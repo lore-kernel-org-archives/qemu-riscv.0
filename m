@@ -1,59 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gHY7y-0004WC-Jl
-	for mharc-qemu-riscv@gnu.org; Tue, 30 Oct 2018 13:48:30 -0400
-Received: from eggs.gnu.org ([2001:4830:134:3::10]:57468)
+	id 1gHaCl-0000t1-1u
+	for mharc-qemu-riscv@gnu.org; Tue, 30 Oct 2018 16:01:35 -0400
+Received: from eggs.gnu.org ([2001:4830:134:3::10]:60004)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1gHY4f-0000id-I8
-	for qemu-riscv@nongnu.org; Tue, 30 Oct 2018 13:45:09 -0400
+	(envelope-from <alistair23@gmail.com>) id 1gHYAA-0005qg-2K
+	for qemu-riscv@nongnu.org; Tue, 30 Oct 2018 13:50:46 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1gHY4T-0006dU-MA
-	for qemu-riscv@nongnu.org; Tue, 30 Oct 2018 13:44:59 -0400
-Received: from mail-pg1-x544.google.com ([2607:f8b0:4864:20::544]:33876)
+	(envelope-from <alistair23@gmail.com>) id 1gHYA9-0002hw-5m
+	for qemu-riscv@nongnu.org; Tue, 30 Oct 2018 13:50:45 -0400
+Received: from mail-lf1-x141.google.com ([2a00:1450:4864:20::141]:35099)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1gHY4T-0006ct-Gb
-	for qemu-riscv@nongnu.org; Tue, 30 Oct 2018 13:44:53 -0400
-Received: by mail-pg1-x544.google.com with SMTP id k1-v6so4594704pgq.1
-	for <qemu-riscv@nongnu.org>; Tue, 30 Oct 2018 10:44:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
-	h=subject:date:message-id:cc:from:to;
-	bh=yvEEmUYHpdYM57JuzbvImyKfpbdaSkBP5AnKimFXT4s=;
-	b=e5d70HcySvAHeBEslMqKomAUAZU6N0CPHeAQBxvEcswaCKH2mqbiCDhscuN04S3KpF
-	A2HNPFGF1H4gkQebM3QGT+3KY3b4nL3tqwt+PejF+En7R5sckAEg9PmyXTzmMI57G1AT
-	xPoWxJ8Jo8mtl1TiQY4cPco8ufsq8ZLGYJfaxqGYC2313Er6hLmI6xbwHBU0F9T+qL3N
-	xIkiE4Hm5GnFrFCfite6wBHKnuSum9oKw1aI7DLPN06gniK6+xQWabS5BfX0tLLk07+W
-	/XItfvKM4SfHlJJxheiC47jCVTkGDJh4M2sno9ZvshU2ASc2QaHwnIMKJe8CiK0Dyot4
-	LqBA==
+	(Exim 4.71) (envelope-from <alistair23@gmail.com>)
+	id 1gHYA8-0002gg-Un; Tue, 30 Oct 2018 13:50:45 -0400
+Received: by mail-lf1-x141.google.com with SMTP id d7-v6so9582804lfi.2;
+	Tue, 30 Oct 2018 10:50:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=MObiaJSa6bnSj2efTjdDNgvcA8Itrlq0pu5rt2sD8qE=;
+	b=dKKjTCgejYPA5wh56M13K/S7y1lXv17MB5vQM9gPgSNxzUbnO1tijVxeyuuH3Pk/eZ
+	ndnNcJv4OE9PJP7y/7x8bTW2HTX7673XWSj3kMuWY6xv6JnQBomGcVHbhmqiYM/SPcq2
+	aGmRH6YMkhCxjUW0Anl9UzL6XpmZJfMCYxOk1A+e+TJJ/Yt0OeuCSnH4IaY0nSudJz6j
+	nteh0nP8M0P33GV9xi3uuUY9CnWIXOKvv67W/8i/4m5ugHgW4VezC9s6HT8FUJpwT6r2
+	tBaxl4cGA+CinV0dkSdepgHbSnDFDuf9Y9mMSiaUw5rk3sFwbuwKb5Z4NY292J4wZ6SR
+	qdNg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:date:message-id:cc:from:to;
-	bh=yvEEmUYHpdYM57JuzbvImyKfpbdaSkBP5AnKimFXT4s=;
-	b=myKauUQ5UCW658fCzve8lzUNuFQu6ha8pmu4loBTlRIZaQNAK2YtkHAxDn7ArfWfk5
-	AxCsi4UjwUgxWOM+zw8lW6BTehxQu1u5xvVCft5A3prddz4o6tG4aaFKP0eTbf9gEZHN
-	i2Tmswl3xfEGzRaPGsdx/9gZ8qTsgNr6k61RDRJlaIjUzvwgbkF3vqS0bB4+rj/d4Qja
-	hWkWQk2RHqQB9HCDWGZBUpNkLKj7BFooxhKvaFKa3tnY8E+UoXcjBOeRcJyoYuKa4I+o
-	u7V8rpw7+9LvqU66H4aZXx7uX1Zy6WbnwxNFN5IfFvszgYL4N/zYe/qGU7AYpnRkBOX1
-	Tn5Q==
-X-Gm-Message-State: AGRZ1gIzRfo8Ge3mTnhUWNa1xx+FHga24lQN7t1ofasUGKU7Uw6sfE1M
-	3MB6KkgQjVMk6Jt5mEEys7nuTA==
-X-Google-Smtp-Source: AJdET5fxm/uRUC5fehOO7EIpZD6AlAexrThT2dkr4isf/qusnHhrH2LwScIcCYjosbAFRad1zaqhQQ==
-X-Received: by 2002:a62:4784:: with SMTP id
-	p4-v6mr3848036pfi.257.1540921491932; 
-	Tue, 30 Oct 2018 10:44:51 -0700 (PDT)
-Received: from localhost ([192.55.54.58]) by smtp.gmail.com with ESMTPSA id
-	r81-v6sm56986507pfa.110.2018.10.30.10.44.50
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 30 Oct 2018 10:44:50 -0700 (PDT)
-Date: Tue, 30 Oct 2018 10:43:56 -0700
-Message-Id: <20181030174356.16915-1-palmer@sifive.com>
-X-Mailer: git-send-email 2.18.1
-Cc: Palmer Dabbelt <palmer@sifive.com>
-From: Palmer Dabbelt <palmer@sifive.com>
-To: qemu-riscv@nongnu.org,       qemu-devel@nongnu.org
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=MObiaJSa6bnSj2efTjdDNgvcA8Itrlq0pu5rt2sD8qE=;
+	b=I4vmqu5uykC76cQBZFd96HCKZtkcA5KlAqDuCzEkcCUPXl2S6JAlM+YVycI0DJY6y9
+	YA93Mgo3YKcoE3EG8Z2tGzTvN2TkXXPKyGd++4pFMcfLC02Qt5fZ5IbqxZ49Vyy5PSHM
+	rXxdNKd1qv/wPFIpPTMRtBQQ6offj8NPTdtJUVAdKLwjuv5IxMOTMvbDopioHB7Dud2v
+	iwkValSgyGx7iN6+LQFwqxILWE5oI4HoQgR69TA5JsB7m432gdS9eRM5LWwd/jeCTmvt
+	fcSheqhWAfoAjSpNgQpRWXoqiSLCqm9Nj0teLz86eT4cQRKbEi5HmlXDkSjeyFKyMXI7
+	8cOQ==
+X-Gm-Message-State: AGRZ1gLmZWIzvL8M2BMTxLg25PuszAf3Qnmv0LAK8BPKtlLWR2bm3X61
+	1AaeIB2lkYZc9dwCI2Tkk0Jh4Q1DXRPKjWpqGsw=
+X-Google-Smtp-Source: AJdET5cghlsRgzxXJjPTxrrZepb6ttLXEP4K0I1pMQcMBmTdU0Ax4flElsg0aj1R/zv/5zfiZ6uoSSgkHC+2nlNsjGI=
+X-Received: by 2002:a19:4e9a:: with SMTP id
+	u26-v6mr2446134lfk.91.1540921842824; 
+	Tue, 30 Oct 2018 10:50:42 -0700 (PDT)
+MIME-Version: 1.0
+References: <20181030174356.16915-1-palmer@sifive.com>
+In-Reply-To: <20181030174356.16915-1-palmer@sifive.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 30 Oct 2018 10:50:15 -0700
+Message-ID: <CAKmqyKOV5HaD-gegE1T0_DhBFffi27wJNa_pAg-xDHOS=L5gnQ@mail.gmail.com>
+To: Palmer Dabbelt <palmer@sifive.com>
+Cc: qemu-riscv@nongnu.org, 
+	"qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::544
-X-Mailman-Approved-At: Tue, 30 Oct 2018 13:48:29 -0400
-Subject: [Qemu-riscv] [PATCH] Add qemu-riscv@nongnu.org as the RISC-V list
+X-Received-From: 2a00:1450:4864:20::141
+X-Mailman-Approved-At: Tue, 30 Oct 2018 16:01:34 -0400
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH] Add qemu-riscv@nongnu.org as
+ the RISC-V list
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -65,28 +67,36 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Oct 2018 17:45:09 -0000
+X-List-Received-Date: Tue, 30 Oct 2018 17:50:46 -0000
 
-We now have a RISC-V specific QEMU development list.
+On Tue, Oct 30, 2018 at 10:45 AM Palmer Dabbelt <palmer@sifive.com> wrote:
+>
+> We now have a RISC-V specific QEMU development list.
+>
+> Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
 
-Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
----
- MAINTAINERS | 1 +
- 1 file changed, 1 insertion(+)
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index d550fd8b809c..10983bd52d64 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -244,6 +244,7 @@ M: Palmer Dabbelt <palmer@sifive.com>
- M: Alistair Francis <Alistair.Francis@wdc.com>
- M: Sagar Karandikar <sagark@eecs.berkeley.edu>
- M: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-+L: qemu-riscv@nongnu.org
- S: Maintained
- F: target/riscv/
- F: hw/riscv/
--- 
-2.18.1
+Alistair
 
+> ---
+>  MAINTAINERS | 1 +
+>  1 file changed, 1 insertion(+)
+>
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index d550fd8b809c..10983bd52d64 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -244,6 +244,7 @@ M: Palmer Dabbelt <palmer@sifive.com>
+>  M: Alistair Francis <Alistair.Francis@wdc.com>
+>  M: Sagar Karandikar <sagark@eecs.berkeley.edu>
+>  M: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+> +L: qemu-riscv@nongnu.org
+>  S: Maintained
+>  F: target/riscv/
+>  F: hw/riscv/
+> --
+> 2.18.1
+>
+>
 
