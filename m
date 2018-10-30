@@ -1,61 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gHaCm-0000uN-6X
-	for mharc-qemu-riscv@gnu.org; Tue, 30 Oct 2018 16:01:36 -0400
-Received: from eggs.gnu.org ([2001:4830:134:3::10]:60671)
+	id 1gHbTm-0008Ee-AE
+	for mharc-qemu-riscv@gnu.org; Tue, 30 Oct 2018 17:23:14 -0400
+Received: from eggs.gnu.org ([2001:4830:134:3::10]:48301)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <philmd@redhat.com>) id 1gHYC4-0007Aq-Ew
-	for qemu-riscv@nongnu.org; Tue, 30 Oct 2018 13:52:48 -0400
+	(envelope-from <palmer@sifive.com>) id 1gHbTh-0008DX-Nf
+	for qemu-riscv@nongnu.org; Tue, 30 Oct 2018 17:23:10 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <philmd@redhat.com>) id 1gHYC0-0004Bj-1F
-	for qemu-riscv@nongnu.org; Tue, 30 Oct 2018 13:52:44 -0400
-Received: from mail-wr1-f66.google.com ([209.85.221.66]:46196)
+	(envelope-from <palmer@sifive.com>) id 1gHbTe-00065d-Rl
+	for qemu-riscv@nongnu.org; Tue, 30 Oct 2018 17:23:09 -0400
+Received: from mail-pf1-x42f.google.com ([2607:f8b0:4864:20::42f]:42410)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <philmd@redhat.com>) id 1gHYBz-0004Ar-N3
-	for qemu-riscv@nongnu.org; Tue, 30 Oct 2018 13:52:39 -0400
-Received: by mail-wr1-f66.google.com with SMTP id 74-v6so5393138wrb.13
-	for <qemu-riscv@nongnu.org>; Tue, 30 Oct 2018 10:52:39 -0700 (PDT)
+	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1gHbTe-00065M-LP
+	for qemu-riscv@nongnu.org; Tue, 30 Oct 2018 17:23:06 -0400
+Received: by mail-pf1-x42f.google.com with SMTP id f26-v6so6495785pfn.9
+	for <qemu-riscv@nongnu.org>; Tue, 30 Oct 2018 14:23:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+	h=subject:date:message-id:in-reply-to:references:cc:from:to;
+	bh=Af8rVrWHdvztrVxLd6qw2DArsRBAN4E6UCg+lL/FuHw=;
+	b=LP+WjAgIRkSz6tck0pT4Mx9Jcv/WIAI5+0zI+t4wOTIXVbbe7REXbPZKfEj4Zn/KIy
+	kSReDjxmXjYi1Bcs/wBqO6HICYZAhKMAsHz3PHKagc5sAfyE9DYR6PmrMJmdeduZXfHT
+	b78u+C1JXkWTTJjeT2P5pEk/NZqHpMAUUq+wxNif6DraI2rlDRvl8wvx7IJC3oJG/P5U
+	dfBF/r2BPWPrNFXjsgXz/79OTjFl4DsCzcx4mGxtTVXzrASPM6bA32oceC+DkL4iDJJP
+	Ks0ngKbc67rqHz1EcpF65yFwNvHZmSSkiXGlD29hxIFJcrJdI3AmjyZ660OJKEszrVEk
+	V46A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-language
-	:content-transfer-encoding;
-	bh=01BtDmWX0EcndkVJ652XB12mX+GutR9BVh7hix1zftQ=;
-	b=W7VI3BG210WQVIvPfAc04jhxMaZ3Dv/Ge8pfRC2x5HdEMcbztJMy6rRhDi6ijfQJMM
-	mEy0q4cw6X5ic0r9esMWqiIi29kc/5NdoS0f6ggXxv7tujpW6ryyJcuJo3fvauekpRl/
-	U7rS+RyVRnZJipzfWL3lo6LHRlV+re3Z2v7j19zHUfSrg2McVD/H28JaI+dk2jzFSejK
-	mfI2BS6RmQRL1y+bzlqfuiYXh4VhHlM/yVvMIDbLP6mFNYAgvf2IMdT/Pn5kjnMbdGAK
-	eoCsUwZaTMrKkHgO8kTlR6s/UD5dUC+PFDjUpna3fstGef+S3/fKWlrcePAbAuGUKUZM
-	NgAQ==
-X-Gm-Message-State: AGRZ1gIHD9bL4nZIk/tsBHVd41DQBlHfMR4H4/GMMYieIsoH1yzqN7GL
-	EspYDWdzq0aXdPaCXASi+/8rmA==
-X-Google-Smtp-Source: AJdET5eiOmB1bT9ZBwy/47fkaSa/T3zHiY4fFG9EGgIYF9KzP+lMa4VWRL35TJ+j+7erw4wdCrWviA==
-X-Received: by 2002:adf:9ccb:: with SMTP id
-	h11-v6mr19981342wre.322.1540921958436; 
-	Tue, 30 Oct 2018 10:52:38 -0700 (PDT)
-Received: from [192.168.1.130] ([139.47.13.138])
-	by smtp.gmail.com with ESMTPSA id
-	l67-v6sm45108919wma.20.2018.10.30.10.52.37
+	h=x-gm-message-state:subject:date:message-id:in-reply-to:references
+	:cc:from:to;
+	bh=Af8rVrWHdvztrVxLd6qw2DArsRBAN4E6UCg+lL/FuHw=;
+	b=mFJgrT1/bFN/DSbrli3ZHoN2fpkIMbm4Y+HHTHIJ9aylHiJxjdktY35tXhNCS8gIME
+	/hQN9Ze939PoUPSnzA1NOyATzvJXAQG1jOhiPSIyrxsoXrWgZZ1tzd3tG1JNrtDeU8hD
+	5AwMr0smQYS2NTTpd0x26P2J5XNQnvWe2h2Ig9REpqtPm/cUWgtB9OxhLH34UOaCe6BV
+	iJ1P/MDnBwbYqb8Nqwoyqc3Cx9ORttCcKr2LxAA/EJyfDP9qEFwxzSod9HfQb8SxHcEu
+	P0TOnJvSV2nxslVnXNp0Cr6PB9zpu1O24xNqJ2TmQRmt4GZ9rp1OefFkpFjSvX3Puy6J
+	bQcg==
+X-Gm-Message-State: AGRZ1gJdY035rg9+ltOZL9iL0OH73ns9w6JO4iJA2wdS9K5XU/hnEmcK
+	mWDF4RyGnMfPdaRVqUe31hPP0dLgG04=
+X-Google-Smtp-Source: AJdET5fO9s85vlFd+CNennRODNnorqRW+giaIyoacywagKF7b3N8ePfMuabKrzGjFKdC326rJiSSHQ==
+X-Received: by 2002:aa7:80cd:: with SMTP id a13-v6mr389544pfn.86.1540934585590;
+	Tue, 30 Oct 2018 14:23:05 -0700 (PDT)
+Received: from localhost ([12.206.222.5]) by smtp.gmail.com with ESMTPSA id
+	g20-v6sm3892617pfj.145.2018.10.30.14.23.03
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 30 Oct 2018 10:52:37 -0700 (PDT)
-To: Palmer Dabbelt <palmer@sifive.com>, qemu-riscv@nongnu.org,
-	qemu-devel@nongnu.org
-References: <20181030174356.16915-1-palmer@sifive.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>
-Message-ID: <dc417db4-7add-0870-b6b7-6a3e4ae92305@redhat.com>
-Date: Tue, 30 Oct 2018 18:52:36 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.2.1
-MIME-Version: 1.0
-In-Reply-To: <20181030174356.16915-1-palmer@sifive.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
-	[fuzzy]
-X-Received-From: 209.85.221.66
-X-Mailman-Approved-At: Tue, 30 Oct 2018 16:01:34 -0400
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH] Add qemu-riscv@nongnu.org as
- the RISC-V list
+	Tue, 30 Oct 2018 14:23:04 -0700 (PDT)
+Date: Tue, 30 Oct 2018 14:22:47 -0700
+Message-Id: <20181030212249.7117-2-palmer@sifive.com>
+X-Mailer: git-send-email 2.18.1
+In-Reply-To: <20181030212249.7117-1-palmer@sifive.com>
+References: <20181030212249.7117-1-palmer@sifive.com>
+Cc: qemu-devel@nongnu.org, Dayeol Lee <dayeol@berkeley.edu>,
+	Palmer Dabbelt <palmer@sifive.com>
+From: Palmer Dabbelt <palmer@sifive.com>
+To: qemu-riscv@nongnu.org
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+	recognized.
+X-Received-From: 2607:f8b0:4864:20::42f
+Subject: [Qemu-riscv] [PULL 1/3] target/riscv/pmp.c: pmpcfg_csr_read returns
+ bogus value on RV64
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -67,31 +68,37 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Oct 2018 17:52:48 -0000
+X-List-Received-Date: Tue, 30 Oct 2018 21:23:13 -0000
 
-On 30/10/18 18:43, Palmer Dabbelt wrote:
-> We now have a RISC-V specific QEMU development list.
-> 
-> Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
+From: Dayeol Lee <dayeol@berkeley.edu>
 
-Reviewed-by: Philippe Mathieu-Daudé <philmd@redhat.com>
-Tested-by: Philippe Mathieu-Daudé <philmd@redhat.com>
+pmp_read_cfg() returns 8-bit value, which is combined together to form a single pmpcfg CSR.
+The default promotion rules will result in an integer here ("i*8" is integer, which
+flows through) resulting in a 32-bit signed value on most hosts.
+That's bogus on RV64I, with the high bits of the CSR being wrong.
 
-> ---
->   MAINTAINERS | 1 +
->   1 file changed, 1 insertion(+)
-> 
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index d550fd8b809c..10983bd52d64 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -244,6 +244,7 @@ M: Palmer Dabbelt <palmer@sifive.com>
->   M: Alistair Francis <Alistair.Francis@wdc.com>
->   M: Sagar Karandikar <sagark@eecs.berkeley.edu>
->   M: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-> +L: qemu-riscv@nongnu.org
->   S: Maintained
->   F: target/riscv/
->   F: hw/riscv/
-> 
+Signed-off-by: Dayeol Lee <dayeol@berkeley.edu>
+Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
+---
+ target/riscv/pmp.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
+index f432f3b7594b..03abd8fe5eb7 100644
+--- a/target/riscv/pmp.c
++++ b/target/riscv/pmp.c
+@@ -325,7 +325,7 @@ target_ulong pmpcfg_csr_read(CPURISCVState *env, uint32_t reg_index)
+ {
+     int i;
+     target_ulong cfg_val = 0;
+-    uint8_t val = 0;
++    target_ulong val = 0;
+ 
+     for (i = 0; i < sizeof(target_ulong); i++) {
+         val = pmp_read_cfg(env, (reg_index * sizeof(target_ulong)) + i);
+-- 
+2.18.1
+
 
