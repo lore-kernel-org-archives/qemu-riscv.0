@@ -1,73 +1,72 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gHx87-0002lU-5r
-	for mharc-qemu-riscv@gnu.org; Wed, 31 Oct 2018 16:30:19 -0400
-Received: from eggs.gnu.org ([2001:4830:134:3::10]:36900)
+	id 1gHxG8-0000L5-MG
+	for mharc-qemu-riscv@gnu.org; Wed, 31 Oct 2018 16:38:36 -0400
+Received: from eggs.gnu.org ([2001:4830:134:3::10]:39147)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1gHx84-0002jF-Mf
-	for qemu-riscv@nongnu.org; Wed, 31 Oct 2018 16:30:17 -0400
+	(envelope-from <alistair23@gmail.com>) id 1gHxG5-0000IT-N0
+	for qemu-riscv@nongnu.org; Wed, 31 Oct 2018 16:38:34 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1gHx82-0002HN-LU
-	for qemu-riscv@nongnu.org; Wed, 31 Oct 2018 16:30:16 -0400
-Received: from mail-pl1-x644.google.com ([2607:f8b0:4864:20::644]:36051)
+	(envelope-from <alistair23@gmail.com>) id 1gHxG4-00057L-9R
+	for qemu-riscv@nongnu.org; Wed, 31 Oct 2018 16:38:33 -0400
+Received: from mail-pg1-x542.google.com ([2607:f8b0:4864:20::542]:37356)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
 	(Exim 4.71) (envelope-from <alistair23@gmail.com>)
-	id 1gHx7u-000292-Qc; Wed, 31 Oct 2018 16:30:07 -0400
-Received: by mail-pl1-x644.google.com with SMTP id y11-v6so7837542plt.3;
-	Wed, 31 Oct 2018 13:30:06 -0700 (PDT)
+	id 1gHxFy-00055x-MX; Wed, 31 Oct 2018 16:38:27 -0400
+Received: by mail-pg1-x542.google.com with SMTP id c10-v6so7929371pgq.4;
+	Wed, 31 Oct 2018 13:38:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=subject:to:cc:references:from:message-id:date:user-agent
 	:mime-version:in-reply-to:content-language:content-transfer-encoding;
-	bh=4xH24X3vTPu3fMXIDPzSdlxuswcJIVgdBS6JU/qMb9U=;
-	b=YDzyZ3oBkZaUeYoReBUIZAKru1gIzTjsSXoBvR/BF8Li6Od+Kggl1oK70fkeePgUYZ
-	QljUx+0FQg3STvbDYIU5zn+wkWHgTYIDp7ad/+xpU8V4R2dH2Rl/5vXWbtOpKYVorAM+
-	pnxzWDKqY396d0U3kxe746pIu9i9rIjH15Q0U20ZLe5gFYodNgV3//CqZICW7Wk3no86
-	edmTbb49Zr3oPZDnopJhv3UOLAJwvhr5nc+RSz+eAuybEtNkXhkdwDX/bj8KJoD2+Vtv
-	71wd8+ZOYiUlUE4RfRnD6YvCG2DiyaCwYG1w65i8ksPcozpcfo7uPduDxLHXujL32R1w
-	S59A==
+	bh=pWapVPrpcIsRna9Jg3K4Q/SZuMkbTBVhZ1npyJldIQk=;
+	b=dvzb5IypuGxNC+UAvGxj1pWki2OAaEboa4mHsdOd4224tKUEDd0EAoKOadfZdG+lcb
+	kzs8uoPvl358pw6XD/qDq86iet7LD/XgW6iRSY4iHDWperVwgxrs80PSWVKBj3D8mDe8
+	r86AAX+6QISh8fdXPzTR8Rk9yA3xHF3Zf8lBW6T+AD95QqprWLeRA9cPpLpSjDeLo7J5
+	Rhg+SGOhZusbnX9UdbGy5flO3dDxvpL8O65GIv5+lgH4G03tcE1v3MRM8sni3QTWMw09
+	uHeshvcMV39Wrn0j++qGs1fDckhgJir+qJo0MN6RTQR4AOdIQEJZQPOnvJdqyJuOEqoj
+	LtQw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:subject:to:cc:references:from:message-id:date
 	:user-agent:mime-version:in-reply-to:content-language
 	:content-transfer-encoding;
-	bh=4xH24X3vTPu3fMXIDPzSdlxuswcJIVgdBS6JU/qMb9U=;
-	b=CSaxz+EygV49pS/S957h8KFs3bWScIWJjXWbLRKTKauuh/yhFBFgbEirWiWzNdJ6QK
-	tm/kewZQ+9qs66CoPBnStq/Ygm8N4Pd0Kumi83AYj96GxEl7FYeL2jlGdQm9H83CmvHN
-	Yqx07a0O3YwB6iPPhOZbjN6+e2rki+Y+ErZpxPUSgoRUJ+/jjyro9XdsUfj8yaEoA40h
-	uxGLQgmZQasBtCmh+8ouBdIhvFBkoOb5C+si5xKy6KUwePZ8qxUMvDCYjJ0fOmHbsNiz
-	Pe3welhltn1crqkTIHWbWmAUZrcqEN5lXsnDafgkdsabP/fjzQPJt+HyLdAeq8hTkt/d
-	z07w==
-X-Gm-Message-State: AGRZ1gK0DVzItMCLse2iSbPoxCJl/NVVuL4wnoh3oo/uJ3y8aEbDnRX6
-	cqWojEsAKOyR/SaeM4WfCm/9xwip
-X-Google-Smtp-Source: AJdET5cxoWa3C9NvLJ0q0/DlexreC6+tICZ97geBnxUxf23N4srvdCKAdvumGlimad9tdbVaW2DZyQ==
-X-Received: by 2002:a17:902:8c84:: with SMTP id
-	t4-v6mr4960636plo.188.1541017805358; 
-	Wed, 31 Oct 2018 13:30:05 -0700 (PDT)
+	bh=pWapVPrpcIsRna9Jg3K4Q/SZuMkbTBVhZ1npyJldIQk=;
+	b=DzTX+dnkdq8xjFpwaWu861EzwuJvgbv3J4hinMr6QSIXgPl5HyPrtiZUwKPNpLM0Ol
+	jxKHkQk7BcK/h+UzR2AwAtVyd+MgIiyN0Lisn6UCl2LPksFF4sIec6nN+diWFuFLG4TB
+	LQa69M6OC5XRfBVR6O+4ZNi9aLmwheVOPeKkOvijCkoPfoBUwnWVGUVRqoFQZI/TS+e4
+	E5pMTeyiAzJ15i1TG3n1/NDekBFvNwrmrF7ISF6lXEMj68FzgDJSvHP6DQaWx4WswKZc
+	BraU8dYRJzafrV2iOLM3Po95PuWhNo84VTFN6e9Sh8qdKRQNad7ueMj+Y94u9zpxYmCC
+	LI6g==
+X-Gm-Message-State: AGRZ1gKRPDIfml38knAb+MIvpG+iYtTrnzmD4zpdLsSAs11gpcO+OBZs
+	SsbCshSzJCr2xgLled4ymtrZ9e3w
+X-Google-Smtp-Source: AJdET5dpLeR3tvIihOUJQO8lOtrkFV7fxR78lJAao06KSxybRt6e9xUXZHw57kwXsv/QI89+eiHHTQ==
+X-Received: by 2002:a63:8ac4:: with SMTP id y187mr4568791pgd.446.1541018304655;
+	Wed, 31 Oct 2018 13:38:24 -0700 (PDT)
 Received: from [10.196.159.185] (rap-us.hgst.com. [199.255.44.250])
 	by smtp.gmail.com with ESMTPSA id
-	f6-v6sm10650160pfg.128.2018.10.31.13.30.03
+	g5-v6sm1270578pgj.87.2018.10.31.13.38.22
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 31 Oct 2018 13:30:04 -0700 (PDT)
+	Wed, 31 Oct 2018 13:38:23 -0700 (PDT)
 To: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, mjc@sifive.com,
 	sagark@eecs.berkeley.edu, palmer@sifive.com, Alistair.Francis@wdc.com
 Cc: qemu-riscv@nongnu.org, peer.adelt@hni.uni-paderborn.de,
 	richard.henderson@linaro.org, qemu-devel@nongnu.org
 References: <20181031132029.4887-1-kbastian@mail.uni-paderborn.de>
-	<20181031132029.4887-8-kbastian@mail.uni-paderborn.de>
+	<20181031132029.4887-10-kbastian@mail.uni-paderborn.de>
 From: Alistair <alistair23@gmail.com>
-Message-ID: <94f933ad-2cba-c18b-bac1-15349df446cd@gmail.com>
-Date: Wed, 31 Oct 2018 13:30:03 -0700
+Message-ID: <537412dc-cd5c-0584-32af-ca9fa7572645@gmail.com>
+Date: Wed, 31 Oct 2018 13:38:22 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
 	Thunderbird/60.2.1
 MIME-Version: 1.0
-In-Reply-To: <20181031132029.4887-8-kbastian@mail.uni-paderborn.de>
+In-Reply-To: <20181031132029.4887-10-kbastian@mail.uni-paderborn.de>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::644
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v3 07/35] target/riscv:
- Convert RVXI fence insns to decodetree
+X-Received-From: 2607:f8b0:4864:20::542
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v3 09/35] target/riscv:
+ Convert RVXM insns to decodetree
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -79,7 +78,7 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Oct 2018 20:30:17 -0000
+X-List-Received-Date: Wed, 31 Oct 2018 20:38:35 -0000
 
 On 10/31/18 6:20 AM, Bastian Koppelmann wrote:
 > Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
@@ -92,77 +91,182 @@ Alistair
 
 > ---
 > v2 -> v3:
->      - removed %pred/%succ
+>      - moved 64-bit only insn to insn64.decode
 >      - dropped insn argument of trans_foo functions
 > 
->   target/riscv/insn32.decode              |  2 ++
->   target/riscv/insn_trans/trans_rvi.inc.c | 21 +++++++++++++++++++++
->   target/riscv/translate.c                | 14 --------------
->   3 files changed, 23 insertions(+), 14 deletions(-)
+>   target/riscv/insn32.decode              |  10 +++
+>   target/riscv/insn64.decode              |   7 ++
+>   target/riscv/insn_trans/trans_rvm.inc.c | 100 ++++++++++++++++++++++++
+>   target/riscv/translate.c                |  10 +--
+>   4 files changed, 118 insertions(+), 9 deletions(-)
+>   create mode 100644 target/riscv/insn_trans/trans_rvm.inc.c
 > 
 > diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-> index 4fd88f48d2..6d750b4c5a 100644
+> index b67d3a9437..b37fece633 100644
 > --- a/target/riscv/insn32.decode
 > +++ b/target/riscv/insn32.decode
-> @@ -82,3 +82,5 @@ srl      0000000 .....    ..... 101 ..... 0110011 @r
->   sra      0100000 .....    ..... 101 ..... 0110011 @r
->   or       0000000 .....    ..... 110 ..... 0110011 @r
->   and      0000000 .....    ..... 111 ..... 0110011 @r
-> +fence    ---- pred:4 succ:4 ----- 000 ----- 0001111
-> +fence_i  ---- ----   ----   ----- 001 ----- 0001111
-> diff --git a/target/riscv/insn_trans/trans_rvi.inc.c b/target/riscv/insn_trans/trans_rvi.inc.c
-> index 01f751650a..a149e913b1 100644
-> --- a/target/riscv/insn_trans/trans_rvi.inc.c
-> +++ b/target/riscv/insn_trans/trans_rvi.inc.c
-> @@ -318,3 +318,24 @@ static bool trans_sraw(DisasContext *ctx, arg_sraw *a)
->       return true;
->   }
->   #endif
+> @@ -92,3 +92,13 @@ csrrc    ............     ..... 011 ..... 1110011 @csr
+>   csrrwi   ............     ..... 101 ..... 1110011 @csr
+>   csrrsi   ............     ..... 110 ..... 1110011 @csr
+>   csrrci   ............     ..... 111 ..... 1110011 @csr
 > +
-> +static bool trans_fence(DisasContext *ctx, arg_fence *a)
+> +# *** RV32M Standard Extension ***
+> +mul      0000001 .....  ..... 000 ..... 0110011 @r
+> +mulh     0000001 .....  ..... 001 ..... 0110011 @r
+> +mulhsu   0000001 .....  ..... 010 ..... 0110011 @r
+> +mulhu    0000001 .....  ..... 011 ..... 0110011 @r
+> +div      0000001 .....  ..... 100 ..... 0110011 @r
+> +divu     0000001 .....  ..... 101 ..... 0110011 @r
+> +rem      0000001 .....  ..... 110 ..... 0110011 @r
+> +remu     0000001 .....  ..... 111 ..... 0110011 @r
+> diff --git a/target/riscv/insn64.decode b/target/riscv/insn64.decode
+> index 9a35f2aa19..008f100546 100644
+> --- a/target/riscv/insn64.decode
+> +++ b/target/riscv/insn64.decode
+> @@ -36,3 +36,10 @@ subw     0100000 .....  ..... 000 ..... 0111011 @r
+>   sllw     0000000 .....  ..... 001 ..... 0111011 @r
+>   srlw     0000000 .....  ..... 101 ..... 0111011 @r
+>   sraw     0100000 .....  ..... 101 ..... 0111011 @r
+> +
+> +# *** RV64M Standard Extension (in addition to RV32M) ***
+> +mulw     0000001 .....  ..... 000 ..... 0111011 @r
+> +divw     0000001 .....  ..... 100 ..... 0111011 @r
+> +divuw    0000001 .....  ..... 101 ..... 0111011 @r
+> +remw     0000001 .....  ..... 110 ..... 0111011 @r
+> +remuw    0000001 .....  ..... 111 ..... 0111011 @r
+> diff --git a/target/riscv/insn_trans/trans_rvm.inc.c b/target/riscv/insn_trans/trans_rvm.inc.c
+> new file mode 100644
+> index 0000000000..ec3197ede8
+> --- /dev/null
+> +++ b/target/riscv/insn_trans/trans_rvm.inc.c
+> @@ -0,0 +1,100 @@
+> +/*
+> + * RISC-V translation routines for the RV64M Standard Extension.
+> + *
+> + * Copyright (c) 2016-2017 Sagar Karandikar, sagark@eecs.berkeley.edu
+> + * Copyright (c) 2018 Peer Adelt, peer.adelt@hni.uni-paderborn.de
+> + *                    Bastian Koppelmann, kbastian@mail.uni-paderborn.de
+> + *
+> + * This program is free software; you can redistribute it and/or modify it
+> + * under the terms and conditions of the GNU General Public License,
+> + * version 2 or later, as published by the Free Software Foundation.
+> + *
+> + * This program is distributed in the hope it will be useful, but WITHOUT
+> + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+> + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+> + * more details.
+> + *
+> + * You should have received a copy of the GNU General Public License along with
+> + * this program.  If not, see <http://www.gnu.org/licenses/>.
+> + */
+> +
+> +
+> +static bool trans_mul(DisasContext *ctx, arg_mul *a)
 > +{
-> +#ifndef CONFIG_USER_ONLY
-> +    /* FENCE is a full memory barrier. */
-> +    tcg_gen_mb(TCG_MO_ALL | TCG_BAR_SC);
-> +#endif
+> +    gen_arith(ctx, OPC_RISC_MUL, a->rd, a->rs1, a->rs2);
 > +    return true;
 > +}
 > +
-> +static bool trans_fence_i(DisasContext *ctx, arg_fence_i *a)
+> +static bool trans_mulh(DisasContext *ctx, arg_mulh *a)
 > +{
-> +#ifndef CONFIG_USER_ONLY
-> +    /* FENCE_I is a no-op in QEMU,
-> +     * however we need to end the translation block */
-> +    tcg_gen_movi_tl(cpu_pc, ctx->pc_succ_insn);
-> +    tcg_gen_exit_tb(NULL, 0);
-> +    ctx->base.is_jmp = DISAS_NORETURN;
-> +#endif
+> +    gen_arith(ctx, OPC_RISC_MULH, a->rd, a->rs1, a->rs2);
 > +    return true;
 > +}
+> +
+> +static bool trans_mulhsu(DisasContext *ctx, arg_mulhsu *a)
+> +{
+> +    gen_arith(ctx, OPC_RISC_MULHSU, a->rd, a->rs1, a->rs2);
+> +    return true;
+> +}
+> +
+> +static bool trans_mulhu(DisasContext *ctx, arg_mulhu *a)
+> +{
+> +    gen_arith(ctx, OPC_RISC_MULHU, a->rd, a->rs1, a->rs2);
+> +    return true;
+> +}
+> +
+> +static bool trans_div(DisasContext *ctx, arg_div *a)
+> +{
+> +    gen_arith(ctx, OPC_RISC_DIV, a->rd, a->rs1, a->rs2);
+> +    return true;
+> +}
+> +
+> +static bool trans_divu(DisasContext *ctx, arg_divu *a)
+> +{
+> +    gen_arith(ctx, OPC_RISC_DIVU, a->rd, a->rs1, a->rs2);
+> +    return true;
+> +}
+> +
+> +static bool trans_rem(DisasContext *ctx, arg_rem *a)
+> +{
+> +    gen_arith(ctx, OPC_RISC_REM, a->rd, a->rs1, a->rs2);
+> +    return true;
+> +}
+> +
+> +static bool trans_remu(DisasContext *ctx, arg_remu *a)
+> +{
+> +    gen_arith(ctx, OPC_RISC_REMU, a->rd, a->rs1, a->rs2);
+> +    return true;
+> +}
+> +
+> +#ifdef TARGET_RISCV64
+> +static bool trans_mulw(DisasContext *ctx, arg_mulw *a)
+> +{
+> +    gen_arith(ctx, OPC_RISC_MULW, a->rd, a->rs1, a->rs2);
+> +    return true;
+> +}
+> +
+> +static bool trans_divw(DisasContext *ctx, arg_divw *a)
+> +{
+> +    gen_arith(ctx, OPC_RISC_DIVW, a->rd, a->rs1, a->rs2);
+> +    return true;
+> +}
+> +
+> +static bool trans_divuw(DisasContext *ctx, arg_divuw *a)
+> +{
+> +    gen_arith(ctx, OPC_RISC_DIVUW, a->rd, a->rs1, a->rs2);
+> +    return true;
+> +}
+> +
+> +static bool trans_remw(DisasContext *ctx, arg_remw *a)
+> +{
+> +    gen_arith(ctx, OPC_RISC_REMW, a->rd, a->rs1, a->rs2);
+> +    return true;
+> +}
+> +
+> +static bool trans_remuw(DisasContext *ctx, arg_remuw *a)
+> +{
+> +    gen_arith(ctx, OPC_RISC_REMUW, a->rd, a->rs1, a->rs2);
+> +    return true;
+> +}
+> +#endif
 > diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index 855c241e97..80f18fb6aa 100644
+> index be03acd066..8c876187b1 100644
 > --- a/target/riscv/translate.c
 > +++ b/target/riscv/translate.c
-> @@ -1740,20 +1740,6 @@ static void decode_RV32_64G(CPURISCVState *env, DisasContext *ctx)
->           gen_fp_arith(ctx, MASK_OP_FP_ARITH(ctx->opcode), rd, rs1, rs2,
->                        GET_RM(ctx->opcode));
->           break;
-> -    case OPC_RISC_FENCE:
-> -#ifndef CONFIG_USER_ONLY
-> -        if (ctx->opcode & 0x1000) {
-> -            /* FENCE_I is a no-op in QEMU,
-> -             * however we need to end the translation block */
-> -            tcg_gen_movi_tl(cpu_pc, ctx->pc_succ_insn);
-> -            tcg_gen_exit_tb(NULL, 0);
-> -            ctx->base.is_jmp = DISAS_NORETURN;
-> -        } else {
-> -            /* FENCE is a full memory barrier. */
-> -            tcg_gen_mb(TCG_MO_ALL | TCG_BAR_SC);
-> -        }
+> @@ -1639,6 +1639,7 @@ bool decode_insn32(DisasContext *ctx, uint32_t insn);
+>   #include "decode_insn32.inc.c"
+>   /* Include insn module translation function */
+>   #include "insn_trans/trans_rvi.inc.c"
+> +#include "insn_trans/trans_rvm.inc.c"
+>   
+>   static void decode_RV32_64G(CPURISCVState *env, DisasContext *ctx)
+>   {
+> @@ -1660,15 +1661,6 @@ static void decode_RV32_64G(CPURISCVState *env, DisasContext *ctx)
+>       imm = GET_IMM(ctx->opcode);
+>   
+>       switch (op) {
+> -    case OPC_RISC_ARITH:
+> -#if defined(TARGET_RISCV64)
+> -    case OPC_RISC_ARITH_W:
 > -#endif
+> -        if (rd == 0) {
+> -            break; /* NOP */
+> -        }
+> -        gen_arith(ctx, MASK_OP_ARITH(ctx->opcode), rd, rs1, rs2);
 > -        break;
->       case OPC_RISC_SYSTEM:
->           gen_system(env, ctx, MASK_OP_SYSTEM(ctx->opcode), rd, rs1,
->                      (ctx->opcode & 0xFFF00000) >> 20);
+>       case OPC_RISC_FP_LOAD:
+>           gen_fp_load(ctx, MASK_OP_FP_LOAD(ctx->opcode), rd, rs1, imm);
+>           break;
 > 
 
