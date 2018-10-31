@@ -1,51 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gHqx9-00062s-C6
+	id 1gHqx9-000639-I4
 	for mharc-qemu-riscv@gnu.org; Wed, 31 Oct 2018 09:54:35 -0400
-Received: from eggs.gnu.org ([2001:4830:134:3::10]:37809)
+Received: from eggs.gnu.org ([2001:4830:134:3::10]:36797)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <kbastian@mail.uni-paderborn.de>) id 1gHqRm-00050b-RK
-	for qemu-riscv@nongnu.org; Wed, 31 Oct 2018 09:22:12 -0400
+	(envelope-from <kbastian@mail.uni-paderborn.de>) id 1gHqQc-0003z9-6h
+	for qemu-riscv@nongnu.org; Wed, 31 Oct 2018 09:21:01 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <kbastian@mail.uni-paderborn.de>) id 1gHqRe-0003Cp-U4
-	for qemu-riscv@nongnu.org; Wed, 31 Oct 2018 09:22:10 -0400
-Received: from mail.uni-paderborn.de ([131.234.142.9]:53022)
+	(envelope-from <kbastian@mail.uni-paderborn.de>) id 1gHqQY-0002Ao-Sn
+	for qemu-riscv@nongnu.org; Wed, 31 Oct 2018 09:20:58 -0400
+Received: from mail.uni-paderborn.de ([131.234.142.9]:45556)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.71) (envelope-from <kbastian@mail.uni-paderborn.de>)
-	id 1gHqRX-0002DL-9n; Wed, 31 Oct 2018 09:21:55 -0400
-Received: from pova.uni-paderborn.de ([131.234.189.23]
+	id 1gHqQY-00029b-JG; Wed, 31 Oct 2018 09:20:54 -0400
+Received: from wormulon.uni-paderborn.de ([131.234.189.22]
 	helo=localhost.localdomain)
-	by mail.uni-paderborn.de with esmtp (Exim 4.89 telepax)
-	id 1gHqQa-0007Bk-45; Wed, 31 Oct 2018 14:20:56 +0100
-Received: from mail.uni-paderborn.de by pova with queue id 2964553-2;
-	Wed, 31 Oct 2018 13:20:56 GMT
+	by mail.uni-paderborn.de with esmtp (Exim 4.89 hoth)
+	id 1gHqQW-00035f-S1; Wed, 31 Oct 2018 14:20:52 +0100
+Received: from mail.uni-paderborn.de by wormulon with queue id 2965934-5;
+	Wed, 31 Oct 2018 13:20:52 GMT
 X-Envelope-From: <kbastian@mail.uni-paderborn.de>
 Received: from [131.234.87.238] (helo=mustique.hni.uni-paderborn.de)
 	by mail.uni-paderborn.de with esmtpsa
 	(TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.89 nylar)
-	id 1gHqQa-0005dh-Mp; Wed, 31 Oct 2018 14:20:56 +0100
+	id 1gHqQW-0005dh-OB; Wed, 31 Oct 2018 14:20:52 +0100
 From: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
 To: mjc@sifive.com, sagark@eecs.berkeley.edu, palmer@sifive.com,
 	kbastian@mail.uni-paderborn.de, Alistair.Francis@wdc.com
 Cc: richard.henderson@linaro.org, peer.adelt@hni.uni-paderborn.de,
 	qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-Date: Wed, 31 Oct 2018 14:20:12 +0100
-Message-Id: <20181031132029.4887-19-kbastian@mail.uni-paderborn.de>
+Date: Wed, 31 Oct 2018 14:19:55 +0100
+Message-Id: <20181031132029.4887-2-kbastian@mail.uni-paderborn.de>
 X-Mailer: git-send-email 2.19.1
 In-Reply-To: <20181031132029.4887-1-kbastian@mail.uni-paderborn.de>
 References: <20181031132029.4887-1-kbastian@mail.uni-paderborn.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-PMX-Version: 6.4.5.2775670, Antispam-Engine: 2.7.2.2107409,
-	Antispam-Data: 2018.10.31.131517, AntiVirus-Engine: 5.53.0,
+	Antispam-Data: 2018.10.31.131216, AntiVirus-Engine: 5.53.0,
 	AntiVirus-Data: 2018.10.10.5530001
 X-IMT-Spam-Score: 0.0 ()
 X-IMT-Authenticated-Sender: 
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
 X-Received-From: 131.234.142.9
-X-Mailman-Approved-At: Wed, 31 Oct 2018 09:54:26 -0400
-Subject: [Qemu-riscv] [PATCH v3 18/35] target/riscv: Convert quadrant 1 of
- RVXC insns to decodetree
+X-Mailman-Approved-At: Wed, 31 Oct 2018 09:54:24 -0400
+Subject: [Qemu-riscv] [PATCH v3 01/35] target/riscv: Move CPURISCVState
+ pointer to DisasContext
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -57,403 +57,68 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Oct 2018 13:22:12 -0000
+X-List-Received-Date: Wed, 31 Oct 2018 13:21:01 -0000
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+CPURISCVState is rarely used, so there is no need to pass it to every
+translate function. This paves the way for decodetree which only passes
+DisasContext to translate functions.
+
+Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
 Signed-off-by: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-Signed-off-by: Peer Adelt <peer.adelt@hni.uni-paderborn.de>
 ---
-v2 -> v3:
-    - simplified trans_c_srai by Richard's suggestion
-    - dropped insn argument of trans_foo functions
+ target/riscv/translate.c | 15 ++++++++-------
+ 1 file changed, 8 insertions(+), 7 deletions(-)
 
- target/riscv/insn16.decode              |  43 +++++++
- target/riscv/insn_trans/trans_rvc.inc.c | 151 ++++++++++++++++++++++++
- target/riscv/translate.c                | 118 +-----------------
- 3 files changed, 195 insertions(+), 117 deletions(-)
-
-diff --git a/target/riscv/insn16.decode b/target/riscv/insn16.decode
-index 558c0c41f0..29dade0fa1 100644
---- a/target/riscv/insn16.decode
-+++ b/target/riscv/insn16.decode
-@@ -22,28 +22,53 @@
- %rs2_3     2:3                !function=ex_rvc_register
- 
- # Immediates:
-+%imm_ci        12:s1 2:5
- %nzuimm_ciw    7:4 11:2 5:1 6:1   !function=ex_shift_2
- %uimm_cl_d     5:2 10:3           !function=ex_shift_3
- %uimm_cl_w     5:1 10:3 6:1       !function=ex_shift_2
-+%imm_cb        12:s1 5:2 2:1 10:2 3:2 !function=ex_shift_1
-+%imm_cj        12:s1 8:1 9:2 6:1 7:1 2:1 11:1 3:3 !function=ex_shift_1
-+
-+%nzuimm_6bit   12:1 2:5
-+
-+%imm_addi16sp  12:s1 3:2 5:1 2:1 6:1 !function=ex_shift_4
-+%imm_lui       12:s1 2:5             !function=ex_shift_12
-+
- 
- 
- # Argument sets:
- &cl               rs1 rd
- &cl_dw     uimm   rs1 rd
-+&ci        imm        rd
- &ciw       nzuimm     rd
- &cs               rs1 rs2
- &cs_dw     uimm   rs1 rs2
-+&cb        imm    rs1
-+&cr               rd  rs2
-+&c_j       imm
-+&c_shift   shamt      rd
-+
- 
-+&c_addi16sp_lui  imm_lui imm_addi16sp rd
- 
- # Formats 16:
-+@ci        ... . ..... .....  .. &ci     imm=%imm_ci                  %rd
- @ciw       ...   ........ ... .. &ciw    nzuimm=%nzuimm_ciw           rd=%rs2_3
- @cl_d      ... ... ... .. ... .. &cl_dw  uimm=%uimm_cl_d  rs1=%rs1_3  rd=%rs2_3
- @cl_w      ... ... ... .. ... .. &cl_dw  uimm=%uimm_cl_w  rs1=%rs1_3  rd=%rs2_3
- @cl        ... ... ... .. ... .. &cl                      rs1=%rs1_3  rd=%rs2_3
- @cs        ... ... ... .. ... .. &cs                      rs1=%rs1_3  rs2=%rs2_3
-+@cs_2      ... ... ... .. ... .. &cr                      rd=%rs1_3   rs2=%rs2_3
- @cs_d      ... ... ... .. ... .. &cs_dw  uimm=%uimm_cl_d  rs1=%rs1_3  rs2=%rs2_3
- @cs_w      ... ... ... .. ... .. &cs_dw  uimm=%uimm_cl_w  rs1=%rs1_3  rs2=%rs2_3
-+@cb        ... ... ... .. ... .. &cb     imm=%imm_cb      rs1=%rs1_3
-+@cj        ...    ........... .. &c_j    imm=%imm_cj
- 
-+@c_addi16sp_lui ... .  ..... ..... .. &c_addi16sp_lui %imm_lui %imm_addi16sp %rd
-+
-+@c_shift        ... . .. ... ..... .. &c_shift rd=%rs1_3 shamt=%nzuimm_6bit
-+
-+@c_andi         ... . .. ... ..... .. &ci imm=%imm_ci rd=%rs1_3
- 
- # *** RV64C Standard Extension (Quadrant 0) ***
- c_addi4spn        000    ........ ... 00 @ciw
-@@ -53,3 +78,21 @@ c_flw_ld          011  --- ... -- ... 00 @cl    #Note: Must parse uimm manually
- c_fsd             101  ... ... .. ... 00 @cs_d
- c_sw              110  ... ... .. ... 00 @cs_w
- c_fsw_sd          111  --- ... -- ... 00 @cs    #Note: Must parse uimm manually
-+
-+# *** RV64C Standard Extension (Quadrant 1) ***
-+c_addi            000 .  .....  ..... 01 @ci
-+c_jal_addiw       001 .  .....  ..... 01 @ci #Note: parse rd and/or imm manually
-+c_li              010 .  .....  ..... 01 @ci
-+c_addi16sp_lui    011 .  .....  ..... 01 @c_addi16sp_lui # shares opc with C.LUI
-+c_srli            100 . 00 ...  ..... 01 @c_shift
-+c_srai            100 . 01 ...  ..... 01 @c_shift
-+c_andi            100 . 10 ...  ..... 01 @c_andi
-+c_sub             100 0 11 ... 00 ... 01 @cs_2
-+c_xor             100 0 11 ... 01 ... 01 @cs_2
-+c_or              100 0 11 ... 10 ... 01 @cs_2
-+c_and             100 0 11 ... 11 ... 01 @cs_2
-+c_subw            100 1 11 ... 00 ... 01 @cs_2
-+c_addw            100 1 11 ... 01 ... 01 @cs_2
-+c_j               101     ........... 01 @cj
-+c_beqz            110  ... ...  ..... 01 @cb
-+c_bnez            111  ... ...  ..... 01 @cb
-diff --git a/target/riscv/insn_trans/trans_rvc.inc.c b/target/riscv/insn_trans/trans_rvc.inc.c
-index 93ec8aa30b..b06c435c98 100644
---- a/target/riscv/insn_trans/trans_rvc.inc.c
-+++ b/target/riscv/insn_trans/trans_rvc.inc.c
-@@ -73,3 +73,154 @@ static bool trans_c_fsw_sd(DisasContext *ctx, arg_c_fsw_sd *a)
-     return false;
- #endif
- }
-+
-+static bool trans_c_addi(DisasContext *ctx, arg_c_addi *a)
-+{
-+    if (a->imm == 0) {
-+        /* Hint: insn is valid but does not affect state */
-+        return true;
-+    }
-+    arg_addi arg = { .rd = a->rd, .rs1 = a->rd, .imm = a->imm };
-+    return trans_addi(ctx, &arg);
-+}
-+
-+static bool trans_c_jal_addiw(DisasContext *ctx, arg_c_jal_addiw *a)
-+{
-+#ifdef TARGET_RISCV32
-+    /* C.JAL */
-+    arg_jal arg = { .rd = 1, .imm = a->imm };
-+    return trans_jal(ctx, &arg);
-+#else
-+    /* C.ADDIW */
-+    arg_addiw arg = { .rd = a->rd, .rs1 = a->rd, .imm = a->imm };
-+    return trans_addiw(ctx, &arg);
-+#endif
-+}
-+
-+static bool trans_c_li(DisasContext *ctx, arg_c_li *a)
-+{
-+    if (a->rd == 0) {
-+        /* Hint: insn is valid but does not affect state */
-+        return true;
-+    }
-+    arg_addi arg = { .rd = a->rd, .rs1 = 0, .imm = a->imm };
-+    return trans_addi(ctx, &arg);
-+}
-+
-+static bool trans_c_addi16sp_lui(DisasContext *ctx, arg_c_addi16sp_lui *a)
-+{
-+    if (a->rd == 2) {
-+        /* C.ADDI16SP */
-+        arg_addi arg = { .rd = 2, .rs1 = 2, .imm = a->imm_addi16sp };
-+        return trans_addi(ctx, &arg);
-+    } else if (a->imm_lui != 0) {
-+        /* C.LUI */
-+        if (a->rd == 0) {
-+            /* Hint: insn is valid but does not affect state */
-+            return true;
-+        }
-+        arg_lui arg = { .rd = a->rd, .imm = a->imm_lui };
-+        return trans_lui(ctx, &arg);
-+    }
-+    return false;
-+}
-+
-+static bool trans_c_srli(DisasContext *ctx, arg_c_srli *a)
-+{
-+    int shamt = a->shamt;
-+    if (shamt == 0) {
-+        /* For RV128 a shamt of 0 means a shift by 64 */
-+        shamt = 64;
-+    }
-+    /* Ensure, that shamt[5] is zero for RV32 */
-+    if (shamt >= TARGET_LONG_BITS) {
-+        return false;
-+    }
-+
-+    arg_srli arg = { .rd = a->rd, .rs1 = a->rd, .shamt = a->shamt };
-+    return trans_srli(ctx, &arg);
-+}
-+
-+static bool trans_c_srai(DisasContext *ctx, arg_c_srai *a)
-+{
-+    int shamt = a->shamt;
-+    if (shamt == 0) {
-+        /* For RV128 a shamt of 0 means a shift by 64 */
-+        shamt = 64;
-+    }
-+    /* Ensure, that shamt[5] is zero for RV32 */
-+    if (shamt >= TARGET_LONG_BITS) {
-+        return false;
-+    }
-+
-+    arg_srai arg = { .rd = a->rd, .rs1 = a->rd, .shamt = a->shamt };
-+    return trans_srai(ctx, &arg);
-+}
-+
-+static bool trans_c_andi(DisasContext *ctx, arg_c_andi *a)
-+{
-+    arg_andi arg = { .rd = a->rd, .rs1 = a->rd, .imm = a->imm };
-+    return trans_andi(ctx, &arg);
-+}
-+
-+static bool trans_c_sub(DisasContext *ctx, arg_c_sub *a)
-+{
-+    arg_sub arg = { .rd = a->rd, .rs1 = a->rd, .rs2 = a->rs2 };
-+    return trans_sub(ctx, &arg);
-+}
-+
-+static bool trans_c_xor(DisasContext *ctx, arg_c_xor *a)
-+{
-+    arg_xor arg = { .rd = a->rd, .rs1 = a->rd, .rs2 = a->rs2 };
-+    return trans_xor(ctx, &arg);
-+}
-+
-+static bool trans_c_or(DisasContext *ctx, arg_c_or *a)
-+{
-+    arg_or arg = { .rd = a->rd, .rs1 = a->rd, .rs2 = a->rs2 };
-+    return trans_or(ctx, &arg);
-+}
-+
-+static bool trans_c_and(DisasContext *ctx, arg_c_and *a)
-+{
-+    arg_and arg = { .rd = a->rd, .rs1 = a->rd, .rs2 = a->rs2 };
-+    return trans_and(ctx, &arg);
-+}
-+
-+static bool trans_c_subw(DisasContext *ctx, arg_c_subw *a)
-+{
-+#ifdef TARGET_RISCV64
-+    arg_subw arg = { .rd = a->rd, .rs1 = a->rd, .rs2 = a->rs2 };
-+    return trans_subw(ctx, &arg);
-+#else
-+    return false;
-+#endif
-+}
-+
-+static bool trans_c_addw(DisasContext *ctx, arg_c_addw *a)
-+{
-+#ifdef TARGET_RISCV64
-+    arg_addw arg = { .rd = a->rd, .rs1 = a->rd, .rs2 = a->rs2 };
-+    return trans_addw(ctx, &arg);
-+#else
-+    return false;
-+#endif
-+}
-+
-+static bool trans_c_j(DisasContext *ctx, arg_c_j *a)
-+{
-+    arg_jal arg = { .rd = 0, .imm = a->imm };
-+    return trans_jal(ctx, &arg);
-+}
-+
-+static bool trans_c_beqz(DisasContext *ctx, arg_c_beqz *a)
-+{
-+    arg_beq arg = { .rs1 = a->rs1, .rs2 = 0, .imm = a->imm };
-+    return trans_beq(ctx, &arg);
-+}
-+
-+static bool trans_c_bnez(DisasContext *ctx, arg_c_bnez *a)
-+{
-+    arg_bne arg = { .rs1 = a->rs1, .rs2 = 0, .imm = a->imm };
-+    return trans_bne(ctx, &arg);
-+}
 diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 8bddebb35e..dc4d2c42ba 100644
+index 18d7b6d147..e81b9f097e 100644
 --- a/target/riscv/translate.c
 +++ b/target/riscv/translate.c
-@@ -746,120 +746,6 @@ static void decode_RV32_64C0(DisasContext *ctx)
+@@ -52,6 +52,7 @@ typedef struct DisasContext {
+        to any system register, which includes CSR_FRM, so we do not have
+        to reset this known value.  */
+     int frm;
++    CPURISCVState *env;
+ } DisasContext;
+ 
+ /* convert riscv funct3 to qemu memop for load/store */
+@@ -1789,19 +1790,19 @@ static void decode_RV32_64G(CPURISCVState *env, DisasContext *ctx)
      }
  }
  
--static void decode_RV32_64C1(CPURISCVState *env, DisasContext *ctx)
--{
--    uint8_t funct3 = extract32(ctx->opcode, 13, 3);
--    uint8_t rd_rs1 = GET_C_RS1(ctx->opcode);
--    uint8_t rs1s, rs2s;
--    uint8_t funct2;
--
--    switch (funct3) {
--    case 0:
--        /* C.ADDI -> addi rd, rd, nzimm[5:0] */
--        gen_arith_imm(ctx, OPC_RISC_ADDI, rd_rs1, rd_rs1,
--                      GET_C_IMM(ctx->opcode));
--        break;
--    case 1:
--#if defined(TARGET_RISCV64)
--        /* C.ADDIW (RV64/128) -> addiw rd, rd, imm[5:0]*/
--        gen_arith_imm(ctx, OPC_RISC_ADDIW, rd_rs1, rd_rs1,
--                      GET_C_IMM(ctx->opcode));
--#else
--        /* C.JAL(RV32) -> jal x1, offset[11:1] */
--        gen_jal(env, ctx, 1, GET_C_J_IMM(ctx->opcode));
--#endif
--        break;
--    case 2:
--        /* C.LI -> addi rd, x0, imm[5:0]*/
--        gen_arith_imm(ctx, OPC_RISC_ADDI, rd_rs1, 0, GET_C_IMM(ctx->opcode));
--        break;
--    case 3:
--        if (rd_rs1 == 2) {
--            /* C.ADDI16SP -> addi x2, x2, nzimm[9:4]*/
--            gen_arith_imm(ctx, OPC_RISC_ADDI, 2, 2,
--                          GET_C_ADDI16SP_IMM(ctx->opcode));
--        } else if (rd_rs1 != 0) {
--            /* C.LUI (rs1/rd =/= {0,2}) -> lui rd, nzimm[17:12]*/
--            tcg_gen_movi_tl(cpu_gpr[rd_rs1],
--                            GET_C_IMM(ctx->opcode) << 12);
--        }
--        break;
--    case 4:
--        funct2 = extract32(ctx->opcode, 10, 2);
--        rs1s = GET_C_RS1S(ctx->opcode);
--        switch (funct2) {
--        case 0: /* C.SRLI(RV32) -> srli rd', rd', shamt[5:0] */
--            gen_arith_imm(ctx, OPC_RISC_SHIFT_RIGHT_I, rs1s, rs1s,
--                               GET_C_ZIMM(ctx->opcode));
--            /* C.SRLI64(RV128) */
--            break;
--        case 1:
--            /* C.SRAI -> srai rd', rd', shamt[5:0]*/
--            gen_arith_imm(ctx, OPC_RISC_SHIFT_RIGHT_I, rs1s, rs1s,
--                            GET_C_ZIMM(ctx->opcode) | 0x400);
--            /* C.SRAI64(RV128) */
--            break;
--        case 2:
--            /* C.ANDI -> andi rd', rd', imm[5:0]*/
--            gen_arith_imm(ctx, OPC_RISC_ANDI, rs1s, rs1s,
--                          GET_C_IMM(ctx->opcode));
--            break;
--        case 3:
--            funct2 = extract32(ctx->opcode, 5, 2);
--            rs2s = GET_C_RS2S(ctx->opcode);
--            switch (funct2) {
--            case 0:
--                /* C.SUB -> sub rd', rd', rs2' */
--                if (extract32(ctx->opcode, 12, 1) == 0) {
--                    gen_arith(ctx, OPC_RISC_SUB, rs1s, rs1s, rs2s);
--                }
--#if defined(TARGET_RISCV64)
--                else {
--                    gen_arith(ctx, OPC_RISC_SUBW, rs1s, rs1s, rs2s);
--                }
--#endif
--                break;
--            case 1:
--                /* C.XOR -> xor rs1', rs1', rs2' */
--                if (extract32(ctx->opcode, 12, 1) == 0) {
--                    gen_arith(ctx, OPC_RISC_XOR, rs1s, rs1s, rs2s);
--                }
--#if defined(TARGET_RISCV64)
--                else {
--                    /* C.ADDW (RV64/128) */
--                    gen_arith(ctx, OPC_RISC_ADDW, rs1s, rs1s, rs2s);
--                }
--#endif
--                break;
--            case 2:
--                /* C.OR -> or rs1', rs1', rs2' */
--                gen_arith(ctx, OPC_RISC_OR, rs1s, rs1s, rs2s);
--                break;
--            case 3:
--                /* C.AND -> and rs1', rs1', rs2' */
--                gen_arith(ctx, OPC_RISC_AND, rs1s, rs1s, rs2s);
--                break;
--            }
--            break;
--        }
--        break;
--    case 5:
--        /* C.J -> jal x0, offset[11:1]*/
--        gen_jal(env, ctx, 0, GET_C_J_IMM(ctx->opcode));
--        break;
--    case 6:
--        /* C.BEQZ -> beq rs1', x0, offset[8:1]*/
--        rs1s = GET_C_RS1S(ctx->opcode);
--        gen_branch(env, ctx, OPC_RISC_BEQ, rs1s, 0, GET_C_B_IMM(ctx->opcode));
--        break;
--    case 7:
--        /* C.BNEZ -> bne rs1', x0, offset[8:1]*/
--        rs1s = GET_C_RS1S(ctx->opcode);
--        gen_branch(env, ctx, OPC_RISC_BNE, rs1s, 0, GET_C_B_IMM(ctx->opcode));
--        break;
--    }
--}
--
- static void decode_RV32_64C2(CPURISCVState *env, DisasContext *ctx)
+-static void decode_opc(CPURISCVState *env, DisasContext *ctx)
++static void decode_opc(DisasContext *ctx)
  {
-     uint8_t rd, rs2;
-@@ -946,9 +832,6 @@ static void decode_RV32_64C(CPURISCVState *env, DisasContext *ctx)
-     case 0:
-         decode_RV32_64C0(ctx);
-         break;
--    case 1:
--        decode_RV32_64C1(env, ctx);
--        break;
-     case 2:
-         decode_RV32_64C2(env, ctx);
-         break;
-@@ -963,6 +846,7 @@ static void decode_RV32_64C(CPURISCVState *env, DisasContext *ctx)
- EX_SH(1)
- EX_SH(2)
- EX_SH(3)
-+EX_SH(4)
- EX_SH(12)
+     /* check for compressed insn */
+     if (extract32(ctx->opcode, 0, 2) != 3) {
+-        if (!riscv_has_ext(env, RVC)) {
++        if (!riscv_has_ext(ctx->env, RVC)) {
+             gen_exception_illegal(ctx);
+         } else {
+             ctx->pc_succ_insn = ctx->base.pc_next + 2;
+-            decode_RV32_64C(env, ctx);
++            decode_RV32_64C(ctx->env, ctx);
+         }
+     } else {
+         ctx->pc_succ_insn = ctx->base.pc_next + 4;
+-        decode_RV32_64G(env, ctx);
++        decode_RV32_64G(ctx->env, ctx);
+     }
+ }
  
- static int ex_rvc_register(int reg)
+@@ -1846,10 +1847,10 @@ static bool riscv_tr_breakpoint_check(DisasContextBase *dcbase, CPUState *cpu,
+ static void riscv_tr_translate_insn(DisasContextBase *dcbase, CPUState *cpu)
+ {
+     DisasContext *ctx = container_of(dcbase, DisasContext, base);
+-    CPURISCVState *env = cpu->env_ptr;
++    ctx->env = cpu->env_ptr;
+ 
+-    ctx->opcode = cpu_ldl_code(env, ctx->base.pc_next);
+-    decode_opc(env, ctx);
++    ctx->opcode = cpu_ldl_code(ctx->env, ctx->base.pc_next);
++    decode_opc(ctx);
+     ctx->base.pc_next = ctx->pc_succ_insn;
+ 
+     if (ctx->base.is_jmp == DISAS_NEXT) {
 -- 
 2.19.1
 
