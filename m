@@ -1,72 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gHu5m-00020p-MV
-	for mharc-qemu-riscv@gnu.org; Wed, 31 Oct 2018 13:15:42 -0400
-Received: from eggs.gnu.org ([2001:4830:134:3::10]:35606)
+	id 1gHwpy-00050B-Ef
+	for mharc-qemu-riscv@gnu.org; Wed, 31 Oct 2018 16:11:34 -0400
+Received: from eggs.gnu.org ([2001:4830:134:3::10]:59910)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <richard.henderson@linaro.org>) id 1gHu5i-0001xl-IW
-	for qemu-riscv@nongnu.org; Wed, 31 Oct 2018 13:15:41 -0400
+	(envelope-from <alistair23@gmail.com>) id 1gHwpv-0004yI-TX
+	for qemu-riscv@nongnu.org; Wed, 31 Oct 2018 16:11:32 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <richard.henderson@linaro.org>) id 1gHu5g-0006rn-2d
-	for qemu-riscv@nongnu.org; Wed, 31 Oct 2018 13:15:38 -0400
-Received: from mail-wm1-x341.google.com ([2a00:1450:4864:20::341]:35917)
+	(envelope-from <alistair23@gmail.com>) id 1gHwpk-000066-21
+	for qemu-riscv@nongnu.org; Wed, 31 Oct 2018 16:11:23 -0400
+Received: from mail-lj1-x243.google.com ([2a00:1450:4864:20::243]:41254)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
-	id 1gHu5e-0006ei-Ra
-	for qemu-riscv@nongnu.org; Wed, 31 Oct 2018 13:15:35 -0400
-Received: by mail-wm1-x341.google.com with SMTP id a8-v6so15209286wmf.1
-	for <qemu-riscv@nongnu.org>; Wed, 31 Oct 2018 10:15:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
-	h=subject:to:cc:references:from:openpgp:message-id:date:user-agent
-	:mime-version:in-reply-to:content-language:content-transfer-encoding;
-	bh=43pHISfOzFEa9vjE+GNq/PCZsg69BIO7vx5KMAgAyI4=;
-	b=HPVQx4IaPCW3GbuBrGj7Aa4A09OTcPEGeishjpLHRVbdNKzac+vyf32SY7jo1jGG7D
-	Z2UnZR16zMsCyKyvT6EcBunVfJSl8jXGMvgQNAK1dlblTJCS10PczGqBa0bSJJf08fW9
-	r10qaT7mpP4erYQguLZ7mXW3m0zNqAm6/fXCE=
+	(Exim 4.71) (envelope-from <alistair23@gmail.com>)
+	id 1gHwpd-0008VC-Ir; Wed, 31 Oct 2018 16:11:13 -0400
+Received: by mail-lj1-x243.google.com with SMTP id z80-v6so9986432ljb.8;
+	Wed, 31 Oct 2018 13:11:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=MQxfZwaSZdaShXueqQz78A4ZYsldc/QBAqACFB959C8=;
+	b=h1L9QegJdCDj9KDn4ufSUIbMinDb9iwCy0wnEhcv4VXjNbYT4u7Fg0oRjxm+kJi8Sm
+	42mK033qKbRShV1Pl9hFr1ZxvhKYjeS94RkXbsobnerNs8jZMikfA5NE7NiFifIya4x5
+	mXY+obEjyvKADiEGTVeeRZ886OEbMOrVKI9VypLYRyNCj25DXZFk+Nj6b61otnW0tF2v
+	FM5uyUll8KV2FRR5qQra1MB1xsZ3Vp+DrI1kpZpEtJsbcTvanHskX21lh93Q1pLXKzzG
+	ZMsbpaHSHPlT4PFAZokxkP6ftVHZBII1jVF73pweB4Jwcbq4boyRVJ1Tx0g4SBJlBOPD
+	ruNA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
-	:date:user-agent:mime-version:in-reply-to:content-language
-	:content-transfer-encoding;
-	bh=43pHISfOzFEa9vjE+GNq/PCZsg69BIO7vx5KMAgAyI4=;
-	b=QXfuFwm2dy0DGODLiq6ICypAoTwtHUGCc08PMqYMrS4smK4TQMOn4ELH33NKT1ZC6T
-	rvwHsfVI0m22pu0pTgaz2M+KwwEWsa4feDW9bdz0U/CfZmmKRMLo7cdY0pjqY/xyFQHD
-	OVD77UVkV5eyzf115ldvX12WazX0/3dwIuMvCbbnAJzQ5k6RSua2Ykg1xXa84amCmIhs
-	oIMM8O7sHiHUax6TvBbQTL0n8Y3p9oCzV0IXfCf64z9ySgbBHfT1SBdSmF1Rg4ff1bvM
-	upEdUfGeCn1v8T6GRRHtujNtOJxm8i40joHciVZ0SW4VpLjIbkUQQwc71jbO/PC3/T6y
-	A62g==
-X-Gm-Message-State: AGRZ1gJViBQay1622+MRxn721vTF+uM53/ydW0UUqIlfRrshvaoDmnli
-	SzJeB5Aiq1+zL+rPhtc2DIty+gxqQn8=
-X-Google-Smtp-Source: AJdET5cD8K9jgoYkBm0P8eBtRZbn+qs1qX8t4KUVT224BuhUZEpupAaq7A40ov5B2oLGzwRqgInGEg==
-X-Received: by 2002:a1c:838a:: with SMTP id
-	f132-v6mr3225328wmd.51.1541006116937; 
-	Wed, 31 Oct 2018 10:15:16 -0700 (PDT)
-Received: from cloudburst.twiddle.net (79-69-241-110.dynamic.dsl.as9105.com.
-	[79.69.241.110]) by smtp.gmail.com with ESMTPSA id
-	m2-v6sm23458746wrj.80.2018.10.31.10.15.15
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 31 Oct 2018 10:15:16 -0700 (PDT)
-To: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, mjc@sifive.com,
-	sagark@eecs.berkeley.edu, palmer@sifive.com, Alistair.Francis@wdc.com
-Cc: peer.adelt@hni.uni-paderborn.de, qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-References: <20181031132029.4887-1-kbastian@mail.uni-paderborn.de>
-	<20181031132029.4887-7-kbastian@mail.uni-paderborn.de>
-From: Richard Henderson <richard.henderson@linaro.org>
-Openpgp: preference=signencrypt
-Message-ID: <fcac4eb9-8389-9c11-b935-d2642e59e207@linaro.org>
-Date: Wed, 31 Oct 2018 17:15:14 +0000
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.2.1
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=MQxfZwaSZdaShXueqQz78A4ZYsldc/QBAqACFB959C8=;
+	b=DS08x95+wUp4sLppqThtszq+GTslRpjJXdxs5Fd4vv2SUSBgO6ahJ+jKbieUu5L32U
+	ft0NIVngga44f4olqccHN4lUM5S1hRn05/xUJFolDDBpVPBSa69vJV+xcwELdb//5yJU
+	Z+n3iSv2Y1r+ixY++GGOyp5s1oo3T3aEBZqs8aqO3ZQCX3W/zMTWANNxBsn7klACIbNJ
+	bNJbSD++9WkosaQEQl152Q/R7XnoSZQthMV7Ib/NyFkGfA9shSV081B6Kr5cFcczE5no
+	z5N5UUr5q2lYb/uSfV7KusTpXI/rJaiX8M41pOP4QLvwl5I1LI/HVD1mDFxHeU6vhHlO
+	wpCA==
+X-Gm-Message-State: AGRZ1gJJ56VXiOvQyxAP7ouGPZGQhIWXgYG2Ek3jYgntQ4+H3/YwhRYI
+	2JDwmBzwknmMPPvCErC1FATzIJGlZ0fKdx+kyKc=
+X-Google-Smtp-Source: AJdET5e8SqlW9tenfZF4Yk/0nlQ37TiekFZ05xgvPTXIs8emAFE1n+f8EsOvH9d/ohuIT3CNo5QwhBra4kdzmjG+TI8=
+X-Received: by 2002:a2e:449c:: with SMTP id
+	b28-v6mr2908347ljf.47.1541016671347; 
+	Wed, 31 Oct 2018 13:11:11 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20181031132029.4887-7-kbastian@mail.uni-paderborn.de>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+References: <cover.1540937826.git.alistair.francis@wdc.com>
+	<3f834825634e34ad107fe9e7af1b417cb47fc1f1.camel@redhat.com>
+In-Reply-To: <3f834825634e34ad107fe9e7af1b417cb47fc1f1.camel@redhat.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Wed, 31 Oct 2018 13:10:43 -0700
+Message-ID: <CAKmqyKNF+tQFf50BCj91_RypYeHbnoZLvpm8gH71iW1og9uWfA@mail.gmail.com>
+To: Andrea Bolognani <abologna@redhat.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
+	"qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+	qemu-riscv@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2a00:1450:4864:20::341
-Subject: Re: [Qemu-riscv] [PATCH v3 06/35] target/riscv: Convert RVXI
- arithmetic insns to decodetree
+X-Received-From: 2a00:1450:4864:20::243
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v6 0/5] Connect a PCIe host
+ and graphics support to RISC-V
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -78,27 +68,59 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Oct 2018 17:15:41 -0000
+X-List-Received-Date: Wed, 31 Oct 2018 20:11:32 -0000
 
-On 10/31/18 1:20 PM, Bastian Koppelmann wrote:
-> we cannot remove the call to gen_arith() in decode_RV32_64G() since it
-> is used to translate multiply instructions.
-> 
-> Signed-off-by: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-> Signed-off-by: Peer Adelt <peer.adelt@hni.uni-paderborn.de>
-> ---
-> v2 -> v3:
->     - moved 64-bit only insn to insn64.decode
->     - dropped insn argument of trans_foo functions
-> 
->  target/riscv/insn32.decode              |  25 ++++
->  target/riscv/insn64.decode              |  13 ++
->  target/riscv/insn_trans/trans_rvi.inc.c | 168 ++++++++++++++++++++++++
->  target/riscv/translate.c                |   9 --
->  4 files changed, 206 insertions(+), 9 deletions(-)
+On Wed, Oct 31, 2018 at 7:51 AM Andrea Bolognani <abologna@redhat.com> wrote:
+>
+> On Tue, 2018-10-30 at 22:17 +0000, Alistair Francis wrote:
+> > V6:
+> >  - Fix the interrupt issue for the GPEX device
+>
+> I gave this a spin.
+>
+> With the pcie.0 <- pcie-root-port <- virtio-net-pci setup I get
+>
+>   qemu-system-riscv64: -device pcie-root-port,port=0x8,chassis=1,\
+>   id=pci.1,bus=pcie.0,multifunction=on,addr=0x1: MSI-X is not \
+>   supported by interrupt controller
+>
+> just like last time, which as I mentioned is a problem for libvirt
+> because we follow the recommendations outlined in qemu/docs/pcie.txt
+> and never plug devices into pcie.0 directly.
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+At the moment we can't support MSI, the interrupt controller doesn't
+support MSI.
 
+>
+> Even after working around that issue by manually placing the device
+> at 0000:00:01.0, it still doesn't work: I see
+>
+>   pci 0000:00:01.0: BAR 6: assigned [mem 0x00000000-0x0003ffff pref]
+>   pci 0000:00:01.0: BAR 4: assigned [mem 0x00040000-0x00043fff 64bit pref]
+>   pci 0000:00:01.0: BAR 0: no space for [io  size 0x0020]
+>   pci 0000:00:01.0: BAR 0: failed to assign [io  size 0x0020]
+>   ...
+>   virtio_net virtio3: virtio: device uses modern interface but does not have VIRTIO_F_VERSION_1
+>   virtio_net: probe of virtio3 failed with error -22
 
-r~
+Yep, someone else pointed out a problem as well. I have made some
+changes [1] but I still can't get the BAR to line up.
+
+>
+> in dmesg and, while the device shows up in the output of lspci(8),
+> it's nowhere to be seen when running 'ip addr' and friends.
+>
+> Let me know if you need me to try anything else :)
+
+Any ideas on how to debug the confusing memory mappings or
+non-existent interrupts would be helpful :)
+
+1: https://github.com/alistair23/qemu/tree/mainline/alistair/sifive_pcie.next
+
+Alistair
+
+>
+> --
+> Andrea Bolognani / Red Hat / Virtualization
+>
 
