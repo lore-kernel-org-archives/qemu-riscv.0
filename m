@@ -1,72 +1,72 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gHu4P-0000l3-Oa
-	for mharc-qemu-riscv@gnu.org; Wed, 31 Oct 2018 13:14:17 -0400
-Received: from eggs.gnu.org ([2001:4830:134:3::10]:35155)
+	id 1gHu5m-00020p-MV
+	for mharc-qemu-riscv@gnu.org; Wed, 31 Oct 2018 13:15:42 -0400
+Received: from eggs.gnu.org ([2001:4830:134:3::10]:35606)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <richard.henderson@linaro.org>) id 1gHu4N-0000ik-24
-	for qemu-riscv@nongnu.org; Wed, 31 Oct 2018 13:14:16 -0400
+	(envelope-from <richard.henderson@linaro.org>) id 1gHu5i-0001xl-IW
+	for qemu-riscv@nongnu.org; Wed, 31 Oct 2018 13:15:41 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <richard.henderson@linaro.org>) id 1gHu4K-0005yz-EE
-	for qemu-riscv@nongnu.org; Wed, 31 Oct 2018 13:14:15 -0400
-Received: from mail-wm1-x343.google.com ([2a00:1450:4864:20::343]:39591)
+	(envelope-from <richard.henderson@linaro.org>) id 1gHu5g-0006rn-2d
+	for qemu-riscv@nongnu.org; Wed, 31 Oct 2018 13:15:38 -0400
+Received: from mail-wm1-x341.google.com ([2a00:1450:4864:20::341]:35917)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
 	(Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
-	id 1gHu4K-0005yM-6E
-	for qemu-riscv@nongnu.org; Wed, 31 Oct 2018 13:14:12 -0400
-Received: by mail-wm1-x343.google.com with SMTP id y144-v6so15198082wmd.4
-	for <qemu-riscv@nongnu.org>; Wed, 31 Oct 2018 10:14:12 -0700 (PDT)
+	id 1gHu5e-0006ei-Ra
+	for qemu-riscv@nongnu.org; Wed, 31 Oct 2018 13:15:35 -0400
+Received: by mail-wm1-x341.google.com with SMTP id a8-v6so15209286wmf.1
+	for <qemu-riscv@nongnu.org>; Wed, 31 Oct 2018 10:15:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
 	h=subject:to:cc:references:from:openpgp:message-id:date:user-agent
 	:mime-version:in-reply-to:content-language:content-transfer-encoding;
-	bh=80ftR3ecKTd7C6qgF2Gwf88iAWx6C/N3IuIiMb1cN/U=;
-	b=NBzNkE8Y/lo8xtnsGjt+u5ORPYZpwkfKLM7I05erhroAZANjYbXdGvrY3oni69LXu5
-	jreBBvOEjNGmKIs7IyeN1komoXObZkGfELa8zjU4GzVgKs7lIlhLZx271JrXxZo3tyAz
-	pNdr2wFhZSPkMUztqRyOb/y8ouUyZYANA/rsg=
+	bh=43pHISfOzFEa9vjE+GNq/PCZsg69BIO7vx5KMAgAyI4=;
+	b=HPVQx4IaPCW3GbuBrGj7Aa4A09OTcPEGeishjpLHRVbdNKzac+vyf32SY7jo1jGG7D
+	Z2UnZR16zMsCyKyvT6EcBunVfJSl8jXGMvgQNAK1dlblTJCS10PczGqBa0bSJJf08fW9
+	r10qaT7mpP4erYQguLZ7mXW3m0zNqAm6/fXCE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
 	:date:user-agent:mime-version:in-reply-to:content-language
 	:content-transfer-encoding;
-	bh=80ftR3ecKTd7C6qgF2Gwf88iAWx6C/N3IuIiMb1cN/U=;
-	b=ZpXYQPc9HBp99N7PU9bCoX5M3CNMfNCt3YrEX+eOz+gHjD7Su1UARVD0ZJPh4fW+TC
-	edvIl8an9kTC12TBbMguVaGYaI9BewkgH/lpE/AiYZ02nQWv9AQvLlUxLoqSSINuzo60
-	CMv2xhu+tCSeliMPpSSxjoTjG6eii1OBd/S+9oJHrwokSUwR7WTtAoFdzM9iUogECK2+
-	Aqc+Ls41GyasH9KFbd5+u60MmE3KBH07rF/C14kQJhlKpqjSxVUXPK9cuSPkD4VOsDhW
-	Yk6D/p2PFdjg52dIBx0i/mwO5Z4JjAsTbE4dl6MAlC4RQvBMmQd0SdR9KQbPO0UiTPJy
-	3ITw==
-X-Gm-Message-State: AGRZ1gKp+g8dE+pqxNY2EgGRp4j7yHEy/Bg9t3QEajw9SEZ0l2WfSpfc
-	ZTqAX5jxTm3elF+Hb2vmx9rrzq3DnhE=
-X-Google-Smtp-Source: AJdET5cGeaQDwvIpwGZInU5erjPLj0oLm9Z/Z7AWSck+EaPh01INl3cbKSOGBRPxca2lOaGZqXv+Iw==
-X-Received: by 2002:a1c:bc82:: with SMTP id
-	m124-v6mr3217947wmf.47.1541006050719; 
-	Wed, 31 Oct 2018 10:14:10 -0700 (PDT)
+	bh=43pHISfOzFEa9vjE+GNq/PCZsg69BIO7vx5KMAgAyI4=;
+	b=QXfuFwm2dy0DGODLiq6ICypAoTwtHUGCc08PMqYMrS4smK4TQMOn4ELH33NKT1ZC6T
+	rvwHsfVI0m22pu0pTgaz2M+KwwEWsa4feDW9bdz0U/CfZmmKRMLo7cdY0pjqY/xyFQHD
+	OVD77UVkV5eyzf115ldvX12WazX0/3dwIuMvCbbnAJzQ5k6RSua2Ykg1xXa84amCmIhs
+	oIMM8O7sHiHUax6TvBbQTL0n8Y3p9oCzV0IXfCf64z9ySgbBHfT1SBdSmF1Rg4ff1bvM
+	upEdUfGeCn1v8T6GRRHtujNtOJxm8i40joHciVZ0SW4VpLjIbkUQQwc71jbO/PC3/T6y
+	A62g==
+X-Gm-Message-State: AGRZ1gJViBQay1622+MRxn721vTF+uM53/ydW0UUqIlfRrshvaoDmnli
+	SzJeB5Aiq1+zL+rPhtc2DIty+gxqQn8=
+X-Google-Smtp-Source: AJdET5cD8K9jgoYkBm0P8eBtRZbn+qs1qX8t4KUVT224BuhUZEpupAaq7A40ov5B2oLGzwRqgInGEg==
+X-Received: by 2002:a1c:838a:: with SMTP id
+	f132-v6mr3225328wmd.51.1541006116937; 
+	Wed, 31 Oct 2018 10:15:16 -0700 (PDT)
 Received: from cloudburst.twiddle.net (79-69-241-110.dynamic.dsl.as9105.com.
 	[79.69.241.110]) by smtp.gmail.com with ESMTPSA id
-	c9-v6sm30285176wrh.50.2018.10.31.10.14.09
+	m2-v6sm23458746wrj.80.2018.10.31.10.15.15
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 31 Oct 2018 10:14:09 -0700 (PDT)
+	Wed, 31 Oct 2018 10:15:16 -0700 (PDT)
 To: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, mjc@sifive.com,
 	sagark@eecs.berkeley.edu, palmer@sifive.com, Alistair.Francis@wdc.com
 Cc: peer.adelt@hni.uni-paderborn.de, qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 References: <20181031132029.4887-1-kbastian@mail.uni-paderborn.de>
-	<20181031132029.4887-6-kbastian@mail.uni-paderborn.de>
+	<20181031132029.4887-7-kbastian@mail.uni-paderborn.de>
 From: Richard Henderson <richard.henderson@linaro.org>
 Openpgp: preference=signencrypt
-Message-ID: <f8f8a627-80eb-5516-d4b7-01672ef7b635@linaro.org>
-Date: Wed, 31 Oct 2018 17:14:08 +0000
+Message-ID: <fcac4eb9-8389-9c11-b935-d2642e59e207@linaro.org>
+Date: Wed, 31 Oct 2018 17:15:14 +0000
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
 	Thunderbird/60.2.1
 MIME-Version: 1.0
-In-Reply-To: <20181031132029.4887-6-kbastian@mail.uni-paderborn.de>
+In-Reply-To: <20181031132029.4887-7-kbastian@mail.uni-paderborn.de>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2a00:1450:4864:20::343
-Subject: Re: [Qemu-riscv] [PATCH v3 05/35] target/riscv: Convert RV64I
- load/store insns to decodetree
+X-Received-From: 2a00:1450:4864:20::341
+Subject: Re: [Qemu-riscv] [PATCH v3 06/35] target/riscv: Convert RVXI
+ arithmetic insns to decodetree
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -78,28 +78,24 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Oct 2018 17:14:16 -0000
+X-List-Received-Date: Wed, 31 Oct 2018 17:15:41 -0000
 
-On 10/31/18 1:19 PM, Bastian Koppelmann wrote:
-> this splits the 64-bit only instructions into its own decode file such
-> that we generate the decoder for these instructions only for the RISC-V
-> 64 bit target.
+On 10/31/18 1:20 PM, Bastian Koppelmann wrote:
+> we cannot remove the call to gen_arith() in decode_RV32_64G() since it
+> is used to translate multiply instructions.
 > 
 > Signed-off-by: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
 > Signed-off-by: Peer Adelt <peer.adelt@hni.uni-paderborn.de>
 > ---
->  target/riscv/Makefile.objs              |  8 +++++---
->  target/riscv/insn64.decode              | 25 +++++++++++++++++++++++++
->  target/riscv/insn_trans/trans_rvi.inc.c | 20 ++++++++++++++++++++
->  target/riscv/translate.c                |  7 -------
->  4 files changed, 50 insertions(+), 10 deletions(-)
->  create mode 100644 target/riscv/insn64.decode
-
-I did suggest using insn32-64.decode, so that insn64.decode is available for an
-actual 64-bit instruction word, which is mentioned in the "Extensions" section
-of the ISA manual.
-
-However,
+> v2 -> v3:
+>     - moved 64-bit only insn to insn64.decode
+>     - dropped insn argument of trans_foo functions
+> 
+>  target/riscv/insn32.decode              |  25 ++++
+>  target/riscv/insn64.decode              |  13 ++
+>  target/riscv/insn_trans/trans_rvi.inc.c | 168 ++++++++++++++++++++++++
+>  target/riscv/translate.c                |   9 --
+>  4 files changed, 206 insertions(+), 9 deletions(-)
 
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
