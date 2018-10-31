@@ -1,35 +1,35 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gHqxA-00064I-6R
+	id 1gHqxA-00064h-F4
 	for mharc-qemu-riscv@gnu.org; Wed, 31 Oct 2018 09:54:36 -0400
-Received: from eggs.gnu.org ([2001:4830:134:3::10]:37103)
+Received: from eggs.gnu.org ([2001:4830:134:3::10]:37426)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <kbastian@mail.uni-paderborn.de>) id 1gHqRK-0004aY-IX
-	for qemu-riscv@nongnu.org; Wed, 31 Oct 2018 09:21:45 -0400
+	(envelope-from <kbastian@mail.uni-paderborn.de>) id 1gHqRZ-0004kn-JG
+	for qemu-riscv@nongnu.org; Wed, 31 Oct 2018 09:21:59 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <kbastian@mail.uni-paderborn.de>) id 1gHqRE-0002op-Q0
-	for qemu-riscv@nongnu.org; Wed, 31 Oct 2018 09:21:40 -0400
-Received: from mail.uni-paderborn.de ([131.234.142.9]:40004)
+	(envelope-from <kbastian@mail.uni-paderborn.de>) id 1gHqRX-000345-Ej
+	for qemu-riscv@nongnu.org; Wed, 31 Oct 2018 09:21:57 -0400
+Received: from mail.uni-paderborn.de ([131.234.142.9]:57818)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.71) (envelope-from <kbastian@mail.uni-paderborn.de>)
-	id 1gHqR9-0002CW-Hm; Wed, 31 Oct 2018 09:21:32 -0400
-Received: from magmaria.uni-paderborn.de ([131.234.189.24]
+	id 1gHqRO-0002ES-H6; Wed, 31 Oct 2018 09:21:46 -0400
+Received: from wormulon.uni-paderborn.de ([131.234.189.22]
 	helo=localhost.localdomain)
-	by mail.uni-paderborn.de with esmtp (Exim 4.89 nylar)
-	id 1gHqQZ-0005j6-PA; Wed, 31 Oct 2018 14:20:55 +0100
-Received: from mail.uni-paderborn.de by magmaria with queue id 2959335-3;
-	Wed, 31 Oct 2018 13:20:55 GMT
+	by mail.uni-paderborn.de with esmtp (Exim 4.89 zuban)
+	id 1gHqQb-0008Lt-MF; Wed, 31 Oct 2018 14:20:57 +0100
+Received: from mail.uni-paderborn.de by wormulon with queue id 2965940-5;
+	Wed, 31 Oct 2018 13:20:57 GMT
 X-Envelope-From: <kbastian@mail.uni-paderborn.de>
 Received: from [131.234.87.238] (helo=mustique.hni.uni-paderborn.de)
 	by mail.uni-paderborn.de with esmtpsa
 	(TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.89 nylar)
-	id 1gHqQZ-0005dh-OZ; Wed, 31 Oct 2018 14:20:55 +0100
+	id 1gHqQb-0005dh-OW; Wed, 31 Oct 2018 14:20:57 +0100
 From: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
 To: mjc@sifive.com, sagark@eecs.berkeley.edu, palmer@sifive.com,
 	kbastian@mail.uni-paderborn.de, Alistair.Francis@wdc.com
 Cc: richard.henderson@linaro.org, peer.adelt@hni.uni-paderborn.de,
 	qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-Date: Wed, 31 Oct 2018 14:20:10 +0100
-Message-Id: <20181031132029.4887-17-kbastian@mail.uni-paderborn.de>
+Date: Wed, 31 Oct 2018 14:20:20 +0100
+Message-Id: <20181031132029.4887-27-kbastian@mail.uni-paderborn.de>
 X-Mailer: git-send-email 2.19.1
 In-Reply-To: <20181031132029.4887-1-kbastian@mail.uni-paderborn.de>
 References: <20181031132029.4887-1-kbastian@mail.uni-paderborn.de>
@@ -44,8 +44,8 @@ X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
 X-Received-From: 131.234.142.9
 X-Mailman-Approved-At: Wed, 31 Oct 2018 09:54:25 -0400
-Subject: [Qemu-riscv] [PATCH v3 16/35] target/riscv: Convert RV priv insns
- to decodetree
+Subject: [Qemu-riscv] [PATCH v3 26/35] target/riscv: Remove shift and slt
+ insn manual decoding
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -57,244 +57,219 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Oct 2018 13:21:46 -0000
+X-List-Received-Date: Wed, 31 Oct 2018 13:22:00 -0000
 
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Signed-off-by: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
 Signed-off-by: Peer Adelt <peer.adelt@hni.uni-paderborn.de>
 ---
-v2 -> v3:
-    - illegal instruction call replaced with return false
-    - dropped insn argument of trans_foo functions
+ target/riscv/insn_trans/trans_rvi.inc.c | 78 +++++++++++++++++++++----
+ target/riscv/translate.c                | 59 ++++++-------------
+ 2 files changed, 85 insertions(+), 52 deletions(-)
 
-target/riscv/insn32.decode                    |  15 +++
-.../riscv/insn_trans/trans_privileged.inc.c   | 108 ++++++++++++++++++
- target/riscv/translate.c                      |  49 +-------
- 3 files changed, 124 insertions(+), 48 deletions(-)
- create mode 100644 target/riscv/insn_trans/trans_privileged.inc.c
-
-diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index b933c349a4..379a5d5438 100644
---- a/target/riscv/insn32.decode
-+++ b/target/riscv/insn32.decode
-@@ -57,6 +57,21 @@
- @r2_rm   .......   ..... ..... ... ..... ....... %rs1 %rm %rd
- @r2      .......   ..... ..... ... ..... ....... %rs1 %rd
+diff --git a/target/riscv/insn_trans/trans_rvi.inc.c b/target/riscv/insn_trans/trans_rvi.inc.c
+index 5b5999954a..65548d1281 100644
+--- a/target/riscv/insn_trans/trans_rvi.inc.c
++++ b/target/riscv/insn_trans/trans_rvi.inc.c
+@@ -311,19 +311,38 @@ static bool trans_sub(DisasContext *ctx, arg_sub *a)
  
-+@sfence_vma ....... ..... .....   ... ..... ....... %rs2 %rs1
-+@sfence_vm  ....... ..... .....   ... ..... ....... %rs1
-+
-+
-+# *** Privileged Instructions ***
-+ecall      000000000000     00000 000 00000 1110011
-+ebreak     000000000001     00000 000 00000 1110011
-+uret       0000000    00010 00000 000 00000 1110011
-+sret       0001000    00010 00000 000 00000 1110011
-+hret       0010000    00010 00000 000 00000 1110011
-+mret       0011000    00010 00000 000 00000 1110011
-+wfi        0001000    00101 00000 000 00000 1110011
-+sfence_vma 0001001    ..... ..... 000 00000 1110011 @sfence_vma
-+sfence_vm  0001000    00100 ..... 000 00000 1110011 @sfence_vm
-+
- # *** RV32I Base Instruction Set ***
- lui      ....................       ..... 0110111 @u
- auipc    ....................       ..... 0010111 @u
-diff --git a/target/riscv/insn_trans/trans_privileged.inc.c b/target/riscv/insn_trans/trans_privileged.inc.c
-new file mode 100644
-index 0000000000..7a4f0c7846
---- /dev/null
-+++ b/target/riscv/insn_trans/trans_privileged.inc.c
-@@ -0,0 +1,108 @@
-+/*
-+ * RISC-V translation routines for the RISC-V privileged instructions.
-+ *
-+ * Copyright (c) 2016-2017 Sagar Karandikar, sagark@eecs.berkeley.edu
-+ * Copyright (c) 2018 Peer Adelt, peer.adelt@hni.uni-paderborn.de
-+ *                    Bastian Koppelmann, kbastian@mail.uni-paderborn.de
-+ *
-+ * This program is free software; you can redistribute it and/or modify it
-+ * under the terms and conditions of the GNU General Public License,
-+ * version 2 or later, as published by the Free Software Foundation.
-+ *
-+ * This program is distributed in the hope it will be useful, but WITHOUT
-+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-+ * more details.
-+ *
-+ * You should have received a copy of the GNU General Public License along with
-+ * this program.  If not, see <http://www.gnu.org/licenses/>.
-+ */
-+
-+static bool trans_ecall(DisasContext *ctx, arg_ecall *a)
-+{
-+    /* always generates U-level ECALL, fixed in do_interrupt handler */
-+    generate_exception(ctx, RISCV_EXCP_U_ECALL);
-+    tcg_gen_exit_tb(NULL, 0); /* no chaining */
-+    ctx->base.is_jmp = DISAS_NORETURN;
-+    return true;
-+}
-+
-+static bool trans_ebreak(DisasContext *ctx, arg_ebreak *a)
-+{
-+    generate_exception(ctx, RISCV_EXCP_BREAKPOINT);
-+    tcg_gen_exit_tb(NULL, 0); /* no chaining */
-+    ctx->base.is_jmp = DISAS_NORETURN;
-+    return true;
-+}
-+
-+static bool trans_uret(DisasContext *ctx, arg_uret *a)
-+{
-+    return false;
-+}
-+
-+static bool trans_sret(DisasContext *ctx, arg_sret *a)
-+{
-+#ifndef CONFIG_USER_ONLY
-+    tcg_gen_movi_tl(cpu_pc, ctx->base.pc_next);
-+    CPURISCVState *env = current_cpu->env_ptr;
-+    if (riscv_has_ext(env, RVS)) {
-+        gen_helper_sret(cpu_pc, cpu_env, cpu_pc);
-+        tcg_gen_exit_tb(NULL, 0); /* no chaining */
-+        ctx->base.is_jmp = DISAS_NORETURN;
-+    } else {
-+        return false;
-+    }
-+    return true;
-+#else
-+    return false;
-+#endif
-+}
-+
-+static bool trans_hret(DisasContext *ctx, arg_hret *a)
-+{
-+    return false;
-+}
-+
-+static bool trans_mret(DisasContext *ctx, arg_mret *a)
-+{
-+#ifndef CONFIG_USER_ONLY
-+    tcg_gen_movi_tl(cpu_pc, ctx->base.pc_next);
-+    gen_helper_mret(cpu_pc, cpu_env, cpu_pc);
-+    tcg_gen_exit_tb(NULL, 0); /* no chaining */
-+    ctx->base.is_jmp = DISAS_NORETURN;
-+    return true;
-+#else
-+    return false;
-+#endif
-+}
-+
-+static bool trans_wfi(DisasContext *ctx, arg_wfi *a)
-+{
-+#ifndef CONFIG_USER_ONLY
-+    tcg_gen_movi_tl(cpu_pc, ctx->pc_succ_insn);
-+    gen_helper_wfi(cpu_env);
-+    return true;
-+#else
-+    return false;
-+#endif
-+}
-+
-+static bool trans_sfence_vma(DisasContext *ctx, arg_sfence_vma *a)
-+{
-+#ifndef CONFIG_USER_ONLY
-+    gen_helper_tlb_flush(cpu_env);
-+    return true;
-+#else
-+    return false;
-+#endif
-+}
-+
-+static bool trans_sfence_vm(DisasContext *ctx, arg_sfence_vm *a)
-+{
-+#ifndef CONFIG_USER_ONLY
-+    gen_helper_tlb_flush(cpu_env);
-+    return true;
-+#else
-+    return false;
-+#endif
-+}
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 8e91fa8284..885e48881c 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -690,22 +690,8 @@ static void gen_set_rm(DisasContext *ctx, int rm)
- static void gen_system(CPURISCVState *env, DisasContext *ctx, uint32_t opc,
-                       int rd, int rs1, int csr)
+ static bool trans_sll(DisasContext *ctx, arg_sll *a)
  {
--    TCGv source1, dest;
--    source1 = tcg_temp_new();
--    dest = tcg_temp_new();
--    gen_get_gpr(source1, rs1);
-     tcg_gen_movi_tl(cpu_pc, ctx->base.pc_next);
- 
--#ifndef CONFIG_USER_ONLY
--    /* Extract funct7 value and check whether it matches SFENCE.VMA */
--    if ((opc == OPC_RISC_ECALL) && ((csr >> 5) == 9)) {
--        /* sfence.vma */
--        /* TODO: handle ASID specific fences */
--        gen_helper_tlb_flush(cpu_env);
--        return;
--    }
--#endif
--
-     switch (opc) {
-     case OPC_RISC_ECALL:
-         switch (csr) {
-@@ -720,46 +706,12 @@ static void gen_system(CPURISCVState *env, DisasContext *ctx, uint32_t opc,
-             tcg_gen_exit_tb(NULL, 0); /* no chaining */
-             ctx->base.is_jmp = DISAS_NORETURN;
-             break;
--#ifndef CONFIG_USER_ONLY
--        case 0x002: /* URET */
--            gen_exception_illegal(ctx);
--            break;
--        case 0x102: /* SRET */
--            if (riscv_has_ext(env, RVS)) {
--                gen_helper_sret(cpu_pc, cpu_env, cpu_pc);
--                tcg_gen_exit_tb(NULL, 0); /* no chaining */
--                ctx->base.is_jmp = DISAS_NORETURN;
--            } else {
--                gen_exception_illegal(ctx);
--            }
--            break;
--        case 0x202: /* HRET */
--            gen_exception_illegal(ctx);
--            break;
--        case 0x302: /* MRET */
--            gen_helper_mret(cpu_pc, cpu_env, cpu_pc);
--            tcg_gen_exit_tb(NULL, 0); /* no chaining */
--            ctx->base.is_jmp = DISAS_NORETURN;
--            break;
--        case 0x7b2: /* DRET */
--            gen_exception_illegal(ctx);
--            break;
--        case 0x105: /* WFI */
--            tcg_gen_movi_tl(cpu_pc, ctx->pc_succ_insn);
--            gen_helper_wfi(cpu_env);
--            break;
--        case 0x104: /* SFENCE.VM */
--            gen_helper_tlb_flush(cpu_env);
--            break;
--#endif
-         default:
-             gen_exception_illegal(ctx);
-             break;
-         }
-         break;
-     }
--    tcg_temp_free(source1);
--    tcg_temp_free(dest);
+-    gen_arith(ctx, OPC_RISC_SLL, a->rd, a->rs1, a->rs2);
+-    return true;
++    return gen_shift(ctx, a, &tcg_gen_shl_tl);
  }
  
- static void decode_RV32_64C0(DisasContext *ctx)
-@@ -1056,6 +1008,7 @@ bool decode_insn32(DisasContext *ctx, uint32_t insn);
- #include "insn_trans/trans_rva.inc.c"
- #include "insn_trans/trans_rvf.inc.c"
- #include "insn_trans/trans_rvd.inc.c"
-+#include "insn_trans/trans_privileged.inc.c"
- 
- static void decode_RV32_64G(CPURISCVState *env, DisasContext *ctx)
+ static bool trans_slt(DisasContext *ctx, arg_slt *a)
  {
+-    gen_arith(ctx, OPC_RISC_SLT, a->rd, a->rs1, a->rs2);
++    TCGv source1 = tcg_temp_new();
++    TCGv source2 = tcg_temp_new();
++
++    gen_get_gpr(source1, a->rs1);
++    gen_get_gpr(source2, a->rs2);
++
++    tcg_gen_setcond_tl(TCG_COND_LT, source1, source1, source2);
++
++    gen_set_gpr(a->rd, source1);
++    tcg_temp_free(source1);
++    tcg_temp_free(source2);
+     return true;
+ }
+ 
+ static bool trans_sltu(DisasContext *ctx, arg_sltu *a)
+ {
+-    gen_arith(ctx, OPC_RISC_SLTU, a->rd, a->rs1, a->rs2);
++    TCGv source1 = tcg_temp_new();
++    TCGv source2 = tcg_temp_new();
++
++    gen_get_gpr(source1, a->rs1);
++    gen_get_gpr(source2, a->rs2);
++
++    tcg_gen_setcond_tl(TCG_COND_LTU, source1, source1, source2);
++
++    gen_set_gpr(a->rd, source1);
++    tcg_temp_free(source1);
++    tcg_temp_free(source2);
+     return true;
+ }
+ 
+@@ -334,14 +353,12 @@ static bool trans_xor(DisasContext *ctx, arg_xor *a)
+ 
+ static bool trans_srl(DisasContext *ctx, arg_srl *a)
+ {
+-    gen_arith(ctx, OPC_RISC_SRL, a->rd, a->rs1, a->rs2);
+-    return true;
++    return gen_shift(ctx, a, &tcg_gen_shr_tl);
+ }
+ 
+ static bool trans_sra(DisasContext *ctx, arg_sra *a)
+ {
+-    gen_arith(ctx, OPC_RISC_SRA, a->rd, a->rs1, a->rs2);
+-    return true;
++    return gen_shift(ctx, a, &tcg_gen_sar_tl);
+ }
+ 
+ static bool trans_or(DisasContext *ctx, arg_or *a)
+@@ -410,19 +427,58 @@ static bool trans_subw(DisasContext *ctx, arg_subw *a)
+ 
+ static bool trans_sllw(DisasContext *ctx, arg_sllw *a)
+ {
+-    gen_arith(ctx, OPC_RISC_SLLW, a->rd, a->rs1, a->rs2);
++    TCGv source1 = tcg_temp_new();
++    TCGv source2 = tcg_temp_new();
++
++    gen_get_gpr(source1, a->rs1);
++    gen_get_gpr(source2, a->rs2);
++
++    tcg_gen_andi_tl(source2, source2, 0x1F);
++    tcg_gen_shl_tl(source1, source1, source2);
++
++    gen_set_gpr(a->rd, source1);
++    tcg_temp_free(source1);
++    tcg_temp_free(source2);
+     return true;
+ }
+ 
+ static bool trans_srlw(DisasContext *ctx, arg_srlw *a)
+ {
+-    gen_arith(ctx, OPC_RISC_SRLW, a->rd, a->rs1, a->rs2);
++    TCGv source1 = tcg_temp_new();
++    TCGv source2 = tcg_temp_new();
++
++    gen_get_gpr(source1, a->rs1);
++    gen_get_gpr(source2, a->rs2);
++
++    /* clear upper 32 */
++    tcg_gen_ext32u_tl(source1, source1);
++    tcg_gen_andi_tl(source2, source2, 0x1F);
++    tcg_gen_shr_tl(source1, source1, source2);
++
++    gen_set_gpr(a->rd, source1);
++    tcg_temp_free(source1);
++    tcg_temp_free(source2);
+     return true;
+ }
+ 
+ static bool trans_sraw(DisasContext *ctx, arg_sraw *a)
+ {
+-    gen_arith(ctx, OPC_RISC_SRAW, a->rd, a->rs1, a->rs2);
++    TCGv source1 = tcg_temp_new();
++    TCGv source2 = tcg_temp_new();
++
++    gen_get_gpr(source1, a->rs1);
++    gen_get_gpr(source2, a->rs2);
++
++    /* first, trick to get it to act like working on 32 bits (get rid of
++       upper 32, sign extend to fill space) */
++    tcg_gen_ext32s_tl(source1, source1);
++    tcg_gen_andi_tl(source2, source2, 0x1F);
++    tcg_gen_sar_tl(source1, source1, source2);
++
++    gen_set_gpr(a->rd, source1);
++    tcg_temp_free(source1);
++    tcg_temp_free(source2);
++
+     return true;
+ }
+ #endif
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index a781aba08c..5b4d091561 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -192,47 +192,6 @@ static void gen_arith(DisasContext *ctx, uint32_t opc, int rd, int rs1,
+     gen_get_gpr(source2, rs2);
+ 
+     switch (opc) {
+-#if defined(TARGET_RISCV64)
+-    case OPC_RISC_SLLW:
+-        tcg_gen_andi_tl(source2, source2, 0x1F);
+-        tcg_gen_shl_tl(source1, source1, source2);
+-        break;
+-#endif
+-    case OPC_RISC_SLL:
+-        tcg_gen_andi_tl(source2, source2, TARGET_LONG_BITS - 1);
+-        tcg_gen_shl_tl(source1, source1, source2);
+-        break;
+-    case OPC_RISC_SLT:
+-        tcg_gen_setcond_tl(TCG_COND_LT, source1, source1, source2);
+-        break;
+-    case OPC_RISC_SLTU:
+-        tcg_gen_setcond_tl(TCG_COND_LTU, source1, source1, source2);
+-        break;
+-#if defined(TARGET_RISCV64)
+-    case OPC_RISC_SRLW:
+-        /* clear upper 32 */
+-        tcg_gen_ext32u_tl(source1, source1);
+-        tcg_gen_andi_tl(source2, source2, 0x1F);
+-        tcg_gen_shr_tl(source1, source1, source2);
+-        break;
+-#endif
+-    case OPC_RISC_SRL:
+-        tcg_gen_andi_tl(source2, source2, TARGET_LONG_BITS - 1);
+-        tcg_gen_shr_tl(source1, source1, source2);
+-        break;
+-#if defined(TARGET_RISCV64)
+-    case OPC_RISC_SRAW:
+-        /* first, trick to get it to act like working on 32 bits (get rid of
+-        upper 32, sign extend to fill space) */
+-        tcg_gen_ext32s_tl(source1, source1);
+-        tcg_gen_andi_tl(source2, source2, 0x1F);
+-        tcg_gen_sar_tl(source1, source1, source2);
+-        break;
+-#endif
+-    case OPC_RISC_SRA:
+-        tcg_gen_andi_tl(source2, source2, TARGET_LONG_BITS - 1);
+-        tcg_gen_sar_tl(source1, source1, source2);
+-        break;
+     CASE_OP_32_64(OPC_RISC_MUL):
+         tcg_gen_mul_tl(source1, source1, source2);
+         break;
+@@ -647,6 +606,24 @@ static bool trans_arith(DisasContext *ctx, arg_r *a,
+     return true;
+ }
+ 
++static bool gen_shift(DisasContext *ctx, arg_r *a,
++                        void(*func)(TCGv, TCGv, TCGv))
++{
++    TCGv source1 = tcg_temp_new();
++    TCGv source2 = tcg_temp_new();
++
++    gen_get_gpr(source1, a->rs1);
++    gen_get_gpr(source2, a->rs2);
++
++    tcg_gen_andi_tl(source2, source2, TARGET_LONG_BITS - 1);
++    (*func)(source1, source1, source2);
++
++    gen_set_gpr(a->rd, source1);
++    tcg_temp_free(source1);
++    tcg_temp_free(source2);
++    return true;
++}
++
+ /* Include insn module translation function */
+ #include "insn_trans/trans_rvi.inc.c"
+ #include "insn_trans/trans_rvm.inc.c"
 -- 
 2.19.1
 
