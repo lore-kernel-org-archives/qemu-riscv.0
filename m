@@ -1,73 +1,72 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gHxS1-0006vO-Ot
-	for mharc-qemu-riscv@gnu.org; Wed, 31 Oct 2018 16:50:53 -0400
-Received: from eggs.gnu.org ([2001:4830:134:3::10]:42726)
+	id 1gHyfu-0000j8-6s
+	for mharc-qemu-riscv@gnu.org; Wed, 31 Oct 2018 18:09:18 -0400
+Received: from eggs.gnu.org ([2001:4830:134:3::10]:32927)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1gHxRz-0006tj-Fd
-	for qemu-riscv@nongnu.org; Wed, 31 Oct 2018 16:50:52 -0400
+	(envelope-from <richard.henderson@linaro.org>) id 1gHyfs-0000hc-AT
+	for qemu-riscv@nongnu.org; Wed, 31 Oct 2018 18:09:16 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1gHxRy-0003Zl-Hp
-	for qemu-riscv@nongnu.org; Wed, 31 Oct 2018 16:50:51 -0400
-Received: from mail-pg1-x543.google.com ([2607:f8b0:4864:20::543]:36226)
+	(envelope-from <richard.henderson@linaro.org>) id 1gHyfp-0005HW-30
+	for qemu-riscv@nongnu.org; Wed, 31 Oct 2018 18:09:16 -0400
+Received: from mail-wr1-x444.google.com ([2a00:1450:4864:20::444]:33686)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <alistair23@gmail.com>)
-	id 1gHxRs-0003UX-Mn; Wed, 31 Oct 2018 16:50:44 -0400
-Received: by mail-pg1-x543.google.com with SMTP id z17-v6so7946016pgv.3;
-	Wed, 31 Oct 2018 13:50:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:cc:references:from:message-id:date:user-agent
+	(Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
+	id 1gHyfo-0005HH-IR
+	for qemu-riscv@nongnu.org; Wed, 31 Oct 2018 18:09:12 -0400
+Received: by mail-wr1-x444.google.com with SMTP id u1-v6so18187591wrn.0
+	for <qemu-riscv@nongnu.org>; Wed, 31 Oct 2018 15:09:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+	h=subject:to:cc:references:from:openpgp:message-id:date:user-agent
 	:mime-version:in-reply-to:content-language:content-transfer-encoding;
-	bh=SRsuXRngPTPoTTsRoQPFuDuANJ4UEvST1sH3g2t42ug=;
-	b=nMXlgc6JhsSboBqclPCazs1t/Ih/18fvBDm1IxrcK/B5w+agTKN488gzXPpU3J8if6
-	Xvz6sYsuDANF9A8XqUPx/PD9XWRbhifiIEuu02ooUlYLOQB/JCFI0DS/J7/LemJVpQ7l
-	NOGKUzhHkMnZ3S6VCaVqv1QzTkB7tGQXAok2lGUDs2lJ69xshjgx2NjubqOGoLTlrVRF
-	TSWjoXuR5L1YVgm2ryZU444ihisuviKMIPAfSKl8/gRs9pYf89p6lhQ2/1uaoBPZq+xr
-	CqiS43YquwSOpcT1W7zasHeV5NWxY317mxzGABJbB0T3ug8281JrMTJJ2PHACq/jiVeR
-	DmDA==
+	bh=UOdbvVZgCwOnQMF49rWPMwdj08uQdDcyjT73tRl5oIQ=;
+	b=co4XWd7wM0jDZxDlj40Bd7ptSrfw3WBjtagiN82Rrmg7fkWHOaAwL6p17Ew/mQH5wF
+	ESTghMRm9Ml9h2wpM2p0b7SkplXNwPilouqW4m3psgVzoIp8zF+eOY8jrTSteJRivlio
+	LVnHushz54Geib04uZIZkPMrpSx2RkZv79seg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-language
+	h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
+	:date:user-agent:mime-version:in-reply-to:content-language
 	:content-transfer-encoding;
-	bh=SRsuXRngPTPoTTsRoQPFuDuANJ4UEvST1sH3g2t42ug=;
-	b=HuRAQrEjhp+sOI9R8/Q0qkGM2RWKkz6jkv3bxbWEfgAMj14cByeWZiwt1MQL7UUVoH
-	HJTd7m7KYkvyq4HKRwihVr3TO4YNGfpX/2/dLXUYnfP7+EpHAoOShd4Z2BSg8hIpoQ/Q
-	5RrFtPrO5yTtge0/b6tS9uuSXtQq9PibeCuGgy/06lcpwnjTih7fWp/oR35oYgGm71bQ
-	2ixe4W6sk9QMZuu4clmEDBFTJWGUGhgq9XcyGDNTGaOUA8NuPllucPfI3jtnVj5Y4qE7
-	rmAv2y59zeaItICBRaI9L5rCXL6Bfih33Xti2XgXx6YLAe8gJh1AE/WruJG3tkVMKIfP
-	JV/Q==
-X-Gm-Message-State: AGRZ1gKIMw57BIYZwtJZ2l4ImKGk1h7zYp+Fc73sBKxWSpeklo4Z6JA+
-	FRt71UFjBaGM6d8v0B5q/AVqtBAS
-X-Google-Smtp-Source: AJdET5elz4WTajRRgUmYMoH+ypnCigfO1MvgrhU2XsViDC0lCiKBw3rvk0bNshJtLzrAP3tYJNQSgQ==
-X-Received: by 2002:aa7:8252:: with SMTP id
-	e18-v6mr4975886pfn.164.1541019043286; 
-	Wed, 31 Oct 2018 13:50:43 -0700 (PDT)
-Received: from [10.196.159.185] (rap-us.hgst.com. [199.255.44.250])
-	by smtp.gmail.com with ESMTPSA id
-	86-v6sm21030762pft.184.2018.10.31.13.50.41
+	bh=UOdbvVZgCwOnQMF49rWPMwdj08uQdDcyjT73tRl5oIQ=;
+	b=HvHz+3aRT2mDPxSr3dqcFlVYpjSeCoT2K2fVjXqYupo8QRSt9l/BB9qXSyMCCm9wHv
+	za7gDOLp2FuGCrPuOLjrrqqpKFSogdhPjrY+L5hOH+haP0uNvlBvCcWQmKGWvjLTQUQg
+	+up+RYPNMMLs2b43Y8htUnzU5M4/lyP+FwMl/MWVCtQxYJivuzY3KI0w98hPRC5ZqiM+
+	SmmmqXAhYEkaIoY6AqLMr5UntzB39BS8kKF2qryAVGmKB++BZ+gSFccxE0HYfxXwMTG+
+	KJJjnNQrVC2utAs8quqPFEeNmIwAM1RZpmcurrr52VDyc+KpuoOiFubdJXHssKlpoZ6x
+	jXeA==
+X-Gm-Message-State: AGRZ1gLNztXh+I4rCtm0xLCcuf+WKGsDaCF4pv+pk15yio0PEOSSSBJV
+	V9COKv088yD2ATNSSMS0PvP5TElfonY=
+X-Google-Smtp-Source: AJdET5dhX52xGSawEKE8hPqseE38ERgNVkoRSTTPcV8ehvTCPW9cOdLV0QuZqJlHMCNTYBaPr/WwgQ==
+X-Received: by 2002:adf:b716:: with SMTP id
+	l22-v6mr4688218wre.157.1541023751343; 
+	Wed, 31 Oct 2018 15:09:11 -0700 (PDT)
+Received: from cloudburst.twiddle.net (79-69-241-110.dynamic.dsl.as9105.com.
+	[79.69.241.110]) by smtp.gmail.com with ESMTPSA id
+	l70-v6sm49699963wma.0.2018.10.31.15.09.10
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 31 Oct 2018 13:50:41 -0700 (PDT)
+	Wed, 31 Oct 2018 15:09:10 -0700 (PDT)
 To: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, mjc@sifive.com,
 	sagark@eecs.berkeley.edu, palmer@sifive.com, Alistair.Francis@wdc.com
-Cc: qemu-riscv@nongnu.org, peer.adelt@hni.uni-paderborn.de,
-	richard.henderson@linaro.org, qemu-devel@nongnu.org
+Cc: peer.adelt@hni.uni-paderborn.de, qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
 References: <20181031132029.4887-1-kbastian@mail.uni-paderborn.de>
-	<20181031132029.4887-21-kbastian@mail.uni-paderborn.de>
-From: Alistair <alistair23@gmail.com>
-Message-ID: <ad1403e7-2937-19d9-070a-ad5b3a835a01@gmail.com>
-Date: Wed, 31 Oct 2018 13:50:41 -0700
+	<20181031132029.4887-23-kbastian@mail.uni-paderborn.de>
+From: Richard Henderson <richard.henderson@linaro.org>
+Openpgp: preference=signencrypt
+Message-ID: <5d4e842f-81b8-0eea-9e5a-f42d973d7d2b@linaro.org>
+Date: Wed, 31 Oct 2018 22:09:09 +0000
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
 	Thunderbird/60.2.1
 MIME-Version: 1.0
-In-Reply-To: <20181031132029.4887-21-kbastian@mail.uni-paderborn.de>
-Content-Type: text/plain; charset=utf-8; format=flowed
+In-Reply-To: <20181031132029.4887-23-kbastian@mail.uni-paderborn.de>
+Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::543
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v3 20/35] target/riscv: Remove
- gen_jalr()
+X-Received-From: 2a00:1450:4864:20::444
+Subject: Re: [Qemu-riscv] [PATCH v3 22/35] target/riscv: Remove manual
+ decoding from gen_load()
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -79,111 +78,23 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Oct 2018 20:50:52 -0000
+X-List-Received-Date: Wed, 31 Oct 2018 22:09:17 -0000
 
-On 10/31/18 6:20 AM, Bastian Koppelmann wrote:
-> trans_jalr() is the only caller, so move the code into trans_jalr().
+On 10/31/18 1:20 PM, Bastian Koppelmann wrote:
+> With decodetree we don't need to convert RISC-V opcodes into to MemOps
+> as the old gen_load() did.
 > 
 > Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 > Signed-off-by: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-> Signed-off-by: Peer Adelt <peer.adelt@hni.uni-paderborn.de>
+> Signed-off-by: Peer Adelt <peer.adelt@hni.uni-paderborn.de><Paste>
 
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
 
-Alistair
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
-> ---
->   target/riscv/insn_trans/trans_rvi.inc.c | 28 +++++++++++++++++-
->   target/riscv/translate.c                | 38 -------------------------
->   2 files changed, 27 insertions(+), 39 deletions(-)
-> 
-> diff --git a/target/riscv/insn_trans/trans_rvi.inc.c b/target/riscv/insn_trans/trans_rvi.inc.c
-> index 09e7a0052a..4d090d68e7 100644
-> --- a/target/riscv/insn_trans/trans_rvi.inc.c
-> +++ b/target/riscv/insn_trans/trans_rvi.inc.c
-> @@ -42,7 +42,33 @@ static bool trans_jal(DisasContext *ctx, arg_jal *a)
->   
->   static bool trans_jalr(DisasContext *ctx, arg_jalr *a)
->   {
-> -    gen_jalr(ctx->env, ctx, OPC_RISC_JALR, a->rd, a->rs1, a->imm);
-> +    /* no chaining with JALR */
-> +    TCGLabel *misaligned = NULL;
-> +    TCGv t0 = tcg_temp_new();
-> +
-> +
-> +    gen_get_gpr(cpu_pc, a->rs1);
-> +    tcg_gen_addi_tl(cpu_pc, cpu_pc, a->imm);
-> +    tcg_gen_andi_tl(cpu_pc, cpu_pc, (target_ulong)-2);
-> +
-> +    if (!riscv_has_ext(ctx->env, RVC)) {
-> +        misaligned = gen_new_label();
-> +        tcg_gen_andi_tl(t0, cpu_pc, 0x2);
-> +        tcg_gen_brcondi_tl(TCG_COND_NE, t0, 0x0, misaligned);
-> +    }
-> +
-> +    if (a->rd != 0) {
-> +        tcg_gen_movi_tl(cpu_gpr[a->rd], ctx->pc_succ_insn);
-> +    }
-> +    tcg_gen_lookup_and_goto_ptr();
-> +
-> +    if (misaligned) {
-> +        gen_set_label(misaligned);
-> +        gen_exception_inst_addr_mis(ctx);
-> +    }
-> +    ctx->base.is_jmp = DISAS_NORETURN;
-> +
-> +    tcg_temp_free(t0);
->       return true;
->   }
->   
-> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index 41d66fae18..b78e423d94 100644
-> --- a/target/riscv/translate.c
-> +++ b/target/riscv/translate.c
-> @@ -489,44 +489,6 @@ static void gen_jal(CPURISCVState *env, DisasContext *ctx, int rd,
->       ctx->base.is_jmp = DISAS_NORETURN;
->   }
->   
-> -static void gen_jalr(CPURISCVState *env, DisasContext *ctx, uint32_t opc,
-> -                     int rd, int rs1, target_long imm)
-> -{
-> -    /* no chaining with JALR */
-> -    TCGLabel *misaligned = NULL;
-> -    TCGv t0 = tcg_temp_new();
-> -
-> -    switch (opc) {
-> -    case OPC_RISC_JALR:
-> -        gen_get_gpr(cpu_pc, rs1);
-> -        tcg_gen_addi_tl(cpu_pc, cpu_pc, imm);
-> -        tcg_gen_andi_tl(cpu_pc, cpu_pc, (target_ulong)-2);
-> -
-> -        if (!riscv_has_ext(env, RVC)) {
-> -            misaligned = gen_new_label();
-> -            tcg_gen_andi_tl(t0, cpu_pc, 0x2);
-> -            tcg_gen_brcondi_tl(TCG_COND_NE, t0, 0x0, misaligned);
-> -        }
-> -
-> -        if (rd != 0) {
-> -            tcg_gen_movi_tl(cpu_gpr[rd], ctx->pc_succ_insn);
-> -        }
-> -        tcg_gen_lookup_and_goto_ptr();
-> -
-> -        if (misaligned) {
-> -            gen_set_label(misaligned);
-> -            gen_exception_inst_addr_mis(ctx);
-> -        }
-> -        ctx->base.is_jmp = DISAS_NORETURN;
-> -        break;
-> -
-> -    default:
-> -        gen_exception_illegal(ctx);
-> -        break;
-> -    }
-> -    tcg_temp_free(t0);
-> -}
-> -
->   static void gen_branch(CPURISCVState *env, DisasContext *ctx, uint32_t opc,
->                          int rs1, int rs2, target_long bimm)
->   {
-> 
+> +static bool gen_load(DisasContext *ctx, arg_lb *a, int memop)
+
+Better with TCGMemOp instead of int.
+
+
+r~
 
