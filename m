@@ -1,115 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gHcPL-0004jN-6P
-	for mharc-qemu-riscv@gnu.org; Tue, 30 Oct 2018 18:22:43 -0400
-Received: from eggs.gnu.org ([2001:4830:134:3::10]:35358)
+	id 1gHqx2-0005rw-6c
+	for mharc-qemu-riscv@gnu.org; Wed, 31 Oct 2018 09:54:28 -0400
+Received: from eggs.gnu.org ([2001:4830:134:3::10]:36799)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <prvs=8344f8b50=Alistair.Francis@wdc.com>)
-	id 1gHcLk-0001Jl-Ie
-	for qemu-riscv@nongnu.org; Tue, 30 Oct 2018 18:19:04 -0400
+	(envelope-from <kbastian@mail.uni-paderborn.de>) id 1gHqQc-0003zA-7g
+	for qemu-riscv@nongnu.org; Wed, 31 Oct 2018 09:21:01 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <prvs=8344f8b50=Alistair.Francis@wdc.com>)
-	id 1gHcLf-0003c5-PQ
-	for qemu-riscv@nongnu.org; Tue, 30 Oct 2018 18:19:00 -0400
-Received: from esa3.hgst.iphmx.com ([216.71.153.141]:15994)
-	by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.71) (envelope-from <prvs=8344f8b50=Alistair.Francis@wdc.com>)
-	id 1gHcLV-00031t-Fz; Tue, 30 Oct 2018 18:18:45 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-	d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
-	t=1540937925; x=1572473925;
-	h=from:to:cc:subject:date:message-id:references:
-	in-reply-to:content-transfer-encoding:mime-version;
-	bh=t7b+VELoxNMEjmK4ptBlecX8rpRkfoh/6JGfMY+1low=;
-	b=K1C33KvkTC7SntqLs93+y0R57cU5tJbp2dMIBSLeAZXJG0CdF7v6l5Uk
-	xgFtFBBiQRF3sAO1YhHpuhWHX+JLOWix+A9eriqC/tqClOmLhw5SYpsp2
-	T66pyT1L6wiSyfukZOtd8cseXbU+PIth2j5eixP19dwkGl2DzhWovAKt6
-	6QCtYtWovdnwK2QEXVZYUojVoq7YaP7VVWj6cZ6afTZDYAZyjt62BpLvf
-	/jB0itZvmJIq/vMHnhY4puZCTrg+TaHW0xwM1O/1qKCaO0qNq0PXbi894
-	slTsU1aJzngCZEhQagacZ9nU+6VhJtsjKxzSC138s7SVlUz+kF3n0JiaN A==;
-X-IronPort-AV: E=Sophos;i="5.54,446,1534780800"; d="scan'208";a="97856994"
-Received: from mail-by2nam01lp0175.outbound.protection.outlook.com (HELO
-	NAM01-BY2-obe.outbound.protection.outlook.com) ([216.32.181.175])
-	by ob1.hgst.iphmx.com with ESMTP; 31 Oct 2018 06:18:20 +0800
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=sharedspace.onmicrosoft.com; s=selector1-wdc-com;
-	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=QTWlYzlKVIZqZXrEc7IaDwAkSP8xjTnp0bfVdIoT6Qs=;
-	b=OkxAFaM1spMqOGpCzfYRlBOSQmo9IWLhG7/ySxJJNt8xIaj3C9LquzvzvspfQAFBQuJ+zMdYy4BbkZMVeRHyrlh9ErccOyJRPRHY0925A15Ylza761KElYPxULt7dvn6DP8FKwEP8r4Pv0gk0sf0mJ2Zdt1+uQT3Riv3/e0RqQI=
-Received: from MWHPR04MB0401.namprd04.prod.outlook.com (10.173.48.18) by
-	MWHPR04MB0976.namprd04.prod.outlook.com (10.174.249.165) with Microsoft
-	SMTP
-	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
-	15.20.1273.25; Tue, 30 Oct 2018 22:18:18 +0000
-Received: from MWHPR04MB0401.namprd04.prod.outlook.com
-	([fe80::4853:2cc0:27bc:a62e]) by
-	MWHPR04MB0401.namprd04.prod.outlook.com
-	([fe80::4853:2cc0:27bc:a62e%12]) with mapi id 15.20.1273.028;
-	Tue, 30 Oct 2018 22:18:18 +0000
-From: Alistair Francis <Alistair.Francis@wdc.com>
-To: "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, "qemu-riscv@nongnu.org"
-	<qemu-riscv@nongnu.org>
-CC: Alistair Francis <Alistair.Francis@wdc.com>, "alistair23@gmail.com"
-	<alistair23@gmail.com>
-Thread-Topic: [PATCH v6 4/5] hw/riscv/sifive_u: Connect the Xilinx PCIe
-Thread-Index: AQHUcJ517A5XNpjliU2rfdW3b/nlFQ==
-Date: Tue, 30 Oct 2018 22:18:18 +0000
-Message-ID: <27888cbc7494b9e496716b3b055f0d72c93e42e5.1540937826.git.alistair.francis@wdc.com>
-References: <cover.1540937826.git.alistair.francis@wdc.com>
-In-Reply-To: <cover.1540937826.git.alistair.francis@wdc.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-mailer: git-send-email 2.19.1
-x-clientproxiedby: BYAPR03CA0014.namprd03.prod.outlook.com
-	(2603:10b6:a02:a8::27) To MWHPR04MB0401.namprd04.prod.outlook.com
-	(2603:10b6:300:70::18)
-x-ms-exchange-messagesentrepresentingtype: 1
-x-originating-ip: [199.255.44.171]
-x-ms-publictraffictype: Email
-x-microsoft-exchange-diagnostics: 1; MWHPR04MB0976;
-	6:vMKzTFLMzdO9JECxXJPuZM3j3jDGklIL31Ty9lfScQaPm0sZ1zmYA+UQgc/R2bMyf42y2sKrGxnqvLu6GPAzePnKSgecNoHZue7R91685z6dHAq8Jg1cdmbvewpDL51151JFGdGfkbptoN9nFhOCxoGbiZbU9aRI0YjJH/fX+Rq00V4R6liW2fzYTnLCeFNMNgproctwnTTKkadSeZqED+QJ5BBQz4iuhu+4IUdpEXJPVl/Ps63sC41OEU1EVYSBATD55/q1YFGVTbIcYyrM22dD+Y2qnCzZugOXrnVbgbouyH9Hsr6Ndp54YYTO7jwER87XpmF3n5jK+Y8r1UWFUIWxP42bQLLRkAS4vroJxJ/udgRsfH9oB3hMQRuMYx+Zw0CzC0V5ZHIwmEYr3iSMAN7KiX+tiVeVEfjywUSeITbefkZJdhsv+gDxpJj/qYQN13mw8x8RnOUmr5MegNYekg==;
-	5:3Qg8W3OzIQywAdOSJRT/9LiOhMXEL0cQxP3j4zAHc6+LpdgY4b3IyWQsyNY5uKnPjnzo0J0HCJHx2s4EF9F3KmYT00fkDuCcZkBlV2VtXnDyLl56CT4RBMZsE40MgwePxHsD9Dbot5VyneAi2vEQI4ICSfsKdxb9ePLw/gSX2v4=;
-	7:7pVRNT6bSPC1ym/XCWBqHjc3DpsR77x3wtnBo3ZWCbC5W9q7A47mQebJmQ+85/ILuqlVcpnla/dhEOrEWm9VC3aDkuaBCjICngQay8wpdCQ9SLF6joKU7n+50F5PxIcUbMwjLenOIRhI5E9QqcEP2g==
-x-ms-office365-filtering-correlation-id: c99f0876-e0aa-484a-dbed-08d63eb597d1
-x-ms-office365-filtering-ht: Tenant
-x-microsoft-antispam: BCL:0; PCL:0;
-	RULEID:(7020095)(4652040)(8989299)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(5600074)(711020)(4618075)(2017052603328)(7153060)(7193020);
-	SRVR:MWHPR04MB0976; 
-x-ms-traffictypediagnostic: MWHPR04MB0976:
-authentication-results: spf=none (sender IP is )
-	smtp.mailfrom=Alistair.Francis@wdc.com; 
-wdcipoutbound: EOP-TRUE
-x-microsoft-antispam-prvs: <MWHPR04MB0976374C18005A14C35CBFC990CC0@MWHPR04MB0976.namprd04.prod.outlook.com>
-x-exchange-antispam-report-test: UriScan:(21532816269658);
-x-ms-exchange-senderadcheck: 1
-x-exchange-antispam-report-cfa-test: BCL:0; PCL:0;
-	RULEID:(8211001083)(6040522)(2401047)(8121501046)(5005006)(93006095)(93001095)(10201501046)(3002001)(3231382)(944501410)(52105095)(6055026)(148016)(149066)(150057)(6041310)(20161123560045)(20161123562045)(20161123558120)(20161123564045)(201703131423095)(201702281528075)(20161123555045)(201703061421075)(201703061406153)(201708071742011)(7699051)(76991095);
-	SRVR:MWHPR04MB0976; BCL:0; PCL:0; RULEID:; SRVR:MWHPR04MB0976; 
-x-forefront-prvs: 08417837C5
-x-forefront-antispam-report: SFV:NSPM;
-	SFS:(10019020)(346002)(136003)(39860400002)(376002)(366004)(396003)(199004)(189003)(97736004)(52116002)(486006)(6506007)(25786009)(26005)(76176011)(102836004)(386003)(4326008)(14444005)(99286004)(68736007)(72206003)(256004)(14454004)(7736002)(81166006)(8676002)(305945005)(110136005)(5250100002)(2501003)(2900100001)(54906003)(6436002)(6512007)(316002)(53936002)(6486002)(50226002)(71190400001)(5660300001)(118296001)(36756003)(106356001)(66066001)(105586002)(81156014)(86362001)(71200400001)(186003)(446003)(8936002)(39060400002)(44832011)(478600001)(2616005)(11346002)(6116002)(3846002)(2906002)(476003);
-	DIR:OUT; SFP:1102; SCL:1; SRVR:MWHPR04MB0976;
-	H:MWHPR04MB0401.namprd04.prod.outlook.com; FPR:; SPF:None;
-	LANG:en; PTR:InfoNoRecords; A:1; MX:1; 
-x-microsoft-antispam-message-info: 9hxkgmZYoUmisMhE8S9D7ZxbB1Iwf+JqfdNK3Y3CviPc2pUQt8iX/HPuIfAkoB19+NU/RcKcVnfYeMdAhX8TnpRTEe6oy9gVc2cznQQZZbkROgHB4BquBGOj5L9GXdnpJ8yROeP7+WuOZFB9EwoAq8MY3ATvk7q9kIvCE9xAa3jmORIVMshwh4/nv23YsTu4HpdcesCTE1uJNJr4Wkb++LuxhJGdhmxJDPFDcdwEHssSYIjmCyT61BR/7hcHCJoUBKbM79p7WxA0g/6XibUVfBI7tUjk/BGxviYYvX/ICC7qoqajNz02AkIXcfCKo0xuder7Wfs5mv2l+9YK0Dp5BXkMFWu3E9jlWT0bi0P03Ms=
-spamdiagnosticoutput: 1:99
-spamdiagnosticmetadata: NSPM
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+	(envelope-from <kbastian@mail.uni-paderborn.de>) id 1gHqQY-0002B0-VM
+	for qemu-riscv@nongnu.org; Wed, 31 Oct 2018 09:20:58 -0400
+Received: from mail.uni-paderborn.de ([131.234.142.9]:43786)
+	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.71) (envelope-from <kbastian@mail.uni-paderborn.de>)
+	id 1gHqQY-00029a-JC; Wed, 31 Oct 2018 09:20:54 -0400
+Received: from tweenies.uni-paderborn.de ([131.234.189.21]
+	helo=localhost.localdomain)
+	by mail.uni-paderborn.de with esmtp (Exim 4.89 amazonia)
+	id 1gHqQX-0005bY-6i; Wed, 31 Oct 2018 14:20:53 +0100
+Received: from mail.uni-paderborn.de by tweenies with queue id 2934690-4;
+	Wed, 31 Oct 2018 13:20:52 GMT
+X-Envelope-From: <kbastian@mail.uni-paderborn.de>
+Received: from [131.234.87.238] (helo=mustique.hni.uni-paderborn.de)
+	by mail.uni-paderborn.de with esmtpsa
+	(TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.89 nylar)
+	id 1gHqQW-0005dh-PQ; Wed, 31 Oct 2018 14:20:52 +0100
+From: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+To: mjc@sifive.com, sagark@eecs.berkeley.edu, palmer@sifive.com,
+	kbastian@mail.uni-paderborn.de, Alistair.Francis@wdc.com
+Cc: richard.henderson@linaro.org, peer.adelt@hni.uni-paderborn.de,
+	qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+Date: Wed, 31 Oct 2018 14:19:57 +0100
+Message-Id: <20181031132029.4887-4-kbastian@mail.uni-paderborn.de>
+X-Mailer: git-send-email 2.19.1
+In-Reply-To: <20181031132029.4887-1-kbastian@mail.uni-paderborn.de>
+References: <20181031132029.4887-1-kbastian@mail.uni-paderborn.de>
 MIME-Version: 1.0
-X-OriginatorOrg: wdc.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: c99f0876-e0aa-484a-dbed-08d63eb597d1
-X-MS-Exchange-CrossTenant-originalarrivaltime: 30 Oct 2018 22:18:18.1743 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MWHPR04MB0976
+Content-Transfer-Encoding: 8bit
+X-PMX-Version: 6.4.5.2775670, Antispam-Engine: 2.7.2.2107409,
+	Antispam-Data: 2018.10.31.131216, AntiVirus-Engine: 5.53.0,
+	AntiVirus-Data: 2018.10.10.5530001
+X-IMT-Spam-Score: 0.0 ()
+X-IMT-Authenticated-Sender: 
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 216.71.153.141
-X-Mailman-Approved-At: Tue, 30 Oct 2018 18:22:39 -0400
-Subject: [Qemu-riscv] [PATCH v6 4/5] hw/riscv/sifive_u: Connect the Xilinx
- PCIe
+X-Received-From: 131.234.142.9
+X-Mailman-Approved-At: Wed, 31 Oct 2018 09:54:24 -0400
+Subject: [Qemu-riscv] [PATCH v3 03/35] target/riscv: Convert RVXI branch
+ insns to decodetree
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -121,148 +57,149 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Oct 2018 22:19:05 -0000
+X-List-Received-Date: Wed, 31 Oct 2018 13:21:01 -0000
 
-Connect the Xilinx PCIe device based on the information in the device
-tree stored in the ROM of the HiFish Unleashed board.
-
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Signed-off-by: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+Signed-off-by: Peer Adelt <peer.adelt@hni.uni-paderborn.de>
 ---
- hw/riscv/sifive_u.c         | 64 +++++++++++++++++++++++++++++++++++++
- include/hw/riscv/sifive_u.h |  4 ++-
- 2 files changed, 67 insertions(+), 1 deletion(-)
+v2 -> v3:
+    - dropped insn argument of trans_foo functions
+    - removal of AUIPC moved to 0002
+    - &branch -> &b
 
-diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-index ef07df2442..0c51c61082 100644
---- a/hw/riscv/sifive_u.c
-+++ b/hw/riscv/sifive_u.c
-@@ -45,6 +45,8 @@
- #include "sysemu/arch_init.h"
- #include "sysemu/device_tree.h"
- #include "exec/address-spaces.h"
-+#include "hw/pci/pci.h"
-+#include "hw/pci-host/xilinx-pcie.h"
- #include "elf.h"
-=20
- #include <libfdt.h>
-@@ -61,6 +63,7 @@ static const struct MemmapEntry {
-     [SIFIVE_U_UART1] =3D    { 0x10023000,     0x1000 },
-     [SIFIVE_U_DRAM] =3D     { 0x80000000,        0x0 },
-     [SIFIVE_U_GEM] =3D      { 0x100900FC,     0x2000 },
-+    [SIFIVE_U_PCIE] =3D     { 0x2000000000, 0x4000000 },
- };
-=20
- #define GEM_REVISION        0x10070109
-@@ -218,6 +221,32 @@ static void create_fdt(SiFiveUState *s, const struct M=
-emmapEntry *memmap,
-     qemu_fdt_setprop_cells(fdt, nodename, "reg", 0x0);
-     g_free(nodename);
-=20
-+    nodename =3D g_strdup_printf("/pci@%lx",
-+        (long) memmap[SIFIVE_U_PCIE].base);
-+    qemu_fdt_add_subnode(fdt, nodename);
-+    qemu_fdt_setprop_cells(fdt, nodename, "#address-cells", 0x3);
-+    qemu_fdt_setprop_cells(fdt, nodename, "#interrupt-cells", 0x1);
-+    qemu_fdt_setprop_cells(fdt, nodename, "#size-cells", 0x2);
-+    qemu_fdt_setprop_string(fdt, nodename, "compatible",
-+                            "xlnx,axi-pcie-host-1.00.a");
-+    qemu_fdt_setprop_string(fdt, nodename, "device_type", "pci");
-+    qemu_fdt_setprop_cells(fdt, nodename, "reg", 0x20, 0x0, 0x0,
-+                           memmap[SIFIVE_U_PCIE].size);
-+    qemu_fdt_setprop_string(fdt, nodename, "reg-names", "control");
-+    qemu_fdt_setprop_cells(fdt, nodename, "ranges", 0x2000000, 0x0,
-+                           0x40000000, 0x0, 0x40000000, 0x0, 0x20000000);
-+    qemu_fdt_setprop_cells(fdt, nodename, "interrupt-parent", plic_phandle=
-);
-+    qemu_fdt_setprop_cells(fdt, nodename, "interrupts", SIFIVE_U_PCIE_IRQ)=
-;
-+    g_free(nodename);
+ target/riscv/insn32.decode              | 19 ++++++++++
+ target/riscv/insn_trans/trans_rvi.inc.c | 49 +++++++++++++++++++++++++
+ target/riscv/translate.c                | 12 +-----
+ 3 files changed, 69 insertions(+), 11 deletions(-)
+
+diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+index 44d4e922b6..81f56c16b4 100644
+--- a/target/riscv/insn32.decode
++++ b/target/riscv/insn32.decode
+@@ -17,14 +17,33 @@
+ # this program.  If not, see <http://www.gnu.org/licenses/>.
+ 
+ # Fields:
++%rs2       20:5
++%rs1       15:5
+ %rd        7:5
+ 
+ # immediates:
++%imm_i    20:s12
++%imm_b    31:s1 7:1 25:6 8:4     !function=ex_shift_1
++%imm_j    31:s1 12:8 20:1 21:10  !function=ex_shift_1
+ %imm_u    12:s20                 !function=ex_shift_12
+ 
++# Argument sets:
++&b    imm rs2 rs1
 +
-+    nodename =3D g_strdup_printf("/pci@%lx/interrupt-controller",
-+            (long) memmap[SIFIVE_U_PCIE].base);
-+    qemu_fdt_add_subnode(fdt, nodename);
-+    qemu_fdt_setprop_cells(fdt, nodename, "#address-cells", 0x00);
-+    qemu_fdt_setprop_cells(fdt, nodename, "#interrupt-cells", 0x1);
-+    qemu_fdt_setprop(fdt, nodename, "interrupt-controller", NULL, 0);
-+    g_free(nodename);
-+
-     nodename =3D g_strdup_printf("/soc/uart@%lx",
-         (long)memmap[SIFIVE_U_UART0].base);
-     qemu_fdt_add_subnode(fdt, nodename);
-@@ -236,6 +265,37 @@ static void create_fdt(SiFiveUState *s, const struct M=
-emmapEntry *memmap,
-     g_free(nodename);
+ # Formats 32:
++@i       ............    ..... ... ..... .......         imm=%imm_i     %rs1 %rd
++@b       .......   ..... ..... ... ..... ....... &b      imm=%imm_b %rs2 %rs1
+ @u       ....................      ..... .......         imm=%imm_u          %rd
++@j       ....................      ..... .......         imm=%imm_j          %rd
+ 
+ # *** RV32I Base Instruction Set ***
+ lui      ....................       ..... 0110111 @u
+ auipc    ....................       ..... 0010111 @u
++jal      ....................       ..... 1101111 @j
++jalr     ............     ..... 000 ..... 1100111 @i
++beq      ....... .....    ..... 000 ..... 1100011 @b
++bne      ....... .....    ..... 001 ..... 1100011 @b
++blt      ....... .....    ..... 100 ..... 1100011 @b
++bge      ....... .....    ..... 101 ..... 1100011 @b
++bltu     ....... .....    ..... 110 ..... 1100011 @b
++bgeu     ....... .....    ..... 111 ..... 1100011 @b
+diff --git a/target/riscv/insn_trans/trans_rvi.inc.c b/target/riscv/insn_trans/trans_rvi.inc.c
+index 9885a8d275..eaeab20282 100644
+--- a/target/riscv/insn_trans/trans_rvi.inc.c
++++ b/target/riscv/insn_trans/trans_rvi.inc.c
+@@ -33,3 +33,52 @@ static bool trans_auipc(DisasContext *ctx, arg_auipc *a)
+     }
+     return true;
  }
-=20
-+static inline DeviceState *
-+xilinx_pcie_init(MemoryRegion *sys_mem, uint32_t bus_nr,
-+                 hwaddr cfg_base, uint64_t cfg_size,
-+                 hwaddr mmio_base, uint64_t mmio_size,
-+                 qemu_irq irq, bool link_up)
++
++static bool trans_jal(DisasContext *ctx, arg_jal *a, uint32_t insn)
 +{
-+    DeviceState *dev;
-+    MemoryRegion *cfg, *mmio;
-+
-+    dev =3D qdev_create(NULL, TYPE_XILINX_PCIE_HOST);
-+
-+    qdev_prop_set_uint32(dev, "bus_nr", bus_nr);
-+    qdev_prop_set_uint64(dev, "cfg_base", cfg_base);
-+    qdev_prop_set_uint64(dev, "cfg_size", cfg_size);
-+    qdev_prop_set_uint64(dev, "mmio_base", mmio_base);
-+    qdev_prop_set_uint64(dev, "mmio_size", mmio_size);
-+    qdev_prop_set_bit(dev, "link_up", link_up);
-+
-+    qdev_init_nofail(dev);
-+
-+    cfg =3D sysbus_mmio_get_region(SYS_BUS_DEVICE(dev), 0);
-+    memory_region_add_subregion_overlap(sys_mem, cfg_base, cfg, 0);
-+
-+    mmio =3D sysbus_mmio_get_region(SYS_BUS_DEVICE(dev), 1);
-+    memory_region_add_subregion_overlap(sys_mem, 0, mmio, 0);
-+
-+    qdev_connect_gpio_out_named(dev, "interrupt_out", 0, irq);
-+
-+    return dev;
++    gen_jal(ctx->env, ctx, a->rd, a->imm);
++    return true;
 +}
 +
- static void riscv_sifive_u_init(MachineState *machine)
- {
-     const struct MemmapEntry *memmap =3D sifive_u_memmap;
-@@ -375,6 +435,10 @@ static void riscv_sifive_u_soc_realize(DeviceState *de=
-v, Error **errp)
-     sysbus_mmio_map(SYS_BUS_DEVICE(&s->gem), 0, memmap[SIFIVE_U_GEM].base)=
-;
-     sysbus_connect_irq(SYS_BUS_DEVICE(&s->gem), 0,
-                        plic_gpios[SIFIVE_U_GEM_IRQ]);
++static bool trans_jalr(DisasContext *ctx, arg_jalr *a, uint32_t insn)
++{
++    gen_jalr(ctx->env, ctx, OPC_RISC_JALR, a->rd, a->rs1, a->imm);
++    return true;
++}
 +
-+    xilinx_pcie_init(system_memory, 0, memmap[SIFIVE_U_PCIE].base,
-+                     memmap[SIFIVE_U_PCIE].size, 0x40000000, 0x20000000,
-+                     qdev_get_gpio_in(DEVICE(s->plic), SIFIVE_U_PCIE_IRQ),=
- true);
- }
-=20
- static void riscv_sifive_u_machine_init(MachineClass *mc)
-diff --git a/include/hw/riscv/sifive_u.h b/include/hw/riscv/sifive_u.h
-index e8b4d9ffa3..e7292ea83b 100644
---- a/include/hw/riscv/sifive_u.h
-+++ b/include/hw/riscv/sifive_u.h
-@@ -53,12 +53,14 @@ enum {
-     SIFIVE_U_UART0,
-     SIFIVE_U_UART1,
-     SIFIVE_U_DRAM,
--    SIFIVE_U_GEM
-+    SIFIVE_U_GEM,
-+    SIFIVE_U_PCIE
- };
-=20
- enum {
-     SIFIVE_U_UART0_IRQ =3D 3,
-     SIFIVE_U_UART1_IRQ =3D 4,
-+    SIFIVE_U_PCIE_IRQ =3D 0x20,
-     SIFIVE_U_GEM_IRQ =3D 0x35
- };
-=20
---=20
++static bool trans_beq(DisasContext *ctx, arg_beq *a, uint32_t insn)
++{
++    gen_branch(ctx->env, ctx, OPC_RISC_BEQ, a->rs1, a->rs2, a->imm);
++    return true;
++}
++
++static bool trans_bne(DisasContext *ctx, arg_bne *a, uint32_t insn)
++{
++    gen_branch(ctx->env, ctx, OPC_RISC_BNE, a->rs1, a->rs2, a->imm);
++    return true;
++}
++
++static bool trans_blt(DisasContext *ctx, arg_blt *a, uint32_t insn)
++{
++    gen_branch(ctx->env, ctx, OPC_RISC_BLT, a->rs1, a->rs2, a->imm);
++    return true;
++}
++
++static bool trans_bge(DisasContext *ctx, arg_bge *a, uint32_t insn)
++{
++    gen_branch(ctx->env, ctx, OPC_RISC_BGE, a->rs1, a->rs2, a->imm);
++    return true;
++}
++
++static bool trans_bltu(DisasContext *ctx, arg_bltu *a, uint32_t insn)
++{
++    gen_branch(ctx->env, ctx, OPC_RISC_BLTU, a->rs1, a->rs2, a->imm);
++    return true;
++}
++
++static bool trans_bgeu(DisasContext *ctx, arg_bgeu *a, uint32_t insn)
++{
++
++    gen_branch(ctx->env, ctx, OPC_RISC_BGEU, a->rs1, a->rs2, a->imm);
++    return true;
++}
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index ba57cb29f5..909f7cd013 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -1672,6 +1672,7 @@ static void decode_RV32_64C(CPURISCVState *env, DisasContext *ctx)
+     {                                         \
+         return imm << amount;                 \
+     }
++EX_SH(1)
+ EX_SH(12)
+ 
+ bool decode_insn32(DisasContext *ctx, uint32_t insn);
+@@ -1700,17 +1701,6 @@ static void decode_RV32_64G(CPURISCVState *env, DisasContext *ctx)
+     imm = GET_IMM(ctx->opcode);
+ 
+     switch (op) {
+-    case OPC_RISC_JAL:
+-        imm = GET_JAL_IMM(ctx->opcode);
+-        gen_jal(env, ctx, rd, imm);
+-        break;
+-    case OPC_RISC_JALR:
+-        gen_jalr(env, ctx, MASK_OP_JALR(ctx->opcode), rd, rs1, imm);
+-        break;
+-    case OPC_RISC_BRANCH:
+-        gen_branch(env, ctx, MASK_OP_BRANCH(ctx->opcode), rs1, rs2,
+-                   GET_B_IMM(ctx->opcode));
+-        break;
+     case OPC_RISC_LOAD:
+         gen_load(ctx, MASK_OP_LOAD(ctx->opcode), rd, rs1, imm);
+         break;
+-- 
 2.19.1
 
 
