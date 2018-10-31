@@ -1,62 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gHwpy-00050B-Ef
-	for mharc-qemu-riscv@gnu.org; Wed, 31 Oct 2018 16:11:34 -0400
-Received: from eggs.gnu.org ([2001:4830:134:3::10]:59910)
+	id 1gHwt4-0008RH-VY
+	for mharc-qemu-riscv@gnu.org; Wed, 31 Oct 2018 16:14:46 -0400
+Received: from eggs.gnu.org ([2001:4830:134:3::10]:32831)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1gHwpv-0004yI-TX
-	for qemu-riscv@nongnu.org; Wed, 31 Oct 2018 16:11:32 -0400
+	(envelope-from <alistair23@gmail.com>) id 1gHwt2-0008R1-5e
+	for qemu-riscv@nongnu.org; Wed, 31 Oct 2018 16:14:45 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1gHwpk-000066-21
-	for qemu-riscv@nongnu.org; Wed, 31 Oct 2018 16:11:23 -0400
-Received: from mail-lj1-x243.google.com ([2a00:1450:4864:20::243]:41254)
+	(envelope-from <alistair23@gmail.com>) id 1gHwsy-0002As-08
+	for qemu-riscv@nongnu.org; Wed, 31 Oct 2018 16:14:42 -0400
+Received: from mail-lf1-x143.google.com ([2a00:1450:4864:20::143]:46766)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
 	(Exim 4.71) (envelope-from <alistair23@gmail.com>)
-	id 1gHwpd-0008VC-Ir; Wed, 31 Oct 2018 16:11:13 -0400
-Received: by mail-lj1-x243.google.com with SMTP id z80-v6so9986432ljb.8;
-	Wed, 31 Oct 2018 13:11:12 -0700 (PDT)
+	id 1gHwst-00029E-Co; Wed, 31 Oct 2018 16:14:37 -0400
+Received: by mail-lf1-x143.google.com with SMTP id o2-v6so12618555lfl.13;
+	Wed, 31 Oct 2018 13:14:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=MQxfZwaSZdaShXueqQz78A4ZYsldc/QBAqACFB959C8=;
-	b=h1L9QegJdCDj9KDn4ufSUIbMinDb9iwCy0wnEhcv4VXjNbYT4u7Fg0oRjxm+kJi8Sm
-	42mK033qKbRShV1Pl9hFr1ZxvhKYjeS94RkXbsobnerNs8jZMikfA5NE7NiFifIya4x5
-	mXY+obEjyvKADiEGTVeeRZ886OEbMOrVKI9VypLYRyNCj25DXZFk+Nj6b61otnW0tF2v
-	FM5uyUll8KV2FRR5qQra1MB1xsZ3Vp+DrI1kpZpEtJsbcTvanHskX21lh93Q1pLXKzzG
-	ZMsbpaHSHPlT4PFAZokxkP6ftVHZBII1jVF73pweB4Jwcbq4boyRVJ1Tx0g4SBJlBOPD
-	ruNA==
+	:cc; bh=q48GscA7G6pASbuVR94C+IBktegNoYK7yGYWSGf7cUw=;
+	b=MPlIx2R6t66FK8EDylgzejpOBtTrfbRwxczKwWWxg3iZebGZxJiXwY8u4rIYakhiUQ
+	tMCxAzTdF5YyVKkMS5Yx8a5pnpwJJQl4Eg9obBeNzP5ZwlXR4LC9F79pVJzGEYV+MBKW
+	RfH/l6BqJrK/7B+BZFLXVr+kr+NeakLBhencn1ttzp+tbCrBA2iraqE/pVn0KADg1MSi
+	+++XN1uWZceAZF2gteodqJbBzrpOmsNBjekcEIaAZGaiCyi5Rx9MbtImRul36F+rLtzF
+	1EIuZoBydQw2BsWxQJEQte0a4HQSC+Z4l6J68yl7dik/mRiEywqtpBg7lFouVzwgR1EY
+	wbog==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=MQxfZwaSZdaShXueqQz78A4ZYsldc/QBAqACFB959C8=;
-	b=DS08x95+wUp4sLppqThtszq+GTslRpjJXdxs5Fd4vv2SUSBgO6ahJ+jKbieUu5L32U
-	ft0NIVngga44f4olqccHN4lUM5S1hRn05/xUJFolDDBpVPBSa69vJV+xcwELdb//5yJU
-	Z+n3iSv2Y1r+ixY++GGOyp5s1oo3T3aEBZqs8aqO3ZQCX3W/zMTWANNxBsn7klACIbNJ
-	bNJbSD++9WkosaQEQl152Q/R7XnoSZQthMV7Ib/NyFkGfA9shSV081B6Kr5cFcczE5no
-	z5N5UUr5q2lYb/uSfV7KusTpXI/rJaiX8M41pOP4QLvwl5I1LI/HVD1mDFxHeU6vhHlO
-	wpCA==
-X-Gm-Message-State: AGRZ1gJJ56VXiOvQyxAP7ouGPZGQhIWXgYG2Ek3jYgntQ4+H3/YwhRYI
-	2JDwmBzwknmMPPvCErC1FATzIJGlZ0fKdx+kyKc=
-X-Google-Smtp-Source: AJdET5e8SqlW9tenfZF4Yk/0nlQ37TiekFZ05xgvPTXIs8emAFE1n+f8EsOvH9d/ohuIT3CNo5QwhBra4kdzmjG+TI8=
-X-Received: by 2002:a2e:449c:: with SMTP id
-	b28-v6mr2908347ljf.47.1541016671347; 
-	Wed, 31 Oct 2018 13:11:11 -0700 (PDT)
+	bh=q48GscA7G6pASbuVR94C+IBktegNoYK7yGYWSGf7cUw=;
+	b=n876WbaUQNpcOlSyxzDwQkM/kgoMCYXPOnUU4mWrtDt8MJk8e1bibexpkttiPab+e7
+	nYWQ8aUaoan9zrmBn2pdhl+1GvjPz/AWNhy7St9sKruOuRcNjTPOYuC5fHGJ3d7wP9W4
+	LszeOx4cdqo52YNOBJpmbFwXMP+kXMmkq8MekMsPbSJywnBj2BtZ96PHHkb/+PVfvYeY
+	zEJy5ThadF9ITB8Y3Xw9hf/Wp/TqEBy3hFaTz9+cfcbI0DMwj71b8v3omy7EAYs9m6bX
+	9z3nBQVVE2pnBrnM1npf/jk9VaIraUUjYl254NVcFjGysdeQ3SxaA8qRfPSYUWloXlCh
+	dg7A==
+X-Gm-Message-State: AGRZ1gLrHAtgCFabaE8HmKWREX5j138KFHdNyGDTxqmy3+yV4QoWw25q
+	MRNZdwk8/hms/VekVDhq7i6hhmSGcNx56nxWm/Y=
+X-Google-Smtp-Source: AJdET5cFTn25Hrl//+/mVd4Jc141l8S2/mmybEgPdQBa6pNPdx+M0FOqndYWTVrCnOhn74zlzc9FBtrfCbD/yfzvYvA=
+X-Received: by 2002:a19:4e9a:: with SMTP id
+	u26-v6mr2671254lfk.91.1541016869393; 
+	Wed, 31 Oct 2018 13:14:29 -0700 (PDT)
 MIME-Version: 1.0
-References: <cover.1540937826.git.alistair.francis@wdc.com>
-	<3f834825634e34ad107fe9e7af1b417cb47fc1f1.camel@redhat.com>
-In-Reply-To: <3f834825634e34ad107fe9e7af1b417cb47fc1f1.camel@redhat.com>
+References: <20181031132029.4887-1-kbastian@mail.uni-paderborn.de>
+	<20181031132029.4887-2-kbastian@mail.uni-paderborn.de>
+In-Reply-To: <20181031132029.4887-2-kbastian@mail.uni-paderborn.de>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 31 Oct 2018 13:10:43 -0700
-Message-ID: <CAKmqyKNF+tQFf50BCj91_RypYeHbnoZLvpm8gH71iW1og9uWfA@mail.gmail.com>
-To: Andrea Bolognani <abologna@redhat.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
-	"qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
-	qemu-riscv@nongnu.org
+Date: Wed, 31 Oct 2018 13:14:02 -0700
+Message-ID: <CAKmqyKMR6brWRrAXw_RwA2avCUp5rL6VmqOKWZPq5bA4xihWEA@mail.gmail.com>
+To: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+Cc: Michael Clark <mjc@sifive.com>, Sagar Karandikar <sagark@eecs.berkeley.edu>,
+	Palmer Dabbelt <palmer@sifive.com>,
+	Alistair Francis <Alistair.Francis@wdc.com>, qemu-riscv@nongnu.org, 
+	peer.adelt@hni.uni-paderborn.de, 
+	Richard Henderson <richard.henderson@linaro.org>, 
+	"qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2a00:1450:4864:20::243
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v6 0/5] Connect a PCIe host
- and graphics support to RISC-V
+X-Received-From: 2a00:1450:4864:20::143
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v3 01/35] target/riscv: Move
+ CPURISCVState pointer to DisasContext
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -68,59 +71,78 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Oct 2018 20:11:32 -0000
+X-List-Received-Date: Wed, 31 Oct 2018 20:14:45 -0000
 
-On Wed, Oct 31, 2018 at 7:51 AM Andrea Bolognani <abologna@redhat.com> wrote:
+On Wed, Oct 31, 2018 at 6:27 AM Bastian Koppelmann
+<kbastian@mail.uni-paderborn.de> wrote:
 >
-> On Tue, 2018-10-30 at 22:17 +0000, Alistair Francis wrote:
-> > V6:
-> >  - Fix the interrupt issue for the GPEX device
+> CPURISCVState is rarely used, so there is no need to pass it to every
+> translate function. This paves the way for decodetree which only passes
+> DisasContext to translate functions.
 >
-> I gave this a spin.
->
-> With the pcie.0 <- pcie-root-port <- virtio-net-pci setup I get
->
->   qemu-system-riscv64: -device pcie-root-port,port=0x8,chassis=1,\
->   id=pci.1,bus=pcie.0,multifunction=on,addr=0x1: MSI-X is not \
->   supported by interrupt controller
->
-> just like last time, which as I mentioned is a problem for libvirt
-> because we follow the recommendations outlined in qemu/docs/pcie.txt
-> and never plug devices into pcie.0 directly.
+> Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
+> Signed-off-by: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
 
-At the moment we can't support MSI, the interrupt controller doesn't
-support MSI.
-
->
-> Even after working around that issue by manually placing the device
-> at 0000:00:01.0, it still doesn't work: I see
->
->   pci 0000:00:01.0: BAR 6: assigned [mem 0x00000000-0x0003ffff pref]
->   pci 0000:00:01.0: BAR 4: assigned [mem 0x00040000-0x00043fff 64bit pref]
->   pci 0000:00:01.0: BAR 0: no space for [io  size 0x0020]
->   pci 0000:00:01.0: BAR 0: failed to assign [io  size 0x0020]
->   ...
->   virtio_net virtio3: virtio: device uses modern interface but does not have VIRTIO_F_VERSION_1
->   virtio_net: probe of virtio3 failed with error -22
-
-Yep, someone else pointed out a problem as well. I have made some
-changes [1] but I still can't get the BAR to line up.
-
->
-> in dmesg and, while the device shows up in the output of lspci(8),
-> it's nowhere to be seen when running 'ip addr' and friends.
->
-> Let me know if you need me to try anything else :)
-
-Any ideas on how to debug the confusing memory mappings or
-non-existent interrupts would be helpful :)
-
-1: https://github.com/alistair23/qemu/tree/mainline/alistair/sifive_pcie.next
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
+> ---
+>  target/riscv/translate.c | 15 ++++++++-------
+>  1 file changed, 8 insertions(+), 7 deletions(-)
 >
+> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+> index 18d7b6d147..e81b9f097e 100644
+> --- a/target/riscv/translate.c
+> +++ b/target/riscv/translate.c
+> @@ -52,6 +52,7 @@ typedef struct DisasContext {
+>         to any system register, which includes CSR_FRM, so we do not have
+>         to reset this known value.  */
+>      int frm;
+> +    CPURISCVState *env;
+>  } DisasContext;
+>
+>  /* convert riscv funct3 to qemu memop for load/store */
+> @@ -1789,19 +1790,19 @@ static void decode_RV32_64G(CPURISCVState *env, DisasContext *ctx)
+>      }
+>  }
+>
+> -static void decode_opc(CPURISCVState *env, DisasContext *ctx)
+> +static void decode_opc(DisasContext *ctx)
+>  {
+>      /* check for compressed insn */
+>      if (extract32(ctx->opcode, 0, 2) != 3) {
+> -        if (!riscv_has_ext(env, RVC)) {
+> +        if (!riscv_has_ext(ctx->env, RVC)) {
+>              gen_exception_illegal(ctx);
+>          } else {
+>              ctx->pc_succ_insn = ctx->base.pc_next + 2;
+> -            decode_RV32_64C(env, ctx);
+> +            decode_RV32_64C(ctx->env, ctx);
+>          }
+>      } else {
+>          ctx->pc_succ_insn = ctx->base.pc_next + 4;
+> -        decode_RV32_64G(env, ctx);
+> +        decode_RV32_64G(ctx->env, ctx);
+>      }
+>  }
+>
+> @@ -1846,10 +1847,10 @@ static bool riscv_tr_breakpoint_check(DisasContextBase *dcbase, CPUState *cpu,
+>  static void riscv_tr_translate_insn(DisasContextBase *dcbase, CPUState *cpu)
+>  {
+>      DisasContext *ctx = container_of(dcbase, DisasContext, base);
+> -    CPURISCVState *env = cpu->env_ptr;
+> +    ctx->env = cpu->env_ptr;
+>
+> -    ctx->opcode = cpu_ldl_code(env, ctx->base.pc_next);
+> -    decode_opc(env, ctx);
+> +    ctx->opcode = cpu_ldl_code(ctx->env, ctx->base.pc_next);
+> +    decode_opc(ctx);
+>      ctx->base.pc_next = ctx->pc_succ_insn;
+>
+>      if (ctx->base.is_jmp == DISAS_NEXT) {
 > --
-> Andrea Bolognani / Red Hat / Virtualization
+> 2.19.1
+>
 >
 
