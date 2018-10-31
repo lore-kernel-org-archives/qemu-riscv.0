@@ -1,42 +1,42 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gHqxC-00066m-CQ
+	id 1gHqxC-00066u-Hh
 	for mharc-qemu-riscv@gnu.org; Wed, 31 Oct 2018 09:54:38 -0400
-Received: from eggs.gnu.org ([2001:4830:134:3::10]:37102)
+Received: from eggs.gnu.org ([2001:4830:134:3::10]:37232)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <kbastian@mail.uni-paderborn.de>) id 1gHqRK-0004aX-IV
-	for qemu-riscv@nongnu.org; Wed, 31 Oct 2018 09:21:45 -0400
+	(envelope-from <kbastian@mail.uni-paderborn.de>) id 1gHqRR-0004eC-1p
+	for qemu-riscv@nongnu.org; Wed, 31 Oct 2018 09:21:54 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <kbastian@mail.uni-paderborn.de>) id 1gHqRE-0002or-Py
-	for qemu-riscv@nongnu.org; Wed, 31 Oct 2018 09:21:40 -0400
-Received: from mail.uni-paderborn.de ([131.234.142.9]:57832)
+	(envelope-from <kbastian@mail.uni-paderborn.de>) id 1gHqRO-0002us-2u
+	for qemu-riscv@nongnu.org; Wed, 31 Oct 2018 09:21:48 -0400
+Received: from mail.uni-paderborn.de ([131.234.142.9]:45582)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.71) (envelope-from <kbastian@mail.uni-paderborn.de>)
-	id 1gHqR9-0002HW-JC; Wed, 31 Oct 2018 09:21:32 -0400
-Received: from magmaria.uni-paderborn.de ([131.234.189.24]
+	id 1gHqR1-0002DJ-U9; Wed, 31 Oct 2018 09:21:27 -0400
+Received: from pova.uni-paderborn.de ([131.234.189.23]
 	helo=localhost.localdomain)
-	by mail.uni-paderborn.de with esmtp (Exim 4.89 zuban)
-	id 1gHqQd-0008M8-LH; Wed, 31 Oct 2018 14:20:59 +0100
-Received: from mail.uni-paderborn.de by magmaria with queue id 2959340-3;
-	Wed, 31 Oct 2018 13:20:59 GMT
+	by mail.uni-paderborn.de with esmtp (Exim 4.89 hoth)
+	id 1gHqQa-00036A-Rc; Wed, 31 Oct 2018 14:20:56 +0100
+Received: from mail.uni-paderborn.de by pova with queue id 2964554-2;
+	Wed, 31 Oct 2018 13:20:56 GMT
 X-Envelope-From: <kbastian@mail.uni-paderborn.de>
 Received: from [131.234.87.238] (helo=mustique.hni.uni-paderborn.de)
 	by mail.uni-paderborn.de with esmtpsa
 	(TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.89 nylar)
-	id 1gHqQd-0005dh-O1; Wed, 31 Oct 2018 14:20:59 +0100
+	id 1gHqQa-0005dh-O0; Wed, 31 Oct 2018 14:20:56 +0100
 From: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
 To: mjc@sifive.com, sagark@eecs.berkeley.edu, palmer@sifive.com,
 	kbastian@mail.uni-paderborn.de, Alistair.Francis@wdc.com
 Cc: richard.henderson@linaro.org, peer.adelt@hni.uni-paderborn.de,
 	qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-Date: Wed, 31 Oct 2018 14:20:29 +0100
-Message-Id: <20181031132029.4887-36-kbastian@mail.uni-paderborn.de>
+Date: Wed, 31 Oct 2018 14:20:14 +0100
+Message-Id: <20181031132029.4887-21-kbastian@mail.uni-paderborn.de>
 X-Mailer: git-send-email 2.19.1
 In-Reply-To: <20181031132029.4887-1-kbastian@mail.uni-paderborn.de>
 References: <20181031132029.4887-1-kbastian@mail.uni-paderborn.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-PMX-Version: 6.4.5.2775670, Antispam-Engine: 2.7.2.2107409,
-	Antispam-Data: 2018.10.31.131216, AntiVirus-Engine: 5.53.0,
+	Antispam-Data: 2018.10.31.131517, AntiVirus-Engine: 5.53.0,
 	AntiVirus-Data: 2018.10.10.5530001
 X-IMT-Spam-Score: 0.0 ()
 X-IMT-Authenticated-Sender: 
@@ -44,8 +44,7 @@ X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
 X-Received-From: 131.234.142.9
 X-Mailman-Approved-At: Wed, 31 Oct 2018 09:54:25 -0400
-Subject: [Qemu-riscv] [PATCH v3 35/35] target/riscv: Remaining rvc insn
- reuse 32 bit translators
+Subject: [Qemu-riscv] [PATCH v3 20/35] target/riscv: Remove gen_jalr()
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -57,170 +56,106 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Oct 2018 13:21:46 -0000
+X-List-Received-Date: Wed, 31 Oct 2018 13:21:55 -0000
 
-only a translate functions of rvc need to handle special cases. For
-the other rvc instruction we can remove the extra layer of indirection.
+trans_jalr() is the only caller, so move the code into trans_jalr().
 
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Signed-off-by: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+Signed-off-by: Peer Adelt <peer.adelt@hni.uni-paderborn.de>
 ---
- target/riscv/insn16.decode              | 37 +++++++++----------
- target/riscv/insn_trans/trans_rvc.inc.c | 48 -------------------------
- 2 files changed, 17 insertions(+), 68 deletions(-)
+ target/riscv/insn_trans/trans_rvi.inc.c | 28 +++++++++++++++++-
+ target/riscv/translate.c                | 38 -------------------------
+ 2 files changed, 27 insertions(+), 39 deletions(-)
 
-diff --git a/target/riscv/insn16.decode b/target/riscv/insn16.decode
-index 98dd672c7f..d88a0c78ab 100644
---- a/target/riscv/insn16.decode
-+++ b/target/riscv/insn16.decode
-@@ -46,19 +46,15 @@
- &i         imm rs1 rd   !extern
- &s         imm rs1 rs2  !extern
- &j         imm rd       !extern
-+&b         imm rs2 rs1  !extern
+diff --git a/target/riscv/insn_trans/trans_rvi.inc.c b/target/riscv/insn_trans/trans_rvi.inc.c
+index 09e7a0052a..4d090d68e7 100644
+--- a/target/riscv/insn_trans/trans_rvi.inc.c
++++ b/target/riscv/insn_trans/trans_rvi.inc.c
+@@ -42,7 +42,33 @@ static bool trans_jal(DisasContext *ctx, arg_jal *a)
  
- # Argument sets:
- &ci        imm        rd
- &ciw       nzuimm     rd
- &cs_dw     uimm   rs1 rs2
--&cb        imm    rs1
- &cr               rd  rs2
--&c_j       imm
- &c_shift   shamt      rd
- 
--&c_ld      uimm  rd
--&c_sd      uimm  rs2
--
- &c_addi16sp_lui  imm_lui imm_addi16sp rd
- 
- # Formats 16:
-@@ -70,20 +66,21 @@
- @cs_2      ... ... ... .. ... .. &r      rd=%rs1_3 rs1=%rs1_3 rs2=%rs2_3
- @cs_d      ... ... ... .. ... .. &s  imm=%uimm_cl_d  rs1=%rs1_3  rs2=%rs2_3
- @cs_w      ... ... ... .. ... .. &s  imm=%uimm_cl_w  rs1=%rs1_3  rs2=%rs2_3
--@cb        ... ... ... .. ... .. &cb     imm=%imm_cb      rs1=%rs1_3
--@cj        ...    ........... .. &c_j    imm=%imm_cj
-+@cb        ... ... ... .. ... .. &b  imm=%imm_cb  rs1=%rs1_3 rs2=0
-+@cj        ...    ........... .. &j  imm=%imm_cj rd=0
- 
--@c_ld      ... . .....  ..... .. &c_ld     uimm=%uimm_6bit_ld  %rd
--@c_lw      ... . .....  ..... .. &c_ld     uimm=%uimm_6bit_lw  %rd
--@c_sd      ... . .....  ..... .. &c_sd     uimm=%uimm_6bit_sd  rs2=%rs2_5
--@c_sw      ... . .....  ..... .. &c_sd     uimm=%uimm_6bit_sw  rs2=%rs2_5
-+@c_ld      ... . .....  ..... .. &i  imm=%uimm_6bit_ld  %rd rs1=2
-+@c_lw      ... . .....  ..... .. &i  imm=%uimm_6bit_lw  %rd rs1=2
-+@c_sd      ... . .....  ..... .. &s  imm=%uimm_6bit_sd  rs1=2 rs2=%rs2_5
-+@c_sw      ... . .....  ..... .. &s  imm=%uimm_6bit_sw  rs1=2 rs2=%rs2_5
- 
- @c_addi16sp_lui ... .  ..... ..... .. &c_addi16sp_lui %imm_lui %imm_addi16sp %rd
- 
- @c_shift        ... . .. ... ..... .. &c_shift rd=%rs1_3 shamt=%nzuimm_6bit
- @c_shift2       ... . .. ... ..... .. &c_shift rd=%rd    shamt=%nzuimm_6bit
- 
--@c_andi         ... . .. ... ..... .. &ci imm=%imm_ci rd=%rs1_3
-+@c_andi         ... . .. ... ..... .. &i imm=%imm_ci rd=%rs1_3 rs1=%rs1_3
+ static bool trans_jalr(DisasContext *ctx, arg_jalr *a)
+ {
+-    gen_jalr(ctx->env, ctx, OPC_RISC_JALR, a->rd, a->rs1, a->imm);
++    /* no chaining with JALR */
++    TCGLabel *misaligned = NULL;
++    TCGv t0 = tcg_temp_new();
 +
- 
- # *** RV64C Standard Extension (Quadrant 0) ***
- c_addi4spn        000    ........ ... 00 @ciw
-@@ -98,20 +95,20 @@ c_li              010 .  .....  ..... 01 @ci
- c_addi16sp_lui    011 .  .....  ..... 01 @c_addi16sp_lui # shares opc with C.LUI
- c_srli            100 . 00 ...  ..... 01 @c_shift
- c_srai            100 . 01 ...  ..... 01 @c_shift
--c_andi            100 . 10 ...  ..... 01 @c_andi
-+andi              100 . 10 ...  ..... 01 @c_andi
- sub               100 0 11 ... 00 ... 01 @cs_2
- xor               100 0 11 ... 01 ... 01 @cs_2
- or                100 0 11 ... 10 ... 01 @cs_2
- and               100 0 11 ... 11 ... 01 @cs_2
--c_j               101     ........... 01 @cj
--c_beqz            110  ... ...  ..... 01 @cb
--c_bnez            111  ... ...  ..... 01 @cb
-+jal               101     ........... 01 @cj # c_j
-+beq               110  ... ...  ..... 01 @cb # c_beqz
-+bne               111  ... ...  ..... 01 @cb # c_bnez
- 
- # *** RV64C Standard Extension (Quadrant 2) ***
- c_slli            000 .  .....  ..... 10 @c_shift2
--c_fldsp           001 .  .....  ..... 10 @c_ld
--c_lwsp            010 .  .....  ..... 10 @c_lw
-+fld               001 .  .....  ..... 10 @c_ld # fldsp
-+lw                010 .  .....  ..... 10 @c_lw # lwsp
- c_jr_mv           100 0  .....  ..... 10 @cr
- c_ebreak_jalr_add 100 1  .....  ..... 10 @cr
--c_fsdsp           101   ......  ..... 10 @c_sd
--c_swsp            110 .  .....  ..... 10 @c_sw
-+fsd               101   ......  ..... 10 @c_sd # fsdsp
-+sw                110 .  .....  ..... 10 @c_sw # swsp
-diff --git a/target/riscv/insn_trans/trans_rvc.inc.c b/target/riscv/insn_trans/trans_rvc.inc.c
-index db9119ec9b..631e72c8b5 100644
---- a/target/riscv/insn_trans/trans_rvc.inc.c
-+++ b/target/riscv/insn_trans/trans_rvc.inc.c
-@@ -98,30 +98,6 @@ static bool trans_c_srai(DisasContext *ctx, arg_c_srai *a)
-     return trans_srai(ctx, &arg);
++
++    gen_get_gpr(cpu_pc, a->rs1);
++    tcg_gen_addi_tl(cpu_pc, cpu_pc, a->imm);
++    tcg_gen_andi_tl(cpu_pc, cpu_pc, (target_ulong)-2);
++
++    if (!riscv_has_ext(ctx->env, RVC)) {
++        misaligned = gen_new_label();
++        tcg_gen_andi_tl(t0, cpu_pc, 0x2);
++        tcg_gen_brcondi_tl(TCG_COND_NE, t0, 0x0, misaligned);
++    }
++
++    if (a->rd != 0) {
++        tcg_gen_movi_tl(cpu_gpr[a->rd], ctx->pc_succ_insn);
++    }
++    tcg_gen_lookup_and_goto_ptr();
++
++    if (misaligned) {
++        gen_set_label(misaligned);
++        gen_exception_inst_addr_mis(ctx);
++    }
++    ctx->base.is_jmp = DISAS_NORETURN;
++
++    tcg_temp_free(t0);
+     return true;
  }
  
--static bool trans_c_andi(DisasContext *ctx, arg_c_andi *a)
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index 41d66fae18..b78e423d94 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -489,44 +489,6 @@ static void gen_jal(CPURISCVState *env, DisasContext *ctx, int rd,
+     ctx->base.is_jmp = DISAS_NORETURN;
+ }
+ 
+-static void gen_jalr(CPURISCVState *env, DisasContext *ctx, uint32_t opc,
+-                     int rd, int rs1, target_long imm)
 -{
--    arg_andi arg = { .rd = a->rd, .rs1 = a->rd, .imm = a->imm };
--    return trans_andi(ctx, &arg);
+-    /* no chaining with JALR */
+-    TCGLabel *misaligned = NULL;
+-    TCGv t0 = tcg_temp_new();
+-
+-    switch (opc) {
+-    case OPC_RISC_JALR:
+-        gen_get_gpr(cpu_pc, rs1);
+-        tcg_gen_addi_tl(cpu_pc, cpu_pc, imm);
+-        tcg_gen_andi_tl(cpu_pc, cpu_pc, (target_ulong)-2);
+-
+-        if (!riscv_has_ext(env, RVC)) {
+-            misaligned = gen_new_label();
+-            tcg_gen_andi_tl(t0, cpu_pc, 0x2);
+-            tcg_gen_brcondi_tl(TCG_COND_NE, t0, 0x0, misaligned);
+-        }
+-
+-        if (rd != 0) {
+-            tcg_gen_movi_tl(cpu_gpr[rd], ctx->pc_succ_insn);
+-        }
+-        tcg_gen_lookup_and_goto_ptr();
+-
+-        if (misaligned) {
+-            gen_set_label(misaligned);
+-            gen_exception_inst_addr_mis(ctx);
+-        }
+-        ctx->base.is_jmp = DISAS_NORETURN;
+-        break;
+-
+-    default:
+-        gen_exception_illegal(ctx);
+-        break;
+-    }
+-    tcg_temp_free(t0);
 -}
 -
--static bool trans_c_j(DisasContext *ctx, arg_c_j *a)
--{
--    arg_jal arg = { .rd = 0, .imm = a->imm };
--    return trans_jal(ctx, &arg);
--}
--
--static bool trans_c_beqz(DisasContext *ctx, arg_c_beqz *a)
--{
--    arg_beq arg = { .rs1 = a->rs1, .rs2 = 0, .imm = a->imm };
--    return trans_beq(ctx, &arg);
--}
--
--static bool trans_c_bnez(DisasContext *ctx, arg_c_bnez *a)
--{
--    arg_bne arg = { .rs1 = a->rs1, .rs2 = 0, .imm = a->imm };
--    return trans_bne(ctx, &arg);
--}
--
- static bool trans_c_slli(DisasContext *ctx, arg_c_slli *a)
+ static void gen_branch(CPURISCVState *env, DisasContext *ctx, uint32_t opc,
+                        int rs1, int rs2, target_long bimm)
  {
-     int shamt = a->shamt;
-@@ -138,18 +114,6 @@ static bool trans_c_slli(DisasContext *ctx, arg_c_slli *a)
-     return trans_slli(ctx, &arg);
- }
- 
--static bool trans_c_fldsp(DisasContext *ctx, arg_c_fldsp *a)
--{
--    arg_fld arg = { .rd = a->rd, .rs1 = 2, .imm = a->uimm };
--    return trans_fld(ctx, &arg);
--}
--
--static bool trans_c_lwsp(DisasContext *ctx, arg_c_lwsp *a)
--{
--    arg_lw arg = { .rd = a->rd, .rs1 = 2, .imm = a->uimm };
--    return trans_lw(ctx, &arg);
--}
--
- static bool trans_c_jr_mv(DisasContext *ctx, arg_c_jr_mv *a)
- {
-     if (a->rd != 0 && a->rs2 == 0) {
-@@ -183,15 +147,3 @@ static bool trans_c_ebreak_jalr_add(DisasContext *ctx, arg_c_ebreak_jalr_add *a)
-     }
-     return false;
- }
--
--static bool trans_c_fsdsp(DisasContext *ctx, arg_c_fsdsp *a)
--{
--    arg_fsd arg = { .rs1 = 2, .rs2 = a->rs2, .imm = a->uimm };
--    return trans_fsd(ctx, &arg);
--}
--
--static bool trans_c_swsp(DisasContext *ctx, arg_c_swsp *a)
--{
--    arg_sw arg = { .rs1 = 2, .rs2 = a->rs2, .imm = a->uimm };
--    return trans_sw(ctx, &arg);
--}
 -- 
 2.19.1
 
