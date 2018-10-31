@@ -1,51 +1,45 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gHqxD-00068X-D3
-	for mharc-qemu-riscv@gnu.org; Wed, 31 Oct 2018 09:54:39 -0400
-Received: from eggs.gnu.org ([2001:4830:134:3::10]:37807)
+	id 1gHrqM-0000qq-Ql
+	for mharc-qemu-riscv@gnu.org; Wed, 31 Oct 2018 10:51:38 -0400
+Received: from eggs.gnu.org ([2001:4830:134:3::10]:43792)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <kbastian@mail.uni-paderborn.de>) id 1gHqRm-00050Z-QZ
-	for qemu-riscv@nongnu.org; Wed, 31 Oct 2018 09:22:12 -0400
+	(envelope-from <abologna@redhat.com>) id 1gHrqK-0000oi-Ls
+	for qemu-riscv@nongnu.org; Wed, 31 Oct 2018 10:51:37 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <kbastian@mail.uni-paderborn.de>) id 1gHqRj-0003HF-Fu
-	for qemu-riscv@nongnu.org; Wed, 31 Oct 2018 09:22:10 -0400
-Received: from mail.uni-paderborn.de ([131.234.142.9]:57796)
-	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.71) (envelope-from <kbastian@mail.uni-paderborn.de>)
-	id 1gHqRX-0002Cz-8g; Wed, 31 Oct 2018 09:21:55 -0400
-Received: from wormulon.uni-paderborn.de ([131.234.189.22]
-	helo=localhost.localdomain)
-	by mail.uni-paderborn.de with esmtp (Exim 4.89 zuban)
-	id 1gHqQa-0008LW-Jh; Wed, 31 Oct 2018 14:20:56 +0100
-Received: from mail.uni-paderborn.de by wormulon with queue id 2965938-5;
-	Wed, 31 Oct 2018 13:20:55 GMT
-X-Envelope-From: <kbastian@mail.uni-paderborn.de>
-Received: from [131.234.87.238] (helo=mustique.hni.uni-paderborn.de)
-	by mail.uni-paderborn.de with esmtpsa
-	(TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.89 nylar)
-	id 1gHqQZ-0005dh-P9; Wed, 31 Oct 2018 14:20:55 +0100
-From: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-To: mjc@sifive.com, sagark@eecs.berkeley.edu, palmer@sifive.com,
-	kbastian@mail.uni-paderborn.de, Alistair.Francis@wdc.com
-Cc: richard.henderson@linaro.org, peer.adelt@hni.uni-paderborn.de,
-	qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-Date: Wed, 31 Oct 2018 14:20:11 +0100
-Message-Id: <20181031132029.4887-18-kbastian@mail.uni-paderborn.de>
-X-Mailer: git-send-email 2.19.1
-In-Reply-To: <20181031132029.4887-1-kbastian@mail.uni-paderborn.de>
-References: <20181031132029.4887-1-kbastian@mail.uni-paderborn.de>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-PMX-Version: 6.4.5.2775670, Antispam-Engine: 2.7.2.2107409,
-	Antispam-Data: 2018.10.31.131216, AntiVirus-Engine: 5.53.0,
-	AntiVirus-Data: 2018.10.10.5530001
-X-IMT-Spam-Score: 0.0 ()
-X-IMT-Authenticated-Sender: 
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
-	recognized.
-X-Received-From: 131.234.142.9
-X-Mailman-Approved-At: Wed, 31 Oct 2018 09:54:26 -0400
-Subject: [Qemu-riscv] [PATCH v3 17/35] target/riscv: Convert quadrant 0 of
- RVXC insns to decodetree
+	(envelope-from <abologna@redhat.com>) id 1gHrqJ-0006NA-T7
+	for qemu-riscv@nongnu.org; Wed, 31 Oct 2018 10:51:36 -0400
+Received: from mx1.redhat.com ([209.132.183.28]:56470)
+	by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.71) (envelope-from <abologna@redhat.com>)
+	id 1gHrqH-0006IY-A5; Wed, 31 Oct 2018 10:51:33 -0400
+Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
+	[10.5.11.14])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mx1.redhat.com (Postfix) with ESMTPS id E791281DFE;
+	Wed, 31 Oct 2018 14:51:27 +0000 (UTC)
+Received: from kinshicho (unknown [10.43.2.63])
+	by smtp.corp.redhat.com (Postfix) with ESMTPS id DF81E29AD3;
+	Wed, 31 Oct 2018 14:51:26 +0000 (UTC)
+Message-ID: <3f834825634e34ad107fe9e7af1b417cb47fc1f1.camel@redhat.com>
+From: Andrea Bolognani <abologna@redhat.com>
+To: Alistair Francis <Alistair.Francis@wdc.com>, "qemu-devel@nongnu.org"
+	<qemu-devel@nongnu.org>, "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>
+Cc: "alistair23@gmail.com" <alistair23@gmail.com>
+Date: Wed, 31 Oct 2018 15:51:25 +0100
+In-Reply-To: <cover.1540937826.git.alistair.francis@wdc.com>
+References: <cover.1540937826.git.alistair.francis@wdc.com>
+Content-Type: text/plain; charset="UTF-8"
+Mime-Version: 1.0
+Content-Transfer-Encoding: 7bit
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+	(mx1.redhat.com [10.5.110.25]);
+	Wed, 31 Oct 2018 14:51:28 +0000 (UTC)
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+X-Received-From: 209.132.183.28
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v6 0/5] Connect a PCIe host
+ and graphics support to RISC-V
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -57,282 +51,41 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Oct 2018 13:22:12 -0000
+X-List-Received-Date: Wed, 31 Oct 2018 14:51:37 -0000
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Signed-off-by: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-Signed-off-by: Peer Adelt <peer.adelt@hni.uni-paderborn.de>
----
-v2 -> v3:
-    - trans_c_flw_ld and trans_c_fsw_sd now return false for now, as we
-      cannot use the insn argument anymore for manual decoding. We fix this
-      in a later patch when rvc is properly split up into insn16-32.decode
-      and insn16-64.decode.
-    - special case of trans_c_addi4spn() returns false in this patch
-    - dropped insn argument of trans_foo functions
+On Tue, 2018-10-30 at 22:17 +0000, Alistair Francis wrote:
+> V6:
+>  - Fix the interrupt issue for the GPEX device
 
- target/riscv/Makefile.objs              |  9 ++-
- target/riscv/insn16.decode              | 55 ++++++++++++++++++
- target/riscv/insn_trans/trans_rvc.inc.c | 75 +++++++++++++++++++++++++
- target/riscv/translate.c                | 53 ++++++-----------
- 4 files changed, 154 insertions(+), 38 deletions(-)
- create mode 100644 target/riscv/insn16.decode
- create mode 100644 target/riscv/insn_trans/trans_rvc.inc.c
+I gave this a spin.
 
-diff --git a/target/riscv/Makefile.objs b/target/riscv/Makefile.objs
-index b9b8152cc2..ba661b69e3 100644
---- a/target/riscv/Makefile.objs
-+++ b/target/riscv/Makefile.objs
-@@ -10,4 +10,11 @@ target/riscv/decode_insn32.inc.c: $(decode32-y) $(DECODETREE)
- 	  $(PYTHON) $(DECODETREE) -o $@ --decode decode_insn32 $(decode32-y), \
- 	  "GEN", $(TARGET_DIR)$@)
- 
--target/riscv/translate.o: target/riscv/decode_insn32.inc.c
-+target/riscv/decode_insn16.inc.c: \
-+  $(SRC_PATH)/target/riscv/insn16.decode $(DECODETREE)
-+	$(call quiet-command, \
-+	  $(PYTHON) $(DECODETREE) -o $@ --decode decode_insn16 --insnwidth 16 $<, \
-+	  "GEN", $(TARGET_DIR)$@)
-+
-+target/riscv/translate.o: target/riscv/decode_insn32.inc.c \
-+	target/riscv/decode_insn16.inc.c
-diff --git a/target/riscv/insn16.decode b/target/riscv/insn16.decode
-new file mode 100644
-index 0000000000..558c0c41f0
---- /dev/null
-+++ b/target/riscv/insn16.decode
-@@ -0,0 +1,55 @@
-+#
-+# RISC-V translation routines for the RVXI Base Integer Instruction Set.
-+#
-+# Copyright (c) 2018 Peer Adelt, peer.adelt@hni.uni-paderborn.de
-+#                    Bastian Koppelmann, kbastian@mail.uni-paderborn.de
-+#
-+# This program is free software; you can redistribute it and/or modify it
-+# under the terms and conditions of the GNU General Public License,
-+# version 2 or later, as published by the Free Software Foundation.
-+#
-+# This program is distributed in the hope it will be useful, but WITHOUT
-+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-+# FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-+# more details.
-+#
-+# You should have received a copy of the GNU General Public License along with
-+# this program.  If not, see <http://www.gnu.org/licenses/>.
-+
-+# Fields:
-+%rd        7:5
-+%rs1_3     7:3                !function=ex_rvc_register
-+%rs2_3     2:3                !function=ex_rvc_register
-+
-+# Immediates:
-+%nzuimm_ciw    7:4 11:2 5:1 6:1   !function=ex_shift_2
-+%uimm_cl_d     5:2 10:3           !function=ex_shift_3
-+%uimm_cl_w     5:1 10:3 6:1       !function=ex_shift_2
-+
-+
-+# Argument sets:
-+&cl               rs1 rd
-+&cl_dw     uimm   rs1 rd
-+&ciw       nzuimm     rd
-+&cs               rs1 rs2
-+&cs_dw     uimm   rs1 rs2
-+
-+
-+# Formats 16:
-+@ciw       ...   ........ ... .. &ciw    nzuimm=%nzuimm_ciw           rd=%rs2_3
-+@cl_d      ... ... ... .. ... .. &cl_dw  uimm=%uimm_cl_d  rs1=%rs1_3  rd=%rs2_3
-+@cl_w      ... ... ... .. ... .. &cl_dw  uimm=%uimm_cl_w  rs1=%rs1_3  rd=%rs2_3
-+@cl        ... ... ... .. ... .. &cl                      rs1=%rs1_3  rd=%rs2_3
-+@cs        ... ... ... .. ... .. &cs                      rs1=%rs1_3  rs2=%rs2_3
-+@cs_d      ... ... ... .. ... .. &cs_dw  uimm=%uimm_cl_d  rs1=%rs1_3  rs2=%rs2_3
-+@cs_w      ... ... ... .. ... .. &cs_dw  uimm=%uimm_cl_w  rs1=%rs1_3  rs2=%rs2_3
-+
-+
-+# *** RV64C Standard Extension (Quadrant 0) ***
-+c_addi4spn        000    ........ ... 00 @ciw
-+c_fld             001  ... ... .. ... 00 @cl_d
-+c_lw              010  ... ... .. ... 00 @cl_w
-+c_flw_ld          011  --- ... -- ... 00 @cl    #Note: Must parse uimm manually
-+c_fsd             101  ... ... .. ... 00 @cs_d
-+c_sw              110  ... ... .. ... 00 @cs_w
-+c_fsw_sd          111  --- ... -- ... 00 @cs    #Note: Must parse uimm manually
-diff --git a/target/riscv/insn_trans/trans_rvc.inc.c b/target/riscv/insn_trans/trans_rvc.inc.c
-new file mode 100644
-index 0000000000..93ec8aa30b
---- /dev/null
-+++ b/target/riscv/insn_trans/trans_rvc.inc.c
-@@ -0,0 +1,75 @@
-+/*
-+ * RISC-V translation routines for the RVC Compressed Instruction Set.
-+ *
-+ * Copyright (c) 2016-2017 Sagar Karandikar, sagark@eecs.berkeley.edu
-+ * Copyright (c) 2018 Peer Adelt, peer.adelt@hni.uni-paderborn.de
-+ *                    Bastian Koppelmann, kbastian@mail.uni-paderborn.de
-+ *
-+ * This program is free software; you can redistribute it and/or modify it
-+ * under the terms and conditions of the GNU General Public License,
-+ * version 2 or later, as published by the Free Software Foundation.
-+ *
-+ * This program is distributed in the hope it will be useful, but WITHOUT
-+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-+ * more details.
-+ *
-+ * You should have received a copy of the GNU General Public License along with
-+ * this program.  If not, see <http://www.gnu.org/licenses/>.
-+ */
-+
-+static bool trans_c_addi4spn(DisasContext *ctx, arg_c_addi4spn *a)
-+{
-+    if (a->nzuimm == 0) {
-+        /* Reserved in ISA */
-+        return false;
-+    }
-+    arg_addi arg = { .rd = a->rd, .rs1 = 2, .imm = a->nzuimm };
-+    return trans_addi(ctx, &arg);
-+}
-+
-+static bool trans_c_fld(DisasContext *ctx, arg_c_fld *a)
-+{
-+    arg_fld arg = { .rd = a->rd, .rs1 = a->rs1, .imm = a->uimm };
-+    return trans_fld(ctx, &arg);
-+}
-+
-+static bool trans_c_lw(DisasContext *ctx, arg_c_lw *a)
-+{
-+    arg_lw arg = { .rd = a->rd, .rs1 = a->rs1, .imm = a->uimm };
-+    return trans_lw(ctx, &arg);
-+}
-+
-+static bool trans_c_flw_ld(DisasContext *ctx, arg_c_flw_ld *a)
-+{
-+#ifdef TARGET_RISCV32
-+    /* C.FLW ( RV32FC-only ) */
-+    return false;
-+#else
-+    /* C.LD ( RV64C/RV128C-only ) */
-+    return false;
-+#endif
-+}
-+
-+static bool trans_c_fsd(DisasContext *ctx, arg_c_fsd *a)
-+{
-+    arg_fsd arg = { .rs1 = a->rs1, .rs2 = a->rs2, .imm = a->uimm };
-+    return trans_fsd(ctx, &arg);
-+}
-+
-+static bool trans_c_sw(DisasContext *ctx, arg_c_sw *a)
-+{
-+    arg_sw arg = { .rs1 = a->rs1, .rs2 = a->rs2, .imm = a->uimm };
-+    return trans_sw(ctx, &arg);
-+}
-+
-+static bool trans_c_fsw_sd(DisasContext *ctx, arg_c_fsw_sd *a)
-+{
-+#ifdef TARGET_RISCV32
-+    /* C.FSW ( RV32FC-only ) */
-+    return false;
-+#else
-+    /* C.SD ( RV64C/RV128C-only ) */
-+    return false;
-+#endif
-+}
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 885e48881c..8bddebb35e 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -721,27 +721,6 @@ static void decode_RV32_64C0(DisasContext *ctx)
-     uint8_t rs1s = GET_C_RS1S(ctx->opcode);
- 
-     switch (funct3) {
--    case 0:
--        /* illegal */
--        if (ctx->opcode == 0) {
--            gen_exception_illegal(ctx);
--        } else {
--            /* C.ADDI4SPN -> addi rd', x2, zimm[9:2]*/
--            gen_arith_imm(ctx, OPC_RISC_ADDI, rd_rs2, 2,
--                          GET_C_ADDI4SPN_IMM(ctx->opcode));
--        }
--        break;
--    case 1:
--        /* C.FLD -> fld rd', offset[7:3](rs1')*/
--        gen_fp_load(ctx, OPC_RISC_FLD, rd_rs2, rs1s,
--                    GET_C_LD_IMM(ctx->opcode));
--        /* C.LQ(RV128) */
--        break;
--    case 2:
--        /* C.LW -> lw rd', offset[6:2](rs1') */
--        gen_load(ctx, OPC_RISC_LW, rd_rs2, rs1s,
--                 GET_C_LW_IMM(ctx->opcode));
--        break;
-     case 3:
- #if defined(TARGET_RISCV64)
-         /* C.LD(RV64/128) -> ld rd', offset[7:3](rs1')*/
-@@ -753,21 +732,6 @@ static void decode_RV32_64C0(DisasContext *ctx)
-                     GET_C_LW_IMM(ctx->opcode));
- #endif
-         break;
--    case 4:
--        /* reserved */
--        gen_exception_illegal(ctx);
--        break;
--    case 5:
--        /* C.FSD(RV32/64) -> fsd rs2', offset[7:3](rs1') */
--        gen_fp_store(ctx, OPC_RISC_FSD, rs1s, rd_rs2,
--                     GET_C_LD_IMM(ctx->opcode));
--        /* C.SQ (RV128) */
--        break;
--    case 6:
--        /* C.SW -> sw rs2', offset[6:2](rs1')*/
--        gen_store(ctx, OPC_RISC_SW, rs1s, rd_rs2,
--                  GET_C_LW_IMM(ctx->opcode));
--        break;
-     case 7:
- #if defined(TARGET_RISCV64)
-         /* C.SD (RV64/128) -> sd rs2', offset[7:3](rs1')*/
-@@ -997,8 +961,15 @@ static void decode_RV32_64C(CPURISCVState *env, DisasContext *ctx)
-         return imm << amount;                 \
-     }
- EX_SH(1)
-+EX_SH(2)
-+EX_SH(3)
- EX_SH(12)
- 
-+static int ex_rvc_register(int reg)
-+{
-+    return 8 + reg;
-+}
-+
- bool decode_insn32(DisasContext *ctx, uint32_t insn);
- /* Include the auto-generated decoder for 32 bit insn */
- #include "decode_insn32.inc.c"
-@@ -1010,6 +981,11 @@ bool decode_insn32(DisasContext *ctx, uint32_t insn);
- #include "insn_trans/trans_rvd.inc.c"
- #include "insn_trans/trans_privileged.inc.c"
- 
-+bool decode_insn16(DisasContext *ctx, uint16_t insn);
-+/* auto-generated decoder*/
-+#include "decode_insn16.inc.c"
-+#include "insn_trans/trans_rvc.inc.c"
-+
- static void decode_RV32_64G(CPURISCVState *env, DisasContext *ctx)
- {
-     int rs1, rd;
-@@ -1043,7 +1019,10 @@ static void decode_opc(DisasContext *ctx)
-             gen_exception_illegal(ctx);
-         } else {
-             ctx->pc_succ_insn = ctx->base.pc_next + 2;
--            decode_RV32_64C(ctx->env, ctx);
-+            if (!decode_insn16(ctx, ctx->opcode)) {
-+                /* fall back to old decoder */
-+                decode_RV32_64C(ctx->env, ctx);
-+            }
-         }
-     } else {
-         ctx->pc_succ_insn = ctx->base.pc_next + 4;
+With the pcie.0 <- pcie-root-port <- virtio-net-pci setup I get
+
+  qemu-system-riscv64: -device pcie-root-port,port=0x8,chassis=1,\
+  id=pci.1,bus=pcie.0,multifunction=on,addr=0x1: MSI-X is not \
+  supported by interrupt controller
+
+just like last time, which as I mentioned is a problem for libvirt
+because we follow the recommendations outlined in qemu/docs/pcie.txt
+and never plug devices into pcie.0 directly.
+
+Even after working around that issue by manually placing the device
+at 0000:00:01.0, it still doesn't work: I see
+
+  pci 0000:00:01.0: BAR 6: assigned [mem 0x00000000-0x0003ffff pref]
+  pci 0000:00:01.0: BAR 4: assigned [mem 0x00040000-0x00043fff 64bit pref]
+  pci 0000:00:01.0: BAR 0: no space for [io  size 0x0020]
+  pci 0000:00:01.0: BAR 0: failed to assign [io  size 0x0020]
+  ...
+  virtio_net virtio3: virtio: device uses modern interface but does not have VIRTIO_F_VERSION_1
+  virtio_net: probe of virtio3 failed with error -22
+
+in dmesg and, while the device shows up in the output of lspci(8),
+it's nowhere to be seen when running 'ip addr' and friends.
+
+Let me know if you need me to try anything else :)
+
 -- 
-2.19.1
+Andrea Bolognani / Red Hat / Virtualization
 
 
