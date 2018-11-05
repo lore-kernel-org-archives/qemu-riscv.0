@@ -1,61 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gJfRT-0006HB-O6
-	for mharc-qemu-riscv@gnu.org; Mon, 05 Nov 2018 09:01:23 -0500
-Received: from eggs.gnu.org ([2001:4830:134:3::10]:46579)
+	id 1gJiPB-00050j-1n
+	for mharc-qemu-riscv@gnu.org; Mon, 05 Nov 2018 12:11:13 -0500
+Received: from eggs.gnu.org ([2001:4830:134:3::10]:34714)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <bmeng.cn@gmail.com>) id 1gJerU-0005pv-Ko
-	for qemu-riscv@nongnu.org; Mon, 05 Nov 2018 08:24:13 -0500
+	(envelope-from <kbastian@mail.uni-paderborn.de>) id 1gJiP5-0004i2-1N
+	for qemu-riscv@nongnu.org; Mon, 05 Nov 2018 12:11:10 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <bmeng.cn@gmail.com>) id 1gJerT-0005q5-J8
-	for qemu-riscv@nongnu.org; Mon, 05 Nov 2018 08:24:12 -0500
-Received: from mail-ed1-x543.google.com ([2a00:1450:4864:20::543]:39271)
-	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
-	id 1gJerQ-0005eh-Rc; Mon, 05 Nov 2018 08:24:09 -0500
-Received: by mail-ed1-x543.google.com with SMTP id w25so1558616edx.6;
-	Mon, 05 Nov 2018 05:24:07 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=z6IDsSJzetYYDRP/XEORJzg7xJJ7zAw9bg2VH87BJ44=;
-	b=d2Iz1Zfhl+IHehF0KpS75cUlf1mtlTDc1WXVhmBEEP6CugWDD3XByO1FKXz+QbOOZP
-	KhQdHMZJKrYeoWLn0JfMwDixob/8asFIaM6jTjDazsXEifM1zJrwbMB3ZBgEekHf2BEy
-	jEuHhdG1rL04MY3J+Tv5sLnbrR3tltSqXB+Yk+f/Ig868w8FMSNDyI5Y8SNt27NxBYdU
-	o+Y/jWW990E/Bwu6x2AhR7tsrC41izkRzOqWAULJx62tUkaNYhLT61uCFBAToITZyFEj
-	PJYDaJxUch79RqjBz9Hz+gwK67wP9E4yAaw7r0lqBSKj4obcghKddNpmDYpxtF0XYR6s
-	zF0w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=z6IDsSJzetYYDRP/XEORJzg7xJJ7zAw9bg2VH87BJ44=;
-	b=mew87O8mRmFKSN70U5n7rdSuKEtFYx4g15EaYvDyw8Yay6ZrOcqO+lwA/MtNRmRuR9
-	w+sBujOeet9a+p6WuPJaaToHNQcXVPx10LFkmKFQ/7sgkTAmv7farchlRgB30ZyV6nGw
-	4ebNu6HiM+4jZPaYB5HWIdSFEe4/F/ab5mbr7/q5EA5/IosNObgD8scW5FoTNv+qOCBt
-	RcN27nbKFVrYUvPh16z+rAe/9suYqv/QedIsljfut0QDi3jVBG1WHZi9OrZdIupprl1u
-	JZagmrq6kxr7wVj5EHw4EPgvRJNHjw/xIrI93ARYU3XHNDhVKuEcOJ2pyfZoN0Z02T8y
-	0fTA==
-X-Gm-Message-State: AGRZ1gKJk9DGYWLXeyUvbJkn6S1URvEyTXKNZxAnbvW+yXNQRS4x5K/e
-	lR2+6buHLK4wo5sljz7q2YKxVOPaiYj82hxsB1mU7Q==
-X-Google-Smtp-Source: AJdET5cMpuzV1jcjpT09pKjvn+yWRG56q//CSjVz+9JQXto66/+uU8c/PdhkF5pV0CsDg33Btem0YfU04jM7HwOHOt8=
-X-Received: by 2002:a17:906:340a:: with SMTP id
-	c10-v6mr14360825ejb.130.1541424246982; 
-	Mon, 05 Nov 2018 05:24:06 -0800 (PST)
+	(envelope-from <kbastian@mail.uni-paderborn.de>) id 1gJiEb-000064-KI
+	for qemu-riscv@nongnu.org; Mon, 05 Nov 2018 12:00:25 -0500
+Received: from mail.uni-paderborn.de ([131.234.142.9]:37776)
+	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.71) (envelope-from <kbastian@mail.uni-paderborn.de>)
+	id 1gJiEY-0008OH-8e; Mon, 05 Nov 2018 12:00:15 -0500
+Received: from tweenies.uni-paderborn.de ([131.234.189.21]
+	helo=localhost.localdomain)
+	by mail.uni-paderborn.de with esmtp (Exim 4.89 amazonia)
+	id 1gJiEV-0004K2-6p; Mon, 05 Nov 2018 18:00:11 +0100
+Received: from mail.uni-paderborn.de by tweenies with queue id 2941527-4;
+	Mon, 05 Nov 2018 17:00:10 GMT
+X-Envelope-From: <kbastian@mail.uni-paderborn.de>
+Received: from [131.234.87.238] by mail.uni-paderborn.de with esmtpsa
+	(TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.89 telepax)
+	id 1gJiEU-0000oA-5b; Mon, 05 Nov 2018 18:00:10 +0100
+To: Palmer Dabbelt <palmer@sifive.com>, richard.henderson@linaro.org
+Cc: qemu-riscv@nongnu.org, sagark@eecs.berkeley.edu, qemu-devel@nongnu.org,
+	peer.adelt@hni.uni-paderborn.de, Alistair Francis
+	<Alistair.Francis@wdc.com>, Michael Clark <mjc@sifive.com>
+References: <mhng-3a3dd1f0-dbed-4b43-b21f-88ecea6f5fb1@palmer-si-x1c4>
+From: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+Message-ID: <8cede3dd-e348-639e-b528-3aa87abf1aae@mail.uni-paderborn.de>
+Date: Mon, 5 Nov 2018 18:00:10 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.2.1
 MIME-Version: 1.0
-References: <cover.1540937826.git.alistair.francis@wdc.com>
-	<546aa18b75a04a281e82706ea41ee9a4a9f3e2bc.1540937826.git.alistair.francis@wdc.com>
-In-Reply-To: <546aa18b75a04a281e82706ea41ee9a4a9f3e2bc.1540937826.git.alistair.francis@wdc.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Mon, 5 Nov 2018 21:23:55 +0800
-Message-ID: <CAEUhbmVsCMLAJK3tyhuo0UGocfYOHLb-+v0z4FYyXSQi7SLsYg@mail.gmail.com>
-To: Alistair.Francis@wdc.com
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair23@gmail.com
-Content-Type: text/plain; charset="UTF-8"
+In-Reply-To: <mhng-3a3dd1f0-dbed-4b43-b21f-88ecea6f5fb1@palmer-si-x1c4>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US-large
+X-PMX-Version: 6.4.5.2775670, Antispam-Engine: 2.7.2.2107409,
+	Antispam-Data: 2018.11.5.165416, AntiVirus-Engine: 5.53.0,
+	AntiVirus-Data: 2018.10.10.5530001
+X-IMT-Spam-Score: 0.0 ()
+X-IMT-Authenticated-Sender: 
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2a00:1450:4864:20::543
-X-Mailman-Approved-At: Mon, 05 Nov 2018 09:01:22 -0500
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v6 2/5] hw/riscv/virt: Connect
- the gpex PCIe
+X-Received-From: 131.234.142.9
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v3 26/35] target/riscv: Remove
+ shift and slt insn manual decoding
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -67,165 +58,92 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Nov 2018 13:24:13 -0000
+X-List-Received-Date: Mon, 05 Nov 2018 17:11:10 -0000
 
-Hi,
 
-On Wed, Oct 31, 2018 at 6:22 AM Alistair Francis
-<Alistair.Francis@wdc.com> wrote:
+On 11/1/18 4:59 PM, Palmer Dabbelt wrote:
+> On Wed, 31 Oct 2018 15:38:08 PDT (-0700), richard.henderson@linaro.org 
+> wrote:
+>> On 10/31/18 1:20 PM, Bastian Koppelmann wrote:
+>>>  static bool trans_slt(DisasContext *ctx, arg_slt *a)
+>>>  {
+>>> -    gen_arith(ctx, OPC_RISC_SLT, a->rd, a->rs1, a->rs2);
+>>> +    TCGv source1 = tcg_temp_new();
+>>> +    TCGv source2 = tcg_temp_new();
+>>> +
+>>> +    gen_get_gpr(source1, a->rs1);
+>>> +    gen_get_gpr(source2, a->rs2);
+>>> +
+>>> +    tcg_gen_setcond_tl(TCG_COND_LT, source1, source1, source2);
+>>
+>> I do wonder about extracting this one line to gen_slt so that you can 
+>> re-use
+>> gen_arith and gen_arithi.
+>>
+>>> +    tcg_gen_setcond_tl(TCG_COND_LTU, source1, source1, source2);
+>>
+>> Similarly.
+>>
+>>>  static bool trans_sllw(DisasContext *ctx, arg_sllw *a)
+>>>  {
+>>> -    gen_arith(ctx, OPC_RISC_SLLW, a->rd, a->rs1, a->rs2);
+>>> +    TCGv source1 = tcg_temp_new();
+>>> +    TCGv source2 = tcg_temp_new();
+>>> +
+>>> +    gen_get_gpr(source1, a->rs1);
+>>> +    gen_get_gpr(source2, a->rs2);
+>>> +
+>>> +    tcg_gen_andi_tl(source2, source2, 0x1F);
+>>> +    tcg_gen_shl_tl(source1, source1, source2);
+>>> +
+>>> +    gen_set_gpr(a->rd, source1);
+>>
+>> Missing the ext32s after the shift.
+>>
+>>>  static bool trans_srlw(DisasContext *ctx, arg_srlw *a)
+>>>  {
+>>> -    gen_arith(ctx, OPC_RISC_SRLW, a->rd, a->rs1, a->rs2);
+>>> +    TCGv source1 = tcg_temp_new();
+>>> +    TCGv source2 = tcg_temp_new();
+>>> +
+>>> +    gen_get_gpr(source1, a->rs1);
+>>> +    gen_get_gpr(source2, a->rs2);
+>>> +
+>>> +    /* clear upper 32 */
+>>> +    tcg_gen_ext32u_tl(source1, source1);
+>>> +    tcg_gen_andi_tl(source2, source2, 0x1F);
+>>> +    tcg_gen_shr_tl(source1, source1, source2);
+>>
+>> Likewise.  (Consider source2 == 0.)
+>>
+>>> -    case OPC_RISC_SRL:
+>>> -        tcg_gen_andi_tl(source2, source2, TARGET_LONG_BITS - 1);
+>>> -        tcg_gen_shr_tl(source1, source1, source2);
+>>> -        break;
+>> ...
+>>> -    case OPC_RISC_SRA:
+>>> -        tcg_gen_andi_tl(source2, source2, TARGET_LONG_BITS - 1);
+>>> -        tcg_gen_sar_tl(source1, source1, source2);
+>>> -        break;
+>>
+>> I see that the bugs are in the original though, so fixing them in a 
+>> separate
+>> patch is certainly ok.
 >
-> Connect the gpex PCIe device based on the device tree included in the
-> HiFive Unleashed ROM.
->
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> ---
->  default-configs/riscv32-softmmu.mak |   6 +-
->  default-configs/riscv64-softmmu.mak |   6 +-
->  hw/riscv/virt.c                     | 111 ++++++++++++++++++++++++++++
->  include/hw/riscv/virt.h             |   8 +-
->  4 files changed, 127 insertions(+), 4 deletions(-)
->
-> diff --git a/default-configs/riscv32-softmmu.mak b/default-configs/riscv32-softmmu.mak
-> index 7937c69e22..3e3d195f37 100644
-> --- a/default-configs/riscv32-softmmu.mak
-> +++ b/default-configs/riscv32-softmmu.mak
-> @@ -1,7 +1,11 @@
->  # Default configuration for riscv-softmmu
->
-> +include pci.mak
-> +
->  CONFIG_SERIAL=y
->  CONFIG_VIRTIO_MMIO=y
-> -include virtio.mak
->
->  CONFIG_CADENCE=y
-> +
-> +CONFIG_PCI_GENERIC=y
-> +CONFIG_PCI_XILINX=y
-> diff --git a/default-configs/riscv64-softmmu.mak b/default-configs/riscv64-softmmu.mak
-> index 7937c69e22..3e3d195f37 100644
-> --- a/default-configs/riscv64-softmmu.mak
-> +++ b/default-configs/riscv64-softmmu.mak
-> @@ -1,7 +1,11 @@
->  # Default configuration for riscv-softmmu
->
-> +include pci.mak
-> +
->  CONFIG_SERIAL=y
->  CONFIG_VIRTIO_MMIO=y
-> -include virtio.mak
->
->  CONFIG_CADENCE=y
-> +
-> +CONFIG_PCI_GENERIC=y
-> +CONFIG_PCI_XILINX=y
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index 4a137a503c..2fbe58ba4b 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -39,6 +39,8 @@
->  #include "sysemu/arch_init.h"
->  #include "sysemu/device_tree.h"
->  #include "exec/address-spaces.h"
-> +#include "hw/pci/pci.h"
-> +#include "hw/pci-host/gpex.h"
->  #include "elf.h"
->
->  #include <libfdt.h>
-> @@ -55,6 +57,10 @@ static const struct MemmapEntry {
->      [VIRT_UART0] =    { 0x10000000,      0x100 },
->      [VIRT_VIRTIO] =   { 0x10001000,     0x1000 },
->      [VIRT_DRAM] =     { 0x80000000,        0x0 },
-> +    [VIRT_PCIE_MMIO] = { 0x2000000000, 0x4000000 },
+> Since we're in the soft freeze now, I think it would be great to get 
+> the bug fixes broken out as separate patches at the start of this 
+> series that we can pick up for this release.  It would be great if the 
+> decodetree conversion was a non-functional change, as that will make 
+> it easier to review.
 
-Does this work with RV32?
 
-> +    [VIRT_PCIE_PIO] = { 0x2010000, 0x40000000 },
-> +    [VIRT_PCIE_ECAM] = { 0x40000000, 0x20000000 },
-> +
->  };
->
->  static uint64_t load_kernel(const char *kernel_filename)
-> @@ -98,6 +104,37 @@ static hwaddr load_initrd(const char *filename, uint64_t mem_size,
->      return *start + size;
->  }
->
-> +#define INTERREUPT_MAP_WIDTH 7
-> +
-> +static void create_pcie_irq_map(void *fdt, char *nodename,
-> +                                uint32_t plic_phandle)
-> +{
-> +    int pin;
-> +    uint32_t full_irq_map[GPEX_NUM_IRQS * INTERREUPT_MAP_WIDTH] = { 0 };
-> +    uint32_t *irq_map = full_irq_map;
-> +
-> +        for (pin = 0; pin < GPEX_NUM_IRQS; pin++) {
-> +            int irq_nr = PCIE_IRQ + (pin % PCI_NUM_PINS);
-> +            int i;
-> +
-> +            uint32_t map[] = {
-> +                0, 0, 0,
-> +                pin + 1, plic_phandle, 0, irq_nr};
-> +
-> +            /* Convert map to big endian */
-> +            for (i = 0; i < INTERREUPT_MAP_WIDTH; i++) {
-> +                irq_map[i] = cpu_to_be32(map[i]);
-> +            }
-> +            irq_map += INTERREUPT_MAP_WIDTH;
-> +        }
-> +
-> +    qemu_fdt_setprop(fdt, nodename, "interrupt-map",
-> +                     full_irq_map, sizeof(full_irq_map));
-> +
-> +    qemu_fdt_setprop_cells(fdt, nodename, "interrupt-map-mask",
-> +                           0, 0, 0, 0x7);
-> +}
-> +
->  static void *create_fdt(RISCVVirtState *s, const struct MemmapEntry *memmap,
->      uint64_t mem_size, const char *cmdline)
->  {
-> @@ -233,6 +270,31 @@ static void *create_fdt(RISCVVirtState *s, const struct MemmapEntry *memmap,
->          g_free(nodename);
->      }
->
-> +    nodename = g_strdup_printf("/pci@%lx",
-> +        (long) memmap[VIRT_PCIE_MMIO].base);
-> +    qemu_fdt_add_subnode(fdt, nodename);
-> +    qemu_fdt_setprop_cells(fdt, nodename, "#address-cells", 0x3);
-> +    qemu_fdt_setprop_cells(fdt, nodename, "#interrupt-cells", 0x1);
-> +    qemu_fdt_setprop_cells(fdt, nodename, "#size-cells", 0x2);
-> +    qemu_fdt_setprop_string(fdt, nodename, "compatible",
-> +                            "pci-host-ecam-generic");
-> +    qemu_fdt_setprop_string(fdt, nodename, "device_type", "pci");
-> +    qemu_fdt_setprop_cell(fdt, nodename, "linux,pci-domain", 0);
-> +    qemu_fdt_setprop_cells(fdt, nodename, "bus-range", 0,
-> +                           memmap[VIRT_PCIE_ECAM].base /
-> +                               PCIE_MMCFG_SIZE_MIN - 1);
-> +    qemu_fdt_setprop(fdt, nodename, "dma-coherent", NULL, 0);
-> +    qemu_fdt_setprop_cells(fdt, nodename, "reg", 0x20, 0,
-> +                           0, memmap[VIRT_PCIE_ECAM].size);
-> +    qemu_fdt_setprop_cells(fdt, nodename, "ranges",
-> +                           memmap[VIRT_PCIE_PIO].base,
-> +                               0, memmap[VIRT_PCIE_PIO].size,
-> +                           0, memmap[VIRT_PCIE_MMIO].base,
-> +                               0, memmap[VIRT_PCIE_MMIO].size);
+Sounds good. Unfortunately, I don't have much time right now. I try at 
+least to extract the bugfixes, such that they make it for this release.
 
-This does not conform with the PCI bus ranges encoding.
 
-> +    qemu_fdt_setprop_cells(fdt, nodename, "interrupt-parent", plic_phandle);
-> +    qemu_fdt_setprop_cells(fdt, nodename, "interrupts", PCIE_IRQ);
-> +    create_pcie_irq_map(fdt, nodename, plic_phandle);
-> +
->      nodename = g_strdup_printf("/test@%lx",
->          (long)memmap[VIRT_TEST].base);
->      qemu_fdt_add_subnode(fdt, nodename);
-> @@ -262,6 +324,47 @@ static void *create_fdt(RISCVVirtState *s, const struct MemmapEntry *memmap,
->      return fdt;
->  }
->
+Cheers,
 
-[snip]
+Bastian
 
-Regards,
-Bin
+
 
