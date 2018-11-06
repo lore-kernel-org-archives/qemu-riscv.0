@@ -1,113 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gJkso-0006jw-OU
-	for mharc-qemu-riscv@gnu.org; Mon, 05 Nov 2018 14:49:58 -0500
-Received: from eggs.gnu.org ([2001:4830:134:3::10]:36060)
+	id 1gJv7b-0007gB-79
+	for mharc-qemu-riscv@gnu.org; Tue, 06 Nov 2018 01:45:55 -0500
+Received: from eggs.gnu.org ([2001:4830:134:3::10]:41057)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <prvs=840391f99=Alistair.Francis@wdc.com>)
-	id 1gJksm-0006jm-6B
-	for qemu-riscv@nongnu.org; Mon, 05 Nov 2018 14:49:56 -0500
+	(envelope-from <bmeng.cn@gmail.com>) id 1gJv7Y-0007ec-Qc
+	for qemu-riscv@nongnu.org; Tue, 06 Nov 2018 01:45:53 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <prvs=840391f99=Alistair.Francis@wdc.com>)
-	id 1gJksi-0005Pv-0q
-	for qemu-riscv@nongnu.org; Mon, 05 Nov 2018 14:49:56 -0500
-Received: from esa3.hgst.iphmx.com ([216.71.153.141]:7601)
-	by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.71) (envelope-from <prvs=840391f99=Alistair.Francis@wdc.com>)
-	id 1gJknm-0008Pw-DT; Mon, 05 Nov 2018 14:44:46 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-	d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
-	t=1541447087; x=1572983087;
-	h=from:to:cc:subject:date:message-id:
-	content-transfer-encoding:mime-version;
-	bh=wcCo1w+FOLtY/YdI0yAMAdQeRe4QDWDpCb30Lkzcx9I=;
-	b=L3jWPivf/T2oLXPN6kOYoDANWPKQL9DafyLk/i9CxqEfDK+Kbqv8oX86
-	ldswTSkiRswBmTmGYTtAQOaElFvM4MQDkcLzUfIUJPPNdJpQf4ZuXnZ+3
-	O8JliIiPXVCtibsVJ8CIM9bbxMgToM/Ot59V5ZsRr8xxQUBHFtbwT1DVj
-	2OpgRyru5H0SMtj6zmj38mlju4sqIJd5e/EyrgAsHW0h/LONyXxxrENHk
-	Rwf9tnEPwvWvqfsyAUp3rkw64BTjxl9mEx3hkTzLRJ6y4MaBnvlo4FVSm
-	O6evWlIq1Bp98pKpSvcoaRqClA7+EqVMEgP09C3882ge7RFkhiLvgKI28 Q==;
-X-IronPort-AV: E=Sophos;i="5.54,469,1534780800"; d="scan'208";a="98298225"
-Received: from mail-by2nam01lp0175.outbound.protection.outlook.com (HELO
-	NAM01-BY2-obe.outbound.protection.outlook.com) ([216.32.181.175])
-	by ob1.hgst.iphmx.com with ESMTP; 06 Nov 2018 03:44:44 +0800
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=sharedspace.onmicrosoft.com; s=selector1-wdc-com;
-	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=eG8QjnZy1SlKGbhuHK+mfM/JPgUmjXdkujKEPuWgqs0=;
-	b=alNNSCLIJFnKgXTKxPQG6OADYPb/wqqdZLz4tRc1kXa03FCfxVXoVhSjBp7hVp3WupFvGtbPxVwywGU8eAtl9kQNJGPGrD00x9XAGq3IrPeFwcwReTo7NGbfeSCx2sBK8pfMHhERVyt1H+A2J1MJW9C6WFgipWLHOzTLzzrl2Ys=
-Received: from MWHPR04MB0401.namprd04.prod.outlook.com (10.173.48.18) by
-	MWHPR04MB0176.namprd04.prod.outlook.com (10.169.201.137) with Microsoft
-	SMTP
-	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
-	15.20.1294.20; Mon, 5 Nov 2018 19:44:41 +0000
-Received: from MWHPR04MB0401.namprd04.prod.outlook.com
-	([fe80::4853:2cc0:27bc:a62e]) by
-	MWHPR04MB0401.namprd04.prod.outlook.com
-	([fe80::4853:2cc0:27bc:a62e%12]) with mapi id 15.20.1294.032;
-	Mon, 5 Nov 2018 19:44:41 +0000
-From: Alistair Francis <Alistair.Francis@wdc.com>
-To: "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, "qemu-riscv@nongnu.org"
-	<qemu-riscv@nongnu.org>
-CC: Alistair Francis <Alistair.Francis@wdc.com>, "alistair23@gmail.com"
-	<alistair23@gmail.com>,
-	"peter.maydell@linaro.org" <peter.maydell@linaro.org>
-Thread-Topic: [PATCH v1 1/1] riscv: spike: Fix memory leak in the board init
-Thread-Index: AQHUdT/+qr8tNb6Ww0CZXOwi6ierQg==
-Date: Mon, 5 Nov 2018 19:44:41 +0000
-Message-ID: <3988cd7b9d292017537f75c2eed70295a3a84718.1541447021.git.alistair.francis@wdc.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-mailer: git-send-email 2.19.1
-x-clientproxiedby: BYAPR07CA0078.namprd07.prod.outlook.com
-	(2603:10b6:a03:12b::19) To MWHPR04MB0401.namprd04.prod.outlook.com
-	(2603:10b6:300:70::18)
-authentication-results: spf=none (sender IP is )
-	smtp.mailfrom=Alistair.Francis@wdc.com; 
-x-ms-exchange-messagesentrepresentingtype: 1
-x-originating-ip: [199.255.44.250]
-x-ms-publictraffictype: Email
-x-microsoft-exchange-diagnostics: 1; MWHPR04MB0176;
-	6:my3VCMtkKXXlQ1K8dYm6DDOCQgk095u5FhCSqifswiM0F0XIMGfyWcRu0a9csphN2Py/BA8DmKfcCAJam/+fULGrrGJzsQTQBaNA3VLQLKgooUCBLmdQQjFRMFWqSF696b9PwBAOwE1M3pIfJB5N0L/BCx3q4uYh+1+MdU851gxNRPC1rDIiudvcb2GiImnhBu7poovO4mcZBM4ZA7yAlT3PjqJsLC2Z4TwmLtBPRLrTWrLJeqF69amazCl2GxV/tIdcT7m7YWNk8F7QILBM3gOunYP8FrZKaygoNbHqndidzzyjgBow/NNkAAPJ0Ujrj0EbTq96FKi4pMm7Cmf2JTHQYD4YPtcfLShXKIica0Z4uXkEBuTjgKhszt8qvx5gx80VowsvItWtFeJAL0KMCepaG2T4JADz/MjINjxQP5dM9stJUIzy8IcUbwFOLcg3FfKRGhCEf2qt+38AtDx5Zg==;
-	5:Siwy2KP5jKT/ufttWH/yqzkqjoJm11PWo3TggAKtsFjMm+gTsnWB/C1QZRe9TncmiXHoF/ZrM9UdwKtY7UA1I7TrBiuxnptvzFdmXxG/Z5Xa6fiFSwg3zXxxqHKpBQlQ3bJRHL4gC1bwZS7bHjjRZuodlLWoTOyw4zAdQIlUgPE=;
-	7:CxU2pEoWqH51gne+SBuoqxeyjVLxFPOguYVqRfx+/Pb/HeX/9aUzQf7AfPItxxHBZK2Z7Vd/tkpIqalOJkS0BgU3GwG99xrKBXOGqfnA3rpMyOyVybFM+VHrnyBZl2W+Hnua39HnSEtmnjVE9E7yCg==
-x-ms-office365-filtering-correlation-id: f6adb1a6-5629-4ec6-d29d-08d6435720af
-x-ms-office365-filtering-ht: Tenant
-x-microsoft-antispam: BCL:0; PCL:0;
-	RULEID:(7020095)(4652040)(8989299)(5600074)(711020)(4618075)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(2017052603328)(7153060)(7193020);
-	SRVR:MWHPR04MB0176; 
-x-ms-traffictypediagnostic: MWHPR04MB0176:
-wdcipoutbound: EOP-TRUE
-x-microsoft-antispam-prvs: <MWHPR04MB0176C0A803C51592D91DE4C590CA0@MWHPR04MB0176.namprd04.prod.outlook.com>
-x-exchange-antispam-report-test: UriScan:;
-x-ms-exchange-senderadcheck: 1
-x-exchange-antispam-report-cfa-test: BCL:0; PCL:0;
-	RULEID:(8211001083)(6040522)(2401047)(5005006)(8121501046)(93006095)(93001095)(3231382)(944501410)(52105095)(10201501046)(3002001)(6055026)(148016)(149066)(150057)(6041310)(20161123558120)(201703131423095)(201702281528075)(20161123555045)(201703061421075)(201703061406153)(20161123560045)(20161123564045)(20161123562045)(201708071742011)(7699051)(76991095);
-	SRVR:MWHPR04MB0176; BCL:0; PCL:0; RULEID:; SRVR:MWHPR04MB0176; 
-x-forefront-prvs: 08476BC6EF
-x-forefront-antispam-report: SFV:NSPM;
-	SFS:(10019020)(39860400002)(376002)(346002)(396003)(366004)(136003)(199004)(189003)(25786009)(106356001)(256004)(186003)(305945005)(7736002)(99286004)(71200400001)(26005)(36756003)(478600001)(5660300001)(71190400001)(6486002)(50226002)(316002)(2501003)(118296001)(39060400002)(476003)(2616005)(44832011)(97736004)(4326008)(6436002)(486006)(8676002)(66066001)(81156014)(6512007)(102836004)(52116002)(72206003)(81166006)(86362001)(8936002)(68736007)(54906003)(110136005)(105586002)(386003)(6506007)(2900100001)(14454004)(3846002)(2906002)(53936002)(6116002);
-	DIR:OUT; SFP:1102; SCL:1; SRVR:MWHPR04MB0176;
-	H:MWHPR04MB0401.namprd04.prod.outlook.com; FPR:; SPF:None;
-	LANG:en; PTR:InfoNoRecords; A:1; MX:1; 
-x-microsoft-antispam-message-info: pM9ImzQf8dsFsL9v8jw4uXPG940sCr0bIp3bjZPqFwNthQmIYbd9anDyS0m8cBoaBIEhYECe8G8JUelDl9VoJHgAfi65sUFCivTrnxWP7/zVtWBm3cvKo6o+b8i97tRZslhKrNFPHpPA89H9pKdJR+NheZD+KjMoiksha+JBuEbaVxqKbdiryqr5ZGtn+ZiecAFjvf8pI5Ro0lozdovhprlrfBKf6/k3q4Lod4HufrMwEj9IgQs14co9Bl+3IWun18m9fm1YVKAjzqkzQeFYt6KkteVShxGa7q9n40bfHkKr2FGkFRnmiyWSLdAIZdL0FuutVQA+7PT4XXdgJ5IpsT27gA7CFKgU3lC1amsrYAQ=
-spamdiagnosticoutput: 1:99
-spamdiagnosticmetadata: NSPM
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+	(envelope-from <bmeng.cn@gmail.com>) id 1gJv7X-0000pd-LD
+	for qemu-riscv@nongnu.org; Tue, 06 Nov 2018 01:45:52 -0500
+Received: from mail-ed1-x541.google.com ([2a00:1450:4864:20::541]:36004)
+	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+	(Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
+	id 1gJv7U-0000a7-QE; Tue, 06 Nov 2018 01:45:49 -0500
+Received: by mail-ed1-x541.google.com with SMTP id x2-v6so9565725eds.3;
+	Mon, 05 Nov 2018 22:45:48 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=06P2hEBk4Dm2ECxJGHSXbfNT3gSE/WIdGJfTFEfDirM=;
+	b=IRYtKBfvUOyXdUXy0uhNtFOq76ch1TIcpCEtr4rWgrktPQnZA3eIvwTFZX/mu9N+PL
+	vhhRpc462tKyWpg70ysm5nH1tbCz8ILVkMZvXALCt9UcHp3e5DTSDdlD76Ge/BJ9hlqb
+	N2PDP4NXaMKNSY71iFnL8Mqn+wctPo72GfIVH9KMEKzZ2NKWIT54qcuEQA79hZQGVjq/
+	Dd95ZzIU0Eudhd6E9J99EcoXcoEAz2uLZC+UfOEN7kJ5sHbjK80syJUkRBH/E2UwiPho
+	wwo3ITv+sV1u0uUCUM5ECk37HkYm7pajI16Nec4M/HprL46AOmNN2XhRDNSip1bd6wnR
+	DXrg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=06P2hEBk4Dm2ECxJGHSXbfNT3gSE/WIdGJfTFEfDirM=;
+	b=TlocR4asfG2YpTmWwNAqHH8HIcMRgcxqDqkxcp5zoVWAIdpucJ3WLCWFlkFRJAgjhL
+	hLganEBSbhmytlk4T5pbyAYmWdoHcuIdvcrs4p7SN2iWzohw4NgB/9e59SPV0nyQMnWp
+	byZEX5ZKqCUZQAtuwCYtZ8FkGRot1/We3GEmiBrqka4cOe0tpMnarl1Z6D065JocwXlF
+	vNvuMqUzTcUPCLJeKcp4hpH4L9q43fkDbru1NcDrMLuUDzP0RWUbw7nd7t/KB9W4cdFH
+	YZnhmWnym+9tbpodfHcvFTYLajkuhL580x1INkCxaDrmEq+qwEx/KzB/z7DS2KzaDHUe
+	1g5A==
+X-Gm-Message-State: AGRZ1gLUfv+mLYk8Uh36iUIjcFVM9MxsxuDdJT+JKdDOH9TZP0NInlF+
+	Rhh46c3HTgooL4Mq5qpO1yU4QMk72sUO0BLkJCwo3ioO
+X-Google-Smtp-Source: AJdET5fiYPY/4StwqyziIjZ+1+Zb7XiTKIgk5GZWmHCZBdpMJmXh7K+lVReQgvbZ8o9UTtFiaUmXKEigsec63Y8sKWk=
+X-Received: by 2002:a50:fc17:: with SMTP id
+	i23-v6mr12629571edr.153.1541486747157; 
+	Mon, 05 Nov 2018 22:45:47 -0800 (PST)
 MIME-Version: 1.0
-X-OriginatorOrg: wdc.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: f6adb1a6-5629-4ec6-d29d-08d6435720af
-X-MS-Exchange-CrossTenant-originalarrivaltime: 05 Nov 2018 19:44:41.6399 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MWHPR04MB0176
+References: <cover.1540937826.git.alistair.francis@wdc.com>
+	<546aa18b75a04a281e82706ea41ee9a4a9f3e2bc.1540937826.git.alistair.francis@wdc.com>
+	<CAEUhbmVsCMLAJK3tyhuo0UGocfYOHLb-+v0z4FYyXSQi7SLsYg@mail.gmail.com>
+	<CAKmqyKNJqsAWkwrPW17iz9MgGEm2d+8szNRKWoHyuoxWebfx=g@mail.gmail.com>
+In-Reply-To: <CAKmqyKNJqsAWkwrPW17iz9MgGEm2d+8szNRKWoHyuoxWebfx=g@mail.gmail.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Tue, 6 Nov 2018 14:45:36 +0800
+Message-ID: <CAEUhbmXSx0yz9Osqc-o2TbqQTAzF+LPwb7-A5FruYv-UZnU0+w@mail.gmail.com>
+To: alistair23@gmail.com
+Cc: Alistair.Francis@wdc.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 216.71.153.141
-Subject: [Qemu-riscv] [PATCH v1 1/1] riscv: spike: Fix memory leak in the
- board init
+X-Received-From: 2a00:1450:4864:20::541
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v6 2/5] hw/riscv/virt: Connect
+ the gpex PCIe
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -119,46 +68,182 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Nov 2018 19:49:57 -0000
+X-List-Received-Date: Tue, 06 Nov 2018 06:45:54 -0000
 
-Coverity caught a malloc() call that was never freed. This patch ensures
-that we free the memory but also updates the allocation to use
-g_strdup_printf() instead of malloc().
+Hi Alistair,
 
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-Suggested-by: Peter Maydell <peter.maydell@linaro.org>
----
- hw/riscv/spike.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+On Tue, Nov 6, 2018 at 3:47 AM Alistair Francis <alistair23@gmail.com> wrote:
+>
+> On Mon, Nov 5, 2018 at 5:24 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+> >
+> > Hi,
+> >
+> > On Wed, Oct 31, 2018 at 6:22 AM Alistair Francis
+> > <Alistair.Francis@wdc.com> wrote:
+> > >
+> > > Connect the gpex PCIe device based on the device tree included in the
+> > > HiFive Unleashed ROM.
+> > >
+> > > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> > > ---
+> > >  default-configs/riscv32-softmmu.mak |   6 +-
+> > >  default-configs/riscv64-softmmu.mak |   6 +-
+> > >  hw/riscv/virt.c                     | 111 ++++++++++++++++++++++++++++
+> > >  include/hw/riscv/virt.h             |   8 +-
+> > >  4 files changed, 127 insertions(+), 4 deletions(-)
+> > >
+> > > diff --git a/default-configs/riscv32-softmmu.mak b/default-configs/riscv32-softmmu.mak
+> > > index 7937c69e22..3e3d195f37 100644
+> > > --- a/default-configs/riscv32-softmmu.mak
+> > > +++ b/default-configs/riscv32-softmmu.mak
+> > > @@ -1,7 +1,11 @@
+> > >  # Default configuration for riscv-softmmu
+> > >
+> > > +include pci.mak
+> > > +
+> > >  CONFIG_SERIAL=y
+> > >  CONFIG_VIRTIO_MMIO=y
+> > > -include virtio.mak
+> > >
+> > >  CONFIG_CADENCE=y
+> > > +
+> > > +CONFIG_PCI_GENERIC=y
+> > > +CONFIG_PCI_XILINX=y
+> > > diff --git a/default-configs/riscv64-softmmu.mak b/default-configs/riscv64-softmmu.mak
+> > > index 7937c69e22..3e3d195f37 100644
+> > > --- a/default-configs/riscv64-softmmu.mak
+> > > +++ b/default-configs/riscv64-softmmu.mak
+> > > @@ -1,7 +1,11 @@
+> > >  # Default configuration for riscv-softmmu
+> > >
+> > > +include pci.mak
+> > > +
+> > >  CONFIG_SERIAL=y
+> > >  CONFIG_VIRTIO_MMIO=y
+> > > -include virtio.mak
+> > >
+> > >  CONFIG_CADENCE=y
+> > > +
+> > > +CONFIG_PCI_GENERIC=y
+> > > +CONFIG_PCI_XILINX=y
+> > > diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> > > index 4a137a503c..2fbe58ba4b 100644
+> > > --- a/hw/riscv/virt.c
+> > > +++ b/hw/riscv/virt.c
+> > > @@ -39,6 +39,8 @@
+> > >  #include "sysemu/arch_init.h"
+> > >  #include "sysemu/device_tree.h"
+> > >  #include "exec/address-spaces.h"
+> > > +#include "hw/pci/pci.h"
+> > > +#include "hw/pci-host/gpex.h"
+> > >  #include "elf.h"
+> > >
+> > >  #include <libfdt.h>
+> > > @@ -55,6 +57,10 @@ static const struct MemmapEntry {
+> > >      [VIRT_UART0] =    { 0x10000000,      0x100 },
+> > >      [VIRT_VIRTIO] =   { 0x10001000,     0x1000 },
+> > >      [VIRT_DRAM] =     { 0x80000000,        0x0 },
+> > > +    [VIRT_PCIE_MMIO] = { 0x2000000000, 0x4000000 },
+> >
+> > Does this work with RV32?
+>
+> That's a good point, probably not. This is based on the HiFive
+> unleashed values to be as similar as possible.
+>
 
-diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
-index 8a712ed490..268df04c3c 100644
---- a/hw/riscv/spike.c
-+++ b/hw/riscv/spike.c
-@@ -316,9 +316,7 @@ static void spike_v1_09_1_board_init(MachineState *mach=
-ine)
-=20
-     /* build config string with supplied memory size */
-     char *isa =3D riscv_isa_string(&s->soc.harts[0]);
--    size_t config_string_size =3D strlen(config_string_tmpl) + 48;
--    char *config_string =3D malloc(config_string_size);
--    snprintf(config_string, config_string_size, config_string_tmpl,
-+    char *config_string =3D g_strdup_printf(config_string_tmpl,
-         (uint64_t)memmap[SPIKE_CLINT].base + SIFIVE_TIME_BASE,
-         (uint64_t)memmap[SPIKE_DRAM].base,
-         (uint64_t)ram_size, isa,
-@@ -345,6 +343,8 @@ static void spike_v1_09_1_board_init(MachineState *mach=
-ine)
-     /* Core Local Interruptor (timer and IPI) */
-     sifive_clint_create(memmap[SPIKE_CLINT].base, memmap[SPIKE_CLINT].size=
-,
-         smp_cpus, SIFIVE_SIP_BASE, SIFIVE_TIMECMP_BASE, SIFIVE_TIME_BASE);
-+
-+    g_free(config_string);
- }
-=20
- static void spike_v1_09_1_machine_init(MachineClass *mc)
---=20
-2.19.1
+Please specifying a 32-bit address to make it work for both 32-bit and 64-bit.
 
+> >
+> > > +    [VIRT_PCIE_PIO] = { 0x2010000, 0x40000000 },
+> > > +    [VIRT_PCIE_ECAM] = { 0x40000000, 0x20000000 },
+
+Forgot to mention: the maximum size of ECAM is 0x10000000 by spec.
+
+> > > +
+> > >  };
+> > >
+> > >  static uint64_t load_kernel(const char *kernel_filename)
+> > > @@ -98,6 +104,37 @@ static hwaddr load_initrd(const char *filename, uint64_t mem_size,
+> > >      return *start + size;
+> > >  }
+> > >
+> > > +#define INTERREUPT_MAP_WIDTH 7
+> > > +
+> > > +static void create_pcie_irq_map(void *fdt, char *nodename,
+> > > +                                uint32_t plic_phandle)
+> > > +{
+> > > +    int pin;
+> > > +    uint32_t full_irq_map[GPEX_NUM_IRQS * INTERREUPT_MAP_WIDTH] = { 0 };
+> > > +    uint32_t *irq_map = full_irq_map;
+> > > +
+> > > +        for (pin = 0; pin < GPEX_NUM_IRQS; pin++) {
+> > > +            int irq_nr = PCIE_IRQ + (pin % PCI_NUM_PINS);
+> > > +            int i;
+> > > +
+> > > +            uint32_t map[] = {
+> > > +                0, 0, 0,
+> > > +                pin + 1, plic_phandle, 0, irq_nr};
+> > > +
+> > > +            /* Convert map to big endian */
+> > > +            for (i = 0; i < INTERREUPT_MAP_WIDTH; i++) {
+> > > +                irq_map[i] = cpu_to_be32(map[i]);
+> > > +            }
+> > > +            irq_map += INTERREUPT_MAP_WIDTH;
+> > > +        }
+> > > +
+> > > +    qemu_fdt_setprop(fdt, nodename, "interrupt-map",
+> > > +                     full_irq_map, sizeof(full_irq_map));
+> > > +
+> > > +    qemu_fdt_setprop_cells(fdt, nodename, "interrupt-map-mask",
+> > > +                           0, 0, 0, 0x7);
+> > > +}
+> > > +
+> > >  static void *create_fdt(RISCVVirtState *s, const struct MemmapEntry *memmap,
+> > >      uint64_t mem_size, const char *cmdline)
+> > >  {
+> > > @@ -233,6 +270,31 @@ static void *create_fdt(RISCVVirtState *s, const struct MemmapEntry *memmap,
+> > >          g_free(nodename);
+> > >      }
+> > >
+> > > +    nodename = g_strdup_printf("/pci@%lx",
+> > > +        (long) memmap[VIRT_PCIE_MMIO].base);
+> > > +    qemu_fdt_add_subnode(fdt, nodename);
+> > > +    qemu_fdt_setprop_cells(fdt, nodename, "#address-cells", 0x3);
+> > > +    qemu_fdt_setprop_cells(fdt, nodename, "#interrupt-cells", 0x1);
+> > > +    qemu_fdt_setprop_cells(fdt, nodename, "#size-cells", 0x2);
+> > > +    qemu_fdt_setprop_string(fdt, nodename, "compatible",
+> > > +                            "pci-host-ecam-generic");
+> > > +    qemu_fdt_setprop_string(fdt, nodename, "device_type", "pci");
+> > > +    qemu_fdt_setprop_cell(fdt, nodename, "linux,pci-domain", 0);
+> > > +    qemu_fdt_setprop_cells(fdt, nodename, "bus-range", 0,
+> > > +                           memmap[VIRT_PCIE_ECAM].base /
+> > > +                               PCIE_MMCFG_SIZE_MIN - 1);
+> > > +    qemu_fdt_setprop(fdt, nodename, "dma-coherent", NULL, 0);
+> > > +    qemu_fdt_setprop_cells(fdt, nodename, "reg", 0x20, 0,
+> > > +                           0, memmap[VIRT_PCIE_ECAM].size);
+> > > +    qemu_fdt_setprop_cells(fdt, nodename, "ranges",
+> > > +                           memmap[VIRT_PCIE_PIO].base,
+> > > +                               0, memmap[VIRT_PCIE_PIO].size,
+> > > +                           0, memmap[VIRT_PCIE_MMIO].base,
+> > > +                               0, memmap[VIRT_PCIE_MMIO].size);
+> >
+> > This does not conform with the PCI bus ranges encoding.
+>
+> Do you know what should?
+>
+> I have tried so many different combinations here and nothing seems to work.
+>
+
+    qemu_fdt_setprop_sized_cells(fdt, nodename, "ranges",
+        1, FDT_PCI_RANGE_IOPORT, 2, 0,
+        2, memmap[VIRT_PCIE_PIO].base, 2, memmap[VIRT_PCIE_PIO].size,
+        1, FDT_PCI_RANGE_MMIO_64BIT,
+        2, memmap[VIRT_PCIE_MMIO].base,
+        2, memmap[VIRT_PCIE_MMIO].base, 2, memmap[VIRT_PCIE_MMIO].size);
+
+Note if we are using 32-bit address for the MMIO,
+FDT_PCI_RANGE_MMIO_64BIT should be FDT_PCI_RANGE_MMIO.
+
+Regards,
+Bin
 
