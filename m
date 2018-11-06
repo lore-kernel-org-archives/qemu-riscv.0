@@ -1,62 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gJv7b-0007gB-79
-	for mharc-qemu-riscv@gnu.org; Tue, 06 Nov 2018 01:45:55 -0500
-Received: from eggs.gnu.org ([2001:4830:134:3::10]:41057)
+	id 1gK1Pt-0001ra-8W
+	for mharc-qemu-riscv@gnu.org; Tue, 06 Nov 2018 08:29:13 -0500
+Received: from eggs.gnu.org ([2001:4830:134:3::10]:34497)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <bmeng.cn@gmail.com>) id 1gJv7Y-0007ec-Qc
-	for qemu-riscv@nongnu.org; Tue, 06 Nov 2018 01:45:53 -0500
+	(envelope-from <peter.maydell@linaro.org>) id 1gK1Pp-0001lw-Qd
+	for qemu-riscv@nongnu.org; Tue, 06 Nov 2018 08:29:10 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <bmeng.cn@gmail.com>) id 1gJv7X-0000pd-LD
-	for qemu-riscv@nongnu.org; Tue, 06 Nov 2018 01:45:52 -0500
-Received: from mail-ed1-x541.google.com ([2a00:1450:4864:20::541]:36004)
+	(envelope-from <peter.maydell@linaro.org>) id 1gK1N2-0002hl-0x
+	for qemu-riscv@nongnu.org; Tue, 06 Nov 2018 08:26:17 -0500
+Received: from mail-ot1-x342.google.com ([2607:f8b0:4864:20::342]:46909)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
-	id 1gJv7U-0000a7-QE; Tue, 06 Nov 2018 01:45:49 -0500
-Received: by mail-ed1-x541.google.com with SMTP id x2-v6so9565725eds.3;
-	Mon, 05 Nov 2018 22:45:48 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=06P2hEBk4Dm2ECxJGHSXbfNT3gSE/WIdGJfTFEfDirM=;
-	b=IRYtKBfvUOyXdUXy0uhNtFOq76ch1TIcpCEtr4rWgrktPQnZA3eIvwTFZX/mu9N+PL
-	vhhRpc462tKyWpg70ysm5nH1tbCz8ILVkMZvXALCt9UcHp3e5DTSDdlD76Ge/BJ9hlqb
-	N2PDP4NXaMKNSY71iFnL8Mqn+wctPo72GfIVH9KMEKzZ2NKWIT54qcuEQA79hZQGVjq/
-	Dd95ZzIU0Eudhd6E9J99EcoXcoEAz2uLZC+UfOEN7kJ5sHbjK80syJUkRBH/E2UwiPho
-	wwo3ITv+sV1u0uUCUM5ECk37HkYm7pajI16Nec4M/HprL46AOmNN2XhRDNSip1bd6wnR
-	DXrg==
+	(Exim 4.71) (envelope-from <peter.maydell@linaro.org>)
+	id 1gK1N1-0002gK-Og
+	for qemu-riscv@nongnu.org; Tue, 06 Nov 2018 08:26:15 -0500
+Received: by mail-ot1-x342.google.com with SMTP id q5so11318865otl.13
+	for <qemu-riscv@nongnu.org>; Tue, 06 Nov 2018 05:26:14 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=KrLnON23Uwf1eBXvFB16yr65JWsIbqrjXGCwqyjcYTM=;
+	b=jd+iohxaP2e3Gnv6oi5WcQQyE+DaVyo0KO/ce7FSj0XArzmEeiLEJP8kaIlY6MbfCT
+	qnc3aFgFMKKCU/hmrkptSlMzXPjsje7+5Q5vWGinFOLrgPI1O5gfDecXEKHq+f+Y4H6i
+	ERs/Q37NUvg+DoWG00w0tq9+4SK1gFjlFtpoQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=06P2hEBk4Dm2ECxJGHSXbfNT3gSE/WIdGJfTFEfDirM=;
-	b=TlocR4asfG2YpTmWwNAqHH8HIcMRgcxqDqkxcp5zoVWAIdpucJ3WLCWFlkFRJAgjhL
-	hLganEBSbhmytlk4T5pbyAYmWdoHcuIdvcrs4p7SN2iWzohw4NgB/9e59SPV0nyQMnWp
-	byZEX5ZKqCUZQAtuwCYtZ8FkGRot1/We3GEmiBrqka4cOe0tpMnarl1Z6D065JocwXlF
-	vNvuMqUzTcUPCLJeKcp4hpH4L9q43fkDbru1NcDrMLuUDzP0RWUbw7nd7t/KB9W4cdFH
-	YZnhmWnym+9tbpodfHcvFTYLajkuhL580x1INkCxaDrmEq+qwEx/KzB/z7DS2KzaDHUe
-	1g5A==
-X-Gm-Message-State: AGRZ1gLUfv+mLYk8Uh36iUIjcFVM9MxsxuDdJT+JKdDOH9TZP0NInlF+
-	Rhh46c3HTgooL4Mq5qpO1yU4QMk72sUO0BLkJCwo3ioO
-X-Google-Smtp-Source: AJdET5fiYPY/4StwqyziIjZ+1+Zb7XiTKIgk5GZWmHCZBdpMJmXh7K+lVReQgvbZ8o9UTtFiaUmXKEigsec63Y8sKWk=
-X-Received: by 2002:a50:fc17:: with SMTP id
-	i23-v6mr12629571edr.153.1541486747157; 
-	Mon, 05 Nov 2018 22:45:47 -0800 (PST)
+	bh=KrLnON23Uwf1eBXvFB16yr65JWsIbqrjXGCwqyjcYTM=;
+	b=BM0/o07rrwCOMDCQ+lhbzXOttaJRRJc3byXeDgTz9vTTJxTDOxypwEmCR/9AlOijbX
+	WQSSGOHDPLk5zIGej4bHDibInZxRJgCu6pzi6voqu82Dy/EZbui7LGeDwDxrufYYjjSV
+	nKvSSVX/HVWBZXW5Ke43W3AM8JzFVRnVR75qAMj3BcXnOPIwweG6c9HDXgpsehiHNNx6
+	chugJOx4iM7KXhX0GS2AicLQomTKRy3qIpxnESmzrasgLSkyg/1fugEjoKWIyGYTKxxl
+	J3TVUZr8syBye/7hp+Em2cSeXyn1+iFKuOw1v0Z98OohATi3Fm/e5/C48PMal/Tpn/AV
+	/2aw==
+X-Gm-Message-State: AGRZ1gKu8PVIj43/Rpmci9FBaWyg2RqiWroWDEMSwVeux/v1Z6p26AId
+	I1EKlHWFr6qz670mS8ywUCRa9VJ9/XJWaGb8oVI0ow==
+X-Google-Smtp-Source: AJdET5deIe1hhSdv8MEVw+NXFBz83b5X38VHYaSY+b+vfgMH2dIbb/zobq5uOB1iT5qAv0jNNnjfoHtSa4s/3R906uQ=
+X-Received: by 2002:a9d:5a81:: with SMTP id w1mr688754oth.317.1541510773576;
+	Tue, 06 Nov 2018 05:26:13 -0800 (PST)
 MIME-Version: 1.0
-References: <cover.1540937826.git.alistair.francis@wdc.com>
-	<546aa18b75a04a281e82706ea41ee9a4a9f3e2bc.1540937826.git.alistair.francis@wdc.com>
-	<CAEUhbmVsCMLAJK3tyhuo0UGocfYOHLb-+v0z4FYyXSQi7SLsYg@mail.gmail.com>
-	<CAKmqyKNJqsAWkwrPW17iz9MgGEm2d+8szNRKWoHyuoxWebfx=g@mail.gmail.com>
-In-Reply-To: <CAKmqyKNJqsAWkwrPW17iz9MgGEm2d+8szNRKWoHyuoxWebfx=g@mail.gmail.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Tue, 6 Nov 2018 14:45:36 +0800
-Message-ID: <CAEUhbmXSx0yz9Osqc-o2TbqQTAzF+LPwb7-A5FruYv-UZnU0+w@mail.gmail.com>
-To: alistair23@gmail.com
-Cc: Alistair.Francis@wdc.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+Received: by 2002:a9d:4b0e:0:0:0:0:0 with HTTP;
+	Tue, 6 Nov 2018 05:25:53 -0800 (PST)
+In-Reply-To: <3988cd7b9d292017537f75c2eed70295a3a84718.1541447021.git.alistair.francis@wdc.com>
+References: <3988cd7b9d292017537f75c2eed70295a3a84718.1541447021.git.alistair.francis@wdc.com>
+From: Peter Maydell <peter.maydell@linaro.org>
+Date: Tue, 6 Nov 2018 13:25:53 +0000
+Message-ID: <CAFEAcA8wLiNgW43tasbZHfjmOxQ209UdpHqCMHNcyQ25G9XcTw@mail.gmail.com>
+To: Alistair Francis <Alistair.Francis@wdc.com>
+Cc: "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>,
+	"qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>, 
+	"alistair23@gmail.com" <alistair23@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2a00:1450:4864:20::541
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v6 2/5] hw/riscv/virt: Connect
- the gpex PCIe
+X-Received-From: 2607:f8b0:4864:20::342
+Subject: Re: [Qemu-riscv] [PATCH v1 1/1] riscv: spike: Fix memory leak in
+ the board init
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -68,182 +66,18 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Nov 2018 06:45:54 -0000
+X-List-Received-Date: Tue, 06 Nov 2018 13:29:10 -0000
 
-Hi Alistair,
-
-On Tue, Nov 6, 2018 at 3:47 AM Alistair Francis <alistair23@gmail.com> wrote:
+On 5 November 2018 at 19:44, Alistair Francis <Alistair.Francis@wdc.com> wrote:
+> Coverity caught a malloc() call that was never freed. This patch ensures
+> that we free the memory but also updates the allocation to use
+> g_strdup_printf() instead of malloc().
 >
-> On Mon, Nov 5, 2018 at 5:24 AM Bin Meng <bmeng.cn@gmail.com> wrote:
-> >
-> > Hi,
-> >
-> > On Wed, Oct 31, 2018 at 6:22 AM Alistair Francis
-> > <Alistair.Francis@wdc.com> wrote:
-> > >
-> > > Connect the gpex PCIe device based on the device tree included in the
-> > > HiFive Unleashed ROM.
-> > >
-> > > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> > > ---
-> > >  default-configs/riscv32-softmmu.mak |   6 +-
-> > >  default-configs/riscv64-softmmu.mak |   6 +-
-> > >  hw/riscv/virt.c                     | 111 ++++++++++++++++++++++++++++
-> > >  include/hw/riscv/virt.h             |   8 +-
-> > >  4 files changed, 127 insertions(+), 4 deletions(-)
-> > >
-> > > diff --git a/default-configs/riscv32-softmmu.mak b/default-configs/riscv32-softmmu.mak
-> > > index 7937c69e22..3e3d195f37 100644
-> > > --- a/default-configs/riscv32-softmmu.mak
-> > > +++ b/default-configs/riscv32-softmmu.mak
-> > > @@ -1,7 +1,11 @@
-> > >  # Default configuration for riscv-softmmu
-> > >
-> > > +include pci.mak
-> > > +
-> > >  CONFIG_SERIAL=y
-> > >  CONFIG_VIRTIO_MMIO=y
-> > > -include virtio.mak
-> > >
-> > >  CONFIG_CADENCE=y
-> > > +
-> > > +CONFIG_PCI_GENERIC=y
-> > > +CONFIG_PCI_XILINX=y
-> > > diff --git a/default-configs/riscv64-softmmu.mak b/default-configs/riscv64-softmmu.mak
-> > > index 7937c69e22..3e3d195f37 100644
-> > > --- a/default-configs/riscv64-softmmu.mak
-> > > +++ b/default-configs/riscv64-softmmu.mak
-> > > @@ -1,7 +1,11 @@
-> > >  # Default configuration for riscv-softmmu
-> > >
-> > > +include pci.mak
-> > > +
-> > >  CONFIG_SERIAL=y
-> > >  CONFIG_VIRTIO_MMIO=y
-> > > -include virtio.mak
-> > >
-> > >  CONFIG_CADENCE=y
-> > > +
-> > > +CONFIG_PCI_GENERIC=y
-> > > +CONFIG_PCI_XILINX=y
-> > > diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> > > index 4a137a503c..2fbe58ba4b 100644
-> > > --- a/hw/riscv/virt.c
-> > > +++ b/hw/riscv/virt.c
-> > > @@ -39,6 +39,8 @@
-> > >  #include "sysemu/arch_init.h"
-> > >  #include "sysemu/device_tree.h"
-> > >  #include "exec/address-spaces.h"
-> > > +#include "hw/pci/pci.h"
-> > > +#include "hw/pci-host/gpex.h"
-> > >  #include "elf.h"
-> > >
-> > >  #include <libfdt.h>
-> > > @@ -55,6 +57,10 @@ static const struct MemmapEntry {
-> > >      [VIRT_UART0] =    { 0x10000000,      0x100 },
-> > >      [VIRT_VIRTIO] =   { 0x10001000,     0x1000 },
-> > >      [VIRT_DRAM] =     { 0x80000000,        0x0 },
-> > > +    [VIRT_PCIE_MMIO] = { 0x2000000000, 0x4000000 },
-> >
-> > Does this work with RV32?
->
-> That's a good point, probably not. This is based on the HiFive
-> unleashed values to be as similar as possible.
->
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> Suggested-by: Peter Maydell <peter.maydell@linaro.org>
 
-Please specifying a 32-bit address to make it work for both 32-bit and 64-bit.
+Reviewed-by: Peter Maydell <peter.maydell@linaro.org>
 
-> >
-> > > +    [VIRT_PCIE_PIO] = { 0x2010000, 0x40000000 },
-> > > +    [VIRT_PCIE_ECAM] = { 0x40000000, 0x20000000 },
-
-Forgot to mention: the maximum size of ECAM is 0x10000000 by spec.
-
-> > > +
-> > >  };
-> > >
-> > >  static uint64_t load_kernel(const char *kernel_filename)
-> > > @@ -98,6 +104,37 @@ static hwaddr load_initrd(const char *filename, uint64_t mem_size,
-> > >      return *start + size;
-> > >  }
-> > >
-> > > +#define INTERREUPT_MAP_WIDTH 7
-> > > +
-> > > +static void create_pcie_irq_map(void *fdt, char *nodename,
-> > > +                                uint32_t plic_phandle)
-> > > +{
-> > > +    int pin;
-> > > +    uint32_t full_irq_map[GPEX_NUM_IRQS * INTERREUPT_MAP_WIDTH] = { 0 };
-> > > +    uint32_t *irq_map = full_irq_map;
-> > > +
-> > > +        for (pin = 0; pin < GPEX_NUM_IRQS; pin++) {
-> > > +            int irq_nr = PCIE_IRQ + (pin % PCI_NUM_PINS);
-> > > +            int i;
-> > > +
-> > > +            uint32_t map[] = {
-> > > +                0, 0, 0,
-> > > +                pin + 1, plic_phandle, 0, irq_nr};
-> > > +
-> > > +            /* Convert map to big endian */
-> > > +            for (i = 0; i < INTERREUPT_MAP_WIDTH; i++) {
-> > > +                irq_map[i] = cpu_to_be32(map[i]);
-> > > +            }
-> > > +            irq_map += INTERREUPT_MAP_WIDTH;
-> > > +        }
-> > > +
-> > > +    qemu_fdt_setprop(fdt, nodename, "interrupt-map",
-> > > +                     full_irq_map, sizeof(full_irq_map));
-> > > +
-> > > +    qemu_fdt_setprop_cells(fdt, nodename, "interrupt-map-mask",
-> > > +                           0, 0, 0, 0x7);
-> > > +}
-> > > +
-> > >  static void *create_fdt(RISCVVirtState *s, const struct MemmapEntry *memmap,
-> > >      uint64_t mem_size, const char *cmdline)
-> > >  {
-> > > @@ -233,6 +270,31 @@ static void *create_fdt(RISCVVirtState *s, const struct MemmapEntry *memmap,
-> > >          g_free(nodename);
-> > >      }
-> > >
-> > > +    nodename = g_strdup_printf("/pci@%lx",
-> > > +        (long) memmap[VIRT_PCIE_MMIO].base);
-> > > +    qemu_fdt_add_subnode(fdt, nodename);
-> > > +    qemu_fdt_setprop_cells(fdt, nodename, "#address-cells", 0x3);
-> > > +    qemu_fdt_setprop_cells(fdt, nodename, "#interrupt-cells", 0x1);
-> > > +    qemu_fdt_setprop_cells(fdt, nodename, "#size-cells", 0x2);
-> > > +    qemu_fdt_setprop_string(fdt, nodename, "compatible",
-> > > +                            "pci-host-ecam-generic");
-> > > +    qemu_fdt_setprop_string(fdt, nodename, "device_type", "pci");
-> > > +    qemu_fdt_setprop_cell(fdt, nodename, "linux,pci-domain", 0);
-> > > +    qemu_fdt_setprop_cells(fdt, nodename, "bus-range", 0,
-> > > +                           memmap[VIRT_PCIE_ECAM].base /
-> > > +                               PCIE_MMCFG_SIZE_MIN - 1);
-> > > +    qemu_fdt_setprop(fdt, nodename, "dma-coherent", NULL, 0);
-> > > +    qemu_fdt_setprop_cells(fdt, nodename, "reg", 0x20, 0,
-> > > +                           0, memmap[VIRT_PCIE_ECAM].size);
-> > > +    qemu_fdt_setprop_cells(fdt, nodename, "ranges",
-> > > +                           memmap[VIRT_PCIE_PIO].base,
-> > > +                               0, memmap[VIRT_PCIE_PIO].size,
-> > > +                           0, memmap[VIRT_PCIE_MMIO].base,
-> > > +                               0, memmap[VIRT_PCIE_MMIO].size);
-> >
-> > This does not conform with the PCI bus ranges encoding.
->
-> Do you know what should?
->
-> I have tried so many different combinations here and nothing seems to work.
->
-
-    qemu_fdt_setprop_sized_cells(fdt, nodename, "ranges",
-        1, FDT_PCI_RANGE_IOPORT, 2, 0,
-        2, memmap[VIRT_PCIE_PIO].base, 2, memmap[VIRT_PCIE_PIO].size,
-        1, FDT_PCI_RANGE_MMIO_64BIT,
-        2, memmap[VIRT_PCIE_MMIO].base,
-        2, memmap[VIRT_PCIE_MMIO].base, 2, memmap[VIRT_PCIE_MMIO].size);
-
-Note if we are using 32-bit address for the MMIO,
-FDT_PCI_RANGE_MMIO_64BIT should be FDT_PCI_RANGE_MMIO.
-
-Regards,
-Bin
+thanks
+-- PMM
 
