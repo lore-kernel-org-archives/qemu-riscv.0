@@ -1,67 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gKBFN-0005SU-ID
-	for mharc-qemu-riscv@gnu.org; Tue, 06 Nov 2018 18:59:01 -0500
-Received: from eggs.gnu.org ([2001:4830:134:3::10]:56060)
+	id 1gKC9W-00032u-1M
+	for mharc-qemu-riscv@gnu.org; Tue, 06 Nov 2018 19:57:02 -0500
+Received: from eggs.gnu.org ([2001:4830:134:3::10]:50576)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1gKBFI-0005GH-Iy
-	for qemu-riscv@nongnu.org; Tue, 06 Nov 2018 18:58:59 -0500
+	(envelope-from <palmer@sifive.com>) id 1gKC9U-00032j-1a
+	for qemu-riscv@nongnu.org; Tue, 06 Nov 2018 19:57:00 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1gKBF7-0000hP-Tl
-	for qemu-riscv@nongnu.org; Tue, 06 Nov 2018 18:58:51 -0500
-Received: from mail-pl1-x643.google.com ([2607:f8b0:4864:20::643]:43701)
+	(envelope-from <palmer@sifive.com>) id 1gKC9P-0007G0-PX
+	for qemu-riscv@nongnu.org; Tue, 06 Nov 2018 19:56:59 -0500
+Received: from mail-pl1-x644.google.com ([2607:f8b0:4864:20::644]:33068)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1gKBF6-0007Wz-Qy
-	for qemu-riscv@nongnu.org; Tue, 06 Nov 2018 18:58:45 -0500
-Received: by mail-pl1-x643.google.com with SMTP id g59-v6so6972569plb.10
-	for <qemu-riscv@nongnu.org>; Tue, 06 Nov 2018 15:58:29 -0800 (PST)
+	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1gKC9L-0006tX-TB
+	for qemu-riscv@nongnu.org; Tue, 06 Nov 2018 19:56:52 -0500
+Received: by mail-pl1-x644.google.com with SMTP id w22-v6so3718845plk.0
+	for <qemu-riscv@nongnu.org>; Tue, 06 Nov 2018 16:56:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
 	h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
 	:content-transfer-encoding;
-	bh=f9wvMtN3eMmnij2ZHeCcGO+7xYdDoQ3avyR9lHgAR0A=;
-	b=bzttC0ED27A3KAaTXH5tfmB44iciXT3gYfcI4akapIU5R0F0c95zBoKMChJtKt7enS
-	/0iM3O6KyZKnZLGsK5bMoHUa/cpxN60NUFHse9GSW8wSNWjYQOm5OwgPCFy51rUQQV7S
-	h1WH3o2CxB3G7krHSP5ffYxgxBiJEgeVIismhKr4DC/YLyPNcdowD/hIjIF1SMQOMpee
-	ZNgxtswVWY4hwMNikFqGgYyXz1+vewVtW4aiRSb2sNOs0YNm17WauR2kBwpjSf4K+oT2
-	/+Uv7/eUeSlLVxzvQFBX29tYkE6LusKxtnWeq112RBVvLLvIHWKks7pmr0js0pLlMOY+
-	eU5w==
+	bh=FE+RBp5NkTRXFBWiq9dELBWs5RvOR3FpMjWG9qVxM/M=;
+	b=lGAYuc1eeraTyne1rcrh1x9j4dBkHNEYaXzDTGi5Ije5xgmpPlAhpRFHcIpYU8d5lY
+	1mA7ABmlZ8clgbW8Z+QJbDaOfszC9BPQ+Dmmsqy82HPeEO3OBJK0UoL3harb2xdXMlJL
+	a4Ryeb32OtY/g2y37zpm/OU3NFvh38GnHofueFHcDHblNWFbZesdM0NZRanYU9UwK/Rt
+	OiiZCLg3AwU72HHlyb6K8VCtb5ZiS3oFOWnh22T7zNXjqcWNkVQvrVJfi9SU4kA+8Y8S
+	NsLgINEOrRMJv9hwDu9DPLVszEkEDMDdOUoNiJHY+aQZRalXrDIatQ9z1fwo3xG/e3Ww
+	/hig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
 	:mime-version:content-transfer-encoding;
-	bh=f9wvMtN3eMmnij2ZHeCcGO+7xYdDoQ3avyR9lHgAR0A=;
-	b=LQpUli2Q4fRnHsk1wRI+oaob47aKSE3qYz0CcUr5cKTNmPXKA40ki1hu0jio967gk6
-	tN6ivyBK/6HyDEoUnOaAx8cloMOVh/S+VKPhxrrr6Yzd2apIfTTqh1lrwrUfoIgxuGJ5
-	Kcd2WXdnuMAkIQ1djZkUEmZrGl/rmnssrTeZ0T1Id2MngBFzO8fGAA5qle2CDCzmZPLR
-	FRBwWwenb1S9zMvk+k76hwv4FJW6bSAIs2auJHZlwvvCQKuXeV6ibVx2D/un+IrF4gxU
-	4bK8R68WLHJwZmUcvu8h3pGfKima5J2gNQCfzXzzumUzAUuGi6uIXCcYpT6k8Rrg7Hgg
-	SQGg==
-X-Gm-Message-State: AGRZ1gLq0a6KhxJVuScbqSCJn0YtLntZ+Llt7lMdEviwf2fIQD73oWtN
-	XLys8xArNJkWDy1fNka/ONSxSg==
-X-Google-Smtp-Source: AJdET5dOT/7TUQIlO97nqsEj7Y24gZ4ZnvaisEc1GWT0zL+ke/uukxAaRfIUqdFPFbon8Szes8DuBA==
-X-Received: by 2002:a17:902:9a04:: with SMTP id
-	v4-v6mr27914912plp.247.1541548708173; 
-	Tue, 06 Nov 2018 15:58:28 -0800 (PST)
+	bh=FE+RBp5NkTRXFBWiq9dELBWs5RvOR3FpMjWG9qVxM/M=;
+	b=BIQsqMSK0AncpqTngLmZicZ4xEMOJnoXnUWoaruleJf7sLP4AvUDafJRqZOO6lc24r
+	QLuAGgMw6xTD3REJL4DYbti/GSsU8dTv7RtAF3JZCle3fh9UERJlUT/kytao2n4W9jdq
+	jSRprH/Wax0rYyCZ5/JPbprTbaNoVYGWdMCAOEPUfMJmrBcm93mskV5dURKmd2mY0nhN
+	QP2FQVkB38444sWt4PDZTiD0zCWCQl2+TrN4OOyMAmC6YJRqCj/GudgOQXTQG5H87KKA
+	eQwFQp59aZ4kGyiPyZfjyfWSccQp2rC+Sprqo3wnfjip5bkDw7LWDTYN6A3ILm8A87q6
+	v8Bw==
+X-Gm-Message-State: AGRZ1gJLUdgb+wyyxBHIuJ4+tM2VAgs3ojG0z8jMjb8M7wo22XAvehy+
+	fOgQJIzKfGnfIB7i9SwVhbl2sg==
+X-Google-Smtp-Source: AJdET5frFUiCPA+eFnROtP4IqRYjRwijLuOoGCu1QG9Lkuwskh3O9cwCNnOZixTEGsTvCDqiW+nSbw==
+X-Received: by 2002:a17:902:8646:: with SMTP id
+	y6-v6mr28524880plt.86.1541552210256; 
+	Tue, 06 Nov 2018 16:56:50 -0800 (PST)
 Received: from localhost ([12.206.222.5]) by smtp.gmail.com with ESMTPSA id
-	s184sm24226462pgc.38.2018.11.06.15.58.26
+	7-v6sm49315023pgk.31.2018.11.06.16.56.49
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 06 Nov 2018 15:58:27 -0800 (PST)
-Date: Tue, 06 Nov 2018 15:58:27 -0800 (PST)
-X-Google-Original-Date: Tue, 06 Nov 2018 15:54:27 PST (-0800)
-In-Reply-To: <3988cd7b9d292017537f75c2eed70295a3a84718.1541447021.git.alistair.francis@wdc.com>
-CC: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair23@gmail.com,
-	Alistair Francis <Alistair.Francis@wdc.com>,
-	Peter Maydell <peter.maydell@linaro.org>
+	Tue, 06 Nov 2018 16:56:49 -0800 (PST)
+Date: Tue, 06 Nov 2018 16:56:49 -0800 (PST)
+X-Google-Original-Date: Tue, 06 Nov 2018 16:54:16 PST (-0800)
+In-Reply-To: <8cede3dd-e348-639e-b528-3aa87abf1aae@mail.uni-paderborn.de>
+CC: richard.henderson@linaro.org, qemu-riscv@nongnu.org,
+	sagark@eecs.berkeley.edu, 
+	qemu-devel@nongnu.org, peer.adelt@hni.uni-paderborn.de,
+	Alistair Francis <Alistair.Francis@wdc.com>, 
+	Michael Clark <mjc@sifive.com>
 From: Palmer Dabbelt <palmer@sifive.com>
-To: Alistair Francis <Alistair.Francis@wdc.com>
-Message-ID: <mhng-88725c82-3433-4a1b-afdf-7baa657a6be0@palmer-si-x1c4>
+To: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+Message-ID: <mhng-29c2d3d1-ff38-423d-a20e-70870b1f2639@palmer-si-x1c4>
 Mime-Version: 1.0 (MHng)
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::643
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v1 1/1] riscv: spike: Fix
- memory leak in the board init
+X-Received-From: 2607:f8b0:4864:20::644
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v3 26/35] target/riscv: Remove
+ shift and slt insn manual decoding
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -73,43 +75,89 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Nov 2018 23:59:00 -0000
+X-List-Received-Date: Wed, 07 Nov 2018 00:57:01 -0000
 
-On Mon, 05 Nov 2018 11:44:41 PST (-0800), Alistair Francis wrote:
-> Coverity caught a malloc() call that was never freed. This patch ensures
-> that we free the memory but also updates the allocation to use
-> g_strdup_printf() instead of malloc().
+On Mon, 05 Nov 2018 09:00:10 PST (-0800), Bastian Koppelmann wrote:
 >
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> Suggested-by: Peter Maydell <peter.maydell@linaro.org>
-> ---
->  hw/riscv/spike.c | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
+> On 11/1/18 4:59 PM, Palmer Dabbelt wrote:
+>> On Wed, 31 Oct 2018 15:38:08 PDT (-0700), richard.henderson@linaro.org
+>> wrote:
+>>> On 10/31/18 1:20 PM, Bastian Koppelmann wrote:
+>>>>  static bool trans_slt(DisasContext *ctx, arg_slt *a)
+>>>>  {
+>>>> -    gen_arith(ctx, OPC_RISC_SLT, a->rd, a->rs1, a->rs2);
+>>>> +    TCGv source1 = tcg_temp_new();
+>>>> +    TCGv source2 = tcg_temp_new();
+>>>> +
+>>>> +    gen_get_gpr(source1, a->rs1);
+>>>> +    gen_get_gpr(source2, a->rs2);
+>>>> +
+>>>> +    tcg_gen_setcond_tl(TCG_COND_LT, source1, source1, source2);
+>>>
+>>> I do wonder about extracting this one line to gen_slt so that you can
+>>> re-use
+>>> gen_arith and gen_arithi.
+>>>
+>>>> +    tcg_gen_setcond_tl(TCG_COND_LTU, source1, source1, source2);
+>>>
+>>> Similarly.
+>>>
+>>>>  static bool trans_sllw(DisasContext *ctx, arg_sllw *a)
+>>>>  {
+>>>> -    gen_arith(ctx, OPC_RISC_SLLW, a->rd, a->rs1, a->rs2);
+>>>> +    TCGv source1 = tcg_temp_new();
+>>>> +    TCGv source2 = tcg_temp_new();
+>>>> +
+>>>> +    gen_get_gpr(source1, a->rs1);
+>>>> +    gen_get_gpr(source2, a->rs2);
+>>>> +
+>>>> +    tcg_gen_andi_tl(source2, source2, 0x1F);
+>>>> +    tcg_gen_shl_tl(source1, source1, source2);
+>>>> +
+>>>> +    gen_set_gpr(a->rd, source1);
+>>>
+>>> Missing the ext32s after the shift.
+>>>
+>>>>  static bool trans_srlw(DisasContext *ctx, arg_srlw *a)
+>>>>  {
+>>>> -    gen_arith(ctx, OPC_RISC_SRLW, a->rd, a->rs1, a->rs2);
+>>>> +    TCGv source1 = tcg_temp_new();
+>>>> +    TCGv source2 = tcg_temp_new();
+>>>> +
+>>>> +    gen_get_gpr(source1, a->rs1);
+>>>> +    gen_get_gpr(source2, a->rs2);
+>>>> +
+>>>> +    /* clear upper 32 */
+>>>> +    tcg_gen_ext32u_tl(source1, source1);
+>>>> +    tcg_gen_andi_tl(source2, source2, 0x1F);
+>>>> +    tcg_gen_shr_tl(source1, source1, source2);
+>>>
+>>> Likewise.  (Consider source2 == 0.)
+>>>
+>>>> -    case OPC_RISC_SRL:
+>>>> -        tcg_gen_andi_tl(source2, source2, TARGET_LONG_BITS - 1);
+>>>> -        tcg_gen_shr_tl(source1, source1, source2);
+>>>> -        break;
+>>> ...
+>>>> -    case OPC_RISC_SRA:
+>>>> -        tcg_gen_andi_tl(source2, source2, TARGET_LONG_BITS - 1);
+>>>> -        tcg_gen_sar_tl(source1, source1, source2);
+>>>> -        break;
+>>>
+>>> I see that the bugs are in the original though, so fixing them in a
+>>> separate
+>>> patch is certainly ok.
+>>
+>> Since we're in the soft freeze now, I think it would be great to get
+>> the bug fixes broken out as separate patches at the start of this
+>> series that we can pick up for this release.  It would be great if the
+>> decodetree conversion was a non-functional change, as that will make
+>> it easier to review.
 >
-> diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
-> index 8a712ed490..268df04c3c 100644
-> --- a/hw/riscv/spike.c
-> +++ b/hw/riscv/spike.c
-> @@ -316,9 +316,7 @@ static void spike_v1_09_1_board_init(MachineState *machine)
->  
->      /* build config string with supplied memory size */
->      char *isa = riscv_isa_string(&s->soc.harts[0]);
-> -    size_t config_string_size = strlen(config_string_tmpl) + 48;
-> -    char *config_string = malloc(config_string_size);
-> -    snprintf(config_string, config_string_size, config_string_tmpl,
-> +    char *config_string = g_strdup_printf(config_string_tmpl,
->          (uint64_t)memmap[SPIKE_CLINT].base + SIFIVE_TIME_BASE,
->          (uint64_t)memmap[SPIKE_DRAM].base,
->          (uint64_t)ram_size, isa,
-> @@ -345,6 +343,8 @@ static void spike_v1_09_1_board_init(MachineState *machine)
->      /* Core Local Interruptor (timer and IPI) */
->      sifive_clint_create(memmap[SPIKE_CLINT].base, memmap[SPIKE_CLINT].size,
->          smp_cpus, SIFIVE_SIP_BASE, SIFIVE_TIMECMP_BASE, SIFIVE_TIME_BASE);
-> +
-> +    g_free(config_string);
->  }
->  
->  static void spike_v1_09_1_machine_init(MachineClass *mc)
+>
+> Sounds good. Unfortunately, I don't have much time right now. I try at
+> least to extract the bugfixes, such that they make it for this release.
 
-Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
+Thanks.  You're welcome to just enumerate the bug fixes so I can dig them out 
+if that's easier.
 
