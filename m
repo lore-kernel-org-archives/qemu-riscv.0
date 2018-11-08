@@ -1,58 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gKp7q-0006Ku-EX
-	for mharc-qemu-riscv@gnu.org; Thu, 08 Nov 2018 13:33:54 -0500
-Received: from eggs.gnu.org ([2001:4830:134:3::10]:53718)
+	id 1gKpBq-0007uy-Kz
+	for mharc-qemu-riscv@gnu.org; Thu, 08 Nov 2018 13:38:02 -0500
+Received: from eggs.gnu.org ([2001:4830:134:3::10]:55822)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1gKp7o-0006KD-Ho
-	for qemu-riscv@nongnu.org; Thu, 08 Nov 2018 13:33:53 -0500
+	(envelope-from <alistair23@gmail.com>) id 1gKpBo-0007tr-Mm
+	for qemu-riscv@nongnu.org; Thu, 08 Nov 2018 13:38:01 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1gKp7n-0002lX-Cb
-	for qemu-riscv@nongnu.org; Thu, 08 Nov 2018 13:33:52 -0500
-Received: from mail-pl1-x62c.google.com ([2607:f8b0:4864:20::62c]:34884)
+	(envelope-from <alistair23@gmail.com>) id 1gKpBn-0006DC-S5
+	for qemu-riscv@nongnu.org; Thu, 08 Nov 2018 13:38:00 -0500
+Received: from mail-lf1-x143.google.com ([2a00:1450:4864:20::143]:45756)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1gKp7m-0002J4-W2
-	for qemu-riscv@nongnu.org; Thu, 08 Nov 2018 13:33:51 -0500
-Received: by mail-pl1-x62c.google.com with SMTP id n4-v6so9935106plp.2
-	for <qemu-riscv@nongnu.org>; Thu, 08 Nov 2018 10:33:20 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
-	h=subject:date:message-id:cc:from:to;
-	bh=Egq5gRpH33IkA9LDQH2z8yl43ypRiuVrfR0hVa8D0kA=;
-	b=iPNbI4lK4RRIVbBLJd8PFdmZEa8VuAEGr8VRLelCslHhYhSjNHfGbuK5YZuzZBIOfR
-	VJ7P2gsJSY/tnhEyF0Kz3Zb8ndTEgHSFjTnLOnyY1SKM9MhfR0CJlnXUkmvPXa5wDDUB
-	SJFAOkTziJ3o36VMhyEmgAASyyJ+SEvHMWqshQ/1kX94RQNmvVQ72g9KqQiInsiPbaDK
-	tI1NgdugnWLe1hQ92l233xwpdAIjU9jkRKzblB0zgyZJ41u70hSZjEDRGlbzUX15NoL4
-	4rnZL1oZW5p3xpP2rOiMtV2m8m1tcSIwWEzKBk7fskinlbbKfO6nvbANcA7QXt2CS5HF
-	nWfQ==
+	(Exim 4.71) (envelope-from <alistair23@gmail.com>)
+	id 1gKpBl-0006A5-LY; Thu, 08 Nov 2018 13:37:57 -0500
+Received: by mail-lf1-x143.google.com with SMTP id b20so14924328lfa.12;
+	Thu, 08 Nov 2018 10:37:57 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=4FDgkvdWN9Ri4KerhOLlfH0oPRW/Ha1AIy2ZeVqnIe8=;
+	b=QumruCPnDBS13dPpN+FyhiEYpSFnYyYS4BZgcG6BmYkUomLf3iAtYoRX6IyONnrBU+
+	z6cKAQqldW+61iwL90ftNlr3DqBwbTKounYaVEmfkSnqSdnN/CvfmNpfAw+Mk/hJ7ga1
+	kMmgtKifTH0AQI3LNWqBFmobB0PZxnnke09pLH+9qIamc+N3TSlVDleLD0UZRabDlha5
+	dMWyWXt864iOIpVtiz2YKGbohtNXsnfwvIzgvgUmyiTOh6iXOHF9rClCfn7l47GOpM6i
+	Tmak+/dcjRhLfB60co559O3c9CCffSgeSNpJAivdeh0pKBuxGZCosxPnGhHxbxAsDdw3
+	BofQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:date:message-id:cc:from:to;
-	bh=Egq5gRpH33IkA9LDQH2z8yl43ypRiuVrfR0hVa8D0kA=;
-	b=loCMLzEjMbinos2L3JzFZdF+HBBveqpOB8yGZCcjpTyBEU/q/FypwqpGWM6HfTQh3i
-	gigy4GxAHcFZUsxpNaa9TjTyJVWMj5rK1Nnlr3Ic59bH4U15l5fSL2+LCspqDlD5pelQ
-	Vl0S2r1Y6a2DaytEe86aYA+UhFQILbzR4Qa4ozxWZYleNa6UlNNdICYTAqiyg8Z4NIrj
-	FfEGsLN3ZGoGycm8I7yqKv13TUsKt6fgy+fVA6eqMjUySpIquIecOZuekgiN/PVFPj7r
-	BDSluxTFazBfx5faUyNAPzqKHWMnN5qhhyUJj+kCJGkEl0gbZUj6jKV3Sp90Jtn5C6Xa
-	YSXw==
-X-Gm-Message-State: AGRZ1gLNVe1RQBv2uVVMwH+wh/nHcYy1m24R2v3VuOUCfWF3M0erLyrB
-	6Ff4w1b2tWjVl9pECPdl9oFY8g==
-X-Google-Smtp-Source: AJdET5cvnRI0ZHJzx4sZdNIhPsIIfIVKBlTYrr/lxqZ8XnOCokidch5W79wl2mPr+jsTtVlVcjGIkg==
-X-Received: by 2002:a17:902:b70c:: with SMTP id
-	d12-v6mr5706180pls.288.1541701999207; 
-	Thu, 08 Nov 2018 10:33:19 -0800 (PST)
-Received: from localhost ([12.206.222.5]) by smtp.gmail.com with ESMTPSA id
-	o12-v6sm4895941pfh.20.2018.11.08.10.33.18
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 08 Nov 2018 10:33:18 -0800 (PST)
-Date: Thu,  8 Nov 2018 10:33:05 -0800
-Message-Id: <20181108183306.4361-1-palmer@sifive.com>
-X-Mailer: git-send-email 2.18.1
-Cc: qemu-devel@nongnu.org,       qemu-riscv@nongnu.org
-From: Palmer Dabbelt <palmer@sifive.com>
-To: Peter Maydell <peter.maydell@linaro.org>
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=4FDgkvdWN9Ri4KerhOLlfH0oPRW/Ha1AIy2ZeVqnIe8=;
+	b=Z6TCg6HoVxiRfwsCYyxv29HAe+D6tw9KLGMPzKL8ycQnUp6rHqi1P+WgeDg2Dr1gnY
+	nbr5rkmB3IhSiWC4HJhK5QSPRPQomW7xJAoqEx5dLuzCPlDn1M27T8k7ouAA9yvQgywj
+	dX8Kjk3H3OMEYxvmvfmYQaExf4WI3f74gqyk+qj49PKkWyr6M6Hb38vs0NHJvs1IEppX
+	ZJJ2GRaTbt19CpLAVn1hMRVGJY1twVmJIZ28YCqMgtWmjQ/PS5mUCR9BG56PEOd/Up5d
+	RSuMfsZgqe7Oq0hNH0UlVEDP7jnKIc3rmonO6J8H+o72SmqY7dSPWTkyGE19CtbzMeje
+	NoqQ==
+X-Gm-Message-State: AGRZ1gIM+5Zd55m+IwkSpGjcNxeuRsGmcXcfFAp8IVc8dmkb94YkY00L
+	38ymyeqBDNxLkLcNa5oGQGnTJGaI2JPUBv5cTYM=
+X-Google-Smtp-Source: AJdET5fHtDR2dxAyZKea9hhHdHRS3j12Pv0WSZCn1BjEd7N2Iqio94RPBO3CY+0Kd+Js2+zOsfPAm1IUlpvQD+QHc6M=
+X-Received: by 2002:a19:8fce:: with SMTP id s75mr3400378lfk.151.1541702276275; 
+	Thu, 08 Nov 2018 10:37:56 -0800 (PST)
+MIME-Version: 1.0
+References: <1793576616012e06e68cd9e0215eb907ff2ef12b.1541627403.git.alistair.francis@wdc.com>
+	<mhng-2f508723-0da1-4d97-9e9e-cbc12898023f@palmer-si-x1c4>
+In-Reply-To: <mhng-2f508723-0da1-4d97-9e9e-cbc12898023f@palmer-si-x1c4>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Thu, 8 Nov 2018 10:37:28 -0800
+Message-ID: <CAKmqyKOXRVE_9fvrXMTXgtruV=UndnBC2oPPS7Qowqt=aqWP1g@mail.gmail.com>
+To: Palmer Dabbelt <palmer@sifive.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
+	"qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+	qemu-riscv@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::62c
-Subject: [Qemu-riscv] [PULL] A Single RISC-V Patch for 3.1-rc1
+X-Received-From: 2a00:1450:4864:20::143
+Subject: Re: [Qemu-riscv] [PATCH for 3.1 v1 1/1] hw/riscv/virt: Free the
+ test device tree node name
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -64,42 +67,35 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Nov 2018 18:33:53 -0000
+X-List-Received-Date: Thu, 08 Nov 2018 18:38:01 -0000
 
-The following changes since commit a7ce790a029bd94eb320d8c69f38900f5233997e:
+On Wed, Nov 7, 2018 at 6:38 PM Palmer Dabbelt <palmer@sifive.com> wrote:
+>
+> On Wed, 07 Nov 2018 13:51:45 PST (-0800), Alistair Francis wrote:
+> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> > ---
+> >  hw/riscv/virt.c | 1 +
+> >  1 file changed, 1 insertion(+)
+> >
+> > diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> > index 4a137a503c..2b38f89070 100644
+> > --- a/hw/riscv/virt.c
+> > +++ b/hw/riscv/virt.c
+> > @@ -240,6 +240,7 @@ static void *create_fdt(RISCVVirtState *s, const struct MemmapEntry *memmap,
+> >      qemu_fdt_setprop_cells(fdt, nodename, "reg",
+> >          0x0, memmap[VIRT_TEST].base,
+> >          0x0, memmap[VIRT_TEST].size);
+> > +    g_free(nodename);
+> >
+> >      nodename = g_strdup_printf("/uart@%lx",
+> >          (long)memmap[VIRT_UART0].base);
+> > --
+> > 2.19.1
+>
+> Thanks.  I got a bit behind this week so I didn't send the pre-PR, but I indent
+> to send a PR tomorrow.  That PR currently only contains this patch.
 
-  tcg/tcg-op.h: Add multiple include guard (2018-11-08 15:15:32 +0000)
+There should be two patches. One for spike and one for the virt machine.
 
-are available in the Git repository at:
-
-  git://github.com/riscv/riscv-qemu.git tags/riscv-for-master-3.1-rc1
-
-for you to fetch changes up to 00a014ac01feac875468d38c376f7e06f050f992:
-
-  riscv: spike: Fix memory leak in the board init (2018-11-08 08:41:06 -0800)
-
-----------------------------------------------------------------
-A Single RISC-V Patch for 3.1-rc1
-
-This tag contains a single patch that I'd like to target for rc1: a fix
-for a memory leak that was detected by static code analysis.
-
-There are still three patch sets that I'd like to try to get up for 3.1:
-
-* The patch set Basian just published that contains fixes for a pair of
-  issues he found when converting our port to decodetree.
-* An as-of-yet-unwritten fix to the third issue that Basian pointed out.
-* A fix to our fflags bug, which is currently coupled to some CSR
-  refactoring that I don't think is OK for 3.1.
-
-I'm at Plumbers next week (and I think Alistair is there too?), but I'll
-try to find a way to squeeze in as much as possible.
-
-----------------------------------------------------------------
-Alistair Francis (1):
-      riscv: spike: Fix memory leak in the board init
-
- hw/riscv/spike.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
-
+Alistair
 
