@@ -1,65 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gKpQj-0006mc-IE
-	for mharc-qemu-riscv@gnu.org; Thu, 08 Nov 2018 13:53:26 -0500
-Received: from eggs.gnu.org ([2001:4830:134:3::10]:34411)
+	id 1gKpaz-0004ld-PJ
+	for mharc-qemu-riscv@gnu.org; Thu, 08 Nov 2018 14:04:01 -0500
+Received: from eggs.gnu.org ([2001:4830:134:3::10]:39499)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1gKpQe-0006Zo-GN
-	for qemu-riscv@nongnu.org; Thu, 08 Nov 2018 13:53:24 -0500
+	(envelope-from <palmer@sifive.com>) id 1gKpaw-0004kr-NO
+	for qemu-riscv@nongnu.org; Thu, 08 Nov 2018 14:03:59 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1gKpQU-0001YH-Uw
-	for qemu-riscv@nongnu.org; Thu, 08 Nov 2018 13:53:14 -0500
-Received: from mail-pl1-x644.google.com ([2607:f8b0:4864:20::644]:34644)
+	(envelope-from <palmer@sifive.com>) id 1gKpas-0002B9-5r
+	for qemu-riscv@nongnu.org; Thu, 08 Nov 2018 14:03:58 -0500
+Received: from mail-pl1-x642.google.com ([2607:f8b0:4864:20::642]:34684)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1gKpQT-0000zg-SH
-	for qemu-riscv@nongnu.org; Thu, 08 Nov 2018 13:53:10 -0500
-Received: by mail-pl1-x644.google.com with SMTP id f12-v6so8768489plo.1
-	for <qemu-riscv@nongnu.org>; Thu, 08 Nov 2018 10:52:19 -0800 (PST)
+	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1gKpar-00027u-M9
+	for qemu-riscv@nongnu.org; Thu, 08 Nov 2018 14:03:54 -0500
+Received: by mail-pl1-x642.google.com with SMTP id f12-v6so8782696plo.1
+	for <qemu-riscv@nongnu.org>; Thu, 08 Nov 2018 11:03:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
-	h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
-	:content-transfer-encoding;
-	bh=p9BYXFASlYnSNIRlIfAQwT5FGrmB1VY77GEJxHFhsQ8=;
-	b=GCIUuNS4nB+pHwYtcaX/aI78Hp/arejI2Kr9wdze6cn4mu0DKRKYeOV1ylpvmWA7mD
-	NXPWm1govbv7Hxt9k3sORIcEXUmT0ta/WxOSBzLV/XvHa5I08ik+8R9IPmFW6MpfKcPf
-	Li215haKQigUSdv9bmjkgs6FQ28Zee8W0ta5GaVNQ70HXL1W3DF69uDhhqwQ+bScLBiG
-	wVx3+mJt5jgbbwv0dC+2R0q5LZFOVvTPujjjmj/UiprsyrLzCk2Qe5gcs4yF368SJKxK
-	NQrfUOhnt15kkYi2t/VGxxZGtj5SbBqCpJ5euWHJLuBCHAVoi/yy2w5VXq6SdzoKY9Ws
-	z4mg==
+	h=mime-version:date:references:in-reply-to:message-id:subject:from:to
+	:cc; bh=4sc3ryc+7yWNWKikvMvofU9HeBlrHTYTfICCNYahMbc=;
+	b=jikkccNP8WMtEBryCl+mOR2Df0QYYhGMFVTplSd/hvxL4cHmXfF6yHxfj95waywpyc
+	Uen6TswpAYptI3y42cqGCcZQdMsBz9GNdpyNP8UNBNberHx6m2hVefd5opnZVvSbzvR5
+	mAlv819MmMKSDA2brPyFiYR9vpL6+bI0WezyemejE3uZvAxpZSBt4wKQ+CvTPJYnvNO+
+	T8+TsyS0EtIbJkCNSUr0FTi2So3C9JX4DtVwk344helQWkcwLtQd3ScIYgvjbjbGixWI
+	wfWktGcdlfSOi+swLMVCga1AVgdGLD0OrxQpArgI7JIK8Zv3pRN1Kvxdrk0P2n+cNa/a
+	xKqA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
-	:mime-version:content-transfer-encoding;
-	bh=p9BYXFASlYnSNIRlIfAQwT5FGrmB1VY77GEJxHFhsQ8=;
-	b=EE/xIhFkdeI65GAqPWIfSV5aBsLmBMivIS4wxGQsTmjZAkpLmlW0QkW/08Rn6TAmkt
-	Yvc1gS8YN/9dcCgfZ+zRIitLAFZXCTpMuDRy0Rm2AyzyAQRUwcYbJDlRQMy0Mmf1Egzr
-	IxZYuGNXezjbS6AGJHzGOF2VmH3TwFzBs497Q0xMuHVSosfQaeRxOwPH7XjMV4180gqC
-	elnS4VGBgLBhWMRmeEwOniYm8evEJg17tyIs+mz+0pCkuzJ81e9QBxsIja3fX0VxrWz8
-	kJ4SWwzc2T9TmsxeKZVloUe4HL49MndzP8PZjO5NejkJqxfwWzI3n22cMqvprbAUOCD6
-	KrPQ==
-X-Gm-Message-State: AGRZ1gL69MJgJG1Gc9TNkaHQFXr5ZzBf2gSEHF8MjH6mZ9gvAZWulKWf
-	NhH3Yg53zJr60FAyeGpo3/dj4dvEHMM=
-X-Google-Smtp-Source: AJdET5e3WaMDI9wwgxFJ5P0G32HqeZFZ1sfs2sI3LzeyEFZLaLmsiW2YPN77y11iJl35T8havfjktQ==
+	h=x-gm-message-state:mime-version:date:references:in-reply-to
+	:message-id:subject:from:to:cc;
+	bh=4sc3ryc+7yWNWKikvMvofU9HeBlrHTYTfICCNYahMbc=;
+	b=OzZm6EsjcVtaDln0J947HGZldgMdZBCu9IWKEnU1rnXCgnU0pyLHYCHsHv9uLanmpd
+	02r6o+wva8HORqtlC+hH50EEzCSO1WJ+6iALeeTDAhl7lGHKIYRLmKrGwbAlWDXSNcYS
+	pTkfpZLlDLUwEY2zPRtMBMJvGg6yMbg0s+6t/V+xgppVuFcu0mUcK/B+spXYqil90yv/
+	uoXy1c08hKt9L8xuf5oY25Y2JZuIIOxfetVJL3RhWGXwVkB63tT1UBF075rFfeuPC3W0
+	ubfwlNFVGDzb4hjt7nGaL/RyPhIdVcHYrqb78Qrh/KaFgDNONuFFeFnNVrO+/uEg+r46
+	Rk3w==
+X-Gm-Message-State: AGRZ1gI7QrAMBJvdNmlgiZoKVwz3o9dkenqcSXLcZPVbQpyQs+BOI8eO
+	7OY3KLvucaFe/luG+z2wxPVdwA==
+X-Google-Smtp-Source: AJdET5epYnDLpWvuw+TFiSF9dVCWGlsWV8/apiU7xDJZkBVaFS/xwhvT50XnjNY4rDq/eReiOv5NSg==
 X-Received: by 2002:a17:902:8543:: with SMTP id
-	d3-v6mr5672194plo.313.1541703138252; 
-	Thu, 08 Nov 2018 10:52:18 -0800 (PST)
-Received: from localhost ([12.206.222.5]) by smtp.gmail.com with ESMTPSA id
-	r137-v6sm7212003pfc.105.2018.11.08.10.52.17
+	d3-v6mr5707593plo.313.1541703832362; 
+	Thu, 08 Nov 2018 11:03:52 -0800 (PST)
+Received: from localhost ([12.206.222.5])
+	by smtp.gmail.com with ESMTPSA id l3sm4202879pga.92.2018.11.08.11.03.51
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 08 Nov 2018 10:52:17 -0800 (PST)
-Date: Thu, 08 Nov 2018 10:52:17 -0800 (PST)
-X-Google-Original-Date: Thu, 08 Nov 2018 10:52:15 PST (-0800)
-In-Reply-To: <CAKmqyKPHDx7iTQRaY7+5v13oE-ARzpqFDOo4e98Y4bHGH7s+Ww@mail.gmail.com>
-CC: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+	Thu, 08 Nov 2018 11:03:51 -0800 (PST)
+MIME-Version: 1.0
+Date: Thu, 8 Nov 2018 10:58:05 -0800
+References: <1793576616012e06e68cd9e0215eb907ff2ef12b.1541627403.git.alistair.francis@wdc.com>
+In-Reply-To: <1793576616012e06e68cd9e0215eb907ff2ef12b.1541627403.git.alistair.francis@wdc.com>
+Message-ID: <CANs6eMmcgZMoNbv83idynU_qt6GKrGNMu0GkbpxDidw_=QNNOw@mail.gmail.com>
 From: Palmer Dabbelt <palmer@sifive.com>
-To: alistair23@gmail.com, Peter Maydell <peter.maydell@linaro.org>
-Message-ID: <mhng-10e50b53-fc97-4315-9a4d-6934d7acd223@palmer-si-x1c4>
-Mime-Version: 1.0 (MHng)
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
+To: Alistair Francis <Alistair.Francis@wdc.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+	Alistair Francis <Alistair.Francis@wdc.com>, alistair23@gmail.com
+Content-Type: multipart/alternative; boundary="000000000000a822dd057a2bd088"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::644
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PULL] A Single RISC-V Patch for
- 3.1-rc1
+X-Received-From: 2607:f8b0:4864:20::642
+Subject: Re: [Qemu-riscv] [PATCH for 3.1 v1 1/1] hw/riscv/virt: Free the
+ test device tree node name
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -71,58 +70,72 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Nov 2018 18:53:24 -0000
+X-List-Received-Date: Thu, 08 Nov 2018 19:03:59 -0000
 
-On Thu, 08 Nov 2018 10:38:51 PST (-0800), alistair23@gmail.com wrote:
-> On Thu, Nov 8, 2018 at 10:35 AM Palmer Dabbelt <palmer@sifive.com> wrote:
->>
->> The following changes since commit a7ce790a029bd94eb320d8c69f38900f5233997e:
->>
->>   tcg/tcg-op.h: Add multiple include guard (2018-11-08 15:15:32 +0000)
->>
->> are available in the Git repository at:
->>
->>   git://github.com/riscv/riscv-qemu.git tags/riscv-for-master-3.1-rc1
->>
->> for you to fetch changes up to 00a014ac01feac875468d38c376f7e06f050f992:
->>
->>   riscv: spike: Fix memory leak in the board init (2018-11-08 08:41:06 -0800)
->>
->> ----------------------------------------------------------------
->> A Single RISC-V Patch for 3.1-rc1
->>
->> This tag contains a single patch that I'd like to target for rc1: a fix
->> for a memory leak that was detected by static code analysis.
->>
->> There are still three patch sets that I'd like to try to get up for 3.1:
->>
->> * The patch set Basian just published that contains fixes for a pair of
->>   issues he found when converting our port to decodetree.
->> * An as-of-yet-unwritten fix to the third issue that Basian pointed out.
->> * A fix to our fflags bug, which is currently coupled to some CSR
->>   refactoring that I don't think is OK for 3.1.
+--000000000000a822dd057a2bd088
+Content-Type: text/plain; charset="UTF-8"
+
+On Wed, Nov 7, 2018 at 1:52 PM Alistair Francis <Alistair.Francis@wdc.com> 
+wrote:
+
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> ---
+>  hw/riscv/virt.c | 1 +
+>  1 file changed, 1 insertion(+)
 >
-> There is one more patch fixing a memory leak in the virt board as well.
-
-Oh, sorry about that -- I thought they were the same patch!
-
-Peter: let me know if you want me to submit a new copy of this PR with both 
-patches or a follow-on PR.  Sorry for the noise!
-
->> I'm at Plumbers next week (and I think Alistair is there too?), but I'll
->> try to find a way to squeeze in as much as possible.
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index 4a137a503c..2b38f89070 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -240,6 +240,7 @@ static void *create_fdt(RISCVVirtState *s, const 
+> struct MemmapEntry *memmap,
+>      qemu_fdt_setprop_cells(fdt, nodename, "reg",
+>          0x0, memmap[VIRT_TEST].base,
+>          0x0, memmap[VIRT_TEST].size);
+> +    g_free(nodename);
 >
-> Yep! I'll be there.
+>      nodename = g_strdup_printf("/uart@%lx",
+>          (long)memmap[VIRT_UART0].base);
+> -- 
+> 2.19.1
 >
-> Alistair
->
->>
->> ----------------------------------------------------------------
->> Alistair Francis (1):
->>       riscv: spike: Fix memory leak in the board init
->>
->>  hw/riscv/spike.c | 6 +++---
->>  1 file changed, 3 insertions(+), 3 deletions(-)
->>
->>
 
+Reviewed-by: Palmer Dabbelt <palmer@sifive.com> 
+
+--000000000000a822dd057a2bd088
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div class=3D"gmail_quote"><div dir=3D"ltr">On Wed, Nov 7,=
+ 2018 at 1:52 PM Alistair Francis &lt;<a href=3D"mailto:Alistair.Francis@wd=
+c.com">Alistair.Francis@wdc.com</a>&gt; wrote:<br></div><blockquote class=
+=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padd=
+ing-left:1ex">Signed-off-by: Alistair Francis &lt;<a href=3D"mailto:alistai=
+r.francis@wdc.com" target=3D"_blank">alistair.francis@wdc.com</a>&gt;<br>
+---<br>
+=C2=A0hw/riscv/virt.c | 1 +<br>
+=C2=A01 file changed, 1 insertion(+)<br>
+<br>
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c<br>
+index 4a137a503c..2b38f89070 100644<br>
+--- a/hw/riscv/virt.c<br>
++++ b/hw/riscv/virt.c<br>
+@@ -240,6 +240,7 @@ static void *create_fdt(RISCVVirtState *s, const struct=
+ MemmapEntry *memmap,<br>
+=C2=A0 =C2=A0 =C2=A0qemu_fdt_setprop_cells(fdt, nodename, &quot;reg&quot;,<=
+br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A00x0, memmap[VIRT_TEST].base,<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A00x0, memmap[VIRT_TEST].size);<br>
++=C2=A0 =C2=A0 g_free(nodename);<br>
+<br>
+=C2=A0 =C2=A0 =C2=A0nodename =3D g_strdup_printf(&quot;/uart@%lx&quot;,<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0(long)memmap[VIRT_UART0].base);<br>
+-- <br>
+2.19.1<br></blockquote><div><br></div><div>Reviewed-by: Palmer Dabbelt &lt;=
+<a href=3D"mailto:palmer@sifive.com">palmer@sifive.com</a>&gt;=C2=A0</div><=
+/div></div>
+
+--000000000000a822dd057a2bd088
+
+
+--000000000000a822dd057a2bd088--
