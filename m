@@ -1,64 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gKpaz-0004ld-PJ
-	for mharc-qemu-riscv@gnu.org; Thu, 08 Nov 2018 14:04:01 -0500
-Received: from eggs.gnu.org ([2001:4830:134:3::10]:39499)
+	id 1gKpit-00089f-L8
+	for mharc-qemu-riscv@gnu.org; Thu, 08 Nov 2018 14:12:11 -0500
+Received: from eggs.gnu.org ([2001:4830:134:3::10]:41660)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1gKpaw-0004kr-NO
-	for qemu-riscv@nongnu.org; Thu, 08 Nov 2018 14:03:59 -0500
+	(envelope-from <palmer@sifive.com>) id 1gKpir-00089N-6N
+	for qemu-riscv@nongnu.org; Thu, 08 Nov 2018 14:12:10 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1gKpas-0002B9-5r
-	for qemu-riscv@nongnu.org; Thu, 08 Nov 2018 14:03:58 -0500
-Received: from mail-pl1-x642.google.com ([2607:f8b0:4864:20::642]:34684)
+	(envelope-from <palmer@sifive.com>) id 1gKpin-0000R9-QZ
+	for qemu-riscv@nongnu.org; Thu, 08 Nov 2018 14:12:09 -0500
+Received: from mail-pg1-x541.google.com ([2607:f8b0:4864:20::541]:35776)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1gKpar-00027u-M9
-	for qemu-riscv@nongnu.org; Thu, 08 Nov 2018 14:03:54 -0500
-Received: by mail-pl1-x642.google.com with SMTP id f12-v6so8782696plo.1
-	for <qemu-riscv@nongnu.org>; Thu, 08 Nov 2018 11:03:53 -0800 (PST)
+	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1gKpin-0000O7-20
+	for qemu-riscv@nongnu.org; Thu, 08 Nov 2018 14:12:05 -0500
+Received: by mail-pg1-x541.google.com with SMTP id 32-v6so9265837pgu.2
+	for <qemu-riscv@nongnu.org>; Thu, 08 Nov 2018 11:12:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
-	h=mime-version:date:references:in-reply-to:message-id:subject:from:to
-	:cc; bh=4sc3ryc+7yWNWKikvMvofU9HeBlrHTYTfICCNYahMbc=;
-	b=jikkccNP8WMtEBryCl+mOR2Df0QYYhGMFVTplSd/hvxL4cHmXfF6yHxfj95waywpyc
-	Uen6TswpAYptI3y42cqGCcZQdMsBz9GNdpyNP8UNBNberHx6m2hVefd5opnZVvSbzvR5
-	mAlv819MmMKSDA2brPyFiYR9vpL6+bI0WezyemejE3uZvAxpZSBt4wKQ+CvTPJYnvNO+
-	T8+TsyS0EtIbJkCNSUr0FTi2So3C9JX4DtVwk344helQWkcwLtQd3ScIYgvjbjbGixWI
-	wfWktGcdlfSOi+swLMVCga1AVgdGLD0OrxQpArgI7JIK8Zv3pRN1Kvxdrk0P2n+cNa/a
-	xKqA==
+	h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
+	:content-transfer-encoding;
+	bh=nV8QZQTnlHMlhf0aTfd43HvCp1eNVTVPktM6oVAJWos=;
+	b=ZVY6FsLFmbEYfJQfgf19M1JVjVvnxcQGt6RltfksVH9AsWJDOFv7DrfKYEbGl9h3lR
+	yZ8O1o7uLqIpj+Uo8Z69UMKmWawhjcdSEsmW3u0bA72ZlC8wiGYI62Dh4ZSb5P2uH8e2
+	QCTsBZ1iMv9KEze16XpCUfS6HHBTVYqzWc2DbkbEbGbxO5VN6cFBrDRMeYeqPc17SH7m
+	glotSc8QESVoXeCyRBW3xn7A4yalMikMbHpUtLa1pbP85mzikw6JzIFaN5soYzd5hqcp
+	yUdmRgRNMOAVvzA3WMYtEvWleMqW7C+YrmC9Q0ZhgDJukTOx06IVun4TtDl9fhJ3LPoa
+	Fn+g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:date:references:in-reply-to
-	:message-id:subject:from:to:cc;
-	bh=4sc3ryc+7yWNWKikvMvofU9HeBlrHTYTfICCNYahMbc=;
-	b=OzZm6EsjcVtaDln0J947HGZldgMdZBCu9IWKEnU1rnXCgnU0pyLHYCHsHv9uLanmpd
-	02r6o+wva8HORqtlC+hH50EEzCSO1WJ+6iALeeTDAhl7lGHKIYRLmKrGwbAlWDXSNcYS
-	pTkfpZLlDLUwEY2zPRtMBMJvGg6yMbg0s+6t/V+xgppVuFcu0mUcK/B+spXYqil90yv/
-	uoXy1c08hKt9L8xuf5oY25Y2JZuIIOxfetVJL3RhWGXwVkB63tT1UBF075rFfeuPC3W0
-	ubfwlNFVGDzb4hjt7nGaL/RyPhIdVcHYrqb78Qrh/KaFgDNONuFFeFnNVrO+/uEg+r46
-	Rk3w==
-X-Gm-Message-State: AGRZ1gI7QrAMBJvdNmlgiZoKVwz3o9dkenqcSXLcZPVbQpyQs+BOI8eO
-	7OY3KLvucaFe/luG+z2wxPVdwA==
-X-Google-Smtp-Source: AJdET5epYnDLpWvuw+TFiSF9dVCWGlsWV8/apiU7xDJZkBVaFS/xwhvT50XnjNY4rDq/eReiOv5NSg==
-X-Received: by 2002:a17:902:8543:: with SMTP id
-	d3-v6mr5707593plo.313.1541703832362; 
-	Thu, 08 Nov 2018 11:03:52 -0800 (PST)
-Received: from localhost ([12.206.222.5])
-	by smtp.gmail.com with ESMTPSA id l3sm4202879pga.92.2018.11.08.11.03.51
+	h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
+	:mime-version:content-transfer-encoding;
+	bh=nV8QZQTnlHMlhf0aTfd43HvCp1eNVTVPktM6oVAJWos=;
+	b=j4cFkTjdlqvsjWNp94liRmL5c0vXq8vRIt6I31vOYf4Rzi3ESPlkUzLZ+Qzduqpg1V
+	/av1U7MiDICbtJmooKol0rS8Xpsqx1qSZl28aXp9gqVFuFu3Z31i5YXqk7cC73tdHY9l
+	zaP4RKufZgyWS/CIQn5bQnpQunXXy/OYrvrb8gprGnNJxpIBbshOWTUQF3zQOBMAy90k
+	HNMhDFWBCO5kz8d8lMm4qRQvgDlNGvWZwmk+rSMEfdpjV9L+b+40ooEIkvh6rcy2g9WQ
+	+y+vZpzB6TC/7zBigeV7Jeqh9BuJeyL4jKzxsIMbAz38s44HNVwDOLwcuy41HrvgSPDZ
+	q0BQ==
+X-Gm-Message-State: AGRZ1gJJyafzoy9PBI+gJH07046639qnRAWnH4Fvvc5tvGjeky3/tcTd
+	N/hU8WJzohLQgo972Z51GbfYZQ==
+X-Google-Smtp-Source: AJdET5frtwzgG5OObk/0gaVmjIH2l1wGXzDmUGhPQYHc+2/9gz0QwfQnG0cRrcrdyEbxHZTeErkiAA==
+X-Received: by 2002:a63:9f0a:: with SMTP id
+	g10-v6mr4517431pge.232.1541704321397; 
+	Thu, 08 Nov 2018 11:12:01 -0800 (PST)
+Received: from localhost ([12.206.222.5]) by smtp.gmail.com with ESMTPSA id
+	w66-v6sm4668343pfb.51.2018.11.08.11.12.00
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 08 Nov 2018 11:03:51 -0800 (PST)
-MIME-Version: 1.0
-Date: Thu, 8 Nov 2018 10:58:05 -0800
-References: <1793576616012e06e68cd9e0215eb907ff2ef12b.1541627403.git.alistair.francis@wdc.com>
-In-Reply-To: <1793576616012e06e68cd9e0215eb907ff2ef12b.1541627403.git.alistair.francis@wdc.com>
-Message-ID: <CANs6eMmcgZMoNbv83idynU_qt6GKrGNMu0GkbpxDidw_=QNNOw@mail.gmail.com>
+	Thu, 08 Nov 2018 11:12:00 -0800 (PST)
+Date: Thu, 08 Nov 2018 11:12:00 -0800 (PST)
+X-Google-Original-Date: Thu, 08 Nov 2018 11:11:34 PST (-0800)
+In-Reply-To: <d6ec0bb8-1ea6-c032-5643-2248ce7647a6@mail.uni-paderborn.de>
+CC: richard.henderson@linaro.org, Michael Clark <mjc@sifive.com>,
+	sagark@eecs.berkeley.edu, Alistair Francis <Alistair.Francis@wdc.com>,
+	qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 From: Palmer Dabbelt <palmer@sifive.com>
-To: Alistair Francis <Alistair.Francis@wdc.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
-	Alistair Francis <Alistair.Francis@wdc.com>, alistair23@gmail.com
-Content-Type: multipart/alternative; boundary="000000000000a822dd057a2bd088"
+To: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+Message-ID: <mhng-133c83c5-d4e7-402a-935f-3ed9ca6b44b3@palmer-si-x1c4>
+Mime-Version: 1.0 (MHng)
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::642
-Subject: Re: [Qemu-riscv] [PATCH for 3.1 v1 1/1] hw/riscv/virt: Free the
- test device tree node name
+X-Received-From: 2607:f8b0:4864:20::541
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH 0/2] target/riscv: Bugfixes
+ found in decodetree conversion
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -70,72 +73,53 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Nov 2018 19:03:59 -0000
+X-List-Received-Date: Thu, 08 Nov 2018 19:12:10 -0000
 
---000000000000a822dd057a2bd088
-Content-Type: text/plain; charset="UTF-8"
-
-On Wed, Nov 7, 2018 at 1:52 PM Alistair Francis <Alistair.Francis@wdc.com> 
-wrote:
-
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> ---
->  hw/riscv/virt.c | 1 +
->  1 file changed, 1 insertion(+)
+On Thu, 08 Nov 2018 09:29:26 PST (-0800), Bastian Koppelmann wrote:
 >
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index 4a137a503c..2b38f89070 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -240,6 +240,7 @@ static void *create_fdt(RISCVVirtState *s, const 
-> struct MemmapEntry *memmap,
->      qemu_fdt_setprop_cells(fdt, nodename, "reg",
->          0x0, memmap[VIRT_TEST].base,
->          0x0, memmap[VIRT_TEST].size);
-> +    g_free(nodename);
+> On 11/8/18 4:53 PM, Richard Henderson wrote:
+>> On 11/8/18 1:06 PM, Bastian Koppelmann wrote:
+>>> while going through the reviews of the riscv-decodetree patches, two bugs came
+>>> up that I fix here. There is one more problem [1] mentioned by Richard but
+>>> I don't have the time to investigate it further.
+>>>
+>>> [1] https://patchwork.kernel.org/patch/10650293/
+>> That one's not a bug, but an optimization.
+>>
+>> The other bug mentioned is shrw and shaw not sign-extending the result.
 >
->      nodename = g_strdup_printf("/uart@%lx",
->          (long)memmap[VIRT_UART0].base);
-> -- 
-> 2.19.1
 >
+> That was a bug I introduced during the conversion to decodetree.
 
-Reviewed-by: Palmer Dabbelt <palmer@sifive.com> 
+My understand of that patch feedback is that there are two issues:
 
---000000000000a822dd057a2bd088
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+* We don't take advantage of the ordering bits on fences, which could allow us 
+  to emit less conservative fences.  This would presumably increase 
+  performance.
+* We treat fences as NOPs under "#ifndef CONFIG_USER_ONLY", which is a bug.
 
-<div dir=3D"ltr"><div class=3D"gmail_quote"><div dir=3D"ltr">On Wed, Nov 7,=
- 2018 at 1:52 PM Alistair Francis &lt;<a href=3D"mailto:Alistair.Francis@wd=
-c.com">Alistair.Francis@wdc.com</a>&gt; wrote:<br></div><blockquote class=
-=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padd=
-ing-left:1ex">Signed-off-by: Alistair Francis &lt;<a href=3D"mailto:alistai=
-r.francis@wdc.com" target=3D"_blank">alistair.francis@wdc.com</a>&gt;<br>
----<br>
-=C2=A0hw/riscv/virt.c | 1 +<br>
-=C2=A01 file changed, 1 insertion(+)<br>
-<br>
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c<br>
-index 4a137a503c..2b38f89070 100644<br>
---- a/hw/riscv/virt.c<br>
-+++ b/hw/riscv/virt.c<br>
-@@ -240,6 +240,7 @@ static void *create_fdt(RISCVVirtState *s, const struct=
- MemmapEntry *memmap,<br>
-=C2=A0 =C2=A0 =C2=A0qemu_fdt_setprop_cells(fdt, nodename, &quot;reg&quot;,<=
-br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A00x0, memmap[VIRT_TEST].base,<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A00x0, memmap[VIRT_TEST].size);<br>
-+=C2=A0 =C2=A0 g_free(nodename);<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0nodename =3D g_strdup_printf(&quot;/uart@%lx&quot;,<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0(long)memmap[VIRT_UART0].base);<br>
--- <br>
-2.19.1<br></blockquote><div><br></div><div>Reviewed-by: Palmer Dabbelt &lt;=
-<a href=3D"mailto:palmer@sifive.com">palmer@sifive.com</a>&gt;=C2=A0</div><=
-/div></div>
+Am I wrong about that second one?  I think the fix should look something like 
+this, which I haven't even tried to compile
 
---000000000000a822dd057a2bd088
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index 18d7b6d1471d..624d1c679a84 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -1766,7 +1766,6 @@ static void decode_RV32_64G(CPURISCVState *env, DisasContext *ctx)
+                      GET_RM(ctx->opcode));
+         break;
+     case OPC_RISC_FENCE:
+-#ifndef CONFIG_USER_ONLY
+         if (ctx->opcode & 0x1000) {
+             /* FENCE_I is a no-op in QEMU,
+              * however we need to end the translation block */
+@@ -1777,7 +1776,6 @@ static void decode_RV32_64G(CPURISCVState *env, DisasContext *ctx)
+             /* FENCE is a full memory barrier. */
+             tcg_gen_mb(TCG_MO_ALL | TCG_BAR_SC);
+         }
+-#endif
+         break;
+     case OPC_RISC_SYSTEM:
+         gen_system(env, ctx, MASK_OP_SYSTEM(ctx->opcode), rd, rs1,
 
 
---000000000000a822dd057a2bd088--
