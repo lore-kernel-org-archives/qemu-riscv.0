@@ -1,66 +1,44 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gKaD0-0003Pp-Qn
-	for mharc-qemu-riscv@gnu.org; Wed, 07 Nov 2018 21:38:14 -0500
-Received: from eggs.gnu.org ([2001:4830:134:3::10]:40752)
+	id 1gKj5r-0005qP-O5
+	for mharc-qemu-riscv@gnu.org; Thu, 08 Nov 2018 07:07:27 -0500
+Received: from eggs.gnu.org ([2001:4830:134:3::10]:41076)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1gKaCw-00038U-G2
-	for qemu-riscv@nongnu.org; Wed, 07 Nov 2018 21:38:13 -0500
+	(envelope-from <kbastian@mail.uni-paderborn.de>) id 1gKj5p-0005o9-0B
+	for qemu-riscv@nongnu.org; Thu, 08 Nov 2018 07:07:25 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1gKaCs-0007wJ-Ep
-	for qemu-riscv@nongnu.org; Wed, 07 Nov 2018 21:38:10 -0500
-Received: from mail-pl1-x641.google.com ([2607:f8b0:4864:20::641]:36735)
-	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1gKaCr-0007un-IS
-	for qemu-riscv@nongnu.org; Wed, 07 Nov 2018 21:38:06 -0500
-Received: by mail-pl1-x641.google.com with SMTP id w24-v6so8798431plq.3
-	for <qemu-riscv@nongnu.org>; Wed, 07 Nov 2018 18:38:03 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
-	h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
-	:content-transfer-encoding;
-	bh=tx0yhX/Axlh3bdR4BbD+Bhd3QJPCWUBPVkJtOdGYYp4=;
-	b=Jtx563ApBZfE4ZW7y6ma3an6PBu1TgXRTUEMGII3BRZpes3ecj3rhLVVWpeKgKb33T
-	wGQE+fl4XXJ2ZzhuyQECH1CK4vRXq+e91NpW8BCTby+lmawyUdRZh6Dtk3qXXzhFP7+Q
-	TRRdEDlrQcQZ/IPP6K5GTiHnYHKXKngiOqVrv0qD9wCm2FzOTiJx63VXC1+ELC9BakxW
-	b4lgkWho4VlQMDLkO0lNch0olhRbzbSwOw7VXn14vUMZUIGUopIqA9vjN28ERfE+Dw77
-	pgAyWZulcBWaPDzoDoGw7qvIsM81KgpF90Y/+uS8MmxRogRm3O43b6TKSwJzRUoofnG6
-	BC5g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
-	:mime-version:content-transfer-encoding;
-	bh=tx0yhX/Axlh3bdR4BbD+Bhd3QJPCWUBPVkJtOdGYYp4=;
-	b=YDLWXqJZFcE+hRJat5Dw79FlWnvNdZDXOrFMQDxOHpY+KnvSYeeWnLSoSqZhgHa8wP
-	fECA/s8GIUo/rz5h3xf4p/7ku+qFF4sz0f9C0Du2jjyvHl9lx5/Atkf/gbY29D1qmkJD
-	eh7HyU2Z/MNWKw79UNYphduGSV9NPnBhgnF7Ud/3N+va0Dhy5W+jqfyCjfSm/9e/pTLA
-	87fHL1wZP6urcJnAki148bY7GLALPXQ9Ry9r9AB4C7eJy3LXf5E0M5UPlWJnR09X1mwR
-	nXCUevsvYH3Eu/VOw3CiX/WsgGb6liE7dwbFti6yPJR/2IAD1VgdXnk2iFYIOFbOxb1w
-	PWIA==
-X-Gm-Message-State: AGRZ1gIVhHoGCRgTFVMktyvXbLWPOyxCkYImK2eYc0WvPQuqZ/i4uj50
-	xWI1NadFCJ7biVWVF2tuwE4VQA==
-X-Google-Smtp-Source: AJdET5eUrisRzRmMRLSMzpqTRNWgcsD7l6i+6UT/PF1suL+n3+l4IJ9qaUmyBIKwnoSIQizga3Tngw==
-X-Received: by 2002:a17:902:c01:: with SMTP id
-	1-v6mr2805992pls.15.1541644682079; 
-	Wed, 07 Nov 2018 18:38:02 -0800 (PST)
-Received: from localhost ([12.206.222.5]) by smtp.gmail.com with ESMTPSA id
-	a17sm1709464pgm.26.2018.11.07.18.38.00
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 07 Nov 2018 18:38:01 -0800 (PST)
-Date: Wed, 07 Nov 2018 18:38:01 -0800 (PST)
-X-Google-Original-Date: Wed, 07 Nov 2018 18:37:52 PST (-0800)
-In-Reply-To: <1793576616012e06e68cd9e0215eb907ff2ef12b.1541627403.git.alistair.francis@wdc.com>
-CC: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
-	Alistair Francis <Alistair.Francis@wdc.com>, alistair23@gmail.com
-From: Palmer Dabbelt <palmer@sifive.com>
-To: Alistair Francis <Alistair.Francis@wdc.com>
-Message-ID: <mhng-2f508723-0da1-4d97-9e9e-cbc12898023f@palmer-si-x1c4>
-Mime-Version: 1.0 (MHng)
-Content-Type: text/plain; charset=utf-8; format=flowed
+	(envelope-from <kbastian@mail.uni-paderborn.de>) id 1gKj5k-0003QK-2r
+	for qemu-riscv@nongnu.org; Thu, 08 Nov 2018 07:07:24 -0500
+Received: from mail.uni-paderborn.de ([131.234.142.9]:52606)
+	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.71) (envelope-from <kbastian@mail.uni-paderborn.de>)
+	id 1gKj5X-0003Jw-GL; Thu, 08 Nov 2018 07:07:07 -0500
+Received: from tweenies.uni-paderborn.de ([131.234.189.21]
+	helo=localhost.localdomain)
+	by mail.uni-paderborn.de with esmtp (Exim 4.89 telepax)
+	id 1gKj5V-0002ue-48; Thu, 08 Nov 2018 13:07:05 +0100
+Received: from mail.uni-paderborn.de by tweenies with queue id 2944761-4;
+	Thu, 08 Nov 2018 12:07:05 GMT
+X-Envelope-From: <kbastian@mail.uni-paderborn.de>
+From: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+To: kbastian@mail.uni-paderborn.de, mjc@sifive.com, sagark@eecs.berkeley.edu,
+	palmer@sifive.com, Alistair.Francis@wdc.com
+Cc: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Date: Thu,  8 Nov 2018 13:06:26 +0100
+Message-Id: <20181108120628.29926-1-kbastian@mail.uni-paderborn.de>
+X-Mailer: git-send-email 2.19.1
+MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-PMX-Version: 6.4.5.2775670, Antispam-Engine: 2.7.2.2107409,
+	Antispam-Data: 2018.11.8.115717, AntiVirus-Engine: 5.53.0,
+	AntiVirus-Data: 2018.10.10.5530001
+X-IMT-Spam-Score: 0.0 ()
+X-IMT-Authenticated-Sender: 
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::641
-Subject: Re: [Qemu-riscv] [PATCH for 3.1 v1 1/1] hw/riscv/virt: Free the
- test device tree node name
+X-Received-From: 131.234.142.9
+Subject: [Qemu-riscv] [PATCH 0/2] target/riscv: Bugfixes found in decodetree
+ conversion
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -72,29 +50,24 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Nov 2018 02:38:13 -0000
+X-List-Received-Date: Thu, 08 Nov 2018 12:07:26 -0000
 
-On Wed, 07 Nov 2018 13:51:45 PST (-0800), Alistair Francis wrote:
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> ---
->  hw/riscv/virt.c | 1 +
->  1 file changed, 1 insertion(+)
->
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index 4a137a503c..2b38f89070 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -240,6 +240,7 @@ static void *create_fdt(RISCVVirtState *s, const struct MemmapEntry *memmap,
->      qemu_fdt_setprop_cells(fdt, nodename, "reg",
->          0x0, memmap[VIRT_TEST].base,
->          0x0, memmap[VIRT_TEST].size);
-> +    g_free(nodename);
->  
->      nodename = g_strdup_printf("/uart@%lx",
->          (long)memmap[VIRT_UART0].base);
-> -- 
-> 2.19.1
+Hi,
 
-Thanks.  I got a bit behind this week so I didn't send the pre-PR, but I indent 
-to send a PR tomorrow.  That PR currently only contains this patch.
+while going through the reviews of the riscv-decodetree patches, two bugs came
+up that I fix here. There is one more problem [1] mentioned by Richard but 
+I don't have the time to investigate it further.
+
+[1] https://patchwork.kernel.org/patch/10650293/
+
+Bastian Koppelmann (2):
+  target/riscv: Fix FCLASS_D being treated as RV64 only
+  target/riscv: Fix sfence.vm/a both available in any priv version
+
+ target/riscv/translate.c | 22 ++++++++++++++++------
+ 1 file changed, 16 insertions(+), 6 deletions(-)
+
+-- 
+2.19.1
+
 
