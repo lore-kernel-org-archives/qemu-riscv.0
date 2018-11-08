@@ -1,71 +1,71 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gKmWf-0005Zi-Oh
-	for mharc-qemu-riscv@gnu.org; Thu, 08 Nov 2018 10:47:21 -0500
-Received: from eggs.gnu.org ([2001:4830:134:3::10]:53519)
+	id 1gKmd6-0002xR-Ma
+	for mharc-qemu-riscv@gnu.org; Thu, 08 Nov 2018 10:54:00 -0500
+Received: from eggs.gnu.org ([2001:4830:134:3::10]:55220)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <richard.henderson@linaro.org>) id 1gKmWc-0005YY-JJ
-	for qemu-riscv@nongnu.org; Thu, 08 Nov 2018 10:47:19 -0500
+	(envelope-from <richard.henderson@linaro.org>) id 1gKmd4-0002wn-Cz
+	for qemu-riscv@nongnu.org; Thu, 08 Nov 2018 10:53:59 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <richard.henderson@linaro.org>) id 1gKmWY-0008S1-IN
-	for qemu-riscv@nongnu.org; Thu, 08 Nov 2018 10:47:18 -0500
-Received: from mail-wr1-x444.google.com ([2a00:1450:4864:20::444]:44827)
+	(envelope-from <richard.henderson@linaro.org>) id 1gKmd0-0003gy-EU
+	for qemu-riscv@nongnu.org; Thu, 08 Nov 2018 10:53:58 -0500
+Received: from mail-wm1-x342.google.com ([2a00:1450:4864:20::342]:51017)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
 	(Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
-	id 1gKmWY-0008RK-2k
-	for qemu-riscv@nongnu.org; Thu, 08 Nov 2018 10:47:14 -0500
-Received: by mail-wr1-x444.google.com with SMTP id j17-v6so16634507wrq.11
-	for <qemu-riscv@nongnu.org>; Thu, 08 Nov 2018 07:47:13 -0800 (PST)
+	id 1gKmd0-0003gk-4v
+	for qemu-riscv@nongnu.org; Thu, 08 Nov 2018 10:53:54 -0500
+Received: by mail-wm1-x342.google.com with SMTP id 124-v6so1783520wmw.0
+	for <qemu-riscv@nongnu.org>; Thu, 08 Nov 2018 07:53:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
 	h=subject:to:cc:references:from:openpgp:message-id:date:user-agent
 	:mime-version:in-reply-to:content-language:content-transfer-encoding;
-	bh=NrV6WMWp0Cu8FHzat6XQif2WSGbOnuTyPaL8TBno5EA=;
-	b=KLeLEQ4p1Cv/iB3H3bQYb7/MXKtB+VKg52LdH4sf80oZTDOTQQNAVMvBLCgdJKlPhc
-	tY7HwbRasm0djB7iLRKwOIVyxE6+ICSnsj36dI1mk7vHgUnfqGf5FXZ/O5L/vRwyeJwm
-	GRok+0OU34ELJl6PUfnuu2SlplNETGvV1p+EM=
+	bh=dNbyY+7xckizEhVHExTV4cPpxkm80hFHDTs1Fcwhx0A=;
+	b=kbbCsqukDPRtD/C+OPqB3rcaiiDGkbzOKRY+zfO2gt4tBs2njbXxOleOYw3R+pv9lz
+	EwmGtDoiAj+wVNI0U8gyMKdMtVSNA0AfJwj/foqEEg5gGvcUDZVzjM9fSX7O26xWle2t
+	FnvGanKwu8od8ck30tkEjlKdO7Hz1GClHFLWg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
 	:date:user-agent:mime-version:in-reply-to:content-language
 	:content-transfer-encoding;
-	bh=NrV6WMWp0Cu8FHzat6XQif2WSGbOnuTyPaL8TBno5EA=;
-	b=cSXp9wT86a8OqErqP69wcTfgd7OfhRQTdWjgafGVndryu9/c02vV3y8r/IezxGeTyX
-	3keQE2+wNQsRh1FMkIuyqmOFTwEwBPVgQH3xT08Vax+Y1W/Uk2CJ/Pk3FTamlTEsvN2c
-	yfNQRpIZVy9UPZ9jOgZx97nLUDUOckwY4LHdT2o6fgf7PdCKuHze1cRQzI/8Owp+O7J5
-	IOQQvCTm7uhUtY6nea9QPhA5w/bxiVsp+9gLAzPD5hKxqSFfEaXkH3zlB71K8piWjI8c
-	Vd8t3A0qRhfdnbErtF8BSRA+2KilblAaESVe90te0ktmOsDuJcuBOhS6FlC1zapnD0i8
-	m08w==
-X-Gm-Message-State: AGRZ1gKhAnMoBhiSCLz8k/LyluF2UwA9abmK/xNld8al0Rovo+plnE+d
-	5fR1jopo1v4TQh5hRNSkYusilA==
-X-Google-Smtp-Source: AJdET5cX4uFfchFqneusetS+wGCmBe7SyXSUQ2/L9qnCPPdKPUR/lwwwIBAtk73r0WZp5mHgpc/bJQ==
-X-Received: by 2002:adf:cd0c:: with SMTP id
-	w12-v6mr4795307wrm.67.1541692033046; 
-	Thu, 08 Nov 2018 07:47:13 -0800 (PST)
+	bh=dNbyY+7xckizEhVHExTV4cPpxkm80hFHDTs1Fcwhx0A=;
+	b=YdnUpYuqfyUiJajHgtbgDO38YXLTQZmkupydkC7NUNFjUu0pZAJLTJjKAle6S3DrBN
+	O8/R1lo11vt6JU6m/P/VhKOR/93j9Y36cvggyk9O0/n4G77+6csDemfG7B3ZzVZ6vcur
+	5BygjSzR7Yki4cxt924wKPio/4GRlJvZm710nJmJC90CPFOogAlXu7DdQuXU2de90eFh
+	09V9n9GKZ1RwERehpG0c+8Q1QoKFsGLc030+wwxhTm6OhZhOFZr+n/BspO7GkoVblUFV
+	a/Ff/3xL6KebZ9VwjvEfXgLhyRwQDOixYzi9U7FiY2U+wlPkx8Wlna/MrJ/jhiyd6+rF
+	hTZQ==
+X-Gm-Message-State: AGRZ1gK6WWwzA/1tauWjUqobS0rmwh63TgUO70UrPgV/IYJ6bzZSGKz5
+	AVTtx28VmVHfLWHuFV46GrQkkw==
+X-Google-Smtp-Source: AJdET5eEsNsLf+vV6k0/+qtikrLX/vY3RsRrTaPhi+igrTdjW76n3ms837sCEFVc1Mg0TD2q5JiqeA==
+X-Received: by 2002:a1c:be0a:: with SMTP id
+	o10-v6mr1762275wmf.111.1541692432916; 
+	Thu, 08 Nov 2018 07:53:52 -0800 (PST)
 Received: from cloudburst.twiddle.net
 	(70.red-2-141-114.dynamicip.rima-tde.net. [2.141.114.70])
-	by smtp.gmail.com with ESMTPSA id k4sm6123535wrx.91.2018.11.08.07.47.11
+	by smtp.gmail.com with ESMTPSA id
+	r126-v6sm5455653wmg.1.2018.11.08.07.53.51
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 08 Nov 2018 07:47:12 -0800 (PST)
+	Thu, 08 Nov 2018 07:53:52 -0800 (PST)
 To: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, mjc@sifive.com,
 	sagark@eecs.berkeley.edu, palmer@sifive.com, Alistair.Francis@wdc.com
 Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 References: <20181108120628.29926-1-kbastian@mail.uni-paderborn.de>
-	<20181108120628.29926-2-kbastian@mail.uni-paderborn.de>
 From: Richard Henderson <richard.henderson@linaro.org>
 Openpgp: preference=signencrypt
-Message-ID: <a34ca91e-8e79-21a1-bf11-a55f7836386f@linaro.org>
-Date: Thu, 8 Nov 2018 16:47:10 +0100
+Message-ID: <97b143d6-5503-21ee-a836-cfa2597a5856@linaro.org>
+Date: Thu, 8 Nov 2018 16:53:49 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
 	Thunderbird/60.2.1
 MIME-Version: 1.0
-In-Reply-To: <20181108120628.29926-2-kbastian@mail.uni-paderborn.de>
+In-Reply-To: <20181108120628.29926-1-kbastian@mail.uni-paderborn.de>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2a00:1450:4864:20::444
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH 1/2] target/riscv: Fix
- FCLASS_D being treated as RV64 only
+X-Received-From: 2a00:1450:4864:20::342
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH 0/2] target/riscv: Bugfixes
+ found in decodetree conversion
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -77,17 +77,19 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Nov 2018 15:47:19 -0000
+X-List-Received-Date: Thu, 08 Nov 2018 15:53:59 -0000
 
 On 11/8/18 1:06 PM, Bastian Koppelmann wrote:
-> Signed-off-by: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-> ---
->  target/riscv/translate.c | 4 +++-
->  1 file changed, 3 insertions(+), 1 deletion(-)
+> while going through the reviews of the riscv-decodetree patches, two bugs came
+> up that I fix here. There is one more problem [1] mentioned by Richard but 
+> I don't have the time to investigate it further.
+> 
+> [1] https://patchwork.kernel.org/patch/10650293/
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+That one's not a bug, but an optimization.
+
+The other bug mentioned is shrw and shaw not sign-extending the result.
 
 
 r~
-
 
