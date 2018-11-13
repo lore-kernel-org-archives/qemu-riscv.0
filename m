@@ -1,62 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gMf1z-0004wW-QM
-	for mharc-qemu-riscv@gnu.org; Tue, 13 Nov 2018 15:11:27 -0500
-Received: from eggs.gnu.org ([2001:4830:134:3::10]:55421)
+	id 1gMiSu-0003SF-19
+	for mharc-qemu-riscv@gnu.org; Tue, 13 Nov 2018 18:51:28 -0500
+Received: from eggs.gnu.org ([2001:4830:134:3::10]:51380)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1gMf1y-0004bo-5X
-	for qemu-riscv@nongnu.org; Tue, 13 Nov 2018 15:11:27 -0500
+	(envelope-from <palmer@sifive.com>) id 1gMiSr-0003Rd-58
+	for qemu-riscv@nongnu.org; Tue, 13 Nov 2018 18:51:26 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1gMexp-0006A6-TX
-	for qemu-riscv@nongnu.org; Tue, 13 Nov 2018 15:07:10 -0500
-Received: from mail-lf1-x142.google.com ([2a00:1450:4864:20::142]:37170)
+	(envelope-from <palmer@sifive.com>) id 1gMiSj-0006Vp-6e
+	for qemu-riscv@nongnu.org; Tue, 13 Nov 2018 18:51:24 -0500
+Received: from mail-pg1-x52f.google.com ([2607:f8b0:4864:20::52f]:40586)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <alistair23@gmail.com>)
-	id 1gMexp-00069X-Kv; Tue, 13 Nov 2018 15:07:09 -0500
-Received: by mail-lf1-x142.google.com with SMTP id p17so9807372lfh.4;
-	Tue, 13 Nov 2018 12:07:09 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=oZ0/wKdDPGFAet71hOVx7O49Rw5dd6mH4vVErFBkNJA=;
-	b=DS7Mwzh5EUCnsF+N2kvfKiiOmenewinFdPx6Z8SUCtGnJ6nb6TrhH5HIhHSMzDiWOr
-	7zoWTk9o2lnR5+2lqtP6JBjoEgYE1yKSkAdlYt8Tl2iZ9eUGhrZYCBBQSrxRRCxyWJpP
-	5oly0KdiXDO1T4WupniLPyn0Ugh2VYeBp3OC5BMf1tBos2/oe/+5t6xflBJ/dU2ibGfP
-	fWOIYy68oLjhUMg3s4kOrlyOYqTCCi6zbFDggSuGOU1ZegFiNV0Re4dSQHwRTrhSUIV/
-	VMdn8nRqpIj//Z24jR2gVzhsK7rKG6tOJrp54LhQg8ztT9bWZRCe+2xFyKeIGUEWvg5G
-	RUeA==
+	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1gMiSi-0006Uo-Ne
+	for qemu-riscv@nongnu.org; Tue, 13 Nov 2018 18:51:17 -0500
+Received: by mail-pg1-x52f.google.com with SMTP id z10so6456158pgp.7
+	for <qemu-riscv@nongnu.org>; Tue, 13 Nov 2018 15:51:15 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+	h=subject:date:message-id:cc:from:to;
+	bh=AxWN8Qplcd2YOTtl4ih2cfRqU5arnKW6U66ILx92bLY=;
+	b=Udns5JdaLHOdzXRlKmb9C6ahfH6LGDzrGrAfLhKUMtMPdhM7Q313HijnMCWGnfXR0x
+	Ash1Xu3/emGZ1gCrmSbPVxP2blGwvRfbYMHeXSj8UmqlKdR0fR4iEu5rC2DvPiDlwpyc
+	FqW20rmEkDGz2qvX2b1P3BKnN4hmeYrEGsNulVCCNfHSgnZQFswly6A/CWgV02GhDOIS
+	fMMiyyMM54coIJl9Ja7to2SlTHwTZdd11wB2MN3Jo8/ffanfvWMNefLbjjBLBH/L2x6o
+	0AQnYp5B26xwx1bC9CwIdZd23Wc2kJN/eqiBFRbGFt7+9E71Z+SgwoSIJ3ck9AYZaVbx
+	GEAw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=oZ0/wKdDPGFAet71hOVx7O49Rw5dd6mH4vVErFBkNJA=;
-	b=ZDpQkuCpiSt8nqsFTxELvR82MwR065+qvpJrz97nIKpZ6lC7wicsl2bEgyCKKzsY71
-	9SR3iOlFpzHevyxaJ4rJgsSlFb2deXERJ9Q+AkcAZdEHKeEFES5Mu4KMSt2oBbDXG4X0
-	uQQ9+O39GUSgJ8Tn3EoadYeDOX33bxWCVP1ubpvgnRvIdTLxNmFUu4rQKrvpkiWOm65c
-	zb29wKpQ+YyPao5+Q2TO3/NF/ANNUEWSpMUKlQtHh9F6nRm+yMXxH1Nch3tT824jp7Fl
-	b6LY0pbJO4OZZnYScrQ4S6a8b+nZfTDrzkms3iFIelnEQ8io/to2+YkkGvUPgIwR8pM3
-	wFLw==
-X-Gm-Message-State: AGRZ1gKdwu2DXFAgg3jL7fqen4EtUCyU5F4D+lChmQpTqn0WLdV62McL
-	pNn/q5j0B9nEIoT1z7EDFKkyh1/FVzZS49HQuYM=
-X-Google-Smtp-Source: AJdET5fIcOW9/swwkbSrjCyhx/EXigSnQq5mLSr/VAGQeaAQ8l5kbBBOTxEC64xFs9rZAhhCKhjlVfkN8Zs48YD7OFo=
-X-Received: by 2002:a19:2a9a:: with SMTP id q26mr3477169lfq.94.1542139627761; 
-	Tue, 13 Nov 2018 12:07:07 -0800 (PST)
-MIME-Version: 1.0
-References: <20181108120628.29926-1-kbastian@mail.uni-paderborn.de>
-	<20181108120628.29926-2-kbastian@mail.uni-paderborn.de>
-In-Reply-To: <20181108120628.29926-2-kbastian@mail.uni-paderborn.de>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 13 Nov 2018 12:06:36 -0800
-Message-ID: <CAKmqyKNewd1mk48KuSwe-5HjS8h9p0f_3Z_rmc05WX+_rP5BHw@mail.gmail.com>
-To: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-Cc: Michael Clark <mjc@sifive.com>, Sagar Karandikar <sagark@eecs.berkeley.edu>,
-	Palmer Dabbelt <palmer@sifive.com>,
-	Alistair Francis <Alistair.Francis@wdc.com>, qemu-riscv@nongnu.org, 
-	"qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
+	h=x-gm-message-state:subject:date:message-id:cc:from:to;
+	bh=AxWN8Qplcd2YOTtl4ih2cfRqU5arnKW6U66ILx92bLY=;
+	b=EuI+dpaQ55y5Q1sA7V6WrTXh5RytAy9d4BuLehUC1Du+0kk8AaO5u/7P43sXVsKHo2
+	vlNggMV4G0UJqpTAiB/J3Z2ADI/4koJnE1d6EEvZUXNSg9QPxbFVB69G6WKj7xFItGI0
+	cIGsd3oPN7h6dHXZ9EJYfN6zj9gyXk1rKDd597X5MopBySg2q8pG1v/3qe7UIa8lit66
+	zzsSs3mLkhbpZ47PEeRjdopXqvlTCUSXNBCJYe3CHVPJYM/A69xAHTsy8V77fRWqdxtG
+	HZg32qSXAfafOGiYpL8y9hKJMJFHriapISW0X3SeamfaaeoASvg1DIe6kP24N+EiGc1J
+	IlbA==
+X-Gm-Message-State: AGRZ1gJBT6wQis734sV4qbwesXthUe1KaFba1PVi0sZnCJmC7gUtRjI1
+	J6b0HQ6iVCiH32ncUtobWWONfl9EgPrHaA==
+X-Google-Smtp-Source: AJdET5ePw9bkjoKdgEx0OR3wbY/ijiHDIgvdC+zZy4x8SFfaUYIZKhu+NaoecB77HhL23b+ospMIdQ==
+X-Received: by 2002:a62:34c5:: with SMTP id
+	b188-v6mr7532925pfa.65.1542153074204; 
+	Tue, 13 Nov 2018 15:51:14 -0800 (PST)
+Received: from localhost ([64.114.255.114]) by smtp.gmail.com with ESMTPSA id
+	p38sm11634059pgm.40.2018.11.13.15.51.12
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 13 Nov 2018 15:51:13 -0800 (PST)
+Date: Tue, 13 Nov 2018 15:50:41 -0800
+Message-Id: <20181113235045.14155-1-palmer@sifive.com>
+X-Mailer: git-send-email 2.18.1
+Cc: qemu-devel@nongnu.org
+From: Palmer Dabbelt <palmer@sifive.com>
+To: qemu-riscv@nongnu.org
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2a00:1450:4864:20::142
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH 1/2] target/riscv: Fix
- FCLASS_D being treated as RV64 only
+X-Received-From: 2607:f8b0:4864:20::52f
+Subject: [Qemu-riscv] [PR RFC] RISC-V Patches for 3.1-rc2
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -68,51 +64,53 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Nov 2018 20:11:27 -0000
+X-List-Received-Date: Tue, 13 Nov 2018 23:51:26 -0000
 
-On Thu, Nov 8, 2018 at 4:07 AM Bastian Koppelmann
-<kbastian@mail.uni-paderborn.de> wrote:
->
-> Signed-off-by: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+The following changes since commit cb968d275c145467c8b385a3618a207ec111eab1:
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+  Update version for v3.1.0-rc1 release (2018-11-13 18:16:14 +0000)
 
-Alistair
+are available in the Git repository at:
 
-> ---
->  target/riscv/translate.c | 4 +++-
->  1 file changed, 3 insertions(+), 1 deletion(-)
->
-> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index 18d7b6d147..5359088e24 100644
-> --- a/target/riscv/translate.c
-> +++ b/target/riscv/translate.c
-> @@ -1237,13 +1237,14 @@ static void gen_fp_arith(DisasContext *ctx, uint32_t opc, int rd,
->          tcg_temp_free(t0);
->          break;
->
-> -#if defined(TARGET_RISCV64)
->      case OPC_RISC_FMV_X_D:
->          /* also OPC_RISC_FCLASS_D */
->          switch (rm) {
-> +#if defined(TARGET_RISCV64)
->          case 0: /* FMV */
->              gen_set_gpr(rd, cpu_fpr[rs1]);
->              break;
-> +#endif
->          case 1:
->              t0 = tcg_temp_new();
->              gen_helper_fclass_d(t0, cpu_fpr[rs1]);
-> @@ -1255,6 +1256,7 @@ static void gen_fp_arith(DisasContext *ctx, uint32_t opc, int rd,
->          }
->          break;
->
-> +#if defined(TARGET_RISCV64)
->      case OPC_RISC_FMV_D_X:
->          t0 = tcg_temp_new();
->          gen_get_gpr(t0, rs1);
-> --
-> 2.19.1
->
->
+  git://github.com/riscv/riscv-qemu.git tags/riscv-for-master-3.1-rc2
+
+for you to fetch changes up to 3502dc824a7b0218abb49f4350e80a49829748cf:
+
+  RISC-V: Respect fences for user-only emulators (2018-11-13 15:12:15 -0800)
+
+----------------------------------------------------------------
+RISC-V Patches for 3.1-rc2
+
+This pull request contains four patches that aren't really related to
+each other aside from all being bug fixes that I think should go in for
+3.1.0:
+
+* The second half of Alistair's memory leak patch set that I missed last
+  week.
+* A fix to make fclass.d availiable only on RV64IFD systems (without
+  this it's availiable on RV32IFD systems, truncating the result).
+* A fix to make sfence.vm availiable only in priv-1.9.1, and sfence.vma
+  only availiable in priv-1.10.
+* A change to respect fences in user-mode emulators, which were
+  previously treated as NOPs.
+
+As usual, this builds and boot Linux for me.  I don't think I have
+anything else planned for 3.1.0, but I may be wrong as things are a bit
+hectic this week.
+
+----------------------------------------------------------------
+Alistair Francis (1):
+      hw/riscv/virt: Free the test device tree node name
+
+Bastian Koppelmann (2):
+      target/riscv: Fix FCLASS_D being treated as RV64 only
+      target/riscv: Fix sfence.vm/a both available in any priv version
+
+Palmer Dabbelt (1):
+      RISC-V: Respect fences for user-only emulators
+
+ hw/riscv/virt.c          |  1 +
+ target/riscv/translate.c | 24 ++++++++++++++++--------
+ 2 files changed, 17 insertions(+), 8 deletions(-)
+
 
