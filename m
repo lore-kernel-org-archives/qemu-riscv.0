@@ -1,52 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gMf1u-0004rF-J4
-	for mharc-qemu-riscv@gnu.org; Tue, 13 Nov 2018 15:11:22 -0500
-Received: from eggs.gnu.org ([2001:4830:134:3::10]:55367)
+	id 1gMf1z-0004wW-QM
+	for mharc-qemu-riscv@gnu.org; Tue, 13 Nov 2018 15:11:27 -0500
+Received: from eggs.gnu.org ([2001:4830:134:3::10]:55421)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1gMf1s-0004bV-J6
-	for qemu-riscv@nongnu.org; Tue, 13 Nov 2018 15:11:21 -0500
+	(envelope-from <alistair23@gmail.com>) id 1gMf1y-0004bo-5X
+	for qemu-riscv@nongnu.org; Tue, 13 Nov 2018 15:11:27 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1gMeyu-0007Vz-Nr
-	for qemu-riscv@nongnu.org; Tue, 13 Nov 2018 15:08:17 -0500
-Received: from mail-lj1-x243.google.com ([2a00:1450:4864:20::243]:36816)
+	(envelope-from <alistair23@gmail.com>) id 1gMexp-0006A6-TX
+	for qemu-riscv@nongnu.org; Tue, 13 Nov 2018 15:07:10 -0500
+Received: from mail-lf1-x142.google.com ([2a00:1450:4864:20::142]:37170)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
 	(Exim 4.71) (envelope-from <alistair23@gmail.com>)
-	id 1gMeyu-0007VQ-G3; Tue, 13 Nov 2018 15:08:16 -0500
-Received: by mail-lj1-x243.google.com with SMTP id s15-v6so12029082lji.3;
-	Tue, 13 Nov 2018 12:08:16 -0800 (PST)
+	id 1gMexp-00069X-Kv; Tue, 13 Nov 2018 15:07:09 -0500
+Received: by mail-lf1-x142.google.com with SMTP id p17so9807372lfh.4;
+	Tue, 13 Nov 2018 12:07:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=GvCvEYp2tw5jRYQwjgto04bYTCe/21WUYz/sGndvo+U=;
-	b=Sa0osVX0ydpKWwW523tX0eHs80zOziZF8qUxn/0RSC/mFphaW9s6TTCnIHH7xk20DF
-	89x8HDbENGN5Y/hvOwm52u4HEINvFCDbY0/nKESTU4nqgqtcSdWIEZubtvkd6IAc0PSO
-	ay6EoACDI79FotGbKokVRdjRpy+h3zFfkdlYA/T4zw6PZL14g52rnmxzQZieAfDJ6/uC
-	kb51cNcN2/pDpPIvyd8CCymTP7H/rtmWp2wqudPDPWYUg4MNIEMoIDj7spLpCdBjUIL3
-	zgOPBDFw6JZh3N5IIN8t9FyWUx+OxfGXU1H8h1hyesJx1qRLOnS8o8ENVA0WgciJoo+n
-	g11g==
+	:cc; bh=oZ0/wKdDPGFAet71hOVx7O49Rw5dd6mH4vVErFBkNJA=;
+	b=DS7Mwzh5EUCnsF+N2kvfKiiOmenewinFdPx6Z8SUCtGnJ6nb6TrhH5HIhHSMzDiWOr
+	7zoWTk9o2lnR5+2lqtP6JBjoEgYE1yKSkAdlYt8Tl2iZ9eUGhrZYCBBQSrxRRCxyWJpP
+	5oly0KdiXDO1T4WupniLPyn0Ugh2VYeBp3OC5BMf1tBos2/oe/+5t6xflBJ/dU2ibGfP
+	fWOIYy68oLjhUMg3s4kOrlyOYqTCCi6zbFDggSuGOU1ZegFiNV0Re4dSQHwRTrhSUIV/
+	VMdn8nRqpIj//Z24jR2gVzhsK7rKG6tOJrp54LhQg8ztT9bWZRCe+2xFyKeIGUEWvg5G
+	RUeA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=GvCvEYp2tw5jRYQwjgto04bYTCe/21WUYz/sGndvo+U=;
-	b=Q6UiuvfYCrS3tZD3c4yJx6QarErsyR9QDU6j/bH2pKjPRi/c/Ebsyue5wP5kymILhk
-	n3fspACOpeuYR6yJOItlO6yON//eWc95sV6HDGG1HKXxK1FCjlI6iO3NdaoatVEl2nGe
-	HT6KOFyLT73VQcfadTC0DCyyIqJYRvN9HxH1B2zgRlD6aMevSfmkoP61pR1V0i5TbFAl
-	uAWmhbAxpAJNl9MJqgcCF6aQNfcXG2pADzDQ1PfexHjKN7CjI8oT+GCRlRVOX7cbuPci
-	16+5bUafd6ytSI/EX6gmJ+4ws0QQlOwB5shw7IZPmJO1udinaCsmOR22gBWrSFPpI72u
-	icQQ==
-X-Gm-Message-State: AGRZ1gKs2amK5Ti9W1YEA9giWW0TtQUxjMR/PyaysIMpmAxoLCQ4Suqw
-	/yeDHvBYagwF9ECbbYhD1TUETzGAxkgApHmT7sI=
-X-Google-Smtp-Source: AJdET5c567D3kxWIc9mPYbUqQj6EaDDPdtgN3On2FCeVLWeFgAP6m8tGsfoXLi+MqVfsEPxhHiD1bAMPVxoAMqVU6WA=
-X-Received: by 2002:a2e:4218:: with SMTP id
-	p24-v6mr3905196lja.58.1542139695202; 
-	Tue, 13 Nov 2018 12:08:15 -0800 (PST)
+	bh=oZ0/wKdDPGFAet71hOVx7O49Rw5dd6mH4vVErFBkNJA=;
+	b=ZDpQkuCpiSt8nqsFTxELvR82MwR065+qvpJrz97nIKpZ6lC7wicsl2bEgyCKKzsY71
+	9SR3iOlFpzHevyxaJ4rJgsSlFb2deXERJ9Q+AkcAZdEHKeEFES5Mu4KMSt2oBbDXG4X0
+	uQQ9+O39GUSgJ8Tn3EoadYeDOX33bxWCVP1ubpvgnRvIdTLxNmFUu4rQKrvpkiWOm65c
+	zb29wKpQ+YyPao5+Q2TO3/NF/ANNUEWSpMUKlQtHh9F6nRm+yMXxH1Nch3tT824jp7Fl
+	b6LY0pbJO4OZZnYScrQ4S6a8b+nZfTDrzkms3iFIelnEQ8io/to2+YkkGvUPgIwR8pM3
+	wFLw==
+X-Gm-Message-State: AGRZ1gKdwu2DXFAgg3jL7fqen4EtUCyU5F4D+lChmQpTqn0WLdV62McL
+	pNn/q5j0B9nEIoT1z7EDFKkyh1/FVzZS49HQuYM=
+X-Google-Smtp-Source: AJdET5fIcOW9/swwkbSrjCyhx/EXigSnQq5mLSr/VAGQeaAQ8l5kbBBOTxEC64xFs9rZAhhCKhjlVfkN8Zs48YD7OFo=
+X-Received: by 2002:a19:2a9a:: with SMTP id q26mr3477169lfq.94.1542139627761; 
+	Tue, 13 Nov 2018 12:07:07 -0800 (PST)
 MIME-Version: 1.0
 References: <20181108120628.29926-1-kbastian@mail.uni-paderborn.de>
-	<20181108120628.29926-3-kbastian@mail.uni-paderborn.de>
-In-Reply-To: <20181108120628.29926-3-kbastian@mail.uni-paderborn.de>
+	<20181108120628.29926-2-kbastian@mail.uni-paderborn.de>
+In-Reply-To: <20181108120628.29926-2-kbastian@mail.uni-paderborn.de>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 13 Nov 2018 12:07:43 -0800
-Message-ID: <CAKmqyKMovbJcChitESLqep_4D4-kgMjaUSaESghPu5+EYKSu5A@mail.gmail.com>
+Date: Tue, 13 Nov 2018 12:06:36 -0800
+Message-ID: <CAKmqyKNewd1mk48KuSwe-5HjS8h9p0f_3Z_rmc05WX+_rP5BHw@mail.gmail.com>
 To: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
 Cc: Michael Clark <mjc@sifive.com>, Sagar Karandikar <sagark@eecs.berkeley.edu>,
 	Palmer Dabbelt <palmer@sifive.com>,
@@ -55,9 +54,9 @@ Cc: Michael Clark <mjc@sifive.com>, Sagar Karandikar <sagark@eecs.berkeley.edu>,
 Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2a00:1450:4864:20::243
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH 2/2] target/riscv: Fix
- sfence.vm/a both available in any priv version
+X-Received-From: 2a00:1450:4864:20::142
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH 1/2] target/riscv: Fix
+ FCLASS_D being treated as RV64 only
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -69,14 +68,11 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Nov 2018 20:11:21 -0000
+X-List-Received-Date: Tue, 13 Nov 2018 20:11:27 -0000
 
 On Thu, Nov 8, 2018 at 4:07 AM Bastian Koppelmann
 <kbastian@mail.uni-paderborn.de> wrote:
 >
-> sfence.vm has been replaced in priv v1.10 spec by sfence.vma.
->
-> Reported-by: Richard Henderson <richard.henderson@linaro.org>
 > Signed-off-by: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
@@ -84,45 +80,37 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  target/riscv/translate.c | 18 +++++++++++++-----
->  1 file changed, 13 insertions(+), 5 deletions(-)
+>  target/riscv/translate.c | 4 +++-
+>  1 file changed, 3 insertions(+), 1 deletion(-)
 >
 > diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index 5359088e24..f44eb9c41b 100644
+> index 18d7b6d147..5359088e24 100644
 > --- a/target/riscv/translate.c
 > +++ b/target/riscv/translate.c
-> @@ -1292,10 +1292,14 @@ static void gen_system(CPURISCVState *env, DisasContext *ctx, uint32_t opc,
->  #ifndef CONFIG_USER_ONLY
->      /* Extract funct7 value and check whether it matches SFENCE.VMA */
->      if ((opc == OPC_RISC_ECALL) && ((csr >> 5) == 9)) {
-> -        /* sfence.vma */
-> -        /* TODO: handle ASID specific fences */
-> -        gen_helper_tlb_flush(cpu_env);
-> -        return;
-> +        if (env->priv_ver == PRIV_VERSION_1_10_0) {
-> +            /* sfence.vma */
-> +            /* TODO: handle ASID specific fences */
-> +            gen_helper_tlb_flush(cpu_env);
-> +            return;
-> +        } else {
-> +            gen_exception_illegal(ctx);
-> +        }
->      }
->  #endif
+> @@ -1237,13 +1237,14 @@ static void gen_fp_arith(DisasContext *ctx, uint32_t opc, int rd,
+>          tcg_temp_free(t0);
+>          break;
 >
-> @@ -1342,7 +1346,11 @@ static void gen_system(CPURISCVState *env, DisasContext *ctx, uint32_t opc,
->              gen_helper_wfi(cpu_env);
+> -#if defined(TARGET_RISCV64)
+>      case OPC_RISC_FMV_X_D:
+>          /* also OPC_RISC_FCLASS_D */
+>          switch (rm) {
+> +#if defined(TARGET_RISCV64)
+>          case 0: /* FMV */
+>              gen_set_gpr(rd, cpu_fpr[rs1]);
 >              break;
->          case 0x104: /* SFENCE.VM */
-> -            gen_helper_tlb_flush(cpu_env);
-> +            if (env->priv_ver <= PRIV_VERSION_1_09_1) {
-> +                gen_helper_tlb_flush(cpu_env);
-> +            } else {
-> +                gen_exception_illegal(ctx);
-> +            }
->              break;
->  #endif
->          default:
+> +#endif
+>          case 1:
+>              t0 = tcg_temp_new();
+>              gen_helper_fclass_d(t0, cpu_fpr[rs1]);
+> @@ -1255,6 +1256,7 @@ static void gen_fp_arith(DisasContext *ctx, uint32_t opc, int rd,
+>          }
+>          break;
+>
+> +#if defined(TARGET_RISCV64)
+>      case OPC_RISC_FMV_D_X:
+>          t0 = tcg_temp_new();
+>          gen_get_gpr(t0, rs1);
 > --
 > 2.19.1
 >
