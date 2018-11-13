@@ -1,50 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gMb05-00079r-AU
-	for mharc-qemu-riscv@gnu.org; Tue, 13 Nov 2018 10:53:13 -0500
-Received: from eggs.gnu.org ([2001:4830:134:3::10]:42955)
+	id 1gMf1u-0004rF-J4
+	for mharc-qemu-riscv@gnu.org; Tue, 13 Nov 2018 15:11:22 -0500
+Received: from eggs.gnu.org ([2001:4830:134:3::10]:55367)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <abologna@redhat.com>) id 1gMb02-00077R-FX
-	for qemu-riscv@nongnu.org; Tue, 13 Nov 2018 10:53:11 -0500
+	(envelope-from <alistair23@gmail.com>) id 1gMf1s-0004bV-J6
+	for qemu-riscv@nongnu.org; Tue, 13 Nov 2018 15:11:21 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <abologna@redhat.com>) id 1gMb01-0007OM-J9
-	for qemu-riscv@nongnu.org; Tue, 13 Nov 2018 10:53:10 -0500
-Received: from mx1.redhat.com ([209.132.183.28]:59630)
-	by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.71) (envelope-from <abologna@redhat.com>)
-	id 1gMazw-0007Ji-03; Tue, 13 Nov 2018 10:53:05 -0500
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
-	[10.5.11.14])
-	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id EF9313154862;
-	Tue, 13 Nov 2018 15:52:57 +0000 (UTC)
-Received: from kinshicho (unknown [10.43.2.63])
-	by smtp.corp.redhat.com (Postfix) with ESMTPS id E7C255D9D6;
-	Tue, 13 Nov 2018 15:52:56 +0000 (UTC)
-Message-ID: <d316de9ed544575a3c9f22882dd8befdf6e0309f.camel@redhat.com>
-From: Andrea Bolognani <abologna@redhat.com>
-To: Alistair Francis <alistair23@gmail.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>, "qemu-devel@nongnu.org
-	Developers" <qemu-devel@nongnu.org>, qemu-riscv@nongnu.org
-Date: Tue, 13 Nov 2018 16:52:55 +0100
-In-Reply-To: <CAKmqyKMM=M-1G15k-0Rgo7+sp-jnq31z=GqcHaciXx5TuHNE2Q@mail.gmail.com>
-References: <cover.1540937826.git.alistair.francis@wdc.com>
-	<3f834825634e34ad107fe9e7af1b417cb47fc1f1.camel@redhat.com>
-	<CAKmqyKNF+tQFf50BCj91_RypYeHbnoZLvpm8gH71iW1og9uWfA@mail.gmail.com>
-	<f91286ff09066c577d359b1d185aca9fb7d21331.camel@redhat.com>
-	<CAKmqyKMM=M-1G15k-0Rgo7+sp-jnq31z=GqcHaciXx5TuHNE2Q@mail.gmail.com>
+	(envelope-from <alistair23@gmail.com>) id 1gMeyu-0007Vz-Nr
+	for qemu-riscv@nongnu.org; Tue, 13 Nov 2018 15:08:17 -0500
+Received: from mail-lj1-x243.google.com ([2a00:1450:4864:20::243]:36816)
+	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+	(Exim 4.71) (envelope-from <alistair23@gmail.com>)
+	id 1gMeyu-0007VQ-G3; Tue, 13 Nov 2018 15:08:16 -0500
+Received: by mail-lj1-x243.google.com with SMTP id s15-v6so12029082lji.3;
+	Tue, 13 Nov 2018 12:08:16 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=GvCvEYp2tw5jRYQwjgto04bYTCe/21WUYz/sGndvo+U=;
+	b=Sa0osVX0ydpKWwW523tX0eHs80zOziZF8qUxn/0RSC/mFphaW9s6TTCnIHH7xk20DF
+	89x8HDbENGN5Y/hvOwm52u4HEINvFCDbY0/nKESTU4nqgqtcSdWIEZubtvkd6IAc0PSO
+	ay6EoACDI79FotGbKokVRdjRpy+h3zFfkdlYA/T4zw6PZL14g52rnmxzQZieAfDJ6/uC
+	kb51cNcN2/pDpPIvyd8CCymTP7H/rtmWp2wqudPDPWYUg4MNIEMoIDj7spLpCdBjUIL3
+	zgOPBDFw6JZh3N5IIN8t9FyWUx+OxfGXU1H8h1hyesJx1qRLOnS8o8ENVA0WgciJoo+n
+	g11g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=GvCvEYp2tw5jRYQwjgto04bYTCe/21WUYz/sGndvo+U=;
+	b=Q6UiuvfYCrS3tZD3c4yJx6QarErsyR9QDU6j/bH2pKjPRi/c/Ebsyue5wP5kymILhk
+	n3fspACOpeuYR6yJOItlO6yON//eWc95sV6HDGG1HKXxK1FCjlI6iO3NdaoatVEl2nGe
+	HT6KOFyLT73VQcfadTC0DCyyIqJYRvN9HxH1B2zgRlD6aMevSfmkoP61pR1V0i5TbFAl
+	uAWmhbAxpAJNl9MJqgcCF6aQNfcXG2pADzDQ1PfexHjKN7CjI8oT+GCRlRVOX7cbuPci
+	16+5bUafd6ytSI/EX6gmJ+4ws0QQlOwB5shw7IZPmJO1udinaCsmOR22gBWrSFPpI72u
+	icQQ==
+X-Gm-Message-State: AGRZ1gKs2amK5Ti9W1YEA9giWW0TtQUxjMR/PyaysIMpmAxoLCQ4Suqw
+	/yeDHvBYagwF9ECbbYhD1TUETzGAxkgApHmT7sI=
+X-Google-Smtp-Source: AJdET5c567D3kxWIc9mPYbUqQj6EaDDPdtgN3On2FCeVLWeFgAP6m8tGsfoXLi+MqVfsEPxhHiD1bAMPVxoAMqVU6WA=
+X-Received: by 2002:a2e:4218:: with SMTP id
+	p24-v6mr3905196lja.58.1542139695202; 
+	Tue, 13 Nov 2018 12:08:15 -0800 (PST)
+MIME-Version: 1.0
+References: <20181108120628.29926-1-kbastian@mail.uni-paderborn.de>
+	<20181108120628.29926-3-kbastian@mail.uni-paderborn.de>
+In-Reply-To: <20181108120628.29926-3-kbastian@mail.uni-paderborn.de>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 13 Nov 2018 12:07:43 -0800
+Message-ID: <CAKmqyKMovbJcChitESLqep_4D4-kgMjaUSaESghPu5+EYKSu5A@mail.gmail.com>
+To: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+Cc: Michael Clark <mjc@sifive.com>, Sagar Karandikar <sagark@eecs.berkeley.edu>,
+	Palmer Dabbelt <palmer@sifive.com>,
+	Alistair Francis <Alistair.Francis@wdc.com>, qemu-riscv@nongnu.org, 
+	"qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.30.2 (3.30.2-2.fc29) 
-Mime-Version: 1.0
-Content-Transfer-Encoding: 7bit
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
-	(mx1.redhat.com [10.5.110.41]);
-	Tue, 13 Nov 2018 15:52:58 +0000 (UTC)
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
-X-Received-From: 209.132.183.28
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v6 0/5] Connect a PCIe host
- and graphics support to RISC-V
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+	recognized.
+X-Received-From: 2a00:1450:4864:20::243
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH 2/2] target/riscv: Fix
+ sfence.vm/a both available in any priv version
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -56,20 +69,62 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Nov 2018 15:53:11 -0000
+X-List-Received-Date: Tue, 13 Nov 2018 20:11:21 -0000
 
-On Wed, 2018-11-07 at 13:47 -0800, Alistair Francis wrote:
-> I don't think there is even MSI support in the interrupt spec (I
-> haven't looked at all though), yet alone in QEMU. Unfortunately it
-> seems low down on the list of things we need to do so it will probably
-> be awhile.
+On Thu, Nov 8, 2018 at 4:07 AM Bastian Koppelmann
+<kbastian@mail.uni-paderborn.de> wrote:
+>
+> sfence.vm has been replaced in priv v1.10 spec by sfence.vma.
+>
+> Reported-by: Richard Henderson <richard.henderson@linaro.org>
+> Signed-off-by: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
 
-That's perfectly fine; just be aware of the fact that, until
-pcie-root-port can be used successfully, libvirt users will still
-get virtio-mmio by default for RISC-V guests and will have to jump
-through significant hoops in order to use virtio-pci instead.
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
--- 
-Andrea Bolognani / Red Hat / Virtualization
+Alistair
 
+> ---
+>  target/riscv/translate.c | 18 +++++++++++++-----
+>  1 file changed, 13 insertions(+), 5 deletions(-)
+>
+> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+> index 5359088e24..f44eb9c41b 100644
+> --- a/target/riscv/translate.c
+> +++ b/target/riscv/translate.c
+> @@ -1292,10 +1292,14 @@ static void gen_system(CPURISCVState *env, DisasContext *ctx, uint32_t opc,
+>  #ifndef CONFIG_USER_ONLY
+>      /* Extract funct7 value and check whether it matches SFENCE.VMA */
+>      if ((opc == OPC_RISC_ECALL) && ((csr >> 5) == 9)) {
+> -        /* sfence.vma */
+> -        /* TODO: handle ASID specific fences */
+> -        gen_helper_tlb_flush(cpu_env);
+> -        return;
+> +        if (env->priv_ver == PRIV_VERSION_1_10_0) {
+> +            /* sfence.vma */
+> +            /* TODO: handle ASID specific fences */
+> +            gen_helper_tlb_flush(cpu_env);
+> +            return;
+> +        } else {
+> +            gen_exception_illegal(ctx);
+> +        }
+>      }
+>  #endif
+>
+> @@ -1342,7 +1346,11 @@ static void gen_system(CPURISCVState *env, DisasContext *ctx, uint32_t opc,
+>              gen_helper_wfi(cpu_env);
+>              break;
+>          case 0x104: /* SFENCE.VM */
+> -            gen_helper_tlb_flush(cpu_env);
+> +            if (env->priv_ver <= PRIV_VERSION_1_09_1) {
+> +                gen_helper_tlb_flush(cpu_env);
+> +            } else {
+> +                gen_exception_illegal(ctx);
+> +            }
+>              break;
+>  #endif
+>          default:
+> --
+> 2.19.1
+>
+>
 
