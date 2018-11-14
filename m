@@ -1,60 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gMpXT-0004Df-1f
+	id 1gMpXT-0004Dp-6U
 	for mharc-qemu-riscv@gnu.org; Wed, 14 Nov 2018 02:24:39 -0500
-Received: from eggs.gnu.org ([2001:4830:134:3::10]:53435)
+Received: from eggs.gnu.org ([2001:4830:134:3::10]:59416)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <mjc@sifive.com>) id 1gMkyf-0001zJ-DT
-	for qemu-riscv@nongnu.org; Tue, 13 Nov 2018 21:32:27 -0500
+	(envelope-from <mjc@sifive.com>) id 1gMlVf-0007QO-GX
+	for qemu-riscv@nongnu.org; Tue, 13 Nov 2018 22:06:33 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <mjc@sifive.com>) id 1gMkyd-0000On-Lv
-	for qemu-riscv@nongnu.org; Tue, 13 Nov 2018 21:32:25 -0500
-Received: from mail-oi1-x243.google.com ([2607:f8b0:4864:20::243]:45532)
+	(envelope-from <mjc@sifive.com>) id 1gMlVd-0001vx-SY
+	for qemu-riscv@nongnu.org; Tue, 13 Nov 2018 22:06:31 -0500
+Received: from mail-ot1-x32b.google.com ([2607:f8b0:4864:20::32b]:37587)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <mjc@sifive.com>) id 1gMkyd-0000Ld-2u
-	for qemu-riscv@nongnu.org; Tue, 13 Nov 2018 21:32:23 -0500
-Received: by mail-oi1-x243.google.com with SMTP id b141so3296305oii.12
-	for <qemu-riscv@nongnu.org>; Tue, 13 Nov 2018 18:32:20 -0800 (PST)
+	(Exim 4.71) (envelope-from <mjc@sifive.com>) id 1gMlVd-0001tb-JR
+	for qemu-riscv@nongnu.org; Tue, 13 Nov 2018 22:06:29 -0500
+Received: by mail-ot1-x32b.google.com with SMTP id 40so13458357oth.4
+	for <qemu-riscv@nongnu.org>; Tue, 13 Nov 2018 19:06:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=/OhNFuxFKhsWuYIkImyoz2Q7AyrmC8gjBuOAAsh4ECk=;
-	b=K9da+/Lfj9EUm4DJWcxTzpM6npf69YhMGFL6HldHjyunzFKL9ifAT4spWMDUXT2OTW
-	TChZrP41OUO2lk+hQ5CWTmJjD9NHayQTsisOOCGpG5YnqW3C5vU8NiBmkRTt/6mG1/Xg
-	n0By4I0vdv3vWBL2l+CH4Oum4SlfDHXjDFct5lGvftCPMB0P6O7zxUlWta/ppF54JAjp
-	fole6i6N886Umbhq7so0r5UCW0wKE0KmHig4WVdh3tRd9JjffrPWAKMfMaZU6cnRlt6a
-	/5FAlgNpkjA1if7PNunTyITcOziZVrjbEkAW6yb1mH2GO89/p7RRC/WQgXdWjsnRay0w
-	zXZA==
+	:cc; bh=8Z5n3ixt0X27EOOPsaFwn5MbNGzY4fAxZnRnh0hFrNE=;
+	b=a/A2ICCTwIR1JnL5krayTYN7e/QwS6P5yqO/RWNrL6J4dGxKeTvBzvHP2avAESyhIQ
+	YeUDUiFdkay+n8P+uuhubvipgxg88od/aMNGpVORkeNhfBja/L9OYUW+MEzq37HwFjDZ
+	mxnOsu6ZudyhiPhiE1UOLK5AOw/8OScVL5qZcpxuoicLSqsXIkrWUW0QTR4HGUxaxnNe
+	rJoj3xlT+2uxKCaQDVa4V/Dv3YDuDafEbVxaudaXyPNy7z/1srNQVntY1frG69UoGoGF
+	kGKI94mE+ENex1VKQwJBW8q95FcrXbWiIWwh6Oc8QqKqgV0j+l9ml4GC9SEMT+ExBSvF
+	NAAg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=/OhNFuxFKhsWuYIkImyoz2Q7AyrmC8gjBuOAAsh4ECk=;
-	b=fb4JWQv4t7cvVAldj3sIpUd58x1v4nTUi0nsES1OoBjuZT7AnlJ1ywV5uotHYuQYIc
-	XWGv4lwnuBx/6j6wHENBrOvLJsabftxCxChTDMWFZPY6AFDsnlpcb9qGQ9t0BhNqKipa
-	h1PwrcWsRLpXsYy1X7BtWqRmP3tD9iOoa0MJMYDeskETtewItCdDdyNAaWeu0uECFcby
-	Z4rMPh3x46/HbGUNU73+bos09HajJXGPA8dHiHzn9YEVit1es81biPhjgJugN7wcJ/kt
-	tE8HSVMHoE+LrV5mZ/kbStaDMAHJubA/c5mxsGlDAVnrM8EQrHaJ2xCF4HtJG5Qy62dU
-	+Zcw==
-X-Gm-Message-State: AGRZ1gKtX4V5kPYRKWkT97BmfThfQU9wmlSJ579bQNqgq0bKzKOTN+b1
-	lL7j4xfhH0VuIm+TrmsjM2fhATYmoRaRhLtp4A331w==
-X-Google-Smtp-Source: AJdET5ccGqDGG4EVvPI2+RsDnYuBVhGzTp1IXRAluGgHcUnxY2KRBldSloaOeAwpOGyuNiF9P7s1LuE3M5NMF8M5ndM=
-X-Received: by 2002:aca:b954:: with SMTP id j81-v6mr47785oif.182.1542162739654;
-	Tue, 13 Nov 2018 18:32:19 -0800 (PST)
+	bh=8Z5n3ixt0X27EOOPsaFwn5MbNGzY4fAxZnRnh0hFrNE=;
+	b=DldiQz0qZwgSibM0qXbXWZum/Aiyel57FvoAkfha0oyYv9H8jxXLib00sI+Xxtu3CK
+	7OE+85DUGMzY1+1pPy8bu9LSiwpaPikq4ErAPSAQQFHy1+aZMxZT6jTGZKaXd0udcHXu
+	9gw1xvit/73ltEraa0NVelEB/3VagLkTkY2bWSZQXY25z5sV6SvEqJKzx+e03YnA8/4Y
+	wMCDc7MCUenR96V45Tlt7i1PFlDsxlsViNv8N6G1Nea9+Lrc1gJZcX+aqOtbVZfxxQkV
+	euTJc1I3aHPye79+HpyVD3lawxfoeXGqNl3SOlIiNDO78EbNGGe43xcTZc4YZC97TXMH
+	7YHA==
+X-Gm-Message-State: AGRZ1gJ4igbbtXws5rThvR7FvDVmhd2NRsHB0GKTJYDtq9RCu32Zie63
+	K60v5Hs+Bzo8nqW+FyNnUPGk1UX9TvNiGtv8JWqurQ==
+X-Google-Smtp-Source: AJdET5c9v/i7UJ0YRdunDSPk3MKJZ7h9NzjQ6Uzi1+17NvR0fCsudj5OsBweERh60ZQOI8q/uD8OPF+kEyNzWnJC1xo=
+X-Received: by 2002:a9d:4b15:: with SMTP id q21mr101371otf.30.1542164780203;
+	Tue, 13 Nov 2018 19:06:20 -0800 (PST)
 MIME-Version: 1.0
 References: <20181113235045.14155-1-palmer@sifive.com>
-	<20181113235045.14155-5-palmer@sifive.com>
-In-Reply-To: <20181113235045.14155-5-palmer@sifive.com>
+In-Reply-To: <20181113235045.14155-1-palmer@sifive.com>
 From: Michael Clark <mjc@sifive.com>
-Date: Wed, 14 Nov 2018 15:32:08 +1300
-Message-ID: <CAHNT7Nu7NAc-=7DEQggnWXq-v-5xAwfrB4yrvWVCJp6S6T5=0w@mail.gmail.com>
+Date: Wed, 14 Nov 2018 16:06:09 +1300
+Message-ID: <CAHNT7NsWzvX8k1Ed9Re_vTL-87r2bh4wzjQSLGJ4=fpgDYyhow@mail.gmail.com>
 To: Palmer Dabbelt <palmer@sifive.com>
 Cc: qemu-riscv@nongnu.org, QEMU Developers <qemu-devel@nongnu.org>
-Content-Type: multipart/alternative; boundary="0000000000004887db057a96be3b"
+Content-Type: multipart/alternative; boundary="000000000000e8d84b057a973728"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::243
-X-Mailman-Approved-At: Wed, 14 Nov 2018 02:24:37 -0500
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PULL 4/4] RISC-V: Respect fences for
- user-only emulators
+X-Received-From: 2607:f8b0:4864:20::32b
+X-Mailman-Approved-At: Wed, 14 Nov 2018 02:24:38 -0500
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PR RFC] RISC-V Patches for 3.1-rc2
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -66,178 +64,194 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Nov 2018 02:32:27 -0000
+X-List-Received-Date: Wed, 14 Nov 2018 03:06:33 -0000
 
---0000000000004887db057a96be3b
+--000000000000e8d84b057a973728
 Content-Type: text/plain; charset="UTF-8"
-
-Nits. Please improve your commit message to make them more impersonal...
 
 On Wed, Nov 14, 2018 at 12:52 PM Palmer Dabbelt <palmer@sifive.com> wrote:
 
-> Our current fence implementation ignores fences for the user-only
-> configurations.  This is incorrect but unlikely to manifest: it requires
-> multi-threaded user-only code that takes advantage of the weakness in
-> the host's memory model and can be inlined by TCG.
+> The following changes since commit
+> cb968d275c145467c8b385a3618a207ec111eab1:
+>
+>   Update version for v3.1.0-rc1 release (2018-11-13 18:16:14 +0000)
+>
+> are available in the Git repository at:
+>
+>   git://github.com/riscv/riscv-qemu.git tags/riscv-for-master-3.1-rc2
+>
+> for you to fetch changes up to 3502dc824a7b0218abb49f4350e80a49829748cf:
+>
+>   RISC-V: Respect fences for user-only emulators (2018-11-13 15:12:15
+> -0800)
+>
+> ----------------------------------------------------------------
+> RISC-V Patches for 3.1-rc2
+>
+> This pull request contains four patches that aren't really related to
+> each other aside from all being bug fixes that I think should go in for
+> 3.1.0:
 >
 
-The RISC-V fence implementation...
+Here's I again. I guess its a somewhat arbitrary set of fixes. Although one
+could say the same about the set of fixes in the github repo.
 
+At least you don't have review feedback asking you split a patch up to make
+it easier to review, after its already been reviewed (what I would call
+"make work").
 
-> This patch simply treats fences the same way for all our emulators.
-> I've given it to testing as I don't want to construct a test that would
-> actually trigger the failure.
+No objections from me. We just have to get these patches into the other
+tree which also has RISC-V bug fixes (but I don't have an opinion about
+which bugs are more or less critical). There will be some minor merge
+conflicts because the RISC-V tree has writable misa suppoer. I'm planning
+to rebase at 3.1.0, just so we don't trample on each other. It's probably
+going to be quite a lot of work to get the patches in that tree here
+because my patches tend to attract a lot of pedantic feedback. i.e. !! to
+normalize a scalar into a bool and ~ to broadcast bit 1 e.g. C bitwise
+logic that you find frequently in spike; has to be dumbed down into macro
+wrappers. Feedback. These changes to keep people happy are the reason why
+we broke things for folk like changing gp$ to __globalPointer$ (in
+GCC/binutils). Suddendly all earlier asm is broken because someone wants to
+give feedback about how RISC-V should be; someone who does not need to bear
+the burden of those changes.
+
+Change simply because we can make you change stuff to break things for
+RISC-V users because we think those changes are a good idea. Don't get me
+wrong. We get good feedback (in QEMU, mostly from RIchard Henderson), but
+its not always the case. VSPILL/VFILL and vaddsz sp is a good idea. I need
+to find that email of Richard's on the GCC list and forward it to Krste. I
+hope the feedback makes it to folk working on the Vector spec because as
+far as I can tell it is a good idea.
+
+Apologies for the cynicism. I'll get over it.
+
+* The second half of Alistair's memory leak patch set that I missed last
+>   week.
+> * A fix to make fclass.d availiable only on RV64IFD systems (without
+>   this it's availiable on RV32IFD systems, truncating the result).
+> * A fix to make sfence.vm availiable only in priv-1.9.1, and sfence.vma
+>   only availiable in priv-1.10.
+> * A change to respect fences in user-mode emulators, which were
+>   previously treated as NOPs.
 >
-
-Testing has been limited to... ? Reproducer?
-
-
-> Our fence implementation has an additional deficiency where we map all
-> RISC-V fences to full fences.  Now that we have a formal memory model
-> for RISC-V we can start to take advantage of the strength bits on our
-> fence instructions.  This requires a bit more though, so I'm going to
-> split it out because the implementation is still correct without taking
-> advantage of these weaker fences.
+> As usual, this builds and boot Linux for me.  I don't think I have
+> anything else planned for 3.1.0, but I may be wrong as things are a bit
+> hectic this week.
 >
-
-The fence implementation...
-
-A formal memory model for RISC-V allows...
-
-
-> Thanks to Richard Henderson for pointing out both of the issues.
+> ----------------------------------------------------------------
+> Alistair Francis (1):
+>       hw/riscv/virt: Free the test device tree node name
 >
-> Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
-> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-
-
-Assuming you fix up the commit message. I am not sure if I am present in
-any of the commit messages I wrote, however perhaps thats just a matter
-style with respect to writing (or re-writing) history.
-
-Reviewed-by: Michael Clark <mjc@sifive.com>
-
----
->  target/riscv/translate.c | 2 --
->  1 file changed, 2 deletions(-)
+> Bastian Koppelmann (2):
+>       target/riscv: Fix FCLASS_D being treated as RV64 only
+>       target/riscv: Fix sfence.vm/a both available in any priv version
 >
-> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index f44eb9c41b48..312bf298b3c2 100644
-> --- a/target/riscv/translate.c
-> +++ b/target/riscv/translate.c
-> @@ -1776,7 +1776,6 @@ static void decode_RV32_64G(CPURISCVState *env,
-> DisasContext *ctx)
->                       GET_RM(ctx->opcode));
->          break;
->      case OPC_RISC_FENCE:
-> -#ifndef CONFIG_USER_ONLY
->          if (ctx->opcode & 0x1000) {
->              /* FENCE_I is a no-op in QEMU,
->               * however we need to end the translation block */
-> @@ -1787,7 +1786,6 @@ static void decode_RV32_64G(CPURISCVState *env,
-> DisasContext *ctx)
->              /* FENCE is a full memory barrier. */
->              tcg_gen_mb(TCG_MO_ALL | TCG_BAR_SC);
->          }
-> -#endif
->          break;
->      case OPC_RISC_SYSTEM:
->          gen_system(env, ctx, MASK_OP_SYSTEM(ctx->opcode), rd, rs1,
-> --
-> 2.18.1
+> Palmer Dabbelt (1):
+>       RISC-V: Respect fences for user-only emulators
+>
+>  hw/riscv/virt.c          |  1 +
+>  target/riscv/translate.c | 24 ++++++++++++++++--------
+>  2 files changed, 17 insertions(+), 8 deletions(-)
 >
 >
 >
 
---0000000000004887db057a96be3b
+--000000000000e8d84b057a973728
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr"><div><br></div><div>Nits. Please improve your commit messa=
-ge to make them more impersonal...<br><br><div class=3D"gmail_quote"><div d=
-ir=3D"ltr">On Wed, Nov 14, 2018 at 12:52 PM Palmer Dabbelt &lt;<a href=3D"m=
-ailto:palmer@sifive.com">palmer@sifive.com</a>&gt; wrote:<br></div><blockqu=
-ote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc s=
-olid;padding-left:1ex">Our current fence implementation ignores fences for =
-the user-only<br>
-configurations.=C2=A0 This is incorrect but unlikely to manifest: it requir=
-es<br>
-multi-threaded user-only code that takes advantage of the weakness in<br>
-the host&#39;s memory model and can be inlined by TCG.<br></blockquote><div=
-><br></div><div>The RISC-V fence implementation...</div><div>=C2=A0</div><b=
-lockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px =
-#ccc solid;padding-left:1ex">
-This patch simply treats fences the same way for all our emulators.<br>
-I&#39;ve given it to testing as I don&#39;t want to construct a test that w=
-ould<br>
-actually trigger the failure.<br></blockquote><div><br></div><div>Testing h=
-as been limited to... ? Reproducer?</div><div>=C2=A0</div><blockquote class=
-=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padd=
-ing-left:1ex">
-Our fence implementation has an additional deficiency where we map all<br>
-RISC-V fences to full fences.=C2=A0 Now that we have a formal memory model<=
+<div dir=3D"ltr"><br><br><div class=3D"gmail_quote"><div dir=3D"ltr">On Wed=
+, Nov 14, 2018 at 12:52 PM Palmer Dabbelt &lt;<a href=3D"mailto:palmer@sifi=
+ve.com">palmer@sifive.com</a>&gt; wrote:<br></div><blockquote class=3D"gmai=
+l_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left=
+:1ex">The following changes since commit cb968d275c145467c8b385a3618a207ec1=
+11eab1:<br>
+<br>
+=C2=A0 Update version for v3.1.0-rc1 release (2018-11-13 18:16:14 +0000)<br=
+>
+<br>
+are available in the Git repository at:<br>
+<br>
+=C2=A0 git://<a href=3D"http://github.com/riscv/riscv-qemu.git" rel=3D"nore=
+ferrer" target=3D"_blank">github.com/riscv/riscv-qemu.git</a> tags/riscv-fo=
+r-master-3.1-rc2<br>
+<br>
+for you to fetch changes up to 3502dc824a7b0218abb49f4350e80a49829748cf:<br=
+>
+<br>
+=C2=A0 RISC-V: Respect fences for user-only emulators (2018-11-13 15:12:15 =
+-0800)<br>
+<br>
+----------------------------------------------------------------<br>
+RISC-V Patches for 3.1-rc2<br>
+<br>
+This pull request contains four patches that aren&#39;t really related to<b=
+r>
+each other aside from all being bug fixes that I think should go in for<br>
+3.1.0:<br></blockquote><div><br></div><div>Here&#39;s I again. I guess its =
+a somewhat arbitrary set of fixes. Although one could say the same about th=
+e set of fixes in the github repo.</div><div><br></div><div>At least you do=
+n&#39;t have review feedback asking you split a patch up to make it easier =
+to review, after its already been reviewed (what I would call &quot;make wo=
+rk&quot;).</div><div><br></div><div>No objections from me. We just have to =
+get these patches into the other tree which also has RISC-V=C2=A0bug fixes =
+(but I don&#39;t have an opinion about which bugs are more or less critical=
+). There will be some minor merge conflicts because the RISC-V tree has wri=
+table misa suppoer. I&#39;m planning to rebase at 3.1.0, just so we don&#39=
+;t trample on each other. It&#39;s probably going to be quite a lot of work=
+ to get the patches in that tree here because my patches tend to attract a =
+lot of pedantic feedback. i.e. !! to normalize a scalar into a bool and ~ t=
+o broadcast bit 1 e.g. C bitwise logic that you find frequently in spike; h=
+as to be dumbed down into macro wrappers. Feedback. These changes to keep p=
+eople happy are the reason why we broke things for folk like changing gp$ t=
+o __globalPointer$ (in GCC/binutils). Suddendly all earlier asm is broken b=
+ecause someone wants to give feedback about how RISC-V should be; someone w=
+ho does not need to bear the burden of those changes.</div><div><br></div><=
+div>Change simply because we can make you change stuff to break things for =
+RISC-V users because we think those changes are a good idea. Don&#39;t get =
+me wrong. We get good feedback (in QEMU, mostly from RIchard Henderson), bu=
+t its not always the case. VSPILL/VFILL and vaddsz sp is a good idea. I nee=
+d to find that email of Richard&#39;s on the GCC list and forward it to Krs=
+te. I hope the feedback makes it to folk working on the Vector spec because=
+ as far as I can tell it is a good idea.</div><div><br></div><div>Apologies=
+ for the cynicism. I&#39;ll get over it.</div><div><br></div><blockquote cl=
+ass=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;p=
+adding-left:1ex">
+* The second half of Alistair&#39;s memory leak patch set that I missed las=
+t<br>
+=C2=A0 week.<br>
+* A fix to make fclass.d availiable only on RV64IFD systems (without<br>
+=C2=A0 this it&#39;s availiable on RV32IFD systems, truncating the result).=
+<br>
+* A fix to make sfence.vm availiable only in priv-1.9.1, and sfence.vma<br>
+=C2=A0 only availiable in priv-1.10.<br>
+* A change to respect fences in user-mode emulators, which were<br>
+=C2=A0 previously treated as NOPs.<br>
+<br>
+As usual, this builds and boot Linux for me.=C2=A0 I don&#39;t think I have=
+<br>
+anything else planned for 3.1.0, but I may be wrong as things are a bit<br>
+hectic this week.<br>
+<br>
+----------------------------------------------------------------<br>
+Alistair Francis (1):<br>
+=C2=A0 =C2=A0 =C2=A0 hw/riscv/virt: Free the test device tree node name<br>
+<br>
+Bastian Koppelmann (2):<br>
+=C2=A0 =C2=A0 =C2=A0 target/riscv: Fix FCLASS_D being treated as RV64 only<=
 br>
-for RISC-V we can start to take advantage of the strength bits on our<br>
-fence instructions.=C2=A0 This requires a bit more though, so I&#39;m going=
- to<br>
-split it out because the implementation is still correct without taking<br>
-advantage of these weaker fences.<br></blockquote><div><br></div><div>The f=
-ence implementation...</div><div><br></div><div>A formal memory model for R=
-ISC-V allows...</div><div>=C2=A0</div><blockquote class=3D"gmail_quote" sty=
-le=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">
-Thanks to Richard Henderson for pointing out both of the issues.<br>
+=C2=A0 =C2=A0 =C2=A0 target/riscv: Fix sfence.vm/a both available in any pr=
+iv version<br>
 <br>
-Signed-off-by: Palmer Dabbelt &lt;<a href=3D"mailto:palmer@sifive.com" targ=
-et=3D"_blank">palmer@sifive.com</a>&gt;<br>
-Reviewed-by: Alistair Francis &lt;<a href=3D"mailto:alistair.francis@wdc.co=
-m" target=3D"_blank">alistair.francis@wdc.com</a>&gt;<br>
-Reviewed-by: Richard Henderson &lt;<a href=3D"mailto:richard.henderson@lina=
-ro.org" target=3D"_blank">richard.henderson@linaro.org</a>&gt;</blockquote>=
-<div>=C2=A0</div><div>Assuming you fix up the commit message. I am not sure=
- if I am present in any of the commit messages I wrote, however perhaps tha=
-ts just a matter style with respect to writing (or re-writing) history.</di=
-v><div><br></div>Reviewed-by: Michael Clark &lt;<a href=3D"mailto:mjc@sifiv=
-e.com">mjc@sifive.com</a>&gt;<br class=3D"gmail-Apple-interchange-newline">=
-<div><br></div><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex=
-;border-left:1px #ccc solid;padding-left:1ex">
----<br>
-=C2=A0target/riscv/translate.c | 2 --<br>
-=C2=A01 file changed, 2 deletions(-)<br>
+Palmer Dabbelt (1):<br>
+=C2=A0 =C2=A0 =C2=A0 RISC-V: Respect fences for user-only emulators<br>
 <br>
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c<br>
-index f44eb9c41b48..312bf298b3c2 100644<br>
---- a/target/riscv/translate.c<br>
-+++ b/target/riscv/translate.c<br>
-@@ -1776,7 +1776,6 @@ static void decode_RV32_64G(CPURISCVState *env, Disas=
-Context *ctx)<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 GET_RM(ctx-&gt;opcode));<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0break;<br>
-=C2=A0 =C2=A0 =C2=A0case OPC_RISC_FENCE:<br>
--#ifndef CONFIG_USER_ONLY<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if (ctx-&gt;opcode &amp; 0x1000) {<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0/* FENCE_I is a no-op in QE=
-MU,<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 * however we need to end t=
-he translation block */<br>
-@@ -1787,7 +1786,6 @@ static void decode_RV32_64G(CPURISCVState *env, Disas=
-Context *ctx)<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0/* FENCE is a full memory b=
-arrier. */<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0tcg_gen_mb(TCG_MO_ALL | TCG=
-_BAR_SC);<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
--#endif<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0break;<br>
-=C2=A0 =C2=A0 =C2=A0case OPC_RISC_SYSTEM:<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0gen_system(env, ctx, MASK_OP_SYSTEM(ctx-&=
-gt;opcode), rd, rs1,<br>
--- <br>
-2.18.1<br>
+=C2=A0hw/riscv/virt.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 1 +<br>
+=C2=A0target/riscv/translate.c | 24 ++++++++++++++++--------<br>
+=C2=A02 files changed, 17 insertions(+), 8 deletions(-)<br>
 <br>
 <br>
-</blockquote></div></div></div>
+</blockquote></div></div>
 
---0000000000004887db057a96be3b--
+--000000000000e8d84b057a973728--
 
