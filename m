@@ -1,59 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gNQGo-0008Jy-B9
-	for mharc-qemu-riscv@gnu.org; Thu, 15 Nov 2018 17:37:54 -0500
-Received: from eggs.gnu.org ([2001:4830:134:3::10]:48608)
+	id 1gNQH2-00007H-9s
+	for mharc-qemu-riscv@gnu.org; Thu, 15 Nov 2018 17:38:08 -0500
+Received: from eggs.gnu.org ([2001:4830:134:3::10]:48685)
 	by lists.gnu.org with esmtp (Exim 4.71)
 	(envelope-from <prvs=8503fdbbc=Alistair.Francis@wdc.com>)
-	id 1gNQGk-0008GI-3R
-	for qemu-riscv@nongnu.org; Thu, 15 Nov 2018 17:37:53 -0500
+	id 1gNQH0-00005g-CV
+	for qemu-riscv@nongnu.org; Thu, 15 Nov 2018 17:38:07 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
 	(envelope-from <prvs=8503fdbbc=Alistair.Francis@wdc.com>)
-	id 1gNQGV-00053s-7i
-	for qemu-riscv@nongnu.org; Thu, 15 Nov 2018 17:37:40 -0500
-Received: from esa3.hgst.iphmx.com ([216.71.153.141]:52061)
+	id 1gNQGy-0005As-D6
+	for qemu-riscv@nongnu.org; Thu, 15 Nov 2018 17:38:06 -0500
+Received: from esa5.hgst.iphmx.com ([216.71.153.144]:50705)
 	by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.71) (envelope-from <prvs=8503fdbbc=Alistair.Francis@wdc.com>)
-	id 1gNQGD-00051d-8I; Thu, 15 Nov 2018 17:37:17 -0500
+	id 1gNQGs-00052j-9o; Thu, 15 Nov 2018 17:37:58 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
 	d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
-	t=1542321438; x=1573857438;
+	t=1542321478; x=1573857478;
 	h=from:to:cc:subject:date:message-id:references:
 	in-reply-to:content-transfer-encoding:mime-version;
-	bh=Xl4JWw9lDIkcmyLyDGSzdZNzbsGImJzxLnNhIpReGcs=;
-	b=ch/0c1IYAVMMCZ1oHg+r1Vmgg3Mr8asHuTmz24+KCh9FxevTrAyfHGoc
-	cLsJ1PqtHx7ZDCiBfbJC7QzqWTFJDOkChW8JAL4qoVgLDsAtEc6W1i/xk
-	ynxUu22Au8sG5/HtXwID94+9stH1VroncY+DmtoC6k+BLmtH+4VMEn2Ao
-	nQxL8pZzeI7hRALhmpr0xRi2AKxU1eeRgGKTcmGcNlt1UV4aGL2fNwbKB
-	1kYPwoBlGy39ilr7+XnAJv++F4SPmOmHEatdr5zE7TeqduQWWIWfcw9I+
-	M5dSSAF6T5FZjJskVy2gNUE3V9PxPTFJeT2CiQ7kUCQg5xwyp+60UuT32 Q==;
-X-IronPort-AV: E=Sophos;i="5.56,237,1539619200"; d="scan'208";a="99166069"
-Received: from mail-bn3nam01lp0178.outbound.protection.outlook.com (HELO
-	NAM01-BN3-obe.outbound.protection.outlook.com) ([216.32.180.178])
-	by ob1.hgst.iphmx.com with ESMTP; 16 Nov 2018 06:37:16 +0800
+	bh=sNAkeF27UM3OtLEjkEGHG14JH25iJ1vHDWmedDNdOG4=;
+	b=mD7E+dX5zMf0boQEpGXw2hfGHLqFZb/WoxvfIBNpsOU7t29iFKJoDFrc
+	ZLUD/69ru3eK20bFbpMjuKEZz4kROMdfY+tD7KjAmLW5P1KH9SOxOkZuH
+	5m+AXzkeobKoJPuZ38PA/6sMSF6FS5N45eOXgcKVRxrefgIpGX8AyzjFA
+	BqMg+vG+fz0oSvfTMf2y+gGNKnjUj+9oLBy8BnolSfCbu9Z5c2oHeSCq3
+	aRSWOYe5Td+7eQPB7CtSJqich63pOkHZBK6HZyyScKTmcVBMYcFCePJob
+	A1qFEF1wuuQ4V8EvaUJ8Nm5nBa9S4yQ3I+xVVxpdy3SwV2dSfUFanZReK Q==;
+X-IronPort-AV: E=Sophos;i="5.56,237,1539619200"; d="scan'208";a="95523469"
+Received: from mail-bn3nam01lp0177.outbound.protection.outlook.com (HELO
+	NAM01-BN3-obe.outbound.protection.outlook.com) ([216.32.180.177])
+	by ob1.hgst.iphmx.com with ESMTP; 16 Nov 2018 06:37:24 +0800
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=sharedspace.onmicrosoft.com; s=selector1-wdc-com;
 	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=+je7nAaBJndhfAMUEdOnXbK/PrzUW6fnYZdTN+2thhc=;
-	b=DvAcrZ3Wh+Is5qL1VfUX7zWv1uB0aaNC7IFQ4p1Rr6PiEPhenxeVasEtGpDbEhSJK/FfIzr7/vtA/9cctVu3eVYrrprvCszrC0CeYD4EXXchxkKSnNuIvTmBA08yWFmMFaezqa/ea2hqeeGB1x5PltQoEh/cvASUIKoI+10gTfc=
+	bh=bT0/h0/F3SUICJU8fPqLe86CfX7hlSOVHi2DEF6jp2U=;
+	b=etEgCVUKm4B25iMy9sVygRDjyieeYB5Te7c/YoXdZwrWQvMUHzL/R+5OR7lRGIOSbvdd/Sa9lIo6cYfaNNobZon+97Noph2n5xrTnAyqVJHR05e/G+MxpUC2C96Knf6ZQmr4rrBgWzPJhWUQ+4hIE1yUzqO6w1dy4UjImnX4jOI=
 Received: from MWHPR04MB0401.namprd04.prod.outlook.com (10.173.48.18) by
 	MWHPR04MB0865.namprd04.prod.outlook.com (10.172.169.7) with Microsoft
 	SMTP
 	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
-	15.20.1294.36; Thu, 15 Nov 2018 22:37:13 +0000
+	15.20.1294.36; Thu, 15 Nov 2018 22:37:22 +0000
 Received: from MWHPR04MB0401.namprd04.prod.outlook.com
 	([fe80::4853:2cc0:27bc:a62e]) by
 	MWHPR04MB0401.namprd04.prod.outlook.com
 	([fe80::4853:2cc0:27bc:a62e%12]) with mapi id 15.20.1294.045;
-	Thu, 15 Nov 2018 22:37:13 +0000
+	Thu, 15 Nov 2018 22:37:22 +0000
 From: Alistair Francis <Alistair.Francis@wdc.com>
 To: "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, "qemu-riscv@nongnu.org"
 	<qemu-riscv@nongnu.org>
 CC: Alistair Francis <Alistair.Francis@wdc.com>, "alistair23@gmail.com"
 	<alistair23@gmail.com>
-Thread-Topic: [RFC v1 22/23] dias: Add RISC-V support
-Thread-Index: AQHUfTPA/tUGnnEISECwiutuJlLLUw==
-Date: Thu, 15 Nov 2018 22:37:13 +0000
-Message-ID: <84be65cc6caa8421b04ac381f4623e21f80ee39f.1542321076.git.alistair.francis@wdc.com>
+Thread-Topic: [RFC v1 23/23] configure: Add support for building RISC-V host
+Thread-Index: AQHUfTPGjVeH6MKMOEKTZhqeG0wMdg==
+Date: Thu, 15 Nov 2018 22:37:22 +0000
+Message-ID: <b7bd19036aa7af06a54d904f5473d97bd8dcfc6e.1542321076.git.alistair.francis@wdc.com>
 References: <cover.1542321076.git.alistair.francis@wdc.com>
 In-Reply-To: <cover.1542321076.git.alistair.francis@wdc.com>
 Accept-Language: en-US
@@ -61,8 +61,8 @@ Content-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
 x-mailer: git-send-email 2.19.1
-x-clientproxiedby: BYAPR07CA0093.namprd07.prod.outlook.com
-	(2603:10b6:a03:12b::34) To MWHPR04MB0401.namprd04.prod.outlook.com
+x-clientproxiedby: BYAPR07CA0077.namprd07.prod.outlook.com
+	(2603:10b6:a03:12b::18) To MWHPR04MB0401.namprd04.prod.outlook.com
 	(2603:10b6:300:70::18)
 authentication-results: spf=none (sender IP is )
 	smtp.mailfrom=Alistair.Francis@wdc.com; 
@@ -70,17 +70,17 @@ x-ms-exchange-messagesentrepresentingtype: 1
 x-originating-ip: [199.255.44.250]
 x-ms-publictraffictype: Email
 x-microsoft-exchange-diagnostics: 1; MWHPR04MB0865;
-	6:BsA/LNQt8zjxw6DMLHw4XRfAA/s1oYH0Ehzm4l8z7o4C3SiNsRUgic/KrGVCkeZspIziXEPbP+KZy+lh7wQ2OzfAHAx9nRroWLvSIA9XDkLFrUWJ8qXtaGx6G8zQ5uG0qO/nF3eEy2HaTpW4yJF/ZNIhewwc7ZkLQq5biXPEhTho1MAM3DBjpjL8o41iBdbd20+8qkhDV3R0AW50UZRajfnTqyWaLoC5ZB7WU4k4m9RSuoFUzae3WKbAocI6gxjts4WR+5xfTVaV1gR6ur8cb/l8yhQ1nuCzKiMSfR9cMfeb3QbasfrTGkY7s540PY1mxRGuCioczhYfhXRxWn4OyYHzG4QxNKKYggkL5Lhdzy//5+kSXbZCouhTB8yr5d96zc3CZ81r6lzk9hhHr4zJ5KRaUPVm7gYL0POy6IgMcan0Pg9TaGsM+HSsgUy5vYMuEY3+8CwV6sYsWQO5JehZlw==;
-	5:pTiXTecweLh1QZwKiKVDPjXuR1u6P9l/icbb8EsC2GvoSVA4wPyPhSLfVoCrBP5V1HyHS3mj2/44ti+irdcPrt/lj0LI8TrkTUKZdZTqY0NvLYVuqNQXYchyZqd4BImIA0iInEXjUZ4rh+QChzHrkQp5qcAnJ8SzY+9xE2MhiWY=;
-	7:Q7lAeMqpj68iKeR3bDMrhSMqJg3oErv3tTelBsOvppVK9KM06o1NDf8XgP1iDy49BEuG6g2QbwJutaR9mKxVSY4L2KAu/KuX/bHkUvuFhWCi19dwZAzzHbgINECRwpH6yPB9LbbBq0gEMXadx2q7MA==
-x-ms-office365-filtering-correlation-id: 02fe60ba-1f9f-49ca-3979-08d64b4ae33c
+	6:iZinT/KwwQ4VKQP2ndeAACj6h354Khmov38pzOnegwaJTojmqv1em06CtDsqfu9b4LA+jphhjXmPCXH71O5Fki8EB2fsUVfTe1LmpzxmheCgoMJGQu1aZl/aBkyC8fvH80GlFWjz4dmTwBVibdNHh0YPFvTGZctTWnAOGD6tsGs0HMa9qacltJiDaGRBCJl/wkMPvIhyN9P4boPrO3sDkxqjd2whL9x/Yaq2J2un2DoJMSkxOJgXZxXrjcgpqsVc8Ur42fPk8tG5LPHH0CSwJJ5eUDwvgD4GZ7Vr+H3WzugDHyL7LdpdEyI7Km6Rv+QEsOpdwWMguQX7PC8h7LNlzCIbVKe2dT50eUJTZhI91ZGHosLoW5HNMtcwNJM0Yn7sZyDuSf4+wXT50g45E4XYmrvENu0YbmYPLVrrZChzU68LFdhvrkzPC+DTAaSAv1jbYXZQuziCr3+dC34rijxDsg==;
+	5:z9A4DbZ8I/G4L94z5hru20HVUKbXEaiSmJe19trm7Ap2qgO7vbFzLlawXRTaIphffIoyYU2Ek4ghDrfIRFfpBxRtRLPoo3iMLbRLE9u+sDC58UThyKjNXYQINVOfLDTvEHFVjEqsGv0qm8JX4Do2uHM8UfYW16nDkl53rkWYIoE=;
+	7:Spzv4nRtXf58BRZHlLo4bXRCPfvKnITXUxgFyG6eceQn7m0bMvtDpT67fqqaJZ4kgvGFn4z0Y+FnnQ7LDA6c0u07xOcqm+a+NubQDI4p7OtiaiUB+KhwGpnds0mcJA9L6juhTe/H40oRMBOSF2MdsA==
+x-ms-office365-filtering-correlation-id: 76c36f27-7190-4039-82a2-08d64b4ae89c
 x-ms-office365-filtering-ht: Tenant
 x-microsoft-antispam: BCL:0; PCL:0;
 	RULEID:(2390098)(7020095)(4652040)(8989299)(5600074)(711020)(4618075)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(2017052603328)(7153060)(7193020);
 	SRVR:MWHPR04MB0865; 
 x-ms-traffictypediagnostic: MWHPR04MB0865:
 wdcipoutbound: EOP-TRUE
-x-microsoft-antispam-prvs: <MWHPR04MB0865815F24DD02E61FA6B03090DC0@MWHPR04MB0865.namprd04.prod.outlook.com>
+x-microsoft-antispam-prvs: <MWHPR04MB0865263C1EAA03BF1EFB0A7D90DC0@MWHPR04MB0865.namprd04.prod.outlook.com>
 x-exchange-antispam-report-test: UriScan:;
 x-ms-exchange-senderadcheck: 1
 x-exchange-antispam-report-cfa-test: BCL:0; PCL:0;
@@ -92,22 +92,23 @@ x-forefront-antispam-report: SFV:NSPM;
 	DIR:OUT; SFP:1102; SCL:1; SRVR:MWHPR04MB0865;
 	H:MWHPR04MB0401.namprd04.prod.outlook.com; FPR:; SPF:None;
 	LANG:en; PTR:InfoNoRecords; MX:1; A:1; 
-x-microsoft-antispam-message-info: xu2FDf4dyCEaekcVYOvh+pkjxZwOzIs5nQ6CfDSjG7YoIFLxO5FLzSbHVwIgyxToVDbOYO55iLQwPmuvUnSvSwi3TnoloN1k/hUgasfVygze/t4+JtWat3NBFmxnA/k2GUEvITMun2flORTsQNXKeTsocfv27MAYH3GnhQ9JfbqHSiNFtwsd4yEHDJgTh0Ei4kjOaFkYAjFPEH9AogBHTFwlwK5izu7psGSpXnTJfSzlGsqFd5MnTJK9lZt54cHJkVKgnGHztsBhvhaX8tEgHhxN068V/9PEsEiMoRMxhNurrElvgIlD775jFQHv+5w2bksLzgZI/qFsNUGUsqQ/EdxCs+e64EHo2wcGH89LVZY=
+x-microsoft-antispam-message-info: pzktIQX027uzaikkLhYL59NfE6aYDRgYwGyRINMVRHOoYIaJ1bQ6P1ouXhlC5GiQK60/0QTKw0l9wuuzfRkiFtCMEDrSEBFYr8R9rt526X4iDklzFoe9MoQvsq8QmrAAdsRI0JWPsQLHyt0vRvZV2BZZC/GMi0QsxDwdnaSypthnTryn7jJESITGljFi3fpEPUKNo/QySklOdEATrYhUfj0W4nCXdyHomX/NwQlITqYfRZhzWhxmPbpdYrUTnsNHRGEjjbzotPLz5WOT+89I1nWFYnuPBXVC/W8P7750PBUrTHltTR7tjtFTfZXYEBRELa2JQv8ZD3siYfYHHQQSkobgqGi0QC6tS9ijmpE25p8=
 spamdiagnosticoutput: 1:99
 spamdiagnosticmetadata: NSPM
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
 X-OriginatorOrg: wdc.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 02fe60ba-1f9f-49ca-3979-08d64b4ae33c
-X-MS-Exchange-CrossTenant-originalarrivaltime: 15 Nov 2018 22:37:13.5014 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 76c36f27-7190-4039-82a2-08d64b4ae89c
+X-MS-Exchange-CrossTenant-originalarrivaltime: 15 Nov 2018 22:37:22.5411 (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: MWHPR04MB0865
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 216.71.153.141
-Subject: [Qemu-riscv] [RFC v1 22/23] dias: Add RISC-V support
+X-Received-From: 216.71.153.144
+Subject: [Qemu-riscv] [RFC v1 23/23] configure: Add support for building
+ RISC-V host
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -119,35 +120,59 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Nov 2018 22:37:53 -0000
+X-List-Received-Date: Thu, 15 Nov 2018 22:38:07 -0000
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 Signed-off-by: Michael Clark <mjc@sifive.com>
 ---
- disas.c | 10 ++++++++--
- 1 file changed, 8 insertions(+), 2 deletions(-)
+ configure | 12 ++++++++++--
+ 1 file changed, 10 insertions(+), 2 deletions(-)
 
-diff --git a/disas.c b/disas.c
-index 5325b7e6be..82a408f272 100644
---- a/disas.c
-+++ b/disas.c
-@@ -522,8 +522,14 @@ void disas(FILE *out, void *code, unsigned long size)
- # ifdef _ARCH_PPC64
-     s.info.cap_mode =3D CS_MODE_64;
- # endif
--#elif defined(__riscv__)
--    print_insn =3D print_insn_riscv;
-+#elif defined(__riscv) && defined(CONFIG_RISCV_DIS)
-+#if defined(_ILP32)
-+    print_insn =3D print_insn_riscv32;
-+#elif defined(_LP64)
-+    print_insn =3D print_insn_riscv64;
-+#else
-+#error unsupported RISC-V ABI
-+#endif
- #elif defined(__aarch64__) && defined(CONFIG_ARM_A64_DIS)
-     print_insn =3D print_insn_arm_a64;
-     s.info.cap_arch =3D CS_ARCH_ARM64;
+diff --git a/configure b/configure
+index 74e313a810..8a7b9fc933 100755
+--- a/configure
++++ b/configure
+@@ -700,6 +700,12 @@ elif check_define __s390__ ; then
+   else
+     cpu=3D"s390"
+   fi
++elif check_define __riscv ; then
++  if check_define _LP64 ; then
++    cpu=3D"riscv64"
++  elif check_define _ILP32 ; then
++    cpu=3D"riscv32"
++  fi
+ elif check_define __arm__ ; then
+   cpu=3D"arm"
+ elif check_define __aarch64__ ; then
+@@ -712,7 +718,7 @@ ARCH=3D
+ # Normalise host CPU name and set ARCH.
+ # Note that this case should only have supported host CPUs, not guests.
+ case "$cpu" in
+-  ppc|ppc64|s390|s390x|sparc64|x32)
++  ppc|ppc64|s390|s390x|sparc64|x32|riscv32|riscv64)
+     cpu=3D"$cpu"
+     supported_cpu=3D"yes"
+     eval "cross_cc_${cpu}=3D\$host_cc"
+@@ -6809,6 +6815,8 @@ elif test "$ARCH" =3D "x86_64" -o "$ARCH" =3D "x32" ;=
+ then
+   QEMU_INCLUDES=3D"-iquote \$(SRC_PATH)/tcg/i386 $QEMU_INCLUDES"
+ elif test "$ARCH" =3D "ppc64" ; then
+   QEMU_INCLUDES=3D"-iquote \$(SRC_PATH)/tcg/ppc $QEMU_INCLUDES"
++elif test "$ARCH" =3D "riscv32" -o "$ARCH" =3D "riscv64" ; then
++  QEMU_INCLUDES=3D"-I\$(SRC_PATH)/tcg/riscv $QEMU_INCLUDES"
+ else
+   QEMU_INCLUDES=3D"-iquote \$(SRC_PATH)/tcg/\$(ARCH) $QEMU_INCLUDES"
+ fi
+@@ -7306,7 +7314,7 @@ for i in $ARCH $TARGET_BASE_ARCH ; do
+   ppc*)
+     disas_config "PPC"
+   ;;
+-  riscv)
++  riscv*)
+     disas_config "RISCV"
+   ;;
+   s390*)
 --=20
 2.19.1
 
