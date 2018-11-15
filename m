@@ -1,58 +1,111 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gMpXT-0004Dp-6U
-	for mharc-qemu-riscv@gnu.org; Wed, 14 Nov 2018 02:24:39 -0500
-Received: from eggs.gnu.org ([2001:4830:134:3::10]:59416)
+	id 1gNQD6-0005Ef-Jj
+	for mharc-qemu-riscv@gnu.org; Thu, 15 Nov 2018 17:34:04 -0500
+Received: from eggs.gnu.org ([2001:4830:134:3::10]:47168)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <mjc@sifive.com>) id 1gMlVf-0007QO-GX
-	for qemu-riscv@nongnu.org; Tue, 13 Nov 2018 22:06:33 -0500
+	(envelope-from <prvs=8503fdbbc=Alistair.Francis@wdc.com>)
+	id 1gNQD4-0005Dq-TA
+	for qemu-riscv@nongnu.org; Thu, 15 Nov 2018 17:34:03 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <mjc@sifive.com>) id 1gMlVd-0001vx-SY
-	for qemu-riscv@nongnu.org; Tue, 13 Nov 2018 22:06:31 -0500
-Received: from mail-ot1-x32b.google.com ([2607:f8b0:4864:20::32b]:37587)
-	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <mjc@sifive.com>) id 1gMlVd-0001tb-JR
-	for qemu-riscv@nongnu.org; Tue, 13 Nov 2018 22:06:29 -0500
-Received: by mail-ot1-x32b.google.com with SMTP id 40so13458357oth.4
-	for <qemu-riscv@nongnu.org>; Tue, 13 Nov 2018 19:06:20 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=8Z5n3ixt0X27EOOPsaFwn5MbNGzY4fAxZnRnh0hFrNE=;
-	b=a/A2ICCTwIR1JnL5krayTYN7e/QwS6P5yqO/RWNrL6J4dGxKeTvBzvHP2avAESyhIQ
-	YeUDUiFdkay+n8P+uuhubvipgxg88od/aMNGpVORkeNhfBja/L9OYUW+MEzq37HwFjDZ
-	mxnOsu6ZudyhiPhiE1UOLK5AOw/8OScVL5qZcpxuoicLSqsXIkrWUW0QTR4HGUxaxnNe
-	rJoj3xlT+2uxKCaQDVa4V/Dv3YDuDafEbVxaudaXyPNy7z/1srNQVntY1frG69UoGoGF
-	kGKI94mE+ENex1VKQwJBW8q95FcrXbWiIWwh6Oc8QqKqgV0j+l9ml4GC9SEMT+ExBSvF
-	NAAg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=8Z5n3ixt0X27EOOPsaFwn5MbNGzY4fAxZnRnh0hFrNE=;
-	b=DldiQz0qZwgSibM0qXbXWZum/Aiyel57FvoAkfha0oyYv9H8jxXLib00sI+Xxtu3CK
-	7OE+85DUGMzY1+1pPy8bu9LSiwpaPikq4ErAPSAQQFHy1+aZMxZT6jTGZKaXd0udcHXu
-	9gw1xvit/73ltEraa0NVelEB/3VagLkTkY2bWSZQXY25z5sV6SvEqJKzx+e03YnA8/4Y
-	wMCDc7MCUenR96V45Tlt7i1PFlDsxlsViNv8N6G1Nea9+Lrc1gJZcX+aqOtbVZfxxQkV
-	euTJc1I3aHPye79+HpyVD3lawxfoeXGqNl3SOlIiNDO78EbNGGe43xcTZc4YZC97TXMH
-	7YHA==
-X-Gm-Message-State: AGRZ1gJ4igbbtXws5rThvR7FvDVmhd2NRsHB0GKTJYDtq9RCu32Zie63
-	K60v5Hs+Bzo8nqW+FyNnUPGk1UX9TvNiGtv8JWqurQ==
-X-Google-Smtp-Source: AJdET5c9v/i7UJ0YRdunDSPk3MKJZ7h9NzjQ6Uzi1+17NvR0fCsudj5OsBweERh60ZQOI8q/uD8OPF+kEyNzWnJC1xo=
-X-Received: by 2002:a9d:4b15:: with SMTP id q21mr101371otf.30.1542164780203;
-	Tue, 13 Nov 2018 19:06:20 -0800 (PST)
+	(envelope-from <prvs=8503fdbbc=Alistair.Francis@wdc.com>)
+	id 1gNQD3-0003Ni-Sw
+	for qemu-riscv@nongnu.org; Thu, 15 Nov 2018 17:34:02 -0500
+Received: from esa5.hgst.iphmx.com ([216.71.153.144]:50456)
+	by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.71) (envelope-from <prvs=8503fdbbc=Alistair.Francis@wdc.com>)
+	id 1gNQCz-0003IF-7F; Thu, 15 Nov 2018 17:33:57 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+	d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+	t=1542321237; x=1573857237;
+	h=from:to:cc:subject:date:message-id:
+	content-transfer-encoding:mime-version;
+	bh=MrWe87lxFlIorRJmSoZvhhOs2H6yIx93wRG50NQhX3o=;
+	b=ahGVMKMcNe7Lx2OXgK0QNKVPTkmUf1XzpFHsEvvdqkAtdSLQZVNJM7Tg
+	K4AA2tlaIOEYhSbwbnZv0Hl+0pj7MfXlalV77oM1yyqewm4Iwsu3ne2AN
+	7/WxIL+7lL9bbDYFEQC7lloK4jxZLh/QVD5yw87OiHEUg2QSHusrQR+He
+	ON98K3VD/TCK7GE0iIASDqq98SxkaZuIr/d8aRw9h7j92CMTu5KONcUdU
+	RGSD6IbHimuGSv2kgD3VttVkm2ZCIjli2rrbbsx2obxFJTU7HpAFceNZu
+	2IUyCF90gUP4gM7JiEWfxlLzSqRGC5+HAET9x3LryxVRrChlHWZyiFer/ w==;
+X-IronPort-AV: E=Sophos;i="5.56,237,1539619200"; d="scan'208";a="95523243"
+Received: from mail-bn3nam04lp0114.outbound.protection.outlook.com (HELO
+	NAM04-BN3-obe.outbound.protection.outlook.com) ([216.32.180.114])
+	by ob1.hgst.iphmx.com with ESMTP; 16 Nov 2018 06:33:53 +0800
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=sharedspace.onmicrosoft.com; s=selector1-wdc-com;
+	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+	bh=TtUWDPVndj4nYaXJfRYG/dLl1XVCi2VaXFQarEPnFyM=;
+	b=DCZqW4PEsOgx4jGpNIMRlj2gjQGPvkmoKwsv6MABtmApuUYzfPQciAa9vDnS0XVrzlc7iUJfMrTMuS6BFiNpnFix1YESLQpGg0IP3Q4bB4jpRNiHoHQt6k7iD+Y14f9pirRblw1nowBFq2OihH7f/jGTtxz4HlR//lqAcE/VlDg=
+Received: from MWHPR04MB0401.namprd04.prod.outlook.com (10.173.48.18) by
+	MWHPR04MB0673.namprd04.prod.outlook.com (10.172.166.150) with Microsoft
+	SMTP
+	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+	15.20.1294.26; Thu, 15 Nov 2018 22:33:51 +0000
+Received: from MWHPR04MB0401.namprd04.prod.outlook.com
+	([fe80::4853:2cc0:27bc:a62e]) by
+	MWHPR04MB0401.namprd04.prod.outlook.com
+	([fe80::4853:2cc0:27bc:a62e%12]) with mapi id 15.20.1294.045;
+	Thu, 15 Nov 2018 22:33:51 +0000
+From: Alistair Francis <Alistair.Francis@wdc.com>
+To: "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, "qemu-riscv@nongnu.org"
+	<qemu-riscv@nongnu.org>
+CC: Alistair Francis <Alistair.Francis@wdc.com>, "alistair23@gmail.com"
+	<alistair23@gmail.com>
+Thread-Topic: [RFC v1 00/23]  Add RISC-V TCG backend support
+Thread-Index: AQHUfTNIb54rBEN150a/YB8+E2Z5MA==
+Date: Thu, 15 Nov 2018 22:33:51 +0000
+Message-ID: <cover.1542321076.git.alistair.francis@wdc.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-mailer: git-send-email 2.19.1
+x-clientproxiedby: BYAPR11CA0055.namprd11.prod.outlook.com
+	(2603:10b6:a03:80::32) To MWHPR04MB0401.namprd04.prod.outlook.com
+	(2603:10b6:300:70::18)
+authentication-results: spf=none (sender IP is )
+	smtp.mailfrom=Alistair.Francis@wdc.com; 
+x-ms-exchange-messagesentrepresentingtype: 1
+x-originating-ip: [199.255.44.250]
+x-ms-publictraffictype: Email
+x-microsoft-exchange-diagnostics: 1; MWHPR04MB0673;
+	6:JNC+mQjMZThDzelZGAe/RkNSlhahFKHjdeYs0i0zJaiZWR0nmKSStoVLxRs+e0lBazh80mbCxbnoKawtLjM1zI5ffAmQ6pj2M0TPirsZ3Eh7v4Mf6oRgmXGU4fG60e3IpIRzNLT7zw3Ds+0eFY8+lHCkstvMR13tDZuO70QHDWNNBV3RRXzf3uxovNSQM2+cnyw0035iTpEoEGvruBBBACIOph884JIUTLbjXOhmtNwfaHRhpFzhQYX/UYcxHjgygb1S4WQeo4hwCRyst7dE72R+vPQmr7oLiMl49H7nnAqhWAYZrM5Vd6VDYdJWDIj+NSD0l4eKDpceV90nE0pisOcMpIo3gbB9yOD54t+clhcyMmPlvGiO1Ai3F3Punmy4wsHIerI52iEFt75PKAabqCZk8KGvqQNF+C1l02a/1rf2tBQLKMralJs3dMOXx0K0fx3ZNEg9stsSxgc4BpjveA==;
+	5:adXuTFVd71THRlV+S582pl40Qjk+OHva4kP90QJGnYivVq6U3ZNBEsCgz/DJevYlVIaYSge4w33bIcE5iLlstlc/ece467lUoLhIAIThmR+vMe/2UgbgHcQCbUljWaVh2w3dOjmXt6UOZHmkeGzrYan6FguHUxs0mVzpmFeD/zo=;
+	7:OVa3k0pZGvxukPVLfX543tiTuqQklJE6ytViGMM8jBvF7GRxplPbtm4iTw0AYuh46MrltotPDh8WmCuKwTSlHyXf0WZy7LNDy28mMtj8i8IgkZSkNNjVQMYUtklMwpAMIu8IO58eWm3FgP5eBI/O1A==
+x-ms-office365-filtering-correlation-id: cbf61fe6-c11a-48f9-e625-08d64b4a6a99
+x-ms-office365-filtering-ht: Tenant
+x-microsoft-antispam: BCL:0; PCL:0;
+	RULEID:(2390098)(7020095)(4652040)(8989299)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(5600074)(711020)(4618075)(2017052603328)(7153060)(7193020);
+	SRVR:MWHPR04MB0673; 
+x-ms-traffictypediagnostic: MWHPR04MB0673:
+wdcipoutbound: EOP-TRUE
+x-microsoft-antispam-prvs: <MWHPR04MB06734FF4653F51B0FFD9262490DC0@MWHPR04MB0673.namprd04.prod.outlook.com>
+x-exchange-antispam-report-test: UriScan:(166708455590820);
+x-ms-exchange-senderadcheck: 1
+x-exchange-antispam-report-cfa-test: BCL:0; PCL:0;
+	RULEID:(8211001083)(6040522)(2401047)(5005006)(8121501046)(3231415)(944501410)(52105112)(10201501046)(3002001)(93006095)(93001095)(6055026)(148016)(149066)(150057)(6041310)(20161123560045)(20161123562045)(20161123564045)(20161123558120)(201703131423095)(201702281528075)(20161123555045)(201703061421075)(201703061406153)(201708071742011)(7699051)(76991095);
+	SRVR:MWHPR04MB0673; BCL:0; PCL:0; RULEID:; SRVR:MWHPR04MB0673; 
+x-forefront-prvs: 08572BD77F
+x-forefront-antispam-report: SFV:NSPM;
+	SFS:(10019020)(39860400002)(376002)(366004)(346002)(396003)(136003)(199004)(189003)(6506007)(26005)(102836004)(386003)(52116002)(6512007)(5660300001)(99286004)(105586002)(6306002)(106356001)(966005)(478600001)(72206003)(186003)(53936002)(39060400002)(4326008)(6436002)(36756003)(14454004)(68736007)(86362001)(25786009)(316002)(2501003)(71190400001)(71200400001)(81166006)(8676002)(81156014)(50226002)(7736002)(305945005)(66066001)(256004)(97736004)(2906002)(2616005)(3846002)(6116002)(476003)(486006)(2900100001)(44832011)(110136005)(54906003)(6486002)(8936002);
+	DIR:OUT; SFP:1102; SCL:1; SRVR:MWHPR04MB0673;
+	H:MWHPR04MB0401.namprd04.prod.outlook.com; FPR:; SPF:None;
+	LANG:en; PTR:InfoNoRecords; A:1; MX:1; 
+x-microsoft-antispam-message-info: jGsaRmeH4CSIxVMfqiXHtYh7TtYFd5SYVmKlqWf9Dwv7rWDqjQhl0wQcxMyxyoZ2hi1ZT8pdwCedibIWW5FqBvT6/1MdYhFGcqDlmid+6zsXDt1scZWatfBn5HqUqilT9pmf+aqlUNwfFOvuEHqlMVQkDVCkNPalLqBbgs21kSTqWJ7iXSmTQ/0GvUNhFyDn/ujpK5tTExiSTOMTcKiUm6u15R+vZTxMb10ZGCWCDy0nUCxh7yHmLmJM3GisCP74n2b3wEBs2MuLyClEMdBG6kE56wTseKGoBNeDr3XcVFiFDm+LtWuZ7+rWMoQcsj34uMumcTGDLnaD4E5VVcwJpcSjX4zF7K0ufav8tncyGfU=
+spamdiagnosticoutput: 1:99
+spamdiagnosticmetadata: NSPM
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-References: <20181113235045.14155-1-palmer@sifive.com>
-In-Reply-To: <20181113235045.14155-1-palmer@sifive.com>
-From: Michael Clark <mjc@sifive.com>
-Date: Wed, 14 Nov 2018 16:06:09 +1300
-Message-ID: <CAHNT7NsWzvX8k1Ed9Re_vTL-87r2bh4wzjQSLGJ4=fpgDYyhow@mail.gmail.com>
-To: Palmer Dabbelt <palmer@sifive.com>
-Cc: qemu-riscv@nongnu.org, QEMU Developers <qemu-devel@nongnu.org>
-Content-Type: multipart/alternative; boundary="000000000000e8d84b057a973728"
+X-OriginatorOrg: wdc.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: cbf61fe6-c11a-48f9-e625-08d64b4a6a99
+X-MS-Exchange-CrossTenant-originalarrivaltime: 15 Nov 2018 22:33:51.7215 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MWHPR04MB0673
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::32b
-X-Mailman-Approved-At: Wed, 14 Nov 2018 02:24:38 -0500
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PR RFC] RISC-V Patches for 3.1-rc2
+X-Received-From: 216.71.153.144
+Subject: [Qemu-riscv] [RFC v1 00/23]  Add RISC-V TCG backend support
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -64,194 +117,75 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Nov 2018 03:06:33 -0000
+X-List-Received-Date: Thu, 15 Nov 2018 22:34:04 -0000
 
---000000000000e8d84b057a973728
-Content-Type: text/plain; charset="UTF-8"
+This patch set adds RISC-V backend support to QEMU. This is based on
+Michael Clark's original work with some patches ontop.
 
-On Wed, Nov 14, 2018 at 12:52 PM Palmer Dabbelt <palmer@sifive.com> wrote:
+This has been slightly tested and can run other architecture softmmu
+code for a number of instructions but eventually QEMU will either
+seg fault or generate an illigal instruction (depending on the guest
+architecture).
 
-> The following changes since commit
-> cb968d275c145467c8b385a3618a207ec111eab1:
->
->   Update version for v3.1.0-rc1 release (2018-11-13 18:16:14 +0000)
->
-> are available in the Git repository at:
->
->   git://github.com/riscv/riscv-qemu.git tags/riscv-for-master-3.1-rc2
->
-> for you to fetch changes up to 3502dc824a7b0218abb49f4350e80a49829748cf:
->
->   RISC-V: Respect fences for user-only emulators (2018-11-13 15:12:15
-> -0800)
->
-> ----------------------------------------------------------------
-> RISC-V Patches for 3.1-rc2
->
-> This pull request contains four patches that aren't really related to
-> each other aside from all being bug fixes that I think should go in for
-> 3.1.0:
->
+I haven't tested linux user support at all yet. I think Michael had that
+working reliably though and hopefully my changes haven't broken it. I'll
+test both a lot more before I send a full patchset.
 
-Here's I again. I guess its a somewhat arbitrary set of fixes. Although one
-could say the same about the set of fixes in the github repo.
+My hope of submitting an RFC is that some extra eyes on the code might
+help catch what is wrong. Comparing the guest CPU state to a working
+version hasn't given any hints as the states match, even up until the
+generated code segfaults.
 
-At least you don't have review feedback asking you split a patch up to make
-it easier to review, after its already been reviewed (what I would call
-"make work").
+This branch can be found here:
+https://github.com/alistair23/qemu/tree/mainline/alistair/tcg-backend-upstr=
+eam.next
 
-No objections from me. We just have to get these patches into the other
-tree which also has RISC-V bug fixes (but I don't have an opinion about
-which bugs are more or less critical). There will be some minor merge
-conflicts because the RISC-V tree has writable misa suppoer. I'm planning
-to rebase at 3.1.0, just so we don't trample on each other. It's probably
-going to be quite a lot of work to get the patches in that tree here
-because my patches tend to attract a lot of pedantic feedback. i.e. !! to
-normalize a scalar into a bool and ~ to broadcast bit 1 e.g. C bitwise
-logic that you find frequently in spike; has to be dumbed down into macro
-wrappers. Feedback. These changes to keep people happy are the reason why
-we broke things for folk like changing gp$ to __globalPointer$ (in
-GCC/binutils). Suddendly all earlier asm is broken because someone wants to
-give feedback about how RISC-V should be; someone who does not need to bear
-the burden of those changes.
+The working version with Michael's orignal patch and work ontop can be
+found here:
+https://github.com/alistair23/qemu/tree/mainline/alistair/tcg-backend.next
 
-Change simply because we can make you change stuff to break things for
-RISC-V users because we think those changes are a good idea. Don't get me
-wrong. We get good feedback (in QEMU, mostly from RIchard Henderson), but
-its not always the case. VSPILL/VFILL and vaddsz sp is a good idea. I need
-to find that email of Richard's on the GCC list and forward it to Krste. I
-hope the feedback makes it to folk working on the Vector spec because as
-far as I can tell it is a good idea.
 
-Apologies for the cynicism. I'll get over it.
+Alistair Francis (23):
+  elf.h: Add the RISCV ELF magic numbers
+  linux-user: Add host dependency for RISC-V 32-bit
+  linux-user: Add host dependency for RISC-V 64-bit
+  exec: Add RISC-V GCC poison macro
+  riscv: Add the tcg-target header file
+  riscv: Add the tcg target registers
+  riscv: tcg-target: Regiser the JIT
+  riscv: tcg-target: Add support for the constraints
+  riscv: tcg-target: Add the immediate encoders
+  riscv: tcg-target: Add the instruction emitters
+  riscv: tcg-target: Add the relocation functions
+  riscv: tcg-target: Add the mov and movi instruction
+  riscv: tcg-target: Add the extract instructions
+  riscv: tcg-target: Add the out load and store instructions
+  riscv: tcg-target: Add branch and jump instructions
+  riscv: tcg-target: Add slowpath load and store instructions
+  riscv: tcg-target: Add direct load and store instructions
+  riscv: tcg-target: Add the out op decoder
+  riscv: tcg-target: Add the prologue generation
+  riscv: tcg-target: Add the target init code
+  tcg: Add RISC-V cpu signal handler
+  dias: Add RISC-V support
+  configure: Add support for building RISC-V host
 
-* The second half of Alistair's memory leak patch set that I missed last
->   week.
-> * A fix to make fclass.d availiable only on RV64IFD systems (without
->   this it's availiable on RV32IFD systems, truncating the result).
-> * A fix to make sfence.vm availiable only in priv-1.9.1, and sfence.vma
->   only availiable in priv-1.10.
-> * A change to respect fences in user-mode emulators, which were
->   previously treated as NOPs.
->
-> As usual, this builds and boot Linux for me.  I don't think I have
-> anything else planned for 3.1.0, but I may be wrong as things are a bit
-> hectic this week.
->
-> ----------------------------------------------------------------
-> Alistair Francis (1):
->       hw/riscv/virt: Free the test device tree node name
->
-> Bastian Koppelmann (2):
->       target/riscv: Fix FCLASS_D being treated as RV64 only
->       target/riscv: Fix sfence.vm/a both available in any priv version
->
-> Palmer Dabbelt (1):
->       RISC-V: Respect fences for user-only emulators
->
->  hw/riscv/virt.c          |  1 +
->  target/riscv/translate.c | 24 ++++++++++++++++--------
->  2 files changed, 17 insertions(+), 8 deletions(-)
->
->
->
+ accel/tcg/user-exec.c             |   48 +
+ configure                         |   12 +-
+ disas.c                           |   10 +-
+ include/elf.h                     |   55 +
+ include/exec/poison.h             |    1 +
+ linux-user/host/riscv32/hostdep.h |   11 +
+ linux-user/host/riscv64/hostdep.h |   11 +
+ tcg/riscv/tcg-target.h            |  173 +++
+ tcg/riscv/tcg-target.inc.c        | 1728 +++++++++++++++++++++++++++++
+ 9 files changed, 2045 insertions(+), 4 deletions(-)
+ create mode 100644 linux-user/host/riscv32/hostdep.h
+ create mode 100644 linux-user/host/riscv64/hostdep.h
+ create mode 100644 tcg/riscv/tcg-target.h
+ create mode 100644 tcg/riscv/tcg-target.inc.c
 
---000000000000e8d84b057a973728
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+--=20
+2.19.1
 
-<div dir=3D"ltr"><br><br><div class=3D"gmail_quote"><div dir=3D"ltr">On Wed=
-, Nov 14, 2018 at 12:52 PM Palmer Dabbelt &lt;<a href=3D"mailto:palmer@sifi=
-ve.com">palmer@sifive.com</a>&gt; wrote:<br></div><blockquote class=3D"gmai=
-l_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left=
-:1ex">The following changes since commit cb968d275c145467c8b385a3618a207ec1=
-11eab1:<br>
-<br>
-=C2=A0 Update version for v3.1.0-rc1 release (2018-11-13 18:16:14 +0000)<br=
->
-<br>
-are available in the Git repository at:<br>
-<br>
-=C2=A0 git://<a href=3D"http://github.com/riscv/riscv-qemu.git" rel=3D"nore=
-ferrer" target=3D"_blank">github.com/riscv/riscv-qemu.git</a> tags/riscv-fo=
-r-master-3.1-rc2<br>
-<br>
-for you to fetch changes up to 3502dc824a7b0218abb49f4350e80a49829748cf:<br=
->
-<br>
-=C2=A0 RISC-V: Respect fences for user-only emulators (2018-11-13 15:12:15 =
--0800)<br>
-<br>
-----------------------------------------------------------------<br>
-RISC-V Patches for 3.1-rc2<br>
-<br>
-This pull request contains four patches that aren&#39;t really related to<b=
-r>
-each other aside from all being bug fixes that I think should go in for<br>
-3.1.0:<br></blockquote><div><br></div><div>Here&#39;s I again. I guess its =
-a somewhat arbitrary set of fixes. Although one could say the same about th=
-e set of fixes in the github repo.</div><div><br></div><div>At least you do=
-n&#39;t have review feedback asking you split a patch up to make it easier =
-to review, after its already been reviewed (what I would call &quot;make wo=
-rk&quot;).</div><div><br></div><div>No objections from me. We just have to =
-get these patches into the other tree which also has RISC-V=C2=A0bug fixes =
-(but I don&#39;t have an opinion about which bugs are more or less critical=
-). There will be some minor merge conflicts because the RISC-V tree has wri=
-table misa suppoer. I&#39;m planning to rebase at 3.1.0, just so we don&#39=
-;t trample on each other. It&#39;s probably going to be quite a lot of work=
- to get the patches in that tree here because my patches tend to attract a =
-lot of pedantic feedback. i.e. !! to normalize a scalar into a bool and ~ t=
-o broadcast bit 1 e.g. C bitwise logic that you find frequently in spike; h=
-as to be dumbed down into macro wrappers. Feedback. These changes to keep p=
-eople happy are the reason why we broke things for folk like changing gp$ t=
-o __globalPointer$ (in GCC/binutils). Suddendly all earlier asm is broken b=
-ecause someone wants to give feedback about how RISC-V should be; someone w=
-ho does not need to bear the burden of those changes.</div><div><br></div><=
-div>Change simply because we can make you change stuff to break things for =
-RISC-V users because we think those changes are a good idea. Don&#39;t get =
-me wrong. We get good feedback (in QEMU, mostly from RIchard Henderson), bu=
-t its not always the case. VSPILL/VFILL and vaddsz sp is a good idea. I nee=
-d to find that email of Richard&#39;s on the GCC list and forward it to Krs=
-te. I hope the feedback makes it to folk working on the Vector spec because=
- as far as I can tell it is a good idea.</div><div><br></div><div>Apologies=
- for the cynicism. I&#39;ll get over it.</div><div><br></div><blockquote cl=
-ass=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;p=
-adding-left:1ex">
-* The second half of Alistair&#39;s memory leak patch set that I missed las=
-t<br>
-=C2=A0 week.<br>
-* A fix to make fclass.d availiable only on RV64IFD systems (without<br>
-=C2=A0 this it&#39;s availiable on RV32IFD systems, truncating the result).=
-<br>
-* A fix to make sfence.vm availiable only in priv-1.9.1, and sfence.vma<br>
-=C2=A0 only availiable in priv-1.10.<br>
-* A change to respect fences in user-mode emulators, which were<br>
-=C2=A0 previously treated as NOPs.<br>
-<br>
-As usual, this builds and boot Linux for me.=C2=A0 I don&#39;t think I have=
-<br>
-anything else planned for 3.1.0, but I may be wrong as things are a bit<br>
-hectic this week.<br>
-<br>
-----------------------------------------------------------------<br>
-Alistair Francis (1):<br>
-=C2=A0 =C2=A0 =C2=A0 hw/riscv/virt: Free the test device tree node name<br>
-<br>
-Bastian Koppelmann (2):<br>
-=C2=A0 =C2=A0 =C2=A0 target/riscv: Fix FCLASS_D being treated as RV64 only<=
-br>
-=C2=A0 =C2=A0 =C2=A0 target/riscv: Fix sfence.vm/a both available in any pr=
-iv version<br>
-<br>
-Palmer Dabbelt (1):<br>
-=C2=A0 =C2=A0 =C2=A0 RISC-V: Respect fences for user-only emulators<br>
-<br>
-=C2=A0hw/riscv/virt.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 1 +<br>
-=C2=A0target/riscv/translate.c | 24 ++++++++++++++++--------<br>
-=C2=A02 files changed, 17 insertions(+), 8 deletions(-)<br>
-<br>
-<br>
-</blockquote></div></div>
-
---000000000000e8d84b057a973728--
 
