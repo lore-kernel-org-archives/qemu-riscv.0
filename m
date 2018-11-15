@@ -1,59 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gNQGA-0007jJ-MS
-	for mharc-qemu-riscv@gnu.org; Thu, 15 Nov 2018 17:37:14 -0500
-Received: from eggs.gnu.org ([2001:4830:134:3::10]:48515)
+	id 1gNQGC-0007lM-GW
+	for mharc-qemu-riscv@gnu.org; Thu, 15 Nov 2018 17:37:16 -0500
+Received: from eggs.gnu.org ([2001:4830:134:3::10]:48516)
 	by lists.gnu.org with esmtp (Exim 4.71)
 	(envelope-from <prvs=8503fdbbc=Alistair.Francis@wdc.com>)
-	id 1gNQG4-0007b0-21
+	id 1gNQG4-0007b2-2P
 	for qemu-riscv@nongnu.org; Thu, 15 Nov 2018 17:37:11 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
 	(envelope-from <prvs=8503fdbbc=Alistair.Francis@wdc.com>)
-	id 1gNQG0-0004vr-L3
+	id 1gNQG0-0004vl-L2
 	for qemu-riscv@nongnu.org; Thu, 15 Nov 2018 17:37:07 -0500
-Received: from esa5.hgst.iphmx.com ([216.71.153.144]:50663)
+Received: from esa1.hgst.iphmx.com ([68.232.141.245]:18123)
 	by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.71) (envelope-from <prvs=8503fdbbc=Alistair.Francis@wdc.com>)
-	id 1gNQFu-0004r4-CE; Thu, 15 Nov 2018 17:36:58 -0500
+	id 1gNQFt-0004qt-Pl; Thu, 15 Nov 2018 17:36:58 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
 	d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
-	t=1542321418; x=1573857418;
+	t=1542321417; x=1573857417;
 	h=from:to:cc:subject:date:message-id:references:
 	in-reply-to:content-transfer-encoding:mime-version;
-	bh=M3Os+PficGmiG5CxXXF8M8XZqujmgHhFDzxPkKQyzdw=;
-	b=Aq+tpfgXDiaiC9DWG5zE23GLKeLmK29lYeKtIew22Xx3sy09i4K8Ad9D
-	rrgyUm0sOPmHNaReSvEdFczcCv5zQUbuGFGUNGpZpvVWW4RQNe/fykmBw
-	tkpQ0eKbbei23T2SfDi4/Y94LEQwtx72HKfW3l0VcEVglf3YRs/cZbvvm
-	bPufBD4zTImeajW1gaTo1AR8qguE9egYNPfvrzBZ4zpHU4Bst9hKaAoZe
-	MPV90bDhiCY2G+fI9/VQ5qCBlmJglM96pvWE64tdNM59yz9rmPuTpZyFE
-	iPhIuHW+AX3Jv8FzPzn5qmRRdcJs5dNtAUt7s/IWG/VUlOWWJTfLmiH9E A==;
-X-IronPort-AV: E=Sophos;i="5.56,237,1539619200"; d="scan'208";a="95523418"
-Received: from mail-cys01nam02lp0051.outbound.protection.outlook.com (HELO
-	NAM02-CY1-obe.outbound.protection.outlook.com) ([207.46.163.51])
-	by ob1.hgst.iphmx.com with ESMTP; 16 Nov 2018 06:36:47 +0800
+	bh=R1D3mUhadKf8E/Xc4LVi5ZVgt9L5Bxe3N2Z5lHT9eR8=;
+	b=P/qY21sI/WGbF7oNXc+hAKA4WL5l/IHRxFMfw/Epckvbnmlfl6GcoE+n
+	zPRGpzLax2KXZS4f+kYl8f+U1JflS/NLBNIhxHgNrB8jvC+uhiIFJSqkB
+	DgYXaSDCrcwXasyzKGlFMQA22PAqReU40YDxe4veao9bfgEyHCKm3H20D
+	kzR6+3e7cu857QKeTMAvrCBkT9ohiPFEnML2lnNZxdj6dfFDzxOfRqRgz
+	5yeKIasRWfXjbgB/mcC3If/mndqSK7dyYteaYSFmd/agdPgcmYjk+BioK
+	f2ygISefZHYXeLoEjCiFsYAvCS/rQZA3bS1eNC/r6ytxnPjkNxxIpHkYg Q==;
+X-IronPort-AV: E=Sophos;i="5.56,237,1539619200"; d="scan'208";a="198884510"
+Received: from mail-cys01nam02lp0056.outbound.protection.outlook.com (HELO
+	NAM02-CY1-obe.outbound.protection.outlook.com) ([207.46.163.56])
+	by ob1.hgst.iphmx.com with ESMTP; 16 Nov 2018 06:36:56 +0800
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=sharedspace.onmicrosoft.com; s=selector1-wdc-com;
 	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=NusdP1MkqcdAmhRNwrMtEizWF/SVZWg4LovuJ7KQj74=;
-	b=ectHJc6Pec42+9g036cM9PQl3OW+g6LIeueSgW42/f+0whkcXasH45VTfYjgTDpBsqvOpGAEw41pMclEO6iTw2iuspyHZZfWmxFx4uw2EIryk5yfeCahj2QLwWASc3xp/c3f6p1/of/QpsyajaHzVbScd1Z+/rVjEYShMoBCe2I=
+	bh=L/2REaYTQNBMFZ1Y5DzEq8/DAR1Xn0k7rwxuYYJSjqM=;
+	b=lHSkE9cWFxuVa6ptXelfVGdf6lHH7mIvfhuLNYlUs/qKxieYUNTee3+SrLOA6eObT4ZaRcdrVWfHdqiCsD/etHBibPxHxxBrb8sihzGeQDGlzRnoyxjo7vrRQ2nipPAljdsDgTiyy/dkGB8b3x+GAwaMBwVlLnVcstyltyyZi68=
 Received: from MWHPR04MB0401.namprd04.prod.outlook.com (10.173.48.18) by
 	MWHPR04MB0865.namprd04.prod.outlook.com (10.172.169.7) with Microsoft
 	SMTP
 	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
-	15.20.1294.36; Thu, 15 Nov 2018 22:36:46 +0000
+	15.20.1294.36; Thu, 15 Nov 2018 22:36:55 +0000
 Received: from MWHPR04MB0401.namprd04.prod.outlook.com
 	([fe80::4853:2cc0:27bc:a62e]) by
 	MWHPR04MB0401.namprd04.prod.outlook.com
 	([fe80::4853:2cc0:27bc:a62e%12]) with mapi id 15.20.1294.045;
-	Thu, 15 Nov 2018 22:36:46 +0000
+	Thu, 15 Nov 2018 22:36:55 +0000
 From: Alistair Francis <Alistair.Francis@wdc.com>
 To: "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, "qemu-riscv@nongnu.org"
 	<qemu-riscv@nongnu.org>
 CC: Alistair Francis <Alistair.Francis@wdc.com>, "alistair23@gmail.com"
 	<alistair23@gmail.com>
-Thread-Topic: [RFC v1 19/23] riscv: tcg-target: Add the prologue generation
-Thread-Index: AQHUfTOwYRo8kNCrWkivyVuZpicg4g==
-Date: Thu, 15 Nov 2018 22:36:46 +0000
-Message-ID: <526c9ffdb23b75e96508703b9c9e3bc95cfac939.1542321076.git.alistair.francis@wdc.com>
+Thread-Topic: [RFC v1 20/23] riscv: tcg-target: Add the target init code
+Thread-Index: AQHUfTO24B1g2SO13UKkQ6rSeWsicA==
+Date: Thu, 15 Nov 2018 22:36:55 +0000
+Message-ID: <cd89e90aeb79ed438aaee6cfa02ca42a36d633b6.1542321076.git.alistair.francis@wdc.com>
 References: <cover.1542321076.git.alistair.francis@wdc.com>
 In-Reply-To: <cover.1542321076.git.alistair.francis@wdc.com>
 Accept-Language: en-US
@@ -61,8 +61,8 @@ Content-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
 x-mailer: git-send-email 2.19.1
-x-clientproxiedby: BYAPR07CA0076.namprd07.prod.outlook.com
-	(2603:10b6:a03:12b::17) To MWHPR04MB0401.namprd04.prod.outlook.com
+x-clientproxiedby: BYAPR07CA0102.namprd07.prod.outlook.com
+	(2603:10b6:a03:12b::43) To MWHPR04MB0401.namprd04.prod.outlook.com
 	(2603:10b6:300:70::18)
 authentication-results: spf=none (sender IP is )
 	smtp.mailfrom=Alistair.Francis@wdc.com; 
@@ -70,17 +70,17 @@ x-ms-exchange-messagesentrepresentingtype: 1
 x-originating-ip: [199.255.44.250]
 x-ms-publictraffictype: Email
 x-microsoft-exchange-diagnostics: 1; MWHPR04MB0865;
-	6:oTltrtX4O1Hb82AI1AI64OonPGSRzTNdaApfZCtaRpnIZN9n27cT8EjPkofVe1O0m7v+o/m4VjCjf0NRKWvVkAwJM7zBvmCBCdi2qG5pGld3e4zudrq1C+W1XWnQYxdrxu1spQ1bH6XVkuIOn+MmUGKJsZPjXXdeSZaOOcz/eWUfhMpBx7c8Ve1wsheVOcvh4FSZIvzfn1zQ5uqtQpBJQPOFji2vqBWeNhj7KwXIGivRRYJwrhvk5iXuMnRmnD0KBTD5cFZChFX09T4TbECMQXdxIDpS7Xg1bADOuGuQ0McMuCfsUC9MaP7r5y+foFjCHAd8rC5AuKYvu+b0QrtyNwDMP3NlgvRrdk81CkkMtwpwNOHEvjlRGSVmtSuUq53fO+6Li6w4BbGHVyXMuuI+N6ko3lq7iU+hxdzS+9vQq5eArWaW3jMXFJ3dT0xiarbXTN8RpQlSJwOrlEdClGRZQg==;
-	5:cXUVH+h7dLg7rb+pP4wQcWPk/oSjeGoHegLSLZTtV7UZ7t6PAvxFLKi7qPewbQU9h/QLLr9KNEMRILA+AefEAQ2mUB5X6vrmrN+fuLJC8RkX5roZKO603SjXMVJdy5DMTD0a/fmMFJKrFzugMh9aKDBDsA6t181yWQjcOmFvSBc=;
-	7:vpMxU6doX5KL+KDD+EYuA17iJoXx2VqH+cW8Q+PJRkR/+zJXch/XDsMRb2wLelh/A3+ebbqC6+fgBpxG1hzEn6Q/9SioFZl23CKSeLBjWxz4BwunIPCrxh96LwUWzjqWs1EpHbpqChL+bTYJoNPP9Q==
-x-ms-office365-filtering-correlation-id: 4347de98-232f-4fe6-7b1d-08d64b4ad2f7
+	6:xhKeTNPlHQkXwdEQkUDiJITvVO5Or1avxJOnFg9AZ8vxldvbKvsPaoWAaKFqp1XVaotRgIsga0kV5hlVwzYJx1LUrUKIBzhKbt4q3V8nPx285rMBAgnwsPa/v3AKXoRZiVjKV5+XqFkTVcKJ6dguuq3eLUmzJn9I82wWFzIC1P1bFyMKP/60549t3kc+TKSXuBcZltDBreeC5fX57u8qqrxV96sXnCsTwSWoWG/VIegFxMbSt0YOFcPGV+qXjoQlPGQZLNCM6u88fBdwZejeXLf79IINiZ9/5vuCubpRA3WQ4eEbQtmw/OewaheTUUH1pPzcPtjKv00FKno/pEJDaQdkpWq2nJoVJa0JkkOhioBWcIpKeREqEs8EueRvGJ+TsQE82raGkmLRN7TvMHYmm7WcM6O+X265qyG0AZ/I0oDX/2TLbzI60ZBUdGVYyvyEtsEf+cH7epWbsdXZKFt8yw==;
+	5:inmucr2tXv1muE4+sqYKjjGQEWzhMEyy/ypgpwQ8/GgifBklSffFwwK+uqKgwLPqpODogj4dPCZISp6nsIBGndG/gKAuSA1hQqkFD7AK2y92HM+Jcbc+20n9qoLJJnHTfg9BRz1g1aChJE6nWX2srmfaqm70neINV7xhSzX7hMk=;
+	7:VrDBHRg+8VHA6XjtV26VF+aL9j5OR4pADf/ChYxg6IhJwFLMHb6qFdXolzSKx6KymzY4KYRpO5j9MmXpyUgrGvmR2yJNajPESdNV0DFGkGp7ZVXdzgQaQbKOrAXkQ+5YHncon5BWpg9aYGNjS3+F6w==
+x-ms-office365-filtering-correlation-id: 358f9b88-c5ca-45d4-2511-08d64b4ad84e
 x-ms-office365-filtering-ht: Tenant
 x-microsoft-antispam: BCL:0; PCL:0;
 	RULEID:(2390098)(7020095)(4652040)(8989299)(5600074)(711020)(4618075)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(2017052603328)(7153060)(7193020);
 	SRVR:MWHPR04MB0865; 
 x-ms-traffictypediagnostic: MWHPR04MB0865:
 wdcipoutbound: EOP-TRUE
-x-microsoft-antispam-prvs: <MWHPR04MB08654D7B66AD640A4A25556F90DC0@MWHPR04MB0865.namprd04.prod.outlook.com>
+x-microsoft-antispam-prvs: <MWHPR04MB0865CE8D4C021765C4B51D1990DC0@MWHPR04MB0865.namprd04.prod.outlook.com>
 x-exchange-antispam-report-test: UriScan:;
 x-ms-exchange-senderadcheck: 1
 x-exchange-antispam-report-cfa-test: BCL:0; PCL:0;
@@ -92,23 +92,23 @@ x-forefront-antispam-report: SFV:NSPM;
 	DIR:OUT; SFP:1102; SCL:1; SRVR:MWHPR04MB0865;
 	H:MWHPR04MB0401.namprd04.prod.outlook.com; FPR:; SPF:None;
 	LANG:en; PTR:InfoNoRecords; MX:1; A:1; 
-x-microsoft-antispam-message-info: 3nCis0bm4x8c6WEn6xCkCDTp3P33Mo6LIISjB8fE5gknOR8qe5pX8OWaCe5NXz6YA3TNCiGRFBHeyNdaI/j7JeNVzbadn2nd1Orq6BJ4/QgBBnXgGWJYm9nPpLjnxj8hsRwWgg57saXKNZYCz8mDhC/OX0H0J7WX0nElyFRTBwZVXFddUxFySKShODQfsoAcwGsoTfZ774z7uFNggtvANo5C+N7bTpzGi5icPo7hq+i7nquQH4SkKjfOEnuWIncrngVCKA9XcdZ1CWtnIHgq8uEB/iaoh9MnftOH5bFySAyy74I+BuUkRbt8oKwnhMZbagkCjk4bQ+U6OBfpaPBENfC0KObu4UPnihmvH8htIjs=
+x-microsoft-antispam-message-info: Xn86enIjxsl/QRzy56CxW32K++2QgJldM78i3rMAOnQg/RvGEFzHvxoX97tHCKKlwo47oW2Y6//BJ1ZgZGqUwHaY7DmO2032Peh8g4X6y3Xnf8KXlzaUGnWrp8gUYqOxtbqR2AQmgdkneWWw4UQ51ALCNGoZEDXxl6tGotr+MqysUsc7nWLHj+5G5Ai6eI3kG1j23chGI/aFpMxRKMASJg9tBkVWa/5NoCbj67o8ARXBg+1tulZntBNbkzyYIBsOi9qaHnaDXihxQwVkUBhDcsCSz87y2i4VlNTQWLYGSEs3yQgyGyTuGyrxppWDK8e+t9/IupvQNuqg1NLuwG+9tgzO6I3+jfD+7LEc1J7V3qw=
 spamdiagnosticoutput: 1:99
 spamdiagnosticmetadata: NSPM
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
 X-OriginatorOrg: wdc.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4347de98-232f-4fe6-7b1d-08d64b4ad2f7
-X-MS-Exchange-CrossTenant-originalarrivaltime: 15 Nov 2018 22:36:46.1733 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 358f9b88-c5ca-45d4-2511-08d64b4ad84e
+X-MS-Exchange-CrossTenant-originalarrivaltime: 15 Nov 2018 22:36:55.1980 (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: MWHPR04MB0865
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 216.71.153.144
-Subject: [Qemu-riscv] [RFC v1 19/23] riscv: tcg-target: Add the prologue
- generation
+X-Received-From: 68.232.141.245
+Subject: [Qemu-riscv] [RFC v1 20/23] riscv: tcg-target: Add the target init
+ code
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -125,85 +125,48 @@ X-List-Received-Date: Thu, 15 Nov 2018 22:37:11 -0000
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 Signed-off-by: Michael Clark <mjc@sifive.com>
 ---
- tcg/riscv/tcg-target.inc.c | 66 ++++++++++++++++++++++++++++++++++++++
- 1 file changed, 66 insertions(+)
+ tcg/riscv/tcg-target.inc.c | 33 +++++++++++++++++++++++++++++++++
+ 1 file changed, 33 insertions(+)
 
 diff --git a/tcg/riscv/tcg-target.inc.c b/tcg/riscv/tcg-target.inc.c
-index bf3b04f7dc..4b8f65f367 100644
+index 4b8f65f367..dfc4e8b44c 100644
 --- a/tcg/riscv/tcg-target.inc.c
 +++ b/tcg/riscv/tcg-target.inc.c
-@@ -1575,6 +1575,72 @@ static const TCGTargetOpDef *tcg_target_op_def(TCGOp=
-code op)
-     }
+@@ -1641,6 +1641,39 @@ static void tcg_target_qemu_prologue(TCGContext *s)
+     tcg_out_opc_imm(s, OPC_JALR, TCG_REG_ZERO, TCG_REG_RA, 0);
  }
 =20
-+static const int tcg_target_callee_save_regs[] =3D {
-+    TCG_REG_S0,       /* used for the global env (TCG_AREG0) */
-+    TCG_REG_S1,
-+    TCG_REG_S2,
-+    TCG_REG_S3,
-+    TCG_REG_S4,
-+    TCG_REG_S5,
-+    TCG_REG_S6,
-+    TCG_REG_S7,
-+    TCG_REG_S8,
-+    TCG_REG_S9,
-+    TCG_REG_S10,
-+    TCG_REG_S11,
-+    TCG_REG_RA,       /* should be last for ABI compliance */
-+};
-+
-+/* Stack frame parameters.  */
-+#define REG_SIZE   (TCG_TARGET_REG_BITS / 8)
-+#define SAVE_SIZE  ((int)ARRAY_SIZE(tcg_target_callee_save_regs) * REG_SIZ=
-E)
-+#define TEMP_SIZE  (CPU_TEMP_BUF_NLONGS * (int)sizeof(long))
-+#define FRAME_SIZE ((TCG_STATIC_CALL_ARGS_SIZE + TEMP_SIZE + SAVE_SIZE \
-+                     + TCG_TARGET_STACK_ALIGN - 1) \
-+                    & -TCG_TARGET_STACK_ALIGN)
-+#define SAVE_OFS   (TCG_STATIC_CALL_ARGS_SIZE + TEMP_SIZE)
-+
-+/* We're expecting to be able to use an immediate for frame allocation.  *=
-/
-+QEMU_BUILD_BUG_ON(FRAME_SIZE > 0x7ff);
-+
-+/* Generate global QEMU prologue and epilogue code */
-+static void tcg_target_qemu_prologue(TCGContext *s)
++static void tcg_target_init(TCGContext *s)
 +{
-+    int i;
-+
-+    tcg_set_frame(s, TCG_REG_SP, TCG_STATIC_CALL_ARGS_SIZE, TEMP_SIZE);
-+
-+    /* TB prologue */
-+    tcg_out_opc_imm(s, OPC_ADDI, TCG_REG_SP, TCG_REG_SP, -FRAME_SIZE);
-+    for (i =3D 0; i < ARRAY_SIZE(tcg_target_callee_save_regs); i++) {
-+        tcg_out_st(s, TCG_TYPE_REG, tcg_target_callee_save_regs[i],
-+                   TCG_REG_SP, SAVE_OFS + i * REG_SIZE);
++    tcg_target_available_regs[TCG_TYPE_I32] =3D 0xffffffff;
++    if (TCG_TARGET_REG_BITS =3D=3D 64) {
++        tcg_target_available_regs[TCG_TYPE_I64] =3D 0xffffffff;
 +    }
 +
-+#if !defined(CONFIG_SOFTMMU)
-+    tcg_out_movi(s, TCG_TYPE_PTR, TCG_GUEST_BASE_REG, guest_base);
-+    tcg_regset_set_reg(s->reserved_regs, TCG_GUEST_BASE_REG);
-+#endif
++    tcg_target_call_clobber_regs =3D -1u;
++    tcg_regset_reset_reg(tcg_target_call_clobber_regs, TCG_REG_S0);
++    tcg_regset_reset_reg(tcg_target_call_clobber_regs, TCG_REG_S1);
++    tcg_regset_reset_reg(tcg_target_call_clobber_regs, TCG_REG_S2);
++    tcg_regset_reset_reg(tcg_target_call_clobber_regs, TCG_REG_S3);
++    tcg_regset_reset_reg(tcg_target_call_clobber_regs, TCG_REG_S4);
++    tcg_regset_reset_reg(tcg_target_call_clobber_regs, TCG_REG_S5);
++    tcg_regset_reset_reg(tcg_target_call_clobber_regs, TCG_REG_S6);
++    tcg_regset_reset_reg(tcg_target_call_clobber_regs, TCG_REG_S7);
++    tcg_regset_reset_reg(tcg_target_call_clobber_regs, TCG_REG_S8);
++    tcg_regset_reset_reg(tcg_target_call_clobber_regs, TCG_REG_S9);
++    tcg_regset_reset_reg(tcg_target_call_clobber_regs, TCG_REG_S10);
++    tcg_regset_reset_reg(tcg_target_call_clobber_regs, TCG_REG_S11);
 +
-+    /* Call generated code */
-+    tcg_out_mov(s, TCG_TYPE_PTR, TCG_AREG0, tcg_target_call_iarg_regs[0]);
-+    tcg_out_opc_imm(s, OPC_JALR, TCG_REG_ZERO, tcg_target_call_iarg_regs[1=
-], 0);
-+
-+    /* Return path for goto_ptr. Set return value to 0 */
-+    s->code_gen_epilogue =3D s->code_ptr;
-+    tcg_out_mov(s, TCG_TYPE_REG, TCG_REG_A0, TCG_REG_ZERO);
-+
-+    /* TB epilogue */
-+    tb_ret_addr =3D s->code_ptr;
-+    for (i =3D 0; i < ARRAY_SIZE(tcg_target_callee_save_regs); i++) {
-+        tcg_out_ld(s, TCG_TYPE_REG, tcg_target_callee_save_regs[i],
-+                   TCG_REG_SP, SAVE_OFS + i * REG_SIZE);
-+    }
-+
-+    tcg_out_opc_imm(s, OPC_ADDI, TCG_REG_SP, TCG_REG_SP, FRAME_SIZE);
-+    tcg_out_opc_imm(s, OPC_JALR, TCG_REG_ZERO, TCG_REG_RA, 0);
++    s->reserved_regs =3D 0;
++    tcg_regset_set_reg(s->reserved_regs, TCG_REG_ZERO);
++    tcg_regset_set_reg(s->reserved_regs, TCG_REG_TMP0);
++    tcg_regset_set_reg(s->reserved_regs, TCG_REG_TMP1);
++    tcg_regset_set_reg(s->reserved_regs, TCG_REG_L0);
++    tcg_regset_set_reg(s->reserved_regs, TCG_REG_L1);
++    tcg_regset_set_reg(s->reserved_regs, TCG_REG_RA);
++    tcg_regset_set_reg(s->reserved_regs, TCG_REG_SP);
++    tcg_regset_set_reg(s->reserved_regs, TCG_REG_GP);
++    tcg_regset_set_reg(s->reserved_regs, TCG_REG_TP);
 +}
 +
  void tb_target_set_jmp_target(uintptr_t tc_ptr, uintptr_t jmp_addr,
