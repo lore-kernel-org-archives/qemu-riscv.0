@@ -1,71 +1,73 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gNYrf-0001Wa-7h
-	for mharc-qemu-riscv@gnu.org; Fri, 16 Nov 2018 02:48:31 -0500
-Received: from eggs.gnu.org ([2001:4830:134:3::10]:52559)
+	id 1gNZ0E-0006OT-A6
+	for mharc-qemu-riscv@gnu.org; Fri, 16 Nov 2018 02:57:22 -0500
+Received: from eggs.gnu.org ([2001:4830:134:3::10]:56750)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <richard.henderson@linaro.org>) id 1gNYrd-0001UU-LB
-	for qemu-riscv@nongnu.org; Fri, 16 Nov 2018 02:48:30 -0500
+	(envelope-from <richard.henderson@linaro.org>) id 1gNZ0C-0006O8-DA
+	for qemu-riscv@nongnu.org; Fri, 16 Nov 2018 02:57:21 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <richard.henderson@linaro.org>) id 1gNYrb-0004OC-Lb
-	for qemu-riscv@nongnu.org; Fri, 16 Nov 2018 02:48:29 -0500
-Received: from mail-wm1-x335.google.com ([2a00:1450:4864:20::335]:37085)
+	(envelope-from <richard.henderson@linaro.org>) id 1gNZ04-0000bs-Tf
+	for qemu-riscv@nongnu.org; Fri, 16 Nov 2018 02:57:17 -0500
+Received: from mail-wr1-x443.google.com ([2a00:1450:4864:20::443]:44744)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
 	(Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
-	id 1gNYrZ-0004JL-Q0
-	for qemu-riscv@nongnu.org; Fri, 16 Nov 2018 02:48:26 -0500
-Received: by mail-wm1-x335.google.com with SMTP id p2-v6so20086468wmc.2
-	for <qemu-riscv@nongnu.org>; Thu, 15 Nov 2018 23:48:10 -0800 (PST)
+	id 1gNZ03-0000b7-66
+	for qemu-riscv@nongnu.org; Fri, 16 Nov 2018 02:57:11 -0500
+Received: by mail-wr1-x443.google.com with SMTP id j17-v6so23817847wrq.11
+	for <qemu-riscv@nongnu.org>; Thu, 15 Nov 2018 23:57:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
 	h=subject:to:cc:references:from:openpgp:message-id:date:user-agent
 	:mime-version:in-reply-to:content-language:content-transfer-encoding;
-	bh=FSQm1INZtW+T7++6Lqj0PLpmNBgDCS2y4znBattf45M=;
-	b=gN1TNy8W8A7lIoiO+9TnKyLINPUo4eMGi3XbV+M0nsoNHuQfeNPAOfChfZIyJTBhsO
-	1ij4ZxeXnwtmT3friGabDvMHYOOqL9GyNuOKre6gsJsAi1gYabOLZ07mRq8hJPe5Cve/
-	Jm6G4aG1SJ9GzOwwIGma2wHzAT9/GNwZZUPEw=
+	bh=RnlqljYMUqrFq7qo0VursqS6j5cdrH/VhjgQR1GIw5Y=;
+	b=OuFZfl08MuVj7ECBhX500PrpAGtg1h0AzdL+zcsNn0ScKLJ+iiQ1Hmiohoa/W12GAb
+	e49rjU6jKk4Znxd7viz32sE7oQ+D8TCUMU8F9jQiZpNHqKzEAGnwLkzx7QF7GrPrCDFL
+	BvYFAtWP1wYh0hKLpOk8nJmd1ZWdxSPBCZwck=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
 	:date:user-agent:mime-version:in-reply-to:content-language
 	:content-transfer-encoding;
-	bh=FSQm1INZtW+T7++6Lqj0PLpmNBgDCS2y4znBattf45M=;
-	b=uVFnSc+YSIwCRmF9ZhB5VbrVxwSZib/a67X9DQnWf0MdLF2QJ2FxxfDd0qJwlJNyxb
-	GuJznEAdvDD6xAU1z6r2EThpXvE3jy3fhtrLXNnAi//2V3DLfzKVcxNNDevm7PnIVi30
-	DYKlvQLnosAwnaZOZWE5ELg0GiU2wedkRrfv4aAm9TvIth/Rgwhf//otaJh3XL27O2O8
-	Xh1kYTFNIqv4KMj7knVbeNfgnuux6VJq9vuvX7msVPk8FY93GvqjjCMudgcLIMg4kSVo
-	2G40qaBnmr0UgaZZSU+2HSae7REovmUClJ3oJyC/pSZq6qcW4iAKOQY4XaEktqUVeeAY
-	yPbw==
-X-Gm-Message-State: AGRZ1gKQD3oGfzfh9+t29Q7gWP8Ev+CRZnNvRdMUn7UnyUHxOKYeiZHa
-	o5Ova2q7KuP/fwDqlOEEMZANlg==
-X-Google-Smtp-Source: AJdET5dXlXIlrdBNOFhvPHmNydgPKvu2zHOo6MfSSG7eowJmuhHlAUfKXY9pWwQ3oZYaAodTXWfB7Q==
-X-Received: by 2002:a7b:cc86:: with SMTP id p6mr268754wma.19.1542354489531;
-	Thu, 15 Nov 2018 23:48:09 -0800 (PST)
+	bh=RnlqljYMUqrFq7qo0VursqS6j5cdrH/VhjgQR1GIw5Y=;
+	b=F8pRdTcT7rsxvD1d4+ADQYjFsMUTrf+agXX3B1zHY/Zksjb+u9H9PTtzwPD0sKNnxH
+	8hZsAxd7HyiozDg78yIIKp767inf5A5mTZ5G05m/gpgohUAZt3iZMB3nSMWGLYZQAA9L
+	rzdJcW9ve0FGLNxa9y+7345JMoYWhDFOCrSpRftyEzu2v16MdJgsvsFuLAYWvOjponw/
+	M/H4Hqn8ngpCUzs+czJ/0pfVX5X+CNXyHqDO2EHSelnHWbjUb9LYopsAJsLbhg5fnfSS
+	aW2UdgYu9ksTr6ZPaq2K1rSa4ARnuQmsoJBPLryowhcruX+gKz+0n+4uA01aqw4kKkjY
+	vqTg==
+X-Gm-Message-State: AGRZ1gKr53fYZvOrZmVMkHH55z8fB0tYfkjMazrKQv/Xgk2qw+dcET3W
+	om0IvJLgB+WuHo/NAr7GvOTwbA==
+X-Google-Smtp-Source: AJdET5drcCtyrJVUJfapn3FUMxap5lALvign8ZPHErygv9dcPw4xBQFnQ5/MklmBQyrqqRgg5ibu5A==
+X-Received: by 2002:adf:dcd1:: with SMTP id
+	x17-v6mr8152471wrm.212.1542355029836; 
+	Thu, 15 Nov 2018 23:57:09 -0800 (PST)
 Received: from cloudburst.twiddle.net
 	(57.red-213-99-142.dynamicip.rima-tde.net. [213.99.142.57])
-	by smtp.gmail.com with ESMTPSA id e9sm6224304wro.16.2018.11.15.23.48.07
+	by smtp.gmail.com with ESMTPSA id
+	e8-v6sm52345664wmf.22.2018.11.15.23.57.08
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 15 Nov 2018 23:48:09 -0800 (PST)
+	Thu, 15 Nov 2018 23:57:09 -0800 (PST)
 To: Alistair Francis <Alistair.Francis@wdc.com>,
 	"qemu-devel@nongnu.org" <qemu-devel@nongnu.org>,
 	"qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>
 Cc: "alistair23@gmail.com" <alistair23@gmail.com>
 References: <cover.1542321076.git.alistair.francis@wdc.com>
-	<765fe28a07d96b0fbd642e5d5f01c123118db4f4.1542321076.git.alistair.francis@wdc.com>
+	<1c17c37965dcd1b579a58af168892818b33453fe.1542321076.git.alistair.francis@wdc.com>
 From: Richard Henderson <richard.henderson@linaro.org>
 Openpgp: preference=signencrypt
-Message-ID: <d5102fba-f56d-f541-b408-834317d7641d@linaro.org>
-Date: Fri, 16 Nov 2018 08:47:01 +0100
+Message-ID: <1c642108-907b-38ce-0a4c-b0e64400d02d@linaro.org>
+Date: Fri, 16 Nov 2018 08:57:06 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
 	Thunderbird/60.3.0
 MIME-Version: 1.0
-In-Reply-To: <765fe28a07d96b0fbd642e5d5f01c123118db4f4.1542321076.git.alistair.francis@wdc.com>
+In-Reply-To: <1c17c37965dcd1b579a58af168892818b33453fe.1542321076.git.alistair.francis@wdc.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2a00:1450:4864:20::335
-Subject: Re: [Qemu-riscv] [Qemu-devel] [RFC v1 02/23] linux-user: Add host
- dependency for RISC-V 32-bit
+X-Received-From: 2a00:1450:4864:20::443
+Subject: Re: [Qemu-riscv] [Qemu-devel] [RFC v1 05/23] riscv: Add the
+ tcg-target header file
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -77,18 +79,30 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Nov 2018 07:48:30 -0000
+X-List-Received-Date: Fri, 16 Nov 2018 07:57:21 -0000
 
 On 11/15/18 11:34 PM, Alistair Francis wrote:
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> Signed-off-by: Michael Clark <mjc@sifive.com>
-> ---
->  linux-user/host/riscv32/hostdep.h | 11 +++++++++++
->  1 file changed, 11 insertions(+)
->  create mode 100644 linux-user/host/riscv32/hostdep.h
+> +#define TCG_TARGET_HAS_add2_i32         0
+> +#define TCG_TARGET_HAS_sub2_i32         0
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+You're not allowed to not implement this for riscv-32,
+along with brcond2 and setcond2.
+
+> +#define TCG_TARGET_HAS_movcond_i32      0
+
+The architecture manual suggests that implementations recognize short
+branch-over and convert internally to predication.  Do any do that?
+
+Even if they don't, you might implement it that way anyway, as the code size
+savings are large vs the inline fallback (6 insns).  But you can definitely put
+that off for a later patch.
+
+> +#define TCG_TARGET_HAS_ext16u_i32       1
+
+Really?  I thought this required two insns...  Or do you expand to shifts while
+the default is x & 0xffff, which would take 3 insns?  I guess I'll find out as
+I keep reading.  ;-)
+
 
 r~
-
 
