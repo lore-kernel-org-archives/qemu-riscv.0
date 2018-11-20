@@ -1,62 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gPFKo-0002nv-Qm
-	for mharc-qemu-riscv@gnu.org; Tue, 20 Nov 2018 18:21:34 -0500
-Received: from eggs.gnu.org ([2001:4830:134:3::10]:37676)
+	id 1gPFQx-0005gG-3a
+	for mharc-qemu-riscv@gnu.org; Tue, 20 Nov 2018 18:27:55 -0500
+Received: from eggs.gnu.org ([2001:4830:134:3::10]:54677)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <groeck7@gmail.com>) id 1gPF0n-00034p-Hr
-	for qemu-riscv@nongnu.org; Tue, 20 Nov 2018 18:00:54 -0500
+	(envelope-from <alistair23@gmail.com>) id 1gPFQv-0005ff-Jc
+	for qemu-riscv@nongnu.org; Tue, 20 Nov 2018 18:27:54 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <groeck7@gmail.com>) id 1gPF0m-0005KV-3g
-	for qemu-riscv@nongnu.org; Tue, 20 Nov 2018 18:00:53 -0500
-Received: from mail-pl1-x642.google.com ([2607:f8b0:4864:20::642]:41187)
+	(envelope-from <alistair23@gmail.com>) id 1gPFQu-0007AW-L2
+	for qemu-riscv@nongnu.org; Tue, 20 Nov 2018 18:27:53 -0500
+Received: from mail-lf1-x143.google.com ([2a00:1450:4864:20::143]:33998)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <groeck7@gmail.com>)
-	id 1gPF0g-0004vZ-FJ; Tue, 20 Nov 2018 18:00:46 -0500
-Received: by mail-pl1-x642.google.com with SMTP id u6so2459157plm.8;
-	Tue, 20 Nov 2018 15:00:37 -0800 (PST)
+	(Exim 4.71) (envelope-from <alistair23@gmail.com>)
+	id 1gPFLs-0008Sv-Ot; Tue, 20 Nov 2018 18:22:41 -0500
+Received: by mail-lf1-x143.google.com with SMTP id p6so2618611lfc.1;
+	Tue, 20 Nov 2018 15:22:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=sender:from:to:cc:subject:date:message-id;
-	bh=hlfLU5OlFUO3prijejcYnnCxM5J4bILOF8+8cao5iGc=;
-	b=KzyItEcDLDeV8MyZz5ijmOToZ8c8/HpX8y3lCnwrkxdTGXqGPAloNYHX6pLshIXIMe
-	xI08YuAJbmcxp3dtMSiZpTarfRGmAwHvA9G2DQhhnxM0lPH/h5gWpwbaea9Cwf4Nt+3e
-	aS0aIRWrXTITL7VO3lX6lcgp9Q2RPh+qNz6VU2cJXc3BdOuIOGYShe+Lqmb6al7wZZ8z
-	1l/Wkj65zLeG1v1DKwjmTnLOrHXmbtFFCFx7cJEauV8VLMJj5cHRQk/fpZxsOyZo1mIg
-	9VV1A3gyBhylBLzsZtk9kHsl3ZwBSluq8mtcoeCn9JUYCO9kOyaAVfcl82UqKCIPeOQV
-	P6GA==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=hJLG0Lt13Fwng9QdezJGMW0XHOBpYSs2iP9oHVcGs28=;
+	b=DyCuYRfG+dHGpx0SK+zqTNfPZAKYJ+6SkcParrQDPoPtLe3su/3uIBVJJfX8u++MCb
+	06Kni52frrUaPuGoA+pj9TsBzNE1/e0XNDgPS9iaesGvdv7uxS/TXQKPlY7LF9PFnMrq
+	xpaVx4lqNXr+uGsGu3iQKENUehMl+TeEnrIjoTjcY9zLwUl/BLF2RM9jjEIPDfg1Qb5t
+	K68n3l2/9raJSoO//kkA10C7UHLbNpFztxacPthRsW2YZKUOuX8QVf0bQdL6W5HXyndS
+	aGY/XPbJpPEdSgmVZ/5ZWMBgdHs0I400BWOxtmRrAa1BlOvrv9zrAXGRima1laK31HIk
+	PQNg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
-	bh=hlfLU5OlFUO3prijejcYnnCxM5J4bILOF8+8cao5iGc=;
-	b=oG1j4fFIVrwKftrZVcj8m1pMmlXyYLfCNriZeE1H1X7vcE1iZ91EsDxWKslG0mE0/k
-	XWbPZJkPgPMvJvfmSwA/lQ6keY50AiS8BYJnYHjjYr6lEmfcImRG1azT8cLiCJMKXm5m
-	vV+Od4f0F6aB0+EElI23R5nNuUbPEcx7keX48vZMZEosJgGJjGZetrO8My262lwmwYen
-	aXQIZSZzojJ/dTEbCz7vDX920fmEXnDE+AEQn7uN9toElkFcVY3pLey13f3j2NVjlMKS
-	6gQeaoF4llZ6kfp+GQiKqucZ4xsIg1zA82JrfXOZgitBKvaaYXRIHt5BPuLhTFLrNMRp
-	q5Vg==
-X-Gm-Message-State: AGRZ1gJbmz5f1qpCZQ6g3FNh/FGy2IqbgiKgcmV5Xk6kgo6lfE2/T4V2
-	7hc6j6V3YOTVuE8jxEp6Pec=
-X-Google-Smtp-Source: AJdET5cstHUCGhrRqt4RPO9xu1s908+TTAkjZdKTobjEyz/CSirxwtAmo1NXqJ2jNoUxKEnIy+Lyqg==
-X-Received: by 2002:a62:9402:: with SMTP id m2mr4182146pfe.34.1542754836773;
-	Tue, 20 Nov 2018 15:00:36 -0800 (PST)
-Received: from localhost ([2600:1700:e321:62f0:329c:23ff:fee3:9d7c])
-	by smtp.gmail.com with ESMTPSA id
-	k24sm40966770pfj.13.2018.11.20.15.00.35
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 20 Nov 2018 15:00:35 -0800 (PST)
-Sender: Guenter Roeck <groeck7@gmail.com>
-From: Guenter Roeck <linux@roeck-us.net>
-To: Alistair Francis <Alistair.Francis@wdc.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
-	Paul Walmsley <paul.walmsley@sifive.com>,
-	Andrea Bolognani <abologna@redhat.com>, Guenter Roeck <linux@roeck-us.net>
-Date: Tue, 20 Nov 2018 15:00:30 -0800
-Message-Id: <1542754831-25567-1-git-send-email-linux@roeck-us.net>
-X-Mailer: git-send-email 2.7.4
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=hJLG0Lt13Fwng9QdezJGMW0XHOBpYSs2iP9oHVcGs28=;
+	b=MRV/XWeG4pxeLBGL3lSvv2PP/5keJk7DKHUci89cG42wV1/pHOA3HaQHsQlxbdcn01
+	+GdhnrR52c4ThBRvIZacJ5ht4aJewfuYyw3dSgMBuYcxUF4mGAxH6QccyOV62T+rRzNa
+	5kFb4u+a9c4nSpMmrantvK7d3+noe0NYqFhuoTDA+HlZiXzL7oWPF0mxL+qmKEddRoye
+	mIABKGbuZ4Zie7BNDR7STOVeCNs9h8MhwcKdRuY5woIs4TuffXsnIqORidsd38B6aSTa
+	oIwiEBeNemHqTH3qHm0Sd/Nfgi3NaH0fZGjSWLnZcMb/Pl/C/8AGFXQPG0Z7Y4a2pMpr
+	Hflg==
+X-Gm-Message-State: AGRZ1gLCTDWoe+TlYMCfsSvR3O/nHqqg3ioZmbw5M7nY+FK++aijzMuW
+	RxaAzLD1uuv7FJ8lBJmhBiGRIgWQx9cZbloUJB0=
+X-Google-Smtp-Source: AJdET5cRMvXQeY70BHH8wsrAxtgN//f4EMIuGKmzn6z9o7bL/zBYdW2xYbdZXiRo7ozYkeQBbxAw5MRBj0OvgF3dhgE=
+X-Received: by 2002:a19:5782:: with SMTP id l124mr2132995lfb.91.1542756156280; 
+	Tue, 20 Nov 2018 15:22:36 -0800 (PST)
+MIME-Version: 1.0
+References: <cover.1542321076.git.alistair.francis@wdc.com>
+	<cd89e90aeb79ed438aaee6cfa02ca42a36d633b6.1542321076.git.alistair.francis@wdc.com>
+	<2aa0f464-c9c4-3d59-81da-952279f56843@linaro.org>
+	<CAKmqyKN9DQkZUp=+hRwC5AwaX+X0oYgt4=L2Pw8dWAauzS59QQ@mail.gmail.com>
+	<e04bac07-ad25-2715-1262-28e9324126a8@linaro.org>
+In-Reply-To: <e04bac07-ad25-2715-1262-28e9324126a8@linaro.org>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 20 Nov 2018 15:22:09 -0800
+Message-ID: <CAKmqyKMSg34-p_9h6GhW-TqMLhq3GM0yH68cjDG7VyFcZJkwsA@mail.gmail.com>
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
+	"qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+	qemu-riscv@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::642
-X-Mailman-Approved-At: Tue, 20 Nov 2018 18:21:33 -0500
-Subject: [Qemu-riscv] [PATCH 1/2] riscv: virt: Fix pcie memory ranges
+X-Received-From: 2a00:1450:4864:20::143
+Subject: Re: [Qemu-riscv] [Qemu-devel] [RFC v1 20/23] riscv: tcg-target: Add
+ the target init code
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -68,164 +70,38 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Nov 2018 23:00:55 -0000
+X-List-Received-Date: Tue, 20 Nov 2018 23:27:54 -0000
 
-- Provide separate maps for VIRT_PCIE_MMIO (32 bit) and
-  VIRT_PCIE_MMIO_HIGH (64 bit)
-- VIRT_PCIE_PIO is for IO ports, not for the physical address
-- VIRT_PCIE_ECAM size reduced to size needed to cover 256 ports
-- Use memmap[VIRT_PCIE_ECAM].size instead of memmap[VIRT_PCIE_ECAM].base
-  to calculate the bus number range
-- Use qemu_fdt_setprop_sized_cells() to create reg and ranges entries
-- Fix parameters for gpex_pcie_init()
-  (ECAM and MMIO addresses were swapped)
+On Mon, Nov 19, 2018 at 10:55 PM Richard Henderson
+<richard.henderson@linaro.org> wrote:
+>
+> On 11/20/18 12:04 AM, Alistair Francis wrote:
+> > On Fri, Nov 16, 2018 at 9:26 AM Richard Henderson
+> > <richard.henderson@linaro.org> wrote:
+> >>
+> >> On 11/15/18 11:36 PM, Alistair Francis wrote:
+> >>> +    tcg_regset_set_reg(s->reserved_regs, TCG_REG_L0);
+> >>> +    tcg_regset_set_reg(s->reserved_regs, TCG_REG_L1);
+> >>> +    tcg_regset_set_reg(s->reserved_regs, TCG_REG_RA);
+> >>
+> >> Why are these three reserved?
+> >
+> > Do these not need to be? I thought we had to reserve them.
+>
+> The return address, I presume, has been saved by the prologue.  I see no reason
+> why it can't be yet another call-clobbered register.
 
-Signed-off-by: Guenter Roeck <linux@roeck-us.net>
----
-This series applies on top of 
-	https://patchwork.kernel.org/cover/10661699/
+Ok, removed.
 
-Tested with mmc:
-    qemu-system-riscv64 -M virt -m 512M -no-reboot \
-	-bios riscv64/bbl -kernel vmlinux \
-	-netdev user,id=net0 -device virtio-net-device,netdev=net0 \
-	-snapshot -device sdhci-pci -device sd-card,drive=d0 \
-	-drive file=rootfs.ext2,format=raw,if=none,id=d0 \
-	-append 'root=/dev/mmcblk0 rw rootwait panic=-1 console=ttyS0,115200' \
-	-nographic -monitor none
+>
+> As for the other two... what are they supposed to be?
 
-and nvme:
-    qemu-system-riscv64 -M virt -m 512M -no-reboot \
-	-bios riscv64/bbl -kernel vmlinux \
-	-netdev user,id=net0 -device virtio-net-device,netdev=net0 \
-	-snapshot -device nvme,serial=foo,drive=d0 \
-	-drive file=rootfs.ext2,if=none,format=raw,id=d0 \
-	-append 'root=/dev/nvme0n1 rw rootwait panic=-1 console=ttyS0,115200' \
-	-nographic -monitor none
+They were old temp registers. L1 wasn't even used and I have replace
+L0 with TMP0 as we have enough tmp registers.
 
- hw/riscv/virt.c         | 51 ++++++++++++++++++++++++++++++++-----------------
- include/hw/riscv/virt.h |  1 +
- 2 files changed, 35 insertions(+), 17 deletions(-)
+Alistair
 
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index 1aac5ca..675899d 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -59,10 +59,10 @@ static const struct MemmapEntry {
-     [VIRT_UART0] =    { 0x10000000,      0x100 },
-     [VIRT_VIRTIO] =   { 0x10001000,     0x1000 },
-     [VIRT_DRAM] =     { 0x80000000,        0x0 },
--    [VIRT_PCIE_MMIO] = { 0x2000000000, 0x4000000 },
--    [VIRT_PCIE_PIO] = { 0x2010000, 0x40000000 },
--    [VIRT_PCIE_ECAM] = { 0x40000000, 0x20000000 },
--
-+    [VIRT_PCIE_MMIO] = { 0x40000000, 0x40000000 },
-+    [VIRT_PCIE_MMIO_HIGH] = { 0x2000000000, 0x4000000000 },
-+    [VIRT_PCIE_PIO] =  { 0x10002000,     0x1000 },
-+    [VIRT_PCIE_ECAM] = { 0x30000000, 0x10000000 },
- };
- 
- #define INTERREUPT_MAP_WIDTH 7
-@@ -231,8 +231,7 @@ static void *create_fdt(RISCVVirtState *s, const struct MemmapEntry *memmap,
-         g_free(nodename);
-     }
- 
--    nodename = g_strdup_printf("/pci@%lx",
--        (long) memmap[VIRT_PCIE_MMIO].base);
-+    nodename = g_strdup_printf("/pcie@%" PRIx64, memmap[VIRT_PCIE_MMIO].base);
-     qemu_fdt_add_subnode(fdt, nodename);
-     qemu_fdt_setprop_cells(fdt, nodename, "#address-cells", 0x3);
-     qemu_fdt_setprop_cells(fdt, nodename, "#interrupt-cells", 0x1);
-@@ -242,16 +241,26 @@ static void *create_fdt(RISCVVirtState *s, const struct MemmapEntry *memmap,
-     qemu_fdt_setprop_string(fdt, nodename, "device_type", "pci");
-     qemu_fdt_setprop_cell(fdt, nodename, "linux,pci-domain", 0);
-     qemu_fdt_setprop_cells(fdt, nodename, "bus-range", 0,
--                           memmap[VIRT_PCIE_ECAM].base /
-+                           memmap[VIRT_PCIE_ECAM].size /
-                                PCIE_MMCFG_SIZE_MIN - 1);
-     qemu_fdt_setprop(fdt, nodename, "dma-coherent", NULL, 0);
--    qemu_fdt_setprop_cells(fdt, nodename, "reg", 0x20, 0,
--                           0, memmap[VIRT_PCIE_ECAM].size);
--    qemu_fdt_setprop_cells(fdt, nodename, "ranges",
--                           memmap[VIRT_PCIE_PIO].base,
--                               0, memmap[VIRT_PCIE_PIO].size,
--                           0, memmap[VIRT_PCIE_MMIO].base,
--                               0, memmap[VIRT_PCIE_MMIO].size);
-+    qemu_fdt_setprop_sized_cells(fdt, nodename, "reg",
-+                                 2, memmap[VIRT_PCIE_ECAM].base,
-+                                 2, memmap[VIRT_PCIE_ECAM].size);
-+
-+    qemu_fdt_setprop_sized_cells(fdt, nodename, "ranges",
-+                                 1, FDT_PCI_RANGE_IOPORT, 2, 0,
-+                                 2, memmap[VIRT_PCIE_PIO].base,
-+                                 2, memmap[VIRT_PCIE_PIO].size,
-+                                 1, FDT_PCI_RANGE_MMIO,
-+                                 2, memmap[VIRT_PCIE_MMIO].base,
-+                                 2, memmap[VIRT_PCIE_MMIO].base,
-+                                 2, memmap[VIRT_PCIE_MMIO].size,
-+                                 1, FDT_PCI_RANGE_MMIO_64BIT,
-+                                 2, memmap[VIRT_PCIE_MMIO_HIGH].base,
-+                                 2, memmap[VIRT_PCIE_MMIO_HIGH].base,
-+                                 2, memmap[VIRT_PCIE_MMIO_HIGH].size);
-+
-     qemu_fdt_setprop_cells(fdt, nodename, "interrupt-parent", plic_phandle);
-     qemu_fdt_setprop_cells(fdt, nodename, "interrupts", PCIE_IRQ);
-     create_pcie_irq_map(fdt, nodename, plic_phandle);
-@@ -289,12 +298,13 @@ static void *create_fdt(RISCVVirtState *s, const struct MemmapEntry *memmap,
- static inline DeviceState *gpex_pcie_init(MemoryRegion *sys_mem,
-                                           hwaddr ecam_base, hwaddr ecam_size,
-                                           hwaddr mmio_base, hwaddr mmio_size,
-+                                          hwaddr mmio_hbase, hwaddr mmio_hsize,
-                                           hwaddr pio_base,
-                                           DeviceState *plic, bool link_up)
- {
-     DeviceState *dev;
-     MemoryRegion *ecam_alias, *ecam_reg;
--    MemoryRegion *mmio_alias, *mmio_reg;
-+    MemoryRegion *mmio_alias, *mmio_halias, *mmio_reg;
-     qemu_irq irq;
-     int i;
- 
-@@ -314,6 +324,11 @@ static inline DeviceState *gpex_pcie_init(MemoryRegion *sys_mem,
-                              mmio_reg, mmio_base, mmio_size);
-     memory_region_add_subregion(get_system_memory(), mmio_base, mmio_alias);
- 
-+    mmio_halias = g_new0(MemoryRegion, 1);
-+    memory_region_init_alias(mmio_halias, OBJECT(dev), "pcie-mmio-high",
-+                             mmio_reg, mmio_hbase, mmio_hsize);
-+    memory_region_add_subregion(get_system_memory(), mmio_hbase, mmio_halias);
-+
-     sysbus_mmio_map(SYS_BUS_DEVICE(dev), 2, pio_base);
- 
-     for (i = 0; i < GPEX_NUM_IRQS; i++) {
-@@ -444,10 +459,12 @@ static void riscv_virt_board_init(MachineState *machine)
-     }
- 
-     dev = gpex_pcie_init(system_memory,
--                         memmap[VIRT_PCIE_MMIO].base,
--                         memmap[VIRT_PCIE_MMIO].size,
-                          memmap[VIRT_PCIE_ECAM].base,
-                          memmap[VIRT_PCIE_ECAM].size,
-+                         memmap[VIRT_PCIE_MMIO].base,
-+                         memmap[VIRT_PCIE_MMIO].size,
-+                         memmap[VIRT_PCIE_MMIO_HIGH].base,
-+                         memmap[VIRT_PCIE_MMIO_HIGH].size,
-                          memmap[VIRT_PCIE_PIO].base,
-                          DEVICE(s->plic), true);
-     pci_bus = PCI_HOST_BRIDGE(dev)->bus;
-diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
-index dd4fedd..99caf09 100644
---- a/include/hw/riscv/virt.h
-+++ b/include/hw/riscv/virt.h
-@@ -40,6 +40,7 @@ enum {
-     VIRT_VIRTIO,
-     VIRT_DRAM,
-     VIRT_PCIE_MMIO,
-+    VIRT_PCIE_MMIO_HIGH,
-     VIRT_PCIE_PIO,
-     VIRT_PCIE_ECAM
- };
--- 
-2.7.4
-
+>
+>
+> r~
 
