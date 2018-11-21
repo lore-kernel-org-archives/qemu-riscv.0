@@ -1,73 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gPXMP-0006hF-AL
-	for mharc-qemu-riscv@gnu.org; Wed, 21 Nov 2018 13:36:25 -0500
-Received: from eggs.gnu.org ([2001:4830:134:3::10]:37133)
+	id 1gPXVl-0003SZ-2L
+	for mharc-qemu-riscv@gnu.org; Wed, 21 Nov 2018 13:46:05 -0500
+Received: from eggs.gnu.org ([2001:4830:134:3::10]:40478)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <groeck7@gmail.com>) id 1gPXMJ-0006ay-CM
-	for qemu-riscv@nongnu.org; Wed, 21 Nov 2018 13:36:22 -0500
+	(envelope-from <logang@deltatee.com>) id 1gPXVh-0003SN-Mb
+	for qemu-riscv@nongnu.org; Wed, 21 Nov 2018 13:46:02 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <groeck7@gmail.com>) id 1gPXMI-000094-MU
-	for qemu-riscv@nongnu.org; Wed, 21 Nov 2018 13:36:19 -0500
-Received: from mail-pl1-x641.google.com ([2607:f8b0:4864:20::641]:39384)
-	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <groeck7@gmail.com>)
-	id 1gPXMG-000053-Rf; Wed, 21 Nov 2018 13:36:16 -0500
-Received: by mail-pl1-x641.google.com with SMTP id 101so403926pld.6;
-	Wed, 21 Nov 2018 10:36:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=sender:date:from:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=t3dn9zUnWt2t3MTwsAy6z8xhesfLsJpj2L4ow08vvUQ=;
-	b=bXbr0sISHP81HfMiTrKFOI6tgYgkH6JqYLP8rkQpu4kkKfpmPOFmthULzZHv8KVc32
-	UnWGnd4BUvZ/lj6Qd92FL1nXrLkZ4xEPrSAvvwKg73FEZX8dhhu71wyLVxV+P57WgV99
-	y59b1ivTBojWaSm84JKqH1YdlYDohbDnOuN6Qa+nP0bY8Rz4Q4UhwoxR4hVulmz6EqBr
-	tYhNfdj65p6FRvZOU9u5Kp67U6gp7tu5SLMK56ZDKNwepfY8mKazWyWQ+xoC/9w+CjTC
-	cgbG2tsUe2bou2fPS2WnNWP0110fqwVeT4vUJQnBiFgpbz9/HjTczsXmhgKTUo3ZmNkD
-	K/ew==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:sender:date:from:to:cc:subject:message-id
-	:references:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=t3dn9zUnWt2t3MTwsAy6z8xhesfLsJpj2L4ow08vvUQ=;
-	b=l+nYoSkZwLvkd6mXzveQd5cdwB7bqReMQjtD0DfrffkkIlS3CtZzTQ1VaATTMZMXBQ
-	xS9cZpHybWh8iKGNw62xa1iQuwTQkjplluqJ7KTOulN93v2+DexxYx0sz8gV6jxKBCew
-	5XMVn6kyiFMbG7RKQIch1EpDePWlqYYJLZpFCn+rrKRx21I/QzgbOSZywRi8GVfXAcCw
-	Fk5F5akf0X8DAgH0hrr+55xhs0C9EuGrDs1fpjzLbGgFkjYrxBl9Yuud27mJ4tLBKoeO
-	qvwjO1asAa4HVACYq6zQYP6BVRrUmS/aFtbhj7Fiktdah6j9iYMKUfO3p4nXj2ChCr6B
-	HIag==
-X-Gm-Message-State: AGRZ1gJ9XNCEIyF1nnXpulWQHdxkwUPY/SxF7ywj9P1VWYr9pCzlOOrk
-	sHUVNzhoH3/f84fPDLVBHc0=
-X-Google-Smtp-Source: AJdET5fRf2+988eHeOdi4O156JkooBuBaP32dlEve0bhztabq+wG+iPYs/az2TB4JwngFvNZOEdCSw==
-X-Received: by 2002:a62:5444:: with SMTP id i65mr8204556pfb.193.1542825375726; 
-	Wed, 21 Nov 2018 10:36:15 -0800 (PST)
-Received: from localhost ([2600:1700:e321:62f0:329c:23ff:fee3:9d7c])
-	by smtp.gmail.com with ESMTPSA id
-	18sm45891059pgl.50.2018.11.21.10.36.14
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 21 Nov 2018 10:36:15 -0800 (PST)
-Sender: Guenter Roeck <groeck7@gmail.com>
-Date: Wed, 21 Nov 2018 10:36:13 -0800
-From: Guenter Roeck <linux@roeck-us.net>
-To: Logan Gunthorpe <logang@deltatee.com>
+	(envelope-from <logang@deltatee.com>) id 1gPXVd-0000gE-Lp
+	for qemu-riscv@nongnu.org; Wed, 21 Nov 2018 13:46:01 -0500
+Received: from ale.deltatee.com ([207.54.116.67]:42334)
+	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.71) (envelope-from <logang@deltatee.com>)
+	id 1gPXVd-0000aa-Cw; Wed, 21 Nov 2018 13:45:57 -0500
+Received: from guinness.priv.deltatee.com ([172.16.1.162])
+	by ale.deltatee.com with esmtp (Exim 4.89)
+	(envelope-from <logang@deltatee.com>)
+	id 1gPXVY-0006x1-Km; Wed, 21 Nov 2018 11:45:53 -0700
+To: Alistair Francis <alistair23@gmail.com>
 Cc: Alistair Francis <Alistair.Francis@wdc.com>,
-	"qemu-devel@nongnu.org" <qemu-devel@nongnu.org>,
-	"qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>,
-	"alistair23@gmail.com" <alistair23@gmail.com>,
-	"abologna@redhat.com" <abologna@redhat.com>
-Message-ID: <20181121183613.GA4874@roeck-us.net>
+	"qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+	qemu-riscv@nongnu.org, Guenter Roeck <linux@roeck-us.net>,
+	Andrea Bolognani <abologna@redhat.com>
 References: <cover.1542819633.git.alistair.francis@wdc.com>
-	<85a3fe487514f4cb659ef7e6b88762ebc567c1b8.1542819633.git.alistair.francis@wdc.com>
-	<e7398997-ba1a-9182-6be0-da8e43e920df@deltatee.com>
+	<a2c70c88a145d2e239f113e28979c7a50d71aedf.1542819633.git.alistair.francis@wdc.com>
+	<ff4ef556-0989-ec47-0424-3f153f10a8d0@deltatee.com>
+	<CAKmqyKOMsBda223ptqt2iVFi6oVifK_0L+=Mne=v9p_umwxVLg@mail.gmail.com>
+From: Logan Gunthorpe <logang@deltatee.com>
+Message-ID: <ed679475-5ba2-c2ce-c468-b531188d6b7e@deltatee.com>
+Date: Wed, 21 Nov 2018 11:45:52 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.2.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <e7398997-ba1a-9182-6be0-da8e43e920df@deltatee.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
-	recognized.
-X-Received-From: 2607:f8b0:4864:20::641
-Subject: Re: [Qemu-riscv] [PATCH for-3.2 v7 5/6] hw/riscv/sifive_u: Connect
- the Xilinx PCIe
+In-Reply-To: <CAKmqyKOMsBda223ptqt2iVFi6oVifK_0L+=Mne=v9p_umwxVLg@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-CA
+Content-Transfer-Encoding: 7bit
+X-SA-Exim-Connect-IP: 172.16.1.162
+X-SA-Exim-Rcpt-To: abologna@redhat.com, linux@roeck-us.net,
+	qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
+	Alistair.Francis@wdc.com, alistair23@gmail.com
+X-SA-Exim-Mail-From: logang@deltatee.com
+X-SA-Exim-Version: 4.2.1 (built Tue, 02 Aug 2016 21:08:31 +0000)
+X-SA-Exim-Scanned: Yes (on ale.deltatee.com)
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+	[fuzzy]
+X-Received-From: 207.54.116.67
+Subject: Re: [Qemu-riscv] [PATCH for-3.2 v7 1/6] hw/riscv/virt: Increase the
+ number of interrupts
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -79,34 +58,41 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Nov 2018 18:36:22 -0000
+X-List-Received-Date: Wed, 21 Nov 2018 18:46:02 -0000
 
-Hi Logan,
 
-On Wed, Nov 21, 2018 at 11:05:21AM -0700, Logan Gunthorpe wrote:
-> 
-> 
-> On 2018-11-21 10:02 a.m., Alistair Francis wrote:
-> > Connect the Xilinx PCIe device based on the information in the device
-> > tree stored in the ROM of the HiFish Unleashed board.
-> 
-> I only briefly tested this patch but could not get any PCI devices to
-> come up with the sifive_u machine. Depending on the kernel I tried, it
-> either failed to initialize a Xilinx PCIe (likely due to a mismatch with
-> the DT) or it appears to successfully initialize a Microsemi device but
-> did not enumerate any devices underneath.
 
-What kernel configuration, devicetree, and qemu command line do you use
-for the sifive_u machine ?
+On 2018-11-21 11:17 a.m., Alistair Francis wrote:
+> On Wed, Nov 21, 2018 at 9:58 AM Logan Gunthorpe <logang@deltatee.com> wrote:
+>>
+>>
+>>
+>> On 2018-11-21 10:02 a.m., Alistair Francis wrote:
+>>> Increase the number of interrupts to match the HiFive Unleashed board.
+>>>
+>>> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+>>> ---
+>>>  include/hw/riscv/virt.h | 2 +-
+>>>  1 file changed, 1 insertion(+), 1 deletion(-)
+>>>
+>>> diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
+>>> index 91163d6cbf..7cb2742070 100644
+>>> --- a/include/hw/riscv/virt.h
+>>> +++ b/include/hw/riscv/virt.h
+>>> @@ -45,7 +45,7 @@ enum {
+>>>      UART0_IRQ = 10,
+>>>      VIRTIO_IRQ = 1, /* 1 to 8 */
+>>>      VIRTIO_COUNT = 8,
+>>> -    VIRTIO_NDEV = 10
+>>> +    VIRTIO_NDEV = 0x35
+>>
+>> Why 0x35? Based on the PCI patch we are using only 36 interrupts, not 53...
+> 
+> This is just for future proofing. There is no reason to set the number
+> lower then the number of interrupts we have, now hopefully this won't
+> keep churning every time we add a device.
 
-Thanks,
-Guenter
+Makes sense. Still 53 is an odd number.
 
-> 
-> In any case, it would be nice if the Microsemi/Xilinx confusion was at
-> least explained in the commit message.
-> 
-> Thanks,
-> 
-> Logan
+Logan
 
