@@ -1,66 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gPUoe-0000gG-H7
-	for mharc-qemu-riscv@gnu.org; Wed, 21 Nov 2018 10:53:24 -0500
-Received: from eggs.gnu.org ([2001:4830:134:3::10]:33187)
+	id 1gPVA4-0008LN-El
+	for mharc-qemu-riscv@gnu.org; Wed, 21 Nov 2018 11:15:32 -0500
+Received: from eggs.gnu.org ([2001:4830:134:3::10]:39086)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1gPUoc-0000Vl-A4
-	for qemu-riscv@nongnu.org; Wed, 21 Nov 2018 10:53:23 -0500
+	(envelope-from <alistair23@gmail.com>) id 1gPV9z-00084C-Qz
+	for qemu-riscv@nongnu.org; Wed, 21 Nov 2018 11:15:28 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1gPUoZ-00046r-L6
-	for qemu-riscv@nongnu.org; Wed, 21 Nov 2018 10:53:22 -0500
-Received: from mail-pl1-x644.google.com ([2607:f8b0:4864:20::644]:37340)
+	(envelope-from <alistair23@gmail.com>) id 1gPUwK-0000WM-Cy
+	for qemu-riscv@nongnu.org; Wed, 21 Nov 2018 11:01:22 -0500
+Received: from mail-lj1-x241.google.com ([2a00:1450:4864:20::241]:34727)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1gPUoZ-00045U-70
-	for qemu-riscv@nongnu.org; Wed, 21 Nov 2018 10:53:19 -0500
-Received: by mail-pl1-x644.google.com with SMTP id b5so6101799plr.4
-	for <qemu-riscv@nongnu.org>; Wed, 21 Nov 2018 07:53:19 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
-	h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
-	:content-transfer-encoding;
-	bh=BY53voaCDhNy+vkSnkYwoqUt1m3QqWcv2/fZRpYXDrY=;
-	b=WDQReoZn4AjIbkF2dQoM6IPP4uVeO0jVWAtDpCt9KcbOLWs5cztDUYpfegKEhdvCa1
-	PzIbDNcLgknHhKTcoIhw6i+JKuUlGmLQ0awUSBgHWw71LL0yRdszdfFMXLHuxBpz/pRE
-	twTzO0c/9UoCpoPoNe1F6pZa3azC/VOvNDFNAb3l1QPbhoZHUWvyRNZvqrwmYslQX1+j
-	XH0LXNNqcyQ24IuxJHm1/EGBuv4iPfz2ohnTzJiI08eudLAa4TRSqL8CKuVSxyE9HjJd
-	XFxs9LOsT5ScQiFsT4aXy7HeqEeEX/1x76IOrQQLM8FGU7GQsm6T53EAQotMP/f/YWtE
-	+Dlg==
+	(Exim 4.71) (envelope-from <alistair23@gmail.com>)
+	id 1gPUwK-0000Uu-4s; Wed, 21 Nov 2018 11:01:20 -0500
+Received: by mail-lj1-x241.google.com with SMTP id u6-v6so5304559ljd.1;
+	Wed, 21 Nov 2018 08:01:19 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=ofOGrnWeeAMkihNcjixbAnhMlD2fTzld37o49leamgA=;
+	b=n/litsXnw2fA2pjbVdMGfA4Xj854qX3ZXj7dCzVi1/hLNC0hSGc4Gk5bIp2pMdxG0Z
+	6iCZHgMQ/CBx8PXxUohEIy1nv1OD0Ny7+JX5kEgANQ6laxb0pBvSlARqNLAcmSDgmMlj
+	xmVP6PO5YMj33VDqpbNJCtm7vfOn/6WTGea4BkY/6zfgHL/rnt1EOMnUlGAoesNVUTqY
+	6FJbgZITT8fcskcBkmUkRYrXxiVgRVGTwSHE5YMJqIQiKnTd0DpwBmzh+If7JBusR+e0
+	ufR+Q5MvznCvW6eSyHmaNmfbsHndlD3DwNbvuohWEhFiv12E4A3YnepriLT+A22pxePQ
+	3Juw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
-	:mime-version:content-transfer-encoding;
-	bh=BY53voaCDhNy+vkSnkYwoqUt1m3QqWcv2/fZRpYXDrY=;
-	b=XT2G1y9H1Hstcm7UQz3bJwAHfdUwj70WUsTwKzAsN3mkLR6yI6xzVPn55WI4+3Erxv
-	c1e1Xrpg2mnJrEO7SsKh8kxwxxy9maMkOzt1DQFHWT1P9QwRYQO0Ltig58mmL1uwovV2
-	C6etCsGkLounA1SKlRO0q2f0XKf6jb6i+4lLdovpp08i4WZvl48vZCx9aLauBecKW2NQ
-	AAFt7M2cAsyn2rXQ+ryoecyUfj+ixiTC6pKErVIfuGWlnby7jrSUCN8SIbmahUYXGp/g
-	VID38Qo+KoLGHm40gL5ZmGXkPkQTwp2HSQdRBZ7afHSflfG0bNC8Q8ahujK9q0D7ATLE
-	JjYw==
-X-Gm-Message-State: AA+aEWagqFwk+m3vMpEpBgGu9owsAqLaakilupGn+l5Llu0avnevxxZv
-	hylm49R70+ECqXwRc74mPTsXOg==
-X-Google-Smtp-Source: AFSGD/WkQ5bNCYL5dIb95A51jPVbjZU3AlTQZsSBUSwM957bcZ4vJdJAiaHFQutaD+I1DUA1gL288g==
-X-Received: by 2002:a17:902:7783:: with SMTP id
-	o3mr6412316pll.118.1542815598079; 
-	Wed, 21 Nov 2018 07:53:18 -0800 (PST)
-Received: from localhost ([12.206.222.5])
-	by smtp.gmail.com with ESMTPSA id b2sm72589888pfm.3.2018.11.21.07.53.16
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 21 Nov 2018 07:53:17 -0800 (PST)
-Date: Wed, 21 Nov 2018 07:53:17 -0800 (PST)
-X-Google-Original-Date: Wed, 21 Nov 2018 07:53:11 PST (-0800)
-In-Reply-To: <CAKmqyKMh3T7w-NsP-i2HaRUHvR-0BhqeyTgd2mD0hnH9k8gZiQ@mail.gmail.com>
-CC: richard.henderson@linaro.org, qemu-riscv@nongnu.org,
-	Alistair Francis <Alistair.Francis@wdc.com>, qemu-devel@nongnu.org
-From: Palmer Dabbelt <palmer@sifive.com>
-To: alistair23@gmail.com
-Message-ID: <mhng-995d2bae-d043-45c1-872d-7639baafd856@palmer-si-x1c4>
-Mime-Version: 1.0 (MHng)
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=ofOGrnWeeAMkihNcjixbAnhMlD2fTzld37o49leamgA=;
+	b=rXPSonqFfBNymd7EKugjHxZv4H83Kak1BXY8gJZ7Xxe2XOf75vDRM2QjYRgz3d1wSD
+	hgOa77NJ4XsG/c71W9ZgFEkYV9MQzqjUv6/UKOtDd+SY0pgUquOn3PQKDXLLF8x6LSZP
+	eHhUo5YgS9Xy68mbIjh0RhAd7B2Jj9qkE0MmV65+yxDKcHqHgHlL8ruJoKONFZm1+yE3
+	MQnH0jx8QScI8F0X3+NtR5xSYgYTy5Wl9CLLf2xIM3NGVX6xYM6hqmyWkHx+y1Dtm42W
+	HNXgvKiYoSD8jjXILxKKFyQ9ZSwWQfUU96fcf3wWqu4A2zk/wXwVXCo7mIYE1iZx6NlW
+	d7tA==
+X-Gm-Message-State: AA+aEWZT/xrceX0MGM8U8MKwAbxC2GPGo7zWr3a/p07dFQiXsTq6nPf2
+	H08+oUMVUFSa/EEBgxkJ46u86zqLvLdXSX4aFG0=
+X-Google-Smtp-Source: AFSGD/VhDrv8r6LqQTzWu0Vq1ASIajoV9Zr/0LUCNcHo+HY7IANtXtWtIeKr8FIHf49swGaWKF2V16qwDPLhnMnD7Fc=
+X-Received: by 2002:a2e:449c:: with SMTP id
+	b28-v6mr4278133ljf.47.1542816078313; 
+	Wed, 21 Nov 2018 08:01:18 -0800 (PST)
+MIME-Version: 1.0
+References: <1542754831-25567-1-git-send-email-linux@roeck-us.net>
+	<CAKmqyKNNAkBY6o06=jokZcMipmtdFyX5zq9W-cQvx96R=RzzRg@mail.gmail.com>
+	<d793d87c-3825-9a72-971d-856291286d57@roeck-us.net>
+In-Reply-To: <d793d87c-3825-9a72-971d-856291286d57@roeck-us.net>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Wed, 21 Nov 2018 08:00:45 -0800
+Message-ID: <CAKmqyKNEE-9kA+yhcbs5cbGhD_Miza=hvXSrJ5F+V6fkYR0yfQ@mail.gmail.com>
+To: Guenter Roeck <linux@roeck-us.net>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>, qemu-riscv@nongnu.org, 
+	"qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+	Andrea Bolognani <abologna@redhat.com>, paul.walmsley@sifive.com
+Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::644
-Subject: Re: [Qemu-riscv] [Qemu-devel] [RFC v1 11/23] riscv: tcg-target: Add
- the relocation functions
+X-Received-From: 2a00:1450:4864:20::241
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH 1/2] riscv: virt: Fix pcie
+ memory ranges
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -72,57 +69,63 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Nov 2018 15:53:23 -0000
+X-List-Received-Date: Wed, 21 Nov 2018 16:15:29 -0000
 
-On Tue, 20 Nov 2018 17:15:11 PST (-0800), alistair23@gmail.com wrote:
-> On Fri, Nov 16, 2018 at 12:33 AM Richard Henderson
-> <richard.henderson@linaro.org> wrote:
->>
->> On 11/15/18 11:35 PM, Alistair Francis wrote:
->> > +static void reloc_sbimm12(tcg_insn_unit *code_ptr, tcg_insn_unit *target)
->> > +{
->> > +    intptr_t offset = (intptr_t)target - (intptr_t)code_ptr;
->> > +    tcg_debug_assert(offset == sextract32(offset, 1, 12) << 1);
->> > +
->> > +    code_ptr[0] |= encode_sbimm12(offset);
->> > +}
->>
->> FYI, I have an in-flight patch for 4.0 that will make patch_reloc return a bool
->> for relocation success, which will move these asserts.
->>
->> http://lists.nongnu.org/archive/html/qemu-devel/2018-11/msg02237.html
+On Tue, Nov 20, 2018 at 8:08 PM Guenter Roeck <linux@roeck-us.net> wrote:
 >
-> Thanks, I'll keep an eye on this.
+> Hi Alistair,
 >
->>
->>
->> > +static void reloc_call(tcg_insn_unit *code_ptr, tcg_insn_unit *target)
->> > +{
->> > +    intptr_t offset = (intptr_t)target - (intptr_t)code_ptr;
->> > +    tcg_debug_assert(offset == (int32_t)offset);
->> > +
->> > +    int32_t hi20 = ((offset + 0x800) >> 12) << 12;
->> > +    int32_t lo12 = offset - hi20;
->> > +
->> > +    code_ptr[0] |= encode_uimm20(hi20);
->> > +    code_ptr[1] |= encode_imm12(lo12);
->> > +}
->> > +
->>
->> This is ok for patching during generation, but it is not ok for
->> tb_target_set_jmp_target from patch 9.
->>
->> Will the riscv-32 compiler use a FSTD insn to implement atomic_set for 64-bit?
->>  If not, you may be just better off using the indirect method.
+> On 11/20/18 4:43 PM, Alistair Francis wrote:
+> > On Tue, Nov 20, 2018 at 3:01 PM Guenter Roeck <linux@roeck-us.net> wrote:
+> >>
+> >> - Provide separate maps for VIRT_PCIE_MMIO (32 bit) and
+> >>    VIRT_PCIE_MMIO_HIGH (64 bit)
+> >> - VIRT_PCIE_PIO is for IO ports, not for the physical address
+> >> - VIRT_PCIE_ECAM size reduced to size needed to cover 256 ports
+> >> - Use memmap[VIRT_PCIE_ECAM].size instead of memmap[VIRT_PCIE_ECAM].base
+> >>    to calculate the bus number range
+> >> - Use qemu_fdt_setprop_sized_cells() to create reg and ranges entries
+> >> - Fix parameters for gpex_pcie_init()
+> >>    (ECAM and MMIO addresses were swapped)
+> >>
+> >> Signed-off-by: Guenter Roeck <linux@roeck-us.net>
+> >
+> > Hey Gunter,
+> >
+> > Thanks for the patch! This was causing me all kinds of headaches.
+> > Unfortunately I had managed to figure out the memory addresses thanks
+> > to Bin Meng's help.
+> >
+> > You can see the new tree here:
+> > https://github.com/alistair23/qemu/tree/mainline/alistair/sifive_pcie.next
+> >
 >
-> I'm not sure. Is the indirect method just using atomic set, because
-> that is what I have now?
+> Looks good. With your patch series applied on top of v3.1-rc2 and usb.mak
+> added to the build:
+>
+> Building riscv:virt:defconfig:initrd ... running ....... passed
+> Building riscv:virt:defconfig:virtio-blk:rootfs ... running ....... passed
+> Building riscv:virt:defconfig:virtio:rootfs ... running ....... passed
+> Building riscv:virt:defconfig:virtio-pci:rootfs ... running ....... passed
+> Building riscv:virt:defconfig:mmc:rootfs ... running ....... passed
+> Building riscv:virt:defconfig:nvme:rootfs ... running ................... passed
+> Building riscv:virt:defconfig:usb-ohci:rootfs ... running ....... passed
+> Building riscv:virt:defconfig:usb-ehci:rootfs ... running ....... passed
+> Building riscv:virt:defconfig:usb-xhci:rootfs ... running ....... passed
+> Building riscv:virt:defconfig:usb-uas-ehci:rootfs ... running ....... passed
+> Building riscv:virt:defconfig:usb-uas-xhci:rootfs ... running ....... passed
+> Building riscv:virt:defconfig:scsi[53C810]:rootfs ... running ........ passed
+> Building riscv:virt:defconfig:scsi[53C895A]:rootfs ... running ........ passed
+> Building riscv:virt:defconfig:scsi[MEGASAS]:rootfs ... running ....... passed
+> Building riscv:virt:defconfig:scsi[MEGASAS2]:rootfs ... running ....... passed
+> Building riscv:virt:defconfig:scsi[FUSION]:rootfs ... running ....... passed
+> Building riscv:virt:defconfig:scsi[virtio]:rootfs ... running ....... passed
+> Building riscv:virt:defconfig:scsi[virtio-pci]:rootfs ... running ....... passed
 
-Per the memory model chapter (which is being ratified now), FSD is not atomic on rv32i:
+Awesome! Can I add your tested by tag?
 
-    An FLD or FSD instruction for which XLEN<64 may also be decomposed into a 
-    set of component memory operations of any granularity.
+Alistair
 
-So they should not be used on RV32I hosts to provide atomicity, even if they 
-may be atomic on some microarchitectures.
+>
+> Guenter
 
