@@ -1,21 +1,21 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gPY23-00068k-0b
-	for mharc-qemu-riscv@gnu.org; Wed, 21 Nov 2018 14:19:27 -0500
-Received: from eggs.gnu.org ([2001:4830:134:3::10]:58517)
+	id 1gPY3c-0006vp-OE
+	for mharc-qemu-riscv@gnu.org; Wed, 21 Nov 2018 14:21:04 -0500
+Received: from eggs.gnu.org ([2001:4830:134:3::10]:59286)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <logang@deltatee.com>) id 1gPY20-00067U-Pz
-	for qemu-riscv@nongnu.org; Wed, 21 Nov 2018 14:19:25 -0500
+	(envelope-from <logang@deltatee.com>) id 1gPY3b-0006ur-3c
+	for qemu-riscv@nongnu.org; Wed, 21 Nov 2018 14:21:03 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <logang@deltatee.com>) id 1gPY1w-0008LW-Nv
-	for qemu-riscv@nongnu.org; Wed, 21 Nov 2018 14:19:24 -0500
-Received: from ale.deltatee.com ([207.54.116.67]:42654)
+	(envelope-from <logang@deltatee.com>) id 1gPY3X-0001dg-1S
+	for qemu-riscv@nongnu.org; Wed, 21 Nov 2018 14:21:03 -0500
+Received: from ale.deltatee.com ([207.54.116.67]:42676)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.71) (envelope-from <logang@deltatee.com>)
-	id 1gPY1w-0008KX-HO; Wed, 21 Nov 2018 14:19:20 -0500
+	id 1gPY3W-0001co-DZ; Wed, 21 Nov 2018 14:20:58 -0500
 Received: from guinness.priv.deltatee.com ([172.16.1.162])
 	by ale.deltatee.com with esmtp (Exim 4.89)
 	(envelope-from <logang@deltatee.com>)
-	id 1gPY1t-0007Tc-BL; Wed, 21 Nov 2018 12:19:18 -0700
+	id 1gPY3S-0007UM-P9; Wed, 21 Nov 2018 12:20:55 -0700
 To: Alistair Francis <alistair23@gmail.com>
 Cc: Alistair Francis <Alistair.Francis@wdc.com>,
 	"qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
@@ -27,15 +27,15 @@ References: <cover.1542819633.git.alistair.francis@wdc.com>
 	<CAKmqyKMtTqi=D-PKZFnt40MaA8+e6Sj8nUr0VmBFajScw1MYng@mail.gmail.com>
 	<ffd80fff-55bf-0578-4fe5-00f07ef6bdc6@deltatee.com>
 	<CAKmqyKMhpAPXFF5cQkqKYcNjD5aciDW7Ek53+W=1XNp3RGFLmw@mail.gmail.com>
-	<33646fef-adb7-26b4-ba01-79f9a0f5bdae@deltatee.com>
-	<CAKmqyKMJvTb=JebfA1N-40-MqgHkAj98JOH51t6K--zjYLXSnA@mail.gmail.com>
+	<1abdea1e-57bd-b841-a924-259baa3b9033@deltatee.com>
+	<CAKmqyKP2yrQax=+qO6q5qncLdUNUpWY2PGW1eCgO104p7CzV6g@mail.gmail.com>
 From: Logan Gunthorpe <logang@deltatee.com>
-Message-ID: <d316a936-c726-dd4c-f90a-9690b4e3fc3d@deltatee.com>
-Date: Wed, 21 Nov 2018 12:19:17 -0700
+Message-ID: <830cb084-8e40-9ec1-cfde-5bb1ad92edda@deltatee.com>
+Date: Wed, 21 Nov 2018 12:20:54 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
 	Thunderbird/60.2.1
 MIME-Version: 1.0
-In-Reply-To: <CAKmqyKMJvTb=JebfA1N-40-MqgHkAj98JOH51t6K--zjYLXSnA@mail.gmail.com>
+In-Reply-To: <CAKmqyKP2yrQax=+qO6q5qncLdUNUpWY2PGW1eCgO104p7CzV6g@mail.gmail.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-CA
 Content-Transfer-Encoding: 7bit
@@ -62,29 +62,21 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Nov 2018 19:19:25 -0000
+X-List-Received-Date: Wed, 21 Nov 2018 19:21:03 -0000
 
 
 
-On 2018-11-21 12:16 p.m., Alistair Francis wrote:
->>> Do you see the MicroSemi PCIe probe in your dmesg?
+On 2018-11-21 12:18 p.m., Alistair Francis wrote:
+>>>
+>>> You should just be able to edit the source, grep for "microsemi".
 >>
->> I do when I have a kernel with microsemi PCI Support (specifically the
->> one included in the bbl you sent us a while back).
+>> I don't see any "microsemi" in my riscv-pk source...
 > 
-> Yeah, so you need to make sure that doesn't happen.
+> msemi maybe?
+> 
+> The compatible sting is: ms-pf,axi-pcie-host
 
-Well, I also have a kernel (one I've built myself) without microsemi
-support, but with Xilinx support and it also doesn't work (see my dmesg
-logs I sent).
-
-> For people who have modified the standard bbl to edit the device tree
-> before passing it to Linux to add the MicroSemi PCIe node, it won't
-> work. That's a very small number of people who have modified the
-> standard boot loader. I don't think we need to document how those
-> people get back to the default set-up.
-
-I have not done that. And it's not working for me.
+None of the above.
 
 Logan
 
