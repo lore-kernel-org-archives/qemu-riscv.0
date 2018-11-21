@@ -1,62 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gPaZB-0001Mj-6j
-	for mharc-qemu-riscv@gnu.org; Wed, 21 Nov 2018 17:01:49 -0500
-Received: from eggs.gnu.org ([2001:4830:134:3::10]:48962)
+	id 1gPaZH-0001Pn-AJ
+	for mharc-qemu-riscv@gnu.org; Wed, 21 Nov 2018 17:01:55 -0500
+Received: from eggs.gnu.org ([2001:4830:134:3::10]:49020)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1gPaZ6-0001LX-DM
-	for qemu-riscv@nongnu.org; Wed, 21 Nov 2018 17:01:47 -0500
+	(envelope-from <logang@deltatee.com>) id 1gPaZE-0001O9-OE
+	for qemu-riscv@nongnu.org; Wed, 21 Nov 2018 17:01:53 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1gPaZ3-0001Tm-Vh
-	for qemu-riscv@nongnu.org; Wed, 21 Nov 2018 17:01:44 -0500
-Received: from mail-lf1-x143.google.com ([2a00:1450:4864:20::143]:36475)
-	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <alistair23@gmail.com>)
-	id 1gPaZ3-0001S3-7c; Wed, 21 Nov 2018 17:01:41 -0500
-Received: by mail-lf1-x143.google.com with SMTP id a16so5113668lfg.3;
-	Wed, 21 Nov 2018 14:01:40 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=oNPy/SpwmVBis33CwGRD+Rca3uuFFQ3JwGVmFuTMpsI=;
-	b=QwjkReMO+6eaX2E490QHQ8ycCuKxZ9OxvUWsqbyEupAoE2gxVQ36aDe9OgjHo/JxJn
-	JPFUb7ATDryyRxsIdAquRtpOwJu9AWUtpJVg0aV0GV5YHfByKtKImh2BADI3nXGHvWmz
-	LmMoqR5d+TUlgEHF8xbTxJYkw2Iiesp7eRxu9G8c6b9CEgXCAB0HVLselK9X/gIIVSDw
-	xVvIPUVIvQp4wmrq2PsTeV9yV8j/k5Lwkako8HcQdt+uHtSh6HBcc/nZUl4ZW+AYEsJv
-	DtblVLBbUMKo2qysMsdMNTdyQaRv4bdwdoIB0ua0VP4mjv2W4h9nPJQqVu08NBvVPiDR
-	jRtQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=oNPy/SpwmVBis33CwGRD+Rca3uuFFQ3JwGVmFuTMpsI=;
-	b=EawVts4gI3tFbZNabFXITgDbmvQMOwvyp0oyUvsKf33L9YETtpfBHe09dFaGFtzxnm
-	qwY60nzAKxVlIpfYI8EExW7S7v9urutE6LKLmbEkvZODwHLYKxYnC+b79roUkj45PqOE
-	Tf1XCEcVmzXgaHDlcdgOmcIHJ3PnjjuKEtWWxJdpxkB7d4HWHrF8Rub3jgtSele2MJG3
-	3aC7wigHb4STzZzQ1DKFN1XDMDx+bjKJYXdGtFMhRw/MsD089faGEbh69zFmpphJr8Rm
-	l1Iz6rYLyXF2Spp3GDz43U0c2rBZqnKPhMroLRccUn4TE1QPYlz8kAlDGQ2iGMN5I3ll
-	A+/A==
-X-Gm-Message-State: AGRZ1gL5MyzygPvJF9soY0buf1UiTLaMNmxWj5SeQKsxdrt74wV9NCdy
-	A6fbQI7CxXDjiwFDwIMGFNJHTAI5wKeeLmMutqk=
-X-Google-Smtp-Source: AJdET5fu/kVj2yrrtvIzE1gQs503QfxobQD1X0xS8LVRKk1uGeAFKua0nQln7NK4fLVFhFQZ0vXoBsYHI3qsI19ePKY=
-X-Received: by 2002:a19:5782:: with SMTP id l124mr4646432lfb.91.1542837698314; 
-	Wed, 21 Nov 2018 14:01:38 -0800 (PST)
-MIME-Version: 1.0
-References: <CAKmqyKM1pf1zJVMuqZvocN07LxDGrRjoSNLojt=06UbN4P-bpg@mail.gmail.com>
-	<mhng-ad48cd5f-383f-427e-9bd6-db4947b3839f@palmer-si-x1c4>
-In-Reply-To: <mhng-ad48cd5f-383f-427e-9bd6-db4947b3839f@palmer-si-x1c4>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 21 Nov 2018 14:01:10 -0800
-Message-ID: <CAKmqyKMZ7+xAPcks33omgaEjQig9b-BSDGMbZBfTDSzW8eiThg@mail.gmail.com>
-To: Palmer Dabbelt <palmer@sifive.com>
-Cc: Logan Gunthorpe <logang@deltatee.com>, qemu-riscv@nongnu.org, 
-	Alistair Francis <Alistair.Francis@wdc.com>, 
+	(envelope-from <logang@deltatee.com>) id 1gPaZ6-0001Vg-H4
+	for qemu-riscv@nongnu.org; Wed, 21 Nov 2018 17:01:50 -0500
+Received: from ale.deltatee.com ([207.54.116.67]:43698)
+	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.71) (envelope-from <logang@deltatee.com>)
+	id 1gPaZ4-0001Rp-9Y; Wed, 21 Nov 2018 17:01:44 -0500
+Received: from guinness.priv.deltatee.com ([172.16.1.162])
+	by ale.deltatee.com with esmtp (Exim 4.89)
+	(envelope-from <logang@deltatee.com>)
+	id 1gPaYy-0000jt-0q; Wed, 21 Nov 2018 15:01:36 -0700
+To: Alistair Francis <alistair23@gmail.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>,
 	"qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
-	Guenter Roeck <linux@roeck-us.net>, Andrea Bolognani <abologna@redhat.com>
-Content-Type: text/plain; charset="UTF-8"
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
-	recognized.
-X-Received-From: 2a00:1450:4864:20::143
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH for-3.2 v7 5/6]
- hw/riscv/sifive_u: Connect the Xilinx PCIe
+	qemu-riscv@nongnu.org, Guenter Roeck <linux@roeck-us.net>,
+	Andrea Bolognani <abologna@redhat.com>
+References: <cover.1542819633.git.alistair.francis@wdc.com>
+	<85a3fe487514f4cb659ef7e6b88762ebc567c1b8.1542819633.git.alistair.francis@wdc.com>
+	<e7398997-ba1a-9182-6be0-da8e43e920df@deltatee.com>
+	<CAKmqyKMtTqi=D-PKZFnt40MaA8+e6Sj8nUr0VmBFajScw1MYng@mail.gmail.com>
+	<ffd80fff-55bf-0578-4fe5-00f07ef6bdc6@deltatee.com>
+	<CAKmqyKMhpAPXFF5cQkqKYcNjD5aciDW7Ek53+W=1XNp3RGFLmw@mail.gmail.com>
+	<33646fef-adb7-26b4-ba01-79f9a0f5bdae@deltatee.com>
+	<CAKmqyKMJvTb=JebfA1N-40-MqgHkAj98JOH51t6K--zjYLXSnA@mail.gmail.com>
+	<d316a936-c726-dd4c-f90a-9690b4e3fc3d@deltatee.com>
+	<CAKmqyKM1pf1zJVMuqZvocN07LxDGrRjoSNLojt=06UbN4P-bpg@mail.gmail.com>
+	<6480496b-dbb5-37bb-57e2-7a4819c61511@deltatee.com>
+	<CAKmqyKMPHg7nGr-Ua1Cb7yvdZzWAs6HOM4eB+SinMypXQ5Ni6w@mail.gmail.com>
+	<CAKmqyKMTiMJKCc=oEP97XLWFQMMfE0PFHB8ZKGm2=AP5_HEoNg@mail.gmail.com>
+From: Logan Gunthorpe <logang@deltatee.com>
+Message-ID: <00f7a2ba-8eb1-77fd-1c4b-14e83e553bed@deltatee.com>
+Date: Wed, 21 Nov 2018 15:01:34 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.2.1
+MIME-Version: 1.0
+In-Reply-To: <CAKmqyKMTiMJKCc=oEP97XLWFQMMfE0PFHB8ZKGm2=AP5_HEoNg@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-CA
+Content-Transfer-Encoding: 7bit
+X-SA-Exim-Connect-IP: 172.16.1.162
+X-SA-Exim-Rcpt-To: abologna@redhat.com, linux@roeck-us.net,
+	qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
+	Alistair.Francis@wdc.com, alistair23@gmail.com
+X-SA-Exim-Mail-From: logang@deltatee.com
+X-SA-Exim-Version: 4.2.1 (built Tue, 02 Aug 2016 21:08:31 +0000)
+X-SA-Exim-Scanned: Yes (on ale.deltatee.com)
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+	[fuzzy]
+X-Received-From: 207.54.116.67
+Subject: Re: [Qemu-riscv] [PATCH for-3.2 v7 5/6] hw/riscv/sifive_u: Connect
+ the Xilinx PCIe
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -68,46 +67,35 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Nov 2018 22:01:47 -0000
+X-List-Received-Date: Wed, 21 Nov 2018 22:01:53 -0000
 
-On Wed, Nov 21, 2018 at 1:37 PM Palmer Dabbelt <palmer@sifive.com> wrote:
->
-> On Wed, 21 Nov 2018 11:21:40 PST (-0800), alistair23@gmail.com wrote:
-> > On Wed, Nov 21, 2018 at 11:19 AM Logan Gunthorpe <logang@deltatee.com> wrote:
-> >>
-> >>
-> >>
-> >> On 2018-11-21 12:16 p.m., Alistair Francis wrote:
-> >> >>> Do you see the MicroSemi PCIe probe in your dmesg?
-> >> >>
-> >> >> I do when I have a kernel with microsemi PCI Support (specifically the
-> >> >> one included in the bbl you sent us a while back).
-> >> >
-> >> > Yeah, so you need to make sure that doesn't happen.
-> >>
-> >> Well, I also have a kernel (one I've built myself) without microsemi
-> >> support, but with Xilinx support and it also doesn't work (see my dmesg
-> >> logs I sent).
-> >
-> > So this one should work.
-> >
-> >>
-> >> > For people who have modified the standard bbl to edit the device tree
-> >> > before passing it to Linux to add the MicroSemi PCIe node, it won't
-> >> > work. That's a very small number of people who have modified the
-> >> > standard boot loader. I don't think we need to document how those
-> >> > people get back to the default set-up.
-> >>
-> >> I have not done that. And it's not working for me.
-> >
-> > If you haven't done this then how can Linux know to probe the
-> > MicroSemi PCIe root complex?
->
-> BBL passes this through from the FSBL, which has the DTB compiled in:
->
-> https://github.com/sifive/freedom-u540-c000-bootloader/blob/master/fsbl/ux00_fsbl.dts#L405
 
-That's fairly new though. Our boards show a Xilinx PCIe device.
 
-Alistair
+On 2018-11-21 2:54 p.m., Alistair Francis wrote:
+> The last time I tested this it worked (although I might not have
+> tested interrupts) and now it doesn't. Nothing has changed in the
+> series, my guest software has changed though. I can see the root
+> complex, but no devices underneath it.
+> 
+> Sorry for the confusion with the MicroSemi PCIe root complex.
+> 
+> I think I'll just drop this patch. It doesn't work for 32-bit guests,
+> but I would like to model the hardware so I don't want to change the
+> addresses. We can revisit this in the future along with the gpex high
+> MMIO support and USB support.
+
+Yeah, I'm less concerned about all the board variant stuff as I am about
+having something actually work. I don't want to have to jump through any
+bbl hoops or anything to use it if it doesn't work out of the box. And
+you're right, getting the virt pci support upstream seems more important
+and this issue can be revisited later.
+
+On an slight tangent: what root device do you use with the sifive_u
+machine? I can't find any virtual hardware that works. If I had PCI I
+could use NVMe, but that's not working. And for this reason I've only
+been using the 'virt' device.
+
+Thanks,
+
+Logan
 
