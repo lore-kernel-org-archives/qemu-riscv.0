@@ -1,62 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gPGhy-0000sf-Dv
-	for mharc-qemu-riscv@gnu.org; Tue, 20 Nov 2018 19:49:34 -0500
-Received: from eggs.gnu.org ([2001:4830:134:3::10]:50232)
+	id 1gPH7I-0007b7-Nx
+	for mharc-qemu-riscv@gnu.org; Tue, 20 Nov 2018 20:15:44 -0500
+Received: from eggs.gnu.org ([2001:4830:134:3::10]:33873)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1gPGhv-0000sX-Up
-	for qemu-riscv@nongnu.org; Tue, 20 Nov 2018 19:49:33 -0500
+	(envelope-from <alistair23@gmail.com>) id 1gPH7G-0007a9-PY
+	for qemu-riscv@nongnu.org; Tue, 20 Nov 2018 20:15:43 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1gPGhu-0007pw-Q3
-	for qemu-riscv@nongnu.org; Tue, 20 Nov 2018 19:49:31 -0500
-Received: from mail-lf1-x142.google.com ([2a00:1450:4864:20::142]:41609)
+	(envelope-from <alistair23@gmail.com>) id 1gPH7F-0008T6-Sf
+	for qemu-riscv@nongnu.org; Tue, 20 Nov 2018 20:15:42 -0500
+Received: from mail-lj1-x243.google.com ([2a00:1450:4864:20::243]:46005)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
 	(Exim 4.71) (envelope-from <alistair23@gmail.com>)
-	id 1gPGhu-0007o9-HY; Tue, 20 Nov 2018 19:49:30 -0500
-Received: by mail-lf1-x142.google.com with SMTP id c16so2697600lfj.8;
-	Tue, 20 Nov 2018 16:49:30 -0800 (PST)
+	id 1gPH7D-0008Ph-R7; Tue, 20 Nov 2018 20:15:40 -0500
+Received: by mail-lj1-x243.google.com with SMTP id s5-v6so3319938ljd.12;
+	Tue, 20 Nov 2018 17:15:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=9sf2xjbkvYMXw0I2lp5Da5kLwJ1rTZ78xWbdBCf6Hq0=;
-	b=Nax1DyfI2d4QdbmjffkcI1kH84jMdfSz8fhFCtK4Pct8nmmA3fZEv3Qojz4rVc0J1S
-	8llJm1oQquwd/WQL1ia0uJJADd/PthDbuzmCU3hz8H+vSvXiTXcnTy29ZS/9l8FjGA48
-	1VwbP5rpcqKnsn3NbpGhpirFRE3HD77TWUl3ELh8WgDaZVJ7I2TGArxmEGDEO6UaaukG
-	KUanNTscvvunSP9RdwrfYPuUxeJwAUJTvYAl5i00luPDHy7hkUu+F7EhQw6zAYCNSAqk
-	zi9oDoLsRseUxXMVBGzMLsthnIyhkVcNd9fPWgrkWq5C2442lxHnLX58u4CbGQb8DDaI
-	DbIQ==
+	:cc; bh=rKVnnfpZ8M6l+0sq3CQigKeFyOs2JdfMjOt1nmkSadQ=;
+	b=b3nl2CAcUO46OCySNpKYQt7Oi/pksGtDNPnnwTiPKOk3GVnMa8wtzgoKH2gYIcDyKR
+	3fm3K7Q2q51HcNFYBQG1Mcvm6bx2V+xzYXn4NIbN6NxAsePWyL7bqMIkImHy0WulaTp3
+	3wXuhbCraJLfw9DHAIoF/HW6n2zSbmesbZCMg3ZjZOinKf9/wPNYJVyiIxUbR+luuQjZ
+	BMyhUnFyipqRd+ymbqwGDQGfNUKXvE4Bvw2SgWPQcjqudqfLL1Ht+G4bFFL7AJJwvJMJ
+	TYzBN5NPv31axVdu0i9O7CY+itEKZLBhNAJmjWpcFzs2CtJSRQ1rlboiBSY2eatXLyTB
+	jsXw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=9sf2xjbkvYMXw0I2lp5Da5kLwJ1rTZ78xWbdBCf6Hq0=;
-	b=AGW3vuXpavMceRcn4lTOSSC0/SL4OKZ9zs/RqntwTOg6KrCdFBD1w7aPhaou0BCKJi
-	ecD3d0nwidEzP/SzHD0gMLTXd1TrM2wlmDfacQDDrreMVBZ1VBK5qYemro2ezCWLJ4Yk
-	G3pKJysQJ2f2TSVHLJCmTfBo1kVWo6HCQynKNdYXsf5ro0AOvAjVoPH/HXNPS1EAS/P1
-	xApyh7ABOUeuXvsIb3cM5uXRnCVhtISTztfwjg15c9Q8npb0gSSkvSZlavdVuOyjDST+
-	CMNnjY6nZOQqvjL7PrG3KHXHOLAIHVUVg3IAcPm0JX7LBvZdBOBUDeznZ1Q8+/6WInTx
-	yrfg==
-X-Gm-Message-State: AGRZ1gKSabiSgX6IK4u8duuzrsyc8Rqz8vgNrDibjAaG7opY9rz6Nbeh
-	pybbRfNHOCUV7Nu+ntBWHFQ+0xhOKbzUkLqqyoo=
-X-Google-Smtp-Source: AJdET5dS+QkirSigLFshxSve9BaDf+QhGRqBBGfY1Dxd2v44fgxwbh3TD2FoOw6w3Cb+IzBLJOkIlOh3L9hlPol5WSw=
-X-Received: by 2002:a19:4e59:: with SMTP id c86mr2501003lfb.132.1542761369110; 
-	Tue, 20 Nov 2018 16:49:29 -0800 (PST)
+	bh=rKVnnfpZ8M6l+0sq3CQigKeFyOs2JdfMjOt1nmkSadQ=;
+	b=hdCGIVNyOV2RJFOzk6etjNq4fLLXsQQx9+HFHgGK3dVG5lq7uoj8LRWPRvuWC68T0Z
+	mU40SZ+qaNbiq3rnD0IwWMHWMX+/TzpRErONbeRdnXxJWzWr8qsyhLxNSImAQztKvx+1
+	ZUj6YDkUlr2rQyWN7s91ijj15Xal8XoU3bB3Z9k09YdnMrVkYzVVuRGbrgr4YXZZFkfd
+	FvsiXFU2QWZtbdatri71jehxlzNxMhkjBR+qJD5I04DImymhk9t1yzrmgE1QhM4tVEJX
+	LTMQd549NbTzC2Wu8sxFovdVrznUJC3HKuGLEAUx0gi1b93LmzVqmF8RPJVCmJIkRaui
+	yA2g==
+X-Gm-Message-State: AGRZ1gJVJ1GX/FAtCrDE3uEZ4cJ0PZQhIj7k/EREOhWhJ0oQ9hij/W8l
+	jJFCYVIcB7UmnIeOmd2poxoJNoOxEIo55qpsULQ=
+X-Google-Smtp-Source: AFSGD/U36+CmmGtfaSkiS6SbeYIq7yZI1hMBciErVXW+FqP8azaRsIPCa1chOnjGg557tSMCsyET34JNcTkBg7u918s=
+X-Received: by 2002:a2e:8605:: with SMTP id
+	a5-v6mr2518565lji.145.1542762938023; 
+	Tue, 20 Nov 2018 17:15:38 -0800 (PST)
 MIME-Version: 1.0
-References: <1542754831-25567-1-git-send-email-linux@roeck-us.net>
-	<1542754831-25567-2-git-send-email-linux@roeck-us.net>
-In-Reply-To: <1542754831-25567-2-git-send-email-linux@roeck-us.net>
+References: <cover.1542321076.git.alistair.francis@wdc.com>
+	<1fe9630dd4ad73b8581684cd0ed6d5fa2918390f.1542321076.git.alistair.francis@wdc.com>
+	<34cb4780-f35f-9bd5-7980-fae18e3e93dd@linaro.org>
+In-Reply-To: <34cb4780-f35f-9bd5-7980-fae18e3e93dd@linaro.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 20 Nov 2018 16:49:01 -0800
-Message-ID: <CAKmqyKMWq7gpTJg4ZPWEcKPzP7-NzAtY+QZZiHK1jP5a+DNGDA@mail.gmail.com>
-To: Guenter Roeck <linux@roeck-us.net>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>, qemu-riscv@nongnu.org, 
+Date: Tue, 20 Nov 2018 17:15:11 -0800
+Message-ID: <CAKmqyKMh3T7w-NsP-i2HaRUHvR-0BhqeyTgd2mD0hnH9k8gZiQ@mail.gmail.com>
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
 	"qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
-	Andrea Bolognani <abologna@redhat.com>, paul.walmsley@sifive.com,
-	Logan Gunthorpe <logang@deltatee.com>
+	qemu-riscv@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2a00:1450:4864:20::142
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH 2/2] riscv: virt: Fix
- interrupt mapping
+X-Received-From: 2a00:1450:4864:20::243
+Subject: Re: [Qemu-riscv] [Qemu-devel] [RFC v1 11/23] riscv: tcg-target: Add
+ the relocation functions
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -68,102 +69,54 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Nov 2018 00:49:33 -0000
+X-List-Received-Date: Wed, 21 Nov 2018 01:15:43 -0000
 
-On Tue, Nov 20, 2018 at 3:01 PM Guenter Roeck <linux@roeck-us.net> wrote:
+On Fri, Nov 16, 2018 at 12:33 AM Richard Henderson
+<richard.henderson@linaro.org> wrote:
 >
-> - Interrupt map width is 6, not 7
->         address (3), pci interrupt (1), controller phandle (1), irq (1)
-> - Since the interrupt map is the default pci interrupt map, we can not
->   omit devfn from the mapping function.
-> - It is not necessary to specify "interrupt-parent" and "interrupts"
->   since both are part of interrupt-map.
+> On 11/15/18 11:35 PM, Alistair Francis wrote:
+> > +static void reloc_sbimm12(tcg_insn_unit *code_ptr, tcg_insn_unit *target)
+> > +{
+> > +    intptr_t offset = (intptr_t)target - (intptr_t)code_ptr;
+> > +    tcg_debug_assert(offset == sextract32(offset, 1, 12) << 1);
+> > +
+> > +    code_ptr[0] |= encode_sbimm12(offset);
+> > +}
 >
-> Signed-off-by: Guenter Roeck <linux@roeck-us.net>
+> FYI, I have an in-flight patch for 4.0 that will make patch_reloc return a bool
+> for relocation success, which will move these asserts.
+>
+> http://lists.nongnu.org/archive/html/qemu-devel/2018-11/msg02237.html
 
-Hey Gunter,
+Thanks, I'll keep an eye on this.
 
-Thanks again for the patch!
+>
+>
+> > +static void reloc_call(tcg_insn_unit *code_ptr, tcg_insn_unit *target)
+> > +{
+> > +    intptr_t offset = (intptr_t)target - (intptr_t)code_ptr;
+> > +    tcg_debug_assert(offset == (int32_t)offset);
+> > +
+> > +    int32_t hi20 = ((offset + 0x800) >> 12) << 12;
+> > +    int32_t lo12 = offset - hi20;
+> > +
+> > +    code_ptr[0] |= encode_uimm20(hi20);
+> > +    code_ptr[1] |= encode_imm12(lo12);
+> > +}
+> > +
+>
+> This is ok for patching during generation, but it is not ok for
+> tb_target_set_jmp_target from patch 9.
+>
+> Will the riscv-32 compiler use a FSTD insn to implement atomic_set for 64-bit?
+>  If not, you may be just better off using the indirect method.
 
-Also unfortunately Logan Gunthorpe had already sent me fixes for the
-interrupt mappings as well. You can see his tree here:
-https://github.com/lsgunth/qemu/commits/riscv_pci
-
-If you have comments on that implementation just let me know.
-Hopefully I will be able to send out a new version tomorrow.
-
-I really appreciate your help! It's always good to have multiple
-people working and looking over everything.
+I'm not sure. Is the indirect method just using atomic set, because
+that is what I have now?
 
 Alistair
 
-> ---
->  hw/riscv/virt.c | 24 ++++++++++++------------
->  1 file changed, 12 insertions(+), 12 deletions(-)
->
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index 675899d..fb3a492 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -65,35 +65,37 @@ static const struct MemmapEntry {
->      [VIRT_PCIE_ECAM] = { 0x30000000, 0x10000000 },
->  };
->
-> -#define INTERREUPT_MAP_WIDTH 7
-> +#define INTERRUPT_MAP_WIDTH 6
->
->  static void create_pcie_irq_map(void *fdt, char *nodename,
->                                  uint32_t plic_phandle)
->  {
-> -    int pin;
-> -    uint32_t full_irq_map[GPEX_NUM_IRQS * INTERREUPT_MAP_WIDTH] = { 0 };
-> +    int devfn, pin;
-> +    uint32_t full_irq_map[GPEX_NUM_IRQS * 4 * INTERRUPT_MAP_WIDTH] = { 0 };
->      uint32_t *irq_map = full_irq_map;
->
-> +    for (devfn = 0; devfn <= 0x18; devfn += 0x8) {
->          for (pin = 0; pin < GPEX_NUM_IRQS; pin++) {
-> -            int irq_nr = PCIE_IRQ + (pin % PCI_NUM_PINS);
-> +            int irq_nr = PCIE_IRQ + ((pin + PCI_SLOT(devfn)) % PCI_NUM_PINS);
->              int i;
->
-> -            uint32_t map[] = {
-> -                0, 0, 0,
-> -                pin + 1, plic_phandle, 0, irq_nr};
-> +            uint32_t map[INTERRUPT_MAP_WIDTH] = {
-> +                devfn << 8, 0, 0,
-> +                pin + 1, plic_phandle, irq_nr};
->
->              /* Convert map to big endian */
-> -            for (i = 0; i < INTERREUPT_MAP_WIDTH; i++) {
-> +            for (i = 0; i < INTERRUPT_MAP_WIDTH; i++) {
->                  irq_map[i] = cpu_to_be32(map[i]);
->              }
-> -            irq_map += INTERREUPT_MAP_WIDTH;
-> +            irq_map += INTERRUPT_MAP_WIDTH;
->          }
-> +    }
->
->      qemu_fdt_setprop(fdt, nodename, "interrupt-map",
->                       full_irq_map, sizeof(full_irq_map));
->
->      qemu_fdt_setprop_cells(fdt, nodename, "interrupt-map-mask",
-> -                           0, 0, 0, 0x7);
-> +                           0x1800, 0, 0, 0x7);
->  }
->
->  static void *create_fdt(RISCVVirtState *s, const struct MemmapEntry *memmap,
-> @@ -261,8 +263,6 @@ static void *create_fdt(RISCVVirtState *s, const struct MemmapEntry *memmap,
->                                   2, memmap[VIRT_PCIE_MMIO_HIGH].base,
->                                   2, memmap[VIRT_PCIE_MMIO_HIGH].size);
->
-> -    qemu_fdt_setprop_cells(fdt, nodename, "interrupt-parent", plic_phandle);
-> -    qemu_fdt_setprop_cells(fdt, nodename, "interrupts", PCIE_IRQ);
->      create_pcie_irq_map(fdt, nodename, plic_phandle);
->
->      nodename = g_strdup_printf("/test@%lx",
-> --
-> 2.7.4
 >
 >
+> r~
 
