@@ -1,44 +1,45 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gPY0A-0004Z6-0V
-	for mharc-qemu-riscv@gnu.org; Wed, 21 Nov 2018 14:17:30 -0500
-Received: from eggs.gnu.org ([2001:4830:134:3::10]:57796)
+	id 1gPY1c-0005xY-Lg
+	for mharc-qemu-riscv@gnu.org; Wed, 21 Nov 2018 14:19:00 -0500
+Received: from eggs.gnu.org ([2001:4830:134:3::10]:58288)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1gPY07-0004Xw-SZ
-	for qemu-riscv@nongnu.org; Wed, 21 Nov 2018 14:17:28 -0500
+	(envelope-from <alistair23@gmail.com>) id 1gPY1a-0005vz-4b
+	for qemu-riscv@nongnu.org; Wed, 21 Nov 2018 14:18:58 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1gPY07-0006XD-0z
-	for qemu-riscv@nongnu.org; Wed, 21 Nov 2018 14:17:27 -0500
-Received: from mail-lj1-x244.google.com ([2a00:1450:4864:20::244]:44551)
+	(envelope-from <alistair23@gmail.com>) id 1gPY1Y-0007rT-V3
+	for qemu-riscv@nongnu.org; Wed, 21 Nov 2018 14:18:58 -0500
+Received: from mail-lj1-x244.google.com ([2a00:1450:4864:20::244]:41111)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
 	(Exim 4.71) (envelope-from <alistair23@gmail.com>)
-	id 1gPY05-0006Ux-6Q; Wed, 21 Nov 2018 14:17:25 -0500
-Received: by mail-lj1-x244.google.com with SMTP id k19-v6so5811180lji.11;
-	Wed, 21 Nov 2018 11:17:25 -0800 (PST)
+	id 1gPY1W-0007oh-6u; Wed, 21 Nov 2018 14:18:54 -0500
+Received: by mail-lj1-x244.google.com with SMTP id z80-v6so5833522ljb.8;
+	Wed, 21 Nov 2018 11:18:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=u5v1ElqjcvRyX4HdryHCzfCv6qpD9dH7cRjT1nkZLRk=;
-	b=EqqKkFpny2ySVL0W50wPU9Nt5EX6h3JgOT2FFn7aWAAu/GKYdXdVhxlqYM+iONAOOK
-	Ldi4aCGeKPwPvj7/3jdhcdsRpIXz4D5JMDj/Pp+tQ7TvgNa2J5sKZ5l/wMUXG5PCNVme
-	2bcj4v4r7Oh2h9/L7nGXsYYwoGqChIlpk4Hkh56da4pNGxvg/oZC0NiJsUU4JGEJnh8s
-	azJYKXBXoxJ75NOLceBkmVC38X8h96Zy27pDg1KDzeUYyaOFiwEewe9xmpz8EWCxjibp
-	ePGWYkRSBL0sFOxWjpKcau6FEi85y1fjWhJh75JpT3jpLVO2AoGl/rAdRgW5p9L7EXNy
-	gt+A==
+	:cc; bh=Xh9inzM6FqvsP5ckv8wI44rXNBMcaXXnS5XxMNA9PhI=;
+	b=P0WagUdI+b5t6xOrZTqhRC8QhLOHqQGOo/D/NK49pp9qw+1DL8XerSKnf1vMLUtNgy
+	qojcXHYJILduTQBgGEUoTktDMVpd82q6OBEl1KfVNuOXlnD9yzLX6hpK5AIt3aouQvlm
+	TPWP/9k9lDJ7WG4Ga9ROBNUQFW06z96coPKECRQztbU7s+VdV93A8VTGoq6hYyGTxDVm
+	5y4yljaMviGHAxCDlY6pEGfyygIkRGpGgWcRtMm4d9xnu/U75s8t8meXdd0HCLsIdiKz
+	B1+KhhsZDlR71fcw3Q6iqP95dokk1dB8FNdIkehuO1mGYDzlVyOL+WW4vOjF8BswvuOI
+	ORxw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=u5v1ElqjcvRyX4HdryHCzfCv6qpD9dH7cRjT1nkZLRk=;
-	b=NvnBmARPtfuRmaBNLcYaC5ECbf2RbPWO58yIJBqLay2Mhse6zFTkAUDfH+IKEZ2U6f
-	nw5SXRhui/SxV3QpG158RFVj30p322cJ+M7KKTDy00txxsf5QhSVBA0hkMBkNe+WND1B
-	FdDGsWrvtjZ7gv+JPvJe76B2NPttYhAyd8aFXwSc69VgrNPhK058LExei0QSQcUB3C/c
-	X4PRU2lUEngUxGiuG/2U9zNdlb4dRZzgQzLVn+NVUSIkQELwh28VzYciuwnzj9zz7izO
-	fRkCaWhYgFkD5K2y6zekXNZtJyk2K7paU0sG2duuK0XkQv80MUfSAzkMi2YEeKDc5ncB
-	EpmA==
-X-Gm-Message-State: AGRZ1gI2X0b9r94iIwvFxQqrur8G4EJZmD3Xf0IOUZK97couymBJIWyn
-	rxeAkNn5gREJU7udSB36RDJ9gZmbACfk34JftB8=
-X-Google-Smtp-Source: AFSGD/XfyjB7fkSzi5xU9Q+7Vw4LyyjGAdpib5b0mTk1lWjoU45LSztsnV+X4+T7RgIIff+QZZGXTBQuquq8HEAoU+c=
-X-Received: by 2002:a2e:7801:: with SMTP id t1-v6mr4779081ljc.84.1542827843771;
-	Wed, 21 Nov 2018 11:17:23 -0800 (PST)
+	bh=Xh9inzM6FqvsP5ckv8wI44rXNBMcaXXnS5XxMNA9PhI=;
+	b=Zu22Uwj7SJfDQqqtPQMu8eBgu+jtkq4LZBu6JuItioIYPMJ4nGgNZ8GMM/+/RmPOj9
+	A1XU6u+5V8hKNx99a4HAhDnnnc7BqidDu9BDkRAWgBqbTiUf/AyQ2ckvTbILa0LEJOCE
+	v6792j2FxBgwYKC4bChf9m3VnOQRlG1pHFaHd8kGYEQDdtWC83150lX3xVfOxw+lEMaw
+	JTU8VDyeeT1GUJ10AXcKZw9kEVD9oOontcF10YOCuGhAY/KscWMi6OP3Fx+fXwukzkGP
+	YIZCl+Bgj9AXgDKkSh7/9VU109ME1a6q11fp7felH5DWYvGVpswMuRT0T2uxi8LrzFPD
+	bwZQ==
+X-Gm-Message-State: AA+aEWZV/anvQr8nDMRzeCuc2pbqZetuenG3rrY4VQQSOnR5QC7oHmuK
+	AG9frDnpTrDZyHDxv3OvV+zzpexAK7oE6jzg/PQ=
+X-Google-Smtp-Source: AJdET5fDVjwXRt70H/uunfHEyOtRmXUkxEsqasmvTH2oOVNLY9x8QqSBpHw3/2Wb4IurrxNlSw8Y07IPolwE9FVnC40=
+X-Received: by 2002:a2e:4601:: with SMTP id
+	t1-v6mr5232718lja.111.1542827932327; 
+	Wed, 21 Nov 2018 11:18:52 -0800 (PST)
 MIME-Version: 1.0
 References: <cover.1542819633.git.alistair.francis@wdc.com>
 	<85a3fe487514f4cb659ef7e6b88762ebc567c1b8.1542819633.git.alistair.francis@wdc.com>
@@ -46,11 +47,11 @@ References: <cover.1542819633.git.alistair.francis@wdc.com>
 	<CAKmqyKMtTqi=D-PKZFnt40MaA8+e6Sj8nUr0VmBFajScw1MYng@mail.gmail.com>
 	<ffd80fff-55bf-0578-4fe5-00f07ef6bdc6@deltatee.com>
 	<CAKmqyKMhpAPXFF5cQkqKYcNjD5aciDW7Ek53+W=1XNp3RGFLmw@mail.gmail.com>
-	<33646fef-adb7-26b4-ba01-79f9a0f5bdae@deltatee.com>
-In-Reply-To: <33646fef-adb7-26b4-ba01-79f9a0f5bdae@deltatee.com>
+	<1abdea1e-57bd-b841-a924-259baa3b9033@deltatee.com>
+In-Reply-To: <1abdea1e-57bd-b841-a924-259baa3b9033@deltatee.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 21 Nov 2018 11:16:57 -0800
-Message-ID: <CAKmqyKMJvTb=JebfA1N-40-MqgHkAj98JOH51t6K--zjYLXSnA@mail.gmail.com>
+Date: Wed, 21 Nov 2018 11:18:25 -0800
+Message-ID: <CAKmqyKP2yrQax=+qO6q5qncLdUNUpWY2PGW1eCgO104p7CzV6g@mail.gmail.com>
 To: Logan Gunthorpe <logang@deltatee.com>
 Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
 	"qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
@@ -73,59 +74,34 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Nov 2018 19:17:28 -0000
+X-List-Received-Date: Wed, 21 Nov 2018 19:18:58 -0000
 
-On Wed, Nov 21, 2018 at 11:09 AM Logan Gunthorpe <logang@deltatee.com> wrote:
+On Wed, Nov 21, 2018 at 11:15 AM Logan Gunthorpe <logang@deltatee.com> wrote:
 >
 >
 >
 > On 2018-11-21 12:02 p.m., Alistair Francis wrote:
+> > On Wed, Nov 21, 2018 at 10:50 AM Logan Gunthorpe <logang@deltatee.com> wrote:
+> >>
+> >>
+> >>
+> >> On 2018-11-21 11:32 a.m., Alistair Francis wrote:
+> >>> That seems like either a kernel or bbl issue.
+> >>>
+> >>> You need to make sure that bbl doesn't edit the device tree (to add
+> >>> the Microsemi device or remove the Xilinx one) and ensure your kernel
+> >>> supports the Xilinx one.
+> >>
 > >> Ok, how do I stop bbl from editing the device tree? I have a kernel with
 > >> Xilinx PCI support but it fails initializing on that machine (see below).
 > >
 > > You should just be able to edit the source, grep for "microsemi".
 >
-> Gross.
->
-> > Do you see the MicroSemi PCIe probe in your dmesg?
->
-> I do when I have a kernel with microsemi PCI Support (specifically the
-> one included in the bbl you sent us a while back).
+> I don't see any "microsemi" in my riscv-pk source...
 
-Yeah, so you need to make sure that doesn't happen.
+msemi maybe?
 
-They are practically the same device so they end up conflicting.
-
->
-> >>
-> >>>> In any case, it would be nice if the Microsemi/Xilinx confusion was at
-> >>>> least explained in the commit message.
-> >>>
-> >>> What should we say? The QEMU machine accurately models the real
-> >>> hardware which reports a Xilinx PCIe. The confusion generally appears
-> >>> above QEMU where people are used to using the MicroSemi one.
-> >>
-> >> Maybe describing the bbl issue and what to do to overcome it would be
-> >> sufficient.
-> >
-> > This is not really a QEMU problem though. If you tried to use the
-> > Xilinx PCIe board on hardware you would see the same thing. Most
-> > people don't have a MicroSemi board so most aren't using bbl versions
-> > that are editing it into their device tree.
->
-> It's a qemu problem in that people will want to be able to actually use
-> qemu... somehow. It has to be documented what's required here. You can't
-> just say that the sifive_u machine won't work and it's someone else's
-> problem. People using qemu will not be able to figure out there are bbl
-> issues.
-
-I'm not saying the SiFive U won't work.
-
-For people who have modified the standard bbl to edit the device tree
-before passing it to Linux to add the MicroSemi PCIe node, it won't
-work. That's a very small number of people who have modified the
-standard boot loader. I don't think we need to document how those
-people get back to the default set-up.
+The compatible sting is: ms-pf,axi-pcie-host
 
 Alistair
 
