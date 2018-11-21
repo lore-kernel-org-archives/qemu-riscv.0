@@ -1,51 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gPX3s-0000f6-Gm
-	for mharc-qemu-riscv@gnu.org; Wed, 21 Nov 2018 13:17:16 -0500
-Received: from eggs.gnu.org ([2001:4830:134:3::10]:57859)
+	id 1gPX4j-0001XX-8h
+	for mharc-qemu-riscv@gnu.org; Wed, 21 Nov 2018 13:18:09 -0500
+Received: from eggs.gnu.org ([2001:4830:134:3::10]:58762)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <logang@deltatee.com>) id 1gPX3p-0008Vd-T3
-	for qemu-riscv@nongnu.org; Wed, 21 Nov 2018 13:17:14 -0500
+	(envelope-from <alistair23@gmail.com>) id 1gPX4h-0001VP-4d
+	for qemu-riscv@nongnu.org; Wed, 21 Nov 2018 13:18:07 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <logang@deltatee.com>) id 1gPWoN-0000rl-Qa
-	for qemu-riscv@nongnu.org; Wed, 21 Nov 2018 13:01:20 -0500
-Received: from ale.deltatee.com ([207.54.116.67]:41964)
-	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.71) (envelope-from <logang@deltatee.com>)
-	id 1gPWoN-0000qF-Hj; Wed, 21 Nov 2018 13:01:15 -0500
-Received: from guinness.priv.deltatee.com ([172.16.1.162])
-	by ale.deltatee.com with esmtp (Exim 4.89)
-	(envelope-from <logang@deltatee.com>)
-	id 1gPWoI-0006KM-R0; Wed, 21 Nov 2018 11:01:11 -0700
-To: Alistair Francis <Alistair.Francis@wdc.com>,
-	"qemu-devel@nongnu.org" <qemu-devel@nongnu.org>,
-	"qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>
-Cc: "alistair23@gmail.com" <alistair23@gmail.com>,
-	"linux@roeck-us.net" <linux@roeck-us.net>,
-	"abologna@redhat.com" <abologna@redhat.com>
-References: <cover.1542819633.git.alistair.francis@wdc.com>
-	<86e2120f18412152ed2994b72bd874120b86d749.1542819633.git.alistair.francis@wdc.com>
-From: Logan Gunthorpe <logang@deltatee.com>
-Message-ID: <b49b54bf-2548-5a6b-1808-511b57cd33ad@deltatee.com>
-Date: Wed, 21 Nov 2018 11:01:10 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.2.1
+	(envelope-from <alistair23@gmail.com>) id 1gPX4g-0002kY-95
+	for qemu-riscv@nongnu.org; Wed, 21 Nov 2018 13:18:07 -0500
+Received: from mail-lj1-x244.google.com ([2a00:1450:4864:20::244]:45459)
+	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+	(Exim 4.71) (envelope-from <alistair23@gmail.com>)
+	id 1gPX4e-0002hV-6v; Wed, 21 Nov 2018 13:18:04 -0500
+Received: by mail-lj1-x244.google.com with SMTP id s5-v6so5669216ljd.12;
+	Wed, 21 Nov 2018 10:18:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=HzLYyDI8poK7bdMDCKuMeaIH6P5K2oWiN62CAvefNFM=;
+	b=GugRPAY7yL5jgMFHRbOJnZVRP3V/CWGcHfKEsDyO5MKrtoCsBcYEElDUIpxp+HP/Ao
+	EH0th6JC02+hpE1gfX60/sTSHrL/O2ZONfbxGld1vp1C4yLT8nUR4ZnMVLe7ks+CKX4e
+	FZTJP1ZCIgvcGV04bJvdcPkg4OFctRmEkVUXn/bgTfMHG/r/limBVHCJBOIRlDILugxL
+	cHJU4nkpYfgviQljnwjuqaNvyhLSzb0FLMUdiojY5pc/1TaPgUjN9w9CqjpqXNhmxbAl
+	8/NFx+N8PEXJkJj6jXTL8a861qKA99CxkFReAX/50MDFhTPKC8OphC5Toyzce7wLphjS
+	OWXA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=HzLYyDI8poK7bdMDCKuMeaIH6P5K2oWiN62CAvefNFM=;
+	b=F7aYkz5QJ08/yeIren4VnHWuaJw63bPQc4RdZO6ROtTQB7/ihIl3Iqc/7dGCgzYvzj
+	8NxUnhzgjZl7iZXc6x/3IYNzxQ8R2DFKPWj2zB3yT25WXqGlLsd3z1Rgsat1jgoG5u88
+	9ypJ2PtGuRjpteRgazMj3NKwjyWzMxA6vUGlxfNWvHp+t367NNTTVE9RxinCJoW5ntwd
+	eBjQgbAXVHRGwiDX816DeHVUwYSafEc7fQgEtf/MNv04ScM1QCEl+QAvv1Y3R3+9Ig2r
+	Q2S3n2PCjFZIncDgs9y7PTVFOFkOTzSSfMlc6e9TthaWxtEc9dNFxKkyiWM040sofzL3
+	Rp/w==
+X-Gm-Message-State: AA+aEWbSoPAtQeB1juJBp6DGj/z2/ZsljxCIWpP+A2ztGsZjQ7EQ2PNO
+	qc7K7eSwf279lwCnDPGnW6JmM4sxVTi9BCN7kDQ=
+X-Google-Smtp-Source: AFSGD/XWlCASHb76XF3fXuEViQq46Lp+FD7Jo+fi+pm+XG+jEQYGH4EpAAZ2+c4vCRznbthmX2uk+5+6jsu3lIigAvE=
+X-Received: by 2002:a2e:449c:: with SMTP id
+	b28-v6mr4579159ljf.47.1542824282857; 
+	Wed, 21 Nov 2018 10:18:02 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <86e2120f18412152ed2994b72bd874120b86d749.1542819633.git.alistair.francis@wdc.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-CA
-Content-Transfer-Encoding: 7bit
-X-SA-Exim-Connect-IP: 172.16.1.162
-X-SA-Exim-Rcpt-To: abologna@redhat.com, linux@roeck-us.net,
-	alistair23@gmail.com, qemu-riscv@nongnu.org,
-	qemu-devel@nongnu.org, Alistair.Francis@wdc.com
-X-SA-Exim-Mail-From: logang@deltatee.com
-X-SA-Exim-Version: 4.2.1 (built Tue, 02 Aug 2016 21:08:31 +0000)
-X-SA-Exim-Scanned: Yes (on ale.deltatee.com)
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
-	[fuzzy]
-X-Received-From: 207.54.116.67
-Subject: Re: [Qemu-riscv] [PATCH for-3.2 v7 3/6] hw/riscv/virt: Connect the
- gpex PCIe
+References: <cover.1542819633.git.alistair.francis@wdc.com>
+	<a2c70c88a145d2e239f113e28979c7a50d71aedf.1542819633.git.alistair.francis@wdc.com>
+	<ff4ef556-0989-ec47-0424-3f153f10a8d0@deltatee.com>
+In-Reply-To: <ff4ef556-0989-ec47-0424-3f153f10a8d0@deltatee.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Wed, 21 Nov 2018 10:17:34 -0800
+Message-ID: <CAKmqyKOMsBda223ptqt2iVFi6oVifK_0L+=Mne=v9p_umwxVLg@mail.gmail.com>
+To: Logan Gunthorpe <logang@deltatee.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
+	"qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+	qemu-riscv@nongnu.org, Guenter Roeck <linux@roeck-us.net>,
+	Andrea Bolognani <abologna@redhat.com>
+Content-Type: text/plain; charset="UTF-8"
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+	recognized.
+X-Received-From: 2a00:1450:4864:20::244
+Subject: Re: [Qemu-riscv] [PATCH for-3.2 v7 1/6] hw/riscv/virt: Increase the
+ number of interrupts
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -57,37 +70,39 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Nov 2018 18:17:15 -0000
+X-List-Received-Date: Wed, 21 Nov 2018 18:18:08 -0000
 
+On Wed, Nov 21, 2018 at 9:58 AM Logan Gunthorpe <logang@deltatee.com> wrote:
+>
+>
+>
+> On 2018-11-21 10:02 a.m., Alistair Francis wrote:
+> > Increase the number of interrupts to match the HiFive Unleashed board.
+> >
+> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> > ---
+> >  include/hw/riscv/virt.h | 2 +-
+> >  1 file changed, 1 insertion(+), 1 deletion(-)
+> >
+> > diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
+> > index 91163d6cbf..7cb2742070 100644
+> > --- a/include/hw/riscv/virt.h
+> > +++ b/include/hw/riscv/virt.h
+> > @@ -45,7 +45,7 @@ enum {
+> >      UART0_IRQ = 10,
+> >      VIRTIO_IRQ = 1, /* 1 to 8 */
+> >      VIRTIO_COUNT = 8,
+> > -    VIRTIO_NDEV = 10
+> > +    VIRTIO_NDEV = 0x35
+>
+> Why 0x35? Based on the PCI patch we are using only 36 interrupts, not 53...
 
+This is just for future proofing. There is no reason to set the number
+lower then the number of interrupts we have, now hopefully this won't
+keep churning every time we add a device.
 
-On 2018-11-21 10:02 a.m., Alistair Francis wrote:
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> Signed-off-by: Logan Gunthorpe <logang@deltatee.com>
+Alistair
 
-Reviewed-by: Logan Gunthorpe <logang@deltatee.com>
-
-
-> diff --git a/default-configs/riscv32-softmmu.mak b/default-configs/riscv32-softmmu.mak
-> index 7937c69e22..3e3d195f37 100644
-> --- a/default-configs/riscv32-softmmu.mak
-> +++ b/default-configs/riscv32-softmmu.mak
-> @@ -1,7 +1,11 @@
->  # Default configuration for riscv-softmmu
->  
-> +include pci.mak
-> +
->  CONFIG_SERIAL=y
->  CONFIG_VIRTIO_MMIO=y
-> -include virtio.mak
->  
->  CONFIG_CADENCE=y
-> +
-> +CONFIG_PCI_GENERIC=y
-> +CONFIG_PCI_XILINX=y
-
-Nit: should PCI_XILINX not be in patch 5? It's not used in this patch
-and was a bit confusing when reviewing.
-
-Logan
+>
+> Logan
 
