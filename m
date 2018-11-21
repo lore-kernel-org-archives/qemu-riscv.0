@@ -1,61 +1,54 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gPaSc-0006ZH-UH
-	for mharc-qemu-riscv@gnu.org; Wed, 21 Nov 2018 16:55:02 -0500
-Received: from eggs.gnu.org ([2001:4830:134:3::10]:46850)
+	id 1gPaTk-0007BT-2b
+	for mharc-qemu-riscv@gnu.org; Wed, 21 Nov 2018 16:56:12 -0500
+Received: from eggs.gnu.org ([2001:4830:134:3::10]:47175)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1gPaSZ-0006XV-TD
-	for qemu-riscv@nongnu.org; Wed, 21 Nov 2018 16:55:01 -0500
+	(envelope-from <alistair23@gmail.com>) id 1gPaTg-00079f-Lm
+	for qemu-riscv@nongnu.org; Wed, 21 Nov 2018 16:56:10 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1gPaSY-0002y7-Cw
-	for qemu-riscv@nongnu.org; Wed, 21 Nov 2018 16:54:59 -0500
-Received: from mail-lj1-x244.google.com ([2a00:1450:4864:20::244]:46403)
+	(envelope-from <alistair23@gmail.com>) id 1gPaTf-00040K-3O
+	for qemu-riscv@nongnu.org; Wed, 21 Nov 2018 16:56:08 -0500
+Received: from mail-lf1-x141.google.com ([2a00:1450:4864:20::141]:39675)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
 	(Exim 4.71) (envelope-from <alistair23@gmail.com>)
-	id 1gPaSU-0002vI-CS; Wed, 21 Nov 2018 16:54:54 -0500
-Received: by mail-lj1-x244.google.com with SMTP id v15-v6so6144213ljh.13;
-	Wed, 21 Nov 2018 13:54:54 -0800 (PST)
+	id 1gPaTb-0003uy-9P; Wed, 21 Nov 2018 16:56:03 -0500
+Received: by mail-lf1-x141.google.com with SMTP id n18so5101496lfh.6;
+	Wed, 21 Nov 2018 13:56:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=8lM24MxExnmGiY46Yo0nwvftvvw0L9iUcjWvG9WXU2c=;
-	b=M2kH1jDaSfFh3jnvfqnaeYrl8yoLleZpXL0jnrV9rNq2CpuHB86XYSXttT+BRcNpEG
-	mslk4pkhvuZ/mCitEW4dT3erSAnD/TQsMGw+h8m+x1re2zOajAer2l0tPfN4YJqywlpT
-	F2IuO+tEw7/nQOya0dEYb5EFvxeY7KJMmjs5PQczidMG4KaKOWppEqbY9z6ZJT7Mw6u5
-	2KmoPJteHC/IJb9hgrLFIpqxAjI/qy9u/EPhfyjdIkkfyeDBGKf3cVRY/WZKCdZ9c1H+
-	HpsU6CsGeTF5wyCGVyT1/yqnrsD2OrXhbZEDvzU6QHFo6K5Uxk94DNMzp5Xg3auAnVhm
-	FQfQ==
+	:cc; bh=yterr/3E1i9jmbdahX5IiCFu69LQjfctoD4AVPLgZaI=;
+	b=dIHUgLbTzvd5YqCA4iF9ezKDY1oKUmbsFdnC1UzUsslWTmQCP8TKS9rrniWFDYMEpn
+	JH+iEo7jwo4c0qQu4XvRL2DOHyLjKjKLgTKPFvkhWurQVAkZwD1FvEEGMLnk+JWM0QQ8
+	mIanWrjgCAa0X5MfVH5Qw/DxJZNZsFWxrlch9U40Zut82n4xq+RE75gl8MQmwxPRg43N
+	0bvnwssL/pTcHx4dz9RDdur2oYRLJt3ErpraW8GbBQyX4W2L/xlfCl7vgI7ChulrcmBc
+	szAIAvOBTfx4wA0eGHpV8aW5tRtDlzjHWY69bNVGCfhtBUBri9Nm06N3dm3ePeAm4m9Y
+	19HA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=8lM24MxExnmGiY46Yo0nwvftvvw0L9iUcjWvG9WXU2c=;
-	b=CmdQRbzK0nPdtEnjju1t7t8KxS41bPCwXiQ0bp+xOgzWrSoxPdRIaisaYlO+Cb+Dfy
-	Mc0EcDJcmvSb5DkzSAmBTgkanIQx8iomS//O/pC00GXhgN3/Z/1qXWCc7J3eug8mbpjh
-	2VYFJYs+d6xUtvHjxnAhP93Cb2F3JXIQuVGzWDVf5hR+9HqKU12oq/GHvsGOup8cqZYo
-	NLSaWbBdQWuPDCQ6Ra2q1AsFqcpc4u0ExqOhYxLHw3Z18ijejZQXgVxjrgUN0FTb9r4P
-	hRpqwcwgSxhYi+7ds85wCQ80VXjRdoMXYWu80hdvdy5jqTPXTMnrcwT9RUOfcYQVI7RJ
-	i/NQ==
-X-Gm-Message-State: AGRZ1gJP0A0g/3MIHeX/5YNqAPXeHp88HlQKU+VmXO3UMbVelf99/FY6
-	oboalDAOT/AlcKVWZrs4S4u4m4tIaCul32HaBQNLog==
-X-Google-Smtp-Source: AFSGD/XmiljoSKj6N2ax95Najhz0wRX3BhLkcWZpWwctZwd2+w7NdYeNDnf60MyXXETD2V0xvB4qlUvLxfkX0GNzubA=
-X-Received: by 2002:a2e:7801:: with SMTP id t1-v6mr5053540ljc.84.1542837292731;
-	Wed, 21 Nov 2018 13:54:52 -0800 (PST)
+	bh=yterr/3E1i9jmbdahX5IiCFu69LQjfctoD4AVPLgZaI=;
+	b=AixUVFeBPaQ+k7OEnXfwkbuv69BBSzmTXnw7QoDb4G7TPiWzIo5xEQe7G1AXA0gWk7
+	T0lyvsbX4IWkcnfaFTohEtK3dhgFWC0OGyMnNOv5fZL8+Y0q4aoDvSEZEuYKFi+Fg+qP
+	T7PWCQzU/QdWnwz5zVoT3gvarlFeVRKF2VAfRpFLP52FxtYtC/wUrIND1fL01IFhrAax
+	l+S9vVKrjfSx9sq86/zpPo+gfExZ6AQ/Yq7z2IK5UU3zRlQ806KzA0R4a+rzzI+12qdf
+	S1GEEvo6ICzrm8GBoOIOCG8exrPBTdmV4JqHu7WDV3c91h6k056BEwqAjBtfok+5sZGG
+	1KqQ==
+X-Gm-Message-State: AGRZ1gKmIGM0fvhOQP0/9rf+hWHnpuhUto2EXEmKwiXqz8oh2zsi8PkQ
+	ThJsrZg3aQzFv2IgIy9ldh/2WHXvwO3ERNx67wU=
+X-Google-Smtp-Source: AJdET5cn3H0VVZcJMlZrLxJ0HnZYSSdbPWc1tON06SHvOqypLMau9u44KCpWgJzMUfyVyA2Ktt8P+OCuYSZjHjQQP7Y=
+X-Received: by 2002:a19:c18d:: with SMTP id r135mr4568982lff.59.1542837361062; 
+	Wed, 21 Nov 2018 13:56:01 -0800 (PST)
 MIME-Version: 1.0
 References: <cover.1542819633.git.alistair.francis@wdc.com>
-	<85a3fe487514f4cb659ef7e6b88762ebc567c1b8.1542819633.git.alistair.francis@wdc.com>
-	<e7398997-ba1a-9182-6be0-da8e43e920df@deltatee.com>
-	<CAKmqyKMtTqi=D-PKZFnt40MaA8+e6Sj8nUr0VmBFajScw1MYng@mail.gmail.com>
-	<ffd80fff-55bf-0578-4fe5-00f07ef6bdc6@deltatee.com>
-	<CAKmqyKMhpAPXFF5cQkqKYcNjD5aciDW7Ek53+W=1XNp3RGFLmw@mail.gmail.com>
-	<33646fef-adb7-26b4-ba01-79f9a0f5bdae@deltatee.com>
-	<CAKmqyKMJvTb=JebfA1N-40-MqgHkAj98JOH51t6K--zjYLXSnA@mail.gmail.com>
-	<d316a936-c726-dd4c-f90a-9690b4e3fc3d@deltatee.com>
-	<CAKmqyKM1pf1zJVMuqZvocN07LxDGrRjoSNLojt=06UbN4P-bpg@mail.gmail.com>
-	<6480496b-dbb5-37bb-57e2-7a4819c61511@deltatee.com>
-	<CAKmqyKMPHg7nGr-Ua1Cb7yvdZzWAs6HOM4eB+SinMypXQ5Ni6w@mail.gmail.com>
-In-Reply-To: <CAKmqyKMPHg7nGr-Ua1Cb7yvdZzWAs6HOM4eB+SinMypXQ5Ni6w@mail.gmail.com>
+	<44e7883bd17c6867f0ac488bdab6c880b2420a9b.1542819633.git.alistair.francis@wdc.com>
+	<0ddaeccd-94fd-22a8-f5e0-91fbafdf1761@deltatee.com>
+	<CAKmqyKNitWerbpVzQrNye3KiPj=5DVFXan4SpiN-+br_P-RG+Q@mail.gmail.com>
+	<0fac09ca-12d5-1462-4456-66646f168ab5@deltatee.com>
+In-Reply-To: <0fac09ca-12d5-1462-4456-66646f168ab5@deltatee.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 21 Nov 2018 13:54:25 -0800
-Message-ID: <CAKmqyKMTiMJKCc=oEP97XLWFQMMfE0PFHB8ZKGm2=AP5_HEoNg@mail.gmail.com>
+Date: Wed, 21 Nov 2018 13:55:34 -0800
+Message-ID: <CAKmqyKMTxgk41cBz=hW-meCUAi-_20vguqN40f_ThRU-rsaJXA@mail.gmail.com>
 To: Logan Gunthorpe <logang@deltatee.com>
 Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
 	"qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
@@ -64,9 +57,9 @@ Cc: Alistair Francis <Alistair.Francis@wdc.com>,
 Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2a00:1450:4864:20::244
-Subject: Re: [Qemu-riscv] [PATCH for-3.2 v7 5/6] hw/riscv/sifive_u: Connect
- the Xilinx PCIe
+X-Received-From: 2a00:1450:4864:20::141
+Subject: Re: [Qemu-riscv] [PATCH for-3.2 v7 6/6] hw/riscv/virt: Connect a
+ VirtIO net PCIe device
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -78,65 +71,34 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Nov 2018 21:55:01 -0000
+X-List-Received-Date: Wed, 21 Nov 2018 21:56:10 -0000
 
-On Wed, Nov 21, 2018 at 11:51 AM Alistair Francis <alistair23@gmail.com> wrote:
+On Wed, Nov 21, 2018 at 11:12 AM Logan Gunthorpe <logang@deltatee.com> wrote:
 >
-> On Wed, Nov 21, 2018 at 11:25 AM Logan Gunthorpe <logang@deltatee.com> wrote:
-> >
-> >
-> >
-> > On 2018-11-21 12:21 p.m., Alistair Francis wrote:
-> > > On Wed, Nov 21, 2018 at 11:19 AM Logan Gunthorpe <logang@deltatee.com> wrote:
-> > >> Well, I also have a kernel (one I've built myself) without microsemi
-> > >> support, but with Xilinx support and it also doesn't work (see my dmesg
-> > >> logs I sent).
-> > >
-> > > So this one should work.
-> >
-> > It does not, see the dmesgs I sent a few emails ago.
-> >
-> > >>
-> > >>> For people who have modified the standard bbl to edit the device tree
-> > >>> before passing it to Linux to add the MicroSemi PCIe node, it won't
-> > >>> work. That's a very small number of people who have modified the
-> > >>> standard boot loader. I don't think we need to document how those
-> > >>> people get back to the default set-up.
-> > >>
-> > >> I have not done that. And it's not working for me.
-> > >
-> > > If you haven't done this then how can Linux know to probe the
-> > > MicroSemi PCIe root complex?
-> >
-> > Oh, well actually, in this case I was using the bbl/kernel you sent us,
-> > so I'm not actually sure what's in it. The stuff I built myself doesn't
-> > have any of the microsemi stuff, so it sounds like all that was a red
-> > herring.
 >
-> Ah ok. There was some confusion there then.
 >
-> So now it sounds like it's not working and there is no MicroSemi
-> device. I will check and see what I find.
+> On 2018-11-21 11:34 a.m., Alistair Francis wrote:
+> >> I don't understand what this patch actually accomplishes. It doesn't
+> >> seem to affect my network devices when running QEMU. Can you provide a
+> >> commit message explaining this?
+> >
+> > Could you connect a PCIe networking device without this commit? This
+> > is what the other architectures all do as well.
+>
+> Yes, actually.
+>
+> Other architectures doing something is never a sufficient justification
+> to make a change. I'm also not sure how virtio relates to this patch...
+>
+> I'd say unless you know you're fixing something specific and can
+> describe it, you should drop this patch.
 
-Yep, I have no idea.
-
-The last time I tested this it worked (although I might not have
-tested interrupts) and now it doesn't. Nothing has changed in the
-series, my guest software has changed though. I can see the root
-complex, but no devices underneath it.
-
-Sorry for the confusion with the MicroSemi PCIe root complex.
-
-I think I'll just drop this patch. It doesn't work for 32-bit guests,
-but I would like to model the hardware so I don't want to change the
-addresses. We can revisit this in the future along with the gpex high
-MMIO support and USB support.
+It is required for networking for PCIe devices. What PCIe device works
+for you without this patch? Can you tell me your command line
+arguments.
 
 Alistair
 
 >
-> Alistair
->
-> >
-> > Logan
+> Logan
 
