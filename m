@@ -1,65 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gPe3J-0004lw-4X
-	for mharc-qemu-riscv@gnu.org; Wed, 21 Nov 2018 20:45:09 -0500
-Received: from eggs.gnu.org ([2001:4830:134:3::10]:52056)
+	id 1gPeG2-0001OU-AY
+	for mharc-qemu-riscv@gnu.org; Wed, 21 Nov 2018 20:58:18 -0500
+Received: from eggs.gnu.org ([2001:4830:134:3::10]:33482)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1gPe3G-0004li-TS
-	for qemu-riscv@nongnu.org; Wed, 21 Nov 2018 20:45:07 -0500
+	(envelope-from <palmer@sifive.com>) id 1gPeFz-0001Nt-LT
+	for qemu-riscv@nongnu.org; Wed, 21 Nov 2018 20:58:16 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1gPe3C-00004x-9T
-	for qemu-riscv@nongnu.org; Wed, 21 Nov 2018 20:45:06 -0500
-Received: from mail-pl1-x643.google.com ([2607:f8b0:4864:20::643]:37650)
+	(envelope-from <palmer@sifive.com>) id 1gPeFr-0004eP-NH
+	for qemu-riscv@nongnu.org; Wed, 21 Nov 2018 20:58:13 -0500
+Received: from mail-pl1-x641.google.com ([2607:f8b0:4864:20::641]:39817)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1gPe3C-0008Un-14
-	for qemu-riscv@nongnu.org; Wed, 21 Nov 2018 20:45:02 -0500
-Received: by mail-pl1-x643.google.com with SMTP id b5so8016996plr.4
-	for <qemu-riscv@nongnu.org>; Wed, 21 Nov 2018 17:45:01 -0800 (PST)
+	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1gPeFp-0004Tj-Lj
+	for qemu-riscv@nongnu.org; Wed, 21 Nov 2018 20:58:07 -0500
+Received: by mail-pl1-x641.google.com with SMTP id 101so1756736pld.6
+	for <qemu-riscv@nongnu.org>; Wed, 21 Nov 2018 17:58:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
-	h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
-	:content-transfer-encoding;
-	bh=oXSv+RzTJQNcC9y2Ptcf4BzMd35bS4ht12EhWMH13Q0=;
-	b=MH8hn2DS+A5U1Zc3kw/Mo08pnFAHZOb4ej2RpqLN3UvQfwdXeuqFh3Ay+4oKcG+Irc
-	Xm3c8bvqySeBsmJFsGqEtkZTK7pgLz5elypKeE1qu7NRYKTQBACTKxG0Ianba/xCKod9
-	VpQNX3EOlzcP+gkuQ1Gg1jpCj5/9cDWJ+0L94SfRCMKB+XlPG1lB6A9f2FL/ahGC01Ly
-	gYYr4w3NmexyELjRMxzS8Hugp925KcfUXgAR107yiEBST5n2U9z568vj0qpORd557Q51
-	q99rD5vBwK0YHr7m1ZVfSRG74dB+rILQmKeO6Pqkw594zJ1p5j71sz7S3PCDGCMDy65k
-	dlNQ==
+	h=date:subject:in-reply-to:cc:from:to:message-id;
+	bh=lPo1ouk5qStDjBOGV/9Uvw+DCyjyhJkHTs8ZXA1HHQM=;
+	b=jhF9bdSluLftUeMTmyr9hb0NSQgPPUUEcm/BYsYUW2kZgx+vdnj7vOIjZDeVl4I3I8
+	r9ABo6oESIs1CWAezepu43XZBzfxCiPKMbXpdO2WNcgpm6TivMiX3lH2O/GChuWMzMjn
+	dFbf7oLLx/5c52MnV2wrjf5CCOVv/7sIDh4FCDuznkUddKzvcS3mZzMtaPTkWzIZ5Wpi
+	cHbYA0mQOqfg+vz4Ns+ON6yK0hKkQCSIp9N04R3CEFr8FnWEF5/vCLGbQ/3KTVtStYIs
+	LZAFcnTIjzB7OwA4BI18DEdStKgFSgx3PWvYsrtVGAiiWTEJg4S3dEstdauon2tL5ueW
+	RO7A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
-	:mime-version:content-transfer-encoding;
-	bh=oXSv+RzTJQNcC9y2Ptcf4BzMd35bS4ht12EhWMH13Q0=;
-	b=U75nJvPuAakcWr6/vKbgRE4XpXCRzA0M3sXWfLgHXcC/aF9GcKPF72WMEPlDkpi/qN
-	4ucRR5gwxFzgiAiV8IN1voOF3S4RJvDJNjvxNB4EJjVxgCT1mLaIntA+idJr3rkMhPMe
-	spoQr75INAo8ApUxuA0ar3dPEf9V5Dvsjw0gqs/qMREiuFxbndkXTauVQIIHW88yr/mD
-	7Cq/RKkxTr9TB2g13hDGUuGiyVT+bRKHhnVdevk2M03L23QvqT7CJMw0rS5Kpqg14zcL
-	/ku5Z4O7cy5y3ZcnoGaN4yQ22PqV8zV9iLRqsIdZxf+MTYzjgcjXlhLNQZ2cKBlDwzc0
-	ZDTQ==
-X-Gm-Message-State: AGRZ1gIQl26+lSK0zWA8lnrQTMK+OpGVlwwc76WGyv6JgIVsbS15xX/X
-	qKiUCRqqRUain3dqB+8DWf4yRA==
-X-Google-Smtp-Source: AJdET5c2BVaGHW2VJze2d3zFH3j/Bmhay++MDU8jW6mIF4QQ1KJc6OX89MGbtjWWtUTVZYZ6bzmmIA==
-X-Received: by 2002:a62:3046:: with SMTP id
-	w67-v6mr9331631pfw.177.1542851100688; 
-	Wed, 21 Nov 2018 17:45:00 -0800 (PST)
+	h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id;
+	bh=lPo1ouk5qStDjBOGV/9Uvw+DCyjyhJkHTs8ZXA1HHQM=;
+	b=VEj0d39Vss8VaWMzuv2rFVU5O4Qv7dWlJHEfuV48FrA71uGdzcSquTkSC7FVTG87lL
+	v6KssjCqUdKZLMRvTE0kQ3OYYYN2xI9HuEjDb//TN8RPnxe1gp5AxxZZO2lRJp+lHnZn
+	sAh3Onne86j59qxoab43IxIew1P/AICL7tRXrjPEeq55TGDneFt8Zjke3wrUEXTgSQxd
+	dL5l5AoRTbHqlEHrqAS4rf0/EvvDymu/t62xpamD9VM0cBjBLZ8gdD8RZk1POnuaN8Hx
+	KT9ytMV0XpnGKQKfaWXLgZOQvml50X3j/fcCIgvqpE+dNIPdHziiYi09ryrETx3RrtCx
+	Xhyw==
+X-Gm-Message-State: AA+aEWbS8tsztYLezrlHGDqE6/z9zrQqo5/RyAuXYzz+321VflnSudAh
+	VGdIa8Thf/OgCZW5OCIJgD7ZaA==
+X-Google-Smtp-Source: AFSGD/X/wWuUrgwS7W8j4JdJVL+DcjTHv+H9xMfKDk9u7nijnEm2n9pZQrEblr8eSomn91SkH094rQ==
+X-Received: by 2002:a17:902:f44:: with SMTP id 62mr6997987ply.38.1542851884254;
+	Wed, 21 Nov 2018 17:58:04 -0800 (PST)
 Received: from localhost ([12.206.222.5]) by smtp.gmail.com with ESMTPSA id
-	o13sm22887631pfk.57.2018.11.21.17.44.59
+	i123sm29198638pfg.164.2018.11.21.17.58.02
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 21 Nov 2018 17:44:59 -0800 (PST)
-Date: Wed, 21 Nov 2018 17:44:59 -0800 (PST)
-X-Google-Original-Date: Wed, 21 Nov 2018 17:44:02 PST (-0800)
-In-Reply-To: <201f1cf4-30af-03c5-393b-0eab6ac7eb87@redhat.com>
-CC: qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+	Wed, 21 Nov 2018 17:58:03 -0800 (PST)
+Date: Wed, 21 Nov 2018 17:58:03 -0800 (PST)
+X-Google-Original-Date: Wed, 21 Nov 2018 17:57:48 PST (-0800)
+In-Reply-To: <6559716eae4b53d2cad39ec6011cdd7b1b32138a.1542839652.git.alistair.francis@wdc.com>
+CC: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair23@gmail.com,
+	Alistair Francis <Alistair.Francis@wdc.com>, agraf@suse.de
 From: Palmer Dabbelt <palmer@sifive.com>
-To: philmd@redhat.com
-Message-ID: <mhng-ce1dc513-eb34-4ace-b3a2-248347025887@palmer-si-x1c4>
-Mime-Version: 1.0 (MHng)
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
+To: Alistair Francis <Alistair.Francis@wdc.com>
+Message-ID: <mhng-3aa4aa94-927c-4ff8-867b-10d341c90d52@palmer-si-x1c4>
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::643
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH for-3.1 1/2] MAINTAINERS: Any
- file with "riscv" in the name is a RISC-V file
+X-Received-From: 2607:f8b0:4864:20::641
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v1 1/1] riscv: virt: Cast the
+ initrd start address to target bit length
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -71,54 +66,46 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Nov 2018 01:45:07 -0000
+X-List-Received-Date: Thu, 22 Nov 2018 01:58:16 -0000
 
-On Wed, 21 Nov 2018 16:29:09 PST (-0800), philmd@redhat.com wrote:
-> On 22/11/18 0:46, Palmer Dabbelt wrote:
->> There was a recent thread about unmaintained files in QEMU where it was
->> noted that a few RISC-V related files had slipped through the patterns
->> in our MAINTAINERS file entry.  This patch adds some more aggressive
->> pattern matching in an attempt to rectify this situation.
->>
->> Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
->> ---
->>   MAINTAINERS | 2 ++
->>   1 file changed, 2 insertions(+)
->>
->> diff --git a/MAINTAINERS b/MAINTAINERS
->> index 1032406c5607..e89adc81d5d5 100644
->> --- a/MAINTAINERS
->> +++ b/MAINTAINERS
->> @@ -255,6 +255,8 @@ F: target/riscv/
->>   F: hw/riscv/
->>   F: include/hw/riscv/
->>   F: disas/riscv.c
->> +K: riscv
->> +N: riscv
+On Wed, 21 Nov 2018 14:34:44 PST (-0800), Alistair Francis wrote:
+> Ensure that the calculate initrd offset points to a valid address for
+> the architecture.
 >
-> QEMU doesn't support the 'N' tag.
-> I see from the Linux kernel:
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> Suggested-by: Alexander Graf <agraf@suse.de>
+> Reported-by: Alexander Graf <agraf@suse.de>
+> ---
+>  hw/riscv/virt.c | 7 ++++++-
+>  1 file changed, 6 insertions(+), 1 deletion(-)
 >
->    N: Files and directories with regex patterns.
->       N:   [^a-z]tegra     all files whose path contains the word tegra
->       One pattern per line.  Multiple N: lines acceptable.
->       scripts/get_maintainer.pl has different behavior for files that
->       match F: pattern and matches of N: patterns.  By default,
->       get_maintainer will not look at git log history when an F: pattern
->       match occurs.  When an N: match occurs, git log history is used
->       to also notify the people that have git commit signatures.
->
-> Should we add this feature to checkscript?
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index 2b38f89070..4467195fac 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -85,7 +85,12 @@ static hwaddr load_initrd(const char *filename, uint64_t mem_size,
+>       * halfway into RAM, and for boards with 256MB of RAM or more we put
+>       * the initrd at 128MB.
+>       */
+> -    *start = kernel_entry + MIN(mem_size / 2, 128 * MiB);
+> +    /* As hwaddr is a 64-bit number we need to cast it for 32-bit */
+> +#if defined(TARGET_RISCV32)
+> +    *start = (uint32_t) (kernel_entry + MIN(mem_size / 2, 128ULL * MiB));
+> +#elif defined(TARGET_RISCV64)
+> +    *start = (uint64_t) (kernel_entry + MIN(mem_size / 2, 128 * MiB));
+> +#endif
+>  
+>      size = load_ramdisk(filename, *start, mem_size - *start);
+>      if (size == -1) {
+> -- 
+> 2.19.1
 
-Ah, I didn't check because I just copied this from our Linux entry.  It's 
-pretty much the core of what I'm trying to do here so if it's easy then that'd 
-be great.
+Maybe I'm missing something, but wouldn't something like
 
-Unfortunately I don't know how to do so.
+    uint64_t start_unclobbered = kernel_entry + MIN(mem_size / 2, 128ULL * MiB);
+    assert(start_unclobbered == (hwaddr)start_unclobbered);
+    *start = (hwaddr)start_unclobbered;
 
->
->>
->>   S390
->>   M: Richard Henderson <rth@twiddle.net>
->>
+work better?  That should actually check this all lines up, as opposed to just 
+silently truncating a bad address.
 
