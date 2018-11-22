@@ -1,61 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gPeRO-0004Ua-7e
-	for mharc-qemu-riscv@gnu.org; Wed, 21 Nov 2018 21:10:02 -0500
-Received: from eggs.gnu.org ([2001:4830:134:3::10]:43137)
+	id 1gPeS1-0004rk-Uf
+	for mharc-qemu-riscv@gnu.org; Wed, 21 Nov 2018 21:10:43 -0500
+Received: from eggs.gnu.org ([2001:4830:134:3::10]:43818)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1gPeRL-0004Sd-BK
-	for qemu-riscv@nongnu.org; Wed, 21 Nov 2018 21:10:00 -0500
+	(envelope-from <alistair23@gmail.com>) id 1gPeRz-0004qp-Q9
+	for qemu-riscv@nongnu.org; Wed, 21 Nov 2018 21:10:40 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1gPeRK-0000YL-KE
-	for qemu-riscv@nongnu.org; Wed, 21 Nov 2018 21:09:59 -0500
-Received: from mail-lj1-x241.google.com ([2a00:1450:4864:20::241]:43662)
+	(envelope-from <alistair23@gmail.com>) id 1gPeRy-0002Qo-SK
+	for qemu-riscv@nongnu.org; Wed, 21 Nov 2018 21:10:39 -0500
+Received: from mail-lf1-x144.google.com ([2a00:1450:4864:20::144]:35464)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
 	(Exim 4.71) (envelope-from <alistair23@gmail.com>)
-	id 1gPeRI-0000PP-Hk; Wed, 21 Nov 2018 21:09:56 -0500
-Received: by mail-lj1-x241.google.com with SMTP id 83-v6so6530875ljf.10;
-	Wed, 21 Nov 2018 18:09:56 -0800 (PST)
+	id 1gPeRu-0002Dp-Vf; Wed, 21 Nov 2018 21:10:35 -0500
+Received: by mail-lf1-x144.google.com with SMTP id e26so5423577lfc.2;
+	Wed, 21 Nov 2018 18:10:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=f1lsW4uFKratc9wu7qNGHAgJ/1IdaHsthdDOBYbxjno=;
-	b=ASL7xbv8ZcJoSUx7ej+1qzCfsbOMV+ctEAEZgJttSk6A9OYirmPGLAe8uaQIgocVGy
-	wtM0Sk0fIyD0la12bvjga7VXXkOA6XGgG2bHoYxSQwZxFwZIDpeJ2wsdDlHemn2H5qTS
-	c4B9sw2m0e4APIGSo1ib8ZyHBQsv4dYjUI+yfi0kCsY8hauvAEkH8TPXwFaH5cV/D/Jw
-	jLfDbWIUNJAG2odLrGhi5BoTLP0MWL4C1qAU+UK2/RsLsY3Cd4RhdaGBLutN7CrUOmFv
-	/Vq4rwRRSMOxkL5K5Pl9SpQwrI37u17M8gvTgoPnPkzfr9LbXRtEYw+18bQGQO1uomoR
-	Dgrw==
+	:cc; bh=I5VD1J5tpuzPAekAEATDuTVz4JbA0MgAkx7n1s4yvVg=;
+	b=l1o8dLBv6c2M9EfN+F/jQlDtcKAaNlnY9lsAedSQ79dO743WT4F3aRHkTP/yUEf4DU
+	SdsOr+xICQ/hqFznKcP4qv8tejhkaw7LmcRGlZz8wcfM4ehAhu3IfK5uEzg37ZhaNMK3
+	Spvfk40BCSgUcDO3u2Q34hoDVRKWFvrZ+BIAzw/fl1+lDhO4UsLSEPRkh4/gZLr29JVs
+	pBtb2ERNpK8JU5TdNurpdRQYZASiWYBz47yhwWFmdXSpp4L640xfBROvjToovZlqExml
+	JJQLSJm8y02zf6IKLTQkqbtr9hVUwJ08WgZ72HBVkAqZZFaVelHh5tahQ0lJiBtNhzdb
+	GDHg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=f1lsW4uFKratc9wu7qNGHAgJ/1IdaHsthdDOBYbxjno=;
-	b=m4NtA4smpL4SETXwlvldBTlUmsD5zeD6Wndc/4Pr4Xd/q4LR6oLvt++G/VohOowq7x
-	uiMC5GvOo0v75vxcfEQSpG1rslCtYn7G5JSQEE/fjbNacTpR5AugpJF3iiWDayus86nO
-	y4NLocLApnHwRafPh3e4fXOfLAnqsHf6AtedO39Pmi9hPnzJ/c9e+jOJfxpuxeaQ5orX
-	KvMWPF/xwZi59uwggF+jbOfIy9ntqE8CfhyaAdGVHK8NGRATgbW4dY/uNrccPrLggbRa
-	eEL1wjDt+UNccaqUwdm15kJeR6bCvi5bnm8A5ZPKOsmolA5Fwrh7/jYOFmsFP1fD/ULw
-	6hcQ==
-X-Gm-Message-State: AGRZ1gJ1f7l2o5Bn3E73//X32ljtKOpto9HNd33mSReHhO7DXx1dXA6u
-	lwqxOi7sbqIpBANSlHNH+i8OKvT8KzINYZupVwE=
-X-Google-Smtp-Source: AFSGD/VOtPoFHktXe9qCHVGn6OFCUt4sDoPyZGT0mXq50xXuHPGPZustJ7YuM+K1ndhhfkOf1mycdMXzE1Job9OZQpo=
-X-Received: by 2002:a2e:7801:: with SMTP id t1-v6mr5426065ljc.84.1542852594408;
-	Wed, 21 Nov 2018 18:09:54 -0800 (PST)
+	bh=I5VD1J5tpuzPAekAEATDuTVz4JbA0MgAkx7n1s4yvVg=;
+	b=FcDe1eyegvVCTpCfBr37wZrDyKYJRHD1a0vqQoWsYHTDIbts5hyvftiDGx3tMRWTJn
+	2K5sKQx5Qww90/kAeiWfW+uJR8g08GRBQg3GvetHFfJNNiZmDwes3LaYfU807TLMZG87
+	CYlxaG4OsBPoS9d4QQH/fQUtcLYXgMaixjG9cIZAVwDuHgLF1WtIr59u/Y3koV5kMkaG
+	lFrFLKHO01/9cXVXfuhhtifOuCkvCXVK48b72PvTMppjeDTNyzUms6QoRdBNEr0LsYZP
+	s+bz65NIQffM3MxhpQJNaXxnU4/PbT0TwUsq2e8apu3/bi1jjWM8dZxH4rFvpIHxemUJ
+	ym9g==
+X-Gm-Message-State: AGRZ1gJ7gzS+ljU15NPA0myvI0NS5q31La9mXm0Cy4knHtiF6gT8wrhz
+	fdy/NahliHYrzeUEssIcQDTgK8pSIVBSwrmzK74=
+X-Google-Smtp-Source: AJdET5ddjfpRkWFoDXmfKaD5z8KEi2OFkje1+Oy5y9yWAFzNIjUlvKBkKS54egWdyld97pH6OaJZdgIUkjhoQkJSwTs=
+X-Received: by 2002:a19:5059:: with SMTP id z25mr5073168lfj.120.1542852633576; 
+	Wed, 21 Nov 2018 18:10:33 -0800 (PST)
 MIME-Version: 1.0
-References: <6559716eae4b53d2cad39ec6011cdd7b1b32138a.1542839652.git.alistair.francis@wdc.com>
-	<mhng-3aa4aa94-927c-4ff8-867b-10d341c90d52@palmer-si-x1c4>
-In-Reply-To: <mhng-3aa4aa94-927c-4ff8-867b-10d341c90d52@palmer-si-x1c4>
+References: <20181121234651.24596-1-palmer@sifive.com>
+	<20181121234651.24596-2-palmer@sifive.com>
+In-Reply-To: <20181121234651.24596-2-palmer@sifive.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 21 Nov 2018 18:09:27 -0800
-Message-ID: <CAKmqyKMdNs4etff7rc0vDy_tmZf5deP1Geu0GchkENu+em5=+w@mail.gmail.com>
+Date: Wed, 21 Nov 2018 18:10:06 -0800
+Message-ID: <CAKmqyKM6_i_V2T-sc1eAJAMRCkacYHMiSCKcgg7xYHmXr7AfHg@mail.gmail.com>
 To: Palmer Dabbelt <palmer@sifive.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
-	"qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
-	qemu-riscv@nongnu.org, Alexander Graf <agraf@suse.de>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+	qemu-riscv@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2a00:1450:4864:20::241
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v1 1/1] riscv: virt: Cast the
- initrd start address to target bit length
+X-Received-From: 2a00:1450:4864:20::144
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH for-3.1 2/2] MAINTAINERS: Mark
+ RISC-V as Supported
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -67,56 +66,37 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Nov 2018 02:10:00 -0000
+X-List-Received-Date: Thu, 22 Nov 2018 02:10:40 -0000
 
-On Wed, Nov 21, 2018 at 5:58 PM Palmer Dabbelt <palmer@sifive.com> wrote:
+On Wed, Nov 21, 2018 at 3:55 PM Palmer Dabbelt <palmer@sifive.com> wrote:
 >
-> On Wed, 21 Nov 2018 14:34:44 PST (-0800), Alistair Francis wrote:
-> > Ensure that the calculate initrd offset points to a valid address for
-> > the architecture.
-> >
-> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> > Suggested-by: Alexander Graf <agraf@suse.de>
-> > Reported-by: Alexander Graf <agraf@suse.de>
-> > ---
-> >  hw/riscv/virt.c | 7 ++++++-
-> >  1 file changed, 6 insertions(+), 1 deletion(-)
-> >
-> > diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> > index 2b38f89070..4467195fac 100644
-> > --- a/hw/riscv/virt.c
-> > +++ b/hw/riscv/virt.c
-> > @@ -85,7 +85,12 @@ static hwaddr load_initrd(const char *filename, uint64_t mem_size,
-> >       * halfway into RAM, and for boards with 256MB of RAM or more we put
-> >       * the initrd at 128MB.
-> >       */
-> > -    *start = kernel_entry + MIN(mem_size / 2, 128 * MiB);
-> > +    /* As hwaddr is a 64-bit number we need to cast it for 32-bit */
-> > +#if defined(TARGET_RISCV32)
-> > +    *start = (uint32_t) (kernel_entry + MIN(mem_size / 2, 128ULL * MiB));
-> > +#elif defined(TARGET_RISCV64)
-> > +    *start = (uint64_t) (kernel_entry + MIN(mem_size / 2, 128 * MiB));
-> > +#endif
-> >
-> >      size = load_ramdisk(filename, *start, mem_size - *start);
-> >      if (size == -1) {
-> > --
-> > 2.19.1
+> There's three of us that are paid to work on this.
 >
-> Maybe I'm missing something, but wouldn't something like
->
->     uint64_t start_unclobbered = kernel_entry + MIN(mem_size / 2, 128ULL * MiB);
->     assert(start_unclobbered == (hwaddr)start_unclobbered);
->     *start = (hwaddr)start_unclobbered;
->
-> work better?  That should actually check this all lines up, as opposed to just
-> silently truncating a bad address.
+> Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
 
-The problem is that hwaddr is always 64-bit.
-
-Stupidly I forgot about target_ulong, which should work basically the
-same as above. An assert() seems a little harsh though, Alex reported
-problem was fixed with just a cast.
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
+
+> ---
+>  MAINTAINERS | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index e89adc81d5d5..d5ec5e74f328 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -250,7 +250,7 @@ M: Alistair Francis <Alistair.Francis@wdc.com>
+>  M: Sagar Karandikar <sagark@eecs.berkeley.edu>
+>  M: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+>  L: qemu-riscv@nongnu.org
+> -S: Maintained
+> +S: Supported
+>  F: target/riscv/
+>  F: hw/riscv/
+>  F: include/hw/riscv/
+> --
+> 2.18.1
+>
+>
 
