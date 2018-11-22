@@ -1,62 +1,48 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gPees-0002Ua-6i
-	for mharc-qemu-riscv@gnu.org; Wed, 21 Nov 2018 21:23:58 -0500
-Received: from eggs.gnu.org ([2001:4830:134:3::10]:54154)
+	id 1gPmhm-0004ly-9g
+	for mharc-qemu-riscv@gnu.org; Thu, 22 Nov 2018 05:59:30 -0500
+Received: from eggs.gnu.org ([2001:4830:134:3::10]:50214)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1gPeeq-0002TI-2o
-	for qemu-riscv@nongnu.org; Wed, 21 Nov 2018 21:23:56 -0500
+	(envelope-from <abologna@redhat.com>) id 1gPmhk-0004kN-3N
+	for qemu-riscv@nongnu.org; Thu, 22 Nov 2018 05:59:29 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1gPeeo-0004EX-Lu
-	for qemu-riscv@nongnu.org; Wed, 21 Nov 2018 21:23:56 -0500
-Received: from mail-lf1-x142.google.com ([2a00:1450:4864:20::142]:46215)
-	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <alistair23@gmail.com>)
-	id 1gPeeo-0004Cc-CY; Wed, 21 Nov 2018 21:23:54 -0500
-Received: by mail-lf1-x142.google.com with SMTP id f23so5401895lfc.13;
-	Wed, 21 Nov 2018 18:23:54 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=4L8tzEIkR7vE+cOmkP93tmmOvQpNEkOsYhibpeH48QA=;
-	b=CpPONhqVSQlosVKoOcN9qFCPVzAfzHUsYsr7oERT/HR93/x0vz4jRQBHSz6S7d2qpw
-	n5nF4X3XNx2OpLro01jnChslOQvteYZxWZPA2AIJwdYgCgiFv530aaCGsAlT4pX2SQ0Z
-	hKBnGPGMW770BWO60aGe8KM+XN1F+VdV5kqd4OzeKIEjroNEaLf/qc3CFZcc+Qa9X7Gs
-	CGGwtryxGAZOP4ZsPOjRSNv+wzmpmv5OclougjyLa+SiQN7mjqc/e/sh55/fARmzH+Be
-	ChHU8l4MxsSVejDy4/m6ItDH4aiJHpR4ErTEBwS0y1wiSQasVj29P3OQza1zIGuYyZbI
-	CJUw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=4L8tzEIkR7vE+cOmkP93tmmOvQpNEkOsYhibpeH48QA=;
-	b=DuoYKyvASHqqfU62XtE5yRVtXbMDCT4VPyP3Thwitxo0zSJdvxp1V2BTGRwXr7YwTL
-	uIN+9wqPvuUiTGJYxZfbttoxJU8EB4ejqMEphsD+Bd1NrxN/2PQuWTulps3IcoNz+nw/
-	0bxRpUERH5B4CmHkTbW9kPxF98fGof/zrKqGemqyXdaaP2MqFT1jEFV35se1VQCPWcDS
-	Ragf/XaKhpWd1CE5TcQlDX+XPX7LVp39THCArJ06lUcB6+81thoPKzC/rdCp2x+3jmOz
-	ieVgo/P+JTaCZIFV/zodISxp2VrOBETi+Og0Kq7g/t/PFZEfnfNONbJfC4Tae++ELN6X
-	x8NA==
-X-Gm-Message-State: AGRZ1gIBjspguypljrZPsoEkU2szmPFMi8nEMJvC0yDpQ+i/uP3Zqsbs
-	u3YviBSEQ5NOFjEOLGXRPB/kh/v5X1GeiKb+5A8=
-X-Google-Smtp-Source: AJdET5ddx7C9FV7fRjnn1g9GjeWdtB4eI/xZXvKS53Iyg5XUCCIMrlN5ehpqX8cFQWo4qix+4pZdmwMto/URG2vmuC8=
-X-Received: by 2002:a19:5782:: with SMTP id l124mr4983550lfb.91.1542853432806; 
-	Wed, 21 Nov 2018 18:23:52 -0800 (PST)
-MIME-Version: 1.0
-References: <9ee74477-105f-db2e-b69c-e67d485b9c2f@deltatee.com>
-	<mhng-105c249c-fc1f-4d85-bf75-5aeb17d95854@palmer-si-x1c4>
-In-Reply-To: <mhng-105c249c-fc1f-4d85-bf75-5aeb17d95854@palmer-si-x1c4>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 21 Nov 2018 18:23:26 -0800
-Message-ID: <CAKmqyKPVif8MQs_aGXxx=aOi9mrRJz94AFv2B41JVETqY9BQRA@mail.gmail.com>
-To: Palmer Dabbelt <palmer@sifive.com>
-Cc: Logan Gunthorpe <logang@deltatee.com>, Guenter Roeck <linux@roeck-us.net>,
-	qemu-riscv@nongnu.org, Alistair Francis <Alistair.Francis@wdc.com>, 
-	"qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
-	Andrea Bolognani <abologna@redhat.com>
+	(envelope-from <abologna@redhat.com>) id 1gPmhj-0007h0-4S
+	for qemu-riscv@nongnu.org; Thu, 22 Nov 2018 05:59:27 -0500
+Received: from mx1.redhat.com ([209.132.183.28]:58566)
+	by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.71) (envelope-from <abologna@redhat.com>)
+	id 1gPmhe-0007V4-Is; Thu, 22 Nov 2018 05:59:22 -0500
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
+	[10.5.11.13])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mx1.redhat.com (Postfix) with ESMTPS id A16483167697;
+	Thu, 22 Nov 2018 10:59:21 +0000 (UTC)
+Received: from kinshicho (unknown [10.43.2.63])
+	by smtp.corp.redhat.com (Postfix) with ESMTPS id 1EC62608E7;
+	Thu, 22 Nov 2018 10:59:19 +0000 (UTC)
+Message-ID: <84778e31610b0b98aea9b2dec5570a02dbf52180.camel@redhat.com>
+From: Andrea Bolognani <abologna@redhat.com>
+To: Alistair Francis <Alistair.Francis@wdc.com>, "qemu-devel@nongnu.org"
+	<qemu-devel@nongnu.org>, "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>
+Cc: "alistair23@gmail.com" <alistair23@gmail.com>, "linux@roeck-us.net"
+	<linux@roeck-us.net>, "logang@deltatee.com" <logang@deltatee.com>
+Date: Thu, 22 Nov 2018 11:59:18 +0100
+In-Reply-To: <cover.1542819633.git.alistair.francis@wdc.com>
+References: <cover.1542819633.git.alistair.francis@wdc.com>
 Content-Type: text/plain; charset="UTF-8"
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
-	recognized.
-X-Received-From: 2a00:1450:4864:20::142
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH for-3.2 v7 5/6]
- hw/riscv/sifive_u: Connect the Xilinx PCIe
+User-Agent: Evolution 3.30.2 (3.30.2-2.fc29) 
+Mime-Version: 1.0
+Content-Transfer-Encoding: 7bit
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+	(mx1.redhat.com [10.5.110.41]);
+	Thu, 22 Nov 2018 10:59:21 +0000 (UTC)
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+	[fuzzy]
+X-Received-From: 209.132.183.28
+Subject: Re: [Qemu-riscv] [PATCH for-3.2 v7 0/6] Connect a PCIe host and
+ graphics support to RISC-V
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -68,24 +54,37 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Nov 2018 02:23:57 -0000
+X-List-Received-Date: Thu, 22 Nov 2018 10:59:29 -0000
 
-On Wed, Nov 21, 2018 at 6:13 PM Palmer Dabbelt <palmer@sifive.com> wrote:
->
-> On Wed, 21 Nov 2018 15:26:01 PST (-0800), logang@deltatee.com wrote:
-> >
-> >
-> > On 2018-11-21 4:10 p.m., Guenter Roeck wrote:
-> >> FWIW, I absoutely agree. If the board can only be used to boot an initrd,
-> >> it is quite pointless to have it around. Actually it is worse than pointless,
-> >> since it will result in people wasting their time trying to get it to work.
-> >
-> > As someone who has wasted their time on it, I second this sentiment.
->
-> So it sounds like I should target that deprecation patch set for 3.1?  Who
-> wants to review it?
+On Wed, 2018-11-21 at 17:02 +0000, Alistair Francis wrote:
+> V7:
+>  - Fix the GPEX memory mapping thanks to Bin Meng
+>  - Fix the interrupt mapping thanks to Logan Gunthorpe
+> 
+[...]
+> 
+> Alistair Francis (6):
+>   hw/riscv/virt: Increase the number of interrupts
+>   hw/riscv/virt: Adjust memory layout spacing
+>   hw/riscv/virt: Connect the gpex PCIe
+>   riscv: Enable VGA and PCIE_VGA
+>   hw/riscv/sifive_u: Connect the Xilinx PCIe
+>   hw/riscv/virt: Connect a VirtIO net PCIe device
 
-I think it's a little late for 3.1. Let's leave it for 3.2
+Using QEMU master + these patches, libvirt master + my own patches,
+a disk image from [1] and the bbl from [2], I was able to run a pure
+PCI RISC-V guest, including connecting to it through ssh and
+performing a system update using dnf; based on these results, the
+series gets a big old
 
-Alistair
+  Tested-by: Andrea Bolognani <abologna@redhat.com>
+
+
+[1] https://fedora-riscv.tranquillity.se/koji/
+    Unfortunately the site is broken at the moment :(
+[2] https://fedorapeople.org/groups/risc-v/disk-images/
+    PCI support is included in the bbl now! \o/
+-- 
+Andrea Bolognani / Red Hat / Virtualization
+
 
