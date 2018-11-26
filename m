@@ -1,65 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gRM9t-00073b-9t
-	for mharc-qemu-riscv@gnu.org; Mon, 26 Nov 2018 14:03:01 -0500
-Received: from eggs.gnu.org ([2001:4830:134:3::10]:57502)
+	id 1gRMML-0003OE-HQ
+	for mharc-qemu-riscv@gnu.org; Mon, 26 Nov 2018 14:15:53 -0500
+Received: from eggs.gnu.org ([2001:4830:134:3::10]:60658)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1gRM9r-0006uJ-EM
-	for qemu-riscv@nongnu.org; Mon, 26 Nov 2018 14:03:00 -0500
+	(envelope-from <palmer@sifive.com>) id 1gRMMK-0003N0-34
+	for qemu-riscv@nongnu.org; Mon, 26 Nov 2018 14:15:52 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1gRM9n-0007ug-7r
-	for qemu-riscv@nongnu.org; Mon, 26 Nov 2018 14:02:59 -0500
-Received: from mail-pf1-x444.google.com ([2607:f8b0:4864:20::444]:46788)
+	(envelope-from <palmer@sifive.com>) id 1gRMME-0007pT-HR
+	for qemu-riscv@nongnu.org; Mon, 26 Nov 2018 14:15:50 -0500
+Received: from mail-pf1-x441.google.com ([2607:f8b0:4864:20::441]:45391)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1gRM9n-0007uA-20
-	for qemu-riscv@nongnu.org; Mon, 26 Nov 2018 14:02:55 -0500
-Received: by mail-pf1-x444.google.com with SMTP id c73so7016077pfe.13
-	for <qemu-riscv@nongnu.org>; Mon, 26 Nov 2018 11:02:54 -0800 (PST)
+	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1gRMMC-0007cd-JG
+	for qemu-riscv@nongnu.org; Mon, 26 Nov 2018 14:15:46 -0500
+Received: by mail-pf1-x441.google.com with SMTP id g62so7035362pfd.12
+	for <qemu-riscv@nongnu.org>; Mon, 26 Nov 2018 11:15:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
 	h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
 	:content-transfer-encoding;
-	bh=hHbtW2VHaK+EnawinuUSPTlpQGH1RdUKYX11fPP2M8g=;
-	b=Q7FF9zXsW4ZolOI798p7JA3NVkyfNa55oMXr/iF9VqAQtLuVcMrDwBpkDPOMo807iO
-	GfUggQekOuCFHWK8UDNECHn/bPUP9QbX0iOI96DpLBAORjMN5NjRN+Id2laJ+D8A32OT
-	37YPNa5rROUzhvez0XsmJEcBJehss8jJP6NnSX1P8Ed8Rwi/NBu8Fw0vFbdPYFkilkzj
-	RCgvPAegSDv2FtUe7s/Kh+8xjcztBVfECdFkZPat2gFcsk3cRUAdvZymZxTdvESTdO/H
-	jNH5gu89zih8A7cRNW7T7XmzYv/kc69RaJEt0PLw9Jqfw5WUwM8NmlitdRP9Fc8gtmXO
-	okmQ==
+	bh=qXttEqXX+xILch0cIH/x0SGUTmIlW1fuQh5QlqRLH7I=;
+	b=Sm6AQJLPmbVqs5UB/8hpNgELQ4bQSzOzcrxXI8bQlFgOpgw/YfMiuYJv5TW0KvhdJv
+	hOIno6SESBGcaeFRzhZ62iEoDNdjqOp2ZyRnFObrmpYIZrpvoW3V1QHNVoNNs7XVnfml
+	9hTe5Zz40flHm52KN/5PRPmyYa4nCxBr8tc8O8ojsG2pR22iIRElQQOlNFKoKDpOHS8y
+	pztOGz8jOE+PLoBUXJFQO5ivno1W6/0VaPtF+GgqepQvN0qu6uawX2WwUVf7fje+D6+H
+	kWMPW1cQ4WwH+9gTi+xE11hwNzdUfkMvklLJmKIhdC8+zTsIodDzsnlrcEW/s33fEB9A
+	GifQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
 	:mime-version:content-transfer-encoding;
-	bh=hHbtW2VHaK+EnawinuUSPTlpQGH1RdUKYX11fPP2M8g=;
-	b=e22Z3gjZ54D4oYj5a0kjGH88FZHv3wSr0ocYi6JUlWwbjnZx1RQch8epWU/gwrVA9t
-	HcKaAkLNDcTM7D85nE/xS1WTjXZ46E/HMtfLQgjRAqy196d8ybUTgt4QGNNBWd4N0v8l
-	/CAHgX0UorYNwltKioL1tqdgtz16MLUazPNUIqpszKGNTVKOf/dPslHNbIv6asZAOqgJ
-	aQ9wYL2nufkwbxT1uL5aQcj1wfCvLinq9jqVy8IkM46b1dDBwfyFFJjXCR9QLdBH2Gku
-	KZKJgaiCU0i/byblS6j6ySb2tmodgmDzs3c0BtepRJLsYskaO7hTx6plmIZ8vSYvb+Jp
-	A8/w==
-X-Gm-Message-State: AA+aEWYBGuq8LRzk9DnfA6jnb9y6X3RNzHvXDcpDQcmkq0AkfBjhfq0E
-	JE7EhvAbJ7NAqyOUMRd38JByxg==
-X-Google-Smtp-Source: AFSGD/UZWHak8Mds1Li0QnTRafjTxAsIkpoZEu3OyHwM0EaPQSn5DYfI9L45MRJI13W6kkIMKLAz7Q==
-X-Received: by 2002:a63:3546:: with SMTP id c67mr26441974pga.284.1543258973270;
-	Mon, 26 Nov 2018 11:02:53 -0800 (PST)
+	bh=qXttEqXX+xILch0cIH/x0SGUTmIlW1fuQh5QlqRLH7I=;
+	b=CicQjMSd1pOz5tSrApjftxrZdhdPlMpEbgwbMVgS3M6VFl5C8HP9zB5B1vqTWsyaxf
+	cjyf2KzkSVVves21PKxxGjSx7QXFi/nsQoosXXzdrp4fAXCE4j+cLcblcerMD+ye10J3
+	E2uBi4vCYSHFOhiKmwyFDEYWTJVXfwBhtQ/FrJSoc6xW+Jj+GEFlxV7UDcsuo3tp5jM8
+	6uEqwaQwb5Ji1HdnNFZiq2lJyhgU+g4IN7FMyJL0f6XEKTnDVE6cPESvkDPqHcXm9t2g
+	BhU+9uT7DTLLZDxWZBk1YWadnXxNFqIVeGH0MwfcvBbDqX+pN8soBIGBBfH4HdljLRWb
+	Jmlw==
+X-Gm-Message-State: AA+aEWaEY27obSZlWACvvtU1J9xMTs3XPXLKS2xDgdT6qAljoCkeCRV4
+	9uV3u+nJLulxB9JvQxIgGwLwjw==
+X-Google-Smtp-Source: AFSGD/U9t/0ETRLqVB/bUeDmyZAKMFeDB38FahxvHrY2/VXU/+OOmMM11bXmepvMNRDLDPKiy8t1SA==
+X-Received: by 2002:a63:5407:: with SMTP id i7mr26103415pgb.413.1543259741937; 
+	Mon, 26 Nov 2018 11:15:41 -0800 (PST)
 Received: from localhost ([12.206.222.5]) by smtp.gmail.com with ESMTPSA id
-	202sm1415666pfy.87.2018.11.26.11.02.52
+	i72sm1759267pfe.181.2018.11.26.11.15.40
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 26 Nov 2018 11:02:52 -0800 (PST)
-Date: Mon, 26 Nov 2018 11:02:52 -0800 (PST)
-X-Google-Original-Date: Mon, 26 Nov 2018 11:02:06 PST (-0800)
-In-Reply-To: <CAKmqyKMdNs4etff7rc0vDy_tmZf5deP1Geu0GchkENu+em5=+w@mail.gmail.com>
-CC: Alistair Francis <Alistair.Francis@wdc.com>, qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org, agraf@suse.de
+	Mon, 26 Nov 2018 11:15:41 -0800 (PST)
+Date: Mon, 26 Nov 2018 11:15:41 -0800 (PST)
+X-Google-Original-Date: Mon, 26 Nov 2018 11:07:41 PST (-0800)
+In-Reply-To: <CAKmqyKPVif8MQs_aGXxx=aOi9mrRJz94AFv2B41JVETqY9BQRA@mail.gmail.com>
+CC: logang@deltatee.com, linux@roeck-us.net, qemu-riscv@nongnu.org,
+	Alistair Francis <Alistair.Francis@wdc.com>, qemu-devel@nongnu.org,
+	abologna@redhat.com
 From: Palmer Dabbelt <palmer@sifive.com>
 To: alistair23@gmail.com
-Message-ID: <mhng-b345219b-56ea-4aee-b25e-95c762c54b49@palmer-si-x1c4>
+Message-ID: <mhng-3ba5a1be-87c9-4028-9442-8773ce4100bd@palmer-si-x1c4>
 Mime-Version: 1.0 (MHng)
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::444
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v1 1/1] riscv: virt: Cast the
- initrd start address to target bit length
+X-Received-From: 2607:f8b0:4864:20::441
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH for-3.2 v7 5/6]
+ hw/riscv/sifive_u: Connect the Xilinx PCIe
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -71,65 +72,25 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Nov 2018 19:03:01 -0000
+X-List-Received-Date: Mon, 26 Nov 2018 19:15:52 -0000
 
-On Wed, 21 Nov 2018 18:09:27 PST (-0800), alistair23@gmail.com wrote:
-> On Wed, Nov 21, 2018 at 5:58 PM Palmer Dabbelt <palmer@sifive.com> wrote:
+On Wed, 21 Nov 2018 18:23:26 PST (-0800), alistair23@gmail.com wrote:
+> On Wed, Nov 21, 2018 at 6:13 PM Palmer Dabbelt <palmer@sifive.com> wrote:
 >>
->> On Wed, 21 Nov 2018 14:34:44 PST (-0800), Alistair Francis wrote:
->> > Ensure that the calculate initrd offset points to a valid address for
->> > the architecture.
+>> On Wed, 21 Nov 2018 15:26:01 PST (-0800), logang@deltatee.com wrote:
 >> >
->> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
->> > Suggested-by: Alexander Graf <agraf@suse.de>
->> > Reported-by: Alexander Graf <agraf@suse.de>
->> > ---
->> >  hw/riscv/virt.c | 7 ++++++-
->> >  1 file changed, 6 insertions(+), 1 deletion(-)
 >> >
->> > diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
->> > index 2b38f89070..4467195fac 100644
->> > --- a/hw/riscv/virt.c
->> > +++ b/hw/riscv/virt.c
->> > @@ -85,7 +85,12 @@ static hwaddr load_initrd(const char *filename, uint64_t mem_size,
->> >       * halfway into RAM, and for boards with 256MB of RAM or more we put
->> >       * the initrd at 128MB.
->> >       */
->> > -    *start = kernel_entry + MIN(mem_size / 2, 128 * MiB);
->> > +    /* As hwaddr is a 64-bit number we need to cast it for 32-bit */
->> > +#if defined(TARGET_RISCV32)
->> > +    *start = (uint32_t) (kernel_entry + MIN(mem_size / 2, 128ULL * MiB));
->> > +#elif defined(TARGET_RISCV64)
->> > +    *start = (uint64_t) (kernel_entry + MIN(mem_size / 2, 128 * MiB));
->> > +#endif
+>> > On 2018-11-21 4:10 p.m., Guenter Roeck wrote:
+>> >> FWIW, I absoutely agree. If the board can only be used to boot an initrd,
+>> >> it is quite pointless to have it around. Actually it is worse than pointless,
+>> >> since it will result in people wasting their time trying to get it to work.
 >> >
->> >      size = load_ramdisk(filename, *start, mem_size - *start);
->> >      if (size == -1) {
->> > --
->> > 2.19.1
+>> > As someone who has wasted their time on it, I second this sentiment.
 >>
->> Maybe I'm missing something, but wouldn't something like
->>
->>     uint64_t start_unclobbered = kernel_entry + MIN(mem_size / 2, 128ULL * MiB);
->>     assert(start_unclobbered == (hwaddr)start_unclobbered);
->>     *start = (hwaddr)start_unclobbered;
->>
->> work better?  That should actually check this all lines up, as opposed to just
->> silently truncating a bad address.
+>> So it sounds like I should target that deprecation patch set for 3.1?  Who
+>> wants to review it?
 >
-> The problem is that hwaddr is always 64-bit.
->
-> Stupidly I forgot about target_ulong, which should work basically the
-> same as above. An assert() seems a little harsh though, Alex reported
-> problem was fixed with just a cast.
+> I think it's a little late for 3.1. Let's leave it for 3.2
 
-OK, I must be misunderstanding the problem, then.  With the current code, isn't 
-it possible to end up causing start to overflow a 32-bit address?  This would 
-happen if kernel_entry is high, with IIUC is coming from the ELF to load and is 
-therefor user input.  I think that's worth some sort of assertion, as it'll 
-definitely blow up trying to enter the kernel (and possible before that, 
-assuming there's no target memory where it overflows into).
-
-This won't happen with the default Linux setup, but could happen if users are 
-trying to do something weird.
+That was my original thought as well, so I'm happy sticking with the plan.
 
