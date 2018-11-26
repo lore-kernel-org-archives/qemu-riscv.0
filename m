@@ -1,70 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gROVc-0008I9-Ng
-	for mharc-qemu-riscv@gnu.org; Mon, 26 Nov 2018 16:33:36 -0500
-Received: from eggs.gnu.org ([2001:4830:134:3::10]:52729)
+	id 1gRPqe-0007Pm-Ls
+	for mharc-qemu-riscv@gnu.org; Mon, 26 Nov 2018 17:59:24 -0500
+Received: from eggs.gnu.org ([2001:4830:134:3::10]:41857)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <groeck7@gmail.com>) id 1gROVa-0008Fq-45
-	for qemu-riscv@nongnu.org; Mon, 26 Nov 2018 16:33:35 -0500
+	(envelope-from <alistair23@gmail.com>) id 1gRPqc-0007NX-15
+	for qemu-riscv@nongnu.org; Mon, 26 Nov 2018 17:59:22 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <groeck7@gmail.com>) id 1gROVZ-0006nZ-51
-	for qemu-riscv@nongnu.org; Mon, 26 Nov 2018 16:33:34 -0500
-Received: from mail-pg1-x543.google.com ([2607:f8b0:4864:20::543]:38895)
+	(envelope-from <alistair23@gmail.com>) id 1gRPqa-0005oc-L4
+	for qemu-riscv@nongnu.org; Mon, 26 Nov 2018 17:59:22 -0500
+Received: from mail-lf1-x143.google.com ([2a00:1450:4864:20::143]:43036)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <groeck7@gmail.com>)
-	id 1gROVU-0006ko-An; Mon, 26 Nov 2018 16:33:29 -0500
-Received: by mail-pg1-x543.google.com with SMTP id g189so6779960pgc.5;
-	Mon, 26 Nov 2018 13:33:27 -0800 (PST)
+	(Exim 4.71) (envelope-from <alistair23@gmail.com>)
+	id 1gRPqY-0005nl-H7; Mon, 26 Nov 2018 17:59:18 -0500
+Received: by mail-lf1-x143.google.com with SMTP id u18so14916094lff.10;
+	Mon, 26 Nov 2018 14:59:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=sender:date:from:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=byVFESQGdoHWWzeakPNk+l6LNXE9e6v1nFCu8/lqPgE=;
-	b=R7C6Ial7yGHjcVUpaVqOyG/hYP1Q5NXynF9ZsNVcDJa5VeicKZWxJ6C4ZeHbKOhz0j
-	gj7VY8WCGOt5ouAso7iJkPqLHTPX7tlfu5jmIrUjLfhnRuA5qtw1AbVVd2lJLWoSVnJ3
-	quenxISbpojmkGNMZiNSxIr4o0y2GIaZ9G9n9ZdAu6NUQ0EIuNx9IyfATEmaQXnco9v8
-	clas94Ecmp8LbGqiRBzIrE8eQ382dVVJ40c/sOr9imW78qdC1LYyU8jX7J2gbmabLerI
-	uqsM0P4I8AM+pLbVDVzC3FCvoqa4Cl+rxqJfLBrHKfxA1U6z3/DG8w+G8lPjIN2ITJeB
-	Vtwg==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=+tbzPZqrxfbozyNfvEVqW6MXItwMjgYX6JgRsQHMlAs=;
+	b=hXCrQ4NQ81HOWCHapTALOWSgI47k3JnBVJH/wySy/nhftFt05EXP6tKEvbf65fEyoS
+	bhkEE2A35u2osKwEM1fhQjXKCaQP6YnIzidEf/MOf3X9gdQ4A0Hv0lotm+wIcacAgQck
+	1ntegaiNiiwEXxaw65j5I9grHKEuBadH6XYGmwxSpXBnfYxiGnYvoY6cZ8FNLu4Smv0/
+	yEFM01EPjQLFdvjQBsNJXLq3qVj/8eA8uihUKX17jbg1cBHpMvBEPxD4yIAE+Kv+Y3Ie
+	T9nZWnoXzV8CEsco53b8Qlvs4tshPlb8YA/svq7X485IEBDWmjj0TqELTO3nHSwEB6Ie
+	tQqA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:sender:date:from:to:cc:subject:message-id
-	:references:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=byVFESQGdoHWWzeakPNk+l6LNXE9e6v1nFCu8/lqPgE=;
-	b=W1rql+jSH4bhlR95woeGA9f/ANaFYZv8Zaqfyg9Ks7YI3W9ZHAtemWvRpUSY+orfTE
-	HShMojZ+BviYa22C9e54nbRS1yrr7sT2//o3bq72nxcGWKOcsxO1s7OPJAvRoZWQwSjt
-	hLgyZgULBy84L0zbluy9O4ws3BsdyWSPvAmOTQDqDDIEqopz+eIz7+/ap1LAfA9Hana6
-	KjbZckgxjIllRNFDn/tY2ts9QxS/Y3BYmwYBccLb/pp6tJdDYX4nbEbK9UJXCGx+QckZ
-	S53pEVRE+m18vZadmr/jBJnb7mCFuB32ZatDEftP996LNl06QwLp9wGjDHXMrnGjq0j1
-	xRBA==
-X-Gm-Message-State: AGRZ1gLVSrhlnfX3Y5pjZVq8cmDE4OmeCftpPOppfqoCETYLBOOByZw9
-	PRSey2dPGbO9pog164W4oqE=
-X-Google-Smtp-Source: AJdET5ebaKYbOQDEWEWRYojQ236UKRw8e/7AX0UXjwO0sY/UfBhFH3aCpCvzK33w6Q/kEExDK8WkGg==
-X-Received: by 2002:a62:4641:: with SMTP id t62mr28908011pfa.141.1543268006998;
-	Mon, 26 Nov 2018 13:33:26 -0800 (PST)
-Received: from localhost ([2600:1700:e321:62f0:329c:23ff:fee3:9d7c])
-	by smtp.gmail.com with ESMTPSA id
-	l11sm1720874pff.65.2018.11.26.13.33.26
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 26 Nov 2018 13:33:26 -0800 (PST)
-Sender: Guenter Roeck <groeck7@gmail.com>
-Date: Mon, 26 Nov 2018 13:33:25 -0800
-From: Guenter Roeck <linux@roeck-us.net>
-To: Palmer Dabbelt <palmer@sifive.com>
-Cc: abologna@redhat.com, Alistair Francis <Alistair.Francis@wdc.com>,
-	qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair23@gmail.com,
-	logang@deltatee.com
-Message-ID: <20181126213325.GA4937@roeck-us.net>
-References: <84778e31610b0b98aea9b2dec5570a02dbf52180.camel@redhat.com>
-	<mhng-b12cc231-a10a-454f-a088-21932acd8edf@palmer-si-x1c4>
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=+tbzPZqrxfbozyNfvEVqW6MXItwMjgYX6JgRsQHMlAs=;
+	b=KtdDc87tVRtm2IC2wxjwoQXjWTYhqyLasEWk4qLuAIUQTAqla2rZ62ipBKsxEKQjNL
+	1kFqNoCL4tXEszaAKCiJW7jO+2serHE21XLPLSA9XMOR6ceTRfwJffuv84QgvuddfZTo
+	GlscndButjrCRMgty42xk2/LJyr3rlD/pgitD/UiRBmEUHmjMIInTNvTBCXFjoRswdZf
+	r5ymjY5juncVMHl+JPo0xBjEcYlv/4EXHavlE0E/uAt1Pf2lTfWwx2aaOg+CPnj0cDdB
+	wJ7m1GfCiXIqGD5vFo61pw+brHNAigseMkE9ypnyd+hvy4mb/fAkPlw6RDHecaoaWl2d
+	2kcQ==
+X-Gm-Message-State: AGRZ1gIWLKA8sdYOHrR1GpWyCJmEzitsvB8Mk/wfW4ZgdUPbkj1ZQ+B6
+	rxrAn1mWA4Mm+9pCIOY+ATRlkj+U0r7es71X5mc=
+X-Google-Smtp-Source: AJdET5e95VgUZcuthcSNX0NQeLLpjMxKkH+DMPHYngaywVwvVn8OiwxNGXVNiRymx4gSeiUKKyZZ2pGrNDAXibrMJ6o=
+X-Received: by 2002:a19:4e59:: with SMTP id c86mr18005177lfb.132.1543273156985;
+	Mon, 26 Nov 2018 14:59:16 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <mhng-b12cc231-a10a-454f-a088-21932acd8edf@palmer-si-x1c4>
-User-Agent: Mutt/1.5.24 (2015-08-30)
+References: <cover.1542321076.git.alistair.francis@wdc.com>
+	<f1a7d2617c26c1745fafe13bbe3bc3b042c14217.1542321076.git.alistair.francis@wdc.com>
+	<23831afc-0ebf-5802-e8e2-6ce48dd340f9@linaro.org>
+	<CAKmqyKP5cCRZujTm+OvoNZWNwPhJirPLA7PjurbovnN8RYCcgQ@mail.gmail.com>
+	<8bacdaca-94c2-d2c7-3af7-b98517a98b64@linaro.org>
+In-Reply-To: <8bacdaca-94c2-d2c7-3af7-b98517a98b64@linaro.org>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Mon, 26 Nov 2018 14:58:50 -0800
+Message-ID: <CAKmqyKM-+HDbUGNjZjS5f0HaqzOpsms3j3+wVgo7gjvL-JT0CQ@mail.gmail.com>
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
+	"qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+	qemu-riscv@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::543
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH for-3.2 v7 0/6] Connect a PCIe
- host and graphics support to RISC-V
+X-Received-From: 2a00:1450:4864:20::143
+Subject: Re: [Qemu-riscv] [Qemu-devel] [RFC v1 15/23] riscv: tcg-target: Add
+ branch and jump instructions
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -76,81 +70,75 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Nov 2018 21:33:35 -0000
+X-List-Received-Date: Mon, 26 Nov 2018 22:59:23 -0000
 
-On Mon, Nov 26, 2018 at 11:34:58AM -0800, Palmer Dabbelt wrote:
-> On Thu, 22 Nov 2018 02:59:18 PST (-0800), abologna@redhat.com wrote:
-> > On Wed, 2018-11-21 at 17:02 +0000, Alistair Francis wrote:
-> >> V7:
-> >>  - Fix the GPEX memory mapping thanks to Bin Meng
-> >>  - Fix the interrupt mapping thanks to Logan Gunthorpe
+On Tue, Nov 20, 2018 at 11:40 PM Richard Henderson
+<richard.henderson@linaro.org> wrote:
+>
+> On 11/21/18 12:49 AM, Alistair Francis wrote:
+> > On Fri, Nov 16, 2018 at 1:14 AM Richard Henderson
+> > <richard.henderson@linaro.org> wrote:
 > >>
-> > [...]
+> >> On 11/15/18 11:36 PM, Alistair Francis wrote:
+> >>> +static void tcg_out_brcond(TCGContext *s, TCGCond cond, TCGReg arg1,
+> >>> +                           TCGReg arg2, TCGLabel *l)
+> >>> +{
+> >>> +    RISCVInsn op = tcg_brcond_to_riscv[cond].op;
+> >>> +    bool swap = tcg_brcond_to_riscv[cond].swap;
+> >>> +
+> >>> +    tcg_out_opc_branch(s, op, swap ? arg2 : arg1, swap ? arg1 : arg2, 0);
 > >>
-> >> Alistair Francis (6):
-> >>   hw/riscv/virt: Increase the number of interrupts
-> >>   hw/riscv/virt: Adjust memory layout spacing
-> >>   hw/riscv/virt: Connect the gpex PCIe
-> >>   riscv: Enable VGA and PCIE_VGA
-> >>   hw/riscv/sifive_u: Connect the Xilinx PCIe
-> >>   hw/riscv/virt: Connect a VirtIO net PCIe device
+> >> You might want to tcg_debug_assert(op != 0) here.
+> >>
+> >>> +    if (l->has_value) {
+> >>> +        reloc_sbimm12(s->code_ptr - 1, l->u.value_ptr);
+> >>
+> >> I'm concerned about the conditional branch range.  +-4K isn't much to work
+> >> with.  The minimum we have for other hosts is +-32K.
+> >>
+> >> We have two options: (1) greatly reduce the max size of the TB for this host;
+> >> (2) be prepared to emit a 2 insn sequence: conditional branch across
+> >> unconditional branch, with forward branches that turn out to be small patched
+> >> with a nop.
+> >>
+> >> FWIW, the first case would be done via modification of tcg_op_buf_full.  You
+> >> might have to go as low as 500 opcodes, I'm not sure.
 > >
-> > Using QEMU master + these patches, libvirt master + my own patches,
-> > a disk image from [1] and the bbl from [2], I was able to run a pure
-> > PCI RISC-V guest, including connecting to it through ssh and
-> > performing a system update using dnf; based on these results, the
-> > series gets a big old
-> >
-> >   Tested-by: Andrea Bolognani <abologna@redhat.com>
-> >
-> >
-> > [1] https://fedora-riscv.tranquillity.se/koji/
-> >     Unfortunately the site is broken at the moment :(
-> 
-> FWIW, I get my images from here
-> 
->     https://fedorapeople.org/groups/risc-v/disk-images/
-> 
-> which is linked to from the Fedora wiki
-> 
->     https://fedoraproject.org/wiki/Architectures/RISC-V/Disk_images
-> 
-> the stage4 there is quite old (April, 2018), is yours newer?  I'm having some 
-> problems updating my disk image and since I'm not a Fedora user I have no idea 
-> what's going on.
-> 
-> > [2] https://fedorapeople.org/groups/risc-v/disk-images/
-> >     PCI support is included in the bbl now! \o/
-> 
-> Great!  I've yet to figure out how to get all the PCI stuff working, but I was 
-> trying to go with a virgl-based GPU which I suspect is broken for other 
-> reasons.  What sort of devices did you attach?
+> > How do we do option 2?
+>
+> If l->has_value, just check the actual range.  But of course backward branching
+> isn't that common in tcg generated code.  Most branches within the TB are short
+> forward branches, but we also don't know how short is short.
+>
+> But every TB begins with a test of env->exit_code and a conditional branch to
+> the end of the block, where we place some code to return to the main loop and
+> return the pointer to the TB at which we exited.  Thus every TB has a branch
+> that spans the size of the entire TB.
+>
+> So, invent (or repurpose) an R_RISCV_FOO value.  It doesn't matter which
+> because it's private within tcg/riscv/.  Just add some commentary.  (See e.g.
+> tcg/sparc/ and its use of R_SPARC_13.)
+>
+> While generating code, emit the conditional branch as normal; leave the unknown
+> destination 0 for now.  Emit a nop as the second insn.
+>
+> When resolving R_RISCV_FOO, if the conditional branch is in range, great!  Just
+> patch it.  If it is out of range, then you need to edit the conditional branch
+> to reverse the condition (insn ^ (1 << 12)) and branch to pc+8, i.e. over the
+> next instruction.  Which was a nop during generation, but you will now install
+> jal r0,dest going to the real destination.
 
-FWIW, here is my list of tests.
+Ok, I think I have done this correctly. I have something that compiles and runs.
 
-Building riscv:virt:defconfig:initrd ... running ....... passed
-Building riscv:virt:defconfig:virtio-blk:rootfs ... running ........ passed
-Building riscv:virt:defconfig:virtio:rootfs ... running ........ passed
-Building riscv:virt:defconfig:virtio-pci:rootfs ... running ........ passed
-Building riscv:virt:defconfig:mmc:rootfs ... running ........ passed
-Building riscv:virt:defconfig:nvme:rootfs ... running ........ passed
-Building riscv:virt:defconfig:usb-ohci:rootfs ... running ........ passed
-Building riscv:virt:defconfig:usb-ehci:rootfs ... running ........ passed
-Building riscv:virt:defconfig:usb-xhci:rootfs ... running ......... passed
-Building riscv:virt:defconfig:usb-uas-ehci:rootfs ... running ......... passed
-Building riscv:virt:defconfig:usb-uas-xhci:rootfs ... running ......... passed
-Building riscv:virt:defconfig:scsi[53C810]:rootfs ... running ........... passed
-Building riscv:virt:defconfig:scsi[53C895A]:rootfs ... running ......... passed
-Building riscv:virt:defconfig:scsi[AM53C974]:rootfs ... skipped
-Building riscv:virt:defconfig:scsi[DC395]:rootfs ... skipped
-Building riscv:virt:defconfig:scsi[MEGASAS]:rootfs ... running ......... passed
-Building riscv:virt:defconfig:scsi[MEGASAS2]:rootfs ... running ........ passed
-Building riscv:virt:defconfig:scsi[FUSION]:rootfs ... running ....... passed
-Building riscv:virt:defconfig:scsi[virtio]:rootfs ... running ....... passed
-Building riscv:virt:defconfig:scsi[virtio-pci]:rootfs ... running ........ passed
+I'll send a second RFC out sometime this week. It won't be based on
+your latest patches and it's still missing some things but I want to
+keep this moving along.
 
-The skipped tests work as well, but the emulation is flaky and fails once
-in a while. This is obviously with usb enabled.
+Thanks so much for your help Richard!
 
-Guenter
+Alistair
+
+>
+>
+> r~
 
