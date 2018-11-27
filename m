@@ -1,64 +1,48 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gRPqe-0007Pm-Ls
-	for mharc-qemu-riscv@gnu.org; Mon, 26 Nov 2018 17:59:24 -0500
-Received: from eggs.gnu.org ([2001:4830:134:3::10]:41857)
+	id 1gRcg3-0001Zv-Dj
+	for mharc-qemu-riscv@gnu.org; Tue, 27 Nov 2018 07:41:19 -0500
+Received: from eggs.gnu.org ([2001:4830:134:3::10]:52283)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1gRPqc-0007NX-15
-	for qemu-riscv@nongnu.org; Mon, 26 Nov 2018 17:59:22 -0500
+	(envelope-from <abologna@redhat.com>) id 1gRcfx-0001UZ-Qe
+	for qemu-riscv@nongnu.org; Tue, 27 Nov 2018 07:41:17 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1gRPqa-0005oc-L4
-	for qemu-riscv@nongnu.org; Mon, 26 Nov 2018 17:59:22 -0500
-Received: from mail-lf1-x143.google.com ([2a00:1450:4864:20::143]:43036)
-	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <alistair23@gmail.com>)
-	id 1gRPqY-0005nl-H7; Mon, 26 Nov 2018 17:59:18 -0500
-Received: by mail-lf1-x143.google.com with SMTP id u18so14916094lff.10;
-	Mon, 26 Nov 2018 14:59:18 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=+tbzPZqrxfbozyNfvEVqW6MXItwMjgYX6JgRsQHMlAs=;
-	b=hXCrQ4NQ81HOWCHapTALOWSgI47k3JnBVJH/wySy/nhftFt05EXP6tKEvbf65fEyoS
-	bhkEE2A35u2osKwEM1fhQjXKCaQP6YnIzidEf/MOf3X9gdQ4A0Hv0lotm+wIcacAgQck
-	1ntegaiNiiwEXxaw65j5I9grHKEuBadH6XYGmwxSpXBnfYxiGnYvoY6cZ8FNLu4Smv0/
-	yEFM01EPjQLFdvjQBsNJXLq3qVj/8eA8uihUKX17jbg1cBHpMvBEPxD4yIAE+Kv+Y3Ie
-	T9nZWnoXzV8CEsco53b8Qlvs4tshPlb8YA/svq7X485IEBDWmjj0TqELTO3nHSwEB6Ie
-	tQqA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=+tbzPZqrxfbozyNfvEVqW6MXItwMjgYX6JgRsQHMlAs=;
-	b=KtdDc87tVRtm2IC2wxjwoQXjWTYhqyLasEWk4qLuAIUQTAqla2rZ62ipBKsxEKQjNL
-	1kFqNoCL4tXEszaAKCiJW7jO+2serHE21XLPLSA9XMOR6ceTRfwJffuv84QgvuddfZTo
-	GlscndButjrCRMgty42xk2/LJyr3rlD/pgitD/UiRBmEUHmjMIInTNvTBCXFjoRswdZf
-	r5ymjY5juncVMHl+JPo0xBjEcYlv/4EXHavlE0E/uAt1Pf2lTfWwx2aaOg+CPnj0cDdB
-	wJ7m1GfCiXIqGD5vFo61pw+brHNAigseMkE9ypnyd+hvy4mb/fAkPlw6RDHecaoaWl2d
-	2kcQ==
-X-Gm-Message-State: AGRZ1gIWLKA8sdYOHrR1GpWyCJmEzitsvB8Mk/wfW4ZgdUPbkj1ZQ+B6
-	rxrAn1mWA4Mm+9pCIOY+ATRlkj+U0r7es71X5mc=
-X-Google-Smtp-Source: AJdET5e95VgUZcuthcSNX0NQeLLpjMxKkH+DMPHYngaywVwvVn8OiwxNGXVNiRymx4gSeiUKKyZZ2pGrNDAXibrMJ6o=
-X-Received: by 2002:a19:4e59:: with SMTP id c86mr18005177lfb.132.1543273156985;
-	Mon, 26 Nov 2018 14:59:16 -0800 (PST)
-MIME-Version: 1.0
-References: <cover.1542321076.git.alistair.francis@wdc.com>
-	<f1a7d2617c26c1745fafe13bbe3bc3b042c14217.1542321076.git.alistair.francis@wdc.com>
-	<23831afc-0ebf-5802-e8e2-6ce48dd340f9@linaro.org>
-	<CAKmqyKP5cCRZujTm+OvoNZWNwPhJirPLA7PjurbovnN8RYCcgQ@mail.gmail.com>
-	<8bacdaca-94c2-d2c7-3af7-b98517a98b64@linaro.org>
-In-Reply-To: <8bacdaca-94c2-d2c7-3af7-b98517a98b64@linaro.org>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 26 Nov 2018 14:58:50 -0800
-Message-ID: <CAKmqyKM-+HDbUGNjZjS5f0HaqzOpsms3j3+wVgo7gjvL-JT0CQ@mail.gmail.com>
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
-	"qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
-	qemu-riscv@nongnu.org
+	(envelope-from <abologna@redhat.com>) id 1gRcfv-0001eF-Uw
+	for qemu-riscv@nongnu.org; Tue, 27 Nov 2018 07:41:13 -0500
+Received: from mx1.redhat.com ([209.132.183.28]:38834)
+	by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.71) (envelope-from <abologna@redhat.com>)
+	id 1gRcfo-0001Oa-1N; Tue, 27 Nov 2018 07:41:04 -0500
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
+	[10.5.11.13])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mx1.redhat.com (Postfix) with ESMTPS id 8A1183082B45;
+	Tue, 27 Nov 2018 12:41:02 +0000 (UTC)
+Received: from kinshicho (unknown [10.43.2.63])
+	by smtp.corp.redhat.com (Postfix) with ESMTPS id 02509608E0;
+	Tue, 27 Nov 2018 12:41:00 +0000 (UTC)
+Message-ID: <8806f4268a13af0a5fe73295a5d496c4809394d7.camel@redhat.com>
+From: Andrea Bolognani <abologna@redhat.com>
+To: Palmer Dabbelt <palmer@sifive.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>, qemu-devel@nongnu.org, 
+	qemu-riscv@nongnu.org, alistair23@gmail.com, logang@deltatee.com, 
+	linux@roeck-us.net
+Date: Tue, 27 Nov 2018 13:40:59 +0100
+In-Reply-To: <mhng-b12cc231-a10a-454f-a088-21932acd8edf@palmer-si-x1c4>
+References: <mhng-b12cc231-a10a-454f-a088-21932acd8edf@palmer-si-x1c4>
 Content-Type: text/plain; charset="UTF-8"
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
-	recognized.
-X-Received-From: 2a00:1450:4864:20::143
-Subject: Re: [Qemu-riscv] [Qemu-devel] [RFC v1 15/23] riscv: tcg-target: Add
- branch and jump instructions
+User-Agent: Evolution 3.30.2 (3.30.2-2.fc29) 
+Mime-Version: 1.0
+Content-Transfer-Encoding: 7bit
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+	(mx1.redhat.com [10.5.110.45]);
+	Tue, 27 Nov 2018 12:41:02 +0000 (UTC)
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+	[fuzzy]
+X-Received-From: 209.132.183.28
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH for-3.2 v7 0/6] Connect a PCIe
+ host and graphics support to RISC-V
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -70,75 +54,159 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Nov 2018 22:59:23 -0000
+X-List-Received-Date: Tue, 27 Nov 2018 12:41:18 -0000
 
-On Tue, Nov 20, 2018 at 11:40 PM Richard Henderson
-<richard.henderson@linaro.org> wrote:
->
-> On 11/21/18 12:49 AM, Alistair Francis wrote:
-> > On Fri, Nov 16, 2018 at 1:14 AM Richard Henderson
-> > <richard.henderson@linaro.org> wrote:
-> >>
-> >> On 11/15/18 11:36 PM, Alistair Francis wrote:
-> >>> +static void tcg_out_brcond(TCGContext *s, TCGCond cond, TCGReg arg1,
-> >>> +                           TCGReg arg2, TCGLabel *l)
-> >>> +{
-> >>> +    RISCVInsn op = tcg_brcond_to_riscv[cond].op;
-> >>> +    bool swap = tcg_brcond_to_riscv[cond].swap;
-> >>> +
-> >>> +    tcg_out_opc_branch(s, op, swap ? arg2 : arg1, swap ? arg1 : arg2, 0);
-> >>
-> >> You might want to tcg_debug_assert(op != 0) here.
-> >>
-> >>> +    if (l->has_value) {
-> >>> +        reloc_sbimm12(s->code_ptr - 1, l->u.value_ptr);
-> >>
-> >> I'm concerned about the conditional branch range.  +-4K isn't much to work
-> >> with.  The minimum we have for other hosts is +-32K.
-> >>
-> >> We have two options: (1) greatly reduce the max size of the TB for this host;
-> >> (2) be prepared to emit a 2 insn sequence: conditional branch across
-> >> unconditional branch, with forward branches that turn out to be small patched
-> >> with a nop.
-> >>
-> >> FWIW, the first case would be done via modification of tcg_op_buf_full.  You
-> >> might have to go as low as 500 opcodes, I'm not sure.
-> >
-> > How do we do option 2?
->
-> If l->has_value, just check the actual range.  But of course backward branching
-> isn't that common in tcg generated code.  Most branches within the TB are short
-> forward branches, but we also don't know how short is short.
->
-> But every TB begins with a test of env->exit_code and a conditional branch to
-> the end of the block, where we place some code to return to the main loop and
-> return the pointer to the TB at which we exited.  Thus every TB has a branch
-> that spans the size of the entire TB.
->
-> So, invent (or repurpose) an R_RISCV_FOO value.  It doesn't matter which
-> because it's private within tcg/riscv/.  Just add some commentary.  (See e.g.
-> tcg/sparc/ and its use of R_SPARC_13.)
->
-> While generating code, emit the conditional branch as normal; leave the unknown
-> destination 0 for now.  Emit a nop as the second insn.
->
-> When resolving R_RISCV_FOO, if the conditional branch is in range, great!  Just
-> patch it.  If it is out of range, then you need to edit the conditional branch
-> to reverse the condition (insn ^ (1 << 12)) and branch to pc+8, i.e. over the
-> next instruction.  Which was a nop during generation, but you will now install
-> jal r0,dest going to the real destination.
+On Mon, 2018-11-26 at 11:34 -0800, Palmer Dabbelt wrote:
+> FWIW, I get my images from here
+> 
+>     https://fedorapeople.org/groups/risc-v/disk-images/
+> 
+> which is linked to from the Fedora wiki
+> 
+>     https://fedoraproject.org/wiki/Architectures/RISC-V/Disk_images
+> 
+> the stage4 there is quite old (April, 2018), is yours newer?  I'm having some 
+> problems updating my disk image and since I'm not a Fedora user I have no idea 
+> what's going on.
 
-Ok, I think I have done this correctly. I have something that compiles and runs.
+Yeah, we have nightly built images now - they come in several
+flavors, even!
 
-I'll send a second RFC out sometime this week. It won't be based on
-your latest patches and it's still missing some things but I want to
-keep this moving along.
+  http://185.97.32.145/koji/tasks?state=closed&view=flat&method=createAppliance&order=-id
 
-Thanks so much for your help Richard!
+Note that there are some issues with the server configuration and
+the HSTS preload list shipped with browsers not playing nice with
+each other, so you'll have to tweak URLs a bit before you can
+actually download images, basically
 
-Alistair
+  s,https://fedora-riscv.tranquillity.se,http://185.97.32.145,
 
->
->
-> r~
+I wonder if it even makes sense to keep the old stage4 images
+around... And someone should definitely sweep through the wiki
+and make sure we don't point to obsolete information and all URLs
+are up to date. Maybe I should create that Fedora Account after
+all O:-)
+
+> > [2] https://fedorapeople.org/groups/risc-v/disk-images/
+> >     PCI support is included in the bbl now! \o/
+> 
+> Great!  I've yet to figure out how to get all the PCI stuff working, but I was 
+> trying to go with a virgl-based GPU which I suspect is broken for other 
+> reasons.  What sort of devices did you attach?
+
+I just tried today, and virtio-gpu doesn't work for me either:
+during boot I get
+
+  [drm] radeon kernel modesetting enabled.
+  [drm] pci: virtio-gpu-pci detected at 0000:00:05.0
+  [drm] virgl 3d acceleration not supported by host
+  [TTM] Zone  kernel: Available graphics memory: 993416 kiB
+  [TTM] Initializing pool allocator
+  [TTM] Initializing DMA pool allocator
+  [drm] number of scanouts: 1
+  [drm] number of cap sets: 0
+  ------------[ cut here ]------------
+  WARNING: CPU: 3 PID: 1 at lib/scatterlist.c:275 __sg_alloc_table+0xba/0xbe
+  Modules linked in:
+  CPU: 3 PID: 1 Comm: swapper/0 Not tainted 4.19.0-rc8 #1
+  Call Trace:
+  [<ffffffe0000383ec>] walk_stackframe+0x0/0xa0
+  [<ffffffe000038588>] show_stack+0x2a/0x34
+  [<ffffffe0006b12b2>] dump_stack+0x62/0x7c
+  [<ffffffe00003c498>] __warn+0xd2/0xe4
+  [<ffffffe00003c544>] warn_slowpath_null+0x30/0x3e
+  [<ffffffe0002a1646>] __sg_alloc_table+0xba/0xbe
+  [<ffffffe0002a18c8>] sg_alloc_table+0x28/0xa6
+  [<ffffffe0002a1a1a>] __sg_alloc_table_from_pages+0xd4/0x1da
+  [<ffffffe0002a1b30>] sg_alloc_table_from_pages+0x10/0x18
+  [<ffffffe00042c87c>] virtio_gpu_object_get_sg_table+0x90/0xa6
+  [<ffffffe00042bdfc>] virtio_gpu_object_attach+0x12c/0x14c
+  [<ffffffe00042a1aa>] virtio_gpufb_create+0xe4/0x1c0
+  [<ffffffe0003345f2>] __drm_fb_helper_initial_config_and_unlock+0x198/0x334
+  [<ffffffe000334c5a>] drm_fb_helper_initial_config+0x2e/0x3a
+  [<ffffffe00042a3f6>] virtio_gpu_fbdev_init+0xa6/0xce
+  [<ffffffe000429556>] virtio_gpu_driver_load+0x36e/0x3be
+  [<ffffffe00033a932>] drm_dev_register+0xfe/0x162
+  [<ffffffe000429968>] drm_virtio_init+0x48/0x158
+  [<ffffffe000429164>] virtio_gpu_probe+0x32/0x40
+  [<ffffffe0002f7e58>] virtio_dev_probe+0x10e/0x196
+  [<ffffffe00043546c>] really_probe+0x17e/0x1ea
+  [<ffffffe000435654>] driver_probe_device+0x7a/0x90
+  [<ffffffe000435702>] __driver_attach+0x98/0x9a
+  [<ffffffe000433bc2>] bus_for_each_dev+0x4a/0x72
+  [<ffffffe000434f28>] driver_attach+0x1a/0x22
+  [<ffffffe000434b06>] bus_add_driver+0x156/0x1b8
+  [<ffffffe000435c88>] driver_register+0x3a/0xd0
+  [<ffffffe0002f7f00>] register_virtio_driver+0x20/0x2e
+  [<ffffffe000012d92>] virtio_gpu_driver_init+0x18/0x20
+  [<ffffffe00003664a>] do_one_initcall+0x2c/0x10a
+  [<ffffffe000000a90>] kernel_init_freeable+0x11e/0x1ae
+  [<ffffffe0006c2304>] kernel_init+0x12/0xf0
+  [<ffffffe000037472>] ret_from_exception+0x0/0xc
+  ---[ end trace 161c50bff518fcd6 ]---
+  [drm] Initialized virtio_gpu 0.0.1 0 for virtio5 on minor 0
+
+and the graphical console is not initialized.
+
+The libvirt guest XML I'm using is
+
+  <domain type='qemu'>
+    <name>riscv</name>
+    <memory unit='GiB'>2</memory>
+    <vcpu>4</vcpu>
+    <os>
+      <type arch='riscv64' machine='virt'>hvm</type>
+      <kernel>/var/lib/libvirt/images/riscv.bbl</kernel>
+      <cmdline>root=/dev/vda1</cmdline>
+    </os>
+    <devices>
+      <emulator>/usr/bin/qemu-system-riscv64</emulator>
+      <disk type='file' device='disk'>
+        <driver name='qemu' type='raw'/>
+        <source file='/var/lib/libvirt/images/riscv.raw'/>
+        <target dev='vda' bus='virtio'/>
+        <address type='pci' domain='0x0000' bus='0x00' slot='0x01' function='0x0'/>
+      </disk>
+      <controller type='pci' model='pcie-root'/>
+      <controller type='virtio-serial'>
+        <address type='pci' domain='0x0000' bus='0x00' slot='0x02' function='0x0'/>
+      </controller>
+      <interface type='network'>
+        <source network='default'/>
+        <model type='virtio'/>
+        <address type='pci' domain='0x0000' bus='0x00' slot='0x03' function='0x0'/>
+      </interface>
+      <serial type='pty'/>
+      <channel type='unix'>
+        <target type='virtio' name='org.qemu.guest_agent.0'/>
+      </channel>
+      <graphics type='spice'/>
+      <video>
+        <model type='virtio'/>
+        <address type='pci' domain='0x0000' bus='0x00' slot='0x04' function='0x0'/>
+      </video>
+      <memballoon model='virtio'>
+        <address type='pci' domain='0x0000' bus='0x00' slot='0x05' function='0x0'/>
+      </memballoon>
+      <rng model='virtio'>
+        <backend model='random'>/dev/urandom</backend>
+        <address type='pci' domain='0x0000' bus='0x00' slot='0x06' function='0x0'/>
+      </rng>
+    </devices>
+  </domain>
+
+but you're going to need a libvirt built from
+
+  https://github.com/andreabolognani/libvirt/tree/riscv-pci
+
+in order to actually use it.
+
+I think the BBL I'm using doesn't have ballooning support, and I
+haven't bothered trying it either, but as reported earlier everything
+else (disk, networking, RNG, shutdown via qemu-guest-agent) works
+just fine.
+
+-- 
+Andrea Bolognani / Red Hat / Virtualization
+
 
