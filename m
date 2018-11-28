@@ -1,97 +1,112 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gRmel-0001ep-GX
-	for mharc-qemu-riscv@gnu.org; Tue, 27 Nov 2018 18:20:39 -0500
-Received: from eggs.gnu.org ([2001:4830:134:3::10]:59503)
+	id 1gRnnv-00068I-0z
+	for mharc-qemu-riscv@gnu.org; Tue, 27 Nov 2018 19:34:11 -0500
+Received: from eggs.gnu.org ([2001:4830:134:3::10]:44779)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <agraf@suse.de>) id 1gRlak-0005Or-37
-	for qemu-riscv@nongnu.org; Tue, 27 Nov 2018 17:12:27 -0500
+	(envelope-from <prvs=863bfe0f3=Alistair.Francis@wdc.com>)
+	id 1gRnns-00065i-3U
+	for qemu-riscv@nongnu.org; Tue, 27 Nov 2018 19:34:08 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <agraf@suse.de>) id 1gRlaj-0007qB-4J
-	for qemu-riscv@nongnu.org; Tue, 27 Nov 2018 17:12:26 -0500
-Received: from mx2.suse.de ([195.135.220.15]:35076 helo=mx1.suse.de)
+	(envelope-from <prvs=863bfe0f3=Alistair.Francis@wdc.com>)
+	id 1gRnno-000197-Od
+	for qemu-riscv@nongnu.org; Tue, 27 Nov 2018 19:34:07 -0500
+Received: from esa5.hgst.iphmx.com ([216.71.153.144]:35350)
 	by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.71) (envelope-from <agraf@suse.de>)
-	id 1gRlac-0007mR-1h; Tue, 27 Nov 2018 17:12:18 -0500
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
-	by mx1.suse.de (Postfix) with ESMTP id 6A775AFBC;
-	Tue, 27 Nov 2018 22:12:15 +0000 (UTC)
-To: Alistair Francis <alistair23@gmail.com>, Palmer Dabbelt <palmer@sifive.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>,
-	"qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
-	qemu-riscv@nongnu.org
-References: <CAKmqyKMdNs4etff7rc0vDy_tmZf5deP1Geu0GchkENu+em5=+w@mail.gmail.com>
-	<mhng-b345219b-56ea-4aee-b25e-95c762c54b49@palmer-si-x1c4>
-	<CAKmqyKPtn-C5rm3ggj5CvAAXh+Gq=u8YDh1S8Wmsb=tsLjcsXA@mail.gmail.com>
-From: Alexander Graf <agraf@suse.de>
-Openpgp: preference=signencrypt
-Autocrypt: addr=agraf@suse.de; prefer-encrypt=mutual; keydata=
-	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
-Message-ID: <005a50f1-8270-ee52-d79e-321b03d841e4@suse.de>
-Date: Tue, 27 Nov 2018 23:12:13 +0100
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:60.0)
-	Gecko/20100101 Thunderbird/60.3.1
-MIME-Version: 1.0
-In-Reply-To: <CAKmqyKPtn-C5rm3ggj5CvAAXh+Gq=u8YDh1S8Wmsb=tsLjcsXA@mail.gmail.com>
-Content-Type: text/plain; charset=utf-8
+	(Exim 4.71) (envelope-from <prvs=863bfe0f3=Alistair.Francis@wdc.com>)
+	id 1gRnno-00017n-Bb; Tue, 27 Nov 2018 19:34:04 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+	d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+	t=1543365244; x=1574901244;
+	h=from:to:cc:subject:date:message-id:
+	content-transfer-encoding:mime-version;
+	bh=WCxmBLMVhSjKDDC6sFrVyJp8eOLouck6ZJASeVLSblE=;
+	b=ohO+R2I4rKE3EAmORd8BEuFLbry9EpB1Mhz6D44IKpMVcjSs/7sgLdyo
+	kTSM/DHJFOv8oVEgyhmwWzfRuHz4Q9KNlw/sL1XZvdX/zOdPLrNm3LWPX
+	zTBxuOmnFgMhG5tk3MdZSfQZ6WtaBEcEUwsKCXoH7f6WiJSQUutp8eQji
+	yh9612M3sqxDfzfziyWWhsqzOmzSmNm8Roa+tzVPJndx0+n2lrFJD40Yt
+	Mcs4oEzKL3yyJVI+bjCaIZNDG7Wyvt1CjojwN7cfEYWHZokpBxfVe0e9N
+	Ap842yVwwI4J0kt9xY3eYd3Wgam0jA2o0tNYhgblAcSizXfCkKCe0ewnM Q==;
+X-IronPort-AV: E=Sophos;i="5.56,288,1539619200"; d="scan'208";a="96446788"
+Received: from mail-sn1nam02lp0016.outbound.protection.outlook.com (HELO
+	NAM02-SN1-obe.outbound.protection.outlook.com) ([216.32.180.16])
+	by ob1.hgst.iphmx.com with ESMTP; 28 Nov 2018 08:34:01 +0800
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=sharedspace.onmicrosoft.com; s=selector1-wdc-com;
+	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+	bh=BzPcoDG+h8X/LAfh6l6CPSZBKiGovFJdctYlfOOnKMg=;
+	b=cwu6Fy0LBrychQ7Z6IFRtGZH7JNwbxrD9sF2gPo6ELgH6rSEQ0mAJ/TLHQFYQY4U3qWpdwyTUiMNoTw4UQ7F7L+9TdS6Z/JrUg4OI59SaqCp3xvP9f+Oxq8sWtHxJ9NttrtHy0nnSGcn2+74LrF8A4kmPsbAsSnB/c/ExiJIZP8=
+Received: from MWHPR04MB0401.namprd04.prod.outlook.com (10.173.48.18) by
+	MWHPR04MB1104.namprd04.prod.outlook.com (10.174.250.138) with Microsoft
+	SMTP
+	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+	15.20.1361.15; Wed, 28 Nov 2018 00:33:59 +0000
+Received: from MWHPR04MB0401.namprd04.prod.outlook.com
+	([fe80::d13d:19d3:fc93:2ec5]) by
+	MWHPR04MB0401.namprd04.prod.outlook.com
+	([fe80::d13d:19d3:fc93:2ec5%9]) with mapi id 15.20.1361.019;
+	Wed, 28 Nov 2018 00:33:59 +0000
+From: Alistair Francis <Alistair.Francis@wdc.com>
+To: "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, "qemu-riscv@nongnu.org"
+	<qemu-riscv@nongnu.org>
+CC: Alistair Francis <Alistair.Francis@wdc.com>, "alistair23@gmail.com"
+	<alistair23@gmail.com>, "agraf@suse.de" <agraf@suse.de>
+Thread-Topic: [PATCH v1 1/1] riscv: Ensure the kernel start address is
+	correctly cast
+Thread-Index: AQHUhrINdsGEZPVk4EaV1sAseoYMpg==
+Date: Wed, 28 Nov 2018 00:33:59 +0000
+Message-ID: <e351b95659a0fc50d6f7122552f41d38987bbe86.1543365187.git.alistair.francis@wdc.com>
+Accept-Language: en-US
 Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x (no
-	timestamps) [generic] [fuzzy]
-X-Received-From: 195.135.220.15
-X-Mailman-Approved-At: Tue, 27 Nov 2018 18:20:38 -0500
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v1 1/1] riscv: virt: Cast the
- initrd start address to target bit length
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-mailer: git-send-email 2.19.1
+x-clientproxiedby: BYAPR02CA0007.namprd02.prod.outlook.com
+	(2603:10b6:a02:ee::20) To MWHPR04MB0401.namprd04.prod.outlook.com
+	(2603:10b6:300:70::18)
+authentication-results: spf=none (sender IP is )
+	smtp.mailfrom=Alistair.Francis@wdc.com; 
+x-ms-exchange-messagesentrepresentingtype: 1
+x-originating-ip: [199.255.44.171]
+x-ms-publictraffictype: Email
+x-microsoft-exchange-diagnostics: 1; MWHPR04MB1104;
+	6:vANa3kDapjsv/N+bB7FKYZbBPFCPV/GLRycv7N+/npAFj884doPOYNVZ7CI2GLV+6L1OZshm9d+J1ZZlY9UUyoDE8obkgY/Qk261Ei2NnOOufWwdnCXQ0mxw53kwSZRPzLWs04p8s07Cv1zohp89wINI5JfIh8NzQ7VWi+VYafXtea3kKWYfRmDkfHlCX5ViNWJIoT114uHI10R/rD88ltRP/verBCm2ixlXWhSw+QeeyVAop52BPUfNMi6z04G78eRj0Nsrm/t7RbOLc6mUp819bIz1HsCejvCME3RceVk2FNIBA4l3GPb1ucgJbkvwkxI7FwNw9zXwoItbwTCvXhkOuq0aHVkKReWvQ5p6w4QI3N0JxkCKyoe6W0AY1n/ixCoWsWCtPRCFCSYzIjeeT6PO8l9961CiiOeokfA1dYITvdt9kpGSAcn7oZfckU3rzU8ro/4AETCgDk8Hndmg0A==;
+	5:sq637iZ7Z1fUQ3sWGs5K3oZFNdkZMHuWkvRjPKSBFjlgjzXGQl4noHXLpVNcwrGSb6IIlCScyjRCGkrboWJGthcByz7e932pshUqwd5xdb2BtuH05C3VJHty//HVPVydhhEuDck/cAcJeLPakyKnsK1g6IhGIm5LatQHk49oIfY=;
+	7:npUq134TcixjewFSHOtDFP6cl8pN1U2KKmiG1bpHuCutQiqvLrmPU3BrqPotZIy8J5iA0FIz6V80UtArn4k9ySO1UALOeugTM7F9h9o3VuMS86+lT1iGrw5NEnW/kf6RKCtcQhzRddy8PA13At5suw==
+x-ms-office365-filtering-correlation-id: d7b0fde7-573f-48db-744e-08d654c93034
+x-ms-office365-filtering-ht: Tenant
+x-microsoft-antispam: BCL:0; PCL:0;
+	RULEID:(2390098)(7020095)(4652040)(8989299)(5600074)(711020)(4618075)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(2017052603328)(7153060)(7193020);
+	SRVR:MWHPR04MB1104; 
+x-ms-traffictypediagnostic: MWHPR04MB1104:
+wdcipoutbound: EOP-TRUE
+x-microsoft-antispam-prvs: <MWHPR04MB11040DDD2B7230A4711134D790D10@MWHPR04MB1104.namprd04.prod.outlook.com>
+x-ms-exchange-senderadcheck: 1
+x-exchange-antispam-report-cfa-test: BCL:0; PCL:0;
+	RULEID:(8211001083)(6040522)(2401047)(5005006)(8121501046)(10201501046)(93006095)(93001095)(3002001)(3231443)(944501410)(52105112)(6055026)(148016)(149066)(150057)(6041310)(201703131423095)(201702281528075)(20161123555045)(201703061421075)(201703061406153)(20161123558120)(20161123560045)(20161123564045)(20161123562045)(201708071742011)(7699051)(76991095);
+	SRVR:MWHPR04MB1104; BCL:0; PCL:0; RULEID:; SRVR:MWHPR04MB1104; 
+x-forefront-prvs: 0870212862
+x-forefront-antispam-report: SFV:NSPM;
+	SFS:(10019020)(346002)(376002)(366004)(396003)(39860400002)(136003)(199004)(189003)(6506007)(52116002)(8936002)(386003)(86362001)(3846002)(6116002)(44832011)(2501003)(106356001)(26005)(5660300001)(486006)(305945005)(99286004)(2616005)(102836004)(105586002)(7736002)(6436002)(36756003)(476003)(6512007)(25786009)(66066001)(14454004)(71190400001)(72206003)(97736004)(68736007)(81156014)(81166006)(4326008)(71200400001)(39060400002)(54906003)(50226002)(316002)(118296001)(186003)(6486002)(8676002)(478600001)(256004)(110136005)(2906002)(53936002);
+	DIR:OUT; SFP:1102; SCL:1; SRVR:MWHPR04MB1104;
+	H:MWHPR04MB0401.namprd04.prod.outlook.com; FPR:; SPF:None;
+	LANG:en; PTR:InfoNoRecords; A:1; MX:1; 
+x-microsoft-antispam-message-info: 6y1EFIhUJrrKsoPOnvC9WNBz040CKJj9zyX4oHdepw3yplpBSg0jwag7hJjBPR7DT4Nf7m0Wf+AaFw37lZi1YLepy207tyfBREd5GsGrMQNJ1MZnUvyExzXAs885S6hrQqEYPu5a87Uuz0/lLvqSQHNhK54K//kdSlKgCt8U9WHbljIAwBijEVcIrJPpa8cT8ddH4zfHryCNhldLu5jKzR5iJlBLHQSBirHRur0+6TzCfXBbx2MDGiDrzMuO0Y5hDBR9tFcaH1yrFHtNtlpzlVbNlNHMT41xD+lSOauGpHQlqxzLqJPPsKnPxWXbU16ytZUyev1fWSMf+0/ikCAkS7MxVL0eglaffsw4sOVMek4=
+spamdiagnosticoutput: 1:99
+spamdiagnosticmetadata: NSPM
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+X-OriginatorOrg: wdc.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: d7b0fde7-573f-48db-744e-08d654c93034
+X-MS-Exchange-CrossTenant-originalarrivaltime: 28 Nov 2018 00:33:59.6532 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MWHPR04MB1104
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+	recognized.
+X-Received-From: 216.71.153.144
+Subject: [Qemu-riscv] [PATCH v1 1/1] riscv: Ensure the kernel start address
+ is correctly cast
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -103,104 +118,85 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Nov 2018 22:12:27 -0000
+X-List-Received-Date: Wed, 28 Nov 2018 00:34:09 -0000
 
+Cast the kernel start address to the target bit length.
 
+This ensures that we calculate the initrd offset to a valid address for
+the architecture.
 
-On 27.11.18 23:05, Alistair Francis wrote:
-> On Mon, Nov 26, 2018 at 11:02 AM Palmer Dabbelt <palmer@sifive.com> wrote:
->>
->> On Wed, 21 Nov 2018 18:09:27 PST (-0800), alistair23@gmail.com wrote:
->>> On Wed, Nov 21, 2018 at 5:58 PM Palmer Dabbelt <palmer@sifive.com> wrote:
->>>>
->>>> On Wed, 21 Nov 2018 14:34:44 PST (-0800), Alistair Francis wrote:
->>>>> Ensure that the calculate initrd offset points to a valid address for
->>>>> the architecture.
->>>>>
->>>>> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
->>>>> Suggested-by: Alexander Graf <agraf@suse.de>
->>>>> Reported-by: Alexander Graf <agraf@suse.de>
->>>>> ---
->>>>>  hw/riscv/virt.c | 7 ++++++-
->>>>>  1 file changed, 6 insertions(+), 1 deletion(-)
->>>>>
->>>>> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
->>>>> index 2b38f89070..4467195fac 100644
->>>>> --- a/hw/riscv/virt.c
->>>>> +++ b/hw/riscv/virt.c
->>>>> @@ -85,7 +85,12 @@ static hwaddr load_initrd(const char *filename, uint64_t mem_size,
->>>>>       * halfway into RAM, and for boards with 256MB of RAM or more we put
->>>>>       * the initrd at 128MB.
->>>>>       */
->>>>> -    *start = kernel_entry + MIN(mem_size / 2, 128 * MiB);
->>>>> +    /* As hwaddr is a 64-bit number we need to cast it for 32-bit */
->>>>> +#if defined(TARGET_RISCV32)
->>>>> +    *start = (uint32_t) (kernel_entry + MIN(mem_size / 2, 128ULL * MiB));
->>>>> +#elif defined(TARGET_RISCV64)
->>>>> +    *start = (uint64_t) (kernel_entry + MIN(mem_size / 2, 128 * MiB));
->>>>> +#endif
->>>>>
->>>>>      size = load_ramdisk(filename, *start, mem_size - *start);
->>>>>      if (size == -1) {
->>>>> --
->>>>> 2.19.1
->>>>
->>>> Maybe I'm missing something, but wouldn't something like
->>>>
->>>>     uint64_t start_unclobbered = kernel_entry + MIN(mem_size / 2, 128ULL * MiB);
->>>>     assert(start_unclobbered == (hwaddr)start_unclobbered);
->>>>     *start = (hwaddr)start_unclobbered;
->>>>
->>>> work better?  That should actually check this all lines up, as opposed to just
->>>> silently truncating a bad address.
->>>
->>> The problem is that hwaddr is always 64-bit.
->>>
->>> Stupidly I forgot about target_ulong, which should work basically the
->>> same as above. An assert() seems a little harsh though, Alex reported
->>> problem was fixed with just a cast.
->>
->> OK, I must be misunderstanding the problem, then.  With the current code, isn't
->> it possible to end up causing start to overflow a 32-bit address?  This would
->> happen if kernel_entry is high, with IIUC is coming from the ELF to load and is
->> therefor user input.  I think that's worth some sort of assertion, as it'll
->> definitely blow up trying to enter the kernel (and possible before that,
->> assuming there's no target memory where it overflows into).
-> 
-> I don't have a setup to reproduce this unfortunately, but Alex
-> reported that he saw start being excessively high (0xffffffff88000000)
-> when loading an initrd.
+Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+Suggested-by: Alexander Graf <agraf@suse.de>
+Reported-by: Alexander Graf <agraf@suse.de>
+---
+ hw/riscv/sifive_e.c | 2 +-
+ hw/riscv/sifive_u.c | 2 +-
+ hw/riscv/spike.c    | 2 +-
+ hw/riscv/virt.c     | 3 ++-
+ 4 files changed, 5 insertions(+), 4 deletions(-)
 
-Sorry for only jumping in so late.
+diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
+index cb513cc3bb..3427b840cb 100644
+--- a/hw/riscv/sifive_e.c
++++ b/hw/riscv/sifive_e.c
+@@ -74,7 +74,7 @@ static const struct MemmapEntry {
+     [SIFIVE_E_DTIM] =3D     { 0x80000000,     0x4000 }
+ };
+=20
+-static uint64_t load_kernel(const char *kernel_filename)
++static target_ulong load_kernel(const char *kernel_filename)
+ {
+     uint64_t kernel_entry, kernel_high;
+=20
+diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+index ef07df2442..5d03a76a28 100644
+--- a/hw/riscv/sifive_u.c
++++ b/hw/riscv/sifive_u.c
+@@ -65,7 +65,7 @@ static const struct MemmapEntry {
+=20
+ #define GEM_REVISION        0x10070109
+=20
+-static uint64_t load_kernel(const char *kernel_filename)
++static target_ulong load_kernel(const char *kernel_filename)
+ {
+     uint64_t kernel_entry, kernel_high;
+=20
+diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
+index 268df04c3c..79cb4c1282 100644
+--- a/hw/riscv/spike.c
++++ b/hw/riscv/spike.c
+@@ -53,7 +53,7 @@ static const struct MemmapEntry {
+     [SPIKE_DRAM] =3D     { 0x80000000,        0x0 },
+ };
+=20
+-static uint64_t load_kernel(const char *kernel_filename)
++static target_ulong load_kernel(const char *kernel_filename)
+ {
+     uint64_t kernel_entry, kernel_high;
+=20
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index 2b38f89070..f4cbf6aa21 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -57,7 +57,7 @@ static const struct MemmapEntry {
+     [VIRT_DRAM] =3D     { 0x80000000,        0x0 },
+ };
+=20
+-static uint64_t load_kernel(const char *kernel_filename)
++static target_ulong load_kernel(const char *kernel_filename)
+ {
+     uint64_t kernel_entry, kernel_high;
+=20
+@@ -85,6 +85,7 @@ static hwaddr load_initrd(const char *filename, uint64_t =
+mem_size,
+      * halfway into RAM, and for boards with 256MB of RAM or more we put
+      * the initrd at 128MB.
+      */
++    /* As hwaddr is a 64-bit number we need to cast it for 32-bit */
+     *start =3D kernel_entry + MIN(mem_size / 2, 128 * MiB);
+=20
+     size =3D load_ramdisk(filename, *start, mem_size - *start);
+--=20
+2.19.1
 
-I didn't actually propose the cast as a solution. The problem must be
-sign extension of some variable in the mix. I didn't find out quickly
-which one it was, so I figured I'd leave it for someone else to debug :).
-
-The issue is very easy to reproduce: Build U-Boot for the virt machine
-for riscv32. Then run it with
-
-  $ qemu-system-riscv32 -M virt -kernel u-boot -nographic -initrd <a file>
-
-You can find the initrd address with
-
-  U-Boot# fdt addr $fdtcontroladdr
-  U-Boot# fdt ls /chosen
-
-Then take a peek at that address:
-
-  U-Boot# md.b <addr>
-
-and you will see that there is nothing there without this patch. The
-reason is that the binary was loaded to a negative address. Again,
-probably some misguided sign extension.
-
-> It looks like the kernel entry address ends up being converted to
-> 0xffffffff80000000 incorrectly instead of being a real overflow.
-
-Yeah, so we seem to cast from int32_t to int64_t somewhere. Can you spot
-where exactly? That's where the bug is :).
-
-
-Alex
 
