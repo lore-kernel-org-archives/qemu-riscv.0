@@ -1,71 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gS6Ez-0000JT-NU
-	for mharc-qemu-riscv@gnu.org; Wed, 28 Nov 2018 15:15:21 -0500
-Received: from eggs.gnu.org ([2001:4830:134:3::10]:42832)
+	id 1gS6Uo-0006dC-C7
+	for mharc-qemu-riscv@gnu.org; Wed, 28 Nov 2018 15:31:42 -0500
+Received: from eggs.gnu.org ([2001:4830:134:3::10]:46238)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <richard.henderson@linaro.org>) id 1gS6Ey-0000JI-CX
-	for qemu-riscv@nongnu.org; Wed, 28 Nov 2018 15:15:20 -0500
+	(envelope-from <richard.henderson@linaro.org>) id 1gS6Uh-0006IT-Nh
+	for qemu-riscv@nongnu.org; Wed, 28 Nov 2018 15:31:40 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <richard.henderson@linaro.org>) id 1gS6Eu-0005f1-Ef
-	for qemu-riscv@nongnu.org; Wed, 28 Nov 2018 15:15:20 -0500
-Received: from mail-pf1-x434.google.com ([2607:f8b0:4864:20::434]:37573)
+	(envelope-from <richard.henderson@linaro.org>) id 1gS6TI-0003Zp-J5
+	for qemu-riscv@nongnu.org; Wed, 28 Nov 2018 15:30:11 -0500
+Received: from mail-pg1-x542.google.com ([2607:f8b0:4864:20::542]:45750)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
 	(Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
-	id 1gS6Eu-0005cw-7E
-	for qemu-riscv@nongnu.org; Wed, 28 Nov 2018 15:15:16 -0500
-Received: by mail-pf1-x434.google.com with SMTP id y126so2828169pfb.4
-	for <qemu-riscv@nongnu.org>; Wed, 28 Nov 2018 12:15:16 -0800 (PST)
+	id 1gS6TI-0003Ys-E1
+	for qemu-riscv@nongnu.org; Wed, 28 Nov 2018 15:30:08 -0500
+Received: by mail-pg1-x542.google.com with SMTP id y4so9992282pgc.12
+	for <qemu-riscv@nongnu.org>; Wed, 28 Nov 2018 12:30:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
 	h=subject:to:cc:references:from:openpgp:message-id:date:user-agent
 	:mime-version:in-reply-to:content-language:content-transfer-encoding;
-	bh=xRGqnAe4HGhYWBnd2IzZ7PQSPkR1OpxBrlwWsfMnwv8=;
-	b=MRgK2fE4KBiG0AT0ad6Ckvnjh68JYqhaKI//LOATET5HHi2kpiG9i0G7OnNW8VMXw3
-	pRglmh2VFK1U9EKsoJZPVc7MZCb0TbkO3ifvRwoZhRjWeVoib0KsWoQ+EHMXWp0wObw+
-	qErIUzUB6w/m4zA04rKSVmO+aNzxhrlxetaiA=
+	bh=gF50fLtUWfh/eGxwE0rYxCp6Dep+O/9Il0xGVURU0+8=;
+	b=DG2v2oFWiOWVas92EkMuoap6290qJ4AtPh+4R1hZKTsg/wZzStn/XseyvLcszKMX+A
+	OqLRRgDIgUUNbS2hLHv2+SH4jnrvbRMHYd3hcnzpZhpFRxhCukwIQ8DdpoRp7yn02v0u
+	8RLPwg4K8mIiudMnr4i2XFLcJAV6mzYgmllJI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
 	:date:user-agent:mime-version:in-reply-to:content-language
 	:content-transfer-encoding;
-	bh=xRGqnAe4HGhYWBnd2IzZ7PQSPkR1OpxBrlwWsfMnwv8=;
-	b=EN5N6vIoUdiUdJNn+1DP+pGRbtqvuFUC5Kqbt8Q4usj7dFxYWf+ttA2ZCM7ORhPKw5
-	QMTbn4coXkVFCWbdhrDgpAf0S05szWnaW1zCcPxcoNKWsOcs3PUzIjpXrXi37qmegugc
-	0tf0/fIKl0haxPkeOHraMRAxe7VcTzHH805RkqzqL9ictQsB4OjGG07eWN00wtFngl2p
-	uUKRYygkZoBroERboIl7hfYOVbCWGLU4RwE0MBKCIayHFKUBHHqM6hDxgucGUzwUaZbj
-	GTJdZKN3JUa5Isf7UtO7RSUHg1wrMlFPorAteidclAibxeUJNms3fSaJYXxr0aDVfcj8
-	5x/g==
-X-Gm-Message-State: AGRZ1gILk5p71preCRGujcrVSgTYLdXRsZDdgfuvg8LLVb4yXSGkz7i9
-	nxzEyf4IT3FeM8r6FyBCRs/lUQ==
-X-Google-Smtp-Source: AJdET5dUOknUmviPhuNabMrvyZjOssZR3xMfGN0tosXnwvYsESazWwI4GtNzZI6XpYqGj24sSTHYQA==
-X-Received: by 2002:a62:1289:: with SMTP id 9mr39429722pfs.102.1543436115236; 
-	Wed, 28 Nov 2018 12:15:15 -0800 (PST)
+	bh=gF50fLtUWfh/eGxwE0rYxCp6Dep+O/9Il0xGVURU0+8=;
+	b=T76oiM6ne55b/hOY3W0IjzsNAXz8JzbYr5cJC28NwXZV1mLJQ/Zf/niqJOgH/oItoA
+	PiHVndwYtl4aIxUmVKiCuJKdbldDC6QtKkHHcFBDavef6fUCFaOL17holvy7MkfOMjPL
+	EjSO8zdEa1SyLmbGwK0/e4mHkPATzow6KzG2HZ43zp8bympOY/vv7ru4xye6Omb9GsTH
+	yBMigaD062nyQ/hm25TWNtXCMiTyuYva6tY64dErsMZAEWR80HLbumyoc7NXJ+Rh1+nM
+	nEVXbWgwZhRz4OqJaGmXh+T4Xxw4l3N1puffArWaJFLEH/7pzaYLmVYFB5ZcOThIQDJD
+	t/gw==
+X-Gm-Message-State: AA+aEWYKZBHUdLKZvQvcHJkET1Yka1d0VY2P+sFNycAmCifGLYXwFaHt
+	KwthwDO9jAU95uY76oDANi1DPg==
+X-Google-Smtp-Source: AFSGD/UIHGPiocO/g1CVjryQwdabODLLaAnXTMCs7ycszV9t3MfjZYOhOG2dC8cjCO/Pw/iIsrMtEw==
+X-Received: by 2002:a62:4255:: with SMTP id p82mr20227032pfa.13.1543437006694; 
+	Wed, 28 Nov 2018 12:30:06 -0800 (PST)
 Received: from cloudburst.twiddle.net (97-113-170-180.tukw.qwest.net.
 	[97.113.170.180]) by smtp.gmail.com with ESMTPSA id
-	p24sm24603395pfk.155.2018.11.28.12.15.14
+	v191sm8258543pgb.77.2018.11.28.12.30.05
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 28 Nov 2018 12:15:14 -0800 (PST)
+	Wed, 28 Nov 2018 12:30:05 -0800 (PST)
 To: Alistair Francis <Alistair.Francis@wdc.com>,
 	"qemu-devel@nongnu.org" <qemu-devel@nongnu.org>,
 	"qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>
 Cc: "alistair23@gmail.com" <alistair23@gmail.com>
 References: <cover.1543352682.git.alistair.francis@wdc.com>
-	<aa41323b013a6c77e28d487d49026df36d60e4c5.1543352682.git.alistair.francis@wdc.com>
+	<46fe7e6cef5c03c2165feaf400cca797ee1b10f9.1543352682.git.alistair.francis@wdc.com>
 From: Richard Henderson <richard.henderson@linaro.org>
 Openpgp: preference=signencrypt
-Message-ID: <ea1df40c-ce6c-16a0-4256-298f32748c6c@linaro.org>
-Date: Wed, 28 Nov 2018 12:15:12 -0800
+Message-ID: <b79b17aa-4c5e-e081-2b1f-0f7649b810c4@linaro.org>
+Date: Wed, 28 Nov 2018 12:30:03 -0800
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
 	Thunderbird/60.3.0
 MIME-Version: 1.0
-In-Reply-To: <aa41323b013a6c77e28d487d49026df36d60e4c5.1543352682.git.alistair.francis@wdc.com>
+In-Reply-To: <46fe7e6cef5c03c2165feaf400cca797ee1b10f9.1543352682.git.alistair.francis@wdc.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::434
-Subject: Re: [Qemu-riscv] [RFC v2 14/24] riscv: tcg-target: Add branch and
- jump instructions
+X-Received-From: 2607:f8b0:4864:20::542
+Subject: Re: [Qemu-riscv] [RFC v2 23/24] WIP: Add missing instructions
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -77,31 +76,114 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Nov 2018 20:15:21 -0000
+X-List-Received-Date: Wed, 28 Nov 2018 20:31:41 -0000
 
-On 11/27/18 1:08 PM, Alistair Francis wrote:
-> +static inline void tcg_out_goto_long(TCGContext *s, tcg_insn_unit *target)
+On 11/27/18 1:10 PM, Alistair Francis wrote:
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> ---
+>  tcg/riscv/tcg-target.inc.c | 77 ++++++++++++++++++++++++++++++++++++++
+>  1 file changed, 77 insertions(+)
+> 
+> diff --git a/tcg/riscv/tcg-target.inc.c b/tcg/riscv/tcg-target.inc.c
+> index 13756f6d0d..b8e9c0e126 100644
+> --- a/tcg/riscv/tcg-target.inc.c
+> +++ b/tcg/riscv/tcg-target.inc.c
+> @@ -606,6 +606,57 @@ static bool tcg_out_sti(TCGContext *s, TCGType type, TCGArg val,
+>      return false;
+>  }
+>  
+> +static void tcg_out_addsub2(TCGContext *s,
+> +                            TCGReg rl, TCGReg rh,
+> +                            TCGReg al, TCGReg ah,
+> +                            TCGReg bl, TCGReg bh,
+> +                            bool cbl, bool cbh, bool is_sub)
 > +{
-> +    ptrdiff_t offset = tcg_pcrel_diff(s, target);
+> +    /* FIXME: This is just copied from MIPS */
+> +    TCGReg th = TCG_REG_TMP1;
 > +
-> +    if (offset == sextract64(offset, 0, 26)) {
-> +        tcg_out_opc_jump(s, OPC_JAL, TCG_REG_ZERO, offset);
-> +    } else {
-> +        tcg_out_movi(s, TCG_TYPE_I64, TCG_REG_TMP0, (intptr_t)target);
-> +        tcg_out_opc_jump(s, OPC_JAL, TCG_REG_TMP0, 0);
+> +    /* If we have a negative constant such that negating it would
+> +       make the high part zero, we can (usually) eliminate one insn.  */
+> +    if (cbl && cbh && bh == -1 && bl != 0) {
+> +        bl = -bl;
+> +        bh = 0;
+> +        is_sub = !is_sub;
 > +    }
-> +}
 > +
-> +static void tcg_out_call_int(TCGContext *s, tcg_insn_unit *arg, bool tail)
-> +{
-> +    TCGReg link = tail ? TCG_REG_ZERO : TCG_REG_RA;
-> +    ptrdiff_t offset = tcg_pcrel_diff(s, arg);
-> +    if (offset == sextract64(offset, 1, 20) << 1) {
+> +    /* By operating on the high part first, we get to use the final
+> +       carry operation to move back from the temporary.  */
+> +    if (!cbh) {
+> +        tcg_out_opc_reg(s, (is_sub ? OPC_SUB : OPC_ADDI), th, ah, bh);
+> +    } else if (bh != 0 || ah == rl) {
+> +        tcg_out_opc_imm(s, OPC_ADDI, th, ah, (is_sub ? -bh : bh));
+> +    } else {
+> +        th = ah;
+> +    }
+> +
+> +    if (is_sub) {
+> +        if (cbl) {
+> +            tcg_out_opc_imm(s, OPC_SLLI, TCG_REG_TMP0, al, bl);
 
-s/20/26/
+s/SLLI/SLTIU/
 
-Seems like there ought to be more shared code between tcg_out_call_int and
-tcg_out_goto_long, really.
+> +            tcg_out_opc_imm(s, OPC_ADDI, rl, al, -bl);
+> +        } else {
+> +            tcg_out_opc_reg(s, OPC_SLLI, TCG_REG_TMP0, al, bl);
+
+s/SLLI/SLTU/
+
+> +            tcg_out_opc_reg(s, OPC_SUB, rl, al, bl);
+> +        }
+> +        tcg_out_opc_reg(s, OPC_SUB, rh, th, TCG_REG_TMP0);
+> +    } else {
+> +        if (cbl) {
+> +            tcg_out_opc_imm(s, OPC_ADDI, rl, al, bl);
+> +            tcg_out_opc_imm(s, OPC_SLLI, TCG_REG_TMP0, rl, bl);
+
+SLTIU
+
+> +        } else if (rl == al && rl == bl) {
+> +            tcg_out_opc_imm(s, OPC_SRLI, TCG_REG_TMP0, al, 31);
+
+s/31/TCG_TARGET_REG_BITS - 1/
+or somesuch.  I think that's an existing mips bug too...
+
+> +            tcg_out_opc_reg(s, OPC_ADDI, rl, al, bl);
+
+ADD, not ADDI.
+
+> +        } else {
+> +            tcg_out_opc_reg(s, OPC_ADDI, rl, al, bl);
+> +            tcg_out_opc_reg(s, OPC_SLLI, TCG_REG_TMP0, rl, (rl == bl ? al : bl));
+
+Similarly.
+
+> +        }
+> +        tcg_out_opc_reg(s, OPC_ADDI, rh, th, TCG_REG_TMP0);
+
+ADD.
+
+> @@ -1537,6 +1604,8 @@ static const TCGTargetOpDef *tcg_target_op_def(TCGOpcode op)
+>      case INDEX_op_ext16s_i32:
+>      case INDEX_op_ext16s_i64:
+>      case INDEX_op_ext32s_i64:
+> +    case INDEX_op_extrl_i64_i32:
+> +    case INDEX_op_extrh_i64_i32:
+
+This belongs in a previous patch.
+
+
+> +    case INDEX_op_add2_i32:
+> +    case INDEX_op_add2_i64:
+> +        return &rZ_rZ_rZ_rZ_rZ_rZ;
+> +
+> +    case INDEX_op_sub2_i32:
+> +    case INDEX_op_sub2_i64:
+> +        return &rZ_rZ_rZ_rZ_rZ_rZ;
+
+Adding 0 with TCG_REG_ZERO is sorta pointless.  You want the I and N
+constraints.  Note that MIPS uses a modified symmetric N that can always be
+negated [-32767, 32767] instead of [-32767, 32768].  Otherwise that first if
+statement doesn't work.
 
 
 r~
