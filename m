@@ -1,71 +1,71 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gS5p3-0008Az-LN
-	for mharc-qemu-riscv@gnu.org; Wed, 28 Nov 2018 14:48:33 -0500
-Received: from eggs.gnu.org ([2001:4830:134:3::10]:59698)
+	id 1gS6Ez-0000JT-NU
+	for mharc-qemu-riscv@gnu.org; Wed, 28 Nov 2018 15:15:21 -0500
+Received: from eggs.gnu.org ([2001:4830:134:3::10]:42832)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <richard.henderson@linaro.org>) id 1gS5oz-00086c-TV
-	for qemu-riscv@nongnu.org; Wed, 28 Nov 2018 14:48:31 -0500
+	(envelope-from <richard.henderson@linaro.org>) id 1gS6Ey-0000JI-CX
+	for qemu-riscv@nongnu.org; Wed, 28 Nov 2018 15:15:20 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <richard.henderson@linaro.org>) id 1gS5ou-00046T-Vo
-	for qemu-riscv@nongnu.org; Wed, 28 Nov 2018 14:48:29 -0500
-Received: from mail-pg1-x52c.google.com ([2607:f8b0:4864:20::52c]:44935)
+	(envelope-from <richard.henderson@linaro.org>) id 1gS6Eu-0005f1-Ef
+	for qemu-riscv@nongnu.org; Wed, 28 Nov 2018 15:15:20 -0500
+Received: from mail-pf1-x434.google.com ([2607:f8b0:4864:20::434]:37573)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
 	(Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
-	id 1gS5ou-00045R-LA
-	for qemu-riscv@nongnu.org; Wed, 28 Nov 2018 14:48:24 -0500
-Received: by mail-pg1-x52c.google.com with SMTP id t13so9946271pgr.11
-	for <qemu-riscv@nongnu.org>; Wed, 28 Nov 2018 11:48:24 -0800 (PST)
+	id 1gS6Eu-0005cw-7E
+	for qemu-riscv@nongnu.org; Wed, 28 Nov 2018 15:15:16 -0500
+Received: by mail-pf1-x434.google.com with SMTP id y126so2828169pfb.4
+	for <qemu-riscv@nongnu.org>; Wed, 28 Nov 2018 12:15:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
 	h=subject:to:cc:references:from:openpgp:message-id:date:user-agent
 	:mime-version:in-reply-to:content-language:content-transfer-encoding;
-	bh=7QhKpK6qxCR4xO5xDzXYBNeDZoP14yX05/DKHVlfsEU=;
-	b=PQo2dDBQh0S69TBZ41m+R/DfqgRdtEzP08p8ySyNKAU93rLWSRcyA66g3BU0xjY1xp
-	AXM5nBAnMI0qaMHzTCpOuZo3XG9G+gZSn8TuZLQ16uVG8Twjs31+qs/0+NuQYguZrK2O
-	fFN8mniC9LwVo4hA/O932mDCpZ/dUGkh1E/wU=
+	bh=xRGqnAe4HGhYWBnd2IzZ7PQSPkR1OpxBrlwWsfMnwv8=;
+	b=MRgK2fE4KBiG0AT0ad6Ckvnjh68JYqhaKI//LOATET5HHi2kpiG9i0G7OnNW8VMXw3
+	pRglmh2VFK1U9EKsoJZPVc7MZCb0TbkO3ifvRwoZhRjWeVoib0KsWoQ+EHMXWp0wObw+
+	qErIUzUB6w/m4zA04rKSVmO+aNzxhrlxetaiA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
 	:date:user-agent:mime-version:in-reply-to:content-language
 	:content-transfer-encoding;
-	bh=7QhKpK6qxCR4xO5xDzXYBNeDZoP14yX05/DKHVlfsEU=;
-	b=sqy6D70lbO6jezb6OyR9c1OTx+tFth0VAMdQ0sj0fpIC+Zr7wMgoiXNWK/tL2Qawa9
-	nwz8vjKawxQHTaThCXR05nmA2TY6AfoxY273RQHJApvBCSol1qSbfVs23gTG2BlMhy7d
-	bsAbNhtelzgg7eXbGKlakDW+aYc2jgbifjfV7n/waWOEEezcZ0AYI/9+sCBdLiX1HMF6
-	D/EKGYx2K7cHXaf7WiUto8qOpF4FPld3Ls354Cs+h7uVG/6nz+8BRJXRKgjMTkDJFI0S
-	vBS4NYpTSwKO63IFffYqm+JAQfJEwrDmEAq+bQdiSb9cct/nR3M1e4n9K7LvgvKZNcOE
-	Hk1Q==
-X-Gm-Message-State: AA+aEWYli+/mhzsiCPHrOIWL2XXSISu6xmc1VqVpiQzUPMSXjtyidauF
-	qUhnQ1ufs+us88KFochQcXolVQ==
-X-Google-Smtp-Source: AFSGD/Wovsj54vdrb/qkWqdKUYq1yTIMO6RWEcECxgrKhVWAhKidSWicXX0Mjrif3gMB8iH1xbAnXQ==
-X-Received: by 2002:a62:32c4:: with SMTP id y187mr2014879pfy.195.1543434502411;
-	Wed, 28 Nov 2018 11:48:22 -0800 (PST)
+	bh=xRGqnAe4HGhYWBnd2IzZ7PQSPkR1OpxBrlwWsfMnwv8=;
+	b=EN5N6vIoUdiUdJNn+1DP+pGRbtqvuFUC5Kqbt8Q4usj7dFxYWf+ttA2ZCM7ORhPKw5
+	QMTbn4coXkVFCWbdhrDgpAf0S05szWnaW1zCcPxcoNKWsOcs3PUzIjpXrXi37qmegugc
+	0tf0/fIKl0haxPkeOHraMRAxe7VcTzHH805RkqzqL9ictQsB4OjGG07eWN00wtFngl2p
+	uUKRYygkZoBroERboIl7hfYOVbCWGLU4RwE0MBKCIayHFKUBHHqM6hDxgucGUzwUaZbj
+	GTJdZKN3JUa5Isf7UtO7RSUHg1wrMlFPorAteidclAibxeUJNms3fSaJYXxr0aDVfcj8
+	5x/g==
+X-Gm-Message-State: AGRZ1gILk5p71preCRGujcrVSgTYLdXRsZDdgfuvg8LLVb4yXSGkz7i9
+	nxzEyf4IT3FeM8r6FyBCRs/lUQ==
+X-Google-Smtp-Source: AJdET5dUOknUmviPhuNabMrvyZjOssZR3xMfGN0tosXnwvYsESazWwI4GtNzZI6XpYqGj24sSTHYQA==
+X-Received: by 2002:a62:1289:: with SMTP id 9mr39429722pfs.102.1543436115236; 
+	Wed, 28 Nov 2018 12:15:15 -0800 (PST)
 Received: from cloudburst.twiddle.net (97-113-170-180.tukw.qwest.net.
 	[97.113.170.180]) by smtp.gmail.com with ESMTPSA id
-	r130sm13869040pfr.48.2018.11.28.11.48.20
+	p24sm24603395pfk.155.2018.11.28.12.15.14
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 28 Nov 2018 11:48:21 -0800 (PST)
+	Wed, 28 Nov 2018 12:15:14 -0800 (PST)
 To: Alistair Francis <Alistair.Francis@wdc.com>,
 	"qemu-devel@nongnu.org" <qemu-devel@nongnu.org>,
 	"qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>
 Cc: "alistair23@gmail.com" <alistair23@gmail.com>
 References: <cover.1543352682.git.alistair.francis@wdc.com>
-	<51221791beb40b25309805b1c76db0004f26f64e.1543352682.git.alistair.francis@wdc.com>
+	<aa41323b013a6c77e28d487d49026df36d60e4c5.1543352682.git.alistair.francis@wdc.com>
 From: Richard Henderson <richard.henderson@linaro.org>
 Openpgp: preference=signencrypt
-Message-ID: <111ab594-64d4-efbd-2ce9-cda600a47abc@linaro.org>
-Date: Wed, 28 Nov 2018 11:48:19 -0800
+Message-ID: <ea1df40c-ce6c-16a0-4256-298f32748c6c@linaro.org>
+Date: Wed, 28 Nov 2018 12:15:12 -0800
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
 	Thunderbird/60.3.0
 MIME-Version: 1.0
-In-Reply-To: <51221791beb40b25309805b1c76db0004f26f64e.1543352682.git.alistair.francis@wdc.com>
+In-Reply-To: <aa41323b013a6c77e28d487d49026df36d60e4c5.1543352682.git.alistair.francis@wdc.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::52c
-Subject: Re: [Qemu-riscv] [RFC v2 11/24] riscv: tcg-target: Add the mov and
- movi instruction
+X-Received-From: 2607:f8b0:4864:20::434
+Subject: Re: [Qemu-riscv] [RFC v2 14/24] riscv: tcg-target: Add branch and
+ jump instructions
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -77,81 +77,31 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Nov 2018 19:48:31 -0000
+X-List-Received-Date: Wed, 28 Nov 2018 20:15:21 -0000
 
 On 11/27/18 1:08 PM, Alistair Francis wrote:
-> +static void tcg_out_movi(TCGContext *s, TCGType type, TCGReg rd,
-> +                         tcg_target_long val)
+> +static inline void tcg_out_goto_long(TCGContext *s, tcg_insn_unit *target)
 > +{
-> +#if TCG_TARGET_REG_BITS == 64
-> +    tcg_target_long lo = sextract64(val, 0, 12);
-> +#else
-> +    tcg_target_long lo = sextract32(val, 0, 12);
-> +#endif
-
-I really think this ifdef should be moved into a helper function.  There are
-quite a number of copies of it throughout.
-
-> +    tcg_target_long hi = val - lo;
-> +    int shift;
-> +    tcg_target_long tmp;
+> +    ptrdiff_t offset = tcg_pcrel_diff(s, target);
 > +
-> +    RISCVInsn add32_op = TCG_TARGET_REG_BITS == 64 ? OPC_ADDIW : OPC_ADDI;
-> +
-> +#if TCG_TARGET_REG_BITS == 64
-> +    ptrdiff_t offset = tcg_pcrel_diff(s, (void *)val);
-> +#endif
-> +
-> +    if (TCG_TARGET_REG_BITS == 32 || val == (int32_t)val) {
-> +        tcg_out_opc_upper(s, OPC_LUI, rd, hi);
-> +        if (lo != 0) {
-> +            tcg_out_opc_imm(s, add32_op, rd, rd, lo);
-> +        }
-> +
-> +        return;
-> +    }
-
-Your reorg has failed to keep the single insn ADDI(W) case.
-
-> +    /* We can only be here if TCG_TARGET_REG_BITS != 32 */
-> +    if (offset == sextract64(offset, 1, 31) << 1) {
-
-The ifdef above won't compile for rv32, because offset is used unconditionally
-here.  Remove the ifdef and allow that to be removed as dead code by the compiler.
-
-> +        tcg_out_opc_upper(s, OPC_AUIPC, rd, 0);
-> +        tcg_out_opc_imm(s, OPC_ADDI, rd, rd, 0);
-> +        reloc_call(s->code_ptr - 2, (tcg_insn_unit *)val);
-> +        return;
-> +    }
-> +
-> +    shift = ctz64(val);
-> +    tmp = val >> shift;
-> +
-> +    if (tmp == sextract64(tmp, 0, 12)) {
-> +        tcg_out_opc_imm(s, OPC_ADDI, rd, TCG_REG_ZERO, 1);
-
-s/1/tmp/
-
-> +        tcg_out_opc_imm(s, OPC_SLLI, rd, rd, ctz64(val));
-> +    } else if (!(val >> 31 == 0 || val >> 31 == -1)) {
-> +        shift = ctz64(hi);
-> +        hi >>= shift;
-> +        tcg_out_movi(s, type, rd, hi);
-> +        tcg_out_opc_imm(s, OPC_SLLI, rd, rd, shift);
-> +        if (lo != 0) {
-> +            tcg_out_opc_imm(s, OPC_ADDI, rd, rd, lo);
-> +        }
+> +    if (offset == sextract64(offset, 0, 26)) {
+> +        tcg_out_opc_jump(s, OPC_JAL, TCG_REG_ZERO, offset);
 > +    } else {
-> +        if (hi != 0) {
-> +            tcg_out_opc_upper(s, OPC_LUI, rd, hi);
-> +        }
-> +        if (lo != 0) {
-> +            tcg_out_opc_imm(s, add32_op, rd, hi == 0 ? TCG_REG_ZERO : rd, lo);
-> +        }
+> +        tcg_out_movi(s, TCG_TYPE_I64, TCG_REG_TMP0, (intptr_t)target);
+> +        tcg_out_opc_jump(s, OPC_JAL, TCG_REG_TMP0, 0);
 > +    }
+> +}
+> +
+> +static void tcg_out_call_int(TCGContext *s, tcg_insn_unit *arg, bool tail)
+> +{
+> +    TCGReg link = tail ? TCG_REG_ZERO : TCG_REG_RA;
+> +    ptrdiff_t offset = tcg_pcrel_diff(s, arg);
+> +    if (offset == sextract64(offset, 1, 20) << 1) {
 
-The final else case is identical with the first if.
+s/20/26/
+
+Seems like there ought to be more shared code between tcg_out_call_int and
+tcg_out_goto_long, really.
 
 
 r~
