@@ -1,71 +1,72 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gS5aU-0004hV-Cj
-	for mharc-qemu-riscv@gnu.org; Wed, 28 Nov 2018 14:33:30 -0500
-Received: from eggs.gnu.org ([2001:4830:134:3::10]:55081)
+	id 1gS5df-0006j5-OO
+	for mharc-qemu-riscv@gnu.org; Wed, 28 Nov 2018 14:36:47 -0500
+Received: from eggs.gnu.org ([2001:4830:134:3::10]:55915)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <richard.henderson@linaro.org>) id 1gS5aS-0004dd-At
-	for qemu-riscv@nongnu.org; Wed, 28 Nov 2018 14:33:28 -0500
+	(envelope-from <richard.henderson@linaro.org>) id 1gS5dd-0006fY-Ul
+	for qemu-riscv@nongnu.org; Wed, 28 Nov 2018 14:36:46 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <richard.henderson@linaro.org>) id 1gS5aQ-0004Xb-FT
-	for qemu-riscv@nongnu.org; Wed, 28 Nov 2018 14:33:28 -0500
-Received: from mail-pf1-x435.google.com ([2607:f8b0:4864:20::435]:44015)
+	(envelope-from <richard.henderson@linaro.org>) id 1gS5da-00078y-Qc
+	for qemu-riscv@nongnu.org; Wed, 28 Nov 2018 14:36:45 -0500
+Received: from mail-pl1-x636.google.com ([2607:f8b0:4864:20::636]:45509)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
 	(Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
-	id 1gS5aO-0004P2-FD
-	for qemu-riscv@nongnu.org; Wed, 28 Nov 2018 14:33:25 -0500
-Received: by mail-pf1-x435.google.com with SMTP id w73so10649761pfk.10
-	for <qemu-riscv@nongnu.org>; Wed, 28 Nov 2018 11:33:18 -0800 (PST)
+	id 1gS5da-00077R-LT
+	for qemu-riscv@nongnu.org; Wed, 28 Nov 2018 14:36:42 -0500
+Received: by mail-pl1-x636.google.com with SMTP id a14so17854636plm.12
+	for <qemu-riscv@nongnu.org>; Wed, 28 Nov 2018 11:36:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
 	h=subject:to:cc:references:from:openpgp:message-id:date:user-agent
 	:mime-version:in-reply-to:content-language:content-transfer-encoding;
-	bh=xdiKauT+lHobMFR1QLDOIxpiqZLOaZqCkJm5bIK0Xp8=;
-	b=QkVbtgStq4txcfv+eixI69t+Z/UM/IhB0AwM9e50xH5Q0rn7Hc606vdSIMmzFO66cX
-	zZLVAZN++XuUBBoRvGjxJTIbONXDW/yujsyXkzkElVfpBLL4BWzQg1SLX9VVEm/hcr6Z
-	MlwC1kuBZ9s696Jhjs5+mZhbPLXFfvLrOQTOI=
+	bh=oZ0r4ol6CCWtfspfh+KkTyfsoihbnd7WMq4KYAudGNI=;
+	b=Mu1HPV08+FaBlV+d3m7uuKjmCXnvrQm35GPowPEHjw3Qsbgx5P4+Ln+w56NzZHbDPy
+	2nOgaSF+jBMtYjZ+2ioxv3wqTCRGCVCt0OoY69QcD9um53KjvkmEBouFojjEovL/rGNy
+	98cOufPkfsPY+/XCX2cjlA61g1dFTutUmIjcU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
 	:date:user-agent:mime-version:in-reply-to:content-language
 	:content-transfer-encoding;
-	bh=xdiKauT+lHobMFR1QLDOIxpiqZLOaZqCkJm5bIK0Xp8=;
-	b=Lsbgs+/B8wWdbS+In6vQPWAYryLoxIfRfryTm51m0R3AjP2IsnXdqcg0b8+sDGkrWS
-	hquCv3QKtI19Oi+KUFiKZEiO3aYm7OManHdblNAxYwxaSpbTP6sYzoeXrsI3ORizbubU
-	jI/MHdWuMvEZo6uCzBezfeT9l4isVDNcwuXhEyeKy7RWT19Q2wn6a0fMAaWSZhirDTHD
-	cVBsSgQTrQdGY49pEmH+Bw1N0dFTJWsp1OAwcNuDqirY7Rn8ezzNC9FRtJ1QEUYs3bOc
-	YtrIF7P/kBjAX3AW/1lmhQ66TMIMm39nuQKjcxyFAHw3uR1Palvx+HmxopU+iNTbD9Jz
-	1AgA==
-X-Gm-Message-State: AA+aEWbW2wDjNfaQvE48TnzypcIyJ6HX4Y+/KVleodyZ0TWP8VgkISud
-	3X6jziNRgYxYeyOMfgqaRrZkZg==
-X-Google-Smtp-Source: AFSGD/XbaBkYJ+JLc3KcqJrpqtGN/uZhY6XuP74TktxXlsK01rx8PXFGFW9412GnxHtp4lxrOyQZuQ==
-X-Received: by 2002:a63:ce50:: with SMTP id r16mr34051737pgi.217.1543433597106;
-	Wed, 28 Nov 2018 11:33:17 -0800 (PST)
+	bh=oZ0r4ol6CCWtfspfh+KkTyfsoihbnd7WMq4KYAudGNI=;
+	b=cq+zooGuuf5iQIyRH8NkFEW6Xx20K38jNYKZ3lOCgpGqfg3I1yOnKAovaNUU7hhbua
+	KgY5w60lgNuc4Ot4pR9xggCIoSoXNyQFVy9PW2CW/9jaC3Gniq5oKG3OhcqeoQRxJwxy
+	OIew2D/4X/3UZkhIfULQYoIVlmLpWGazHYpiAuYjJYD21Y8Qm1VRflrQaYU7XSImcmre
+	vpizITzGNKkBmsE/eeWY1YXO15vxdlRQ+dd8vkt0MYtQsOjvkgegBcvL7PL59V24DGqV
+	pEXoyv7ypbEdIrmEyus0t9LFUq2nurnyWqvs26I7+Y5dFIjIItrKVhOHpABr0MyIrFJa
+	GaYQ==
+X-Gm-Message-State: AA+aEWYHp0EBg1BS/bdjRQ5dTi3jhsjYGe2uWugDiPOcml5PTfHHl2NE
+	OXOWwnC0vCdgXddy3o9YFHsxPg==
+X-Google-Smtp-Source: AFSGD/WCKYlQkQOHlK9UzGCd0wWv+HGwtrPrvav+KobIZy72JQSutWRPPU26aPG5kUZxYX07sigNug==
+X-Received: by 2002:a17:902:76ca:: with SMTP id
+	j10mr37077289plt.144.1543433801346; 
+	Wed, 28 Nov 2018 11:36:41 -0800 (PST)
 Received: from cloudburst.twiddle.net (97-113-170-180.tukw.qwest.net.
-	[97.113.170.180]) by smtp.gmail.com with ESMTPSA id
-	n65-v6sm9699705pfi.185.2018.11.28.11.33.16
+	[97.113.170.180])
+	by smtp.gmail.com with ESMTPSA id h69sm8390423pge.4.2018.11.28.11.36.40
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 28 Nov 2018 11:33:16 -0800 (PST)
+	Wed, 28 Nov 2018 11:36:40 -0800 (PST)
 To: Alistair Francis <Alistair.Francis@wdc.com>,
 	"qemu-devel@nongnu.org" <qemu-devel@nongnu.org>,
 	"qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>
 Cc: "alistair23@gmail.com" <alistair23@gmail.com>
 References: <cover.1543352682.git.alistair.francis@wdc.com>
-	<67303db03721ef2e4d9737379312681543a0ba0c.1543352682.git.alistair.francis@wdc.com>
+	<0ee380a9ce2d7290523b5d06597c74ea14ff4174.1543352682.git.alistair.francis@wdc.com>
 From: Richard Henderson <richard.henderson@linaro.org>
 Openpgp: preference=signencrypt
-Message-ID: <e48d8e2c-3399-06cf-e4bb-fb73f5b1dba1@linaro.org>
-Date: Wed, 28 Nov 2018 11:33:14 -0800
+Message-ID: <d9994150-7232-638a-3519-830544604cac@linaro.org>
+Date: Wed, 28 Nov 2018 11:36:38 -0800
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
 	Thunderbird/60.3.0
 MIME-Version: 1.0
-In-Reply-To: <67303db03721ef2e4d9737379312681543a0ba0c.1543352682.git.alistair.francis@wdc.com>
+In-Reply-To: <0ee380a9ce2d7290523b5d06597c74ea14ff4174.1543352682.git.alistair.francis@wdc.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::435
-Subject: Re: [Qemu-riscv] [RFC v2 07/24] riscv: tcg-target: Add support for
- the constraints
+X-Received-From: 2607:f8b0:4864:20::636
+Subject: Re: [Qemu-riscv] [RFC v2 08/24] riscv: tcg-target: Add the
+ immediate encoders
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -77,19 +78,30 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Nov 2018 19:33:29 -0000
+X-List-Received-Date: Wed, 28 Nov 2018 19:36:46 -0000
 
 On 11/27/18 1:07 PM, Alistair Francis wrote:
-> +    OPC_FENCE_RW_RW = 0x0330000f,
-> +    OPC_FENCE_R_R = 0x0220000f,
-> +    OPC_FENCE_W_R = 0x0120000f,
-> +    OPC_FENCE_R_W = 0x0210000f,
-> +    OPC_FENCE_W_W = 0x0110000f,
-> +    OPC_FENCE_R_RW = 0x0230000f,
-> +    OPC_FENCE_RW_W = 0x0310000f,
+> +void tb_target_set_jmp_target(uintptr_t tc_ptr, uintptr_t jmp_addr,
+> +                              uintptr_t addr)
+> +{
+> +    intptr_t offset = (intptr_t)addr - (intptr_t)jmp_addr;
+> +    tcg_debug_assert(offset == (int32_t)offset);
+> +
+> +    int32_t hi20 = ((offset + 0x800) >> 12) << 12;
+> +    int32_t lo12 = offset - hi20;
+> +
+> +    atomic_set((uint32_t *)jmp_addr, encode_uimm20(hi20));
+> +    atomic_set((uint32_t *)jmp_addr + 4, encode_imm12(lo12));
+> +
+> +    flush_icache_range(jmp_addr, jmp_addr + 8);
+> +}
 
-A full compliment would have 9 alternatives, surely?
-Perhaps better to just fill in the fields when emitting?
+Two atomic_sets do not help.  You want a single 64-bit atomic_set updating both
+insns simultaneously.  But since you're currently setting
+
+> +#define TCG_TARGET_HAS_direct_jump      0
+
+this code isn't used at all.  Better to simply remove it for now.
 
 Otherwise,
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
