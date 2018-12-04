@@ -1,53 +1,57 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gSPyb-0002GO-Hc
-	for mharc-qemu-riscv@gnu.org; Thu, 29 Nov 2018 12:19:45 -0500
-Received: from eggs.gnu.org ([2001:4830:134:3::10]:50707)
+	id 1gUEh3-0001ay-D0
+	for mharc-qemu-riscv@gnu.org; Tue, 04 Dec 2018 12:41:09 -0500
+Received: from eggs.gnu.org ([2001:4830:134:3::10]:55587)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <no-reply@patchew.org>) id 1gSPyY-0002E0-Df
-	for qemu-riscv@nongnu.org; Thu, 29 Nov 2018 12:19:44 -0500
+	(envelope-from <armbru@redhat.com>) id 1gUEba-0004jQ-L0
+	for qemu-riscv@nongnu.org; Tue, 04 Dec 2018 12:35:32 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <no-reply@patchew.org>) id 1gSPyU-0006rJ-Ix
-	for qemu-riscv@nongnu.org; Thu, 29 Nov 2018 12:19:42 -0500
-Resent-Date: Thu, 29 Nov 2018 12:19:42 -0500
-Resent-Message-Id: <E1gSPyU-0006rJ-Ix@eggs.gnu.org>
-Received: from sender-of-o52.zoho.com ([135.84.80.217]:21495)
-	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.71) (envelope-from <no-reply@patchew.org>)
-	id 1gSPyU-0006qx-Bw
-	for qemu-riscv@nongnu.org; Thu, 29 Nov 2018 12:19:38 -0500
-ARC-Seal: i=1; a=rsa-sha256; t=1543505623; cv=none; d=zoho.com; s=zohoarc; 
-	b=kq4ON8QQ6bOcs2skUuZBGfvkgmNz625xa8amJ3bvC6Fz4tKrbJBTPBWPyiexFHnaPhyTfEVUb2whT5piNylyAdYu5c0bade5JJbqndsgDrxJ3Q+CP7ViMpINjv6EBggpDTa4cTeySFxRypRisqqob5w3fmkeJjzUhS/hZHu0LQE=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zoho.com;
-	s=zohoarc; t=1543505623;
-	h=Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:MIME-Version:Message-ID:Reply-To:Subject:To:ARC-Authentication-Results;
-	bh=UyHPEsVnttKFcwGyfG0cDMzhi4HFQ/fQJhb44A0IyBg=; 
-	b=bhIxRgSFGzKf9xASRNsLQmVMOu+3KQRcP1EVKlSSwIuo2v5cDZju2eeg73EL8TiurUILmT/71NFDdTxQmtGA3gQsrzLpHDJCEz2jljqPlOrHkgaecl2U6qfAVZ4SOYwjIyAnSdcAnE8DKG1A27ynpliREJ/ILIqX8ulKxcZ4w/4=
-ARC-Authentication-Results: i=1; mx.zoho.com; dkim=pass  header.i=patchew.org;
-	spf=pass  smtp.mailfrom=no-reply@patchew.org;
-	dmarc=pass header.from=<no-reply@patchew.org>
-	header.from=<no-reply@patchew.org>
-Received: from [172.17.0.2] (23.253.156.214 [23.253.156.214]) by
-	mx.zohomail.com with SMTPS id 1543505620864568.259128337607;
-	Thu, 29 Nov 2018 07:33:40 -0800 (PST)
-In-Reply-To: <cover.1543352682.git.alistair.francis@wdc.com>
-Message-ID: <154350561947.25047.6851106790362028197@c26723477dc9>
-Reply-To: <qemu-devel@nongnu.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-Resent-From: 
-From: no-reply@patchew.org
-To: Alistair.Francis@wdc.com
-Cc: famz@redhat.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
-	alistair23@gmail.com, richard.henderson@linaro.org,
-	Alistair.Francis@wdc.com
-Date: Thu, 29 Nov 2018 07:33:40 -0800 (PST)
-X-ZohoMailClient: External
+	(envelope-from <armbru@redhat.com>) id 1gUESA-0007ok-C1
+	for qemu-riscv@nongnu.org; Tue, 04 Dec 2018 12:25:47 -0500
+Received: from mx1.redhat.com ([209.132.183.28]:50926)
+	by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.71) (envelope-from <armbru@redhat.com>)
+	id 1gUES6-0007n6-QA; Tue, 04 Dec 2018 12:25:43 -0500
+Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
+	[10.5.11.22])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mx1.redhat.com (Postfix) with ESMTPS id D2755307D847;
+	Tue,  4 Dec 2018 17:25:40 +0000 (UTC)
+Received: from blackfin.pond.sub.org (ovpn-116-104.ams2.redhat.com
+	[10.36.116.104])
+	by smtp.corp.redhat.com (Postfix) with ESMTPS id 33A64105704C;
+	Tue,  4 Dec 2018 17:25:37 +0000 (UTC)
+Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
+	id BB34B113860E; Tue,  4 Dec 2018 18:25:35 +0100 (CET)
+From: Markus Armbruster <armbru@redhat.com>
+To: qemu-devel@nongnu.org
+Cc: Viktor Prutyanov <viktor.prutyanov@phystech.edu>,
+	Yuval Shaia <yuval.shaia@oracle.com>,
+	Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+	Cornelia Huck <cohuck@redhat.com>,
+	Alex Williamson <alex.williamson@redhat.com>,
+	Christian Borntraeger <borntraeger@de.ibm.com>,
+	Tony Krowiak <akrowiak@linux.ibm.com>, Halil Pasic <pasic@linux.ibm.com>,
+	Pierre Morel <pmorel@linux.ibm.com>, Paolo Bonzini <pbonzini@redhat.com>,
+	Richard Henderson <rth@twiddle.net>, Eduardo Habkost <ehabkost@redhat.com>,
+	Michael Clark <mjc@sifive.com>, Palmer Dabbelt <palmer@sifive.com>,
+	Alistair Francis <Alistair.Francis@wdc.com>,
+	Sagar Karandikar <sagark@eecs.berkeley.edu>,
+	Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+	Stefan Berger <stefanb@linux.ibm.com>, qemu-s390x@nongnu.org,
+	qemu-riscv@nongnu.org
+Date: Tue,  4 Dec 2018 18:25:35 +0100
+Message-Id: <20181204172535.2799-1-armbru@redhat.com>
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+	(mx1.redhat.com [10.5.110.48]);
+	Tue, 04 Dec 2018 17:25:41 +0000 (UTC)
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
 	[fuzzy]
-X-Received-From: 135.84.80.217
-Subject: Re: [Qemu-riscv] [Qemu-devel] [RFC v2 00/24] Add RISC-V TCG backend
- support
+X-Received-From: 209.132.183.28
+X-Mailman-Approved-At: Tue, 04 Dec 2018 12:41:04 -0500
+Subject: [Qemu-riscv] [PATCH] Clean up includes
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -59,123 +63,278 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Nov 2018 17:19:44 -0000
+X-List-Received-Date: Tue, 04 Dec 2018 17:35:32 -0000
 
-SGksCgpUaGlzIHNlcmllcyBzZWVtcyB0byBoYXZlIHNvbWUgY29kaW5nIHN0eWxlIHByb2JsZW1z
-LiBTZWUgb3V0cHV0IGJlbG93IGZvcgptb3JlIGluZm9ybWF0aW9uOgoKVHlwZTogc2VyaWVzClN1
-YmplY3Q6IFtRZW11LWRldmVsXSBbUkZDIHYyIDAwLzI0XSAgQWRkIFJJU0MtViBUQ0cgYmFja2Vu
-ZCBzdXBwb3J0Ck1lc3NhZ2UtaWQ6IGNvdmVyLjE1NDMzNTI2ODIuZ2l0LmFsaXN0YWlyLmZyYW5j
-aXNAd2RjLmNvbQoKPT09IFRFU1QgU0NSSVBUIEJFR0lOID09PQojIS9iaW4vYmFzaAoKQkFTRT1i
-YXNlCm49MQp0b3RhbD0kKGdpdCBsb2cgLS1vbmVsaW5lICRCQVNFLi4gfCB3YyAtbCkKZmFpbGVk
-PTAKCmdpdCBjb25maWcgLS1sb2NhbCBkaWZmLnJlbmFtZWxpbWl0IDAKZ2l0IGNvbmZpZyAtLWxv
-Y2FsIGRpZmYucmVuYW1lcyBUcnVlCmdpdCBjb25maWcgLS1sb2NhbCBkaWZmLmFsZ29yaXRobSBo
-aXN0b2dyYW0KCmNvbW1pdHM9IiQoZ2l0IGxvZyAtLWZvcm1hdD0lSCAtLXJldmVyc2UgJEJBU0Uu
-LikiCmZvciBjIGluICRjb21taXRzOyBkbwogICAgZWNobyAiQ2hlY2tpbmcgUEFUQ0ggJG4vJHRv
-dGFsOiAkKGdpdCBsb2cgLW4gMSAtLWZvcm1hdD0lcyAkYykuLi4iCiAgICBpZiAhIGdpdCBzaG93
-ICRjIC0tZm9ybWF0PWVtYWlsIHwgLi9zY3JpcHRzL2NoZWNrcGF0Y2gucGwgLS1tYWlsYmFjayAt
-OyB0aGVuCiAgICAgICAgZmFpbGVkPTEKICAgICAgICBlY2hvCiAgICBmaQogICAgbj0kKChuKzEp
-KQpkb25lCgpleGl0ICRmYWlsZWQKPT09IFRFU1QgU0NSSVBUIEVORCA9PT0KClVwZGF0aW5nIDNj
-OGNmNWE5YzIxZmY4NzgyMTY0ZDFkZWY3ZjQ0YmQ4ODg3MTMzODQKU3dpdGNoZWQgdG8gYSBuZXcg
-YnJhbmNoICd0ZXN0JwpjYjc0ZjIwIFdJUDogVHJ5IHRvIHBhdGNoIGxvbmdlciBicmFuY2hlcwow
-YjI0M2YzIFdJUDogQWRkIG1pc3NpbmcgaW5zdHJ1Y3Rpb25zCjFhNTlmYmUgY29uZmlndXJlOiBB
-ZGQgc3VwcG9ydCBmb3IgYnVpbGRpbmcgUklTQy1WIGhvc3QKZTcxZjU3ZCBkaWFzOiBBZGQgUklT
-Qy1WIHN1cHBvcnQKZTRkZWE0YyB0Y2c6IEFkZCBSSVNDLVYgY3B1IHNpZ25hbCBoYW5kbGVyCjI0
-YWFiMDcgcmlzY3Y6IHRjZy10YXJnZXQ6IEFkZCB0aGUgdGFyZ2V0IGluaXQgY29kZQoxZTBiYjFm
-IHJpc2N2OiB0Y2ctdGFyZ2V0OiBBZGQgdGhlIHByb2xvZ3VlIGdlbmVyYXRpb24gYW5kIHJlZ2lz
-dGVyIHRoZSBKSVQKNTAxMDMyMyByaXNjdjogdGNnLXRhcmdldDogQWRkIHRoZSBvdXQgb3AgZGVj
-b2RlcgoxYWFmYWQ2IHJpc2N2OiB0Y2ctdGFyZ2V0OiBBZGQgZGlyZWN0IGxvYWQgYW5kIHN0b3Jl
-IGluc3RydWN0aW9ucwo4MGI0ZTU1IHJpc2N2OiB0Y2ctdGFyZ2V0OiBBZGQgc2xvd3BhdGggbG9h
-ZCBhbmQgc3RvcmUgaW5zdHJ1Y3Rpb25zCmI0Y2I1NzMgcmlzY3Y6IHRjZy10YXJnZXQ6IEFkZCBi
-cmFuY2ggYW5kIGp1bXAgaW5zdHJ1Y3Rpb25zCmVmNThhYjQgcmlzY3Y6IHRjZy10YXJnZXQ6IEFk
-ZCB0aGUgb3V0IGxvYWQgYW5kIHN0b3JlIGluc3RydWN0aW9ucwpiMmVlNGQ3IHJpc2N2OiB0Y2ct
-dGFyZ2V0OiBBZGQgdGhlIGV4dHJhY3QgaW5zdHJ1Y3Rpb25zCjFiM2I3YTEgcmlzY3Y6IHRjZy10
-YXJnZXQ6IEFkZCB0aGUgbW92IGFuZCBtb3ZpIGluc3RydWN0aW9uCjk4MzY2NzYgcmlzY3Y6IHRj
-Zy10YXJnZXQ6IEFkZCB0aGUgcmVsb2NhdGlvbiBmdW5jdGlvbnMKYTY1ZmM5ZCByaXNjdjogdGNn
-LXRhcmdldDogQWRkIHRoZSBpbnN0cnVjdGlvbiBlbWl0dGVycwo3MzQ4NGQwIHJpc2N2OiB0Y2ct
-dGFyZ2V0OiBBZGQgdGhlIGltbWVkaWF0ZSBlbmNvZGVycwo5ZDRiMGEyIHJpc2N2OiB0Y2ctdGFy
-Z2V0OiBBZGQgc3VwcG9ydCBmb3IgdGhlIGNvbnN0cmFpbnRzCjcwYjc4ZmMgcmlzY3Y6IEFkZCB0
-aGUgdGNnIHRhcmdldCByZWdpc3RlcnMKODMwYTRiNSByaXNjdjogQWRkIHRoZSB0Y2ctdGFyZ2V0
-IGhlYWRlciBmaWxlCjA0OWM0MjYgZXhlYzogQWRkIFJJU0MtViBHQ0MgcG9pc29uIG1hY3JvCjYw
-NjU3YzMgbGludXgtdXNlcjogQWRkIGhvc3QgZGVwZW5kZW5jeSBmb3IgUklTQy1WIDY0LWJpdAo0
-NjNiZTE1IGxpbnV4LXVzZXI6IEFkZCBob3N0IGRlcGVuZGVuY3kgZm9yIFJJU0MtViAzMi1iaXQK
-ZDZkNmIxYyBlbGYuaDogQWRkIHRoZSBSSVNDViBFTEYgbWFnaWMgbnVtYmVycwoKPT09IE9VVFBV
-VCBCRUdJTiA9PT0KQ2hlY2tpbmcgUEFUQ0ggMS8yNDogZWxmLmg6IEFkZCB0aGUgUklTQ1YgRUxG
-IG1hZ2ljIG51bWJlcnMuLi4KQ2hlY2tpbmcgUEFUQ0ggMi8yNDogbGludXgtdXNlcjogQWRkIGhv
-c3QgZGVwZW5kZW5jeSBmb3IgUklTQy1WIDMyLWJpdC4uLgpXQVJOSU5HOiBhZGRlZCwgbW92ZWQg
-b3IgZGVsZXRlZCBmaWxlKHMpLCBkb2VzIE1BSU5UQUlORVJTIG5lZWQgdXBkYXRpbmc/CiMxMjog
-Cm5ldyBmaWxlIG1vZGUgMTAwNjQ0Cgp0b3RhbDogMCBlcnJvcnMsIDEgd2FybmluZ3MsIDExIGxp
-bmVzIGNoZWNrZWQKCllvdXIgcGF0Y2ggaGFzIHN0eWxlIHByb2JsZW1zLCBwbGVhc2UgcmV2aWV3
-LiAgSWYgYW55IG9mIHRoZXNlIGVycm9ycwphcmUgZmFsc2UgcG9zaXRpdmVzIHJlcG9ydCB0aGVt
-IHRvIHRoZSBtYWludGFpbmVyLCBzZWUKQ0hFQ0tQQVRDSCBpbiBNQUlOVEFJTkVSUy4KQ2hlY2tp
-bmcgUEFUQ0ggMy8yNDogbGludXgtdXNlcjogQWRkIGhvc3QgZGVwZW5kZW5jeSBmb3IgUklTQy1W
-IDY0LWJpdC4uLgpXQVJOSU5HOiBhZGRlZCwgbW92ZWQgb3IgZGVsZXRlZCBmaWxlKHMpLCBkb2Vz
-IE1BSU5UQUlORVJTIG5lZWQgdXBkYXRpbmc/CiMxMjogCm5ldyBmaWxlIG1vZGUgMTAwNjQ0Cgp0
-b3RhbDogMCBlcnJvcnMsIDEgd2FybmluZ3MsIDExIGxpbmVzIGNoZWNrZWQKCllvdXIgcGF0Y2gg
-aGFzIHN0eWxlIHByb2JsZW1zLCBwbGVhc2UgcmV2aWV3LiAgSWYgYW55IG9mIHRoZXNlIGVycm9y
-cwphcmUgZmFsc2UgcG9zaXRpdmVzIHJlcG9ydCB0aGVtIHRvIHRoZSBtYWludGFpbmVyLCBzZWUK
-Q0hFQ0tQQVRDSCBpbiBNQUlOVEFJTkVSUy4KQ2hlY2tpbmcgUEFUQ0ggNC8yNDogZXhlYzogQWRk
-IFJJU0MtViBHQ0MgcG9pc29uIG1hY3JvLi4uCkNoZWNraW5nIFBBVENIIDUvMjQ6IHJpc2N2OiBB
-ZGQgdGhlIHRjZy10YXJnZXQgaGVhZGVyIGZpbGUuLi4KV0FSTklORzogYWRkZWQsIG1vdmVkIG9y
-IGRlbGV0ZWQgZmlsZShzKSwgZG9lcyBNQUlOVEFJTkVSUyBuZWVkIHVwZGF0aW5nPwojMTE6IApu
-ZXcgZmlsZSBtb2RlIDEwMDY0NAoKV0FSTklORzogYXJjaGl0ZWN0dXJlIHNwZWNpZmljIGRlZmlu
-ZXMgc2hvdWxkIGJlIGF2b2lkZWQKIzQzOiBGSUxFOiB0Y2cvcmlzY3YvdGNnLXRhcmdldC5oOjI4
-OgorI2lmIF9fcmlzY3ZfeGxlbiA9PSAzMgoKdG90YWw6IDAgZXJyb3JzLCAyIHdhcm5pbmdzLCAx
-NzMgbGluZXMgY2hlY2tlZAoKWW91ciBwYXRjaCBoYXMgc3R5bGUgcHJvYmxlbXMsIHBsZWFzZSBy
-ZXZpZXcuICBJZiBhbnkgb2YgdGhlc2UgZXJyb3JzCmFyZSBmYWxzZSBwb3NpdGl2ZXMgcmVwb3J0
-IHRoZW0gdG8gdGhlIG1haW50YWluZXIsIHNlZQpDSEVDS1BBVENIIGluIE1BSU5UQUlORVJTLgpD
-aGVja2luZyBQQVRDSCA2LzI0OiByaXNjdjogQWRkIHRoZSB0Y2cgdGFyZ2V0IHJlZ2lzdGVycy4u
-LgpXQVJOSU5HOiBhZGRlZCwgbW92ZWQgb3IgZGVsZXRlZCBmaWxlKHMpLCBkb2VzIE1BSU5UQUlO
-RVJTIG5lZWQgdXBkYXRpbmc/CiMxMjogCm5ldyBmaWxlIG1vZGUgMTAwNjQ0Cgp0b3RhbDogMCBl
-cnJvcnMsIDEgd2FybmluZ3MsIDExNiBsaW5lcyBjaGVja2VkCgpZb3VyIHBhdGNoIGhhcyBzdHls
-ZSBwcm9ibGVtcywgcGxlYXNlIHJldmlldy4gIElmIGFueSBvZiB0aGVzZSBlcnJvcnMKYXJlIGZh
-bHNlIHBvc2l0aXZlcyByZXBvcnQgdGhlbSB0byB0aGUgbWFpbnRhaW5lciwgc2VlCkNIRUNLUEFU
-Q0ggaW4gTUFJTlRBSU5FUlMuCkNoZWNraW5nIFBBVENIIDcvMjQ6IHJpc2N2OiB0Y2ctdGFyZ2V0
-OiBBZGQgc3VwcG9ydCBmb3IgdGhlIGNvbnN0cmFpbnRzLi4uCkNoZWNraW5nIFBBVENIIDgvMjQ6
-IHJpc2N2OiB0Y2ctdGFyZ2V0OiBBZGQgdGhlIGltbWVkaWF0ZSBlbmNvZGVycy4uLgpDaGVja2lu
-ZyBQQVRDSCA5LzI0OiByaXNjdjogdGNnLXRhcmdldDogQWRkIHRoZSBpbnN0cnVjdGlvbiBlbWl0
-dGVycy4uLgpDaGVja2luZyBQQVRDSCAxMC8yNDogcmlzY3Y6IHRjZy10YXJnZXQ6IEFkZCB0aGUg
-cmVsb2NhdGlvbiBmdW5jdGlvbnMuLi4KQ2hlY2tpbmcgUEFUQ0ggMTEvMjQ6IHJpc2N2OiB0Y2ct
-dGFyZ2V0OiBBZGQgdGhlIG1vdiBhbmQgbW92aSBpbnN0cnVjdGlvbi4uLgpDaGVja2luZyBQQVRD
-SCAxMi8yNDogcmlzY3Y6IHRjZy10YXJnZXQ6IEFkZCB0aGUgZXh0cmFjdCBpbnN0cnVjdGlvbnMu
-Li4KQ2hlY2tpbmcgUEFUQ0ggMTMvMjQ6IHJpc2N2OiB0Y2ctdGFyZ2V0OiBBZGQgdGhlIG91dCBs
-b2FkIGFuZCBzdG9yZSBpbnN0cnVjdGlvbnMuLi4KQ2hlY2tpbmcgUEFUQ0ggMTQvMjQ6IHJpc2N2
-OiB0Y2ctdGFyZ2V0OiBBZGQgYnJhbmNoIGFuZCBqdW1wIGluc3RydWN0aW9ucy4uLgpDaGVja2lu
-ZyBQQVRDSCAxNS8yNDogcmlzY3Y6IHRjZy10YXJnZXQ6IEFkZCBzbG93cGF0aCBsb2FkIGFuZCBz
-dG9yZSBpbnN0cnVjdGlvbnMuLi4KV0FSTklORzogbGluZSBvdmVyIDgwIGNoYXJhY3RlcnMKIzE2
-MTogRklMRTogdGNnL3Jpc2N2L3RjZy10YXJnZXQuaW5jLmM6ODkzOgorICAgICAqIHNlZTogaHR0
-cHM6Ly9saXN0cy5ub25nbnUub3JnL2FyY2hpdmUvaHRtbC9xZW11LWRldmVsLzIwMTgtMTEvbXNn
-MDIyMzQuaHRtbAoKdG90YWw6IDAgZXJyb3JzLCAxIHdhcm5pbmdzLCAyNTAgbGluZXMgY2hlY2tl
-ZAoKWW91ciBwYXRjaCBoYXMgc3R5bGUgcHJvYmxlbXMsIHBsZWFzZSByZXZpZXcuICBJZiBhbnkg
-b2YgdGhlc2UgZXJyb3JzCmFyZSBmYWxzZSBwb3NpdGl2ZXMgcmVwb3J0IHRoZW0gdG8gdGhlIG1h
-aW50YWluZXIsIHNlZQpDSEVDS1BBVENIIGluIE1BSU5UQUlORVJTLgpDaGVja2luZyBQQVRDSCAx
-Ni8yNDogcmlzY3Y6IHRjZy10YXJnZXQ6IEFkZCBkaXJlY3QgbG9hZCBhbmQgc3RvcmUgaW5zdHJ1
-Y3Rpb25zLi4uCkVSUk9SOiBzcGFjZXMgcmVxdWlyZWQgYXJvdW5kIHRoYXQgJyonIChjdHg6V3hW
-KQojODc6IEZJTEU6IHRjZy9yaXNjdi90Y2ctdGFyZ2V0LmluYy5jOjEwNDQ6CisgICAgdGNnX2lu
-c25fdW5pdCAqbGFiZWxfcHRyWzFdOwogICAgICAgICAgICAgICAgICAgXgoKRVJST1I6IHNwYWNl
-cyByZXF1aXJlZCBhcm91bmQgdGhhdCAnKicgKGN0eDpXeFYpCiMxNTg6IEZJTEU6IHRjZy9yaXNj
-di90Y2ctdGFyZ2V0LmluYy5jOjExMTU6CisgICAgdGNnX2luc25fdW5pdCAqbGFiZWxfcHRyWzFd
-OwogICAgICAgICAgICAgICAgICAgXgoKdG90YWw6IDIgZXJyb3JzLCAwIHdhcm5pbmdzLCAxNzgg
-bGluZXMgY2hlY2tlZAoKWW91ciBwYXRjaCBoYXMgc3R5bGUgcHJvYmxlbXMsIHBsZWFzZSByZXZp
-ZXcuICBJZiBhbnkgb2YgdGhlc2UgZXJyb3JzCmFyZSBmYWxzZSBwb3NpdGl2ZXMgcmVwb3J0IHRo
-ZW0gdG8gdGhlIG1haW50YWluZXIsIHNlZQpDSEVDS1BBVENIIGluIE1BSU5UQUlORVJTLgoKQ2hl
-Y2tpbmcgUEFUQ0ggMTcvMjQ6IHJpc2N2OiB0Y2ctdGFyZ2V0OiBBZGQgdGhlIG91dCBvcCBkZWNv
-ZGVyLi4uCkNoZWNraW5nIFBBVENIIDE4LzI0OiByaXNjdjogdGNnLXRhcmdldDogQWRkIHRoZSBw
-cm9sb2d1ZSBnZW5lcmF0aW9uIGFuZCByZWdpc3RlciB0aGUgSklULi4uCkNoZWNraW5nIFBBVENI
-IDE5LzI0OiByaXNjdjogdGNnLXRhcmdldDogQWRkIHRoZSB0YXJnZXQgaW5pdCBjb2RlLi4uCkNo
-ZWNraW5nIFBBVENIIDIwLzI0OiB0Y2c6IEFkZCBSSVNDLVYgY3B1IHNpZ25hbCBoYW5kbGVyLi4u
-CkNoZWNraW5nIFBBVENIIDIxLzI0OiBkaWFzOiBBZGQgUklTQy1WIHN1cHBvcnQuLi4KQ2hlY2tp
-bmcgUEFUQ0ggMjIvMjQ6IGNvbmZpZ3VyZTogQWRkIHN1cHBvcnQgZm9yIGJ1aWxkaW5nIFJJU0Mt
-ViBob3N0Li4uCkNoZWNraW5nIFBBVENIIDIzLzI0OiBXSVA6IEFkZCBtaXNzaW5nIGluc3RydWN0
-aW9ucy4uLgpXQVJOSU5HOiBsaW5lIG92ZXIgODAgY2hhcmFjdGVycwojNjI6IEZJTEU6IHRjZy9y
-aXNjdi90Y2ctdGFyZ2V0LmluYy5jOjY1NDoKKyAgICAgICAgICAgIHRjZ19vdXRfb3BjX3JlZyhz
-LCBPUENfU0xMSSwgVENHX1JFR19UTVAwLCBybCwgKHJsID09IGJsID8gYWwgOiBibCkpOwoKdG90
-YWw6IDAgZXJyb3JzLCAxIHdhcm5pbmdzLCAxMTMgbGluZXMgY2hlY2tlZAoKWW91ciBwYXRjaCBo
-YXMgc3R5bGUgcHJvYmxlbXMsIHBsZWFzZSByZXZpZXcuICBJZiBhbnkgb2YgdGhlc2UgZXJyb3Jz
-CmFyZSBmYWxzZSBwb3NpdGl2ZXMgcmVwb3J0IHRoZW0gdG8gdGhlIG1haW50YWluZXIsIHNlZQpD
-SEVDS1BBVENIIGluIE1BSU5UQUlORVJTLgpDaGVja2luZyBQQVRDSCAyNC8yNDogV0lQOiBUcnkg
-dG8gcGF0Y2ggbG9uZ2VyIGJyYW5jaGVzLi4uCj09PSBPVVRQVVQgRU5EID09PQoKVGVzdCBjb21t
-YW5kIGV4aXRlZCB3aXRoIGNvZGU6IDEKCgotLS0KRW1haWwgZ2VuZXJhdGVkIGF1dG9tYXRpY2Fs
-bHkgYnkgUGF0Y2hldyBbaHR0cDovL3BhdGNoZXcub3JnL10uClBsZWFzZSBzZW5kIHlvdXIgZmVl
-ZGJhY2sgdG8gcGF0Y2hldy1kZXZlbEByZWRoYXQuY29t
+Clean up includes so that osdep.h is included first and headers
+which it implies are not included manually.
+
+This commit was created with scripts/clean-includes, with the changes
+to the following files manually reverted:
+
+    contrib/libvhost-user/libvhost-user-glib.h
+    contrib/libvhost-user/libvhost-user.c
+    contrib/libvhost-user/libvhost-user.h
+    linux-user/mips64/cpu_loop.c
+    linux-user/mips64/signal.c
+    linux-user/sparc64/cpu_loop.c
+    linux-user/sparc64/signal.c
+    linux-user/x86_64/cpu_loop.c
+    linux-user/x86_64/signal.c
+    target/s390x/gen-features.c
+    tests/migration/s390x/a-b-bios.c
+    tests/test-rcu-simpleq.c
+    tests/test-rcu-tailq.c
+
+Signed-off-by: Markus Armbruster <armbru@redhat.com>
+---
+ contrib/elf2dmp/pdb.h                     | 2 --
+ contrib/elf2dmp/pe.h                      | 1 -
+ contrib/elf2dmp/qemu_elf.h                | 1 -
+ contrib/vhost-user-blk/vhost-user-blk.c   | 1 -
+ contrib/vhost-user-scsi/vhost-user-scsi.c | 1 -
+ hw/rdma/rdma_utils.c                      | 1 +
+ hw/rdma/rdma_utils.h                      | 1 -
+ hw/rdma/vmw/pvrdma_dev_ring.h             | 1 -
+ hw/vfio/ap.c                              | 2 +-
+ include/qemu/vfio-helpers.h               | 1 -
+ include/sysemu/whpx.h                     | 1 -
+ target/i386/sev.c                         | 3 ++-
+ target/i386/whp-dispatch.h                | 1 -
+ target/riscv/fpu_helper.c                 | 1 -
+ tests/fp/platform.h                       | 1 -
+ tests/tpm-util.h                          | 1 -
+ tests/vhost-user-bridge.c                 | 2 +-
+ util/qemu-thread-common.h                 | 1 -
+ 18 files changed, 5 insertions(+), 18 deletions(-)
+
+diff --git a/contrib/elf2dmp/pdb.h b/contrib/elf2dmp/pdb.h
+index 4351a2dd61..a3a3cac2c1 100644
+--- a/contrib/elf2dmp/pdb.h
++++ b/contrib/elf2dmp/pdb.h
+@@ -8,8 +8,6 @@
+ #ifndef PDB_H
+ #define PDB_H
+ 
+-#include <stdint.h>
+-#include <stdlib.h>
+ 
+ typedef struct GUID {
+     unsigned int Data1;
+diff --git a/contrib/elf2dmp/pe.h b/contrib/elf2dmp/pe.h
+index 374e06a9c5..dafb26afbb 100644
+--- a/contrib/elf2dmp/pe.h
++++ b/contrib/elf2dmp/pe.h
+@@ -8,7 +8,6 @@
+ #ifndef PE_H
+ #define PE_H
+ 
+-#include <stdint.h>
+ 
+ typedef struct IMAGE_DOS_HEADER {
+     uint16_t  e_magic;      /* 0x00: MZ Header signature */
+diff --git a/contrib/elf2dmp/qemu_elf.h b/contrib/elf2dmp/qemu_elf.h
+index d85d6558fa..86e6e688fb 100644
+--- a/contrib/elf2dmp/qemu_elf.h
++++ b/contrib/elf2dmp/qemu_elf.h
+@@ -8,7 +8,6 @@
+ #ifndef QEMU_ELF_H
+ #define QEMU_ELF_H
+ 
+-#include <stdint.h>
+ #include <elf.h>
+ 
+ typedef struct QEMUCPUSegment {
+diff --git a/contrib/vhost-user-blk/vhost-user-blk.c b/contrib/vhost-user-blk/vhost-user-blk.c
+index 571f114a56..858221ad95 100644
+--- a/contrib/vhost-user-blk/vhost-user-blk.c
++++ b/contrib/vhost-user-blk/vhost-user-blk.c
+@@ -20,7 +20,6 @@
+ #include "contrib/libvhost-user/libvhost-user-glib.h"
+ #include "contrib/libvhost-user/libvhost-user.h"
+ 
+-#include <glib.h>
+ 
+ struct virtio_blk_inhdr {
+     unsigned char status;
+diff --git a/contrib/vhost-user-scsi/vhost-user-scsi.c b/contrib/vhost-user-scsi/vhost-user-scsi.c
+index 02c29019d1..496dd6e693 100644
+--- a/contrib/vhost-user-scsi/vhost-user-scsi.c
++++ b/contrib/vhost-user-scsi/vhost-user-scsi.c
+@@ -16,7 +16,6 @@
+ #include "contrib/libvhost-user/libvhost-user-glib.h"
+ #include "standard-headers/linux/virtio_scsi.h"
+ 
+-#include <glib.h>
+ 
+ #define VUS_ISCSI_INITIATOR "iqn.2016-11.com.nutanix:vhost-user-scsi"
+ 
+diff --git a/hw/rdma/rdma_utils.c b/hw/rdma/rdma_utils.c
+index dc23f158f3..4fbea8cde2 100644
+--- a/hw/rdma/rdma_utils.c
++++ b/hw/rdma/rdma_utils.c
+@@ -13,6 +13,7 @@
+  *
+  */
+ 
++#include "qemu/osdep.h"
+ #include "rdma_utils.h"
+ 
+ #ifdef PVRDMA_DEBUG
+diff --git a/hw/rdma/rdma_utils.h b/hw/rdma/rdma_utils.h
+index 04c7c2ef5b..c4f96c4f2a 100644
+--- a/hw/rdma/rdma_utils.h
++++ b/hw/rdma/rdma_utils.h
+@@ -17,7 +17,6 @@
+ #ifndef RDMA_UTILS_H
+ #define RDMA_UTILS_H
+ 
+-#include "qemu/osdep.h"
+ #include "hw/pci/pci.h"
+ #include "sysemu/dma.h"
+ 
+diff --git a/hw/rdma/vmw/pvrdma_dev_ring.h b/hw/rdma/vmw/pvrdma_dev_ring.h
+index 411d244603..5f2a0cf9b9 100644
+--- a/hw/rdma/vmw/pvrdma_dev_ring.h
++++ b/hw/rdma/vmw/pvrdma_dev_ring.h
+@@ -16,7 +16,6 @@
+ #ifndef PVRDMA_DEV_RING_H
+ #define PVRDMA_DEV_RING_H
+ 
+-#include "qemu/typedefs.h"
+ 
+ #define MAX_RING_NAME_SZ 32
+ 
+diff --git a/hw/vfio/ap.c b/hw/vfio/ap.c
+index 65de952f44..32b880213d 100644
+--- a/hw/vfio/ap.c
++++ b/hw/vfio/ap.c
+@@ -10,9 +10,9 @@
+  * directory.
+  */
+ 
++#include "qemu/osdep.h"
+ #include <linux/vfio.h>
+ #include <sys/ioctl.h>
+-#include "qemu/osdep.h"
+ #include "qapi/error.h"
+ #include "hw/sysbus.h"
+ #include "hw/vfio/vfio.h"
+diff --git a/include/qemu/vfio-helpers.h b/include/qemu/vfio-helpers.h
+index ce7e7b057f..1f057c2b9e 100644
+--- a/include/qemu/vfio-helpers.h
++++ b/include/qemu/vfio-helpers.h
+@@ -12,7 +12,6 @@
+ 
+ #ifndef QEMU_VFIO_HELPERS_H
+ #define QEMU_VFIO_HELPERS_H
+-#include "qemu/typedefs.h"
+ 
+ typedef struct QEMUVFIOState QEMUVFIOState;
+ 
+diff --git a/include/sysemu/whpx.h b/include/sysemu/whpx.h
+index 89592ae4fa..d200ee01d0 100644
+--- a/include/sysemu/whpx.h
++++ b/include/sysemu/whpx.h
+@@ -13,7 +13,6 @@
+ #ifndef QEMU_WHPX_H
+ #define QEMU_WHPX_H
+ 
+-#include "config-host.h"
+ #include "qemu-common.h"
+ 
+ int whpx_init_vcpu(CPUState *cpu);
+diff --git a/target/i386/sev.c b/target/i386/sev.c
+index 2395171acf..20b2d325d8 100644
+--- a/target/i386/sev.c
++++ b/target/i386/sev.c
+@@ -11,12 +11,13 @@
+  *
+  */
+ 
++#include "qemu/osdep.h"
++
+ #include <linux/kvm.h>
+ #include <linux/psp-sev.h>
+ 
+ #include <sys/ioctl.h>
+ 
+-#include "qemu/osdep.h"
+ #include "qapi/error.h"
+ #include "qom/object_interfaces.h"
+ #include "qemu/base64.h"
+diff --git a/target/i386/whp-dispatch.h b/target/i386/whp-dispatch.h
+index d8d3485976..4ae3cc8fa5 100644
+--- a/target/i386/whp-dispatch.h
++++ b/target/i386/whp-dispatch.h
+@@ -1,5 +1,4 @@
+ #include "windows.h"
+-#include <stdbool.h>
+ 
+ #include <WinHvPlatform.h>
+ #include <WinHvEmulation.h>
+diff --git a/target/riscv/fpu_helper.c b/target/riscv/fpu_helper.c
+index fdb87d8d82..01b45ca0ae 100644
+--- a/target/riscv/fpu_helper.c
++++ b/target/riscv/fpu_helper.c
+@@ -17,7 +17,6 @@
+  */
+ 
+ #include "qemu/osdep.h"
+-#include <stdlib.h>
+ #include "cpu.h"
+ #include "qemu/host-utils.h"
+ #include "exec/exec-all.h"
+diff --git a/tests/fp/platform.h b/tests/fp/platform.h
+index c20ba70baa..f8c423dde3 100644
+--- a/tests/fp/platform.h
++++ b/tests/fp/platform.h
+@@ -29,7 +29,6 @@
+  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  */
+-#include "config-host.h"
+ 
+ #ifndef HOST_WORDS_BIGENDIAN
+ #define LITTLEENDIAN 1
+diff --git a/tests/tpm-util.h b/tests/tpm-util.h
+index 9e98bc5124..5755698ad2 100644
+--- a/tests/tpm-util.h
++++ b/tests/tpm-util.h
+@@ -13,7 +13,6 @@
+ #ifndef TESTS_TPM_UTIL_H
+ #define TESTS_TPM_UTIL_H
+ 
+-#include "qemu/osdep.h"
+ #include "io/channel-socket.h"
+ 
+ typedef void (tx_func)(QTestState *s,
+diff --git a/tests/vhost-user-bridge.c b/tests/vhost-user-bridge.c
+index 0cf8d0baca..0033b61f2e 100644
+--- a/tests/vhost-user-bridge.c
++++ b/tests/vhost-user-bridge.c
+@@ -29,8 +29,8 @@
+ 
+ #define _FILE_OFFSET_BITS 64
+ 
+-#include "qemu/atomic.h"
+ #include "qemu/osdep.h"
++#include "qemu/atomic.h"
+ #include "qemu/iov.h"
+ #include "standard-headers/linux/virtio_net.h"
+ #include "contrib/libvhost-user/libvhost-user.h"
+diff --git a/util/qemu-thread-common.h b/util/qemu-thread-common.h
+index a0ea7c0d92..2af6b12085 100644
+--- a/util/qemu-thread-common.h
++++ b/util/qemu-thread-common.h
+@@ -13,7 +13,6 @@
+ #ifndef QEMU_THREAD_COMMON_H
+ #define QEMU_THREAD_COMMON_H
+ 
+-#include "qemu/typedefs.h"
+ #include "qemu/thread.h"
+ #include "trace.h"
+ 
+-- 
+2.17.2
 
 
