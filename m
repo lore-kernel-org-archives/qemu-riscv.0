@@ -1,63 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gUSWk-0007HN-6r
-	for mharc-qemu-riscv@gnu.org; Wed, 05 Dec 2018 03:27:26 -0500
-Received: from eggs.gnu.org ([2001:4830:134:3::10]:50063)
+	id 1gUSWm-0007IB-BH
+	for mharc-qemu-riscv@gnu.org; Wed, 05 Dec 2018 03:27:28 -0500
+Received: from eggs.gnu.org ([2001:4830:134:3::10]:50066)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <anup@brainfault.org>) id 1gUSWh-0007Fu-GL
+	(envelope-from <anup@brainfault.org>) id 1gUSWh-0007G6-Rj
 	for qemu-riscv@nongnu.org; Wed, 05 Dec 2018 03:27:25 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <anup@brainfault.org>) id 1gUSWd-0005t4-I2
+	(envelope-from <anup@brainfault.org>) id 1gUSWa-0005rx-BM
 	for qemu-riscv@nongnu.org; Wed, 05 Dec 2018 03:27:22 -0500
-Received: from mail-pg1-x542.google.com ([2607:f8b0:4864:20::542]:41675)
+Received: from mail-pl1-x641.google.com ([2607:f8b0:4864:20::641]:40943)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <anup@brainfault.org>) id 1gUSWc-0005sM-P0
-	for qemu-riscv@nongnu.org; Wed, 05 Dec 2018 03:27:19 -0500
-Received: by mail-pg1-x542.google.com with SMTP id 70so8674138pgh.8
-	for <qemu-riscv@nongnu.org>; Wed, 05 Dec 2018 00:27:18 -0800 (PST)
+	(Exim 4.71) (envelope-from <anup@brainfault.org>) id 1gUSWZ-0005qg-Lr
+	for qemu-riscv@nongnu.org; Wed, 05 Dec 2018 03:27:16 -0500
+Received: by mail-pl1-x641.google.com with SMTP id u18so9704898plq.7
+	for <qemu-riscv@nongnu.org>; Wed, 05 Dec 2018 00:27:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=brainfault-org.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=2CI8xLFjzwd/QtoF8z6vh9Y7B9tYVWZ8qg5tKBAIgrY=;
-	b=NTMj/B13mU/ME29IPpBeDk+jryhrWd9ySwTZ0zdyOajStqpYGL+8Rj46X1QymnOLWS
-	zMfhLDn2ImaELOEXVy7TsIrMsXDC3h9/AymaXHTETG0JrcevaJynaspoVJkCzXRuEFVj
-	XF+sy4dI31gDq16iH+V+iBr2u0uGqFOr7ZdHgLKlBwnWUpfTAg7T9GWCnv8dflpSdDFF
-	bWjFAIMMfLPEg+bPv14KKgEAWXqHJTBTZbur9i0UMga5z6a6wldxMUeMXr7Fn6iMWdIK
-	imaAQNfSPDJRmCEq7VU9+nRtAOKkktUPJih0aW06qwxKZdn+58xp8/FX+aNOm0FESMWy
-	HXhw==
+	h=from:to:cc:subject:date:message-id;
+	bh=eeYvyP1uwG+CNh53IlxHP80V/dByOXA9HR36ir0+fcU=;
+	b=itsjeH3hQdjS3xB52kxdCqgu2RD/IPohKJz2Y/lIHXmGRs9jouk07ct3C2/cThhCst
+	lDu/ikUePn7RCHu5eDzIUHMw42M5Y6kUOcSo7b68fmRujDESvlNltPyvNZt3dLx9QtDi
+	fUC+84vSyFDX1GlqM0dIjhjo5CXG/L0fTq2jYur+dabL/YOljFpr8fSZlJ/KmMcaAqVk
+	8gnbjXeRUreIaRb66jo2gmWB8vX7JBvETI6kEY+D+JoFfgoMzpo2ArzrAsaegY0Srqx2
+	HQYoXWmjJDxpPwD1y0Se9V7GS5jOHl51FBTImCpcYyJ9pQXjlaglvXR/ks/WhEUCywmT
+	l4QA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=2CI8xLFjzwd/QtoF8z6vh9Y7B9tYVWZ8qg5tKBAIgrY=;
-	b=KXI/UDfL7lm+z8WL2OvqPrw2qzwowQmgiwZGiHsCZe6+86yZaO5fAfH9vLBKDSpall
-	XetIgbJXhbtOfs7/v2kg7jbzCPXJMQVhBVipg7f87nwfQs9S8KPM/4/IlG8gA+lOI75g
-	IUiLsLFwX3SvlHZqunPdErL9a01oJqY/UyKlouw246pWzqP5j7PCs12VzEaSi+hy2R6/
-	MMMcCiZfRroUkNWj1Hx4QjRdDW1I/j3bZFsG7GoBYL8xqrvukIgk8XS0dkvHsY2iDc60
-	yFl6psn2mTISwbqAwLz8DljoKojePL5TV7uhmeWbYS/IP+LGoVGyLH+/ZmcpnCIYaN31
-	K3Fw==
-X-Gm-Message-State: AA+aEWaR3d/vB7vGnVIl1nsEv4qqAj50Q2QyWLHS+93r2CurR3aMNrRz
-	YH49AItDPiPmTxwFeBm0uQKRbFX4AX0=
-X-Google-Smtp-Source: AFSGD/Uq/ARFas+DVh0/P8HGDdwC47OUEwUUtKyua2oI5JBxVncUtd43QWtK37xL7tL7FQ8zhxETRw==
-X-Received: by 2002:a62:ae12:: with SMTP id q18mr23462496pff.126.1543998436444;
-	Wed, 05 Dec 2018 00:27:16 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=eeYvyP1uwG+CNh53IlxHP80V/dByOXA9HR36ir0+fcU=;
+	b=G7zOPcklqgcS28u4yiVYixfrsSW5w1szs/ZHF+kWYJCZCDAgaZVKC+Obr78/f3/IFO
+	aTNVeuIi2NOtJeWKSdQ2BXVrYtvfghIgvJys3wwoNuJe561WEwg8B9A3/nqbzahLrzq/
+	ta2CocUEbnf5btwDVRhbHoUsT4AXK30cM4A7eGc7kTZrVaEjiy/V1tJ2l4EMaRUyaqqI
+	XNA+Shl7ZpUcvHGEAABlRUKVmXGxN8pkmuqkoOHkIASAJabTya8gRCgijaOvHmwWgf1F
+	JP/M2gk7ZVH/ucHzFgPgOaWQ3IMkcUPLpccMLimedterxDMv+ZVvm85F3ehfb4Aps3YT
+	qpuw==
+X-Gm-Message-State: AA+aEWa+8cP/ToOFD4BObuqAFrvooarm92V4AgXIbtebvZriL6Mj5Ux1
+	7FLArZ1rxrlm/dXeUUjKSZxw5WSca+U=
+X-Google-Smtp-Source: AFSGD/VNXO3kVffLKY5CSaXBw/NU2VsHHao3wUPUuShlX7+n4C/312c2nNmKlWaYuZSn0ILlc5sAdg==
+X-Received: by 2002:a17:902:8c91:: with SMTP id
+	t17mr22563757plo.119.1543998433161; 
+	Wed, 05 Dec 2018 00:27:13 -0800 (PST)
 Received: from anup-ubuntu64.qualcomm.com ([49.207.50.107])
 	by smtp.googlemail.com with ESMTPSA id
-	19sm33410406pfs.108.2018.12.05.00.27.14
+	19sm33410406pfs.108.2018.12.05.00.27.11
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 05 Dec 2018 00:27:15 -0800 (PST)
+	Wed, 05 Dec 2018 00:27:12 -0800 (PST)
 From: Anup Patel <anup@brainfault.org>
 To: qemu-riscv@nongnu.org
 Cc: Anup Patel <anup@brainfault.org>
-Date: Wed,  5 Dec 2018 13:57:03 +0530
-Message-Id: <20181205082703.13945-2-anup@brainfault.org>
+Date: Wed,  5 Dec 2018 13:57:02 +0530
+Message-Id: <20181205082703.13945-1-anup@brainfault.org>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20181205082703.13945-1-anup@brainfault.org>
-References: <20181205082703.13945-1-anup@brainfault.org>
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::542
-Subject: [Qemu-riscv] [PATCH 2/2] hw/riscv/sifive_u: Set 'clock-frequency'
- DT property for SiFive UART
+X-Received-From: 2607:f8b0:4864:20::641
+Subject: [Qemu-riscv] [PATCH 1/2] target/riscv/pmp.c: Don't try further once
+ matching PMP entry found
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -71,28 +69,45 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Wed, 05 Dec 2018 08:27:25 -0000
 
-The 'clock-frequency' DT property is required by U-Boot to compute
-divider value. This patch sets 'clock-frequency' DT property of
-SiFive UART DT node (similar to virt machine).
+As-per RISC-V privilege spec, we should only consider first matching
+PMP entry. This is not enforced by current pmp_has_access().
+
+Let's say we have two PMP entries configured by M-mode code:
+PMP0: 0x0000000080000000-0x000000008001ffff (A)
+PMP1: 0x0000000000000000-0xffffffffffffffff (A,R,W,X)
+
+Now if S-mode code tries to access 0x80000000 then it should
+generate trap to M-mode because PMP0 blocks the access.
+
+The current implementation of pmp_has_access() checks PMP0 which gives
+result=0 so it continues and tries PMP1 which gives result=1 hence
+the access to 0x80000000 from S-mode is allowed.
+
+This patch fixes pmp_has_access() to return immediatiely once
+a matching entry is found (irrespective to the value of result).
 
 Signed-off-by: Anup Patel <anup@brainfault.org>
 ---
- hw/riscv/sifive_u.c | 2 ++
- 1 file changed, 2 insertions(+)
+ target/riscv/pmp.c | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-index b3a4352986..5fa666fefc 100644
---- a/hw/riscv/sifive_u.c
-+++ b/hw/riscv/sifive_u.c
-@@ -238,6 +238,8 @@ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
-     qemu_fdt_setprop_cells(fdt, nodename, "reg",
-         0x0, memmap[SIFIVE_U_UART0].base,
-         0x0, memmap[SIFIVE_U_UART0].size);
-+    qemu_fdt_setprop_cell(fdt, nodename, "clock-frequency",
-+        SIFIVE_U_CLOCK_FREQ / 2);
-     qemu_fdt_setprop_cells(fdt, nodename, "interrupt-parent", plic_phandle);
-     qemu_fdt_setprop_cells(fdt, nodename, "interrupts", 1);
+diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
+index 3dbb87c69d..936a52b6ba 100644
+--- a/target/riscv/pmp.c
++++ b/target/riscv/pmp.c
+@@ -193,8 +193,11 @@ bool pmp_has_access(CPURISCVState *env, target_ulong addr, int size, int rw,
+                 /* breaks iff other covering entries (invalid config). Punt */
+                 *tlb_size = roundpow2(ea - sa);
+             }
+-            goto match;
+         }
++
++        /* only first matching PMP entry applies */
++        if (sa <= addr && (addr + size - 1) < ea)
++            goto match;
+     }
  
+     /* only allow M mode if no rules are present */
 -- 
 2.17.1
 
