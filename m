@@ -1,60 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gWqfC-0006Oq-TG
-	for mharc-qemu-riscv@gnu.org; Tue, 11 Dec 2018 17:38:02 -0500
-Received: from eggs.gnu.org ([2001:4830:134:3::10]:35829)
+	id 1gWqfD-0006PP-7B
+	for mharc-qemu-riscv@gnu.org; Tue, 11 Dec 2018 17:38:03 -0500
+Received: from eggs.gnu.org ([2001:4830:134:3::10]:35822)
 	by lists.gnu.org with esmtp (Exim 4.71)
 	(envelope-from <prvs=87679fe4f=Alistair.Francis@wdc.com>)
-	id 1gWqf8-0006NA-5z
-	for qemu-riscv@nongnu.org; Tue, 11 Dec 2018 17:38:01 -0500
+	id 1gWqf7-0006N6-HM
+	for qemu-riscv@nongnu.org; Tue, 11 Dec 2018 17:38:00 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
 	(envelope-from <prvs=87679fe4f=Alistair.Francis@wdc.com>)
-	id 1gWqf6-0006h9-OI
-	for qemu-riscv@nongnu.org; Tue, 11 Dec 2018 17:37:58 -0500
-Received: from esa1.hgst.iphmx.com ([68.232.141.245]:41303)
+	id 1gWqf6-0006hE-Ou
+	for qemu-riscv@nongnu.org; Tue, 11 Dec 2018 17:37:57 -0500
+Received: from esa4.hgst.iphmx.com ([216.71.154.42]:29404)
 	by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.71) (envelope-from <prvs=87679fe4f=Alistair.Francis@wdc.com>)
-	id 1gWqev-0006Tv-Fu; Tue, 11 Dec 2018 17:37:46 -0500
+	id 1gWqf0-0006Zk-JY; Tue, 11 Dec 2018 17:37:51 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
 	d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
-	t=1544567865; x=1576103865;
+	t=1544567871; x=1576103871;
 	h=from:to:cc:subject:date:message-id:references:
 	in-reply-to:content-transfer-encoding:mime-version;
-	bh=sfadnx/auh4oqZkES4o9nQDgSF7tvihPnOS1PDdv6II=;
-	b=EUikkv7hhUdyvem9linxHc9TbAyjXxZey17G3NWOMBAIBcPHAxuBHZ9u
-	cikNUuTic/G/mtJ55vDj347z0mwg524CU0w5B0FdHrowVziX0Zwf0k/zi
-	Euy+crjLItpH8cGSrLP606+U2Vhu94u8c66r8lz+jp38JVl1SjcCZjR7a
-	QuehyqxYxiu7i5IBd3hbpLjVjwxI1zFU8MHt2rdUwYnS+cWB1HMcgw5Ih
-	PVzsQRp/nYKj2nAPBnKba12cpm7u5ifpoWMf8VK1iccu7OSD5a5q0hv+A
-	etSVF7n4A3MG8YWlCvUcJ3J2f84eVvHiEUp93y4kEMfspX2QRigk+yM4e Q==;
-X-IronPort-AV: E=Sophos;i="5.56,343,1539619200"; d="scan'208";a="201014433"
-Received: from mail-by2nam03lp2053.outbound.protection.outlook.com (HELO
-	NAM03-BY2-obe.outbound.protection.outlook.com) ([104.47.42.53])
-	by ob1.hgst.iphmx.com with ESMTP; 12 Dec 2018 06:37:38 +0800
+	bh=NWU584To5ANJKVal7RSzaotgKjo8EEfCqELWBY2aIy8=;
+	b=HCMA0TqWcJ7DRDELftXGvwHJmDNfNe2tSOYUWT7L1GPTrrYyVdHc/SKr
+	P04Ys2Nm+RfwcA/Bhe6/9Fq8zL/jqGUxUgyHvmyyv7IIYYac4jF39IBev
+	l/tRne4P4q8ANLl8jbGgCPsAuVZK89SAVU2nBoUn2NwIkW7SOcB5sw0qc
+	KACtyOoo/SJXVFiIrNvb+6QWB9qf9ISb9jdxzDwCTqIWqcXZehtKoPC8J
+	kQBCNyecRkcA220mhRB9D58IgdHjnzYINGk9tYGMvg0wKlBVNxJDxOnLd
+	2eSAIDdcTJVR4wUDUSXRgaGeimv35sIkw6liqvgLXkfG83BJHEASRnyOa A==;
+X-IronPort-AV: E=Sophos;i="5.56,343,1539619200"; d="scan'208";a="96357267"
+Received: from mail-dm3nam03lp2054.outbound.protection.outlook.com (HELO
+	NAM03-DM3-obe.outbound.protection.outlook.com) ([104.47.41.54])
+	by ob1.hgst.iphmx.com with ESMTP; 12 Dec 2018 06:37:47 +0800
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=sharedspace.onmicrosoft.com; s=selector1-wdc-com;
 	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=NexpM7NVXrxPEGKwo1hroPLHDjH6o6z5yCYCwGAW+HE=;
-	b=J0KQxOEn1frOpNGCUN+zDXoLLBXC2DRDzdOPwJAKhuTW8/XzHHx1k5VLMbHJ+psgl4eKIgTcasGQU/LCAkTGsiKlQCF1+uX3j2JAHptj9C3uhrFyXusnTeeMuDlqTGAG39gqFiw3O6XU0NYViTLQbOz/RIl1kxwxse5j8zvEYGM=
+	bh=NWU584To5ANJKVal7RSzaotgKjo8EEfCqELWBY2aIy8=;
+	b=aRKKVXS4izRlyaVkwRRkr/Wi4LVs6JKgtvgdGoMVQEWy9cyo4ssC9RsH3BRBEPthXn7zbgecV0+jzWfn6reAzrPR0TwezVEMFNAHrocdXycH05YOFoispwfrZyF+P98E4Jhj5DBVFdIZj85rdwUs9BezwTEr3YSR/tDMouFG5V4=
 Received: from MWHPR04MB0401.namprd04.prod.outlook.com (10.173.48.18) by
 	MWHPR04MB0608.namprd04.prod.outlook.com (10.173.49.149) with Microsoft
 	SMTP
 	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
-	15.20.1404.22; Tue, 11 Dec 2018 22:37:36 +0000
+	15.20.1404.22; Tue, 11 Dec 2018 22:37:46 +0000
 Received: from MWHPR04MB0401.namprd04.prod.outlook.com
 	([fe80::9067:fb44:66b2:7604]) by
 	MWHPR04MB0401.namprd04.prod.outlook.com
 	([fe80::9067:fb44:66b2:7604%3]) with mapi id 15.20.1425.016;
-	Tue, 11 Dec 2018 22:37:36 +0000
+	Tue, 11 Dec 2018 22:37:46 +0000
 From: Alistair Francis <Alistair.Francis@wdc.com>
 To: "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, "qemu-riscv@nongnu.org"
 	<qemu-riscv@nongnu.org>
 CC: Alistair Francis <Alistair.Francis@wdc.com>, "alistair23@gmail.com"
 	<alistair23@gmail.com>, "stephen@eideticom.com" <stephen@eideticom.com>,
 	"palmer@sifive.com" <palmer@sifive.com>
-Thread-Topic: [PATCH v8 3/4] hw/riscv/virt: Connect the gpex PCIe
-Thread-Index: AQHUkaIdqu7dJIsIJUa1RUUELnP7GQ==
-Date: Tue, 11 Dec 2018 22:37:36 +0000
-Message-ID: <b51dbde7690d8d06c804843fd970cf9efa69a345.1544567709.git.alistair.francis@wdc.com>
+Thread-Topic: [PATCH v8 4/4] riscv: Enable VGA and PCIE_VGA
+Thread-Index: AQHUkaIjHFlr/U6MGUiDwS9OQG5OFg==
+Date: Tue, 11 Dec 2018 22:37:46 +0000
+Message-ID: <d537d6d4bbe59fcb36fcab3280fdad4fbff7aa15.1544567709.git.alistair.francis@wdc.com>
 References: <cover.1544567709.git.alistair.francis@wdc.com>
 In-Reply-To: <cover.1544567709.git.alistair.francis@wdc.com>
 Accept-Language: en-US
@@ -62,8 +62,8 @@ Content-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
 x-mailer: git-send-email 2.19.1
-x-clientproxiedby: BYAPR03CA0020.namprd03.prod.outlook.com
-	(2603:10b6:a02:a8::33) To MWHPR04MB0401.namprd04.prod.outlook.com
+x-clientproxiedby: BYAPR03CA0015.namprd03.prod.outlook.com
+	(2603:10b6:a02:a8::28) To MWHPR04MB0401.namprd04.prod.outlook.com
 	(2603:10b6:300:70::18)
 authentication-results: spf=none (sender IP is )
 	smtp.mailfrom=Alistair.Francis@wdc.com; 
@@ -71,17 +71,17 @@ x-ms-exchange-messagesentrepresentingtype: 1
 x-originating-ip: [199.255.44.171]
 x-ms-publictraffictype: Email
 x-microsoft-exchange-diagnostics: 1; MWHPR04MB0608;
-	6:W6A21Dl2qCHGPkYncmgELvegoVNXpBfZIuijpavwPIPG+Oxs9HKB59Sdm457mAaUDWRZE81Eha9vVr5cNn/DkTeJEPMu2HMH2FSpA/4XiJnuktZ/nOc/luxYAWhMwK2x4rB4VP1j4fHZHk2PoZ5r6oIdZ4vx7ss69roZHpAcpUVhDtjHdA6T+V7cQvfSQG7hkwCUV2eNkWo0oRP4aHMDudu8vye1cycbrv+B8Aemon6amd2xmREOVtzB8zUraDSFwSQhxGuCiJJYi/RysYcD/sYWjMarT2Tv42PTb1AZ/U4xdcJLemKxMzo7OJowWUGMQrfGEpJt7Kw+0nubTbIJlMipuPASCx6D/mSn4qnuT8nyko9gzl3zw/AuY838RJ+PVh3OzLlaYkSULTkTs/UrNDgtEer7hWUKRih+dUrB5ENmI8cTXDGT8Z6dovnE6762FYnFppD9rCi1Y0kFBLly0Q==;
-	5:j82EuxkOzT/U6zhEkDTTQJhI83zHgKVwQ0OUOIFIl3FYcjOF9fj1xSThySGVc5+oKNH7WMa70Bzwt3IJCY37REq3pCqV6m0eprvFX/qTbN5uoRhCbYNBz/P+G8p93DAaRoOeJswL8A4qEQ7aRQzotICGw0c9O9hv6x6WTgpsTs8=;
-	7:6oWJfqy4VjqrZURroBvwyLR7xrVrrNEYXJ7idO8lliJT2t/3JuHPat7YpH2QHaSn0neQshUJRJARlUwnzPHDfPHKi4mldb7xGq6sFqkFoZ3BtjS0T7QzGZnWeyIaKy8WbdLkhOhvShAaIFXmK7eNJQ==
-x-ms-office365-filtering-correlation-id: 230e1d17-c1a9-4d12-fe8a-08d65fb93f8f
+	6:wENYpgVZi7tgEffGfkyhU3mVU9MHlIMv3P+kErviiv+xr0e4nf5PlQUu+wlKvU4B1Gn7J53g6cC+heYaH2rzr4u6QtI5PKIcglyK37iXZ2LxvkrkyJJh6L5FWCxC3sHUx4GAaS66lsf7SwutJ6ka6bu1+c4aQKN67cA6gMAYyCY9+QQ5W1V8UiUFIoN9M3iqZhg35bv3ng3FpTogqLY1t6MT1DhMAJBJ0BOdRM9ID/VMTScrGJdHSUdKKZw6AUncDx8921ujGAuWmupEi6g+jTUkXh153EP/vpduCOAsu3+zPSG5PgLT2ClDvujQN7Z/HPGTuPPgeSmzwQBL0LCfdACexBbu3x/NZ8jsk6r7lu7sDsW3hLxtvvMSiLMeLwKErItx08Kbirb6olW1UtFL020rT9D8nCQbie4DPKcYyVTu8gx1dTQJjqO3BpiHL8RVIKVr7KUK4ioePU6R2EoJwA==;
+	5:jid/8BVPVlm4kDTv0yhna2jUDDNnpp8vL3GhqlPdPLBsnurV4+B4fCvZZ6YIAz5lx0N44dEMzbqZGTP58XMXTuJQeg7UoJcTm0MZQGJ8r3OtK6dLz5lMDqexTigYcnsse6iCv0xRS2E2e9k68mhkwBM9jNMQ2gyGBgJLL8WSSBw=;
+	7:rKjmIQ6cMju0PQ+aL8uOQwqt3IJUBE88xY0vWHHadDJZJkw6z642gmfsPn4+Y+2KKplE1Bogc+LGbZw5dB1Zv7reh148ftZturpR2RdGTL5A9XQyGEk0pG8xV03F/GpLDLQfuZGD89fUWJvqewCMgQ==
+x-ms-office365-filtering-correlation-id: e7b7a532-ae34-4b30-707c-08d65fb9458f
 x-ms-office365-filtering-ht: Tenant
 x-microsoft-antispam: BCL:0; PCL:0;
 	RULEID:(2390098)(7020095)(4652040)(8989299)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(5600074)(711020)(4618075)(2017052603328)(7153060)(7193020);
 	SRVR:MWHPR04MB0608; 
 x-ms-traffictypediagnostic: MWHPR04MB0608:
 wdcipoutbound: EOP-TRUE
-x-microsoft-antispam-prvs: <MWHPR04MB060827C61EF2DB5BC97882C090A60@MWHPR04MB0608.namprd04.prod.outlook.com>
+x-microsoft-antispam-prvs: <MWHPR04MB060814E894D7A260B807467990A60@MWHPR04MB0608.namprd04.prod.outlook.com>
 x-ms-exchange-senderadcheck: 1
 x-exchange-antispam-report-cfa-test: BCL:0; PCL:0;
 	RULEID:(8211001083)(3230017)(999002)(6040522)(2401047)(8121501046)(5005006)(10201501046)(93006095)(93001095)(3002001)(3231472)(944501520)(52105112)(6055026)(148016)(149066)(150057)(6041310)(20161123560045)(20161123558120)(20161123562045)(20161123564045)(201703131423095)(201702281528075)(20161123555045)(201703061421075)(201703061406153)(201708071742011)(7699051)(76991095);
@@ -92,22 +92,22 @@ x-forefront-antispam-report: SFV:NSPM;
 	DIR:OUT; SFP:1102; SCL:1; SRVR:MWHPR04MB0608;
 	H:MWHPR04MB0401.namprd04.prod.outlook.com; FPR:; SPF:None;
 	LANG:en; PTR:InfoNoRecords; A:1; MX:1; 
-x-microsoft-antispam-message-info: qqiEkDEKu1UA8ymLTjo0RNmTzX9YwOKhbnkhylaUbFpV4VlXw5Toi8ue+zZKETFqA9XzdS9ER/0CZwr899nw88Sl3XovV/tqgb89El4qdTxLoBs0TcMtfYrYYLBzZawjPJQoE51XwzXH0MNRnBe9gKJ74gNqdjjQNug3I0lw69ppiJWgd+4hLD7J6boyTAnG9R4n1w5SUDFNaK90AO0Dtnaqp5NAk8nvW1TWKPhSXA8xtIU6FChzP/2U9jCT86BwWtxzAsnv836ys/JqjfzDKBf2SYqpG5gs9DFcBGFpg3mtTtzRxNcGacJayd346947
+x-microsoft-antispam-message-info: ccMduK0QvyffGcnddLOG49GYlpSMF7XEVUWGhaUt7owIrG3ip3Ioqq94IO5QyCMzZqkbQNHhn+9o0eoH8Nbi35uw9VWiSMXzMVygT/i9bs7BCgCi/u0ozUj1jcPKm+Un7WmehjzXFcgfOd2+xyLUFzdfOEMgGX9hU7uDQtoOIxVYa+exvaueTwd8yWcSYt/ofc3WIKhBGJQMuSlAmMEwHyQttMSz0jowwKDmorFZdVMaMRs1CDx5M0eAF8om86a997HtcEttUsrXeAi0fwKhBHOwevnWTSD7su8F+vkxpDtCQUm9ZUtOD4ksl4VuRyOX
 spamdiagnosticoutput: 1:99
 spamdiagnosticmetadata: NSPM
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
 X-OriginatorOrg: wdc.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 230e1d17-c1a9-4d12-fe8a-08d65fb93f8f
-X-MS-Exchange-CrossTenant-originalarrivaltime: 11 Dec 2018 22:37:36.1837 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: e7b7a532-ae34-4b30-707c-08d65fb9458f
+X-MS-Exchange-CrossTenant-originalarrivaltime: 11 Dec 2018 22:37:46.2777 (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: MWHPR04MB0608
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 68.232.141.245
-Subject: [Qemu-riscv] [PATCH v8 3/4] hw/riscv/virt: Connect the gpex PCIe
+X-Received-From: 216.71.154.42
+Subject: [Qemu-riscv] [PATCH v8 4/4] riscv: Enable VGA and PCIE_VGA
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -121,290 +121,42 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Tue, 11 Dec 2018 22:38:01 -0000
 
-Connect the gpex PCIe device based on the device tree included in the
-HiFive Unleashed ROM.
+Enable compile support for VGA devices. This allows the user to conenct
+a display by adding '-device bochs-display -display sdl' to their
+command line argument.
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-Signed-off-by: Logan Gunthorpe <logang@deltatee.com>
 Reviewed-by: Logan Gunthorpe <logang@deltatee.com>
-Tested-by: Guenter Roeck <linux@roeck-us.net>
 Tested-by: Andrea Bolognani <abologna@redhat.com>
 ---
- default-configs/riscv32-softmmu.mak |   5 +-
- default-configs/riscv64-softmmu.mak |   5 +-
- hw/riscv/virt.c                     | 131 +++++++++++++++++++++++++++-
- include/hw/riscv/virt.h             |  13 ++-
- 4 files changed, 150 insertions(+), 4 deletions(-)
+ default-configs/riscv32-softmmu.mak | 3 +++
+ default-configs/riscv64-softmmu.mak | 3 +++
+ 2 files changed, 6 insertions(+)
 
 diff --git a/default-configs/riscv32-softmmu.mak b/default-configs/riscv32-=
 softmmu.mak
-index 7937c69e22..c5ea36cba5 100644
+index c5ea36cba5..dbc9398284 100644
 --- a/default-configs/riscv32-softmmu.mak
 +++ b/default-configs/riscv32-softmmu.mak
-@@ -1,7 +1,10 @@
- # Default configuration for riscv-softmmu
-=20
-+include pci.mak
-+
- CONFIG_SERIAL=3Dy
- CONFIG_VIRTIO_MMIO=3Dy
--include virtio.mak
-=20
+@@ -8,3 +8,6 @@ CONFIG_VIRTIO_MMIO=3Dy
  CONFIG_CADENCE=3Dy
+=20
+ CONFIG_PCI_GENERIC=3Dy
 +
-+CONFIG_PCI_GENERIC=3Dy
++CONFIG_VGA=3Dy
++CONFIG_VGA_PCI=3Dy
 diff --git a/default-configs/riscv64-softmmu.mak b/default-configs/riscv64-=
 softmmu.mak
-index 7937c69e22..c5ea36cba5 100644
+index c5ea36cba5..dbc9398284 100644
 --- a/default-configs/riscv64-softmmu.mak
 +++ b/default-configs/riscv64-softmmu.mak
-@@ -1,7 +1,10 @@
- # Default configuration for riscv-softmmu
-=20
-+include pci.mak
-+
- CONFIG_SERIAL=3Dy
- CONFIG_VIRTIO_MMIO=3Dy
--include virtio.mak
-=20
+@@ -8,3 +8,6 @@ CONFIG_VIRTIO_MMIO=3Dy
  CONFIG_CADENCE=3Dy
-+
-+CONFIG_PCI_GENERIC=3Dy
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index 6b6fa39aaa..e7f0716fb6 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -39,6 +39,8 @@
- #include "sysemu/arch_init.h"
- #include "sysemu/device_tree.h"
- #include "exec/address-spaces.h"
-+#include "hw/pci/pci.h"
-+#include "hw/pci-host/gpex.h"
- #include "elf.h"
 =20
- #include <libfdt.h>
-@@ -55,6 +57,9 @@ static const struct MemmapEntry {
-     [VIRT_UART0] =3D       { 0x10000000,         0x100 },
-     [VIRT_VIRTIO] =3D      { 0x10001000,        0x1000 },
-     [VIRT_DRAM] =3D        { 0x80000000,           0x0 },
-+    [VIRT_PCIE_MMIO] =3D   { 0x40000000,    0x40000000 },
-+    [VIRT_PCIE_PIO] =3D    { 0x03000000,    0x00010000 },
-+    [VIRT_PCIE_ECAM] =3D   { 0x30000000,    0x10000000 },
- };
-=20
- static uint64_t load_kernel(const char *kernel_filename)
-@@ -98,6 +103,51 @@ static hwaddr load_initrd(const char *filename, uint64_=
-t mem_size,
-     return *start + size;
- }
-=20
-+static void create_pcie_irq_map(void *fdt, char *nodename,
-+                                uint32_t plic_phandle)
-+{
-+    int pin, dev;
-+    uint32_t
-+        full_irq_map[GPEX_NUM_IRQS * GPEX_NUM_IRQS * FDT_INT_MAP_WIDTH] =
-=3D {};
-+    uint32_t *irq_map =3D full_irq_map;
+ CONFIG_PCI_GENERIC=3Dy
 +
-+    /* This code creates a standard swizzle of interrupts such that
-+     * each device's first interrupt is based on it's PCI_SLOT number.
-+     * (See pci_swizzle_map_irq_fn())
-+     *
-+     * We only need one entry per interrupt in the table (not one per
-+     * possible slot) seeing the interrupt-map-mask will allow the table
-+     * to wrap to any number of devices.
-+     */
-+    for (dev =3D 0; dev < GPEX_NUM_IRQS; dev++) {
-+        int devfn =3D dev * 0x8;
-+
-+        for (pin =3D 0; pin < GPEX_NUM_IRQS; pin++) {
-+            int irq_nr =3D PCIE_IRQ + ((pin + PCI_SLOT(devfn)) % GPEX_NUM_=
-IRQS);
-+            int i =3D 0;
-+
-+            irq_map[i] =3D cpu_to_be32(devfn << 8);
-+
-+            i +=3D FDT_PCI_ADDR_CELLS;
-+            irq_map[i] =3D cpu_to_be32(pin + 1);
-+
-+            i +=3D FDT_PCI_INT_CELLS;
-+            irq_map[i++] =3D cpu_to_be32(plic_phandle);
-+
-+            i +=3D FDT_PLIC_ADDR_CELLS;
-+            irq_map[i] =3D cpu_to_be32(irq_nr);
-+
-+            irq_map +=3D FDT_INT_MAP_WIDTH;
-+        }
-+    }
-+
-+    qemu_fdt_setprop(fdt, nodename, "interrupt-map",
-+                     full_irq_map, sizeof(full_irq_map));
-+
-+    qemu_fdt_setprop_cells(fdt, nodename, "interrupt-map-mask",
-+                           0x1800, 0, 0, 0x7);
-+}
-+
- static void *create_fdt(RISCVVirtState *s, const struct MemmapEntry *memma=
-p,
-     uint64_t mem_size, const char *cmdline)
- {
-@@ -203,7 +253,10 @@ static void *create_fdt(RISCVVirtState *s, const struc=
-t MemmapEntry *memmap,
-     nodename =3D g_strdup_printf("/soc/interrupt-controller@%lx",
-         (long)memmap[VIRT_PLIC].base);
-     qemu_fdt_add_subnode(fdt, nodename);
--    qemu_fdt_setprop_cell(fdt, nodename, "#interrupt-cells", 1);
-+    qemu_fdt_setprop_cells(fdt, nodename, "#address-cells",
-+                           FDT_PLIC_ADDR_CELLS);
-+    qemu_fdt_setprop_cell(fdt, nodename, "#interrupt-cells",
-+                          FDT_PLIC_INT_CELLS);
-     qemu_fdt_setprop_string(fdt, nodename, "compatible", "riscv,plic0");
-     qemu_fdt_setprop(fdt, nodename, "interrupt-controller", NULL, 0);
-     qemu_fdt_setprop(fdt, nodename, "interrupts-extended",
-@@ -233,6 +286,33 @@ static void *create_fdt(RISCVVirtState *s, const struc=
-t MemmapEntry *memmap,
-         g_free(nodename);
-     }
-=20
-+    nodename =3D g_strdup_printf("/soc/pci@%lx",
-+        (long) memmap[VIRT_PCIE_ECAM].base);
-+    qemu_fdt_add_subnode(fdt, nodename);
-+    qemu_fdt_setprop_cells(fdt, nodename, "#address-cells",
-+                           FDT_PCI_ADDR_CELLS);
-+    qemu_fdt_setprop_cells(fdt, nodename, "#interrupt-cells",
-+                           FDT_PCI_INT_CELLS);
-+    qemu_fdt_setprop_cells(fdt, nodename, "#size-cells", 0x2);
-+    qemu_fdt_setprop_string(fdt, nodename, "compatible",
-+                            "pci-host-ecam-generic");
-+    qemu_fdt_setprop_string(fdt, nodename, "device_type", "pci");
-+    qemu_fdt_setprop_cell(fdt, nodename, "linux,pci-domain", 0);
-+    qemu_fdt_setprop_cells(fdt, nodename, "bus-range", 0,
-+                           memmap[VIRT_PCIE_ECAM].base /
-+                               PCIE_MMCFG_SIZE_MIN - 1);
-+    qemu_fdt_setprop(fdt, nodename, "dma-coherent", NULL, 0);
-+    qemu_fdt_setprop_cells(fdt, nodename, "reg", 0, memmap[VIRT_PCIE_ECAM]=
-.base,
-+                           0, memmap[VIRT_PCIE_ECAM].size);
-+    qemu_fdt_setprop_sized_cells(fdt, nodename, "ranges",
-+        1, FDT_PCI_RANGE_IOPORT, 2, 0,
-+        2, memmap[VIRT_PCIE_PIO].base, 2, memmap[VIRT_PCIE_PIO].size,
-+        1, FDT_PCI_RANGE_MMIO,
-+        2, memmap[VIRT_PCIE_MMIO].base,
-+        2, memmap[VIRT_PCIE_MMIO].base, 2, memmap[VIRT_PCIE_MMIO].size);
-+    create_pcie_irq_map(fdt, nodename, plic_phandle);
-+    g_free(nodename);
-+
-     nodename =3D g_strdup_printf("/test@%lx",
-         (long)memmap[VIRT_TEST].base);
-     qemu_fdt_add_subnode(fdt, nodename);
-@@ -263,6 +343,47 @@ static void *create_fdt(RISCVVirtState *s, const struc=
-t MemmapEntry *memmap,
-     return fdt;
- }
-=20
-+
-+static inline DeviceState *gpex_pcie_init(MemoryRegion *sys_mem,
-+                                          hwaddr ecam_base, hwaddr ecam_si=
-ze,
-+                                          hwaddr mmio_base, hwaddr mmio_si=
-ze,
-+                                          hwaddr pio_base,
-+                                          DeviceState *plic, bool link_up)
-+{
-+    DeviceState *dev;
-+    MemoryRegion *ecam_alias, *ecam_reg;
-+    MemoryRegion *mmio_alias, *mmio_reg;
-+    qemu_irq irq;
-+    int i;
-+
-+    dev =3D qdev_create(NULL, TYPE_GPEX_HOST);
-+
-+    qdev_init_nofail(dev);
-+
-+    ecam_alias =3D g_new0(MemoryRegion, 1);
-+    ecam_reg =3D sysbus_mmio_get_region(SYS_BUS_DEVICE(dev), 0);
-+    memory_region_init_alias(ecam_alias, OBJECT(dev), "pcie-ecam",
-+                             ecam_reg, 0, ecam_size);
-+    memory_region_add_subregion(get_system_memory(), ecam_base, ecam_alias=
-);
-+
-+    mmio_alias =3D g_new0(MemoryRegion, 1);
-+    mmio_reg =3D sysbus_mmio_get_region(SYS_BUS_DEVICE(dev), 1);
-+    memory_region_init_alias(mmio_alias, OBJECT(dev), "pcie-mmio",
-+                             mmio_reg, mmio_base, mmio_size);
-+    memory_region_add_subregion(get_system_memory(), mmio_base, mmio_alias=
-);
-+
-+    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 2, pio_base);
-+
-+    for (i =3D 0; i < GPEX_NUM_IRQS; i++) {
-+        irq =3D qdev_get_gpio_in(plic, PCIE_IRQ + i);
-+
-+        sysbus_connect_irq(SYS_BUS_DEVICE(dev), i, irq);
-+        gpex_set_irq_num(GPEX_HOST(dev), i, PCIE_IRQ + i);
-+    }
-+
-+    return dev;
-+}
-+
- static void riscv_virt_board_init(MachineState *machine)
- {
-     const struct MemmapEntry *memmap =3D virt_memmap;
-@@ -385,6 +506,14 @@ static void riscv_virt_board_init(MachineState *machin=
-e)
-             qdev_get_gpio_in(DEVICE(s->plic), VIRTIO_IRQ + i));
-     }
-=20
-+    gpex_pcie_init(system_memory,
-+                         memmap[VIRT_PCIE_ECAM].base,
-+                         memmap[VIRT_PCIE_ECAM].size,
-+                         memmap[VIRT_PCIE_MMIO].base,
-+                         memmap[VIRT_PCIE_MMIO].size,
-+                         memmap[VIRT_PCIE_PIO].base,
-+                         DEVICE(s->plic), true);
-+
-     serial_mm_init(system_memory, memmap[VIRT_UART0].base,
-         0, qdev_get_gpio_in(DEVICE(s->plic), UART0_IRQ), 399193,
-         serial_hd(0), DEVICE_LITTLE_ENDIAN);
-diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
-index 2b2e6dd4ea..f12deaebd6 100644
---- a/include/hw/riscv/virt.h
-+++ b/include/hw/riscv/virt.h
-@@ -38,13 +38,17 @@ enum {
-     VIRT_PLIC,
-     VIRT_UART0,
-     VIRT_VIRTIO,
--    VIRT_DRAM
-+    VIRT_DRAM,
-+    VIRT_PCIE_MMIO,
-+    VIRT_PCIE_PIO,
-+    VIRT_PCIE_ECAM
- };
-=20
- enum {
-     UART0_IRQ =3D 10,
-     VIRTIO_IRQ =3D 1, /* 1 to 8 */
-     VIRTIO_COUNT =3D 8,
-+    PCIE_IRQ =3D 0x20, /* 32 to 35 */
-     VIRTIO_NDEV =3D 0x35 /* Arbitrary maximum number of interrupts */
- };
-=20
-@@ -62,6 +66,13 @@ enum {
- #define VIRT_PLIC_CONTEXT_BASE 0x200000
- #define VIRT_PLIC_CONTEXT_STRIDE 0x1000
-=20
-+#define FDT_PCI_ADDR_CELLS    3
-+#define FDT_PCI_INT_CELLS     1
-+#define FDT_PLIC_ADDR_CELLS   0
-+#define FDT_PLIC_INT_CELLS    1
-+#define FDT_INT_MAP_WIDTH     (FDT_PCI_ADDR_CELLS + FDT_PCI_INT_CELLS + 1 =
-+ \
-+                               FDT_PLIC_ADDR_CELLS + FDT_PLIC_INT_CELLS)
-+
- #if defined(TARGET_RISCV32)
- #define VIRT_CPU TYPE_RISCV_CPU_RV32GCSU_V1_10_0
- #elif defined(TARGET_RISCV64)
++CONFIG_VGA=3Dy
++CONFIG_VGA_PCI=3Dy
 --=20
 2.19.1
 
