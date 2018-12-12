@@ -1,66 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gWqpU-0006Yb-Kq
-	for mharc-qemu-riscv@gnu.org; Tue, 11 Dec 2018 17:48:40 -0500
-Received: from eggs.gnu.org ([2001:4830:134:3::10]:40846)
+	id 1gWs0z-0005bM-3A
+	for mharc-qemu-riscv@gnu.org; Tue, 11 Dec 2018 19:04:37 -0500
+Received: from eggs.gnu.org ([2001:4830:134:3::10]:59028)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1gWqpR-0006WK-34
-	for qemu-riscv@nongnu.org; Tue, 11 Dec 2018 17:48:39 -0500
+	(envelope-from <alistair23@gmail.com>) id 1gWs0w-0005Zp-BW
+	for qemu-riscv@nongnu.org; Tue, 11 Dec 2018 19:04:35 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1gWqpN-0007TO-Qp
-	for qemu-riscv@nongnu.org; Tue, 11 Dec 2018 17:48:36 -0500
-Received: from mail-pf1-x442.google.com ([2607:f8b0:4864:20::442]:34313)
+	(envelope-from <alistair23@gmail.com>) id 1gWs0v-0004B7-Ko
+	for qemu-riscv@nongnu.org; Tue, 11 Dec 2018 19:04:34 -0500
+Received: from mail-lj1-x244.google.com ([2a00:1450:4864:20::244]:37213)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1gWqpN-0007S6-8m
-	for qemu-riscv@nongnu.org; Tue, 11 Dec 2018 17:48:33 -0500
-Received: by mail-pf1-x442.google.com with SMTP id h3so7850036pfg.1
-	for <qemu-riscv@nongnu.org>; Tue, 11 Dec 2018 14:48:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
-	h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
-	:content-transfer-encoding;
-	bh=URBCZm7xV3qmiPerxtUlIcDBr7+Hv3BNJlbauL+jNQw=;
-	b=k3vfPPo1CmynY8/ngRHH/Xd3PPeyhJYnfu1c9e0JuAtFplwiqypMezHn61JCasEgbQ
-	MSMvnqv/CBxnmU6xGFAIPirDywxmz2IEeS08fDiVUVKFo+/S1nZaDu+7aYMAhSLccksg
-	ps2g+zSES+0BdjOxGddWAjly0q960OMRmZ039IF2lRogA1DZ62jFRQbEsMlX021KH4go
-	eYwlfFssdqHLn0sud7/6hNkA7Lsbh5UhtpV7yMD4dBaQTSRLsALstixEC0FvXMasTdbG
-	Jc23VrpHgOdXrBG0pZj1YMD2clMiqC5vPtFsZAfTEkBqBA9Tl3R+3g3i19Ox/PlWG8tZ
-	paDA==
+	(Exim 4.71) (envelope-from <alistair23@gmail.com>)
+	id 1gWs0t-00049r-Pn; Tue, 11 Dec 2018 19:04:31 -0500
+Received: by mail-lj1-x244.google.com with SMTP id e5-v6so14669427lja.4;
+	Tue, 11 Dec 2018 16:04:31 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=SaMeLbbURK7Kf+Exr1yVQLBYI6vUostE0BbF8gzYdDE=;
+	b=PeeyIvPnRM2ppmV7NI5YBnSoS2mcrFgR+ZcNA/3EwBHBWy/LCaSAX6y0zRCfV/i/4p
+	X6e283TpMkFdP/lqF9C39eHA4X7mnVFYBMAdOTM29JW0GfVqSbpiHUP2262VB4816/d1
+	OT/qk4H1R+ChdWUNEwxrwnAYdlcvF0OX+G4jaSolRxCja4SzV9HJGyW8xqmwEPrhKZM+
+	zCAPMj+aBvWE4lANv9r5pTr2RdWW4j8pTTMxcdHPt+wBSdFdamJGxoGlwkXBr41FDZAt
+	ESUpyfqZJh+NCs4PIzhgAjeHlr0iASa/LPTYTlz77Gziyl2+xFPi5ZIeHAlLRhGbJgQK
+	VQRw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
-	:mime-version:content-transfer-encoding;
-	bh=URBCZm7xV3qmiPerxtUlIcDBr7+Hv3BNJlbauL+jNQw=;
-	b=AtTulUDn06A98h9FNzk3+wV8ylL7NCSRD0QEv+T68ZtlkcAnmZH9B9ZzfuvxI/a6N2
-	+hpG1LMU4TaLo/nMaGOstD8fYenwdS0XJHyYOjrQKrE97DiChbXMTYIhWWU7UkMN4DX/
-	xtn1h1wUto9V0CsLU2Wo9EBPlU0nag68DVGrrSZ7AV9XaAwpaoeT5I0DeZW9LwaHrTxg
-	wmvnDeNkeF9/pyKaiJZtFr48W9xE+fPRTkD+6MZxXIDKFMXibTFCVra2iLrAMz54cIk4
-	nezCDanXpfFSf6mfuybWBivsNsF5Z96i920mWFwO31Wdp4gBaSWpF9UxgaZDSM/ZJtNi
-	VCWA==
-X-Gm-Message-State: AA+aEWbdge27WRb7Q0YfcP5IaLgcinfekZf4aMwlP6oTR9li4oIBfOPN
-	GrsB1KRTJpBEy9AjstbFvhs9Hw==
-X-Google-Smtp-Source: AFSGD/XODJsV7CxxTZ/Rd5b4YcKtvx/obVM1yO71ZCTYqhfFWZ7fQ7gyFUzlnl85mw5XchO/eS1NUQ==
-X-Received: by 2002:a63:4a4d:: with SMTP id j13mr16562417pgl.127.1544568511888;
-	Tue, 11 Dec 2018 14:48:31 -0800 (PST)
-Received: from localhost ([12.206.222.5]) by smtp.gmail.com with ESMTPSA id
-	e128sm20863147pfe.67.2018.12.11.14.48.30
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 11 Dec 2018 14:48:31 -0800 (PST)
-Date: Tue, 11 Dec 2018 14:48:31 -0800 (PST)
-X-Google-Original-Date: Tue, 11 Dec 2018 14:48:24 PST (-0800)
-In-Reply-To: <cover.1544567709.git.alistair.francis@wdc.com>
-CC: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
-	Alistair Francis <Alistair.Francis@wdc.com>, alistair23@gmail.com,
-	stephen@eideticom.com
-From: Palmer Dabbelt <palmer@sifive.com>
-To: Alistair Francis <Alistair.Francis@wdc.com>
-Message-ID: <mhng-b51f090f-6ece-4e17-9527-04f73763de4d@palmer-si-x1c4>
-Mime-Version: 1.0 (MHng)
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=SaMeLbbURK7Kf+Exr1yVQLBYI6vUostE0BbF8gzYdDE=;
+	b=L+s48MRh0XsZhIvG7NaW2ZCaMz1j5IYA53sLSyyPiRBRv3aS7Dp2CSB7cbPe6Mx89S
+	Mr/Lj5jaOJXBYrRsdn481kQxuYHR/JBiDkVWxKJElpmKCoDN8/GIaFJxeI/hr5bFaJpr
+	BSml4KkW0+6er+j67xkugCLn9XafKhrkHKZcSCc1ALWkqd67ncWYj3W7yURD3RwXl89m
+	SITueG+T68ORQ4tfh/p7iqjk/I9e9pVBefSoN4edDH1nwiQtpPU+b//NEF0kzWZbaFGi
+	QK+zhBZIlaDlWhMwaPpmXH27QAgeBycdjHy/THF1ubHOR946tyk4eqhA7qn/nt6T82Pe
+	Zqug==
+X-Gm-Message-State: AA+aEWYOefgne5r7Zh7NoePPMO+CTnK8bThV6ffw9lhLGe0idflKaYeT
+	bWIxkuAPozXowWMULv4EhA8Yu8x4YiHXUSc27XQ=
+X-Google-Smtp-Source: AFSGD/XV7uGXkOecD+9cERq8edz9Oy4xjHgvcZEOZ3eP16HnkggtQcXC6hlRUsVJIUCD1VGwVx5tESnZBCghGEy22Qo=
+X-Received: by 2002:a2e:131a:: with SMTP id
+	26-v6mr11965139ljt.107.1544573069741; 
+	Tue, 11 Dec 2018 16:04:29 -0800 (PST)
+MIME-Version: 1.0
+References: <cover.1544229872.git.alistair.francis@wdc.com>
+	<c1cbe33881d567ee4712128282e6fcc49a5736b5.1544229872.git.alistair.francis@wdc.com>
+	<98465a90-99cc-bce6-8cde-5025a30b3785@linaro.org>
+	<042678a6-6837-e272-e4fa-eb0a8f265e6b@linaro.org>
+In-Reply-To: <042678a6-6837-e272-e4fa-eb0a8f265e6b@linaro.org>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 11 Dec 2018 16:04:03 -0800
+Message-ID: <CAKmqyKNGDCkqL1VzdLBm+dwVx6C9PTUP+amzHfZeqTifC1Ef7A@mail.gmail.com>
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
+	"qemu-devel@nongnu.org" <qemu-devel@nongnu.org>,
+	"qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::442
-Subject: Re: [Qemu-riscv] [PATCH v8 0/4] Connect a PCIe host and graphics
- support to RISC-V
+X-Received-From: 2a00:1450:4864:20::244
+Subject: Re: [Qemu-riscv] [RFC v3 19/24] riscv: tcg-target: Add the out op
+ decoder
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -72,55 +70,64 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Dec 2018 22:48:39 -0000
+X-List-Received-Date: Wed, 12 Dec 2018 00:04:35 -0000
 
-On Tue, 11 Dec 2018 14:37:07 PST (-0800), Alistair Francis wrote:
-> This series is now ready to be merged, all of the patches are reviewed
-> and tested.
+On Tue, Dec 11, 2018 at 2:45 PM Richard Henderson
+<richard.henderson@linaro.org> wrote:
 >
-> Palmer can you take this with all the other RISC-V patches sent during
-> the freeze?
+> On 12/10/18 11:56 AM, Richard Henderson wrote:
+> > On 12/7/18 6:49 PM, Alistair Francis wrote:
+> >> +    case INDEX_op_neg_i64:
+> >> +        tcg_out_opc_imm(s, OPC_SUB, a0, TCG_REG_ZERO, a1);
+> >
+> > tcg_out_opc_reg.
+> >
+> >> +    case INDEX_op_mulsh_i32:
+> >> +    case INDEX_op_mulsh_i64:
+> >> +        tcg_out_opc_imm(s, OPC_MULH, a0, a1, a2);
+> >> +        break;
+> >> +
+> >> +    case INDEX_op_muluh_i32:
+> >> +    case INDEX_op_muluh_i64:
+> >> +        tcg_out_opc_imm(s, OPC_MULHU, a0, a1, a2);
+> >> +        break;
+> >
+> > Likewise.
+>
+> Incidentally, catching these sorts of errors is why tcg/s390 puts the format of
+> the insn into the enum.  E.g.
+>
+> /* Emit an opcode with "type-checking" of the format.  */
+> #define tcg_out_insn(S, FMT, OP, ...) \
+>     glue(tcg_out_insn_,FMT)(S, glue(glue(FMT,_),OP), ## __VA_ARGS__)
+>
+>     tcg_out_insn(s, RR, AR, a0, a2);
+>     tcg_out_insn(s, RRE, AGR, TCG_TMP0, index);
+>
+> /* All of the following instructions are prefixed with their instruction
+>    format...  */
+> typedef enum S390Opcode {
+>     ...
+>     RR_AR       = 0x1a,
+>     RRE_AGR     = 0xb908,
 
-Yep, I'll be collecting everything this week.
-
-Thanks!
+That is really cool.
 
 >
-> V8:
->  - Drop SiFive U support
->  - Drop legacy -nic support
->  - Small other review changes
-> V7:
->  - Fix the GPEX memory mapping thanks to Bin Meng
->  - Fix the interrupt mapping thanks to Logan Gunthorpe
-> V6:
->  - Fix the interrupt issue for the GPEX device
-> V5:
->  - Rebase
->  - Include pci.mak in the default configs
-> V4:
->  - Fix the spike device tree
->  - Don't use stdvga device
-> V3:
->  - Remove Makefile config changes
->  - Connect a network adapter to the virt device
-> V2:
->  - Use the gpex PCIe host for virt
->  - Add support for SiFive U PCIe
+>
+> I do something similar for tcg/aarch64, although that's more complicated due to
+> the wide variety of formats.
+>
+> Whether you go back and retro-fit this scheme to your existing patch set is up
+> to you.  But I think it could be worthwhile.
+
+It looks like I'm ready to send a patch series (instead of an RFC) so
+I might leave it for now. There are a range of improvements we can
+work on in the future, this can be yet another one.
+
+Alistair
+
 >
 >
-> Alistair Francis (4):
->   hw/riscv/virt: Increase the number of interrupts
->   hw/riscv/virt: Adjust memory layout spacing
->   hw/riscv/virt: Connect the gpex PCIe
->   riscv: Enable VGA and PCIE_VGA
->
->  default-configs/riscv32-softmmu.mak |   8 +-
->  default-configs/riscv64-softmmu.mak |   8 +-
->  hw/riscv/virt.c                     | 147 ++++++++++++++++++++++++++--
->  include/hw/riscv/virt.h             |  15 ++-
->  4 files changed, 165 insertions(+), 13 deletions(-)
->
-> -- 
-> 2.19.1
+> r~
 
