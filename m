@@ -1,67 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gXAPY-000081-Fi
-	for mharc-qemu-riscv@gnu.org; Wed, 12 Dec 2018 14:43:12 -0500
-Received: from eggs.gnu.org ([2001:4830:134:3::10]:48191)
+	id 1gXAPc-0000Bq-3U
+	for mharc-qemu-riscv@gnu.org; Wed, 12 Dec 2018 14:43:16 -0500
+Received: from eggs.gnu.org ([2001:4830:134:3::10]:48241)
 	by lists.gnu.org with esmtp (Exim 4.71)
 	(envelope-from <prvs=8779827ad=Alistair.Francis@wdc.com>)
-	id 1gXAPS-0008Ua-OC
-	for qemu-riscv@nongnu.org; Wed, 12 Dec 2018 14:43:10 -0500
+	id 1gXAPZ-00009T-Ra
+	for qemu-riscv@nongnu.org; Wed, 12 Dec 2018 14:43:14 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
 	(envelope-from <prvs=8779827ad=Alistair.Francis@wdc.com>)
-	id 1gXAPR-0001An-GA
-	for qemu-riscv@nongnu.org; Wed, 12 Dec 2018 14:43:06 -0500
-Received: from esa3.hgst.iphmx.com ([216.71.153.141]:39059)
+	id 1gXAPX-0001GE-Qz
+	for qemu-riscv@nongnu.org; Wed, 12 Dec 2018 14:43:13 -0500
+Received: from esa3.hgst.iphmx.com ([216.71.153.141]:39067)
 	by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.71) (envelope-from <prvs=8779827ad=Alistair.Francis@wdc.com>)
-	id 1gXAPH-0000uS-Ve; Wed, 12 Dec 2018 14:42:56 -0500
+	id 1gXAPQ-000181-3K; Wed, 12 Dec 2018 14:43:05 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
 	d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
-	t=1544643776; x=1576179776;
-	h=from:to:cc:subject:date:message-id:
-	content-transfer-encoding:mime-version;
-	bh=E4BRXTUQWXWFJZ0QAiQXjWFTvDGgagFdLPD09hmhvio=;
-	b=ULSh2KBSBpQe75xKIrGV3EQmIJQa0mDtLEFB98RHfjWOB1u9kNNnmQXj
-	W4A/UEQErqUOqRSFMnXSsgY3Gu9L3XPkLO7rVC+jD55pLgmW9tUKRfQN0
-	+BMVvFW5GHEWnyPd8gHHssy8cLKjNrKUT5SDlwmmMFXsnIpc14M/MNKyW
-	qKJvCYlii+oK0wzTrqXcNboMugiH8Z9RX8OfwULUU+ipCm3OumnFpEckt
-	RbhloDXzrA1ppsyldX4u9T5un6FZkxWyFPQCyylAaehec7URJN2O91LZg
-	OwLExl/8SB3vgES3xkctZ52J4WOWYZPS5Jx03R4r4MX1Tilq2AuXO9LqK A==;
-X-IronPort-AV: E=Sophos;i="5.56,345,1539619200"; d="scan'208";a="101342179"
-Received: from mail-by2nam05lp2053.outbound.protection.outlook.com (HELO
-	NAM05-BY2-obe.outbound.protection.outlook.com) ([104.47.50.53])
-	by ob1.hgst.iphmx.com with ESMTP; 13 Dec 2018 03:42:53 +0800
+	t=1544643784; x=1576179784;
+	h=from:to:cc:subject:date:message-id:references:
+	in-reply-to:content-transfer-encoding:mime-version;
+	bh=mF4O0+bfADNh8fzyDt27zpjmLYs6qg05LJuV8MMK3Jo=;
+	b=KOOYsPCtl0E3Fyn5KgzdXFP+dD1zdFSgJYDfIP64IhsAuTkZ/UkjCU5G
+	r46ZNh6FhzbN8iC68X5tmAmF7ohe3S1WHustSIaiJNDyZ58mK4hh4pwO5
+	QmNK9Vu4asAXPIh2baVmVl5FZQ/+dgTYbCZJwdrA6XpeVKMbS2jrGRYwo
+	geF3qbWHr0dxB2XNICvRGf9dxinLNrGnJiQj0ok6xREXXzdiaNTP4zVKv
+	+hKwiaCKrrF3gph4uV3EF3S5OlQ1B7JvBpGlmp2bP8lYsGfg6nwgsyqCs
+	FIQLkHeI/ZchX/LWIiILpCL/K/1HYVzSaP7PrQFVYAzYWhBxb5Vo8mA1L w==;
+X-IronPort-AV: E=Sophos;i="5.56,345,1539619200"; d="scan'208";a="101342189"
+Received: from mail-by2nam05lp2058.outbound.protection.outlook.com (HELO
+	NAM05-BY2-obe.outbound.protection.outlook.com) ([104.47.50.58])
+	by ob1.hgst.iphmx.com with ESMTP; 13 Dec 2018 03:43:02 +0800
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=sharedspace.onmicrosoft.com; s=selector1-wdc-com;
 	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=jNW9wDjp9CXfTq13wMd01rzIQUgvk269m69QOPMkWcQ=;
-	b=AqchBzh3KqlVvzg4I58FbQhF5E7iD9LdLvikKhZcSoLjunfSz8d3LlNb2+MnSKEL0wMi4YaDwsVRkUZIubHTmdo+HrRHnb/o/nEzn81LmUruqCkLSvVgPAjFCMh6qvrwBX1313YA4p+p4A8GTNQ2ZJSM3K4eLB2T37oEAuYS/ZA=
+	bh=pjqulYK6IymM7ZlRic1bd6OprINR9qsdhN20yySqNEE=;
+	b=Dy+xclwe5v3BaqP8/5WsAi7LACz4yv+36hWa1GoaQ6xy3LHYuYbVvi+kHIHag+oOO2fo9ZDuy5Vrb4sh46hWymWaw1eO03MgT5+5ZVCWDarqXaM0G/qFPHjbi4cS5EJkIOVx2m1AOcAoZ6b5KIKHYco7rAivtz/h4eaCBMEcVig=
 Received: from MWHPR04MB0401.namprd04.prod.outlook.com (10.173.48.18) by
 	MWHPR04MB3744.namprd04.prod.outlook.com (10.172.169.19) with Microsoft
 	SMTP
 	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
-	15.20.1425.19; Wed, 12 Dec 2018 19:42:51 +0000
+	15.20.1425.19; Wed, 12 Dec 2018 19:43:00 +0000
 Received: from MWHPR04MB0401.namprd04.prod.outlook.com
 	([fe80::9067:fb44:66b2:7604]) by
 	MWHPR04MB0401.namprd04.prod.outlook.com
 	([fe80::9067:fb44:66b2:7604%3]) with mapi id 15.20.1425.016;
-	Wed, 12 Dec 2018 19:42:51 +0000
+	Wed, 12 Dec 2018 19:43:00 +0000
 From: Alistair Francis <Alistair.Francis@wdc.com>
 To: "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, "qemu-riscv@nongnu.org"
 	<qemu-riscv@nongnu.org>
 CC: Alistair Francis <Alistair.Francis@wdc.com>, "alistair23@gmail.com"
 	<alistair23@gmail.com>, "richard.henderson@linaro.org"
 	<richard.henderson@linaro.org>
-Thread-Topic: [PATCH v1 00/23]  Add RISC-V TCG backend support
-Thread-Index: AQHUklLexMhLlkW7wUa7JkAKhspGng==
-Date: Wed, 12 Dec 2018 19:42:51 +0000
-Message-ID: <cover.1544643238.git.alistair.francis@wdc.com>
+Thread-Topic: [PATCH v1 01/23] elf.h: Add the RISCV ELF magic numbers
+Thread-Index: AQHUklLjtBwPb3tJ202ZJfv96JcjxQ==
+Date: Wed, 12 Dec 2018 19:43:00 +0000
+Message-ID: <da0e24e750d8c8f664369daebf99109c4346afbf.1544643238.git.alistair.francis@wdc.com>
+References: <cover.1544643238.git.alistair.francis@wdc.com>
+In-Reply-To: <cover.1544643238.git.alistair.francis@wdc.com>
 Accept-Language: en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
 x-mailer: git-send-email 2.19.1
-x-clientproxiedby: BYAPR04CA0025.namprd04.prod.outlook.com
-	(2603:10b6:a03:40::38) To MWHPR04MB0401.namprd04.prod.outlook.com
+x-clientproxiedby: BYAPR04CA0002.namprd04.prod.outlook.com
+	(2603:10b6:a03:40::15) To MWHPR04MB0401.namprd04.prod.outlook.com
 	(2603:10b6:300:70::18)
 authentication-results: spf=none (sender IP is )
 	smtp.mailfrom=Alistair.Francis@wdc.com; 
@@ -69,43 +71,43 @@ x-ms-exchange-messagesentrepresentingtype: 1
 x-originating-ip: [199.255.44.250]
 x-ms-publictraffictype: Email
 x-microsoft-exchange-diagnostics: 1; MWHPR04MB3744;
-	6:G8FdAL0OEJU/at7zmKg2SnwQit0kkpC+dZc9xzACsTDEunOpulF435OsHaQAOmCycCGERXkcNCwcNE2awezJIt1D53fQ3+q787cE9DXnj2ZCOtLr4dtSbLdqGkR7JsawVNyQrjrayRJ9cy39pdre+UKBt6AloALX+cCUtky7dYTJxvsoukr0YAOhWfNDUZzB1w5n2zshDLdFMrx8bYZpSnCnQEJ72Yw22+Ewli3NN1O/+eE+Sl7tiR26Ob0b1r3KSvS+Fs69gS9Q5wEQsgj1fNNGwWs5at/4odt0QmxuXwqBq58tLVhn1MRgIYnzRrLWxJq8NBJJNTIZmHtAkLZe/a/Y5Nof2wbu1VVgmtOjBeoTDIinqvUbDdCNtoWyfA79ogyGnYDZV5ZbgW4n5wGKvsIVBJjE7mp/meSD25iPtny3heS8RUeLNgUtOaCI3K3tULehoNnuVNS1z89hUX3dgA==;
-	5:fmUdHy//gAnK2eLpy6zJND0kFaOJFSpCzZU4xAOfIuo1jCl1BcshlNRGrh9BRvrpatkrSV+QtD8YvOGDNYKr5JtXVL3v87myNfk10f/hp6tznJ089File9/uEdaGDAlupSv9uucMfkjtFvku/XZQAf1JrSdbvWFb+N3Eeosj7mc=;
-	7:ytzTbpFF3NJwHpNNVPDicOh8Kk6dBoguA3FSvlSlcixoh/37HId/tE6GbhOwCNzbvBKl71g2M+lyYn2DreP2M4u4f7VEMrf6xjJZmQOAVax+gG1+mLVZb+K75SpAad8MY6AUY3Gi9r50LGVZE7aOPA==
-x-ms-office365-filtering-correlation-id: a39c37fd-72ab-41f0-6988-08d6606a00b0
+	6:KV4SrlleAV3Yo/XPGlynV6QaBL/xSltzRe3LRk7AHJRQmKJuxdumMCCW8LZNCAa4SSnr/y6xtqgeWJpMRYjRUXrL/q/y7LJNSixqmZXqY0htsJGZsnaXYzek9WuI6rGfdgIYaS+X+ZumpXuajo9uFkxYFwfXFBen14JIHce2o6o1RhaOQy8OY3lbBe+8oPUDIBwr/LSkhp0RDcQTQ6F5kZ8pThand+EqGsdUfU0epqI8tZUdbqrlDHO1HBDL8YxllUPLVDzC39MuuvDGcusGEUgKB+mMMc8cCORs+k4gCFbwcRICpGwmFRKKp6TLfc9y5J5gRTj//6ohkl9A9u1e/E77eQonuWF0tyKTgAffFDn3gm10CbTTs9+DFdoAmmCeRYE0nLU3fQ1HW2Sqe9GD2ciTlJ8V0Xlkin19mGy+uYZoYn+MW8YFfXeoeOab81EqM+Tg83bI1pOudt+g8z64qQ==;
+	5:1lT+zlEg5e7mNv5RlLNJ9SVFzmlsdBUPlchViQiSXUd7n1slFsLnLEgpTutJRQZTahJPLDpuO5t7i9N6ztsRdPmZeHyo54Fle0GIbwXgQooiQtbzimHjX55fMKNsFdtFLn6vu9ikTk45/LO214REL1axRcDFsgSdczBnGfJQd6E=;
+	7:uTAoh6N1jCVSrTsJh65tL/IK7oFdnzaYMUJYCp9//LaQnrmRwxd9CZ6RB5IiN3ncIya8+EYBXpCB3jjMuE6MDoDnRk4mw0qSEhdd3KYTgQ/WP2K4CR6bBNRW9h+o/qJih2obh8wOg0beL8BOYnV8aQ==
+x-ms-office365-filtering-correlation-id: 08f08168-b97e-418e-08f3-08d6606a061c
 x-ms-office365-filtering-ht: Tenant
 x-microsoft-antispam: BCL:0; PCL:0;
 	RULEID:(2390098)(7020095)(4652040)(8989299)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(5600074)(711020)(4618075)(2017052603328)(7153060)(7193020);
 	SRVR:MWHPR04MB3744; 
 x-ms-traffictypediagnostic: MWHPR04MB3744:
 wdcipoutbound: EOP-TRUE
-x-microsoft-antispam-prvs: <MWHPR04MB37448D6D2B35B34AB447CA5990A70@MWHPR04MB3744.namprd04.prod.outlook.com>
+x-microsoft-antispam-prvs: <MWHPR04MB37442C82CDB752E068C1D23190A70@MWHPR04MB3744.namprd04.prod.outlook.com>
 x-ms-exchange-senderadcheck: 1
 x-exchange-antispam-report-cfa-test: BCL:0; PCL:0;
 	RULEID:(8211001083)(6040522)(2401047)(5005006)(8121501046)(10201501046)(3002001)(93006095)(93001095)(3231455)(999002)(944501520)(52105112)(6055026)(148016)(149066)(150057)(6041310)(20161123564045)(20161123562045)(20161123560045)(201703131423095)(201702281528075)(20161123555045)(201703061421075)(201703061406153)(20161123558120)(201708071742011)(7699051)(76991095);
 	SRVR:MWHPR04MB3744; BCL:0; PCL:0; RULEID:; SRVR:MWHPR04MB3744; 
 x-forefront-prvs: 0884AAA693
 x-forefront-antispam-report: SFV:NSPM;
-	SFS:(10019020)(396003)(376002)(366004)(136003)(346002)(39860400002)(189003)(199004)(2501003)(81166006)(81156014)(8936002)(7736002)(316002)(14444005)(97736004)(8676002)(86362001)(256004)(386003)(6506007)(52116002)(102836004)(6512007)(26005)(186003)(50226002)(6486002)(6306002)(4326008)(39060400002)(6436002)(66066001)(53936002)(6116002)(14454004)(966005)(72206003)(25786009)(3846002)(36756003)(478600001)(2616005)(476003)(486006)(106356001)(44832011)(68736007)(105586002)(71190400001)(71200400001)(5660300001)(305945005)(2906002)(99286004)(54906003)(110136005);
+	SFS:(10019020)(396003)(376002)(366004)(136003)(346002)(39860400002)(189003)(199004)(217873002)(2501003)(81166006)(81156014)(8936002)(7736002)(76176011)(316002)(575784001)(97736004)(8676002)(86362001)(256004)(386003)(6506007)(52116002)(102836004)(6512007)(26005)(186003)(50226002)(6486002)(4326008)(39060400002)(6436002)(66066001)(53936002)(6116002)(14454004)(72206003)(25786009)(3846002)(36756003)(446003)(478600001)(11346002)(2616005)(476003)(486006)(106356001)(44832011)(68736007)(105586002)(71190400001)(71200400001)(5660300001)(305945005)(2906002)(118296001)(99286004)(54906003)(110136005);
 	DIR:OUT; SFP:1102; SCL:1; SRVR:MWHPR04MB3744;
 	H:MWHPR04MB0401.namprd04.prod.outlook.com; FPR:; SPF:None;
 	LANG:en; PTR:InfoNoRecords; MX:1; A:1; 
-x-microsoft-antispam-message-info: 7AP9AU8JKFupU06r1xkd/+vkbOK3MC4cOUQ+CpbJGfVb8LOSJ5vfViIC0qIdHb3L/Yz0KKFOK6QJTx8wIhnVE4xvnQpMyIdLaZnBFGKBE6K+pd8XFKOdkbiEVCgtdOaSQtJ/UehorIrz2ApQwSptKK8RvWNE7zKBx6P3pZJa379yVWKvTBUzR8+EU3h0WjxjYn2xxzANoxo6MVhzJ94IFbb0yac05dIIXueD1EcgGpDstUqP6GWwvV+ww5ZLXF3esfu3Ngr/femEEFECC/yZKdtlvGgmQfYYCvXfBUoCrechxmGSvQ7DH3wlVRopPgXh
+x-microsoft-antispam-message-info: hft+XxAlmkNUYpcT+8pkKOUFVbSwwomciIhuSAS4urrS7DqSYfzUp2e+RVnSgvIdc4II3ZnZtm+LSHLHD55XoohvI1IfQniol8+RjFv9uyzC9XLRdSSDjkFKT2remdQfTI6wX01ymoNjssMGOlTpi+rLJ2cYcClLGy4wKwuB6nKjprAGY3gG/x6KpHf8RmQ+oq+BloMUe3ZSO61KTX9X79l00x30R/ut8uDTw4NKwjITuHrldP8eaUaTZCFN0SJiipBaCWz7pUIBiQ1XkPIslZ8vJSaSxYb79jhwgwZkRD7Bvb2YvyBSYLt719lvKM0P
 spamdiagnosticoutput: 1:99
 spamdiagnosticmetadata: NSPM
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
 X-OriginatorOrg: wdc.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: a39c37fd-72ab-41f0-6988-08d6606a00b0
-X-MS-Exchange-CrossTenant-originalarrivaltime: 12 Dec 2018 19:42:51.7615 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 08f08168-b97e-418e-08f3-08d6606a061c
+X-MS-Exchange-CrossTenant-originalarrivaltime: 12 Dec 2018 19:43:00.7460 (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: MWHPR04MB3744
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
 X-Received-From: 216.71.153.141
-Subject: [Qemu-riscv] [PATCH v1 00/23]  Add RISC-V TCG backend support
+Subject: [Qemu-riscv] [PATCH v1 01/23] elf.h: Add the RISCV ELF magic numbers
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -117,77 +119,81 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Dec 2018 19:43:10 -0000
+X-List-Received-Date: Wed, 12 Dec 2018 19:43:14 -0000
 
-This patch set adds RISC-V backend support to QEMU. This is based on
-Michael Clark's original work with extra work on top.
-This has been somewhat tested and can run other architecture softmmu
-code. It seems that any complex OS will eventually hang, but we can
-run the BIOS and OS startup code for a number of different operating
-systems.
-I haven't tested linux user support at all yet. I think Michael had that
-working reliably though and hopefully my changes haven't broken it.
-There are still some todos in the code (there are missing instructions
-and byte swapping) but these should assert instead of generating invalid
-code.
-As this is all new work (so can't cause regressions) I'm starting the
-patch series process with what we have so far. That way others can help
-contribute and test. If anyone has strong feelings for missing functionalit=
-y
-let me know and we can work on adding that before this is merged.
-This branch can be found here:
-https://github.com/alistair23/qemu/tree/mainline/alistair/tcg-backend-upstr=
-eam.next
-v1:
- - Fix long jump with slowpath load/stores
-RFC v3:
- - Update the MAINTAINERS file
- - Enusre that RISC-V 32-bit works
- - More changes based on Richard's feedback and contributions
-RFC v2:
- - A large number of changes based on Richard's feedback
+Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+Signed-off-by: Michael Clark <mjc@sifive.com>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+---
+ include/elf.h | 55 +++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 55 insertions(+)
 
-Alistair Francis (23):
-  elf.h: Add the RISCV ELF magic numbers
-  linux-user: Add host dependency for RISC-V 32-bit
-  linux-user: Add host dependency for RISC-V 64-bit
-  exec: Add RISC-V GCC poison macro
-  riscv: Add the tcg-target header file
-  riscv: Add the tcg target registers
-  riscv: tcg-target: Add support for the constraints
-  riscv: tcg-target: Add the immediate encoders
-  riscv: tcg-target: Add the instruction emitters
-  riscv: tcg-target: Add the relocation functions
-  riscv: tcg-target: Add the mov and movi instruction
-  riscv: tcg-target: Add the extract instructions
-  riscv: tcg-target: Add the out load and store instructions
-  riscv: tcg-target: Add the add2 and sub2 instructions
-  riscv: tcg-target: Add branch and jump instructions
-  riscv: tcg-target: Add slowpath load and store instructions
-  riscv: tcg-target: Add direct load and store instructions
-  riscv: tcg-target: Add the out op decoder
-  riscv: tcg-target: Add the prologue generation and register the JIT
-  riscv: tcg-target: Add the target init code
-  tcg: Add RISC-V cpu signal handler
-  dias: Add RISC-V support
-  configure: Add support for building RISC-V host
-
- MAINTAINERS                       |    3 +
- accel/tcg/user-exec.c             |   75 ++
- configure                         |   12 +-
- disas.c                           |   10 +-
- include/elf.h                     |   55 +
- include/exec/poison.h             |    1 +
- linux-user/host/riscv32/hostdep.h |   11 +
- linux-user/host/riscv64/hostdep.h |   11 +
- tcg/riscv/tcg-target.h            |  175 +++
- tcg/riscv/tcg-target.inc.c        | 1929 +++++++++++++++++++++++++++++
- 10 files changed, 2278 insertions(+), 4 deletions(-)
- create mode 100644 linux-user/host/riscv32/hostdep.h
- create mode 100644 linux-user/host/riscv64/hostdep.h
- create mode 100644 tcg/riscv/tcg-target.h
- create mode 100644 tcg/riscv/tcg-target.inc.c
-
+diff --git a/include/elf.h b/include/elf.h
+index c151164b63..0ac7911b7b 100644
+--- a/include/elf.h
++++ b/include/elf.h
+@@ -1338,6 +1338,61 @@ typedef struct {
+ #define R_IA64_DTPREL64LSB	0xb7	/* @dtprel(sym + add), data8 LSB */
+ #define R_IA64_LTOFF_DTPREL22	0xba	/* @ltoff(@dtprel(s+a)), imm22 */
+=20
++/* RISC-V relocations.  */
++#define R_RISCV_NONE          0
++#define R_RISCV_32            1
++#define R_RISCV_64            2
++#define R_RISCV_RELATIVE      3
++#define R_RISCV_COPY          4
++#define R_RISCV_JUMP_SLOT     5
++#define R_RISCV_TLS_DTPMOD32  6
++#define R_RISCV_TLS_DTPMOD64  7
++#define R_RISCV_TLS_DTPREL32  8
++#define R_RISCV_TLS_DTPREL64  9
++#define R_RISCV_TLS_TPREL32   10
++#define R_RISCV_TLS_TPREL64   11
++#define R_RISCV_BRANCH        16
++#define R_RISCV_JAL           17
++#define R_RISCV_CALL          18
++#define R_RISCV_CALL_PLT      19
++#define R_RISCV_GOT_HI20      20
++#define R_RISCV_TLS_GOT_HI20  21
++#define R_RISCV_TLS_GD_HI20   22
++#define R_RISCV_PCREL_HI20    23
++#define R_RISCV_PCREL_LO12_I  24
++#define R_RISCV_PCREL_LO12_S  25
++#define R_RISCV_HI20          26
++#define R_RISCV_LO12_I        27
++#define R_RISCV_LO12_S        28
++#define R_RISCV_TPREL_HI20    29
++#define R_RISCV_TPREL_LO12_I  30
++#define R_RISCV_TPREL_LO12_S  31
++#define R_RISCV_TPREL_ADD     32
++#define R_RISCV_ADD8          33
++#define R_RISCV_ADD16         34
++#define R_RISCV_ADD32         35
++#define R_RISCV_ADD64         36
++#define R_RISCV_SUB8          37
++#define R_RISCV_SUB16         38
++#define R_RISCV_SUB32         39
++#define R_RISCV_SUB64         40
++#define R_RISCV_GNU_VTINHERIT 41
++#define R_RISCV_GNU_VTENTRY   42
++#define R_RISCV_ALIGN         43
++#define R_RISCV_RVC_BRANCH    44
++#define R_RISCV_RVC_JUMP      45
++#define R_RISCV_RVC_LUI       46
++#define R_RISCV_GPREL_I       47
++#define R_RISCV_GPREL_S       48
++#define R_RISCV_TPREL_I       49
++#define R_RISCV_TPREL_S       50
++#define R_RISCV_RELAX         51
++#define R_RISCV_SUB6          52
++#define R_RISCV_SET6          53
++#define R_RISCV_SET8          54
++#define R_RISCV_SET16         55
++#define R_RISCV_SET32         56
++
+ typedef struct elf32_rel {
+   Elf32_Addr	r_offset;
+   Elf32_Word	r_info;
 --=20
 2.19.1
 
