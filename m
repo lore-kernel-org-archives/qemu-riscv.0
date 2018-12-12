@@ -1,55 +1,54 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gWtXw-00055L-5s
+	id 1gWtXw-00055Y-BA
 	for mharc-qemu-riscv@gnu.org; Tue, 11 Dec 2018 20:42:44 -0500
-Received: from eggs.gnu.org ([2001:4830:134:3::10]:49674)
+Received: from eggs.gnu.org ([2001:4830:134:3::10]:49944)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <jimw@sifive.com>) id 1gWtKz-0001Zb-AX
-	for qemu-riscv@nongnu.org; Tue, 11 Dec 2018 20:29:23 -0500
+	(envelope-from <jimw@sifive.com>) id 1gWtML-0001j0-VV
+	for qemu-riscv@nongnu.org; Tue, 11 Dec 2018 20:30:48 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <jimw@sifive.com>) id 1gWtKx-0000cH-2X
-	for qemu-riscv@nongnu.org; Tue, 11 Dec 2018 20:29:21 -0500
-Received: from mail-pf1-x441.google.com ([2607:f8b0:4864:20::441]:36569)
+	(envelope-from <jimw@sifive.com>) id 1gWtMJ-0001K0-6C
+	for qemu-riscv@nongnu.org; Tue, 11 Dec 2018 20:30:45 -0500
+Received: from mail-pf1-x441.google.com ([2607:f8b0:4864:20::441]:37240)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <jimw@sifive.com>) id 1gWtKw-0000bd-Ki
-	for qemu-riscv@nongnu.org; Tue, 11 Dec 2018 20:29:18 -0500
-Received: by mail-pf1-x441.google.com with SMTP id b85so8029188pfc.3
-	for <qemu-riscv@nongnu.org>; Tue, 11 Dec 2018 17:29:18 -0800 (PST)
+	(Exim 4.71) (envelope-from <jimw@sifive.com>) id 1gWtMI-0001Jj-Rv
+	for qemu-riscv@nongnu.org; Tue, 11 Dec 2018 20:30:43 -0500
+Received: by mail-pf1-x441.google.com with SMTP id y126so8024571pfb.4
+	for <qemu-riscv@nongnu.org>; Tue, 11 Dec 2018 17:30:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=7Ot8GKea+jT7Zwt5Oji1jjMxESedw1Dmydh/qJRQkyQ=;
-	b=K5Je3ajJ3k+7Vt2403GUCW8uAmfZNoAyV5JRbtJB9ja7niz4vrGC10csjxerwS7uB8
-	nfXVkPRBWn7Wy3xWtuYW9hZx6+IsTkAC//pnhMOySz6GGc5YiEuYjdodSf6huWZBUJ53
-	LaXk8rr6jwvi55mnSaAmDWeB+b1UvyVhVfU4ntzPAy5s318USEjJVHrEi+7n2GrZ5itm
-	j4Bj+hW7kjZbFtcXrqfIW39/OmVAGA3+LaHVCdrtaxfh96pB+3yA9mcSYpxe/jQhEjTy
-	840pF2y5dn/NwjfHif+BvM0qxTn937WKd3DiYi0szNVWbXAdfUHmIAEU4KJMrL+j0aiX
-	Uimg==
+	bh=sj121eFWjxEa6q+whjprV+dhmy6te+NHz5mMDJEypuY=;
+	b=RqIlIkPZ+b+3axqnFw194Y3J9N2zlZPpaKjOcX8ydS4G5EJO9Dc1kP0UC1NZpkBhea
+	fnm+fc/4QyFF+vto7nJRbXjh5rljiUeMrFEt8p+wZLmT+5juuga9lP2VhISXzV0dGGQW
+	4h4VjEpaI5ndQWIS150DwRn1Miwjmvw5W2u6QT9xrrEBFv9j9bulylRII62TF6Thfk7V
+	+3N3vjYlXPgZAoZDFsKb5n09zp4ebCwDSBTDAgyhNXVS4IqmgnydyBflcEGWeT5R14VO
+	cyRfZ89J+NvjoP1oz9hsrOGquYDgzkEjd9X8fzC9CKtF7WM+l/tO8Vq76IE1gyYHy3Bj
+	/L+A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=7Ot8GKea+jT7Zwt5Oji1jjMxESedw1Dmydh/qJRQkyQ=;
-	b=t1a/1D/bvhaPAO7JTXF62Et9FJFR7+zWZZQTCwlO6TT12JkooU2bFbWLuMeD3EBM3l
-	tsA3OxPSxMzVl8K0iOs8cVsF/j6q9Or60/s1YZevYLjJID1m5AB7kYRcjevm8SW6ibcJ
-	QPR9ptTvbST3SwgR98bKvOCN06Pipe2F1XGkq9MOcOZACnKH40O+xBUELomgLopSw6o/
-	Id3WkK2jOOWCH85A2Sr2npsvgbeNYzKckXTKb2OdbnUSJ0H9aomcaUSYB/4hzLmELOmV
-	gI0rkhQ9LuY3YtBfx+FARcIx+C/xoaNZ5LfTx4YTGeHLXzfCu66FoGTL+5CMLFDqjXSx
-	Tpvg==
-X-Gm-Message-State: AA+aEWaOIoZnGqCZ5gKPSjIAT06VMrrIaWX0rgTPUC+tMviYxXEyDnYE
-	8aPo6FMSQR8D4Y3tS6sxF/XOfRgSOeQ2XQ==
-X-Google-Smtp-Source: AFSGD/UTRD15oR64JvL0OQV8CsCGn6HivXrpHdJ1Tn9VjXVv+rK1qRFjBgtejU0r+zVZLpXJR6sItA==
-X-Received: by 2002:a63:8e43:: with SMTP id k64mr16505899pge.346.1544578155900;
-	Tue, 11 Dec 2018 17:29:15 -0800 (PST)
+	bh=sj121eFWjxEa6q+whjprV+dhmy6te+NHz5mMDJEypuY=;
+	b=ZBE/t8tVAOklfp1j3QlGTN2WfEZIes3E7rnAuqxXyoPx/FCgk8eB84PvORo1pDLfio
+	vZ3Up1QAyo9SlRMqtMgWzXsvDy4viC5QlGhj5g+Fn9KEhBoHbNrdteDeKOtCwcXzfO44
+	cGL3pSBFc6KmReCvff1wsMZKAcUPe6qzKZbo51Y+uuWKkJFsJxJo5L4ceUEbb6ep0naw
+	H4rjx+R0rGiBm8x7BfoDTDRSg4A8hVWMMBZKqydev1wK8JWzO5KbV/om0zxO7sCzlLFk
+	kcslpeC+1ePoD0e9jNUp7bbKQBZjfGcIbWgZkbztPYo8DckvuVBUQ4g/j6JTgt1+Peq7
+	S+DA==
+X-Gm-Message-State: AA+aEWZfAIgAjK+orh5e1W1CQptDfJz4X9asU3Kytk/5/U3EkzfXVD8v
+	aRzvUoBiTJ03jYWq3LCiS9AokFu+L8oe0g==
+X-Google-Smtp-Source: AFSGD/XMA4+krw4o0IdAGcXPUfrASn+tJKIm/40asiTx6O9ClVynhln3rg1zbp/6K/uB5eAxlmciuw==
+X-Received: by 2002:a63:9a09:: with SMTP id o9mr15912985pge.94.1544578241619; 
+	Tue, 11 Dec 2018 17:30:41 -0800 (PST)
 Received: from rohan.hsd1.ca.comcast.net
 	([2601:646:c100:8240:316a:e169:23a5:398])
-	by smtp.gmail.com with ESMTPSA id
-	12sm15633835pgd.35.2018.12.11.17.29.15
+	by smtp.gmail.com with ESMTPSA id 4sm33882788pfq.10.2018.12.11.17.30.40
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 11 Dec 2018 17:29:15 -0800 (PST)
+	Tue, 11 Dec 2018 17:30:41 -0800 (PST)
 From: Jim Wilson <jimw@sifive.com>
 To: qemu-riscv@nongnu.org
 Cc: Jim Wilson <jimw@sifive.com>
-Date: Tue, 11 Dec 2018 17:28:32 -0800
-Message-Id: <20181212012832.3564-1-jimw@sifive.com>
+Date: Tue, 11 Dec 2018 17:30:38 -0800
+Message-Id: <20181212013038.3773-1-jimw@sifive.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <CAFyWVaYFqbGoGkksxYKDJZejOhGOSk6qkEcRm4J4YDwG-pYN=A@mail.gmail.com>
 References: <CAFyWVaYFqbGoGkksxYKDJZejOhGOSk6qkEcRm4J4YDwG-pYN=A@mail.gmail.com>
@@ -57,7 +56,8 @@ X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
 X-Received-From: 2607:f8b0:4864:20::441
 X-Mailman-Approved-At: Tue, 11 Dec 2018 20:42:42 -0500
-Subject: [Qemu-riscv] [PATCH 1/5] RISC-V: Add 32-bit gdb xml files.
+Subject: [Qemu-riscv] [PATCH 4/5] RISC-V: Add debug support for accessing
+ CSRs.
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -69,388 +69,337 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Dec 2018 01:29:23 -0000
+X-List-Received-Date: Wed, 12 Dec 2018 01:30:48 -0000
+
+Adds a debugger parameter to csr_read_helper and csr_write_helper.  When
+this is true, we disable illegal instruction checks.
 
 Signed-off-by: Jim Wilson <jimw@sifive.com>
 ---
- configure                   |   1 +
- gdb-xml/riscv-32bit-cpu.xml |  43 ++++++++
- gdb-xml/riscv-32bit-csr.xml | 250 ++++++++++++++++++++++++++++++++++++++++++++
- gdb-xml/riscv-32bit-fpu.xml |  46 ++++++++
- 4 files changed, 340 insertions(+)
- create mode 100644 gdb-xml/riscv-32bit-cpu.xml
- create mode 100644 gdb-xml/riscv-32bit-csr.xml
- create mode 100644 gdb-xml/riscv-32bit-fpu.xml
+ linux-user/riscv/signal.c |  4 +-
+ target/riscv/cpu.h        |  7 +++-
+ target/riscv/cpu_helper.c |  4 +-
+ target/riscv/gdbstub.c    |  4 +-
+ target/riscv/op_helper.c  | 93 ++++++++++++++++++++++++++++++++---------------
+ 5 files changed, 75 insertions(+), 37 deletions(-)
 
-diff --git a/configure b/configure
-index 0a3c6a7..413d162 100755
---- a/configure
-+++ b/configure
-@@ -7172,6 +7172,7 @@ case "$target_name" in
-     TARGET_BASE_ARCH=riscv
-     TARGET_ABI_DIR=riscv
-     mttcg=yes
-+    gdb_xml_files="riscv-32bit-cpu.xml riscv-32bit-fpu.xml riscv-32bit-csr.xml"
-     target_compiler=$cross_cc_riscv32
-   ;;
-   riscv64)
-diff --git a/gdb-xml/riscv-32bit-cpu.xml b/gdb-xml/riscv-32bit-cpu.xml
-new file mode 100644
-index 0000000..c02f86c
---- /dev/null
-+++ b/gdb-xml/riscv-32bit-cpu.xml
-@@ -0,0 +1,43 @@
-+<?xml version="1.0"?>
-+<!-- Copyright (C) 2018 Free Software Foundation, Inc.
+diff --git a/linux-user/riscv/signal.c b/linux-user/riscv/signal.c
+index f598d41..7dafadb 100644
+--- a/linux-user/riscv/signal.c
++++ b/linux-user/riscv/signal.c
+@@ -83,7 +83,7 @@ static void setup_sigcontext(struct target_sigcontext *sc, CPURISCVState *env)
+         __put_user(env->fpr[i], &sc->fpr[i]);
+     }
+ 
+-    uint32_t fcsr = csr_read_helper(env, CSR_FCSR); /*riscv_get_fcsr(env);*/
++    uint32_t fcsr = csr_read_helper(env, CSR_FCSR, false); /*riscv_get_fcsr(env);*/
+     __put_user(fcsr, &sc->fcsr);
+ }
+ 
+@@ -159,7 +159,7 @@ static void restore_sigcontext(CPURISCVState *env, struct target_sigcontext *sc)
+ 
+     uint32_t fcsr;
+     __get_user(fcsr, &sc->fcsr);
+-    csr_write_helper(env, fcsr, CSR_FCSR);
++    csr_write_helper(env, fcsr, CSR_FCSR, false);
+ }
+ 
+ static void restore_ucontext(CPURISCVState *env, struct target_ucontext *uc)
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 4ee09b9..29361ca 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -290,8 +290,11 @@ static inline void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
+ }
+ 
+ void csr_write_helper(CPURISCVState *env, target_ulong val_to_write,
+-        target_ulong csrno);
+-target_ulong csr_read_helper(CPURISCVState *env, target_ulong csrno);
++                      target_ulong csrno, bool debugger);
++target_ulong csr_read_helper(CPURISCVState *env, target_ulong csrno,
++                             bool debugger);
 +
-+     Copying and distribution of this file, with or without modification,
-+     are permitted in any medium without royalty provided the copyright
-+     notice and this notice are preserved.  -->
-+
-+<!DOCTYPE feature SYSTEM "gdb-target.dtd">
-+<feature name="org.gnu.gdb.riscv.cpu">
-+  <reg name="zero" bitsize="32" type="int"/>
-+  <reg name="ra" bitsize="32" type="code_ptr"/>
-+  <reg name="sp" bitsize="32" type="data_ptr"/>
-+  <reg name="gp" bitsize="32" type="data_ptr"/>
-+  <reg name="tp" bitsize="32" type="data_ptr"/>
-+  <reg name="t0" bitsize="32" type="int"/>
-+  <reg name="t1" bitsize="32" type="int"/>
-+  <reg name="t2" bitsize="32" type="int"/>
-+  <reg name="fp" bitsize="32" type="data_ptr"/>
-+  <reg name="s1" bitsize="32" type="int"/>
-+  <reg name="a0" bitsize="32" type="int"/>
-+  <reg name="a1" bitsize="32" type="int"/>
-+  <reg name="a2" bitsize="32" type="int"/>
-+  <reg name="a3" bitsize="32" type="int"/>
-+  <reg name="a4" bitsize="32" type="int"/>
-+  <reg name="a5" bitsize="32" type="int"/>
-+  <reg name="a6" bitsize="32" type="int"/>
-+  <reg name="a7" bitsize="32" type="int"/>
-+  <reg name="s2" bitsize="32" type="int"/>
-+  <reg name="s3" bitsize="32" type="int"/>
-+  <reg name="s4" bitsize="32" type="int"/>
-+  <reg name="s5" bitsize="32" type="int"/>
-+  <reg name="s6" bitsize="32" type="int"/>
-+  <reg name="s7" bitsize="32" type="int"/>
-+  <reg name="s8" bitsize="32" type="int"/>
-+  <reg name="s9" bitsize="32" type="int"/>
-+  <reg name="s10" bitsize="32" type="int"/>
-+  <reg name="s11" bitsize="32" type="int"/>
-+  <reg name="t3" bitsize="32" type="int"/>
-+  <reg name="t4" bitsize="32" type="int"/>
-+  <reg name="t5" bitsize="32" type="int"/>
-+  <reg name="t6" bitsize="32" type="int"/>
-+  <reg name="pc" bitsize="32" type="code_ptr"/>
-+</feature>
-diff --git a/gdb-xml/riscv-32bit-csr.xml b/gdb-xml/riscv-32bit-csr.xml
-new file mode 100644
-index 0000000..4aea9e6
---- /dev/null
-+++ b/gdb-xml/riscv-32bit-csr.xml
-@@ -0,0 +1,250 @@
-+<?xml version="1.0"?>
-+<!-- Copyright (C) 2018 Free Software Foundation, Inc.
-+
-+     Copying and distribution of this file, with or without modification,
-+     are permitted in any medium without royalty provided the copyright
-+     notice and this notice are preserved.  -->
-+
-+<!DOCTYPE feature SYSTEM "gdb-target.dtd">
-+<feature name="org.gnu.gdb.riscv.csr">
-+  <reg name="ustatus" bitsize="32"/>
-+  <reg name="uie" bitsize="32"/>
-+  <reg name="utvec" bitsize="32"/>
-+  <reg name="uscratch" bitsize="32"/>
-+  <reg name="uepc" bitsize="32"/>
-+  <reg name="ucause" bitsize="32"/>
-+  <reg name="utval" bitsize="32"/>
-+  <reg name="uip" bitsize="32"/>
-+  <reg name="fflags" bitsize="32"/>
-+  <reg name="frm" bitsize="32"/>
-+  <reg name="fcsr" bitsize="32"/>
-+  <reg name="cycle" bitsize="32"/>
-+  <reg name="time" bitsize="32"/>
-+  <reg name="instret" bitsize="32"/>
-+  <reg name="hpmcounter3" bitsize="32"/>
-+  <reg name="hpmcounter4" bitsize="32"/>
-+  <reg name="hpmcounter5" bitsize="32"/>
-+  <reg name="hpmcounter6" bitsize="32"/>
-+  <reg name="hpmcounter7" bitsize="32"/>
-+  <reg name="hpmcounter8" bitsize="32"/>
-+  <reg name="hpmcounter9" bitsize="32"/>
-+  <reg name="hpmcounter10" bitsize="32"/>
-+  <reg name="hpmcounter11" bitsize="32"/>
-+  <reg name="hpmcounter12" bitsize="32"/>
-+  <reg name="hpmcounter13" bitsize="32"/>
-+  <reg name="hpmcounter14" bitsize="32"/>
-+  <reg name="hpmcounter15" bitsize="32"/>
-+  <reg name="hpmcounter16" bitsize="32"/>
-+  <reg name="hpmcounter17" bitsize="32"/>
-+  <reg name="hpmcounter18" bitsize="32"/>
-+  <reg name="hpmcounter19" bitsize="32"/>
-+  <reg name="hpmcounter20" bitsize="32"/>
-+  <reg name="hpmcounter21" bitsize="32"/>
-+  <reg name="hpmcounter22" bitsize="32"/>
-+  <reg name="hpmcounter23" bitsize="32"/>
-+  <reg name="hpmcounter24" bitsize="32"/>
-+  <reg name="hpmcounter25" bitsize="32"/>
-+  <reg name="hpmcounter26" bitsize="32"/>
-+  <reg name="hpmcounter27" bitsize="32"/>
-+  <reg name="hpmcounter28" bitsize="32"/>
-+  <reg name="hpmcounter29" bitsize="32"/>
-+  <reg name="hpmcounter30" bitsize="32"/>
-+  <reg name="hpmcounter31" bitsize="32"/>
-+  <reg name="cycleh" bitsize="32"/>
-+  <reg name="timeh" bitsize="32"/>
-+  <reg name="instreth" bitsize="32"/>
-+  <reg name="hpmcounter3h" bitsize="32"/>
-+  <reg name="hpmcounter4h" bitsize="32"/>
-+  <reg name="hpmcounter5h" bitsize="32"/>
-+  <reg name="hpmcounter6h" bitsize="32"/>
-+  <reg name="hpmcounter7h" bitsize="32"/>
-+  <reg name="hpmcounter8h" bitsize="32"/>
-+  <reg name="hpmcounter9h" bitsize="32"/>
-+  <reg name="hpmcounter10h" bitsize="32"/>
-+  <reg name="hpmcounter11h" bitsize="32"/>
-+  <reg name="hpmcounter12h" bitsize="32"/>
-+  <reg name="hpmcounter13h" bitsize="32"/>
-+  <reg name="hpmcounter14h" bitsize="32"/>
-+  <reg name="hpmcounter15h" bitsize="32"/>
-+  <reg name="hpmcounter16h" bitsize="32"/>
-+  <reg name="hpmcounter17h" bitsize="32"/>
-+  <reg name="hpmcounter18h" bitsize="32"/>
-+  <reg name="hpmcounter19h" bitsize="32"/>
-+  <reg name="hpmcounter20h" bitsize="32"/>
-+  <reg name="hpmcounter21h" bitsize="32"/>
-+  <reg name="hpmcounter22h" bitsize="32"/>
-+  <reg name="hpmcounter23h" bitsize="32"/>
-+  <reg name="hpmcounter24h" bitsize="32"/>
-+  <reg name="hpmcounter25h" bitsize="32"/>
-+  <reg name="hpmcounter26h" bitsize="32"/>
-+  <reg name="hpmcounter27h" bitsize="32"/>
-+  <reg name="hpmcounter28h" bitsize="32"/>
-+  <reg name="hpmcounter29h" bitsize="32"/>
-+  <reg name="hpmcounter30h" bitsize="32"/>
-+  <reg name="hpmcounter31h" bitsize="32"/>
-+  <reg name="sstatus" bitsize="32"/>
-+  <reg name="sedeleg" bitsize="32"/>
-+  <reg name="sideleg" bitsize="32"/>
-+  <reg name="sie" bitsize="32"/>
-+  <reg name="stvec" bitsize="32"/>
-+  <reg name="scounteren" bitsize="32"/>
-+  <reg name="sscratch" bitsize="32"/>
-+  <reg name="sepc" bitsize="32"/>
-+  <reg name="scause" bitsize="32"/>
-+  <reg name="stval" bitsize="32"/>
-+  <reg name="sip" bitsize="32"/>
-+  <reg name="satp" bitsize="32"/>
-+  <reg name="mvendorid" bitsize="32"/>
-+  <reg name="marchid" bitsize="32"/>
-+  <reg name="mimpid" bitsize="32"/>
-+  <reg name="mhartid" bitsize="32"/>
-+  <reg name="mstatus" bitsize="32"/>
-+  <reg name="misa" bitsize="32"/>
-+  <reg name="medeleg" bitsize="32"/>
-+  <reg name="mideleg" bitsize="32"/>
-+  <reg name="mie" bitsize="32"/>
-+  <reg name="mtvec" bitsize="32"/>
-+  <reg name="mcounteren" bitsize="32"/>
-+  <reg name="mscratch" bitsize="32"/>
-+  <reg name="mepc" bitsize="32"/>
-+  <reg name="mcause" bitsize="32"/>
-+  <reg name="mtval" bitsize="32"/>
-+  <reg name="mip" bitsize="32"/>
-+  <reg name="pmpcfg0" bitsize="32"/>
-+  <reg name="pmpcfg1" bitsize="32"/>
-+  <reg name="pmpcfg2" bitsize="32"/>
-+  <reg name="pmpcfg3" bitsize="32"/>
-+  <reg name="pmpaddr0" bitsize="32"/>
-+  <reg name="pmpaddr1" bitsize="32"/>
-+  <reg name="pmpaddr2" bitsize="32"/>
-+  <reg name="pmpaddr3" bitsize="32"/>
-+  <reg name="pmpaddr4" bitsize="32"/>
-+  <reg name="pmpaddr5" bitsize="32"/>
-+  <reg name="pmpaddr6" bitsize="32"/>
-+  <reg name="pmpaddr7" bitsize="32"/>
-+  <reg name="pmpaddr8" bitsize="32"/>
-+  <reg name="pmpaddr9" bitsize="32"/>
-+  <reg name="pmpaddr10" bitsize="32"/>
-+  <reg name="pmpaddr11" bitsize="32"/>
-+  <reg name="pmpaddr12" bitsize="32"/>
-+  <reg name="pmpaddr13" bitsize="32"/>
-+  <reg name="pmpaddr14" bitsize="32"/>
-+  <reg name="pmpaddr15" bitsize="32"/>
-+  <reg name="mcycle" bitsize="32"/>
-+  <reg name="minstret" bitsize="32"/>
-+  <reg name="mhpmcounter3" bitsize="32"/>
-+  <reg name="mhpmcounter4" bitsize="32"/>
-+  <reg name="mhpmcounter5" bitsize="32"/>
-+  <reg name="mhpmcounter6" bitsize="32"/>
-+  <reg name="mhpmcounter7" bitsize="32"/>
-+  <reg name="mhpmcounter8" bitsize="32"/>
-+  <reg name="mhpmcounter9" bitsize="32"/>
-+  <reg name="mhpmcounter10" bitsize="32"/>
-+  <reg name="mhpmcounter11" bitsize="32"/>
-+  <reg name="mhpmcounter12" bitsize="32"/>
-+  <reg name="mhpmcounter13" bitsize="32"/>
-+  <reg name="mhpmcounter14" bitsize="32"/>
-+  <reg name="mhpmcounter15" bitsize="32"/>
-+  <reg name="mhpmcounter16" bitsize="32"/>
-+  <reg name="mhpmcounter17" bitsize="32"/>
-+  <reg name="mhpmcounter18" bitsize="32"/>
-+  <reg name="mhpmcounter19" bitsize="32"/>
-+  <reg name="mhpmcounter20" bitsize="32"/>
-+  <reg name="mhpmcounter21" bitsize="32"/>
-+  <reg name="mhpmcounter22" bitsize="32"/>
-+  <reg name="mhpmcounter23" bitsize="32"/>
-+  <reg name="mhpmcounter24" bitsize="32"/>
-+  <reg name="mhpmcounter25" bitsize="32"/>
-+  <reg name="mhpmcounter26" bitsize="32"/>
-+  <reg name="mhpmcounter27" bitsize="32"/>
-+  <reg name="mhpmcounter28" bitsize="32"/>
-+  <reg name="mhpmcounter29" bitsize="32"/>
-+  <reg name="mhpmcounter30" bitsize="32"/>
-+  <reg name="mhpmcounter31" bitsize="32"/>
-+  <reg name="mcycleh" bitsize="32"/>
-+  <reg name="minstreth" bitsize="32"/>
-+  <reg name="mhpmcounter3h" bitsize="32"/>
-+  <reg name="mhpmcounter4h" bitsize="32"/>
-+  <reg name="mhpmcounter5h" bitsize="32"/>
-+  <reg name="mhpmcounter6h" bitsize="32"/>
-+  <reg name="mhpmcounter7h" bitsize="32"/>
-+  <reg name="mhpmcounter8h" bitsize="32"/>
-+  <reg name="mhpmcounter9h" bitsize="32"/>
-+  <reg name="mhpmcounter10h" bitsize="32"/>
-+  <reg name="mhpmcounter11h" bitsize="32"/>
-+  <reg name="mhpmcounter12h" bitsize="32"/>
-+  <reg name="mhpmcounter13h" bitsize="32"/>
-+  <reg name="mhpmcounter14h" bitsize="32"/>
-+  <reg name="mhpmcounter15h" bitsize="32"/>
-+  <reg name="mhpmcounter16h" bitsize="32"/>
-+  <reg name="mhpmcounter17h" bitsize="32"/>
-+  <reg name="mhpmcounter18h" bitsize="32"/>
-+  <reg name="mhpmcounter19h" bitsize="32"/>
-+  <reg name="mhpmcounter20h" bitsize="32"/>
-+  <reg name="mhpmcounter21h" bitsize="32"/>
-+  <reg name="mhpmcounter22h" bitsize="32"/>
-+  <reg name="mhpmcounter23h" bitsize="32"/>
-+  <reg name="mhpmcounter24h" bitsize="32"/>
-+  <reg name="mhpmcounter25h" bitsize="32"/>
-+  <reg name="mhpmcounter26h" bitsize="32"/>
-+  <reg name="mhpmcounter27h" bitsize="32"/>
-+  <reg name="mhpmcounter28h" bitsize="32"/>
-+  <reg name="mhpmcounter29h" bitsize="32"/>
-+  <reg name="mhpmcounter30h" bitsize="32"/>
-+  <reg name="mhpmcounter31h" bitsize="32"/>
-+  <reg name="mhpmevent3" bitsize="32"/>
-+  <reg name="mhpmevent4" bitsize="32"/>
-+  <reg name="mhpmevent5" bitsize="32"/>
-+  <reg name="mhpmevent6" bitsize="32"/>
-+  <reg name="mhpmevent7" bitsize="32"/>
-+  <reg name="mhpmevent8" bitsize="32"/>
-+  <reg name="mhpmevent9" bitsize="32"/>
-+  <reg name="mhpmevent10" bitsize="32"/>
-+  <reg name="mhpmevent11" bitsize="32"/>
-+  <reg name="mhpmevent12" bitsize="32"/>
-+  <reg name="mhpmevent13" bitsize="32"/>
-+  <reg name="mhpmevent14" bitsize="32"/>
-+  <reg name="mhpmevent15" bitsize="32"/>
-+  <reg name="mhpmevent16" bitsize="32"/>
-+  <reg name="mhpmevent17" bitsize="32"/>
-+  <reg name="mhpmevent18" bitsize="32"/>
-+  <reg name="mhpmevent19" bitsize="32"/>
-+  <reg name="mhpmevent20" bitsize="32"/>
-+  <reg name="mhpmevent21" bitsize="32"/>
-+  <reg name="mhpmevent22" bitsize="32"/>
-+  <reg name="mhpmevent23" bitsize="32"/>
-+  <reg name="mhpmevent24" bitsize="32"/>
-+  <reg name="mhpmevent25" bitsize="32"/>
-+  <reg name="mhpmevent26" bitsize="32"/>
-+  <reg name="mhpmevent27" bitsize="32"/>
-+  <reg name="mhpmevent28" bitsize="32"/>
-+  <reg name="mhpmevent29" bitsize="32"/>
-+  <reg name="mhpmevent30" bitsize="32"/>
-+  <reg name="mhpmevent31" bitsize="32"/>
-+  <reg name="tselect" bitsize="32"/>
-+  <reg name="tdata1" bitsize="32"/>
-+  <reg name="tdata2" bitsize="32"/>
-+  <reg name="tdata3" bitsize="32"/>
-+  <reg name="dcsr" bitsize="32"/>
-+  <reg name="dpc" bitsize="32"/>
-+  <reg name="dscratch" bitsize="32"/>
-+  <reg name="hstatus" bitsize="32"/>
-+  <reg name="hedeleg" bitsize="32"/>
-+  <reg name="hideleg" bitsize="32"/>
-+  <reg name="hie" bitsize="32"/>
-+  <reg name="htvec" bitsize="32"/>
-+  <reg name="hscratch" bitsize="32"/>
-+  <reg name="hepc" bitsize="32"/>
-+  <reg name="hcause" bitsize="32"/>
-+  <reg name="hbadaddr" bitsize="32"/>
-+  <reg name="hip" bitsize="32"/>
-+  <reg name="mbase" bitsize="32"/>
-+  <reg name="mbound" bitsize="32"/>
-+  <reg name="mibase" bitsize="32"/>
-+  <reg name="mibound" bitsize="32"/>
-+  <reg name="mdbase" bitsize="32"/>
-+  <reg name="mdbound" bitsize="32"/>
-+  <reg name="mucounteren" bitsize="32"/>
-+  <reg name="mscounteren" bitsize="32"/>
-+  <reg name="mhcounteren" bitsize="32"/>
-+</feature>
-diff --git a/gdb-xml/riscv-32bit-fpu.xml b/gdb-xml/riscv-32bit-fpu.xml
-new file mode 100644
-index 0000000..783287d
---- /dev/null
-+++ b/gdb-xml/riscv-32bit-fpu.xml
-@@ -0,0 +1,46 @@
-+<?xml version="1.0"?>
-+<!-- Copyright (C) 2018 Free Software Foundation, Inc.
-+
-+     Copying and distribution of this file, with or without modification,
-+     are permitted in any medium without royalty provided the copyright
-+     notice and this notice are preserved.  -->
-+
-+<!DOCTYPE feature SYSTEM "gdb-target.dtd">
-+<feature name="org.gnu.gdb.riscv.fpu">
-+  <reg name="ft0" bitsize="32" type="ieee_single"/>
-+  <reg name="ft1" bitsize="32" type="ieee_single"/>
-+  <reg name="ft2" bitsize="32" type="ieee_single"/>
-+  <reg name="ft3" bitsize="32" type="ieee_single"/>
-+  <reg name="ft4" bitsize="32" type="ieee_single"/>
-+  <reg name="ft5" bitsize="32" type="ieee_single"/>
-+  <reg name="ft6" bitsize="32" type="ieee_single"/>
-+  <reg name="ft7" bitsize="32" type="ieee_single"/>
-+  <reg name="fs0" bitsize="32" type="ieee_single"/>
-+  <reg name="fs1" bitsize="32" type="ieee_single"/>
-+  <reg name="fa0" bitsize="32" type="ieee_single"/>
-+  <reg name="fa1" bitsize="32" type="ieee_single"/>
-+  <reg name="fa2" bitsize="32" type="ieee_single"/>
-+  <reg name="fa3" bitsize="32" type="ieee_single"/>
-+  <reg name="fa4" bitsize="32" type="ieee_single"/>
-+  <reg name="fa5" bitsize="32" type="ieee_single"/>
-+  <reg name="fa6" bitsize="32" type="ieee_single"/>
-+  <reg name="fa7" bitsize="32" type="ieee_single"/>
-+  <reg name="fs2" bitsize="32" type="ieee_single"/>
-+  <reg name="fs3" bitsize="32" type="ieee_single"/>
-+  <reg name="fs4" bitsize="32" type="ieee_single"/>
-+  <reg name="fs5" bitsize="32" type="ieee_single"/>
-+  <reg name="fs6" bitsize="32" type="ieee_single"/>
-+  <reg name="fs7" bitsize="32" type="ieee_single"/>
-+  <reg name="fs8" bitsize="32" type="ieee_single"/>
-+  <reg name="fs9" bitsize="32" type="ieee_single"/>
-+  <reg name="fs10" bitsize="32" type="ieee_single"/>
-+  <reg name="fs11" bitsize="32" type="ieee_single"/>
-+  <reg name="ft8" bitsize="32" type="ieee_single"/>
-+  <reg name="ft9" bitsize="32" type="ieee_single"/>
-+  <reg name="ft10" bitsize="32" type="ieee_single"/>
-+  <reg name="ft11" bitsize="32" type="ieee_single"/>
-+
-+  <reg name="fflags" bitsize="32" type="int"/>
-+  <reg name="frm" bitsize="32" type="int"/>
-+  <reg name="fcsr" bitsize="32" type="int"/>
-+</feature>
++void riscv_cpu_register_gdb_regs_for_features(CPUState *cs);
+ 
+ #include "exec/cpu-all.h"
+ 
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index 86f9f47..1abad94 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -526,7 +526,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+             get_field(s, MSTATUS_SIE) : get_field(s, MSTATUS_UIE << env->priv));
+         s = set_field(s, MSTATUS_SPP, env->priv);
+         s = set_field(s, MSTATUS_SIE, 0);
+-        csr_write_helper(env, s, CSR_MSTATUS);
++        csr_write_helper(env, s, CSR_MSTATUS, false);
+         riscv_set_mode(env, PRV_S);
+     } else {
+         /* No need to check MTVEC for misaligned - lower 2 bits cannot be set */
+@@ -551,7 +551,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+             get_field(s, MSTATUS_MIE) : get_field(s, MSTATUS_UIE << env->priv));
+         s = set_field(s, MSTATUS_MPP, env->priv);
+         s = set_field(s, MSTATUS_MIE, 0);
+-        csr_write_helper(env, s, CSR_MSTATUS);
++        csr_write_helper(env, s, CSR_MSTATUS, false);
+         riscv_set_mode(env, PRV_M);
+     }
+     /* TODO yield load reservation  */
+diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
+index 71c3eb1..b06f0fa 100644
+--- a/target/riscv/gdbstub.c
++++ b/target/riscv/gdbstub.c
+@@ -34,7 +34,7 @@ int riscv_cpu_gdb_read_register(CPUState *cs, uint8_t *mem_buf, int n)
+     } else if (n < 65) {
+         return gdb_get_reg64(mem_buf, env->fpr[n - 33]);
+     } else if (n < 4096 + 65) {
+-        return gdb_get_regl(mem_buf, csr_read_helper(env, n - 65));
++        return gdb_get_regl(mem_buf, csr_read_helper(env, n - 65, true));
+     }
+     return 0;
+ }
+@@ -57,7 +57,7 @@ int riscv_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
+         env->fpr[n - 33] = ldq_p(mem_buf); /* always 64-bit */
+         return sizeof(uint64_t);
+     } else if (n < 4096 + 65) {
+-        csr_write_helper(env, ldtul_p(mem_buf), n - 65);
++        csr_write_helper(env, ldtul_p(mem_buf), n - 65, true);
+     }
+     return 0;
+ }
+diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+index 3726299..3c5641e 100644
+--- a/target/riscv/op_helper.c
++++ b/target/riscv/op_helper.c
+@@ -87,7 +87,7 @@ static void validate_mstatus_fs(CPURISCVState *env, uintptr_t ra)
+  * Adapted from Spike's processor_t::set_csr
+  */
+ void csr_write_helper(CPURISCVState *env, target_ulong val_to_write,
+-        target_ulong csrno)
++                      target_ulong csrno, bool debugger)
+ {
+ #ifndef CONFIG_USER_ONLY
+     uint64_t delegable_ints = MIP_SSIP | MIP_STIP | MIP_SEIP;
+@@ -96,15 +96,21 @@ void csr_write_helper(CPURISCVState *env, target_ulong val_to_write,
+ 
+     switch (csrno) {
+     case CSR_FFLAGS:
+-        validate_mstatus_fs(env, GETPC());
++        if (!debugger) {
++            validate_mstatus_fs(env, GETPC());
++        }
+         cpu_riscv_set_fflags(env, val_to_write & (FSR_AEXC >> FSR_AEXC_SHIFT));
+         break;
+     case CSR_FRM:
+-        validate_mstatus_fs(env, GETPC());
++        if (!debugger) {
++            validate_mstatus_fs(env, GETPC());
++        }
+         env->frm = val_to_write & (FSR_RD >> FSR_RD_SHIFT);
+         break;
+     case CSR_FCSR:
+-        validate_mstatus_fs(env, GETPC());
++        if (!debugger) {
++            validate_mstatus_fs(env, GETPC());
++        }
+         env->frm = (val_to_write & FSR_RD) >> FSR_RD_SHIFT;
+         cpu_riscv_set_fflags(env, (val_to_write & FSR_AEXC) >> FSR_AEXC_SHIFT);
+         break;
+@@ -169,7 +175,9 @@ void csr_write_helper(CPURISCVState *env, target_ulong val_to_write,
+          * CLINT, no additional locking is needed for read-modifiy-write
+          * CSR operations
+          */
+-        qemu_mutex_lock_iothread();
++        if (!debugger) {
++            qemu_mutex_lock_iothread();
++        }
+         RISCVCPU *cpu = riscv_env_get_cpu(env);
+         riscv_cpu_update_mip(cpu, MIP_SSIP | MIP_STIP,
+                                   (val_to_write & (MIP_SSIP | MIP_STIP)));
+@@ -177,7 +185,9 @@ void csr_write_helper(CPURISCVState *env, target_ulong val_to_write,
+          * csrs, csrc on mip.SEIP is not decomposable into separate read and
+          * write steps, so a different implementation is needed
+          */
+-        qemu_mutex_unlock_iothread();
++        if (!debugger) {
++            qemu_mutex_unlock_iothread();
++        }
+         break;
+     }
+     case CSR_MIE: {
+@@ -247,21 +257,25 @@ void csr_write_helper(CPURISCVState *env, target_ulong val_to_write,
+             mask |= SSTATUS_MXR;
+         }
+         ms = (ms & ~mask) | (val_to_write & mask);
+-        csr_write_helper(env, ms, CSR_MSTATUS);
++        csr_write_helper(env, ms, CSR_MSTATUS, debugger);
+         break;
+     }
+     case CSR_SIP: {
+-        qemu_mutex_lock_iothread();
++        if (!debugger) {
++            qemu_mutex_lock_iothread();
++        }
+         target_ulong next_mip = (env->mip & ~env->mideleg)
+                                 | (val_to_write & env->mideleg);
+-        qemu_mutex_unlock_iothread();
+-        csr_write_helper(env, next_mip, CSR_MIP);
++        if (!debugger) {
++            qemu_mutex_unlock_iothread();
++        }
++        csr_write_helper(env, next_mip, CSR_MIP, debugger);
+         break;
+     }
+     case CSR_SIE: {
+         target_ulong next_mie = (env->mie & ~env->mideleg)
+                                 | (val_to_write & env->mideleg);
+-        csr_write_helper(env, next_mie, CSR_MIE);
++        csr_write_helper(env, next_mie, CSR_MIE, debugger);
+         break;
+     }
+     case CSR_SATP: /* CSR_SPTBR */ {
+@@ -371,7 +385,9 @@ void csr_write_helper(CPURISCVState *env, target_ulong val_to_write,
+     do_illegal:
+ #endif
+     default:
+-        do_raise_exception_err(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
++        if (!debugger) {
++            do_raise_exception_err(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
++        }
+     }
+ }
+ 
+@@ -380,7 +396,8 @@ void csr_write_helper(CPURISCVState *env, target_ulong val_to_write,
+  *
+  * Adapted from Spike's processor_t::get_csr
+  */
+-target_ulong csr_read_helper(CPURISCVState *env, target_ulong csrno)
++target_ulong csr_read_helper(CPURISCVState *env, target_ulong csrno,
++                             bool debugger)
+ {
+ #ifndef CONFIG_USER_ONLY
+     target_ulong ctr_en = env->priv == PRV_U ? env->scounteren :
+@@ -416,13 +433,19 @@ target_ulong csr_read_helper(CPURISCVState *env, target_ulong csrno)
+ 
+     switch (csrno) {
+     case CSR_FFLAGS:
+-        validate_mstatus_fs(env, GETPC());
++        if (!debugger) {
++            validate_mstatus_fs(env, GETPC());
++        }
+         return cpu_riscv_get_fflags(env);
+     case CSR_FRM:
+-        validate_mstatus_fs(env, GETPC());
++        if (!debugger) {
++            validate_mstatus_fs(env, GETPC());
++        }
+         return env->frm;
+     case CSR_FCSR:
+-        validate_mstatus_fs(env, GETPC());
++        if (!debugger) {
++            validate_mstatus_fs(env, GETPC());
++        }
+         return (cpu_riscv_get_fflags(env) << FSR_AEXC_SHIFT)
+                 | (env->frm << FSR_RD_SHIFT);
+     /* rdtime/rdtimeh is trapped and emulated by bbl in system mode */
+@@ -504,9 +527,13 @@ target_ulong csr_read_helper(CPURISCVState *env, target_ulong csrno)
+         return env->mstatus & mask;
+     }
+     case CSR_SIP: {
+-        qemu_mutex_lock_iothread();
++        if (!debugger) {
++            qemu_mutex_lock_iothread();
++        }
+         target_ulong tmp = env->mip & env->mideleg;
+-        qemu_mutex_unlock_iothread();
++        if (!debugger) {
++            qemu_mutex_unlock_iothread();
++        }
+         return tmp;
+     }
+     case CSR_SIE:
+@@ -539,9 +566,13 @@ target_ulong csr_read_helper(CPURISCVState *env, target_ulong csrno)
+     case CSR_MSTATUS:
+         return env->mstatus;
+     case CSR_MIP: {
+-        qemu_mutex_lock_iothread();
++        if (!debugger) {
++            qemu_mutex_lock_iothread();
++        }
+         target_ulong tmp = env->mip;
+-        qemu_mutex_unlock_iothread();
++        if (!debugger) {
++            qemu_mutex_unlock_iothread();
++        }
+         return tmp;
+     }
+     case CSR_MIE:
+@@ -601,7 +632,11 @@ target_ulong csr_read_helper(CPURISCVState *env, target_ulong csrno)
+ #endif
+     }
+     /* used by e.g. MTIME read */
+-    do_raise_exception_err(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
++    if (!debugger) {
++        do_raise_exception_err(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
++    } else {
++        return 0;
++    }
+ }
+ 
+ /*
+@@ -625,8 +660,8 @@ target_ulong helper_csrrw(CPURISCVState *env, target_ulong src,
+         target_ulong csr)
+ {
+     validate_csr(env, csr, 1, GETPC());
+-    uint64_t csr_backup = csr_read_helper(env, csr);
+-    csr_write_helper(env, src, csr);
++    uint64_t csr_backup = csr_read_helper(env, csr, false);
++    csr_write_helper(env, src, csr, false);
+     return csr_backup;
+ }
+ 
+@@ -634,9 +669,9 @@ target_ulong helper_csrrs(CPURISCVState *env, target_ulong src,
+         target_ulong csr, target_ulong rs1_pass)
+ {
+     validate_csr(env, csr, rs1_pass != 0, GETPC());
+-    uint64_t csr_backup = csr_read_helper(env, csr);
++    uint64_t csr_backup = csr_read_helper(env, csr, false);
+     if (rs1_pass != 0) {
+-        csr_write_helper(env, src | csr_backup, csr);
++        csr_write_helper(env, src | csr_backup, csr, false);
+     }
+     return csr_backup;
+ }
+@@ -645,9 +680,9 @@ target_ulong helper_csrrc(CPURISCVState *env, target_ulong src,
+         target_ulong csr, target_ulong rs1_pass)
+ {
+     validate_csr(env, csr, rs1_pass != 0, GETPC());
+-    uint64_t csr_backup = csr_read_helper(env, csr);
++    uint64_t csr_backup = csr_read_helper(env, csr, false);
+     if (rs1_pass != 0) {
+-        csr_write_helper(env, (~src) & csr_backup, csr);
++        csr_write_helper(env, (~src) & csr_backup, csr, false);
+     }
+     return csr_backup;
+ }
+@@ -674,7 +709,7 @@ target_ulong helper_sret(CPURISCVState *env, target_ulong cpu_pc_deb)
+     mstatus = set_field(mstatus, MSTATUS_SPIE, 0);
+     mstatus = set_field(mstatus, MSTATUS_SPP, PRV_U);
+     riscv_set_mode(env, prev_priv);
+-    csr_write_helper(env, mstatus, CSR_MSTATUS);
++    csr_write_helper(env, mstatus, CSR_MSTATUS, false);
+ 
+     return retpc;
+ }
+@@ -699,7 +734,7 @@ target_ulong helper_mret(CPURISCVState *env, target_ulong cpu_pc_deb)
+     mstatus = set_field(mstatus, MSTATUS_MPIE, 0);
+     mstatus = set_field(mstatus, MSTATUS_MPP, PRV_U);
+     riscv_set_mode(env, prev_priv);
+-    csr_write_helper(env, mstatus, CSR_MSTATUS);
++    csr_write_helper(env, mstatus, CSR_MSTATUS, false);
+ 
+     return retpc;
+ }
 -- 
 2.7.4
 
