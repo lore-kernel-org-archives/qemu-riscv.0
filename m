@@ -1,54 +1,53 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gWs0z-0005bM-3A
-	for mharc-qemu-riscv@gnu.org; Tue, 11 Dec 2018 19:04:37 -0500
-Received: from eggs.gnu.org ([2001:4830:134:3::10]:59028)
+	id 1gWsHH-0000yr-45
+	for mharc-qemu-riscv@gnu.org; Tue, 11 Dec 2018 19:21:27 -0500
+Received: from eggs.gnu.org ([2001:4830:134:3::10]:34399)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1gWs0w-0005Zp-BW
-	for qemu-riscv@nongnu.org; Tue, 11 Dec 2018 19:04:35 -0500
+	(envelope-from <alistair23@gmail.com>) id 1gWsHF-0000x8-Gw
+	for qemu-riscv@nongnu.org; Tue, 11 Dec 2018 19:21:26 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1gWs0v-0004B7-Ko
-	for qemu-riscv@nongnu.org; Tue, 11 Dec 2018 19:04:34 -0500
-Received: from mail-lj1-x244.google.com ([2a00:1450:4864:20::244]:37213)
+	(envelope-from <alistair23@gmail.com>) id 1gWsHE-0008Bv-PB
+	for qemu-riscv@nongnu.org; Tue, 11 Dec 2018 19:21:25 -0500
+Received: from mail-lj1-x243.google.com ([2a00:1450:4864:20::243]:37265)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
 	(Exim 4.71) (envelope-from <alistair23@gmail.com>)
-	id 1gWs0t-00049r-Pn; Tue, 11 Dec 2018 19:04:31 -0500
-Received: by mail-lj1-x244.google.com with SMTP id e5-v6so14669427lja.4;
-	Tue, 11 Dec 2018 16:04:31 -0800 (PST)
+	id 1gWsH9-00088J-66; Tue, 11 Dec 2018 19:21:19 -0500
+Received: by mail-lj1-x243.google.com with SMTP id e5-v6so14694916lja.4;
+	Tue, 11 Dec 2018 16:21:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=SaMeLbbURK7Kf+Exr1yVQLBYI6vUostE0BbF8gzYdDE=;
-	b=PeeyIvPnRM2ppmV7NI5YBnSoS2mcrFgR+ZcNA/3EwBHBWy/LCaSAX6y0zRCfV/i/4p
-	X6e283TpMkFdP/lqF9C39eHA4X7mnVFYBMAdOTM29JW0GfVqSbpiHUP2262VB4816/d1
-	OT/qk4H1R+ChdWUNEwxrwnAYdlcvF0OX+G4jaSolRxCja4SzV9HJGyW8xqmwEPrhKZM+
-	zCAPMj+aBvWE4lANv9r5pTr2RdWW4j8pTTMxcdHPt+wBSdFdamJGxoGlwkXBr41FDZAt
-	ESUpyfqZJh+NCs4PIzhgAjeHlr0iASa/LPTYTlz77Gziyl2+xFPi5ZIeHAlLRhGbJgQK
-	VQRw==
+	:cc; bh=hJcS7kHLSqzTSWMVyhJmOmL4Jv2m6SSHpwneQf3aYWk=;
+	b=WIomPHbIbspIcQXZk4L4VCLPTYoza/atqdLaHhfxjRpKPVM832gC3fpldDIEhAVdk/
+	uehqB7ofUXhbI1x8dUyYBipEG2xlyAU/zGFXMJQwtX0uQTRrZNIymZnCvvqLuuA+Z2w4
+	L36UGgKdmcjCwngDUsderQPW0Um+/UpqkEq8znEbBq02sKNDc1Ytrx5shykvJIjwmlmq
+	+kXPBjoL7lXajtXP/UkqJxyhpZLIRvzEdD9Q5jneTQBVNweCxlXj32JGFIXXnEAVTMjk
+	MmNCe2AF1bwbkv20BeCqunw89xci2CoV4MfUpNF4efySZX0ST7lct5XCjyygpnMX/PR0
+	PV9g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=SaMeLbbURK7Kf+Exr1yVQLBYI6vUostE0BbF8gzYdDE=;
-	b=L+s48MRh0XsZhIvG7NaW2ZCaMz1j5IYA53sLSyyPiRBRv3aS7Dp2CSB7cbPe6Mx89S
-	Mr/Lj5jaOJXBYrRsdn481kQxuYHR/JBiDkVWxKJElpmKCoDN8/GIaFJxeI/hr5bFaJpr
-	BSml4KkW0+6er+j67xkugCLn9XafKhrkHKZcSCc1ALWkqd67ncWYj3W7yURD3RwXl89m
-	SITueG+T68ORQ4tfh/p7iqjk/I9e9pVBefSoN4edDH1nwiQtpPU+b//NEF0kzWZbaFGi
-	QK+zhBZIlaDlWhMwaPpmXH27QAgeBycdjHy/THF1ubHOR946tyk4eqhA7qn/nt6T82Pe
-	Zqug==
-X-Gm-Message-State: AA+aEWYOefgne5r7Zh7NoePPMO+CTnK8bThV6ffw9lhLGe0idflKaYeT
-	bWIxkuAPozXowWMULv4EhA8Yu8x4YiHXUSc27XQ=
-X-Google-Smtp-Source: AFSGD/XV7uGXkOecD+9cERq8edz9Oy4xjHgvcZEOZ3eP16HnkggtQcXC6hlRUsVJIUCD1VGwVx5tESnZBCghGEy22Qo=
-X-Received: by 2002:a2e:131a:: with SMTP id
-	26-v6mr11965139ljt.107.1544573069741; 
-	Tue, 11 Dec 2018 16:04:29 -0800 (PST)
+	bh=hJcS7kHLSqzTSWMVyhJmOmL4Jv2m6SSHpwneQf3aYWk=;
+	b=UNn9cRcgaxZm83TdQlZugBamjC/MQ0p2zpRqE8BuC0CwiHUAD9k7cTRnoMbdBxdiRF
+	qzUUPzfdJwyvV/L/Nu9dhhvQJGbjGiLGuE6870kpg48tiNmei0bH0dn6LyK2UKX743HC
+	QKKoVUXEiUMMJiD1yVjo/4m/3hE2q5T3wuWMrNkWVRGdUleGuMgDyG5B+3i0zuf2rQpi
+	SXxfRjYZ1A5gXxhkf6iF0uFznsZ6AcolR0N5RoAMcu1KiUxofC6x8nWOvYFFDzma+Tpa
+	qqDVKE48fyHFbip4izcg8jLZhGbWV/b6hlFNFNl5OAx7PSj3iOKmEKSo1xwrdN36TmIj
+	ebTQ==
+X-Gm-Message-State: AA+aEWb97TdMrLRPbCkoKArq9GPd9pj3ztFbZdgvFwL4h3v6xFgD2sTE
+	GEeSCC3TVHs0ucn1On/j8IRY3nERI15Xszncm/Y=
+X-Google-Smtp-Source: AFSGD/XStxPLTk4rRMO2yLAGuesHMicmFFi+GD9Usd9AnhYkClNypum0Ng/LHHrLelBSKznJPAVGd+r9LtyulPjsIt4=
+X-Received: by 2002:a2e:449c:: with SMTP id
+	b28-v6mr10798530ljf.47.1544574077637; 
+	Tue, 11 Dec 2018 16:21:17 -0800 (PST)
 MIME-Version: 1.0
 References: <cover.1544229872.git.alistair.francis@wdc.com>
-	<c1cbe33881d567ee4712128282e6fcc49a5736b5.1544229872.git.alistair.francis@wdc.com>
-	<98465a90-99cc-bce6-8cde-5025a30b3785@linaro.org>
-	<042678a6-6837-e272-e4fa-eb0a8f265e6b@linaro.org>
-In-Reply-To: <042678a6-6837-e272-e4fa-eb0a8f265e6b@linaro.org>
+	<d6c491ecb5c0224c113ddfb2c06552ec89b68227.1544229872.git.alistair.francis@wdc.com>
+	<b4a5e3e9-5e62-c0a3-67e3-891725db89d5@linaro.org>
+In-Reply-To: <b4a5e3e9-5e62-c0a3-67e3-891725db89d5@linaro.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 11 Dec 2018 16:04:03 -0800
-Message-ID: <CAKmqyKNGDCkqL1VzdLBm+dwVx6C9PTUP+amzHfZeqTifC1Ef7A@mail.gmail.com>
+Date: Tue, 11 Dec 2018 16:20:50 -0800
+Message-ID: <CAKmqyKMzgagUvJ-Zy-qMaMXk_2-3iLjuMyZwkOiu_ffb7mhH-A@mail.gmail.com>
 To: Richard Henderson <richard.henderson@linaro.org>
 Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
 	"qemu-devel@nongnu.org" <qemu-devel@nongnu.org>,
@@ -56,9 +55,9 @@ Cc: Alistair Francis <Alistair.Francis@wdc.com>,
 Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2a00:1450:4864:20::244
-Subject: Re: [Qemu-riscv] [RFC v3 19/24] riscv: tcg-target: Add the out op
- decoder
+X-Received-From: 2a00:1450:4864:20::243
+Subject: Re: [Qemu-riscv] [RFC v3 04/24] linux-user: riscv: Fix compile
+ failure on riscv32 hosts
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -70,60 +69,53 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Dec 2018 00:04:35 -0000
+X-List-Received-Date: Wed, 12 Dec 2018 00:21:26 -0000
 
-On Tue, Dec 11, 2018 at 2:45 PM Richard Henderson
+On Mon, Dec 10, 2018 at 9:04 AM Richard Henderson
 <richard.henderson@linaro.org> wrote:
 >
-> On 12/10/18 11:56 AM, Richard Henderson wrote:
-> > On 12/7/18 6:49 PM, Alistair Francis wrote:
-> >> +    case INDEX_op_neg_i64:
-> >> +        tcg_out_opc_imm(s, OPC_SUB, a0, TCG_REG_ZERO, a1);
+> On 12/7/18 6:46 PM, Alistair Francis wrote:
+> > When cross compilling for riscv32 hosts using GCC 8.2 this error is seen:
+> >     error: '__NR__llseek' undeclared (first use in this function); did you mean '_llseek'?
 > >
-> > tcg_out_opc_reg.
+> > To avoid the error let's ensure that __NR__llseek is defined.
 > >
-> >> +    case INDEX_op_mulsh_i32:
-> >> +    case INDEX_op_mulsh_i64:
-> >> +        tcg_out_opc_imm(s, OPC_MULH, a0, a1, a2);
-> >> +        break;
-> >> +
-> >> +    case INDEX_op_muluh_i32:
-> >> +    case INDEX_op_muluh_i64:
-> >> +        tcg_out_opc_imm(s, OPC_MULHU, a0, a1, a2);
-> >> +        break;
+> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> > ---
+> >  linux-user/riscv/target_syscall.h | 5 +++++
+> >  1 file changed, 5 insertions(+)
 > >
-> > Likewise.
+> > diff --git a/linux-user/riscv/target_syscall.h b/linux-user/riscv/target_syscall.h
+> > index ee81d8bc88..af73f71839 100644
+> > --- a/linux-user/riscv/target_syscall.h
+> > +++ b/linux-user/riscv/target_syscall.h
+> > @@ -47,6 +47,11 @@ struct target_pt_regs {
+> >  #endif
+> >  #define UNAME_MINIMUM_RELEASE "4.15.0"
+> >
+> > +/* This is sometimes needed to compile riscv32 Linux user mode */
+> > +#if !defined(__NR__llseek) && !defined(__NR_lseek)
+> > +#define __NR__llseek __NR3264_lseek
+> > +#endif
 >
-> Incidentally, catching these sorts of errors is why tcg/s390 puts the format of
-> the insn into the enum.  E.g.
+> I'm not quite sure how this could be.  Upstream I see
 >
-> /* Emit an opcode with "type-checking" of the format.  */
-> #define tcg_out_insn(S, FMT, OP, ...) \
->     glue(tcg_out_insn_,FMT)(S, glue(glue(FMT,_),OP), ## __VA_ARGS__)
+> #if __BITS_PER_LONG == 64 && !defined(__SYSCALL_COMPAT)
+> ...
+> #define __NR_lseek __NR3264_lseek
+> ...
+> #else
+> ...
+> #define __NR_llseek __NR3264_lseek
 >
->     tcg_out_insn(s, RR, AR, a0, a2);
->     tcg_out_insn(s, RRE, AGR, TCG_TMP0, index);
+> so this define should already exist.
 >
-> /* All of the following instructions are prefixed with their instruction
->    format...  */
-> typedef enum S390Opcode {
->     ...
->     RR_AR       = 0x1a,
->     RRE_AGR     = 0xb908,
+> Do you have the wrong headers installed for the cross-build?
 
-That is really cool.
-
->
->
-> I do something similar for tcg/aarch64, although that's more complicated due to
-> the wide variety of formats.
->
-> Whether you go back and retro-fit this scheme to your existing patch set is up
-> to you.  But I think it could be worthwhile.
-
-It looks like I'm ready to send a patch series (instead of an RFC) so
-I might leave it for now. There are a range of improvements we can
-work on in the future, this can be yet another one.
+I'm using Yocto for the cross build, so I don't see how I can get the
+wrong headers. I agree though that I probably shouldn't need this
+patch. Maybe it's something to do with the glibc fork I'm using. I'll
+drop this patch and see if I can figure out what's going on.
 
 Alistair
 
