@@ -1,61 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gXASB-0002aW-DW
-	for mharc-qemu-riscv@gnu.org; Wed, 12 Dec 2018 14:45:55 -0500
-Received: from eggs.gnu.org ([2001:4830:134:3::10]:49211)
+	id 1gXASL-0002hI-Ji
+	for mharc-qemu-riscv@gnu.org; Wed, 12 Dec 2018 14:46:05 -0500
+Received: from eggs.gnu.org ([2001:4830:134:3::10]:49276)
 	by lists.gnu.org with esmtp (Exim 4.71)
 	(envelope-from <prvs=8779827ad=Alistair.Francis@wdc.com>)
-	id 1gXAS4-0002To-Pi
-	for qemu-riscv@nongnu.org; Wed, 12 Dec 2018 14:45:52 -0500
+	id 1gXASE-0002dQ-MJ
+	for qemu-riscv@nongnu.org; Wed, 12 Dec 2018 14:46:02 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
 	(envelope-from <prvs=8779827ad=Alistair.Francis@wdc.com>)
-	id 1gXAS0-00038Q-Pi
-	for qemu-riscv@nongnu.org; Wed, 12 Dec 2018 14:45:48 -0500
-Received: from esa4.hgst.iphmx.com ([216.71.154.42]:29296)
+	id 1gXASA-0003EN-ID
+	for qemu-riscv@nongnu.org; Wed, 12 Dec 2018 14:45:58 -0500
+Received: from esa3.hgst.iphmx.com ([216.71.153.141]:39250)
 	by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.71) (envelope-from <prvs=8779827ad=Alistair.Francis@wdc.com>)
-	id 1gXARp-00031m-3G; Wed, 12 Dec 2018 14:45:33 -0500
+	id 1gXARz-00036Q-3L; Wed, 12 Dec 2018 14:45:44 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
 	d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
-	t=1544643933; x=1576179933;
+	t=1544643943; x=1576179943;
 	h=from:to:cc:subject:date:message-id:references:
 	in-reply-to:content-transfer-encoding:mime-version;
-	bh=nAA7B/Lr62aFGctR+EwZ4d5fuWp2s6IMv1+nV5lV/D0=;
-	b=MHAJCkf/4ZK1y6r0fRhsP5cFqwtd4HCr19dGmtNcSEqUjk+TdILOO4+P
-	McHEgxx1pWRjHXiy/zTiqZqd5uJ1BBwl3nnDc6B+6nZRMkKutzaB/mL+2
-	6WjGFkQFJZPv3QV8Rr6BaSFa1/l35zJU39dM9ztbuQNYKbjCpy72s5ayF
-	EWZzvyN0sqnD0liRTh/dbfi7VQPDKp5sL0B7olqHZ0FUU2KUrD1+VzSIJ
-	VlfCGBB/C9IJXyF7kfIAiA6vXUU6aLKLXMqyK8366j1a+QUXwn36aOwJU
-	/MEGyMrOVP8Ba7D8AgB9EDrpcjAbKTuMi5Td1SmkckcyHGg29WVdq7YLB Q==;
-X-IronPort-AV: E=Sophos;i="5.56,345,1539619200"; d="scan'208";a="96440942"
-Received: from mail-bn3nam01lp2056.outbound.protection.outlook.com (HELO
-	NAM01-BN3-obe.outbound.protection.outlook.com) ([104.47.33.56])
-	by ob1.hgst.iphmx.com with ESMTP; 13 Dec 2018 03:45:31 +0800
+	bh=Mr2K1ZUeybEAkGTw7hRCXhk+KP3wEOm1aYsUjB+L/9g=;
+	b=V+xODDPWOalkyJcEhJbPRdjk1P4drxvh0/08ktQ8/w6ESN2yECBtyIDs
+	jYuashYr+u1ycfiAZ4niCfh/d2EKuaoxxFPgNjzovNUYs2+BayBuRIDbv
+	qMJOcc10WyAqKjhLetQayHiusChryPD7SWZIqmmCWv9DEFCH+KebnGseG
+	uigcZKGLJ44/zUe9cCg+p5x7P8jF9k+caDmdqsRbsyeYXcgZoWss886Vk
+	MHxhJIuRlK6nq2WL4cDzjzKr3PdXhvPSgBnM1VsJ/33eWIwLrP9ps5DQR
+	WaHiFAGQC5ciKdrZ91v9JWqqV5R6rMq1Kd57AnF9HT4EC4sp5a9DjsH90 Q==;
+X-IronPort-AV: E=Sophos;i="5.56,345,1539619200"; d="scan'208";a="101342381"
+Received: from mail-by2nam01lp2057.outbound.protection.outlook.com (HELO
+	NAM01-BY2-obe.outbound.protection.outlook.com) ([104.47.34.57])
+	by ob1.hgst.iphmx.com with ESMTP; 13 Dec 2018 03:45:41 +0800
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=sharedspace.onmicrosoft.com; s=selector1-wdc-com;
 	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=81exqrBPH/3D6O7ch2dQw17QE854X6mrxIxH3YvwYn0=;
-	b=NUvm07/X0tSOpOXC6B8sowunnBNjHrIZMmR7oDRuN/mvc0HwqQ7tyAbz+jPCBAGcGe3LKgqYyP62isJ8NVRAbleI46dAqmK4qdGa1z1+GdeCUe/HRmE//6VqUjnI6T8lCn+vvkveAkBfI/XnMThHxhIBDnXR5HwbRG7YabXtUqc=
+	bh=wom+jldRLlWNRnfCvrv+vOQ95YOAZemCrlxvT0BR3nk=;
+	b=YBbxZ0CBeyywNTbjbMsSAY4rYkURTOQr7urRYVkaOw/JLxDl7O2uzTPD8PrMHd1qzmVx4digAetq5QL2Ic59C5nSnf49/nK+2NaRmJkVLS3MGYtBUBSzFj0Bxf8qgcRcXXI6B1ThyhnGm4TuH2kGtwZMjAoSv95xPYNyozzvClw=
 Received: from MWHPR04MB0401.namprd04.prod.outlook.com (10.173.48.18) by
-	MWHPR04MB0512.namprd04.prod.outlook.com (10.173.49.13) with Microsoft
+	MWHPR04MB0446.namprd04.prod.outlook.com (10.173.48.139) with Microsoft
 	SMTP
 	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
-	15.20.1404.19; Wed, 12 Dec 2018 19:45:29 +0000
+	15.20.1404.21; Wed, 12 Dec 2018 19:45:38 +0000
 Received: from MWHPR04MB0401.namprd04.prod.outlook.com
 	([fe80::9067:fb44:66b2:7604]) by
 	MWHPR04MB0401.namprd04.prod.outlook.com
 	([fe80::9067:fb44:66b2:7604%3]) with mapi id 15.20.1425.016;
-	Wed, 12 Dec 2018 19:45:29 +0000
+	Wed, 12 Dec 2018 19:45:38 +0000
 From: Alistair Francis <Alistair.Francis@wdc.com>
 To: "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, "qemu-riscv@nongnu.org"
 	<qemu-riscv@nongnu.org>
 CC: Alistair Francis <Alistair.Francis@wdc.com>, "alistair23@gmail.com"
 	<alistair23@gmail.com>, "richard.henderson@linaro.org"
 	<richard.henderson@linaro.org>
-Thread-Topic: [PATCH v1 17/23] riscv: tcg-target: Add direct load and store
-	instructions
-Thread-Index: AQHUklM8dC0e2vrFUEuxxkb2Y2NWPg==
-Date: Wed, 12 Dec 2018 19:45:29 +0000
-Message-ID: <4dfc1c6576c863854c6aeb8910b0165d82fe9b73.1544643238.git.alistair.francis@wdc.com>
+Thread-Topic: [PATCH v1 18/23] riscv: tcg-target: Add the out op decoder
+Thread-Index: AQHUklNBkbyqBdcTaUifFP95NhzeZA==
+Date: Wed, 12 Dec 2018 19:45:38 +0000
+Message-ID: <1696f7c9250606df42c6a6776b3ca0530d72fed0.1544643238.git.alistair.francis@wdc.com>
 References: <cover.1544643238.git.alistair.francis@wdc.com>
 In-Reply-To: <cover.1544643238.git.alistair.francis@wdc.com>
 Accept-Language: en-US
@@ -63,53 +62,53 @@ Content-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
 x-mailer: git-send-email 2.19.1
-x-clientproxiedby: BYAPR05CA0054.namprd05.prod.outlook.com
-	(2603:10b6:a03:74::31) To MWHPR04MB0401.namprd04.prod.outlook.com
+x-clientproxiedby: BYAPR07CA0074.namprd07.prod.outlook.com
+	(2603:10b6:a03:12b::15) To MWHPR04MB0401.namprd04.prod.outlook.com
 	(2603:10b6:300:70::18)
 authentication-results: spf=none (sender IP is )
 	smtp.mailfrom=Alistair.Francis@wdc.com; 
 x-ms-exchange-messagesentrepresentingtype: 1
 x-originating-ip: [199.255.44.250]
 x-ms-publictraffictype: Email
-x-microsoft-exchange-diagnostics: 1; MWHPR04MB0512;
-	6:eoNRnWmvLgtWfLmR9Jq/CaNusPVXOlqaVlLkgB/gZjz+hwhwC+8vB38R7IU/Vd/uWgL8ezsUA3JU9Nt4p36khQzLOv0lWaZodFK65rlwTJPhfRVr6y0XRR8X9kSKsM2fk3i6560GeQrV/4uLO7RzYrhx2zKi+pHTdTRAKhiSc7hQaMDPmYXCsdEkbRweLLUpxNNEIRx5Z7/ABzykqNH149v+wUCSvTlJEIOVmVnlp+U0vbFVsUD0aGOa1QSKtl1Rka5kDbhEMbYr/3SoeeiuANCdVDQbcuvuYKNTwP9NSOMQw3Qne4kd0MOkF+y6UU+Orn3OOI0OyOxbcKgxaAB2A+duRjFFytv6yyTZCgHbVkHH5UyhkQBP9bj2H7ijwAkjcRczlgShd9SCjLkYpqiJXi/TtfzOCaSwWEZqaiOwKvrb+HL2FTWaDOCFtAAb9QxfsvRDSwM6GpL3pzqFla0DEA==;
-	5:RhixdPMDV/o1ddK/smOvV39CEn+Tx3hKldWCitPvH6ae3EM3I1wrgRyLYBoIMSXIO60oo/YF3r6FDSsVTjrDteuamIQsXSuNaGFP215Yda8IIWbooOrBYKfLv8jDW9KVlRujY1GjzHI1F8GgOF4i3CK9yiS/C8baT5Gsl1AcOHk=;
-	7:oY1RfXe+bOyAgn4n8eBz9vFj57Dj0KKlQRv5x/Q7lkG27nk9tNC2rJL30uEyCCyHtkFdaPhUWFomutmVMeRTR9lIVS1+0f7Fx+AUTh7U6259+o99fQVRlRaH21bhdvAUtVbIzvyLDnpgSOHSJMnzRw==
-x-ms-office365-filtering-correlation-id: 9fd493d4-cae9-4f1b-7708-08d6606a5ebc
+x-microsoft-exchange-diagnostics: 1; MWHPR04MB0446;
+	6:NFfKXParSOvQ8RvbkBRBKj4LTYAuzcELr2ATbjAZLzhItXLrH8BVvaC45z0jwLqr0g1M/n4d8iTE6yNyROEmwno8301smDxp9E+GI/Ek7qoSgcN5sFYbk2BzzHArLm+tOmvsrmxA6sCxhhHrkJqIGJH7kM7NQDVswCrrrVLHsQa1HU9Zg8WV1B3qmHrQiXq5NP0MyAckiUtRIq2w2Q/yjbqWv4iqWHB+FDuLFB473xHvtlSKh/O/VHWoeJKjBgM+2rJzDBRuoAbLjh38nzhUiEaJAdkVa+vOa61XYRTxQQZB9L9ZCCFpZ5GKJsQxwxAETUZGKCecf0ID+hQqsFQ7+l2bLH3x094QFHDkCSl/X2q28/LawjTV0koJQ7+11tqwBh+N7TU8NErzFlx0/RNSYS2OJQiTVhzW3d3i4PzDEhWVQEIj4bQJnNrekAqdWZv7zJ9sYxcg13RKxdvbCzYv1w==;
+	5:0q/0+LH5xC1e47jyi/uCmck8ehXXO2AUw7wmgFzqKZf19KdUfg3lTsY+rfQ1OengsNYly3OCAZqMTMOzkpWMqwJ4r8/g6VL21jreJ7YYk45OI4Vnb+3lVh9LM8PPkRP+5EjVIza7haoB9Vlwp/3L+2pO7PyB0WxYTrZZxhJaKGg=;
+	7:nTf+Bg2h7KPR5p0fp6mt4QqtzJMNz1K5AllwNuyUI/zw8CQU2X2FuEUGqcMq9atI3OJ08+Vk/T62w9/cLaTDnsTSjoA+3M/Ghx9CnG+z7zV+GwDGUBaFnDy+Up1slVdVMjLzEXHXeasyupOiT69VLQ==
+x-ms-office365-filtering-correlation-id: 35f8f506-f4c3-4158-d847-08d6606a644b
 x-ms-office365-filtering-ht: Tenant
 x-microsoft-antispam: BCL:0; PCL:0;
-	RULEID:(2390098)(7020095)(4652040)(8989299)(5600074)(711020)(4618075)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(2017052603328)(7153060)(7193020);
-	SRVR:MWHPR04MB0512; 
-x-ms-traffictypediagnostic: MWHPR04MB0512:
+	RULEID:(2390098)(7020095)(4652040)(8989299)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(5600074)(711020)(4618075)(2017052603328)(7153060)(7193020);
+	SRVR:MWHPR04MB0446; 
+x-ms-traffictypediagnostic: MWHPR04MB0446:
 wdcipoutbound: EOP-TRUE
-x-microsoft-antispam-prvs: <MWHPR04MB05121F9ECB566CB1F694B4A890A70@MWHPR04MB0512.namprd04.prod.outlook.com>
+x-microsoft-antispam-prvs: <MWHPR04MB04461CECE6E3A40D719A6E8090A70@MWHPR04MB0446.namprd04.prod.outlook.com>
 x-ms-exchange-senderadcheck: 1
 x-exchange-antispam-report-cfa-test: BCL:0; PCL:0;
-	RULEID:(8211001083)(3230017)(999002)(6040522)(2401047)(5005006)(8121501046)(3231472)(944501520)(52105112)(3002001)(10201501046)(93006095)(93001095)(6055026)(148016)(149066)(150057)(6041310)(20161123560045)(20161123562045)(20161123558120)(20161123564045)(201703131423095)(201702281528075)(20161123555045)(201703061421075)(201703061406153)(201708071742011)(7699051)(76991095);
-	SRVR:MWHPR04MB0512; BCL:0; PCL:0; RULEID:; SRVR:MWHPR04MB0512; 
+	RULEID:(8211001083)(6040522)(2401047)(5005006)(8121501046)(10201501046)(3231455)(999002)(944501520)(52105112)(93006095)(93001095)(3002001)(6055026)(148016)(149066)(150057)(6041310)(20161123560045)(201703131423095)(201702281528075)(20161123555045)(201703061421075)(201703061406153)(20161123562045)(20161123558120)(20161123564045)(201708071742011)(7699051)(76991095);
+	SRVR:MWHPR04MB0446; BCL:0; PCL:0; RULEID:; SRVR:MWHPR04MB0446; 
 x-forefront-prvs: 0884AAA693
 x-forefront-antispam-report: SFV:NSPM;
-	SFS:(10019020)(346002)(39860400002)(396003)(366004)(136003)(376002)(199004)(189003)(316002)(66066001)(97736004)(71200400001)(2501003)(71190400001)(76176011)(486006)(8936002)(6506007)(386003)(102836004)(118296001)(3846002)(81166006)(44832011)(186003)(25786009)(26005)(11346002)(6436002)(6486002)(99286004)(2616005)(105586002)(8676002)(6116002)(81156014)(52116002)(5660300001)(6512007)(478600001)(72206003)(53936002)(68736007)(256004)(50226002)(110136005)(446003)(54906003)(39060400002)(14454004)(36756003)(7736002)(2906002)(476003)(4326008)(575784001)(86362001)(305945005)(106356001);
-	DIR:OUT; SFP:1102; SCL:1; SRVR:MWHPR04MB0512;
+	SFS:(10019020)(136003)(39860400002)(366004)(346002)(396003)(376002)(189003)(199004)(3846002)(71190400001)(6512007)(97736004)(256004)(66066001)(2501003)(4744004)(81166006)(50226002)(53936002)(6436002)(71200400001)(8676002)(106356001)(4326008)(6116002)(39060400002)(53946003)(105586002)(478600001)(8936002)(6486002)(305945005)(386003)(6506007)(44832011)(110136005)(81156014)(186003)(72206003)(68736007)(7736002)(102836004)(486006)(316002)(54906003)(26005)(99286004)(76176011)(14454004)(86362001)(11346002)(476003)(5660300001)(2906002)(446003)(36756003)(52116002)(25786009)(118296001)(2616005);
+	DIR:OUT; SFP:1102; SCL:1; SRVR:MWHPR04MB0446;
 	H:MWHPR04MB0401.namprd04.prod.outlook.com; FPR:; SPF:None;
-	LANG:en; PTR:InfoNoRecords; A:1; MX:1; 
-x-microsoft-antispam-message-info: lh2lYnaADC/LxK+WFD03A52KPBsn7fgbAJpLUvQvVor2cQst/R946GFOl5K4XRaMnT6LeZTrhQfY4rTzSJaNKP+xVSN1src7SRtKFLKBAfS3ZAbT6/v4uFQx6yt0mTgvxwfht+U8VRTV/nAEK+BOQ72y/fk9CEu8MarWen4kRc6y6+QKGp19ZjrJyi+tdQvevA3b1VuCgOUIqvp+6JNen6kWOR98P0z1ABx+Pitmu+HEZW5hQ9AOQk0pj6idJ4w+SWIkkHUYbVOrLZJXJzPhyRGDqWSW9yCWkKGBw3XweI5snVStLYkFcDRxozVOicYo
+	LANG:en; PTR:InfoNoRecords; MX:1; A:1; 
+x-microsoft-antispam-message-info: LsVoFtyIe6tDLNI7/7+gixhrkn4QRJb/oWvJnywp67YLmvzmgwsFb/UmdxeMsLTWH4B8/hHEQWBgwiAZzGKxD7eTJMPlJPchFe0V92V+y97Sm99UbwsEFjP32ilse1HfAYAJR6JKw8NaPRBRAjJXSm53AjRFgoYp4K7O89/IPNRcPAKIzgJ6IH9C1uegJadZlxXbOB3y97dm5AE/CX3JP79JWJ+gWQLzX8LH8KICtaeHc2RtLiY5uNmWGIaLB98AVc7XpTcnpx0lMr1DbSgJyxDoxxeW3l3Ou9GQmZViJNgynoVSz+kkhleBL+0UXx6p
 spamdiagnosticoutput: 1:99
 spamdiagnosticmetadata: NSPM
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
 X-OriginatorOrg: wdc.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9fd493d4-cae9-4f1b-7708-08d6606a5ebc
-X-MS-Exchange-CrossTenant-originalarrivaltime: 12 Dec 2018 19:45:29.4525 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 35f8f506-f4c3-4158-d847-08d6606a644b
+X-MS-Exchange-CrossTenant-originalarrivaltime: 12 Dec 2018 19:45:38.7027 (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MWHPR04MB0512
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MWHPR04MB0446
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 216.71.154.42
-Subject: [Qemu-riscv] [PATCH v1 17/23] riscv: tcg-target: Add direct load
- and store instructions
+X-Received-From: 216.71.153.141
+Subject: [Qemu-riscv] [PATCH v1 18/23] riscv: tcg-target: Add the out op
+ decoder
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -121,181 +120,519 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Dec 2018 19:45:52 -0000
+X-List-Received-Date: Wed, 12 Dec 2018 19:46:02 -0000
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 Signed-off-by: Michael Clark <mjc@sifive.com>
+Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- tcg/riscv/tcg-target.inc.c | 158 +++++++++++++++++++++++++++++++++++++
- 1 file changed, 158 insertions(+)
+ tcg/riscv/tcg-target.inc.c | 493 +++++++++++++++++++++++++++++++++++++
+ 1 file changed, 493 insertions(+)
 
 diff --git a/tcg/riscv/tcg-target.inc.c b/tcg/riscv/tcg-target.inc.c
-index bc0e7ee509..b0061a7e83 100644
+index b0061a7e83..f3708fe8e1 100644
 --- a/tcg/riscv/tcg-target.inc.c
 +++ b/tcg/riscv/tcg-target.inc.c
-@@ -1134,3 +1134,161 @@ static void tcg_out_qemu_st_slow_path(TCGContext *s=
-, TCGLabelQemuLdst *l)
-     tcg_out_goto(s, l->raddr);
+@@ -1292,3 +1292,496 @@ static void tcg_out_qemu_st(TCGContext *s, const TC=
+GArg *args, bool is_64)
+     tcg_out_qemu_st_direct(s, data_regl, data_regh, base, opc);
+ #endif
  }
- #endif /* CONFIG_SOFTMMU */
 +
-+static void tcg_out_qemu_ld_direct(TCGContext *s, TCGReg lo, TCGReg hi,
-+                                   TCGReg base, TCGMemOp opc, bool is_64)
++static tcg_insn_unit *tb_ret_addr;
++
++static void tcg_out_op(TCGContext *s, TCGOpcode opc,
++                       const TCGArg *args, const int *const_args)
 +{
-+    const TCGMemOp bswap =3D opc & MO_BSWAP;
++    TCGArg a0 =3D args[0];
++    TCGArg a1 =3D args[1];
++    TCGArg a2 =3D args[2];
++    int c2 =3D const_args[2];
 +
-+    /* We don't yet handle byteswapping, assert */
-+    g_assert(!bswap);
-+
-+    switch (opc & (MO_SSIZE)) {
-+    case MO_UB:
-+        tcg_out_opc_imm(s, OPC_LBU, lo, base, 0);
-+        break;
-+    case MO_SB:
-+        tcg_out_opc_imm(s, OPC_LB, lo, base, 0);
-+        break;
-+    case MO_UW:
-+        tcg_out_opc_imm(s, OPC_LHU, lo, base, 0);
-+        break;
-+    case MO_SW:
-+        tcg_out_opc_imm(s, OPC_LH, lo, base, 0);
-+        break;
-+    case MO_UL:
-+        if (TCG_TARGET_REG_BITS =3D=3D 64 && is_64) {
-+            tcg_out_opc_imm(s, OPC_LWU, lo, base, 0);
-+            break;
-+        }
-+        /* FALLTHRU */
-+    case MO_SL:
-+        tcg_out_opc_imm(s, OPC_LW, lo, base, 0);
-+        break;
-+    case MO_Q:
-+        /* Prefer to load from offset 0 first, but allow for overlap.  */
-+        if (TCG_TARGET_REG_BITS =3D=3D 64) {
-+            tcg_out_opc_imm(s, OPC_LD, lo, base, 0);
-+        } else if (lo !=3D base) {
-+            tcg_out_opc_imm(s, OPC_LW, lo, base, 0);
-+            tcg_out_opc_imm(s, OPC_LW, hi, base, 4);
++    switch (opc) {
++    case INDEX_op_exit_tb:
++        /* Reuse the zeroing that exists for goto_ptr.  */
++        if (a0 =3D=3D 0) {
++            tcg_out_call_int(s, s->code_gen_epilogue, true);
 +        } else {
-+            tcg_out_opc_imm(s, OPC_LW, hi, base, 4);
-+            tcg_out_opc_imm(s, OPC_LW, lo, base, 0);
++            tcg_out_movi(s, TCG_TYPE_PTR, TCG_REG_A0, a0);
++            tcg_out_call_int(s, tb_ret_addr, true);
 +        }
 +        break;
++
++    case INDEX_op_goto_tb:
++        assert(s->tb_jmp_insn_offset =3D=3D 0);
++        /* indirect jump method */
++        tcg_out_ld(s, TCG_TYPE_PTR, TCG_REG_TMP0, TCG_REG_ZERO,
++                   (uintptr_t)(s->tb_jmp_target_addr + a0));
++        tcg_out_opc_imm(s, OPC_JALR, TCG_REG_ZERO, TCG_REG_TMP0, 0);
++        set_jmp_reset_offset(s, a0);
++        break;
++
++    case INDEX_op_goto_ptr:
++        tcg_out_opc_imm(s, OPC_JALR, TCG_REG_ZERO, a0, 0);
++        break;
++
++    case INDEX_op_br:
++        tcg_out_reloc(s, s->code_ptr, R_RISCV_JAL, arg_label(a0), 0);
++        tcg_out_opc_jump(s, OPC_JAL, TCG_REG_ZERO, 0);
++        break;
++
++    case INDEX_op_ld8u_i32:
++    case INDEX_op_ld8u_i64:
++        tcg_out_ldst(s, OPC_LBU, a0, a1, a2);
++        break;
++    case INDEX_op_ld8s_i32:
++    case INDEX_op_ld8s_i64:
++        tcg_out_ldst(s, OPC_LB, a0, a1, a2);
++        break;
++    case INDEX_op_ld16u_i32:
++    case INDEX_op_ld16u_i64:
++        tcg_out_ldst(s, OPC_LHU, a0, a1, a2);
++        break;
++    case INDEX_op_ld16s_i32:
++    case INDEX_op_ld16s_i64:
++        tcg_out_ldst(s, OPC_LH, a0, a1, a2);
++        break;
++    case INDEX_op_ld32u_i64:
++        tcg_out_ldst(s, OPC_LWU, a0, a1, a2);
++        break;
++    case INDEX_op_ld_i32:
++    case INDEX_op_ld32s_i64:
++        tcg_out_ldst(s, OPC_LW, a0, a1, a2);
++        break;
++    case INDEX_op_ld_i64:
++        tcg_out_ldst(s, OPC_LD, a0, a1, a2);
++        break;
++
++    case INDEX_op_st8_i32:
++    case INDEX_op_st8_i64:
++        tcg_out_ldst(s, OPC_SB, a0, a1, a2);
++        break;
++    case INDEX_op_st16_i32:
++    case INDEX_op_st16_i64:
++        tcg_out_ldst(s, OPC_SH, a0, a1, a2);
++        break;
++    case INDEX_op_st_i32:
++    case INDEX_op_st32_i64:
++        tcg_out_ldst(s, OPC_SW, a0, a1, a2);
++        break;
++    case INDEX_op_st_i64:
++        tcg_out_ldst(s, OPC_SD, a0, a1, a2);
++        break;
++
++    case INDEX_op_add_i32:
++        if (c2) {
++            tcg_out_opc_imm(s, OPC_ADDIW, a0, a1, a2);
++        } else {
++            tcg_out_opc_reg(s, OPC_ADDW, a0, a1, a2);
++        }
++        break;
++    case INDEX_op_add_i64:
++        if (c2) {
++            tcg_out_opc_imm(s, OPC_ADDI, a0, a1, a2);
++        } else {
++            tcg_out_opc_reg(s, OPC_ADD, a0, a1, a2);
++        }
++        break;
++
++    case INDEX_op_sub_i32:
++        if (c2) {
++            tcg_out_opc_imm(s, OPC_ADDIW, a0, a1, -a2);
++        } else {
++            tcg_out_opc_reg(s, OPC_SUBW, a0, a1, a2);
++        }
++        break;
++    case INDEX_op_sub_i64:
++        if (c2) {
++            tcg_out_opc_imm(s, OPC_ADDI, a0, a1, -a2);
++        } else {
++            tcg_out_opc_reg(s, OPC_SUB, a0, a1, a2);
++        }
++        break;
++
++    case INDEX_op_and_i32:
++    case INDEX_op_and_i64:
++        if (c2) {
++            tcg_out_opc_imm(s, OPC_ANDI, a0, a1, a2);
++        } else {
++            tcg_out_opc_reg(s, OPC_AND, a0, a1, a2);
++        }
++        break;
++
++    case INDEX_op_or_i32:
++    case INDEX_op_or_i64:
++        if (c2) {
++            tcg_out_opc_imm(s, OPC_ORI, a0, a1, a2);
++        } else {
++            tcg_out_opc_reg(s, OPC_OR, a0, a1, a2);
++        }
++        break;
++
++    case INDEX_op_xor_i32:
++    case INDEX_op_xor_i64:
++        if (c2) {
++            tcg_out_opc_imm(s, OPC_XORI, a0, a1, a2);
++        } else {
++            tcg_out_opc_reg(s, OPC_XOR, a0, a1, a2);
++        }
++        break;
++
++    case INDEX_op_not_i32:
++    case INDEX_op_not_i64:
++        tcg_out_opc_imm(s, OPC_XORI, a0, a1, -1);
++        break;
++
++    case INDEX_op_neg_i32:
++        tcg_out_opc_reg(s, OPC_SUBW, a0, TCG_REG_ZERO, a1);
++        break;
++    case INDEX_op_neg_i64:
++        tcg_out_opc_reg(s, OPC_SUB, a0, TCG_REG_ZERO, a1);
++        break;
++
++    case INDEX_op_mul_i32:
++        tcg_out_opc_reg(s, OPC_MULW, a0, a1, a2);
++        break;
++    case INDEX_op_mul_i64:
++        tcg_out_opc_reg(s, OPC_MUL, a0, a1, a2);
++        break;
++
++    case INDEX_op_div_i32:
++        tcg_out_opc_reg(s, OPC_DIVW, a0, a1, a2);
++        break;
++    case INDEX_op_div_i64:
++        tcg_out_opc_reg(s, OPC_DIV, a0, a1, a2);
++        break;
++
++    case INDEX_op_divu_i32:
++        tcg_out_opc_reg(s, OPC_DIVUW, a0, a1, a2);
++        break;
++    case INDEX_op_divu_i64:
++        tcg_out_opc_reg(s, OPC_DIVU, a0, a1, a2);
++        break;
++
++    case INDEX_op_rem_i32:
++        tcg_out_opc_reg(s, OPC_REMW, a0, a1, a2);
++        break;
++    case INDEX_op_rem_i64:
++        tcg_out_opc_reg(s, OPC_REM, a0, a1, a2);
++        break;
++
++    case INDEX_op_remu_i32:
++        tcg_out_opc_reg(s, OPC_REMUW, a0, a1, a2);
++        break;
++    case INDEX_op_remu_i64:
++        tcg_out_opc_reg(s, OPC_REMU, a0, a1, a2);
++        break;
++
++    case INDEX_op_shl_i32:
++        if (c2) {
++            tcg_out_opc_imm(s, OPC_SLLIW, a0, a1, a2);
++        } else {
++            tcg_out_opc_reg(s, OPC_SLLW, a0, a1, a2);
++        }
++        break;
++    case INDEX_op_shl_i64:
++        if (c2) {
++            tcg_out_opc_imm(s, OPC_SLLI, a0, a1, a2);
++        } else {
++            tcg_out_opc_reg(s, OPC_SLL, a0, a1, a2);
++        }
++        break;
++
++    case INDEX_op_shr_i32:
++        if (c2) {
++            tcg_out_opc_imm(s, OPC_SRLIW, a0, a1, a2);
++        } else {
++            tcg_out_opc_reg(s, OPC_SRLW, a0, a1, a2);
++        }
++        break;
++    case INDEX_op_shr_i64:
++        if (c2) {
++            tcg_out_opc_imm(s, OPC_SRLI, a0, a1, a2);
++        } else {
++            tcg_out_opc_reg(s, OPC_SRL, a0, a1, a2);
++        }
++        break;
++
++    case INDEX_op_sar_i32:
++        if (c2) {
++            tcg_out_opc_imm(s, OPC_SRAIW, a0, a1, a2);
++        } else {
++            tcg_out_opc_reg(s, OPC_SRAW, a0, a1, a2);
++        }
++        break;
++    case INDEX_op_sar_i64:
++        if (c2) {
++            tcg_out_opc_imm(s, OPC_SRAI, a0, a1, a2);
++        } else {
++            tcg_out_opc_reg(s, OPC_SRA, a0, a1, a2);
++        }
++        break;
++
++    case INDEX_op_add2_i32:
++        tcg_out_addsub2(s, a0, a1, a2, args[3], args[4], args[5],
++                        const_args[4], const_args[5], false, true);
++        break;
++    case INDEX_op_add2_i64:
++        tcg_out_addsub2(s, a0, a1, a2, args[3], args[4], args[5],
++                        const_args[4], const_args[5], false, false);
++        break;
++    case INDEX_op_sub2_i32:
++        tcg_out_addsub2(s, a0, a1, a2, args[3], args[4], args[5],
++                        const_args[4], const_args[5], true, true);
++        break;
++    case INDEX_op_sub2_i64:
++        tcg_out_addsub2(s, a0, a1, a2, args[3], args[4], args[5],
++                        const_args[4], const_args[5], true, false);
++        break;
++
++    case INDEX_op_brcond_i32:
++    case INDEX_op_brcond_i64:
++        tcg_out_brcond(s, a2, a0, a1, arg_label(args[3]));
++        break;
++    case INDEX_op_brcond2_i32:
++        tcg_out_brcond2(s, args[4], a0, a1, a2, args[3], arg_label(args[5]=
+));
++        break;
++
++    case INDEX_op_setcond_i32:
++    case INDEX_op_setcond_i64:
++        tcg_out_setcond(s, args[3], a0, a1, a2);
++        break;
++    case INDEX_op_setcond2_i32:
++        tcg_out_setcond2(s, args[5], a0, a1, a2, args[3], args[4]);
++        break;
++
++    case INDEX_op_qemu_ld_i32:
++        tcg_out_qemu_ld(s, args, false);
++        break;
++    case INDEX_op_qemu_ld_i64:
++        tcg_out_qemu_ld(s, args, true);
++        break;
++    case INDEX_op_qemu_st_i32:
++        tcg_out_qemu_st(s, args, false);
++        break;
++    case INDEX_op_qemu_st_i64:
++        tcg_out_qemu_st(s, args, true);
++        break;
++
++    case INDEX_op_ext8u_i32:
++    case INDEX_op_ext8u_i64:
++        tcg_out_ext8u(s, a0, a1);
++        break;
++
++    case INDEX_op_ext16u_i32:
++    case INDEX_op_ext16u_i64:
++        tcg_out_ext16u(s, a0, a1);
++        break;
++
++    case INDEX_op_ext32u_i64:
++    case INDEX_op_extu_i32_i64:
++        tcg_out_ext32u(s, a0, a1);
++        break;
++
++    case INDEX_op_ext8s_i32:
++    case INDEX_op_ext8s_i64:
++        tcg_out_ext8s(s, a0, a1);
++        break;
++
++    case INDEX_op_ext16s_i32:
++    case INDEX_op_ext16s_i64:
++        tcg_out_ext16s(s, a0, a1);
++        break;
++
++    case INDEX_op_ext32s_i64:
++    case INDEX_op_extrl_i64_i32:
++    case INDEX_op_extrh_i64_i32:
++    case INDEX_op_ext_i32_i64:
++        tcg_out_ext32s(s, a0, a1);
++        break;
++
++    case INDEX_op_mulsh_i32:
++    case INDEX_op_mulsh_i64:
++        tcg_out_opc_reg(s, OPC_MULH, a0, a1, a2);
++        break;
++
++    case INDEX_op_muluh_i32:
++    case INDEX_op_muluh_i64:
++        tcg_out_opc_reg(s, OPC_MULHU, a0, a1, a2);
++        break;
++
++    case INDEX_op_mb:
++        tcg_out_mb(s, a0);
++        break;
++
++    case INDEX_op_mov_i32:  /* Always emitted via tcg_out_mov.  */
++    case INDEX_op_mov_i64:
++    case INDEX_op_movi_i32: /* Always emitted via tcg_out_movi.  */
++    case INDEX_op_movi_i64:
++    case INDEX_op_call:     /* Always emitted via tcg_out_call.  */
 +    default:
 +        g_assert_not_reached();
 +    }
 +}
 +
-+static void tcg_out_qemu_ld(TCGContext *s, const TCGArg *args, bool is_64)
++static const TCGTargetOpDef *tcg_target_op_def(TCGOpcode op)
 +{
-+    TCGReg addr_regl, addr_regh __attribute__((unused));
-+    TCGReg data_regl, data_regh;
-+    TCGMemOpIdx oi;
-+    TCGMemOp opc;
-+#if defined(CONFIG_SOFTMMU)
-+    tcg_insn_unit *label_ptr[1];
-+#endif
-+    TCGReg base =3D TCG_REG_TMP0;
++    static const TCGTargetOpDef r
++        =3D { .args_ct_str =3D { "r" } };
++    static const TCGTargetOpDef r_r
++        =3D { .args_ct_str =3D { "r", "r" } };
++    static const TCGTargetOpDef rZ_r
++        =3D { .args_ct_str =3D { "rZ", "r" } };
++    static const TCGTargetOpDef rZ_rZ
++        =3D { .args_ct_str =3D { "rZ", "rZ" } };
++    static const TCGTargetOpDef rZ_rZ_rZ_rZ
++        =3D { .args_ct_str =3D { "rZ", "rZ", "rZ", "rZ" } };
++    static const TCGTargetOpDef r_r_ri
++        =3D { .args_ct_str =3D { "r", "r", "ri" } };
++    static const TCGTargetOpDef r_r_rI
++        =3D { .args_ct_str =3D { "r", "r", "rI" } };
++    static const TCGTargetOpDef r_rZ_rN
++        =3D { .args_ct_str =3D { "r", "rZ", "rN" } };
++    static const TCGTargetOpDef r_rZ_rZ
++        =3D { .args_ct_str =3D { "r", "rZ", "rZ" } };
++    static const TCGTargetOpDef r_rZ_rZ_rZ_rZ
++        =3D { .args_ct_str =3D { "r", "rZ", "rZ", "rZ", "rZ" } };
++    static const TCGTargetOpDef r_L
++        =3D { .args_ct_str =3D { "r", "L" } };
++    static const TCGTargetOpDef r_r_L
++        =3D { .args_ct_str =3D { "r", "r", "L" } };
++    static const TCGTargetOpDef r_L_L
++        =3D { .args_ct_str =3D { "r", "L", "L" } };
++    static const TCGTargetOpDef r_r_L_L
++        =3D { .args_ct_str =3D { "r", "r", "L", "L" } };
++    static const TCGTargetOpDef LZ_L
++        =3D { .args_ct_str =3D { "LZ", "L" } };
++    static const TCGTargetOpDef LZ_L_L
++        =3D { .args_ct_str =3D { "LZ", "L", "L" } };
++    static const TCGTargetOpDef LZ_LZ_L
++        =3D { .args_ct_str =3D { "LZ", "LZ", "L" } };
++    static const TCGTargetOpDef LZ_LZ_L_L
++        =3D { .args_ct_str =3D { "LZ", "LZ", "L", "L" } };
++    static const TCGTargetOpDef r_r_rZ_rZ_rM_rM
++        =3D { .args_ct_str =3D { "r", "r", "rZ", "rZ", "rM", "rM" } };
 +
-+    data_regl =3D *args++;
-+    data_regh =3D (TCG_TARGET_REG_BITS =3D=3D 32 && is_64 ? *args++ : 0);
-+    addr_regl =3D *args++;
-+    addr_regh =3D (TCG_TARGET_REG_BITS < TARGET_LONG_BITS ? *args++ : 0);
-+    oi =3D *args++;
-+    opc =3D get_memop(oi);
++    switch (op) {
++    case INDEX_op_goto_ptr:
++        return &r;
 +
-+#if defined(CONFIG_SOFTMMU)
-+    tcg_out_tlb_load(s, addr_regl, addr_regh, oi, label_ptr, 1);
-+    tcg_out_qemu_ld_direct(s, data_regl, data_regh, base, opc, is_64);
-+    add_qemu_ldst_label(s, 1, oi,
-+                        (is_64 ? TCG_TYPE_I64 : TCG_TYPE_I32),
-+                        data_regl, data_regh, addr_regl, addr_regh,
-+                        s->code_ptr, label_ptr);
-+#else
-+    if (TCG_TARGET_REG_BITS > TARGET_LONG_BITS) {
-+        tcg_out_ext32u(s, base, addr_regl);
-+        addr_regl =3D base;
-+    }
++    case INDEX_op_ld8u_i32:
++    case INDEX_op_ld8s_i32:
++    case INDEX_op_ld16u_i32:
++    case INDEX_op_ld16s_i32:
++    case INDEX_op_ld_i32:
++    case INDEX_op_not_i32:
++    case INDEX_op_neg_i32:
++    case INDEX_op_ld8u_i64:
++    case INDEX_op_ld8s_i64:
++    case INDEX_op_ld16u_i64:
++    case INDEX_op_ld16s_i64:
++    case INDEX_op_ld32s_i64:
++    case INDEX_op_ld32u_i64:
++    case INDEX_op_ld_i64:
++    case INDEX_op_not_i64:
++    case INDEX_op_neg_i64:
++    case INDEX_op_ext8u_i32:
++    case INDEX_op_ext8u_i64:
++    case INDEX_op_ext16u_i32:
++    case INDEX_op_ext16u_i64:
++    case INDEX_op_ext32u_i64:
++    case INDEX_op_extu_i32_i64:
++    case INDEX_op_ext8s_i32:
++    case INDEX_op_ext8s_i64:
++    case INDEX_op_ext16s_i32:
++    case INDEX_op_ext16s_i64:
++    case INDEX_op_ext32s_i64:
++    case INDEX_op_extrl_i64_i32:
++    case INDEX_op_extrh_i64_i32:
++    case INDEX_op_ext_i32_i64:
++        return &r_r;
 +
-+    if (guest_base =3D=3D 0) {
-+        tcg_out_opc_reg(s, OPC_ADD, base, addr_regl, TCG_REG_ZERO);
-+    } else {
-+        tcg_out_opc_reg(s, OPC_ADD, base, TCG_GUEST_BASE_REG, addr_regl);
-+    }
-+    tcg_out_qemu_ld_direct(s, data_regl, data_regh, base, opc, is_64);
-+#endif
-+}
++    case INDEX_op_st8_i32:
++    case INDEX_op_st16_i32:
++    case INDEX_op_st_i32:
++    case INDEX_op_st8_i64:
++    case INDEX_op_st16_i64:
++    case INDEX_op_st32_i64:
++    case INDEX_op_st_i64:
++        return &rZ_r;
 +
-+static void tcg_out_qemu_st_direct(TCGContext *s, TCGReg lo, TCGReg hi,
-+                                   TCGReg base, TCGMemOp opc)
-+{
-+    const TCGMemOp bswap =3D opc & MO_BSWAP;
++    case INDEX_op_add_i32:
++    case INDEX_op_and_i32:
++    case INDEX_op_or_i32:
++    case INDEX_op_xor_i32:
++    case INDEX_op_add_i64:
++    case INDEX_op_and_i64:
++    case INDEX_op_or_i64:
++    case INDEX_op_xor_i64:
++        return &r_r_rI;
 +
-+    /* We don't yet handle byteswapping, assert */
-+    g_assert(!bswap);
++    case INDEX_op_sub_i32:
++    case INDEX_op_sub_i64:
++        return &r_rZ_rN;
 +
-+    switch (opc & (MO_SSIZE)) {
-+    case MO_8:
-+        tcg_out_opc_store(s, OPC_SB, base, lo, 0);
-+        break;
-+    case MO_16:
-+        tcg_out_opc_store(s, OPC_SH, base, lo, 0);
-+        break;
-+    case MO_32:
-+        tcg_out_opc_store(s, OPC_SW, base, lo, 0);
-+        break;
-+    case MO_64:
-+        if (TCG_TARGET_REG_BITS =3D=3D 64) {
-+            tcg_out_opc_store(s, OPC_SD, base, lo, 0);
-+        } else {
-+            tcg_out_opc_store(s, OPC_SW, base, lo, 0);
-+            tcg_out_opc_store(s, OPC_SW, base, hi, 4);
-+        }
-+        break;
++    case INDEX_op_mul_i32:
++    case INDEX_op_mulsh_i32:
++    case INDEX_op_muluh_i32:
++    case INDEX_op_div_i32:
++    case INDEX_op_divu_i32:
++    case INDEX_op_rem_i32:
++    case INDEX_op_remu_i32:
++    case INDEX_op_setcond_i32:
++    case INDEX_op_mul_i64:
++    case INDEX_op_mulsh_i64:
++    case INDEX_op_muluh_i64:
++    case INDEX_op_div_i64:
++    case INDEX_op_divu_i64:
++    case INDEX_op_rem_i64:
++    case INDEX_op_remu_i64:
++    case INDEX_op_setcond_i64:
++        return &r_rZ_rZ;
++
++    case INDEX_op_shl_i32:
++    case INDEX_op_shr_i32:
++    case INDEX_op_sar_i32:
++    case INDEX_op_shl_i64:
++    case INDEX_op_shr_i64:
++    case INDEX_op_sar_i64:
++        return &r_r_ri;
++
++    case INDEX_op_brcond_i32:
++    case INDEX_op_brcond_i64:
++        return &rZ_rZ;
++
++    case INDEX_op_add2_i32:
++    case INDEX_op_add2_i64:
++    case INDEX_op_sub2_i32:
++    case INDEX_op_sub2_i64:
++        return &r_r_rZ_rZ_rM_rM;
++
++    case INDEX_op_brcond2_i32:
++        return &rZ_rZ_rZ_rZ;
++
++    case INDEX_op_setcond2_i32:
++        return &r_rZ_rZ_rZ_rZ;
++
++    case INDEX_op_qemu_ld_i32:
++        return TARGET_LONG_BITS <=3D TCG_TARGET_REG_BITS ? &r_L : &r_L_L;
++    case INDEX_op_qemu_st_i32:
++        return TARGET_LONG_BITS <=3D TCG_TARGET_REG_BITS ? &LZ_L : &LZ_L_L=
+;
++    case INDEX_op_qemu_ld_i64:
++        return TCG_TARGET_REG_BITS =3D=3D 64 ? &r_L
++               : TARGET_LONG_BITS <=3D TCG_TARGET_REG_BITS ? &r_r_L
++               : &r_r_L_L;
++    case INDEX_op_qemu_st_i64:
++        return TCG_TARGET_REG_BITS =3D=3D 64 ? &LZ_L
++               : TARGET_LONG_BITS <=3D TCG_TARGET_REG_BITS ? &LZ_LZ_L
++               : &LZ_LZ_L_L;
++
 +    default:
-+        g_assert_not_reached();
++        return NULL;
 +    }
-+}
-+
-+static void tcg_out_qemu_st(TCGContext *s, const TCGArg *args, bool is_64)
-+{
-+    TCGReg addr_regl, addr_regh __attribute__((unused));
-+    TCGReg data_regl, data_regh;
-+    TCGMemOpIdx oi;
-+    TCGMemOp opc;
-+#if defined(CONFIG_SOFTMMU)
-+    tcg_insn_unit *label_ptr[1];
-+#endif
-+    TCGReg base =3D TCG_REG_TMP0;
-+
-+    data_regl =3D *args++;
-+    data_regh =3D (TCG_TARGET_REG_BITS =3D=3D 32 && is_64 ? *args++ : 0);
-+    addr_regl =3D *args++;
-+    addr_regh =3D (TCG_TARGET_REG_BITS < TARGET_LONG_BITS ? *args++ : 0);
-+    oi =3D *args++;
-+    opc =3D get_memop(oi);
-+
-+#if defined(CONFIG_SOFTMMU)
-+    tcg_out_tlb_load(s, addr_regl, addr_regh, oi, label_ptr, 0);
-+    tcg_out_qemu_st_direct(s, data_regl, data_regh, base, opc);
-+    add_qemu_ldst_label(s, 0, oi,
-+                        (is_64 ? TCG_TYPE_I64 : TCG_TYPE_I32),
-+                        data_regl, data_regh, addr_regl, addr_regh,
-+                        s->code_ptr, label_ptr);
-+#else
-+    if (TCG_TARGET_REG_BITS > TARGET_LONG_BITS) {
-+        tcg_out_ext32u(s, base, addr_regl);
-+        addr_regl =3D base;
-+    }
-+
-+    if (guest_base =3D=3D 0) {
-+        tcg_out_opc_reg(s, OPC_ADD, base, addr_regl, TCG_REG_ZERO);
-+    } else {
-+        tcg_out_opc_reg(s, OPC_ADD, base, TCG_GUEST_BASE_REG, addr_regl);
-+    }
-+    tcg_out_qemu_st_direct(s, data_regl, data_regh, base, opc);
-+#endif
 +}
 --=20
 2.19.1
