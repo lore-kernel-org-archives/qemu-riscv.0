@@ -1,52 +1,111 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gXH4G-0003B5-1B
-	for mharc-qemu-riscv@gnu.org; Wed, 12 Dec 2018 21:49:40 -0500
-Received: from eggs.gnu.org ([2001:4830:134:3::10]:45512)
+	id 1gXVpl-0000Ua-NV
+	for mharc-qemu-riscv@gnu.org; Thu, 13 Dec 2018 13:35:41 -0500
+Received: from eggs.gnu.org ([2001:4830:134:3::10]:50950)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <no-reply@patchew.org>) id 1gXH4D-0003AE-4J
-	for qemu-riscv@nongnu.org; Wed, 12 Dec 2018 21:49:39 -0500
+	(envelope-from <prvs=87864c7eb=Alistair.Francis@wdc.com>)
+	id 1gXVpi-0000TU-OD
+	for qemu-riscv@nongnu.org; Thu, 13 Dec 2018 13:35:40 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <no-reply@patchew.org>) id 1gXH4A-0001aC-Se
-	for qemu-riscv@nongnu.org; Wed, 12 Dec 2018 21:49:36 -0500
-Resent-Date: Wed, 12 Dec 2018 21:49:36 -0500
-Resent-Message-Id: <E1gXH4A-0001aC-Se@eggs.gnu.org>
-Received: from sender-of-o53.zoho.com ([135.84.80.218]:21787)
-	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.71) (envelope-from <no-reply@patchew.org>)
-	id 1gXH44-0000sO-06; Wed, 12 Dec 2018 21:49:28 -0500
-ARC-Seal: i=1; a=rsa-sha256; t=1544669340; cv=none; d=zoho.com; s=zohoarc; 
-	b=biGH0Qcq5f76EBXwNrh2XPXKdhdqQcXTYd1WOQGhIohV6kNUaO3nzES5cGhaVtag8hZ51U5T4nDyNDIjX0BxoHRHfj3cGwpEhdN+1FXFXiW0T/wdeo4Y/nBr3PowZvymM0TIAN1lXPnnrnJCv8QfN4gKxvn7HFbiS2vfez3ym3c=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zoho.com;
-	s=zohoarc; t=1544669340;
-	h=Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:MIME-Version:Message-ID:Reply-To:Subject:To:ARC-Authentication-Results;
-	bh=GqPW5m/GP5wsQegO5ko4OdQRXuS8dfIAs+TT233QFcg=; 
-	b=D5p459hRreMem2lkbOBoEbg5gKjs9mmlqUr54rwXtUydr1aw7hsfKMO3E07GgZb+z5PsFozLFHdjTmHIf3gyCGHPfZqWs8/9XLZWgG9zzWPB8MSbPhG6rZLg5NI9vTmQqdHRzg2ZVag+HM54fOl0SrnpYgQDmfbGIMWjqJV4Zt0=
-ARC-Authentication-Results: i=1; mx.zoho.com; dkim=pass  header.i=patchew.org;
-	spf=pass  smtp.mailfrom=no-reply@patchew.org;
-	dmarc=pass header.from=<no-reply@patchew.org>
-	header.from=<no-reply@patchew.org>
-Received: from [172.17.0.3] (23.253.156.214 [23.253.156.214]) by
-	mx.zohomail.com with SMTPS id 1544669339245358.0973212749301;
-	Wed, 12 Dec 2018 18:48:59 -0800 (PST)
-In-Reply-To: <cover.1544643238.git.alistair.francis@wdc.com>
-Message-ID: <154466933790.9757.5017406111008394126@02a1dbf831e2>
-Reply-To: <qemu-devel@nongnu.org>
+	(envelope-from <prvs=87864c7eb=Alistair.Francis@wdc.com>)
+	id 1gXVpg-0003tg-Kh
+	for qemu-riscv@nongnu.org; Thu, 13 Dec 2018 13:35:38 -0500
+Received: from esa2.hgst.iphmx.com ([68.232.143.124]:8832)
+	by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.71) (envelope-from <prvs=87864c7eb=Alistair.Francis@wdc.com>)
+	id 1gXVpB-0001gK-Hd; Thu, 13 Dec 2018 13:35:29 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+	d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+	t=1544726110; x=1576262110;
+	h=from:to:cc:subject:date:message-id:
+	content-transfer-encoding:mime-version;
+	bh=C4xXzECytiRSZwQpVDvE+YyVzGQXwPLPBg49DHifZz4=;
+	b=H8xkpRWaPJ/5PM7hQKouaUJPexNCTck4hw3k+UsI4GbdfKJ8vALyTJVd
+	uzJJZW7pUJvSlEI93gsz9SRyMPjGYnjRdngdXHBcAWjXvKzw3bPJ3+3TV
+	e6GWjI/LaYDVzcsRAOmbig3EKDnJRM5g1mNj/UB6q6xwo78hS91lB2Xgr
+	52DncexeDrhR94/1PII7/etnW0UBQ3Hbp7T0msCgqEeX3bollwMi5wg6/
+	yY7xquR+jmBeYFEd951/WA6zuITi2IfWE/BTmcYwX4mpe9Bs94AU8EQOb
+	7ZYrhZy+PB9+qqFxC2sUt/seMCXvPiXkrGIBg7SmCzwO1xavLy2nX1K38 A==;
+X-IronPort-AV: E=Sophos;i="5.56,349,1539619200"; d="scan'208";a="194427415"
+Received: from mail-by2nam03lp2054.outbound.protection.outlook.com (HELO
+	NAM03-BY2-obe.outbound.protection.outlook.com) ([104.47.42.54])
+	by ob1.hgst.iphmx.com with ESMTP; 14 Dec 2018 02:34:55 +0800
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=sharedspace.onmicrosoft.com; s=selector1-wdc-com;
+	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+	bh=kvBbGhTjlxsId874QCWqYi5026P8krxN1vU+pmkdwoA=;
+	b=eBrVd4o/5iiISWlscG4Vx3/KLYiBLo7TGYBCRGJPbNYF0Be6JAAoixpUetf/p4v9VydLcsmYL28WzS21WeFn61dV21lqfVgdO93isBLg6HFNQ7BV6RDOWqk2E7uYy4bANQUzoepWF00Bwb1LZh4q0UVczcSmcyxlCVObyBev3Cs=
+Received: from MWHPR04MB0401.namprd04.prod.outlook.com (10.173.48.18) by
+	MWHPR04MB1200.namprd04.prod.outlook.com (10.173.51.15) with Microsoft
+	SMTP
+	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+	15.20.1425.20; Thu, 13 Dec 2018 18:34:52 +0000
+Received: from MWHPR04MB0401.namprd04.prod.outlook.com
+	([fe80::9067:fb44:66b2:7604]) by
+	MWHPR04MB0401.namprd04.prod.outlook.com
+	([fe80::9067:fb44:66b2:7604%3]) with mapi id 15.20.1425.016;
+	Thu, 13 Dec 2018 18:34:52 +0000
+From: Alistair Francis <Alistair.Francis@wdc.com>
+To: "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, "qemu-riscv@nongnu.org"
+	<qemu-riscv@nongnu.org>
+CC: Alistair Francis <Alistair.Francis@wdc.com>, "alistair23@gmail.com"
+	<alistair23@gmail.com>, Anup Patel <Anup.Patel@wdc.com>
+Thread-Topic: [PATCH v1 1/1] sifive_u: Add clock DT node for GEM ethernet
+Thread-Index: AQHUkxKJWISL24wYb0OraN3SXrDM1g==
+Date: Thu, 13 Dec 2018 18:34:52 +0000
+Message-ID: <17339beb25e8db709cd55882df726200de31b2b0.1544726044.git.alistair.francis@wdc.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-mailer: git-send-email 2.19.1
+x-clientproxiedby: BYAPR11CA0047.namprd11.prod.outlook.com
+	(2603:10b6:a03:80::24) To MWHPR04MB0401.namprd04.prod.outlook.com
+	(2603:10b6:300:70::18)
+authentication-results: spf=none (sender IP is )
+	smtp.mailfrom=Alistair.Francis@wdc.com; 
+x-ms-exchange-messagesentrepresentingtype: 1
+x-originating-ip: [199.255.44.250]
+x-ms-publictraffictype: Email
+x-microsoft-exchange-diagnostics: 1; MWHPR04MB1200;
+	6:IAvbHxAItt4eDkcji5uTpIASE/ffeSbhslWMUeJ6agpsdmMeWmFVMgcMUrldnKZ5RyB5GAZWg/Va1BHNQt7CSPaBcZIC8yF+/vqnzGbRWSBX/uTfdtWksjl+9VhdlGE21SitLulgYSps3s92hsYwexa9YgM9+b1TnbtBth7wjyflBNWdzcx0YrHMalDSxTFd8nOK8SdMFf44FteqwjWIB/AE3CZl5qQiLdSUVMgVj/v42Dtet419dU92fW/4CnqwP4267lt5eotmZ4i6u1fvgPX44JWjMaeqEF3PUEqU0G/cFGF3cMYclzU5db9WQebzHyaHBqKLZd50OEpG1TPkZ5iSzTT5HCyNDa0iinDn1chsocTGhJAgIYB6O8akExoX4bnSsj60HNupStayZ7sDHDsfIkwhe0rCuBOuLW41MX9lfIoyM92HC+408ovr6rIuzwRJ7XsUg/qU8TB6PqA6Lg==;
+	5:o+iR+9mEpJH6j5SGzDJUvnZkmxcWjCrlO82j+C3pyDH7kPbPrX2Ej/pz3lNovXNC1sS3yFQJ9iJKm+4siyNhE24yg3yCvdyCPde6HLoZ/PqIMWqidfkZTY3Y7+G7wdfBsXEaPplJI2lgWNQjQHKLOmlaQJzHDyp3ISoQrYxhi08=;
+	7:d5fUMQ01sQNc3KADnhCABG2YBSHxL964ySin6eKbUUaNS+4TIupGjekZpwtkZcy4HPYbWmmrEb0aIQ7RLtW5cGyEOkqOAXEiWiMRJq5ggLnTrQKQbiRzzFro9KLV8ouOAPvpPuev00xzU5yqkX8v4A==
+x-ms-office365-filtering-correlation-id: a0a44590-63a1-4fe1-0793-08d66129ab6b
+x-ms-office365-filtering-ht: Tenant
+x-microsoft-antispam: BCL:0; PCL:0;
+	RULEID:(2390098)(7020095)(4652040)(8989299)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(5600074)(711020)(4618075)(2017052603328)(7153060)(7193020);
+	SRVR:MWHPR04MB1200; 
+x-ms-traffictypediagnostic: MWHPR04MB1200:
+wdcipoutbound: EOP-TRUE
+x-microsoft-antispam-prvs: <MWHPR04MB12001CC8DF17B8E8F780A87190A00@MWHPR04MB1200.namprd04.prod.outlook.com>
+x-ms-exchange-senderadcheck: 1
+x-exchange-antispam-report-cfa-test: BCL:0; PCL:0;
+	RULEID:(8211001083)(3230021)(999002)(6040522)(2401047)(8121501046)(5005006)(10201501046)(3231475)(944501520)(52105112)(93006095)(93001095)(3002001)(6055026)(148016)(149066)(150057)(6041310)(20161123560045)(201703131423095)(201702281528075)(20161123555045)(201703061421075)(201703061406153)(20161123562045)(20161123564045)(20161123558120)(201708071742011)(7699051)(76991095);
+	SRVR:MWHPR04MB1200; BCL:0; PCL:0; RULEID:; SRVR:MWHPR04MB1200; 
+x-forefront-prvs: 088552DE73
+x-forefront-antispam-report: SFV:NSPM;
+	SFS:(10019020)(136003)(396003)(39860400002)(346002)(366004)(376002)(199004)(189003)(36756003)(68736007)(81156014)(7736002)(2906002)(81166006)(8676002)(5660300001)(106356001)(99286004)(8936002)(97736004)(71190400001)(256004)(305945005)(105586002)(50226002)(86362001)(71200400001)(118296001)(52116002)(53936002)(6486002)(478600001)(6436002)(25786009)(44832011)(386003)(54906003)(39060400002)(6116002)(110136005)(102836004)(2616005)(2501003)(3846002)(476003)(26005)(6512007)(186003)(14454004)(66066001)(316002)(72206003)(4326008)(6506007)(486006);
+	DIR:OUT; SFP:1102; SCL:1; SRVR:MWHPR04MB1200;
+	H:MWHPR04MB0401.namprd04.prod.outlook.com; FPR:; SPF:None;
+	LANG:en; PTR:InfoNoRecords; A:1; MX:1; 
+x-microsoft-antispam-message-info: q9J9Rkcq/zMan8/VS3jzH6DBP4ZgBMtnSWHZp1CfXva/w27AjPVjqZQ/qCTEV1isgrEgtFJHnH3u7nN59pbtb+N/88gRLfsGJ5fgCf4Be4psiYoX/w6c0qSRHVrA/PpabTVe3GqN09p3zfSs8HbEsabSjsWt1E+ddrphc0veyADjpgw1ri+ctC3dUN2iCF+IXJnz9CNXEU+AWW9T6iJ4Nc+sasdJKY2cmwjr20FK1dVEsltuWf+hbBMskv+3zmJX83CgQnFQ0qOVfGvY48ECwm7pvr8E+9d3ZLkUJp1Zrru3SYxtQJoCEOgJW9AdasL0
+spamdiagnosticoutput: 1:99
+spamdiagnosticmetadata: NSPM
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-Resent-From: 
-From: no-reply@patchew.org
-To: Alistair.Francis@wdc.com
-Cc: fam@euphon.net, qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
-	alistair23@gmail.com, richard.henderson@linaro.org,
-	Alistair.Francis@wdc.com
-Date: Wed, 12 Dec 2018 18:48:59 -0800 (PST)
-X-ZohoMailClient: External
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
-	[fuzzy]
-X-Received-From: 135.84.80.218
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v1 00/23] Add RISC-V TCG
- backend support
+X-OriginatorOrg: wdc.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: a0a44590-63a1-4fe1-0793-08d66129ab6b
+X-MS-Exchange-CrossTenant-originalarrivaltime: 13 Dec 2018 18:34:52.2131 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MWHPR04MB1200
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+	recognized.
+X-Received-From: 68.232.143.124
+Subject: [Qemu-riscv] [PATCH v1 1/1] sifive_u: Add clock DT node for GEM
+ ethernet
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -58,119 +117,85 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Dec 2018 02:49:39 -0000
+X-List-Received-Date: Thu, 13 Dec 2018 18:35:40 -0000
 
-UGF0Y2hldyBVUkw6IGh0dHBzOi8vcGF0Y2hldy5vcmcvUUVNVS9jb3Zlci4xNTQ0NjQzMjM4Lmdp
-dC5hbGlzdGFpci5mcmFuY2lzQHdkYy5jb20vCgoKCkhpLAoKVGhpcyBzZXJpZXMgc2VlbXMgdG8g
-aGF2ZSBzb21lIGNvZGluZyBzdHlsZSBwcm9ibGVtcy4gU2VlIG91dHB1dCBiZWxvdyBmb3IKbW9y
-ZSBpbmZvcm1hdGlvbjoKClR5cGU6IHNlcmllcwpNZXNzYWdlLWlkOiBjb3Zlci4xNTQ0NjQzMjM4
-LmdpdC5hbGlzdGFpci5mcmFuY2lzQHdkYy5jb20KU3ViamVjdDogW1FlbXUtZGV2ZWxdIFtQQVRD
-SCB2MSAwMC8yM10gIEFkZCBSSVNDLVYgVENHIGJhY2tlbmQgc3VwcG9ydAoKPT09IFRFU1QgU0NS
-SVBUIEJFR0lOID09PQojIS9iaW4vYmFzaAoKQkFTRT1iYXNlCm49MQp0b3RhbD0kKGdpdCBsb2cg
-LS1vbmVsaW5lICRCQVNFLi4gfCB3YyAtbCkKZmFpbGVkPTAKCmdpdCBjb25maWcgLS1sb2NhbCBk
-aWZmLnJlbmFtZWxpbWl0IDAKZ2l0IGNvbmZpZyAtLWxvY2FsIGRpZmYucmVuYW1lcyBUcnVlCmdp
-dCBjb25maWcgLS1sb2NhbCBkaWZmLmFsZ29yaXRobSBoaXN0b2dyYW0KCmNvbW1pdHM9IiQoZ2l0
-IGxvZyAtLWZvcm1hdD0lSCAtLXJldmVyc2UgJEJBU0UuLikiCmZvciBjIGluICRjb21taXRzOyBk
-bwogICAgZWNobyAiQ2hlY2tpbmcgUEFUQ0ggJG4vJHRvdGFsOiAkKGdpdCBsb2cgLW4gMSAtLWZv
-cm1hdD0lcyAkYykuLi4iCiAgICBpZiAhIGdpdCBzaG93ICRjIC0tZm9ybWF0PWVtYWlsIHwgLi9z
-Y3JpcHRzL2NoZWNrcGF0Y2gucGwgLS1tYWlsYmFjayAtOyB0aGVuCiAgICAgICAgZmFpbGVkPTEK
-ICAgICAgICBlY2hvCiAgICBmaQogICAgbj0kKChuKzEpKQpkb25lCgpleGl0ICRmYWlsZWQKPT09
-IFRFU1QgU0NSSVBUIEVORCA9PT0KClVwZGF0aW5nIDNjOGNmNWE5YzIxZmY4NzgyMTY0ZDFkZWY3
-ZjQ0YmQ4ODg3MTMzODQKU3dpdGNoZWQgdG8gYSBuZXcgYnJhbmNoICd0ZXN0Jwo5YjVjOTMyIGNv
-bmZpZ3VyZTogQWRkIHN1cHBvcnQgZm9yIGJ1aWxkaW5nIFJJU0MtViBob3N0CmZiMTU4OTggZGlh
-czogQWRkIFJJU0MtViBzdXBwb3J0CjAwYzg0ZDEgdGNnOiBBZGQgUklTQy1WIGNwdSBzaWduYWwg
-aGFuZGxlcgo2YWRkNjQxIHJpc2N2OiB0Y2ctdGFyZ2V0OiBBZGQgdGhlIHRhcmdldCBpbml0IGNv
-ZGUKMTU1ODM2MyByaXNjdjogdGNnLXRhcmdldDogQWRkIHRoZSBwcm9sb2d1ZSBnZW5lcmF0aW9u
-IGFuZCByZWdpc3RlciB0aGUgSklUCmViMmU4MWQgcmlzY3Y6IHRjZy10YXJnZXQ6IEFkZCB0aGUg
-b3V0IG9wIGRlY29kZXIKMzgxMDY3MCByaXNjdjogdGNnLXRhcmdldDogQWRkIGRpcmVjdCBsb2Fk
-IGFuZCBzdG9yZSBpbnN0cnVjdGlvbnMKM2Y5YzljYiByaXNjdjogdGNnLXRhcmdldDogQWRkIHNs
-b3dwYXRoIGxvYWQgYW5kIHN0b3JlIGluc3RydWN0aW9ucwplZmZiNmVmIHJpc2N2OiB0Y2ctdGFy
-Z2V0OiBBZGQgYnJhbmNoIGFuZCBqdW1wIGluc3RydWN0aW9ucwo2YTRlMTQxIHJpc2N2OiB0Y2ct
-dGFyZ2V0OiBBZGQgdGhlIGFkZDIgYW5kIHN1YjIgaW5zdHJ1Y3Rpb25zCmIyNzVkNjMgcmlzY3Y6
-IHRjZy10YXJnZXQ6IEFkZCB0aGUgb3V0IGxvYWQgYW5kIHN0b3JlIGluc3RydWN0aW9ucwo2NzM5
-NzU4IHJpc2N2OiB0Y2ctdGFyZ2V0OiBBZGQgdGhlIGV4dHJhY3QgaW5zdHJ1Y3Rpb25zCjU5NDlj
-ZmMgcmlzY3Y6IHRjZy10YXJnZXQ6IEFkZCB0aGUgbW92IGFuZCBtb3ZpIGluc3RydWN0aW9uCmQz
-MDQzMzMgcmlzY3Y6IHRjZy10YXJnZXQ6IEFkZCB0aGUgcmVsb2NhdGlvbiBmdW5jdGlvbnMKNDE3
-ZDcwNCByaXNjdjogdGNnLXRhcmdldDogQWRkIHRoZSBpbnN0cnVjdGlvbiBlbWl0dGVycwowZGY4
-NDk4IHJpc2N2OiB0Y2ctdGFyZ2V0OiBBZGQgdGhlIGltbWVkaWF0ZSBlbmNvZGVycwo3OGRmYTgy
-IHJpc2N2OiB0Y2ctdGFyZ2V0OiBBZGQgc3VwcG9ydCBmb3IgdGhlIGNvbnN0cmFpbnRzCmRlMjVj
-NzMgcmlzY3Y6IEFkZCB0aGUgdGNnIHRhcmdldCByZWdpc3RlcnMKMjRjYjgwNyByaXNjdjogQWRk
-IHRoZSB0Y2ctdGFyZ2V0IGhlYWRlciBmaWxlCmJjMmEzMjQgZXhlYzogQWRkIFJJU0MtViBHQ0Mg
-cG9pc29uIG1hY3JvCjJkMmE2NGEgbGludXgtdXNlcjogQWRkIGhvc3QgZGVwZW5kZW5jeSBmb3Ig
-UklTQy1WIDY0LWJpdAoxOWQyNDFmIGxpbnV4LXVzZXI6IEFkZCBob3N0IGRlcGVuZGVuY3kgZm9y
-IFJJU0MtViAzMi1iaXQKMGJmMDRmNSBlbGYuaDogQWRkIHRoZSBSSVNDViBFTEYgbWFnaWMgbnVt
-YmVycwoKPT09IE9VVFBVVCBCRUdJTiA9PT0KQ2hlY2tpbmcgUEFUQ0ggMS8yMzogZWxmLmg6IEFk
-ZCB0aGUgUklTQ1YgRUxGIG1hZ2ljIG51bWJlcnMuLi4KQ2hlY2tpbmcgUEFUQ0ggMi8yMzogbGlu
-dXgtdXNlcjogQWRkIGhvc3QgZGVwZW5kZW5jeSBmb3IgUklTQy1WIDMyLWJpdC4uLgpXQVJOSU5H
-OiBhZGRlZCwgbW92ZWQgb3IgZGVsZXRlZCBmaWxlKHMpLCBkb2VzIE1BSU5UQUlORVJTIG5lZWQg
-dXBkYXRpbmc/CiMyNDogCm5ldyBmaWxlIG1vZGUgMTAwNjQ0Cgp0b3RhbDogMCBlcnJvcnMsIDEg
-d2FybmluZ3MsIDE4IGxpbmVzIGNoZWNrZWQKCllvdXIgcGF0Y2ggaGFzIHN0eWxlIHByb2JsZW1z
-LCBwbGVhc2UgcmV2aWV3LiAgSWYgYW55IG9mIHRoZXNlIGVycm9ycwphcmUgZmFsc2UgcG9zaXRp
-dmVzIHJlcG9ydCB0aGVtIHRvIHRoZSBtYWludGFpbmVyLCBzZWUKQ0hFQ0tQQVRDSCBpbiBNQUlO
-VEFJTkVSUy4KQ2hlY2tpbmcgUEFUQ0ggMy8yMzogbGludXgtdXNlcjogQWRkIGhvc3QgZGVwZW5k
-ZW5jeSBmb3IgUklTQy1WIDY0LWJpdC4uLgpXQVJOSU5HOiBhZGRlZCwgbW92ZWQgb3IgZGVsZXRl
-ZCBmaWxlKHMpLCBkb2VzIE1BSU5UQUlORVJTIG5lZWQgdXBkYXRpbmc/CiMyNDogCm5ldyBmaWxl
-IG1vZGUgMTAwNjQ0Cgp0b3RhbDogMCBlcnJvcnMsIDEgd2FybmluZ3MsIDE4IGxpbmVzIGNoZWNr
-ZWQKCllvdXIgcGF0Y2ggaGFzIHN0eWxlIHByb2JsZW1zLCBwbGVhc2UgcmV2aWV3LiAgSWYgYW55
-IG9mIHRoZXNlIGVycm9ycwphcmUgZmFsc2UgcG9zaXRpdmVzIHJlcG9ydCB0aGVtIHRvIHRoZSBt
-YWludGFpbmVyLCBzZWUKQ0hFQ0tQQVRDSCBpbiBNQUlOVEFJTkVSUy4KQ2hlY2tpbmcgUEFUQ0gg
-NC8yMzogZXhlYzogQWRkIFJJU0MtViBHQ0MgcG9pc29uIG1hY3JvLi4uCkNoZWNraW5nIFBBVENI
-IDUvMjM6IHJpc2N2OiBBZGQgdGhlIHRjZy10YXJnZXQgaGVhZGVyIGZpbGUuLi4KV0FSTklORzog
-YWRkZWQsIG1vdmVkIG9yIGRlbGV0ZWQgZmlsZShzKSwgZG9lcyBNQUlOVEFJTkVSUyBuZWVkIHVw
-ZGF0aW5nPwojMjQ6IApuZXcgZmlsZSBtb2RlIDEwMDY0NAoKV0FSTklORzogYXJjaGl0ZWN0dXJl
-IHNwZWNpZmljIGRlZmluZXMgc2hvdWxkIGJlIGF2b2lkZWQKIzU2OiBGSUxFOiB0Y2cvcmlzY3Yv
-dGNnLXRhcmdldC5oOjI4OgorI2lmIF9fcmlzY3ZfeGxlbiA9PSAzMgoKdG90YWw6IDAgZXJyb3Jz
-LCAyIHdhcm5pbmdzLCAxODIgbGluZXMgY2hlY2tlZAoKWW91ciBwYXRjaCBoYXMgc3R5bGUgcHJv
-YmxlbXMsIHBsZWFzZSByZXZpZXcuICBJZiBhbnkgb2YgdGhlc2UgZXJyb3JzCmFyZSBmYWxzZSBw
-b3NpdGl2ZXMgcmVwb3J0IHRoZW0gdG8gdGhlIG1haW50YWluZXIsIHNlZQpDSEVDS1BBVENIIGlu
-IE1BSU5UQUlORVJTLgpDaGVja2luZyBQQVRDSCA2LzIzOiByaXNjdjogQWRkIHRoZSB0Y2cgdGFy
-Z2V0IHJlZ2lzdGVycy4uLgpXQVJOSU5HOiBhZGRlZCwgbW92ZWQgb3IgZGVsZXRlZCBmaWxlKHMp
-LCBkb2VzIE1BSU5UQUlORVJTIG5lZWQgdXBkYXRpbmc/CiMxMjogCm5ldyBmaWxlIG1vZGUgMTAw
-NjQ0Cgp0b3RhbDogMCBlcnJvcnMsIDEgd2FybmluZ3MsIDExOCBsaW5lcyBjaGVja2VkCgpZb3Vy
-IHBhdGNoIGhhcyBzdHlsZSBwcm9ibGVtcywgcGxlYXNlIHJldmlldy4gIElmIGFueSBvZiB0aGVz
-ZSBlcnJvcnMKYXJlIGZhbHNlIHBvc2l0aXZlcyByZXBvcnQgdGhlbSB0byB0aGUgbWFpbnRhaW5l
-ciwgc2VlCkNIRUNLUEFUQ0ggaW4gTUFJTlRBSU5FUlMuCkNoZWNraW5nIFBBVENIIDcvMjM6IHJp
-c2N2OiB0Y2ctdGFyZ2V0OiBBZGQgc3VwcG9ydCBmb3IgdGhlIGNvbnN0cmFpbnRzLi4uCkNoZWNr
-aW5nIFBBVENIIDgvMjM6IHJpc2N2OiB0Y2ctdGFyZ2V0OiBBZGQgdGhlIGltbWVkaWF0ZSBlbmNv
-ZGVycy4uLgpDaGVja2luZyBQQVRDSCA5LzIzOiByaXNjdjogdGNnLXRhcmdldDogQWRkIHRoZSBp
-bnN0cnVjdGlvbiBlbWl0dGVycy4uLgpDaGVja2luZyBQQVRDSCAxMC8yMzogcmlzY3Y6IHRjZy10
-YXJnZXQ6IEFkZCB0aGUgcmVsb2NhdGlvbiBmdW5jdGlvbnMuLi4KQ2hlY2tpbmcgUEFUQ0ggMTEv
-MjM6IHJpc2N2OiB0Y2ctdGFyZ2V0OiBBZGQgdGhlIG1vdiBhbmQgbW92aSBpbnN0cnVjdGlvbi4u
-LgpDaGVja2luZyBQQVRDSCAxMi8yMzogcmlzY3Y6IHRjZy10YXJnZXQ6IEFkZCB0aGUgZXh0cmFj
-dCBpbnN0cnVjdGlvbnMuLi4KQ2hlY2tpbmcgUEFUQ0ggMTMvMjM6IHJpc2N2OiB0Y2ctdGFyZ2V0
-OiBBZGQgdGhlIG91dCBsb2FkIGFuZCBzdG9yZSBpbnN0cnVjdGlvbnMuLi4KQ2hlY2tpbmcgUEFU
-Q0ggMTQvMjM6IHJpc2N2OiB0Y2ctdGFyZ2V0OiBBZGQgdGhlIGFkZDIgYW5kIHN1YjIgaW5zdHJ1
-Y3Rpb25zLi4uCkNoZWNraW5nIFBBVENIIDE1LzIzOiByaXNjdjogdGNnLXRhcmdldDogQWRkIGJy
-YW5jaCBhbmQganVtcCBpbnN0cnVjdGlvbnMuLi4KQ2hlY2tpbmcgUEFUQ0ggMTYvMjM6IHJpc2N2
-OiB0Y2ctdGFyZ2V0OiBBZGQgc2xvd3BhdGggbG9hZCBhbmQgc3RvcmUgaW5zdHJ1Y3Rpb25zLi4u
-CkNoZWNraW5nIFBBVENIIDE3LzIzOiByaXNjdjogdGNnLXRhcmdldDogQWRkIGRpcmVjdCBsb2Fk
-IGFuZCBzdG9yZSBpbnN0cnVjdGlvbnMuLi4KRVJST1I6IHNwYWNlcyByZXF1aXJlZCBhcm91bmQg
-dGhhdCAnKicgKGN0eDpXeFYpCiM3NDogRklMRTogdGNnL3Jpc2N2L3RjZy10YXJnZXQuaW5jLmM6
-MTE5MjoKKyAgICB0Y2dfaW5zbl91bml0ICpsYWJlbF9wdHJbMV07CiAgICAgICAgICAgICAgICAg
-ICBeCgpFUlJPUjogc3BhY2VzIHJlcXVpcmVkIGFyb3VuZCB0aGF0ICcqJyAoY3R4Old4VikKIzE0
-NTogRklMRTogdGNnL3Jpc2N2L3RjZy10YXJnZXQuaW5jLmM6MTI2MzoKKyAgICB0Y2dfaW5zbl91
-bml0ICpsYWJlbF9wdHJbMV07CiAgICAgICAgICAgICAgICAgICBeCgp0b3RhbDogMiBlcnJvcnMs
-IDAgd2FybmluZ3MsIDE2MSBsaW5lcyBjaGVja2VkCgpZb3VyIHBhdGNoIGhhcyBzdHlsZSBwcm9i
-bGVtcywgcGxlYXNlIHJldmlldy4gIElmIGFueSBvZiB0aGVzZSBlcnJvcnMKYXJlIGZhbHNlIHBv
-c2l0aXZlcyByZXBvcnQgdGhlbSB0byB0aGUgbWFpbnRhaW5lciwgc2VlCkNIRUNLUEFUQ0ggaW4g
-TUFJTlRBSU5FUlMuCgpDaGVja2luZyBQQVRDSCAxOC8yMzogcmlzY3Y6IHRjZy10YXJnZXQ6IEFk
-ZCB0aGUgb3V0IG9wIGRlY29kZXIuLi4KQ2hlY2tpbmcgUEFUQ0ggMTkvMjM6IHJpc2N2OiB0Y2ct
-dGFyZ2V0OiBBZGQgdGhlIHByb2xvZ3VlIGdlbmVyYXRpb24gYW5kIHJlZ2lzdGVyIHRoZSBKSVQu
-Li4KQ2hlY2tpbmcgUEFUQ0ggMjAvMjM6IHJpc2N2OiB0Y2ctdGFyZ2V0OiBBZGQgdGhlIHRhcmdl
-dCBpbml0IGNvZGUuLi4KQ2hlY2tpbmcgUEFUQ0ggMjEvMjM6IHRjZzogQWRkIFJJU0MtViBjcHUg
-c2lnbmFsIGhhbmRsZXIuLi4KQ2hlY2tpbmcgUEFUQ0ggMjIvMjM6IGRpYXM6IEFkZCBSSVNDLVYg
-c3VwcG9ydC4uLgpXQVJOSU5HOiBhcmNoaXRlY3R1cmUgc3BlY2lmaWMgZGVmaW5lcyBzaG91bGQg
-YmUgYXZvaWRlZAojMjI6IEZJTEU6IGRpc2FzLmM6NTI2OgorI2lmIGRlZmluZWQoX0lMUDMyKSB8
-fCAoX19yaXNjdl94bGVuID09IDMyKQoKdG90YWw6IDAgZXJyb3JzLCAxIHdhcm5pbmdzLCAxNiBs
-aW5lcyBjaGVja2VkCgpZb3VyIHBhdGNoIGhhcyBzdHlsZSBwcm9ibGVtcywgcGxlYXNlIHJldmll
-dy4gIElmIGFueSBvZiB0aGVzZSBlcnJvcnMKYXJlIGZhbHNlIHBvc2l0aXZlcyByZXBvcnQgdGhl
-bSB0byB0aGUgbWFpbnRhaW5lciwgc2VlCkNIRUNLUEFUQ0ggaW4gTUFJTlRBSU5FUlMuCkNoZWNr
-aW5nIFBBVENIIDIzLzIzOiBjb25maWd1cmU6IEFkZCBzdXBwb3J0IGZvciBidWlsZGluZyBSSVND
-LVYgaG9zdC4uLgo9PT0gT1VUUFVUIEVORCA9PT0KClRlc3QgY29tbWFuZCBleGl0ZWQgd2l0aCBj
-b2RlOiAxCgoKVGhlIGZ1bGwgbG9nIGlzIGF2YWlsYWJsZSBhdApodHRwOi8vcGF0Y2hldy5vcmcv
-bG9ncy9jb3Zlci4xNTQ0NjQzMjM4LmdpdC5hbGlzdGFpci5mcmFuY2lzQHdkYy5jb20vdGVzdGlu
-Zy5jaGVja3BhdGNoLz90eXBlPW1lc3NhZ2UuCi0tLQpFbWFpbCBnZW5lcmF0ZWQgYXV0b21hdGlj
-YWxseSBieSBQYXRjaGV3IFtodHRwOi8vcGF0Y2hldy5vcmcvXS4KUGxlYXNlIHNlbmQgeW91ciBm
-ZWVkYmFjayB0byBwYXRjaGV3LWRldmVsQHJlZGhhdC5jb20=
+From: Anup Patel <anup@brainfault.org>
+
+The GEM ethernet on SiFive unleashed has fixed input clock
+of 125MHz as-per SiFive FU540 manual. This patch updates FDT
+generation for QEMU sifive_u machine to provide fixed-rate
+clock for GEM ethernet.
+
+Signed-off-by: Anup Patel <anup@brainfault.org>
+Signed-off-by: Anup Patel <anup.patel@wdc.com>
+Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+---
+ hw/riscv/sifive_u.c         | 18 +++++++++++++++++-
+ include/hw/riscv/sifive_u.h |  3 ++-
+ 2 files changed, 19 insertions(+), 2 deletions(-)
+
+diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+index ef07df2442..5c41ee5017 100644
+--- a/hw/riscv/sifive_u.c
++++ b/hw/riscv/sifive_u.c
+@@ -85,7 +85,8 @@ static void create_fdt(SiFiveUState *s, const struct Memm=
+apEntry *memmap,
+     int cpu;
+     uint32_t *cells;
+     char *nodename;
+-    uint32_t plic_phandle;
++    char ethclk_names[] =3D "pclk\0hclk\0tx_clk";
++    uint32_t plic_phandle, ethclk_phandle;
+=20
+     fdt =3D s->fdt =3D create_device_tree(&s->fdt_size);
+     if (!fdt) {
+@@ -197,6 +198,17 @@ static void create_fdt(SiFiveUState *s, const struct M=
+emmapEntry *memmap,
+     g_free(cells);
+     g_free(nodename);
+=20
++    nodename =3D g_strdup_printf("/soc/ethclk");
++    qemu_fdt_add_subnode(fdt, nodename);
++    qemu_fdt_setprop_string(fdt, nodename, "compatible", "fixed-clock");
++    qemu_fdt_setprop_cell(fdt, nodename, "#clock-cells", 0x0);
++    qemu_fdt_setprop_cell(fdt, nodename, "clock-frequency",
++        SIFIVE_U_GEM_CLOCK_FREQ);
++    qemu_fdt_setprop_cell(fdt, nodename, "phandle", 3);
++    qemu_fdt_setprop_cell(fdt, nodename, "linux,phandle", 3);
++    ethclk_phandle =3D qemu_fdt_get_phandle(fdt, nodename);
++    g_free(nodename);
++
+     nodename =3D g_strdup_printf("/soc/ethernet@%lx",
+         (long)memmap[SIFIVE_U_GEM].base);
+     qemu_fdt_add_subnode(fdt, nodename);
+@@ -208,6 +220,10 @@ static void create_fdt(SiFiveUState *s, const struct M=
+emmapEntry *memmap,
+     qemu_fdt_setprop_string(fdt, nodename, "phy-mode", "gmii");
+     qemu_fdt_setprop_cells(fdt, nodename, "interrupt-parent", plic_phandle=
+);
+     qemu_fdt_setprop_cells(fdt, nodename, "interrupts", SIFIVE_U_GEM_IRQ);
++    qemu_fdt_setprop_cells(fdt, nodename, "clocks",
++        ethclk_phandle, ethclk_phandle, ethclk_phandle);
++    qemu_fdt_setprop(fdt, nodename, "clocks-names", ethclk_names,
++        sizeof(ethclk_names));
+     qemu_fdt_setprop_cells(fdt, nodename, "#address-cells", 1);
+     qemu_fdt_setprop_cells(fdt, nodename, "#size-cells", 0);
+     g_free(nodename);
+diff --git a/include/hw/riscv/sifive_u.h b/include/hw/riscv/sifive_u.h
+index e8b4d9ffa3..be13cc1304 100644
+--- a/include/hw/riscv/sifive_u.h
++++ b/include/hw/riscv/sifive_u.h
+@@ -63,7 +63,8 @@ enum {
+ };
+=20
+ enum {
+-    SIFIVE_U_CLOCK_FREQ =3D 1000000000
++    SIFIVE_U_CLOCK_FREQ =3D 1000000000,
++    SIFIVE_U_GEM_CLOCK_FREQ =3D 125000000
+ };
+=20
+ #define SIFIVE_U_PLIC_HART_CONFIG "MS"
+--=20
+2.19.1
 
 
