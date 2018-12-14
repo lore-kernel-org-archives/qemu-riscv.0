@@ -1,59 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gXbBt-0000YY-7k
-	for mharc-qemu-riscv@gnu.org; Thu, 13 Dec 2018 19:18:53 -0500
-Received: from eggs.gnu.org ([2001:4830:134:3::10]:37711)
+	id 1gXbC6-0000ek-Ee
+	for mharc-qemu-riscv@gnu.org; Thu, 13 Dec 2018 19:19:06 -0500
+Received: from eggs.gnu.org ([2001:4830:134:3::10]:37742)
 	by lists.gnu.org with esmtp (Exim 4.71)
 	(envelope-from <prvs=879e7201e=Alistair.Francis@wdc.com>)
-	id 1gXbBr-0000Uk-0B
-	for qemu-riscv@nongnu.org; Thu, 13 Dec 2018 19:18:51 -0500
+	id 1gXbC2-0000dH-Fq
+	for qemu-riscv@nongnu.org; Thu, 13 Dec 2018 19:19:03 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
 	(envelope-from <prvs=879e7201e=Alistair.Francis@wdc.com>)
-	id 1gXbBq-0002qv-4s
-	for qemu-riscv@nongnu.org; Thu, 13 Dec 2018 19:18:50 -0500
-Received: from esa2.hgst.iphmx.com ([68.232.143.124]:28134)
+	id 1gXbC1-0003Kg-M1
+	for qemu-riscv@nongnu.org; Thu, 13 Dec 2018 19:19:02 -0500
+Received: from esa2.hgst.iphmx.com ([68.232.143.124]:28157)
 	by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.71) (envelope-from <prvs=879e7201e=Alistair.Francis@wdc.com>)
-	id 1gXbBj-0002YB-Ah; Thu, 13 Dec 2018 19:18:43 -0500
+	id 1gXbBx-00037w-4O; Thu, 13 Dec 2018 19:18:57 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
 	d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
-	t=1544746774; x=1576282774;
+	t=1544746795; x=1576282795;
 	h=from:to:cc:subject:date:message-id:references:
 	in-reply-to:content-transfer-encoding:mime-version;
-	bh=wy1gsWhNMyacTjYO5PUk1751KW5SzxgFqKFa5DzAg3I=;
-	b=QG0b3rIbGciJT73HXf6hacIqR2uUKyRtINIrslw6pqXpxPMTD6Cq+3cB
-	JgMtqW7l2oYjJv6zch1B7ZZgc2bx1UEdHk5DtJYipnyiF/gtZXpy1mUk9
-	3iPjMb9D+pdLLySWTjaJ3DWbKmDVOibpqDxFO+hC97RoWNyuD7qCRwsbB
-	ACJTmpmEqgwSc2MhdBb+uDoVD31FrvpNFGOaRQ8z6avAio25vc/OGxjal
-	y+y4sew2AJNVUToXeY47NBoCzbnrnmQ/699luo6QMiCwMeGqGod8Hu75S
-	HRTm64sIJUPxhOVsAj2BQKX/ZN1MDtjeza8tjzA2uJE4Du7nGLFRY3D0H w==;
-X-IronPort-AV: E=Sophos;i="5.56,350,1539619200"; d="scan'208";a="194449099"
+	bh=ecaL16ZSjyDYZW4/ZM0vvVB08d24Vby3wFqrleDnp/0=;
+	b=blAWT1YMjdyfaF9hCuIz8oF88riNLtpM6lRTvxE/0FR6fhRaFVMtXCkF
+	qUCRVXaIQtSfHGUMpga3OfBSJUeNCtsU4bQ77cc8CATkqTM5yb5AQI/eh
+	hKLl+yOXg2e4859rCwOLXN6Yv6LKvTH3Yv94MLUM4X5k/xyCipH4OvdKm
+	HrGJOLFIqzr4mf0Lbx1U3o7MIL/2KhvF5va2J32lhezMAt90DTtfP9dtc
+	nNvdzg3BzccxwkHS6JES6voa6AAoKFSCcT/swVLrQRLGYKTu2dRTC3P1A
+	Bw7KX4X/4PHCHtEerbc5yID3p59SttPIc/5F0fiStc1fSoYKr1Oi9g4I/ Q==;
+X-IronPort-AV: E=Sophos;i="5.56,350,1539619200"; d="scan'208";a="194449112"
 Received: from mail-bn3nam04lp2059.outbound.protection.outlook.com (HELO
 	NAM04-BN3-obe.outbound.protection.outlook.com) ([104.47.46.59])
-	by ob1.hgst.iphmx.com with ESMTP; 14 Dec 2018 08:19:30 +0800
+	by ob1.hgst.iphmx.com with ESMTP; 14 Dec 2018 08:19:52 +0800
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=sharedspace.onmicrosoft.com; s=selector1-wdc-com;
 	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=dcBICFHbDOZ4O/C91zn+7v0Uw6hhu1/JBCQEFOPEHuI=;
-	b=NHFqNq7ibgF+UYzIK+lePvap+tNgw5k2y1YYxHyvp1NUdoO4gyow9z+ZL+/zq5FSz57oq55AjXcAZ8wZbOZMPtm4awmUO+HBVefMMmOcSr0mJi63xg8EJcYgc68RfBworsaCPbGz6WN+IV77MVj9Gdp4wvdGS4TXLji4OqV1scg=
+	bh=lv+zSQRCU2CLLmiI5UKaafC+2BLy3oEGA8wyRXMFSo0=;
+	b=Z/wJ2NHvMJau7+0hYQljBLLC+kkjL7LsNY+c0+PPxzKRJb9kk9yrg6Nc8c1bj18hny2TsXB1ZUBLFx+upJJn3MAUgfR53Q4hVQDLUrbka8+3o1KMAOAoWqsWXBFYVbkniyD6ARJr9EmlAneqJKWYkJcTZUbbpWvcoURN3HqYn8U=
 Received: from MWHPR04MB0401.namprd04.prod.outlook.com (10.173.48.18) by
 	MWHPR04MB0497.namprd04.prod.outlook.com (10.173.49.10) with Microsoft
 	SMTP
 	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
-	15.20.1404.27; Fri, 14 Dec 2018 00:18:39 +0000
+	15.20.1404.27; Fri, 14 Dec 2018 00:18:54 +0000
 Received: from MWHPR04MB0401.namprd04.prod.outlook.com
 	([fe80::9067:fb44:66b2:7604]) by
 	MWHPR04MB0401.namprd04.prod.outlook.com
 	([fe80::9067:fb44:66b2:7604%3]) with mapi id 15.20.1425.016;
-	Fri, 14 Dec 2018 00:18:39 +0000
+	Fri, 14 Dec 2018 00:18:54 +0000
 From: Alistair Francis <Alistair.Francis@wdc.com>
 To: "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, "qemu-riscv@nongnu.org"
 	<qemu-riscv@nongnu.org>
 CC: Alistair Francis <Alistair.Francis@wdc.com>, "alistair23@gmail.com"
 	<alistair23@gmail.com>
-Thread-Topic: [PATCH v1 2/5] RISC-V: Fix CLINT timecmp low 32-bit writes
-Thread-Index: AQHUk0KQ5+1obptxXUeurTd0K+nBXA==
-Date: Fri, 14 Dec 2018 00:18:39 +0000
-Message-ID: <66f87c98f9a2122262d7c3179052df95e42b6917.1544746653.git.alistair.francis@wdc.com>
+Thread-Topic: [PATCH v1 3/5] RISC-V: Fix PLIC pending bitfield reads
+Thread-Index: AQHUk0KY9m8ivMBIrUS4cbiAMHVWCg==
+Date: Fri, 14 Dec 2018 00:18:54 +0000
+Message-ID: <126c481d658afcc297317b2f6844a48ffe591de2.1544746653.git.alistair.francis@wdc.com>
 References: <cover.1544746653.git.alistair.francis@wdc.com>
 In-Reply-To: <cover.1544746653.git.alistair.francis@wdc.com>
 Accept-Language: en-US
@@ -61,8 +61,8 @@ Content-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
 x-mailer: git-send-email 2.19.1
-x-clientproxiedby: BYAPR07CA0098.namprd07.prod.outlook.com
-	(2603:10b6:a03:12b::39) To MWHPR04MB0401.namprd04.prod.outlook.com
+x-clientproxiedby: BYAPR07CA0082.namprd07.prod.outlook.com
+	(2603:10b6:a03:12b::23) To MWHPR04MB0401.namprd04.prod.outlook.com
 	(2603:10b6:300:70::18)
 authentication-results: spf=none (sender IP is )
 	smtp.mailfrom=Alistair.Francis@wdc.com; 
@@ -70,17 +70,17 @@ x-ms-exchange-messagesentrepresentingtype: 1
 x-originating-ip: [199.255.44.250]
 x-ms-publictraffictype: Email
 x-microsoft-exchange-diagnostics: 1; MWHPR04MB0497;
-	6:DHMzje1i3K7rRNuHiHPLCg9mlPdPcgpD+Y9cDx3awzQELyoOBgwsvzxOUxZI9w1YdDNUeY/KHrX4Y/gNTYxQHkkoovPVuog16TtIpui6eyfaMFrGJnHx2jtjyfD6Lvyt/WtkBk64M0gfyeZs0xJN6etgBsZuIyNoTTddlTHroDRetbXxQTtPTLg2KuCJ8LQ3LULQFCju1yX//YKNLl48UN/T5MrObGxcaeghFNYOturiKTyJn3Cwk1du/4tAkX7VqrmtYXBx7/6SNa5euO06DrLm9bwm4klYcKgF25r42R4eZZ2kaxyYu9URCrEegK32J51P/3UrRRtnDAlUehcKy/hN/A+0TH0BD9P7IUUcD7Wr2b39SqeYrlYfhQ2IqzSZHzgLO2r5BrV04+fG71Z46uYtUFmAA766YdTEk0XRtTevSfiM+UgJfWy7FqyvqYme08bcyTLAbp8lRPb0BLn+1w==;
-	5:ctgbatV0/665zggN7oyWwH/+WTYslgLUmS5AiPan5roNOXs6SeyLdwSY5ZMCcczNHRlOF7aj53m6ZQ/Pc8YNmBrVkZF3uf0cpksQk3jiv3USap9KevPqO5RhWAdF86HObQsu2OVSpYJDiMjaM8hUjr05E3ZP32vz2/QG3A582ME=;
-	7:dIgU43v+Q6BmBM37Gstb5lEJNwyKTccyunLskEXQbKSJfw4Q0neffw1aEx5067rn0xYBLkXCOQTN5+D155ioKd4AYxogtnF0eP1WKHa8ASLf9g74zfd8OXEcel3UXNXxPP8RgPz5/Fc+FvnHHjMfGg==
-x-ms-office365-filtering-correlation-id: 1a146e27-79e0-4d28-429b-08d66159b26b
+	6:r8iM9bePYYHYtpm2vQRU3Dvuo2sgbN22fFdNiXXegiDhUQ1sjxhks/iyJnyrPb512mSuncqeY925P3xXL0f+AWnhNLlharCaeeigvIXjmYiz07SRofWOIR2mOn33aqvZRQ9Cj9Fpjogr3ytHbZmCwrdc0nd/WgfuA/gLMz+S+pQagVmVbYxgBrzRg1BhhZXsttaeQ5q9b89jccDVeal0qpm+3XZ9IVZKfqx+Q2669U/E9BIDCml8VmmZfQ2efQRZzKGHwWGUCJPamyE/d1Tg9RkfyU8uX7mNcCO4i8AeGcc3UAPUfYfLRcIDVuZp0PpnUBf1Fhd3CUmUzUS/oZQPl3XWxamJj+U+1CGMGCs6ncRAanSDimAz/asMp5yHNbkNPy3l2cmiUFFi2QQ7DDKo06WVUViaqyrEp0Lxx+p91CYsfq2dIBN78FPDT6X5g2ZG+WjgbXbT7uQCPo7b3Vl8bA==;
+	5:Fb5AtLYS26Wu1YQCQCV9CHnkjhp3GbNaCyPZTihoWk4/6M+vSUGPW3tqDhCklzTpdbILwj3MdT/kb4f5YgcAAgb/Bf0RauizSQXznvoct6U4mqys5gDGXjKvGowAw1n+5gx6zVuIw4Yh/4YUUQj6W7gq5zPK4UGLTZb4XPvuICM=;
+	7:aLGE42Z2Sg7dnks8iIYXfEFYO33LyV3wrymxje5zcoKXHNUTOuGkrQJ6YDrGmLlVr1wgO7IXH0Le2oxbmWdb5iCs3TRoRtuGkY6JZR5yQiIYslXQWhuhXLUsuMx2Qu31Ivt1cVZ26HoexnT54t+EwA==
+x-ms-office365-filtering-correlation-id: 3b265edd-41ce-4250-92ca-08d66159bb33
 x-ms-office365-filtering-ht: Tenant
 x-microsoft-antispam: BCL:0; PCL:0;
 	RULEID:(2390098)(7020095)(4652040)(8989299)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(5600074)(711020)(4618075)(2017052603328)(7153060)(7193020);
 	SRVR:MWHPR04MB0497; 
 x-ms-traffictypediagnostic: MWHPR04MB0497:
 wdcipoutbound: EOP-TRUE
-x-microsoft-antispam-prvs: <MWHPR04MB0497FD6DC9120FEC6410B18790A10@MWHPR04MB0497.namprd04.prod.outlook.com>
+x-microsoft-antispam-prvs: <MWHPR04MB049765BC6B5330BC2638B09490A10@MWHPR04MB0497.namprd04.prod.outlook.com>
 x-ms-exchange-senderadcheck: 1
 x-exchange-antispam-report-cfa-test: BCL:0; PCL:0;
 	RULEID:(8211001083)(3230021)(999002)(6040522)(2401047)(5005006)(8121501046)(3002001)(3231475)(944501520)(52105112)(93006095)(93001095)(10201501046)(6055026)(148016)(149066)(150057)(6041310)(20161123564045)(201703131423095)(201702281528075)(20161123555045)(201703061421075)(201703061406153)(20161123562045)(20161123558120)(20161123560045)(201708071742011)(7699051)(76991095);
@@ -91,23 +91,22 @@ x-forefront-antispam-report: SFV:NSPM;
 	DIR:OUT; SFP:1102; SCL:1; SRVR:MWHPR04MB0497;
 	H:MWHPR04MB0401.namprd04.prod.outlook.com; FPR:; SPF:None;
 	LANG:en; PTR:InfoNoRecords; A:1; MX:1; 
-x-microsoft-antispam-message-info: +/KBg4jVU9/SpICX8lQllFd5DGV+DHmO96ePkiGb3TTjDQJDrcBGkqKD6GifZEvBn1ynu/Ze2OXcvZ37mKzJesmDlwVliBq4juYGFEPIoM/MCsfN4hi7AU9sr25NwE1C5dgrldhJDLc/3uaYNN7d5sDG0shrUtl/ke7sPustop9Mynahtx3Nhhk7xCGQlwsv9YECVAZapZGYgek+Hn6WVghiE9NjVUPytSAOd+3R2nH296Sa/rY1qk7snRzxPEKhjVzb8V8F5QAztvm3li7bTSHaK+DzNgco2XIxB4riQ9MP/GTbx++nvREThbyq3/Mz
+x-microsoft-antispam-message-info: 4YnzrYgHMXqmrLQ8nAjFpyPJZHat25o6UdDL+A9/ogufyfc0EdQ6DnOjJSniBwZUSr0BCptEJiLDKGMv3J6JJ2vVttEKDlwIprfncPUSjXghzWqOB4qgSGPaVkxQcLXum2pwuPjxAkr/L6O9VszQb5GUCRoRHcmmnUokf8ZD55861Oj+6Ofw6UJpmaaH5c3ayAAqyW/DLrBX7HuJn+u/WHm4891L8yaD9nhvHZlcATxil4W8uCji/aVed8ENaEZx61tInkK6LGiybNzfA0vpRXHGir5iYgQzp+0uJYQG5VY28o8hu6Iz+iEC6vsMt6jF
 spamdiagnosticoutput: 1:99
 spamdiagnosticmetadata: NSPM
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
 X-OriginatorOrg: wdc.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1a146e27-79e0-4d28-429b-08d66159b26b
-X-MS-Exchange-CrossTenant-originalarrivaltime: 14 Dec 2018 00:18:39.4891 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3b265edd-41ce-4250-92ca-08d66159bb33
+X-MS-Exchange-CrossTenant-originalarrivaltime: 14 Dec 2018 00:18:54.2238 (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: MWHPR04MB0497
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
 X-Received-From: 68.232.143.124
-Subject: [Qemu-riscv] [PATCH v1 2/5] RISC-V: Fix CLINT timecmp low 32-bit
- writes
+Subject: [Qemu-riscv] [PATCH v1 3/5] RISC-V: Fix PLIC pending bitfield reads
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -119,59 +118,42 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Dec 2018 00:18:51 -0000
+X-List-Received-Date: Fri, 14 Dec 2018 00:19:03 -0000
 
 From: Michael Clark <mjc@sifive.com>
 
-A missing shift made updates to the low order bits
-of timecmp erroneously copy the old low order bits
-into the high order bits of the 64-bit timecmp
-register. Add the missing shift and rename timecmp
-local variables to timecmp_hi and timecmp_lo.
-
-This bug didn't show up as the low order bits are
-usually written first followed by the high order
-bits meaning the high order bits contained an invalid
-value between the timecmp_lo and timecmp_hi update.
+The address calculation for the pending bitfield had
+a copy paste bug. This bug went unnoticed because the Linux
+PLIC driver does not read the pending bitfield, rather it
+reads pending interrupt numbers from the claim register
+and writes acknowledgements back to the claim register.
 
 Cc: Palmer Dabbelt <palmer@sifive.com>
 Cc: Sagar Karandikar <sagark@eecs.berkeley.edu>
 Cc: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
 Cc: Alistair Francis <Alistair.Francis@wdc.com>
-Co-Authored-by: Johannes Haring <johannes.haring@gmx.net>
+Reported-by: Vincent Siles <vincent.siles@ens-lyon.org>
 Signed-off-by: Michael Clark <mjc@sifive.com>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- hw/riscv/sifive_clint.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ hw/riscv/sifive_plic.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/hw/riscv/sifive_clint.c b/hw/riscv/sifive_clint.c
-index 0d2fd52487..d4c159e937 100644
---- a/hw/riscv/sifive_clint.c
-+++ b/hw/riscv/sifive_clint.c
-@@ -146,15 +146,15 @@ static void sifive_clint_write(void *opaque, hwaddr a=
-ddr, uint64_t value,
-             error_report("clint: invalid timecmp hartid: %zu", hartid);
-         } else if ((addr & 0x7) =3D=3D 0) {
-             /* timecmp_lo */
--            uint64_t timecmp =3D env->timecmp;
-+            uint64_t timecmp_hi =3D env->timecmp >> 32;
-             sifive_clint_write_timecmp(RISCV_CPU(cpu),
--                timecmp << 32 | (value & 0xFFFFFFFF));
-+                timecmp_hi << 32 | (value & 0xFFFFFFFF));
-             return;
-         } else if ((addr & 0x7) =3D=3D 4) {
-             /* timecmp_hi */
--            uint64_t timecmp =3D env->timecmp;
-+            uint64_t timecmp_lo =3D env->timecmp;
-             sifive_clint_write_timecmp(RISCV_CPU(cpu),
--                value << 32 | (timecmp & 0xFFFFFFFF));
-+                value << 32 | (timecmp_lo & 0xFFFFFFFF));
-         } else {
-             error_report("clint: invalid timecmp write: %08x", (uint32_t)a=
-ddr);
-         }
+diff --git a/hw/riscv/sifive_plic.c b/hw/riscv/sifive_plic.c
+index 9cf9a1f986..d12ec3fc9a 100644
+--- a/hw/riscv/sifive_plic.c
++++ b/hw/riscv/sifive_plic.c
+@@ -214,7 +214,7 @@ static uint64_t sifive_plic_read(void *opaque, hwaddr a=
+ddr, unsigned size)
+     } else if (addr >=3D plic->pending_base && /* 1 bit per source */
+                addr < plic->pending_base + (plic->num_sources >> 3))
+     {
+-        uint32_t word =3D (addr - plic->priority_base) >> 2;
++        uint32_t word =3D (addr - plic->pending_base) >> 2;
+         if (RISCV_DEBUG_PLIC) {
+             qemu_log("plic: read pending: word=3D%d value=3D%d\n",
+                 word, plic->pending[word]);
 --=20
 2.19.1
 
