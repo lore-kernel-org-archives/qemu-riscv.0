@@ -1,113 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gXbCR-0000rn-R8
-	for mharc-qemu-riscv@gnu.org; Thu, 13 Dec 2018 19:19:27 -0500
-Received: from eggs.gnu.org ([2001:4830:134:3::10]:37907)
+	id 1gXlNy-0003sW-W4
+	for mharc-qemu-riscv@gnu.org; Fri, 14 Dec 2018 06:12:03 -0500
+Received: from eggs.gnu.org ([2001:4830:134:3::10]:46002)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <prvs=879e7201e=Alistair.Francis@wdc.com>)
-	id 1gXbCP-0000q5-Ij
-	for qemu-riscv@nongnu.org; Thu, 13 Dec 2018 19:19:26 -0500
+	(envelope-from <philmd@redhat.com>) id 1gXlNv-0003qD-EL
+	for qemu-riscv@nongnu.org; Fri, 14 Dec 2018 06:12:01 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <prvs=879e7201e=Alistair.Francis@wdc.com>)
-	id 1gXbCO-0004ND-Je
-	for qemu-riscv@nongnu.org; Thu, 13 Dec 2018 19:19:25 -0500
-Received: from esa1.hgst.iphmx.com ([68.232.141.245]:47870)
-	by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.71) (envelope-from <prvs=879e7201e=Alistair.Francis@wdc.com>)
-	id 1gXbCG-0003wb-OG; Thu, 13 Dec 2018 19:19:17 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-	d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
-	t=1544746756; x=1576282756;
-	h=from:to:cc:subject:date:message-id:references:
-	in-reply-to:content-transfer-encoding:mime-version;
-	bh=0xfZsehpV0W8v+k7Dpjq3lJP1A/uqDOChsflEOU/mgQ=;
-	b=bz+t0gp1u3m9VPdfc13N+K6N15uQcPmxiHqQKB16Siz37kEDi8qywcRi
-	Ev3Pur1Bz9XylNIHwgMhAHKa2aCQy7DB7IYGjPaj/qur+FnovnHuL3jOE
-	67NSH0V6sTfikoRRMrJNaA7hlBYdoXgQJAPMIwgON6i2uZbwINeRpdNK6
-	E7j7OSl93XH0zUabqmH3Jwi+Cy0PHogjxQtvEK+UeVh+fYHjGZmrI3Xoe
-	kU2O3jgOzEGPIzyxY+pTKbTuYCGUTlz+mXnlV0EbbjhCXli1CgKbFLyE4
-	JMI4LmKw+gnTpOHzSi8RX2m/J52bLMwCEuserVfFa4TYAdEfR97KkRuZc g==;
-X-IronPort-AV: E=Sophos;i="5.56,350,1539619200"; d="scan'208";a="201220535"
-Received: from mail-bn3nam04lp2051.outbound.protection.outlook.com (HELO
-	NAM04-BN3-obe.outbound.protection.outlook.com) ([104.47.46.51])
-	by ob1.hgst.iphmx.com with ESMTP; 14 Dec 2018 08:19:14 +0800
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=sharedspace.onmicrosoft.com; s=selector1-wdc-com;
-	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=Uf6OrYJOILHspQsDeumGcCOef/wZ4fS/HDvJpnxWPuk=;
-	b=oGPzsABpVGDsXe6hwm4x8q0t9ewNpVepJkd/hHk6Prk0xhR6fRS9uWruMuA/xbRiRRXwinhfU6WttAaTWMEHSdU+9GTekkSxXLvDmlm/aoilZHYb/HK9Juo+Q2cveoHCJd53EJMPXXD/I+njmlavny05FhnYE9TIwoQiNMHcugM=
-Received: from MWHPR04MB0401.namprd04.prod.outlook.com (10.173.48.18) by
-	MWHPR04MB0497.namprd04.prod.outlook.com (10.173.49.10) with Microsoft
-	SMTP
-	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
-	15.20.1404.27; Fri, 14 Dec 2018 00:19:12 +0000
-Received: from MWHPR04MB0401.namprd04.prod.outlook.com
-	([fe80::9067:fb44:66b2:7604]) by
-	MWHPR04MB0401.namprd04.prod.outlook.com
-	([fe80::9067:fb44:66b2:7604%3]) with mapi id 15.20.1425.016;
-	Fri, 14 Dec 2018 00:19:12 +0000
-From: Alistair Francis <Alistair.Francis@wdc.com>
-To: "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, "qemu-riscv@nongnu.org"
-	<qemu-riscv@nongnu.org>
-CC: Alistair Francis <Alistair.Francis@wdc.com>, "alistair23@gmail.com"
-	<alistair23@gmail.com>
-Thread-Topic: [PATCH v1 5/5] sifive_uart: Implement interrupt pending register
-Thread-Index: AQHUk0KjB57zG+zv8UmhY5caMT6++Q==
-Date: Fri, 14 Dec 2018 00:19:12 +0000
-Message-ID: <3753d59b3a0f07fb6a678ffacd3d913f5fcb774d.1544746653.git.alistair.francis@wdc.com>
-References: <cover.1544746653.git.alistair.francis@wdc.com>
-In-Reply-To: <cover.1544746653.git.alistair.francis@wdc.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-mailer: git-send-email 2.19.1
-x-clientproxiedby: BYAPR07CA0083.namprd07.prod.outlook.com
-	(2603:10b6:a03:12b::24) To MWHPR04MB0401.namprd04.prod.outlook.com
-	(2603:10b6:300:70::18)
-authentication-results: spf=none (sender IP is )
-	smtp.mailfrom=Alistair.Francis@wdc.com; 
-x-ms-exchange-messagesentrepresentingtype: 1
-x-originating-ip: [199.255.44.250]
-x-ms-publictraffictype: Email
-x-microsoft-exchange-diagnostics: 1; MWHPR04MB0497;
-	6:5CF+Au4/91LqIfn7gUitQsjV3Lw82/rBGZmjkctwdD1td+ofo/mrho91jHsWRXWO85afkk8IWPYVo6bzCSq6VfEbs/HY9SLSnMiNOHRFJFp93sddfayEGplYA6f5vATOHBoMg7ibdYEmSBLE20/CkNnaZ9xcb46meuX5XER/vtEjKMKXz888NbBtorH7OSmknWF4W8P2iVRRKx2/bDhHhFIUPwVzS+2kct8w5yoR8dvJdJPGJf123tSlJ1/gXY55FcaLvnp+vSSUvGLrOyH9y/qup5OOUU6pJiQvp5Yhxdvtt8LTUeoDKyWM7gcH141PaDIbC5+SYVb4RDm7VnblJYKNldpI4FLUiZTGkPfW+ZIb+q+gJqDK5IdGkRWBS3sOskfDRa3nNh9PtnhVUghwiT35wlLycrPaTEFdtYoEiCrUXeSYMmxSZV75FCilXsxm/hLegAPNrJ5kzytG+9ZI6g==;
-	5:xGSxmXiB15AH0qQqSiJBpP1iAzie6I+CkVS+DCSgYsO0PWrLhKZPZs4kMC3XFjuo7qjVcaM7V4gmNJ5tBr5vauoKZT1yus7flbF0Lu5913wY54aBRVl7g3ROUANtTeQP6sjFZ9J12bBoCQW6/npt3Z66Q2z707lKss67imZXoCI=;
-	7:sxmhwWD4/tCnCh1NpLMhqcYNecg4JJbB4eKMe5W2pCjcNVYmZyNhZZCSc1dGDRHWyzdWHMDZ69Wdbs25j5WzqyW//32zLzb5iNZHIhgCb5xef7ygRIeSZd0TR/hnhSOiwL25dXo/5fVesu+iAkHy8w==
-x-ms-office365-filtering-correlation-id: 376bf68f-fc78-41be-91f6-08d66159c64d
-x-ms-office365-filtering-ht: Tenant
-x-microsoft-antispam: BCL:0; PCL:0;
-	RULEID:(2390098)(7020095)(4652040)(8989299)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(5600074)(711020)(4618075)(2017052603328)(7153060)(7193020);
-	SRVR:MWHPR04MB0497; 
-x-ms-traffictypediagnostic: MWHPR04MB0497:
-wdcipoutbound: EOP-TRUE
-x-microsoft-antispam-prvs: <MWHPR04MB0497A24F9C7B711275BF97EC90A10@MWHPR04MB0497.namprd04.prod.outlook.com>
-x-ms-exchange-senderadcheck: 1
-x-exchange-antispam-report-cfa-test: BCL:0; PCL:0;
-	RULEID:(8211001083)(3230021)(999002)(6040522)(2401047)(5005006)(8121501046)(3002001)(3231475)(944501520)(52105112)(93006095)(93001095)(10201501046)(6055026)(148016)(149066)(150057)(6041310)(20161123564045)(201703131423095)(201702281528075)(20161123555045)(201703061421075)(201703061406153)(20161123562045)(20161123558120)(20161123560045)(201708071742011)(7699051)(76991095);
-	SRVR:MWHPR04MB0497; BCL:0; PCL:0; RULEID:; SRVR:MWHPR04MB0497; 
-x-forefront-prvs: 08864C38AC
-x-forefront-antispam-report: SFV:NSPM;
-	SFS:(10019020)(136003)(396003)(376002)(346002)(366004)(39850400004)(199004)(189003)(50226002)(106356001)(3846002)(81166006)(11346002)(5660300001)(81156014)(68736007)(8936002)(71190400001)(36756003)(71200400001)(105586002)(8676002)(14444005)(7736002)(256004)(2906002)(6436002)(72206003)(6486002)(478600001)(102836004)(53936002)(14454004)(305945005)(25786009)(6512007)(4326008)(476003)(52116002)(316002)(118296001)(54906003)(97736004)(66066001)(39060400002)(486006)(2616005)(2501003)(44832011)(6116002)(386003)(575784001)(76176011)(6506007)(186003)(86362001)(110136005)(26005)(446003)(99286004);
-	DIR:OUT; SFP:1102; SCL:1; SRVR:MWHPR04MB0497;
-	H:MWHPR04MB0401.namprd04.prod.outlook.com; FPR:; SPF:None;
-	LANG:en; PTR:InfoNoRecords; A:1; MX:1; 
-x-microsoft-antispam-message-info: +mM4peyw1MWyki1V7kKr0w0OJ4jhP2KAkjWTjIMZxcwO3IR+8T2eP8JJKEsguM6EpEY/Qb6cjTjnCfNwp2Wq3bpA0OJHoXcHpFNESvWW7YQJhAs2bkK/ZC6gUoicl8qO5PuKXRw/pLwNFORSyk0s+hd8mEXaokvlCMBG3dWJoOkCFoVF1PNc+ETYc4awIUsUiA8/vjIdIP1Yrnr3Q44+bTXvi6tFXYlctPcXoTrHXJuG7TBzvzGG2WUsRZMminjkJdpz05O+q7K2KTo3bX3GC3b9/UFGob1O7Ph+KjVuc80KXVVjoktUdMQVkbXb0RUJ
-spamdiagnosticoutput: 1:99
-spamdiagnosticmetadata: NSPM
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+	(envelope-from <philmd@redhat.com>) id 1gXlNs-00063x-70
+	for qemu-riscv@nongnu.org; Fri, 14 Dec 2018 06:11:59 -0500
+Received: from mail-wm1-f67.google.com ([209.85.128.67]:55209)
+	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+	(Exim 4.71) (envelope-from <philmd@redhat.com>) id 1gXlNr-00061v-Ss
+	for qemu-riscv@nongnu.org; Fri, 14 Dec 2018 06:11:56 -0500
+Received: by mail-wm1-f67.google.com with SMTP id a62so5290746wmh.4
+	for <qemu-riscv@nongnu.org>; Fri, 14 Dec 2018 03:11:54 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
+	:date:user-agent:mime-version:in-reply-to:content-language
+	:content-transfer-encoding;
+	bh=l98oXVgCrk2iQK/xbh7h4rAyZq32/e40C/BQ4vnQqaU=;
+	b=baiA9W0tAtMrUGoesG86YaPM+8taP+MEvRW7PvKV481Kjc4dTVgRL+P4v6vClbzvL+
+	fpQDjbONOv1qpfSChM+T1qQQtMgO2duj71UjWMSxVpUFr0jw3GfxSKEDAa+MpYsUf2xw
+	zAvWA+3BKVjuqjPbr4/H3J9PyQAzyZicESzoNeGzHJmPPPIg4qOJhUb41c9seDnFhlgl
+	WsXcnpQh1/Iy8R7xSh3clKMMiOqZFi6qcNsRcm4ei2nYqm/zn2Xf7a7QBXKKkm+aXQeJ
+	L+WUvqOY4gcxX8tkK8yjc1NUNfKILq93dXtfrlZteqe0JuISm8JY3Pxq4C08LzKRfDmz
+	SHfg==
+X-Gm-Message-State: AA+aEWaM9TDoPbOCx9lRbJtiEU7/jleiFqNM6JEXtT4t7mHEu4dTj+Pq
+	n3IvvmxX3i6SLpp8kuHRQXiPqAW/DQU=
+X-Google-Smtp-Source: AFSGD/WtAvC/XI6i2+B9ABv6kD4wyiJlPyxfMv2istWXjg2Mw1NFXCpUVZzv2bH4ET1IXTuJii5fsw==
+X-Received: by 2002:a1c:934b:: with SMTP id v72mr3007317wmd.5.1544785912902;
+	Fri, 14 Dec 2018 03:11:52 -0800 (PST)
+Received: from [192.168.1.34] (172.red-88-21-202.staticip.rima-tde.net.
+	[88.21.202.172]) by smtp.gmail.com with ESMTPSA id
+	o17sm6604932wmg.35.2018.12.14.03.11.51
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 14 Dec 2018 03:11:52 -0800 (PST)
+To: Michael Clark <mjc@sifive.com>, Palmer Dabbelt <palmer@sifive.com>
+Cc: Paolo Bonzini <pbonzini@redhat.com>,
+	Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+References: <20181213235804.14956-1-benh@kernel.crashing.org>
+	<20181213235804.14956-2-benh@kernel.crashing.org>
+	<c59aabb14c0b89257db6c136300df24d583977b3.camel@kernel.crashing.org>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>
+Openpgp: id=89C1E78F601EE86C867495CBA2A3FD6EDEADC0DE;
+	url=http://pgp.mit.edu/pks/lookup?op=get&search=0xA2A3FD6EDEADC0DE
+Message-ID: <926d9f34-c615-e4a7-b0d7-04b77d215540@redhat.com>
+Date: Fri, 14 Dec 2018 12:11:51 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.3.1
 MIME-Version: 1.0
-X-OriginatorOrg: wdc.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 376bf68f-fc78-41be-91f6-08d66159c64d
-X-MS-Exchange-CrossTenant-originalarrivaltime: 14 Dec 2018 00:19:12.8647 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MWHPR04MB0497
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
-	recognized.
-X-Received-From: 68.232.141.245
-Subject: [Qemu-riscv] [PATCH v1 5/5] sifive_uart: Implement interrupt
- pending register
+In-Reply-To: <c59aabb14c0b89257db6c136300df24d583977b3.camel@kernel.crashing.org>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+	[fuzzy]
+X-Received-From: 209.85.128.67
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH 2/3] i386: Atomically update
+ PTEs with mttcg
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -119,87 +71,245 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Dec 2018 00:19:26 -0000
+X-List-Received-Date: Fri, 14 Dec 2018 11:12:01 -0000
 
-From: Nathaniel Graff <nathaniel.graff@sifive.com>
+On 12/14/18 1:05 AM, Benjamin Herrenschmidt wrote:
+> Note to RiscV folks: You may want to adapt your code to do the same as
+> this, esp. afaik, what you do today is endian-broken if host and guest
+> endian are different.
 
-The watermark bits are set in the interrupt pending register according
-to the configuration of txcnt and rxcnt in the txctrl and rxctrl
-registers.
+Cc'ing the RISC-V list.
 
-Since the UART TX does not implement a FIFO, the txwm bit is set as long
-as the TX watermark level is greater than zero.
-
-Signed-off-by: Nathaniel Graff <nathaniel.graff@sifive.com>
-Reviewed-by: Michael Clark <mjc@sifive.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
----
- hw/riscv/sifive_uart.c         | 24 +++++++++++++++++++-----
- include/hw/riscv/sifive_uart.h |  3 +++
- 2 files changed, 22 insertions(+), 5 deletions(-)
-
-diff --git a/hw/riscv/sifive_uart.c b/hw/riscv/sifive_uart.c
-index b0c3798cf2..456a3d3697 100644
---- a/hw/riscv/sifive_uart.c
-+++ b/hw/riscv/sifive_uart.c
-@@ -28,12 +28,26 @@
-  * Not yet implemented:
-  *
-  * Transmit FIFO using "qemu/fifo8.h"
-- * SIFIVE_UART_IE_TXWM interrupts
-- * SIFIVE_UART_IE_RXWM interrupts must honor fifo watermark
-- * Rx FIFO watermark interrupt trigger threshold
-- * Tx FIFO watermark interrupt trigger threshold.
-  */
-=20
-+/* Returns the state of the IP (interrupt pending) register */
-+static uint64_t uart_ip(SiFiveUARTState *s)
-+{
-+    uint64_t ret =3D 0;
-+
-+    uint64_t txcnt =3D SIFIVE_UART_GET_TXCNT(s->txctrl);
-+    uint64_t rxcnt =3D SIFIVE_UART_GET_RXCNT(s->rxctrl);
-+
-+    if (txcnt !=3D 0) {
-+        ret |=3D SIFIVE_UART_IP_TXWM;
-+    }
-+    if (s->rx_fifo_len > rxcnt) {
-+        ret |=3D SIFIVE_UART_IP_RXWM;
-+    }
-+
-+    return ret;
-+}
-+
- static void update_irq(SiFiveUARTState *s)
- {
-     int cond =3D 0;
-@@ -69,7 +83,7 @@ uart_read(void *opaque, hwaddr addr, unsigned int size)
-     case SIFIVE_UART_IE:
-         return s->ie;
-     case SIFIVE_UART_IP:
--        return s->rx_fifo_len ? SIFIVE_UART_IP_RXWM : 0;
-+        return uart_ip(s);
-     case SIFIVE_UART_TXCTRL:
-         return s->txctrl;
-     case SIFIVE_UART_RXCTRL:
-diff --git a/include/hw/riscv/sifive_uart.h b/include/hw/riscv/sifive_uart.=
-h
-index 504f18a60f..c8dc1c57fd 100644
---- a/include/hw/riscv/sifive_uart.h
-+++ b/include/hw/riscv/sifive_uart.h
-@@ -43,6 +43,9 @@ enum {
-     SIFIVE_UART_IP_RXWM       =3D 2  /* Receive watermark interrupt pendin=
-g */
- };
-=20
-+#define SIFIVE_UART_GET_TXCNT(txctrl)   ((txctrl >> 16) & 0x7)
-+#define SIFIVE_UART_GET_RXCNT(rxctrl)   ((rxctrl >> 16) & 0x7)
-+
- #define TYPE_SIFIVE_UART "riscv.sifive.uart"
-=20
- #define SIFIVE_UART(obj) \
---=20
-2.19.1
-
+> Cheers,
+> Ben. 
+> 
+> On Fri, 2018-12-14 at 10:58 +1100, Benjamin Herrenschmidt wrote:
+>> Afaik, this isn't well documented (at least it wasn't when I last looked)
+>> but OSes such as Linux rely on this behaviour:
+>>
+>> The HW updates to the page tables need to be done atomically with the
+>> checking of the present bit (and other permissions).
+>>
+>> This is what allows Linux to do simple xchg of PTEs with 0 and assume
+>> the value read has "final" stable dirty and accessed bits (the TLB
+>> invalidation is deferred).
+>>
+>> Signed-off-by: Benjamin Herrenschmidt <benh@kernel.crashing.org>
+>> ---
+>>  target/i386/excp_helper.c | 104 +++++++++++++++++++++++++++++---------
+>>  1 file changed, 80 insertions(+), 24 deletions(-)
+>>
+>> diff --git a/target/i386/excp_helper.c b/target/i386/excp_helper.c
+>> index 49231f6b69..93fc24c011 100644
+>> --- a/target/i386/excp_helper.c
+>> +++ b/target/i386/excp_helper.c
+>> @@ -157,11 +157,45 @@ int x86_cpu_handle_mmu_fault(CPUState *cs, vaddr addr, int size,
+>>  
+>>  #else
+>>  
+>> +static inline uint64_t update_entry(CPUState *cs, target_ulong addr,
+>> +                                    uint64_t orig_entry, uint32_t bits)
+>> +{
+>> +    uint64_t new_entry = orig_entry | bits;
+>> +
+>> +    /* Write the updated bottom 32-bits */
+>> +    if (qemu_tcg_mttcg_enabled()) {
+>> +        uint32_t old_le = cpu_to_le32(orig_entry);
+>> +        uint32_t new_le = cpu_to_le32(new_entry);
+>> +        MemTxResult result;
+>> +        uint32_t old_ret;
+>> +
+>> +        old_ret = address_space_cmpxchgl_notdirty(cs->as, addr,
+>> +                                                  old_le, new_le,
+>> +                                                  MEMTXATTRS_UNSPECIFIED,
+>> +                                                  &result);
+>> +        if (result == MEMTX_OK) {
+>> +            if (old_ret != old_le && old_ret != new_le) {
+>> +                new_entry = 0;
+>> +            }
+>> +            return new_entry;
+>> +        }
+>> +
+>> +        /* Do we need to support this case where PTEs aren't in RAM ?
+>> +         *
+>> +         * For now fallback to non-atomic case
+>> +         */
+>> +    }
+>> +
+>> +    x86_stl_phys_notdirty(cs, addr, new_entry);
+>> +
+>> +    return new_entry;
+>> +}
+>> +
+>>  static hwaddr get_hphys(CPUState *cs, hwaddr gphys, MMUAccessType access_type,
+>>                          int *prot)
+>>  {
+>>      CPUX86State *env = &X86_CPU(cs)->env;
+>> -    uint64_t rsvd_mask = PG_HI_RSVD_MASK;
+>> +    uint64_t rsvd_mask;
+>>      uint64_t ptep, pte;
+>>      uint64_t exit_info_1 = 0;
+>>      target_ulong pde_addr, pte_addr;
+>> @@ -172,6 +206,8 @@ static hwaddr get_hphys(CPUState *cs, hwaddr gphys, MMUAccessType access_type,
+>>          return gphys;
+>>      }
+>>  
+>> + restart:
+>> +    rsvd_mask = PG_HI_RSVD_MASK;
+>>      if (!(env->nested_pg_mode & SVM_NPT_NXE)) {
+>>          rsvd_mask |= PG_NX_MASK;
+>>      }
+>> @@ -198,8 +234,10 @@ static hwaddr get_hphys(CPUState *cs, hwaddr gphys, MMUAccessType access_type,
+>>                  goto do_fault_rsvd;
+>>              }
+>>              if (!(pml4e & PG_ACCESSED_MASK)) {
+>> -                pml4e |= PG_ACCESSED_MASK;
+>> -                x86_stl_phys_notdirty(cs, pml4e_addr, pml4e);
+>> +                pml4e = update_entry(cs, pml4e_addr, pml4e, PG_ACCESSED_MASK);
+>> +                if (!pml4e) {
+>> +                    goto restart;
+>> +                }
+>>              }
+>>              ptep &= pml4e ^ PG_NX_MASK;
+>>              pdpe_addr = (pml4e & PG_ADDRESS_MASK) +
+>> @@ -213,8 +251,10 @@ static hwaddr get_hphys(CPUState *cs, hwaddr gphys, MMUAccessType access_type,
+>>              }
+>>              ptep &= pdpe ^ PG_NX_MASK;
+>>              if (!(pdpe & PG_ACCESSED_MASK)) {
+>> -                pdpe |= PG_ACCESSED_MASK;
+>> -                x86_stl_phys_notdirty(cs, pdpe_addr, pdpe);
+>> +                pdpe = update_entry(cs, pdpe_addr, pdpe, PG_ACCESSED_MASK);
+>> +                if (!pdpe) {
+>> +                    goto restart;
+>> +                }
+>>              }
+>>              if (pdpe & PG_PSE_MASK) {
+>>                  /* 1 GB page */
+>> @@ -256,8 +296,10 @@ static hwaddr get_hphys(CPUState *cs, hwaddr gphys, MMUAccessType access_type,
+>>          }
+>>          /* 4 KB page */
+>>          if (!(pde & PG_ACCESSED_MASK)) {
+>> -            pde |= PG_ACCESSED_MASK;
+>> -            x86_stl_phys_notdirty(cs, pde_addr, pde);
+>> +            pde = update_entry(cs, pde_addr, pde, PG_ACCESSED_MASK);
+>> +            if (!pde) {
+>> +                goto restart;
+>> +            }
+>>          }
+>>          pte_addr = (pde & PG_ADDRESS_MASK) + (((gphys >> 12) & 0x1ff) << 3);
+>>          pte = x86_ldq_phys(cs, pte_addr);
+>> @@ -295,8 +337,10 @@ static hwaddr get_hphys(CPUState *cs, hwaddr gphys, MMUAccessType access_type,
+>>          }
+>>  
+>>          if (!(pde & PG_ACCESSED_MASK)) {
+>> -            pde |= PG_ACCESSED_MASK;
+>> -            x86_stl_phys_notdirty(cs, pde_addr, pde);
+>> +            pde = update_entry(cs, pde_addr, pde, PG_ACCESSED_MASK);
+>> +            if (!pde) {
+>> +                goto restart;
+>> +            }
+>>          }
+>>  
+>>          /* page directory entry */
+>> @@ -376,7 +420,7 @@ int x86_cpu_handle_mmu_fault(CPUState *cs, vaddr addr, int size,
+>>      int error_code = 0;
+>>      int is_dirty, prot, page_size, is_write, is_user;
+>>      hwaddr paddr;
+>> -    uint64_t rsvd_mask = PG_HI_RSVD_MASK;
+>> +    uint64_t rsvd_mask;
+>>      uint32_t page_offset;
+>>      target_ulong vaddr;
+>>  
+>> @@ -401,6 +445,8 @@ int x86_cpu_handle_mmu_fault(CPUState *cs, vaddr addr, int size,
+>>          goto do_mapping;
+>>      }
+>>  
+>> + restart:
+>> +    rsvd_mask = PG_HI_RSVD_MASK;
+>>      if (!(env->efer & MSR_EFER_NXE)) {
+>>          rsvd_mask |= PG_NX_MASK;
+>>      }
+>> @@ -436,8 +482,10 @@ int x86_cpu_handle_mmu_fault(CPUState *cs, vaddr addr, int size,
+>>                      goto do_fault_rsvd;
+>>                  }
+>>                  if (!(pml5e & PG_ACCESSED_MASK)) {
+>> -                    pml5e |= PG_ACCESSED_MASK;
+>> -                    x86_stl_phys_notdirty(cs, pml5e_addr, pml5e);
+>> +                    pml5e = update_entry(cs, pml5e_addr, pml5e, PG_ACCESSED_MASK);
+>> +                    if (!pml5e) {
+>> +                        goto restart;
+>> +                    }
+>>                  }
+>>                  ptep = pml5e ^ PG_NX_MASK;
+>>              } else {
+>> @@ -456,8 +504,10 @@ int x86_cpu_handle_mmu_fault(CPUState *cs, vaddr addr, int size,
+>>                  goto do_fault_rsvd;
+>>              }
+>>              if (!(pml4e & PG_ACCESSED_MASK)) {
+>> -                pml4e |= PG_ACCESSED_MASK;
+>> -                x86_stl_phys_notdirty(cs, pml4e_addr, pml4e);
+>> +                pml4e = update_entry(cs, pml4e_addr, pml4e, PG_ACCESSED_MASK);
+>> +                if (!pml4e) {
+>> +                    goto restart;
+>> +                }
+>>              }
+>>              ptep &= pml4e ^ PG_NX_MASK;
+>>              pdpe_addr = ((pml4e & PG_ADDRESS_MASK) + (((addr >> 30) & 0x1ff) << 3)) &
+>> @@ -472,8 +522,10 @@ int x86_cpu_handle_mmu_fault(CPUState *cs, vaddr addr, int size,
+>>              }
+>>              ptep &= pdpe ^ PG_NX_MASK;
+>>              if (!(pdpe & PG_ACCESSED_MASK)) {
+>> -                pdpe |= PG_ACCESSED_MASK;
+>> -                x86_stl_phys_notdirty(cs, pdpe_addr, pdpe);
+>> +                pdpe = update_entry(cs, pdpe_addr, pdpe, PG_ACCESSED_MASK);
+>> +                if (!pdpe) {
+>> +                    goto restart;
+>> +                }
+>>              }
+>>              if (pdpe & PG_PSE_MASK) {
+>>                  /* 1 GB page */
+>> @@ -520,8 +572,10 @@ int x86_cpu_handle_mmu_fault(CPUState *cs, vaddr addr, int size,
+>>          }
+>>          /* 4 KB page */
+>>          if (!(pde & PG_ACCESSED_MASK)) {
+>> -            pde |= PG_ACCESSED_MASK;
+>> -            x86_stl_phys_notdirty(cs, pde_addr, pde);
+>> +            pde = update_entry(cs, pde_addr, pde, PG_ACCESSED_MASK);
+>> +            if (!pde) {
+>> +                goto restart;
+>> +            }
+>>          }
+>>          pte_addr = ((pde & PG_ADDRESS_MASK) + (((addr >> 12) & 0x1ff) << 3)) &
+>>              a20_mask;
+>> @@ -563,8 +617,10 @@ int x86_cpu_handle_mmu_fault(CPUState *cs, vaddr addr, int size,
+>>          }
+>>  
+>>          if (!(pde & PG_ACCESSED_MASK)) {
+>> -            pde |= PG_ACCESSED_MASK;
+>> -            x86_stl_phys_notdirty(cs, pde_addr, pde);
+>> +            pde = update_entry(cs, pde_addr, pde, PG_ACCESSED_MASK);
+>> +            if (!pde) {
+>> +                goto restart;
+>> +            }
+>>          }
+>>  
+>>          /* page directory entry */
+>> @@ -634,11 +690,11 @@ do_check_protect_pse36:
+>>      /* yes, it can! */
+>>      is_dirty = is_write && !(pte & PG_DIRTY_MASK);
+>>      if (!(pte & PG_ACCESSED_MASK) || is_dirty) {
+>> -        pte |= PG_ACCESSED_MASK;
+>> -        if (is_dirty) {
+>> -            pte |= PG_DIRTY_MASK;
+>> +        pte = update_entry(cs, pte_addr, pte,
+>> +                           PG_ACCESSED_MASK | (is_dirty ? PG_DIRTY_MASK : 0));
+>> +        if (!pte) {
+>> +            goto restart;
+>>          }
+>> -        x86_stl_phys_notdirty(cs, pte_addr, pte);
+>>      }
+>>  
+>>      if (!(pte & PG_DIRTY_MASK)) {
+> 
+> 
 
