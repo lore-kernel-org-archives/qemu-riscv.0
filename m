@@ -1,60 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gXbCN-0000q3-9Q
-	for mharc-qemu-riscv@gnu.org; Thu, 13 Dec 2018 19:19:25 -0500
-Received: from eggs.gnu.org ([2001:4830:134:3::10]:37861)
+	id 1gXbCR-0000rn-R8
+	for mharc-qemu-riscv@gnu.org; Thu, 13 Dec 2018 19:19:27 -0500
+Received: from eggs.gnu.org ([2001:4830:134:3::10]:37907)
 	by lists.gnu.org with esmtp (Exim 4.71)
 	(envelope-from <prvs=879e7201e=Alistair.Francis@wdc.com>)
-	id 1gXbCK-0000o0-TC
-	for qemu-riscv@nongnu.org; Thu, 13 Dec 2018 19:19:21 -0500
+	id 1gXbCP-0000q5-Ij
+	for qemu-riscv@nongnu.org; Thu, 13 Dec 2018 19:19:26 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
 	(envelope-from <prvs=879e7201e=Alistair.Francis@wdc.com>)
-	id 1gXbCH-00042V-3q
-	for qemu-riscv@nongnu.org; Thu, 13 Dec 2018 19:19:20 -0500
-Received: from esa3.hgst.iphmx.com ([216.71.153.141]:47815)
+	id 1gXbCO-0004ND-Je
+	for qemu-riscv@nongnu.org; Thu, 13 Dec 2018 19:19:25 -0500
+Received: from esa1.hgst.iphmx.com ([68.232.141.245]:47870)
 	by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.71) (envelope-from <prvs=879e7201e=Alistair.Francis@wdc.com>)
-	id 1gXbC6-0003Sk-2k; Thu, 13 Dec 2018 19:19:06 -0500
+	id 1gXbCG-0003wb-OG; Thu, 13 Dec 2018 19:19:17 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
 	d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
-	t=1544746745; x=1576282745;
+	t=1544746756; x=1576282756;
 	h=from:to:cc:subject:date:message-id:references:
 	in-reply-to:content-transfer-encoding:mime-version;
-	bh=l0iDJxT5Nato+uVZXDGQZ6GbczeYSu3+iA97z+C2jQI=;
-	b=KIft+qkCuslyDxyXV5nfAQjp+EId7NXgCPBMbs+XOyduVNsYDoD1iot+
-	GKnpm/y+RrTUREuD1QmSQYQthWHOVH59gzatGtDMs/PhZ7UHfUheUR1Pw
-	7/nEtZ18aSaE0PTSieo41ORH/S1cn17sUHausYRpE24wtRgCaGNhvV5AX
-	/K8JeZGJh6brn+BL4ioThKk37FQZENFsw+zen22kzE8ET7+jrYcsAnpnu
-	zp3MCaatOv9u8XaACjZsXPYgAetQokM7stGBsO/W8l4eiwMi8YPMSBvzs
-	P1+hCtkV9yTbEU4YbqxFwI2R5pTX0hj8rD1cTtuus/1Azl+ScO0QxIlw3 A==;
-X-IronPort-AV: E=Sophos;i="5.56,350,1539619200"; d="scan'208";a="101454305"
-Received: from mail-by2nam05lp2055.outbound.protection.outlook.com (HELO
-	NAM05-BY2-obe.outbound.protection.outlook.com) ([104.47.50.55])
-	by ob1.hgst.iphmx.com with ESMTP; 14 Dec 2018 08:19:03 +0800
+	bh=0xfZsehpV0W8v+k7Dpjq3lJP1A/uqDOChsflEOU/mgQ=;
+	b=bz+t0gp1u3m9VPdfc13N+K6N15uQcPmxiHqQKB16Siz37kEDi8qywcRi
+	Ev3Pur1Bz9XylNIHwgMhAHKa2aCQy7DB7IYGjPaj/qur+FnovnHuL3jOE
+	67NSH0V6sTfikoRRMrJNaA7hlBYdoXgQJAPMIwgON6i2uZbwINeRpdNK6
+	E7j7OSl93XH0zUabqmH3Jwi+Cy0PHogjxQtvEK+UeVh+fYHjGZmrI3Xoe
+	kU2O3jgOzEGPIzyxY+pTKbTuYCGUTlz+mXnlV0EbbjhCXli1CgKbFLyE4
+	JMI4LmKw+gnTpOHzSi8RX2m/J52bLMwCEuserVfFa4TYAdEfR97KkRuZc g==;
+X-IronPort-AV: E=Sophos;i="5.56,350,1539619200"; d="scan'208";a="201220535"
+Received: from mail-bn3nam04lp2051.outbound.protection.outlook.com (HELO
+	NAM04-BN3-obe.outbound.protection.outlook.com) ([104.47.46.51])
+	by ob1.hgst.iphmx.com with ESMTP; 14 Dec 2018 08:19:14 +0800
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=sharedspace.onmicrosoft.com; s=selector1-wdc-com;
 	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=3B/bds40JPjAOBVCxsB3UWIjkgnlSq0suq865xBsL5g=;
-	b=Wb38dwKZHKkbn/Fb3SzeTQD4VSvwKnVpqFDwaN3u1ulDmDIiiZuO1o+VVpbEogNYruwlzFAuah9Y7ff6G4uq46kLxWH59Ol+BVT99a7KyxCuFEpBPyBFrWNPTIFKXVStskxsEjlrOTnLPZmirOLHm6yo6clpx/HJwJp9QeYvi8E=
+	bh=Uf6OrYJOILHspQsDeumGcCOef/wZ4fS/HDvJpnxWPuk=;
+	b=oGPzsABpVGDsXe6hwm4x8q0t9ewNpVepJkd/hHk6Prk0xhR6fRS9uWruMuA/xbRiRRXwinhfU6WttAaTWMEHSdU+9GTekkSxXLvDmlm/aoilZHYb/HK9Juo+Q2cveoHCJd53EJMPXXD/I+njmlavny05FhnYE9TIwoQiNMHcugM=
 Received: from MWHPR04MB0401.namprd04.prod.outlook.com (10.173.48.18) by
 	MWHPR04MB0497.namprd04.prod.outlook.com (10.173.49.10) with Microsoft
 	SMTP
 	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
-	15.20.1404.27; Fri, 14 Dec 2018 00:19:03 +0000
+	15.20.1404.27; Fri, 14 Dec 2018 00:19:12 +0000
 Received: from MWHPR04MB0401.namprd04.prod.outlook.com
 	([fe80::9067:fb44:66b2:7604]) by
 	MWHPR04MB0401.namprd04.prod.outlook.com
 	([fe80::9067:fb44:66b2:7604%3]) with mapi id 15.20.1425.016;
-	Fri, 14 Dec 2018 00:19:03 +0000
+	Fri, 14 Dec 2018 00:19:12 +0000
 From: Alistair Francis <Alistair.Francis@wdc.com>
 To: "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, "qemu-riscv@nongnu.org"
 	<qemu-riscv@nongnu.org>
 CC: Alistair Francis <Alistair.Francis@wdc.com>, "alistair23@gmail.com"
 	<alistair23@gmail.com>
-Thread-Topic: [PATCH v1 4/5] RISC-V: Enable second UART on sifive_e and
-	sifive_u
-Thread-Index: AQHUk0KeyqEGU1N5LU6fnoqQAQ+F/Q==
-Date: Fri, 14 Dec 2018 00:19:03 +0000
-Message-ID: <cac7c30e993d969f89b001d6cb88829c1f6c0073.1544746653.git.alistair.francis@wdc.com>
+Thread-Topic: [PATCH v1 5/5] sifive_uart: Implement interrupt pending register
+Thread-Index: AQHUk0KjB57zG+zv8UmhY5caMT6++Q==
+Date: Fri, 14 Dec 2018 00:19:12 +0000
+Message-ID: <3753d59b3a0f07fb6a678ffacd3d913f5fcb774d.1544746653.git.alistair.francis@wdc.com>
 References: <cover.1544746653.git.alistair.francis@wdc.com>
 In-Reply-To: <cover.1544746653.git.alistair.francis@wdc.com>
 Accept-Language: en-US
@@ -62,8 +61,8 @@ Content-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
 x-mailer: git-send-email 2.19.1
-x-clientproxiedby: BYAPR07CA0090.namprd07.prod.outlook.com
-	(2603:10b6:a03:12b::31) To MWHPR04MB0401.namprd04.prod.outlook.com
+x-clientproxiedby: BYAPR07CA0083.namprd07.prod.outlook.com
+	(2603:10b6:a03:12b::24) To MWHPR04MB0401.namprd04.prod.outlook.com
 	(2603:10b6:300:70::18)
 authentication-results: spf=none (sender IP is )
 	smtp.mailfrom=Alistair.Francis@wdc.com; 
@@ -71,44 +70,44 @@ x-ms-exchange-messagesentrepresentingtype: 1
 x-originating-ip: [199.255.44.250]
 x-ms-publictraffictype: Email
 x-microsoft-exchange-diagnostics: 1; MWHPR04MB0497;
-	6:eVX2qY4PBN2JA9xWE3XoAugXzIA2p+U3D0a17Z/FBluEpbFyfmnthvCgUdu5xrw37ZOTpO5uyB38BohjK17oyKRVYDVmtFTlrdOf2JAnd0YIZczj6UXWrhZdGWdZ7yalfNlUViUspRXuD7uhENUZWjaHv0ZOjGs+S1cidxk1U0I60yRyZAXjLyYUTaVeMB9Ns6w12VyjJMpYT2u+k1+SCc9JIWL5aqSVKXeEaBXm8D/ErJ/sbx1BkrbJzI6MU8jlkNKDJfMMUhWP1BrUPj5Kqb14YOc4ttsK/FuLcZw3HVJSZ02gydFqjHpizd2yFOFajnq55e8Pu0oOP83WOUjKMnQG9eQ7CZ/9YwQmFxcorG517aCi7iGXtoKQ/xujA/08Jcru3sSIDitJjqzBKdRlZLvaxMLTzsTokTDj5SwhU0jX9BT5yTH4kATtXElpg6Q1wyuCtybvz9UTcK5N9TWz2Q==;
-	5:R8wY91HKZrU/r2AEoC5oBClJA8f1CYzwKfQhRmK7pOD/Hh972i9p052HJbBonD1pOjFhsmx7Z6n3Kb2QqOSxRw5RdaEwaBg2QBC1u8egN1Y1X4biGREIOAtVwdZopE+a5ltU1S5C3CzxbshIMdfdcnLj6gPQzKjXftDH6ZjAgz4=;
-	7:C7QhWVytw+qpbycTnIArcDID5f9gPHSoIJb0hkg1f5mPCIbY7IsTwS7Np5MRPoRyGpHhZNozhyE3HBRxNjU63CnbghqN7LXI0k8Ub1n2RQJCV31n5VpOs8T7wsK6MdbNENXx9iqtu6EDLc2O71XQBQ==
-x-ms-office365-filtering-correlation-id: 2134f62c-7785-463a-7e47-08d66159c0cc
+	6:5CF+Au4/91LqIfn7gUitQsjV3Lw82/rBGZmjkctwdD1td+ofo/mrho91jHsWRXWO85afkk8IWPYVo6bzCSq6VfEbs/HY9SLSnMiNOHRFJFp93sddfayEGplYA6f5vATOHBoMg7ibdYEmSBLE20/CkNnaZ9xcb46meuX5XER/vtEjKMKXz888NbBtorH7OSmknWF4W8P2iVRRKx2/bDhHhFIUPwVzS+2kct8w5yoR8dvJdJPGJf123tSlJ1/gXY55FcaLvnp+vSSUvGLrOyH9y/qup5OOUU6pJiQvp5Yhxdvtt8LTUeoDKyWM7gcH141PaDIbC5+SYVb4RDm7VnblJYKNldpI4FLUiZTGkPfW+ZIb+q+gJqDK5IdGkRWBS3sOskfDRa3nNh9PtnhVUghwiT35wlLycrPaTEFdtYoEiCrUXeSYMmxSZV75FCilXsxm/hLegAPNrJ5kzytG+9ZI6g==;
+	5:xGSxmXiB15AH0qQqSiJBpP1iAzie6I+CkVS+DCSgYsO0PWrLhKZPZs4kMC3XFjuo7qjVcaM7V4gmNJ5tBr5vauoKZT1yus7flbF0Lu5913wY54aBRVl7g3ROUANtTeQP6sjFZ9J12bBoCQW6/npt3Z66Q2z707lKss67imZXoCI=;
+	7:sxmhwWD4/tCnCh1NpLMhqcYNecg4JJbB4eKMe5W2pCjcNVYmZyNhZZCSc1dGDRHWyzdWHMDZ69Wdbs25j5WzqyW//32zLzb5iNZHIhgCb5xef7ygRIeSZd0TR/hnhSOiwL25dXo/5fVesu+iAkHy8w==
+x-ms-office365-filtering-correlation-id: 376bf68f-fc78-41be-91f6-08d66159c64d
 x-ms-office365-filtering-ht: Tenant
 x-microsoft-antispam: BCL:0; PCL:0;
 	RULEID:(2390098)(7020095)(4652040)(8989299)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(5600074)(711020)(4618075)(2017052603328)(7153060)(7193020);
 	SRVR:MWHPR04MB0497; 
 x-ms-traffictypediagnostic: MWHPR04MB0497:
 wdcipoutbound: EOP-TRUE
-x-microsoft-antispam-prvs: <MWHPR04MB0497F1389D5BF1AC403D470990A10@MWHPR04MB0497.namprd04.prod.outlook.com>
+x-microsoft-antispam-prvs: <MWHPR04MB0497A24F9C7B711275BF97EC90A10@MWHPR04MB0497.namprd04.prod.outlook.com>
 x-ms-exchange-senderadcheck: 1
 x-exchange-antispam-report-cfa-test: BCL:0; PCL:0;
 	RULEID:(8211001083)(3230021)(999002)(6040522)(2401047)(5005006)(8121501046)(3002001)(3231475)(944501520)(52105112)(93006095)(93001095)(10201501046)(6055026)(148016)(149066)(150057)(6041310)(20161123564045)(201703131423095)(201702281528075)(20161123555045)(201703061421075)(201703061406153)(20161123562045)(20161123558120)(20161123560045)(201708071742011)(7699051)(76991095);
 	SRVR:MWHPR04MB0497; BCL:0; PCL:0; RULEID:; SRVR:MWHPR04MB0497; 
 x-forefront-prvs: 08864C38AC
 x-forefront-antispam-report: SFV:NSPM;
-	SFS:(10019020)(136003)(396003)(376002)(346002)(366004)(39850400004)(199004)(189003)(50226002)(106356001)(3846002)(81166006)(11346002)(5660300001)(81156014)(68736007)(8936002)(71190400001)(36756003)(71200400001)(105586002)(8676002)(14444005)(7736002)(256004)(2906002)(6436002)(72206003)(6486002)(478600001)(102836004)(53936002)(14454004)(305945005)(25786009)(6512007)(4326008)(476003)(52116002)(316002)(118296001)(54906003)(97736004)(66066001)(39060400002)(486006)(2616005)(2501003)(44832011)(6116002)(386003)(76176011)(6506007)(186003)(86362001)(110136005)(26005)(446003)(99286004);
+	SFS:(10019020)(136003)(396003)(376002)(346002)(366004)(39850400004)(199004)(189003)(50226002)(106356001)(3846002)(81166006)(11346002)(5660300001)(81156014)(68736007)(8936002)(71190400001)(36756003)(71200400001)(105586002)(8676002)(14444005)(7736002)(256004)(2906002)(6436002)(72206003)(6486002)(478600001)(102836004)(53936002)(14454004)(305945005)(25786009)(6512007)(4326008)(476003)(52116002)(316002)(118296001)(54906003)(97736004)(66066001)(39060400002)(486006)(2616005)(2501003)(44832011)(6116002)(386003)(575784001)(76176011)(6506007)(186003)(86362001)(110136005)(26005)(446003)(99286004);
 	DIR:OUT; SFP:1102; SCL:1; SRVR:MWHPR04MB0497;
 	H:MWHPR04MB0401.namprd04.prod.outlook.com; FPR:; SPF:None;
 	LANG:en; PTR:InfoNoRecords; A:1; MX:1; 
-x-microsoft-antispam-message-info: 9zdMl/oI0GpSSxiTaonxXJxrm4lBk3zf5Qusd4DKkM+4FYp/7mcIFeDenrsxmMyQxBjHZAZ5YqUrDy5upRvD9pAUkVUjLY1ISYUx+otLrYloEGKi7gGQmIUGM3ifYDFueBUqAGVzYWuXiNONlp7RIpTmUkRRWwjvkMDBaVhu6f6Vsttrzk/pbZkSPTjv3YVcdRmsrc0L72uXyswsgiL0Ko934y2HbsOZB71zVXw5EEkZB/8OztoRJV+y0xacYTXePFZpphDs54pr0bZSfUF1YFYVME92BcYWo+o7/yKSQlc8ThKx7AulIpGy8QR2iL6c
+x-microsoft-antispam-message-info: +mM4peyw1MWyki1V7kKr0w0OJ4jhP2KAkjWTjIMZxcwO3IR+8T2eP8JJKEsguM6EpEY/Qb6cjTjnCfNwp2Wq3bpA0OJHoXcHpFNESvWW7YQJhAs2bkK/ZC6gUoicl8qO5PuKXRw/pLwNFORSyk0s+hd8mEXaokvlCMBG3dWJoOkCFoVF1PNc+ETYc4awIUsUiA8/vjIdIP1Yrnr3Q44+bTXvi6tFXYlctPcXoTrHXJuG7TBzvzGG2WUsRZMminjkJdpz05O+q7K2KTo3bX3GC3b9/UFGob1O7Ph+KjVuc80KXVVjoktUdMQVkbXb0RUJ
 spamdiagnosticoutput: 1:99
 spamdiagnosticmetadata: NSPM
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
 X-OriginatorOrg: wdc.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2134f62c-7785-463a-7e47-08d66159c0cc
-X-MS-Exchange-CrossTenant-originalarrivaltime: 14 Dec 2018 00:19:03.7083 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 376bf68f-fc78-41be-91f6-08d66159c64d
+X-MS-Exchange-CrossTenant-originalarrivaltime: 14 Dec 2018 00:19:12.8647 (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: MWHPR04MB0497
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 216.71.153.141
-Subject: [Qemu-riscv] [PATCH v1 4/5] RISC-V: Enable second UART on sifive_e
- and sifive_u
+X-Received-From: 68.232.141.245
+Subject: [Qemu-riscv] [PATCH v1 5/5] sifive_uart: Implement interrupt
+ pending register
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -120,64 +119,86 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Dec 2018 00:19:22 -0000
+X-List-Received-Date: Fri, 14 Dec 2018 00:19:26 -0000
 
-From: Michael Clark <mjc@sifive.com>
+From: Nathaniel Graff <nathaniel.graff@sifive.com>
 
-Previously the second UARTs on the sifive_e and sifive_u machines
-where disabled due to check-qtest-riscv32 and check-qtest-riscv64
-failures. Recent changes in the QEMU core serial code have
-resolved these failures so the second UARTs can be instantiated.
+The watermark bits are set in the interrupt pending register according
+to the configuration of txcnt and rxcnt in the txctrl and rxctrl
+registers.
 
-Cc: Palmer Dabbelt <palmer@sifive.com>
-Cc: Sagar Karandikar <sagark@eecs.berkeley.edu>
-Cc: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>
-Signed-off-by: Michael Clark <mjc@sifive.com>
+Since the UART TX does not implement a FIFO, the txwm bit is set as long
+as the TX watermark level is greater than zero.
+
+Signed-off-by: Nathaniel Graff <nathaniel.graff@sifive.com>
+Reviewed-by: Michael Clark <mjc@sifive.com>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- hw/riscv/sifive_e.c | 5 ++---
- hw/riscv/sifive_u.c | 5 ++---
- 2 files changed, 4 insertions(+), 6 deletions(-)
+ hw/riscv/sifive_uart.c         | 24 +++++++++++++++++++-----
+ include/hw/riscv/sifive_uart.h |  3 +++
+ 2 files changed, 22 insertions(+), 5 deletions(-)
 
-diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
-index cb513cc3bb..5d9d65ff29 100644
---- a/hw/riscv/sifive_e.c
-+++ b/hw/riscv/sifive_e.c
-@@ -192,9 +192,8 @@ static void riscv_sifive_e_soc_realize(DeviceState *dev=
-, Error **errp)
-         memmap[SIFIVE_E_QSPI0].base, memmap[SIFIVE_E_QSPI0].size);
-     sifive_mmio_emulate(sys_mem, "riscv.sifive.e.pwm0",
-         memmap[SIFIVE_E_PWM0].base, memmap[SIFIVE_E_PWM0].size);
--    /* sifive_uart_create(sys_mem, memmap[SIFIVE_E_UART1].base,
--        serial_hd(1), qdev_get_gpio_in(DEVICE(s->plic),
--                                       SIFIVE_E_UART1_IRQ)); */
-+    sifive_uart_create(sys_mem, memmap[SIFIVE_E_UART1].base,
-+        serial_hd(1), qdev_get_gpio_in(DEVICE(s->plic), SIFIVE_E_UART1_IRQ=
-));
-     sifive_mmio_emulate(sys_mem, "riscv.sifive.e.qspi1",
-         memmap[SIFIVE_E_QSPI1].base, memmap[SIFIVE_E_QSPI1].size);
-     sifive_mmio_emulate(sys_mem, "riscv.sifive.e.pwm1",
-diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-index ef07df2442..3591898011 100644
---- a/hw/riscv/sifive_u.c
-+++ b/hw/riscv/sifive_u.c
-@@ -350,9 +350,8 @@ static void riscv_sifive_u_soc_realize(DeviceState *dev=
-, Error **errp)
-         memmap[SIFIVE_U_PLIC].size);
-     sifive_uart_create(system_memory, memmap[SIFIVE_U_UART0].base,
-         serial_hd(0), qdev_get_gpio_in(DEVICE(s->plic), SIFIVE_U_UART0_IRQ=
-));
--    /* sifive_uart_create(system_memory, memmap[SIFIVE_U_UART1].base,
--        serial_hd(1), qdev_get_gpio_in(DEVICE(s->plic),
--                                       SIFIVE_U_UART1_IRQ)); */
-+    sifive_uart_create(system_memory, memmap[SIFIVE_U_UART1].base,
-+        serial_hd(1), qdev_get_gpio_in(DEVICE(s->plic), SIFIVE_U_UART1_IRQ=
-));
-     sifive_clint_create(memmap[SIFIVE_U_CLINT].base,
-         memmap[SIFIVE_U_CLINT].size, smp_cpus,
-         SIFIVE_SIP_BASE, SIFIVE_TIMECMP_BASE, SIFIVE_TIME_BASE);
+diff --git a/hw/riscv/sifive_uart.c b/hw/riscv/sifive_uart.c
+index b0c3798cf2..456a3d3697 100644
+--- a/hw/riscv/sifive_uart.c
++++ b/hw/riscv/sifive_uart.c
+@@ -28,12 +28,26 @@
+  * Not yet implemented:
+  *
+  * Transmit FIFO using "qemu/fifo8.h"
+- * SIFIVE_UART_IE_TXWM interrupts
+- * SIFIVE_UART_IE_RXWM interrupts must honor fifo watermark
+- * Rx FIFO watermark interrupt trigger threshold
+- * Tx FIFO watermark interrupt trigger threshold.
+  */
+=20
++/* Returns the state of the IP (interrupt pending) register */
++static uint64_t uart_ip(SiFiveUARTState *s)
++{
++    uint64_t ret =3D 0;
++
++    uint64_t txcnt =3D SIFIVE_UART_GET_TXCNT(s->txctrl);
++    uint64_t rxcnt =3D SIFIVE_UART_GET_RXCNT(s->rxctrl);
++
++    if (txcnt !=3D 0) {
++        ret |=3D SIFIVE_UART_IP_TXWM;
++    }
++    if (s->rx_fifo_len > rxcnt) {
++        ret |=3D SIFIVE_UART_IP_RXWM;
++    }
++
++    return ret;
++}
++
+ static void update_irq(SiFiveUARTState *s)
+ {
+     int cond =3D 0;
+@@ -69,7 +83,7 @@ uart_read(void *opaque, hwaddr addr, unsigned int size)
+     case SIFIVE_UART_IE:
+         return s->ie;
+     case SIFIVE_UART_IP:
+-        return s->rx_fifo_len ? SIFIVE_UART_IP_RXWM : 0;
++        return uart_ip(s);
+     case SIFIVE_UART_TXCTRL:
+         return s->txctrl;
+     case SIFIVE_UART_RXCTRL:
+diff --git a/include/hw/riscv/sifive_uart.h b/include/hw/riscv/sifive_uart.=
+h
+index 504f18a60f..c8dc1c57fd 100644
+--- a/include/hw/riscv/sifive_uart.h
++++ b/include/hw/riscv/sifive_uart.h
+@@ -43,6 +43,9 @@ enum {
+     SIFIVE_UART_IP_RXWM       =3D 2  /* Receive watermark interrupt pendin=
+g */
+ };
+=20
++#define SIFIVE_UART_GET_TXCNT(txctrl)   ((txctrl >> 16) & 0x7)
++#define SIFIVE_UART_GET_RXCNT(rxctrl)   ((rxctrl >> 16) & 0x7)
++
+ #define TYPE_SIFIVE_UART "riscv.sifive.uart"
+=20
+ #define SIFIVE_UART(obj) \
 --=20
 2.19.1
 
