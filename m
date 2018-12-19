@@ -1,112 +1,111 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gYyI0-0000Fi-1y
-	for mharc-qemu-riscv@gnu.org; Mon, 17 Dec 2018 14:10:52 -0500
-Received: from eggs.gnu.org ([2001:4830:134:3::10]:42365)
+	id 1gZhKa-0000aA-EN
+	for mharc-qemu-riscv@gnu.org; Wed, 19 Dec 2018 14:16:32 -0500
+Received: from eggs.gnu.org ([2001:4830:134:3::10]:45035)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <prvs=8826e7969=Alistair.Francis@wdc.com>)
-	id 1gYyHx-0000EC-V8
-	for qemu-riscv@nongnu.org; Mon, 17 Dec 2018 14:10:51 -0500
+	(envelope-from <prvs=884a3e257=Alistair.Francis@wdc.com>)
+	id 1gZhKX-0000Xo-Nd
+	for qemu-riscv@nongnu.org; Wed, 19 Dec 2018 14:16:30 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <prvs=8826e7969=Alistair.Francis@wdc.com>)
-	id 1gYyHt-0006sL-Pv
-	for qemu-riscv@nongnu.org; Mon, 17 Dec 2018 14:10:49 -0500
-Received: from esa6.hgst.iphmx.com ([216.71.154.45]:34868)
+	(envelope-from <prvs=884a3e257=Alistair.Francis@wdc.com>)
+	id 1gZhKW-0007wT-Hu
+	for qemu-riscv@nongnu.org; Wed, 19 Dec 2018 14:16:29 -0500
+Received: from esa5.hgst.iphmx.com ([216.71.153.144]:43293)
 	by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.71) (envelope-from <prvs=8826e7969=Alistair.Francis@wdc.com>)
-	id 1gYyHt-0006qU-99
-	for qemu-riscv@nongnu.org; Mon, 17 Dec 2018 14:10:45 -0500
+	(Exim 4.71) (envelope-from <prvs=884a3e257=Alistair.Francis@wdc.com>)
+	id 1gZhKN-0007oo-RI; Wed, 19 Dec 2018 14:16:21 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
 	d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
-	t=1545073845; x=1576609845;
-	h=from:to:cc:subject:date:message-id:references:
-	in-reply-to:content-id:content-transfer-encoding: mime-version;
-	bh=+YgDXMLQxjw9uA6W4VEqAFzaUPqXcOE5LulueqiKqAA=;
-	b=AWJhVVFDhtJTpS8IJ8VeT7ELvdrOWJILoYzB0JqB4pQOdM0jkZcjlPNm
-	AMugE8PqnhtW5o7ZmJMDy2D45csgkYfKPHXUgMva8gZzG8XMB9MywsqOm
-	K4qhJuIP2fjl3q+Tyh7httC2c9xEfjAEdDveXKHq9bXpPFLKy/uQ9Dvkx
-	p6UXoTvqVr+gwvDf2/JU1fbG+FeEPwOR+lH3vFxo05v5dz1cl0ti4hFSZ
-	gzISXZh5iYVMkFMk9ZHSkdqA8RXtl5vtX+28wRXzUBWoTkV08KIAG16UN
-	+vPmpkX00p0HOS35VGyU9i1e1fRGfZGEAs8gKVTjVhhc7VXManHWKyFmc Q==;
-X-IronPort-AV: E=Sophos;i="5.56,366,1539619200"; d="scan'208";a="98536644"
-Received: from mail-by2nam05lp2050.outbound.protection.outlook.com (HELO
-	NAM05-BY2-obe.outbound.protection.outlook.com) ([104.47.50.50])
-	by ob1.hgst.iphmx.com with ESMTP; 18 Dec 2018 03:10:41 +0800
+	t=1545246980; x=1576782980;
+	h=from:to:cc:subject:date:message-id:
+	content-transfer-encoding:mime-version;
+	bh=2WdnhTaDjDZooHQWdIyl4nLQbHJbMZ3BO8/AEejbPQQ=;
+	b=qZ0kCCwJ1JAII0PhSqVhMtv5mYrduVckMmEhYbxUaofO8Y0G9R2yYqQg
+	HbDBlYhqYMpA9CvBHdTg4hVE5xOC1z5GVBgTCnk/UDsv0V9fzHJT/DdU7
+	eQsYieyqSD0G0+5EpFByNQ1n8qX9qESCwwBYqYoJ7CbUBmASPiJ+8yuNB
+	BXj3l/Z+EL8oIZOZRAtEWPNgjTzNd5i6YWAFrJOkMXOe4XdtXM8Fr/FQm
+	Ca3VYkxf8qZqYp4PpF9Ufy3T5kD7BOkIpcmpVY6MeAdz7BEYXjC+bUJlQ
+	aisfE7HehyND6L0wrmFC0lAQJxgB0E70COyft8leUasx3DbfLKlwm5ojE w==;
+X-IronPort-AV: E=Sophos;i="5.56,373,1539619200"; d="scan'208";a="98234098"
+Received: from mail-dm3nam03lp2051.outbound.protection.outlook.com (HELO
+	NAM03-DM3-obe.outbound.protection.outlook.com) ([104.47.41.51])
+	by ob1.hgst.iphmx.com with ESMTP; 20 Dec 2018 03:16:15 +0800
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=sharedspace.onmicrosoft.com; s=selector1-wdc-com;
 	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=+YgDXMLQxjw9uA6W4VEqAFzaUPqXcOE5LulueqiKqAA=;
-	b=VHoWDeTOmnVTs6YTOJizR8JpCBCIcI94u/cuu/bWZv4+NkiZXYuE/1p0EDjchD0yW2/qTsmwbr8J6EittL+7KoCejX1SX/MMDUAVqHsxG4KtlJVap12RcoZg12tZWDJsCayOIH5iZ+Cr1ds0TMIcJbW+WP5mgUnl+f1WpXP+REI=
+	bh=Qt8Xpjwb5tp5Ksq32ezRsyqRummmGQRcEbN9yYelXI4=;
+	b=Fgpw1XRQsfK8ed7n0g/hpiT0A7LIkmL+eesNLXajmb7VdSxEvxgHVLjUTjH7Ho9G3xJ4Isnj3L9JiOC13+5bdxiFrCALEF36yCzH1Z7TzfqyD5XpM63cvZmmbQr9F48cCOfI2qCy00geH8i8czgdVTVkezr3MmgiXSa4GI/6Pms=
 Received: from MWHPR04MB0401.namprd04.prod.outlook.com (10.173.48.18) by
-	MWHPR04MB0718.namprd04.prod.outlook.com (10.172.167.143) with Microsoft
+	MWHPR04MB1041.namprd04.prod.outlook.com (10.174.250.24) with Microsoft
 	SMTP
 	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
-	15.20.1425.22; Mon, 17 Dec 2018 19:10:39 +0000
+	15.20.1446.19; Wed, 19 Dec 2018 19:16:13 +0000
 Received: from MWHPR04MB0401.namprd04.prod.outlook.com
 	([fe80::9067:fb44:66b2:7604]) by
 	MWHPR04MB0401.namprd04.prod.outlook.com
-	([fe80::9067:fb44:66b2:7604%3]) with mapi id 15.20.1425.021;
-	Mon, 17 Dec 2018 19:10:39 +0000
+	([fe80::9067:fb44:66b2:7604%4]) with mapi id 15.20.1446.018;
+	Wed, 19 Dec 2018 19:16:13 +0000
 From: Alistair Francis <Alistair.Francis@wdc.com>
-To: "sorear2@gmail.com" <sorear2@gmail.com>, "qemu-riscv@nongnu.org"
+To: "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, "qemu-riscv@nongnu.org"
 	<qemu-riscv@nongnu.org>
-CC: "mjc@sifive.com" <mjc@sifive.com>
-Thread-Topic: [PATCH v2 4/4] RISC-V: Support separate firmware and kernel
-	payload
-Thread-Index: AQHUlZTkYJN82YpIDUuxBUdcWX/gs6WDTToA
-Date: Mon, 17 Dec 2018 19:10:39 +0000
-Message-ID: <2b56217e082449d1250c5e59bb6dacdcbc3a8979.camel@wdc.com>
-References: <1545001947-29444-1-git-send-email-sorear2@gmail.com>
-	<1545001947-29444-5-git-send-email-sorear2@gmail.com>
-In-Reply-To: <1545001947-29444-5-git-send-email-sorear2@gmail.com>
+CC: Alistair Francis <Alistair.Francis@wdc.com>, "alistair23@gmail.com"
+	<alistair23@gmail.com>, "richard.henderson@linaro.org"
+	<richard.henderson@linaro.org>
+Thread-Topic: [PATCH v2 00/23]  Add RISC-V TCG backend support
+Thread-Index: AQHUl89OzEUnQrF5HUq94D68EMR/XQ==
+Date: Wed, 19 Dec 2018 19:16:13 +0000
+Message-ID: <cover.1545246859.git.alistair.francis@wdc.com>
 Accept-Language: en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
+x-mailer: git-send-email 2.19.1
+x-clientproxiedby: BYAPR03CA0019.namprd03.prod.outlook.com
+	(2603:10b6:a02:a8::32) To MWHPR04MB0401.namprd04.prod.outlook.com
+	(2603:10b6:300:70::18)
 authentication-results: spf=none (sender IP is )
 	smtp.mailfrom=Alistair.Francis@wdc.com; 
-x-originating-ip: [199.255.44.250]
+x-ms-exchange-messagesentrepresentingtype: 1
+x-originating-ip: [199.255.44.171]
 x-ms-publictraffictype: Email
-x-microsoft-exchange-diagnostics: 1; MWHPR04MB0718;
-	6:wphnQlttKdWGOZdZTqFh2FLjBcFM5zo7INdc4bBgK364JcOhNghKSceibGlZcaNw4V0w8l5mmeKBfX1dkQHs4Rj3XLCVUy2IosEO7oE4mmz2y4T4mLSJXRWHupXmEGq/sa3Go/GSniN9wPYNj80SblndCI3WvlYaDT6u3AKN9ZfKR5ppOiwLzxPjbLHuKBoco+mqEIjf2sl4YF8O5ONGudZzhpP9kf+ZOTDwMoFAJbu+7anRXF5wRoEUfw78arX2jxMhGQXvk9yPTkRsjYj+4HYXJZSEHIFkN3MPQF/OTAVzzLmvov1qdqOVB15cYOqBAlOJ3xTVvYePF6htDUPuNHRuJ9PUyEY9s7MWc4HELPv4GimJr31qoaOXqKZmVG55VNfPCSgrEZSTOWZkOs68URAhE2iq5trpj9re/CfokiAJprl9mOYmSVDQFRMO+XOVSU39KbV5nfhKcQ2INNfErQ==;
-	5:/jLzTFdV7l22PNAeIx5tYvUf1hHZL88+RtwCfqKPdN02OPPXsDO7+NiAEBw335U7iJVI+pY+UQUItlBYFso+aSC70zGsm0ZFMCZMPVdnH1K59damUtzirPqg/s7Vkj93PGvSkAjBK9AkzQNDiqzTLEz6xiW3LUAIHPsktqsIIls=;
-	7:MyGvlW80LMGj98sMUYXjjwOpTTakB5RX+Cx/BSaB9PriIX70fTru5Ph3edAJ+aS0M+1tLDGiyLsWsi5YZ1ZH/ag4qLjDmF8eNsE4pcrWRFXiAd5Q6aMY6XaEGyERQYp7qxlIvGrWjO+dtTYubWR5LQ==
-x-ms-exchange-antispam-srfa-diagnostics: SOS;
-x-ms-office365-filtering-correlation-id: 4fec0b2e-57ed-4a51-304f-08d66453556b
+x-microsoft-exchange-diagnostics: 1; MWHPR04MB1041;
+	6:EmeQWAQ441kOAvaFHNjBqUxeSxgKsCNcXzgdCjBbQV2nz2R5MbjcEKvhbkpyQCM6ZbGRqVBU+8stj0r29IaFIvCLo5G+vQvBpjGtksjles/DP+IdBiOKE7qDK5XW1Ayg17SAaGF70aVyJX6vz41ck1M3fZfs/MTAWsJMUA5KnCjVvszHVcYfGab31Kk3my9ZWCgq6oWVS25Ss/j4paHauAY0LT+hskZxQWnSL3JxxjxqwwmVblm3vM7MPbuSIStyAYRqPtXKAp5BC5KMBhmGsFs6c1KW4m82DEulUoPjEkTEDD/CIhcaPbPlW0spA6ThEHtPyIlfIIbPCH0/hpRhCmUII+8SQ3kv4fbD40monlOBNVgZ1GTCpuN44ew6G1l2Z+FHOZeosXbmnXsCxg3v0LV9BJdtmWqpBdVOeG0x8+5e3wWD67FVPNSn9N+JL3dX35mCjvGkGzhc9/TG90Bj2g==;
+	5:nSEUiGbt7o+i9FPUseM6qq/y4zf4t5d/cqIz/ezTZb+CuV/WUyprXMbagZ//1GYZDmBYn8jjgg40r1W6o23eqHPzkSMaN1OaWwEPdoiSQI0SLr/cOxp2xck9tRcpWz1OT4L5iCxoWjtpWmk5LEBdOTG3ntEybupp/Bw+1NeLVxo=;
+	7:M0iyWdo8Ph8Xkq4yMR6jI+3s1nnyr/aqmkbL8Vcgi8qoneJQJUXz5JVEROMTnMvjUXa/919ghEEvIZv/tTavI//wkABrO/SmV5pOQ2hqyyLGwxCxmG/08TWgDtt7Cetok72IqEaKTTCr84FIU57g7g==
+x-ms-office365-filtering-correlation-id: 0891885d-9149-4d1b-1187-08d665e670c2
 x-ms-office365-filtering-ht: Tenant
 x-microsoft-antispam: BCL:0; PCL:0;
 	RULEID:(2390118)(7020095)(4652040)(8989299)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(5600074)(711020)(4618075)(2017052603328)(7153060)(7193020);
-	SRVR:MWHPR04MB0718; 
-x-ms-traffictypediagnostic: MWHPR04MB0718:
+	SRVR:MWHPR04MB1041; 
+x-ms-traffictypediagnostic: MWHPR04MB1041:
 wdcipoutbound: EOP-TRUE
-x-microsoft-antispam-prvs: <MWHPR04MB07188378DF95F882671501EC90BC0@MWHPR04MB0718.namprd04.prod.outlook.com>
+x-microsoft-antispam-prvs: <MWHPR04MB1041C6324333FA45A864E2C890BE0@MWHPR04MB1041.namprd04.prod.outlook.com>
 x-ms-exchange-senderadcheck: 1
 x-exchange-antispam-report-cfa-test: BCL:0; PCL:0;
-	RULEID:(8211001083)(3230021)(999002)(6040522)(2401047)(5005006)(8121501046)(93006095)(93001095)(3002001)(3231475)(944501520)(52105112)(10201501046)(6055026)(148016)(149066)(150057)(6041310)(20161123564045)(201703131423095)(201702281528075)(20161123555045)(201703061421075)(201703061406153)(20161123558120)(20161123562045)(20161123560045)(201708071742011)(7699051)(76991095);
-	SRVR:MWHPR04MB0718; BCL:0; PCL:0; RULEID:; SRVR:MWHPR04MB0718; 
-x-forefront-prvs: 08897B549D
+	RULEID:(8211001083)(3230021)(999002)(6040522)(2401047)(5005006)(8121501046)(3002001)(10201501046)(93006095)(93001095)(3231475)(944501520)(52105112)(6055026)(149066)(150057)(6041310)(20161123558120)(20161123564045)(20161123560045)(20161123562045)(201703131423095)(201702281528075)(20161123555045)(201703061421075)(201703061406153)(201708071742011)(7699051)(76991095);
+	SRVR:MWHPR04MB1041; BCL:0; PCL:0; RULEID:; SRVR:MWHPR04MB1041; 
+x-forefront-prvs: 0891BC3F3D
 x-forefront-antispam-report: SFV:NSPM;
-	SFS:(10019020)(396003)(376002)(39860400002)(136003)(366004)(346002)(189003)(199004)(51914003)(446003)(66066001)(26005)(110136005)(7736002)(6486002)(11346002)(305945005)(72206003)(6436002)(186003)(478600001)(229853002)(76176011)(256004)(4001150100001)(486006)(476003)(97736004)(2616005)(6506007)(36756003)(102836004)(316002)(106356001)(105586002)(8936002)(14454004)(8676002)(6246003)(81156014)(68736007)(81166006)(2501003)(4326008)(39060400002)(71200400001)(71190400001)(86362001)(118296001)(25786009)(3846002)(6116002)(5660300001)(2906002)(99286004)(53936002)(6512007);
-	DIR:OUT; SFP:1102; SCL:1; SRVR:MWHPR04MB0718;
+	SFS:(10019020)(136003)(39860400002)(366004)(376002)(346002)(396003)(189003)(199004)(71200400001)(8676002)(81156014)(6306002)(81166006)(44832011)(71190400001)(8936002)(36756003)(2906002)(3846002)(6116002)(97736004)(7736002)(305945005)(99286004)(476003)(86362001)(5660300001)(316002)(2616005)(52116002)(50226002)(26005)(105586002)(110136005)(486006)(68736007)(54906003)(186003)(6506007)(386003)(478600001)(53936002)(102836004)(6512007)(6486002)(66066001)(6436002)(4326008)(14444005)(39060400002)(14454004)(72206003)(2501003)(256004)(966005)(25786009)(106356001);
+	DIR:OUT; SFP:1102; SCL:1; SRVR:MWHPR04MB1041;
 	H:MWHPR04MB0401.namprd04.prod.outlook.com; FPR:; SPF:None;
 	LANG:en; PTR:InfoNoRecords; MX:1; A:1; 
-x-microsoft-antispam-message-info: 09Mvo96Xj9JJ28kwbaGYWweGs2eMKgYv1BI4ibjC4Ju2aHXxKOhFEvqKAo/PTdPWVdgH1s/01qq7MihVStX5CiKBZ7jAS6OqT/fKwQBcMG83aUTHesD/2bWOi7urnFuTDyfIeFSF6MOpwBaJCLKs9SC9wTvN5dPOFeBt+KGSnpWjj1C3QiCPC4l1NS8nCawTpulNgPtpbe+QcquM3Y89JXNfHfMH5pKDOXxR5cGahdyB72sRvUzwiwehiob38snMnUPxAq2wV9exy4o+AmYAOu6g3CWxxkk+SvjREyXaaJ5uBwjXs8yaYz9TYJMLtN+I
+x-microsoft-antispam-message-info: mCSIEEbFjazPK1YHJOJwIo3tZS2YqV5N4XIfdOfzLjRU4Ytf/L8d1dHDMr2fey7kV/nyXknk3o4+0y2WYOCO5ShGlNfiPaSB5QHb+XONW94NlrrixuKpusLSL03YN0YWb22b/K3nTcywrCHUmKd2JX10lJAnV5Yx/jXMutlcw/tzPaf500DKmX1lT84gLULMWbMWrmQ7Op9qpgXoTHa0QPhmkD+86GDD67NrvTpTq0qwMt18bzSsLlWlek+MIC9XH3vwiaeyDM5nPt5SmWe5MsZblM2B/PNQZm6dpKS6ApHQPQRbVYRovBu64hY5l1Is
 spamdiagnosticoutput: 1:99
 spamdiagnosticmetadata: NSPM
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <4871325E074C7B4B9398D4DAEAD688F5@namprd04.prod.outlook.com>
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
 X-OriginatorOrg: wdc.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4fec0b2e-57ed-4a51-304f-08d66453556b
-X-MS-Exchange-CrossTenant-originalarrivaltime: 17 Dec 2018 19:10:39.6193 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0891885d-9149-4d1b-1187-08d665e670c2
+X-MS-Exchange-CrossTenant-originalarrivaltime: 19 Dec 2018 19:16:13.0636 (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MWHPR04MB0718
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MWHPR04MB1041
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 216.71.154.45
-Subject: Re: [Qemu-riscv] [PATCH v2 4/4] RISC-V: Support separate firmware
- and kernel payload
+X-Received-From: 216.71.153.144
+Subject: [Qemu-riscv] [PATCH v2 00/23]  Add RISC-V TCG backend support
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -118,117 +117,82 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Dec 2018 19:10:51 -0000
+X-List-Received-Date: Wed, 19 Dec 2018 19:16:31 -0000
 
-T24gU3VuLCAyMDE4LTEyLTE2IGF0IDE4OjEyIC0wNTAwLCBTdGVmYW4gTydSZWFyIHdyb3RlOg0K
-PiBTdXBwb3J0IGZvciBzZXBhcmF0ZSBmaXJtd2FyZSBhbmQga2VybmVsIHBheWxvYWQgaXMgYWRk
-ZWQNCj4gYnkgdXBkYXRpbmcgQkJMIHRvIHJlYWQgb3B0aW9uYWwgcHJlbG9hZGVkIGtlcm5lbCBh
-ZGRyZXNzDQo+IGF0dHJpYnV0ZXMgZnJvbSBkZXZpY2UtdHJlZSB1c2luZyBhIHNpbWlsYXIgbWVj
-aGFuaXNtIHRvDQo+IHRoYXQgdXNlZCB0byBwYXNzIGluaXQgcmFtZGlzayBhZGRyZXNzZXMgdG8g
-bGludXgga2VybmVsLg0KPiANCj4gICAgIGNob3NlbiB7DQo+ICAgICAgICAgcmlzY3Ysa2VybmVs
-LXN0YXJ0ID0gPDB4MDAwMDAwMDAgMHg4MDIwMDAwMD47DQo+ICAgICAgICAgcmlzY3Ysa2VybmVs
-LWVuZCA9IDwweDAwMDAwMDAwIDB4ODA1OTA2MzQ+Ow0KPiAgICAgfTsNCj4gDQo+IFRoZXNlIGF0
-dHJpYnV0ZXMgYXJlIGFkZGVkIGJ5IFFFTVUgYW5kIHJlYWQgYnkgQkJMIHdoZW4gY29tYmluaW5n
-DQo+IC1iaW9zIDxmaXJtd2FyZS1pbWFnZT4gYW5kIC1rZXJuZWwgPGtlcm5lbC1pbWFnZT4gb3B0
-aW9ucy4gZS5nLg0KPiANCj4gJCBxZW11LXN5c3RlbS1yaXNjdjY0IC1tYWNoaW5lIHZpcnQgLWJp
-b3MgYmJsIC1rZXJuZWwgdm1saW51eA0KPiANCj4gV2l0aCB0aGlzIGNoYW5nZSwgYmJsIGNhbiBi
-ZSBjb21waWxlZCB3aXRob3V0IC0td2l0aC1wYXlsb2FkDQo+IGFuZCB0aGUgZHVtbXkgcGF5bG9h
-ZCBhbGlnbm1lbnQgaXMgYWx0ZXJlZCB0byBtYWtlIHRoZSBtZW1vcnkNCj4gZm9vdHByaW50IG9m
-IHRoZSBmaXJtd2FyZS1vbmx5IGJibCBzbWFsbGVyLiBUaGUgZHVtbXkgcGF5bG9hZA0KPiBtZXNz
-YWdlIGlzIHVwZGF0ZWQgdG8gaW5kaWNhdGUgdGhlIGFsdGVybmF0aXZlIGxvYWQgbWV0aG9kLg0K
-PiANCj4gVGhpcyBsb2FkIG1ldGhvZCBjb3VsZCBhbHNvIGJlIHN1cHBvcnRlZCBieSBhIGZpcnN0
-IHN0YWdlIGJvb3QNCj4gbG9hZGVyIHRoYXQgcmVhZHMgc2VwZXJhdGUgZmlybXdhcmUgYW5kIGtl
-cm5lbCBmcm9tIFNQSSBmbGFzaC4NCj4gVGhlIG1haW4gYWR2YW50YWdlIG9mIHRoaXMgbmV3IG1l
-Y2hhbmlzbSBpcyB0aGF0IGl0IGVhc2VzIGtlcm5lbA0KPiBkZXZlbG9wbWVudCBieSBhdm9pZGlu
-ZyB0aGUgcmlzY3YtcGsgcGFja2FnaW5nIHN0ZXAgYWZ0ZXIga2VybmVsDQo+IGJ1aWxkcywgbWFr
-ZXMgYnVpbGRpbmcgcGVyIHJlcG9zaXRvcnkgYXJ0ZWZhY3RzIGZvciBDSSBzaW1wbGVyLA0KPiBh
-bmQgbWltaWNzIGJvb3Rsb2FkZXJzIG9uIG90aGVyIHBsYXRmb3JtcyB0aGF0IGNhbiBsb2FkIGEg
-a2VybmVsDQo+IGltYWdlIGZpbGUgZGlyZWN0bHkuIFVsdGltYXRlbHkgQkJMIHNob3VsZCB1c2Ug
-YW4gU1BJIGRyaXZlciB0bw0KPiBsb2FkIHRoZSBrZXJuZWwgaW1hZ2UgaG93ZXZlciB0aGlzIG1l
-Y2hhbmlzbSBzdXBwb3J0cyB1c2UgY2FzZXMNCj4gc3VjaCBzdWNoIGFzIFFFTVUncyAtYmlvcywg
-LWtlcm5lbCBhbmQgLWluaXRyZCBvcHRpb25zIGZvbGxvd2luZw0KPiBleGFtcGxlcyBmcm9tIG90
-aGVyIHBsYXRmb3JtcyB0aGF0IHBhc3Mga2VybmVsIGVudHJ5IHRvIGZpcm13YXJlDQo+IHZpYSBk
-ZXZpY2UtdHJlZS4NCj4gDQo+IFNpZ25lZC1vZmYtYnk6IE1pY2hhZWwgQ2xhcmsgPG1qY0BzaWZp
-dmUuY29tPg0KPiBTaWduZWQtb2ZmLWJ5OiBTdGVmYW4gTydSZWFyIDxzb3JlYXIyQGdtYWlsLmNv
-bT4NCj4gLS0tDQo+ICBody9yaXNjdi9ib290LmMgfCA3OA0KPiArKysrKysrKysrKysrKysrKysr
-KysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrLS0tLS0NCj4gIDEgZmlsZSBjaGFuZ2Vk
-LCA3MiBpbnNlcnRpb25zKCspLCA2IGRlbGV0aW9ucygtKQ0KPiANCj4gZGlmZiAtLWdpdCBhL2h3
-L3Jpc2N2L2Jvb3QuYyBiL2h3L3Jpc2N2L2Jvb3QuYw0KPiBpbmRleCBlNTFlN2Y5Li40M2YzMjhk
-IDEwMDY0NA0KPiAtLS0gYS9ody9yaXNjdi9ib290LmMNCj4gKysrIGIvaHcvcmlzY3YvYm9vdC5j
-DQo+IEBAIC0zMiwxNiArMzIsNzAgQEANCj4gICAgICAgICAgZnByaW50ZihzdGRlcnIsICJib290
-OiAlczogImZzLCBfX2Z1bmNfXywgIyNfX1ZBX0FSR1NfXyk7IFwNCj4gICAgICB9DQo+ICANCj4g
-LXN0YXRpYyB1aW50NjRfdCBsb2FkX2tlcm5lbChjb25zdCBjaGFyICprZXJuZWxfZmlsZW5hbWUp
-DQo+ICtzdGF0aWMgdWludDY0X3Qga2VybmVsX29mZnNldDsNCj4gKw0KPiArc3RhdGljIHVpbnQ2
-NF90IGtlcm5lbF90cmFuc2xhdGUodm9pZCAqb3BhcXVlLCB1aW50NjRfdCBhZGRyKQ0KPiAgew0K
-PiAtICAgIHVpbnQ2NF90IGtlcm5lbF9lbnRyeSwga2VybmVsX2hpZ2g7DQo+ICsgICAgLyogbWFz
-ayBrZXJuZWwgdmlydHVhbCBhZGRyZXNzIGFuZCBvZmZzZXQgYnkgbG9hZCBhZGRyZXNzICovDQo+
-ICsgICAgaWYgKGtlcm5lbF9vZmZzZXQpIHsNCj4gKyAgICAgICAgcmV0dXJuIChhZGRyICYgMHg3
-ZmZmZmZmZikgKyBrZXJuZWxfb2Zmc2V0Ow0KPiArICAgIH0gZWxzZSB7DQo+ICsgICAgICAgIHJl
-dHVybiBhZGRyOw0KPiArICAgIH0NCj4gK30NCj4gIA0KPiAtICAgIGlmIChsb2FkX2VsZihrZXJu
-ZWxfZmlsZW5hbWUsIE5VTEwsIE5VTEwsDQo+IC0gICAgICAgICAgICAgICAgICZrZXJuZWxfZW50
-cnksIE5VTEwsICZrZXJuZWxfaGlnaCwNCj4gK3N0YXRpYyBod2FkZHIgcmlzY3ZfbG9hZF9maXJt
-d2FyZShjb25zdCBjaGFyICpmaWxlbmFtZSkNCj4gK3sNCj4gKyAgICB1aW50NjRfdCBmaXJtd2Fy
-ZV9lbnRyeSwgZmlybXdhcmVfc3RhcnQsIGZpcm13YXJlX2VuZDsNCj4gKw0KPiArICAgIGlmIChs
-b2FkX2VsZihmaWxlbmFtZSwgTlVMTCwgTlVMTCwNCj4gKyAgICAgICAgICAgICAgICAgJmZpcm13
-YXJlX2VudHJ5LCAmZmlybXdhcmVfc3RhcnQsICZmaXJtd2FyZV9lbmQsDQo+ICAgICAgICAgICAg
-ICAgICAgIDAsIEVNX1JJU0NWLCAxLCAwKSA8IDApIHsNCj4gLSAgICAgICAgZXJyb3JfcmVwb3J0
-KCJjb3VsZCBub3QgbG9hZCBrZXJuZWwgJyVzJyIsIGtlcm5lbF9maWxlbmFtZSk7DQo+ICsgICAg
-ICAgIGVycm9yX3JlcG9ydCgiY291bGQgbm90IGxvYWQgZmlybXdhcmUgJyVzJyIsIGZpbGVuYW1l
-KTsNCj4gICAgICAgICAgZXhpdCgxKTsNCj4gICAgICB9DQo+ICsNCj4gKyAgICAvKiBhbGlnbiBr
-ZXJuZWwgbG9hZCBhZGRyZXNzIHRvIHRoZSBtZWdhcGFnZSBhZnRlciB0aGUgZmlybXdhcmUNCj4g
-Ki8NCj4gKyNpZiBkZWZpbmVkKFRBUkdFVF9SSVNDVjMyKQ0KPiArICAgIGtlcm5lbF9vZmZzZXQg
-PSAoZmlybXdhcmVfZW5kICsgMHgzZmZmZmYpICYgfjB4M2ZmZmZmOw0KPiArI2Vsc2UNCj4gKyAg
-ICBrZXJuZWxfb2Zmc2V0ID0gKGZpcm13YXJlX2VuZCArIDB4MWZmZmZmKSAmIH4weDFmZmZmZjsN
-Cj4gKyNlbmRpZg0KPiArDQo+ICsgICAgYm9vdF9kZWJ1ZygiZW50cnk9MHgiIFRBUkdFVF9GTVRf
-cGx4ICIgc3RhcnQ9MHgiIFRBUkdFVF9GTVRfcGx4DQo+ICIgIg0KPiArICAgICAgICAgICAgICAg
-ImVuZD0weCIgVEFSR0VUX0ZNVF9wbHggIiBrZXJuZWxfb2Zmc2V0PTB4Ig0KPiBUQVJHRVRfRk1U
-X3BseCAiXG4iLA0KPiArICAgICAgICAgICAgICAgZmlybXdhcmVfZW50cnksIGZpcm13YXJlX3N0
-YXJ0LCBmaXJtd2FyZV9lbmQsDQo+IGtlcm5lbF9vZmZzZXQpOw0KPiArDQo+ICsgICAgcmV0dXJu
-IGZpcm13YXJlX2VudHJ5Ow0KPiArfQ0KPiArDQo+ICtzdGF0aWMgaHdhZGRyIHJpc2N2X2xvYWRf
-a2VybmVsKGNvbnN0IGNoYXIgKmZpbGVuYW1lLCB2b2lkICpmZHQpDQo+ICt7DQo+ICsgICAgdWlu
-dDY0X3Qga2VybmVsX2VudHJ5LCBrZXJuZWxfc3RhcnQsIGtlcm5lbF9lbmQ7DQo+ICsNCj4gKyAg
-ICBpZiAobG9hZF9lbGYoZmlsZW5hbWUsIGtlcm5lbF90cmFuc2xhdGUsIE5VTEwsDQo+ICsgICAg
-ICAgICAgICAgICAgICZrZXJuZWxfZW50cnksICZrZXJuZWxfc3RhcnQsICZrZXJuZWxfZW5kLA0K
-PiArICAgICAgICAgICAgICAgICAwLCBFTV9SSVNDViwgMSwgMCkgPCAwKSB7DQo+ICsgICAgICAg
-IGVycm9yX3JlcG9ydCgiY291bGQgbm90IGxvYWQga2VybmVsICclcyciLCBmaWxlbmFtZSk7DQo+
-ICsgICAgICAgIGV4aXQoMSk7DQo+ICsgICAgfQ0KPiArDQo+ICsgICAgYm9vdF9kZWJ1ZygiZW50
-cnk9MHgiIFRBUkdFVF9GTVRfcGx4ICIgc3RhcnQ9MHgiIFRBUkdFVF9GTVRfcGx4DQo+ICIgIg0K
-PiArICAgICAgICAgICAgICAgImVuZD0weCIgVEFSR0VUX0ZNVF9wbHggIlxuIiwga2VybmVsX2Vu
-dHJ5LA0KPiBrZXJuZWxfc3RhcnQsDQo+ICsgICAgICAgICAgICAgICBrZXJuZWxfZW5kKTsNCj4g
-Kw0KPiArICAgIC8qDQo+ICsgICAgICogcGFzcyBrZXJuZWwgbG9hZCBhZGRyZXNzIHZpYSBkZXZp
-Y2UtdHJlZSB0byBmaXJtd2FyZQ0KPiArICAgICAqDQo+ICsgICAgICogQkJMIHJlYWRzIHRoZSBr
-ZXJuZWwgYWRkcmVzcyBmcm9tIGRldmljZS10cmVlDQo+ICsgICAgICovDQoNCkkgZG9uJ3QgdGhp
-bmsgd2Ugc2hvdWxkIGhhdmUgYmJsIHNwZWNpZmljIGNvZGUgaW4gUUVNVS4gYmJsIGlzIG5vdCBh
-DQpsb25nIHRlcm0gc29sdXRpb24gc28gaXQgc2VlbXMgbGlrZSBhIGJhZCBpZGVhIHRvIGhhbmRs
-ZSBpdCBmb3JldmVyIGluDQpRRU1VLg0KDQpEbyB5b3UgbWluZCBmaXhpbmcgdGhlIGNvbW1lbnRz
-IEkgbWFkZSB0byBwYXRjaCAxIGFuZCAyIGFuZCB0aGVuDQpzZW5kaW5nIHRoZSBzZXJpZXMgdG8g
-dGhlIFFFTVUgbWFpbGluZyBsaXN0Pw0KDQpJZiB5b3Ugd291bGQgc3RpbGwgbGlrZSB0aGlzIHBh
-dGNoIHRoZW4geW91IGNhbiBrZWVwIGl0IGluIGFuZCB3ZSBjYW4NCmhhdmUgdGhlIGRpc2N1c3Np
-b24gb24gdGhlIGxpc3QgYWJvdXQgaXQncyBtZXJyaXRzLg0KDQpUaGFua3MgZm9yIHRoZSBzZXJp
-ZXMsIHRoZSB0aGlzIGlzIHZlcnkgaGVscGZ1bCB0byBRRU1VIGFuZCBSSVNDLVYNCnN1cHBvcnQh
-DQoNCkFsaXN0YWlyDQoNCj4gKyAgICBpZiAoZmR0KSB7DQo+ICsgICAgICAgIHFlbXVfZmR0X3Nl
-dHByb3BfY2VsbHMoZmR0LCAiL2Nob3NlbiIsICJyaXNjdixrZXJuZWwtZW5kIiwNCj4gKyAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICBrZXJuZWxfZW5kID4+IDMyLCBrZXJuZWxfZW5kKTsN
-Cj4gKyAgICAgICAgcWVtdV9mZHRfc2V0cHJvcF9jZWxscyhmZHQsICIvY2hvc2VuIiwgInJpc2N2
-LGtlcm5lbC1zdGFydCIsDQo+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAga2VybmVs
-X3N0YXJ0ID4+IDMyLCBrZXJuZWxfc3RhcnQpOw0KPiArICAgIH0NCj4gKw0KPiAgICAgIHJldHVy
-biBrZXJuZWxfZW50cnk7DQo+ICB9DQo+ICANCj4gQEAgLTkxLDggKzE0NSwyMCBAQCBod2FkZHIN
-Cj4gcmlzY3ZfbG9hZF9maXJtd2FyZV9rZXJuZWxfaW5pdHJkKE1hY2hpbmVTdGF0ZSAqbWFjaGlu
-ZSwgdm9pZCAqZmR0KQ0KPiAgew0KPiAgICAgIGh3YWRkciBmaXJtd2FyZV9lbnRyeSA9IDA7DQo+
-ICANCj4gKyAgICAvKiBsb2FkIGZpcm13YXJlIGUuZy4gLWJpb3MgYmJsICovDQo+ICsgICAgaWYg
-KG1hY2hpbmUtPmZpcm13YXJlKSB7DQo+ICsgICAgICAgIGZpcm13YXJlX2VudHJ5ID0gcmlzY3Zf
-bG9hZF9maXJtd2FyZShtYWNoaW5lLT5maXJtd2FyZSk7DQo+ICsgICAgfQ0KPiArDQo+ICsgICAg
-LyogbG9hZCBjb21iaW5lZCBiYmwra2VybmVsIG9yIHNlcGFyYXRlIGtlcm5lbCAqLw0KPiAgICAg
-IGlmIChtYWNoaW5lLT5rZXJuZWxfZmlsZW5hbWUpIHsNCj4gLSAgICAgICAgZmlybXdhcmVfZW50
-cnkgPSBsb2FkX2tlcm5lbChtYWNoaW5lLT5rZXJuZWxfZmlsZW5hbWUpOw0KPiArICAgICAgICBp
-ZiAobWFjaGluZS0+ZmlybXdhcmUpIHsNCj4gKyAgICAgICAgICAgIC8qIGxvYWQgc2VwYXJhdGUg
-YmlvcyBhbmQga2VybmVsIGUuZy4gLWJpb3MgYmJsIC1rZXJuZWwNCj4gdm1saW51eCAqLw0KPiAr
-ICAgICAgICAgICAgcmlzY3ZfbG9hZF9rZXJuZWwobWFjaGluZS0+a2VybmVsX2ZpbGVuYW1lLCBm
-ZHQpOw0KPiArICAgICAgICB9IGVsc2Ugew0KPiArICAgICAgICAgICAgLyogbG9hZCB0cmFkaXRp
-b25hbCBjb21iaW5lZCBiYmwra2VybmVsIGUuZy4gLWtlcm5lbA0KPiBiYmxfdm1saW11eCAqLw0K
-PiArICAgICAgICAgICAgZmlybXdhcmVfZW50cnkgPSByaXNjdl9sb2FkX2tlcm5lbChtYWNoaW5l
-LQ0KPiA+a2VybmVsX2ZpbGVuYW1lLCBOVUxMKTsNCj4gKyAgICAgICAgfQ0KPiAgICAgICAgICBp
-ZiAobWFjaGluZS0+aW5pdHJkX2ZpbGVuYW1lKSB7DQo+ICAgICAgICAgICAgICAvKiBsb2FkIHNl
-cGFyYXRlIGluaXRyZCAqLw0KPiAgICAgICAgICAgICAgcmlzY3ZfbG9hZF9pbml0cmQobWFjaGlu
-ZS0+aW5pdHJkX2ZpbGVuYW1lLCBtYWNoaW5lLQ0KPiA+cmFtX3NpemUsDQo=
+This patch set adds RISC-V backend support to QEMU. This is based on
+Michael Clark's original work with extra work on top.
+
+This has been somewhat tested and can run other architecture softmmu
+code. It seems that any complex OS will eventually hang, but we can
+run the BIOS and OS startup code for a number of different operating
+systems.
+
+I haven't tested linux user support at all yet. I think Michael had that
+working reliably though and hopefully my changes haven't broken it.
+
+There are still some todos in the code (there are missing instructions
+and byte swapping) but these should assert instead of generating invalid
+code.
+
+This branch can be found here:
+https://github.com/alistair23/qemu/tree/mainline/alistair/tcg-backend-upstr=
+eam.next
+
+v2:
+ - define TCG_TARGET_HAS_MEMORY_BSWAP
+ - Fix new TCG MAINTAINERS entry
+ - Rebase ontop of Richard's patch_reloc() changes
+v1:
+ - Fix long jump with slowpath load/stores
+RFC v3:
+ - Update the MAINTAINERS file
+ - Enusre that RISC-V 32-bit works
+ - More changes based on Richard's feedback and contributions
+RFC v2:
+ - A large number of changes based on Richard's feedback
+
+Alistair Francis (23):
+  elf.h: Add the RISCV ELF magic numbers
+  linux-user: Add host dependency for RISC-V 32-bit
+  linux-user: Add host dependency for RISC-V 64-bit
+  exec: Add RISC-V GCC poison macro
+  riscv: Add the tcg-target header file
+  riscv: Add the tcg target registers
+  riscv: tcg-target: Add support for the constraints
+  riscv: tcg-target: Add the immediate encoders
+  riscv: tcg-target: Add the instruction emitters
+  riscv: tcg-target: Add the relocation functions
+  riscv: tcg-target: Add the mov and movi instruction
+  riscv: tcg-target: Add the extract instructions
+  riscv: tcg-target: Add the out load and store instructions
+  riscv: tcg-target: Add the add2 and sub2 instructions
+  riscv: tcg-target: Add branch and jump instructions
+  riscv: tcg-target: Add slowpath load and store instructions
+  riscv: tcg-target: Add direct load and store instructions
+  riscv: tcg-target: Add the out op decoder
+  riscv: tcg-target: Add the prologue generation and register the JIT
+  riscv: tcg-target: Add the target init code
+  tcg: Add RISC-V cpu signal handler
+  dias: Add RISC-V support
+  configure: Add support for building RISC-V host
+
+ MAINTAINERS                       |   12 +-
+ accel/tcg/user-exec.c             |   75 ++
+ configure                         |   12 +-
+ disas.c                           |   10 +-
+ include/elf.h                     |   55 +
+ include/exec/poison.h             |    1 +
+ linux-user/host/riscv32/hostdep.h |   11 +
+ linux-user/host/riscv64/hostdep.h |   11 +
+ tcg/riscv/tcg-target.h            |  177 +++
+ tcg/riscv/tcg-target.inc.c        | 1946 +++++++++++++++++++++++++++++
+ 10 files changed, 2305 insertions(+), 5 deletions(-)
+ create mode 100644 linux-user/host/riscv32/hostdep.h
+ create mode 100644 linux-user/host/riscv64/hostdep.h
+ create mode 100644 tcg/riscv/tcg-target.h
+ create mode 100644 tcg/riscv/tcg-target.inc.c
+
+--=20
+2.19.1
+
 
