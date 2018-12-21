@@ -1,66 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gaNHU-0001jf-2w
-	for mharc-qemu-riscv@gnu.org; Fri, 21 Dec 2018 11:04:09 -0500
-Received: from eggs.gnu.org ([2001:4830:134:3::10]:53084)
+	id 1gaNHW-0001lS-H1
+	for mharc-qemu-riscv@gnu.org; Fri, 21 Dec 2018 11:04:10 -0500
+Received: from eggs.gnu.org ([2001:4830:134:3::10]:53073)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1gaNHP-0001gd-Kj
+	(envelope-from <palmer@sifive.com>) id 1gaNHP-0001gN-Eo
 	for qemu-riscv@nongnu.org; Fri, 21 Dec 2018 11:04:04 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1gaNHO-0004G3-9L
+	(envelope-from <palmer@sifive.com>) id 1gaNHO-0004Fr-45
 	for qemu-riscv@nongnu.org; Fri, 21 Dec 2018 11:04:03 -0500
-Received: from mail-qk1-x72b.google.com ([2607:f8b0:4864:20::72b]:44989)
+Received: from mail-qt1-x835.google.com ([2607:f8b0:4864:20::835]:41502)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1gaNHN-00047H-Ps
+	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1gaNHN-00049Q-MN
 	for qemu-riscv@nongnu.org; Fri, 21 Dec 2018 11:04:01 -0500
-Received: by mail-qk1-x72b.google.com with SMTP id n12so3336737qkh.11
-	for <qemu-riscv@nongnu.org>; Fri, 21 Dec 2018 08:03:46 -0800 (PST)
+Received: by mail-qt1-x835.google.com with SMTP id l12so6164233qtf.8
+	for <qemu-riscv@nongnu.org>; Fri, 21 Dec 2018 08:03:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
 	h=subject:date:message-id:in-reply-to:references:cc:from:to;
-	bh=6p7JyG3RH0lXqirJxx0bPeJBobxdYh1L5CqZ7x4vX6o=;
-	b=i5VRlBJXxsxNZX8ofxaIH9l0PPfVsIyemjtcRHurEggdU1upO3T75vMEMMQaS3aq57
-	P+u/PEaBJu6uYxklxO7snsysI3RvHBNULRMHWp7sA/HwqIIaWcyRNFx0QuAf+ZjloY3r
-	BHpyAuqFtYxu4dIDzK5wtBAAXDke+y1Dlz1YmsDDkoj3dg1iD45zCwWJRGBMV+NNkyiY
-	nkBnk3twCBY7Qq37LjwOc9XW/JaLQP9ysY1C98FDIdSDWYUuWDjkiREv20vwgaqwDWdO
-	m2u5hBuWUZbn8Ai9tpmEHYif87CoIZlJGOB2fpllx2Z1co4o4lab1TrE0Z/GWMOfE+ya
-	9Phg==
+	bh=B2OUXWtoyq20lymvhtwIjTpztHbwOwadgrVPRgraXAk=;
+	b=lG34oRwqV27QZVQFS62nVbGlLN0ilrNf5huiEmhG5MFwjXZ4q+ynDPZgsYtGhiX1u/
+	fuMuQ8kwZ4TkMv3NKJkgE+5nT2l+F4Xb3ZQ8SUQKFrroa3djwThYUhAHvgaRErWlwIFX
+	B7tGHI4x6uVnXz+E3PKngWE797KFfzH9pt4xSR8GfGegOTtmc0mmAxjHl0BqhAzdqs9H
+	n7Cv9iWj8sUgit03F2Z0I58WL7JMVCUtO6PmSDbRRmEWIuigyKojgQ2RaEssi7F+eTGY
+	s7cZXioaCNTLHd+Lutmc+2/FBr8qp327r7tS3lk8XxjMXBezWqgNgvnfMap6Vmys8Y1C
+	5lNg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:subject:date:message-id:in-reply-to:references
 	:cc:from:to;
-	bh=6p7JyG3RH0lXqirJxx0bPeJBobxdYh1L5CqZ7x4vX6o=;
-	b=nek7EyxN96Uu7lVZH4anLvwj/IAAsUCBEQBJPjsHPgF7XeSWiTMyzIjltco6eCC3x2
-	x1rmi18szLGTVyuG87MoVTg6t0pAlATCnP+ufeKREA1fDd+DXK4Euf42zl2jcYgU/9R7
-	Bu0LM93JAq9u4Ni1P92ELPmq5LpdY0iFEF19cAAcXkQ3sFEr47uXRJVB4y2OOFz4Agt1
-	H4a/koEvjM3q7TZJw2CPrLVQeiVTottzQCyD6feYVQjNJgh86IejN6/d4KUzgmZdy6fR
-	1f1t/kzqWcndoT8NaMGcl5N+teYIGI5Ll8qDpBYcpi8+1hT2Ta+L7hsl2AQgxZE+NlQD
-	qQqw==
-X-Gm-Message-State: AJcUukd/9QAMTf2JQfBEZpxt5CcCIOINVJC9A/Bk+5a/T42UcVtQ8hHW
-	GxsRSw0Oq6Rney5bi43V0eLlpQ==
-X-Google-Smtp-Source: ALg8bN5E6/wcHqKSJTWLLgX85358q0sOVtwP/4yG41Zp/vwnghwX/2+D4xGm2LFBUtO55W8yA4UtOg==
-X-Received: by 2002:a37:96c2:: with SMTP id y185mr2692248qkd.239.1545408225952;
-	Fri, 21 Dec 2018 08:03:45 -0800 (PST)
+	bh=B2OUXWtoyq20lymvhtwIjTpztHbwOwadgrVPRgraXAk=;
+	b=K7fnAExaIpn4WU//YGyG4BSPNqdyknOBztcNDdhr1Hi7yQmjTfUecbXrGEqpuy2tg2
+	0Zmk+kw+XuMhheLb72BOIlKtHkuRmk8Fr+8ckl7OpVYnmZo1PdeR5FSeQlPg+zG/f821
+	bF957pNHySinXpRyHPbjh6ixA9MRIW9NYgdfH0/8bsFewmaQCd1pY+ZBIlRUxkBEAKu9
+	6M5qd16GVYA916Mhq4K20cubJwOSMtcxp2Q7KSNcz8w6nOgitTbHtEdMAy6IAVGtf6Zg
+	gdX6+2tXQ9bBfhDm1ASci5v1C0QE9zFYzljuQsbrcxic9KC5DY5sXL82uMhaondB2qHX
+	DA1Q==
+X-Gm-Message-State: AJcUuke5v28N9gnCwNnlZLcGtQ/YwvDFv9FOVaOV1oNEEkgr7MsN7a3x
+	2pc8eIsiIbzMR+d3ttcCG5S9Aw==
+X-Google-Smtp-Source: ALg8bN5Q3O/fiRe0kBnCr/To/hMFbh2JU1tZ1C5ERE/+Je9/ikmlJCtiGrgrocWiVMNgd1H+ulgP6A==
+X-Received: by 2002:ac8:1185:: with SMTP id d5mr2998294qtj.117.1545408231238; 
+	Fri, 21 Dec 2018 08:03:51 -0800 (PST)
 Received: from localhost ([2601:182:c980:96c:8dd:4488:90b1:59d1])
-	by smtp.gmail.com with ESMTPSA id n3sm6635062qtc.81.2018.12.21.08.03.44
+	by smtp.gmail.com with ESMTPSA id 83sm7520617qkz.73.2018.12.21.08.03.50
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 21 Dec 2018 08:03:45 -0800 (PST)
-Date: Fri, 21 Dec 2018 08:03:00 -0800
-Message-Id: <20181221160307.14819-8-palmer@sifive.com>
+	Fri, 21 Dec 2018 08:03:50 -0800 (PST)
+Date: Fri, 21 Dec 2018 08:03:03 -0800
+Message-Id: <20181221160307.14819-11-palmer@sifive.com>
 X-Mailer: git-send-email 2.18.1
 In-Reply-To: <20181221160307.14819-1-palmer@sifive.com>
 References: <20181221160307.14819-1-palmer@sifive.com>
 Cc: qemu-devel@nongnu.org, Michael Clark <mjc@sifive.com>,
-	Sagar Karandikar <sagark@eecs.berkeley.edu>,
-	Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
 	Palmer Dabbelt <palmer@sifive.com>,
+	Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+	Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
 	Alistair Francis <Alistair.Francis@wdc.com>, 
 	Alistair Francis <alistair.francis@wdc.com>
 From: Palmer Dabbelt <palmer@sifive.com>
 To: qemu-riscv@nongnu.org
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::72b
-Subject: [Qemu-riscv] [PULL 07/14] RISC-V: Add hartid and \n to interrupt
- logging
+X-Received-From: 2607:f8b0:4864:20::835
+Subject: [Qemu-riscv] [PULL 10/14] RISC-V: Enable second UART on sifive_e
+ and sifive_u
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -76,66 +76,56 @@ X-List-Received-Date: Fri, 21 Dec 2018 16:04:04 -0000
 
 From: Michael Clark <mjc@sifive.com>
 
-Add carriage return that was erroneously removed
-when converting to qemu_log. Change hard coded
-core number to the actual hartid.
+Previously the second UARTs on the sifive_e and sifive_u machines
+where disabled due to check-qtest-riscv32 and check-qtest-riscv64
+failures. Recent changes in the QEMU core serial code have
+resolved these failures so the second UARTs can be instantiated.
 
+Cc: Palmer Dabbelt <palmer@sifive.com>
 Cc: Sagar Karandikar <sagark@eecs.berkeley.edu>
 Cc: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-Cc: Palmer Dabbelt <palmer@sifive.com>
 Cc: Alistair Francis <Alistair.Francis@wdc.com>
 Signed-off-by: Michael Clark <mjc@sifive.com>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
 ---
- target/riscv/cpu_helper.c | 18 ++++++++++--------
- 1 file changed, 10 insertions(+), 8 deletions(-)
+ hw/riscv/sifive_e.c | 5 ++---
+ hw/riscv/sifive_u.c | 5 ++---
+ 2 files changed, 4 insertions(+), 6 deletions(-)
 
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 86f9f4730c88..0234c2d52886 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -445,11 +445,13 @@ void riscv_cpu_do_interrupt(CPUState *cs)
-     if (RISCV_DEBUG_INTERRUPT) {
-         int log_cause = cs->exception_index & RISCV_EXCP_INT_MASK;
-         if (cs->exception_index & RISCV_EXCP_INT_FLAG) {
--            qemu_log_mask(LOG_TRACE, "core   0: trap %s, epc 0x" TARGET_FMT_lx,
--                riscv_intr_names[log_cause], env->pc);
-+            qemu_log_mask(LOG_TRACE, "core "
-+                TARGET_FMT_ld ": trap %s, epc 0x" TARGET_FMT_lx "\n",
-+                env->mhartid, riscv_intr_names[log_cause], env->pc);
-         } else {
--            qemu_log_mask(LOG_TRACE, "core   0: intr %s, epc 0x" TARGET_FMT_lx,
--                riscv_excp_names[log_cause], env->pc);
-+            qemu_log_mask(LOG_TRACE, "core "
-+                TARGET_FMT_ld ": intr %s, epc 0x" TARGET_FMT_lx "\n",
-+                env->mhartid, riscv_excp_names[log_cause], env->pc);
-         }
-     }
- 
-@@ -511,8 +513,8 @@ void riscv_cpu_do_interrupt(CPUState *cs)
- 
-         if (hasbadaddr) {
-             if (RISCV_DEBUG_INTERRUPT) {
--                qemu_log_mask(LOG_TRACE, "core " TARGET_FMT_ld
--                    ": badaddr 0x" TARGET_FMT_lx, env->mhartid, env->badaddr);
-+                qemu_log_mask(LOG_TRACE, "core " TARGET_FMT_ld ": badaddr 0x"
-+                    TARGET_FMT_lx "\n", env->mhartid, env->badaddr);
-             }
-             env->sbadaddr = env->badaddr;
-         } else {
-@@ -536,8 +538,8 @@ void riscv_cpu_do_interrupt(CPUState *cs)
- 
-         if (hasbadaddr) {
-             if (RISCV_DEBUG_INTERRUPT) {
--                qemu_log_mask(LOG_TRACE, "core " TARGET_FMT_ld
--                    ": badaddr 0x" TARGET_FMT_lx, env->mhartid, env->badaddr);
-+                qemu_log_mask(LOG_TRACE, "core " TARGET_FMT_ld ": badaddr 0x"
-+                    TARGET_FMT_lx "\n", env->mhartid, env->badaddr);
-             }
-             env->mbadaddr = env->badaddr;
-         } else {
+diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
+index cb513cc3bb50..5d9d65ff29ab 100644
+--- a/hw/riscv/sifive_e.c
++++ b/hw/riscv/sifive_e.c
+@@ -192,9 +192,8 @@ static void riscv_sifive_e_soc_realize(DeviceState *dev, Error **errp)
+         memmap[SIFIVE_E_QSPI0].base, memmap[SIFIVE_E_QSPI0].size);
+     sifive_mmio_emulate(sys_mem, "riscv.sifive.e.pwm0",
+         memmap[SIFIVE_E_PWM0].base, memmap[SIFIVE_E_PWM0].size);
+-    /* sifive_uart_create(sys_mem, memmap[SIFIVE_E_UART1].base,
+-        serial_hd(1), qdev_get_gpio_in(DEVICE(s->plic),
+-                                       SIFIVE_E_UART1_IRQ)); */
++    sifive_uart_create(sys_mem, memmap[SIFIVE_E_UART1].base,
++        serial_hd(1), qdev_get_gpio_in(DEVICE(s->plic), SIFIVE_E_UART1_IRQ));
+     sifive_mmio_emulate(sys_mem, "riscv.sifive.e.qspi1",
+         memmap[SIFIVE_E_QSPI1].base, memmap[SIFIVE_E_QSPI1].size);
+     sifive_mmio_emulate(sys_mem, "riscv.sifive.e.pwm1",
+diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+index 849fa2e6311a..3bd3b67507f8 100644
+--- a/hw/riscv/sifive_u.c
++++ b/hw/riscv/sifive_u.c
+@@ -368,9 +368,8 @@ static void riscv_sifive_u_soc_realize(DeviceState *dev, Error **errp)
+         memmap[SIFIVE_U_PLIC].size);
+     sifive_uart_create(system_memory, memmap[SIFIVE_U_UART0].base,
+         serial_hd(0), qdev_get_gpio_in(DEVICE(s->plic), SIFIVE_U_UART0_IRQ));
+-    /* sifive_uart_create(system_memory, memmap[SIFIVE_U_UART1].base,
+-        serial_hd(1), qdev_get_gpio_in(DEVICE(s->plic),
+-                                       SIFIVE_U_UART1_IRQ)); */
++    sifive_uart_create(system_memory, memmap[SIFIVE_U_UART1].base,
++        serial_hd(1), qdev_get_gpio_in(DEVICE(s->plic), SIFIVE_U_UART1_IRQ));
+     sifive_clint_create(memmap[SIFIVE_U_CLINT].base,
+         memmap[SIFIVE_U_CLINT].size, smp_cpus,
+         SIFIVE_SIP_BASE, SIFIVE_TIMECMP_BASE, SIFIVE_TIME_BASE);
 -- 
 2.18.1
 
