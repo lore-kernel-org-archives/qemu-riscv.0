@@ -1,51 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gaNH0-0001HV-Eh
-	for mharc-qemu-riscv@gnu.org; Fri, 21 Dec 2018 11:03:38 -0500
-Received: from eggs.gnu.org ([2001:4830:134:3::10]:52720)
+	id 1gaNH1-0001IV-Mx
+	for mharc-qemu-riscv@gnu.org; Fri, 21 Dec 2018 11:03:39 -0500
+Received: from eggs.gnu.org ([2001:4830:134:3::10]:52739)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1gaNGy-0001Fp-B7
-	for qemu-riscv@nongnu.org; Fri, 21 Dec 2018 11:03:36 -0500
+	(envelope-from <palmer@sifive.com>) id 1gaNGz-0001H9-Nu
+	for qemu-riscv@nongnu.org; Fri, 21 Dec 2018 11:03:38 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1gaNGx-0003zC-JS
-	for qemu-riscv@nongnu.org; Fri, 21 Dec 2018 11:03:36 -0500
-Received: from mail-qt1-x835.google.com ([2607:f8b0:4864:20::835]:40304)
+	(envelope-from <palmer@sifive.com>) id 1gaNGy-000418-UD
+	for qemu-riscv@nongnu.org; Fri, 21 Dec 2018 11:03:37 -0500
+Received: from mail-qt1-x82a.google.com ([2607:f8b0:4864:20::82a]:41490)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1gaNGx-0003yp-Eh
-	for qemu-riscv@nongnu.org; Fri, 21 Dec 2018 11:03:35 -0500
-Received: by mail-qt1-x835.google.com with SMTP id k12so6182078qtf.7
-	for <qemu-riscv@nongnu.org>; Fri, 21 Dec 2018 08:03:35 -0800 (PST)
+	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1gaNGy-0003zu-Oj
+	for qemu-riscv@nongnu.org; Fri, 21 Dec 2018 11:03:36 -0500
+Received: by mail-qt1-x82a.google.com with SMTP id l12so6163111qtf.8
+	for <qemu-riscv@nongnu.org>; Fri, 21 Dec 2018 08:03:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
 	h=subject:date:message-id:in-reply-to:references:cc:from:to;
-	bh=4TYxjnhCTB+5Qwi+14/0f8x5REAO9A6o+3y6lon1DYk=;
-	b=hyI/xfwQXozU2u0A+Aw3RT3HE7veanQJmXPFiHJLS4nyY4nVcNOwIxUCW1jktHz6Y9
-	aWHKx4RIUUiXJU2ZBAwDNGx3KmjkfiKhxcQRitEOm3X4TXlb5UZQqq0tlfgEOBOtlfHi
-	G2mehWX4kDknZSP//HuQkXLoMOBJxavcFC01C3WaSE9SqGp5/zaa230fNNi5k+nOthUH
-	ceg76sHAdnQ158f/Yy1AmEt0L3BD/3HATdFTevL3BDRG5KZnYbK2+2nA7WSattKiQU++
-	Me/V70Er4SPLZUi/wJIeG4ucUFXSVwQikMuX+uH8eAFwJkp3MdJL2QZNqIK4Kt0daiVi
-	StvQ==
+	bh=RQpnr+T97+tng7kZjR3X+orZ553r6cnvrdttQSiSflU=;
+	b=g+CtIovDslBhu8oe4Brbc+4OqMV7upbNlULerLsouCEDTVZ7nJcGDTzHwAhYfGeIIW
+	KNUtSewMbxyQkZ57xd+9DI6W5Uat9VqZpj2Or/eSP5rPuzjz/ZS0t38py1z1X/Fu9KMq
+	WVDj2aehxr1AcKMnKlozoMxUIlCcu4Ldca1QhZLE5IYWugIcvnSLDd8wJfNtV/obhNfV
+	4wjT17sfxj69sKfq3ElVpZq1LCYHNAOCqoP7BLl4E8u+l0qXjrpi7PzmbWt62ZZCr+4G
+	QgSYug/v5VAnqpf0q19wAd1DDlV/4B6mh4bxxCdUFcoZeIbM7IurcLfK9qUT5Ls2rGWO
+	ZmhQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:subject:date:message-id:in-reply-to:references
 	:cc:from:to;
-	bh=4TYxjnhCTB+5Qwi+14/0f8x5REAO9A6o+3y6lon1DYk=;
-	b=cEsrdWLVVoZsIpbgkS5k5nBSHnl/ju0m9m3tGY3YAF8W9lnsfMSWvfk0lFl8yotnuy
-	a8QyuEGsLemoCTAr2XjiwJLcROrRJ+g7RD5N68VXsvr3aupnHEReKlqsaYmDSXeyvL/G
-	sFJqSSgUnOgD7D9wmkB7QjxYFI/tEqgtWsYCz8lVXrqi78uwqwgQJhwLjeKbdxuwVvtk
-	/sq8ihakmyDwgJvLrVOJUKqvvoseuUU4uZN4Uhi+SE0Zt/NWdzm1Wc/ko5QVQn8uoLj1
-	yqmiFULjNZaVkrGzgz2TjF8EVzbvKoYuNUEVjvG5MaXavTMSWQoOjv1iW6i236rdg/zh
-	tIng==
-X-Gm-Message-State: AA+aEWaGBmG2rNsS65UOswjqJuefbGByylZ6Nbcz8QkmOG8lrxaDZRDF
-	oCBXNf3xhvzEJ9RR8ewuP3XUo9u0Rv4=
-X-Google-Smtp-Source: ALg8bN6XCNBy/aDFNVYsuEpawobRKRRAhjd16hEN6C2YwP9bctzpe/hn2Th7vrmTeU5lDmE+WejA0A==
-X-Received: by 2002:aed:2d86:: with SMTP id i6mr3013576qtd.227.1545408214657; 
-	Fri, 21 Dec 2018 08:03:34 -0800 (PST)
+	bh=RQpnr+T97+tng7kZjR3X+orZ553r6cnvrdttQSiSflU=;
+	b=a7Nn1hLyI67ORiXHtnODx+WfmGQz/zs3GJG6IFopsQKK9uMqABn9g7vibXPtO67bLh
+	oSqeXsc4Mkmq5LO4U0vLTgM8ydTFjLWt3g5O5y5T4F1IiuEKyy4K0EXWeCVXjuFU7hLI
+	vXzPX0e7EzWoLhrLY7j+HjkAhaUNOcM6meZBa6Hu4KdtbXc1excNlc9bJH5sq4hGnhyQ
+	Gh0pPuoHF9ubVojyDWX0j17XcR6JrZ6xMjr4aqe6U1TYratbBZWISxqrXftAy1A1WjLz
+	TI4fJ7r2ZWShD0edFeYQnaEGdfDVc0T+lI5SUkByby7O8GXFXQQWP8qpRKDqXRHoMcov
+	C/bA==
+X-Gm-Message-State: AJcUukfQR8m/2hKFTiyzQZlfSg5veUdxjaFfGwWHUNbn+w6TvLshXIpq
+	xedOx6gkViafT1aUuLrmbIjmzA==
+X-Google-Smtp-Source: ALg8bN79Y8p9/u9HelCjMbB83Y/6zBMHo4v+o4uQTya/ckx7QdQAjzJ4A2B9j/HfSc50GGvN/4r20Q==
+X-Received: by 2002:a0c:bb82:: with SMTP id i2mr2911319qvg.159.1545408216196; 
+	Fri, 21 Dec 2018 08:03:36 -0800 (PST)
 Received: from localhost ([2601:182:c980:96c:8dd:4488:90b1:59d1])
 	by smtp.gmail.com with ESMTPSA id
-	x49sm8043873qta.89.2018.12.21.08.03.33
+	t43sm7969787qtc.53.2018.12.21.08.03.35
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 21 Dec 2018 08:03:33 -0800 (PST)
-Date: Fri, 21 Dec 2018 08:02:54 -0800
-Message-Id: <20181221160307.14819-2-palmer@sifive.com>
+	Fri, 21 Dec 2018 08:03:35 -0800 (PST)
+Date: Fri, 21 Dec 2018 08:02:55 -0800
+Message-Id: <20181221160307.14819-3-palmer@sifive.com>
 X-Mailer: git-send-email 2.18.1
 In-Reply-To: <20181221160307.14819-1-palmer@sifive.com>
 References: <20181221160307.14819-1-palmer@sifive.com>
@@ -56,9 +56,9 @@ From: Palmer Dabbelt <palmer@sifive.com>
 To: qemu-riscv@nongnu.org
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::835
-Subject: [Qemu-riscv] [PULL 01/14] hw/riscv/virt: Increase the number of
- interrupts
+X-Received-From: 2607:f8b0:4864:20::82a
+Subject: [Qemu-riscv] [PULL 02/14] hw/riscv/virt: Adjust memory layout
+ spacing
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -70,33 +70,46 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Dec 2018 16:03:37 -0000
+X-List-Received-Date: Fri, 21 Dec 2018 16:03:38 -0000
 
 From: Alistair Francis <Alistair.Francis@wdc.com>
 
-Increase the number of interrupts to match the HiFive Unleashed board.
-
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Logan Gunthorpe <logang@deltatee.com>
 Tested-by: Guenter Roeck <linux@roeck-us.net>
 Tested-by: Andrea Bolognani <abologna@redhat.com>
 Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
 ---
- include/hw/riscv/virt.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ hw/riscv/virt.c | 16 ++++++++--------
+ 1 file changed, 8 insertions(+), 8 deletions(-)
 
-diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
-index 91163d6cbfe8..2b2e6dd4ea6b 100644
---- a/include/hw/riscv/virt.h
-+++ b/include/hw/riscv/virt.h
-@@ -45,7 +45,7 @@ enum {
-     UART0_IRQ = 10,
-     VIRTIO_IRQ = 1, /* 1 to 8 */
-     VIRTIO_COUNT = 8,
--    VIRTIO_NDEV = 10
-+    VIRTIO_NDEV = 0x35 /* Arbitrary maximum number of interrupts */
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index 2b38f890702c..6b6fa39aaa38 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -47,14 +47,14 @@ static const struct MemmapEntry {
+     hwaddr base;
+     hwaddr size;
+ } virt_memmap[] = {
+-    [VIRT_DEBUG] =    {        0x0,      0x100 },
+-    [VIRT_MROM] =     {     0x1000,    0x11000 },
+-    [VIRT_TEST] =     {   0x100000,     0x1000 },
+-    [VIRT_CLINT] =    {  0x2000000,    0x10000 },
+-    [VIRT_PLIC] =     {  0xc000000,  0x4000000 },
+-    [VIRT_UART0] =    { 0x10000000,      0x100 },
+-    [VIRT_VIRTIO] =   { 0x10001000,     0x1000 },
+-    [VIRT_DRAM] =     { 0x80000000,        0x0 },
++    [VIRT_DEBUG] =       {        0x0,         0x100 },
++    [VIRT_MROM] =        {     0x1000,       0x11000 },
++    [VIRT_TEST] =        {   0x100000,        0x1000 },
++    [VIRT_CLINT] =       {  0x2000000,       0x10000 },
++    [VIRT_PLIC] =        {  0xc000000,     0x4000000 },
++    [VIRT_UART0] =       { 0x10000000,         0x100 },
++    [VIRT_VIRTIO] =      { 0x10001000,        0x1000 },
++    [VIRT_DRAM] =        { 0x80000000,           0x0 },
  };
  
- enum {
+ static uint64_t load_kernel(const char *kernel_filename)
 -- 
 2.18.1
 
