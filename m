@@ -1,63 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gaNHY-0001nI-7d
+	id 1gaNHY-0001oQ-PJ
 	for mharc-qemu-riscv@gnu.org; Fri, 21 Dec 2018 11:04:12 -0500
-Received: from eggs.gnu.org ([2001:4830:134:3::10]:52999)
+Received: from eggs.gnu.org ([2001:4830:134:3::10]:53064)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1gaNHO-0001f1-HH
-	for qemu-riscv@nongnu.org; Fri, 21 Dec 2018 11:04:03 -0500
+	(envelope-from <palmer@sifive.com>) id 1gaNHP-0001gH-Co
+	for qemu-riscv@nongnu.org; Fri, 21 Dec 2018 11:04:06 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1gaNHN-0004Eg-Ed
-	for qemu-riscv@nongnu.org; Fri, 21 Dec 2018 11:04:02 -0500
-Received: from mail-qt1-x844.google.com ([2607:f8b0:4864:20::844]:41927)
+	(envelope-from <palmer@sifive.com>) id 1gaNHN-0004EY-CC
+	for qemu-riscv@nongnu.org; Fri, 21 Dec 2018 11:04:03 -0500
+Received: from mail-qk1-x732.google.com ([2607:f8b0:4864:20::732]:33998)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1gaNHN-0004Aw-4r
+	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1gaNHN-0004Bl-3A
 	for qemu-riscv@nongnu.org; Fri, 21 Dec 2018 11:04:01 -0500
-Received: by mail-qt1-x844.google.com with SMTP id l12so6164500qtf.8
-	for <qemu-riscv@nongnu.org>; Fri, 21 Dec 2018 08:03:55 -0800 (PST)
+Received: by mail-qk1-x732.google.com with SMTP id q8so3364394qke.1
+	for <qemu-riscv@nongnu.org>; Fri, 21 Dec 2018 08:03:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
 	h=subject:date:message-id:in-reply-to:references:cc:from:to;
-	bh=pGdFvWxsyK+082c4RANqehx4XfGix5v1XjwMetfsyZg=;
-	b=BFLxT6q9KDFCMRBUTi6o8oPwvKDwh+WJDvy1PvXZOXrgmkn4lqivhU6vuZOuHVPFrb
-	LmHjWBJSBPmDmwU6FC9tAcwzXxstYH2KT0tGfIuYNQfJmp2A4sdgr9TRVGrY/z9pM1AN
-	YnnLeXxJjo7XlIyHOrEwgUvt37uDJ5YDJIm9jF1UN80vE5SWHW/0BZH0EMVxHPbrcDEk
-	TUvEzQrdhDl1NoXj+uhIUvvcAXQ7INx/WtKXFxlO0tuGs4o4EgYrXYa5QwOqCmzMOGum
-	+0Hb0a7njE3gwdhAcFFjlS92xTuNkrYaRHfYXecTWK4vkoaZXAzRrZA40er5tRxGJVan
-	dcoA==
+	bh=tnbr8NQlLnEwyDk6jq23yeNCNXL8rh7xi2hs6eUQisk=;
+	b=mFl6Z5azvogZ9jJPXFPruvbA9SbiO4GkQV8grB0yT4t5k4U9y/JlSch+ceztPgE1Yx
+	+ETdBUbuEIMdWib2/w/0/KDdgSOnfrDhDeCb3AUpv0Z846Z/EKJES2Gzh1nHYYaU9DEZ
+	Y6ZNeOodMjNsNbpGzkkmMcIimGH+SBwZF9lskKOU/eMx5J6vhsfLbwqg7MIRGeiSa15C
+	QkoQRMfOLlHW5Zrw0gf+X7jkB94ppsat4AeYINa7yFBy8yM0bIJ6HKpABA3qT6YQbEcG
+	MCKse4gChsaH0RnoPPFWMoW2xCEWqulmaJrWTonxQh94o76TR+hb+zQpQrsHLrGgU3/I
+	hqjA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:subject:date:message-id:in-reply-to:references
 	:cc:from:to;
-	bh=pGdFvWxsyK+082c4RANqehx4XfGix5v1XjwMetfsyZg=;
-	b=ns5B5E6afdQaXwuSf7jr1wG+fmFLaibuM4e5woEPfFnldvEqEuqFAJrDMpzcraOI5X
-	gf9rhpCu+VNmRZedJFqHErn1AHeVxbuh/Wok1FEEAf0RmXeb4mX4nTYFiblntP6ruhlu
-	YiBt28m8FYYsZ+9RELO0tkRsKF51NC17uaiPmz81gzTDBCzGTXjTcLrMWr4nnuMN6qFS
-	d4LmpbUvHE2+gTeXxShbbxuohmv9E5L40aTmkP8m87o+AbLJax/EbCI4DRn1+8zKb0kl
-	UUSG/jSbD45IeW41zm/XJCz6GSOKySfjiJdfrmcRy3G8MB5EPF1D+ERAGXJPy+eSBiju
-	Hoxg==
-X-Gm-Message-State: AJcUukfxxZPqMKPwSQ8dZ+c8jYcAAD++0vO4adxZR9Evbywu+y3Snsss
-	/sKGNqc+b1XUwGEI6viSY5hv+IQZL+0=
-X-Google-Smtp-Source: ALg8bN7HDkHstcrzBb2D1EL2iZd9wYwALtAwVk5F7dj5Zd+ikIVsdvekOmaJkaezjpTpGeLN2J6RwA==
-X-Received: by 2002:a0c:b093:: with SMTP id o19mr2997013qvc.49.1545408234814; 
-	Fri, 21 Dec 2018 08:03:54 -0800 (PST)
+	bh=tnbr8NQlLnEwyDk6jq23yeNCNXL8rh7xi2hs6eUQisk=;
+	b=ecck5H4GKxPlsaAHeZjvNLWjEBsZOp4Mxb6EH7qXApdARZ4jpkusPAVeUgU0wDOOLx
+	WoqGM54ZVDdFeFXEVLHV2x3dfu0JjjqSiRY3bmbaeqnuMqZY0CtvddIO3PCrKebBlYr7
+	ZWuDAWR6ndF9PfC9Fjn4IMZ7CWtAn04aW4hI+E1VoSOekt2AFV7lfiHTDJewUXi0QVm5
+	d+mleW6VhSwfsPFz6iNbmbdvAQge2ZmqA98kZ4e7CqOmDQxJOPlRslVmHW5nRtVM7w+T
+	tbZSjJ7dgT9K6oVhmWWbeiLXj258Ad4HVaPgkOY7hgSosilAXCMGIi7JCzG6kAz3K/80
+	Bx+g==
+X-Gm-Message-State: AJcUukfDK+dDHSZR82khniUuksb0GjhmYBPCirUsngz07QQ4f5h6WbHp
+	VH1NECbz0DE6EOAL0Rl7Hgga5A==
+X-Google-Smtp-Source: ALg8bN7KRmM2VX/iRzWCAqmI5J62TMLWFDcOwY2wu4BZEr/5qRmoInpDlcG78FcsvQuzzfYGJrScuQ==
+X-Received: by 2002:a37:ba06:: with SMTP id k6mr2860378qkf.115.1545408236411; 
+	Fri, 21 Dec 2018 08:03:56 -0800 (PST)
 Received: from localhost ([2601:182:c980:96c:8dd:4488:90b1:59d1])
-	by smtp.gmail.com with ESMTPSA id 24sm6307676qkx.77.2018.12.21.08.03.53
+	by smtp.gmail.com with ESMTPSA id
+	a68sm6069751qkj.63.2018.12.21.08.03.55
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 21 Dec 2018 08:03:54 -0800 (PST)
-Date: Fri, 21 Dec 2018 08:03:05 -0800
-Message-Id: <20181221160307.14819-13-palmer@sifive.com>
+	Fri, 21 Dec 2018 08:03:55 -0800 (PST)
+Date: Fri, 21 Dec 2018 08:03:06 -0800
+Message-Id: <20181221160307.14819-14-palmer@sifive.com>
 X-Mailer: git-send-email 2.18.1
 In-Reply-To: <20181221160307.14819-1-palmer@sifive.com>
 References: <20181221160307.14819-1-palmer@sifive.com>
-Cc: qemu-devel@nongnu.org, Anup Patel <anup@brainfault.org>,
-	Anup Patel <anup.patel@wdc.com>,
-	Alistair Francis <alistair.francis@wdc.com>, 
+Cc: qemu-devel@nongnu.org, Mao Zhongyi <maozhongyi@cmss.chinamobile.com>,
 	Palmer Dabbelt <palmer@sifive.com>
 From: Palmer Dabbelt <palmer@sifive.com>
 To: qemu-riscv@nongnu.org
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::844
-Subject: [Qemu-riscv] [PULL 12/14] target/riscv/pmp.c: Fix pmp_decode_napot()
+X-Received-From: 2607:f8b0:4864:20::732
+Subject: [Qemu-riscv] [PULL 13/14] riscv/cpu: use
+ device_class_set_parent_realize
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -69,45 +69,33 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Dec 2018 16:04:03 -0000
+X-List-Received-Date: Fri, 21 Dec 2018 16:04:07 -0000
 
-From: Anup Patel <anup@brainfault.org>
+From: Mao Zhongyi <maozhongyi@cmss.chinamobile.com>
 
-Currently, start and end address of a PMP region are not decoded
-correctly by pmp_decode_napot().
-
-Let's say we have a 128KB PMP region with base address as 0x80000000.
-Now, the PMPADDRx CSR value for this region will be 0x20003fff.
-
-The current pmp_decode_napot() implementation will decode PMPADDRx
-CSR as t1=14, base=0x100000000, and range=0x1ffff whereas it should
-have decoded PMPADDRx CSR as t1=14, base=0x80000000, and range=0x1fff.
-
-This patch fixes the base value decoding in pmp_decode_napot() when
-PMPADDRx CSR is not -1 (i.e. 0xffffffffffffffff).
-
-Signed-off-by: Anup Patel <anup@brainfault.org>
-Signed-off-by: Anup Patel <anup.patel@wdc.com>
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
+Signed-off-by: Mao Zhongyi <maozhongyi@cmss.chinamobile.com>
+Reviewed-by: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
 ---
- target/riscv/pmp.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ target/riscv/cpu.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-index 03abd8fe5eb7..15a5366616bd 100644
---- a/target/riscv/pmp.c
-+++ b/target/riscv/pmp.c
-@@ -138,7 +138,7 @@ static void pmp_decode_napot(target_ulong a, target_ulong *sa, target_ulong *ea)
-         return;
-     } else {
-         target_ulong t1 = ctz64(~a);
--        target_ulong base = (a & ~(((target_ulong)1 << t1) - 1)) << 3;
-+        target_ulong base = (a & ~(((target_ulong)1 << t1) - 1)) << 2;
-         target_ulong range = ((target_ulong)1 << (t1 + 3)) - 1;
-         *sa = base;
-         *ea = base + range;
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index a025a0a3baac..5e8a2cb2ba61 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -330,8 +330,8 @@ static void riscv_cpu_class_init(ObjectClass *c, void *data)
+     CPUClass *cc = CPU_CLASS(c);
+     DeviceClass *dc = DEVICE_CLASS(c);
+ 
+-    mcc->parent_realize = dc->realize;
+-    dc->realize = riscv_cpu_realize;
++    device_class_set_parent_realize(dc, riscv_cpu_realize,
++                                    &mcc->parent_realize);
+ 
+     mcc->parent_reset = cc->reset;
+     cc->reset = riscv_cpu_reset;
 -- 
 2.18.1
 
