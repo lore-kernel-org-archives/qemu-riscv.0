@@ -1,63 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gaNH8-0001Om-8B
-	for mharc-qemu-riscv@gnu.org; Fri, 21 Dec 2018 11:03:46 -0500
-Received: from eggs.gnu.org ([2001:4830:134:3::10]:52787)
+	id 1gaNHG-0001Wu-F1
+	for mharc-qemu-riscv@gnu.org; Fri, 21 Dec 2018 11:03:54 -0500
+Received: from eggs.gnu.org ([2001:4830:134:3::10]:52845)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1gaNH2-0001JO-Qb
-	for qemu-riscv@nongnu.org; Fri, 21 Dec 2018 11:03:43 -0500
+	(envelope-from <palmer@sifive.com>) id 1gaNHC-0001Tk-Tl
+	for qemu-riscv@nongnu.org; Fri, 21 Dec 2018 11:03:51 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1gaNH1-00043O-Rf
-	for qemu-riscv@nongnu.org; Fri, 21 Dec 2018 11:03:40 -0500
-Received: from mail-qt1-x843.google.com ([2607:f8b0:4864:20::843]:44341)
+	(envelope-from <palmer@sifive.com>) id 1gaNH5-000468-BC
+	for qemu-riscv@nongnu.org; Fri, 21 Dec 2018 11:03:45 -0500
+Received: from mail-qt1-x841.google.com ([2607:f8b0:4864:20::841]:42228)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1gaNH0-00042O-NX
-	for qemu-riscv@nongnu.org; Fri, 21 Dec 2018 11:03:38 -0500
-Received: by mail-qt1-x843.google.com with SMTP id n32so6160843qte.11
-	for <qemu-riscv@nongnu.org>; Fri, 21 Dec 2018 08:03:38 -0800 (PST)
+	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1gaNH4-00045e-PF
+	for qemu-riscv@nongnu.org; Fri, 21 Dec 2018 11:03:43 -0500
+Received: by mail-qt1-x841.google.com with SMTP id d19so6162497qtq.9
+	for <qemu-riscv@nongnu.org>; Fri, 21 Dec 2018 08:03:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
 	h=subject:date:message-id:in-reply-to:references:cc:from:to;
-	bh=3V84xRAUhqBRFfgcuIO0jFkPhFU/KdwMqjbRvl8Mjt0=;
-	b=JLVXtal1I/CXA1OEJMLPt8M9UEdp7RClw9o5Wxse1PC9RdyWg/BrXY60hpUNDb7kU1
-	Edc0PbsCRtInUgP0skBbllHAhMPvPWDXGidpI6URKW7VuSOLT7kghrIuxyitY8Ak9+gw
-	XtMaQ64cIjMjxa9PezvuD/U+XjDiiX1hNbgCdtj/9GwZrDIjJz3SGHtqTE99Jt7Ktc5U
-	L7kkGcygKi14abPMAdMYrEpcBtpyyiCy+DC1bUkPyo1iSB1igYz6FznvRjf/qki+ZKMJ
-	ZDnU3bIdJsqcKROKWnl72j2O0OPoiZoEeAtB+nRX0EjZMZdnhK4QwYdVBnhUwEpDFfO2
-	EXuQ==
+	bh=ZFe5OLfgkbGyNHW683WS7kU/EYaB5fvA+Mo6gZiihOw=;
+	b=WA1hu0ATw5P872RVR53pSPFfN0wT3/cEIm4Mc76YwTq0J3mHbSoOzHTYFXrA94NCbS
+	ql0R97LQa06CnjHZhkLFnETPuj1uSsg0DCIFH7GWmCKdCc0QJc7kC+r5A9FYfuo/eRwq
+	3+hqamQ0qbrbs8wilQQcz2Emh/GnZaO7KXlDjM6NCLpwAZ5lUjLbeNBQDrAXezYOQidP
+	LZ5cGumCuO3PPw0UFYm/2fRuhnbYsPEWAlyK2jDsPPxs2nFcIBBt9wOvPb/ob0cTtIwW
+	lIQzk1EzAtHbHk+3F7GJ6WxJv4GzrsJ9N4LwLZK/3Er0CABiWYBtaVXXykZATE2PbCM0
+	KGlg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:subject:date:message-id:in-reply-to:references
 	:cc:from:to;
-	bh=3V84xRAUhqBRFfgcuIO0jFkPhFU/KdwMqjbRvl8Mjt0=;
-	b=ojSiK1gDI/lmMXFVuJwRcTuj72fj6Yd5AxZUgVDAqDDnRu3v0+AwbM7LZTKAtjyJ8C
-	65xMlXTT9gCELFgEVmigwztfnCYSKPBY+/01+upZd3cR6ZUvQEmN2YamuF0Prt3BOTbk
-	0KHleLa4kH3yjK2yMFJT51JgmL+cfShsGKxD2Ma7kDeZReKQgrEqMes1OHAx/AeH32/v
-	jNjjEmeWf5OHTG52Gvy35XAaeTsUicQENahhvdtaoTz1Vb63vNChBGM9p7iH8Vo1MSHD
-	LqPfO9HMEcUu9o1mrwOb/+N/RuU9qEoDJ40X9TSDW/gq6AIjWLFt6cVy1frl1dIhH4X+
-	d00A==
-X-Gm-Message-State: AA+aEWbRR0FMYJ8kslByiXAgChvcpnx6osSurrAg93dpY3ezOdyhNihs
-	hINrt2FcysNFVj25dfgR5pJB8sX+a8E=
-X-Google-Smtp-Source: AFSGD/X15uNJrUs7xvo05XEyVjJi/8aAYWl1tAfpe/9fWpRsGRj6fr6JAqV1tv7fYUvUDQ3qLUkwqg==
-X-Received: by 2002:ac8:dc5:: with SMTP id t5mr2881559qti.80.1545408217952;
-	Fri, 21 Dec 2018 08:03:37 -0800 (PST)
+	bh=ZFe5OLfgkbGyNHW683WS7kU/EYaB5fvA+Mo6gZiihOw=;
+	b=h47Ui8Nd2NUlsViOf5MV255fxYd6fNpD18Bf+PLSU7qF0s0wJVgzs0UMtSGERnen+X
+	V+QMI4uTAWoRD6dvNS5XG1TmcamSotNZjqrzOq4yQd8U6NzUYCvOwXI7KN9eULQ5qlhn
+	LT0fl5fvshjsU2b3dg/Si8YSOs3LiE2ivADwoCtqvQVEGbWFdHc0Ox+VZP8P2M+XgoXq
+	7KTzWyBbJJvlBMhdt+naBcSDKi79r6PyAvXT3teXn6N0EXMG2zQVUoLCBdMqyxXMfWs+
+	4yhe2NftHCv6fpk63d1Dzpg+EiE0Z3+923TW3p5WB+7ozL9hfYuEWiqRtRXAhP9T9Hes
+	qE4w==
+X-Gm-Message-State: AJcUukdsfCPUShHIraVPx/2gqrPEvA4hrX1jmuPxin6J/cu0BlaJCmaP
+	9SeH3OW8z2WyQpxlT34wj3J+zgjxDP4=
+X-Google-Smtp-Source: ALg8bN6+XskU91DsmCTzLPLmxw5+yyCwMsHUWRS8+tbCbOMZjWlms19RdhAbjm/Tofar3qAVvmRPGg==
+X-Received: by 2002:a0c:b407:: with SMTP id u7mr2842358qve.179.1545408222095; 
+	Fri, 21 Dec 2018 08:03:42 -0800 (PST)
 Received: from localhost ([2601:182:c980:96c:8dd:4488:90b1:59d1])
 	by smtp.gmail.com with ESMTPSA id
-	t43sm7969868qtc.53.2018.12.21.08.03.36
+	u16sm7447467qkg.14.2018.12.21.08.03.40
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 21 Dec 2018 08:03:37 -0800 (PST)
-Date: Fri, 21 Dec 2018 08:02:56 -0800
-Message-Id: <20181221160307.14819-4-palmer@sifive.com>
+	Fri, 21 Dec 2018 08:03:41 -0800 (PST)
+Date: Fri, 21 Dec 2018 08:02:58 -0800
+Message-Id: <20181221160307.14819-6-palmer@sifive.com>
 X-Mailer: git-send-email 2.18.1
 In-Reply-To: <20181221160307.14819-1-palmer@sifive.com>
 References: <20181221160307.14819-1-palmer@sifive.com>
-Cc: qemu-devel@nongnu.org, Alistair Francis <Alistair.Francis@wdc.com>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Logan Gunthorpe <logang@deltatee.com>, Palmer Dabbelt <palmer@sifive.com>
+Cc: qemu-devel@nongnu.org, Anup Patel <anup@brainfault.org>,
+	Anup Patel <anup.patel@wdc.com>,
+	Alistair Francis <alistair.francis@wdc.com>, 
+	Palmer Dabbelt <palmer@sifive.com>
 From: Palmer Dabbelt <palmer@sifive.com>
 To: qemu-riscv@nongnu.org
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::843
-Subject: [Qemu-riscv] [PULL 03/14] hw/riscv/virt: Connect the gpex PCIe
+X-Received-From: 2607:f8b0:4864:20::841
+Subject: [Qemu-riscv] [PULL 05/14] sifive_u: Add clock DT node for GEM
+ ethernet
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -69,279 +71,82 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Dec 2018 16:03:43 -0000
+X-List-Received-Date: Fri, 21 Dec 2018 16:03:51 -0000
 
-From: Alistair Francis <Alistair.Francis@wdc.com>
+From: Anup Patel <anup@brainfault.org>
 
-Connect the gpex PCIe device based on the device tree included in the
-HiFive Unleashed ROM.
+The GEM ethernet on SiFive unleashed has fixed input clock
+of 125MHz as-per SiFive FU540 manual. This patch updates FDT
+generation for QEMU sifive_u machine to provide fixed-rate
+clock for GEM ethernet.
 
+Signed-off-by: Anup Patel <anup@brainfault.org>
+Signed-off-by: Anup Patel <anup.patel@wdc.com>
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-Signed-off-by: Logan Gunthorpe <logang@deltatee.com>
-Reviewed-by: Logan Gunthorpe <logang@deltatee.com>
-Tested-by: Guenter Roeck <linux@roeck-us.net>
-Tested-by: Andrea Bolognani <abologna@redhat.com>
+Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
 Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
 ---
- default-configs/riscv32-softmmu.mak |   5 +-
- default-configs/riscv64-softmmu.mak |   5 +-
- hw/riscv/virt.c                     | 131 +++++++++++++++++++++++++++-
- include/hw/riscv/virt.h             |  13 ++-
- 4 files changed, 150 insertions(+), 4 deletions(-)
+ hw/riscv/sifive_u.c         | 18 +++++++++++++++++-
+ include/hw/riscv/sifive_u.h |  3 ++-
+ 2 files changed, 19 insertions(+), 2 deletions(-)
 
-diff --git a/default-configs/riscv32-softmmu.mak b/default-configs/riscv32-softmmu.mak
-index 7937c69e2247..c5ea36cba597 100644
---- a/default-configs/riscv32-softmmu.mak
-+++ b/default-configs/riscv32-softmmu.mak
-@@ -1,7 +1,10 @@
- # Default configuration for riscv-softmmu
+diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+index ef07df244241..5c41ee5017e4 100644
+--- a/hw/riscv/sifive_u.c
++++ b/hw/riscv/sifive_u.c
+@@ -85,7 +85,8 @@ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
+     int cpu;
+     uint32_t *cells;
+     char *nodename;
+-    uint32_t plic_phandle;
++    char ethclk_names[] = "pclk\0hclk\0tx_clk";
++    uint32_t plic_phandle, ethclk_phandle;
  
-+include pci.mak
-+
- CONFIG_SERIAL=y
- CONFIG_VIRTIO_MMIO=y
--include virtio.mak
+     fdt = s->fdt = create_device_tree(&s->fdt_size);
+     if (!fdt) {
+@@ -197,6 +198,17 @@ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
+     g_free(cells);
+     g_free(nodename);
  
- CONFIG_CADENCE=y
-+
-+CONFIG_PCI_GENERIC=y
-diff --git a/default-configs/riscv64-softmmu.mak b/default-configs/riscv64-softmmu.mak
-index 7937c69e2247..c5ea36cba597 100644
---- a/default-configs/riscv64-softmmu.mak
-+++ b/default-configs/riscv64-softmmu.mak
-@@ -1,7 +1,10 @@
- # Default configuration for riscv-softmmu
- 
-+include pci.mak
-+
- CONFIG_SERIAL=y
- CONFIG_VIRTIO_MMIO=y
--include virtio.mak
- 
- CONFIG_CADENCE=y
-+
-+CONFIG_PCI_GENERIC=y
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index 6b6fa39aaa38..e7f0716fb667 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -39,6 +39,8 @@
- #include "sysemu/arch_init.h"
- #include "sysemu/device_tree.h"
- #include "exec/address-spaces.h"
-+#include "hw/pci/pci.h"
-+#include "hw/pci-host/gpex.h"
- #include "elf.h"
- 
- #include <libfdt.h>
-@@ -55,6 +57,9 @@ static const struct MemmapEntry {
-     [VIRT_UART0] =       { 0x10000000,         0x100 },
-     [VIRT_VIRTIO] =      { 0x10001000,        0x1000 },
-     [VIRT_DRAM] =        { 0x80000000,           0x0 },
-+    [VIRT_PCIE_MMIO] =   { 0x40000000,    0x40000000 },
-+    [VIRT_PCIE_PIO] =    { 0x03000000,    0x00010000 },
-+    [VIRT_PCIE_ECAM] =   { 0x30000000,    0x10000000 },
- };
- 
- static uint64_t load_kernel(const char *kernel_filename)
-@@ -98,6 +103,51 @@ static hwaddr load_initrd(const char *filename, uint64_t mem_size,
-     return *start + size;
- }
- 
-+static void create_pcie_irq_map(void *fdt, char *nodename,
-+                                uint32_t plic_phandle)
-+{
-+    int pin, dev;
-+    uint32_t
-+        full_irq_map[GPEX_NUM_IRQS * GPEX_NUM_IRQS * FDT_INT_MAP_WIDTH] = {};
-+    uint32_t *irq_map = full_irq_map;
-+
-+    /* This code creates a standard swizzle of interrupts such that
-+     * each device's first interrupt is based on it's PCI_SLOT number.
-+     * (See pci_swizzle_map_irq_fn())
-+     *
-+     * We only need one entry per interrupt in the table (not one per
-+     * possible slot) seeing the interrupt-map-mask will allow the table
-+     * to wrap to any number of devices.
-+     */
-+    for (dev = 0; dev < GPEX_NUM_IRQS; dev++) {
-+        int devfn = dev * 0x8;
-+
-+        for (pin = 0; pin < GPEX_NUM_IRQS; pin++) {
-+            int irq_nr = PCIE_IRQ + ((pin + PCI_SLOT(devfn)) % GPEX_NUM_IRQS);
-+            int i = 0;
-+
-+            irq_map[i] = cpu_to_be32(devfn << 8);
-+
-+            i += FDT_PCI_ADDR_CELLS;
-+            irq_map[i] = cpu_to_be32(pin + 1);
-+
-+            i += FDT_PCI_INT_CELLS;
-+            irq_map[i++] = cpu_to_be32(plic_phandle);
-+
-+            i += FDT_PLIC_ADDR_CELLS;
-+            irq_map[i] = cpu_to_be32(irq_nr);
-+
-+            irq_map += FDT_INT_MAP_WIDTH;
-+        }
-+    }
-+
-+    qemu_fdt_setprop(fdt, nodename, "interrupt-map",
-+                     full_irq_map, sizeof(full_irq_map));
-+
-+    qemu_fdt_setprop_cells(fdt, nodename, "interrupt-map-mask",
-+                           0x1800, 0, 0, 0x7);
-+}
-+
- static void *create_fdt(RISCVVirtState *s, const struct MemmapEntry *memmap,
-     uint64_t mem_size, const char *cmdline)
- {
-@@ -203,7 +253,10 @@ static void *create_fdt(RISCVVirtState *s, const struct MemmapEntry *memmap,
-     nodename = g_strdup_printf("/soc/interrupt-controller@%lx",
-         (long)memmap[VIRT_PLIC].base);
-     qemu_fdt_add_subnode(fdt, nodename);
--    qemu_fdt_setprop_cell(fdt, nodename, "#interrupt-cells", 1);
-+    qemu_fdt_setprop_cells(fdt, nodename, "#address-cells",
-+                           FDT_PLIC_ADDR_CELLS);
-+    qemu_fdt_setprop_cell(fdt, nodename, "#interrupt-cells",
-+                          FDT_PLIC_INT_CELLS);
-     qemu_fdt_setprop_string(fdt, nodename, "compatible", "riscv,plic0");
-     qemu_fdt_setprop(fdt, nodename, "interrupt-controller", NULL, 0);
-     qemu_fdt_setprop(fdt, nodename, "interrupts-extended",
-@@ -233,6 +286,33 @@ static void *create_fdt(RISCVVirtState *s, const struct MemmapEntry *memmap,
-         g_free(nodename);
-     }
- 
-+    nodename = g_strdup_printf("/soc/pci@%lx",
-+        (long) memmap[VIRT_PCIE_ECAM].base);
++    nodename = g_strdup_printf("/soc/ethclk");
 +    qemu_fdt_add_subnode(fdt, nodename);
-+    qemu_fdt_setprop_cells(fdt, nodename, "#address-cells",
-+                           FDT_PCI_ADDR_CELLS);
-+    qemu_fdt_setprop_cells(fdt, nodename, "#interrupt-cells",
-+                           FDT_PCI_INT_CELLS);
-+    qemu_fdt_setprop_cells(fdt, nodename, "#size-cells", 0x2);
-+    qemu_fdt_setprop_string(fdt, nodename, "compatible",
-+                            "pci-host-ecam-generic");
-+    qemu_fdt_setprop_string(fdt, nodename, "device_type", "pci");
-+    qemu_fdt_setprop_cell(fdt, nodename, "linux,pci-domain", 0);
-+    qemu_fdt_setprop_cells(fdt, nodename, "bus-range", 0,
-+                           memmap[VIRT_PCIE_ECAM].base /
-+                               PCIE_MMCFG_SIZE_MIN - 1);
-+    qemu_fdt_setprop(fdt, nodename, "dma-coherent", NULL, 0);
-+    qemu_fdt_setprop_cells(fdt, nodename, "reg", 0, memmap[VIRT_PCIE_ECAM].base,
-+                           0, memmap[VIRT_PCIE_ECAM].size);
-+    qemu_fdt_setprop_sized_cells(fdt, nodename, "ranges",
-+        1, FDT_PCI_RANGE_IOPORT, 2, 0,
-+        2, memmap[VIRT_PCIE_PIO].base, 2, memmap[VIRT_PCIE_PIO].size,
-+        1, FDT_PCI_RANGE_MMIO,
-+        2, memmap[VIRT_PCIE_MMIO].base,
-+        2, memmap[VIRT_PCIE_MMIO].base, 2, memmap[VIRT_PCIE_MMIO].size);
-+    create_pcie_irq_map(fdt, nodename, plic_phandle);
++    qemu_fdt_setprop_string(fdt, nodename, "compatible", "fixed-clock");
++    qemu_fdt_setprop_cell(fdt, nodename, "#clock-cells", 0x0);
++    qemu_fdt_setprop_cell(fdt, nodename, "clock-frequency",
++        SIFIVE_U_GEM_CLOCK_FREQ);
++    qemu_fdt_setprop_cell(fdt, nodename, "phandle", 3);
++    qemu_fdt_setprop_cell(fdt, nodename, "linux,phandle", 3);
++    ethclk_phandle = qemu_fdt_get_phandle(fdt, nodename);
 +    g_free(nodename);
 +
-     nodename = g_strdup_printf("/test@%lx",
-         (long)memmap[VIRT_TEST].base);
+     nodename = g_strdup_printf("/soc/ethernet@%lx",
+         (long)memmap[SIFIVE_U_GEM].base);
      qemu_fdt_add_subnode(fdt, nodename);
-@@ -263,6 +343,47 @@ static void *create_fdt(RISCVVirtState *s, const struct MemmapEntry *memmap,
-     return fdt;
- }
- 
-+
-+static inline DeviceState *gpex_pcie_init(MemoryRegion *sys_mem,
-+                                          hwaddr ecam_base, hwaddr ecam_size,
-+                                          hwaddr mmio_base, hwaddr mmio_size,
-+                                          hwaddr pio_base,
-+                                          DeviceState *plic, bool link_up)
-+{
-+    DeviceState *dev;
-+    MemoryRegion *ecam_alias, *ecam_reg;
-+    MemoryRegion *mmio_alias, *mmio_reg;
-+    qemu_irq irq;
-+    int i;
-+
-+    dev = qdev_create(NULL, TYPE_GPEX_HOST);
-+
-+    qdev_init_nofail(dev);
-+
-+    ecam_alias = g_new0(MemoryRegion, 1);
-+    ecam_reg = sysbus_mmio_get_region(SYS_BUS_DEVICE(dev), 0);
-+    memory_region_init_alias(ecam_alias, OBJECT(dev), "pcie-ecam",
-+                             ecam_reg, 0, ecam_size);
-+    memory_region_add_subregion(get_system_memory(), ecam_base, ecam_alias);
-+
-+    mmio_alias = g_new0(MemoryRegion, 1);
-+    mmio_reg = sysbus_mmio_get_region(SYS_BUS_DEVICE(dev), 1);
-+    memory_region_init_alias(mmio_alias, OBJECT(dev), "pcie-mmio",
-+                             mmio_reg, mmio_base, mmio_size);
-+    memory_region_add_subregion(get_system_memory(), mmio_base, mmio_alias);
-+
-+    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 2, pio_base);
-+
-+    for (i = 0; i < GPEX_NUM_IRQS; i++) {
-+        irq = qdev_get_gpio_in(plic, PCIE_IRQ + i);
-+
-+        sysbus_connect_irq(SYS_BUS_DEVICE(dev), i, irq);
-+        gpex_set_irq_num(GPEX_HOST(dev), i, PCIE_IRQ + i);
-+    }
-+
-+    return dev;
-+}
-+
- static void riscv_virt_board_init(MachineState *machine)
- {
-     const struct MemmapEntry *memmap = virt_memmap;
-@@ -385,6 +506,14 @@ static void riscv_virt_board_init(MachineState *machine)
-             qdev_get_gpio_in(DEVICE(s->plic), VIRTIO_IRQ + i));
-     }
- 
-+    gpex_pcie_init(system_memory,
-+                         memmap[VIRT_PCIE_ECAM].base,
-+                         memmap[VIRT_PCIE_ECAM].size,
-+                         memmap[VIRT_PCIE_MMIO].base,
-+                         memmap[VIRT_PCIE_MMIO].size,
-+                         memmap[VIRT_PCIE_PIO].base,
-+                         DEVICE(s->plic), true);
-+
-     serial_mm_init(system_memory, memmap[VIRT_UART0].base,
-         0, qdev_get_gpio_in(DEVICE(s->plic), UART0_IRQ), 399193,
-         serial_hd(0), DEVICE_LITTLE_ENDIAN);
-diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
-index 2b2e6dd4ea6b..f12deaebd697 100644
---- a/include/hw/riscv/virt.h
-+++ b/include/hw/riscv/virt.h
-@@ -38,13 +38,17 @@ enum {
-     VIRT_PLIC,
-     VIRT_UART0,
-     VIRT_VIRTIO,
--    VIRT_DRAM
-+    VIRT_DRAM,
-+    VIRT_PCIE_MMIO,
-+    VIRT_PCIE_PIO,
-+    VIRT_PCIE_ECAM
+@@ -208,6 +220,10 @@ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
+     qemu_fdt_setprop_string(fdt, nodename, "phy-mode", "gmii");
+     qemu_fdt_setprop_cells(fdt, nodename, "interrupt-parent", plic_phandle);
+     qemu_fdt_setprop_cells(fdt, nodename, "interrupts", SIFIVE_U_GEM_IRQ);
++    qemu_fdt_setprop_cells(fdt, nodename, "clocks",
++        ethclk_phandle, ethclk_phandle, ethclk_phandle);
++    qemu_fdt_setprop(fdt, nodename, "clocks-names", ethclk_names,
++        sizeof(ethclk_names));
+     qemu_fdt_setprop_cells(fdt, nodename, "#address-cells", 1);
+     qemu_fdt_setprop_cells(fdt, nodename, "#size-cells", 0);
+     g_free(nodename);
+diff --git a/include/hw/riscv/sifive_u.h b/include/hw/riscv/sifive_u.h
+index e8b4d9ffa3fb..be13cc1304cc 100644
+--- a/include/hw/riscv/sifive_u.h
++++ b/include/hw/riscv/sifive_u.h
+@@ -63,7 +63,8 @@ enum {
  };
  
  enum {
-     UART0_IRQ = 10,
-     VIRTIO_IRQ = 1, /* 1 to 8 */
-     VIRTIO_COUNT = 8,
-+    PCIE_IRQ = 0x20, /* 32 to 35 */
-     VIRTIO_NDEV = 0x35 /* Arbitrary maximum number of interrupts */
+-    SIFIVE_U_CLOCK_FREQ = 1000000000
++    SIFIVE_U_CLOCK_FREQ = 1000000000,
++    SIFIVE_U_GEM_CLOCK_FREQ = 125000000
  };
  
-@@ -62,6 +66,13 @@ enum {
- #define VIRT_PLIC_CONTEXT_BASE 0x200000
- #define VIRT_PLIC_CONTEXT_STRIDE 0x1000
- 
-+#define FDT_PCI_ADDR_CELLS    3
-+#define FDT_PCI_INT_CELLS     1
-+#define FDT_PLIC_ADDR_CELLS   0
-+#define FDT_PLIC_INT_CELLS    1
-+#define FDT_INT_MAP_WIDTH     (FDT_PCI_ADDR_CELLS + FDT_PCI_INT_CELLS + 1 + \
-+                               FDT_PLIC_ADDR_CELLS + FDT_PLIC_INT_CELLS)
-+
- #if defined(TARGET_RISCV32)
- #define VIRT_CPU TYPE_RISCV_CPU_RV32GCSU_V1_10_0
- #elif defined(TARGET_RISCV64)
+ #define SIFIVE_U_PLIC_HART_CONFIG "MS"
 -- 
 2.18.1
 
