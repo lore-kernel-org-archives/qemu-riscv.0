@@ -1,65 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gaNHO-0001fb-WA
-	for mharc-qemu-riscv@gnu.org; Fri, 21 Dec 2018 11:04:03 -0500
-Received: from eggs.gnu.org ([2001:4830:134:3::10]:52879)
+	id 1gaNHQ-0001hI-6K
+	for mharc-qemu-riscv@gnu.org; Fri, 21 Dec 2018 11:04:04 -0500
+Received: from eggs.gnu.org ([2001:4830:134:3::10]:52952)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1gaNHM-0001cY-Iv
-	for qemu-riscv@nongnu.org; Fri, 21 Dec 2018 11:04:01 -0500
+	(envelope-from <palmer@sifive.com>) id 1gaNHN-0001eJ-To
+	for qemu-riscv@nongnu.org; Fri, 21 Dec 2018 11:04:02 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1gaNHK-0004CH-JI
-	for qemu-riscv@nongnu.org; Fri, 21 Dec 2018 11:04:00 -0500
-Received: from mail-qt1-x841.google.com ([2607:f8b0:4864:20::841]:38312)
+	(envelope-from <palmer@sifive.com>) id 1gaNHM-0004Df-Sr
+	for qemu-riscv@nongnu.org; Fri, 21 Dec 2018 11:04:01 -0500
+Received: from mail-qt1-x832.google.com ([2607:f8b0:4864:20::832]:44409)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1gaNHI-00046b-LU
-	for qemu-riscv@nongnu.org; Fri, 21 Dec 2018 11:03:58 -0500
-Received: by mail-qt1-x841.google.com with SMTP id p17so6187660qtl.5
-	for <qemu-riscv@nongnu.org>; Fri, 21 Dec 2018 08:03:44 -0800 (PST)
+	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1gaNHM-0004CL-K5
+	for qemu-riscv@nongnu.org; Fri, 21 Dec 2018 11:04:00 -0500
+Received: by mail-qt1-x832.google.com with SMTP id n32so6162317qte.11
+	for <qemu-riscv@nongnu.org>; Fri, 21 Dec 2018 08:03:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
 	h=subject:date:message-id:in-reply-to:references:cc:from:to;
-	bh=s8TQWdfmNT9BwGooMFuCxfyNF1ywYtDH9Swp6HiUmKk=;
-	b=HmnWOGrhMrl296xxyVHR+r175c/qLnVAdcPreioVdik2VoHJIT4bgodSzT5AQc+dIn
-	FHr20ZFfc6xY1NM5pCHlVDfwGw5Lc9+tlC3jUV6GOa6mNtUZsQJYRKa54EMOFzo4po5R
-	WyLcmqT4eeC7ycC0FkSeQmypiwJrjAC9NpSgCqf5Tt+ME9xSReBbJd0DTN+9XGNF9sl5
-	TgRoqJsodZYkZKFn1CjmEgxQO7su2gatE9W2Q9+uK1iilvkkYoapajhtVUwRqMO8sbXa
-	CpHF4XixvbwkJyHwh1o21gI+J1Ou2SkcAmk4Fhpa3cSR4TCcPjSq0gqHoca78/jy6fDA
-	bM+A==
+	bh=LrEYanjBIeOlcUCN87Q23zBaAMNYjJEywyn80S4jR80=;
+	b=WjG0bPHTKhRCNrDROUsqGZdntexNJNYTJMpY4BP8cca9Ll+BS74ogiPBQlCibb2VY2
+	08qLoozc8LiDSz91olERxEY7IpqU9DR4ae58QT63uqicFfbMGWdkfLCmXaJBLeOJMK6v
+	SoHlDKVxbpfnjPgc1NxmlFNkUXTOOJs+fE6FhJzn73PGm7GXUlKQfRmkeRZlDFsLnUmi
+	DNH9UMh7PeLoMP+hiNRWZcXzHCaT/ZuyXvuJFw8VnNfN64exx+bcR/l0VQcsNcqP3Y3t
+	GScuRNFQBcV7+PyqEbP7aR/QbEDIMolwNub6rbmcpya9bWOdbfjr39Z90sZPHuwLY01U
+	+vrQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:subject:date:message-id:in-reply-to:references
 	:cc:from:to;
-	bh=s8TQWdfmNT9BwGooMFuCxfyNF1ywYtDH9Swp6HiUmKk=;
-	b=TtgZoOGtJj8SrKnBHaTuynVAmH72WyhVtY9T8YwEtPlh8y3cv4hGkNtb4MPUrRJUij
-	+Z+rCkuhlmgErjbe2btwmbt1UNEcCYiTtja06qOKUbD7HX6AsCs8T+UKlnHp38WJg3/x
-	mOttXInxVolfz34VKoEeJmvCH71bZnc/wqaLV2jPJg+Bhbdp6OjhfjgLuoILUg14NcB9
-	6+fl16NENl8HOg/caOHJoLGK4H25qrpmdFXzTqdIxyWucyCyTSmKzlaA94D9B5QwPbXU
-	ziOsBocsFXdXvutPRctnSKdJeXJFX38rdFPtjXmvABOjDv2SxNgdwUCxucaeypGF14Ka
-	iEFA==
-X-Gm-Message-State: AJcUukeUyaCZwGPRuj+UHHEqxsON9NXQVL2z0WXSjEZ/+UhusU2ppbGl
-	oWXqV3kYTYFyoWThD4Nqw54HUycCfO8=
-X-Google-Smtp-Source: ALg8bN6y1K1+8ngKd5jTVguehXr0Jqg/CjM30bnW8hLqwiIsKopWNTOgbH0Prpbah4/2+hRGWeUYTA==
-X-Received: by 2002:a0c:f8cb:: with SMTP id h11mr3041515qvo.134.1545408223949; 
-	Fri, 21 Dec 2018 08:03:43 -0800 (PST)
+	bh=LrEYanjBIeOlcUCN87Q23zBaAMNYjJEywyn80S4jR80=;
+	b=GQ0Bjxd5+VS0xCjtXQp4j6uKwmpcoypHWq2S6WwKUPSkYt/PuFbEfSoRAiLZbUIMGw
+	qZNGdzQJOquO4XPHKO67Nh/SX5icywJVTnaKoDa9eCxUhuIQzroH+gj5fMAzS3ohHLSB
+	JIFHPxcoL1Mda/SPv6VgiK2XbLbtIG3yfonrPfG9tzpeNzcr7CBxiNIHMXhXKx1UszzJ
+	6tBdA8YHiFhiCo9kqgHzY/OECVKEbSBAO0LKa2qEXsMly0lb+hr1D4rV3j1yqJhhjYWc
+	WLCXiX67enSdeMfyD5HfVHrCW+yFOmZzHG3VuHas44RVN8eqUeQkeShIwe20e8YHateA
+	Yevg==
+X-Gm-Message-State: AJcUukeLRX3Dbr64Rbqx0+/4Ie/NJSXTkd/2NdEIekMaEKFQsQPkxOn/
+	YxIFrvpBmYGf15D8vR6xtOvd2g==
+X-Google-Smtp-Source: AFSGD/W8aFzAGMDEYFv1CegU9t87WR8X0GrYV/Ke+Slj8NOEIDcbAi49hV7MT9XC8KLq+Il9syxvKQ==
+X-Received: by 2002:ac8:33fc:: with SMTP id d57mr2863434qtb.82.1545408238342; 
+	Fri, 21 Dec 2018 08:03:58 -0800 (PST)
 Received: from localhost ([2601:182:c980:96c:8dd:4488:90b1:59d1])
 	by smtp.gmail.com with ESMTPSA id
-	o21sm6057974qto.18.2018.12.21.08.03.42
+	n72sm7170084qki.26.2018.12.21.08.03.57
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 21 Dec 2018 08:03:43 -0800 (PST)
-Date: Fri, 21 Dec 2018 08:02:59 -0800
-Message-Id: <20181221160307.14819-7-palmer@sifive.com>
+	Fri, 21 Dec 2018 08:03:57 -0800 (PST)
+Date: Fri, 21 Dec 2018 08:03:07 -0800
+Message-Id: <20181221160307.14819-15-palmer@sifive.com>
 X-Mailer: git-send-email 2.18.1
 In-Reply-To: <20181221160307.14819-1-palmer@sifive.com>
 References: <20181221160307.14819-1-palmer@sifive.com>
-Cc: qemu-devel@nongnu.org, Anup Patel <anup@brainfault.org>,
-	Anup Patel <anup.patel@wdc.com>,
-	Alistair Francis <alistair.francis@wdc.com>, 
-	Palmer Dabbelt <palmer@sifive.com>
+Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@sifive.com>
 From: Palmer Dabbelt <palmer@sifive.com>
 To: qemu-riscv@nongnu.org
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::841
-Subject: [Qemu-riscv] [PULL 06/14] sifive_u: Set 'clock-frequency' DT
- property for SiFive UART
+X-Received-From: 2607:f8b0:4864:20::832
+Subject: [Qemu-riscv] [PULL 14/14] MAINTAINERS: Mark RISC-V as Supported
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -71,36 +67,29 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Dec 2018 16:04:01 -0000
+X-List-Received-Date: Fri, 21 Dec 2018 16:04:03 -0000
 
-From: Anup Patel <anup@brainfault.org>
+There's at least two of us that are paid to work on this.
 
-The 'clock-frequency' DT property is required by U-Boot to compute
-the divider value. This patch sets the 'clock-frequency' DT property
-of the SiFive UART device tree node (similar to virt machine).
-
-Signed-off-by: Anup Patel <anup@brainfault.org>
-Signed-off-by: Anup Patel <anup.patel@wdc.com>
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
 ---
- hw/riscv/sifive_u.c | 2 ++
- 1 file changed, 2 insertions(+)
+ MAINTAINERS | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-index 5c41ee5017e4..849fa2e6311a 100644
---- a/hw/riscv/sifive_u.c
-+++ b/hw/riscv/sifive_u.c
-@@ -241,6 +241,8 @@ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
-     qemu_fdt_setprop_cells(fdt, nodename, "reg",
-         0x0, memmap[SIFIVE_U_UART0].base,
-         0x0, memmap[SIFIVE_U_UART0].size);
-+    qemu_fdt_setprop_cell(fdt, nodename, "clock-frequency",
-+                          SIFIVE_U_CLOCK_FREQ / 2);
-     qemu_fdt_setprop_cells(fdt, nodename, "interrupt-parent", plic_phandle);
-     qemu_fdt_setprop_cells(fdt, nodename, "interrupts", 1);
- 
+diff --git a/MAINTAINERS b/MAINTAINERS
+index d676c73f8840..317eff6cec4d 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -262,7 +262,7 @@ M: Alistair Francis <Alistair.Francis@wdc.com>
+ M: Sagar Karandikar <sagark@eecs.berkeley.edu>
+ M: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+ L: qemu-riscv@nongnu.org
+-S: Maintained
++S: Supported
+ F: target/riscv/
+ F: hw/riscv/
+ F: include/hw/riscv/
 -- 
 2.18.1
 
