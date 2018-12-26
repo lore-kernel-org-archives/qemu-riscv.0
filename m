@@ -1,64 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gcCrf-0004hJ-JH
-	for mharc-qemu-riscv@gnu.org; Wed, 26 Dec 2018 12:21:03 -0500
-Received: from eggs.gnu.org ([208.118.235.92]:48198)
+	id 1gcCrg-0004ix-JC
+	for mharc-qemu-riscv@gnu.org; Wed, 26 Dec 2018 12:21:04 -0500
+Received: from eggs.gnu.org ([208.118.235.92]:48275)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1gcCrZ-0004YE-GH
-	for qemu-riscv@nongnu.org; Wed, 26 Dec 2018 12:20:58 -0500
+	(envelope-from <palmer@sifive.com>) id 1gcCrb-0004bW-LY
+	for qemu-riscv@nongnu.org; Wed, 26 Dec 2018 12:21:00 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1gcCrX-0007zK-D7
-	for qemu-riscv@nongnu.org; Wed, 26 Dec 2018 12:20:57 -0500
-Received: from mail-qt1-x843.google.com ([2607:f8b0:4864:20::843]:43996)
+	(envelope-from <palmer@sifive.com>) id 1gcCrZ-00080m-Dg
+	for qemu-riscv@nongnu.org; Wed, 26 Dec 2018 12:20:59 -0500
+Received: from mail-qt1-x82d.google.com ([2607:f8b0:4864:20::82d]:33358)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1gcCrX-0007r9-2e
+	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1gcCrX-0007s0-Em
 	for qemu-riscv@nongnu.org; Wed, 26 Dec 2018 12:20:55 -0500
-Received: by mail-qt1-x843.google.com with SMTP id i7so17826670qtj.10
-	for <qemu-riscv@nongnu.org>; Wed, 26 Dec 2018 09:20:36 -0800 (PST)
+Received: by mail-qt1-x82d.google.com with SMTP id l11so17885616qtp.0
+	for <qemu-riscv@nongnu.org>; Wed, 26 Dec 2018 09:20:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
 	h=subject:date:message-id:in-reply-to:references:cc:from:to;
-	bh=pGdFvWxsyK+082c4RANqehx4XfGix5v1XjwMetfsyZg=;
-	b=hCb9bHcUTmosQZTdPc3pFChUYVni85WHzug2suAPBTGMJ4D112hj1lXqcOfqHKtdvE
-	7fRxpz0MPb+UWizmvK1Z/CM9tDxoatvH6wZRbUUDIPmUMtkVK2FZ+U0oVgAuDsJb1O9K
-	6MdyxngPQy9X2uG1oEor85NRmOT64PAQqzHBWmDSbcjeBIp/5n4KW/Cem1ZefnakhQPr
-	UilnaVsZlrPrSyVBHRL0y7DSTF6h2a+rv3XBIo+AXMKWUBM5S7hbMt0G26nx2yMfi85e
-	90WSlutqsKsKEeY+3pNmK1F0+0WhADnOBgaTIUbM1Z3SIlDfJ4KjbYNgbnp3mUaFmLpY
-	I+3Q==
+	bh=LrEYanjBIeOlcUCN87Q23zBaAMNYjJEywyn80S4jR80=;
+	b=YS6ug9YLPbwpwCKVDcjcczkJcvR4Itpg3Uv0Uo1PPeeoR9EGJ9WdpzV/oH1EPKlUaH
+	Jqy6K9bcP5l/X8St7f4OkUl54HVPWnabL4Kc6U4T62JmBZnEA30H8CTzvGTmKuAWrmpl
+	6LrZlghXzCAT8GKvMGjVZ/JeVzsQIqEBK6Hr+3wk5ShWlFrGZ5WssJtVXjwJyuMOF5oQ
+	Wf2H6oFxkqp6qIhdYwZhVCCi2pYFNLo0vDo4cdfqUMGPsVuyRH6tDexhn6UURkXXSEDT
+	EZIlQVAhN4fJB8Tgk2M4i+B9auXdIF8SoW4WeiLt+MsYENq3S5oFA0QDCGQcxziZAva+
+	6DXQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:subject:date:message-id:in-reply-to:references
 	:cc:from:to;
-	bh=pGdFvWxsyK+082c4RANqehx4XfGix5v1XjwMetfsyZg=;
-	b=AANsXV5UKTm2zeGgMkDJ7weSEK9S+GyA2YJ8QmsoIZOHJn3ctN7Naj/emZrd6FT7VW
-	1CJEGXGXr/1Ex0KyxRIcZxcLcNnUZwobutXF+KRj/QDI0AKmzE2g54aXLqg0pSAhRUN0
-	7WCvSopXbgAYziMk+coS/HoSVmrCG1Ex92yFmgVepTbMyjp5R/qIREiglGiKlsXErB3D
-	F9CE+SXIa7UHLbqh7X1omKr0F7CIYieEKNvHs0dDR+GYoOJZqy8K9R03mSZPLHBk3EH1
-	v+FxH6So9K7jGcvqgShJ4a8fA0shxd4/DSyN71v2PcMhrmc2xRmBiwVuUrqAlQY1eKlu
-	qxwQ==
-X-Gm-Message-State: AA+aEWaCz0RH/wC6frEWK0PiDnhTc4pvJiqfbI+1URSVH2AqWlh9d6rs
-	EWk9AmfxD9YkCfHQahDKJ3jWRC1buUA=
-X-Google-Smtp-Source: ALg8bN7KXaWbXl1EW4Ym+K3KKr5R+aTJB554/eBfVrYg0PjhyLkP113A1d2FG3tlcG7zMaRMFeevYw==
-X-Received: by 2002:ac8:1779:: with SMTP id u54mr18928970qtk.285.1545844835755;
-	Wed, 26 Dec 2018 09:20:35 -0800 (PST)
+	bh=LrEYanjBIeOlcUCN87Q23zBaAMNYjJEywyn80S4jR80=;
+	b=FFowpHNMCNU7Ff0zBUR2RTbj8wrxjoo4zpBspTTwrQH2HiUn1w2PimcBu1by+cVjFw
+	KcRAOWrEmrdp9kt40u12LqmfSJ702WgbJsOJw6Hy6TfTaht03cdVRqvlOzKj3KvT1R7p
+	oXbwQOwTPAILHou9M0JzEXbw2Jfe/Uj7ZqIGl/wP2MwzuIMU7RajQRGOVuJMZxIibtmv
+	qLJpPRe9G8Qe9fNEQGrQAxRUmo0zNuXZhB/m4w518A6x9l1Y9fE9+JhlUMNiV9Km0NzD
+	+6Opgv5Zx9hL033+78LDToGy9i1dRR1RLLG15N+SsamrMyCIEPWhUhdoJDu0D9VFawyQ
+	rAVw==
+X-Gm-Message-State: AJcUukfi9A/Jjt5TpPtIhc7aG9IrlSxmM8ElejjUZyPAzrGvozdkhrff
+	YOm4WuJAK7KAjiH89BUn0/Fey0n/cDM=
+X-Google-Smtp-Source: ALg8bN7IiiOpTuQj1Il0j1x3h/qSDVAKx5V5+JdagOhn48idCH2KtjFLwkVU7CWQUdjiSxEmSxs8Pg==
+X-Received: by 2002:a0c:9e65:: with SMTP id z37mr19778632qve.188.1545844839221;
+	Wed, 26 Dec 2018 09:20:39 -0800 (PST)
 Received: from localhost ([2601:182:c980:96c:8dd:4488:90b1:59d1])
 	by smtp.gmail.com with ESMTPSA id
-	o65sm13313201qkl.11.2018.12.26.09.20.34
+	b17sm12615235qkj.69.2018.12.26.09.20.38
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 26 Dec 2018 09:20:35 -0800 (PST)
-Date: Wed, 26 Dec 2018 09:20:03 -0800
-Message-Id: <20181226172005.26990-13-palmer@sifive.com>
+	Wed, 26 Dec 2018 09:20:38 -0800 (PST)
+Date: Wed, 26 Dec 2018 09:20:05 -0800
+Message-Id: <20181226172005.26990-15-palmer@sifive.com>
 X-Mailer: git-send-email 2.18.1
 In-Reply-To: <20181226172005.26990-1-palmer@sifive.com>
 References: <20181226172005.26990-1-palmer@sifive.com>
 Cc: qemu-riscv@nongnu.org,       qemu-devel@nongnu.org,
-	Anup Patel <anup@brainfault.org>, Anup Patel <anup.patel@wdc.com>,
-	Alistair Francis <alistair.francis@wdc.com>, 
 	Palmer Dabbelt <palmer@sifive.com>
 From: Palmer Dabbelt <palmer@sifive.com>
 To: Peter Maydell <peter.maydell@linaro.org>
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::843
-Subject: [Qemu-riscv] [PULL 12/14] target/riscv/pmp.c: Fix pmp_decode_napot()
+X-Received-From: 2607:f8b0:4864:20::82d
+Subject: [Qemu-riscv] [PULL 14/14] MAINTAINERS: Mark RISC-V as Supported
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -70,45 +68,29 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Dec 2018 17:20:59 -0000
+X-List-Received-Date: Wed, 26 Dec 2018 17:21:00 -0000
 
-From: Anup Patel <anup@brainfault.org>
+There's at least two of us that are paid to work on this.
 
-Currently, start and end address of a PMP region are not decoded
-correctly by pmp_decode_napot().
-
-Let's say we have a 128KB PMP region with base address as 0x80000000.
-Now, the PMPADDRx CSR value for this region will be 0x20003fff.
-
-The current pmp_decode_napot() implementation will decode PMPADDRx
-CSR as t1=14, base=0x100000000, and range=0x1ffff whereas it should
-have decoded PMPADDRx CSR as t1=14, base=0x80000000, and range=0x1fff.
-
-This patch fixes the base value decoding in pmp_decode_napot() when
-PMPADDRx CSR is not -1 (i.e. 0xffffffffffffffff).
-
-Signed-off-by: Anup Patel <anup@brainfault.org>
-Signed-off-by: Anup Patel <anup.patel@wdc.com>
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
 ---
- target/riscv/pmp.c | 2 +-
+ MAINTAINERS | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-index 03abd8fe5eb7..15a5366616bd 100644
---- a/target/riscv/pmp.c
-+++ b/target/riscv/pmp.c
-@@ -138,7 +138,7 @@ static void pmp_decode_napot(target_ulong a, target_ulong *sa, target_ulong *ea)
-         return;
-     } else {
-         target_ulong t1 = ctz64(~a);
--        target_ulong base = (a & ~(((target_ulong)1 << t1) - 1)) << 3;
-+        target_ulong base = (a & ~(((target_ulong)1 << t1) - 1)) << 2;
-         target_ulong range = ((target_ulong)1 << (t1 + 3)) - 1;
-         *sa = base;
-         *ea = base + range;
+diff --git a/MAINTAINERS b/MAINTAINERS
+index d676c73f8840..317eff6cec4d 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -262,7 +262,7 @@ M: Alistair Francis <Alistair.Francis@wdc.com>
+ M: Sagar Karandikar <sagark@eecs.berkeley.edu>
+ M: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+ L: qemu-riscv@nongnu.org
+-S: Maintained
++S: Supported
+ F: target/riscv/
+ F: hw/riscv/
+ F: include/hw/riscv/
 -- 
 2.18.1
 
