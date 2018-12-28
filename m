@@ -1,64 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gd0Tz-0005bj-Df
+	id 1gd0Tz-0005c0-Jq
 	for mharc-qemu-riscv@gnu.org; Fri, 28 Dec 2018 17:19:55 -0500
-Received: from eggs.gnu.org ([208.118.235.92]:48330)
+Received: from eggs.gnu.org ([208.118.235.92]:48350)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <jimw@sifive.com>) id 1gd0Tu-0004zz-GN
+	(envelope-from <jimw@sifive.com>) id 1gd0Tu-00050W-OO
 	for qemu-riscv@nongnu.org; Fri, 28 Dec 2018 17:19:53 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <jimw@sifive.com>) id 1gd0LS-0001Od-M7
-	for qemu-riscv@nongnu.org; Fri, 28 Dec 2018 17:11:10 -0500
-Received: from mail-pl1-x644.google.com ([2607:f8b0:4864:20::644]:34815)
+	(envelope-from <jimw@sifive.com>) id 1gd0Kq-0000Gz-4l
+	for qemu-riscv@nongnu.org; Fri, 28 Dec 2018 17:10:31 -0500
+Received: from mail-pg1-x544.google.com ([2607:f8b0:4864:20::544]:40183)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <jimw@sifive.com>) id 1gd0LS-0001Nw-BR
-	for qemu-riscv@nongnu.org; Fri, 28 Dec 2018 17:11:06 -0500
-Received: by mail-pl1-x644.google.com with SMTP id w4so10507923plz.1
-	for <qemu-riscv@nongnu.org>; Fri, 28 Dec 2018 14:11:06 -0800 (PST)
+	(Exim 4.71) (envelope-from <jimw@sifive.com>) id 1gd0Ko-0008Uz-9B
+	for qemu-riscv@nongnu.org; Fri, 28 Dec 2018 17:10:28 -0500
+Received: by mail-pg1-x544.google.com with SMTP id z10so10519150pgp.7
+	for <qemu-riscv@nongnu.org>; Fri, 28 Dec 2018 14:10:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=qjFGo7mCW+G72VXx2tdNBtYMBeGehGrOVM14v8asCO4=;
-	b=DY0BIkHL9paCrT4O8oytXBkfK5cxEEPh/sEFlku/Y/AIUPJu9S1kYsA0MJehMzY+MP
-	r6/E/BEetfqMUbrF3MymIuGS/qxSL3uZ2gWg1motfHgaWAfUBdr+y4YsmNvTHAH6I5cY
-	FxBKKBCrsuSKy/jNYRd9rYQhdplTQ9zsVL85ALl4BrCIqt4YnybLJoK7R+G55UyvhD93
-	sFAht5DMmwa41G+RxsjHTJMs2BESEA5LREhDNSEOginb6gVLD1E9WnQ9Ktg8TVFBODts
-	eqyOU8yp/SyxRsf0cqqZmUfi1BwtQnTrLBU1+Bd7Xf9S1rmKNftqkjE05u2UTzQtREaU
-	X19g==
+	bh=3/5EhJBB2z/MFvaUwgffAB+Y09T1pMm6MX8B2C4kGO0=;
+	b=gRHHU7P1mRaoYVjO6Df2jk88DFc3zLBwV6nNg7MHM66WH7OeV2Q8PzrauwvBX2T5YJ
+	IK4kfsP6xGUVOgE3/wjsoD//ff2Pts2zIfO6xN4ikuqHZZLYEDZGssZGmcGM48quFNlj
+	mQgows/pr5Le/mTX1TcxXCieo1AWvmiqJvfus57jq5iLmFKkGZfaZvDlI09ZN0BiBm+p
+	kfELqgbk7MGAlCe3e4dO2KKJzIn3s8HxwklGkp+IuBkBiTEwQlN6WBCEibU7TuKZk2ud
+	kjsQ3u7lwtxVWsQS6ifBDzyyUXXs/tBjvVhTdNhTinVVWioD1eE2j9V+hsJCP/GfW3JL
+	ZDZA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=qjFGo7mCW+G72VXx2tdNBtYMBeGehGrOVM14v8asCO4=;
-	b=GflYGDkHvxEEh2EGK1LWdIiOvorTje80dbqCfV2pxfJUCMXNcxpFOzr2vPkuJSGIBE
-	yWcKelHWadiAEFnd/xyTPJorNiZztx7R+7+FYniBH4ZVcEiyhJlFdzdyeA9dPe+LhgJE
-	eQV+T46DbcX174MAHuzlatMqOKppbdCFjZDkqgNqvffPvn962WBmFQEPKq2Xkv1yeHgv
-	lF8uxUy8VDb/DcJkTk+H51KQOJOW9ZwbHa8OEjlZevhCgSOkZ6x2kZ11M4j5Nzay4zeW
-	z3aHtOap8zt2NyaJ9jaNJQxQDynsKjR/cDSfpnz+K5jsnAl5YWJGFvJ2Swi30qGsWbTX
-	UVlg==
-X-Gm-Message-State: AJcUukdl8j1NehrPV+Li69HfEQNf3LkNUY3n70tsKCBAcvhOz9tykKiT
-	uhIBfPlirjlYDYsyx22uBn6G67s726eqzg==
-X-Google-Smtp-Source: ALg8bN7+aOkj/03bcY3s/XzZXmXUfN7GP+RZoDq30r/dlr+eQvXf79yQ0y8EQKx1GGFKhDHYwRpg4A==
-X-Received: by 2002:a17:902:4681:: with SMTP id
-	p1mr29843943pld.184.1546035065384; 
-	Fri, 28 Dec 2018 14:11:05 -0800 (PST)
+	bh=3/5EhJBB2z/MFvaUwgffAB+Y09T1pMm6MX8B2C4kGO0=;
+	b=abxodqvQzctMs1TurkNOzTjWuWgfXJwK7DEFm9RGpwTmhK9Ze7c8IXejp8QfRw9DF+
+	OhH3Ue2D1CBxbsJ3V1g9btDYg5jISs3gfM+TUcYs+0YVOhQ+LPrKmM2XB+O0atoKvkKB
+	6UBNFKk3M/hW/314pOC6yR0vGnSrt/0Yv1H5gbBUPIDEmhR18AIma8bUMswjEnRb9cqy
+	2p1BUX0Nu62naR5O73JG5hOeRaYvGuGJUPoccwEQ+Ph3n1YfRUudmLOVYRhiVm8htqeO
+	PHvkF7R2aR7mnuT/0Dc17dK/W+yXTJPjDNhtk05DHWqa4Obp4e0YHc6KZHtFuX9kZMkF
+	Ad6g==
+X-Gm-Message-State: AJcUukfJQo5kTgbibBHXECewOziiwyDtylO+3y43fGa6ElhcjRCEB8bL
+	LHK9KDrf2pzmnYCT4HpqXh0ldg==
+X-Google-Smtp-Source: ALg8bN7+fAexkGEhDt90SN+15irOMpHJ9eTDTUzRxHXhjQdZ8TTUbceJBGRvtb5V6azB6Qf3xfTF7w==
+X-Received: by 2002:a63:ee0e:: with SMTP id e14mr27129157pgi.8.1546035020842; 
+	Fri, 28 Dec 2018 14:10:20 -0800 (PST)
 Received: from rohan.sifive.com ([12.206.222.5])
 	by smtp.gmail.com with ESMTPSA id
-	g70sm69255769pfg.98.2018.12.28.14.11.04
+	a90sm76174790pfj.109.2018.12.28.14.10.20
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 28 Dec 2018 14:11:05 -0800 (PST)
+	Fri, 28 Dec 2018 14:10:20 -0800 (PST)
 From: Jim Wilson <jimw@sifive.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org,
 	Jim Wilson <jimw@sifive.com>
-Date: Fri, 28 Dec 2018 14:11:02 -0800
-Message-Id: <20181228221102.5080-1-jimw@sifive.com>
+Date: Fri, 28 Dec 2018 14:10:18 -0800
+Message-Id: <20181228221018.5022-1-jimw@sifive.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <CAFyWVaai=5K7j8w+Abpk9jxGyKuo4v9w2BgmDbY=_29+Q++Jyw@mail.gmail.com>
 References: <CAFyWVaai=5K7j8w+Abpk9jxGyKuo4v9w2BgmDbY=_29+Q++Jyw@mail.gmail.com>
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::644
-Subject: [Qemu-riscv] [PATCH 5/5 v2] RISC-V: Add hooks to use the gdb xml
- files.
+X-Received-From: 2607:f8b0:4864:20::544
+Subject: [Qemu-riscv] [PATCH 4/5 v2] RISC-V: Add debug support for accessing
+ CSRs.
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -72,131 +71,336 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Fri, 28 Dec 2018 22:19:53 -0000
 
+Adds a debugger parameter to csr_read_helper and csr_write_helper.  When
+this is true, we disable illegal instruction checks.
+
 Signed-off-by: Jim Wilson <jimw@sifive.com>
 ---
- target/riscv/cpu.c     |  9 ++++++-
- target/riscv/gdbstub.c | 73 ++++++++++++++++++++++++++++++++++++++++++++------
- 2 files changed, 73 insertions(+), 9 deletions(-)
+ linux-user/riscv/signal.c |  5 ++-
+ target/riscv/cpu.h        |  7 +++-
+ target/riscv/cpu_helper.c |  4 +-
+ target/riscv/gdbstub.c    |  4 +-
+ target/riscv/op_helper.c  | 93 ++++++++++++++++++++++++++++++++---------------
+ 5 files changed, 76 insertions(+), 37 deletions(-)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index a025a0a..b248e3e 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -305,6 +305,8 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
-         return;
+diff --git a/linux-user/riscv/signal.c b/linux-user/riscv/signal.c
+index f598d41..ed76f23 100644
+--- a/linux-user/riscv/signal.c
++++ b/linux-user/riscv/signal.c
+@@ -83,7 +83,8 @@ static void setup_sigcontext(struct target_sigcontext *sc, CPURISCVState *env)
+         __put_user(env->fpr[i], &sc->fpr[i]);
      }
  
-+    riscv_cpu_register_gdb_regs_for_features(cs);
-+
-     qemu_init_vcpu(cs);
-     cpu_reset(cs);
+-    uint32_t fcsr = csr_read_helper(env, CSR_FCSR); /*riscv_get_fcsr(env);*/
++    /*riscv_get_fcsr(env);*/
++    uint32_t fcsr = csr_read_helper(env, CSR_FCSR, false);
+     __put_user(fcsr, &sc->fcsr);
+ }
  
-@@ -345,7 +347,12 @@ static void riscv_cpu_class_init(ObjectClass *c, void *data)
-     cc->synchronize_from_tb = riscv_cpu_synchronize_from_tb;
-     cc->gdb_read_register = riscv_cpu_gdb_read_register;
-     cc->gdb_write_register = riscv_cpu_gdb_write_register;
--    cc->gdb_num_core_regs = 65;
-+    cc->gdb_num_core_regs = 33;
-+#if defined(TARGET_RISCV32)
-+    cc->gdb_core_xml_file = "riscv-32bit-cpu.xml";
-+#elif defined(TARGET_RISCV64)
-+    cc->gdb_core_xml_file = "riscv-64bit-cpu.xml";
-+#endif
-     cc->gdb_stop_before_watchpoint = true;
-     cc->disas_set_info = riscv_cpu_disas_set_info;
- #ifdef CONFIG_USER_ONLY
+@@ -159,7 +160,7 @@ static void restore_sigcontext(CPURISCVState *env, struct target_sigcontext *sc)
+ 
+     uint32_t fcsr;
+     __get_user(fcsr, &sc->fcsr);
+-    csr_write_helper(env, fcsr, CSR_FCSR);
++    csr_write_helper(env, fcsr, CSR_FCSR, false);
+ }
+ 
+ static void restore_ucontext(CPURISCVState *env, struct target_ucontext *uc)
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 4ee09b9..29361ca 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -290,8 +290,11 @@ static inline void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
+ }
+ 
+ void csr_write_helper(CPURISCVState *env, target_ulong val_to_write,
+-        target_ulong csrno);
+-target_ulong csr_read_helper(CPURISCVState *env, target_ulong csrno);
++                      target_ulong csrno, bool debugger);
++target_ulong csr_read_helper(CPURISCVState *env, target_ulong csrno,
++                             bool debugger);
++
++void riscv_cpu_register_gdb_regs_for_features(CPUState *cs);
+ 
+ #include "exec/cpu-all.h"
+ 
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index 86f9f47..1abad94 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -526,7 +526,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+             get_field(s, MSTATUS_SIE) : get_field(s, MSTATUS_UIE << env->priv));
+         s = set_field(s, MSTATUS_SPP, env->priv);
+         s = set_field(s, MSTATUS_SIE, 0);
+-        csr_write_helper(env, s, CSR_MSTATUS);
++        csr_write_helper(env, s, CSR_MSTATUS, false);
+         riscv_set_mode(env, PRV_S);
+     } else {
+         /* No need to check MTVEC for misaligned - lower 2 bits cannot be set */
+@@ -551,7 +551,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+             get_field(s, MSTATUS_MIE) : get_field(s, MSTATUS_UIE << env->priv));
+         s = set_field(s, MSTATUS_MPP, env->priv);
+         s = set_field(s, MSTATUS_MIE, 0);
+-        csr_write_helper(env, s, CSR_MSTATUS);
++        csr_write_helper(env, s, CSR_MSTATUS, false);
+         riscv_set_mode(env, PRV_M);
+     }
+     /* TODO yield load reservation  */
 diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
-index b06f0fa..9558d80 100644
+index 71c3eb1..b06f0fa 100644
 --- a/target/riscv/gdbstub.c
 +++ b/target/riscv/gdbstub.c
-@@ -31,10 +31,6 @@ int riscv_cpu_gdb_read_register(CPUState *cs, uint8_t *mem_buf, int n)
-         return gdb_get_regl(mem_buf, env->gpr[n]);
-     } else if (n == 32) {
-         return gdb_get_regl(mem_buf, env->pc);
--    } else if (n < 65) {
--        return gdb_get_reg64(mem_buf, env->fpr[n - 33]);
--    } else if (n < 4096 + 65) {
--        return gdb_get_regl(mem_buf, csr_read_helper(env, n - 65, true));
+@@ -34,7 +34,7 @@ int riscv_cpu_gdb_read_register(CPUState *cs, uint8_t *mem_buf, int n)
+     } else if (n < 65) {
+         return gdb_get_reg64(mem_buf, env->fpr[n - 33]);
+     } else if (n < 4096 + 65) {
+-        return gdb_get_regl(mem_buf, csr_read_helper(env, n - 65));
++        return gdb_get_regl(mem_buf, csr_read_helper(env, n - 65, true));
      }
      return 0;
  }
-@@ -53,11 +49,72 @@ int riscv_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
-     } else if (n == 32) {
-         env->pc = ldtul_p(mem_buf);
-         return sizeof(target_ulong);
--    } else if (n < 65) {
--        env->fpr[n - 33] = ldq_p(mem_buf); /* always 64-bit */
-+    }
-+    return 0;
-+}
-+
-+static int riscv_gdb_get_fpu(CPURISCVState *env, uint8_t *mem_buf, int n)
-+{
-+    if (n < 32) {
-+        return gdb_get_reg64(mem_buf, env->fpr[n]);
-+    } else if (n < 35) {
-+        /*
-+         * CSR_FFLAGS is 0x001, and gdb says it is FP register 32, so we
-+         * subtract 31 to map the gdb FP register number to the CSR number.
-+         * This also works for CSR_FRM and CSR_FCSR.
-+         */
-+        return gdb_get_regl(mem_buf, csr_read_helper(env, n - 31, true));
-+    }
-+    return 0;
-+}
-+
-+static int riscv_gdb_set_fpu(CPURISCVState *env, uint8_t *mem_buf, int n)
-+{
-+    if (n < 32) {
-+        env->fpr[n] = ldq_p(mem_buf); /* always 64-bit */
+@@ -57,7 +57,7 @@ int riscv_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
+         env->fpr[n - 33] = ldq_p(mem_buf); /* always 64-bit */
          return sizeof(uint64_t);
--    } else if (n < 4096 + 65) {
--        csr_write_helper(env, ldtul_p(mem_buf), n - 65, true);
-+    } else if (n < 35) {
-+        /*
-+         * CSR_FFLAGS is 0x001, and gdb says it is FP register 32, so we
-+         * subtract 31 to map the gdb FP register number to the CSR number.
-+         * This also works for CSR_FRM and CSR_FCSR.
-+         */
-+        csr_write_helper(env, ldtul_p(mem_buf), n - 31, true);
+     } else if (n < 4096 + 65) {
+-        csr_write_helper(env, ldtul_p(mem_buf), n - 65);
++        csr_write_helper(env, ldtul_p(mem_buf), n - 65, true);
      }
      return 0;
  }
-+
-+static int riscv_gdb_get_csr(CPURISCVState *env, uint8_t *mem_buf, int n)
-+{
-+    if (n < ARRAY_SIZE(csr_register_map)) {
-+        return gdb_get_regl(mem_buf, csr_read_helper(env, csr_register_map[n],
-+                                                     true));
+diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+index 3726299..3c5641e 100644
+--- a/target/riscv/op_helper.c
++++ b/target/riscv/op_helper.c
+@@ -87,7 +87,7 @@ static void validate_mstatus_fs(CPURISCVState *env, uintptr_t ra)
+  * Adapted from Spike's processor_t::set_csr
+  */
+ void csr_write_helper(CPURISCVState *env, target_ulong val_to_write,
+-        target_ulong csrno)
++                      target_ulong csrno, bool debugger)
+ {
+ #ifndef CONFIG_USER_ONLY
+     uint64_t delegable_ints = MIP_SSIP | MIP_STIP | MIP_SEIP;
+@@ -96,15 +96,21 @@ void csr_write_helper(CPURISCVState *env, target_ulong val_to_write,
+ 
+     switch (csrno) {
+     case CSR_FFLAGS:
+-        validate_mstatus_fs(env, GETPC());
++        if (!debugger) {
++            validate_mstatus_fs(env, GETPC());
++        }
+         cpu_riscv_set_fflags(env, val_to_write & (FSR_AEXC >> FSR_AEXC_SHIFT));
+         break;
+     case CSR_FRM:
+-        validate_mstatus_fs(env, GETPC());
++        if (!debugger) {
++            validate_mstatus_fs(env, GETPC());
++        }
+         env->frm = val_to_write & (FSR_RD >> FSR_RD_SHIFT);
+         break;
+     case CSR_FCSR:
+-        validate_mstatus_fs(env, GETPC());
++        if (!debugger) {
++            validate_mstatus_fs(env, GETPC());
++        }
+         env->frm = (val_to_write & FSR_RD) >> FSR_RD_SHIFT;
+         cpu_riscv_set_fflags(env, (val_to_write & FSR_AEXC) >> FSR_AEXC_SHIFT);
+         break;
+@@ -169,7 +175,9 @@ void csr_write_helper(CPURISCVState *env, target_ulong val_to_write,
+          * CLINT, no additional locking is needed for read-modifiy-write
+          * CSR operations
+          */
+-        qemu_mutex_lock_iothread();
++        if (!debugger) {
++            qemu_mutex_lock_iothread();
++        }
+         RISCVCPU *cpu = riscv_env_get_cpu(env);
+         riscv_cpu_update_mip(cpu, MIP_SSIP | MIP_STIP,
+                                   (val_to_write & (MIP_SSIP | MIP_STIP)));
+@@ -177,7 +185,9 @@ void csr_write_helper(CPURISCVState *env, target_ulong val_to_write,
+          * csrs, csrc on mip.SEIP is not decomposable into separate read and
+          * write steps, so a different implementation is needed
+          */
+-        qemu_mutex_unlock_iothread();
++        if (!debugger) {
++            qemu_mutex_unlock_iothread();
++        }
+         break;
+     }
+     case CSR_MIE: {
+@@ -247,21 +257,25 @@ void csr_write_helper(CPURISCVState *env, target_ulong val_to_write,
+             mask |= SSTATUS_MXR;
+         }
+         ms = (ms & ~mask) | (val_to_write & mask);
+-        csr_write_helper(env, ms, CSR_MSTATUS);
++        csr_write_helper(env, ms, CSR_MSTATUS, debugger);
+         break;
+     }
+     case CSR_SIP: {
+-        qemu_mutex_lock_iothread();
++        if (!debugger) {
++            qemu_mutex_lock_iothread();
++        }
+         target_ulong next_mip = (env->mip & ~env->mideleg)
+                                 | (val_to_write & env->mideleg);
+-        qemu_mutex_unlock_iothread();
+-        csr_write_helper(env, next_mip, CSR_MIP);
++        if (!debugger) {
++            qemu_mutex_unlock_iothread();
++        }
++        csr_write_helper(env, next_mip, CSR_MIP, debugger);
+         break;
+     }
+     case CSR_SIE: {
+         target_ulong next_mie = (env->mie & ~env->mideleg)
+                                 | (val_to_write & env->mideleg);
+-        csr_write_helper(env, next_mie, CSR_MIE);
++        csr_write_helper(env, next_mie, CSR_MIE, debugger);
+         break;
+     }
+     case CSR_SATP: /* CSR_SPTBR */ {
+@@ -371,7 +385,9 @@ void csr_write_helper(CPURISCVState *env, target_ulong val_to_write,
+     do_illegal:
+ #endif
+     default:
+-        do_raise_exception_err(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
++        if (!debugger) {
++            do_raise_exception_err(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
++        }
+     }
+ }
+ 
+@@ -380,7 +396,8 @@ void csr_write_helper(CPURISCVState *env, target_ulong val_to_write,
+  *
+  * Adapted from Spike's processor_t::get_csr
+  */
+-target_ulong csr_read_helper(CPURISCVState *env, target_ulong csrno)
++target_ulong csr_read_helper(CPURISCVState *env, target_ulong csrno,
++                             bool debugger)
+ {
+ #ifndef CONFIG_USER_ONLY
+     target_ulong ctr_en = env->priv == PRV_U ? env->scounteren :
+@@ -416,13 +433,19 @@ target_ulong csr_read_helper(CPURISCVState *env, target_ulong csrno)
+ 
+     switch (csrno) {
+     case CSR_FFLAGS:
+-        validate_mstatus_fs(env, GETPC());
++        if (!debugger) {
++            validate_mstatus_fs(env, GETPC());
++        }
+         return cpu_riscv_get_fflags(env);
+     case CSR_FRM:
+-        validate_mstatus_fs(env, GETPC());
++        if (!debugger) {
++            validate_mstatus_fs(env, GETPC());
++        }
+         return env->frm;
+     case CSR_FCSR:
+-        validate_mstatus_fs(env, GETPC());
++        if (!debugger) {
++            validate_mstatus_fs(env, GETPC());
++        }
+         return (cpu_riscv_get_fflags(env) << FSR_AEXC_SHIFT)
+                 | (env->frm << FSR_RD_SHIFT);
+     /* rdtime/rdtimeh is trapped and emulated by bbl in system mode */
+@@ -504,9 +527,13 @@ target_ulong csr_read_helper(CPURISCVState *env, target_ulong csrno)
+         return env->mstatus & mask;
+     }
+     case CSR_SIP: {
+-        qemu_mutex_lock_iothread();
++        if (!debugger) {
++            qemu_mutex_lock_iothread();
++        }
+         target_ulong tmp = env->mip & env->mideleg;
+-        qemu_mutex_unlock_iothread();
++        if (!debugger) {
++            qemu_mutex_unlock_iothread();
++        }
+         return tmp;
+     }
+     case CSR_SIE:
+@@ -539,9 +566,13 @@ target_ulong csr_read_helper(CPURISCVState *env, target_ulong csrno)
+     case CSR_MSTATUS:
+         return env->mstatus;
+     case CSR_MIP: {
+-        qemu_mutex_lock_iothread();
++        if (!debugger) {
++            qemu_mutex_lock_iothread();
++        }
+         target_ulong tmp = env->mip;
+-        qemu_mutex_unlock_iothread();
++        if (!debugger) {
++            qemu_mutex_unlock_iothread();
++        }
+         return tmp;
+     }
+     case CSR_MIE:
+@@ -601,7 +632,11 @@ target_ulong csr_read_helper(CPURISCVState *env, target_ulong csrno)
+ #endif
+     }
+     /* used by e.g. MTIME read */
+-    do_raise_exception_err(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
++    if (!debugger) {
++        do_raise_exception_err(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
++    } else {
++        return 0;
 +    }
-+    return 0;
-+}
-+
-+static int riscv_gdb_set_csr(CPURISCVState *env, uint8_t *mem_buf, int n)
-+{
-+    if (n < ARRAY_SIZE(csr_register_map)) {
-+        csr_write_helper(env, ldtul_p(mem_buf), csr_register_map[n], true);
-+    }
-+    return 0;
-+}
-+
-+void riscv_cpu_register_gdb_regs_for_features(CPUState *cs)
-+{
-+    /* ??? Assume all targets have FPU regs for now.  */
-+#if defined(TARGET_RISCV32)
-+    gdb_register_coprocessor(cs, riscv_gdb_get_fpu, riscv_gdb_set_fpu,
-+                             35, "riscv-32bit-fpu.xml", 0);
-+
-+    gdb_register_coprocessor(cs, riscv_gdb_get_csr, riscv_gdb_set_csr,
-+                             4096, "riscv-32bit-csr.xml", 0);
-+#elif defined(TARGET_RISCV64)
-+    gdb_register_coprocessor(cs, riscv_gdb_get_fpu, riscv_gdb_set_fpu,
-+                             35, "riscv-64bit-fpu.xml", 0);
-+
-+    gdb_register_coprocessor(cs, riscv_gdb_get_csr, riscv_gdb_set_csr,
-+                             4096, "riscv-64bit-csr.xml", 0);
-+#endif
-+}
+ }
+ 
+ /*
+@@ -625,8 +660,8 @@ target_ulong helper_csrrw(CPURISCVState *env, target_ulong src,
+         target_ulong csr)
+ {
+     validate_csr(env, csr, 1, GETPC());
+-    uint64_t csr_backup = csr_read_helper(env, csr);
+-    csr_write_helper(env, src, csr);
++    uint64_t csr_backup = csr_read_helper(env, csr, false);
++    csr_write_helper(env, src, csr, false);
+     return csr_backup;
+ }
+ 
+@@ -634,9 +669,9 @@ target_ulong helper_csrrs(CPURISCVState *env, target_ulong src,
+         target_ulong csr, target_ulong rs1_pass)
+ {
+     validate_csr(env, csr, rs1_pass != 0, GETPC());
+-    uint64_t csr_backup = csr_read_helper(env, csr);
++    uint64_t csr_backup = csr_read_helper(env, csr, false);
+     if (rs1_pass != 0) {
+-        csr_write_helper(env, src | csr_backup, csr);
++        csr_write_helper(env, src | csr_backup, csr, false);
+     }
+     return csr_backup;
+ }
+@@ -645,9 +680,9 @@ target_ulong helper_csrrc(CPURISCVState *env, target_ulong src,
+         target_ulong csr, target_ulong rs1_pass)
+ {
+     validate_csr(env, csr, rs1_pass != 0, GETPC());
+-    uint64_t csr_backup = csr_read_helper(env, csr);
++    uint64_t csr_backup = csr_read_helper(env, csr, false);
+     if (rs1_pass != 0) {
+-        csr_write_helper(env, (~src) & csr_backup, csr);
++        csr_write_helper(env, (~src) & csr_backup, csr, false);
+     }
+     return csr_backup;
+ }
+@@ -674,7 +709,7 @@ target_ulong helper_sret(CPURISCVState *env, target_ulong cpu_pc_deb)
+     mstatus = set_field(mstatus, MSTATUS_SPIE, 0);
+     mstatus = set_field(mstatus, MSTATUS_SPP, PRV_U);
+     riscv_set_mode(env, prev_priv);
+-    csr_write_helper(env, mstatus, CSR_MSTATUS);
++    csr_write_helper(env, mstatus, CSR_MSTATUS, false);
+ 
+     return retpc;
+ }
+@@ -699,7 +734,7 @@ target_ulong helper_mret(CPURISCVState *env, target_ulong cpu_pc_deb)
+     mstatus = set_field(mstatus, MSTATUS_MPIE, 0);
+     mstatus = set_field(mstatus, MSTATUS_MPP, PRV_U);
+     riscv_set_mode(env, prev_priv);
+-    csr_write_helper(env, mstatus, CSR_MSTATUS);
++    csr_write_helper(env, mstatus, CSR_MSTATUS, false);
+ 
+     return retpc;
+ }
 -- 
 2.7.4
 
