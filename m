@@ -1,55 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gd0UB-0005rZ-SH
-	for mharc-qemu-riscv@gnu.org; Fri, 28 Dec 2018 17:20:07 -0500
-Received: from eggs.gnu.org ([208.118.235.92]:48595)
+	id 1gdN1x-0005AA-9G
+	for mharc-qemu-riscv@gnu.org; Sat, 29 Dec 2018 17:24:29 -0500
+Received: from eggs.gnu.org ([208.118.235.92]:53933)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <jimw@sifive.com>) id 1gd0U7-0005Iz-Rv
-	for qemu-riscv@nongnu.org; Fri, 28 Dec 2018 17:20:05 -0500
+	(envelope-from <richard.henderson@linaro.org>) id 1gdN1t-00058b-GH
+	for qemu-riscv@nongnu.org; Sat, 29 Dec 2018 17:24:28 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <jimw@sifive.com>) id 1gd0Gf-00056b-CM
-	for qemu-riscv@nongnu.org; Fri, 28 Dec 2018 17:06:10 -0500
-Received: from mail-vs1-xe42.google.com ([2607:f8b0:4864:20::e42]:39565)
+	(envelope-from <richard.henderson@linaro.org>) id 1gdN0s-0002PB-OW
+	for qemu-riscv@nongnu.org; Sat, 29 Dec 2018 17:23:25 -0500
+Received: from mail-pf1-x443.google.com ([2607:f8b0:4864:20::443]:43517)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <jimw@sifive.com>) id 1gd0Gf-00056I-7W
-	for qemu-riscv@nongnu.org; Fri, 28 Dec 2018 17:06:09 -0500
-Received: by mail-vs1-xe42.google.com with SMTP id h78so13708159vsi.6
-	for <qemu-riscv@nongnu.org>; Fri, 28 Dec 2018 14:06:08 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
-	h=mime-version:from:date:message-id:subject:to:cc;
-	bh=W9/vjzhPdbumhkH9piUbeikPgVDyvN2D74ao/eJmjg4=;
-	b=dd8xs0S9woHdAxNeIbAWFwVxoOG/mnCmgHExW9hky9YwgyC0WEBCcG/Q9OXo4RDxlN
-	GtLoyivFLMa+76b+fxkssdgjHjvrLHMZfPM8Avp3ZFmEOyicfZkl3XvXcJXLa7uBIEB8
-	AavN2+o2LqJhR9M0xN+qkv/axFDUf0VDElewstXdHQ8w8YIDGU3M40V6j7yfMDOcvfbZ
-	1B9cbN+xcnekYL7bwx8D1eO3IMulFROGCn3f240E63s6dOpYXXIq2PduMQzgdcq0bA0F
-	MFn+3LCjFBbE+U4YCnSDyKKeunF5DVlHUE4yaHZpHK0fmhj3kmCWUoONz9U+zDaEEFgg
-	nHSw==
+	(Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
+	id 1gdN0s-0002Oa-Im
+	for qemu-riscv@nongnu.org; Sat, 29 Dec 2018 17:23:22 -0500
+Received: by mail-pf1-x443.google.com with SMTP id w73so11862166pfk.10
+	for <qemu-riscv@nongnu.org>; Sat, 29 Dec 2018 14:23:22 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+	h=subject:to:cc:references:from:openpgp:message-id:date:user-agent
+	:mime-version:in-reply-to:content-language:content-transfer-encoding;
+	bh=LY76N7v9ABHk0UKHYvhi6Fn6kamH+bvS5H6S2AHv/8E=;
+	b=EUqdHtkowFZHDuYE1t7iST3rfkkGO28765PC8JJBaDJ20Z2ik1GSg2RRRMFiu0t+uw
+	pZAoVNke+dhSbAneHMY+wJ5N3mdaP2KqEfGTheoKDz1wB78GLOqxeGGRBAaUUw7CzBg2
+	UFry9/azMf+6zHktGeMuGQEdcVW3xbdP4M1ow=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to:cc;
-	bh=W9/vjzhPdbumhkH9piUbeikPgVDyvN2D74ao/eJmjg4=;
-	b=EUsmRtfdKR/PTbHC4vm4Dvo3te44ZNXnsbhDNRor5KNBfZe8UKGVEe7lj1mNM9pQbM
-	j8rufavBphETLFbFJ+CSLWRP4l8/+HDMSS7HB1m7iBenC85TfaY2xF/sIy3OrG/6+oPO
-	4tolIzvD+4Jyu+sCd31Y7nAUADVQ/KZGV+yuQac+lAdl5+2K24YxQfZPqNRGfmKJ0nhP
-	CPQLtii8Cxtlz4tsk02hfdXD5tcMGoLOSL2c9vEuRsY3iKTNfMCGb5OdI3HEApEzB/ZB
-	Pnh//v5t64Yf1ONgMFDEzWA5KzZP3dGlevGGdRV2Ny1hkUAqFcgyQyG1VyNBfuvIv6AU
-	742g==
-X-Gm-Message-State: AA+aEWbpbIIbZwFQNTQ98B1gn1R9FqY+Pe6Or/d6D6FiMrLTGxqSM3NM
-	rTPzilxoqV3iYJNO5FNPHpjbC1esCjhilTkZidv5xg==
-X-Google-Smtp-Source: ALg8bN62x8xo/dFNcw/NeKM9YNdGJVRAEBJkR2oF+phH/b3dxehxA+ku92QGrNlvKJFZvMEoZMDxgUkq174XCluMFnQ=
-X-Received: by 2002:a67:4e5d:: with SMTP id c90mr11953130vsb.72.1546034768060; 
-	Fri, 28 Dec 2018 14:06:08 -0800 (PST)
+	h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
+	:date:user-agent:mime-version:in-reply-to:content-language
+	:content-transfer-encoding;
+	bh=LY76N7v9ABHk0UKHYvhi6Fn6kamH+bvS5H6S2AHv/8E=;
+	b=ZW/JmYLTCEyoIX3qvfsw4w8GOPxPSX4MgAX6GRaDQWVIR8TupY96lROAIWNS2vHLAw
+	hXJiBP1eaZMX3/ap1ALct0/ef2zOjHW51GhWpD4FxReUV2UHhccHg+t5IfxPVkJJWNko
+	2/9Mh8rIjemizxzurfN5oeWxZ0uyA4PAZr7KtczxjLEM+GSjszSn2SmNomP76olExwsG
+	WoTwyprGVYqQw8NJZDN/5B9PgndZiYbNATFI9s9jiuk0hUex6cOEfF2nfZSX9hoGbjP6
+	NEaszBaU1DigTE5zes8eeDggV6ijAkTEVpVYM6RsfaUTyPQ+BaM3HehV3AuGlXk5ry+i
+	xmMQ==
+X-Gm-Message-State: AJcUukeZpKk0dcyUckL149/4K/BePb5psFZSaMZ8VuzjK/iRg+fvmIMV
+	pB/YaAz9leEG/ipNr0IL8QEgI15rbSDqJQ==
+X-Google-Smtp-Source: ALg8bN6DQpjsxKby01yNWEwAbbDyXbWy1K7xdeDfg8SnxLzYrchQ/FaChcyk0kJBFhRKz6lVBO9cfw==
+X-Received: by 2002:a65:6215:: with SMTP id d21mr2903446pgv.289.1546122201276; 
+	Sat, 29 Dec 2018 14:23:21 -0800 (PST)
+Received: from cloudburst.twiddle.net
+	(c211-28-135-144.sunsh3.vic.optusnet.com.au. [211.28.135.144])
+	by smtp.gmail.com with ESMTPSA id
+	202sm89151161pfy.87.2018.12.29.14.23.18
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sat, 29 Dec 2018 14:23:20 -0800 (PST)
+To: Jim Wilson <jimw@sifive.com>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org
+References: <CAFyWVaai=5K7j8w+Abpk9jxGyKuo4v9w2BgmDbY=_29+Q++Jyw@mail.gmail.com>
+	<20181228220951.4962-1-jimw@sifive.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+Openpgp: preference=signencrypt
+Message-ID: <f3e26863-4624-2c8f-5a9d-f3e76b7e6f0e@linaro.org>
+Date: Sun, 30 Dec 2018 09:23:15 +1100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.3.1
 MIME-Version: 1.0
-From: Jim Wilson <jimw@sifive.com>
-Date: Fri, 28 Dec 2018 14:05:57 -0800
-Message-ID: <CAFyWVaai=5K7j8w+Abpk9jxGyKuo4v9w2BgmDbY=_29+Q++Jyw@mail.gmail.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, Jim Wilson <jimw@sifive.com>
-Content-Type: text/plain; charset="UTF-8"
+In-Reply-To: <20181228220951.4962-1-jimw@sifive.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::e42
-Subject: [Qemu-riscv] [PATCH 0/5 v2] RISC-V: Add gdb xml files and gdbstub
- support.
+X-Received-From: 2607:f8b0:4864:20::443
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH 3/5 v2] RISC-V: Map gdb CSR
+ reg numbers to hw reg numbers.
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -61,33 +76,24 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Dec 2018 22:20:05 -0000
+X-List-Received-Date: Sat, 29 Dec 2018 22:24:28 -0000
 
-This is the second version of the patch set.  I haven't gotten any bug
-reports for the patches in the several weeks that they have been
-available, and no review yet, so the only significant difference from
-the first version is that I ran them through checkpatch to fix style
-issues, and I sent them to the right mailing list this time.
+On 12/29/18 9:09 AM, Jim Wilson wrote:
+> +++ b/target/riscv/csr-map.h
+> @@ -0,0 +1,248 @@
+> +/*
+> + * The GDB CSR xml files list them in documentation order, not numerical order,
+> + * and are missing entries for unnamed CSRs.  So we need to map the gdb numbers
+> + * to the hardware numbers.
+> + */
+> +
+> +int csr_register_map[] = {
 
-With these patches, I can run system qemu with -s -S, connect to it
-with gdb, and then print any integer, FP, or CSR register.  This
-support is currently broken.
+static const?
 
-The first two patches in the series are just dropping in xml files
-from gdb unchanged, with configure support to point at them.  The next
-two patches are the inconvenient stuff.  The gdb CSR files are in
-documentation order not numerical order, so I need an array to map the
-gdb numbers to the actual hardware numbers.  The gdb files should
-probably be improved, but I don't know when that will happen.  That is
-the third patch.  The fourth patch is to disable all of the illegal
-instruction checks when accessing CSRs from the debugger, as it needs
-to be able to access them without traps.  The last patch adds the
-gdbstub support to use the new xml files which is pretty simple,
-though there is an unanswered question in there about what to do with
-the FP registers.  Should we try to configure them based on the
-target?  Right now I just always enable them which is the simple
-solution.  I'm not sure if enabling them based on the target will even
-work with gdb or not.
+Putting an initialized variable in a header file doesn't seem right.  Is this
+supposed to be a declaration that is shared between c files?
 
-Jim
+
+r~
 
