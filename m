@@ -1,60 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gdhCg-0007ix-99
-	for mharc-qemu-riscv@gnu.org; Sun, 30 Dec 2018 14:56:54 -0500
-Received: from eggs.gnu.org ([208.118.235.92]:39882)
+	id 1gf68b-00058R-7e
+	for mharc-qemu-riscv@gnu.org; Thu, 03 Jan 2019 11:46:29 -0500
+Received: from eggs.gnu.org ([208.118.235.92]:59431)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <jimw@sifive.com>) id 1gdhCd-0007i9-Om
-	for qemu-riscv@nongnu.org; Sun, 30 Dec 2018 14:56:52 -0500
+	(envelope-from <peter.maydell@linaro.org>) id 1gf68Z-00055b-0i
+	for qemu-riscv@nongnu.org; Thu, 03 Jan 2019 11:46:27 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <jimw@sifive.com>) id 1gdhCc-0007VH-T2
-	for qemu-riscv@nongnu.org; Sun, 30 Dec 2018 14:56:51 -0500
-Received: from mail-ua1-x942.google.com ([2607:f8b0:4864:20::942]:33110)
+	(envelope-from <peter.maydell@linaro.org>) id 1gf68X-0001cP-6D
+	for qemu-riscv@nongnu.org; Thu, 03 Jan 2019 11:46:26 -0500
+Received: from mail-oi1-x22d.google.com ([2607:f8b0:4864:20::22d]:34697)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <jimw@sifive.com>) id 1gdhCc-0007Uq-OG
-	for qemu-riscv@nongnu.org; Sun, 30 Dec 2018 14:56:50 -0500
-Received: by mail-ua1-x942.google.com with SMTP id t8so8227778uap.0
-	for <qemu-riscv@nongnu.org>; Sun, 30 Dec 2018 11:56:50 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+	(Exim 4.71) (envelope-from <peter.maydell@linaro.org>)
+	id 1gf68W-0001b6-MB
+	for qemu-riscv@nongnu.org; Thu, 03 Jan 2019 11:46:25 -0500
+Received: by mail-oi1-x22d.google.com with SMTP id r62so28214715oie.1
+	for <qemu-riscv@nongnu.org>; Thu, 03 Jan 2019 08:46:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=imCq807nB1pkD2IllxlKhjSLyWGJXtMcu5RIBMKifR8=;
-	b=nPkDKc4PyoV+d464mUglgTbgxOGnAOBYMfZlBafZSPQE71InuvaqYIOAR5dqrvFWQS
-	6+jANBfke3sUBngD9v12zaTEKjb9K4TYpmRTSl9bjP+S9e6lt5j4axIcOq0lfSN0PYJi
-	1em1iBG8eZKQRQyZmdFJyAaCp+q5xfdR2HKLwAyA1CFs2OIEYbo8X+HYqDBtBHjgPEmX
-	DN0UMU99prxa16OmhRxEiwrZH88k7BcqN6bfmTXwFXCoC5oQferO0gTq+rDtuZj3D9Fp
-	crFy1Q6kzfWaN/lvpxVwP4ITQA9dKNcUsbwa6jhyn0X3vj6YfWFjc3NWfMZhJlG8f1r3
-	HfUQ==
+	:cc; bh=5WrlGQcRTyiQNscuQyhV13b9K0090vFFFWUw7vYEwdU=;
+	b=QRhwXbGLSlPWw85GJTHs5M0dww4fqgm1UfdzNybY4Z0FaVsx0UF8wh9qbRDxvApIjd
+	PSggNejKlpTAwgPt3Oiw4W/FIHKbfcYO3rrV4bueIqbpbp0Rr6SDbriotSlfdymODO4p
+	dArLvcDJwNdrFSMxr/asfiR6bhG8LunItJ1to=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=imCq807nB1pkD2IllxlKhjSLyWGJXtMcu5RIBMKifR8=;
-	b=KMyAVYX33Ki7BEle81UgLLytpXT37lSIdcPm8BcpwxzR5AEgCRR2YqKdIem9SC7WXy
-	FTd5tLqMyIE1aLxWNXonIORR3vzNTG+Bllc698nZtnYiY6YVAnXScTEioKerTlzZTM3s
-	u7TtglFd4Z4J4Qfpu0FTFeL1xUwCXQmI8Azp6RDFvKewoQqoojcqg143KmK0FJXAKvWo
-	8ufyCZbEk6HJMNEyelzQ4KWZHxZOdmnado5IoikoBbooEbr8IrqDPZFK9NVdg/bL015y
-	BNxarDRxmKYnTpmW2IElDZxu9o406Dlm+j9WR5+bld6uKyW2dAQNe8wUGOMTsfLrS3jg
-	2tYg==
-X-Gm-Message-State: AJcUukdTXOku5hFA0sVjpS7a1Yy63VHH0Iy163RAmk/zx6JEaXO5Lb2v
-	i1AISkp95UDyyWJkp//eJlyINxt0hJ3E7iT27A9aMA==
-X-Google-Smtp-Source: ALg8bN4NM4jt1IyrrYz/41mflR0O45iRFHmM+wQn/nqFKORX/tkxmWd4Cl2Mdw5WIHV3fnd5RXFczSxwpJBNJGyoMCI=
-X-Received: by 2002:ab0:7db:: with SMTP id d27mr12346588uaf.4.1546199810051;
-	Sun, 30 Dec 2018 11:56:50 -0800 (PST)
+	bh=5WrlGQcRTyiQNscuQyhV13b9K0090vFFFWUw7vYEwdU=;
+	b=LJPBcW2i3btE70EdaUO8Hf3Tn/dEOGLaONO77JFt51Hs4QUZLfTeIgoUvby4sIr2qV
+	HnwOWzH0VAgLOw7hu/ibmwmGfz3DbixdeYTEloF7KaVuB27Sd0+zcTCT0sZC/LiXziK7
+	TxJQ/cLlh+E4uHQEmsYDtDcjPvjP7FDNKeDY8KO7Hv+jK5y4XT0p25jna4tjhGmz/xQb
+	hce+dIgVwnAay6UFSOhBSJ6QY5Vz/TpwocHO5NTYQxrNRfpmp1iYb/mfYUbyaMqfzGic
+	dZ2IyYSC8li+8wHBWWk7XdXsDi5S+rLcrDMBo+8K70btWKZY0rpL3aUd1vrRckjKGrHJ
+	iRcw==
+X-Gm-Message-State: AA+aEWa3bBx2/ETz6Pjvb70Wf/iQz+PmhJpXjfe7lcO4r/nBzDyLjba/
+	hXgkMbmLlu9+kWPLWt7wJBq9l6WAcBvhIhNvhhr27Zcu
+X-Google-Smtp-Source: AFSGD/UCg7+JbWsB0lgfTA3D7p8wvLNDOfoudNOu/R6PUnWmj+B+EgYxXPN9qom44zfeWfjYhFDbpi3FTW5o3Yuz1Ww=
+X-Received: by 2002:aca:2dc9:: with SMTP id
+	t192mr33410375oit.325.1546533982678; 
+	Thu, 03 Jan 2019 08:46:22 -0800 (PST)
 MIME-Version: 1.0
-References: <CAFyWVaai=5K7j8w+Abpk9jxGyKuo4v9w2BgmDbY=_29+Q++Jyw@mail.gmail.com>
-	<20181228220731.4753-1-jimw@sifive.com>
-	<bcf78767-a96e-8ba4-52da-97b34b3cb3ba@linaro.org>
-In-Reply-To: <bcf78767-a96e-8ba4-52da-97b34b3cb3ba@linaro.org>
-From: Jim Wilson <jimw@sifive.com>
-Date: Sun, 30 Dec 2018 11:56:39 -0800
-Message-ID: <CAFyWVaaTk_0cimE1z3p6vyT9hCvC4bF46KkooedFkz-QKP6g=w@mail.gmail.com>
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+References: <20181226172005.26990-1-palmer@sifive.com>
+In-Reply-To: <20181226172005.26990-1-palmer@sifive.com>
+From: Peter Maydell <peter.maydell@linaro.org>
+Date: Thu, 3 Jan 2019 16:46:11 +0000
+Message-ID: <CAFEAcA8t7V3XwkPCSKCPCd1qc=MxZcw2yjoHMW-NmTzGWMkbVQ@mail.gmail.com>
+To: Palmer Dabbelt <palmer@sifive.com>
+Cc: qemu-riscv@nongnu.org, QEMU Developers <qemu-devel@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::942
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH 1/5 v2] RISC-V: Add 32-bit gdb
- xml files.
+X-Received-From: 2607:f8b0:4864:20::22d
+Subject: Re: [Qemu-riscv] [PULL] RISC-V Changes for 3.2, Part 1
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -66,49 +62,38 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 30 Dec 2018 19:56:52 -0000
+X-List-Received-Date: Thu, 03 Jan 2019 16:46:28 -0000
 
-On Sat, Dec 29, 2018 at 2:20 PM Richard Henderson
-<richard.henderson@linaro.org> wrote:
-> On 12/29/18 9:07 AM, Jim Wilson wrote:
-> Don't the csr's vary between priv-1.9.1 and priv-1.10?
+On Wed, 26 Dec 2018 at 17:20, Palmer Dabbelt <palmer@sifive.com> wrote:
+>
+> The following changes since commit b72566a4ffaddbc0c0c1f6f5ee91b42ab13ff429:
+>
+>   Merge remote-tracking branch 'remotes/vivier2/tags/trivial-patches-pull-request' into staging (2018-12-19 15:31:02 +0000)
+>
+> are available in the Git repository at:
+>
+>   git://github.com/palmer-dabbelt/qemu.git tags/riscv-for-master-3.2-part1
+>
+> for you to fetch changes up to 7b91ae7d7944056c5e8045342e4039e978e43c82:
+>
+>   MAINTAINERS: Mark RISC-V as Supported (2018-12-21 07:57:15 -0800)
+>
+> ----------------------------------------------------------------
+> RISC-V Changes for 3.2, Part 1
+>
+> This pull request contains the first set of RISC-V patches I'd like to
+> target for the 3.2 development cycle.  It's really just a collection of
+> bug fixes with one major new feature: PCIe can now be attached to RISC-V
+> guests.
+>
+> This has passed my usual test of booting the latest Linux RC into a
+> Fedora disk image on the virt machine.
+>
 
-There are a few csr's that disappear in 1.10, but there is no known
-hardware that implements them.  There are a few csr's new in 1.10, but
-I don't know of any 1.9.1 systems that can run the software that
-requires the new registers.  There are a few that change name; the
-toolchain supports both the old and new names.  On the toolchain side,
-currently, none of the tools care about the privilege spec version.
-And the linux kernel doesn't care about the priv spec version either.
-This will eventually have to change, maybe with 1.11, but so far it
-hasn't been an issue with any software I've seen.
+Applied, thanks.
 
-qemu has an option to specify the priv spec version.  But looking at
-the csr's, this affects two of the registers that disappeared, which
-were never implemented in hardware, and aren't supported by gdb.  This
-also affects a few registers that have new fields in 1.10, but gdb
-doesn't know about those internal register fields, so this doesn't
-affect gdb either.
+Please update the changelog at https://wiki.qemu.org/ChangeLog/4.0
+for any user-visible changes.
 
-> I wonder if it would be better to auto-generate these, via the
-> gdb_get_dynamic_xml hook.  That way you don't need near identical copies for
-> 32-bit vs 64-bit.
-
-I haven't tried looking at this, but I don't see a convenient list of
-implemented csr's.  This list would be every csr that the
-csr_read_helper function in target/riscv/op_helper.c supports  That
-function requires some machine state that includes the register
-values, so it doesn't look convenient to use, unless we add more
-hackery to it.
-
-Long term, it would be useful to have target specific csr register
-lists.  Most csr's are optional, and most hardware only implements a
-subset of them.  This is somewhat orthogonal to what I'm trying to do
-here, but this would require a list of supported csr's in the target
-hardware file, then this would have to be fed back into
-csr_read_helper somehow, and then we could also use this to generate
-an appropriate xml csr register file for that target for use with gdb.
-Openocd already does something like this for a few supported targets.
-
-Jim
+-- PMM
 
