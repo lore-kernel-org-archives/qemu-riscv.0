@@ -1,59 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gfYpE-0002Pc-Ls
-	for mharc-qemu-riscv@gnu.org; Fri, 04 Jan 2019 18:24:24 -0500
-Received: from eggsout.gnu.org ([209.51.188.92]:39347 helo=eggs.gnu.org)
+	id 1gfYpF-0002S6-RT
+	for mharc-qemu-riscv@gnu.org; Fri, 04 Jan 2019 18:24:25 -0500
+Received: from eggsout.gnu.org ([209.51.188.92]:39341 helo=eggs.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.71)
 	(envelope-from <prvs=90010c98c=Alistair.Francis@wdc.com>)
-	id 1gfYpA-0002LS-Lt
+	id 1gfYp9-0002IS-28
 	for qemu-riscv@nongnu.org; Fri, 04 Jan 2019 18:24:23 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
 	(envelope-from <prvs=90010c98c=Alistair.Francis@wdc.com>)
-	id 1gfYp7-0003zP-Bp
-	for qemu-riscv@nongnu.org; Fri, 04 Jan 2019 18:24:20 -0500
-Received: from esa4.hgst.iphmx.com ([216.71.154.42]:58626)
+	id 1gfYp0-0003xT-1p
+	for qemu-riscv@nongnu.org; Fri, 04 Jan 2019 18:24:16 -0500
+Received: from esa1.hgst.iphmx.com ([68.232.141.245]:29839)
 	by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.71) (envelope-from <prvs=90010c98c=Alistair.Francis@wdc.com>)
-	id 1gfYox-0003wM-JA; Fri, 04 Jan 2019 18:24:07 -0500
+	id 1gfYop-0003pn-EK; Fri, 04 Jan 2019 18:23:59 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
 	d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
-	t=1546644247; x=1578180247;
+	t=1546644239; x=1578180239;
 	h=from:to:cc:subject:date:message-id:references:
 	in-reply-to:content-transfer-encoding:mime-version;
-	bh=QtChUhiaORXJYW/nR6baQGS5vORAX/E9ssS8P9MXg/8=;
-	b=ixXpmuVXo7ZaWzoi59uuqiZ7tJaj68kkdnZE7iWoX0oGV9tsOBRY9GIO
-	AqA7A2xWd7MsibQB63TkD104wY1OqGQLEjbArB3gEtZfOSsHLTV1ZbQ/3
-	ZCkd3NEOIYV93zRmvOxbDlY79M5lLo9aktQH6CAYnN2u+kl26dmU6s+DU
-	VHNgoVpJPiPrUbBQy6zH8+VG+Wsi2/ADhwZe243ZQVJqRyvrbZgUBhFM4
-	/hwXCassoc5peSe0AaJ0P2XDCxPBWqaaoNFqWKa2OsSNopBpCHjchpFnN
-	qWnIbVc1Bft5S69Tfv05liUEkbSvjt8hzugeSqIRCfCTb1vqZtTDskEV/ g==;
-X-IronPort-AV: E=Sophos;i="5.56,440,1539619200"; d="scan'208";a="98004796"
-Received: from mail-co1nam05lp2051.outbound.protection.outlook.com (HELO
-	NAM05-CO1-obe.outbound.protection.outlook.com) ([104.47.48.51])
-	by ob1.hgst.iphmx.com with ESMTP; 05 Jan 2019 07:24:06 +0800
+	bh=4bJDNOiV2s8n0Jbejue8hG84yAhTJGHEnpnAyYK1M1g=;
+	b=S1Jr8BbrIYNWp97rnK7SHJJV2UXXDVAx69VseQIS3Pua+GC1sgFq86iL
+	Y3RkDfaI4CVNxv4CAcP+rmIwZ4YcZaKWAlMrVUyH8lDleSgLjpDuJgJD3
+	PAIo5H+nEil3yt9HDE8f3GntDGSJCFFskfQv0aENcSZ9tPzOyzqxIU5oh
+	2WE6/qRZMKKWEs0uFgkC/Q09Z5c9s/U5l5DcDv8dBh26R9+5gEp0u4y+4
+	dVYiqkKHy+EM/49MrGsFBud2JezrInSD+fEviQA1KM8FLyCxu3eP62lmR
+	Wi6kB9eYy2W7fEzjZPdraGX6vrnMqrJ7jZ/LBO0+4ekKC7vb4rffIwIIr A==;
+X-IronPort-AV: E=Sophos;i="5.56,440,1539619200"; d="scan'208";a="202843126"
+Received: from mail-co1nam05lp2056.outbound.protection.outlook.com (HELO
+	NAM05-CO1-obe.outbound.protection.outlook.com) ([104.47.48.56])
+	by ob1.hgst.iphmx.com with ESMTP; 05 Jan 2019 07:23:57 +0800
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=sharedspace.onmicrosoft.com; s=selector1-wdc-com;
 	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=2HTt9Vg79d0qL4TNMAdRI0ieG1UYvJRXBVEaubP/2OA=;
-	b=Ahev6ph9/QJz6MHVqGx29ClCGNYHMke3StvILxxZ8+xBH/+tGOYxLwE9x4IiYYSU1b5gNaftbDHlFcR8I/M/GlXjKj3cbPHQAkuB9b/1ObbVeORvpdvYp97Tf8/bfoADIixaM08kuAC7yIPe+6ZZ3yApAsWLVLL2Asr7M/v6IYo=
+	bh=Eamd+IAvAFdy1XNXETNGf8xfLtxdMK0cta53gLGXpcY=;
+	b=AOhbxsVcCAdLkoyAdoH87oxnFP5cRdFNqSDsdmGVb1r8Dy99XQ3xdwoylA1G+XsbrfYrLUPHT4evlK1RBTvX0IxuPxSpN4luGm3WGcJWU1F3y2ZR03llALGmIJgNhINCURGaBozz7FFKd0XorpIOxFSBxHcMsNPjLLG7mJ4EMF4=
 Received: from MWHPR04MB0401.namprd04.prod.outlook.com (10.173.48.18) by
 	MWHPR04MB3776.namprd04.prod.outlook.com (10.172.169.142) with Microsoft
 	SMTP
 	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
-	15.20.1495.6; Fri, 4 Jan 2019 23:24:05 +0000
+	15.20.1495.6; Fri, 4 Jan 2019 23:23:56 +0000
 Received: from MWHPR04MB0401.namprd04.prod.outlook.com
 	([fe80::10e5:e75d:3272:2d33]) by
 	MWHPR04MB0401.namprd04.prod.outlook.com
 	([fe80::10e5:e75d:3272:2d33%6]) with mapi id 15.20.1495.005;
-	Fri, 4 Jan 2019 23:24:05 +0000
+	Fri, 4 Jan 2019 23:23:56 +0000
 From: Alistair Francis <Alistair.Francis@wdc.com>
 To: "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, "qemu-riscv@nongnu.org"
 	<qemu-riscv@nongnu.org>
 CC: Alistair Francis <Alistair.Francis@wdc.com>, "alistair23@gmail.com"
 	<alistair23@gmail.com>
-Thread-Topic: [PATCH v1 2/3] RISC-V: Implement atomic mip/sip CSR updates
-Thread-Index: AQHUpISV1wIyoZb5EkGgE+ToEMLoog==
-Date: Fri, 4 Jan 2019 23:24:04 +0000
-Message-ID: <8c5a410e1ce4a5898e77ef49e66da289518a5298.1546644177.git.alistair.francis@wdc.com>
+Thread-Topic: [PATCH v1 1/3] RISC-V: Implement modular CSR helper interface
+Thread-Index: AQHUpISPwaSQ64pj9UW+DoPQij96ZA==
+Date: Fri, 4 Jan 2019 23:23:55 +0000
+Message-ID: <0337c54faa2fc1e33a160b374ad9ec63fbd8e9f8.1546644177.git.alistair.francis@wdc.com>
 References: <cover.1546644177.git.alistair.francis@wdc.com>
 In-Reply-To: <cover.1546644177.git.alistair.francis@wdc.com>
 Accept-Language: en-US
@@ -61,53 +61,53 @@ Content-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
 x-mailer: git-send-email 2.19.1
-x-clientproxiedby: BYAPR03CA0026.namprd03.prod.outlook.com
-	(2603:10b6:a02:a8::39) To MWHPR04MB0401.namprd04.prod.outlook.com
+x-clientproxiedby: BYAPR01CA0051.prod.exchangelabs.com (2603:10b6:a03:94::28)
+	To MWHPR04MB0401.namprd04.prod.outlook.com
 	(2603:10b6:300:70::18)
 authentication-results: spf=none (sender IP is )
 	smtp.mailfrom=Alistair.Francis@wdc.com; 
 x-ms-exchange-messagesentrepresentingtype: 1
-x-originating-ip: [199.255.44.170]
+x-originating-ip: [199.255.44.250]
 x-ms-publictraffictype: Email
 x-microsoft-exchange-diagnostics: 1; MWHPR04MB3776;
-	6:pl0VgXfDUsiyrfgQvUct0LBdSwNjvuaCzNnTcrj/HbG0JkNG54fdg7AV1yOtrwhhXMCgnzU2Zj1J0yLLPsWEhGprR6N/EELG+rexkbmVowahXd+NRlrNxCo73GvHJXIJB9o3pMgFPE5M8iYiVanpPZy9+yC8SE4ZUJw+GPfvd8p6DZG+mK2TzIzKG1iJn3dCp9egr1ZbxQt92lE14mL7vDyAkaNV/0EWAOmS1KhO28LZAnP0eK0aeWFaiTBTtzbX5NHpuAT7q1/heMUZoVN6D3C1XRuOX8z/MAFyJQItiNju3pbRYS2prdCWT8NDadCqpbbyLUIzoa7LDk5NA371vUrPWxHQ9JxrNVeyiXWxciRATGLYMrWieOzLOo0xIQrKAe/kTRs8TaNOE2TPdU988URc0qjJ3lABOOAk3HI/rG26+QLNObBTUSI3DzQvOAgpXa6ivGDuG/HF2i4NjvlW6g==;
-	5:qOxyjYSq3Ww4NlTUGVi83t8GHG1M0gMK0GyAcV7X4hBCjifc1Ybd7K/Y7bAG+y9ENpaZJGh2xWpliKy7opAO6LyeCWD5RntDdJJZCkeSEIQPc2sknGKHUvoBuydmn+4cHLRdfUisj5XSn+9maD5Aa9jKve+aKI2BWV7ZByvgWwu3EkVQpxFsz8NuAQZtSEI2gOjtutE7TTt1guEJxp+MRQ==;
-	7:xwWcSd9W5hbar94oUVhu6sylLGD5GlQ6MA0Hc2K469goxPThA4YnLxjPT4/byYyWnrKlK+61xygZGBPWTjMRW+9reJVhdQHtkVxUHFwdTE/YXUqKhgWxwF21F4O5L1Eje5DLKkhSrE0nhNHoE5MFMw==
-x-ms-office365-filtering-correlation-id: e0751d74-f43b-44b0-291b-08d6729bb79f
+	6:oQKg3M5s4iYOxvNFlNIv0kqmi1H38VaTnjVlNmx0U13BiinNCG+edwq2CVisf5j5eODtekBc5TrHrBnaAMye9BiN5tUDhkAolgOsUT7V/BbMSYMNSIFeRMkdn8zINeOYF9jVF+u/mIOwuF33wQ7Eb10Mg9Kjf1tzilyj/keu99Mbzkw2+GrQwcUzpd7L4ppd3bD7y+kIewcsNl/gwVB+sRbXKzJo+eTdrhPgYaPbHbwn1Nsf9XJgCMYfMtsgLPzHDcMWFi88NZ6MWqLEvQvHXm6Eva/O0SsL7zZy0NHY8EJgd7umaLpsCL13ue31iP6IQxEDnsFeHsox+Txr5Pzj5TSYBt1RkpW8WFYqZqK0AJ5HScfbD0oqX7yQJlasXYwnZdiHasmykfO1BcrUkByhvxQopVlwB7mgzKbSk9JAnyCM8qMATRHZMEZ4LIleKcQZTwMS6rAHIJvXdC2ang3+5w==;
+	5:P6j5Q8+tiS4j9DZiZ+grl51P6bxqlIZmSBYq8wU3uNgG/cG3CMTI7488TLj52Dgq9NSkvcei7thYE3hv5UakzTX3MAGW+HgYduMiKReItpUsgLUDVM+7DG+ZPwWZZyBKsDjwrS6TcTZudLYWngkBtMPmFoTwMLiD9rggtEbR7GPqim2EWeq29Au0v2xUkE9sWwA8QriuXaZo9ukFccG4wg==;
+	7:uVDvfyNJg3HtSBbaYBXWyBbu+W/vAd8F7ys7xhMnV9H7yLP8aDbn4O8cHOGUhmZRhEl4YQG+QK9+1z8d/Xu6uvy+w9YQKSdd0g/4KtUZ8PEm66lijCN+EQm81DbVOIlqZnvA+eBYyYLt8OmG3d7ZhQ==
+x-ms-office365-filtering-correlation-id: 114076e9-366d-4a9b-b266-08d6729bb23a
 x-ms-office365-filtering-ht: Tenant
 x-microsoft-antispam: BCL:0; PCL:0;
 	RULEID:(2390118)(7020095)(4652040)(8989299)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(5600109)(711020)(4618075)(2017052603328)(7153060)(7193020);
 	SRVR:MWHPR04MB3776; 
 x-ms-traffictypediagnostic: MWHPR04MB3776:
 wdcipoutbound: EOP-TRUE
-x-microsoft-antispam-prvs: <MWHPR04MB3776D22C1EDE662364B1207C908E0@MWHPR04MB3776.namprd04.prod.outlook.com>
+x-microsoft-antispam-prvs: <MWHPR04MB3776ABD4A049134DC8411000908E0@MWHPR04MB3776.namprd04.prod.outlook.com>
 x-exchange-antispam-report-cfa-test: BCL:0; PCL:0;
 	RULEID:(8211001083)(3230021)(908002)(999002)(5005026)(6040522)(8220060)(2401047)(8121501046)(3002001)(3231475)(944501520)(52105112)(10201501046)(93006095)(93001095)(6055026)(6041310)(20161123562045)(20161123560045)(20161123564045)(201703131423095)(201702281528075)(20161123555045)(201703061421075)(201703061406153)(20161123558120)(201708071742011)(7699051)(76991095);
 	SRVR:MWHPR04MB3776; BCL:0; PCL:0; RULEID:; SRVR:MWHPR04MB3776; 
 x-forefront-prvs: 0907F58A24
 x-forefront-antispam-report: SFV:NSPM;
-	SFS:(10019020)(376002)(366004)(346002)(396003)(136003)(39860400002)(199004)(189003)(36756003)(256004)(14444005)(446003)(2616005)(186003)(14454004)(476003)(26005)(305945005)(71200400001)(11346002)(71190400001)(50226002)(6116002)(44832011)(5024004)(316002)(4326008)(486006)(118296001)(3846002)(25786009)(8676002)(2501003)(5660300001)(39060400002)(8936002)(81166006)(81156014)(52116002)(6512007)(97736004)(6436002)(53936002)(86362001)(102836004)(575784001)(6486002)(2906002)(68736007)(105586002)(66066001)(106356001)(478600001)(7736002)(110136005)(54906003)(72206003)(15650500001)(6506007)(99286004)(386003)(76176011);
+	SFS:(10019020)(376002)(366004)(346002)(396003)(136003)(39860400002)(199004)(189003)(36756003)(256004)(14444005)(446003)(2616005)(186003)(14454004)(476003)(26005)(305945005)(4744004)(71200400001)(11346002)(71190400001)(50226002)(6116002)(44832011)(316002)(4326008)(486006)(118296001)(3846002)(25786009)(8676002)(2501003)(5660300001)(39060400002)(8936002)(81166006)(81156014)(52116002)(6306002)(6512007)(97736004)(6436002)(53936002)(86362001)(102836004)(575784001)(6486002)(2906002)(68736007)(53946003)(105586002)(66066001)(106356001)(478600001)(7736002)(110136005)(54906003)(72206003)(6506007)(99286004)(386003)(76176011)(2004002)(559001)(569006);
 	DIR:OUT; SFP:1102; SCL:1; SRVR:MWHPR04MB3776;
 	H:MWHPR04MB0401.namprd04.prod.outlook.com; FPR:; SPF:None;
 	LANG:en; PTR:InfoNoRecords; A:1; MX:1; 
 x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam-message-info: OPvufLNab5g6jB+3q/ZeQ5XB9t2DZzdp3/rOw3xEVl6roLY1E6aCeadbDpWVu1olkX2OM5z/G908TYh5lW3hzskRNYifGazStH8rVMIjGO5xzpOa/U5ziMmeOFmPtLrwI41AZbkJZkmBf2iiktnlZv9N1sic6sKvocWEl7//aBYWvMuQtOB8waRRGzaN4kgBrxSm2bpiuqAcYqUcIkyPPL+MdALEhxNjAO1ZCSkLTJtjGWhMGz+2QNXPSRbtMm6nSBPaRXSqHYgoALbbbpVP9aJ+w/AO9FOHGRgXMYo4WBAUFL1qgbAcwISmg0SL19BK
+x-microsoft-antispam-message-info: xe9pAeKHSrvfj2r5BlIpUniBalwb1ysK1Okw4hrR2daKvPDuxbF8h0JT48UD1lcMh5LJsdGggw2P0T2+Oxfd6Fp9fJxzqEpDNcWukd7bUnAPCQUCLVg8AOOsh1MNoTkPRzsnWowPUuEsSDnSB+oGfhFlQorr6G4mZ4hBEpmuGvfFqs5A8tOPErfHCkDBeZyC6zCT+0gle/CHr8yuTQYmDJFi1IF31LzpIh6eIJ/2AtTwdgBkwVxaa5KPbMRN1YvnBfMVx23JkU9UfkrwOBbSqF4TANpicoG5DooBpagbafmXfw4dFli3fm0GhmucR90t
 spamdiagnosticoutput: 1:99
 spamdiagnosticmetadata: NSPM
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
 X-OriginatorOrg: wdc.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: e0751d74-f43b-44b0-291b-08d6729bb79f
-X-MS-Exchange-CrossTenant-originalarrivaltime: 04 Jan 2019 23:24:04.8318 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 114076e9-366d-4a9b-b266-08d6729bb23a
+X-MS-Exchange-CrossTenant-originalarrivaltime: 04 Jan 2019 23:23:55.8786 (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: MWHPR04MB3776
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 216.71.154.42
-Subject: [Qemu-riscv] [PATCH v1 2/3] RISC-V: Implement atomic mip/sip CSR
- updates
+X-Received-From: 68.232.141.245
+Subject: [Qemu-riscv] [PATCH v1 1/3] RISC-V: Implement modular CSR helper
+ interface
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -123,8 +123,34 @@ X-List-Received-Date: Fri, 04 Jan 2019 23:24:23 -0000
 
 From: Michael Clark <mjc@sifive.com>
 
-Use the new CSR read/modify/write interface to implement
-atomic updates to mip/sip.
+Previous CSR code uses csr_read_helper and csr_write_helper
+to update CSR registers however this interface prevents
+atomic read/modify/write CSR operations; in addition
+there is no trap-free method to access to CSRs due
+to the monolithic CSR functions call longjmp.
+
+The current iCSR interface is not safe to be called by
+target/riscv/gdbstub.c as privilege checks or missing CSRs
+may call longjmp to generate exceptions. It needs to
+indicate existence so traps can be generated in the
+CSR instruction helpers.
+
+This commit moves CSR access from the monolithic switch
+statements in target/riscv/op_helper.c into modular
+read/write functions in target/riscv/csr.c using a new
+function pointer table for dispatch (which can later
+be used to allow CPUs to hook up model specific CSRs).
+
+A read/modify/write interface is added to support atomic
+CSR operations and a non-trapping interface is added
+to allow exception-free access to CSRs by the debugger.
+
+The CSR functions and CSR dispatch table are ordered
+to match The RISC-V Instruction Set Manual, Volume II:
+Privileged Architecture Version 1.10, 2.2 CSR Listing.
+
+An API is added to allow derived cpu instances to modify
+or implement new CSR operations.
 
 Cc: Sagar Karandikar <sagark@eecs.berkeley.edu>
 Cc: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
@@ -133,109 +159,1677 @@ Cc: Alistair Francis <Alistair.Francis@wdc.com>
 Signed-off-by: Michael Clark <mjc@sifive.com>
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/csr.c | 56 +++++++++++++++++++++++-----------------------
- 1 file changed, 28 insertions(+), 28 deletions(-)
+ target/riscv/Makefile.objs |   2 +-
+ target/riscv/cpu.h         |  35 +-
+ target/riscv/cpu_helper.c  |   4 +-
+ target/riscv/csr.c         | 846 +++++++++++++++++++++++++++++++++++++
+ target/riscv/gdbstub.c     |  10 +-
+ target/riscv/op_helper.c   | 613 +--------------------------
+ 6 files changed, 904 insertions(+), 606 deletions(-)
+ create mode 100644 target/riscv/csr.c
 
+diff --git a/target/riscv/Makefile.objs b/target/riscv/Makefile.objs
+index fcc5d34c1f..4072abe3e4 100644
+--- a/target/riscv/Makefile.objs
++++ b/target/riscv/Makefile.objs
+@@ -1 +1 @@
+-obj-y +=3D translate.o op_helper.o cpu_helper.o cpu.o fpu_helper.o gdbstub=
+.o pmp.o
++obj-y +=3D translate.o op_helper.o cpu_helper.o cpu.o csr.o fpu_helper.o g=
+dbstub.o pmp.o
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 4ee09b9cff..4aeaa32049 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -289,9 +289,38 @@ static inline void cpu_get_tb_cpu_state(CPURISCVState =
+*env, target_ulong *pc,
+ #endif
+ }
+=20
+-void csr_write_helper(CPURISCVState *env, target_ulong val_to_write,
+-        target_ulong csrno);
+-target_ulong csr_read_helper(CPURISCVState *env, target_ulong csrno);
++int riscv_csrrw(CPURISCVState *env, int csrno, target_ulong *ret_value,
++                target_ulong new_value, target_ulong write_mask);
++
++static inline void csr_write_helper(CPURISCVState *env, target_ulong val,
++                                    int csrno)
++{
++    riscv_csrrw(env, csrno, NULL, val, MAKE_64BIT_MASK(0, TARGET_LONG_BITS=
+));
++}
++
++static inline target_ulong csr_read_helper(CPURISCVState *env, int csrno)
++{
++    target_ulong val =3D 0;
++    riscv_csrrw(env, csrno, &val, 0, 0);
++    return val;
++}
++
++typedef int (*riscv_csr_predicate_fn)(CPURISCVState *env, int csrno);
++typedef int (*riscv_csr_read_fn)(CPURISCVState *env, int csrno,
++    target_ulong *ret_value);
++typedef int (*riscv_csr_write_fn)(CPURISCVState *env, int csrno,
++    target_ulong new_value);
++typedef int (*riscv_csr_op_fn)(CPURISCVState *env, int csrno,
++    target_ulong *ret_value, target_ulong new_value, target_ulong write_ma=
+sk);
++
++typedef struct {
++    riscv_csr_read_fn read;
++    riscv_csr_write_fn write;
++    riscv_csr_op_fn op;
++} riscv_csr_operations;
++
++void riscv_get_csr_ops(int csrno, riscv_csr_operations *ops);
++void riscv_set_csr_ops(int csrno, riscv_csr_operations *ops);
+=20
+ #include "exec/cpu-all.h"
+=20
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index 0234c2d528..4ef7f5c1f9 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -528,7 +528,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+             get_field(s, MSTATUS_SIE) : get_field(s, MSTATUS_UIE << env->p=
+riv));
+         s =3D set_field(s, MSTATUS_SPP, env->priv);
+         s =3D set_field(s, MSTATUS_SIE, 0);
+-        csr_write_helper(env, s, CSR_MSTATUS);
++        env->mstatus =3D s;
+         riscv_set_mode(env, PRV_S);
+     } else {
+         /* No need to check MTVEC for misaligned - lower 2 bits cannot be =
+set */
+@@ -553,7 +553,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+             get_field(s, MSTATUS_MIE) : get_field(s, MSTATUS_UIE << env->p=
+riv));
+         s =3D set_field(s, MSTATUS_MPP, env->priv);
+         s =3D set_field(s, MSTATUS_MIE, 0);
+-        csr_write_helper(env, s, CSR_MSTATUS);
++        env->mstatus =3D s;
+         riscv_set_mode(env, PRV_M);
+     }
+     /* TODO yield load reservation  */
 diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index b61b0ef379..44ea8b7cb6 100644
---- a/target/riscv/csr.c
+new file mode 100644
+index 0000000000..b61b0ef379
+--- /dev/null
 +++ b/target/riscv/csr.c
-@@ -487,25 +487,31 @@ static int write_mbadaddr(CPURISCVState *env, int csr=
-no, target_ulong val)
-     return 0;
- }
-=20
--static int read_mip(CPURISCVState *env, int csrno, target_ulong *val)
--{
--    *val =3D atomic_read(&env->mip);
--    return 0;
--}
--
--static int write_mip(CPURISCVState *env, int csrno, target_ulong val)
-+static int rmw_mip(CPURISCVState *env, int csrno, target_ulong *ret_value,
-+                   target_ulong new_value, target_ulong write_mask)
- {
-     RISCVCPU *cpu =3D riscv_env_get_cpu(env);
-+    target_ulong mask =3D write_mask & delegable_ints;
-+    uint32_t old_mip;
+@@ -0,0 +1,846 @@
++/*
++ * RISC-V Control and Status Registers.
++ *
++ * Copyright (c) 2016-2017 Sagar Karandikar, sagark@eecs.berkeley.edu
++ * Copyright (c) 2017-2018 SiFive, Inc.
++ *
++ * This program is free software; you can redistribute it and/or modify it
++ * under the terms and conditions of the GNU General Public License,
++ * version 2 or later, as published by the Free Software Foundation.
++ *
++ * This program is distributed in the hope it will be useful, but WITHOUT
++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
++ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License f=
+or
++ * more details.
++ *
++ * You should have received a copy of the GNU General Public License along=
+ with
++ * this program.  If not, see <http://www.gnu.org/licenses/>.
++ */
 +
-+    /* We can't allow the supervisor to control SEIP as this would allow t=
-he
-+     * supervisor to clear a pending external interrupt which will result =
-in
-+     * lost a interrupt in the case a PLIC is attached. The SEIP bit must =
-be
-+     * hardware controlled when a PLIC is attached. This should be an opti=
-on
-+     * for CPUs with software-delegated Supervisor External Interrupts. */
-+    mask &=3D ~MIP_SEIP;
++#include "qemu/osdep.h"
++#include "qemu/log.h"
++#include "cpu.h"
++#include "qemu/main-loop.h"
++#include "exec/exec-all.h"
 +
-+    if (mask) {
-+        qemu_mutex_lock_iothread();
-+        old_mip =3D riscv_cpu_update_mip(cpu, mask, (new_value & mask));
-+        qemu_mutex_unlock_iothread();
++/* CSR function table */
++static riscv_csr_operations csr_ops[];
++
++/* CSR function table constants */
++enum {
++    CSR_TABLE_SIZE =3D 0x1000
++};
++
++/* CSR function table public API */
++void riscv_get_csr_ops(int csrno, riscv_csr_operations *ops)
++{
++    *ops =3D csr_ops[csrno & (CSR_TABLE_SIZE - 1)];
++}
++
++void riscv_set_csr_ops(int csrno, riscv_csr_operations *ops)
++{
++    csr_ops[csrno & (CSR_TABLE_SIZE - 1)] =3D *ops;
++}
++
++/* User Floating-Point CSRs */
++static int read_fflags(CPURISCVState *env, int csrno, target_ulong *val)
++{
++#if !defined(CONFIG_USER_ONLY)
++    if (!(env->mstatus & MSTATUS_FS)) {
++        return -1;
++    }
++#endif
++    *val =3D cpu_riscv_get_fflags(env);
++    return 0;
++}
++
++static int write_fflags(CPURISCVState *env, int csrno, target_ulong val)
++{
++#if !defined(CONFIG_USER_ONLY)
++    if (!(env->mstatus & MSTATUS_FS)) {
++        return -1;
++    }
++    env->mstatus |=3D MSTATUS_FS;
++#endif
++    cpu_riscv_set_fflags(env, val & (FSR_AEXC >> FSR_AEXC_SHIFT));
++    return 0;
++}
++
++static int read_frm(CPURISCVState *env, int csrno, target_ulong *val)
++{
++#if !defined(CONFIG_USER_ONLY)
++    if (!(env->mstatus & MSTATUS_FS)) {
++        return -1;
++    }
++#endif
++    *val =3D env->frm;
++    return 0;
++}
++
++static int write_frm(CPURISCVState *env, int csrno, target_ulong val)
++{
++#if !defined(CONFIG_USER_ONLY)
++    if (!(env->mstatus & MSTATUS_FS)) {
++        return -1;
++    }
++    env->mstatus |=3D MSTATUS_FS;
++#endif
++    env->frm =3D val & (FSR_RD >> FSR_RD_SHIFT);
++    return 0;
++}
++
++static int read_fcsr(CPURISCVState *env, int csrno, target_ulong *val)
++{
++#if !defined(CONFIG_USER_ONLY)
++    if (!(env->mstatus & MSTATUS_FS)) {
++        return -1;
++    }
++#endif
++    *val =3D (cpu_riscv_get_fflags(env) << FSR_AEXC_SHIFT)
++        | (env->frm << FSR_RD_SHIFT);
++    return 0;
++}
++
++static int write_fcsr(CPURISCVState *env, int csrno, target_ulong val)
++{
++#if !defined(CONFIG_USER_ONLY)
++    if (!(env->mstatus & MSTATUS_FS)) {
++        return -1;
++    }
++    env->mstatus |=3D MSTATUS_FS;
++#endif
++    env->frm =3D (val & FSR_RD) >> FSR_RD_SHIFT;
++    cpu_riscv_set_fflags(env, (val & FSR_AEXC) >> FSR_AEXC_SHIFT);
++    return 0;
++}
++
++/* User Timers and Counters */
++static int counter_enabled(CPURISCVState *env, int csrno)
++{
++#ifndef CONFIG_USER_ONLY
++    target_ulong ctr_en =3D env->priv =3D=3D PRV_U ? env->scounteren :
++                          env->priv =3D=3D PRV_S ? env->mcounteren : -1U;
++#else
++    target_ulong ctr_en =3D -1;
++#endif
++    return (ctr_en >> (csrno & 31)) & 1;
++}
++
++#if !defined(CONFIG_USER_ONLY)
++static int read_zero_counter(CPURISCVState *env, int csrno, target_ulong *=
+val)
++{
++    if (!counter_enabled(env, csrno)) {
++        return -1;
++    }
++    *val =3D 0;
++    return 0;
++}
++#endif
++
++static int read_instret(CPURISCVState *env, int csrno, target_ulong *val)
++{
++    if (!counter_enabled(env, csrno)) {
++        return -1;
++    }
++#if !defined(CONFIG_USER_ONLY)
++    if (use_icount) {
++        *val =3D cpu_get_icount();
 +    } else {
-+        old_mip =3D atomic_read(&env->mip);
++        *val =3D cpu_get_host_ticks();
 +    }
-=20
--    /*
--     * csrs, csrc on mip.SEIP is not decomposable into separate read and
--     * write steps, so a different implementation is needed
--     */
--
--    qemu_mutex_lock_iothread();
--    riscv_cpu_update_mip(cpu, MIP_SSIP | MIP_STIP,
--                         (val & (MIP_SSIP | MIP_STIP)));
--    qemu_mutex_unlock_iothread();
++#else
++    *val =3D cpu_get_host_ticks();
++#endif
++    return 0;
++}
++
++#if defined(TARGET_RISCV32)
++static int read_instreth(CPURISCVState *env, int csrno, target_ulong *val)
++{
++    if (!counter_enabled(env, csrno)) {
++        return -1;
++    }
++#if !defined(CONFIG_USER_ONLY)
++    if (use_icount) {
++        *val =3D cpu_get_icount() >> 32;
++    } else {
++        *val =3D cpu_get_host_ticks() >> 32;
++    }
++#else
++    *val =3D cpu_get_host_ticks() >> 32;
++#endif
++    return 0;
++}
++#endif /* TARGET_RISCV32 */
++
++#if defined(CONFIG_USER_ONLY)
++static int read_time(CPURISCVState *env, int csrno, target_ulong *val)
++{
++    *val =3D cpu_get_host_ticks();
++    return 0;
++}
++
++#if defined(TARGET_RISCV32)
++static int read_timeh(CPURISCVState *env, int csrno, target_ulong *val)
++{
++    *val =3D cpu_get_host_ticks() >> 32;
++    return 0;
++}
++#endif
++
++#else /* CONFIG_USER_ONLY */
++
++/* Machine constants */
++
++#define M_MODE_INTERRUPTS (MIP_MSIP | MIP_MTIP | MIP_MEIP)
++#define S_MODE_INTERRUPTS (MIP_SSIP | MIP_STIP | MIP_SEIP)
++
++static const target_ulong delegable_ints =3D S_MODE_INTERRUPTS;
++static const target_ulong all_ints =3D M_MODE_INTERRUPTS | S_MODE_INTERRUP=
+TS;
++static const target_ulong delegable_excps =3D
++    (1ULL << (RISCV_EXCP_INST_ADDR_MIS)) |
++    (1ULL << (RISCV_EXCP_INST_ACCESS_FAULT)) |
++    (1ULL << (RISCV_EXCP_ILLEGAL_INST)) |
++    (1ULL << (RISCV_EXCP_BREAKPOINT)) |
++    (1ULL << (RISCV_EXCP_LOAD_ADDR_MIS)) |
++    (1ULL << (RISCV_EXCP_LOAD_ACCESS_FAULT)) |
++    (1ULL << (RISCV_EXCP_STORE_AMO_ADDR_MIS)) |
++    (1ULL << (RISCV_EXCP_STORE_AMO_ACCESS_FAULT)) |
++    (1ULL << (RISCV_EXCP_U_ECALL)) |
++    (1ULL << (RISCV_EXCP_S_ECALL)) |
++    (1ULL << (RISCV_EXCP_H_ECALL)) |
++    (1ULL << (RISCV_EXCP_M_ECALL)) |
++    (1ULL << (RISCV_EXCP_INST_PAGE_FAULT)) |
++    (1ULL << (RISCV_EXCP_LOAD_PAGE_FAULT)) |
++    (1ULL << (RISCV_EXCP_STORE_PAGE_FAULT));
++static const target_ulong sstatus_v1_9_mask =3D SSTATUS_SIE | SSTATUS_SPIE=
+ |
++    SSTATUS_UIE | SSTATUS_UPIE | SSTATUS_SPP | SSTATUS_FS | SSTATUS_XS |
++    SSTATUS_SUM | SSTATUS_SD;
++static const target_ulong sstatus_v1_10_mask =3D SSTATUS_SIE | SSTATUS_SPI=
+E |
++    SSTATUS_UIE | SSTATUS_UPIE | SSTATUS_SPP | SSTATUS_FS | SSTATUS_XS |
++    SSTATUS_SUM | SSTATUS_MXR | SSTATUS_SD;
++
++#if defined(TARGET_RISCV32)
++static const char valid_vm_1_09[16] =3D {
++    [VM_1_09_MBARE] =3D 1,
++    [VM_1_09_SV32] =3D 1,
++};
++static const char valid_vm_1_10[16] =3D {
++    [VM_1_10_MBARE] =3D 1,
++    [VM_1_10_SV32] =3D 1
++};
++#elif defined(TARGET_RISCV64)
++static const char valid_vm_1_09[16] =3D {
++    [VM_1_09_MBARE] =3D 1,
++    [VM_1_09_SV39] =3D 1,
++    [VM_1_09_SV48] =3D 1,
++};
++static const char valid_vm_1_10[16] =3D {
++    [VM_1_10_MBARE] =3D 1,
++    [VM_1_10_SV39] =3D 1,
++    [VM_1_10_SV48] =3D 1,
++    [VM_1_10_SV57] =3D 1
++};
++#endif /* CONFIG_USER_ONLY */
++
++/* Machine Information Registers */
++static int read_zero(CPURISCVState *env, int csrno, target_ulong *val)
++{
++    return *val =3D 0;
++}
++
++static int read_mhartid(CPURISCVState *env, int csrno, target_ulong *val)
++{
++    *val =3D env->mhartid;
++    return 0;
++}
++
++/* Machine Trap Setup */
++static int read_mstatus(CPURISCVState *env, int csrno, target_ulong *val)
++{
++    *val =3D env->mstatus;
++    return 0;
++}
++
++static int validate_vm(CPURISCVState *env, target_ulong vm)
++{
++    return (env->priv_ver >=3D PRIV_VERSION_1_10_0) ?
++        valid_vm_1_10[vm & 0xf] : valid_vm_1_09[vm & 0xf];
++}
++
++static int write_mstatus(CPURISCVState *env, int csrno, target_ulong val)
++{
++    target_ulong mstatus =3D env->mstatus;
++    target_ulong mask =3D 0;
++    target_ulong mpp =3D get_field(val, MSTATUS_MPP);
++
++    /* flush tlb on mstatus fields that affect VM */
++    if (env->priv_ver <=3D PRIV_VERSION_1_09_1) {
++        if ((val ^ mstatus) & (MSTATUS_MXR | MSTATUS_MPP |
++                MSTATUS_MPRV | MSTATUS_SUM | MSTATUS_VM)) {
++            tlb_flush(CPU(riscv_env_get_cpu(env)));
++        }
++        mask =3D MSTATUS_SIE | MSTATUS_SPIE | MSTATUS_MIE | MSTATUS_MPIE |
++            MSTATUS_SPP | MSTATUS_FS | MSTATUS_MPRV | MSTATUS_SUM |
++            MSTATUS_MPP | MSTATUS_MXR |
++            (validate_vm(env, get_field(val, MSTATUS_VM)) ?
++                MSTATUS_VM : 0);
++    }
++    if (env->priv_ver >=3D PRIV_VERSION_1_10_0) {
++        if ((val ^ mstatus) & (MSTATUS_MXR | MSTATUS_MPP |
++                MSTATUS_MPRV | MSTATUS_SUM)) {
++            tlb_flush(CPU(riscv_env_get_cpu(env)));
++        }
++        mask =3D MSTATUS_SIE | MSTATUS_SPIE | MSTATUS_MIE | MSTATUS_MPIE |
++            MSTATUS_SPP | MSTATUS_FS | MSTATUS_MPRV | MSTATUS_SUM |
++            MSTATUS_MPP | MSTATUS_MXR;
++    }
++
++    /* silenty discard mstatus.mpp writes for unsupported modes */
++    if (mpp =3D=3D PRV_H ||
++        (!riscv_has_ext(env, RVS) && mpp =3D=3D PRV_S) ||
++        (!riscv_has_ext(env, RVU) && mpp =3D=3D PRV_U)) {
++        mask &=3D ~MSTATUS_MPP;
++    }
++
++    mstatus =3D (mstatus & ~mask) | (val & mask);
++
++    /* Note: this is a workaround for an issue where mstatus.FS
++       does not report dirty after floating point operations
++       that modify floating point state. This workaround is
++       technically compliant with the RISC-V Privileged
++       specification as it is legal to return only off, or dirty.
++       at the expense of extra floating point save/restore. */
++
++    /* FP is always dirty or off */
++    if (mstatus & MSTATUS_FS) {
++        mstatus |=3D MSTATUS_FS;
++    }
++
++    int dirty =3D ((mstatus & MSTATUS_FS) =3D=3D MSTATUS_FS) |
++                ((mstatus & MSTATUS_XS) =3D=3D MSTATUS_XS);
++    mstatus =3D set_field(mstatus, MSTATUS_SD, dirty);
++    env->mstatus =3D mstatus;
++
++    return 0;
++}
++
++static int read_misa(CPURISCVState *env, int csrno, target_ulong *val)
++{
++    *val =3D env->misa;
++    return 0;
++}
++
++static int read_medeleg(CPURISCVState *env, int csrno, target_ulong *val)
++{
++    *val =3D env->medeleg;
++    return 0;
++}
++
++static int write_medeleg(CPURISCVState *env, int csrno, target_ulong val)
++{
++    env->medeleg =3D (env->medeleg & ~delegable_excps) | (val & delegable_=
+excps);
++    return 0;
++}
++
++static int read_mideleg(CPURISCVState *env, int csrno, target_ulong *val)
++{
++    *val =3D env->mideleg;
++    return 0;
++}
++
++static int write_mideleg(CPURISCVState *env, int csrno, target_ulong val)
++{
++    env->mideleg =3D (env->mideleg & ~delegable_ints) | (val & delegable_i=
+nts);
++    return 0;
++}
++
++static int read_mie(CPURISCVState *env, int csrno, target_ulong *val)
++{
++    *val =3D env->mie;
++    return 0;
++}
++
++static int write_mie(CPURISCVState *env, int csrno, target_ulong val)
++{
++    env->mie =3D (env->mie & ~all_ints) | (val & all_ints);
++    return 0;
++}
++
++static int read_mtvec(CPURISCVState *env, int csrno, target_ulong *val)
++{
++    *val =3D env->mtvec;
++    return 0;
++}
++
++static int write_mtvec(CPURISCVState *env, int csrno, target_ulong val)
++{
++    /* bits [1:0] encode mode; 0 =3D direct, 1 =3D vectored, 2 >=3D reserv=
+ed */
++    if ((val & 3) =3D=3D 0) {
++        env->mtvec =3D val >> 2 << 2;
++    } else {
++        qemu_log_mask(LOG_UNIMP, "CSR_MTVEC: vectored traps not supported"=
+);
++    }
++    return 0;
++}
++
++static int read_mcounteren(CPURISCVState *env, int csrno, target_ulong *va=
+l)
++{
++    if (env->priv_ver < PRIV_VERSION_1_10_0) {
++        return -1;
++    }
++    *val =3D env->mcounteren;
++    return 0;
++}
++
++static int write_mcounteren(CPURISCVState *env, int csrno, target_ulong va=
+l)
++{
++    if (env->priv_ver < PRIV_VERSION_1_10_0) {
++        return -1;
++    }
++    env->mcounteren =3D val;
++    return 0;
++}
++
++static int read_mscounteren(CPURISCVState *env, int csrno, target_ulong *v=
+al)
++{
++    if (env->priv_ver > PRIV_VERSION_1_09_1) {
++        return -1;
++    }
++    *val =3D env->mcounteren;
++    return 0;
++}
++
++static int write_mscounteren(CPURISCVState *env, int csrno, target_ulong v=
+al)
++{
++    if (env->priv_ver > PRIV_VERSION_1_09_1) {
++        return -1;
++    }
++    env->mcounteren =3D val;
++    return 0;
++}
++
++static int read_mucounteren(CPURISCVState *env, int csrno, target_ulong *v=
+al)
++{
++    if (env->priv_ver > PRIV_VERSION_1_09_1) {
++        return -1;
++    }
++    *val =3D env->scounteren;
++    return 0;
++}
++
++static int write_mucounteren(CPURISCVState *env, int csrno, target_ulong v=
+al)
++{
++    if (env->priv_ver > PRIV_VERSION_1_09_1) {
++        return -1;
++    }
++    env->scounteren =3D val;
++    return 0;
++}
++
++/* Machine Trap Handling */
++static int read_mscratch(CPURISCVState *env, int csrno, target_ulong *val)
++{
++    *val =3D env->mscratch;
++    return 0;
++}
++
++static int write_mscratch(CPURISCVState *env, int csrno, target_ulong val)
++{
++    env->mscratch =3D val;
++    return 0;
++}
++
++static int read_mepc(CPURISCVState *env, int csrno, target_ulong *val)
++{
++    *val =3D env->mepc;
++    return 0;
++}
++
++static int write_mepc(CPURISCVState *env, int csrno, target_ulong val)
++{
++    env->mepc =3D val;
++    return 0;
++}
++
++static int read_mcause(CPURISCVState *env, int csrno, target_ulong *val)
++{
++    *val =3D env->mcause;
++    return 0;
++}
++
++static int write_mcause(CPURISCVState *env, int csrno, target_ulong val)
++{
++    env->mcause =3D val;
++    return 0;
++}
++
++static int read_mbadaddr(CPURISCVState *env, int csrno, target_ulong *val)
++{
++    *val =3D env->mbadaddr;
++    return 0;
++}
++
++static int write_mbadaddr(CPURISCVState *env, int csrno, target_ulong val)
++{
++    env->mbadaddr =3D val;
++    return 0;
++}
++
++static int read_mip(CPURISCVState *env, int csrno, target_ulong *val)
++{
++    *val =3D atomic_read(&env->mip);
++    return 0;
++}
++
++static int write_mip(CPURISCVState *env, int csrno, target_ulong val)
++{
++    RISCVCPU *cpu =3D riscv_env_get_cpu(env);
++
++    /*
++     * csrs, csrc on mip.SEIP is not decomposable into separate read and
++     * write steps, so a different implementation is needed
++     */
++
++    qemu_mutex_lock_iothread();
++    riscv_cpu_update_mip(cpu, MIP_SSIP | MIP_STIP,
++                         (val & (MIP_SSIP | MIP_STIP)));
++    qemu_mutex_unlock_iothread();
++
++    return 0;
++}
++
++/* Supervisor Trap Setup */
++static int read_sstatus(CPURISCVState *env, int csrno, target_ulong *val)
++{
++    target_ulong mask =3D ((env->priv_ver >=3D PRIV_VERSION_1_10_0) ?
++                         sstatus_v1_10_mask : sstatus_v1_9_mask);
++    *val =3D env->mstatus & mask;
++    return 0;
++}
++
++static int write_sstatus(CPURISCVState *env, int csrno, target_ulong val)
++{
++    target_ulong mask =3D ((env->priv_ver >=3D PRIV_VERSION_1_10_0) ?
++                         sstatus_v1_10_mask : sstatus_v1_9_mask);
++    target_ulong newval =3D (env->mstatus & ~mask) | (val & mask);
++    return write_mstatus(env, CSR_MSTATUS, newval);
++}
++
++static int read_sie(CPURISCVState *env, int csrno, target_ulong *val)
++{
++    *val =3D env->mie & env->mideleg;
++    return 0;
++}
++
++static int write_sie(CPURISCVState *env, int csrno, target_ulong val)
++{
++    target_ulong newval =3D (env->mie & ~env->mideleg) | (val & env->midel=
+eg);
++    return write_mie(env, CSR_MIE, newval);
++}
++
++static int read_stvec(CPURISCVState *env, int csrno, target_ulong *val)
++{
++    *val =3D env->stvec;
++    return 0;
++}
++
++static int write_stvec(CPURISCVState *env, int csrno, target_ulong val)
++{
++    /* bits [1:0] encode mode; 0 =3D direct, 1 =3D vectored, 2 >=3D reserv=
+ed */
++    if ((val & 3) =3D=3D 0) {
++        env->stvec =3D val >> 2 << 2;
++    } else {
++        qemu_log_mask(LOG_UNIMP, "CSR_STVEC: vectored traps not supported"=
+);
++    }
++    return 0;
++}
++
++static int read_scounteren(CPURISCVState *env, int csrno, target_ulong *va=
+l)
++{
++    if (env->priv_ver < PRIV_VERSION_1_10_0) {
++        return -1;
++    }
++    *val =3D env->scounteren;
++    return 0;
++}
++
++static int write_scounteren(CPURISCVState *env, int csrno, target_ulong va=
+l)
++{
++    if (env->priv_ver < PRIV_VERSION_1_10_0) {
++        return -1;
++    }
++    env->scounteren =3D val;
++    return 0;
++}
++
++/* Supervisor Trap Handling */
++static int read_sscratch(CPURISCVState *env, int csrno, target_ulong *val)
++{
++    *val =3D env->sscratch;
++    return 0;
++}
++
++static int write_sscratch(CPURISCVState *env, int csrno, target_ulong val)
++{
++    env->sscratch =3D val;
++    return 0;
++}
++
++static int read_sepc(CPURISCVState *env, int csrno, target_ulong *val)
++{
++    *val =3D env->sepc;
++    return 0;
++}
++
++static int write_sepc(CPURISCVState *env, int csrno, target_ulong val)
++{
++    env->sepc =3D val;
++    return 0;
++}
++
++static int read_scause(CPURISCVState *env, int csrno, target_ulong *val)
++{
++    *val =3D env->scause;
++    return 0;
++}
++
++static int write_scause(CPURISCVState *env, int csrno, target_ulong val)
++{
++    env->scause =3D val;
++    return 0;
++}
++
++static int read_sbadaddr(CPURISCVState *env, int csrno, target_ulong *val)
++{
++    *val =3D env->sbadaddr;
++    return 0;
++}
++
++static int write_sbadaddr(CPURISCVState *env, int csrno, target_ulong val)
++{
++    env->sbadaddr =3D val;
++    return 0;
++}
++
++static int read_sip(CPURISCVState *env, int csrno, target_ulong *val)
++{
++    *val =3D atomic_read(&env->mip) & env->mideleg;
++    return 0;
++}
++
++static int write_sip(CPURISCVState *env, int csrno, target_ulong val)
++{
++    target_ulong newval =3D (atomic_read(&env->mip) & ~env->mideleg)
++                          | (val & env->mideleg);
++    return write_mip(env, CSR_MIP, newval);
++}
++
++/* Supervisor Protection and Translation */
++static int read_satp(CPURISCVState *env, int csrno, target_ulong *val)
++{
++    if (!riscv_feature(env, RISCV_FEATURE_MMU)) {
++        *val =3D 0;
++    } else if (env->priv_ver >=3D PRIV_VERSION_1_10_0) {
++        *val =3D env->satp;
++    } else {
++        *val =3D env->sptbr;
++    }
++    return 0;
++}
++
++static int write_satp(CPURISCVState *env, int csrno, target_ulong val)
++{
++    if (!riscv_feature(env, RISCV_FEATURE_MMU)) {
++        return 0;
++    }
++    if (env->priv_ver <=3D PRIV_VERSION_1_09_1 && (val ^ env->sptbr)) {
++        tlb_flush(CPU(riscv_env_get_cpu(env)));
++        env->sptbr =3D val & (((target_ulong)
++            1 << (TARGET_PHYS_ADDR_SPACE_BITS - PGSHIFT)) - 1);
++    }
++    if (env->priv_ver >=3D PRIV_VERSION_1_10_0 &&
++        validate_vm(env, get_field(val, SATP_MODE)) &&
++        ((val ^ env->satp) & (SATP_MODE | SATP_ASID | SATP_PPN)))
++    {
++        tlb_flush(CPU(riscv_env_get_cpu(env)));
++        env->satp =3D val;
++    }
++    return 0;
++}
++
++/* Physical Memory Protection */
++static int read_pmpcfg(CPURISCVState *env, int csrno, target_ulong *val)
++{
++    *val =3D pmpcfg_csr_read(env, csrno - CSR_PMPCFG0);
++    return 0;
++}
++
++static int write_pmpcfg(CPURISCVState *env, int csrno, target_ulong val)
++{
++    pmpcfg_csr_write(env, csrno - CSR_PMPCFG0, val);
++    return 0;
++}
++
++static int read_pmpaddr(CPURISCVState *env, int csrno, target_ulong *val)
++{
++    *val =3D pmpaddr_csr_read(env, csrno - CSR_PMPADDR0);
++    return 0;
++}
++
++static int write_pmpaddr(CPURISCVState *env, int csrno, target_ulong val)
++{
++    pmpaddr_csr_write(env, csrno - CSR_PMPADDR0, val);
++    return 0;
++}
++
++#endif
++
++/*
++ * riscv_csrrw - read and/or update control and status register
++ *
++ * csrr   <->  riscv_csrrw(env, csrno, ret_value, 0, 0);
++ * csrrw  <->  riscv_csrrw(env, csrno, ret_value, value, -1);
++ * csrrs  <->  riscv_csrrw(env, csrno, ret_value, -1, value);
++ * csrrc  <->  riscv_csrrw(env, csrno, ret_value, 0, value);
++ */
++
++int riscv_csrrw(CPURISCVState *env, int csrno, target_ulong *ret_value,
++                target_ulong new_value, target_ulong write_mask)
++{
++    int ret;
++    target_ulong old_value;
++
++    /* check privileges and return -1 if check fails */
++#if !defined(CONFIG_USER_ONLY)
++    int csr_priv =3D get_field(csrno, 0x300);
++    int read_only =3D get_field(csrno, 0xC00) =3D=3D 3;
++    if ((write_mask && read_only) || (env->priv < csr_priv)) {
++        return -1;
++    }
++#endif
++
++    /* execute combined read/write operation if it exists */
++    if (csr_ops[csrno].op) {
++        return csr_ops[csrno].op(env, csrno, ret_value, new_value, write_m=
+ask);
++    }
++
++    /* if no accessor exists then return failure */
++    if (!csr_ops[csrno].read) {
++        return -1;
++    }
++
++    /* read old value */
++    ret =3D csr_ops[csrno].read(env, csrno, &old_value);
++    if (ret < 0) {
++        return ret;
++    }
++
++    /* write value if writable and write mask set, otherwise drop writes *=
+/
++    if (write_mask) {
++        new_value =3D (old_value & ~write_mask) | (new_value & write_mask)=
+;
++        if (csr_ops[csrno].write) {
++            ret =3D csr_ops[csrno].write(env, csrno, new_value);
++            if (ret < 0) {
++                return ret;
++            }
++        }
++    }
++
++    /* return old value */
 +    if (ret_value) {
-+        *ret_value =3D old_mip;
++        *ret_value =3D old_value;
 +    }
-=20
++
++    return 0;
++}
++
++/* Control and Status Register function table */
++static riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =3D {
++    /* User Floating-Point CSRs */
++    [CSR_FFLAGS] =3D              { read_fflags,      write_fflags      },
++    [CSR_FRM] =3D                 { read_frm,         write_frm         },
++    [CSR_FCSR] =3D                { read_fcsr,        write_fcsr        },
++
++    /* User Timers and Counters */
++    [CSR_CYCLE] =3D               { read_instret                        },
++    [CSR_INSTRET] =3D             { read_instret                        },
++#if defined(TARGET_RISCV32)
++    [CSR_CYCLEH] =3D              { read_instreth                       },
++    [CSR_INSTRETH] =3D            { read_instreth                       },
++#endif
++
++    /* User-level time CSRs are only available in linux-user
++     * In privileged mode, the monitor emulates these CSRs */
++#if defined(CONFIG_USER_ONLY)
++    [CSR_TIME] =3D                { read_time                           },
++#if defined(TARGET_RISCV32)
++    [CSR_TIMEH] =3D               { read_timeh                          },
++#endif
++#endif
++
++#if !defined(CONFIG_USER_ONLY)
++    /* Machine Timers and Counters */
++    [CSR_MCYCLE] =3D              { read_instret                        },
++    [CSR_MINSTRET] =3D            { read_instret                        },
++#if defined(TARGET_RISCV32)
++    [CSR_MCYCLEH] =3D             { read_instreth                       },
++    [CSR_MINSTRETH] =3D           { read_instreth                       },
++#endif
++
++    /* Machine Information Registers */
++    [CSR_MVENDORID] =3D           { read_zero                           },
++    [CSR_MARCHID] =3D             { read_zero                           },
++    [CSR_MIMPID] =3D              { read_zero                           },
++    [CSR_MHARTID] =3D             { read_mhartid                        },
++
++    /* Machine Trap Setup */
++    [CSR_MSTATUS] =3D             { read_mstatus,     write_mstatus     },
++    [CSR_MISA] =3D                { read_misa                           },
++    [CSR_MIDELEG] =3D             { read_mideleg,     write_mideleg     },
++    [CSR_MEDELEG] =3D             { read_medeleg,     write_medeleg     },
++    [CSR_MIE] =3D                 { read_mie,         write_mie         },
++    [CSR_MTVEC] =3D               { read_mtvec,       write_mtvec       },
++    [CSR_MCOUNTEREN] =3D          { read_mcounteren,  write_mcounteren  },
++
++    /* Legacy Counter Setup (priv v1.9.1) */
++    [CSR_MUCOUNTEREN] =3D         { read_mucounteren, write_mucounteren },
++    [CSR_MSCOUNTEREN] =3D         { read_mscounteren, write_mscounteren },
++
++    /* Machine Trap Handling */
++    [CSR_MSCRATCH] =3D            { read_mscratch,    write_mscratch    },
++    [CSR_MEPC] =3D                { read_mepc,        write_mepc        },
++    [CSR_MCAUSE] =3D              { read_mcause,      write_mcause      },
++    [CSR_MBADADDR] =3D            { read_mbadaddr,    write_mbadaddr    },
++    [CSR_MIP] =3D                 { read_mip,         write_mip         },
++
++    /* Supervisor Trap Setup */
++    [CSR_SSTATUS] =3D             { read_sstatus,     write_sstatus     },
++    [CSR_SIE] =3D                 { read_sie,         write_sie         },
++    [CSR_STVEC] =3D               { read_stvec,       write_stvec       },
++    [CSR_SCOUNTEREN] =3D          { read_scounteren,  write_scounteren  },
++
++    /* Supervisor Trap Handling */
++    [CSR_SSCRATCH] =3D            { read_sscratch,    write_sscratch    },
++    [CSR_SEPC] =3D                { read_sepc,        write_sepc        },
++    [CSR_SCAUSE] =3D              { read_scause,      write_scause      },
++    [CSR_SBADADDR] =3D            { read_sbadaddr,    write_sbadaddr    },
++    [CSR_SIP] =3D                 { read_sip,         write_sip         },
++
++    /* Supervisor Protection and Translation */
++    [CSR_SATP] =3D                { read_satp,        write_satp        },
++
++    /* Physical Memory Protection */
++    [CSR_PMPCFG0  ... CSR_PMPADDR9] =3D  { read_pmpcfg,  write_pmpcfg   },
++    [CSR_PMPADDR0 ... CSR_PMPADDR15] =3D { read_pmpaddr, write_pmpaddr  },
++
++    /* Performance Counters */
++    [CSR_HPMCOUNTER3   ... CSR_HPMCOUNTER31] =3D    { read_zero_counter },
++    [CSR_MHPMCOUNTER3  ... CSR_MHPMCOUNTER31] =3D   { read_zero         },
++    [CSR_MHPMEVENT3    ... CSR_MHPMEVENT31] =3D     { read_zero         },
++#if defined(TARGET_RISCV32)
++    [CSR_HPMCOUNTER3H  ... CSR_HPMCOUNTER31H] =3D   { read_zero_counter },
++    [CSR_MHPMCOUNTER3H ... CSR_MHPMCOUNTER31H] =3D  { read_zero         },
++#endif
++#endif /* !CONFIG_USER_ONLY */
++};
+diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
+index 4f919b6c34..3cabb21cd0 100644
+--- a/target/riscv/gdbstub.c
++++ b/target/riscv/gdbstub.c
+@@ -33,7 +33,10 @@ int riscv_cpu_gdb_read_register(CPUState *cs, uint8_t *m=
+em_buf, int n)
+     } else if (n < 65) {
+         return gdb_get_reg64(mem_buf, env->fpr[n - 33]);
+     } else if (n < 4096 + 65) {
+-        return gdb_get_regl(mem_buf, csr_read_helper(env, n - 65));
++        target_ulong val =3D 0;
++        if (riscv_csrrw(env, n - 65, &val, 0, 0) =3D=3D 0) {
++            return gdb_get_regl(mem_buf, val);
++        }
+     }
      return 0;
  }
-@@ -623,17 +629,11 @@ static int write_sbadaddr(CPURISCVState *env, int csr=
-no, target_ulong val)
+@@ -56,7 +59,10 @@ int riscv_cpu_gdb_write_register(CPUState *cs, uint8_t *=
+mem_buf, int n)
+         env->fpr[n - 33] =3D ldq_p(mem_buf); /* always 64-bit */
+         return sizeof(uint64_t);
+     } else if (n < 4096 + 65) {
+-        csr_write_helper(env, ldtul_p(mem_buf), n - 65);
++        target_ulong val =3D ldtul_p(mem_buf);
++        if (riscv_csrrw(env, n - 65, NULL, val, -1) =3D=3D 0) {
++            return sizeof(target_ulong);
++        }
+     }
      return 0;
  }
+diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+index 3726299d4a..81bd1a77ea 100644
+--- a/target/riscv/op_helper.c
++++ b/target/riscv/op_helper.c
+@@ -24,39 +24,6 @@
+ #include "exec/exec-all.h"
+ #include "exec/helper-proto.h"
 =20
--static int read_sip(CPURISCVState *env, int csrno, target_ulong *val)
+-#ifndef CONFIG_USER_ONLY
+-
+-#if defined(TARGET_RISCV32)
+-static const char valid_vm_1_09[16] =3D {
+-    [VM_1_09_MBARE] =3D 1,
+-    [VM_1_09_SV32] =3D 1,
+-};
+-static const char valid_vm_1_10[16] =3D {
+-    [VM_1_10_MBARE] =3D 1,
+-    [VM_1_10_SV32] =3D 1
+-};
+-#elif defined(TARGET_RISCV64)
+-static const char valid_vm_1_09[16] =3D {
+-    [VM_1_09_MBARE] =3D 1,
+-    [VM_1_09_SV39] =3D 1,
+-    [VM_1_09_SV48] =3D 1,
+-};
+-static const char valid_vm_1_10[16] =3D {
+-    [VM_1_10_MBARE] =3D 1,
+-    [VM_1_10_SV39] =3D 1,
+-    [VM_1_10_SV48] =3D 1,
+-    [VM_1_10_SV57] =3D 1
+-};
+-#endif
+-
+-static int validate_vm(CPURISCVState *env, target_ulong vm)
 -{
--    *val =3D atomic_read(&env->mip) & env->mideleg;
--    return 0;
+-    return (env->priv_ver >=3D PRIV_VERSION_1_10_0) ?
+-        valid_vm_1_10[vm & 0xf] : valid_vm_1_09[vm & 0xf];
 -}
 -
--static int write_sip(CPURISCVState *env, int csrno, target_ulong val)
-+static int rmw_sip(CPURISCVState *env, int csrno, target_ulong *ret_value,
-+                   target_ulong new_value, target_ulong write_mask)
- {
--    target_ulong newval =3D (atomic_read(&env->mip) & ~env->mideleg)
--                          | (val & env->mideleg);
--    return write_mip(env, CSR_MIP, newval);
-+    return rmw_mip(env, CSR_MSTATUS, ret_value, new_value,
-+                   write_mask & env->mideleg);
+-#endif
+-
+ /* Exceptions processing helpers */
+ void QEMU_NORETURN do_raise_exception_err(CPURISCVState *env,
+                                           uint32_t exception, uintptr_t pc=
+)
+@@ -72,584 +39,34 @@ void helper_raise_exception(CPURISCVState *env, uint32=
+_t exception)
+     do_raise_exception_err(env, exception, 0);
  }
 =20
- /* Supervisor Protection and Translation */
-@@ -812,7 +812,7 @@ static riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =3D=
+-static void validate_mstatus_fs(CPURISCVState *env, uintptr_t ra)
+-{
+-#ifndef CONFIG_USER_ONLY
+-    if (!(env->mstatus & MSTATUS_FS)) {
+-        do_raise_exception_err(env, RISCV_EXCP_ILLEGAL_INST, ra);
+-    }
+-#endif
+-}
+-
+-/*
+- * Handle writes to CSRs and any resulting special behavior
+- *
+- * Adapted from Spike's processor_t::set_csr
+- */
+-void csr_write_helper(CPURISCVState *env, target_ulong val_to_write,
+-        target_ulong csrno)
+-{
+-#ifndef CONFIG_USER_ONLY
+-    uint64_t delegable_ints =3D MIP_SSIP | MIP_STIP | MIP_SEIP;
+-    uint64_t all_ints =3D delegable_ints | MIP_MSIP | MIP_MTIP;
+-#endif
+-
+-    switch (csrno) {
+-    case CSR_FFLAGS:
+-        validate_mstatus_fs(env, GETPC());
+-        cpu_riscv_set_fflags(env, val_to_write & (FSR_AEXC >> FSR_AEXC_SHI=
+FT));
+-        break;
+-    case CSR_FRM:
+-        validate_mstatus_fs(env, GETPC());
+-        env->frm =3D val_to_write & (FSR_RD >> FSR_RD_SHIFT);
+-        break;
+-    case CSR_FCSR:
+-        validate_mstatus_fs(env, GETPC());
+-        env->frm =3D (val_to_write & FSR_RD) >> FSR_RD_SHIFT;
+-        cpu_riscv_set_fflags(env, (val_to_write & FSR_AEXC) >> FSR_AEXC_SH=
+IFT);
+-        break;
+-#ifndef CONFIG_USER_ONLY
+-    case CSR_MSTATUS: {
+-        target_ulong mstatus =3D env->mstatus;
+-        target_ulong mask =3D 0;
+-        target_ulong mpp =3D get_field(val_to_write, MSTATUS_MPP);
+-
+-        /* flush tlb on mstatus fields that affect VM */
+-        if (env->priv_ver <=3D PRIV_VERSION_1_09_1) {
+-            if ((val_to_write ^ mstatus) & (MSTATUS_MXR | MSTATUS_MPP |
+-                    MSTATUS_MPRV | MSTATUS_SUM | MSTATUS_VM)) {
+-                helper_tlb_flush(env);
+-            }
+-            mask =3D MSTATUS_SIE | MSTATUS_SPIE | MSTATUS_MIE | MSTATUS_MP=
+IE |
+-                MSTATUS_SPP | MSTATUS_FS | MSTATUS_MPRV | MSTATUS_SUM |
+-                MSTATUS_MPP | MSTATUS_MXR |
+-                (validate_vm(env, get_field(val_to_write, MSTATUS_VM)) ?
+-                    MSTATUS_VM : 0);
+-        }
+-        if (env->priv_ver >=3D PRIV_VERSION_1_10_0) {
+-            if ((val_to_write ^ mstatus) & (MSTATUS_MXR | MSTATUS_MPP |
+-                    MSTATUS_MPRV | MSTATUS_SUM)) {
+-                helper_tlb_flush(env);
+-            }
+-            mask =3D MSTATUS_SIE | MSTATUS_SPIE | MSTATUS_MIE | MSTATUS_MP=
+IE |
+-                MSTATUS_SPP | MSTATUS_FS | MSTATUS_MPRV | MSTATUS_SUM |
+-                MSTATUS_MPP | MSTATUS_MXR;
+-        }
+-
+-        /* silenty discard mstatus.mpp writes for unsupported modes */
+-        if (mpp =3D=3D PRV_H ||
+-            (!riscv_has_ext(env, RVS) && mpp =3D=3D PRV_S) ||
+-            (!riscv_has_ext(env, RVU) && mpp =3D=3D PRV_U)) {
+-            mask &=3D ~MSTATUS_MPP;
+-        }
+-
+-        mstatus =3D (mstatus & ~mask) | (val_to_write & mask);
+-
+-        /* Note: this is a workaround for an issue where mstatus.FS
+-           does not report dirty after floating point operations
+-           that modify floating point state. This workaround is
+-           technically compliant with the RISC-V Privileged
+-           specification as it is legal to return only off, or dirty.
+-           at the expense of extra floating point save/restore. */
+-
+-        /* FP is always dirty or off */
+-        if (mstatus & MSTATUS_FS) {
+-            mstatus |=3D MSTATUS_FS;
+-        }
+-
+-        int dirty =3D ((mstatus & MSTATUS_FS) =3D=3D MSTATUS_FS) |
+-                    ((mstatus & MSTATUS_XS) =3D=3D MSTATUS_XS);
+-        mstatus =3D set_field(mstatus, MSTATUS_SD, dirty);
+-        env->mstatus =3D mstatus;
+-        break;
+-    }
+-    case CSR_MIP: {
+-        /*
+-         * Since the writeable bits in MIP are not set asynchrously by the
+-         * CLINT, no additional locking is needed for read-modifiy-write
+-         * CSR operations
+-         */
+-        qemu_mutex_lock_iothread();
+-        RISCVCPU *cpu =3D riscv_env_get_cpu(env);
+-        riscv_cpu_update_mip(cpu, MIP_SSIP | MIP_STIP,
+-                                  (val_to_write & (MIP_SSIP | MIP_STIP)));
+-        /*
+-         * csrs, csrc on mip.SEIP is not decomposable into separate read a=
+nd
+-         * write steps, so a different implementation is needed
+-         */
+-        qemu_mutex_unlock_iothread();
+-        break;
+-    }
+-    case CSR_MIE: {
+-        env->mie =3D (env->mie & ~all_ints) |
+-            (val_to_write & all_ints);
+-        break;
+-    }
+-    case CSR_MIDELEG:
+-        env->mideleg =3D (env->mideleg & ~delegable_ints)
+-                                | (val_to_write & delegable_ints);
+-        break;
+-    case CSR_MEDELEG: {
+-        target_ulong mask =3D 0;
+-        mask |=3D 1ULL << (RISCV_EXCP_INST_ADDR_MIS);
+-        mask |=3D 1ULL << (RISCV_EXCP_INST_ACCESS_FAULT);
+-        mask |=3D 1ULL << (RISCV_EXCP_ILLEGAL_INST);
+-        mask |=3D 1ULL << (RISCV_EXCP_BREAKPOINT);
+-        mask |=3D 1ULL << (RISCV_EXCP_LOAD_ADDR_MIS);
+-        mask |=3D 1ULL << (RISCV_EXCP_LOAD_ACCESS_FAULT);
+-        mask |=3D 1ULL << (RISCV_EXCP_STORE_AMO_ADDR_MIS);
+-        mask |=3D 1ULL << (RISCV_EXCP_STORE_AMO_ACCESS_FAULT);
+-        mask |=3D 1ULL << (RISCV_EXCP_U_ECALL);
+-        mask |=3D 1ULL << (RISCV_EXCP_S_ECALL);
+-        mask |=3D 1ULL << (RISCV_EXCP_H_ECALL);
+-        mask |=3D 1ULL << (RISCV_EXCP_M_ECALL);
+-        mask |=3D 1ULL << (RISCV_EXCP_INST_PAGE_FAULT);
+-        mask |=3D 1ULL << (RISCV_EXCP_LOAD_PAGE_FAULT);
+-        mask |=3D 1ULL << (RISCV_EXCP_STORE_PAGE_FAULT);
+-        env->medeleg =3D (env->medeleg & ~mask)
+-                                | (val_to_write & mask);
+-        break;
+-    }
+-    case CSR_MINSTRET:
+-        /* minstret is WARL so unsupported writes are ignored */
+-        break;
+-    case CSR_MCYCLE:
+-        /* mcycle is WARL so unsupported writes are ignored */
+-        break;
+-#if defined(TARGET_RISCV32)
+-    case CSR_MINSTRETH:
+-        /* minstreth is WARL so unsupported writes are ignored */
+-        break;
+-    case CSR_MCYCLEH:
+-        /* mcycleh is WARL so unsupported writes are ignored */
+-        break;
+-#endif
+-    case CSR_MUCOUNTEREN:
+-        if (env->priv_ver <=3D PRIV_VERSION_1_09_1) {
+-            env->scounteren =3D val_to_write;
+-            break;
+-        } else {
+-            goto do_illegal;
+-        }
+-    case CSR_MSCOUNTEREN:
+-        if (env->priv_ver <=3D PRIV_VERSION_1_09_1) {
+-            env->mcounteren =3D val_to_write;
+-            break;
+-        } else {
+-            goto do_illegal;
+-        }
+-    case CSR_SSTATUS: {
+-        target_ulong ms =3D env->mstatus;
+-        target_ulong mask =3D SSTATUS_SIE | SSTATUS_SPIE | SSTATUS_UIE
+-            | SSTATUS_UPIE | SSTATUS_SPP | SSTATUS_FS | SSTATUS_XS
+-            | SSTATUS_SUM | SSTATUS_SD;
+-        if (env->priv_ver >=3D PRIV_VERSION_1_10_0) {
+-            mask |=3D SSTATUS_MXR;
+-        }
+-        ms =3D (ms & ~mask) | (val_to_write & mask);
+-        csr_write_helper(env, ms, CSR_MSTATUS);
+-        break;
+-    }
+-    case CSR_SIP: {
+-        qemu_mutex_lock_iothread();
+-        target_ulong next_mip =3D (env->mip & ~env->mideleg)
+-                                | (val_to_write & env->mideleg);
+-        qemu_mutex_unlock_iothread();
+-        csr_write_helper(env, next_mip, CSR_MIP);
+-        break;
+-    }
+-    case CSR_SIE: {
+-        target_ulong next_mie =3D (env->mie & ~env->mideleg)
+-                                | (val_to_write & env->mideleg);
+-        csr_write_helper(env, next_mie, CSR_MIE);
+-        break;
+-    }
+-    case CSR_SATP: /* CSR_SPTBR */ {
+-        if (!riscv_feature(env, RISCV_FEATURE_MMU)) {
+-            break;
+-        }
+-        if (env->priv_ver <=3D PRIV_VERSION_1_09_1 && (val_to_write ^ env-=
+>sptbr))
+-        {
+-            helper_tlb_flush(env);
+-            env->sptbr =3D val_to_write & (((target_ulong)
+-                1 << (TARGET_PHYS_ADDR_SPACE_BITS - PGSHIFT)) - 1);
+-        }
+-        if (env->priv_ver >=3D PRIV_VERSION_1_10_0 &&
+-            validate_vm(env, get_field(val_to_write, SATP_MODE)) &&
+-            ((val_to_write ^ env->satp) & (SATP_MODE | SATP_ASID | SATP_PP=
+N)))
+-        {
+-            helper_tlb_flush(env);
+-            env->satp =3D val_to_write;
+-        }
+-        break;
+-    }
+-    case CSR_SEPC:
+-        env->sepc =3D val_to_write;
+-        break;
+-    case CSR_STVEC:
+-        /* bits [1:0] encode mode; 0 =3D direct, 1 =3D vectored, 2 >=3D re=
+served */
+-        if ((val_to_write & 3) =3D=3D 0) {
+-            env->stvec =3D val_to_write >> 2 << 2;
+-        } else {
+-            qemu_log_mask(LOG_UNIMP,
+-                          "CSR_STVEC: vectored traps not supported\n");
+-        }
+-        break;
+-    case CSR_SCOUNTEREN:
+-        if (env->priv_ver >=3D PRIV_VERSION_1_10_0) {
+-            env->scounteren =3D val_to_write;
+-            break;
+-        } else {
+-            goto do_illegal;
+-        }
+-    case CSR_SSCRATCH:
+-        env->sscratch =3D val_to_write;
+-        break;
+-    case CSR_SCAUSE:
+-        env->scause =3D val_to_write;
+-        break;
+-    case CSR_SBADADDR:
+-        env->sbadaddr =3D val_to_write;
+-        break;
+-    case CSR_MEPC:
+-        env->mepc =3D val_to_write;
+-        break;
+-    case CSR_MTVEC:
+-        /* bits [1:0] indicate mode; 0 =3D direct, 1 =3D vectored, 2 >=3D =
+reserved */
+-        if ((val_to_write & 3) =3D=3D 0) {
+-            env->mtvec =3D val_to_write >> 2 << 2;
+-        } else {
+-            qemu_log_mask(LOG_UNIMP,
+-                          "CSR_MTVEC: vectored traps not supported\n");
+-        }
+-        break;
+-    case CSR_MCOUNTEREN:
+-        if (env->priv_ver >=3D PRIV_VERSION_1_10_0) {
+-            env->mcounteren =3D val_to_write;
+-            break;
+-        } else {
+-            goto do_illegal;
+-        }
+-    case CSR_MSCRATCH:
+-        env->mscratch =3D val_to_write;
+-        break;
+-    case CSR_MCAUSE:
+-        env->mcause =3D val_to_write;
+-        break;
+-    case CSR_MBADADDR:
+-        env->mbadaddr =3D val_to_write;
+-        break;
+-    case CSR_MISA:
+-        /* misa is WARL so unsupported writes are ignored */
+-        break;
+-    case CSR_PMPCFG0:
+-    case CSR_PMPCFG1:
+-    case CSR_PMPCFG2:
+-    case CSR_PMPCFG3:
+-       pmpcfg_csr_write(env, csrno - CSR_PMPCFG0, val_to_write);
+-       break;
+-    case CSR_PMPADDR0:
+-    case CSR_PMPADDR1:
+-    case CSR_PMPADDR2:
+-    case CSR_PMPADDR3:
+-    case CSR_PMPADDR4:
+-    case CSR_PMPADDR5:
+-    case CSR_PMPADDR6:
+-    case CSR_PMPADDR7:
+-    case CSR_PMPADDR8:
+-    case CSR_PMPADDR9:
+-    case CSR_PMPADDR10:
+-    case CSR_PMPADDR11:
+-    case CSR_PMPADDR12:
+-    case CSR_PMPADDR13:
+-    case CSR_PMPADDR14:
+-    case CSR_PMPADDR15:
+-       pmpaddr_csr_write(env, csrno - CSR_PMPADDR0, val_to_write);
+-       break;
+-#endif
+-#if !defined(CONFIG_USER_ONLY)
+-    do_illegal:
+-#endif
+-    default:
+-        do_raise_exception_err(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
+-    }
+-}
+-
+-/*
+- * Handle reads to CSRs and any resulting special behavior
+- *
+- * Adapted from Spike's processor_t::get_csr
+- */
+-target_ulong csr_read_helper(CPURISCVState *env, target_ulong csrno)
+-{
+-#ifndef CONFIG_USER_ONLY
+-    target_ulong ctr_en =3D env->priv =3D=3D PRV_U ? env->scounteren :
+-                          env->priv =3D=3D PRV_S ? env->mcounteren : -1U;
+-#else
+-    target_ulong ctr_en =3D -1;
+-#endif
+-    target_ulong ctr_ok =3D (ctr_en >> (csrno & 31)) & 1;
+-
+-    if (csrno >=3D CSR_HPMCOUNTER3 && csrno <=3D CSR_HPMCOUNTER31) {
+-        if (ctr_ok) {
+-            return 0;
+-        }
+-    }
+-#if defined(TARGET_RISCV32)
+-    if (csrno >=3D CSR_HPMCOUNTER3H && csrno <=3D CSR_HPMCOUNTER31H) {
+-        if (ctr_ok) {
+-            return 0;
+-        }
+-    }
+-#endif
+-    if (csrno >=3D CSR_MHPMCOUNTER3 && csrno <=3D CSR_MHPMCOUNTER31) {
+-        return 0;
+-    }
+-#if defined(TARGET_RISCV32)
+-    if (csrno >=3D CSR_MHPMCOUNTER3 && csrno <=3D CSR_MHPMCOUNTER31) {
+-        return 0;
+-    }
+-#endif
+-    if (csrno >=3D CSR_MHPMEVENT3 && csrno <=3D CSR_MHPMEVENT31) {
+-        return 0;
+-    }
+-
+-    switch (csrno) {
+-    case CSR_FFLAGS:
+-        validate_mstatus_fs(env, GETPC());
+-        return cpu_riscv_get_fflags(env);
+-    case CSR_FRM:
+-        validate_mstatus_fs(env, GETPC());
+-        return env->frm;
+-    case CSR_FCSR:
+-        validate_mstatus_fs(env, GETPC());
+-        return (cpu_riscv_get_fflags(env) << FSR_AEXC_SHIFT)
+-                | (env->frm << FSR_RD_SHIFT);
+-    /* rdtime/rdtimeh is trapped and emulated by bbl in system mode */
+-#ifdef CONFIG_USER_ONLY
+-    case CSR_TIME:
+-        return cpu_get_host_ticks();
+-#if defined(TARGET_RISCV32)
+-    case CSR_TIMEH:
+-        return cpu_get_host_ticks() >> 32;
+-#endif
+-#endif
+-    case CSR_INSTRET:
+-    case CSR_CYCLE:
+-        if (ctr_ok) {
+-#if !defined(CONFIG_USER_ONLY)
+-            if (use_icount) {
+-                return cpu_get_icount();
+-            } else {
+-                return cpu_get_host_ticks();
+-            }
+-#else
+-            return cpu_get_host_ticks();
+-#endif
+-        }
+-        break;
+-#if defined(TARGET_RISCV32)
+-    case CSR_INSTRETH:
+-    case CSR_CYCLEH:
+-        if (ctr_ok) {
+-#if !defined(CONFIG_USER_ONLY)
+-            if (use_icount) {
+-                return cpu_get_icount() >> 32;
+-            } else {
+-                return cpu_get_host_ticks() >> 32;
+-            }
+-#else
+-            return cpu_get_host_ticks() >> 32;
+-#endif
+-        }
+-        break;
+-#endif
+-#ifndef CONFIG_USER_ONLY
+-    case CSR_MINSTRET:
+-    case CSR_MCYCLE:
+-        if (use_icount) {
+-            return cpu_get_icount();
+-        } else {
+-            return cpu_get_host_ticks();
+-        }
+-    case CSR_MINSTRETH:
+-    case CSR_MCYCLEH:
+-#if defined(TARGET_RISCV32)
+-        if (use_icount) {
+-            return cpu_get_icount() >> 32;
+-        } else {
+-            return cpu_get_host_ticks() >> 32;
+-        }
+-#endif
+-        break;
+-    case CSR_MUCOUNTEREN:
+-        if (env->priv_ver <=3D PRIV_VERSION_1_09_1) {
+-            return env->scounteren;
+-        } else {
+-            break; /* illegal instruction */
+-        }
+-    case CSR_MSCOUNTEREN:
+-        if (env->priv_ver <=3D PRIV_VERSION_1_09_1) {
+-            return env->mcounteren;
+-        } else {
+-            break; /* illegal instruction */
+-        }
+-    case CSR_SSTATUS: {
+-        target_ulong mask =3D SSTATUS_SIE | SSTATUS_SPIE | SSTATUS_UIE
+-            | SSTATUS_UPIE | SSTATUS_SPP | SSTATUS_FS | SSTATUS_XS
+-            | SSTATUS_SUM | SSTATUS_SD;
+-        if (env->priv_ver >=3D PRIV_VERSION_1_10_0) {
+-            mask |=3D SSTATUS_MXR;
+-        }
+-        return env->mstatus & mask;
+-    }
+-    case CSR_SIP: {
+-        qemu_mutex_lock_iothread();
+-        target_ulong tmp =3D env->mip & env->mideleg;
+-        qemu_mutex_unlock_iothread();
+-        return tmp;
+-    }
+-    case CSR_SIE:
+-        return env->mie & env->mideleg;
+-    case CSR_SEPC:
+-        return env->sepc;
+-    case CSR_SBADADDR:
+-        return env->sbadaddr;
+-    case CSR_STVEC:
+-        return env->stvec;
+-    case CSR_SCOUNTEREN:
+-        if (env->priv_ver >=3D PRIV_VERSION_1_10_0) {
+-            return env->scounteren;
+-        } else {
+-            break; /* illegal instruction */
+-        }
+-    case CSR_SCAUSE:
+-        return env->scause;
+-    case CSR_SATP: /* CSR_SPTBR */
+-        if (!riscv_feature(env, RISCV_FEATURE_MMU)) {
+-            return 0;
+-        }
+-        if (env->priv_ver >=3D PRIV_VERSION_1_10_0) {
+-            return env->satp;
+-        } else {
+-            return env->sptbr;
+-        }
+-    case CSR_SSCRATCH:
+-        return env->sscratch;
+-    case CSR_MSTATUS:
+-        return env->mstatus;
+-    case CSR_MIP: {
+-        qemu_mutex_lock_iothread();
+-        target_ulong tmp =3D env->mip;
+-        qemu_mutex_unlock_iothread();
+-        return tmp;
+-    }
+-    case CSR_MIE:
+-        return env->mie;
+-    case CSR_MEPC:
+-        return env->mepc;
+-    case CSR_MSCRATCH:
+-        return env->mscratch;
+-    case CSR_MCAUSE:
+-        return env->mcause;
+-    case CSR_MBADADDR:
+-        return env->mbadaddr;
+-    case CSR_MISA:
+-        return env->misa;
+-    case CSR_MARCHID:
+-        return 0; /* as spike does */
+-    case CSR_MIMPID:
+-        return 0; /* as spike does */
+-    case CSR_MVENDORID:
+-        return 0; /* as spike does */
+-    case CSR_MHARTID:
+-        return env->mhartid;
+-    case CSR_MTVEC:
+-        return env->mtvec;
+-    case CSR_MCOUNTEREN:
+-        if (env->priv_ver >=3D PRIV_VERSION_1_10_0) {
+-            return env->mcounteren;
+-        } else {
+-            break; /* illegal instruction */
+-        }
+-    case CSR_MEDELEG:
+-        return env->medeleg;
+-    case CSR_MIDELEG:
+-        return env->mideleg;
+-    case CSR_PMPCFG0:
+-    case CSR_PMPCFG1:
+-    case CSR_PMPCFG2:
+-    case CSR_PMPCFG3:
+-       return pmpcfg_csr_read(env, csrno - CSR_PMPCFG0);
+-    case CSR_PMPADDR0:
+-    case CSR_PMPADDR1:
+-    case CSR_PMPADDR2:
+-    case CSR_PMPADDR3:
+-    case CSR_PMPADDR4:
+-    case CSR_PMPADDR5:
+-    case CSR_PMPADDR6:
+-    case CSR_PMPADDR7:
+-    case CSR_PMPADDR8:
+-    case CSR_PMPADDR9:
+-    case CSR_PMPADDR10:
+-    case CSR_PMPADDR11:
+-    case CSR_PMPADDR12:
+-    case CSR_PMPADDR13:
+-    case CSR_PMPADDR14:
+-    case CSR_PMPADDR15:
+-       return pmpaddr_csr_read(env, csrno - CSR_PMPADDR0);
+-#endif
+-    }
+-    /* used by e.g. MTIME read */
+-    do_raise_exception_err(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
+-}
+-
+-/*
+- * Check that CSR access is allowed.
+- *
+- * Adapted from Spike's decode.h:validate_csr
+- */
+-static void validate_csr(CPURISCVState *env, uint64_t which,
+-                         uint64_t write, uintptr_t ra)
+-{
+-#ifndef CONFIG_USER_ONLY
+-    unsigned csr_priv =3D get_field((which), 0x300);
+-    unsigned csr_read_only =3D get_field((which), 0xC00) =3D=3D 3;
+-    if (((write) && csr_read_only) || (env->priv < csr_priv)) {
+-        do_raise_exception_err(env, RISCV_EXCP_ILLEGAL_INST, ra);
+-    }
+-#endif
+-}
+-
+ target_ulong helper_csrrw(CPURISCVState *env, target_ulong src,
+         target_ulong csr)
  {
-     [CSR_MEPC] =3D                { read_mepc,        write_mepc        },
-     [CSR_MCAUSE] =3D              { read_mcause,      write_mcause      },
-     [CSR_MBADADDR] =3D            { read_mbadaddr,    write_mbadaddr    },
--    [CSR_MIP] =3D                 { read_mip,         write_mip         },
-+    [CSR_MIP] =3D                 { NULL,     NULL,     rmw_mip         },
+-    validate_csr(env, csr, 1, GETPC());
+-    uint64_t csr_backup =3D csr_read_helper(env, csr);
+-    csr_write_helper(env, src, csr);
+-    return csr_backup;
++    target_ulong val =3D 0;
++    if (riscv_csrrw(env, csr, &val, src, -1) < 0) {
++        do_raise_exception_err(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
++    }
++    return val;
+ }
 =20
-     /* Supervisor Trap Setup */
-     [CSR_SSTATUS] =3D             { read_sstatus,     write_sstatus     },
-@@ -825,7 +825,7 @@ static riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =3D=
+ target_ulong helper_csrrs(CPURISCVState *env, target_ulong src,
+         target_ulong csr, target_ulong rs1_pass)
  {
-     [CSR_SEPC] =3D                { read_sepc,        write_sepc        },
-     [CSR_SCAUSE] =3D              { read_scause,      write_scause      },
-     [CSR_SBADADDR] =3D            { read_sbadaddr,    write_sbadaddr    },
--    [CSR_SIP] =3D                 { read_sip,         write_sip         },
-+    [CSR_SIP] =3D                 { NULL,     NULL,     rmw_sip         },
+-    validate_csr(env, csr, rs1_pass !=3D 0, GETPC());
+-    uint64_t csr_backup =3D csr_read_helper(env, csr);
+-    if (rs1_pass !=3D 0) {
+-        csr_write_helper(env, src | csr_backup, csr);
++    target_ulong val =3D 0;
++    if (riscv_csrrw(env, csr, &val, -1, rs1_pass ? src : 0) < 0) {
++        do_raise_exception_err(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
+     }
+-    return csr_backup;
++    return val;
+ }
 =20
-     /* Supervisor Protection and Translation */
-     [CSR_SATP] =3D                { read_satp,        write_satp        },
+ target_ulong helper_csrrc(CPURISCVState *env, target_ulong src,
+         target_ulong csr, target_ulong rs1_pass)
+ {
+-    validate_csr(env, csr, rs1_pass !=3D 0, GETPC());
+-    uint64_t csr_backup =3D csr_read_helper(env, csr);
+-    if (rs1_pass !=3D 0) {
+-        csr_write_helper(env, (~src) & csr_backup, csr);
++    target_ulong val =3D 0;
++    if (riscv_csrrw(env, csr, &val, 0, rs1_pass ? src : 0) < 0) {
++        do_raise_exception_err(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
+     }
+-    return csr_backup;
++    return val;
+ }
+=20
+ #ifndef CONFIG_USER_ONLY
+@@ -674,7 +91,7 @@ target_ulong helper_sret(CPURISCVState *env, target_ulon=
+g cpu_pc_deb)
+     mstatus =3D set_field(mstatus, MSTATUS_SPIE, 0);
+     mstatus =3D set_field(mstatus, MSTATUS_SPP, PRV_U);
+     riscv_set_mode(env, prev_priv);
+-    csr_write_helper(env, mstatus, CSR_MSTATUS);
++    env->mstatus =3D mstatus;
+=20
+     return retpc;
+ }
+@@ -699,7 +116,7 @@ target_ulong helper_mret(CPURISCVState *env, target_ulo=
+ng cpu_pc_deb)
+     mstatus =3D set_field(mstatus, MSTATUS_MPIE, 0);
+     mstatus =3D set_field(mstatus, MSTATUS_MPP, PRV_U);
+     riscv_set_mode(env, prev_priv);
+-    csr_write_helper(env, mstatus, CSR_MSTATUS);
++    env->mstatus =3D mstatus;
+=20
+     return retpc;
+ }
 --=20
 2.19.1
 
