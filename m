@@ -1,72 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gg4TW-0003I2-Tj
-	for mharc-qemu-riscv@gnu.org; Sun, 06 Jan 2019 04:12:06 -0500
-Received: from eggsout.gnu.org ([209.51.188.92]:57611 helo=eggs.gnu.org)
+	id 1ggxBa-00077m-0M
+	for mharc-qemu-riscv@gnu.org; Tue, 08 Jan 2019 14:37:14 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:47683)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <richard.henderson@linaro.org>) id 1gg4TV-0003Hr-51
-	for qemu-riscv@nongnu.org; Sun, 06 Jan 2019 04:12:05 -0500
+	(envelope-from <palmer@sifive.com>) id 1ggxBX-00075Y-1h
+	for qemu-riscv@nongnu.org; Tue, 08 Jan 2019 14:37:11 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <richard.henderson@linaro.org>) id 1gg4TU-0001x4-Gh
-	for qemu-riscv@nongnu.org; Sun, 06 Jan 2019 04:12:05 -0500
-Received: from mail-pf1-x442.google.com ([2607:f8b0:4864:20::442]:33629)
+	(envelope-from <palmer@sifive.com>) id 1ggxBV-0008B6-71
+	for qemu-riscv@nongnu.org; Tue, 08 Jan 2019 14:37:11 -0500
+Received: from mail-pf1-x443.google.com ([2607:f8b0:4864:20::443]:34551)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
-	id 1gg4TU-0001va-AU
-	for qemu-riscv@nongnu.org; Sun, 06 Jan 2019 04:12:04 -0500
-Received: by mail-pf1-x442.google.com with SMTP id c123so20366147pfb.0
-	for <qemu-riscv@nongnu.org>; Sun, 06 Jan 2019 01:12:04 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
-	h=subject:to:cc:references:from:openpgp:message-id:date:user-agent
-	:mime-version:in-reply-to:content-language:content-transfer-encoding;
-	bh=JiLhHpOmAutcUllXz4LKps4Z30qJXlP+/DYnJgWBuJ0=;
-	b=HkQ9OY4K7SndtITAobl6xyvnT1217apB2P6y3QCGCnJBF44LT337qvGIo5hGsUJcXp
-	lxzyWtLjxYxb89JS+P7gJNBEfvuhfwOW2OrzIvIS2GneYfpid2jpNCSE3R2VlzYe0mA3
-	dSZw0u6D/LzjBgIJAUEZc3TpqlpAgJ6Ma0FZg=
+	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1ggxBV-00082y-0n
+	for qemu-riscv@nongnu.org; Tue, 08 Jan 2019 14:37:09 -0500
+Received: by mail-pf1-x443.google.com with SMTP id h3so2422387pfg.1
+	for <qemu-riscv@nongnu.org>; Tue, 08 Jan 2019 11:37:07 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+	h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
+	:content-transfer-encoding;
+	bh=i2x6PpENGKZZDuKH/0obZdxaWDvODeIw82b9vGoneX8=;
+	b=j15zLXpfXxOGW99VGXDKOMET3L9jqcrHWxSN43e5AlhEVE5Cac8hL4QEj8Luq/4DNQ
+	G+6AHMBAkxQSOnTeyR8dn72ffloYhOypxWvDLyNhsjyVzHb1dwVNlbQkOQuRNmqKrKJJ
+	nz1RYuCvV7Ug7bv/cpGvTraAVP/ncwRLFpUdJweBP3xoUY3rd0xD8trlVQNrf4VyBEHq
+	lgQudA1m1kMU/DHFmwzVe/+NSXwCzxG8O8O5+TvangGij4OzkPHHGlW++DqP1PtpGDdJ
+	SX7FcLSmCwyaL9LUx866aHEt097g9W2bspViNfJwhSr68y2+nGbLgAzGHZd167NAQw2r
+	rGaw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
-	:date:user-agent:mime-version:in-reply-to:content-language
-	:content-transfer-encoding;
-	bh=JiLhHpOmAutcUllXz4LKps4Z30qJXlP+/DYnJgWBuJ0=;
-	b=rwvl0WUpUxXgaYlzahQcAJIBNrCJ5pihSGIn3Fe/cse1cQd3JceWU3i2dzBSDAPuDn
-	89dSP3JQXuwi/9XWPs/hQDk9U9u/3f8IKMDwiUmDBuZydgLTf45iOk1NCc5RpwCWCxCg
-	i6w/pU1aymQQK6hJA6dz73mcRykcqTMcJKgC+D52AdJ2s6wd1orK+xJ4kCBt6HTfEK6i
-	kMIWQ0gLMtklXJgHUHdfLWZ9hS1lQEfgUXFeOZoxQxpclcBKMuQZ45jqBlWuPL/4YBXU
-	aYz3t8h1pn4mgeqtKVMiEuFiFoUvCizmGzV41QtHPcaueOm6MDihotReH795hnlbbUtR
-	LPZQ==
-X-Gm-Message-State: AJcUukctm1sZsDEJ+5TmT/Z9YRF9VWBh4IBDheBUuuHyoidIpHaSmYN4
-	DmojSk2UiLwqNQjvRPHlkO2FRw==
-X-Google-Smtp-Source: AFSGD/XPVH90IwIqLrKdcDQloC3qiwy3p2W1IAzuU7ERNzXxFpKm8IsRIUZfW7VzuS+T0nVyqFbGrA==
-X-Received: by 2002:a62:4c:: with SMTP id 73mr58141518pfa.24.1546765923232;
-	Sun, 06 Jan 2019 01:12:03 -0800 (PST)
-Received: from cloudburst.twiddle.net
-	(2001-44b8-2176-c800-8cc6-2630-7d99-5ef1.static.ipv6.internode.on.net.
-	[2001:44b8:2176:c800:8cc6:2630:7d99:5ef1])
-	by smtp.gmail.com with ESMTPSA id
-	g26sm82381316pfh.61.2019.01.06.01.12.00
+	h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
+	:mime-version:content-transfer-encoding;
+	bh=i2x6PpENGKZZDuKH/0obZdxaWDvODeIw82b9vGoneX8=;
+	b=Uh3U5NbZXXldd/IARpAeeMp7RgymqOgaGYcbKJEZ56nUEkvwb6qiZX/rL+ubHvhcd3
+	hg+03rYECy3KAOtbSJu2kTjdbh9rSGORODuNwtdJtuqYrFBjxg2Xu9TSKxnQDjvFl0GE
+	8zwXr0URgodaBko8oy38+keENJcKCOcwLoWg/GRd8AE69U3lEi2xIvn+2Ui5hFcRR2BA
+	sp/65WJv75cPChYP5liTuVqPqr1G+iuojVxN/u4PjEXA9z6wPlOqmEgMmuqiKOfqpjsU
+	hkgim0BIHqCyb0VwmlkRfA+eICpMrEkFe3Q3d+YlAxzQBD6gMGUxEfTEMJ3RN4C0tZGG
+	OMgg==
+X-Gm-Message-State: AJcUukffJoKQot6OfkUyKBi69PKa3ncbGs7lPm6q+zBjOZDEhx3+IZCx
+	gW7yv3mhz4mYE3BgCTEG9gh9i+m7wMo=
+X-Google-Smtp-Source: ALg8bN4J6irPMscsawKsEYAXGqYL7Wuqdniw4XQdXk5kGifOJkBZmh0Wur/SadrtqmaBnykx6kIJBw==
+X-Received: by 2002:a63:e545:: with SMTP id z5mr2663685pgj.195.1546976226379; 
+	Tue, 08 Jan 2019 11:37:06 -0800 (PST)
+Received: from localhost ([12.206.222.5]) by smtp.gmail.com with ESMTPSA id
+	v89sm101861973pfj.164.2019.01.08.11.37.05
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 06 Jan 2019 01:12:02 -0800 (PST)
-To: Alistair Francis <Alistair.Francis@wdc.com>,
-	"qemu-devel@nongnu.org" <qemu-devel@nongnu.org>,
-	"qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>
-Cc: "alistair23@gmail.com" <alistair23@gmail.com>
-References: <cover.1546644177.git.alistair.francis@wdc.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-Openpgp: preference=signencrypt
-Message-ID: <378cfd04-a6a6-1f00-d4a8-4f12f970277e@linaro.org>
-Date: Sun, 6 Jan 2019 19:11:56 +1000
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.3.1
-MIME-Version: 1.0
-In-Reply-To: <cover.1546644177.git.alistair.francis@wdc.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+	Tue, 08 Jan 2019 11:37:05 -0800 (PST)
+Date: Tue, 08 Jan 2019 11:37:05 -0800 (PST)
+X-Google-Original-Date: Tue, 08 Jan 2019 11:33:24 PST (-0800)
+In-Reply-To: <CAFEAcA8t7V3XwkPCSKCPCd1qc=MxZcw2yjoHMW-NmTzGWMkbVQ@mail.gmail.com>
+CC: qemu-riscv@nongnu.org
+From: Palmer Dabbelt <palmer@sifive.com>
+To: Peter Maydell <peter.maydell@linaro.org>, qemu-devel@nongnu.org
+Message-ID: <mhng-39a30073-8d69-47fa-863b-b38761d1e8de@palmer-si-x1c4>
+Mime-Version: 1.0 (MHng)
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::442
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v1 0/3] Upstream more RISC-V
- fork patches
+X-Received-From: 2607:f8b0:4864:20::443
+Subject: [Qemu-riscv] Wiki Account Creation [Was Re: [PULL] RISC-V Changes
+ for 3.2, Part 1]
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -78,20 +70,40 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 06 Jan 2019 09:12:05 -0000
+X-List-Received-Date: Tue, 08 Jan 2019 19:37:11 -0000
 
-On 1/5/19 9:23 AM, Alistair Francis wrote:
-> This is one of the big patches that the RISC-V fork has that we don't.
-> After this it should be straight forward to upstream the remaining
-> patches.
-> 
-> Michael Clark (3):
->   RISC-V: Implement modular CSR helper interface
->   RISC-V: Implement atomic mip/sip CSR updates
->   RISC-V: Implement existential predicates for CSRs
+On Thu, 03 Jan 2019 08:46:11 PST (-0800), Peter Maydell wrote:
+> On Wed, 26 Dec 2018 at 17:20, Palmer Dabbelt <palmer@sifive.com> wrote:
+>>
+>> The following changes since commit b72566a4ffaddbc0c0c1f6f5ee91b42ab13ff429:
+>>
+>>   Merge remote-tracking branch 'remotes/vivier2/tags/trivial-patches-pull-request' into staging (2018-12-19 15:31:02 +0000)
+>>
+>> are available in the Git repository at:
+>>
+>>   git://github.com/palmer-dabbelt/qemu.git tags/riscv-for-master-3.2-part1
+>>
+>> for you to fetch changes up to 7b91ae7d7944056c5e8045342e4039e978e43c82:
+>>
+>>   MAINTAINERS: Mark RISC-V as Supported (2018-12-21 07:57:15 -0800)
+>>
+>> ----------------------------------------------------------------
+>> RISC-V Changes for 3.2, Part 1
+>>
+>> This pull request contains the first set of RISC-V patches I'd like to
+>> target for the 3.2 development cycle.  It's really just a collection of
+>> bug fixes with one major new feature: PCIe can now be attached to RISC-V
+>> guests.
+>>
+>> This has passed my usual test of booting the latest Linux RC into a
+>> Fedora disk image on the virt machine.
+>>
+>
+> Applied, thanks.
+>
+> Please update the changelog at https://wiki.qemu.org/ChangeLog/4.0
+> for any user-visible changes.
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-
-
-r~
+It looks like I don't have an account and I'm supposed to ask on qemu-devel for 
+one.
 
