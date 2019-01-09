@@ -1,59 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1ggyef-0003Aj-38
-	for mharc-qemu-riscv@gnu.org; Tue, 08 Jan 2019 16:11:21 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:57899)
+	id 1ghJfk-000440-Ga
+	for mharc-qemu-riscv@gnu.org; Wed, 09 Jan 2019 14:37:52 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:38748)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <jcmvbkbc@gmail.com>) id 1ggy69-0003Ip-91
-	for qemu-riscv@nongnu.org; Tue, 08 Jan 2019 15:35:42 -0500
+	(envelope-from <palmer@sifive.com>) id 1ghJfi-00042h-Tb
+	for qemu-riscv@nongnu.org; Wed, 09 Jan 2019 14:37:51 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <jcmvbkbc@gmail.com>) id 1ggy67-0002FX-BL
-	for qemu-riscv@nongnu.org; Tue, 08 Jan 2019 15:35:41 -0500
-Received: from mail-yw1-xc44.google.com ([2607:f8b0:4864:20::c44]:33534)
+	(envelope-from <palmer@sifive.com>) id 1ghJfi-0000xJ-8H
+	for qemu-riscv@nongnu.org; Wed, 09 Jan 2019 14:37:50 -0500
+Received: from mail-pl1-x631.google.com ([2607:f8b0:4864:20::631]:42794)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <jcmvbkbc@gmail.com>)
-	id 1ggy61-0002AU-FA; Tue, 08 Jan 2019 15:35:33 -0500
-Received: by mail-yw1-xc44.google.com with SMTP id p65so2101506ywe.0;
-	Tue, 08 Jan 2019 12:35:29 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=x4UzFbkeTAZnge8zPk7GrtVM/TMc5bk9adMhBX2mHHg=;
-	b=GyMlGWoEQT2uYhddrZJQWTZOwvmWEv6TjsxoVhnva2Lth5qyxnbL22x7upm91dvnpN
-	lTs0oXD+UtrGkPeZ8Nx2KbX2zuLVLFk9u8rN0udOqymMrNodUqel+wCeQc4q8KjXMYXr
-	xKKc4XN1+iK/QEeSSiRsc6Es/rZyRniZbzyMBOrLk9es3guJbAxJPLst4ZPnM7lGwzBl
-	gJIQE3jvG7QuwBCiTMxNl6M3fLSuqXiHif0KEeIGaMDYsPnv7jjDsqFc9KihLb/+iUHo
-	wR7TPmt7MA/52q8C0Re6iNoXOWpaFjM8KBGrTJ4Xu2JE8ps3RGaTzuyGGPwmyX47dskp
-	en1Q==
+	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1ghJfg-0000Vm-4q
+	for qemu-riscv@nongnu.org; Wed, 09 Jan 2019 14:37:48 -0500
+Received: by mail-pl1-x631.google.com with SMTP id y1so4027475plp.9
+	for <qemu-riscv@nongnu.org>; Wed, 09 Jan 2019 11:37:28 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+	h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
+	:content-transfer-encoding;
+	bh=KPajVhqFcb3kkI659CoqMKjdGu/WcRlbAaIyhF+T1ig=;
+	b=Aou2Pup0w7l6h9WciybqoBhgD6pPtsEIQ5plQWEpcJUBDxngpBKMmfxJaWKdOx97zP
+	FLKVQmv65VA4KQ/ypre9HF6q+ZyNNIHV0ObIzYtdJl8Jmo5/YOHfVexqy1qlxS3Fbn6w
+	c4YGR5xUTDgoFjzHSIMyWLbHlAbiubkRoH1Mrhqc45/wgZemeiWMeGoQEg4/mDR22ryl
+	lgSQCJHXEhI94YmWa20+YcFokCFXC9aQvwv7t9F7i6z5jvFQaszbDLyKzw7XiMu1shQ0
+	Nka4YIZ+d5F9dM1IRtLMgpwgl0Bcc9D9F7CO6EmDmv/LmNCDDk4FQ5/uWkY+XiRQjL0T
+	Vpdw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=x4UzFbkeTAZnge8zPk7GrtVM/TMc5bk9adMhBX2mHHg=;
-	b=g60k95Frlvj/HgawoKMrvOxaRtj/4WeQfATEK3uoPQqcvJolrZmgix1gawDWDzFxmG
-	eMydx8Jj86fj5eO/HnXpDnCzgmpvD4hYxqPtktBgchtVZKwX4eokeGzFLcMo1cLnqrR2
-	lnSVgtxNdDjW4nCgaHjj0oKnw38JrsHidzsMy1iwb53YdViq2QgNZK7hT/FlO/w34gXk
-	gBsZF3KIbW6yvVM7Rzun5dQxoHFphWDAqfPJjQTw9QBTaVjaO/YeYXHh0lox71VtaB5w
-	JxAO25YDv+cVteJM4L8ESqQOzg2TIXVeNupybuzqy/tw6XpCmR5bEzApU2TTaYzFCD1W
-	/uPg==
-X-Gm-Message-State: AJcUukeBZWhRR+wLgRu6KzeuXq5iquMr13FARuhuj+YTqnguMVttF2ch
-	626NiK/tH3kGftYEyIqT6gINUokRBKdIpSclMSg=
-X-Google-Smtp-Source: ALg8bN6u/opddpiXH3vqjeCFKKrJTmM7RuO23e9iIHwWpokPUboFyzWYGo+8NmhpiO/3S12L5IKDu5GLjUzVrdIjD+Y=
-X-Received: by 2002:a81:5b07:: with SMTP id p7mr3240430ywb.468.1546979728364; 
-	Tue, 08 Jan 2019 12:35:28 -0800 (PST)
-MIME-Version: 1.0
-References: <CAFEAcA8t7V3XwkPCSKCPCd1qc=MxZcw2yjoHMW-NmTzGWMkbVQ@mail.gmail.com>
-	<mhng-39a30073-8d69-47fa-863b-b38761d1e8de@palmer-si-x1c4>
-In-Reply-To: <mhng-39a30073-8d69-47fa-863b-b38761d1e8de@palmer-si-x1c4>
-From: Max Filippov <jcmvbkbc@gmail.com>
-Date: Tue, 8 Jan 2019 12:35:17 -0800
-Message-ID: <CAMo8BfL96J7cT_R36qTHuwk+SvqWSEyZ5+oW05g=Bahc-QxFWw@mail.gmail.com>
-To: Palmer Dabbelt <palmer@sifive.com>
-Cc: Peter Maydell <peter.maydell@linaro.org>,
-	qemu-devel <qemu-devel@nongnu.org>, qemu-riscv@nongnu.org
-Content-Type: text/plain; charset="UTF-8"
+	h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
+	:mime-version:content-transfer-encoding;
+	bh=KPajVhqFcb3kkI659CoqMKjdGu/WcRlbAaIyhF+T1ig=;
+	b=p0RFg7xg45TDNfhYpJAgyFAMhH/krEt3pqF7mzvrwN8gDLRsk/E3xZu3gWKO6i0FRy
+	VmhNIiBQCUPSGtRCffLOQhir5YbRc9t0KX7g3sKArGuONsP/BLbjJAxwjZFNCkWWxZyY
+	33coEJvtIMlBt7TVzL6oLkrPLgF+Kc4irSTVYQf6q4dCaCdLSbdMqXBvjTAVrDo7QdQd
+	8ZQW2hA3jz42eRra89mK/CgMYpo2HEzwpLgxVxO5PE1v+9BbmE1ry8KmYxS8t8Y3QC8i
+	PssRURC+vKsrboMwIFU+5MUILqsP2EJKDinhrTEv754sgh/JF38UO9Sfc4oHPi3LA71m
+	89tQ==
+X-Gm-Message-State: AJcUukeOpDop/R9kb9WimTEDUNuLTwBjeRgSSI0aoXTG09ufH/v4h642
+	fqmVcBLkxjst+5AfnxcbZDAeIQ==
+X-Google-Smtp-Source: ALg8bN61jw1PTIkREWp9GO9fZ7mZP3pPD5q8OnGwTjIncWxfNCqp5m/qBPNa4+iI6QkbHdHoDNVYvg==
+X-Received: by 2002:a17:902:bc81:: with SMTP id
+	bb1mr7137824plb.223.1547062647675; 
+	Wed, 09 Jan 2019 11:37:27 -0800 (PST)
+Received: from localhost ([12.206.222.5]) by smtp.gmail.com with ESMTPSA id
+	b9sm103941466pfi.118.2019.01.09.11.37.26
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 09 Jan 2019 11:37:26 -0800 (PST)
+Date: Wed, 09 Jan 2019 11:37:26 -0800 (PST)
+X-Google-Original-Date: Wed, 09 Jan 2019 11:33:27 PST (-0800)
+In-Reply-To: <CAMo8BfL96J7cT_R36qTHuwk+SvqWSEyZ5+oW05g=Bahc-QxFWw@mail.gmail.com>
+CC: Peter Maydell <peter.maydell@linaro.org>, qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+From: Palmer Dabbelt <palmer@sifive.com>
+To: jcmvbkbc@gmail.com
+Message-ID: <mhng-26258e3f-d92f-4438-ba66-8364a52595f7@palmer-si-x1c4>
+Mime-Version: 1.0 (MHng)
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::c44
-X-Mailman-Approved-At: Tue, 08 Jan 2019 16:11:19 -0500
+X-Received-From: 2607:f8b0:4864:20::631
 Subject: Re: [Qemu-riscv] [Qemu-devel] Wiki Account Creation [Was Re: [PULL]
  RISC-V Changes for 3.2, Part 1]
 X-BeenThere: qemu-riscv@nongnu.org
@@ -67,17 +72,16 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Jan 2019 20:35:42 -0000
+X-List-Received-Date: Wed, 09 Jan 2019 19:37:51 -0000
 
-Hi Palmer,
+On Tue, 08 Jan 2019 12:35:17 PST (-0800), jcmvbkbc@gmail.com wrote:
+> Hi Palmer,
+>
+> On Tue, Jan 8, 2019 at 11:37 AM Palmer Dabbelt <palmer@sifive.com> wrote:
+>> It looks like I don't have an account and I'm supposed to ask on qemu-devel for
+>> one.
+>
+> I've created an account for you. Will send details in private e-mail.
 
-On Tue, Jan 8, 2019 at 11:37 AM Palmer Dabbelt <palmer@sifive.com> wrote:
-> It looks like I don't have an account and I'm supposed to ask on qemu-devel for
-> one.
-
-I've created an account for you. Will send details in private e-mail.
-
--- 
-Thanks.
--- Max
+Thanks!
 
