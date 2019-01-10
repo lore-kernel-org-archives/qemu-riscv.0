@@ -1,109 +1,93 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1ghNn7-0006Qg-Nh
-	for mharc-qemu-riscv@gnu.org; Wed, 09 Jan 2019 19:01:45 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:58526)
+	id 1ghVmT-0005KX-Hv
+	for mharc-qemu-riscv@gnu.org; Thu, 10 Jan 2019 03:33:37 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:51689)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <prvs=906996e92=Alistair.Francis@wdc.com>)
-	id 1ghNn5-0006Pu-Qj
-	for qemu-riscv@nongnu.org; Wed, 09 Jan 2019 19:01:44 -0500
+	(envelope-from <thuth@redhat.com>) id 1ghVmR-0005JD-6n
+	for qemu-riscv@nongnu.org; Thu, 10 Jan 2019 03:33:35 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <prvs=906996e92=Alistair.Francis@wdc.com>)
-	id 1ghNn5-0000wZ-5d
-	for qemu-riscv@nongnu.org; Wed, 09 Jan 2019 19:01:43 -0500
-Received: from esa6.hgst.iphmx.com ([216.71.154.45]:53371)
+	(envelope-from <thuth@redhat.com>) id 1ghVmL-0007Hg-6q
+	for qemu-riscv@nongnu.org; Thu, 10 Jan 2019 03:33:32 -0500
+Received: from mx1.redhat.com ([209.132.183.28]:51932)
 	by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.71) (envelope-from <prvs=906996e92=Alistair.Francis@wdc.com>)
-	id 1ghNn3-0000ql-1L; Wed, 09 Jan 2019 19:01:41 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-	d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
-	t=1547078501; x=1578614501;
-	h=from:to:cc:subject:date:message-id:
-	content-transfer-encoding:mime-version;
-	bh=GuuFotW4xZQr7y2UV/Hvk0heJMDMx7FLRia8Xlyk71Q=;
-	b=p8IwPoFujeND/+rUuxVRJhLnmYFMeEg+PoenNjwOfToEzZLVhVx/vl+k
-	TXbIIregsQ8V3IJV79GFC8J/xNuyLJRSoUAaREel5S+Ezxb/M4+EDulHl
-	LyXqXywhSCO/IVnTwP8G+BP2eWMkgsaI7nvOmlqmqImT1MVz4CKKiG90W
-	UWQkFXWiEHIKzOqmy9VuluePFzcGMo9JbyEYImd2k80t+igbR21M4Ruqu
-	ygrR5meanSZTfexxeg/qm51V++hVPEjmoyUtyjO9MQRkxuQlQEALJUBaZ
-	0rvrXVi0ydgpOiDlhht9ED4+slRnlRrVyfAclvn8MRlrtCd8cYjhxMC8f A==;
-X-IronPort-AV: E=Sophos;i="5.56,459,1539619200"; d="scan'208";a="100171206"
-Received: from mail-by2nam01lp2057.outbound.protection.outlook.com (HELO
-	NAM01-BY2-obe.outbound.protection.outlook.com) ([104.47.34.57])
-	by ob1.hgst.iphmx.com with ESMTP; 10 Jan 2019 08:01:36 +0800
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=sharedspace.onmicrosoft.com; s=selector1-wdc-com;
-	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=GuuFotW4xZQr7y2UV/Hvk0heJMDMx7FLRia8Xlyk71Q=;
-	b=ZSHFwzup3Cu7H/LY9JD/e1wRELbIrYRkJBZWpPdo1mEW0oGi0KxyHLGz2VvvqLCRkWC8de7ebknj1apoBwk7OEli3dnY9eSUYrevzfblWsVTlE1tePzlzCPx0IzFbmK710qLZXiihLU1OEqRSPLKJ4mKReQuC3A1oleO9bEK57M=
-Received: from MWHPR04MB0401.namprd04.prod.outlook.com (10.173.48.18) by
-	MWHPR04MB0369.namprd04.prod.outlook.com (10.173.48.10) with Microsoft
-	SMTP
-	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
-	15.20.1495.6; Thu, 10 Jan 2019 00:01:35 +0000
-Received: from MWHPR04MB0401.namprd04.prod.outlook.com
-	([fe80::10e5:e75d:3272:2d33]) by
-	MWHPR04MB0401.namprd04.prod.outlook.com
-	([fe80::10e5:e75d:3272:2d33%7]) with mapi id 15.20.1516.010;
-	Thu, 10 Jan 2019 00:01:35 +0000
-From: Alistair Francis <Alistair.Francis@wdc.com>
-To: "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, "qemu-riscv@nongnu.org"
-	<qemu-riscv@nongnu.org>
-CC: Alistair Francis <Alistair.Francis@wdc.com>, "alistair23@gmail.com"
-	<alistair23@gmail.com>
-Thread-Topic: [PATCH v1 1/1] default-configs: Enable USB support for RISC-V
-	machines
-Thread-Index: AQHUqHem4KunkMZyp0G1wRCrn8gEAg==
-Date: Thu, 10 Jan 2019 00:01:34 +0000
-Message-ID: <c162ffeb1bb1cbcdeb47ea62a829294168a0ebdf.1547078463.git.alistair.francis@wdc.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-mailer: git-send-email 2.19.1
-x-clientproxiedby: BYAPR07CA0077.namprd07.prod.outlook.com
-	(2603:10b6:a03:12b::18) To MWHPR04MB0401.namprd04.prod.outlook.com
-	(2603:10b6:300:70::18)
-authentication-results: spf=none (sender IP is )
-	smtp.mailfrom=Alistair.Francis@wdc.com; 
-x-ms-exchange-messagesentrepresentingtype: 1
-x-originating-ip: [199.255.44.250]
-x-ms-publictraffictype: Email
-x-microsoft-exchange-diagnostics: 1; MWHPR04MB0369;
-	6:9Oj+djpfXUcmSo1CF6/QiBw1Tp74OBE+SpVw9Qzro+KFeZd8ggfZ5AUM9kBYxr4Ir1szo35V1twojjrmgjaULlfBrT5+DHtUYgTjgU/cKZmR1yCSSOfPJvklf9SAE7T3310okUUFz2R/4N73yOr9dj9j+xYIFYuw1xMnJKqSNHioSthZ55MEBhcVpm+Ys7YmPDK+kV51kKMr3T2stCf/3iFGkd6Zxen0RAc498ejhh67lBit4DL57ivo0wZdUz6IW/WOAfUt3Hd9l5Ewle294TT7e1+3B0mnHKYRzDKd1XMkkbeCHP1h3y3aYl93PuscoVYrTvO4R6X1xbY118dWsEJ8SKnlp3OcOMlqJosGIwQV1B4bpKJUMmCHKiVSadqWzBYkMyYBSB5Q78IUP/dWhDqcGodxi0FftfTV2JFp4zk7ckdugzSJPbyOc+CrBZ6qU2ic34zj7IdnO0lCMXJbAQ==;
-	5:IHeA+5wwFVXnsVsoqW1XcDWbhGMk8lqBhRGP5NKzhKOa7mKCtTHa5W0TGEC8gG41IfE3MqMD8WzCTuqzQ8VoZklcx8B80iwMu/84LDrAfQytGPaSGhI377A9zEzKLmVyvOaY8It8k8iOcuDtCJy0lFG3rUTynHo3Gi9lh4hMWFWrfwe9dV1cacIwJhiL+9owBNWlNAxpRGIfhEXBQMKkkQ==;
-	7:Cl2ApcHE8M1Aib81PW1Ps+kUG3Z8u462/WGJQfKgixiuAZvkI8DWRSNQ+dW23knFmnXYpLoKSb1vWCflDis8db6GiHDblRBsQ+IPX84y3oyGs0Q21LoH9rN3w845K6iigHT6i+gARCP7I33Y8yERyg==
-x-ms-office365-filtering-correlation-id: c74f076b-cba3-43d9-b683-08d6768ec8c2
-x-ms-office365-filtering-ht: Tenant
-x-microsoft-antispam: BCL:0; PCL:0;
-	RULEID:(2390118)(7020095)(4652040)(8989299)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(5600109)(711020)(4618075)(2017052603328)(7153060)(7193020);
-	SRVR:MWHPR04MB0369; 
-x-ms-traffictypediagnostic: MWHPR04MB0369:
-wdcipoutbound: EOP-TRUE
-x-microsoft-antispam-prvs: <MWHPR04MB0369BB2EB2EE5CA4DE07E89290840@MWHPR04MB0369.namprd04.prod.outlook.com>
-x-forefront-prvs: 0913EA1D60
-x-forefront-antispam-report: SFV:NSPM;
-	SFS:(10019020)(366004)(39860400002)(346002)(376002)(136003)(396003)(189003)(199004)(486006)(36756003)(5660300001)(72206003)(476003)(186003)(4326008)(66066001)(2616005)(71190400001)(71200400001)(52116002)(68736007)(54906003)(105586002)(39060400002)(106356001)(110136005)(6512007)(2906002)(99286004)(6506007)(316002)(25786009)(386003)(102836004)(26005)(53936002)(256004)(86362001)(2501003)(50226002)(14454004)(6436002)(44832011)(6486002)(7736002)(6116002)(3846002)(8936002)(305945005)(97736004)(118296001)(81156014)(81166006)(478600001)(8676002)(4744005);
-	DIR:OUT; SFP:1102; SCL:1; SRVR:MWHPR04MB0369;
-	H:MWHPR04MB0401.namprd04.prod.outlook.com; FPR:; SPF:None;
-	LANG:en; PTR:InfoNoRecords; MX:1; A:1; 
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam-message-info: MjDhiK4J4ye06pGdPu+62Ga9STLSRVrWhNmeiD7psjLR2DAiwfgSKTftDVse/BJ8ilAFkoRS2qCDRllUX8XKrsyjEubjIo9kxOCQ4Kv9kbRh0Z5XPPani2JOESSofeda0sGC/4KFPAndJblTtpeSpH4zTeZzMppPS5PNR9YbLL1WkZgUxp0jAahDpcdC17J/EV8bFxbeHURWj4ZxACTQChlmjXayMdjYklpXwGi9W63G21k4cLwUzrE82KX4y2ZjyMM8ZCRmmv5YlEUMfm3Ywk5BplT1Jnk2LdktXvkzoeAX91crXTM5msFh16x/1qJc
-spamdiagnosticoutput: 1:99
-spamdiagnosticmetadata: NSPM
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+	(Exim 4.71) (envelope-from <thuth@redhat.com>)
+	id 1ghVm8-0007EY-Sl; Thu, 10 Jan 2019 03:33:18 -0500
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
+	[10.5.11.23])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mx1.redhat.com (Postfix) with ESMTPS id F083780F95;
+	Thu, 10 Jan 2019 08:33:12 +0000 (UTC)
+Received: from thuth.remote.csb (ovpn-116-101.ams2.redhat.com [10.36.116.101])
+	by smtp.corp.redhat.com (Postfix) with ESMTP id 774922634F;
+	Thu, 10 Jan 2019 08:33:11 +0000 (UTC)
+To: Alistair Francis <Alistair.Francis@wdc.com>,
+	"qemu-devel@nongnu.org" <qemu-devel@nongnu.org>,
+	"qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>
+Cc: "alistair23@gmail.com" <alistair23@gmail.com>
+References: <c162ffeb1bb1cbcdeb47ea62a829294168a0ebdf.1547078463.git.alistair.francis@wdc.com>
+From: Thomas Huth <thuth@redhat.com>
+Openpgp: preference=signencrypt
+Autocrypt: addr=thuth@redhat.com; keydata=
+	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
+Organization: Red Hat
+Message-ID: <e319aa13-1a43-d369-1213-060cf85b13a4@redhat.com>
+Date: Thu, 10 Jan 2019 09:33:10 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.9.1
 MIME-Version: 1.0
-X-OriginatorOrg: wdc.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: c74f076b-cba3-43d9-b683-08d6768ec8c2
-X-MS-Exchange-CrossTenant-originalarrivaltime: 10 Jan 2019 00:01:34.9725 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MWHPR04MB0369
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
-	recognized.
-X-Received-From: 216.71.154.45
-Subject: [Qemu-riscv] [PATCH v1 1/1] default-configs: Enable USB support for
- RISC-V machines
+In-Reply-To: <c162ffeb1bb1cbcdeb47ea62a829294168a0ebdf.1547078463.git.alistair.francis@wdc.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+	(mx1.redhat.com [10.5.110.27]);
+	Thu, 10 Jan 2019 08:33:13 +0000 (UTC)
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+X-Received-From: 209.132.183.28
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v1 1/1] default-configs:
+ Enable USB support for RISC-V machines
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -115,41 +99,41 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Jan 2019 00:01:44 -0000
+X-List-Received-Date: Thu, 10 Jan 2019 08:33:36 -0000
 
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
----
- default-configs/riscv32-softmmu.mak | 1 +
- default-configs/riscv64-softmmu.mak | 1 +
- 2 files changed, 2 insertions(+)
+On 2019-01-10 01:01, Alistair Francis wrote:
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> ---
+>  default-configs/riscv32-softmmu.mak | 1 +
+>  default-configs/riscv64-softmmu.mak | 1 +
+>  2 files changed, 2 insertions(+)
+> 
+> diff --git a/default-configs/riscv32-softmmu.mak b/default-configs/riscv32-softmmu.mak
+> index dbc9398284..c9c5971409 100644
+> --- a/default-configs/riscv32-softmmu.mak
+> +++ b/default-configs/riscv32-softmmu.mak
+> @@ -1,6 +1,7 @@
+>  # Default configuration for riscv-softmmu
+>  
+>  include pci.mak
+> +include usb.mak
+>  
+>  CONFIG_SERIAL=y
+>  CONFIG_VIRTIO_MMIO=y
+> diff --git a/default-configs/riscv64-softmmu.mak b/default-configs/riscv64-softmmu.mak
+> index dbc9398284..c9c5971409 100644
+> --- a/default-configs/riscv64-softmmu.mak
+> +++ b/default-configs/riscv64-softmmu.mak
+> @@ -1,6 +1,7 @@
+>  # Default configuration for riscv-softmmu
+>  
+>  include pci.mak
+> +include usb.mak
+>  
+>  CONFIG_SERIAL=y
+>  CONFIG_VIRTIO_MMIO=y
 
-diff --git a/default-configs/riscv32-softmmu.mak b/default-configs/riscv32-=
-softmmu.mak
-index dbc9398284..c9c5971409 100644
---- a/default-configs/riscv32-softmmu.mak
-+++ b/default-configs/riscv32-softmmu.mak
-@@ -1,6 +1,7 @@
- # Default configuration for riscv-softmmu
-=20
- include pci.mak
-+include usb.mak
-=20
- CONFIG_SERIAL=3Dy
- CONFIG_VIRTIO_MMIO=3Dy
-diff --git a/default-configs/riscv64-softmmu.mak b/default-configs/riscv64-=
-softmmu.mak
-index dbc9398284..c9c5971409 100644
---- a/default-configs/riscv64-softmmu.mak
-+++ b/default-configs/riscv64-softmmu.mak
-@@ -1,6 +1,7 @@
- # Default configuration for riscv-softmmu
-=20
- include pci.mak
-+include usb.mak
-=20
- CONFIG_SERIAL=3Dy
- CONFIG_VIRTIO_MMIO=3Dy
---=20
-2.19.1
+Makes sense if the PCI HCDs are already working.
 
+Reviewed-by: Thomas Huth <thuth@redhat.com>
 
