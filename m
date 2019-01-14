@@ -1,55 +1,107 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gj1Xr-0001Mk-C9
-	for mharc-qemu-riscv@gnu.org; Mon, 14 Jan 2019 07:40:47 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:57303)
+	id 1gjC75-0003JU-Oh
+	for mharc-qemu-riscv@gnu.org; Mon, 14 Jan 2019 18:57:51 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:51067)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <peter.maydell@linaro.org>) id 1gj1Xo-0001LD-Si
-	for qemu-riscv@nongnu.org; Mon, 14 Jan 2019 07:40:45 -0500
+	(envelope-from <prvs=910900a2a=Alistair.Francis@wdc.com>)
+	id 1gjC74-0003Ik-5h
+	for qemu-riscv@nongnu.org; Mon, 14 Jan 2019 18:57:50 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <peter.maydell@linaro.org>) id 1gj1Xk-0002G5-K5
-	for qemu-riscv@nongnu.org; Mon, 14 Jan 2019 07:40:42 -0500
-Received: from mail-ot1-x343.google.com ([2607:f8b0:4864:20::343]:42097)
-	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <peter.maydell@linaro.org>)
-	id 1gj1Xk-00029P-BV
-	for qemu-riscv@nongnu.org; Mon, 14 Jan 2019 07:40:40 -0500
-Received: by mail-ot1-x343.google.com with SMTP id v23so19114250otk.9
-	for <qemu-riscv@nongnu.org>; Mon, 14 Jan 2019 04:40:18 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=lvQOJRAnC3UgNr4XtN4KqY5h2D9qWzrkqBBzgyLiWoE=;
-	b=H4NB8PUcJddsYxJKk1iTVnO1oN1MfPl/m6JJimoZBiZAqITsIg4yZpcrevbs6YkwHK
-	k2u5lO7JEsoJ7REcDmRJ/taUFdbEVWLYvmzT/0hKDHJy9F449sKjBZC8WZ65VUGGyT6J
-	C4G7k2v1gT2G1jq5zEGHQrIaQ9L8R/ixCHpGQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=lvQOJRAnC3UgNr4XtN4KqY5h2D9qWzrkqBBzgyLiWoE=;
-	b=YwKz1v83czEEuV3Vm9FJ9ZwNjv6fCVJZ7dsPzNWQI+jzoWLGOmidfk9Tc+kcKKx11J
-	fSzN8Pz4jCiaf0K8TvsKR2aTdXXYddufVWHP1IeDap5CJTByM0oQ7P7TktFvV6lR+HoW
-	nqlQvTsqd88Pb2XHhW/wPtxkQ23NP0/PYucPYCX1L4hGaUO9ubcssbWMqYbxg9bo5eyO
-	mTSsBJMUxJgWlKxZIt4Hkn+0PX33rqkLLMv/rqZxLfq/rVEalgGuzBl2j3FJpGUCt2Zp
-	0VbXGmX/+nZBn5qr5hRFdx21CbxgPM0bDMlXAxmv8pnMBe3jqH9i85UbAJ/aQ7pkixTk
-	gMgA==
-X-Gm-Message-State: AJcUuke67buaEOT6+L3C/RhgIrdqjmgiuNnPzBslQqcRfjn/yvDU5PwG
-	ZfoIPjbhtCRvreuruQhemgN26NA05baLz/78XehB3w==
-X-Google-Smtp-Source: ALg8bN4xRaHWedeDuVgapJSO1ukyOS3Sba8tYZOFArRE8ZvnUoKIUtI2W1EkyxlUjO74QiS+ZA3e1nSxyL4fJkWwRzI=
-X-Received: by 2002:a9d:3a22:: with SMTP id j31mr16988347otc.238.1547469618053;
-	Mon, 14 Jan 2019 04:40:18 -0800 (PST)
+	(envelope-from <prvs=910900a2a=Alistair.Francis@wdc.com>)
+	id 1gjC73-0008TB-GL
+	for qemu-riscv@nongnu.org; Mon, 14 Jan 2019 18:57:50 -0500
+Received: from esa4.hgst.iphmx.com ([216.71.154.42]:59810)
+	by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.71) (envelope-from <prvs=910900a2a=Alistair.Francis@wdc.com>)
+	id 1gjC71-0008Pk-1Y; Mon, 14 Jan 2019 18:57:47 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+	d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+	t=1547510267; x=1579046267;
+	h=from:to:cc:subject:date:message-id:
+	content-transfer-encoding:mime-version;
+	bh=SGPM4xA3mDvKJBvd1zs5tNceP/ZXXi0SX4ZwQtEphhY=;
+	b=MTIbYrU3Ldg3jyMc96cp9jJOd04EToCI4Dwg7eVNE1svPCQ5l1BtwzBS
+	SJ3QwT0YYavgvmhnT0OmsrZLGNoP/1pjpRrBx2fOTiHe9fwJ8CeACB1rJ
+	ovhuUwB0HqGW4TK5Tgc+vwX5L99JpJsnzLDQlzTY+YZ6X+WLkymKnuX4g
+	+pNY4g9c0cxaPlSO0Mi0ABbxpM7kvoGGm9YjA+vADBtVzF1OPYu/92ab4
+	qtrS3Onj/Y2tqc5vyg6cUcBEms/Cyh/zdzbd+4YxwK5f3aKk9tpuqStqH
+	aVr17bqXAwc7u+RJXrQb+BjvDxH9wLZo4aNmaAg5VPvrg6AS2zmseWYfp w==;
+X-IronPort-AV: E=Sophos;i="5.56,479,1539619200"; d="scan'208";a="98765670"
+Received: from mail-sn1nam04lp2051.outbound.protection.outlook.com (HELO
+	NAM04-SN1-obe.outbound.protection.outlook.com) ([104.47.44.51])
+	by ob1.hgst.iphmx.com with ESMTP; 15 Jan 2019 07:57:43 +0800
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=sharedspace.onmicrosoft.com; s=selector1-wdc-com;
+	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+	bh=fUk5P6D1253+kZnYKiut6u6zPdRceecnhjr4pCJkBV0=;
+	b=YOsJR9Xoc/B1Qy4c7+b+XYPxS4U7D5glUc+MQUp7VZi7haMfAisoZo2tvGSqZgN5g1dF/HrHC82xhSjr7l4WBlVBJiXvHyUA2lFNbcgYge8xfgex4wwRDDc2bdfnhGhevE16vSVIzNTIFje8Mkt5CcDCYF8AcHcBnMS8cCYAOZI=
+Received: from MWHPR04MB0401.namprd04.prod.outlook.com (10.173.48.18) by
+	MWHPR04MB0895.namprd04.prod.outlook.com (10.174.174.141) with Microsoft
+	SMTP
+	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+	15.20.1516.18; Mon, 14 Jan 2019 23:57:41 +0000
+Received: from MWHPR04MB0401.namprd04.prod.outlook.com
+	([fe80::10e5:e75d:3272:2d33]) by
+	MWHPR04MB0401.namprd04.prod.outlook.com
+	([fe80::10e5:e75d:3272:2d33%7]) with mapi id 15.20.1516.019;
+	Mon, 14 Jan 2019 23:57:41 +0000
+From: Alistair Francis <Alistair.Francis@wdc.com>
+To: "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, "qemu-riscv@nongnu.org"
+	<qemu-riscv@nongnu.org>
+CC: Alistair Francis <Alistair.Francis@wdc.com>, "alistair23@gmail.com"
+	<alistair23@gmail.com>
+Thread-Topic: [PATCH v1 0/8]  Upstream RISC-V fork patches, part 3
+Thread-Index: AQHUrGTvPpbhO48aJEG7kiV2tzltKg==
+Date: Mon, 14 Jan 2019 23:57:41 +0000
+Message-ID: <cover.1547510220.git.alistair.francis@wdc.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-mailer: git-send-email 2.19.1
+x-clientproxiedby: MWHPR20CA0035.namprd20.prod.outlook.com
+	(2603:10b6:300:ed::21) To MWHPR04MB0401.namprd04.prod.outlook.com
+	(2603:10b6:300:70::18)
+authentication-results: spf=none (sender IP is )
+	smtp.mailfrom=Alistair.Francis@wdc.com; 
+x-ms-exchange-messagesentrepresentingtype: 1
+x-originating-ip: [199.255.44.170]
+x-ms-publictraffictype: Email
+x-microsoft-exchange-diagnostics: 1; MWHPR04MB0895;
+	6:xmTK6U9Wbx4TviUyU7ZDiy5HmBAxfUVnbPcgjlzRe38NzLCwdpwXfJCfs2iYGjEsKM5m/VKvRLWwUtDw62j6ei1k+b8pzrKhNNt6skAMFb1uoIFvJCx4RG24iriQV0va4IbqzXpqfxWtQkbzZGZT2jTl7eo94nWw2VVEd1pENmSXE0KlQl0u+CDiabJ/+l71Qa40XyrcAwhrPtzTRPFc+6Fp8YypLQX3wh49uPxbAYsoFONbfNyiZOEzkFDknjodm3ZDFRQEQMDQ35lKhWVyYOH+JPMmXjiNVBHQb39abfkkjjyQEpvqW63V4pZi34aUiRDF8o2IW6Nn0ffBW8hYi5P9MLGsDf2vVgwxs05F4EN7juosWy2lLGnYOiyiIavjSJRsPO4IBW+DIR9Lkbgv4rcVa+/0rkEhdKXEBJh0czuVER/e5gxB1sB5vm+o4X04Og5k1eIJkefc/KBZSNRzBQ==;
+	5:w/cyFZtcZkQe3T/pJwU7pNg/FCmGyoA8RhzCZcewzTomZdCNDkVcMmLJcjKk9aao7NKwPREpTvxSr9EMMuSpJAmQrtYt4LjoIWTK+tRD7B9uEpj4lRI/ljq0WIK5mu7OGqD/lNrCP207+DMWdlW1kexcCxnctljxBdO/PPaVEa9vEWkWGF8DM3lN0M3jygVLGXr9Y90RLIOnU7RXAI+okw==;
+	7:6hkkeVBs+aFTMdq9NxEXytQSC8EpbGBfTCXzuPOAef2anHp+66At+PnePzJOC4Iu7op7gvNfu5ChIS2lohLf2tOhaUEftYqnCuGU2rbaoYsex335/gB/khTEMTymwArMgv06UeiZSmSj/rklqHw45A==
+x-ms-office365-filtering-correlation-id: c249bc7f-e3a6-48db-1638-08d67a7c116d
+x-ms-office365-filtering-ht: Tenant
+x-microsoft-antispam: BCL:0; PCL:0;
+	RULEID:(2390118)(7020095)(4652040)(8989299)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(5600109)(711020)(4618075)(2017052603328)(7153060)(7193020);
+	SRVR:MWHPR04MB0895; 
+x-ms-traffictypediagnostic: MWHPR04MB0895:
+wdcipoutbound: EOP-TRUE
+x-microsoft-antispam-prvs: <MWHPR04MB08951ABCCB60C72178664F3890800@MWHPR04MB0895.namprd04.prod.outlook.com>
+x-forefront-prvs: 0917DFAC67
+x-forefront-antispam-report: SFV:NSPM;
+	SFS:(10019020)(39860400002)(136003)(376002)(366004)(396003)(346002)(199004)(189003)(81156014)(256004)(99286004)(72206003)(386003)(6506007)(68736007)(5660300001)(81166006)(4326008)(2501003)(8676002)(44832011)(105586002)(2906002)(8936002)(486006)(106356001)(71190400001)(7736002)(71200400001)(50226002)(110136005)(316002)(52116002)(54906003)(14454004)(53936002)(186003)(39060400002)(66066001)(6512007)(6486002)(36756003)(478600001)(4744005)(25786009)(2616005)(6436002)(6116002)(476003)(97736004)(3846002)(305945005)(102836004)(26005)(86362001);
+	DIR:OUT; SFP:1102; SCL:1; SRVR:MWHPR04MB0895;
+	H:MWHPR04MB0401.namprd04.prod.outlook.com; FPR:; SPF:None;
+	LANG:en; PTR:InfoNoRecords; A:1; MX:1; 
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam-message-info: IqXCnhTQJNBTtaCom0m6/D/U0OUz/FGOdyQ3I3CcyrBKfw2LKcBNdATWLlqSLTePa9UWSKdTIWs4sqqH/oe7+1Y797hsSiajF6AVk+srvKtNLYQ7n/dX3pAn0bFSI/iTFzPvaS1IGLVyFaYCV5FSB1JWDsxKXvbhs3jomGtDdb+fsZPf/WurQ4NBLppPv4OFLxT0qlJvNCRcvghdyrYL5zTj3aZ4ZZFTgbIlVfWzIr4rVi9DWUoNY0QouTCr65UD7isQE/xdAPXQmHih1K+h/5Qh3n8DDpAalTZjz3njsnH+BAE29mOsNli/y13qkWF8LsLjSR79j1B6uSDYvHLfx77ViSdx1Powp8uU2G2fT/qhdbmkF7iHzEfs+chzgM9l4bGORmWmf5s6JTwvwfBjCrUU4r3UwoZ/FiWCuQ4r0OU=
+spamdiagnosticoutput: 1:99
+spamdiagnosticmetadata: NSPM
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-References: <20190111180630.6433-1-palmer@sifive.com>
-In-Reply-To: <20190111180630.6433-1-palmer@sifive.com>
-From: Peter Maydell <peter.maydell@linaro.org>
-Date: Mon, 14 Jan 2019 12:40:06 +0000
-Message-ID: <CAFEAcA-yeQSbbhKXXJ0f961MJKC-v46DWgoaXcQUt64DZcdzqQ@mail.gmail.com>
-To: Palmer Dabbelt <palmer@sifive.com>
-Cc: qemu-riscv@nongnu.org, QEMU Developers <qemu-devel@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
+X-OriginatorOrg: wdc.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: c249bc7f-e3a6-48db-1638-08d67a7c116d
+X-MS-Exchange-CrossTenant-originalarrivaltime: 14 Jan 2019 23:57:40.4867 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MWHPR04MB0895
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::343
-Subject: Re: [Qemu-riscv] [PULL] RISC-V Updates for 3.2, Part 2
+X-Received-From: 216.71.154.42
+Subject: [Qemu-riscv] [PATCH v1 0/8]  Upstream RISC-V fork patches, part 3
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -61,44 +113,35 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Jan 2019 12:40:45 -0000
+X-List-Received-Date: Mon, 14 Jan 2019 23:57:51 -0000
 
-On Fri, 11 Jan 2019 at 18:06, Palmer Dabbelt <palmer@sifive.com> wrote:
->
-> The following changes since commit 147923b1a901a0370f83a0f4c58ec1baffef22f0:
->
->   Merge remote-tracking branch 'remotes/kraxel/tags/usb-20190108-pull-request' into staging (2019-01-08 16:07:32 +0000)
->
-> are available in the Git repository at:
->
->   git://github.com/palmer-dabbelt/qemu.git tags/riscv-for-master-3.2-part2
->
-> for you to fetch changes up to f7cdfa38f37e0985457ac03c3238861144a58b4c:
->
->   default-configs: Enable USB support for RISC-V machines (2019-01-09 17:34:10 -0800)
->
-> ----------------------------------------------------------------
-> RISC-V Updates for 3.2, Part 2
->
-> This patch set contains a handful of Michael's CSR-related cleanups,
-> which should allow us to proceed with more outstanding bug fixes that
-> depend on them.
->
-> Additionally, there is a patch that turns on USB.  This works for me
-> when the kernel has the appropriate drivers (which will soon be in
-> defconfig) and I pass
->
->     -device usb-ehci
->     -drive id=my_usb_disk,file=usbdisk.img,if=none,format=raw
->     -device usb-storage,drive=my_usb_disk
->
-> to QEMU.
->
 
-Applied, thanks.
+Alistair Francis (1):
+  RISC-V: Add priv_ver to DisasContext
 
-Please update the changelog at https://wiki.qemu.org/ChangeLog/4.0
-for any user-visible changes.
+Michael Clark (5):
+  RISC-V: Implement mstatus.TSR/TW/TVM
+  RISC-V: Use riscv prefix consistently on cpu helpers
+  RISC-V: Add misa to DisasContext
+  RISC-V: Add misa.MAFD checks to translate
+  RISC-V: Add misa runtime write support
 
--- PMM
+Richard Henderson (2):
+  RISC-V: Split out mstatus_fs from tb_flags
+  RISC-V: Mark mstatus.fs dirty
+
+ linux-user/riscv/signal.c |   4 +-
+ target/riscv/cpu.c        |   2 +-
+ target/riscv/cpu.h        |  31 ++--
+ target/riscv/cpu_bits.h   |  11 ++
+ target/riscv/cpu_helper.c |  10 +-
+ target/riscv/csr.c        |  91 +++++++++---
+ target/riscv/fpu_helper.c |   6 +-
+ target/riscv/op_helper.c  |  47 ++++--
+ target/riscv/translate.c  | 292 ++++++++++++++++++++++++++++++++------
+ 9 files changed, 388 insertions(+), 106 deletions(-)
+
+--=20
+2.19.1
+
 
