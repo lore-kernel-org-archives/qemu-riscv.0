@@ -1,71 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gjXAP-0006hQ-M8
-	for mharc-qemu-riscv@gnu.org; Tue, 15 Jan 2019 17:26:41 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:40445)
+	id 1gjXAS-0006jb-Da
+	for mharc-qemu-riscv@gnu.org; Tue, 15 Jan 2019 17:26:44 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:40718)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <richard.henderson@linaro.org>) id 1gjXAM-0006gT-7M
-	for qemu-riscv@nongnu.org; Tue, 15 Jan 2019 17:26:39 -0500
+	(envelope-from <alistair23@gmail.com>) id 1gjXAQ-0006hw-D2
+	for qemu-riscv@nongnu.org; Tue, 15 Jan 2019 17:26:43 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <richard.henderson@linaro.org>) id 1gjXA2-00033U-M4
-	for qemu-riscv@nongnu.org; Tue, 15 Jan 2019 17:26:23 -0500
-Received: from mail-pf1-x443.google.com ([2607:f8b0:4864:20::443]:39339)
+	(envelope-from <alistair23@gmail.com>) id 1gjXAO-0003Fj-Qz
+	for qemu-riscv@nongnu.org; Tue, 15 Jan 2019 17:26:42 -0500
+Received: from mail-lj1-x243.google.com ([2a00:1450:4864:20::243]:36356)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
-	id 1gjX9y-0002zm-NA
-	for qemu-riscv@nongnu.org; Tue, 15 Jan 2019 17:26:14 -0500
-Received: by mail-pf1-x443.google.com with SMTP id r136so1986988pfc.6
-	for <qemu-riscv@nongnu.org>; Tue, 15 Jan 2019 14:26:13 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
-	h=subject:to:cc:references:from:openpgp:message-id:date:user-agent
-	:mime-version:in-reply-to:content-language:content-transfer-encoding;
-	bh=OZriX2SZ1UFpqFZYBW2TPztULD+EuNIz2xRBHzZym+s=;
-	b=hHzSfRwF4UDVJViwuUoes4PoiBRYwA40GUo0xyzzlZ7cNH515qKAiw0MOm+seLn6Of
-	ikpf1TltJo+reqjve4sTtxHlnZH1TtHC1CpuSjQQAU06kPHBe1wSofRPLfTvWY5KHSlW
-	INJNgfDS6/u5ggUvnmgAG0wEIGzZkJd9EnpIM=
+	(Exim 4.71) (envelope-from <alistair23@gmail.com>)
+	id 1gjX9y-0002zG-O9; Tue, 15 Jan 2019 17:26:16 -0500
+Received: by mail-lj1-x243.google.com with SMTP id g11-v6so3778770ljk.3;
+	Tue, 15 Jan 2019 14:26:13 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=8IIZLuGrm+rzdxMdUD6LynG/OF6LhNWcu4O/PHL2NVs=;
+	b=GDoYhWDFB8TlZ/rZdcQOhDsachiUcV/xxcQwwwaR/I6pWhoMowdlPLtG2UIx/lw7mB
+	bKA/9AiKmLNPwNE4SPJLwC7fk8obGfYHJxX7NLggXTNMhyIylXwtm9pmXSdS5ebEg4to
+	spVmVoRqBVSTCiot6qf5+8BL+5OqN6gLRxB9vq3rR/oQyp2fW2iLKcRXgJjfNTjZgUHr
+	EnVLh3ws4eLjnYp5kvcw7+Z/RxKErFRUyiUXYQvWcP+SZIffKFvez//4y3ELPPQLeAhU
+	fdBHjJh0t6LtohrsVrfhzPYtmI2GM+/YxDMjbXXg/6sLKupVE82Jj3wH+fvotV54mljI
+	qodw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
-	:date:user-agent:mime-version:in-reply-to:content-language
-	:content-transfer-encoding;
-	bh=OZriX2SZ1UFpqFZYBW2TPztULD+EuNIz2xRBHzZym+s=;
-	b=J/HP/v0XFHICawbm82M7S2Qw8CsCs/2phams5cpwUVhLQrrx0l14Gh8fvJUlmify4l
-	Z7hn+RaybRSc8z7ienUptnIpMMD/yVjPJkcnO+BhREY0aFrSK8dg8CZJQ45Sl/ppITp+
-	6eXqI0bzOVMGigoInSWSd42nHOcvvxbwbm93Rwllze4fO9OXsRZjG5tg/JIRhqhiqmml
-	I+oTnov9eZWv9rXOALQLxC6UtbbDTHoXah93BaRTB1gC1eJYDROwtwZXWpc0dVY6tIJg
-	PfEjVvmMka17NkL6folv7FIA9/7bFnIWsuMQ/JBgnKhLBuqMsaQbeHqm+T4It1juVA45
-	HKgA==
-X-Gm-Message-State: AJcUukdNftG4S5vBtON6Wg84ROFSmU9XMqOrYKoQ9dMMM198WfjZaYZH
-	T6xQHB9AOppVKZq5nh1EWcCWOQ==
-X-Google-Smtp-Source: ALg8bN63lzmpzr9R+C5gjhJ0DneWf5kBOdegDq1ytidKMvB7x66a2Q/2vyiadmmilZL75WKYM3iLqw==
-X-Received: by 2002:a62:76cc:: with SMTP id r195mr6353267pfc.38.1547591172397; 
-	Tue, 15 Jan 2019 14:26:12 -0800 (PST)
-Received: from cloudburst.twiddle.net
-	([2001:8003:2e1e:900:a89d:d9ff:18e1:b2fd])
-	by smtp.gmail.com with ESMTPSA id f64sm8901933pfh.0.2019.01.15.14.26.09
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=8IIZLuGrm+rzdxMdUD6LynG/OF6LhNWcu4O/PHL2NVs=;
+	b=ooanLLN/PZsDrNL3yjOjQAvktOJmOH1e89IZa4I4q+PbwWFrOKEY7xWkKwAgiQsUkA
+	2KFLh/eAvvxnXEcg+2GSBiKT4oquq2nRLX1H+HhwracJfPiFU8fxvEWD/V1pi+A9saCO
+	qBryXYa0ZAh67wsCtMmglBjD/tTKtUKHjjCHk/97WanqBWa/0OWPJGke5GwpUFB1zBH7
+	cP0Mlde1UmzQVMZR2vhRPVJu2hxwcDgV0qIVAtWi2FaYXbj1O20UrHSVuOPVXnnJIYXr
+	cDXb0ZIgSASVI5hJoScR54/8mxxtDNs2V3GmuRhOPQ+UfNJQqv4u23UUP3lAfG1fVlFq
+	gCPA==
+X-Gm-Message-State: AJcUukcAB900pmhunTan6bE9LXhjN4uYT6MJ+8/R/T0w2kXlOCtO8Z1X
+	joEcxFxNnLdIa+anNresB0Fup5z6VM2dZIjvYS0=
+X-Google-Smtp-Source: ALg8bN6NfDNKcDjKwk2ISyVcL++ylvaMgNLDTdOhOAjqgOKk7wnuezs0B3lRqarSMVHpiTdh34YECY/ecB/DK1S8ZTE=
+X-Received: by 2002:a2e:131a:: with SMTP id
+	26-v6mr4474001ljt.107.1547591171756; 
 	Tue, 15 Jan 2019 14:26:11 -0800 (PST)
-To: Alistair Francis <Alistair.Francis@wdc.com>,
+MIME-Version: 1.0
+References: <cover.1547510220.git.alistair.francis@wdc.com>
+	<b17f45cb9053318f20ca2a5b2167afa96c1f933a.1547510220.git.alistair.francis@wdc.com>
+	<62009a7b-877b-9c7d-7844-4eaa1930e9ff@linaro.org>
+In-Reply-To: <62009a7b-877b-9c7d-7844-4eaa1930e9ff@linaro.org>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 15 Jan 2019 14:25:44 -0800
+Message-ID: <CAKmqyKOgQLX3Feh=g2ytdiSbFaedWdExpVVjMt6v+SUqxRYhzQ@mail.gmail.com>
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
 	"qemu-devel@nongnu.org" <qemu-devel@nongnu.org>,
 	"qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>
-Cc: "alistair23@gmail.com" <alistair23@gmail.com>
-References: <cover.1547510220.git.alistair.francis@wdc.com>
-	<f437442d547363c1d0c27dd30e1c428a83c02e50.1547510220.git.alistair.francis@wdc.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-Openpgp: preference=signencrypt
-Message-ID: <0c224494-c6b5-4800-6f4a-df4eecf0fa8c@linaro.org>
-Date: Wed, 16 Jan 2019 09:26:06 +1100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.4.0
-MIME-Version: 1.0
-In-Reply-To: <f437442d547363c1d0c27dd30e1c428a83c02e50.1547510220.git.alistair.francis@wdc.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::443
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v1 7/8] RISC-V: Add misa.MAFD
- checks to translate
+X-Received-From: 2a00:1450:4864:20::243
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v1 5/8] RISC-V: Add priv_ver
+ to DisasContext
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -77,29 +69,26 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Jan 2019 22:26:39 -0000
+X-List-Received-Date: Tue, 15 Jan 2019 22:26:43 -0000
 
-On 1/15/19 10:58 AM, Alistair Francis wrote:
-> From: Michael Clark <mjc@sifive.com>
-> 
-> Add misa checks for M, A, F and D extensions and if they are
-> not present generate illegal instructions. This improves
-> emulation accurary for harts with a limited set of extensions.
-> 
-> Cc: Palmer Dabbelt <palmer@sifive.com>
-> Cc: Sagar Karandikar <sagark@eecs.berkeley.edu>
-> Cc: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-> Cc: Alistair Francis <Alistair.Francis@wdc.com>
-> Cc: Emilio G. Cota <cota@braap.org>
-> Signed-off-by: Michael Clark <mjc@sifive.com>
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> ---
->  target/riscv/translate.c | 158 +++++++++++++++++++++++++++++++++++++++
->  1 file changed, 158 insertions(+)
+On Tue, Jan 15, 2019 at 2:24 PM Richard Henderson
+<richard.henderson@linaro.org> wrote:
+>
+> On 1/15/19 10:58 AM, Alistair Francis wrote:
+> > -static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
+> > +static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cpu)
+>
+> Why change this?  I know there is variation in the naming, but my
+> preferred default mapping is CPUState *cs, RISCVCPU *cpu.
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Good point, I have changed it back to cs.
 
+Alistair
 
-r~
-
+>
+> Otherwise,
+> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+>
+>
+> r~
 
