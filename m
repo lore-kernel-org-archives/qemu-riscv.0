@@ -1,47 +1,46 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gkTzt-0004jM-6b
+	id 1gkTzt-0004jZ-Ci
 	for mharc-qemu-riscv@gnu.org; Fri, 18 Jan 2019 08:15:45 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:41620)
+Received: from eggs.gnu.org ([209.51.188.92]:41687)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <kbastian@mail.uni-paderborn.de>) id 1gkTzm-0004fz-SE
-	for qemu-riscv@nongnu.org; Fri, 18 Jan 2019 08:15:43 -0500
+	(envelope-from <kbastian@mail.uni-paderborn.de>) id 1gkTzq-0004he-L0
+	for qemu-riscv@nongnu.org; Fri, 18 Jan 2019 08:15:44 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <kbastian@mail.uni-paderborn.de>) id 1gkTze-0006lk-3g
-	for qemu-riscv@nongnu.org; Fri, 18 Jan 2019 08:15:35 -0500
-Received: from mail.uni-paderborn.de ([131.234.142.9]:50112)
+	(envelope-from <kbastian@mail.uni-paderborn.de>) id 1gkTzm-00074A-Pq
+	for qemu-riscv@nongnu.org; Fri, 18 Jan 2019 08:15:41 -0500
+Received: from mail.uni-paderborn.de ([131.234.142.9]:48072)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.71) (envelope-from <kbastian@mail.uni-paderborn.de>)
-	id 1gkTzS-0006TY-2C; Fri, 18 Jan 2019 08:15:21 -0500
-Received: from pova.uni-paderborn.de ([131.234.189.23]
+	id 1gkTzP-0006OO-Bs; Fri, 18 Jan 2019 08:15:15 -0500
+Received: from tweenies.uni-paderborn.de ([131.234.189.21]
 	helo=localhost.localdomain)
-	by mail.uni-paderborn.de with esmtp (Exim 4.89 zuban)
-	id 1gkTzO-0005wW-Kt; Fri, 18 Jan 2019 14:15:14 +0100
-Received: from mail.uni-paderborn.de by pova with queue id 3091130-2;
-	Fri, 18 Jan 2019 13:15:13 GMT
+	by mail.uni-paderborn.de with esmtp (Exim 4.89 amazonia)
+	id 1gkTzG-0001ov-8C; Fri, 18 Jan 2019 14:15:06 +0100
+Received: from mail.uni-paderborn.de by tweenies with queue id 3062195-4;
+	Fri, 18 Jan 2019 13:15:05 GMT
 X-Envelope-From: <kbastian@mail.uni-paderborn.de>
 From: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
 To: sagark@eecs.berkeley.edu, palmer@sifive.com, Alistair.Francis@wdc.com,
 	kbastian@mail.uni-paderborn.de
 Cc: qemu-riscv@nongnu.org, peer.adelt@hni.uni-paderborn.de,
-	richard.henderson@linaro.org, qemu-devel@nongnu.org,
-	Alistair Francis <alistair.francis@wdc.com>
-Date: Fri, 18 Jan 2019 14:14:29 +0100
-Message-Id: <20190118131456.32451-9-kbastian@mail.uni-paderborn.de>
+	richard.henderson@linaro.org, qemu-devel@nongnu.org
+Date: Fri, 18 Jan 2019 14:14:24 +0100
+Message-Id: <20190118131456.32451-4-kbastian@mail.uni-paderborn.de>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20190118131456.32451-1-kbastian@mail.uni-paderborn.de>
 References: <20190118131456.32451-1-kbastian@mail.uni-paderborn.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-PMX-Version: 6.4.6.2792898, Antispam-Engine: 2.7.2.2107409,
-	Antispam-Data: 2019.1.18.130916, AntiVirus-Engine: 5.56.1,
+	Antispam-Data: 2019.1.18.130316, AntiVirus-Engine: 5.56.1,
 	AntiVirus-Data: 2019.1.18.5561000
 X-IMT-Spam-Score: 0.0 ()
 X-IMT-Authenticated-Sender: 
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
 X-Received-From: 131.234.142.9
-Subject: [Qemu-riscv] [PATCH v4 08/35] target/riscv: Convert RVXI csr insns
- to decodetree
+Subject: [Qemu-riscv] [PATCH v4 03/35] target/riscv: Convert RVXI branch
+ insns to decodetree
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -53,203 +52,146 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Jan 2019 13:15:43 -0000
+X-List-Received-Date: Fri, 18 Jan 2019 13:15:44 -0000
 
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Signed-off-by: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
 Signed-off-by: Peer Adelt <peer.adelt@hni.uni-paderborn.de>
 ---
- target/riscv/insn32.decode              |  8 +++
- target/riscv/insn_trans/trans_rvi.inc.c | 79 +++++++++++++++++++++++++
- target/riscv/translate.c                | 43 +-------------
- 3 files changed, 88 insertions(+), 42 deletions(-)
+v3 -> v4:
+    - moved uint32_t insn removal from patch 0004 here
+
+ target/riscv/insn32.decode              | 19 ++++++++++
+ target/riscv/insn_trans/trans_rvi.inc.c | 49 +++++++++++++++++++++++++
+ target/riscv/translate.c                | 12 +-----
+ 3 files changed, 69 insertions(+), 11 deletions(-)
 
 diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index 804b721ca5..977b1b10a3 100644
+index 44d4e922b6..81f56c16b4 100644
 --- a/target/riscv/insn32.decode
 +++ b/target/riscv/insn32.decode
-@@ -22,6 +22,7 @@
+@@ -17,14 +17,33 @@
+ # this program.  If not, see <http://www.gnu.org/licenses/>.
+ 
+ # Fields:
++%rs2       20:5
++%rs1       15:5
  %rd        7:5
  
- %sh10    20:10
-+%csr    20:12
- 
  # immediates:
- %imm_i    20:s12
-@@ -43,6 +44,7 @@
- @j       ....................      ..... .......         imm=%imm_j          %rd
++%imm_i    20:s12
++%imm_b    31:s1 7:1 25:6 8:4     !function=ex_shift_1
++%imm_j    31:s1 12:8 20:1 21:10  !function=ex_shift_1
+ %imm_u    12:s20                 !function=ex_shift_12
  
- @sh      ......  ...... .....  ... ..... ....... &shift  shamt=%sh10      %rs1 %rd
-+@csr     ............   .....  ... ..... .......               %csr     %rs1 %rd
++# Argument sets:
++&b    imm rs2 rs1
++
+ # Formats 32:
++@i       ............    ..... ... ..... .......         imm=%imm_i     %rs1 %rd
++@b       .......   ..... ..... ... ..... ....... &b      imm=%imm_b %rs2 %rs1
+ @u       ....................      ..... .......         imm=%imm_u          %rd
++@j       ....................      ..... .......         imm=%imm_j          %rd
  
  # *** RV32I Base Instruction Set ***
  lui      ....................       ..... 0110111 @u
-@@ -84,3 +86,9 @@ or       0000000 .....    ..... 110 ..... 0110011 @r
- and      0000000 .....    ..... 111 ..... 0110011 @r
- fence    ---- pred:4 succ:4 ----- 000 ----- 0001111
- fence_i  ---- ----   ----   ----- 001 ----- 0001111
-+csrrw    ............     ..... 001 ..... 1110011 @csr
-+csrrs    ............     ..... 010 ..... 1110011 @csr
-+csrrc    ............     ..... 011 ..... 1110011 @csr
-+csrrwi   ............     ..... 101 ..... 1110011 @csr
-+csrrsi   ............     ..... 110 ..... 1110011 @csr
-+csrrci   ............     ..... 111 ..... 1110011 @csr
+ auipc    ....................       ..... 0010111 @u
++jal      ....................       ..... 1101111 @j
++jalr     ............     ..... 000 ..... 1100111 @i
++beq      ....... .....    ..... 000 ..... 1100011 @b
++bne      ....... .....    ..... 001 ..... 1100011 @b
++blt      ....... .....    ..... 100 ..... 1100011 @b
++bge      ....... .....    ..... 101 ..... 1100011 @b
++bltu     ....... .....    ..... 110 ..... 1100011 @b
++bgeu     ....... .....    ..... 111 ..... 1100011 @b
 diff --git a/target/riscv/insn_trans/trans_rvi.inc.c b/target/riscv/insn_trans/trans_rvi.inc.c
-index 138a8397d9..eb41cc61df 100644
+index 9885a8d275..0347461ee6 100644
 --- a/target/riscv/insn_trans/trans_rvi.inc.c
 +++ b/target/riscv/insn_trans/trans_rvi.inc.c
-@@ -341,3 +341,82 @@ static bool trans_fence_i(DisasContext *ctx, arg_fence_i *a)
- #endif
+@@ -33,3 +33,52 @@ static bool trans_auipc(DisasContext *ctx, arg_auipc *a)
+     }
      return true;
  }
 +
-+#define RISCV_OP_CSR_PRE do {\
-+    source1 = tcg_temp_new(); \
-+    csr_store = tcg_temp_new(); \
-+    dest = tcg_temp_new(); \
-+    rs1_pass = tcg_temp_new(); \
-+    gen_get_gpr(source1, a->rs1); \
-+    tcg_gen_movi_tl(cpu_pc, ctx->base.pc_next); \
-+    tcg_gen_movi_tl(rs1_pass, a->rs1); \
-+    tcg_gen_movi_tl(csr_store, a->csr); \
-+    gen_io_start();\
-+} while (0)
-+
-+#define RISCV_OP_CSR_POST do {\
-+    gen_io_end(); \
-+    gen_set_gpr(a->rd, dest); \
-+    tcg_gen_movi_tl(cpu_pc, ctx->pc_succ_insn); \
-+    tcg_gen_exit_tb(NULL, 0); \
-+    ctx->base.is_jmp = DISAS_NORETURN; \
-+    tcg_temp_free(source1); \
-+    tcg_temp_free(csr_store); \
-+    tcg_temp_free(dest); \
-+    tcg_temp_free(rs1_pass); \
-+} while (0)
-+
-+
-+static bool trans_csrrw(DisasContext *ctx, arg_csrrw *a)
++static bool trans_jal(DisasContext *ctx, arg_jal *a)
 +{
-+    TCGv source1, csr_store, dest, rs1_pass;
-+    RISCV_OP_CSR_PRE;
-+    gen_helper_csrrw(dest, cpu_env, source1, csr_store);
-+    RISCV_OP_CSR_POST;
++    gen_jal(ctx->env, ctx, a->rd, a->imm);
 +    return true;
 +}
 +
-+static bool trans_csrrs(DisasContext *ctx, arg_csrrs *a)
++static bool trans_jalr(DisasContext *ctx, arg_jalr *a)
 +{
-+    TCGv source1, csr_store, dest, rs1_pass;
-+    RISCV_OP_CSR_PRE;
-+    gen_helper_csrrs(dest, cpu_env, source1, csr_store, rs1_pass);
-+    RISCV_OP_CSR_POST;
++    gen_jalr(ctx->env, ctx, OPC_RISC_JALR, a->rd, a->rs1, a->imm);
 +    return true;
 +}
 +
-+static bool trans_csrrc(DisasContext *ctx, arg_csrrc *a)
++static bool trans_beq(DisasContext *ctx, arg_beq *a)
 +{
-+    TCGv source1, csr_store, dest, rs1_pass;
-+    RISCV_OP_CSR_PRE;
-+    gen_helper_csrrc(dest, cpu_env, source1, csr_store, rs1_pass);
-+    RISCV_OP_CSR_POST;
++    gen_branch(ctx->env, ctx, OPC_RISC_BEQ, a->rs1, a->rs2, a->imm);
 +    return true;
 +}
 +
-+static bool trans_csrrwi(DisasContext *ctx, arg_csrrwi *a)
++static bool trans_bne(DisasContext *ctx, arg_bne *a)
 +{
-+    TCGv source1, csr_store, dest, rs1_pass;
-+    RISCV_OP_CSR_PRE;
-+    gen_helper_csrrw(dest, cpu_env, rs1_pass, csr_store);
-+    RISCV_OP_CSR_POST;
++    gen_branch(ctx->env, ctx, OPC_RISC_BNE, a->rs1, a->rs2, a->imm);
 +    return true;
 +}
 +
-+static bool trans_csrrsi(DisasContext *ctx, arg_csrrsi *a)
++static bool trans_blt(DisasContext *ctx, arg_blt *a)
 +{
-+    TCGv source1, csr_store, dest, rs1_pass;
-+    RISCV_OP_CSR_PRE;
-+    gen_helper_csrrs(dest, cpu_env, rs1_pass, csr_store, rs1_pass);
-+    RISCV_OP_CSR_POST;
++    gen_branch(ctx->env, ctx, OPC_RISC_BLT, a->rs1, a->rs2, a->imm);
 +    return true;
 +}
 +
-+static bool trans_csrrci(DisasContext *ctx, arg_csrrci *a)
++static bool trans_bge(DisasContext *ctx, arg_bge *a)
 +{
-+    TCGv source1, csr_store, dest, rs1_pass;
-+    RISCV_OP_CSR_PRE;
-+    gen_helper_csrrc(dest, cpu_env, rs1_pass, csr_store, rs1_pass);
-+    RISCV_OP_CSR_POST;
++    gen_branch(ctx->env, ctx, OPC_RISC_BGE, a->rs1, a->rs2, a->imm);
++    return true;
++}
++
++static bool trans_bltu(DisasContext *ctx, arg_bltu *a)
++{
++    gen_branch(ctx->env, ctx, OPC_RISC_BLTU, a->rs1, a->rs2, a->imm);
++    return true;
++}
++
++static bool trans_bgeu(DisasContext *ctx, arg_bgeu *a)
++{
++
++    gen_branch(ctx->env, ctx, OPC_RISC_BGEU, a->rs1, a->rs2, a->imm);
 +    return true;
 +}
 diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 9899f10be4..a020305556 100644
+index 99829a600d..b81297f23e 100644
 --- a/target/riscv/translate.c
 +++ b/target/riscv/translate.c
-@@ -1279,16 +1279,11 @@ static void gen_fp_arith(DisasContext *ctx, uint32_t opc, int rd,
- static void gen_system(CPURISCVState *env, DisasContext *ctx, uint32_t opc,
-                       int rd, int rs1, int csr)
- {
--    TCGv source1, csr_store, dest, rs1_pass, imm_rs1;
-+    TCGv source1, dest;
-     source1 = tcg_temp_new();
--    csr_store = tcg_temp_new();
-     dest = tcg_temp_new();
--    rs1_pass = tcg_temp_new();
--    imm_rs1 = tcg_temp_new();
-     gen_get_gpr(source1, rs1);
-     tcg_gen_movi_tl(cpu_pc, ctx->base.pc_next);
--    tcg_gen_movi_tl(rs1_pass, rs1);
--    tcg_gen_movi_tl(csr_store, csr); /* copy into temp reg to feed to helper */
- 
- #ifndef CONFIG_USER_ONLY
-     /* Extract funct7 value and check whether it matches SFENCE.VMA */
-@@ -1359,45 +1354,9 @@ static void gen_system(CPURISCVState *env, DisasContext *ctx, uint32_t opc,
-             break;
-         }
-         break;
--    default:
--        tcg_gen_movi_tl(imm_rs1, rs1);
--        gen_io_start();
--        switch (opc) {
--        case OPC_RISC_CSRRW:
--            gen_helper_csrrw(dest, cpu_env, source1, csr_store);
--            break;
--        case OPC_RISC_CSRRS:
--            gen_helper_csrrs(dest, cpu_env, source1, csr_store, rs1_pass);
--            break;
--        case OPC_RISC_CSRRC:
--            gen_helper_csrrc(dest, cpu_env, source1, csr_store, rs1_pass);
--            break;
--        case OPC_RISC_CSRRWI:
--            gen_helper_csrrw(dest, cpu_env, imm_rs1, csr_store);
--            break;
--        case OPC_RISC_CSRRSI:
--            gen_helper_csrrs(dest, cpu_env, imm_rs1, csr_store, rs1_pass);
--            break;
--        case OPC_RISC_CSRRCI:
--            gen_helper_csrrc(dest, cpu_env, imm_rs1, csr_store, rs1_pass);
--            break;
--        default:
--            gen_exception_illegal(ctx);
--            return;
--        }
--        gen_io_end();
--        gen_set_gpr(rd, dest);
--        /* end tb since we may be changing priv modes, to get mmu_index right */
--        tcg_gen_movi_tl(cpu_pc, ctx->pc_succ_insn);
--        tcg_gen_exit_tb(NULL, 0); /* no chaining */
--        ctx->base.is_jmp = DISAS_NORETURN;
--        break;
+@@ -1682,6 +1682,7 @@ static void decode_RV32_64C(CPURISCVState *env, DisasContext *ctx)
+     {                                         \
+         return imm << amount;                 \
      }
-     tcg_temp_free(source1);
--    tcg_temp_free(csr_store);
-     tcg_temp_free(dest);
--    tcg_temp_free(rs1_pass);
--    tcg_temp_free(imm_rs1);
- }
++EX_SH(1)
+ EX_SH(12)
  
- static void decode_RV32_64C0(DisasContext *ctx)
+ bool decode_insn32(DisasContext *ctx, uint32_t insn);
+@@ -1710,17 +1711,6 @@ static void decode_RV32_64G(CPURISCVState *env, DisasContext *ctx)
+     imm = GET_IMM(ctx->opcode);
+ 
+     switch (op) {
+-    case OPC_RISC_JAL:
+-        imm = GET_JAL_IMM(ctx->opcode);
+-        gen_jal(env, ctx, rd, imm);
+-        break;
+-    case OPC_RISC_JALR:
+-        gen_jalr(env, ctx, MASK_OP_JALR(ctx->opcode), rd, rs1, imm);
+-        break;
+-    case OPC_RISC_BRANCH:
+-        gen_branch(env, ctx, MASK_OP_BRANCH(ctx->opcode), rs1, rs2,
+-                   GET_B_IMM(ctx->opcode));
+-        break;
+     case OPC_RISC_LOAD:
+         gen_load(ctx, MASK_OP_LOAD(ctx->opcode), rd, rs1, imm);
+         break;
 -- 
 2.20.1
 
