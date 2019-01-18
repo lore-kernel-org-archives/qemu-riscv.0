@@ -1,31 +1,31 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gkU0p-0005c8-38
-	for mharc-qemu-riscv@gnu.org; Fri, 18 Jan 2019 08:16:43 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:42376)
+	id 1gkU0q-0005dN-1B
+	for mharc-qemu-riscv@gnu.org; Fri, 18 Jan 2019 08:16:44 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:42607)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <kbastian@mail.uni-paderborn.de>) id 1gkU0c-0005R4-GD
-	for qemu-riscv@nongnu.org; Fri, 18 Jan 2019 08:16:32 -0500
+	(envelope-from <kbastian@mail.uni-paderborn.de>) id 1gkU0n-0005ah-2H
+	for qemu-riscv@nongnu.org; Fri, 18 Jan 2019 08:16:42 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <kbastian@mail.uni-paderborn.de>) id 1gkU0M-000886-O9
-	for qemu-riscv@nongnu.org; Fri, 18 Jan 2019 08:16:23 -0500
-Received: from mail.uni-paderborn.de ([131.234.142.9]:41498)
+	(envelope-from <kbastian@mail.uni-paderborn.de>) id 1gkU0k-0008S6-I4
+	for qemu-riscv@nongnu.org; Fri, 18 Jan 2019 08:16:39 -0500
+Received: from mail.uni-paderborn.de ([131.234.142.9]:48318)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.71) (envelope-from <kbastian@mail.uni-paderborn.de>)
-	id 1gkU0H-0007Mj-8j; Fri, 18 Jan 2019 08:16:10 -0500
-Received: from pova.uni-paderborn.de ([131.234.189.23]
+	id 1gkU0S-0007ap-9w; Fri, 18 Jan 2019 08:16:25 -0500
+Received: from wormulon.uni-paderborn.de ([131.234.189.22]
 	helo=localhost.localdomain)
-	by mail.uni-paderborn.de with esmtp (Exim 4.89 spheron)
-	id 1gkTzv-0007W9-IW; Fri, 18 Jan 2019 14:15:47 +0100
-Received: from mail.uni-paderborn.de by pova with queue id 3091137-2;
-	Fri, 18 Jan 2019 13:15:46 GMT
+	by mail.uni-paderborn.de with esmtp (Exim 4.89 amazonia)
+	id 1gkU05-0001t2-71; Fri, 18 Jan 2019 14:15:57 +0100
+Received: from mail.uni-paderborn.de by wormulon with queue id 3093584-5;
+	Fri, 18 Jan 2019 13:15:55 GMT
 X-Envelope-From: <kbastian@mail.uni-paderborn.de>
 From: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
 To: sagark@eecs.berkeley.edu, palmer@sifive.com, Alistair.Francis@wdc.com,
 	kbastian@mail.uni-paderborn.de
 Cc: qemu-riscv@nongnu.org, peer.adelt@hni.uni-paderborn.de,
 	richard.henderson@linaro.org, qemu-devel@nongnu.org
-Date: Fri, 18 Jan 2019 14:14:50 +0100
-Message-Id: <20190118131456.32451-30-kbastian@mail.uni-paderborn.de>
+Date: Fri, 18 Jan 2019 14:14:56 +0100
+Message-Id: <20190118131456.32451-36-kbastian@mail.uni-paderborn.de>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20190118131456.32451-1-kbastian@mail.uni-paderborn.de>
 References: <20190118131456.32451-1-kbastian@mail.uni-paderborn.de>
@@ -39,7 +39,8 @@ X-IMT-Authenticated-Sender:
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
 X-Received-From: 131.234.142.9
-Subject: [Qemu-riscv] [PATCH v4 29/35] target/riscv: Remove gen_system()
+Subject: [Qemu-riscv] [PATCH v4 35/35] target/riscv: Remaining rvc insn
+ reuse 32 bit translators
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -51,77 +52,171 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Jan 2019 13:16:33 -0000
+X-List-Received-Date: Fri, 18 Jan 2019 13:16:42 -0000
 
-with all 16 bit insns moved to decodetree no path is falling back to
-gen_system(), so we can remove it.
+only one translate functions of rvc needs to handle special cases. For
+the other rvc insns we can remove the extra layer of indirection.
 
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Signed-off-by: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-Signed-off-by: Peer Adelt <peer.adelt@hni.uni-paderborn.de>
 ---
- target/riscv/translate.c | 31 -------------------------------
- 1 file changed, 31 deletions(-)
+ target/riscv/insn16.decode              | 37 +++++++++----------
+ target/riscv/insn_trans/trans_rvc.inc.c | 48 -------------------------
+ 2 files changed, 17 insertions(+), 68 deletions(-)
 
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index d0b0fca12b..0e37beb68e 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -427,32 +427,6 @@ static void gen_set_rm(DisasContext *ctx, int rm)
-     tcg_temp_free_i32(t0);
+diff --git a/target/riscv/insn16.decode b/target/riscv/insn16.decode
+index 98dd672c7f..d88a0c78ab 100644
+--- a/target/riscv/insn16.decode
++++ b/target/riscv/insn16.decode
+@@ -46,19 +46,15 @@
+ &i         imm rs1 rd   !extern
+ &s         imm rs1 rs2  !extern
+ &j         imm rd       !extern
++&b         imm rs2 rs1  !extern
+ 
+ # Argument sets:
+ &ci        imm        rd
+ &ciw       nzuimm     rd
+ &cs_dw     uimm   rs1 rs2
+-&cb        imm    rs1
+ &cr               rd  rs2
+-&c_j       imm
+ &c_shift   shamt      rd
+ 
+-&c_ld      uimm  rd
+-&c_sd      uimm  rs2
+-
+ &c_addi16sp_lui  imm_lui imm_addi16sp rd
+ 
+ # Formats 16:
+@@ -70,20 +66,21 @@
+ @cs_2      ... ... ... .. ... .. &r      rd=%rs1_3 rs1=%rs1_3 rs2=%rs2_3
+ @cs_d      ... ... ... .. ... .. &s  imm=%uimm_cl_d  rs1=%rs1_3  rs2=%rs2_3
+ @cs_w      ... ... ... .. ... .. &s  imm=%uimm_cl_w  rs1=%rs1_3  rs2=%rs2_3
+-@cb        ... ... ... .. ... .. &cb     imm=%imm_cb      rs1=%rs1_3
+-@cj        ...    ........... .. &c_j    imm=%imm_cj
++@cb        ... ... ... .. ... .. &b  imm=%imm_cb  rs1=%rs1_3 rs2=0
++@cj        ...    ........... .. &j  imm=%imm_cj rd=0
+ 
+-@c_ld      ... . .....  ..... .. &c_ld     uimm=%uimm_6bit_ld  %rd
+-@c_lw      ... . .....  ..... .. &c_ld     uimm=%uimm_6bit_lw  %rd
+-@c_sd      ... . .....  ..... .. &c_sd     uimm=%uimm_6bit_sd  rs2=%rs2_5
+-@c_sw      ... . .....  ..... .. &c_sd     uimm=%uimm_6bit_sw  rs2=%rs2_5
++@c_ld      ... . .....  ..... .. &i  imm=%uimm_6bit_ld  %rd rs1=2
++@c_lw      ... . .....  ..... .. &i  imm=%uimm_6bit_lw  %rd rs1=2
++@c_sd      ... . .....  ..... .. &s  imm=%uimm_6bit_sd  rs1=2 rs2=%rs2_5
++@c_sw      ... . .....  ..... .. &s  imm=%uimm_6bit_sw  rs1=2 rs2=%rs2_5
+ 
+ @c_addi16sp_lui ... .  ..... ..... .. &c_addi16sp_lui %imm_lui %imm_addi16sp %rd
+ 
+ @c_shift        ... . .. ... ..... .. &c_shift rd=%rs1_3 shamt=%nzuimm_6bit
+ @c_shift2       ... . .. ... ..... .. &c_shift rd=%rd    shamt=%nzuimm_6bit
+ 
+-@c_andi         ... . .. ... ..... .. &ci imm=%imm_ci rd=%rs1_3
++@c_andi         ... . .. ... ..... .. &i imm=%imm_ci rd=%rs1_3 rs1=%rs1_3
++
+ 
+ # *** RV64C Standard Extension (Quadrant 0) ***
+ c_addi4spn        000    ........ ... 00 @ciw
+@@ -98,20 +95,20 @@ c_li              010 .  .....  ..... 01 @ci
+ c_addi16sp_lui    011 .  .....  ..... 01 @c_addi16sp_lui # shares opc with C.LUI
+ c_srli            100 . 00 ...  ..... 01 @c_shift
+ c_srai            100 . 01 ...  ..... 01 @c_shift
+-c_andi            100 . 10 ...  ..... 01 @c_andi
++andi              100 . 10 ...  ..... 01 @c_andi
+ sub               100 0 11 ... 00 ... 01 @cs_2
+ xor               100 0 11 ... 01 ... 01 @cs_2
+ or                100 0 11 ... 10 ... 01 @cs_2
+ and               100 0 11 ... 11 ... 01 @cs_2
+-c_j               101     ........... 01 @cj
+-c_beqz            110  ... ...  ..... 01 @cb
+-c_bnez            111  ... ...  ..... 01 @cb
++jal               101     ........... 01 @cj # c_j
++beq               110  ... ...  ..... 01 @cb # c_beqz
++bne               111  ... ...  ..... 01 @cb # c_bnez
+ 
+ # *** RV64C Standard Extension (Quadrant 2) ***
+ c_slli            000 .  .....  ..... 10 @c_shift2
+-c_fldsp           001 .  .....  ..... 10 @c_ld
+-c_lwsp            010 .  .....  ..... 10 @c_lw
++fld               001 .  .....  ..... 10 @c_ld # fldsp
++lw                010 .  .....  ..... 10 @c_lw # lwsp
+ c_jr_mv           100 0  .....  ..... 10 @cr
+ c_ebreak_jalr_add 100 1  .....  ..... 10 @cr
+-c_fsdsp           101   ......  ..... 10 @c_sd
+-c_swsp            110 .  .....  ..... 10 @c_sw
++fsd               101   ......  ..... 10 @c_sd # fsdsp
++sw                110 .  .....  ..... 10 @c_sw # swsp
+diff --git a/target/riscv/insn_trans/trans_rvc.inc.c b/target/riscv/insn_trans/trans_rvc.inc.c
+index db9119ec9b..631e72c8b5 100644
+--- a/target/riscv/insn_trans/trans_rvc.inc.c
++++ b/target/riscv/insn_trans/trans_rvc.inc.c
+@@ -98,30 +98,6 @@ static bool trans_c_srai(DisasContext *ctx, arg_c_srai *a)
+     return trans_srai(ctx, &arg);
  }
  
--static void gen_system(CPURISCVState *env, DisasContext *ctx, uint32_t opc,
--                      int rd, int rs1, int csr)
+-static bool trans_c_andi(DisasContext *ctx, arg_c_andi *a)
 -{
--    tcg_gen_movi_tl(cpu_pc, ctx->base.pc_next);
--
--    switch (opc) {
--    case OPC_RISC_ECALL:
--        switch (csr) {
--        case 0x0: /* ECALL */
--            /* always generates U-level ECALL, fixed in do_interrupt handler */
--            generate_exception(ctx, RISCV_EXCP_U_ECALL);
--            tcg_gen_exit_tb(NULL, 0); /* no chaining */
--            ctx->base.is_jmp = DISAS_NORETURN;
--            break;
--        case 0x1: /* EBREAK */
--            generate_exception(ctx, RISCV_EXCP_BREAKPOINT);
--            tcg_gen_exit_tb(NULL, 0); /* no chaining */
--            ctx->base.is_jmp = DISAS_NORETURN;
--            break;
--        default:
--            gen_exception_illegal(ctx);
--            break;
--        }
--        break;
--    }
+-    arg_andi arg = { .rd = a->rd, .rs1 = a->rd, .imm = a->imm };
+-    return trans_andi(ctx, &arg);
 -}
- 
- static void decode_RV32_64C0(DisasContext *ctx)
+-
+-static bool trans_c_j(DisasContext *ctx, arg_c_j *a)
+-{
+-    arg_jal arg = { .rd = 0, .imm = a->imm };
+-    return trans_jal(ctx, &arg);
+-}
+-
+-static bool trans_c_beqz(DisasContext *ctx, arg_c_beqz *a)
+-{
+-    arg_beq arg = { .rs1 = a->rs1, .rs2 = 0, .imm = a->imm };
+-    return trans_beq(ctx, &arg);
+-}
+-
+-static bool trans_c_bnez(DisasContext *ctx, arg_c_bnez *a)
+-{
+-    arg_bne arg = { .rs1 = a->rs1, .rs2 = 0, .imm = a->imm };
+-    return trans_bne(ctx, &arg);
+-}
+-
+ static bool trans_c_slli(DisasContext *ctx, arg_c_slli *a)
  {
-@@ -628,7 +602,6 @@ bool decode_insn16(DisasContext *ctx, uint16_t insn);
+     int shamt = a->shamt;
+@@ -138,18 +114,6 @@ static bool trans_c_slli(DisasContext *ctx, arg_c_slli *a)
+     return trans_slli(ctx, &arg);
+ }
  
- static void decode_RV32_64G(CPURISCVState *env, DisasContext *ctx)
+-static bool trans_c_fldsp(DisasContext *ctx, arg_c_fldsp *a)
+-{
+-    arg_fld arg = { .rd = a->rd, .rs1 = 2, .imm = a->uimm };
+-    return trans_fld(ctx, &arg);
+-}
+-
+-static bool trans_c_lwsp(DisasContext *ctx, arg_c_lwsp *a)
+-{
+-    arg_lw arg = { .rd = a->rd, .rs1 = 2, .imm = a->uimm };
+-    return trans_lw(ctx, &arg);
+-}
+-
+ static bool trans_c_jr_mv(DisasContext *ctx, arg_c_jr_mv *a)
  {
--    int rs1, rd;
-     uint32_t op;
- 
-     /* We do not do misaligned address check here: the address should never be
-@@ -637,13 +610,9 @@ static void decode_RV32_64G(CPURISCVState *env, DisasContext *ctx)
-      * perform the misaligned instruction fetch */
- 
-     op = MASK_OP_MAJOR(ctx->opcode);
--    rs1 = GET_RS1(ctx->opcode);
--    rd = GET_RD(ctx->opcode);
- 
-     switch (op) {
-     case OPC_RISC_SYSTEM:
--        gen_system(env, ctx, MASK_OP_SYSTEM(ctx->opcode), rd, rs1,
--                   (ctx->opcode & 0xFFF00000) >> 20);
-         break;
-     default:
-         gen_exception_illegal(ctx);
+     if (a->rd != 0 && a->rs2 == 0) {
+@@ -183,15 +147,3 @@ static bool trans_c_ebreak_jalr_add(DisasContext *ctx, arg_c_ebreak_jalr_add *a)
+     }
+     return false;
+ }
+-
+-static bool trans_c_fsdsp(DisasContext *ctx, arg_c_fsdsp *a)
+-{
+-    arg_fsd arg = { .rs1 = 2, .rs2 = a->rs2, .imm = a->uimm };
+-    return trans_fsd(ctx, &arg);
+-}
+-
+-static bool trans_c_swsp(DisasContext *ctx, arg_c_swsp *a)
+-{
+-    arg_sw arg = { .rs1 = 2, .rs2 = a->rs2, .imm = a->uimm };
+-    return trans_sw(ctx, &arg);
+-}
 -- 
 2.20.1
 
