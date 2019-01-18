@@ -1,23 +1,23 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gkTzi-0004b5-27
-	for mharc-qemu-riscv@gnu.org; Fri, 18 Jan 2019 08:15:34 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:41513)
+	id 1gkTzj-0004cQ-3b
+	for mharc-qemu-riscv@gnu.org; Fri, 18 Jan 2019 08:15:35 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:41555)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <kbastian@mail.uni-paderborn.de>) id 1gkTze-0004Xa-24
-	for qemu-riscv@nongnu.org; Fri, 18 Jan 2019 08:15:31 -0500
+	(envelope-from <kbastian@mail.uni-paderborn.de>) id 1gkTzh-0004a8-1J
+	for qemu-riscv@nongnu.org; Fri, 18 Jan 2019 08:15:34 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <kbastian@mail.uni-paderborn.de>) id 1gkTzQ-0006Vy-KR
-	for qemu-riscv@nongnu.org; Fri, 18 Jan 2019 08:15:21 -0500
-Received: from mail.uni-paderborn.de ([131.234.142.9]:48040)
+	(envelope-from <kbastian@mail.uni-paderborn.de>) id 1gkTzU-0006at-52
+	for qemu-riscv@nongnu.org; Fri, 18 Jan 2019 08:15:24 -0500
+Received: from mail.uni-paderborn.de ([131.234.142.9]:53440)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.71) (envelope-from <kbastian@mail.uni-paderborn.de>)
-	id 1gkTzQ-0006NU-0y; Fri, 18 Jan 2019 08:15:16 -0500
-Received: from pova.uni-paderborn.de ([131.234.189.23]
+	id 1gkTzR-0006LF-Am; Fri, 18 Jan 2019 08:15:17 -0500
+Received: from magmaria.uni-paderborn.de ([131.234.189.24]
 	helo=localhost.localdomain)
-	by mail.uni-paderborn.de with esmtp (Exim 4.89 amazonia)
-	id 1gkTzE-0001oT-9P; Fri, 18 Jan 2019 14:15:05 +0100
-Received: from mail.uni-paderborn.de by pova with queue id 3091128-2;
-	Fri, 18 Jan 2019 13:15:03 GMT
+	by mail.uni-paderborn.de with esmtp (Exim 4.89 hoth)
+	id 1gkTzD-0001qO-R7; Fri, 18 Jan 2019 14:15:03 +0100
+Received: from mail.uni-paderborn.de by magmaria with queue id 3087757-3;
+	Fri, 18 Jan 2019 13:15:02 GMT
 X-Envelope-From: <kbastian@mail.uni-paderborn.de>
 From: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
 To: sagark@eecs.berkeley.edu, palmer@sifive.com, Alistair.Francis@wdc.com,
@@ -25,8 +25,8 @@ To: sagark@eecs.berkeley.edu, palmer@sifive.com, Alistair.Francis@wdc.com,
 Cc: qemu-riscv@nongnu.org, peer.adelt@hni.uni-paderborn.de,
 	richard.henderson@linaro.org, qemu-devel@nongnu.org,
 	Alistair Francis <alistair.francis@wdc.com>
-Date: Fri, 18 Jan 2019 14:14:23 +0100
-Message-Id: <20190118131456.32451-3-kbastian@mail.uni-paderborn.de>
+Date: Fri, 18 Jan 2019 14:14:22 +0100
+Message-Id: <20190118131456.32451-2-kbastian@mail.uni-paderborn.de>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20190118131456.32451-1-kbastian@mail.uni-paderborn.de>
 References: <20190118131456.32451-1-kbastian@mail.uni-paderborn.de>
@@ -40,8 +40,8 @@ X-IMT-Authenticated-Sender:
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
 X-Received-From: 131.234.142.9
-Subject: [Qemu-riscv] [PATCH v4 02/35] target/riscv: Activate decodetree and
- implemnt LUI & AUIPC
+Subject: [Qemu-riscv] [PATCH v4 01/35] target/riscv: Move CPURISCVState
+ pointer to DisasContext
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -53,173 +53,70 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Jan 2019 13:15:32 -0000
+X-List-Received-Date: Fri, 18 Jan 2019 13:15:34 -0000
 
-for now only LUI & AUIPC are decoded and translated. If decodetree fails, we
-fall back to the old decoder.
+CPURISCVState is rarely used, so there is no need to pass it to every
+translate function. This paves the way for decodetree which only passes
+DisasContext to translate functions.
 
+Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Signed-off-by: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-Signed-off-by: Peer Adelt <peer.adelt@hni.uni-paderborn.de>
 ---
- target/riscv/Makefile.objs              | 10 +++++++
- target/riscv/insn32.decode              | 30 +++++++++++++++++++++
- target/riscv/insn_trans/trans_rvi.inc.c | 35 +++++++++++++++++++++++++
- target/riscv/translate.c                | 31 ++++++++++++----------
- 4 files changed, 92 insertions(+), 14 deletions(-)
- create mode 100644 target/riscv/insn32.decode
- create mode 100644 target/riscv/insn_trans/trans_rvi.inc.c
+ target/riscv/translate.c | 15 ++++++++-------
+ 1 file changed, 8 insertions(+), 7 deletions(-)
 
-diff --git a/target/riscv/Makefile.objs b/target/riscv/Makefile.objs
-index 4072abe3e4..bf0a268033 100644
---- a/target/riscv/Makefile.objs
-+++ b/target/riscv/Makefile.objs
-@@ -1 +1,11 @@
- obj-y += translate.o op_helper.o cpu_helper.o cpu.o csr.o fpu_helper.o gdbstub.o pmp.o
-+
-+DECODETREE = $(SRC_PATH)/scripts/decodetree.py
-+
-+target/riscv/decode_insn32.inc.c: \
-+  $(SRC_PATH)/target/riscv/insn32.decode $(DECODETREE)
-+	$(call quiet-command, \
-+	  $(PYTHON) $(DECODETREE) -o $@ --decode decode_insn32 $<, \
-+	  "GEN", $(TARGET_DIR)$@)
-+
-+target/riscv/translate.o: target/riscv/decode_insn32.inc.c
-diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-new file mode 100644
-index 0000000000..44d4e922b6
---- /dev/null
-+++ b/target/riscv/insn32.decode
-@@ -0,0 +1,30 @@
-+#
-+# RISC-V translation routines for the RVXI Base Integer Instruction Set.
-+#
-+# Copyright (c) 2018 Peer Adelt, peer.adelt@hni.uni-paderborn.de
-+#                    Bastian Koppelmann, kbastian@mail.uni-paderborn.de
-+#
-+# This program is free software; you can redistribute it and/or modify it
-+# under the terms and conditions of the GNU General Public License,
-+# version 2 or later, as published by the Free Software Foundation.
-+#
-+# This program is distributed in the hope it will be useful, but WITHOUT
-+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-+# FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-+# more details.
-+#
-+# You should have received a copy of the GNU General Public License along with
-+# this program.  If not, see <http://www.gnu.org/licenses/>.
-+
-+# Fields:
-+%rd        7:5
-+
-+# immediates:
-+%imm_u    12:s20                 !function=ex_shift_12
-+
-+# Formats 32:
-+@u       ....................      ..... .......         imm=%imm_u          %rd
-+
-+# *** RV32I Base Instruction Set ***
-+lui      ....................       ..... 0110111 @u
-+auipc    ....................       ..... 0010111 @u
-diff --git a/target/riscv/insn_trans/trans_rvi.inc.c b/target/riscv/insn_trans/trans_rvi.inc.c
-new file mode 100644
-index 0000000000..9885a8d275
---- /dev/null
-+++ b/target/riscv/insn_trans/trans_rvi.inc.c
-@@ -0,0 +1,35 @@
-+/*
-+ * RISC-V translation routines for the RVXI Base Integer Instruction Set.
-+ *
-+ * Copyright (c) 2016-2017 Sagar Karandikar, sagark@eecs.berkeley.edu
-+ * Copyright (c) 2018 Peer Adelt, peer.adelt@hni.uni-paderborn.de
-+ *                    Bastian Koppelmann, kbastian@mail.uni-paderborn.de
-+ *
-+ * This program is free software; you can redistribute it and/or modify it
-+ * under the terms and conditions of the GNU General Public License,
-+ * version 2 or later, as published by the Free Software Foundation.
-+ *
-+ * This program is distributed in the hope it will be useful, but WITHOUT
-+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-+ * more details.
-+ *
-+ * You should have received a copy of the GNU General Public License along with
-+ * this program.  If not, see <http://www.gnu.org/licenses/>.
-+ */
-+
-+static bool trans_lui(DisasContext *ctx, arg_lui *a)
-+{
-+    if (a->rd != 0) {
-+        tcg_gen_movi_tl(cpu_gpr[a->rd], a->imm);
-+    }
-+    return true;
-+}
-+
-+static bool trans_auipc(DisasContext *ctx, arg_auipc *a)
-+{
-+    if (a->rd != 0) {
-+        tcg_gen_movi_tl(cpu_gpr[a->rd], a->imm + ctx->base.pc_next);
-+    }
-+    return true;
-+}
 diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index c4a4d8115c..99829a600d 100644
+index 312bf298b3..c4a4d8115c 100644
 --- a/target/riscv/translate.c
 +++ b/target/riscv/translate.c
-@@ -1677,6 +1677,19 @@ static void decode_RV32_64C(CPURISCVState *env, DisasContext *ctx)
+@@ -52,6 +52,7 @@ typedef struct DisasContext {
+        to any system register, which includes CSR_FRM, so we do not have
+        to reset this known value.  */
+     int frm;
++    CPURISCVState *env;
+ } DisasContext;
+ 
+ /* convert riscv funct3 to qemu memop for load/store */
+@@ -1797,19 +1798,19 @@ static void decode_RV32_64G(CPURISCVState *env, DisasContext *ctx)
      }
  }
  
-+#define EX_SH(amount) \
-+    static int ex_shift_##amount(int imm) \
-+    {                                         \
-+        return imm << amount;                 \
-+    }
-+EX_SH(12)
-+
-+bool decode_insn32(DisasContext *ctx, uint32_t insn);
-+/* Include the auto-generated decoder for 32 bit insn */
-+#include "decode_insn32.inc.c"
-+/* Include insn module translation function */
-+#include "insn_trans/trans_rvi.inc.c"
-+
- static void decode_RV32_64G(CPURISCVState *env, DisasContext *ctx)
+-static void decode_opc(CPURISCVState *env, DisasContext *ctx)
++static void decode_opc(DisasContext *ctx)
  {
-     int rs1;
-@@ -1697,19 +1710,6 @@ static void decode_RV32_64G(CPURISCVState *env, DisasContext *ctx)
-     imm = GET_IMM(ctx->opcode);
- 
-     switch (op) {
--    case OPC_RISC_LUI:
--        if (rd == 0) {
--            break; /* NOP */
--        }
--        tcg_gen_movi_tl(cpu_gpr[rd], sextract64(ctx->opcode, 12, 20) << 12);
--        break;
--    case OPC_RISC_AUIPC:
--        if (rd == 0) {
--            break; /* NOP */
--        }
--        tcg_gen_movi_tl(cpu_gpr[rd], (sextract64(ctx->opcode, 12, 20) << 12) +
--               ctx->base.pc_next);
--        break;
-     case OPC_RISC_JAL:
-         imm = GET_JAL_IMM(ctx->opcode);
-         gen_jal(env, ctx, rd, imm);
-@@ -1810,7 +1810,10 @@ static void decode_opc(DisasContext *ctx)
+     /* check for compressed insn */
+     if (extract32(ctx->opcode, 0, 2) != 3) {
+-        if (!riscv_has_ext(env, RVC)) {
++        if (!riscv_has_ext(ctx->env, RVC)) {
+             gen_exception_illegal(ctx);
+         } else {
+             ctx->pc_succ_insn = ctx->base.pc_next + 2;
+-            decode_RV32_64C(env, ctx);
++            decode_RV32_64C(ctx->env, ctx);
          }
      } else {
          ctx->pc_succ_insn = ctx->base.pc_next + 4;
--        decode_RV32_64G(ctx->env, ctx);
-+        if (!decode_insn32(ctx, ctx->opcode)) {
-+            /* fallback to old decoder */
-+            decode_RV32_64G(ctx->env, ctx);
-+        }
+-        decode_RV32_64G(env, ctx);
++        decode_RV32_64G(ctx->env, ctx);
      }
  }
  
+@@ -1854,10 +1855,10 @@ static bool riscv_tr_breakpoint_check(DisasContextBase *dcbase, CPUState *cpu,
+ static void riscv_tr_translate_insn(DisasContextBase *dcbase, CPUState *cpu)
+ {
+     DisasContext *ctx = container_of(dcbase, DisasContext, base);
+-    CPURISCVState *env = cpu->env_ptr;
++    ctx->env = cpu->env_ptr;
+ 
+-    ctx->opcode = cpu_ldl_code(env, ctx->base.pc_next);
+-    decode_opc(env, ctx);
++    ctx->opcode = cpu_ldl_code(ctx->env, ctx->base.pc_next);
++    decode_opc(ctx);
+     ctx->base.pc_next = ctx->pc_succ_insn;
+ 
+     if (ctx->base.is_jmp == DISAS_NEXT) {
 -- 
 2.20.1
 
