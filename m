@@ -1,31 +1,30 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1glsVy-0006yY-Qz
-	for mharc-qemu-riscv@gnu.org; Tue, 22 Jan 2019 04:38:38 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:59571)
+	id 1glsVz-0006yo-0K
+	for mharc-qemu-riscv@gnu.org; Tue, 22 Jan 2019 04:38:39 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:59267)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <kbastian@mail.uni-paderborn.de>) id 1glsVm-0006XP-SW
-	for qemu-riscv@nongnu.org; Tue, 22 Jan 2019 04:38:28 -0500
+	(envelope-from <kbastian@mail.uni-paderborn.de>) id 1glsVm-0006Ht-MZ
+	for qemu-riscv@nongnu.org; Tue, 22 Jan 2019 04:38:32 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <kbastian@mail.uni-paderborn.de>) id 1glsNW-0004qg-F5
+	(envelope-from <kbastian@mail.uni-paderborn.de>) id 1glsNW-0004rA-Kf
 	for qemu-riscv@nongnu.org; Tue, 22 Jan 2019 04:29:55 -0500
-Received: from mail.uni-paderborn.de ([131.234.142.9]:53484)
+Received: from mail.uni-paderborn.de ([131.234.142.9]:41758)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.71) (envelope-from <kbastian@mail.uni-paderborn.de>)
-	id 1glsNU-0004bY-9H; Tue, 22 Jan 2019 04:29:54 -0500
+	id 1glsNS-0004bC-B2; Tue, 22 Jan 2019 04:29:52 -0500
 Received: from tweenies.uni-paderborn.de ([131.234.189.21]
 	helo=localhost.localdomain)
-	by mail.uni-paderborn.de with esmtp (Exim 4.89 zuban)
-	id 1glsNR-0004ii-K2; Tue, 22 Jan 2019 10:29:49 +0100
-Received: from mail.uni-paderborn.de by tweenies with queue id 3069617-4;
-	Tue, 22 Jan 2019 09:29:48 GMT
+	by mail.uni-paderborn.de with esmtp (Exim 4.89 hoth)
+	id 1glsNP-000161-SE; Tue, 22 Jan 2019 10:29:47 +0100
+Received: from mail.uni-paderborn.de by tweenies with queue id 3069616-4;
+	Tue, 22 Jan 2019 09:29:46 GMT
 X-Envelope-From: <kbastian@mail.uni-paderborn.de>
 From: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
 To: sagark@eecs.berkeley.edu, palmer@sifive.com, kbastian@mail.uni-paderborn.de
 Cc: richard.henderson@linaro.org, peer.adelt@hni.uni-paderborn.de,
-	qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
-	Alistair Francis <alistair.francis@wdc.com>
-Date: Tue, 22 Jan 2019 10:28:39 +0100
-Message-Id: <20190122092909.5341-6-kbastian@mail.uni-paderborn.de>
+	qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Date: Tue, 22 Jan 2019 10:28:38 +0100
+Message-Id: <20190122092909.5341-5-kbastian@mail.uni-paderborn.de>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20190122092909.5341-1-kbastian@mail.uni-paderborn.de>
 References: <20190122092909.5341-1-kbastian@mail.uni-paderborn.de>
@@ -39,7 +38,7 @@ X-IMT-Authenticated-Sender:
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
 X-Received-From: 131.234.142.9
-Subject: [Qemu-riscv] [PATCH v5 05/35] target/riscv: Convert RV64I
+Subject: [Qemu-riscv] [PATCH v5 04/35] target/riscv: Convert RV32I
  load/store insns to decodetree
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
@@ -52,121 +51,104 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Jan 2019 09:38:28 -0000
+X-List-Received-Date: Tue, 22 Jan 2019 09:38:33 -0000
 
-this splits the 64-bit only instructions into its own decode file such
-that we generate the decoder for these instructions only for the RISC-V
-64 bit target.
-
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Signed-off-by: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
 Signed-off-by: Peer Adelt <peer.adelt@hni.uni-paderborn.de>
 ---
- target/riscv/Makefile.objs              |  8 +++++---
- target/riscv/insn32-64.decode           | 25 +++++++++++++++++++++++++
- target/riscv/insn_trans/trans_rvi.inc.c | 20 ++++++++++++++++++++
- target/riscv/translate.c                |  7 -------
- 4 files changed, 50 insertions(+), 10 deletions(-)
- create mode 100644 target/riscv/insn32-64.decode
+ target/riscv/insn32.decode              | 10 ++++++
+ target/riscv/insn_trans/trans_rvi.inc.c | 48 +++++++++++++++++++++++++
+ 2 files changed, 58 insertions(+)
 
-diff --git a/target/riscv/Makefile.objs b/target/riscv/Makefile.objs
-index bf0a268033..05087a91bb 100644
---- a/target/riscv/Makefile.objs
-+++ b/target/riscv/Makefile.objs
-@@ -2,10 +2,12 @@ obj-y += translate.o op_helper.o cpu_helper.o cpu.o csr.o fpu_helper.o gdbstub.o
+diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+index 81f56c16b4..076de873c4 100644
+--- a/target/riscv/insn32.decode
++++ b/target/riscv/insn32.decode
+@@ -23,6 +23,7 @@
  
- DECODETREE = $(SRC_PATH)/scripts/decodetree.py
+ # immediates:
+ %imm_i    20:s12
++%imm_s    25:s7 7:5
+ %imm_b    31:s1 7:1 25:6 8:4     !function=ex_shift_1
+ %imm_j    31:s1 12:8 20:1 21:10  !function=ex_shift_1
+ %imm_u    12:s20                 !function=ex_shift_12
+@@ -33,6 +34,7 @@
+ # Formats 32:
+ @i       ............    ..... ... ..... .......         imm=%imm_i     %rs1 %rd
+ @b       .......   ..... ..... ... ..... ....... &b      imm=%imm_b %rs2 %rs1
++@s       .......   ..... ..... ... ..... .......         imm=%imm_s %rs2 %rs1
+ @u       ....................      ..... .......         imm=%imm_u          %rd
+ @j       ....................      ..... .......         imm=%imm_j          %rd
  
--target/riscv/decode_insn32.inc.c: \
--  $(SRC_PATH)/target/riscv/insn32.decode $(DECODETREE)
-+decode32-y = $(SRC_PATH)/target/riscv/insn32.decode
-+decode32-$(TARGET_RISCV64) += $(SRC_PATH)/target/riscv/insn32-64.decode
-+
-+target/riscv/decode_insn32.inc.c: $(decode32-y) $(DECODETREE)
- 	$(call quiet-command, \
--	  $(PYTHON) $(DECODETREE) -o $@ --decode decode_insn32 $<, \
-+	  $(PYTHON) $(DECODETREE) -o $@ --decode decode_insn32 $(decode32-y), \
- 	  "GEN", $(TARGET_DIR)$@)
- 
- target/riscv/translate.o: target/riscv/decode_insn32.inc.c
-diff --git a/target/riscv/insn32-64.decode b/target/riscv/insn32-64.decode
-new file mode 100644
-index 0000000000..439d4e2c58
---- /dev/null
-+++ b/target/riscv/insn32-64.decode
-@@ -0,0 +1,25 @@
-+#
-+# RISC-V translation routines for the RV Instruction Set.
-+#
-+# Copyright (c) 2018 Peer Adelt, peer.adelt@hni.uni-paderborn.de
-+#                    Bastian Koppelmann, kbastian@mail.uni-paderborn.de
-+#
-+# This program is free software; you can redistribute it and/or modify it
-+# under the terms and conditions of the GNU General Public License,
-+# version 2 or later, as published by the Free Software Foundation.
-+#
-+# This program is distributed in the hope it will be useful, but WITHOUT
-+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-+# FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-+# more details.
-+#
-+# You should have received a copy of the GNU General Public License along with
-+# this program.  If not, see <http://www.gnu.org/licenses/>.
-+
-+# This is concatenated with insn32.decode for risc64 targets.
-+# Most of the fields and formats are there.
-+
-+# *** RV64I Base Instruction Set (in addition to RV32I) ***
-+lwu      ............   ..... 110 ..... 0000011 @i
-+ld       ............   ..... 011 ..... 0000011 @i
-+sd       ....... .....  ..... 011 ..... 0100011 @s
+@@ -47,3 +49,11 @@ blt      ....... .....    ..... 100 ..... 1100011 @b
+ bge      ....... .....    ..... 101 ..... 1100011 @b
+ bltu     ....... .....    ..... 110 ..... 1100011 @b
+ bgeu     ....... .....    ..... 111 ..... 1100011 @b
++lb       ............     ..... 000 ..... 0000011 @i
++lh       ............     ..... 001 ..... 0000011 @i
++lw       ............     ..... 010 ..... 0000011 @i
++lbu      ............     ..... 100 ..... 0000011 @i
++lhu      ............     ..... 101 ..... 0000011 @i
++sb       .......  .....   ..... 000 ..... 0100011 @s
++sh       .......  .....   ..... 001 ..... 0100011 @s
++sw       .......  .....   ..... 010 ..... 0100011 @s
 diff --git a/target/riscv/insn_trans/trans_rvi.inc.c b/target/riscv/insn_trans/trans_rvi.inc.c
-index f3b88ebb69..39a20a70e8 100644
+index 0347461ee6..f3b88ebb69 100644
 --- a/target/riscv/insn_trans/trans_rvi.inc.c
 +++ b/target/riscv/insn_trans/trans_rvi.inc.c
-@@ -130,3 +130,23 @@ static bool trans_sw(DisasContext *ctx, arg_sw *a)
-     gen_store(ctx, OPC_RISC_SW, a->rs1, a->rs2, a->imm);
+@@ -82,3 +82,51 @@ static bool trans_bgeu(DisasContext *ctx, arg_bgeu *a)
+     gen_branch(ctx->env, ctx, OPC_RISC_BGEU, a->rs1, a->rs2, a->imm);
      return true;
  }
 +
-+#ifdef TARGET_RISCV64
-+static bool trans_lwu(DisasContext *ctx, arg_lwu *a)
++static bool trans_lb(DisasContext *ctx, arg_lb *a)
 +{
-+    gen_load(ctx, OPC_RISC_LWU, a->rd, a->rs1, a->imm);
++    gen_load(ctx, OPC_RISC_LB, a->rd, a->rs1, a->imm);
 +    return true;
 +}
 +
-+static bool trans_ld(DisasContext *ctx, arg_ld *a)
++static bool trans_lh(DisasContext *ctx, arg_lh *a)
 +{
-+    gen_load(ctx, OPC_RISC_LD, a->rd, a->rs1, a->imm);
++    gen_load(ctx, OPC_RISC_LH, a->rd, a->rs1, a->imm);
 +    return true;
 +}
 +
-+static bool trans_sd(DisasContext *ctx, arg_sd *a)
++static bool trans_lw(DisasContext *ctx, arg_lw *a)
 +{
-+    gen_store(ctx, OPC_RISC_SD, a->rs1, a->rs2, a->imm);
++    gen_load(ctx, OPC_RISC_LW, a->rd, a->rs1, a->imm);
 +    return true;
 +}
-+#endif
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index b81297f23e..609207f785 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -1711,13 +1711,6 @@ static void decode_RV32_64G(CPURISCVState *env, DisasContext *ctx)
-     imm = GET_IMM(ctx->opcode);
- 
-     switch (op) {
--    case OPC_RISC_LOAD:
--        gen_load(ctx, MASK_OP_LOAD(ctx->opcode), rd, rs1, imm);
--        break;
--    case OPC_RISC_STORE:
--        gen_store(ctx, MASK_OP_STORE(ctx->opcode), rs1, rs2,
--                  GET_STORE_IMM(ctx->opcode));
--        break;
-     case OPC_RISC_ARITH_IMM:
- #if defined(TARGET_RISCV64)
-     case OPC_RISC_ARITH_IMM_W:
++
++static bool trans_lbu(DisasContext *ctx, arg_lbu *a)
++{
++    gen_load(ctx, OPC_RISC_LBU, a->rd, a->rs1, a->imm);
++    return true;
++}
++
++static bool trans_lhu(DisasContext *ctx, arg_lhu *a)
++{
++    gen_load(ctx, OPC_RISC_LHU, a->rd, a->rs1, a->imm);
++    return true;
++}
++
++static bool trans_sb(DisasContext *ctx, arg_sb *a)
++{
++    gen_store(ctx, OPC_RISC_SB, a->rs1, a->rs2, a->imm);
++    return true;
++}
++
++static bool trans_sh(DisasContext *ctx, arg_sh *a)
++{
++    gen_store(ctx, OPC_RISC_SH, a->rs1, a->rs2, a->imm);
++    return true;
++}
++
++static bool trans_sw(DisasContext *ctx, arg_sw *a)
++{
++    gen_store(ctx, OPC_RISC_SW, a->rs1, a->rs2, a->imm);
++    return true;
++}
 -- 
 2.20.1
 
