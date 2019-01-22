@@ -1,60 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gm3zu-0002Tq-Pw
-	for mharc-qemu-riscv@gnu.org; Tue, 22 Jan 2019 16:54:18 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:34912)
+	id 1gm552-0007Yc-Hy
+	for mharc-qemu-riscv@gnu.org; Tue, 22 Jan 2019 18:03:40 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:55546)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1gm3zr-0002Pc-5r
-	for qemu-riscv@nongnu.org; Tue, 22 Jan 2019 16:54:17 -0500
+	(envelope-from <alistair23@gmail.com>) id 1gm550-0007YR-Na
+	for qemu-riscv@nongnu.org; Tue, 22 Jan 2019 18:03:39 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1gm3zm-000483-As
-	for qemu-riscv@nongnu.org; Tue, 22 Jan 2019 16:54:12 -0500
-Received: from mail-lf1-x144.google.com ([2a00:1450:4864:20::144]:44243)
+	(envelope-from <alistair23@gmail.com>) id 1gm54y-0003ND-GG
+	for qemu-riscv@nongnu.org; Tue, 22 Jan 2019 18:03:38 -0500
+Received: from mail-lf1-x142.google.com ([2a00:1450:4864:20::142]:35916)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
 	(Exim 4.71) (envelope-from <alistair23@gmail.com>)
-	id 1gm3ze-0003nH-4m; Tue, 22 Jan 2019 16:54:02 -0500
-Received: by mail-lf1-x144.google.com with SMTP id z13so38076lfe.11;
-	Tue, 22 Jan 2019 13:53:58 -0800 (PST)
+	id 1gm54w-0003K5-F5; Tue, 22 Jan 2019 18:03:36 -0500
+Received: by mail-lf1-x142.google.com with SMTP id a16so185177lfg.3;
+	Tue, 22 Jan 2019 15:03:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=6rCLls5viGRppw4bc/3ZNXt8DIUDh41yvn6qTro+QGs=;
-	b=e0JjZmUt4RmHeNOoq9E26I92739hCpQPHb7xPfcZhkqO3bYVGCSNbX3mKkmiSdcRlR
-	SGokBwHXvd9KlrMJSRVMndHmqnhCU2eUNfcD9ocMQ6Be2YrJDQEb0kWDaypITHGVYQP2
-	XeWe8b61LShlAFBVkVo5PtqWGGM9n2QVpZXDsUSua9NegDHkElD9MQAoLThzhxJc0zIB
-	bmhlETOo/aU8bmbmdLK/uvnYRISjKKPzi4WcJs9/hYK0hskTxKQt7FG24a+2dB4u4Qlw
-	D754Fszk4+IRDKdauTB/ZEI/ABjU1bQ1u4FHxvE73CJEnCVpklkrXJViZ5E3ybMR8mzS
-	l4EQ==
+	:cc; bh=UFCFSh7UGuZTESnspawKcoHmOrrfI30MlIloccpZSRc=;
+	b=PZAKwjxe4Nl8wT5wRIc3Ss0aMeBQOle+D+se3DQORYmnknZkLMxLrp+teTMvRGV8U5
+	keYfk/cSJ6j0zGCCH+gcYLdgdNZv9Z6H97YE03oSVMgvS/Ro0aPl+npBVmMG6wzcz/59
+	975c7+migIPLY67TwCTdPyg4sgFifEEyLXoDpZOY9LNjqAGoHRhbbFVJcsdzHNAjl7Zo
+	5EeANkS4w53zLpExF5Iacg0R/uX2SV1xV9OogGz/5iUg2aoI/HpDMf8kfwjq8v9QDK+X
+	quC6upo/auiK8ztKaTYT7XGSuyFrEUsHohBRMYXde3jaFz2c8NyR7IsRe6Bie+04OmR9
+	BC2g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=6rCLls5viGRppw4bc/3ZNXt8DIUDh41yvn6qTro+QGs=;
-	b=s4SHxqQAfaSoNmdNNuoXycD3WkFgYMc4VNl1KuUTvtqWGOTlNWH+NAhgFWW4VgTAAA
-	LXrrvYB3sF8OnrD88jene69v949mQsWjR7PTorTtN+GmeJBtFLdn93WZoweAEmdMu88r
-	Yim9j/MdsdMPoFLkHd4/oIk6BZTxNhxt0bM/PXdFHAdrOUSgCQE0oSL+0kDHRzzTOo5d
-	9A1XIqZqyx/u33g80n+0vkYf8mVVxEVESvl4MYm72C4SfTiq6UlgmeVN+0R+8Rj2UZ8l
-	7Zramh8FOzOy/DECZMvJdMlTBj6BtqEJA5USo31lh65zk5GL27JEjInnC/1CIN0t4XLv
-	vayA==
-X-Gm-Message-State: AJcUukeM255uVQyE0TSjlaC1OrSLAQKrbR3IX+gL8viIOQs/zGoibN0K
-	iWEyFwfV+/4FOAUrqVizDe7E5/n0lXxcUcugJvs=
-X-Google-Smtp-Source: ALg8bN7kb6PQLOv/Q8+tMV8chZb21bYXSwpxQ+XLjNgRxQp2sQNqtp9IKfFGxl9X+nD/Z4XSzizHxuNwz/GE7LrnOVY=
-X-Received: by 2002:a19:ca51:: with SMTP id h17mr21377810lfj.126.1548194037274;
-	Tue, 22 Jan 2019 13:53:57 -0800 (PST)
+	bh=UFCFSh7UGuZTESnspawKcoHmOrrfI30MlIloccpZSRc=;
+	b=U61F4Hs0IaHOUG9JVj3s6I27yZ0q0sfRZPg8FVFiUxNGPE8Z2MpZ5YOySpw88N7OH8
+	Mqr4aTugUU4xXqhewC8NxZSnzEKXF+GRGUQ0lZs0B62VV/hsP9BdpV5Oz/fFxEFGhGnd
+	s98ZGIsmVS1oP0/8Rr3Kwp84J7+Jmdv69FMkuaRFZ70h4R0qHxcVrrChJ5ovanlKLDES
+	vK+zuERw6jZ0qJc+NjLJGYKISMX3pcL7kcPzMYRnBPr/t3MmyZTAITiXJSWjm131GUdO
+	H0st698jUEaqCX0nhGjdes9IycdlojK9w3hnz6DmvEZj3Nu9/7VijY7DfKT8jm6fKBtI
+	6nwA==
+X-Gm-Message-State: AJcUukcUH4bG4uD32z6nhXebjE87H12vJ5vpfxBoBQ8Fsz0REMoPdIxk
+	wiNAwCTFxz5+c/Q1rZWsxntQfifZS++jLJ4Ui5r6ag==
+X-Google-Smtp-Source: ALg8bN4JsT06HvgFWzfo19YMjlgokDJikCX1fGksHRCSSqfsYTXgukK4n1dke4F7v6LTaHX+29VT2aWSlMSJSu1EHxk=
+X-Received: by 2002:a19:d486:: with SMTP id
+	l128mr21371386lfg.114.1548198211830; 
+	Tue, 22 Jan 2019 15:03:31 -0800 (PST)
 MIME-Version: 1.0
-References: <CAFyWVaai=5K7j8w+Abpk9jxGyKuo4v9w2BgmDbY=_29+Q++Jyw@mail.gmail.com>
-	<20181228220841.4896-1-jimw@sifive.com>
-In-Reply-To: <20181228220841.4896-1-jimw@sifive.com>
+References: <20190122092909.5341-1-kbastian@mail.uni-paderborn.de>
+	<20190122092909.5341-4-kbastian@mail.uni-paderborn.de>
+In-Reply-To: <20190122092909.5341-4-kbastian@mail.uni-paderborn.de>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 22 Jan 2019 13:53:30 -0800
-Message-ID: <CAKmqyKPTnYpeyqjDR7=dcceGG7dbAc0nwVCTDMxiaJG5D=R6FA@mail.gmail.com>
-To: Jim Wilson <jimw@sifive.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
-	qemu-riscv@nongnu.org
+Date: Tue, 22 Jan 2019 15:03:04 -0800
+Message-ID: <CAKmqyKN6pe=VUyABd5kRBJADMb88D8fvx-Q37ddKec4fgiFCDg@mail.gmail.com>
+To: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+Cc: Sagar Karandikar <sagark@eecs.berkeley.edu>,
+	Palmer Dabbelt <palmer@sifive.com>, qemu-riscv@nongnu.org, 
+	peer.adelt@hni.uni-paderborn.de, 
+	Richard Henderson <richard.henderson@linaro.org>, 
+	"qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2a00:1450:4864:20::144
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH 2/5 v2] RISC-V: Add 64-bit gdb
- xml files.
+X-Received-From: 2a00:1450:4864:20::142
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v5 03/35] target/riscv:
+ Convert RVXI branch insns to decodetree
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -66,403 +70,153 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Jan 2019 21:54:17 -0000
+X-List-Received-Date: Tue, 22 Jan 2019 23:03:39 -0000
 
-On Fri, Dec 28, 2018 at 2:20 PM Jim Wilson <jimw@sifive.com> wrote:
+On Tue, Jan 22, 2019 at 2:12 AM Bastian Koppelmann
+<kbastian@mail.uni-paderborn.de> wrote:
 >
-> Signed-off-by: Jim Wilson <jimw@sifive.com>
+> Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
+> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+> Signed-off-by: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+> Signed-off-by: Peer Adelt <peer.adelt@hni.uni-paderborn.de>
 
 Acked-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  configure                   |   1 +
->  gdb-xml/riscv-64bit-cpu.xml |  43 ++++++++
->  gdb-xml/riscv-64bit-csr.xml | 250 ++++++++++++++++++++++++++++++++++++++++++++
->  gdb-xml/riscv-64bit-fpu.xml |  52 +++++++++
->  4 files changed, 346 insertions(+)
->  create mode 100644 gdb-xml/riscv-64bit-cpu.xml
->  create mode 100644 gdb-xml/riscv-64bit-csr.xml
->  create mode 100644 gdb-xml/riscv-64bit-fpu.xml
+>  target/riscv/insn32.decode              | 19 ++++++++++
+>  target/riscv/insn_trans/trans_rvi.inc.c | 49 +++++++++++++++++++++++++
+>  target/riscv/translate.c                | 12 +-----
+>  3 files changed, 69 insertions(+), 11 deletions(-)
 >
-> diff --git a/configure b/configure
-> index 4e05eed..00b7495 100755
-> --- a/configure
-> +++ b/configure
-> @@ -7215,6 +7215,7 @@ case "$target_name" in
->      TARGET_BASE_ARCH=riscv
->      TARGET_ABI_DIR=riscv
->      mttcg=yes
-> +    gdb_xml_files="riscv-64bit-cpu.xml riscv-64bit-fpu.xml riscv-64bit-csr.xml"
->      target_compiler=$cross_cc_riscv64
->    ;;
->    sh4|sh4eb)
-> diff --git a/gdb-xml/riscv-64bit-cpu.xml b/gdb-xml/riscv-64bit-cpu.xml
-> new file mode 100644
-> index 0000000..f37d7f3
-> --- /dev/null
-> +++ b/gdb-xml/riscv-64bit-cpu.xml
-> @@ -0,0 +1,43 @@
-> +<?xml version="1.0"?>
-> +<!-- Copyright (C) 2018 Free Software Foundation, Inc.
+> diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+> index 44d4e922b6..81f56c16b4 100644
+> --- a/target/riscv/insn32.decode
+> +++ b/target/riscv/insn32.decode
+> @@ -17,14 +17,33 @@
+>  # this program.  If not, see <http://www.gnu.org/licenses/>.
+>
+>  # Fields:
+> +%rs2       20:5
+> +%rs1       15:5
+>  %rd        7:5
+>
+>  # immediates:
+> +%imm_i    20:s12
+> +%imm_b    31:s1 7:1 25:6 8:4     !function=ex_shift_1
+> +%imm_j    31:s1 12:8 20:1 21:10  !function=ex_shift_1
+>  %imm_u    12:s20                 !function=ex_shift_12
+>
+> +# Argument sets:
+> +&b    imm rs2 rs1
 > +
-> +     Copying and distribution of this file, with or without modification,
-> +     are permitted in any medium without royalty provided the copyright
-> +     notice and this notice are preserved.  -->
+>  # Formats 32:
+> +@i       ............    ..... ... ..... .......         imm=%imm_i     %rs1 %rd
+> +@b       .......   ..... ..... ... ..... ....... &b      imm=%imm_b %rs2 %rs1
+>  @u       ....................      ..... .......         imm=%imm_u          %rd
+> +@j       ....................      ..... .......         imm=%imm_j          %rd
+>
+>  # *** RV32I Base Instruction Set ***
+>  lui      ....................       ..... 0110111 @u
+>  auipc    ....................       ..... 0010111 @u
+> +jal      ....................       ..... 1101111 @j
+> +jalr     ............     ..... 000 ..... 1100111 @i
+> +beq      ....... .....    ..... 000 ..... 1100011 @b
+> +bne      ....... .....    ..... 001 ..... 1100011 @b
+> +blt      ....... .....    ..... 100 ..... 1100011 @b
+> +bge      ....... .....    ..... 101 ..... 1100011 @b
+> +bltu     ....... .....    ..... 110 ..... 1100011 @b
+> +bgeu     ....... .....    ..... 111 ..... 1100011 @b
+> diff --git a/target/riscv/insn_trans/trans_rvi.inc.c b/target/riscv/insn_trans/trans_rvi.inc.c
+> index 9885a8d275..0347461ee6 100644
+> --- a/target/riscv/insn_trans/trans_rvi.inc.c
+> +++ b/target/riscv/insn_trans/trans_rvi.inc.c
+> @@ -33,3 +33,52 @@ static bool trans_auipc(DisasContext *ctx, arg_auipc *a)
+>      }
+>      return true;
+>  }
 > +
-> +<!DOCTYPE feature SYSTEM "gdb-target.dtd">
-> +<feature name="org.gnu.gdb.riscv.cpu">
-> +  <reg name="zero" bitsize="64" type="int"/>
-> +  <reg name="ra" bitsize="64" type="code_ptr"/>
-> +  <reg name="sp" bitsize="64" type="data_ptr"/>
-> +  <reg name="gp" bitsize="64" type="data_ptr"/>
-> +  <reg name="tp" bitsize="64" type="data_ptr"/>
-> +  <reg name="t0" bitsize="64" type="int"/>
-> +  <reg name="t1" bitsize="64" type="int"/>
-> +  <reg name="t2" bitsize="64" type="int"/>
-> +  <reg name="fp" bitsize="64" type="data_ptr"/>
-> +  <reg name="s1" bitsize="64" type="int"/>
-> +  <reg name="a0" bitsize="64" type="int"/>
-> +  <reg name="a1" bitsize="64" type="int"/>
-> +  <reg name="a2" bitsize="64" type="int"/>
-> +  <reg name="a3" bitsize="64" type="int"/>
-> +  <reg name="a4" bitsize="64" type="int"/>
-> +  <reg name="a5" bitsize="64" type="int"/>
-> +  <reg name="a6" bitsize="64" type="int"/>
-> +  <reg name="a7" bitsize="64" type="int"/>
-> +  <reg name="s2" bitsize="64" type="int"/>
-> +  <reg name="s3" bitsize="64" type="int"/>
-> +  <reg name="s4" bitsize="64" type="int"/>
-> +  <reg name="s5" bitsize="64" type="int"/>
-> +  <reg name="s6" bitsize="64" type="int"/>
-> +  <reg name="s7" bitsize="64" type="int"/>
-> +  <reg name="s8" bitsize="64" type="int"/>
-> +  <reg name="s9" bitsize="64" type="int"/>
-> +  <reg name="s10" bitsize="64" type="int"/>
-> +  <reg name="s11" bitsize="64" type="int"/>
-> +  <reg name="t3" bitsize="64" type="int"/>
-> +  <reg name="t4" bitsize="64" type="int"/>
-> +  <reg name="t5" bitsize="64" type="int"/>
-> +  <reg name="t6" bitsize="64" type="int"/>
-> +  <reg name="pc" bitsize="64" type="code_ptr"/>
-> +</feature>
-> diff --git a/gdb-xml/riscv-64bit-csr.xml b/gdb-xml/riscv-64bit-csr.xml
-> new file mode 100644
-> index 0000000..a3de834
-> --- /dev/null
-> +++ b/gdb-xml/riscv-64bit-csr.xml
-> @@ -0,0 +1,250 @@
-> +<?xml version="1.0"?>
-> +<!-- Copyright (C) 2018 Free Software Foundation, Inc.
+> +static bool trans_jal(DisasContext *ctx, arg_jal *a)
+> +{
+> +    gen_jal(ctx->env, ctx, a->rd, a->imm);
+> +    return true;
+> +}
 > +
-> +     Copying and distribution of this file, with or without modification,
-> +     are permitted in any medium without royalty provided the copyright
-> +     notice and this notice are preserved.  -->
+> +static bool trans_jalr(DisasContext *ctx, arg_jalr *a)
+> +{
+> +    gen_jalr(ctx->env, ctx, OPC_RISC_JALR, a->rd, a->rs1, a->imm);
+> +    return true;
+> +}
 > +
-> +<!DOCTYPE feature SYSTEM "gdb-target.dtd">
-> +<feature name="org.gnu.gdb.riscv.csr">
-> +  <reg name="ustatus" bitsize="64"/>
-> +  <reg name="uie" bitsize="64"/>
-> +  <reg name="utvec" bitsize="64"/>
-> +  <reg name="uscratch" bitsize="64"/>
-> +  <reg name="uepc" bitsize="64"/>
-> +  <reg name="ucause" bitsize="64"/>
-> +  <reg name="utval" bitsize="64"/>
-> +  <reg name="uip" bitsize="64"/>
-> +  <reg name="fflags" bitsize="64"/>
-> +  <reg name="frm" bitsize="64"/>
-> +  <reg name="fcsr" bitsize="64"/>
-> +  <reg name="cycle" bitsize="64"/>
-> +  <reg name="time" bitsize="64"/>
-> +  <reg name="instret" bitsize="64"/>
-> +  <reg name="hpmcounter3" bitsize="64"/>
-> +  <reg name="hpmcounter4" bitsize="64"/>
-> +  <reg name="hpmcounter5" bitsize="64"/>
-> +  <reg name="hpmcounter6" bitsize="64"/>
-> +  <reg name="hpmcounter7" bitsize="64"/>
-> +  <reg name="hpmcounter8" bitsize="64"/>
-> +  <reg name="hpmcounter9" bitsize="64"/>
-> +  <reg name="hpmcounter10" bitsize="64"/>
-> +  <reg name="hpmcounter11" bitsize="64"/>
-> +  <reg name="hpmcounter12" bitsize="64"/>
-> +  <reg name="hpmcounter13" bitsize="64"/>
-> +  <reg name="hpmcounter14" bitsize="64"/>
-> +  <reg name="hpmcounter15" bitsize="64"/>
-> +  <reg name="hpmcounter16" bitsize="64"/>
-> +  <reg name="hpmcounter17" bitsize="64"/>
-> +  <reg name="hpmcounter18" bitsize="64"/>
-> +  <reg name="hpmcounter19" bitsize="64"/>
-> +  <reg name="hpmcounter20" bitsize="64"/>
-> +  <reg name="hpmcounter21" bitsize="64"/>
-> +  <reg name="hpmcounter22" bitsize="64"/>
-> +  <reg name="hpmcounter23" bitsize="64"/>
-> +  <reg name="hpmcounter24" bitsize="64"/>
-> +  <reg name="hpmcounter25" bitsize="64"/>
-> +  <reg name="hpmcounter26" bitsize="64"/>
-> +  <reg name="hpmcounter27" bitsize="64"/>
-> +  <reg name="hpmcounter28" bitsize="64"/>
-> +  <reg name="hpmcounter29" bitsize="64"/>
-> +  <reg name="hpmcounter30" bitsize="64"/>
-> +  <reg name="hpmcounter31" bitsize="64"/>
-> +  <reg name="cycleh" bitsize="64"/>
-> +  <reg name="timeh" bitsize="64"/>
-> +  <reg name="instreth" bitsize="64"/>
-> +  <reg name="hpmcounter3h" bitsize="64"/>
-> +  <reg name="hpmcounter4h" bitsize="64"/>
-> +  <reg name="hpmcounter5h" bitsize="64"/>
-> +  <reg name="hpmcounter6h" bitsize="64"/>
-> +  <reg name="hpmcounter7h" bitsize="64"/>
-> +  <reg name="hpmcounter8h" bitsize="64"/>
-> +  <reg name="hpmcounter9h" bitsize="64"/>
-> +  <reg name="hpmcounter10h" bitsize="64"/>
-> +  <reg name="hpmcounter11h" bitsize="64"/>
-> +  <reg name="hpmcounter12h" bitsize="64"/>
-> +  <reg name="hpmcounter13h" bitsize="64"/>
-> +  <reg name="hpmcounter14h" bitsize="64"/>
-> +  <reg name="hpmcounter15h" bitsize="64"/>
-> +  <reg name="hpmcounter16h" bitsize="64"/>
-> +  <reg name="hpmcounter17h" bitsize="64"/>
-> +  <reg name="hpmcounter18h" bitsize="64"/>
-> +  <reg name="hpmcounter19h" bitsize="64"/>
-> +  <reg name="hpmcounter20h" bitsize="64"/>
-> +  <reg name="hpmcounter21h" bitsize="64"/>
-> +  <reg name="hpmcounter22h" bitsize="64"/>
-> +  <reg name="hpmcounter23h" bitsize="64"/>
-> +  <reg name="hpmcounter24h" bitsize="64"/>
-> +  <reg name="hpmcounter25h" bitsize="64"/>
-> +  <reg name="hpmcounter26h" bitsize="64"/>
-> +  <reg name="hpmcounter27h" bitsize="64"/>
-> +  <reg name="hpmcounter28h" bitsize="64"/>
-> +  <reg name="hpmcounter29h" bitsize="64"/>
-> +  <reg name="hpmcounter30h" bitsize="64"/>
-> +  <reg name="hpmcounter31h" bitsize="64"/>
-> +  <reg name="sstatus" bitsize="64"/>
-> +  <reg name="sedeleg" bitsize="64"/>
-> +  <reg name="sideleg" bitsize="64"/>
-> +  <reg name="sie" bitsize="64"/>
-> +  <reg name="stvec" bitsize="64"/>
-> +  <reg name="scounteren" bitsize="64"/>
-> +  <reg name="sscratch" bitsize="64"/>
-> +  <reg name="sepc" bitsize="64"/>
-> +  <reg name="scause" bitsize="64"/>
-> +  <reg name="stval" bitsize="64"/>
-> +  <reg name="sip" bitsize="64"/>
-> +  <reg name="satp" bitsize="64"/>
-> +  <reg name="mvendorid" bitsize="64"/>
-> +  <reg name="marchid" bitsize="64"/>
-> +  <reg name="mimpid" bitsize="64"/>
-> +  <reg name="mhartid" bitsize="64"/>
-> +  <reg name="mstatus" bitsize="64"/>
-> +  <reg name="misa" bitsize="64"/>
-> +  <reg name="medeleg" bitsize="64"/>
-> +  <reg name="mideleg" bitsize="64"/>
-> +  <reg name="mie" bitsize="64"/>
-> +  <reg name="mtvec" bitsize="64"/>
-> +  <reg name="mcounteren" bitsize="64"/>
-> +  <reg name="mscratch" bitsize="64"/>
-> +  <reg name="mepc" bitsize="64"/>
-> +  <reg name="mcause" bitsize="64"/>
-> +  <reg name="mtval" bitsize="64"/>
-> +  <reg name="mip" bitsize="64"/>
-> +  <reg name="pmpcfg0" bitsize="64"/>
-> +  <reg name="pmpcfg1" bitsize="64"/>
-> +  <reg name="pmpcfg2" bitsize="64"/>
-> +  <reg name="pmpcfg3" bitsize="64"/>
-> +  <reg name="pmpaddr0" bitsize="64"/>
-> +  <reg name="pmpaddr1" bitsize="64"/>
-> +  <reg name="pmpaddr2" bitsize="64"/>
-> +  <reg name="pmpaddr3" bitsize="64"/>
-> +  <reg name="pmpaddr4" bitsize="64"/>
-> +  <reg name="pmpaddr5" bitsize="64"/>
-> +  <reg name="pmpaddr6" bitsize="64"/>
-> +  <reg name="pmpaddr7" bitsize="64"/>
-> +  <reg name="pmpaddr8" bitsize="64"/>
-> +  <reg name="pmpaddr9" bitsize="64"/>
-> +  <reg name="pmpaddr10" bitsize="64"/>
-> +  <reg name="pmpaddr11" bitsize="64"/>
-> +  <reg name="pmpaddr12" bitsize="64"/>
-> +  <reg name="pmpaddr13" bitsize="64"/>
-> +  <reg name="pmpaddr14" bitsize="64"/>
-> +  <reg name="pmpaddr15" bitsize="64"/>
-> +  <reg name="mcycle" bitsize="64"/>
-> +  <reg name="minstret" bitsize="64"/>
-> +  <reg name="mhpmcounter3" bitsize="64"/>
-> +  <reg name="mhpmcounter4" bitsize="64"/>
-> +  <reg name="mhpmcounter5" bitsize="64"/>
-> +  <reg name="mhpmcounter6" bitsize="64"/>
-> +  <reg name="mhpmcounter7" bitsize="64"/>
-> +  <reg name="mhpmcounter8" bitsize="64"/>
-> +  <reg name="mhpmcounter9" bitsize="64"/>
-> +  <reg name="mhpmcounter10" bitsize="64"/>
-> +  <reg name="mhpmcounter11" bitsize="64"/>
-> +  <reg name="mhpmcounter12" bitsize="64"/>
-> +  <reg name="mhpmcounter13" bitsize="64"/>
-> +  <reg name="mhpmcounter14" bitsize="64"/>
-> +  <reg name="mhpmcounter15" bitsize="64"/>
-> +  <reg name="mhpmcounter16" bitsize="64"/>
-> +  <reg name="mhpmcounter17" bitsize="64"/>
-> +  <reg name="mhpmcounter18" bitsize="64"/>
-> +  <reg name="mhpmcounter19" bitsize="64"/>
-> +  <reg name="mhpmcounter20" bitsize="64"/>
-> +  <reg name="mhpmcounter21" bitsize="64"/>
-> +  <reg name="mhpmcounter22" bitsize="64"/>
-> +  <reg name="mhpmcounter23" bitsize="64"/>
-> +  <reg name="mhpmcounter24" bitsize="64"/>
-> +  <reg name="mhpmcounter25" bitsize="64"/>
-> +  <reg name="mhpmcounter26" bitsize="64"/>
-> +  <reg name="mhpmcounter27" bitsize="64"/>
-> +  <reg name="mhpmcounter28" bitsize="64"/>
-> +  <reg name="mhpmcounter29" bitsize="64"/>
-> +  <reg name="mhpmcounter30" bitsize="64"/>
-> +  <reg name="mhpmcounter31" bitsize="64"/>
-> +  <reg name="mcycleh" bitsize="64"/>
-> +  <reg name="minstreth" bitsize="64"/>
-> +  <reg name="mhpmcounter3h" bitsize="64"/>
-> +  <reg name="mhpmcounter4h" bitsize="64"/>
-> +  <reg name="mhpmcounter5h" bitsize="64"/>
-> +  <reg name="mhpmcounter6h" bitsize="64"/>
-> +  <reg name="mhpmcounter7h" bitsize="64"/>
-> +  <reg name="mhpmcounter8h" bitsize="64"/>
-> +  <reg name="mhpmcounter9h" bitsize="64"/>
-> +  <reg name="mhpmcounter10h" bitsize="64"/>
-> +  <reg name="mhpmcounter11h" bitsize="64"/>
-> +  <reg name="mhpmcounter12h" bitsize="64"/>
-> +  <reg name="mhpmcounter13h" bitsize="64"/>
-> +  <reg name="mhpmcounter14h" bitsize="64"/>
-> +  <reg name="mhpmcounter15h" bitsize="64"/>
-> +  <reg name="mhpmcounter16h" bitsize="64"/>
-> +  <reg name="mhpmcounter17h" bitsize="64"/>
-> +  <reg name="mhpmcounter18h" bitsize="64"/>
-> +  <reg name="mhpmcounter19h" bitsize="64"/>
-> +  <reg name="mhpmcounter20h" bitsize="64"/>
-> +  <reg name="mhpmcounter21h" bitsize="64"/>
-> +  <reg name="mhpmcounter22h" bitsize="64"/>
-> +  <reg name="mhpmcounter23h" bitsize="64"/>
-> +  <reg name="mhpmcounter24h" bitsize="64"/>
-> +  <reg name="mhpmcounter25h" bitsize="64"/>
-> +  <reg name="mhpmcounter26h" bitsize="64"/>
-> +  <reg name="mhpmcounter27h" bitsize="64"/>
-> +  <reg name="mhpmcounter28h" bitsize="64"/>
-> +  <reg name="mhpmcounter29h" bitsize="64"/>
-> +  <reg name="mhpmcounter30h" bitsize="64"/>
-> +  <reg name="mhpmcounter31h" bitsize="64"/>
-> +  <reg name="mhpmevent3" bitsize="64"/>
-> +  <reg name="mhpmevent4" bitsize="64"/>
-> +  <reg name="mhpmevent5" bitsize="64"/>
-> +  <reg name="mhpmevent6" bitsize="64"/>
-> +  <reg name="mhpmevent7" bitsize="64"/>
-> +  <reg name="mhpmevent8" bitsize="64"/>
-> +  <reg name="mhpmevent9" bitsize="64"/>
-> +  <reg name="mhpmevent10" bitsize="64"/>
-> +  <reg name="mhpmevent11" bitsize="64"/>
-> +  <reg name="mhpmevent12" bitsize="64"/>
-> +  <reg name="mhpmevent13" bitsize="64"/>
-> +  <reg name="mhpmevent14" bitsize="64"/>
-> +  <reg name="mhpmevent15" bitsize="64"/>
-> +  <reg name="mhpmevent16" bitsize="64"/>
-> +  <reg name="mhpmevent17" bitsize="64"/>
-> +  <reg name="mhpmevent18" bitsize="64"/>
-> +  <reg name="mhpmevent19" bitsize="64"/>
-> +  <reg name="mhpmevent20" bitsize="64"/>
-> +  <reg name="mhpmevent21" bitsize="64"/>
-> +  <reg name="mhpmevent22" bitsize="64"/>
-> +  <reg name="mhpmevent23" bitsize="64"/>
-> +  <reg name="mhpmevent24" bitsize="64"/>
-> +  <reg name="mhpmevent25" bitsize="64"/>
-> +  <reg name="mhpmevent26" bitsize="64"/>
-> +  <reg name="mhpmevent27" bitsize="64"/>
-> +  <reg name="mhpmevent28" bitsize="64"/>
-> +  <reg name="mhpmevent29" bitsize="64"/>
-> +  <reg name="mhpmevent30" bitsize="64"/>
-> +  <reg name="mhpmevent31" bitsize="64"/>
-> +  <reg name="tselect" bitsize="64"/>
-> +  <reg name="tdata1" bitsize="64"/>
-> +  <reg name="tdata2" bitsize="64"/>
-> +  <reg name="tdata3" bitsize="64"/>
-> +  <reg name="dcsr" bitsize="64"/>
-> +  <reg name="dpc" bitsize="64"/>
-> +  <reg name="dscratch" bitsize="64"/>
-> +  <reg name="hstatus" bitsize="64"/>
-> +  <reg name="hedeleg" bitsize="64"/>
-> +  <reg name="hideleg" bitsize="64"/>
-> +  <reg name="hie" bitsize="64"/>
-> +  <reg name="htvec" bitsize="64"/>
-> +  <reg name="hscratch" bitsize="64"/>
-> +  <reg name="hepc" bitsize="64"/>
-> +  <reg name="hcause" bitsize="64"/>
-> +  <reg name="hbadaddr" bitsize="64"/>
-> +  <reg name="hip" bitsize="64"/>
-> +  <reg name="mbase" bitsize="64"/>
-> +  <reg name="mbound" bitsize="64"/>
-> +  <reg name="mibase" bitsize="64"/>
-> +  <reg name="mibound" bitsize="64"/>
-> +  <reg name="mdbase" bitsize="64"/>
-> +  <reg name="mdbound" bitsize="64"/>
-> +  <reg name="mucounteren" bitsize="64"/>
-> +  <reg name="mscounteren" bitsize="64"/>
-> +  <reg name="mhcounteren" bitsize="64"/>
-> +</feature>
-> diff --git a/gdb-xml/riscv-64bit-fpu.xml b/gdb-xml/riscv-64bit-fpu.xml
-> new file mode 100644
-> index 0000000..fb24b72
-> --- /dev/null
-> +++ b/gdb-xml/riscv-64bit-fpu.xml
-> @@ -0,0 +1,52 @@
-> +<?xml version="1.0"?>
-> +<!-- Copyright (C) 2018 Free Software Foundation, Inc.
+> +static bool trans_beq(DisasContext *ctx, arg_beq *a)
+> +{
+> +    gen_branch(ctx->env, ctx, OPC_RISC_BEQ, a->rs1, a->rs2, a->imm);
+> +    return true;
+> +}
 > +
-> +     Copying and distribution of this file, with or without modification,
-> +     are permitted in any medium without royalty provided the copyright
-> +     notice and this notice are preserved.  -->
+> +static bool trans_bne(DisasContext *ctx, arg_bne *a)
+> +{
+> +    gen_branch(ctx->env, ctx, OPC_RISC_BNE, a->rs1, a->rs2, a->imm);
+> +    return true;
+> +}
 > +
-> +<!DOCTYPE feature SYSTEM "gdb-target.dtd">
-> +<feature name="org.gnu.gdb.riscv.fpu">
+> +static bool trans_blt(DisasContext *ctx, arg_blt *a)
+> +{
+> +    gen_branch(ctx->env, ctx, OPC_RISC_BLT, a->rs1, a->rs2, a->imm);
+> +    return true;
+> +}
 > +
-> +  <union id="riscv_double">
-> +    <field name="float" type="ieee_single"/>
-> +    <field name="double" type="ieee_double"/>
-> +  </union>
+> +static bool trans_bge(DisasContext *ctx, arg_bge *a)
+> +{
+> +    gen_branch(ctx->env, ctx, OPC_RISC_BGE, a->rs1, a->rs2, a->imm);
+> +    return true;
+> +}
 > +
-> +  <reg name="ft0" bitsize="64" type="riscv_double"/>
-> +  <reg name="ft1" bitsize="64" type="riscv_double"/>
-> +  <reg name="ft2" bitsize="64" type="riscv_double"/>
-> +  <reg name="ft3" bitsize="64" type="riscv_double"/>
-> +  <reg name="ft4" bitsize="64" type="riscv_double"/>
-> +  <reg name="ft5" bitsize="64" type="riscv_double"/>
-> +  <reg name="ft6" bitsize="64" type="riscv_double"/>
-> +  <reg name="ft7" bitsize="64" type="riscv_double"/>
-> +  <reg name="fs0" bitsize="64" type="riscv_double"/>
-> +  <reg name="fs1" bitsize="64" type="riscv_double"/>
-> +  <reg name="fa0" bitsize="64" type="riscv_double"/>
-> +  <reg name="fa1" bitsize="64" type="riscv_double"/>
-> +  <reg name="fa2" bitsize="64" type="riscv_double"/>
-> +  <reg name="fa3" bitsize="64" type="riscv_double"/>
-> +  <reg name="fa4" bitsize="64" type="riscv_double"/>
-> +  <reg name="fa5" bitsize="64" type="riscv_double"/>
-> +  <reg name="fa6" bitsize="64" type="riscv_double"/>
-> +  <reg name="fa7" bitsize="64" type="riscv_double"/>
-> +  <reg name="fs2" bitsize="64" type="riscv_double"/>
-> +  <reg name="fs3" bitsize="64" type="riscv_double"/>
-> +  <reg name="fs4" bitsize="64" type="riscv_double"/>
-> +  <reg name="fs5" bitsize="64" type="riscv_double"/>
-> +  <reg name="fs6" bitsize="64" type="riscv_double"/>
-> +  <reg name="fs7" bitsize="64" type="riscv_double"/>
-> +  <reg name="fs8" bitsize="64" type="riscv_double"/>
-> +  <reg name="fs9" bitsize="64" type="riscv_double"/>
-> +  <reg name="fs10" bitsize="64" type="riscv_double"/>
-> +  <reg name="fs11" bitsize="64" type="riscv_double"/>
-> +  <reg name="ft8" bitsize="64" type="riscv_double"/>
-> +  <reg name="ft9" bitsize="64" type="riscv_double"/>
-> +  <reg name="ft10" bitsize="64" type="riscv_double"/>
-> +  <reg name="ft11" bitsize="64" type="riscv_double"/>
+> +static bool trans_bltu(DisasContext *ctx, arg_bltu *a)
+> +{
+> +    gen_branch(ctx->env, ctx, OPC_RISC_BLTU, a->rs1, a->rs2, a->imm);
+> +    return true;
+> +}
 > +
-> +  <reg name="fflags" bitsize="32" type="int"/>
-> +  <reg name="frm" bitsize="32" type="int"/>
-> +  <reg name="fcsr" bitsize="32" type="int"/>
-> +</feature>
+> +static bool trans_bgeu(DisasContext *ctx, arg_bgeu *a)
+> +{
+> +
+> +    gen_branch(ctx->env, ctx, OPC_RISC_BGEU, a->rs1, a->rs2, a->imm);
+> +    return true;
+> +}
+> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+> index 99829a600d..b81297f23e 100644
+> --- a/target/riscv/translate.c
+> +++ b/target/riscv/translate.c
+> @@ -1682,6 +1682,7 @@ static void decode_RV32_64C(CPURISCVState *env, DisasContext *ctx)
+>      {                                         \
+>          return imm << amount;                 \
+>      }
+> +EX_SH(1)
+>  EX_SH(12)
+>
+>  bool decode_insn32(DisasContext *ctx, uint32_t insn);
+> @@ -1710,17 +1711,6 @@ static void decode_RV32_64G(CPURISCVState *env, DisasContext *ctx)
+>      imm = GET_IMM(ctx->opcode);
+>
+>      switch (op) {
+> -    case OPC_RISC_JAL:
+> -        imm = GET_JAL_IMM(ctx->opcode);
+> -        gen_jal(env, ctx, rd, imm);
+> -        break;
+> -    case OPC_RISC_JALR:
+> -        gen_jalr(env, ctx, MASK_OP_JALR(ctx->opcode), rd, rs1, imm);
+> -        break;
+> -    case OPC_RISC_BRANCH:
+> -        gen_branch(env, ctx, MASK_OP_BRANCH(ctx->opcode), rs1, rs2,
+> -                   GET_B_IMM(ctx->opcode));
+> -        break;
+>      case OPC_RISC_LOAD:
+>          gen_load(ctx, MASK_OP_LOAD(ctx->opcode), rd, rs1, imm);
+>          break;
 > --
-> 2.7.4
+> 2.20.1
 >
 >
 
