@@ -1,30 +1,30 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1glsVV-0006Qh-HE
+	id 1glsVV-0006R7-ND
 	for mharc-qemu-riscv@gnu.org; Tue, 22 Jan 2019 04:38:09 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:58945)
+Received: from eggs.gnu.org ([209.51.188.92]:59267)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <kbastian@mail.uni-paderborn.de>) id 1glsVP-00068S-Hy
+	(envelope-from <kbastian@mail.uni-paderborn.de>) id 1glsVP-0006Ht-FH
 	for qemu-riscv@nongnu.org; Tue, 22 Jan 2019 04:38:08 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <kbastian@mail.uni-paderborn.de>) id 1glsOV-0005zE-Fw
+	(envelope-from <kbastian@mail.uni-paderborn.de>) id 1glsOW-0005zx-7y
 	for qemu-riscv@nongnu.org; Tue, 22 Jan 2019 04:30:56 -0500
-Received: from mail.uni-paderborn.de ([131.234.142.9]:55100)
+Received: from mail.uni-paderborn.de ([131.234.142.9]:60962)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.71) (envelope-from <kbastian@mail.uni-paderborn.de>)
-	id 1glsOV-0005a4-4v; Tue, 22 Jan 2019 04:30:55 -0500
-Received: from tweenies.uni-paderborn.de ([131.234.189.21]
+	id 1glsOV-0005Ti-5b; Tue, 22 Jan 2019 04:30:55 -0500
+Received: from wormulon.uni-paderborn.de ([131.234.189.22]
 	helo=localhost.localdomain)
-	by mail.uni-paderborn.de with esmtp (Exim 4.89 telepax)
-	id 1glsO8-0001v3-55; Tue, 22 Jan 2019 10:30:32 +0100
-Received: from mail.uni-paderborn.de by tweenies with queue id 3069629-4;
-	Tue, 22 Jan 2019 09:30:31 GMT
+	by mail.uni-paderborn.de with esmtp (Exim 4.89 amazonia)
+	id 1glsO1-0006EA-8q; Tue, 22 Jan 2019 10:30:25 +0100
+Received: from mail.uni-paderborn.de by wormulon with queue id 3100917-5;
+	Tue, 22 Jan 2019 09:30:24 GMT
 X-Envelope-From: <kbastian@mail.uni-paderborn.de>
 From: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
 To: sagark@eecs.berkeley.edu, palmer@sifive.com, kbastian@mail.uni-paderborn.de
 Cc: richard.henderson@linaro.org, peer.adelt@hni.uni-paderborn.de,
 	qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Date: Tue, 22 Jan 2019 10:29:09 +0100
-Message-Id: <20190122092909.5341-36-kbastian@mail.uni-paderborn.de>
+Date: Tue, 22 Jan 2019 10:29:04 +0100
+Message-Id: <20190122092909.5341-31-kbastian@mail.uni-paderborn.de>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20190122092909.5341-1-kbastian@mail.uni-paderborn.de>
 References: <20190122092909.5341-1-kbastian@mail.uni-paderborn.de>
@@ -38,8 +38,7 @@ X-IMT-Authenticated-Sender:
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
 X-Received-From: 131.234.142.9
-Subject: [Qemu-riscv] [PATCH v5 35/35] target/riscv: Remaining rvc insn
- reuse 32 bit translators
+Subject: [Qemu-riscv] [PATCH v5 30/35] target/riscv: Remove decode_RV32_64G()
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -53,169 +52,57 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Tue, 22 Jan 2019 09:38:08 -0000
 
-only one translate functions of rvc needs to handle special cases. For
-the other rvc insns we can remove the extra layer of indirection.
+decodetree handles all instructions now so the fallback is not necessary
+anymore.
 
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Signed-off-by: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+Signed-off-by: Peer Adelt <peer.adelt@hni.uni-paderborn.de>
 ---
- target/riscv/insn16.decode              | 37 +++++++++----------
- target/riscv/insn_trans/trans_rvc.inc.c | 48 -------------------------
- 2 files changed, 17 insertions(+), 68 deletions(-)
+ target/riscv/translate.c | 23 +----------------------
+ 1 file changed, 1 insertion(+), 22 deletions(-)
 
-diff --git a/target/riscv/insn16.decode b/target/riscv/insn16.decode
-index 98dd672c7f..d88a0c78ab 100644
---- a/target/riscv/insn16.decode
-+++ b/target/riscv/insn16.decode
-@@ -46,19 +46,15 @@
- &i         imm rs1 rd   !extern
- &s         imm rs1 rs2  !extern
- &j         imm rd       !extern
-+&b         imm rs2 rs1  !extern
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index 0e37beb68e..b0251b3518 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -600,26 +600,6 @@ bool decode_insn16(DisasContext *ctx, uint16_t insn);
+ #include "decode_insn16.inc.c"
+ #include "insn_trans/trans_rvc.inc.c"
  
- # Argument sets:
- &ci        imm        rd
- &ciw       nzuimm     rd
- &cs_dw     uimm   rs1 rs2
--&cb        imm    rs1
- &cr               rd  rs2
--&c_j       imm
- &c_shift   shamt      rd
- 
--&c_ld      uimm  rd
--&c_sd      uimm  rs2
--
- &c_addi16sp_lui  imm_lui imm_addi16sp rd
- 
- # Formats 16:
-@@ -70,20 +66,21 @@
- @cs_2      ... ... ... .. ... .. &r      rd=%rs1_3 rs1=%rs1_3 rs2=%rs2_3
- @cs_d      ... ... ... .. ... .. &s  imm=%uimm_cl_d  rs1=%rs1_3  rs2=%rs2_3
- @cs_w      ... ... ... .. ... .. &s  imm=%uimm_cl_w  rs1=%rs1_3  rs2=%rs2_3
--@cb        ... ... ... .. ... .. &cb     imm=%imm_cb      rs1=%rs1_3
--@cj        ...    ........... .. &c_j    imm=%imm_cj
-+@cb        ... ... ... .. ... .. &b  imm=%imm_cb  rs1=%rs1_3 rs2=0
-+@cj        ...    ........... .. &j  imm=%imm_cj rd=0
- 
--@c_ld      ... . .....  ..... .. &c_ld     uimm=%uimm_6bit_ld  %rd
--@c_lw      ... . .....  ..... .. &c_ld     uimm=%uimm_6bit_lw  %rd
--@c_sd      ... . .....  ..... .. &c_sd     uimm=%uimm_6bit_sd  rs2=%rs2_5
--@c_sw      ... . .....  ..... .. &c_sd     uimm=%uimm_6bit_sw  rs2=%rs2_5
-+@c_ld      ... . .....  ..... .. &i  imm=%uimm_6bit_ld  %rd rs1=2
-+@c_lw      ... . .....  ..... .. &i  imm=%uimm_6bit_lw  %rd rs1=2
-+@c_sd      ... . .....  ..... .. &s  imm=%uimm_6bit_sd  rs1=2 rs2=%rs2_5
-+@c_sw      ... . .....  ..... .. &s  imm=%uimm_6bit_sw  rs1=2 rs2=%rs2_5
- 
- @c_addi16sp_lui ... .  ..... ..... .. &c_addi16sp_lui %imm_lui %imm_addi16sp %rd
- 
- @c_shift        ... . .. ... ..... .. &c_shift rd=%rs1_3 shamt=%nzuimm_6bit
- @c_shift2       ... . .. ... ..... .. &c_shift rd=%rd    shamt=%nzuimm_6bit
- 
--@c_andi         ... . .. ... ..... .. &ci imm=%imm_ci rd=%rs1_3
-+@c_andi         ... . .. ... ..... .. &i imm=%imm_ci rd=%rs1_3 rs1=%rs1_3
-+
- 
- # *** RV64C Standard Extension (Quadrant 0) ***
- c_addi4spn        000    ........ ... 00 @ciw
-@@ -98,20 +95,20 @@ c_li              010 .  .....  ..... 01 @ci
- c_addi16sp_lui    011 .  .....  ..... 01 @c_addi16sp_lui # shares opc with C.LUI
- c_srli            100 . 00 ...  ..... 01 @c_shift
- c_srai            100 . 01 ...  ..... 01 @c_shift
--c_andi            100 . 10 ...  ..... 01 @c_andi
-+andi              100 . 10 ...  ..... 01 @c_andi
- sub               100 0 11 ... 00 ... 01 @cs_2
- xor               100 0 11 ... 01 ... 01 @cs_2
- or                100 0 11 ... 10 ... 01 @cs_2
- and               100 0 11 ... 11 ... 01 @cs_2
--c_j               101     ........... 01 @cj
--c_beqz            110  ... ...  ..... 01 @cb
--c_bnez            111  ... ...  ..... 01 @cb
-+jal               101     ........... 01 @cj # c_j
-+beq               110  ... ...  ..... 01 @cb # c_beqz
-+bne               111  ... ...  ..... 01 @cb # c_bnez
- 
- # *** RV64C Standard Extension (Quadrant 2) ***
- c_slli            000 .  .....  ..... 10 @c_shift2
--c_fldsp           001 .  .....  ..... 10 @c_ld
--c_lwsp            010 .  .....  ..... 10 @c_lw
-+fld               001 .  .....  ..... 10 @c_ld # fldsp
-+lw                010 .  .....  ..... 10 @c_lw # lwsp
- c_jr_mv           100 0  .....  ..... 10 @cr
- c_ebreak_jalr_add 100 1  .....  ..... 10 @cr
--c_fsdsp           101   ......  ..... 10 @c_sd
--c_swsp            110 .  .....  ..... 10 @c_sw
-+fsd               101   ......  ..... 10 @c_sd # fsdsp
-+sw                110 .  .....  ..... 10 @c_sw # swsp
-diff --git a/target/riscv/insn_trans/trans_rvc.inc.c b/target/riscv/insn_trans/trans_rvc.inc.c
-index db9119ec9b..631e72c8b5 100644
---- a/target/riscv/insn_trans/trans_rvc.inc.c
-+++ b/target/riscv/insn_trans/trans_rvc.inc.c
-@@ -98,30 +98,6 @@ static bool trans_c_srai(DisasContext *ctx, arg_c_srai *a)
-     return trans_srai(ctx, &arg);
- }
- 
--static bool trans_c_andi(DisasContext *ctx, arg_c_andi *a)
+-static void decode_RV32_64G(CPURISCVState *env, DisasContext *ctx)
 -{
--    arg_andi arg = { .rd = a->rd, .rs1 = a->rd, .imm = a->imm };
--    return trans_andi(ctx, &arg);
+-    uint32_t op;
+-
+-    /* We do not do misaligned address check here: the address should never be
+-     * misaligned at this point. Instructions that set PC must do the check,
+-     * since epc must be the address of the instruction that caused us to
+-     * perform the misaligned instruction fetch */
+-
+-    op = MASK_OP_MAJOR(ctx->opcode);
+-
+-    switch (op) {
+-    case OPC_RISC_SYSTEM:
+-        break;
+-    default:
+-        gen_exception_illegal(ctx);
+-        break;
+-    }
 -}
 -
--static bool trans_c_j(DisasContext *ctx, arg_c_j *a)
--{
--    arg_jal arg = { .rd = 0, .imm = a->imm };
--    return trans_jal(ctx, &arg);
--}
--
--static bool trans_c_beqz(DisasContext *ctx, arg_c_beqz *a)
--{
--    arg_beq arg = { .rs1 = a->rs1, .rs2 = 0, .imm = a->imm };
--    return trans_beq(ctx, &arg);
--}
--
--static bool trans_c_bnez(DisasContext *ctx, arg_c_bnez *a)
--{
--    arg_bne arg = { .rs1 = a->rs1, .rs2 = 0, .imm = a->imm };
--    return trans_bne(ctx, &arg);
--}
--
- static bool trans_c_slli(DisasContext *ctx, arg_c_slli *a)
+ static void decode_opc(DisasContext *ctx)
  {
-     int shamt = a->shamt;
-@@ -138,18 +114,6 @@ static bool trans_c_slli(DisasContext *ctx, arg_c_slli *a)
-     return trans_slli(ctx, &arg);
- }
- 
--static bool trans_c_fldsp(DisasContext *ctx, arg_c_fldsp *a)
--{
--    arg_fld arg = { .rd = a->rd, .rs1 = 2, .imm = a->uimm };
--    return trans_fld(ctx, &arg);
--}
--
--static bool trans_c_lwsp(DisasContext *ctx, arg_c_lwsp *a)
--{
--    arg_lw arg = { .rd = a->rd, .rs1 = 2, .imm = a->uimm };
--    return trans_lw(ctx, &arg);
--}
--
- static bool trans_c_jr_mv(DisasContext *ctx, arg_c_jr_mv *a)
- {
-     if (a->rd != 0 && a->rs2 == 0) {
-@@ -183,15 +147,3 @@ static bool trans_c_ebreak_jalr_add(DisasContext *ctx, arg_c_ebreak_jalr_add *a)
+     /* check for compressed insn */
+@@ -636,8 +616,7 @@ static void decode_opc(DisasContext *ctx)
+     } else {
+         ctx->pc_succ_insn = ctx->base.pc_next + 4;
+         if (!decode_insn32(ctx, ctx->opcode)) {
+-            /* fallback to old decoder */
+-            decode_RV32_64G(ctx->env, ctx);
++            gen_exception_illegal(ctx);
+         }
      }
-     return false;
  }
--
--static bool trans_c_fsdsp(DisasContext *ctx, arg_c_fsdsp *a)
--{
--    arg_fsd arg = { .rs1 = 2, .rs2 = a->rs2, .imm = a->uimm };
--    return trans_fsd(ctx, &arg);
--}
--
--static bool trans_c_swsp(DisasContext *ctx, arg_c_swsp *a)
--{
--    arg_sw arg = { .rs1 = 2, .rs2 = a->rs2, .imm = a->uimm };
--    return trans_sw(ctx, &arg);
--}
 -- 
 2.20.1
 
