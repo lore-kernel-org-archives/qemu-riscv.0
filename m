@@ -1,31 +1,30 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1glsVu-0006rz-Pb
-	for mharc-qemu-riscv@gnu.org; Tue, 22 Jan 2019 04:38:34 -0500
+	id 1glsVu-0006sF-W7
+	for mharc-qemu-riscv@gnu.org; Tue, 22 Jan 2019 04:38:35 -0500
 Received: from eggs.gnu.org ([209.51.188.92]:59386)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <kbastian@mail.uni-paderborn.de>) id 1glsVZ-0006Mz-1T
-	for qemu-riscv@nongnu.org; Tue, 22 Jan 2019 04:38:15 -0500
+	(envelope-from <kbastian@mail.uni-paderborn.de>) id 1glsVc-0006Mz-3n
+	for qemu-riscv@nongnu.org; Tue, 22 Jan 2019 04:38:17 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <kbastian@mail.uni-paderborn.de>) id 1glsON-0005hR-M3
-	for qemu-riscv@nongnu.org; Tue, 22 Jan 2019 04:30:48 -0500
-Received: from mail.uni-paderborn.de ([131.234.142.9]:60784)
+	(envelope-from <kbastian@mail.uni-paderborn.de>) id 1glsOA-0005aJ-8R
+	for qemu-riscv@nongnu.org; Tue, 22 Jan 2019 04:30:36 -0500
+Received: from mail.uni-paderborn.de ([131.234.142.9]:60880)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.71) (envelope-from <kbastian@mail.uni-paderborn.de>)
-	id 1glsON-0005NZ-Fg; Tue, 22 Jan 2019 04:30:47 -0500
-Received: from tweenies.uni-paderborn.de ([131.234.189.21]
+	id 1glsO4-0005JJ-0Z; Tue, 22 Jan 2019 04:30:29 -0500
+Received: from wormulon.uni-paderborn.de ([131.234.189.22]
 	helo=localhost.localdomain)
-	by mail.uni-paderborn.de with esmtp (Exim 4.89 nylar)
-	id 1glsNn-0003Ie-Mt; Tue, 22 Jan 2019 10:30:11 +0100
-Received: from mail.uni-paderborn.de by tweenies with queue id 3069626-4;
-	Tue, 22 Jan 2019 09:30:09 GMT
+	by mail.uni-paderborn.de with esmtp (Exim 4.89 amazonia)
+	id 1glsNh-0006Ch-7C; Tue, 22 Jan 2019 10:30:05 +0100
+Received: from mail.uni-paderborn.de by wormulon with queue id 3100913-5;
+	Tue, 22 Jan 2019 09:30:03 GMT
 X-Envelope-From: <kbastian@mail.uni-paderborn.de>
 From: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
 To: sagark@eecs.berkeley.edu, palmer@sifive.com, kbastian@mail.uni-paderborn.de
 Cc: richard.henderson@linaro.org, peer.adelt@hni.uni-paderborn.de,
-	qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
-	Alistair Francis <alistair.francis@wdc.com>
-Date: Tue, 22 Jan 2019 10:28:54 +0100
-Message-Id: <20190122092909.5341-21-kbastian@mail.uni-paderborn.de>
+	qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Date: Tue, 22 Jan 2019 10:28:50 +0100
+Message-Id: <20190122092909.5341-17-kbastian@mail.uni-paderborn.de>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20190122092909.5341-1-kbastian@mail.uni-paderborn.de>
 References: <20190122092909.5341-1-kbastian@mail.uni-paderborn.de>
@@ -39,7 +38,8 @@ X-IMT-Authenticated-Sender:
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
 X-Received-From: 131.234.142.9
-Subject: [Qemu-riscv] [PATCH v5 20/35] target/riscv: Remove gen_jalr()
+Subject: [Qemu-riscv] [PATCH v5 16/35] target/riscv: Convert RV priv insns
+ to decodetree
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -51,106 +51,249 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Jan 2019 09:38:16 -0000
+X-List-Received-Date: Tue, 22 Jan 2019 09:38:17 -0000
 
-trans_jalr() is the only caller, so move the code into trans_jalr().
-
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Signed-off-by: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
 Signed-off-by: Peer Adelt <peer.adelt@hni.uni-paderborn.de>
 ---
- target/riscv/insn_trans/trans_rvi.inc.c | 28 +++++++++++++++++-
- target/riscv/translate.c                | 38 -------------------------
- 2 files changed, 27 insertions(+), 39 deletions(-)
+ target/riscv/insn32.decode                    |  15 +++
+ .../riscv/insn_trans/trans_privileged.inc.c   | 110 ++++++++++++++++++
+ target/riscv/translate.c                      |  57 +--------
+ 3 files changed, 126 insertions(+), 56 deletions(-)
+ create mode 100644 target/riscv/insn_trans/trans_privileged.inc.c
 
-diff --git a/target/riscv/insn_trans/trans_rvi.inc.c b/target/riscv/insn_trans/trans_rvi.inc.c
-index b0f35cef14..3b3aff4803 100644
---- a/target/riscv/insn_trans/trans_rvi.inc.c
-+++ b/target/riscv/insn_trans/trans_rvi.inc.c
-@@ -42,7 +42,33 @@ static bool trans_jal(DisasContext *ctx, arg_jal *a)
+diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+index e64b2b5e34..ecc46a50cc 100644
+--- a/target/riscv/insn32.decode
++++ b/target/riscv/insn32.decode
+@@ -57,6 +57,21 @@
+ @r2_rm   .......   ..... ..... ... ..... ....... %rs1 %rm %rd
+ @r2      .......   ..... ..... ... ..... ....... %rs1 %rd
  
- static bool trans_jalr(DisasContext *ctx, arg_jalr *a)
- {
--    gen_jalr(ctx->env, ctx, OPC_RISC_JALR, a->rd, a->rs1, a->imm);
-+    /* no chaining with JALR */
-+    TCGLabel *misaligned = NULL;
-+    TCGv t0 = tcg_temp_new();
++@sfence_vma ....... ..... .....   ... ..... ....... %rs2 %rs1
++@sfence_vm  ....... ..... .....   ... ..... ....... %rs1
 +
 +
-+    gen_get_gpr(cpu_pc, a->rs1);
-+    tcg_gen_addi_tl(cpu_pc, cpu_pc, a->imm);
-+    tcg_gen_andi_tl(cpu_pc, cpu_pc, (target_ulong)-2);
++# *** Privileged Instructions ***
++ecall      000000000000     00000 000 00000 1110011
++ebreak     000000000001     00000 000 00000 1110011
++uret       0000000    00010 00000 000 00000 1110011
++sret       0001000    00010 00000 000 00000 1110011
++hret       0010000    00010 00000 000 00000 1110011
++mret       0011000    00010 00000 000 00000 1110011
++wfi        0001000    00101 00000 000 00000 1110011
++sfence_vma 0001001    ..... ..... 000 00000 1110011 @sfence_vma
++sfence_vm  0001000    00100 ..... 000 00000 1110011 @sfence_vm
 +
-+    if (!riscv_has_ext(ctx->env, RVC)) {
-+        misaligned = gen_new_label();
-+        tcg_gen_andi_tl(t0, cpu_pc, 0x2);
-+        tcg_gen_brcondi_tl(TCG_COND_NE, t0, 0x0, misaligned);
-+    }
+ # *** RV32I Base Instruction Set ***
+ lui      ....................       ..... 0110111 @u
+ auipc    ....................       ..... 0010111 @u
+diff --git a/target/riscv/insn_trans/trans_privileged.inc.c b/target/riscv/insn_trans/trans_privileged.inc.c
+new file mode 100644
+index 0000000000..fb2da8f5f0
+--- /dev/null
++++ b/target/riscv/insn_trans/trans_privileged.inc.c
+@@ -0,0 +1,110 @@
++/*
++ * RISC-V translation routines for the RISC-V privileged instructions.
++ *
++ * Copyright (c) 2016-2017 Sagar Karandikar, sagark@eecs.berkeley.edu
++ * Copyright (c) 2018 Peer Adelt, peer.adelt@hni.uni-paderborn.de
++ *                    Bastian Koppelmann, kbastian@mail.uni-paderborn.de
++ *
++ * This program is free software; you can redistribute it and/or modify it
++ * under the terms and conditions of the GNU General Public License,
++ * version 2 or later, as published by the Free Software Foundation.
++ *
++ * This program is distributed in the hope it will be useful, but WITHOUT
++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
++ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
++ * more details.
++ *
++ * You should have received a copy of the GNU General Public License along with
++ * this program.  If not, see <http://www.gnu.org/licenses/>.
++ */
 +
-+    if (a->rd != 0) {
-+        tcg_gen_movi_tl(cpu_gpr[a->rd], ctx->pc_succ_insn);
-+    }
-+    tcg_gen_lookup_and_goto_ptr();
-+
-+    if (misaligned) {
-+        gen_set_label(misaligned);
-+        gen_exception_inst_addr_mis(ctx);
-+    }
++static bool trans_ecall(DisasContext *ctx, arg_ecall *a)
++{
++    /* always generates U-level ECALL, fixed in do_interrupt handler */
++    generate_exception(ctx, RISCV_EXCP_U_ECALL);
++    tcg_gen_exit_tb(NULL, 0); /* no chaining */
 +    ctx->base.is_jmp = DISAS_NORETURN;
++    return true;
++}
 +
-+    tcg_temp_free(t0);
-     return true;
- }
- 
++static bool trans_ebreak(DisasContext *ctx, arg_ebreak *a)
++{
++    generate_exception(ctx, RISCV_EXCP_BREAKPOINT);
++    tcg_gen_exit_tb(NULL, 0); /* no chaining */
++    ctx->base.is_jmp = DISAS_NORETURN;
++    return true;
++}
++
++static bool trans_uret(DisasContext *ctx, arg_uret *a)
++{
++    return false;
++}
++
++static bool trans_sret(DisasContext *ctx, arg_sret *a)
++{
++#ifndef CONFIG_USER_ONLY
++    tcg_gen_movi_tl(cpu_pc, ctx->base.pc_next);
++
++    if (riscv_has_ext(ctx->env, RVS)) {
++        gen_helper_sret(cpu_pc, cpu_env, cpu_pc);
++        tcg_gen_exit_tb(NULL, 0); /* no chaining */
++        ctx->base.is_jmp = DISAS_NORETURN;
++    } else {
++        return false;
++    }
++    return true;
++#else
++    return false;
++#endif
++}
++
++static bool trans_hret(DisasContext *ctx, arg_hret *a)
++{
++    return false;
++}
++
++static bool trans_mret(DisasContext *ctx, arg_mret *a)
++{
++#ifndef CONFIG_USER_ONLY
++    tcg_gen_movi_tl(cpu_pc, ctx->base.pc_next);
++    gen_helper_mret(cpu_pc, cpu_env, cpu_pc);
++    tcg_gen_exit_tb(NULL, 0); /* no chaining */
++    ctx->base.is_jmp = DISAS_NORETURN;
++    return true;
++#else
++    return false;
++#endif
++}
++
++static bool trans_wfi(DisasContext *ctx, arg_wfi *a)
++{
++#ifndef CONFIG_USER_ONLY
++    tcg_gen_movi_tl(cpu_pc, ctx->pc_succ_insn);
++    gen_helper_wfi(cpu_env);
++    return true;
++#else
++    return false;
++#endif
++}
++
++static bool trans_sfence_vma(DisasContext *ctx, arg_sfence_vma *a)
++{
++#ifndef CONFIG_USER_ONLY
++    if (ctx->env->priv_ver == PRIV_VERSION_1_10_0) {
++        gen_helper_tlb_flush(cpu_env);
++        return true;
++    }
++#endif
++    return false;
++}
++
++static bool trans_sfence_vm(DisasContext *ctx, arg_sfence_vm *a)
++{
++#ifndef CONFIG_USER_ONLY
++    if (ctx->env->priv_ver <= PRIV_VERSION_1_09_1) {
++        gen_helper_tlb_flush(cpu_env);
++        return true;
++    }
++#endif
++    return false;
++}
 diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 53febc60b0..1f59b02c84 100644
+index 4dda78d7c1..ff15e0f7ed 100644
 --- a/target/riscv/translate.c
 +++ b/target/riscv/translate.c
-@@ -489,44 +489,6 @@ static void gen_jal(CPURISCVState *env, DisasContext *ctx, int rd,
-     ctx->base.is_jmp = DISAS_NORETURN;
+@@ -689,26 +689,8 @@ static void gen_set_rm(DisasContext *ctx, int rm)
+ static void gen_system(CPURISCVState *env, DisasContext *ctx, uint32_t opc,
+                       int rd, int rs1, int csr)
+ {
+-    TCGv source1, dest;
+-    source1 = tcg_temp_new();
+-    dest = tcg_temp_new();
+-    gen_get_gpr(source1, rs1);
+     tcg_gen_movi_tl(cpu_pc, ctx->base.pc_next);
+ 
+-#ifndef CONFIG_USER_ONLY
+-    /* Extract funct7 value and check whether it matches SFENCE.VMA */
+-    if ((opc == OPC_RISC_ECALL) && ((csr >> 5) == 9)) {
+-        if (env->priv_ver == PRIV_VERSION_1_10_0) {
+-            /* sfence.vma */
+-            /* TODO: handle ASID specific fences */
+-            gen_helper_tlb_flush(cpu_env);
+-            return;
+-        } else {
+-            gen_exception_illegal(ctx);
+-        }
+-    }
+-#endif
+-
+     switch (opc) {
+     case OPC_RISC_ECALL:
+         switch (csr) {
+@@ -723,50 +705,12 @@ static void gen_system(CPURISCVState *env, DisasContext *ctx, uint32_t opc,
+             tcg_gen_exit_tb(NULL, 0); /* no chaining */
+             ctx->base.is_jmp = DISAS_NORETURN;
+             break;
+-#ifndef CONFIG_USER_ONLY
+-        case 0x002: /* URET */
+-            gen_exception_illegal(ctx);
+-            break;
+-        case 0x102: /* SRET */
+-            if (riscv_has_ext(env, RVS)) {
+-                gen_helper_sret(cpu_pc, cpu_env, cpu_pc);
+-                tcg_gen_exit_tb(NULL, 0); /* no chaining */
+-                ctx->base.is_jmp = DISAS_NORETURN;
+-            } else {
+-                gen_exception_illegal(ctx);
+-            }
+-            break;
+-        case 0x202: /* HRET */
+-            gen_exception_illegal(ctx);
+-            break;
+-        case 0x302: /* MRET */
+-            gen_helper_mret(cpu_pc, cpu_env, cpu_pc);
+-            tcg_gen_exit_tb(NULL, 0); /* no chaining */
+-            ctx->base.is_jmp = DISAS_NORETURN;
+-            break;
+-        case 0x7b2: /* DRET */
+-            gen_exception_illegal(ctx);
+-            break;
+-        case 0x105: /* WFI */
+-            tcg_gen_movi_tl(cpu_pc, ctx->pc_succ_insn);
+-            gen_helper_wfi(cpu_env);
+-            break;
+-        case 0x104: /* SFENCE.VM */
+-            if (env->priv_ver <= PRIV_VERSION_1_09_1) {
+-                gen_helper_tlb_flush(cpu_env);
+-            } else {
+-                gen_exception_illegal(ctx);
+-            }
+-            break;
+-#endif
+         default:
+             gen_exception_illegal(ctx);
+             break;
+         }
+         break;
+     }
+-    tcg_temp_free(source1);
+-    tcg_temp_free(dest);
  }
  
--static void gen_jalr(CPURISCVState *env, DisasContext *ctx, uint32_t opc,
--                     int rd, int rs1, target_long imm)
--{
--    /* no chaining with JALR */
--    TCGLabel *misaligned = NULL;
--    TCGv t0 = tcg_temp_new();
--
--    switch (opc) {
--    case OPC_RISC_JALR:
--        gen_get_gpr(cpu_pc, rs1);
--        tcg_gen_addi_tl(cpu_pc, cpu_pc, imm);
--        tcg_gen_andi_tl(cpu_pc, cpu_pc, (target_ulong)-2);
--
--        if (!riscv_has_ext(env, RVC)) {
--            misaligned = gen_new_label();
--            tcg_gen_andi_tl(t0, cpu_pc, 0x2);
--            tcg_gen_brcondi_tl(TCG_COND_NE, t0, 0x0, misaligned);
--        }
--
--        if (rd != 0) {
--            tcg_gen_movi_tl(cpu_gpr[rd], ctx->pc_succ_insn);
--        }
--        tcg_gen_lookup_and_goto_ptr();
--
--        if (misaligned) {
--            gen_set_label(misaligned);
--            gen_exception_inst_addr_mis(ctx);
--        }
--        ctx->base.is_jmp = DISAS_NORETURN;
--        break;
--
--    default:
--        gen_exception_illegal(ctx);
--        break;
--    }
--    tcg_temp_free(t0);
--}
--
- static void gen_branch(CPURISCVState *env, DisasContext *ctx, uint32_t opc,
-                        int rs1, int rs2, target_long bimm)
+ static void decode_RV32_64C0(DisasContext *ctx)
+@@ -1063,6 +1007,7 @@ bool decode_insn32(DisasContext *ctx, uint32_t insn);
+ #include "insn_trans/trans_rva.inc.c"
+ #include "insn_trans/trans_rvf.inc.c"
+ #include "insn_trans/trans_rvd.inc.c"
++#include "insn_trans/trans_privileged.inc.c"
+ 
+ static void decode_RV32_64G(CPURISCVState *env, DisasContext *ctx)
  {
 -- 
 2.20.1
