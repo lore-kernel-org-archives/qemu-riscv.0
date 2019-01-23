@@ -1,31 +1,31 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gmEnu-0000Ah-Bc
-	for mharc-qemu-riscv@gnu.org; Wed, 23 Jan 2019 04:26:38 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:40465)
+	id 1gmEnv-0000Cc-Pf
+	for mharc-qemu-riscv@gnu.org; Wed, 23 Jan 2019 04:26:39 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:40476)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <kbastian@mail.uni-paderborn.de>) id 1gmEnr-00006m-Oh
-	for qemu-riscv@nongnu.org; Wed, 23 Jan 2019 04:26:36 -0500
+	(envelope-from <kbastian@mail.uni-paderborn.de>) id 1gmEns-00007b-5V
+	for qemu-riscv@nongnu.org; Wed, 23 Jan 2019 04:26:37 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <kbastian@mail.uni-paderborn.de>) id 1gmEnq-0007MA-Dp
-	for qemu-riscv@nongnu.org; Wed, 23 Jan 2019 04:26:35 -0500
-Received: from mail.uni-paderborn.de ([131.234.142.9]:47468)
+	(envelope-from <kbastian@mail.uni-paderborn.de>) id 1gmEnq-0007ML-EX
+	for qemu-riscv@nongnu.org; Wed, 23 Jan 2019 04:26:36 -0500
+Received: from mail.uni-paderborn.de ([131.234.142.9]:47518)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.71) (envelope-from <kbastian@mail.uni-paderborn.de>)
-	id 1gmEnm-0007Jn-NQ; Wed, 23 Jan 2019 04:26:30 -0500
-Received: from pova.uni-paderborn.de ([131.234.189.23]
+	id 1gmEnp-0007LK-HU; Wed, 23 Jan 2019 04:26:33 -0500
+Received: from wormulon.uni-paderborn.de ([131.234.189.22]
 	helo=localhost.localdomain)
 	by mail.uni-paderborn.de with esmtp (Exim 4.89 nylar)
-	id 1gmEnk-0004rC-Nv; Wed, 23 Jan 2019 10:26:28 +0100
-Received: from mail.uni-paderborn.de by pova with queue id 3100756-2;
-	Wed, 23 Jan 2019 09:26:27 GMT
+	id 1gmEnn-0004rh-Nz; Wed, 23 Jan 2019 10:26:31 +0100
+Received: from mail.uni-paderborn.de by wormulon with queue id 3103314-5;
+	Wed, 23 Jan 2019 09:26:30 GMT
 X-Envelope-From: <kbastian@mail.uni-paderborn.de>
 From: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
 To: sagark@eecs.berkeley.edu, palmer@sifive.com, kbastian@mail.uni-paderborn.de
 Cc: qemu-riscv@nongnu.org, peer.adelt@hni.uni-paderborn.de,
 	richard.henderson@linaro.org, qemu-devel@nongnu.org,
 	Alistair Francis <alistair.francis@wdc.com>
-Date: Wed, 23 Jan 2019 10:25:10 +0100
-Message-Id: <20190123092538.8004-8-kbastian@mail.uni-paderborn.de>
+Date: Wed, 23 Jan 2019 10:25:12 +0100
+Message-Id: <20190123092538.8004-10-kbastian@mail.uni-paderborn.de>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20190123092538.8004-1-kbastian@mail.uni-paderborn.de>
 References: <20190123092538.8004-1-kbastian@mail.uni-paderborn.de>
@@ -39,8 +39,8 @@ X-IMT-Authenticated-Sender:
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
 X-Received-From: 131.234.142.9
-Subject: [Qemu-riscv] [PATCH v6 07/35] target/riscv: Convert RVXI fence
- insns to decodetree
+Subject: [Qemu-riscv] [PATCH v6 09/35] target/riscv: Convert RVXM insns to
+ decodetree
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -59,71 +59,180 @@ Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Signed-off-by: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
 Signed-off-by: Peer Adelt <peer.adelt@hni.uni-paderborn.de>
 ---
- target/riscv/insn32.decode              |  2 ++
- target/riscv/insn_trans/trans_rvi.inc.c | 19 +++++++++++++++++++
- target/riscv/translate.c                | 12 ------------
- 3 files changed, 21 insertions(+), 12 deletions(-)
+ target/riscv/insn32-64.decode           |   7 ++
+ target/riscv/insn32.decode              |  10 +++
+ target/riscv/insn_trans/trans_rvm.inc.c | 100 ++++++++++++++++++++++++
+ target/riscv/translate.c                |  10 +--
+ 4 files changed, 118 insertions(+), 9 deletions(-)
+ create mode 100644 target/riscv/insn_trans/trans_rvm.inc.c
 
+diff --git a/target/riscv/insn32-64.decode b/target/riscv/insn32-64.decode
+index 9a35f2aa19..008f100546 100644
+--- a/target/riscv/insn32-64.decode
++++ b/target/riscv/insn32-64.decode
+@@ -36,3 +36,10 @@ subw     0100000 .....  ..... 000 ..... 0111011 @r
+ sllw     0000000 .....  ..... 001 ..... 0111011 @r
+ srlw     0000000 .....  ..... 101 ..... 0111011 @r
+ sraw     0100000 .....  ..... 101 ..... 0111011 @r
++
++# *** RV64M Standard Extension (in addition to RV32M) ***
++mulw     0000001 .....  ..... 000 ..... 0111011 @r
++divw     0000001 .....  ..... 100 ..... 0111011 @r
++divuw    0000001 .....  ..... 101 ..... 0111011 @r
++remw     0000001 .....  ..... 110 ..... 0111011 @r
++remuw    0000001 .....  ..... 111 ..... 0111011 @r
 diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index 1f5bf1f6f9..804b721ca5 100644
+index 977b1b10a3..e53944bf0e 100644
 --- a/target/riscv/insn32.decode
 +++ b/target/riscv/insn32.decode
-@@ -82,3 +82,5 @@ srl      0000000 .....    ..... 101 ..... 0110011 @r
- sra      0100000 .....    ..... 101 ..... 0110011 @r
- or       0000000 .....    ..... 110 ..... 0110011 @r
- and      0000000 .....    ..... 111 ..... 0110011 @r
-+fence    ---- pred:4 succ:4 ----- 000 ----- 0001111
-+fence_i  ---- ----   ----   ----- 001 ----- 0001111
-diff --git a/target/riscv/insn_trans/trans_rvi.inc.c b/target/riscv/insn_trans/trans_rvi.inc.c
-index 01f751650a..b468a0ac0e 100644
---- a/target/riscv/insn_trans/trans_rvi.inc.c
-+++ b/target/riscv/insn_trans/trans_rvi.inc.c
-@@ -318,3 +318,22 @@ static bool trans_sraw(DisasContext *ctx, arg_sraw *a)
-     return true;
- }
- #endif
+@@ -92,3 +92,13 @@ csrrc    ............     ..... 011 ..... 1110011 @csr
+ csrrwi   ............     ..... 101 ..... 1110011 @csr
+ csrrsi   ............     ..... 110 ..... 1110011 @csr
+ csrrci   ............     ..... 111 ..... 1110011 @csr
 +
-+static bool trans_fence(DisasContext *ctx, arg_fence *a)
++# *** RV32M Standard Extension ***
++mul      0000001 .....  ..... 000 ..... 0110011 @r
++mulh     0000001 .....  ..... 001 ..... 0110011 @r
++mulhsu   0000001 .....  ..... 010 ..... 0110011 @r
++mulhu    0000001 .....  ..... 011 ..... 0110011 @r
++div      0000001 .....  ..... 100 ..... 0110011 @r
++divu     0000001 .....  ..... 101 ..... 0110011 @r
++rem      0000001 .....  ..... 110 ..... 0110011 @r
++remu     0000001 .....  ..... 111 ..... 0110011 @r
+diff --git a/target/riscv/insn_trans/trans_rvm.inc.c b/target/riscv/insn_trans/trans_rvm.inc.c
+new file mode 100644
+index 0000000000..ec3197ede8
+--- /dev/null
++++ b/target/riscv/insn_trans/trans_rvm.inc.c
+@@ -0,0 +1,100 @@
++/*
++ * RISC-V translation routines for the RV64M Standard Extension.
++ *
++ * Copyright (c) 2016-2017 Sagar Karandikar, sagark@eecs.berkeley.edu
++ * Copyright (c) 2018 Peer Adelt, peer.adelt@hni.uni-paderborn.de
++ *                    Bastian Koppelmann, kbastian@mail.uni-paderborn.de
++ *
++ * This program is free software; you can redistribute it and/or modify it
++ * under the terms and conditions of the GNU General Public License,
++ * version 2 or later, as published by the Free Software Foundation.
++ *
++ * This program is distributed in the hope it will be useful, but WITHOUT
++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
++ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
++ * more details.
++ *
++ * You should have received a copy of the GNU General Public License along with
++ * this program.  If not, see <http://www.gnu.org/licenses/>.
++ */
++
++
++static bool trans_mul(DisasContext *ctx, arg_mul *a)
 +{
-+    /* FENCE is a full memory barrier. */
-+    tcg_gen_mb(TCG_MO_ALL | TCG_BAR_SC);
++    gen_arith(ctx, OPC_RISC_MUL, a->rd, a->rs1, a->rs2);
 +    return true;
 +}
 +
-+static bool trans_fence_i(DisasContext *ctx, arg_fence_i *a)
++static bool trans_mulh(DisasContext *ctx, arg_mulh *a)
 +{
-+    /*
-+     * FENCE_I is a no-op in QEMU,
-+     * however we need to end the translation block
-+     */
-+    tcg_gen_movi_tl(cpu_pc, ctx->pc_succ_insn);
-+    tcg_gen_exit_tb(NULL, 0);
-+    ctx->base.is_jmp = DISAS_NORETURN;
++    gen_arith(ctx, OPC_RISC_MULH, a->rd, a->rs1, a->rs2);
 +    return true;
 +}
++
++static bool trans_mulhsu(DisasContext *ctx, arg_mulhsu *a)
++{
++    gen_arith(ctx, OPC_RISC_MULHSU, a->rd, a->rs1, a->rs2);
++    return true;
++}
++
++static bool trans_mulhu(DisasContext *ctx, arg_mulhu *a)
++{
++    gen_arith(ctx, OPC_RISC_MULHU, a->rd, a->rs1, a->rs2);
++    return true;
++}
++
++static bool trans_div(DisasContext *ctx, arg_div *a)
++{
++    gen_arith(ctx, OPC_RISC_DIV, a->rd, a->rs1, a->rs2);
++    return true;
++}
++
++static bool trans_divu(DisasContext *ctx, arg_divu *a)
++{
++    gen_arith(ctx, OPC_RISC_DIVU, a->rd, a->rs1, a->rs2);
++    return true;
++}
++
++static bool trans_rem(DisasContext *ctx, arg_rem *a)
++{
++    gen_arith(ctx, OPC_RISC_REM, a->rd, a->rs1, a->rs2);
++    return true;
++}
++
++static bool trans_remu(DisasContext *ctx, arg_remu *a)
++{
++    gen_arith(ctx, OPC_RISC_REMU, a->rd, a->rs1, a->rs2);
++    return true;
++}
++
++#ifdef TARGET_RISCV64
++static bool trans_mulw(DisasContext *ctx, arg_mulw *a)
++{
++    gen_arith(ctx, OPC_RISC_MULW, a->rd, a->rs1, a->rs2);
++    return true;
++}
++
++static bool trans_divw(DisasContext *ctx, arg_divw *a)
++{
++    gen_arith(ctx, OPC_RISC_DIVW, a->rd, a->rs1, a->rs2);
++    return true;
++}
++
++static bool trans_divuw(DisasContext *ctx, arg_divuw *a)
++{
++    gen_arith(ctx, OPC_RISC_DIVUW, a->rd, a->rs1, a->rs2);
++    return true;
++}
++
++static bool trans_remw(DisasContext *ctx, arg_remw *a)
++{
++    gen_arith(ctx, OPC_RISC_REMW, a->rd, a->rs1, a->rs2);
++    return true;
++}
++
++static bool trans_remuw(DisasContext *ctx, arg_remuw *a)
++{
++    gen_arith(ctx, OPC_RISC_REMUW, a->rd, a->rs1, a->rs2);
++    return true;
++}
++#endif
 diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index c16eba8ec8..9899f10be4 100644
+index a020305556..666c039662 100644
 --- a/target/riscv/translate.c
 +++ b/target/riscv/translate.c
-@@ -1750,18 +1750,6 @@ static void decode_RV32_64G(CPURISCVState *env, DisasContext *ctx)
-         gen_fp_arith(ctx, MASK_OP_FP_ARITH(ctx->opcode), rd, rs1, rs2,
-                      GET_RM(ctx->opcode));
-         break;
--    case OPC_RISC_FENCE:
--        if (ctx->opcode & 0x1000) {
--            /* FENCE_I is a no-op in QEMU,
--             * however we need to end the translation block */
--            tcg_gen_movi_tl(cpu_pc, ctx->pc_succ_insn);
--            tcg_gen_exit_tb(NULL, 0);
--            ctx->base.is_jmp = DISAS_NORETURN;
--        } else {
--            /* FENCE is a full memory barrier. */
--            tcg_gen_mb(TCG_MO_ALL | TCG_BAR_SC);
+@@ -1649,6 +1649,7 @@ bool decode_insn32(DisasContext *ctx, uint32_t insn);
+ #include "decode_insn32.inc.c"
+ /* Include insn module translation function */
+ #include "insn_trans/trans_rvi.inc.c"
++#include "insn_trans/trans_rvm.inc.c"
+ 
+ static void decode_RV32_64G(CPURISCVState *env, DisasContext *ctx)
+ {
+@@ -1670,15 +1671,6 @@ static void decode_RV32_64G(CPURISCVState *env, DisasContext *ctx)
+     imm = GET_IMM(ctx->opcode);
+ 
+     switch (op) {
+-    case OPC_RISC_ARITH:
+-#if defined(TARGET_RISCV64)
+-    case OPC_RISC_ARITH_W:
+-#endif
+-        if (rd == 0) {
+-            break; /* NOP */
 -        }
+-        gen_arith(ctx, MASK_OP_ARITH(ctx->opcode), rd, rs1, rs2);
 -        break;
-     case OPC_RISC_SYSTEM:
-         gen_system(env, ctx, MASK_OP_SYSTEM(ctx->opcode), rd, rs1,
-                    (ctx->opcode & 0xFFF00000) >> 20);
+     case OPC_RISC_FP_LOAD:
+         gen_fp_load(ctx, MASK_OP_FP_LOAD(ctx->opcode), rd, rs1, imm);
+         break;
 -- 
 2.20.1
 
