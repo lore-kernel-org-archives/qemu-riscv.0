@@ -1,45 +1,45 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gmF4b-00037P-G2
-	for mharc-qemu-riscv@gnu.org; Wed, 23 Jan 2019 04:43:53 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:46247)
+	id 1gmF4d-00039r-P3
+	for mharc-qemu-riscv@gnu.org; Wed, 23 Jan 2019 04:43:55 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:47244)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <kbastian@mail.uni-paderborn.de>) id 1gmF4R-00026n-3X
+	(envelope-from <kbastian@mail.uni-paderborn.de>) id 1gmF4R-0002FU-2o
 	for qemu-riscv@nongnu.org; Wed, 23 Jan 2019 04:43:50 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <kbastian@mail.uni-paderborn.de>) id 1gmEod-0007pO-VA
-	for qemu-riscv@nongnu.org; Wed, 23 Jan 2019 04:27:30 -0500
-Received: from mail.uni-paderborn.de ([131.234.142.9]:35998)
+	(envelope-from <kbastian@mail.uni-paderborn.de>) id 1gmEot-0007yE-KQ
+	for qemu-riscv@nongnu.org; Wed, 23 Jan 2019 04:27:41 -0500
+Received: from mail.uni-paderborn.de ([131.234.142.9]:36014)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.71) (envelope-from <kbastian@mail.uni-paderborn.de>)
-	id 1gmEoY-0007Tg-2a; Wed, 23 Jan 2019 04:27:20 -0500
-Received: from tweenies.uni-paderborn.de ([131.234.189.21]
+	id 1gmEon-0007ZI-VF; Wed, 23 Jan 2019 04:27:36 -0500
+Received: from magmaria.uni-paderborn.de ([131.234.189.24]
 	helo=localhost.localdomain)
 	by mail.uni-paderborn.de with esmtp (Exim 4.89 spheron)
-	id 1gmEoB-0004Yx-IR; Wed, 23 Jan 2019 10:26:55 +0100
-Received: from mail.uni-paderborn.de by tweenies with queue id 3072083-4;
-	Wed, 23 Jan 2019 09:26:54 GMT
+	id 1gmEoM-0004ZQ-Ia; Wed, 23 Jan 2019 10:27:06 +0100
+Received: from mail.uni-paderborn.de by magmaria with queue id 3097572-3;
+	Wed, 23 Jan 2019 09:27:05 GMT
 X-Envelope-From: <kbastian@mail.uni-paderborn.de>
 From: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
 To: sagark@eecs.berkeley.edu, palmer@sifive.com, kbastian@mail.uni-paderborn.de
 Cc: qemu-riscv@nongnu.org, peer.adelt@hni.uni-paderborn.de,
 	richard.henderson@linaro.org, qemu-devel@nongnu.org
-Date: Wed, 23 Jan 2019 10:25:29 +0100
-Message-Id: <20190123092538.8004-27-kbastian@mail.uni-paderborn.de>
+Date: Wed, 23 Jan 2019 10:25:37 +0100
+Message-Id: <20190123092538.8004-35-kbastian@mail.uni-paderborn.de>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20190123092538.8004-1-kbastian@mail.uni-paderborn.de>
 References: <20190123092538.8004-1-kbastian@mail.uni-paderborn.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-PMX-Version: 6.4.6.2792898, Antispam-Engine: 2.7.2.2107409,
-	Antispam-Data: 2019.1.23.91816, AntiVirus-Engine: 5.56.1,
+	Antispam-Data: 2019.1.23.92116, AntiVirus-Engine: 5.56.1,
 	AntiVirus-Data: 2019.1.18.5561000
 X-IMT-Spam-Score: 0.0 ()
 X-IMT-Authenticated-Sender: 
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
 X-Received-From: 131.234.142.9
-Subject: [Qemu-riscv] [PATCH v6 26/35] target/riscv: Remove shift and slt
- insn manual decoding
+Subject: [Qemu-riscv] [PATCH v6 34/35] target/riscv: Splice remaining
+ compressed insn pairs for riscv32 vs riscv64
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -53,245 +53,187 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Wed, 23 Jan 2019 09:43:50 -0000
 
+it splices flwsp_ldsp, fswsp_sdsp, and jal_addiw and makes each of them
+reuse the code generator used for the non compressed insns.
+
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Signed-off-by: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-Signed-off-by: Peer Adelt <peer.adelt@hni.uni-paderborn.de>
 ---
- target/riscv/insn_trans/trans_rvi.inc.c | 93 +++++++++++++++++--------
- target/riscv/translate.c                | 59 +++++-----------
- 2 files changed, 81 insertions(+), 71 deletions(-)
+ target/riscv/insn16-32.decode           |  7 +++++
+ target/riscv/insn16-64.decode           |  5 ++++
+ target/riscv/insn16.decode              | 12 ++------
+ target/riscv/insn32.decode              |  3 +-
+ target/riscv/insn_trans/trans_rvc.inc.c | 40 -------------------------
+ 5 files changed, 16 insertions(+), 51 deletions(-)
 
-diff --git a/target/riscv/insn_trans/trans_rvi.inc.c b/target/riscv/insn_trans/trans_rvi.inc.c
-index 4c79e424ae..eac79f076f 100644
---- a/target/riscv/insn_trans/trans_rvi.inc.c
-+++ b/target/riscv/insn_trans/trans_rvi.inc.c
-@@ -220,30 +220,25 @@ static bool trans_addi(DisasContext *ctx, arg_addi *a)
-     return gen_arith_imm(ctx, a, &tcg_gen_add_tl);
- }
- 
--static bool trans_slti(DisasContext *ctx, arg_slti *a)
-+static void gen_slt(TCGv ret, TCGv s1, TCGv s2)
- {
--    TCGv source1;
--    source1 = tcg_temp_new();
--    gen_get_gpr(source1, a->rs1);
-+    tcg_gen_setcond_tl(TCG_COND_LT, ret, s1, s2);
-+}
+diff --git a/target/riscv/insn16-32.decode b/target/riscv/insn16-32.decode
+index e21a701056..978b8d5834 100644
+--- a/target/riscv/insn16-32.decode
++++ b/target/riscv/insn16-32.decode
+@@ -22,3 +22,10 @@
+ # *** RV32C Standard Extension (Quadrant 0) ***
+ flw     011 ... ... .. ... 00   @cl_w
+ fsw     111 ... ... .. ... 00   @cs_w
 +
-+static void gen_sltu(TCGv ret, TCGv s1, TCGv s2)
-+{
-+    tcg_gen_setcond_tl(TCG_COND_LTU, ret, s1, s2);
-+}
++# *** RV32C Standard Extension (Quadrant 1) ***
++jal     001 ......   ..... 01   &j imm=%imm_cj rd=1
++
++# *** RV32C Standard Extension (Quadrant 2) ***
++flw     011 . .....  ..... 10   &i imm=%uimm_6bit_lw %rd rs1=2
++fsw     111 ......   ..... 10   &s imm=%uimm_6bit_sw rs2=2 rs1=%rs2_5
+diff --git a/target/riscv/insn16-64.decode b/target/riscv/insn16-64.decode
+index de97a45acf..d43055837a 100644
+--- a/target/riscv/insn16-64.decode
++++ b/target/riscv/insn16-64.decode
+@@ -24,5 +24,10 @@ ld      011  ... ... .. ... 00 @cl_d
+ sd      111  ... ... .. ... 00 @cs_d
  
--    tcg_gen_setcondi_tl(TCG_COND_LT, source1, source1, a->imm);
+ # *** RV64C Standard Extension (Quadrant 1) ***
++addiw             001 .  .....  ..... 01 @ci
+ subw              100 1 11 ... 00 ... 01 @cs_2
+ addw              100 1 11 ... 01 ... 01 @cs_2
++
++# *** RV64C Standard Extension (Quadrant 2) ***
++ld      011 .  .....  ..... 10 &i imm=%uimm_6bit_ld %rd rs1=2
++sd      111 ......    ..... 10 &s imm=%uimm_6bit_sd rs2=%rs2_5 rs1=2
+diff --git a/target/riscv/insn16.decode b/target/riscv/insn16.decode
+index b075336062..98dd672c7f 100644
+--- a/target/riscv/insn16.decode
++++ b/target/riscv/insn16.decode
+@@ -45,6 +45,7 @@
+ &r         rd rs1 rs2   !extern
+ &i         imm rs1 rd   !extern
+ &s         imm rs1 rs2  !extern
++&j         imm rd       !extern
  
--    gen_set_gpr(a->rd, source1);
--    tcg_temp_free(source1);
--    return true;
-+static bool trans_slti(DisasContext *ctx, arg_slti *a)
-+{
-+    return gen_arith_imm(ctx, a, &gen_slt);
+ # Argument sets:
+ &ci        imm        rd
+@@ -59,12 +60,10 @@
+ &c_sd      uimm  rs2
+ 
+ &c_addi16sp_lui  imm_lui imm_addi16sp rd
+-&c_flwsp_ldsp    uimm_flwsp uimm_ldsp rd
+-&c_fswsp_sdsp    uimm_fswsp uimm_sdsp rs2
+ 
+ # Formats 16:
+ @cr        ....  ..... .....  .. &cr                      rs2=%rs2_5  %rd
+-@ci        ... . ..... .....  .. &ci     imm=%imm_ci                  %rd
++@ci        ... . ..... .....  .. &i  imm=%imm_ci %rd rs1=%rd
+ @ciw       ...   ........ ... .. &ciw    nzuimm=%nzuimm_ciw           rd=%rs2_3
+ @cl_d      ... ... ... .. ... .. &i  imm=%uimm_cl_d  rs1=%rs1_3  rd=%rs2_3
+ @cl_w      ... ... ... .. ... .. &i  imm=%uimm_cl_w  rs1=%rs1_3  rd=%rs2_3
+@@ -80,10 +79,6 @@
+ @c_sw      ... . .....  ..... .. &c_sd     uimm=%uimm_6bit_sw  rs2=%rs2_5
+ 
+ @c_addi16sp_lui ... .  ..... ..... .. &c_addi16sp_lui %imm_lui %imm_addi16sp %rd
+-@c_flwsp_ldsp   ... .  ..... ..... .. &c_flwsp_ldsp uimm_flwsp=%uimm_6bit_lw \
+-    uimm_ldsp=%uimm_6bit_ld %rd
+-@c_fswsp_sdsp   ... .  ..... ..... .. &c_fswsp_sdsp uimm_fswsp=%uimm_6bit_sw \
+-    uimm_sdsp=%uimm_6bit_sd rs2=%rs2_5
+ 
+ @c_shift        ... . .. ... ..... .. &c_shift rd=%rs1_3 shamt=%nzuimm_6bit
+ @c_shift2       ... . .. ... ..... .. &c_shift rd=%rd    shamt=%nzuimm_6bit
+@@ -99,7 +94,6 @@ sw                110  ... ... .. ... 00 @cs_w
+ 
+ # *** RV64C Standard Extension (Quadrant 1) ***
+ c_addi            000 .  .....  ..... 01 @ci
+-c_jal_addiw       001 .  .....  ..... 01 @ci #Note: parse rd and/or imm manually
+ c_li              010 .  .....  ..... 01 @ci
+ c_addi16sp_lui    011 .  .....  ..... 01 @c_addi16sp_lui # shares opc with C.LUI
+ c_srli            100 . 00 ...  ..... 01 @c_shift
+@@ -117,9 +111,7 @@ c_bnez            111  ... ...  ..... 01 @cb
+ c_slli            000 .  .....  ..... 10 @c_shift2
+ c_fldsp           001 .  .....  ..... 10 @c_ld
+ c_lwsp            010 .  .....  ..... 10 @c_lw
+-c_flwsp_ldsp      011 .  .....  ..... 10 @c_flwsp_ldsp #C.LDSP:RV64;C.FLWSP:RV32
+ c_jr_mv           100 0  .....  ..... 10 @cr
+ c_ebreak_jalr_add 100 1  .....  ..... 10 @cr
+ c_fsdsp           101   ......  ..... 10 @c_sd
+ c_swsp            110 .  .....  ..... 10 @c_sw
+-c_fswsp_sdsp      111 .  .....  ..... 10 @c_fswsp_sdsp #C.SDSP:RV64;C.FSWSP:RV32
+diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+index b59a00cc42..0e098e05fe 100644
+--- a/target/riscv/insn32.decode
++++ b/target/riscv/insn32.decode
+@@ -38,6 +38,7 @@
+ &i    imm rs1 rd
+ &r    rd rs1 rs2
+ &s    imm rs2 rs1
++&j    imm rd
+ &shift     shamt rs1 rd
+ &atomic    aq rl rs2 rs1 rd
+ 
+@@ -47,7 +48,7 @@
+ @b       .......   ..... ..... ... ..... ....... &b      imm=%imm_b %rs2 %rs1
+ @s       .......   ..... ..... ... ..... ....... &s      imm=%imm_s %rs2 %rs1
+ @u       ....................      ..... .......         imm=%imm_u          %rd
+-@j       ....................      ..... .......         imm=%imm_j          %rd
++@j       ....................      ..... ....... &j      imm=%imm_j          %rd
+ 
+ @sh      ......  ...... .....  ... ..... ....... &shift  shamt=%sh10      %rs1 %rd
+ @csr     ............   .....  ... ..... .......               %csr     %rs1 %rd
+diff --git a/target/riscv/insn_trans/trans_rvc.inc.c b/target/riscv/insn_trans/trans_rvc.inc.c
+index f521daf32e..db9119ec9b 100644
+--- a/target/riscv/insn_trans/trans_rvc.inc.c
++++ b/target/riscv/insn_trans/trans_rvc.inc.c
+@@ -38,19 +38,6 @@ static bool trans_c_addi(DisasContext *ctx, arg_c_addi *a)
+     return trans_addi(ctx, &arg);
  }
  
- static bool trans_sltiu(DisasContext *ctx, arg_sltiu *a)
- {
--    TCGv source1;
--    source1 = tcg_temp_new();
--    gen_get_gpr(source1, a->rs1);
+-static bool trans_c_jal_addiw(DisasContext *ctx, arg_c_jal_addiw *a)
+-{
+-#ifdef TARGET_RISCV32
+-    /* C.JAL */
+-    arg_jal arg = { .rd = 1, .imm = a->imm };
+-    return trans_jal(ctx, &arg);
+-#else
+-    /* C.ADDIW */
+-    arg_addiw arg = { .rd = a->rd, .rs1 = a->rd, .imm = a->imm };
+-    return trans_addiw(ctx, &arg);
+-#endif
+-}
 -
--    tcg_gen_setcondi_tl(TCG_COND_LTU, source1, source1, a->imm);
+ static bool trans_c_li(DisasContext *ctx, arg_c_li *a)
+ {
+     if (a->rd == 0) {
+@@ -163,20 +150,6 @@ static bool trans_c_lwsp(DisasContext *ctx, arg_c_lwsp *a)
+     return trans_lw(ctx, &arg);
+ }
+ 
+-static bool trans_c_flwsp_ldsp(DisasContext *ctx, arg_c_flwsp_ldsp *a)
+-{
+-#ifdef TARGET_RISCV32
+-    /* C.FLWSP */
+-    arg_flw arg_flw = { .rd = a->rd, .rs1 = 2, .imm = a->uimm_flwsp };
+-    return trans_flw(ctx, &arg_flw);
+-#else
+-    /* C.LDSP */
+-    arg_ld arg_ld = { .rd = a->rd, .rs1 = 2, .imm = a->uimm_ldsp };
+-    return trans_ld(ctx, &arg_ld);
+-#endif
+-    return false;
+-}
 -
--    gen_set_gpr(a->rd, source1);
--    tcg_temp_free(source1);
--    return true;
-+    return gen_arith_imm(ctx, a, &gen_sltu);
- }
- 
- static bool trans_xori(DisasContext *ctx, arg_xori *a)
-@@ -322,20 +317,17 @@ static bool trans_sub(DisasContext *ctx, arg_sub *a)
- 
- static bool trans_sll(DisasContext *ctx, arg_sll *a)
+ static bool trans_c_jr_mv(DisasContext *ctx, arg_c_jr_mv *a)
  {
--    gen_arith(ctx, OPC_RISC_SLL, a->rd, a->rs1, a->rs2);
--    return true;
-+    return gen_shift(ctx, a, &tcg_gen_shl_tl);
+     if (a->rd != 0 && a->rs2 == 0) {
+@@ -222,16 +195,3 @@ static bool trans_c_swsp(DisasContext *ctx, arg_c_swsp *a)
+     arg_sw arg = { .rs1 = 2, .rs2 = a->rs2, .imm = a->uimm };
+     return trans_sw(ctx, &arg);
  }
- 
- static bool trans_slt(DisasContext *ctx, arg_slt *a)
- {
--    gen_arith(ctx, OPC_RISC_SLT, a->rd, a->rs1, a->rs2);
--    return true;
-+    return trans_arith(ctx, a, &gen_slt);
- }
- 
- static bool trans_sltu(DisasContext *ctx, arg_sltu *a)
- {
--    gen_arith(ctx, OPC_RISC_SLTU, a->rd, a->rs1, a->rs2);
--    return true;
-+    return trans_arith(ctx, a, &gen_sltu);
- }
- 
- static bool trans_xor(DisasContext *ctx, arg_xor *a)
-@@ -345,14 +337,12 @@ static bool trans_xor(DisasContext *ctx, arg_xor *a)
- 
- static bool trans_srl(DisasContext *ctx, arg_srl *a)
- {
--    gen_arith(ctx, OPC_RISC_SRL, a->rd, a->rs1, a->rs2);
--    return true;
-+    return gen_shift(ctx, a, &tcg_gen_shr_tl);
- }
- 
- static bool trans_sra(DisasContext *ctx, arg_sra *a)
- {
--    gen_arith(ctx, OPC_RISC_SRA, a->rd, a->rs1, a->rs2);
--    return true;
-+    return gen_shift(ctx, a, &tcg_gen_sar_tl);
- }
- 
- static bool trans_or(DisasContext *ctx, arg_or *a)
-@@ -419,19 +409,62 @@ static bool trans_subw(DisasContext *ctx, arg_subw *a)
- 
- static bool trans_sllw(DisasContext *ctx, arg_sllw *a)
- {
--    gen_arith(ctx, OPC_RISC_SLLW, a->rd, a->rs1, a->rs2);
-+    TCGv source1 = tcg_temp_new();
-+    TCGv source2 = tcg_temp_new();
-+
-+    gen_get_gpr(source1, a->rs1);
-+    gen_get_gpr(source2, a->rs2);
-+
-+    tcg_gen_andi_tl(source2, source2, 0x1F);
-+    tcg_gen_shl_tl(source1, source1, source2);
-+
-+    tcg_gen_ext32s_tl(source1, source1);
-+    gen_set_gpr(a->rd, source1);
-+    tcg_temp_free(source1);
-+    tcg_temp_free(source2);
-     return true;
- }
- 
- static bool trans_srlw(DisasContext *ctx, arg_srlw *a)
- {
--    gen_arith(ctx, OPC_RISC_SRLW, a->rd, a->rs1, a->rs2);
-+    TCGv source1 = tcg_temp_new();
-+    TCGv source2 = tcg_temp_new();
-+
-+    gen_get_gpr(source1, a->rs1);
-+    gen_get_gpr(source2, a->rs2);
-+
-+    /* clear upper 32 */
-+    tcg_gen_ext32u_tl(source1, source1);
-+    tcg_gen_andi_tl(source2, source2, 0x1F);
-+    tcg_gen_shr_tl(source1, source1, source2);
-+
-+    tcg_gen_ext32s_tl(source1, source1);
-+    gen_set_gpr(a->rd, source1);
-+    tcg_temp_free(source1);
-+    tcg_temp_free(source2);
-     return true;
- }
- 
- static bool trans_sraw(DisasContext *ctx, arg_sraw *a)
- {
--    gen_arith(ctx, OPC_RISC_SRAW, a->rd, a->rs1, a->rs2);
-+    TCGv source1 = tcg_temp_new();
-+    TCGv source2 = tcg_temp_new();
-+
-+    gen_get_gpr(source1, a->rs1);
-+    gen_get_gpr(source2, a->rs2);
-+
-+    /*
-+     * first, trick to get it to act like working on 32 bits (get rid of
-+     * upper 32, sign extend to fill space)
-+     */
-+    tcg_gen_ext32s_tl(source1, source1);
-+    tcg_gen_andi_tl(source2, source2, 0x1F);
-+    tcg_gen_sar_tl(source1, source1, source2);
-+
-+    gen_set_gpr(a->rd, source1);
-+    tcg_temp_free(source1);
-+    tcg_temp_free(source2);
-+
-     return true;
- }
- #endif
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index f691cbcd80..442c7d26a3 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -192,47 +192,6 @@ static void gen_arith(DisasContext *ctx, uint32_t opc, int rd, int rs1,
-     gen_get_gpr(source2, rs2);
- 
-     switch (opc) {
--#if defined(TARGET_RISCV64)
--    case OPC_RISC_SLLW:
--        tcg_gen_andi_tl(source2, source2, 0x1F);
--        tcg_gen_shl_tl(source1, source1, source2);
--        break;
+-
+-static bool trans_c_fswsp_sdsp(DisasContext *ctx, arg_c_fswsp_sdsp *a)
+-{
+-#ifdef TARGET_RISCV32
+-    /* C.FSWSP */
+-    arg_fsw a_fsw = { .rs1 = a->rs2, .rs2 = 2, .imm = a->uimm_fswsp };
+-    return trans_fsw(ctx, &a_fsw);
+-#else
+-    /* C.SDSP */
+-    arg_sd a_sd = { .rs1 = 2, .rs2 = a->rs2, .imm = a->uimm_sdsp };
+-    return trans_sd(ctx, &a_sd);
 -#endif
--    case OPC_RISC_SLL:
--        tcg_gen_andi_tl(source2, source2, TARGET_LONG_BITS - 1);
--        tcg_gen_shl_tl(source1, source1, source2);
--        break;
--    case OPC_RISC_SLT:
--        tcg_gen_setcond_tl(TCG_COND_LT, source1, source1, source2);
--        break;
--    case OPC_RISC_SLTU:
--        tcg_gen_setcond_tl(TCG_COND_LTU, source1, source1, source2);
--        break;
--#if defined(TARGET_RISCV64)
--    case OPC_RISC_SRLW:
--        /* clear upper 32 */
--        tcg_gen_ext32u_tl(source1, source1);
--        tcg_gen_andi_tl(source2, source2, 0x1F);
--        tcg_gen_shr_tl(source1, source1, source2);
--        break;
--#endif
--    case OPC_RISC_SRL:
--        tcg_gen_andi_tl(source2, source2, TARGET_LONG_BITS - 1);
--        tcg_gen_shr_tl(source1, source1, source2);
--        break;
--#if defined(TARGET_RISCV64)
--    case OPC_RISC_SRAW:
--        /* first, trick to get it to act like working on 32 bits (get rid of
--        upper 32, sign extend to fill space) */
--        tcg_gen_ext32s_tl(source1, source1);
--        tcg_gen_andi_tl(source2, source2, 0x1F);
--        tcg_gen_sar_tl(source1, source1, source2);
--        break;
--#endif
--    case OPC_RISC_SRA:
--        tcg_gen_andi_tl(source2, source2, TARGET_LONG_BITS - 1);
--        tcg_gen_sar_tl(source1, source1, source2);
--        break;
-     CASE_OP_32_64(OPC_RISC_MUL):
-         tcg_gen_mul_tl(source1, source1, source2);
-         break;
-@@ -653,6 +612,24 @@ static bool trans_arith(DisasContext *ctx, arg_r *a,
-     return true;
- }
- 
-+static bool gen_shift(DisasContext *ctx, arg_r *a,
-+                        void(*func)(TCGv, TCGv, TCGv))
-+{
-+    TCGv source1 = tcg_temp_new();
-+    TCGv source2 = tcg_temp_new();
-+
-+    gen_get_gpr(source1, a->rs1);
-+    gen_get_gpr(source2, a->rs2);
-+
-+    tcg_gen_andi_tl(source2, source2, TARGET_LONG_BITS - 1);
-+    (*func)(source1, source1, source2);
-+
-+    gen_set_gpr(a->rd, source1);
-+    tcg_temp_free(source1);
-+    tcg_temp_free(source2);
-+    return true;
-+}
-+
- /* Include insn module translation function */
- #include "insn_trans/trans_rvi.inc.c"
- #include "insn_trans/trans_rvm.inc.c"
+-}
 -- 
 2.20.1
 
