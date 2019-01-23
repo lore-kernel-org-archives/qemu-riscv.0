@@ -1,50 +1,46 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gmEd3-0006qS-Tz
-	for mharc-qemu-riscv@gnu.org; Wed, 23 Jan 2019 04:15:25 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:38272)
+	id 1gmEnk-0008RI-CT
+	for mharc-qemu-riscv@gnu.org; Wed, 23 Jan 2019 04:26:28 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:40308)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <kbastian@mail.uni-paderborn.de>) id 1gmEd1-0006mI-CV
-	for qemu-riscv@nongnu.org; Wed, 23 Jan 2019 04:15:24 -0500
+	(envelope-from <kbastian@mail.uni-paderborn.de>) id 1gmEni-0008Qk-T2
+	for qemu-riscv@nongnu.org; Wed, 23 Jan 2019 04:26:27 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <kbastian@mail.uni-paderborn.de>) id 1gmEd0-0002fb-96
-	for qemu-riscv@nongnu.org; Wed, 23 Jan 2019 04:15:23 -0500
-Received: from mail.uni-paderborn.de ([131.234.142.9]:56176)
+	(envelope-from <kbastian@mail.uni-paderborn.de>) id 1gmEnh-0007ID-14
+	for qemu-riscv@nongnu.org; Wed, 23 Jan 2019 04:26:26 -0500
+Received: from mail.uni-paderborn.de ([131.234.142.9]:47398)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.71) (envelope-from <kbastian@mail.uni-paderborn.de>)
-	id 1gmEct-0002ZE-6L; Wed, 23 Jan 2019 04:15:15 -0500
-Received: from magmaria.uni-paderborn.de ([131.234.189.24]
+	id 1gmEne-0007HN-W6; Wed, 23 Jan 2019 04:26:24 -0500
+Received: from pova.uni-paderborn.de ([131.234.189.23]
 	helo=localhost.localdomain)
-	by mail.uni-paderborn.de with esmtp (Exim 4.89 telepax)
-	id 1gmEcq-00051e-4n; Wed, 23 Jan 2019 10:15:12 +0100
-Received: from mail.uni-paderborn.de by magmaria with queue id 3097550-3;
-	Wed, 23 Jan 2019 09:15:11 GMT
+	by mail.uni-paderborn.de with esmtp (Exim 4.89 nylar)
+	id 1gmEnb-0004q0-PK; Wed, 23 Jan 2019 10:26:19 +0100
+Received: from mail.uni-paderborn.de by pova with queue id 3100755-2;
+	Wed, 23 Jan 2019 09:26:18 GMT
 X-Envelope-From: <kbastian@mail.uni-paderborn.de>
-To: Richard Henderson <richard.henderson@linaro.org>,
-	sagark@eecs.berkeley.edu, palmer@sifive.com
-Cc: peer.adelt@hni.uni-paderborn.de, qemu-riscv@nongnu.org,
-	qemu-devel@nongnu.org
-References: <20190122092909.5341-1-kbastian@mail.uni-paderborn.de>
-	<2153eec6-f25f-4e34-6423-01d76a14815c@linaro.org>
 From: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-Message-ID: <66fd9695-c511-b068-7cf1-b529d9f44d9d@mail.uni-paderborn.de>
-Date: Wed, 23 Jan 2019 10:15:10 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.4.0
+To: sagark@eecs.berkeley.edu, palmer@sifive.com, kbastian@mail.uni-paderborn.de
+Cc: qemu-riscv@nongnu.org, peer.adelt@hni.uni-paderborn.de,
+	richard.henderson@linaro.org, qemu-devel@nongnu.org,
+	Alistair Francis <alistair.francis@wdc.com>
+Date: Wed, 23 Jan 2019 10:25:04 +0100
+Message-Id: <20190123092538.8004-2-kbastian@mail.uni-paderborn.de>
+X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20190123092538.8004-1-kbastian@mail.uni-paderborn.de>
+References: <20190123092538.8004-1-kbastian@mail.uni-paderborn.de>
 MIME-Version: 1.0
-In-Reply-To: <2153eec6-f25f-4e34-6423-01d76a14815c@linaro.org>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US-large
+Content-Transfer-Encoding: 8bit
 X-PMX-Version: 6.4.6.2792898, Antispam-Engine: 2.7.2.2107409,
-	Antispam-Data: 2019.1.23.90616, AntiVirus-Engine: 5.56.1,
+	Antispam-Data: 2019.1.23.91816, AntiVirus-Engine: 5.56.1,
 	AntiVirus-Data: 2019.1.18.5561000
 X-IMT-Spam-Score: 0.0 ()
 X-IMT-Authenticated-Sender: 
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
 X-Received-From: 131.234.142.9
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v5 00/35] target/riscv:
- Convert to decodetree
+Subject: [Qemu-riscv] [PATCH v6 01/35] target/riscv: Move CPURISCVState
+ pointer to DisasContext
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -56,57 +52,71 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Jan 2019 09:15:24 -0000
+X-List-Received-Date: Wed, 23 Jan 2019 09:26:27 -0000
 
+CPURISCVState is rarely used, so there is no need to pass it to every
+translate function. This paves the way for decodetree which only passes
+DisasContext to translate functions.
 
-On 1/22/19 10:38 PM, Richard Henderson wrote:
-> On 1/22/19 1:28 AM, Bastian Koppelmann wrote:
->> Hi,
->>
->> this patchset converts the RISC-V decoder to decodetree in four major steps:
->>
->> 1) Convert 32-bit instructions to decodetree [Patch 1-16]:
->>      Many of the gen_* functions are called by the decode functions for 16-bit
->>      and 32-bit functions. If we move translation code from the gen_*
->>      functions to the generated trans_* functions of decode-tree, we get a lot of
->>      duplication. Therefore, we mostly generate calls to the old gen_* function
->>      which are properly replaced after step 2).
->>
->>      Each of the trans_ functions are grouped into files corresponding to their
->>      ISA extension, e.g. addi which is in RV32I is translated in the file
->>      'trans_rvi.inc.c'.
->>
->> 2) Convert 16-bit instructions to decodetree [Patch 17-19]:
->>      All 16 bit instructions have a direct mapping to a 32 bit instruction. Thus,
->>      we convert the arguments in the 16 bit trans_ function to the arguments of
->>      the corresponding 32 bit instruction and call the 32 bit trans_ function.
->>
->> 3) Remove old manual decoding in gen_* function [Patch 20-30]:
->>      this move all manual translation code into the trans_* instructions of
->>      decode tree, such that we can remove the old decode_* functions.
->>
->> 4) Simplify RVC by reusing as much as possible from the RVG decoder as suggested
->>     by Richard. [Patch 31-35]
->>
->> full tree available at
->> https://github.com/bkoppelmann/qemu/tree/riscv-dt-v5
->>
->> Cheers,
->> Bastian
->>
->> v4 -> v5:
->>      - fixed rebase error
->>      - moved TARGET_LONG_BITS check of shift instructions before rd == 0 check
->>      - removed extra sign extension of sraiw
->>      - removed rs2 == 0 special cases in sraw/srlw
-> All looks good to me now.  Thanks for persevering.
+Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Signed-off-by: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+---
+ target/riscv/translate.c | 15 ++++++++-------
+ 1 file changed, 8 insertions(+), 7 deletions(-)
 
-
-Thanks for your great reviews. I'll do a final respin to fix the funky 
-indentations. Alistair do you want to pick up the series?
-
-Cheers,
-
-Bastian
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index 312bf298b3..c4a4d8115c 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -52,6 +52,7 @@ typedef struct DisasContext {
+        to any system register, which includes CSR_FRM, so we do not have
+        to reset this known value.  */
+     int frm;
++    CPURISCVState *env;
+ } DisasContext;
+ 
+ /* convert riscv funct3 to qemu memop for load/store */
+@@ -1797,19 +1798,19 @@ static void decode_RV32_64G(CPURISCVState *env, DisasContext *ctx)
+     }
+ }
+ 
+-static void decode_opc(CPURISCVState *env, DisasContext *ctx)
++static void decode_opc(DisasContext *ctx)
+ {
+     /* check for compressed insn */
+     if (extract32(ctx->opcode, 0, 2) != 3) {
+-        if (!riscv_has_ext(env, RVC)) {
++        if (!riscv_has_ext(ctx->env, RVC)) {
+             gen_exception_illegal(ctx);
+         } else {
+             ctx->pc_succ_insn = ctx->base.pc_next + 2;
+-            decode_RV32_64C(env, ctx);
++            decode_RV32_64C(ctx->env, ctx);
+         }
+     } else {
+         ctx->pc_succ_insn = ctx->base.pc_next + 4;
+-        decode_RV32_64G(env, ctx);
++        decode_RV32_64G(ctx->env, ctx);
+     }
+ }
+ 
+@@ -1854,10 +1855,10 @@ static bool riscv_tr_breakpoint_check(DisasContextBase *dcbase, CPUState *cpu,
+ static void riscv_tr_translate_insn(DisasContextBase *dcbase, CPUState *cpu)
+ {
+     DisasContext *ctx = container_of(dcbase, DisasContext, base);
+-    CPURISCVState *env = cpu->env_ptr;
++    ctx->env = cpu->env_ptr;
+ 
+-    ctx->opcode = cpu_ldl_code(env, ctx->base.pc_next);
+-    decode_opc(env, ctx);
++    ctx->opcode = cpu_ldl_code(ctx->env, ctx->base.pc_next);
++    decode_opc(ctx);
+     ctx->base.pc_next = ctx->pc_succ_insn;
+ 
+     if (ctx->base.is_jmp == DISAS_NEXT) {
+-- 
+2.20.1
 
 
