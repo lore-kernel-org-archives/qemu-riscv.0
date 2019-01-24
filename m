@@ -1,56 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gmc8R-0003Kn-MJ
-	for mharc-qemu-riscv@gnu.org; Thu, 24 Jan 2019 05:21:23 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:35295)
+	id 1gmiwf-00032v-F9
+	for mharc-qemu-riscv@gnu.org; Thu, 24 Jan 2019 12:37:41 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:39340)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <peter.maydell@linaro.org>) id 1gmc8L-000320-OG
-	for qemu-riscv@nongnu.org; Thu, 24 Jan 2019 05:21:18 -0500
+	(envelope-from <alistair23@gmail.com>) id 1gmiwc-00032h-K0
+	for qemu-riscv@nongnu.org; Thu, 24 Jan 2019 12:37:40 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <peter.maydell@linaro.org>) id 1gmbuE-0006H5-Hw
-	for qemu-riscv@nongnu.org; Thu, 24 Jan 2019 05:06:43 -0500
-Received: from mail-ot1-x32d.google.com ([2607:f8b0:4864:20::32d]:43962)
+	(envelope-from <alistair23@gmail.com>) id 1gmiwT-0001eZ-70
+	for qemu-riscv@nongnu.org; Thu, 24 Jan 2019 12:37:34 -0500
+Received: from mail-lf1-x135.google.com ([2a00:1450:4864:20::135]:46628)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <peter.maydell@linaro.org>)
-	id 1gmbuE-0006Ge-D0
-	for qemu-riscv@nongnu.org; Thu, 24 Jan 2019 05:06:42 -0500
-Received: by mail-ot1-x32d.google.com with SMTP id a11so4704500otr.10
-	for <qemu-riscv@nongnu.org>; Thu, 24 Jan 2019 02:06:42 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+	(Exim 4.71) (envelope-from <alistair23@gmail.com>)
+	id 1gmiwH-0001L1-Ua; Thu, 24 Jan 2019 12:37:18 -0500
+Received: by mail-lf1-x135.google.com with SMTP id f5so4895973lfc.13;
+	Thu, 24 Jan 2019 09:37:16 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=AUNl0LehqCWTaSTdpfVs6XA1m3U3K63koMsyXud3aPA=;
-	b=ddO21vz/HkvzSRPXQKjDi/qZg0C2PqDO7pRm13yYvBC0wivufIF0GES/bF036eZwhk
-	9iToZ9Et+lkjRuPTWYckJ4QP17ZDy6tx9WVAXnIUdwyV8dYwE6Zu0WHbo/DrHyX1qnK/
-	ReMaBSE3+oWNkJYKtPn7wncibd116uewzo2LI=
+	:cc:content-transfer-encoding;
+	bh=txgtlSic4TKbw1E1jtfveJG/y9anx6Qvlr19V139GXk=;
+	b=fsrx7LPoComXVU9BMQhYK+eo+OblZON/OR6Zz8lxm9c7Fhr4mL5ZK0BHbREfjV7Mtr
+	QVs4m7v55oSMWwHKINzINN8m+MwT/Vawg0tf8d8HNUaIf6pd1qEFJK8dhnfPUOm9tP1l
+	NXzVt4RQlDSOchNEKKe7FxLi1gf/b0V2bUeSiia9rP1FgDK2R2f8UeuBCug7jD2zBkgS
+	PeK1UbNO7pw0VAU4ila5FTZH1UZeeyK8AEYo0dESyOeBa7jC13TQ7X3krmbMIcfvO3oH
+	h/CjkjxFIP5+6jj4gHSBf9+CKlJ4ofDXIiFjwOt2VzFD0+tXajpWRKlvkPtq/b/dfHk8
+	xI/g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=AUNl0LehqCWTaSTdpfVs6XA1m3U3K63koMsyXud3aPA=;
-	b=Q8pEsKcGfZBDaAivwmwWcdOIQetIp9v3qSgbSu4k3BDr2TZkBsi2jZ9lwmJR6tFmmK
-	S3z1sUlT598JuI1xGxW6qBpDtlTlSJAoV8g+IEvTqhYc6R0B2m5o8mQMz4yYFyPHfgIA
-	WGGOGaNUpn7D8xuM/xAUCP5OT9hL0Q4gCMTxOLWVK0MRq05EuM3yBqYxeXTsPrVIhv/F
-	36gQWNLsEIIyf7Rje++HXiOc2DF9aOvP65tdCp6UOBL+Bac1hlwXNey2HMXQAVt2WGHj
-	ikwpDzMe7yDwqCgD6q0KC8o1o2JIVJbliJAELU1xOfWGntYnd0AUrkews7eB57IsYjVc
-	p4Lg==
-X-Gm-Message-State: AJcUukc10fmOxtgH9Ik67CoTKRYbk7vmHvy6Vj+QnyDYwSXXTXqQnsmu
-	Y+AkX0I3pNMbvcuD2MnZ4JzrAYiNlKmxWtSiVjCiDg==
-X-Google-Smtp-Source: ALg8bN4ieyoYmLtxvGk78Cy97nR2F4zRJBwH3fLOjSnFq0/D28k+fKuAtctDRp6Ia9NojnG9V1QvOs+EU7PUCVF/x9M=
-X-Received: by 2002:a9d:7855:: with SMTP id c21mr3667550otm.363.1548324401464; 
-	Thu, 24 Jan 2019 02:06:41 -0800 (PST)
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=txgtlSic4TKbw1E1jtfveJG/y9anx6Qvlr19V139GXk=;
+	b=r1hosoEriwwafbEQtIAeL5r9uwCPYBzrmQjf1yfg3ztGbA9QdLf1gXjSTb61CSPapr
+	iSlMp7yqM+DBOSyK6CbelcRVraA4H+AZuh3XgdSfz9a5c9o/rHt2fTOPYQX8ykAjajDR
+	izIy2abaYw2gZhRBc+NkNmnNeEkszdbFeS3wNvldFyD/gw9xmrW3GM7DfcxBU9L5oD5t
+	SpORY5M25egbByZBEUAX6iXmaZDkarUIJSIdYMg5NbTDqFOqoEJInkDvd6s3UK/+CJiA
+	+JgxpCVBtsztoVjh7vZ5eT0PjKr4zydp++nlzWrS82kfo1BjEvW0160kAdPQD0Nkc6/X
+	EYQQ==
+X-Gm-Message-State: AJcUukehxCzNvqpdVWDG9JLDlWkobKxBGBwN1wSCqdrDKj20/9bQVXL9
+	1NkMf52QjtIUfsCvZZ2Tz7LB/QzvB8qdGf1MBQg=
+X-Google-Smtp-Source: ALg8bN7geBe9wxTsYs96NQOpPAy4nkzKZi+zNF1AZhCAwzNfTNfvulsH1FFJUrxuxeOp4HTUwbHwjSS3PYhtXg47Vf0=
+X-Received: by 2002:a19:7018:: with SMTP id h24mr5906027lfc.162.1548351434953; 
+	Thu, 24 Jan 2019 09:37:14 -0800 (PST)
 MIME-Version: 1.0
-References: <CAFEAcA-yeQSbbhKXXJ0f961MJKC-v46DWgoaXcQUt64DZcdzqQ@mail.gmail.com>
-	<mhng-2bd91def-4148-4180-bdbe-0be851d575e5@palmer-si-x1c4>
-In-Reply-To: <mhng-2bd91def-4148-4180-bdbe-0be851d575e5@palmer-si-x1c4>
-From: Peter Maydell <peter.maydell@linaro.org>
-Date: Thu, 24 Jan 2019 10:06:30 +0000
-Message-ID: <CAFEAcA8gH03WG_W-tp=ZC5HOoWRkpEDN_rdFm9Y6edxx-HztoQ@mail.gmail.com>
+References: <CAKmqyKN+PEt8=z_OUHngj5w6V6ZQ4r+U4uEDFrFayWXo8S+1tA@mail.gmail.com>
+	<mhng-283ef773-6344-48c3-a18d-c321084aba4d@palmer-si-x1c4>
+In-Reply-To: <mhng-283ef773-6344-48c3-a18d-c321084aba4d@palmer-si-x1c4>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Thu, 24 Jan 2019 09:36:48 -0800
+Message-ID: <CAKmqyKM4diZYTd4J_3AqsogX+a1u59m=mkQbzrAzahNwff3Y7w@mail.gmail.com>
 To: Palmer Dabbelt <palmer@sifive.com>
-Cc: qemu-riscv@nongnu.org, QEMU Developers <qemu-devel@nongnu.org>
+Cc: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>, 
+	qemu-riscv@nongnu.org, Alistair Francis <Alistair.Francis@wdc.com>, 
+	"qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+	Alexander Graf <agraf@suse.de>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::32d
-Subject: Re: [Qemu-riscv] [PULL] RISC-V Updates for 3.2, Part 2
+X-Received-From: 2a00:1450:4864:20::135
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v2 1/1] riscv: Ensure the
+ kernel start address is correctly cast
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -62,21 +70,112 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Jan 2019 10:21:18 -0000
+X-List-Received-Date: Thu, 24 Jan 2019 17:37:40 -0000
 
-On Thu, 24 Jan 2019 at 02:53, Palmer Dabbelt <palmer@sifive.com> wrote:
+On Wed, Jan 23, 2019 at 6:00 PM Palmer Dabbelt <palmer@sifive.com> wrote:
 >
-> On Mon, 14 Jan 2019 04:40:06 PST (-0800), Peter Maydell wrote:
-> > Please update the changelog at https://wiki.qemu.org/ChangeLog/4.0
-> > for any user-visible changes.
+> On Tue, 15 Jan 2019 13:09:28 PST (-0800), alistair23@gmail.com wrote:
+> > On Mon, Jan 14, 2019 at 2:58 AM Philippe Mathieu-Daud=C3=A9
+> > <philmd@redhat.com> wrote:
+> >>
+> >> Hi Alistair,
+> >>
+> >> On 1/12/19 2:17 AM, Alistair Francis wrote:
+> >> > Cast the kernel start address to the target bit length.
+> >> >
+> >> > This ensures that we calculate the initrd offset to a valid address =
+for
+> >> > the architecture.
+> >>
+> >> Can you add an example of the failure symptoms?
+> >
+> > I can.
 >
-> Thanks for the reminder :).  I have an account now so the update should be in
-> there, I'll try to remember to include it along with the PR next time.
+> Should I be waiting for a v3?
 
-Reminder is what that text is for :-)  It's entirely part of my
-canned reply to pull requests, so you'll see it whether there's
-anything in your PR email about having updated the changelog or not...
+You should be, I thought I sent it but I must have forgotten. I'll send it =
+now.
 
-thanks
--- PMM
+Alistair
+
+>
+> >
+> >>
+> >> >
+> >> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> >> > Suggested-by: Alexander Graf <agraf@suse.de>
+> >> > Reported-by: Alexander Graf <agraf@suse.de>
+> >> > ---
+> >> > v2:
+> >> >  - Remove old comment
+> >> >  hw/riscv/sifive_e.c | 2 +-
+> >> >  hw/riscv/sifive_u.c | 2 +-
+> >> >  hw/riscv/spike.c    | 2 +-
+> >> >  hw/riscv/virt.c     | 2 +-
+> >> >  4 files changed, 4 insertions(+), 4 deletions(-)
+> >> >
+> >> > diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
+> >> > index 5d9d65ff29..e5d7fc548e 100644
+> >> > --- a/hw/riscv/sifive_e.c
+> >> > +++ b/hw/riscv/sifive_e.c
+> >> > @@ -74,7 +74,7 @@ static const struct MemmapEntry {
+> >> >      [SIFIVE_E_DTIM] =3D     { 0x80000000,     0x4000 }
+> >> >  };
+> >> >
+> >> > -static uint64_t load_kernel(const char *kernel_filename)
+> >> > +static target_ulong load_kernel(const char *kernel_filename)
+> >> >  {
+> >> >      uint64_t kernel_entry, kernel_high;
+> >>
+> >> Shouldn't you update load_elf() and co now to take target_ulong
+> >> arguments? This would fix this error generically for all archs.
+> >
+> > That is an option, but as load_elf() is called by every other machine
+> > I don't want to break them. It's entirely possible that other machines
+> > rely on this behaviour and changing it will break them.
+> >
+> > Alistair
+> >
+> >>
+> >> >
+> >> > diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+> >> > index 3bd3b67507..3b3acec377 100644
+> >> > --- a/hw/riscv/sifive_u.c
+> >> > +++ b/hw/riscv/sifive_u.c
+> >> > @@ -65,7 +65,7 @@ static const struct MemmapEntry {
+> >> >
+> >> >  #define GEM_REVISION        0x10070109
+> >> >
+> >> > -static uint64_t load_kernel(const char *kernel_filename)
+> >> > +static target_ulong load_kernel(const char *kernel_filename)
+> >> >  {
+> >> >      uint64_t kernel_entry, kernel_high;
+> >> >
+> >> > diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
+> >> > index 268df04c3c..79cb4c1282 100644
+> >> > --- a/hw/riscv/spike.c
+> >> > +++ b/hw/riscv/spike.c
+> >> > @@ -53,7 +53,7 @@ static const struct MemmapEntry {
+> >> >      [SPIKE_DRAM] =3D     { 0x80000000,        0x0 },
+> >> >  };
+> >> >
+> >> > -static uint64_t load_kernel(const char *kernel_filename)
+> >> > +static target_ulong load_kernel(const char *kernel_filename)
+> >> >  {
+> >> >      uint64_t kernel_entry, kernel_high;
+> >> >
+> >> > diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> >> > index e7f0716fb6..648462b18c 100644
+> >> > --- a/hw/riscv/virt.c
+> >> > +++ b/hw/riscv/virt.c
+> >> > @@ -62,7 +62,7 @@ static const struct MemmapEntry {
+> >> >      [VIRT_PCIE_ECAM] =3D   { 0x30000000,    0x10000000 },
+> >> >  };
+> >> >
+> >> > -static uint64_t load_kernel(const char *kernel_filename)
+> >> > +static target_ulong load_kernel(const char *kernel_filename)
+> >> >  {
+> >> >      uint64_t kernel_entry, kernel_high;
+> >> >
+> >> >
 
