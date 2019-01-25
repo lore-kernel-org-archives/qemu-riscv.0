@@ -1,63 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gmn3N-0004VG-Gw
-	for mharc-qemu-riscv@gnu.org; Thu, 24 Jan 2019 17:00:53 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:43843)
+	id 1gmpcv-00006I-Go
+	for mharc-qemu-riscv@gnu.org; Thu, 24 Jan 2019 19:45:45 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:59806)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <philmd@redhat.com>) id 1gmn3K-0004Rm-Qu
-	for qemu-riscv@nongnu.org; Thu, 24 Jan 2019 17:00:51 -0500
+	(envelope-from <alistair23@gmail.com>) id 1gmpcu-00005j-3N
+	for qemu-riscv@nongnu.org; Thu, 24 Jan 2019 19:45:44 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <philmd@redhat.com>) id 1gmn0A-0006Y8-6M
-	for qemu-riscv@nongnu.org; Thu, 24 Jan 2019 16:57:35 -0500
-Received: from mail-wm1-f68.google.com ([209.85.128.68]:51722)
+	(envelope-from <alistair23@gmail.com>) id 1gmpct-0005fS-7p
+	for qemu-riscv@nongnu.org; Thu, 24 Jan 2019 19:45:44 -0500
+Received: from mail-lj1-x244.google.com ([2a00:1450:4864:20::244]:41562)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <philmd@redhat.com>) id 1gmn0A-0006Rl-0f
-	for qemu-riscv@nongnu.org; Thu, 24 Jan 2019 16:57:34 -0500
-Received: by mail-wm1-f68.google.com with SMTP id b11so4824066wmj.1
-	for <qemu-riscv@nongnu.org>; Thu, 24 Jan 2019 13:57:21 -0800 (PST)
+	(Exim 4.71) (envelope-from <alistair23@gmail.com>)
+	id 1gmpcs-0005e7-RR; Thu, 24 Jan 2019 19:45:43 -0500
+Received: by mail-lj1-x244.google.com with SMTP id k15-v6so6907306ljc.8;
+	Thu, 24 Jan 2019 16:45:42 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=7i390VFdFgC9MB+vfnsbstGpFxq0r2mXorVIf1mUzqg=;
+	b=BfR/TROv4eXwdkvE88A3tQd94wbXCiEbzcpr4LAyQEJft7OThq0mZ5q7I0Lv8VfkuD
+	l5Ssgl0bXKAKwPNdjXHGFtAgWfz9bH8ITIWWimwJoCzCRVKRf7wmqXJo8/ibv/f+eCt/
+	jHL0rB60j6etP7p+LUABQDxIGylsWPe5V7xiJftz/gF1nS8Yu5r+cuQN2dFovylwx0Ac
+	UiT77366FN/wEd6B2ebO/Tjtp9o3LIeqT8mkIpa6YdFmJgIJFqY9g/ckmar0qTCE0XmV
+	kg7gshtfH41J90NLBZ2DDT3/Sa0G8/vQXvpNGTG6XkWoRZ78DbHQO/RDJaxjZ1ZikV/F
+	b02Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
-	:date:user-agent:mime-version:in-reply-to:content-language
-	:content-transfer-encoding;
-	bh=Wr3J7uWXVzpeMHbHJaUL7WdG6Gx1teZuU4vls5ZqYVw=;
-	b=fE/ue6gli6fL7EwSv+EWgA4Ps14lWzXs9V2lOO0we4/UoV8nyaamF98tDDC1FHhj+v
-	Sv3NMH67FurKJCAGVhCG2+EI2vnXfhwmwbmG0ug4fRVkAJFhq6n5z+XyBRK5q2/nwsvW
-	8MUOTR1c/4eLZR01XSX0E9gcVCQET14HY1kW1rpWtOK6wFyUkuXyzEm+5uudY2S4aL11
-	cotPTa6BS+xtLOB0suYO7RMUBW8kLYCQ7iFLevS5qNgB9kCYEosGu8IfdHN2dlVqko7+
-	UaW0VUcD46h9gBrx4Pzts5ScCXmlisyjLJsvVLwpfwQRHrWQEq1OgxwlJiC7G1m07i25
-	EkLg==
-X-Gm-Message-State: AJcUukeyUtW98GLhc/euKC0+Xt3qI8jb5vfO9XADr63ZCFEBFpi10TDK
-	PJRdB2MgPQytua3lr8FBY7STsw==
-X-Google-Smtp-Source: ALg8bN7HeLCFsKxJlvJPmP268mOwlTMdJ3TRVHrid90h+b5EB3NkInfmCJcxZcKXT9NMh4dZPrGN+A==
-X-Received: by 2002:a1c:f605:: with SMTP id w5mr4548274wmc.116.1548367040804; 
-	Thu, 24 Jan 2019 13:57:20 -0800 (PST)
-Received: from [192.168.1.39] (110.red-83-51-161.dynamicip.rima-tde.net.
-	[83.51.161.110]) by smtp.gmail.com with ESMTPSA id
-	v1sm140856769wrw.90.2019.01.24.13.57.19
-	(version=TLS1_3 cipher=AEAD-AES128-GCM-SHA256 bits=128/128);
-	Thu, 24 Jan 2019 13:57:20 -0800 (PST)
-To: Alistair Francis <Alistair.Francis@wdc.com>,
-	"qemu-devel@nongnu.org" <qemu-devel@nongnu.org>,
-	"qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>
-Cc: "alistair23@gmail.com" <alistair23@gmail.com>
-References: <2b9ba958f8b317df83c37b348ad543fef2113528.1548351450.git.alistair.francis@wdc.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>
-Openpgp: id=89C1E78F601EE86C867495CBA2A3FD6EDEADC0DE;
-	url=http://pgp.mit.edu/pks/lookup?op=get&search=0xA2A3FD6EDEADC0DE
-Message-ID: <fd5f51bd-92a6-f653-40aa-02956a2f921e@redhat.com>
-Date: Thu, 24 Jan 2019 22:57:19 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.4.0
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=7i390VFdFgC9MB+vfnsbstGpFxq0r2mXorVIf1mUzqg=;
+	b=KbvzxEaX9kqwcF2S5Q28ocek/KOTn7oc9tSMr8AVKDOsImXeT+HhRcGl88noXGOQVB
+	0+Tz7qQqomqOnyRoY+vvRb7e/7Kd8VUgXglT/DnvvH1MlzS9nM8aN9zZbN1bG/XGL4/P
+	uaD+lqOWPXy+tvsg6pGqGGEKACmqE5QS0wND6UtDaLC0TEpACJ7TK7Ei4tit9W8/toTj
+	/6ZEoKZxrGxiRHWnDDTI6o92ndBQoGnh8BzXBbOpCeDf4WwlVsS4rOjupT//X9cr1yka
+	Iksfbz4l7ootQPzSHKf+SG8YxnojcK7+hZAsOklP7v5yeOiDmRDaT9o7tnITlZBd/T5w
+	ZRAg==
+X-Gm-Message-State: AJcUukfxtJ4b6AChJ3JZ76o60sL2bsIoFrvWJOboxTyTiNLsEM53ErIe
+	lCWR6mLLKr7EUCg6JJo+iBO3l+zIx1XuiFFFtn8=
+X-Google-Smtp-Source: ALg8bN6kQpfPhRY8oexwIFly7pQpKLcm8wBl5SEqIC32u2fCDvKLtgc760nOOASYVy4TJEurlWGgUdzUDDPTfMCAq7M=
+X-Received: by 2002:a2e:9e95:: with SMTP id
+	f21-v6mr7095217ljk.128.1548377140724; 
+	Thu, 24 Jan 2019 16:45:40 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <2b9ba958f8b317df83c37b348ad543fef2113528.1548351450.git.alistair.francis@wdc.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
-	[fuzzy]
-X-Received-From: 209.85.128.68
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v3 1/1] riscv: Ensure the
- kernel start address is correctly cast
+References: <CAKmqyKOgQLX3Feh=g2ytdiSbFaedWdExpVVjMt6v+SUqxRYhzQ@mail.gmail.com>
+	<mhng-8ea8314c-74f3-485d-a128-9fe9418ba593@palmer-si-x1c4>
+In-Reply-To: <mhng-8ea8314c-74f3-485d-a128-9fe9418ba593@palmer-si-x1c4>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Thu, 24 Jan 2019 16:45:13 -0800
+Message-ID: <CAKmqyKMAKq_WXtcEi9M55meRa6P=mk7uiy0_5Jg3_B-GpG9tXA@mail.gmail.com>
+To: Palmer Dabbelt <palmer@sifive.com>
+Cc: Richard Henderson <richard.henderson@linaro.org>, qemu-riscv@nongnu.org, 
+	Alistair Francis <Alistair.Francis@wdc.com>, 
+	"qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+	recognized.
+X-Received-From: 2a00:1450:4864:20::244
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v1 5/8] RISC-V: Add priv_ver
+ to DisasContext
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -69,101 +68,58 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Jan 2019 22:00:52 -0000
+X-List-Received-Date: Fri, 25 Jan 2019 00:45:45 -0000
 
-On 1/24/19 6:37 PM, Alistair Francis wrote:
-> Cast the kernel start address to the target bit length.
-> 
-> This ensures that we calculate the initrd offset to a valid address for
-> the architecture.
-> 
-> Steps to reproduce the original problem (reported by Alex):
->   Build U-Boot for the virt machine for riscv32. Then run it with
-> 
->     $ qemu-system-riscv32 -M virt -kernel u-boot -nographic -initrd <a file>
-> 
->   You can find the initrd address with
-> 
->     U-Boot# fdt addr $fdtcontroladdr
->     U-Boot# fdt ls /chosen
-> 
->   Then take a peek at that address:
-> 
->     U-Boot# md.b <addr>
-> 
->   and you will see that there is nothing there without this patch. The
->   reason is that the binary was loaded to a negative address.
-> 
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> Suggested-by: Alexander Graf <agraf@suse.de>
-> Reported-by: Alexander Graf <agraf@suse.de>
-> ---
-> v3:
->  - Add steps to reproduce
+On Thu, Jan 24, 2019 at 4:37 PM Palmer Dabbelt <palmer@sifive.com> wrote:
+>
+> On Tue, 15 Jan 2019 14:25:44 PST (-0800), alistair23@gmail.com wrote:
+> > On Tue, Jan 15, 2019 at 2:24 PM Richard Henderson
+> > <richard.henderson@linaro.org> wrote:
+> >>
+> >> On 1/15/19 10:58 AM, Alistair Francis wrote:
+> >> > -static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
+> >> > +static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cpu)
+> >>
+> >> Why change this?  I know there is variation in the naming, but my
+> >> preferred default mapping is CPUState *cs, RISCVCPU *cpu.
+> >
+> > Good point, I have changed it back to cs.
+>
+> I don't see a v2, so I'm just going to go ahead and squash in
 
-Thanks, this is useful to write an acceptance test.
+Yeah, I was waiting for more comments before sending a v2 on such a
+trivial change.
 
-Reviewed-by: Philippe Mathieu-Daudé <philmd@redhat.com>
+>
+>     diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+>     index 8593c2170af4..b7176cbf98e1 100644
+>     --- a/target/riscv/translate.c
+>     +++ b/target/riscv/translate.c
+>     @@ -2015,10 +2015,10 @@ static void decode_opc(DisasContext *ctx)
+>          }
+>      }
+>
+>     -static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cpu)
+>     +static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
+>      {
+>          DisasContext *ctx = container_of(dcbase, DisasContext, base);
+>     -    CPURISCVState *env = cpu->env_ptr;
+>     +    CPURISCVState *env = cs->env_ptr;
+>
+>          ctx->pc_succ_insn = ctx->base.pc_first;
+>          ctx->mem_idx = ctx->base.tb->flags & TB_FLAGS_MMU_MASK;
+>
+> and add Richard's tag.
 
-> v2:
->  - Remove old comment
->  hw/riscv/sifive_e.c | 2 +-
->  hw/riscv/sifive_u.c | 2 +-
->  hw/riscv/spike.c    | 2 +-
->  hw/riscv/virt.c     | 2 +-
->  4 files changed, 4 insertions(+), 4 deletions(-)
-> 
-> diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
-> index 5d9d65ff29..e5d7fc548e 100644
-> --- a/hw/riscv/sifive_e.c
-> +++ b/hw/riscv/sifive_e.c
-> @@ -74,7 +74,7 @@ static const struct MemmapEntry {
->      [SIFIVE_E_DTIM] =     { 0x80000000,     0x4000 }
->  };
->  
-> -static uint64_t load_kernel(const char *kernel_filename)
-> +static target_ulong load_kernel(const char *kernel_filename)
->  {
->      uint64_t kernel_entry, kernel_high;
->  
-> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-> index 3bd3b67507..3b3acec377 100644
-> --- a/hw/riscv/sifive_u.c
-> +++ b/hw/riscv/sifive_u.c
-> @@ -65,7 +65,7 @@ static const struct MemmapEntry {
->  
->  #define GEM_REVISION        0x10070109
->  
-> -static uint64_t load_kernel(const char *kernel_filename)
-> +static target_ulong load_kernel(const char *kernel_filename)
->  {
->      uint64_t kernel_entry, kernel_high;
->  
-> diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
-> index 268df04c3c..79cb4c1282 100644
-> --- a/hw/riscv/spike.c
-> +++ b/hw/riscv/spike.c
-> @@ -53,7 +53,7 @@ static const struct MemmapEntry {
->      [SPIKE_DRAM] =     { 0x80000000,        0x0 },
->  };
->  
-> -static uint64_t load_kernel(const char *kernel_filename)
-> +static target_ulong load_kernel(const char *kernel_filename)
->  {
->      uint64_t kernel_entry, kernel_high;
->  
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index e7f0716fb6..648462b18c 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -62,7 +62,7 @@ static const struct MemmapEntry {
->      [VIRT_PCIE_ECAM] =   { 0x30000000,    0x10000000 },
->  };
->  
-> -static uint64_t load_kernel(const char *kernel_filename)
-> +static target_ulong load_kernel(const char *kernel_filename)
->  {
->      uint64_t kernel_entry, kernel_high;
->  
-> 
+Sounds good.
+
+Alistair
+
+>
+> >
+> > Alistair
+> >
+> >>
+> >> Otherwise,
+> >> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
