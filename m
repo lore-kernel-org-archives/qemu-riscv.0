@@ -1,61 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gnAcd-0004Se-Ok
-	for mharc-qemu-riscv@gnu.org; Fri, 25 Jan 2019 18:10:51 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:36014)
+	id 1gnBJS-0003RG-7H
+	for mharc-qemu-riscv@gnu.org; Fri, 25 Jan 2019 18:55:06 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:50377)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <philmd@redhat.com>) id 1gnAcb-0004QF-5C
-	for qemu-riscv@nongnu.org; Fri, 25 Jan 2019 18:10:49 -0500
+	(envelope-from <palmer@sifive.com>) id 1gnBJO-0003Op-0E
+	for qemu-riscv@nongnu.org; Fri, 25 Jan 2019 18:55:02 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <philmd@redhat.com>) id 1gnAZe-0005Ri-N5
-	for qemu-riscv@nongnu.org; Fri, 25 Jan 2019 18:07:47 -0500
-Received: from mail-wm1-f67.google.com ([209.85.128.67]:38457)
+	(envelope-from <palmer@sifive.com>) id 1gnBJM-0005HH-Mz
+	for qemu-riscv@nongnu.org; Fri, 25 Jan 2019 18:55:01 -0500
+Received: from mail-pf1-x442.google.com ([2607:f8b0:4864:20::442]:46021)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <philmd@redhat.com>) id 1gnAZe-0005R1-H2
-	for qemu-riscv@nongnu.org; Fri, 25 Jan 2019 18:07:46 -0500
-Received: by mail-wm1-f67.google.com with SMTP id m22so8161779wml.3
-	for <qemu-riscv@nongnu.org>; Fri, 25 Jan 2019 15:07:46 -0800 (PST)
+	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1gnBJM-0005Ea-5c
+	for qemu-riscv@nongnu.org; Fri, 25 Jan 2019 18:55:00 -0500
+Received: by mail-pf1-x442.google.com with SMTP id g62so5427939pfd.12
+	for <qemu-riscv@nongnu.org>; Fri, 25 Jan 2019 15:54:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+	h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
+	:content-transfer-encoding;
+	bh=C0zeCOrYaFdLPk8Lc/cqTFJigmRBCUq/7TAZ4rYVC9g=;
+	b=Mug0QljL3hQy12GXZu7B5Qlq+nu4bUVJPz0tYHZEYZKO3pTzWR9eeyLg8wpzl+UM9X
+	6L+4JDKEcM6SBRdKoJEg4qo31qaTmTw63z/ytPcpaYXzTso94HtdV/5hOQMkexo0zHTQ
+	iORL2beIz5VEuWNinTIFrcoIkcB1xacjnkOETMWILF2uF6CWCkxXgCSKAp07UGK9d+IC
+	/A9+xA/SFtXvOyndn634yJhuIRP6hvhsmBr05q15oYYb8nKrlhnUa8b4Aoh94fa4Bdn/
+	JL13GMo3PgB5XB2FWJY1M41KX4Z61euau2HlRjC1BpUiSZjTcnN3CKJalH/ZTKjO67dy
+	XPbg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:references:from:openpgp:message-id
-	:date:user-agent:mime-version:in-reply-to:content-language
-	:content-transfer-encoding;
-	bh=8QkYvGAdChVivReQFU9jV7x+qWdUItFGNtUJ7SehJpI=;
-	b=a17a4Q4IOOsEc0VMLIBLe3BdwT3l3t7LnKoHpM36XyqXW/fz5kba8y0q6kddX0tmwJ
-	H3RBHc0XChbWa4VPWjW1e6C3O9XXHKv5Zugy0+oK5S2wud7fdH7vPd/nHGg3xorUOZJS
-	xWP95wOtVjrnRuLBVO+zO/ulCFRbM//+yBb77MQAi5Esi48QZ3fdQb4dwwwvJVU9Mdn7
-	N+0EMhpv8NTMbRToXUdprmj4P8BRZ+E55ha5fSQq6fLllmxFV1M7SUy/PkvNnITBFSsw
-	d+wY+KjZH4oeWE3X1i7WGg/sfEHFXpGOyUAZo5FgrHT/G/7E21Z2HGvrUH745VgVY7jF
-	nhAA==
-X-Gm-Message-State: AJcUukdc4MeI6bWb+zFuLNuVg6daGdXLzE9rhTVHceK3pNefnbBKRFNB
-	b9eqM/5R7TJeiIkklXTtSarQ1A==
-X-Google-Smtp-Source: ALg8bN4J+wj5Q4hcxSfVXOAFVvHLX5oWNhEqBI0gTQaTOLnuY6/OdZxfy3gzl3AYVFlYxrJ0MbsgGg==
-X-Received: by 2002:a1c:2787:: with SMTP id n129mr8721945wmn.128.1548457665326;
-	Fri, 25 Jan 2019 15:07:45 -0800 (PST)
-Received: from [192.168.1.39] (110.red-83-51-161.dynamicip.rima-tde.net.
-	[83.51.161.110]) by smtp.gmail.com with ESMTPSA id
-	x3sm103709237wrd.19.2019.01.25.15.07.44
-	(version=TLS1_3 cipher=AEAD-AES128-GCM-SHA256 bits=128/128);
-	Fri, 25 Jan 2019 15:07:44 -0800 (PST)
-To: Palmer Dabbelt <palmer@sifive.com>, qemu-riscv@nongnu.org,
+	h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
+	:mime-version:content-transfer-encoding;
+	bh=C0zeCOrYaFdLPk8Lc/cqTFJigmRBCUq/7TAZ4rYVC9g=;
+	b=LUKY9Vssgs1/6znadckxUO4Dkr5W+fXyqiiyyCz6IKnBk/wjvQ5/1Ro+gkPkGsFiH8
+	ahID49/QlARnLduRdd6nx2YWzN4Mg1SIpFtUJA4n6+JJQRGW54xKJjmxwwAG7K2ye8jB
+	a3XRS2IwZrGe9zK4+VE0JiIR1AyAulb8wVjvgSFJ6ij5//DStKEOOS5vCoJUdwIANIQi
+	A5Pn7qO7KTrit2JX3Fy+cn58hTGL8iHQ79EkkdEMQumRxJvoHOVQMbXSjHmC3beJz8GI
+	7mTph6LNcta/wjD0N/AKWFNgbM5dSO+kHZTd7d/czDKC8YOPnSeJ+cABr4SLD2HzTOyT
+	Fpdg==
+X-Gm-Message-State: AJcUukdS0Eyh/qy4PA6Ye8MHnI+F9jDyXQHmgB5B3W2Sk83fqSQfcbPZ
+	viF36HjeVIBKp+vmX7TBnaRvcw==
+X-Google-Smtp-Source: ALg8bN5BR8d85vkETFVy/TPLNtj6Bddal5E5V78OBPyfUqFwCVZWnLAjilfmKDicsm0gZCx49slOeA==
+X-Received: by 2002:a63:cd11:: with SMTP id i17mr11855648pgg.345.1548460498847;
+	Fri, 25 Jan 2019 15:54:58 -0800 (PST)
+Received: from localhost ([12.206.222.5]) by smtp.gmail.com with ESMTPSA id
+	m67sm37372854pfm.73.2019.01.25.15.54.57
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 25 Jan 2019 15:54:58 -0800 (PST)
+Date: Fri, 25 Jan 2019 15:54:58 -0800 (PST)
+X-Google-Original-Date: Fri, 25 Jan 2019 15:52:24 PST (-0800)
+In-Reply-To: <2153eec6-f25f-4e34-6423-01d76a14815c@linaro.org>
+CC: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+	sagark@eecs.berkeley.edu, 
+	peer.adelt@hni.uni-paderborn.de, qemu-riscv@nongnu.org,
 	qemu-devel@nongnu.org
-References: <20190125222113.31183-1-palmer@sifive.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>
-Openpgp: id=89C1E78F601EE86C867495CBA2A3FD6EDEADC0DE;
-	url=http://pgp.mit.edu/pks/lookup?op=get&search=0xA2A3FD6EDEADC0DE
-Message-ID: <ea2971d8-37e2-9d7b-8a9d-cc52aafa8467@redhat.com>
-Date: Sat, 26 Jan 2019 00:07:43 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.4.0
-MIME-Version: 1.0
-In-Reply-To: <20190125222113.31183-1-palmer@sifive.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
-	[fuzzy]
-X-Received-From: 209.85.128.67
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH] MAINTAINERS: Remove Michael
- Clark as a RISC-V Maintainer
+From: Palmer Dabbelt <palmer@sifive.com>
+To: richard.henderson@linaro.org
+Message-ID: <mhng-a089b75c-29ca-4a50-b64c-e86349ac6190@palmer-si-x1c4>
+Mime-Version: 1.0 (MHng)
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+	recognized.
+X-Received-From: 2607:f8b0:4864:20::442
+Subject: Re: [Qemu-riscv] [PATCH v5 00/35] target/riscv: Convert to
+ decodetree
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -67,31 +73,53 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Jan 2019 23:10:49 -0000
+X-List-Received-Date: Fri, 25 Jan 2019 23:55:03 -0000
 
-On 1/25/19 11:21 PM, Palmer Dabbelt wrote:
-> Michael is no longer employed by SiFive and does not want to continue
-> maintianing the RISC-V port.
+On Tue, 22 Jan 2019 13:38:52 PST (-0800), richard.henderson@linaro.org wrote:
+> On 1/22/19 1:28 AM, Bastian Koppelmann wrote:
+>> Hi,
+>>
+>> this patchset converts the RISC-V decoder to decodetree in four major steps:
+>>
+>> 1) Convert 32-bit instructions to decodetree [Patch 1-16]:
+>>     Many of the gen_* functions are called by the decode functions for 16-bit
+>>     and 32-bit functions. If we move translation code from the gen_*
+>>     functions to the generated trans_* functions of decode-tree, we get a lot of
+>>     duplication. Therefore, we mostly generate calls to the old gen_* function
+>>     which are properly replaced after step 2).
+>>
+>>     Each of the trans_ functions are grouped into files corresponding to their
+>>     ISA extension, e.g. addi which is in RV32I is translated in the file
+>>     'trans_rvi.inc.c'.
+>>
+>> 2) Convert 16-bit instructions to decodetree [Patch 17-19]:
+>>     All 16 bit instructions have a direct mapping to a 32 bit instruction. Thus,
+>>     we convert the arguments in the 16 bit trans_ function to the arguments of
+>>     the corresponding 32 bit instruction and call the 32 bit trans_ function.
+>>
+>> 3) Remove old manual decoding in gen_* function [Patch 20-30]:
+>>     this move all manual translation code into the trans_* instructions of
+>>     decode tree, such that we can remove the old decode_* functions.
+>>
+>> 4) Simplify RVC by reusing as much as possible from the RVG decoder as suggested
+>>    by Richard. [Patch 31-35]
+>>
+>> full tree available at
+>> https://github.com/bkoppelmann/qemu/tree/riscv-dt-v5
+>>
+>> Cheers,
+>> Bastian
+>>
+>> v4 -> v5:
+>>     - fixed rebase error
+>>     - moved TARGET_LONG_BITS check of shift instructions before rd == 0 check
+>>     - removed extra sign extension of sraiw
+>>     - removed rs2 == 0 special cases in sraw/srlw
+>
+> All looks good to me now.  Thanks for persevering.
 
-"maintaining"
+Thanks for reviewing this.
 
-> 
-> Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
-> ---
->  MAINTAINERS | 1 -
->  1 file changed, 1 deletion(-)
-> 
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index af339b86db76..47cb3c14298e 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -259,7 +259,6 @@ F: include/hw/ppc/
->  F: disas/ppc.c
->  
->  RISC-V
-> -M: Michael Clark <mjc@sifive.com>
->  M: Palmer Dabbelt <palmer@sifive.com>
->  M: Alistair Francis <Alistair.Francis@wdc.com>
->  M: Sagar Karandikar <sagark@eecs.berkeley.edu>
-> 
+Bastian: what sort of testing have you done here?  This is a pretty big change, 
+and while it's been fairly extensively reviewed I'm just generally paranoid.
 
