@@ -1,73 +1,73 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gn9yJ-0003MG-Qu
-	for mharc-qemu-riscv@gnu.org; Fri, 25 Jan 2019 17:29:11 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:42745)
+	id 1gn9zG-0003vz-DJ
+	for mharc-qemu-riscv@gnu.org; Fri, 25 Jan 2019 17:30:11 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:43408)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1gn9yH-0003Kq-Sg
-	for qemu-riscv@nongnu.org; Fri, 25 Jan 2019 17:29:10 -0500
+	(envelope-from <alistair23@gmail.com>) id 1gn9zD-0003sO-J4
+	for qemu-riscv@nongnu.org; Fri, 25 Jan 2019 17:30:08 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1gn9yF-0006gG-Sp
-	for qemu-riscv@nongnu.org; Fri, 25 Jan 2019 17:29:09 -0500
-Received: from mail-pl1-x643.google.com ([2607:f8b0:4864:20::643]:46880)
+	(envelope-from <alistair23@gmail.com>) id 1gn9zC-0007XG-H8
+	for qemu-riscv@nongnu.org; Fri, 25 Jan 2019 17:30:07 -0500
+Received: from mail-pl1-x642.google.com ([2607:f8b0:4864:20::642]:36739)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
 	(Exim 4.71) (envelope-from <alistair23@gmail.com>)
-	id 1gn9yA-0006cC-7h; Fri, 25 Jan 2019 17:29:03 -0500
-Received: by mail-pl1-x643.google.com with SMTP id t13so5153853ply.13;
-	Fri, 25 Jan 2019 14:29:01 -0800 (PST)
+	id 1gn9z2-00077F-HR; Fri, 25 Jan 2019 17:29:59 -0500
+Received: by mail-pl1-x642.google.com with SMTP id g9so5180920plo.3;
+	Fri, 25 Jan 2019 14:29:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=subject:to:cc:references:from:message-id:date:user-agent
 	:mime-version:in-reply-to:content-language:content-transfer-encoding;
-	bh=qSeSCHOqRAoEdaFmDAcRgxN54zNW5wUffKREjweaQ48=;
-	b=lwbVWH1WXrb4IM5r+F8cljIuOQLpFeboTkkZ7IgdvfATJjEmaR64EHh24NHKBhly10
-	OJsZnVglQEigmFJ+Plg26E6iXTwIUIteARFplUJQc9Bh+5w189vuZG+R8duUzPco4/Ah
-	M8+ABtYaMZ4Eb3EIDcG05ibT+3+P/FYndSaG4SEKqPNZqm+7zP4epdZEaQdc23AbcYQO
-	q5ANCiGdPhqmM9NoHT55ROrWDhwaqICKMIffL+lypPXIH/YM/zL7dzkY9Smawd0mUSJi
-	OZnG8reSjqsK6hNGnubcGWkWWGp8uubRHqnRpdcZtAFk7c4OcxihaUULfxS8qP6WS6NR
-	oUZw==
+	bh=NtkbCEfkDfwUeczp/zBZ3dDoeT5kny+0wR+EQzyp4Fw=;
+	b=s2h0mHbxx40tcqA97BAHKT80t5p+vwNBAazdK1kNhWpMqehOK0V03TZBVK4AiOXVoY
+	tgaiBrEH3HHM6a0bFVHd4nNnxZGhGMcuFSZUjy6jMSIxxYVPjQfSYNmrHft/QZiG+Rkn
+	KkwORbvPGf/7DAR02b8LlW21cwmGW3uUUFh2q4AnKs2uOylCHRGvXGMh6PAV9/tIHHYs
+	jMnr3yOQKf2wEBkTWJvrbWvAySE+zjYPoHdKvpl3JVcc6AL8EORcXUo6A4yhzEJMYWPQ
+	G2BCQ3mFjVJKOMaUErXbEqo/AiUxeCiDJV1MXxD0/v+v24c0qYT4vloqbI3X1c9seG1w
+	N95Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:subject:to:cc:references:from:message-id:date
 	:user-agent:mime-version:in-reply-to:content-language
 	:content-transfer-encoding;
-	bh=qSeSCHOqRAoEdaFmDAcRgxN54zNW5wUffKREjweaQ48=;
-	b=Hf1dGoYNNZWnKQG5LvL2gpzUL3U/OCFZb75cCiu61Ksp2ViutPdofqQHChINnTRLXn
-	7mHlHJ2On6lJRd514iK9gUS4ayjkA2SXeH8WC9bmGIBYDdZcfZ8sDZs1hy4iahFijyT4
-	PCZrue/OrSlemVzPJKfChUuWMW7E7wj8eLndTELqGU+mQZhOQnLuJw7jlVzObWkgAMyo
-	ZKp69EHKoUuPg46toV5M/wMFsD5blMP4DHcpca/08Rz8oOkwVHGbHCjMNolDgH5Ne+R3
-	Bixs1c3XYHx7uTXT1ziJy/4My5E9NmUai35Hp70jLRez65IvW/z4AuhgXktvSTDYi8q3
-	qNrA==
-X-Gm-Message-State: AJcUukdGhGQWW4NTQdXoiKXMlrACV4e3kkWLSAMgiExdfbvKQiz2hQuq
-	8o3FSxLVRl6MBE3yDI5QKPD5k7GG
-X-Google-Smtp-Source: ALg8bN6GHrebV7BdkTMvjeqbBhVQ/lAzLhZxXc3GZkNIJspmzTrIlrysfVbrTXbpS5RmJL05j4nlvA==
-X-Received: by 2002:a17:902:2c83:: with SMTP id
-	n3mr12978968plb.104.1548455340271; 
-	Fri, 25 Jan 2019 14:29:00 -0800 (PST)
+	bh=NtkbCEfkDfwUeczp/zBZ3dDoeT5kny+0wR+EQzyp4Fw=;
+	b=r67aKpORbsS9gsMkgd3lG0Hw2OyowbAdV8Dfq48fs4Qvkkl+p1Wu6A8XrH/ACSjWPv
+	zkxY8CFIj8OYe6ALduo5oWsLUfQPAigSqOBN7QDnU3ig/9YSeYuu8EC1bRWWACMRZ5xX
+	bLAUgQtkQIgF/XfjnPcuyU7sFHxFYXmIErMraX6gnGdziJptlxjaVSM8eiOQgOgiZ2Tj
+	9OW/D73FU3ywEAVbJdNkBRvcy8vj7Y0Wc61RrVA3XubInI6mg9xzrEx2pg9MvAKlXxOd
+	zPT8EzKol6GVwpMKB83kFVLCDS43Gx9ZsEhwlhE2I25rgb9Vs7Yz39oXX8a/tXz+fh2A
+	oT9g==
+X-Gm-Message-State: AJcUukdIY/mN5O68zDZU+AcZg7tyXU8Ow2xEemfZImHJmJbeX6Xe7oZJ
+	XLw5UyGQ5a+20uFA3kTBPqkEmrDP
+X-Google-Smtp-Source: ALg8bN40jdMWZV5RLKJ8A3LUuz/McjAyEbtuzrO6+DQb1B2kbbZQUx8YPre/Inn3D2zYfPksGiBpSw==
+X-Received: by 2002:a17:902:968d:: with SMTP id
+	n13mr13086456plp.109.1548455374651; 
+	Fri, 25 Jan 2019 14:29:34 -0800 (PST)
 Received: from [10.196.159.136] (rap-us.hgst.com. [199.255.44.250])
 	by smtp.gmail.com with ESMTPSA id
-	e16sm32526792pfn.46.2019.01.25.14.28.57
+	l5sm34250734pgp.82.2019.01.25.14.29.31
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 25 Jan 2019 14:28:59 -0800 (PST)
+	Fri, 25 Jan 2019 14:29:33 -0800 (PST)
 To: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
 	sagark@eecs.berkeley.edu, palmer@sifive.com
 Cc: richard.henderson@linaro.org, peer.adelt@hni.uni-paderborn.de,
 	qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 References: <20190123092538.8004-1-kbastian@mail.uni-paderborn.de>
-	<20190123092538.8004-29-kbastian@mail.uni-paderborn.de>
+	<20190123092538.8004-31-kbastian@mail.uni-paderborn.de>
 From: Alistair <alistair23@gmail.com>
-Message-ID: <4dd52d4c-5c17-bf31-553d-1368494a63aa@gmail.com>
-Date: Fri, 25 Jan 2019 14:28:56 -0800
+Message-ID: <14f6462f-ea46-7e1a-d03a-bed324f9d88b@gmail.com>
+Date: Fri, 25 Jan 2019 14:29:30 -0800
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
 	Thunderbird/60.4.0
 MIME-Version: 1.0
-In-Reply-To: <20190123092538.8004-29-kbastian@mail.uni-paderborn.de>
+In-Reply-To: <20190123092538.8004-31-kbastian@mail.uni-paderborn.de>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::643
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v6 28/35] target/riscv: Rename
- trans_arith to gen_arith
+X-Received-From: 2607:f8b0:4864:20::642
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v6 30/35] target/riscv: Remove
+ decode_RV32_64G()
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -79,162 +79,64 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Jan 2019 22:29:11 -0000
+X-List-Received-Date: Fri, 25 Jan 2019 22:30:08 -0000
 
 On 1/23/19 1:25 AM, Bastian Koppelmann wrote:
+> decodetree handles all instructions now so the fallback is not necessary
+> anymore.
+> 
 > Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 > Signed-off-by: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+> Signed-off-by: Peer Adelt <peer.adelt@hni.uni-paderborn.de>
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->   target/riscv/insn_trans/trans_rvi.inc.c | 18 +++++++++---------
->   target/riscv/insn_trans/trans_rvm.inc.c | 14 +++++++-------
->   target/riscv/translate.c                |  4 ++--
->   3 files changed, 18 insertions(+), 18 deletions(-)
+>   target/riscv/translate.c | 23 +----------------------
+>   1 file changed, 1 insertion(+), 22 deletions(-)
 > 
-> diff --git a/target/riscv/insn_trans/trans_rvi.inc.c b/target/riscv/insn_trans/trans_rvi.inc.c
-> index eac79f076f..904ae44968 100644
-> --- a/target/riscv/insn_trans/trans_rvi.inc.c
-> +++ b/target/riscv/insn_trans/trans_rvi.inc.c
-> @@ -307,12 +307,12 @@ static bool trans_srai(DisasContext *ctx, arg_srai *a)
->   
->   static bool trans_add(DisasContext *ctx, arg_add *a)
->   {
-> -    return trans_arith(ctx, a, &tcg_gen_add_tl);
-> +    return gen_arith(ctx, a, &tcg_gen_add_tl);
->   }
->   
->   static bool trans_sub(DisasContext *ctx, arg_sub *a)
->   {
-> -    return trans_arith(ctx, a, &tcg_gen_sub_tl);
-> +    return gen_arith(ctx, a, &tcg_gen_sub_tl);
->   }
->   
->   static bool trans_sll(DisasContext *ctx, arg_sll *a)
-> @@ -322,17 +322,17 @@ static bool trans_sll(DisasContext *ctx, arg_sll *a)
->   
->   static bool trans_slt(DisasContext *ctx, arg_slt *a)
->   {
-> -    return trans_arith(ctx, a, &gen_slt);
-> +    return gen_arith(ctx, a, &gen_slt);
->   }
->   
->   static bool trans_sltu(DisasContext *ctx, arg_sltu *a)
->   {
-> -    return trans_arith(ctx, a, &gen_sltu);
-> +    return gen_arith(ctx, a, &gen_sltu);
->   }
->   
->   static bool trans_xor(DisasContext *ctx, arg_xor *a)
->   {
-> -    return trans_arith(ctx, a, &tcg_gen_xor_tl);
-> +    return gen_arith(ctx, a, &tcg_gen_xor_tl);
->   }
->   
->   static bool trans_srl(DisasContext *ctx, arg_srl *a)
-> @@ -347,12 +347,12 @@ static bool trans_sra(DisasContext *ctx, arg_sra *a)
->   
->   static bool trans_or(DisasContext *ctx, arg_or *a)
->   {
-> -    return trans_arith(ctx, a, &tcg_gen_or_tl);
-> +    return gen_arith(ctx, a, &tcg_gen_or_tl);
->   }
->   
->   static bool trans_and(DisasContext *ctx, arg_and *a)
->   {
-> -    return trans_arith(ctx, a, &tcg_gen_and_tl);
-> +    return gen_arith(ctx, a, &tcg_gen_and_tl);
->   }
->   
->   #ifdef TARGET_RISCV64
-> @@ -399,12 +399,12 @@ static bool trans_sraiw(DisasContext *ctx, arg_sraiw *a)
->   
->   static bool trans_addw(DisasContext *ctx, arg_addw *a)
->   {
-> -    return trans_arith(ctx, a, &gen_addw);
-> +    return gen_arith(ctx, a, &gen_addw);
->   }
->   
->   static bool trans_subw(DisasContext *ctx, arg_subw *a)
->   {
-> -    return trans_arith(ctx, a, &gen_subw);
-> +    return gen_arith(ctx, a, &gen_subw);
->   }
->   
->   static bool trans_sllw(DisasContext *ctx, arg_sllw *a)
-> diff --git a/target/riscv/insn_trans/trans_rvm.inc.c b/target/riscv/insn_trans/trans_rvm.inc.c
-> index 949f59ddb2..5844d6f5be 100644
-> --- a/target/riscv/insn_trans/trans_rvm.inc.c
-> +++ b/target/riscv/insn_trans/trans_rvm.inc.c
-> @@ -21,7 +21,7 @@
->   
->   static bool trans_mul(DisasContext *ctx, arg_mul *a)
->   {
-> -    return trans_arith(ctx, a, &tcg_gen_mul_tl);
-> +    return gen_arith(ctx, a, &tcg_gen_mul_tl);
->   }
->   
->   static bool trans_mulh(DisasContext *ctx, arg_mulh *a)
-> @@ -41,7 +41,7 @@ static bool trans_mulh(DisasContext *ctx, arg_mulh *a)
->   
->   static bool trans_mulhsu(DisasContext *ctx, arg_mulhsu *a)
->   {
-> -    return trans_arith(ctx, a, &gen_mulhsu);
-> +    return gen_arith(ctx, a, &gen_mulhsu);
->   }
->   
->   static bool trans_mulhu(DisasContext *ctx, arg_mulhu *a)
-> @@ -61,28 +61,28 @@ static bool trans_mulhu(DisasContext *ctx, arg_mulhu *a)
->   
->   static bool trans_div(DisasContext *ctx, arg_div *a)
->   {
-> -    return trans_arith(ctx, a, &gen_div);
-> +    return gen_arith(ctx, a, &gen_div);
->   }
->   
->   static bool trans_divu(DisasContext *ctx, arg_divu *a)
->   {
-> -    return trans_arith(ctx, a, &gen_divu);
-> +    return gen_arith(ctx, a, &gen_divu);
->   }
->   
->   static bool trans_rem(DisasContext *ctx, arg_rem *a)
->   {
-> -    return trans_arith(ctx, a, &gen_rem);
-> +    return gen_arith(ctx, a, &gen_rem);
->   }
->   
->   static bool trans_remu(DisasContext *ctx, arg_remu *a)
->   {
-> -    return trans_arith(ctx, a, &gen_remu);
-> +    return gen_arith(ctx, a, &gen_remu);
->   }
->   
->   #ifdef TARGET_RISCV64
->   static bool trans_mulw(DisasContext *ctx, arg_mulw *a)
->   {
-> -    return trans_arith(ctx, a, &gen_mulw);
-> +    return gen_arith(ctx, a, &gen_mulw);
->   }
->   
->   static bool trans_divw(DisasContext *ctx, arg_divw *a)
 > diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index 6a722a0045..d0b0fca12b 100644
+> index 0e37beb68e..b0251b3518 100644
 > --- a/target/riscv/translate.c
 > +++ b/target/riscv/translate.c
-> @@ -577,8 +577,8 @@ static bool gen_arith_div_w(DisasContext *ctx, arg_r *a,
+> @@ -600,26 +600,6 @@ bool decode_insn16(DisasContext *ctx, uint16_t insn);
+>   #include "decode_insn16.inc.c"
+>   #include "insn_trans/trans_rvc.inc.c"
 >   
->   #endif
->   
-> -static bool trans_arith(DisasContext *ctx, arg_r *a,
-> -                        void(*func)(TCGv, TCGv, TCGv))
-> +static bool gen_arith(DisasContext *ctx, arg_r *a,
-> +                      void(*func)(TCGv, TCGv, TCGv))
+> -static void decode_RV32_64G(CPURISCVState *env, DisasContext *ctx)
+> -{
+> -    uint32_t op;
+> -
+> -    /* We do not do misaligned address check here: the address should never be
+> -     * misaligned at this point. Instructions that set PC must do the check,
+> -     * since epc must be the address of the instruction that caused us to
+> -     * perform the misaligned instruction fetch */
+> -
+> -    op = MASK_OP_MAJOR(ctx->opcode);
+> -
+> -    switch (op) {
+> -    case OPC_RISC_SYSTEM:
+> -        break;
+> -    default:
+> -        gen_exception_illegal(ctx);
+> -        break;
+> -    }
+> -}
+> -
+>   static void decode_opc(DisasContext *ctx)
 >   {
->       TCGv source1, source2;
->       source1 = tcg_temp_new();
+>       /* check for compressed insn */
+> @@ -636,8 +616,7 @@ static void decode_opc(DisasContext *ctx)
+>       } else {
+>           ctx->pc_succ_insn = ctx->base.pc_next + 4;
+>           if (!decode_insn32(ctx, ctx->opcode)) {
+> -            /* fallback to old decoder */
+> -            decode_RV32_64G(ctx->env, ctx);
+> +            gen_exception_illegal(ctx);
+>           }
+>       }
+>   }
 > 
 
