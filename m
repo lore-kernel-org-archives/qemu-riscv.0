@@ -1,62 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gmpcv-00006I-Go
-	for mharc-qemu-riscv@gnu.org; Thu, 24 Jan 2019 19:45:45 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:59806)
+	id 1gmpd4-0000FB-Rz
+	for mharc-qemu-riscv@gnu.org; Thu, 24 Jan 2019 19:45:55 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:59786)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1gmpcu-00005j-3N
-	for qemu-riscv@nongnu.org; Thu, 24 Jan 2019 19:45:44 -0500
+	(envelope-from <palmer@sifive.com>) id 1gmpd1-00005h-Vf
+	for qemu-riscv@nongnu.org; Thu, 24 Jan 2019 19:45:53 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1gmpct-0005fS-7p
-	for qemu-riscv@nongnu.org; Thu, 24 Jan 2019 19:45:44 -0500
-Received: from mail-lj1-x244.google.com ([2a00:1450:4864:20::244]:41562)
+	(envelope-from <palmer@sifive.com>) id 1gmpUV-0000Cj-E8
+	for qemu-riscv@nongnu.org; Thu, 24 Jan 2019 19:37:04 -0500
+Received: from mail-pf1-x443.google.com ([2607:f8b0:4864:20::443]:38931)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <alistair23@gmail.com>)
-	id 1gmpcs-0005e7-RR; Thu, 24 Jan 2019 19:45:43 -0500
-Received: by mail-lj1-x244.google.com with SMTP id k15-v6so6907306ljc.8;
-	Thu, 24 Jan 2019 16:45:42 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=7i390VFdFgC9MB+vfnsbstGpFxq0r2mXorVIf1mUzqg=;
-	b=BfR/TROv4eXwdkvE88A3tQd94wbXCiEbzcpr4LAyQEJft7OThq0mZ5q7I0Lv8VfkuD
-	l5Ssgl0bXKAKwPNdjXHGFtAgWfz9bH8ITIWWimwJoCzCRVKRf7wmqXJo8/ibv/f+eCt/
-	jHL0rB60j6etP7p+LUABQDxIGylsWPe5V7xiJftz/gF1nS8Yu5r+cuQN2dFovylwx0Ac
-	UiT77366FN/wEd6B2ebO/Tjtp9o3LIeqT8mkIpa6YdFmJgIJFqY9g/ckmar0qTCE0XmV
-	kg7gshtfH41J90NLBZ2DDT3/Sa0G8/vQXvpNGTG6XkWoRZ78DbHQO/RDJaxjZ1ZikV/F
-	b02Q==
+	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1gmpUV-0000Bg-4V
+	for qemu-riscv@nongnu.org; Thu, 24 Jan 2019 19:37:03 -0500
+Received: by mail-pf1-x443.google.com with SMTP id r136so3864319pfc.6
+	for <qemu-riscv@nongnu.org>; Thu, 24 Jan 2019 16:37:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+	h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
+	:content-transfer-encoding;
+	bh=Ov3WHkrv2J8/Xm2Q/Oh5Zql+BNLqvaISw9FuueU3lGE=;
+	b=KulFifw/6XJrypAL1PqNwiifACt4wPP1JvdbDwlX8H8XuTOm2LJ8YViCJoFcuz0UQp
+	jDQOrRgBKEiM/PWM/DxfVaMFRFrtuFkLlnWgdab3vf4xc1E1NT8dW1MlaQ02UQjmcCdV
+	45KLpava0ToyoX6YF/C5M/WZBFqKG1sx2JVxiqoZCLSzJa7feZm1VsCu2qj5C03joSem
+	V/0RsTCgVtWQKg7hmNS1TMIVnAFXlIfHawcrAX4hYkHZg1DQ8xHthXKdfahYZbpbOcQG
+	2ZUd1rOeZN5O3Z3+rUzmKHWxOz1nKT4fMZpXi1KCGBSldJseRPwoFxj7ddzFYskDtP7T
+	SoxA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=7i390VFdFgC9MB+vfnsbstGpFxq0r2mXorVIf1mUzqg=;
-	b=KbvzxEaX9kqwcF2S5Q28ocek/KOTn7oc9tSMr8AVKDOsImXeT+HhRcGl88noXGOQVB
-	0+Tz7qQqomqOnyRoY+vvRb7e/7Kd8VUgXglT/DnvvH1MlzS9nM8aN9zZbN1bG/XGL4/P
-	uaD+lqOWPXy+tvsg6pGqGGEKACmqE5QS0wND6UtDaLC0TEpACJ7TK7Ei4tit9W8/toTj
-	/6ZEoKZxrGxiRHWnDDTI6o92ndBQoGnh8BzXBbOpCeDf4WwlVsS4rOjupT//X9cr1yka
-	Iksfbz4l7ootQPzSHKf+SG8YxnojcK7+hZAsOklP7v5yeOiDmRDaT9o7tnITlZBd/T5w
-	ZRAg==
-X-Gm-Message-State: AJcUukfxtJ4b6AChJ3JZ76o60sL2bsIoFrvWJOboxTyTiNLsEM53ErIe
-	lCWR6mLLKr7EUCg6JJo+iBO3l+zIx1XuiFFFtn8=
-X-Google-Smtp-Source: ALg8bN6kQpfPhRY8oexwIFly7pQpKLcm8wBl5SEqIC32u2fCDvKLtgc760nOOASYVy4TJEurlWGgUdzUDDPTfMCAq7M=
-X-Received: by 2002:a2e:9e95:: with SMTP id
-	f21-v6mr7095217ljk.128.1548377140724; 
-	Thu, 24 Jan 2019 16:45:40 -0800 (PST)
-MIME-Version: 1.0
-References: <CAKmqyKOgQLX3Feh=g2ytdiSbFaedWdExpVVjMt6v+SUqxRYhzQ@mail.gmail.com>
-	<mhng-8ea8314c-74f3-485d-a128-9fe9418ba593@palmer-si-x1c4>
-In-Reply-To: <mhng-8ea8314c-74f3-485d-a128-9fe9418ba593@palmer-si-x1c4>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 24 Jan 2019 16:45:13 -0800
-Message-ID: <CAKmqyKMAKq_WXtcEi9M55meRa6P=mk7uiy0_5Jg3_B-GpG9tXA@mail.gmail.com>
-To: Palmer Dabbelt <palmer@sifive.com>
-Cc: Richard Henderson <richard.henderson@linaro.org>, qemu-riscv@nongnu.org, 
-	Alistair Francis <Alistair.Francis@wdc.com>, 
-	"qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
+	h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
+	:mime-version:content-transfer-encoding;
+	bh=Ov3WHkrv2J8/Xm2Q/Oh5Zql+BNLqvaISw9FuueU3lGE=;
+	b=U4/vb1y3Ius4YyaM5T4duBTtEjbFOfLUpOzrx2BQ8UteGgak5nq+LAnUac84fsYgUd
+	OUKtTVyHpJ181N1fUENWc7xeQbIJbxB7GKjtKquCL7ms6aWycZvlHGzAjcxPrio2/7x1
+	e8LCArV5j9VwbmWVUuhqBfo0LSRIof0UmdkN76AyFMzfrD2Mi12MOPUc24jkppj1Jcfx
+	mDH7Au8G0J1rLlXDKBEuRUvHXG87SDf+TJ5Y89ftySVol3yYp2rFSi4vSoxVcULrpV5n
+	KfZw6k7dVbsInJqxPrFm5WIAbpjvPIsG3aTnR2qAYDMMb5pyAQ7hEA2BbrPsM0ZoDCQI
+	unVQ==
+X-Gm-Message-State: AJcUuke59F8dM5LDsTzlkFsXgHaNTIhlT/MaTCqMZrSNmTBUds9aVcmO
+	Uq2GYvhIOqoxTN6d3GXzO7w7Xq7Uy/8=
+X-Google-Smtp-Source: ALg8bN61P1I9iQETtnh+Ln6Jf2JU8px0HxXaNowbDQVIlgPQyN7Tn02WN2IfEiTB3Lz5RN6/JIla5Q==
+X-Received: by 2002:a63:2905:: with SMTP id p5mr8065096pgp.178.1548376622075; 
+	Thu, 24 Jan 2019 16:37:02 -0800 (PST)
+Received: from localhost ([12.206.222.5]) by smtp.gmail.com with ESMTPSA id
+	n21sm32517331pfg.84.2019.01.24.16.37.01
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 24 Jan 2019 16:37:01 -0800 (PST)
+Date: Thu, 24 Jan 2019 16:37:01 -0800 (PST)
+X-Google-Original-Date: Thu, 24 Jan 2019 16:35:18 PST (-0800)
+In-Reply-To: <f7184f107ba99dab6b85da6916fc09663ffd3e21.1547510220.git.alistair.francis@wdc.com>
+CC: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair23@gmail.com,
+	Alistair Francis <Alistair.Francis@wdc.com>
+From: Palmer Dabbelt <palmer@sifive.com>
+To: Alistair Francis <Alistair.Francis@wdc.com>
+Message-ID: <mhng-3c01575f-3b0a-4ee3-be42-260e5bb39956@palmer-si-x1c4>
+Mime-Version: 1.0 (MHng)
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2a00:1450:4864:20::244
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v1 5/8] RISC-V: Add priv_ver
- to DisasContext
+X-Received-From: 2607:f8b0:4864:20::443
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v1 8/8] RISC-V: Add misa
+ runtime write support
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -68,58 +71,166 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Jan 2019 00:45:45 -0000
+X-List-Received-Date: Fri, 25 Jan 2019 00:45:53 -0000
 
-On Thu, Jan 24, 2019 at 4:37 PM Palmer Dabbelt <palmer@sifive.com> wrote:
+On Mon, 14 Jan 2019 15:59:00 PST (-0800), Alistair Francis wrote:
+> From: Michael Clark <mjc@sifive.com>
 >
-> On Tue, 15 Jan 2019 14:25:44 PST (-0800), alistair23@gmail.com wrote:
-> > On Tue, Jan 15, 2019 at 2:24 PM Richard Henderson
-> > <richard.henderson@linaro.org> wrote:
-> >>
-> >> On 1/15/19 10:58 AM, Alistair Francis wrote:
-> >> > -static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
-> >> > +static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cpu)
-> >>
-> >> Why change this?  I know there is variation in the naming, but my
-> >> preferred default mapping is CPUState *cs, RISCVCPU *cpu.
-> >
-> > Good point, I have changed it back to cs.
+> This patch adds support for writing misa. misa is validated based
+> on rules in the ISA specification. 'E' is mutually exclusive with
+> all other extensions. 'D' depends on 'F' so 'D' bit is dropped
+> if 'F' is not present. A conservative approach to consistency is
+> taken by flushing the translation cache on misa writes. misa_mask
+> is added to the CPU struct to store the original set of extensions.
 >
-> I don't see a v2, so I'm just going to go ahead and squash in
+> Cc: Palmer Dabbelt <palmer@sifive.com>
+> Cc: Sagar Karandikar <sagark@eecs.berkeley.edu>
+> Cc: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+> Cc: Alistair Francis <Alistair.Francis@wdc.com>
+> Signed-off-by: Michael Clark <mjc@sifive.com>
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> ---
+>  target/riscv/cpu.c      |  2 +-
+>  target/riscv/cpu.h      |  4 ++-
+>  target/riscv/cpu_bits.h | 11 +++++++++
+>  target/riscv/csr.c      | 54 ++++++++++++++++++++++++++++++++++++++++-
+>  4 files changed, 68 insertions(+), 3 deletions(-)
+>
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 28d7e5302f..cc3ddc0ae4 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -88,7 +88,7 @@ typedef struct RISCVCPUInfo {
+>  
+>  static void set_misa(CPURISCVState *env, target_ulong misa)
+>  {
+> -    env->misa = misa;
+> +    env->misa_mask = env->misa = misa;
+>  }
+>  
+>  static void set_versions(CPURISCVState *env, int user_ver, int priv_ver)
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index a97435bd7b..5c2aebf132 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -86,7 +86,8 @@
+>     so a cpu features bitfield is required, likewise for optional PMP support */
+>  enum {
+>      RISCV_FEATURE_MMU,
+> -    RISCV_FEATURE_PMP
+> +    RISCV_FEATURE_PMP,
+> +    RISCV_FEATURE_MISA
+>  };
+>  
+>  #define USER_VERSION_2_02_0 0x00020200
+> @@ -118,6 +119,7 @@ struct CPURISCVState {
+>      target_ulong user_ver;
+>      target_ulong priv_ver;
+>      target_ulong misa;
+> +    target_ulong misa_mask;
+>  
+>      uint32_t features;
+>  
+> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+> index 5439f4719e..7afcb2468d 100644
+> --- a/target/riscv/cpu_bits.h
+> +++ b/target/riscv/cpu_bits.h
+> @@ -311,10 +311,21 @@
+>  #define MSTATUS32_SD        0x80000000
+>  #define MSTATUS64_SD        0x8000000000000000ULL
+>  
+> +#define MISA32_MXL          0xC0000000
+> +#define MISA64_MXL          0xC000000000000000ULL
+> +
+> +#define MXL_RV32            1
+> +#define MXL_RV64            2
+> +#define MXL_RV128           3
+> +
+>  #if defined(TARGET_RISCV32)
+>  #define MSTATUS_SD MSTATUS32_SD
+> +#define MISA_MXL MISA32_MXL
+> +#define MXL_VAL MXL_RV32
+>  #elif defined(TARGET_RISCV64)
+>  #define MSTATUS_SD MSTATUS64_SD
+> +#define MISA_MXL MISA64_MXL
+> +#define MXL_VAL MXL_RV64
+>  #endif
+>  
+>  /* sstatus CSR bits */
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index e2bd374f09..e72fcf1265 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -332,6 +332,58 @@ static int read_misa(CPURISCVState *env, int csrno, target_ulong *val)
+>      return 0;
+>  }
+>  
+> +static int write_misa(CPURISCVState *env, int csrno, target_ulong val)
+> +{
+> +    if (!riscv_feature(env, RISCV_FEATURE_MISA)) {
+> +        /* drop write to misa */
+> +        return 0;
+> +    }
+> +
+> +    /* 'I' or 'E' must be present */
+> +    if (!(val & (RVI | RVE))) {
+> +        /* It is not, drop write to misa */
+> +        return 0;
+> +    }
+> +
+> +    /* 'E' excludes all other extensions */
+> +    if (val & RVE) {
+> +        /* when we support 'E' we can do "val = RVE;" however
+> +         * for now we just drop writes if 'E' is present.
+> +         */
+> +        return 0;
+> +    }
+> +
+> +    /* Mask extensions that are not supported by this hart */
+> +    val &= env->misa_mask;
+> +
+> +    /* Mask extensions that are not supported by QEMU */
+> +    val &= (RVI | RVE | RVM | RVA | RVF | RVD | RVC | RVS | RVU);
+> +
+> +    /* 'D' depends on 'F', so clear 'D' if 'F' is not present */
+> +    if ((val & RVD) && !(val & RVF)) {
+> +        val &= ~RVD;
+> +    }
+> +
+> +    /* Suppress 'C' if next instruction is not aligned
+> +     * TODO: this should check next_pc
+> +     */
+> +    if ((val & RVC) && (GETPC() & ~3) != 0) {
+> +        val &= ~RVC;
+> +    }
+> +
+> +    /* misa.MXL writes are not supported by QEMU */
+> +    val = (env->misa & MISA_MXL) | (val & ~MISA_MXL);
+> +
+> +    /* flush translation cache */
+> +    if (val != env->misa) {
+> +        tb_flush(CPU(riscv_env_get_cpu(env)));
+> +    }
+> +
+> +    env->misa = val;
+> +
+> +    return 0;
+> +}
+> +
+>  static int read_medeleg(CPURISCVState *env, int csrno, target_ulong *val)
+>  {
+>      *val = env->medeleg;
+> @@ -810,7 +862,7 @@ static riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+>  
+>      /* Machine Trap Setup */
+>      [CSR_MSTATUS] =             { any,  read_mstatus,     write_mstatus     },
+> -    [CSR_MISA] =                { any,  read_misa                           },
+> +    [CSR_MISA] =                { any,  read_misa,        write_misa        },
+>      [CSR_MIDELEG] =             { any,  read_mideleg,     write_mideleg     },
+>      [CSR_MEDELEG] =             { any,  read_medeleg,     write_medeleg     },
+>      [CSR_MIE] =                 { any,  read_mie,         write_mie         },
+> -- 
+> 2.19.1
 
-Yeah, I was waiting for more comments before sending a v2 on such a
-trivial change.
-
->
->     diff --git a/target/riscv/translate.c b/target/riscv/translate.c
->     index 8593c2170af4..b7176cbf98e1 100644
->     --- a/target/riscv/translate.c
->     +++ b/target/riscv/translate.c
->     @@ -2015,10 +2015,10 @@ static void decode_opc(DisasContext *ctx)
->          }
->      }
->
->     -static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cpu)
->     +static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
->      {
->          DisasContext *ctx = container_of(dcbase, DisasContext, base);
->     -    CPURISCVState *env = cpu->env_ptr;
->     +    CPURISCVState *env = cs->env_ptr;
->
->          ctx->pc_succ_insn = ctx->base.pc_first;
->          ctx->mem_idx = ctx->base.tb->flags & TB_FLAGS_MMU_MASK;
->
-> and add Richard's tag.
-
-Sounds good.
-
-Alistair
-
->
-> >
-> > Alistair
-> >
-> >>
-> >> Otherwise,
-> >> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
 
