@@ -1,65 +1,55 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gochU-0002tH-Mj
-	for mharc-qemu-riscv@gnu.org; Tue, 29 Jan 2019 18:21:52 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:47321)
+	id 1gofwF-0001N0-2G
+	for mharc-qemu-riscv@gnu.org; Tue, 29 Jan 2019 21:49:19 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:58462)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1gochS-0002sX-C8
-	for qemu-riscv@nongnu.org; Tue, 29 Jan 2019 18:21:51 -0500
+	(envelope-from <jimw@sifive.com>) id 1gofwC-0001LA-Pp
+	for qemu-riscv@nongnu.org; Tue, 29 Jan 2019 21:49:17 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1gochR-0003Wg-E5
-	for qemu-riscv@nongnu.org; Tue, 29 Jan 2019 18:21:50 -0500
-Received: from mail-pg1-x541.google.com ([2607:f8b0:4864:20::541]:40611)
+	(envelope-from <jimw@sifive.com>) id 1gofwA-00078P-R8
+	for qemu-riscv@nongnu.org; Tue, 29 Jan 2019 21:49:16 -0500
+Received: from mail-vs1-xe42.google.com ([2607:f8b0:4864:20::e42]:38790)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1gochQ-0003WS-VC
-	for qemu-riscv@nongnu.org; Tue, 29 Jan 2019 18:21:49 -0500
-Received: by mail-pg1-x541.google.com with SMTP id z10so9448405pgp.7
-	for <qemu-riscv@nongnu.org>; Tue, 29 Jan 2019 15:21:48 -0800 (PST)
+	(Exim 4.71) (envelope-from <jimw@sifive.com>) id 1gofw8-000771-Tn
+	for qemu-riscv@nongnu.org; Tue, 29 Jan 2019 21:49:13 -0500
+Received: by mail-vs1-xe42.google.com with SMTP id x64so13354870vsa.5
+	for <qemu-riscv@nongnu.org>; Tue, 29 Jan 2019 18:49:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
-	h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
-	:content-transfer-encoding;
-	bh=P3fvlCHy4UJhfVQSdLi7n/SCT7EMChHp0J5YnaaZZ1g=;
-	b=Sm103dlAqNJBJo37vVRdzhlxOUZIAIGAkgknyx5j00r5DLwrukBbfgGm0aVJ+9zjAU
-	74QEjLSqW3Efyc4SmkmMh9oGbGCYmpn5M+4y0kUdAQcQKs3mKUhdRmee4HGuutAmMpNW
-	MmpuNYKwCuG9NGOxsr3qljAcFD9mu5RiciCw+kTrDgtwG2+8brkXJmwkTEFKXVuNtbxl
-	ARgmsy0Zux/WdrDwHJciL1UMRgH9Z/RCYMaI523Hyea/sDYHPmbC4KS/MvpTsdRbaHsU
-	d03/YqY8C02A42YROW0VXTNB3DkaJZyTLQ1VKd6MeZLjTg7OjK7HTU8eImkOaro8lj/7
-	4VTg==
+	h=mime-version:from:date:message-id:subject:to:cc;
+	bh=RMGv5xDl6uuIF6m8iK9B7NTx+OUzVaDD/G0rjtQ22sI=;
+	b=Bb24JmSYhfOeXysK8/eALCO05XQgl/l3BjKm4CsR82HLyse3EtLM+omRiEMXS6iVRP
+	7Y92emVaIqYSO6PpXhO7EOq6ZGeEh2mfayHtnUw/KjewUv4guhd8oI2mUYuRDtt1iHZX
+	ibpJQRSN7Ydl/kTZMuSnLsy/ww3sWb2OqLcxny4yZp5hcvpXKWUV4Ce02qQF2eiZG0gt
+	e25dbZokbmPA2cD8W5jJtJRh12NGPFW8dWPe7yMWR7GvlMAi0d+iy7Fs+zlCly95A2Uu
+	wlfKWS4lgibzXzIgVAzfdjuTNPqkexID70M6DvofN4EStP3dfo1DP6eqUVmKTfltocgr
+	DOBg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
-	:mime-version:content-transfer-encoding;
-	bh=P3fvlCHy4UJhfVQSdLi7n/SCT7EMChHp0J5YnaaZZ1g=;
-	b=CgY4T2tZVUbxu/VCCm2TBEil4hlxwT90OU77BTN4unXocVPWELgbDx9IoonJGuK5gg
-	7Y/xIxwbB+PgFQHVNe75ycchyApWiHKvYN9JcB1Z6S/EzQHHt1we2vthnKgSnY/BqOtQ
-	OfKdslz67lk0q8kRodbkPKDaVbagHFaij6yhMFDw6v8uOd7T0pDxaD16sukEurWQZiOD
-	/NW7tA1k8e/nkvVTBchMRqNpGCPWOFBl7EYxayV2vQOcxK9WZCEGlpViTRvL1K/+xYQw
-	hMdHKvsOoiux8AqK3LzlChMGYF32H5IIWCswtCIaUKWdO7OU2MYnH8PvU7PnVklYf1b7
-	Vl9w==
-X-Gm-Message-State: AJcUukdQmCbNmbsUXgNVvd28VmrnTVKSPHxqcEv6symbk+fH1GimTp6S
-	ngfuqhU+tkqihYhBhk1BG/Gmjg==
-X-Google-Smtp-Source: ALg8bN5U6k9Xax8FbeoQ5WwGT855cYhKRRxWZLfE7BUHlDoFO6RVNMrqDRFyK/oPEgInWRX/5k9qXQ==
-X-Received: by 2002:a62:3888:: with SMTP id
-	f130mr27588838pfa.132.1548804106768; 
-	Tue, 29 Jan 2019 15:21:46 -0800 (PST)
-Received: from localhost ([12.206.222.5]) by smtp.gmail.com with ESMTPSA id
-	l11sm47489739pff.65.2019.01.29.15.21.45
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 29 Jan 2019 15:21:46 -0800 (PST)
-Date: Tue, 29 Jan 2019 15:21:46 -0800 (PST)
-X-Google-Original-Date: Tue, 29 Jan 2019 15:21:26 PST (-0800)
-In-Reply-To: <CAFyWVaYACGYvUe2ehYiT0hjJR4bUc44ZG5niEdT7mJOMXxGVpg@mail.gmail.com>
-CC: alistair23@gmail.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-From: Palmer Dabbelt <palmer@sifive.com>
-To: Jim Wilson <jimw@sifive.com>
-Message-ID: <mhng-742f375b-47d4-4554-b13a-270e098799e7@palmer-si-x1c4>
-Mime-Version: 1.0 (MHng)
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to:cc;
+	bh=RMGv5xDl6uuIF6m8iK9B7NTx+OUzVaDD/G0rjtQ22sI=;
+	b=awjBbJWlclanshtltfsDCT0IimamioDhJ7V5lAslSABK5UVQya8GNScbpK4UrO8AIA
+	yMpK4rC0h8+9mtHm0By3sFiiIUwsOp/7RsRCoT9bDkjB3quCLPTLURBabO9IX43JyYpf
+	iC1E92QVSPM92KPqGrmYyZ+i46i/m2L/4V32fhO+2bQgJ8rf8NKA8j/1tqreBo6gpSBP
+	YVkV7sEXmkgWjdXFfrp9jaGFpj0Z0cJNJt2UgINJpKxNFVsoHvpdPG6YGNn2RTH7QBLH
+	Ni1LOrKIJ2W97SC4A3tm23JGhOJJrBhv5O4jGKlSNl1WFZUbM31gMYUBi0L7hwpEG7bl
+	cx8A==
+X-Gm-Message-State: AJcUukf08UMc1e2ZTV6LhlZXBIjboYRZRWQMfMDMn+o1FsIBokJIX7/0
+	U+W/hhbNfAhTvXDmtB89JIocNNgIwz21FCvcQZ2E3A==
+X-Google-Smtp-Source: ALg8bN4lPCMT4dmHL6NQ5OcvKQP40onThbJrdADeXvD6WwrqKTmcBxuY/FDSwS3588bOfTfQ9KWlW5OK+CB64lEdvtc=
+X-Received: by 2002:a67:e0d4:: with SMTP id m20mr12120976vsl.182.1548816550857;
+	Tue, 29 Jan 2019 18:49:10 -0800 (PST)
+MIME-Version: 1.0
+From: Jim Wilson <jimw@sifive.com>
+Date: Tue, 29 Jan 2019 18:49:00 -0800
+Message-ID: <CAFyWVaZ5tQq4eGaZiPBq7172PB_x3JCqV6c2xo=wSJdgbJakKQ@mail.gmail.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, Jim Wilson <jimw@sifive.com>
+Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::541
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH 5/5 v2] RISC-V: Add hooks to
- use the gdb xml files.
+X-Received-From: 2607:f8b0:4864:20::e42
+Subject: [Qemu-riscv] [PATCH 0/5 v3] RISC-V: Add gdb xml files and gdbstub
+ support.
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -71,34 +61,24 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Jan 2019 23:21:51 -0000
+X-List-Received-Date: Wed, 30 Jan 2019 02:49:17 -0000
 
-On Mon, 28 Jan 2019 19:11:58 PST (-0800), Jim Wilson wrote:
-> On Tue, Jan 22, 2019 at 1:52 PM Alistair Francis <alistair23@gmail.com> wrote:
->> You can get env and then check for floating point support:
->>
->> CPURISCVState *env = &cs->env;
->> if (env->misa_mask & RVF) {
->> ...
->
-> I needed this which wasn't hard to figure out.
->     RISCVCPU *cpu = RISCV_CPU(cs);
->     CPURISCVState *env = &cpu->env;
->     if (env->misa & RVF) {
->
-> The tricky bit was figuring out how to test it, because I wasn't sure
-> if making registers conditional would actually work.  I figured out
-> that using -machine sifive_e gives me a target with no fpu, and
-> playing with that a bit I get the expected result, which is that the
-> FP regs don't print anymore.  The FP related CSRs still do, but that
-> would require gdb fixes I think, because gdb knows that they are both
-> FP regs and CSR, and tries to print them both ways.  That leads to a
-> more general problem of figuring out exactly which CSRs a particular
-> target implements, which is a bigger problem than I have time to fix
-> at the moment, and should be handled as a separate problem.
->
-> Since my patch set is now a month old, I'll rebase onto current master
-> and post a version 3 patch set.
+This is the 3rd version of the patch set, updated as per the review
+from Richard and Alistair, and updated for current top of tree.  Parts
+1 and 2 are the same.  Part 3 is smaller because some of it was moved
+to part 5.  Part 5 is bigger because it received part of part 3.
+Parts 4 and 5 have changed because the csr support was rewritten.  The
+illegal instruction traps are no longer inside the csr support code,
+but it still has mode checks that I need to disable, so I still need a
+debugger mode, but it doesn't do as much as before.  Also, what was
+one function is now about one hundred functions, so rather than add a
+debugger parameter to lots of functions that don't need it, I put it
+in the CPURISCVState struct.  This also helps fix a bug, because
+debugger mode is only appropriate for system qemu, and should not be
+enabled for user qemu.  The new patch set gets this right.  As a
+result of this, part 4 also ends up smaller, and part 5 is rewritten a
+bit to use the new interface to the csr support.  Otherwise it is
+effectively the same code as before.
 
-Thanks!
+Jim
 
