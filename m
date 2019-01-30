@@ -1,66 +1,47 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1goutk-0007Ie-E0
-	for mharc-qemu-riscv@gnu.org; Wed, 30 Jan 2019 13:47:44 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:54838)
+	id 1gouz5-0000sn-3O
+	for mharc-qemu-riscv@gnu.org; Wed, 30 Jan 2019 13:53:15 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:55946)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1gouth-0007IV-Ga
-	for qemu-riscv@nongnu.org; Wed, 30 Jan 2019 13:47:42 -0500
+	(envelope-from <chouteau@adacore.com>) id 1gouz0-0000qJ-Ku
+	for qemu-riscv@nongnu.org; Wed, 30 Jan 2019 13:53:11 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1goutc-0003LM-Gy
-	for qemu-riscv@nongnu.org; Wed, 30 Jan 2019 13:47:37 -0500
-Received: from mail-pg1-x533.google.com ([2607:f8b0:4864:20::533]:45230)
-	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1goutQ-0003BZ-5h
-	for qemu-riscv@nongnu.org; Wed, 30 Jan 2019 13:47:27 -0500
-Received: by mail-pg1-x533.google.com with SMTP id y4so187266pgc.12
-	for <qemu-riscv@nongnu.org>; Wed, 30 Jan 2019 10:47:14 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
-	h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
-	:content-transfer-encoding;
-	bh=K0T219BCCAaG8e9IpoXwWoXDxmWfkAaSew/mRsll+E0=;
-	b=ggPwbUPE12SuCV2AshOPRaff0o9jYqooBH+74xeuVNgJF+/lCTVHD2pu00BRO077QU
-	CdaOBXYum0CnT2axWrqD9EnzpRXU6mC6wLD0sY/w3apTHhOE1qJbKfiArbGYgSa5H0Lf
-	zQlyqsYfEWc9BhqQUTjQ5h6RpxHTCA6xNXFX08NnF0Z6NXGWEoHcru/UiJmycS/RDGhG
-	224PlboGd8Y1GgiAss/VTl2FaoJfOkymwhxzOYeWZPZOamZMAkjUXEl2ogj447WGsJCm
-	aVFs7yYINT4I36UqwM5pqQnsIipLy7FLP7dq0yO8XrcErODstHZiAxLzB0hpQdWjPxFy
-	FnbA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
-	:mime-version:content-transfer-encoding;
-	bh=K0T219BCCAaG8e9IpoXwWoXDxmWfkAaSew/mRsll+E0=;
-	b=F8YNC6Nh3QkcrRjl9pQUZgNvVdALAxmLpOxpTV3bVk8ohuxzgRe2VuYGuGSHMkclr7
-	D6wqflZpQ8lWOmnFQ6vBt4s+70eMP8MHA3MdbLp8BWjQyNbDlvChJm75VQHmHzoSTbBh
-	uIh8/1jLhdV5W9viPoqup8I3KmHPXxhm3V/Nz0qlWUJdToMbOvdaNjR8HOiJhoB02wEg
-	O1sme4+Je5AE9iDgM0u6btUVGnY1layaouX6UgQNbdcnf5TAuw/VJe53CptD7fxdGKkg
-	j/xM7uo6hNJ2E3VdK7y6F/yyy854uUMapjYtHNO+CgFtst1bqvH5tE0i7RwJYrWRns14
-	uk3w==
-X-Gm-Message-State: AJcUukceTy2Yp1mP9uK8RMjJfRGjJZeZCaAKKWtizJGJjcbaVXeqjGj0
-	RfcMRRSFmQkNs3nH2RVr0/h3mw==
-X-Google-Smtp-Source: ALg8bN66DGXbBumtUVjZaP3Mo7os2Odc9m7fSppF1EA/R5f2nAj5aQmTNM9s63zlMVtMJXG52njW9Q==
-X-Received: by 2002:a65:4646:: with SMTP id k6mr28004924pgr.153.1548874033294; 
-	Wed, 30 Jan 2019 10:47:13 -0800 (PST)
-Received: from localhost ([12.206.222.5])
-	by smtp.gmail.com with ESMTPSA id h69sm2853158pge.4.2019.01.30.10.47.12
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 30 Jan 2019 10:47:12 -0800 (PST)
-Date: Wed, 30 Jan 2019 10:47:12 -0800 (PST)
-X-Google-Original-Date: Wed, 30 Jan 2019 10:44:06 PST (-0800)
-In-Reply-To: <603b6279-8670-d614-e1ac-4c13bf870ec9@mail.uni-paderborn.de>
-CC: Alistair Francis <Alistair.Francis@wdc.com>, richard.henderson@linaro.org, 
-	peer.adelt@hni.uni-paderborn.de, qemu-riscv@nongnu.org,
-	qemu-devel@nongnu.org, sagark@eecs.berkeley.edu
-From: Palmer Dabbelt <palmer@sifive.com>
-To: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-Message-ID: <mhng-1940b8f6-61f9-4fce-b1fc-b97158239424@palmer-si-x1c4>
-Mime-Version: 1.0 (MHng)
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
-	recognized.
-X-Received-From: 2607:f8b0:4864:20::533
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v5 00/35] target/riscv:
- Convert to decodetree
+	(envelope-from <chouteau@adacore.com>) id 1gouyx-0002pp-9P
+	for qemu-riscv@nongnu.org; Wed, 30 Jan 2019 13:53:10 -0500
+Received: from mel.act-europe.fr ([2a02:2ab8:224:1::a0a:d2]:48912
+	helo=smtp.eu.adacore.com)
+	by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.71) (envelope-from <chouteau@adacore.com>)
+	id 1gouyv-0002dP-Aa; Wed, 30 Jan 2019 13:53:05 -0500
+Received: from localhost (localhost [127.0.0.1])
+	by filtered-smtp.eu.adacore.com (Postfix) with ESMTP id 637618138F;
+	Wed, 30 Jan 2019 19:53:01 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at eu.adacore.com
+Received: from smtp.eu.adacore.com ([127.0.0.1])
+	by localhost (smtp.eu.adacore.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id Da-BbiOoYIBc; Wed, 30 Jan 2019 19:53:01 +0100 (CET)
+Received: from ledoue.act-europe.fr (unknown
+	[IPv6:2a02:2ab8:224:1:d8fe:6e57:5bc4:202f])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	(No client certificate requested)
+	by smtp.eu.adacore.com (Postfix) with ESMTPSA id D156681345;
+	Wed, 30 Jan 2019 19:53:00 +0100 (CET)
+From: Fabien Chouteau <chouteau@adacore.com>
+To: 
+Cc: Fabien Chouteau <chouteau@adacore.com>, Michael Clark <mjc@sifive.com>,
+	Palmer Dabbelt <palmer@sifive.com>,
+	Alistair Francis <Alistair.Francis@wdc.com>,
+	Sagar Karandikar <sagark@eecs.berkeley.edu>,
+	Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+	qemu-riscv@nongnu.org (open list:RISC-V),
+	qemu-devel@nongnu.org (open list:All patches CC here)
+Date: Wed, 30 Jan 2019 19:52:42 +0100
+Message-Id: <20190130185242.12490-1-chouteau@adacore.com>
+X-Mailer: git-send-email 2.17.1
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 3.x
+X-Received-From: 2a02:2ab8:224:1::a0a:d2
+Subject: [Qemu-riscv] [PATCH] hw/riscv/sifive_clint.c: avoid integer
+ overflow in timecmp write
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -72,34 +53,68 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Jan 2019 18:47:42 -0000
+X-List-Received-Date: Wed, 30 Jan 2019 18:53:13 -0000
 
-On Wed, 30 Jan 2019 01:08:33 PST (-0800), Bastian Koppelmann wrote:
-> Hi Palmer,
->
-> On 1/29/19 8:22 PM, Palmer Dabbelt wrote:
->> [..]
->> Well, that pretty much exhausts my testing scheme :).  I think
->> Alistair might have a setup for booting a 32-bit Yocto-based distro in
->> QEMU.  Assuming he has the flow set up and it boots then I don't see
->> any reason not to merge it.
->>
->> Thanks for pulling this all together, it's really great to have a
->> cleaner decoder!
->>
->> Alistair: if that's true, can you give this a shot?
->>
->> Bastian: do you mind collecting the relevant tags (Reviwed-by, etc)
->> and putting them in a v6?
->
->
-> I already did (see
-> http://lists.gnu.org/archive/html/qemu-riscv/2019-01/msg00147.html) :)
+Writing a high value in timecmp leads to an integer overflow. This patch
+modifies the code to detect such case, and use the maximum integer value
+as the next trigger for the timer.
 
-Sorry, my mail latency got a bit high.  So I'm good here, just pending any 
-other testing we might have floating around.  I just sent up a PR with a 
-handful of little things so we can avoid mixing too much stuff together, but I 
-don't see any reason not to include this in the next round.
+Signed-off-by: Fabien Chouteau <chouteau@adacore.com>
+---
+ hw/riscv/sifive_clint.c | 31 ++++++++++++++++++++++++++-----
+ 1 file changed, 26 insertions(+), 5 deletions(-)
 
-Thanks!
+diff --git a/hw/riscv/sifive_clint.c b/hw/riscv/sifive_clint.c
+index d4c159e937..1ca1f8c75e 100644
+--- a/hw/riscv/sifive_clint.c
++++ b/hw/riscv/sifive_clint.c
+@@ -38,8 +38,10 @@ static uint64_t cpu_riscv_read_rtc(void)
+  */
+ static void sifive_clint_write_timecmp(RISCVCPU *cpu, uint64_t value)
+ {
+-    uint64_t next;
+     uint64_t diff;
++    uint64_t lapse_ns;
++    uint64_t clock_ns;
++    int64_t  next_ns;
+ 
+     uint64_t rtc_r = cpu_riscv_read_rtc();
+ 
+@@ -54,10 +56,29 @@ static void sifive_clint_write_timecmp(RISCVCPU *cpu, uint64_t value)
+     /* otherwise, set up the future timer interrupt */
+     riscv_cpu_update_mip(cpu, MIP_MTIP, BOOL_TO_MASK(0));
+     diff = cpu->env.timecmp - rtc_r;
+-    /* back to ns (note args switched in muldiv64) */
+-    next = qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL) +
+-        muldiv64(diff, NANOSECONDS_PER_SECOND, SIFIVE_CLINT_TIMEBASE_FREQ);
+-    timer_mod(cpu->env.timer, next);
++
++    /*
++     * How many nanoseconds until the next trigger (note args switched in
++     * muldiv64)
++     */
++    lapse_ns = muldiv64(diff,
++                        NANOSECONDS_PER_SECOND,
++                        SIFIVE_CLINT_TIMEBASE_FREQ);
++
++    /* Current time in nanoseconds */
++    clock_ns = qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL);
++
++    if ((G_MAXINT64 - clock_ns) <= lapse_ns) {
++        /*
++         * clock + lapse would overflow on 64bit. The highest 64bit value is
++         * used as the next trigger time.
++         */
++        next_ns = G_MAXINT64;
++    } else {
++        next_ns = clock_ns + lapse_ns;
++    }
++
++    timer_mod(cpu->env.timer, next_ns);
+ }
+ 
+ /*
+-- 
+2.17.1
+
 
