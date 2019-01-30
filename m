@@ -1,72 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gotvs-0002ur-2g
-	for mharc-qemu-riscv@gnu.org; Wed, 30 Jan 2019 12:45:52 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:41350)
+	id 1goutk-0007Ie-E0
+	for mharc-qemu-riscv@gnu.org; Wed, 30 Jan 2019 13:47:44 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:54838)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <eblake@redhat.com>) id 1gotvm-0002tV-HG
-	for qemu-riscv@nongnu.org; Wed, 30 Jan 2019 12:45:48 -0500
+	(envelope-from <palmer@sifive.com>) id 1gouth-0007IV-Ga
+	for qemu-riscv@nongnu.org; Wed, 30 Jan 2019 13:47:42 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <eblake@redhat.com>) id 1gotvl-0004uw-Ot
-	for qemu-riscv@nongnu.org; Wed, 30 Jan 2019 12:45:46 -0500
-Received: from mx1.redhat.com ([209.132.183.28]:50096)
-	by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.71) (envelope-from <eblake@redhat.com>)
-	id 1gotvh-0004mL-TI; Wed, 30 Jan 2019 12:45:43 -0500
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
-	[10.5.11.23])
-	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id 3E1C2C068BFB;
-	Wed, 30 Jan 2019 17:45:35 +0000 (UTC)
-Received: from [10.3.117.44] (ovpn-117-44.phx2.redhat.com [10.3.117.44])
-	by smtp.corp.redhat.com (Postfix) with ESMTPS id CA0D0452C;
-	Wed, 30 Jan 2019 17:45:34 +0000 (UTC)
-To: Palmer Dabbelt <palmer@sifive.com>, qemu-riscv@nongnu.org
-Cc: qemu-devel@nongnu.org
-References: <20190130173601.3268-1-palmer@sifive.com>
-From: Eric Blake <eblake@redhat.com>
-Openpgp: preference=signencrypt
-Autocrypt: addr=eblake@redhat.com; keydata=
-	xsBNBEvHyWwBCACw7DwsQIh0kAbUXyqhfiKAKOTVu6OiMGffw2w90Ggrp4bdVKmCaEXlrVLU
-	xphBM8mb+wsFkU+pq9YR621WXo9REYVIl0FxKeQo9dyQBZ/XvmUMka4NOmHtFg74nvkpJFCD
-	TUNzmqfcjdKhfFV0d7P/ixKQeZr2WP1xMcjmAQY5YvQ2lUoHP43m8TtpB1LkjyYBCodd+LkV
-	GmCx2Bop1LSblbvbrOm2bKpZdBPjncRNob73eTpIXEutvEaHH72LzpzksfcKM+M18cyRH+nP
-	sAd98xIbVjm3Jm4k4d5oQyE2HwOur+trk2EcxTgdp17QapuWPwMfhaNq3runaX7x34zhABEB
-	AAHNHkVyaWMgQmxha2UgPGVibGFrZUByZWRoYXQuY29tPsLAegQTAQgAJAIbAwULCQgHAwUV
-	CgkICwUWAgMBAAIeAQIXgAUCS8fL9QIZAQAKCRCnoWtKJSdDahBHCACbl/5FGkUqJ89GAjeX
-	RjpAeJtdKhujir0iS4CMSIng7fCiGZ0fNJCpL5RpViSo03Q7l37ss+No+dJI8KtAp6ID+PMz
-	wTJe5Egtv/KGUKSDvOLYJ9WIIbftEObekP+GBpWP2+KbpADsc7EsNd70sYxExD3liwVJYqLc
-	Rw7so1PEIFp+Ni9A1DrBR5NaJBnno2PHzHPTS9nmZVYm/4I32qkLXOcdX0XElO8VPDoVobG6
-	gELf4v/vIImdmxLh/w5WctUpBhWWIfQDvSOW2VZDOihm7pzhQodr3QP/GDLfpK6wI7exeu3P
-	pfPtqwa06s1pae3ad13mZGzkBdNKs1HEm8x6zsBNBEvHyWwBCADGkMFzFjmmyqAEn5D+Mt4P
-	zPdO8NatsDw8Qit3Rmzu+kUygxyYbz52ZO40WUu7EgQ5kDTOeRPnTOd7awWDQcl1gGBXgrkR
-	pAlQ0l0ReO57Q0eglFydLMi5bkwYhfY+TwDPMh3aOP5qBXkm4qIYSsxb8A+i00P72AqFb9Q7
-	3weG/flxSPApLYQE5qWGSXjOkXJv42NGS6o6gd4RmD6Ap5e8ACo1lSMPfTpGzXlt4aRkBfvb
-	NCfNsQikLZzFYDLbQgKBA33BDeV6vNJ9Cj0SgEGOkYyed4I6AbU0kIy1hHAm1r6+sAnEdIKj
-	cHi3xWH/UPrZW5flM8Kqo14OTDkI9EtlABEBAAHCwF8EGAEIAAkFAkvHyWwCGwwACgkQp6Fr
-	SiUnQ2q03wgAmRFGDeXzc58NX0NrDijUu0zx3Lns/qZ9VrkSWbNZBFjpWKaeL1fdVeE4TDGm
-	I5mRRIsStjQzc2R9b+2VBUhlAqY1nAiBDv0Qnt+9cLiuEICeUwlyl42YdwpmY0ELcy5+u6wz
-	mK/jxrYOpzXKDwLq5k4X+hmGuSNWWAN3gHiJqmJZPkhFPUIozZUCeEc76pS/IUN72NfprZmF
-	Dp6/QDjDFtfS39bHSWXKVZUbqaMPqlj/z6Ugk027/3GUjHHr8WkeL1ezWepYDY7WSoXwfoAL
-	2UXYsMAr/uUncSKlfjvArhsej0S4zbqim2ZY6S8aRWw94J3bSvJR+Nwbs34GPTD4Pg==
-Organization: Red Hat, Inc.
-Message-ID: <b9b988df-140e-108d-a80d-48c7ce1b351d@redhat.com>
-Date: Wed, 30 Jan 2019 11:45:33 -0600
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.4.0
-MIME-Version: 1.0
-In-Reply-To: <20190130173601.3268-1-palmer@sifive.com>
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature";
-	boundary="aPtElfIDd6OXO6w5kTpLfUJXmgNWVnjHu"
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
-	(mx1.redhat.com [10.5.110.32]);
-	Wed, 30 Jan 2019 17:45:35 +0000 (UTC)
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
-X-Received-From: 209.132.183.28
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PR RFC] RISC-V Patches for 3.2,
- Part 3
+	(envelope-from <palmer@sifive.com>) id 1goutc-0003LM-Gy
+	for qemu-riscv@nongnu.org; Wed, 30 Jan 2019 13:47:37 -0500
+Received: from mail-pg1-x533.google.com ([2607:f8b0:4864:20::533]:45230)
+	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1goutQ-0003BZ-5h
+	for qemu-riscv@nongnu.org; Wed, 30 Jan 2019 13:47:27 -0500
+Received: by mail-pg1-x533.google.com with SMTP id y4so187266pgc.12
+	for <qemu-riscv@nongnu.org>; Wed, 30 Jan 2019 10:47:14 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+	h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
+	:content-transfer-encoding;
+	bh=K0T219BCCAaG8e9IpoXwWoXDxmWfkAaSew/mRsll+E0=;
+	b=ggPwbUPE12SuCV2AshOPRaff0o9jYqooBH+74xeuVNgJF+/lCTVHD2pu00BRO077QU
+	CdaOBXYum0CnT2axWrqD9EnzpRXU6mC6wLD0sY/w3apTHhOE1qJbKfiArbGYgSa5H0Lf
+	zQlyqsYfEWc9BhqQUTjQ5h6RpxHTCA6xNXFX08NnF0Z6NXGWEoHcru/UiJmycS/RDGhG
+	224PlboGd8Y1GgiAss/VTl2FaoJfOkymwhxzOYeWZPZOamZMAkjUXEl2ogj447WGsJCm
+	aVFs7yYINT4I36UqwM5pqQnsIipLy7FLP7dq0yO8XrcErODstHZiAxLzB0hpQdWjPxFy
+	FnbA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
+	:mime-version:content-transfer-encoding;
+	bh=K0T219BCCAaG8e9IpoXwWoXDxmWfkAaSew/mRsll+E0=;
+	b=F8YNC6Nh3QkcrRjl9pQUZgNvVdALAxmLpOxpTV3bVk8ohuxzgRe2VuYGuGSHMkclr7
+	D6wqflZpQ8lWOmnFQ6vBt4s+70eMP8MHA3MdbLp8BWjQyNbDlvChJm75VQHmHzoSTbBh
+	uIh8/1jLhdV5W9viPoqup8I3KmHPXxhm3V/Nz0qlWUJdToMbOvdaNjR8HOiJhoB02wEg
+	O1sme4+Je5AE9iDgM0u6btUVGnY1layaouX6UgQNbdcnf5TAuw/VJe53CptD7fxdGKkg
+	j/xM7uo6hNJ2E3VdK7y6F/yyy854uUMapjYtHNO+CgFtst1bqvH5tE0i7RwJYrWRns14
+	uk3w==
+X-Gm-Message-State: AJcUukceTy2Yp1mP9uK8RMjJfRGjJZeZCaAKKWtizJGJjcbaVXeqjGj0
+	RfcMRRSFmQkNs3nH2RVr0/h3mw==
+X-Google-Smtp-Source: ALg8bN66DGXbBumtUVjZaP3Mo7os2Odc9m7fSppF1EA/R5f2nAj5aQmTNM9s63zlMVtMJXG52njW9Q==
+X-Received: by 2002:a65:4646:: with SMTP id k6mr28004924pgr.153.1548874033294; 
+	Wed, 30 Jan 2019 10:47:13 -0800 (PST)
+Received: from localhost ([12.206.222.5])
+	by smtp.gmail.com with ESMTPSA id h69sm2853158pge.4.2019.01.30.10.47.12
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 30 Jan 2019 10:47:12 -0800 (PST)
+Date: Wed, 30 Jan 2019 10:47:12 -0800 (PST)
+X-Google-Original-Date: Wed, 30 Jan 2019 10:44:06 PST (-0800)
+In-Reply-To: <603b6279-8670-d614-e1ac-4c13bf870ec9@mail.uni-paderborn.de>
+CC: Alistair Francis <Alistair.Francis@wdc.com>, richard.henderson@linaro.org, 
+	peer.adelt@hni.uni-paderborn.de, qemu-riscv@nongnu.org,
+	qemu-devel@nongnu.org, sagark@eecs.berkeley.edu
+From: Palmer Dabbelt <palmer@sifive.com>
+To: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+Message-ID: <mhng-1940b8f6-61f9-4fce-b1fc-b97158239424@palmer-si-x1c4>
+Mime-Version: 1.0 (MHng)
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+	recognized.
+X-Received-From: 2607:f8b0:4864:20::533
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v5 00/35] target/riscv:
+ Convert to decodetree
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -78,74 +72,34 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Jan 2019 17:45:50 -0000
+X-List-Received-Date: Wed, 30 Jan 2019 18:47:42 -0000
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---aPtElfIDd6OXO6w5kTpLfUJXmgNWVnjHu
-Content-Type: multipart/mixed; boundary="hKx5D6S2TIl2VC1ugEfwVxbe9yTJS2ZhH";
- protected-headers="v1"
-From: Eric Blake <eblake@redhat.com>
-To: Palmer Dabbelt <palmer@sifive.com>, qemu-riscv@nongnu.org
-Cc: qemu-devel@nongnu.org
-Message-ID: <b9b988df-140e-108d-a80d-48c7ce1b351d@redhat.com>
-Subject: Re: [Qemu-devel] [PR RFC] RISC-V Patches for 3.2, Part 3
-References: <20190130173601.3268-1-palmer@sifive.com>
-In-Reply-To: <20190130173601.3268-1-palmer@sifive.com>
+On Wed, 30 Jan 2019 01:08:33 PST (-0800), Bastian Koppelmann wrote:
+> Hi Palmer,
+>
+> On 1/29/19 8:22 PM, Palmer Dabbelt wrote:
+>> [..]
+>> Well, that pretty much exhausts my testing scheme :).  I think
+>> Alistair might have a setup for booting a 32-bit Yocto-based distro in
+>> QEMU.  Assuming he has the flow set up and it boots then I don't see
+>> any reason not to merge it.
+>>
+>> Thanks for pulling this all together, it's really great to have a
+>> cleaner decoder!
+>>
+>> Alistair: if that's true, can you give this a shot?
+>>
+>> Bastian: do you mind collecting the relevant tags (Reviwed-by, etc)
+>> and putting them in a v6?
+>
+>
+> I already did (see
+> http://lists.gnu.org/archive/html/qemu-riscv/2019-01/msg00147.html) :)
 
---hKx5D6S2TIl2VC1ugEfwVxbe9yTJS2ZhH
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
+Sorry, my mail latency got a bit high.  So I'm good here, just pending any 
+other testing we might have floating around.  I just sent up a PR with a 
+handful of little things so we can avoid mixing too much stuff together, but I 
+don't see any reason not to include this in the next round.
 
-On 1/30/19 11:35 AM, Palmer Dabbelt wrote:
-> The following changes since commit 5385a5988c8a55bebdc878c05b96648579b5=
-d6e0:
->=20
->   hw/virtio/virtio-balloon: zero-initialize the virtio_balloon_config s=
-truct (2019-01-21 17:20:36 +0000)
->=20
-> are available in the Git repository at:
->=20
->   git://github.com/palmer-dabbelt/qemu.git tags/riscv-for-master-3.2-pa=
-rt3
->=20
-> for you to fetch changes up to 461ab9de46d085a37b0da6f096aadc4e0dda4d4c=
-:
->=20
->   target/riscv: fix counter-enable checks in ctr() (2019-01-29 11:33:38=
- -0800)
->=20
-> ----------------------------------------------------------------
-> RISC-V Patches for 3.2, Part 3
-
-There is no 3.2 release; the next release is named 4.0.  However, if you
-don't want to bother with sending a v2 pull request just to fix the
-merge commit message, that's okay with me.
-
---=20
-Eric Blake, Principal Software Engineer
-Red Hat, Inc.           +1-919-301-3226
-Virtualization:  qemu.org | libvirt.org
-
-
---hKx5D6S2TIl2VC1ugEfwVxbe9yTJS2ZhH--
-
---aPtElfIDd6OXO6w5kTpLfUJXmgNWVnjHu
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEccLMIrHEYCkn0vOqp6FrSiUnQ2oFAlxR4r0ACgkQp6FrSiUn
-Q2oFqQf5ASzoPgmptcojZxRZYwJlLlKK1oM6IcGlzM6y8OBA8hiQilF6RqiIgeRw
-uYVQsm5ltuFGkZjQ0i5yuCvZDBxgNVK9UJ62rGaPih1VuVCujhnS6V6y9oZEO1kC
-0AC0waekcaKjHiSP+/3fD5wfti8G8kz5KtXKcS/uahMKkYjAyx713z3I9DlbcWhi
-o6MSQJdC5m6zgY0JbqdZz3poXvr/0fw4vd0icJThnkOka7py7nkQh8c8b9ehQhzd
-klKQ3iA+qh3sd7WQYALsv26cZqHEwNQx0lBi2CtTZ/innRcJ+os9dDRFJJlwp2Op
-un2ntMGvxDexJA+NW5rQ4CWj1k2Wdw==
-=fwCm
------END PGP SIGNATURE-----
-
---aPtElfIDd6OXO6w5kTpLfUJXmgNWVnjHu--
+Thanks!
 
