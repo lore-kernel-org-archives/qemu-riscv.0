@@ -1,65 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gprzH-00079M-Jy
-	for mharc-qemu-riscv@gnu.org; Sat, 02 Feb 2019 04:53:23 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:55006)
+	id 1gprzS-0007Fb-6t
+	for mharc-qemu-riscv@gnu.org; Sat, 02 Feb 2019 04:53:34 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:54983)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1gprz9-0006zR-C1
-	for qemu-riscv@nongnu.org; Sat, 02 Feb 2019 04:53:17 -0500
+	(envelope-from <palmer@sifive.com>) id 1gprzE-0006zO-P3
+	for qemu-riscv@nongnu.org; Sat, 02 Feb 2019 04:53:21 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1gprqF-0005rj-Rl
-	for qemu-riscv@nongnu.org; Sat, 02 Feb 2019 04:44:05 -0500
-Received: from mail-ed1-x52f.google.com ([2a00:1450:4864:20::52f]:35171)
+	(envelope-from <palmer@sifive.com>) id 1gprqB-0005l2-RX
+	for qemu-riscv@nongnu.org; Sat, 02 Feb 2019 04:44:01 -0500
+Received: from mail-ed1-x543.google.com ([2a00:1450:4864:20::543]:37759)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1gprqD-0005ZV-Pq
-	for qemu-riscv@nongnu.org; Sat, 02 Feb 2019 04:44:03 -0500
-Received: by mail-ed1-x52f.google.com with SMTP id x30so7494600edx.2
-	for <qemu-riscv@nongnu.org>; Sat, 02 Feb 2019 01:43:48 -0800 (PST)
+	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1gprq7-0005XT-V3
+	for qemu-riscv@nongnu.org; Sat, 02 Feb 2019 04:43:57 -0500
+Received: by mail-ed1-x543.google.com with SMTP id h15so7475831edb.4
+	for <qemu-riscv@nongnu.org>; Sat, 02 Feb 2019 01:43:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
 	h=subject:date:message-id:in-reply-to:references:cc:from:to;
-	bh=Skhj66vFOGJI47+G1j5cXFswZYSfNmygkXU3bju1xtg=;
-	b=XYhCrplrCQBIW1UZ6LhdYYMo8Qfze8ZfiuMQtWqZ388M7MxHKkOCu0AGG2RSrpqstM
-	wavQ8psYQLrq8PXE5LCxe7Fq0OPzHMFhrato73XeIrf9pLO0RCEQ+GqnQ702dD9iq9P2
-	L8aX5fOLqxvyI8Sd3lV4L3O0Wqd9Zo3TfX/OBMM2ZwVthLjVkK1iopVSnO7fLKkOVly0
-	4Y7nRCIIXqAEvRSTzTDZlXbAaUNgt8BcEoMLzpuuFVHnQQrrDThzdd54CD8q9l8W3IC8
-	O/SvLeSwgltBRJ4SuG1FCObt0fh+3LgJ00dQ42HzedIpvngOb8U0CdkPKtHSEllWbgjs
-	dk+g==
+	bh=VsEG5EqtY/F+uxugfJZjY5iDDB0h1Q1FwFLq+ViPw8A=;
+	b=EGmT8jIL7TUd74YGaj3Jsr3YfNXRK3ptPXzUbXooqKQSCvVVmHwQcdAWLnxEVuFS0W
+	nkGjJWt8bf3DNHHrjZ0a136IpB83vcBeVv7wuZOy8XsfUOLTWFJlIT3w2mBQf1XgShxI
+	CH8R48yUAZ3t6ggsFGOsQus4o1nDmC471CA9yrmrreODwKUCiwu9e0tUjbSQQyRFIL0x
+	PT6m/28vthCAV09T6k3RFttHMKqPy8R7MYzu9+uuAKCzYNA6Y10Uhorrq0T3svtda6kx
+	v11e3UuVLC5vXAT9ZGYqT0mlprI8J7XBb99BBxMni2FLGQ2nNWxt0cHxLJ91uBlK4vzH
+	Hrrg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:subject:date:message-id:in-reply-to:references
 	:cc:from:to;
-	bh=Skhj66vFOGJI47+G1j5cXFswZYSfNmygkXU3bju1xtg=;
-	b=ZpY4eVrL+KlKKp5E8KC3HeAuynhwG9p/vE9ThQuo7KkN7wl8bpo1fDHe/JmjHSrqY1
-	DKdpxAMt5qU+8vnolxGioA9obvJefLN8LmVF+junqp+KqCNK+CRUtDnGDURDL47T/go5
-	4HsPXbJmQXkHaciduSgSUvOqhkYUFV0I0akgDPJyKV/rdvw86rtrQ9cOscIpcaOxzfBs
-	/mwqFAvJGH2VjoIrjNFViOPfDh2HBGTDk1QRM4htQYaa5De02R2yFn2TYp2fOB5oQUo7
-	VwMt1kQ1rbvxBsz1celm8hTWWHdWAPWiwUc9PiFdizj24+5deTu79iOJFBFUZuhmZdfd
-	QKVw==
-X-Gm-Message-State: AHQUAuaRFq186g1tKycyCcTuz59lSxFiZE+dObkQleyXuI8NwThaws8A
-	xPvbxml6srF1DdSz9BvDyrWSP8q9we+iTQ==
-X-Google-Smtp-Source: AHgI3IZkkFhHJ3cXc2B6G9v7uU0ovkqo0l0blIC6rhB/FeVruWZ67tq1Z5bI/FCPQGiIPrTK4wbThw==
-X-Received: by 2002:a17:906:8416:: with SMTP id
-	n22mr16843904ejx.113.1549100626924; 
-	Sat, 02 Feb 2019 01:43:46 -0800 (PST)
+	bh=VsEG5EqtY/F+uxugfJZjY5iDDB0h1Q1FwFLq+ViPw8A=;
+	b=KEwFV9EUcQipsJzOlRpQ8hY28JWwSyTiLXOvEDFmRqja+a2O+dIGMPPR9lOESco1JN
+	/oW8w+DKnfUkJDnEG0wp2ZuyLQM1mW98TTind2le1TmuTZVeab4b/1G+E2P7wg4F+roB
+	q94BXy8DtP4gpaT04xTsyJ7J0T3mKJ6bwRRNjyqOCmUvlv0s49awcOCxfSvbXiAWMAiH
+	NLF51IpQlCr5nAF76lOBPS5JY9jGMzEfwT8jLhqMgUIZRK5NmvgMTedewdXhT8Ygvf5n
+	UWhXoSojY2fGBQzKBVjiUOUt2DD27p8m+516Nfjqf5LCYTpudV/r0JhcjX/DZS1IsSJY
+	ysjw==
+X-Gm-Message-State: AJcUukdO3Gl3tfl0rm8ziroljk+deOlPyx23lrgc1Kj20BOUYFhUk0dR
+	NeImAPBDXS2S1uIUHUrhF3I9qZocm6r7AA==
+X-Google-Smtp-Source: ALg8bN5iM9GIyqLWUDJUfeALUsMmV4TvEJdNga3GJYEXmtkL7NuKbO3XiQoej4M+ec83UUgeUAVucg==
+X-Received: by 2002:a50:a622:: with SMTP id d31mr44346771edc.228.1549100625259;
+	Sat, 02 Feb 2019 01:43:45 -0800 (PST)
 Received: from localhost ([2001:67c:1810:f051:fd32:55e2:f60b:183b])
 	by smtp.gmail.com with ESMTPSA id
-	g37sm2713596edb.85.2019.02.02.01.43.45
+	g21sm2665204edc.63.2019.02.02.01.43.44
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 02 Feb 2019 01:43:46 -0800 (PST)
-Date: Sat,  2 Feb 2019 01:43:25 -0800
-Message-Id: <20190202094329.22874-7-palmer@sifive.com>
+	Sat, 02 Feb 2019 01:43:44 -0800 (PST)
+Date: Sat,  2 Feb 2019 01:43:24 -0800
+Message-Id: <20190202094329.22874-6-palmer@sifive.com>
 X-Mailer: git-send-email 2.18.1
 In-Reply-To: <20190202094329.22874-1-palmer@sifive.com>
 References: <20190202094329.22874-1-palmer@sifive.com>
 Cc: qemu-riscv@nongnu.org,       qemu-devel@nongnu.org,
-	Michael Clark <mjc@sifive.com>,
+	Alistair Francis <Alistair.Francis@wdc.com>,
 	Alistair Francis <alistair.francis@wdc.com>, 
 	Palmer Dabbelt <palmer@sifive.com>
 From: Palmer Dabbelt <palmer@sifive.com>
 To: Peter Maydell <peter.maydell@linaro.org>
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2a00:1450:4864:20::52f
-Subject: [Qemu-riscv] [PULL 06/10] RISC-V: Add misa to DisasContext
+X-Received-From: 2a00:1450:4864:20::543
+Subject: [Qemu-riscv] [PULL 05/10] RISC-V: Add priv_ver to DisasContext
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -71,293 +70,63 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 02 Feb 2019 09:53:17 -0000
+X-List-Received-Date: Sat, 02 Feb 2019 09:53:21 -0000
 
-From: Michael Clark <mjc@sifive.com>
+From: Alistair Francis <Alistair.Francis@wdc.com>
 
-gen methods should access state from DisasContext. Add misa
-field to the DisasContext struct and remove CPURISCVState
-argument from all gen methods.
+The gen methods should access state from DisasContext. Add priv_ver
+field to the DisasContext struct.
 
-Signed-off-by: Michael Clark <mjc@sifive.com>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
 ---
- target/riscv/translate.c | 75 +++++++++++++++++++++-------------------
- 1 file changed, 40 insertions(+), 35 deletions(-)
+ target/riscv/translate.c | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
 
 diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 35eb6bdfe099..bb80387088e2 100644
+index 0581b3c1f7d7..35eb6bdfe099 100644
 --- a/target/riscv/translate.c
 +++ b/target/riscv/translate.c
-@@ -46,6 +46,7 @@ typedef struct DisasContext {
-     target_ulong priv_ver;
+@@ -43,6 +43,7 @@ typedef struct DisasContext {
+     DisasContextBase base;
+     /* pc_succ_insn points to the instruction following base.pc_next */
+     target_ulong pc_succ_insn;
++    target_ulong priv_ver;
      uint32_t opcode;
      uint32_t mstatus_fs;
-+    uint32_t misa;
      uint32_t mem_idx;
-     /* Remember the rounding mode encoded in the previous fp instruction,
-        which we have already installed into env->fp_status.  Or -1 for
-@@ -75,6 +76,11 @@ static const int tcg_memop_lookup[8] = {
- #define CASE_OP_32_64(X) case X
- #endif
- 
-+static inline bool has_ext(DisasContext *ctx, uint32_t ext)
-+{
-+    return ctx->misa & ext;
-+}
-+
- static void generate_exception(DisasContext *ctx, int excp)
- {
-     tcg_gen_movi_tl(cpu_pc, ctx->base.pc_next);
-@@ -506,14 +512,13 @@ static void gen_arith_imm(DisasContext *ctx, uint32_t opc, int rd,
-     tcg_temp_free(source1);
- }
- 
--static void gen_jal(CPURISCVState *env, DisasContext *ctx, int rd,
--                    target_ulong imm)
-+static void gen_jal(DisasContext *ctx, int rd, target_ulong imm)
- {
-     target_ulong next_pc;
- 
-     /* check misaligned: */
-     next_pc = ctx->base.pc_next + imm;
--    if (!riscv_has_ext(env, RVC)) {
-+    if (!has_ext(ctx, RVC)) {
-         if ((next_pc & 0x3) != 0) {
-             gen_exception_inst_addr_mis(ctx);
-             return;
-@@ -527,8 +532,8 @@ static void gen_jal(CPURISCVState *env, DisasContext *ctx, int rd,
-     ctx->base.is_jmp = DISAS_NORETURN;
- }
- 
--static void gen_jalr(CPURISCVState *env, DisasContext *ctx, uint32_t opc,
--                     int rd, int rs1, target_long imm)
-+static void gen_jalr(DisasContext *ctx, uint32_t opc, int rd, int rs1,
-+                     target_long imm)
- {
-     /* no chaining with JALR */
-     TCGLabel *misaligned = NULL;
-@@ -540,7 +545,7 @@ static void gen_jalr(CPURISCVState *env, DisasContext *ctx, uint32_t opc,
-         tcg_gen_addi_tl(cpu_pc, cpu_pc, imm);
-         tcg_gen_andi_tl(cpu_pc, cpu_pc, (target_ulong)-2);
- 
--        if (!riscv_has_ext(env, RVC)) {
-+        if (!has_ext(ctx, RVC)) {
-             misaligned = gen_new_label();
-             tcg_gen_andi_tl(t0, cpu_pc, 0x2);
-             tcg_gen_brcondi_tl(TCG_COND_NE, t0, 0x0, misaligned);
-@@ -565,8 +570,8 @@ static void gen_jalr(CPURISCVState *env, DisasContext *ctx, uint32_t opc,
-     tcg_temp_free(t0);
- }
- 
--static void gen_branch(CPURISCVState *env, DisasContext *ctx, uint32_t opc,
--                       int rs1, int rs2, target_long bimm)
-+static void gen_branch(DisasContext *ctx, uint32_t opc, int rs1, int rs2,
-+                       target_long bimm)
- {
-     TCGLabel *l = gen_new_label();
-     TCGv source1, source2;
-@@ -603,7 +608,7 @@ static void gen_branch(CPURISCVState *env, DisasContext *ctx, uint32_t opc,
- 
-     gen_goto_tb(ctx, 1, ctx->pc_succ_insn);
-     gen_set_label(l); /* branch taken */
--    if (!riscv_has_ext(env, RVC) && ((ctx->base.pc_next + bimm) & 0x3)) {
-+    if (!has_ext(ctx, RVC) && ((ctx->base.pc_next + bimm) & 0x3)) {
-         /* misaligned */
-         gen_exception_inst_addr_mis(ctx);
-     } else {
-@@ -1314,8 +1319,8 @@ static void gen_fp_arith(DisasContext *ctx, uint32_t opc, int rd,
-     }
- }
- 
--static void gen_system(CPURISCVState *env, DisasContext *ctx, uint32_t opc,
--                      int rd, int rs1, int csr)
-+static void gen_system(DisasContext *ctx, uint32_t opc, int rd, int rs1,
-+                       int csr)
- {
-     TCGv source1, csr_store, dest, rs1_pass, imm_rs1;
-     source1 = tcg_temp_new();
-@@ -1361,7 +1366,7 @@ static void gen_system(CPURISCVState *env, DisasContext *ctx, uint32_t opc,
-             gen_exception_illegal(ctx);
+@@ -1330,7 +1331,7 @@ static void gen_system(CPURISCVState *env, DisasContext *ctx, uint32_t opc,
+ #ifndef CONFIG_USER_ONLY
+     /* Extract funct7 value and check whether it matches SFENCE.VMA */
+     if ((opc == OPC_RISC_ECALL) && ((csr >> 5) == 9)) {
+-        if (env->priv_ver == PRIV_VERSION_1_10_0) {
++        if (ctx->priv_ver == PRIV_VERSION_1_10_0) {
+             /* sfence.vma */
+             /* TODO: handle ASID specific fences */
+             gen_helper_tlb_flush(cpu_env);
+@@ -1384,7 +1385,7 @@ static void gen_system(CPURISCVState *env, DisasContext *ctx, uint32_t opc,
+             gen_helper_wfi(cpu_env);
              break;
-         case 0x102: /* SRET */
--            if (riscv_has_ext(env, RVS)) {
-+            if (has_ext(ctx, RVS)) {
-                 gen_helper_sret(cpu_pc, cpu_env, cpu_pc);
-                 tcg_gen_exit_tb(NULL, 0); /* no chaining */
-                 ctx->base.is_jmp = DISAS_NORETURN;
-@@ -1506,7 +1511,7 @@ static void decode_RV32_64C0(DisasContext *ctx)
-     }
- }
- 
--static void decode_RV32_64C1(CPURISCVState *env, DisasContext *ctx)
-+static void decode_RV32_64C1(DisasContext *ctx)
- {
-     uint8_t funct3 = extract32(ctx->opcode, 13, 3);
-     uint8_t rd_rs1 = GET_C_RS1(ctx->opcode);
-@@ -1526,7 +1531,7 @@ static void decode_RV32_64C1(CPURISCVState *env, DisasContext *ctx)
-                       GET_C_IMM(ctx->opcode));
- #else
-         /* C.JAL(RV32) -> jal x1, offset[11:1] */
--        gen_jal(env, ctx, 1, GET_C_J_IMM(ctx->opcode));
-+        gen_jal(ctx, 1, GET_C_J_IMM(ctx->opcode));
- #endif
-         break;
-     case 2:
-@@ -1605,22 +1610,22 @@ static void decode_RV32_64C1(CPURISCVState *env, DisasContext *ctx)
-         break;
-     case 5:
-         /* C.J -> jal x0, offset[11:1]*/
--        gen_jal(env, ctx, 0, GET_C_J_IMM(ctx->opcode));
-+        gen_jal(ctx, 0, GET_C_J_IMM(ctx->opcode));
-         break;
-     case 6:
-         /* C.BEQZ -> beq rs1', x0, offset[8:1]*/
-         rs1s = GET_C_RS1S(ctx->opcode);
--        gen_branch(env, ctx, OPC_RISC_BEQ, rs1s, 0, GET_C_B_IMM(ctx->opcode));
-+        gen_branch(ctx, OPC_RISC_BEQ, rs1s, 0, GET_C_B_IMM(ctx->opcode));
-         break;
-     case 7:
-         /* C.BNEZ -> bne rs1', x0, offset[8:1]*/
-         rs1s = GET_C_RS1S(ctx->opcode);
--        gen_branch(env, ctx, OPC_RISC_BNE, rs1s, 0, GET_C_B_IMM(ctx->opcode));
-+        gen_branch(ctx, OPC_RISC_BNE, rs1s, 0, GET_C_B_IMM(ctx->opcode));
-         break;
-     }
- }
- 
--static void decode_RV32_64C2(CPURISCVState *env, DisasContext *ctx)
-+static void decode_RV32_64C2(DisasContext *ctx)
- {
-     uint8_t rd, rs2;
-     uint8_t funct3 = extract32(ctx->opcode, 13, 3);
-@@ -1654,7 +1659,7 @@ static void decode_RV32_64C2(CPURISCVState *env, DisasContext *ctx)
-         if (extract32(ctx->opcode, 12, 1) == 0) {
-             if (rs2 == 0) {
-                 /* C.JR -> jalr x0, rs1, 0*/
--                gen_jalr(env, ctx, OPC_RISC_JALR, 0, rd, 0);
-+                gen_jalr(ctx, OPC_RISC_JALR, 0, rd, 0);
+         case 0x104: /* SFENCE.VM */
+-            if (env->priv_ver <= PRIV_VERSION_1_09_1) {
++            if (ctx->priv_ver <= PRIV_VERSION_1_09_1) {
+                 gen_helper_tlb_flush(cpu_env);
              } else {
-                 /* C.MV -> add rd, x0, rs2 */
-                 gen_arith(ctx, OPC_RISC_ADD, rd, 0, rs2);
-@@ -1662,11 +1667,11 @@ static void decode_RV32_64C2(CPURISCVState *env, DisasContext *ctx)
-         } else {
-             if (rd == 0) {
-                 /* C.EBREAK -> ebreak*/
--                gen_system(env, ctx, OPC_RISC_ECALL, 0, 0, 0x1);
-+                gen_system(ctx, OPC_RISC_ECALL, 0, 0, 0x1);
-             } else {
-                 if (rs2 == 0) {
-                     /* C.JALR -> jalr x1, rs1, 0*/
--                    gen_jalr(env, ctx, OPC_RISC_JALR, 1, rd, 0);
-+                    gen_jalr(ctx, OPC_RISC_JALR, 1, rd, 0);
-                 } else {
-                     /* C.ADD -> add rd, rd, rs2 */
-                     gen_arith(ctx, OPC_RISC_ADD, rd, rd, rs2);
-@@ -1698,7 +1703,7 @@ static void decode_RV32_64C2(CPURISCVState *env, DisasContext *ctx)
-     }
- }
- 
--static void decode_RV32_64C(CPURISCVState *env, DisasContext *ctx)
-+static void decode_RV32_64C(DisasContext *ctx)
+                 gen_exception_illegal(ctx);
+@@ -1854,10 +1855,12 @@ static void decode_opc(CPURISCVState *env, DisasContext *ctx)
+ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
  {
-     uint8_t op = extract32(ctx->opcode, 0, 2);
+     DisasContext *ctx = container_of(dcbase, DisasContext, base);
++    CPURISCVState *env = cs->env_ptr;
  
-@@ -1707,15 +1712,15 @@ static void decode_RV32_64C(CPURISCVState *env, DisasContext *ctx)
-         decode_RV32_64C0(ctx);
-         break;
-     case 1:
--        decode_RV32_64C1(env, ctx);
-+        decode_RV32_64C1(ctx);
-         break;
-     case 2:
--        decode_RV32_64C2(env, ctx);
-+        decode_RV32_64C2(ctx);
-         break;
-     }
- }
- 
--static void decode_RV32_64G(CPURISCVState *env, DisasContext *ctx)
-+static void decode_RV32_64G(DisasContext *ctx)
- {
-     int rs1;
-     int rs2;
-@@ -1750,13 +1755,13 @@ static void decode_RV32_64G(CPURISCVState *env, DisasContext *ctx)
-         break;
-     case OPC_RISC_JAL:
-         imm = GET_JAL_IMM(ctx->opcode);
--        gen_jal(env, ctx, rd, imm);
-+        gen_jal(ctx, rd, imm);
-         break;
-     case OPC_RISC_JALR:
--        gen_jalr(env, ctx, MASK_OP_JALR(ctx->opcode), rd, rs1, imm);
-+        gen_jalr(ctx, MASK_OP_JALR(ctx->opcode), rd, rs1, imm);
-         break;
-     case OPC_RISC_BRANCH:
--        gen_branch(env, ctx, MASK_OP_BRANCH(ctx->opcode), rs1, rs2,
-+        gen_branch(ctx, MASK_OP_BRANCH(ctx->opcode), rs1, rs2,
-                    GET_B_IMM(ctx->opcode));
-         break;
-     case OPC_RISC_LOAD:
-@@ -1827,7 +1832,7 @@ static void decode_RV32_64G(CPURISCVState *env, DisasContext *ctx)
-         }
-         break;
-     case OPC_RISC_SYSTEM:
--        gen_system(env, ctx, MASK_OP_SYSTEM(ctx->opcode), rd, rs1,
-+        gen_system(ctx, MASK_OP_SYSTEM(ctx->opcode), rd, rs1,
-                    (ctx->opcode & 0xFFF00000) >> 20);
-         break;
-     default:
-@@ -1836,19 +1841,19 @@ static void decode_RV32_64G(CPURISCVState *env, DisasContext *ctx)
-     }
- }
- 
--static void decode_opc(CPURISCVState *env, DisasContext *ctx)
-+static void decode_opc(DisasContext *ctx)
- {
-     /* check for compressed insn */
-     if (extract32(ctx->opcode, 0, 2) != 3) {
--        if (!riscv_has_ext(env, RVC)) {
-+        if (!has_ext(ctx, RVC)) {
-             gen_exception_illegal(ctx);
-         } else {
-             ctx->pc_succ_insn = ctx->base.pc_next + 2;
--            decode_RV32_64C(env, ctx);
-+            decode_RV32_64C(ctx);
-         }
-     } else {
-         ctx->pc_succ_insn = ctx->base.pc_next + 4;
--        decode_RV32_64G(env, ctx);
-+        decode_RV32_64G(ctx);
-     }
- }
- 
-@@ -1861,6 +1866,7 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
+     ctx->pc_succ_insn = ctx->base.pc_first;
      ctx->mem_idx = ctx->base.tb->flags & TB_FLAGS_MMU_MASK;
      ctx->mstatus_fs = ctx->base.tb->flags & TB_FLAGS_MSTATUS_FS;
-     ctx->priv_ver = env->priv_ver;
-+    ctx->misa = env->misa;
++    ctx->priv_ver = env->priv_ver;
      ctx->frm = -1;  /* unknown rounding mode */
  }
  
-@@ -1891,14 +1897,13 @@ static bool riscv_tr_breakpoint_check(DisasContextBase *dcbase, CPUState *cpu,
-     return true;
- }
- 
--
- static void riscv_tr_translate_insn(DisasContextBase *dcbase, CPUState *cpu)
- {
-     DisasContext *ctx = container_of(dcbase, DisasContext, base);
-     CPURISCVState *env = cpu->env_ptr;
- 
-     ctx->opcode = cpu_ldl_code(env, ctx->base.pc_next);
--    decode_opc(env, ctx);
-+    decode_opc(ctx);
-     ctx->base.pc_next = ctx->pc_succ_insn;
- 
-     if (ctx->base.is_jmp == DISAS_NEXT) {
 -- 
 2.18.1
 
