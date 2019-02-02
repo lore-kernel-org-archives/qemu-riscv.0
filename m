@@ -1,51 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gprzH-000792-Ew
+	id 1gprzH-00079M-Jy
 	for mharc-qemu-riscv@gnu.org; Sat, 02 Feb 2019 04:53:23 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:54880)
+Received: from eggs.gnu.org ([209.51.188.92]:55006)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1gprzA-0006z8-92
+	(envelope-from <palmer@sifive.com>) id 1gprz9-0006zR-C1
 	for qemu-riscv@nongnu.org; Sat, 02 Feb 2019 04:53:17 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1gprqD-0005oQ-SJ
-	for qemu-riscv@nongnu.org; Sat, 02 Feb 2019 04:44:03 -0500
-Received: from mail-ed1-x542.google.com ([2a00:1450:4864:20::542]:34734)
+	(envelope-from <palmer@sifive.com>) id 1gprqF-0005rj-Rl
+	for qemu-riscv@nongnu.org; Sat, 02 Feb 2019 04:44:05 -0500
+Received: from mail-ed1-x52f.google.com ([2a00:1450:4864:20::52f]:35171)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1gprqB-0005cC-T2
-	for qemu-riscv@nongnu.org; Sat, 02 Feb 2019 04:44:00 -0500
-Received: by mail-ed1-x542.google.com with SMTP id b3so7518514ede.1
-	for <qemu-riscv@nongnu.org>; Sat, 02 Feb 2019 01:43:51 -0800 (PST)
+	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1gprqD-0005ZV-Pq
+	for qemu-riscv@nongnu.org; Sat, 02 Feb 2019 04:44:03 -0500
+Received: by mail-ed1-x52f.google.com with SMTP id x30so7494600edx.2
+	for <qemu-riscv@nongnu.org>; Sat, 02 Feb 2019 01:43:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
 	h=subject:date:message-id:in-reply-to:references:cc:from:to;
-	bh=ihjYI8w/pHOrt/O0GHzxFvfptHP8KkD3SPdesRMFnZg=;
-	b=UlTnc7J3KOsLni1cRH8E6TP8QgA7xdJP91jDa/GzXQ0pDYaP5Okni9usQdsB6wJ/pe
-	h6mSJ2VbuRe0wlpvUkRjP7ciTcURo6WGPJyRZcwLQCCzhMaFuYyqych77NmcUoLYSW1y
-	bOOcoOKzB5M0jSZwPsafEe52RUiRRKY6urEWL/gxpU3nsQWE1bac4ArdS1DweXj+Vkfb
-	BM1dp4YDSSEa1RKrBIZRm97lxe8rP9pTeVP2O4j0n8JTC0zKYiAeunkvT0xz0xMi+P1C
-	oj/HGYYPZaJAs9n/pPQ8KQP4tzaNl5xf2HdJyvSsbFGIIF6OADCrk1cnDV4rfpR76Gzr
-	ZWnw==
+	bh=Skhj66vFOGJI47+G1j5cXFswZYSfNmygkXU3bju1xtg=;
+	b=XYhCrplrCQBIW1UZ6LhdYYMo8Qfze8ZfiuMQtWqZ388M7MxHKkOCu0AGG2RSrpqstM
+	wavQ8psYQLrq8PXE5LCxe7Fq0OPzHMFhrato73XeIrf9pLO0RCEQ+GqnQ702dD9iq9P2
+	L8aX5fOLqxvyI8Sd3lV4L3O0Wqd9Zo3TfX/OBMM2ZwVthLjVkK1iopVSnO7fLKkOVly0
+	4Y7nRCIIXqAEvRSTzTDZlXbAaUNgt8BcEoMLzpuuFVHnQQrrDThzdd54CD8q9l8W3IC8
+	O/SvLeSwgltBRJ4SuG1FCObt0fh+3LgJ00dQ42HzedIpvngOb8U0CdkPKtHSEllWbgjs
+	dk+g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:subject:date:message-id:in-reply-to:references
 	:cc:from:to;
-	bh=ihjYI8w/pHOrt/O0GHzxFvfptHP8KkD3SPdesRMFnZg=;
-	b=BYVbxEAHgbbR57G9lgtbbNJMB9cXj/XrGBdAVg5fTAmzpf1zyWsNd+9XrzC7dcV4H5
-	quZPOJHVwKEk9DtDTrX8rvi0c4naLHpXz/YVXxlWiLzU+ndT+iRHKkEiC9ml33DxoDcD
-	NHfX/+jqdtpk5xF/t1+TTwb3Z17brKhOYSTuY4rkFkRPT+nD2Yz4Sg9yCJf1boCbEeV0
-	Sg3Ofg6dxrTWgqB1LTdpaDac8SyKueU2pMOv1UEIlcQ+Unu0MlDKUnKlUpcl2eDFu3SF
-	pppTmoXwTpH9Y35OOru/F05NnmdbY7bfCV8tCjvrDy7ynmC1wFc8MqQOe5y7Mia25hf4
-	JzJQ==
-X-Gm-Message-State: AJcUukdK56LrRUeGYA21o/Raqq3JUO0bZVlGv7bFM8GbXFFXhRSUpjd9
-	/N/xg7s3+xCu/ZZ5dy+u7U21qmP89SKvqw==
-X-Google-Smtp-Source: ALg8bN66JMDLpssI6Nu3nUR09Pz5SEoV0tR5Z8kA4YG3Yhac5LRcJzugHUguieMTGMlAYBOWfipIiA==
-X-Received: by 2002:aa7:d749:: with SMTP id a9mr41210916eds.223.1549100629864; 
-	Sat, 02 Feb 2019 01:43:49 -0800 (PST)
+	bh=Skhj66vFOGJI47+G1j5cXFswZYSfNmygkXU3bju1xtg=;
+	b=ZpY4eVrL+KlKKp5E8KC3HeAuynhwG9p/vE9ThQuo7KkN7wl8bpo1fDHe/JmjHSrqY1
+	DKdpxAMt5qU+8vnolxGioA9obvJefLN8LmVF+junqp+KqCNK+CRUtDnGDURDL47T/go5
+	4HsPXbJmQXkHaciduSgSUvOqhkYUFV0I0akgDPJyKV/rdvw86rtrQ9cOscIpcaOxzfBs
+	/mwqFAvJGH2VjoIrjNFViOPfDh2HBGTDk1QRM4htQYaa5De02R2yFn2TYp2fOB5oQUo7
+	VwMt1kQ1rbvxBsz1celm8hTWWHdWAPWiwUc9PiFdizj24+5deTu79iOJFBFUZuhmZdfd
+	QKVw==
+X-Gm-Message-State: AHQUAuaRFq186g1tKycyCcTuz59lSxFiZE+dObkQleyXuI8NwThaws8A
+	xPvbxml6srF1DdSz9BvDyrWSP8q9we+iTQ==
+X-Google-Smtp-Source: AHgI3IZkkFhHJ3cXc2B6G9v7uU0ovkqo0l0blIC6rhB/FeVruWZ67tq1Z5bI/FCPQGiIPrTK4wbThw==
+X-Received: by 2002:a17:906:8416:: with SMTP id
+	n22mr16843904ejx.113.1549100626924; 
+	Sat, 02 Feb 2019 01:43:46 -0800 (PST)
 Received: from localhost ([2001:67c:1810:f051:fd32:55e2:f60b:183b])
 	by smtp.gmail.com with ESMTPSA id
-	m14sm2793200edc.27.2019.02.02.01.43.48
+	g37sm2713596edb.85.2019.02.02.01.43.45
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 02 Feb 2019 01:43:49 -0800 (PST)
-Date: Sat,  2 Feb 2019 01:43:27 -0800
-Message-Id: <20190202094329.22874-9-palmer@sifive.com>
+	Sat, 02 Feb 2019 01:43:46 -0800 (PST)
+Date: Sat,  2 Feb 2019 01:43:25 -0800
+Message-Id: <20190202094329.22874-7-palmer@sifive.com>
 X-Mailer: git-send-email 2.18.1
 In-Reply-To: <20190202094329.22874-1-palmer@sifive.com>
 References: <20190202094329.22874-1-palmer@sifive.com>
@@ -57,8 +58,8 @@ From: Palmer Dabbelt <palmer@sifive.com>
 To: Peter Maydell <peter.maydell@linaro.org>
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2a00:1450:4864:20::542
-Subject: [Qemu-riscv] [PULL 08/10] RISC-V: Add misa runtime write support
+X-Received-From: 2a00:1450:4864:20::52f
+Subject: [Qemu-riscv] [PULL 06/10] RISC-V: Add misa to DisasContext
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -74,157 +75,289 @@ X-List-Received-Date: Sat, 02 Feb 2019 09:53:17 -0000
 
 From: Michael Clark <mjc@sifive.com>
 
-This patch adds support for writing misa. misa is validated based
-on rules in the ISA specification. 'E' is mutually exclusive with
-all other extensions. 'D' depends on 'F' so 'D' bit is dropped
-if 'F' is not present. A conservative approach to consistency is
-taken by flushing the translation cache on misa writes. misa_mask
-is added to the CPU struct to store the original set of extensions.
+gen methods should access state from DisasContext. Add misa
+field to the DisasContext struct and remove CPURISCVState
+argument from all gen methods.
 
 Signed-off-by: Michael Clark <mjc@sifive.com>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
 Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
 ---
- target/riscv/cpu.c      |  2 +-
- target/riscv/cpu.h      |  4 ++-
- target/riscv/cpu_bits.h | 11 +++++++++
- target/riscv/csr.c      | 54 ++++++++++++++++++++++++++++++++++++++++-
- 4 files changed, 68 insertions(+), 3 deletions(-)
+ target/riscv/translate.c | 75 +++++++++++++++++++++-------------------
+ 1 file changed, 40 insertions(+), 35 deletions(-)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 28d7e5302fb1..cc3ddc0ae4b5 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -88,7 +88,7 @@ typedef struct RISCVCPUInfo {
- 
- static void set_misa(CPURISCVState *env, target_ulong misa)
- {
--    env->misa = misa;
-+    env->misa_mask = env->misa = misa;
- }
- 
- static void set_versions(CPURISCVState *env, int user_ver, int priv_ver)
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index a97435bd7b1d..5c2aebf13251 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -86,7 +86,8 @@
-    so a cpu features bitfield is required, likewise for optional PMP support */
- enum {
-     RISCV_FEATURE_MMU,
--    RISCV_FEATURE_PMP
-+    RISCV_FEATURE_PMP,
-+    RISCV_FEATURE_MISA
- };
- 
- #define USER_VERSION_2_02_0 0x00020200
-@@ -118,6 +119,7 @@ struct CPURISCVState {
-     target_ulong user_ver;
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index 35eb6bdfe099..bb80387088e2 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -46,6 +46,7 @@ typedef struct DisasContext {
      target_ulong priv_ver;
-     target_ulong misa;
-+    target_ulong misa_mask;
- 
-     uint32_t features;
- 
-diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-index 5439f4719ee5..7afcb2468d80 100644
---- a/target/riscv/cpu_bits.h
-+++ b/target/riscv/cpu_bits.h
-@@ -311,10 +311,21 @@
- #define MSTATUS32_SD        0x80000000
- #define MSTATUS64_SD        0x8000000000000000ULL
- 
-+#define MISA32_MXL          0xC0000000
-+#define MISA64_MXL          0xC000000000000000ULL
-+
-+#define MXL_RV32            1
-+#define MXL_RV64            2
-+#define MXL_RV128           3
-+
- #if defined(TARGET_RISCV32)
- #define MSTATUS_SD MSTATUS32_SD
-+#define MISA_MXL MISA32_MXL
-+#define MXL_VAL MXL_RV32
- #elif defined(TARGET_RISCV64)
- #define MSTATUS_SD MSTATUS64_SD
-+#define MISA_MXL MISA64_MXL
-+#define MXL_VAL MXL_RV64
+     uint32_t opcode;
+     uint32_t mstatus_fs;
++    uint32_t misa;
+     uint32_t mem_idx;
+     /* Remember the rounding mode encoded in the previous fp instruction,
+        which we have already installed into env->fp_status.  Or -1 for
+@@ -75,6 +76,11 @@ static const int tcg_memop_lookup[8] = {
+ #define CASE_OP_32_64(X) case X
  #endif
  
- /* sstatus CSR bits */
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index e2bd374f09ed..e72fcf1265d4 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -332,6 +332,58 @@ static int read_misa(CPURISCVState *env, int csrno, target_ulong *val)
-     return 0;
- }
- 
-+static int write_misa(CPURISCVState *env, int csrno, target_ulong val)
++static inline bool has_ext(DisasContext *ctx, uint32_t ext)
 +{
-+    if (!riscv_feature(env, RISCV_FEATURE_MISA)) {
-+        /* drop write to misa */
-+        return 0;
-+    }
-+
-+    /* 'I' or 'E' must be present */
-+    if (!(val & (RVI | RVE))) {
-+        /* It is not, drop write to misa */
-+        return 0;
-+    }
-+
-+    /* 'E' excludes all other extensions */
-+    if (val & RVE) {
-+        /* when we support 'E' we can do "val = RVE;" however
-+         * for now we just drop writes if 'E' is present.
-+         */
-+        return 0;
-+    }
-+
-+    /* Mask extensions that are not supported by this hart */
-+    val &= env->misa_mask;
-+
-+    /* Mask extensions that are not supported by QEMU */
-+    val &= (RVI | RVE | RVM | RVA | RVF | RVD | RVC | RVS | RVU);
-+
-+    /* 'D' depends on 'F', so clear 'D' if 'F' is not present */
-+    if ((val & RVD) && !(val & RVF)) {
-+        val &= ~RVD;
-+    }
-+
-+    /* Suppress 'C' if next instruction is not aligned
-+     * TODO: this should check next_pc
-+     */
-+    if ((val & RVC) && (GETPC() & ~3) != 0) {
-+        val &= ~RVC;
-+    }
-+
-+    /* misa.MXL writes are not supported by QEMU */
-+    val = (env->misa & MISA_MXL) | (val & ~MISA_MXL);
-+
-+    /* flush translation cache */
-+    if (val != env->misa) {
-+        tb_flush(CPU(riscv_env_get_cpu(env)));
-+    }
-+
-+    env->misa = val;
-+
-+    return 0;
++    return ctx->misa & ext;
 +}
 +
- static int read_medeleg(CPURISCVState *env, int csrno, target_ulong *val)
+ static void generate_exception(DisasContext *ctx, int excp)
  {
-     *val = env->medeleg;
-@@ -810,7 +862,7 @@ static riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+     tcg_gen_movi_tl(cpu_pc, ctx->base.pc_next);
+@@ -506,14 +512,13 @@ static void gen_arith_imm(DisasContext *ctx, uint32_t opc, int rd,
+     tcg_temp_free(source1);
+ }
  
-     /* Machine Trap Setup */
-     [CSR_MSTATUS] =             { any,  read_mstatus,     write_mstatus     },
--    [CSR_MISA] =                { any,  read_misa                           },
-+    [CSR_MISA] =                { any,  read_misa,        write_misa        },
-     [CSR_MIDELEG] =             { any,  read_mideleg,     write_mideleg     },
-     [CSR_MEDELEG] =             { any,  read_medeleg,     write_medeleg     },
-     [CSR_MIE] =                 { any,  read_mie,         write_mie         },
+-static void gen_jal(CPURISCVState *env, DisasContext *ctx, int rd,
+-                    target_ulong imm)
++static void gen_jal(DisasContext *ctx, int rd, target_ulong imm)
+ {
+     target_ulong next_pc;
+ 
+     /* check misaligned: */
+     next_pc = ctx->base.pc_next + imm;
+-    if (!riscv_has_ext(env, RVC)) {
++    if (!has_ext(ctx, RVC)) {
+         if ((next_pc & 0x3) != 0) {
+             gen_exception_inst_addr_mis(ctx);
+             return;
+@@ -527,8 +532,8 @@ static void gen_jal(CPURISCVState *env, DisasContext *ctx, int rd,
+     ctx->base.is_jmp = DISAS_NORETURN;
+ }
+ 
+-static void gen_jalr(CPURISCVState *env, DisasContext *ctx, uint32_t opc,
+-                     int rd, int rs1, target_long imm)
++static void gen_jalr(DisasContext *ctx, uint32_t opc, int rd, int rs1,
++                     target_long imm)
+ {
+     /* no chaining with JALR */
+     TCGLabel *misaligned = NULL;
+@@ -540,7 +545,7 @@ static void gen_jalr(CPURISCVState *env, DisasContext *ctx, uint32_t opc,
+         tcg_gen_addi_tl(cpu_pc, cpu_pc, imm);
+         tcg_gen_andi_tl(cpu_pc, cpu_pc, (target_ulong)-2);
+ 
+-        if (!riscv_has_ext(env, RVC)) {
++        if (!has_ext(ctx, RVC)) {
+             misaligned = gen_new_label();
+             tcg_gen_andi_tl(t0, cpu_pc, 0x2);
+             tcg_gen_brcondi_tl(TCG_COND_NE, t0, 0x0, misaligned);
+@@ -565,8 +570,8 @@ static void gen_jalr(CPURISCVState *env, DisasContext *ctx, uint32_t opc,
+     tcg_temp_free(t0);
+ }
+ 
+-static void gen_branch(CPURISCVState *env, DisasContext *ctx, uint32_t opc,
+-                       int rs1, int rs2, target_long bimm)
++static void gen_branch(DisasContext *ctx, uint32_t opc, int rs1, int rs2,
++                       target_long bimm)
+ {
+     TCGLabel *l = gen_new_label();
+     TCGv source1, source2;
+@@ -603,7 +608,7 @@ static void gen_branch(CPURISCVState *env, DisasContext *ctx, uint32_t opc,
+ 
+     gen_goto_tb(ctx, 1, ctx->pc_succ_insn);
+     gen_set_label(l); /* branch taken */
+-    if (!riscv_has_ext(env, RVC) && ((ctx->base.pc_next + bimm) & 0x3)) {
++    if (!has_ext(ctx, RVC) && ((ctx->base.pc_next + bimm) & 0x3)) {
+         /* misaligned */
+         gen_exception_inst_addr_mis(ctx);
+     } else {
+@@ -1314,8 +1319,8 @@ static void gen_fp_arith(DisasContext *ctx, uint32_t opc, int rd,
+     }
+ }
+ 
+-static void gen_system(CPURISCVState *env, DisasContext *ctx, uint32_t opc,
+-                      int rd, int rs1, int csr)
++static void gen_system(DisasContext *ctx, uint32_t opc, int rd, int rs1,
++                       int csr)
+ {
+     TCGv source1, csr_store, dest, rs1_pass, imm_rs1;
+     source1 = tcg_temp_new();
+@@ -1361,7 +1366,7 @@ static void gen_system(CPURISCVState *env, DisasContext *ctx, uint32_t opc,
+             gen_exception_illegal(ctx);
+             break;
+         case 0x102: /* SRET */
+-            if (riscv_has_ext(env, RVS)) {
++            if (has_ext(ctx, RVS)) {
+                 gen_helper_sret(cpu_pc, cpu_env, cpu_pc);
+                 tcg_gen_exit_tb(NULL, 0); /* no chaining */
+                 ctx->base.is_jmp = DISAS_NORETURN;
+@@ -1506,7 +1511,7 @@ static void decode_RV32_64C0(DisasContext *ctx)
+     }
+ }
+ 
+-static void decode_RV32_64C1(CPURISCVState *env, DisasContext *ctx)
++static void decode_RV32_64C1(DisasContext *ctx)
+ {
+     uint8_t funct3 = extract32(ctx->opcode, 13, 3);
+     uint8_t rd_rs1 = GET_C_RS1(ctx->opcode);
+@@ -1526,7 +1531,7 @@ static void decode_RV32_64C1(CPURISCVState *env, DisasContext *ctx)
+                       GET_C_IMM(ctx->opcode));
+ #else
+         /* C.JAL(RV32) -> jal x1, offset[11:1] */
+-        gen_jal(env, ctx, 1, GET_C_J_IMM(ctx->opcode));
++        gen_jal(ctx, 1, GET_C_J_IMM(ctx->opcode));
+ #endif
+         break;
+     case 2:
+@@ -1605,22 +1610,22 @@ static void decode_RV32_64C1(CPURISCVState *env, DisasContext *ctx)
+         break;
+     case 5:
+         /* C.J -> jal x0, offset[11:1]*/
+-        gen_jal(env, ctx, 0, GET_C_J_IMM(ctx->opcode));
++        gen_jal(ctx, 0, GET_C_J_IMM(ctx->opcode));
+         break;
+     case 6:
+         /* C.BEQZ -> beq rs1', x0, offset[8:1]*/
+         rs1s = GET_C_RS1S(ctx->opcode);
+-        gen_branch(env, ctx, OPC_RISC_BEQ, rs1s, 0, GET_C_B_IMM(ctx->opcode));
++        gen_branch(ctx, OPC_RISC_BEQ, rs1s, 0, GET_C_B_IMM(ctx->opcode));
+         break;
+     case 7:
+         /* C.BNEZ -> bne rs1', x0, offset[8:1]*/
+         rs1s = GET_C_RS1S(ctx->opcode);
+-        gen_branch(env, ctx, OPC_RISC_BNE, rs1s, 0, GET_C_B_IMM(ctx->opcode));
++        gen_branch(ctx, OPC_RISC_BNE, rs1s, 0, GET_C_B_IMM(ctx->opcode));
+         break;
+     }
+ }
+ 
+-static void decode_RV32_64C2(CPURISCVState *env, DisasContext *ctx)
++static void decode_RV32_64C2(DisasContext *ctx)
+ {
+     uint8_t rd, rs2;
+     uint8_t funct3 = extract32(ctx->opcode, 13, 3);
+@@ -1654,7 +1659,7 @@ static void decode_RV32_64C2(CPURISCVState *env, DisasContext *ctx)
+         if (extract32(ctx->opcode, 12, 1) == 0) {
+             if (rs2 == 0) {
+                 /* C.JR -> jalr x0, rs1, 0*/
+-                gen_jalr(env, ctx, OPC_RISC_JALR, 0, rd, 0);
++                gen_jalr(ctx, OPC_RISC_JALR, 0, rd, 0);
+             } else {
+                 /* C.MV -> add rd, x0, rs2 */
+                 gen_arith(ctx, OPC_RISC_ADD, rd, 0, rs2);
+@@ -1662,11 +1667,11 @@ static void decode_RV32_64C2(CPURISCVState *env, DisasContext *ctx)
+         } else {
+             if (rd == 0) {
+                 /* C.EBREAK -> ebreak*/
+-                gen_system(env, ctx, OPC_RISC_ECALL, 0, 0, 0x1);
++                gen_system(ctx, OPC_RISC_ECALL, 0, 0, 0x1);
+             } else {
+                 if (rs2 == 0) {
+                     /* C.JALR -> jalr x1, rs1, 0*/
+-                    gen_jalr(env, ctx, OPC_RISC_JALR, 1, rd, 0);
++                    gen_jalr(ctx, OPC_RISC_JALR, 1, rd, 0);
+                 } else {
+                     /* C.ADD -> add rd, rd, rs2 */
+                     gen_arith(ctx, OPC_RISC_ADD, rd, rd, rs2);
+@@ -1698,7 +1703,7 @@ static void decode_RV32_64C2(CPURISCVState *env, DisasContext *ctx)
+     }
+ }
+ 
+-static void decode_RV32_64C(CPURISCVState *env, DisasContext *ctx)
++static void decode_RV32_64C(DisasContext *ctx)
+ {
+     uint8_t op = extract32(ctx->opcode, 0, 2);
+ 
+@@ -1707,15 +1712,15 @@ static void decode_RV32_64C(CPURISCVState *env, DisasContext *ctx)
+         decode_RV32_64C0(ctx);
+         break;
+     case 1:
+-        decode_RV32_64C1(env, ctx);
++        decode_RV32_64C1(ctx);
+         break;
+     case 2:
+-        decode_RV32_64C2(env, ctx);
++        decode_RV32_64C2(ctx);
+         break;
+     }
+ }
+ 
+-static void decode_RV32_64G(CPURISCVState *env, DisasContext *ctx)
++static void decode_RV32_64G(DisasContext *ctx)
+ {
+     int rs1;
+     int rs2;
+@@ -1750,13 +1755,13 @@ static void decode_RV32_64G(CPURISCVState *env, DisasContext *ctx)
+         break;
+     case OPC_RISC_JAL:
+         imm = GET_JAL_IMM(ctx->opcode);
+-        gen_jal(env, ctx, rd, imm);
++        gen_jal(ctx, rd, imm);
+         break;
+     case OPC_RISC_JALR:
+-        gen_jalr(env, ctx, MASK_OP_JALR(ctx->opcode), rd, rs1, imm);
++        gen_jalr(ctx, MASK_OP_JALR(ctx->opcode), rd, rs1, imm);
+         break;
+     case OPC_RISC_BRANCH:
+-        gen_branch(env, ctx, MASK_OP_BRANCH(ctx->opcode), rs1, rs2,
++        gen_branch(ctx, MASK_OP_BRANCH(ctx->opcode), rs1, rs2,
+                    GET_B_IMM(ctx->opcode));
+         break;
+     case OPC_RISC_LOAD:
+@@ -1827,7 +1832,7 @@ static void decode_RV32_64G(CPURISCVState *env, DisasContext *ctx)
+         }
+         break;
+     case OPC_RISC_SYSTEM:
+-        gen_system(env, ctx, MASK_OP_SYSTEM(ctx->opcode), rd, rs1,
++        gen_system(ctx, MASK_OP_SYSTEM(ctx->opcode), rd, rs1,
+                    (ctx->opcode & 0xFFF00000) >> 20);
+         break;
+     default:
+@@ -1836,19 +1841,19 @@ static void decode_RV32_64G(CPURISCVState *env, DisasContext *ctx)
+     }
+ }
+ 
+-static void decode_opc(CPURISCVState *env, DisasContext *ctx)
++static void decode_opc(DisasContext *ctx)
+ {
+     /* check for compressed insn */
+     if (extract32(ctx->opcode, 0, 2) != 3) {
+-        if (!riscv_has_ext(env, RVC)) {
++        if (!has_ext(ctx, RVC)) {
+             gen_exception_illegal(ctx);
+         } else {
+             ctx->pc_succ_insn = ctx->base.pc_next + 2;
+-            decode_RV32_64C(env, ctx);
++            decode_RV32_64C(ctx);
+         }
+     } else {
+         ctx->pc_succ_insn = ctx->base.pc_next + 4;
+-        decode_RV32_64G(env, ctx);
++        decode_RV32_64G(ctx);
+     }
+ }
+ 
+@@ -1861,6 +1866,7 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
+     ctx->mem_idx = ctx->base.tb->flags & TB_FLAGS_MMU_MASK;
+     ctx->mstatus_fs = ctx->base.tb->flags & TB_FLAGS_MSTATUS_FS;
+     ctx->priv_ver = env->priv_ver;
++    ctx->misa = env->misa;
+     ctx->frm = -1;  /* unknown rounding mode */
+ }
+ 
+@@ -1891,14 +1897,13 @@ static bool riscv_tr_breakpoint_check(DisasContextBase *dcbase, CPUState *cpu,
+     return true;
+ }
+ 
+-
+ static void riscv_tr_translate_insn(DisasContextBase *dcbase, CPUState *cpu)
+ {
+     DisasContext *ctx = container_of(dcbase, DisasContext, base);
+     CPURISCVState *env = cpu->env_ptr;
+ 
+     ctx->opcode = cpu_ldl_code(env, ctx->base.pc_next);
+-    decode_opc(env, ctx);
++    decode_opc(ctx);
+     ctx->base.pc_next = ctx->pc_succ_insn;
+ 
+     if (ctx->base.is_jmp == DISAS_NEXT) {
 -- 
 2.18.1
 
