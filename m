@@ -1,64 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gprzS-0007Fb-6t
+	id 1gprzS-0007Fr-Fd
 	for mharc-qemu-riscv@gnu.org; Sat, 02 Feb 2019 04:53:34 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:54983)
+Received: from eggs.gnu.org ([209.51.188.92]:54880)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1gprzE-0006zO-P3
-	for qemu-riscv@nongnu.org; Sat, 02 Feb 2019 04:53:21 -0500
+	(envelope-from <palmer@sifive.com>) id 1gprzG-0006z8-Ko
+	for qemu-riscv@nongnu.org; Sat, 02 Feb 2019 04:53:23 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1gprqB-0005l2-RX
+	(envelope-from <palmer@sifive.com>) id 1gprqB-0005kf-Qk
 	for qemu-riscv@nongnu.org; Sat, 02 Feb 2019 04:44:01 -0500
-Received: from mail-ed1-x543.google.com ([2a00:1450:4864:20::543]:37759)
+Received: from mail-ed1-x542.google.com ([2a00:1450:4864:20::542]:37759)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1gprq7-0005XT-V3
+	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1gprq7-0005fV-SE
 	for qemu-riscv@nongnu.org; Sat, 02 Feb 2019 04:43:57 -0500
-Received: by mail-ed1-x543.google.com with SMTP id h15so7475831edb.4
-	for <qemu-riscv@nongnu.org>; Sat, 02 Feb 2019 01:43:46 -0800 (PST)
+Received: by mail-ed1-x542.google.com with SMTP id h15so7476001edb.4
+	for <qemu-riscv@nongnu.org>; Sat, 02 Feb 2019 01:43:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
 	h=subject:date:message-id:in-reply-to:references:cc:from:to;
-	bh=VsEG5EqtY/F+uxugfJZjY5iDDB0h1Q1FwFLq+ViPw8A=;
-	b=EGmT8jIL7TUd74YGaj3Jsr3YfNXRK3ptPXzUbXooqKQSCvVVmHwQcdAWLnxEVuFS0W
-	nkGjJWt8bf3DNHHrjZ0a136IpB83vcBeVv7wuZOy8XsfUOLTWFJlIT3w2mBQf1XgShxI
-	CH8R48yUAZ3t6ggsFGOsQus4o1nDmC471CA9yrmrreODwKUCiwu9e0tUjbSQQyRFIL0x
-	PT6m/28vthCAV09T6k3RFttHMKqPy8R7MYzu9+uuAKCzYNA6Y10Uhorrq0T3svtda6kx
-	v11e3UuVLC5vXAT9ZGYqT0mlprI8J7XBb99BBxMni2FLGQ2nNWxt0cHxLJ91uBlK4vzH
-	Hrrg==
+	bh=1TwFMTdrijbYHJcqilfA4QcaYI5N+IsK6t29hHJjQM8=;
+	b=jWBNFlIVUxSieGn9yNzTnZEDPVPQ3Ks0r0SgzxEXpIyvwLHqdBH6g0d4jYsypX09Yy
+	gOshzZBYNQanbq5t5Hobhke3RWgUsPU8noExHPscxrJR/SdBReEEhfcjcC8zeRALXNzL
+	RUkLt1I08BQ2uFMrpkn07sMTONPf2Z/+F84YRpQebpdhxovFfpIF6MPaW7So5pHk3sp9
+	bpmMWBEu5v7UBCQtN6Me42sfy7CPUv39Nm1aPKmRz6pEoLg65DEn/FIfIv652/vYYiA9
+	awUJIYSmke7fCwOg7fknUYXqclle1Lw+wk6eCpcgA0n1Gysw2rIKvKhoMFqZx845QlYH
+	IWYw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:subject:date:message-id:in-reply-to:references
 	:cc:from:to;
-	bh=VsEG5EqtY/F+uxugfJZjY5iDDB0h1Q1FwFLq+ViPw8A=;
-	b=KEwFV9EUcQipsJzOlRpQ8hY28JWwSyTiLXOvEDFmRqja+a2O+dIGMPPR9lOESco1JN
-	/oW8w+DKnfUkJDnEG0wp2ZuyLQM1mW98TTind2le1TmuTZVeab4b/1G+E2P7wg4F+roB
-	q94BXy8DtP4gpaT04xTsyJ7J0T3mKJ6bwRRNjyqOCmUvlv0s49awcOCxfSvbXiAWMAiH
-	NLF51IpQlCr5nAF76lOBPS5JY9jGMzEfwT8jLhqMgUIZRK5NmvgMTedewdXhT8Ygvf5n
-	UWhXoSojY2fGBQzKBVjiUOUt2DD27p8m+516Nfjqf5LCYTpudV/r0JhcjX/DZS1IsSJY
-	ysjw==
-X-Gm-Message-State: AJcUukdO3Gl3tfl0rm8ziroljk+deOlPyx23lrgc1Kj20BOUYFhUk0dR
-	NeImAPBDXS2S1uIUHUrhF3I9qZocm6r7AA==
-X-Google-Smtp-Source: ALg8bN5iM9GIyqLWUDJUfeALUsMmV4TvEJdNga3GJYEXmtkL7NuKbO3XiQoej4M+ec83UUgeUAVucg==
-X-Received: by 2002:a50:a622:: with SMTP id d31mr44346771edc.228.1549100625259;
-	Sat, 02 Feb 2019 01:43:45 -0800 (PST)
+	bh=1TwFMTdrijbYHJcqilfA4QcaYI5N+IsK6t29hHJjQM8=;
+	b=tBMiByFe5Sczr2w1ueSAh4fYmXCF27vTbbl2mMA61fEmXvjWzThHC0MkcRCqCUA/EA
+	8ifXO0M5kHAs8Z0Eg5pXVBxaPaDghdu/6kNV23eTSDCKXfAJF9P6TGDMi4l7Hw3rfaRX
+	xjsNFXjZlGU/pXhaNWwmCuAcVuote5bosBRqkmeowy08BBauaP0YcJ3lBYiOB4aaQWHI
+	O/RaWa+mS5c7IzVyIewk3gq1Kwrs2L5IxFDxqQVU6Cw6TAM5YBr//1xNSfnN/F/enbDd
+	UDoYnJMSYnqqXY9OpfLXvCdg/H3h+bQVJl6GhiLTZ+r69gFUaGASk89QQzJZobqbEUIf
+	a/Rw==
+X-Gm-Message-State: AHQUAuZUCJRbnSqg1Ak2H4AvLhlpCv7kjMj8Ot63JabB0ITYSvvSN7E8
+	4yFL8484Ik6ZO4UQbclKXxPO90JIcjgqJQ==
+X-Google-Smtp-Source: AHgI3IZDqO6NitwchuKzB4GZC46FAm5XWCX43ElSO7el/ed2OYCx5YQ0ZGBJXsbE7kKykjFTBJDEwg==
+X-Received: by 2002:a50:d753:: with SMTP id i19mr18349810edj.75.1549100633570; 
+	Sat, 02 Feb 2019 01:43:53 -0800 (PST)
 Received: from localhost ([2001:67c:1810:f051:fd32:55e2:f60b:183b])
 	by smtp.gmail.com with ESMTPSA id
-	g21sm2665204edc.63.2019.02.02.01.43.44
+	r51sm2682281eda.64.2019.02.02.01.43.52
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 02 Feb 2019 01:43:44 -0800 (PST)
-Date: Sat,  2 Feb 2019 01:43:24 -0800
-Message-Id: <20190202094329.22874-6-palmer@sifive.com>
+	Sat, 02 Feb 2019 01:43:52 -0800 (PST)
+Date: Sat,  2 Feb 2019 01:43:29 -0800
+Message-Id: <20190202094329.22874-11-palmer@sifive.com>
 X-Mailer: git-send-email 2.18.1
 In-Reply-To: <20190202094329.22874-1-palmer@sifive.com>
 References: <20190202094329.22874-1-palmer@sifive.com>
 Cc: qemu-riscv@nongnu.org,       qemu-devel@nongnu.org,
-	Alistair Francis <Alistair.Francis@wdc.com>,
-	Alistair Francis <alistair.francis@wdc.com>, 
-	Palmer Dabbelt <palmer@sifive.com>
+	Xi Wang <xi.wang@gmail.com>, Palmer Dabbelt <palmer@sifive.com>
 From: Palmer Dabbelt <palmer@sifive.com>
 To: Peter Maydell <peter.maydell@linaro.org>
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2a00:1450:4864:20::543
-Subject: [Qemu-riscv] [PULL 05/10] RISC-V: Add priv_ver to DisasContext
+X-Received-From: 2a00:1450:4864:20::542
+Subject: [Qemu-riscv] [PULL 10/10] target/riscv: fix counter-enable checks
+ in ctr()
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -70,63 +69,44 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 02 Feb 2019 09:53:21 -0000
+X-List-Received-Date: Sat, 02 Feb 2019 09:53:23 -0000
 
-From: Alistair Francis <Alistair.Francis@wdc.com>
+From: Xi Wang <xi.wang@gmail.com>
 
-The gen methods should access state from DisasContext. Add priv_ver
-field to the DisasContext struct.
+Access to a counter in U-mode is permitted only if the corresponding
+bit is set in both mcounteren and scounteren.  The current code
+ignores mcounteren and checks scounteren only for U-mode access.
 
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Signed-off-by: Xi Wang <xi.wang@gmail.com>
+Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
 Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
 ---
- target/riscv/translate.c | 7 +++++--
- 1 file changed, 5 insertions(+), 2 deletions(-)
+ target/riscv/csr.c | 12 +++++++++---
+ 1 file changed, 9 insertions(+), 3 deletions(-)
 
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 0581b3c1f7d7..35eb6bdfe099 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -43,6 +43,7 @@ typedef struct DisasContext {
-     DisasContextBase base;
-     /* pc_succ_insn points to the instruction following base.pc_next */
-     target_ulong pc_succ_insn;
-+    target_ulong priv_ver;
-     uint32_t opcode;
-     uint32_t mstatus_fs;
-     uint32_t mem_idx;
-@@ -1330,7 +1331,7 @@ static void gen_system(CPURISCVState *env, DisasContext *ctx, uint32_t opc,
- #ifndef CONFIG_USER_ONLY
-     /* Extract funct7 value and check whether it matches SFENCE.VMA */
-     if ((opc == OPC_RISC_ECALL) && ((csr >> 5) == 9)) {
--        if (env->priv_ver == PRIV_VERSION_1_10_0) {
-+        if (ctx->priv_ver == PRIV_VERSION_1_10_0) {
-             /* sfence.vma */
-             /* TODO: handle ASID specific fences */
-             gen_helper_tlb_flush(cpu_env);
-@@ -1384,7 +1385,7 @@ static void gen_system(CPURISCVState *env, DisasContext *ctx, uint32_t opc,
-             gen_helper_wfi(cpu_env);
-             break;
-         case 0x104: /* SFENCE.VM */
--            if (env->priv_ver <= PRIV_VERSION_1_09_1) {
-+            if (ctx->priv_ver <= PRIV_VERSION_1_09_1) {
-                 gen_helper_tlb_flush(cpu_env);
-             } else {
-                 gen_exception_illegal(ctx);
-@@ -1854,10 +1855,12 @@ static void decode_opc(CPURISCVState *env, DisasContext *ctx)
- static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index e72fcf1265d4..960d2b0aa951 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -56,9 +56,15 @@ static int fs(CPURISCVState *env, int csrno)
+ static int ctr(CPURISCVState *env, int csrno)
  {
-     DisasContext *ctx = container_of(dcbase, DisasContext, base);
-+    CPURISCVState *env = cs->env_ptr;
- 
-     ctx->pc_succ_insn = ctx->base.pc_first;
-     ctx->mem_idx = ctx->base.tb->flags & TB_FLAGS_MMU_MASK;
-     ctx->mstatus_fs = ctx->base.tb->flags & TB_FLAGS_MSTATUS_FS;
-+    ctx->priv_ver = env->priv_ver;
-     ctx->frm = -1;  /* unknown rounding mode */
- }
- 
+ #if !defined(CONFIG_USER_ONLY)
+-    target_ulong ctr_en = env->priv == PRV_U ? env->scounteren :
+-                          env->priv == PRV_S ? env->mcounteren : -1U;
+-    if (!(ctr_en & (1 << (csrno & 31)))) {
++    uint32_t ctr_en = ~0u;
++
++    if (env->priv < PRV_M) {
++        ctr_en &= env->mcounteren;
++    }
++    if (env->priv < PRV_S) {
++        ctr_en &= env->scounteren;
++    }
++    if (!(ctr_en & (1u << (csrno & 31)))) {
+         return -1;
+     }
+ #endif
 -- 
 2.18.1
 
