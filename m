@@ -1,56 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gprzF-00076a-DF
-	for mharc-qemu-riscv@gnu.org; Sat, 02 Feb 2019 04:53:21 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:55006)
+	id 1gprzH-00078m-8d
+	for mharc-qemu-riscv@gnu.org; Sat, 02 Feb 2019 04:53:23 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:54983)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1gprzC-0006zR-JV
-	for qemu-riscv@nongnu.org; Sat, 02 Feb 2019 04:53:19 -0500
+	(envelope-from <palmer@sifive.com>) id 1gprz9-0006zO-Ah
+	for qemu-riscv@nongnu.org; Sat, 02 Feb 2019 04:53:17 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1gprqB-0005lT-W6
-	for qemu-riscv@nongnu.org; Sat, 02 Feb 2019 04:44:01 -0500
-Received: from mail-ed1-x541.google.com ([2a00:1450:4864:20::541]:46164)
+	(envelope-from <palmer@sifive.com>) id 1gprqF-0005rq-S4
+	for qemu-riscv@nongnu.org; Sat, 02 Feb 2019 04:44:05 -0500
+Received: from mail-ed1-x532.google.com ([2a00:1450:4864:20::532]:35174)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1gprq9-0005Ox-OK
-	for qemu-riscv@nongnu.org; Sat, 02 Feb 2019 04:43:59 -0500
-Received: by mail-ed1-x541.google.com with SMTP id o10so7430893edt.13
-	for <qemu-riscv@nongnu.org>; Sat, 02 Feb 2019 01:43:40 -0800 (PST)
+	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1gprqD-0005ap-Oh
+	for qemu-riscv@nongnu.org; Sat, 02 Feb 2019 04:44:03 -0500
+Received: by mail-ed1-x532.google.com with SMTP id x30so7494627edx.2
+	for <qemu-riscv@nongnu.org>; Sat, 02 Feb 2019 01:43:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
 	h=subject:date:message-id:in-reply-to:references:cc:from:to;
-	bh=z6Oe5++7//00+8jf3KOesDxKK2wIxkTBsez1SGK1Kro=;
-	b=X3l6yNuVoZXHJK+7TqH95EvGY2YZYrcVyI2b1E/ulY6ZzV0JK2tltEwyR+GYWu5L0g
-	l94/Wkg/AovsssjRAbqXZV6mTqn93w2RP62KB+gbeK7uaMX70qKzUHQds7yrKn6HhXji
-	zPQdDWyv3OsZEXRGeZLbXTKixRQ+Qh3FJ2gQUXvRBX/P/O3k2wMzDQy/rdywJanaEC3a
-	DAukFNt8PZoT/ZEjkg48G4oXPn9tsGAbxeCJbsk3RZ2nJaMa6+hccS5PGP4Q66vNbI4g
-	anZsoxrG1WZpsBCLWIuc6s5I9hLwEPrRsp4bAYmoHF+YgxoPhWy/eUFhorQtypE2s9Uu
-	LydQ==
+	bh=uh/cx2fO792mW+H9MP7dYEuTmQie0wSf91G942+fWKU=;
+	b=EYh6YmrVuOcSnfZI6iJaAyfHLj0yuyliDt3s7fwWG43CmlKKOabCW/xMCaRinBxscu
+	1v0xxmsQ4xH330AYdZmLscMdSkVVGl3N4Re2FDEbDRh/xSmDS1MqLI6ChtTBViUDh02n
+	dxk/k5nTVjgAjZgXb9BJchsscXTqn8R2iAs7RGg5GVGLIPM0uiIQ8YfqpHB/QfSumd5Q
+	NErVxrk3YubxvlLR7gSUnCoz0ojVSHwHh93yHFhGrtD973ESLC+BaQq7Mi8BRltNwpvl
+	CHJForDzw8/CZyL73wPXLprUjI8EX7SPJyFetNZGftKWaehMEoTG6rSGrfKE+xFYG1TI
+	Sc9w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:subject:date:message-id:in-reply-to:references
 	:cc:from:to;
-	bh=z6Oe5++7//00+8jf3KOesDxKK2wIxkTBsez1SGK1Kro=;
-	b=iNjMmPWHZLLQQdQosKd1IrL+tydpC+x5cizW6zv1dbLzWTW5T26ury+hVsSuUuSy+J
-	LKO29u0cyAwmQa5u5G7DFrXfoTTGPh4gveoHtjpgnLKJH5k6TGlrrAtZ4/d3pfULwx82
-	3KV2amsvoPEi3RjbsFZyk+6KhyLKlFABhEUi/YOeC5dYC+M30VyGvlRcdZ9XNDaU8eN2
-	X9YKijoft9/CAtJj3vDr/2dowM6pnrLwADhjE5UQl6N6YQgz05OWSOMj1WzVpDHYxfM+
-	v8QYDJJUtD+CmEPN43NjjRbk0KQNh4xAhKyHnt54KMsLN+5wJe1WREiHRiSSPY9wCdK1
-	la7g==
-X-Gm-Message-State: AJcUuke9eW11weyz16F+7ArTvFYU66wIA4pvxztBFVp4WwL31UlezYEV
-	SmirtosuNnSKl4CwlOQysnecQ+IcXmZcow==
-X-Google-Smtp-Source: ALg8bN5rS3BeibTBGpwUvmy9yVTTRbC5GxnGyPpju+pdAyQFbHZF0jkgl8aJ4NLwylQZxKRZEowXMQ==
-X-Received: by 2002:a50:8b26:: with SMTP id l35mr40908322edl.146.1549100619219;
-	Sat, 02 Feb 2019 01:43:39 -0800 (PST)
+	bh=uh/cx2fO792mW+H9MP7dYEuTmQie0wSf91G942+fWKU=;
+	b=VCZXcIXL1omoiAEy7Ms/aMJVdzea6c4KQule8K0GfveZtdGDpg/RfsEXsu7UpWyjZO
+	+Mg4zoiGAJ28CJHq941LUXw/ztVNGWgIBSWF3asTcx+dHjBc7XWuMW7R83GD7V0MJcqZ
+	QUa+z6vr4t8S0kZM2bmsVM8V2ECVquUU/vAQPGG8y4UdjD4Ba1HNLEsfKWY7qj9cTjm+
+	5rLZX0xAINJuFezPeOxGioDY8E0FYYOdTzV9ih7KYkr3XJZA4SJKFS5oRdfSETzAInLy
+	9kJNxWxpjdkXSDnUXEKaFqRvqf8IizNMn3Sw/McuLEdgnw6wnA8TcFzRZySqTrnaEkb7
+	EYvQ==
+X-Gm-Message-State: AJcUukeEp1Uy5WK31moYBCknqnVyc/9sgZ9EXShcjaHjxKM2xEY3rCHF
+	N8R7jWyoNohPxHzOYWpQfh2y1/ZRx6pLRw==
+X-Google-Smtp-Source: ALg8bN559cfQKaMd62MnXvJ15IUWb9mphIiP95a9rD6Zo2ss4MVrbPZaq/4EEzwoVeeVb9K0Iht7Ow==
+X-Received: by 2002:a17:906:2e59:: with SMTP id
+	r25-v6mr33378964eji.186.1549100628127; 
+	Sat, 02 Feb 2019 01:43:48 -0800 (PST)
 Received: from localhost ([2001:67c:1810:f051:fd32:55e2:f60b:183b])
 	by smtp.gmail.com with ESMTPSA id
-	c30sm2665260edc.70.2019.02.02.01.43.38
+	c12sm2490840edi.52.2019.02.02.01.43.47
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 02 Feb 2019 01:43:38 -0800 (PST)
-Date: Sat,  2 Feb 2019 01:43:20 -0800
-Message-Id: <20190202094329.22874-2-palmer@sifive.com>
+	Sat, 02 Feb 2019 01:43:47 -0800 (PST)
+Date: Sat,  2 Feb 2019 01:43:26 -0800
+Message-Id: <20190202094329.22874-8-palmer@sifive.com>
 X-Mailer: git-send-email 2.18.1
 In-Reply-To: <20190202094329.22874-1-palmer@sifive.com>
 References: <20190202094329.22874-1-palmer@sifive.com>
 Cc: qemu-riscv@nongnu.org,       qemu-devel@nongnu.org,
-	Richard Henderson <richard.henderson@linaro.org>,
 	Michael Clark <mjc@sifive.com>,
 	Alistair Francis <alistair.francis@wdc.com>, 
 	Palmer Dabbelt <palmer@sifive.com>
@@ -58,8 +58,8 @@ From: Palmer Dabbelt <palmer@sifive.com>
 To: Peter Maydell <peter.maydell@linaro.org>
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2a00:1450:4864:20::541
-Subject: [Qemu-riscv] [PULL 01/10] RISC-V: Split out mstatus_fs from tb_flags
+X-Received-From: 2a00:1450:4864:20::532
+Subject: [Qemu-riscv] [PULL 07/10] RISC-V: Add misa.MAFD checks to translate
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -71,93 +71,501 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 02 Feb 2019 09:53:19 -0000
+X-List-Received-Date: Sat, 02 Feb 2019 09:53:17 -0000
 
-From: Richard Henderson <richard.henderson@linaro.org>
+From: Michael Clark <mjc@sifive.com>
+
+Add misa checks for M, A, F and D extensions and if they are
+not present generate illegal instructions. This improves
+emulation accurary for harts with a limited set of extensions.
 
 Signed-off-by: Michael Clark <mjc@sifive.com>
-Reviewed-by: Michael Clark <mjc@sifive.com>
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
 ---
- target/riscv/cpu.h       |  6 +++---
- target/riscv/translate.c | 10 +++++-----
- 2 files changed, 8 insertions(+), 8 deletions(-)
+ target/riscv/translate.c | 158 +++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 158 insertions(+)
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 743f02c8b95a..681341f5d5a4 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -275,8 +275,8 @@ void QEMU_NORETURN do_raise_exception_err(CPURISCVState *env,
- target_ulong cpu_riscv_get_fflags(CPURISCVState *env);
- void cpu_riscv_set_fflags(CPURISCVState *env, target_ulong);
- 
--#define TB_FLAGS_MMU_MASK  3
--#define TB_FLAGS_FP_ENABLE MSTATUS_FS
-+#define TB_FLAGS_MMU_MASK   3
-+#define TB_FLAGS_MSTATUS_FS MSTATUS_FS
- 
- static inline void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
-                                         target_ulong *cs_base, uint32_t *flags)
-@@ -284,7 +284,7 @@ static inline void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
-     *pc = env->pc;
-     *cs_base = 0;
- #ifdef CONFIG_USER_ONLY
--    *flags = TB_FLAGS_FP_ENABLE;
-+    *flags = TB_FLAGS_MSTATUS_FS;
- #else
-     *flags = cpu_mmu_index(env, 0) | (env->mstatus & MSTATUS_FS);
- #endif
 diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 312bf298b3c2..3d07d651b60c 100644
+index bb80387088e2..b7176cbf98e1 100644
 --- a/target/riscv/translate.c
 +++ b/target/riscv/translate.c
-@@ -44,7 +44,7 @@ typedef struct DisasContext {
-     /* pc_succ_insn points to the instruction following base.pc_next */
-     target_ulong pc_succ_insn;
-     uint32_t opcode;
--    uint32_t flags;
-+    uint32_t mstatus_fs;
-     uint32_t mem_idx;
-     /* Remember the rounding mode encoded in the previous fp instruction,
-        which we have already installed into env->fp_status.  Or -1 for
-@@ -656,7 +656,7 @@ static void gen_fp_load(DisasContext *ctx, uint32_t opc, int rd,
- {
-     TCGv t0;
- 
--    if (!(ctx->flags & TB_FLAGS_FP_ENABLE)) {
-+    if (ctx->mstatus_fs == 0) {
+@@ -291,24 +291,42 @@ static void gen_arith(DisasContext *ctx, uint32_t opc, int rd, int rs1,
+         tcg_gen_and_tl(source1, source1, source2);
+         break;
+     CASE_OP_32_64(OPC_RISC_MUL):
++        if (!has_ext(ctx, RVM)) {
++            goto do_illegal;
++        }
+         tcg_gen_mul_tl(source1, source1, source2);
+         break;
+     case OPC_RISC_MULH:
++        if (!has_ext(ctx, RVM)) {
++            goto do_illegal;
++        }
+         tcg_gen_muls2_tl(source2, source1, source1, source2);
+         break;
+     case OPC_RISC_MULHSU:
++        if (!has_ext(ctx, RVM)) {
++            goto do_illegal;
++        }
+         gen_mulhsu(source1, source1, source2);
+         break;
+     case OPC_RISC_MULHU:
++        if (!has_ext(ctx, RVM)) {
++            goto do_illegal;
++        }
+         tcg_gen_mulu2_tl(source2, source1, source1, source2);
+         break;
+ #if defined(TARGET_RISCV64)
+     case OPC_RISC_DIVW:
++        if (!has_ext(ctx, RVM)) {
++            goto do_illegal;
++        }
+         tcg_gen_ext32s_tl(source1, source1);
+         tcg_gen_ext32s_tl(source2, source2);
+         /* fall through to DIV */
+ #endif
+     case OPC_RISC_DIV:
++        if (!has_ext(ctx, RVM)) {
++            goto do_illegal;
++        }
+         /* Handle by altering args to tcg_gen_div to produce req'd results:
+          * For overflow: want source1 in source1 and 1 in source2
+          * For div by zero: want -1 in source1 and 1 in source2 -> -1 result */
+@@ -340,11 +358,17 @@ static void gen_arith(DisasContext *ctx, uint32_t opc, int rd, int rs1,
+         break;
+ #if defined(TARGET_RISCV64)
+     case OPC_RISC_DIVUW:
++        if (!has_ext(ctx, RVM)) {
++            goto do_illegal;
++        }
+         tcg_gen_ext32u_tl(source1, source1);
+         tcg_gen_ext32u_tl(source2, source2);
+         /* fall through to DIVU */
+ #endif
+     case OPC_RISC_DIVU:
++        if (!has_ext(ctx, RVM)) {
++            goto do_illegal;
++        }
+         cond1 = tcg_temp_new();
+         zeroreg = tcg_const_tl(0);
+         resultopt1 = tcg_temp_new();
+@@ -364,11 +388,17 @@ static void gen_arith(DisasContext *ctx, uint32_t opc, int rd, int rs1,
+         break;
+ #if defined(TARGET_RISCV64)
+     case OPC_RISC_REMW:
++        if (!has_ext(ctx, RVM)) {
++            goto do_illegal;
++        }
+         tcg_gen_ext32s_tl(source1, source1);
+         tcg_gen_ext32s_tl(source2, source2);
+         /* fall through to REM */
+ #endif
+     case OPC_RISC_REM:
++        if (!has_ext(ctx, RVM)) {
++            goto do_illegal;
++        }
+         cond1 = tcg_temp_new();
+         cond2 = tcg_temp_new();
+         zeroreg = tcg_const_tl(0);
+@@ -396,11 +426,17 @@ static void gen_arith(DisasContext *ctx, uint32_t opc, int rd, int rs1,
+         break;
+ #if defined(TARGET_RISCV64)
+     case OPC_RISC_REMUW:
++        if (!has_ext(ctx, RVM)) {
++            goto do_illegal;
++        }
+         tcg_gen_ext32u_tl(source1, source1);
+         tcg_gen_ext32u_tl(source2, source2);
+         /* fall through to REMU */
+ #endif
+     case OPC_RISC_REMU:
++        if (!has_ext(ctx, RVM)) {
++            goto do_illegal;
++        }
+         cond1 = tcg_temp_new();
+         zeroreg = tcg_const_tl(0);
+         resultopt1 = tcg_temp_new();
+@@ -418,6 +454,7 @@ static void gen_arith(DisasContext *ctx, uint32_t opc, int rd, int rs1,
+         tcg_temp_free(zeroreg);
+         tcg_temp_free(resultopt1);
+         break;
++    do_illegal:
+     default:
          gen_exception_illegal(ctx);
          return;
-     }
-@@ -686,7 +686,7 @@ static void gen_fp_store(DisasContext *ctx, uint32_t opc, int rs1,
- {
-     TCGv t0;
+@@ -698,13 +735,20 @@ static void gen_fp_load(DisasContext *ctx, uint32_t opc, int rd,
  
--    if (!(ctx->flags & TB_FLAGS_FP_ENABLE)) {
-+    if (ctx->mstatus_fs == 0) {
+     switch (opc) {
+     case OPC_RISC_FLW:
++        if (!has_ext(ctx, RVF)) {
++            goto do_illegal;
++        }
+         tcg_gen_qemu_ld_i64(cpu_fpr[rd], t0, ctx->mem_idx, MO_TEUL);
+         /* RISC-V requires NaN-boxing of narrower width floating point values */
+         tcg_gen_ori_i64(cpu_fpr[rd], cpu_fpr[rd], 0xffffffff00000000ULL);
+         break;
+     case OPC_RISC_FLD:
++        if (!has_ext(ctx, RVD)) {
++            goto do_illegal;
++        }
+         tcg_gen_qemu_ld_i64(cpu_fpr[rd], t0, ctx->mem_idx, MO_TEQ);
+         break;
++    do_illegal:
+     default:
          gen_exception_illegal(ctx);
-         return;
-     }
-@@ -945,7 +945,7 @@ static void gen_fp_arith(DisasContext *ctx, uint32_t opc, int rd,
+         break;
+@@ -730,11 +774,18 @@ static void gen_fp_store(DisasContext *ctx, uint32_t opc, int rs1,
+ 
+     switch (opc) {
+     case OPC_RISC_FSW:
++        if (!has_ext(ctx, RVF)) {
++            goto do_illegal;
++        }
+         tcg_gen_qemu_st_i64(cpu_fpr[rs2], t0, ctx->mem_idx, MO_TEUL);
+         break;
+     case OPC_RISC_FSD:
++        if (!has_ext(ctx, RVD)) {
++            goto do_illegal;
++        }
+         tcg_gen_qemu_st_i64(cpu_fpr[rs2], t0, ctx->mem_idx, MO_TEQ);
+         break;
++    do_illegal:
+     default:
+         gen_exception_illegal(ctx);
+         break;
+@@ -898,15 +949,22 @@ static void gen_fp_fmadd(DisasContext *ctx, uint32_t opc, int rd,
  {
-     TCGv t0 = NULL;
+     switch (opc) {
+     case OPC_RISC_FMADD_S:
++        if (!has_ext(ctx, RVF)) {
++            goto do_illegal;
++        }
+         gen_set_rm(ctx, rm);
+         gen_helper_fmadd_s(cpu_fpr[rd], cpu_env, cpu_fpr[rs1],
+                            cpu_fpr[rs2], cpu_fpr[rs3]);
+         break;
+     case OPC_RISC_FMADD_D:
++        if (!has_ext(ctx, RVD)) {
++            goto do_illegal;
++        }
+         gen_set_rm(ctx, rm);
+         gen_helper_fmadd_d(cpu_fpr[rd], cpu_env, cpu_fpr[rs1],
+                            cpu_fpr[rs2], cpu_fpr[rs3]);
+         break;
++    do_illegal:
+     default:
+         gen_exception_illegal(ctx);
+         break;
+@@ -918,15 +976,22 @@ static void gen_fp_fmsub(DisasContext *ctx, uint32_t opc, int rd,
+ {
+     switch (opc) {
+     case OPC_RISC_FMSUB_S:
++        if (!has_ext(ctx, RVF)) {
++            goto do_illegal;
++        }
+         gen_set_rm(ctx, rm);
+         gen_helper_fmsub_s(cpu_fpr[rd], cpu_env, cpu_fpr[rs1],
+                            cpu_fpr[rs2], cpu_fpr[rs3]);
+         break;
+     case OPC_RISC_FMSUB_D:
++        if (!has_ext(ctx, RVD)) {
++            goto do_illegal;
++        }
+         gen_set_rm(ctx, rm);
+         gen_helper_fmsub_d(cpu_fpr[rd], cpu_env, cpu_fpr[rs1],
+                            cpu_fpr[rs2], cpu_fpr[rs3]);
+         break;
++    do_illegal:
+     default:
+         gen_exception_illegal(ctx);
+         break;
+@@ -938,15 +1003,22 @@ static void gen_fp_fnmsub(DisasContext *ctx, uint32_t opc, int rd,
+ {
+     switch (opc) {
+     case OPC_RISC_FNMSUB_S:
++        if (!has_ext(ctx, RVF)) {
++            goto do_illegal;
++        }
+         gen_set_rm(ctx, rm);
+         gen_helper_fnmsub_s(cpu_fpr[rd], cpu_env, cpu_fpr[rs1],
+                             cpu_fpr[rs2], cpu_fpr[rs3]);
+         break;
+     case OPC_RISC_FNMSUB_D:
++        if (!has_ext(ctx, RVD)) {
++            goto do_illegal;
++        }
+         gen_set_rm(ctx, rm);
+         gen_helper_fnmsub_d(cpu_fpr[rd], cpu_env, cpu_fpr[rs1],
+                             cpu_fpr[rs2], cpu_fpr[rs3]);
+         break;
++    do_illegal:
+     default:
+         gen_exception_illegal(ctx);
+         break;
+@@ -958,15 +1030,22 @@ static void gen_fp_fnmadd(DisasContext *ctx, uint32_t opc, int rd,
+ {
+     switch (opc) {
+     case OPC_RISC_FNMADD_S:
++        if (!has_ext(ctx, RVF)) {
++            goto do_illegal;
++        }
+         gen_set_rm(ctx, rm);
+         gen_helper_fnmadd_s(cpu_fpr[rd], cpu_env, cpu_fpr[rs1],
+                             cpu_fpr[rs2], cpu_fpr[rs3]);
+         break;
+     case OPC_RISC_FNMADD_D:
++        if (!has_ext(ctx, RVD)) {
++            goto do_illegal;
++        }
+         gen_set_rm(ctx, rm);
+         gen_helper_fnmadd_d(cpu_fpr[rd], cpu_env, cpu_fpr[rs1],
+                             cpu_fpr[rs2], cpu_fpr[rs3]);
+         break;
++    do_illegal:
+     default:
+         gen_exception_illegal(ctx);
+         break;
+@@ -985,30 +1064,51 @@ static void gen_fp_arith(DisasContext *ctx, uint32_t opc, int rd,
  
--    if (!(ctx->flags & TB_FLAGS_FP_ENABLE)) {
-+    if (ctx->mstatus_fs == 0) {
-         goto do_illegal;
-     }
+     switch (opc) {
+     case OPC_RISC_FADD_S:
++        if (!has_ext(ctx, RVF)) {
++            goto do_illegal;
++        }
+         gen_set_rm(ctx, rm);
+         gen_helper_fadd_s(cpu_fpr[rd], cpu_env, cpu_fpr[rs1], cpu_fpr[rs2]);
+         break;
+     case OPC_RISC_FSUB_S:
++        if (!has_ext(ctx, RVF)) {
++            goto do_illegal;
++        }
+         gen_set_rm(ctx, rm);
+         gen_helper_fsub_s(cpu_fpr[rd], cpu_env, cpu_fpr[rs1], cpu_fpr[rs2]);
+         break;
+     case OPC_RISC_FMUL_S:
++        if (!has_ext(ctx, RVF)) {
++            goto do_illegal;
++        }
+         gen_set_rm(ctx, rm);
+         gen_helper_fmul_s(cpu_fpr[rd], cpu_env, cpu_fpr[rs1], cpu_fpr[rs2]);
+         break;
+     case OPC_RISC_FDIV_S:
++        if (!has_ext(ctx, RVF)) {
++            goto do_illegal;
++        }
+         gen_set_rm(ctx, rm);
+         gen_helper_fdiv_s(cpu_fpr[rd], cpu_env, cpu_fpr[rs1], cpu_fpr[rs2]);
+         break;
+     case OPC_RISC_FSQRT_S:
++        if (!has_ext(ctx, RVF)) {
++            goto do_illegal;
++        }
+         gen_set_rm(ctx, rm);
+         gen_helper_fsqrt_s(cpu_fpr[rd], cpu_env, cpu_fpr[rs1]);
+         break;
+     case OPC_RISC_FSGNJ_S:
++        if (!has_ext(ctx, RVF)) {
++            goto do_illegal;
++        }
+         gen_fsgnj(ctx, rd, rs1, rs2, rm, INT32_MIN);
+         break;
  
-@@ -1818,8 +1818,8 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
-     DisasContext *ctx = container_of(dcbase, DisasContext, base);
+     case OPC_RISC_FMIN_S:
++        if (!has_ext(ctx, RVF)) {
++            goto do_illegal;
++        }
+         /* also handles: OPC_RISC_FMAX_S */
+         switch (rm) {
+         case 0x0:
+@@ -1024,6 +1124,9 @@ static void gen_fp_arith(DisasContext *ctx, uint32_t opc, int rd,
  
-     ctx->pc_succ_insn = ctx->base.pc_first;
--    ctx->flags = ctx->base.tb->flags;
-     ctx->mem_idx = ctx->base.tb->flags & TB_FLAGS_MMU_MASK;
-+    ctx->mstatus_fs = ctx->base.tb->flags & TB_FLAGS_MSTATUS_FS;
-     ctx->frm = -1;  /* unknown rounding mode */
- }
+     case OPC_RISC_FEQ_S:
+         /* also handles: OPC_RISC_FLT_S, OPC_RISC_FLE_S */
++        if (!has_ext(ctx, RVF)) {
++            goto do_illegal;
++        }
+         t0 = tcg_temp_new();
+         switch (rm) {
+         case 0x0:
+@@ -1045,6 +1148,9 @@ static void gen_fp_arith(DisasContext *ctx, uint32_t opc, int rd,
  
+     case OPC_RISC_FCVT_W_S:
+         /* also OPC_RISC_FCVT_WU_S, OPC_RISC_FCVT_L_S, OPC_RISC_FCVT_LU_S */
++        if (!has_ext(ctx, RVF)) {
++            goto do_illegal;
++        }
+         t0 = tcg_temp_new();
+         switch (rs2) {
+         case 0: /* FCVT_W_S */
+@@ -1075,6 +1181,9 @@ static void gen_fp_arith(DisasContext *ctx, uint32_t opc, int rd,
+ 
+     case OPC_RISC_FCVT_S_W:
+         /* also OPC_RISC_FCVT_S_WU, OPC_RISC_FCVT_S_L, OPC_RISC_FCVT_S_LU */
++        if (!has_ext(ctx, RVF)) {
++            goto do_illegal;
++        }
+         t0 = tcg_temp_new();
+         gen_get_gpr(t0, rs1);
+         switch (rs2) {
+@@ -1104,6 +1213,9 @@ static void gen_fp_arith(DisasContext *ctx, uint32_t opc, int rd,
+ 
+     case OPC_RISC_FMV_X_S:
+         /* also OPC_RISC_FCLASS_S */
++        if (!has_ext(ctx, RVF)) {
++            goto do_illegal;
++        }
+         t0 = tcg_temp_new();
+         switch (rm) {
+         case 0: /* FMV */
+@@ -1125,6 +1237,9 @@ static void gen_fp_arith(DisasContext *ctx, uint32_t opc, int rd,
+         break;
+ 
+     case OPC_RISC_FMV_S_X:
++        if (!has_ext(ctx, RVF)) {
++            goto do_illegal;
++        }
+         t0 = tcg_temp_new();
+         gen_get_gpr(t0, rs1);
+ #if defined(TARGET_RISCV64)
+@@ -1137,22 +1252,37 @@ static void gen_fp_arith(DisasContext *ctx, uint32_t opc, int rd,
+ 
+     /* double */
+     case OPC_RISC_FADD_D:
++        if (!has_ext(ctx, RVD)) {
++            goto do_illegal;
++        }
+         gen_set_rm(ctx, rm);
+         gen_helper_fadd_d(cpu_fpr[rd], cpu_env, cpu_fpr[rs1], cpu_fpr[rs2]);
+         break;
+     case OPC_RISC_FSUB_D:
++        if (!has_ext(ctx, RVD)) {
++            goto do_illegal;
++        }
+         gen_set_rm(ctx, rm);
+         gen_helper_fsub_d(cpu_fpr[rd], cpu_env, cpu_fpr[rs1], cpu_fpr[rs2]);
+         break;
+     case OPC_RISC_FMUL_D:
++        if (!has_ext(ctx, RVD)) {
++            goto do_illegal;
++        }
+         gen_set_rm(ctx, rm);
+         gen_helper_fmul_d(cpu_fpr[rd], cpu_env, cpu_fpr[rs1], cpu_fpr[rs2]);
+         break;
+     case OPC_RISC_FDIV_D:
++        if (!has_ext(ctx, RVD)) {
++            goto do_illegal;
++        }
+         gen_set_rm(ctx, rm);
+         gen_helper_fdiv_d(cpu_fpr[rd], cpu_env, cpu_fpr[rs1], cpu_fpr[rs2]);
+         break;
+     case OPC_RISC_FSQRT_D:
++        if (!has_ext(ctx, RVD)) {
++            goto do_illegal;
++        }
+         gen_set_rm(ctx, rm);
+         gen_helper_fsqrt_d(cpu_fpr[rd], cpu_env, cpu_fpr[rs1]);
+         break;
+@@ -1162,6 +1292,9 @@ static void gen_fp_arith(DisasContext *ctx, uint32_t opc, int rd,
+ 
+     case OPC_RISC_FMIN_D:
+         /* also OPC_RISC_FMAX_D */
++        if (!has_ext(ctx, RVD)) {
++            goto do_illegal;
++        }
+         switch (rm) {
+         case 0:
+             gen_helper_fmin_d(cpu_fpr[rd], cpu_env, cpu_fpr[rs1], cpu_fpr[rs2]);
+@@ -1175,6 +1308,9 @@ static void gen_fp_arith(DisasContext *ctx, uint32_t opc, int rd,
+         break;
+ 
+     case OPC_RISC_FCVT_S_D:
++        if (!has_ext(ctx, RVD)) {
++            goto do_illegal;
++        }
+         switch (rs2) {
+         case 1:
+             gen_set_rm(ctx, rm);
+@@ -1186,6 +1322,9 @@ static void gen_fp_arith(DisasContext *ctx, uint32_t opc, int rd,
+         break;
+ 
+     case OPC_RISC_FCVT_D_S:
++        if (!has_ext(ctx, RVD)) {
++            goto do_illegal;
++        }
+         switch (rs2) {
+         case 0:
+             gen_set_rm(ctx, rm);
+@@ -1198,6 +1337,9 @@ static void gen_fp_arith(DisasContext *ctx, uint32_t opc, int rd,
+ 
+     case OPC_RISC_FEQ_D:
+         /* also OPC_RISC_FLT_D, OPC_RISC_FLE_D */
++        if (!has_ext(ctx, RVD)) {
++            goto do_illegal;
++        }
+         t0 = tcg_temp_new();
+         switch (rm) {
+         case 0:
+@@ -1219,6 +1361,9 @@ static void gen_fp_arith(DisasContext *ctx, uint32_t opc, int rd,
+ 
+     case OPC_RISC_FCVT_W_D:
+         /* also OPC_RISC_FCVT_WU_D, OPC_RISC_FCVT_L_D, OPC_RISC_FCVT_LU_D */
++        if (!has_ext(ctx, RVD)) {
++            goto do_illegal;
++        }
+         t0 = tcg_temp_new();
+         switch (rs2) {
+         case 0:
+@@ -1249,6 +1394,9 @@ static void gen_fp_arith(DisasContext *ctx, uint32_t opc, int rd,
+ 
+     case OPC_RISC_FCVT_D_W:
+         /* also OPC_RISC_FCVT_D_WU, OPC_RISC_FCVT_D_L, OPC_RISC_FCVT_D_LU */
++        if (!has_ext(ctx, RVD)) {
++            goto do_illegal;
++        }
+         t0 = tcg_temp_new();
+         gen_get_gpr(t0, rs1);
+         switch (rs2) {
+@@ -1278,6 +1426,9 @@ static void gen_fp_arith(DisasContext *ctx, uint32_t opc, int rd,
+ 
+     case OPC_RISC_FMV_X_D:
+         /* also OPC_RISC_FCLASS_D */
++        if (!has_ext(ctx, RVD)) {
++            goto do_illegal;
++        }
+         switch (rm) {
+ #if defined(TARGET_RISCV64)
+         case 0: /* FMV */
+@@ -1298,6 +1449,9 @@ static void gen_fp_arith(DisasContext *ctx, uint32_t opc, int rd,
+ 
+ #if defined(TARGET_RISCV64)
+     case OPC_RISC_FMV_D_X:
++        if (!has_ext(ctx, RVD)) {
++            goto do_illegal;
++        }
+         t0 = tcg_temp_new();
+         gen_get_gpr(t0, rs1);
+         tcg_gen_mov_tl(cpu_fpr[rd], t0);
+@@ -1797,6 +1951,9 @@ static void decode_RV32_64G(DisasContext *ctx)
+                      GET_STORE_IMM(ctx->opcode));
+         break;
+     case OPC_RISC_ATOMIC:
++        if (!has_ext(ctx, RVA)) {
++            goto do_illegal;
++        }
+         gen_atomic(ctx, MASK_OP_ATOMIC(ctx->opcode), rd, rs1, rs2);
+         break;
+     case OPC_RISC_FMADD:
+@@ -1835,6 +1992,7 @@ static void decode_RV32_64G(DisasContext *ctx)
+         gen_system(ctx, MASK_OP_SYSTEM(ctx->opcode), rd, rs1,
+                    (ctx->opcode & 0xFFF00000) >> 20);
+         break;
++    do_illegal:
+     default:
+         gen_exception_illegal(ctx);
+         break;
 -- 
 2.18.1
 
