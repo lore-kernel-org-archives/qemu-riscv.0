@@ -1,59 +1,92 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gprzX-0007JQ-C9
-	for mharc-qemu-riscv@gnu.org; Sat, 02 Feb 2019 04:53:39 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:54983)
+	id 1gqaCS-0003mo-2Z
+	for mharc-qemu-riscv@gnu.org; Mon, 04 Feb 2019 04:05:56 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:40156)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1gprzU-0006zO-5q
-	for qemu-riscv@nongnu.org; Sat, 02 Feb 2019 04:53:38 -0500
+	(envelope-from <thuth@redhat.com>) id 1gqaCN-0003ke-8h
+	for qemu-riscv@nongnu.org; Mon, 04 Feb 2019 04:05:53 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1gprq0-0005aE-7m
-	for qemu-riscv@nongnu.org; Sat, 02 Feb 2019 04:43:50 -0500
-Received: from mail-ed1-x52b.google.com ([2a00:1450:4864:20::52b]:36296)
-	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1gprpz-0005NF-JL
-	for qemu-riscv@nongnu.org; Sat, 02 Feb 2019 04:43:47 -0500
-Received: by mail-ed1-x52b.google.com with SMTP id f23so7492572edb.3
-	for <qemu-riscv@nongnu.org>; Sat, 02 Feb 2019 01:43:38 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
-	h=subject:date:message-id:cc:from:to;
-	bh=Ogjb3WoVfjFHAc1lMhw1Z69lybA8Fd0Z21xJ9dOEL9M=;
-	b=j5BmifxgMMp9gl3yXt567VenG1b1iQES9zL1tJzwV52tZVy/qNwLtmQwDyClmsYqi9
-	BPyPTz8vAYAIdaqY3GEJE/owCCNBGSnjGbMcEeK64slz8SKLWIVq7YqdMoswZlcq2J7r
-	Z6kRVQpVROKoMzw5H1f9xdcO7gUGiL/QPDWp113aex2h2QH9VULdENXUFqlw0qDajV0W
-	oMZgg67h2fN4Lf8MKtv09oNYJO5MQ9DzoHvvq8u4ODdONZhyIaQwWk/9DggszjXdjbmo
-	8eeLoGFCoPWyQEU1kcC4fYpTok05oPgM/nLDPa6vNgnnMvkBULbqJ/QVig+EdwPV9o3u
-	XpMA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:date:message-id:cc:from:to;
-	bh=Ogjb3WoVfjFHAc1lMhw1Z69lybA8Fd0Z21xJ9dOEL9M=;
-	b=Pe8YF/o8f9G4dsSistZ+p66K6W3uKMh2EVoo2P2VbDRq2UUtLSOqCCROrVK3wRFfn2
-	rvEgrkxbwOoN0Iji3+ngcdOICFSyDwosHB+UVrb7q/plcl95GoM0v33eztlXTw9jfD+y
-	OZHAoCdu22GNzr9yskOJhvA+xQKiE6XmXTw8NzYpaEBqSSz1mmFpdiquYYYLuWzzI7dS
-	f1CChOXISC1d4+5dc3wyFjJQK/QQvdwidY+4hIbFAsb7+5a7G+HSqtUfNb+tDajCTJiB
-	AT9bLi6gC47b/cgq31z18Pd0Rw3CTZxj4oscnGsZxX/oGBvrrmaBeBRRcEf9KwGlrN8c
-	QxIA==
-X-Gm-Message-State: AJcUukf/zN2AUOgvgZvQ50MvsGZQ3a4+zIDRGKsg4U0F4E1y6D+2HkHC
-	xnnBeJCiwrAXnjWf0zy4eMk1rxUBlx9BmQ==
-X-Google-Smtp-Source: ALg8bN4fJ40mdLbAdid6IOZH709khWYjO/qfpleseqzj/wLmEbh2vUEyP2l4sj4xFEyb+92rG8ZKdQ==
-X-Received: by 2002:a05:6402:511:: with SMTP id
-	m17mr43033003edv.33.1549100617488; 
-	Sat, 02 Feb 2019 01:43:37 -0800 (PST)
-Received: from localhost ([2001:67c:1810:f051:fd32:55e2:f60b:183b])
-	by smtp.gmail.com with ESMTPSA id
-	g37sm2713511edb.85.2019.02.02.01.43.36
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 02 Feb 2019 01:43:36 -0800 (PST)
-Date: Sat,  2 Feb 2019 01:43:19 -0800
-Message-Id: <20190202094329.22874-1-palmer@sifive.com>
-X-Mailer: git-send-email 2.18.1
-Cc: qemu-riscv@nongnu.org,       qemu-devel@nongnu.org
-From: Palmer Dabbelt <palmer@sifive.com>
-To: Peter Maydell <peter.maydell@linaro.org>
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
-	recognized.
-X-Received-From: 2a00:1450:4864:20::52b
-Subject: [Qemu-riscv] [PULL] RISC-V Patches for 3.2, Part 3
+	(envelope-from <thuth@redhat.com>) id 1gqaCM-0002x7-8Z
+	for qemu-riscv@nongnu.org; Mon, 04 Feb 2019 04:05:51 -0500
+Received: from mx1.redhat.com ([209.132.183.28]:50628)
+	by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.71) (envelope-from <thuth@redhat.com>)
+	id 1gqaCJ-0002sp-Tg; Mon, 04 Feb 2019 04:05:48 -0500
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
+	[10.5.11.12])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mx1.redhat.com (Postfix) with ESMTPS id 5F86A1326AA;
+	Mon,  4 Feb 2019 09:05:45 +0000 (UTC)
+Received: from thuth.remote.csb (ovpn-117-5.ams2.redhat.com [10.36.117.5])
+	by smtp.corp.redhat.com (Postfix) with ESMTP id 887ED8BA8D;
+	Mon,  4 Feb 2019 09:05:43 +0000 (UTC)
+To: Palmer Dabbelt <palmer@sifive.com>,
+	Peter Maydell <peter.maydell@linaro.org>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+References: <mhng-99c129ef-4e70-4840-b80f-7b3c6b806083@palmer-si-x1c4>
+From: Thomas Huth <thuth@redhat.com>
+Openpgp: preference=signencrypt
+Autocrypt: addr=thuth@redhat.com; keydata=
+	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
+Organization: Red Hat
+Message-ID: <01c75f94-26ae-ffa4-dd46-4dd019702fa0@redhat.com>
+Date: Mon, 4 Feb 2019 10:05:42 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.9.1
+MIME-Version: 1.0
+In-Reply-To: <mhng-99c129ef-4e70-4840-b80f-7b3c6b806083@palmer-si-x1c4>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+	(mx1.redhat.com [10.5.110.38]);
+	Mon, 04 Feb 2019 09:05:45 +0000 (UTC)
+Content-Transfer-Encoding: quoted-printable
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+X-Received-From: 209.132.183.28
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PR RFC] RISC-V Patches for 3.2,
+ Part 3
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -65,68 +98,68 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 02 Feb 2019 09:53:38 -0000
+X-List-Received-Date: Mon, 04 Feb 2019 09:05:54 -0000
 
-The following changes since commit 5385a5988c8a55bebdc878c05b96648579b5d6e0:
+On 2019-02-02 09:41, Palmer Dabbelt wrote:
+> On Thu, 31 Jan 2019 01:51:52 PST (-0800), Peter Maydell wrote:
+>> On Thu, 31 Jan 2019 at 06:39, Thomas Huth <thuth@redhat.com> wrote:
+>>>
+>>> On 2019-01-30 20:01, Palmer Dabbelt wrote:
+>>> > On Wed, 30 Jan 2019 09:45:33 PST (-0800), eblake@redhat.com wrote:
+>>> >> On 1/30/19 11:35 AM, Palmer Dabbelt wrote:
+>>> >>> The following changes since commit
+>>> >>> 5385a5988c8a55bebdc878c05b96648579b5d6e0:
+>>> >>>
+>>> >>>=C2=A0=C2=A0 hw/virtio/virtio-balloon: zero-initialize the
+>>> virtio_balloon_config
+>>> >>> struct (2019-01-21 17:20:36 +0000)
+>>> >>>
+>>> >>> are available in the Git repository at:
+>>> >>>
+>>> >>>=C2=A0=C2=A0 git://github.com/palmer-dabbelt/qemu.git
+>>> >>> tags/riscv-for-master-3.2-part3
+>>> >>>
+>>> >>> for you to fetch changes up to
+>>> 461ab9de46d085a37b0da6f096aadc4e0dda4d4c:
+>>> >>>
+>>> >>>=C2=A0=C2=A0 target/riscv: fix counter-enable checks in ctr() (201=
+9-01-29
+>>> >>> 11:33:38 -0800)
+>>> >>>
+>>> >>> ----------------------------------------------------------------
+>>> >>> RISC-V Patches for 3.2, Part 3
+>>> >>
+>>> >> There is no 3.2 release; the next release is named 4.0.=C2=A0 Howe=
+ver,
+>>> if you
+>>> >> don't want to bother with sending a v2 pull request just to fix th=
+e
+>>> >> merge commit message, that's okay with me.
+>>> >
+>>> > Ah, sorry.=C2=A0 I think I'm just going to leave it as is, I'll get=
+ it
+>>> right
+>>> > next time.
+>>>
+>>> Also note that you used "PR RFC" in the title ... so not sure whether
+>>> Peter's scripts will catch this PR as a valid one...
+>>
+>> My mail filter finds these RFC pullrequests, yes. I'm then
+>> relying on my manual brain to not actually apply them.
+>> (If it's a slow day I might do a test merge on them, but
+>> usually my queue is full enough that I don't get to them
+>> before the real PR appears.)
+>=20
+> Ah, OK -- do you want me to do something else?
 
-  hw/virtio/virtio-balloon: zero-initialize the virtio_balloon_config struct (2019-01-21 17:20:36 +0000)
+At least I got a little bit confused by "PR RFC" ... I think some other
+maintainers rather send out patch series marked with "PATCH" first, and
+add some non-pull-request cover letter with a text like "I'm intending
+to send a pull request for this soon, please review one more time...".
+Then after a day or two, once Patchew checked the series and nobody else
+complained, they send a real "PULL" request.
+(at least that's how I saw the handling on the mailing list in the past,
+not sure whether Peter has a different point of view here, though).
 
-are available in the Git repository at:
-
-  git://github.com/palmer-dabbelt/qemu.git tags/riscv-for-master-3.2-part3
-
-for you to fetch changes up to 461ab9de46d085a37b0da6f096aadc4e0dda4d4c:
-
-  target/riscv: fix counter-enable checks in ctr() (2019-01-29 11:33:38 -0800)
-
-----------------------------------------------------------------
-RISC-V Patches for 3.2, Part 3
-
-This patch set contains a handful of patches I've collected over the
-last few weeks.  There's nothing really fundamental, but I thought it
-would be good to send these out now as there are some other patch sets
-on the mailing list that are getting ready to go.
-
-As far as the actual patches, there's:
-
-* A set that cleans up our FS dirty-mode handling.
-* Support for writing MISA.
-* The removal of Michael as a maintainer.
-* A fix to {m,s}counteren handling.
-
-This passes my standard "boots Fedora" test case.
-
-----------------------------------------------------------------
-Alistair Francis (1):
-      RISC-V: Add priv_ver to DisasContext
-
-Michael Clark (5):
-      RISC-V: Implement mstatus.TSR/TW/TVM
-      RISC-V: Use riscv prefix consistently on cpu helpers
-      RISC-V: Add misa to DisasContext
-      RISC-V: Add misa.MAFD checks to translate
-      RISC-V: Add misa runtime write support
-
-Palmer Dabbelt (1):
-      MAINTAINERS: Remove Michael Clark as a RISC-V Maintainer
-
-Richard Henderson (2):
-      RISC-V: Split out mstatus_fs from tb_flags
-      RISC-V: Mark mstatus.fs dirty
-
-Xi Wang (1):
-      target/riscv: fix counter-enable checks in ctr()
-
- MAINTAINERS               |   1 -
- linux-user/riscv/signal.c |   4 +-
- target/riscv/cpu.c        |   2 +-
- target/riscv/cpu.h        |  31 ++---
- target/riscv/cpu_bits.h   |  11 ++
- target/riscv/cpu_helper.c |  10 +-
- target/riscv/csr.c        | 103 ++++++++++++----
- target/riscv/fpu_helper.c |   6 +-
- target/riscv/op_helper.c  |  47 +++++---
- target/riscv/translate.c  | 290 +++++++++++++++++++++++++++++++++++++++-------
- 10 files changed, 396 insertions(+), 109 deletions(-)
-
+ Thomas
 
