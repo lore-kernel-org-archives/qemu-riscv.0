@@ -1,58 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gqzsS-0004Av-9R
-	for mharc-qemu-riscv@gnu.org; Tue, 05 Feb 2019 07:31:00 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:35921)
+	id 1gr1BM-0006Ge-1U
+	for mharc-qemu-riscv@gnu.org; Tue, 05 Feb 2019 08:54:36 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:39994)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <armbru@redhat.com>) id 1gqzsK-00048Q-Gv
-	for qemu-riscv@nongnu.org; Tue, 05 Feb 2019 07:30:58 -0500
+	(envelope-from <berrange@redhat.com>) id 1gqyIi-00057X-5t
+	for qemu-riscv@nongnu.org; Tue, 05 Feb 2019 05:50:01 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <armbru@redhat.com>) id 1gqzsJ-0001GQ-KR
-	for qemu-riscv@nongnu.org; Tue, 05 Feb 2019 07:30:52 -0500
-Received: from mx1.redhat.com ([209.132.183.28]:45746)
+	(envelope-from <berrange@redhat.com>) id 1gqyIh-0000Qp-5U
+	for qemu-riscv@nongnu.org; Tue, 05 Feb 2019 05:50:00 -0500
+Received: from mx1.redhat.com ([209.132.183.28]:39140)
 	by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.71) (envelope-from <armbru@redhat.com>)
-	id 1gqzsC-00019Y-J6; Tue, 05 Feb 2019 07:30:45 -0500
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
-	[10.5.11.12])
+	(Exim 4.71) (envelope-from <berrange@redhat.com>)
+	id 1gqyIc-0000NN-Md; Tue, 05 Feb 2019 05:49:54 -0500
+Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
+	[10.5.11.14])
 	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id 7278A3DBF8;
-	Tue,  5 Feb 2019 12:30:40 +0000 (UTC)
-Received: from blackfin.pond.sub.org (ovpn-116-113.ams2.redhat.com
-	[10.36.116.113])
-	by smtp.corp.redhat.com (Postfix) with ESMTPS id 5AB3579C01;
-	Tue,  5 Feb 2019 12:30:18 +0000 (UTC)
-Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
-	id D4FD211386C5; Tue,  5 Feb 2019 13:30:16 +0100 (CET)
-From: Markus Armbruster <armbru@redhat.com>
-To: Daniel P. =?utf-8?Q?Berrang=C3=A9?= <berrange@redhat.com>
-Cc: Peter Maydell <peter.maydell@linaro.org>,  qemu-riscv@nongnu.org,  QEMU
-	Trivial <qemu-trivial@nongnu.org>,  QEMU Developers
-	<qemu-devel@nongnu.org>,  Stefano Garzarella <sgarzare@redhat.com>,
-	Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@redhat.com>, David Gibson
-	<david@gibson.dropbear.id.au>
+	by mx1.redhat.com (Postfix) with ESMTPS id 71F0490C99;
+	Tue,  5 Feb 2019 10:49:52 +0000 (UTC)
+Received: from redhat.com (unknown [10.36.112.10])
+	by smtp.corp.redhat.com (Postfix) with ESMTPS id EC96317C40;
+	Tue,  5 Feb 2019 10:49:38 +0000 (UTC)
+Date: Tue, 5 Feb 2019 10:49:35 +0000
+From: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
+To: Cornelia Huck <cohuck@redhat.com>
+Cc: Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@redhat.com>,
+	Fam Zheng <fam@euphon.net>, qemu-ppc@nongnu.org,
+	qemu-riscv@nongnu.org, Michael Roth <mdroth@linux.vnet.ibm.com>,
+	Sagar Karandikar <sagark@eecs.berkeley.edu>,
+	David Hildenbrand <david@redhat.com>, qemu-trivial@nongnu.org,
+	Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+	Richard Henderson <rth@twiddle.net>,
+	Palmer Dabbelt <palmer@sifive.com>, qemu-devel@nongnu.org,
+	Markus Armbruster <armbru@redhat.com>, Halil Pasic <pasic@linux.ibm.com>,
+	Christian Borntraeger <borntraeger@de.ibm.com>,
+	"open list:S390 Virtio-ccw" <qemu-s390x@nongnu.org>,
+	Michael Clark <mjc@sifive.com>,
+	Alistair Francis <Alistair.Francis@wdc.com>,
+	Gerd Hoffmann <kraxel@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
+	Stefano Garzarella <sgarzare@redhat.com>,
+	David Gibson <david@gibson.dropbear.id.au>
+Message-ID: <20190205104935.GD20321@redhat.com>
+Reply-To: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
 References: <20190204211204.27321-1-philmd@redhat.com>
-	<20190204211204.27321-4-philmd@redhat.com>
-	<87a7jaag7q.fsf@dusky.pond.sub.org>
-	<CAFEAcA8-YDTnszv7Mk+F+OAxGJSmdu4yEio1j-E477HNbh-SOQ@mail.gmail.com>
-	<20190205110417.GF20321@redhat.com>
-Date: Tue, 05 Feb 2019 13:30:16 +0100
-In-Reply-To: <20190205110417.GF20321@redhat.com> ("Daniel P. =?utf-8?Q?Ber?=
-	=?utf-8?Q?rang=C3=A9=22's?=
-	message of "Tue, 5 Feb 2019 11:04:17 +0000")
-Message-ID: <87bm3qto2v.fsf@dusky.pond.sub.org>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/26.1 (gnu/linux)
+	<20190204211204.27321-3-philmd@redhat.com>
+	<20190205113219.0c1311e0.cohuck@redhat.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
+Content-Disposition: inline
+In-Reply-To: <20190205113219.0c1311e0.cohuck@redhat.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
 X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
-	(mx1.redhat.com [10.5.110.30]);
-	Tue, 05 Feb 2019 12:30:40 +0000 (UTC)
+	(mx1.redhat.com [10.5.110.29]);
+	Tue, 05 Feb 2019 10:49:53 +0000 (UTC)
+Content-Transfer-Encoding: quoted-printable
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
 X-Received-From: 209.132.183.28
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v3 3/3] util/cutils: Move
- function documentations to the header
+X-Mailman-Approved-At: Tue, 05 Feb 2019 08:54:34 -0500
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v3 2/3] util/cutils: Move
+ ctype macros to "cutils.h"
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -64,42 +71,96 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Feb 2019 12:30:58 -0000
+X-List-Received-Date: Tue, 05 Feb 2019 10:50:01 -0000
 
-Daniel P. Berrang=C3=A9 <berrange@redhat.com> writes:
+On Tue, Feb 05, 2019 at 11:32:19AM +0100, Cornelia Huck wrote:
+> On Mon,  4 Feb 2019 22:12:03 +0100
+> Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com> wrote:
+>=20
+> > Introduced in cd390083ad1, these macros don't need to be in
+> > a generic header.
+> > Add documentation to justify their use.
+> >=20
+> > Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
+> > Reviewed-by: Stefano Garzarella <sgarzare@redhat.com>
+> > Reviewed-by: David Gibson <david@gibson.dropbear.id.au>
+> > ---
+> > v2: Fixed checkpatch warnings (tabs)
+> > ---
+> >  hw/core/bus.c              |  2 +-
+> >  hw/core/qdev-properties.c  |  1 +
+> >  hw/s390x/s390-virtio-ccw.c |  1 +
+> >  hw/scsi/scsi-generic.c     |  2 +-
+> >  include/qemu-common.h      | 16 ----------------
+> >  include/qemu/cutils.h      | 25 +++++++++++++++++++++++++
+> >  qapi/qapi-util.c           |  2 +-
+> >  qobject/json-parser.c      |  1 -
+> >  target/ppc/monitor.c       |  1 +
+> >  target/riscv/cpu.c         |  1 +
+> >  ui/keymaps.c               |  1 +
+> >  util/id.c                  |  2 +-
+> >  util/readline.c            |  1 -
+> >  13 files changed, 34 insertions(+), 22 deletions(-)
+>=20
+> > diff --git a/include/qemu/cutils.h b/include/qemu/cutils.h
+> > index 9ee40470e3..644f2d75bd 100644
+> > --- a/include/qemu/cutils.h
+> > +++ b/include/qemu/cutils.h
+> > @@ -3,6 +3,31 @@
+> > =20
+> >  #include "qemu/fprintf-fn.h"
+> > =20
+> > +/**
+> > + * unsigned ctype macros:
+> > + *
+> > + * The standards require that the argument for these functions
+> > + * is either EOF or a value that is representable in the type
+> > + * unsigned char. If the argument is of type char, it must be
+> > + * cast to unsigned char. This is what these macros do,
+> > + * avoiding 'signed to unsigned' conversion warnings.
+>=20
+> I'd add
+>=20
+> "Note that these macros are intended for use with char arguments only,
+> they cannot handle EOF."
+>=20
+> > + */
+> > +#define qemu_isalnum(c)     isalnum((unsigned char)(c))
+> > +#define qemu_isalpha(c)     isalpha((unsigned char)(c))
+> > +#define qemu_iscntrl(c)     iscntrl((unsigned char)(c))
+> > +#define qemu_isdigit(c)     isdigit((unsigned char)(c))
+> > +#define qemu_isgraph(c)     isgraph((unsigned char)(c))
+> > +#define qemu_islower(c)     islower((unsigned char)(c))
+> > +#define qemu_isprint(c)     isprint((unsigned char)(c))
+> > +#define qemu_ispunct(c)     ispunct((unsigned char)(c))
+> > +#define qemu_isspace(c)     isspace((unsigned char)(c))
+> > +#define qemu_isupper(c)     isupper((unsigned char)(c))
+> > +#define qemu_isxdigit(c)    isxdigit((unsigned char)(c))
+> > +#define qemu_tolower(c)     tolower((unsigned char)(c))
+> > +#define qemu_toupper(c)     toupper((unsigned char)(c))
+> > +#define qemu_isascii(c)     isascii((unsigned char)(c))
+> > +#define qemu_toascii(c)     toascii((unsigned char)(c))
 
-> On Tue, Feb 05, 2019 at 10:56:51AM +0000, Peter Maydell wrote:
->> On Tue, 5 Feb 2019 at 06:44, Markus Armbruster <armbru@redhat.com> wrote:
->> > There are two justifiable function comment placement styles: (1) next =
-to
->> > definition, and (2) next to declaration if it's in a header, else next
->> > to definition.
->> >
->> > The rationale for the latter is having the headers do double-duty as
->> > interface documentation.
->> >
->> > The rationale for the former is consistently placing the function
->> > comments close to the code gives them a fighting chance to actually
->> > match the code.
->> >
->> > I'm in the "next to definition" camp.  If you want concise interface
->> > specification, use something like Sphinx.
->>=20
->> I'm in the "next to declaration" camp. I don't want to have
->> to wade into your implementation to find out what it does:
->> document it for me in the interface, please.
->
-> I'm already looking at the header file to identify the function signature,
-> having the explanation / docs at the same place is desirable, especially
-> when the C file name is completely different from the header file name
-> forcing me to go grepping the code base to find where it is implemented.
+Not a problem with your patch, since this is just code movement, but
+I would note that some (many?) uses of these functions in QEMU are likely
+wrong / bad. These functions all check according to the current locale
+rules, while IME most developers assume these APIs are following ASCII
+match rules. IOW, these may well be allowing more characters through
+than expected.
 
-If going to a definition of takes you more than a few keystrokes, your
-editor is grossly deficient.
+We might want to consider whether some callers need switching to use
+the glib provided APIs that explicitly match in ASCII rules:
 
-> The .c files are already volumous in size so not amenable to browsing
-> for the purpose of reading the docs.
->
-> Regards,
-> Daniel
+  https://developer.gnome.org/glib/stable/glib-String-Utility-Functions.h=
+tml#g-ascii-isalnum
+
+Regards,
+Daniel
+--=20
+|: https://berrange.com      -o-    https://www.flickr.com/photos/dberran=
+ge :|
+|: https://libvirt.org         -o-            https://fstop138.berrange.c=
+om :|
+|: https://entangle-photo.org    -o-    https://www.instagram.com/dberran=
+ge :|
 
