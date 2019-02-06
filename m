@@ -1,60 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1grX2R-0004Ek-OF
-	for mharc-qemu-riscv@gnu.org; Wed, 06 Feb 2019 18:55:31 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:54031)
+	id 1grX3o-0005JF-1s
+	for mharc-qemu-riscv@gnu.org; Wed, 06 Feb 2019 18:56:56 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:54374)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1grX2P-0004Cc-2n
-	for qemu-riscv@nongnu.org; Wed, 06 Feb 2019 18:55:29 -0500
+	(envelope-from <alistair23@gmail.com>) id 1grX3l-0005HS-He
+	for qemu-riscv@nongnu.org; Wed, 06 Feb 2019 18:56:54 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1grX2I-0000N6-Lz
-	for qemu-riscv@nongnu.org; Wed, 06 Feb 2019 18:55:23 -0500
-Received: from mail-lf1-x144.google.com ([2a00:1450:4864:20::144]:40879)
+	(envelope-from <alistair23@gmail.com>) id 1grX3k-0000oc-9u
+	for qemu-riscv@nongnu.org; Wed, 06 Feb 2019 18:56:53 -0500
+Received: from mail-lj1-x241.google.com ([2a00:1450:4864:20::241]:38792)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
 	(Exim 4.71) (envelope-from <alistair23@gmail.com>)
-	id 1grX29-00009G-Cw; Wed, 06 Feb 2019 18:55:15 -0500
-Received: by mail-lf1-x144.google.com with SMTP id v5so6771529lfe.7;
-	Wed, 06 Feb 2019 15:55:02 -0800 (PST)
+	id 1grX3g-0000hk-PE; Wed, 06 Feb 2019 18:56:48 -0500
+Received: by mail-lj1-x241.google.com with SMTP id c19-v6so7735200lja.5;
+	Wed, 06 Feb 2019 15:56:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=YDJ+ktrLwyxs059q7/uxS/ejxZq7xVU0Wwkznt/06u4=;
-	b=lZfqftk0pJoAHTIfym5lC4y5Nw0P/058EIQ8dT5/gk4lngdo9WtrqIj+1wj7zWb+L9
-	K2GTfAoN85YgNuOSZ3qk/4kc1tJC99N6nlyT5DuT9tiAa3XxmY1lZI/jBDNT8fpV4kC7
-	h35HUiwBtKUXgdGlFvZjvFxWxMoZD+nJPRKsMGBufQfMAsZI52mSfDviVbifmNUFwh0R
-	H695A0U2DE0je5I+91oxfaf6ixUCeDRCm2VNgjBtDZR/b6bCf+MzuiiZbHgnrUajktmX
-	UM22vzWfGr/K0MXpe6zFN+9huYnyygMLQW2MLEDgZX8fdinmATbmeHuxcl9NulsCEd6c
-	2QlQ==
+	:cc; bh=ymZ0nS5cFzAfOO+ckZ8ApDqORA7ZgL+aoKxuqM6EMMs=;
+	b=jcGqnP6iLm3kKUObR/56jaje6ARGNS+s/h76ckxt/ZhaBd7O7tc7RP5CDrCm7zquG2
+	PXVp6mvRDhIimFZ41h0LvolVKoVdNVqa8gX/1D0VEO4KQt+GmV8zOQM5MUHiPDHSk7r2
+	JpKPr7oIsRv7WUYjjhiwimzyPA4+OAUm8IJ7FfAuYKGajLFtTPxWBXx7X74egAYbs5bI
+	OqMQkuYVby4ulxLljEs7DioxNbzzqXKLeRhJzYrxIZbfCQN0zrIcAp0mxPhrokzjElm9
+	csTLmp9Gc7a8GczNbRI8o9z35kEduT2chC+Y5QkX8bUDZG45XkbVC4aRUhmlUbCht1hm
+	z+lA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=YDJ+ktrLwyxs059q7/uxS/ejxZq7xVU0Wwkznt/06u4=;
-	b=CFI5uk0CSg7MxK1RLjbXhIzWMiwjof/v0EiZziLgWBTjFsa1CF5vtnArLcVP2SrT3L
-	XhmHalJBVk2tGeyaL+UL5B/a2rzfFvhSekdaqDcCmLp6PLLCIqrbCXvZxTU7X4KAO8bv
-	Az5EwbwzMfB1tzap4A4E3SyyEa2O01KWk+PNPmjVdQSzOStLii6sW8mjCLZRHfWtwCBe
-	TeiSv3hDnBRfyzenAkdFD0zcEhALGzepqxVvOqW6xAxoXo3AUhA+uQ8NvrDEM22SXtLb
-	VSCV5jWqGB9syMht84RP73nwYKGhX15TyZZwK6AQ8v1e/jqmnKIfmejM+sPGekaqrxiy
-	/bVg==
-X-Gm-Message-State: AHQUAuY99bNpdBZCKETlQte/WasqaFdZQkcsJmlOYMJJNmg8+cW7kqaD
-	stczJ7YmEGGDp7mO+19/vDEpTWlccIDc70+O7wA=
-X-Google-Smtp-Source: AHgI3IZIbe6RDuqcJyVAhzGEPZTLMpgUoEOmLs/8nqJdv0hT2WnIK4O+MEKr8O5Ydj6nAvWSFPhunVtv4YjHfw4o5eg=
-X-Received: by 2002:a19:7018:: with SMTP id h24mr8074487lfc.162.1549497301446; 
-	Wed, 06 Feb 2019 15:55:01 -0800 (PST)
+	bh=ymZ0nS5cFzAfOO+ckZ8ApDqORA7ZgL+aoKxuqM6EMMs=;
+	b=P/o0JegFQV3bBr2RFlo9Tbe1Ua4cJzBnjBiEobbmf5vXpdyC6XdiYJ9mE1FjWFOYVm
+	b9vIXh625Hjh/zoA0l5B9xyyRjOmgvIq8QI1B3m9ONfhyIGT3N1rr5RVaWAUMQ4g73GO
+	xdENoosHS9e65P7RqkNEJM0lu2djNDzl0EqZCtgS6y304eP1LvyUI4YSD5pjL+2KQ7/v
+	skaFPfvzGfabI0nDy62ws/E1q0IG1SsCJlhW8oNannX0vUdlU7qanWBhT9u4/Oj6VbTc
+	M+1xwSjOSzVb+HVpJGmUoTY6KzmGe1gpedrWRVX8Bjki0ffr+7sknCOaBRsN5S1v7K9E
+	hjBA==
+X-Gm-Message-State: AHQUAuYrTILXRgVqHm4fyNbdTQPhJoGPzfYBGjeQLdDjXT3cxRyhMwjk
+	2fwp3ZKZCIr2zEWgAH0h06J+OCc2VJ+jAesMODU=
+X-Google-Smtp-Source: AHgI3IaNbltOzzt4XCluahBInDPvgi4nDZH6QsL7lms3IMftnOMF2R6l4U4PdMdbzL1FTEVxCX/F61pRUwu6WEpQ6hg=
+X-Received: by 2002:a2e:9516:: with SMTP id
+	f22-v6mr4305538ljh.191.1549497398609; 
+	Wed, 06 Feb 2019 15:56:38 -0800 (PST)
 MIME-Version: 1.0
 References: <CAFyWVaZ5tQq4eGaZiPBq7172PB_x3JCqV6c2xo=wSJdgbJakKQ@mail.gmail.com>
-	<20190130025559.12696-1-jimw@sifive.com>
-In-Reply-To: <20190130025559.12696-1-jimw@sifive.com>
+	<20190130025644.12754-1-jimw@sifive.com>
+In-Reply-To: <20190130025644.12754-1-jimw@sifive.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 6 Feb 2019 15:54:21 -0800
-Message-ID: <CAKmqyKMofPxKdrhW=XSD_jbFGK3K5EgK3WLDTj1tB=T0MWPD=Q@mail.gmail.com>
+Date: Wed, 6 Feb 2019 15:55:59 -0800
+Message-ID: <CAKmqyKMPYYuD1jRT-9pxgAdBcgA3990MmseMNube_zzP0wmncQ@mail.gmail.com>
 To: Jim Wilson <jimw@sifive.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
 	qemu-riscv@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2a00:1450:4864:20::144
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH 3/5 v3] RISC-V: Fixes to CSR_*
- register macros.
+X-Received-From: 2a00:1450:4864:20::241
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH 4/5 v3] RISC-V: Add debug
+ support for accessing CSRs.
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -66,12 +67,12 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Feb 2019 23:55:30 -0000
+X-List-Received-Date: Wed, 06 Feb 2019 23:56:54 -0000
 
-On Tue, Jan 29, 2019 at 6:56 PM Jim Wilson <jimw@sifive.com> wrote:
+On Tue, Jan 29, 2019 at 6:57 PM Jim Wilson <jimw@sifive.com> wrote:
 >
-> This adds some missing CSR_* register macros, and documents some as being
-> priv v1.9.1 specific.
+> Adds a debugger field to CPURISCVState.  Disable mode checks in riscv_csrrw
+> when true.
 >
 > Signed-off-by: Jim Wilson <jimw@sifive.com>
 
@@ -80,80 +81,100 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  target/riscv/cpu_bits.h | 35 +++++++++++++++++++++++++++++++++--
->  1 file changed, 33 insertions(+), 2 deletions(-)
+>  target/riscv/cpu.h |  3 +++
+>  target/riscv/csr.c | 16 ++++++++--------
+>  2 files changed, 11 insertions(+), 8 deletions(-)
 >
-> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-> index 5439f47..316d500 100644
-> --- a/target/riscv/cpu_bits.h
-> +++ b/target/riscv/cpu_bits.h
-> @@ -135,16 +135,22 @@
->  /* Legacy Counter Setup (priv v1.9.1) */
->  #define CSR_MUCOUNTEREN     0x320
->  #define CSR_MSCOUNTEREN     0x321
-> +#define CSR_MHCOUNTEREN     0x322
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 743f02c..faa46d0 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -170,6 +170,9 @@ struct CPURISCVState {
 >
->  /* Machine Trap Handling */
->  #define CSR_MSCRATCH        0x340
->  #define CSR_MEPC            0x341
->  #define CSR_MCAUSE          0x342
-> -#define CSR_MBADADDR        0x343
-> +#define CSR_MTVAL           0x343
->  #define CSR_MIP             0x344
+>      /* physical memory protection */
+>      pmp_table_t pmp_state;
+> +
+> +    /* True if in debugger mode.  */
+> +    bool debugger;
+>  #endif
 >
-> +/* Legacy Machine Trap Handling (priv v1.9.1) */
-> +#define CSR_MBADADDR        0x343
-> +
->  /* Supervisor Trap Setup */
->  #define CSR_SSTATUS         0x100
-> +#define CSR_SEDELEG         0x102
-> +#define CSR_SIDELEG         0x103
->  #define CSR_SIE             0x104
->  #define CSR_STVEC           0x105
->  #define CSR_SCOUNTEREN      0x106
-> @@ -153,9 +159,12 @@
->  #define CSR_SSCRATCH        0x140
->  #define CSR_SEPC            0x141
->  #define CSR_SCAUSE          0x142
-> -#define CSR_SBADADDR        0x143
-> +#define CSR_STVAL           0x143
->  #define CSR_SIP             0x144
->
-> +/* Legacy Supervisor Trap Handling (priv v1.9.1) */
-> +#define CSR_SBADADDR        0x143
-> +
->  /* Supervisor Protection and Translation */
->  #define CSR_SPTBR           0x180
->  #define CSR_SATP            0x180
-> @@ -282,6 +291,28 @@
->  #define CSR_MHPMCOUNTER30H  0xb9e
->  #define CSR_MHPMCOUNTER31H  0xb9f
->
-> +/* Legacy Hypervisor Trap Setup (priv v1.9.1) */
-> +#define CSR_HSTATUS         0x200
-> +#define CSR_HEDELEG         0x202
-> +#define CSR_HIDELEG         0x203
-> +#define CSR_HIE             0x204
-> +#define CSR_HTVEC           0x205
-> +
-> +/* Legacy Hypervisor Trap Handling (priv v1.9.1) */
-> +#define CSR_HSCRATCH        0x240
-> +#define CSR_HEPC            0x241
-> +#define CSR_HCAUSE          0x242
-> +#define CSR_HBADADDR        0x243
-> +#define CSR_HIP             0x244
-> +
-> +/* Legacy Machine Protection and Translation (priv v1.9.1) */
-> +#define CSR_MBASE           0x380
-> +#define CSR_MBOUND          0x381
-> +#define CSR_MIBASE          0x382
-> +#define CSR_MIBOUND         0x383
-> +#define CSR_MDBASE          0x384
-> +#define CSR_MDBOUND         0x385
-> +
->  /* mstatus CSR bits */
->  #define MSTATUS_UIE         0x00000001
->  #define MSTATUS_SIE         0x00000002
+>      float_status fp_status;
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index 5e7e7d1..04e6b59 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -46,7 +46,7 @@ void riscv_set_csr_ops(int csrno, riscv_csr_operations *ops)
+>  static int fs(CPURISCVState *env, int csrno)
+>  {
+>  #if !defined(CONFIG_USER_ONLY)
+> -    if (!(env->mstatus & MSTATUS_FS)) {
+> +    if (!env->debugger && !(env->mstatus & MSTATUS_FS)) {
+>          return -1;
+>      }
+>  #endif
+> @@ -58,7 +58,7 @@ static int ctr(CPURISCVState *env, int csrno)
+>  #if !defined(CONFIG_USER_ONLY)
+>      target_ulong ctr_en = env->priv == PRV_U ? env->scounteren :
+>                            env->priv == PRV_S ? env->mcounteren : -1U;
+> -    if (!(ctr_en & (1 << (csrno & 31)))) {
+> +    if (!env->debugger && !(ctr_en & (1 << (csrno & 31)))) {
+>          return -1;
+>      }
+>  #endif
+> @@ -86,7 +86,7 @@ static int pmp(CPURISCVState *env, int csrno)
+>  static int read_fflags(CPURISCVState *env, int csrno, target_ulong *val)
+>  {
+>  #if !defined(CONFIG_USER_ONLY)
+> -    if (!(env->mstatus & MSTATUS_FS)) {
+> +    if (!env->debugger && !(env->mstatus & MSTATUS_FS)) {
+>          return -1;
+>      }
+>  #endif
+> @@ -97,7 +97,7 @@ static int read_fflags(CPURISCVState *env, int csrno, target_ulong *val)
+>  static int write_fflags(CPURISCVState *env, int csrno, target_ulong val)
+>  {
+>  #if !defined(CONFIG_USER_ONLY)
+> -    if (!(env->mstatus & MSTATUS_FS)) {
+> +    if (!env->debugger && !(env->mstatus & MSTATUS_FS)) {
+>          return -1;
+>      }
+>      env->mstatus |= MSTATUS_FS;
+> @@ -109,7 +109,7 @@ static int write_fflags(CPURISCVState *env, int csrno, target_ulong val)
+>  static int read_frm(CPURISCVState *env, int csrno, target_ulong *val)
+>  {
+>  #if !defined(CONFIG_USER_ONLY)
+> -    if (!(env->mstatus & MSTATUS_FS)) {
+> +    if (!env->debugger && !(env->mstatus & MSTATUS_FS)) {
+>          return -1;
+>      }
+>  #endif
+> @@ -120,7 +120,7 @@ static int read_frm(CPURISCVState *env, int csrno, target_ulong *val)
+>  static int write_frm(CPURISCVState *env, int csrno, target_ulong val)
+>  {
+>  #if !defined(CONFIG_USER_ONLY)
+> -    if (!(env->mstatus & MSTATUS_FS)) {
+> +    if (!env->debugger && !(env->mstatus & MSTATUS_FS)) {
+>          return -1;
+>      }
+>      env->mstatus |= MSTATUS_FS;
+> @@ -132,7 +132,7 @@ static int write_frm(CPURISCVState *env, int csrno, target_ulong val)
+>  static int read_fcsr(CPURISCVState *env, int csrno, target_ulong *val)
+>  {
+>  #if !defined(CONFIG_USER_ONLY)
+> -    if (!(env->mstatus & MSTATUS_FS)) {
+> +    if (!env->debugger && !(env->mstatus & MSTATUS_FS)) {
+>          return -1;
+>      }
+>  #endif
+> @@ -144,7 +144,7 @@ static int read_fcsr(CPURISCVState *env, int csrno, target_ulong *val)
+>  static int write_fcsr(CPURISCVState *env, int csrno, target_ulong val)
+>  {
+>  #if !defined(CONFIG_USER_ONLY)
+> -    if (!(env->mstatus & MSTATUS_FS)) {
+> +    if (!env->debugger && !(env->mstatus & MSTATUS_FS)) {
+>          return -1;
+>      }
+>      env->mstatus |= MSTATUS_FS;
 > --
 > 2.7.4
 >
