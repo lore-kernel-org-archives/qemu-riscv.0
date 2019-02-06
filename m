@@ -1,51 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1grX14-0002zI-9R
-	for mharc-qemu-riscv@gnu.org; Wed, 06 Feb 2019 18:54:06 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:53703)
+	id 1grX2R-0004Ek-OF
+	for mharc-qemu-riscv@gnu.org; Wed, 06 Feb 2019 18:55:31 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:54031)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1grX0x-0002wP-TM
-	for qemu-riscv@nongnu.org; Wed, 06 Feb 2019 18:54:02 -0500
+	(envelope-from <alistair23@gmail.com>) id 1grX2P-0004Cc-2n
+	for qemu-riscv@nongnu.org; Wed, 06 Feb 2019 18:55:29 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1grX0v-00087F-Og
-	for qemu-riscv@nongnu.org; Wed, 06 Feb 2019 18:53:59 -0500
-Received: from mail-lf1-x144.google.com ([2a00:1450:4864:20::144]:32772)
+	(envelope-from <alistair23@gmail.com>) id 1grX2I-0000N6-Lz
+	for qemu-riscv@nongnu.org; Wed, 06 Feb 2019 18:55:23 -0500
+Received: from mail-lf1-x144.google.com ([2a00:1450:4864:20::144]:40879)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
 	(Exim 4.71) (envelope-from <alistair23@gmail.com>)
-	id 1grX0o-00081O-Nk; Wed, 06 Feb 2019 18:53:52 -0500
-Received: by mail-lf1-x144.google.com with SMTP id i26so6827937lfc.0;
-	Wed, 06 Feb 2019 15:53:50 -0800 (PST)
+	id 1grX29-00009G-Cw; Wed, 06 Feb 2019 18:55:15 -0500
+Received: by mail-lf1-x144.google.com with SMTP id v5so6771529lfe.7;
+	Wed, 06 Feb 2019 15:55:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=vqae4ncZ6FwcGvGYnBz5NpVUV/knFP1jGQ2fEZHXikU=;
-	b=gkftoyLLiWu9Z88rP0EuEqpwR7cUlkwRxg2+nQaxeEMpNoH5ZgGFQrKRYUbRw+n2Jq
-	B7ZTzoiPXYBaSAMqud0N5Dti2Rw6uB/Q6h3c3sVGv+iFt2UWhxrMnXtf4yMBqne66gbz
-	DXZZz++9ry0VqMftOfIufifDGcTytMrcwW76IxfCLC/0QTsaFCNWnIPSz8zWos/qGlFw
-	zDHhrJ/V32vg1iTklBM5Dsf6TSnA7O7avhPA7/LYxejMPn8CeUigBQQ2oqwtJDYYD4Yy
-	De8VA1CH2F/flR1Bp7l/ccCV5j46nXOKzCiuXyuav75O+VmRgBsOmhW7nTKnk2W+uwaO
-	61ZQ==
+	:cc; bh=YDJ+ktrLwyxs059q7/uxS/ejxZq7xVU0Wwkznt/06u4=;
+	b=lZfqftk0pJoAHTIfym5lC4y5Nw0P/058EIQ8dT5/gk4lngdo9WtrqIj+1wj7zWb+L9
+	K2GTfAoN85YgNuOSZ3qk/4kc1tJC99N6nlyT5DuT9tiAa3XxmY1lZI/jBDNT8fpV4kC7
+	h35HUiwBtKUXgdGlFvZjvFxWxMoZD+nJPRKsMGBufQfMAsZI52mSfDviVbifmNUFwh0R
+	H695A0U2DE0je5I+91oxfaf6ixUCeDRCm2VNgjBtDZR/b6bCf+MzuiiZbHgnrUajktmX
+	UM22vzWfGr/K0MXpe6zFN+9huYnyygMLQW2MLEDgZX8fdinmATbmeHuxcl9NulsCEd6c
+	2QlQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=vqae4ncZ6FwcGvGYnBz5NpVUV/knFP1jGQ2fEZHXikU=;
-	b=tyUyc2I9S+I4ZBn8y0WygBFeV7YGuGALpqC0YMhZbfCy03DYWplKy+GuoIUPgeLEGh
-	I/wgNM0f0GVbjJmSSopLVtqhyKyebpSD6ZNF01cI3HfXyBB2kE13WQvjRrzAVkx+UqVa
-	irANY4HlIXFptLigDpQNUWsR76h8HnsJL3XaxEMFn4+64HO4mVeWyZwi+wP5Eq0GrGXG
-	qj9TgkEGwrHrkM5xA6ufXIoRS5eeiK+DPGgzggKWCwVHefCRFzWWdnXH3moCWq6NDfy2
-	C0Uaqh4BgXNfwfoNAfXQtjT3WipyL9poHTKqvTyn8vCQSNsftvxiYcHSsBu73cu47rV+
-	Ik+A==
-X-Gm-Message-State: AHQUAuZsp3unNoTOX/naYiQn0oOF5Q4jq4DjrKnxIaNEDkTSjByfSG5V
-	ruTa1Z6mv07H+Ck9lCYlBe9hx576GnoDmXMxLjVe/KIo
-X-Google-Smtp-Source: AHgI3IYYqvzzDKlFCKDxaI7niYoHos/10C8A5/9ECWXWUrEtxaMR1fOLQ/9sJUPSeqQqf6PwyAO0cCiT2Imm2a3y4UE=
-X-Received: by 2002:a19:194e:: with SMTP id 75mr8082926lfz.114.1549497228956; 
-	Wed, 06 Feb 2019 15:53:48 -0800 (PST)
+	bh=YDJ+ktrLwyxs059q7/uxS/ejxZq7xVU0Wwkznt/06u4=;
+	b=CFI5uk0CSg7MxK1RLjbXhIzWMiwjof/v0EiZziLgWBTjFsa1CF5vtnArLcVP2SrT3L
+	XhmHalJBVk2tGeyaL+UL5B/a2rzfFvhSekdaqDcCmLp6PLLCIqrbCXvZxTU7X4KAO8bv
+	Az5EwbwzMfB1tzap4A4E3SyyEa2O01KWk+PNPmjVdQSzOStLii6sW8mjCLZRHfWtwCBe
+	TeiSv3hDnBRfyzenAkdFD0zcEhALGzepqxVvOqW6xAxoXo3AUhA+uQ8NvrDEM22SXtLb
+	VSCV5jWqGB9syMht84RP73nwYKGhX15TyZZwK6AQ8v1e/jqmnKIfmejM+sPGekaqrxiy
+	/bVg==
+X-Gm-Message-State: AHQUAuY99bNpdBZCKETlQte/WasqaFdZQkcsJmlOYMJJNmg8+cW7kqaD
+	stczJ7YmEGGDp7mO+19/vDEpTWlccIDc70+O7wA=
+X-Google-Smtp-Source: AHgI3IZIbe6RDuqcJyVAhzGEPZTLMpgUoEOmLs/8nqJdv0hT2WnIK4O+MEKr8O5Ydj6nAvWSFPhunVtv4YjHfw4o5eg=
+X-Received: by 2002:a19:7018:: with SMTP id h24mr8074487lfc.162.1549497301446; 
+	Wed, 06 Feb 2019 15:55:01 -0800 (PST)
 MIME-Version: 1.0
 References: <CAFyWVaZ5tQq4eGaZiPBq7172PB_x3JCqV6c2xo=wSJdgbJakKQ@mail.gmail.com>
-	<20190130025528.12560-1-jimw@sifive.com>
-In-Reply-To: <20190130025528.12560-1-jimw@sifive.com>
+	<20190130025559.12696-1-jimw@sifive.com>
+In-Reply-To: <20190130025559.12696-1-jimw@sifive.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 6 Feb 2019 15:53:09 -0800
-Message-ID: <CAKmqyKO4wmaf+LLshhTidsdw7KVBSwRZMusJg8YVJL2G4hJUMw@mail.gmail.com>
+Date: Wed, 6 Feb 2019 15:54:21 -0800
+Message-ID: <CAKmqyKMofPxKdrhW=XSD_jbFGK3K5EgK3WLDTj1tB=T0MWPD=Q@mail.gmail.com>
 To: Jim Wilson <jimw@sifive.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
 	qemu-riscv@nongnu.org
@@ -53,8 +53,8 @@ Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
 X-Received-From: 2a00:1450:4864:20::144
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH 2/5 v3] RISC-V: Add 64-bit gdb
- xml files.
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH 3/5 v3] RISC-V: Fixes to CSR_*
+ register macros.
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -66,9 +66,12 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Feb 2019 23:54:02 -0000
+X-List-Received-Date: Wed, 06 Feb 2019 23:55:30 -0000
 
 On Tue, Jan 29, 2019 at 6:56 PM Jim Wilson <jimw@sifive.com> wrote:
+>
+> This adds some missing CSR_* register macros, and documents some as being
+> priv v1.9.1 specific.
 >
 > Signed-off-by: Jim Wilson <jimw@sifive.com>
 
@@ -77,390 +80,80 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  configure                   |   1 +
->  gdb-xml/riscv-64bit-cpu.xml |  43 ++++++++
->  gdb-xml/riscv-64bit-csr.xml | 250 ++++++++++++++++++++++++++++++++++++++++++++
->  gdb-xml/riscv-64bit-fpu.xml |  52 +++++++++
->  4 files changed, 346 insertions(+)
->  create mode 100644 gdb-xml/riscv-64bit-cpu.xml
->  create mode 100644 gdb-xml/riscv-64bit-csr.xml
->  create mode 100644 gdb-xml/riscv-64bit-fpu.xml
+>  target/riscv/cpu_bits.h | 35 +++++++++++++++++++++++++++++++++--
+>  1 file changed, 33 insertions(+), 2 deletions(-)
 >
-> diff --git a/configure b/configure
-> index f30369a..5e71d28 100755
-> --- a/configure
-> +++ b/configure
-> @@ -7290,6 +7290,7 @@ case "$target_name" in
->      TARGET_BASE_ARCH=riscv
->      TARGET_ABI_DIR=riscv
->      mttcg=yes
-> +    gdb_xml_files="riscv-64bit-cpu.xml riscv-64bit-fpu.xml riscv-64bit-csr.xml"
->      target_compiler=$cross_cc_riscv64
->    ;;
->    sh4|sh4eb)
-> diff --git a/gdb-xml/riscv-64bit-cpu.xml b/gdb-xml/riscv-64bit-cpu.xml
-> new file mode 100644
-> index 0000000..f37d7f3
-> --- /dev/null
-> +++ b/gdb-xml/riscv-64bit-cpu.xml
-> @@ -0,0 +1,43 @@
-> +<?xml version="1.0"?>
-> +<!-- Copyright (C) 2018 Free Software Foundation, Inc.
+> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+> index 5439f47..316d500 100644
+> --- a/target/riscv/cpu_bits.h
+> +++ b/target/riscv/cpu_bits.h
+> @@ -135,16 +135,22 @@
+>  /* Legacy Counter Setup (priv v1.9.1) */
+>  #define CSR_MUCOUNTEREN     0x320
+>  #define CSR_MSCOUNTEREN     0x321
+> +#define CSR_MHCOUNTEREN     0x322
+>
+>  /* Machine Trap Handling */
+>  #define CSR_MSCRATCH        0x340
+>  #define CSR_MEPC            0x341
+>  #define CSR_MCAUSE          0x342
+> -#define CSR_MBADADDR        0x343
+> +#define CSR_MTVAL           0x343
+>  #define CSR_MIP             0x344
+>
+> +/* Legacy Machine Trap Handling (priv v1.9.1) */
+> +#define CSR_MBADADDR        0x343
 > +
-> +     Copying and distribution of this file, with or without modification,
-> +     are permitted in any medium without royalty provided the copyright
-> +     notice and this notice are preserved.  -->
+>  /* Supervisor Trap Setup */
+>  #define CSR_SSTATUS         0x100
+> +#define CSR_SEDELEG         0x102
+> +#define CSR_SIDELEG         0x103
+>  #define CSR_SIE             0x104
+>  #define CSR_STVEC           0x105
+>  #define CSR_SCOUNTEREN      0x106
+> @@ -153,9 +159,12 @@
+>  #define CSR_SSCRATCH        0x140
+>  #define CSR_SEPC            0x141
+>  #define CSR_SCAUSE          0x142
+> -#define CSR_SBADADDR        0x143
+> +#define CSR_STVAL           0x143
+>  #define CSR_SIP             0x144
+>
+> +/* Legacy Supervisor Trap Handling (priv v1.9.1) */
+> +#define CSR_SBADADDR        0x143
 > +
-> +<!DOCTYPE feature SYSTEM "gdb-target.dtd">
-> +<feature name="org.gnu.gdb.riscv.cpu">
-> +  <reg name="zero" bitsize="64" type="int"/>
-> +  <reg name="ra" bitsize="64" type="code_ptr"/>
-> +  <reg name="sp" bitsize="64" type="data_ptr"/>
-> +  <reg name="gp" bitsize="64" type="data_ptr"/>
-> +  <reg name="tp" bitsize="64" type="data_ptr"/>
-> +  <reg name="t0" bitsize="64" type="int"/>
-> +  <reg name="t1" bitsize="64" type="int"/>
-> +  <reg name="t2" bitsize="64" type="int"/>
-> +  <reg name="fp" bitsize="64" type="data_ptr"/>
-> +  <reg name="s1" bitsize="64" type="int"/>
-> +  <reg name="a0" bitsize="64" type="int"/>
-> +  <reg name="a1" bitsize="64" type="int"/>
-> +  <reg name="a2" bitsize="64" type="int"/>
-> +  <reg name="a3" bitsize="64" type="int"/>
-> +  <reg name="a4" bitsize="64" type="int"/>
-> +  <reg name="a5" bitsize="64" type="int"/>
-> +  <reg name="a6" bitsize="64" type="int"/>
-> +  <reg name="a7" bitsize="64" type="int"/>
-> +  <reg name="s2" bitsize="64" type="int"/>
-> +  <reg name="s3" bitsize="64" type="int"/>
-> +  <reg name="s4" bitsize="64" type="int"/>
-> +  <reg name="s5" bitsize="64" type="int"/>
-> +  <reg name="s6" bitsize="64" type="int"/>
-> +  <reg name="s7" bitsize="64" type="int"/>
-> +  <reg name="s8" bitsize="64" type="int"/>
-> +  <reg name="s9" bitsize="64" type="int"/>
-> +  <reg name="s10" bitsize="64" type="int"/>
-> +  <reg name="s11" bitsize="64" type="int"/>
-> +  <reg name="t3" bitsize="64" type="int"/>
-> +  <reg name="t4" bitsize="64" type="int"/>
-> +  <reg name="t5" bitsize="64" type="int"/>
-> +  <reg name="t6" bitsize="64" type="int"/>
-> +  <reg name="pc" bitsize="64" type="code_ptr"/>
-> +</feature>
-> diff --git a/gdb-xml/riscv-64bit-csr.xml b/gdb-xml/riscv-64bit-csr.xml
-> new file mode 100644
-> index 0000000..a3de834
-> --- /dev/null
-> +++ b/gdb-xml/riscv-64bit-csr.xml
-> @@ -0,0 +1,250 @@
-> +<?xml version="1.0"?>
-> +<!-- Copyright (C) 2018 Free Software Foundation, Inc.
+>  /* Supervisor Protection and Translation */
+>  #define CSR_SPTBR           0x180
+>  #define CSR_SATP            0x180
+> @@ -282,6 +291,28 @@
+>  #define CSR_MHPMCOUNTER30H  0xb9e
+>  #define CSR_MHPMCOUNTER31H  0xb9f
+>
+> +/* Legacy Hypervisor Trap Setup (priv v1.9.1) */
+> +#define CSR_HSTATUS         0x200
+> +#define CSR_HEDELEG         0x202
+> +#define CSR_HIDELEG         0x203
+> +#define CSR_HIE             0x204
+> +#define CSR_HTVEC           0x205
 > +
-> +     Copying and distribution of this file, with or without modification,
-> +     are permitted in any medium without royalty provided the copyright
-> +     notice and this notice are preserved.  -->
+> +/* Legacy Hypervisor Trap Handling (priv v1.9.1) */
+> +#define CSR_HSCRATCH        0x240
+> +#define CSR_HEPC            0x241
+> +#define CSR_HCAUSE          0x242
+> +#define CSR_HBADADDR        0x243
+> +#define CSR_HIP             0x244
 > +
-> +<!DOCTYPE feature SYSTEM "gdb-target.dtd">
-> +<feature name="org.gnu.gdb.riscv.csr">
-> +  <reg name="ustatus" bitsize="64"/>
-> +  <reg name="uie" bitsize="64"/>
-> +  <reg name="utvec" bitsize="64"/>
-> +  <reg name="uscratch" bitsize="64"/>
-> +  <reg name="uepc" bitsize="64"/>
-> +  <reg name="ucause" bitsize="64"/>
-> +  <reg name="utval" bitsize="64"/>
-> +  <reg name="uip" bitsize="64"/>
-> +  <reg name="fflags" bitsize="64"/>
-> +  <reg name="frm" bitsize="64"/>
-> +  <reg name="fcsr" bitsize="64"/>
-> +  <reg name="cycle" bitsize="64"/>
-> +  <reg name="time" bitsize="64"/>
-> +  <reg name="instret" bitsize="64"/>
-> +  <reg name="hpmcounter3" bitsize="64"/>
-> +  <reg name="hpmcounter4" bitsize="64"/>
-> +  <reg name="hpmcounter5" bitsize="64"/>
-> +  <reg name="hpmcounter6" bitsize="64"/>
-> +  <reg name="hpmcounter7" bitsize="64"/>
-> +  <reg name="hpmcounter8" bitsize="64"/>
-> +  <reg name="hpmcounter9" bitsize="64"/>
-> +  <reg name="hpmcounter10" bitsize="64"/>
-> +  <reg name="hpmcounter11" bitsize="64"/>
-> +  <reg name="hpmcounter12" bitsize="64"/>
-> +  <reg name="hpmcounter13" bitsize="64"/>
-> +  <reg name="hpmcounter14" bitsize="64"/>
-> +  <reg name="hpmcounter15" bitsize="64"/>
-> +  <reg name="hpmcounter16" bitsize="64"/>
-> +  <reg name="hpmcounter17" bitsize="64"/>
-> +  <reg name="hpmcounter18" bitsize="64"/>
-> +  <reg name="hpmcounter19" bitsize="64"/>
-> +  <reg name="hpmcounter20" bitsize="64"/>
-> +  <reg name="hpmcounter21" bitsize="64"/>
-> +  <reg name="hpmcounter22" bitsize="64"/>
-> +  <reg name="hpmcounter23" bitsize="64"/>
-> +  <reg name="hpmcounter24" bitsize="64"/>
-> +  <reg name="hpmcounter25" bitsize="64"/>
-> +  <reg name="hpmcounter26" bitsize="64"/>
-> +  <reg name="hpmcounter27" bitsize="64"/>
-> +  <reg name="hpmcounter28" bitsize="64"/>
-> +  <reg name="hpmcounter29" bitsize="64"/>
-> +  <reg name="hpmcounter30" bitsize="64"/>
-> +  <reg name="hpmcounter31" bitsize="64"/>
-> +  <reg name="cycleh" bitsize="64"/>
-> +  <reg name="timeh" bitsize="64"/>
-> +  <reg name="instreth" bitsize="64"/>
-> +  <reg name="hpmcounter3h" bitsize="64"/>
-> +  <reg name="hpmcounter4h" bitsize="64"/>
-> +  <reg name="hpmcounter5h" bitsize="64"/>
-> +  <reg name="hpmcounter6h" bitsize="64"/>
-> +  <reg name="hpmcounter7h" bitsize="64"/>
-> +  <reg name="hpmcounter8h" bitsize="64"/>
-> +  <reg name="hpmcounter9h" bitsize="64"/>
-> +  <reg name="hpmcounter10h" bitsize="64"/>
-> +  <reg name="hpmcounter11h" bitsize="64"/>
-> +  <reg name="hpmcounter12h" bitsize="64"/>
-> +  <reg name="hpmcounter13h" bitsize="64"/>
-> +  <reg name="hpmcounter14h" bitsize="64"/>
-> +  <reg name="hpmcounter15h" bitsize="64"/>
-> +  <reg name="hpmcounter16h" bitsize="64"/>
-> +  <reg name="hpmcounter17h" bitsize="64"/>
-> +  <reg name="hpmcounter18h" bitsize="64"/>
-> +  <reg name="hpmcounter19h" bitsize="64"/>
-> +  <reg name="hpmcounter20h" bitsize="64"/>
-> +  <reg name="hpmcounter21h" bitsize="64"/>
-> +  <reg name="hpmcounter22h" bitsize="64"/>
-> +  <reg name="hpmcounter23h" bitsize="64"/>
-> +  <reg name="hpmcounter24h" bitsize="64"/>
-> +  <reg name="hpmcounter25h" bitsize="64"/>
-> +  <reg name="hpmcounter26h" bitsize="64"/>
-> +  <reg name="hpmcounter27h" bitsize="64"/>
-> +  <reg name="hpmcounter28h" bitsize="64"/>
-> +  <reg name="hpmcounter29h" bitsize="64"/>
-> +  <reg name="hpmcounter30h" bitsize="64"/>
-> +  <reg name="hpmcounter31h" bitsize="64"/>
-> +  <reg name="sstatus" bitsize="64"/>
-> +  <reg name="sedeleg" bitsize="64"/>
-> +  <reg name="sideleg" bitsize="64"/>
-> +  <reg name="sie" bitsize="64"/>
-> +  <reg name="stvec" bitsize="64"/>
-> +  <reg name="scounteren" bitsize="64"/>
-> +  <reg name="sscratch" bitsize="64"/>
-> +  <reg name="sepc" bitsize="64"/>
-> +  <reg name="scause" bitsize="64"/>
-> +  <reg name="stval" bitsize="64"/>
-> +  <reg name="sip" bitsize="64"/>
-> +  <reg name="satp" bitsize="64"/>
-> +  <reg name="mvendorid" bitsize="64"/>
-> +  <reg name="marchid" bitsize="64"/>
-> +  <reg name="mimpid" bitsize="64"/>
-> +  <reg name="mhartid" bitsize="64"/>
-> +  <reg name="mstatus" bitsize="64"/>
-> +  <reg name="misa" bitsize="64"/>
-> +  <reg name="medeleg" bitsize="64"/>
-> +  <reg name="mideleg" bitsize="64"/>
-> +  <reg name="mie" bitsize="64"/>
-> +  <reg name="mtvec" bitsize="64"/>
-> +  <reg name="mcounteren" bitsize="64"/>
-> +  <reg name="mscratch" bitsize="64"/>
-> +  <reg name="mepc" bitsize="64"/>
-> +  <reg name="mcause" bitsize="64"/>
-> +  <reg name="mtval" bitsize="64"/>
-> +  <reg name="mip" bitsize="64"/>
-> +  <reg name="pmpcfg0" bitsize="64"/>
-> +  <reg name="pmpcfg1" bitsize="64"/>
-> +  <reg name="pmpcfg2" bitsize="64"/>
-> +  <reg name="pmpcfg3" bitsize="64"/>
-> +  <reg name="pmpaddr0" bitsize="64"/>
-> +  <reg name="pmpaddr1" bitsize="64"/>
-> +  <reg name="pmpaddr2" bitsize="64"/>
-> +  <reg name="pmpaddr3" bitsize="64"/>
-> +  <reg name="pmpaddr4" bitsize="64"/>
-> +  <reg name="pmpaddr5" bitsize="64"/>
-> +  <reg name="pmpaddr6" bitsize="64"/>
-> +  <reg name="pmpaddr7" bitsize="64"/>
-> +  <reg name="pmpaddr8" bitsize="64"/>
-> +  <reg name="pmpaddr9" bitsize="64"/>
-> +  <reg name="pmpaddr10" bitsize="64"/>
-> +  <reg name="pmpaddr11" bitsize="64"/>
-> +  <reg name="pmpaddr12" bitsize="64"/>
-> +  <reg name="pmpaddr13" bitsize="64"/>
-> +  <reg name="pmpaddr14" bitsize="64"/>
-> +  <reg name="pmpaddr15" bitsize="64"/>
-> +  <reg name="mcycle" bitsize="64"/>
-> +  <reg name="minstret" bitsize="64"/>
-> +  <reg name="mhpmcounter3" bitsize="64"/>
-> +  <reg name="mhpmcounter4" bitsize="64"/>
-> +  <reg name="mhpmcounter5" bitsize="64"/>
-> +  <reg name="mhpmcounter6" bitsize="64"/>
-> +  <reg name="mhpmcounter7" bitsize="64"/>
-> +  <reg name="mhpmcounter8" bitsize="64"/>
-> +  <reg name="mhpmcounter9" bitsize="64"/>
-> +  <reg name="mhpmcounter10" bitsize="64"/>
-> +  <reg name="mhpmcounter11" bitsize="64"/>
-> +  <reg name="mhpmcounter12" bitsize="64"/>
-> +  <reg name="mhpmcounter13" bitsize="64"/>
-> +  <reg name="mhpmcounter14" bitsize="64"/>
-> +  <reg name="mhpmcounter15" bitsize="64"/>
-> +  <reg name="mhpmcounter16" bitsize="64"/>
-> +  <reg name="mhpmcounter17" bitsize="64"/>
-> +  <reg name="mhpmcounter18" bitsize="64"/>
-> +  <reg name="mhpmcounter19" bitsize="64"/>
-> +  <reg name="mhpmcounter20" bitsize="64"/>
-> +  <reg name="mhpmcounter21" bitsize="64"/>
-> +  <reg name="mhpmcounter22" bitsize="64"/>
-> +  <reg name="mhpmcounter23" bitsize="64"/>
-> +  <reg name="mhpmcounter24" bitsize="64"/>
-> +  <reg name="mhpmcounter25" bitsize="64"/>
-> +  <reg name="mhpmcounter26" bitsize="64"/>
-> +  <reg name="mhpmcounter27" bitsize="64"/>
-> +  <reg name="mhpmcounter28" bitsize="64"/>
-> +  <reg name="mhpmcounter29" bitsize="64"/>
-> +  <reg name="mhpmcounter30" bitsize="64"/>
-> +  <reg name="mhpmcounter31" bitsize="64"/>
-> +  <reg name="mcycleh" bitsize="64"/>
-> +  <reg name="minstreth" bitsize="64"/>
-> +  <reg name="mhpmcounter3h" bitsize="64"/>
-> +  <reg name="mhpmcounter4h" bitsize="64"/>
-> +  <reg name="mhpmcounter5h" bitsize="64"/>
-> +  <reg name="mhpmcounter6h" bitsize="64"/>
-> +  <reg name="mhpmcounter7h" bitsize="64"/>
-> +  <reg name="mhpmcounter8h" bitsize="64"/>
-> +  <reg name="mhpmcounter9h" bitsize="64"/>
-> +  <reg name="mhpmcounter10h" bitsize="64"/>
-> +  <reg name="mhpmcounter11h" bitsize="64"/>
-> +  <reg name="mhpmcounter12h" bitsize="64"/>
-> +  <reg name="mhpmcounter13h" bitsize="64"/>
-> +  <reg name="mhpmcounter14h" bitsize="64"/>
-> +  <reg name="mhpmcounter15h" bitsize="64"/>
-> +  <reg name="mhpmcounter16h" bitsize="64"/>
-> +  <reg name="mhpmcounter17h" bitsize="64"/>
-> +  <reg name="mhpmcounter18h" bitsize="64"/>
-> +  <reg name="mhpmcounter19h" bitsize="64"/>
-> +  <reg name="mhpmcounter20h" bitsize="64"/>
-> +  <reg name="mhpmcounter21h" bitsize="64"/>
-> +  <reg name="mhpmcounter22h" bitsize="64"/>
-> +  <reg name="mhpmcounter23h" bitsize="64"/>
-> +  <reg name="mhpmcounter24h" bitsize="64"/>
-> +  <reg name="mhpmcounter25h" bitsize="64"/>
-> +  <reg name="mhpmcounter26h" bitsize="64"/>
-> +  <reg name="mhpmcounter27h" bitsize="64"/>
-> +  <reg name="mhpmcounter28h" bitsize="64"/>
-> +  <reg name="mhpmcounter29h" bitsize="64"/>
-> +  <reg name="mhpmcounter30h" bitsize="64"/>
-> +  <reg name="mhpmcounter31h" bitsize="64"/>
-> +  <reg name="mhpmevent3" bitsize="64"/>
-> +  <reg name="mhpmevent4" bitsize="64"/>
-> +  <reg name="mhpmevent5" bitsize="64"/>
-> +  <reg name="mhpmevent6" bitsize="64"/>
-> +  <reg name="mhpmevent7" bitsize="64"/>
-> +  <reg name="mhpmevent8" bitsize="64"/>
-> +  <reg name="mhpmevent9" bitsize="64"/>
-> +  <reg name="mhpmevent10" bitsize="64"/>
-> +  <reg name="mhpmevent11" bitsize="64"/>
-> +  <reg name="mhpmevent12" bitsize="64"/>
-> +  <reg name="mhpmevent13" bitsize="64"/>
-> +  <reg name="mhpmevent14" bitsize="64"/>
-> +  <reg name="mhpmevent15" bitsize="64"/>
-> +  <reg name="mhpmevent16" bitsize="64"/>
-> +  <reg name="mhpmevent17" bitsize="64"/>
-> +  <reg name="mhpmevent18" bitsize="64"/>
-> +  <reg name="mhpmevent19" bitsize="64"/>
-> +  <reg name="mhpmevent20" bitsize="64"/>
-> +  <reg name="mhpmevent21" bitsize="64"/>
-> +  <reg name="mhpmevent22" bitsize="64"/>
-> +  <reg name="mhpmevent23" bitsize="64"/>
-> +  <reg name="mhpmevent24" bitsize="64"/>
-> +  <reg name="mhpmevent25" bitsize="64"/>
-> +  <reg name="mhpmevent26" bitsize="64"/>
-> +  <reg name="mhpmevent27" bitsize="64"/>
-> +  <reg name="mhpmevent28" bitsize="64"/>
-> +  <reg name="mhpmevent29" bitsize="64"/>
-> +  <reg name="mhpmevent30" bitsize="64"/>
-> +  <reg name="mhpmevent31" bitsize="64"/>
-> +  <reg name="tselect" bitsize="64"/>
-> +  <reg name="tdata1" bitsize="64"/>
-> +  <reg name="tdata2" bitsize="64"/>
-> +  <reg name="tdata3" bitsize="64"/>
-> +  <reg name="dcsr" bitsize="64"/>
-> +  <reg name="dpc" bitsize="64"/>
-> +  <reg name="dscratch" bitsize="64"/>
-> +  <reg name="hstatus" bitsize="64"/>
-> +  <reg name="hedeleg" bitsize="64"/>
-> +  <reg name="hideleg" bitsize="64"/>
-> +  <reg name="hie" bitsize="64"/>
-> +  <reg name="htvec" bitsize="64"/>
-> +  <reg name="hscratch" bitsize="64"/>
-> +  <reg name="hepc" bitsize="64"/>
-> +  <reg name="hcause" bitsize="64"/>
-> +  <reg name="hbadaddr" bitsize="64"/>
-> +  <reg name="hip" bitsize="64"/>
-> +  <reg name="mbase" bitsize="64"/>
-> +  <reg name="mbound" bitsize="64"/>
-> +  <reg name="mibase" bitsize="64"/>
-> +  <reg name="mibound" bitsize="64"/>
-> +  <reg name="mdbase" bitsize="64"/>
-> +  <reg name="mdbound" bitsize="64"/>
-> +  <reg name="mucounteren" bitsize="64"/>
-> +  <reg name="mscounteren" bitsize="64"/>
-> +  <reg name="mhcounteren" bitsize="64"/>
-> +</feature>
-> diff --git a/gdb-xml/riscv-64bit-fpu.xml b/gdb-xml/riscv-64bit-fpu.xml
-> new file mode 100644
-> index 0000000..fb24b72
-> --- /dev/null
-> +++ b/gdb-xml/riscv-64bit-fpu.xml
-> @@ -0,0 +1,52 @@
-> +<?xml version="1.0"?>
-> +<!-- Copyright (C) 2018 Free Software Foundation, Inc.
+> +/* Legacy Machine Protection and Translation (priv v1.9.1) */
+> +#define CSR_MBASE           0x380
+> +#define CSR_MBOUND          0x381
+> +#define CSR_MIBASE          0x382
+> +#define CSR_MIBOUND         0x383
+> +#define CSR_MDBASE          0x384
+> +#define CSR_MDBOUND         0x385
 > +
-> +     Copying and distribution of this file, with or without modification,
-> +     are permitted in any medium without royalty provided the copyright
-> +     notice and this notice are preserved.  -->
-> +
-> +<!DOCTYPE feature SYSTEM "gdb-target.dtd">
-> +<feature name="org.gnu.gdb.riscv.fpu">
-> +
-> +  <union id="riscv_double">
-> +    <field name="float" type="ieee_single"/>
-> +    <field name="double" type="ieee_double"/>
-> +  </union>
-> +
-> +  <reg name="ft0" bitsize="64" type="riscv_double"/>
-> +  <reg name="ft1" bitsize="64" type="riscv_double"/>
-> +  <reg name="ft2" bitsize="64" type="riscv_double"/>
-> +  <reg name="ft3" bitsize="64" type="riscv_double"/>
-> +  <reg name="ft4" bitsize="64" type="riscv_double"/>
-> +  <reg name="ft5" bitsize="64" type="riscv_double"/>
-> +  <reg name="ft6" bitsize="64" type="riscv_double"/>
-> +  <reg name="ft7" bitsize="64" type="riscv_double"/>
-> +  <reg name="fs0" bitsize="64" type="riscv_double"/>
-> +  <reg name="fs1" bitsize="64" type="riscv_double"/>
-> +  <reg name="fa0" bitsize="64" type="riscv_double"/>
-> +  <reg name="fa1" bitsize="64" type="riscv_double"/>
-> +  <reg name="fa2" bitsize="64" type="riscv_double"/>
-> +  <reg name="fa3" bitsize="64" type="riscv_double"/>
-> +  <reg name="fa4" bitsize="64" type="riscv_double"/>
-> +  <reg name="fa5" bitsize="64" type="riscv_double"/>
-> +  <reg name="fa6" bitsize="64" type="riscv_double"/>
-> +  <reg name="fa7" bitsize="64" type="riscv_double"/>
-> +  <reg name="fs2" bitsize="64" type="riscv_double"/>
-> +  <reg name="fs3" bitsize="64" type="riscv_double"/>
-> +  <reg name="fs4" bitsize="64" type="riscv_double"/>
-> +  <reg name="fs5" bitsize="64" type="riscv_double"/>
-> +  <reg name="fs6" bitsize="64" type="riscv_double"/>
-> +  <reg name="fs7" bitsize="64" type="riscv_double"/>
-> +  <reg name="fs8" bitsize="64" type="riscv_double"/>
-> +  <reg name="fs9" bitsize="64" type="riscv_double"/>
-> +  <reg name="fs10" bitsize="64" type="riscv_double"/>
-> +  <reg name="fs11" bitsize="64" type="riscv_double"/>
-> +  <reg name="ft8" bitsize="64" type="riscv_double"/>
-> +  <reg name="ft9" bitsize="64" type="riscv_double"/>
-> +  <reg name="ft10" bitsize="64" type="riscv_double"/>
-> +  <reg name="ft11" bitsize="64" type="riscv_double"/>
-> +
-> +  <reg name="fflags" bitsize="32" type="int"/>
-> +  <reg name="frm" bitsize="32" type="int"/>
-> +  <reg name="fcsr" bitsize="32" type="int"/>
-> +</feature>
+>  /* mstatus CSR bits */
+>  #define MSTATUS_UIE         0x00000001
+>  #define MSTATUS_SIE         0x00000002
 > --
 > 2.7.4
 >
