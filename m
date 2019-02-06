@@ -1,65 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gr5bT-0003Vl-48
-	for mharc-qemu-riscv@gnu.org; Tue, 05 Feb 2019 13:37:51 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:45610)
+	id 1grQMi-0005wY-2x
+	for mharc-qemu-riscv@gnu.org; Wed, 06 Feb 2019 11:48:00 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:46988)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1gr5bR-0003Tr-4f
-	for qemu-riscv@nongnu.org; Tue, 05 Feb 2019 13:37:50 -0500
+	(envelope-from <palmer@sifive.com>) id 1grQMg-0005v0-0h
+	for qemu-riscv@nongnu.org; Wed, 06 Feb 2019 11:47:58 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1gr5bP-0004Hi-7K
-	for qemu-riscv@nongnu.org; Tue, 05 Feb 2019 13:37:49 -0500
-Received: from mail-lf1-x143.google.com ([2a00:1450:4864:20::143]:40251)
+	(envelope-from <palmer@sifive.com>) id 1grQMd-0007QE-MN
+	for qemu-riscv@nongnu.org; Wed, 06 Feb 2019 11:47:57 -0500
+Received: from mail-pg1-x542.google.com ([2607:f8b0:4864:20::542]:40666)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <alistair23@gmail.com>)
-	id 1gr5bH-0003w6-AF; Tue, 05 Feb 2019 13:37:39 -0500
-Received: by mail-lf1-x143.google.com with SMTP id v5so3403129lfe.7;
-	Tue, 05 Feb 2019 10:37:25 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=5br4pgBG7qKVz4Lcsk8slzd8zvSd+AHkTsZ3iJS+Fac=;
-	b=HLLnkPm0YxRbegMp0I7htPfCYtAuxlXG+ZwABqHAH3pDUD4nqN6icqgQrA9UICWuyG
-	4fimrrG8o+1VEWjeSyhMAXIsiqywz0jXgqPLfhBqwPWH7rdrf0In4nSOPdzuN4S8Pdu3
-	zDU70wggoGxmJsuVWyy36HQMzoxIBhdABXt9KNmA2oRzGxu9OUJ6wlBgU61U2hK7Rg5o
-	4VSd8ngjyVlZsYjIFXHK3MFO4+o+VSKx7T6HNXG4F5Vc1BcI1xCAnl1/UTd06AOU4VyL
-	5s3kDB6j0bqy/fUZHksCUdtWX21mDdH4g5JG8PbJLsgykq9+Zsds2LRtUkCvmEMDUooq
-	5BOw==
+	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1grQMb-0007Iv-FP
+	for qemu-riscv@nongnu.org; Wed, 06 Feb 2019 11:47:53 -0500
+Received: by mail-pg1-x542.google.com with SMTP id z10so3129302pgp.7
+	for <qemu-riscv@nongnu.org>; Wed, 06 Feb 2019 08:47:47 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+	h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
+	:content-transfer-encoding;
+	bh=tn2klk5d6CXuLyNfaNcww2QFr2KzqOF1La1NgCZ0/Ug=;
+	b=kKbZMYCuhtPYIVJhzwyY4xlZC6pKE7E2/+U9Wrc8Ey2JLcof4MwdVy0wUFFR/7UlEs
+	1e3QiYM13aOnJqvJ4hTkZDrFxL8B0B45OeTR81ZPMh/aLfCaMqXOCQmWrVZZacqS4c72
+	NVa9IqU6626Jr1dDjkYjQvNvlBnl2xZ0hMs/S4FcOdI0hmyIV+IcPeJyPHbJA+22jkqz
+	2kIsJ+FabRg75XJ0Y/wrf23r50po3EWv5kTePWpbDH5TPbpmH/BuNdCTs346L6rR9LQN
+	pBlrIAqaX9SOV4xyFw9Zknr8W9h6iXc3rnh6c88A24vKgE0CXGlFk6dky8AyEBwnAOe8
+	lg4A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=5br4pgBG7qKVz4Lcsk8slzd8zvSd+AHkTsZ3iJS+Fac=;
-	b=RpziMRb8Nv228aPFAyhqa3As35MH42pGu1WHVwd0bsJqBa9bPdwbhtDkcpU8AgGNye
-	az7ky4iy1Q4dcvG7Vo6uz49qA6okNrwrH2PC8hbjsKk4nRO+9dHrq4Oc9r7TIR8MNHOr
-	yT0k9x7CYff2iIU8CVBnkB51aNVdzbtfd18TiFjyw2q1JHqxKEsZqxX1ytWwAPBU3ClW
-	ffczke0WKeidDrzQ50i64uyEu6ikqTqdQa9SKWLxu8V6KNOmIYitEZ82pJ/Cwhc6vkvW
-	2DdfNSifDISJo1R54nK/iEOAO8t0Rsxk82C/OEolEJThgBUEUTwsrvFfRg6o5IKhgeUg
-	21bw==
-X-Gm-Message-State: AHQUAuZ4Er/vquQkOqvF3DU5erNp248AtXFwvinHTsbjgSNpCI07YZVk
-	qgwftDfclvpluR74vOFzmimgCe53f6gHwmCyO0M=
-X-Google-Smtp-Source: AHgI3IZEh2r5J7rkyyWztGIlJk3xFBwBPKpOw8es0Vs/K0PYj+74jRlgOgDGSQesYqfCM44Qd9GG0wGaJYlm5n9ZKNo=
-X-Received: by 2002:ac2:5483:: with SMTP id t3mr3909871lfk.79.1549391844223;
-	Tue, 05 Feb 2019 10:37:24 -0800 (PST)
-MIME-Version: 1.0
-References: <154905879413.25667.2843143192142684785.malonedeb@chaenomeles.canonical.com>
-	<a667006b-44e2-f72d-8164-c52a9374cb84@redhat.com>
-In-Reply-To: <a667006b-44e2-f72d-8164-c52a9374cb84@redhat.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 5 Feb 2019 10:36:46 -0800
-Message-ID: <CAKmqyKMBF23CJTNtdqiQ7gO7kA5ZSAu3aXr1uoF+=rE_RKwgFw@mail.gmail.com>
-To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>
-Cc: Bug 1814343 <1814343@bugs.launchpad.net>, 
-	"qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
-	Alistair Francis <Alistair.Francis@wdc.com>, 
-	Alistair Francis <alistair@alistair23.me>,
-	"qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+	h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
+	:mime-version:content-transfer-encoding;
+	bh=tn2klk5d6CXuLyNfaNcww2QFr2KzqOF1La1NgCZ0/Ug=;
+	b=W6Ls946Ii/8nYRdlU+EcrSXpeAclLSUbXwpPIdYuX6tzMPujie4AipOYK+T/3So2GK
+	TmtDpXK8CJFbIsupxAunw4ev4A2eV0LjKZlAXxJ+eR80pM2+mN3WHEOY2Sug9vfKQLRw
+	3lWmSU/hyOkxwfHW4VdFic+qoFPw0W/qm7YbM3jRC8JfOx5hmITdbVRFB3R3bkXNcvPP
+	L4fvKRPKfjB2/nLr9o2SStSa7Rdz0UervfQN4M8V/gQIuQk/h1w9Ul1iZiKcU39AGLli
+	5sldl1klhsIszkE05LgozqfVPgqfPQVX23A9TXTQlUJjuA9buyxU5sR1CXrSuBa9pegT
+	614Q==
+X-Gm-Message-State: AHQUAuYbjV61e713yMZkLtVQh+3yzCz+NOTUF0lr4eQo9v3N0PryoaQi
+	UJkUNGPcChEZKtoXHEa847z99w==
+X-Google-Smtp-Source: AHgI3IYtawmH644Ziht9i2+SaI+OKAukmKj1MK9Xf7eDBNTQZWn9rB1M/dS1u9CdXP+/uJY6vO78HA==
+X-Received: by 2002:a62:824c:: with SMTP id w73mr11351628pfd.150.1549471666417;
+	Wed, 06 Feb 2019 08:47:46 -0800 (PST)
+Received: from localhost ([12.206.222.5]) by smtp.gmail.com with ESMTPSA id
+	d16sm7773255pgj.21.2019.02.06.08.47.44
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 06 Feb 2019 08:47:45 -0800 (PST)
+Date: Wed, 06 Feb 2019 08:47:45 -0800 (PST)
+X-Google-Original-Date: Tue, 05 Feb 2019 13:27:03 PST (-0800)
+In-Reply-To: <CAFEAcA9JXK5O5tSvBD17CM3Eb132EWuub9VvOJWaAKUOu8KA5A@mail.gmail.com>
+CC: thuth@redhat.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+From: Palmer Dabbelt <palmer@sifive.com>
+To: Peter Maydell <peter.maydell@linaro.org>
+Message-ID: <mhng-7f0a2867-f9c8-4a43-a410-b60f25df4cc1@palmer-si-x1c4>
+Mime-Version: 1.0 (MHng)
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2a00:1450:4864:20::143
-Subject: Re: [Qemu-riscv] [Qemu-devel] [Bug 1814343] [NEW] Initrd not loaded
- on riscv32
+X-Received-From: 2607:f8b0:4864:20::542
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PR RFC] RISC-V Patches for 3.2,
+ Part 3
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -71,74 +70,44 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Feb 2019 18:37:50 -0000
+X-List-Received-Date: Wed, 06 Feb 2019 16:47:59 -0000
 
-On Fri, Feb 1, 2019 at 3:26 PM Philippe Mathieu-Daud=C3=A9 <philmd@redhat.c=
-om> wrote:
+On Mon, 04 Feb 2019 01:59:48 PST (-0800), Peter Maydell wrote:
+> On Mon, 4 Feb 2019 at 09:05, Thomas Huth <thuth@redhat.com> wrote:
+>> On 2019-02-02 09:41, Palmer Dabbelt wrote:
+>> >> My mail filter finds these RFC pullrequests, yes. I'm then
+>> >> relying on my manual brain to not actually apply them.
+>> >> (If it's a slow day I might do a test merge on them, but
+>> >> usually my queue is full enough that I don't get to them
+>> >> before the real PR appears.)
+>> >
+>> > Ah, OK -- do you want me to do something else?
+>>
+>> At least I got a little bit confused by "PR RFC" ... I think some other
+>> maintainers rather send out patch series marked with "PATCH" first, and
+>> add some non-pull-request cover letter with a text like "I'm intending
+>> to send a pull request for this soon, please review one more time...".
+>> Then after a day or two, once Patchew checked the series and nobody else
+>> complained, they send a real "PULL" request.
 >
-> Hi Jonathan,
->
-> On 2/1/19 11:06 PM, Jonathan Behrens wrote:
-> > Public bug reported:
-> >
-> > I attempted to run qemu with a ram disk. However, when reading the
-> > contents of the disk from within the VM I only get back zeros.
-> >
-> > I was able to trace the issue to a mismatch of expectations on line 93
-> > of hw/riscv/virt.c. Specifically, when running in 32-bit mode the value
-> > of kernel_entry is sign extended to 64-bits, but load_image_targphys
-> > expects the start address to not be sign extended.
-> >
-> > Straw man patch (works for 32-bit but would probably break 64-bit VMs?)=
-:
-> >
-> > diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> > index e7f0716fb6..32216f993c 100644
-> > --- a/hw/riscv/virt.c
-> > +++ b/hw/riscv/virt.c
-> > @@ -90,7 +90,7 @@ static hwaddr load_initrd(const char *filename, uint6=
-4_t mem_size,
-> >       * halfway into RAM, and for boards with 256MB of RAM or more we p=
-ut
-> >       * the initrd at 128MB.
-> >       */
-> > -    *start =3D kernel_entry + MIN(mem_size / 2, 128 * MiB);
-> > +    *start =3D (kernel_entry & 0xffffffff) + MIN(mem_size / 2, 128 * M=
-iB);
-> >
-> >      size =3D load_ramdisk(filename, *start, mem_size - *start);
-> >      if (size =3D=3D -1) {
-> >
-> >
-> > Run command:
-> >
-> > $ qemu/build/riscv32-softmmu/qemu-system-riscv32 -machine virt -kernel
-> > mykernel.elf -nographic -initrd payload
-> >
-> > Commit hash:
-> >
-> > 3a183e330dbd7dbcac3841737ac874979552cca2
-> >
-> > ** Affects: qemu
-> >      Importance: Undecided
-> >          Status: New
->
-> I believe this is fixed by the following patch:
-> "Ensure the kernel start address is correctly cast"
-> https://lists.gnu.org/archive/html/qemu-devel/2019-01/msg06358.html
->
-> Can you test it?
-> If if works you can reply to it with a
-> "Tested-by: Jonathan Behrens <your-email>"
-> to increases the odds it get merged ;)
+> Yeah, generally nobody else sends RFC pull requests, they just
+> send the actual pulls. I don't object if Palmer finds them
+> useful, though.
 
-Did you get a chance to test this Jonathan?
+If nobody else does it then I might stop -- they were more useful for me when I 
+was new at this, as I was pretty worried about making mistakes and wanted to 
+make sure I didn't screw anything up.  Things have gone pretty smoothly, so it 
+might just have been paranoia.
 
-Alistair
+Unless anyone likes these I think I'll stop sending them.
 
 >
-> Thanks,
->
-> Phil.
->
+> For what it's worth, my filter for finding pull requests is emails
+> containing "for you to fetch changes up to" but not either of
+> "not for master" or "PULL SUBSYSTEM". So if you want to specifically
+> keep out of the filters you can add "not for master" in the cover
+> letter. But as I say it's not a big deal for me to sort things out
+> manually -- the filter has the odd false positive anyway.
+
+OK, makes sense.
 
