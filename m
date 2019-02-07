@@ -1,54 +1,75 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1grgc1-0007FM-Mx
-	for mharc-qemu-riscv@gnu.org; Thu, 07 Feb 2019 05:08:53 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:33931)
+	id 1griQK-0007uv-3D
+	for mharc-qemu-riscv@gnu.org; Thu, 07 Feb 2019 07:04:56 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:60942)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <chouteau@adacore.com>) id 1grgby-0007De-W9
-	for qemu-riscv@nongnu.org; Thu, 07 Feb 2019 05:08:51 -0500
+	(envelope-from <richard.henderson@linaro.org>) id 1griQF-0007sc-9N
+	for qemu-riscv@nongnu.org; Thu, 07 Feb 2019 07:04:54 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <chouteau@adacore.com>) id 1grgby-0007HM-9a
-	for qemu-riscv@nongnu.org; Thu, 07 Feb 2019 05:08:50 -0500
-Received: from mel.act-europe.fr ([2a02:2ab8:224:1::a0a:d2]:42505
-	helo=smtp.eu.adacore.com)
-	by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.71) (envelope-from <chouteau@adacore.com>)
-	id 1grgbq-00078J-F1; Thu, 07 Feb 2019 05:08:44 -0500
-Received: from localhost (localhost [127.0.0.1])
-	by filtered-smtp.eu.adacore.com (Postfix) with ESMTP id 58E2381354;
-	Thu,  7 Feb 2019 11:08:27 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at eu.adacore.com
-Received: from smtp.eu.adacore.com ([127.0.0.1])
-	by localhost (smtp.eu.adacore.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id eBhGFvvZgZ6R; Thu,  7 Feb 2019 11:08:27 +0100 (CET)
-Received: from [IPv6:2a02:2ab8:224:1:45ad:b40e:ab13:7adb] (unknown
-	[IPv6:2a02:2ab8:224:1:45ad:b40e:ab13:7adb])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-	(No client certificate requested)
-	by smtp.eu.adacore.com (Postfix) with ESMTPSA id 6380781386;
-	Thu,  7 Feb 2019 11:08:26 +0100 (CET)
-To: Alistair Francis <alistair23@gmail.com>
-Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
-	Sagar Karandikar <sagark@eecs.berkeley.edu>,
-	Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
-	Palmer Dabbelt <palmer@sifive.com>,
-	"open list:All patches CC here" <qemu-devel@nongnu.org>,
-	Michael Clark <mjc@sifive.com>, Alistair Francis <Alistair.Francis@wdc.com>
-References: <20190130185242.12490-1-chouteau@adacore.com>
-	<CAKmqyKMNqYBN9ZCESAxfqWSOidjFRhQNofN130MOPDOyRwQ28w@mail.gmail.com>
-From: Fabien Chouteau <chouteau@adacore.com>
-Message-ID: <5cb673ce-930d-81d5-eb59-d33471f7318b@adacore.com>
-Date: Thu, 7 Feb 2019 11:08:24 +0100
+	(envelope-from <richard.henderson@linaro.org>) id 1griQ5-0008JI-0q
+	for qemu-riscv@nongnu.org; Thu, 07 Feb 2019 07:04:45 -0500
+Received: from mail-wm1-x343.google.com ([2a00:1450:4864:20::343]:33526)
+	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+	(Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
+	id 1griPt-0008Bn-6v
+	for qemu-riscv@nongnu.org; Thu, 07 Feb 2019 07:04:31 -0500
+Received: by mail-wm1-x343.google.com with SMTP id h22so4208277wmb.0
+	for <qemu-riscv@nongnu.org>; Thu, 07 Feb 2019 04:04:28 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+	h=subject:to:cc:references:from:openpgp:message-id:date:user-agent
+	:mime-version:in-reply-to:content-language:content-transfer-encoding;
+	bh=oz+nrjaVaH7Kzoe1ccCvlxrdhHhHYMG/xZk3W9sOVSY=;
+	b=QJ9S2Vmfl5gFdKoO+i1pOcs6xR63LbiOk6OGjvsIKgp74rIEYrHI2VL+N3ZP+g/zAn
+	+tl98MbhBix4XkBtC5aouVTYg61QxJoL9z6mWGqlqCagChK7gZ41txTB+oEpF1RywLub
+	feXTHvc4JN3+hx2OQW/OxzXQiaBVQUnpbRaU0ufnthX6KZms0Fr7ODe0dwyr//Ps9XUp
+	EwzWviATB7A9Fkj8kB7qZepJPYvxjM/43Jhb3kk0vCNqjayqLOKPbPfMi7zIjMS4WZRI
+	Ta7oeNXKayOScx4JHM4e637KIe9RiS3UPZ2rNPlAhohqzCnTaFh9d/GDP4weeDsQlzQh
+	Mcaw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
+	:date:user-agent:mime-version:in-reply-to:content-language
+	:content-transfer-encoding;
+	bh=oz+nrjaVaH7Kzoe1ccCvlxrdhHhHYMG/xZk3W9sOVSY=;
+	b=C0/jbmgrQ64/+6vMQXT+OGDJVNmVMdpuN1MxCFr8/W9YWW0WkwFyqH2yRo1flj/1lQ
+	f91QNgiMDtIk/3hxVw+RQDSuHmx6Rcpqa1khZ6znk1cPUEy10oqATSiZed8VN5nMqPIP
+	pVn0158lNDcGyYeE7XO+Tcs1RBkFmVQCRYrKtXKTwStwU/TZiLWdCS7vqgjIyiYnqh6T
+	cjdgM0bLdm0XrU6AC1tyUGjOYVDWy2hub3hikDUgrlEZavEUzHZFMTpK1mc0IxlzTv3/
+	9n/A3h87K4AMoFnVyX+dSc7JnObetlkIgKuShIok9HT4BblwgxPfSBObhpjGNUc3XliJ
+	cz5A==
+X-Gm-Message-State: AHQUAubFbXuSF16z2R1F8DHS1KKNrr3Js5sjz3JJSVnd+RDwc/ZFk1+4
+	QLhvimnCpcQO2USzY7AkpUuQ9Q==
+X-Google-Smtp-Source: AHgI3IYyg6cIH7DurDcIuIFF54rwr39CU55sYNb/bNDF3etNDBNAs55xw/kKuVolTPn7SiesfMKc4w==
+X-Received: by 2002:a1c:2408:: with SMTP id k8mr6934621wmk.110.1549541067891; 
+	Thu, 07 Feb 2019 04:04:27 -0800 (PST)
+Received: from cloudburst.twiddle.net ([37.205.61.206])
+	by smtp.gmail.com with ESMTPSA id
+	r9sm49045049wmb.27.2019.02.07.04.04.27
+	(version=TLS1_3 cipher=AEAD-AES128-GCM-SHA256 bits=128/128);
+	Thu, 07 Feb 2019 04:04:27 -0800 (PST)
+To: Jim Wilson <jimw@sifive.com>, Alistair Francis <alistair23@gmail.com>
+Cc: qemu-riscv@nongnu.org,
+	"qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
+References: <CAFyWVaZ5tQq4eGaZiPBq7172PB_x3JCqV6c2xo=wSJdgbJakKQ@mail.gmail.com>
+	<20190130025708.12811-1-jimw@sifive.com>
+	<CAKmqyKMrCVqudmyJUPta9q6TJtDkeLV=FseAqQ7YhYMu3ak_NQ@mail.gmail.com>
+	<CAFyWVaaS_4RY9YKXcgJ1F4Ep1TDWkExtBTEigJedZQCcXG+44Q@mail.gmail.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+Openpgp: preference=signencrypt
+Message-ID: <9b4e0b04-e941-a433-0175-33ba9f79945b@linaro.org>
+Date: Thu, 7 Feb 2019 12:04:20 +0000
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.2.1
+	Thunderbird/60.4.0
 MIME-Version: 1.0
-In-Reply-To: <CAKmqyKMNqYBN9ZCESAxfqWSOidjFRhQNofN130MOPDOyRwQ28w@mail.gmail.com>
+In-Reply-To: <CAFyWVaaS_4RY9YKXcgJ1F4Ep1TDWkExtBTEigJedZQCcXG+44Q@mail.gmail.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 3.x
-X-Received-From: 2a02:2ab8:224:1::a0a:d2
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH] hw/riscv/sifive_clint.c:
- avoid integer overflow in timecmp write
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+	recognized.
+X-Received-From: 2a00:1450:4864:20::343
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH 5/5 v3] RISC-V: Add hooks to
+ use the gdb xml files.
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -60,31 +81,13 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Feb 2019 10:08:51 -0000
+X-List-Received-Date: Thu, 07 Feb 2019 12:04:54 -0000
 
-Hello Alistair,
+On 2/7/19 2:05 AM, Jim Wilson wrote:
+> Maybe qemu doesn't care about unused arguments/parameters?
 
-On 07/02/2019 01:42, Alistair Francis wrote:> 
-> Can you describe what this fixes?
-> 
+We do not.
 
-I encountered this problem when I tried to write 0xffffffffffffffff in timecmp.
 
-With the integer overflow in QEMU, writing this value means that the QEMU timer
-will be set in the past.
-
-> Won't an overflow be ok as we then just wrap around anyway? I guess
-> there is a problem if we want a value so large that we wrap around
-> past our current time though.
-> 
-
-The overflow was in the computation of the value `next_ns`. It is used to set
-the QEMU timer:
-
-timer_mod(cpu->env.timer, next_ns);
-
-A negative `next_ns` -because of the overflow- means that the timer
-triggers immediately instead of far in the future.
-
-Regards,
+r~
 
