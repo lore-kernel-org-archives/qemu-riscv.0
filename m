@@ -1,61 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1grX3o-0005JF-1s
-	for mharc-qemu-riscv@gnu.org; Wed, 06 Feb 2019 18:56:56 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:54374)
+	id 1grXBd-00089n-JV
+	for mharc-qemu-riscv@gnu.org; Wed, 06 Feb 2019 19:05:01 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:55611)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1grX3l-0005HS-He
-	for qemu-riscv@nongnu.org; Wed, 06 Feb 2019 18:56:54 -0500
+	(envelope-from <alistair23@gmail.com>) id 1grXBa-000882-Hz
+	for qemu-riscv@nongnu.org; Wed, 06 Feb 2019 19:05:00 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1grX3k-0000oc-9u
-	for qemu-riscv@nongnu.org; Wed, 06 Feb 2019 18:56:53 -0500
-Received: from mail-lj1-x241.google.com ([2a00:1450:4864:20::241]:38792)
+	(envelope-from <alistair23@gmail.com>) id 1grXBW-0003IR-30
+	for qemu-riscv@nongnu.org; Wed, 06 Feb 2019 19:04:56 -0500
+Received: from mail-lj1-x242.google.com ([2a00:1450:4864:20::242]:34951)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
 	(Exim 4.71) (envelope-from <alistair23@gmail.com>)
-	id 1grX3g-0000hk-PE; Wed, 06 Feb 2019 18:56:48 -0500
-Received: by mail-lj1-x241.google.com with SMTP id c19-v6so7735200lja.5;
-	Wed, 06 Feb 2019 15:56:40 -0800 (PST)
+	id 1grXBN-0003BJ-Gf; Wed, 06 Feb 2019 19:04:47 -0500
+Received: by mail-lj1-x242.google.com with SMTP id j13-v6so1465458ljc.2;
+	Wed, 06 Feb 2019 16:04:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=ymZ0nS5cFzAfOO+ckZ8ApDqORA7ZgL+aoKxuqM6EMMs=;
-	b=jcGqnP6iLm3kKUObR/56jaje6ARGNS+s/h76ckxt/ZhaBd7O7tc7RP5CDrCm7zquG2
-	PXVp6mvRDhIimFZ41h0LvolVKoVdNVqa8gX/1D0VEO4KQt+GmV8zOQM5MUHiPDHSk7r2
-	JpKPr7oIsRv7WUYjjhiwimzyPA4+OAUm8IJ7FfAuYKGajLFtTPxWBXx7X74egAYbs5bI
-	OqMQkuYVby4ulxLljEs7DioxNbzzqXKLeRhJzYrxIZbfCQN0zrIcAp0mxPhrokzjElm9
-	csTLmp9Gc7a8GczNbRI8o9z35kEduT2chC+Y5QkX8bUDZG45XkbVC4aRUhmlUbCht1hm
-	z+lA==
+	:cc; bh=7ebi6Hon5rANv46VXB4CywWlDffhkPbr5BG19LsHnz0=;
+	b=cjy7zSEX6ltlfDEA5xhMvy6ma34cBy3UxUMHkMrC1yV5IYA72tfaH9+eSgJy6STJOb
+	fnNI/zxa5X/mcOPKwxqRfL9Iuaw0XXR+c87Dr0r/F2FW90lkmO0KETgzsaMPFAkmtvDl
+	zQRYtz0SB1oJC1Z/kQeZRnIlrj9LIhlrRroiNYLl3j/AE0XN8SN6o2QszMy5kw60wH2E
+	+hKH35cZUP2+0/hhgT3nqKLF1yx5/Ti5mud2ByegRSiERDSaHeWazgxCPr8WKzKvCuEy
+	1O4tPdmYH/u7uXudgQi3RB/a2buvwA79Rh4ruiP4NgZ9n2QFjHddgOXUXv/jYgGOdiAt
+	NwKQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=ymZ0nS5cFzAfOO+ckZ8ApDqORA7ZgL+aoKxuqM6EMMs=;
-	b=P/o0JegFQV3bBr2RFlo9Tbe1Ua4cJzBnjBiEobbmf5vXpdyC6XdiYJ9mE1FjWFOYVm
-	b9vIXh625Hjh/zoA0l5B9xyyRjOmgvIq8QI1B3m9ONfhyIGT3N1rr5RVaWAUMQ4g73GO
-	xdENoosHS9e65P7RqkNEJM0lu2djNDzl0EqZCtgS6y304eP1LvyUI4YSD5pjL+2KQ7/v
-	skaFPfvzGfabI0nDy62ws/E1q0IG1SsCJlhW8oNannX0vUdlU7qanWBhT9u4/Oj6VbTc
-	M+1xwSjOSzVb+HVpJGmUoTY6KzmGe1gpedrWRVX8Bjki0ffr+7sknCOaBRsN5S1v7K9E
-	hjBA==
-X-Gm-Message-State: AHQUAuYrTILXRgVqHm4fyNbdTQPhJoGPzfYBGjeQLdDjXT3cxRyhMwjk
-	2fwp3ZKZCIr2zEWgAH0h06J+OCc2VJ+jAesMODU=
-X-Google-Smtp-Source: AHgI3IaNbltOzzt4XCluahBInDPvgi4nDZH6QsL7lms3IMftnOMF2R6l4U4PdMdbzL1FTEVxCX/F61pRUwu6WEpQ6hg=
-X-Received: by 2002:a2e:9516:: with SMTP id
-	f22-v6mr4305538ljh.191.1549497398609; 
-	Wed, 06 Feb 2019 15:56:38 -0800 (PST)
+	bh=7ebi6Hon5rANv46VXB4CywWlDffhkPbr5BG19LsHnz0=;
+	b=R4JSym/47fgUMjwifu5gZR8ic+lg0m8dQ3YL7o9icmEN5PdC4u4/n6yf6MKQGZ2Wro
+	Xi2PPj7H/Tidfw1x59DaV16VsxBjoCPU5bEk1qOSuYzxSSR0M1VKdFOqCyJZ82swlQ2c
+	4Xx8J+gFMwqcoOoOSDT00eInlPJZhE0gauZWPcjka1EVXcn5TqBP5Gude0NCAuAY039C
+	sW8bJNHEkITd/WfyMvg/OBkkAAycrYjYzAjT/hrgCL/NsBSLr3151/b9IzzkkAX+J7eK
+	B6Y3WO1ZJ3flEJHM17Ow7hpBLfn+75dBltNsvlcrH+gLDvG7rYb27qcioRixUzMe5M7Y
+	mZZw==
+X-Gm-Message-State: AHQUAuYL79NccFwrqmCZsB8D1H5V6NZwrK0ukTCW4i2ojB6ezTvRMBPp
+	nazClS4UROEtJA7ucl2VEKAHsa5uURw6CY+SBi4=
+X-Google-Smtp-Source: AHgI3IajiaTP1oXde3cnyMI/gekeRA4k89mDe0bl7SsATwea2C/bhBZtsYgh/TRa3pHaNQjW0ezFEUKbG7GbRTg8Ao0=
+X-Received: by 2002:a2e:9457:: with SMTP id o23-v6mr8022040ljh.7.1549497883256;
+	Wed, 06 Feb 2019 16:04:43 -0800 (PST)
 MIME-Version: 1.0
 References: <CAFyWVaZ5tQq4eGaZiPBq7172PB_x3JCqV6c2xo=wSJdgbJakKQ@mail.gmail.com>
-	<20190130025644.12754-1-jimw@sifive.com>
-In-Reply-To: <20190130025644.12754-1-jimw@sifive.com>
+	<20190130025708.12811-1-jimw@sifive.com>
+In-Reply-To: <20190130025708.12811-1-jimw@sifive.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 6 Feb 2019 15:55:59 -0800
-Message-ID: <CAKmqyKMPYYuD1jRT-9pxgAdBcgA3990MmseMNube_zzP0wmncQ@mail.gmail.com>
+Date: Wed, 6 Feb 2019 16:04:03 -0800
+Message-ID: <CAKmqyKMrCVqudmyJUPta9q6TJtDkeLV=FseAqQ7YhYMu3ak_NQ@mail.gmail.com>
 To: Jim Wilson <jimw@sifive.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
 	qemu-riscv@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2a00:1450:4864:20::241
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH 4/5 v3] RISC-V: Add debug
- support for accessing CSRs.
+X-Received-From: 2a00:1450:4864:20::242
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH 5/5 v3] RISC-V: Add hooks to
+ use the gdb xml files.
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -67,114 +66,477 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Feb 2019 23:56:54 -0000
+X-List-Received-Date: Thu, 07 Feb 2019 00:05:00 -0000
 
-On Tue, Jan 29, 2019 at 6:57 PM Jim Wilson <jimw@sifive.com> wrote:
+On Tue, Jan 29, 2019 at 6:58 PM Jim Wilson <jimw@sifive.com> wrote:
 >
-> Adds a debugger field to CPURISCVState.  Disable mode checks in riscv_csrrw
-> when true.
+> The gdb CSR xml file has registers in documentation order, not numerical
+> order, so we need a table to map the register numbers.  This also adds
+> fairly standard gdb hooks to access xml specified registers.
 >
 > Signed-off-by: Jim Wilson <jimw@sifive.com>
+> ---
+>  target/riscv/cpu.c     |   9 +-
+>  target/riscv/cpu.h     |   2 +
+>  target/riscv/gdbstub.c | 373 +++++++++++++++++++++++++++++++++++++++++++++++--
+>  3 files changed, 372 insertions(+), 12 deletions(-)
+>
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 28d7e53..c23bd01 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -311,6 +311,8 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+>          return;
+>      }
+>
+> +    riscv_cpu_register_gdb_regs_for_features(cs);
+> +
+>      qemu_init_vcpu(cs);
+>      cpu_reset(cs);
+>
+> @@ -351,7 +353,12 @@ static void riscv_cpu_class_init(ObjectClass *c, void *data)
+>      cc->synchronize_from_tb = riscv_cpu_synchronize_from_tb;
+>      cc->gdb_read_register = riscv_cpu_gdb_read_register;
+>      cc->gdb_write_register = riscv_cpu_gdb_write_register;
+> -    cc->gdb_num_core_regs = 65;
+> +    cc->gdb_num_core_regs = 33;
+> +#if defined(TARGET_RISCV32)
+> +    cc->gdb_core_xml_file = "riscv-32bit-cpu.xml";
+> +#elif defined(TARGET_RISCV64)
+> +    cc->gdb_core_xml_file = "riscv-64bit-cpu.xml";
+> +#endif
+>      cc->gdb_stop_before_watchpoint = true;
+>      cc->disas_set_info = riscv_cpu_disas_set_info;
+>  #ifdef CONFIG_USER_ONLY
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index faa46d0..a7dcdb6 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -327,6 +327,8 @@ typedef struct {
+>  void riscv_get_csr_ops(int csrno, riscv_csr_operations *ops);
+>  void riscv_set_csr_ops(int csrno, riscv_csr_operations *ops);
+>
+> +void riscv_cpu_register_gdb_regs_for_features(CPUState *cs);
+> +
+>  #include "exec/cpu-all.h"
+>
+>  #endif /* RISCV_CPU_H */
+> diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
+> index 3cabb21..44e19a2 100644
+> --- a/target/riscv/gdbstub.c
+> +++ b/target/riscv/gdbstub.c
+> @@ -21,6 +21,255 @@
+>  #include "exec/gdbstub.h"
+>  #include "cpu.h"
+>
+> +/*
+> + * The GDB CSR xml files list them in documentation order, not numerical order,
+> + * and are missing entries for unnamed CSRs.  So we need to map the gdb numbers
+> + * to the hardware numbers.
+> + */
+> +
+> +static int csr_register_map[] = {
+> +    CSR_USTATUS,
+> +    CSR_UIE,
+> +    CSR_UTVEC,
+> +    CSR_USCRATCH,
+> +    CSR_UEPC,
+> +    CSR_UCAUSE,
+> +    CSR_UTVAL,
+> +    CSR_UIP,
+> +    CSR_FFLAGS,
+> +    CSR_FRM,
+> +    CSR_FCSR,
+> +    CSR_CYCLE,
+> +    CSR_TIME,
+> +    CSR_INSTRET,
+> +    CSR_HPMCOUNTER3,
+> +    CSR_HPMCOUNTER4,
+> +    CSR_HPMCOUNTER5,
+> +    CSR_HPMCOUNTER6,
+> +    CSR_HPMCOUNTER7,
+> +    CSR_HPMCOUNTER8,
+> +    CSR_HPMCOUNTER9,
+> +    CSR_HPMCOUNTER10,
+> +    CSR_HPMCOUNTER11,
+> +    CSR_HPMCOUNTER12,
+> +    CSR_HPMCOUNTER13,
+> +    CSR_HPMCOUNTER14,
+> +    CSR_HPMCOUNTER15,
+> +    CSR_HPMCOUNTER16,
+> +    CSR_HPMCOUNTER17,
+> +    CSR_HPMCOUNTER18,
+> +    CSR_HPMCOUNTER19,
+> +    CSR_HPMCOUNTER20,
+> +    CSR_HPMCOUNTER21,
+> +    CSR_HPMCOUNTER22,
+> +    CSR_HPMCOUNTER23,
+> +    CSR_HPMCOUNTER24,
+> +    CSR_HPMCOUNTER25,
+> +    CSR_HPMCOUNTER26,
+> +    CSR_HPMCOUNTER27,
+> +    CSR_HPMCOUNTER28,
+> +    CSR_HPMCOUNTER29,
+> +    CSR_HPMCOUNTER30,
+> +    CSR_HPMCOUNTER31,
+> +    CSR_CYCLEH,
+> +    CSR_TIMEH,
+> +    CSR_INSTRETH,
+> +    CSR_HPMCOUNTER3H,
+> +    CSR_HPMCOUNTER4H,
+> +    CSR_HPMCOUNTER5H,
+> +    CSR_HPMCOUNTER6H,
+> +    CSR_HPMCOUNTER7H,
+> +    CSR_HPMCOUNTER8H,
+> +    CSR_HPMCOUNTER9H,
+> +    CSR_HPMCOUNTER10H,
+> +    CSR_HPMCOUNTER11H,
+> +    CSR_HPMCOUNTER12H,
+> +    CSR_HPMCOUNTER13H,
+> +    CSR_HPMCOUNTER14H,
+> +    CSR_HPMCOUNTER15H,
+> +    CSR_HPMCOUNTER16H,
+> +    CSR_HPMCOUNTER17H,
+> +    CSR_HPMCOUNTER18H,
+> +    CSR_HPMCOUNTER19H,
+> +    CSR_HPMCOUNTER20H,
+> +    CSR_HPMCOUNTER21H,
+> +    CSR_HPMCOUNTER22H,
+> +    CSR_HPMCOUNTER23H,
+> +    CSR_HPMCOUNTER24H,
+> +    CSR_HPMCOUNTER25H,
+> +    CSR_HPMCOUNTER26H,
+> +    CSR_HPMCOUNTER27H,
+> +    CSR_HPMCOUNTER28H,
+> +    CSR_HPMCOUNTER29H,
+> +    CSR_HPMCOUNTER30H,
+> +    CSR_HPMCOUNTER31H,
+> +    CSR_SSTATUS,
+> +    CSR_SEDELEG,
+> +    CSR_SIDELEG,
+> +    CSR_SIE,
+> +    CSR_STVEC,
+> +    CSR_SCOUNTEREN,
+> +    CSR_SSCRATCH,
+> +    CSR_SEPC,
+> +    CSR_SCAUSE,
+> +    CSR_STVAL,
+> +    CSR_SIP,
+> +    CSR_SATP,
+> +    CSR_MVENDORID,
+> +    CSR_MARCHID,
+> +    CSR_MIMPID,
+> +    CSR_MHARTID,
+> +    CSR_MSTATUS,
+> +    CSR_MISA,
+> +    CSR_MEDELEG,
+> +    CSR_MIDELEG,
+> +    CSR_MIE,
+> +    CSR_MTVEC,
+> +    CSR_MCOUNTEREN,
+> +    CSR_MSCRATCH,
+> +    CSR_MEPC,
+> +    CSR_MCAUSE,
+> +    CSR_MTVAL,
+> +    CSR_MIP,
+> +    CSR_PMPCFG0,
+> +    CSR_PMPCFG1,
+> +    CSR_PMPCFG2,
+> +    CSR_PMPCFG3,
+> +    CSR_PMPADDR0,
+> +    CSR_PMPADDR1,
+> +    CSR_PMPADDR2,
+> +    CSR_PMPADDR3,
+> +    CSR_PMPADDR4,
+> +    CSR_PMPADDR5,
+> +    CSR_PMPADDR6,
+> +    CSR_PMPADDR7,
+> +    CSR_PMPADDR8,
+> +    CSR_PMPADDR9,
+> +    CSR_PMPADDR10,
+> +    CSR_PMPADDR11,
+> +    CSR_PMPADDR12,
+> +    CSR_PMPADDR13,
+> +    CSR_PMPADDR14,
+> +    CSR_PMPADDR15,
+> +    CSR_MCYCLE,
+> +    CSR_MINSTRET,
+> +    CSR_MHPMCOUNTER3,
+> +    CSR_MHPMCOUNTER4,
+> +    CSR_MHPMCOUNTER5,
+> +    CSR_MHPMCOUNTER6,
+> +    CSR_MHPMCOUNTER7,
+> +    CSR_MHPMCOUNTER8,
+> +    CSR_MHPMCOUNTER9,
+> +    CSR_MHPMCOUNTER10,
+> +    CSR_MHPMCOUNTER11,
+> +    CSR_MHPMCOUNTER12,
+> +    CSR_MHPMCOUNTER13,
+> +    CSR_MHPMCOUNTER14,
+> +    CSR_MHPMCOUNTER15,
+> +    CSR_MHPMCOUNTER16,
+> +    CSR_MHPMCOUNTER17,
+> +    CSR_MHPMCOUNTER18,
+> +    CSR_MHPMCOUNTER19,
+> +    CSR_MHPMCOUNTER20,
+> +    CSR_MHPMCOUNTER21,
+> +    CSR_MHPMCOUNTER22,
+> +    CSR_MHPMCOUNTER23,
+> +    CSR_MHPMCOUNTER24,
+> +    CSR_MHPMCOUNTER25,
+> +    CSR_MHPMCOUNTER26,
+> +    CSR_MHPMCOUNTER27,
+> +    CSR_MHPMCOUNTER28,
+> +    CSR_MHPMCOUNTER29,
+> +    CSR_MHPMCOUNTER30,
+> +    CSR_MHPMCOUNTER31,
+> +    CSR_MCYCLEH,
+> +    CSR_MINSTRETH,
+> +    CSR_MHPMCOUNTER3H,
+> +    CSR_MHPMCOUNTER4H,
+> +    CSR_MHPMCOUNTER5H,
+> +    CSR_MHPMCOUNTER6H,
+> +    CSR_MHPMCOUNTER7H,
+> +    CSR_MHPMCOUNTER8H,
+> +    CSR_MHPMCOUNTER9H,
+> +    CSR_MHPMCOUNTER10H,
+> +    CSR_MHPMCOUNTER11H,
+> +    CSR_MHPMCOUNTER12H,
+> +    CSR_MHPMCOUNTER13H,
+> +    CSR_MHPMCOUNTER14H,
+> +    CSR_MHPMCOUNTER15H,
+> +    CSR_MHPMCOUNTER16H,
+> +    CSR_MHPMCOUNTER17H,
+> +    CSR_MHPMCOUNTER18H,
+> +    CSR_MHPMCOUNTER19H,
+> +    CSR_MHPMCOUNTER20H,
+> +    CSR_MHPMCOUNTER21H,
+> +    CSR_MHPMCOUNTER22H,
+> +    CSR_MHPMCOUNTER23H,
+> +    CSR_MHPMCOUNTER24H,
+> +    CSR_MHPMCOUNTER25H,
+> +    CSR_MHPMCOUNTER26H,
+> +    CSR_MHPMCOUNTER27H,
+> +    CSR_MHPMCOUNTER28H,
+> +    CSR_MHPMCOUNTER29H,
+> +    CSR_MHPMCOUNTER30H,
+> +    CSR_MHPMCOUNTER31H,
+> +    CSR_MHPMEVENT3,
+> +    CSR_MHPMEVENT4,
+> +    CSR_MHPMEVENT5,
+> +    CSR_MHPMEVENT6,
+> +    CSR_MHPMEVENT7,
+> +    CSR_MHPMEVENT8,
+> +    CSR_MHPMEVENT9,
+> +    CSR_MHPMEVENT10,
+> +    CSR_MHPMEVENT11,
+> +    CSR_MHPMEVENT12,
+> +    CSR_MHPMEVENT13,
+> +    CSR_MHPMEVENT14,
+> +    CSR_MHPMEVENT15,
+> +    CSR_MHPMEVENT16,
+> +    CSR_MHPMEVENT17,
+> +    CSR_MHPMEVENT18,
+> +    CSR_MHPMEVENT19,
+> +    CSR_MHPMEVENT20,
+> +    CSR_MHPMEVENT21,
+> +    CSR_MHPMEVENT22,
+> +    CSR_MHPMEVENT23,
+> +    CSR_MHPMEVENT24,
+> +    CSR_MHPMEVENT25,
+> +    CSR_MHPMEVENT26,
+> +    CSR_MHPMEVENT27,
+> +    CSR_MHPMEVENT28,
+> +    CSR_MHPMEVENT29,
+> +    CSR_MHPMEVENT30,
+> +    CSR_MHPMEVENT31,
+> +    CSR_TSELECT,
+> +    CSR_TDATA1,
+> +    CSR_TDATA2,
+> +    CSR_TDATA3,
+> +    CSR_DCSR,
+> +    CSR_DPC,
+> +    CSR_DSCRATCH,
+> +    CSR_HSTATUS,
+> +    CSR_HEDELEG,
+> +    CSR_HIDELEG,
+> +    CSR_HIE,
+> +    CSR_HTVEC,
+> +    CSR_HSCRATCH,
+> +    CSR_HEPC,
+> +    CSR_HCAUSE,
+> +    CSR_HBADADDR,
+> +    CSR_HIP,
+> +    CSR_MBASE,
+> +    CSR_MBOUND,
+> +    CSR_MIBASE,
+> +    CSR_MIBOUND,
+> +    CSR_MDBASE,
+> +    CSR_MDBOUND,
+> +    CSR_MUCOUNTEREN,
+> +    CSR_MSCOUNTEREN,
+> +    CSR_MHCOUNTEREN,
+> +};
+> +
+>  int riscv_cpu_gdb_read_register(CPUState *cs, uint8_t *mem_buf, int n)
+>  {
+>      RISCVCPU *cpu = RISCV_CPU(cs);
+> @@ -30,13 +279,6 @@ int riscv_cpu_gdb_read_register(CPUState *cs, uint8_t *mem_buf, int n)
+>          return gdb_get_regl(mem_buf, env->gpr[n]);
+>      } else if (n == 32) {
+>          return gdb_get_regl(mem_buf, env->pc);
+> -    } else if (n < 65) {
+> -        return gdb_get_reg64(mem_buf, env->fpr[n - 33]);
+> -    } else if (n < 4096 + 65) {
+> -        target_ulong val = 0;
+> -        if (riscv_csrrw(env, n - 65, &val, 0, 0) == 0) {
+> -            return gdb_get_regl(mem_buf, val);
+> -        }
+>      }
+>      return 0;
+>  }
+> @@ -55,14 +297,123 @@ int riscv_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
+>      } else if (n == 32) {
+>          env->pc = ldtul_p(mem_buf);
+>          return sizeof(target_ulong);
+> -    } else if (n < 65) {
+> -        env->fpr[n - 33] = ldq_p(mem_buf); /* always 64-bit */
+> +    }
+> +    return 0;
+> +}
+> +
+> +static int riscv_gdb_get_fpu(CPURISCVState *env, uint8_t *mem_buf, int n)
+> +{
+> +    if (n < 32) {
+> +        return gdb_get_reg64(mem_buf, env->fpr[n]);
+> +    } else if (n < 35) {
+> +        target_ulong val = 0;
+> +        int result;
+> +        /*
+> +         * CSR_FFLAGS is 0x001, and gdb says it is FP register 32, so we
+> +         * subtract 31 to map the gdb FP register number to the CSR number.
+> +         * This also works for CSR_FRM and CSR_FCSR.
+> +         */
+> +#if !defined(CONFIG_USER_ONLY)
+> +        env->debugger = true;
+> +#endif
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Would it not be easier to add an extra argument to the functions
+intstead of setting and unsetting this?
+
+That's what you had in the earlier version of this set.
+
+> +        result = riscv_csrrw(env, n - 31, &val, 0, 0);
+> +#if !defined(CONFIG_USER_ONLY)
+> +        env->debugger = false;
+> +#endif
+> +        if (result == 0) {
+> +            return gdb_get_regl(mem_buf, val);
+> +        }
+> +
+
+Extra line here as well.
+
+> +    }
+> +    return 0;
+> +}
+> +
+> +static int riscv_gdb_set_fpu(CPURISCVState *env, uint8_t *mem_buf, int n)
+> +{
+> +    if (n < 32) {
+> +        env->fpr[n] = ldq_p(mem_buf); /* always 64-bit */
+>          return sizeof(uint64_t);
+> -    } else if (n < 4096 + 65) {
+> +    } else if (n < 35) {
+> +        target_ulong val = ldtul_p(mem_buf);
+> +        int result;
+> +        /*
+> +         * CSR_FFLAGS is 0x001, and gdb says it is FP register 32, so we
+> +         * subtract 31 to map the gdb FP register number to the CSR number.
+> +         * This also works for CSR_FRM and CSR_FCSR.
+> +         */
+> +#if !defined(CONFIG_USER_ONLY)
+> +        env->debugger = true;
+> +#endif
+> +        result = riscv_csrrw(env, n - 31, NULL, val, -1);
+> +#if !defined(CONFIG_USER_ONLY)
+> +        env->debugger = false;
+> +#endif
+> +        if (result == 0) {
+> +            return sizeof(target_ulong);
+> +        }
+> +    }
+> +    return 0;
+> +}
+> +
+> +static int riscv_gdb_get_csr(CPURISCVState *env, uint8_t *mem_buf, int n)
+> +{
+> +    if (n < ARRAY_SIZE(csr_register_map)) {
+> +        target_ulong val = 0;
+> +        int result;
+> +
+> +#if !defined(CONFIG_USER_ONLY)
+> +        env->debugger = true;
+> +#endif
+> +        result = riscv_csrrw(env, csr_register_map[n], &val, 0, 0);
+> +#if !defined(CONFIG_USER_ONLY)
+> +        env->debugger = false;
+> +#endif
+> +        if (result == 0) {
+> +            return gdb_get_regl(mem_buf, val);
+> +        }
+> +    }
+> +    return 0;
+> +}
+> +
+> +static int riscv_gdb_set_csr(CPURISCVState *env, uint8_t *mem_buf, int n)
+> +{
+> +    if (n < ARRAY_SIZE(csr_register_map)) {
+>          target_ulong val = ldtul_p(mem_buf);
+> -        if (riscv_csrrw(env, n - 65, NULL, val, -1) == 0) {
+> +        int result;
+> +
+> +#if !defined(CONFIG_USER_ONLY)
+> +        env->debugger = true;
+> +#endif
+> +        result = riscv_csrrw(env, csr_register_map[n], NULL, val, -1);
+> +#if !defined(CONFIG_USER_ONLY)
+> +        env->debugger = false;
+> +#endif
+> +        if (result == 0) {
+>              return sizeof(target_ulong);
+>          }
+>      }
+>      return 0;
+>  }
+> +
+> +void riscv_cpu_register_gdb_regs_for_features(CPUState *cs)
+> +{
+> +    RISCVCPU *cpu = RISCV_CPU(cs);
+> +    CPURISCVState *env = &cpu->env;
+> +#if defined(TARGET_RISCV32)
+> +    if (env->misa & RVF) {
+> +        gdb_register_coprocessor(cs, riscv_gdb_get_fpu, riscv_gdb_set_fpu,
+> +                                 35, "riscv-32bit-fpu.xml", 0);
+> +    }
+> +
+> +    gdb_register_coprocessor(cs, riscv_gdb_get_csr, riscv_gdb_set_csr,
+> +                             4096, "riscv-32bit-csr.xml", 0);
+> +#elif defined(TARGET_RISCV64)
+> +    if (env->misa & RVF) {
+> +        gdb_register_coprocessor(cs, riscv_gdb_get_fpu, riscv_gdb_set_fpu,
+> +                                 35, "riscv-64bit-fpu.xml", 0);
+> +    }
+> +
+> +    gdb_register_coprocessor(cs, riscv_gdb_get_csr, riscv_gdb_set_csr,
+> +                             4096, "riscv-64bit-csr.xml", 0);
+> +#endif
+
+Besides the two comments this looks good :)
 
 Alistair
 
-> ---
->  target/riscv/cpu.h |  3 +++
->  target/riscv/csr.c | 16 ++++++++--------
->  2 files changed, 11 insertions(+), 8 deletions(-)
->
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 743f02c..faa46d0 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -170,6 +170,9 @@ struct CPURISCVState {
->
->      /* physical memory protection */
->      pmp_table_t pmp_state;
-> +
-> +    /* True if in debugger mode.  */
-> +    bool debugger;
->  #endif
->
->      float_status fp_status;
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index 5e7e7d1..04e6b59 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -46,7 +46,7 @@ void riscv_set_csr_ops(int csrno, riscv_csr_operations *ops)
->  static int fs(CPURISCVState *env, int csrno)
->  {
->  #if !defined(CONFIG_USER_ONLY)
-> -    if (!(env->mstatus & MSTATUS_FS)) {
-> +    if (!env->debugger && !(env->mstatus & MSTATUS_FS)) {
->          return -1;
->      }
->  #endif
-> @@ -58,7 +58,7 @@ static int ctr(CPURISCVState *env, int csrno)
->  #if !defined(CONFIG_USER_ONLY)
->      target_ulong ctr_en = env->priv == PRV_U ? env->scounteren :
->                            env->priv == PRV_S ? env->mcounteren : -1U;
-> -    if (!(ctr_en & (1 << (csrno & 31)))) {
-> +    if (!env->debugger && !(ctr_en & (1 << (csrno & 31)))) {
->          return -1;
->      }
->  #endif
-> @@ -86,7 +86,7 @@ static int pmp(CPURISCVState *env, int csrno)
->  static int read_fflags(CPURISCVState *env, int csrno, target_ulong *val)
->  {
->  #if !defined(CONFIG_USER_ONLY)
-> -    if (!(env->mstatus & MSTATUS_FS)) {
-> +    if (!env->debugger && !(env->mstatus & MSTATUS_FS)) {
->          return -1;
->      }
->  #endif
-> @@ -97,7 +97,7 @@ static int read_fflags(CPURISCVState *env, int csrno, target_ulong *val)
->  static int write_fflags(CPURISCVState *env, int csrno, target_ulong val)
->  {
->  #if !defined(CONFIG_USER_ONLY)
-> -    if (!(env->mstatus & MSTATUS_FS)) {
-> +    if (!env->debugger && !(env->mstatus & MSTATUS_FS)) {
->          return -1;
->      }
->      env->mstatus |= MSTATUS_FS;
-> @@ -109,7 +109,7 @@ static int write_fflags(CPURISCVState *env, int csrno, target_ulong val)
->  static int read_frm(CPURISCVState *env, int csrno, target_ulong *val)
->  {
->  #if !defined(CONFIG_USER_ONLY)
-> -    if (!(env->mstatus & MSTATUS_FS)) {
-> +    if (!env->debugger && !(env->mstatus & MSTATUS_FS)) {
->          return -1;
->      }
->  #endif
-> @@ -120,7 +120,7 @@ static int read_frm(CPURISCVState *env, int csrno, target_ulong *val)
->  static int write_frm(CPURISCVState *env, int csrno, target_ulong val)
->  {
->  #if !defined(CONFIG_USER_ONLY)
-> -    if (!(env->mstatus & MSTATUS_FS)) {
-> +    if (!env->debugger && !(env->mstatus & MSTATUS_FS)) {
->          return -1;
->      }
->      env->mstatus |= MSTATUS_FS;
-> @@ -132,7 +132,7 @@ static int write_frm(CPURISCVState *env, int csrno, target_ulong val)
->  static int read_fcsr(CPURISCVState *env, int csrno, target_ulong *val)
->  {
->  #if !defined(CONFIG_USER_ONLY)
-> -    if (!(env->mstatus & MSTATUS_FS)) {
-> +    if (!env->debugger && !(env->mstatus & MSTATUS_FS)) {
->          return -1;
->      }
->  #endif
-> @@ -144,7 +144,7 @@ static int read_fcsr(CPURISCVState *env, int csrno, target_ulong *val)
->  static int write_fcsr(CPURISCVState *env, int csrno, target_ulong val)
->  {
->  #if !defined(CONFIG_USER_ONLY)
-> -    if (!(env->mstatus & MSTATUS_FS)) {
-> +    if (!env->debugger && !(env->mstatus & MSTATUS_FS)) {
->          return -1;
->      }
->      env->mstatus |= MSTATUS_FS;
+> +}
 > --
 > 2.7.4
 >
