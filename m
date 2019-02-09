@@ -1,60 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gsH0A-0005JA-MR
-	for mharc-qemu-riscv@gnu.org; Fri, 08 Feb 2019 20:00:14 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:49531)
+	id 1gsH0D-0005PE-SO
+	for mharc-qemu-riscv@gnu.org; Fri, 08 Feb 2019 20:00:17 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:49584)
 	by lists.gnu.org with esmtp (Exim 4.71)
 	(envelope-from <prvs=9369ea4ad=Alistair.Francis@wdc.com>)
-	id 1gsH03-0005Gr-Ej
-	for qemu-riscv@nongnu.org; Fri, 08 Feb 2019 20:00:13 -0500
+	id 1gsH0B-0005KS-PE
+	for qemu-riscv@nongnu.org; Fri, 08 Feb 2019 20:00:16 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
 	(envelope-from <prvs=9369ea4ad=Alistair.Francis@wdc.com>)
-	id 1gsH02-0006OU-8E
-	for qemu-riscv@nongnu.org; Fri, 08 Feb 2019 20:00:07 -0500
-Received: from esa2.hgst.iphmx.com ([68.232.143.124]:21480)
+	id 1gsH09-0006Xd-Dv
+	for qemu-riscv@nongnu.org; Fri, 08 Feb 2019 20:00:15 -0500
+Received: from esa5.hgst.iphmx.com ([216.71.153.144]:26204)
 	by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.71) (envelope-from <prvs=9369ea4ad=Alistair.Francis@wdc.com>)
-	id 1gsGzv-0006F8-LI; Fri, 08 Feb 2019 19:59:59 -0500
+	id 1gsH05-0006QC-U8; Fri, 08 Feb 2019 20:00:10 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
 	d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
-	t=1549674019; x=1581210019;
+	t=1549674010; x=1581210010;
 	h=from:to:cc:subject:date:message-id:references:
 	in-reply-to:content-transfer-encoding:mime-version;
-	bh=/ZV95K4nHrfbwHh0leF2LpjeFJuS8bDij/lV00ecMwo=;
-	b=dO1lik0LGhHtoR+DK/XOgahCumhzeI4fxFDUic4ghFDo4cao9r+Bk2FS
-	XGYIRgJDl240R/M7hk7d6/49ZTzYhyrJUGIM2ZST82C534U0p/Pmlj0jj
-	UjXaCOwUXn1iJX+44jo807qdGQF9gVdXpDj/XZxR5sSVBbVikUQNnqDiC
-	88ZwEekqXFtDe4TR7A9A+n8lNLczwCb8Se09JsOS+N1FcgjmL3pTtMfJL
-	uNOP3glau4iq1pnQRPW6xZE+OHvfEeYe7LgovsOD1k5V3XzBSdUGsoXpr
-	JyR+bhh7e3Z0yCHqLCSBSfikcAqKzaiJHFE5RQdXve1078n3yp8iWaM1R g==;
-X-IronPort-AV: E=Sophos;i="5.56,564,1539619200"; d="scan'208";a="198999504"
-Received: from mail-cys01nam02lp2058.outbound.protection.outlook.com (HELO
-	NAM02-CY1-obe.outbound.protection.outlook.com) ([104.47.37.58])
-	by ob1.hgst.iphmx.com with ESMTP; 09 Feb 2019 09:00:16 +0800
+	bh=S6Y3NDTcZRwin8Bpei8FNMZBOIhbNRFJWIOwEvW4088=;
+	b=WH2C/p2PkCTA+cT4l+cqreMgO3s4jaQ1fEUqyPynCmGZBqMwX+9DK8lh
+	nBYRZBW2kOrngARLnOvegL495pgIz2m7pZvK6WAjS6NeyrjwCox0mDfLK
+	bjyQ+e8L3gqLLiS5ntU5oUf3ZslMCY20uOi3oXHoiKnR1KJTRDeQJrJm+
+	xzh+fA26fptqr2pYW5EjKNaJmj0M73+Jcg5xw8YWrcN7eMgzpZt6GwSSc
+	o9G9Oib30q8qoU9AFD0/lTK5XS3b/J71n1NQ0ZgHVl7IWaByBcJV8uB05
+	dzOqNYydRxRn1o3jTUlcQxvABFaEeKQWRcMGnmrQhPE+0F7ZNeV/w1c6y A==;
+X-IronPort-AV: E=Sophos;i="5.56,564,1539619200"; d="scan'208";a="102120950"
+Received: from mail-by2nam03lp2059.outbound.protection.outlook.com (HELO
+	NAM03-BY2-obe.outbound.protection.outlook.com) ([104.47.42.59])
+	by ob1.hgst.iphmx.com with ESMTP; 09 Feb 2019 09:00:07 +0800
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=sharedspace.onmicrosoft.com; s=selector1-wdc-com;
 	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=Oe/7r60kvHELNwLMSbBVf7H3g89G2/NlpqkIMvcRAH0=;
-	b=fUgueajAt7/Zk7tsdaXWuRhfrhTLrEcZ5akW5YhbmPMma18kpTphO7tkZXeRt7Vb3y3RcnyhHxko42nmGOs+KVeFsoldV4rQDSM623KT+E40pmqQ3tT0w809H0BpidLrdD6UkXdaDsKkrNCxaRpaBLk2YHx7Sct0S0ZLvt0qyrE=
+	bh=/4eJCY3i0yvilQh83SgUwGJdWU6QwTUiY3wsGQ66N6c=;
+	b=eTp6J49uQluIanw9+nfpEhvh5EnJaFsuOuN88Izymk3kTMHGEwd63MyrvFEIcNCacLdpgoZtd/enM94/6QCPJU/FKA3xx84WWXr+atryFGytwpxPTeQk37eDzNKYhCVrxMx8/eAc/uoWw8jNXQJbmgHaspIgreAsN4dzE3JDshk=
 Received: from CY4PR04MB0392.namprd04.prod.outlook.com (10.173.190.148) by
 	CY4PR04MB0409.namprd04.prod.outlook.com (10.173.188.150) with Microsoft
 	SMTP
 	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
-	15.20.1601.21; Sat, 9 Feb 2019 00:59:56 +0000
+	15.20.1601.21; Sat, 9 Feb 2019 01:00:05 +0000
 Received: from CY4PR04MB0392.namprd04.prod.outlook.com
 	([fe80::2057:d590:6918:b286]) by
 	CY4PR04MB0392.namprd04.prod.outlook.com
 	([fe80::2057:d590:6918:b286%9]) with mapi id 15.20.1601.016;
-	Sat, 9 Feb 2019 00:59:56 +0000
+	Sat, 9 Feb 2019 01:00:05 +0000
 From: Alistair Francis <Alistair.Francis@wdc.com>
 To: "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, "qemu-riscv@nongnu.org"
 	<qemu-riscv@nongnu.org>
 CC: Alistair Francis <Alistair.Francis@wdc.com>, "alistair23@gmail.com"
 	<alistair23@gmail.com>
-Thread-Topic: [PATCH v1 04/11] RISC-V: Allow interrupt controllers to claim
-	interrupts
-Thread-Index: AQHUwBLG14WX+MEk0UCiYs+PnsSttA==
-Date: Sat, 9 Feb 2019 00:59:56 +0000
-Message-ID: <e1345bc6141130d7d7b3414377964d1223cf09ae.1549673900.git.alistair.francis@wdc.com>
+Thread-Topic: [PATCH v1 05/11] RISC-V: Remove unnecessary disassembler
+	constraints
+Thread-Index: AQHUwBLLuqT48gA+OE+NUmpSedDc8g==
+Date: Sat, 9 Feb 2019 01:00:05 +0000
+Message-ID: <875b00b989a60fabb3a03353253ce8d939b5ce28.1549673900.git.alistair.francis@wdc.com>
 References: <cover.1549673900.git.alistair.francis@wdc.com>
 In-Reply-To: <cover.1549673900.git.alistair.francis@wdc.com>
 Accept-Language: en-US
@@ -62,49 +62,49 @@ Content-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
 x-mailer: git-send-email 2.20.1
-x-clientproxiedby: BYAPR02CA0047.namprd02.prod.outlook.com
-	(2603:10b6:a03:54::24) To CY4PR04MB0392.namprd04.prod.outlook.com
+x-clientproxiedby: BYAPR04CA0028.namprd04.prod.outlook.com
+	(2603:10b6:a03:40::41) To CY4PR04MB0392.namprd04.prod.outlook.com
 	(2603:10b6:903:b5::20)
 authentication-results: spf=none (sender IP is )
 	smtp.mailfrom=Alistair.Francis@wdc.com; 
 x-ms-exchange-messagesentrepresentingtype: 1
-x-originating-ip: [199.255.44.170]
+x-originating-ip: [199.255.44.250]
 x-ms-publictraffictype: Email
 x-microsoft-exchange-diagnostics: 1; CY4PR04MB0409;
-	6:m778Cxbqt/0sAed8mcOkGzyTZ9Cnk4F3JWeixJAlwz5GtkNq0FYldIJX/2Mqmhb/ljZqyi0Pqh9wJwZL6yhU1cALzuCieGCcwGdb/z+cyJKpLlnIbtbSWO7GPmr8XTCEYMRqj+/w5PM04NYs/wnQruWF/4gCAAHwttm2e8ffI8elQzaX5IkA/+APzvt1FI8U2NzrSjDjlvZc4lSRTRCFDN8hAsV328x48dmtAU+9Pmf2cFuudks8BfLMNhAXunpa0mmbFQN/sGEo3nuyV1Mb2+ASDeNxjuDzk0h7RKdkt5EPp+6MUpnp+aTq7wc9mOB/P3Ktxbw7wSc0mFepLscJGF/j9V3DaBpeCpANAhb+xxsCawurMQ1f46vVayR2+wObrkidVPLJzfhgBz2nGsNnVrXMLexqB3gRQx1O3YqcKdpx4FOZ9ql7Q9D3o7welDram6VACVLNVNAYGsS3FpeRkQ==;
-	5:F0ya3oWzpyvXf6SPqlIWui8qjnX2fOCNthPGcCuW8clvFDTM2Ls+wgOZgNirarXH9YbJ4ODlgl+/1W8wE5qNiW2nNjE26n+5TXsqkSIszo55P6gpCiYdLdZkabFuhJ9TOIhOekvOzn9mlZw560sx0ODQJRNi8/73i9K7qHW5S8W6YooWPBUyEklYSP6MRmo/UemvtUxXUmKt9HXngXGhow==;
-	7:XLAPJMXt7UA5zJJTmwNPw4+N3cIekIGnu5FjTJ6qCZ8kf/PrU7iAIzsBOEEXy9FNpey9HRt6Qsokn462fJI2lPTuBPP2fn5QjVgFlzUyFasSEJpvWLqlEFr0PpGbN3zhBgPOU/dnamF3t8GcE4eVDg==
-x-ms-office365-filtering-correlation-id: 69192b02-76c4-4589-ea1b-08d68e29e852
+	6:uAfM4nopF8Nz/Uis3qWawWxWN5byJ19kyY3n0tHCskC82/HVBHJLDEfb1nuJlCXgUJFkP4+g7gW/IiBbFrZWzvktWBpFxSDQk4TuJsWmV72WOodoUknJH3TmJHKKs4bLPC7ujzqp+UyNYoy650dxN9pVSOiwt34vQsvpDm513oeyrX7qy+3VwTsTv4shOQEWretgH4E1fcRuH7abpxihZkO6vgEBOzKvR9i1PHYGAQHIVhiOtSWdWzeyCHoD1IlRHYT6LyMp0PbHqFKbtNI8hbSlL2ElDsm2s2Vws3T4Jee/fF7Xm0oVCndhwMrdU+NIj/vr2sZWUtka9tk8CgtZOkMuC+lQJy0Gh9Pd7UV+AWcpzNe9WuPqGPXYBdfn46GPXgmmYWseDNVDl1HlWB0EZCU34rzMfkiG5Gv0b8ZkD3FuedNfKnwwY8tyj/ZsAGMySwcg4KrAO7Zz5Hc4IkmLsQ==;
+	5:UUWxSoeZbB1lmqf0vQ6Zw3BI3xGUmw6yITjPlb7pONdAZOFDSzNwJ1/re6IFTCoenLaIoNklMtEgOJT3vLRYtE8gTx8IVnwQL4moUPygey1HimCrorycnODfu1NAPj0bBHp6SmL/LTsQ2UVAT7wMj//e0Hstw9sWF3CFFsM/2rp1aW7TfqFGuo0XadmoQ7mLRzCUfXGg0JahvTwm+620YQ==;
+	7:hcgateeV3SadDyhVvNWqq2dWRWp7QGXCWghwhzpkZr5ZMYVYbpKaIKkRvEYwzNynutpD7+quNxtSLkDOA5lF3JqZO4y9gHPy6DZlf3YjdbQRLaj1NrSn7dn6Gib6Y78j0xcZIsCJDfDjAviynlR0rA==
+x-ms-office365-filtering-correlation-id: 0f446a34-1030-4a31-19ff-08d68e29edd3
 x-ms-office365-filtering-ht: Tenant
 x-microsoft-antispam: BCL:0; PCL:0;
 	RULEID:(2390118)(7020095)(4652040)(8989299)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(5600110)(711020)(4605077)(4618075)(2017052603328)(7153060)(7193020);
 	SRVR:CY4PR04MB0409; 
 x-ms-traffictypediagnostic: CY4PR04MB0409:
 wdcipoutbound: EOP-TRUE
-x-microsoft-antispam-prvs: <CY4PR04MB0409BDABADE3A0CA64D180E6906A0@CY4PR04MB0409.namprd04.prod.outlook.com>
+x-microsoft-antispam-prvs: <CY4PR04MB0409861798FF1C3D8B9E814D906A0@CY4PR04MB0409.namprd04.prod.outlook.com>
 x-forefront-prvs: 09435FCA72
 x-forefront-antispam-report: SFV:NSPM;
-	SFS:(10019020)(136003)(346002)(366004)(39860400002)(396003)(376002)(189003)(199004)(316002)(6506007)(386003)(86362001)(102836004)(53936002)(97736004)(5024004)(44832011)(256004)(14444005)(66066001)(71190400001)(4326008)(71200400001)(6512007)(36756003)(25786009)(7736002)(305945005)(68736007)(2501003)(2906002)(72206003)(6436002)(50226002)(14454004)(6486002)(2616005)(81156014)(118296001)(11346002)(106356001)(8936002)(105586002)(476003)(81166006)(3846002)(6116002)(52116002)(76176011)(99286004)(8676002)(186003)(54906003)(486006)(26005)(110136005)(446003)(478600001);
+	SFS:(10019020)(136003)(346002)(366004)(39860400002)(396003)(376002)(189003)(199004)(316002)(6506007)(386003)(86362001)(102836004)(53936002)(97736004)(44832011)(256004)(66066001)(71190400001)(4326008)(71200400001)(6512007)(36756003)(25786009)(7736002)(305945005)(68736007)(2501003)(2906002)(72206003)(6436002)(50226002)(14454004)(6486002)(2616005)(81156014)(118296001)(11346002)(106356001)(8936002)(105586002)(476003)(81166006)(3846002)(6116002)(52116002)(76176011)(99286004)(8676002)(186003)(54906003)(486006)(26005)(110136005)(446003)(478600001);
 	DIR:OUT; SFP:1102; SCL:1; SRVR:CY4PR04MB0409;
 	H:CY4PR04MB0392.namprd04.prod.outlook.com; FPR:; SPF:None;
 	LANG:en; PTR:InfoNoRecords; MX:1; A:1; 
 x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam-message-info: EJznk98Av8+n9SdW45kMaMXrekrDBu5fra6ZVgrYY0rxe2JDoooknZ6/0zUSq1YV0riM98UBVqfJBoYTwqllzkckCEK0CxaV7TXwij9sC6l+1QnlnqmUdObrHgUkPqNcOYNhGfhPBiAyH6Uhae8wRJHpLY+j7vKLv+7lK7rFPgK73sSCvVMGH2N8pkTUjkQ16Z5FIbvOL0HgmvQsT+JS5RAdvY7HAHAE3BXEXUgzMd/sDgdudV61KJH4McjCqtIflvTVs6OJld693vCXGo/LgkoHl45ZHkkCLkS0MdmQza4ghvmjazqS7Z1X9pS5N/q1Spx72UaCdMkjJLLjUbGEfj4dwybSzPvbdAx3ji9dz3Ml9TzLPe0faP+KiA+9wF6/jsc+s/QvD7+PHbSGYgNLTEBaADb85BzWbr0a4JpH66Y=
+x-microsoft-antispam-message-info: TkfU2wsBhqoK2xiyKI+BdULSnHDjXgaD2fE7NThF6leaa/ItbMJgmWgJj3wmfY98+zF+oBQrxarX3Xiw6+Yss5hYpQucIYIuPjYAO6E0xY+L7ikMy0awDgmLgUmihZ8RXwXC+CHz2lnGTdDIW/MsEtZ6PSD2NMNdJ4skGkekaFKq5y/coSkHP3PU70M6gMCLgpJdDgpP/Jq2lyEJTrzQvOJYMaQuCzwZDO9tIcDz9fR0tU7JlSU7AsTu+kCsiqZxQvmVPQo/hio4fd37PBQo8PVoHxeATH6mevzrEFPGNRqcExaHZgXRreiUEAh5zMWKZzlre1KUOVCNwVbyF64+vu/33yy9wqh2fahUl4e8apOernpl1rid9SUktD7ZjioakJTrh2xPqmhx0E9WrOczucore25tStAlxPi92I1+ncc=
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
 X-OriginatorOrg: wdc.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 69192b02-76c4-4589-ea1b-08d68e29e852
-X-MS-Exchange-CrossTenant-originalarrivaltime: 09 Feb 2019 00:59:56.0083 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0f446a34-1030-4a31-19ff-08d68e29edd3
+X-MS-Exchange-CrossTenant-originalarrivaltime: 09 Feb 2019 01:00:05.2350 (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
 X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY4PR04MB0409
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 68.232.143.124
-Subject: [Qemu-riscv] [PATCH v1 04/11] RISC-V: Allow interrupt controllers
- to claim interrupts
+X-Received-From: 216.71.153.144
+Subject: [Qemu-riscv] [PATCH v1 05/11] RISC-V: Remove unnecessary
+ disassembler constraints
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -116,22 +116,12 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 09 Feb 2019 01:00:13 -0000
+X-List-Received-Date: Sat, 09 Feb 2019 01:00:16 -0000
 
 From: Michael Clark <mjc@sifive.com>
 
-We can't allow the supervisor to control SEIP as this would allow the
-supervisor to clear a pending external interrupt which will result in
-lost a interrupt in the case a PLIC is attached. The SEIP bit must be
-hardware controlled when a PLIC is attached.
-
-This logic was previously hard-coded so SEIP was always masked even
-if no PLIC was attached. This patch adds riscv_cpu_claim_interrupts
-so that the PLIC can register control of SEIP. In the case of models
-without a PLIC (spike), the SEIP bit remains software controlled.
-
-This interface allows for hardware control of supervisor timer and
-software interrupts by other interrupt controller models.
+Remove machine generated constraints that are not
+referenced by the pseudo-instruction constraints.
 
 Cc: Palmer Dabbelt <palmer@sifive.com>
 Cc: Sagar Karandikar <sagark@eecs.berkeley.edu>
@@ -140,135 +130,188 @@ Cc: Alistair Francis <Alistair.Francis@wdc.com>
 Signed-off-by: Michael Clark <mjc@sifive.com>
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- hw/riscv/sifive_plic.c    | 15 +++++++++++++++
- target/riscv/cpu.h        |  2 ++
- target/riscv/cpu_helper.c | 11 +++++++++++
- target/riscv/csr.c        | 10 ++--------
- 4 files changed, 30 insertions(+), 8 deletions(-)
+ disas/riscv.c | 138 --------------------------------------------------
+ 1 file changed, 138 deletions(-)
 
-diff --git a/hw/riscv/sifive_plic.c b/hw/riscv/sifive_plic.c
-index b859f919a7..1c703e1a37 100644
---- a/hw/riscv/sifive_plic.c
-+++ b/hw/riscv/sifive_plic.c
-@@ -23,6 +23,7 @@
- #include "qemu/error-report.h"
- #include "hw/sysbus.h"
- #include "target/riscv/cpu.h"
-+#include "sysemu/sysemu.h"
- #include "hw/riscv/sifive_plic.h"
+diff --git a/disas/riscv.c b/disas/riscv.c
+index 7fd1019623..27546dd790 100644
+--- a/disas/riscv.c
++++ b/disas/riscv.c
+@@ -87,33 +87,10 @@ typedef enum {
 =20
- #define RISCV_DEBUG_PLIC 0
-@@ -431,6 +432,7 @@ static void sifive_plic_irq_request(void *opaque, int i=
-rq, int level)
- static void sifive_plic_realize(DeviceState *dev, Error **errp)
- {
-     SiFivePLICState *plic =3D SIFIVE_PLIC(dev);
-+    int i;
-=20
-     memory_region_init_io(&plic->mmio, OBJECT(dev), &sifive_plic_ops, plic=
-,
-                           TYPE_SIFIVE_PLIC, plic->aperture_size);
-@@ -443,6 +445,19 @@ static void sifive_plic_realize(DeviceState *dev, Erro=
-r **errp)
-     plic->enable =3D g_new0(uint32_t, plic->bitfield_words * plic->num_add=
-rs);
-     sysbus_init_mmio(SYS_BUS_DEVICE(dev), &plic->mmio);
-     qdev_init_gpio_in(dev, sifive_plic_irq_request, plic->num_sources);
-+
-+    /* We can't allow the supervisor to control SEIP as this would allow t=
-he
-+     * supervisor to clear a pending external interrupt which will result =
-in
-+     * lost a interrupt in the case a PLIC is attached. The SEIP bit must =
-be
-+     * hardware controlled when a PLIC is attached.
-+     */
-+    for (i =3D 0; i < smp_cpus; i++) {
-+        RISCVCPU *cpu =3D RISCV_CPU(qemu_get_cpu(i));
-+        if (riscv_cpu_claim_interrupts(cpu, MIP_SEIP) < 0) {
-+            error_report("SEIP already claimed");
-+            exit(1);
-+        }
-+    }
- }
-=20
- static void sifive_plic_class_init(ObjectClass *klass, void *data)
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 5c2aebf132..a0b3c22dec 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -140,6 +140,7 @@ struct CPURISCVState {
-      * mip is 32-bits to allow atomic_read on 32-bit hosts.
-      */
-     uint32_t mip;
-+    uint32_t miclaim;
-=20
-     target_ulong mie;
-     target_ulong mideleg;
-@@ -263,6 +264,7 @@ void riscv_cpu_list(FILE *f, fprintf_function cpu_fprin=
-tf);
- #define cpu_mmu_index riscv_cpu_mmu_index
-=20
- #ifndef CONFIG_USER_ONLY
-+int riscv_cpu_claim_interrupts(RISCVCPU *cpu, uint32_t interrupts);
- uint32_t riscv_cpu_update_mip(RISCVCPU *cpu, uint32_t mask, uint32_t value=
-);
- #define BOOL_TO_MASK(x) (-!!(x)) /* helper for riscv_cpu_update_mip value =
-*/
- #endif
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index f49e98ed59..555756d40c 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -72,6 +72,17 @@ bool riscv_cpu_exec_interrupt(CPUState *cs, int interrup=
-t_request)
-=20
- #if !defined(CONFIG_USER_ONLY)
-=20
-+int riscv_cpu_claim_interrupts(RISCVCPU *cpu, uint32_t interrupts)
-+{
-+    CPURISCVState *env =3D &cpu->env;
-+    if (env->miclaim & interrupts) {
-+        return -1;
-+    } else {
-+        env->miclaim |=3D interrupts;
-+        return 0;
-+    }
-+}
-+
- /* iothread_mutex must be held */
- uint32_t riscv_cpu_update_mip(RISCVCPU *cpu, uint32_t mask, uint32_t value=
-)
- {
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 960d2b0aa9..938c10897c 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -550,16 +550,10 @@ static int rmw_mip(CPURISCVState *env, int csrno, tar=
-get_ulong *ret_value,
-                    target_ulong new_value, target_ulong write_mask)
- {
-     RISCVCPU *cpu =3D riscv_env_get_cpu(env);
--    target_ulong mask =3D write_mask & delegable_ints;
-+    /* Allow software control of delegable interrupts not claimed by hardw=
-are */
-+    target_ulong mask =3D write_mask & delegable_ints & ~env->miclaim;
-     uint32_t old_mip;
-=20
--    /* We can't allow the supervisor to control SEIP as this would allow t=
-he
--     * supervisor to clear a pending external interrupt which will result =
-in
--     * lost a interrupt in the case a PLIC is attached. The SEIP bit must =
-be
--     * hardware controlled when a PLIC is attached. This should be an opti=
-on
--     * for CPUs with software-delegated Supervisor External Interrupts. */
--    mask &=3D ~MIP_SEIP;
--
-     if (mask) {
-         qemu_mutex_lock_iothread();
-         old_mip =3D riscv_cpu_update_mip(cpu, mask, (new_value & mask));
+ typedef enum {
+     rvc_end,
+-    rvc_simm_6,
+-    rvc_imm_6,
+-    rvc_imm_7,
+-    rvc_imm_8,
+-    rvc_imm_9,
+-    rvc_imm_10,
+-    rvc_imm_12,
+-    rvc_imm_18,
+-    rvc_imm_nz,
+-    rvc_imm_x2,
+-    rvc_imm_x4,
+-    rvc_imm_x8,
+-    rvc_imm_x16,
+-    rvc_rd_b3,
+-    rvc_rs1_b3,
+-    rvc_rs2_b3,
+-    rvc_rd_eq_rs1,
+     rvc_rd_eq_ra,
+-    rvc_rd_eq_sp,
+     rvc_rd_eq_x0,
+-    rvc_rs1_eq_sp,
+     rvc_rs1_eq_x0,
+     rvc_rs2_eq_x0,
+-    rvc_rd_ne_x0_x2,
+-    rvc_rd_ne_x0,
+-    rvc_rs1_ne_x0,
+-    rvc_rs2_ne_x0,
+     rvc_rs2_eq_rs1,
+     rvc_rs1_eq_ra,
+     rvc_imm_eq_zero,
+@@ -2522,111 +2499,16 @@ static bool check_constraints(rv_decode *dec, cons=
+t rvc_constraint *c)
+     uint8_t rd =3D dec->rd, rs1 =3D dec->rs1, rs2 =3D dec->rs2;
+     while (*c !=3D rvc_end) {
+         switch (*c) {
+-        case rvc_simm_6:
+-            if (!(imm >=3D -32 && imm < 32)) {
+-                return false;
+-            }
+-            break;
+-        case rvc_imm_6:
+-            if (!(imm <=3D 63)) {
+-                return false;
+-            }
+-            break;
+-        case rvc_imm_7:
+-            if (!(imm <=3D 127)) {
+-                return false;
+-            }
+-            break;
+-        case rvc_imm_8:
+-            if (!(imm <=3D 255)) {
+-                return false;
+-            }
+-            break;
+-        case rvc_imm_9:
+-            if (!(imm <=3D 511)) {
+-                return false;
+-            }
+-            break;
+-        case rvc_imm_10:
+-            if (!(imm <=3D 1023)) {
+-                return false;
+-            }
+-            break;
+-        case rvc_imm_12:
+-            if (!(imm <=3D 4095)) {
+-                return false;
+-            }
+-            break;
+-        case rvc_imm_18:
+-            if (!(imm <=3D 262143)) {
+-                return false;
+-            }
+-            break;
+-        case rvc_imm_nz:
+-            if (!(imm !=3D 0)) {
+-                return false;
+-            }
+-            break;
+-        case rvc_imm_x2:
+-            if (!((imm & 0b1) =3D=3D 0)) {
+-                return false;
+-            }
+-            break;
+-        case rvc_imm_x4:
+-            if (!((imm & 0b11) =3D=3D 0)) {
+-                return false;
+-            }
+-            break;
+-        case rvc_imm_x8:
+-            if (!((imm & 0b111) =3D=3D 0)) {
+-                return false;
+-            }
+-            break;
+-        case rvc_imm_x16:
+-            if (!((imm & 0b1111) =3D=3D 0)) {
+-                return false;
+-            }
+-            break;
+-        case rvc_rd_b3:
+-            if (!(rd  >=3D 8 && rd  <=3D 15)) {
+-                return false;
+-            }
+-            break;
+-        case rvc_rs1_b3:
+-            if (!(rs1 >=3D 8 && rs1 <=3D 15)) {
+-                return false;
+-            }
+-            break;
+-        case rvc_rs2_b3:
+-            if (!(rs2 >=3D 8 && rs2 <=3D 15)) {
+-                return false;
+-            }
+-            break;
+-        case rvc_rd_eq_rs1:
+-            if (!(rd =3D=3D rs1)) {
+-                return false;
+-            }
+-            break;
+         case rvc_rd_eq_ra:
+             if (!(rd =3D=3D 1)) {
+                 return false;
+             }
+             break;
+-        case rvc_rd_eq_sp:
+-            if (!(rd =3D=3D 2)) {
+-                return false;
+-            }
+-            break;
+         case rvc_rd_eq_x0:
+             if (!(rd =3D=3D 0)) {
+                 return false;
+             }
+             break;
+-        case rvc_rs1_eq_sp:
+-            if (!(rs1 =3D=3D 2)) {
+-                return false;
+-            }
+-            break;
+         case rvc_rs1_eq_x0:
+             if (!(rs1 =3D=3D 0)) {
+                 return false;
+@@ -2637,26 +2519,6 @@ static bool check_constraints(rv_decode *dec, const =
+rvc_constraint *c)
+                 return false;
+             }
+             break;
+-        case rvc_rd_ne_x0_x2:
+-            if (!(rd !=3D 0 && rd !=3D 2)) {
+-                return false;
+-            }
+-            break;
+-        case rvc_rd_ne_x0:
+-            if (!(rd !=3D 0)) {
+-                return false;
+-            }
+-            break;
+-        case rvc_rs1_ne_x0:
+-            if (!(rs1 !=3D 0)) {
+-                return false;
+-            }
+-            break;
+-        case rvc_rs2_ne_x0:
+-            if (!(rs2 !=3D 0)) {
+-                return false;
+-            }
+-            break;
+         case rvc_rs2_eq_rs1:
+             if (!(rs2 =3D=3D rs1)) {
+                 return false;
 --=20
 2.20.1
 
