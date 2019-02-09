@@ -1,60 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gsGzp-00055T-5G
-	for mharc-qemu-riscv@gnu.org; Fri, 08 Feb 2019 19:59:53 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:49423)
+	id 1gsGzv-000599-DH
+	for mharc-qemu-riscv@gnu.org; Fri, 08 Feb 2019 19:59:59 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:49465)
 	by lists.gnu.org with esmtp (Exim 4.71)
 	(envelope-from <prvs=9369ea4ad=Alistair.Francis@wdc.com>)
-	id 1gsGzn-00053g-Oe
-	for qemu-riscv@nongnu.org; Fri, 08 Feb 2019 19:59:52 -0500
+	id 1gsGzr-00057K-0M
+	for qemu-riscv@nongnu.org; Fri, 08 Feb 2019 19:59:58 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
 	(envelope-from <prvs=9369ea4ad=Alistair.Francis@wdc.com>)
-	id 1gsGzm-00068g-Ey
-	for qemu-riscv@nongnu.org; Fri, 08 Feb 2019 19:59:51 -0500
-Received: from esa2.hgst.iphmx.com ([68.232.143.124]:21429)
+	id 1gsGzp-0006BX-Ql
+	for qemu-riscv@nongnu.org; Fri, 08 Feb 2019 19:59:54 -0500
+Received: from esa2.hgst.iphmx.com ([68.232.143.124]:21453)
 	by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.71) (envelope-from <prvs=9369ea4ad=Alistair.Francis@wdc.com>)
-	id 1gsGzd-0005zU-Oo; Fri, 08 Feb 2019 19:59:43 -0500
+	id 1gsGzl-00066Z-KM; Fri, 08 Feb 2019 19:59:50 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
 	d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
-	t=1549673992; x=1581209992;
+	t=1549674003; x=1581210003;
 	h=from:to:cc:subject:date:message-id:references:
 	in-reply-to:content-transfer-encoding:mime-version;
-	bh=AOaFML7kj36rjvBCxvBKU2+Olafu8d1NMlOnDxuHXWA=;
-	b=Bq31ubqcMrjm3S8Ha2YmzEn/q/LA1JXwTOD5IfflUI/mbKFj6Wqpl06A
-	APRsHpVw83ZacjBPuwNXFyCDkufcgTMpAFviXG7Mqvlx5Z6NlSdN5YIpL
-	HUHXRRLPJQ0SYsBwUJ6HC+/9C/CDxYywJQS4kNMiuWbz0thg1HBZ8ue20
-	SRjMxiJs5nhWVhA38pa8qiibGjeyyU9teTENp9aBZ+DMVP1D4KBdmjI/W
-	SeTm0C680ziLNqHA7QqsmGmadpoRFeNcdqk8VWkTgvoJx0GQSAZZE0VP9
-	fOcKnpvUMR+ZwgdaOPH7DA9Q8pcZYeFLGZiizoKN97Hjwxu6vfzLxCeWt g==;
-X-IronPort-AV: E=Sophos;i="5.56,564,1539619200"; d="scan'208";a="198999429"
-Received: from mail-cys01nam02lp2050.outbound.protection.outlook.com (HELO
-	NAM02-CY1-obe.outbound.protection.outlook.com) ([104.47.37.50])
-	by ob1.hgst.iphmx.com with ESMTP; 09 Feb 2019 08:59:48 +0800
+	bh=eQHutzBkg+MuK+9r7qFhvRqlUbAmjuoDuycfdsoW7JA=;
+	b=TrXQFvxMle+cmPxvjNWJOYki6FiSuY892MYSYaRwmokTqY0W/a+5qQCF
+	1pZhkxUT1B1C7kbcb0+cbB2ggliXA5Zv+mcKA+lzEhbK6QhOG9RPhL5PK
+	As7FrWmfaKD/ixHbRHfIyTVyPsbdBE62XIaccBAz6Q95sZLZD4BcMP9Ml
+	tkhBbnYAAU4OcB/F4Na7FpL5JTxhoD0w/g7A/iCfxe69bwIJF/mqNLIof
+	hZdoV+PpYMtvb9qthCoMCJmbyUXrWboa4kltQ0UGT4BTTaN6YPvFbOx4q
+	yXNvowOGXlEpYMTO87zXRD9BDJOPeJD+AFzYSAsmMbHBtanvCMIsD1Eg4 g==;
+X-IronPort-AV: E=Sophos;i="5.56,564,1539619200"; d="scan'208";a="198999454"
+Received: from mail-cys01nam02lp2057.outbound.protection.outlook.com (HELO
+	NAM02-CY1-obe.outbound.protection.outlook.com) ([104.47.37.57])
+	by ob1.hgst.iphmx.com with ESMTP; 09 Feb 2019 09:00:02 +0800
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=sharedspace.onmicrosoft.com; s=selector1-wdc-com;
 	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=McK/qEiyWRH1yKxgD4bsiQmUaVqmhQgC6fbggKB8x8Y=;
-	b=nZal/Zbi6B4J4Q0Mt5fwcy9TTvhd4SErLTUZdMPy1GrHpij0NgI1SKLzZ14qllhgKLrPCYm8ppiaFQqv5BMn8I2Ns0PkVcDdq1M1Lr6PW1SNorXi90BL920UaTtHEuQ/CgzzOwfoLOQGju+aBqE7Owh/0NfXcupWDRJPowaZWWY=
+	bh=fV5SB8InIRHifiGcqdZUxttnMmEUfryYqpgS4uJJi9k=;
+	b=aiTVf3frhSno6t5NFdKBJWihz/Y2jqkxPWXzprmY2H0/2Q2Zsah9e0XSksQYuRwshS1CaJ2XNkJxeJkwwhv3T3dSpZ0hYcvO3TlCukLXXlFnHDSIR3SB50HgsC60csuI9QAFSMh0JvXm/PSpEq/Fo6oNKSA7dbBms113hNi8h4w=
 Received: from CY4PR04MB0392.namprd04.prod.outlook.com (10.173.190.148) by
 	CY4PR04MB0409.namprd04.prod.outlook.com (10.173.188.150) with Microsoft
 	SMTP
 	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
-	15.20.1601.21; Sat, 9 Feb 2019 00:59:38 +0000
+	15.20.1601.21; Sat, 9 Feb 2019 00:59:47 +0000
 Received: from CY4PR04MB0392.namprd04.prod.outlook.com
 	([fe80::2057:d590:6918:b286]) by
 	CY4PR04MB0392.namprd04.prod.outlook.com
 	([fe80::2057:d590:6918:b286%9]) with mapi id 15.20.1601.016;
-	Sat, 9 Feb 2019 00:59:38 +0000
+	Sat, 9 Feb 2019 00:59:47 +0000
 From: Alistair Francis <Alistair.Francis@wdc.com>
 To: "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, "qemu-riscv@nongnu.org"
 	<qemu-riscv@nongnu.org>
 CC: Alistair Francis <Alistair.Francis@wdc.com>, "alistair23@gmail.com"
 	<alistair23@gmail.com>
-Thread-Topic: [PATCH v1 02/11] riscv: pmp: Log pmp access errors as guest
-	errors
-Thread-Index: AQHUwBK7jOTr2znGkEqtlS2C/dKHeA==
-Date: Sat, 9 Feb 2019 00:59:38 +0000
-Message-ID: <c2daf173b9313126c6cb0babc2728ad82053d668.1549673900.git.alistair.francis@wdc.com>
+Thread-Topic: [PATCH v1 03/11] RISC-V: Replace __builtin_popcount with ctpop8
+	in PLIC
+Thread-Index: AQHUwBLAg9Cek6sczUOdM2721m37XQ==
+Date: Sat, 9 Feb 2019 00:59:47 +0000
+Message-ID: <f3876e4e18060732817a2f657a8bf4e0af75d4d5.1549673900.git.alistair.francis@wdc.com>
 References: <cover.1549673900.git.alistair.francis@wdc.com>
 In-Reply-To: <cover.1549673900.git.alistair.francis@wdc.com>
 Accept-Language: en-US
@@ -62,8 +62,8 @@ Content-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
 x-mailer: git-send-email 2.20.1
-x-clientproxiedby: BYAPR04CA0031.namprd04.prod.outlook.com
-	(2603:10b6:a03:40::44) To CY4PR04MB0392.namprd04.prod.outlook.com
+x-clientproxiedby: BYAPR04CA0027.namprd04.prod.outlook.com
+	(2603:10b6:a03:40::40) To CY4PR04MB0392.namprd04.prod.outlook.com
 	(2603:10b6:903:b5::20)
 authentication-results: spf=none (sender IP is )
 	smtp.mailfrom=Alistair.Francis@wdc.com; 
@@ -71,31 +71,31 @@ x-ms-exchange-messagesentrepresentingtype: 1
 x-originating-ip: [199.255.44.250]
 x-ms-publictraffictype: Email
 x-microsoft-exchange-diagnostics: 1; CY4PR04MB0409;
-	6:0/RMWdDaxhyCOeUHNujKieLQoNu2Sr8YoTF0vjkv6aaMvFXKItIFUCys9WLfEY+f/NKK2vlyVqOJ3/RTWeJeBuqZkis1JfGX7c0xKU9GxHRpa/i2nAOaiMrrv8BT8P99Za8d5ldyLDwrDxu+sUFquG90JszinexR+kWp9IEW64f6ilOB5CJmcBR7vyRe0P3X+Is4K3kWCVcB3iBGThtjIaPqEpS3fx02hfnJYU1TAjWiLfyaqr7/ppvvF5Ec4/Ssun1Hl85x308uzS/5uEEa5adgVMbEHJWBywtqODpghwreHHP/M80ew9ZP8K97FByvPzkIY2AcYs1QPMj6YH2xO8GO9O2NYYj+mswbeUStCD//dAe/DirFmMsyaD+11uzwj+V2JT5sk562cbCCClpfBYvy4ePIkhN74yj39XZNnSAEcvLM374EQM8JLjgheWaSrk9wf0zPkOvI8aH1Gb47Og==;
-	5:X9vICU62vLVuKEdxa+MMuWp3bqR2QbpZ9UXmlkpUW644mRWVDLzhU4k+YpbOI46FWCUaFLySNK4LR19Y3sCXetuHfgYLUMIH1+AoO/UDqhFJg8UIt9iCtUUzya3wRoNVNXR6ADFaYXvT6e9MYcCmrm7+jetEfkhPgMUTJb1yDy6fvotZz6/b35UALTWxGM/qoDYBz/tc6fnpLs4o0+QCCA==;
-	7:fSBHgjK7B2DLeJC1OTBIzknNFJMoedmIBfPKTSdf/CzQKmEhYm4NEz9Os30djVJk5jvsV74fqdba+gDq8n+z1VhrCpE21ssG6wSN2CvBicw7BFy0bvxXBFznYXWKUks1FBpD6PCym/PkiYMMRlDo4w==
-x-ms-office365-filtering-correlation-id: 0ba7a395-375a-4186-4596-08d68e29dd62
+	6:8EwhbvtAv94cPSvynSJObRfMFh06A68EUA1S0y9sOEPa1s7d3MLl2n52dndR/R4ayZ+9ZrjZCZk33hVirat1x3PDc07miuVsWAvyRrlzdYPyrk36+o1V2TqwmlTIULpeMJaR1fZ9dS45ScswvsoIGV3Ntwt7UZPUKa5diGBdNbgzK767dYR/WzKRSL7vznDz9iERvdYRXaOMbsY+rZPfH357QxJcExo4ze13i1ad3/BRKSyhUbaxnFPZ/iFGAr9HN4MRxgSU2vKA0rWesJUr/U4yYjAe4aipwA4w/JhDmA9WWkgcyj2Su2XDrI2vpX39N0fFQVfwHT9f39uJxuKs1kxKVtKGDkaPScEylEGB6jl4sUuXaiFe7pkPLoym5EZSNID1zrz2gb7pNTF+5ypmisgy85p9RIlteRvkBUyxgh4sraqrRCm/P+bsCS7SiamipZgp3XQ1le7qvVpVaHxVNw==;
+	5:hvSJM4eIo/f115eKe+DWIsciN92Se8djls9QVLWagqpJxMFiKn3gVc30k64e9CpXV/HzAD0eZnt797xKMFibJjuMm+OkwxWgX8wLLV3gE2+ydlqLAz2B5/TKMMjDSlVcEuSloYDYrFgz1DB1e83wxRdJUw86tV27ZZdthvSoDh7P12tdv1+lkOfm+/aVUIeMvgrtoGvveN5lKcC5VErcRg==;
+	7:JxnUiPaHPF8M+r7HsZdZ+0iSJeBKya99WHpy2LYQYQv6qsQHVZ7Sx5C++uemwuzKlkjJpcDgL0guQVQ6JIxdCKvhbBEyXpjY70eB3CAkmI0xY1Qq9Ogtl16f4Wek6sQmBN5RIDwDgyBv4ZIICt+JOg==
+x-ms-office365-filtering-correlation-id: 3fd10182-fb16-4c1a-c987-08d68e29e2ca
 x-ms-office365-filtering-ht: Tenant
 x-microsoft-antispam: BCL:0; PCL:0;
 	RULEID:(2390118)(7020095)(4652040)(8989299)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(5600110)(711020)(4605077)(4618075)(2017052603328)(7153060)(7193020);
 	SRVR:CY4PR04MB0409; 
 x-ms-traffictypediagnostic: CY4PR04MB0409:
 wdcipoutbound: EOP-TRUE
-x-microsoft-antispam-prvs: <CY4PR04MB0409BB67A29032D723930BEC906A0@CY4PR04MB0409.namprd04.prod.outlook.com>
+x-microsoft-antispam-prvs: <CY4PR04MB040933140884F49CE94E58B2906A0@CY4PR04MB0409.namprd04.prod.outlook.com>
 x-forefront-prvs: 09435FCA72
 x-forefront-antispam-report: SFV:NSPM;
-	SFS:(10019020)(136003)(346002)(366004)(39860400002)(396003)(376002)(189003)(199004)(316002)(6506007)(386003)(86362001)(102836004)(53936002)(97736004)(44832011)(256004)(14444005)(66066001)(71190400001)(4326008)(71200400001)(6512007)(36756003)(25786009)(7736002)(305945005)(68736007)(2501003)(2906002)(72206003)(6436002)(50226002)(14454004)(6486002)(2616005)(81156014)(118296001)(11346002)(106356001)(8936002)(105586002)(476003)(81166006)(3846002)(6116002)(52116002)(76176011)(99286004)(8676002)(186003)(54906003)(486006)(26005)(110136005)(446003)(478600001);
+	SFS:(10019020)(136003)(346002)(366004)(39860400002)(396003)(376002)(189003)(199004)(316002)(6506007)(386003)(86362001)(102836004)(53936002)(97736004)(44832011)(256004)(66066001)(71190400001)(4326008)(71200400001)(6512007)(36756003)(25786009)(7736002)(305945005)(68736007)(2501003)(2906002)(72206003)(4744005)(6436002)(50226002)(14454004)(6486002)(2616005)(81156014)(118296001)(11346002)(106356001)(8936002)(105586002)(476003)(81166006)(3846002)(6116002)(52116002)(76176011)(99286004)(8676002)(186003)(54906003)(486006)(26005)(110136005)(446003)(478600001);
 	DIR:OUT; SFP:1102; SCL:1; SRVR:CY4PR04MB0409;
 	H:CY4PR04MB0392.namprd04.prod.outlook.com; FPR:; SPF:None;
 	LANG:en; PTR:InfoNoRecords; MX:1; A:1; 
 x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam-message-info: bD78bJTHV9VM1HtVDRKtZDhCdgpKmld4olHgDWunn5wl8DHxWixTjglNhowSa/C+MiltBiSCh0BtkfFHZ+KQfd76m/Us18BKokAj42uWyIWfiOymolELzKOfCv+BUkf8ZUNVYRq3lvoGD3BDVRMeuhTCsjpQleJbG4sKtCJ0u8k0BJvslWvD1chp3PD8kbR+MBbQetpTAmKQFXMe8bQ0koCrjhnpbS1axGUYNRqhz0AXr5E7f8nq7K2d8Byt0C2axgugaBx8WQBg6YkB/rMFtpmrTVti5IPp2ZFVXYp9VMH8FE9jNoB2xD8WdsDDK6ONnYWZF+gREiB6iLXWK3OgdGam/VpDfSk8zqmZIS9FVxoUgUxyWVgfqCIbYTXe8+t9VWGVpB1L7r3K1BFCIIc5x08bq0Xz0F3X3yHONgG4ifg=
+x-microsoft-antispam-message-info: iT0O+AsGIjt3KxeIEmG9LloK0Pq5t1pMEPeNUFGnpjJFtK/tiHCfykRFxFjzMfUcbsWvyxaeX+No9eafLV1BoZ5tnblREFnPJUCJyDJ7v1W4OXdvUpM1Who+h7rRi+G0xMJ9qH4lhUGI6LFDrKlNKWCDvL1VIpoGWlkX3ehixS2VeVJ8E+vk4l99/eWC+TwYWZPyoO5POPPJof2aFYT9AYyKfT+FBEp/ObpwqPXIe6w5bR2boF+EnWpFDkfxv2du3GoOr3VOdeMgc5jYrXBaqER7HL8wGtdUJrrBu9Pz1WJOdqsb+Uu9kuceyezahT/zFClqD5mBn/fhF2QFRIdLhRxYZI8QU1RAC3w+zeOci8JjFFx/WHIvNnQFHf3cvdbSTSPdsWFYL8iPlkqRxMVESRbEeUfhVF319+SgHauceaM=
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
 X-OriginatorOrg: wdc.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0ba7a395-375a-4186-4596-08d68e29dd62
-X-MS-Exchange-CrossTenant-originalarrivaltime: 09 Feb 2019 00:59:37.6550 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3fd10182-fb16-4c1a-c987-08d68e29e2ca
+X-MS-Exchange-CrossTenant-originalarrivaltime: 09 Feb 2019 00:59:46.7276 (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
 X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
@@ -103,8 +103,8 @@ X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY4PR04MB0409
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
 X-Received-From: 68.232.143.124
-Subject: [Qemu-riscv] [PATCH v1 02/11] riscv: pmp: Log pmp access errors as
- guest errors
+Subject: [Qemu-riscv] [PATCH v1 03/11] RISC-V: Replace __builtin_popcount
+ with ctpop8 in PLIC
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -116,82 +116,45 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 09 Feb 2019 00:59:52 -0000
+X-List-Received-Date: Sat, 09 Feb 2019 00:59:58 -0000
 
+From: Michael Clark <mjc@sifive.com>
+
+The mode variable only uses the lower 4-bits (M,H,S,U) so
+replace the GCC specific __builtin_popcount with ctpop8.
+
+Cc: Palmer Dabbelt <palmer@sifive.com>
+Cc: Sagar Karandikar <sagark@eecs.berkeley.edu>
+Cc: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>
+Signed-off-by: Michael Clark <mjc@sifive.com>
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/pmp.c | 20 +++++++++++++-------
- 1 file changed, 13 insertions(+), 7 deletions(-)
+ hw/riscv/sifive_plic.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-index 15a5366616..b11c4ae22f 100644
---- a/target/riscv/pmp.c
-+++ b/target/riscv/pmp.c
-@@ -113,10 +113,11 @@ static void pmp_write_cfg(CPURISCVState *env, uint32_=
-t pmp_index, uint8_t val)
-             env->pmp_state.pmp[pmp_index].cfg_reg =3D val;
-             pmp_update_rule(env, pmp_index);
+diff --git a/hw/riscv/sifive_plic.c b/hw/riscv/sifive_plic.c
+index d12ec3fc9a..b859f919a7 100644
+--- a/hw/riscv/sifive_plic.c
++++ b/hw/riscv/sifive_plic.c
+@@ -383,7 +383,7 @@ static void parse_hart_config(SiFivePLICState *plic)
+     p =3D plic->hart_config;
+     while ((c =3D *p++)) {
+         if (c =3D=3D ',') {
+-            addrid +=3D __builtin_popcount(modes);
++            addrid +=3D ctpop8(modes);
+             modes =3D 0;
+             hartid++;
          } else {
--            PMP_DEBUG("ignoring write - locked");
-+            qemu_log_mask(LOG_GUEST_ERROR, "ignoring pmpcfg write - locked=
-\n");
+@@ -397,7 +397,7 @@ static void parse_hart_config(SiFivePLICState *plic)
          }
-     } else {
--        PMP_DEBUG("ignoring write - out of bounds");
-+        qemu_log_mask(LOG_GUEST_ERROR,
-+                      "ignoring pmpcfg write - out of bounds\n");
      }
- }
-=20
-@@ -249,7 +250,8 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulon=
-g addr,
-=20
-         /* partially inside */
-         if ((s + e) =3D=3D 1) {
--            PMP_DEBUG("pmp violation - access is partially inside");
-+            qemu_log_mask(LOG_GUEST_ERROR,
-+                          "pmp violation - access is partially inside\n");
-             ret =3D 0;
-             break;
-         }
-@@ -306,7 +308,8 @@ void pmpcfg_csr_write(CPURISCVState *env, uint32_t reg_=
-index,
-         env->mhartid, reg_index, val);
-=20
-     if ((reg_index & 1) && (sizeof(target_ulong) =3D=3D 8)) {
--        PMP_DEBUG("ignoring write - incorrect address");
-+        qemu_log_mask(LOG_GUEST_ERROR,
-+                      "ignoring pmpcfg write - incorrect address\n");
-         return;
+     if (modes) {
+-        addrid +=3D __builtin_popcount(modes);
++        addrid +=3D ctpop8(modes);
      }
+     hartid++;
 =20
-@@ -353,10 +356,12 @@ void pmpaddr_csr_write(CPURISCVState *env, uint32_t a=
-ddr_index,
-             env->pmp_state.pmp[addr_index].addr_reg =3D val;
-             pmp_update_rule(env, addr_index);
-         } else {
--            PMP_DEBUG("ignoring write - locked");
-+            qemu_log_mask(LOG_GUEST_ERROR,
-+                          "ignoring pmpaddr write - locked\n");
-         }
-     } else {
--        PMP_DEBUG("ignoring write - out of bounds");
-+        qemu_log_mask(LOG_GUEST_ERROR,
-+                      "ignoring pmpaddr write - out of bounds\n");
-     }
- }
-=20
-@@ -372,7 +377,8 @@ target_ulong pmpaddr_csr_read(CPURISCVState *env, uint3=
-2_t addr_index)
-     if (addr_index < MAX_RISCV_PMPS) {
-         return env->pmp_state.pmp[addr_index].addr_reg;
-     } else {
--        PMP_DEBUG("ignoring read - out of bounds");
-+        qemu_log_mask(LOG_GUEST_ERROR,
-+                      "ignoring pmpaddr read - out of bounds\n");
-         return 0;
-     }
- }
 --=20
 2.20.1
 
