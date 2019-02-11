@@ -1,65 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gsvbF-0004Xg-B8
-	for mharc-qemu-riscv@gnu.org; Sun, 10 Feb 2019 15:21:13 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:43319)
+	id 1gtG9M-0003Jf-0h
+	for mharc-qemu-riscv@gnu.org; Mon, 11 Feb 2019 13:17:48 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:47218)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <lukas.auer@aisec.fraunhofer.de>) id 1gsvbD-0004TW-0o
-	for qemu-riscv@nongnu.org; Sun, 10 Feb 2019 15:21:11 -0500
+	(envelope-from <palmer@sifive.com>) id 1gtG9J-0003JJ-Jg
+	for qemu-riscv@nongnu.org; Mon, 11 Feb 2019 13:17:46 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <lukas.auer@aisec.fraunhofer.de>) id 1gsvYc-00074I-Mv
-	for qemu-riscv@nongnu.org; Sun, 10 Feb 2019 15:18:32 -0500
-Received: from mail-edgedd24.fraunhofer.de ([192.102.167.24]:47646)
-	by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.71) (envelope-from <lukas.auer@aisec.fraunhofer.de>)
-	id 1gsvYb-00071O-Sa; Sun, 10 Feb 2019 15:18:30 -0500
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: =?us-ascii?q?A2EVAAAO4PJb/xmnZsBiGgEBAQEBAgEBA?=
-	=?us-ascii?q?QEHAgEBAQGBVAIBAQEBCwGCA4FWOYxvix2bPQ2EbINwIjcGDQEDAQECAQECAgJ?=
-	=?us-ascii?q?pKIVrCwFGgR4gAQ0FgyGCAqhJM4ocCQGHUIQrgVc/gRGHWYYSAosIlGcHAoERg?=
-	=?us-ascii?q?QkEjn4LGIlYhyQBmBaBXCOBVTMaJIM7gicXjh0+ATIBjA6CTQEB?=
-X-IPAS-Result: =?us-ascii?q?A2EVAAAO4PJb/xmnZsBiGgEBAQEBAgEBAQEHAgEBAQGBVAI?=
-	=?us-ascii?q?BAQEBCwGCA4FWOYxvix2bPQ2EbINwIjcGDQEDAQECAQECAgJpKIVrCwFGgR4gA?=
-	=?us-ascii?q?Q0FgyGCAqhJM4ocCQGHUIQrgVc/gRGHWYYSAosIlGcHAoERgQkEjn4LGIlYhyQ?=
-	=?us-ascii?q?BmBaBXCOBVTMaJIM7gicXjh0+ATIBjA6CTQEB?=
-X-IronPort-AV: E=Sophos;i="5.56,253,1539640800"; d="scan'208";a="23237006"
-Received: from mail-mtadd25.fraunhofer.de ([192.102.167.25])
-	by mail-edgeDD24.fraunhofer.de with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	10 Feb 2019 21:18:15 +0100
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: =?us-ascii?q?A0A1AAAq4PJb/xBhWMBiGwEBAQEDAQEBB?=
-	=?us-ascii?q?wMBAQGBVAMBAQELAYM4ITmMb6ZaDYRshBE3Bg0BAwEBAgEBAm0ohWoLAUaBHiA?=
-	=?us-ascii?q?BDQWDIYICqEkzih0JAYdQhgI/gRGHWYYSAosIlGcHAoERgQkEjn4LGIlYhyQBm?=
-	=?us-ascii?q?BaBXCKBVTMaJIM7gicXjh0+AzABjA6CTQEB?=
-X-IronPort-AV: E=Sophos;i="5.56,253,1539640800"; d="scan'208";a="31585611"
-Received: from fgdemucivp01ltm.xch.fraunhofer.de (HELO
-	FGDEMUCIMP11EXC.ads.fraunhofer.de) ([192.88.97.16])
-	by mail-mtaDD25.fraunhofer.de with ESMTP/TLS/AES256-SHA;
-	10 Feb 2019 21:18:13 +0100
-Received: from localhost.de (10.80.233.50) by
-	FGDEMUCIMP11EXC.ads.fraunhofer.de (10.80.232.42) with Microsoft SMTP
-	Server (TLS) id 14.3.435.0; Sun, 10 Feb 2019 21:18:12 +0100
-From: Lukas Auer <lukas.auer@aisec.fraunhofer.de>
-To: <qemu-devel@nongnu.org>, <qemu-riscv@nongnu.org>
-CC: Lukas Auer <lukas.auer@aisec.fraunhofer.de>, Alistair Francis
-	<Alistair.Francis@wdc.com>, Palmer Dabbelt <palmer@sifive.com>,
-	Michael Clark
-	<mjc@sifive.com>, Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
-	"Sagar Karandikar" <sagark@eecs.berkeley.edu>
-Date: Sun, 10 Feb 2019 21:17:26 +0100
-Message-ID: <20190210201726.3567-1-lukas.auer@aisec.fraunhofer.de>
-X-Mailer: git-send-email 2.20.1
-MIME-Version: 1.0
+	(envelope-from <palmer@sifive.com>) id 1gtG9I-0002Ie-EZ
+	for qemu-riscv@nongnu.org; Mon, 11 Feb 2019 13:17:45 -0500
+Received: from mail-pf1-x444.google.com ([2607:f8b0:4864:20::444]:41652)
+	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1gtG9H-0002FQ-U8
+	for qemu-riscv@nongnu.org; Mon, 11 Feb 2019 13:17:44 -0500
+Received: by mail-pf1-x444.google.com with SMTP id b7so5627204pfi.8
+	for <qemu-riscv@nongnu.org>; Mon, 11 Feb 2019 10:17:43 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+	h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
+	:content-transfer-encoding;
+	bh=GGup1GtH3/PR94/FYNlr9ZXn7Q4Ys63kyvloGeu9fz4=;
+	b=FOTtvVcdMaYhk9WqXaX+9xaWVF2enSMlNweBPJLksociakaCF2aKoZoNB+KzZbO6DB
+	nqYjjc/RnKEdlvTYN3UAvlRTytSCRlM4HNNmPcAgGPYHOTcNi0fZVy522u/CXJ8hIVr2
+	nRexikkODdbcl5zZae4qRjpGcRcyST0IocO9COhjOX8gfJDk9TbfDMXCzjhftKzuBdpR
+	3k9Wec/7EJ0cPOeg2jU/RbNGVqarowtpYiv0NsCgRLFoVmMwBgdL2yuKDEToyae8NTnK
+	R/dxOl/vRLWSPzr09FeoHtLTjCEWNf9YqfAdL0ih7iRWCXgKQJJ2PgcxBw1WqqY5yRFX
+	lKnQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
+	:mime-version:content-transfer-encoding;
+	bh=GGup1GtH3/PR94/FYNlr9ZXn7Q4Ys63kyvloGeu9fz4=;
+	b=M3gxEUr575oZR4cPJx/2JhSSKX7Ekj/17c8Z1sYdfweG3aS+YXHkx9xGzlB/+EmYSZ
+	2IEMSq8kr3uxf4KEQovZqZEvJcpWOCfTpCQqG3a0A/fw/gJyBV+k5jsKu46qDhNd41hS
+	NCIiV9d53HjX/ss/yfhpsv+LbUplAscr3LZO8jZGsN7ridAcE4uBxwpONHWfyQeIYADt
+	pA7WMgnqkZnFeaJH4dTEQUV6JeLW4GeciM7FAQAdk7KuAUZHhw+0lpP35GKiOHJ3GgYD
+	sZyZhwHd8DEIpAzM9C0ZgMTJXhTvNqTOAzU9H9SfPqGGWsPBhFyzhVhB+i4AGI5JUVgc
+	Z1Rg==
+X-Gm-Message-State: AHQUAub+bdRt7YqajjtVxyCX3f9P04kX0+RylAV2sQ8W/bBatQgpL/Dg
+	TUPVKuA5Egzeg5iCK5rvHc1M2Q==
+X-Google-Smtp-Source: AHgI3IZYgo77w8106uNn4GLp3CmQTe2u1KhQXILfWQtFawTQ5lIx52U2BwX9jWlvBKwLIMAmV2Xx6g==
+X-Received: by 2002:a63:2d43:: with SMTP id t64mr13837793pgt.155.1549909061873;
+	Mon, 11 Feb 2019 10:17:41 -0800 (PST)
+Received: from localhost ([12.206.222.5]) by smtp.gmail.com with ESMTPSA id
+	l2sm14925657pgn.52.2019.02.11.10.17.40
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 11 Feb 2019 10:17:41 -0800 (PST)
+Date: Mon, 11 Feb 2019 10:17:41 -0800 (PST)
+X-Google-Original-Date: Mon, 11 Feb 2019 10:17:21 PST (-0800)
+In-Reply-To: <CAKmqyKOr5eX1hQXURdz6Y7qDgygGOwYyFeKKZCH83UuuRkuR9w@mail.gmail.com>
+CC: Jim Wilson <jimw@sifive.com>, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+From: Palmer Dabbelt <palmer@sifive.com>
+To: alistair23@gmail.com
+Message-ID: <mhng-f2a3d61b-68dc-4842-a695-0eff3c6d81e4@palmer-si-x1c4>
+Mime-Version: 1.0 (MHng)
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-TM-AS-Product-Ver: SMEX-11.0.0.4179-8.200.1013-24422.001
-X-TM-AS-Result: No--5.248900-8.000000-31
-X-TM-AS-User-Approved-Sender: No
-X-TM-AS-User-Blocked-Sender: No
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 192.102.167.24
-Subject: [Qemu-riscv] [PATCH] hw/riscv/virt: re-add machine-specific
- compatible string to /soc/ node
+X-Received-From: 2607:f8b0:4864:20::444
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH 5/5 v3] RISC-V: Add hooks to
+ use the gdb xml files.
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -71,45 +70,31 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 10 Feb 2019 20:21:12 -0000
+X-List-Received-Date: Mon, 11 Feb 2019 18:17:46 -0000
 
-Re-add the previous compatible string "riscv-virtio-soc" to the soc
-device tree node to allow U-Boot and Linux to bind machine-specific
-drivers to it. The current compatible string "simple-bus" is retained.
+On Fri, 08 Feb 2019 11:28:48 PST (-0800), alistair23@gmail.com wrote:
+> On Fri, Feb 8, 2019 at 11:09 AM Jim Wilson <jimw@sifive.com> wrote:
+>>
+>> On Fri, Feb 8, 2019 at 10:17 AM Alistair Francis <alistair23@gmail.com> wrote:
+>> > Can we just write a wrapper function then that sets and unsets the variable?
+>> > Something like this:
+>> >
+>> > riscv_csrrw_debug(...) {
+>> >     #if !defined(CONFIG_USER_ONLY)
+>> >             env->debugger = true;
+>> >     #endif
+>> >             result = riscv_csrrw(env, ...);
+>> >     #if !defined(CONFIG_USER_ONLY)
+>> >             env->debugger = false;
+>> >     #endif
+>> > }
+>>
+>> Yes, that would work.  Do you want me to resubmit a fixed part 5 patch?
+>
+> It's probably best to send out a new version of the whole series.
+> Include all the Reviewed-by tags and then that should be the last
+> version and Palmer can apply that series directly.
 
-This is required by U-Boot to bind devices early, as part of the
-pre-relocation driver model.
-
-Fixes: 53f54508dae6("hw/riscv/virtio: Set the soc device tree node as a
-simple-bus")
-Signed-off-by: Lukas Auer <lukas.auer@aisec.fraunhofer.de>
----
-
- hw/riscv/virt.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
-
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index 3e8b19c668..c53bb905ff 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -157,6 +157,7 @@ static void *create_fdt(RISCVVirtState *s, const struct MemmapEntry *memmap,
-     char *nodename;
-     uint32_t plic_phandle, phandle = 1;
-     int i;
-+    const char soc_compat[] = "riscv-virtio-soc\0simple-bus";
- 
-     fdt = s->fdt = create_device_tree(&s->fdt_size);
-     if (!fdt) {
-@@ -171,7 +172,7 @@ static void *create_fdt(RISCVVirtState *s, const struct MemmapEntry *memmap,
- 
-     qemu_fdt_add_subnode(fdt, "/soc");
-     qemu_fdt_setprop(fdt, "/soc", "ranges", NULL, 0);
--    qemu_fdt_setprop_string(fdt, "/soc", "compatible", "simple-bus");
-+    qemu_fdt_setprop(fdt, "/soc", "compatible", soc_compat, sizeof(soc_compat));
-     qemu_fdt_setprop_cell(fdt, "/soc", "#size-cells", 0x2);
-     qemu_fdt_setprop_cell(fdt, "/soc", "#address-cells", 0x2);
- 
--- 
-2.20.1
-
+Ya, that's the best way to do it.  That way everyone is on the same page about 
+exactly what is going in.
 
