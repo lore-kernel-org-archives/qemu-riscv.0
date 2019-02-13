@@ -1,65 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gtwYM-00055H-10
-	for mharc-qemu-riscv@gnu.org; Wed, 13 Feb 2019 10:34:26 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:53578)
+	id 1gtwis-00026F-Ja
+	for mharc-qemu-riscv@gnu.org; Wed, 13 Feb 2019 10:45:18 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:56242)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1gtwYK-000548-7j
-	for qemu-riscv@nongnu.org; Wed, 13 Feb 2019 10:34:24 -0500
+	(envelope-from <palmer@sifive.com>) id 1gtwiq-000266-LP
+	for qemu-riscv@nongnu.org; Wed, 13 Feb 2019 10:45:18 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1gtwYJ-00068G-D5
-	for qemu-riscv@nongnu.org; Wed, 13 Feb 2019 10:34:24 -0500
-Received: from mail-pg1-x542.google.com ([2607:f8b0:4864:20::542]:39226)
+	(envelope-from <palmer@sifive.com>) id 1gtwio-0006fD-Mq
+	for qemu-riscv@nongnu.org; Wed, 13 Feb 2019 10:45:16 -0500
+Received: from mail-pg1-x530.google.com ([2607:f8b0:4864:20::530]:33951)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1gtwYJ-00067O-4o
-	for qemu-riscv@nongnu.org; Wed, 13 Feb 2019 10:34:23 -0500
-Received: by mail-pg1-x542.google.com with SMTP id r11so1285137pgp.6
-	for <qemu-riscv@nongnu.org>; Wed, 13 Feb 2019 07:34:22 -0800 (PST)
+	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1gtwik-0006WU-I5
+	for qemu-riscv@nongnu.org; Wed, 13 Feb 2019 10:45:13 -0500
+Received: by mail-pg1-x530.google.com with SMTP id i130so1311831pgd.1
+	for <qemu-riscv@nongnu.org>; Wed, 13 Feb 2019 07:45:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
-	h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
-	:content-transfer-encoding;
-	bh=7ql0rpGUD0Lze6haTBrD3h+CrrIqkElOnfuksjbaAA8=;
-	b=NH4pEIfqyWlBKC/60QxiWMUYnv1B/WRcCspKWyMqhop1116QJ/elsQDC2vjzMReXvU
-	w+Wcy/TUhQ2owriAKVAkoR+A58RfUyjeEY2MJULWFe1Mf7X374YsszUwK8btUzUNhAab
-	PyldBt3pUMwqg1eWBl5Mb9TdbesX7Xq28F2DU/W4lpGYcEypHuLeKk6PKoTpMqSP1RRl
-	JNcZqgo/dUK63GJbolm5wHn/s+Rv6BaPEI21AQ/DSndFFUKEi1Yii2tt+sbYsgClxr2k
-	NiNq8PYJZzjpwr6ZJ99CPoQcnWGGUvJ4ZKfKN+v9nsWNUlxPANKSCtD6VAhuCzoh22B8
-	pKcg==
+	h=subject:date:message-id:in-reply-to:references:cc:from:to;
+	bh=m3QyX5GKKen9C2A//gm0itW+Zbw+s4kREoS0dubIg4I=;
+	b=kCTva/bCuZgpfp8RwGvbQTfUHGpkSlpsFKtZfUTL6Ymp3wmAXBqC6jyF3hud7VMWx4
+	/zq+kG/kmEfPYDYWnEf59H+WyrJIDQ5ecCwZCZm6LtgslxeRJepvE+xLB/HOiLW103nY
+	Gr+MzMrJcQo4BRSYy4IN1RTilmkgADmFbaBIb0YsmiEYVxoboN/a3ecdQzIioNNM0yBt
+	8xn1hik+638pGgHdOQE2dzPgPCfqe+cro3kW/4TkFmw0UKJzpohPMYDmEjiWmCLxlpyM
+	wypIqs6MPDbfIDx3QwXh1xru1/38Fe3dwXE5N/aOVLT+FTxApOxehoS2Wy0gJNI/Ip+N
+	8Kbw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
-	:mime-version:content-transfer-encoding;
-	bh=7ql0rpGUD0Lze6haTBrD3h+CrrIqkElOnfuksjbaAA8=;
-	b=V6UvvU7ON/F7epLOy8PUDIwT1gC5rzA+CcPBH7/HVEbNOQOm90FBMVnSkoPhwkA5cj
-	dzYpddIopbZ9DKX/bKEfrFkXWHkiYfNGSzqPOZOoLdEY78o8D3+13Kknx34VAceJEn50
-	w1Aofro7RXDFokWYRnENIy4mtwTPxiZZ2qucZZVQnqzhcC1H4NS9phOqjkwIAz9z8YI6
-	g1kY+XYTzTGC7eTd8etc2bGjDf/4FJIUw1JtN5CbTcSOK7NPlJW0yl2SerV2Cuc5I78m
-	PxYjY5WZDYpcGsxiU7AKKE0fz8PyvRTRIhhLhH5HQx+R5EWoIVVQT7P3sHhNpuXt2dth
-	yn/g==
-X-Gm-Message-State: AHQUAuaKzoXCo0HLwJB5bVkDx5WP+56TgP9SKjsHlb7FhORIL85MTTiQ
-	KCXYPZOZkfRV1T9wfI64LQl6rQ==
-X-Google-Smtp-Source: AHgI3IZT6/IpUwyNeHGtF/6Nnw5SbTJjVBZIyaMGMNHxhAMZpCuMYb4dbkPwOarv5E0rX83gMXp3zw==
-X-Received: by 2002:a62:4b4d:: with SMTP id y74mr1059592pfa.186.1550072060869; 
-	Wed, 13 Feb 2019 07:34:20 -0800 (PST)
+	h=x-gm-message-state:subject:date:message-id:in-reply-to:references
+	:cc:from:to;
+	bh=m3QyX5GKKen9C2A//gm0itW+Zbw+s4kREoS0dubIg4I=;
+	b=Bh+mh3Jeh/hsfZF6yHdsBZeLGKNNdGIMJiC2YP3x0E2PUH4laP0RuX4W5duRujzNZe
+	D2zgUasBtX2u33uQPkEn7i+zbPkXNRYkcNAcSzKAF/tP4Bl8ABMZMmaGerBIO+m6TEDn
+	KBzYzgh70Fvc8WBjtE8X9XPkHazB5eL88Of0U/d/QKQQPrKztRJLOyg13hlIRXDSRvyR
+	QD7FYHidRwtJ01Sv6V9i67qCLOYm80cHgOVhtFe56w58hG5ECWNnum6i36xtnjrbwp+c
+	tAB3XhqxmgLsxp58cGz3VL4lEp8DcSbSY5hhbzwtXXJPS9pw8eGStbIm1rhgB9MKcVhQ
+	bfsA==
+X-Gm-Message-State: AHQUAuYqTPgUfE8rcqLb3871efeAOKOT7yD148cpAwziEkK/PPeih+cH
+	5HGZOw2kL4cS7FTtxa273phqlZom2mE=
+X-Google-Smtp-Source: AHgI3IZEOhVXw3glOawBCtcZ0HH0llfU6FTZXCk4H1Ai8mMKXkSAONSKekfF5bpEjvKO2VFDc10mog==
+X-Received: by 2002:aa7:8249:: with SMTP id e9mr1081289pfn.93.1550072705135;
+	Wed, 13 Feb 2019 07:45:05 -0800 (PST)
 Received: from localhost ([12.206.222.5]) by smtp.gmail.com with ESMTPSA id
-	w65sm19042889pfb.23.2019.02.13.07.34.19
+	z14sm19318423pgv.47.2019.02.13.07.45.04
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 13 Feb 2019 07:34:19 -0800 (PST)
-Date: Wed, 13 Feb 2019 07:34:19 -0800 (PST)
-X-Google-Original-Date: Wed, 13 Feb 2019 07:34:17 PST (-0800)
-In-Reply-To: <7a7b5675-3d66-6c87-8830-74c60f8a7471@mail.uni-paderborn.de>
-CC: richard.henderson@linaro.org, peer.adelt@hni.uni-paderborn.de,
-	qemu-riscv@nongnu.org, qemu-devel@nongnu.org, sagark@eecs.berkeley.edu
+	Wed, 13 Feb 2019 07:45:04 -0800 (PST)
+Date: Wed, 13 Feb 2019 07:44:41 -0800
+Message-Id: <20190213154450.14749-3-palmer@sifive.com>
+X-Mailer: git-send-email 2.18.1
+In-Reply-To: <20190213154450.14749-1-palmer@sifive.com>
+References: <20190213154450.14749-1-palmer@sifive.com>
+Cc: qemu-riscv@nongnu.org,       qemu-devel@nongnu.org,
+	Richard Henderson <richard.henderson@linaro.org>,
+	Michael Clark <mjc@sifive.com>,
+	Alistair Francis <alistair.francis@wdc.com>, 
+	Palmer Dabbelt <palmer@sifive.com>
 From: Palmer Dabbelt <palmer@sifive.com>
-To: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-Message-ID: <mhng-64897fe3-6dad-4973-9246-07c07ecba2af@palmer-si-x1c4>
-Mime-Version: 1.0 (MHng)
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
+To: Peter Maydell <peter.maydell@linaro.org>
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::542
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v6 00/35] target/riscv:
- Convert to decodetree
+X-Received-From: 2607:f8b0:4864:20::530
+Subject: [Qemu-riscv] [PULL 02/11] RISC-V: Mark mstatus.fs dirty
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -71,27 +70,169 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Feb 2019 15:34:25 -0000
+X-List-Received-Date: Wed, 13 Feb 2019 15:45:18 -0000
 
-On Wed, 13 Feb 2019 01:06:41 PST (-0800), Bastian Koppelmann wrote:
->
-> On 2/13/19 3:15 AM, Palmer Dabbelt wrote:
->> On Tue, Feb 12, 2019 at 3:21 PM Palmer Dabbelt <palmer@sifive.com> wrote:
-> [snip]
->>>
->>> Do you, by any chance, have a v7?  It looks like there's quite a few merge
->>> conflicts here, and while I'm OK fixing them I don't want to do it if you
->>> already have.
->>>
->> I made it through my rebase, so unless you want to send out a v7 I will.
->> There were some meaningful changes so I'd like to get a round of review
->> just so everyone is on the same page.
->
->
-> Thanks for doing this work. I don't have a v7 yet, since I was waiting
-> on your current pull-request to get merged. So please do send a v7, I'm
-> happy to review/test it.
+From: Richard Henderson <richard.henderson@linaro.org>
 
-Sounds good.  It definitely deserves a review, as I was sort of just fumbling 
-around in the dark here :)
+Modifed from Richard Henderson's patch [1] to integrate
+with the new control and status register implementation.
+
+[1] https://lists.nongnu.org/archive/html/qemu-devel/2018-03/msg07034.html
+
+Note: the f* CSRs already mark mstatus.FS dirty using
+env->mstatus |= mstatus.FS so the bug in the first
+spin of this patch has been fixed in a prior commit.
+
+Signed-off-by: Michael Clark <mjc@sifive.com>
+Reviewed-by: Michael Clark <mjc@sifive.com>
+Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+
+Co-authored-by: Richard Henderson <richard.henderson@linaro.org>
+Co-authored-by: Michael Clark <mjc@sifive.com>
+Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
+---
+ target/riscv/csr.c       | 12 ------------
+ target/riscv/translate.c | 40 +++++++++++++++++++++++++++++++++++++++-
+ 2 files changed, 39 insertions(+), 13 deletions(-)
+
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index 5e7e7d16b8b5..571414768992 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -317,18 +317,6 @@ static int write_mstatus(CPURISCVState *env, int csrno, target_ulong val)
+ 
+     mstatus = (mstatus & ~mask) | (val & mask);
+ 
+-    /* Note: this is a workaround for an issue where mstatus.FS
+-       does not report dirty after floating point operations
+-       that modify floating point state. This workaround is
+-       technically compliant with the RISC-V Privileged
+-       specification as it is legal to return only off, or dirty.
+-       at the expense of extra floating point save/restore. */
+-
+-    /* FP is always dirty or off */
+-    if (mstatus & MSTATUS_FS) {
+-        mstatus |= MSTATUS_FS;
+-    }
+-
+     int dirty = ((mstatus & MSTATUS_FS) == MSTATUS_FS) |
+                 ((mstatus & MSTATUS_XS) == MSTATUS_XS);
+     mstatus = set_field(mstatus, MSTATUS_SD, dirty);
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index 3d07d651b60c..0581b3c1f7d7 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -651,6 +651,31 @@ static void gen_store(DisasContext *ctx, uint32_t opc, int rs1, int rs2,
+     tcg_temp_free(dat);
+ }
+ 
++#ifndef CONFIG_USER_ONLY
++/* The states of mstatus_fs are:
++ * 0 = disabled, 1 = initial, 2 = clean, 3 = dirty
++ * We will have already diagnosed disabled state,
++ * and need to turn initial/clean into dirty.
++ */
++static void mark_fs_dirty(DisasContext *ctx)
++{
++    TCGv tmp;
++    if (ctx->mstatus_fs == MSTATUS_FS) {
++        return;
++    }
++    /* Remember the state change for the rest of the TB.  */
++    ctx->mstatus_fs = MSTATUS_FS;
++
++    tmp = tcg_temp_new();
++    tcg_gen_ld_tl(tmp, cpu_env, offsetof(CPURISCVState, mstatus));
++    tcg_gen_ori_tl(tmp, tmp, MSTATUS_FS);
++    tcg_gen_st_tl(tmp, cpu_env, offsetof(CPURISCVState, mstatus));
++    tcg_temp_free(tmp);
++}
++#else
++static inline void mark_fs_dirty(DisasContext *ctx) { }
++#endif
++
+ static void gen_fp_load(DisasContext *ctx, uint32_t opc, int rd,
+         int rs1, target_long imm)
+ {
+@@ -679,6 +704,8 @@ static void gen_fp_load(DisasContext *ctx, uint32_t opc, int rd,
+         break;
+     }
+     tcg_temp_free(t0);
++
++    mark_fs_dirty(ctx);
+ }
+ 
+ static void gen_fp_store(DisasContext *ctx, uint32_t opc, int rs1,
+@@ -944,6 +971,7 @@ static void gen_fp_arith(DisasContext *ctx, uint32_t opc, int rd,
+                          int rs1, int rs2, int rm)
+ {
+     TCGv t0 = NULL;
++    bool fp_output = true;
+ 
+     if (ctx->mstatus_fs == 0) {
+         goto do_illegal;
+@@ -1006,6 +1034,7 @@ static void gen_fp_arith(DisasContext *ctx, uint32_t opc, int rd,
+         }
+         gen_set_gpr(rd, t0);
+         tcg_temp_free(t0);
++        fp_output = false;
+         break;
+ 
+     case OPC_RISC_FCVT_W_S:
+@@ -1035,6 +1064,7 @@ static void gen_fp_arith(DisasContext *ctx, uint32_t opc, int rd,
+         }
+         gen_set_gpr(rd, t0);
+         tcg_temp_free(t0);
++        fp_output = false;
+         break;
+ 
+     case OPC_RISC_FCVT_S_W:
+@@ -1085,6 +1115,7 @@ static void gen_fp_arith(DisasContext *ctx, uint32_t opc, int rd,
+         }
+         gen_set_gpr(rd, t0);
+         tcg_temp_free(t0);
++        fp_output = false;
+         break;
+ 
+     case OPC_RISC_FMV_S_X:
+@@ -1177,6 +1208,7 @@ static void gen_fp_arith(DisasContext *ctx, uint32_t opc, int rd,
+         }
+         gen_set_gpr(rd, t0);
+         tcg_temp_free(t0);
++        fp_output = false;
+         break;
+ 
+     case OPC_RISC_FCVT_W_D:
+@@ -1206,6 +1238,7 @@ static void gen_fp_arith(DisasContext *ctx, uint32_t opc, int rd,
+         }
+         gen_set_gpr(rd, t0);
+         tcg_temp_free(t0);
++        fp_output = false;
+         break;
+ 
+     case OPC_RISC_FCVT_D_W:
+@@ -1254,6 +1287,7 @@ static void gen_fp_arith(DisasContext *ctx, uint32_t opc, int rd,
+         default:
+             goto do_illegal;
+         }
++        fp_output = false;
+         break;
+ 
+ #if defined(TARGET_RISCV64)
+@@ -1271,7 +1305,11 @@ static void gen_fp_arith(DisasContext *ctx, uint32_t opc, int rd,
+             tcg_temp_free(t0);
+         }
+         gen_exception_illegal(ctx);
+-        break;
++        return;
++    }
++
++    if (fp_output) {
++        mark_fs_dirty(ctx);
+     }
+ }
+ 
+-- 
+2.18.1
+
 
