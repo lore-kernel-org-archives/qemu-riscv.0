@@ -1,54 +1,57 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gtwj4-0002El-DC
-	for mharc-qemu-riscv@gnu.org; Wed, 13 Feb 2019 10:45:30 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:56355)
+	id 1gtwj5-0002G2-7O
+	for mharc-qemu-riscv@gnu.org; Wed, 13 Feb 2019 10:45:31 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:56421)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1gtwj0-00027b-JL
-	for qemu-riscv@nongnu.org; Wed, 13 Feb 2019 10:45:28 -0500
+	(envelope-from <palmer@sifive.com>) id 1gtwj3-0002Ay-3j
+	for qemu-riscv@nongnu.org; Wed, 13 Feb 2019 10:45:30 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1gtwiy-0006rs-K5
-	for qemu-riscv@nongnu.org; Wed, 13 Feb 2019 10:45:26 -0500
-Received: from mail-pl1-x62f.google.com ([2607:f8b0:4864:20::62f]:43716)
+	(envelope-from <palmer@sifive.com>) id 1gtwj0-0006y8-Mv
+	for qemu-riscv@nongnu.org; Wed, 13 Feb 2019 10:45:28 -0500
+Received: from mail-pg1-x542.google.com ([2607:f8b0:4864:20::542]:38306)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1gtwis-0006b7-BF
-	for qemu-riscv@nongnu.org; Wed, 13 Feb 2019 10:45:21 -0500
-Received: by mail-pl1-x62f.google.com with SMTP id f90so1326504plb.10
-	for <qemu-riscv@nongnu.org>; Wed, 13 Feb 2019 07:45:11 -0800 (PST)
+	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1gtwiy-0006oW-LK
+	for qemu-riscv@nongnu.org; Wed, 13 Feb 2019 10:45:26 -0500
+Received: by mail-pg1-x542.google.com with SMTP id g189so1301143pgc.5
+	for <qemu-riscv@nongnu.org>; Wed, 13 Feb 2019 07:45:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
-	h=subject:date:message-id:in-reply-to:references:cc:from:to;
-	bh=VsEG5EqtY/F+uxugfJZjY5iDDB0h1Q1FwFLq+ViPw8A=;
-	b=e4/Z1dmMBry1NJ3ubcYYRerIcMd2PxVzfpMI1AVbeef6+jWxx1mX0oXiHFeOZLKpwC
-	kcrpNkneJcoGAOSAXqt8pADwirF9q06ypQQdgNAySYCop27Ct+WiHf7XuzTxHvGlEZSF
-	ykGZfnfm9iwDakZx1zMSUfIQDsyK5TL/VvmzuHbI34YTD1acbvJwXD+Y4OGg+y6Kuc1/
-	1MpTo7qUpj5mf2iRAXKdLvT301tkTt6TpTm/o1otbaz5G0dIIJjnGSTIpzfPJE+Haj7R
-	N47JCXXS0AF94fV1Ln44UE7ok7NNR0FpsQiPVIN9dy6nTTFJbRnmYALYvujzdey2oEQ6
-	uMkw==
+	h=subject:date:message-id:in-reply-to:references:mime-version
+	:content-transfer-encoding:cc:from:to;
+	bh=BophRMwowisaYaC1U48VeLPl6f830QgtoDxDV4XkaXM=;
+	b=iIUsRiskzYV2GBY+HhpAeOdyOINwilUB7oRUyCDd59nAm72ch1yUIxxgDz4bh2S1DM
+	RdWUjZ3bBpoKeLENm5OqQWg/jKSp5seyaVZfKTOhS56Eb0gFgWZYBP3R+gKF1Xw0gTrQ
+	i5y8/N6bb3bc0RwnNGmjrEVV0fLVddxfbW8gYQerh+RxQy0F4MAKjtsIrS4l/+iSCJ2e
+	9nJi+0I3JIYa3ntFpuQ34tLiBYCUQFAPqnrSBRfi2+l7dnMb5PZo8UflijgoRgpLQEFo
+	rSaYb805qM6W0+jXl5EetLGr10PwHN6SnOk3gOUh7UKPEaGpSIPVA0ind65mB/a4JJMa
+	nD5g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:subject:date:message-id:in-reply-to:references
-	:cc:from:to;
-	bh=VsEG5EqtY/F+uxugfJZjY5iDDB0h1Q1FwFLq+ViPw8A=;
-	b=B1BavBnDD6WurBfRS1hair6ABCWAAMS2usxz9qDJSjljvJm+VinhGNnnB9DTCGyjYt
-	RH6JeHT9N1woB2O3/adporvDlkXMM+KbRVsM8yRkip3lZ/3kXnqOh+H9BCeFNi14xBFY
-	p6phrV3F8zeqPWFNq+xAj8eQiDW77HcLQRhxE8jieLN4iQv46dKkL9+HzLz0NK1aHw3h
-	v/I4OrYDEYDIWicVF6QU+OFhpFqSNzWvqUEWKrjzIEE9fQ4MsEk0b4JXMeiANy52I+no
-	RvCbXMftprS9y7LE1Z6G0K/qtGuJIgvjuipcrf6i0a4MjEtCAbjnjT8gfycRCpqAVG7b
-	1ysA==
-X-Gm-Message-State: AHQUAua4OKYcKf8IoilrqBTHDtcgqxl54IuyXgIzsrKymDJjYO1HepxL
-	APXtjLUVdsZsDZCboLbZVNU0P4xSODw=
-X-Google-Smtp-Source: AHgI3Ia3F1XI6Y0NJBEU6jbRqFIsSE9ulrC51JnFGh9DnuYSudXeUJn60F8nqMBDQCGvRmsQCUd8EA==
-X-Received: by 2002:a17:902:4225:: with SMTP id
-	g34mr1192793pld.152.1550072710529; 
-	Wed, 13 Feb 2019 07:45:10 -0800 (PST)
+	:mime-version:content-transfer-encoding:cc:from:to;
+	bh=BophRMwowisaYaC1U48VeLPl6f830QgtoDxDV4XkaXM=;
+	b=Xvybs7p5ZvYgpk9Sm1FwamjL7Hck7Ze/JkPPvEL8HXxip1a7mVm7rtFUc3hXEisHbp
+	UHsIEivAAiApCSA37g+ktWZUVxff59xylFttC2MtkwD2/1ecRfzdHBPalqjAa4xpfp9d
+	S7R7CAzh4wqppCToErdo+fndnHZvNduFBVSZS+1ZUeaMpyPk8q84T8YOZIUApwJwCxDg
+	hS+5e/F13UlaVJhkAjJzFlU1+JF/X0BfSjPqoAEStGugOnN+N+QW5oMHJVSoWdpO6k4N
+	aohJhyfi0eWYPFZOhSGXl4V70cizXjUV+zAAkMPj3nxUe7yiF7WxuBOGyyKfJjysAPih
+	OVpA==
+X-Gm-Message-State: AHQUAua0zfdcNb+XMt2MgyiVclLmtPGzL67NJwfjh/lpsFfFAq+SW/4Y
+	ViX9bfP0aIFokyZo6VZAgXojRQsoz0w=
+X-Google-Smtp-Source: AHgI3Iax+llcgeGzvFhQI4b8sx4SrWyWdkMVlsl0lXwqFz9lL7sy+vZUFG9RnHhsaP4iGcYJe/+L/Q==
+X-Received: by 2002:a63:125a:: with SMTP id 26mr1043383pgs.314.1550072721042; 
+	Wed, 13 Feb 2019 07:45:21 -0800 (PST)
 Received: from localhost ([12.206.222.5]) by smtp.gmail.com with ESMTPSA id
-	k17sm4098110pfj.92.2019.02.13.07.45.09
+	v26sm4782101pfg.62.2019.02.13.07.45.20
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 13 Feb 2019 07:45:09 -0800 (PST)
-Date: Wed, 13 Feb 2019 07:44:44 -0800
-Message-Id: <20190213154450.14749-6-palmer@sifive.com>
+	Wed, 13 Feb 2019 07:45:20 -0800 (PST)
+Date: Wed, 13 Feb 2019 07:44:50 -0800
+Message-Id: <20190213154450.14749-12-palmer@sifive.com>
 X-Mailer: git-send-email 2.18.1
 In-Reply-To: <20190213154450.14749-1-palmer@sifive.com>
 References: <20190213154450.14749-1-palmer@sifive.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 Cc: qemu-riscv@nongnu.org,       qemu-devel@nongnu.org,
 	Alistair Francis <Alistair.Francis@wdc.com>,
 	Alistair Francis <alistair.francis@wdc.com>, 
@@ -57,8 +60,9 @@ From: Palmer Dabbelt <palmer@sifive.com>
 To: Peter Maydell <peter.maydell@linaro.org>
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::62f
-Subject: [Qemu-riscv] [PULL 05/11] RISC-V: Add priv_ver to DisasContext
+X-Received-From: 2607:f8b0:4864:20::542
+Subject: [Qemu-riscv] [PULL 11/11] riscv: Ensure the kernel start address is
+ correctly cast
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -70,62 +74,95 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Feb 2019 15:45:28 -0000
+X-List-Received-Date: Wed, 13 Feb 2019 15:45:30 -0000
 
 From: Alistair Francis <Alistair.Francis@wdc.com>
 
-The gen methods should access state from DisasContext. Add priv_ver
-field to the DisasContext struct.
+Cast the kernel start address to the target bit length.
+
+This ensures that we calculate the initrd offset to a valid address for
+the architecture.
+
+Steps to reproduce the original problem (reported by Alex):
+  Build U-Boot for the virt machine for riscv32. Then run it with
+
+    $ qemu-system-riscv32 -M virt -kernel u-boot -nographic -initrd <a file>
+
+  You can find the initrd address with
+
+    U-Boot# fdt addr $fdtcontroladdr
+    U-Boot# fdt ls /chosen
+
+  Then take a peek at that address:
+
+    U-Boot# md.b <addr>
+
+  and you will see that there is nothing there without this patch. The
+  reason is that the binary was loaded to a negative address.
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Suggested-by: Alexander Graf <agraf@suse.de>
+Reported-by: Alexander Graf <agraf@suse.de>
+Reviewed-by: Philippe Mathieu-Daudé <philmd@redhat.com>
 Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
 ---
- target/riscv/translate.c | 7 +++++--
- 1 file changed, 5 insertions(+), 2 deletions(-)
+ hw/riscv/sifive_e.c | 2 +-
+ hw/riscv/sifive_u.c | 2 +-
+ hw/riscv/spike.c    | 2 +-
+ hw/riscv/virt.c     | 2 +-
+ 4 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 0581b3c1f7d7..35eb6bdfe099 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -43,6 +43,7 @@ typedef struct DisasContext {
-     DisasContextBase base;
-     /* pc_succ_insn points to the instruction following base.pc_next */
-     target_ulong pc_succ_insn;
-+    target_ulong priv_ver;
-     uint32_t opcode;
-     uint32_t mstatus_fs;
-     uint32_t mem_idx;
-@@ -1330,7 +1331,7 @@ static void gen_system(CPURISCVState *env, DisasContext *ctx, uint32_t opc,
- #ifndef CONFIG_USER_ONLY
-     /* Extract funct7 value and check whether it matches SFENCE.VMA */
-     if ((opc == OPC_RISC_ECALL) && ((csr >> 5) == 9)) {
--        if (env->priv_ver == PRIV_VERSION_1_10_0) {
-+        if (ctx->priv_ver == PRIV_VERSION_1_10_0) {
-             /* sfence.vma */
-             /* TODO: handle ASID specific fences */
-             gen_helper_tlb_flush(cpu_env);
-@@ -1384,7 +1385,7 @@ static void gen_system(CPURISCVState *env, DisasContext *ctx, uint32_t opc,
-             gen_helper_wfi(cpu_env);
-             break;
-         case 0x104: /* SFENCE.VM */
--            if (env->priv_ver <= PRIV_VERSION_1_09_1) {
-+            if (ctx->priv_ver <= PRIV_VERSION_1_09_1) {
-                 gen_helper_tlb_flush(cpu_env);
-             } else {
-                 gen_exception_illegal(ctx);
-@@ -1854,10 +1855,12 @@ static void decode_opc(CPURISCVState *env, DisasContext *ctx)
- static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
- {
-     DisasContext *ctx = container_of(dcbase, DisasContext, base);
-+    CPURISCVState *env = cs->env_ptr;
+diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
+index bfc086609cb9..b1cd11363c93 100644
+--- a/hw/riscv/sifive_e.c
++++ b/hw/riscv/sifive_e.c
+@@ -74,7 +74,7 @@ static const struct MemmapEntry {
+     [SIFIVE_E_DTIM] =     { 0x80000000,     0x4000 }
+ };
  
-     ctx->pc_succ_insn = ctx->base.pc_first;
-     ctx->mem_idx = ctx->base.tb->flags & TB_FLAGS_MMU_MASK;
-     ctx->mstatus_fs = ctx->base.tb->flags & TB_FLAGS_MSTATUS_FS;
-+    ctx->priv_ver = env->priv_ver;
-     ctx->frm = -1;  /* unknown rounding mode */
- }
+-static uint64_t load_kernel(const char *kernel_filename)
++static target_ulong load_kernel(const char *kernel_filename)
+ {
+     uint64_t kernel_entry, kernel_high;
+ 
+diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+index 2730b25b6032..7bc25820feaa 100644
+--- a/hw/riscv/sifive_u.c
++++ b/hw/riscv/sifive_u.c
+@@ -65,7 +65,7 @@ static const struct MemmapEntry {
+ 
+ #define GEM_REVISION        0x10070109
+ 
+-static uint64_t load_kernel(const char *kernel_filename)
++static target_ulong load_kernel(const char *kernel_filename)
+ {
+     uint64_t kernel_entry, kernel_high;
+ 
+diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
+index c66ffc50cc74..2a000a58009a 100644
+--- a/hw/riscv/spike.c
++++ b/hw/riscv/spike.c
+@@ -53,7 +53,7 @@ static const struct MemmapEntry {
+     [SPIKE_DRAM] =     { 0x80000000,        0x0 },
+ };
+ 
+-static uint64_t load_kernel(const char *kernel_filename)
++static target_ulong load_kernel(const char *kernel_filename)
+ {
+     uint64_t kernel_entry, kernel_high;
+ 
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index 3e8b19c66898..fc4c6b306e13 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -62,7 +62,7 @@ static const struct MemmapEntry {
+     [VIRT_PCIE_ECAM] =   { 0x30000000,    0x10000000 },
+ };
+ 
+-static uint64_t load_kernel(const char *kernel_filename)
++static target_ulong load_kernel(const char *kernel_filename)
+ {
+     uint64_t kernel_entry, kernel_high;
  
 -- 
 2.18.1
