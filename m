@@ -1,67 +1,68 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gtzBY-0000Lk-B9
-	for mharc-qemu-riscv@gnu.org; Wed, 13 Feb 2019 13:23:04 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:42070)
+	id 1gtzBZ-0000NU-Rx
+	for mharc-qemu-riscv@gnu.org; Wed, 13 Feb 2019 13:23:05 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:42119)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1gtzBV-0008VG-2S
-	for qemu-riscv@nongnu.org; Wed, 13 Feb 2019 13:23:01 -0500
+	(envelope-from <palmer@sifive.com>) id 1gtzBX-0008W2-AR
+	for qemu-riscv@nongnu.org; Wed, 13 Feb 2019 13:23:04 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1gtz15-0004bf-DI
-	for qemu-riscv@nongnu.org; Wed, 13 Feb 2019 13:12:17 -0500
-Received: from mail-pg1-x543.google.com ([2607:f8b0:4864:20::543]:40487)
-	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1gtz14-0004aG-UK
+	(envelope-from <palmer@sifive.com>) id 1gtz14-0004aB-4U
 	for qemu-riscv@nongnu.org; Wed, 13 Feb 2019 13:12:15 -0500
-Received: by mail-pg1-x543.google.com with SMTP id z10so1512181pgp.7
-	for <qemu-riscv@nongnu.org>; Wed, 13 Feb 2019 10:12:14 -0800 (PST)
+Received: from mail-pl1-x62c.google.com ([2607:f8b0:4864:20::62c]:42666)
+	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1gtz13-0004Xp-Ip
+	for qemu-riscv@nongnu.org; Wed, 13 Feb 2019 13:12:14 -0500
+Received: by mail-pl1-x62c.google.com with SMTP id s1so1546361plp.9
+	for <qemu-riscv@nongnu.org>; Wed, 13 Feb 2019 10:12:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
 	h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
 	:content-transfer-encoding;
-	bh=54pKL8ibb3V0HWY4bU8RDlVOG12LC+yFLEQFWLU5JL0=;
-	b=m6+fypNBdmoB2HBCnuxDDPYsTAaaqBaQ4dWHe8PPU6RS757G0t95oHhS4IP0GEzLVA
-	HZyHvOUSLrqztjDygW1sXlahUxmHC/F44+36K/4Wzt16kUwX7YYSc3S8YFA/p4XTZMcs
-	V1arh9rvz8SBk/kpgbjLy4h3iUbZpEwMzA/wyTeXv5ZLrNv9CJFFibppCe7U8dffypWu
-	cxaKSN4xVPTr8JnRxDSzKiaiBzgYXFT7hJSFN4TI+SONn2dmEdqD2X9rCm71lKF9M6OY
-	GmkTIlIIdYiMbjsvG6I4uhU3//7ka1u6xxVA3Ykm8y8eIHRPCpECZtdCanbWPR0+S+ma
-	wwdg==
+	bh=30AOoz1urnSeFSCYmiq/noHISHPgocbUGMlNz5MWmC4=;
+	b=XzBMUPbsOJFjLu7v66Y3KVTGO2SXVUtbaatytuMeB6uDeiDC1t9wUSLSSaiJt/fRqa
+	kq4xu3iHI7sCCQqUZR6QewvEn+c2GEDfC2SpeT9WlX8ftwC09ZQ9Z4PnZqYmQCC0KiEq
+	9/SfTIUQCZ7D2VA3SPkiQPivAN3Z0TQa1NXLa9ePksIzjL4dOnGsVWdTlEtfcqW3y1/m
+	b35uBoD5INjHVal5GpFfwJlIHJ9Vw0W90IbZbgk5X632hAoL7d0hVyIqkH6Hgqc3i0vR
+	HbdQyCWt82qQX8g9Y452q3aH9QL+fT+0Dv5Fz81vePZGil+3vO3rsoqlpeCoEpuFmmHM
+	P/EQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
 	:mime-version:content-transfer-encoding;
-	bh=54pKL8ibb3V0HWY4bU8RDlVOG12LC+yFLEQFWLU5JL0=;
-	b=fv7ZC6+fRJw9YLxTRWTZSNQDvoPKVstr0MR5KQjnRI0OnV7YLs6E7WRBje/ZgELWqY
-	nX+bxiZdm5WNGWBdqWFoTYyEIHjG/kTa6uhmsinuhLHrByTdwHFhEG9JYUULgDyC9WzP
-	X4sHo02fWqEWoGihgMwgf+ERLSfXgP/GZwfXSLJrHJUrR4z9phML5+DHHeIXoNtDRkJN
-	icvuBPzSLsf0oghGReE3/Q8zl1XecDXq5yGoOJ+4W4QftTS6Eoc4rXgJoxCriQF9EiYC
-	nyQUihjMFL4GYvnFa+6DqT02uTemxar63j/O5DnnbfW+qnJ5isVtbMgCUpPfQXDTPhZH
-	DEjg==
-X-Gm-Message-State: AHQUAuZ081zyHmOxA44ZSRaBXjP40SCYIMBMgzczam2PLWw3osVmWh8b
-	5vxeXKmumHxlaQm2NTLsyxN3hQ==
-X-Google-Smtp-Source: AHgI3IZoNoOdl4waiSoTXkFo0IXz7yDtzIaC5SavtH/YNYlGHZpA6dfTu271+0P/ECsA1xhDx5aHeA==
-X-Received: by 2002:a63:aa46:: with SMTP id x6mr1598853pgo.452.1550081533374; 
-	Wed, 13 Feb 2019 10:12:13 -0800 (PST)
+	bh=30AOoz1urnSeFSCYmiq/noHISHPgocbUGMlNz5MWmC4=;
+	b=Gn4I9itwOF3EPqeIdZHMQhDQI9y8m08oCO4QBuLXvKr0dwhlwGIFZiS2gHbNjwsgQR
+	pWizurgB+wRLSibJV46gx7FVNjsYvRxfSzg6beR9kNKSWAr3lIozAcyyMXOpQOmkIIbT
+	1oFdqqmzid9ifICIbO+01t93IpUb/PSDvvhUYKinxuMIhLDyjzFZzAKi2ir7Wb0eibvK
+	OnR1tkWBGO5NXP77WWIZwPoxcWEIg3hLLoOJ2vhGxRa8gQF2hPQqRCrSqDeyi+jUCU6E
+	ZpvJx5URm6SCYXEvu8jExzuHnn9GbXkawi6wUqkts82mTXmRJJYIFU/0R7yshlVhfHVR
+	qROA==
+X-Gm-Message-State: AHQUAubFS6RutHgK/G7Ohw/aCrPAmkzSMI7Hnn69+dgAC9eJcgQvS/4K
+	4FvqrgXR5fRSr72YVd2X3Qzs4g==
+X-Google-Smtp-Source: AHgI3IZ4isP9+nCvnSTuV5AadyhyQlKhI0yPMF4q0T+nfUd76uzdCm8rblVmJ+lNtCr3jJc68ZBtJg==
+X-Received: by 2002:a17:902:b182:: with SMTP id
+	s2mr1758943plr.89.1550081531571; 
+	Wed, 13 Feb 2019 10:12:11 -0800 (PST)
 Received: from localhost ([12.206.222.5]) by smtp.gmail.com with ESMTPSA id
-	l81sm34313888pfg.100.2019.02.13.10.12.12
+	a6sm12717043pfn.147.2019.02.13.10.12.10
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 13 Feb 2019 10:12:12 -0800 (PST)
-Date: Wed, 13 Feb 2019 10:12:12 -0800 (PST)
-X-Google-Original-Date: Wed, 13 Feb 2019 10:11:56 PST (-0800)
-In-Reply-To: <CAKmqyKNPpRKYJunZLQrbNE9LmXLKkMcGUdghe3Ry6kO=R9TQLw@mail.gmail.com>
-CC: luke.r.nels@gmail.com, qemu-riscv@nongnu.org, sagark@eecs.berkeley.edu,
+	Wed, 13 Feb 2019 10:12:10 -0800 (PST)
+Date: Wed, 13 Feb 2019 10:12:10 -0800 (PST)
+X-Google-Original-Date: Wed, 13 Feb 2019 10:03:26 PST (-0800)
+In-Reply-To: <CAKmqyKMWuqYD-_nYFR1dwvw7ZqPTqqsBdF_V0FBzryuWOgL4zQ@mail.gmail.com>
+CC: chouteau@adacore.com, qemu-riscv@nongnu.org, sagark@eecs.berkeley.edu,
 	Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
-	qemu-devel@nongnu.org, lukenels@pm.me, mjc@sifive.com, 
-	Alistair Francis <Alistair.Francis@wdc.com>, xi.wang@gmail.com
+	qemu-devel@nongnu.org, mjc@sifive.com, 
+	Alistair Francis <Alistair.Francis@wdc.com>
 From: Palmer Dabbelt <palmer@sifive.com>
 To: alistair23@gmail.com
-Message-ID: <mhng-eb63042f-42db-4a31-96b5-e13a0e1d2363@palmer-si-x1c4>
+Message-ID: <mhng-40d9ba8a-37f0-43af-8a37-d56716c48630@palmer-si-x1c4>
 Mime-Version: 1.0 (MHng)
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::543
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH] RISC-V: Fix pmpcfg register
- indexing
+X-Received-From: 2607:f8b0:4864:20::62c
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH] hw/riscv/sifive_clint.c:
+ avoid integer overflow in timecmp write
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -73,69 +74,41 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Feb 2019 18:23:02 -0000
+X-List-Received-Date: Wed, 13 Feb 2019 18:23:04 -0000
 
-On Fri, 08 Feb 2019 10:57:17 PST (-0800), alistair23@gmail.com wrote:
-> On Wed, Jan 30, 2019 at 2:20 PM Luke Nelson <luke.r.nels@gmail.com> wrote:
+On Fri, 08 Feb 2019 10:41:17 PST (-0800), alistair23@gmail.com wrote:
+> On Thu, Feb 7, 2019 at 2:08 AM Fabien Chouteau <chouteau@adacore.com> wrote:
 >>
->> pmpcfg_csr_{read,write} do not correctly handle accesses to PMP
->> configurations 8 through 15 (CSR pmpcfg2) on RV64.
+>> Hello Alistair,
 >>
->> The current code computes the pmpcfg index using:
+>> On 07/02/2019 01:42, Alistair Francis wrote:>
+>> > Can you describe what this fixes?
+>> >
 >>
->>   (reg_index * sizeof(target_ulong))
+>> I encountered this problem when I tried to write 0xffffffffffffffff in timecmp.
 >>
->> This is incorrect on RV64.  For example, when reg_index is 2 (i.e.,
->> pmpcfg2), the computed configuration index will be 16-23, which
->> should be 8-15.
+>> With the integer overflow in QEMU, writing this value means that the QEMU timer
+>> will be set in the past.
 >>
->> A correct way is to use (reg_index * 4) instead, which works for
->> both RV32 and RV64.
+>> > Won't an overflow be ok as we then just wrap around anyway? I guess
+>> > there is a problem if we want a value so large that we wrap around
+>> > past our current time though.
+>> >
 >>
->> Cc: Xi Wang <xi.wang@gmail.com>
->> Signed-off-by: Luke Nelson <luke.r.nels@gmail.com>
+>> The overflow was in the computation of the value `next_ns`. It is used to set
+>> the QEMU timer:
+>>
+>> timer_mod(cpu->env.timer, next_ns);
+>>
+>> A negative `next_ns` -because of the overflow- means that the timer
+>> triggers immediately instead of far in the future.
 >
-> Good catch!
+> Ah you are right here. The expired time of the timer will be set to
+> zero (it looks like QEMU ensures it can't be negative) but then it
+> detects that as being in the past and will trigger the timer event as
+> timer_expired_ns() will return true.
 >
 > Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-Ya, thanks -- that's a somewhat embarrassing bug, as someone else just fixed 
-one on the line below :).  I'll target this for my next PR.
-
->
-> Alistair
->
->> ---
->>  target/riscv/pmp.c | 7 +++----
->>  1 file changed, 3 insertions(+), 4 deletions(-)
->>
->> diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
->> index 15a5366616..a1bee56c86 100644
->> --- a/target/riscv/pmp.c
->> +++ b/target/riscv/pmp.c
->> @@ -311,9 +311,8 @@ void pmpcfg_csr_write(CPURISCVState *env, uint32_t reg_index,
->>      }
->>
->>      for (i = 0; i < sizeof(target_ulong); i++) {
->> -        cfg_val = (val >> 8 * i)  & 0xff;
->> -        pmp_write_cfg(env, (reg_index * sizeof(target_ulong)) + i,
->> -            cfg_val);
->> +        cfg_val = (val >> (i * 8)) & 0xff;
->> +        pmp_write_cfg(env, (reg_index * 4) + i, cfg_val);
->>      }
->>  }
->>
->> @@ -328,7 +327,7 @@ target_ulong pmpcfg_csr_read(CPURISCVState *env, uint32_t reg_index)
->>      target_ulong val = 0;
->>
->>      for (i = 0; i < sizeof(target_ulong); i++) {
->> -        val = pmp_read_cfg(env, (reg_index * sizeof(target_ulong)) + i);
->> +        val = pmp_read_cfg(env, (reg_index * 4) + i);
->>          cfg_val |= (val << (i * 8));
->>      }
->>
->> --
->> 2.19.1
->>
->>
+Thanks.  I'll target this for the next PR.
 
