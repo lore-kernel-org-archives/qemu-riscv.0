@@ -1,68 +1,99 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gtzBZ-0000NU-Rx
-	for mharc-qemu-riscv@gnu.org; Wed, 13 Feb 2019 13:23:05 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:42119)
+	id 1gtzg6-00044q-8S
+	for mharc-qemu-riscv@gnu.org; Wed, 13 Feb 2019 13:54:38 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:49001)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1gtzBX-0008W2-AR
-	for qemu-riscv@nongnu.org; Wed, 13 Feb 2019 13:23:04 -0500
+	(envelope-from <thuth@redhat.com>) id 1gtzg4-00043B-0H
+	for qemu-riscv@nongnu.org; Wed, 13 Feb 2019 13:54:37 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1gtz14-0004aB-4U
-	for qemu-riscv@nongnu.org; Wed, 13 Feb 2019 13:12:15 -0500
-Received: from mail-pl1-x62c.google.com ([2607:f8b0:4864:20::62c]:42666)
-	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1gtz13-0004Xp-Ip
-	for qemu-riscv@nongnu.org; Wed, 13 Feb 2019 13:12:14 -0500
-Received: by mail-pl1-x62c.google.com with SMTP id s1so1546361plp.9
-	for <qemu-riscv@nongnu.org>; Wed, 13 Feb 2019 10:12:13 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
-	h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
-	:content-transfer-encoding;
-	bh=30AOoz1urnSeFSCYmiq/noHISHPgocbUGMlNz5MWmC4=;
-	b=XzBMUPbsOJFjLu7v66Y3KVTGO2SXVUtbaatytuMeB6uDeiDC1t9wUSLSSaiJt/fRqa
-	kq4xu3iHI7sCCQqUZR6QewvEn+c2GEDfC2SpeT9WlX8ftwC09ZQ9Z4PnZqYmQCC0KiEq
-	9/SfTIUQCZ7D2VA3SPkiQPivAN3Z0TQa1NXLa9ePksIzjL4dOnGsVWdTlEtfcqW3y1/m
-	b35uBoD5INjHVal5GpFfwJlIHJ9Vw0W90IbZbgk5X632hAoL7d0hVyIqkH6Hgqc3i0vR
-	HbdQyCWt82qQX8g9Y452q3aH9QL+fT+0Dv5Fz81vePZGil+3vO3rsoqlpeCoEpuFmmHM
-	P/EQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
-	:mime-version:content-transfer-encoding;
-	bh=30AOoz1urnSeFSCYmiq/noHISHPgocbUGMlNz5MWmC4=;
-	b=Gn4I9itwOF3EPqeIdZHMQhDQI9y8m08oCO4QBuLXvKr0dwhlwGIFZiS2gHbNjwsgQR
-	pWizurgB+wRLSibJV46gx7FVNjsYvRxfSzg6beR9kNKSWAr3lIozAcyyMXOpQOmkIIbT
-	1oFdqqmzid9ifICIbO+01t93IpUb/PSDvvhUYKinxuMIhLDyjzFZzAKi2ir7Wb0eibvK
-	OnR1tkWBGO5NXP77WWIZwPoxcWEIg3hLLoOJ2vhGxRa8gQF2hPQqRCrSqDeyi+jUCU6E
-	ZpvJx5URm6SCYXEvu8jExzuHnn9GbXkawi6wUqkts82mTXmRJJYIFU/0R7yshlVhfHVR
-	qROA==
-X-Gm-Message-State: AHQUAubFS6RutHgK/G7Ohw/aCrPAmkzSMI7Hnn69+dgAC9eJcgQvS/4K
-	4FvqrgXR5fRSr72YVd2X3Qzs4g==
-X-Google-Smtp-Source: AHgI3IZ4isP9+nCvnSTuV5AadyhyQlKhI0yPMF4q0T+nfUd76uzdCm8rblVmJ+lNtCr3jJc68ZBtJg==
-X-Received: by 2002:a17:902:b182:: with SMTP id
-	s2mr1758943plr.89.1550081531571; 
-	Wed, 13 Feb 2019 10:12:11 -0800 (PST)
-Received: from localhost ([12.206.222.5]) by smtp.gmail.com with ESMTPSA id
-	a6sm12717043pfn.147.2019.02.13.10.12.10
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 13 Feb 2019 10:12:10 -0800 (PST)
-Date: Wed, 13 Feb 2019 10:12:10 -0800 (PST)
-X-Google-Original-Date: Wed, 13 Feb 2019 10:03:26 PST (-0800)
-In-Reply-To: <CAKmqyKMWuqYD-_nYFR1dwvw7ZqPTqqsBdF_V0FBzryuWOgL4zQ@mail.gmail.com>
-CC: chouteau@adacore.com, qemu-riscv@nongnu.org, sagark@eecs.berkeley.edu,
+	(envelope-from <thuth@redhat.com>) id 1gtzfv-0004NF-Cg
+	for qemu-riscv@nongnu.org; Wed, 13 Feb 2019 13:54:31 -0500
+Received: from mx1.redhat.com ([209.132.183.28]:58242)
+	by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.71) (envelope-from <thuth@redhat.com>)
+	id 1gtzfk-0003sE-01; Wed, 13 Feb 2019 13:54:16 -0500
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
+	[10.5.11.12])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mx1.redhat.com (Postfix) with ESMTPS id 0D2F313A4C;
+	Wed, 13 Feb 2019 18:54:14 +0000 (UTC)
+Received: from thuth.remote.csb (ovpn-116-98.ams2.redhat.com [10.36.116.98])
+	by smtp.corp.redhat.com (Postfix) with ESMTP id 2893360C62;
+	Wed, 13 Feb 2019 18:54:09 +0000 (UTC)
+To: Peter Maydell <peter.maydell@linaro.org>,
+	Alistair Francis <alistair23@gmail.com>
+Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
+	Sagar Karandikar <sagark@eecs.berkeley.edu>,
 	Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
-	qemu-devel@nongnu.org, mjc@sifive.com, 
+	Palmer Dabbelt <palmer@sifive.com>,
+	"open list:All patches CC here" <qemu-devel@nongnu.org>,
+	Fabien Chouteau <chouteau@adacore.com>, Michael Clark <mjc@sifive.com>, 
 	Alistair Francis <Alistair.Francis@wdc.com>
-From: Palmer Dabbelt <palmer@sifive.com>
-To: alistair23@gmail.com
-Message-ID: <mhng-40d9ba8a-37f0-43af-8a37-d56716c48630@palmer-si-x1c4>
-Mime-Version: 1.0 (MHng)
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
-	recognized.
-X-Received-From: 2607:f8b0:4864:20::62c
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH] hw/riscv/sifive_clint.c:
- avoid integer overflow in timecmp write
+References: <20190212173839.31587-1-chouteau@adacore.com>
+	<CAKmqyKOAVDbJQ6avwWgDHP1fHD_EXdZmi+Sjucm05ZqNkQoUog@mail.gmail.com>
+	<CAFEAcA_5jYqTWVBiTFjumkAHEEwvDkt_f_LHAo=00gkEfoY9sA@mail.gmail.com>
+From: Thomas Huth <thuth@redhat.com>
+Openpgp: preference=signencrypt
+Autocrypt: addr=thuth@redhat.com; keydata=
+	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
+Organization: Red Hat
+Message-ID: <49bd9805-2f40-7d5d-8814-e0a59a9c5be1@redhat.com>
+Date: Wed, 13 Feb 2019 19:54:08 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.9.1
+MIME-Version: 1.0
+In-Reply-To: <CAFEAcA_5jYqTWVBiTFjumkAHEEwvDkt_f_LHAo=00gkEfoY9sA@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+	(mx1.redhat.com [10.5.110.29]);
+	Wed, 13 Feb 2019 18:54:14 +0000 (UTC)
+Content-Transfer-Encoding: quoted-printable
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+X-Received-From: 209.132.183.28
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH] SiFive RISC-V GPIO Device
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -74,41 +105,24 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Feb 2019 18:23:04 -0000
+X-List-Received-Date: Wed, 13 Feb 2019 18:54:37 -0000
 
-On Fri, 08 Feb 2019 10:41:17 PST (-0800), alistair23@gmail.com wrote:
-> On Thu, Feb 7, 2019 at 2:08 AM Fabien Chouteau <chouteau@adacore.com> wrote:
->>
->> Hello Alistair,
->>
->> On 07/02/2019 01:42, Alistair Francis wrote:>
->> > Can you describe what this fixes?
->> >
->>
->> I encountered this problem when I tried to write 0xffffffffffffffff in timecmp.
->>
->> With the integer overflow in QEMU, writing this value means that the QEMU timer
->> will be set in the past.
->>
->> > Won't an overflow be ok as we then just wrap around anyway? I guess
->> > there is a problem if we want a value so large that we wrap around
->> > past our current time though.
->> >
->>
->> The overflow was in the computation of the value `next_ns`. It is used to set
->> the QEMU timer:
->>
->> timer_mod(cpu->env.timer, next_ns);
->>
->> A negative `next_ns` -because of the overflow- means that the timer
->> triggers immediately instead of far in the future.
->
-> Ah you are right here. The expired time of the timer will be set to
-> zero (it looks like QEMU ensures it can't be negative) but then it
-> detects that as being in the past and will trigger the timer event as
-> timer_expired_ns() will return true.
->
-> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+On 2019-02-13 18:14, Peter Maydell wrote:
+> On Wed, 13 Feb 2019 at 00:13, Alistair Francis <alistair23@gmail.com> w=
+rote:
+>> I know the other RISC-V files don't do it, but this should go in the
+>> hw/gpio directory instead of hw/riscv.
+>=20
+> It might be nice to move those existing riscv devices into
+> their proper places at some point: should be a fairly easy
+> cleanup patch if somebody wants to take it on. (Advice
+> on what should live where available on request.)
 
-Thanks.  I'll target this for the next PR.
+If devices only work on riscv, they should IMHO stay in hw/riscv/. I
+think hw/gpio/ and friends should primarily be used if a device is
+shared between architectures. If they stay in hw/riscv/ it is way easier
+to match the devices with wildcards in the MAINTAINERS file. Just my
+0.02 =E2=82=AC only, of course.
+
+ Thomas
 
