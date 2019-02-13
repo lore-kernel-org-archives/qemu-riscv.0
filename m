@@ -1,51 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gtwsr-0001SU-QW
-	for mharc-qemu-riscv@gnu.org; Wed, 13 Feb 2019 10:55:37 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:59314)
+	id 1gtwt7-0001ga-KR
+	for mharc-qemu-riscv@gnu.org; Wed, 13 Feb 2019 10:55:53 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:59391)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1gtwso-0001P9-GT
-	for qemu-riscv@nongnu.org; Wed, 13 Feb 2019 10:55:35 -0500
+	(envelope-from <palmer@sifive.com>) id 1gtwt3-0001cv-Nz
+	for qemu-riscv@nongnu.org; Wed, 13 Feb 2019 10:55:52 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1gtwsa-0001pj-Jh
-	for qemu-riscv@nongnu.org; Wed, 13 Feb 2019 10:55:24 -0500
-Received: from mail-pl1-x634.google.com ([2607:f8b0:4864:20::634]:38978)
+	(envelope-from <palmer@sifive.com>) id 1gtwsr-0002EL-2Y
+	for qemu-riscv@nongnu.org; Wed, 13 Feb 2019 10:55:41 -0500
+Received: from mail-pl1-x643.google.com ([2607:f8b0:4864:20::643]:32782)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1gtwsU-0001Qq-0j
-	for qemu-riscv@nongnu.org; Wed, 13 Feb 2019 10:55:15 -0500
-Received: by mail-pl1-x634.google.com with SMTP id 101so1346600pld.6
-	for <qemu-riscv@nongnu.org>; Wed, 13 Feb 2019 07:55:10 -0800 (PST)
+	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1gtwso-000113-UK
+	for qemu-riscv@nongnu.org; Wed, 13 Feb 2019 10:55:36 -0500
+Received: by mail-pl1-x643.google.com with SMTP id y10so1359518plp.0
+	for <qemu-riscv@nongnu.org>; Wed, 13 Feb 2019 07:54:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
 	h=subject:date:message-id:in-reply-to:references:cc:from:to;
-	bh=8EypunTKjsEtiRMX5hY7rGFR1bKZQLM2m6PHUljo33Q=;
-	b=Qt+f9HDsLVqkoxj1wAD00kYbdevk/qI0PzZe9T5OM1ULf4Ai65mZV3yJXhsYnk3zcr
-	1Kn6mHO/67mHYKH7Pe7b1UaexugHtI0AiDOi8Ty3DszC4yAj44aqiwFmsFw5priK7p10
-	Dj3oUPwOrLs1NuFr2XVzmfQwjU7AodkfGCHb+ZgwSo84cr1WVt8bVkMDT2b+pH8g/V5a
-	Lc9zlaG0hDYDhqNExei2hpDHiWzZIBoCNW+t6Uufx3XGSPQ7eIM7S9CL0RBhZoGsN2Bh
-	5n3Mqrof9gu5TEFfarvsmntxDi2GoLKpUhAOMTuqPhDeP8wB/1+ilpf9S5MJZaD6SBiq
-	3mGQ==
+	bh=sAib+0ImwrCKDVdMy1IS6ls4fK2/5kQQzAdcIjQqNIU=;
+	b=WJCKb8Nw7fvSE2UX/yNfoVUIASjtbpVTTMg03tYFGnzyy52tv01hdP2S1/uGT5sHMg
+	grvKtBQbNjJHZtWJ8PwZJqKDtPtLn8Oxeq8LUvFpLQx+ok9ZmDIctsbDPQ3s26egbjxm
+	ahyM/KoiQMGlL9CWdBriVe8kV3sOgTUtr4at3+6g+dwwSDENse6904ij1e6rww8Wact3
+	3PSh2F4prPcxmgLfz+6anMFPJmtWGZjXTvRfGhLJ52VMWm3Ai6CdIAPTcIMSg6eRKHt0
+	vXVYo/H23H/ACS6lrRKbcPWwRBPtIhNGT9Y+76vRUao+Fs3aBQA6Af6KzYyi71w5ttmh
+	x+sA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:subject:date:message-id:in-reply-to:references
 	:cc:from:to;
-	bh=8EypunTKjsEtiRMX5hY7rGFR1bKZQLM2m6PHUljo33Q=;
-	b=AeR0KzWDTip9rkkQIDsXbaOZCZGK6IoQ6UsEBqXqpAhdj9V5Q8mW83zfUcJA5j9DdJ
-	cz7cmv9a7cHflUN5JED0XBh6OjTWNd4pJzyth8O/2Z9gPHnCDjS/ANYveuTAwTbzTuMI
-	8i7txg7Nt5WLiOkjBAMkxOuoTwC6X3zQFvGlWmueQy5ds02MOQu7ks0vIBly75dw+ldc
-	V/OYd5smT7nX92XGCmmpNHWtel34B/YHnr4FUIVX+3yIUyy+7S06TneMvP5N99vZGtbr
-	sLrR06sbtpwe8VQL/bbw8Q/f2kYJrQsLa6ifsyKWyaefM0iia2xDzuc7X/fBp7gjM9Dj
-	NdnA==
-X-Gm-Message-State: AHQUAuag9HMSC0FCp4V9tECMaN5zudoKyUj4jzNT7mnuPy71WEewPPly
-	LHvIr3Apvd0wUl3BCJede0oZfw==
-X-Google-Smtp-Source: AHgI3IbVtde79pR+JYl1Rd5oV3USHIjfhHfP0FLCwienMmDt9RFnvXRxy2hUPPJVoI7d+agM3+4VYg==
-X-Received: by 2002:a17:902:7148:: with SMTP id
-	u8mr1202659plm.110.1550073309197; 
-	Wed, 13 Feb 2019 07:55:09 -0800 (PST)
-Received: from localhost ([12.206.222.5]) by smtp.gmail.com with ESMTPSA id
-	j8sm7565293pfe.130.2019.02.13.07.55.08
+	bh=sAib+0ImwrCKDVdMy1IS6ls4fK2/5kQQzAdcIjQqNIU=;
+	b=JIx6l04Wk3R/q+F20inLqRRloMd0EInokqQdMgsjeos6lyhSQAyiibhy6q+hw3SVeX
+	lduKvQwir94dj1UFeNi5lUosxqgHcKCpOYVG1bziROoFo3d+iJTcywe9H4uEr0MQU2As
+	x7lsMFZgUL7NUr8Dv8S9fds3xqmagThxJHmYMxtVJKLFojmGxk0Cj4oyXDOIwuo1yRAs
+	ku7q7Qjdg2ptyiYa3eDR03lF1P7EVbq9VyDeRilIhGSlSg59ty8ERxJZtaLBHYVmcHYP
+	T1tHplSPFveKZK4XXuqw1d/v5Dt6qbg2+XEA4xEWAuet+z16B+n/NmshQuY/SOoH/L0R
+	FOvw==
+X-Gm-Message-State: AHQUAuYVUcoDFgfX88SQvH/BiR29TazuVyQXp96OPW5pR5i5pA8LPxJ/
+	WJx4QC0I+DwkF2woHZ2OcrFz5w==
+X-Google-Smtp-Source: AHgI3IarFEzcqo0FcXebbtM0U9IxI8/K5RAUAVcrCjeHHWE0XF+jgzMtRQg4OmU+f6X1LwNWmMlTXA==
+X-Received: by 2002:a17:902:e486:: with SMTP id
+	cj6mr1199781plb.86.1550073286526; 
+	Wed, 13 Feb 2019 07:54:46 -0800 (PST)
+Received: from localhost ([12.206.222.5])
+	by smtp.gmail.com with ESMTPSA id t3sm9384441pga.31.2019.02.13.07.54.45
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 13 Feb 2019 07:55:08 -0800 (PST)
-Date: Wed, 13 Feb 2019 07:53:59 -0800
-Message-Id: <20190213155414.22285-21-palmer@sifive.com>
+	Wed, 13 Feb 2019 07:54:45 -0800 (PST)
+Date: Wed, 13 Feb 2019 07:53:45 -0800
+Message-Id: <20190213155414.22285-7-palmer@sifive.com>
 X-Mailer: git-send-email 2.18.1
 In-Reply-To: <20190213155414.22285-1-palmer@sifive.com>
 References: <20190213155414.22285-1-palmer@sifive.com>
@@ -55,8 +55,9 @@ From: Palmer Dabbelt <palmer@sifive.com>
 To: qemu-riscv@nongnu.org
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::634
-Subject: [Qemu-riscv] [PATCH v7 20/35] target/riscv: Remove gen_jalr()
+X-Received-From: 2607:f8b0:4864:20::643
+Subject: [Qemu-riscv] [PATCH v7 06/35] target/riscv: Convert RVXI arithmetic
+ insns to decodetree
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -68,109 +69,300 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Feb 2019 15:55:35 -0000
+X-List-Received-Date: Wed, 13 Feb 2019 15:55:52 -0000
 
 From: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
 
-trans_jalr() is the only caller, so move the code into trans_jalr().
+we cannot remove the call to gen_arith() in decode_RV32_64G() since it
+is used to translate multiply instructions.
 
 Acked-by: Alistair Francis <alistair.francis@wdc.com>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Signed-off-by: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
 Signed-off-by: Peer Adelt <peer.adelt@hni.uni-paderborn.de>
 ---
- target/riscv/insn_trans/trans_rvi.inc.c | 28 +++++++++++++++++-
- target/riscv/translate.c                | 38 -------------------------
- 2 files changed, 27 insertions(+), 39 deletions(-)
+ target/riscv/insn32-64.decode           |  13 ++
+ target/riscv/insn32.decode              |  25 ++++
+ target/riscv/insn_trans/trans_rvi.inc.c | 168 ++++++++++++++++++++++++
+ target/riscv/translate.c                |   9 --
+ 4 files changed, 206 insertions(+), 9 deletions(-)
 
+diff --git a/target/riscv/insn32-64.decode b/target/riscv/insn32-64.decode
+index 439d4e2c587b..9a35f2aa1920 100644
+--- a/target/riscv/insn32-64.decode
++++ b/target/riscv/insn32-64.decode
+@@ -19,7 +19,20 @@
+ # This is concatenated with insn32.decode for risc64 targets.
+ # Most of the fields and formats are there.
+ 
++%sh5    20:5
++
++@sh5     .......  ..... .....  ... ..... ....... &shift  shamt=%sh5      %rs1 %rd
++
+ # *** RV64I Base Instruction Set (in addition to RV32I) ***
+ lwu      ............   ..... 110 ..... 0000011 @i
+ ld       ............   ..... 011 ..... 0000011 @i
+ sd       ....... .....  ..... 011 ..... 0100011 @s
++addiw    ............   ..... 000 ..... 0011011 @i
++slliw    0000000 .....  ..... 001 ..... 0011011 @sh5
++srliw    0000000 .....  ..... 101 ..... 0011011 @sh5
++sraiw    0100000 .....  ..... 101 ..... 0011011 @sh5
++addw     0000000 .....  ..... 000 ..... 0111011 @r
++subw     0100000 .....  ..... 000 ..... 0111011 @r
++sllw     0000000 .....  ..... 001 ..... 0111011 @r
++srlw     0000000 .....  ..... 101 ..... 0111011 @r
++sraw     0100000 .....  ..... 101 ..... 0111011 @r
+diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+index 076de873c4f1..1f5bf1f6f97d 100644
+--- a/target/riscv/insn32.decode
++++ b/target/riscv/insn32.decode
+@@ -21,6 +21,8 @@
+ %rs1       15:5
+ %rd        7:5
+ 
++%sh10    20:10
++
+ # immediates:
+ %imm_i    20:s12
+ %imm_s    25:s7 7:5
+@@ -30,14 +32,18 @@
+ 
+ # Argument sets:
+ &b    imm rs2 rs1
++&shift     shamt rs1 rd
+ 
+ # Formats 32:
++@r       .......   ..... ..... ... ..... .......                   %rs2 %rs1 %rd
+ @i       ............    ..... ... ..... .......         imm=%imm_i     %rs1 %rd
+ @b       .......   ..... ..... ... ..... ....... &b      imm=%imm_b %rs2 %rs1
+ @s       .......   ..... ..... ... ..... .......         imm=%imm_s %rs2 %rs1
+ @u       ....................      ..... .......         imm=%imm_u          %rd
+ @j       ....................      ..... .......         imm=%imm_j          %rd
+ 
++@sh      ......  ...... .....  ... ..... ....... &shift  shamt=%sh10      %rs1 %rd
++
+ # *** RV32I Base Instruction Set ***
+ lui      ....................       ..... 0110111 @u
+ auipc    ....................       ..... 0010111 @u
+@@ -57,3 +63,22 @@ lhu      ............     ..... 101 ..... 0000011 @i
+ sb       .......  .....   ..... 000 ..... 0100011 @s
+ sh       .......  .....   ..... 001 ..... 0100011 @s
+ sw       .......  .....   ..... 010 ..... 0100011 @s
++addi     ............     ..... 000 ..... 0010011 @i
++slti     ............     ..... 010 ..... 0010011 @i
++sltiu    ............     ..... 011 ..... 0010011 @i
++xori     ............     ..... 100 ..... 0010011 @i
++ori      ............     ..... 110 ..... 0010011 @i
++andi     ............     ..... 111 ..... 0010011 @i
++slli     00.... ......    ..... 001 ..... 0010011 @sh
++srli     00.... ......    ..... 101 ..... 0010011 @sh
++srai     01.... ......    ..... 101 ..... 0010011 @sh
++add      0000000 .....    ..... 000 ..... 0110011 @r
++sub      0100000 .....    ..... 000 ..... 0110011 @r
++sll      0000000 .....    ..... 001 ..... 0110011 @r
++slt      0000000 .....    ..... 010 ..... 0110011 @r
++sltu     0000000 .....    ..... 011 ..... 0110011 @r
++xor      0000000 .....    ..... 100 ..... 0110011 @r
++srl      0000000 .....    ..... 101 ..... 0110011 @r
++sra      0100000 .....    ..... 101 ..... 0110011 @r
++or       0000000 .....    ..... 110 ..... 0110011 @r
++and      0000000 .....    ..... 111 ..... 0110011 @r
 diff --git a/target/riscv/insn_trans/trans_rvi.inc.c b/target/riscv/insn_trans/trans_rvi.inc.c
-index 4a23372cb823..39af38081ede 100644
+index 61f708dba144..136fa54d0655 100644
 --- a/target/riscv/insn_trans/trans_rvi.inc.c
 +++ b/target/riscv/insn_trans/trans_rvi.inc.c
-@@ -42,7 +42,33 @@ static bool trans_jal(DisasContext *ctx, arg_jal *a)
- 
- static bool trans_jalr(DisasContext *ctx, arg_jalr *a)
- {
--    gen_jalr(ctx, OPC_RISC_JALR, a->rd, a->rs1, a->imm);
-+    /* no chaining with JALR */
-+    TCGLabel *misaligned = NULL;
-+    TCGv t0 = tcg_temp_new();
-+
-+
-+    gen_get_gpr(cpu_pc, a->rs1);
-+    tcg_gen_addi_tl(cpu_pc, cpu_pc, a->imm);
-+    tcg_gen_andi_tl(cpu_pc, cpu_pc, (target_ulong)-2);
-+
-+    if (!riscv_has_ext(ctx->env, RVC)) {
-+        misaligned = gen_new_label();
-+        tcg_gen_andi_tl(t0, cpu_pc, 0x2);
-+        tcg_gen_brcondi_tl(TCG_COND_NE, t0, 0x0, misaligned);
-+    }
-+
-+    if (a->rd != 0) {
-+        tcg_gen_movi_tl(cpu_gpr[a->rd], ctx->pc_succ_insn);
-+    }
-+    tcg_gen_lookup_and_goto_ptr();
-+
-+    if (misaligned) {
-+        gen_set_label(misaligned);
-+        gen_exception_inst_addr_mis(ctx);
-+    }
-+    ctx->base.is_jmp = DISAS_NORETURN;
-+
-+    tcg_temp_free(t0);
+@@ -150,3 +150,171 @@ static bool trans_sd(DisasContext *ctx, arg_sd *a)
      return true;
  }
- 
+ #endif
++
++static bool trans_addi(DisasContext *ctx, arg_addi *a)
++{
++    gen_arith_imm(ctx, OPC_RISC_ADDI, a->rd, a->rs1, a->imm);
++    return true;
++}
++
++static bool trans_slti(DisasContext *ctx, arg_slti *a)
++{
++    gen_arith_imm(ctx, OPC_RISC_SLTI, a->rd, a->rs1, a->imm);
++    return true;
++}
++
++static bool trans_sltiu(DisasContext *ctx, arg_sltiu *a)
++{
++    gen_arith_imm(ctx, OPC_RISC_SLTIU, a->rd, a->rs1, a->imm);
++    return true;
++}
++
++static bool trans_xori(DisasContext *ctx, arg_xori *a)
++{
++    gen_arith_imm(ctx, OPC_RISC_XORI, a->rd, a->rs1, a->imm);
++    return true;
++}
++static bool trans_ori(DisasContext *ctx, arg_ori *a)
++{
++    gen_arith_imm(ctx, OPC_RISC_ORI, a->rd, a->rs1, a->imm);
++    return true;
++}
++static bool trans_andi(DisasContext *ctx, arg_andi *a)
++{
++    gen_arith_imm(ctx, OPC_RISC_ANDI, a->rd, a->rs1, a->imm);
++    return true;
++}
++static bool trans_slli(DisasContext *ctx, arg_slli *a)
++{
++    gen_arith_imm(ctx, OPC_RISC_SLLI, a->rd, a->rs1, a->shamt);
++    return true;
++}
++
++static bool trans_srli(DisasContext *ctx, arg_srli *a)
++{
++    gen_arith_imm(ctx, OPC_RISC_SHIFT_RIGHT_I, a->rd, a->rs1, a->shamt);
++    return true;
++}
++
++static bool trans_srai(DisasContext *ctx, arg_srai *a)
++{
++    gen_arith_imm(ctx, OPC_RISC_SHIFT_RIGHT_I, a->rd, a->rs1, a->shamt | 0x400);
++    return true;
++}
++
++static bool trans_add(DisasContext *ctx, arg_add *a)
++{
++    gen_arith(ctx, OPC_RISC_ADD, a->rd, a->rs1, a->rs2);
++    return true;
++}
++
++static bool trans_sub(DisasContext *ctx, arg_sub *a)
++{
++    gen_arith(ctx, OPC_RISC_SUB, a->rd, a->rs1, a->rs2);
++    return true;
++}
++
++static bool trans_sll(DisasContext *ctx, arg_sll *a)
++{
++    gen_arith(ctx, OPC_RISC_SLL, a->rd, a->rs1, a->rs2);
++    return true;
++}
++
++static bool trans_slt(DisasContext *ctx, arg_slt *a)
++{
++    gen_arith(ctx, OPC_RISC_SLT, a->rd, a->rs1, a->rs2);
++    return true;
++}
++
++static bool trans_sltu(DisasContext *ctx, arg_sltu *a)
++{
++    gen_arith(ctx, OPC_RISC_SLTU, a->rd, a->rs1, a->rs2);
++    return true;
++}
++
++static bool trans_xor(DisasContext *ctx, arg_xor *a)
++{
++    gen_arith(ctx, OPC_RISC_XOR, a->rd, a->rs1, a->rs2);
++    return true;
++}
++
++static bool trans_srl(DisasContext *ctx, arg_srl *a)
++{
++    gen_arith(ctx, OPC_RISC_SRL, a->rd, a->rs1, a->rs2);
++    return true;
++}
++
++static bool trans_sra(DisasContext *ctx, arg_sra *a)
++{
++    gen_arith(ctx, OPC_RISC_SRA, a->rd, a->rs1, a->rs2);
++    return true;
++}
++
++static bool trans_or(DisasContext *ctx, arg_or *a)
++{
++    gen_arith(ctx, OPC_RISC_OR, a->rd, a->rs1, a->rs2);
++    return true;
++}
++
++static bool trans_and(DisasContext *ctx, arg_and *a)
++{
++    gen_arith(ctx, OPC_RISC_AND, a->rd, a->rs1, a->rs2);
++    return true;
++}
++
++#ifdef TARGET_RISCV64
++static bool trans_addiw(DisasContext *ctx, arg_addiw *a)
++{
++    gen_arith_imm(ctx, OPC_RISC_ADDIW, a->rd, a->rs1, a->imm);
++    return true;
++}
++
++static bool trans_slliw(DisasContext *ctx, arg_slliw *a)
++{
++    gen_arith_imm(ctx, OPC_RISC_SLLIW, a->rd, a->rs1, a->shamt);
++    return true;
++}
++
++static bool trans_srliw(DisasContext *ctx, arg_srliw *a)
++{
++    gen_arith_imm(ctx, OPC_RISC_SHIFT_RIGHT_IW, a->rd, a->rs1, a->shamt);
++    return true;
++}
++
++static bool trans_sraiw(DisasContext *ctx, arg_sraiw *a)
++{
++    gen_arith_imm(ctx, OPC_RISC_SHIFT_RIGHT_IW , a->rd, a->rs1,
++                  a->shamt | 0x400);
++    return true;
++}
++
++static bool trans_addw(DisasContext *ctx, arg_addw *a)
++{
++    gen_arith(ctx, OPC_RISC_ADDW, a->rd, a->rs1, a->rs2);
++    return true;
++}
++
++static bool trans_subw(DisasContext *ctx, arg_subw *a)
++{
++    gen_arith(ctx, OPC_RISC_SUBW, a->rd, a->rs1, a->rs2);
++    return true;
++}
++
++static bool trans_sllw(DisasContext *ctx, arg_sllw *a)
++{
++    gen_arith(ctx, OPC_RISC_SLLW, a->rd, a->rs1, a->rs2);
++    return true;
++}
++
++static bool trans_srlw(DisasContext *ctx, arg_srlw *a)
++{
++    gen_arith(ctx, OPC_RISC_SRLW, a->rd, a->rs1, a->rs2);
++    return true;
++}
++
++static bool trans_sraw(DisasContext *ctx, arg_sraw *a)
++{
++    gen_arith(ctx, OPC_RISC_SRAW, a->rd, a->rs1, a->rs2);
++    return true;
++}
++#endif
 diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index c9a8fdda8a85..abdcd0631af4 100644
+index 3b0bcc33d0fe..bb02ef23e791 100644
 --- a/target/riscv/translate.c
 +++ b/target/riscv/translate.c
-@@ -532,44 +532,6 @@ static void gen_jal(DisasContext *ctx, int rd, target_ulong imm)
-     ctx->base.is_jmp = DISAS_NORETURN;
- }
+@@ -1909,15 +1909,6 @@ static void decode_RV32_64G(DisasContext *ctx)
+     imm = GET_IMM(ctx->opcode);
  
--static void gen_jalr(DisasContext *ctx, uint32_t opc, int rd, int rs1,
--                     target_long imm)
--{
--    /* no chaining with JALR */
--    TCGLabel *misaligned = NULL;
--    TCGv t0 = tcg_temp_new();
--
--    switch (opc) {
--    case OPC_RISC_JALR:
--        gen_get_gpr(cpu_pc, rs1);
--        tcg_gen_addi_tl(cpu_pc, cpu_pc, imm);
--        tcg_gen_andi_tl(cpu_pc, cpu_pc, (target_ulong)-2);
--
--        if (!has_ext(ctx, RVC)) {
--            misaligned = gen_new_label();
--            tcg_gen_andi_tl(t0, cpu_pc, 0x2);
--            tcg_gen_brcondi_tl(TCG_COND_NE, t0, 0x0, misaligned);
+     switch (op) {
+-    case OPC_RISC_ARITH_IMM:
+-#if defined(TARGET_RISCV64)
+-    case OPC_RISC_ARITH_IMM_W:
+-#endif
+-        if (rd == 0) {
+-            break; /* NOP */
 -        }
--
--        if (rd != 0) {
--            tcg_gen_movi_tl(cpu_gpr[rd], ctx->pc_succ_insn);
--        }
--        tcg_gen_lookup_and_goto_ptr();
--
--        if (misaligned) {
--            gen_set_label(misaligned);
--            gen_exception_inst_addr_mis(ctx);
--        }
--        ctx->base.is_jmp = DISAS_NORETURN;
+-        gen_arith_imm(ctx, MASK_OP_ARITH_IMM(ctx->opcode), rd, rs1, imm);
 -        break;
--
--    default:
--        gen_exception_illegal(ctx);
--        break;
--    }
--    tcg_temp_free(t0);
--}
--
- static void gen_branch(DisasContext *ctx, uint32_t opc, int rs1, int rs2,
-                        target_long bimm)
- {
+     case OPC_RISC_ARITH:
+ #if defined(TARGET_RISCV64)
+     case OPC_RISC_ARITH_W:
 -- 
 2.18.1
 
