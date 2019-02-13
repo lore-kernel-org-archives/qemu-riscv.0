@@ -1,60 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gthRH-0003Ay-6q
-	for mharc-qemu-riscv@gnu.org; Tue, 12 Feb 2019 18:26:07 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:37113)
+	id 1gti5a-0002ff-18
+	for mharc-qemu-riscv@gnu.org; Tue, 12 Feb 2019 19:07:46 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:44982)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1gthRD-00038P-QN
-	for qemu-riscv@nongnu.org; Tue, 12 Feb 2019 18:26:05 -0500
+	(envelope-from <alistair23@gmail.com>) id 1gti5T-0002bn-U9
+	for qemu-riscv@nongnu.org; Tue, 12 Feb 2019 19:07:44 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1gthRC-0001Lz-6u
-	for qemu-riscv@nongnu.org; Tue, 12 Feb 2019 18:26:03 -0500
-Received: from mail-lj1-x243.google.com ([2a00:1450:4864:20::243]:47017)
+	(envelope-from <alistair23@gmail.com>) id 1gti5R-0001Jk-An
+	for qemu-riscv@nongnu.org; Tue, 12 Feb 2019 19:07:39 -0500
+Received: from mail-lf1-x143.google.com ([2a00:1450:4864:20::143]:41199)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
 	(Exim 4.71) (envelope-from <alistair23@gmail.com>)
-	id 1gthR6-00013o-KQ; Tue, 12 Feb 2019 18:25:58 -0500
-Received: by mail-lj1-x243.google.com with SMTP id v16so329018ljg.13;
-	Tue, 12 Feb 2019 15:25:43 -0800 (PST)
+	id 1gti5O-0001Ck-4u; Tue, 12 Feb 2019 19:07:36 -0500
+Received: by mail-lf1-x143.google.com with SMTP id e27so379279lfj.8;
+	Tue, 12 Feb 2019 16:07:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=4o1KZOFVlLavZEgZpEDb62/xA2Dvw2cYt/RzIMMDu2A=;
-	b=UpISzNxHknNrfkIkxUE6cOT90mVaJPpu7raKt60LqTrNynN5Ni6eOXqn7wWeR3RFlk
-	fVofhVt3PmXuE/d/FL7Vuj8EZuTQhKdcFlED9hB/mg7p53OKx8UoXoQ0Krb7C2Aa+PgC
-	wzOzmSXk2l9aaVgo8I5JWHutae1CYwTIcq8HjOfdXVWPL8yo/eMhd388kxpIn17yErwz
-	u3FPE+HGoKTxqqGlMZ3wokiPTlyctDRG/qtCfAoFxInmWSRTkLpAkaHfCgM0pzld0SnC
-	kjjVcHYYu4OnR/vboG6Ev7OnXKgxboIsta9wB1nnDldbi8DqWdrLzjFzsI/hMPooSLOI
-	M+Gw==
+	:cc:content-transfer-encoding;
+	bh=sEi+yH+juYQTF78Kq+3S2t5w18bbZxLaXebDobbw4s0=;
+	b=UYTeJLYbG/tY255Jsk5ZywDPqeLu6hWZglukF+SZ/C3gV+VjPSgrEN6IZIRa+sPOel
+	V9bPKXzHws3/Y/lgIuAIj1zKhpAjV7ZomrrpBB+SmL28vJM2yTAl/ZIyD4gG5L7SDE8e
+	hsE1JDR8Y4sJNDvc6hUitFTRhy9UpcVQ2bF3/d9U34Nt3kf0WdxXiKmlv0dw2Q7R1z1A
+	bu/Aer7hbxc/4YmbnK5vuW8fOU81Gjt/vm+TA/bXFDDfH0h08YsGYookM75iuNkY3qkC
+	VXACY9yueVe0DsT/A2CxG9H/6Y0GEu/NByjQJKYCp7r0zOVGU5lCXXZfo14r0ujA/2H8
+	hftA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=4o1KZOFVlLavZEgZpEDb62/xA2Dvw2cYt/RzIMMDu2A=;
-	b=dLbRb5Odthon29ooTvRhsKdZgVaeoyymNhFoJjIEkVdTXC4DqEmINgJ4QM7K6IXgi8
-	8z1RyiDBiGCcHsDPa42pv7iVFmUaQv4wC6q0wH/5gWsfPqsGgquTraWIoXww7MoVb1wh
-	GENFGedI5vzHV6EbmGeG5YxBv70nETHVbC/j18J1TZZKk8ETzqwhZS+SKAZK/4j+o9+X
-	TQbHgMpQy/pMeY32IG/eYue+FQbFaVzUk6HHJ/mHFHTEBlZgXLcDjD3VPsCCtL2sPLeC
-	7Wee23xd56tEf8QtQo578P/VEMBzCfGL7YYd1ZKX41XJ6d+jY5rMj+GriUaP3wqyKTmp
-	kzPg==
-X-Gm-Message-State: AHQUAubM1EMWNdbTJllw8cikdHV0mMffwDckjHpz4owhXEcqmLTf6hKD
-	EwSeclYLtD42InilwX9xBTXI6kMtouvMU6R5Cy3QbMHC
-X-Google-Smtp-Source: AHgI3Ia9ZrxPFEbRc1dxtm2MudM+mdH32pGJTrsekOs0ou1LUfQe948PKSOBym86P5HFnupkJEK1RfxwE+b2CBF5pcQ=
-X-Received: by 2002:a2e:3308:: with SMTP id d8-v6mr3659794ljc.38.1550013942058;
-	Tue, 12 Feb 2019 15:25:42 -0800 (PST)
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=sEi+yH+juYQTF78Kq+3S2t5w18bbZxLaXebDobbw4s0=;
+	b=ZSJJfpn7dSd2h18pLC4T0WKowlk/TOBsAD0NkNp/PJBg6DAIh/DdY+uXbDK1dIxt9/
+	Jigj0HsJH2IhoLbpUrB70y2yRZE80sWV8l38cxO2AXCAeJdScX3wc0LSN6V2eAld/r9d
+	4C3qevj51k5tXCcam+QB8HnfB8Wo+C9GJOj9AOgEgiJnLhQqY1e3rMgg0uzQ2vpLq+FW
+	/Adj2eR27OpV0ylIts9a/O3goVnsPoxLhtbXghWcToofXAh4PdaSo/jpUD51RLaw7SDK
+	Eo7zrP/cKLIv8XUATfYQaI+Ov8Nfi06KGfVvfFhE4RFrN5ybyyg6P0FMw5UakmdvDdNR
+	2E9A==
+X-Gm-Message-State: AHQUAuYMdNFhCppq64PtyK+vQTiyRyEFfn0V7nUyuwPJwCCHbmUoHev6
+	R4pj7oPkNuzIkoKFz9pAOCVP5ERiIFhtMXEahm4=
+X-Google-Smtp-Source: AHgI3IYgHIJDWjszKTeZUWptTThTbEwNseNOrVETbQ1t4SIk8cU5iVQf3cX/sc3fU5vbn/PwcGly8cQ6tYgR/nuB/Bw=
+X-Received: by 2002:ac2:43c3:: with SMTP id u3mr811252lfl.114.1550016446260;
+	Tue, 12 Feb 2019 16:07:26 -0800 (PST)
 MIME-Version: 1.0
-References: <CAFyWVabfDYU+2+iDYOeFMBL4+hVFL5q=fSR7Pb=VX1af5xsTNg@mail.gmail.com>
-	<20190212230926.9273-1-jimw@sifive.com>
-In-Reply-To: <20190212230926.9273-1-jimw@sifive.com>
+References: <20190212173839.31587-1-chouteau@adacore.com>
+In-Reply-To: <20190212173839.31587-1-chouteau@adacore.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 12 Feb 2019 15:24:59 -0800
-Message-ID: <CAKmqyKNO4A6X6m73ibNyt4PM=kqEsSXdFMZYekRB506+QEqm9w@mail.gmail.com>
-To: Jim Wilson <jimw@sifive.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
-	"open list:RISC-V" <qemu-riscv@nongnu.org>
+Date: Tue, 12 Feb 2019 16:06:41 -0800
+Message-ID: <CAKmqyKOAVDbJQ6avwWgDHP1fHD_EXdZmi+Sjucm05ZqNkQoUog@mail.gmail.com>
+To: Fabien Chouteau <chouteau@adacore.com>
+Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
+	Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+	Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+	Palmer Dabbelt <palmer@sifive.com>, 
+	"open list:All patches CC here" <qemu-devel@nongnu.org>,
+	Michael Clark <mjc@sifive.com>, 
+	Alistair Francis <Alistair.Francis@wdc.com>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2a00:1450:4864:20::243
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v4 5/5] RISC-V: Add hooks to
- use the gdb xml files.
+X-Received-From: 2a00:1450:4864:20::143
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH] SiFive RISC-V GPIO Device
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -66,445 +71,685 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Feb 2019 23:26:05 -0000
+X-List-Received-Date: Wed, 13 Feb 2019 00:07:44 -0000
 
-On Tue, Feb 12, 2019 at 3:10 PM Jim Wilson <jimw@sifive.com> wrote:
+On Tue, Feb 12, 2019 at 9:39 AM Fabien Chouteau <chouteau@adacore.com> wrot=
+e:
 >
-> The gdb CSR xml file has registers in documentation order, not numerical
-> order, so we need a table to map the register numbers.  This also adds
-> fairly standard gdb hooks to access xml specified registers.
+> QEMU model of the GPIO device on the SiFive E300 series SOCs.
 >
-> Signed-off-by: Jim Wilson <jimw@sifive.com>
+> The pins are not used by a board definition yet, however this
+> implementation can already be used to trigger GPIO interrupts from the
+> software by configuring a pin as both output and input.
+>
+> Signed-off-by: Fabien Chouteau <chouteau@adacore.com>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Hey,
+
+Thanks for the patch!
+
+> ---
+>  Makefile.objs                  |   1 +
+>  hw/riscv/Makefile.objs         |   1 +
+>  hw/riscv/sifive_e.c            |  28 ++-
+>  hw/riscv/sifive_gpio.c         | 388 +++++++++++++++++++++++++++++++++
+>  hw/riscv/trace-events          |   7 +
+>  include/hw/riscv/sifive_e.h    |   8 +-
+>  include/hw/riscv/sifive_gpio.h |  72 ++++++
+>  7 files changed, 501 insertions(+), 4 deletions(-)
+>  create mode 100644 hw/riscv/sifive_gpio.c
+>  create mode 100644 hw/riscv/trace-events
+>  create mode 100644 include/hw/riscv/sifive_gpio.h
+>
+> diff --git a/Makefile.objs b/Makefile.objs
+> index 67a054b08a..d40eb089ae 100644
+> --- a/Makefile.objs
+> +++ b/Makefile.objs
+> @@ -184,6 +184,7 @@ trace-events-subdirs +=3D hw/virtio
+>  trace-events-subdirs +=3D hw/watchdog
+>  trace-events-subdirs +=3D hw/xen
+>  trace-events-subdirs +=3D hw/gpio
+> +trace-events-subdirs +=3D hw/riscv
+>  trace-events-subdirs +=3D io
+>  trace-events-subdirs +=3D linux-user
+>  trace-events-subdirs +=3D migration
+> diff --git a/hw/riscv/Makefile.objs b/hw/riscv/Makefile.objs
+> index 1dde01d39d..ced7935371 100644
+> --- a/hw/riscv/Makefile.objs
+> +++ b/hw/riscv/Makefile.objs
+> @@ -7,5 +7,6 @@ obj-y +=3D sifive_plic.o
+>  obj-y +=3D sifive_test.o
+>  obj-y +=3D sifive_u.o
+>  obj-y +=3D sifive_uart.o
+> +obj-y +=3D sifive_gpio.o
+
+I know the other RISC-V files don't do it, but this should go in the
+hw/gpio directory instead of hw/riscv.
+
+>  obj-y +=3D spike.o
+>  obj-y +=3D virt.o
+> diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
+> index 5d9d65ff29..49c1dd986c 100644
+> --- a/hw/riscv/sifive_e.c
+> +++ b/hw/riscv/sifive_e.c
+> @@ -146,11 +146,15 @@ static void riscv_sifive_e_soc_init(Object *obj)
+>                              &error_abort);
+>      object_property_set_int(OBJECT(&s->cpus), smp_cpus, "num-harts",
+>                              &error_abort);
+> +    sysbus_init_child_obj(obj, "riscv.sifive.e.gpio0",
+> +                          &s->gpio, sizeof(s->gpio),
+> +                          TYPE_SIFIVE_GPIO);
+>  }
+>
+>  static void riscv_sifive_e_soc_realize(DeviceState *dev, Error **errp)
+>  {
+>      const struct MemmapEntry *memmap =3D sifive_e_memmap;
+> +    Error *err =3D NULL;
+>
+>      SiFiveESoCState *s =3D RISCV_E_SOC(dev);
+>      MemoryRegion *sys_mem =3D get_system_memory();
+> @@ -184,8 +188,28 @@ static void riscv_sifive_e_soc_realize(DeviceState *=
+dev, Error **errp)
+>      sifive_mmio_emulate(sys_mem, "riscv.sifive.e.aon",
+>          memmap[SIFIVE_E_AON].base, memmap[SIFIVE_E_AON].size);
+>      sifive_prci_create(memmap[SIFIVE_E_PRCI].base);
+> -    sifive_mmio_emulate(sys_mem, "riscv.sifive.e.gpio0",
+> -        memmap[SIFIVE_E_GPIO0].base, memmap[SIFIVE_E_GPIO0].size);
+> +
+> +    /* GPIO */
+> +
+> +    object_property_set_bool(OBJECT(&s->gpio), true, "realized", &err);
+> +    if (err) {
+> +        error_propagate(errp, err);
+> +        return;
+> +    }
+> +
+> +    /* Map GPIO registers */
+> +    sysbus_mmio_map(SYS_BUS_DEVICE(&s->gpio), 0, memmap[SIFIVE_E_GPIO0].=
+base);
+> +
+> +    /* Pass all GPIOs to the SOC layer so they are available to the boar=
+d */
+> +    qdev_pass_gpios(DEVICE(&s->gpio), dev, NULL);
+> +
+> +    /* Connect GPIO interrupts to the PLIC */
+> +    for (int i =3D 0; i < 32; i++) {
+> +        sysbus_connect_irq(SYS_BUS_DEVICE(&s->gpio), i,
+> +                           qdev_get_gpio_in(DEVICE(s->plic),
+> +                                            SIFIVE_E_GPIO0_IRQ0 + i));
+> +    }
+> +
+
+It's common in QEMU world to split your patch in two. One that adds
+the device and then one that connects it.
+
+In this case the patch isn't too complex so it's fine, just for future
+reference.
+
+>      sifive_uart_create(sys_mem, memmap[SIFIVE_E_UART0].base,
+>          serial_hd(0), qdev_get_gpio_in(DEVICE(s->plic), SIFIVE_E_UART0_I=
+RQ));
+>      sifive_mmio_emulate(sys_mem, "riscv.sifive.e.qspi0",
+> diff --git a/hw/riscv/sifive_gpio.c b/hw/riscv/sifive_gpio.c
+> new file mode 100644
+> index 0000000000..06bd8112d7
+> --- /dev/null
+> +++ b/hw/riscv/sifive_gpio.c
+> @@ -0,0 +1,388 @@
+> +/*
+> + * sifive System-on-Chip general purpose input/output register definitio=
+n
+> + *
+> + * Copyright 2019 AdaCore
+> + *
+> + * Base on nrf51_gpio.c:
+> + *
+> + * Copyright 2018 Steffen G=C3=B6rtz <contrib@steffen-goertz.de>
+> + *
+> + * This code is licensed under the GPL version 2 or later.  See
+> + * the COPYING file in the top-level directory.
+> + */
+> +
+> +#include "qemu/osdep.h"
+> +#include "qemu/log.h"
+> +#include "hw/riscv/sifive_gpio.h"
+> +#include "trace.h"
+> +
+> +static void update_output_irq(SIFIVEGPIOState *s)
+> +{
+> +
+
+Remove the new line.
+
+> +    uint32_t pending;
+> +    uint32_t pin;
+> +
+> +    pending =3D s->high_ip & s->high_ie;
+> +    pending |=3D s->low_ip & s->low_ie;
+> +    pending |=3D s->rise_ip & s->rise_ie;
+> +    pending |=3D s->fall_ip & s->fall_ie;
+> +
+> +    for (int i =3D 0; i < SIFIVE_GPIO_PINS; i++) {
+> +        pin =3D 1 << i;
+> +        qemu_set_irq(s->irq[i], (pending & pin) !=3D 0);
+> +        trace_sifive_gpio_update_output_irq(i, (pending & pin) !=3D 0);
+> +    }
+> +}
+> +
+> +static void update_state(SIFIVEGPIOState *s)
+> +{
+> +    size_t i;
+> +    bool prev_ival, in, in_mask, port, out_xor, pull, output_en, input_e=
+n,
+> +        rise_ip, fall_ip, low_ip, high_ip, oval, actual_value, ival;
+> +
+> +    for (i =3D 0; i < SIFIVE_GPIO_PINS; i++) {
+> +
+> +        prev_ival =3D extract32(s->value, i, 1);
+> +        in        =3D extract32(s->in, i, 1);
+> +        in_mask   =3D extract32(s->in_mask, i, 1);
+> +        port      =3D extract32(s->port, i, 1);
+> +        out_xor   =3D extract32(s->out_xor, i, 1);
+> +        pull      =3D extract32(s->pue, i, 1);
+> +        output_en =3D extract32(s->output_en, i, 1);
+> +        input_en  =3D extract32(s->input_en, i, 1);
+> +        rise_ip   =3D extract32(s->rise_ip, i, 1);
+> +        fall_ip   =3D extract32(s->fall_ip, i, 1);
+> +        low_ip    =3D extract32(s->low_ip, i, 1);
+> +        high_ip   =3D extract32(s->high_ip, i, 1);
+> +
+> +        /* Output value (IOF not supported) */
+> +        oval =3D output_en && (port ^ out_xor);
+> +
+> +        /* Pin both driven externally and internally */
+> +        if (output_en && in_mask) {
+> +            qemu_log_mask(LOG_GUEST_ERROR, "GPIO pin %zu short circuited=
+\n", i);
+> +        }
+> +
+> +        if (in_mask) {
+> +            /* The pin is driven by external device */
+> +            actual_value =3D in;
+> +        } else if (output_en) {
+> +            /* The pin is driven by internal circuit */
+> +            actual_value =3D oval;
+> +        } else {
+> +            /* Floating? Apply pull-up resistor */
+> +            actual_value =3D pull;
+> +        }
+> +
+> +        qemu_set_irq(s->output[i], actual_value);
+> +
+> +        /* Input value */
+> +        ival =3D input_en && actual_value;
+> +
+> +        /* Interrupts */
+> +        high_ip =3D high_ip || ival;
+> +        s->high_ip =3D deposit32(s->high_ip, i, 1, high_ip);
+> +
+> +        low_ip =3D low_ip || !ival;
+> +        s->low_ip =3D deposit32(s->low_ip,  i, 1, low_ip);
+> +
+> +        rise_ip =3D rise_ip || (ival && !prev_ival);
+> +        s->rise_ip =3D deposit32(s->rise_ip, i, 1, rise_ip);
+> +
+> +        fall_ip =3D fall_ip || (!ival && prev_ival);
+> +        s->fall_ip =3D deposit32(s->fall_ip, i, 1, fall_ip);
+> +
+> +        /* Update value */
+> +        s->value =3D deposit32(s->value, i, 1, ival);
+> +    }
+> +    update_output_irq(s);
+> +}
+> +
+> +static uint64_t sifive_gpio_read(void *opaque, hwaddr offset, unsigned i=
+nt size)
+> +{
+> +    SIFIVEGPIOState *s =3D SIFIVE_GPIO(opaque);
+> +    uint64_t r =3D 0;
+> +
+> +    switch (offset) {
+> +    case SIFIVE_GPIO_REG_VALUE:
+> +        r =3D s->value;
+> +        break;
+> +
+> +    case SIFIVE_GPIO_REG_INPUT_EN:
+> +        r =3D s->input_en;
+> +        break;
+> +
+> +    case SIFIVE_GPIO_REG_OUTPUT_EN:
+> +        r =3D s->output_en;
+> +        break;
+> +
+> +    case SIFIVE_GPIO_REG_PORT:
+> +        r =3D s->port;
+> +        break;
+> +
+> +    case SIFIVE_GPIO_REG_PUE:
+> +        r =3D s->pue;
+> +        break;
+> +
+> +    case SIFIVE_GPIO_REG_DS:
+> +        r =3D s->ds;
+> +        break;
+> +
+> +    case SIFIVE_GPIO_REG_RISE_IE:
+> +        r =3D s->rise_ie;
+> +        break;
+> +
+> +    case SIFIVE_GPIO_REG_RISE_IP:
+> +        r =3D s->rise_ip;
+> +        break;
+> +
+> +    case SIFIVE_GPIO_REG_FALL_IE:
+> +        r =3D s->fall_ie;
+> +        break;
+> +
+> +    case SIFIVE_GPIO_REG_FALL_IP:
+> +        r =3D s->fall_ip;
+> +        break;
+> +
+> +    case SIFIVE_GPIO_REG_HIGH_IE:
+> +        r =3D s->high_ie;
+> +        break;
+> +
+> +    case SIFIVE_GPIO_REG_HIGH_IP:
+> +        r =3D s->high_ip;
+> +        break;
+> +
+> +    case SIFIVE_GPIO_REG_LOW_IE:
+> +        r =3D s->low_ie;
+> +        break;
+> +
+> +    case SIFIVE_GPIO_REG_LOW_IP:
+> +        r =3D s->low_ip;
+> +        break;
+> +
+> +    case SIFIVE_GPIO_REG_IOF_EN:
+> +        r =3D s->iof_en;
+> +        break;
+> +
+> +    case SIFIVE_GPIO_REG_IOF_SEL:
+> +        r =3D s->iof_sel;
+> +        break;
+> +
+> +    case SIFIVE_GPIO_REG_OUT_XOR:
+> +        r =3D s->out_xor;
+> +        break;
+> +
+> +    default:
+> +        qemu_log_mask(LOG_GUEST_ERROR,
+> +                "%s: bad read offset 0x%" HWADDR_PRIx "\n",
+> +                      __func__, offset);
+> +    }
+> +
+> +    trace_sifive_gpio_read(offset, r);
+> +
+> +    return r;
+> +}
+> +
+> +static void sifive_gpio_write(void *opaque, hwaddr offset,
+> +                       uint64_t value, unsigned int size)
+> +{
+> +    SIFIVEGPIOState *s =3D SIFIVE_GPIO(opaque);
+> +
+> +    trace_sifive_gpio_write(offset, value);
+> +
+> +    switch (offset) {
+> +
+
+No newline here as well
+
+> +    case SIFIVE_GPIO_REG_INPUT_EN:
+> +        s->input_en =3D value;
+> +        break;
+> +
+> +    case SIFIVE_GPIO_REG_OUTPUT_EN:
+> +        s->output_en =3D value;
+> +        break;
+> +
+> +    case SIFIVE_GPIO_REG_PORT:
+> +        s->port =3D value;
+> +        break;
+> +
+> +    case SIFIVE_GPIO_REG_PUE:
+> +        s->pue =3D value;
+> +        break;
+> +
+> +    case SIFIVE_GPIO_REG_DS:
+> +        s->ds =3D value;
+> +        break;
+> +
+> +    case SIFIVE_GPIO_REG_RISE_IE:
+> +        s->rise_ie =3D value;
+> +        break;
+> +
+> +    case SIFIVE_GPIO_REG_RISE_IP:
+> +         /* Write 1 to clear */
+> +        s->rise_ip &=3D ~value;
+> +        break;
+> +
+> +    case SIFIVE_GPIO_REG_FALL_IE:
+> +        s->fall_ie =3D value;
+> +        break;
+> +
+> +    case SIFIVE_GPIO_REG_FALL_IP:
+> +         /* Write 1 to clear */
+> +        s->fall_ip &=3D ~value;
+> +        break;
+> +
+> +    case SIFIVE_GPIO_REG_HIGH_IE:
+> +        s->high_ie =3D value;
+> +        break;
+> +
+> +    case SIFIVE_GPIO_REG_HIGH_IP:
+> +         /* Write 1 to clear */
+> +        s->high_ip &=3D ~value;
+> +        break;
+> +
+> +    case SIFIVE_GPIO_REG_LOW_IE:
+> +        s->low_ie =3D value;
+> +        break;
+> +
+> +    case SIFIVE_GPIO_REG_LOW_IP:
+> +         /* Write 1 to clear */
+> +        s->low_ip &=3D ~value;
+> +        break;
+> +
+> +    case SIFIVE_GPIO_REG_IOF_EN:
+> +        s->iof_en =3D value;
+> +        break;
+> +
+> +    case SIFIVE_GPIO_REG_IOF_SEL:
+> +        s->iof_sel =3D value;
+> +        break;
+> +
+> +    case SIFIVE_GPIO_REG_OUT_XOR:
+> +        s->out_xor =3D value;
+> +        break;
+
+You don't have to hand write these all out most other devices use
+arrays to simplfy this. There is also the register API, which is
+pretty cool (hw/intc/xlnx-zynqmp-ipi.c).
+
+Now that you have already done it this is fine.
+
+> +
+> +    default:
+> +        qemu_log_mask(LOG_GUEST_ERROR,
+> +                      "%s: bad write offset 0x%" HWADDR_PRIx "\n",
+> +                      __func__, offset);
+> +    }
+> +
+> +    update_state(s);
+> +}
+> +
+> +static const MemoryRegionOps gpio_ops =3D {
+> +    .read =3D  sifive_gpio_read,
+> +    .write =3D sifive_gpio_write,
+> +    .endianness =3D DEVICE_LITTLE_ENDIAN,
+> +    .impl.min_access_size =3D 4,
+> +    .impl.max_access_size =3D 4,
+> +};
+> +
+> +static void sifive_gpio_set(void *opaque, int line, int value)
+> +{
+> +    SIFIVEGPIOState *s =3D SIFIVE_GPIO(opaque);
+> +
+> +    trace_sifive_gpio_set(line, value);
+> +
+> +    assert(line >=3D 0 && line < SIFIVE_GPIO_PINS);
+
+g_assert() instead of assert()
+
+> +
+> +    s->in_mask =3D deposit32(s->in_mask, line, 1, value >=3D 0);
+> +    if (value >=3D 0) {
+> +        s->in =3D deposit32(s->in, line, 1, value !=3D 0);
+> +    }
+> +
+> +    update_state(s);
+> +}
+> +
+> +static void sifive_gpio_reset(DeviceState *dev)
+> +{
+> +    SIFIVEGPIOState *s =3D SIFIVE_GPIO(dev);
+> +
+> +    s->value =3D 0;
+> +    s->input_en =3D 0;
+> +    s->output_en =3D 0;
+> +    s->port =3D 0;
+> +    s->pue =3D 0;
+> +    s->ds =3D 0;
+> +    s->rise_ie =3D 0;
+> +    s->rise_ip =3D 0;
+> +    s->fall_ie =3D 0;
+> +    s->fall_ip =3D 0;
+> +    s->high_ie =3D 0;
+> +    s->high_ip =3D 0;
+> +    s->low_ie =3D 0;
+> +    s->low_ip =3D 0;
+> +    s->iof_en =3D 0;
+> +    s->iof_sel =3D 0;
+> +    s->out_xor =3D 0;
+> +    s->in =3D 0;
+> +    s->in_mask =3D 0;
+
+Maybe a memset is better here?
+
+> +
+> +}
+> +
+> +static const VMStateDescription vmstate_sifive_gpio =3D {
+> +    .name =3D TYPE_SIFIVE_GPIO,
+> +    .version_id =3D 1,
+> +    .minimum_version_id =3D 1,
+> +    .fields =3D (VMStateField[]) {
+> +        VMSTATE_UINT32(value,     SIFIVEGPIOState),
+> +        VMSTATE_UINT32(input_en,  SIFIVEGPIOState),
+> +        VMSTATE_UINT32(output_en, SIFIVEGPIOState),
+> +        VMSTATE_UINT32(port,      SIFIVEGPIOState),
+> +        VMSTATE_UINT32(pue,       SIFIVEGPIOState),
+> +        VMSTATE_UINT32(rise_ie,   SIFIVEGPIOState),
+> +        VMSTATE_UINT32(rise_ip,   SIFIVEGPIOState),
+> +        VMSTATE_UINT32(fall_ie,   SIFIVEGPIOState),
+> +        VMSTATE_UINT32(fall_ip,   SIFIVEGPIOState),
+> +        VMSTATE_UINT32(high_ie,   SIFIVEGPIOState),
+> +        VMSTATE_UINT32(high_ip,   SIFIVEGPIOState),
+> +        VMSTATE_UINT32(low_ie,    SIFIVEGPIOState),
+> +        VMSTATE_UINT32(low_ip,    SIFIVEGPIOState),
+> +        VMSTATE_UINT32(iof_en,    SIFIVEGPIOState),
+> +        VMSTATE_UINT32(iof_sel,   SIFIVEGPIOState),
+> +        VMSTATE_UINT32(out_xor,   SIFIVEGPIOState),
+> +        VMSTATE_UINT32(in, SIFIVEGPIOState),
+> +        VMSTATE_UINT32(in_mask, SIFIVEGPIOState),
+> +        VMSTATE_END_OF_LIST()
+> +    }
+> +};
+> +
+> +static void sifive_gpio_init(Object *obj)
+> +{
+> +    SIFIVEGPIOState *s =3D SIFIVE_GPIO(obj);
+> +
+> +    memory_region_init_io(&s->mmio, obj, &gpio_ops, s,
+> +            TYPE_SIFIVE_GPIO, SIFIVE_GPIO_SIZE);
+> +    sysbus_init_mmio(SYS_BUS_DEVICE(obj), &s->mmio);
+> +
+> +
+
+Remove new line.
+
+> +    for (int i =3D 0; i < SIFIVE_GPIO_PINS; i++) {
+> +        sysbus_init_irq(SYS_BUS_DEVICE(obj), &s->irq[i]);
+> +    }
+> +
+> +    qdev_init_gpio_in(DEVICE(s), sifive_gpio_set, SIFIVE_GPIO_PINS);
+> +    qdev_init_gpio_out(DEVICE(s), s->output, SIFIVE_GPIO_PINS);
+> +}
+> +
+> +static void sifive_gpio_class_init(ObjectClass *klass, void *data)
+> +{
+> +    DeviceClass *dc =3D DEVICE_CLASS(klass);
+> +
+> +    dc->vmsd =3D &vmstate_sifive_gpio;
+> +    dc->reset =3D sifive_gpio_reset;
+> +    dc->desc =3D "sifive GPIO";
+> +}
+> +
+> +static const TypeInfo sifive_gpio_info =3D {
+> +    .name =3D TYPE_SIFIVE_GPIO,
+> +    .parent =3D TYPE_SYS_BUS_DEVICE,
+> +    .instance_size =3D sizeof(SIFIVEGPIOState),
+> +    .instance_init =3D sifive_gpio_init,
+> +    .class_init =3D sifive_gpio_class_init
+> +};
+> +
+> +static void sifive_gpio_register_types(void)
+> +{
+> +    type_register_static(&sifive_gpio_info);
+> +}
+> +
+> +type_init(sifive_gpio_register_types)
+> diff --git a/hw/riscv/trace-events b/hw/riscv/trace-events
+> new file mode 100644
+> index 0000000000..6d59233e23
+> --- /dev/null
+> +++ b/hw/riscv/trace-events
+> @@ -0,0 +1,7 @@
+> +# See docs/devel/tracing.txt for syntax documentation.
+> +
+> +# hw/gpio/sifive_gpio.c
+> +sifive_gpio_read(uint64_t offset, uint64_t r) "offset 0x%" PRIx64 " valu=
+e 0x%" PRIx64
+> +sifive_gpio_write(uint64_t offset, uint64_t value) "offset 0x%" PRIx64 "=
+ value 0x%" PRIx64
+> +sifive_gpio_set(int64_t line, int64_t value) "line %" PRIi64 " value %" =
+PRIi64
+> +sifive_gpio_update_output_irq(int64_t line, int64_t value) "line %" PRIi=
+64 " value %" PRIi64
+> diff --git a/include/hw/riscv/sifive_e.h b/include/hw/riscv/sifive_e.h
+> index 7b6d8aed96..6852bc36c6 100644
+> --- a/include/hw/riscv/sifive_e.h
+> +++ b/include/hw/riscv/sifive_e.h
+> @@ -19,6 +19,8 @@
+>  #ifndef HW_SIFIVE_E_H
+>  #define HW_SIFIVE_E_H
+>
+> +#include "hw/riscv/sifive_gpio.h"
+> +
+>  #define TYPE_RISCV_E_SOC "riscv.sifive.e.soc"
+>  #define RISCV_E_SOC(obj) \
+>      OBJECT_CHECK(SiFiveESoCState, (obj), TYPE_RISCV_E_SOC)
+> @@ -30,6 +32,7 @@ typedef struct SiFiveESoCState {
+>      /*< public >*/
+>      RISCVHartArrayState cpus;
+>      DeviceState *plic;
+> +    SIFIVEGPIOState gpio;
+>  } SiFiveESoCState;
+>
+>  typedef struct SiFiveEState {
+> @@ -63,8 +66,9 @@ enum {
+>  };
+>
+>  enum {
+> -    SIFIVE_E_UART0_IRQ =3D 3,
+> -    SIFIVE_E_UART1_IRQ =3D 4
+> +    SIFIVE_E_UART0_IRQ  =3D 3,
+
+Why is this line changing?
+
+Besides the few comments it looks good to me.
 
 Alistair
 
-> ---
->  target/riscv/cpu.c     |   9 +-
->  target/riscv/cpu.h     |   2 +
->  target/riscv/gdbstub.c | 348 +++++++++++++++++++++++++++++++++++++++++++++++--
->  3 files changed, 347 insertions(+), 12 deletions(-)
+> +    SIFIVE_E_UART1_IRQ  =3D 4,
+> +    SIFIVE_E_GPIO0_IRQ0 =3D 8
+>  };
 >
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 28d7e53..c23bd01 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -311,6 +311,8 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
->          return;
->      }
->
-> +    riscv_cpu_register_gdb_regs_for_features(cs);
-> +
->      qemu_init_vcpu(cs);
->      cpu_reset(cs);
->
-> @@ -351,7 +353,12 @@ static void riscv_cpu_class_init(ObjectClass *c, void *data)
->      cc->synchronize_from_tb = riscv_cpu_synchronize_from_tb;
->      cc->gdb_read_register = riscv_cpu_gdb_read_register;
->      cc->gdb_write_register = riscv_cpu_gdb_write_register;
-> -    cc->gdb_num_core_regs = 65;
-> +    cc->gdb_num_core_regs = 33;
-> +#if defined(TARGET_RISCV32)
-> +    cc->gdb_core_xml_file = "riscv-32bit-cpu.xml";
-> +#elif defined(TARGET_RISCV64)
-> +    cc->gdb_core_xml_file = "riscv-64bit-cpu.xml";
-> +#endif
->      cc->gdb_stop_before_watchpoint = true;
->      cc->disas_set_info = riscv_cpu_disas_set_info;
->  #ifdef CONFIG_USER_ONLY
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 04a050e..c10e86c 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -329,6 +329,8 @@ typedef struct {
->  void riscv_get_csr_ops(int csrno, riscv_csr_operations *ops);
->  void riscv_set_csr_ops(int csrno, riscv_csr_operations *ops);
->
-> +void riscv_cpu_register_gdb_regs_for_features(CPUState *cs);
-> +
->  #include "exec/cpu-all.h"
->
->  #endif /* RISCV_CPU_H */
-> diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
-> index 3cabb21..621206d 100644
-> --- a/target/riscv/gdbstub.c
-> +++ b/target/riscv/gdbstub.c
-> @@ -21,6 +21,255 @@
->  #include "exec/gdbstub.h"
->  #include "cpu.h"
->
+>  #define SIFIVE_E_PLIC_HART_CONFIG "M"
+> diff --git a/include/hw/riscv/sifive_gpio.h b/include/hw/riscv/sifive_gpi=
+o.h
+> new file mode 100644
+> index 0000000000..fce03d6c41
+> --- /dev/null
+> +++ b/include/hw/riscv/sifive_gpio.h
+> @@ -0,0 +1,72 @@
 > +/*
-> + * The GDB CSR xml files list them in documentation order, not numerical order,
-> + * and are missing entries for unnamed CSRs.  So we need to map the gdb numbers
-> + * to the hardware numbers.
+> + * sifive System-on-Chip general purpose input/output register definitio=
+n
+> + *
+> + * Copyright 2019 AdaCore
+> + *
+> + * Base on nrf51_gpio.c:
+> + *
+> + * Copyright 2018 Steffen G=C3=B6rtz <contrib@steffen-goertz.de>
+> + *
+> + * This code is licensed under the GPL version 2 or later.  See
+> + * the COPYING file in the top-level directory.
 > + */
+> +#ifndef SIFIVE_GPIO_H
+> +#define SIFIVE_GPIO_H
 > +
-> +static int csr_register_map[] = {
-> +    CSR_USTATUS,
-> +    CSR_UIE,
-> +    CSR_UTVEC,
-> +    CSR_USCRATCH,
-> +    CSR_UEPC,
-> +    CSR_UCAUSE,
-> +    CSR_UTVAL,
-> +    CSR_UIP,
-> +    CSR_FFLAGS,
-> +    CSR_FRM,
-> +    CSR_FCSR,
-> +    CSR_CYCLE,
-> +    CSR_TIME,
-> +    CSR_INSTRET,
-> +    CSR_HPMCOUNTER3,
-> +    CSR_HPMCOUNTER4,
-> +    CSR_HPMCOUNTER5,
-> +    CSR_HPMCOUNTER6,
-> +    CSR_HPMCOUNTER7,
-> +    CSR_HPMCOUNTER8,
-> +    CSR_HPMCOUNTER9,
-> +    CSR_HPMCOUNTER10,
-> +    CSR_HPMCOUNTER11,
-> +    CSR_HPMCOUNTER12,
-> +    CSR_HPMCOUNTER13,
-> +    CSR_HPMCOUNTER14,
-> +    CSR_HPMCOUNTER15,
-> +    CSR_HPMCOUNTER16,
-> +    CSR_HPMCOUNTER17,
-> +    CSR_HPMCOUNTER18,
-> +    CSR_HPMCOUNTER19,
-> +    CSR_HPMCOUNTER20,
-> +    CSR_HPMCOUNTER21,
-> +    CSR_HPMCOUNTER22,
-> +    CSR_HPMCOUNTER23,
-> +    CSR_HPMCOUNTER24,
-> +    CSR_HPMCOUNTER25,
-> +    CSR_HPMCOUNTER26,
-> +    CSR_HPMCOUNTER27,
-> +    CSR_HPMCOUNTER28,
-> +    CSR_HPMCOUNTER29,
-> +    CSR_HPMCOUNTER30,
-> +    CSR_HPMCOUNTER31,
-> +    CSR_CYCLEH,
-> +    CSR_TIMEH,
-> +    CSR_INSTRETH,
-> +    CSR_HPMCOUNTER3H,
-> +    CSR_HPMCOUNTER4H,
-> +    CSR_HPMCOUNTER5H,
-> +    CSR_HPMCOUNTER6H,
-> +    CSR_HPMCOUNTER7H,
-> +    CSR_HPMCOUNTER8H,
-> +    CSR_HPMCOUNTER9H,
-> +    CSR_HPMCOUNTER10H,
-> +    CSR_HPMCOUNTER11H,
-> +    CSR_HPMCOUNTER12H,
-> +    CSR_HPMCOUNTER13H,
-> +    CSR_HPMCOUNTER14H,
-> +    CSR_HPMCOUNTER15H,
-> +    CSR_HPMCOUNTER16H,
-> +    CSR_HPMCOUNTER17H,
-> +    CSR_HPMCOUNTER18H,
-> +    CSR_HPMCOUNTER19H,
-> +    CSR_HPMCOUNTER20H,
-> +    CSR_HPMCOUNTER21H,
-> +    CSR_HPMCOUNTER22H,
-> +    CSR_HPMCOUNTER23H,
-> +    CSR_HPMCOUNTER24H,
-> +    CSR_HPMCOUNTER25H,
-> +    CSR_HPMCOUNTER26H,
-> +    CSR_HPMCOUNTER27H,
-> +    CSR_HPMCOUNTER28H,
-> +    CSR_HPMCOUNTER29H,
-> +    CSR_HPMCOUNTER30H,
-> +    CSR_HPMCOUNTER31H,
-> +    CSR_SSTATUS,
-> +    CSR_SEDELEG,
-> +    CSR_SIDELEG,
-> +    CSR_SIE,
-> +    CSR_STVEC,
-> +    CSR_SCOUNTEREN,
-> +    CSR_SSCRATCH,
-> +    CSR_SEPC,
-> +    CSR_SCAUSE,
-> +    CSR_STVAL,
-> +    CSR_SIP,
-> +    CSR_SATP,
-> +    CSR_MVENDORID,
-> +    CSR_MARCHID,
-> +    CSR_MIMPID,
-> +    CSR_MHARTID,
-> +    CSR_MSTATUS,
-> +    CSR_MISA,
-> +    CSR_MEDELEG,
-> +    CSR_MIDELEG,
-> +    CSR_MIE,
-> +    CSR_MTVEC,
-> +    CSR_MCOUNTEREN,
-> +    CSR_MSCRATCH,
-> +    CSR_MEPC,
-> +    CSR_MCAUSE,
-> +    CSR_MTVAL,
-> +    CSR_MIP,
-> +    CSR_PMPCFG0,
-> +    CSR_PMPCFG1,
-> +    CSR_PMPCFG2,
-> +    CSR_PMPCFG3,
-> +    CSR_PMPADDR0,
-> +    CSR_PMPADDR1,
-> +    CSR_PMPADDR2,
-> +    CSR_PMPADDR3,
-> +    CSR_PMPADDR4,
-> +    CSR_PMPADDR5,
-> +    CSR_PMPADDR6,
-> +    CSR_PMPADDR7,
-> +    CSR_PMPADDR8,
-> +    CSR_PMPADDR9,
-> +    CSR_PMPADDR10,
-> +    CSR_PMPADDR11,
-> +    CSR_PMPADDR12,
-> +    CSR_PMPADDR13,
-> +    CSR_PMPADDR14,
-> +    CSR_PMPADDR15,
-> +    CSR_MCYCLE,
-> +    CSR_MINSTRET,
-> +    CSR_MHPMCOUNTER3,
-> +    CSR_MHPMCOUNTER4,
-> +    CSR_MHPMCOUNTER5,
-> +    CSR_MHPMCOUNTER6,
-> +    CSR_MHPMCOUNTER7,
-> +    CSR_MHPMCOUNTER8,
-> +    CSR_MHPMCOUNTER9,
-> +    CSR_MHPMCOUNTER10,
-> +    CSR_MHPMCOUNTER11,
-> +    CSR_MHPMCOUNTER12,
-> +    CSR_MHPMCOUNTER13,
-> +    CSR_MHPMCOUNTER14,
-> +    CSR_MHPMCOUNTER15,
-> +    CSR_MHPMCOUNTER16,
-> +    CSR_MHPMCOUNTER17,
-> +    CSR_MHPMCOUNTER18,
-> +    CSR_MHPMCOUNTER19,
-> +    CSR_MHPMCOUNTER20,
-> +    CSR_MHPMCOUNTER21,
-> +    CSR_MHPMCOUNTER22,
-> +    CSR_MHPMCOUNTER23,
-> +    CSR_MHPMCOUNTER24,
-> +    CSR_MHPMCOUNTER25,
-> +    CSR_MHPMCOUNTER26,
-> +    CSR_MHPMCOUNTER27,
-> +    CSR_MHPMCOUNTER28,
-> +    CSR_MHPMCOUNTER29,
-> +    CSR_MHPMCOUNTER30,
-> +    CSR_MHPMCOUNTER31,
-> +    CSR_MCYCLEH,
-> +    CSR_MINSTRETH,
-> +    CSR_MHPMCOUNTER3H,
-> +    CSR_MHPMCOUNTER4H,
-> +    CSR_MHPMCOUNTER5H,
-> +    CSR_MHPMCOUNTER6H,
-> +    CSR_MHPMCOUNTER7H,
-> +    CSR_MHPMCOUNTER8H,
-> +    CSR_MHPMCOUNTER9H,
-> +    CSR_MHPMCOUNTER10H,
-> +    CSR_MHPMCOUNTER11H,
-> +    CSR_MHPMCOUNTER12H,
-> +    CSR_MHPMCOUNTER13H,
-> +    CSR_MHPMCOUNTER14H,
-> +    CSR_MHPMCOUNTER15H,
-> +    CSR_MHPMCOUNTER16H,
-> +    CSR_MHPMCOUNTER17H,
-> +    CSR_MHPMCOUNTER18H,
-> +    CSR_MHPMCOUNTER19H,
-> +    CSR_MHPMCOUNTER20H,
-> +    CSR_MHPMCOUNTER21H,
-> +    CSR_MHPMCOUNTER22H,
-> +    CSR_MHPMCOUNTER23H,
-> +    CSR_MHPMCOUNTER24H,
-> +    CSR_MHPMCOUNTER25H,
-> +    CSR_MHPMCOUNTER26H,
-> +    CSR_MHPMCOUNTER27H,
-> +    CSR_MHPMCOUNTER28H,
-> +    CSR_MHPMCOUNTER29H,
-> +    CSR_MHPMCOUNTER30H,
-> +    CSR_MHPMCOUNTER31H,
-> +    CSR_MHPMEVENT3,
-> +    CSR_MHPMEVENT4,
-> +    CSR_MHPMEVENT5,
-> +    CSR_MHPMEVENT6,
-> +    CSR_MHPMEVENT7,
-> +    CSR_MHPMEVENT8,
-> +    CSR_MHPMEVENT9,
-> +    CSR_MHPMEVENT10,
-> +    CSR_MHPMEVENT11,
-> +    CSR_MHPMEVENT12,
-> +    CSR_MHPMEVENT13,
-> +    CSR_MHPMEVENT14,
-> +    CSR_MHPMEVENT15,
-> +    CSR_MHPMEVENT16,
-> +    CSR_MHPMEVENT17,
-> +    CSR_MHPMEVENT18,
-> +    CSR_MHPMEVENT19,
-> +    CSR_MHPMEVENT20,
-> +    CSR_MHPMEVENT21,
-> +    CSR_MHPMEVENT22,
-> +    CSR_MHPMEVENT23,
-> +    CSR_MHPMEVENT24,
-> +    CSR_MHPMEVENT25,
-> +    CSR_MHPMEVENT26,
-> +    CSR_MHPMEVENT27,
-> +    CSR_MHPMEVENT28,
-> +    CSR_MHPMEVENT29,
-> +    CSR_MHPMEVENT30,
-> +    CSR_MHPMEVENT31,
-> +    CSR_TSELECT,
-> +    CSR_TDATA1,
-> +    CSR_TDATA2,
-> +    CSR_TDATA3,
-> +    CSR_DCSR,
-> +    CSR_DPC,
-> +    CSR_DSCRATCH,
-> +    CSR_HSTATUS,
-> +    CSR_HEDELEG,
-> +    CSR_HIDELEG,
-> +    CSR_HIE,
-> +    CSR_HTVEC,
-> +    CSR_HSCRATCH,
-> +    CSR_HEPC,
-> +    CSR_HCAUSE,
-> +    CSR_HBADADDR,
-> +    CSR_HIP,
-> +    CSR_MBASE,
-> +    CSR_MBOUND,
-> +    CSR_MIBASE,
-> +    CSR_MIBOUND,
-> +    CSR_MDBASE,
-> +    CSR_MDBOUND,
-> +    CSR_MUCOUNTEREN,
-> +    CSR_MSCOUNTEREN,
-> +    CSR_MHCOUNTEREN,
-> +};
+> +#include "hw/sysbus.h"
+> +#define TYPE_SIFIVE_GPIO "sifive_soc.gpio"
+> +#define SIFIVE_GPIO(obj) OBJECT_CHECK(SIFIVEGPIOState, (obj), TYPE_SIFIV=
+E_GPIO)
 > +
->  int riscv_cpu_gdb_read_register(CPUState *cs, uint8_t *mem_buf, int n)
->  {
->      RISCVCPU *cpu = RISCV_CPU(cs);
-> @@ -30,13 +279,6 @@ int riscv_cpu_gdb_read_register(CPUState *cs, uint8_t *mem_buf, int n)
->          return gdb_get_regl(mem_buf, env->gpr[n]);
->      } else if (n == 32) {
->          return gdb_get_regl(mem_buf, env->pc);
-> -    } else if (n < 65) {
-> -        return gdb_get_reg64(mem_buf, env->fpr[n - 33]);
-> -    } else if (n < 4096 + 65) {
-> -        target_ulong val = 0;
-> -        if (riscv_csrrw(env, n - 65, &val, 0, 0) == 0) {
-> -            return gdb_get_regl(mem_buf, val);
-> -        }
->      }
->      return 0;
->  }
-> @@ -55,14 +297,98 @@ int riscv_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
->      } else if (n == 32) {
->          env->pc = ldtul_p(mem_buf);
->          return sizeof(target_ulong);
-> -    } else if (n < 65) {
-> -        env->fpr[n - 33] = ldq_p(mem_buf); /* always 64-bit */
-> +    }
-> +    return 0;
-> +}
+> +#define SIFIVE_GPIO_PINS 32
 > +
-> +static int riscv_gdb_get_fpu(CPURISCVState *env, uint8_t *mem_buf, int n)
-> +{
-> +    if (n < 32) {
-> +        return gdb_get_reg64(mem_buf, env->fpr[n]);
-> +    } else if (n < 35) {
-> +        target_ulong val = 0;
-> +        int result;
-> +        /*
-> +         * CSR_FFLAGS is 0x001, and gdb says it is FP register 32, so we
-> +         * subtract 31 to map the gdb FP register number to the CSR number.
-> +         * This also works for CSR_FRM and CSR_FCSR.
-> +         */
-> +        result = riscv_csrrw_debug(env, n - 31, &val, 0, 0);
-> +        if (result == 0) {
-> +            return gdb_get_regl(mem_buf, val);
-> +        }
-> +    }
-> +    return 0;
-> +}
+> +#define SIFIVE_GPIO_SIZE 0x100
 > +
-> +static int riscv_gdb_set_fpu(CPURISCVState *env, uint8_t *mem_buf, int n)
-> +{
-> +    if (n < 32) {
-> +        env->fpr[n] = ldq_p(mem_buf); /* always 64-bit */
->          return sizeof(uint64_t);
-> -    } else if (n < 4096 + 65) {
-> +    } else if (n < 35) {
->          target_ulong val = ldtul_p(mem_buf);
-> -        if (riscv_csrrw(env, n - 65, NULL, val, -1) == 0) {
-> +        int result;
-> +        /*
-> +         * CSR_FFLAGS is 0x001, and gdb says it is FP register 32, so we
-> +         * subtract 31 to map the gdb FP register number to the CSR number.
-> +         * This also works for CSR_FRM and CSR_FCSR.
-> +         */
-> +        result = riscv_csrrw_debug(env, n - 31, NULL, val, -1);
-> +        if (result == 0) {
->              return sizeof(target_ulong);
->          }
->      }
->      return 0;
->  }
+> +#define SIFIVE_GPIO_REG_VALUE      0x000
+> +#define SIFIVE_GPIO_REG_INPUT_EN   0x004
+> +#define SIFIVE_GPIO_REG_OUTPUT_EN  0x008
+> +#define SIFIVE_GPIO_REG_PORT       0x00C
+> +#define SIFIVE_GPIO_REG_PUE        0x010
+> +#define SIFIVE_GPIO_REG_DS         0x014
+> +#define SIFIVE_GPIO_REG_RISE_IE    0x018
+> +#define SIFIVE_GPIO_REG_RISE_IP    0x01C
+> +#define SIFIVE_GPIO_REG_FALL_IE    0x020
+> +#define SIFIVE_GPIO_REG_FALL_IP    0x024
+> +#define SIFIVE_GPIO_REG_HIGH_IE    0x028
+> +#define SIFIVE_GPIO_REG_HIGH_IP    0x02C
+> +#define SIFIVE_GPIO_REG_LOW_IE     0x030
+> +#define SIFIVE_GPIO_REG_LOW_IP     0x034
+> +#define SIFIVE_GPIO_REG_IOF_EN     0x038
+> +#define SIFIVE_GPIO_REG_IOF_SEL    0x03C
+> +#define SIFIVE_GPIO_REG_OUT_XOR    0x040
 > +
-> +static int riscv_gdb_get_csr(CPURISCVState *env, uint8_t *mem_buf, int n)
-> +{
-> +    if (n < ARRAY_SIZE(csr_register_map)) {
-> +        target_ulong val = 0;
-> +        int result;
+> +typedef struct SIFIVEGPIOState {
+> +    SysBusDevice parent_obj;
 > +
-> +        result = riscv_csrrw_debug(env, csr_register_map[n], &val, 0, 0);
-> +        if (result == 0) {
-> +            return gdb_get_regl(mem_buf, val);
-> +        }
-> +    }
-> +    return 0;
-> +}
+> +    MemoryRegion mmio;
 > +
-> +static int riscv_gdb_set_csr(CPURISCVState *env, uint8_t *mem_buf, int n)
-> +{
-> +    if (n < ARRAY_SIZE(csr_register_map)) {
-> +        target_ulong val = ldtul_p(mem_buf);
-> +        int result;
+> +    qemu_irq irq[SIFIVE_GPIO_PINS];
+> +    qemu_irq output[SIFIVE_GPIO_PINS];
 > +
-> +        result = riscv_csrrw_debug(env, csr_register_map[n], NULL, val, -1);
-> +        if (result == 0) {
-> +            return sizeof(target_ulong);
-> +        }
-> +    }
-> +    return 0;
-> +}
+> +    uint32_t value;             /* Actual value of the pin */
+> +    uint32_t input_en;
+> +    uint32_t output_en;
+> +    uint32_t port;              /* Pin value requested by the user */
+> +    uint32_t pue;
+> +    uint32_t ds;
+> +    uint32_t rise_ie;
+> +    uint32_t rise_ip;
+> +    uint32_t fall_ie;
+> +    uint32_t fall_ip;
+> +    uint32_t high_ie;
+> +    uint32_t high_ip;
+> +    uint32_t low_ie;
+> +    uint32_t low_ip;
+> +    uint32_t iof_en;
+> +    uint32_t iof_sel;
+> +    uint32_t out_xor;
+> +    uint32_t in;
+> +    uint32_t in_mask;
 > +
-> +void riscv_cpu_register_gdb_regs_for_features(CPUState *cs)
-> +{
-> +    RISCVCPU *cpu = RISCV_CPU(cs);
-> +    CPURISCVState *env = &cpu->env;
-> +#if defined(TARGET_RISCV32)
-> +    if (env->misa & RVF) {
-> +        gdb_register_coprocessor(cs, riscv_gdb_get_fpu, riscv_gdb_set_fpu,
-> +                                 35, "riscv-32bit-fpu.xml", 0);
-> +    }
+> +} SIFIVEGPIOState;
 > +
-> +    gdb_register_coprocessor(cs, riscv_gdb_get_csr, riscv_gdb_set_csr,
-> +                             4096, "riscv-32bit-csr.xml", 0);
-> +#elif defined(TARGET_RISCV64)
-> +    if (env->misa & RVF) {
-> +        gdb_register_coprocessor(cs, riscv_gdb_get_fpu, riscv_gdb_set_fpu,
-> +                                 35, "riscv-64bit-fpu.xml", 0);
-> +    }
-> +
-> +    gdb_register_coprocessor(cs, riscv_gdb_get_csr, riscv_gdb_set_csr,
-> +                             4096, "riscv-64bit-csr.xml", 0);
 > +#endif
-> +}
 > --
-> 2.7.4
+> 2.17.1
 >
 >
 
