@@ -1,63 +1,57 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gtwtZ-00029B-6e
-	for mharc-qemu-riscv@gnu.org; Wed, 13 Feb 2019 10:56:21 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:59770)
+	id 1gtwta-0002AN-Dw
+	for mharc-qemu-riscv@gnu.org; Wed, 13 Feb 2019 10:56:22 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:59776)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1gtwtO-0001yk-IJ
-	for qemu-riscv@nongnu.org; Wed, 13 Feb 2019 10:56:20 -0500
+	(envelope-from <palmer@sifive.com>) id 1gtwtO-0001yn-Kk
+	for qemu-riscv@nongnu.org; Wed, 13 Feb 2019 10:56:21 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1gtwtL-0002vZ-Fa
+	(envelope-from <palmer@sifive.com>) id 1gtwtM-0002wz-3Q
 	for qemu-riscv@nongnu.org; Wed, 13 Feb 2019 10:56:10 -0500
-Received: from mail-pl1-x632.google.com ([2607:f8b0:4864:20::632]:46759)
+Received: from mail-pg1-x52f.google.com ([2607:f8b0:4864:20::52f]:33969)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1gtwtJ-0000xK-Ei
+	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1gtwtL-0000qC-Oc
 	for qemu-riscv@nongnu.org; Wed, 13 Feb 2019 10:56:07 -0500
-Received: by mail-pl1-x632.google.com with SMTP id o6so1333341pls.13
-	for <qemu-riscv@nongnu.org>; Wed, 13 Feb 2019 07:54:45 -0800 (PST)
+Received: by mail-pg1-x52f.google.com with SMTP id i130so1323281pgd.1
+	for <qemu-riscv@nongnu.org>; Wed, 13 Feb 2019 07:54:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
-	h=subject:date:message-id:in-reply-to:references:cc:from:to;
-	bh=w7VQRx07PCvyefnek535b7w+gwAuVbOr1bTDkd1rg44=;
-	b=ACa08nWLFQ5v2ew7KU58/FLJAlG4na7E6UGwkHysnsFw+6RGAQgd/Hz5u7OsYAh3Sj
-	QTMYjHTxk7PCei1NSdD9Qkroxozhbh3tHXe4w/kQJv4RIVmTys8rhqhbPpHP3Eaj8KMy
-	I+Bl6HP6AwsbVgORW9i95lmG2h+G0qqdj9O5tTqUs10yh75fhr3IlDwlKAiQUSxK1VOT
-	amLHyXrBgwqYPzZ1Esf83tC+e3Zow0HTbfKPbUxULl3s3+53bOXdMoU3qIS4aPe2TfPu
-	ijSeKl4K6aZcRY6+x+1dET7cJnttHKlECpIZLIdwQMbioKD63fyYn8nmKrnZSIeun4Fg
-	emoQ==
+	h=subject:date:message-id:cc:from:to;
+	bh=smx3OqeB2JTeh9mGnu95iZWpQffS83tmuMIb87jUJtU=;
+	b=F4dR0H1h58Zed9CMiwyTLHTiMHl0+VnWOZxOMju7wEz3L5xHFgwLzD5knnMbXNsrC6
+	xqskz1wrNCyGOSqWI8nB/V7PLyQXgQFsWqBaTbdduIlk7l/zKuZF75hkdN4zobxcpq1z
+	qGPUjpMrEnkgS2JYoxLtPs59fj47fRhpZymPP7uKmOXeIGAIMSdukSqWRj6J9u8Gmj1C
+	GJECpEgHVA28n3Ce9TZY7p6VmNmLQJZsf6sKuHzTKnX/pjv8esI4s3jC6ETnwa0RypNt
+	p9JOxohrJZ0ybjKW2K3PM2OVgRZxYX/tfgUlG3xpg31dvq0V2iHT1EXVXXxc8NBplScK
+	sO1A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:date:message-id:in-reply-to:references
-	:cc:from:to;
-	bh=w7VQRx07PCvyefnek535b7w+gwAuVbOr1bTDkd1rg44=;
-	b=ufIMKjUqddLSTB5xre8arihAxVAWZZGQigsvGfrbEDKK2wPg0ja002C79ALQFodVIz
-	aS7Q42WAiOuhTWKx768D2eAHwxiYkJ3weqh5mfZAGWj5KHj8KQQCKZUMOV9tn99FhZwf
-	eGA9z17pu0slJlx78WoJkzjiIg4VrC6bp2ov5lwUcFf+TjT3SgBaBFAcvFNYYpMQzaj1
-	1d/KmJ5DEIab0H8BzrUw0+J+7r3KU3feOOm1SKNF3xq81XP86YtUVCZVKhMGlgA80Vvs
-	9bxuHThENU4Mr0z140yrG+tj/lSz9FlwvSzSZD9bSMEjg+SDDGe4BjH3aZjVNViOQ+mi
-	A+0g==
-X-Gm-Message-State: AHQUAublkFrbIMj01naXYUIX4eaxaAq/uj8xU80tcrhryLNxeTDkO7nQ
-	m3FLAtRKIPsIe1V9929NYupiwg==
-X-Google-Smtp-Source: AHgI3IbpZUY1vf82XWUjixdL4m2O2UAzIuYcEK3aqhA5LoFtjQSkewAi05ihhotzTiRCMm5VsewI/A==
-X-Received: by 2002:a17:902:b715:: with SMTP id
-	d21mr1192473pls.242.1550073284947; 
-	Wed, 13 Feb 2019 07:54:44 -0800 (PST)
+	h=x-gm-message-state:subject:date:message-id:cc:from:to;
+	bh=smx3OqeB2JTeh9mGnu95iZWpQffS83tmuMIb87jUJtU=;
+	b=EVxNiWBQ56nl812LGaiKgfwFjr9BIvbx6WSlka7rVvhaU+FQ8gICoROYkSe/5OuCzK
+	e57wLfZAGCLqefVHJowf96PdOcJqU8rQE4hhC+GDqqDOQAl2bGjxtGw5j7Q6Ac5W+urE
+	fivS7ETvFA427Bn3umVwTynlWXaFLlDXMQMug0htjuZDOZa4D8AZAKc7+CFf5AE+7R1G
+	LGrT/JpLLzzICdiwI0nddmB9Vr06ykLJ1mSsB1Lspor24K/pR93oZMDyTW1ZWYsTbFE6
+	SNurOH1Q66LB0cUuF9ah+JlZ9hbWuUvIG5z2O3UdUhop+/fDd8tpvlugSM4wzVCOh89B
+	dS+g==
+X-Gm-Message-State: AHQUAuZfiC0hXZ8Ic+GmUVljZcPz4qsz+am5h0liFTx6OqD5jRieMM8G
+	WjNpa4UOp7DB416M3YJYg+uanQ5dluc=
+X-Google-Smtp-Source: AHgI3IZXliVQTlX1Oy3LR4XQPBbXGIHI7kFqLOwOzGHrCVEiddBebmCKQ24phP4Xw6pHBUAeCPTOQg==
+X-Received: by 2002:a63:5518:: with SMTP id j24mr1058334pgb.208.1550073276519; 
+	Wed, 13 Feb 2019 07:54:36 -0800 (PST)
 Received: from localhost ([12.206.222.5]) by smtp.gmail.com with ESMTPSA id
-	h79sm31626526pfj.186.2019.02.13.07.54.43
+	125sm21327883pfg.39.2019.02.13.07.54.35
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 13 Feb 2019 07:54:44 -0800 (PST)
-Date: Wed, 13 Feb 2019 07:53:44 -0800
-Message-Id: <20190213155414.22285-6-palmer@sifive.com>
+	Wed, 13 Feb 2019 07:54:35 -0800 (PST)
+Date: Wed, 13 Feb 2019 07:53:39 -0800
+Message-Id: <20190213155414.22285-1-palmer@sifive.com>
 X-Mailer: git-send-email 2.18.1
-In-Reply-To: <20190213155414.22285-1-palmer@sifive.com>
-References: <20190213155414.22285-1-palmer@sifive.com>
-Cc: qemu-devel@nongnu.org, Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
-	Peer Adelt <peer.adelt@hni.uni-paderborn.de>
+Cc: qemu-devel@nongnu.org
 From: Palmer Dabbelt <palmer@sifive.com>
 To: qemu-riscv@nongnu.org
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::632
-Subject: [Qemu-riscv] [PATCH v7 05/35] target/riscv: Convert RV64I
- load/store insns to decodetree
+X-Received-From: 2607:f8b0:4864:20::52f
+Subject: [Qemu-riscv] [PATCH v7 00/35] target/riscv: Convert to decodetree
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -69,124 +63,54 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Feb 2019 15:56:20 -0000
+X-List-Received-Date: Wed, 13 Feb 2019 15:56:21 -0000
 
-From: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+Palmer: I caused some merge conflicts in Bastian's patch set so I
+figured I'd attempt to clean these up.  As far as I'm concerned v6 was
+good to go, but since the merge conflicts were fairly extensive (if
+somewhat mechanical) I'd like to pass the baton back to Bastian here for
+at least a sanity check.
 
-this splits the 64-bit only instructions into its own decode file such
-that we generate the decoder for these instructions only for the RISC-V
-64 bit target.
+Hi,
 
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Signed-off-by: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-Signed-off-by: Peer Adelt <peer.adelt@hni.uni-paderborn.de>
----
- target/riscv/Makefile.objs              |  8 +++++---
- target/riscv/insn32-64.decode           | 25 +++++++++++++++++++++++++
- target/riscv/insn_trans/trans_rvi.inc.c | 20 ++++++++++++++++++++
- target/riscv/translate.c                |  7 -------
- 4 files changed, 50 insertions(+), 10 deletions(-)
- create mode 100644 target/riscv/insn32-64.decode
+this patchset converts the RISC-V decoder to decodetree in four major steps:
 
-diff --git a/target/riscv/Makefile.objs b/target/riscv/Makefile.objs
-index bf0a268033a0..05087a91bb85 100644
---- a/target/riscv/Makefile.objs
-+++ b/target/riscv/Makefile.objs
-@@ -2,10 +2,12 @@ obj-y += translate.o op_helper.o cpu_helper.o cpu.o csr.o fpu_helper.o gdbstub.o
- 
- DECODETREE = $(SRC_PATH)/scripts/decodetree.py
- 
--target/riscv/decode_insn32.inc.c: \
--  $(SRC_PATH)/target/riscv/insn32.decode $(DECODETREE)
-+decode32-y = $(SRC_PATH)/target/riscv/insn32.decode
-+decode32-$(TARGET_RISCV64) += $(SRC_PATH)/target/riscv/insn32-64.decode
-+
-+target/riscv/decode_insn32.inc.c: $(decode32-y) $(DECODETREE)
- 	$(call quiet-command, \
--	  $(PYTHON) $(DECODETREE) -o $@ --decode decode_insn32 $<, \
-+	  $(PYTHON) $(DECODETREE) -o $@ --decode decode_insn32 $(decode32-y), \
- 	  "GEN", $(TARGET_DIR)$@)
- 
- target/riscv/translate.o: target/riscv/decode_insn32.inc.c
-diff --git a/target/riscv/insn32-64.decode b/target/riscv/insn32-64.decode
-new file mode 100644
-index 000000000000..439d4e2c587b
---- /dev/null
-+++ b/target/riscv/insn32-64.decode
-@@ -0,0 +1,25 @@
-+#
-+# RISC-V translation routines for the RV Instruction Set.
-+#
-+# Copyright (c) 2018 Peer Adelt, peer.adelt@hni.uni-paderborn.de
-+#                    Bastian Koppelmann, kbastian@mail.uni-paderborn.de
-+#
-+# This program is free software; you can redistribute it and/or modify it
-+# under the terms and conditions of the GNU General Public License,
-+# version 2 or later, as published by the Free Software Foundation.
-+#
-+# This program is distributed in the hope it will be useful, but WITHOUT
-+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-+# FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-+# more details.
-+#
-+# You should have received a copy of the GNU General Public License along with
-+# this program.  If not, see <http://www.gnu.org/licenses/>.
-+
-+# This is concatenated with insn32.decode for risc64 targets.
-+# Most of the fields and formats are there.
-+
-+# *** RV64I Base Instruction Set (in addition to RV32I) ***
-+lwu      ............   ..... 110 ..... 0000011 @i
-+ld       ............   ..... 011 ..... 0000011 @i
-+sd       ....... .....  ..... 011 ..... 0100011 @s
-diff --git a/target/riscv/insn_trans/trans_rvi.inc.c b/target/riscv/insn_trans/trans_rvi.inc.c
-index d13b7b2b6d8f..61f708dba144 100644
---- a/target/riscv/insn_trans/trans_rvi.inc.c
-+++ b/target/riscv/insn_trans/trans_rvi.inc.c
-@@ -130,3 +130,23 @@ static bool trans_sw(DisasContext *ctx, arg_sw *a)
-     gen_store(ctx, OPC_RISC_SW, a->rs1, a->rs2, a->imm);
-     return true;
- }
-+
-+#ifdef TARGET_RISCV64
-+static bool trans_lwu(DisasContext *ctx, arg_lwu *a)
-+{
-+    gen_load(ctx, OPC_RISC_LWU, a->rd, a->rs1, a->imm);
-+    return true;
-+}
-+
-+static bool trans_ld(DisasContext *ctx, arg_ld *a)
-+{
-+    gen_load(ctx, OPC_RISC_LD, a->rd, a->rs1, a->imm);
-+    return true;
-+}
-+
-+static bool trans_sd(DisasContext *ctx, arg_sd *a)
-+{
-+    gen_store(ctx, OPC_RISC_SD, a->rs1, a->rs2, a->imm);
-+    return true;
-+}
-+#endif
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index c5bcfd6b9756..3b0bcc33d0fe 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -1909,13 +1909,6 @@ static void decode_RV32_64G(DisasContext *ctx)
-     imm = GET_IMM(ctx->opcode);
- 
-     switch (op) {
--    case OPC_RISC_LOAD:
--        gen_load(ctx, MASK_OP_LOAD(ctx->opcode), rd, rs1, imm);
--        break;
--    case OPC_RISC_STORE:
--        gen_store(ctx, MASK_OP_STORE(ctx->opcode), rs1, rs2,
--                  GET_STORE_IMM(ctx->opcode));
--        break;
-     case OPC_RISC_ARITH_IMM:
- #if defined(TARGET_RISCV64)
-     case OPC_RISC_ARITH_IMM_W:
--- 
-2.18.1
+1) Convert 32-bit instructions to decodetree [Patch 1-16]:
+    Many of the gen_* functions are called by the decode functions for 16-bit
+    and 32-bit functions. If we move translation code from the gen_*
+    functions to the generated trans_* functions of decode-tree, we get a lot of
+    duplication. Therefore, we mostly generate calls to the old gen_* function
+    which are properly replaced after step 2).
+
+    Each of the trans_ functions are grouped into files corresponding to their
+    ISA extension, e.g. addi which is in RV32I is translated in the file
+    'trans_rvi.inc.c'.
+
+2) Convert 16-bit instructions to decodetree [Patch 17-19]:
+    All 16 bit instructions have a direct mapping to a 32 bit instruction. Thus,
+    we convert the arguments in the 16 bit trans_ function to the arguments of
+    the corresponding 32 bit instruction and call the 32 bit trans_ function.
+
+3) Remove old manual decoding in gen_* function [Patch 20-30]:
+    this move all manual translation code into the trans_* instructions of
+    decode tree, such that we can remove the old decode_* functions.
+
+4) Simplify RVC by reusing as much as possible from the RVG decoder as suggested
+   by Richard. [Patch 31-35]
+
+full tree available at
+https://github.com/palmer-dabbelt/qemu/tree/riscv-dt-v7
+
+Cheers,
+Bastian
+
+v6 -> v7:
+    - Rebased on top of riscv-for-master-4.0-sf1, which contains a
+      refactoring of the original translation code.
+    - Added handling of mstatus.fs to the floating-point routines.
+
+v5 -> v6:
+    - fixed funky indentation
+
 
 
