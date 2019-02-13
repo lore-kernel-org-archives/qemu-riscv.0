@@ -1,65 +1,71 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gti5a-0002ff-18
-	for mharc-qemu-riscv@gnu.org; Tue, 12 Feb 2019 19:07:46 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:44982)
+	id 1gtk5c-00020q-D3
+	for mharc-qemu-riscv@gnu.org; Tue, 12 Feb 2019 21:15:56 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:40083)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1gti5T-0002bn-U9
-	for qemu-riscv@nongnu.org; Tue, 12 Feb 2019 19:07:44 -0500
+	(envelope-from <palmer@sifive.com>) id 1gtk5Z-00020c-H2
+	for qemu-riscv@nongnu.org; Tue, 12 Feb 2019 21:15:55 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1gti5R-0001Jk-An
-	for qemu-riscv@nongnu.org; Tue, 12 Feb 2019 19:07:39 -0500
-Received: from mail-lf1-x143.google.com ([2a00:1450:4864:20::143]:41199)
+	(envelope-from <palmer@sifive.com>) id 1gtk5X-0000ZG-0e
+	for qemu-riscv@nongnu.org; Tue, 12 Feb 2019 21:15:53 -0500
+Received: from mail-qk1-x741.google.com ([2607:f8b0:4864:20::741]:37206)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <alistair23@gmail.com>)
-	id 1gti5O-0001Ck-4u; Tue, 12 Feb 2019 19:07:36 -0500
-Received: by mail-lf1-x143.google.com with SMTP id e27so379279lfj.8;
-	Tue, 12 Feb 2019 16:07:28 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1gtk5T-0000Re-Fk
+	for qemu-riscv@nongnu.org; Tue, 12 Feb 2019 21:15:49 -0500
+Received: by mail-qk1-x741.google.com with SMTP id m9so487387qkl.4
+	for <qemu-riscv@nongnu.org>; Tue, 12 Feb 2019 18:15:40 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=sEi+yH+juYQTF78Kq+3S2t5w18bbZxLaXebDobbw4s0=;
-	b=UYTeJLYbG/tY255Jsk5ZywDPqeLu6hWZglukF+SZ/C3gV+VjPSgrEN6IZIRa+sPOel
-	V9bPKXzHws3/Y/lgIuAIj1zKhpAjV7ZomrrpBB+SmL28vJM2yTAl/ZIyD4gG5L7SDE8e
-	hsE1JDR8Y4sJNDvc6hUitFTRhy9UpcVQ2bF3/d9U34Nt3kf0WdxXiKmlv0dw2Q7R1z1A
-	bu/Aer7hbxc/4YmbnK5vuW8fOU81Gjt/vm+TA/bXFDDfH0h08YsGYookM75iuNkY3qkC
-	VXACY9yueVe0DsT/A2CxG9H/6Y0GEu/NByjQJKYCp7r0zOVGU5lCXXZfo14r0ujA/2H8
-	hftA==
+	:cc; bh=VLwlVz8CievMATCzrthi2Zg6B8fb9ASgan2YKFAgWto=;
+	b=LtVf5dSGEMS6nXNo/ZcGIjZsvcyvsJBlCGDqINKZHasn5i3IUmdyP2xGjMmz9sgkXn
+	PLrOBUJd26fCjkeQNsJN2j9LoIfQirOMti7iUpnQ9BEb/qTho9zCMTQNiMFFk/3HJ8Ck
+	vqHJzw64G3tlJ+uRnM7hvhnUIAwxfrVA3EOrNHLgpUARVUHuxGFNZ6Y3oQeezPoZxN02
+	3Gmvh2V4wMm3Dl6PdjFA1krqWncn3DsB1Ptf5H0zoouZJKoUFKAObQ0BiLyKf3rZdK1r
+	QkwUFbDvLg4Lc2L2NESp3C7pob0lDxqsuwK9ErffuJJahrM/PhsEznrrIURl8+Ke5o6z
+	+GhA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=sEi+yH+juYQTF78Kq+3S2t5w18bbZxLaXebDobbw4s0=;
-	b=ZSJJfpn7dSd2h18pLC4T0WKowlk/TOBsAD0NkNp/PJBg6DAIh/DdY+uXbDK1dIxt9/
-	Jigj0HsJH2IhoLbpUrB70y2yRZE80sWV8l38cxO2AXCAeJdScX3wc0LSN6V2eAld/r9d
-	4C3qevj51k5tXCcam+QB8HnfB8Wo+C9GJOj9AOgEgiJnLhQqY1e3rMgg0uzQ2vpLq+FW
-	/Adj2eR27OpV0ylIts9a/O3goVnsPoxLhtbXghWcToofXAh4PdaSo/jpUD51RLaw7SDK
-	Eo7zrP/cKLIv8XUATfYQaI+Ov8Nfi06KGfVvfFhE4RFrN5ybyyg6P0FMw5UakmdvDdNR
-	2E9A==
-X-Gm-Message-State: AHQUAuYMdNFhCppq64PtyK+vQTiyRyEFfn0V7nUyuwPJwCCHbmUoHev6
-	R4pj7oPkNuzIkoKFz9pAOCVP5ERiIFhtMXEahm4=
-X-Google-Smtp-Source: AHgI3IYgHIJDWjszKTeZUWptTThTbEwNseNOrVETbQ1t4SIk8cU5iVQf3cX/sc3fU5vbn/PwcGly8cQ6tYgR/nuB/Bw=
-X-Received: by 2002:ac2:43c3:: with SMTP id u3mr811252lfl.114.1550016446260;
-	Tue, 12 Feb 2019 16:07:26 -0800 (PST)
+	:message-id:subject:to:cc;
+	bh=VLwlVz8CievMATCzrthi2Zg6B8fb9ASgan2YKFAgWto=;
+	b=lHKFbTW1eHrxud9aWXZr7zTPNWRqjckakhl3pxzTOTj8mZi3vEuR+u+mIXMXWRTVJw
+	u7W59K5+TI1xyZ41oSkyOMmUdMYjWnXVK5xhNyMJINsSXvDSpHwOrxwS1uiLEbcpgCUO
+	1gZe+PcOurCKFwWVu0ByU8XlhdzLpfAHJj/oqKcKaraeIutDVq/QXb/88OcPW92KAQ6B
+	C5yLzvVVPuYs5FpbJYI6yNWzNZc1Cws+NILoQiaYsCgAh+l2uao3OFGm05bj9RRjjTn1
+	7HKbaivuk3KKp/ezoP1Zs69PCZ9EZodNWzhZWnNlfqrxGyk0gQ3sJE65pbNqne9AQz5I
+	wLVA==
+X-Gm-Message-State: AHQUAua1kCMzuWrfrKl9wHBwuvw8O9UrLQhr4dtccLLcRnxDon8nAQEe
+	Cv33unll9DPeAYRM5xQReAwM+tJTfW4=
+X-Google-Smtp-Source: AHgI3IYUO+CxfFxhXK+Xe8w9lq/V4sV0LFM1QdKhKpTdI8ptLT+G5UnBy7Jy5qNTwN8OVIPREXIMlw==
+X-Received: by 2002:a37:af04:: with SMTP id y4mr4713229qke.271.1550024139565; 
+	Tue, 12 Feb 2019 18:15:39 -0800 (PST)
+Received: from mail-qk1-f175.google.com (mail-qk1-f175.google.com.
+	[209.85.222.175]) by smtp.gmail.com with ESMTPSA id
+	e35sm16796927qte.8.2019.02.12.18.15.38 for <qemu-riscv@nongnu.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 12 Feb 2019 18:15:38 -0800 (PST)
+Received: by mail-qk1-f175.google.com with SMTP id w204so494230qka.2
+	for <qemu-riscv@nongnu.org>; Tue, 12 Feb 2019 18:15:38 -0800 (PST)
+X-Received: by 2002:a37:330c:: with SMTP id z12mr5017584qkz.136.1550024138001; 
+	Tue, 12 Feb 2019 18:15:38 -0800 (PST)
 MIME-Version: 1.0
-References: <20190212173839.31587-1-chouteau@adacore.com>
-In-Reply-To: <20190212173839.31587-1-chouteau@adacore.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 12 Feb 2019 16:06:41 -0800
-Message-ID: <CAKmqyKOAVDbJQ6avwWgDHP1fHD_EXdZmi+Sjucm05ZqNkQoUog@mail.gmail.com>
-To: Fabien Chouteau <chouteau@adacore.com>
-Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
-	Sagar Karandikar <sagark@eecs.berkeley.edu>, 
-	Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
-	Palmer Dabbelt <palmer@sifive.com>, 
-	"open list:All patches CC here" <qemu-devel@nongnu.org>,
-	Michael Clark <mjc@sifive.com>, 
-	Alistair Francis <Alistair.Francis@wdc.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+References: <20190123092538.8004-1-kbastian@mail.uni-paderborn.de>
+	<mhng-0fc7cd00-deda-4e41-abb3-c78657c4f0f1@palmer-si-x1c4>
+In-Reply-To: <mhng-0fc7cd00-deda-4e41-abb3-c78657c4f0f1@palmer-si-x1c4>
+From: Palmer Dabbelt <palmer@sifive.com>
+Date: Tue, 12 Feb 2019 18:15:26 -0800
+X-Gmail-Original-Message-ID: <CANs6eMkMKGKVdnWh2CmEz1sOtXEZh6eMUN5NkCwGjna7zEhh9Q@mail.gmail.com>
+Message-ID: <CANs6eMkMKGKVdnWh2CmEz1sOtXEZh6eMUN5NkCwGjna7zEhh9Q@mail.gmail.com>
+To: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+Cc: Sagar Karandikar <sagark@eecs.berkeley.edu>, qemu-riscv@nongnu.org, 
+	peer.adelt@hni.uni-paderborn.de, richard.henderson@linaro.org, 
+	qemu-devel@nongnu.org
+Content-Type: multipart/alternative; boundary="00000000000023a37a0581bd1e34"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2a00:1450:4864:20::143
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH] SiFive RISC-V GPIO Device
+X-Received-From: 2607:f8b0:4864:20::741
+Subject: Re: [Qemu-riscv] [PATCH v6 00/35] target/riscv: Convert to
+ decodetree
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -71,685 +77,302 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Feb 2019 00:07:44 -0000
+X-List-Received-Date: Wed, 13 Feb 2019 02:15:55 -0000
 
-On Tue, Feb 12, 2019 at 9:39 AM Fabien Chouteau <chouteau@adacore.com> wrot=
-e:
+--00000000000023a37a0581bd1e34
+Content-Type: text/plain; charset="UTF-8"
+
+On Tue, Feb 12, 2019 at 3:21 PM Palmer Dabbelt <palmer@sifive.com> wrote:
+
+> On Wed, 23 Jan 2019 01:25:03 PST (-0800), Bastian Koppelmann wrote:
+> > Hi,
+> >
+> > this patchset converts the RISC-V decoder to decodetree in four major
+> steps:
+> >
+> > 1) Convert 32-bit instructions to decodetree [Patch 1-16]:
+> >     Many of the gen_* functions are called by the decode functions for
+> 16-bit
+> >     and 32-bit functions. If we move translation code from the gen_*
+> >     functions to the generated trans_* functions of decode-tree, we get
+> a lot of
+> >     duplication. Therefore, we mostly generate calls to the old gen_*
+> function
+> >     which are properly replaced after step 2).
+> >
+> >     Each of the trans_ functions are grouped into files corresponding to
+> their
+> >     ISA extension, e.g. addi which is in RV32I is translated in the file
+> >     'trans_rvi.inc.c'.
+> >
+> > 2) Convert 16-bit instructions to decodetree [Patch 17-19]:
+> >     All 16 bit instructions have a direct mapping to a 32 bit
+> instruction. Thus,
+> >     we convert the arguments in the 16 bit trans_ function to the
+> arguments of
+> >     the corresponding 32 bit instruction and call the 32 bit trans_
+> function.
+> >
+> > 3) Remove old manual decoding in gen_* function [Patch 20-30]:
+> >     this move all manual translation code into the trans_* instructions
+> of
+> >     decode tree, such that we can remove the old decode_* functions.
+> >
+> > 4) Simplify RVC by reusing as much as possible from the RVG decoder as
+> suggested
+> >    by Richard. [Patch 31-35]
+> >
+> > full tree available at
+> > https://github.com/bkoppelmann/qemu/tree/riscv-dt-v6
+> >
+> > Cheers,
+> > Bastian
+> >
+> > v5 -> v6:
+> >     - fixed funky indentation
+> >
+> >
+> > Bastian Koppelmann (35):
+> >   target/riscv: Move CPURISCVState pointer to DisasContext
+> >   target/riscv: Activate decodetree and implemnt LUI & AUIPC
+> >   target/riscv: Convert RVXI branch insns to decodetree
+> >   target/riscv: Convert RV32I load/store insns to decodetree
+> >   target/riscv: Convert RV64I load/store insns to decodetree
+> >   target/riscv: Convert RVXI arithmetic insns to decodetree
+> >   target/riscv: Convert RVXI fence insns to decodetree
+> >   target/riscv: Convert RVXI csr insns to decodetree
+> >   target/riscv: Convert RVXM insns to decodetree
+> >   target/riscv: Convert RV32A insns to decodetree
+> >   target/riscv: Convert RV64A insns to decodetree
+> >   target/riscv: Convert RV32F insns to decodetree
+> >   target/riscv: Convert RV64F insns to decodetree
+> >   target/riscv: Convert RV32D insns to decodetree
+> >   target/riscv: Convert RV64D insns to decodetree
+> >   target/riscv: Convert RV priv insns to decodetree
+> >   target/riscv: Convert quadrant 0 of RVXC insns to decodetree
+> >   target/riscv: Convert quadrant 1 of RVXC insns to decodetree
+> >   target/riscv: Convert quadrant 2 of RVXC insns to decodetree
+> >   target/riscv: Remove gen_jalr()
+> >   target/riscv: Remove manual decoding from gen_branch()
+> >   target/riscv: Remove manual decoding from gen_load()
+> >   target/riscv: Remove manual decoding from gen_store()
+> >   target/riscv: Move gen_arith_imm() decoding into trans_* functions
+> >   target/riscv: make ADD/SUB/OR/XOR/AND insn use arg lists
+> >   target/riscv: Remove shift and slt insn manual decoding
+> >   target/riscv: Remove manual decoding of RV32/64M insn
+> >   target/riscv: Rename trans_arith to gen_arith
+> >   target/riscv: Remove gen_system()
+> >   target/riscv: Remove decode_RV32_64G()
+> >   target/riscv: Convert @cs_2 insns to share translation functions
+> >   target/riscv: Convert @cl_d, @cl_w, @cs_d, @cs_w insns
+> >   target/riscv: Splice fsw_sd and flw_ld for riscv32 vs riscv64
+> >   target/riscv: Splice remaining compressed insn pairs for riscv32 vs
+> >     riscv64
+> >   target/riscv: Remaining rvc insn reuse 32 bit translators
+> >
+> >  target/riscv/Makefile.objs                    |   22 +
+> >  target/riscv/insn16-32.decode                 |   31 +
+> >  target/riscv/insn16-64.decode                 |   33 +
+> >  target/riscv/insn16.decode                    |  114 ++
+> >  target/riscv/insn32-64.decode                 |   72 +
+> >  target/riscv/insn32.decode                    |  203 ++
+> >  .../riscv/insn_trans/trans_privileged.inc.c   |  110 +
+> >  target/riscv/insn_trans/trans_rva.inc.c       |  207 ++
+> >  target/riscv/insn_trans/trans_rvc.inc.c       |  149 ++
+> >  target/riscv/insn_trans/trans_rvd.inc.c       |  388 ++++
+> >  target/riscv/insn_trans/trans_rvf.inc.c       |  388 ++++
+> >  target/riscv/insn_trans/trans_rvi.inc.c       |  568 ++++++
+> >  target/riscv/insn_trans/trans_rvm.inc.c       |  107 +
+> >  target/riscv/translate.c                      | 1781 ++---------------
+> >  14 files changed, 2611 insertions(+), 1562 deletions(-)
+> >  create mode 100644 target/riscv/insn16-32.decode
+> >  create mode 100644 target/riscv/insn16-64.decode
+> >  create mode 100644 target/riscv/insn16.decode
+> >  create mode 100644 target/riscv/insn32-64.decode
+> >  create mode 100644 target/riscv/insn32.decode
+> >  create mode 100644 target/riscv/insn_trans/trans_privileged.inc.c
+> >  create mode 100644 target/riscv/insn_trans/trans_rva.inc.c
+> >  create mode 100644 target/riscv/insn_trans/trans_rvc.inc.c
+> >  create mode 100644 target/riscv/insn_trans/trans_rvd.inc.c
+> >  create mode 100644 target/riscv/insn_trans/trans_rvf.inc.c
+> >  create mode 100644 target/riscv/insn_trans/trans_rvi.inc.c
+> >  create mode 100644 target/riscv/insn_trans/trans_rvm.inc.c
 >
-> QEMU model of the GPIO device on the SiFive E300 series SOCs.
+> Do you, by any chance, have a v7?  It looks like there's quite a few merge
+> conflicts here, and while I'm OK fixing them I don't want to do it if you
+> already have.
 >
-> The pins are not used by a board definition yet, however this
-> implementation can already be used to trigger GPIO interrupts from the
-> software by configuring a pin as both output and input.
+
+I made it through my rebase, so unless you want to send out a v7 I will.
+There were some meaningful changes so I'd like to get a round of review
+just so everyone is on the same page.
+
+--00000000000023a37a0581bd1e34
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr">On Tue, Feb 12, 2019 at 3:21 PM Palmer Da=
+bbelt &lt;<a href=3D"mailto:palmer@sifive.com">palmer@sifive.com</a>&gt; wr=
+ote:<br></div><div class=3D"gmail_quote"><blockquote class=3D"gmail_quote" =
+style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);pa=
+dding-left:1ex">On Wed, 23 Jan 2019 01:25:03 PST (-0800), Bastian Koppelman=
+n wrote:<br>
+&gt; Hi,<br>
+&gt;<br>
+&gt; this patchset converts the RISC-V decoder to decodetree in four major =
+steps:<br>
+&gt;<br>
+&gt; 1) Convert 32-bit instructions to decodetree [Patch 1-16]:<br>
+&gt;=C2=A0 =C2=A0 =C2=A0Many of the gen_* functions are called by the decod=
+e functions for 16-bit<br>
+&gt;=C2=A0 =C2=A0 =C2=A0and 32-bit functions. If we move translation code f=
+rom the gen_*<br>
+&gt;=C2=A0 =C2=A0 =C2=A0functions to the generated trans_* functions of dec=
+ode-tree, we get a lot of<br>
+&gt;=C2=A0 =C2=A0 =C2=A0duplication. Therefore, we mostly generate calls to=
+ the old gen_* function<br>
+&gt;=C2=A0 =C2=A0 =C2=A0which are properly replaced after step 2).<br>
+&gt;<br>
+&gt;=C2=A0 =C2=A0 =C2=A0Each of the trans_ functions are grouped into files=
+ corresponding to their<br>
+&gt;=C2=A0 =C2=A0 =C2=A0ISA extension, e.g. addi which is in RV32I is trans=
+lated in the file<br>
+&gt;=C2=A0 =C2=A0 =C2=A0&#39;trans_rvi.inc.c&#39;.<br>
+&gt;<br>
+&gt; 2) Convert 16-bit instructions to decodetree [Patch 17-19]:<br>
+&gt;=C2=A0 =C2=A0 =C2=A0All 16 bit instructions have a direct mapping to a =
+32 bit instruction. Thus,<br>
+&gt;=C2=A0 =C2=A0 =C2=A0we convert the arguments in the 16 bit trans_ funct=
+ion to the arguments of<br>
+&gt;=C2=A0 =C2=A0 =C2=A0the corresponding 32 bit instruction and call the 3=
+2 bit trans_ function.<br>
+&gt;<br>
+&gt; 3) Remove old manual decoding in gen_* function [Patch 20-30]:<br>
+&gt;=C2=A0 =C2=A0 =C2=A0this move all manual translation code into the tran=
+s_* instructions of<br>
+&gt;=C2=A0 =C2=A0 =C2=A0decode tree, such that we can remove the old decode=
+_* functions.<br>
+&gt;<br>
+&gt; 4) Simplify RVC by reusing as much as possible from the RVG decoder as=
+ suggested<br>
+&gt;=C2=A0 =C2=A0 by Richard. [Patch 31-35]<br>
+&gt;<br>
+&gt; full tree available at<br>
+&gt; <a href=3D"https://github.com/bkoppelmann/qemu/tree/riscv-dt-v6" rel=
+=3D"noreferrer" target=3D"_blank">https://github.com/bkoppelmann/qemu/tree/=
+riscv-dt-v6</a><br>
+&gt;<br>
+&gt; Cheers,<br>
+&gt; Bastian<br>
+&gt;<br>
+&gt; v5 -&gt; v6:<br>
+&gt;=C2=A0 =C2=A0 =C2=A0- fixed funky indentation<br>
+&gt;<br>
+&gt;<br>
+&gt; Bastian Koppelmann (35):<br>
+&gt;=C2=A0 =C2=A0target/riscv: Move CPURISCVState pointer to DisasContext<b=
+r>
+&gt;=C2=A0 =C2=A0target/riscv: Activate decodetree and implemnt LUI &amp; A=
+UIPC<br>
+&gt;=C2=A0 =C2=A0target/riscv: Convert RVXI branch insns to decodetree<br>
+&gt;=C2=A0 =C2=A0target/riscv: Convert RV32I load/store insns to decodetree=
+<br>
+&gt;=C2=A0 =C2=A0target/riscv: Convert RV64I load/store insns to decodetree=
+<br>
+&gt;=C2=A0 =C2=A0target/riscv: Convert RVXI arithmetic insns to decodetree<=
+br>
+&gt;=C2=A0 =C2=A0target/riscv: Convert RVXI fence insns to decodetree<br>
+&gt;=C2=A0 =C2=A0target/riscv: Convert RVXI csr insns to decodetree<br>
+&gt;=C2=A0 =C2=A0target/riscv: Convert RVXM insns to decodetree<br>
+&gt;=C2=A0 =C2=A0target/riscv: Convert RV32A insns to decodetree<br>
+&gt;=C2=A0 =C2=A0target/riscv: Convert RV64A insns to decodetree<br>
+&gt;=C2=A0 =C2=A0target/riscv: Convert RV32F insns to decodetree<br>
+&gt;=C2=A0 =C2=A0target/riscv: Convert RV64F insns to decodetree<br>
+&gt;=C2=A0 =C2=A0target/riscv: Convert RV32D insns to decodetree<br>
+&gt;=C2=A0 =C2=A0target/riscv: Convert RV64D insns to decodetree<br>
+&gt;=C2=A0 =C2=A0target/riscv: Convert RV priv insns to decodetree<br>
+&gt;=C2=A0 =C2=A0target/riscv: Convert quadrant 0 of RVXC insns to decodetr=
+ee<br>
+&gt;=C2=A0 =C2=A0target/riscv: Convert quadrant 1 of RVXC insns to decodetr=
+ee<br>
+&gt;=C2=A0 =C2=A0target/riscv: Convert quadrant 2 of RVXC insns to decodetr=
+ee<br>
+&gt;=C2=A0 =C2=A0target/riscv: Remove gen_jalr()<br>
+&gt;=C2=A0 =C2=A0target/riscv: Remove manual decoding from gen_branch()<br>
+&gt;=C2=A0 =C2=A0target/riscv: Remove manual decoding from gen_load()<br>
+&gt;=C2=A0 =C2=A0target/riscv: Remove manual decoding from gen_store()<br>
+&gt;=C2=A0 =C2=A0target/riscv: Move gen_arith_imm() decoding into trans_* f=
+unctions<br>
+&gt;=C2=A0 =C2=A0target/riscv: make ADD/SUB/OR/XOR/AND insn use arg lists<b=
+r>
+&gt;=C2=A0 =C2=A0target/riscv: Remove shift and slt insn manual decoding<br=
 >
-> Signed-off-by: Fabien Chouteau <chouteau@adacore.com>
+&gt;=C2=A0 =C2=A0target/riscv: Remove manual decoding of RV32/64M insn<br>
+&gt;=C2=A0 =C2=A0target/riscv: Rename trans_arith to gen_arith<br>
+&gt;=C2=A0 =C2=A0target/riscv: Remove gen_system()<br>
+&gt;=C2=A0 =C2=A0target/riscv: Remove decode_RV32_64G()<br>
+&gt;=C2=A0 =C2=A0target/riscv: Convert @cs_2 insns to share translation fun=
+ctions<br>
+&gt;=C2=A0 =C2=A0target/riscv: Convert @cl_d, @cl_w, @cs_d, @cs_w insns<br>
+&gt;=C2=A0 =C2=A0target/riscv: Splice fsw_sd and flw_ld for riscv32 vs risc=
+v64<br>
+&gt;=C2=A0 =C2=A0target/riscv: Splice remaining compressed insn pairs for r=
+iscv32 vs<br>
+&gt;=C2=A0 =C2=A0 =C2=A0riscv64<br>
+&gt;=C2=A0 =C2=A0target/riscv: Remaining rvc insn reuse 32 bit translators<=
+br>
+&gt;<br>
+&gt;=C2=A0 target/riscv/Makefile.objs=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A022 +<br>
+&gt;=C2=A0 target/riscv/insn16-32.decode=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A031 +<br>
+&gt;=C2=A0 target/riscv/insn16-64.decode=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A033 +<br>
+&gt;=C2=A0 target/riscv/insn16.decode=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 114 ++<br>
+&gt;=C2=A0 target/riscv/insn32-64.decode=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A072 +<br>
+&gt;=C2=A0 target/riscv/insn32.decode=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 203 ++<br>
+&gt;=C2=A0 .../riscv/insn_trans/trans_privileged.inc.c=C2=A0 =C2=A0|=C2=A0 =
+110 +<br>
+&gt;=C2=A0 target/riscv/insn_trans/trans_rva.inc.c=C2=A0 =C2=A0 =C2=A0 =C2=
+=A0|=C2=A0 207 ++<br>
+&gt;=C2=A0 target/riscv/insn_trans/trans_rvc.inc.c=C2=A0 =C2=A0 =C2=A0 =C2=
+=A0|=C2=A0 149 ++<br>
+&gt;=C2=A0 target/riscv/insn_trans/trans_rvd.inc.c=C2=A0 =C2=A0 =C2=A0 =C2=
+=A0|=C2=A0 388 ++++<br>
+&gt;=C2=A0 target/riscv/insn_trans/trans_rvf.inc.c=C2=A0 =C2=A0 =C2=A0 =C2=
+=A0|=C2=A0 388 ++++<br>
+&gt;=C2=A0 target/riscv/insn_trans/trans_rvi.inc.c=C2=A0 =C2=A0 =C2=A0 =C2=
+=A0|=C2=A0 568 ++++++<br>
+&gt;=C2=A0 target/riscv/insn_trans/trans_rvm.inc.c=C2=A0 =C2=A0 =C2=A0 =C2=
+=A0|=C2=A0 107 +<br>
+&gt;=C2=A0 target/riscv/translate.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 | 1781 ++---------------<br>
+&gt;=C2=A0 14 files changed, 2611 insertions(+), 1562 deletions(-)<br>
+&gt;=C2=A0 create mode 100644 target/riscv/insn16-32.decode<br>
+&gt;=C2=A0 create mode 100644 target/riscv/insn16-64.decode<br>
+&gt;=C2=A0 create mode 100644 target/riscv/insn16.decode<br>
+&gt;=C2=A0 create mode 100644 target/riscv/insn32-64.decode<br>
+&gt;=C2=A0 create mode 100644 target/riscv/insn32.decode<br>
+&gt;=C2=A0 create mode 100644 target/riscv/insn_trans/trans_privileged.inc.=
+c<br>
+&gt;=C2=A0 create mode 100644 target/riscv/insn_trans/trans_rva.inc.c<br>
+&gt;=C2=A0 create mode 100644 target/riscv/insn_trans/trans_rvc.inc.c<br>
+&gt;=C2=A0 create mode 100644 target/riscv/insn_trans/trans_rvd.inc.c<br>
+&gt;=C2=A0 create mode 100644 target/riscv/insn_trans/trans_rvf.inc.c<br>
+&gt;=C2=A0 create mode 100644 target/riscv/insn_trans/trans_rvi.inc.c<br>
+&gt;=C2=A0 create mode 100644 target/riscv/insn_trans/trans_rvm.inc.c<br>
+<br>
+Do you, by any chance, have a v7?=C2=A0 It looks like there&#39;s quite a f=
+ew merge <br>
+conflicts here, and while I&#39;m OK fixing them I don&#39;t want to do it =
+if you <br>
+already have.<br></blockquote><div><br></div><div>I made it through my reba=
+se, so unless you want to send out a v7 I will.=C2=A0 There were some meani=
+ngful changes so I&#39;d like to get a round of review just so everyone is =
+on the same page.=C2=A0</div></div></div>
 
-Hey,
-
-Thanks for the patch!
-
-> ---
->  Makefile.objs                  |   1 +
->  hw/riscv/Makefile.objs         |   1 +
->  hw/riscv/sifive_e.c            |  28 ++-
->  hw/riscv/sifive_gpio.c         | 388 +++++++++++++++++++++++++++++++++
->  hw/riscv/trace-events          |   7 +
->  include/hw/riscv/sifive_e.h    |   8 +-
->  include/hw/riscv/sifive_gpio.h |  72 ++++++
->  7 files changed, 501 insertions(+), 4 deletions(-)
->  create mode 100644 hw/riscv/sifive_gpio.c
->  create mode 100644 hw/riscv/trace-events
->  create mode 100644 include/hw/riscv/sifive_gpio.h
->
-> diff --git a/Makefile.objs b/Makefile.objs
-> index 67a054b08a..d40eb089ae 100644
-> --- a/Makefile.objs
-> +++ b/Makefile.objs
-> @@ -184,6 +184,7 @@ trace-events-subdirs +=3D hw/virtio
->  trace-events-subdirs +=3D hw/watchdog
->  trace-events-subdirs +=3D hw/xen
->  trace-events-subdirs +=3D hw/gpio
-> +trace-events-subdirs +=3D hw/riscv
->  trace-events-subdirs +=3D io
->  trace-events-subdirs +=3D linux-user
->  trace-events-subdirs +=3D migration
-> diff --git a/hw/riscv/Makefile.objs b/hw/riscv/Makefile.objs
-> index 1dde01d39d..ced7935371 100644
-> --- a/hw/riscv/Makefile.objs
-> +++ b/hw/riscv/Makefile.objs
-> @@ -7,5 +7,6 @@ obj-y +=3D sifive_plic.o
->  obj-y +=3D sifive_test.o
->  obj-y +=3D sifive_u.o
->  obj-y +=3D sifive_uart.o
-> +obj-y +=3D sifive_gpio.o
-
-I know the other RISC-V files don't do it, but this should go in the
-hw/gpio directory instead of hw/riscv.
-
->  obj-y +=3D spike.o
->  obj-y +=3D virt.o
-> diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
-> index 5d9d65ff29..49c1dd986c 100644
-> --- a/hw/riscv/sifive_e.c
-> +++ b/hw/riscv/sifive_e.c
-> @@ -146,11 +146,15 @@ static void riscv_sifive_e_soc_init(Object *obj)
->                              &error_abort);
->      object_property_set_int(OBJECT(&s->cpus), smp_cpus, "num-harts",
->                              &error_abort);
-> +    sysbus_init_child_obj(obj, "riscv.sifive.e.gpio0",
-> +                          &s->gpio, sizeof(s->gpio),
-> +                          TYPE_SIFIVE_GPIO);
->  }
->
->  static void riscv_sifive_e_soc_realize(DeviceState *dev, Error **errp)
->  {
->      const struct MemmapEntry *memmap =3D sifive_e_memmap;
-> +    Error *err =3D NULL;
->
->      SiFiveESoCState *s =3D RISCV_E_SOC(dev);
->      MemoryRegion *sys_mem =3D get_system_memory();
-> @@ -184,8 +188,28 @@ static void riscv_sifive_e_soc_realize(DeviceState *=
-dev, Error **errp)
->      sifive_mmio_emulate(sys_mem, "riscv.sifive.e.aon",
->          memmap[SIFIVE_E_AON].base, memmap[SIFIVE_E_AON].size);
->      sifive_prci_create(memmap[SIFIVE_E_PRCI].base);
-> -    sifive_mmio_emulate(sys_mem, "riscv.sifive.e.gpio0",
-> -        memmap[SIFIVE_E_GPIO0].base, memmap[SIFIVE_E_GPIO0].size);
-> +
-> +    /* GPIO */
-> +
-> +    object_property_set_bool(OBJECT(&s->gpio), true, "realized", &err);
-> +    if (err) {
-> +        error_propagate(errp, err);
-> +        return;
-> +    }
-> +
-> +    /* Map GPIO registers */
-> +    sysbus_mmio_map(SYS_BUS_DEVICE(&s->gpio), 0, memmap[SIFIVE_E_GPIO0].=
-base);
-> +
-> +    /* Pass all GPIOs to the SOC layer so they are available to the boar=
-d */
-> +    qdev_pass_gpios(DEVICE(&s->gpio), dev, NULL);
-> +
-> +    /* Connect GPIO interrupts to the PLIC */
-> +    for (int i =3D 0; i < 32; i++) {
-> +        sysbus_connect_irq(SYS_BUS_DEVICE(&s->gpio), i,
-> +                           qdev_get_gpio_in(DEVICE(s->plic),
-> +                                            SIFIVE_E_GPIO0_IRQ0 + i));
-> +    }
-> +
-
-It's common in QEMU world to split your patch in two. One that adds
-the device and then one that connects it.
-
-In this case the patch isn't too complex so it's fine, just for future
-reference.
-
->      sifive_uart_create(sys_mem, memmap[SIFIVE_E_UART0].base,
->          serial_hd(0), qdev_get_gpio_in(DEVICE(s->plic), SIFIVE_E_UART0_I=
-RQ));
->      sifive_mmio_emulate(sys_mem, "riscv.sifive.e.qspi0",
-> diff --git a/hw/riscv/sifive_gpio.c b/hw/riscv/sifive_gpio.c
-> new file mode 100644
-> index 0000000000..06bd8112d7
-> --- /dev/null
-> +++ b/hw/riscv/sifive_gpio.c
-> @@ -0,0 +1,388 @@
-> +/*
-> + * sifive System-on-Chip general purpose input/output register definitio=
-n
-> + *
-> + * Copyright 2019 AdaCore
-> + *
-> + * Base on nrf51_gpio.c:
-> + *
-> + * Copyright 2018 Steffen G=C3=B6rtz <contrib@steffen-goertz.de>
-> + *
-> + * This code is licensed under the GPL version 2 or later.  See
-> + * the COPYING file in the top-level directory.
-> + */
-> +
-> +#include "qemu/osdep.h"
-> +#include "qemu/log.h"
-> +#include "hw/riscv/sifive_gpio.h"
-> +#include "trace.h"
-> +
-> +static void update_output_irq(SIFIVEGPIOState *s)
-> +{
-> +
-
-Remove the new line.
-
-> +    uint32_t pending;
-> +    uint32_t pin;
-> +
-> +    pending =3D s->high_ip & s->high_ie;
-> +    pending |=3D s->low_ip & s->low_ie;
-> +    pending |=3D s->rise_ip & s->rise_ie;
-> +    pending |=3D s->fall_ip & s->fall_ie;
-> +
-> +    for (int i =3D 0; i < SIFIVE_GPIO_PINS; i++) {
-> +        pin =3D 1 << i;
-> +        qemu_set_irq(s->irq[i], (pending & pin) !=3D 0);
-> +        trace_sifive_gpio_update_output_irq(i, (pending & pin) !=3D 0);
-> +    }
-> +}
-> +
-> +static void update_state(SIFIVEGPIOState *s)
-> +{
-> +    size_t i;
-> +    bool prev_ival, in, in_mask, port, out_xor, pull, output_en, input_e=
-n,
-> +        rise_ip, fall_ip, low_ip, high_ip, oval, actual_value, ival;
-> +
-> +    for (i =3D 0; i < SIFIVE_GPIO_PINS; i++) {
-> +
-> +        prev_ival =3D extract32(s->value, i, 1);
-> +        in        =3D extract32(s->in, i, 1);
-> +        in_mask   =3D extract32(s->in_mask, i, 1);
-> +        port      =3D extract32(s->port, i, 1);
-> +        out_xor   =3D extract32(s->out_xor, i, 1);
-> +        pull      =3D extract32(s->pue, i, 1);
-> +        output_en =3D extract32(s->output_en, i, 1);
-> +        input_en  =3D extract32(s->input_en, i, 1);
-> +        rise_ip   =3D extract32(s->rise_ip, i, 1);
-> +        fall_ip   =3D extract32(s->fall_ip, i, 1);
-> +        low_ip    =3D extract32(s->low_ip, i, 1);
-> +        high_ip   =3D extract32(s->high_ip, i, 1);
-> +
-> +        /* Output value (IOF not supported) */
-> +        oval =3D output_en && (port ^ out_xor);
-> +
-> +        /* Pin both driven externally and internally */
-> +        if (output_en && in_mask) {
-> +            qemu_log_mask(LOG_GUEST_ERROR, "GPIO pin %zu short circuited=
-\n", i);
-> +        }
-> +
-> +        if (in_mask) {
-> +            /* The pin is driven by external device */
-> +            actual_value =3D in;
-> +        } else if (output_en) {
-> +            /* The pin is driven by internal circuit */
-> +            actual_value =3D oval;
-> +        } else {
-> +            /* Floating? Apply pull-up resistor */
-> +            actual_value =3D pull;
-> +        }
-> +
-> +        qemu_set_irq(s->output[i], actual_value);
-> +
-> +        /* Input value */
-> +        ival =3D input_en && actual_value;
-> +
-> +        /* Interrupts */
-> +        high_ip =3D high_ip || ival;
-> +        s->high_ip =3D deposit32(s->high_ip, i, 1, high_ip);
-> +
-> +        low_ip =3D low_ip || !ival;
-> +        s->low_ip =3D deposit32(s->low_ip,  i, 1, low_ip);
-> +
-> +        rise_ip =3D rise_ip || (ival && !prev_ival);
-> +        s->rise_ip =3D deposit32(s->rise_ip, i, 1, rise_ip);
-> +
-> +        fall_ip =3D fall_ip || (!ival && prev_ival);
-> +        s->fall_ip =3D deposit32(s->fall_ip, i, 1, fall_ip);
-> +
-> +        /* Update value */
-> +        s->value =3D deposit32(s->value, i, 1, ival);
-> +    }
-> +    update_output_irq(s);
-> +}
-> +
-> +static uint64_t sifive_gpio_read(void *opaque, hwaddr offset, unsigned i=
-nt size)
-> +{
-> +    SIFIVEGPIOState *s =3D SIFIVE_GPIO(opaque);
-> +    uint64_t r =3D 0;
-> +
-> +    switch (offset) {
-> +    case SIFIVE_GPIO_REG_VALUE:
-> +        r =3D s->value;
-> +        break;
-> +
-> +    case SIFIVE_GPIO_REG_INPUT_EN:
-> +        r =3D s->input_en;
-> +        break;
-> +
-> +    case SIFIVE_GPIO_REG_OUTPUT_EN:
-> +        r =3D s->output_en;
-> +        break;
-> +
-> +    case SIFIVE_GPIO_REG_PORT:
-> +        r =3D s->port;
-> +        break;
-> +
-> +    case SIFIVE_GPIO_REG_PUE:
-> +        r =3D s->pue;
-> +        break;
-> +
-> +    case SIFIVE_GPIO_REG_DS:
-> +        r =3D s->ds;
-> +        break;
-> +
-> +    case SIFIVE_GPIO_REG_RISE_IE:
-> +        r =3D s->rise_ie;
-> +        break;
-> +
-> +    case SIFIVE_GPIO_REG_RISE_IP:
-> +        r =3D s->rise_ip;
-> +        break;
-> +
-> +    case SIFIVE_GPIO_REG_FALL_IE:
-> +        r =3D s->fall_ie;
-> +        break;
-> +
-> +    case SIFIVE_GPIO_REG_FALL_IP:
-> +        r =3D s->fall_ip;
-> +        break;
-> +
-> +    case SIFIVE_GPIO_REG_HIGH_IE:
-> +        r =3D s->high_ie;
-> +        break;
-> +
-> +    case SIFIVE_GPIO_REG_HIGH_IP:
-> +        r =3D s->high_ip;
-> +        break;
-> +
-> +    case SIFIVE_GPIO_REG_LOW_IE:
-> +        r =3D s->low_ie;
-> +        break;
-> +
-> +    case SIFIVE_GPIO_REG_LOW_IP:
-> +        r =3D s->low_ip;
-> +        break;
-> +
-> +    case SIFIVE_GPIO_REG_IOF_EN:
-> +        r =3D s->iof_en;
-> +        break;
-> +
-> +    case SIFIVE_GPIO_REG_IOF_SEL:
-> +        r =3D s->iof_sel;
-> +        break;
-> +
-> +    case SIFIVE_GPIO_REG_OUT_XOR:
-> +        r =3D s->out_xor;
-> +        break;
-> +
-> +    default:
-> +        qemu_log_mask(LOG_GUEST_ERROR,
-> +                "%s: bad read offset 0x%" HWADDR_PRIx "\n",
-> +                      __func__, offset);
-> +    }
-> +
-> +    trace_sifive_gpio_read(offset, r);
-> +
-> +    return r;
-> +}
-> +
-> +static void sifive_gpio_write(void *opaque, hwaddr offset,
-> +                       uint64_t value, unsigned int size)
-> +{
-> +    SIFIVEGPIOState *s =3D SIFIVE_GPIO(opaque);
-> +
-> +    trace_sifive_gpio_write(offset, value);
-> +
-> +    switch (offset) {
-> +
-
-No newline here as well
-
-> +    case SIFIVE_GPIO_REG_INPUT_EN:
-> +        s->input_en =3D value;
-> +        break;
-> +
-> +    case SIFIVE_GPIO_REG_OUTPUT_EN:
-> +        s->output_en =3D value;
-> +        break;
-> +
-> +    case SIFIVE_GPIO_REG_PORT:
-> +        s->port =3D value;
-> +        break;
-> +
-> +    case SIFIVE_GPIO_REG_PUE:
-> +        s->pue =3D value;
-> +        break;
-> +
-> +    case SIFIVE_GPIO_REG_DS:
-> +        s->ds =3D value;
-> +        break;
-> +
-> +    case SIFIVE_GPIO_REG_RISE_IE:
-> +        s->rise_ie =3D value;
-> +        break;
-> +
-> +    case SIFIVE_GPIO_REG_RISE_IP:
-> +         /* Write 1 to clear */
-> +        s->rise_ip &=3D ~value;
-> +        break;
-> +
-> +    case SIFIVE_GPIO_REG_FALL_IE:
-> +        s->fall_ie =3D value;
-> +        break;
-> +
-> +    case SIFIVE_GPIO_REG_FALL_IP:
-> +         /* Write 1 to clear */
-> +        s->fall_ip &=3D ~value;
-> +        break;
-> +
-> +    case SIFIVE_GPIO_REG_HIGH_IE:
-> +        s->high_ie =3D value;
-> +        break;
-> +
-> +    case SIFIVE_GPIO_REG_HIGH_IP:
-> +         /* Write 1 to clear */
-> +        s->high_ip &=3D ~value;
-> +        break;
-> +
-> +    case SIFIVE_GPIO_REG_LOW_IE:
-> +        s->low_ie =3D value;
-> +        break;
-> +
-> +    case SIFIVE_GPIO_REG_LOW_IP:
-> +         /* Write 1 to clear */
-> +        s->low_ip &=3D ~value;
-> +        break;
-> +
-> +    case SIFIVE_GPIO_REG_IOF_EN:
-> +        s->iof_en =3D value;
-> +        break;
-> +
-> +    case SIFIVE_GPIO_REG_IOF_SEL:
-> +        s->iof_sel =3D value;
-> +        break;
-> +
-> +    case SIFIVE_GPIO_REG_OUT_XOR:
-> +        s->out_xor =3D value;
-> +        break;
-
-You don't have to hand write these all out most other devices use
-arrays to simplfy this. There is also the register API, which is
-pretty cool (hw/intc/xlnx-zynqmp-ipi.c).
-
-Now that you have already done it this is fine.
-
-> +
-> +    default:
-> +        qemu_log_mask(LOG_GUEST_ERROR,
-> +                      "%s: bad write offset 0x%" HWADDR_PRIx "\n",
-> +                      __func__, offset);
-> +    }
-> +
-> +    update_state(s);
-> +}
-> +
-> +static const MemoryRegionOps gpio_ops =3D {
-> +    .read =3D  sifive_gpio_read,
-> +    .write =3D sifive_gpio_write,
-> +    .endianness =3D DEVICE_LITTLE_ENDIAN,
-> +    .impl.min_access_size =3D 4,
-> +    .impl.max_access_size =3D 4,
-> +};
-> +
-> +static void sifive_gpio_set(void *opaque, int line, int value)
-> +{
-> +    SIFIVEGPIOState *s =3D SIFIVE_GPIO(opaque);
-> +
-> +    trace_sifive_gpio_set(line, value);
-> +
-> +    assert(line >=3D 0 && line < SIFIVE_GPIO_PINS);
-
-g_assert() instead of assert()
-
-> +
-> +    s->in_mask =3D deposit32(s->in_mask, line, 1, value >=3D 0);
-> +    if (value >=3D 0) {
-> +        s->in =3D deposit32(s->in, line, 1, value !=3D 0);
-> +    }
-> +
-> +    update_state(s);
-> +}
-> +
-> +static void sifive_gpio_reset(DeviceState *dev)
-> +{
-> +    SIFIVEGPIOState *s =3D SIFIVE_GPIO(dev);
-> +
-> +    s->value =3D 0;
-> +    s->input_en =3D 0;
-> +    s->output_en =3D 0;
-> +    s->port =3D 0;
-> +    s->pue =3D 0;
-> +    s->ds =3D 0;
-> +    s->rise_ie =3D 0;
-> +    s->rise_ip =3D 0;
-> +    s->fall_ie =3D 0;
-> +    s->fall_ip =3D 0;
-> +    s->high_ie =3D 0;
-> +    s->high_ip =3D 0;
-> +    s->low_ie =3D 0;
-> +    s->low_ip =3D 0;
-> +    s->iof_en =3D 0;
-> +    s->iof_sel =3D 0;
-> +    s->out_xor =3D 0;
-> +    s->in =3D 0;
-> +    s->in_mask =3D 0;
-
-Maybe a memset is better here?
-
-> +
-> +}
-> +
-> +static const VMStateDescription vmstate_sifive_gpio =3D {
-> +    .name =3D TYPE_SIFIVE_GPIO,
-> +    .version_id =3D 1,
-> +    .minimum_version_id =3D 1,
-> +    .fields =3D (VMStateField[]) {
-> +        VMSTATE_UINT32(value,     SIFIVEGPIOState),
-> +        VMSTATE_UINT32(input_en,  SIFIVEGPIOState),
-> +        VMSTATE_UINT32(output_en, SIFIVEGPIOState),
-> +        VMSTATE_UINT32(port,      SIFIVEGPIOState),
-> +        VMSTATE_UINT32(pue,       SIFIVEGPIOState),
-> +        VMSTATE_UINT32(rise_ie,   SIFIVEGPIOState),
-> +        VMSTATE_UINT32(rise_ip,   SIFIVEGPIOState),
-> +        VMSTATE_UINT32(fall_ie,   SIFIVEGPIOState),
-> +        VMSTATE_UINT32(fall_ip,   SIFIVEGPIOState),
-> +        VMSTATE_UINT32(high_ie,   SIFIVEGPIOState),
-> +        VMSTATE_UINT32(high_ip,   SIFIVEGPIOState),
-> +        VMSTATE_UINT32(low_ie,    SIFIVEGPIOState),
-> +        VMSTATE_UINT32(low_ip,    SIFIVEGPIOState),
-> +        VMSTATE_UINT32(iof_en,    SIFIVEGPIOState),
-> +        VMSTATE_UINT32(iof_sel,   SIFIVEGPIOState),
-> +        VMSTATE_UINT32(out_xor,   SIFIVEGPIOState),
-> +        VMSTATE_UINT32(in, SIFIVEGPIOState),
-> +        VMSTATE_UINT32(in_mask, SIFIVEGPIOState),
-> +        VMSTATE_END_OF_LIST()
-> +    }
-> +};
-> +
-> +static void sifive_gpio_init(Object *obj)
-> +{
-> +    SIFIVEGPIOState *s =3D SIFIVE_GPIO(obj);
-> +
-> +    memory_region_init_io(&s->mmio, obj, &gpio_ops, s,
-> +            TYPE_SIFIVE_GPIO, SIFIVE_GPIO_SIZE);
-> +    sysbus_init_mmio(SYS_BUS_DEVICE(obj), &s->mmio);
-> +
-> +
-
-Remove new line.
-
-> +    for (int i =3D 0; i < SIFIVE_GPIO_PINS; i++) {
-> +        sysbus_init_irq(SYS_BUS_DEVICE(obj), &s->irq[i]);
-> +    }
-> +
-> +    qdev_init_gpio_in(DEVICE(s), sifive_gpio_set, SIFIVE_GPIO_PINS);
-> +    qdev_init_gpio_out(DEVICE(s), s->output, SIFIVE_GPIO_PINS);
-> +}
-> +
-> +static void sifive_gpio_class_init(ObjectClass *klass, void *data)
-> +{
-> +    DeviceClass *dc =3D DEVICE_CLASS(klass);
-> +
-> +    dc->vmsd =3D &vmstate_sifive_gpio;
-> +    dc->reset =3D sifive_gpio_reset;
-> +    dc->desc =3D "sifive GPIO";
-> +}
-> +
-> +static const TypeInfo sifive_gpio_info =3D {
-> +    .name =3D TYPE_SIFIVE_GPIO,
-> +    .parent =3D TYPE_SYS_BUS_DEVICE,
-> +    .instance_size =3D sizeof(SIFIVEGPIOState),
-> +    .instance_init =3D sifive_gpio_init,
-> +    .class_init =3D sifive_gpio_class_init
-> +};
-> +
-> +static void sifive_gpio_register_types(void)
-> +{
-> +    type_register_static(&sifive_gpio_info);
-> +}
-> +
-> +type_init(sifive_gpio_register_types)
-> diff --git a/hw/riscv/trace-events b/hw/riscv/trace-events
-> new file mode 100644
-> index 0000000000..6d59233e23
-> --- /dev/null
-> +++ b/hw/riscv/trace-events
-> @@ -0,0 +1,7 @@
-> +# See docs/devel/tracing.txt for syntax documentation.
-> +
-> +# hw/gpio/sifive_gpio.c
-> +sifive_gpio_read(uint64_t offset, uint64_t r) "offset 0x%" PRIx64 " valu=
-e 0x%" PRIx64
-> +sifive_gpio_write(uint64_t offset, uint64_t value) "offset 0x%" PRIx64 "=
- value 0x%" PRIx64
-> +sifive_gpio_set(int64_t line, int64_t value) "line %" PRIi64 " value %" =
-PRIi64
-> +sifive_gpio_update_output_irq(int64_t line, int64_t value) "line %" PRIi=
-64 " value %" PRIi64
-> diff --git a/include/hw/riscv/sifive_e.h b/include/hw/riscv/sifive_e.h
-> index 7b6d8aed96..6852bc36c6 100644
-> --- a/include/hw/riscv/sifive_e.h
-> +++ b/include/hw/riscv/sifive_e.h
-> @@ -19,6 +19,8 @@
->  #ifndef HW_SIFIVE_E_H
->  #define HW_SIFIVE_E_H
->
-> +#include "hw/riscv/sifive_gpio.h"
-> +
->  #define TYPE_RISCV_E_SOC "riscv.sifive.e.soc"
->  #define RISCV_E_SOC(obj) \
->      OBJECT_CHECK(SiFiveESoCState, (obj), TYPE_RISCV_E_SOC)
-> @@ -30,6 +32,7 @@ typedef struct SiFiveESoCState {
->      /*< public >*/
->      RISCVHartArrayState cpus;
->      DeviceState *plic;
-> +    SIFIVEGPIOState gpio;
->  } SiFiveESoCState;
->
->  typedef struct SiFiveEState {
-> @@ -63,8 +66,9 @@ enum {
->  };
->
->  enum {
-> -    SIFIVE_E_UART0_IRQ =3D 3,
-> -    SIFIVE_E_UART1_IRQ =3D 4
-> +    SIFIVE_E_UART0_IRQ  =3D 3,
-
-Why is this line changing?
-
-Besides the few comments it looks good to me.
-
-Alistair
-
-> +    SIFIVE_E_UART1_IRQ  =3D 4,
-> +    SIFIVE_E_GPIO0_IRQ0 =3D 8
->  };
->
->  #define SIFIVE_E_PLIC_HART_CONFIG "M"
-> diff --git a/include/hw/riscv/sifive_gpio.h b/include/hw/riscv/sifive_gpi=
-o.h
-> new file mode 100644
-> index 0000000000..fce03d6c41
-> --- /dev/null
-> +++ b/include/hw/riscv/sifive_gpio.h
-> @@ -0,0 +1,72 @@
-> +/*
-> + * sifive System-on-Chip general purpose input/output register definitio=
-n
-> + *
-> + * Copyright 2019 AdaCore
-> + *
-> + * Base on nrf51_gpio.c:
-> + *
-> + * Copyright 2018 Steffen G=C3=B6rtz <contrib@steffen-goertz.de>
-> + *
-> + * This code is licensed under the GPL version 2 or later.  See
-> + * the COPYING file in the top-level directory.
-> + */
-> +#ifndef SIFIVE_GPIO_H
-> +#define SIFIVE_GPIO_H
-> +
-> +#include "hw/sysbus.h"
-> +#define TYPE_SIFIVE_GPIO "sifive_soc.gpio"
-> +#define SIFIVE_GPIO(obj) OBJECT_CHECK(SIFIVEGPIOState, (obj), TYPE_SIFIV=
-E_GPIO)
-> +
-> +#define SIFIVE_GPIO_PINS 32
-> +
-> +#define SIFIVE_GPIO_SIZE 0x100
-> +
-> +#define SIFIVE_GPIO_REG_VALUE      0x000
-> +#define SIFIVE_GPIO_REG_INPUT_EN   0x004
-> +#define SIFIVE_GPIO_REG_OUTPUT_EN  0x008
-> +#define SIFIVE_GPIO_REG_PORT       0x00C
-> +#define SIFIVE_GPIO_REG_PUE        0x010
-> +#define SIFIVE_GPIO_REG_DS         0x014
-> +#define SIFIVE_GPIO_REG_RISE_IE    0x018
-> +#define SIFIVE_GPIO_REG_RISE_IP    0x01C
-> +#define SIFIVE_GPIO_REG_FALL_IE    0x020
-> +#define SIFIVE_GPIO_REG_FALL_IP    0x024
-> +#define SIFIVE_GPIO_REG_HIGH_IE    0x028
-> +#define SIFIVE_GPIO_REG_HIGH_IP    0x02C
-> +#define SIFIVE_GPIO_REG_LOW_IE     0x030
-> +#define SIFIVE_GPIO_REG_LOW_IP     0x034
-> +#define SIFIVE_GPIO_REG_IOF_EN     0x038
-> +#define SIFIVE_GPIO_REG_IOF_SEL    0x03C
-> +#define SIFIVE_GPIO_REG_OUT_XOR    0x040
-> +
-> +typedef struct SIFIVEGPIOState {
-> +    SysBusDevice parent_obj;
-> +
-> +    MemoryRegion mmio;
-> +
-> +    qemu_irq irq[SIFIVE_GPIO_PINS];
-> +    qemu_irq output[SIFIVE_GPIO_PINS];
-> +
-> +    uint32_t value;             /* Actual value of the pin */
-> +    uint32_t input_en;
-> +    uint32_t output_en;
-> +    uint32_t port;              /* Pin value requested by the user */
-> +    uint32_t pue;
-> +    uint32_t ds;
-> +    uint32_t rise_ie;
-> +    uint32_t rise_ip;
-> +    uint32_t fall_ie;
-> +    uint32_t fall_ip;
-> +    uint32_t high_ie;
-> +    uint32_t high_ip;
-> +    uint32_t low_ie;
-> +    uint32_t low_ip;
-> +    uint32_t iof_en;
-> +    uint32_t iof_sel;
-> +    uint32_t out_xor;
-> +    uint32_t in;
-> +    uint32_t in_mask;
-> +
-> +} SIFIVEGPIOState;
-> +
-> +#endif
-> --
-> 2.17.1
->
->
+--00000000000023a37a0581bd1e34--
 
