@@ -1,69 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gu39F-0002fR-UV
-	for mharc-qemu-riscv@gnu.org; Wed, 13 Feb 2019 17:36:57 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:34907)
+	id 1gu5FV-0000Vc-DG
+	for mharc-qemu-riscv@gnu.org; Wed, 13 Feb 2019 19:51:33 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:60189)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1gu39D-0002dB-SV
-	for qemu-riscv@nongnu.org; Wed, 13 Feb 2019 17:36:56 -0500
+	(envelope-from <palmer@sifive.com>) id 1gu5FT-0000Gq-Nu
+	for qemu-riscv@nongnu.org; Wed, 13 Feb 2019 19:51:32 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1gu39C-0007Xl-Uv
-	for qemu-riscv@nongnu.org; Wed, 13 Feb 2019 17:36:55 -0500
-Received: from mail-lj1-x243.google.com ([2a00:1450:4864:20::243]:46150)
+	(envelope-from <palmer@sifive.com>) id 1gu52L-0005ya-N0
+	for qemu-riscv@nongnu.org; Wed, 13 Feb 2019 19:37:58 -0500
+Received: from mail-pg1-x543.google.com ([2607:f8b0:4864:20::543]:35954)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <alistair23@gmail.com>)
-	id 1gu395-0007Qy-Ur; Wed, 13 Feb 2019 17:36:48 -0500
-Received: by mail-lj1-x243.google.com with SMTP id v16so3441561ljg.13;
-	Wed, 13 Feb 2019 14:36:41 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=SF9RnM52o+4eacfmJ5CwSY/eMyVFPKEmNdEmScWXHMc=;
-	b=U2IU9EzJNKEwrot5Fe8dscxUR9KUMX+0ShY0EOWPPsEdKPaj6wCBBvjFTUQZ1Cg2IF
-	8sZobysq4rd0ivlep59p74/MUW7mmVRR95uuvNNQ9hkix3bGb64OcLaLu/3yzV6jK/8j
-	bqYJQtqoqDOYRhphuq75JoIJP2uUzjTTCbhPt5gGTqtciRpfT0t958Pih999VFSnNtmg
-	gyXItudBCfriASb+yt6Nv8X29WN9sP28uwbNA27FMd9ivReAwWrWlx/GZzG7EdHE/SZb
-	Avvkn2xhcSFE0YQggM4BWAhnNtDeGBt05t4YLOCNFIv3tukeX4b1Dv1ZQ3354Xj5rxXK
-	O3PA==
+	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1gu52L-0005s6-99
+	for qemu-riscv@nongnu.org; Wed, 13 Feb 2019 19:37:57 -0500
+Received: by mail-pg1-x543.google.com with SMTP id r124so2040603pgr.3
+	for <qemu-riscv@nongnu.org>; Wed, 13 Feb 2019 16:37:55 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+	h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
+	:content-transfer-encoding;
+	bh=LDgozyKtT2fNyBiE8cN+GXljAah1U6X0TyD3cvwjQcA=;
+	b=AWDY8PH8taQJFogHaVblsege56GT0PSABRpb4ginbvatbBET6UIL84meO1PdJMyj2F
+	tnoWb2c89f6lUBHVqAZK2gnFV3eofEbYUSbAyyvwrgfGtcm5uvuO+r4jLctTOJwftwB7
+	T7PyzK8YHlhsrwunAtNNIEatckR29ZqpBW5xRJKgTWZI2fNVd1ndFb2tHXxEueHXoz0m
+	NnysDHoTzyvVxlbjDnA4cUSEKwQf+4tCJbaiRDJz4ah3CzRGURO8kNiEcX9p14dbwHxR
+	IPRRPs3DbTZNUMe1qqSU9EmZuKbagWmxGqHx0dpgpwwQrwIZV5xg2R/12af+HHen5RvT
+	UORg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=SF9RnM52o+4eacfmJ5CwSY/eMyVFPKEmNdEmScWXHMc=;
-	b=RVEkxD3ul1Ae7+vy6M/1Kg4rQjTa6f+oghqYqAxxiQwjyswATEESzIOCoO2hcqfp8Q
-	+XWW4WRLzmHOYmyIZ9nlML/T2Sb4wInK7PkpY/VMMTE8IJM4Q65oOq0K8q/dlU/gI80p
-	wm9bP73oZb0r2ahKscYlXyzIa36bCjJfa/qjW5DuIr6HY20Yei8xBXUS7QYe7Z2ehk/+
-	mSZO0V7tgHoQVD0I0oceZ4tgaz54KfydFtpe5UBzqRTiNs2+aDhq4gcWv1ILG/HqWn7G
-	Nq6svVhZPSyAJXlB2JNuVDis+LttNKARguKyAcsac79ZV1+iavHh64Vjay4+eIofEpDi
-	gurg==
-X-Gm-Message-State: AHQUAuZ/MHoSAGAivAmj8gZgLfQQ99UXKimwx0TOIY/AKgrXmUPHZSt+
-	nagrum8CBv5cM+zwaSNQZs2+3WoXbaugd9pNngI=
-X-Google-Smtp-Source: AHgI3IaZcpH/5dCw2umLqglL8S0ntTMqlOLqR0d9AchuirC1BeQtS8LCPz7Xr07/Gux4uyB9l1vUX4CptXBJ9Pnj4ck=
-X-Received: by 2002:a2e:3308:: with SMTP id d8-v6mr294346ljc.38.1550097399976; 
-	Wed, 13 Feb 2019 14:36:39 -0800 (PST)
-MIME-Version: 1.0
-References: <20190212173839.31587-1-chouteau@adacore.com>
-	<CAKmqyKOAVDbJQ6avwWgDHP1fHD_EXdZmi+Sjucm05ZqNkQoUog@mail.gmail.com>
-	<CAFEAcA_5jYqTWVBiTFjumkAHEEwvDkt_f_LHAo=00gkEfoY9sA@mail.gmail.com>
-	<49bd9805-2f40-7d5d-8814-e0a59a9c5be1@redhat.com>
-	<CAFEAcA9GD+Cr_nAgz1CxfrWi7OuEZHrz=Gnh1PLrFJo6-BkOtw@mail.gmail.com>
-In-Reply-To: <CAFEAcA9GD+Cr_nAgz1CxfrWi7OuEZHrz=Gnh1PLrFJo6-BkOtw@mail.gmail.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 13 Feb 2019 14:35:58 -0800
-Message-ID: <CAKmqyKNBVusma92pD-Ad5k=2LNqpm7M=Euvih-MhRuDzW4EymA@mail.gmail.com>
-To: Peter Maydell <peter.maydell@linaro.org>
-Cc: Thomas Huth <thuth@redhat.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>,
-	Sagar Karandikar <sagark@eecs.berkeley.edu>, 
-	Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
-	Palmer Dabbelt <palmer@sifive.com>, 
-	"open list:All patches CC here" <qemu-devel@nongnu.org>,
-	Fabien Chouteau <chouteau@adacore.com>, 
-	Alistair Francis <Alistair.Francis@wdc.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+	h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
+	:mime-version:content-transfer-encoding;
+	bh=LDgozyKtT2fNyBiE8cN+GXljAah1U6X0TyD3cvwjQcA=;
+	b=IFmUDNgvQ3eCAKhH8nklSCfme8WphQwpghXs/CPW52d6bcXdh2vj1RBoCIH8pa2Qrs
+	hJpff5DiZVNCaHQ/N4VaWv/vaBB0NISdwTaeVmyghZLGUUJxrhIOmH4W3VOxggoY/8i8
+	KL8b09MS2s7YX6vOllrozDsec91cmb3GZbMtsb+Pbdwt2ONCTR2xsw7wgWxXmK1QagI3
+	wqax5nOMmA3GryC35ti/BzAUtw075o4jtH7tsUZG8yK2h2u63C0d9L/Wqj+IRq9zqWkh
+	uovcpbE/SYNdaOWBJ0p8hb1qEL8KffzDCRt2BypeROsZ/tmKNmau5Wmn7ZClEm6AOVER
+	6VFQ==
+X-Gm-Message-State: AHQUAuYSm51SV76I3JToShFRqQVnuZLKDumEat2+9NcyGGY7RzfqWjvt
+	i2EChg+7YMI3VOGI2sX+jVUYBQ==
+X-Google-Smtp-Source: AHgI3IaYE0Vp+mMAetl+LUglEmeLpSVecvoNl7sDYlsy0ybOcw8+bYaV4JvkwdVo94atsd3rEhYd8A==
+X-Received: by 2002:a63:c303:: with SMTP id c3mr997005pgd.268.1550104674622;
+	Wed, 13 Feb 2019 16:37:54 -0800 (PST)
+Received: from localhost ([12.206.222.5]) by smtp.gmail.com with ESMTPSA id
+	q21sm716888pfq.138.2019.02.13.16.37.53
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 13 Feb 2019 16:37:53 -0800 (PST)
+Date: Wed, 13 Feb 2019 16:37:53 -0800 (PST)
+X-Google-Original-Date: Wed, 13 Feb 2019 16:36:12 PST (-0800)
+In-Reply-To: <7a7b5675-3d66-6c87-8830-74c60f8a7471@mail.uni-paderborn.de>
+CC: richard.henderson@linaro.org, peer.adelt@hni.uni-paderborn.de,
+	qemu-riscv@nongnu.org, qemu-devel@nongnu.org, sagark@eecs.berkeley.edu
+From: Palmer Dabbelt <palmer@sifive.com>
+To: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+Message-ID: <mhng-ee0701f2-0571-4996-a9e1-2e6e03dd2167@palmer-si-x1c4>
+Mime-Version: 1.0 (MHng)
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2a00:1450:4864:20::243
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH] SiFive RISC-V GPIO Device
+X-Received-From: 2607:f8b0:4864:20::543
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v6 00/35] target/riscv:
+ Convert to decodetree
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -75,59 +71,26 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Feb 2019 22:36:56 -0000
+X-List-Received-Date: Thu, 14 Feb 2019 00:51:32 -0000
 
-On Wed, Feb 13, 2019 at 1:36 PM Peter Maydell <peter.maydell@linaro.org> wr=
-ote:
+On Wed, 13 Feb 2019 01:06:41 PST (-0800), Bastian Koppelmann wrote:
 >
-> On Wed, 13 Feb 2019 at 18:54, Thomas Huth <thuth@redhat.com> wrote:
-> >
-> > On 2019-02-13 18:14, Peter Maydell wrote:
-> > > On Wed, 13 Feb 2019 at 00:13, Alistair Francis <alistair23@gmail.com>=
- wrote:
-> > >> I know the other RISC-V files don't do it, but this should go in the
-> > >> hw/gpio directory instead of hw/riscv.
-> > >
-> > > It might be nice to move those existing riscv devices into
-> > > their proper places at some point: should be a fairly easy
-> > > cleanup patch if somebody wants to take it on. (Advice
-> > > on what should live where available on request.)
-> >
-> > If devices only work on riscv, they should IMHO stay in hw/riscv/. I
-> > think hw/gpio/ and friends should primarily be used if a device is
-> > shared between architectures. If they stay in hw/riscv/ it is way easie=
-r
-> > to match the devices with wildcards in the MAINTAINERS file. Just my
-> > 0.02 =E2=82=AC only, of course.
+> On 2/13/19 3:15 AM, Palmer Dabbelt wrote:
+>> On Tue, Feb 12, 2019 at 3:21 PM Palmer Dabbelt <palmer@sifive.com> wrote:
+> [snip]
+>>>
+>>> Do you, by any chance, have a v7?  It looks like there's quite a few merge
+>>> conflicts here, and while I'm OK fixing them I don't want to do it if you
+>>> already have.
+>>>
+>> I made it through my rebase, so unless you want to send out a v7 I will.
+>> There were some meaningful changes so I'd like to get a round of review
+>> just so everyone is on the same page.
 >
-> This is not the way we generally arrange the source tree,
-> at least not the parts I'm familiar with. The rule of
-> thumb I use is that devices of type X go in hw/X, and
-> hw/$ARCH is only for board models and SoC container objects.
-> I think the model for this is the Linux kernel, which
-> splits drivers for devices into directories by device
-> family, rather than putting them all in arch/whatever.
-> A split that puts all the architecture-specific device
-> models in hw/$ARCH has the significant disadvantage that
-> it would put a huge number of files in hw/arm ...
-
-That is how I understood it as well.
-
-I think some of the current files in hw/riscv/ could be moved, but
-they are somewhat border line and we don't have many files yet so I
-wasn't bothering yet.
-
-This GPIO device doesn't have to be RISC-V specific so it makes sense
-to put it under hw/gpio. The maintainers file will need to be updated
-though.
-
-Alistair
-
 >
-> (More generally, I don't think the exact way we split
-> the source files between directories matters much, but
-> I do think it helps if we try to be consistent about it.)
->
-> thanks
-> -- PMM
+> Thanks for doing this work. I don't have a v7 yet, since I was waiting
+> on your current pull-request to get merged. So please do send a v7, I'm
+> happy to review/test it.
+
+No problem, they're my merge conflicts :).  It's on the list.
 
