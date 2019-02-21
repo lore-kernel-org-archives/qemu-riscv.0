@@ -1,59 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gwcTP-0004gO-HI
-	for mharc-qemu-riscv@gnu.org; Wed, 20 Feb 2019 19:44:23 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:58074)
+	id 1gwcTT-0004kD-B7
+	for mharc-qemu-riscv@gnu.org; Wed, 20 Feb 2019 19:44:27 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:58118)
 	by lists.gnu.org with esmtp (Exim 4.71)
 	(envelope-from <prvs=948ed6046=Alistair.Francis@wdc.com>)
-	id 1gwcTM-0004da-M5
-	for qemu-riscv@nongnu.org; Wed, 20 Feb 2019 19:44:21 -0500
+	id 1gwcTR-0004i6-7E
+	for qemu-riscv@nongnu.org; Wed, 20 Feb 2019 19:44:25 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
 	(envelope-from <prvs=948ed6046=Alistair.Francis@wdc.com>)
-	id 1gwcTL-0002QP-Mu
-	for qemu-riscv@nongnu.org; Wed, 20 Feb 2019 19:44:20 -0500
-Received: from esa1.hgst.iphmx.com ([68.232.141.245]:45683)
+	id 1gwcTQ-0002S6-Cd
+	for qemu-riscv@nongnu.org; Wed, 20 Feb 2019 19:44:25 -0500
+Received: from esa3.hgst.iphmx.com ([216.71.153.141]:49126)
 	by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.71) (envelope-from <prvs=948ed6046=Alistair.Francis@wdc.com>)
-	id 1gwcTF-0002Oe-F1; Wed, 20 Feb 2019 19:44:15 -0500
+	id 1gwcTN-0002QU-3G; Wed, 20 Feb 2019 19:44:22 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
 	d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
-	t=1550709853; x=1582245853;
+	t=1550709861; x=1582245861;
 	h=from:to:cc:subject:date:message-id:references:
 	in-reply-to:content-transfer-encoding:mime-version;
-	bh=s7cdeuwWPw4XIDx2G1GZwXBr44UKN8BU1njWfpy+Hs8=;
-	b=TEAvKygoblZgjvpe8SJhesLC0zvteasHEXySrHauxNw14O+HOyWrzVN8
-	xZC1SXgzsy57o59oVrWmTqILdKIwRlaN9hLOxd9opnJBCuGCRc+SyTxqU
-	aotHfPwSHjBdBMP7odB53UFwJu7Wqbp8hX5j3ZohNu24jQd6OMp3OAV5X
-	mtG05PlCJO/grlWpFsUqIaI3s1tcE7t7vMdutoDqmo0XDWpic4aOP5ztz
-	DhxOI9Sau0PRTd7cWT8fa+8ehI0186SoF4NepNoxgoWNQnAEtMI3IUvWF
-	93UG1LLS9Bp6r4bYKKXZJCAIkFBEGLdQ9YMmkmnJXPmnGMWvong5nbFE0 A==;
-X-IronPort-AV: E=Sophos;i="5.58,393,1544457600"; d="scan'208";a="206985652"
-Received: from mail-co1nam04lp2050.outbound.protection.outlook.com (HELO
-	NAM04-CO1-obe.outbound.protection.outlook.com) ([104.47.45.50])
-	by ob1.hgst.iphmx.com with ESMTP; 21 Feb 2019 08:44:09 +0800
+	bh=/gOAmNvsydMG67UaJC2PD2qnb65CTzoNUErgLy0F96s=;
+	b=X7vjb5NAXU1RkaGRrp3U9DNNcLYrx3J+fZ+qketsyO/Q1JVX92WO6LDp
+	/dNYbTLcpXJzPmdyvyinIleCHLG5Zz8TqDAudSiu4OQy1zH4qKpOt/3pI
+	sbpW8hvRA2tczTSf0Jf38LO4dlwTKE85v2gkTbAoZIAUWALhuap4VZouF
+	aaXgqL4ILj/IkaJVOjAT345Ujf/ec3JKcqjehu/MGSVlZxL4+1OkNXMEc
+	TJYF/WdwtA2cUjVHLS72TBKtEY75oPVYGXez13qbCI52NGZFzwnoh4Ps1
+	Ft/sGMbXZOsSl235z0ZeDE8b8nGrhpnu0ZPWtNLWS3sl0aBkaVy+cK0mB w==;
+X-IronPort-AV: E=Sophos;i="5.58,393,1544457600"; d="scan'208";a="106761275"
+Received: from mail-by2nam05lp2056.outbound.protection.outlook.com (HELO
+	NAM05-BY2-obe.outbound.protection.outlook.com) ([104.47.50.56])
+	by ob1.hgst.iphmx.com with ESMTP; 21 Feb 2019 08:44:20 +0800
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=sharedspace.onmicrosoft.com; s=selector1-wdc-com;
 	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=kjRcIc+pv/5xFVaMUKn29xpMOojQmLLnxA2w6ml31Vo=;
-	b=dbB5YCmbN2OVYoL4wlJR4dtAgqYMnCRXikkvHVJJCxL6onulScAeBzqxZ/wT1CX2l6l0jN3UEF04oclMZusQeWHXZnQD+yGOLg3MDNV1mzsLZrYDyoWRzG6cZKRLtV/I/phwYrfBVK/zEZc5fvh3U8ZUgf25gfOTUSuewX19xSY=
+	bh=/kUQ29t5TrfYlfzqWOQXVR8Cybxb9FdATw7XRW5RQBw=;
+	b=LbRF2D3z8SqtnemSXhgeo4veU5faGcjjPMbJNO/VVk5YFQWdN9CJyFM3Y5Q1u8GLrx5VjrYJVgWiKxOcDoHrX3AF312l5bGYBz5sY9oFto6GWHOJurQHr7aLJt9AawpaoAcRDf+osZGawmpGMF5abKfImwnHbCqn/GfDhSkC3L0=
 Received: from CY4PR04MB0392.namprd04.prod.outlook.com (10.173.190.148) by
-	CY4PR04MB0520.namprd04.prod.outlook.com (10.173.190.17) with Microsoft
+	CY4PR04MB0985.namprd04.prod.outlook.com (10.171.246.157) with Microsoft
 	SMTP
 	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
-	15.20.1643.14; Thu, 21 Feb 2019 00:44:08 +0000
+	15.20.1622.16; Thu, 21 Feb 2019 00:44:18 +0000
 Received: from CY4PR04MB0392.namprd04.prod.outlook.com
 	([fe80::2057:d590:6918:b286]) by
 	CY4PR04MB0392.namprd04.prod.outlook.com
 	([fe80::2057:d590:6918:b286%10]) with mapi id 15.20.1643.014;
-	Thu, 21 Feb 2019 00:44:08 +0000
+	Thu, 21 Feb 2019 00:44:18 +0000
 From: Alistair Francis <Alistair.Francis@wdc.com>
 To: "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, "qemu-riscv@nongnu.org"
 	<qemu-riscv@nongnu.org>
 CC: Alistair Francis <Alistair.Francis@wdc.com>, "alistair23@gmail.com"
 	<alistair23@gmail.com>, "palmer@sifive.com" <palmer@sifive.com>
-Thread-Topic: [PATCH v2 06/11] RISC-V: linux-user support for RVE ABI
-Thread-Index: AQHUyX6OYH4cewxYd0KLFO5tx1Oj6Q==
-Date: Thu, 21 Feb 2019 00:44:08 +0000
-Message-ID: <87a626176be2061cbf7a524789685157d17922a0.1550709660.git.alistair.francis@wdc.com>
+Thread-Topic: [PATCH v2 07/11] RISC-V: Change local interrupts from edge to
+	level
+Thread-Index: AQHUyX6TXQ7br6ItPU6utSBD9quQtQ==
+Date: Thu, 21 Feb 2019 00:44:18 +0000
+Message-ID: <b2560b2a58fcae354ab8efe33cbe185962333b62.1550709660.git.alistair.francis@wdc.com>
 References: <cover.1550709660.git.alistair.francis@wdc.com>
 In-Reply-To: <cover.1550709660.git.alistair.francis@wdc.com>
 Accept-Language: en-US
@@ -61,68 +62,71 @@ Content-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
 x-mailer: git-send-email 2.20.1
-x-clientproxiedby: BYAPR01CA0059.prod.exchangelabs.com (2603:10b6:a03:94::36)
+x-clientproxiedby: BYAPR01CA0026.prod.exchangelabs.com (2603:10b6:a02:80::39)
 	To CY4PR04MB0392.namprd04.prod.outlook.com
 	(2603:10b6:903:b5::20)
 authentication-results: spf=none (sender IP is )
 	smtp.mailfrom=Alistair.Francis@wdc.com; 
 x-ms-exchange-messagesentrepresentingtype: 1
-x-originating-ip: [199.255.44.250]
+x-originating-ip: [199.255.44.170]
 x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 17943925-9dbd-49a4-480b-08d69795b06d
+x-ms-office365-filtering-correlation-id: 4d5cc961-0efb-4ba9-ed18-08d69795b634
 x-ms-office365-filtering-ht: Tenant
 x-microsoft-antispam: BCL:0; PCL:0;
 	RULEID:(2390118)(7020095)(4652040)(8989299)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(5600110)(711020)(4605104)(4618075)(2017052603328)(7153060)(7193020);
-	SRVR:CY4PR04MB0520; 
-x-ms-traffictypediagnostic: CY4PR04MB0520:
+	SRVR:CY4PR04MB0985; 
+x-ms-traffictypediagnostic: CY4PR04MB0985:
+x-ms-exchange-purlcount: 2
 wdcipoutbound: EOP-TRUE
-x-microsoft-exchange-diagnostics: =?iso-8859-1?Q?1; CY4PR04MB0520;
-	23:aO2FddQebrBMUkEOOBMruNypD7ZEGJdXKHkw0Wn?=
-	=?iso-8859-1?Q?5wrc+jUGHfOCZ8xO36V40AR2lW3TXslS8J39rGTqpOXEnI9I/XQSaqdQDW?=
-	=?iso-8859-1?Q?FsynlUPk6mIii2vwXO/37yHhQYQ8yLJ9t3hG4cb9s+oGVFbvMY0aEfgI0P?=
-	=?iso-8859-1?Q?72aS240cBYQ2zftIrsOxKEzh/OoqPUf+cFKRa9WNu0dbkkYAgwN6nOKwWo?=
-	=?iso-8859-1?Q?bLrgg2RSBUynUcfUK62zszUGFdLxp8oZIKpbNMw00yDM+xvZvTga4MGEkD?=
-	=?iso-8859-1?Q?xB2mMQLHb6TOXxTiNCShpXzMRr9K2EpMIpqFcESaugcrmF7zXzJp/TFWi3?=
-	=?iso-8859-1?Q?WldyuDlRYgA/pFmr+/2O0ow0h8XIe1aqHDd3wmHcm1Is0OXZfa2/RM2yEn?=
-	=?iso-8859-1?Q?kl5BcmE3/qw8cWqrJ+XOl5hxrLsa9SFOyrkmxkDXop4dLkND+omGi5FKKY?=
-	=?iso-8859-1?Q?Tg6+tAZsP3r7eFwMkKHA9dkm9Jn3KTAnvwdezRiPxFa2UR7AecpCEmTQ+h?=
-	=?iso-8859-1?Q?szz+HTckiFoqyQ0hxLWtzHF78OT5RAYU9EhCIruenUIZrGJdzXGkKL/kC4?=
-	=?iso-8859-1?Q?9/zc2MyTW2/mWiS1xgUnGcYRtCMm3DDdx0JtVKXJhVTQ0zwa58uCePlfy7?=
-	=?iso-8859-1?Q?c3Theb5iVP9XKIqBPvJtR2Q2zVJfAjeBy9RUWzsqHxjWOfZOzgQysXWGKI?=
-	=?iso-8859-1?Q?kAGk6Td9UOJX1iaba7DtxXI4G/ai0OV+9uRv7xbLy4+lqg8DcdWBxJsN0s?=
-	=?iso-8859-1?Q?GLnKoMz6Wt0FHvRd2KwM+FOVXj2T+Y4ToC5AWBiKunBFhvb6AicCwH5su3?=
-	=?iso-8859-1?Q?dKFDZSC9/btp0ixy0bfIUoQ9r+1Xuj9GDkpYPw2i4gYeYIxsyu+cjNL9RZ?=
-	=?iso-8859-1?Q?NEr/94mlKUXLce7ZosvU32beE6naz8cLp64GeMjJw9Od8aRJZaDflaWtuJ?=
-	=?iso-8859-1?Q?5oajMhsdD/wS0VbG0PuNcwyPKW+ofBWKVrOpm/ZXSsgxYZVLs7k3kzJFG4?=
-	=?iso-8859-1?Q?qeC8NnyW1RWfbdRJa40zjaYCflRyi5XeaChAcvuh//BlBJ1C/0pt5hVKfI?=
-	=?iso-8859-1?Q?jveaLYcq4X1Ii9fdjXtWOBnWK5pJqEbkv7q/XCIcNsI6iUnz7Fmu4h11iJ?=
-	=?iso-8859-1?Q?xMoreJyXxSy63Yk6M4TvdY6n+H/ZTvgg1oDo6mdc8G/KbM7QBard1oH9rX?=
-	=?iso-8859-1?Q?lwIn0O9/gytUVZ/RuWF5hfVmENNe0EoNlStHVkvhKQgxK3h5lmbsD2RZ7v?=
-	=?iso-8859-1?Q?uUtw4k390lYidxevOoB/3R2UMqx7iylyCSdY/rvVQkuwWm9dKjN/2Y65bt?=
-	=?iso-8859-1?Q?9+Jqxzwhmj/qqv5FTd31HS23qWj+jW0kcVT2jS9V2KNfA=3D=3D?=
-x-microsoft-antispam-prvs: <CY4PR04MB05204A56E848914A8721CA1F907E0@CY4PR04MB0520.namprd04.prod.outlook.com>
+x-microsoft-exchange-diagnostics: =?iso-8859-1?Q?1; CY4PR04MB0985;
+	23:wOCUapSRq2XP/eWk0R1936ai3wAWX7/j7OQ+fq1?=
+	=?iso-8859-1?Q?VCppzCqxZa9NlNf2yDj6hks8FABvlWTLeYQh6AtdEznwdpFfW9GdgLkaNs?=
+	=?iso-8859-1?Q?yA9uZ0mptKYb3IjeUTekdLQ5x8ljbKOEF/8FS5fBCTCuMXy2A+6jnG0mMQ?=
+	=?iso-8859-1?Q?duVVPiAz7dUXzSVPUbs9Mu8G7N34Bp/ds3ydV6Hopz8iKYDMrLi+7Ph8cA?=
+	=?iso-8859-1?Q?Idg60AK4tenYYUg28uF9b9KUkVKwalDPD5+9o614JnH2N/X1Txp3hAhm+g?=
+	=?iso-8859-1?Q?ltSLXHZA6D7jnmALCgwe5RsgKDWvbAV9k09LMcLZKBeqrCHNPMz5OwO4xX?=
+	=?iso-8859-1?Q?ltBupxlHPTBHlx9FCdRqEbDCFGl0boBEKzcQolRzGPtTGIcE1vFzKddg6O?=
+	=?iso-8859-1?Q?ZSpZuUty5KLbNncyj6P+b8QDLzKF1NQZOuIgPE+zubW3HBwSO5B2jxcA0O?=
+	=?iso-8859-1?Q?0B9sMakQVGte2/WyJc6owndKTnUsGpZ3cKWx2GdhSfuXMhP4oyk15s7M1d?=
+	=?iso-8859-1?Q?aEA0gE9QSjMlhdrcnIpOSfySVW+ciD8x5cIo17NDy71/p6ljCmNCsO0ee5?=
+	=?iso-8859-1?Q?pQ6aB8TSyaK74U6alXt6a3/JLujSdupJovU/lIc5Exnw1FeWaZ1qsxFPpp?=
+	=?iso-8859-1?Q?pALpIWbdBSkipLd8NRODiL3+PIEgPlRdhdq48sC3dFTcWyHRMkK+bydxxR?=
+	=?iso-8859-1?Q?qOXyyh6Qfp/lQscX2CaUwt5JYAvt+FyNcZPrFvVtaTs+s2t3SsUODzgifj?=
+	=?iso-8859-1?Q?cUhVGwB0Cae3cT+s6yIxx+yvCPVdbUsuBnqS8bCdz2jMzU3uQJW+luzsCb?=
+	=?iso-8859-1?Q?4KL8MBna5FfMVVP/Xb7bWIf8C3+P/8Ymi0AcVW+bBI+LerqGhWDS21BtZD?=
+	=?iso-8859-1?Q?i/wiulWVhtjt1d++fy844GqvV3I88xycBQVzZcpNI0PMEVzdF8TnBygHz1?=
+	=?iso-8859-1?Q?I58GkzwukBf3MZ4oOnHC/3U9+dWB8gq0OYa6Z1DVsE7cxv+b1BUP+UuU2t?=
+	=?iso-8859-1?Q?2h4xqYNqEf2U++XEt1FFLd7vzS1JGj8pEOBJ/ZHVmrdo5FdDIs0R4LvWUd?=
+	=?iso-8859-1?Q?Ctshm2IDT0EgH/GOC2gOG5iq42yQMHGBeqUtLPs+MUnDG/AKjzNZmJhj4e?=
+	=?iso-8859-1?Q?CIS87zOUQ4zd461o93H4zKFNjSH8V+fuhcvXmdXHRKIBxVbc90Enh6pWZO?=
+	=?iso-8859-1?Q?4z5XEt2R4q9l146DNTCh9mQ+3V9IpzNkGcdop5wMnxXP/fD4DVT9LlaAqr?=
+	=?iso-8859-1?Q?SAbUN1DnuwWV08UK+afO1gyv69vvgldaK5759lBjhYiPBXC2XtlWKNEgn0?=
+	=?iso-8859-1?Q?jCT8ePB4PChRZgNn+TsBj6xQnSBsQcpIpcatPR+LifrdO4Q/PA+mnnV23f?=
+	=?iso-8859-1?Q?uA/NZ+K/x5aNYtg6Tf0M5hma3fJXm?=
+x-microsoft-antispam-prvs: <CY4PR04MB0985A139A4FD89413F4C6571907E0@CY4PR04MB0985.namprd04.prod.outlook.com>
 x-forefront-prvs: 09555FB1AD
 x-forefront-antispam-report: SFV:NSPM;
-	SFS:(10019020)(136003)(376002)(346002)(366004)(396003)(39860400002)(189003)(199004)(50226002)(316002)(26005)(6436002)(81166006)(6506007)(118296001)(2501003)(6486002)(53936002)(36756003)(3846002)(68736007)(2616005)(14454004)(476003)(8676002)(81156014)(6116002)(52116002)(5660300002)(186003)(8936002)(446003)(305945005)(102836004)(6512007)(486006)(386003)(7736002)(478600001)(72206003)(97736004)(44832011)(11346002)(99286004)(2906002)(105586002)(106356001)(110136005)(54906003)(14444005)(256004)(66066001)(86362001)(4326008)(71200400001)(25786009)(71190400001)(76176011);
-	DIR:OUT; SFP:1102; SCL:1; SRVR:CY4PR04MB0520;
+	SFS:(10019020)(346002)(376002)(136003)(396003)(366004)(39860400002)(189003)(199004)(72206003)(2616005)(118296001)(4326008)(25786009)(97736004)(478600001)(110136005)(3846002)(14454004)(6116002)(486006)(86362001)(966005)(44832011)(6436002)(316002)(54906003)(71190400001)(71200400001)(7736002)(305945005)(81166006)(81156014)(6486002)(14444005)(8936002)(50226002)(66066001)(8676002)(2906002)(386003)(256004)(68736007)(476003)(186003)(102836004)(76176011)(106356001)(6506007)(105586002)(2501003)(6306002)(6512007)(99286004)(11346002)(52116002)(446003)(26005)(53936002)(36756003)(5660300002);
+	DIR:OUT; SFP:1102; SCL:1; SRVR:CY4PR04MB0985;
 	H:CY4PR04MB0392.namprd04.prod.outlook.com; FPR:; SPF:None;
 	LANG:en; PTR:InfoNoRecords; MX:1; A:1; 
 x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam-message-info: ZkIeQDSKqyZ9I/Vz+ZQ+BG/7OoxIvKOW9S8EedwXVTG2Rv0y49wh1IzSdYf0BPzjnvqB8l0PPG3/4cnrxCQfmz03T7KwEOA1AITx9EJKl2a6/ams+sH6tXn3o18J+Wu46JKESglj0pXIIr0pQrFNysInWpyOGmSe02jQW6+LUE7nrmwTomZscI7BDcpnX6ZSG7ryGZvz8brsQxR9M4Oa0yuatKXsELhZas9FJRyMnVthgttItCJhazxEc/1xu3RKtH0ihbYN2/xia4bkVM4ki7MOhIyFo7r0UGlbGONBta5NsnuQ7YkawZ/1CznPsVWJwLt0MvebV9xN10R1F60JovZ2DJIUC5n8yg72OXmerR5F+G8WLqoJevgjRVXdeGxip1Vf7dc3WKACN06AfCbdVf3mC446/unRSvxbqX1SdsI=
+x-microsoft-antispam-message-info: F6qR/a0f7RtjrviX+Ib5pGyLhw4EVwZ/cqdb6zWd2w5cEmhn11Yb17CFeqkzjGkaaBIkhgW7s2L5U1dnHeftXPxLjajtq32hDd1txk34XSWWnDwD5OS9Y+m23ERJ3VDUAL1J6P7hYvE114f2kM0DqLwDeFUQdCdk9I1a8yKsSL6ZH+8R1PLyKzCcSQxTJqiqQN0VFqCDt+Q3ibH7qYPQQkQNOF6YhimSoKPRyCSsMarquGSsV2V3PF+hwtVEfSy8ljDvAzdM/GfkI6xX46AT2fjL15Pbw9STCtOE08RlwCp7Xtk8moIqDL0PQlz/IvE/AfEaVqaBKn+GX+YBUDLfIpaAyPGDtQDBQjvw/9cMu4cmdkNoMAcVVfjZR9TqkHsfAlJ3Q2vlq8Dq7C7M84l4n39hvLvA57FISSYnX/W0yI0=
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
 X-OriginatorOrg: wdc.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 17943925-9dbd-49a4-480b-08d69795b06d
-X-MS-Exchange-CrossTenant-originalarrivaltime: 21 Feb 2019 00:44:08.3035 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4d5cc961-0efb-4ba9-ed18-08d69795b634
+X-MS-Exchange-CrossTenant-originalarrivaltime: 21 Feb 2019 00:44:18.0045 (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
 X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY4PR04MB0520
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY4PR04MB0985
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 68.232.141.245
-Subject: [Qemu-riscv] [PATCH v2 06/11] RISC-V: linux-user support for RVE ABI
+X-Received-From: 216.71.153.141
+Subject: [Qemu-riscv] [PATCH v2 07/11] RISC-V: Change local interrupts from
+ edge to level
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -134,99 +138,59 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Feb 2019 00:44:21 -0000
+X-List-Received-Date: Thu, 21 Feb 2019 00:44:26 -0000
 
-From: Kito Cheng <kito.cheng@gmail.com>
+From: Michael Clark <mjc@sifive.com>
 
-This change checks elf_flags for EF_RISCV_RVE and if
-present uses the RVE linux syscall ABI which uses t0
-for the syscall number instead of a7.
+This effectively changes riscv_cpu_update_mip
+from edge to level. i.e. cpu_interrupt or
+cpu_reset_interrupt are called regardless of
+the current interrupt level.
 
-Warn and exit if a non-RVE ABI binary is run on a
-cpu with the RVE extension as it is incompatible.
+Fixes WFI doesn't return when a IPI is issued:
 
-Cc: Palmer Dabbelt <palmer@sifive.com>
-Cc: Sagar Karandikar <sagark@eecs.berkeley.edu>
-Cc: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+- https://github.com/riscv/riscv-qemu/issues/132
+
+To test:
+
+1) Apply RISC-V Linux CPU hotplug patch:
+
+- http://lists.infradead.org/pipermail/linux-riscv/2018-May/000603.html
+
+2) Enable CONFIG_CPU_HOTPLUG in linux .config
+
+3) Try to offline and online cpus:
+
+  echo 1 > /sys/devices/system/cpu/cpu2/online
+  echo 0 > /sys/devices/system/cpu/cpu2/online
+  echo 1 > /sys/devices/system/cpu/cpu2/online
+
+Reported-by: Atish Patra <atishp04@gmail.com>
+Cc: Atish Patra <atishp04@gmail.com>
 Cc: Alistair Francis <Alistair.Francis@wdc.com>
-Co-authored-by: Kito Cheng <kito.cheng@gmail.com>
-Co-authored-by: Michael Clark <mjc@sifive.com>
 Signed-off-by: Michael Clark <mjc@sifive.com>
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- linux-user/riscv/cpu_loop.c | 15 ++++++++++++++-
- target/riscv/cpu.h          |  4 ++++
- target/riscv/cpu_user.h     |  3 ++-
- 3 files changed, 20 insertions(+), 2 deletions(-)
+ target/riscv/cpu_helper.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/linux-user/riscv/cpu_loop.c b/linux-user/riscv/cpu_loop.c
-index 4cf3e94632..a9bac4ca79 100644
---- a/linux-user/riscv/cpu_loop.c
-+++ b/linux-user/riscv/cpu_loop.c
-@@ -18,8 +18,10 @@
-  */
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index 555756d40c..073bdcfe74 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -95,9 +95,9 @@ uint32_t riscv_cpu_update_mip(RISCVCPU *cpu, uint32_t mas=
+k, uint32_t value)
+         cmp =3D atomic_cmpxchg(&env->mip, old, new);
+     } while (old !=3D cmp);
 =20
- #include "qemu/osdep.h"
-+#include "qemu/error-report.h"
- #include "qemu.h"
- #include "cpu_loop-common.h"
-+#include "elf.h"
+-    if (new && !old) {
++    if (new) {
+         cpu_interrupt(CPU(cpu), CPU_INTERRUPT_HARD);
+-    } else if (!new && old) {
++    } else {
+         cpu_reset_interrupt(CPU(cpu), CPU_INTERRUPT_HARD);
+     }
 =20
- void cpu_loop(CPURISCVState *env)
- {
-@@ -53,7 +55,8 @@ void cpu_loop(CPURISCVState *env)
-                 ret =3D 0;
-             } else {
-                 ret =3D do_syscall(env,
--                                 env->gpr[xA7],
-+                                 env->gpr[(env->elf_flags & EF_RISCV_RVE)
-+                                    ? xT0 : xA7],
-                                  env->gpr[xA0],
-                                  env->gpr[xA1],
-                                  env->gpr[xA2],
-@@ -113,6 +116,16 @@ void cpu_loop(CPURISCVState *env)
-=20
- void target_cpu_copy_regs(CPUArchState *env, struct target_pt_regs *regs)
- {
-+    CPUState *cpu =3D ENV_GET_CPU(env);
-+    TaskState *ts =3D cpu->opaque;
-+    struct image_info *info =3D ts->info;
-+
-     env->pc =3D regs->sepc;
-     env->gpr[xSP] =3D regs->sp;
-+    env->elf_flags =3D info->elf_flags;
-+
-+    if ((env->misa & RVE) && !(env->elf_flags & EF_RISCV_RVE)) {
-+        error_report("Incompatible ELF: RVE cpu requires RVE ABI binary");
-+        exit(EXIT_FAILURE);
-+    }
- }
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index a0b3c22dec..8e4b5cfe26 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -123,6 +123,10 @@ struct CPURISCVState {
-=20
-     uint32_t features;
-=20
-+#ifdef CONFIG_USER_ONLY
-+    uint32_t elf_flags;
-+#endif
-+
- #ifndef CONFIG_USER_ONLY
-     target_ulong priv;
-     target_ulong resetvec;
-diff --git a/target/riscv/cpu_user.h b/target/riscv/cpu_user.h
-index c2199610ab..52d380aa98 100644
---- a/target/riscv/cpu_user.h
-+++ b/target/riscv/cpu_user.h
-@@ -10,4 +10,5 @@
- #define xA4 14
- #define xA5 15
- #define xA6 16
--#define xA7 17  /* syscall number goes here */
-+#define xA7 17  /* syscall number for RVI ABI */
-+#define xT0 5   /* syscall number for RVE ABI */
 --=20
 2.20.1
 
