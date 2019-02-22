@@ -1,44 +1,46 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gxBZm-0006SB-HZ
-	for mharc-qemu-riscv@gnu.org; Fri, 22 Feb 2019 09:13:18 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:41429)
+	id 1gxBZn-0006T0-14
+	for mharc-qemu-riscv@gnu.org; Fri, 22 Feb 2019 09:13:19 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:41276)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <kbastian@mail.uni-paderborn.de>) id 1gxBZi-0006N0-0x
-	for qemu-riscv@nongnu.org; Fri, 22 Feb 2019 09:13:15 -0500
-Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <kbastian@mail.uni-paderborn.de>) id 1gxBZe-0000mP-5M
+	(envelope-from <kbastian@mail.uni-paderborn.de>) id 1gxBZe-0006IC-1U
 	for qemu-riscv@nongnu.org; Fri, 22 Feb 2019 09:13:12 -0500
-Received: from mail.uni-paderborn.de ([131.234.142.9]:42006)
+Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
+	(envelope-from <kbastian@mail.uni-paderborn.de>) id 1gxBZV-0000V6-A0
+	for qemu-riscv@nongnu.org; Fri, 22 Feb 2019 09:13:06 -0500
+Received: from mail.uni-paderborn.de ([131.234.142.9]:40488)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.71) (envelope-from <kbastian@mail.uni-paderborn.de>)
-	id 1gxBZH-000779-Fo; Fri, 22 Feb 2019 09:12:52 -0500
-Received: from wormulon.uni-paderborn.de ([131.234.189.22]
+	id 1gxBZI-00064s-Ui; Fri, 22 Feb 2019 09:12:52 -0500
+Received: from magmaria.uni-paderborn.de ([131.234.189.24]
 	helo=localhost.localdomain)
 	by mail.uni-paderborn.de with esmtp (Exim 4.89 telepax)
-	id 1gxBYN-0001yt-6P; Fri, 22 Feb 2019 15:11:52 +0100
-Received: from mail.uni-paderborn.de by wormulon with queue id 3169556-5;
-	Fri, 22 Feb 2019 14:11:50 GMT
+	id 1gxBXq-0001pb-3i; Fri, 22 Feb 2019 15:11:18 +0100
+Received: from mail.uni-paderborn.de by magmaria with queue id 3163435-3;
+	Fri, 22 Feb 2019 14:11:16 GMT
 X-Envelope-From: <kbastian@mail.uni-paderborn.de>
 From: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
 To: sagark@eecs.berkeley.edu, palmer@sifive.com, kbastian@mail.uni-paderborn.de
 Cc: richard.henderson@linaro.org, peer.adelt@hni.uni-paderborn.de,
-	qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Date: Fri, 22 Feb 2019 15:10:18 +0100
-Message-Id: <20190222141024.22217-29-kbastian@mail.uni-paderborn.de>
+	qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
+	Alistair Francis <alistair.francis@wdc.com>
+Date: Fri, 22 Feb 2019 15:09:55 +0100
+Message-Id: <20190222141024.22217-6-kbastian@mail.uni-paderborn.de>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20190222141024.22217-1-kbastian@mail.uni-paderborn.de>
 References: <20190222141024.22217-1-kbastian@mail.uni-paderborn.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-PMX-Version: 6.4.6.2792898, Antispam-Engine: 2.7.2.2107409,
-	Antispam-Data: 2019.2.22.140616, AntiVirus-Engine: 5.58.0,
+	Antispam-Data: 2019.2.22.140315, AntiVirus-Engine: 5.58.0,
 	AntiVirus-Data: 2019.2.19.5580002
 X-IMT-Spam-Score: 0.0 ()
 X-IMT-Authenticated-Sender: 
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
 X-Received-From: 131.234.142.9
-Subject: [Qemu-riscv] [PATCH v8 28/34] target/riscv: Remove gen_system()
+Subject: [Qemu-riscv] [PATCH v8 05/34] target/riscv: Convert RVXI arithmetic
+ insns to decodetree
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -50,79 +52,298 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Feb 2019 14:13:15 -0000
+X-List-Received-Date: Fri, 22 Feb 2019 14:13:13 -0000
 
-with all 16 bit insns moved to decodetree no path is falling back to
-gen_system(), so we can remove it.
+we cannot remove the call to gen_arith() in decode_RV32_64G() since it
+is used to translate multiply instructions.
 
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Signed-off-by: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
 Signed-off-by: Peer Adelt <peer.adelt@hni.uni-paderborn.de>
 ---
- target/riscv/translate.c | 34 ----------------------------------
- 1 file changed, 34 deletions(-)
+ target/riscv/insn32-64.decode           |  13 ++
+ target/riscv/insn32.decode              |  25 ++++
+ target/riscv/insn_trans/trans_rvi.inc.c | 168 ++++++++++++++++++++++++
+ target/riscv/translate.c                |   9 --
+ 4 files changed, 206 insertions(+), 9 deletions(-)
 
+diff --git a/target/riscv/insn32-64.decode b/target/riscv/insn32-64.decode
+index 439d4e2c58..9a35f2aa19 100644
+--- a/target/riscv/insn32-64.decode
++++ b/target/riscv/insn32-64.decode
+@@ -19,7 +19,20 @@
+ # This is concatenated with insn32.decode for risc64 targets.
+ # Most of the fields and formats are there.
+ 
++%sh5    20:5
++
++@sh5     .......  ..... .....  ... ..... ....... &shift  shamt=%sh5      %rs1 %rd
++
+ # *** RV64I Base Instruction Set (in addition to RV32I) ***
+ lwu      ............   ..... 110 ..... 0000011 @i
+ ld       ............   ..... 011 ..... 0000011 @i
+ sd       ....... .....  ..... 011 ..... 0100011 @s
++addiw    ............   ..... 000 ..... 0011011 @i
++slliw    0000000 .....  ..... 001 ..... 0011011 @sh5
++srliw    0000000 .....  ..... 101 ..... 0011011 @sh5
++sraiw    0100000 .....  ..... 101 ..... 0011011 @sh5
++addw     0000000 .....  ..... 000 ..... 0111011 @r
++subw     0100000 .....  ..... 000 ..... 0111011 @r
++sllw     0000000 .....  ..... 001 ..... 0111011 @r
++srlw     0000000 .....  ..... 101 ..... 0111011 @r
++sraw     0100000 .....  ..... 101 ..... 0111011 @r
+diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+index 076de873c4..1f5bf1f6f9 100644
+--- a/target/riscv/insn32.decode
++++ b/target/riscv/insn32.decode
+@@ -21,6 +21,8 @@
+ %rs1       15:5
+ %rd        7:5
+ 
++%sh10    20:10
++
+ # immediates:
+ %imm_i    20:s12
+ %imm_s    25:s7 7:5
+@@ -30,14 +32,18 @@
+ 
+ # Argument sets:
+ &b    imm rs2 rs1
++&shift     shamt rs1 rd
+ 
+ # Formats 32:
++@r       .......   ..... ..... ... ..... .......                   %rs2 %rs1 %rd
+ @i       ............    ..... ... ..... .......         imm=%imm_i     %rs1 %rd
+ @b       .......   ..... ..... ... ..... ....... &b      imm=%imm_b %rs2 %rs1
+ @s       .......   ..... ..... ... ..... .......         imm=%imm_s %rs2 %rs1
+ @u       ....................      ..... .......         imm=%imm_u          %rd
+ @j       ....................      ..... .......         imm=%imm_j          %rd
+ 
++@sh      ......  ...... .....  ... ..... ....... &shift  shamt=%sh10      %rs1 %rd
++
+ # *** RV32I Base Instruction Set ***
+ lui      ....................       ..... 0110111 @u
+ auipc    ....................       ..... 0010111 @u
+@@ -57,3 +63,22 @@ lhu      ............     ..... 101 ..... 0000011 @i
+ sb       .......  .....   ..... 000 ..... 0100011 @s
+ sh       .......  .....   ..... 001 ..... 0100011 @s
+ sw       .......  .....   ..... 010 ..... 0100011 @s
++addi     ............     ..... 000 ..... 0010011 @i
++slti     ............     ..... 010 ..... 0010011 @i
++sltiu    ............     ..... 011 ..... 0010011 @i
++xori     ............     ..... 100 ..... 0010011 @i
++ori      ............     ..... 110 ..... 0010011 @i
++andi     ............     ..... 111 ..... 0010011 @i
++slli     00.... ......    ..... 001 ..... 0010011 @sh
++srli     00.... ......    ..... 101 ..... 0010011 @sh
++srai     01.... ......    ..... 101 ..... 0010011 @sh
++add      0000000 .....    ..... 000 ..... 0110011 @r
++sub      0100000 .....    ..... 000 ..... 0110011 @r
++sll      0000000 .....    ..... 001 ..... 0110011 @r
++slt      0000000 .....    ..... 010 ..... 0110011 @r
++sltu     0000000 .....    ..... 011 ..... 0110011 @r
++xor      0000000 .....    ..... 100 ..... 0110011 @r
++srl      0000000 .....    ..... 101 ..... 0110011 @r
++sra      0100000 .....    ..... 101 ..... 0110011 @r
++or       0000000 .....    ..... 110 ..... 0110011 @r
++and      0000000 .....    ..... 111 ..... 0110011 @r
+diff --git a/target/riscv/insn_trans/trans_rvi.inc.c b/target/riscv/insn_trans/trans_rvi.inc.c
+index 61f708dba1..136fa54d06 100644
+--- a/target/riscv/insn_trans/trans_rvi.inc.c
++++ b/target/riscv/insn_trans/trans_rvi.inc.c
+@@ -150,3 +150,171 @@ static bool trans_sd(DisasContext *ctx, arg_sd *a)
+     return true;
+ }
+ #endif
++
++static bool trans_addi(DisasContext *ctx, arg_addi *a)
++{
++    gen_arith_imm(ctx, OPC_RISC_ADDI, a->rd, a->rs1, a->imm);
++    return true;
++}
++
++static bool trans_slti(DisasContext *ctx, arg_slti *a)
++{
++    gen_arith_imm(ctx, OPC_RISC_SLTI, a->rd, a->rs1, a->imm);
++    return true;
++}
++
++static bool trans_sltiu(DisasContext *ctx, arg_sltiu *a)
++{
++    gen_arith_imm(ctx, OPC_RISC_SLTIU, a->rd, a->rs1, a->imm);
++    return true;
++}
++
++static bool trans_xori(DisasContext *ctx, arg_xori *a)
++{
++    gen_arith_imm(ctx, OPC_RISC_XORI, a->rd, a->rs1, a->imm);
++    return true;
++}
++static bool trans_ori(DisasContext *ctx, arg_ori *a)
++{
++    gen_arith_imm(ctx, OPC_RISC_ORI, a->rd, a->rs1, a->imm);
++    return true;
++}
++static bool trans_andi(DisasContext *ctx, arg_andi *a)
++{
++    gen_arith_imm(ctx, OPC_RISC_ANDI, a->rd, a->rs1, a->imm);
++    return true;
++}
++static bool trans_slli(DisasContext *ctx, arg_slli *a)
++{
++    gen_arith_imm(ctx, OPC_RISC_SLLI, a->rd, a->rs1, a->shamt);
++    return true;
++}
++
++static bool trans_srli(DisasContext *ctx, arg_srli *a)
++{
++    gen_arith_imm(ctx, OPC_RISC_SHIFT_RIGHT_I, a->rd, a->rs1, a->shamt);
++    return true;
++}
++
++static bool trans_srai(DisasContext *ctx, arg_srai *a)
++{
++    gen_arith_imm(ctx, OPC_RISC_SHIFT_RIGHT_I, a->rd, a->rs1, a->shamt | 0x400);
++    return true;
++}
++
++static bool trans_add(DisasContext *ctx, arg_add *a)
++{
++    gen_arith(ctx, OPC_RISC_ADD, a->rd, a->rs1, a->rs2);
++    return true;
++}
++
++static bool trans_sub(DisasContext *ctx, arg_sub *a)
++{
++    gen_arith(ctx, OPC_RISC_SUB, a->rd, a->rs1, a->rs2);
++    return true;
++}
++
++static bool trans_sll(DisasContext *ctx, arg_sll *a)
++{
++    gen_arith(ctx, OPC_RISC_SLL, a->rd, a->rs1, a->rs2);
++    return true;
++}
++
++static bool trans_slt(DisasContext *ctx, arg_slt *a)
++{
++    gen_arith(ctx, OPC_RISC_SLT, a->rd, a->rs1, a->rs2);
++    return true;
++}
++
++static bool trans_sltu(DisasContext *ctx, arg_sltu *a)
++{
++    gen_arith(ctx, OPC_RISC_SLTU, a->rd, a->rs1, a->rs2);
++    return true;
++}
++
++static bool trans_xor(DisasContext *ctx, arg_xor *a)
++{
++    gen_arith(ctx, OPC_RISC_XOR, a->rd, a->rs1, a->rs2);
++    return true;
++}
++
++static bool trans_srl(DisasContext *ctx, arg_srl *a)
++{
++    gen_arith(ctx, OPC_RISC_SRL, a->rd, a->rs1, a->rs2);
++    return true;
++}
++
++static bool trans_sra(DisasContext *ctx, arg_sra *a)
++{
++    gen_arith(ctx, OPC_RISC_SRA, a->rd, a->rs1, a->rs2);
++    return true;
++}
++
++static bool trans_or(DisasContext *ctx, arg_or *a)
++{
++    gen_arith(ctx, OPC_RISC_OR, a->rd, a->rs1, a->rs2);
++    return true;
++}
++
++static bool trans_and(DisasContext *ctx, arg_and *a)
++{
++    gen_arith(ctx, OPC_RISC_AND, a->rd, a->rs1, a->rs2);
++    return true;
++}
++
++#ifdef TARGET_RISCV64
++static bool trans_addiw(DisasContext *ctx, arg_addiw *a)
++{
++    gen_arith_imm(ctx, OPC_RISC_ADDIW, a->rd, a->rs1, a->imm);
++    return true;
++}
++
++static bool trans_slliw(DisasContext *ctx, arg_slliw *a)
++{
++    gen_arith_imm(ctx, OPC_RISC_SLLIW, a->rd, a->rs1, a->shamt);
++    return true;
++}
++
++static bool trans_srliw(DisasContext *ctx, arg_srliw *a)
++{
++    gen_arith_imm(ctx, OPC_RISC_SHIFT_RIGHT_IW, a->rd, a->rs1, a->shamt);
++    return true;
++}
++
++static bool trans_sraiw(DisasContext *ctx, arg_sraiw *a)
++{
++    gen_arith_imm(ctx, OPC_RISC_SHIFT_RIGHT_IW , a->rd, a->rs1,
++                  a->shamt | 0x400);
++    return true;
++}
++
++static bool trans_addw(DisasContext *ctx, arg_addw *a)
++{
++    gen_arith(ctx, OPC_RISC_ADDW, a->rd, a->rs1, a->rs2);
++    return true;
++}
++
++static bool trans_subw(DisasContext *ctx, arg_subw *a)
++{
++    gen_arith(ctx, OPC_RISC_SUBW, a->rd, a->rs1, a->rs2);
++    return true;
++}
++
++static bool trans_sllw(DisasContext *ctx, arg_sllw *a)
++{
++    gen_arith(ctx, OPC_RISC_SLLW, a->rd, a->rs1, a->rs2);
++    return true;
++}
++
++static bool trans_srlw(DisasContext *ctx, arg_srlw *a)
++{
++    gen_arith(ctx, OPC_RISC_SRLW, a->rd, a->rs1, a->rs2);
++    return true;
++}
++
++static bool trans_sraw(DisasContext *ctx, arg_sraw *a)
++{
++    gen_arith(ctx, OPC_RISC_SRAW, a->rd, a->rs1, a->rs2);
++    return true;
++}
++#endif
 diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index dedf4189d5..92be090bc7 100644
+index 2e35142ca2..1ae84dcd59 100644
 --- a/target/riscv/translate.c
 +++ b/target/riscv/translate.c
-@@ -473,33 +473,6 @@ static void gen_set_rm(DisasContext *ctx, int rm)
-     tcg_temp_free_i32(t0);
- }
- 
--static void gen_system(DisasContext *ctx, uint32_t opc, int rd, int rs1,
--                       int csr)
--{
--    tcg_gen_movi_tl(cpu_pc, ctx->base.pc_next);
--
--    switch (opc) {
--    case OPC_RISC_ECALL:
--        switch (csr) {
--        case 0x0: /* ECALL */
--            /* always generates U-level ECALL, fixed in do_interrupt handler */
--            generate_exception(ctx, RISCV_EXCP_U_ECALL);
--            tcg_gen_exit_tb(NULL, 0); /* no chaining */
--            ctx->base.is_jmp = DISAS_NORETURN;
--            break;
--        case 0x1: /* EBREAK */
--            generate_exception(ctx, RISCV_EXCP_BREAKPOINT);
--            tcg_gen_exit_tb(NULL, 0); /* no chaining */
--            ctx->base.is_jmp = DISAS_NORETURN;
--            break;
--        default:
--            gen_exception_illegal(ctx);
--            break;
--        }
--        break;
--    }
--}
--
- static void decode_RV32_64C0(DisasContext *ctx)
- {
-     uint8_t funct3 = extract32(ctx->opcode, 13, 3);
-@@ -680,7 +653,6 @@ bool decode_insn16(DisasContext *ctx, uint16_t insn);
- 
- static void decode_RV32_64G(DisasContext *ctx)
- {
--    int rs1, rd;
-     uint32_t op;
- 
-     /* We do not do misaligned address check here: the address should never be
-@@ -689,14 +661,8 @@ static void decode_RV32_64G(DisasContext *ctx)
-      * perform the misaligned instruction fetch */
- 
-     op = MASK_OP_MAJOR(ctx->opcode);
--    rs1 = GET_RS1(ctx->opcode);
--    rd = GET_RD(ctx->opcode);
+@@ -1908,15 +1908,6 @@ static void decode_RV32_64G(DisasContext *ctx)
+     imm = GET_IMM(ctx->opcode);
  
      switch (op) {
--    case OPC_RISC_SYSTEM:
--        gen_system(ctx, MASK_OP_SYSTEM(ctx->opcode), rd, rs1,
--                   (ctx->opcode & 0xFFF00000) >> 20);
+-    case OPC_RISC_ARITH_IMM:
+-#if defined(TARGET_RISCV64)
+-    case OPC_RISC_ARITH_IMM_W:
+-#endif
+-        if (rd == 0) {
+-            break; /* NOP */
+-        }
+-        gen_arith_imm(ctx, MASK_OP_ARITH_IMM(ctx->opcode), rd, rs1, imm);
 -        break;
-     default:
-         gen_exception_illegal(ctx);
-         break;
+     case OPC_RISC_ARITH:
+ #if defined(TARGET_RISCV64)
+     case OPC_RISC_ARITH_W:
 -- 
 2.20.1
 
