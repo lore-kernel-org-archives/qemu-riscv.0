@@ -1,60 +1,75 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gxop3-0004Ow-BW
-	for mharc-qemu-riscv@gnu.org; Sun, 24 Feb 2019 03:07:41 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:44080)
+	id 1gxz4r-0002O2-WB
+	for mharc-qemu-riscv@gnu.org; Sun, 24 Feb 2019 14:04:42 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:41183)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <amagdy.afifi@gmail.com>) id 1gxop1-0004Nd-6f
-	for qemu-riscv@nongnu.org; Sun, 24 Feb 2019 03:07:40 -0500
+	(envelope-from <richard.henderson@linaro.org>) id 1gxz4n-0002Np-2U
+	for qemu-riscv@nongnu.org; Sun, 24 Feb 2019 14:04:37 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <amagdy.afifi@gmail.com>) id 1gxop0-0002CT-3N
-	for qemu-riscv@nongnu.org; Sun, 24 Feb 2019 03:07:39 -0500
-Received: from mail-qt1-x842.google.com ([2607:f8b0:4864:20::842]:43958)
+	(envelope-from <richard.henderson@linaro.org>) id 1gxz4m-00060n-5W
+	for qemu-riscv@nongnu.org; Sun, 24 Feb 2019 14:04:37 -0500
+Received: from mail-pl1-x642.google.com ([2607:f8b0:4864:20::642]:43079)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <amagdy.afifi@gmail.com>)
-	id 1gxoox-0002BE-I1; Sun, 24 Feb 2019 03:07:35 -0500
-Received: by mail-qt1-x842.google.com with SMTP id y4so7221164qtc.10;
-	Sun, 24 Feb 2019 00:07:35 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=srFTdNiyGPKWfBDNPD+WDa/CScOk8LMx3LPF0RWBIs4=;
-	b=inuBIV47XU98LDtiHVNoytiy2kDz2O7vnGMN2xHm7Ef6y6XKsEzWxD8HsL0CqMxesO
-	PyPyx1DIuWF8eZe2Zlig8MteBl+XeKxTuVGvGnFmiOd80IC+DF6ss6DWHW5uudgflus8
-	VFX+qiZjbNYXhUO12z77PUopb7f8MJKBG8tBBNJ7mQwERFsbU1ThgVVgq8b7kdnk9r4/
-	3u7CGytWrT11QrBQ2aQdVFJldsa2eC20QPYKfWbOBU2FjC8XQRCrYIAebDSMbx2gOS3M
-	ldz+4M5zM8Ab2zCZVhgv3MOaGI5ZfEk+U1vYngruKwdCdzUhwJZGuZ9gdyQAb9+aNVls
-	mjuw==
+	(Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
+	id 1gxz4l-0005zM-L7
+	for qemu-riscv@nongnu.org; Sun, 24 Feb 2019 14:04:36 -0500
+Received: by mail-pl1-x642.google.com with SMTP id m10so3395791plt.10
+	for <qemu-riscv@nongnu.org>; Sun, 24 Feb 2019 11:04:35 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+	h=subject:to:cc:references:from:openpgp:message-id:date:user-agent
+	:mime-version:in-reply-to:content-language:content-transfer-encoding;
+	bh=/Y1h09YJitKbAYEaUCJmanAHEsRI+JpQLoeKUtbiDF0=;
+	b=sB23ysc9XT2YU0bsGFxic2aWsT9RelWG17LruMz1fKuVrwvUiHpAuH+frMCfcKFdiF
+	B53hp2kxHo/uwCS66zcZDTbvan9/y3ZoUfO9tIyo5K9ecc9dNCNZfvNROph+I7LiM8n6
+	h7iCkRyDzjxNg0rloWCGEFI585Iw3kbTRoSlQWU5PmP2KXMUNr/lUAFCe3IXlrxo7Upy
+	N7txyYPGEI7UaxmUPUWYetOmEkmgdTCU1/13jfmOMAlwReo+/ReJ4yhy0kcdP2d6afBg
+	XuOlHCHfpckb0mcEKl4ZCLumwauiRRbiGlRyG2PZPPbV10yDa0jW0MsVNoMP3ieyuOgG
+	WI3w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=srFTdNiyGPKWfBDNPD+WDa/CScOk8LMx3LPF0RWBIs4=;
-	b=RycRWgHWNvAlxyRFf3fY2ED4c1YHJ2uOfjCADSO4gGdCvB4qL6U/29zU/7qdOuWsBs
-	iUBDTJA/0e/ophEzjAeDfVi6wy2QlVTEYueVq0hPz7sEIs4LcAS8gqDnBOfogYAjH2Ba
-	Z/vpvwXIHnhjU8vHiwG0yztYwu1ZiPzkFXagZOZ6x8Dp/2jy1/qgQD7e+drIjUISbzoX
-	0dG5n6iV1Q31mexNXxhVCBNTNcPdZTtAuLqYCUix6jGHfb0MH1XQORQrNkozI4Wac4r6
-	g7xd/F35M+3ZgdV1x5tHjLWI3UwSC4crw0pySLfY1luF2t1HBM4637vGM236TUm6SOq6
-	dBTQ==
-X-Gm-Message-State: AHQUAuZuMWewCxspjZhUhvv9cr6i43BF+vCFUMomC7kXGYZTKyndTkhC
-	YYOQ+7qFDJ0HjzxHeio8/58Or9wGcO6C88D54Fs=
-X-Google-Smtp-Source: AHgI3IY3L1NwiJCVGZ7iHWqd6Mf4jFBBUK14V08hvwhEAzdSVGHEWuo8FMa/Z5S10gV1NW8vg6AwfBPHj9XhBbksR+M=
-X-Received: by 2002:ac8:2827:: with SMTP id 36mr9419718qtq.359.1550995654759; 
-	Sun, 24 Feb 2019 00:07:34 -0800 (PST)
-MIME-Version: 1.0
+	h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
+	:date:user-agent:mime-version:in-reply-to:content-language
+	:content-transfer-encoding;
+	bh=/Y1h09YJitKbAYEaUCJmanAHEsRI+JpQLoeKUtbiDF0=;
+	b=rtuvqc6wOlxofCJeZus+bdQNfGIavKgSN01x6P2ma+wnlcjgqr+f8SeqqJsz0bPjUa
+	kDEUP71Nzh6uvsn85b0wcpK1oWzbEutn+/6GcTyI06qxLoA+3UGWCPyxja0lxoKc2aGd
+	1CzJm54jRMOiitETmHMW+SpZR0djb8Y0q6OGNJfQ7dm1cF99c9reQ95rUys7jWeWmc4C
+	Z5Hsj1cf55yA5p7e1TzBK+NFE76ziJ4dsE5SPVpvZn169YhthAGlb96cYflCtowHwvI3
+	/xMEsBR1lx760SaN0CUvnxbT+Guny2jQn2w0SonvoCFaaXZxr3s07pTE99Gy4PvSwsms
+	51OA==
+X-Gm-Message-State: AHQUAuak+P4KC/4hWNwM3xGdmpd5XneWgOF5upyspy0YhMVmddOaxRCh
+	dXlC8RNijj4x77bNjXO+zN0lRA==
+X-Google-Smtp-Source: AHgI3IZf4br5fjSJR9k1vfhdUF2ibp7BLJuapDF7Dv9Dk3MfMKo8i02D6bp+5jPMWgFdwat1lSsRfg==
+X-Received: by 2002:a17:902:848f:: with SMTP id
+	c15mr15554038plo.119.1551035074315; 
+	Sun, 24 Feb 2019 11:04:34 -0800 (PST)
+Received: from cloudburst.twiddle.net (97-113-188-82.tukw.qwest.net.
+	[97.113.188.82]) by smtp.gmail.com with ESMTPSA id
+	s10sm11784164pfi.117.2019.02.24.11.04.32
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sun, 24 Feb 2019 11:04:33 -0800 (PST)
+To: Amed Magdy <amagdy.afifi@gmail.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, sagark@eecs.berkeley.edu,
+	kbastian@mail.uni-paderborn.de, palmer@sifive.com, mjc@sifive.com,
+	Alistair.Francis@wdc.com
 References: <20190222162555.13764-1-amagdy.afifi@gmail.com>
 	<20190222162555.13764-2-amagdy.afifi@gmail.com>
-	<8f36a26e-7e20-1b9c-18bd-a5ce4b3d9c14@redhat.com>
-In-Reply-To: <8f36a26e-7e20-1b9c-18bd-a5ce4b3d9c14@redhat.com>
-From: Amed Magdy <amagdy.afifi@gmail.com>
-Date: Sun, 24 Feb 2019 10:07:23 +0200
-Message-ID: <CAKV=O7=JK4t7VxQ74LvjVpM9+TQ6MJ0hA9_XX40ud7OEsh30hQ@mail.gmail.com>
-To: Eric Blake <eblake@redhat.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, sagark@eecs.berkeley.edu, 
-	kbastian@mail.uni-paderborn.de, palmer@sifive.com, mjc@sifive.com, 
-	Alistair.Francis@wdc.com
-Content-Type: multipart/alternative; boundary="0000000000000cdf3605829f513a"
+	<f782bdde-2a42-c612-5769-1cde42e7c2a4@linaro.org>
+	<CAKV=O7mWBKQzVJRJT-bGW0Ojvb7eFraGniqG1-qPidZWHtp8Ew@mail.gmail.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+Openpgp: preference=signencrypt
+Message-ID: <bf134899-fa0b-2a27-dffd-92369805fd50@linaro.org>
+Date: Sun, 24 Feb 2019 11:04:30 -0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.4.0
+MIME-Version: 1.0
+In-Reply-To: <CAKV=O7mWBKQzVJRJT-bGW0Ojvb7eFraGniqG1-qPidZWHtp8Ew@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::842
+X-Received-From: 2607:f8b0:4864:20::642
 Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH] riscv: Add proper alignment
  check and pending 'C' extension upon misa writes
 X-BeenThere: qemu-riscv@nongnu.org
@@ -68,130 +83,104 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 24 Feb 2019 08:07:40 -0000
+X-List-Received-Date: Sun, 24 Feb 2019 19:04:38 -0000
 
---0000000000000cdf3605829f513a
-Content-Type: text/plain; charset="UTF-8"
+On 2/23/19 11:57 PM, Amed Magdy wrote:
+> Thank you for your review and feedback, Richard.
+> As Eric mentioned, this is the first time contribution. I have been exploring
+> Qemu for some time and try to understand main flow, internals, ..etc.
+> 
+>>  You cannot manipulate env like this during translation.
+> 
+>>  Neither the write to env->pc_next nor the read from env->pending_rvc here will
+>>  be in any synchronization with the execution of write_misa. 
+>  
+> Does this applies for translated code in a single translation block only or for
+> different TBs also ?
 
-Thank you so much, Eric.
+All of the time this will not work.
 
-Sorry about this unclear description.
-I forgot to fix user name in git configuration before submitting the patch.
+> So should I manipulate "env" from translation context through helpers only ?
+> for example:
+> 
+> TCGv temp;
+> tcg_gen_movi_tl(temp, ctx->pc_succ_insn);
+> gen_helper_next_pc(cpu_env, temp);
+> 
+> while the helper function definition like that:
+> void helper_next_pc(CPURISCVState *env, target_ulong pc_next)
+> {
+>     env->pc_next = pc_next;
+> }
 
-Sorry about any inconvenience.
-Thanks,
-Ahmed
+This is a correct way to write pc_next.  (Although I still don't understand why
+you need it.)
 
-On Sat, 23 Feb 2019 at 23:46, Eric Blake <eblake@redhat.com> wrote:
+> and the same to read "env->pending_rvc"
 
-> On 2/22/19 10:25 AM, amagdy.afifi@gmail.com wrote:
-> > From: ahmed_magdy <amagdy.afifi@gmail.com>
-> >
-> > Signed-off-by: ahmed_magdy <amagdy.afifi@gmail.com>
->
-> This appears to be your first contribution to qemu. Welcome to the
-> community!
->
-> Typically, a Signed-off-by designation should be a proper name (what you
-> would sign a legal document with, as it has a legal significance on your
-> right to contribute the code).  Using all lowercase and _ instead of
-> space looks like a username, and while I am not one to tell you it can't
-> be a legal name, it is unusual enough to at least raise my suspicions.
->
-> Furthermore, your commit message doesn't give any details beyond the
-> "what" in the subject line. The body of the commit message should
-> explain the "why" (what bug are you fixing, how to reproduce it), so
-> that a reviewer stands a chance of determining if the code matches the
-> description you gave, and if the issue you describe really does warrant
-> the inclusion of your patch.  You gave a brief "why" in your cover letter:
->
-> "I'm submiting this patch to properly check the next instruction
-> alignment and scheduale compression extenstion enable upon 'MISA'
-> register writes to later aligned instruction through exporting next
-> instruction 'pc' to riscv cpu state"
->
-> where it would be wise to include an improved version of that text with
-> this commit proper (since the cover letter does not get applied to git).
->  For that matter, when sending a single patch, a cover letter is
-> optional (it is only mandatory when sending a multi-patch series).
->
-> For more patch submission hints, see:
-> https://wiki.qemu.org/Contribute/SubmitAPatch
->
-> --
-> Eric Blake, Principal Software Engineer
-> Red Hat, Inc.           +1-919-301-3226
-> Virtualization:  qemu.org | libvirt.org
->
+No, you cannot read pending_rvc this way.  You would need to incorporate
+pending_rvc into the flags set by cpu_get_tb_cpu_state.  (Although I still
+don't understand why you need it.)
 
---0000000000000cdf3605829f513a
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+> I'm thinking of a way to add 'C' extension at run time through waiting the
+> correct aligned instruction, which I believe it might be after branch something
+> quite similar to switching between ARM and THUMB states in ARM, for misa 'RVC'
+> enable to take effect since it will be no possibility to check alignment with
+> 'C' extension.
 
-<div dir=3D"ltr">Thank you so much, Eric.<div><br></div><div>Sorry about th=
-is unclear description. <br>I forgot to fix user name in git configuration =
-before submitting the patch.</div><div><br></div><div>Sorry about any incon=
-venience.</div><div>Thanks,</div><div>Ahmed=C2=A0</div></div><br><div class=
-=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Sat, 23 Feb 2019 =
-at 23:46, Eric Blake &lt;<a href=3D"mailto:eblake@redhat.com" target=3D"_bl=
-ank">eblake@redhat.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_q=
-uote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,2=
-04);padding-left:1ex">On 2/22/19 10:25 AM, <a href=3D"mailto:amagdy.afifi@g=
-mail.com" target=3D"_blank">amagdy.afifi@gmail.com</a> wrote:<br>
-&gt; From: ahmed_magdy &lt;<a href=3D"mailto:amagdy.afifi@gmail.com" target=
-=3D"_blank">amagdy.afifi@gmail.com</a>&gt;<br>
-&gt; <br>
-&gt; Signed-off-by: ahmed_magdy &lt;<a href=3D"mailto:amagdy.afifi@gmail.co=
-m" target=3D"_blank">amagdy.afifi@gmail.com</a>&gt;<br>
-<br>
-This appears to be your first contribution to qemu. Welcome to the<br>
-community!<br>
-<br>
-Typically, a Signed-off-by designation should be a proper name (what you<br=
->
-would sign a legal document with, as it has a legal significance on your<br=
->
-right to contribute the code).=C2=A0 Using all lowercase and _ instead of<b=
-r>
-space looks like a username, and while I am not one to tell you it can&#39;=
-t<br>
-be a legal name, it is unusual enough to at least raise my suspicions.<br>
-<br>
-Furthermore, your commit message doesn&#39;t give any details beyond the<br=
->
-&quot;what&quot; in the subject line. The body of the commit message should=
-<br>
-explain the &quot;why&quot; (what bug are you fixing, how to reproduce it),=
- so<br>
-that a reviewer stands a chance of determining if the code matches the<br>
-description you gave, and if the issue you describe really does warrant<br>
-the inclusion of your patch.=C2=A0 You gave a brief &quot;why&quot; in your=
- cover letter:<br>
-<br>
-&quot;I&#39;m submiting this patch to properly check the next instruction<b=
-r>
-alignment and scheduale compression extenstion enable upon &#39;MISA&#39;<b=
-r>
-register writes to later aligned instruction through exporting next<br>
-instruction &#39;pc&#39; to riscv cpu state&quot;<br>
-<br>
-where it would be wise to include an improved version of that text with<br>
-this commit proper (since the cover letter does not get applied to git).<br=
->
-=C2=A0For that matter, when sending a single patch, a cover letter is<br>
-optional (it is only mandatory when sending a multi-patch series).<br>
-<br>
-For more patch submission hints, see:<br>
-<a href=3D"https://wiki.qemu.org/Contribute/SubmitAPatch" rel=3D"noreferrer=
-" target=3D"_blank">https://wiki.qemu.org/Contribute/SubmitAPatch</a><br>
-<br>
--- <br>
-Eric Blake, Principal Software Engineer<br>
-Red Hat, Inc.=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0+1-919-301-3226<br>
-Virtualization:=C2=A0 <a href=3D"http://qemu.org" rel=3D"noreferrer" target=
-=3D"_blank">qemu.org</a> | <a href=3D"http://libvirt.org" rel=3D"noreferrer=
-" target=3D"_blank">libvirt.org</a><br>
-</blockquote></div>
+It seems to me that the C extension can be enabled at any point, since if C is
+off, you know that the next insn is aligned modulo 4.
 
---0000000000000cdf3605829f513a--
+It is only if the C extension is enabled, and you want to disable it, that is
+when we must check to see if the next insn is aligned mod 4.  It is trivial to
+arrange for a particular instruction to be aligned, via assembler directives.
+So it seems silly to make the definition of the csr write to misa any more
+complicated than it is.
+
+You are right that the existing code is broken, in that it is checking the
+alignment of the host PC and not the guest PC.  However, I see no reason to
+introduce a new "pc_next" field when we already update the pc field ...
+
+> static void gen_system(DisasContext *ctx, uint32_t opc, int rd, int rs1,
+>                        int csr)
+> {
+>     TCGv source1, csr_store, dest, rs1_pass, imm_rs1;
+>     source1 = tcg_temp_new();
+>     csr_store = tcg_temp_new();
+>     dest = tcg_temp_new();
+>     rs1_pass = tcg_temp_new();
+>     imm_rs1 = tcg_temp_new();
+>     gen_get_gpr(source1, rs1);
+>     tcg_gen_movi_tl(cpu_pc, ctx->base.pc_next);
+
+... here.
+
+So as far as I can see, the only thing that needs fixing is GETPC.
+
+
+r~
+
+
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index 960d2b0aa9..8726ef802e 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -370,10 +370,11 @@ static int write_misa(CPURISCVState *env, int csrno,
+target_ulong val)
+         val &= ~RVD;
+     }
+
+-    /* Suppress 'C' if next instruction is not aligned
+-     * TODO: this should check next_pc
++    /*
++     * Suppress 'C' if next instruction is not aligned.
++     * We updated env->pc to the next insn in the translator.
+      */
+-    if ((val & RVC) && (GETPC() & ~3) != 0) {
++    if ((val & RVC) && (env->pc & ~3) != 0) {
+         val &= ~RVC;
+     }
+
+
+
 
