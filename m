@@ -1,50 +1,50 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gzq3a-0003af-5a
+	id 1gzq3a-0003b0-CE
 	for mharc-qemu-riscv@gnu.org; Fri, 01 Mar 2019 16:51:02 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:50270)
+Received: from eggs.gnu.org ([209.51.188.92]:50263)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1gzq3T-0003RP-0i
+	(envelope-from <palmer@sifive.com>) id 1gzq3S-0003R7-RH
 	for qemu-riscv@nongnu.org; Fri, 01 Mar 2019 16:50:56 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1gzq3P-00037k-HD
+	(envelope-from <palmer@sifive.com>) id 1gzq3O-00033C-1c
 	for qemu-riscv@nongnu.org; Fri, 01 Mar 2019 16:50:54 -0500
-Received: from mail-pg1-x534.google.com ([2607:f8b0:4864:20::534]:38168)
+Received: from mail-pf1-x42f.google.com ([2607:f8b0:4864:20::42f]:43349)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1gzq3K-0002XA-FL
-	for qemu-riscv@nongnu.org; Fri, 01 Mar 2019 16:50:51 -0500
-Received: by mail-pg1-x534.google.com with SMTP id m2so12050476pgl.5
-	for <qemu-riscv@nongnu.org>; Fri, 01 Mar 2019 13:50:32 -0800 (PST)
+	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1gzq3K-0002Yz-73
+	for qemu-riscv@nongnu.org; Fri, 01 Mar 2019 16:50:49 -0500
+Received: by mail-pf1-x42f.google.com with SMTP id q17so12012473pfh.10
+	for <qemu-riscv@nongnu.org>; Fri, 01 Mar 2019 13:50:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
 	h=subject:date:message-id:in-reply-to:references:cc:from:to;
-	bh=nPPzIdX0rpmyy3MoFLlXZz0uKI5n0DbKz/S5XJ1YzAE=;
-	b=CLPOcyFfcxLtNNIKCHlw3R3waEE1vZVd3S/XMwpYtoch2ri9kyr86XC+S9AADNNBIc
-	hZPJbHHI+SQLI4u/zsRmJ+ElgFl6K1fQ4uZps2jUc3PdBuswYUXfKYQZCvhYYtL4PZhG
-	af8XO5D+mehlPFdygFVeRKYY4HeA6dEFmTQEMLvp6LHfU6kigKYhYJBwCb7L/c7JElhn
-	fjhZGEfNA14K9vhMm138hoVkAKxdWWz3P4cwB1JpTp35kE0zoN+rnr8CBMG0rRvy5gBC
-	upe7illSAMtPYlfOLMWeeJ/CVzfwZOAjS2UVVVVNW6kB4VyBaMOjXhwUVl5aATzE456a
-	/T1w==
+	bh=qsaDjuD7cYGnev4FgbYMJhzlxE/p3Kn1ZCz4427+MCo=;
+	b=Fdb5utaI5ouAhx0MWV5CRVTaRnL5y0jxV3m4TJvmBaSri3DN+sRhr2TtghzgxBKe82
+	D6eBgr4V18fDWG+MrVMPJN80IDaz9XR8uoYEYGQ/9JWxczTNnT89HZVayuW4O28CdnUH
+	TEmzhQmqrfhJAnuyziNElcNlIasCeNPyOy1UoEQZ4eEL7gj6GcSJfXWL1Gam2845xXuG
+	HDUO+FvghJoGHxxgScisefa3e5RddLqRuP0o0PfTIuogkWneOI68M56zL8fD3/VIdZ1u
+	tfjzHTGZNgOf12lrbhOs8H+iJ4Xq7PCAlkAdrwmg+kKgFaq+XuRDcxHPVM31YOxMZXQv
+	MT5g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:subject:date:message-id:in-reply-to:references
 	:cc:from:to;
-	bh=nPPzIdX0rpmyy3MoFLlXZz0uKI5n0DbKz/S5XJ1YzAE=;
-	b=Qv7CZ92K9HmqKpqJP0AVj3KVdvAw98tTLoxitRlU/1bo/QkpXNJPdV8lIZwKNyU4ue
-	mDSAGnA6SEun9LT4MCSXfs6+fZ3VzuCdg5IAJ7N8y8WAeBsWEXEbHS0w0YZ1lvpikzFC
-	xO0nZOmw6JHm9Kf3zKrG5TRVqu2hYz/+UUuAUkF2u7FTokC+6IkQvumXrfjTUR5lee83
-	VfpROYCgAVoxfzqx15exp8TRs+Twg84Va9JauUI85+k5dxy78/7u03dKcemolM9O4v1w
-	vs9yYEukckzAe6cMwnEW+jfDeJDz4b8onrdsxgNbx9WvwmbEQ63q0FbYfnTu6ylvATSH
-	U5CA==
-X-Gm-Message-State: APjAAAWdlClU2ZuzHYBFqDdfjN7egdSwPc2QRpT/53/dgfE5ZpOCIp0S
-	JHPBhEeJHNbFbRasiyEDru7MgA==
-X-Google-Smtp-Source: APXvYqxKY2XJh0BMbs4UYWcE23JU7a+8ZGALjmV79H+DC76MavkxuaL8k0XcEB8j7aOvZ0/CTyuhFA==
-X-Received: by 2002:a62:e80f:: with SMTP id c15mr2918465pfi.33.1551477032004; 
-	Fri, 01 Mar 2019 13:50:32 -0800 (PST)
+	bh=qsaDjuD7cYGnev4FgbYMJhzlxE/p3Kn1ZCz4427+MCo=;
+	b=VGZXNeaQ/iDUtmHa8BLDjlvSu0qddplCOUHV95gixuURqjMoK76l+VKhzNshWLNNXe
+	EcfWyuBdzez+nei/67NPZaF0j6c1TAAkhhJSTPxJQm7mQLGIRV0lx28XTBfZXdY112v0
+	qY9j9qor1egg+75TRLusVvbQbOAokpsI46GEW9Uv61F1En8XGK525cJS+aV/owaqdjMN
+	ShK59V6rhd/h+k1mif/VjLsxPPYfCikiSpKs/O/YqAg/VI2OOPX3Xqr+JRrO1YKWkg6S
+	lR1t9N9oYWRDcjkh1IJmZXDliFNt2NJT50Gyi09ZAAlWUeQiz+TFLEGIcDPGskn2XzJz
+	u9Rg==
+X-Gm-Message-State: APjAAAXAXrl/aJHCOiKOXPpgBZbUhdlbqgxJerustJtQQ816mhfOEtM0
+	WG8ZVpnTsze1s2Ar/oxNS04zog==
+X-Google-Smtp-Source: APXvYqz5z55FHzQjQkjwN4vBUokpZvaISx8Q6DIDr5QBOwxVyr1AnBc41JeTuohPcpP/NHAMe3I8QQ==
+X-Received: by 2002:a62:1752:: with SMTP id 79mr7725798pfx.127.1551477033715; 
+	Fri, 01 Mar 2019 13:50:33 -0800 (PST)
 Received: from localhost ([12.206.222.5]) by smtp.gmail.com with ESMTPSA id
-	a4sm44879072pga.52.2019.03.01.13.50.30
+	h75sm38332418pfd.150.2019.03.01.13.50.32
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 01 Mar 2019 13:50:31 -0800 (PST)
-Date: Fri,  1 Mar 2019 13:49:32 -0800
-Message-Id: <20190301214945.4353-22-palmer@sifive.com>
+	Fri, 01 Mar 2019 13:50:33 -0800 (PST)
+Date: Fri,  1 Mar 2019 13:49:33 -0800
+Message-Id: <20190301214945.4353-23-palmer@sifive.com>
 X-Mailer: git-send-email 2.18.1
 In-Reply-To: <20190301214945.4353-1-palmer@sifive.com>
 References: <20190301214945.4353-1-palmer@sifive.com>
@@ -56,9 +56,9 @@ From: Palmer Dabbelt <palmer@sifive.com>
 To: Peter Maydell <peter.maydell@linaro.org>
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::534
-Subject: [Qemu-riscv] [PULL 21/34] target/riscv: Remove manual decoding from
- gen_load()
+X-Received-From: 2607:f8b0:4864:20::42f
+Subject: [Qemu-riscv] [PULL 22/34] target/riscv: Remove manual decoding from
+ gen_store()
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -70,128 +70,125 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Mar 2019 21:50:56 -0000
+X-List-Received-Date: Fri, 01 Mar 2019 21:50:57 -0000
 
 From: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
 
 With decodetree we don't need to convert RISC-V opcodes into to MemOps
-as the old gen_load() did.
+as the old gen_store() did.
 
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Signed-off-by: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
 Signed-off-by: Peer Adelt <peer.adelt@hni.uni-paderborn.de>
 Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
 ---
- target/riscv/insn_trans/trans_rvi.inc.c | 35 +++++++++++++++----------
- target/riscv/translate.c                |  6 +++--
- 2 files changed, 25 insertions(+), 16 deletions(-)
+ target/riscv/insn_trans/trans_rvi.inc.c | 27 +++++++++++++++++--------
+ target/riscv/translate.c                |  8 +++++---
+ 2 files changed, 24 insertions(+), 11 deletions(-)
 
 diff --git a/target/riscv/insn_trans/trans_rvi.inc.c b/target/riscv/insn_trans/trans_rvi.inc.c
-index ae4b0a2bcb78..cc361ed4d151 100644
+index cc361ed4d151..5a09c6335ae0 100644
 --- a/target/riscv/insn_trans/trans_rvi.inc.c
 +++ b/target/riscv/insn_trans/trans_rvi.inc.c
-@@ -129,34 +129,43 @@ static bool trans_bgeu(DisasContext *ctx, arg_bgeu *a)
-     return gen_branch(ctx, a, TCG_COND_GEU);
+@@ -168,22 +168,34 @@ static bool trans_lhu(DisasContext *ctx, arg_lhu *a)
+     return gen_load(ctx, a, MO_TEUW);
  }
  
--static bool trans_lb(DisasContext *ctx, arg_lb *a)
-+static bool gen_load(DisasContext *ctx, arg_lb *a, TCGMemOp memop)
+-static bool trans_sb(DisasContext *ctx, arg_sb *a)
++static bool gen_store(DisasContext *ctx, arg_sb *a, TCGMemOp memop)
  {
--    gen_load(ctx, OPC_RISC_LB, a->rd, a->rs1, a->imm);
+-    gen_store(ctx, OPC_RISC_SB, a->rs1, a->rs2, a->imm);
 +    TCGv t0 = tcg_temp_new();
-+    TCGv t1 = tcg_temp_new();
++    TCGv dat = tcg_temp_new();
 +    gen_get_gpr(t0, a->rs1);
 +    tcg_gen_addi_tl(t0, t0, a->imm);
++    gen_get_gpr(dat, a->rs2);
 +
-+    tcg_gen_qemu_ld_tl(t1, t0, ctx->mem_idx, memop);
-+    gen_set_gpr(a->rd, t1);
++    tcg_gen_qemu_st_tl(dat, t0, ctx->mem_idx, memop);
 +    tcg_temp_free(t0);
-+    tcg_temp_free(t1);
++    tcg_temp_free(dat);
      return true;
  }
  
-+static bool trans_lb(DisasContext *ctx, arg_lb *a)
++
++static bool trans_sb(DisasContext *ctx, arg_sb *a)
 +{
-+    return gen_load(ctx, a, MO_SB);
++    return gen_store(ctx, a, MO_SB);
 +}
 +
- static bool trans_lh(DisasContext *ctx, arg_lh *a)
+ static bool trans_sh(DisasContext *ctx, arg_sh *a)
  {
--    gen_load(ctx, OPC_RISC_LH, a->rd, a->rs1, a->imm);
+-    gen_store(ctx, OPC_RISC_SH, a->rs1, a->rs2, a->imm);
 -    return true;
-+    return gen_load(ctx, a, MO_TESW);
++    return gen_store(ctx, a, MO_TESW);
  }
  
- static bool trans_lw(DisasContext *ctx, arg_lw *a)
+ static bool trans_sw(DisasContext *ctx, arg_sw *a)
  {
--    gen_load(ctx, OPC_RISC_LW, a->rd, a->rs1, a->imm);
+-    gen_store(ctx, OPC_RISC_SW, a->rs1, a->rs2, a->imm);
 -    return true;
-+    return gen_load(ctx, a, MO_TESL);
++    return gen_store(ctx, a, MO_TESL);
  }
  
- static bool trans_lbu(DisasContext *ctx, arg_lbu *a)
- {
--    gen_load(ctx, OPC_RISC_LBU, a->rd, a->rs1, a->imm);
--    return true;
-+    return gen_load(ctx, a, MO_UB);
- }
- 
- static bool trans_lhu(DisasContext *ctx, arg_lhu *a)
- {
--    gen_load(ctx, OPC_RISC_LHU, a->rd, a->rs1, a->imm);
--    return true;
-+    return gen_load(ctx, a, MO_TEUW);
- }
- 
- static bool trans_sb(DisasContext *ctx, arg_sb *a)
-@@ -180,14 +189,12 @@ static bool trans_sw(DisasContext *ctx, arg_sw *a)
  #ifdef TARGET_RISCV64
- static bool trans_lwu(DisasContext *ctx, arg_lwu *a)
- {
--    gen_load(ctx, OPC_RISC_LWU, a->rd, a->rs1, a->imm);
--    return true;
-+    return gen_load(ctx, a, MO_TEUL);
- }
- 
- static bool trans_ld(DisasContext *ctx, arg_ld *a)
- {
--    gen_load(ctx, OPC_RISC_LD, a->rd, a->rs1, a->imm);
--    return true;
-+    return gen_load(ctx, a, MO_TEQ);
- }
+@@ -199,8 +211,7 @@ static bool trans_ld(DisasContext *ctx, arg_ld *a)
  
  static bool trans_sd(DisasContext *ctx, arg_sd *a)
+ {
+-    gen_store(ctx, OPC_RISC_SD, a->rs1, a->rs2, a->imm);
+-    return true;
++    return gen_store(ctx, a, MO_TEQ);
+ }
+ #endif
+ 
 diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index a3d5cdbad82d..99d6d3b4ae91 100644
+index 99d6d3b4ae91..cdc08b1bff20 100644
 --- a/target/riscv/translate.c
 +++ b/target/riscv/translate.c
-@@ -531,7 +531,8 @@ static void gen_jal(DisasContext *ctx, int rd, target_ulong imm)
-     ctx->base.is_jmp = DISAS_NORETURN;
- }
+@@ -56,6 +56,7 @@ typedef struct DisasContext {
+     int frm;
+ } DisasContext;
  
--static void gen_load(DisasContext *ctx, uint32_t opc, int rd, int rs1,
 +#ifdef TARGET_RISCV64
-+static void gen_load_c(DisasContext *ctx, uint32_t opc, int rd, int rs1,
-         target_long imm)
- {
-     TCGv t0 = tcg_temp_new();
-@@ -550,6 +551,7 @@ static void gen_load(DisasContext *ctx, uint32_t opc, int rd, int rs1,
+ /* convert riscv funct3 to qemu memop for load/store */
+ static const int tcg_memop_lookup[8] = {
+     [0 ... 7] = -1,
+@@ -69,6 +70,7 @@ static const int tcg_memop_lookup[8] = {
+     [6] = MO_TEUL,
+ #endif
+ };
++#endif
+ 
+ #ifdef TARGET_RISCV64
+ #define CASE_OP_32_64(X) case X: case glue(X, W)
+@@ -551,9 +553,8 @@ static void gen_load_c(DisasContext *ctx, uint32_t opc, int rd, int rs1,
      tcg_temp_free(t0);
      tcg_temp_free(t1);
  }
+-#endif
+ 
+-static void gen_store(DisasContext *ctx, uint32_t opc, int rs1, int rs2,
++static void gen_store_c(DisasContext *ctx, uint32_t opc, int rs1, int rs2,
+         target_long imm)
+ {
+     TCGv t0 = tcg_temp_new();
+@@ -572,6 +573,7 @@ static void gen_store(DisasContext *ctx, uint32_t opc, int rs1, int rs2,
+     tcg_temp_free(t0);
+     tcg_temp_free(dat);
+ }
 +#endif
  
- static void gen_store(DisasContext *ctx, uint32_t opc, int rs1, int rs2,
-         target_long imm)
-@@ -723,7 +725,7 @@ static void decode_RV32_64C0(DisasContext *ctx)
-     case 3:
+ #ifndef CONFIG_USER_ONLY
+ /* The states of mstatus_fs are:
+@@ -736,7 +738,7 @@ static void decode_RV32_64C0(DisasContext *ctx)
+     case 7:
  #if defined(TARGET_RISCV64)
-         /* C.LD(RV64/128) -> ld rd', offset[7:3](rs1')*/
--        gen_load(ctx, OPC_RISC_LD, rd_rs2, rs1s,
-+        gen_load_c(ctx, OPC_RISC_LD, rd_rs2, rs1s,
-                  GET_C_LD_IMM(ctx->opcode));
+         /* C.SD (RV64/128) -> sd rs2', offset[7:3](rs1')*/
+-        gen_store(ctx, OPC_RISC_SD, rs1s, rd_rs2,
++        gen_store_c(ctx, OPC_RISC_SD, rs1s, rd_rs2,
+                   GET_C_LD_IMM(ctx->opcode));
  #else
-         /* C.FLW (RV32) -> flw rd', offset[6:2](rs1')*/
+         /* C.FSW (RV32) -> fsw rs2', offset[6:2](rs1')*/
 -- 
 2.18.1
 
