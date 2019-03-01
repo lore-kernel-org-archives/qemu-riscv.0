@@ -1,107 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gzNEf-0001um-Sm
-	for mharc-qemu-riscv@gnu.org; Thu, 28 Feb 2019 10:04:33 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:40504)
+	id 1gzq2i-0002hW-VJ
+	for mharc-qemu-riscv@gnu.org; Fri, 01 Mar 2019 16:50:09 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:49270)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <pbonzini@redhat.com>) id 1gzHeQ-0001IU-S2
-	for qemu-riscv@nongnu.org; Thu, 28 Feb 2019 04:06:47 -0500
+	(envelope-from <palmer@sifive.com>) id 1gzq2f-0002gl-Sq
+	for qemu-riscv@nongnu.org; Fri, 01 Mar 2019 16:50:07 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <pbonzini@redhat.com>) id 1gzHeP-0002bO-Qt
-	for qemu-riscv@nongnu.org; Thu, 28 Feb 2019 04:06:46 -0500
-Received: from mx1.redhat.com ([209.132.183.28]:56246)
-	by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.71) (envelope-from <pbonzini@redhat.com>)
-	id 1gzHeI-0002Wc-9A; Thu, 28 Feb 2019 04:06:39 -0500
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
-	[10.5.11.15])
-	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id 4B7A330BF4F3;
-	Thu, 28 Feb 2019 09:06:36 +0000 (UTC)
-Received: from [10.36.112.40] (ovpn-112-40.ams2.redhat.com [10.36.112.40])
-	by smtp.corp.redhat.com (Postfix) with ESMTPS id 6BE2361520;
-	Thu, 28 Feb 2019 09:06:22 +0000 (UTC)
-To: Thomas Huth <thuth@redhat.com>, fam@euphon.net
-Cc: qemu-devel@nongnu.org, kbastian@mail.uni-paderborn.de,
-	qemu-riscv@nongnu.org, sagark@eecs.berkeley.edu, palmer@sifive.com,
-	richard.henderson@linaro.org, peer.adelt@hni.uni-paderborn.de
-References: <155129014351.2181.16531275718275765030@49fa7ef69f7b>
-	<d29adfb8-e194-54af-5f08-b4accb5df790@redhat.com>
-From: Paolo Bonzini <pbonzini@redhat.com>
-Openpgp: preference=signencrypt
-Autocrypt: addr=pbonzini@redhat.com; prefer-encrypt=mutual; keydata=
-	mQHhBFRCcBIBDqDGsz4K0zZun3jh+U6Z9wNGLKQ0kSFyjN38gMqU1SfP+TUNQepFHb/Gc0E2
-	CxXPkIBTvYY+ZPkoTh5xF9oS1jqI8iRLzouzF8yXs3QjQIZ2SfuCxSVwlV65jotcjD2FTN04
-	hVopm9llFijNZpVIOGUTqzM4U55sdsCcZUluWM6x4HSOdw5F5Utxfp1wOjD/v92Lrax0hjiX
-	DResHSt48q+8FrZzY+AUbkUS+Jm34qjswdrgsC5uxeVcLkBgWLmov2kMaMROT0YmFY6A3m1S
-	P/kXmHDXxhe23gKb3dgwxUTpENDBGcfEzrzilWueOeUWiOcWuFOed/C3SyijBx3Av/lbCsHU
-	Vx6pMycNTdzU1BuAroB+Y3mNEuW56Yd44jlInzG2UOwt9XjjdKkJZ1g0P9dwptwLEgTEd3Fo
-	UdhAQyRXGYO8oROiuh+RZ1lXp6AQ4ZjoyH8WLfTLf5g1EKCTc4C1sy1vQSdzIRu3rBIjAvnC
-	tGZADei1IExLqB3uzXKzZ1BZ+Z8hnt2og9hb7H0y8diYfEk2w3R7wEr+Ehk5NQsT2MPI2QBd
-	wEv1/Aj1DgUHZAHzG1QN9S8wNWQ6K9DqHZTBnI1hUlkp22zCSHK/6FwUCuYp1zcAEQEAAbQj
-	UGFvbG8gQm9uemluaSA8cGJvbnppbmlAcmVkaGF0LmNvbT6JAg0EEwECACMFAlRCcBICGwMH
-	CwkIBwMCAQYVCAIJCgsEFgIDAQIeAQIXgAAKCRB+FRAMzTZpsbceDp9IIN6BIA0Ol7MoB15E
-	11kRz/ewzryFY54tQlMnd4xxfH8MTQ/mm9I482YoSwPMdcWFAKnUX6Yo30tbLiNB8hzaHeRj
-	jx12K+ptqYbg+cevgOtbLAlL9kNgLLcsGqC2829jBCUTVeMSZDrzS97ole/YEez2qFpPnTV0
-	VrRWClWVfYh+JfzpXmgyhbkuwUxNFk421s4Ajp3d8nPPFUGgBG5HOxzkAm7xb1cjAuJ+oi/K
-	CHfkuN+fLZl/u3E/fw7vvOESApLU5o0icVXeakfSz0LsygEnekDbxPnE5af/9FEkXJD5EoYG
-	SEahaEtgNrR4qsyxyAGYgZlS70vkSSYJ+iT2rrwEiDlo31MzRo6Ba2FfHBSJ7lcYdPT7bbk9
-	AO3hlNMhNdUhoQv7M5HsnqZ6unvSHOKmReNaS9egAGdRN0/GPDWr9wroyJ65ZNQsHl9nXBqE
-	AukZNr5oJO5vxrYiAuuTSd6UI/xFkjtkzltG3mw5ao2bBpk/V/YuePrJsnPFHG7NhizrxttB
-	nTuOSCMo45pfHQ+XYd5K1+Cv/NzZFNWscm5htJ0HznY+oOsZvHTyGz3v91pn51dkRYN0otqr
-	bQ4tlFFuVjArBZcapSIe6NV8C4cEiSS5AQ0EVEJxcwEIAK+nUrsUz3aP2aBjIrX3a1+C+39R
-	nctpNIPcJjFJ/8WafRiwcEuLjbvJ/4kyM6K7pWUIQftl1P8Woxwb5nqL7zEFHh5I+hKS3haO
-	5pgco//V0tWBGMKinjqntpd4U4Dl299dMBZ4rRbPvmI8rr63sCENxTnHhTECyHdGFpqSzWzy
-	97rH68uqMpxbUeggVwYkYihZNd8xt1+lf7GWYNEO/QV8ar/qbRPG6PEfiPPHQd/sldGYavmd
-	//o6TQLSJsvJyJDt7KxulnNT8Q2X/OdEuVQsRT5glLaSAeVAABcLAEnNgmCIGkX7TnQF8a6w
-	gHGrZIR9ZCoKvDxAr7RP6mPeS9sAEQEAAYkDEgQYAQIACQUCVEJxcwIbAgEpCRB+FRAMzTZp
-	scBdIAQZAQIABgUCVEJxcwAKCRC/+9JfeMeug/SlCACl7QjRnwHo/VzENWD9G2VpUOd9eRnS
-	DZGQmPo6Mp3Wy8vL7snGFBfRseT9BevXBSkxvtOnUUV2YbyLmolAODqUGzUI8ViF339poOYN
-	i6Ffek0E19IMQ5+CilqJJ2d5ZvRfaq70LA/Ly9jmIwwX4auvXrWl99/2wCkqnWZI+PAepkcX
-	JRD4KY2fsvRi64/aoQmcxTiyyR7q3/52Sqd4EdMfj0niYJV0Xb9nt8G57Dp9v3Ox5JeWZKXS
-	krFqy1qyEIypIrqcMbtXM7LSmiQ8aJRM4ZHYbvgjChJKR4PsKNQZQlMWGUJO4nVFSkrixc9R
-	Z49uIqQK3b3ENB1QkcdMg9cxsB0Onih8zR+Wp1uDZXnz1ekto+EivLQLqvTjCCwLxxJafwKI
-	bqhQ+hGR9jF34EFur5eWt9jJGloEPVv0GgQflQaE+rRGe+3f5ZDgRe5Y/EJVNhBhKcafcbP8
-	MzmLRh3UDnYDwaeguYmxuSlMdjFL96YfhRBXs8tUw6SO9jtCgBvoOIBDCxxAJjShY4KIvEpK
-	b2hSNr8KxzelKKlSXMtB1bbHbQxiQcerAipYiChUHq1raFc3V0eOyCXK205rLtknJHhM5pfG
-	6taABGAMvJgm/MrVILIxvBuERj1FRgcgoXtiBmLEJSb7akcrRlqe3MoPTntSTNvNzAJmfWhd
-	SvP0G1WDLolqvX0OtKMppI91AWVu72f1kolJg43wbaKpRJg1GMkKEI3H+jrrlTBrNl/8e20m
-	TElPRDKzPiowmXeZqFSS1A6Azv0TJoo9as+lWF+P4zCXt40+Zhh5hdHO38EV7vFAVG3iuay6
-	7ToF8Uy7tgc3mdH98WQSmHcn/H5PFYk3xTP3KHB7b0FZPdFPQXBZb9+tJeZBi9gMqcjMch+Y
-	R8dmTcQRQX14bm5nXlBF7VpSOPZMR392LY7wzAvRdhz7aeIUkdO7VelaspFk2nT7wOj1Y6uL
-	nRxQlLkBDQRUQnHuAQgAx4dxXO6/Zun0eVYOnr5GRl76+2UrAAemVv9Yfn2PbDIbxXqLff7o
-	yVJIkw4WdhQIIvvtu5zH24iYjmdfbg8iWpP7NqxUQRUZJEWbx2CRwkMHtOmzQiQ2tSLjKh/c
-	HeyFH68xjeLcinR7jXMrHQK+UCEw6jqi1oeZzGvfmxarUmS0uRuffAb589AJW50kkQK9VD/9
-	QC2FJISSUDnRC0PawGSZDXhmvITJMdD4TjYrePYhSY4uuIV02v028TVAaYbIhxvDY0hUQE4r
-	8ZbGRLn52bEzaIPgl1p/adKfeOUeMReg/CkyzQpmyB1TSk8lDMxQzCYHXAzwnGi8WU9iuE1P
-	0wARAQABiQHzBBgBAgAJBQJUQnHuAhsMAAoJEH4VEAzNNmmxp1EOoJy0uZggJm7gZKeJ7iUp
-	eX4eqUtqelUw6gU2daz2hE/jsxsTbC/w5piHmk1H1VWDKEM4bQBTuiJ0bfo55SWsUNN+c9hh
-	IX+Y8LEe22izK3w7mRpvGcg+/ZRG4DEMHLP6JVsv5GMpoYwYOmHnplOzCXHvmdlW0i6SrMsB
-	Dl9rw4AtIa6bRwWLim1lQ6EM3PWifPrWSUPrPcw4OLSwFk0CPqC4HYv/7ZnASVkR5EERFF3+
-	6iaaVi5OgBd81F1TCvCX2BEyIDRZLJNvX3TOd5FEN+lIrl26xecz876SvcOb5SL5SKg9/rCB
-	ufdPSjojkGFWGziHiFaYhbuI2E+NfWLJtd+ZvWAAV+O0d8vFFSvriy9enJ8kxJwhC0ECbSKF
-	Y+W1eTIhMD3aeAKY90drozWEyHhENf4l/V+Ja5vOnW+gCDQkGt2Y1lJAPPSIqZKvHzGShdh8
-	DduC0U3xYkfbGAUvbxeepjgzp0uEnBXfPTy09JGpgWbg0w91GyfT/ujKaGd4vxG2Ei+MMNDm
-	S1SMx7wu0evvQ5kT9NPzyq8R2GIhVSiAd2jioGuTjX6AZCFv3ToO53DliFMkVTecLptsXaes
-	uUHgL9dKIfvpm+rNXRn9wAwGjk0X/A==
-Message-ID: <6fd94511-8634-fa0a-0cfc-6d7a83d57f9c@redhat.com>
-Date: Thu, 28 Feb 2019 10:06:13 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.4.0
-MIME-Version: 1.0
-In-Reply-To: <d29adfb8-e194-54af-5f08-b4accb5df790@redhat.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
-	(mx1.redhat.com [10.5.110.45]);
-	Thu, 28 Feb 2019 09:06:36 +0000 (UTC)
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
-X-Received-From: 209.132.183.28
-X-Mailman-Approved-At: Thu, 28 Feb 2019 10:04:33 -0500
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v8 00/34] target/riscv:
- Convert to decodetree
+	(envelope-from <palmer@sifive.com>) id 1gzq2e-0001jF-DV
+	for qemu-riscv@nongnu.org; Fri, 01 Mar 2019 16:50:05 -0500
+Received: from mail-pl1-x62d.google.com ([2607:f8b0:4864:20::62d]:36080)
+	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1gzq2d-0001em-Qj
+	for qemu-riscv@nongnu.org; Fri, 01 Mar 2019 16:50:04 -0500
+Received: by mail-pl1-x62d.google.com with SMTP id k2so12090830plt.3
+	for <qemu-riscv@nongnu.org>; Fri, 01 Mar 2019 13:50:02 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+	h=subject:date:message-id:in-reply-to:references:cc:from:to;
+	bh=hFKTZz6IPw1id8YoPgiQS2RYFfpvgs+5pIW5GhYLQec=;
+	b=ah1tUXh/nTF/PFJ8S8wJcFu7t+hV6+kMWm0uxeRJMp/BVPHl1Nxw/azNCoh4L7PDhv
+	LlAJd1sbBNGYItJ7bX/KOyBJTpa4bf9thtOqdMBpjninr6G8PmrMzYDyoOREQNnhXor0
+	0rJlhKhNysf+TDfpnI231In8KJklAHeb/46L0uUFrIPFQL8ZAiMmfvK/G7cSyFIe1jA+
+	YW09KdTTclNxztI+UjoY5GFgRqvzMJ/I4cq24ZObZ9cZpnwYN2dvCvqKkG2x+Akjc650
+	ELBBWuyGj0lOFNwioqYTWNWSZih3h7oU+DNQFvsRhxc9ut1L2WH/KacYGbL/03BX3O3t
+	QnJg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:subject:date:message-id:in-reply-to:references
+	:cc:from:to;
+	bh=hFKTZz6IPw1id8YoPgiQS2RYFfpvgs+5pIW5GhYLQec=;
+	b=BJYOoKC23rRH8nNbSeUjES3VNHLsx1E/v9XQh5/uyUXy0mFY+X8ivXa+YI8ITFBFw3
+	PJ4Hllgxy5Szrsg9bAhnnmYhh8a8ZUePPMxrmjZv3Mp+T/J8U3TnwN+NJFiosIe1z70K
+	oouWIVovt4j7KadDpkqgMO55SDVeEqBtq8xFGKzANRB7sMiGaAWUJxf6F3z+6wtGkq7s
+	LBh2QXy2OSdT5uWITuJ0KTJq3RnYRHaMsBuyPrRNgpUfhsy11Z37xPT8Hk7FHj1lUujK
+	E15kSHwDZCBDsjh+0bI3UxNdHUgF2EtKXcnRYVhHOx2pc2eOrYdFf8d+pcycJoK0nSL5
+	ggrg==
+X-Gm-Message-State: APjAAAUoPt9q6Mt+wCrgM6NhfoDMUdoIXu0r6wvNu1pV7yWBhgc7S6MK
+	dlzjGbHWLEiiLa8YqFMC8N46TA==
+X-Google-Smtp-Source: APXvYqwif5UzxsQhiw55Uuooef5djyIu2g+M/6aOH2KF9wAgltOjSRah9EF1RQ+2kTl6Abg1nEo8Ww==
+X-Received: by 2002:a17:902:b904:: with SMTP id
+	bf4mr7577826plb.273.1551477001408; 
+	Fri, 01 Mar 2019 13:50:01 -0800 (PST)
+Received: from localhost ([12.206.222.5]) by smtp.gmail.com with ESMTPSA id
+	b85sm62022227pfj.56.2019.03.01.13.50.00
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 01 Mar 2019 13:50:00 -0800 (PST)
+Date: Fri,  1 Mar 2019 13:49:14 -0800
+Message-Id: <20190301214945.4353-4-palmer@sifive.com>
+X-Mailer: git-send-email 2.18.1
+In-Reply-To: <20190301214945.4353-1-palmer@sifive.com>
+References: <20190301214945.4353-1-palmer@sifive.com>
+Cc: qemu-devel@nongnu.org,       qemu-riscv@nongnu.org,
+	Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+	Peer Adelt <peer.adelt@hni.uni-paderborn.de>, 
+	Palmer Dabbelt <palmer@sifive.com>
+From: Palmer Dabbelt <palmer@sifive.com>
+To: Peter Maydell <peter.maydell@linaro.org>
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+	recognized.
+X-Received-From: 2607:f8b0:4864:20::62d
+Subject: [Qemu-riscv] [PULL 03/34] target/riscv: Convert RV32I load/store
+ insns to decodetree
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -113,24 +71,109 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Feb 2019 09:06:47 -0000
+X-List-Received-Date: Fri, 01 Mar 2019 21:50:07 -0000
 
-On 28/02/19 09:37, Thomas Huth wrote:
-> On 27/02/2019 18.55, no-reply@patchew.org wrote:
->> Patchew URL: https://patchew.org/QEMU/20190222141024.22217-1-kbastian@mail.uni-paderborn.de/
->>
->> Hi,
->>
->> This series seems to have some coding style problems. See output below for
->> more information:
-> 
->  Fam, Paolo,
-> 
-> Patchew is really going wild these days. It replied 32 times to this
-> patch series - quite a bit annoying. Could this be fixed, please?
+From: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
 
-I have a fix, I haven't deployed it yet to patchew.org though.
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Signed-off-by: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+Signed-off-by: Peer Adelt <peer.adelt@hni.uni-paderborn.de>
+Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
+---
+ target/riscv/insn32.decode              | 10 ++++++
+ target/riscv/insn_trans/trans_rvi.inc.c | 48 +++++++++++++++++++++++++
+ 2 files changed, 58 insertions(+)
 
-Paolo
+diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+index 81f56c16b45f..076de873c4f1 100644
+--- a/target/riscv/insn32.decode
++++ b/target/riscv/insn32.decode
+@@ -23,6 +23,7 @@
+ 
+ # immediates:
+ %imm_i    20:s12
++%imm_s    25:s7 7:5
+ %imm_b    31:s1 7:1 25:6 8:4     !function=ex_shift_1
+ %imm_j    31:s1 12:8 20:1 21:10  !function=ex_shift_1
+ %imm_u    12:s20                 !function=ex_shift_12
+@@ -33,6 +34,7 @@
+ # Formats 32:
+ @i       ............    ..... ... ..... .......         imm=%imm_i     %rs1 %rd
+ @b       .......   ..... ..... ... ..... ....... &b      imm=%imm_b %rs2 %rs1
++@s       .......   ..... ..... ... ..... .......         imm=%imm_s %rs2 %rs1
+ @u       ....................      ..... .......         imm=%imm_u          %rd
+ @j       ....................      ..... .......         imm=%imm_j          %rd
+ 
+@@ -47,3 +49,11 @@ blt      ....... .....    ..... 100 ..... 1100011 @b
+ bge      ....... .....    ..... 101 ..... 1100011 @b
+ bltu     ....... .....    ..... 110 ..... 1100011 @b
+ bgeu     ....... .....    ..... 111 ..... 1100011 @b
++lb       ............     ..... 000 ..... 0000011 @i
++lh       ............     ..... 001 ..... 0000011 @i
++lw       ............     ..... 010 ..... 0000011 @i
++lbu      ............     ..... 100 ..... 0000011 @i
++lhu      ............     ..... 101 ..... 0000011 @i
++sb       .......  .....   ..... 000 ..... 0100011 @s
++sh       .......  .....   ..... 001 ..... 0100011 @s
++sw       .......  .....   ..... 010 ..... 0100011 @s
+diff --git a/target/riscv/insn_trans/trans_rvi.inc.c b/target/riscv/insn_trans/trans_rvi.inc.c
+index bcf20def50eb..d13b7b2b6d8f 100644
+--- a/target/riscv/insn_trans/trans_rvi.inc.c
++++ b/target/riscv/insn_trans/trans_rvi.inc.c
+@@ -82,3 +82,51 @@ static bool trans_bgeu(DisasContext *ctx, arg_bgeu *a)
+     gen_branch(ctx, OPC_RISC_BGEU, a->rs1, a->rs2, a->imm);
+     return true;
+ }
++
++static bool trans_lb(DisasContext *ctx, arg_lb *a)
++{
++    gen_load(ctx, OPC_RISC_LB, a->rd, a->rs1, a->imm);
++    return true;
++}
++
++static bool trans_lh(DisasContext *ctx, arg_lh *a)
++{
++    gen_load(ctx, OPC_RISC_LH, a->rd, a->rs1, a->imm);
++    return true;
++}
++
++static bool trans_lw(DisasContext *ctx, arg_lw *a)
++{
++    gen_load(ctx, OPC_RISC_LW, a->rd, a->rs1, a->imm);
++    return true;
++}
++
++static bool trans_lbu(DisasContext *ctx, arg_lbu *a)
++{
++    gen_load(ctx, OPC_RISC_LBU, a->rd, a->rs1, a->imm);
++    return true;
++}
++
++static bool trans_lhu(DisasContext *ctx, arg_lhu *a)
++{
++    gen_load(ctx, OPC_RISC_LHU, a->rd, a->rs1, a->imm);
++    return true;
++}
++
++static bool trans_sb(DisasContext *ctx, arg_sb *a)
++{
++    gen_store(ctx, OPC_RISC_SB, a->rs1, a->rs2, a->imm);
++    return true;
++}
++
++static bool trans_sh(DisasContext *ctx, arg_sh *a)
++{
++    gen_store(ctx, OPC_RISC_SH, a->rs1, a->rs2, a->imm);
++    return true;
++}
++
++static bool trans_sw(DisasContext *ctx, arg_sw *a)
++{
++    gen_store(ctx, OPC_RISC_SW, a->rs1, a->rs2, a->imm);
++    return true;
++}
+-- 
+2.18.1
 
 
