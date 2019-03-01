@@ -1,50 +1,50 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gzq38-000392-Bx
-	for mharc-qemu-riscv@gnu.org; Fri, 01 Mar 2019 16:50:34 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:49744)
+	id 1gzq3A-0003BO-Nw
+	for mharc-qemu-riscv@gnu.org; Fri, 01 Mar 2019 16:50:36 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:49770)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1gzq35-00036K-FA
+	(envelope-from <palmer@sifive.com>) id 1gzq35-00036U-KO
 	for qemu-riscv@nongnu.org; Fri, 01 Mar 2019 16:50:33 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1gzq2r-0002Dq-67
-	for qemu-riscv@nongnu.org; Fri, 01 Mar 2019 16:50:21 -0500
-Received: from mail-pl1-x632.google.com ([2607:f8b0:4864:20::632]:46674)
+	(envelope-from <palmer@sifive.com>) id 1gzq2y-0002Lr-QX
+	for qemu-riscv@nongnu.org; Fri, 01 Mar 2019 16:50:28 -0500
+Received: from mail-pl1-x630.google.com ([2607:f8b0:4864:20::630]:36083)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1gzq2h-0001pv-Gk
-	for qemu-riscv@nongnu.org; Fri, 01 Mar 2019 16:50:14 -0500
-Received: by mail-pl1-x632.google.com with SMTP id c17so8910564plz.13
-	for <qemu-riscv@nongnu.org>; Fri, 01 Mar 2019 13:50:07 -0800 (PST)
+	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1gzq2j-0001uN-EL
+	for qemu-riscv@nongnu.org; Fri, 01 Mar 2019 16:50:17 -0500
+Received: by mail-pl1-x630.google.com with SMTP id k2so12090959plt.3
+	for <qemu-riscv@nongnu.org>; Fri, 01 Mar 2019 13:50:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
 	h=subject:date:message-id:in-reply-to:references:cc:from:to;
-	bh=/1mElAx7dGEjmoPQT9pBMAWfFIq7yVnDAy3YZPEjXVo=;
-	b=jsc2nUPw31Fd1CU43RR8VhD/h7VLXO7h+9JhK3hnQ08+/qreJeFtYF1eDZZ4jCTsmA
-	hcE3fqPFMW57JkVoOC5kDGoaBLcMGBXHqAc3F7YcNypFvGD6r9NPlPHYt/HMFQRtf9ur
-	rhTi22MqFbFhnDmUJ/8WgNApJNkLR0Bk46N3wjWGe7hc5c+Opp/p6qHaQqLGjYQKdbp8
-	hzh22lu8PyBpDhoPoNRhn1iNLd9CgIlSjfI2PKKfcDeYPjqRP7GzaSK58DQqdLfPgj0Z
-	lq8vjpBxYVGVjg6/56zEtlkmJLuc6YvQzsSRMvrfbcLlQouzYiMYs/7a231F+sHQ8r6W
-	4EQg==
+	bh=WIFnUze0iAULzRg13WIyu5wGuvoD1VtiIGVzYXR5GvI=;
+	b=hXI2pKBiy3vH1Q7IjXuAQP7WOZw4egFgNVqXH1gnsynFamiwBYcG9k+mvQ/ioZbqBv
+	hNGtjH52B8p+sMbuOmGox+IORgjZO/mCe+i8JCAVZEAzAw6J9MUosUDY7FjDjPZlSAox
+	gQZ2HdoLaIRYmZ69YChasD6QK03/fFBH5Tp05SQQ7nLSZ2J9/Jys15gqKRo6U4a7IWoC
+	kS4FGuOtVWFlOcNu2qo9W9JR0qw/SIniyqHuFsKSw+HZcbObHrOeZmKROM0FY0FzdYjd
+	qV7ql+Nvzw7ft9XHLPQgrpjLD/XIhiA6QWgz6P5fE4Ib4pxQab5L1YklH8+3Hwplu5KS
+	P0HQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:subject:date:message-id:in-reply-to:references
 	:cc:from:to;
-	bh=/1mElAx7dGEjmoPQT9pBMAWfFIq7yVnDAy3YZPEjXVo=;
-	b=saJWKWKB4s9Gz07A6Jje393ONG09MKtU9Mv+2bS4lnPA89ETlqgWHuS9bNVl/9wYmR
-	J+h3Au5aECgzU2JGL5Rt1xhdCYHd7j94c02vcWj7oD5AnERWYWhyXaLQQACXzw60ECi5
-	DYusPnAG9CgQ50SIsz5rMYoaz7rPOsuU81ozWKbnwlv45lormV9N3PJ4TvVSPe9a0zNH
-	Y8zMxqh+WZSmB+jWST4O3ec86GCW8sl70Jh4NBzsSEBfM2hBMz/Aa0DfswktGEAeda/x
-	GJTls9QlqNoZf8XpNNeFSyN0mnA6jZX7/ZvNK61W/P9uNCNn3NwUthTiI0C/NwbMFkVa
-	mb9w==
-X-Gm-Message-State: APjAAAWPQHLqUtHPCmMhe3dQ4ghlO7b4ECEjrFMrfpdD0zxGcuz57YA/
-	Oeh7LcrMhYJUW0e4sfjUWOQTWQ==
-X-Google-Smtp-Source: APXvYqwE/MJAh1uU7jJ5pQzua4Pya7uDfDc3c0WI/K9vEHo9ztnl6Q1CIN/+iunt7a4ENZ6IbuPRaw==
-X-Received: by 2002:a17:902:1:: with SMTP id 1mr7368684pla.276.1551477006513; 
-	Fri, 01 Mar 2019 13:50:06 -0800 (PST)
+	bh=WIFnUze0iAULzRg13WIyu5wGuvoD1VtiIGVzYXR5GvI=;
+	b=UmVsEvv8PyhgIY5Lwvs3ZKbBDVr4yhUUPdesI3afSfnxdhcz+axe9sckYqXsmQAf0+
+	5Rsm2B1xlmoXyo0AXzfAhKL3QuVH6rHzM+Oo59i8CWtYhEYC9CyydE7JOLUucULmegTT
+	1gE5YhZ+Ia33zPMzSF5HytyMeBFtXatOEQKEHSLSJf15HfRB2w2yRSaLDOEn5vjuKgm6
+	Tpn5EbcLYe7INsW1+R6LgyO6WDbmEFUdcpP/L/5U+Ozt7I03cJMOUXM5lU7fq5cYFmEP
+	nonkeS+y+mUqRSosJhxMQFcGlM/cplfzdjXN6jLAusECusFUl/e+3w8F9mDJT+nYrOQB
+	D93A==
+X-Gm-Message-State: APjAAAX6p1AkmO5ed7MwXFwPv+QtXFc3ant2OXXua9j7B6b47p5Um3Fi
+	w/K8UWt3AMDpSXdItaB1K+x7Yw==
+X-Google-Smtp-Source: APXvYqw+MtP/ha95iM+qCVyaBMvk7B3NITkwPEXKJ9B+b/wwEP60KUn++nCnXLpeAn6dOGroHxx/bw==
+X-Received: by 2002:a17:902:45:: with SMTP id 63mr7836839pla.281.1551477008306;
+	Fri, 01 Mar 2019 13:50:08 -0800 (PST)
 Received: from localhost ([12.206.222.5]) by smtp.gmail.com with ESMTPSA id
-	b8sm21548550pfi.129.2019.03.01.13.50.05
+	i79sm24842145pfj.28.2019.03.01.13.50.07
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 01 Mar 2019 13:50:05 -0800 (PST)
-Date: Fri,  1 Mar 2019 13:49:17 -0800
-Message-Id: <20190301214945.4353-7-palmer@sifive.com>
+	Fri, 01 Mar 2019 13:50:07 -0800 (PST)
+Date: Fri,  1 Mar 2019 13:49:18 -0800
+Message-Id: <20190301214945.4353-8-palmer@sifive.com>
 X-Mailer: git-send-email 2.18.1
 In-Reply-To: <20190301214945.4353-1-palmer@sifive.com>
 References: <20190301214945.4353-1-palmer@sifive.com>
@@ -56,8 +56,8 @@ From: Palmer Dabbelt <palmer@sifive.com>
 To: Peter Maydell <peter.maydell@linaro.org>
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::632
-Subject: [Qemu-riscv] [PULL 06/34] target/riscv: Convert RVXI fence insns to
+X-Received-From: 2607:f8b0:4864:20::630
+Subject: [Qemu-riscv] [PULL 07/34] target/riscv: Convert RVXI csr insns to
  decodetree
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
@@ -80,71 +80,196 @@ Signed-off-by: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
 Signed-off-by: Peer Adelt <peer.adelt@hni.uni-paderborn.de>
 Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
 ---
- target/riscv/insn32.decode              |  2 ++
- target/riscv/insn_trans/trans_rvi.inc.c | 19 +++++++++++++++++++
- target/riscv/translate.c                | 12 ------------
- 3 files changed, 21 insertions(+), 12 deletions(-)
+ target/riscv/insn32.decode              |  8 +++
+ target/riscv/insn_trans/trans_rvi.inc.c | 79 +++++++++++++++++++++++++
+ target/riscv/translate.c                | 43 +-------------
+ 3 files changed, 88 insertions(+), 42 deletions(-)
 
 diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index 1f5bf1f6f97d..804b721ca51e 100644
+index 804b721ca51e..977b1b10a330 100644
 --- a/target/riscv/insn32.decode
 +++ b/target/riscv/insn32.decode
-@@ -82,3 +82,5 @@ srl      0000000 .....    ..... 101 ..... 0110011 @r
- sra      0100000 .....    ..... 101 ..... 0110011 @r
- or       0000000 .....    ..... 110 ..... 0110011 @r
+@@ -22,6 +22,7 @@
+ %rd        7:5
+ 
+ %sh10    20:10
++%csr    20:12
+ 
+ # immediates:
+ %imm_i    20:s12
+@@ -43,6 +44,7 @@
+ @j       ....................      ..... .......         imm=%imm_j          %rd
+ 
+ @sh      ......  ...... .....  ... ..... ....... &shift  shamt=%sh10      %rs1 %rd
++@csr     ............   .....  ... ..... .......               %csr     %rs1 %rd
+ 
+ # *** RV32I Base Instruction Set ***
+ lui      ....................       ..... 0110111 @u
+@@ -84,3 +86,9 @@ or       0000000 .....    ..... 110 ..... 0110011 @r
  and      0000000 .....    ..... 111 ..... 0110011 @r
-+fence    ---- pred:4 succ:4 ----- 000 ----- 0001111
-+fence_i  ---- ----   ----   ----- 001 ----- 0001111
+ fence    ---- pred:4 succ:4 ----- 000 ----- 0001111
+ fence_i  ---- ----   ----   ----- 001 ----- 0001111
++csrrw    ............     ..... 001 ..... 1110011 @csr
++csrrs    ............     ..... 010 ..... 1110011 @csr
++csrrc    ............     ..... 011 ..... 1110011 @csr
++csrrwi   ............     ..... 101 ..... 1110011 @csr
++csrrsi   ............     ..... 110 ..... 1110011 @csr
++csrrci   ............     ..... 111 ..... 1110011 @csr
 diff --git a/target/riscv/insn_trans/trans_rvi.inc.c b/target/riscv/insn_trans/trans_rvi.inc.c
-index 136fa54d0655..973d6371df85 100644
+index 973d6371df85..4a23372cb823 100644
 --- a/target/riscv/insn_trans/trans_rvi.inc.c
 +++ b/target/riscv/insn_trans/trans_rvi.inc.c
-@@ -318,3 +318,22 @@ static bool trans_sraw(DisasContext *ctx, arg_sraw *a)
+@@ -337,3 +337,82 @@ static bool trans_fence_i(DisasContext *ctx, arg_fence_i *a)
+     ctx->base.is_jmp = DISAS_NORETURN;
      return true;
  }
- #endif
 +
-+static bool trans_fence(DisasContext *ctx, arg_fence *a)
++#define RISCV_OP_CSR_PRE do {\
++    source1 = tcg_temp_new(); \
++    csr_store = tcg_temp_new(); \
++    dest = tcg_temp_new(); \
++    rs1_pass = tcg_temp_new(); \
++    gen_get_gpr(source1, a->rs1); \
++    tcg_gen_movi_tl(cpu_pc, ctx->base.pc_next); \
++    tcg_gen_movi_tl(rs1_pass, a->rs1); \
++    tcg_gen_movi_tl(csr_store, a->csr); \
++    gen_io_start();\
++} while (0)
++
++#define RISCV_OP_CSR_POST do {\
++    gen_io_end(); \
++    gen_set_gpr(a->rd, dest); \
++    tcg_gen_movi_tl(cpu_pc, ctx->pc_succ_insn); \
++    tcg_gen_exit_tb(NULL, 0); \
++    ctx->base.is_jmp = DISAS_NORETURN; \
++    tcg_temp_free(source1); \
++    tcg_temp_free(csr_store); \
++    tcg_temp_free(dest); \
++    tcg_temp_free(rs1_pass); \
++} while (0)
++
++
++static bool trans_csrrw(DisasContext *ctx, arg_csrrw *a)
 +{
-+    /* FENCE is a full memory barrier. */
-+    tcg_gen_mb(TCG_MO_ALL | TCG_BAR_SC);
++    TCGv source1, csr_store, dest, rs1_pass;
++    RISCV_OP_CSR_PRE;
++    gen_helper_csrrw(dest, cpu_env, source1, csr_store);
++    RISCV_OP_CSR_POST;
 +    return true;
 +}
 +
-+static bool trans_fence_i(DisasContext *ctx, arg_fence_i *a)
++static bool trans_csrrs(DisasContext *ctx, arg_csrrs *a)
 +{
-+    /*
-+     * FENCE_I is a no-op in QEMU,
-+     * however we need to end the translation block
-+     */
-+    tcg_gen_movi_tl(cpu_pc, ctx->pc_succ_insn);
-+    tcg_gen_exit_tb(NULL, 0);
-+    ctx->base.is_jmp = DISAS_NORETURN;
++    TCGv source1, csr_store, dest, rs1_pass;
++    RISCV_OP_CSR_PRE;
++    gen_helper_csrrs(dest, cpu_env, source1, csr_store, rs1_pass);
++    RISCV_OP_CSR_POST;
++    return true;
++}
++
++static bool trans_csrrc(DisasContext *ctx, arg_csrrc *a)
++{
++    TCGv source1, csr_store, dest, rs1_pass;
++    RISCV_OP_CSR_PRE;
++    gen_helper_csrrc(dest, cpu_env, source1, csr_store, rs1_pass);
++    RISCV_OP_CSR_POST;
++    return true;
++}
++
++static bool trans_csrrwi(DisasContext *ctx, arg_csrrwi *a)
++{
++    TCGv source1, csr_store, dest, rs1_pass;
++    RISCV_OP_CSR_PRE;
++    gen_helper_csrrw(dest, cpu_env, rs1_pass, csr_store);
++    RISCV_OP_CSR_POST;
++    return true;
++}
++
++static bool trans_csrrsi(DisasContext *ctx, arg_csrrsi *a)
++{
++    TCGv source1, csr_store, dest, rs1_pass;
++    RISCV_OP_CSR_PRE;
++    gen_helper_csrrs(dest, cpu_env, rs1_pass, csr_store, rs1_pass);
++    RISCV_OP_CSR_POST;
++    return true;
++}
++
++static bool trans_csrrci(DisasContext *ctx, arg_csrrci *a)
++{
++    TCGv source1, csr_store, dest, rs1_pass;
++    RISCV_OP_CSR_PRE;
++    gen_helper_csrrc(dest, cpu_env, rs1_pass, csr_store, rs1_pass);
++    RISCV_OP_CSR_POST;
 +    return true;
 +}
 diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 1ae84dcd5992..f720746cb791 100644
+index f720746cb791..18555000af35 100644
 --- a/target/riscv/translate.c
 +++ b/target/riscv/translate.c
-@@ -1950,18 +1950,6 @@ static void decode_RV32_64G(DisasContext *ctx)
-         gen_fp_arith(ctx, MASK_OP_FP_ARITH(ctx->opcode), rd, rs1, rs2,
-                      GET_RM(ctx->opcode));
+@@ -1476,16 +1476,11 @@ static void gen_fp_arith(DisasContext *ctx, uint32_t opc, int rd,
+ static void gen_system(DisasContext *ctx, uint32_t opc, int rd, int rs1,
+                        int csr)
+ {
+-    TCGv source1, csr_store, dest, rs1_pass, imm_rs1;
++    TCGv source1, dest;
+     source1 = tcg_temp_new();
+-    csr_store = tcg_temp_new();
+     dest = tcg_temp_new();
+-    rs1_pass = tcg_temp_new();
+-    imm_rs1 = tcg_temp_new();
+     gen_get_gpr(source1, rs1);
+     tcg_gen_movi_tl(cpu_pc, ctx->base.pc_next);
+-    tcg_gen_movi_tl(rs1_pass, rs1);
+-    tcg_gen_movi_tl(csr_store, csr); /* copy into temp reg to feed to helper */
+ 
+ #ifndef CONFIG_USER_ONLY
+     /* Extract funct7 value and check whether it matches SFENCE.VMA */
+@@ -1556,45 +1551,9 @@ static void gen_system(DisasContext *ctx, uint32_t opc, int rd, int rs1,
+             break;
+         }
          break;
--    case OPC_RISC_FENCE:
--        if (ctx->opcode & 0x1000) {
--            /* FENCE_I is a no-op in QEMU,
--             * however we need to end the translation block */
--            tcg_gen_movi_tl(cpu_pc, ctx->pc_succ_insn);
--            tcg_gen_exit_tb(NULL, 0);
--            ctx->base.is_jmp = DISAS_NORETURN;
--        } else {
--            /* FENCE is a full memory barrier. */
--            tcg_gen_mb(TCG_MO_ALL | TCG_BAR_SC);
+-    default:
+-        tcg_gen_movi_tl(imm_rs1, rs1);
+-        gen_io_start();
+-        switch (opc) {
+-        case OPC_RISC_CSRRW:
+-            gen_helper_csrrw(dest, cpu_env, source1, csr_store);
+-            break;
+-        case OPC_RISC_CSRRS:
+-            gen_helper_csrrs(dest, cpu_env, source1, csr_store, rs1_pass);
+-            break;
+-        case OPC_RISC_CSRRC:
+-            gen_helper_csrrc(dest, cpu_env, source1, csr_store, rs1_pass);
+-            break;
+-        case OPC_RISC_CSRRWI:
+-            gen_helper_csrrw(dest, cpu_env, imm_rs1, csr_store);
+-            break;
+-        case OPC_RISC_CSRRSI:
+-            gen_helper_csrrs(dest, cpu_env, imm_rs1, csr_store, rs1_pass);
+-            break;
+-        case OPC_RISC_CSRRCI:
+-            gen_helper_csrrc(dest, cpu_env, imm_rs1, csr_store, rs1_pass);
+-            break;
+-        default:
+-            gen_exception_illegal(ctx);
+-            return;
 -        }
+-        gen_io_end();
+-        gen_set_gpr(rd, dest);
+-        /* end tb since we may be changing priv modes, to get mmu_index right */
+-        tcg_gen_movi_tl(cpu_pc, ctx->pc_succ_insn);
+-        tcg_gen_exit_tb(NULL, 0); /* no chaining */
+-        ctx->base.is_jmp = DISAS_NORETURN;
 -        break;
-     case OPC_RISC_SYSTEM:
-         gen_system(ctx, MASK_OP_SYSTEM(ctx->opcode), rd, rs1,
-                    (ctx->opcode & 0xFFF00000) >> 20);
+     }
+     tcg_temp_free(source1);
+-    tcg_temp_free(csr_store);
+     tcg_temp_free(dest);
+-    tcg_temp_free(rs1_pass);
+-    tcg_temp_free(imm_rs1);
+ }
+ 
+ static void decode_RV32_64C0(DisasContext *ctx)
 -- 
 2.18.1
 
