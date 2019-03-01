@@ -1,64 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1gzq3o-0003vZ-J0
-	for mharc-qemu-riscv@gnu.org; Fri, 01 Mar 2019 16:51:16 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:50641)
+	id 1gzq3p-0003y6-NF
+	for mharc-qemu-riscv@gnu.org; Fri, 01 Mar 2019 16:51:17 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:50777)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1gzq3f-0003hf-4s
-	for qemu-riscv@nongnu.org; Fri, 01 Mar 2019 16:51:13 -0500
+	(envelope-from <palmer@sifive.com>) id 1gzq3j-0003oC-OK
+	for qemu-riscv@nongnu.org; Fri, 01 Mar 2019 16:51:14 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1gzq3a-0003RN-7Q
-	for qemu-riscv@nongnu.org; Fri, 01 Mar 2019 16:51:05 -0500
-Received: from mail-pl1-x62c.google.com ([2607:f8b0:4864:20::62c]:41847)
+	(envelope-from <palmer@sifive.com>) id 1gzq3a-0003R7-6I
+	for qemu-riscv@nongnu.org; Fri, 01 Mar 2019 16:51:09 -0500
+Received: from mail-pl1-x631.google.com ([2607:f8b0:4864:20::631]:33773)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1gzq3M-0002vO-Cm
+	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1gzq3L-0002FD-NE
 	for qemu-riscv@nongnu.org; Fri, 01 Mar 2019 16:51:00 -0500
-Received: by mail-pl1-x62c.google.com with SMTP id y5so12086163plk.8
-	for <qemu-riscv@nongnu.org>; Fri, 01 Mar 2019 13:50:48 -0800 (PST)
+Received: by mail-pl1-x631.google.com with SMTP id y10so12118001plp.0
+	for <qemu-riscv@nongnu.org>; Fri, 01 Mar 2019 13:50:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
 	h=subject:date:message-id:in-reply-to:references:cc:from:to;
-	bh=eoQrwrHEhEbE6t1QV2wPhIiYmgEVU/XkpTTiVF7mAo8=;
-	b=EP30mxMFcBboxYU67EGAWqqqvvmsNA9rclqthuKfzwg39eMIURb8vkidvC+gGSSG2n
-	DLzSW0hipQl3y86XGJtqZlXedm0weXFNBhUn8z00utAthxWx1ixrwdOATGkH+El6TejI
-	juRfsSTxW9h82+Y/xxIU4sj9+mBRS72znf9pRdjpdZQH/7e9r1rKdki56OsZ2OBZ23Nb
-	vh3hXhczH2PjS8OMvI5xx3YZBNhelk/lhQCRQ0L6ZeRy0mI9I7ZZtrfy6H683Ec78RKk
-	HJYkqTu+b3ygjGPZ8SsVGEf0mxOiONd+hHtL+O/+JPFyzUZ5t589oJrEFVag3f+M+ni0
-	TIdA==
+	bh=djaFw5O4JqP2RWnZNSXisC8Ij0PbBa2du4o49mErjV4=;
+	b=iJBigiTMgcjzRLqfKaoVxTM45o0tuZWrqGtz47p5nxAjHqIYVdGzs22tr81mAJrDA4
+	gQD713xwRuHV9E1NXOf8gqvsPeRC4JttGtqVE0SKAp0U66CtAj7Wpsx8vzG/w5y6M8ZX
+	cqYJaBXxeWEh28RJyEuMMR4jkPH5hW2woXJQiXsVhnykGcLQv5ZRKgpLDisI/6r8DC+0
+	g0tp2kK3lWCysLuYhIgwt5NUFU1m/Ppw1PXnGdrEvsqUm2HwNO5P2hEMGxBvhwCJbMz9
+	fmid0v7sU+XDgOmAZS5jE0DthLUVZo8tPD9JCLzewcU1Wbw1TI02b1979Ul4PXoXT0WD
+	TSkw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:subject:date:message-id:in-reply-to:references
 	:cc:from:to;
-	bh=eoQrwrHEhEbE6t1QV2wPhIiYmgEVU/XkpTTiVF7mAo8=;
-	b=qhFss/gb//mAKmvQQsESwi6qnd6KrMghqgHhVB+OQhho5XBM5KJ4OPy7r5lmMAm/KE
-	j3tG/8FVlo2lqS/Phv3CTLTb0zsmX3Ku1FKg7bufGbWyVZxV6ww/zMfIKTgCtcntkCNU
-	k8kYI+KWjQie0NcBpvcxxkFOqNdaT5P9VnE8CA21KQmjK85ikVwXrfpghCCT7AOvhIeB
-	MkT/3IWNAF+y+v6OW+9hYDLppDpJz19HUAZ/cawztIPgBRg/2xPVwDEkHsKqbI38u+1h
-	73JFdlVw5ZNkM6y238sSV/10FVMrifyPwaBZ4WjZ/xzYxmTOK/QIVAA7fmZA2kiI2FA0
-	LyCw==
-X-Gm-Message-State: APjAAAWaSSpeMHEN9JNTOhtZiS8ySF8LSAIaKnagOroFFJPmbwUYA79B
-	9NVQo4xy6JZn9DZFmhoaOBsVXQ==
-X-Google-Smtp-Source: APXvYqw8YazVkGCLno8vwEkaTUsJcEYlz/4l7riqqaQVR7idbx+GaU36bphPrZdvO/ZRcPyM8Ky+hg==
-X-Received: by 2002:a17:902:82cc:: with SMTP id
-	u12mr7809882plz.189.1551477047090; 
-	Fri, 01 Mar 2019 13:50:47 -0800 (PST)
+	bh=djaFw5O4JqP2RWnZNSXisC8Ij0PbBa2du4o49mErjV4=;
+	b=gdDAxt12rSRS5EYy4Rq4V1PE7b8uWUKUQHPBLETiZT02EcG7VEZTU5AwHGCtLyBbYj
+	xbBjf/lKjanEIdpE+NTk0vERbCq1bMNP36F8/YWBJadXffwlcoa0dGJxVFmmrSKafxTL
+	xHrmXQdgmMiwNNfZ9aboSU5GZEk/QmRHA76H/7XIG4B0kf79MUnzCeAuiHoxoq4e7Ut0
+	nCui7aXvFOFry/quAGBthBZBWE1rD1npmwwLZ4BenFN+fefyfkFaDp+JRUwTcuCxrA2O
+	s6fMoZbS7JG1mCUWUTUjTbQleVxEsNlvACsV13itZEJkyyI/wSvG3k4k1C5K1m1jqfd3
+	fUHA==
+X-Gm-Message-State: APjAAAVguDzX3fRVmI/xBPGUHCjNWHylkSC3igG8dXnvrj+6sgsA4/2c
+	ntRqbEKXQWYA/BD6HCoDo0I4aQ==
+X-Google-Smtp-Source: APXvYqzQNH8tUl2vrVNJGLRIN7ymeOsA/j1cll60/5oa4arM+4EfHRXSC9Ig2eAogFB/ZYtp4L5J2w==
+X-Received: by 2002:a17:902:b591:: with SMTP id
+	a17mr7943061pls.228.1551477018476; 
+	Fri, 01 Mar 2019 13:50:18 -0800 (PST)
 Received: from localhost ([12.206.222.5]) by smtp.gmail.com with ESMTPSA id
-	h65sm27227466pgc.93.2019.03.01.13.50.46
+	h13sm30376512pfn.114.2019.03.01.13.50.17
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 01 Mar 2019 13:50:46 -0800 (PST)
-Date: Fri,  1 Mar 2019 13:49:41 -0800
-Message-Id: <20190301214945.4353-31-palmer@sifive.com>
+	Fri, 01 Mar 2019 13:50:17 -0800 (PST)
+Date: Fri,  1 Mar 2019 13:49:24 -0800
+Message-Id: <20190301214945.4353-14-palmer@sifive.com>
 X-Mailer: git-send-email 2.18.1
 In-Reply-To: <20190301214945.4353-1-palmer@sifive.com>
 References: <20190301214945.4353-1-palmer@sifive.com>
 Cc: qemu-devel@nongnu.org,       qemu-riscv@nongnu.org,
 	Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+	Peer Adelt <peer.adelt@hni.uni-paderborn.de>, 
 	Palmer Dabbelt <palmer@sifive.com>
 From: Palmer Dabbelt <palmer@sifive.com>
 To: Peter Maydell <peter.maydell@linaro.org>
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::62c
-Subject: [Qemu-riscv] [PULL 30/34] target/riscv: Convert @cs_2 insns to
- share translation functions
+X-Received-From: 2607:f8b0:4864:20::631
+Subject: [Qemu-riscv] [PULL 13/34] target/riscv: Convert RV32D insns to
+ decodetree
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -70,217 +71,436 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Mar 2019 21:51:13 -0000
+X-List-Received-Date: Fri, 01 Mar 2019 21:51:15 -0000
 
 From: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
 
-These all expand simply to R format instructions.
-
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Signed-off-by: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+Signed-off-by: Peer Adelt <peer.adelt@hni.uni-paderborn.de>
 Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
 ---
- target/riscv/Makefile.objs              | 10 +++---
- target/riscv/insn16-64.decode           | 24 ++++++++++++++
- target/riscv/insn16.decode              | 15 +++++----
- target/riscv/insn_trans/trans_rvc.inc.c | 44 -------------------------
- target/riscv/translate.c                | 20 ++++++++---
- 5 files changed, 54 insertions(+), 59 deletions(-)
- create mode 100644 target/riscv/insn16-64.decode
+ target/riscv/insn32.decode              |  28 ++
+ target/riscv/insn_trans/trans_rvd.inc.c | 360 ++++++++++++++++++++++++
+ target/riscv/translate.c                |   1 +
+ 3 files changed, 389 insertions(+)
+ create mode 100644 target/riscv/insn_trans/trans_rvd.inc.c
 
-diff --git a/target/riscv/Makefile.objs b/target/riscv/Makefile.objs
-index 9c6c1093271e..990bd8901623 100644
---- a/target/riscv/Makefile.objs
-+++ b/target/riscv/Makefile.objs
-@@ -5,16 +5,18 @@ DECODETREE = $(SRC_PATH)/scripts/decodetree.py
- decode32-y = $(SRC_PATH)/target/riscv/insn32.decode
- decode32-$(TARGET_RISCV64) += $(SRC_PATH)/target/riscv/insn32-64.decode
- 
-+decode16-y = $(SRC_PATH)/target/riscv/insn16.decode
-+decode16-$(TARGET_RISCV64) += $(SRC_PATH)/target/riscv/insn16-64.decode
+diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+index e40836bf032f..e64b2b5e3458 100644
+--- a/target/riscv/insn32.decode
++++ b/target/riscv/insn32.decode
+@@ -154,3 +154,31 @@ fclass_s   1110000  00000 ..... 001 ..... 1010011 @r2
+ fcvt_s_w   1101000  00000 ..... ... ..... 1010011 @r2_rm
+ fcvt_s_wu  1101000  00001 ..... ... ..... 1010011 @r2_rm
+ fmv_w_x    1111000  00000 ..... 000 ..... 1010011 @r2
 +
- target/riscv/decode_insn32.inc.c: $(decode32-y) $(DECODETREE)
- 	$(call quiet-command, \
- 	  $(PYTHON) $(DECODETREE) -o $@ --decode decode_insn32 $(decode32-y), \
- 	  "GEN", $(TARGET_DIR)$@)
- 
--target/riscv/decode_insn16.inc.c: \
--  $(SRC_PATH)/target/riscv/insn16.decode $(DECODETREE)
-+target/riscv/decode_insn16.inc.c: $(decode16-y) $(DECODETREE)
- 	$(call quiet-command, \
--	  $(PYTHON) $(DECODETREE) -o $@ --decode decode_insn16 --insnwidth 16 $<, \
--	  "GEN", $(TARGET_DIR)$@)
-+	  $(PYTHON) $(DECODETREE) -o $@ --decode decode_insn16 --insnwidth 16 \
-+	  $(decode16-y), "GEN", $(TARGET_DIR)$@)
- 
- target/riscv/translate.o: target/riscv/decode_insn32.inc.c \
- 	target/riscv/decode_insn16.inc.c
-diff --git a/target/riscv/insn16-64.decode b/target/riscv/insn16-64.decode
++# *** RV32D Standard Extension ***
++fld        ............   ..... 011 ..... 0000111 @i
++fsd        ....... .....  ..... 011 ..... 0100111 @s
++fmadd_d    ..... 01 ..... ..... ... ..... 1000011 @r4_rm
++fmsub_d    ..... 01 ..... ..... ... ..... 1000111 @r4_rm
++fnmsub_d   ..... 01 ..... ..... ... ..... 1001011 @r4_rm
++fnmadd_d   ..... 01 ..... ..... ... ..... 1001111 @r4_rm
++fadd_d     0000001  ..... ..... ... ..... 1010011 @r_rm
++fsub_d     0000101  ..... ..... ... ..... 1010011 @r_rm
++fmul_d     0001001  ..... ..... ... ..... 1010011 @r_rm
++fdiv_d     0001101  ..... ..... ... ..... 1010011 @r_rm
++fsqrt_d    0101101  00000 ..... ... ..... 1010011 @r2_rm
++fsgnj_d    0010001  ..... ..... 000 ..... 1010011 @r
++fsgnjn_d   0010001  ..... ..... 001 ..... 1010011 @r
++fsgnjx_d   0010001  ..... ..... 010 ..... 1010011 @r
++fmin_d     0010101  ..... ..... 000 ..... 1010011 @r
++fmax_d     0010101  ..... ..... 001 ..... 1010011 @r
++fcvt_s_d   0100000  00001 ..... ... ..... 1010011 @r2_rm
++fcvt_d_s   0100001  00000 ..... ... ..... 1010011 @r2_rm
++feq_d      1010001  ..... ..... 010 ..... 1010011 @r
++flt_d      1010001  ..... ..... 001 ..... 1010011 @r
++fle_d      1010001  ..... ..... 000 ..... 1010011 @r
++fclass_d   1110001  00000 ..... 001 ..... 1010011 @r2
++fcvt_w_d   1100001  00000 ..... ... ..... 1010011 @r2_rm
++fcvt_wu_d  1100001  00001 ..... ... ..... 1010011 @r2_rm
++fcvt_d_w   1101001  00000 ..... ... ..... 1010011 @r2_rm
++fcvt_d_wu  1101001  00001 ..... ... ..... 1010011 @r2_rm
+diff --git a/target/riscv/insn_trans/trans_rvd.inc.c b/target/riscv/insn_trans/trans_rvd.inc.c
 new file mode 100644
-index 000000000000..5af2e2b0728d
+index 000000000000..98fc1cdc5a20
 --- /dev/null
-+++ b/target/riscv/insn16-64.decode
-@@ -0,0 +1,24 @@
-+#
-+# RISC-V translation routines for the RVC Instruction Set.
-+#
-+# Copyright (c) 2018 Peer Adelt, peer.adelt@hni.uni-paderborn.de
-+#                    Bastian Koppelmann, kbastian@mail.uni-paderborn.de
-+#
-+# This program is free software; you can redistribute it and/or modify it
-+# under the terms and conditions of the GNU General Public License,
-+# version 2 or later, as published by the Free Software Foundation.
-+#
-+# This program is distributed in the hope it will be useful, but WITHOUT
-+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-+# FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-+# more details.
-+#
-+# You should have received a copy of the GNU General Public License along with
-+# this program.  If not, see <http://www.gnu.org/licenses/>.
++++ b/target/riscv/insn_trans/trans_rvd.inc.c
+@@ -0,0 +1,360 @@
++/*
++ * RISC-V translation routines for the RV64D Standard Extension.
++ *
++ * Copyright (c) 2016-2017 Sagar Karandikar, sagark@eecs.berkeley.edu
++ * Copyright (c) 2018 Peer Adelt, peer.adelt@hni.uni-paderborn.de
++ *                    Bastian Koppelmann, kbastian@mail.uni-paderborn.de
++ *
++ * This program is free software; you can redistribute it and/or modify it
++ * under the terms and conditions of the GNU General Public License,
++ * version 2 or later, as published by the Free Software Foundation.
++ *
++ * This program is distributed in the hope it will be useful, but WITHOUT
++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
++ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
++ * more details.
++ *
++ * You should have received a copy of the GNU General Public License along with
++ * this program.  If not, see <http://www.gnu.org/licenses/>.
++ */
 +
-+# This is concatenated with insn16.decode for risc64 targets.
-+# All of the fields and formats are there.
++static bool trans_fld(DisasContext *ctx, arg_fld *a)
++{
++    TCGv t0 = tcg_temp_new();
++    gen_get_gpr(t0, a->rs1);
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVD);
++    tcg_gen_addi_tl(t0, t0, a->imm);
 +
-+# *** RV64C Standard Extension (Quadrant 1) ***
-+subw              100 1 11 ... 00 ... 01 @cs_2
-+addw              100 1 11 ... 01 ... 01 @cs_2
-diff --git a/target/riscv/insn16.decode b/target/riscv/insn16.decode
-index 0829e3bc592d..c7a58d80e5ae 100644
---- a/target/riscv/insn16.decode
-+++ b/target/riscv/insn16.decode
-@@ -41,6 +41,9 @@
- 
- 
- 
-+# Argument sets imported from insn32.decode:
-+&r         rd rs1 rs2   !extern
++    tcg_gen_qemu_ld_i64(cpu_fpr[a->rd], t0, ctx->mem_idx, MO_TEQ);
 +
- # Argument sets:
- &cl               rs1 rd
- &cl_dw     uimm   rs1 rd
-@@ -68,7 +71,7 @@
- @cl_w      ... ... ... .. ... .. &cl_dw  uimm=%uimm_cl_w  rs1=%rs1_3  rd=%rs2_3
- @cl        ... ... ... .. ... .. &cl                      rs1=%rs1_3  rd=%rs2_3
- @cs        ... ... ... .. ... .. &cs                      rs1=%rs1_3  rs2=%rs2_3
--@cs_2      ... ... ... .. ... .. &cr                      rd=%rs1_3   rs2=%rs2_3
-+@cs_2      ... ... ... .. ... .. &r      rd=%rs1_3 rs1=%rs1_3 rs2=%rs2_3
- @cs_d      ... ... ... .. ... .. &cs_dw  uimm=%uimm_cl_d  rs1=%rs1_3  rs2=%rs2_3
- @cs_w      ... ... ... .. ... .. &cs_dw  uimm=%uimm_cl_w  rs1=%rs1_3  rs2=%rs2_3
- @cb        ... ... ... .. ... .. &cb     imm=%imm_cb      rs1=%rs1_3
-@@ -107,12 +110,10 @@ c_addi16sp_lui    011 .  .....  ..... 01 @c_addi16sp_lui # shares opc with C.LUI
- c_srli            100 . 00 ...  ..... 01 @c_shift
- c_srai            100 . 01 ...  ..... 01 @c_shift
- c_andi            100 . 10 ...  ..... 01 @c_andi
--c_sub             100 0 11 ... 00 ... 01 @cs_2
--c_xor             100 0 11 ... 01 ... 01 @cs_2
--c_or              100 0 11 ... 10 ... 01 @cs_2
--c_and             100 0 11 ... 11 ... 01 @cs_2
--c_subw            100 1 11 ... 00 ... 01 @cs_2
--c_addw            100 1 11 ... 01 ... 01 @cs_2
-+sub               100 0 11 ... 00 ... 01 @cs_2
-+xor               100 0 11 ... 01 ... 01 @cs_2
-+or                100 0 11 ... 10 ... 01 @cs_2
-+and               100 0 11 ... 11 ... 01 @cs_2
- c_j               101     ........... 01 @cj
- c_beqz            110  ... ...  ..... 01 @cb
- c_bnez            111  ... ...  ..... 01 @cb
-diff --git a/target/riscv/insn_trans/trans_rvc.inc.c b/target/riscv/insn_trans/trans_rvc.inc.c
-index bcdf64d3b705..639c381edfc0 100644
---- a/target/riscv/insn_trans/trans_rvc.inc.c
-+++ b/target/riscv/insn_trans/trans_rvc.inc.c
-@@ -163,50 +163,6 @@ static bool trans_c_andi(DisasContext *ctx, arg_c_andi *a)
-     return trans_andi(ctx, &arg);
- }
- 
--static bool trans_c_sub(DisasContext *ctx, arg_c_sub *a)
--{
--    arg_sub arg = { .rd = a->rd, .rs1 = a->rd, .rs2 = a->rs2 };
--    return trans_sub(ctx, &arg);
--}
--
--static bool trans_c_xor(DisasContext *ctx, arg_c_xor *a)
--{
--    arg_xor arg = { .rd = a->rd, .rs1 = a->rd, .rs2 = a->rs2 };
--    return trans_xor(ctx, &arg);
--}
--
--static bool trans_c_or(DisasContext *ctx, arg_c_or *a)
--{
--    arg_or arg = { .rd = a->rd, .rs1 = a->rd, .rs2 = a->rs2 };
--    return trans_or(ctx, &arg);
--}
--
--static bool trans_c_and(DisasContext *ctx, arg_c_and *a)
--{
--    arg_and arg = { .rd = a->rd, .rs1 = a->rd, .rs2 = a->rs2 };
--    return trans_and(ctx, &arg);
--}
--
--static bool trans_c_subw(DisasContext *ctx, arg_c_subw *a)
--{
--#ifdef TARGET_RISCV64
--    arg_subw arg = { .rd = a->rd, .rs1 = a->rd, .rs2 = a->rs2 };
--    return trans_subw(ctx, &arg);
--#else
--    return false;
--#endif
--}
--
--static bool trans_c_addw(DisasContext *ctx, arg_c_addw *a)
--{
--#ifdef TARGET_RISCV64
--    arg_addw arg = { .rd = a->rd, .rs1 = a->rd, .rs2 = a->rs2 };
--    return trans_addw(ctx, &arg);
--#else
--    return false;
--#endif
--}
--
- static bool trans_c_j(DisasContext *ctx, arg_c_j *a)
- {
-     arg_jal arg = { .rd = 0, .imm = a->imm };
++    mark_fs_dirty(ctx);
++    tcg_temp_free(t0);
++    return true;
++}
++
++static bool trans_fsd(DisasContext *ctx, arg_fsd *a)
++{
++    TCGv t0 = tcg_temp_new();
++    gen_get_gpr(t0, a->rs1);
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVD);
++    tcg_gen_addi_tl(t0, t0, a->imm);
++
++    tcg_gen_qemu_st_i64(cpu_fpr[a->rs2], t0, ctx->mem_idx, MO_TEQ);
++
++    mark_fs_dirty(ctx);
++    tcg_temp_free(t0);
++    return true;
++}
++
++static bool trans_fmadd_d(DisasContext *ctx, arg_fmadd_d *a)
++{
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVD);
++    gen_set_rm(ctx, a->rm);
++    gen_helper_fmadd_d(cpu_fpr[a->rd], cpu_env, cpu_fpr[a->rs1],
++                       cpu_fpr[a->rs2], cpu_fpr[a->rs3]);
++    mark_fs_dirty(ctx);
++    return true;
++}
++
++static bool trans_fmsub_d(DisasContext *ctx, arg_fmsub_d *a)
++{
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVD);
++    gen_set_rm(ctx, a->rm);
++    gen_helper_fmsub_d(cpu_fpr[a->rd], cpu_env, cpu_fpr[a->rs1],
++                       cpu_fpr[a->rs2], cpu_fpr[a->rs3]);
++    mark_fs_dirty(ctx);
++    return true;
++}
++
++static bool trans_fnmsub_d(DisasContext *ctx, arg_fnmsub_d *a)
++{
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVD);
++    gen_set_rm(ctx, a->rm);
++    gen_helper_fnmsub_d(cpu_fpr[a->rd], cpu_env, cpu_fpr[a->rs1],
++                        cpu_fpr[a->rs2], cpu_fpr[a->rs3]);
++    mark_fs_dirty(ctx);
++    return true;
++}
++
++static bool trans_fnmadd_d(DisasContext *ctx, arg_fnmadd_d *a)
++{
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVD);
++    gen_set_rm(ctx, a->rm);
++    gen_helper_fnmadd_d(cpu_fpr[a->rd], cpu_env, cpu_fpr[a->rs1],
++                        cpu_fpr[a->rs2], cpu_fpr[a->rs3]);
++    mark_fs_dirty(ctx);
++    return true;
++}
++
++static bool trans_fadd_d(DisasContext *ctx, arg_fadd_d *a)
++{
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVD);
++
++    gen_set_rm(ctx, a->rm);
++    gen_helper_fadd_d(cpu_fpr[a->rd], cpu_env,
++                      cpu_fpr[a->rs1], cpu_fpr[a->rs2]);
++
++    mark_fs_dirty(ctx);
++    return true;
++}
++
++static bool trans_fsub_d(DisasContext *ctx, arg_fsub_d *a)
++{
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVD);
++
++    gen_set_rm(ctx, a->rm);
++    gen_helper_fsub_d(cpu_fpr[a->rd], cpu_env,
++                      cpu_fpr[a->rs1], cpu_fpr[a->rs2]);
++
++    mark_fs_dirty(ctx);
++    return true;
++}
++
++static bool trans_fmul_d(DisasContext *ctx, arg_fmul_d *a)
++{
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVD);
++
++    gen_set_rm(ctx, a->rm);
++    gen_helper_fmul_d(cpu_fpr[a->rd], cpu_env,
++                      cpu_fpr[a->rs1], cpu_fpr[a->rs2]);
++
++    mark_fs_dirty(ctx);
++    return true;
++}
++
++static bool trans_fdiv_d(DisasContext *ctx, arg_fdiv_d *a)
++{
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVD);
++
++    gen_set_rm(ctx, a->rm);
++    gen_helper_fdiv_d(cpu_fpr[a->rd], cpu_env,
++                      cpu_fpr[a->rs1], cpu_fpr[a->rs2]);
++
++    mark_fs_dirty(ctx);
++    return true;
++}
++
++static bool trans_fsqrt_d(DisasContext *ctx, arg_fsqrt_d *a)
++{
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVD);
++
++    gen_set_rm(ctx, a->rm);
++    gen_helper_fsqrt_d(cpu_fpr[a->rd], cpu_env, cpu_fpr[a->rs1]);
++
++    mark_fs_dirty(ctx);
++    return true;
++}
++
++static bool trans_fsgnj_d(DisasContext *ctx, arg_fsgnj_d *a)
++{
++    if (a->rs1 == a->rs2) { /* FMOV */
++        tcg_gen_mov_i64(cpu_fpr[a->rd], cpu_fpr[a->rs1]);
++    } else {
++        tcg_gen_deposit_i64(cpu_fpr[a->rd], cpu_fpr[a->rs2],
++                            cpu_fpr[a->rs1], 0, 63);
++    }
++    mark_fs_dirty(ctx);
++    return true;
++}
++
++static bool trans_fsgnjn_d(DisasContext *ctx, arg_fsgnjn_d *a)
++{
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVD);
++    if (a->rs1 == a->rs2) { /* FNEG */
++        tcg_gen_xori_i64(cpu_fpr[a->rd], cpu_fpr[a->rs1], INT64_MIN);
++    } else {
++        TCGv_i64 t0 = tcg_temp_new_i64();
++        tcg_gen_not_i64(t0, cpu_fpr[a->rs2]);
++        tcg_gen_deposit_i64(cpu_fpr[a->rd], t0, cpu_fpr[a->rs1], 0, 63);
++        tcg_temp_free_i64(t0);
++    }
++    mark_fs_dirty(ctx);
++    return true;
++}
++
++static bool trans_fsgnjx_d(DisasContext *ctx, arg_fsgnjx_d *a)
++{
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVD);
++    if (a->rs1 == a->rs2) { /* FABS */
++        tcg_gen_andi_i64(cpu_fpr[a->rd], cpu_fpr[a->rs1], ~INT64_MIN);
++    } else {
++        TCGv_i64 t0 = tcg_temp_new_i64();
++        tcg_gen_andi_i64(t0, cpu_fpr[a->rs2], INT64_MIN);
++        tcg_gen_xor_i64(cpu_fpr[a->rd], cpu_fpr[a->rs1], t0);
++        tcg_temp_free_i64(t0);
++    }
++    mark_fs_dirty(ctx);
++    return true;
++}
++
++static bool trans_fmin_d(DisasContext *ctx, arg_fmin_d *a)
++{
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVD);
++
++    gen_helper_fmin_d(cpu_fpr[a->rd], cpu_env,
++                      cpu_fpr[a->rs1], cpu_fpr[a->rs2]);
++
++    mark_fs_dirty(ctx);
++    return true;
++}
++
++static bool trans_fmax_d(DisasContext *ctx, arg_fmax_d *a)
++{
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVD);
++
++    gen_helper_fmax_d(cpu_fpr[a->rd], cpu_env,
++                      cpu_fpr[a->rs1], cpu_fpr[a->rs2]);
++
++    mark_fs_dirty(ctx);
++    return true;
++}
++
++static bool trans_fcvt_s_d(DisasContext *ctx, arg_fcvt_s_d *a)
++{
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVD);
++
++    gen_set_rm(ctx, a->rm);
++    gen_helper_fcvt_s_d(cpu_fpr[a->rd], cpu_env, cpu_fpr[a->rs1]);
++
++    mark_fs_dirty(ctx);
++    return true;
++}
++
++static bool trans_fcvt_d_s(DisasContext *ctx, arg_fcvt_d_s *a)
++{
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVD);
++
++    gen_set_rm(ctx, a->rm);
++    gen_helper_fcvt_d_s(cpu_fpr[a->rd], cpu_env, cpu_fpr[a->rs1]);
++
++    mark_fs_dirty(ctx);
++    return true;
++}
++
++static bool trans_feq_d(DisasContext *ctx, arg_feq_d *a)
++{
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVD);
++
++    TCGv t0 = tcg_temp_new();
++    gen_helper_feq_d(t0, cpu_env, cpu_fpr[a->rs1], cpu_fpr[a->rs2]);
++    gen_set_gpr(a->rd, t0);
++    tcg_temp_free(t0);
++
++    return true;
++}
++
++static bool trans_flt_d(DisasContext *ctx, arg_flt_d *a)
++{
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVD);
++
++    TCGv t0 = tcg_temp_new();
++    gen_helper_flt_d(t0, cpu_env, cpu_fpr[a->rs1], cpu_fpr[a->rs2]);
++    gen_set_gpr(a->rd, t0);
++    tcg_temp_free(t0);
++
++    return true;
++}
++
++static bool trans_fle_d(DisasContext *ctx, arg_fle_d *a)
++{
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVD);
++
++    TCGv t0 = tcg_temp_new();
++    gen_helper_fle_d(t0, cpu_env, cpu_fpr[a->rs1], cpu_fpr[a->rs2]);
++    gen_set_gpr(a->rd, t0);
++    tcg_temp_free(t0);
++
++    return true;
++}
++
++static bool trans_fclass_d(DisasContext *ctx, arg_fclass_d *a)
++{
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVD);
++
++    TCGv t0 = tcg_temp_new();
++    gen_helper_fclass_d(t0, cpu_fpr[a->rs1]);
++    gen_set_gpr(a->rd, t0);
++    tcg_temp_free(t0);
++    return true;
++}
++
++static bool trans_fcvt_w_d(DisasContext *ctx, arg_fcvt_w_d *a)
++{
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVD);
++
++    TCGv t0 = tcg_temp_new();
++    gen_set_rm(ctx, a->rm);
++    gen_helper_fcvt_w_d(t0, cpu_env, cpu_fpr[a->rs1]);
++    gen_set_gpr(a->rd, t0);
++    tcg_temp_free(t0);
++
++    return true;
++}
++
++static bool trans_fcvt_wu_d(DisasContext *ctx, arg_fcvt_wu_d *a)
++{
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVD);
++
++    TCGv t0 = tcg_temp_new();
++    gen_set_rm(ctx, a->rm);
++    gen_helper_fcvt_wu_d(t0, cpu_env, cpu_fpr[a->rs1]);
++    gen_set_gpr(a->rd, t0);
++    tcg_temp_free(t0);
++
++    return true;
++}
++
++static bool trans_fcvt_d_w(DisasContext *ctx, arg_fcvt_d_w *a)
++{
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVD);
++
++    TCGv t0 = tcg_temp_new();
++    gen_get_gpr(t0, a->rs1);
++
++    gen_set_rm(ctx, a->rm);
++    gen_helper_fcvt_d_w(cpu_fpr[a->rd], cpu_env, t0);
++    tcg_temp_free(t0);
++
++    mark_fs_dirty(ctx);
++    return true;
++}
++
++static bool trans_fcvt_d_wu(DisasContext *ctx, arg_fcvt_d_wu *a)
++{
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVD);
++
++    TCGv t0 = tcg_temp_new();
++    gen_get_gpr(t0, a->rs1);
++
++    gen_set_rm(ctx, a->rm);
++    gen_helper_fcvt_d_wu(cpu_fpr[a->rd], cpu_env, t0);
++    tcg_temp_free(t0);
++
++    mark_fs_dirty(ctx);
++    return true;
++}
 diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 049fa65c6611..59d051511f4d 100644
+index b9f78f5a1f8f..c201985ef37b 100644
 --- a/target/riscv/translate.c
 +++ b/target/riscv/translate.c
-@@ -538,10 +538,25 @@ static int ex_rvc_register(int reg)
-     return 8 + reg;
- }
+@@ -1718,6 +1718,7 @@ bool decode_insn32(DisasContext *ctx, uint32_t insn);
+ #include "insn_trans/trans_rvm.inc.c"
+ #include "insn_trans/trans_rva.inc.c"
+ #include "insn_trans/trans_rvf.inc.c"
++#include "insn_trans/trans_rvd.inc.c"
  
-+/*
-+ * Include the auto-generated decoders.
-+ * Note that the 16-bit decoder reuses some of the trans_* functions
-+ * from the 32-bit decoder, which results in duplicate declarations
-+ * of the relevant helpers.  Suppress the warning.
-+ */
- bool decode_insn32(DisasContext *ctx, uint32_t insn);
--/* Include the auto-generated decoder for 32 bit insn */
-+bool decode_insn16(DisasContext *ctx, uint16_t insn);
-+
- #include "decode_insn32.inc.c"
- 
-+#pragma GCC diagnostic push
-+#pragma GCC diagnostic ignored "-Wredundant-decls"
-+
-+#include "decode_insn16.inc.c"
-+
-+#pragma GCC diagnostic pop
-+
-+
- static bool gen_arith_imm(DisasContext *ctx, arg_i *a,
-                           void(*func)(TCGv, TCGv, TCGv))
+ static void decode_RV32_64G(DisasContext *ctx)
  {
-@@ -646,9 +661,6 @@ static bool gen_shift(DisasContext *ctx, arg_r *a,
- #include "insn_trans/trans_rvd.inc.c"
- #include "insn_trans/trans_privileged.inc.c"
- 
--bool decode_insn16(DisasContext *ctx, uint16_t insn);
--/* auto-generated decoder*/
--#include "decode_insn16.inc.c"
- #include "insn_trans/trans_rvc.inc.c"
- 
- static void decode_opc(DisasContext *ctx)
 -- 
 2.18.1
 
