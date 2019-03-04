@@ -1,54 +1,74 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1h0pTS-00053C-TL
-	for mharc-qemu-riscv@gnu.org; Mon, 04 Mar 2019 10:25:50 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:60438)
+	id 1h0tIG-0002V0-QQ
+	for mharc-qemu-riscv@gnu.org; Mon, 04 Mar 2019 14:30:32 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:37867)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <kbastian@mail.uni-paderborn.de>) id 1h0pTQ-000517-JG
-	for qemu-riscv@nongnu.org; Mon, 04 Mar 2019 10:25:49 -0500
+	(envelope-from <richard.henderson@linaro.org>) id 1h0tIE-0002S4-Kn
+	for qemu-riscv@nongnu.org; Mon, 04 Mar 2019 14:30:31 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <kbastian@mail.uni-paderborn.de>) id 1h0pTP-0001D7-Iq
-	for qemu-riscv@nongnu.org; Mon, 04 Mar 2019 10:25:48 -0500
-Received: from mail.uni-paderborn.de ([131.234.142.9]:37958)
-	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.71) (envelope-from <kbastian@mail.uni-paderborn.de>)
-	id 1h0pTM-0000mF-NO; Mon, 04 Mar 2019 10:25:45 -0500
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=mail.uni-paderborn.de; s=20170601;
-	h=Content-Transfer-Encoding:Content-Type
-	:In-Reply-To:MIME-Version:Date:Message-ID:References:Cc:To:From:Subject:
-	Sender:Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
-	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
-	List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
-	bh=akb9sqVXhaD/NJQhy2qrZezzq6sbZPxSu4Xiw9WkkPw=;
-	b=H3OJK+8lIHjhnPLnR7X/jadnlw
-	Z5up070DXUd1GiRWjdL5RL4r1+6xrHOdWvcc0rIsmMwTmy6IFxbpVPS6DrgT9Q9RwQDpAcRFPlo1Q
-	Ne9OJMkoxRGsEsPQzBQElE9QxgWfeK5epqtrgZ4axL9KpaSnjdz980AN43BpgzKm6V8g=; 
-From: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-To: Peter Maydell <peter.maydell@linaro.org>,
+	(envelope-from <richard.henderson@linaro.org>) id 1h0tID-0008Cg-SQ
+	for qemu-riscv@nongnu.org; Mon, 04 Mar 2019 14:30:30 -0500
+Received: from mail-pg1-x536.google.com ([2607:f8b0:4864:20::536]:38449)
+	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+	(Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
+	id 1h0tID-0008AH-AG
+	for qemu-riscv@nongnu.org; Mon, 04 Mar 2019 14:30:29 -0500
+Received: by mail-pg1-x536.google.com with SMTP id m2so3773828pgl.5
+	for <qemu-riscv@nongnu.org>; Mon, 04 Mar 2019 11:30:27 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+	h=subject:to:cc:references:from:openpgp:message-id:date:user-agent
+	:mime-version:in-reply-to:content-language:content-transfer-encoding;
+	bh=lgBaohOL1p2IDHyJGR2mWykoWrrUvGB/PjktXZEwKlI=;
+	b=uSuHs5PG1CKVNPvhmyPbusajLYyMXM/gZe+KKqxZLr3D9L9jeKjENwH7ZX2cdNQ0yh
+	qwRwDluCeLjjIvzmAWzV+8gJHK+mmJYrZ2WtR16Ypp1CCXuovzLDXkRg5bqSyHm67D70
+	KXGCRtedaCQ0ci9ECJU5BJsxje4zW22hmpQpfq8k0CeuglXhwGURv3a8izYfLslerBm2
+	K8mlG7zv1s8130JL65y/Aa1640+DA9ik4720RGeIzhvHpyREc34Ib5/Ger0GPHJCwRtj
+	GQwJR9+QgXN/ov1FtS2IdY6OTD/g4lajXOC/V//8bUvIfFGgKn0UHd+0JIna6kELRd67
+	Ghxw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
+	:date:user-agent:mime-version:in-reply-to:content-language
+	:content-transfer-encoding;
+	bh=lgBaohOL1p2IDHyJGR2mWykoWrrUvGB/PjktXZEwKlI=;
+	b=paEAZw1kNj3d9x4sHm38feloTbxkZsl67XV5bdU/B0EMkyNVGNEDRMU7vpHqC0JyYA
+	uiO1zXajz+93Q1CDEMVAuKW9vRhr7+vJip/gjaKOy6MmY3/AD3DFkEJFmszLAI1jBn+J
+	rXkcOfUqa+dTohTRXRHhXvc4/DUhoRPfozzRuvnwilVHUVQGM+6QhvpXHX1FpMVk2vUx
+	oeKWiTNoxVb4md3WvBinoMIupulrXkAJiiMgL0xkOvlUuuepIliIljqM9KGxJYWmHVHK
+	vR1OFUQTBlpCtEQ/wwRwhQjp3sqSHcHk6om+uIIjlX3eDA7Hy71E2c0yaI1O4DrWJqDj
+	k5lg==
+X-Gm-Message-State: APjAAAWzgYFDSN6DlqN/s+125i+QF0/nO9Vdj/00t8QYYcFiJSi3NJ+z
+	/jgrJPkID3ozEDN4vpifZa7Jlg==
+X-Google-Smtp-Source: APXvYqy8OnT4CABNgHsF4ErSvJcvochZn7ZOQuKMUMsw4j2Dx10ohwaNseEPKr+y9ITIhf9p2Wg4Bg==
+X-Received: by 2002:a63:cc15:: with SMTP id x21mr20358765pgf.380.1551727826027;
+	Mon, 04 Mar 2019 11:30:26 -0800 (PST)
+Received: from cloudburst.twiddle.net (ip-184-254-40-25.brbnca.spcsdns.net.
+	[184.254.40.25]) by smtp.gmail.com with ESMTPSA id
+	e8sm8847658pfn.103.2019.03.04.11.30.24
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 04 Mar 2019 11:30:25 -0800 (PST)
+To: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+	Peter Maydell <peter.maydell@linaro.org>,
 	Palmer Dabbelt <palmer@sifive.com>
-Cc: Richard Henderson <richard.henderson@linaro.org>,
-	"open list:RISC-V" <qemu-riscv@nongnu.org>,
+Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
 	QEMU Developers <qemu-devel@nongnu.org>
 References: <20190301214945.4353-1-palmer@sifive.com>
 	<CAFEAcA-ZbFf+_Bt4QGu6ZchOZtvizWPR_5pFz4vOVVYAf23mgA@mail.gmail.com>
 	<36b17c57-7caf-1e49-d500-bf2eddcd1f25@mail.uni-paderborn.de>
-Message-ID: <35469245-ab32-5cb9-52d7-9ead8ffe6c42@mail.uni-paderborn.de>
-Date: Mon, 4 Mar 2019 16:25:40 +0100
+From: Richard Henderson <richard.henderson@linaro.org>
+Openpgp: preference=signencrypt
+Message-ID: <a652de39-fae2-9885-1197-fbb70b28b7cf@linaro.org>
+Date: Mon, 4 Mar 2019 11:30:21 -0800
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.5.1
+	Thunderbird/60.4.0
 MIME-Version: 1.0
 In-Reply-To: <36b17c57-7caf-1e49-d500-bf2eddcd1f25@mail.uni-paderborn.de>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US-large
-X-IMT-Spam-Score: 0.0 ()
-X-PMX-Version: 6.4.6.2792898, Antispam-Engine: 2.7.2.2107409,
-	Antispam-Data: 2019.3.4.151516, AntiVirus-Engine: 5.58.0,
-	AntiVirus-Data: 2019.2.22.5580002
-X-IMT-Authenticated-Sender: kbastian@UNI-PADERBORN.DE
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 131.234.142.9
+X-Received-From: 2607:f8b0:4864:20::536
 Subject: Re: [Qemu-riscv] [Qemu-devel] [PULL] target/riscv: Convert to
  decodetree
 X-BeenThere: qemu-riscv@nongnu.org
@@ -62,104 +82,18 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Mar 2019 15:25:49 -0000
+X-List-Received-Date: Mon, 04 Mar 2019 19:30:31 -0000
+
+On 3/4/19 4:52 AM, Bastian Koppelmann wrote:
+> This looks like an unforeseen decodetree problem (CC' Richard). As these 16/32
+> instructions share the same trans_* function, we emit the same typedef once for
+> 16 bit and once for 32 bit. I don't see an easy fix in decodetree
+
+Use an argument set, and add !extern to the argument set definition for the
+"second" decoder.
+
+(Leastwise I don't think that feature is sitting on the branch...)
 
 
-On 3/4/19 1:52 PM, Bastian Koppelmann wrote:
->
-> On 3/4/19 12:02 PM, Peter Maydell wrote:
->> On Fri, 1 Mar 2019 at 21:49, Palmer Dabbelt <palmer@sifive.com> wrote:
->>> merged tag 'i2c-for-release-20190228'
->>> Primary key fingerprint: FD0D 5CE6 7CE0 F59A 6688  2686 61F3 8C90 
->>> 919B FF81
->>> The following changes since commit 
->>> 20b084c4b1401b7f8fbc385649d48c67b6f43d44:
->>>
->>>    Merge remote-tracking branch 
->>> 'remotes/cminyard/tags/i2c-for-release-20190228' into staging 
->>> (2019-03-01 11:20:49 +0000)
->>>
->>> are available in the Git repository at:
->>>
->>>    git://github.com/palmer-dabbelt/qemu.git 
->>> tags/riscv-for-master-4.0-sf2
->>>
->>> for you to fetch changes up to 
->>> 0bcba29464ea9969fc69cd729e4c8bddfb2e18e3:
->>>
->>>    target/riscv: Remaining rvc insn reuse 32 bit translators 
->>> (2019-03-01 13:16:18 -0800)
->>>
->>> ----------------------------------------------------------------
->>> target/riscv: Convert to decodetree
->>>
->>> Bastian: this patchset converts the RISC-V decoder to decodetree in 
->>> four major steps:
->>>
->>> 1) Convert 32-bit instructions to decodetree [Patch 1-15]:
->>>      Many of the gen_* functions are called by the decode functions 
->>> for 16-bit
->>>      and 32-bit functions. If we move translation code from the gen_*
->>>      functions to the generated trans_* functions of decode-tree, we 
->>> get a lot of
->>>      duplication. Therefore, we mostly generate calls to the old 
->>> gen_* function
->>>      which are properly replaced after step 2).
->>>
->>>      Each of the trans_ functions are grouped into files 
->>> corresponding to their
->>>      ISA extension, e.g. addi which is in RV32I is translated in the 
->>> file
->>>      'trans_rvi.inc.c'.
->>>
->>> 2) Convert 16-bit instructions to decodetree [Patch 16-18]:
->>>      All 16 bit instructions have a direct mapping to a 32 bit 
->>> instruction. Thus,
->>>      we convert the arguments in the 16 bit trans_ function to the 
->>> arguments of
->>>      the corresponding 32 bit instruction and call the 32 bit trans_ 
->>> function.
->>>
->>> 3) Remove old manual decoding in gen_* function [Patch 19-29]:
->>>      this move all manual translation code into the trans_* 
->>> instructions of
->>>      decode tree, such that we can remove the old decode_* functions.
->>>
->>> 4) Simplify RVC by reusing as much as possible from the RVG decoder 
->>> as suggested
->>>     by Richard. [Patch 30-34]
->>>
->>> Palmer: This passed Alistar's testing on rv32 and rv64 as well as my
->>> testing on rv64, so I think it's good to go.  Thanks for the cleanup!
->>>
->> Hi; I'm afraid this has compile errors on the OSX build:
->>
->>
->> In file included from
->> /Users/pm215/src/qemu-for-merges/target/riscv/translate.c:377:
->> target/riscv/decode_insn16.inc.c:37:15: error: redefinition of typedef
->> 'arg_fld' is a C11 feature [-Werror,-Wtypedef-redefinition]
->> typedef arg_i arg_fld;
->>                ^
->> target/riscv/decode_insn32.inc.c:293:15: note: previous definition is 
->> here
->> typedef arg_i arg_fld;
->
->
-> This looks like an unforeseen decodetree problem (CC' Richard). As 
-> these 16/32 instructions share the same trans_* function, we emit the 
-> same typedef once for 16 bit and once for 32 bit. I don't see an easy 
-> fix in decodetree other than annotating one of the instructions with 
-> something like !shared , since both insn are parsed in two runs of 
-> decodetree and later included together into one file. I'll try to 
-> prepare a patch.
-
-This is something we can figure out after this PR. @Palmer I think you 
-can drop patches 30-34 for now as these are the offenders and the rest 
-of the PR is fine.
-
-Cheers,
-
-Bastian
-
+r~
 
