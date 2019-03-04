@@ -1,59 +1,55 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1h0lMg-0007JC-0H
-	for mharc-qemu-riscv@gnu.org; Mon, 04 Mar 2019 06:02:34 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:33331)
+	id 1h0n5A-0001lo-LM
+	for mharc-qemu-riscv@gnu.org; Mon, 04 Mar 2019 07:52:36 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:58578)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <peter.maydell@linaro.org>) id 1h0lMe-0007J3-0x
-	for qemu-riscv@nongnu.org; Mon, 04 Mar 2019 06:02:33 -0500
+	(envelope-from <kbastian@mail.uni-paderborn.de>) id 1h0n56-0001kq-C3
+	for qemu-riscv@nongnu.org; Mon, 04 Mar 2019 07:52:35 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <peter.maydell@linaro.org>) id 1h0lMc-0003MA-Sp
-	for qemu-riscv@nongnu.org; Mon, 04 Mar 2019 06:02:31 -0500
-Received: from mail-ot1-x32a.google.com ([2607:f8b0:4864:20::32a]:45227)
-	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <peter.maydell@linaro.org>)
-	id 1h0lMc-0003In-DY
-	for qemu-riscv@nongnu.org; Mon, 04 Mar 2019 06:02:30 -0500
-Received: by mail-ot1-x32a.google.com with SMTP id i12so3852831otp.12
-	for <qemu-riscv@nongnu.org>; Mon, 04 Mar 2019 03:02:28 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=8ebtU+jhK5Iv+XUZwnzQSblhY0/M+8kw6FN5BLJyAIw=;
-	b=PTWw3vaWPjpQUZoxsIrM/bSdfIAgooLTzYp79eA0aEFUtwCfFtm5hhYfB41erSm99U
-	rrTOJ9JPZ/tdzW5E4KKoN73RXzXV1+eERP7SKTdolyx+6lboJgL82bOUehkk4G3AidQe
-	XgyGPYGdRwJzOsdFifpAPna5sijDDOQ9+i6Vd0dUnynKlpKH2icU9uggByfYrraP7CJc
-	stnsqcthWdFf2E8ayah8w4+P2xDRKvNl9j490b39iHgewYRwn77Em7hDkoWk/4Go4pDw
-	/f2FIzLTE6A4sJEN55tbK/0kp2CrFp5DyjnUWAKE04o7/J3u6oIpzsnbf1SGAspGJAhc
-	jV+w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=8ebtU+jhK5Iv+XUZwnzQSblhY0/M+8kw6FN5BLJyAIw=;
-	b=kprjkVGWkdDyySZ32AbrnTtnlSOYOqE4d2BXAHq/9C3X5LEstDYG7qSajsczcSzWzI
-	/byu0KW4HLCxZ7LpQLokfK3D1OpWl3MKLnnaYwFzSJDlElrNhCt846IvID8UcJiwcK1J
-	/w5qgrh6gCEj7RseW0P0PO7aKkbK0Zf2pcrUlDBa2lKQiXnaQVjgAiqaOUn+wL0yvch3
-	QdY6041ZEntMXSdlQ1kBn4Ai7Zfv7NYnE8ciGhQUz7Soh1wTPIyHWcUtTeDKsK28Ixcw
-	XWnZxHBiDjmVYkkR+I8yK6FTkrp1u4Kia5S+xD42pTw0V4f3LysSiPUQiVXAK+00eAd2
-	eGPA==
-X-Gm-Message-State: APjAAAX3IIFkgxZD1XNbfvtTZN3pRbiXg87H1ndWK1S+rw1z4UfK0UEC
-	7kQFoLrxCoRhanzXRblnkJsz/y/QXyZgov2vGm0Crw==
-X-Google-Smtp-Source: APXvYqyq3Ib4rR/hVfoYL5UWChPW3Xw5A6RSWvj4nR2CZYkBHWaDlAtC26gMzTekM4XnQqgtQNnEDjvNawfwGooaTe4=
-X-Received: by 2002:a9d:61c7:: with SMTP id h7mr11283286otk.363.1551697347238; 
-	Mon, 04 Mar 2019 03:02:27 -0800 (PST)
-MIME-Version: 1.0
+	(envelope-from <kbastian@mail.uni-paderborn.de>) id 1h0n54-0005PH-DX
+	for qemu-riscv@nongnu.org; Mon, 04 Mar 2019 07:52:32 -0500
+Received: from mail.uni-paderborn.de ([131.234.142.9]:40664)
+	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.71) (envelope-from <kbastian@mail.uni-paderborn.de>)
+	id 1h0n4w-0005Fj-Fw; Mon, 04 Mar 2019 07:52:23 -0500
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=mail.uni-paderborn.de; s=20170601;
+	h=Content-Transfer-Encoding:Content-Type
+	:In-Reply-To:MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:
+	Sender:Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
+	List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+	bh=NeU1OvMrOTaDiEcwnTEgVpZkdRJgccxE/StAOMuyjcA=;
+	b=ezRxS32IMjnQGLYtf3SS6gND8T
+	jJPvujMvzsuJUnHGlnd7i1fcFFGqb3js1GoK32uberrBKy5l4zlF5ptCQBjLRX9JnIXO3Uu5WlrPP
+	tJPjQmwOXIdxHN7egQ3zrpilwb8cDFF0XC/rHFplMCajWSHC3z8RMtfDTJZU7Rz1OqxA=; 
+To: Peter Maydell <peter.maydell@linaro.org>,
+	Palmer Dabbelt <palmer@sifive.com>
+Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
+	QEMU Developers <qemu-devel@nongnu.org>,
+	Richard Henderson <richard.henderson@linaro.org>
 References: <20190301214945.4353-1-palmer@sifive.com>
-In-Reply-To: <20190301214945.4353-1-palmer@sifive.com>
-From: Peter Maydell <peter.maydell@linaro.org>
-Date: Mon, 4 Mar 2019 11:02:14 +0000
-Message-ID: <CAFEAcA-ZbFf+_Bt4QGu6ZchOZtvizWPR_5pFz4vOVVYAf23mgA@mail.gmail.com>
-To: Palmer Dabbelt <palmer@sifive.com>
-Cc: QEMU Developers <qemu-devel@nongnu.org>,
-	"open list:RISC-V" <qemu-riscv@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
+	<CAFEAcA-ZbFf+_Bt4QGu6ZchOZtvizWPR_5pFz4vOVVYAf23mgA@mail.gmail.com>
+From: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+Message-ID: <36b17c57-7caf-1e49-d500-bf2eddcd1f25@mail.uni-paderborn.de>
+Date: Mon, 4 Mar 2019 13:52:17 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.5.1
+MIME-Version: 1.0
+In-Reply-To: <CAFEAcA-ZbFf+_Bt4QGu6ZchOZtvizWPR_5pFz4vOVVYAf23mgA@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Content-Language: en-US-large
+X-IMT-Spam-Score: 0.0 ()
+X-PMX-Version: 6.4.6.2792898, Antispam-Engine: 2.7.2.2107409,
+	Antispam-Data: 2019.3.4.124817, AntiVirus-Engine: 5.58.0,
+	AntiVirus-Data: 2019.2.22.5580002
+X-IMT-Authenticated-Sender: kbastian@UNI-PADERBORN.DE
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::32a
-Subject: Re: [Qemu-riscv] [PULL] target/riscv: Convert to decodetree
+X-Received-From: 131.234.142.9
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PULL] target/riscv: Convert to
+ decodetree
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -65,107 +61,78 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Mar 2019 11:02:33 -0000
-
-On Fri, 1 Mar 2019 at 21:49, Palmer Dabbelt <palmer@sifive.com> wrote:
->
-> merged tag 'i2c-for-release-20190228'
-> Primary key fingerprint: FD0D 5CE6 7CE0 F59A 6688  2686 61F3 8C90 919B FF81
-> The following changes since commit 20b084c4b1401b7f8fbc385649d48c67b6f43d44:
->
->   Merge remote-tracking branch 'remotes/cminyard/tags/i2c-for-release-20190228' into staging (2019-03-01 11:20:49 +0000)
->
-> are available in the Git repository at:
->
->   git://github.com/palmer-dabbelt/qemu.git tags/riscv-for-master-4.0-sf2
->
-> for you to fetch changes up to 0bcba29464ea9969fc69cd729e4c8bddfb2e18e3:
->
->   target/riscv: Remaining rvc insn reuse 32 bit translators (2019-03-01 13:16:18 -0800)
->
-> ----------------------------------------------------------------
-> target/riscv: Convert to decodetree
->
-> Bastian: this patchset converts the RISC-V decoder to decodetree in four major steps:
->
-> 1) Convert 32-bit instructions to decodetree [Patch 1-15]:
->     Many of the gen_* functions are called by the decode functions for 16-bit
->     and 32-bit functions. If we move translation code from the gen_*
->     functions to the generated trans_* functions of decode-tree, we get a lot of
->     duplication. Therefore, we mostly generate calls to the old gen_* function
->     which are properly replaced after step 2).
->
->     Each of the trans_ functions are grouped into files corresponding to their
->     ISA extension, e.g. addi which is in RV32I is translated in the file
->     'trans_rvi.inc.c'.
->
-> 2) Convert 16-bit instructions to decodetree [Patch 16-18]:
->     All 16 bit instructions have a direct mapping to a 32 bit instruction. Thus,
->     we convert the arguments in the 16 bit trans_ function to the arguments of
->     the corresponding 32 bit instruction and call the 32 bit trans_ function.
->
-> 3) Remove old manual decoding in gen_* function [Patch 19-29]:
->     this move all manual translation code into the trans_* instructions of
->     decode tree, such that we can remove the old decode_* functions.
->
-> 4) Simplify RVC by reusing as much as possible from the RVG decoder as suggested
->    by Richard. [Patch 30-34]
->
-> Palmer: This passed Alistar's testing on rv32 and rv64 as well as my
-> testing on rv64, so I think it's good to go.  Thanks for the cleanup!
->
-
-Hi; I'm afraid this has compile errors on the OSX build:
+X-List-Received-Date: Mon, 04 Mar 2019 12:52:35 -0000
 
 
-In file included from
-/Users/pm215/src/qemu-for-merges/target/riscv/translate.c:377:
-target/riscv/decode_insn16.inc.c:37:15: error: redefinition of typedef
-'arg_fld' is a C11 feature [-Werror,-Wtypedef-redefinition]
-typedef arg_i arg_fld;
-              ^
-target/riscv/decode_insn32.inc.c:293:15: note: previous definition is here
-typedef arg_i arg_fld;
-              ^
-In file included from
-/Users/pm215/src/qemu-for-merges/target/riscv/translate.c:377:
-target/riscv/decode_insn16.inc.c:39:15: error: redefinition of typedef
-'arg_lw' is a C11 feature [-Werror,-Wtypedef-redefinition]
-typedef arg_i arg_lw;
-              ^
-target/riscv/decode_insn32.inc.c:137:15: note: previous definition is here
-typedef arg_i arg_lw;
-              ^
-In file included from
-/Users/pm215/src/qemu-for-merges/target/riscv/translate.c:377:
-target/riscv/decode_insn16.inc.c:41:15: error: redefinition of typedef
-'arg_fsd' is a C11 feature [-Werror,-Wtypedef-redefinition]
-typedef arg_s arg_fsd;
-              ^
-target/riscv/decode_insn32.inc.c:295:15: note: previous definition is here
-typedef arg_s arg_fsd;
-              ^
-In file included from
-/Users/pm215/src/qemu-for-merges/target/riscv/translate.c:377:
-target/riscv/decode_insn16.inc.c:43:15: error: redefinition of typedef
-'arg_sw' is a C11 feature [-Werror,-Wtypedef-redefinition]
-typedef arg_s arg_sw;
-              ^
-target/riscv/decode_insn32.inc.c:147:15: note: previous definition is here
-typedef arg_s arg_sw;
-              ^
-In file included from
-/Users/pm215/src/qemu-for-merges/target/riscv/translate.c:377:
-target/riscv/decode_insn16.inc.c:49:28: error: redefinition of typedef
-'arg_c_addi16sp_lui' is a C11 feature [-Werror,-Wtypedef-redefinition]
-typedef arg_c_addi16sp_lui arg_c_addi16sp_lui;
-                           ^
-target/riscv/decode_insn16.inc.c:7:3: note: previous definition is here
-} arg_c_addi16sp_lui;
-  ^
+On 3/4/19 12:02 PM, Peter Maydell wrote:
+> On Fri, 1 Mar 2019 at 21:49, Palmer Dabbelt <palmer@sifive.com> wrote:
+>> merged tag 'i2c-for-release-20190228'
+>> Primary key fingerprint: FD0D 5CE6 7CE0 F59A 6688  2686 61F3 8C90 919B FF81
+>> The following changes since commit 20b084c4b1401b7f8fbc385649d48c67b6f43d44:
+>>
+>>    Merge remote-tracking branch 'remotes/cminyard/tags/i2c-for-release-20190228' into staging (2019-03-01 11:20:49 +0000)
+>>
+>> are available in the Git repository at:
+>>
+>>    git://github.com/palmer-dabbelt/qemu.git tags/riscv-for-master-4.0-sf2
+>>
+>> for you to fetch changes up to 0bcba29464ea9969fc69cd729e4c8bddfb2e18e3:
+>>
+>>    target/riscv: Remaining rvc insn reuse 32 bit translators (2019-03-01 13:16:18 -0800)
+>>
+>> ----------------------------------------------------------------
+>> target/riscv: Convert to decodetree
+>>
+>> Bastian: this patchset converts the RISC-V decoder to decodetree in four major steps:
+>>
+>> 1) Convert 32-bit instructions to decodetree [Patch 1-15]:
+>>      Many of the gen_* functions are called by the decode functions for 16-bit
+>>      and 32-bit functions. If we move translation code from the gen_*
+>>      functions to the generated trans_* functions of decode-tree, we get a lot of
+>>      duplication. Therefore, we mostly generate calls to the old gen_* function
+>>      which are properly replaced after step 2).
+>>
+>>      Each of the trans_ functions are grouped into files corresponding to their
+>>      ISA extension, e.g. addi which is in RV32I is translated in the file
+>>      'trans_rvi.inc.c'.
+>>
+>> 2) Convert 16-bit instructions to decodetree [Patch 16-18]:
+>>      All 16 bit instructions have a direct mapping to a 32 bit instruction. Thus,
+>>      we convert the arguments in the 16 bit trans_ function to the arguments of
+>>      the corresponding 32 bit instruction and call the 32 bit trans_ function.
+>>
+>> 3) Remove old manual decoding in gen_* function [Patch 19-29]:
+>>      this move all manual translation code into the trans_* instructions of
+>>      decode tree, such that we can remove the old decode_* functions.
+>>
+>> 4) Simplify RVC by reusing as much as possible from the RVG decoder as suggested
+>>     by Richard. [Patch 30-34]
+>>
+>> Palmer: This passed Alistar's testing on rv32 and rv64 as well as my
+>> testing on rv64, so I think it's good to go.  Thanks for the cleanup!
+>>
+> Hi; I'm afraid this has compile errors on the OSX build:
+>
+>
+> In file included from
+> /Users/pm215/src/qemu-for-merges/target/riscv/translate.c:377:
+> target/riscv/decode_insn16.inc.c:37:15: error: redefinition of typedef
+> 'arg_fld' is a C11 feature [-Werror,-Wtypedef-redefinition]
+> typedef arg_i arg_fld;
+>                ^
+> target/riscv/decode_insn32.inc.c:293:15: note: previous definition is here
+> typedef arg_i arg_fld;
 
-(and a lot of other similar errors)
 
-thanks
--- PMM
+This looks like an unforeseen decodetree problem (CC' Richard). As these 
+16/32 instructions share the same trans_* function, we emit the same 
+typedef once for 16 bit and once for 32 bit. I don't see an easy fix in 
+decodetree other than annotating one of the instructions with something 
+like !shared , since both insn are parsed in two runs of decodetree and 
+later included together into one file. I'll try to prepare a patch.
+
+Cheers,
+
+Bastian
+
 
