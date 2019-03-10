@@ -1,66 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1h0vPV-0006Sq-4S
-	for mharc-qemu-riscv@gnu.org; Mon, 04 Mar 2019 16:46:09 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:42680)
+	id 1h2mwh-0006OT-Az
+	for mharc-qemu-riscv@gnu.org; Sat, 09 Mar 2019 20:08:07 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:51296)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1h0vPT-0006Sc-2Z
-	for qemu-riscv@nongnu.org; Mon, 04 Mar 2019 16:46:07 -0500
+	(envelope-from <bmeng.cn@gmail.com>) id 1h2mwe-0006LO-NO
+	for qemu-riscv@nongnu.org; Sat, 09 Mar 2019 20:08:05 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1h0vPS-0003fZ-8u
-	for qemu-riscv@nongnu.org; Mon, 04 Mar 2019 16:46:07 -0500
-Received: from mail-pg1-x52e.google.com ([2607:f8b0:4864:20::52e]:44715)
+	(envelope-from <bmeng.cn@gmail.com>) id 1h2mwe-0003Nw-2Q
+	for qemu-riscv@nongnu.org; Sat, 09 Mar 2019 20:08:04 -0500
+Received: from mail-ed1-x543.google.com ([2a00:1450:4864:20::543]:36195)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1h0vPS-0003cz-20
-	for qemu-riscv@nongnu.org; Mon, 04 Mar 2019 16:46:06 -0500
-Received: by mail-pg1-x52e.google.com with SMTP id j3so4001492pgm.11
-	for <qemu-riscv@nongnu.org>; Mon, 04 Mar 2019 13:46:05 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
-	h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
-	:content-transfer-encoding;
-	bh=CQ6wqUVUr37LeljKPWo/8XWifyjY6BGPzbFhxUKwNos=;
-	b=WH/+rQFestFOHrj15o3dB4B0+bDdMq8GGXKMd5WB4L6yPLIuHpwVR/biTFIEtcX7i4
-	8DYjzpqLt+CA1ePsGkwoLS6UBRoD0klt22S4OcbppI/Q8M0tS487OjDxNSmH1wWeaBdp
-	jWCyGwakCjTudJ9Hzst3SzL8+O0iYydyNzQemeVPUgV6wouMzk9leICKM5dzfv2x/H1C
-	kTDB3q54umMLQ7qvvI5nJVSwhO7H4q9DhkX/TCKfBcJjHUd7nz6s5BnwHtCODjda914k
-	9hkuH78nQf4GB4vgSNE1ZCMW51B5H0Rgc+UxRotuUKIgPIRKeSNRWmxGifBbX0n1hsMs
-	dwcA==
+	(Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
+	id 1h2mwb-0003LO-Oa; Sat, 09 Mar 2019 20:08:01 -0500
+Received: by mail-ed1-x543.google.com with SMTP id e4so1078559edi.3;
+	Sat, 09 Mar 2019 17:08:01 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=iMDUqXE4BEZy2kvWXX64+liFF7rIhbPSq6jl04Ozrk8=;
+	b=sB/g1v0oJFId1HlUIpeknJWIlEl0lSQ0wMW6zI5dQI8ep3/oI1nv5xvKMFCcTvUV5Q
+	mvl9NYh2WKr1SK3/GAYLmirYxwNzJcqvPRCR/9MVFaW42RMbLoyoXOsiPJVEDL5pm0rU
+	RI0HzP4Jw5nNgrZKqOMgEaD4OdGOvFWjU/DjmPWmK5F7dGuuSC30QfPc1OPWsOzCwXYj
+	e1f9tPqY7l/4Vegqcw5hWMzjqT0kdvhz83M9rAKFIopy+yW5Bmr6HqxIh/iMFQJ1I9Eq
+	FyOvTtMbZcUE9UJxn3qJOrSpWAJJ//1liGpMV71jwaop1DnMuK89fh2G5Ynbk57DklUD
+	PiDQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
-	:mime-version:content-transfer-encoding;
-	bh=CQ6wqUVUr37LeljKPWo/8XWifyjY6BGPzbFhxUKwNos=;
-	b=lW7Dr+TgINBhBZ+o+SFE+joaqxoAI+HEhIunUXQU170WIAvF/ct6Q0gu1t4O0dhbBw
-	B2ejpokweEijeUsZijl/V0iDbkMQRoyo6sdP4i+iA1Qis9R1JgmpQ6SVU4KRtnCnwnqL
-	RXNFzOg4isOjW9WTwVpA+89AYnN1DltyJ6bau0361Icv78spIQhnZ8LCG5B79c1PBOzg
-	zwl2k46hsC50f9QrcBLYckYwm5NwEFAvsKrpHWQ9SeKdGTzdB3Hvj57uwIZy8uXl+viT
-	PQ90Y6rGviwI6aF0ikjieDupYCjovLctW9LW0zFEYV64mzWWG9mHgGgDkmj6L5h+W5SH
-	dhjQ==
-X-Gm-Message-State: APjAAAWHjhDcmcTAFQg9yrEtAd+QVVBUnxu0Ee/qRQ7nt3StlfP4+bqf
-	A0XpPDfFLTfq6iYFa6ARhEmHnQ==
-X-Google-Smtp-Source: APXvYqwJnO4ei+HQ7j+ctc8It9vTVUnK8pvCjvJuCw6gw6t+BBCQ47ahiYkGxqrNV83K6Lvlk4DTVw==
-X-Received: by 2002:a63:c449:: with SMTP id m9mr20303806pgg.41.1551735964464; 
-	Mon, 04 Mar 2019 13:46:04 -0800 (PST)
-Received: from localhost ([12.206.222.5]) by smtp.gmail.com with ESMTPSA id
-	d11sm11191960pfh.29.2019.03.04.13.46.03
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 04 Mar 2019 13:46:03 -0800 (PST)
-Date: Mon, 04 Mar 2019 13:46:03 -0800 (PST)
-X-Google-Original-Date: Mon, 04 Mar 2019 13:45:52 PST (-0800)
-In-Reply-To: <a652de39-fae2-9885-1197-fbb70b28b7cf@linaro.org>
-CC: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
-	Peter Maydell <peter.maydell@linaro.org>, qemu-riscv@nongnu.org,
-	qemu-devel@nongnu.org
-From: Palmer Dabbelt <palmer@sifive.com>
-To: Peter Maydell <peter.maydell@linaro.org>, richard.henderson@linaro.org
-Message-ID: <mhng-0bb53acf-0f1c-405f-8599-76941fe63e37@palmer-si-x1c4>
-Mime-Version: 1.0 (MHng)
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=iMDUqXE4BEZy2kvWXX64+liFF7rIhbPSq6jl04Ozrk8=;
+	b=IknA5v87x/o95GFYkkCglItic0xYf6cCmDy3bYS0herqcbVaprFRAtyvddNx0iofJU
+	yWWa3rcXLR9M+ARx1gjT4gvhTJTyHbodW4o1hmCjAcXSaIRHYAyXYMBRZzMkBVl1upWG
+	i9//Kjt5d7J5zyErO7GYFUdjIm7Y8iJ5qOB7BNGTujgnUeQIVU6niwV12z5FROou4zJi
+	TfZDfjiimo5rd60UGpSrLyuXA4R+7CESlJbqJMMwVz0zxPsptSGzVCYCTynpsOGGvO+z
+	e+hkndvUaSw4HJvw190wqfM/jsJLxJmfKhFQyvsyH+yRJZxQRZLLDEVpUicTx9MbsVb5
+	ZT4A==
+X-Gm-Message-State: APjAAAUzhQVU3hRHSo/kNL4jqwrdYeqShfjhuLu3OYt0MI8JNrik0/Ez
+	j0BhgpgMGPLeYRtBuBJVPaESH/gwk6FAT59VGqY=
+X-Google-Smtp-Source: APXvYqwxEUlHqgSrc4qV5CqP6XpAhL61rK7OFTcf7/vpMucy7CJcPlJfUwU0JB/sRlMTKn65/rdr9jjE1lIu5byTy9o=
+X-Received: by 2002:a17:906:69cf:: with SMTP id
+	g15mr17032253ejs.157.1552180079692; 
+	Sat, 09 Mar 2019 17:07:59 -0800 (PST)
+MIME-Version: 1.0
+References: <20190210201726.3567-1-lukas.auer@aisec.fraunhofer.de>
+In-Reply-To: <20190210201726.3567-1-lukas.auer@aisec.fraunhofer.de>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Sun, 10 Mar 2019 09:07:48 +0800
+Message-ID: <CAEUhbmUtSAeznt1DCwJ7tS=YFeqwnYBemS6278=QQ60qs_MthA@mail.gmail.com>
+To: Lukas Auer <lukas.auer@aisec.fraunhofer.de>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+	Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+	Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+	Palmer Dabbelt <palmer@sifive.com>, Michael Clark <mjc@sifive.com>,
+	Alistair Francis <Alistair.Francis@wdc.com>
+Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::52e
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PULL] target/riscv: Convert to
- decodetree
+X-Received-From: 2a00:1450:4864:20::543
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH] hw/riscv/virt: re-add
+ machine-specific compatible string to /soc/ node
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -72,19 +69,34 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Mar 2019 21:46:07 -0000
+X-List-Received-Date: Sun, 10 Mar 2019 01:08:05 -0000
 
-On Mon, 04 Mar 2019 11:30:21 PST (-0800), richard.henderson@linaro.org wrote:
-> On 3/4/19 4:52 AM, Bastian Koppelmann wrote:
->> This looks like an unforeseen decodetree problem (CC' Richard). As these 16/32
->> instructions share the same trans_* function, we emit the same typedef once for
->> 16 bit and once for 32 bit. I don't see an easy fix in decodetree
+Hi Lukas,
+
+On Mon, Feb 11, 2019 at 6:13 AM Lukas Auer
+<lukas.auer@aisec.fraunhofer.de> wrote:
 >
-> Use an argument set, and add !extern to the argument set definition for the
-> "second" decoder.
+> Re-add the previous compatible string "riscv-virtio-soc" to the soc
+> device tree node to allow U-Boot and Linux to bind machine-specific
+> drivers to it. The current compatible string "simple-bus" is retained.
 >
-> (Leastwise I don't think that feature is sitting on the branch...)
+> This is required by U-Boot to bind devices early, as part of the
+> pre-relocation driver model.
 >
 
-Thanks, I'll do another PR and keep the last 5 patches for later.
+I see no problem with U-Boot working with current compatible string
+"simple-bus". In fact I had planned to remove the compatible string
+"riscv-virtio-soc" in U-Boot but did not get time to work on it.
+
+> Fixes: 53f54508dae6("hw/riscv/virtio: Set the soc device tree node as a
+> simple-bus")
+> Signed-off-by: Lukas Auer <lukas.auer@aisec.fraunhofer.de>
+> ---
+>
+>  hw/riscv/virt.c | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
+>
+
+Regards,
+Bin
 
