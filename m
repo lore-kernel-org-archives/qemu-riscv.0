@@ -1,54 +1,54 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1h3hUC-0003Xw-GD
-	for mharc-qemu-riscv@gnu.org; Tue, 12 Mar 2019 09:30:28 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:55068)
+	id 1h3hUD-0003Yt-Da
+	for mharc-qemu-riscv@gnu.org; Tue, 12 Mar 2019 09:30:29 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:54897)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1h3hU5-0003Hi-Fs
-	for qemu-riscv@nongnu.org; Tue, 12 Mar 2019 09:30:24 -0400
+	(envelope-from <palmer@sifive.com>) id 1h3hU3-00033q-HI
+	for qemu-riscv@nongnu.org; Tue, 12 Mar 2019 09:30:21 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1h3hHC-0000P7-Bo
-	for qemu-riscv@nongnu.org; Tue, 12 Mar 2019 09:17:04 -0400
-Received: from mail-pg1-x52a.google.com ([2607:f8b0:4864:20::52a]:39353)
+	(envelope-from <palmer@sifive.com>) id 1h3hHJ-0000Up-T1
+	for qemu-riscv@nongnu.org; Tue, 12 Mar 2019 09:17:10 -0400
+Received: from mail-pf1-x436.google.com ([2607:f8b0:4864:20::436]:41324)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1h3hHB-0000Ni-IM
-	for qemu-riscv@nongnu.org; Tue, 12 Mar 2019 09:17:02 -0400
-Received: by mail-pg1-x52a.google.com with SMTP id h8so1816552pgp.6
-	for <qemu-riscv@nongnu.org>; Tue, 12 Mar 2019 06:17:01 -0700 (PDT)
+	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1h3hHJ-0000UN-Lf
+	for qemu-riscv@nongnu.org; Tue, 12 Mar 2019 09:17:09 -0400
+Received: by mail-pf1-x436.google.com with SMTP id d25so1806911pfn.8
+	for <qemu-riscv@nongnu.org>; Tue, 12 Mar 2019 06:17:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
 	h=subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding:cc:from:to;
-	bh=OPUNxKf4mTX+Vnf601r72Ss5k2kVOhk1wPtz3HBIudU=;
-	b=nLltYaSBECwavrrh52909PFn2C11gb1tSzkbliy5MSv5Rlie3JVDygtybhNmGI4NzF
-	SUDQhY+ecq5STHRtqXQYfmRo20GNptU+l7EaLJNboeJu2PjdBSMAjEWq3BqFNnGG+5xQ
-	2knb83GptljsANt0BGFa4r1KwHIdhkXnthof+zfQ8zi4oCmmVf/repkfFTf/7TXGAOEg
-	T/Yay299FWx//cBSwAc2BcTww5mYE1PBbsEuc7kl2B0ssvSEQn44tDzLAmzhmSPnwLoL
-	g2J+zh5WAsiuF2c8Ev2j/hii7cWPXj4hIcCv9FGVKG7gGP1s1ikMXqTdFDdUBd64yh8w
-	goPA==
+	bh=A4nqSOiEomNC8Yql/++VvC8Pht0T9boN/3KbHf7SQVM=;
+	b=H9V90BnVrn7ReIpFssJP3aw8PP29cMpTwXv4gJxgyNuYyBik9Og90M37mg+RU1BWpv
+	+p2GJ5JmCsabVfDvOyL8TKI+rNFRcImnQhyvef3bH8zpNYsG5aU3u/jSfsPlPs8IRBFf
+	U1h/vQgUHZQjhUcv7YWx+Q6j7GYntbMR3n1vYgvHB7ygesu/rQOYIIfY339nuxM5RmVl
+	c0zRsjIZkesg1QOEjuelBSqox8fRu0vkliwd9/LNuQ+SD5tnXEQCnUyL/BS8afdyU+ps
+	muZbwmU3tJ9aRFpoFvEQvwc1reU1/qGv0T3nv2HcmOCJGTytknEtDd/BDi9CpRWoOnm0
+	5ueA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding:cc:from:to;
-	bh=OPUNxKf4mTX+Vnf601r72Ss5k2kVOhk1wPtz3HBIudU=;
-	b=RjXGoN2Tj2kmVEBY4iN3cAXyoPjgDX8gM/Mr+tLewFJUwDDtj9e0RbpiVmwai+hvRe
-	IaDjMHbBIjlreD8M69r0PzcgD+p/yAY0W8+pjpvpQT/CYGHvrk9AR+FJMxqiKNQn07X1
-	OpX01tsHABO0txMB9jsuYXmghrADXIBGtlZ95wQu0L02SHJqbRihDlE+hwAct78VnmdB
-	hpN16HYmlieHe3Nbmopi9F2fYjJZ8KdeJ4osszLHpfuyIVs+7dICS4+SWxZ4XrNcijaJ
-	o8U/GHxzH02FrcFRofxdNC/wVSdB93CM9jGtl64grTRcLUSMAU5sjbc5pT/hSfvHErsr
-	vJCw==
-X-Gm-Message-State: APjAAAXJNBwW8TpEmK+40oAscKBLxwbW00zpYyw2qjjn8glQaBhd7K7W
-	Xst+VAnwrXpbOwi6bV87j9SrJ4NcX6f2L6P4
-X-Google-Smtp-Source: APXvYqx4cHbGoiXudBG9mEBlHNV+CZhxSAyMbFTXpk+E+Utsl0cacKWraYIvObSDp7sQwCir0ft6Bg==
-X-Received: by 2002:a62:1f5d:: with SMTP id f90mr38312961pff.104.1552396620021;
-	Tue, 12 Mar 2019 06:17:00 -0700 (PDT)
+	bh=A4nqSOiEomNC8Yql/++VvC8Pht0T9boN/3KbHf7SQVM=;
+	b=UjPhcep7ime+Xnoj7LpXznHcSDCDTfXgL2j3IZ+kPjUSBmdbA35E5OP1XFBQMDPn0D
+	g2zbnMCSNNjH78jkBWqsywuF/CesdtcdNlvrE01xbFLs8JT7ofoH0hzX7VvFv6gYHX2t
+	05bJTjwfooUSnbaiBOtnYPDOyuzdLQIPqnbxbF7qSlwh81LAQJX7rq9bbAYpUeZgtO3F
+	o+1bNasmi0ZDbbNXYm6CgVBmiHFKZRxkKG1EfdKWo5CVoXfNP7vea/qLrquh6lJiZVNf
+	UcoIekJWw8uCeX9otM2pVZ3rDnWxMwWlFilPApbgTxqGc2HcbQpakNBqyB6uvy1cD063
+	2O2Q==
+X-Gm-Message-State: APjAAAW4MckYaqyDXhLXi3/lvCpChl0SMbf5fkNMeRyX+mtklEz6dIgo
+	G6XGA3R0F6IJD0W7grTZXTGREw==
+X-Google-Smtp-Source: APXvYqzfSifeN3A7p8lZN8zEX1KXl0QFhDx9CRy+CiI1Ym6UyFBJqfzZaXr6ZBpeCkc4QbGfcuxq6Q==
+X-Received: by 2002:a63:6193:: with SMTP id v141mr6272757pgb.392.1552396628802;
+	Tue, 12 Mar 2019 06:17:08 -0700 (PDT)
 Received: from localhost
 	(2001-b011-7001-120c-5816-f057-fc2f-b780.dynamic-ip6.hinet.net.
 	[2001:b011:7001:120c:5816:f057:fc2f:b780])
 	by smtp.gmail.com with ESMTPSA id
-	n75sm17343899pfb.39.2019.03.12.06.16.58
+	i13sm13129029pfo.106.2019.03.12.06.17.07
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 12 Mar 2019 06:16:59 -0700 (PDT)
-Date: Tue, 12 Mar 2019 06:15:23 -0700
-Message-Id: <20190312131526.14710-27-palmer@sifive.com>
+	Tue, 12 Mar 2019 06:17:08 -0700 (PDT)
+Date: Tue, 12 Mar 2019 06:15:26 -0700
+Message-Id: <20190312131526.14710-30-palmer@sifive.com>
 X-Mailer: git-send-email 2.19.2
 In-Reply-To: <20190312131526.14710-1-palmer@sifive.com>
 References: <20190312131526.14710-1-palmer@sifive.com>
@@ -62,9 +62,8 @@ From: Palmer Dabbelt <palmer@sifive.com>
 To: Peter Maydell <peter.maydell@linaro.org>
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::52a
-Subject: [Qemu-riscv] [PULL 26/29] target/riscv: Remove manual decoding of
- RV32/64M insn
+X-Received-From: 2607:f8b0:4864:20::436
+Subject: [Qemu-riscv] [PULL 29/29] target/riscv: Remove decode_RV32_64G()
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -76,485 +75,60 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Mar 2019 13:30:24 -0000
+X-List-Received-Date: Tue, 12 Mar 2019 13:30:21 -0000
 
 From: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+
+decodetree handles all instructions now so the fallback is not necessary
+anymore.
 
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Signed-off-by: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
 Signed-off-by: Peer Adelt <peer.adelt@hni.uni-paderborn.de>
 Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
 ---
- target/riscv/insn_trans/trans_rvm.inc.c |  55 ++--
- target/riscv/translate.c                | 320 ++++++++++--------------
- 2 files changed, 164 insertions(+), 211 deletions(-)
+ target/riscv/translate.c | 21 +--------------------
+ 1 file changed, 1 insertion(+), 20 deletions(-)
 
-diff --git a/target/riscv/insn_trans/trans_rvm.inc.c b/target/riscv/insn_trans/trans_rvm.inc.c
-index 69631c9e3783..d2bf2f171904 100644
---- a/target/riscv/insn_trans/trans_rvm.inc.c
-+++ b/target/riscv/insn_trans/trans_rvm.inc.c
-@@ -22,92 +22,99 @@
- static bool trans_mul(DisasContext *ctx, arg_mul *a)
- {
-     REQUIRE_EXT(ctx, RVM);
--    gen_arith(ctx, OPC_RISC_MUL, a->rd, a->rs1, a->rs2);
--    return true;
-+    return trans_arith(ctx, a, &tcg_gen_mul_tl);
- }
- 
- static bool trans_mulh(DisasContext *ctx, arg_mulh *a)
- {
-     REQUIRE_EXT(ctx, RVM);
--    gen_arith(ctx, OPC_RISC_MULH, a->rd, a->rs1, a->rs2);
-+    TCGv source1 = tcg_temp_new();
-+    TCGv source2 = tcg_temp_new();
-+    gen_get_gpr(source1, a->rs1);
-+    gen_get_gpr(source2, a->rs2);
-+
-+    tcg_gen_muls2_tl(source2, source1, source1, source2);
-+
-+    gen_set_gpr(a->rd, source1);
-+    tcg_temp_free(source1);
-+    tcg_temp_free(source2);
-     return true;
- }
- 
- static bool trans_mulhsu(DisasContext *ctx, arg_mulhsu *a)
- {
-     REQUIRE_EXT(ctx, RVM);
--    gen_arith(ctx, OPC_RISC_MULHSU, a->rd, a->rs1, a->rs2);
--    return true;
-+    return trans_arith(ctx, a, &gen_mulhsu);
- }
- 
- static bool trans_mulhu(DisasContext *ctx, arg_mulhu *a)
- {
-     REQUIRE_EXT(ctx, RVM);
--    gen_arith(ctx, OPC_RISC_MULHU, a->rd, a->rs1, a->rs2);
-+    TCGv source1 = tcg_temp_new();
-+    TCGv source2 = tcg_temp_new();
-+    gen_get_gpr(source1, a->rs1);
-+    gen_get_gpr(source2, a->rs2);
-+
-+    tcg_gen_mulu2_tl(source2, source1, source1, source2);
-+
-+    gen_set_gpr(a->rd, source1);
-+    tcg_temp_free(source1);
-+    tcg_temp_free(source2);
-     return true;
- }
- 
- static bool trans_div(DisasContext *ctx, arg_div *a)
- {
-     REQUIRE_EXT(ctx, RVM);
--    gen_arith(ctx, OPC_RISC_DIV, a->rd, a->rs1, a->rs2);
--    return true;
-+    return trans_arith(ctx, a, &gen_div);
- }
- 
- static bool trans_divu(DisasContext *ctx, arg_divu *a)
- {
-     REQUIRE_EXT(ctx, RVM);
--    gen_arith(ctx, OPC_RISC_DIVU, a->rd, a->rs1, a->rs2);
--    return true;
-+    return trans_arith(ctx, a, &gen_divu);
- }
- 
- static bool trans_rem(DisasContext *ctx, arg_rem *a)
- {
-     REQUIRE_EXT(ctx, RVM);
--    gen_arith(ctx, OPC_RISC_REM, a->rd, a->rs1, a->rs2);
--    return true;
-+    return trans_arith(ctx, a, &gen_rem);
- }
- 
- static bool trans_remu(DisasContext *ctx, arg_remu *a)
- {
-     REQUIRE_EXT(ctx, RVM);
--    gen_arith(ctx, OPC_RISC_REMU, a->rd, a->rs1, a->rs2);
--    return true;
-+    return trans_arith(ctx, a, &gen_remu);
- }
- 
- #ifdef TARGET_RISCV64
- static bool trans_mulw(DisasContext *ctx, arg_mulw *a)
- {
-     REQUIRE_EXT(ctx, RVM);
--    gen_arith(ctx, OPC_RISC_MULW, a->rd, a->rs1, a->rs2);
--    return true;
-+    return trans_arith(ctx, a, &gen_mulw);
- }
- 
- static bool trans_divw(DisasContext *ctx, arg_divw *a)
- {
-     REQUIRE_EXT(ctx, RVM);
--    gen_arith(ctx, OPC_RISC_DIVW, a->rd, a->rs1, a->rs2);
--    return true;
-+    return gen_arith_div_w(ctx, a, &gen_div);
- }
- 
- static bool trans_divuw(DisasContext *ctx, arg_divuw *a)
- {
-     REQUIRE_EXT(ctx, RVM);
--    gen_arith(ctx, OPC_RISC_DIVUW, a->rd, a->rs1, a->rs2);
--    return true;
-+    return gen_arith_div_w(ctx, a, &gen_divu);
- }
- 
- static bool trans_remw(DisasContext *ctx, arg_remw *a)
- {
-     REQUIRE_EXT(ctx, RVM);
--    gen_arith(ctx, OPC_RISC_REMW, a->rd, a->rs1, a->rs2);
--    return true;
-+    return gen_arith_div_w(ctx, a, &gen_rem);
- }
- 
- static bool trans_remuw(DisasContext *ctx, arg_remuw *a)
- {
-     REQUIRE_EXT(ctx, RVM);
--    gen_arith(ctx, OPC_RISC_REMUW, a->rd, a->rs1, a->rs2);
--    return true;
-+    return gen_arith_div_w(ctx, a, &gen_remu);
- }
- #endif
 diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 9ae40f65096f..3cd7e16c63cf 100644
+index 92be090bc7bb..049fa65c6611 100644
 --- a/target/riscv/translate.c
 +++ b/target/riscv/translate.c
-@@ -188,193 +188,112 @@ static void gen_mulhsu(TCGv ret, TCGv arg1, TCGv arg2)
-     tcg_temp_free(rh);
- }
+@@ -651,24 +651,6 @@ bool decode_insn16(DisasContext *ctx, uint16_t insn);
+ #include "decode_insn16.inc.c"
+ #include "insn_trans/trans_rvc.inc.c"
  
--static void gen_arith(DisasContext *ctx, uint32_t opc, int rd, int rs1,
--        int rs2)
+-static void decode_RV32_64G(DisasContext *ctx)
 -{
--    TCGv source1, source2, cond1, cond2, zeroreg, resultopt1;
--    source1 = tcg_temp_new();
--    source2 = tcg_temp_new();
--    gen_get_gpr(source1, rs1);
--    gen_get_gpr(source2, rs2);
+-    uint32_t op;
 -
--    switch (opc) {
--    CASE_OP_32_64(OPC_RISC_MUL):
--        if (!has_ext(ctx, RVM)) {
--            goto do_illegal;
--        }
--        tcg_gen_mul_tl(source1, source1, source2);
--        break;
--    case OPC_RISC_MULH:
--        if (!has_ext(ctx, RVM)) {
--            goto do_illegal;
--        }
--        tcg_gen_muls2_tl(source2, source1, source1, source2);
--        break;
--    case OPC_RISC_MULHSU:
--        if (!has_ext(ctx, RVM)) {
--            goto do_illegal;
--        }
--        gen_mulhsu(source1, source1, source2);
--        break;
--    case OPC_RISC_MULHU:
--        if (!has_ext(ctx, RVM)) {
--            goto do_illegal;
--        }
--        tcg_gen_mulu2_tl(source2, source1, source1, source2);
--        break;
--#if defined(TARGET_RISCV64)
--    case OPC_RISC_DIVW:
--        if (!has_ext(ctx, RVM)) {
--            goto do_illegal;
--        }
--        tcg_gen_ext32s_tl(source1, source1);
--        tcg_gen_ext32s_tl(source2, source2);
--        /* fall through to DIV */
--#endif
--    case OPC_RISC_DIV:
--        if (!has_ext(ctx, RVM)) {
--            goto do_illegal;
--        }
--        /* Handle by altering args to tcg_gen_div to produce req'd results:
--         * For overflow: want source1 in source1 and 1 in source2
--         * For div by zero: want -1 in source1 and 1 in source2 -> -1 result */
--        cond1 = tcg_temp_new();
--        cond2 = tcg_temp_new();
--        zeroreg = tcg_const_tl(0);
--        resultopt1 = tcg_temp_new();
+-    /* We do not do misaligned address check here: the address should never be
+-     * misaligned at this point. Instructions that set PC must do the check,
+-     * since epc must be the address of the instruction that caused us to
+-     * perform the misaligned instruction fetch */
 -
--        tcg_gen_movi_tl(resultopt1, (target_ulong)-1);
--        tcg_gen_setcondi_tl(TCG_COND_EQ, cond2, source2, (target_ulong)(~0L));
--        tcg_gen_setcondi_tl(TCG_COND_EQ, cond1, source1,
--                            ((target_ulong)1) << (TARGET_LONG_BITS - 1));
--        tcg_gen_and_tl(cond1, cond1, cond2); /* cond1 = overflow */
--        tcg_gen_setcondi_tl(TCG_COND_EQ, cond2, source2, 0); /* cond2 = div 0 */
--        /* if div by zero, set source1 to -1, otherwise don't change */
--        tcg_gen_movcond_tl(TCG_COND_EQ, source1, cond2, zeroreg, source1,
--                resultopt1);
--        /* if overflow or div by zero, set source2 to 1, else don't change */
--        tcg_gen_or_tl(cond1, cond1, cond2);
--        tcg_gen_movi_tl(resultopt1, (target_ulong)1);
--        tcg_gen_movcond_tl(TCG_COND_EQ, source2, cond1, zeroreg, source2,
--                resultopt1);
--        tcg_gen_div_tl(source1, source1, source2);
+-    op = MASK_OP_MAJOR(ctx->opcode);
 -
--        tcg_temp_free(cond1);
--        tcg_temp_free(cond2);
--        tcg_temp_free(zeroreg);
--        tcg_temp_free(resultopt1);
--        break;
--#if defined(TARGET_RISCV64)
--    case OPC_RISC_DIVUW:
--        if (!has_ext(ctx, RVM)) {
--            goto do_illegal;
--        }
--        tcg_gen_ext32u_tl(source1, source1);
--        tcg_gen_ext32u_tl(source2, source2);
--        /* fall through to DIVU */
--#endif
--    case OPC_RISC_DIVU:
--        if (!has_ext(ctx, RVM)) {
--            goto do_illegal;
--        }
--        cond1 = tcg_temp_new();
--        zeroreg = tcg_const_tl(0);
--        resultopt1 = tcg_temp_new();
--
--        tcg_gen_setcondi_tl(TCG_COND_EQ, cond1, source2, 0);
--        tcg_gen_movi_tl(resultopt1, (target_ulong)-1);
--        tcg_gen_movcond_tl(TCG_COND_EQ, source1, cond1, zeroreg, source1,
--                resultopt1);
--        tcg_gen_movi_tl(resultopt1, (target_ulong)1);
--        tcg_gen_movcond_tl(TCG_COND_EQ, source2, cond1, zeroreg, source2,
--                resultopt1);
--        tcg_gen_divu_tl(source1, source1, source2);
--
--        tcg_temp_free(cond1);
--        tcg_temp_free(zeroreg);
--        tcg_temp_free(resultopt1);
--        break;
--#if defined(TARGET_RISCV64)
--    case OPC_RISC_REMW:
--        if (!has_ext(ctx, RVM)) {
--            goto do_illegal;
--        }
--        tcg_gen_ext32s_tl(source1, source1);
--        tcg_gen_ext32s_tl(source2, source2);
--        /* fall through to REM */
--#endif
--    case OPC_RISC_REM:
--        if (!has_ext(ctx, RVM)) {
--            goto do_illegal;
--        }
--        cond1 = tcg_temp_new();
--        cond2 = tcg_temp_new();
--        zeroreg = tcg_const_tl(0);
--        resultopt1 = tcg_temp_new();
--
--        tcg_gen_movi_tl(resultopt1, 1L);
--        tcg_gen_setcondi_tl(TCG_COND_EQ, cond2, source2, (target_ulong)-1);
--        tcg_gen_setcondi_tl(TCG_COND_EQ, cond1, source1,
--                            (target_ulong)1 << (TARGET_LONG_BITS - 1));
--        tcg_gen_and_tl(cond2, cond1, cond2); /* cond1 = overflow */
--        tcg_gen_setcondi_tl(TCG_COND_EQ, cond1, source2, 0); /* cond2 = div 0 */
--        /* if overflow or div by zero, set source2 to 1, else don't change */
--        tcg_gen_or_tl(cond2, cond1, cond2);
--        tcg_gen_movcond_tl(TCG_COND_EQ, source2, cond2, zeroreg, source2,
--                resultopt1);
--        tcg_gen_rem_tl(resultopt1, source1, source2);
--        /* if div by zero, just return the original dividend */
--        tcg_gen_movcond_tl(TCG_COND_EQ, source1, cond1, zeroreg, resultopt1,
--                source1);
--
--        tcg_temp_free(cond1);
--        tcg_temp_free(cond2);
--        tcg_temp_free(zeroreg);
--        tcg_temp_free(resultopt1);
--        break;
--#if defined(TARGET_RISCV64)
--    case OPC_RISC_REMUW:
--        if (!has_ext(ctx, RVM)) {
--            goto do_illegal;
--        }
--        tcg_gen_ext32u_tl(source1, source1);
--        tcg_gen_ext32u_tl(source2, source2);
--        /* fall through to REMU */
--#endif
--    case OPC_RISC_REMU:
--        if (!has_ext(ctx, RVM)) {
--            goto do_illegal;
--        }
--        cond1 = tcg_temp_new();
--        zeroreg = tcg_const_tl(0);
--        resultopt1 = tcg_temp_new();
--
--        tcg_gen_movi_tl(resultopt1, (target_ulong)1);
--        tcg_gen_setcondi_tl(TCG_COND_EQ, cond1, source2, 0);
--        tcg_gen_movcond_tl(TCG_COND_EQ, source2, cond1, zeroreg, source2,
--                resultopt1);
--        tcg_gen_remu_tl(resultopt1, source1, source2);
--        /* if div by zero, just return the original dividend */
--        tcg_gen_movcond_tl(TCG_COND_EQ, source1, cond1, zeroreg, resultopt1,
--                source1);
--
--        tcg_temp_free(cond1);
--        tcg_temp_free(zeroreg);
--        tcg_temp_free(resultopt1);
--        break;
--    do_illegal:
+-    switch (op) {
 -    default:
 -        gen_exception_illegal(ctx);
--        return;
+-        break;
 -    }
+-}
 -
--    if (opc & 0x8) { /* sign extend for W instructions */
--        tcg_gen_ext32s_tl(source1, source1);
--    }
--
--    gen_set_gpr(rd, source1);
--    tcg_temp_free(source1);
--    tcg_temp_free(source2);
-+static void gen_div(TCGv ret, TCGv source1, TCGv source2)
-+{
-+    TCGv cond1, cond2, zeroreg, resultopt1;
-+    /*
-+     * Handle by altering args to tcg_gen_div to produce req'd results:
-+     * For overflow: want source1 in source1 and 1 in source2
-+     * For div by zero: want -1 in source1 and 1 in source2 -> -1 result
-+     */
-+    cond1 = tcg_temp_new();
-+    cond2 = tcg_temp_new();
-+    zeroreg = tcg_const_tl(0);
-+    resultopt1 = tcg_temp_new();
-+
-+    tcg_gen_movi_tl(resultopt1, (target_ulong)-1);
-+    tcg_gen_setcondi_tl(TCG_COND_EQ, cond2, source2, (target_ulong)(~0L));
-+    tcg_gen_setcondi_tl(TCG_COND_EQ, cond1, source1,
-+                        ((target_ulong)1) << (TARGET_LONG_BITS - 1));
-+    tcg_gen_and_tl(cond1, cond1, cond2); /* cond1 = overflow */
-+    tcg_gen_setcondi_tl(TCG_COND_EQ, cond2, source2, 0); /* cond2 = div 0 */
-+    /* if div by zero, set source1 to -1, otherwise don't change */
-+    tcg_gen_movcond_tl(TCG_COND_EQ, source1, cond2, zeroreg, source1,
-+            resultopt1);
-+    /* if overflow or div by zero, set source2 to 1, else don't change */
-+    tcg_gen_or_tl(cond1, cond1, cond2);
-+    tcg_gen_movi_tl(resultopt1, (target_ulong)1);
-+    tcg_gen_movcond_tl(TCG_COND_EQ, source2, cond1, zeroreg, source2,
-+            resultopt1);
-+    tcg_gen_div_tl(ret, source1, source2);
-+
-+    tcg_temp_free(cond1);
-+    tcg_temp_free(cond2);
-+    tcg_temp_free(zeroreg);
-+    tcg_temp_free(resultopt1);
-+}
-+
-+static void gen_divu(TCGv ret, TCGv source1, TCGv source2)
-+{
-+    TCGv cond1, zeroreg, resultopt1;
-+    cond1 = tcg_temp_new();
-+
-+    zeroreg = tcg_const_tl(0);
-+    resultopt1 = tcg_temp_new();
-+
-+    tcg_gen_setcondi_tl(TCG_COND_EQ, cond1, source2, 0);
-+    tcg_gen_movi_tl(resultopt1, (target_ulong)-1);
-+    tcg_gen_movcond_tl(TCG_COND_EQ, source1, cond1, zeroreg, source1,
-+            resultopt1);
-+    tcg_gen_movi_tl(resultopt1, (target_ulong)1);
-+    tcg_gen_movcond_tl(TCG_COND_EQ, source2, cond1, zeroreg, source2,
-+            resultopt1);
-+    tcg_gen_divu_tl(ret, source1, source2);
-+
-+    tcg_temp_free(cond1);
-+    tcg_temp_free(zeroreg);
-+    tcg_temp_free(resultopt1);
-+}
-+
-+static void gen_rem(TCGv ret, TCGv source1, TCGv source2)
-+{
-+    TCGv cond1, cond2, zeroreg, resultopt1;
-+
-+    cond1 = tcg_temp_new();
-+    cond2 = tcg_temp_new();
-+    zeroreg = tcg_const_tl(0);
-+    resultopt1 = tcg_temp_new();
-+
-+    tcg_gen_movi_tl(resultopt1, 1L);
-+    tcg_gen_setcondi_tl(TCG_COND_EQ, cond2, source2, (target_ulong)-1);
-+    tcg_gen_setcondi_tl(TCG_COND_EQ, cond1, source1,
-+                        (target_ulong)1 << (TARGET_LONG_BITS - 1));
-+    tcg_gen_and_tl(cond2, cond1, cond2); /* cond1 = overflow */
-+    tcg_gen_setcondi_tl(TCG_COND_EQ, cond1, source2, 0); /* cond2 = div 0 */
-+    /* if overflow or div by zero, set source2 to 1, else don't change */
-+    tcg_gen_or_tl(cond2, cond1, cond2);
-+    tcg_gen_movcond_tl(TCG_COND_EQ, source2, cond2, zeroreg, source2,
-+            resultopt1);
-+    tcg_gen_rem_tl(resultopt1, source1, source2);
-+    /* if div by zero, just return the original dividend */
-+    tcg_gen_movcond_tl(TCG_COND_EQ, ret, cond1, zeroreg, resultopt1,
-+            source1);
-+
-+    tcg_temp_free(cond1);
-+    tcg_temp_free(cond2);
-+    tcg_temp_free(zeroreg);
-+    tcg_temp_free(resultopt1);
-+}
-+
-+static void gen_remu(TCGv ret, TCGv source1, TCGv source2)
-+{
-+    TCGv cond1, zeroreg, resultopt1;
-+    cond1 = tcg_temp_new();
-+    zeroreg = tcg_const_tl(0);
-+    resultopt1 = tcg_temp_new();
-+
-+    tcg_gen_movi_tl(resultopt1, (target_ulong)1);
-+    tcg_gen_setcondi_tl(TCG_COND_EQ, cond1, source2, 0);
-+    tcg_gen_movcond_tl(TCG_COND_EQ, source2, cond1, zeroreg, source2,
-+            resultopt1);
-+    tcg_gen_remu_tl(resultopt1, source1, source2);
-+    /* if div by zero, just return the original dividend */
-+    tcg_gen_movcond_tl(TCG_COND_EQ, ret, cond1, zeroreg, resultopt1,
-+            source1);
-+
-+    tcg_temp_free(cond1);
-+    tcg_temp_free(zeroreg);
-+    tcg_temp_free(resultopt1);
+ static void decode_opc(DisasContext *ctx)
+ {
+     /* check for compressed insn */
+@@ -685,8 +667,7 @@ static void decode_opc(DisasContext *ctx)
+     } else {
+         ctx->pc_succ_insn = ctx->base.pc_next + 4;
+         if (!decode_insn32(ctx, ctx->opcode)) {
+-            /* fallback to old decoder */
+-            decode_RV32_64G(ctx);
++            gen_exception_illegal(ctx);
+         }
+     }
  }
- 
- static void gen_jal(DisasContext *ctx, int rd, target_ulong imm)
-@@ -681,6 +600,33 @@ static void gen_subw(TCGv ret, TCGv arg1, TCGv arg2)
-     tcg_gen_ext32s_tl(ret, ret);
- }
- 
-+static void gen_mulw(TCGv ret, TCGv arg1, TCGv arg2)
-+{
-+    tcg_gen_mul_tl(ret, arg1, arg2);
-+    tcg_gen_ext32s_tl(ret, ret);
-+}
-+
-+static bool gen_arith_div_w(DisasContext *ctx, arg_r *a,
-+                            void(*func)(TCGv, TCGv, TCGv))
-+{
-+    TCGv source1, source2;
-+    source1 = tcg_temp_new();
-+    source2 = tcg_temp_new();
-+
-+    gen_get_gpr(source1, a->rs1);
-+    gen_get_gpr(source2, a->rs2);
-+    tcg_gen_ext32s_tl(source1, source1);
-+    tcg_gen_ext32s_tl(source2, source2);
-+
-+    (*func)(source1, source1, source2);
-+
-+    tcg_gen_ext32s_tl(source1, source1);
-+    gen_set_gpr(a->rd, source1);
-+    tcg_temp_free(source1);
-+    tcg_temp_free(source2);
-+    return true;
-+}
-+
- #endif
- 
- static bool trans_arith(DisasContext *ctx, arg_r *a,
 -- 
 2.19.2
 
