@@ -1,71 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1h3hUo-00048c-Jj
-	for mharc-qemu-riscv@gnu.org; Tue, 12 Mar 2019 09:31:06 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:54897)
+	id 1h3hUp-00049m-Ht
+	for mharc-qemu-riscv@gnu.org; Tue, 12 Mar 2019 09:31:07 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:54601)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1h3hUh-00033q-91
-	for qemu-riscv@nongnu.org; Tue, 12 Mar 2019 09:31:02 -0400
+	(envelope-from <palmer@sifive.com>) id 1h3hUk-0002x0-RT
+	for qemu-riscv@nongnu.org; Tue, 12 Mar 2019 09:31:06 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1h3hG8-0007tV-Hn
-	for qemu-riscv@nongnu.org; Tue, 12 Mar 2019 09:15:58 -0400
-Received: from mail-pg1-x532.google.com ([2607:f8b0:4864:20::532]:34010)
+	(envelope-from <palmer@sifive.com>) id 1h3hFx-0007jP-CO
+	for qemu-riscv@nongnu.org; Tue, 12 Mar 2019 09:15:46 -0400
+Received: from mail-pg1-x529.google.com ([2607:f8b0:4864:20::529]:36799)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1h3hG8-0007sn-5z
-	for qemu-riscv@nongnu.org; Tue, 12 Mar 2019 09:15:56 -0400
-Received: by mail-pg1-x532.google.com with SMTP id v12so1838254pgq.1
-	for <qemu-riscv@nongnu.org>; Tue, 12 Mar 2019 06:15:56 -0700 (PDT)
+	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1h3hFw-0007iQ-L1
+	for qemu-riscv@nongnu.org; Tue, 12 Mar 2019 09:15:45 -0400
+Received: by mail-pg1-x529.google.com with SMTP id r124so1829261pgr.3
+	for <qemu-riscv@nongnu.org>; Tue, 12 Mar 2019 06:15:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
-	h=subject:date:message-id:in-reply-to:references:mime-version
-	:content-transfer-encoding:cc:from:to;
-	bh=KRdR6FRJvYjFCTpCcfewpyOvfDv7iI4lTximzGSasHI=;
-	b=ld1xIMWtpPR/QMaGNO5ig2Ly9Hk9gKkcuoIWtir3hb6X4C48XDlj4xfNLCo7BQQkaD
-	DbO7Pzi+N4gdaiUrnzrP264df3/C4PXxQjS9f7Va82f1HUgyPma2h5bAiWIHmcotSAiC
-	TVD12FFG3OD6DctM6x3uOOL8Bz8DoaeqEepXaLZfVNtzy0kZLDaG2fOkFMbYeZ5jqM7q
-	6NkvZuKcgv6oiwfoIBGiwFABmZ8mhFdv+RAz42NqN/HgDvWl9TLpZxprjMateZnlcw5A
-	GKAT2DUI2Mt4Lom2vMECwobQienz43H7qqzHlE8VwkhWmVGSXYC9sn1XBeNfXDYedAZy
-	f6ng==
+	h=subject:date:message-id:mime-version:content-transfer-encoding:cc
+	:from:to; bh=+e0MlRD3z2Cahcb2KBbEOftYUp2XeMUlRySGW8tmrNE=;
+	b=CuL0R0kCGns5ib+GzjzpLKAILKEzHBbTVORYGBlnl3ooy5j/ASy2I+MZy1d2AbxDqc
+	ZdHOhfzjR8k3ekktEtHFs8fjG5NGmdlnKE6dw2FNiNoYqn8Mj2bY+t8CdBOJGkkwiuyL
+	8d686hL0EwCaxz8EXR7lVSve+wMD+xfICi6RgPn4wRntsBPRDuVCFcXdQJj2CckF1W9d
+	7Tx94H+PsLIfuPOcGFu7SiFWifLTlwOdhMtoc/rSxSO4RWozNLTGNUCftlJuVMgRryeT
+	raN+Aj+7ayJL0ZI+ob+IUfXmlEafPTy/wWdR105q8s5JScw9H2RhgoJPgr6GTy+QjTy/
+	WQRg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding:cc:from:to;
-	bh=KRdR6FRJvYjFCTpCcfewpyOvfDv7iI4lTximzGSasHI=;
-	b=V9YWUZY+zczeimUe1jDSFXi0c35pIuD287N3pxKum1uaMQCuC3o8ajEERxXVwqmb/I
-	XBvX9Bm+ZKneZ2TKc1HPAp8qhD/byMnosmTmwFEoYxZUUdWACBja+7AwypyKsBs38fsb
-	gJjmZKcq76RlER9zyvrNP4de2zQ6hO/UmETPUo6yGIRjod+EQJlSTOrR1a1vyss7TSm6
-	lO65sfOVWFzxonTDL7pvx+6w76tPMp/e7GVeX+qhypki0UTtxZzoLbZVTpYxeIijawvg
-	w+CBwgTAcWmI67C8GIx5gGIavi8dGzc91yIfTPDEqA6d9hQV79BBdhqpD/4RWMnCr1DN
-	WKbg==
-X-Gm-Message-State: APjAAAVHsculufE5tLbbRq3n8otrNVFAuCqUVE2tCFzF/uvP0d/yS5WZ
-	R7Ztj6fmIAZF4wm9zuVVtnUVjg==
-X-Google-Smtp-Source: APXvYqz6mcjCnQ8DRuE0A4DeHhuTTfSy+IpgMZFfhWrHVqdRZcn0yGIed/hKpHbG6Ocdu8+hz4Dkjw==
-X-Received: by 2002:a17:902:e3:: with SMTP id
-	a90mr38835930pla.45.1552396555097; 
-	Tue, 12 Mar 2019 06:15:55 -0700 (PDT)
+	h=x-gm-message-state:subject:date:message-id:mime-version
+	:content-transfer-encoding:cc:from:to;
+	bh=+e0MlRD3z2Cahcb2KBbEOftYUp2XeMUlRySGW8tmrNE=;
+	b=D8900/zqgY3YgTAmgufT7bgq1HnKf583/ShrwrFYC1M44E5YrnwMHoI9MjcGW4he/n
+	2EpUGNHduoDldvwpSdNZLMAamH4s/PIUzJmDOOBJq31mFvKSwI5rTo2+Oz82ZV3kAy1V
+	QqjQTMHhBSUr6yc8hAPcnGZc0ogVagbfgL7+DUI8Cg8RhthABKRfnLpM/mglAzRAblGO
+	fm22VUPjTng9WHBnvvvKMq4UWEfhKO/yJXeplNI2HUpSUwoZOySYx/P85873ERMpliMV
+	xoif7oXG0Ot67EyRyam3XBORTFkfIkcDJ00mjI5j6cuKKPjULv41XlRe9kyp7fnuPncp
+	TxwA==
+X-Gm-Message-State: APjAAAWR9x0Zje4HSljgJNwTpFwQstGULXdcCo0tEWrn4UvfgGE+pVUT
+	l7QPNpcQd21oFqX/LliwacgGyA==
+X-Google-Smtp-Source: APXvYqzzXH5K2o5OBjxYWhqKjeq+m+RiGtZlPs2P+foGPvfEXMpXGHUTMlcr5RSNU79O15zxTsJnSA==
+X-Received: by 2002:a65:6554:: with SMTP id a20mr34955381pgw.170.1552396542704;
+	Tue, 12 Mar 2019 06:15:42 -0700 (PDT)
 Received: from localhost
 	(2001-b011-7001-120c-5816-f057-fc2f-b780.dynamic-ip6.hinet.net.
 	[2001:b011:7001:120c:5816:f057:fc2f:b780])
 	by smtp.gmail.com with ESMTPSA id
-	y68sm10742307pgy.67.2019.03.12.06.15.53
+	d5sm14784421pfo.83.2019.03.12.06.15.41
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 12 Mar 2019 06:15:54 -0700 (PDT)
-Date: Tue, 12 Mar 2019 06:15:01 -0700
-Message-Id: <20190312131526.14710-5-palmer@sifive.com>
+	Tue, 12 Mar 2019 06:15:41 -0700 (PDT)
+Date: Tue, 12 Mar 2019 06:14:57 -0700
+Message-Id: <20190312131526.14710-1-palmer@sifive.com>
 X-Mailer: git-send-email 2.19.2
-In-Reply-To: <20190312131526.14710-1-palmer@sifive.com>
-References: <20190312131526.14710-1-palmer@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Cc: qemu-devel@nongnu.org,       qemu-riscv@nongnu.org,
-	Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
-	Peer Adelt <peer.adelt@hni.uni-paderborn.de>, 
-	Palmer Dabbelt <palmer@sifive.com>
+Cc: qemu-devel@nongnu.org,       qemu-riscv@nongnu.org
 From: Palmer Dabbelt <palmer@sifive.com>
 To: Peter Maydell <peter.maydell@linaro.org>
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::532
-Subject: [Qemu-riscv] [PULL 04/29] target/riscv: Convert RV64I load/store
- insns to decodetree
+X-Received-From: 2607:f8b0:4864:20::529
+Subject: [Qemu-riscv] [PULL] target/riscv: Convert to decodetree
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -77,125 +69,105 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Mar 2019 13:31:02 -0000
+X-List-Received-Date: Tue, 12 Mar 2019 13:31:06 -0000
 
-From: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+The following changes since commit 377b155bde451d5ac545fbdcdfbf6ca17a4228f5:
 
-this splits the 64-bit only instructions into its own decode file such
-that we generate the decoder for these instructions only for the RISC-V
-64 bit target.
+  Merge remote-tracking branch 'remotes/bonzini/tags/for-upstream' into staging (2019-03-11 18:26:37 +0000)
 
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Signed-off-by: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-Signed-off-by: Peer Adelt <peer.adelt@hni.uni-paderborn.de>
-Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
----
- target/riscv/Makefile.objs              |  8 +++++---
- target/riscv/insn32-64.decode           | 25 +++++++++++++++++++++++++
- target/riscv/insn_trans/trans_rvi.inc.c | 20 ++++++++++++++++++++
- target/riscv/translate.c                |  7 -------
- 4 files changed, 50 insertions(+), 10 deletions(-)
+are available in the Git repository at:
+
+  git://github.com/palmer-dabbelt/qemu.git tags/riscv-for-master-4.0-sf3
+
+for you to fetch changes up to a971f8ae0e8ab6fab1eee199961b1ea2f4d876f7:
+
+  target/riscv: Remove decode_RV32_64G() (2019-03-12 03:08:34 -0700)
+
+----------------------------------------------------------------
+target/riscv: Convert to decodetree
+
+Bastian: this patchset converts the RISC-V decoder to decodetree in four major steps:
+
+1) Convert 32-bit instructions to decodetree [Patch 1-15]:
+    Many of the gen_* functions are called by the decode functions for 16-bit
+    and 32-bit functions. If we move translation code from the gen_*
+    functions to the generated trans_* functions of decode-tree, we get a lot of
+    duplication. Therefore, we mostly generate calls to the old gen_* function
+    which are properly replaced after step 2).
+
+    Each of the trans_ functions are grouped into files corresponding to their
+    ISA extension, e.g. addi which is in RV32I is translated in the file
+    'trans_rvi.inc.c'.
+
+2) Convert 16-bit instructions to decodetree [Patch 16-18]:
+    All 16 bit instructions have a direct mapping to a 32 bit instruction. Thus,
+    we convert the arguments in the 16 bit trans_ function to the arguments of
+    the corresponding 32 bit instruction and call the 32 bit trans_ function.
+
+3) Remove old manual decoding in gen_* function [Patch 19-29]:
+    this move all manual translation code into the trans_* instructions of
+    decode tree, such that we can remove the old decode_* functions.
+
+Palmer: This, with some additional cleanup patches, passed Alistar's
+testing on rv32 and rv64 as well as my testing on rv64, so I think it's
+good to go.  I've run my standard test against this exact tag.  I
+haven't tested the OSX build because I didn't find an OSX machine (I'm
+traveling), but I removed the offending commits so hopefully we're safe.
+
+----------------------------------------------------------------
+Bastian Koppelmann (29):
+      target/riscv: Activate decodetree and implemnt LUI & AUIPC
+      target/riscv: Convert RVXI branch insns to decodetree
+      target/riscv: Convert RV32I load/store insns to decodetree
+      target/riscv: Convert RV64I load/store insns to decodetree
+      target/riscv: Convert RVXI arithmetic insns to decodetree
+      target/riscv: Convert RVXI fence insns to decodetree
+      target/riscv: Convert RVXI csr insns to decodetree
+      target/riscv: Convert RVXM insns to decodetree
+      target/riscv: Convert RV32A insns to decodetree
+      target/riscv: Convert RV64A insns to decodetree
+      target/riscv: Convert RV32F insns to decodetree
+      target/riscv: Convert RV64F insns to decodetree
+      target/riscv: Convert RV32D insns to decodetree
+      target/riscv: Convert RV64D insns to decodetree
+      target/riscv: Convert RV priv insns to decodetree
+      target/riscv: Convert quadrant 0 of RVXC insns to decodetree
+      target/riscv: Convert quadrant 1 of RVXC insns to decodetree
+      target/riscv: Convert quadrant 2 of RVXC insns to decodetree
+      target/riscv: Remove gen_jalr()
+      target/riscv: Remove manual decoding from gen_branch()
+      target/riscv: Remove manual decoding from gen_load()
+      target/riscv: Remove manual decoding from gen_store()
+      target/riscv: Move gen_arith_imm() decoding into trans_* functions
+      target/riscv: make ADD/SUB/OR/XOR/AND insn use arg lists
+      target/riscv: Remove shift and slt insn manual decoding
+      target/riscv: Remove manual decoding of RV32/64M insn
+      target/riscv: Rename trans_arith to gen_arith
+      target/riscv: Remove gen_system()
+      target/riscv: Remove decode_RV32_64G()
+
+ target/riscv/Makefile.objs                     |   19 +
+ target/riscv/insn16.decode                     |  129 ++
+ target/riscv/insn32-64.decode                  |   72 +
+ target/riscv/insn32.decode                     |  201 +++
+ target/riscv/insn_trans/trans_privileged.inc.c |  110 ++
+ target/riscv/insn_trans/trans_rva.inc.c        |  218 +++
+ target/riscv/insn_trans/trans_rvc.inc.c        |  327 +++++
+ target/riscv/insn_trans/trans_rvd.inc.c        |  442 ++++++
+ target/riscv/insn_trans/trans_rvf.inc.c        |  439 ++++++
+ target/riscv/insn_trans/trans_rvi.inc.c        |  568 ++++++++
+ target/riscv/insn_trans/trans_rvm.inc.c        |  120 ++
+ target/riscv/translate.c                       | 1847 ++++--------------------
+ 12 files changed, 2897 insertions(+), 1595 deletions(-)
+ create mode 100644 target/riscv/insn16.decode
  create mode 100644 target/riscv/insn32-64.decode
-
-diff --git a/target/riscv/Makefile.objs b/target/riscv/Makefile.objs
-index bf0a268033a0..05087a91bb85 100644
---- a/target/riscv/Makefile.objs
-+++ b/target/riscv/Makefile.objs
-@@ -2,10 +2,12 @@ obj-y += translate.o op_helper.o cpu_helper.o cpu.o csr.o fpu_helper.o gdbstub.o
- 
- DECODETREE = $(SRC_PATH)/scripts/decodetree.py
- 
--target/riscv/decode_insn32.inc.c: \
--  $(SRC_PATH)/target/riscv/insn32.decode $(DECODETREE)
-+decode32-y = $(SRC_PATH)/target/riscv/insn32.decode
-+decode32-$(TARGET_RISCV64) += $(SRC_PATH)/target/riscv/insn32-64.decode
-+
-+target/riscv/decode_insn32.inc.c: $(decode32-y) $(DECODETREE)
- 	$(call quiet-command, \
--	  $(PYTHON) $(DECODETREE) -o $@ --decode decode_insn32 $<, \
-+	  $(PYTHON) $(DECODETREE) -o $@ --decode decode_insn32 $(decode32-y), \
- 	  "GEN", $(TARGET_DIR)$@)
- 
- target/riscv/translate.o: target/riscv/decode_insn32.inc.c
-diff --git a/target/riscv/insn32-64.decode b/target/riscv/insn32-64.decode
-new file mode 100644
-index 000000000000..439d4e2c587b
---- /dev/null
-+++ b/target/riscv/insn32-64.decode
-@@ -0,0 +1,25 @@
-+#
-+# RISC-V translation routines for the RV Instruction Set.
-+#
-+# Copyright (c) 2018 Peer Adelt, peer.adelt@hni.uni-paderborn.de
-+#                    Bastian Koppelmann, kbastian@mail.uni-paderborn.de
-+#
-+# This program is free software; you can redistribute it and/or modify it
-+# under the terms and conditions of the GNU General Public License,
-+# version 2 or later, as published by the Free Software Foundation.
-+#
-+# This program is distributed in the hope it will be useful, but WITHOUT
-+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-+# FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-+# more details.
-+#
-+# You should have received a copy of the GNU General Public License along with
-+# this program.  If not, see <http://www.gnu.org/licenses/>.
-+
-+# This is concatenated with insn32.decode for risc64 targets.
-+# Most of the fields and formats are there.
-+
-+# *** RV64I Base Instruction Set (in addition to RV32I) ***
-+lwu      ............   ..... 110 ..... 0000011 @i
-+ld       ............   ..... 011 ..... 0000011 @i
-+sd       ....... .....  ..... 011 ..... 0100011 @s
-diff --git a/target/riscv/insn_trans/trans_rvi.inc.c b/target/riscv/insn_trans/trans_rvi.inc.c
-index d13b7b2b6d8f..61f708dba144 100644
---- a/target/riscv/insn_trans/trans_rvi.inc.c
-+++ b/target/riscv/insn_trans/trans_rvi.inc.c
-@@ -130,3 +130,23 @@ static bool trans_sw(DisasContext *ctx, arg_sw *a)
-     gen_store(ctx, OPC_RISC_SW, a->rs1, a->rs2, a->imm);
-     return true;
- }
-+
-+#ifdef TARGET_RISCV64
-+static bool trans_lwu(DisasContext *ctx, arg_lwu *a)
-+{
-+    gen_load(ctx, OPC_RISC_LWU, a->rd, a->rs1, a->imm);
-+    return true;
-+}
-+
-+static bool trans_ld(DisasContext *ctx, arg_ld *a)
-+{
-+    gen_load(ctx, OPC_RISC_LD, a->rd, a->rs1, a->imm);
-+    return true;
-+}
-+
-+static bool trans_sd(DisasContext *ctx, arg_sd *a)
-+{
-+    gen_store(ctx, OPC_RISC_SD, a->rs1, a->rs2, a->imm);
-+    return true;
-+}
-+#endif
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index fb284a5e08d6..2e35142ca2a4 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -1908,13 +1908,6 @@ static void decode_RV32_64G(DisasContext *ctx)
-     imm = GET_IMM(ctx->opcode);
- 
-     switch (op) {
--    case OPC_RISC_LOAD:
--        gen_load(ctx, MASK_OP_LOAD(ctx->opcode), rd, rs1, imm);
--        break;
--    case OPC_RISC_STORE:
--        gen_store(ctx, MASK_OP_STORE(ctx->opcode), rs1, rs2,
--                  GET_STORE_IMM(ctx->opcode));
--        break;
-     case OPC_RISC_ARITH_IMM:
- #if defined(TARGET_RISCV64)
-     case OPC_RISC_ARITH_IMM_W:
--- 
-2.19.2
+ create mode 100644 target/riscv/insn32.decode
+ create mode 100644 target/riscv/insn_trans/trans_privileged.inc.c
+ create mode 100644 target/riscv/insn_trans/trans_rva.inc.c
+ create mode 100644 target/riscv/insn_trans/trans_rvc.inc.c
+ create mode 100644 target/riscv/insn_trans/trans_rvd.inc.c
+ create mode 100644 target/riscv/insn_trans/trans_rvf.inc.c
+ create mode 100644 target/riscv/insn_trans/trans_rvi.inc.c
+ create mode 100644 target/riscv/insn_trans/trans_rvm.inc.c
 
 
