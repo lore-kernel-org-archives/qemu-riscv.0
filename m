@@ -1,67 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1h3Mvs-00065J-CV
-	for mharc-qemu-riscv@gnu.org; Mon, 11 Mar 2019 11:33:40 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:42203)
+	id 1h3hUC-0003Xw-GD
+	for mharc-qemu-riscv@gnu.org; Tue, 12 Mar 2019 09:30:28 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:55068)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <bmeng.cn@gmail.com>) id 1h3Mvq-0005vg-AX
-	for qemu-riscv@nongnu.org; Mon, 11 Mar 2019 11:33:39 -0400
+	(envelope-from <palmer@sifive.com>) id 1h3hU5-0003Hi-Fs
+	for qemu-riscv@nongnu.org; Tue, 12 Mar 2019 09:30:24 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <bmeng.cn@gmail.com>) id 1h3Mqe-0001DY-0R
-	for qemu-riscv@nongnu.org; Mon, 11 Mar 2019 11:28:17 -0400
-Received: from mail-ed1-x542.google.com ([2a00:1450:4864:20::542]:39357)
+	(envelope-from <palmer@sifive.com>) id 1h3hHC-0000P7-Bo
+	for qemu-riscv@nongnu.org; Tue, 12 Mar 2019 09:17:04 -0400
+Received: from mail-pg1-x52a.google.com ([2607:f8b0:4864:20::52a]:39353)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
-	id 1h3Mqc-0001Cv-Hk; Mon, 11 Mar 2019 11:28:15 -0400
-Received: by mail-ed1-x542.google.com with SMTP id p27so4382334edc.6;
-	Mon, 11 Mar 2019 08:28:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=7WM0+wID6VIWCBoulhe3P6hB7Us0u7T/c4aH9w4bQ4I=;
-	b=ZkwqU2iOvUidygT3aJSTNFe9c3bm4uDCCFFFYYqcq6ct2KwQ1da7JQLZrCWILLZiCL
-	gUu6MzDkObCGsrVwMPDRL9a4ql00HNQUFR3hFtoHllPZdWFE7o/gykJaTXRlYwBMACJs
-	A53+c66sqBQpzKgHMsl2n/AtHRzQIrNhrCPs6Nsfs/pvPHM4uro5ecLcteM1ISc99pNl
-	uSBauRIH69QZyJAlmT1fRAQIhRw6qHyU9ONScRroDaXz/Ayak3AuJz0ODLub7sEVVlRJ
-	Y7xNiT/2vKEp+XTFkrFgMZh7w3AQkg8jVmMLpzv6vB5jZtWj23HrMMTW0uuOksqLkqmP
-	Pb0Q==
+	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1h3hHB-0000Ni-IM
+	for qemu-riscv@nongnu.org; Tue, 12 Mar 2019 09:17:02 -0400
+Received: by mail-pg1-x52a.google.com with SMTP id h8so1816552pgp.6
+	for <qemu-riscv@nongnu.org>; Tue, 12 Mar 2019 06:17:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+	h=subject:date:message-id:in-reply-to:references:mime-version
+	:content-transfer-encoding:cc:from:to;
+	bh=OPUNxKf4mTX+Vnf601r72Ss5k2kVOhk1wPtz3HBIudU=;
+	b=nLltYaSBECwavrrh52909PFn2C11gb1tSzkbliy5MSv5Rlie3JVDygtybhNmGI4NzF
+	SUDQhY+ecq5STHRtqXQYfmRo20GNptU+l7EaLJNboeJu2PjdBSMAjEWq3BqFNnGG+5xQ
+	2knb83GptljsANt0BGFa4r1KwHIdhkXnthof+zfQ8zi4oCmmVf/repkfFTf/7TXGAOEg
+	T/Yay299FWx//cBSwAc2BcTww5mYE1PBbsEuc7kl2B0ssvSEQn44tDzLAmzhmSPnwLoL
+	g2J+zh5WAsiuF2c8Ev2j/hii7cWPXj4hIcCv9FGVKG7gGP1s1ikMXqTdFDdUBd64yh8w
+	goPA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=7WM0+wID6VIWCBoulhe3P6hB7Us0u7T/c4aH9w4bQ4I=;
-	b=VyXS1OReyOdeV4SBekfd6NAl1ym2vSgLefZ0VznwdrOWJB9QBWJ9OpTCg+KZyFMIdb
-	vSkmWywvSXa5LJp/MaCLAzJIkjQwzb9LOKgJuAoPIm1vgN2UAo6WIkbymDBAPEqeRfxs
-	LD8P1RnI4jYiVw0xgA4qyzltt9wSrSjmRSwgn5Emzq+VHdJhhTHq1eml6cx5I5uqQCP2
-	da7ek4lctjgIa35wqPBjwxphiic56ta9qO8pNSVDY+bi8bovp68xf8/FxnvveA+Hf17F
-	VylafrccVIdvjDRNLS61lpgER+sjQSFdQAzwMNgXhaO35BJpheSr4Rf9d4UV6mUgOF7G
-	10pA==
-X-Gm-Message-State: APjAAAUzY2es35ep0M9/C5IKflZr71ASA0OFlQrknwwuqfIpxWPqh8FE
-	PLjqmye+72gJhbSBKwnsurJsxv2baiu0WJXrH0U=
-X-Google-Smtp-Source: APXvYqyG7Rbt0Z8a5W5gFfDS0stt8kTyxlV+onfEQZPSvEvd4TwIJIHuouaCzeaADZ0wh6aH7YodjjKHd57Y3T0MXWM=
-X-Received: by 2002:a50:92fb:: with SMTP id l56mr44610863eda.114.1552318092708;
-	Mon, 11 Mar 2019 08:28:12 -0700 (PDT)
+	h=x-gm-message-state:subject:date:message-id:in-reply-to:references
+	:mime-version:content-transfer-encoding:cc:from:to;
+	bh=OPUNxKf4mTX+Vnf601r72Ss5k2kVOhk1wPtz3HBIudU=;
+	b=RjXGoN2Tj2kmVEBY4iN3cAXyoPjgDX8gM/Mr+tLewFJUwDDtj9e0RbpiVmwai+hvRe
+	IaDjMHbBIjlreD8M69r0PzcgD+p/yAY0W8+pjpvpQT/CYGHvrk9AR+FJMxqiKNQn07X1
+	OpX01tsHABO0txMB9jsuYXmghrADXIBGtlZ95wQu0L02SHJqbRihDlE+hwAct78VnmdB
+	hpN16HYmlieHe3Nbmopi9F2fYjJZ8KdeJ4osszLHpfuyIVs+7dICS4+SWxZ4XrNcijaJ
+	o8U/GHxzH02FrcFRofxdNC/wVSdB93CM9jGtl64grTRcLUSMAU5sjbc5pT/hSfvHErsr
+	vJCw==
+X-Gm-Message-State: APjAAAXJNBwW8TpEmK+40oAscKBLxwbW00zpYyw2qjjn8glQaBhd7K7W
+	Xst+VAnwrXpbOwi6bV87j9SrJ4NcX6f2L6P4
+X-Google-Smtp-Source: APXvYqx4cHbGoiXudBG9mEBlHNV+CZhxSAyMbFTXpk+E+Utsl0cacKWraYIvObSDp7sQwCir0ft6Bg==
+X-Received: by 2002:a62:1f5d:: with SMTP id f90mr38312961pff.104.1552396620021;
+	Tue, 12 Mar 2019 06:17:00 -0700 (PDT)
+Received: from localhost
+	(2001-b011-7001-120c-5816-f057-fc2f-b780.dynamic-ip6.hinet.net.
+	[2001:b011:7001:120c:5816:f057:fc2f:b780])
+	by smtp.gmail.com with ESMTPSA id
+	n75sm17343899pfb.39.2019.03.12.06.16.58
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 12 Mar 2019 06:16:59 -0700 (PDT)
+Date: Tue, 12 Mar 2019 06:15:23 -0700
+Message-Id: <20190312131526.14710-27-palmer@sifive.com>
+X-Mailer: git-send-email 2.19.2
+In-Reply-To: <20190312131526.14710-1-palmer@sifive.com>
+References: <20190312131526.14710-1-palmer@sifive.com>
 MIME-Version: 1.0
-References: <20190210201726.3567-1-lukas.auer@aisec.fraunhofer.de>
-	<CAEUhbmUtSAeznt1DCwJ7tS=YFeqwnYBemS6278=QQ60qs_MthA@mail.gmail.com>
-	<c9f69861058412a1f71418a9c892daf0821a9e33.camel@aisec.fraunhofer.de>
-	<CAEUhbmXjCqRRtNDqq5E5y60sDz+4=WqMuxFhaLndot7TSJuUiQ@mail.gmail.com>
-	<e131b4b0eb9109547ce0ed0993665206d6bf983a.camel@aisec.fraunhofer.de>
-In-Reply-To: <e131b4b0eb9109547ce0ed0993665206d6bf983a.camel@aisec.fraunhofer.de>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Mon, 11 Mar 2019 23:28:01 +0800
-Message-ID: <CAEUhbmX=PT-46nqtMqSaGn5xu2tRJ50Sm6kK7b97Xc_Y+6stPw@mail.gmail.com>
-To: "Auer, Lukas" <lukas.auer@aisec.fraunhofer.de>
-Cc: "palmer@sifive.com" <palmer@sifive.com>,
-	"qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>, 
-	"qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, 
-	"kbastian@mail.uni-paderborn.de" <kbastian@mail.uni-paderborn.de>, 
-	"sagark@eecs.berkeley.edu" <sagark@eecs.berkeley.edu>, 
-	"Alistair.Francis@wdc.com" <Alistair.Francis@wdc.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+Cc: qemu-devel@nongnu.org,       qemu-riscv@nongnu.org,
+	Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+	Peer Adelt <peer.adelt@hni.uni-paderborn.de>, 
+	Palmer Dabbelt <palmer@sifive.com>
+From: Palmer Dabbelt <palmer@sifive.com>
+To: Peter Maydell <peter.maydell@linaro.org>
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2a00:1450:4864:20::542
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH] hw/riscv/virt: re-add
- machine-specific compatible string to /soc/ node
+X-Received-From: 2607:f8b0:4864:20::52a
+Subject: [Qemu-riscv] [PULL 26/29] target/riscv: Remove manual decoding of
+ RV32/64M insn
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -73,84 +76,486 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Mar 2019 15:33:39 -0000
+X-List-Received-Date: Tue, 12 Mar 2019 13:30:24 -0000
 
-Hi Lukas,
+From: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
 
-On Mon, Mar 11, 2019 at 2:03 AM Auer, Lukas
-<lukas.auer@aisec.fraunhofer.de> wrote:
->
-> Hi Bin,
->
-> On Sun, 2019-03-10 at 22:57 +0800, Bin Meng wrote:
-> > Hi Lukas,
-> >
-> > On Sun, Mar 10, 2019 at 9:44 PM Auer, Lukas
-> > <lukas.auer@aisec.fraunhofer.de> wrote:
-> > > Hi Bin,
-> > >
-> > > On Sun, 2019-03-10 at 09:07 +0800, Bin Meng wrote:
-> > > > Hi Lukas,
-> > > >
-> > > > On Mon, Feb 11, 2019 at 6:13 AM Lukas Auer
-> > > > <lukas.auer@aisec.fraunhofer.de> wrote:
-> > > > > Re-add the previous compatible string "riscv-virtio-soc" to the
-> > > > > soc
-> > > > > device tree node to allow U-Boot and Linux to bind machine-
-> > > > > specific
-> > > > > drivers to it. The current compatible string "simple-bus" is
-> > > > > retained.
-> > > > >
-> > > > > This is required by U-Boot to bind devices early, as part of
-> > > > > the
-> > > > > pre-relocation driver model.
-> > > > >
-> > > >
-> > > > I see no problem with U-Boot working with current compatible
-> > > > string
-> > > > "simple-bus". In fact I had planned to remove the compatible
-> > > > string
-> > > > "riscv-virtio-soc" in U-Boot but did not get time to work on it.
-> > > >
-> > >
-> > > It is only required if U-Boot is running in machine-mode. For
-> > > relocation it needs to use the CLINT driver to send appropriate
-> > > IPIs to
-> > > the other harts. To be able to probe the driver, the device and its
-> > > parent device tree node (soc) must therefore be available in the
-> > > pre-
-> > > relocation device model.
-> > > This patch was the easiest way I could think of for achieving this.
-> > > It
-> > > could be that there is a better way of solving this.
-> > >
-> >
-> > I tested your SMP U-Boot series in both M-mode and S-mode, using a 4
-> > core 'virt' target. Works fine. I am using QEMU 3.1.0 so it is
-> > "simple-bus".
-> >
->
-> That is actually my fault, it should not work.
-> What is happening is that U-Boot fails to relocate the secondary harts,
-> because the CLINT driver cannot get the memory address of the CLINT
-> device. This error is currently silently ignored.
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Signed-off-by: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+Signed-off-by: Peer Adelt <peer.adelt@hni.uni-paderborn.de>
+Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
+---
+ target/riscv/insn_trans/trans_rvm.inc.c |  55 ++--
+ target/riscv/translate.c                | 320 ++++++++++--------------
+ 2 files changed, 164 insertions(+), 211 deletions(-)
 
-I still don't understand. Why does the CLINT driver fail to get the
-memory address? U-Boot has been supporting "simpile-bus" for a long
-time. It was because QEMU 3.0.0 generated the /soc node with
-"riscv-virtio-soc" compatible string, U-Boot was taught to treat such
-compatible string as a "simple-bus" too (that was the U-Boot commit
-27dc2c130e29)
+diff --git a/target/riscv/insn_trans/trans_rvm.inc.c b/target/riscv/insn_trans/trans_rvm.inc.c
+index 69631c9e3783..d2bf2f171904 100644
+--- a/target/riscv/insn_trans/trans_rvm.inc.c
++++ b/target/riscv/insn_trans/trans_rvm.inc.c
+@@ -22,92 +22,99 @@
+ static bool trans_mul(DisasContext *ctx, arg_mul *a)
+ {
+     REQUIRE_EXT(ctx, RVM);
+-    gen_arith(ctx, OPC_RISC_MUL, a->rd, a->rs1, a->rs2);
+-    return true;
++    return trans_arith(ctx, a, &tcg_gen_mul_tl);
+ }
+ 
+ static bool trans_mulh(DisasContext *ctx, arg_mulh *a)
+ {
+     REQUIRE_EXT(ctx, RVM);
+-    gen_arith(ctx, OPC_RISC_MULH, a->rd, a->rs1, a->rs2);
++    TCGv source1 = tcg_temp_new();
++    TCGv source2 = tcg_temp_new();
++    gen_get_gpr(source1, a->rs1);
++    gen_get_gpr(source2, a->rs2);
++
++    tcg_gen_muls2_tl(source2, source1, source1, source2);
++
++    gen_set_gpr(a->rd, source1);
++    tcg_temp_free(source1);
++    tcg_temp_free(source2);
+     return true;
+ }
+ 
+ static bool trans_mulhsu(DisasContext *ctx, arg_mulhsu *a)
+ {
+     REQUIRE_EXT(ctx, RVM);
+-    gen_arith(ctx, OPC_RISC_MULHSU, a->rd, a->rs1, a->rs2);
+-    return true;
++    return trans_arith(ctx, a, &gen_mulhsu);
+ }
+ 
+ static bool trans_mulhu(DisasContext *ctx, arg_mulhu *a)
+ {
+     REQUIRE_EXT(ctx, RVM);
+-    gen_arith(ctx, OPC_RISC_MULHU, a->rd, a->rs1, a->rs2);
++    TCGv source1 = tcg_temp_new();
++    TCGv source2 = tcg_temp_new();
++    gen_get_gpr(source1, a->rs1);
++    gen_get_gpr(source2, a->rs2);
++
++    tcg_gen_mulu2_tl(source2, source1, source1, source2);
++
++    gen_set_gpr(a->rd, source1);
++    tcg_temp_free(source1);
++    tcg_temp_free(source2);
+     return true;
+ }
+ 
+ static bool trans_div(DisasContext *ctx, arg_div *a)
+ {
+     REQUIRE_EXT(ctx, RVM);
+-    gen_arith(ctx, OPC_RISC_DIV, a->rd, a->rs1, a->rs2);
+-    return true;
++    return trans_arith(ctx, a, &gen_div);
+ }
+ 
+ static bool trans_divu(DisasContext *ctx, arg_divu *a)
+ {
+     REQUIRE_EXT(ctx, RVM);
+-    gen_arith(ctx, OPC_RISC_DIVU, a->rd, a->rs1, a->rs2);
+-    return true;
++    return trans_arith(ctx, a, &gen_divu);
+ }
+ 
+ static bool trans_rem(DisasContext *ctx, arg_rem *a)
+ {
+     REQUIRE_EXT(ctx, RVM);
+-    gen_arith(ctx, OPC_RISC_REM, a->rd, a->rs1, a->rs2);
+-    return true;
++    return trans_arith(ctx, a, &gen_rem);
+ }
+ 
+ static bool trans_remu(DisasContext *ctx, arg_remu *a)
+ {
+     REQUIRE_EXT(ctx, RVM);
+-    gen_arith(ctx, OPC_RISC_REMU, a->rd, a->rs1, a->rs2);
+-    return true;
++    return trans_arith(ctx, a, &gen_remu);
+ }
+ 
+ #ifdef TARGET_RISCV64
+ static bool trans_mulw(DisasContext *ctx, arg_mulw *a)
+ {
+     REQUIRE_EXT(ctx, RVM);
+-    gen_arith(ctx, OPC_RISC_MULW, a->rd, a->rs1, a->rs2);
+-    return true;
++    return trans_arith(ctx, a, &gen_mulw);
+ }
+ 
+ static bool trans_divw(DisasContext *ctx, arg_divw *a)
+ {
+     REQUIRE_EXT(ctx, RVM);
+-    gen_arith(ctx, OPC_RISC_DIVW, a->rd, a->rs1, a->rs2);
+-    return true;
++    return gen_arith_div_w(ctx, a, &gen_div);
+ }
+ 
+ static bool trans_divuw(DisasContext *ctx, arg_divuw *a)
+ {
+     REQUIRE_EXT(ctx, RVM);
+-    gen_arith(ctx, OPC_RISC_DIVUW, a->rd, a->rs1, a->rs2);
+-    return true;
++    return gen_arith_div_w(ctx, a, &gen_divu);
+ }
+ 
+ static bool trans_remw(DisasContext *ctx, arg_remw *a)
+ {
+     REQUIRE_EXT(ctx, RVM);
+-    gen_arith(ctx, OPC_RISC_REMW, a->rd, a->rs1, a->rs2);
+-    return true;
++    return gen_arith_div_w(ctx, a, &gen_rem);
+ }
+ 
+ static bool trans_remuw(DisasContext *ctx, arg_remuw *a)
+ {
+     REQUIRE_EXT(ctx, RVM);
+-    gen_arith(ctx, OPC_RISC_REMUW, a->rd, a->rs1, a->rs2);
+-    return true;
++    return gen_arith_div_w(ctx, a, &gen_remu);
+ }
+ #endif
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index 9ae40f65096f..3cd7e16c63cf 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -188,193 +188,112 @@ static void gen_mulhsu(TCGv ret, TCGv arg1, TCGv arg2)
+     tcg_temp_free(rh);
+ }
+ 
+-static void gen_arith(DisasContext *ctx, uint32_t opc, int rd, int rs1,
+-        int rs2)
+-{
+-    TCGv source1, source2, cond1, cond2, zeroreg, resultopt1;
+-    source1 = tcg_temp_new();
+-    source2 = tcg_temp_new();
+-    gen_get_gpr(source1, rs1);
+-    gen_get_gpr(source2, rs2);
+-
+-    switch (opc) {
+-    CASE_OP_32_64(OPC_RISC_MUL):
+-        if (!has_ext(ctx, RVM)) {
+-            goto do_illegal;
+-        }
+-        tcg_gen_mul_tl(source1, source1, source2);
+-        break;
+-    case OPC_RISC_MULH:
+-        if (!has_ext(ctx, RVM)) {
+-            goto do_illegal;
+-        }
+-        tcg_gen_muls2_tl(source2, source1, source1, source2);
+-        break;
+-    case OPC_RISC_MULHSU:
+-        if (!has_ext(ctx, RVM)) {
+-            goto do_illegal;
+-        }
+-        gen_mulhsu(source1, source1, source2);
+-        break;
+-    case OPC_RISC_MULHU:
+-        if (!has_ext(ctx, RVM)) {
+-            goto do_illegal;
+-        }
+-        tcg_gen_mulu2_tl(source2, source1, source1, source2);
+-        break;
+-#if defined(TARGET_RISCV64)
+-    case OPC_RISC_DIVW:
+-        if (!has_ext(ctx, RVM)) {
+-            goto do_illegal;
+-        }
+-        tcg_gen_ext32s_tl(source1, source1);
+-        tcg_gen_ext32s_tl(source2, source2);
+-        /* fall through to DIV */
+-#endif
+-    case OPC_RISC_DIV:
+-        if (!has_ext(ctx, RVM)) {
+-            goto do_illegal;
+-        }
+-        /* Handle by altering args to tcg_gen_div to produce req'd results:
+-         * For overflow: want source1 in source1 and 1 in source2
+-         * For div by zero: want -1 in source1 and 1 in source2 -> -1 result */
+-        cond1 = tcg_temp_new();
+-        cond2 = tcg_temp_new();
+-        zeroreg = tcg_const_tl(0);
+-        resultopt1 = tcg_temp_new();
+-
+-        tcg_gen_movi_tl(resultopt1, (target_ulong)-1);
+-        tcg_gen_setcondi_tl(TCG_COND_EQ, cond2, source2, (target_ulong)(~0L));
+-        tcg_gen_setcondi_tl(TCG_COND_EQ, cond1, source1,
+-                            ((target_ulong)1) << (TARGET_LONG_BITS - 1));
+-        tcg_gen_and_tl(cond1, cond1, cond2); /* cond1 = overflow */
+-        tcg_gen_setcondi_tl(TCG_COND_EQ, cond2, source2, 0); /* cond2 = div 0 */
+-        /* if div by zero, set source1 to -1, otherwise don't change */
+-        tcg_gen_movcond_tl(TCG_COND_EQ, source1, cond2, zeroreg, source1,
+-                resultopt1);
+-        /* if overflow or div by zero, set source2 to 1, else don't change */
+-        tcg_gen_or_tl(cond1, cond1, cond2);
+-        tcg_gen_movi_tl(resultopt1, (target_ulong)1);
+-        tcg_gen_movcond_tl(TCG_COND_EQ, source2, cond1, zeroreg, source2,
+-                resultopt1);
+-        tcg_gen_div_tl(source1, source1, source2);
+-
+-        tcg_temp_free(cond1);
+-        tcg_temp_free(cond2);
+-        tcg_temp_free(zeroreg);
+-        tcg_temp_free(resultopt1);
+-        break;
+-#if defined(TARGET_RISCV64)
+-    case OPC_RISC_DIVUW:
+-        if (!has_ext(ctx, RVM)) {
+-            goto do_illegal;
+-        }
+-        tcg_gen_ext32u_tl(source1, source1);
+-        tcg_gen_ext32u_tl(source2, source2);
+-        /* fall through to DIVU */
+-#endif
+-    case OPC_RISC_DIVU:
+-        if (!has_ext(ctx, RVM)) {
+-            goto do_illegal;
+-        }
+-        cond1 = tcg_temp_new();
+-        zeroreg = tcg_const_tl(0);
+-        resultopt1 = tcg_temp_new();
+-
+-        tcg_gen_setcondi_tl(TCG_COND_EQ, cond1, source2, 0);
+-        tcg_gen_movi_tl(resultopt1, (target_ulong)-1);
+-        tcg_gen_movcond_tl(TCG_COND_EQ, source1, cond1, zeroreg, source1,
+-                resultopt1);
+-        tcg_gen_movi_tl(resultopt1, (target_ulong)1);
+-        tcg_gen_movcond_tl(TCG_COND_EQ, source2, cond1, zeroreg, source2,
+-                resultopt1);
+-        tcg_gen_divu_tl(source1, source1, source2);
+-
+-        tcg_temp_free(cond1);
+-        tcg_temp_free(zeroreg);
+-        tcg_temp_free(resultopt1);
+-        break;
+-#if defined(TARGET_RISCV64)
+-    case OPC_RISC_REMW:
+-        if (!has_ext(ctx, RVM)) {
+-            goto do_illegal;
+-        }
+-        tcg_gen_ext32s_tl(source1, source1);
+-        tcg_gen_ext32s_tl(source2, source2);
+-        /* fall through to REM */
+-#endif
+-    case OPC_RISC_REM:
+-        if (!has_ext(ctx, RVM)) {
+-            goto do_illegal;
+-        }
+-        cond1 = tcg_temp_new();
+-        cond2 = tcg_temp_new();
+-        zeroreg = tcg_const_tl(0);
+-        resultopt1 = tcg_temp_new();
+-
+-        tcg_gen_movi_tl(resultopt1, 1L);
+-        tcg_gen_setcondi_tl(TCG_COND_EQ, cond2, source2, (target_ulong)-1);
+-        tcg_gen_setcondi_tl(TCG_COND_EQ, cond1, source1,
+-                            (target_ulong)1 << (TARGET_LONG_BITS - 1));
+-        tcg_gen_and_tl(cond2, cond1, cond2); /* cond1 = overflow */
+-        tcg_gen_setcondi_tl(TCG_COND_EQ, cond1, source2, 0); /* cond2 = div 0 */
+-        /* if overflow or div by zero, set source2 to 1, else don't change */
+-        tcg_gen_or_tl(cond2, cond1, cond2);
+-        tcg_gen_movcond_tl(TCG_COND_EQ, source2, cond2, zeroreg, source2,
+-                resultopt1);
+-        tcg_gen_rem_tl(resultopt1, source1, source2);
+-        /* if div by zero, just return the original dividend */
+-        tcg_gen_movcond_tl(TCG_COND_EQ, source1, cond1, zeroreg, resultopt1,
+-                source1);
+-
+-        tcg_temp_free(cond1);
+-        tcg_temp_free(cond2);
+-        tcg_temp_free(zeroreg);
+-        tcg_temp_free(resultopt1);
+-        break;
+-#if defined(TARGET_RISCV64)
+-    case OPC_RISC_REMUW:
+-        if (!has_ext(ctx, RVM)) {
+-            goto do_illegal;
+-        }
+-        tcg_gen_ext32u_tl(source1, source1);
+-        tcg_gen_ext32u_tl(source2, source2);
+-        /* fall through to REMU */
+-#endif
+-    case OPC_RISC_REMU:
+-        if (!has_ext(ctx, RVM)) {
+-            goto do_illegal;
+-        }
+-        cond1 = tcg_temp_new();
+-        zeroreg = tcg_const_tl(0);
+-        resultopt1 = tcg_temp_new();
+-
+-        tcg_gen_movi_tl(resultopt1, (target_ulong)1);
+-        tcg_gen_setcondi_tl(TCG_COND_EQ, cond1, source2, 0);
+-        tcg_gen_movcond_tl(TCG_COND_EQ, source2, cond1, zeroreg, source2,
+-                resultopt1);
+-        tcg_gen_remu_tl(resultopt1, source1, source2);
+-        /* if div by zero, just return the original dividend */
+-        tcg_gen_movcond_tl(TCG_COND_EQ, source1, cond1, zeroreg, resultopt1,
+-                source1);
+-
+-        tcg_temp_free(cond1);
+-        tcg_temp_free(zeroreg);
+-        tcg_temp_free(resultopt1);
+-        break;
+-    do_illegal:
+-    default:
+-        gen_exception_illegal(ctx);
+-        return;
+-    }
+-
+-    if (opc & 0x8) { /* sign extend for W instructions */
+-        tcg_gen_ext32s_tl(source1, source1);
+-    }
+-
+-    gen_set_gpr(rd, source1);
+-    tcg_temp_free(source1);
+-    tcg_temp_free(source2);
++static void gen_div(TCGv ret, TCGv source1, TCGv source2)
++{
++    TCGv cond1, cond2, zeroreg, resultopt1;
++    /*
++     * Handle by altering args to tcg_gen_div to produce req'd results:
++     * For overflow: want source1 in source1 and 1 in source2
++     * For div by zero: want -1 in source1 and 1 in source2 -> -1 result
++     */
++    cond1 = tcg_temp_new();
++    cond2 = tcg_temp_new();
++    zeroreg = tcg_const_tl(0);
++    resultopt1 = tcg_temp_new();
++
++    tcg_gen_movi_tl(resultopt1, (target_ulong)-1);
++    tcg_gen_setcondi_tl(TCG_COND_EQ, cond2, source2, (target_ulong)(~0L));
++    tcg_gen_setcondi_tl(TCG_COND_EQ, cond1, source1,
++                        ((target_ulong)1) << (TARGET_LONG_BITS - 1));
++    tcg_gen_and_tl(cond1, cond1, cond2); /* cond1 = overflow */
++    tcg_gen_setcondi_tl(TCG_COND_EQ, cond2, source2, 0); /* cond2 = div 0 */
++    /* if div by zero, set source1 to -1, otherwise don't change */
++    tcg_gen_movcond_tl(TCG_COND_EQ, source1, cond2, zeroreg, source1,
++            resultopt1);
++    /* if overflow or div by zero, set source2 to 1, else don't change */
++    tcg_gen_or_tl(cond1, cond1, cond2);
++    tcg_gen_movi_tl(resultopt1, (target_ulong)1);
++    tcg_gen_movcond_tl(TCG_COND_EQ, source2, cond1, zeroreg, source2,
++            resultopt1);
++    tcg_gen_div_tl(ret, source1, source2);
++
++    tcg_temp_free(cond1);
++    tcg_temp_free(cond2);
++    tcg_temp_free(zeroreg);
++    tcg_temp_free(resultopt1);
++}
++
++static void gen_divu(TCGv ret, TCGv source1, TCGv source2)
++{
++    TCGv cond1, zeroreg, resultopt1;
++    cond1 = tcg_temp_new();
++
++    zeroreg = tcg_const_tl(0);
++    resultopt1 = tcg_temp_new();
++
++    tcg_gen_setcondi_tl(TCG_COND_EQ, cond1, source2, 0);
++    tcg_gen_movi_tl(resultopt1, (target_ulong)-1);
++    tcg_gen_movcond_tl(TCG_COND_EQ, source1, cond1, zeroreg, source1,
++            resultopt1);
++    tcg_gen_movi_tl(resultopt1, (target_ulong)1);
++    tcg_gen_movcond_tl(TCG_COND_EQ, source2, cond1, zeroreg, source2,
++            resultopt1);
++    tcg_gen_divu_tl(ret, source1, source2);
++
++    tcg_temp_free(cond1);
++    tcg_temp_free(zeroreg);
++    tcg_temp_free(resultopt1);
++}
++
++static void gen_rem(TCGv ret, TCGv source1, TCGv source2)
++{
++    TCGv cond1, cond2, zeroreg, resultopt1;
++
++    cond1 = tcg_temp_new();
++    cond2 = tcg_temp_new();
++    zeroreg = tcg_const_tl(0);
++    resultopt1 = tcg_temp_new();
++
++    tcg_gen_movi_tl(resultopt1, 1L);
++    tcg_gen_setcondi_tl(TCG_COND_EQ, cond2, source2, (target_ulong)-1);
++    tcg_gen_setcondi_tl(TCG_COND_EQ, cond1, source1,
++                        (target_ulong)1 << (TARGET_LONG_BITS - 1));
++    tcg_gen_and_tl(cond2, cond1, cond2); /* cond1 = overflow */
++    tcg_gen_setcondi_tl(TCG_COND_EQ, cond1, source2, 0); /* cond2 = div 0 */
++    /* if overflow or div by zero, set source2 to 1, else don't change */
++    tcg_gen_or_tl(cond2, cond1, cond2);
++    tcg_gen_movcond_tl(TCG_COND_EQ, source2, cond2, zeroreg, source2,
++            resultopt1);
++    tcg_gen_rem_tl(resultopt1, source1, source2);
++    /* if div by zero, just return the original dividend */
++    tcg_gen_movcond_tl(TCG_COND_EQ, ret, cond1, zeroreg, resultopt1,
++            source1);
++
++    tcg_temp_free(cond1);
++    tcg_temp_free(cond2);
++    tcg_temp_free(zeroreg);
++    tcg_temp_free(resultopt1);
++}
++
++static void gen_remu(TCGv ret, TCGv source1, TCGv source2)
++{
++    TCGv cond1, zeroreg, resultopt1;
++    cond1 = tcg_temp_new();
++    zeroreg = tcg_const_tl(0);
++    resultopt1 = tcg_temp_new();
++
++    tcg_gen_movi_tl(resultopt1, (target_ulong)1);
++    tcg_gen_setcondi_tl(TCG_COND_EQ, cond1, source2, 0);
++    tcg_gen_movcond_tl(TCG_COND_EQ, source2, cond1, zeroreg, source2,
++            resultopt1);
++    tcg_gen_remu_tl(resultopt1, source1, source2);
++    /* if div by zero, just return the original dividend */
++    tcg_gen_movcond_tl(TCG_COND_EQ, ret, cond1, zeroreg, resultopt1,
++            source1);
++
++    tcg_temp_free(cond1);
++    tcg_temp_free(zeroreg);
++    tcg_temp_free(resultopt1);
+ }
+ 
+ static void gen_jal(DisasContext *ctx, int rd, target_ulong imm)
+@@ -681,6 +600,33 @@ static void gen_subw(TCGv ret, TCGv arg1, TCGv arg2)
+     tcg_gen_ext32s_tl(ret, ret);
+ }
+ 
++static void gen_mulw(TCGv ret, TCGv arg1, TCGv arg2)
++{
++    tcg_gen_mul_tl(ret, arg1, arg2);
++    tcg_gen_ext32s_tl(ret, ret);
++}
++
++static bool gen_arith_div_w(DisasContext *ctx, arg_r *a,
++                            void(*func)(TCGv, TCGv, TCGv))
++{
++    TCGv source1, source2;
++    source1 = tcg_temp_new();
++    source2 = tcg_temp_new();
++
++    gen_get_gpr(source1, a->rs1);
++    gen_get_gpr(source2, a->rs2);
++    tcg_gen_ext32s_tl(source1, source1);
++    tcg_gen_ext32s_tl(source2, source2);
++
++    (*func)(source1, source1, source2);
++
++    tcg_gen_ext32s_tl(source1, source1);
++    gen_set_gpr(a->rd, source1);
++    tcg_temp_free(source1);
++    tcg_temp_free(source2);
++    return true;
++}
++
+ #endif
+ 
+ static bool trans_arith(DisasContext *ctx, arg_r *a,
+-- 
+2.19.2
 
-> The secondary harts are still waiting to receive IPIs, so booting Linux
-> works fine, because U-Boot can now send IPIs. This will however break
-> if U-Boot overwrites the code the secondary harts are running, which
-> could happen when loading an image.
->
-> I will update my SMP U-Boot series to print a warning if sending an IPI
-> fails.
->
-
-Regards,
-Bin
 
