@@ -1,51 +1,53 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1h456F-0000xU-Ec
-	for mharc-qemu-riscv@gnu.org; Wed, 13 Mar 2019 10:43:19 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:60702)
+	id 1h456G-0000yd-9R
+	for mharc-qemu-riscv@gnu.org; Wed, 13 Mar 2019 10:43:20 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:60596)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1h456B-0000Ro-FJ
-	for qemu-riscv@nongnu.org; Wed, 13 Mar 2019 10:43:16 -0400
+	(envelope-from <palmer@sifive.com>) id 1h4565-0000I0-Rn
+	for qemu-riscv@nongnu.org; Wed, 13 Mar 2019 10:43:10 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1h450Z-00042R-DS
-	for qemu-riscv@nongnu.org; Wed, 13 Mar 2019 10:37:29 -0400
-Received: from mail-pf1-x432.google.com ([2607:f8b0:4864:20::432]:46248)
+	(envelope-from <palmer@sifive.com>) id 1h450x-0004OX-JL
+	for qemu-riscv@nongnu.org; Wed, 13 Mar 2019 10:37:52 -0400
+Received: from mail-pf1-x432.google.com ([2607:f8b0:4864:20::432]:36597)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1h450Z-00040m-8H
-	for qemu-riscv@nongnu.org; Wed, 13 Mar 2019 10:37:27 -0400
-Received: by mail-pf1-x432.google.com with SMTP id s23so1499796pfe.13
-	for <qemu-riscv@nongnu.org>; Wed, 13 Mar 2019 07:37:27 -0700 (PDT)
+	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1h450x-0004Mw-D9
+	for qemu-riscv@nongnu.org; Wed, 13 Mar 2019 10:37:51 -0400
+Received: by mail-pf1-x432.google.com with SMTP id n22so1530790pfa.3
+	for <qemu-riscv@nongnu.org>; Wed, 13 Mar 2019 07:37:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
 	h=subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding:cc:from:to;
-	bh=SheaVEXgAq4P9MXoQbJ/WXmVEoB3bxNZ3epjl2RqUfI=;
-	b=OVmx/gwa3FRnRqgyRYXIp5HLNRUWGSKn0xkOicPvREO1vHK0Vsrklyea/lsNwpiNGR
-	dqOXwTaS0GgspWOdWKe8yWFNHs+Hs+IFRaOqalJ7CqUSIFapzNWURslRTMkIvZDqGkcx
-	fYx+HOLtDYypz71NHmW4bUDN0gpiKgfKFNVT0UpcZhPN0vqEVBWhWfNy8fcH9UAonWUs
-	qgYqTBLuH80gKjSWvvY4QGlM8eIjDy/FWlE2hbh1mU/o6NRighiCNtwgQjrGrdeLybXC
-	4/Q51oQMad5oDuD5DfY3rY8fUu3y0nxzUUkOe4gQrYIlO3fmVBJP+cOk0z2vZPx4qC9v
-	96UQ==
+	bh=5rYctR7eI37R5sMwCD3qvyZIBLK3WZhWz7ppR4vewcU=;
+	b=IUZ/SQMQ5xtlFJ3+KC5q+L0Xdu1Q9aAA7mLGEK1GaNUxztXJXevOlPaXOwygnNx0Py
+	v3ys/iE/tlAmfNVhy9u5mSgo08qAHLiDDNruDgpyPjd3AShXIdQLWYoYAujNM1YdyTI5
+	zxFctDisxvXZmjTGNjERCuWlzv0JeIcSkygTNWb4mSKLRe5Fo6vn8H2gY484nVJSsGKD
+	M1L7gyCcENApfCKsdyt4JzXpwRbMmw63nMgG9K7MMLqdSjPtXu82XW9w/O3+ba4JSFGW
+	Bco7oSl2c219QPWiZDPd980B+gniqt9pp/Bt6h9Ghtxoq1dDh81MBzYtim73Byzp1NkT
+	qUIQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding:cc:from:to;
-	bh=SheaVEXgAq4P9MXoQbJ/WXmVEoB3bxNZ3epjl2RqUfI=;
-	b=N3yC7EsY/n5XQJ8he5oQTf/S3aZlb3epwcZ/n9n02K+/iszU048MhNLIas2EQj0Y0f
-	Rdy5tt4BqL4eBkUyiaYE49Z7CZNEdpdKPaqDPKDQxf/8/6dQbRqZh4fCfjmBK/EDX5B6
-	ktYhyrx9wd79CkOoQzWzLhcj8WkdaYm5y3fgRIGdiwrGko+ASEbNcnGDEhoSvUk40Ku9
-	MbuIJBifBQbfKJBUGO9qfJIVlSaxMH0te1tO9uRL6NI5Qd4ONpacsVqNTQLpKjiTfKEu
-	mPY0JU42cllLkox39YCBzrmjGKC2XvsQ1iioU3gDdHjF9T2uK53rnZm69j+uIjLUEmyY
-	G3IQ==
-X-Gm-Message-State: APjAAAW55heJpGSX7YapXZCKkMKp0g3N5EiVvi4CfvJLKA155rU0va60
-	6PRi8hUYYRX2oxMNZBU9WtZF+wwr1ihThH5w
-X-Google-Smtp-Source: APXvYqwROvIejl+vhmPwnEpLBmG42lhtwfLmTgQ6fMIZfft8mxxUi0G7nILEzOtLaqUGX55AkQjjuQ==
-X-Received: by 2002:a62:41cc:: with SMTP id g73mr43504827pfd.145.1552487845851;
-	Wed, 13 Mar 2019 07:37:25 -0700 (PDT)
-Received: from localhost ([122.146.90.161]) by smtp.gmail.com with ESMTPSA id
-	u26sm16406570pfn.166.2019.03.13.07.37.24
+	bh=5rYctR7eI37R5sMwCD3qvyZIBLK3WZhWz7ppR4vewcU=;
+	b=D9z12MnVx30vbXQ87hDDcPkntUjhSXcLRJs+q8tgd0dw+LTemLpiNiyRutApl7/baj
+	MM2rmKmvzhQk9jRkk1jOn/Upy03aCTwrqyAXFMqkCCx3NcRpTFEWtMgBgcCv6EmDIXML
+	54QzdogXek4deZBJVVGJZwSBpPDKDj+FYK+7Tvt66oJKf8a+3XrQabRFWWqP4wd0TDx/
+	PLMY0C9vBFPnfbwP7Gz4FHXCqiPB2IvQo38nC5J+p3kv5VMLT4AvZ8Vzmq+zk8A5o/Kp
+	olrlVNgGQF9IEQ0uxZJYk9vkZH9uxTy1bl+OSA/024pw+UMEm8rQz4e+hq/2empT6eHP
+	620Q==
+X-Gm-Message-State: APjAAAXjBPa+NkzImhnyStARUy3iKP7EpFgrwBv5j9GiqlxNUGwQU5KQ
+	E2wRKc9sSgxAIbVJpuKUlhVhlSsc85RlHCGf
+X-Google-Smtp-Source: APXvYqwRoc+N8WdLYLtpWZsxutbAWY91Ka4izB/BLFQiH15qioXnh6UtXdBPzw1S+ERDjQH2tIcm8Q==
+X-Received: by 2002:a63:6a88:: with SMTP id
+	f130mr40090543pgc.114.1552487870170; 
+	Wed, 13 Mar 2019 07:37:50 -0700 (PDT)
+Received: from localhost (60-250-203-158.HINET-IP.hinet.net. [60.250.203.158])
+	by smtp.gmail.com with ESMTPSA id
+	s79sm22414888pfa.61.2019.03.13.07.37.49
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 13 Mar 2019 07:37:25 -0700 (PDT)
-Date: Wed, 13 Mar 2019 07:36:39 -0700
-Message-Id: <20190313143705.29129-4-palmer@sifive.com>
+	Wed, 13 Mar 2019 07:37:49 -0700 (PDT)
+Date: Wed, 13 Mar 2019 07:36:48 -0700
+Message-Id: <20190313143705.29129-13-palmer@sifive.com>
 X-Mailer: git-send-email 2.19.2
 In-Reply-To: <20190313143705.29129-1-palmer@sifive.com>
 References: <20190313143705.29129-1-palmer@sifive.com>
@@ -59,8 +61,8 @@ To: Peter Maydell <peter.maydell@linaro.org>
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
 X-Received-From: 2607:f8b0:4864:20::432
-Subject: [Qemu-riscv] [PULL 03/29] target/riscv: Convert RV32I load/store
- insns to decodetree
+Subject: [Qemu-riscv] [PULL 12/29] target/riscv: Convert RV64F insns to
+ decodetree
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -72,7 +74,7 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Mar 2019 14:43:16 -0000
+X-List-Received-Date: Wed, 13 Mar 2019 14:43:11 -0000
 
 From: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
 
@@ -81,98 +83,92 @@ Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Signed-off-by: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
 Signed-off-by: Peer Adelt <peer.adelt@hni.uni-paderborn.de>
 ---
- target/riscv/insn32.decode              | 10 ++++++
- target/riscv/insn_trans/trans_rvi.inc.c | 48 +++++++++++++++++++++++++
- 2 files changed, 58 insertions(+)
+ target/riscv/insn32-64.decode           |  6 +++
+ target/riscv/insn_trans/trans_rvf.inc.c | 60 +++++++++++++++++++++++++
+ 2 files changed, 66 insertions(+)
 
-diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index 81f56c16b45f..076de873c4f1 100644
---- a/target/riscv/insn32.decode
-+++ b/target/riscv/insn32.decode
-@@ -23,6 +23,7 @@
+diff --git a/target/riscv/insn32-64.decode b/target/riscv/insn32-64.decode
+index 0bee95c9840d..6319f872ac1d 100644
+--- a/target/riscv/insn32-64.decode
++++ b/target/riscv/insn32-64.decode
+@@ -56,3 +56,9 @@ amomin_d   10000 . . ..... ..... 011 ..... 0101111 @atom_st
+ amomax_d   10100 . . ..... ..... 011 ..... 0101111 @atom_st
+ amominu_d  11000 . . ..... ..... 011 ..... 0101111 @atom_st
+ amomaxu_d  11100 . . ..... ..... 011 ..... 0101111 @atom_st
++
++# *** RV64F Standard Extension (in addition to RV32F) ***
++fcvt_l_s   1100000  00010 ..... ... ..... 1010011 @r2_rm
++fcvt_lu_s  1100000  00011 ..... ... ..... 1010011 @r2_rm
++fcvt_s_l   1101000  00010 ..... ... ..... 1010011 @r2_rm
++fcvt_s_lu  1101000  00011 ..... ... ..... 1010011 @r2_rm
+diff --git a/target/riscv/insn_trans/trans_rvf.inc.c b/target/riscv/insn_trans/trans_rvf.inc.c
+index 0f837903491b..172dbfa919b6 100644
+--- a/target/riscv/insn_trans/trans_rvf.inc.c
++++ b/target/riscv/insn_trans/trans_rvf.inc.c
+@@ -377,3 +377,63 @@ static bool trans_fmv_w_x(DisasContext *ctx, arg_fmv_w_x *a)
  
- # immediates:
- %imm_i    20:s12
-+%imm_s    25:s7 7:5
- %imm_b    31:s1 7:1 25:6 8:4     !function=ex_shift_1
- %imm_j    31:s1 12:8 20:1 21:10  !function=ex_shift_1
- %imm_u    12:s20                 !function=ex_shift_12
-@@ -33,6 +34,7 @@
- # Formats 32:
- @i       ............    ..... ... ..... .......         imm=%imm_i     %rs1 %rd
- @b       .......   ..... ..... ... ..... ....... &b      imm=%imm_b %rs2 %rs1
-+@s       .......   ..... ..... ... ..... .......         imm=%imm_s %rs2 %rs1
- @u       ....................      ..... .......         imm=%imm_u          %rd
- @j       ....................      ..... .......         imm=%imm_j          %rd
- 
-@@ -47,3 +49,11 @@ blt      ....... .....    ..... 100 ..... 1100011 @b
- bge      ....... .....    ..... 101 ..... 1100011 @b
- bltu     ....... .....    ..... 110 ..... 1100011 @b
- bgeu     ....... .....    ..... 111 ..... 1100011 @b
-+lb       ............     ..... 000 ..... 0000011 @i
-+lh       ............     ..... 001 ..... 0000011 @i
-+lw       ............     ..... 010 ..... 0000011 @i
-+lbu      ............     ..... 100 ..... 0000011 @i
-+lhu      ............     ..... 101 ..... 0000011 @i
-+sb       .......  .....   ..... 000 ..... 0100011 @s
-+sh       .......  .....   ..... 001 ..... 0100011 @s
-+sw       .......  .....   ..... 010 ..... 0100011 @s
-diff --git a/target/riscv/insn_trans/trans_rvi.inc.c b/target/riscv/insn_trans/trans_rvi.inc.c
-index bcf20def50eb..d13b7b2b6d8f 100644
---- a/target/riscv/insn_trans/trans_rvi.inc.c
-+++ b/target/riscv/insn_trans/trans_rvi.inc.c
-@@ -82,3 +82,51 @@ static bool trans_bgeu(DisasContext *ctx, arg_bgeu *a)
-     gen_branch(ctx, OPC_RISC_BGEU, a->rs1, a->rs2, a->imm);
      return true;
  }
 +
-+static bool trans_lb(DisasContext *ctx, arg_lb *a)
++#ifdef TARGET_RISCV64
++static bool trans_fcvt_l_s(DisasContext *ctx, arg_fcvt_l_s *a)
 +{
-+    gen_load(ctx, OPC_RISC_LB, a->rd, a->rs1, a->imm);
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVF);
++
++    TCGv t0 = tcg_temp_new();
++    gen_set_rm(ctx, a->rm);
++    gen_helper_fcvt_l_s(t0, cpu_env, cpu_fpr[a->rs1]);
++    gen_set_gpr(a->rd, t0);
++    tcg_temp_free(t0);
 +    return true;
 +}
 +
-+static bool trans_lh(DisasContext *ctx, arg_lh *a)
++static bool trans_fcvt_lu_s(DisasContext *ctx, arg_fcvt_lu_s *a)
 +{
-+    gen_load(ctx, OPC_RISC_LH, a->rd, a->rs1, a->imm);
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVF);
++
++    TCGv t0 = tcg_temp_new();
++    gen_set_rm(ctx, a->rm);
++    gen_helper_fcvt_lu_s(t0, cpu_env, cpu_fpr[a->rs1]);
++    gen_set_gpr(a->rd, t0);
++    tcg_temp_free(t0);
 +    return true;
 +}
 +
-+static bool trans_lw(DisasContext *ctx, arg_lw *a)
++static bool trans_fcvt_s_l(DisasContext *ctx, arg_fcvt_s_l *a)
 +{
-+    gen_load(ctx, OPC_RISC_LW, a->rd, a->rs1, a->imm);
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVF);
++
++    TCGv t0 = tcg_temp_new();
++    gen_get_gpr(t0, a->rs1);
++
++    gen_set_rm(ctx, a->rm);
++    gen_helper_fcvt_s_l(cpu_fpr[a->rd], cpu_env, t0);
++
++    mark_fs_dirty(ctx);
++    tcg_temp_free(t0);
 +    return true;
 +}
 +
-+static bool trans_lbu(DisasContext *ctx, arg_lbu *a)
++static bool trans_fcvt_s_lu(DisasContext *ctx, arg_fcvt_s_lu *a)
 +{
-+    gen_load(ctx, OPC_RISC_LBU, a->rd, a->rs1, a->imm);
-+    return true;
-+}
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVF);
 +
-+static bool trans_lhu(DisasContext *ctx, arg_lhu *a)
-+{
-+    gen_load(ctx, OPC_RISC_LHU, a->rd, a->rs1, a->imm);
-+    return true;
-+}
++    TCGv t0 = tcg_temp_new();
++    gen_get_gpr(t0, a->rs1);
 +
-+static bool trans_sb(DisasContext *ctx, arg_sb *a)
-+{
-+    gen_store(ctx, OPC_RISC_SB, a->rs1, a->rs2, a->imm);
-+    return true;
-+}
++    gen_set_rm(ctx, a->rm);
++    gen_helper_fcvt_s_lu(cpu_fpr[a->rd], cpu_env, t0);
 +
-+static bool trans_sh(DisasContext *ctx, arg_sh *a)
-+{
-+    gen_store(ctx, OPC_RISC_SH, a->rs1, a->rs2, a->imm);
++    mark_fs_dirty(ctx);
++    tcg_temp_free(t0);
 +    return true;
 +}
-+
-+static bool trans_sw(DisasContext *ctx, arg_sw *a)
-+{
-+    gen_store(ctx, OPC_RISC_SW, a->rs1, a->rs2, a->imm);
-+    return true;
-+}
++#endif
 -- 
 2.19.2
 
