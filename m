@@ -1,70 +1,54 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1h3t3V-0004n0-8H
-	for mharc-qemu-riscv@gnu.org; Tue, 12 Mar 2019 21:51:41 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:43149)
+	id 1h40Qv-0001CL-8k
+	for mharc-qemu-riscv@gnu.org; Wed, 13 Mar 2019 05:44:21 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:54972)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <bmeng.cn@gmail.com>) id 1h3t3S-0004ju-3B
-	for qemu-riscv@nongnu.org; Tue, 12 Mar 2019 21:51:39 -0400
+	(envelope-from <kbastian@mail.uni-paderborn.de>) id 1h40Qs-0000a0-2O
+	for qemu-riscv@nongnu.org; Wed, 13 Mar 2019 05:44:18 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <bmeng.cn@gmail.com>) id 1h3t3Q-0006D6-5b
-	for qemu-riscv@nongnu.org; Tue, 12 Mar 2019 21:51:38 -0400
-Received: from mail-ed1-x544.google.com ([2a00:1450:4864:20::544]:41096)
-	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
-	id 1h3t3M-00065C-Fp; Tue, 12 Mar 2019 21:51:34 -0400
-Received: by mail-ed1-x544.google.com with SMTP id n14so80121edv.8;
-	Tue, 12 Mar 2019 18:51:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=9OH7nznUOVlLbcjZCPE7oOSmhxyzexQhDp1tdbYBeGQ=;
-	b=HquePqiya3NmG1asPOvRl0U2zke7YYxXKuIO0BkPmLehrDAO02F91Rt0hM++kxo8YU
-	SWLYcCmE0GJeQ7XONNks5gAjj5W2G9WGW37NZasaKaxDCROUD/rCCZxFgmZ1GB84R7lT
-	mZQIFlH2szLQmU/gy99koG8RSKS3YcC0nj82iKO316uDog2Ehqd/ts2tlJ+mIxLUh0Ex
-	DhQKW7z1kwrj+8QSe7qls/wXf2FmccNU39eafoolDvtGB/ZRVEBqiXqGOv+D8SEsVNIe
-	Fq+GsmX5Xio6SnsYAVdMyRUT+/h66rwc5ZNwdMbmBBT+SIhAoLP+mBWZQOjczd/RyJqn
-	Zihg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=9OH7nznUOVlLbcjZCPE7oOSmhxyzexQhDp1tdbYBeGQ=;
-	b=tTaxrtb9n0RkFW7m6gomEmOe/4eJ1CxI/4tGBf0tU84Eugm22DzG1h9xkeM3G1yJAu
-	vr/etJj1JJG8pABsHQh/8wNy2SKqIflcfwh79okkvXSElstSxoy/lr8Rx0tjwOY0KYvg
-	PuK2lMSo1hqiPwa/Fbjl7nLvnvP2/bQn4NG/mPgu9ls/6GEMFFwRg7HZLRvQBKUqr6YK
-	BFqKIgXMStMEiYP0NRhOVrmJjL8G/IJIzt+Lq/v5viYS6bYtjTpQEOi9a1XSwSd9wg0C
-	MJYq/1czgTAyxP6xPVaSbiOmHY6+k/9jOcdZvGhZN/K2q+524mfDTpovq6lHMn/4Htd/
-	LL+g==
-X-Gm-Message-State: APjAAAW5Yu1LX56EtXnuoBN2bhh+W882eAomwndHXroOg7Y1ozfam6/m
-	9fiieLIsgOSSYnG4YBIokWCAkqBSTPWbjGDfHQk=
-X-Google-Smtp-Source: APXvYqyia5b4NSBvEfZhRabEh6H434VAa8SG30To8hD0IJFZ1Etb7vFBvjdI1dQcgBUwzsShtKcmTuizoRhbg6hHXyE=
-X-Received: by 2002:a17:906:4ada:: with SMTP id
-	u26mr28140880ejt.191.1552441891091; 
-	Tue, 12 Mar 2019 18:51:31 -0700 (PDT)
+	(envelope-from <kbastian@mail.uni-paderborn.de>) id 1h40EA-0005ty-MI
+	for qemu-riscv@nongnu.org; Wed, 13 Mar 2019 05:31:11 -0400
+Received: from mail.uni-paderborn.de ([131.234.142.9]:54164)
+	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.71) (envelope-from <kbastian@mail.uni-paderborn.de>)
+	id 1h40E8-0005oz-Nk; Wed, 13 Mar 2019 05:31:09 -0400
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=mail.uni-paderborn.de; s=20170601;
+	h=Content-Transfer-Encoding:Content-Type
+	:In-Reply-To:MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:
+	Sender:Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
+	List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+	bh=N/EScPWohqHIgu46es41Bj7XWLSPEuo0YMRQLJj+sSQ=;
+	b=pLtZ6LtLkbjzsC2Mz03H8QTNPN
+	BJhi7cbDDCxdI7tgjGgpAKbC4i9r/9ldVkkXSGAJc2SMxtXAbWWwM7q3wP1nLz63RZnjak1RXZKwO
+	bMUy/+pMGQW2YCRY4gDgTRvPSkiFI0CxNE4VS5OAebcUYEMUpyMVu8rOOhKVkGTY/S0Y=; 
+To: Peter Maydell <peter.maydell@linaro.org>,
+	Palmer Dabbelt <palmer@sifive.com>
+Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
+	QEMU Developers <qemu-devel@nongnu.org>
+References: <20190312131526.14710-1-palmer@sifive.com>
+	<CAFEAcA_hZLO032+gPuoy6enJvssjiZBUtBaC_pG4BGUPR3F0kQ@mail.gmail.com>
+From: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+Message-ID: <108e3974-e305-4a0b-69cf-92809ddc117c@mail.uni-paderborn.de>
+Date: Wed, 13 Mar 2019 10:31:03 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.5.3
 MIME-Version: 1.0
-References: <20190210201726.3567-1-lukas.auer@aisec.fraunhofer.de>
-	<CAEUhbmUtSAeznt1DCwJ7tS=YFeqwnYBemS6278=QQ60qs_MthA@mail.gmail.com>
-	<c9f69861058412a1f71418a9c892daf0821a9e33.camel@aisec.fraunhofer.de>
-	<CAEUhbmXjCqRRtNDqq5E5y60sDz+4=WqMuxFhaLndot7TSJuUiQ@mail.gmail.com>
-	<e131b4b0eb9109547ce0ed0993665206d6bf983a.camel@aisec.fraunhofer.de>
-	<CAEUhbmX=PT-46nqtMqSaGn5xu2tRJ50Sm6kK7b97Xc_Y+6stPw@mail.gmail.com>
-	<33758c6945c9b1968247c5b6dfb12418e57e71e0.camel@aisec.fraunhofer.de>
-In-Reply-To: <33758c6945c9b1968247c5b6dfb12418e57e71e0.camel@aisec.fraunhofer.de>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Wed, 13 Mar 2019 09:51:20 +0800
-Message-ID: <CAEUhbmX5ygthHtEoMvRMND3hbmhXrp-ok_hyvAqC+REafNSNbQ@mail.gmail.com>
-To: "Auer, Lukas" <lukas.auer@aisec.fraunhofer.de>
-Cc: "palmer@sifive.com" <palmer@sifive.com>,
-	"qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>, 
-	"qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, 
-	"kbastian@mail.uni-paderborn.de" <kbastian@mail.uni-paderborn.de>, 
-	"sagark@eecs.berkeley.edu" <sagark@eecs.berkeley.edu>, 
-	"Alistair.Francis@wdc.com" <Alistair.Francis@wdc.com>
-Content-Type: text/plain; charset="UTF-8"
+In-Reply-To: <CAFEAcA_hZLO032+gPuoy6enJvssjiZBUtBaC_pG4BGUPR3F0kQ@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US-large
+X-IMT-Spam-Score: 0.0 ()
+X-PMX-Version: 6.4.6.2792898, Antispam-Engine: 2.7.2.2107409,
+	Antispam-Data: 2019.3.13.92116, AntiVirus-Engine: 5.58.0,
+	AntiVirus-Data: 2019.2.22.5580002
+X-IMT-Authenticated-Sender: kbastian@UNI-PADERBORN.DE
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2a00:1450:4864:20::544
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH] hw/riscv/virt: re-add
- machine-specific compatible string to /soc/ node
+X-Received-From: 131.234.142.9
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PULL] target/riscv: Convert to
+ decodetree
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -76,102 +60,122 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Mar 2019 01:51:39 -0000
+X-List-Received-Date: Wed, 13 Mar 2019 09:44:19 -0000
 
-Hi Lukas,
 
-On Tue, Mar 12, 2019 at 10:39 PM Auer, Lukas
-<lukas.auer@aisec.fraunhofer.de> wrote:
+On 3/12/19 7:31 PM, Peter Maydell wrote:
+> On Tue, 12 Mar 2019 at 13:15, Palmer Dabbelt <palmer@sifive.com> wrote:
+>> The following changes since commit 377b155bde451d5ac545fbdcdfbf6ca17a4228f5:
+>>
+>>    Merge remote-tracking branch 'remotes/bonzini/tags/for-upstream' into staging (2019-03-11 18:26:37 +0000)
+>>
+>> are available in the Git repository at:
+>>
+>>    git://github.com/palmer-dabbelt/qemu.git tags/riscv-for-master-4.0-sf3
+>>
+>> for you to fetch changes up to a971f8ae0e8ab6fab1eee199961b1ea2f4d876f7:
+>>
+>>    target/riscv: Remove decode_RV32_64G() (2019-03-12 03:08:34 -0700)
+>>
+>> ----------------------------------------------------------------
+>> target/riscv: Convert to decodetree
 >
-> Hi Bin,
+> I'm still seeing some errors about redefining typedefs, I'm afraid:
 >
-> On Mon, 2019-03-11 at 23:28 +0800, Bin Meng wrote:
-> > Hi Lukas,
-> >
-> > On Mon, Mar 11, 2019 at 2:03 AM Auer, Lukas
-> > <lukas.auer@aisec.fraunhofer.de> wrote:
-> > > Hi Bin,
-> > >
-> > > On Sun, 2019-03-10 at 22:57 +0800, Bin Meng wrote:
-> > > > Hi Lukas,
-> > > >
-> > > > On Sun, Mar 10, 2019 at 9:44 PM Auer, Lukas
-> > > > <lukas.auer@aisec.fraunhofer.de> wrote:
-> > > > > Hi Bin,
-> > > > >
-> > > > > On Sun, 2019-03-10 at 09:07 +0800, Bin Meng wrote:
-> > > > > > Hi Lukas,
-> > > > > >
-> > > > > > On Mon, Feb 11, 2019 at 6:13 AM Lukas Auer
-> > > > > > <lukas.auer@aisec.fraunhofer.de> wrote:
-> > > > > > > Re-add the previous compatible string "riscv-virtio-soc" to
-> > > > > > > the
-> > > > > > > soc
-> > > > > > > device tree node to allow U-Boot and Linux to bind machine-
-> > > > > > > specific
-> > > > > > > drivers to it. The current compatible string "simple-bus"
-> > > > > > > is
-> > > > > > > retained.
-> > > > > > >
-> > > > > > > This is required by U-Boot to bind devices early, as part
-> > > > > > > of
-> > > > > > > the
-> > > > > > > pre-relocation driver model.
-> > > > > > >
-> > > > > >
-> > > > > > I see no problem with U-Boot working with current compatible
-> > > > > > string
-> > > > > > "simple-bus". In fact I had planned to remove the compatible
-> > > > > > string
-> > > > > > "riscv-virtio-soc" in U-Boot but did not get time to work on
-> > > > > > it.
-> > > > > >
-> > > > >
-> > > > > It is only required if U-Boot is running in machine-mode. For
-> > > > > relocation it needs to use the CLINT driver to send appropriate
-> > > > > IPIs to
-> > > > > the other harts. To be able to probe the driver, the device and
-> > > > > its
-> > > > > parent device tree node (soc) must therefore be available in
-> > > > > the
-> > > > > pre-
-> > > > > relocation device model.
-> > > > > This patch was the easiest way I could think of for achieving
-> > > > > this.
-> > > > > It
-> > > > > could be that there is a better way of solving this.
-> > > > >
-> > > >
-> > > > I tested your SMP U-Boot series in both M-mode and S-mode, using
-> > > > a 4
-> > > > core 'virt' target. Works fine. I am using QEMU 3.1.0 so it is
-> > > > "simple-bus".
-> > > >
-> > >
-> > > That is actually my fault, it should not work.
-> > > What is happening is that U-Boot fails to relocate the secondary
-> > > harts,
-> > > because the CLINT driver cannot get the memory address of the CLINT
-> > > device. This error is currently silently ignored.
-> >
-> > I still don't understand. Why does the CLINT driver fail to get the
-> > memory address? U-Boot has been supporting "simpile-bus" for a long
-> > time. It was because QEMU 3.0.0 generated the /soc node with
-> > "riscv-virtio-soc" compatible string, U-Boot was taught to treat such
-> > compatible string as a "simple-bus" too (that was the U-Boot commit
-> > 27dc2c130e29)
+> target/riscv/decode_insn16.inc.c:102:28: error: redefinition of
+> typedef 'arg_c_addi16sp_lui' is a C11 feature
+> [-Werror,-Wtypedef-redefinition]
+> target/riscv/decode_insn16.inc.c:122:17: error: redefinition of
+> typedef 'arg_c_j' is a C11 feature [-Werror,-Wtypedef-redefinition]
+> target/riscv/decode_insn16.inc.c:134:26: error: redefinition of
+> typedef 'arg_c_flwsp_ldsp' is a C11 feature
+> [-Werror,-Wtypedef-redefinition]
+> target/riscv/decode_insn16.inc.c:144:26: error: redefinition of
+> typedef 'arg_c_fswsp_sdsp' is a C11 feature
+> [-Werror,-Wtypedef-redefinition]
+> target/riscv/decode_insn16.inc.c:102:28: error: redefinition of
+> typedef 'arg_c_addi16sp_lui' is a C11 feature
+> [-Werror,-Wtypedef-redefinition]
+> target/riscv/decode_insn16.inc.c:122:17: error: redefinition of
+> typedef 'arg_c_j' is a C11 feature [-Werror,-Wtypedef-redefinition]
+> target/riscv/decode_insn16.inc.c:134:26: error: redefinition of
+> typedef 'arg_c_flwsp_ldsp' is a C11 feature
+> [-Werror,-Wtypedef-redefinition]
+> target/riscv/decode_insn16.inc.c:144:26: error: redefinition of
+> typedef 'arg_c_fswsp_sdsp' is a C11 feature
+> [-Werror,-Wtypedef-redefinition]
 >
-> That's correct. The problem with the default simple-bus U-Boot driver
-> is that it does not have the DM_FLAG_PRE_RELOC flag set. The /soc and
-> /soc/clint nodes are therefore not available before relocation, meaning
-> that IPIs cannot be sent to relocate the secondary harts.
+> thanks
+> -- PMM
 >
 
-Thanks for the clarifications. Now I see the problem. But I think we
-should fix U-Boot "simple-bus" driver instead. As seen on FU540 or
-likely other hardware, QEMU generates the "simple-bus" compatible
-string for the /soc node, as well as the DT provided by the hardware.
+Hi Peter,
 
-Regards,
-Bin
+this should fix it:
+
+diff --git a/target/riscv/insn16.decode b/target/riscv/insn16.decode
+index 0829e3bc59..1a461616aa 100644
+--- a/target/riscv/insn16.decode
++++ b/target/riscv/insn16.decode
+@@ -50,15 +50,15 @@
+  &cs_dw     uimm   rs1 rs2
+  &cb        imm    rs1
+  &cr               rd  rs2
+-&c_j       imm
++&cj       imm
+  &c_shift   shamt      rd
+
+  &c_ld      uimm  rd
+  &c_sd      uimm  rs2
+
+-&c_addi16sp_lui  imm_lui imm_addi16sp rd
+-&c_flwsp_ldsp    uimm_flwsp uimm_ldsp rd
+-&c_fswsp_sdsp    uimm_fswsp uimm_sdsp rs2
++&caddi16sp_lui  imm_lui imm_addi16sp rd
++&cflwsp_ldsp    uimm_flwsp uimm_ldsp rd
++&cfswsp_sdsp    uimm_fswsp uimm_sdsp rs2
+
+  # Formats 16:
+  @cr        ....  ..... .....  .. &cr rs2=%rs2_5  %rd
+@@ -72,17 +72,17 @@
+  @cs_d      ... ... ... .. ... .. &cs_dw  uimm=%uimm_cl_d rs1=%rs1_3  
+rs2=%rs2_3
+  @cs_w      ... ... ... .. ... .. &cs_dw  uimm=%uimm_cl_w rs1=%rs1_3  
+rs2=%rs2_3
+  @cb        ... ... ... .. ... .. &cb     imm=%imm_cb rs1=%rs1_3
+-@cj        ...    ........... .. &c_j    imm=%imm_cj
++@cj        ...    ........... .. &cj    imm=%imm_cj
+
+  @c_ld      ... . .....  ..... .. &c_ld uimm=%uimm_6bit_ld  %rd
+  @c_lw      ... . .....  ..... .. &c_ld uimm=%uimm_6bit_lw  %rd
+  @c_sd      ... . .....  ..... .. &c_sd uimm=%uimm_6bit_sd  rs2=%rs2_5
+  @c_sw      ... . .....  ..... .. &c_sd uimm=%uimm_6bit_sw  rs2=%rs2_5
+
+-@c_addi16sp_lui ... .  ..... ..... .. &c_addi16sp_lui %imm_lui 
+%imm_addi16sp %rd
+-@c_flwsp_ldsp   ... .  ..... ..... .. &c_flwsp_ldsp 
+uimm_flwsp=%uimm_6bit_lw \
++@c_addi16sp_lui ... .  ..... ..... .. &caddi16sp_lui %imm_lui 
+%imm_addi16sp %rd
++@c_flwsp_ldsp   ... .  ..... ..... .. &cflwsp_ldsp 
+uimm_flwsp=%uimm_6bit_lw \
+      uimm_ldsp=%uimm_6bit_ld %rd
+-@c_fswsp_sdsp   ... .  ..... ..... .. &c_fswsp_sdsp 
+uimm_fswsp=%uimm_6bit_sw \
++@c_fswsp_sdsp   ... .  ..... ..... .. &cfswsp_sdsp 
+uimm_fswsp=%uimm_6bit_sw \
+      uimm_sdsp=%uimm_6bit_sd rs2=%rs2_5
+
+  @c_shift        ... . .. ... ..... .. &c_shift rd=%rs1_3 
+shamt=%nzuimm_6bit
+
+
+@Palmer: I send a fixed version of the offending patch.
+
+Cheers,
+
+Bastian
+
+
+
 
