@@ -1,59 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1h3mBv-0004Cv-Nf
-	for mharc-qemu-riscv@gnu.org; Tue, 12 Mar 2019 14:31:55 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:44558)
+	id 1h3t3V-0004n0-8H
+	for mharc-qemu-riscv@gnu.org; Tue, 12 Mar 2019 21:51:41 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:43149)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <peter.maydell@linaro.org>) id 1h3mBs-0004AA-T2
-	for qemu-riscv@nongnu.org; Tue, 12 Mar 2019 14:31:53 -0400
+	(envelope-from <bmeng.cn@gmail.com>) id 1h3t3S-0004ju-3B
+	for qemu-riscv@nongnu.org; Tue, 12 Mar 2019 21:51:39 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <peter.maydell@linaro.org>) id 1h3mBr-0003k2-Ui
-	for qemu-riscv@nongnu.org; Tue, 12 Mar 2019 14:31:52 -0400
-Received: from mail-it1-x12f.google.com ([2607:f8b0:4864:20::12f]:39397)
+	(envelope-from <bmeng.cn@gmail.com>) id 1h3t3Q-0006D6-5b
+	for qemu-riscv@nongnu.org; Tue, 12 Mar 2019 21:51:38 -0400
+Received: from mail-ed1-x544.google.com ([2a00:1450:4864:20::544]:41096)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <peter.maydell@linaro.org>)
-	id 1h3mBr-0003iu-KI
-	for qemu-riscv@nongnu.org; Tue, 12 Mar 2019 14:31:51 -0400
-Received: by mail-it1-x12f.google.com with SMTP id l15so6158759iti.4
-	for <qemu-riscv@nongnu.org>; Tue, 12 Mar 2019 11:31:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+	(Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
+	id 1h3t3M-00065C-Fp; Tue, 12 Mar 2019 21:51:34 -0400
+Received: by mail-ed1-x544.google.com with SMTP id n14so80121edv.8;
+	Tue, 12 Mar 2019 18:51:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=eliv2jE3NX7P8PQLeKY9FIyqxoOkvNrQPHcF5VwwRSE=;
-	b=JGBVxsaWFpi2KEsOfsXaJHUYookWwJy1K9G7g2OBcj+dqfvT5NarpjSSU+OilhcAUp
-	HZeGNQRIkH6OJ5v04TSTdJ3U4WA9YzQ6461UyPhiaUaat1IVBWmvlSkTpWlOgMLk2KWl
-	B+ho9FVJlfF7MULQyMu84sW1Niwe6nkzZoAeG5IOBVheCmeY/ZD9M9uMmzrLN/c5+sI3
-	OqgYw7WFFHXEkdY+T15bhKtxgL4kk6R1fMN6aGqngAU2QKz2etvJph2IRAdxGsKlNTJt
-	oFFKHg0bRA1A4XBojrA6CknZ7pkjOBKSCfY9WAlyys+ibRUnTzNwTnixakIrOCdhS7cn
-	MIxA==
+	:cc; bh=9OH7nznUOVlLbcjZCPE7oOSmhxyzexQhDp1tdbYBeGQ=;
+	b=HquePqiya3NmG1asPOvRl0U2zke7YYxXKuIO0BkPmLehrDAO02F91Rt0hM++kxo8YU
+	SWLYcCmE0GJeQ7XONNks5gAjj5W2G9WGW37NZasaKaxDCROUD/rCCZxFgmZ1GB84R7lT
+	mZQIFlH2szLQmU/gy99koG8RSKS3YcC0nj82iKO316uDog2Ehqd/ts2tlJ+mIxLUh0Ex
+	DhQKW7z1kwrj+8QSe7qls/wXf2FmccNU39eafoolDvtGB/ZRVEBqiXqGOv+D8SEsVNIe
+	Fq+GsmX5Xio6SnsYAVdMyRUT+/h66rwc5ZNwdMbmBBT+SIhAoLP+mBWZQOjczd/RyJqn
+	Zihg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=eliv2jE3NX7P8PQLeKY9FIyqxoOkvNrQPHcF5VwwRSE=;
-	b=l0uDTYy+U/Ne74k3LL1PgqsufXsMOUHNVzkQlFxi0b/4Urthb1aovBhPVmRt2SFk8N
-	HNVgpAtiEhigwhbQsNstLr3iv+YcEOe6MieByHhy7mZHSlntAwro70in/Qlp9Jq+jR2N
-	4ebmvd9hx1d29useENUl7A+DR5CWXI/o2NVVrifPwDO8/4AYkku8PJAz/e1JXkxkhhiG
-	PoQ4e6RTKsxUIsrbifjmDx+BcwJk9cTWRjyrdFo+ZBw+IR5Wk3f3ng9C125IgGMOzpGT
-	srWo1r+tcIq63xOYDxuFkvlpNWxFqoK3edr2DpnGX4Avt9pbBsOPu6YzymJVYt03vQDo
-	/Vlg==
-X-Gm-Message-State: APjAAAVWcxsAGyLLbgUzt3Al6rW0BuvUlhVVFEmlPdgLI3EeLjK1k8NF
-	ImOU8ebbv2TJeMw5h0JH6p/ioJ4gBgnsjNoloWWiaQ==
-X-Google-Smtp-Source: APXvYqzQJgVEOcc5plh8+2cc7U5HCKjAJzCO5+/IOLgvRlTq8hsJjKAFmR+TARMrcAC7Nb3sQvmjouWQJp9awnq5lDw=
-X-Received: by 2002:a24:4087:: with SMTP id n129mr2808942ita.140.1552415510221;
-	Tue, 12 Mar 2019 11:31:50 -0700 (PDT)
+	bh=9OH7nznUOVlLbcjZCPE7oOSmhxyzexQhDp1tdbYBeGQ=;
+	b=tTaxrtb9n0RkFW7m6gomEmOe/4eJ1CxI/4tGBf0tU84Eugm22DzG1h9xkeM3G1yJAu
+	vr/etJj1JJG8pABsHQh/8wNy2SKqIflcfwh79okkvXSElstSxoy/lr8Rx0tjwOY0KYvg
+	PuK2lMSo1hqiPwa/Fbjl7nLvnvP2/bQn4NG/mPgu9ls/6GEMFFwRg7HZLRvQBKUqr6YK
+	BFqKIgXMStMEiYP0NRhOVrmJjL8G/IJIzt+Lq/v5viYS6bYtjTpQEOi9a1XSwSd9wg0C
+	MJYq/1czgTAyxP6xPVaSbiOmHY6+k/9jOcdZvGhZN/K2q+524mfDTpovq6lHMn/4Htd/
+	LL+g==
+X-Gm-Message-State: APjAAAW5Yu1LX56EtXnuoBN2bhh+W882eAomwndHXroOg7Y1ozfam6/m
+	9fiieLIsgOSSYnG4YBIokWCAkqBSTPWbjGDfHQk=
+X-Google-Smtp-Source: APXvYqyia5b4NSBvEfZhRabEh6H434VAa8SG30To8hD0IJFZ1Etb7vFBvjdI1dQcgBUwzsShtKcmTuizoRhbg6hHXyE=
+X-Received: by 2002:a17:906:4ada:: with SMTP id
+	u26mr28140880ejt.191.1552441891091; 
+	Tue, 12 Mar 2019 18:51:31 -0700 (PDT)
 MIME-Version: 1.0
-References: <20190312131526.14710-1-palmer@sifive.com>
-In-Reply-To: <20190312131526.14710-1-palmer@sifive.com>
-From: Peter Maydell <peter.maydell@linaro.org>
-Date: Tue, 12 Mar 2019 18:31:38 +0000
-Message-ID: <CAFEAcA_hZLO032+gPuoy6enJvssjiZBUtBaC_pG4BGUPR3F0kQ@mail.gmail.com>
-To: Palmer Dabbelt <palmer@sifive.com>
-Cc: QEMU Developers <qemu-devel@nongnu.org>,
-	"open list:RISC-V" <qemu-riscv@nongnu.org>
+References: <20190210201726.3567-1-lukas.auer@aisec.fraunhofer.de>
+	<CAEUhbmUtSAeznt1DCwJ7tS=YFeqwnYBemS6278=QQ60qs_MthA@mail.gmail.com>
+	<c9f69861058412a1f71418a9c892daf0821a9e33.camel@aisec.fraunhofer.de>
+	<CAEUhbmXjCqRRtNDqq5E5y60sDz+4=WqMuxFhaLndot7TSJuUiQ@mail.gmail.com>
+	<e131b4b0eb9109547ce0ed0993665206d6bf983a.camel@aisec.fraunhofer.de>
+	<CAEUhbmX=PT-46nqtMqSaGn5xu2tRJ50Sm6kK7b97Xc_Y+6stPw@mail.gmail.com>
+	<33758c6945c9b1968247c5b6dfb12418e57e71e0.camel@aisec.fraunhofer.de>
+In-Reply-To: <33758c6945c9b1968247c5b6dfb12418e57e71e0.camel@aisec.fraunhofer.de>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Wed, 13 Mar 2019 09:51:20 +0800
+Message-ID: <CAEUhbmX5ygthHtEoMvRMND3hbmhXrp-ok_hyvAqC+REafNSNbQ@mail.gmail.com>
+To: "Auer, Lukas" <lukas.auer@aisec.fraunhofer.de>
+Cc: "palmer@sifive.com" <palmer@sifive.com>,
+	"qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>, 
+	"qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, 
+	"kbastian@mail.uni-paderborn.de" <kbastian@mail.uni-paderborn.de>, 
+	"sagark@eecs.berkeley.edu" <sagark@eecs.berkeley.edu>, 
+	"Alistair.Francis@wdc.com" <Alistair.Francis@wdc.com>
 Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::12f
-Subject: Re: [Qemu-riscv] [PULL] target/riscv: Convert to decodetree
+X-Received-From: 2a00:1450:4864:20::544
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH] hw/riscv/virt: re-add
+ machine-specific compatible string to /soc/ node
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -65,51 +76,102 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Mar 2019 18:31:54 -0000
+X-List-Received-Date: Wed, 13 Mar 2019 01:51:39 -0000
 
-On Tue, 12 Mar 2019 at 13:15, Palmer Dabbelt <palmer@sifive.com> wrote:
->
-> The following changes since commit 377b155bde451d5ac545fbdcdfbf6ca17a4228f5:
->
->   Merge remote-tracking branch 'remotes/bonzini/tags/for-upstream' into staging (2019-03-11 18:26:37 +0000)
->
-> are available in the Git repository at:
->
->   git://github.com/palmer-dabbelt/qemu.git tags/riscv-for-master-4.0-sf3
->
-> for you to fetch changes up to a971f8ae0e8ab6fab1eee199961b1ea2f4d876f7:
->
->   target/riscv: Remove decode_RV32_64G() (2019-03-12 03:08:34 -0700)
->
-> ----------------------------------------------------------------
-> target/riscv: Convert to decodetree
+Hi Lukas,
 
+On Tue, Mar 12, 2019 at 10:39 PM Auer, Lukas
+<lukas.auer@aisec.fraunhofer.de> wrote:
+>
+> Hi Bin,
+>
+> On Mon, 2019-03-11 at 23:28 +0800, Bin Meng wrote:
+> > Hi Lukas,
+> >
+> > On Mon, Mar 11, 2019 at 2:03 AM Auer, Lukas
+> > <lukas.auer@aisec.fraunhofer.de> wrote:
+> > > Hi Bin,
+> > >
+> > > On Sun, 2019-03-10 at 22:57 +0800, Bin Meng wrote:
+> > > > Hi Lukas,
+> > > >
+> > > > On Sun, Mar 10, 2019 at 9:44 PM Auer, Lukas
+> > > > <lukas.auer@aisec.fraunhofer.de> wrote:
+> > > > > Hi Bin,
+> > > > >
+> > > > > On Sun, 2019-03-10 at 09:07 +0800, Bin Meng wrote:
+> > > > > > Hi Lukas,
+> > > > > >
+> > > > > > On Mon, Feb 11, 2019 at 6:13 AM Lukas Auer
+> > > > > > <lukas.auer@aisec.fraunhofer.de> wrote:
+> > > > > > > Re-add the previous compatible string "riscv-virtio-soc" to
+> > > > > > > the
+> > > > > > > soc
+> > > > > > > device tree node to allow U-Boot and Linux to bind machine-
+> > > > > > > specific
+> > > > > > > drivers to it. The current compatible string "simple-bus"
+> > > > > > > is
+> > > > > > > retained.
+> > > > > > >
+> > > > > > > This is required by U-Boot to bind devices early, as part
+> > > > > > > of
+> > > > > > > the
+> > > > > > > pre-relocation driver model.
+> > > > > > >
+> > > > > >
+> > > > > > I see no problem with U-Boot working with current compatible
+> > > > > > string
+> > > > > > "simple-bus". In fact I had planned to remove the compatible
+> > > > > > string
+> > > > > > "riscv-virtio-soc" in U-Boot but did not get time to work on
+> > > > > > it.
+> > > > > >
+> > > > >
+> > > > > It is only required if U-Boot is running in machine-mode. For
+> > > > > relocation it needs to use the CLINT driver to send appropriate
+> > > > > IPIs to
+> > > > > the other harts. To be able to probe the driver, the device and
+> > > > > its
+> > > > > parent device tree node (soc) must therefore be available in
+> > > > > the
+> > > > > pre-
+> > > > > relocation device model.
+> > > > > This patch was the easiest way I could think of for achieving
+> > > > > this.
+> > > > > It
+> > > > > could be that there is a better way of solving this.
+> > > > >
+> > > >
+> > > > I tested your SMP U-Boot series in both M-mode and S-mode, using
+> > > > a 4
+> > > > core 'virt' target. Works fine. I am using QEMU 3.1.0 so it is
+> > > > "simple-bus".
+> > > >
+> > >
+> > > That is actually my fault, it should not work.
+> > > What is happening is that U-Boot fails to relocate the secondary
+> > > harts,
+> > > because the CLINT driver cannot get the memory address of the CLINT
+> > > device. This error is currently silently ignored.
+> >
+> > I still don't understand. Why does the CLINT driver fail to get the
+> > memory address? U-Boot has been supporting "simpile-bus" for a long
+> > time. It was because QEMU 3.0.0 generated the /soc node with
+> > "riscv-virtio-soc" compatible string, U-Boot was taught to treat such
+> > compatible string as a "simple-bus" too (that was the U-Boot commit
+> > 27dc2c130e29)
+>
+> That's correct. The problem with the default simple-bus U-Boot driver
+> is that it does not have the DM_FLAG_PRE_RELOC flag set. The /soc and
+> /soc/clint nodes are therefore not available before relocation, meaning
+> that IPIs cannot be sent to relocate the secondary harts.
+>
 
-I'm still seeing some errors about redefining typedefs, I'm afraid:
+Thanks for the clarifications. Now I see the problem. But I think we
+should fix U-Boot "simple-bus" driver instead. As seen on FU540 or
+likely other hardware, QEMU generates the "simple-bus" compatible
+string for the /soc node, as well as the DT provided by the hardware.
 
-target/riscv/decode_insn16.inc.c:102:28: error: redefinition of
-typedef 'arg_c_addi16sp_lui' is a C11 feature
-[-Werror,-Wtypedef-redefinition]
-target/riscv/decode_insn16.inc.c:122:17: error: redefinition of
-typedef 'arg_c_j' is a C11 feature [-Werror,-Wtypedef-redefinition]
-target/riscv/decode_insn16.inc.c:134:26: error: redefinition of
-typedef 'arg_c_flwsp_ldsp' is a C11 feature
-[-Werror,-Wtypedef-redefinition]
-target/riscv/decode_insn16.inc.c:144:26: error: redefinition of
-typedef 'arg_c_fswsp_sdsp' is a C11 feature
-[-Werror,-Wtypedef-redefinition]
-target/riscv/decode_insn16.inc.c:102:28: error: redefinition of
-typedef 'arg_c_addi16sp_lui' is a C11 feature
-[-Werror,-Wtypedef-redefinition]
-target/riscv/decode_insn16.inc.c:122:17: error: redefinition of
-typedef 'arg_c_j' is a C11 feature [-Werror,-Wtypedef-redefinition]
-target/riscv/decode_insn16.inc.c:134:26: error: redefinition of
-typedef 'arg_c_flwsp_ldsp' is a C11 feature
-[-Werror,-Wtypedef-redefinition]
-target/riscv/decode_insn16.inc.c:144:26: error: redefinition of
-typedef 'arg_c_fswsp_sdsp' is a C11 feature
-[-Werror,-Wtypedef-redefinition]
-
-thanks
--- PMM
+Regards,
+Bin
 
