@@ -1,67 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1h4562-0000dX-Oo
-	for mharc-qemu-riscv@gnu.org; Wed, 13 Mar 2019 10:43:06 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:60723)
+	id 1h4563-0000eL-BX
+	for mharc-qemu-riscv@gnu.org; Wed, 13 Mar 2019 10:43:07 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:60596)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1h455r-0000SU-Na
-	for qemu-riscv@nongnu.org; Wed, 13 Mar 2019 10:42:56 -0400
+	(envelope-from <palmer@sifive.com>) id 1h455s-0000I0-Sy
+	for qemu-riscv@nongnu.org; Wed, 13 Mar 2019 10:42:58 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1h451f-0004re-DE
-	for qemu-riscv@nongnu.org; Wed, 13 Mar 2019 10:38:36 -0400
-Received: from mail-pf1-x430.google.com ([2607:f8b0:4864:20::430]:35381)
+	(envelope-from <palmer@sifive.com>) id 1h451Z-0004nu-O0
+	for qemu-riscv@nongnu.org; Wed, 13 Mar 2019 10:38:30 -0400
+Received: from mail-pf1-x42f.google.com ([2607:f8b0:4864:20::42f]:42641)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1h451f-0004rF-7j
-	for qemu-riscv@nongnu.org; Wed, 13 Mar 2019 10:38:35 -0400
-Received: by mail-pf1-x430.google.com with SMTP id j5so1535500pfa.2
-	for <qemu-riscv@nongnu.org>; Wed, 13 Mar 2019 07:38:35 -0700 (PDT)
+	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1h451Z-0004nM-GX
+	for qemu-riscv@nongnu.org; Wed, 13 Mar 2019 10:38:29 -0400
+Received: by mail-pf1-x42f.google.com with SMTP id n74so1515799pfi.9
+	for <qemu-riscv@nongnu.org>; Wed, 13 Mar 2019 07:38:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
 	h=subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding:cc:from:to;
-	bh=41jWe7eqKwUbIEv9qKvD//y2zi/3DdoUZKjfpiZ07j0=;
-	b=GSkbOg16dhpw621yodZJdqcR4g7rv5ZNbX8ZrViKaWdYRBJX9rmILRFvZYMsgjp1iY
-	nQ7RvAEJSO2RtWegGQuWGCEh1zQjqLUKA0cm4ol+1bngt6b6GLwaK8MPuSPTxU1hsR6u
-	FlkmSoT0TXt2mFDF5al8RiDlqG3W2VInzw8MYOAsLgkuIMUbOHz0qcXCrpbps0KS7tzA
-	MNyOQXO3cK9GD4DwyQ4SkTTW4kqZ33ZiTZaI7uA+6qULNM2ZyfHnbmEKZIxnRTEIKIco
-	VToXcgKBkWgabRDkrZ737dZ2rNcmqpiqNS0e88apjROmxXpRi2Rq4nEGXYJA1JMfUItI
-	YD5g==
+	bh=kHfE6VWOyUQ//bv64/i9dmI/tTebcWEU3d/nCLPezw4=;
+	b=cMFMtuQkYRg5++8koXTMYN7xMTuSrXymjcZaUDtTbLT0DTd30uJSPnunsX2o3aAUXs
+	Mvz5+hEbzmTCjqQdFvi6ZYvOVYiyhhdDARj3H2TlM/czuaojOHn+cZ7O74zKvtO0EpA5
+	o17jRgVDDOsHAVB7lPSa75QEP0sWlQa8AY21IZsbJvAQ9L0962xxKOgMrM1sAGXlpvtb
+	lqRcgMNddZFqktxX6rDK1toNG7jriZi8vf2U0VwcQCY2EEHGVnO+NEOhLD7p/0sGsRNd
+	jqkOfk3brnPqII7j5J3TZxux5DInp7niAbhi7FXec+YFQM7MG5RZLFIOVtRiChwsDJa9
+	x6jw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding:cc:from:to;
-	bh=41jWe7eqKwUbIEv9qKvD//y2zi/3DdoUZKjfpiZ07j0=;
-	b=HSfgVM4mn//F6l+l+Q8gZ542zSX3jkegOTSApD87uJzZthZ24aFb9KvZYR6FJcosq8
-	erdA8ND1h1JQ+XDoIXjjFJCGER4yDT3zkMvJjgpnvMw5orcXfQDbZr0p8IwVNrozjhwp
-	+GNF6GmCirOPxYOEpDHkbgen9AGTqEt7fgJeGYUzH4NxAygh2tjrUEsP8Dq09g842mLk
-	7fGG1uWRmu+B77WyZFbp88r8j5khr80CeD+dw+a5OHaOURt13LySFzJqjhLGqFs5OI6D
-	JNswDKvnD+x8lU9KL9lm6Yq4otuD9+L9lYvX8Sy0ZsX+dXDLyBkED583b2EVS8Xn/+Gm
-	tkjA==
-X-Gm-Message-State: APjAAAWzUX/tzNn/esOMKi0x2lIcpDgeP0s2fYvPP48XX4vApfiX4ytJ
-	gAZ3XwOF/Eh3F2fX19iinUqhtfvDKf0ccgc6
-X-Google-Smtp-Source: APXvYqwoHahgwLpM1FauHbEV/UlVqocyDplYSkQjzK3IaHRyHS1l5fNNpkiqbBj6UOid6KxLGPMzxg==
-X-Received: by 2002:a17:902:76c7:: with SMTP id
-	j7mr45041179plt.121.1552487914012; 
-	Wed, 13 Mar 2019 07:38:34 -0700 (PDT)
+	bh=kHfE6VWOyUQ//bv64/i9dmI/tTebcWEU3d/nCLPezw4=;
+	b=r0es+TozWcLDo46VPtslrnQyGICy0EtA4hrh0+A4xBKRcN58qV+sHTtkT+bCKbFT3q
+	OPglt+QECefH/DnoTZaR1odR7qfDO7TPW2Yt8ZtIMcj/qBg0aXExAVR9Dw5PrqikQ34V
+	HBAlVOC3ZieJuVfJZxdnm2+nXndfOmOEbOOkuC8PepACajgyVOtUQKg3WqHxwS+2UJaj
+	ZGM8UxNq2HLgt7eqxzuvVkrqiMd/LWXv0t43PPQ4YdvvVAl8DZdTOBdiNcX+OASyIaLA
+	F2QqJgNM7Tvtc1eOZCgFgGzTot3n+GQh8CjZ4fcF92XiXHTgXzzu/br0NfatFWMMn/Md
+	of5g==
+X-Gm-Message-State: APjAAAWz/fdPQH6oBbuCY8TB7N4e10D1ZiiBWwdlqtRBfauiznnNyrd+
+	qaOoC3HoxKBApIZ2PJeKzBa6PXHrBZyPfarm
+X-Google-Smtp-Source: APXvYqx0SGEhsf4O809EyCvTxHb0/3G952eQSm2O5IXaQcFzPIT1IFdwGCKBL6FygJ8IFADLefpgnA==
+X-Received: by 2002:aa7:8583:: with SMTP id w3mr6845628pfn.131.1552487908278; 
+	Wed, 13 Mar 2019 07:38:28 -0700 (PDT)
 Received: from localhost (60-250-203-158.HINET-IP.hinet.net. [60.250.203.158])
 	by smtp.gmail.com with ESMTPSA id
-	p187sm6530729pfg.64.2019.03.13.07.38.32
+	x15sm17881741pfn.74.2019.03.13.07.38.27
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 13 Mar 2019 07:38:33 -0700 (PDT)
-Date: Wed, 13 Mar 2019 07:37:03 -0700
-Message-Id: <20190313143705.29129-28-palmer@sifive.com>
+	Wed, 13 Mar 2019 07:38:27 -0700 (PDT)
+Date: Wed, 13 Mar 2019 07:37:01 -0700
+Message-Id: <20190313143705.29129-26-palmer@sifive.com>
 X-Mailer: git-send-email 2.19.2
 In-Reply-To: <20190313143705.29129-1-palmer@sifive.com>
 References: <20190313143705.29129-1-palmer@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Cc: qemu-riscv@nongnu.org,       qemu-devel@nongnu.org,
-	Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+	Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+	Peer Adelt <peer.adelt@hni.uni-paderborn.de>
 From: Palmer Dabbelt <palmer@sifive.com>
 To: Peter Maydell <peter.maydell@linaro.org>
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::430
-Subject: [Qemu-riscv] [PULL 27/29] target/riscv: Rename trans_arith to
- gen_arith
+X-Received-From: 2607:f8b0:4864:20::42f
+Subject: [Qemu-riscv] [PULL 25/29] target/riscv: Remove shift and slt insn
+ manual decoding
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -73,163 +73,249 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Mar 2019 14:42:57 -0000
+X-List-Received-Date: Wed, 13 Mar 2019 14:42:58 -0000
 
 From: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
 
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Signed-off-by: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+Signed-off-by: Peer Adelt <peer.adelt@hni.uni-paderborn.de>
 ---
- target/riscv/insn_trans/trans_rvi.inc.c | 18 +++++++++---------
- target/riscv/insn_trans/trans_rvm.inc.c | 14 +++++++-------
- target/riscv/translate.c                |  4 ++--
- 3 files changed, 18 insertions(+), 18 deletions(-)
+ target/riscv/insn_trans/trans_rvi.inc.c | 93 +++++++++++++++++--------
+ target/riscv/translate.c                | 59 +++++-----------
+ 2 files changed, 81 insertions(+), 71 deletions(-)
 
 diff --git a/target/riscv/insn_trans/trans_rvi.inc.c b/target/riscv/insn_trans/trans_rvi.inc.c
-index 88ef0003ec17..d420a4d8b2e9 100644
+index 8879f2da35c7..88ef0003ec17 100644
 --- a/target/riscv/insn_trans/trans_rvi.inc.c
 +++ b/target/riscv/insn_trans/trans_rvi.inc.c
-@@ -307,12 +307,12 @@ static bool trans_srai(DisasContext *ctx, arg_srai *a)
- 
- static bool trans_add(DisasContext *ctx, arg_add *a)
- {
--    return trans_arith(ctx, a, &tcg_gen_add_tl);
-+    return gen_arith(ctx, a, &tcg_gen_add_tl);
+@@ -220,30 +220,25 @@ static bool trans_addi(DisasContext *ctx, arg_addi *a)
+     return gen_arith_imm(ctx, a, &tcg_gen_add_tl);
  }
  
- static bool trans_sub(DisasContext *ctx, arg_sub *a)
+-static bool trans_slti(DisasContext *ctx, arg_slti *a)
++static void gen_slt(TCGv ret, TCGv s1, TCGv s2)
  {
--    return trans_arith(ctx, a, &tcg_gen_sub_tl);
-+    return gen_arith(ctx, a, &tcg_gen_sub_tl);
+-    TCGv source1;
+-    source1 = tcg_temp_new();
+-    gen_get_gpr(source1, a->rs1);
++    tcg_gen_setcond_tl(TCG_COND_LT, ret, s1, s2);
++}
++
++static void gen_sltu(TCGv ret, TCGv s1, TCGv s2)
++{
++    tcg_gen_setcond_tl(TCG_COND_LTU, ret, s1, s2);
++}
+ 
+-    tcg_gen_setcondi_tl(TCG_COND_LT, source1, source1, a->imm);
+ 
+-    gen_set_gpr(a->rd, source1);
+-    tcg_temp_free(source1);
+-    return true;
++static bool trans_slti(DisasContext *ctx, arg_slti *a)
++{
++    return gen_arith_imm(ctx, a, &gen_slt);
  }
+ 
+ static bool trans_sltiu(DisasContext *ctx, arg_sltiu *a)
+ {
+-    TCGv source1;
+-    source1 = tcg_temp_new();
+-    gen_get_gpr(source1, a->rs1);
+-
+-    tcg_gen_setcondi_tl(TCG_COND_LTU, source1, source1, a->imm);
+-
+-    gen_set_gpr(a->rd, source1);
+-    tcg_temp_free(source1);
+-    return true;
++    return gen_arith_imm(ctx, a, &gen_sltu);
+ }
+ 
+ static bool trans_xori(DisasContext *ctx, arg_xori *a)
+@@ -322,20 +317,17 @@ static bool trans_sub(DisasContext *ctx, arg_sub *a)
  
  static bool trans_sll(DisasContext *ctx, arg_sll *a)
-@@ -322,17 +322,17 @@ static bool trans_sll(DisasContext *ctx, arg_sll *a)
+ {
+-    gen_arith(ctx, OPC_RISC_SLL, a->rd, a->rs1, a->rs2);
+-    return true;
++    return gen_shift(ctx, a, &tcg_gen_shl_tl);
+ }
  
  static bool trans_slt(DisasContext *ctx, arg_slt *a)
  {
--    return trans_arith(ctx, a, &gen_slt);
-+    return gen_arith(ctx, a, &gen_slt);
+-    gen_arith(ctx, OPC_RISC_SLT, a->rd, a->rs1, a->rs2);
+-    return true;
++    return trans_arith(ctx, a, &gen_slt);
  }
  
  static bool trans_sltu(DisasContext *ctx, arg_sltu *a)
  {
--    return trans_arith(ctx, a, &gen_sltu);
-+    return gen_arith(ctx, a, &gen_sltu);
+-    gen_arith(ctx, OPC_RISC_SLTU, a->rd, a->rs1, a->rs2);
+-    return true;
++    return trans_arith(ctx, a, &gen_sltu);
  }
  
  static bool trans_xor(DisasContext *ctx, arg_xor *a)
- {
--    return trans_arith(ctx, a, &tcg_gen_xor_tl);
-+    return gen_arith(ctx, a, &tcg_gen_xor_tl);
- }
+@@ -345,14 +337,12 @@ static bool trans_xor(DisasContext *ctx, arg_xor *a)
  
  static bool trans_srl(DisasContext *ctx, arg_srl *a)
-@@ -347,12 +347,12 @@ static bool trans_sra(DisasContext *ctx, arg_sra *a)
+ {
+-    gen_arith(ctx, OPC_RISC_SRL, a->rd, a->rs1, a->rs2);
+-    return true;
++    return gen_shift(ctx, a, &tcg_gen_shr_tl);
+ }
+ 
+ static bool trans_sra(DisasContext *ctx, arg_sra *a)
+ {
+-    gen_arith(ctx, OPC_RISC_SRA, a->rd, a->rs1, a->rs2);
+-    return true;
++    return gen_shift(ctx, a, &tcg_gen_sar_tl);
+ }
  
  static bool trans_or(DisasContext *ctx, arg_or *a)
- {
--    return trans_arith(ctx, a, &tcg_gen_or_tl);
-+    return gen_arith(ctx, a, &tcg_gen_or_tl);
- }
- 
- static bool trans_and(DisasContext *ctx, arg_and *a)
- {
--    return trans_arith(ctx, a, &tcg_gen_and_tl);
-+    return gen_arith(ctx, a, &tcg_gen_and_tl);
- }
- 
- #ifdef TARGET_RISCV64
-@@ -399,12 +399,12 @@ static bool trans_sraiw(DisasContext *ctx, arg_sraiw *a)
- 
- static bool trans_addw(DisasContext *ctx, arg_addw *a)
- {
--    return trans_arith(ctx, a, &gen_addw);
-+    return gen_arith(ctx, a, &gen_addw);
- }
- 
- static bool trans_subw(DisasContext *ctx, arg_subw *a)
- {
--    return trans_arith(ctx, a, &gen_subw);
-+    return gen_arith(ctx, a, &gen_subw);
- }
+@@ -419,19 +409,62 @@ static bool trans_subw(DisasContext *ctx, arg_subw *a)
  
  static bool trans_sllw(DisasContext *ctx, arg_sllw *a)
-diff --git a/target/riscv/insn_trans/trans_rvm.inc.c b/target/riscv/insn_trans/trans_rvm.inc.c
-index d2bf2f171904..204af225f8f3 100644
---- a/target/riscv/insn_trans/trans_rvm.inc.c
-+++ b/target/riscv/insn_trans/trans_rvm.inc.c
-@@ -22,7 +22,7 @@
- static bool trans_mul(DisasContext *ctx, arg_mul *a)
  {
-     REQUIRE_EXT(ctx, RVM);
--    return trans_arith(ctx, a, &tcg_gen_mul_tl);
-+    return gen_arith(ctx, a, &tcg_gen_mul_tl);
+-    gen_arith(ctx, OPC_RISC_SLLW, a->rd, a->rs1, a->rs2);
++    TCGv source1 = tcg_temp_new();
++    TCGv source2 = tcg_temp_new();
++
++    gen_get_gpr(source1, a->rs1);
++    gen_get_gpr(source2, a->rs2);
++
++    tcg_gen_andi_tl(source2, source2, 0x1F);
++    tcg_gen_shl_tl(source1, source1, source2);
++
++    tcg_gen_ext32s_tl(source1, source1);
++    gen_set_gpr(a->rd, source1);
++    tcg_temp_free(source1);
++    tcg_temp_free(source2);
+     return true;
  }
  
- static bool trans_mulh(DisasContext *ctx, arg_mulh *a)
-@@ -44,7 +44,7 @@ static bool trans_mulh(DisasContext *ctx, arg_mulh *a)
- static bool trans_mulhsu(DisasContext *ctx, arg_mulhsu *a)
+ static bool trans_srlw(DisasContext *ctx, arg_srlw *a)
  {
-     REQUIRE_EXT(ctx, RVM);
--    return trans_arith(ctx, a, &gen_mulhsu);
-+    return gen_arith(ctx, a, &gen_mulhsu);
+-    gen_arith(ctx, OPC_RISC_SRLW, a->rd, a->rs1, a->rs2);
++    TCGv source1 = tcg_temp_new();
++    TCGv source2 = tcg_temp_new();
++
++    gen_get_gpr(source1, a->rs1);
++    gen_get_gpr(source2, a->rs2);
++
++    /* clear upper 32 */
++    tcg_gen_ext32u_tl(source1, source1);
++    tcg_gen_andi_tl(source2, source2, 0x1F);
++    tcg_gen_shr_tl(source1, source1, source2);
++
++    tcg_gen_ext32s_tl(source1, source1);
++    gen_set_gpr(a->rd, source1);
++    tcg_temp_free(source1);
++    tcg_temp_free(source2);
+     return true;
  }
  
- static bool trans_mulhu(DisasContext *ctx, arg_mulhu *a)
-@@ -66,32 +66,32 @@ static bool trans_mulhu(DisasContext *ctx, arg_mulhu *a)
- static bool trans_div(DisasContext *ctx, arg_div *a)
+ static bool trans_sraw(DisasContext *ctx, arg_sraw *a)
  {
-     REQUIRE_EXT(ctx, RVM);
--    return trans_arith(ctx, a, &gen_div);
-+    return gen_arith(ctx, a, &gen_div);
+-    gen_arith(ctx, OPC_RISC_SRAW, a->rd, a->rs1, a->rs2);
++    TCGv source1 = tcg_temp_new();
++    TCGv source2 = tcg_temp_new();
++
++    gen_get_gpr(source1, a->rs1);
++    gen_get_gpr(source2, a->rs2);
++
++    /*
++     * first, trick to get it to act like working on 32 bits (get rid of
++     * upper 32, sign extend to fill space)
++     */
++    tcg_gen_ext32s_tl(source1, source1);
++    tcg_gen_andi_tl(source2, source2, 0x1F);
++    tcg_gen_sar_tl(source1, source1, source2);
++
++    gen_set_gpr(a->rd, source1);
++    tcg_temp_free(source1);
++    tcg_temp_free(source2);
++
+     return true;
  }
- 
- static bool trans_divu(DisasContext *ctx, arg_divu *a)
- {
-     REQUIRE_EXT(ctx, RVM);
--    return trans_arith(ctx, a, &gen_divu);
-+    return gen_arith(ctx, a, &gen_divu);
- }
- 
- static bool trans_rem(DisasContext *ctx, arg_rem *a)
- {
-     REQUIRE_EXT(ctx, RVM);
--    return trans_arith(ctx, a, &gen_rem);
-+    return gen_arith(ctx, a, &gen_rem);
- }
- 
- static bool trans_remu(DisasContext *ctx, arg_remu *a)
- {
-     REQUIRE_EXT(ctx, RVM);
--    return trans_arith(ctx, a, &gen_remu);
-+    return gen_arith(ctx, a, &gen_remu);
- }
- 
- #ifdef TARGET_RISCV64
- static bool trans_mulw(DisasContext *ctx, arg_mulw *a)
- {
-     REQUIRE_EXT(ctx, RVM);
--    return trans_arith(ctx, a, &gen_mulw);
-+    return gen_arith(ctx, a, &gen_mulw);
- }
- 
- static bool trans_divw(DisasContext *ctx, arg_divw *a)
+ #endif
 diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 3cd7e16c63cf..dedf4189d5b7 100644
+index 8eb883463322..9ae40f65096f 100644
 --- a/target/riscv/translate.c
 +++ b/target/riscv/translate.c
-@@ -629,8 +629,8 @@ static bool gen_arith_div_w(DisasContext *ctx, arg_r *a,
+@@ -198,47 +198,6 @@ static void gen_arith(DisasContext *ctx, uint32_t opc, int rd, int rs1,
+     gen_get_gpr(source2, rs2);
  
- #endif
+     switch (opc) {
+-#if defined(TARGET_RISCV64)
+-    case OPC_RISC_SLLW:
+-        tcg_gen_andi_tl(source2, source2, 0x1F);
+-        tcg_gen_shl_tl(source1, source1, source2);
+-        break;
+-#endif
+-    case OPC_RISC_SLL:
+-        tcg_gen_andi_tl(source2, source2, TARGET_LONG_BITS - 1);
+-        tcg_gen_shl_tl(source1, source1, source2);
+-        break;
+-    case OPC_RISC_SLT:
+-        tcg_gen_setcond_tl(TCG_COND_LT, source1, source1, source2);
+-        break;
+-    case OPC_RISC_SLTU:
+-        tcg_gen_setcond_tl(TCG_COND_LTU, source1, source1, source2);
+-        break;
+-#if defined(TARGET_RISCV64)
+-    case OPC_RISC_SRLW:
+-        /* clear upper 32 */
+-        tcg_gen_ext32u_tl(source1, source1);
+-        tcg_gen_andi_tl(source2, source2, 0x1F);
+-        tcg_gen_shr_tl(source1, source1, source2);
+-        break;
+-#endif
+-    case OPC_RISC_SRL:
+-        tcg_gen_andi_tl(source2, source2, TARGET_LONG_BITS - 1);
+-        tcg_gen_shr_tl(source1, source1, source2);
+-        break;
+-#if defined(TARGET_RISCV64)
+-    case OPC_RISC_SRAW:
+-        /* first, trick to get it to act like working on 32 bits (get rid of
+-        upper 32, sign extend to fill space) */
+-        tcg_gen_ext32s_tl(source1, source1);
+-        tcg_gen_andi_tl(source2, source2, 0x1F);
+-        tcg_gen_sar_tl(source1, source1, source2);
+-        break;
+-#endif
+-    case OPC_RISC_SRA:
+-        tcg_gen_andi_tl(source2, source2, TARGET_LONG_BITS - 1);
+-        tcg_gen_sar_tl(source1, source1, source2);
+-        break;
+     CASE_OP_32_64(OPC_RISC_MUL):
+         if (!has_ext(ctx, RVM)) {
+             goto do_illegal;
+@@ -742,6 +701,24 @@ static bool trans_arith(DisasContext *ctx, arg_r *a,
+     return true;
+ }
  
--static bool trans_arith(DisasContext *ctx, arg_r *a,
--                        void(*func)(TCGv, TCGv, TCGv))
-+static bool gen_arith(DisasContext *ctx, arg_r *a,
-+                      void(*func)(TCGv, TCGv, TCGv))
- {
-     TCGv source1, source2;
-     source1 = tcg_temp_new();
++static bool gen_shift(DisasContext *ctx, arg_r *a,
++                        void(*func)(TCGv, TCGv, TCGv))
++{
++    TCGv source1 = tcg_temp_new();
++    TCGv source2 = tcg_temp_new();
++
++    gen_get_gpr(source1, a->rs1);
++    gen_get_gpr(source2, a->rs2);
++
++    tcg_gen_andi_tl(source2, source2, TARGET_LONG_BITS - 1);
++    (*func)(source1, source1, source2);
++
++    gen_set_gpr(a->rd, source1);
++    tcg_temp_free(source1);
++    tcg_temp_free(source2);
++    return true;
++}
++
+ /* Include insn module translation function */
+ #include "insn_trans/trans_rvi.inc.c"
+ #include "insn_trans/trans_rvm.inc.c"
 -- 
 2.19.2
 
