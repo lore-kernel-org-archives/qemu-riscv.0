@@ -1,63 +1,85 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1h4XCp-0002Jj-RR
-	for mharc-qemu-riscv@gnu.org; Thu, 14 Mar 2019 16:44:02 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:44740)
+	id 1h4Xeo-00081e-2E
+	for mharc-qemu-riscv@gnu.org; Thu, 14 Mar 2019 17:12:54 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:49825)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1h4XCm-00022n-RF
-	for qemu-riscv@nongnu.org; Thu, 14 Mar 2019 16:43:58 -0400
+	(envelope-from <lukas.auer@aisec.fraunhofer.de>) id 1h4Xej-0007vK-ER
+	for qemu-riscv@nongnu.org; Thu, 14 Mar 2019 17:12:50 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1h4WzA-0002SD-Dh
-	for qemu-riscv@nongnu.org; Thu, 14 Mar 2019 16:29:56 -0400
-Received: from mail-lf1-x141.google.com ([2a00:1450:4864:20::141]:32773)
-	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <alistair23@gmail.com>)
-	id 1h4Wz9-0002O2-DJ; Thu, 14 Mar 2019 16:29:52 -0400
-Received: by mail-lf1-x141.google.com with SMTP id v14so4696586lfi.0;
-	Thu, 14 Mar 2019 13:29:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=/zOWlg195Ikw5wW0e5HJGYfzWKasbiJbosm++EeBlmk=;
-	b=riTGR5aKO17ruTCiYEcetCpkS3FCp6raX6xxUohtuIYRCo/CuOAPd+GBhKOPWpd+8p
-	51uUmlVv4QxYmgMSjz0dkY340bLfMSdAYwzeL5TthBhJ/bJClQkYdZzzX1lKLpaE6f1i
-	bUkAA1nccyNy47DGcc0JTWR9aN1O4RT3zkh9K1Ez8e5WKSUcbtodPyIPRREFbeNOvP1b
-	6wz+o/DoCIy4RD/vyHKhdI+2fuEKwlF6g5cRurh7uqfssKvSdoinpj2hLwnh1rFlnDAe
-	JmpV7Br+xaYEWOfFZyBEe2mJ/YwPhRBXWngqmyom8wQqjfoAhGsvD0m4ujuGnPsazz7h
-	2zZg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=/zOWlg195Ikw5wW0e5HJGYfzWKasbiJbosm++EeBlmk=;
-	b=FTjP0SMWXIEau/33Tl7E52/mhAyYUOwNiWMF7zYM54S+wrBHoytpcbfQoPYHdccPA3
-	l3x93Z7/f8Ux9vyXT5iETWDS8eitxR1PkDF7QscbtQ09O37G/JfXs5//gpXCPPVjpJFv
-	dMpIrtONU994+yghSbEbVXKMLOOMwM3hp8af3dJi3v+AOIVMJkqAlRCXOi3JcbSiTHWO
-	XL/D4RZ7HihOcgy/EMiFxeWQ3iptFrs5vmDo1uaQeIpkOQpjlpbhiFiqkZMd6mLSGNxi
-	F9NEvf0D2pkHhJddLO42KfWiGZkAPj2956fDxHtY0EOAZduCwrcH9mJOl+V7pfEFC/g4
-	nyzw==
-X-Gm-Message-State: APjAAAWQ6+kjx8u+jfwvkNGsULN7WAeFGsrkNEnm5oELHRAMpaywE4bz
-	oWc3km7HMmGl+oWsOEtfmCO0h5oK4XYnrX+f0x0=
-X-Google-Smtp-Source: APXvYqyWARCvA+9knvIO5DUYnhe9CSEyRnLTR3PbJdgmFrolzdIrWO/8hypYIZ6O6V31fEF9ix0H7w/45YdYRF9aS1k=
-X-Received: by 2002:a19:238f:: with SMTP id j137mr41352lfj.79.1552595386729;
-	Thu, 14 Mar 2019 13:29:46 -0700 (PDT)
+	(envelope-from <lukas.auer@aisec.fraunhofer.de>) id 1h4XTh-0007wg-05
+	for qemu-riscv@nongnu.org; Thu, 14 Mar 2019 17:01:28 -0400
+Received: from mail-edgeka24.fraunhofer.de ([153.96.1.24]:59277)
+	by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.71) (envelope-from <lukas.auer@aisec.fraunhofer.de>)
+	id 1h4XTg-0007ri-4q; Thu, 14 Mar 2019 17:01:24 -0400
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: =?us-ascii?q?A2HmAADWv4pc/xwBYJlkHAEBAQQBAQc?=
+	=?us-ascii?q?EAQGBVAQBAQsBgg+BaycKhAGIe4pDgg18mS8NhGwCF4Q6IjcGDQEBAwEBCQE?=
+	=?us-ascii?q?DAgICaR0LhUwBBSMRRRACAQgYAgImAgICMBUQAgQOBYUXAa0vgS+KM4ELJAG?=
+	=?us-ascii?q?LLIFYPoEQAYIUSTWIC4JXA4woKotBjC0DBAICgSORehmLBYhHin+TEIFdI4F?=
+	=?us-ascii?q?WcYM7ghYXE44LPwEBMQGPJ4EfAQE?=
+X-IPAS-Result: =?us-ascii?q?A2HmAADWv4pc/xwBYJlkHAEBAQQBAQcEAQGBVAQBAQsBg?=
+	=?us-ascii?q?g+BaycKhAGIe4pDgg18mS8NhGwCF4Q6IjcGDQEBAwEBCQEDAgICaR0LhUwBB?=
+	=?us-ascii?q?SMRRRACAQgYAgImAgICMBUQAgQOBYUXAa0vgS+KM4ELJAGLLIFYPoEQAYIUS?=
+	=?us-ascii?q?TWIC4JXA4woKotBjC0DBAICgSORehmLBYhHin+TEIFdI4FWcYM7ghYXE44LP?=
+	=?us-ascii?q?wEBMQGPJ4EfAQE?=
+X-IronPort-AV: E=Sophos;i="5.58,479,1544482800"; d="scan'208";a="13803404"
+Received: from mail-mtaka28.fraunhofer.de ([153.96.1.28])
+	by mail-edgeKA24.fraunhofer.de with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	14 Mar 2019 22:01:16 +0100
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: =?us-ascii?q?A0CvAADWv4pcfRBhWMBkHAEBAQQBAQc?=
+	=?us-ascii?q?EAQGBVAQBAQsBg0chEicKhAGIe4xQfJkvDYRsAheEWzcGDQEBAwEBCQEDAhQ?=
+	=?us-ascii?q?BARY6JAuFSwEFIxFFEAIBCBgCAiYCAgIwFRACBA4FhRitL4EvijOBCyQBjQQ?=
+	=?us-ascii?q?+gRABghRJNYgLglcDjCgqi0GMLQMEAgKBI5F6GYsFiEeKf5MQgV0hgVdxgzu?=
+	=?us-ascii?q?CFhcTjgs/AQIwAY8ngR8BAQ?=
+X-IronPort-AV: E=Sophos;i="5.58,479,1544482800"; d="scan'208";a="19584776"
+Received: from fgdemucivp01ltm.xch.fraunhofer.de (HELO
+	FGDEMUCIMP12EXC.ads.fraunhofer.de) ([192.88.97.16])
+	by mail-mtaKA28.fraunhofer.de with ESMTP/TLS/AES256-SHA;
+	14 Mar 2019 22:01:14 +0100
+Received: from FGDEMUCIMP01EXC.ads.fraunhofer.de ([10.80.232.40]) by
+	FGDEMUCIMP12EXC.ads.fraunhofer.de ([10.80.232.43]) with mapi id
+	14.03.0435.000; Thu, 14 Mar 2019 22:01:14 +0100
+From: "Auer, Lukas" <lukas.auer@aisec.fraunhofer.de>
+To: "bmeng.cn@gmail.com" <bmeng.cn@gmail.com>
+CC: "palmer@sifive.com" <palmer@sifive.com>, "qemu-riscv@nongnu.org"
+	<qemu-riscv@nongnu.org>, "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>,
+	"kbastian@mail.uni-paderborn.de" <kbastian@mail.uni-paderborn.de>,
+	"sagark@eecs.berkeley.edu" <sagark@eecs.berkeley.edu>,
+	"Alistair.Francis@wdc.com" <Alistair.Francis@wdc.com>
+Thread-Topic: [Qemu-devel] [PATCH] hw/riscv/virt: re-add machine-specific
+	compatible string to /soc/ node
+Thread-Index: AQHUwX2/pwGZ00zQgE6v+yqcxIgIXaYEJ5sAgADTUQCAABSaAIAAM/MAgAFmzoCAAYTigIAAu5oAgALTm4A=
+Date: Thu, 14 Mar 2019 21:01:13 +0000
+Message-ID: <9beff9a660f1c3fd1317a52c6d1b7c7ae211a2dd.camel@aisec.fraunhofer.de>
+References: <20190210201726.3567-1-lukas.auer@aisec.fraunhofer.de>
+	<CAEUhbmUtSAeznt1DCwJ7tS=YFeqwnYBemS6278=QQ60qs_MthA@mail.gmail.com>
+	<c9f69861058412a1f71418a9c892daf0821a9e33.camel@aisec.fraunhofer.de>
+	<CAEUhbmXjCqRRtNDqq5E5y60sDz+4=WqMuxFhaLndot7TSJuUiQ@mail.gmail.com>
+	<e131b4b0eb9109547ce0ed0993665206d6bf983a.camel@aisec.fraunhofer.de>
+	<CAEUhbmX=PT-46nqtMqSaGn5xu2tRJ50Sm6kK7b97Xc_Y+6stPw@mail.gmail.com>
+	<33758c6945c9b1968247c5b6dfb12418e57e71e0.camel@aisec.fraunhofer.de>
+	<CAEUhbmX5ygthHtEoMvRMND3hbmhXrp-ok_hyvAqC+REafNSNbQ@mail.gmail.com>
+In-Reply-To: <CAEUhbmX5ygthHtEoMvRMND3hbmhXrp-ok_hyvAqC+REafNSNbQ@mail.gmail.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.80.233.51]
+x-tm-as-product-ver: SMEX-11.0.0.4179-8.200.1013-24488.004
+x-tm-as-result: No--16.813800-8.000000-31
+x-tm-as-user-approved-sender: No
+x-tm-as-user-blocked-sender: No
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <A5BE6700177C834289CAD27A9A104728@xch.fraunhofer.de>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-References: <20190313143705.29129-1-palmer@sifive.com>
-	<20190313143705.29129-18-palmer@sifive.com>
-In-Reply-To: <20190313143705.29129-18-palmer@sifive.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 14 Mar 2019 13:28:37 -0700
-Message-ID: <CAKmqyKPAFOBfppfozwNfJ=TS6kC=+x1VPDB2OxQ7SHYkpT1kvQ@mail.gmail.com>
-To: Palmer Dabbelt <palmer@sifive.com>
-Cc: Peter Maydell <peter.maydell@linaro.org>, 
-	Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
-	Peer Adelt <peer.adelt@hni.uni-paderborn.de>, 
-	"open list:RISC-V" <qemu-riscv@nongnu.org>, 
-	"qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2a00:1450:4864:20::141
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PULL 17/29] target/riscv: Convert
- quadrant 1 of RVXC insns to decodetree
+X-Received-From: 153.96.1.24
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH] hw/riscv/virt: re-add
+ machine-specific compatible string to /soc/ node
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -69,424 +91,84 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Mar 2019 20:43:58 -0000
+X-List-Received-Date: Thu, 14 Mar 2019 21:12:51 -0000
 
-On Wed, Mar 13, 2019 at 7:53 AM Palmer Dabbelt <palmer@sifive.com> wrote:
->
-> From: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
->
-> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-> Signed-off-by: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-> Signed-off-by: Peer Adelt <peer.adelt@hni.uni-paderborn.de>
-
-This commit is the first bad commit in breaking 32-bit boot.
-
-It looks like the jal doesn't jump to the correct address:
-
-----------------
-IN:
-0x80000022:  00050433          add             s0,a0,zero
-0x80000026:  000584b3          add             s1,a1,zero
-0x8000002a:  2c79              jal             ra,670          # 0x800002c8
-
-----------------
-IN:
-0x800002c8:  00000533          add             a0,zero,zero
-0x800002cc:  8082              ret
-
-
-Alistair
-
-> ---
->  target/riscv/insn16.decode              |  43 +++++++
->  target/riscv/insn_trans/trans_rvc.inc.c | 151 ++++++++++++++++++++++++
->  target/riscv/translate.c                | 118 +-----------------
->  3 files changed, 195 insertions(+), 117 deletions(-)
->
-> diff --git a/target/riscv/insn16.decode b/target/riscv/insn16.decode
-> index 558c0c41f0b5..45109301c6d4 100644
-> --- a/target/riscv/insn16.decode
-> +++ b/target/riscv/insn16.decode
-> @@ -22,28 +22,53 @@
->  %rs2_3     2:3                !function=ex_rvc_register
->
->  # Immediates:
-> +%imm_ci        12:s1 2:5
->  %nzuimm_ciw    7:4 11:2 5:1 6:1   !function=ex_shift_2
->  %uimm_cl_d     5:2 10:3           !function=ex_shift_3
->  %uimm_cl_w     5:1 10:3 6:1       !function=ex_shift_2
-> +%imm_cb        12:s1 5:2 2:1 10:2 3:2 !function=ex_shift_1
-> +%imm_cj        12:s1 8:1 9:2 6:1 7:1 2:1 11:1 3:3 !function=ex_shift_1
-> +
-> +%nzuimm_6bit   12:1 2:5
-> +
-> +%imm_addi16sp  12:s1 3:2 5:1 2:1 6:1 !function=ex_shift_4
-> +%imm_lui       12:s1 2:5             !function=ex_shift_12
-> +
->
->
->  # Argument sets:
->  &cl               rs1 rd
->  &cl_dw     uimm   rs1 rd
-> +&ci        imm        rd
->  &ciw       nzuimm     rd
->  &cs               rs1 rs2
->  &cs_dw     uimm   rs1 rs2
-> +&cb        imm    rs1
-> +&cr               rd  rs2
-> +&cj       imm
-> +&c_shift   shamt      rd
-> +
->
-> +&caddi16sp_lui  imm_lui imm_addi16sp rd
->
->  # Formats 16:
-> +@ci        ... . ..... .....  .. &ci     imm=%imm_ci                  %rd
->  @ciw       ...   ........ ... .. &ciw    nzuimm=%nzuimm_ciw           rd=%rs2_3
->  @cl_d      ... ... ... .. ... .. &cl_dw  uimm=%uimm_cl_d  rs1=%rs1_3  rd=%rs2_3
->  @cl_w      ... ... ... .. ... .. &cl_dw  uimm=%uimm_cl_w  rs1=%rs1_3  rd=%rs2_3
->  @cl        ... ... ... .. ... .. &cl                      rs1=%rs1_3  rd=%rs2_3
->  @cs        ... ... ... .. ... .. &cs                      rs1=%rs1_3  rs2=%rs2_3
-> +@cs_2      ... ... ... .. ... .. &cr                      rd=%rs1_3   rs2=%rs2_3
->  @cs_d      ... ... ... .. ... .. &cs_dw  uimm=%uimm_cl_d  rs1=%rs1_3  rs2=%rs2_3
->  @cs_w      ... ... ... .. ... .. &cs_dw  uimm=%uimm_cl_w  rs1=%rs1_3  rs2=%rs2_3
-> +@cb        ... ... ... .. ... .. &cb     imm=%imm_cb      rs1=%rs1_3
-> +@cj        ...    ........... .. &cj     imm=%imm_cj
->
-> +@c_addi16sp_lui ... .  ..... ..... .. &caddi16sp_lui %imm_lui %imm_addi16sp %rd
-> +
-> +@c_shift        ... . .. ... ..... .. &c_shift rd=%rs1_3 shamt=%nzuimm_6bit
-> +
-> +@c_andi         ... . .. ... ..... .. &ci imm=%imm_ci rd=%rs1_3
->
->  # *** RV64C Standard Extension (Quadrant 0) ***
->  c_addi4spn        000    ........ ... 00 @ciw
-> @@ -53,3 +78,21 @@ c_flw_ld          011  --- ... -- ... 00 @cl    #Note: Must parse uimm manually
->  c_fsd             101  ... ... .. ... 00 @cs_d
->  c_sw              110  ... ... .. ... 00 @cs_w
->  c_fsw_sd          111  --- ... -- ... 00 @cs    #Note: Must parse uimm manually
-> +
-> +# *** RV64C Standard Extension (Quadrant 1) ***
-> +c_addi            000 .  .....  ..... 01 @ci
-> +c_jal_addiw       001 .  .....  ..... 01 @ci #Note: parse rd and/or imm manually
-> +c_li              010 .  .....  ..... 01 @ci
-> +c_addi16sp_lui    011 .  .....  ..... 01 @c_addi16sp_lui # shares opc with C.LUI
-> +c_srli            100 . 00 ...  ..... 01 @c_shift
-> +c_srai            100 . 01 ...  ..... 01 @c_shift
-> +c_andi            100 . 10 ...  ..... 01 @c_andi
-> +c_sub             100 0 11 ... 00 ... 01 @cs_2
-> +c_xor             100 0 11 ... 01 ... 01 @cs_2
-> +c_or              100 0 11 ... 10 ... 01 @cs_2
-> +c_and             100 0 11 ... 11 ... 01 @cs_2
-> +c_subw            100 1 11 ... 00 ... 01 @cs_2
-> +c_addw            100 1 11 ... 01 ... 01 @cs_2
-> +c_j               101     ........... 01 @cj
-> +c_beqz            110  ... ...  ..... 01 @cb
-> +c_bnez            111  ... ...  ..... 01 @cb
-> diff --git a/target/riscv/insn_trans/trans_rvc.inc.c b/target/riscv/insn_trans/trans_rvc.inc.c
-> index 93ec8aa30b95..b06c435c9800 100644
-> --- a/target/riscv/insn_trans/trans_rvc.inc.c
-> +++ b/target/riscv/insn_trans/trans_rvc.inc.c
-> @@ -73,3 +73,154 @@ static bool trans_c_fsw_sd(DisasContext *ctx, arg_c_fsw_sd *a)
->      return false;
->  #endif
->  }
-> +
-> +static bool trans_c_addi(DisasContext *ctx, arg_c_addi *a)
-> +{
-> +    if (a->imm == 0) {
-> +        /* Hint: insn is valid but does not affect state */
-> +        return true;
-> +    }
-> +    arg_addi arg = { .rd = a->rd, .rs1 = a->rd, .imm = a->imm };
-> +    return trans_addi(ctx, &arg);
-> +}
-> +
-> +static bool trans_c_jal_addiw(DisasContext *ctx, arg_c_jal_addiw *a)
-> +{
-> +#ifdef TARGET_RISCV32
-> +    /* C.JAL */
-> +    arg_jal arg = { .rd = 1, .imm = a->imm };
-> +    return trans_jal(ctx, &arg);
-> +#else
-> +    /* C.ADDIW */
-> +    arg_addiw arg = { .rd = a->rd, .rs1 = a->rd, .imm = a->imm };
-> +    return trans_addiw(ctx, &arg);
-> +#endif
-> +}
-> +
-> +static bool trans_c_li(DisasContext *ctx, arg_c_li *a)
-> +{
-> +    if (a->rd == 0) {
-> +        /* Hint: insn is valid but does not affect state */
-> +        return true;
-> +    }
-> +    arg_addi arg = { .rd = a->rd, .rs1 = 0, .imm = a->imm };
-> +    return trans_addi(ctx, &arg);
-> +}
-> +
-> +static bool trans_c_addi16sp_lui(DisasContext *ctx, arg_c_addi16sp_lui *a)
-> +{
-> +    if (a->rd == 2) {
-> +        /* C.ADDI16SP */
-> +        arg_addi arg = { .rd = 2, .rs1 = 2, .imm = a->imm_addi16sp };
-> +        return trans_addi(ctx, &arg);
-> +    } else if (a->imm_lui != 0) {
-> +        /* C.LUI */
-> +        if (a->rd == 0) {
-> +            /* Hint: insn is valid but does not affect state */
-> +            return true;
-> +        }
-> +        arg_lui arg = { .rd = a->rd, .imm = a->imm_lui };
-> +        return trans_lui(ctx, &arg);
-> +    }
-> +    return false;
-> +}
-> +
-> +static bool trans_c_srli(DisasContext *ctx, arg_c_srli *a)
-> +{
-> +    int shamt = a->shamt;
-> +    if (shamt == 0) {
-> +        /* For RV128 a shamt of 0 means a shift by 64 */
-> +        shamt = 64;
-> +    }
-> +    /* Ensure, that shamt[5] is zero for RV32 */
-> +    if (shamt >= TARGET_LONG_BITS) {
-> +        return false;
-> +    }
-> +
-> +    arg_srli arg = { .rd = a->rd, .rs1 = a->rd, .shamt = a->shamt };
-> +    return trans_srli(ctx, &arg);
-> +}
-> +
-> +static bool trans_c_srai(DisasContext *ctx, arg_c_srai *a)
-> +{
-> +    int shamt = a->shamt;
-> +    if (shamt == 0) {
-> +        /* For RV128 a shamt of 0 means a shift by 64 */
-> +        shamt = 64;
-> +    }
-> +    /* Ensure, that shamt[5] is zero for RV32 */
-> +    if (shamt >= TARGET_LONG_BITS) {
-> +        return false;
-> +    }
-> +
-> +    arg_srai arg = { .rd = a->rd, .rs1 = a->rd, .shamt = a->shamt };
-> +    return trans_srai(ctx, &arg);
-> +}
-> +
-> +static bool trans_c_andi(DisasContext *ctx, arg_c_andi *a)
-> +{
-> +    arg_andi arg = { .rd = a->rd, .rs1 = a->rd, .imm = a->imm };
-> +    return trans_andi(ctx, &arg);
-> +}
-> +
-> +static bool trans_c_sub(DisasContext *ctx, arg_c_sub *a)
-> +{
-> +    arg_sub arg = { .rd = a->rd, .rs1 = a->rd, .rs2 = a->rs2 };
-> +    return trans_sub(ctx, &arg);
-> +}
-> +
-> +static bool trans_c_xor(DisasContext *ctx, arg_c_xor *a)
-> +{
-> +    arg_xor arg = { .rd = a->rd, .rs1 = a->rd, .rs2 = a->rs2 };
-> +    return trans_xor(ctx, &arg);
-> +}
-> +
-> +static bool trans_c_or(DisasContext *ctx, arg_c_or *a)
-> +{
-> +    arg_or arg = { .rd = a->rd, .rs1 = a->rd, .rs2 = a->rs2 };
-> +    return trans_or(ctx, &arg);
-> +}
-> +
-> +static bool trans_c_and(DisasContext *ctx, arg_c_and *a)
-> +{
-> +    arg_and arg = { .rd = a->rd, .rs1 = a->rd, .rs2 = a->rs2 };
-> +    return trans_and(ctx, &arg);
-> +}
-> +
-> +static bool trans_c_subw(DisasContext *ctx, arg_c_subw *a)
-> +{
-> +#ifdef TARGET_RISCV64
-> +    arg_subw arg = { .rd = a->rd, .rs1 = a->rd, .rs2 = a->rs2 };
-> +    return trans_subw(ctx, &arg);
-> +#else
-> +    return false;
-> +#endif
-> +}
-> +
-> +static bool trans_c_addw(DisasContext *ctx, arg_c_addw *a)
-> +{
-> +#ifdef TARGET_RISCV64
-> +    arg_addw arg = { .rd = a->rd, .rs1 = a->rd, .rs2 = a->rs2 };
-> +    return trans_addw(ctx, &arg);
-> +#else
-> +    return false;
-> +#endif
-> +}
-> +
-> +static bool trans_c_j(DisasContext *ctx, arg_c_j *a)
-> +{
-> +    arg_jal arg = { .rd = 0, .imm = a->imm };
-> +    return trans_jal(ctx, &arg);
-> +}
-> +
-> +static bool trans_c_beqz(DisasContext *ctx, arg_c_beqz *a)
-> +{
-> +    arg_beq arg = { .rs1 = a->rs1, .rs2 = 0, .imm = a->imm };
-> +    return trans_beq(ctx, &arg);
-> +}
-> +
-> +static bool trans_c_bnez(DisasContext *ctx, arg_c_bnez *a)
-> +{
-> +    arg_bne arg = { .rs1 = a->rs1, .rs2 = 0, .imm = a->imm };
-> +    return trans_bne(ctx, &arg);
-> +}
-> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index 0106fa8d51b3..a584c24fbf6b 100644
-> --- a/target/riscv/translate.c
-> +++ b/target/riscv/translate.c
-> @@ -828,120 +828,6 @@ static void decode_RV32_64C0(DisasContext *ctx)
->      }
->  }
->
-> -static void decode_RV32_64C1(DisasContext *ctx)
-> -{
-> -    uint8_t funct3 = extract32(ctx->opcode, 13, 3);
-> -    uint8_t rd_rs1 = GET_C_RS1(ctx->opcode);
-> -    uint8_t rs1s, rs2s;
-> -    uint8_t funct2;
-> -
-> -    switch (funct3) {
-> -    case 0:
-> -        /* C.ADDI -> addi rd, rd, nzimm[5:0] */
-> -        gen_arith_imm(ctx, OPC_RISC_ADDI, rd_rs1, rd_rs1,
-> -                      GET_C_IMM(ctx->opcode));
-> -        break;
-> -    case 1:
-> -#if defined(TARGET_RISCV64)
-> -        /* C.ADDIW (RV64/128) -> addiw rd, rd, imm[5:0]*/
-> -        gen_arith_imm(ctx, OPC_RISC_ADDIW, rd_rs1, rd_rs1,
-> -                      GET_C_IMM(ctx->opcode));
-> -#else
-> -        /* C.JAL(RV32) -> jal x1, offset[11:1] */
-> -        gen_jal(ctx, 1, GET_C_J_IMM(ctx->opcode));
-> -#endif
-> -        break;
-> -    case 2:
-> -        /* C.LI -> addi rd, x0, imm[5:0]*/
-> -        gen_arith_imm(ctx, OPC_RISC_ADDI, rd_rs1, 0, GET_C_IMM(ctx->opcode));
-> -        break;
-> -    case 3:
-> -        if (rd_rs1 == 2) {
-> -            /* C.ADDI16SP -> addi x2, x2, nzimm[9:4]*/
-> -            gen_arith_imm(ctx, OPC_RISC_ADDI, 2, 2,
-> -                          GET_C_ADDI16SP_IMM(ctx->opcode));
-> -        } else if (rd_rs1 != 0) {
-> -            /* C.LUI (rs1/rd =/= {0,2}) -> lui rd, nzimm[17:12]*/
-> -            tcg_gen_movi_tl(cpu_gpr[rd_rs1],
-> -                            GET_C_IMM(ctx->opcode) << 12);
-> -        }
-> -        break;
-> -    case 4:
-> -        funct2 = extract32(ctx->opcode, 10, 2);
-> -        rs1s = GET_C_RS1S(ctx->opcode);
-> -        switch (funct2) {
-> -        case 0: /* C.SRLI(RV32) -> srli rd', rd', shamt[5:0] */
-> -            gen_arith_imm(ctx, OPC_RISC_SHIFT_RIGHT_I, rs1s, rs1s,
-> -                               GET_C_ZIMM(ctx->opcode));
-> -            /* C.SRLI64(RV128) */
-> -            break;
-> -        case 1:
-> -            /* C.SRAI -> srai rd', rd', shamt[5:0]*/
-> -            gen_arith_imm(ctx, OPC_RISC_SHIFT_RIGHT_I, rs1s, rs1s,
-> -                            GET_C_ZIMM(ctx->opcode) | 0x400);
-> -            /* C.SRAI64(RV128) */
-> -            break;
-> -        case 2:
-> -            /* C.ANDI -> andi rd', rd', imm[5:0]*/
-> -            gen_arith_imm(ctx, OPC_RISC_ANDI, rs1s, rs1s,
-> -                          GET_C_IMM(ctx->opcode));
-> -            break;
-> -        case 3:
-> -            funct2 = extract32(ctx->opcode, 5, 2);
-> -            rs2s = GET_C_RS2S(ctx->opcode);
-> -            switch (funct2) {
-> -            case 0:
-> -                /* C.SUB -> sub rd', rd', rs2' */
-> -                if (extract32(ctx->opcode, 12, 1) == 0) {
-> -                    gen_arith(ctx, OPC_RISC_SUB, rs1s, rs1s, rs2s);
-> -                }
-> -#if defined(TARGET_RISCV64)
-> -                else {
-> -                    gen_arith(ctx, OPC_RISC_SUBW, rs1s, rs1s, rs2s);
-> -                }
-> -#endif
-> -                break;
-> -            case 1:
-> -                /* C.XOR -> xor rs1', rs1', rs2' */
-> -                if (extract32(ctx->opcode, 12, 1) == 0) {
-> -                    gen_arith(ctx, OPC_RISC_XOR, rs1s, rs1s, rs2s);
-> -                }
-> -#if defined(TARGET_RISCV64)
-> -                else {
-> -                    /* C.ADDW (RV64/128) */
-> -                    gen_arith(ctx, OPC_RISC_ADDW, rs1s, rs1s, rs2s);
-> -                }
-> -#endif
-> -                break;
-> -            case 2:
-> -                /* C.OR -> or rs1', rs1', rs2' */
-> -                gen_arith(ctx, OPC_RISC_OR, rs1s, rs1s, rs2s);
-> -                break;
-> -            case 3:
-> -                /* C.AND -> and rs1', rs1', rs2' */
-> -                gen_arith(ctx, OPC_RISC_AND, rs1s, rs1s, rs2s);
-> -                break;
-> -            }
-> -            break;
-> -        }
-> -        break;
-> -    case 5:
-> -        /* C.J -> jal x0, offset[11:1]*/
-> -        gen_jal(ctx, 0, GET_C_J_IMM(ctx->opcode));
-> -        break;
-> -    case 6:
-> -        /* C.BEQZ -> beq rs1', x0, offset[8:1]*/
-> -        rs1s = GET_C_RS1S(ctx->opcode);
-> -        gen_branch(ctx, OPC_RISC_BEQ, rs1s, 0, GET_C_B_IMM(ctx->opcode));
-> -        break;
-> -    case 7:
-> -        /* C.BNEZ -> bne rs1', x0, offset[8:1]*/
-> -        rs1s = GET_C_RS1S(ctx->opcode);
-> -        gen_branch(ctx, OPC_RISC_BNE, rs1s, 0, GET_C_B_IMM(ctx->opcode));
-> -        break;
-> -    }
-> -}
-> -
->  static void decode_RV32_64C2(DisasContext *ctx)
->  {
->      uint8_t rd, rs2;
-> @@ -1028,9 +914,6 @@ static void decode_RV32_64C(DisasContext *ctx)
->      case 0:
->          decode_RV32_64C0(ctx);
->          break;
-> -    case 1:
-> -        decode_RV32_64C1(ctx);
-> -        break;
->      case 2:
->          decode_RV32_64C2(ctx);
->          break;
-> @@ -1045,6 +928,7 @@ static void decode_RV32_64C(DisasContext *ctx)
->  EX_SH(1)
->  EX_SH(2)
->  EX_SH(3)
-> +EX_SH(4)
->  EX_SH(12)
->
->  #define REQUIRE_EXT(ctx, ext) do { \
-> --
-> 2.19.2
->
->
+SGkgQmluLA0KDQpPbiBXZWQsIDIwMTktMDMtMTMgYXQgMDk6NTEgKzA4MDAsIEJpbiBNZW5nIHdy
+b3RlOg0KPiBIaSBMdWthcywNCj4gDQo+IE9uIFR1ZSwgTWFyIDEyLCAyMDE5IGF0IDEwOjM5IFBN
+IEF1ZXIsIEx1a2FzDQo+IDxsdWthcy5hdWVyQGFpc2VjLmZyYXVuaG9mZXIuZGU+IHdyb3RlOg0K
+PiA+IEhpIEJpbiwNCj4gPiANCj4gPiBPbiBNb24sIDIwMTktMDMtMTEgYXQgMjM6MjggKzA4MDAs
+IEJpbiBNZW5nIHdyb3RlOg0KPiA+ID4gSGkgTHVrYXMsDQo+ID4gPiANCj4gPiA+IE9uIE1vbiwg
+TWFyIDExLCAyMDE5IGF0IDI6MDMgQU0gQXVlciwgTHVrYXMNCj4gPiA+IDxsdWthcy5hdWVyQGFp
+c2VjLmZyYXVuaG9mZXIuZGU+IHdyb3RlOg0KPiA+ID4gPiBIaSBCaW4sDQo+ID4gPiA+IA0KPiA+
+ID4gPiBPbiBTdW4sIDIwMTktMDMtMTAgYXQgMjI6NTcgKzA4MDAsIEJpbiBNZW5nIHdyb3RlOg0K
+PiA+ID4gPiA+IEhpIEx1a2FzLA0KPiA+ID4gPiA+IA0KPiA+ID4gPiA+IE9uIFN1biwgTWFyIDEw
+LCAyMDE5IGF0IDk6NDQgUE0gQXVlciwgTHVrYXMNCj4gPiA+ID4gPiA8bHVrYXMuYXVlckBhaXNl
+Yy5mcmF1bmhvZmVyLmRlPiB3cm90ZToNCj4gPiA+ID4gPiA+IEhpIEJpbiwNCj4gPiA+ID4gPiA+
+IA0KPiA+ID4gPiA+ID4gT24gU3VuLCAyMDE5LTAzLTEwIGF0IDA5OjA3ICswODAwLCBCaW4gTWVu
+ZyB3cm90ZToNCj4gPiA+ID4gPiA+ID4gSGkgTHVrYXMsDQo+ID4gPiA+ID4gPiA+IA0KPiA+ID4g
+PiA+ID4gPiBPbiBNb24sIEZlYiAxMSwgMjAxOSBhdCA2OjEzIEFNIEx1a2FzIEF1ZXINCj4gPiA+
+ID4gPiA+ID4gPGx1a2FzLmF1ZXJAYWlzZWMuZnJhdW5ob2Zlci5kZT4gd3JvdGU6DQo+ID4gPiA+
+ID4gPiA+ID4gUmUtYWRkIHRoZSBwcmV2aW91cyBjb21wYXRpYmxlIHN0cmluZyAicmlzY3Ytdmly
+dGlvLQ0KPiA+ID4gPiA+ID4gPiA+IHNvYyIgdG8NCj4gPiA+ID4gPiA+ID4gPiB0aGUNCj4gPiA+
+ID4gPiA+ID4gPiBzb2MNCj4gPiA+ID4gPiA+ID4gPiBkZXZpY2UgdHJlZSBub2RlIHRvIGFsbG93
+IFUtQm9vdCBhbmQgTGludXggdG8gYmluZA0KPiA+ID4gPiA+ID4gPiA+IG1hY2hpbmUtDQo+ID4g
+PiA+ID4gPiA+ID4gc3BlY2lmaWMNCj4gPiA+ID4gPiA+ID4gPiBkcml2ZXJzIHRvIGl0LiBUaGUg
+Y3VycmVudCBjb21wYXRpYmxlIHN0cmluZyAic2ltcGxlLQ0KPiA+ID4gPiA+ID4gPiA+IGJ1cyIN
+Cj4gPiA+ID4gPiA+ID4gPiBpcw0KPiA+ID4gPiA+ID4gPiA+IHJldGFpbmVkLg0KPiA+ID4gPiA+
+ID4gPiA+IA0KPiA+ID4gPiA+ID4gPiA+IFRoaXMgaXMgcmVxdWlyZWQgYnkgVS1Cb290IHRvIGJp
+bmQgZGV2aWNlcyBlYXJseSwgYXMNCj4gPiA+ID4gPiA+ID4gPiBwYXJ0DQo+ID4gPiA+ID4gPiA+
+ID4gb2YNCj4gPiA+ID4gPiA+ID4gPiB0aGUNCj4gPiA+ID4gPiA+ID4gPiBwcmUtcmVsb2NhdGlv
+biBkcml2ZXIgbW9kZWwuDQo+ID4gPiA+ID4gPiA+ID4gDQo+ID4gPiA+ID4gPiA+IA0KPiA+ID4g
+PiA+ID4gPiBJIHNlZSBubyBwcm9ibGVtIHdpdGggVS1Cb290IHdvcmtpbmcgd2l0aCBjdXJyZW50
+DQo+ID4gPiA+ID4gPiA+IGNvbXBhdGlibGUNCj4gPiA+ID4gPiA+ID4gc3RyaW5nDQo+ID4gPiA+
+ID4gPiA+ICJzaW1wbGUtYnVzIi4gSW4gZmFjdCBJIGhhZCBwbGFubmVkIHRvIHJlbW92ZSB0aGUN
+Cj4gPiA+ID4gPiA+ID4gY29tcGF0aWJsZQ0KPiA+ID4gPiA+ID4gPiBzdHJpbmcNCj4gPiA+ID4g
+PiA+ID4gInJpc2N2LXZpcnRpby1zb2MiIGluIFUtQm9vdCBidXQgZGlkIG5vdCBnZXQgdGltZSB0
+byB3b3JrDQo+ID4gPiA+ID4gPiA+IG9uDQo+ID4gPiA+ID4gPiA+IGl0Lg0KPiA+ID4gPiA+ID4g
+PiANCj4gPiA+ID4gPiA+IA0KPiA+ID4gPiA+ID4gSXQgaXMgb25seSByZXF1aXJlZCBpZiBVLUJv
+b3QgaXMgcnVubmluZyBpbiBtYWNoaW5lLW1vZGUuDQo+ID4gPiA+ID4gPiBGb3INCj4gPiA+ID4g
+PiA+IHJlbG9jYXRpb24gaXQgbmVlZHMgdG8gdXNlIHRoZSBDTElOVCBkcml2ZXIgdG8gc2VuZA0K
+PiA+ID4gPiA+ID4gYXBwcm9wcmlhdGUNCj4gPiA+ID4gPiA+IElQSXMgdG8NCj4gPiA+ID4gPiA+
+IHRoZSBvdGhlciBoYXJ0cy4gVG8gYmUgYWJsZSB0byBwcm9iZSB0aGUgZHJpdmVyLCB0aGUgZGV2
+aWNlDQo+ID4gPiA+ID4gPiBhbmQNCj4gPiA+ID4gPiA+IGl0cw0KPiA+ID4gPiA+ID4gcGFyZW50
+IGRldmljZSB0cmVlIG5vZGUgKHNvYykgbXVzdCB0aGVyZWZvcmUgYmUgYXZhaWxhYmxlDQo+ID4g
+PiA+ID4gPiBpbg0KPiA+ID4gPiA+ID4gdGhlDQo+ID4gPiA+ID4gPiBwcmUtDQo+ID4gPiA+ID4g
+PiByZWxvY2F0aW9uIGRldmljZSBtb2RlbC4NCj4gPiA+ID4gPiA+IFRoaXMgcGF0Y2ggd2FzIHRo
+ZSBlYXNpZXN0IHdheSBJIGNvdWxkIHRoaW5rIG9mIGZvcg0KPiA+ID4gPiA+ID4gYWNoaWV2aW5n
+DQo+ID4gPiA+ID4gPiB0aGlzLg0KPiA+ID4gPiA+ID4gSXQNCj4gPiA+ID4gPiA+IGNvdWxkIGJl
+IHRoYXQgdGhlcmUgaXMgYSBiZXR0ZXIgd2F5IG9mIHNvbHZpbmcgdGhpcy4NCj4gPiA+ID4gPiA+
+IA0KPiA+ID4gPiA+IA0KPiA+ID4gPiA+IEkgdGVzdGVkIHlvdXIgU01QIFUtQm9vdCBzZXJpZXMg
+aW4gYm90aCBNLW1vZGUgYW5kIFMtbW9kZSwNCj4gPiA+ID4gPiB1c2luZw0KPiA+ID4gPiA+IGEg
+NA0KPiA+ID4gPiA+IGNvcmUgJ3ZpcnQnIHRhcmdldC4gV29ya3MgZmluZS4gSSBhbSB1c2luZyBR
+RU1VIDMuMS4wIHNvIGl0DQo+ID4gPiA+ID4gaXMNCj4gPiA+ID4gPiAic2ltcGxlLWJ1cyIuDQo+
+ID4gPiA+ID4gDQo+ID4gPiA+IA0KPiA+ID4gPiBUaGF0IGlzIGFjdHVhbGx5IG15IGZhdWx0LCBp
+dCBzaG91bGQgbm90IHdvcmsuDQo+ID4gPiA+IFdoYXQgaXMgaGFwcGVuaW5nIGlzIHRoYXQgVS1C
+b290IGZhaWxzIHRvIHJlbG9jYXRlIHRoZQ0KPiA+ID4gPiBzZWNvbmRhcnkNCj4gPiA+ID4gaGFy
+dHMsDQo+ID4gPiA+IGJlY2F1c2UgdGhlIENMSU5UIGRyaXZlciBjYW5ub3QgZ2V0IHRoZSBtZW1v
+cnkgYWRkcmVzcyBvZiB0aGUNCj4gPiA+ID4gQ0xJTlQNCj4gPiA+ID4gZGV2aWNlLiBUaGlzIGVy
+cm9yIGlzIGN1cnJlbnRseSBzaWxlbnRseSBpZ25vcmVkLg0KPiA+ID4gDQo+ID4gPiBJIHN0aWxs
+IGRvbid0IHVuZGVyc3RhbmQuIFdoeSBkb2VzIHRoZSBDTElOVCBkcml2ZXIgZmFpbCB0byBnZXQN
+Cj4gPiA+IHRoZQ0KPiA+ID4gbWVtb3J5IGFkZHJlc3M/IFUtQm9vdCBoYXMgYmVlbiBzdXBwb3J0
+aW5nICJzaW1waWxlLWJ1cyIgZm9yIGENCj4gPiA+IGxvbmcNCj4gPiA+IHRpbWUuIEl0IHdhcyBi
+ZWNhdXNlIFFFTVUgMy4wLjAgZ2VuZXJhdGVkIHRoZSAvc29jIG5vZGUgd2l0aA0KPiA+ID4gInJp
+c2N2LXZpcnRpby1zb2MiIGNvbXBhdGlibGUgc3RyaW5nLCBVLUJvb3Qgd2FzIHRhdWdodCB0byB0
+cmVhdA0KPiA+ID4gc3VjaA0KPiA+ID4gY29tcGF0aWJsZSBzdHJpbmcgYXMgYSAic2ltcGxlLWJ1
+cyIgdG9vICh0aGF0IHdhcyB0aGUgVS1Cb290DQo+ID4gPiBjb21taXQNCj4gPiA+IDI3ZGMyYzEz
+MGUyOSkNCj4gPiANCj4gPiBUaGF0J3MgY29ycmVjdC4gVGhlIHByb2JsZW0gd2l0aCB0aGUgZGVm
+YXVsdCBzaW1wbGUtYnVzIFUtQm9vdA0KPiA+IGRyaXZlcg0KPiA+IGlzIHRoYXQgaXQgZG9lcyBu
+b3QgaGF2ZSB0aGUgRE1fRkxBR19QUkVfUkVMT0MgZmxhZyBzZXQuIFRoZSAvc29jDQo+ID4gYW5k
+DQo+ID4gL3NvYy9jbGludCBub2RlcyBhcmUgdGhlcmVmb3JlIG5vdCBhdmFpbGFibGUgYmVmb3Jl
+IHJlbG9jYXRpb24sDQo+ID4gbWVhbmluZw0KPiA+IHRoYXQgSVBJcyBjYW5ub3QgYmUgc2VudCB0
+byByZWxvY2F0ZSB0aGUgc2Vjb25kYXJ5IGhhcnRzLg0KPiA+IA0KPiANCj4gVGhhbmtzIGZvciB0
+aGUgY2xhcmlmaWNhdGlvbnMuIE5vdyBJIHNlZSB0aGUgcHJvYmxlbS4gQnV0IEkgdGhpbmsgd2UN
+Cj4gc2hvdWxkIGZpeCBVLUJvb3QgInNpbXBsZS1idXMiIGRyaXZlciBpbnN0ZWFkLiBBcyBzZWVu
+IG9uIEZVNTQwIG9yDQo+IGxpa2VseSBvdGhlciBoYXJkd2FyZSwgUUVNVSBnZW5lcmF0ZXMgdGhl
+ICJzaW1wbGUtYnVzIiBjb21wYXRpYmxlDQo+IHN0cmluZyBmb3IgdGhlIC9zb2Mgbm9kZSwgYXMg
+d2VsbCBhcyB0aGUgRFQgcHJvdmlkZWQgYnkgdGhlIGhhcmR3YXJlLg0KPiANCg0KVGhhdCBtYWtl
+cyBzZW5zZSwgSSBjYW4gc2VuZCBhIHBhdGNoIHRvIHNldCB0aGUgRE1fRkxBR19QUkVfUkVMT0Mg
+ZmxhZw0KaW4gdGhlIHNpbXBsZS1idXMgVS1Cb290IGRyaXZlci4gSSB0aGluayBpdCdzIGJlc3Qg
+dG8gc2VuZCBpdA0Kc2VwYXJhdGVseSBmcm9tIHRoZSBTTVAgcGF0Y2ggc2VyaWVzLCBzaW5jZSBp
+dCBjb3VsZCBhZmZlY3Qgb3RoZXINCmJvYXJkcyBhbmQgaXQncyBhIGJpdCBsYXRlIGluIHRoZSBy
+ZWxlYXNlIGN5Y2xlLiBXaGF0IGRvIHlvdSB0aGluaz8NCg0KVGhpcyBwYXRjaCBjYW4gYmUgZHJv
+cHBlZCB0aGVuLg0KDQpUaGFua3MsDQpMdWthcw0K
 
