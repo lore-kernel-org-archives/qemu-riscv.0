@@ -1,59 +1,110 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1h4L17-0006jd-Es
-	for mharc-qemu-riscv@gnu.org; Thu, 14 Mar 2019 03:43:05 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:47247)
+	id 1h4QGz-0004D5-BK
+	for mharc-qemu-riscv@gnu.org; Thu, 14 Mar 2019 09:19:49 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:45503)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <peter.maydell@linaro.org>) id 1h4L14-0006iA-R8
-	for qemu-riscv@nongnu.org; Thu, 14 Mar 2019 03:43:03 -0400
+	(envelope-from <pbonzini@redhat.com>) id 1h4QGx-0003bH-H5
+	for qemu-riscv@nongnu.org; Thu, 14 Mar 2019 09:19:48 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <peter.maydell@linaro.org>) id 1h4L12-00037Q-8E
-	for qemu-riscv@nongnu.org; Thu, 14 Mar 2019 03:43:02 -0400
-Received: from mail-it1-x129.google.com ([2607:f8b0:4864:20::129]:52708)
-	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <peter.maydell@linaro.org>)
-	id 1h4L11-000369-6r
-	for qemu-riscv@nongnu.org; Thu, 14 Mar 2019 03:43:00 -0400
-Received: by mail-it1-x129.google.com with SMTP id g17so3140161ita.2
-	for <qemu-riscv@nongnu.org>; Thu, 14 Mar 2019 00:42:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=CdeUAda5uRByPNndW2OKTcNr66KOhImToL7ILBl5jAk=;
-	b=FrmuW7SkS9+alzR65dt59LHafuigPlEVQbZfdPlyLwtAcpjHjGr9OI0nYz6kd538Ji
-	f7HSr5NHN9EmpnLzt8mQ8vfx/nd72VDUKKb6FV37ZSkx6qRXe4CnXFjbRt/XErcyryzz
-	XpMm0F0kDvEuA2Uue7/ZrpuvCqJudcJWlpCZhIc4fRWMvK4PJwp9+f2Ns49OPdUJYoE3
-	0DfTsLAffAGc9twpJUgG5PfQPsGHNApFXJcD1oRNHo86Ixr9444X3KwkN0MBfjHiOIPj
-	+EiwQIzlE+8pAHGSF5Ur2SaSMwUMWmjvDda5Jfsi+nIINmqhh0OtDVDGkFKkOaY+P2WF
-	ju5A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=CdeUAda5uRByPNndW2OKTcNr66KOhImToL7ILBl5jAk=;
-	b=POKoIOUAlch1sVtToLMyDbOcMKCWVFHFv2LNnoduBUoU7UVjwiu3ZuuZbDhrjsz35O
-	1Y4/s4vgtrW7RO/if1n/LXFAwDc4Px0UNfKw0ewPP1sORqqNgsrzF7w+//o/r07zCShR
-	ncBHx84HS0sCJ2gauZAsajaby90RHYhTPIp87bmVG/4XKQl21LmbIgUgvowlEWL5YSKe
-	Ke48eYVVNx/fyukpjXc7RDwsLe159SjBONsE1YnVvWCG8O/t3glzIiiW0EobZiQZXyU+
-	R3BLr7ur6BOW618sNnyZps6OFXYOdZCUnbHaZulBzxNyIB2eCaESTykwvOqYpV4VRsOb
-	hIRA==
-X-Gm-Message-State: APjAAAWBVnhs+xNDvvKQ3gawtfjTTZhiMTItoC7YwYA29h28xpFwrzEb
-	/xLocxQ4EQ1p9/FFYXQJh6qcmn2egKI6vTBepLFXwA==
-X-Google-Smtp-Source: APXvYqwcYAJTfJMHoo4D13m5o/l/+JIPd9rccK0Fr28XYdRsfB4cREewpo/jhGWHJmoUzj5xPX+9X+kvBQRoQq0wPEk=
-X-Received: by 2002:a02:4904:: with SMTP id z4mr25221646jaa.46.1552549377894; 
-	Thu, 14 Mar 2019 00:42:57 -0700 (PDT)
+	(envelope-from <pbonzini@redhat.com>) id 1h4QAu-0004O0-7J
+	for qemu-riscv@nongnu.org; Thu, 14 Mar 2019 09:13:32 -0400
+Received: from mx1.redhat.com ([209.132.183.28]:37044)
+	by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.71) (envelope-from <pbonzini@redhat.com>)
+	id 1h4QAt-0004Mq-2q; Thu, 14 Mar 2019 09:13:31 -0400
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
+	[10.5.11.12])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mx1.redhat.com (Postfix) with ESMTPS id D37353002EE4;
+	Thu, 14 Mar 2019 13:13:29 +0000 (UTC)
+Received: from [10.36.112.69] (ovpn-112-69.ams2.redhat.com [10.36.112.69])
+	by smtp.corp.redhat.com (Postfix) with ESMTPS id 82DC960BE6;
+	Thu, 14 Mar 2019 13:13:25 +0000 (UTC)
+To: Andrea Bolognani <abologna@redhat.com>, qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Yang Zhong <yang.zhong@intel.com>, thuth@redhat.com,
+	"Michael S. Tsirkin" <mst@redhat.com>, Palmer Dabbelt <palmer@sifive.com>, 
+	Alistair Francis <Alistair.Francis@wdc.com>,
+	"Richard W.M. Jones" <rjones@redhat.com>,
+	David Abdurachmanov <david.abdurachmanov@gmail.com>
+References: <1551723614-1823-1-git-send-email-pbonzini@redhat.com>
+	<1551723614-1823-16-git-send-email-pbonzini@redhat.com>
+	<100bab7e060234ff76a1fe7d0d97bc79368a2a4e.camel@redhat.com>
+From: Paolo Bonzini <pbonzini@redhat.com>
+Openpgp: preference=signencrypt
+Autocrypt: addr=pbonzini@redhat.com; prefer-encrypt=mutual; keydata=
+	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
+	uUHgL9dKIfvpm+rNXRn9wAwGjk0X/A==
+Message-ID: <cd805adc-209e-464b-54ca-7c52b16d6568@redhat.com>
+Date: Thu, 14 Mar 2019 14:13:21 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.4.0
 MIME-Version: 1.0
-References: <20190313143705.29129-1-palmer@sifive.com>
-In-Reply-To: <20190313143705.29129-1-palmer@sifive.com>
-From: Peter Maydell <peter.maydell@linaro.org>
-Date: Thu, 14 Mar 2019 07:42:46 +0000
-Message-ID: <CAFEAcA8wy5mw1tgbOAE02gZkuS6-LMVHYkweBWhw7fPq101DkA@mail.gmail.com>
-To: Palmer Dabbelt <palmer@sifive.com>
-Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
-	QEMU Developers <qemu-devel@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
-	recognized.
-X-Received-From: 2607:f8b0:4864:20::129
-Subject: Re: [Qemu-riscv] [PULL] target/riscv: Convert to decodetree
+In-Reply-To: <100bab7e060234ff76a1fe7d0d97bc79368a2a4e.camel@redhat.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+	(mx1.redhat.com [10.5.110.44]);
+	Thu, 14 Mar 2019 13:13:29 +0000 (UTC)
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+X-Received-From: 209.132.183.28
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PULL 15/54] build: convert pci.mak
+ to Kconfig
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -65,27 +116,25 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Mar 2019 07:43:03 -0000
+X-List-Received-Date: Thu, 14 Mar 2019 13:19:48 -0000
 
-On Wed, 13 Mar 2019 at 14:37, Palmer Dabbelt <palmer@sifive.com> wrote:
->
-> merged tag 'pull-request-2019-03-12'
-> Primary key fingerprint: 27B8 8847 EEE0 2501 18F3  EAB9 2ED9 D774 FE70 2DB5
-> The following changes since commit 3f3bbfc7cef4490c5ed5550766a81e7d18f08db1:
->
->   Merge remote-tracking branch 'remotes/huth-gitlab/tags/pull-request-2019-03-12' into staging (2019-03-12 21:06:26 +0000)
->
-> are available in the Git repository at:
->
->   git://github.com/palmer-dabbelt/qemu.git tags/riscv-for-master-4.0-sf4
->
-> for you to fetch changes up to 25e6ca30c668783cd72ff97080ff44e141b99f9b:
->
->   target/riscv: Remove decode_RV32_64G() (2019-03-13 10:40:50 +0100)
-Applied, thanks.
+On 14/03/19 13:53, Andrea Bolognani wrote:
+> 
+>   $ ./riscv64-softmmu/qemu-system-riscv64 \
+>     -M virt \
+>     -device pcie-root-port
+>   qemu-system-riscv64: -device pcie-root-port: MSI-X is not
+>                        supported by interrupt controller
+> 
+> This is a limitation we have been aware of, and the plan was to
+> enable the device in QEMU once it had been addressed: from the
+> libvirt side, the availability of the device would have meant that it
+> was safe to use it, but if the device is enabled in QEMU before it
+> can actually be used, then that makes detection on the libvirt side
+> problematic.
 
-Please update the changelog at https://wiki.qemu.org/ChangeLog/4.0
-for any user-visible changes.
+Interesting, I didn't know that.  Kconfig is perfect for expressing this
+kind of dependency though.  I'll send a series soon.
 
--- PMM
+Paolo
 
