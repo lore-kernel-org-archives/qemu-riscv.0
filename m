@@ -1,58 +1,46 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1h4Xeo-00081e-2E
-	for mharc-qemu-riscv@gnu.org; Thu, 14 Mar 2019 17:12:54 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:49825)
+	id 1h4c6P-0006Gw-Br
+	for mharc-qemu-riscv@gnu.org; Thu, 14 Mar 2019 21:57:41 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:33405)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <lukas.auer@aisec.fraunhofer.de>) id 1h4Xej-0007vK-ER
-	for qemu-riscv@nongnu.org; Thu, 14 Mar 2019 17:12:50 -0400
+	(envelope-from <bmeng.cn@gmail.com>) id 1h4c6N-0006CN-EP
+	for qemu-riscv@nongnu.org; Thu, 14 Mar 2019 21:57:40 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <lukas.auer@aisec.fraunhofer.de>) id 1h4XTh-0007wg-05
-	for qemu-riscv@nongnu.org; Thu, 14 Mar 2019 17:01:28 -0400
-Received: from mail-edgeka24.fraunhofer.de ([153.96.1.24]:59277)
-	by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.71) (envelope-from <lukas.auer@aisec.fraunhofer.de>)
-	id 1h4XTg-0007ri-4q; Thu, 14 Mar 2019 17:01:24 -0400
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: =?us-ascii?q?A2HmAADWv4pc/xwBYJlkHAEBAQQBAQc?=
-	=?us-ascii?q?EAQGBVAQBAQsBgg+BaycKhAGIe4pDgg18mS8NhGwCF4Q6IjcGDQEBAwEBCQE?=
-	=?us-ascii?q?DAgICaR0LhUwBBSMRRRACAQgYAgImAgICMBUQAgQOBYUXAa0vgS+KM4ELJAG?=
-	=?us-ascii?q?LLIFYPoEQAYIUSTWIC4JXA4woKotBjC0DBAICgSORehmLBYhHin+TEIFdI4F?=
-	=?us-ascii?q?WcYM7ghYXE44LPwEBMQGPJ4EfAQE?=
-X-IPAS-Result: =?us-ascii?q?A2HmAADWv4pc/xwBYJlkHAEBAQQBAQcEAQGBVAQBAQsBg?=
-	=?us-ascii?q?g+BaycKhAGIe4pDgg18mS8NhGwCF4Q6IjcGDQEBAwEBCQEDAgICaR0LhUwBB?=
-	=?us-ascii?q?SMRRRACAQgYAgImAgICMBUQAgQOBYUXAa0vgS+KM4ELJAGLLIFYPoEQAYIUS?=
-	=?us-ascii?q?TWIC4JXA4woKotBjC0DBAICgSORehmLBYhHin+TEIFdI4FWcYM7ghYXE44LP?=
-	=?us-ascii?q?wEBMQGPJ4EfAQE?=
-X-IronPort-AV: E=Sophos;i="5.58,479,1544482800"; d="scan'208";a="13803404"
-Received: from mail-mtaka28.fraunhofer.de ([153.96.1.28])
-	by mail-edgeKA24.fraunhofer.de with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	14 Mar 2019 22:01:16 +0100
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: =?us-ascii?q?A0CvAADWv4pcfRBhWMBkHAEBAQQBAQc?=
-	=?us-ascii?q?EAQGBVAQBAQsBg0chEicKhAGIe4xQfJkvDYRsAheEWzcGDQEBAwEBCQEDAhQ?=
-	=?us-ascii?q?BARY6JAuFSwEFIxFFEAIBCBgCAiYCAgIwFRACBA4FhRitL4EvijOBCyQBjQQ?=
-	=?us-ascii?q?+gRABghRJNYgLglcDjCgqi0GMLQMEAgKBI5F6GYsFiEeKf5MQgV0hgVdxgzu?=
-	=?us-ascii?q?CFhcTjgs/AQIwAY8ngR8BAQ?=
-X-IronPort-AV: E=Sophos;i="5.58,479,1544482800"; d="scan'208";a="19584776"
-Received: from fgdemucivp01ltm.xch.fraunhofer.de (HELO
-	FGDEMUCIMP12EXC.ads.fraunhofer.de) ([192.88.97.16])
-	by mail-mtaKA28.fraunhofer.de with ESMTP/TLS/AES256-SHA;
-	14 Mar 2019 22:01:14 +0100
-Received: from FGDEMUCIMP01EXC.ads.fraunhofer.de ([10.80.232.40]) by
-	FGDEMUCIMP12EXC.ads.fraunhofer.de ([10.80.232.43]) with mapi id
-	14.03.0435.000; Thu, 14 Mar 2019 22:01:14 +0100
-From: "Auer, Lukas" <lukas.auer@aisec.fraunhofer.de>
-To: "bmeng.cn@gmail.com" <bmeng.cn@gmail.com>
-CC: "palmer@sifive.com" <palmer@sifive.com>, "qemu-riscv@nongnu.org"
-	<qemu-riscv@nongnu.org>, "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>,
-	"kbastian@mail.uni-paderborn.de" <kbastian@mail.uni-paderborn.de>,
-	"sagark@eecs.berkeley.edu" <sagark@eecs.berkeley.edu>,
-	"Alistair.Francis@wdc.com" <Alistair.Francis@wdc.com>
-Thread-Topic: [Qemu-devel] [PATCH] hw/riscv/virt: re-add machine-specific
-	compatible string to /soc/ node
-Thread-Index: AQHUwX2/pwGZ00zQgE6v+yqcxIgIXaYEJ5sAgADTUQCAABSaAIAAM/MAgAFmzoCAAYTigIAAu5oAgALTm4A=
-Date: Thu, 14 Mar 2019 21:01:13 +0000
-Message-ID: <9beff9a660f1c3fd1317a52c6d1b7c7ae211a2dd.camel@aisec.fraunhofer.de>
+	(envelope-from <bmeng.cn@gmail.com>) id 1h4c3j-0006rb-At
+	for qemu-riscv@nongnu.org; Thu, 14 Mar 2019 21:54:58 -0400
+Received: from mail-ed1-x541.google.com ([2a00:1450:4864:20::541]:45269)
+	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+	(Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
+	id 1h4c3j-0006r7-0B; Thu, 14 Mar 2019 21:54:55 -0400
+Received: by mail-ed1-x541.google.com with SMTP id d21so4850459edx.12;
+	Thu, 14 Mar 2019 18:54:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=ajc6GWfVGkoBMdktNCdOavrAxXhqpupoUEPlN0TnEtw=;
+	b=qGbGIFRdRPHXKqTp//TiaVD/xDA4ehUwzhLb0iIIvLZcA8mfaqPas0Vuy4tBe8M956
+	J19P69z3V8ENzPdhEFAhrzse+ldtwadvNK7BmaNGhaTx1WGrhPbDQuHk1WK4zl14N+Ls
+	CfL/3yvug0DkCyij7gBLsltwPViLnImfwMuj+ZoEatYdOE7BNK3mJu9epNdme8pLHzgH
+	hK4l/NRq1JzyKLXDDmrJgdP/OQqzYCsgC2hZOYfOOce1f1dVSkxr+jt5qXDb8XmwzSxm
+	DIUSs5TYpmjrBoMedsUpa9G8s+jwQHR61PsuE5Ua6el7ZEps59WIRhRtteUTLa0+8AE8
+	SmOA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=ajc6GWfVGkoBMdktNCdOavrAxXhqpupoUEPlN0TnEtw=;
+	b=Y7cV1QggfpN5PmAOVf+y0jZ8RtnnESGCAsarQQypcdGZjWIAvc6xxQXT6rE8CBoqjW
+	tYjH7LvkV74/1q56ZAcx+jtA/ITpIBGgcAnTyn+wlMda7EjwpV3sW+A+0tb1LjcA8Npm
+	gqkc78I1+xkWWWeCr2RyPUmtb6Fjlok6QaMIEoD4cKJKSf3LZ0QTr7lOunwvCXDZszoj
+	AvdTRBVFrUNO3g2F2VGYdN8uBd4BRsqxYcEt5Rkia5/D+04PxUJndOLIHXLwLNh3coXB
+	hCtk6mTGF6qXOt3wPj/A6CBqu3s/dalWLjBOB7KmS+qCffEyYUggneyCAvGi0vTlGftb
+	N14w==
+X-Gm-Message-State: APjAAAU/mqY9r6Ox4jkuZMS5hlUMiOG30V2sl+SSW/hfeR06QQq7z7B0
+	Ff8fqmV5k9hfSydbY1Tg9tuszJzmXP/nyZKNGV4=
+X-Google-Smtp-Source: APXvYqz9QEJEM5ywTiem/LMRQdt+l+r3Ak7y6NPsM8NcF4Pqsda15qbEwPxPIt4w0zCmFaWUmCysc0eiylIHQtgYaIo=
+X-Received: by 2002:a05:6402:74d:: with SMTP id
+	p13mr876082edy.245.1552614892661; 
+	Thu, 14 Mar 2019 18:54:52 -0700 (PDT)
+MIME-Version: 1.0
 References: <20190210201726.3567-1-lukas.auer@aisec.fraunhofer.de>
 	<CAEUhbmUtSAeznt1DCwJ7tS=YFeqwnYBemS6278=QQ60qs_MthA@mail.gmail.com>
 	<c9f69861058412a1f71418a9c892daf0821a9e33.camel@aisec.fraunhofer.de>
@@ -61,23 +49,22 @@ References: <20190210201726.3567-1-lukas.auer@aisec.fraunhofer.de>
 	<CAEUhbmX=PT-46nqtMqSaGn5xu2tRJ50Sm6kK7b97Xc_Y+6stPw@mail.gmail.com>
 	<33758c6945c9b1968247c5b6dfb12418e57e71e0.camel@aisec.fraunhofer.de>
 	<CAEUhbmX5ygthHtEoMvRMND3hbmhXrp-ok_hyvAqC+REafNSNbQ@mail.gmail.com>
-In-Reply-To: <CAEUhbmX5ygthHtEoMvRMND3hbmhXrp-ok_hyvAqC+REafNSNbQ@mail.gmail.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.80.233.51]
-x-tm-as-product-ver: SMEX-11.0.0.4179-8.200.1013-24488.004
-x-tm-as-result: No--16.813800-8.000000-31
-x-tm-as-user-approved-sender: No
-x-tm-as-user-blocked-sender: No
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <A5BE6700177C834289CAD27A9A104728@xch.fraunhofer.de>
-Content-Transfer-Encoding: base64
-MIME-Version: 1.0
+	<9beff9a660f1c3fd1317a52c6d1b7c7ae211a2dd.camel@aisec.fraunhofer.de>
+In-Reply-To: <9beff9a660f1c3fd1317a52c6d1b7c7ae211a2dd.camel@aisec.fraunhofer.de>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Fri, 15 Mar 2019 09:54:41 +0800
+Message-ID: <CAEUhbmV9TS1wXfcSFX7P-JEWooXX8JHxW34vtGHLgFy7-z+evA@mail.gmail.com>
+To: "Auer, Lukas" <lukas.auer@aisec.fraunhofer.de>
+Cc: "palmer@sifive.com" <palmer@sifive.com>,
+	"qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>, 
+	"qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, 
+	"kbastian@mail.uni-paderborn.de" <kbastian@mail.uni-paderborn.de>, 
+	"sagark@eecs.berkeley.edu" <sagark@eecs.berkeley.edu>, 
+	"Alistair.Francis@wdc.com" <Alistair.Francis@wdc.com>
+Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 153.96.1.24
+X-Received-From: 2a00:1450:4864:20::541
 Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH] hw/riscv/virt: re-add
  machine-specific compatible string to /soc/ node
 X-BeenThere: qemu-riscv@nongnu.org
@@ -91,84 +78,146 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Mar 2019 21:12:51 -0000
+X-List-Received-Date: Fri, 15 Mar 2019 01:57:40 -0000
 
-SGkgQmluLA0KDQpPbiBXZWQsIDIwMTktMDMtMTMgYXQgMDk6NTEgKzA4MDAsIEJpbiBNZW5nIHdy
-b3RlOg0KPiBIaSBMdWthcywNCj4gDQo+IE9uIFR1ZSwgTWFyIDEyLCAyMDE5IGF0IDEwOjM5IFBN
-IEF1ZXIsIEx1a2FzDQo+IDxsdWthcy5hdWVyQGFpc2VjLmZyYXVuaG9mZXIuZGU+IHdyb3RlOg0K
-PiA+IEhpIEJpbiwNCj4gPiANCj4gPiBPbiBNb24sIDIwMTktMDMtMTEgYXQgMjM6MjggKzA4MDAs
-IEJpbiBNZW5nIHdyb3RlOg0KPiA+ID4gSGkgTHVrYXMsDQo+ID4gPiANCj4gPiA+IE9uIE1vbiwg
-TWFyIDExLCAyMDE5IGF0IDI6MDMgQU0gQXVlciwgTHVrYXMNCj4gPiA+IDxsdWthcy5hdWVyQGFp
-c2VjLmZyYXVuaG9mZXIuZGU+IHdyb3RlOg0KPiA+ID4gPiBIaSBCaW4sDQo+ID4gPiA+IA0KPiA+
-ID4gPiBPbiBTdW4sIDIwMTktMDMtMTAgYXQgMjI6NTcgKzA4MDAsIEJpbiBNZW5nIHdyb3RlOg0K
-PiA+ID4gPiA+IEhpIEx1a2FzLA0KPiA+ID4gPiA+IA0KPiA+ID4gPiA+IE9uIFN1biwgTWFyIDEw
-LCAyMDE5IGF0IDk6NDQgUE0gQXVlciwgTHVrYXMNCj4gPiA+ID4gPiA8bHVrYXMuYXVlckBhaXNl
-Yy5mcmF1bmhvZmVyLmRlPiB3cm90ZToNCj4gPiA+ID4gPiA+IEhpIEJpbiwNCj4gPiA+ID4gPiA+
-IA0KPiA+ID4gPiA+ID4gT24gU3VuLCAyMDE5LTAzLTEwIGF0IDA5OjA3ICswODAwLCBCaW4gTWVu
-ZyB3cm90ZToNCj4gPiA+ID4gPiA+ID4gSGkgTHVrYXMsDQo+ID4gPiA+ID4gPiA+IA0KPiA+ID4g
-PiA+ID4gPiBPbiBNb24sIEZlYiAxMSwgMjAxOSBhdCA2OjEzIEFNIEx1a2FzIEF1ZXINCj4gPiA+
-ID4gPiA+ID4gPGx1a2FzLmF1ZXJAYWlzZWMuZnJhdW5ob2Zlci5kZT4gd3JvdGU6DQo+ID4gPiA+
-ID4gPiA+ID4gUmUtYWRkIHRoZSBwcmV2aW91cyBjb21wYXRpYmxlIHN0cmluZyAicmlzY3Ytdmly
-dGlvLQ0KPiA+ID4gPiA+ID4gPiA+IHNvYyIgdG8NCj4gPiA+ID4gPiA+ID4gPiB0aGUNCj4gPiA+
-ID4gPiA+ID4gPiBzb2MNCj4gPiA+ID4gPiA+ID4gPiBkZXZpY2UgdHJlZSBub2RlIHRvIGFsbG93
-IFUtQm9vdCBhbmQgTGludXggdG8gYmluZA0KPiA+ID4gPiA+ID4gPiA+IG1hY2hpbmUtDQo+ID4g
-PiA+ID4gPiA+ID4gc3BlY2lmaWMNCj4gPiA+ID4gPiA+ID4gPiBkcml2ZXJzIHRvIGl0LiBUaGUg
-Y3VycmVudCBjb21wYXRpYmxlIHN0cmluZyAic2ltcGxlLQ0KPiA+ID4gPiA+ID4gPiA+IGJ1cyIN
-Cj4gPiA+ID4gPiA+ID4gPiBpcw0KPiA+ID4gPiA+ID4gPiA+IHJldGFpbmVkLg0KPiA+ID4gPiA+
-ID4gPiA+IA0KPiA+ID4gPiA+ID4gPiA+IFRoaXMgaXMgcmVxdWlyZWQgYnkgVS1Cb290IHRvIGJp
-bmQgZGV2aWNlcyBlYXJseSwgYXMNCj4gPiA+ID4gPiA+ID4gPiBwYXJ0DQo+ID4gPiA+ID4gPiA+
-ID4gb2YNCj4gPiA+ID4gPiA+ID4gPiB0aGUNCj4gPiA+ID4gPiA+ID4gPiBwcmUtcmVsb2NhdGlv
-biBkcml2ZXIgbW9kZWwuDQo+ID4gPiA+ID4gPiA+ID4gDQo+ID4gPiA+ID4gPiA+IA0KPiA+ID4g
-PiA+ID4gPiBJIHNlZSBubyBwcm9ibGVtIHdpdGggVS1Cb290IHdvcmtpbmcgd2l0aCBjdXJyZW50
-DQo+ID4gPiA+ID4gPiA+IGNvbXBhdGlibGUNCj4gPiA+ID4gPiA+ID4gc3RyaW5nDQo+ID4gPiA+
-ID4gPiA+ICJzaW1wbGUtYnVzIi4gSW4gZmFjdCBJIGhhZCBwbGFubmVkIHRvIHJlbW92ZSB0aGUN
-Cj4gPiA+ID4gPiA+ID4gY29tcGF0aWJsZQ0KPiA+ID4gPiA+ID4gPiBzdHJpbmcNCj4gPiA+ID4g
-PiA+ID4gInJpc2N2LXZpcnRpby1zb2MiIGluIFUtQm9vdCBidXQgZGlkIG5vdCBnZXQgdGltZSB0
-byB3b3JrDQo+ID4gPiA+ID4gPiA+IG9uDQo+ID4gPiA+ID4gPiA+IGl0Lg0KPiA+ID4gPiA+ID4g
-PiANCj4gPiA+ID4gPiA+IA0KPiA+ID4gPiA+ID4gSXQgaXMgb25seSByZXF1aXJlZCBpZiBVLUJv
-b3QgaXMgcnVubmluZyBpbiBtYWNoaW5lLW1vZGUuDQo+ID4gPiA+ID4gPiBGb3INCj4gPiA+ID4g
-PiA+IHJlbG9jYXRpb24gaXQgbmVlZHMgdG8gdXNlIHRoZSBDTElOVCBkcml2ZXIgdG8gc2VuZA0K
-PiA+ID4gPiA+ID4gYXBwcm9wcmlhdGUNCj4gPiA+ID4gPiA+IElQSXMgdG8NCj4gPiA+ID4gPiA+
-IHRoZSBvdGhlciBoYXJ0cy4gVG8gYmUgYWJsZSB0byBwcm9iZSB0aGUgZHJpdmVyLCB0aGUgZGV2
-aWNlDQo+ID4gPiA+ID4gPiBhbmQNCj4gPiA+ID4gPiA+IGl0cw0KPiA+ID4gPiA+ID4gcGFyZW50
-IGRldmljZSB0cmVlIG5vZGUgKHNvYykgbXVzdCB0aGVyZWZvcmUgYmUgYXZhaWxhYmxlDQo+ID4g
-PiA+ID4gPiBpbg0KPiA+ID4gPiA+ID4gdGhlDQo+ID4gPiA+ID4gPiBwcmUtDQo+ID4gPiA+ID4g
-PiByZWxvY2F0aW9uIGRldmljZSBtb2RlbC4NCj4gPiA+ID4gPiA+IFRoaXMgcGF0Y2ggd2FzIHRo
-ZSBlYXNpZXN0IHdheSBJIGNvdWxkIHRoaW5rIG9mIGZvcg0KPiA+ID4gPiA+ID4gYWNoaWV2aW5n
-DQo+ID4gPiA+ID4gPiB0aGlzLg0KPiA+ID4gPiA+ID4gSXQNCj4gPiA+ID4gPiA+IGNvdWxkIGJl
-IHRoYXQgdGhlcmUgaXMgYSBiZXR0ZXIgd2F5IG9mIHNvbHZpbmcgdGhpcy4NCj4gPiA+ID4gPiA+
-IA0KPiA+ID4gPiA+IA0KPiA+ID4gPiA+IEkgdGVzdGVkIHlvdXIgU01QIFUtQm9vdCBzZXJpZXMg
-aW4gYm90aCBNLW1vZGUgYW5kIFMtbW9kZSwNCj4gPiA+ID4gPiB1c2luZw0KPiA+ID4gPiA+IGEg
-NA0KPiA+ID4gPiA+IGNvcmUgJ3ZpcnQnIHRhcmdldC4gV29ya3MgZmluZS4gSSBhbSB1c2luZyBR
-RU1VIDMuMS4wIHNvIGl0DQo+ID4gPiA+ID4gaXMNCj4gPiA+ID4gPiAic2ltcGxlLWJ1cyIuDQo+
-ID4gPiA+ID4gDQo+ID4gPiA+IA0KPiA+ID4gPiBUaGF0IGlzIGFjdHVhbGx5IG15IGZhdWx0LCBp
-dCBzaG91bGQgbm90IHdvcmsuDQo+ID4gPiA+IFdoYXQgaXMgaGFwcGVuaW5nIGlzIHRoYXQgVS1C
-b290IGZhaWxzIHRvIHJlbG9jYXRlIHRoZQ0KPiA+ID4gPiBzZWNvbmRhcnkNCj4gPiA+ID4gaGFy
-dHMsDQo+ID4gPiA+IGJlY2F1c2UgdGhlIENMSU5UIGRyaXZlciBjYW5ub3QgZ2V0IHRoZSBtZW1v
-cnkgYWRkcmVzcyBvZiB0aGUNCj4gPiA+ID4gQ0xJTlQNCj4gPiA+ID4gZGV2aWNlLiBUaGlzIGVy
-cm9yIGlzIGN1cnJlbnRseSBzaWxlbnRseSBpZ25vcmVkLg0KPiA+ID4gDQo+ID4gPiBJIHN0aWxs
-IGRvbid0IHVuZGVyc3RhbmQuIFdoeSBkb2VzIHRoZSBDTElOVCBkcml2ZXIgZmFpbCB0byBnZXQN
-Cj4gPiA+IHRoZQ0KPiA+ID4gbWVtb3J5IGFkZHJlc3M/IFUtQm9vdCBoYXMgYmVlbiBzdXBwb3J0
-aW5nICJzaW1waWxlLWJ1cyIgZm9yIGENCj4gPiA+IGxvbmcNCj4gPiA+IHRpbWUuIEl0IHdhcyBi
-ZWNhdXNlIFFFTVUgMy4wLjAgZ2VuZXJhdGVkIHRoZSAvc29jIG5vZGUgd2l0aA0KPiA+ID4gInJp
-c2N2LXZpcnRpby1zb2MiIGNvbXBhdGlibGUgc3RyaW5nLCBVLUJvb3Qgd2FzIHRhdWdodCB0byB0
-cmVhdA0KPiA+ID4gc3VjaA0KPiA+ID4gY29tcGF0aWJsZSBzdHJpbmcgYXMgYSAic2ltcGxlLWJ1
-cyIgdG9vICh0aGF0IHdhcyB0aGUgVS1Cb290DQo+ID4gPiBjb21taXQNCj4gPiA+IDI3ZGMyYzEz
-MGUyOSkNCj4gPiANCj4gPiBUaGF0J3MgY29ycmVjdC4gVGhlIHByb2JsZW0gd2l0aCB0aGUgZGVm
-YXVsdCBzaW1wbGUtYnVzIFUtQm9vdA0KPiA+IGRyaXZlcg0KPiA+IGlzIHRoYXQgaXQgZG9lcyBu
-b3QgaGF2ZSB0aGUgRE1fRkxBR19QUkVfUkVMT0MgZmxhZyBzZXQuIFRoZSAvc29jDQo+ID4gYW5k
-DQo+ID4gL3NvYy9jbGludCBub2RlcyBhcmUgdGhlcmVmb3JlIG5vdCBhdmFpbGFibGUgYmVmb3Jl
-IHJlbG9jYXRpb24sDQo+ID4gbWVhbmluZw0KPiA+IHRoYXQgSVBJcyBjYW5ub3QgYmUgc2VudCB0
-byByZWxvY2F0ZSB0aGUgc2Vjb25kYXJ5IGhhcnRzLg0KPiA+IA0KPiANCj4gVGhhbmtzIGZvciB0
-aGUgY2xhcmlmaWNhdGlvbnMuIE5vdyBJIHNlZSB0aGUgcHJvYmxlbS4gQnV0IEkgdGhpbmsgd2UN
-Cj4gc2hvdWxkIGZpeCBVLUJvb3QgInNpbXBsZS1idXMiIGRyaXZlciBpbnN0ZWFkLiBBcyBzZWVu
-IG9uIEZVNTQwIG9yDQo+IGxpa2VseSBvdGhlciBoYXJkd2FyZSwgUUVNVSBnZW5lcmF0ZXMgdGhl
-ICJzaW1wbGUtYnVzIiBjb21wYXRpYmxlDQo+IHN0cmluZyBmb3IgdGhlIC9zb2Mgbm9kZSwgYXMg
-d2VsbCBhcyB0aGUgRFQgcHJvdmlkZWQgYnkgdGhlIGhhcmR3YXJlLg0KPiANCg0KVGhhdCBtYWtl
-cyBzZW5zZSwgSSBjYW4gc2VuZCBhIHBhdGNoIHRvIHNldCB0aGUgRE1fRkxBR19QUkVfUkVMT0Mg
-ZmxhZw0KaW4gdGhlIHNpbXBsZS1idXMgVS1Cb290IGRyaXZlci4gSSB0aGluayBpdCdzIGJlc3Qg
-dG8gc2VuZCBpdA0Kc2VwYXJhdGVseSBmcm9tIHRoZSBTTVAgcGF0Y2ggc2VyaWVzLCBzaW5jZSBp
-dCBjb3VsZCBhZmZlY3Qgb3RoZXINCmJvYXJkcyBhbmQgaXQncyBhIGJpdCBsYXRlIGluIHRoZSBy
-ZWxlYXNlIGN5Y2xlLiBXaGF0IGRvIHlvdSB0aGluaz8NCg0KVGhpcyBwYXRjaCBjYW4gYmUgZHJv
-cHBlZCB0aGVuLg0KDQpUaGFua3MsDQpMdWthcw0K
+Hi Lukas,
+
+On Fri, Mar 15, 2019 at 5:01 AM Auer, Lukas
+<lukas.auer@aisec.fraunhofer.de> wrote:
+>
+> Hi Bin,
+>
+> On Wed, 2019-03-13 at 09:51 +0800, Bin Meng wrote:
+> > Hi Lukas,
+> >
+> > On Tue, Mar 12, 2019 at 10:39 PM Auer, Lukas
+> > <lukas.auer@aisec.fraunhofer.de> wrote:
+> > > Hi Bin,
+> > >
+> > > On Mon, 2019-03-11 at 23:28 +0800, Bin Meng wrote:
+> > > > Hi Lukas,
+> > > >
+> > > > On Mon, Mar 11, 2019 at 2:03 AM Auer, Lukas
+> > > > <lukas.auer@aisec.fraunhofer.de> wrote:
+> > > > > Hi Bin,
+> > > > >
+> > > > > On Sun, 2019-03-10 at 22:57 +0800, Bin Meng wrote:
+> > > > > > Hi Lukas,
+> > > > > >
+> > > > > > On Sun, Mar 10, 2019 at 9:44 PM Auer, Lukas
+> > > > > > <lukas.auer@aisec.fraunhofer.de> wrote:
+> > > > > > > Hi Bin,
+> > > > > > >
+> > > > > > > On Sun, 2019-03-10 at 09:07 +0800, Bin Meng wrote:
+> > > > > > > > Hi Lukas,
+> > > > > > > >
+> > > > > > > > On Mon, Feb 11, 2019 at 6:13 AM Lukas Auer
+> > > > > > > > <lukas.auer@aisec.fraunhofer.de> wrote:
+> > > > > > > > > Re-add the previous compatible string "riscv-virtio-
+> > > > > > > > > soc" to
+> > > > > > > > > the
+> > > > > > > > > soc
+> > > > > > > > > device tree node to allow U-Boot and Linux to bind
+> > > > > > > > > machine-
+> > > > > > > > > specific
+> > > > > > > > > drivers to it. The current compatible string "simple-
+> > > > > > > > > bus"
+> > > > > > > > > is
+> > > > > > > > > retained.
+> > > > > > > > >
+> > > > > > > > > This is required by U-Boot to bind devices early, as
+> > > > > > > > > part
+> > > > > > > > > of
+> > > > > > > > > the
+> > > > > > > > > pre-relocation driver model.
+> > > > > > > > >
+> > > > > > > >
+> > > > > > > > I see no problem with U-Boot working with current
+> > > > > > > > compatible
+> > > > > > > > string
+> > > > > > > > "simple-bus". In fact I had planned to remove the
+> > > > > > > > compatible
+> > > > > > > > string
+> > > > > > > > "riscv-virtio-soc" in U-Boot but did not get time to work
+> > > > > > > > on
+> > > > > > > > it.
+> > > > > > > >
+> > > > > > >
+> > > > > > > It is only required if U-Boot is running in machine-mode.
+> > > > > > > For
+> > > > > > > relocation it needs to use the CLINT driver to send
+> > > > > > > appropriate
+> > > > > > > IPIs to
+> > > > > > > the other harts. To be able to probe the driver, the device
+> > > > > > > and
+> > > > > > > its
+> > > > > > > parent device tree node (soc) must therefore be available
+> > > > > > > in
+> > > > > > > the
+> > > > > > > pre-
+> > > > > > > relocation device model.
+> > > > > > > This patch was the easiest way I could think of for
+> > > > > > > achieving
+> > > > > > > this.
+> > > > > > > It
+> > > > > > > could be that there is a better way of solving this.
+> > > > > > >
+> > > > > >
+> > > > > > I tested your SMP U-Boot series in both M-mode and S-mode,
+> > > > > > using
+> > > > > > a 4
+> > > > > > core 'virt' target. Works fine. I am using QEMU 3.1.0 so it
+> > > > > > is
+> > > > > > "simple-bus".
+> > > > > >
+> > > > >
+> > > > > That is actually my fault, it should not work.
+> > > > > What is happening is that U-Boot fails to relocate the
+> > > > > secondary
+> > > > > harts,
+> > > > > because the CLINT driver cannot get the memory address of the
+> > > > > CLINT
+> > > > > device. This error is currently silently ignored.
+> > > >
+> > > > I still don't understand. Why does the CLINT driver fail to get
+> > > > the
+> > > > memory address? U-Boot has been supporting "simpile-bus" for a
+> > > > long
+> > > > time. It was because QEMU 3.0.0 generated the /soc node with
+> > > > "riscv-virtio-soc" compatible string, U-Boot was taught to treat
+> > > > such
+> > > > compatible string as a "simple-bus" too (that was the U-Boot
+> > > > commit
+> > > > 27dc2c130e29)
+> > >
+> > > That's correct. The problem with the default simple-bus U-Boot
+> > > driver
+> > > is that it does not have the DM_FLAG_PRE_RELOC flag set. The /soc
+> > > and
+> > > /soc/clint nodes are therefore not available before relocation,
+> > > meaning
+> > > that IPIs cannot be sent to relocate the secondary harts.
+> > >
+> >
+> > Thanks for the clarifications. Now I see the problem. But I think we
+> > should fix U-Boot "simple-bus" driver instead. As seen on FU540 or
+> > likely other hardware, QEMU generates the "simple-bus" compatible
+> > string for the /soc node, as well as the DT provided by the hardware.
+> >
+>
+> That makes sense, I can send a patch to set the DM_FLAG_PRE_RELOC flag
+> in the simple-bus U-Boot driver. I think it's best to send it
+> separately from the SMP patch series, since it could affect other
+> boards and it's a bit late in the release cycle. What do you think?
+>
+
+Yes, agreed that the "simple-bus" driver changes should be next U-Boot
+release. We should try to get the U-Boot SMP series in the v2019.04
+release.
+
+> This patch can be dropped then.
+>
+
+Regards,
+Bin
 
