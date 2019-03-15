@@ -1,68 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1h4pGY-0006qt-6s
-	for mharc-qemu-riscv@gnu.org; Fri, 15 Mar 2019 12:01:02 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:35531)
+	id 1h4qj8-0000jy-VP
+	for mharc-qemu-riscv@gnu.org; Fri, 15 Mar 2019 13:34:38 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:51875)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1h4pGQ-0006ea-HS
-	for qemu-riscv@nongnu.org; Fri, 15 Mar 2019 12:00:55 -0400
+	(envelope-from <alistair23@gmail.com>) id 1h4qj5-0000hj-VF
+	for qemu-riscv@nongnu.org; Fri, 15 Mar 2019 13:34:37 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1h4p7f-0005Pv-9D
-	for qemu-riscv@nongnu.org; Fri, 15 Mar 2019 11:51:52 -0400
-Received: from mail-pf1-x444.google.com ([2607:f8b0:4864:20::444]:36518)
+	(envelope-from <alistair23@gmail.com>) id 1h4qj4-0003oZ-Nh
+	for qemu-riscv@nongnu.org; Fri, 15 Mar 2019 13:34:35 -0400
+Received: from mail-lf1-x130.google.com ([2a00:1450:4864:20::130]:45171)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1h4p7c-0005PC-3G
-	for qemu-riscv@nongnu.org; Fri, 15 Mar 2019 11:51:49 -0400
-Received: by mail-pf1-x444.google.com with SMTP id n22so6644002pfa.3
-	for <qemu-riscv@nongnu.org>; Fri, 15 Mar 2019 08:51:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
-	h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
-	:content-transfer-encoding;
-	bh=uccqaNeddQveea5vF+TE2LQIni6ZGnMwUESMpw+CAD4=;
-	b=ZC2IcwK7QU07JXWMEkliV8MxLxbB0XI9PxMeRAddUFJXTVf1Y7/yZZ1882bXlTjLU2
-	g9O8CqUfXhSmXvxmUOj1oEOKpxNTScV+rMHXygXB2Tz8lKuDKd4tTxKrII96Go2gF7Y5
-	qRBmJys2Q8r2OcUcmqUIeFgT7s4W1l6ICZaE8R8qcBMrckEL5+xwjWQS0atmrmL/Hyh7
-	8TcGtMSW+YTnQNqlqjscaOx0BemaWXv0r9NKDS7gXhcbd9++4bOFMAqNbTuhDQDiUbXc
-	tLJvMBfIkDFwnu9MZWN7v84qynaci25T/6eNZgjx/6Pw0Mxk2e0JQm7vcsbiL9+XO1Dk
-	xNjg==
+	(Exim 4.71) (envelope-from <alistair23@gmail.com>)
+	id 1h4qj4-0003mW-9H; Fri, 15 Mar 2019 13:34:34 -0400
+Received: by mail-lf1-x130.google.com with SMTP id f16so7405209lfk.12;
+	Fri, 15 Mar 2019 10:34:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=u0SntflN8mPyW8/akYF7zgj8eVA8k10Et5Bx0qlL+Oo=;
+	b=cTi4sLWb4cavqzfdEipJ/BLqrwADfCToZ89etcyPcA+IMz8sD0HsELMkxnfjR7ZhjI
+	I2H8wwryKbVJBOaLt3B+tjbO8AimuUebB7YyppR139BXyWic0NP297lm3wOxSGy+iA8h
+	EIVMZliDbiLlLJ0rnF1q6o9bNoeMxfBFae7ETwBhXjz3U6R9fTaH2jFqZuU8krG2xCzl
+	vDiyieQ6OHBho93zgqJWfkxEd4vrWhjEJx3iIcO0IXzwBE3clUayqXVJK6TBCziqmYdK
+	FiZW4YiUgdT4bI1/FUyjAU1gnYO3doaecrzBuBdCH2GTBvcAjD65Aq/aTA2fiVsaBwor
+	EP9w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
-	:mime-version:content-transfer-encoding;
-	bh=uccqaNeddQveea5vF+TE2LQIni6ZGnMwUESMpw+CAD4=;
-	b=Qll5A3zg71Fpjy1N/y/bItkCMH0iNV2i9D3reIfPTsku0Yex4Dl1jfdaHz1X+oOxRK
-	koVzQ9pyWpH3akC3P/ASuAbS+hEjaGJfNam8+b05IvpKHKVfYEZy4Bwn/Z5El6PVKmMN
-	ZbqEeYLx3OH1FoBIjEjyim2gVXBjMCvSXBGuwtFqt42qk3JoV4xpUTcTsrDt56nXyvwv
-	gfcXvn5qhZBddFN++uwc5yNOa6zjNPgv/0n3Bh1rsXFvRY8zkvCcz0cafVQYkkkZSkQD
-	fBHA/rZTGYmdcUQAwNupNPhR7xyVzbcwouUYBeCHKKooqaAhs0samF4EHAgRNgkCj9se
-	3T8A==
-X-Gm-Message-State: APjAAAWHYuj4NRJi6QWhH3utIGTnFQuGoLZL1R1730jZ45PabB4ISCZA
-	RvgMqPfgDn0pVWxJgkiQXnXORw==
-X-Google-Smtp-Source: APXvYqyLCbTIKpNuz6g3QuQoUigc/BfG5yDY/q8qZxZPfAvcGG7UiSKMozwSvKh9yg/LSMvHeRGACA==
-X-Received: by 2002:a17:902:ab8e:: with SMTP id
-	f14mr4957553plr.84.1552665106484; 
-	Fri, 15 Mar 2019 08:51:46 -0700 (PDT)
-Received: from localhost (60-250-203-158.HINET-IP.hinet.net. [60.250.203.158])
-	by smtp.gmail.com with ESMTPSA id
-	v7sm3094067pga.50.2019.03.15.08.51.45
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 15 Mar 2019 08:51:45 -0700 (PDT)
-Date: Fri, 15 Mar 2019 08:51:45 -0700 (PDT)
-X-Google-Original-Date: Fri, 15 Mar 2019 08:51:42 PDT (-0700)
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=u0SntflN8mPyW8/akYF7zgj8eVA8k10Et5Bx0qlL+Oo=;
+	b=T6j0pJUY5BcQjT/Flak7QnQ2lRkfDc5hdgY1TUmXYWy/w8CafK3QsrjR+JWlGH+wlk
+	0mCBE/Bk+VULwE69xj3IByK4/Bg6qIJ8/znvSTcYJyrn0ZWMXCp9gUdFrXqZ1QZ+d+wx
+	PWt21hVXZiN7qDi8OqCgIWEwyPweIf8EP8THSWwyxV6HcJ80G67ptmvWJwhwtbmGFN+V
+	lLW40X4BjnEFkvQMDPI5ETRIKgTb4M0j4vrCvDFIlCyFVhgNOSjF9Hol+j0f3ytvg/SA
+	QRmMaFT4yFdbKQ4A80JAaqMm9s8mKv7zVnlS8RVwZbVYCyDdcqjgaVHdghIIxFYU8npO
+	oyFw==
+X-Gm-Message-State: APjAAAW7ZzGGgErJf1lVYLalxnihzGedZA33pS3Yzk8JHjjJqMPr5atm
+	2bLBF+ZrYRKDllEaJkezWQGoxzsjT2XbInrUHYU=
+X-Google-Smtp-Source: APXvYqzjHXGL632Bjy6X9lJRm8FoEHNPOp17pgbXWnSTu9sqqo78py/VBuaZ1s5WejVdkEKfd/WzsEGLF1XKLlwdfVY=
+X-Received: by 2002:a19:40cc:: with SMTP id n195mr2968561lfa.150.1552671270438;
+	Fri, 15 Mar 2019 10:34:30 -0700 (PDT)
+MIME-Version: 1.0
+References: <20190315135140.10507-1-kbastian@mail.uni-paderborn.de>
 In-Reply-To: <20190315135140.10507-1-kbastian@mail.uni-paderborn.de>
-CC: Alistair Francis <Alistair.Francis@wdc.com>, sagark@eecs.berkeley.edu,
-	Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
-	qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-From: Palmer Dabbelt <palmer@sifive.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Fri, 15 Mar 2019 10:33:19 -0700
+Message-ID: <CAKmqyKPdeCiFpr4hpj7cgoA4+rRHSwOsvbu8xbnU0w1KahrcbA@mail.gmail.com>
 To: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-Message-ID: <mhng-063f3d73-802f-4d51-a4a6-31cd013027ba@palmer-si-x1c4>
-Mime-Version: 1.0 (MHng)
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Cc: Alistair Francis <Alistair.Francis@wdc.com>,
+	Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+	Palmer Dabbelt <palmer@sifive.com>,
+	"open list:RISC-V" <qemu-riscv@nongnu.org>, 
+	"qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::444
-Subject: Re: [Qemu-riscv] [PATCH] target/riscv: Fix manually parsed 16 bit
- insn
+X-Received-From: 2a00:1450:4864:20::130
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH] target/riscv: Fix manually
+ parsed 16 bit insn
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -74,15 +68,25 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Mar 2019 16:00:55 -0000
+X-List-Received-Date: Fri, 15 Mar 2019 17:34:37 -0000
 
-On Fri, 15 Mar 2019 06:51:40 PDT (-0700), Bastian Koppelmann wrote:
+On Fri, Mar 15, 2019 at 7:15 AM Bastian Koppelmann
+<kbastian@mail.uni-paderborn.de> wrote:
+>
 > during the refactor to decodetree we removed the manual decoding that is
 > necessary for c.jal/c.addiw and removed the translation of c.flw/c.ld
 > and c.fsw/c.sd. This reintroduces the manual parsing and the
 > omited implementation.
 >
 > Signed-off-by: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Tested-by: Alistair Francis <alistair.francis@wdc.com>
+
+This fixes the 32-bit failures I was seeing.
+
+Alistair
+
 > ---
 >  target/riscv/insn_trans/trans_rvc.inc.c | 30 ++++++++++++++++++++-----
 >  1 file changed, 25 insertions(+), 5 deletions(-)
@@ -146,8 +150,8 @@ On Fri, 15 Mar 2019 06:51:40 PDT (-0700), Bastian Koppelmann wrote:
 >      return trans_jal(ctx, &arg);
 >  #else
 >      /* C.ADDIW */
-
-Thanks!  This fixes my simple test case, so I'm going to pick it up for the 
-next PR.  It also sounds like it's time for me to start testing rv32 Linux 
-boots, so I'll go do that next...
+> --
+> 2.21.0
+>
+>
 
