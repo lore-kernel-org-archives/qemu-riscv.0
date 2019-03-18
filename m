@@ -1,59 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1h5qBF-0001Qd-Ns
-	for mharc-qemu-riscv@gnu.org; Mon, 18 Mar 2019 07:11:45 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:56282)
+	id 1h5rQL-0000Wp-I7
+	for mharc-qemu-riscv@gnu.org; Mon, 18 Mar 2019 08:31:25 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:37673)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <peter.maydell@linaro.org>) id 1h5qB9-00014t-Fm
-	for qemu-riscv@nongnu.org; Mon, 18 Mar 2019 07:11:40 -0400
+	(envelope-from <armbru@redhat.com>) id 1h5rQJ-0000VI-2c
+	for qemu-riscv@nongnu.org; Mon, 18 Mar 2019 08:31:24 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <peter.maydell@linaro.org>) id 1h5pyj-0007uq-3s
-	for qemu-riscv@nongnu.org; Mon, 18 Mar 2019 06:58:49 -0400
-Received: from mail-oi1-x231.google.com ([2607:f8b0:4864:20::231]:33272)
-	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <peter.maydell@linaro.org>)
-	id 1h5pyi-0007uL-Op
-	for qemu-riscv@nongnu.org; Mon, 18 Mar 2019 06:58:49 -0400
-Received: by mail-oi1-x231.google.com with SMTP id e22so5501969oiy.0
-	for <qemu-riscv@nongnu.org>; Mon, 18 Mar 2019 03:58:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=KgPx90Mri5q2lyl+pd0FI0sDNgaF7/dtly4gIjN6Nko=;
-	b=l7UmCrcCJflc7cAI7A9FdFOlsrGtnjB8amKXJx/58zpPWvhNueAd+1RabgvEJn/SJa
-	9WaAB47PTlvCpzmYjhqZa9wKd+FeiDqaX9YhxR6uVpmtM8+rD+d5hnkoSX/5OxXUP7lh
-	XsolQUeSSVJ+WvndkrmRFUPdkCzGyb1qtWBQ5nFX0lOZFjzhog+m9Qjp0jQGKRC6NE24
-	XkQAH99CzqPlzATHB+1KPstngi8Guj/+xngUUUZjsHMw6glYbtbs/5yBRqj0InO/Kj/w
-	WxkKcGV0Gn4g/7vhCXvP8shGYGVDDu7t9HHKOFvZGSQwm6ght2K6231LE49M2nEygM2Z
-	TS9w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=KgPx90Mri5q2lyl+pd0FI0sDNgaF7/dtly4gIjN6Nko=;
-	b=ioIjWCO2UdVd1dye9cLQTOxQCoEXk/WXJzV/VL465f7PZmc2t4iF5JI2B2KXqprZ8k
-	VAkg4xp25c/rRKcfBPi4r74sWnLep2kE+N6XkemNmB0QZ3oRgkcGvzdsUcmihnRgC9pV
-	6A84ydwV+d+Jh+0Am2HiuCq0VXCKiaubqvvpBX01nikInqCF2FLQ6Ze6zzKqk5jV79i9
-	0E49Q1Of0SZHiDzz8xoYa2xH6FbaIkGzF+FzI+sRNK3M+gp3IvQ+0AJbN+NmpTmW28I7
-	cB9wE6lAUV9WULSLVpj23HUapfpKuuzcOzqgcrcJAg5S+C86zU/KXFejqsWlhqFZ49DZ
-	cFQw==
-X-Gm-Message-State: APjAAAVB3PMaClx9Pai23f3jN+oQVmnmuhQ1g66/cvTvxxhME4zKIT8V
-	nIxnje31BOWzIlCYsjFEm8IzEcEFSuVrPzXLB/ZJaQ==
-X-Google-Smtp-Source: APXvYqy8BdzoGxP5EGIWKiYE6CwYVZDrjNdyNltT6KHRq8tDJA2JKt4WBIoAvxinBowHDb21LtjFfeXRbsO5/H2dyQg=
-X-Received: by 2002:aca:42c6:: with SMTP id p189mr9687019oia.163.1552906727514;
-	Mon, 18 Mar 2019 03:58:47 -0700 (PDT)
+	(envelope-from <armbru@redhat.com>) id 1h5rQH-0003Xs-1h
+	for qemu-riscv@nongnu.org; Mon, 18 Mar 2019 08:31:22 -0400
+Received: from mx1.redhat.com ([209.132.183.28]:53792)
+	by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.71) (envelope-from <armbru@redhat.com>)
+	id 1h5rQD-0003To-5M; Mon, 18 Mar 2019 08:31:17 -0400
+Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
+	[10.5.11.14])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mx1.redhat.com (Postfix) with ESMTPS id F2174307D86F;
+	Mon, 18 Mar 2019 12:31:15 +0000 (UTC)
+Received: from blackfin.pond.sub.org (ovpn-116-92.ams2.redhat.com
+	[10.36.116.92])
+	by smtp.corp.redhat.com (Postfix) with ESMTPS id 808725D9E2;
+	Mon, 18 Mar 2019 12:31:12 +0000 (UTC)
+Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
+	id 0E7DE11385E4; Mon, 18 Mar 2019 13:31:11 +0100 (CET)
+From: Markus Armbruster <armbru@redhat.com>
+To: Peter Maydell <peter.maydell@linaro.org>
+Cc: "qemu-riscv\@nongnu.org" <qemu-riscv@nongnu.org>,
+	"david.abdurachmanov\@gmail.com" <david.abdurachmanov@gmail.com>,
+	"palmer\@sifive.com" <palmer@sifive.com>,
+	"qemu-devel\@nongnu.org" <qemu-devel@nongnu.org>,
+	"rjones\@redhat.com" <rjones@redhat.com>,
+	Alistair Francis <Alistair.Francis@wdc.com>,
+	"abologna\@redhat.com" <abologna@redhat.com>,
+	"pbonzini\@redhat.com" <pbonzini@redhat.com>,
+	"alistair23\@gmail.com" <alistair23@gmail.com>, 
+	"Michael S. Tsirkin" <mst@redhat.com>
+References: <256afbb2da005dc62c159b0f4a4fc0d95c050660.1552679970.git.alistair.francis@wdc.com>
+	<87imwgimot.fsf@dusky.pond.sub.org>
+	<CAFEAcA-i9N=W1e+UzO1Hxvw0Qv_GfUm-+9R7PhpMHPrUKyL0-w@mail.gmail.com>
+Date: Mon, 18 Mar 2019 13:31:11 +0100
+In-Reply-To: <CAFEAcA-i9N=W1e+UzO1Hxvw0Qv_GfUm-+9R7PhpMHPrUKyL0-w@mail.gmail.com>
+	(Peter Maydell's message of "Mon, 18 Mar 2019 09:55:58 +0000")
+Message-ID: <87a7hsfjow.fsf@dusky.pond.sub.org>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/26.1 (gnu/linux)
 MIME-Version: 1.0
-References: <20190318052759.10860-1-palmer@sifive.com>
-In-Reply-To: <20190318052759.10860-1-palmer@sifive.com>
-From: Peter Maydell <peter.maydell@linaro.org>
-Date: Mon, 18 Mar 2019 10:58:36 +0000
-Message-ID: <CAFEAcA_9_oYQE5P+kgUhSk0EhAFbWH18L88=+0x-vMkMMaQEvQ@mail.gmail.com>
-To: Palmer Dabbelt <palmer@sifive.com>
-Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
-	QEMU Developers <qemu-devel@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
-	recognized.
-X-Received-From: 2607:f8b0:4864:20::231
-Subject: Re: [Qemu-riscv] [PULL] A Single RISC-V Patch for 4.0-rc0
+Content-Type: text/plain
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+	(mx1.redhat.com [10.5.110.48]);
+	Mon, 18 Mar 2019 12:31:16 +0000 (UTC)
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+X-Received-From: 209.132.183.28
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v1 1/1] riscv: plic: Set
+ msi_nonbroken as true
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -65,37 +65,60 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Mar 2019 11:11:40 -0000
+X-List-Received-Date: Mon, 18 Mar 2019 12:31:24 -0000
 
-On Mon, 18 Mar 2019 at 05:28, Palmer Dabbelt <palmer@sifive.com> wrote:
->
-> The following changes since commit d4e65539e570d5872003710b5a1064489911d33d:
->
->   Merge remote-tracking branch 'remotes/rth/tags/pull-hppa-20190316' into staging (2019-03-17 14:10:52 +0000)
->
-> are available in the Git repository at:
->
->   git://github.com/palmer-dabbelt/qemu.git tags/riscv-for-4.0-rc0
->
-> for you to fetch changes up to f330433b3633647b047cfa418c2ca4d18fda69c7:
->
->   target/riscv: Fix manually parsed 16 bit insn (2019-03-17 22:21:32 -0700)
->
-> ----------------------------------------------------------------
-> A Single RISC-V Patch for 4.0-rc0
->
-> There was a regression introduced by the decodetree conversion that has
-> a fairly straight-forward fix.  Since this fixes bugs that everyone has
-> hit I'd like to target it for rc0.
->
-> ----------------------------------------------------------------
-> Bastian Koppelmann (1):
->       target/riscv: Fix manually parsed 16 bit insn
->
-Applied, thanks.
+Peter Maydell <peter.maydell@linaro.org> writes:
 
-Please update the changelog at https://wiki.qemu.org/ChangeLog/4.0
-for any user-visible changes.
+> On Mon, 18 Mar 2019 at 08:59, Markus Armbruster <armbru@redhat.com> wrote:
+>>
+>> Alistair Francis <Alistair.Francis@wdc.com> writes:
+>>
+>> > Set msi_nonbroken as true for the PLIC.
+>> >
+>> > According to the comment located here:
+>> > https://git.qemu.org/?p=qemu.git;a=blob;f=hw/pci/msi.c;h=47d2b0f33c664533b8dbd5cb17faa8e6a01afe1f;hb=HEAD#l38
+>> > the msi_nonbroken variable should be set to true even if they don't
+>> > support MSI. In this case that is what we are doing as we don't support
+>> > MSI.
+>> >
+>> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+>> > Reported-by: Andrea Bolognani <abologna@redhat.com>
+>> > Reported-by: David Abdurachmanov <david.abdurachmanov@gmail.com>
+>> > ---
+>> > This should allow working pcie-root-ports in QEMU and allow libvirt
+>> > to start using PCIe by default for RISC-V guests.
+>>
+>> Lovely!  If more people reviewed and updated their interrupt controllers
+>> this way, we'd be in better shape.
+>
+> Why do we have a flag which each interrupt controller
+> has to set rather than just making the right thing the
+> default (and having the one or two interrupt controllers
+> that need the wrong thing for backwards compatibility reasons
+> be the ones that have to set the flag) ? This way round makes
+> it way to easy to add a new interrupt controller with this
+> bug without noticing it, I think.
 
--- PMM
+This is ultimately a question for Michael (cc'ed).  However, I can
+provide a bit of context right away.
+
+The problem is virtual interrupt controllers that claim to support MSI
+when they don't.  The OS's probe returns "go ahead and use MSI", and the
+system falls apart.
+
+So we put in a lame work-around to masks these interrupt controller
+bugs: if MSI is broken, mangle all PCI devices to make them deny MSI
+capability.
+
+The next problem is that we don't even know which of our interrupt
+controllers have MSI working.  So we summarily declare them all broken,
+then have the few we actually know declare themselves non-broken.
+
+The next problem is having multiple interrupt controllers, some broken,
+some not.  The work-around falls apart there.  We currently use the
+ostrich algorithm to deal with that.
+
+More information in the thread around
+Message-ID: <87wppi1vol.fsf@blackfin.pond.sub.org>
+https://lists.nongnu.org/archive/html/qemu-devel/2016-03/msg00983.html
 
