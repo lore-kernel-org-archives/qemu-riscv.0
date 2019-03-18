@@ -1,109 +1,55 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1h5nrU-0000yr-7d
-	for mharc-qemu-riscv@gnu.org; Mon, 18 Mar 2019 04:43:12 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:32791)
+	id 1h5o66-0005nD-GN
+	for mharc-qemu-riscv@gnu.org; Mon, 18 Mar 2019 04:58:18 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:36096)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <pbonzini@redhat.com>) id 1h5nrR-0000x0-JK
-	for qemu-riscv@nongnu.org; Mon, 18 Mar 2019 04:43:10 -0400
+	(envelope-from <armbru@redhat.com>) id 1h5o64-0005mD-Me
+	for qemu-riscv@nongnu.org; Mon, 18 Mar 2019 04:58:17 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <pbonzini@redhat.com>) id 1h5noI-00051W-Un
-	for qemu-riscv@nongnu.org; Mon, 18 Mar 2019 04:39:55 -0400
-Received: from mx1.redhat.com ([209.132.183.28]:42604)
+	(envelope-from <armbru@redhat.com>) id 1h5o63-0007tq-NB
+	for qemu-riscv@nongnu.org; Mon, 18 Mar 2019 04:58:16 -0400
+Received: from mx1.redhat.com ([209.132.183.28]:42154)
 	by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.71) (envelope-from <pbonzini@redhat.com>)
-	id 1h5noH-000505-Br; Mon, 18 Mar 2019 04:39:53 -0400
+	(Exim 4.71) (envelope-from <armbru@redhat.com>)
+	id 1h5o61-0007sj-71; Mon, 18 Mar 2019 04:58:13 -0400
 Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
 	[10.5.11.11])
 	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id 7F0ED307D90E;
-	Mon, 18 Mar 2019 08:39:51 +0000 (UTC)
-Received: from [10.36.112.55] (ovpn-112-55.ams2.redhat.com [10.36.112.55])
-	by smtp.corp.redhat.com (Postfix) with ESMTPS id CADEC600C2;
-	Mon, 18 Mar 2019 08:39:48 +0000 (UTC)
-To: Alistair Francis <Alistair.Francis@wdc.com>,
-	"qemu-devel@nongnu.org" <qemu-devel@nongnu.org>,
-	"qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>
-Cc: "palmer@sifive.com" <palmer@sifive.com>,
-	"alistair23@gmail.com" <alistair23@gmail.com>,
-	"david.abdurachmanov@gmail.com" <david.abdurachmanov@gmail.com>,
-	"rjones@redhat.com" <rjones@redhat.com>,
-	"abologna@redhat.com" <abologna@redhat.com>
+	by mx1.redhat.com (Postfix) with ESMTPS id 135444E341;
+	Mon, 18 Mar 2019 08:58:12 +0000 (UTC)
+Received: from blackfin.pond.sub.org (ovpn-116-92.ams2.redhat.com
+	[10.36.116.92])
+	by smtp.corp.redhat.com (Postfix) with ESMTPS id A8B68600C2;
+	Mon, 18 Mar 2019 08:58:11 +0000 (UTC)
+Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
+	id 38B4D11385E4; Mon, 18 Mar 2019 09:58:10 +0100 (CET)
+From: Markus Armbruster <armbru@redhat.com>
+To: Alistair Francis <Alistair.Francis@wdc.com>
+Cc: "qemu-devel\@nongnu.org" <qemu-devel@nongnu.org>,
+	"qemu-riscv\@nongnu.org" <qemu-riscv@nongnu.org>,
+	"david.abdurachmanov\@gmail.com" <david.abdurachmanov@gmail.com>,
+	"palmer\@sifive.com" <palmer@sifive.com>,
+	"rjones\@redhat.com" <rjones@redhat.com>,
+	"abologna\@redhat.com" <abologna@redhat.com>,
+	"pbonzini\@redhat.com" <pbonzini@redhat.com>,
+	"alistair23\@gmail.com" <alistair23@gmail.com>
 References: <256afbb2da005dc62c159b0f4a4fc0d95c050660.1552679970.git.alistair.francis@wdc.com>
-From: Paolo Bonzini <pbonzini@redhat.com>
-Openpgp: preference=signencrypt
-Autocrypt: addr=pbonzini@redhat.com; prefer-encrypt=mutual; keydata=
-	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
-	uUHgL9dKIfvpm+rNXRn9wAwGjk0X/A==
-Message-ID: <52be9b1c-772a-326a-584b-606fac5c6638@redhat.com>
-Date: Mon, 18 Mar 2019 09:39:46 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.5.1
-MIME-Version: 1.0
+Date: Mon, 18 Mar 2019 09:58:10 +0100
 In-Reply-To: <256afbb2da005dc62c159b0f4a4fc0d95c050660.1552679970.git.alistair.francis@wdc.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+	(Alistair Francis's message of "Fri, 15 Mar 2019 20:05:36 +0000")
+Message-ID: <87imwgimot.fsf@dusky.pond.sub.org>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/26.1 (gnu/linux)
+MIME-Version: 1.0
+Content-Type: text/plain
 X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
 X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
-	(mx1.redhat.com [10.5.110.48]);
-	Mon, 18 Mar 2019 08:39:51 +0000 (UTC)
+	(mx1.redhat.com [10.5.110.38]);
+	Mon, 18 Mar 2019 08:58:12 +0000 (UTC)
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
 X-Received-From: 209.132.183.28
-Subject: Re: [Qemu-riscv] [PATCH v1 1/1] riscv: plic: Set msi_nonbroken as
- true
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v1 1/1] riscv: plic: Set
+ msi_nonbroken as true
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -115,51 +61,25 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Mar 2019 08:43:10 -0000
+X-List-Received-Date: Mon, 18 Mar 2019 08:58:17 -0000
 
-On 15/03/19 21:05, Alistair Francis wrote:
+Alistair Francis <Alistair.Francis@wdc.com> writes:
+
 > Set msi_nonbroken as true for the PLIC.
-> 
+>
 > According to the comment located here:
 > https://git.qemu.org/?p=qemu.git;a=blob;f=hw/pci/msi.c;h=47d2b0f33c664533b8dbd5cb17faa8e6a01afe1f;hb=HEAD#l38
 > the msi_nonbroken variable should be set to true even if they don't
 > support MSI. In this case that is what we are doing as we don't support
 > MSI.
-> 
+>
 > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 > Reported-by: Andrea Bolognani <abologna@redhat.com>
 > Reported-by: David Abdurachmanov <david.abdurachmanov@gmail.com>
 > ---
 > This should allow working pcie-root-ports in QEMU and allow libvirt
 > to start using PCIe by default for RISC-V guests.
-> 
-> hw/riscv/sifive_plic.c | 3 +++
->  1 file changed, 3 insertions(+)
-> 
-> diff --git a/hw/riscv/sifive_plic.c b/hw/riscv/sifive_plic.c
-> index d12ec3fc9a..4b0537c912 100644
-> --- a/hw/riscv/sifive_plic.c
-> +++ b/hw/riscv/sifive_plic.c
-> @@ -22,6 +22,7 @@
->  #include "qemu/log.h"
->  #include "qemu/error-report.h"
->  #include "hw/sysbus.h"
-> +#include "hw/pci/msi.h"
->  #include "target/riscv/cpu.h"
->  #include "hw/riscv/sifive_plic.h"
->  
-> @@ -443,6 +444,8 @@ static void sifive_plic_realize(DeviceState *dev, Error **errp)
->      plic->enable = g_new0(uint32_t, plic->bitfield_words * plic->num_addrs);
->      sysbus_init_mmio(SYS_BUS_DEVICE(dev), &plic->mmio);
->      qdev_init_gpio_in(dev, sifive_plic_irq_request, plic->num_sources);
-> +
-> +    msi_nonbroken = true;
->  }
->  
->  static void sifive_plic_class_init(ObjectClass *klass, void *data)
-> 
 
-I can queue this patch, and add the "select MSI" to CONFIG_SIFIVE.
-
-Paolo
+Lovely!  If more people reviewed and updated their interrupt controllers
+this way, we'd be in better shape.
 
