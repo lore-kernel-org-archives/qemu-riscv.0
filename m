@@ -1,67 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1h6DC2-0002Oh-Fq
-	for mharc-qemu-riscv@gnu.org; Tue, 19 Mar 2019 07:46:06 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:60316)
+	id 1h6DLD-0004nj-Ub
+	for mharc-qemu-riscv@gnu.org; Tue, 19 Mar 2019 07:55:35 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:33499)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1h6DC0-0002N3-2G
-	for qemu-riscv@nongnu.org; Tue, 19 Mar 2019 07:46:04 -0400
+	(envelope-from <peter.maydell@linaro.org>) id 1h6DLC-0004nE-9J
+	for qemu-riscv@nongnu.org; Tue, 19 Mar 2019 07:55:35 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1h6DBz-0003u6-4W
-	for qemu-riscv@nongnu.org; Tue, 19 Mar 2019 07:46:04 -0400
-Received: from mail-pf1-x42c.google.com ([2607:f8b0:4864:20::42c]:44043)
+	(envelope-from <peter.maydell@linaro.org>) id 1h6DLA-0001eF-Cp
+	for qemu-riscv@nongnu.org; Tue, 19 Mar 2019 07:55:34 -0400
+Received: from mail-oi1-x243.google.com ([2607:f8b0:4864:20::243]:34772)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1h6DBy-0003q5-In
-	for qemu-riscv@nongnu.org; Tue, 19 Mar 2019 07:46:03 -0400
-Received: by mail-pf1-x42c.google.com with SMTP id a3so13483437pff.11
-	for <qemu-riscv@nongnu.org>; Tue, 19 Mar 2019 04:45:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
-	h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
-	:content-transfer-encoding;
-	bh=NUgBAPxHeSs2SGq2EMSwMHBTenkKwPd1/9mBEz/duHA=;
-	b=KU8oIkTVUL6XPyGK8QAYQynghbqWEmYoRaVDkZABWktZ/4KVUKWL6FiN6RwRfQpsZK
-	QuJX9L/OyMYJEu+R8bYXvk8uMZzHHVd9n44PxXqmzux2P8mECigtGCHIlBLH6FZR1yGC
-	Aaj4MNZLl+mzCE8Zdla6/OKN6MsLJ0315Bev5plgmVOLE3NAXkMrbAtd+iSMiowS1faC
-	pTciFj/VaWxSbHrAf8CsxZptA/VrB+mjauWcwksElvVfScYURToKyGbBEAcoaVFk/MY5
-	GnMeZ0jdvpBauBAockwc00D6zGGx2/KCD5ipOZzOXu2k2te9RB0i2NlglMrK/HMTzGU9
-	UVYg==
+	(Exim 4.71) (envelope-from <peter.maydell@linaro.org>)
+	id 1h6DL8-0001dE-U9
+	for qemu-riscv@nongnu.org; Tue, 19 Mar 2019 07:55:31 -0400
+Received: by mail-oi1-x243.google.com with SMTP id u12so12743808oiv.1
+	for <qemu-riscv@nongnu.org>; Tue, 19 Mar 2019 04:55:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=mWK369x+n1UeKNAsOGxlDiE/ZueOU3CzCA/q/9WyrZw=;
+	b=gHOc53u0D+Fy8tZDkJZ/txUv/Lv6yC3bkatutAEn0FzbUEF8SxvhTtiTsutBZuxpVV
+	01EuU/IHsrC50f1vfWJ+sKiJDlTCUl8wNhFzwccGi8ajCx9UU8XYvFKjjEWg+8arjfjJ
+	9CwPNEgoFO31zUl12LJ+vhULxJ8Yh5IEy2ZMM7qtol16Oz8QQ2Yys5zFCR/w0CpFnAdp
+	nDa9EdCrR16lJrcxczx8JsWx+9ZlKGL8xSJGftHkqMvQK4mEDsPts4QvlsshyPiFad6y
+	dFE5hhY2XSjiuPH6fUXOKYB2qs45ES3NKGZxLWKEYGsBtonRbYMKGpbBhjXodKRatYFt
+	hqmQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
-	:mime-version:content-transfer-encoding;
-	bh=NUgBAPxHeSs2SGq2EMSwMHBTenkKwPd1/9mBEz/duHA=;
-	b=V71U88MYcyMhh9lUWSTR/t1Oy64pidp0v2iFaghOj7qYP2e9c3Xw6fpPVu9JD0ys97
-	TSkCOpb2BmPqauOPeR7ENn/4KY6mQ9Bo1jwJ81pN4J5Jpi+S20ggsrxoywPmIg2cVnzd
-	B2mj5Y+/3Nhia6802p+b7eO/Kg+rZRkL/+ydsRSYTyI92xAeMz6eSPeVLBcxAh+QwYqd
-	fgT/jXVZY2uUhgO2dy8Mzljqv+vQ6+dV3UhkklOeed58iefGsnq532ZlvIZ/0gl1V+Sr
-	sPxcw/BAaS0CNSl1PV5MHPmtw4ZV+emfRTlAGD/eeLexLuZmW4sRW75uKI9EXG3aldw2
-	WkxA==
-X-Gm-Message-State: APjAAAVxBPwM9I2mzXk6XNnUsTKuRDHcyha/ztTIwKCPlKeMyhgvQ1M6
-	rcsWbdpDzN/M46t9HEWEGOrEyA==
-X-Google-Smtp-Source: APXvYqz2z3LjBL66za8N1QG0dkG71Zv0QUA8nJNFWP3Lrdc0uR1RpAqhI70vzqwfvfEaXhxozF2JEA==
-X-Received: by 2002:a62:3001:: with SMTP id w1mr1506665pfw.59.1552995958506;
-	Tue, 19 Mar 2019 04:45:58 -0700 (PDT)
-Received: from localhost
-	(2001-b011-7001-1cad-363a-ebbe-dac8-3f4c.dynamic-ip6.hinet.net.
-	[2001:b011:7001:1cad:363a:ebbe:dac8:3f4c])
-	by smtp.gmail.com with ESMTPSA id
-	73sm22490895pga.19.2019.03.19.04.45.57
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 19 Mar 2019 04:45:57 -0700 (PDT)
-Date: Tue, 19 Mar 2019 04:45:57 -0700 (PDT)
-X-Google-Original-Date: Tue, 19 Mar 2019 04:45:49 PDT (-0700)
-In-Reply-To: <CAKmqyKNK0ovGpGSqvthp5B-=1k8VrxNAokZj4+PFx==Lr=ETbA@mail.gmail.com>
-CC: Chih-Min Chao <chihmin.chao@sifive.com>, qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-From: Palmer Dabbelt <palmer@sifive.com>
-To: Peter Maydell <peter.maydell@linaro.org>,
-	Chih-Min Chao <chihmin.chao@sifive.com>, alistair23@gmail.com
-Message-ID: <mhng-7e5bff91-c165-4823-b292-ae81d49e3b4d@palmer-si-x1c4>
-Mime-Version: 1.0 (MHng)
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=mWK369x+n1UeKNAsOGxlDiE/ZueOU3CzCA/q/9WyrZw=;
+	b=XXT15AZkq+71xVo1MT/AEJ9NkoJcPGcklKOXq6JDY0l33sbOK7Aa0CmbxBgcDBdVp/
+	JGPIZoxCrFcjOvdpcum3pnyAecoqJQ1qdqQf+ZWW5gGatudK19uW4tjes7DjtoaWyA0D
+	9mhmPtRu0bQhRTwC7zVrY8Ffc1vDMivTXUunLRjqm/xEy58C8qFdTY0PWcd0HUUPAJyA
+	saQnz26UwnYFzGkzDYVuyF22FyBFRBy3S98KNn+L+frWTWx3C3vwLyxKkLPnmsvQp/6Z
+	b9qhB5Ablj1PofetB5KJr+yb/OyM5wi5tHLZlZ8qq5/gjaGmNMVN5wWr4vFj4ztFZ3vK
+	0o0Q==
+X-Gm-Message-State: APjAAAU+VfY8iBDcgU6POMLbjp9QgVpSYKPXZadDWrTSadvzYawzEDWD
+	83AN6e1sDzeLDnnN59LDi6qv4RjEQLilWiDv+ssKAg==
+X-Google-Smtp-Source: APXvYqwBpmAJB6aTQvoDTnbe8o+/vx/9dwCRimAeJtNm1mG8lm6JGBRUx36pQWqJ/rhU/2HeuAYKe7k9ZEbpnxQP/+M=
+X-Received: by 2002:aca:e84c:: with SMTP id f73mr1168921oih.163.1552996529630; 
+	Tue, 19 Mar 2019 04:55:29 -0700 (PDT)
+MIME-Version: 1.0
+References: <CAKmqyKNK0ovGpGSqvthp5B-=1k8VrxNAokZj4+PFx==Lr=ETbA@mail.gmail.com>
+	<mhng-7e5bff91-c165-4823-b292-ae81d49e3b4d@palmer-si-x1c4>
+In-Reply-To: <mhng-7e5bff91-c165-4823-b292-ae81d49e3b4d@palmer-si-x1c4>
+From: Peter Maydell <peter.maydell@linaro.org>
+Date: Tue, 19 Mar 2019 11:55:18 +0000
+Message-ID: <CAFEAcA8Hxd2L+wyPhHs99jDpbCVNkoZXzzFVBmKm-KfpedN1tQ@mail.gmail.com>
+To: Palmer Dabbelt <palmer@sifive.com>
+Cc: Chih-Min Chao <chihmin.chao@sifive.com>,
+	Alistair Francis <alistair23@gmail.com>, 
+	QEMU Developers <qemu-devel@nongnu.org>,
+	"open list:RISC-V" <qemu-riscv@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::42c
+X-Received-From: 2607:f8b0:4864:20::243
 Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v5 0/5] RISC-V: Add gdb xml
  files and gdbstub support
 X-BeenThere: qemu-riscv@nongnu.org
@@ -75,75 +69,18 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Mar 2019 11:46:05 -0000
+X-List-Received-Date: Tue, 19 Mar 2019 11:55:35 -0000
 
-On Fri, 15 Mar 2019 11:33:09 PDT (-0700), alistair23@gmail.com wrote:
-> On Fri, Mar 15, 2019 at 6:45 AM Chih-Min Chao <chihmin.chao@sifive.com> wrote:
->>
->> This is the 5th version of the patch set, based on the Jim's previous work,
->>      http://lists.nongnu.org/archive/html/qemu-riscv/2019-02/msg00059.html
->>
->>     v4 -> v5:
->>        - rebase 7074ab1
->>        - update the register xml files to gdb 8.3
->>        - refine the fpu control registers, fflags/frm/fcsr index calculation
->>        - fix the csr offset calculcation because of tne regnum field in fpu
->>          xml file introducing one useless number
+On Tue, 19 Mar 2019 at 11:45, Palmer Dabbelt <palmer@sifive.com> wrote:
+> This is another one that got queued up behind the decode tree stuff.  I'd call
+> this a new feature, but give that it's been on the list and reviewed I'm not
+> sure if it's OK for master right now.
 >
-> Hey Chih-Min,
->
-> I thought this was merged into master, but apparently that never
-> happened. Thanks for bringing this up again.
->
-> Thanks for the corrections on top of the v4. For future reference if
-> the changes are very minor you can probably keep the reviewed tags.
->
-> I have reviewed the changes and this should be ready to go. I have
-> added Palmer so hopefully he can add this to a PR to get it in for
-> 4.0.
+> Peter: is this too much of a change for post-rc0?  If possible I'd like it in,
+> as it's pretty self-contained and enables a meaningful use case.
 
-Thanks.
+Yes, I think it's ok to go in. (If you send a pullreq for it in the next
+3 hours or so then it'll actually get in before rc0 ;-))
 
-This is another one that got queued up behind the decode tree stuff.  I'd call 
-this a new feature, but give that it's been on the list and reviewed I'm not 
-sure if it's OK for master right now.
-
-Peter: is this too much of a change for post-rc0?  If possible I'd like it in, 
-as it's pretty self-contained and enables a meaningful use case.
-
->
-> Alistair
->
->>
->> Jim Wilson (5):
->>   RISC-V: Add 32-bit gdb xml files.
->>   RISC-V: Add 64-bit gdb xml files.
->>   RISC-V: Fixes to CSR_* register macros.
->>   RISC-V: Add debug support for accessing CSRs.
->>   RISC-V: Add hooks to use the gdb xml files.
->>
->>  configure                   |   2 +
->>  gdb-xml/riscv-32bit-cpu.xml |  47 ++++++
->>  gdb-xml/riscv-32bit-csr.xml | 250 +++++++++++++++++++++++++++++++
->>  gdb-xml/riscv-32bit-fpu.xml |  50 +++++++
->>  gdb-xml/riscv-64bit-cpu.xml |  47 ++++++
->>  gdb-xml/riscv-64bit-csr.xml | 250 +++++++++++++++++++++++++++++++
->>  gdb-xml/riscv-64bit-fpu.xml |  56 +++++++
->>  target/riscv/cpu.c          |   9 +-
->>  target/riscv/cpu.h          |   7 +
->>  target/riscv/cpu_bits.h     |  35 ++++-
->>  target/riscv/csr.c          |  32 +++-
->>  target/riscv/gdbstub.c      | 350 ++++++++++++++++++++++++++++++++++++++++++--
->>  12 files changed, 1114 insertions(+), 21 deletions(-)
->>  create mode 100644 gdb-xml/riscv-32bit-cpu.xml
->>  create mode 100644 gdb-xml/riscv-32bit-csr.xml
->>  create mode 100644 gdb-xml/riscv-32bit-fpu.xml
->>  create mode 100644 gdb-xml/riscv-64bit-cpu.xml
->>  create mode 100644 gdb-xml/riscv-64bit-csr.xml
->>  create mode 100644 gdb-xml/riscv-64bit-fpu.xml
->>
->> --
->> 2.7.4
->>
->>
+-- PMM
 
