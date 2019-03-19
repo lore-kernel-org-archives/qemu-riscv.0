@@ -1,60 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1h6JNw-00006z-Oz
-	for mharc-qemu-riscv@gnu.org; Tue, 19 Mar 2019 14:22:48 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:33855)
+	id 1h6JNz-00009d-Gq
+	for mharc-qemu-riscv@gnu.org; Tue, 19 Mar 2019 14:22:51 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:33876)
 	by lists.gnu.org with esmtp (Exim 4.71)
 	(envelope-from <prvs=974414bc6=Alistair.Francis@wdc.com>)
-	id 1h6JNs-0008Ur-UG
-	for qemu-riscv@nongnu.org; Tue, 19 Mar 2019 14:22:47 -0400
+	id 1h6JNv-00005w-No
+	for qemu-riscv@nongnu.org; Tue, 19 Mar 2019 14:22:49 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
 	(envelope-from <prvs=974414bc6=Alistair.Francis@wdc.com>)
-	id 1h6JNl-00018h-QC
-	for qemu-riscv@nongnu.org; Tue, 19 Mar 2019 14:22:44 -0400
-Received: from esa1.hgst.iphmx.com ([68.232.141.245]:47926)
+	id 1h6JNr-0001J3-BA
+	for qemu-riscv@nongnu.org; Tue, 19 Mar 2019 14:22:47 -0400
+Received: from esa1.hgst.iphmx.com ([68.232.141.245]:47877)
 	by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.71) (envelope-from <prvs=974414bc6=Alistair.Francis@wdc.com>)
-	id 1h6JNY-0000MN-Sq; Tue, 19 Mar 2019 14:22:28 -0400
+	id 1h6JNY-0007iP-EH; Tue, 19 Mar 2019 14:22:28 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
 	d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
 	t=1553019744; x=1584555744;
 	h=from:to:cc:subject:date:message-id:references:
 	in-reply-to:content-transfer-encoding:mime-version;
-	bh=tl+xYE2Ag76+rug00OyLCp+7ai/skmz4m8I3hOEHOsk=;
-	b=GAk+By4BXtHGnlDS1KRixdlK+5KB/Ncp0Z5V6PhCuvYXAI2yXC0BnlgW
-	5D93c2Y69kvhGjly2F4Rq/I/5RCfej+vCGFA5P6YUUAINVVk5mHo1y1yD
-	+p9O1UvSzEg9QLjO7lJNTdTpJ53mTOry92AUHpue14rdff9Kucmehq9UN
-	OBE2P6sPWUvhjBqIF21oItgyfqM9dwAzyjettj9tp3FnveA1n/QdQ0qTm
-	rSWfdaNNBy8XNzqOrSZHTQfg3M+ccJQfcqk7NT1o3kKZIIOHEAHtYpRn7
-	WO7wTvf9goIbC+yOqxya3jJn9PMvutbaBTAHi2IJ+hnWpvGFx0DYA0ISP g==;
-X-IronPort-AV: E=Sophos;i="5.58,498,1544457600"; d="scan'208";a="209307023"
-Received: from mail-bl2nam02lp2057.outbound.protection.outlook.com (HELO
-	NAM02-BL2-obe.outbound.protection.outlook.com) ([104.47.38.57])
-	by ob1.hgst.iphmx.com with ESMTP; 20 Mar 2019 02:21:16 +0800
+	bh=TRaVJNiQbb0CrsQH7F8HHPVRuBS0J/goCg5iyU9aYfQ=;
+	b=lCjTuVLQG6Fb7XcjItIhqki4stVVJruC4mQSV7+MZ5kE9Y/Zz6hDdnzC
+	ocgHQobRcsZ88B+iArl0wo7fDYmOPaxM/BlrDwN+3wf249oCEV3o/cPcF
+	P0pw+urslTxHfSdDlHI/j4LNZFmtc5vxIVFyMSge/ifvHZI8hoMHFWwix
+	QTsFtovrC6gUA15K7uiuj9+VNdPK0AI+/xNxjFm/yEB9jU2BmfeHfpubS
+	ETqEuvNpakFkKrtqGaBXHo4gsIgGalOe0wnR0mprnMSlCPBY0PP7pTjdD
+	47/NMuubsHx9msozQBXrMHxdmdi60u3JHWxNVY0s92dpIEZhyNQ33slpH Q==;
+X-IronPort-AV: E=Sophos;i="5.58,498,1544457600"; d="scan'208";a="209307041"
+Received: from mail-by2nam05lp2050.outbound.protection.outlook.com (HELO
+	NAM05-BY2-obe.outbound.protection.outlook.com) ([104.47.50.50])
+	by ob1.hgst.iphmx.com with ESMTP; 20 Mar 2019 02:21:42 +0800
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=sharedspace.onmicrosoft.com; s=selector1-wdc-com;
 	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=7uC/t8Ht0x7cgW30qFfYD7V9rWaIb0DAvLxpgoD0Dbo=;
-	b=MVIhjs5g8qfTbV98BCXWAlora1cOL8+sIpHozOQ4+zpWfXr4gUChp2n6bcwZa/W77zVQzVGkpoCrdnjIVjyL/KkcQm+4jXRGwJHb8IVzoHwrK8cCXo2LgGWf+vhoolxXm7m9AS1ULDYmzv1Uj0XTwF6PeJy8VDBDHajidUA7Pb0=
+	bh=uulSttjDxf4KEla53VGejwEiwWvGiXEU3aCZpU+we0U=;
+	b=IowXeqzjT55lbVR0lKIW8+TBIgugaCty6lLgEK450jxlZnjmmfLUvNsIkxMgg/Jr4SIqRzQpq8orKxf8oizqVlnCCoVQ5b4/cd7FMYJV+fEWonP5TuMuHcW//omhhF+PMQeYCyB/1qrOlUN/Pdc0s8n/460/E8tO2T9n8PWMikc=
 Received: from BYAPR04MB4901.namprd04.prod.outlook.com (52.135.232.206) by
-	BYAPR04MB4920.namprd04.prod.outlook.com (52.135.232.213) with Microsoft
+	BYAPR04MB4326.namprd04.prod.outlook.com (20.176.251.140) with Microsoft
 	SMTP
 	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
-	15.20.1709.13; Tue, 19 Mar 2019 18:21:11 +0000
+	15.20.1709.13; Tue, 19 Mar 2019 18:21:41 +0000
 Received: from BYAPR04MB4901.namprd04.prod.outlook.com
 	([fe80::1c45:32d7:98ed:4cd7]) by
 	BYAPR04MB4901.namprd04.prod.outlook.com
 	([fe80::1c45:32d7:98ed:4cd7%6]) with mapi id 15.20.1709.015;
-	Tue, 19 Mar 2019 18:21:11 +0000
+	Tue, 19 Mar 2019 18:21:41 +0000
 From: Alistair Francis <Alistair.Francis@wdc.com>
 To: "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, "qemu-riscv@nongnu.org"
 	<qemu-riscv@nongnu.org>
 CC: "palmer@sifive.com" <palmer@sifive.com>, Alistair Francis
 	<Alistair.Francis@wdc.com>, "alistair23@gmail.com" <alistair23@gmail.com>
-Thread-Topic: [PATCH for 4.1 v1 2/6] target/riscv: Create settable CPU
-	properties
-Thread-Index: AQHU3oCEG3n/sr6eE02Hxr2eXBDL2g==
-Date: Tue, 19 Mar 2019 18:21:06 +0000
-Message-ID: <81f94c7c3e29f0d3647685f22ea47f1d8917e0f0.1553019560.git.alistair.francis@wdc.com>
+Thread-Topic: [PATCH for 4.1 v1 6/6] riscv: Add a generic spike machine
+Thread-Index: AQHU3oCZVYrRO73JyESjhifUBSqRMQ==
+Date: Tue, 19 Mar 2019 18:21:41 +0000
+Message-ID: <f4e9b8d0b64c0e9702bb26653c182113f60a6bee.1553019560.git.alistair.francis@wdc.com>
 References: <cover.1553019560.git.alistair.francis@wdc.com>
 In-Reply-To: <cover.1553019560.git.alistair.francis@wdc.com>
 Accept-Language: en-US
@@ -62,45 +61,45 @@ Content-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
 x-mailer: git-send-email 2.21.0
-x-clientproxiedby: BYAPR05CA0056.namprd05.prod.outlook.com
-	(2603:10b6:a03:74::33) To BYAPR04MB4901.namprd04.prod.outlook.com
+x-clientproxiedby: BYAPR07CA0106.namprd07.prod.outlook.com
+	(2603:10b6:a03:12b::47) To BYAPR04MB4901.namprd04.prod.outlook.com
 	(2603:10b6:a03:4f::14)
 authentication-results: spf=none (sender IP is )
 	smtp.mailfrom=Alistair.Francis@wdc.com; 
 x-ms-exchange-messagesentrepresentingtype: 1
 x-originating-ip: [199.255.44.250]
 x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 97f3e19b-05ec-4b21-7d9e-08d6ac97a6c7
+x-ms-office365-filtering-correlation-id: 53321578-199a-4538-56c7-08d6ac97bbee
 x-ms-office365-filtering-ht: Tenant
 x-microsoft-antispam: BCL:0; PCL:0;
 	RULEID:(2390118)(7020095)(4652040)(8989299)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(5600127)(711020)(4605104)(4618075)(2017052603328)(7153060)(7193020);
-	SRVR:BYAPR04MB4920; 
-x-ms-traffictypediagnostic: BYAPR04MB4920:
+	SRVR:BYAPR04MB4326; 
+x-ms-traffictypediagnostic: BYAPR04MB4326:
 wdcipoutbound: EOP-TRUE
-x-microsoft-antispam-prvs: <BYAPR04MB49203D8C1334563A704C1A7790400@BYAPR04MB4920.namprd04.prod.outlook.com>
+x-microsoft-antispam-prvs: <BYAPR04MB43260A4070AC44087774CF2890400@BYAPR04MB4326.namprd04.prod.outlook.com>
 x-forefront-prvs: 0981815F2F
 x-forefront-antispam-report: SFV:NSPM;
-	SFS:(10019020)(366004)(376002)(39860400002)(346002)(136003)(396003)(199004)(189003)(68736007)(14454004)(72206003)(66066001)(2501003)(2906002)(54906003)(256004)(478600001)(7736002)(86362001)(305945005)(6116002)(81166006)(81156014)(8936002)(50226002)(97736004)(8676002)(36756003)(3846002)(106356001)(2616005)(11346002)(486006)(476003)(446003)(6666004)(316002)(71190400001)(71200400001)(44832011)(6436002)(6512007)(4326008)(25786009)(110136005)(102836004)(6486002)(76176011)(186003)(52116002)(53936002)(26005)(99286004)(118296001)(105586002)(5660300002)(6506007)(386003);
-	DIR:OUT; SFP:1102; SCL:1; SRVR:BYAPR04MB4920;
+	SFS:(10019020)(366004)(376002)(346002)(39860400002)(136003)(396003)(189003)(199004)(71200400001)(316002)(6506007)(44832011)(4326008)(2616005)(11346002)(486006)(71190400001)(105586002)(446003)(476003)(6436002)(102836004)(99286004)(52116002)(5660300002)(53936002)(118296001)(386003)(26005)(25786009)(186003)(110136005)(6512007)(6486002)(76176011)(72206003)(14444005)(54906003)(256004)(68736007)(66066001)(106356001)(8936002)(14454004)(478600001)(2906002)(7736002)(97736004)(3846002)(86362001)(81156014)(36756003)(2501003)(6116002)(305945005)(8676002)(81166006)(50226002)(41533002);
+	DIR:OUT; SFP:1102; SCL:1; SRVR:BYAPR04MB4326;
 	H:BYAPR04MB4901.namprd04.prod.outlook.com; FPR:; SPF:None;
-	LANG:en; PTR:InfoNoRecords; A:1; MX:1; 
+	LANG:en; PTR:InfoNoRecords; MX:1; A:1; 
 x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam-message-info: 0qC7In768e+mK/Y/3hcae4VkSyNHzF52CSahL2qfcZvs+QiRCsNe6aoMNZVPumU5lFN+H6+nTlSDqGDJ8NhwjywEsWh0MB5H8mSEN1nI7ORuzaXDVLxyGi08VbJiUDHMnZmE6DkgaHMljxogTeWhzOGtJjdEI+zaDYS5oYVsUP3FGGgWmwTSYY64YQnLIDGbmOqO4dGO7idksSUUZiRujanBX77AuaiTpOS7e8byM0mzBDD79HI8JpFdlslrffkcd9wybi8YfNFplTtQ3havGmM5IWw7AF3GFC/ladNCjYCvvCE11aORXF8RpPl6rAUeygx6RLNhiO1lrCTHw2qOJfdTZ+pHstTpBUQQi5IIyLITXgdctxBFDmyFlhANRE9ycPOc32ujEADBsR14sBt8mytdh7LuKahLMfsxs14PDuo=
+x-microsoft-antispam-message-info: IV8hBy3JD7p9C/6mohVsVSTVchA1fGHY9nrl2TExhkZwOZjj9qfgRs00TZ1X3h6XxfI4nqxycq4Q2Q2Cmv7M4SrGkLKdun9bHeyN0afx8cL4v9GyvLpi2XOu2yqU26xBV2eTyC8Zjhh0CPGmWLoZcfFdhNrbG3V3NWfCD4ugOxq9MRS3+caOt82kMowMTV21J7cBeVzKlvEg7cGCYAtlWi6vL/CCfs3vgUEUR47x9BDzdHutLK7XGGyofu2HRbpSGXVQZVyLK6wfos74wgWxJBNniVwAgqBA7kq2kG1AB9/iTSMbZ5rQaQmX1+Yt8/yJYLdlYs8khX5KpPh2HVUc+GmsJAdRVzfm3T7MvmwXKn5G2dmXaYingsaR+uhpLslzPgL4WbDYjE8ffkwMjBNXuWqekMZFAAKj4ocrVJZNn/I=
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
 X-OriginatorOrg: wdc.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 97f3e19b-05ec-4b21-7d9e-08d6ac97a6c7
-X-MS-Exchange-CrossTenant-originalarrivaltime: 19 Mar 2019 18:21:06.1277 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 53321578-199a-4538-56c7-08d6ac97bbee
+X-MS-Exchange-CrossTenant-originalarrivaltime: 19 Mar 2019 18:21:41.5804 (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR04MB4920
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR04MB4326
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
 X-Received-From: 68.232.141.245
-Subject: [Qemu-riscv] [PATCH for 4.1 v1 2/6] target/riscv: Create settable
- CPU properties
+Subject: [Qemu-riscv] [PATCH for 4.1 v1 6/6] riscv: Add a generic spike
+ machine
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -112,138 +111,178 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Mar 2019 18:22:47 -0000
+X-List-Received-Date: Tue, 19 Mar 2019 18:22:50 -0000
+
+Add a generic spike machine (not tied to a version) and deprecate the
+spike mahines that are tied to a specific version. As we can now specify
+the CPU via the command line we no londer need specific versions of the
+spike machines.
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/cpu.c | 52 ++++++++++++++++++++++++++++++++++++++++++----
- target/riscv/cpu.h |  8 +++++++
- 2 files changed, 56 insertions(+), 4 deletions(-)
+ hw/riscv/spike.c | 106 ++++++++++++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 105 insertions(+), 1 deletion(-)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 31561c719f..b6408e0a83 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -23,6 +23,7 @@
- #include "cpu.h"
- #include "exec/exec-all.h"
- #include "qapi/error.h"
-+#include "hw/qdev-properties.h"
- #include "migration/vmstate.h"
+diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
+index 2a000a5800..9d3f7cec4d 100644
+--- a/hw/riscv/spike.c
++++ b/hw/riscv/spike.c
+@@ -39,6 +39,7 @@
+ #include "chardev/char.h"
+ #include "sysemu/arch_init.h"
+ #include "sysemu/device_tree.h"
++#include "sysemu/qtest.h"
+ #include "exec/address-spaces.h"
+ #include "elf.h"
 =20
- /* RISC-V CPU definitions */
-@@ -185,12 +186,9 @@ static void riscv_generate_cpu_init(Object *obj)
+@@ -160,7 +161,89 @@ static void create_fdt(SpikeState *s, const struct Mem=
+mapEntry *memmap,
+         qemu_fdt_add_subnode(fdt, "/chosen");
+         qemu_fdt_setprop_string(fdt, "/chosen", "bootargs", cmdline);
      }
+- }
++}
++
++static void spike_board_init(MachineState *machine)
++{
++    const struct MemmapEntry *memmap =3D spike_memmap;
++
++    SpikeState *s =3D g_new0(SpikeState, 1);
++    MemoryRegion *system_memory =3D get_system_memory();
++    MemoryRegion *main_mem =3D g_new(MemoryRegion, 1);
++    MemoryRegion *mask_rom =3D g_new(MemoryRegion, 1);
++    int i;
++
++    /* Initialize SOC */
++    object_initialize_child(OBJECT(machine), "soc", &s->soc, sizeof(s->soc=
+),
++                            TYPE_RISCV_HART_ARRAY, &error_abort, NULL);
++    object_property_set_str(OBJECT(&s->soc), machine->cpu_type, "cpu-type"=
+,
++                            &error_abort);
++    object_property_set_int(OBJECT(&s->soc), smp_cpus, "num-harts",
++                            &error_abort);
++    object_property_set_bool(OBJECT(&s->soc), true, "realized",
++                            &error_abort);
++
++    /* register system main memory (actual RAM) */
++    memory_region_init_ram(main_mem, NULL, "riscv.spike.ram",
++                           machine->ram_size, &error_fatal);
++    memory_region_add_subregion(system_memory, memmap[SPIKE_DRAM].base,
++        main_mem);
++
++    /* create device tree */
++    create_fdt(s, memmap, machine->ram_size, machine->kernel_cmdline);
++
++    /* boot rom */
++    memory_region_init_rom(mask_rom, NULL, "riscv.spike.mrom",
++                           memmap[SPIKE_MROM].size, &error_fatal);
++    memory_region_add_subregion(system_memory, memmap[SPIKE_MROM].base,
++                                mask_rom);
++
++    if (machine->kernel_filename) {
++        load_kernel(machine->kernel_filename);
++    }
++
++    /* reset vector */
++    uint32_t reset_vec[8] =3D {
++        0x00000297,                  /* 1:  auipc  t0, %pcrel_hi(dtb) */
++        0x02028593,                  /*     addi   a1, t0, %pcrel_lo(1b) *=
+/
++        0xf1402573,                  /*     csrr   a0, mhartid  */
++#if defined(TARGET_RISCV32)
++        0x0182a283,                  /*     lw     t0, 24(t0) */
++#elif defined(TARGET_RISCV64)
++        0x0182b283,                  /*     ld     t0, 24(t0) */
++#endif
++        0x00028067,                  /*     jr     t0 */
++        0x00000000,
++        memmap[SPIKE_DRAM].base,     /* start: .dword DRAM_BASE */
++        0x00000000,
++                                     /* dtb: */
++    };
++
++    /* copy in the reset vector in little_endian byte order */
++    for (i =3D 0; i < sizeof(reset_vec) >> 2; i++) {
++        reset_vec[i] =3D cpu_to_le32(reset_vec[i]);
++    }
++    rom_add_blob_fixed_as("mrom.reset", reset_vec, sizeof(reset_vec),
++                          memmap[SPIKE_MROM].base, &address_space_memory);
++
++    /* copy in the device tree */
++    if (fdt_pack(s->fdt) || fdt_totalsize(s->fdt) >
++            memmap[SPIKE_MROM].size - sizeof(reset_vec)) {
++        error_report("not enough space to store device-tree");
++        exit(1);
++    }
++    qemu_fdt_dumpdtb(s->fdt, fdt_totalsize(s->fdt));
++    rom_add_blob_fixed_as("mrom.fdt", s->fdt, fdt_totalsize(s->fdt),
++                          memmap[SPIKE_MROM].base + sizeof(reset_vec),
++                          &address_space_memory);
++
++    /* initialize HTIF using symbols found in load_kernel */
++    htif_mm_init(system_memory, mask_rom, &s->soc.harts[0].env, serial_hd(=
+0));
++
++    /* Core Local Interruptor (timer and IPI) */
++    sifive_clint_create(memmap[SPIKE_CLINT].base, memmap[SPIKE_CLINT].size=
+,
++        smp_cpus, SIFIVE_SIP_BASE, SIFIVE_TIMECMP_BASE, SIFIVE_TIME_BASE);
++}
 =20
-     set_misa(env, rvxlen | target_misa);
--    set_versions(env, USER_VERSION_2_02_0, PRIV_VERSION_1_10_0);
--    set_resetvec(env, DEFAULT_RSTVEC);
--    set_feature(env, RISCV_FEATURE_MMU);
--    set_feature(env, RISCV_FEATURE_PMP);
+ static void spike_v1_10_0_board_init(MachineState *machine)
+ {
+@@ -172,6 +255,12 @@ static void spike_v1_10_0_board_init(MachineState *mac=
+hine)
+     MemoryRegion *mask_rom =3D g_new(MemoryRegion, 1);
+     int i;
+=20
++    if (!qtest_enabled()) {
++        info_report("The Spike v1.10.0 machine has been depreceated. "
++                    "Please use the deneric spike machine and specify the =
+ISA "
++                    "versions using -cpu.");
++    }
++
+     /* Initialize SOC */
+     object_initialize_child(OBJECT(machine), "soc", &s->soc, sizeof(s->soc=
+),
+                             TYPE_RISCV_HART_ARRAY, &error_abort, NULL);
+@@ -254,6 +343,12 @@ static void spike_v1_09_1_board_init(MachineState *mac=
+hine)
+     MemoryRegion *mask_rom =3D g_new(MemoryRegion, 1);
+     int i;
+=20
++    if (!qtest_enabled()) {
++        info_report("The Spike v1.09.1 machine has been depreceated. "
++                    "Please use the deneric spike machine and specify the =
+ISA "
++                    "versions using -cpu.");
++    }
++
+     /* Initialize SOC */
+     object_initialize_child(OBJECT(machine), "soc", &s->soc, sizeof(s->soc=
+),
+                             TYPE_RISCV_HART_ARRAY, &error_abort, NULL);
+@@ -359,8 +454,17 @@ static void spike_v1_10_0_machine_init(MachineClass *m=
+c)
+     mc->desc =3D "RISC-V Spike Board (Privileged ISA v1.10)";
+     mc->init =3D spike_v1_10_0_board_init;
+     mc->max_cpus =3D 1;
++}
++
++static void spike_machine_init(MachineClass *mc)
++{
++    mc->desc =3D "RISC-V Spike Board";
++    mc->init =3D spike_board_init;
++    mc->max_cpus =3D 1;
+     mc->is_default =3D 1;
++    mc->default_cpu_type =3D SPIKE_V1_10_0_CPU;
  }
 =20
-+
- static void riscv_any_cpu_init(Object *obj)
- {
-     CPURISCVState *env =3D &RISCV_CPU(obj)->env;
-@@ -388,7 +386,11 @@ static void riscv_cpu_disas_set_info(CPUState *s, disa=
-ssemble_info *info)
- static void riscv_cpu_realize(DeviceState *dev, Error **errp)
- {
-     CPUState *cs =3D CPU(dev);
-+    RISCVCPU *cpu =3D RISCV_CPU(dev);
-+    CPURISCVState *env =3D &cpu->env;
-     RISCVCPUClass *mcc =3D RISCV_CPU_GET_CLASS(dev);
-+    int priv_version =3D PRIV_VERSION_1_10_0;
-+    int user_version =3D USER_VERSION_2_02_0;
-     Error *local_err =3D NULL;
-=20
-     cpu_exec_realizefn(cs, &local_err);
-@@ -397,6 +399,39 @@ static void riscv_cpu_realize(DeviceState *dev, Error =
-**errp)
-         return;
-     }
-=20
-+    if (cpu->cfg.priv_spec) {
-+        if (!g_strcmp0(cpu->cfg.priv_spec, "v1.10.0")) {
-+            priv_version =3D PRIV_VERSION_1_10_0;
-+        } else if (!g_strcmp0(cpu->cfg.priv_spec, "v1.9.1")) {
-+            priv_version =3D PRIV_VERSION_1_09_1;
-+        } else {
-+            error_report("Unsupported privilege spec version '%s'",
-+                         cpu->cfg.priv_spec);
-+            exit(1);
-+        }
-+    }
-+
-+    if (cpu->cfg.user_spec) {
-+        if (!g_strcmp0(cpu->cfg.user_spec, "v2.02.0")) {
-+            user_version =3D USER_VERSION_2_02_0;
-+        } else {
-+            error_report("Unsupported user spec version '%s'",
-+                         cpu->cfg.user_spec);
-+            exit(1);
-+        }
-+    }
-+
-+    set_versions(env, user_version, priv_version);
-+    set_resetvec(env, DEFAULT_RSTVEC);
-+
-+    if (cpu->cfg.mmu) {
-+        set_feature(env, RISCV_FEATURE_MMU);
-+    }
-+
-+    if (cpu->cfg.pmp) {
-+        set_feature(env, RISCV_FEATURE_PMP);
-+    }
-+
-     riscv_cpu_register_gdb_regs_for_features(cs);
-=20
-     qemu_init_vcpu(cs);
-@@ -418,6 +453,14 @@ static const VMStateDescription vmstate_riscv_cpu =3D =
-{
-     .unmigratable =3D 1,
- };
-=20
-+static Property riscv_cpu_properties[] =3D {
-+    DEFINE_PROP_STRING("priv_spec", RISCVCPU, cfg.priv_spec),
-+    DEFINE_PROP_STRING("user_spec", RISCVCPU, cfg.user_spec),
-+    DEFINE_PROP_BOOL("mmu", RISCVCPU, cfg.mmu, true),
-+    DEFINE_PROP_BOOL("pmp", RISCVCPU, cfg.pmp, true),
-+    DEFINE_PROP_END_OF_LIST(),
-+};
-+
- static void riscv_cpu_class_init(ObjectClass *c, void *data)
- {
-     RISCVCPUClass *mcc =3D RISCV_CPU_CLASS(c);
-@@ -458,6 +501,7 @@ static void riscv_cpu_class_init(ObjectClass *c, void *=
-data)
- #endif
-     /* For now, mark unmigratable: */
-     cc->vmsd =3D &vmstate_riscv_cpu;
-+    dc->props =3D riscv_cpu_properties;
- }
-=20
- char *riscv_isa_string(RISCVCPU *cpu)
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 453108a855..bc877d8107 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -226,6 +226,14 @@ typedef struct RISCVCPU {
-     CPUState parent_obj;
-     /*< public >*/
-     CPURISCVState env;
-+
-+    /* Configuration Settings */
-+    struct {
-+        char *priv_spec;
-+        char *user_spec;
-+        bool mmu;
-+        bool pmp;
-+    } cfg;
- } RISCVCPU;
-=20
- static inline RISCVCPU *riscv_env_get_cpu(CPURISCVState *env)
+ DEFINE_MACHINE("spike_v1.9.1", spike_v1_09_1_machine_init)
+ DEFINE_MACHINE("spike_v1.10", spike_v1_10_0_machine_init)
++DEFINE_MACHINE("spike", spike_machine_init)
 --=20
 2.21.0
 
