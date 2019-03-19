@@ -1,54 +1,54 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1h6EU5-0007fy-AM
-	for mharc-qemu-riscv@gnu.org; Tue, 19 Mar 2019 09:08:49 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:45307)
+	id 1h6EU6-0007hO-CA
+	for mharc-qemu-riscv@gnu.org; Tue, 19 Mar 2019 09:08:50 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:45163)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1h6ETw-0007Uw-FJ
-	for qemu-riscv@nongnu.org; Tue, 19 Mar 2019 09:08:41 -0400
+	(envelope-from <palmer@sifive.com>) id 1h6ETy-00078U-BQ
+	for qemu-riscv@nongnu.org; Tue, 19 Mar 2019 09:08:43 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1h6EGf-0005Pu-UK
-	for qemu-riscv@nongnu.org; Tue, 19 Mar 2019 08:54:58 -0400
-Received: from mail-pg1-x535.google.com ([2607:f8b0:4864:20::535]:37215)
+	(envelope-from <palmer@sifive.com>) id 1h6EGd-0005MV-Ms
+	for qemu-riscv@nongnu.org; Tue, 19 Mar 2019 08:54:56 -0400
+Received: from mail-pf1-x429.google.com ([2607:f8b0:4864:20::429]:33563)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1h6EGf-0005PK-Oh
-	for qemu-riscv@nongnu.org; Tue, 19 Mar 2019 08:54:57 -0400
-Received: by mail-pg1-x535.google.com with SMTP id q206so13791896pgq.4
-	for <qemu-riscv@nongnu.org>; Tue, 19 Mar 2019 05:54:57 -0700 (PDT)
+	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1h6EGd-0005L5-H5
+	for qemu-riscv@nongnu.org; Tue, 19 Mar 2019 08:54:55 -0400
+Received: by mail-pf1-x429.google.com with SMTP id i19so13635946pfd.0
+	for <qemu-riscv@nongnu.org>; Tue, 19 Mar 2019 05:54:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
 	h=subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding:cc:from:to;
-	bh=aq+PQvBAYMr9TetDYzbxFa3L+q/hLP72QO5baDAOzCs=;
-	b=TwaEkY9Xaf3kGW6ka0Ojwyy/G9HGLg4OFFZvMADRNUy3zql2URAi4SY08ZZ9Y1D+65
-	5DCx3f1haqXfpCYfLkCV/jhh/UBmyVpw31y9BQ/S7xH5uVvgZowXLlq++Xc/jtTPYURc
-	/lxHp8OhkysG00kOs6Y3pb3xLQFRQszDFW1DbQyt5hSZRbq4uBiniqixKoPoe52o25Gs
-	DeJ1nM2uZL1jQycKEsufa7j4uG/cTZQESI7+jrftB3iiRzJFcmpde8lQVZb2gQ5dK8Eh
-	gIisnY5l14gj2UBavn5CGQbNC5xzCF8xcGsc0DuE/uwO+fFypXl+QFaxUq248ZvmCeuB
-	qmzg==
+	bh=R9yteLw804vBup5WfAuerJM1e2X1gT1roHQgAWe0O4E=;
+	b=k+KJ3H8FXEmRI0hs41b7l9GkR6JNBT6W3zZTrMhyYhv3jWQeBFQzKalGOeo0YaVQ3R
+	erVwXEC27e9BfeWwIRdHKbQmscdyddJmbGumr9G916FhuMA5n0ZW+dAY3HqgL9Ojp1fy
+	M+KtuDWj9DhmIhBHd4tYyLEcw0shHKu6srSuN0S676y1yzTlksi0+zufwl4YFibqbMs5
+	gpt1XkzvAg8mSKGpw/ivgB6/+bTVqVhpCUmxb1pRY5Zqmq3P5vbQpWv0sVEajbzFvM9T
+	9q0YyqL2ElckbnEaFn0DcJiD6Z8RPIsntv7T1DGlLfAZ6MPgf16zw1PnqZEFNJQE+Jw8
+	mwiA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding:cc:from:to;
-	bh=aq+PQvBAYMr9TetDYzbxFa3L+q/hLP72QO5baDAOzCs=;
-	b=RV00faBqVXaBoxYopxRr4+byuJiYdplBKRAS1Y2chGbSE57rWNLlYn7JRmSHhoKhoH
-	dE0flO7u1w0BRF+P76O60Bz1wlE2jHW4SSmVbCpekp6RmygiRdJQOubyltpSoQiEOKC6
-	/6xQR6+w79Adi4TwQgOiQJBGEpAdkpLJt6jgp0UzdN39Y+81yfvP1yGwZ9vIKpk603aQ
-	ab3sQJRnUI8UfUa55EerbOLHbV0rNYYHMQNIMHjIHNEaLxjjmmtNcCcor8xQ3rO15Hcr
-	pbe6IlUd0cG/N60f0/Q0DjZj/Oz/B3jFFnbNfKyRMX4xOc3wZktceHyhIJfhW5ajZl6U
-	6W8A==
-X-Gm-Message-State: APjAAAWs2eZ7L2vgSn5EFSplp8uUpg+FqedxawQ5foY1jfnN4QFv6bni
-	D79r22WSBYahQ3Gf23a49jFM4SwVg65tsEOD
-X-Google-Smtp-Source: APXvYqz/VowbQOdKtwVano1Wcgfzsu5s7FIY48OjAflh2B8MPUvEWduuUXEe7Yy/wggX8i4SUAUuXg==
-X-Received: by 2002:a65:6656:: with SMTP id z22mr1631391pgv.95.1553000096504; 
-	Tue, 19 Mar 2019 05:54:56 -0700 (PDT)
+	bh=R9yteLw804vBup5WfAuerJM1e2X1gT1roHQgAWe0O4E=;
+	b=ppbZm+cK3d0Yl7/IsVEFc+sEKwRaCb303EsfZ9n0tuSwTVUVgl/RCJYzYseEbgNjS0
+	+2b8osSt7eJixpw7cD6T3NK6hVXgHWsW4hyfYH22PspR7EFtnak6N97RXlqTf+4mh9b0
+	aT86ifB1XLMVkCUNPMl1oXZleRVASEhpEEoM3ctDjc4m93lw5TfMG6AeDoW+PNFG/sBZ
+	49C4V4w8hJdiVR2lDpVsfi7S1OkNyGf71WJy+qkJNhukIhjdG5LnowopvvK2HQcjHJ5R
+	8TmpDJlLX3i2WPrOcfjH0iEYcs/6waLlwX8qNcg15ckSLXlhlIMz9IuE+DrnI9n5iupC
+	dbpQ==
+X-Gm-Message-State: APjAAAURDEItBSPJ+0NFLlxys5i1IyPX9wkPSd4SHqSY+jP5d4E2sf+X
+	6/oVBvENrw7rQwKkgGubhDP9v3xfgarFVecc
+X-Google-Smtp-Source: APXvYqzNnzQD09dYcVBz+JgWeVqQviotRmkmo90NHuKkD2MRXmj4C7Qy99II9jrb1rBA3geph4MrDA==
+X-Received: by 2002:a63:5515:: with SMTP id j21mr1794141pgb.244.1553000093943; 
+	Tue, 19 Mar 2019 05:54:53 -0700 (PDT)
 Received: from localhost
 	(2001-b011-7001-1cad-363a-ebbe-dac8-3f4c.dynamic-ip6.hinet.net.
 	[2001:b011:7001:1cad:363a:ebbe:dac8:3f4c])
 	by smtp.gmail.com with ESMTPSA id
-	u13sm22740348pfa.169.2019.03.19.05.54.55
+	10sm19931256pft.83.2019.03.19.05.54.52
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 19 Mar 2019 05:54:55 -0700 (PDT)
-Date: Tue, 19 Mar 2019 05:47:59 -0700
-Message-Id: <20190319124803.13826-16-palmer@sifive.com>
+	Tue, 19 Mar 2019 05:54:53 -0700 (PDT)
+Date: Tue, 19 Mar 2019 05:47:58 -0700
+Message-Id: <20190319124803.13826-15-palmer@sifive.com>
 X-Mailer: git-send-email 2.19.2
 In-Reply-To: <20190319124803.13826-1-palmer@sifive.com>
 References: <20190319124803.13826-1-palmer@sifive.com>
@@ -62,9 +62,9 @@ From: Palmer Dabbelt <palmer@sifive.com>
 To: Peter Maydell <peter.maydell@linaro.org>
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::535
-Subject: [Qemu-riscv] [PULL 15/19] RISC-V: Update load reservation comment
- in do_interrupt
+X-Received-From: 2607:f8b0:4864:20::429
+Subject: [Qemu-riscv] [PULL 14/19] RISC-V: Convert trap debugging to trace
+ events
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -76,7 +76,7 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Mar 2019 13:08:41 -0000
+X-List-Received-Date: Tue, 19 Mar 2019 13:08:43 -0000
 
 From: Michael Clark <mjc@sifive.com>
 
@@ -86,28 +86,62 @@ Signed-off-by: Michael Clark <mjc@sifive.com>
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
 ---
- target/riscv/cpu_helper.c | 8 +++++++-
- 1 file changed, 7 insertions(+), 1 deletion(-)
+ Makefile.objs             |  1 +
+ target/riscv/cpu_helper.c | 12 +++---------
+ target/riscv/trace-events |  2 ++
+ 3 files changed, 6 insertions(+), 9 deletions(-)
+ create mode 100644 target/riscv/trace-events
 
+diff --git a/Makefile.objs b/Makefile.objs
+index 72debbf5c5de..cf065de5ed44 100644
+--- a/Makefile.objs
++++ b/Makefile.objs
+@@ -186,6 +186,7 @@ trace-events-subdirs += target/hppa
+ trace-events-subdirs += target/i386
+ trace-events-subdirs += target/mips
+ trace-events-subdirs += target/ppc
++trace-events-subdirs += target/riscv
+ trace-events-subdirs += target/s390x
+ trace-events-subdirs += target/sparc
+ trace-events-subdirs += ui
 diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 6d3fbc340165..b17f169681ad 100644
+index a02f4dad8c00..6d3fbc340165 100644
 --- a/target/riscv/cpu_helper.c
 +++ b/target/riscv/cpu_helper.c
-@@ -525,7 +525,13 @@ void riscv_cpu_do_interrupt(CPUState *cs)
-             ((async && (env->mtvec & 3) == 1) ? cause * 4 : 0);
-         riscv_cpu_set_mode(env, PRV_M);
+@@ -22,8 +22,7 @@
+ #include "cpu.h"
+ #include "exec/exec-all.h"
+ #include "tcg-op.h"
+-
+-#define RISCV_DEBUG_INTERRUPT 0
++#include "trace.h"
+ 
+ int riscv_cpu_mmu_index(CPURISCVState *env, bool ifetch)
+ {
+@@ -493,13 +492,8 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+         }
      }
--    /* TODO yield load reservation  */
-+
-+    /* NOTE: it is not necessary to yield load reservations here. It is only
-+     * necessary for an SC from "another hart" to cause a load reservation
-+     * to be yielded. Refer to the memory consistency model section of the
-+     * RISC-V ISA Specification.
-+     */
-+
- #endif
-     cs->exception_index = EXCP_NONE; /* mark handled to qemu */
- }
+ 
+-    if (RISCV_DEBUG_INTERRUPT) {
+-        qemu_log_mask(LOG_TRACE, "core " TARGET_FMT_ld ": %s %s, "
+-            "epc 0x" TARGET_FMT_lx ": tval 0x" TARGET_FMT_lx "\n",
+-            env->mhartid, async ? "intr" : "trap",
+-            (async ? riscv_intr_names : riscv_excp_names)[cause],
+-            env->pc, tval);
+-    }
++    trace_riscv_trap(env->mhartid, async, cause, env->pc, tval, cause < 16 ?
++        (async ? riscv_intr_names : riscv_excp_names)[cause] : "(unknown)");
+ 
+     if (env->priv <= PRV_S &&
+             cause < TARGET_LONG_BITS && ((deleg >> cause) & 1)) {
+diff --git a/target/riscv/trace-events b/target/riscv/trace-events
+new file mode 100644
+index 000000000000..48af0373df6e
+--- /dev/null
++++ b/target/riscv/trace-events
+@@ -0,0 +1,2 @@
++# target/riscv/cpu_helper.c
++riscv_trap(uint64_t hartid, bool async, uint64_t cause, uint64_t epc, uint64_t tval, const char *desc) "hart:%"PRId64", async:%d, cause:%"PRId64", epc:0x%"PRIx64", tval:0x%"PRIx64", desc=%s"
 -- 
 2.19.2
 
