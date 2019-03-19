@@ -1,70 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1h6ESs-0006qT-Nd
-	for mharc-qemu-riscv@gnu.org; Tue, 19 Mar 2019 09:07:34 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:44975)
+	id 1h6ETp-0007Sh-9K
+	for mharc-qemu-riscv@gnu.org; Tue, 19 Mar 2019 09:08:33 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:45163)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1h6ESr-0006q2-1G
-	for qemu-riscv@nongnu.org; Tue, 19 Mar 2019 09:07:33 -0400
+	(envelope-from <palmer@sifive.com>) id 1h6ETm-00078U-C6
+	for qemu-riscv@nongnu.org; Tue, 19 Mar 2019 09:08:31 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1h6EGE-0004YN-Ui
-	for qemu-riscv@nongnu.org; Tue, 19 Mar 2019 08:54:31 -0400
-Received: from mail-pg1-x544.google.com ([2607:f8b0:4864:20::544]:37480)
+	(envelope-from <palmer@sifive.com>) id 1h6EGr-0005WC-C4
+	for qemu-riscv@nongnu.org; Tue, 19 Mar 2019 08:55:10 -0400
+Received: from mail-pg1-x542.google.com ([2607:f8b0:4864:20::542]:34479)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1h6EGE-0004WV-Kc
-	for qemu-riscv@nongnu.org; Tue, 19 Mar 2019 08:54:30 -0400
-Received: by mail-pg1-x544.google.com with SMTP id q206so13791116pgq.4
-	for <qemu-riscv@nongnu.org>; Tue, 19 Mar 2019 05:54:30 -0700 (PDT)
+	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1h6EGr-0005Vv-6Q
+	for qemu-riscv@nongnu.org; Tue, 19 Mar 2019 08:55:09 -0400
+Received: by mail-pg1-x542.google.com with SMTP id v12so13827080pgq.1
+	for <qemu-riscv@nongnu.org>; Tue, 19 Mar 2019 05:55:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
 	h=subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding:cc:from:to;
-	bh=fWgGc8PQ+KSE2a4NhscIVZpeEB75XYFWyMRP6DxXz+g=;
-	b=H31S0CgULOn4V1YBC5kvQckuXComzktscggg6mzpVL9UiC1mktjtQtQKwWhR1mLWwN
-	Zs+5ghZ9/7hinx/MXRG2KYT0Hdu2x6riK8T66uiRYewVvQAOCTN00VR0pexbonCWAN67
-	AqwAe2Ts2cceAI6q18XlxXKZVhgRLB5Off7tArZMx9dfRayVW5MimeZ9tsjX2qMZhODF
-	tGQvBTlbnZTdY1b9zC95CPBFPRG13QpO5EAkhhXG0h/gA8JPSeN3CGFfk/HFPkKIdWtb
-	ix57mj4+ZHz0QAaCTM1LbUL087FigizdkwCXP4QRc4vjCYDWijDj82GCjN7jHMnIqnQK
-	lcnQ==
+	bh=mT/w4mK1ltk1Z+/Eg8Ia5fwAoDmAMM6ATAhNNM6SUlI=;
+	b=PdXZANHfQGOZgfY3NZ6tNel5jqqtczDTXzhYWs5DH0NAQrF9NdRuWiTQP9yQBT8P+F
+	8pJbC755yHI2D5oygL/jxEDml7kOVRi8lg/BcmIO/NvNV5c5zYjZvxRa02bwtlOWC9LH
+	JU91Q9kfXX20JxzV/fl4yJEkAD2kAdXCf9EJyuTJHUzeHxXZtPf3Sv85Ik6bXwfe+tmM
+	f3iZA2gmpqayrWQc0Aa6ljnFlU5fFk9sJsnum9r26mDV1lJTbWXMuHh6OmS46xjeNWuq
+	kwlmxEq1p42Jc8hSDqA2IwKVB3621BQoduxy3dL7Fxge5isGv7HMUhInKG3AAs9tl0bx
+	QAoA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding:cc:from:to;
-	bh=fWgGc8PQ+KSE2a4NhscIVZpeEB75XYFWyMRP6DxXz+g=;
-	b=AltyIGRUhQ8LM0nkOdRM8T20OHumfo/IaIBsIFi8/kuEzUT5TciySS3ZtGFjVbdQk6
-	ED8bhlL8NHQOlrHE5UlKXqBBgYpCH/gN8Z4G3YR0NmhCDOy0qb/cisAIL5tBZ7jDoRLm
-	o91eQEoOZe8Ra2mxqcqUZDY58LxGiH+DB7NJO9KBzIy4Ky412sThlznToXrd/UZP27/z
-	CT7/BlS+i80+qVSo8hanjKR+ZmuOTuBn0FDWhGXWzPi8pOwlNUZUoiryp8tEmXP2a1St
-	i/rLxeZJsqTYcyuNP4fjOfjz1KunLpYxoOUOttGb1FWpmLSK5fDBQHb3yaytFu8kVR5y
-	aB8g==
-X-Gm-Message-State: APjAAAVKxPlkr9p6jucybgoCnlAMV6wF2HivBhwYmnGdAPDQq3El1qcI
-	tbPrBzROPuGm1KEZjOFRSDPQR8QNkjoDjFNq
-X-Google-Smtp-Source: APXvYqzH4m9ZginoqoGeNbvfw7hQZ3H6dgIL8ZHdPCui9T/6P5JW/v1HRHhPToovw9RvjUKn0DCyZg==
-X-Received: by 2002:a17:902:7242:: with SMTP id
-	c2mr24916880pll.245.1553000069416; 
-	Tue, 19 Mar 2019 05:54:29 -0700 (PDT)
+	bh=mT/w4mK1ltk1Z+/Eg8Ia5fwAoDmAMM6ATAhNNM6SUlI=;
+	b=b0JCogXfr6OoBhS1Cpw6OXw99aJ0DlZGKOPtQ6A/v5Olb3OYXM0LLIh0BoESLqFcdI
+	kZNcrJKBr+wti9L5nVQ9PNmDPW8Vye1un5kgvTjPEKJKKNX4eF1OgFtiZ/bG4VvSF8Vs
+	x2HqS36abSpx5G46rY2OhIpz9Pm81qdOEWS/XeLb7cbmcHN4gLxo8zbx57poAzswxYvl
+	Lk4m5IxP3BttfZnFoErNoX2H5HX6EGK4Sh9eS0A1rxZI9wBCZ8uXnosv22YW/YR1ka/E
+	n76P9X0YBOJ64QKJDEoOqucxqp7apx4KIQFgucZBMwZbS0O9hF2mSYzkSjt6F+K70cEA
+	LfiA==
+X-Gm-Message-State: APjAAAV3Eu9p+nPEbWUZUYNVKTaShPo+2VmD/9sUQNeIwQ+YY+4YzKvI
+	9VoBHZCW3Zr3VVbm6xc93nBDE7QsO7+9C+mN
+X-Google-Smtp-Source: APXvYqyKFNc92BlsFpJupwRy4ZtfV0w3luYIBTLXyewoqaa5y6ygR/FvMqugFy9Z6pzhURmLkipmdQ==
+X-Received: by 2002:a17:902:2848:: with SMTP id
+	e66mr1950070plb.181.1553000108095; 
+	Tue, 19 Mar 2019 05:55:08 -0700 (PDT)
 Received: from localhost
 	(2001-b011-7001-1cad-363a-ebbe-dac8-3f4c.dynamic-ip6.hinet.net.
 	[2001:b011:7001:1cad:363a:ebbe:dac8:3f4c])
-	by smtp.gmail.com with ESMTPSA id v2sm957853pgj.62.2019.03.19.05.54.28
+	by smtp.gmail.com with ESMTPSA id
+	p6sm22109961pgd.69.2019.03.19.05.55.06
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 19 Mar 2019 05:54:28 -0700 (PDT)
-Date: Tue, 19 Mar 2019 05:47:50 -0700
-Message-Id: <20190319124803.13826-7-palmer@sifive.com>
+	Tue, 19 Mar 2019 05:55:07 -0700 (PDT)
+Date: Tue, 19 Mar 2019 05:48:03 -0700
+Message-Id: <20190319124803.13826-20-palmer@sifive.com>
 X-Mailer: git-send-email 2.19.2
 In-Reply-To: <20190319124803.13826-1-palmer@sifive.com>
 References: <20190319124803.13826-1-palmer@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Cc: qemu-riscv@nongnu.org,       qemu-devel@nongnu.org,
-	Alistair Francis <Alistair.Francis@wdc.com>,
-	Alistair Francis <alistair.francis@wdc.com>, 
-	Palmer Dabbelt <palmer@sifive.com>
+	Bin Meng <bmeng.cn@gmail.com>, Palmer Dabbelt <palmer@sifive.com>
 From: Palmer Dabbelt <palmer@sifive.com>
 To: Peter Maydell <peter.maydell@linaro.org>
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::544
-Subject: [Qemu-riscv] [PULL 06/19] riscv: pmp: Log pmp access errors as
- guest errors
+X-Received-From: 2607:f8b0:4864:20::542
+Subject: [Qemu-riscv] [PULL 19/19] riscv: sifive_u: Correct UART0's IRQ in
+ the device tree
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -76,79 +75,33 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Mar 2019 13:07:33 -0000
+X-List-Received-Date: Tue, 19 Mar 2019 13:08:31 -0000
 
-From: Alistair Francis <Alistair.Francis@wdc.com>
+From: Bin Meng <bmeng.cn@gmail.com>
 
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+The UART0's interrupt vector is wrongly set to 1 in the device tree.
+Use SIFIVE_U_UART0_IRQ instead.
+
+Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
 ---
- target/riscv/pmp.c | 20 +++++++++++++-------
- 1 file changed, 13 insertions(+), 7 deletions(-)
+ hw/riscv/sifive_u.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-index 15a5366616bd..b11c4ae22fbc 100644
---- a/target/riscv/pmp.c
-+++ b/target/riscv/pmp.c
-@@ -113,10 +113,11 @@ static void pmp_write_cfg(CPURISCVState *env, uint32_t pmp_index, uint8_t val)
-             env->pmp_state.pmp[pmp_index].cfg_reg = val;
-             pmp_update_rule(env, pmp_index);
-         } else {
--            PMP_DEBUG("ignoring write - locked");
-+            qemu_log_mask(LOG_GUEST_ERROR, "ignoring pmpcfg write - locked\n");
-         }
-     } else {
--        PMP_DEBUG("ignoring write - out of bounds");
-+        qemu_log_mask(LOG_GUEST_ERROR,
-+                      "ignoring pmpcfg write - out of bounds\n");
-     }
- }
+diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+index 3199238ba01e..5ecc47cea35d 100644
+--- a/hw/riscv/sifive_u.c
++++ b/hw/riscv/sifive_u.c
+@@ -244,7 +244,7 @@ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
+     qemu_fdt_setprop_cell(fdt, nodename, "clock-frequency",
+                           SIFIVE_U_CLOCK_FREQ / 2);
+     qemu_fdt_setprop_cells(fdt, nodename, "interrupt-parent", plic_phandle);
+-    qemu_fdt_setprop_cells(fdt, nodename, "interrupts", 1);
++    qemu_fdt_setprop_cells(fdt, nodename, "interrupts", SIFIVE_U_UART0_IRQ);
  
-@@ -249,7 +250,8 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
- 
-         /* partially inside */
-         if ((s + e) == 1) {
--            PMP_DEBUG("pmp violation - access is partially inside");
-+            qemu_log_mask(LOG_GUEST_ERROR,
-+                          "pmp violation - access is partially inside\n");
-             ret = 0;
-             break;
-         }
-@@ -306,7 +308,8 @@ void pmpcfg_csr_write(CPURISCVState *env, uint32_t reg_index,
-         env->mhartid, reg_index, val);
- 
-     if ((reg_index & 1) && (sizeof(target_ulong) == 8)) {
--        PMP_DEBUG("ignoring write - incorrect address");
-+        qemu_log_mask(LOG_GUEST_ERROR,
-+                      "ignoring pmpcfg write - incorrect address\n");
-         return;
-     }
- 
-@@ -353,10 +356,12 @@ void pmpaddr_csr_write(CPURISCVState *env, uint32_t addr_index,
-             env->pmp_state.pmp[addr_index].addr_reg = val;
-             pmp_update_rule(env, addr_index);
-         } else {
--            PMP_DEBUG("ignoring write - locked");
-+            qemu_log_mask(LOG_GUEST_ERROR,
-+                          "ignoring pmpaddr write - locked\n");
-         }
-     } else {
--        PMP_DEBUG("ignoring write - out of bounds");
-+        qemu_log_mask(LOG_GUEST_ERROR,
-+                      "ignoring pmpaddr write - out of bounds\n");
-     }
- }
- 
-@@ -372,7 +377,8 @@ target_ulong pmpaddr_csr_read(CPURISCVState *env, uint32_t addr_index)
-     if (addr_index < MAX_RISCV_PMPS) {
-         return env->pmp_state.pmp[addr_index].addr_reg;
-     } else {
--        PMP_DEBUG("ignoring read - out of bounds");
-+        qemu_log_mask(LOG_GUEST_ERROR,
-+                      "ignoring pmpaddr read - out of bounds\n");
-         return 0;
-     }
- }
+     qemu_fdt_add_subnode(fdt, "/chosen");
+     qemu_fdt_setprop_string(fdt, "/chosen", "stdout-path", nodename);
 -- 
 2.19.2
 
