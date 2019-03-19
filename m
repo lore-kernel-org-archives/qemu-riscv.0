@@ -1,72 +1,72 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1h6EU7-0007iI-2t
-	for mharc-qemu-riscv@gnu.org; Tue, 19 Mar 2019 09:08:51 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:45366)
+	id 1h6EU8-0007kD-IC
+	for mharc-qemu-riscv@gnu.org; Tue, 19 Mar 2019 09:08:52 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:44969)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1h6EU2-0007c9-Tu
-	for qemu-riscv@nongnu.org; Tue, 19 Mar 2019 09:08:47 -0400
+	(envelope-from <palmer@sifive.com>) id 1h6EU6-0006q1-QG
+	for qemu-riscv@nongnu.org; Tue, 19 Mar 2019 09:08:51 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1h6EGX-0005Cj-8a
-	for qemu-riscv@nongnu.org; Tue, 19 Mar 2019 08:54:50 -0400
-Received: from mail-pg1-x544.google.com ([2607:f8b0:4864:20::544]:39512)
+	(envelope-from <palmer@sifive.com>) id 1h6EGT-000569-Rn
+	for qemu-riscv@nongnu.org; Tue, 19 Mar 2019 08:54:46 -0400
+Received: from mail-pf1-x42c.google.com ([2607:f8b0:4864:20::42c]:46312)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1h6EGW-0005C0-Tn
-	for qemu-riscv@nongnu.org; Tue, 19 Mar 2019 08:54:49 -0400
-Received: by mail-pg1-x544.google.com with SMTP id h8so13785364pgp.6
-	for <qemu-riscv@nongnu.org>; Tue, 19 Mar 2019 05:54:48 -0700 (PDT)
+	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1h6EGT-00052B-L7
+	for qemu-riscv@nongnu.org; Tue, 19 Mar 2019 08:54:45 -0400
+Received: by mail-pf1-x42c.google.com with SMTP id s23so13603720pfe.13
+	for <qemu-riscv@nongnu.org>; Tue, 19 Mar 2019 05:54:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
 	h=subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding:cc:from:to;
-	bh=wWQTBWqlrfhzLmAcnqszBMaQHtgZX/43qgD2vd7QMo4=;
-	b=mcydAMWWLkb6CRL1FapYP02au1d0tIh8KQoXRxYU92dsfvOt90afURmM976Su+ITk6
-	PqCJHRfgzcnXkdD8zQkZJuFf2RLXQMbJCOScBW7LBvIHGBRt0jgTblJh69aTnwKTIu59
-	WZrmGanjWk7nY/jEQHJnFdiIRnMg65lKZiVrBuBxiLiwbhc623WizoC5TtbFnVLAfukg
-	pneOZ+4iMxH/56ldFwJL8vRgn/533Nn4uFeRe+9gOZw6rnN5iuUVmPYH0HWLaDYPWVnn
-	AlWpvxl9bNfSbDMMN8bSdltJrwysfY24fnzZyKw89m1adQdiroSY66ntCy6PiBsqy0d7
-	jFZw==
+	bh=ktAf58N8r7P+0jH0YNQ8MB1Y2sxNcEFpO/9V6VhkFxA=;
+	b=UgRc+4ld/uBvlqJXt7SovMLvEUXEdy4+fn73BiyTR58gcFbgsieKZgcEbtxeFMEe7e
+	AaxW1dcH6Px2oIOoRH9jd1xd0+QWDOFrmUzyKrvBC01Tv0kMbCRDWnDptZj8GhPQ7BPN
+	Qx2tJvApMDM0Jfb1xLUJ6zeaTXNYDb/5PeJu6c96wHbkdW4+05J1ykTJhTb8CxvhcF0S
+	f2A08TeGoL5n4LQxdyl8MEjAIHxnnLv6qTolz4WW1ZpdmrRKWpGrxTbdrV6v0ZTmJVI8
+	5BHCyf64YKYF6p2cf3Vijo3xB/nI0Ux2NsUGkqHcqEG2KFQAm+oJpRCZZe8i4N1cf9IM
+	cOLg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding:cc:from:to;
-	bh=wWQTBWqlrfhzLmAcnqszBMaQHtgZX/43qgD2vd7QMo4=;
-	b=nfdCUUlkbI3dARrzRQ55UwmNaCqkuNnxUnLPw65wbBTtzLSrLrl5okTC7OJYtskA6e
-	RCV51TCK910msnG614dPmFahOIQj5v2empy9m65tHjfo7/Z4Suvn8/n7Gpy0Sqwum0k1
-	y+sqv1LhdxvEuR2kHHnUmiT9jwXuIqrnRYB6BEkS1JrIvOzDTVjqn1U4vCtfd4m7WFaX
-	XvSM7j0ayEvfzXztUxkcQfPtszA1GOCoN3Hm+l19gvSYmeX+AT6RiJg/Q6T+JI0OWX2f
-	cDcjPkOVtjKnFH/JM96bUBrg7q60vLSSXp+WsnFVWprjdHuZGBY/YDEMrin4ENSDI8Sn
-	nZRQ==
-X-Gm-Message-State: APjAAAWHNMlXyRwR4+/z2Zs+AFQRaURCAZ+0u5C+g74sbATbU58m6Ljq
-	p1lzUP4ymtysbGxhsZyaQGheBfT+P6xEqF61
-X-Google-Smtp-Source: APXvYqxHW9izp2Ml6PiaiaPWstP4n7g0aN+cS3grJ31w2LAmCTMvwTXFIho6M7PM03c8G9FW9ecDNg==
-X-Received: by 2002:a17:902:ab8f:: with SMTP id
-	f15mr1923573plr.218.1553000087797; 
-	Tue, 19 Mar 2019 05:54:47 -0700 (PDT)
+	bh=ktAf58N8r7P+0jH0YNQ8MB1Y2sxNcEFpO/9V6VhkFxA=;
+	b=stnuc5ZFcoSs5ccfdUayTJaCEq6TN4bWn9sflCqfnqvm5dp3ub7V01vXNnLftFEt7S
+	h7q10Ryx7r8lpASgKZVX4HFuHVYlhZE+QEYvTnV97kgpFrceRne+JBZelqYCTvByoWZa
+	hFSBRUMtpCxO/JqQtsbKMj/SOKcM+v/Yb0Ccut4fYrN8DWPnT8PQdojFvwEIj2Q7Ozgk
+	siIOesFG1wIQ/oDY0eM/ZHKh/sw0JTmxmvPjifIioeCGxfbmWIo2L8BlgilqYv70nGGv
+	2jn+0JlVUNoRBRe8BeKTu8Rix8PNkHDF89MMK0AT/wnmVkWCaAheWxh73blbBl8gZ47k
+	CWJA==
+X-Gm-Message-State: APjAAAVZG6UOr4Nkf3zfFLRoAGvwuzxad2Gppah4vL7FCmqJLBRyJDLb
+	piK3vqNnpAw3cU1B3be/c5KzGPF5QWsqaSjl
+X-Google-Smtp-Source: APXvYqyaOE19iOlj2RWSF51uaGC6yQbhRAFsqKD9oiT4fI+d0FcyDFXovrzcAAF0Rt7JE98jV2C4GQ==
+X-Received: by 2002:a17:902:b217:: with SMTP id
+	t23mr1967594plr.184.1553000084436; 
+	Tue, 19 Mar 2019 05:54:44 -0700 (PDT)
 Received: from localhost
 	(2001-b011-7001-1cad-363a-ebbe-dac8-3f4c.dynamic-ip6.hinet.net.
 	[2001:b011:7001:1cad:363a:ebbe:dac8:3f4c])
 	by smtp.gmail.com with ESMTPSA id
-	h87sm32631792pfj.20.2019.03.19.05.54.46
+	y20sm12488179pfn.3.2019.03.19.05.54.43
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 19 Mar 2019 05:54:46 -0700 (PDT)
-Date: Tue, 19 Mar 2019 05:47:56 -0700
-Message-Id: <20190319124803.13826-13-palmer@sifive.com>
+	Tue, 19 Mar 2019 05:54:43 -0700 (PDT)
+Date: Tue, 19 Mar 2019 05:47:55 -0700
+Message-Id: <20190319124803.13826-12-palmer@sifive.com>
 X-Mailer: git-send-email 2.19.2
 In-Reply-To: <20190319124803.13826-1-palmer@sifive.com>
 References: <20190319124803.13826-1-palmer@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Cc: qemu-riscv@nongnu.org,       qemu-devel@nongnu.org,
-	Michael Clark <mjc@sifive.com>, Atish Patra <atishp04@gmail.com>,
-	Alistair Francis <Alistair.Francis@wdc.com>, 
-	Alistair Francis <alistair.francis@wdc.com>,
-	Palmer Dabbelt <palmer@sifive.com>
+	Kito Cheng <kito.cheng@gmail.com>, Palmer Dabbelt <palmer@sifive.com>, 
+	Sagar Karandikar <sagark@eecs.berkeley.edu>,
+	Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
+	Alistair Francis <Alistair.Francis@wdc.com>,
+	Michael Clark <mjc@sifive.com>, Alistair Francis <alistair.francis@wdc.com>
 From: Palmer Dabbelt <palmer@sifive.com>
 To: Peter Maydell <peter.maydell@linaro.org>
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::544
-Subject: [Qemu-riscv] [PULL 12/19] RISC-V: Change local interrupts from edge
- to level
+X-Received-From: 2607:f8b0:4864:20::42c
+Subject: [Qemu-riscv] [PULL 11/19] RISC-V: linux-user support for RVE ABI
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -78,59 +78,100 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Mar 2019 13:08:47 -0000
+X-List-Received-Date: Tue, 19 Mar 2019 13:08:51 -0000
 
-From: Michael Clark <mjc@sifive.com>
+From: Kito Cheng <kito.cheng@gmail.com>
 
-This effectively changes riscv_cpu_update_mip
-from edge to level. i.e. cpu_interrupt or
-cpu_reset_interrupt are called regardless of
-the current interrupt level.
+This change checks elf_flags for EF_RISCV_RVE and if
+present uses the RVE linux syscall ABI which uses t0
+for the syscall number instead of a7.
 
-Fixes WFI doesn't return when a IPI is issued:
+Warn and exit if a non-RVE ABI binary is run on a
+cpu with the RVE extension as it is incompatible.
 
-- https://github.com/riscv/riscv-qemu/issues/132
-
-To test:
-
-1) Apply RISC-V Linux CPU hotplug patch:
-
-- http://lists.infradead.org/pipermail/linux-riscv/2018-May/000603.html
-
-2) Enable CONFIG_CPU_HOTPLUG in linux .config
-
-3) Try to offline and online cpus:
-
-  echo 1 > /sys/devices/system/cpu/cpu2/online
-  echo 0 > /sys/devices/system/cpu/cpu2/online
-  echo 1 > /sys/devices/system/cpu/cpu2/online
-
-Reported-by: Atish Patra <atishp04@gmail.com>
-Cc: Atish Patra <atishp04@gmail.com>
+Cc: Palmer Dabbelt <palmer@sifive.com>
+Cc: Sagar Karandikar <sagark@eecs.berkeley.edu>
+Cc: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
 Cc: Alistair Francis <Alistair.Francis@wdc.com>
+Co-authored-by: Kito Cheng <kito.cheng@gmail.com>
+Co-authored-by: Michael Clark <mjc@sifive.com>
 Signed-off-by: Michael Clark <mjc@sifive.com>
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
 ---
- target/riscv/cpu_helper.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ linux-user/riscv/cpu_loop.c | 15 ++++++++++++++-
+ target/riscv/cpu.h          |  4 ++++
+ target/riscv/cpu_user.h     |  3 ++-
+ 3 files changed, 20 insertions(+), 2 deletions(-)
 
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 555756d40cfb..073bdcfe7410 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -95,9 +95,9 @@ uint32_t riscv_cpu_update_mip(RISCVCPU *cpu, uint32_t mask, uint32_t value)
-         cmp = atomic_cmpxchg(&env->mip, old, new);
-     } while (old != cmp);
+diff --git a/linux-user/riscv/cpu_loop.c b/linux-user/riscv/cpu_loop.c
+index 4cf3e9463240..a9bac4ca79d8 100644
+--- a/linux-user/riscv/cpu_loop.c
++++ b/linux-user/riscv/cpu_loop.c
+@@ -18,8 +18,10 @@
+  */
  
--    if (new && !old) {
-+    if (new) {
-         cpu_interrupt(CPU(cpu), CPU_INTERRUPT_HARD);
--    } else if (!new && old) {
-+    } else {
-         cpu_reset_interrupt(CPU(cpu), CPU_INTERRUPT_HARD);
-     }
+ #include "qemu/osdep.h"
++#include "qemu/error-report.h"
+ #include "qemu.h"
+ #include "cpu_loop-common.h"
++#include "elf.h"
  
+ void cpu_loop(CPURISCVState *env)
+ {
+@@ -53,7 +55,8 @@ void cpu_loop(CPURISCVState *env)
+                 ret = 0;
+             } else {
+                 ret = do_syscall(env,
+-                                 env->gpr[xA7],
++                                 env->gpr[(env->elf_flags & EF_RISCV_RVE)
++                                    ? xT0 : xA7],
+                                  env->gpr[xA0],
+                                  env->gpr[xA1],
+                                  env->gpr[xA2],
+@@ -113,6 +116,16 @@ void cpu_loop(CPURISCVState *env)
+ 
+ void target_cpu_copy_regs(CPUArchState *env, struct target_pt_regs *regs)
+ {
++    CPUState *cpu = ENV_GET_CPU(env);
++    TaskState *ts = cpu->opaque;
++    struct image_info *info = ts->info;
++
+     env->pc = regs->sepc;
+     env->gpr[xSP] = regs->sp;
++    env->elf_flags = info->elf_flags;
++
++    if ((env->misa & RVE) && !(env->elf_flags & EF_RISCV_RVE)) {
++        error_report("Incompatible ELF: RVE cpu requires RVE ABI binary");
++        exit(EXIT_FAILURE);
++    }
+ }
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index df43a0898d65..20bce8742ee9 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -123,6 +123,10 @@ struct CPURISCVState {
+ 
+     uint32_t features;
+ 
++#ifdef CONFIG_USER_ONLY
++    uint32_t elf_flags;
++#endif
++
+ #ifndef CONFIG_USER_ONLY
+     target_ulong priv;
+     target_ulong resetvec;
+diff --git a/target/riscv/cpu_user.h b/target/riscv/cpu_user.h
+index c2199610abff..52d380aa98c2 100644
+--- a/target/riscv/cpu_user.h
++++ b/target/riscv/cpu_user.h
+@@ -10,4 +10,5 @@
+ #define xA4 14
+ #define xA5 15
+ #define xA6 16
+-#define xA7 17  /* syscall number goes here */
++#define xA7 17  /* syscall number for RVI ABI */
++#define xT0 5   /* syscall number for RVE ABI */
 -- 
 2.19.2
 
