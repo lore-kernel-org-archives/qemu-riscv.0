@@ -1,47 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1h6wkd-0007Gf-Sc
-	for mharc-qemu-riscv@gnu.org; Thu, 21 Mar 2019 08:24:51 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:39583)
+	id 1h6zBa-0004dr-Oc
+	for mharc-qemu-riscv@gnu.org; Thu, 21 Mar 2019 11:00:50 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:46969)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <abologna@redhat.com>) id 1h6wkZ-0006fI-GL
-	for qemu-riscv@nongnu.org; Thu, 21 Mar 2019 08:24:48 -0400
+	(envelope-from <palmer@sifive.com>) id 1h6zBX-0004bu-Hv
+	for qemu-riscv@nongnu.org; Thu, 21 Mar 2019 11:00:48 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <abologna@redhat.com>) id 1h6wWG-0001sj-2p
-	for qemu-riscv@nongnu.org; Thu, 21 Mar 2019 08:10:01 -0400
-Received: from mx1.redhat.com ([209.132.183.28]:35254)
-	by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.71) (envelope-from <abologna@redhat.com>)
-	id 1h6wRB-0005Qt-4a; Thu, 21 Mar 2019 08:04:46 -0400
-Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
-	[10.5.11.13])
-	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id E4D773082B1F;
-	Thu, 21 Mar 2019 11:56:40 +0000 (UTC)
-Received: from kinshicho (unknown [10.43.2.212])
-	by smtp.corp.redhat.com (Postfix) with ESMTPS id 4331160857;
-	Thu, 21 Mar 2019 11:56:39 +0000 (UTC)
-Message-ID: <bf5af2218f0b0e7deefd088ab8319851bed3c87c.camel@redhat.com>
-From: Andrea Bolognani <abologna@redhat.com>
-To: Palmer Dabbelt <palmer@sifive.com>, pbonzini@redhat.com
-Cc: qemu-riscv@nongnu.org, David Abdurachmanov
-	<david.abdurachmanov@gmail.com>, rjones@redhat.com, qemu-devel@nongnu.org, 
-	Alistair Francis <Alistair.Francis@wdc.com>, alistair23@gmail.com
-Date: Thu, 21 Mar 2019 12:56:37 +0100
-In-Reply-To: <mhng-7fbbd7d2-fbc9-4c3a-8c1c-4e66c25d54dd@palmer-si-x1c4>
-References: <mhng-7fbbd7d2-fbc9-4c3a-8c1c-4e66c25d54dd@palmer-si-x1c4>
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.30.5 (3.30.5-1.fc29) 
+	(envelope-from <palmer@sifive.com>) id 1h6zBV-0002vR-9b
+	for qemu-riscv@nongnu.org; Thu, 21 Mar 2019 11:00:47 -0400
+Received: from mail-pg1-x52a.google.com ([2607:f8b0:4864:20::52a]:36298)
+	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1h6zBU-0002sM-Ba
+	for qemu-riscv@nongnu.org; Thu, 21 Mar 2019 11:00:44 -0400
+Received: by mail-pg1-x52a.google.com with SMTP id r124so4387868pgr.3
+	for <qemu-riscv@nongnu.org>; Thu, 21 Mar 2019 08:00:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+	h=subject:date:message-id:mime-version:content-transfer-encoding:cc
+	:from:to; bh=JORoJzYgQFH/7WNMb1acrFIMBBGdNJO3f8a7htCYba0=;
+	b=SnnKAfMN6GX24WcIlk7TgcjH+TMnChzRlFFZXOcUTQ1KmNAFqls3ccIw4LqSw/3DUz
+	Zv8LqczXFmsmn4q7D5qCjn8YP/Lyg02ek8qh3FSIh+13qIf1H6xnuzpqFeM3ziIG6BQ2
+	XJdzYHCKNMryAziivuM+4lxLK6RS7NEAChohiGgPKLSnuaSgRDOBHog5iAy92JHoXn5v
+	uuteJzrhlVW3LnkJqaWQ8WC9KpVRkl91prAa7VPnGVoQfvvNcbicymfEF9a2hmD30MNB
+	tbXEuF32iEJ90tg5Tnf3AORRXXyXR7JKhFPAPyY8bOiZPOBUQUznOgn8kVpL45R4VZY0
+	jrWw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:subject:date:message-id:mime-version
+	:content-transfer-encoding:cc:from:to;
+	bh=JORoJzYgQFH/7WNMb1acrFIMBBGdNJO3f8a7htCYba0=;
+	b=TVjcrbCJtRO46LayYRiIS/U3uMMkpBP20wsdC+OhvTuDA3/kvnjoPZluVGaGbwRqZe
+	UZV/ZyJVDkLZbCD+9eFA4z78cKgNR3dj4sIcmIwIVC1cyPL4eSbTU7sxkocQx/sOV5Tn
+	06bC3xIbTG36Q70OzfUR2g2n82fv+8G6HvphUxJ+k+QYbx+eLU3cUePmxdSSjKP8sDKZ
+	iHe9ZX66PYtJE+Jik5AbOGh2FUctQbLvDZ9xufNdPNp9elyNdF8FHVRDPohh0n9b4O4/
+	AVzQxnVX6hDWyZ7JnuC3BuY9YvSaSd4jEwhD4/M7KRIqGM500Gw4FBgb6nXusXE+brzG
+	3V8A==
+X-Gm-Message-State: APjAAAVOC2bMf0p3CAIg5+WnlpHswbS3O0IRF4+bstggnroBHuBFixFF
+	Qz1FKAk4i3MprGSDLZUtX18E1ji1cwBbH22N
+X-Google-Smtp-Source: APXvYqwfNHjNPG4AGfyDOuJU5cNhzZO5DU3mQc48Y4CO+DUILbKS9fdIKtsy3b5eX8RSA4HZ4JySag==
+X-Received: by 2002:aa7:8251:: with SMTP id e17mr3766682pfn.96.1553180440752; 
+	Thu, 21 Mar 2019 08:00:40 -0700 (PDT)
+Received: from localhost (60-250-203-158.HINET-IP.hinet.net. [60.250.203.158])
+	by smtp.gmail.com with ESMTPSA id
+	m17sm8304368pff.170.2019.03.21.08.00.38
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 21 Mar 2019 08:00:39 -0700 (PDT)
+Date: Thu, 21 Mar 2019 07:59:20 -0700
+Message-Id: <20190321145920.20897-1-palmer@sifive.com>
+X-Mailer: git-send-email 2.19.2
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
-	(mx1.redhat.com [10.5.110.45]);
-	Thu, 21 Mar 2019 11:56:41 +0000 (UTC)
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
-X-Received-From: 209.132.183.28
-Subject: Re: [Qemu-riscv] [PATCH v1 1/1] riscv: plic: Set msi_nonbroken as
- true
+Content-Transfer-Encoding: 8bit
+Cc: qemu-devel@nongnu.org, Kito Cheng <kito.cheng@gmail.com>,
+	Palmer Dabbelt <palmer@sifive.com>
+From: Palmer Dabbelt <palmer@sifive.com>
+To: qemu-riscv@nongnu.org
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+	recognized.
+X-Received-From: 2607:f8b0:4864:20::52a
+Subject: [Qemu-riscv] [PATCH] target/riscv: Zero extend the inputs of divuw
+ and remuw
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -53,31 +69,107 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Mar 2019 12:24:48 -0000
+X-List-Received-Date: Thu, 21 Mar 2019 15:00:49 -0000
 
-On Mon, 2019-03-18 at 02:31 -0700, Palmer Dabbelt wrote:
-> On Mon, 18 Mar 2019 01:39:46 PDT (-0700), pbonzini@redhat.com wrote:
-> > On 15/03/19 21:05, Alistair Francis wrote:
-> > > Set msi_nonbroken as true for the PLIC.
-> > > 
-> > > According to the comment located here:
-> > > https://git.qemu.org/?p=qemu.git;a=blob;f=hw/pci/msi.c;h=47d2b0f33c664533b8dbd5cb17faa8e6a01afe1f;hb=HEAD#l38
-> > > the msi_nonbroken variable should be set to true even if they don't
-> > > support MSI. In this case that is what we are doing as we don't support
-> > > MSI.
-> > 
-> > I can queue this patch, and add the "select MSI" to CONFIG_SIFIVE.
-> 
-> Works for me.  Thanks!
+While running the GCC test suite against 4.0.0-rc0, Kito found a
+regression introduced by the decodetree conversion that caused divuw and
+remuw to sign-extend their inputs.  The ISA manual says they are
+supposed to be zero extended:
 
-Just so we're on the same page, are you targeting this at 4.0.0?
-If it gets merged in the next few days I can probably get the
-corresponding libvirt patches in before our own freeze starts.
+    DIVW and DIVUW instructions are only valid for RV64, and divide the
+    lower 32 bits of rs1 by the lower 32 bits of rs2, treating them as
+    signed and unsigned integers respectively, placing the 32-bit
+    quotient in rd, sign-extended to 64 bits. REMW and REMUW
+    instructions are only valid for RV64, and provide the corresponding
+    signed and unsigned remainder operations respectively.  Both REMW
+    and REMUW always sign-extend the 32-bit result to 64 bits, including
+    on a divide by zero.
 
-It would be great if we could make it so guests created with
-QEMU 4.0.0 + libvirt 5.2.0 get PCI by default :)
+Here's Kito's reduced test case from the GCC test suite
 
+    unsigned calc_mp(unsigned mod)
+    {
+         unsigned a,b,c;
+         c=-1;
+         a=c/mod;
+         b=0-a*mod;
+         if (b > mod) { a += 1; b-=mod; }
+         return b;
+    }
+
+    int main(int argc, char *argv[])
+    {
+         unsigned x = 1234;
+         unsigned y = calc_mp(x);
+
+         if ((sizeof (y) == 4 && y != 680)
+      || (sizeof (y) == 2 && y != 134))
+    abort ();
+         exit (0);
+    }
+
+I haven't done any other testing on this, but it does fix the test case.
+
+Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
+---
+ target/riscv/insn_trans/trans_rvm.inc.c |  4 ++--
+ target/riscv/translate.c                | 21 +++++++++++++++++++++
+ 2 files changed, 23 insertions(+), 2 deletions(-)
+
+diff --git a/target/riscv/insn_trans/trans_rvm.inc.c b/target/riscv/insn_trans/trans_rvm.inc.c
+index 204af225f8f3..47cd6edc72a1 100644
+--- a/target/riscv/insn_trans/trans_rvm.inc.c
++++ b/target/riscv/insn_trans/trans_rvm.inc.c
+@@ -103,7 +103,7 @@ static bool trans_divw(DisasContext *ctx, arg_divw *a)
+ static bool trans_divuw(DisasContext *ctx, arg_divuw *a)
+ {
+     REQUIRE_EXT(ctx, RVM);
+-    return gen_arith_div_w(ctx, a, &gen_divu);
++    return gen_arith_div_uw(ctx, a, &gen_divu);
+ }
+ 
+ static bool trans_remw(DisasContext *ctx, arg_remw *a)
+@@ -115,6 +115,6 @@ static bool trans_remw(DisasContext *ctx, arg_remw *a)
+ static bool trans_remuw(DisasContext *ctx, arg_remuw *a)
+ {
+     REQUIRE_EXT(ctx, RVM);
+-    return gen_arith_div_w(ctx, a, &gen_remu);
++    return gen_arith_div_uw(ctx, a, &gen_remu);
+ }
+ #endif
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index 049fa65c6611..dd763647ea55 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -600,6 +600,27 @@ static bool gen_arith_div_w(DisasContext *ctx, arg_r *a,
+     return true;
+ }
+ 
++static bool gen_arith_div_uw(DisasContext *ctx, arg_r *a,
++                            void(*func)(TCGv, TCGv, TCGv))
++{
++    TCGv source1, source2;
++    source1 = tcg_temp_new();
++    source2 = tcg_temp_new();
++
++    gen_get_gpr(source1, a->rs1);
++    gen_get_gpr(source2, a->rs2);
++    tcg_gen_ext32u_tl(source1, source1);
++    tcg_gen_ext32u_tl(source2, source2);
++
++    (*func)(source1, source1, source2);
++
++    tcg_gen_ext32s_tl(source1, source1);
++    gen_set_gpr(a->rd, source1);
++    tcg_temp_free(source1);
++    tcg_temp_free(source2);
++    return true;
++}
++
+ #endif
+ 
+ static bool gen_arith(DisasContext *ctx, arg_r *a,
 -- 
-Andrea Bolognani / Red Hat / Virtualization
+2.19.2
 
 
