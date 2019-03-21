@@ -1,63 +1,104 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1h6itp-0001hC-LB
-	for mharc-qemu-riscv@gnu.org; Wed, 20 Mar 2019 17:37:25 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:56362)
+	id 1h6ly8-0000cS-Tg
+	for mharc-qemu-riscv@gnu.org; Wed, 20 Mar 2019 20:54:04 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:56841)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1h6itn-0001fb-Tq
-	for qemu-riscv@nongnu.org; Wed, 20 Mar 2019 17:37:24 -0400
+	(envelope-from <prvs=97641c120=Alistair.Francis@wdc.com>)
+	id 1h6ly7-0000YW-0Z
+	for qemu-riscv@nongnu.org; Wed, 20 Mar 2019 20:54:03 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1h6itm-0005Xi-TW
-	for qemu-riscv@nongnu.org; Wed, 20 Mar 2019 17:37:23 -0400
-Received: from mail-lj1-x242.google.com ([2a00:1450:4864:20::242]:33740)
-	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <alistair23@gmail.com>)
-	id 1h6itk-0005KP-3q; Wed, 20 Mar 2019 17:37:20 -0400
-Received: by mail-lj1-x242.google.com with SMTP id f23so3631315ljc.0;
-	Wed, 20 Mar 2019 14:37:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=2y7zwrleDwq6hgLNASuudGjU1EI2pvF1/JU5XeUFkUc=;
-	b=hxaNXjdKSJTt+U13h7elrVb02bEubu83gXqLMgGc8FCtE2tksTslgnN08J7KHux+fB
-	AkRoH+/HFAK04J0QSGh2tSOvaRfyeTYEMeZ5Zt+ySpLaYuE1ZEDZ4nz8RtKsPXXA/vxw
-	/gFQqM7TmxKPq6RsbWoT5HbcHjPKanoYsgOoQkM1d9DAQErp98Dy/AnDd2V4Mc+YL89x
-	ZvmzU/fNkGBk0vIGYhQn+VQvGebsH3jym63fEvxAdO78UQauuww8yrdNAHfx4b3yyr2I
-	R0FfHXHAyHPmS+JZtAeYDtMBTZnJEiFxV4O0v1oHvSrx/EA+ChaNNZ7FxPwnIZ04s1pE
-	ecHw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=2y7zwrleDwq6hgLNASuudGjU1EI2pvF1/JU5XeUFkUc=;
-	b=Z13bLPFq75ZwHf7ibCR75D/Az7yBjtIbrJmf1Qh3ps4hYu9+akOFshGAWBSffuO9gM
-	taBY4tQ75LcS5M5kVK0ONBwDVTPgM712loVjNIAwO155hAYI/gx5m3vGYfomxgJzj8T9
-	rdFKO6rUw0Au3duSjWIIdPJKkfwWiG4p4Usif7Hf7hIrCrtjH8r+Fh/SPCtaYyxmHYrZ
-	Ts6vzcoTvbyzw0eejSPLEZRoP3ssju8osS3jFkwnH0M+3NFFQly7RKO2z+xkkMMXFDf2
-	mVMn/tWnwDByP6ca6Wp9Ue4IFEOEnuQCvTXuIiptezy+9nnU/PlOeHyBaFsNSXnM1/vn
-	NPsA==
-X-Gm-Message-State: APjAAAUZAn58cPMVdlZjVhpxJZk7sZAp6F2SRDGOUAgObK+3jgnmNJSS
-	83Tx68OJuZ6eVeMJYPZhLBAeE2GqJ8SxABWp5E8=
-X-Google-Smtp-Source: APXvYqxcYsJMejk7Ajuls+TrpXtgAMvc2OFSY53hfrljLjJwum46aTAFO9dH+yuMOMUDXiBWiugcCsd1XVRqVtp4Fwo=
-X-Received: by 2002:a2e:6350:: with SMTP id x77mr132357ljb.191.1553117835009; 
-	Wed, 20 Mar 2019 14:37:15 -0700 (PDT)
+	(envelope-from <prvs=97641c120=Alistair.Francis@wdc.com>)
+	id 1h6lqx-0005KF-27
+	for qemu-riscv@nongnu.org; Wed, 20 Mar 2019 20:46:39 -0400
+Received: from esa4.hgst.iphmx.com ([216.71.154.42]:28017)
+	by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.71) (envelope-from <prvs=97641c120=Alistair.Francis@wdc.com>)
+	id 1h6lqv-0005CB-IG; Wed, 20 Mar 2019 20:46:37 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+	d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+	t=1553129197; x=1584665197;
+	h=from:to:cc:subject:date:message-id:references:
+	in-reply-to:content-transfer-encoding:mime-version;
+	bh=gPBRQwVjNkDPus3pZoYDL4t7/qa8M4Nn+/kT4rhTTiI=;
+	b=EdDHNmMlMweGVPV8mz+rlUmRWAY/pcoiTlWS8s7Eyez43TCvh8G4Sw+0
+	mf3Q6hlisFSjAPaKR6ADtnfAbRLEJ3ILPuJSX59zyO9RqTTM13PYZ7EHS
+	QEEL04eHdtpp54QhYZOj/ZoqwgUKO0zQgheuw2zcBssTrAyni+s6qcX4r
+	NSbJfgV1w0isEZRS/XtUv7OrV80QF6STmTRxQ4Z77XYYxZ8+mUxA/Epaz
+	hxat889Gg7mlFcJ6HNjR2OqoyS5YCgTaDbA/SfUru2cATuNp5upVtoYYl
+	sZxYkiusY4dk8YIP1F/pTUjVcsYSSP8HstMnX2UDZNy7wahKd/sPHjIJ6 Q==;
+X-IronPort-AV: E=Sophos;i="5.60,250,1549900800"; d="scan'208";a="103877779"
+Received: from mail-cys01nam02lp2057.outbound.protection.outlook.com (HELO
+	NAM02-CY1-obe.outbound.protection.outlook.com) ([104.47.37.57])
+	by ob1.hgst.iphmx.com with ESMTP; 21 Mar 2019 08:46:36 +0800
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=sharedspace.onmicrosoft.com; s=selector1-wdc-com;
+	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+	bh=gPBRQwVjNkDPus3pZoYDL4t7/qa8M4Nn+/kT4rhTTiI=;
+	b=GmR4fPrV4SmiIDEKvsZJbgFsydNKKLG+EkjwAvG5rz0JrdmE01d9pLuYWtDpNTdWpbZAib+LJWMjWD5+4AWaeRMqokJo+j80MA6bKWk+akKliIxHjX4buH5kS6Gfu7RKTozBKecbg/IuuPKn7rc3IgDCZMMERJrjOWHtpCrAxNM=
+Received: from BYAPR04MB4901.namprd04.prod.outlook.com (52.135.232.206) by
+	BYAPR04MB4741.namprd04.prod.outlook.com (52.135.240.32) with Microsoft
+	SMTP
+	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+	15.20.1709.16; Thu, 21 Mar 2019 00:46:35 +0000
+Received: from BYAPR04MB4901.namprd04.prod.outlook.com
+	([fe80::44e8:bd21:17b:348c]) by BYAPR04MB4901.namprd04.prod.outlook.com
+	([fe80::44e8:bd21:17b:348c%4]) with mapi id 15.20.1730.013;
+	Thu, 21 Mar 2019 00:46:35 +0000
+From: Alistair Francis <Alistair.Francis@wdc.com>
+To: "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, "qemu-riscv@nongnu.org"
+	<qemu-riscv@nongnu.org>
+CC: "palmer@sifive.com" <palmer@sifive.com>, Alistair Francis
+	<Alistair.Francis@wdc.com>, "alistair23@gmail.com" <alistair23@gmail.com>
+Thread-Topic: [PATCH for 4.0 v1 4/5] riscv: virt: Fix PLIC priority base offset
+Thread-Index: AQHU33+IY/7KbTWY7EKvJCKEuWdgPQ==
+Date: Thu, 21 Mar 2019 00:46:35 +0000
+Message-ID: <a21bce52e1b1a4592b1b429165fd3913e86cb128.1553129005.git.alistair.francis@wdc.com>
+References: <cover.1553129005.git.alistair.francis@wdc.com>
+In-Reply-To: <cover.1553129005.git.alistair.francis@wdc.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-mailer: git-send-email 2.21.0
+x-clientproxiedby: BYAPR07CA0102.namprd07.prod.outlook.com
+	(2603:10b6:a03:12b::43) To BYAPR04MB4901.namprd04.prod.outlook.com
+	(2603:10b6:a03:4f::14)
+authentication-results: spf=none (sender IP is )
+	smtp.mailfrom=Alistair.Francis@wdc.com; 
+x-ms-exchange-messagesentrepresentingtype: 1
+x-originating-ip: [199.255.44.250]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: 33ef5a66-8281-4ad5-1dd6-08d6ad96ab2a
+x-ms-office365-filtering-ht: Tenant
+x-microsoft-antispam: BCL:0; PCL:0;
+	RULEID:(2390118)(7020095)(4652040)(8989299)(5600127)(711020)(4605104)(4618075)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(2017052603328)(7153060)(7193020);
+	SRVR:BYAPR04MB4741; 
+x-ms-traffictypediagnostic: BYAPR04MB4741:
+wdcipoutbound: EOP-TRUE
+x-microsoft-antispam-prvs: <BYAPR04MB4741C1CEE929EECC288D31DF90420@BYAPR04MB4741.namprd04.prod.outlook.com>
+x-forefront-prvs: 0983EAD6B2
+x-forefront-antispam-report: SFV:NSPM;
+	SFS:(10019020)(39860400002)(346002)(396003)(136003)(366004)(376002)(199004)(189003)(71190400001)(8676002)(446003)(102836004)(97736004)(186003)(52116002)(118296001)(81166006)(6436002)(3846002)(86362001)(2616005)(81156014)(478600001)(6512007)(68736007)(476003)(11346002)(2906002)(66066001)(4326008)(6116002)(99286004)(14444005)(106356001)(26005)(50226002)(110136005)(53936002)(71200400001)(7736002)(44832011)(6506007)(54906003)(4744005)(72206003)(105586002)(76176011)(2501003)(386003)(14454004)(8936002)(25786009)(5660300002)(305945005)(36756003)(6486002)(486006)(316002)(256004);
+	DIR:OUT; SFP:1102; SCL:1; SRVR:BYAPR04MB4741;
+	H:BYAPR04MB4901.namprd04.prod.outlook.com; FPR:; SPF:None;
+	LANG:en; PTR:InfoNoRecords; A:1; MX:1; 
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam-message-info: ApVpAXj1NgX4Vu2p54UTUij5H0bAgaRlEttzP3Q69HbJ1Ylb7Cu9M+3BRzniJYnFuyXXka2hqb6KN/BVQYdGqm5dEbDHOZfbomXk9qidOJwWpUUVWK3X0vyDiZdi316ZI+wl+U/uiZ8xke0nqfMQSuEhwM+uGglBM46j+xEOi5b1gkXd6bHwTqpfx+Rt6hzsarJhxi68LbRyR3MRQfZMMRTvw2wm+l9BhRFJpPgD3Egs5hQNSvEig0QNUasBdnPKeYMm5feSjeno1LfDbKcxlZJ0sQxe1QYI1GzMKx6+KVdbb67pJuPBJuXicNhb1sGiKlOELkMO+KpPaKN55jPzaTfVjaYrdx2TFRcsmSDsdMrHLadu820093IGuD/hhXuau0edEtC0xXPI3/Ejf+IuNJlQvdNhakPBPJSdIxhJrTo=
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-References: <cover.1553019560.git.alistair.francis@wdc.com>
-	<073a79909f5ec317747ff8330744e6d7dabec717.1553019560.git.alistair.francis@wdc.com>
-	<CAFEAcA-x0r6a7uyR8KDBp2qv7KwRZu3dKxK73-XN7aAzgz=e_A@mail.gmail.com>
-In-Reply-To: <CAFEAcA-x0r6a7uyR8KDBp2qv7KwRZu3dKxK73-XN7aAzgz=e_A@mail.gmail.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 20 Mar 2019 14:35:56 -0700
-Message-ID: <CAKmqyKP6_Gv2jFG6YteTuqNU1YKgYho=-2rxugGqLjXzhfm8Bw@mail.gmail.com>
-To: Peter Maydell <peter.maydell@linaro.org>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
-	"qemu-devel@nongnu.org" <qemu-devel@nongnu.org>,
-	"qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>, 
-	"palmer@sifive.com" <palmer@sifive.com>
-Content-Type: text/plain; charset="UTF-8"
+X-OriginatorOrg: wdc.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 33ef5a66-8281-4ad5-1dd6-08d6ad96ab2a
+X-MS-Exchange-CrossTenant-originalarrivaltime: 21 Mar 2019 00:46:35.1079 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR04MB4741
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2a00:1450:4864:20::242
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH for 4.1 v1 4/6] target/riscvL
- Remove the unused any CPU
+X-Received-From: 216.71.154.42
+Subject: [Qemu-riscv] [PATCH for 4.0 v1 4/5] riscv: virt: Fix PLIC priority
+ base offset
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -69,29 +110,30 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Mar 2019 21:37:24 -0000
+X-List-Received-Date: Thu, 21 Mar 2019 00:54:04 -0000
 
-On Tue, Mar 19, 2019 at 12:10 PM Peter Maydell <peter.maydell@linaro.org> wrote:
->
-> On Tue, 19 Mar 2019 at 18:24, Alistair Francis <Alistair.Francis@wdc.com> wrote:
-> >
-> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> > ---
-> >  target/riscv/cpu.c | 10 ----------
-> >  target/riscv/cpu.h |  1 -
-> >  2 files changed, 11 deletions(-)
->
-> Won't this break linux-user? cpu_get_model() in linux-user/riscv/target_elf.h
-> specifies the "any" CPU as the default to use if the user doesn't
-> pass one on the command line. (In general you want the default for
-> linux-user to be an "as many features as possible enabled" CPU.)
+Update the virt offsets based on the newly updated SiFive U and SiFive E
+offsets.
 
-I don't have any linux-user tests setup at the moment so I'm not sure.
-I'll add one and update this accordingly.
+Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+---
+ include/hw/riscv/virt.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Alistair
+diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
+index f12deaebd6..568764b570 100644
+--- a/include/hw/riscv/virt.h
++++ b/include/hw/riscv/virt.h
+@@ -59,7 +59,7 @@ enum {
+ #define VIRT_PLIC_HART_CONFIG "MS"
+ #define VIRT_PLIC_NUM_SOURCES 127
+ #define VIRT_PLIC_NUM_PRIORITIES 7
+-#define VIRT_PLIC_PRIORITY_BASE 0x0
++#define VIRT_PLIC_PRIORITY_BASE 0x04
+ #define VIRT_PLIC_PENDING_BASE 0x1000
+ #define VIRT_PLIC_ENABLE_BASE 0x2000
+ #define VIRT_PLIC_ENABLE_STRIDE 0x80
+--=20
+2.21.0
 
->
-> thanks
-> -- PMM
 
