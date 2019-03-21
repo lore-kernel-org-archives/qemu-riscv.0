@@ -1,58 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1h6lyT-0000yw-QG
-	for mharc-qemu-riscv@gnu.org; Wed, 20 Mar 2019 20:54:25 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:56854)
+	id 1h6lyW-00011q-Cy
+	for mharc-qemu-riscv@gnu.org; Wed, 20 Mar 2019 20:54:28 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:56841)
 	by lists.gnu.org with esmtp (Exim 4.71)
 	(envelope-from <prvs=97641c120=Alistair.Francis@wdc.com>)
-	id 1h6lyP-0000d0-M4
-	for qemu-riscv@nongnu.org; Wed, 20 Mar 2019 20:54:22 -0400
+	id 1h6lyS-0000YW-Mj
+	for qemu-riscv@nongnu.org; Wed, 20 Mar 2019 20:54:25 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
 	(envelope-from <prvs=97641c120=Alistair.Francis@wdc.com>)
-	id 1h6lr6-0005ma-P7
-	for qemu-riscv@nongnu.org; Wed, 20 Mar 2019 20:46:49 -0400
-Received: from esa2.hgst.iphmx.com ([68.232.143.124]:5518)
+	id 1h6lqd-000497-MA
+	for qemu-riscv@nongnu.org; Wed, 20 Mar 2019 20:46:20 -0400
+Received: from esa3.hgst.iphmx.com ([216.71.153.141]:17510)
 	by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.71) (envelope-from <prvs=97641c120=Alistair.Francis@wdc.com>)
-	id 1h6lr5-0005eH-Az; Wed, 20 Mar 2019 20:46:47 -0400
+	id 1h6lqY-0003j6-PC; Wed, 20 Mar 2019 20:46:15 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
 	d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
-	t=1553129212; x=1584665212;
+	t=1553129175; x=1584665175;
 	h=from:to:cc:subject:date:message-id:references:
 	in-reply-to:content-transfer-encoding:mime-version;
-	bh=+McbQ3u7pSiVvq1X4UzDG/xhIHOJBUtngx28tuT8kck=;
-	b=LkzIouy1NnUzE6QdrERCOPG6z9skY00/N/4edn6777umcPqSbblJ1evU
-	iKbrsuJwMO3WHhWNY/gwRfRhaLtplDs+TM6T3tgaVTTTTLmE1SJQYXKRT
-	qmNw5JE477zA6hITbAXLEz6LImpBPXoH1KvdeGMhxFErfPFmAA2pveb36
-	Q/OuwxM5YP2K9RiCi+MyQwZ2i6awi+WXDkX7HHuDg/F6C4894pvYxwnHy
-	ZkxA/cvjwzSzGMocsnESMpqaPy1lH5C+4NtGzdBB9TiE9NrpELkqd8Qja
-	75BXyujrYJu8PzCXmMt2Awncqbsx69PjfZtAy7mrm/5fyh9evsPS5gNsX w==;
-X-IronPort-AV: E=Sophos;i="5.60,250,1549900800"; d="scan'208";a="202570803"
-Received: from mail-cys01nam02lp2051.outbound.protection.outlook.com (HELO
-	NAM02-CY1-obe.outbound.protection.outlook.com) ([104.47.37.51])
-	by ob1.hgst.iphmx.com with ESMTP; 21 Mar 2019 08:46:49 +0800
+	bh=2Kyl+NJvYnpLetRWzm2H6cAvR05eeL9/X9h9V+FVJ9s=;
+	b=S6yJXBcX8EM6NPadY6XsbOJPix20cjI+5tsu3HyI0BOipj8PEZWIGbq4
+	kl8IRg28X89mJQl1P1KUI3I9QC5VsJTUMQgzcuZs6Rq3TytPR/i+hE8DH
+	MrJaLYVWMVqYS+vGT+Hi+ir8NWBPRK6QM74rvm+lro5O9sv6TdIRgf9Aj
+	rivlIBt3FGLFhJwM31bcVWo7C0xPliQBkb5ubdKg4PEygWb/4lLC4ORmA
+	k0UO2KY7P0haWVd6+T8lXMzojxbRBID9B5Xhq0ybJpbm3QINFix/DkbG/
+	ej4NyaceBSvPXVKWXcldWunN4JMfF9NQt3FOPG541kPlbxXCOl+Ft2fvw w==;
+X-IronPort-AV: E=Sophos;i="5.60,250,1549900800"; d="scan'208";a="108934105"
+Received: from mail-bn3nam01lp2050.outbound.protection.outlook.com (HELO
+	NAM01-BN3-obe.outbound.protection.outlook.com) ([104.47.33.50])
+	by ob1.hgst.iphmx.com with ESMTP; 21 Mar 2019 08:46:11 +0800
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=sharedspace.onmicrosoft.com; s=selector1-wdc-com;
 	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=RZyti4Y/QB3Gi/MVqDSxOapl/D5ax08xUY2Lb+FYTT0=;
-	b=ecFqzks+Y3L36vsejh555M4z17BBs7duyVWRDEiYwLc67TaoHoV2RZFNM5aPtYAm3C+qB1fACy0Y1X/vifgl3rC7Koqe6xgvT6U9koFYuQ4VEKjS92gqWFYV4LryRnz2zWpYTgyVQUh/kTlFNX3EXDtcY0WKvHh6I/VUotTcCI4=
+	bh=OSOS5zTA13rAKjLi3hbUDeJM0nut8tqX6afoG4WoJCA=;
+	b=EioBBjoJm/rh5fCiRgF/ZvE6x3JZKSxtSGudvaSsLjz6Uwt2B34WGyw5O7AeIFvY+0wKb9hsHwxTb38ggcXXZqnAogMuXPDc+h2DOw0VGdMf3E3GcSFy7TXiL6aMqbI+UIcSTZrl4YJntbaUnAN2OuvXLvhUxSzr36Z5tbUovBA=
 Received: from BYAPR04MB4901.namprd04.prod.outlook.com (52.135.232.206) by
 	BYAPR04MB4741.namprd04.prod.outlook.com (52.135.240.32) with Microsoft
 	SMTP
 	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
-	15.20.1709.16; Thu, 21 Mar 2019 00:46:43 +0000
+	15.20.1709.16; Thu, 21 Mar 2019 00:46:09 +0000
 Received: from BYAPR04MB4901.namprd04.prod.outlook.com
 	([fe80::44e8:bd21:17b:348c]) by BYAPR04MB4901.namprd04.prod.outlook.com
 	([fe80::44e8:bd21:17b:348c%4]) with mapi id 15.20.1730.013;
-	Thu, 21 Mar 2019 00:46:43 +0000
+	Thu, 21 Mar 2019 00:46:09 +0000
 From: Alistair Francis <Alistair.Francis@wdc.com>
 To: "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, "qemu-riscv@nongnu.org"
 	<qemu-riscv@nongnu.org>
 CC: "palmer@sifive.com" <palmer@sifive.com>, Alistair Francis
 	<Alistair.Francis@wdc.com>, "alistair23@gmail.com" <alistair23@gmail.com>
-Thread-Topic: [PATCH for 4.0 v1 5/5] riscv: plic: Log guest errors
-Thread-Index: AQHU33+NDglHEWTVHUSMigfNJNcezA==
-Date: Thu, 21 Mar 2019 00:46:43 +0000
-Message-ID: <5856b388fa5e95444c910e3ae629038ba22dc37d.1553129005.git.alistair.francis@wdc.com>
+Thread-Topic: [PATCH for 4.0 v1 1/5] riscv: plic: Fix incorrect irq calculation
+Thread-Index: AQHU33952URPaAK0IkCQpT59g5uD1g==
+Date: Thu, 21 Mar 2019 00:46:09 +0000
+Message-ID: <7efcf90aa1cc78d1ce2c5f823a7ff9ac96c379ed.1553129005.git.alistair.francis@wdc.com>
 References: <cover.1553129005.git.alistair.francis@wdc.com>
 In-Reply-To: <cover.1553129005.git.alistair.francis@wdc.com>
 Accept-Language: en-US
@@ -60,44 +60,45 @@ Content-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
 x-mailer: git-send-email 2.21.0
-x-clientproxiedby: BYAPR07CA0094.namprd07.prod.outlook.com
-	(2603:10b6:a03:12b::35) To BYAPR04MB4901.namprd04.prod.outlook.com
+x-clientproxiedby: BYAPR06CA0068.namprd06.prod.outlook.com
+	(2603:10b6:a03:14b::45) To BYAPR04MB4901.namprd04.prod.outlook.com
 	(2603:10b6:a03:4f::14)
 authentication-results: spf=none (sender IP is )
 	smtp.mailfrom=Alistair.Francis@wdc.com; 
 x-ms-exchange-messagesentrepresentingtype: 1
 x-originating-ip: [199.255.44.250]
 x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 491fce8b-53ad-4aed-a1f0-08d6ad96b03c
+x-ms-office365-filtering-correlation-id: 18a4ab3a-d3dc-4304-b103-08d6ad969bc3
 x-ms-office365-filtering-ht: Tenant
 x-microsoft-antispam: BCL:0; PCL:0;
 	RULEID:(2390118)(7020095)(4652040)(8989299)(5600127)(711020)(4605104)(4618075)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(2017052603328)(7153060)(7193020);
 	SRVR:BYAPR04MB4741; 
 x-ms-traffictypediagnostic: BYAPR04MB4741:
 wdcipoutbound: EOP-TRUE
-x-microsoft-antispam-prvs: <BYAPR04MB474161B2190E4317424D09BE90420@BYAPR04MB4741.namprd04.prod.outlook.com>
+x-microsoft-antispam-prvs: <BYAPR04MB4741E82EA93B5C4762C69EE390420@BYAPR04MB4741.namprd04.prod.outlook.com>
 x-forefront-prvs: 0983EAD6B2
 x-forefront-antispam-report: SFV:NSPM;
-	SFS:(10019020)(39860400002)(346002)(396003)(136003)(366004)(376002)(199004)(189003)(71190400001)(8676002)(446003)(102836004)(97736004)(186003)(52116002)(118296001)(81166006)(6436002)(3846002)(86362001)(2616005)(81156014)(478600001)(6512007)(68736007)(476003)(11346002)(2906002)(66066001)(4326008)(6116002)(99286004)(14444005)(106356001)(26005)(50226002)(110136005)(53936002)(71200400001)(7736002)(44832011)(6506007)(54906003)(72206003)(105586002)(76176011)(2501003)(386003)(14454004)(8936002)(25786009)(5660300002)(305945005)(36756003)(6486002)(486006)(316002)(256004);
+	SFS:(10019020)(39860400002)(346002)(396003)(136003)(366004)(376002)(199004)(189003)(71190400001)(8676002)(446003)(102836004)(97736004)(186003)(52116002)(118296001)(81166006)(6436002)(3846002)(86362001)(2616005)(81156014)(478600001)(6512007)(68736007)(476003)(11346002)(2906002)(66066001)(4326008)(6116002)(99286004)(106356001)(26005)(50226002)(110136005)(53936002)(71200400001)(7736002)(44832011)(6506007)(54906003)(72206003)(105586002)(76176011)(2501003)(386003)(14454004)(8936002)(25786009)(5660300002)(305945005)(36756003)(6486002)(486006)(316002)(256004);
 	DIR:OUT; SFP:1102; SCL:1; SRVR:BYAPR04MB4741;
 	H:BYAPR04MB4901.namprd04.prod.outlook.com; FPR:; SPF:None;
 	LANG:en; PTR:InfoNoRecords; A:1; MX:1; 
 x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam-message-info: ZNNdM9uhTHzOw2N4Tety8nJwfshrxHih+6G/1+lxhvdyu6/moN3/sItiIzRwchrknue68usOLheP4EicjA8vVyEQfqz8jgYk4HYuHjdmBusk2aWALfHN6aOZqN9Wn2/kbgSMJ4MAN9D74tm1A0HBA0N3yoyGaUsJs5X88Tx2vUj5tq0yT8NFIxLdzeM9z+86N1MGhGFYe4svzktIUD81vCbGh8xqe/sfgAQ2aWKd+scsh6KX1HVDqpjfn68qtNmnrTDKRhY4ITErLY/EPRjjkLJNcu4VGMl33bsO1CR2ywYoEWc9Yxh0vtLbJUhJyxxJQqD47nRqkYsM6yN7p5mUMdFCWtWI5QiFk43tHMWBr3TA+6SLTsYmzvg4KrwVLrOJPxyMHXURtFJCOpX7+dJHZUvViqomKtWrllJs69XSZag=
+x-microsoft-antispam-message-info: FupC6X/1387AGo355f1GsnE/QIxsmBBsgWGlGItdgn1yq2dEJsYmRPbv5A90vhHsjjzKMfkFWzXVzxXg/12e6UpnClNqlZAelWe0iWLRLAAd46qoIpZvfNh95F2drx5SMDwiRTVkRa6M1VRhOZDTdpTmXp+0lugGCjpin9s0e03Y86KlG/DWwZjPWRAEb6HbKwGeL8kE8uxmfLQI/TkH39tbXojAQR/Qfb1aDuDrsWJpyLYzkui4jUW5HqDvgP7jqKLfUAZolTnJYTF1Yaq4FbU/8duTUx0oLcc7E+5y8HyzvRBAsUkp8k2PPUfIrqrQjhSM+4svfwhZeYVucsqWpAo8pnw9ONAZCNXv33/xdlFqgBrFq3ggVR7mTx0fYAPFZNoAuybQWqYZwiF7y095ixxGWRRXCRhBEkaHh9JAsDM=
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
 X-OriginatorOrg: wdc.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 491fce8b-53ad-4aed-a1f0-08d6ad96b03c
-X-MS-Exchange-CrossTenant-originalarrivaltime: 21 Mar 2019 00:46:43.6479 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 18a4ab3a-d3dc-4304-b103-08d6ad969bc3
+X-MS-Exchange-CrossTenant-originalarrivaltime: 21 Mar 2019 00:46:09.2979 (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR04MB4741
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 68.232.143.124
-Subject: [Qemu-riscv] [PATCH for 4.0 v1 5/5] riscv: plic: Log guest errors
+X-Received-From: 216.71.153.141
+Subject: [Qemu-riscv] [PATCH for 4.0 v1 1/5] riscv: plic: Fix incorrect irq
+ calculation
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -109,56 +110,42 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Mar 2019 00:54:22 -0000
+X-List-Received-Date: Thu, 21 Mar 2019 00:54:25 -0000
 
-Instead of using error_report() to print guest errors let's use
-qemu_log_mask(LOG_GUEST_ERROR,...) to log the error.
+The irq is incorrectly calculated to be off by one. It has worked in the
+past as the priority_base offset has also been set incorrectly. We are
+about to fix the priority_base offset so first first the irq
+calculation.
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- hw/riscv/sifive_plic.c | 12 +++++++++---
- 1 file changed, 9 insertions(+), 3 deletions(-)
+ hw/riscv/sifive_plic.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/hw/riscv/sifive_plic.c b/hw/riscv/sifive_plic.c
-index 70a85cd075..7f373d6c9d 100644
+index 1c703e1a37..70a85cd075 100644
 --- a/hw/riscv/sifive_plic.c
 +++ b/hw/riscv/sifive_plic.c
-@@ -262,7 +262,9 @@ static uint64_t sifive_plic_read(void *opaque, hwaddr a=
+@@ -206,7 +206,7 @@ static uint64_t sifive_plic_read(void *opaque, hwaddr a=
 ddr, unsigned size)
-     }
-=20
- err:
--    error_report("plic: invalid register read: %08x", (uint32_t)addr);
-+    qemu_log_mask(LOG_GUEST_ERROR,
-+                  "%s: Invalid register read 0x%" HWADDR_PRIx "\n",
-+                  __func__, addr);
-     return 0;
- }
-=20
-@@ -289,7 +291,9 @@ static void sifive_plic_write(void *opaque, hwaddr addr=
-, uint64_t value,
-     } else if (addr >=3D plic->pending_base && /* 1 bit per source */
-                addr < plic->pending_base + (plic->num_sources >> 3))
+     if (addr >=3D plic->priority_base && /* 4 bytes per source */
+         addr < plic->priority_base + (plic->num_sources << 2))
      {
--        error_report("plic: invalid pending write: %08x", (uint32_t)addr);
-+        qemu_log_mask(LOG_GUEST_ERROR,
-+                      "%s: invalid pending write: 0x%" HWADDR_PRIx "",
-+                      __func__, addr);
-         return;
-     } else if (addr >=3D plic->enable_base && /* 1 bit per source */
-         addr < plic->enable_base + plic->num_addrs * plic->enable_stride)
-@@ -339,7 +343,9 @@ static void sifive_plic_write(void *opaque, hwaddr addr=
+-        uint32_t irq =3D (addr - plic->priority_base) >> 2;
++        uint32_t irq =3D ((addr - plic->priority_base) >> 2) + 1;
+         if (RISCV_DEBUG_PLIC) {
+             qemu_log("plic: read priority: irq=3D%d priority=3D%d\n",
+                 irq, plic->source_priority[irq]);
+@@ -279,7 +279,7 @@ static void sifive_plic_write(void *opaque, hwaddr addr=
 , uint64_t value,
-     }
-=20
- err:
--    error_report("plic: invalid register write: %08x", (uint32_t)addr);
-+    qemu_log_mask(LOG_GUEST_ERROR,
-+                  "%s: Invalid register write 0x%" HWADDR_PRIx "\n",
-+                  __func__, addr);
- }
-=20
- static const MemoryRegionOps sifive_plic_ops =3D {
+     if (addr >=3D plic->priority_base && /* 4 bytes per source */
+         addr < plic->priority_base + (plic->num_sources << 2))
+     {
+-        uint32_t irq =3D (addr - plic->priority_base) >> 2;
++        uint32_t irq =3D ((addr - plic->priority_base) >> 2) + 1;
+         plic->source_priority[irq] =3D value & 7;
+         if (RISCV_DEBUG_PLIC) {
+             qemu_log("plic: write priority: irq=3D%d priority=3D%d\n",
 --=20
 2.21.0
 
