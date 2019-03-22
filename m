@@ -1,71 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1h71rz-0002Ux-Gk
-	for mharc-qemu-riscv@gnu.org; Thu, 21 Mar 2019 13:52:47 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:35639)
+	id 1h782a-00030B-In
+	for mharc-qemu-riscv@gnu.org; Thu, 21 Mar 2019 20:28:08 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:41902)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <richard.henderson@linaro.org>) id 1h71rx-0002NN-Q3
-	for qemu-riscv@nongnu.org; Thu, 21 Mar 2019 13:52:46 -0400
+	(envelope-from <palmer@sifive.com>) id 1h782X-0002zR-QK
+	for qemu-riscv@nongnu.org; Thu, 21 Mar 2019 20:28:06 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <richard.henderson@linaro.org>) id 1h71lw-0007Ch-Bn
-	for qemu-riscv@nongnu.org; Thu, 21 Mar 2019 13:46:36 -0400
-Received: from mail-pg1-x52a.google.com ([2607:f8b0:4864:20::52a]:36824)
+	(envelope-from <palmer@sifive.com>) id 1h782W-0001Zs-Kx
+	for qemu-riscv@nongnu.org; Thu, 21 Mar 2019 20:28:05 -0400
+Received: from mail-pg1-x543.google.com ([2607:f8b0:4864:20::543]:39303)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
-	id 1h71lt-0006zC-G8
-	for qemu-riscv@nongnu.org; Thu, 21 Mar 2019 13:46:30 -0400
-Received: by mail-pg1-x52a.google.com with SMTP id r124so4699941pgr.3
-	for <qemu-riscv@nongnu.org>; Thu, 21 Mar 2019 10:46:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
-	h=subject:to:cc:references:from:openpgp:message-id:date:user-agent
-	:mime-version:in-reply-to:content-language:content-transfer-encoding;
-	bh=KfdeAR6ue2r56ejw4Hc8jR4FL63MKARLqSLVG3H6Z5c=;
-	b=wUVeO0JhMgrdWf9P2DjJ73HdE2Y8e1IkMTEJi/y7TTS7JmxEpv9q2rfw6qE6eWnTT9
-	ZeNXNHq9epgFOslz3yTbidjRfWhqeDTzpzkOZJchd6ooTk38iCqavia9aG+mixm/NbYN
-	aTRbYfsKaIW1KodrAgxf3JP8ufgtCX2k/nlL6ysOBcvR8Ub1VrV3CRlA0pa2DfeizVtH
-	ZcfZ6bHkEIHrJDyInf3RY4OJ3CuIYiBSSZucmP/irivDvypcHv/6ct3P7TcNidQwj/FN
-	q/rbLdQKh4176a+xiSnAgugtUCuEcynbTzFZXqf7KTHMKa+PzlFHyS0tImx3qBb2TAPJ
-	uyzA==
+	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1h782W-0001Wx-3m
+	for qemu-riscv@nongnu.org; Thu, 21 Mar 2019 20:28:04 -0400
+Received: by mail-pg1-x543.google.com with SMTP id h8so212128pgp.6
+	for <qemu-riscv@nongnu.org>; Thu, 21 Mar 2019 17:28:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+	h=subject:date:message-id:mime-version:content-transfer-encoding:cc
+	:from:to; bh=P0PmWB4MEKCw4NufvvW/W6VRhua7JfOUfUf8LMy67Nw=;
+	b=RCTCIjMVKFXzVXxYtYpXDxycK0yT878i8qFxOqJ7K9rpmxJRPVPHOk9WGvSvzjkHOw
+	EEUdtFmrYy0TKyvXY1SEZ1yc6UYiPhXcXn1nV65lLfWGpF2zZH1XAradu7AjgMgghd0B
+	4J7oVCXTOQ37t9ytcLvfC6XvhaVENd1U1XHU+fgIY+TGKxBmXHY0Gw0EypMP9xGquCCv
+	nJUJpmdBIRsk74YXa1jtAD1KUjKb/Kdeqyykb1ThmVic8l9zhptr/ros3jygHnb6dcrl
+	ykBJEBVeuhSg5umpvo34UQWOEN2I2Z8Bc16BllGVGBPza1KnM40r+Esg97YtO2489DiQ
+	8rdQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
-	:date:user-agent:mime-version:in-reply-to:content-language
-	:content-transfer-encoding;
-	bh=KfdeAR6ue2r56ejw4Hc8jR4FL63MKARLqSLVG3H6Z5c=;
-	b=TkOpo2Tu27sAlWOoRctn1HerpY/Xfzpr79Yxj+n7FpoxNsJhUxqmmzbwH7uodQWCD3
-	Rb0NppRNN5K3E3IOEJtv3TMc2+Y6xCx9ZPy9WvrZBXq11tEHLEEKqbva4/wKAKN5pVIC
-	FYEB33PPkRfbKnKKNNuD13Hfh2ayPWM+mbhAJowwOywubM2T8BVgl62FAvl7zSjO7CZV
-	Iaib7kMgIwcyPlZYCflAG8WX0GAyFjulq+e29C6aPaSUCr+CnIGkSz9gDRjAGFKwaLl/
-	ZkU15yf17Ve8xgyt4E1hpnuM+jCpUlzbUE6/sSfrmIZf9jzV9oAR/HCxPqnDXuaFYqp1
-	iodA==
-X-Gm-Message-State: APjAAAXA1UdklNHV7io0uvW/wV4j88IQmTU8t9wMnUQQwM7VEFKZUQ+m
-	CRcLUuidht4RoFuavunWGmziTQ==
-X-Google-Smtp-Source: APXvYqyoEGW9QVynkjoXbsoQrs0P704MNHgFMDzLQuRW6BPPw3+beuGSrrZuSVXirZEkms2Z29yFng==
-X-Received: by 2002:a63:5415:: with SMTP id i21mr4474017pgb.106.1553190383956; 
-	Thu, 21 Mar 2019 10:46:23 -0700 (PDT)
-Received: from cloudburst.twiddle.net (174-21-5-201.tukw.qwest.net.
-	[174.21.5.201]) by smtp.gmail.com with ESMTPSA id
-	d23sm11026191pfn.69.2019.03.21.10.46.22
+	h=x-gm-message-state:subject:date:message-id:mime-version
+	:content-transfer-encoding:cc:from:to;
+	bh=P0PmWB4MEKCw4NufvvW/W6VRhua7JfOUfUf8LMy67Nw=;
+	b=Qzi/v3yd39w0NWHOS1DJCPg158fRxIty39NMZMf09EK14y4googFAFDEgXr2NIGgFm
+	TmSt7XGHX/JEU04us+l1R1XxNJ1h7oL4bR4e6QceCT0u3hIcsere2akqIBnYYSErQfii
+	0Q6B/ADTK9vogUuuRrP6cU5HSl7SVephe7ZRWb1BkkjIguYqM2EX8Wu6Zek2v6m56FZI
+	TcMIOtF7vaO0h80J0ZChI+1uC4RH66GxKB9YjkBI4MVgatgLoXnvavSuqitH+4+je2lu
+	UjEXuumbLCN/Hy4AFh4CVgPCE4Y3vsg/1XBCHK2AW2YfmlL+HXI7WXKEC0479Lacp73c
+	YPDw==
+X-Gm-Message-State: APjAAAUkqYoWexnq2YC0Xfxb4mG2cFQHwU2LJdVJ3SiMTvcUGNcpkeot
+	qTqsAF+sbrzpik8sYT5TtRAtXQ==
+X-Google-Smtp-Source: APXvYqxXSVY+r0ZviyvrqKYKwLd4FsEo9W0wW7yURBvoel2f45H0nuK/dqZzpHAICFofnSbgu2Ju6w==
+X-Received: by 2002:a63:ff0c:: with SMTP id k12mr6031929pgi.358.1553214482844; 
+	Thu, 21 Mar 2019 17:28:02 -0700 (PDT)
+Received: from localhost
+	(2001-b011-7001-1ed7-23f1-a55b-5e6a-d75e.dynamic-ip6.hinet.net.
+	[2001:b011:7001:1ed7:23f1:a55b:5e6a:d75e])
+	by smtp.gmail.com with ESMTPSA id
+	p3sm9377942pfp.136.2019.03.21.17.28.01
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 21 Mar 2019 10:46:23 -0700 (PDT)
-To: Palmer Dabbelt <palmer@sifive.com>, qemu-riscv@nongnu.org
-Cc: qemu-devel@nongnu.org, Kito Cheng <kito.cheng@gmail.com>
-References: <20190321145920.20897-1-palmer@sifive.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-Openpgp: preference=signencrypt
-Message-ID: <175ccc33-b35b-ebfd-9097-156ac9fbd6ee@linaro.org>
-Date: Thu, 21 Mar 2019 10:46:20 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.4.0
+	Thu, 21 Mar 2019 17:28:01 -0700 (PDT)
+Date: Thu, 21 Mar 2019 17:27:49 -0700
+Message-Id: <20190322002749.26561-1-palmer@sifive.com>
+X-Mailer: git-send-email 2.19.2
 MIME-Version: 1.0
-In-Reply-To: <20190321145920.20897-1-palmer@sifive.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Cc: qemu-devel@nongnu.org, Nathaniel Graff <nathaniel.graff@sifive.com>,
+	Palmer Dabbelt <palmer@sifive.com>
+From: Palmer Dabbelt <palmer@sifive.com>
+To: qemu-riscv@nongnu.org
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::52a
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH] target/riscv: Zero extend the
- inputs of divuw and remuw
+X-Received-From: 2607:f8b0:4864:20::543
+Subject: [Qemu-riscv] [PATCH] sifive_prci: Read and write PRCI registers
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -77,56 +70,152 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Mar 2019 17:52:46 -0000
+X-List-Received-Date: Fri, 22 Mar 2019 00:28:07 -0000
 
-On 3/21/19 7:59 AM, Palmer Dabbelt wrote:
-> While running the GCC test suite against 4.0.0-rc0, Kito found a
-> regression introduced by the decodetree conversion that caused divuw and
-> remuw to sign-extend their inputs.  The ISA manual says they are
-> supposed to be zero extended:
-> 
->     DIVW and DIVUW instructions are only valid for RV64, and divide the
->     lower 32 bits of rs1 by the lower 32 bits of rs2, treating them as
->     signed and unsigned integers respectively, placing the 32-bit
->     quotient in rd, sign-extended to 64 bits. REMW and REMUW
->     instructions are only valid for RV64, and provide the corresponding
->     signed and unsigned remainder operations respectively.  Both REMW
->     and REMUW always sign-extend the 32-bit result to 64 bits, including
->     on a divide by zero.
-> 
-> Here's Kito's reduced test case from the GCC test suite
-> 
->     unsigned calc_mp(unsigned mod)
->     {
->          unsigned a,b,c;
->          c=-1;
->          a=c/mod;
->          b=0-a*mod;
->          if (b > mod) { a += 1; b-=mod; }
->          return b;
->     }
-> 
->     int main(int argc, char *argv[])
->     {
->          unsigned x = 1234;
->          unsigned y = calc_mp(x);
-> 
->          if ((sizeof (y) == 4 && y != 680)
->       || (sizeof (y) == 2 && y != 134))
->     abort ();
->          exit (0);
->     }
-> 
-> I haven't done any other testing on this, but it does fix the test case.
-> 
-> Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
-> ---
->  target/riscv/insn_trans/trans_rvm.inc.c |  4 ++--
->  target/riscv/translate.c                | 21 +++++++++++++++++++++
->  2 files changed, 23 insertions(+), 2 deletions(-)
+From: Nathaniel Graff <nathaniel.graff@sifive.com>
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Writes to the SiFive PRCI registers are preserved while leaving the
+ready bits set for the HFX/HFR oscillators and the lock bit set for the
+PLL.
 
+Signed-off-by: Nathaniel Graff <nathaniel.graff@sifive.com>
+Reviewed-by: Michael Clark <mjc@sifive.com>
+Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
+Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
+---
+ hw/riscv/sifive_prci.c         | 51 ++++++++++++++++++++++++++++------
+ include/hw/riscv/sifive_prci.h | 32 +++++++++++++++++++++
+ 2 files changed, 75 insertions(+), 8 deletions(-)
 
-r~
+diff --git a/hw/riscv/sifive_prci.c b/hw/riscv/sifive_prci.c
+index 0910ea32c1a5..1435423a23e4 100644
+--- a/hw/riscv/sifive_prci.c
++++ b/hw/riscv/sifive_prci.c
+@@ -23,15 +23,19 @@
+ #include "target/riscv/cpu.h"
+ #include "hw/riscv/sifive_prci.h"
+ 
+-/* currently implements enough to mock freedom-e-sdk BSP clock programming */
+-
+ static uint64_t sifive_prci_read(void *opaque, hwaddr addr, unsigned int size)
+ {
+-    if (addr == 0 /* PRCI_HFROSCCFG */) {
+-        return 1 << 31; /* ROSC_RDY */
+-    }
+-    if (addr == 8 /* PRCI_PLLCFG    */) {
+-        return 1 << 31; /* PLL_LOCK */
++    SiFivePRCIState *s = opaque;
++    switch(addr)
++    {
++        case SIFIVE_PRCI_HFROSCCFG:
++            return s->hfrosccfg;
++        case SIFIVE_PRCI_HFXOSCCFG:
++            return s->hfxosccfg;
++        case SIFIVE_PRCI_PLLCFG:
++            return s->pllcfg;
++        case SIFIVE_PRCI_PLLOUTDIV:
++            return s->plloutdiv;
+     }
+     hw_error("%s: read: addr=0x%x\n", __func__, (int)addr);
+     return 0;
+@@ -40,7 +44,31 @@ static uint64_t sifive_prci_read(void *opaque, hwaddr addr, unsigned int size)
+ static void sifive_prci_write(void *opaque, hwaddr addr,
+            uint64_t val64, unsigned int size)
+ {
+-    /* discard writes */
++    SiFivePRCIState *s = opaque;
++    switch(addr)
++    {
++        case SIFIVE_PRCI_HFROSCCFG:
++            s->hfrosccfg = (uint32_t) val64;
++            /* OSC stays ready */
++            s->hfrosccfg |= SIFIVE_PRCI_HFROSCCFG_RDY;
++            break;
++        case SIFIVE_PRCI_HFXOSCCFG:
++            s->hfxosccfg = (uint32_t) val64;
++            /* OSC stays ready */
++            s->hfxosccfg |= SIFIVE_PRCI_HFXOSCCFG_RDY;
++            break;
++        case SIFIVE_PRCI_PLLCFG:
++            s->pllcfg = (uint32_t) val64;
++            /* PLL stays locked */
++            s->pllcfg |= SIFIVE_PRCI_PLLCFG_LOCK;
++            break;
++        case SIFIVE_PRCI_PLLOUTDIV:
++            s->plloutdiv = (uint32_t) val64; 
++            break;
++        default:
++            hw_error("%s: bad write: addr=0x%x v=0x%x\n",
++                    __func__, (int)addr, (int)val64);
++    }
+ }
+ 
+ static const MemoryRegionOps sifive_prci_ops = {
+@@ -60,6 +88,13 @@ static void sifive_prci_init(Object *obj)
+     memory_region_init_io(&s->mmio, obj, &sifive_prci_ops, s,
+                           TYPE_SIFIVE_PRCI, 0x8000);
+     sysbus_init_mmio(SYS_BUS_DEVICE(obj), &s->mmio);
++
++    s->hfrosccfg = (SIFIVE_PRCI_HFROSCCFG_RDY | SIFIVE_PRCI_HFROSCCFG_EN);
++    s->hfxosccfg = (SIFIVE_PRCI_HFROSCCFG_RDY | SIFIVE_PRCI_HFROSCCFG_EN);
++    s->pllcfg = (SIFIVE_PRCI_PLLCFG_REFSEL | SIFIVE_PRCI_PLLCFG_BYPASS |
++                SIFIVE_PRCI_PLLCFG_LOCK);
++    s->plloutdiv = SIFIVE_PRCI_PLLOUTDIV_DIV1;
++
+ }
+ 
+ static const TypeInfo sifive_prci_info = {
+diff --git a/include/hw/riscv/sifive_prci.h b/include/hw/riscv/sifive_prci.h
+index b6f4c486cc1e..bd51c4af3c1c 100644
+--- a/include/hw/riscv/sifive_prci.h
++++ b/include/hw/riscv/sifive_prci.h
+@@ -19,6 +19,34 @@
+ #ifndef HW_SIFIVE_PRCI_H
+ #define HW_SIFIVE_PRCI_H
+ 
++enum {
++    SIFIVE_PRCI_HFROSCCFG   = 0x0,
++    SIFIVE_PRCI_HFXOSCCFG   = 0x4,
++    SIFIVE_PRCI_PLLCFG      = 0x8,
++    SIFIVE_PRCI_PLLOUTDIV   = 0xC
++};
++
++enum {
++    SIFIVE_PRCI_HFROSCCFG_RDY   = (1 << 31),
++    SIFIVE_PRCI_HFROSCCFG_EN    = (1 << 30)
++};
++
++enum {
++    SIFIVE_PRCI_HFXOSCCFG_RDY   = (1 << 31),
++    SIFIVE_PRCI_HFXOSCCFG_EN    = (1 << 30)
++};
++
++enum {
++    SIFIVE_PRCI_PLLCFG_PLLSEL   = (1 << 16),
++    SIFIVE_PRCI_PLLCFG_REFSEL   = (1 << 17),
++    SIFIVE_PRCI_PLLCFG_BYPASS   = (1 << 18),
++    SIFIVE_PRCI_PLLCFG_LOCK     = (1 << 31)
++};
++
++enum {
++    SIFIVE_PRCI_PLLOUTDIV_DIV1  = (1 << 8)
++};
++
+ #define TYPE_SIFIVE_PRCI "riscv.sifive.prci"
+ 
+ #define SIFIVE_PRCI(obj) \
+@@ -30,6 +58,10 @@ typedef struct SiFivePRCIState {
+ 
+     /*< public >*/
+     MemoryRegion mmio;
++    uint32_t hfrosccfg;
++    uint32_t hfxosccfg;
++    uint32_t pllcfg;
++    uint32_t plloutdiv;
+ } SiFivePRCIState;
+ 
+ DeviceState *sifive_prci_create(hwaddr addr);
+-- 
+2.19.2
+
 
