@@ -1,76 +1,54 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1h7MDU-0003XT-0F
-	for mharc-qemu-riscv@gnu.org; Fri, 22 Mar 2019 11:36:20 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:58749)
+	id 1h7OBO-0004PY-3E
+	for mharc-qemu-riscv@gnu.org; Fri, 22 Mar 2019 13:42:18 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:58972)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <richard.henderson@linaro.org>) id 1h7MDP-0003M9-4s
-	for qemu-riscv@nongnu.org; Fri, 22 Mar 2019 11:36:18 -0400
+	(envelope-from <npickito@gmail.com>) id 1h7OBJ-0004Mr-56
+	for qemu-riscv@nongnu.org; Fri, 22 Mar 2019 13:42:16 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <richard.henderson@linaro.org>) id 1h7M2G-0003p2-AK
-	for qemu-riscv@nongnu.org; Fri, 22 Mar 2019 11:24:45 -0400
-Received: from mail-pg1-x52e.google.com ([2607:f8b0:4864:20::52e]:41201)
+	(envelope-from <npickito@gmail.com>) id 1h7O8s-0007cK-Ou
+	for qemu-riscv@nongnu.org; Fri, 22 Mar 2019 13:39:43 -0400
+Received: from mail-wr1-x443.google.com ([2a00:1450:4864:20::443]:43691)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
-	id 1h7M2F-0003oD-Sm
-	for qemu-riscv@nongnu.org; Fri, 22 Mar 2019 11:24:44 -0400
-Received: by mail-pg1-x52e.google.com with SMTP id k11so1738527pgb.8
-	for <qemu-riscv@nongnu.org>; Fri, 22 Mar 2019 08:24:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
-	h=subject:to:cc:references:from:openpgp:message-id:date:user-agent
-	:mime-version:in-reply-to:content-language:content-transfer-encoding;
-	bh=jTLFJYq4QZUt0fkJgzAueK65vYYNHt311g0LPOyP2wo=;
-	b=PBvvEzeXb3DIrgspi4umRH48r6i4m2XLB8uOgLS/McCmpJvQFV59E7ubSJ5KADbjb7
-	BnJXA64BbEVRx3u+qYN5RxPNNCFizRFt9r5hj2Il4fbjbYWMkbGJe69KFQ/WAv93l2ul
-	ky1nc1rwMloMeVPt4Kxwq4eOof/NBXNkgYTLqoubhKR07VIf4iQA5a0QaQICe1lCN7BB
-	bcr/pqeyP8DRp4fBxHjH8b2nPHUVWYLYWLYxJ7L6kX5kZKsSP2ZO/6ISXXLHh01YKOt1
-	eMcjWjHqzBy7kNrccMQtKAo8eZR7P+UJZ7AoD+IuJAFtaIiFJ8RN8sQsXih3QOQEx3fi
-	jxSA==
+	(Exim 4.71) (envelope-from <npickito@gmail.com>)
+	id 1h7O8p-0007Oc-Tq; Fri, 22 Mar 2019 13:39:41 -0400
+Received: by mail-wr1-x443.google.com with SMTP id d17so3225732wre.10;
+	Fri, 22 Mar 2019 10:39:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:from:date:message-id:subject:to:cc;
+	bh=JSoN7f9QkT3lcw9+F8G1hSeLONiyvWz6vPe2yIMOcfM=;
+	b=WuMsqQzJyqdcRZclpwDoj8CFMeA9MS43gie0V1tkOqZZrV6nZ3qZl4fsYXAydm4Uqr
+	wI9lq8l4piyllFqxMaS+gTj1ZtF57axTwRuSmXBl3Vcft1xkLvt4iadTArTS4VF8U9JX
+	FLH4EE2Vj8ovejyEnOx+Xlsz76Nl1JvZF2mRHUuS3/2ahUzUr91DqTobftgOtDRwakfu
+	evglS2GVU49Gih5GfO1D+7Zx3+XJNe9ExdFicqW/aVIgvv9BKKIq7ZGppkp7CHzV3rn5
+	oMGNZePybAZEsvLkxe80liGXxyylzRGAK+7VAqQKmqLqU7lLBU5Lz5T51K1c9+nxUJra
+	vfnQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
-	:date:user-agent:mime-version:in-reply-to:content-language
-	:content-transfer-encoding;
-	bh=jTLFJYq4QZUt0fkJgzAueK65vYYNHt311g0LPOyP2wo=;
-	b=DtVQsMxgkZQxZswTQS0PbtJfzCZY/qL4t+d15O/hslzS6HXrcMuc/WzJXpAVEpp5/p
-	XYhYni5c3jtrPNPBjHqn3nQxNHrGWSAMYcBKcsvnqWpg2P31fDUdkbOZPZpnLB9zubRo
-	PSu0AAWC7j3fwz9USCcr3tWxW/43/QzYA7MGY90NgBIpEYMUSBUaKZAGsKLK3+o9tT47
-	INWtCK1tI5DWpm9k1rKp9pp9poMaBSLqJff3VF6ezuSY0yFc3CYTgFHJVYYUEjyU9OS6
-	a7tjFEeF01F8Vob6TN4AXNIwgupLpD7pqffanO4C/5BF4kukrRw1UHfyiWBf/IsKN0G9
-	W40Q==
-X-Gm-Message-State: APjAAAV2PETxjntcuRSbkH7PLLaSYCWuljdrL+bDFT9PyQr8R4FP1Ecx
-	j3I/s75qB8nk+WGcXaMSV7RRxw==
-X-Google-Smtp-Source: APXvYqwpwa5PfnGbmpmAoxkzofm8/QBKzXAVxx7a4SlkndDNzZs4NO6VJNco2o2Azs7zxywu5lb6DQ==
-X-Received: by 2002:a63:e752:: with SMTP id j18mr9341154pgk.313.1553268282295; 
-	Fri, 22 Mar 2019 08:24:42 -0700 (PDT)
-Received: from [192.168.1.11] (174-21-5-201.tukw.qwest.net. [174.21.5.201])
-	by smtp.gmail.com with ESMTPSA id
-	f65sm12517963pff.21.2019.03.22.08.24.40
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 22 Mar 2019 08:24:41 -0700 (PDT)
-To: Fabien Chouteau <chouteau@adacore.com>
-Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
-	Sagar Karandikar <sagark@eecs.berkeley.edu>,
-	Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
-	Palmer Dabbelt <palmer@sifive.com>,
-	"open list:All patches CC here" <qemu-devel@nongnu.org>,
-	Alistair Francis <Alistair.Francis@wdc.com>
-References: <20190322112226.26890-1-chouteau@adacore.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-Openpgp: preference=signencrypt
-Message-ID: <43360785-4c71-bda6-c2f0-a5b02838865c@linaro.org>
-Date: Fri, 22 Mar 2019 08:24:39 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.5.1
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to:cc;
+	bh=JSoN7f9QkT3lcw9+F8G1hSeLONiyvWz6vPe2yIMOcfM=;
+	b=tfGuAjO9g/eQjcSxQZON5puKd9Dx6LjtUnuG01VM5jfMVPZAF5QN0KW/3Z3/Fj4zW8
+	fSSwFEo72THFutWeN1zWLZ2hezGjO7ljJbX2E1oHwHcIM/8Qvvi1EcSjmKRBrnuMHAgC
+	HoDhH/wznKev9tOGjenZMF3Nz/BAMcyp/mEC7zQAt8NJgoOL4wqP/SA23BkFBgc9uhL2
+	LSKh5xOY8uXYt4/84tsaofXpjQtATE8H47e9KL8iiKDSp/bPQS9+dzUri/7lecL/WsEO
+	meCCnJe5x418NIo7g89d6Z6bmBlg2AvjtMZZu0MbRx7Jry7bkYO4WlBsK3DvsRdwi33r
+	3hPA==
+X-Gm-Message-State: APjAAAWcf/tAvfRHvaViTYipbx/3yrxVHyqe4M6p962Giw7OQnjSXxO9
+	eMpdx9+htUHbZuIelfifBIryxA0TqwtU1EDD21gDxGcA
+X-Google-Smtp-Source: APXvYqziraxUmlNLwc89t9sMTthRtLUUZWyfy2BvoK+ZK2x8blHArTVt3juZoMbxuLt9+T0onU24y+pDunltEpdvxsU=
+X-Received: by 2002:a5d:6207:: with SMTP id y7mr7029994wru.60.1553276377419;
+	Fri, 22 Mar 2019 10:39:37 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20190322112226.26890-1-chouteau@adacore.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+From: Kito Cheng <kito.cheng@gmail.com>
+Date: Sat, 23 Mar 2019 01:39:26 +0800
+Message-ID: <CA+yXCZBs2KDYzJz=--5SjyEJz8s8sn_jtvjDyrU0dJL+L+=MzA@mail.gmail.com>
+To: qemu-devel@nongnu.org, alex.bennee@linaro.org, cota@braap.org
+Cc: qemu-riscv@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::52e
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH] RISC-V: fix single stepping
- over ret and other branching instructions
+X-Received-From: 2a00:1450:4864:20::443
+Subject: [Qemu-riscv] [PATCH] hardfloat: fix float32/64 fused multiply-add
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -82,34 +60,60 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Mar 2019 15:36:18 -0000
+X-List-Received-Date: Fri, 22 Mar 2019 17:42:17 -0000
 
-On 3/22/19 4:22 AM, Fabien Chouteau wrote:
-> +/* Wrapper around tcg_gen_exit_tb that handles single stepping */
-> +static void exit_tb(DisasContext *ctx, TranslationBlock *tb, unsigned idx)
-> +{
-> +    if (ctx->base.singlestep_enabled) {
-> +        gen_exception_debug();
-> +    } else {
-> +        tcg_gen_exit_tb(tb, idx);
-> +    }
-> +}
+hardfloat fused multiply-add might fallback to softfloat mode in some
+situation, but it might already changed the value of input operands,
+so we must restore those value before fallback.
 
-You should remove the TB and idx parameters here and pass NULL, 0 to
-tcg_gen_exit_tb.
+This bug is catched by running gcc testsuite on RISC-V qemu.
 
-> @@ -138,14 +158,10 @@ static void gen_goto_tb(DisasContext *ctx, int n, target_ulong dest)
->          /* chaining is only allowed when the jump is to the same page */
->          tcg_gen_goto_tb(n);
->          tcg_gen_movi_tl(cpu_pc, dest);
-> -        tcg_gen_exit_tb(ctx->base.tb, n);
-> +        exit_tb(ctx, ctx->base.tb, n);
+Signed-off-by: Kito Cheng <kito.cheng@gmail.com>
+---
+ fpu/softfloat.c | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-Because this is the only non-zero use, and it is already protected by
-use_goto_tb, which includes the single-step check.
-
-Because goto_tb(n) must be paired with exit_tb(tb, n), and vice-versa.
-
-
-r~
+diff --git a/fpu/softfloat.c b/fpu/softfloat.c
+index 4610738..f53f391 100644
+--- a/fpu/softfloat.c
++++ b/fpu/softfloat.c
+@@ -1596,6 +1596,7 @@ float32_muladd(float32 xa, float32 xb, float32
+xc, int flags, float_status *s)
+         }
+         ur.h = up.h + uc.h;
+     } else {
++        union_float32 ux = ua, uy = uc;
+         if (flags & float_muladd_negate_product) {
+             ua.h = -ua.h;
+         }
+@@ -1608,6 +1609,8 @@ float32_muladd(float32 xa, float32 xb, float32
+xc, int flags, float_status *s)
+         if (unlikely(f32_is_inf(ur))) {
+             s->float_exception_flags |= float_flag_overflow;
+         } else if (unlikely(fabsf(ur.h) <= FLT_MIN)) {
++            ua.h = ux.h;
++            uc.h = uy.h;
+             goto soft;
+         }
+     }
+@@ -1662,6 +1665,8 @@ float64_muladd(float64 xa, float64 xb, float64
+xc, int flags, float_status *s)
+         }
+         ur.h = up.h + uc.h;
+     } else {
++        union_float64 ux = ua, uy = uc;
++
+         if (flags & float_muladd_negate_product) {
+             ua.h = -ua.h;
+         }
+@@ -1674,6 +1679,8 @@ float64_muladd(float64 xa, float64 xb, float64
+xc, int flags, float_status *s)
+         if (unlikely(f64_is_inf(ur))) {
+             s->float_exception_flags |= float_flag_overflow;
+         } else if (unlikely(fabs(ur.h) <= FLT_MIN)) {
++            ua.h = ux.h;
++            uc.h = uy.h;
+             goto soft;
+         }
+     }
 
