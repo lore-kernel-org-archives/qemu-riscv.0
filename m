@@ -1,50 +1,45 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1h787X-0007Fj-2E
-	for mharc-qemu-riscv@gnu.org; Thu, 21 Mar 2019 20:33:15 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:43785)
+	id 1h7IUA-0005Zm-ML
+	for mharc-qemu-riscv@gnu.org; Fri, 22 Mar 2019 07:37:18 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:52155)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <no-reply@patchew.org>) id 1h787T-0007Ck-M6
-	for qemu-riscv@nongnu.org; Thu, 21 Mar 2019 20:33:12 -0400
+	(envelope-from <chouteau@adacore.com>) id 1h7IU6-0005UP-Lw
+	for qemu-riscv@nongnu.org; Fri, 22 Mar 2019 07:37:17 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <no-reply@patchew.org>) id 1h787R-0008FR-Tl
-	for qemu-riscv@nongnu.org; Thu, 21 Mar 2019 20:33:11 -0400
-Resent-Date: Thu, 21 Mar 2019 20:33:11 -0400
-Resent-Message-Id: <E1h787R-0008FR-Tl@eggs.gnu.org>
-Received: from sender-of-o51.zoho.com ([135.84.80.216]:21149)
-	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.71) (envelope-from <no-reply@patchew.org>)
-	id 1h787R-0008Dd-HM; Thu, 21 Mar 2019 20:33:09 -0400
-ARC-Seal: i=1; a=rsa-sha256; t=1553214781; cv=none; d=zoho.com; s=zohoarc; 
-	b=HMyNDThTSZ4XVG0tblvOmW8hwoJXQaV2Kjr+54bZQ8n2fpOnFVoyGhT2SI54OEcxEEUlBtPbhkei9J4ZqG9bePG+5n1tCxW2uCH0OFzekPVnytVwZmdxdsqopZx9l3Afc1IA4W0TePALhyxDD++S9L5piWV//HubjfE/2XGSGF8=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zoho.com;
-	s=zohoarc; t=1553214781;
-	h=Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:MIME-Version:Message-ID:Reply-To:Subject:To:ARC-Authentication-Results;
-	bh=49MKBRhMFqx84pThWHBl7El2xdH4W6XZBsKHlRMZheQ=; 
-	b=YocqF08Q+FZbVYWh5f3SsTq1PGEP5drTwL6HM7XLdXvgYisov3a7p4zWL4YnxXaX86imINAaM4jq1zeDDENkuZc1XlS7sy5opFUr//WAmSvkEtpsHqAlAqamTW4dAvQisUtujxPgWAq1+vMCC8xQdPlQhqXOtmHlucjzyvWooDQ=
-ARC-Authentication-Results: i=1; mx.zoho.com; dkim=pass  header.i=patchew.org;
-	spf=pass  smtp.mailfrom=no-reply@patchew.org;
-	dmarc=pass header.from=<no-reply@patchew.org>
-	header.from=<no-reply@patchew.org>
-Received: from [172.17.0.3] (23.253.156.214 [23.253.156.214]) by
-	mx.zohomail.com with SMTPS id 1553214778632221.9034446400177;
-	Thu, 21 Mar 2019 17:32:58 -0700 (PDT)
-In-Reply-To: <20190322002749.26561-1-palmer@sifive.com>
-Message-ID: <155321477736.24.8768661903107922078@b782c5aab522>
-Reply-To: <qemu-devel@nongnu.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-Resent-From: 
-From: no-reply@patchew.org
-To: palmer@sifive.com
-Cc: fam@euphon.net, qemu-riscv@nongnu.org, nathaniel.graff@sifive.com,
-	palmer@sifive.com, qemu-devel@nongnu.org
-Date: Thu, 21 Mar 2019 17:32:58 -0700 (PDT)
-X-ZohoMailClient: External
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
-X-Received-From: 135.84.80.216
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH] sifive_prci: Read and write
- PRCI registers
+	(envelope-from <chouteau@adacore.com>) id 1h7IG4-0006UN-Su
+	for qemu-riscv@nongnu.org; Fri, 22 Mar 2019 07:22:46 -0400
+Received: from mel.act-europe.fr ([2a02:2ab8:224:1::a0a:d2]:50976
+	helo=smtp.eu.adacore.com)
+	by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.71) (envelope-from <chouteau@adacore.com>)
+	id 1h7IG3-0006Kp-5S; Fri, 22 Mar 2019 07:22:43 -0400
+Received: from localhost (localhost [127.0.0.1])
+	by filtered-smtp.eu.adacore.com (Postfix) with ESMTP id 1AC8581A10;
+	Fri, 22 Mar 2019 12:22:40 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at eu.adacore.com
+Received: from smtp.eu.adacore.com ([127.0.0.1])
+	by localhost (smtp.eu.adacore.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id W2kNlBokQOpb; Fri, 22 Mar 2019 12:22:39 +0100 (CET)
+Received: from ledoue.clients.t29.sncf.fr (unknown [37.165.26.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	(No client certificate requested)
+	by smtp.eu.adacore.com (Postfix) with ESMTPSA id F2FC18137E;
+	Fri, 22 Mar 2019 12:22:38 +0100 (CET)
+From: Fabien Chouteau <chouteau@adacore.com>
+To: 
+Cc: Fabien Chouteau <chouteau@adacore.com>, Palmer Dabbelt <palmer@sifive.com>,
+	Alistair Francis <Alistair.Francis@wdc.com>,
+	Sagar Karandikar <sagark@eecs.berkeley.edu>,
+	Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+	qemu-riscv@nongnu.org (open list:RISC-V),
+	qemu-devel@nongnu.org (open list:All patches CC here)
+Date: Fri, 22 Mar 2019 12:22:26 +0100
+Message-Id: <20190322112226.26890-1-chouteau@adacore.com>
+X-Mailer: git-send-email 2.17.1
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 3.x
+X-Received-From: 2a02:2ab8:224:1::a0a:d2
+Subject: [Qemu-riscv] [PATCH] RISC-V: fix single stepping over ret and other
+ branching instructions
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -56,44 +51,143 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Mar 2019 00:33:12 -0000
+X-List-Received-Date: Fri, 22 Mar 2019 11:37:18 -0000
 
-UGF0Y2hldyBVUkw6IGh0dHBzOi8vcGF0Y2hldy5vcmcvUUVNVS8yMDE5MDMyMjAwMjc0OS4yNjU2
-MS0xLXBhbG1lckBzaWZpdmUuY29tLwoKCgpIaSwKClRoaXMgc2VyaWVzIHNlZW1zIHRvIGhhdmUg
-c29tZSBjb2Rpbmcgc3R5bGUgcHJvYmxlbXMuIFNlZSBvdXRwdXQgYmVsb3cgZm9yCm1vcmUgaW5m
-b3JtYXRpb246CgpNZXNzYWdlLWlkOiAyMDE5MDMyMjAwMjc0OS4yNjU2MS0xLXBhbG1lckBzaWZp
-dmUuY29tClN1YmplY3Q6IFtRZW11LWRldmVsXSBbUEFUQ0hdIHNpZml2ZV9wcmNpOiBSZWFkIGFu
-ZCB3cml0ZSBQUkNJIHJlZ2lzdGVycwpUeXBlOiBzZXJpZXMKCj09PSBURVNUIFNDUklQVCBCRUdJ
-TiA9PT0KIyEvYmluL2Jhc2gKZ2l0IHJldi1wYXJzZSBiYXNlID4gL2Rldi9udWxsIHx8IGV4aXQg
-MApnaXQgY29uZmlnIC0tbG9jYWwgZGlmZi5yZW5hbWVsaW1pdCAwCmdpdCBjb25maWcgLS1sb2Nh
-bCBkaWZmLnJlbmFtZXMgVHJ1ZQpnaXQgY29uZmlnIC0tbG9jYWwgZGlmZi5hbGdvcml0aG0gaGlz
-dG9ncmFtCi4vc2NyaXB0cy9jaGVja3BhdGNoLnBsIC0tbWFpbGJhY2sgYmFzZS4uCj09PSBURVNU
-IFNDUklQVCBFTkQgPT09CgpVcGRhdGluZyAzYzhjZjVhOWMyMWZmODc4MjE2NGQxZGVmN2Y0NGJk
-ODg4NzEzMzg0CkZyb20gaHR0cHM6Ly9naXRodWIuY29tL3BhdGNoZXctcHJvamVjdC9xZW11CiAq
-IFtuZXcgdGFnXSAgICAgICAgICAgICAgIHBhdGNoZXcvMjAxOTAzMjIwMDI3NDkuMjY1NjEtMS1w
-YWxtZXJAc2lmaXZlLmNvbSAtPiBwYXRjaGV3LzIwMTkwMzIyMDAyNzQ5LjI2NTYxLTEtcGFsbWVy
-QHNpZml2ZS5jb20KU3dpdGNoZWQgdG8gYSBuZXcgYnJhbmNoICd0ZXN0JwpiYThiZTRkY2I2IHNp
-Zml2ZV9wcmNpOiBSZWFkIGFuZCB3cml0ZSBQUkNJIHJlZ2lzdGVycwoKPT09IE9VVFBVVCBCRUdJ
-TiA9PT0KRVJST1I6IHRoYXQgb3BlbiBicmFjZSB7IHNob3VsZCBiZSBvbiB0aGUgcHJldmlvdXMg
-bGluZQojMzU6IEZJTEU6IGh3L3Jpc2N2L3NpZml2ZV9wcmNpLmM6Mjk6CisgICAgc3dpdGNoKGFk
-ZHIpCisgICAgewoKRVJST1I6IHNwYWNlIHJlcXVpcmVkIGJlZm9yZSB0aGUgb3BlbiBwYXJlbnRo
-ZXNpcyAnKCcKIzM1OiBGSUxFOiBody9yaXNjdi9zaWZpdmVfcHJjaS5jOjI5OgorICAgIHN3aXRj
-aChhZGRyKQoKRVJST1I6IHRoYXQgb3BlbiBicmFjZSB7IHNob3VsZCBiZSBvbiB0aGUgcHJldmlv
-dXMgbGluZQojNTQ6IEZJTEU6IGh3L3Jpc2N2L3NpZml2ZV9wcmNpLmM6NDg6CisgICAgc3dpdGNo
-KGFkZHIpCisgICAgewoKRVJST1I6IHNwYWNlIHJlcXVpcmVkIGJlZm9yZSB0aGUgb3BlbiBwYXJl
-bnRoZXNpcyAnKCcKIzU0OiBGSUxFOiBody9yaXNjdi9zaWZpdmVfcHJjaS5jOjQ4OgorICAgIHN3
-aXRjaChhZGRyKQoKRVJST1I6IHRyYWlsaW5nIHdoaXRlc3BhY2UKIzcyOiBGSUxFOiBody9yaXNj
-di9zaWZpdmVfcHJjaS5jOjY2OgorICAgICAgICAgICAgcy0+cGxsb3V0ZGl2ID0gKHVpbnQzMl90
-KSB2YWw2NDsgJAoKdG90YWw6IDUgZXJyb3JzLCAwIHdhcm5pbmdzLCAxMTUgbGluZXMgY2hlY2tl
-ZAoKQ29tbWl0IGJhOGJlNGRjYjZjNCAoc2lmaXZlX3ByY2k6IFJlYWQgYW5kIHdyaXRlIFBSQ0kg
-cmVnaXN0ZXJzKSBoYXMgc3R5bGUgcHJvYmxlbXMsIHBsZWFzZSByZXZpZXcuICBJZiBhbnkgb2Yg
-dGhlc2UgZXJyb3JzCmFyZSBmYWxzZSBwb3NpdGl2ZXMgcmVwb3J0IHRoZW0gdG8gdGhlIG1haW50
-YWluZXIsIHNlZQpDSEVDS1BBVENIIGluIE1BSU5UQUlORVJTLgo9PT0gT1VUUFVUIEVORCA9PT0K
-ClRlc3QgY29tbWFuZCBleGl0ZWQgd2l0aCBjb2RlOiAxCgoKVGhlIGZ1bGwgbG9nIGlzIGF2YWls
-YWJsZSBhdApodHRwOi8vcGF0Y2hldy5vcmcvbG9ncy8yMDE5MDMyMjAwMjc0OS4yNjU2MS0xLXBh
-bG1lckBzaWZpdmUuY29tL3Rlc3RpbmcuY2hlY2twYXRjaC8/dHlwZT1tZXNzYWdlLgotLS0KRW1h
-aWwgZ2VuZXJhdGVkIGF1dG9tYXRpY2FsbHkgYnkgUGF0Y2hldyBbaHR0cHM6Ly9wYXRjaGV3Lm9y
-Zy9dLgpQbGVhc2Ugc2VuZCB5b3VyIGZlZWRiYWNrIHRvIHBhdGNoZXctZGV2ZWxAcmVkaGF0LmNv
-bQ==
+This patch introduces wrappers around the tcg_gen_exit_tb() and
+tcg_gen_lookup_and_goto_ptr() functions that handle single stepping,
+i.e. call gen_exception_debug() when single stepping is enabled.
+
+Theses functions are then used instead of the originals, bringing single
+stepping handling in places where it was previously ignored such as jalr
+and system branch instructions (ecall, mret, sret, etc.).
+
+Signed-off-by: Fabien Chouteau <chouteau@adacore.com>
+---
+ .../riscv/insn_trans/trans_privileged.inc.c   |  8 +++---
+ target/riscv/insn_trans/trans_rvi.inc.c       |  6 ++--
+ target/riscv/translate.c                      | 28 +++++++++++++++----
+ 3 files changed, 29 insertions(+), 13 deletions(-)
+
+diff --git a/target/riscv/insn_trans/trans_privileged.inc.c b/target/riscv/insn_trans/trans_privileged.inc.c
+index acb605923e..fe660ab3dd 100644
+--- a/target/riscv/insn_trans/trans_privileged.inc.c
++++ b/target/riscv/insn_trans/trans_privileged.inc.c
+@@ -22,7 +22,7 @@ static bool trans_ecall(DisasContext *ctx, arg_ecall *a)
+ {
+     /* always generates U-level ECALL, fixed in do_interrupt handler */
+     generate_exception(ctx, RISCV_EXCP_U_ECALL);
+-    tcg_gen_exit_tb(NULL, 0); /* no chaining */
++    exit_tb(ctx, NULL, 0); /* no chaining */
+     ctx->base.is_jmp = DISAS_NORETURN;
+     return true;
+ }
+@@ -30,7 +30,7 @@ static bool trans_ecall(DisasContext *ctx, arg_ecall *a)
+ static bool trans_ebreak(DisasContext *ctx, arg_ebreak *a)
+ {
+     generate_exception(ctx, RISCV_EXCP_BREAKPOINT);
+-    tcg_gen_exit_tb(NULL, 0); /* no chaining */
++    exit_tb(ctx, NULL, 0); /* no chaining */
+     ctx->base.is_jmp = DISAS_NORETURN;
+     return true;
+ }
+@@ -47,7 +47,7 @@ static bool trans_sret(DisasContext *ctx, arg_sret *a)
+ 
+     if (has_ext(ctx, RVS)) {
+         gen_helper_sret(cpu_pc, cpu_env, cpu_pc);
+-        tcg_gen_exit_tb(NULL, 0); /* no chaining */
++        exit_tb(ctx, NULL, 0); /* no chaining */
+         ctx->base.is_jmp = DISAS_NORETURN;
+     } else {
+         return false;
+@@ -68,7 +68,7 @@ static bool trans_mret(DisasContext *ctx, arg_mret *a)
+ #ifndef CONFIG_USER_ONLY
+     tcg_gen_movi_tl(cpu_pc, ctx->base.pc_next);
+     gen_helper_mret(cpu_pc, cpu_env, cpu_pc);
+-    tcg_gen_exit_tb(NULL, 0); /* no chaining */
++    exit_tb(ctx, NULL, 0); /* no chaining */
+     ctx->base.is_jmp = DISAS_NORETURN;
+     return true;
+ #else
+diff --git a/target/riscv/insn_trans/trans_rvi.inc.c b/target/riscv/insn_trans/trans_rvi.inc.c
+index d420a4d8b2..44ae573768 100644
+--- a/target/riscv/insn_trans/trans_rvi.inc.c
++++ b/target/riscv/insn_trans/trans_rvi.inc.c
+@@ -60,7 +60,7 @@ static bool trans_jalr(DisasContext *ctx, arg_jalr *a)
+     if (a->rd != 0) {
+         tcg_gen_movi_tl(cpu_gpr[a->rd], ctx->pc_succ_insn);
+     }
+-    tcg_gen_lookup_and_goto_ptr();
++    lookup_and_goto_ptr(ctx);
+ 
+     if (misaligned) {
+         gen_set_label(misaligned);
+@@ -483,7 +483,7 @@ static bool trans_fence_i(DisasContext *ctx, arg_fence_i *a)
+      * however we need to end the translation block
+      */
+     tcg_gen_movi_tl(cpu_pc, ctx->pc_succ_insn);
+-    tcg_gen_exit_tb(NULL, 0);
++    exit_tb(ctx, NULL, 0);
+     ctx->base.is_jmp = DISAS_NORETURN;
+     return true;
+ }
+@@ -504,7 +504,7 @@ static bool trans_fence_i(DisasContext *ctx, arg_fence_i *a)
+     gen_io_end(); \
+     gen_set_gpr(a->rd, dest); \
+     tcg_gen_movi_tl(cpu_pc, ctx->pc_succ_insn); \
+-    tcg_gen_exit_tb(NULL, 0); \
++    exit_tb(ctx, NULL, 0); \
+     ctx->base.is_jmp = DISAS_NORETURN; \
+     tcg_temp_free(source1); \
+     tcg_temp_free(csr_store); \
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index 049fa65c66..c438400b19 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -109,6 +109,26 @@ static void gen_exception_debug(void)
+     tcg_temp_free_i32(helper_tmp);
+ }
+ 
++/* Wrapper around tcg_gen_exit_tb that handles single stepping */
++static void exit_tb(DisasContext *ctx, TranslationBlock *tb, unsigned idx)
++{
++    if (ctx->base.singlestep_enabled) {
++        gen_exception_debug();
++    } else {
++        tcg_gen_exit_tb(tb, idx);
++    }
++}
++
++/* Wrapper around tcg_gen_lookup_and_goto_ptr that handles single stepping */
++static void lookup_and_goto_ptr(DisasContext *ctx)
++{
++    if (ctx->base.singlestep_enabled) {
++        gen_exception_debug();
++    } else {
++        tcg_gen_lookup_and_goto_ptr();
++    }
++}
++
+ static void gen_exception_illegal(DisasContext *ctx)
+ {
+     generate_exception(ctx, RISCV_EXCP_ILLEGAL_INST);
+@@ -138,14 +158,10 @@ static void gen_goto_tb(DisasContext *ctx, int n, target_ulong dest)
+         /* chaining is only allowed when the jump is to the same page */
+         tcg_gen_goto_tb(n);
+         tcg_gen_movi_tl(cpu_pc, dest);
+-        tcg_gen_exit_tb(ctx->base.tb, n);
++        exit_tb(ctx, ctx->base.tb, n);
+     } else {
+         tcg_gen_movi_tl(cpu_pc, dest);
+-        if (ctx->base.singlestep_enabled) {
+-            gen_exception_debug();
+-        } else {
+-            tcg_gen_lookup_and_goto_ptr();
+-        }
++        lookup_and_goto_ptr(ctx);
+     }
+ }
+ 
+-- 
+2.17.1
 
 
