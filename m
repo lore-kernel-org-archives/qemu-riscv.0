@@ -1,54 +1,71 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1h7OBO-0004PY-3E
-	for mharc-qemu-riscv@gnu.org; Fri, 22 Mar 2019 13:42:18 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:58972)
+	id 1h7Qwu-0007Q4-KA
+	for mharc-qemu-riscv@gnu.org; Fri, 22 Mar 2019 16:39:32 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:56914)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <npickito@gmail.com>) id 1h7OBJ-0004Mr-56
-	for qemu-riscv@nongnu.org; Fri, 22 Mar 2019 13:42:16 -0400
+	(envelope-from <cota@braap.org>) id 1h7QnV-0001Rm-St
+	for qemu-riscv@nongnu.org; Fri, 22 Mar 2019 16:29:52 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <npickito@gmail.com>) id 1h7O8s-0007cK-Ou
-	for qemu-riscv@nongnu.org; Fri, 22 Mar 2019 13:39:43 -0400
-Received: from mail-wr1-x443.google.com ([2a00:1450:4864:20::443]:43691)
-	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <npickito@gmail.com>)
-	id 1h7O8p-0007Oc-Tq; Fri, 22 Mar 2019 13:39:41 -0400
-Received: by mail-wr1-x443.google.com with SMTP id d17so3225732wre.10;
-	Fri, 22 Mar 2019 10:39:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:from:date:message-id:subject:to:cc;
-	bh=JSoN7f9QkT3lcw9+F8G1hSeLONiyvWz6vPe2yIMOcfM=;
-	b=WuMsqQzJyqdcRZclpwDoj8CFMeA9MS43gie0V1tkOqZZrV6nZ3qZl4fsYXAydm4Uqr
-	wI9lq8l4piyllFqxMaS+gTj1ZtF57axTwRuSmXBl3Vcft1xkLvt4iadTArTS4VF8U9JX
-	FLH4EE2Vj8ovejyEnOx+Xlsz76Nl1JvZF2mRHUuS3/2ahUzUr91DqTobftgOtDRwakfu
-	evglS2GVU49Gih5GfO1D+7Zx3+XJNe9ExdFicqW/aVIgvv9BKKIq7ZGppkp7CHzV3rn5
-	oMGNZePybAZEsvLkxe80liGXxyylzRGAK+7VAqQKmqLqU7lLBU5Lz5T51K1c9+nxUJra
-	vfnQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to:cc;
-	bh=JSoN7f9QkT3lcw9+F8G1hSeLONiyvWz6vPe2yIMOcfM=;
-	b=tfGuAjO9g/eQjcSxQZON5puKd9Dx6LjtUnuG01VM5jfMVPZAF5QN0KW/3Z3/Fj4zW8
-	fSSwFEo72THFutWeN1zWLZ2hezGjO7ljJbX2E1oHwHcIM/8Qvvi1EcSjmKRBrnuMHAgC
-	HoDhH/wznKev9tOGjenZMF3Nz/BAMcyp/mEC7zQAt8NJgoOL4wqP/SA23BkFBgc9uhL2
-	LSKh5xOY8uXYt4/84tsaofXpjQtATE8H47e9KL8iiKDSp/bPQS9+dzUri/7lecL/WsEO
-	meCCnJe5x418NIo7g89d6Z6bmBlg2AvjtMZZu0MbRx7Jry7bkYO4WlBsK3DvsRdwi33r
-	3hPA==
-X-Gm-Message-State: APjAAAWcf/tAvfRHvaViTYipbx/3yrxVHyqe4M6p962Giw7OQnjSXxO9
-	eMpdx9+htUHbZuIelfifBIryxA0TqwtU1EDD21gDxGcA
-X-Google-Smtp-Source: APXvYqziraxUmlNLwc89t9sMTthRtLUUZWyfy2BvoK+ZK2x8blHArTVt3juZoMbxuLt9+T0onU24y+pDunltEpdvxsU=
-X-Received: by 2002:a5d:6207:: with SMTP id y7mr7029994wru.60.1553276377419;
-	Fri, 22 Mar 2019 10:39:37 -0700 (PDT)
+	(envelope-from <cota@braap.org>) id 1h7QmP-0000kZ-1g
+	for qemu-riscv@nongnu.org; Fri, 22 Mar 2019 16:28:42 -0400
+Received: from out3-smtp.messagingengine.com ([66.111.4.27]:35549)
+	by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.71) (envelope-from <cota@braap.org>)
+	id 1h7QmB-00006b-9b; Fri, 22 Mar 2019 16:28:33 -0400
+Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
+	by mailout.nyi.internal (Postfix) with ESMTP id 3F97B21F0A;
+	Fri, 22 Mar 2019 16:28:25 -0400 (EDT)
+Received: from mailfrontend2 ([10.202.2.163])
+	by compute4.internal (MEProxy); Fri, 22 Mar 2019 16:28:25 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=braap.org; h=
+	date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:in-reply-to; s=mesmtp; bh=Johshd3s8zyRHwaSQdEhy12b
+	qDuRELwz9asTCJUN1wo=; b=HiyZa6UgoHlnlf+cKbyXozSM5U51yHUWcJLIkBeA
+	Be8v376bdG5nO5k5VzT7I/uRWo3JiqyllhpQC4kWKdIAdKN4Ih/yFt1Lqsgx6pVV
+	NWXpZys/inIbNbF0GnwuvDbD1XLb8ICT52iF5hc1DA/6Mth0GL5u8jDh8BY3EW4c
+	oTI=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to:x-me-proxy
+	:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; bh=Johshd
+	3s8zyRHwaSQdEhy12bqDuRELwz9asTCJUN1wo=; b=6qRLwMp4Adq/HEY+LwfUFT
+	UNjwrKW8s9WLotiwd8uDGSICKNY3lMYterW7Cbvur3uktcbyXGR1V6yT1yUY1G2U
+	IIkdHjt18H345Sb6hfmypVT4ZWTILzhfnpP15pivOXabg2NYqHh6gCdOc8y2LTTC
+	jezgm+zMgIIVjAIgIcnswUGGTFBMXJEZiBk1PxQ6zvOSB62DKLekWuzd+wPkGSId
+	kuCu9DjqKjq+INotQmPYMnGuA6r68bFjcTFx8CvuVM6g+Q5lR1X9awNFhs/CGdsa
+	rKrpqJFMAAO1F2a6fPr7y4OF0r+K0Oo8/buHLoj2R+2kJnTEI/YMz5J2A9aOX21g
+	==
+X-ME-Sender: <xms:aEWVXPcFjL4114BJcy98vT1du8PUaw3vkV22EXUkMdOsZmadb8MGAQ>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedutddrjedugddugedtucetufdoteggodetrfdotf
+	fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+	uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
+	cujfgurhepfffhvffukfhfgggtuggjfgesthdtredttdervdenucfhrhhomhepfdfgmhhi
+	lhhiohcuifdrucevohhtrgdfuceotghothgrsegsrhgrrghprdhorhhgqeenucfkphepud
+	dvkedrheelrddvtddrvdduieenucfrrghrrghmpehmrghilhhfrhhomheptghothgrsegs
+	rhgrrghprdhorhhgnecuvehluhhsthgvrhfuihiivgeptd
+X-ME-Proxy: <xmx:aEWVXMrBhN3iyRmDUuCVzQOCJLFnY-3OZX53ZfDq_cdL20jzAPulww>
+	<xmx:aEWVXGBT3faQGSc7u85av-7qPIViS-AWHpuzsZHyAq8Yke8sJ-oJDg>
+	<xmx:aEWVXMfSq0JRl2buOLtgjUr18uknKZjdq3J2Rk-s6KlZ132k58_aCw>
+	<xmx:aUWVXLPMhpRsPEkupLi9TNYoVlNn2Hgy4T-J3MgX0X0HpKSkldwUMA>
+Received: from localhost (flamenco.cs.columbia.edu [128.59.20.216])
+	by mail.messagingengine.com (Postfix) with ESMTPA id 7174810315;
+	Fri, 22 Mar 2019 16:28:24 -0400 (EDT)
+Date: Fri, 22 Mar 2019 16:28:24 -0400
+From: "Emilio G. Cota" <cota@braap.org>
+To: Kito Cheng <kito.cheng@gmail.com>
+Cc: qemu-devel@nongnu.org, alex.bennee@linaro.org, qemu-riscv@nongnu.org
+Message-ID: <20190322202824.GA6740@flamenco>
+References: <CA+yXCZBs2KDYzJz=--5SjyEJz8s8sn_jtvjDyrU0dJL+L+=MzA@mail.gmail.com>
 MIME-Version: 1.0
-From: Kito Cheng <kito.cheng@gmail.com>
-Date: Sat, 23 Mar 2019 01:39:26 +0800
-Message-ID: <CA+yXCZBs2KDYzJz=--5SjyEJz8s8sn_jtvjDyrU0dJL+L+=MzA@mail.gmail.com>
-To: qemu-devel@nongnu.org, alex.bennee@linaro.org, cota@braap.org
-Cc: qemu-riscv@nongnu.org
-Content-Type: text/plain; charset="UTF-8"
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
-	recognized.
-X-Received-From: 2a00:1450:4864:20::443
-Subject: [Qemu-riscv] [PATCH] hardfloat: fix float32/64 fused multiply-add
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CA+yXCZBs2KDYzJz=--5SjyEJz8s8sn_jtvjDyrU0dJL+L+=MzA@mail.gmail.com>
+User-Agent: Mutt/1.9.4 (2018-02-28)
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+X-Received-From: 66.111.4.27
+X-Mailman-Approved-At: Fri, 22 Mar 2019 16:39:31 -0400
+Subject: Re: [Qemu-riscv] [PATCH] hardfloat: fix float32/64 fused
+ multiply-add
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -60,60 +77,22 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Mar 2019 17:42:17 -0000
+X-List-Received-Date: Fri, 22 Mar 2019 20:29:52 -0000
 
-hardfloat fused multiply-add might fallback to softfloat mode in some
-situation, but it might already changed the value of input operands,
-so we must restore those value before fallback.
+On Sat, Mar 23, 2019 at 01:39:26 +0800, Kito Cheng wrote:
+> hardfloat fused multiply-add might fallback to softfloat mode in some
+> situation, but it might already changed the value of input operands,
+> so we must restore those value before fallback.
+> 
+> This bug is catched by running gcc testsuite on RISC-V qemu.
+> 
+> Signed-off-by: Kito Cheng <kito.cheng@gmail.com>
 
-This bug is catched by running gcc testsuite on RISC-V qemu.
+Good catch!
 
-Signed-off-by: Kito Cheng <kito.cheng@gmail.com>
----
- fpu/softfloat.c | 7 +++++++
- 1 file changed, 7 insertions(+)
+I'll send a v2 shortly with some small changes.
 
-diff --git a/fpu/softfloat.c b/fpu/softfloat.c
-index 4610738..f53f391 100644
---- a/fpu/softfloat.c
-+++ b/fpu/softfloat.c
-@@ -1596,6 +1596,7 @@ float32_muladd(float32 xa, float32 xb, float32
-xc, int flags, float_status *s)
-         }
-         ur.h = up.h + uc.h;
-     } else {
-+        union_float32 ux = ua, uy = uc;
-         if (flags & float_muladd_negate_product) {
-             ua.h = -ua.h;
-         }
-@@ -1608,6 +1609,8 @@ float32_muladd(float32 xa, float32 xb, float32
-xc, int flags, float_status *s)
-         if (unlikely(f32_is_inf(ur))) {
-             s->float_exception_flags |= float_flag_overflow;
-         } else if (unlikely(fabsf(ur.h) <= FLT_MIN)) {
-+            ua.h = ux.h;
-+            uc.h = uy.h;
-             goto soft;
-         }
-     }
-@@ -1662,6 +1665,8 @@ float64_muladd(float64 xa, float64 xb, float64
-xc, int flags, float_status *s)
-         }
-         ur.h = up.h + uc.h;
-     } else {
-+        union_float64 ux = ua, uy = uc;
-+
-         if (flags & float_muladd_negate_product) {
-             ua.h = -ua.h;
-         }
-@@ -1674,6 +1679,8 @@ float64_muladd(float64 xa, float64 xb, float64
-xc, int flags, float_status *s)
-         if (unlikely(f64_is_inf(ur))) {
-             s->float_exception_flags |= float_flag_overflow;
-         } else if (unlikely(fabs(ur.h) <= FLT_MIN)) {
-+            ua.h = ux.h;
-+            uc.h = uy.h;
-             goto soft;
-         }
-     }
+Thanks,
+
+		Emilio
 
