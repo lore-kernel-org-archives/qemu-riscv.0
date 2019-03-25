@@ -1,53 +1,77 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1h8OAr-0006zT-I4
-	for mharc-qemu-riscv@gnu.org; Mon, 25 Mar 2019 07:53:53 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:39907)
+	id 1h8SwR-0006Wd-DA
+	for mharc-qemu-riscv@gnu.org; Mon, 25 Mar 2019 12:59:19 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:48085)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <chouteau@adacore.com>) id 1h8OAp-0006yS-O0
-	for qemu-riscv@nongnu.org; Mon, 25 Mar 2019 07:53:52 -0400
+	(envelope-from <richard.henderson@linaro.org>) id 1h8SwO-0006U6-T2
+	for qemu-riscv@nongnu.org; Mon, 25 Mar 2019 12:59:17 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <chouteau@adacore.com>) id 1h8OAo-0004cJ-Mp
-	for qemu-riscv@nongnu.org; Mon, 25 Mar 2019 07:53:51 -0400
-Received: from mel.act-europe.fr ([194.98.77.210]:34932
-	helo=smtp.eu.adacore.com)
-	by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.71) (envelope-from <chouteau@adacore.com>)
-	id 1h8O5w-0001pt-IE; Mon, 25 Mar 2019 07:48:48 -0400
-Received: from localhost (localhost [127.0.0.1])
-	by filtered-smtp.eu.adacore.com (Postfix) with ESMTP id BF5DE8139F;
-	Mon, 25 Mar 2019 12:48:47 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at eu.adacore.com
-Received: from smtp.eu.adacore.com ([127.0.0.1])
-	by localhost (smtp.eu.adacore.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id DzKoiwlBvrFF; Mon, 25 Mar 2019 12:48:47 +0100 (CET)
-Received: from [192.168.42.81] (unknown [37.168.121.157])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-	(No client certificate requested)
-	by smtp.eu.adacore.com (Postfix) with ESMTPSA id 3854B81399;
-	Mon, 25 Mar 2019 12:48:47 +0100 (CET)
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
+	(envelope-from <richard.henderson@linaro.org>) id 1h8SwL-0003qG-2z
+	for qemu-riscv@nongnu.org; Mon, 25 Mar 2019 12:59:16 -0400
+Received: from mail-pl1-x642.google.com ([2607:f8b0:4864:20::642]:33244)
+	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+	(Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
+	id 1h8SwJ-0003o6-Dq
+	for qemu-riscv@nongnu.org; Mon, 25 Mar 2019 12:59:12 -0400
+Received: by mail-pl1-x642.google.com with SMTP id bg8so230770plb.0
+	for <qemu-riscv@nongnu.org>; Mon, 25 Mar 2019 09:59:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+	h=subject:to:cc:references:from:openpgp:message-id:date:user-agent
+	:mime-version:in-reply-to:content-language:content-transfer-encoding;
+	bh=a5ZedghKB5WDlCS7hZqwi6ZQO4obLH3TjCTaRFDUGQ4=;
+	b=t0xb+D4D4DAD7A7jQuyHtBsOYHmojphjQ9DDCxf72CX5fcpw4jYunVkftqG2zJWZ1L
+	5672sAvVyPYPr9eXMWN7B7FGgMBdGMmyYPe0NtosaPZV8unRUmJq3s3G1zC8GBfCyjcV
+	2sibZ2pQRcfgcAsu/MArvkDenLVpqfZsaSSe6XelRIZzti9TQKot8KOwPK2KF0HswnP/
+	F6upaum/sOT13Hrt/ANSb/JT2OoRjIv5+iqk5WERuHbWBQQ5yC1n0zONWs021fUkAIdu
+	y3/Nh8HoDIn2F2qkJKwWsdCLV8bc16ZHQxBiZx8xA4M/JM7l5dHNPDFfa5XHxjxE7wcv
+	BFnw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
+	:date:user-agent:mime-version:in-reply-to:content-language
+	:content-transfer-encoding;
+	bh=a5ZedghKB5WDlCS7hZqwi6ZQO4obLH3TjCTaRFDUGQ4=;
+	b=Pcf2c2SNUM6cGnJRYTU7QWjuxRlGnwQlb9SmM09ONZxPnspv+ne3i4hDdt4oNpASIY
+	s5IDh37+61O4rLSHcjv62a0ACBE/E5s6Z3azvwlCcEwj9e4iMwC3f8nEQrQBwiB7oWu+
+	SqsMGyLpZNP2sdBb8SB1Bpb57JpOvRpp9hajqaPGDzHk/mnmCgzw9oQNekD5QaYKasRD
+	fHr21a5iAHnE7BwiuCxfQBECOoL9qBcJT1haeLsdGcg33MC6dKdiCEc40j2RS8eA+Eua
+	0FRPkHtkeHx1rgMxcsCmQq/Fa9L25YkFub4G3ps9a8DO7jdak9upeyrSPeTU11/wB5xQ
+	auww==
+X-Gm-Message-State: APjAAAV/yk9dQdeBi5YQR7Cwsdy8I5kvGD+MQ0rAUfBHDgPsM5yyPv5d
+	fEs2dHC9yTWj9WCK6kf1JHILvg==
+X-Google-Smtp-Source: APXvYqwZnXReFj1DrvsKgmjcR4GVDnlar7HvEOxfbiJ7eO5SATWBBbGzQnZ0H91GRPXUIFl6pnahQg==
+X-Received: by 2002:a17:902:9683:: with SMTP id
+	n3mr26560575plp.333.1553533149834; 
+	Mon, 25 Mar 2019 09:59:09 -0700 (PDT)
+Received: from [192.168.1.11] (174-21-5-201.tukw.qwest.net. [174.21.5.201])
+	by smtp.gmail.com with ESMTPSA id
+	d69sm13302663pfg.26.2019.03.25.09.59.08
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 25 Mar 2019 09:59:09 -0700 (PDT)
+To: Fabien Chouteau <chouteau@adacore.com>
+Cc: Palmer Dabbelt <palmer@sifive.com>,
+	Alistair Francis <Alistair.Francis@wdc.com>,
 	Sagar Karandikar <sagark@eecs.berkeley.edu>,
 	Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
-	Palmer Dabbelt <palmer@sifive.com>,
-	"open list:All patches CC here" <qemu-devel@nongnu.org>,
-	Alistair Francis <Alistair.Francis@wdc.com>
-References: <20190322112226.26890-1-chouteau@adacore.com>
-	<43360785-4c71-bda6-c2f0-a5b02838865c@linaro.org>
-From: Fabien Chouteau <chouteau@adacore.com>
-Message-ID: <eceb7ec3-73cd-a058-1410-e9217ec27ff4@adacore.com>
-Date: Mon, 25 Mar 2019 12:48:45 +0100
+	"open list:RISC-V" <qemu-riscv@nongnu.org>,
+	"open list:All patches CC here" <qemu-devel@nongnu.org>
+References: <20190325114554.7388-1-chouteau@adacore.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+Openpgp: preference=signencrypt
+Message-ID: <7b79d668-fffb-35ed-b855-e27eab819a05@linaro.org>
+Date: Mon, 25 Mar 2019 09:59:06 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
 	Thunderbird/60.5.1
 MIME-Version: 1.0
-In-Reply-To: <43360785-4c71-bda6-c2f0-a5b02838865c@linaro.org>
+In-Reply-To: <20190325114554.7388-1-chouteau@adacore.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 3.x
-X-Received-From: 194.98.77.210
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH] RISC-V: fix single stepping
- over ret and other branching instructions
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+	recognized.
+X-Received-From: 2607:f8b0:4864:20::642
+Subject: Re: [Qemu-riscv] [PATCH V2] RISC-V: fix single stepping over ret
+ and other branching instructions
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -59,41 +83,26 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Mar 2019 11:53:52 -0000
+X-List-Received-Date: Mon, 25 Mar 2019 16:59:17 -0000
 
-Thanks Richard,
+On 3/25/19 4:45 AM, Fabien Chouteau wrote:
+> This patch introduces wrappers around the tcg_gen_exit_tb() and
+> tcg_gen_lookup_and_goto_ptr() functions that handle single stepping,
+> i.e. call gen_exception_debug() when single stepping is enabled.
+> 
+> Theses functions are then used instead of the originals, bringing single
+> stepping handling in places where it was previously ignored such as jalr
+> and system branch instructions (ecall, mret, sret, etc.).
+> 
+> Signed-off-by: Fabien Chouteau <chouteau@adacore.com>
+> ---
+>  .../riscv/insn_trans/trans_privileged.inc.c   |  8 ++---
+>  target/riscv/insn_trans/trans_rvi.inc.c       |  6 ++--
+>  target/riscv/translate.c                      | 30 +++++++++++++++----
+>  3 files changed, 32 insertions(+), 12 deletions(-)
 
-I sent a version 2.
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
-On 22/03/2019 16:24, Richard Henderson wrote:
-> On 3/22/19 4:22 AM, Fabien Chouteau wrote:
->> +/* Wrapper around tcg_gen_exit_tb that handles single stepping */
->> +static void exit_tb(DisasContext *ctx, TranslationBlock *tb, unsigned idx)
->> +{
->> +    if (ctx->base.singlestep_enabled) {
->> +        gen_exception_debug();
->> +    } else {
->> +        tcg_gen_exit_tb(tb, idx);
->> +    }
->> +}
-> 
-> You should remove the TB and idx parameters here and pass NULL, 0 to
-> tcg_gen_exit_tb.
-> 
->> @@ -138,14 +158,10 @@ static void gen_goto_tb(DisasContext *ctx, int n, target_ulong dest)
->>          /* chaining is only allowed when the jump is to the same page */
->>          tcg_gen_goto_tb(n);
->>          tcg_gen_movi_tl(cpu_pc, dest);
->> -        tcg_gen_exit_tb(ctx->base.tb, n);
->> +        exit_tb(ctx, ctx->base.tb, n);
-> 
-> Because this is the only non-zero use, and it is already protected by
-> use_goto_tb, which includes the single-step check.
-> 
-> Because goto_tb(n) must be paired with exit_tb(tb, n), and vice-versa.
-> 
-> 
-> r~
-> 
 
+r~
 
