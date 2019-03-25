@@ -1,75 +1,46 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1h7nk1-0001K2-My
-	for mharc-qemu-riscv@gnu.org; Sat, 23 Mar 2019 16:59:45 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:39054)
+	id 1h8O3Z-0004g7-LB
+	for mharc-qemu-riscv@gnu.org; Mon, 25 Mar 2019 07:46:21 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:38808)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <richard.henderson@linaro.org>) id 1h7njs-0000hJ-0Q
-	for qemu-riscv@nongnu.org; Sat, 23 Mar 2019 16:59:36 -0400
+	(envelope-from <chouteau@adacore.com>) id 1h8O3X-0004em-H3
+	for qemu-riscv@nongnu.org; Mon, 25 Mar 2019 07:46:20 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <richard.henderson@linaro.org>) id 1h7nby-0006Bn-EK
-	for qemu-riscv@nongnu.org; Sat, 23 Mar 2019 16:51:27 -0400
-Received: from mail-pf1-x441.google.com ([2607:f8b0:4864:20::441]:34886)
-	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
-	id 1h7nbx-0006B4-N9
-	for qemu-riscv@nongnu.org; Sat, 23 Mar 2019 16:51:26 -0400
-Received: by mail-pf1-x441.google.com with SMTP id t21so3779716pfe.2
-	for <qemu-riscv@nongnu.org>; Sat, 23 Mar 2019 13:51:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
-	h=subject:to:cc:references:from:openpgp:message-id:date:user-agent
-	:mime-version:in-reply-to:content-language:content-transfer-encoding;
-	bh=UPL4AXc9q7lhlI+Uvf3gFDGUV/Mc8IfOaMR212a64hw=;
-	b=w1jR/79TYWXCmny+KewbYhKolTyEwnOsUzLet7YL6k1JKS1pzfNx8pPu6tKrnqLJGd
-	3dC3W8PhTMUvZ0EwoQ7Vq50Zpor7PwNNsTxRII1r8P9ouBV5kL9eH62pV/X+VofSu0L6
-	yeFemBH61LUNeR9dWgeb0GytiRlgQ2n+vyaEk3MFyb5E9KAx5OcuJv6QtFOK4cCix0GK
-	EoPsDlOeS8QrWqyfZx8MFYjuWYRB/InZsqVeyEqXQOgzo37jc9WJZuoiQ0rJAnF4Ivkg
-	YBhYK43nJbFr0PuSwOE3qPmt+wPRH6lkY6MTuEVsVFzKawM6/1+R9KaIc1zXsZl0Wf/v
-	yKVA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
-	:date:user-agent:mime-version:in-reply-to:content-language
-	:content-transfer-encoding;
-	bh=UPL4AXc9q7lhlI+Uvf3gFDGUV/Mc8IfOaMR212a64hw=;
-	b=WLvPku80iipjXaOACHxukI5iQfamK9fAgP3vO04OLSg4R+r54VuRc+GXH/Tl7pRxlZ
-	7FAilKBrUlypSIt6n65/2LBUtCbdDeVPvT6iimybgUYa5g6Efg83lSew9J6neIoormsk
-	Ij24d2fSSuwLm2vs0YHyt2xIyVXr63Je1r59/I08sl/vuiOTZeLWZUHOY1vFitB2yC5y
-	Se0avW/IXBLTjLC/IzpsuBb992XpCRjYWNyymfOi/xyH+ImCXY5ZTuNR3ZHzqNlppuSp
-	5NZpTzuzqD9LgvmlXg+vp0QjQGDKgWZ2NlL1ec500tAnxpi45Dudz8a8neJrIegBMe/w
-	U4Jw==
-X-Gm-Message-State: APjAAAVv5iDZuooDkBytponl6opDDliLbkSD2EnpWA0F3oGf/YuMOziV
-	ocwm1WbJUb2CNE8zoh/MknDUcA==
-X-Google-Smtp-Source: APXvYqwryTt+H4/ZAZEcQ8S8jiu78xxVcHWr2QCf+ag1GE+zfwv5YG7JAN5fsyg0y97gKhQ7yG8TBA==
-X-Received: by 2002:a62:29c6:: with SMTP id
-	p189mr16621539pfp.194.1553374284531; 
-	Sat, 23 Mar 2019 13:51:24 -0700 (PDT)
-Received: from [192.168.1.11] (174-21-5-201.tukw.qwest.net. [174.21.5.201])
-	by smtp.gmail.com with ESMTPSA id
-	k3sm26412278pfc.59.2019.03.23.13.51.23
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 23 Mar 2019 13:51:23 -0700 (PDT)
-To: "Emilio G. Cota" <cota@braap.org>, qemu-devel@nongnu.org
-Cc: =?UTF-8?Q?Alex_Benn=c3=a9e?= <alex.bennee@linaro.org>,
-	Kito Cheng <kito.cheng@gmail.com>, qemu-riscv@nongnu.org,
-	Aurelien Jarno <aurelien@aurel32.net>,
-	Peter Maydell <peter.maydell@linaro.org>
-References: <20190322204320.17777-1-cota@braap.org>
-From: Richard Henderson <richard.henderson@linaro.org>
-Openpgp: preference=signencrypt
-Message-ID: <64df8e3e-d6ee-f68e-86de-c5fc3d8da5b7@linaro.org>
-Date: Sat, 23 Mar 2019 13:51:21 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.5.1
-MIME-Version: 1.0
-In-Reply-To: <20190322204320.17777-1-cota@braap.org>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
-	recognized.
-X-Received-From: 2607:f8b0:4864:20::441
-Subject: Re: [Qemu-riscv] [PATCH v2 for-4.0] hardfloat: fix float32/64 fused
- multiply-add
+	(envelope-from <chouteau@adacore.com>) id 1h8O3V-0000za-AD
+	for qemu-riscv@nongnu.org; Mon, 25 Mar 2019 07:46:18 -0400
+Received: from mel.act-europe.fr ([194.98.77.210]:34760
+	helo=smtp.eu.adacore.com)
+	by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.71) (envelope-from <chouteau@adacore.com>)
+	id 1h8O3P-0000v1-FO; Mon, 25 Mar 2019 07:46:11 -0400
+Received: from localhost (localhost [127.0.0.1])
+	by filtered-smtp.eu.adacore.com (Postfix) with ESMTP id 5A6668139F;
+	Mon, 25 Mar 2019 12:46:09 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at eu.adacore.com
+Received: from smtp.eu.adacore.com ([127.0.0.1])
+	by localhost (smtp.eu.adacore.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id MHBhkJQn5Xgb; Mon, 25 Mar 2019 12:46:09 +0100 (CET)
+Received: from ledoue.clients.t29.sncf.fr (unknown [37.168.121.157])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	(No client certificate requested)
+	by smtp.eu.adacore.com (Postfix) with ESMTPSA id 354F881399;
+	Mon, 25 Mar 2019 12:46:08 +0100 (CET)
+From: Fabien Chouteau <chouteau@adacore.com>
+To: 
+Cc: richard.henderson@linaro.org, Fabien Chouteau <chouteau@adacore.com>,
+	Palmer Dabbelt <palmer@sifive.com>,
+	Alistair Francis <Alistair.Francis@wdc.com>,
+	Sagar Karandikar <sagark@eecs.berkeley.edu>,
+	Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+	qemu-riscv@nongnu.org (open list:RISC-V),
+	qemu-devel@nongnu.org (open list:All patches CC here)
+Date: Mon, 25 Mar 2019 12:45:54 +0100
+Message-Id: <20190325114554.7388-1-chouteau@adacore.com>
+X-Mailer: git-send-email 2.17.1
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 3.x
+X-Received-From: 194.98.77.210
+Subject: [Qemu-riscv] [PATCH V2] RISC-V: fix single stepping over ret and
+ other branching instructions
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -81,18 +52,146 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 23 Mar 2019 20:59:37 -0000
+X-List-Received-Date: Mon, 25 Mar 2019 11:46:20 -0000
 
-On 3/22/19 1:43 PM, Emilio G. Cota wrote:
-> From: Kito Cheng <kito.cheng@gmail.com>
-> 
-> Before falling back to softfloat FMA, we do not restore the original
-> values of inputs A and C. Fix it.
+This patch introduces wrappers around the tcg_gen_exit_tb() and
+tcg_gen_lookup_and_goto_ptr() functions that handle single stepping,
+i.e. call gen_exception_debug() when single stepping is enabled.
 
+Theses functions are then used instead of the originals, bringing single
+stepping handling in places where it was previously ignored such as jalr
+and system branch instructions (ecall, mret, sret, etc.).
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Signed-off-by: Fabien Chouteau <chouteau@adacore.com>
+---
+ .../riscv/insn_trans/trans_privileged.inc.c   |  8 ++---
+ target/riscv/insn_trans/trans_rvi.inc.c       |  6 ++--
+ target/riscv/translate.c                      | 30 +++++++++++++++----
+ 3 files changed, 32 insertions(+), 12 deletions(-)
 
-
-r~
+diff --git a/target/riscv/insn_trans/trans_privileged.inc.c b/target/riscv/insn_trans/trans_privileged.inc.c
+index acb605923e..664d6ba3f2 100644
+--- a/target/riscv/insn_trans/trans_privileged.inc.c
++++ b/target/riscv/insn_trans/trans_privileged.inc.c
+@@ -22,7 +22,7 @@ static bool trans_ecall(DisasContext *ctx, arg_ecall *a)
+ {
+     /* always generates U-level ECALL, fixed in do_interrupt handler */
+     generate_exception(ctx, RISCV_EXCP_U_ECALL);
+-    tcg_gen_exit_tb(NULL, 0); /* no chaining */
++    exit_tb(ctx); /* no chaining */
+     ctx->base.is_jmp = DISAS_NORETURN;
+     return true;
+ }
+@@ -30,7 +30,7 @@ static bool trans_ecall(DisasContext *ctx, arg_ecall *a)
+ static bool trans_ebreak(DisasContext *ctx, arg_ebreak *a)
+ {
+     generate_exception(ctx, RISCV_EXCP_BREAKPOINT);
+-    tcg_gen_exit_tb(NULL, 0); /* no chaining */
++    exit_tb(ctx); /* no chaining */
+     ctx->base.is_jmp = DISAS_NORETURN;
+     return true;
+ }
+@@ -47,7 +47,7 @@ static bool trans_sret(DisasContext *ctx, arg_sret *a)
+ 
+     if (has_ext(ctx, RVS)) {
+         gen_helper_sret(cpu_pc, cpu_env, cpu_pc);
+-        tcg_gen_exit_tb(NULL, 0); /* no chaining */
++        exit_tb(ctx); /* no chaining */
+         ctx->base.is_jmp = DISAS_NORETURN;
+     } else {
+         return false;
+@@ -68,7 +68,7 @@ static bool trans_mret(DisasContext *ctx, arg_mret *a)
+ #ifndef CONFIG_USER_ONLY
+     tcg_gen_movi_tl(cpu_pc, ctx->base.pc_next);
+     gen_helper_mret(cpu_pc, cpu_env, cpu_pc);
+-    tcg_gen_exit_tb(NULL, 0); /* no chaining */
++    exit_tb(ctx); /* no chaining */
+     ctx->base.is_jmp = DISAS_NORETURN;
+     return true;
+ #else
+diff --git a/target/riscv/insn_trans/trans_rvi.inc.c b/target/riscv/insn_trans/trans_rvi.inc.c
+index d420a4d8b2..37b0b9dd19 100644
+--- a/target/riscv/insn_trans/trans_rvi.inc.c
++++ b/target/riscv/insn_trans/trans_rvi.inc.c
+@@ -60,7 +60,7 @@ static bool trans_jalr(DisasContext *ctx, arg_jalr *a)
+     if (a->rd != 0) {
+         tcg_gen_movi_tl(cpu_gpr[a->rd], ctx->pc_succ_insn);
+     }
+-    tcg_gen_lookup_and_goto_ptr();
++    lookup_and_goto_ptr(ctx);
+ 
+     if (misaligned) {
+         gen_set_label(misaligned);
+@@ -483,7 +483,7 @@ static bool trans_fence_i(DisasContext *ctx, arg_fence_i *a)
+      * however we need to end the translation block
+      */
+     tcg_gen_movi_tl(cpu_pc, ctx->pc_succ_insn);
+-    tcg_gen_exit_tb(NULL, 0);
++    exit_tb(ctx);
+     ctx->base.is_jmp = DISAS_NORETURN;
+     return true;
+ }
+@@ -504,7 +504,7 @@ static bool trans_fence_i(DisasContext *ctx, arg_fence_i *a)
+     gen_io_end(); \
+     gen_set_gpr(a->rd, dest); \
+     tcg_gen_movi_tl(cpu_pc, ctx->pc_succ_insn); \
+-    tcg_gen_exit_tb(NULL, 0); \
++    exit_tb(ctx); \
+     ctx->base.is_jmp = DISAS_NORETURN; \
+     tcg_temp_free(source1); \
+     tcg_temp_free(csr_store); \
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index 049fa65c66..7417c532f2 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -109,6 +109,26 @@ static void gen_exception_debug(void)
+     tcg_temp_free_i32(helper_tmp);
+ }
+ 
++/* Wrapper around tcg_gen_exit_tb that handles single stepping */
++static void exit_tb(DisasContext *ctx)
++{
++    if (ctx->base.singlestep_enabled) {
++        gen_exception_debug();
++    } else {
++        tcg_gen_exit_tb(NULL, 0);
++    }
++}
++
++/* Wrapper around tcg_gen_lookup_and_goto_ptr that handles single stepping */
++static void lookup_and_goto_ptr(DisasContext *ctx)
++{
++    if (ctx->base.singlestep_enabled) {
++        gen_exception_debug();
++    } else {
++        tcg_gen_lookup_and_goto_ptr();
++    }
++}
++
+ static void gen_exception_illegal(DisasContext *ctx)
+ {
+     generate_exception(ctx, RISCV_EXCP_ILLEGAL_INST);
+@@ -138,14 +158,14 @@ static void gen_goto_tb(DisasContext *ctx, int n, target_ulong dest)
+         /* chaining is only allowed when the jump is to the same page */
+         tcg_gen_goto_tb(n);
+         tcg_gen_movi_tl(cpu_pc, dest);
++
++        /* No need to check for single stepping here as use_goto_tb() will
++         * return false in case of single stepping.
++         */
+         tcg_gen_exit_tb(ctx->base.tb, n);
+     } else {
+         tcg_gen_movi_tl(cpu_pc, dest);
+-        if (ctx->base.singlestep_enabled) {
+-            gen_exception_debug();
+-        } else {
+-            tcg_gen_lookup_and_goto_ptr();
+-        }
++        lookup_and_goto_ptr(ctx);
+     }
+ }
+ 
+-- 
+2.17.1
 
 
