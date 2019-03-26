@@ -1,65 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1h8uV1-0000CQ-T2
-	for mharc-qemu-riscv@gnu.org; Tue, 26 Mar 2019 18:24:51 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:39609)
+	id 1h8uVJ-0000Yr-Dx
+	for mharc-qemu-riscv@gnu.org; Tue, 26 Mar 2019 18:25:09 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:39667)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1h8uUz-0008Pm-4e
-	for qemu-riscv@nongnu.org; Tue, 26 Mar 2019 18:24:50 -0400
+	(envelope-from <alistair23@gmail.com>) id 1h8uVF-0000Cz-Ix
+	for qemu-riscv@nongnu.org; Tue, 26 Mar 2019 18:25:08 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1h8uUX-0001JI-Om
-	for qemu-riscv@nongnu.org; Tue, 26 Mar 2019 18:24:22 -0400
-Received: from mail-lf1-x144.google.com ([2a00:1450:4864:20::144]:44876)
+	(envelope-from <alistair23@gmail.com>) id 1h8uR6-0000Bc-TA
+	for qemu-riscv@nongnu.org; Tue, 26 Mar 2019 18:20:49 -0400
+Received: from mail-lj1-x241.google.com ([2a00:1450:4864:20::241]:44549)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
 	(Exim 4.71) (envelope-from <alistair23@gmail.com>)
-	id 1h8uUX-0001Ic-GE; Tue, 26 Mar 2019 18:24:21 -0400
-Received: by mail-lf1-x144.google.com with SMTP id u9so9810279lfe.11;
-	Tue, 26 Mar 2019 15:24:21 -0700 (PDT)
+	id 1h8uR5-0000B5-IF; Tue, 26 Mar 2019 18:20:47 -0400
+Received: by mail-lj1-x241.google.com with SMTP id h16so8120798ljg.11;
+	Tue, 26 Mar 2019 15:20:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=PYgWmmTn3NwIaawUFswp1rZ15I4nIekeAzFFevppZuY=;
-	b=sjseeZnRIKv7OobHHgG/Yb0silxgRt87BRVyy8g0tuBn3lgI7zRS7S2c0RKrBbn43b
-	pmuK/vp+uvoRZqMwjwmK2kslVsy/vxImJBr8VGMCIE9ecAWHR7szfkFQaubW5+7xw7Vk
-	+I1gPYW9crum3NBTamQoKzmBRz0WDvxuqc7b/8pWuGCBgh2tePNatG2CAHvs7VULp3SD
-	WsiUqWmKU2uWeiPMTOKymYjKRLlvuZXpf3N3bYNCWMRo0iJVtfEL9y5pfx97/pOZBsK/
-	JGvbrTUWNEUw8m6S2GstGvz+g92+Pgoy3aT0hXwO0U68l1+as/BmA3R/tSw6nsnr+KsM
-	PaPw==
+	:cc; bh=N+R17ccxjzsApgKTqfojKuz9eLObRWgQdCrJJoJxatE=;
+	b=jYqa7lChNHEEbq6L1BPMgveKvJ5/9qVdHDDGQWfcHoIkr1znoivvfa2lI2t1Fb1lcX
+	syCU/IT+eYOTDXmIKdjwhHFfAbLLW8hrLugxb/WIaJuhb7u2aGD14Cky8/AJpnNMboRB
+	PHYEUex29pFKTQRCEh77ZZQQYCH/0ZnznV73tQZK8mKmipUETGCO9lvcS3kpdLxYf2e9
+	QJLVK1s2XfY2QkOjOr2sPUEJ5zjtbc1zZdoGXJw0+SgsvcnpvpvzIIoYcJ0DWFe17J34
+	h91qmP9pkq7ecjwTPAgQKkZQSAU7VkPCCw+TT9Ee3LnI0yWLhBzI5vbzMoeEKUkq7juo
+	8h3A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=PYgWmmTn3NwIaawUFswp1rZ15I4nIekeAzFFevppZuY=;
-	b=nUoJlGDCnyDH+0qMSKrbLHOCYbU608rsDCWYiyTqbPPwdNPKDYfhUgOFOcHtR4gSFx
-	+zeanALw4BoTE5D+GoCtCVGBGRUYWlu6RJ0nPeU7GBxpHeE9jwxRXz2LS+0VsfiMCnF8
-	gkCpe17UvJE1ONdy9sdRtja8SLHdUxVGhtDdsjHN/tTxC/QwU6fCfqbdewLahTq3rzJg
-	5FOwFyPlxVXi75nMPjGrSlxNOqmYqOd0olE3Y959VDCw/6ALs2s/ZKxI2OP1CbLqXDd5
-	z0dc9DkO9Kjx77WTfFsMy1klhWSypA/1/Bp4XRymxj6sv5ShVU6sACjn4EPpvmgzSKFO
-	s+6A==
-X-Gm-Message-State: APjAAAWDyVHC/EE/DdyXlAcZdGxtxrwoPDZjOskrgl+5vj4jK/Uph7PP
-	ITVWOBxsacfeK2OIJszknvIThr+72p9AbntcDSA=
-X-Google-Smtp-Source: APXvYqyrsHAAi41O2zgyiEeMeKVoHcWrqgetIWM5rVMWoZJvnJwyXRALC/LoTh5xOr5Y1GC0+U7x922TIPAkiqlh4dQ=
-X-Received: by 2002:a19:40cc:: with SMTP id n195mr4215170lfa.150.1553639060223;
-	Tue, 26 Mar 2019 15:24:20 -0700 (PDT)
+	bh=N+R17ccxjzsApgKTqfojKuz9eLObRWgQdCrJJoJxatE=;
+	b=D1B5GP2OOTrwfDwDuyWyY2i/oQvf7ZkdNNbnq5RO6FejntDWDx3zHYmwuobBNxA2lK
+	gXNwg5G9e64y4izdvI8sz1XDJ3cxU4L136h6O2xe3+ZcLc97y+hRv7O20IcvRWsvJcta
+	is0BGQCRjTfd/beR10UNsgZEb4e+llx2VOXdVSdJD6lS9Pc4tJkzZgE/9b/Rjtdj4F7Y
+	iYFc+oOu+QeJgs+Nab3s9NZ/uw7nlDbI1MavyLX/yWt6Xsn2oe6v1wOt6RbN6XD8umIS
+	rGtMlmTc0l+37yBohlTYKahZa9bXPmWgVBYrWsQUF+1+/x8jb/pS17GQqhreaxItcOub
+	z2bA==
+X-Gm-Message-State: APjAAAVWC5S2viv9kRRbCZEu0RUgtGuBPSuyb6WpavK0j3LgUjMesfGK
+	Unp1ut45di7ccY709N9TF+gjbR5saf6QmT8K1hw=
+X-Google-Smtp-Source: APXvYqysdPNi3yY9wH9/d7vET8ku+sznbX01aBq9Nu20m+adjQEvJY4iwRywbplUbX49NtJAxW/uk7W/5vulNFgdOeg=
+X-Received: by 2002:a2e:8ec5:: with SMTP id e5mr17609225ljl.7.1553638846079;
+	Tue, 26 Mar 2019 15:20:46 -0700 (PDT)
 MIME-Version: 1.0
-References: <20190325114554.7388-1-chouteau@adacore.com>
-	<7b79d668-fffb-35ed-b855-e27eab819a05@linaro.org>
-In-Reply-To: <7b79d668-fffb-35ed-b855-e27eab819a05@linaro.org>
+References: <cover.1553129005.git.alistair.francis@wdc.com>
+In-Reply-To: <cover.1553129005.git.alistair.francis@wdc.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 26 Mar 2019 15:23:01 -0700
-Message-ID: <CAKmqyKOak5=8Z_Tu+a1xncGvg8k9no4DBPEQqgMTLX+On0c8ZA@mail.gmail.com>
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: Fabien Chouteau <chouteau@adacore.com>,
-	"open list:RISC-V" <qemu-riscv@nongnu.org>, 
-	Sagar Karandikar <sagark@eecs.berkeley.edu>, 
-	Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
-	Palmer Dabbelt <palmer@sifive.com>, 
-	"open list:All patches CC here" <qemu-devel@nongnu.org>,
-	Alistair Francis <Alistair.Francis@wdc.com>
+Date: Tue, 26 Mar 2019 15:19:25 -0700
+Message-ID: <CAKmqyKNwBe+mfDDDw3gW_avKCpNAfb=0Y6kngb4fJ+jEHpSuVg@mail.gmail.com>
+To: Alistair Francis <Alistair.Francis@wdc.com>
+Cc: "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>,
+	"qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>, 
+	"palmer@sifive.com" <palmer@sifive.com>
 Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2a00:1450:4864:20::144
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH V2] RISC-V: fix single
- stepping over ret and other branching instructions
+X-Received-From: 2a00:1450:4864:20::241
+Subject: Re: [Qemu-riscv] [PATCH for 4.0 v1 0/5] Update the QEMU PLIC
+ addresses
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -71,35 +66,35 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Mar 2019 22:24:50 -0000
+X-List-Received-Date: Tue, 26 Mar 2019 22:25:08 -0000
 
-On Mon, Mar 25, 2019 at 9:59 AM Richard Henderson
-<richard.henderson@linaro.org> wrote:
+On Wed, Mar 20, 2019 at 5:45 PM Alistair Francis
+<Alistair.Francis@wdc.com> wrote:
 >
-> On 3/25/19 4:45 AM, Fabien Chouteau wrote:
-> > This patch introduces wrappers around the tcg_gen_exit_tb() and
-> > tcg_gen_lookup_and_goto_ptr() functions that handle single stepping,
-> > i.e. call gen_exception_debug() when single stepping is enabled.
-> >
-> > Theses functions are then used instead of the originals, bringing single
-> > stepping handling in places where it was previously ignored such as jalr
-> > and system branch instructions (ecall, mret, sret, etc.).
-> >
-> > Signed-off-by: Fabien Chouteau <chouteau@adacore.com>
-> > ---
-> >  .../riscv/insn_trans/trans_privileged.inc.c   |  8 ++---
-> >  target/riscv/insn_trans/trans_rvi.inc.c       |  6 ++--
-> >  target/riscv/translate.c                      | 30 +++++++++++++++----
-> >  3 files changed, 32 insertions(+), 12 deletions(-)
+> This series updates the PLIC address to match the documentation.
 >
-> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+> This fixes: https://github.com/riscv/opensbi/issues/97
+>
+> Alistair Francis (5):
+>   riscv: plic: Fix incorrect irq calculation
+>   riscv: sifive_u: Fix PLIC priority base offset and numbering
+>   riscv: sifive_e: Fix PLIC priority base offset
+>   riscv: virt: Fix PLIC priority base offset
+>   riscv: plic: Log guest errors
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Ping! Can this make it into 4.0?
 
 Alistair
 
 >
+>  hw/riscv/sifive_plic.c      | 16 +++++++++++-----
+>  hw/riscv/sifive_u.c         |  2 +-
+>  include/hw/riscv/sifive_e.h |  2 +-
+>  include/hw/riscv/sifive_u.h |  4 ++--
+>  include/hw/riscv/virt.h     |  2 +-
+>  5 files changed, 16 insertions(+), 10 deletions(-)
 >
-> r~
+> --
+> 2.21.0
 >
 
