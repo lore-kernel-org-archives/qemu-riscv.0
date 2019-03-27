@@ -1,68 +1,50 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1h91pT-0001Bm-46
-	for mharc-qemu-riscv@gnu.org; Wed, 27 Mar 2019 02:14:27 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:54484)
+	id 1h94Rv-0006h1-9S
+	for mharc-qemu-riscv@gnu.org; Wed, 27 Mar 2019 05:02:19 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:53293)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1h91pN-00011u-De
-	for qemu-riscv@nongnu.org; Wed, 27 Mar 2019 02:14:23 -0400
+	(envelope-from <no-reply@patchew.org>) id 1h94Rk-0006c7-3H
+	for qemu-riscv@nongnu.org; Wed, 27 Mar 2019 05:02:13 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1h91pK-0001SH-RD
-	for qemu-riscv@nongnu.org; Wed, 27 Mar 2019 02:14:20 -0400
-Received: from mail-pg1-x544.google.com ([2607:f8b0:4864:20::544]:42064)
-	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1h91pI-0001PI-Id
-	for qemu-riscv@nongnu.org; Wed, 27 Mar 2019 02:14:18 -0400
-Received: by mail-pg1-x544.google.com with SMTP id p6so9441637pgh.9
-	for <qemu-riscv@nongnu.org>; Tue, 26 Mar 2019 23:14:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
-	h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
-	:content-transfer-encoding;
-	bh=NG3U8l6PTExzO8ehD15RMDYt3Nlbh6uSbA3dK2I+Ps8=;
-	b=bpnniuobQ8uM6D+okhlkbo+czJ1uRffJ5QT3Zt8OuPZAITjvfjEeCSEuUQWLcjoQMm
-	UJhpn0w6Aj/0fL6/7igt3ikFjFkHkpjtQ3U/IqNssQl0YAOX8dv6av8JMgyyh4tBAIi1
-	8qAxZXB18REf470595btvy0qhlxihA1tcy8QxAFgE0OCk+a5b0v2wNls1Z+CnMQA8iyM
-	lieud7RPV4kPFYzMQ3vUUvDW9ZCPSDxXR0OUFLn/tr5VO9M8ogmYDdY/0OQ+wcXVfUV8
-	E/WBw5ILnM3KnE1N9dU0PXS0f9XbBx2J868VbFTXHELn4IHt5mjrDweLOCKBMD0hlNvX
-	ixdw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
-	:mime-version:content-transfer-encoding;
-	bh=NG3U8l6PTExzO8ehD15RMDYt3Nlbh6uSbA3dK2I+Ps8=;
-	b=dzGg3AUuc8LBs+s2XPNu764exQlJrYV4jX2rg1RnEQBuYaWYJy7TgjSakGpyWY9R/c
-	2KgAA4AbqMf8DSWrELGCv4mG5VxAH2TYhMZpB50zzKlnaRNzS1mbQn/pzVh+HSq/sS8G
-	xb9nlK77eabYtch2pqNNGs4vyK56TyXGamtK8RKNEyM/UF5JrVwbt6xX+Z97vdhAGxOr
-	LQxdL95oybJUAm9RNmls+D9oPHgNTCoSVPFg0Bn5mexQ+3LH9adPygkUckZHUeO0hfBq
-	rTzUKVMxe69FiDMbxS8L9IDA7JJtCTkR8b+ZaUbWaAFuhCbOAwENkTgjUq2MDLJZlYeB
-	zTRw==
-X-Gm-Message-State: APjAAAXznoFfrU8R+ByBiN3Br9fuUSu90dqdFdIwHhgMEYtm2Ghcd5fB
-	CF9XaebGOkN7zw1fTVxFaoziLQ==
-X-Google-Smtp-Source: APXvYqxZgXm1QiJtEtoH9iu76kULwFV6NsjZyjm+98zLA3l8HGrrwJio8spPw2es5QC4+ZfCsiOBhA==
-X-Received: by 2002:a65:6085:: with SMTP id t5mr33347365pgu.257.1553667252180; 
-	Tue, 26 Mar 2019 23:14:12 -0700 (PDT)
-Received: from localhost
-	(2001-b011-7001-168c-9355-f21f-1416-8b19.dynamic-ip6.hinet.net.
-	[2001:b011:7001:168c:9355:f21f:1416:8b19])
-	by smtp.gmail.com with ESMTPSA id
-	p63sm29559441pfb.4.2019.03.26.23.14.10
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 26 Mar 2019 23:14:11 -0700 (PDT)
-Date: Tue, 26 Mar 2019 23:14:11 -0700 (PDT)
-X-Google-Original-Date: Tue, 26 Mar 2019 22:57:50 PDT (-0700)
-In-Reply-To: <CAKmqyKNwBe+mfDDDw3gW_avKCpNAfb=0Y6kngb4fJ+jEHpSuVg@mail.gmail.com>
-CC: Alistair Francis <Alistair.Francis@wdc.com>, qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-From: Palmer Dabbelt <palmer@sifive.com>
-To: alistair23@gmail.com
-Message-ID: <mhng-715db02a-044a-4da8-b091-7671d5cb17f1@palmer-si-x1c4>
-Mime-Version: 1.0 (MHng)
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
-	recognized.
-X-Received-From: 2607:f8b0:4864:20::544
-Subject: Re: [Qemu-riscv] [PATCH for 4.0 v1 0/5] Update the QEMU PLIC
- addresses
+	(envelope-from <no-reply@patchew.org>) id 1h94Ri-0001D0-ME
+	for qemu-riscv@nongnu.org; Wed, 27 Mar 2019 05:02:08 -0400
+Resent-Date: Wed, 27 Mar 2019 05:02:08 -0400
+Resent-Message-Id: <E1h94Ri-0001D0-ME@eggs.gnu.org>
+Received: from sender4-of-o53.zoho.com ([136.143.188.53]:21301)
+	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.71) (envelope-from <no-reply@patchew.org>)
+	id 1h94Ri-00019Z-FG; Wed, 27 Mar 2019 05:02:06 -0400
+ARC-Seal: i=1; a=rsa-sha256; t=1553677304; cv=none; d=zoho.com; s=zohoarc; 
+	b=MCaAu8T2T3NzP3RcUmo5MQfil6xS1gl/lZg1QL4GFjf8rmjWYlpYGHdSwiDLJkjXQS3y/CpHyf8Ch8+ggMeaXkUUZ2xXgOyAT8MfD90I0JoRoixhvK0OSZrSmaSvg6FEliPTGYCcrUhf7Ean/QD0gwiaBs2dS0SMLG/qUqy70r0=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zoho.com;
+	s=zohoarc; t=1553677304;
+	h=Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:MIME-Version:Message-ID:Reply-To:Subject:To:ARC-Authentication-Results;
+	bh=xKC/QslWC3qoFkLpaAL36bbnR47oS1UjTAUKZk1wmdM=; 
+	b=Mp3fZVos4nU4lkHxu9jHkGwhWXc2Jo81OsY8wpGCwojVXiyu9lgVOqhgvyZYG0FEiprwj+HzIHnU3oaeYGt/NChP8B+DeYJTfgI/430IdnTlAenmOdqcE3IrvMzKfMipampgx3j661jXYP72yLtzCoXm8U0O+Lolpw/tGb859Fk=
+ARC-Authentication-Results: i=1; mx.zoho.com; dkim=pass  header.i=patchew.org;
+	spf=pass  smtp.mailfrom=no-reply@patchew.org;
+	dmarc=pass header.from=<no-reply@patchew.org>
+	header.from=<no-reply@patchew.org>
+Received: from [172.17.0.3] (23.253.156.214 [23.253.156.214]) by
+	mx.zohomail.com with SMTPS id 155367730146712.21088979605122;
+	Wed, 27 Mar 2019 02:01:41 -0700 (PDT)
+In-Reply-To: <1553592437-109191-1-git-send-email-kito@andestech.com>
+Message-ID: <155367730004.11112.14519146849045483815@b782c5aab522>
+Reply-To: <qemu-devel@nongnu.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+Resent-From: 
+From: no-reply@patchew.org
+To: kito@andestech.com
+Cc: fam@euphon.net, qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
+	palmer@sifive.com, kito.cheng@gmail.com
+Date: Wed, 27 Mar 2019 02:01:41 -0700 (PDT)
+X-ZohoMailClient: External
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+X-Received-From: 136.143.188.53
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH] target/riscv: Fix wrong
+ expanding for c.fswsp
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -74,39 +56,58 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Mar 2019 06:14:23 -0000
+X-List-Received-Date: Wed, 27 Mar 2019 09:02:13 -0000
 
-On Tue, 26 Mar 2019 15:19:25 PDT (-0700), alistair23@gmail.com wrote:
-> On Wed, Mar 20, 2019 at 5:45 PM Alistair Francis
-> <Alistair.Francis@wdc.com> wrote:
->>
->> This series updates the PLIC address to match the documentation.
->>
->> This fixes: https://github.com/riscv/opensbi/issues/97
->>
->> Alistair Francis (5):
->>   riscv: plic: Fix incorrect irq calculation
->>   riscv: sifive_u: Fix PLIC priority base offset and numbering
->>   riscv: sifive_e: Fix PLIC priority base offset
->>   riscv: virt: Fix PLIC priority base offset
->>   riscv: plic: Log guest errors
->
-> Ping! Can this make it into 4.0?
+UGF0Y2hldyBVUkw6IGh0dHBzOi8vcGF0Y2hldy5vcmcvUUVNVS8xNTUzNTkyNDM3LTEwOTE5MS0x
+LWdpdC1zZW5kLWVtYWlsLWtpdG9AYW5kZXN0ZWNoLmNvbS8KCgoKSGksCgpUaGlzIHNlcmllcyBz
+ZWVtcyB0byBoYXZlIHNvbWUgY29kaW5nIHN0eWxlIHByb2JsZW1zLiBTZWUgb3V0cHV0IGJlbG93
+IGZvcgptb3JlIGluZm9ybWF0aW9uOgoKTWVzc2FnZS1pZDogMTU1MzU5MjQzNy0xMDkxOTEtMS1n
+aXQtc2VuZC1lbWFpbC1raXRvQGFuZGVzdGVjaC5jb20KU3ViamVjdDogW1FlbXUtZGV2ZWxdIFtQ
+QVRDSF0gdGFyZ2V0L3Jpc2N2OiBGaXggd3JvbmcgZXhwYW5kaW5nIGZvciBjLmZzd3NwClR5cGU6
+IHNlcmllcwoKPT09IFRFU1QgU0NSSVBUIEJFR0lOID09PQojIS9iaW4vYmFzaApnaXQgcmV2LXBh
+cnNlIGJhc2UgPiAvZGV2L251bGwgfHwgZXhpdCAwCmdpdCBjb25maWcgLS1sb2NhbCBkaWZmLnJl
+bmFtZWxpbWl0IDAKZ2l0IGNvbmZpZyAtLWxvY2FsIGRpZmYucmVuYW1lcyBUcnVlCmdpdCBjb25m
+aWcgLS1sb2NhbCBkaWZmLmFsZ29yaXRobSBoaXN0b2dyYW0KLi9zY3JpcHRzL2NoZWNrcGF0Y2gu
+cGwgLS1tYWlsYmFjayBiYXNlLi4KPT09IFRFU1QgU0NSSVBUIEVORCA9PT0KClVwZGF0aW5nIDNj
+OGNmNWE5YzIxZmY4NzgyMTY0ZDFkZWY3ZjQ0YmQ4ODg3MTMzODQKRnJvbSBodHRwczovL2dpdGh1
+Yi5jb20vcGF0Y2hldy1wcm9qZWN0L3FlbXUKICAgN2U5YTIxMzdjZS4uNDlmYzg5OWY4ZCAgbWFz
+dGVyICAgICAtPiBtYXN0ZXIKIHQgW3RhZyB1cGRhdGVdICAgICAgICAgICAgcGF0Y2hldy8xNTUy
+NDk0NjgyLTE2Nzg4LTEtZ2l0LXNlbmQtZW1haWwtampoZXJuZUBsaW51eC5pYm0uY29tIC0+IHBh
+dGNoZXcvMTU1MjQ5NDY4Mi0xNjc4OC0xLWdpdC1zZW5kLWVtYWlsLWpqaGVybmVAbGludXguaWJt
+LmNvbQogdCBbdGFnIHVwZGF0ZV0gICAgICAgICAgICBwYXRjaGV3LzE1NTMxOTM2MzAtMjg2MTEt
+MS1naXQtc2VuZC1lbWFpbC1zYW5kcmFAY29kZXNvdXJjZXJ5LmNvbSAtPiBwYXRjaGV3LzE1NTMx
+OTM2MzAtMjg2MTEtMS1naXQtc2VuZC1lbWFpbC1zYW5kcmFAY29kZXNvdXJjZXJ5LmNvbQogdCBb
+dGFnIHVwZGF0ZV0gICAgICAgICAgICBwYXRjaGV3LzE1NTMzNTExOTctMTQ1ODEtMS1naXQtc2Vu
+ZC1lbWFpbC1jYWZlci5hYmRpQGdtYWlsLmNvbSAtPiBwYXRjaGV3LzE1NTMzNTExOTctMTQ1ODEt
+MS1naXQtc2VuZC1lbWFpbC1jYWZlci5hYmRpQGdtYWlsLmNvbQogKiBbbmV3IHRhZ10gICAgICAg
+ICAgICAgICBwYXRjaGV3LzE1NTM1OTI0MzctMTA5MTkxLTEtZ2l0LXNlbmQtZW1haWwta2l0b0Bh
+bmRlc3RlY2guY29tIC0+IHBhdGNoZXcvMTU1MzU5MjQzNy0xMDkxOTEtMS1naXQtc2VuZC1lbWFp
+bC1raXRvQGFuZGVzdGVjaC5jb20KIHQgW3RhZyB1cGRhdGVdICAgICAgICAgICAgcGF0Y2hldy8y
+MDE5MDMwNzE0NDEyNi4zMTg0Ny0xLXJpY2hhcmQuaGVuZGVyc29uQGxpbmFyby5vcmcgLT4gcGF0
+Y2hldy8yMDE5MDMwNzE0NDEyNi4zMTg0Ny0xLXJpY2hhcmQuaGVuZGVyc29uQGxpbmFyby5vcmcK
+IHQgW3RhZyB1cGRhdGVdICAgICAgICAgICAgcGF0Y2hldy8yMDE5MDMyMjE2MjMzMy4xNzE1OS0x
+LWRyam9uZXNAcmVkaGF0LmNvbSAtPiBwYXRjaGV3LzIwMTkwMzIyMTYyMzMzLjE3MTU5LTEtZHJq
+b25lc0ByZWRoYXQuY29tCiB0IFt0YWcgdXBkYXRlXSAgICAgICAgICAgIHBhdGNoZXcvMjAxOTAz
+MjMxOTA5MjUuMjEzMjQtMS1yaWNoYXJkLmhlbmRlcnNvbkBsaW5hcm8ub3JnIC0+IHBhdGNoZXcv
+MjAxOTAzMjMxOTA5MjUuMjEzMjQtMS1yaWNoYXJkLmhlbmRlcnNvbkBsaW5hcm8ub3JnCiB0IFt0
+YWcgdXBkYXRlXSAgICAgICAgICAgIHBhdGNoZXcvMjAxOTAzMjQxODA1MjMuR0EyMzk3OUBlcm9r
+ZW5sYWJzZXJ2ZXIgLT4gcGF0Y2hldy8yMDE5MDMyNDE4MDUyMy5HQTIzOTc5QGVyb2tlbmxhYnNl
+cnZlcgogdCBbdGFnIHVwZGF0ZV0gICAgICAgICAgICBwYXRjaGV3LzIwMTkwMzI1MTE0NTU0Ljcz
+ODgtMS1jaG91dGVhdUBhZGFjb3JlLmNvbSAtPiBwYXRjaGV3LzIwMTkwMzI1MTE0NTU0LjczODgt
+MS1jaG91dGVhdUBhZGFjb3JlLmNvbQogdCBbdGFnIHVwZGF0ZV0gICAgICAgICAgICBwYXRjaGV3
+LzIwMTkwMzI1MTYxMzM4LjY1MzYtMS1yaWNoYXJkLmhlbmRlcnNvbkBsaW5hcm8ub3JnIC0+IHBh
+dGNoZXcvMjAxOTAzMjUxNjEzMzguNjUzNi0xLXJpY2hhcmQuaGVuZGVyc29uQGxpbmFyby5vcmcK
+IHQgW3RhZyB1cGRhdGVdICAgICAgICAgICAgcGF0Y2hldy8yMDE5MDMyNjA3MTIzMy4xOTQ3LTEt
+YXJtYnJ1QHJlZGhhdC5jb20gLT4gcGF0Y2hldy8yMDE5MDMyNjA3MTIzMy4xOTQ3LTEtYXJtYnJ1
+QHJlZGhhdC5jb20KIHQgW3RhZyB1cGRhdGVdICAgICAgICAgICAgcGF0Y2hldy8yMDE5MDMyNjA5
+MDUwMS4xNTI1My0xLWFybWJydUByZWRoYXQuY29tIC0+IHBhdGNoZXcvMjAxOTAzMjYwOTA1MDEu
+MTUyNTMtMS1hcm1icnVAcmVkaGF0LmNvbQpTd2l0Y2hlZCB0byBhIG5ldyBicmFuY2ggJ3Rlc3Qn
+Cgo9PT0gT1VUUFVUIEJFR0lOID09PQpjaGVja3BhdGNoLnBsOiBubyByZXZpc2lvbnMgcmV0dXJu
+ZWQgZm9yIHJldmxpc3QgJzEnCj09PSBPVVRQVVQgRU5EID09PQoKVGVzdCBjb21tYW5kIGV4aXRl
+ZCB3aXRoIGNvZGU6IDI1NQoKClRoZSBmdWxsIGxvZyBpcyBhdmFpbGFibGUgYXQKaHR0cDovL3Bh
+dGNoZXcub3JnL2xvZ3MvMTU1MzU5MjQzNy0xMDkxOTEtMS1naXQtc2VuZC1lbWFpbC1raXRvQGFu
+ZGVzdGVjaC5jb20vdGVzdGluZy5jaGVja3BhdGNoLz90eXBlPW1lc3NhZ2UuCi0tLQpFbWFpbCBn
+ZW5lcmF0ZWQgYXV0b21hdGljYWxseSBieSBQYXRjaGV3IFtodHRwczovL3BhdGNoZXcub3JnL10u
+ClBsZWFzZSBzZW5kIHlvdXIgZmVlZGJhY2sgdG8gcGF0Y2hldy1kZXZlbEByZWRoYXQuY29t
 
-Sorry, I missed this one.  I'll take a look.
-
->
-> Alistair
->
->>
->>  hw/riscv/sifive_plic.c      | 16 +++++++++++-----
->>  hw/riscv/sifive_u.c         |  2 +-
->>  include/hw/riscv/sifive_e.h |  2 +-
->>  include/hw/riscv/sifive_u.h |  4 ++--
->>  include/hw/riscv/virt.h     |  2 +-
->>  5 files changed, 16 insertions(+), 10 deletions(-)
->>
->> --
->> 2.21.0
->>
 
