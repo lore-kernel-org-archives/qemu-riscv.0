@@ -1,50 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1h94Rv-0006h1-9S
-	for mharc-qemu-riscv@gnu.org; Wed, 27 Mar 2019 05:02:19 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:53293)
+	id 1h95oF-00084Z-NU
+	for mharc-qemu-riscv@gnu.org; Wed, 27 Mar 2019 06:29:27 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:45740)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <no-reply@patchew.org>) id 1h94Rk-0006c7-3H
-	for qemu-riscv@nongnu.org; Wed, 27 Mar 2019 05:02:13 -0400
+	(envelope-from <palmer@sifive.com>) id 1h95oD-00082N-LP
+	for qemu-riscv@nongnu.org; Wed, 27 Mar 2019 06:29:26 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <no-reply@patchew.org>) id 1h94Ri-0001D0-ME
-	for qemu-riscv@nongnu.org; Wed, 27 Mar 2019 05:02:08 -0400
-Resent-Date: Wed, 27 Mar 2019 05:02:08 -0400
-Resent-Message-Id: <E1h94Ri-0001D0-ME@eggs.gnu.org>
-Received: from sender4-of-o53.zoho.com ([136.143.188.53]:21301)
-	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.71) (envelope-from <no-reply@patchew.org>)
-	id 1h94Ri-00019Z-FG; Wed, 27 Mar 2019 05:02:06 -0400
-ARC-Seal: i=1; a=rsa-sha256; t=1553677304; cv=none; d=zoho.com; s=zohoarc; 
-	b=MCaAu8T2T3NzP3RcUmo5MQfil6xS1gl/lZg1QL4GFjf8rmjWYlpYGHdSwiDLJkjXQS3y/CpHyf8Ch8+ggMeaXkUUZ2xXgOyAT8MfD90I0JoRoixhvK0OSZrSmaSvg6FEliPTGYCcrUhf7Ean/QD0gwiaBs2dS0SMLG/qUqy70r0=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zoho.com;
-	s=zohoarc; t=1553677304;
-	h=Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:MIME-Version:Message-ID:Reply-To:Subject:To:ARC-Authentication-Results;
-	bh=xKC/QslWC3qoFkLpaAL36bbnR47oS1UjTAUKZk1wmdM=; 
-	b=Mp3fZVos4nU4lkHxu9jHkGwhWXc2Jo81OsY8wpGCwojVXiyu9lgVOqhgvyZYG0FEiprwj+HzIHnU3oaeYGt/NChP8B+DeYJTfgI/430IdnTlAenmOdqcE3IrvMzKfMipampgx3j661jXYP72yLtzCoXm8U0O+Lolpw/tGb859Fk=
-ARC-Authentication-Results: i=1; mx.zoho.com; dkim=pass  header.i=patchew.org;
-	spf=pass  smtp.mailfrom=no-reply@patchew.org;
-	dmarc=pass header.from=<no-reply@patchew.org>
-	header.from=<no-reply@patchew.org>
-Received: from [172.17.0.3] (23.253.156.214 [23.253.156.214]) by
-	mx.zohomail.com with SMTPS id 155367730146712.21088979605122;
-	Wed, 27 Mar 2019 02:01:41 -0700 (PDT)
-In-Reply-To: <1553592437-109191-1-git-send-email-kito@andestech.com>
-Message-ID: <155367730004.11112.14519146849045483815@b782c5aab522>
-Reply-To: <qemu-devel@nongnu.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-Resent-From: 
-From: no-reply@patchew.org
-To: kito@andestech.com
-Cc: fam@euphon.net, qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
-	palmer@sifive.com, kito.cheng@gmail.com
-Date: Wed, 27 Mar 2019 02:01:41 -0700 (PDT)
-X-ZohoMailClient: External
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
-X-Received-From: 136.143.188.53
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH] target/riscv: Fix wrong
- expanding for c.fswsp
+	(envelope-from <palmer@sifive.com>) id 1h95oC-0001Ko-CM
+	for qemu-riscv@nongnu.org; Wed, 27 Mar 2019 06:29:25 -0400
+Received: from mail-pf1-x444.google.com ([2607:f8b0:4864:20::444]:37108)
+	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1h95oC-0001Jd-2F
+	for qemu-riscv@nongnu.org; Wed, 27 Mar 2019 06:29:24 -0400
+Received: by mail-pf1-x444.google.com with SMTP id 8so9499731pfr.4
+	for <qemu-riscv@nongnu.org>; Wed, 27 Mar 2019 03:29:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+	h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
+	:content-transfer-encoding;
+	bh=TGtLX9t84s/c2sZq7BNLqM7lFJ4ze4bSl9it26O8He8=;
+	b=Xw9L7NAEauu9d+q3Z3R2ok2AlRajESorU8D5Ye1HUVJZS2cVGaObekkLfH4+1GIbQ7
+	acqFAYmh7p2IJUVzheFY20oaCJ4DxZjHdRv1iIf+APgyRNmhTGg76N7a2NVoa0xPOtny
+	Z2yrmBYCpeE6rNsZ0YC47crNVT9LK2t1X0J0jvrM/peXG2WZy2JKogoQ2457ceDPpBHJ
+	8VbNPwyCS4gP+KhzPDEa8w+PnciBTH+UsPsLfRF/aGcWM53uWYyOVn4xJlqDBzzE5T52
+	2Gtz/rq4/7bBVqki8r4ZitHX4qbQ7uH/m8gvKSEycPFRKSI4M98SwHKOK65A+HWbn073
+	EPxg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
+	:mime-version:content-transfer-encoding;
+	bh=TGtLX9t84s/c2sZq7BNLqM7lFJ4ze4bSl9it26O8He8=;
+	b=Fl60pRh3cU31q/toxBatDA0lN5teFZ8SKzb9O8Q46Y17R50S3SHFhUZvkhBCrRBSK8
+	Gi+7JwTOPHuodH8GAo3Yo5hG9/yPhbpIL08E0QhxQ+ubK2QwZAlg/XLJMAaHCfNt3T0r
+	voNwgG3leSiWHJL7th4h3ijSYGmwTM/9KF+NqRMZCc6GpVJDkEJYOcCIfWdNV1mpUZWz
+	UNJhQkmnKlykRI6x9vCtPo0Tf6ETZpy9PBx0pNY43r0kP1K+wnS64COxVXYURT9oNhgc
+	ugB2do6ObTzLhow7LDYAQlGRYgL1lV5a4R5rQxZpH09k1SDbXrhqgpnbaeSFblL9CQAO
+	f+RQ==
+X-Gm-Message-State: APjAAAWFHhJxaFSXjgPbEn3StgGeql4JoGJh2RFBGRz1n4/XNBQva5DK
+	GqsqDh0VRNgiMrcph58R8+BY2Q==
+X-Google-Smtp-Source: APXvYqxBLNuCRGbX8/GJh6O50Ms/5LZV1Klh0rdhc15CvnvFJZVE4FC2kwTi9GDXE11f5GgeKs9qpw==
+X-Received: by 2002:a62:fb10:: with SMTP id x16mr34686344pfm.5.1553682562747; 
+	Wed, 27 Mar 2019 03:29:22 -0700 (PDT)
+Received: from localhost
+	(2001-b011-7001-168c-9355-f21f-1416-8b19.dynamic-ip6.hinet.net.
+	[2001:b011:7001:168c:9355:f21f:1416:8b19])
+	by smtp.gmail.com with ESMTPSA id g2sm791043pfd.134.2019.03.27.03.29.21
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 27 Mar 2019 03:29:21 -0700 (PDT)
+Date: Wed, 27 Mar 2019 03:29:21 -0700 (PDT)
+X-Google-Original-Date: Wed, 27 Mar 2019 03:29:18 PDT (-0700)
+In-Reply-To: <7efcf90aa1cc78d1ce2c5f823a7ff9ac96c379ed.1553129005.git.alistair.francis@wdc.com>
+CC: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
+	Alistair Francis <Alistair.Francis@wdc.com>, alistair23@gmail.com
+From: Palmer Dabbelt <palmer@sifive.com>
+To: Alistair Francis <Alistair.Francis@wdc.com>
+Message-ID: <mhng-5414d791-e26f-4d3d-aec0-1d11191ddace@palmer-si-x1c4>
+Mime-Version: 1.0 (MHng)
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+	recognized.
+X-Received-From: 2607:f8b0:4864:20::444
+Subject: Re: [Qemu-riscv] [PATCH for 4.0 v1 1/5] riscv: plic: Fix incorrect
+ irq calculation
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -56,58 +73,50 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Mar 2019 09:02:13 -0000
+X-List-Received-Date: Wed, 27 Mar 2019 10:29:26 -0000
 
-UGF0Y2hldyBVUkw6IGh0dHBzOi8vcGF0Y2hldy5vcmcvUUVNVS8xNTUzNTkyNDM3LTEwOTE5MS0x
-LWdpdC1zZW5kLWVtYWlsLWtpdG9AYW5kZXN0ZWNoLmNvbS8KCgoKSGksCgpUaGlzIHNlcmllcyBz
-ZWVtcyB0byBoYXZlIHNvbWUgY29kaW5nIHN0eWxlIHByb2JsZW1zLiBTZWUgb3V0cHV0IGJlbG93
-IGZvcgptb3JlIGluZm9ybWF0aW9uOgoKTWVzc2FnZS1pZDogMTU1MzU5MjQzNy0xMDkxOTEtMS1n
-aXQtc2VuZC1lbWFpbC1raXRvQGFuZGVzdGVjaC5jb20KU3ViamVjdDogW1FlbXUtZGV2ZWxdIFtQ
-QVRDSF0gdGFyZ2V0L3Jpc2N2OiBGaXggd3JvbmcgZXhwYW5kaW5nIGZvciBjLmZzd3NwClR5cGU6
-IHNlcmllcwoKPT09IFRFU1QgU0NSSVBUIEJFR0lOID09PQojIS9iaW4vYmFzaApnaXQgcmV2LXBh
-cnNlIGJhc2UgPiAvZGV2L251bGwgfHwgZXhpdCAwCmdpdCBjb25maWcgLS1sb2NhbCBkaWZmLnJl
-bmFtZWxpbWl0IDAKZ2l0IGNvbmZpZyAtLWxvY2FsIGRpZmYucmVuYW1lcyBUcnVlCmdpdCBjb25m
-aWcgLS1sb2NhbCBkaWZmLmFsZ29yaXRobSBoaXN0b2dyYW0KLi9zY3JpcHRzL2NoZWNrcGF0Y2gu
-cGwgLS1tYWlsYmFjayBiYXNlLi4KPT09IFRFU1QgU0NSSVBUIEVORCA9PT0KClVwZGF0aW5nIDNj
-OGNmNWE5YzIxZmY4NzgyMTY0ZDFkZWY3ZjQ0YmQ4ODg3MTMzODQKRnJvbSBodHRwczovL2dpdGh1
-Yi5jb20vcGF0Y2hldy1wcm9qZWN0L3FlbXUKICAgN2U5YTIxMzdjZS4uNDlmYzg5OWY4ZCAgbWFz
-dGVyICAgICAtPiBtYXN0ZXIKIHQgW3RhZyB1cGRhdGVdICAgICAgICAgICAgcGF0Y2hldy8xNTUy
-NDk0NjgyLTE2Nzg4LTEtZ2l0LXNlbmQtZW1haWwtampoZXJuZUBsaW51eC5pYm0uY29tIC0+IHBh
-dGNoZXcvMTU1MjQ5NDY4Mi0xNjc4OC0xLWdpdC1zZW5kLWVtYWlsLWpqaGVybmVAbGludXguaWJt
-LmNvbQogdCBbdGFnIHVwZGF0ZV0gICAgICAgICAgICBwYXRjaGV3LzE1NTMxOTM2MzAtMjg2MTEt
-MS1naXQtc2VuZC1lbWFpbC1zYW5kcmFAY29kZXNvdXJjZXJ5LmNvbSAtPiBwYXRjaGV3LzE1NTMx
-OTM2MzAtMjg2MTEtMS1naXQtc2VuZC1lbWFpbC1zYW5kcmFAY29kZXNvdXJjZXJ5LmNvbQogdCBb
-dGFnIHVwZGF0ZV0gICAgICAgICAgICBwYXRjaGV3LzE1NTMzNTExOTctMTQ1ODEtMS1naXQtc2Vu
-ZC1lbWFpbC1jYWZlci5hYmRpQGdtYWlsLmNvbSAtPiBwYXRjaGV3LzE1NTMzNTExOTctMTQ1ODEt
-MS1naXQtc2VuZC1lbWFpbC1jYWZlci5hYmRpQGdtYWlsLmNvbQogKiBbbmV3IHRhZ10gICAgICAg
-ICAgICAgICBwYXRjaGV3LzE1NTM1OTI0MzctMTA5MTkxLTEtZ2l0LXNlbmQtZW1haWwta2l0b0Bh
-bmRlc3RlY2guY29tIC0+IHBhdGNoZXcvMTU1MzU5MjQzNy0xMDkxOTEtMS1naXQtc2VuZC1lbWFp
-bC1raXRvQGFuZGVzdGVjaC5jb20KIHQgW3RhZyB1cGRhdGVdICAgICAgICAgICAgcGF0Y2hldy8y
-MDE5MDMwNzE0NDEyNi4zMTg0Ny0xLXJpY2hhcmQuaGVuZGVyc29uQGxpbmFyby5vcmcgLT4gcGF0
-Y2hldy8yMDE5MDMwNzE0NDEyNi4zMTg0Ny0xLXJpY2hhcmQuaGVuZGVyc29uQGxpbmFyby5vcmcK
-IHQgW3RhZyB1cGRhdGVdICAgICAgICAgICAgcGF0Y2hldy8yMDE5MDMyMjE2MjMzMy4xNzE1OS0x
-LWRyam9uZXNAcmVkaGF0LmNvbSAtPiBwYXRjaGV3LzIwMTkwMzIyMTYyMzMzLjE3MTU5LTEtZHJq
-b25lc0ByZWRoYXQuY29tCiB0IFt0YWcgdXBkYXRlXSAgICAgICAgICAgIHBhdGNoZXcvMjAxOTAz
-MjMxOTA5MjUuMjEzMjQtMS1yaWNoYXJkLmhlbmRlcnNvbkBsaW5hcm8ub3JnIC0+IHBhdGNoZXcv
-MjAxOTAzMjMxOTA5MjUuMjEzMjQtMS1yaWNoYXJkLmhlbmRlcnNvbkBsaW5hcm8ub3JnCiB0IFt0
-YWcgdXBkYXRlXSAgICAgICAgICAgIHBhdGNoZXcvMjAxOTAzMjQxODA1MjMuR0EyMzk3OUBlcm9r
-ZW5sYWJzZXJ2ZXIgLT4gcGF0Y2hldy8yMDE5MDMyNDE4MDUyMy5HQTIzOTc5QGVyb2tlbmxhYnNl
-cnZlcgogdCBbdGFnIHVwZGF0ZV0gICAgICAgICAgICBwYXRjaGV3LzIwMTkwMzI1MTE0NTU0Ljcz
-ODgtMS1jaG91dGVhdUBhZGFjb3JlLmNvbSAtPiBwYXRjaGV3LzIwMTkwMzI1MTE0NTU0LjczODgt
-MS1jaG91dGVhdUBhZGFjb3JlLmNvbQogdCBbdGFnIHVwZGF0ZV0gICAgICAgICAgICBwYXRjaGV3
-LzIwMTkwMzI1MTYxMzM4LjY1MzYtMS1yaWNoYXJkLmhlbmRlcnNvbkBsaW5hcm8ub3JnIC0+IHBh
-dGNoZXcvMjAxOTAzMjUxNjEzMzguNjUzNi0xLXJpY2hhcmQuaGVuZGVyc29uQGxpbmFyby5vcmcK
-IHQgW3RhZyB1cGRhdGVdICAgICAgICAgICAgcGF0Y2hldy8yMDE5MDMyNjA3MTIzMy4xOTQ3LTEt
-YXJtYnJ1QHJlZGhhdC5jb20gLT4gcGF0Y2hldy8yMDE5MDMyNjA3MTIzMy4xOTQ3LTEtYXJtYnJ1
-QHJlZGhhdC5jb20KIHQgW3RhZyB1cGRhdGVdICAgICAgICAgICAgcGF0Y2hldy8yMDE5MDMyNjA5
-MDUwMS4xNTI1My0xLWFybWJydUByZWRoYXQuY29tIC0+IHBhdGNoZXcvMjAxOTAzMjYwOTA1MDEu
-MTUyNTMtMS1hcm1icnVAcmVkaGF0LmNvbQpTd2l0Y2hlZCB0byBhIG5ldyBicmFuY2ggJ3Rlc3Qn
-Cgo9PT0gT1VUUFVUIEJFR0lOID09PQpjaGVja3BhdGNoLnBsOiBubyByZXZpc2lvbnMgcmV0dXJu
-ZWQgZm9yIHJldmxpc3QgJzEnCj09PSBPVVRQVVQgRU5EID09PQoKVGVzdCBjb21tYW5kIGV4aXRl
-ZCB3aXRoIGNvZGU6IDI1NQoKClRoZSBmdWxsIGxvZyBpcyBhdmFpbGFibGUgYXQKaHR0cDovL3Bh
-dGNoZXcub3JnL2xvZ3MvMTU1MzU5MjQzNy0xMDkxOTEtMS1naXQtc2VuZC1lbWFpbC1raXRvQGFu
-ZGVzdGVjaC5jb20vdGVzdGluZy5jaGVja3BhdGNoLz90eXBlPW1lc3NhZ2UuCi0tLQpFbWFpbCBn
-ZW5lcmF0ZWQgYXV0b21hdGljYWxseSBieSBQYXRjaGV3IFtodHRwczovL3BhdGNoZXcub3JnL10u
-ClBsZWFzZSBzZW5kIHlvdXIgZmVlZGJhY2sgdG8gcGF0Y2hldy1kZXZlbEByZWRoYXQuY29t
+On Wed, 20 Mar 2019 17:46:09 PDT (-0700), Alistair Francis wrote:
+> The irq is incorrectly calculated to be off by one. It has worked in the
+> past as the priority_base offset has also been set incorrectly. We are
+> about to fix the priority_base offset so first first the irq
+> calculation.
+>
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> ---
+>  hw/riscv/sifive_plic.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/hw/riscv/sifive_plic.c b/hw/riscv/sifive_plic.c
+> index 1c703e1a37..70a85cd075 100644
+> --- a/hw/riscv/sifive_plic.c
+> +++ b/hw/riscv/sifive_plic.c
+> @@ -206,7 +206,7 @@ static uint64_t sifive_plic_read(void *opaque, hwaddr addr, unsigned size)
+>      if (addr >= plic->priority_base && /* 4 bytes per source */
+>          addr < plic->priority_base + (plic->num_sources << 2))
+>      {
+> -        uint32_t irq = (addr - plic->priority_base) >> 2;
+> +        uint32_t irq = ((addr - plic->priority_base) >> 2) + 1;
+>          if (RISCV_DEBUG_PLIC) {
+>              qemu_log("plic: read priority: irq=%d priority=%d\n",
+>                  irq, plic->source_priority[irq]);
+> @@ -279,7 +279,7 @@ static void sifive_plic_write(void *opaque, hwaddr addr, uint64_t value,
+>      if (addr >= plic->priority_base && /* 4 bytes per source */
+>          addr < plic->priority_base + (plic->num_sources << 2))
+>      {
+> -        uint32_t irq = (addr - plic->priority_base) >> 2;
+> +        uint32_t irq = ((addr - plic->priority_base) >> 2) + 1;
+>          plic->source_priority[irq] = value & 7;
+>          if (RISCV_DEBUG_PLIC) {
+>              qemu_log("plic: write priority: irq=%d priority=%d\n",
 
+I think this breaks bisectability and should be merged with the 
+*_PLIC_PRIORITY_BASE modifications as otherwise we'll end up the priority being 
+set for the brong IRQ.
+
+I'm also not sure how this fixes the bug listed in the OpenSBI PR.  As far as I 
+can understand it, all this does is ensure that source 0 is actually treated as 
+illegal (and shrinks the number of sources to match what's actually there, but 
+that shouldn't fix the bug).  That looks more like a cleanup than an actual fix.
+
+Am I missing something?
 
