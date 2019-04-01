@@ -1,64 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1hAnN3-0006qu-Gh
+	id 1hAnN3-0006rF-MS
 	for mharc-qemu-riscv@gnu.org; Sun, 31 Mar 2019 23:12:25 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:38971)
+Received: from eggs.gnu.org ([209.51.188.92]:38994)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <richard.henderson@linaro.org>) id 1hAnN0-0006nc-8Z
-	for qemu-riscv@nongnu.org; Sun, 31 Mar 2019 23:12:23 -0400
+	(envelope-from <richard.henderson@linaro.org>) id 1hAnN1-0006oL-1C
+	for qemu-riscv@nongnu.org; Sun, 31 Mar 2019 23:12:24 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <richard.henderson@linaro.org>) id 1hAnMz-0002r9-A1
-	for qemu-riscv@nongnu.org; Sun, 31 Mar 2019 23:12:22 -0400
-Received: from mail-pg1-x542.google.com ([2607:f8b0:4864:20::542]:43247)
+	(envelope-from <richard.henderson@linaro.org>) id 1hAnMz-0002s1-R5
+	for qemu-riscv@nongnu.org; Sun, 31 Mar 2019 23:12:23 -0400
+Received: from mail-pg1-x544.google.com ([2607:f8b0:4864:20::544]:39641)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
 	(Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
-	id 1hAnMv-0002p3-HG
-	for qemu-riscv@nongnu.org; Sun, 31 Mar 2019 23:12:19 -0400
-Received: by mail-pg1-x542.google.com with SMTP id z9so3979860pgu.10
-	for <qemu-riscv@nongnu.org>; Sun, 31 Mar 2019 20:12:15 -0700 (PDT)
+	id 1hAnMz-0002qp-G8
+	for qemu-riscv@nongnu.org; Sun, 31 Mar 2019 23:12:21 -0400
+Received: by mail-pg1-x544.google.com with SMTP id k3so3987165pga.6
+	for <qemu-riscv@nongnu.org>; Sun, 31 Mar 2019 20:12:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=dpFu0UtJn3h4iEnuE21ntkTj1sL+0aSszxtNnRJ8slY=;
-	b=cuvFpT6dCZz+T+10qlpByshL2+NDRl94HsNxeEyC20fAX1tH5dXkxflFqc0waLOfNa
-	JCgKXbvPc1BZzJQufk13MwVRwsOkbWUo/+ShzyVRA8NR3GG1Uc5tZqKQ2EH4US63QR+2
-	ZqqFwu+DLNpQI2qYUm3Jkw2SJGO4VYn8Bo7HjimL+96MU3FOtP8d9CXTtnIyEnoQfvej
-	3/IePFcUbfLImhDldIhPHBZu3Boqku2SQmglLyY/LUCpizZSIWV7zghrZFhFHHehQy3Q
-	1o2gCKh5/xnsPFk1v5rJnj3yb63ok+XHzaqsGkN54Z0aEFCLKITytK8OT86up4x1H8vc
-	vsQw==
+	bh=JUQH54WlqWGm8qyK2Q0VFVzTkdAZArTzYx2vwJJCIVI=;
+	b=GD0V5uMURb1QM+rZt7wGIQ5Met93OWvQpXKF0JN9RT/Y/FDsmy6j4ZF9YkmR2At3Z9
+	g5ExvDJcQSzya65ef+53d1P+TQKS611GqCOiGOBVxe6D0hN7NIl63IGsbv97V8yz5xQp
+	nJOhbXBZradEvA41045luL20QmPiejGtbu9p3bXVJWjC1ohyUnC7gR97OHH3CVLPZE4n
+	yfTW/1WV71rprSsELS3BKgHKApID/3xrXVff1PBD0VZ3xFg/XNW5ExzFZEYqUsL/S1zX
+	ptS2G4sqYdVSdnM+wv1nyu5kfoN14IpuyfxnnAPvdzyrTm01pO59thqTqi6/oJC5E7/M
+	miGg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=dpFu0UtJn3h4iEnuE21ntkTj1sL+0aSszxtNnRJ8slY=;
-	b=MmoMDulqlcC06VL5ZTRobLFNn6rSPbf4d2cYlGKC1sygCs1d4OvMn8Hv2nYHlLR3Dh
-	ocD4yZxFreG75dXCY6W4do2kIUO9AhwuF/UNz+lrDDmD9zWa97fS+iGHNE4OyV60oVuu
-	tBwziLNqUsg7ywALyH/yh5vs9WJvR2R7pgJU7JZDiSJ7u15eqGtav2xjWCmghImQ1xWU
-	29fnztsSod/+JQRxEJrpF3Ij0RcFiP8nuBPYL18bm9nshw79lY3YhR9Ba5MbbTrKb0VT
-	VKgiCIbe4mnGBSryainQEP7XdsvuFcj+XCSwuOML1mlWp2FWa4MVsSHvyTrxiB8h0PGk
-	PT6g==
-X-Gm-Message-State: APjAAAXy9nPVG4Jg//GrCiDmPrn7us+GnzbFQb+TjiQQDNPq0yiKVroC
-	+1Mxlj0IFMIjtEftTMLuEgeMnQ==
-X-Google-Smtp-Source: APXvYqzD8BbRLotGQp7cDFgS0PD/h6ZMEzhdLgbjgpvgiD13ssBwPt71ngvQhZBdjRA1RfqlIsU63w==
-X-Received: by 2002:a62:b612:: with SMTP id j18mr89117pff.124.1554088334102;
-	Sun, 31 Mar 2019 20:12:14 -0700 (PDT)
+	bh=JUQH54WlqWGm8qyK2Q0VFVzTkdAZArTzYx2vwJJCIVI=;
+	b=Go8DyWOWrtDnzHk0LLdoNwCFWpxdlPGIxhxNnTfBUhjGozhJ06f0ffHE3B74Z/io7D
+	p78i11bDL2NO1jZcVFNlZkZ0rRLDdbDulhP+YAwAPB6KWvGsnttz4THpMg+McVKAkaP8
+	YlhD23jHh7/eGk3Eyla5Cw50YzptbMUhWhKoz2jX2ZEWazPjt4QHmZ+meLGl/MVmICXz
+	kBktlGeRvbOsEhF6eMMs6nWyZ4Zk2DfVbVqdBONcPmZI3OIXZ38zopNKa78zBUdlJLKi
+	MEy4S3sjSNmqZ0ypjeRGgZg3cxxkA2qKntLJFc74tthwDsoy4hia3ytHI5pn8Rbr7cvz
+	ai0w==
+X-Gm-Message-State: APjAAAVgUs+n6t9UY+RfDVf5vZOon1RJJjwCeOUVDBspVAAitMIR2689
+	UslaNEyKxqPmYaRndDa9cyVEmg==
+X-Google-Smtp-Source: APXvYqzTdRFtojuCNnW0xKO8vqyCJzYlwSorBVwiCOXuftNt4+vRJznWLwcfd1+uv72nUQCt8npZag==
+X-Received: by 2002:a63:d5f:: with SMTP id 31mr12260960pgn.208.1554088339769; 
+	Sun, 31 Mar 2019 20:12:19 -0700 (PDT)
 Received: from cloudburst.imgcgcw.net ([147.50.13.10])
 	by smtp.gmail.com with ESMTPSA id
-	c1sm11843954pfd.114.2019.03.31.20.12.11
+	c1sm11843954pfd.114.2019.03.31.20.12.17
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 31 Mar 2019 20:12:13 -0700 (PDT)
+	Sun, 31 Mar 2019 20:12:19 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: kbastian@mail.uni-paderborn.de, Alistair.Francis@wdc.com,
 	palmer@sifive.com, qemu-riscv@nongnu.org
-Date: Mon,  1 Apr 2019 10:11:49 +0700
-Message-Id: <20190401031155.21293-3-richard.henderson@linaro.org>
+Date: Mon,  1 Apr 2019 10:11:51 +0700
+Message-Id: <20190401031155.21293-5-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20190401031155.21293-1-richard.henderson@linaro.org>
 References: <20190401031155.21293-1-richard.henderson@linaro.org>
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::542
-Subject: [Qemu-riscv] [PATCH for-4.1 2/8] target/riscv: Use --static-decode
- for decodetree
+X-Received-From: 2607:f8b0:4864:20::544
+Subject: [Qemu-riscv] [PATCH for-4.1 4/8] target/riscv: Merge argument
+ decode for RVC shifti
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -70,60 +70,145 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Apr 2019 03:12:23 -0000
+X-List-Received-Date: Mon, 01 Apr 2019 03:12:24 -0000
 
-The generated functions are only used within translate.c
-and do not need to be global, or declared.
+Special handling for IMM==0 is the only difference between
+RVC shifti and RVI shifti.  This can be handled with !function.
 
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/riscv/translate.c   | 2 --
- target/riscv/Makefile.objs | 8 ++++----
- 2 files changed, 4 insertions(+), 6 deletions(-)
+ target/riscv/insn_trans/trans_rvc.inc.c | 47 -------------------------
+ target/riscv/translate.c                |  6 ++++
+ target/riscv/insn16.decode              | 12 +++----
+ 3 files changed, 12 insertions(+), 53 deletions(-)
 
+diff --git a/target/riscv/insn_trans/trans_rvc.inc.c b/target/riscv/insn_trans/trans_rvc.inc.c
+index dfb46a2348..691b1e2725 100644
+--- a/target/riscv/insn_trans/trans_rvc.inc.c
++++ b/target/riscv/insn_trans/trans_rvc.inc.c
+@@ -97,37 +97,6 @@ static bool trans_c_addi16sp_lui(DisasContext *ctx, arg_c_addi16sp_lui *a)
+     return false;
+ }
+ 
+-static bool trans_c_srli(DisasContext *ctx, arg_c_srli *a)
+-{
+-    int shamt = a->shamt;
+-    if (shamt == 0) {
+-        /* For RV128 a shamt of 0 means a shift by 64 */
+-        shamt = 64;
+-    }
+-    /* Ensure, that shamt[5] is zero for RV32 */
+-    if (shamt >= TARGET_LONG_BITS) {
+-        return false;
+-    }
+-
+-    arg_srli arg = { .rd = a->rd, .rs1 = a->rd, .shamt = a->shamt };
+-    return trans_srli(ctx, &arg);
+-}
+-
+-static bool trans_c_srai(DisasContext *ctx, arg_c_srai *a)
+-{
+-    int shamt = a->shamt;
+-    if (shamt == 0) {
+-        /* For RV128 a shamt of 0 means a shift by 64 */
+-        shamt = 64;
+-    }
+-    /* Ensure, that shamt[5] is zero for RV32 */
+-    if (shamt >= TARGET_LONG_BITS) {
+-        return false;
+-    }
+-
+-    arg_srai arg = { .rd = a->rd, .rs1 = a->rd, .shamt = a->shamt };
+-    return trans_srai(ctx, &arg);
+-}
+ 
+ static bool trans_c_subw(DisasContext *ctx, arg_c_subw *a)
+ {
+@@ -147,22 +116,6 @@ static bool trans_c_addw(DisasContext *ctx, arg_c_addw *a)
+ #endif
+ }
+ 
+-static bool trans_c_slli(DisasContext *ctx, arg_c_slli *a)
+-{
+-    int shamt = a->shamt;
+-    if (shamt == 0) {
+-        /* For RV128 a shamt of 0 means a shift by 64 */
+-        shamt = 64;
+-    }
+-    /* Ensure, that shamt[5] is zero for RV32 */
+-    if (shamt >= TARGET_LONG_BITS) {
+-        return false;
+-    }
+-
+-    arg_slli arg = { .rd = a->rd, .rs1 = a->rd, .shamt = a->shamt };
+-    return trans_slli(ctx, &arg);
+-}
+-
+ static bool trans_c_flwsp_ldsp(DisasContext *ctx, arg_c_flwsp_ldsp *a)
+ {
+ #ifdef TARGET_RISCV32
 diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index dd763647ea..7ebd590486 100644
+index 9e016d8e50..a1cd29f80f 100644
 --- a/target/riscv/translate.c
 +++ b/target/riscv/translate.c
-@@ -538,7 +538,6 @@ static int ex_rvc_register(int reg)
+@@ -538,6 +538,12 @@ static int ex_rvc_register(int reg)
      return 8 + reg;
  }
  
--bool decode_insn32(DisasContext *ctx, uint32_t insn);
++static int ex_rvc_shifti(int imm)
++{
++    /* For RV128 a shamt of 0 means a shift by 64. */
++    return imm ? imm : 64;
++}
++
  /* Include the auto-generated decoder for 32 bit insn */
  #include "decode_insn32.inc.c"
  
-@@ -667,7 +666,6 @@ static bool gen_shift(DisasContext *ctx, arg_r *a,
- #include "insn_trans/trans_rvd.inc.c"
- #include "insn_trans/trans_privileged.inc.c"
+diff --git a/target/riscv/insn16.decode b/target/riscv/insn16.decode
+index d0cc778bc9..add9cf3923 100644
+--- a/target/riscv/insn16.decode
++++ b/target/riscv/insn16.decode
+@@ -30,7 +30,7 @@
+ %imm_cb        12:s1 5:2 2:1 10:2 3:2 !function=ex_shift_1
+ %imm_cj        12:s1 8:1 9:2 6:1 7:1 2:1 11:1 3:3 !function=ex_shift_1
  
--bool decode_insn16(DisasContext *ctx, uint16_t insn);
- /* auto-generated decoder*/
- #include "decode_insn16.inc.c"
- #include "insn_trans/trans_rvc.inc.c"
-diff --git a/target/riscv/Makefile.objs b/target/riscv/Makefile.objs
-index 9c6c109327..c7a1b063ed 100644
---- a/target/riscv/Makefile.objs
-+++ b/target/riscv/Makefile.objs
-@@ -7,14 +7,14 @@ decode32-$(TARGET_RISCV64) += $(SRC_PATH)/target/riscv/insn32-64.decode
+-%nzuimm_6bit   12:1 2:5
++%shimm_6bit   12:1 2:5               !function=ex_rvc_shifti
+ %uimm_6bit_ld 2:3 12:1 5:2           !function=ex_shift_3
+ %uimm_6bit_lw 2:2 12:1 4:3           !function=ex_shift_2
+ %uimm_6bit_sd 7:3 10:3               !function=ex_shift_3
+@@ -94,9 +94,9 @@
+     uimm_sdsp=%uimm_6bit_sd rs2=%rs2_5
  
- target/riscv/decode_insn32.inc.c: $(decode32-y) $(DECODETREE)
- 	$(call quiet-command, \
--	  $(PYTHON) $(DECODETREE) -o $@ --decode decode_insn32 $(decode32-y), \
--	  "GEN", $(TARGET_DIR)$@)
-+	  $(PYTHON) $(DECODETREE) -o $@ --static-decode decode_insn32 \
-+          $(decode32-y), "GEN", $(TARGET_DIR)$@)
+ @c_shift        ... . .. ... ..... .. \
+-                &shift rd=%rs1_3 rs1=%rs1_3 shamt=%nzuimm_6bit
++                &shift rd=%rs1_3 rs1=%rs1_3 shamt=%shimm_6bit
+ @c_shift2       ... . .. ... ..... .. \
+-                &shift rd=%rd rs1=%rd shamt=%nzuimm_6bit
++                &shift rd=%rd rs1=%rd shamt=%shimm_6bit
  
- target/riscv/decode_insn16.inc.c: \
-   $(SRC_PATH)/target/riscv/insn16.decode $(DECODETREE)
- 	$(call quiet-command, \
--	  $(PYTHON) $(DECODETREE) -o $@ --decode decode_insn16 --insnwidth 16 $<, \
--	  "GEN", $(TARGET_DIR)$@)
-+	  $(PYTHON) $(DECODETREE) -o $@ --static-decode decode_insn16 \
-+          --insnwidth 16 $<, "GEN", $(TARGET_DIR)$@)
+ @c_andi         ... . .. ... ..... .. &i imm=%imm_ci rs1=%rs1_3 rd=%rs1_3
  
- target/riscv/translate.o: target/riscv/decode_insn32.inc.c \
- 	target/riscv/decode_insn16.inc.c
+@@ -114,8 +114,8 @@ addi              000 .  .....  ..... 01 @ci
+ c_jal_addiw       001 .  .....  ..... 01 @ci #Note: parse rd and/or imm manually
+ addi              010 .  .....  ..... 01 @c_li
+ c_addi16sp_lui    011 .  .....  ..... 01 @c_addi16sp_lui # shares opc with C.LUI
+-c_srli            100 . 00 ...  ..... 01 @c_shift
+-c_srai            100 . 01 ...  ..... 01 @c_shift
++srli              100 . 00 ...  ..... 01 @c_shift
++srai              100 . 01 ...  ..... 01 @c_shift
+ andi              100 . 10 ...  ..... 01 @c_andi
+ sub               100 0 11 ... 00 ... 01 @cs_2
+ xor               100 0 11 ... 01 ... 01 @cs_2
+@@ -128,7 +128,7 @@ beq               110  ... ...  ..... 01 @cb_z
+ bne               111  ... ...  ..... 01 @cb_z
+ 
+ # *** RV64C Standard Extension (Quadrant 2) ***
+-c_slli            000 .  .....  ..... 10 @c_shift2
++slli              000 .  .....  ..... 10 @c_shift2
+ fld               001 .  .....  ..... 10 @c_ldsp
+ lw                010 .  .....  ..... 10 @c_lwsp
+ c_flwsp_ldsp      011 .  .....  ..... 10 @c_flwsp_ldsp #C.LDSP:RV64;C.FLWSP:RV32
 -- 
 2.17.1
 
