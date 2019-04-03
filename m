@@ -1,63 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1hBpLZ-0007Qz-A6
-	for mharc-qemu-riscv@gnu.org; Wed, 03 Apr 2019 19:31:09 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:60595)
+	id 1hBpd5-0002X3-GM
+	for mharc-qemu-riscv@gnu.org; Wed, 03 Apr 2019 19:49:15 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:43762)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1hBpLX-0007NX-6e
-	for qemu-riscv@nongnu.org; Wed, 03 Apr 2019 19:31:08 -0400
+	(envelope-from <alistair23@gmail.com>) id 1hBpd2-0002V7-O7
+	for qemu-riscv@nongnu.org; Wed, 03 Apr 2019 19:49:13 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1hBpLV-0001OF-Im
-	for qemu-riscv@nongnu.org; Wed, 03 Apr 2019 19:31:06 -0400
-Received: from mail-lf1-x143.google.com ([2a00:1450:4864:20::143]:45209)
+	(envelope-from <alistair23@gmail.com>) id 1hBpOA-0005uc-JZ
+	for qemu-riscv@nongnu.org; Wed, 03 Apr 2019 19:33:52 -0400
+Received: from mail-lj1-x242.google.com ([2a00:1450:4864:20::242]:40980)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
 	(Exim 4.71) (envelope-from <alistair23@gmail.com>)
-	id 1hBpLJ-0000iA-28; Wed, 03 Apr 2019 19:30:53 -0400
-Received: by mail-lf1-x143.google.com with SMTP id 5so336856lft.12;
-	Wed, 03 Apr 2019 16:30:51 -0700 (PDT)
+	id 1hBpO0-0005bK-S6; Wed, 03 Apr 2019 19:33:42 -0400
+Received: by mail-lj1-x242.google.com with SMTP id k8so373694lja.8;
+	Wed, 03 Apr 2019 16:33:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=3bfD+KQ+YtIfEmQKphRtL+XSPhWZcuP7XAWTJXxPIYg=;
-	b=V9RXKmx3h+bSNDuMH1+UJXzph3Idfa3GqOQ03ZQA2sPKijhnFAyd1fBxw8TPphiXWt
-	onH2zJeHrj536OHEVp1f3RNdDO+X2t7izizihKxY7efCRnMlpqKnHtBRuJmPtHbjAfSh
-	bNaYlgzMFKG5Vb/Na3KmIX42fyvUsw3mAQQ1hJVpQ1VdYawXNSqwtsAXsYWWfMr3j1UU
-	MaCeqvXq6y3OZM4ocnLGLCC7PKEV4xlGGRl/o/+fOgYSpmMO3NFafFh6IUfb9VggKFGJ
-	7lpJJadmTh1tuOkasV/D97k1JVx1cnt9ZMv8PeQTHizhS5OqOu5ciHJlxbg5aMBwvSAJ
-	6s+A==
+	:cc; bh=7eD8+8D+QxESEed2f/lfyuury4uaZ9o08tV2RBKmE0g=;
+	b=JHZozpd+P+Qn1DK069srAUyicV2or4Ve/CJF5DtMgafvAk+2X8GyiW7fe+aDQdJ7g9
+	HkKTwEHmCYM4/gpECplNKD7fTi7jx522ipnHAea+SPuh8pK8TNiT4wKN48qsvqGmE/dv
+	2dN3+XwHO64BuKibKWFd7sFDLIiik8SU/eMzxd73Q/vsqo3Z6rb4ax4CZ6UtHQuHFTe3
+	Leod0f2MUfPsuTok/h3xK9V/QhcwK9qz1oSrWdX8sA6Wel2zWcAops3O+4z7SE/AdLmA
+	AQkWtDyBjz3lO4IhOjFnuYLvdALPYi/uXXLdET/jhRcmwQX6/KRo0GG4GdD/tymuGUnt
+	NvWw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=3bfD+KQ+YtIfEmQKphRtL+XSPhWZcuP7XAWTJXxPIYg=;
-	b=cDd0h0QHI8FYGIxZFteiEKtpv2R/dLwWd3berUxxURxWiSOeMW7yQBw2h6pRTgMnjv
-	nyLmDw3fBqigKKWJkmGYoM8q1rVz8QCXNWDWyNBRM5irJ+C/V/Xu1ecCoW3iNFFroh6A
-	1fTAcMyegMjN4ApCZJbFDIaZ5ZHX1K7NEWXvwn5uHkr4MDL1cZUZCJuSSEtF1RmDxVkZ
-	7AjYEF1m/7edrNqRTMXVCJeUKS1bLkneWGl2bppOSk92/SALgwmfaIE65fk5ynmhWST8
-	rA6kANxp8gg4/Nc6YEt+4HO37IAw9dv7t/U8pb5G0FzWUriTaFgQ2ZZgY8hCvY9+jP5N
-	yMoA==
-X-Gm-Message-State: APjAAAVT5T7Hso+Un1Hs3qN5YP+zm/NTdqC9WAYxDlRSsgDLwBeNtZ2d
-	SefbwYU3UJ3LnUdDLjg1ZNwulUejD9GtMtMCVlKnHmEh
-X-Google-Smtp-Source: APXvYqyZZoYdw3IvFL4IvUdMUtWWrA6yoIoz9Qh/9E6hqHYnK8/k3RB0S+MP7Um26cGOByq99xKxDgEqnUA6gloEG1g=
-X-Received: by 2002:ac2:420b:: with SMTP id y11mr1330806lfh.104.1554334250508; 
-	Wed, 03 Apr 2019 16:30:50 -0700 (PDT)
+	bh=7eD8+8D+QxESEed2f/lfyuury4uaZ9o08tV2RBKmE0g=;
+	b=bnNd5eU4HmOAwVf56weIU/sHezerzwARLk031tQzF4o45CCSlyQzgPtSuSFfZGqwb4
+	Oey4YO5kLgjTdFZgnMm5bGsOdVDsEJ8RUKSdfAUjGB+qH9va9huFRT8W84nXZ9A8I2K8
+	ODAE30feqg6dmPswQTHS7Xp9RlDDhc8318DkAo9qJgoWKBtfgL18r03v0N09zzEFYP12
+	eknBxmX/USf+6nmyrvDjdD9bP8p/PDG1T2V9gDW2BA7WZyquxhUcqmtvtyuymFU51XOF
+	FYu3oIioxyujtA4lA2ZUys1K25/8uyb7uP5xvC25/zJThI7/bEcE6lNWBds51cPM3uvJ
+	aSPw==
+X-Gm-Message-State: APjAAAVV96E+IiRbfN2GBmrCQD1UuDBFxlHoEspxbo2DYG46NrGEZsQL
+	QxCObVIQjB9Yp4i+ArudLriV00UrUWCG/QSwUOs=
+X-Google-Smtp-Source: APXvYqxWUfDi5pWO/HqkHfM06IuhI+pg/Mm7/vid/q/1gpC07XfpRdC+R4DopWw03PxhDY+DEIku1dXQ9tSyZ61ZyWg=
+X-Received: by 2002:a2e:9843:: with SMTP id e3mr1385417ljj.28.1554334419083;
+	Wed, 03 Apr 2019 16:33:39 -0700 (PDT)
 MIME-Version: 1.0
-References: <20190401031155.21293-1-richard.henderson@linaro.org>
-	<20190401031155.21293-3-richard.henderson@linaro.org>
-In-Reply-To: <20190401031155.21293-3-richard.henderson@linaro.org>
+References: <cover.1553712571.git.alistair.francis@wdc.com>
+	<mhng-9286e210-d632-41e0-b30d-cfdef1a43396@palmer-si-x1c4>
+In-Reply-To: <mhng-9286e210-d632-41e0-b30d-cfdef1a43396@palmer-si-x1c4>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 3 Apr 2019 16:29:21 -0700
-Message-ID: <CAKmqyKNZZGQnPy3hw6DWEif7Oe2Jz=owMTbGa9atnqu_tZwENw@mail.gmail.com>
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>, 
-	Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
-	Palmer Dabbelt <palmer@sifive.com>, 
-	Alistair Francis <Alistair.Francis@wdc.com>,
+Date: Wed, 3 Apr 2019 16:32:11 -0700
+Message-ID: <CAKmqyKOAMGBcgRscu9QzpQYsA=qTeGgkK+03F=0YRhtzUFaXVw@mail.gmail.com>
+To: Palmer Dabbelt <palmer@sifive.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
+	"qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
 	"open list:RISC-V" <qemu-riscv@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2a00:1450:4864:20::143
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH for-4.1 2/8] target/riscv: Use
- --static-decode for decodetree
+X-Received-From: 2a00:1450:4864:20::242
+Subject: Re: [Qemu-riscv] [PATCH for 4.0 v2 0/2] Update the QEMU PLIC
+ addresses
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -69,70 +67,38 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Apr 2019 23:31:08 -0000
+X-List-Received-Date: Wed, 03 Apr 2019 23:49:14 -0000
 
-On Sun, Mar 31, 2019 at 8:15 PM Richard Henderson
-<richard.henderson@linaro.org> wrote:
+On Wed, Mar 27, 2019 at 8:23 PM Palmer Dabbelt <palmer@sifive.com> wrote:
 >
-> The generated functions are only used within translate.c
-> and do not need to be global, or declared.
+> On Wed, 27 Mar 2019 11:51:15 PDT (-0700), Alistair Francis wrote:
+> > This series updates the PLIC address to match the documentation.
+> >
+> > This fixes: https://github.com/riscv/opensbi/issues/97
+> >
+> > V2:
+> >  - Squash patches to ensure biesctability
+> >
+> > Alistair Francis (2):
+> >   riscv: plic: Fix incorrect irq calculation
+> >   riscv: plic: Log guest errors
+> >
+> >  hw/riscv/sifive_plic.c      | 16 +++++++++++-----
+> >  hw/riscv/sifive_u.c         |  2 +-
+> >  include/hw/riscv/sifive_e.h |  2 +-
+> >  include/hw/riscv/sifive_u.h |  4 ++--
+> >  include/hw/riscv/virt.h     |  2 +-
+> >  5 files changed, 16 insertions(+), 10 deletions(-)
+> >
+> > --
+> > 2.21.0
 >
-> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+> Thanks, I've got these on for-master.  I'll let them sit for a bit to see if
+> there are any other comments, but
+>
+> Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Ping! Just want to make sure these make it into 4.0
 
 Alistair
-
-> ---
->  target/riscv/translate.c   | 2 --
->  target/riscv/Makefile.objs | 8 ++++----
->  2 files changed, 4 insertions(+), 6 deletions(-)
->
-> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index dd763647ea..7ebd590486 100644
-> --- a/target/riscv/translate.c
-> +++ b/target/riscv/translate.c
-> @@ -538,7 +538,6 @@ static int ex_rvc_register(int reg)
->      return 8 + reg;
->  }
->
-> -bool decode_insn32(DisasContext *ctx, uint32_t insn);
->  /* Include the auto-generated decoder for 32 bit insn */
->  #include "decode_insn32.inc.c"
->
-> @@ -667,7 +666,6 @@ static bool gen_shift(DisasContext *ctx, arg_r *a,
->  #include "insn_trans/trans_rvd.inc.c"
->  #include "insn_trans/trans_privileged.inc.c"
->
-> -bool decode_insn16(DisasContext *ctx, uint16_t insn);
->  /* auto-generated decoder*/
->  #include "decode_insn16.inc.c"
->  #include "insn_trans/trans_rvc.inc.c"
-> diff --git a/target/riscv/Makefile.objs b/target/riscv/Makefile.objs
-> index 9c6c109327..c7a1b063ed 100644
-> --- a/target/riscv/Makefile.objs
-> +++ b/target/riscv/Makefile.objs
-> @@ -7,14 +7,14 @@ decode32-$(TARGET_RISCV64) += $(SRC_PATH)/target/riscv/insn32-64.decode
->
->  target/riscv/decode_insn32.inc.c: $(decode32-y) $(DECODETREE)
->         $(call quiet-command, \
-> -         $(PYTHON) $(DECODETREE) -o $@ --decode decode_insn32 $(decode32-y), \
-> -         "GEN", $(TARGET_DIR)$@)
-> +         $(PYTHON) $(DECODETREE) -o $@ --static-decode decode_insn32 \
-> +          $(decode32-y), "GEN", $(TARGET_DIR)$@)
->
->  target/riscv/decode_insn16.inc.c: \
->    $(SRC_PATH)/target/riscv/insn16.decode $(DECODETREE)
->         $(call quiet-command, \
-> -         $(PYTHON) $(DECODETREE) -o $@ --decode decode_insn16 --insnwidth 16 $<, \
-> -         "GEN", $(TARGET_DIR)$@)
-> +         $(PYTHON) $(DECODETREE) -o $@ --static-decode decode_insn16 \
-> +          --insnwidth 16 $<, "GEN", $(TARGET_DIR)$@)
->
->  target/riscv/translate.o: target/riscv/decode_insn32.inc.c \
->         target/riscv/decode_insn16.inc.c
-> --
-> 2.17.1
->
->
 
