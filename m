@@ -1,51 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1hBpJc-0006bW-Ut
-	for mharc-qemu-riscv@gnu.org; Wed, 03 Apr 2019 19:29:08 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:58723)
+	id 1hBpLZ-0007Qz-A6
+	for mharc-qemu-riscv@gnu.org; Wed, 03 Apr 2019 19:31:09 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:60595)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1hBpJZ-0006aT-Q2
-	for qemu-riscv@nongnu.org; Wed, 03 Apr 2019 19:29:07 -0400
+	(envelope-from <alistair23@gmail.com>) id 1hBpLX-0007NX-6e
+	for qemu-riscv@nongnu.org; Wed, 03 Apr 2019 19:31:08 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1hBpJX-00041v-P0
-	for qemu-riscv@nongnu.org; Wed, 03 Apr 2019 19:29:05 -0400
-Received: from mail-lf1-x143.google.com ([2a00:1450:4864:20::143]:40816)
+	(envelope-from <alistair23@gmail.com>) id 1hBpLV-0001OF-Im
+	for qemu-riscv@nongnu.org; Wed, 03 Apr 2019 19:31:06 -0400
+Received: from mail-lf1-x143.google.com ([2a00:1450:4864:20::143]:45209)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
 	(Exim 4.71) (envelope-from <alistair23@gmail.com>)
-	id 1hBpJQ-0003Vg-8l; Wed, 03 Apr 2019 19:28:56 -0400
-Received: by mail-lf1-x143.google.com with SMTP id a28so355989lfo.7;
-	Wed, 03 Apr 2019 16:28:49 -0700 (PDT)
+	id 1hBpLJ-0000iA-28; Wed, 03 Apr 2019 19:30:53 -0400
+Received: by mail-lf1-x143.google.com with SMTP id 5so336856lft.12;
+	Wed, 03 Apr 2019 16:30:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=F09JXLIt+jQxMGVUOzzqPEvj1I58ecKZOwHxdNFKIp0=;
-	b=WdcOGgXFf5AwGkRhiZ8wLX1Ctsimk3lmdANKmux+tWuboatkRRFU/KrZh6bE11bSKK
-	Y11MnahHkCrMlV1A+rvU+gndGY1XqNbTSPgd/SH9+GbLcMt5idTrIAxgP0dZXWO+PFXc
-	oXXHuI+XLAe4F5O57qIXMV+ReX2F7z4sWyaK1IrAcyP34Pqb7htlxKSl0CRwdby+x3KI
-	Z4ou+bGZ+nlURy2bNJgcv3F+Ic3n0Xpv7O146UoZNnbO+eiQCxMStdzFITGc+IVuWCVn
-	8kgzwW01wiDsAKVR6K62zn4B6G5SNUXJy5nL3iYUmsxou6J6xZP4a+EjGuhxrgg3PeSG
-	SZPg==
+	:cc; bh=3bfD+KQ+YtIfEmQKphRtL+XSPhWZcuP7XAWTJXxPIYg=;
+	b=V9RXKmx3h+bSNDuMH1+UJXzph3Idfa3GqOQ03ZQA2sPKijhnFAyd1fBxw8TPphiXWt
+	onH2zJeHrj536OHEVp1f3RNdDO+X2t7izizihKxY7efCRnMlpqKnHtBRuJmPtHbjAfSh
+	bNaYlgzMFKG5Vb/Na3KmIX42fyvUsw3mAQQ1hJVpQ1VdYawXNSqwtsAXsYWWfMr3j1UU
+	MaCeqvXq6y3OZM4ocnLGLCC7PKEV4xlGGRl/o/+fOgYSpmMO3NFafFh6IUfb9VggKFGJ
+	7lpJJadmTh1tuOkasV/D97k1JVx1cnt9ZMv8PeQTHizhS5OqOu5ciHJlxbg5aMBwvSAJ
+	6s+A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=F09JXLIt+jQxMGVUOzzqPEvj1I58ecKZOwHxdNFKIp0=;
-	b=lAzdblVKNXIHUriAbQUeXS3+wDKNcL30jjcRo9qcofX3SYu1PMIMtW8YJ/Fv9hZnuw
-	hVaJ1IAJf1gBmBPGTMZeQoIly/laVwRt+JzlKf/UcQ0RwtrllfFVRl74uoYI/tk2Uip7
-	BucxWdvSz0NMBoUAwS/Oe8wu3wcRwJ+QVx6ezRcttJzMi/I05quC8F03LUi7ZtVhEVdS
-	k1lnGQdvc5uopX4BSraPnghAYwQPl+QHnxRbRqEc/5VH8j/hZumfro/sjErcfUBVLHGv
-	Blip7USxNHmaMKr2XEj0Fb1w1JG+tUCiBqxSIgH0E+iiaw3l2WIWL2IiQI3WPelVezto
-	tjnw==
-X-Gm-Message-State: APjAAAWO22kBx3seySbS2P45OPlgXYg/vEfu4qczhU9+LFo0NkuUCqP6
-	DJSDRmcTPRLC3G1lzlSMQlSAv7od3Jagvrr1E2Q=
-X-Google-Smtp-Source: APXvYqyMvN8g1+fjk5bhTgZGgrSs0VTeJlrqkUyinSyylvu51Bxa1kpVq8lwZ9AQ2PYOYJE6WO2LfxW55qflaYPnP/c=
-X-Received: by 2002:a19:9107:: with SMTP id t7mr1308777lfd.48.1554334128358;
-	Wed, 03 Apr 2019 16:28:48 -0700 (PDT)
+	bh=3bfD+KQ+YtIfEmQKphRtL+XSPhWZcuP7XAWTJXxPIYg=;
+	b=cDd0h0QHI8FYGIxZFteiEKtpv2R/dLwWd3berUxxURxWiSOeMW7yQBw2h6pRTgMnjv
+	nyLmDw3fBqigKKWJkmGYoM8q1rVz8QCXNWDWyNBRM5irJ+C/V/Xu1ecCoW3iNFFroh6A
+	1fTAcMyegMjN4ApCZJbFDIaZ5ZHX1K7NEWXvwn5uHkr4MDL1cZUZCJuSSEtF1RmDxVkZ
+	7AjYEF1m/7edrNqRTMXVCJeUKS1bLkneWGl2bppOSk92/SALgwmfaIE65fk5ynmhWST8
+	rA6kANxp8gg4/Nc6YEt+4HO37IAw9dv7t/U8pb5G0FzWUriTaFgQ2ZZgY8hCvY9+jP5N
+	yMoA==
+X-Gm-Message-State: APjAAAVT5T7Hso+Un1Hs3qN5YP+zm/NTdqC9WAYxDlRSsgDLwBeNtZ2d
+	SefbwYU3UJ3LnUdDLjg1ZNwulUejD9GtMtMCVlKnHmEh
+X-Google-Smtp-Source: APXvYqyZZoYdw3IvFL4IvUdMUtWWrA6yoIoz9Qh/9E6hqHYnK8/k3RB0S+MP7Um26cGOByq99xKxDgEqnUA6gloEG1g=
+X-Received: by 2002:ac2:420b:: with SMTP id y11mr1330806lfh.104.1554334250508; 
+	Wed, 03 Apr 2019 16:30:50 -0700 (PDT)
 MIME-Version: 1.0
 References: <20190401031155.21293-1-richard.henderson@linaro.org>
-	<20190401031155.21293-2-richard.henderson@linaro.org>
-In-Reply-To: <20190401031155.21293-2-richard.henderson@linaro.org>
+	<20190401031155.21293-3-richard.henderson@linaro.org>
+In-Reply-To: <20190401031155.21293-3-richard.henderson@linaro.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 3 Apr 2019 16:27:15 -0700
-Message-ID: <CAKmqyKOAAC_NpxBCBwK+0R=GO8b2YxEfzU0Thh9QNSB_x1FAWQ@mail.gmail.com>
+Date: Wed, 3 Apr 2019 16:29:21 -0700
+Message-ID: <CAKmqyKNZZGQnPy3hw6DWEif7Oe2Jz=owMTbGa9atnqu_tZwENw@mail.gmail.com>
 To: Richard Henderson <richard.henderson@linaro.org>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>, 
 	Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
@@ -56,8 +56,8 @@ Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
 X-Received-From: 2a00:1450:4864:20::143
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH for-4.1 1/8] target/riscv:
- Name the argument sets for all of insn32 formats
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH for-4.1 2/8] target/riscv: Use
+ --static-decode for decodetree
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -69,10 +69,13 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Apr 2019 23:29:07 -0000
+X-List-Received-Date: Wed, 03 Apr 2019 23:31:08 -0000
 
-On Sun, Mar 31, 2019 at 8:12 PM Richard Henderson
+On Sun, Mar 31, 2019 at 8:15 PM Richard Henderson
 <richard.henderson@linaro.org> wrote:
+>
+> The generated functions are only used within translate.c
+> and do not need to be global, or declared.
 >
 > Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 
@@ -81,40 +84,53 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  target/riscv/insn32.decode | 10 +++++++---
->  1 file changed, 7 insertions(+), 3 deletions(-)
+>  target/riscv/translate.c   | 2 --
+>  target/riscv/Makefile.objs | 8 ++++----
+>  2 files changed, 4 insertions(+), 6 deletions(-)
 >
-> diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-> index 6f3ab7aa52..77f794ed70 100644
-> --- a/target/riscv/insn32.decode
-> +++ b/target/riscv/insn32.decode
-> @@ -34,9 +34,13 @@
->  %imm_u    12:s20                 !function=ex_shift_12
+> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+> index dd763647ea..7ebd590486 100644
+> --- a/target/riscv/translate.c
+> +++ b/target/riscv/translate.c
+> @@ -538,7 +538,6 @@ static int ex_rvc_register(int reg)
+>      return 8 + reg;
+>  }
 >
->  # Argument sets:
-> +&empty
->  &b    imm rs2 rs1
->  &i    imm rs1 rd
-> +&j    imm rd
->  &r    rd rs1 rs2
-> +&s    imm rs1 rs2
-> +&u    imm rd
->  &shift     shamt rs1 rd
->  &atomic    aq rl rs2 rs1 rd
+> -bool decode_insn32(DisasContext *ctx, uint32_t insn);
+>  /* Include the auto-generated decoder for 32 bit insn */
+>  #include "decode_insn32.inc.c"
 >
-> @@ -44,9 +48,9 @@
->  @r       .......   ..... ..... ... ..... ....... &r                %rs2 %rs1 %rd
->  @i       ............    ..... ... ..... ....... &i      imm=%imm_i     %rs1 %rd
->  @b       .......   ..... ..... ... ..... ....... &b      imm=%imm_b %rs2 %rs1
-> -@s       .......   ..... ..... ... ..... .......         imm=%imm_s %rs2 %rs1
-> -@u       ....................      ..... .......         imm=%imm_u          %rd
-> -@j       ....................      ..... .......         imm=%imm_j          %rd
-> +@s       .......   ..... ..... ... ..... ....... &s      imm=%imm_s %rs2 %rs1
-> +@u       ....................      ..... ....... &u      imm=%imm_u          %rd
-> +@j       ....................      ..... ....... &j      imm=%imm_j          %rd
+> @@ -667,7 +666,6 @@ static bool gen_shift(DisasContext *ctx, arg_r *a,
+>  #include "insn_trans/trans_rvd.inc.c"
+>  #include "insn_trans/trans_privileged.inc.c"
 >
->  @sh      ......  ...... .....  ... ..... ....... &shift  shamt=%sh10      %rs1 %rd
->  @csr     ............   .....  ... ..... .......               %csr     %rs1 %rd
+> -bool decode_insn16(DisasContext *ctx, uint16_t insn);
+>  /* auto-generated decoder*/
+>  #include "decode_insn16.inc.c"
+>  #include "insn_trans/trans_rvc.inc.c"
+> diff --git a/target/riscv/Makefile.objs b/target/riscv/Makefile.objs
+> index 9c6c109327..c7a1b063ed 100644
+> --- a/target/riscv/Makefile.objs
+> +++ b/target/riscv/Makefile.objs
+> @@ -7,14 +7,14 @@ decode32-$(TARGET_RISCV64) += $(SRC_PATH)/target/riscv/insn32-64.decode
+>
+>  target/riscv/decode_insn32.inc.c: $(decode32-y) $(DECODETREE)
+>         $(call quiet-command, \
+> -         $(PYTHON) $(DECODETREE) -o $@ --decode decode_insn32 $(decode32-y), \
+> -         "GEN", $(TARGET_DIR)$@)
+> +         $(PYTHON) $(DECODETREE) -o $@ --static-decode decode_insn32 \
+> +          $(decode32-y), "GEN", $(TARGET_DIR)$@)
+>
+>  target/riscv/decode_insn16.inc.c: \
+>    $(SRC_PATH)/target/riscv/insn16.decode $(DECODETREE)
+>         $(call quiet-command, \
+> -         $(PYTHON) $(DECODETREE) -o $@ --decode decode_insn16 --insnwidth 16 $<, \
+> -         "GEN", $(TARGET_DIR)$@)
+> +         $(PYTHON) $(DECODETREE) -o $@ --static-decode decode_insn16 \
+> +          --insnwidth 16 $<, "GEN", $(TARGET_DIR)$@)
+>
+>  target/riscv/translate.o: target/riscv/decode_insn32.inc.c \
+>         target/riscv/decode_insn16.inc.c
 > --
 > 2.17.1
 >
