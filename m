@@ -1,63 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1hBp3M-0003F0-Av
-	for mharc-qemu-riscv@gnu.org; Wed, 03 Apr 2019 19:12:20 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:44395)
+	id 1hBpJc-0006bW-Ut
+	for mharc-qemu-riscv@gnu.org; Wed, 03 Apr 2019 19:29:08 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:58723)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1hBp3I-0003DQ-TZ
-	for qemu-riscv@nongnu.org; Wed, 03 Apr 2019 19:12:18 -0400
+	(envelope-from <alistair23@gmail.com>) id 1hBpJZ-0006aT-Q2
+	for qemu-riscv@nongnu.org; Wed, 03 Apr 2019 19:29:07 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1hBp3H-0007RM-D0
-	for qemu-riscv@nongnu.org; Wed, 03 Apr 2019 19:12:16 -0400
-Received: from mail-lf1-x142.google.com ([2a00:1450:4864:20::142]:42408)
+	(envelope-from <alistair23@gmail.com>) id 1hBpJX-00041v-P0
+	for qemu-riscv@nongnu.org; Wed, 03 Apr 2019 19:29:05 -0400
+Received: from mail-lf1-x143.google.com ([2a00:1450:4864:20::143]:40816)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
 	(Exim 4.71) (envelope-from <alistair23@gmail.com>)
-	id 1hBp38-0005iR-JN; Wed, 03 Apr 2019 19:12:07 -0400
-Received: by mail-lf1-x142.google.com with SMTP id b7so330472lfg.9;
-	Wed, 03 Apr 2019 16:11:44 -0700 (PDT)
+	id 1hBpJQ-0003Vg-8l; Wed, 03 Apr 2019 19:28:56 -0400
+Received: by mail-lf1-x143.google.com with SMTP id a28so355989lfo.7;
+	Wed, 03 Apr 2019 16:28:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=CTt/jLIRuotKBbsJDgLnpVygmzry6CI7fXm7Xyq3uAQ=;
-	b=nqADsAOldBtoqMbcUsTu2uxmGxZgKps+JvgjLkrvAo+t5IEc7RfXBHLffj1SKiPaXz
-	a2dMQEs9aWNCb20a3Ai8KeWkQ+x3g+VvX6h6PxeTWFgHRYHn9Uv96DmbwxuH6iaqUUEg
-	XvggnGUvoFSumboFb1wzfiMxvpTu4iAXuqpemamRE5qrsqOXz7KXMPieZJ03caQTf21I
-	G5bpC9Av3V2ZBo4TBJlmIWqOHBK0cWB7WzX7MzQHFfgnwoTwu6ULX4JBeDIvKoZ1KzHd
-	bVLSksgk88hA9qZQAF5VBnSyzpUfbA7rEhztPWLJNc7t0fm7Bccqz7pwkirAdcu8+wJR
-	kfPg==
+	:cc; bh=F09JXLIt+jQxMGVUOzzqPEvj1I58ecKZOwHxdNFKIp0=;
+	b=WdcOGgXFf5AwGkRhiZ8wLX1Ctsimk3lmdANKmux+tWuboatkRRFU/KrZh6bE11bSKK
+	Y11MnahHkCrMlV1A+rvU+gndGY1XqNbTSPgd/SH9+GbLcMt5idTrIAxgP0dZXWO+PFXc
+	oXXHuI+XLAe4F5O57qIXMV+ReX2F7z4sWyaK1IrAcyP34Pqb7htlxKSl0CRwdby+x3KI
+	Z4ou+bGZ+nlURy2bNJgcv3F+Ic3n0Xpv7O146UoZNnbO+eiQCxMStdzFITGc+IVuWCVn
+	8kgzwW01wiDsAKVR6K62zn4B6G5SNUXJy5nL3iYUmsxou6J6xZP4a+EjGuhxrgg3PeSG
+	SZPg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=CTt/jLIRuotKBbsJDgLnpVygmzry6CI7fXm7Xyq3uAQ=;
-	b=K1NJ1YPp1X76AW2IJd6RDV3k/UGLXCO7d4DYLoNTHx067FvteuTMkostjFyDvgrqQh
-	d69+AlWp3CXeyUYDGOhI2rWbxgw7dUT+xt/1YsPEcOi/i6zSF2aDpfoUCjo+cvKVwhuf
-	byC9CQkNzldmK4LobKP8bUGKdT5m3QRvjwTrPjshrCCFNUz7d7pXuk27WQboR14gyXNc
-	3wF4vvNvivKUUhd7LLU2tSaMT81ViPWplc0uhM2aLS5St7L25Q4XzZjxjLCgBEGnoQho
-	z1D3MhfL6/zUGOYuprZgxPO4n2661O/wFen0dw01hmRLcKurgq6bD4QfkcoBWI8SgtlM
-	o4AA==
-X-Gm-Message-State: APjAAAVks/DXlb8asVexOW6GP/gUn1Gd3VPfsDqMhN9g8Kt+3TYTzvZf
-	TmvGHIBRCkOFu4psOYmbGsxOf0qfdodSKiVylBU=
-X-Google-Smtp-Source: APXvYqy/D1q6WX0L51Gntd3B6F0+BPikjY4bQJ91fPQp7wtlkijWFLwuccAnK8seQLxdk0BU0PNQ7Q779+IsTmfmGJI=
-X-Received: by 2002:a19:c51a:: with SMTP id w26mr1211844lfe.59.1554333102234; 
-	Wed, 03 Apr 2019 16:11:42 -0700 (PDT)
+	bh=F09JXLIt+jQxMGVUOzzqPEvj1I58ecKZOwHxdNFKIp0=;
+	b=lAzdblVKNXIHUriAbQUeXS3+wDKNcL30jjcRo9qcofX3SYu1PMIMtW8YJ/Fv9hZnuw
+	hVaJ1IAJf1gBmBPGTMZeQoIly/laVwRt+JzlKf/UcQ0RwtrllfFVRl74uoYI/tk2Uip7
+	BucxWdvSz0NMBoUAwS/Oe8wu3wcRwJ+QVx6ezRcttJzMi/I05quC8F03LUi7ZtVhEVdS
+	k1lnGQdvc5uopX4BSraPnghAYwQPl+QHnxRbRqEc/5VH8j/hZumfro/sjErcfUBVLHGv
+	Blip7USxNHmaMKr2XEj0Fb1w1JG+tUCiBqxSIgH0E+iiaw3l2WIWL2IiQI3WPelVezto
+	tjnw==
+X-Gm-Message-State: APjAAAWO22kBx3seySbS2P45OPlgXYg/vEfu4qczhU9+LFo0NkuUCqP6
+	DJSDRmcTPRLC3G1lzlSMQlSAv7od3Jagvrr1E2Q=
+X-Google-Smtp-Source: APXvYqyMvN8g1+fjk5bhTgZGgrSs0VTeJlrqkUyinSyylvu51Bxa1kpVq8lwZ9AQ2PYOYJE6WO2LfxW55qflaYPnP/c=
+X-Received: by 2002:a19:9107:: with SMTP id t7mr1308777lfd.48.1554334128358;
+	Wed, 03 Apr 2019 16:28:48 -0700 (PDT)
 MIME-Version: 1.0
-References: <CANnJOVHadZt5Vho5sy6FGVgUW_yvYZg7BGDiGJFtRBCquyOXZA@mail.gmail.com>
-In-Reply-To: <CANnJOVHadZt5Vho5sy6FGVgUW_yvYZg7BGDiGJFtRBCquyOXZA@mail.gmail.com>
+References: <20190401031155.21293-1-richard.henderson@linaro.org>
+	<20190401031155.21293-2-richard.henderson@linaro.org>
+In-Reply-To: <20190401031155.21293-2-richard.henderson@linaro.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 3 Apr 2019 16:10:13 -0700
-Message-ID: <CAKmqyKNVno+jR_PYxgnyqQOSQFCn_ai7GH+hYPgaO=fkqHDa6A@mail.gmail.com>
-To: Jonathan Behrens <fintelia@gmail.com>
+Date: Wed, 3 Apr 2019 16:27:15 -0700
+Message-ID: <CAKmqyKOAAC_NpxBCBwK+0R=GO8b2YxEfzU0Thh9QNSB_x1FAWQ@mail.gmail.com>
+To: Richard Henderson <richard.henderson@linaro.org>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>, 
 	Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
 	Palmer Dabbelt <palmer@sifive.com>, 
 	Alistair Francis <Alistair.Francis@wdc.com>,
-	"open list:RISC-V" <qemu-riscv@nongnu.org>, 
-	Sagar Karandikar <sagark@eecs.berkeley.edu>
+	"open list:RISC-V" <qemu-riscv@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2a00:1450:4864:20::142
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH] target/riscv: Do not allow
- sfence.vma from user mode
+X-Received-From: 2a00:1450:4864:20::143
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH for-4.1 1/8] target/riscv:
+ Name the argument sets for all of insn32 formats
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -69,43 +69,54 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Apr 2019 23:12:18 -0000
+X-List-Received-Date: Wed, 03 Apr 2019 23:29:07 -0000
 
-On Mon, Apr 1, 2019 at 1:39 PM Jonathan Behrens <fintelia@gmail.com> wrote:
+On Sun, Mar 31, 2019 at 8:12 PM Richard Henderson
+<richard.henderson@linaro.org> wrote:
 >
-> The 'sfence.vma' instruction is privileged, and should only ever be allowed
-> when executing in supervisor mode or higher.
->
-> Jonathan
->
-> Signed-off-by: Jonathan Behrens <fintelia@gmail.com>
+> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  target/riscv/op_helper.c | 7 ++++---
->  1 file changed, 4 insertions(+), 3 deletions(-)
+>  target/riscv/insn32.decode | 10 +++++++---
+>  1 file changed, 7 insertions(+), 3 deletions(-)
 >
-> diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
-> index b7dc18a41e..644d0fb35f 100644
-> --- a/target/riscv/op_helper.c
-> +++ b/target/riscv/op_helper.c
-> @@ -145,9 +145,10 @@ void helper_tlb_flush(CPURISCVState *env)
->  {
->      RISCVCPU *cpu = riscv_env_get_cpu(env);
->      CPUState *cs = CPU(cpu);
-> -    if (env->priv == PRV_S &&
-> -        env->priv_ver >= PRIV_VERSION_1_10_0 &&
-> -        get_field(env->mstatus, MSTATUS_TVM)) {
-> +    if (!(env->priv >= PRV_S) ||
-> +        (env->priv == PRV_S &&
-> +         env->priv_ver >= PRIV_VERSION_1_10_0 &&
-> +         get_field(env->mstatus, MSTATUS_TVM))) {
->          riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
->      } else {
->          tlb_flush(cs);
+> diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+> index 6f3ab7aa52..77f794ed70 100644
+> --- a/target/riscv/insn32.decode
+> +++ b/target/riscv/insn32.decode
+> @@ -34,9 +34,13 @@
+>  %imm_u    12:s20                 !function=ex_shift_12
+>
+>  # Argument sets:
+> +&empty
+>  &b    imm rs2 rs1
+>  &i    imm rs1 rd
+> +&j    imm rd
+>  &r    rd rs1 rs2
+> +&s    imm rs1 rs2
+> +&u    imm rd
+>  &shift     shamt rs1 rd
+>  &atomic    aq rl rs2 rs1 rd
+>
+> @@ -44,9 +48,9 @@
+>  @r       .......   ..... ..... ... ..... ....... &r                %rs2 %rs1 %rd
+>  @i       ............    ..... ... ..... ....... &i      imm=%imm_i     %rs1 %rd
+>  @b       .......   ..... ..... ... ..... ....... &b      imm=%imm_b %rs2 %rs1
+> -@s       .......   ..... ..... ... ..... .......         imm=%imm_s %rs2 %rs1
+> -@u       ....................      ..... .......         imm=%imm_u          %rd
+> -@j       ....................      ..... .......         imm=%imm_j          %rd
+> +@s       .......   ..... ..... ... ..... ....... &s      imm=%imm_s %rs2 %rs1
+> +@u       ....................      ..... ....... &u      imm=%imm_u          %rd
+> +@j       ....................      ..... ....... &j      imm=%imm_j          %rd
+>
+>  @sh      ......  ...... .....  ... ..... ....... &shift  shamt=%sh10      %rs1 %rd
+>  @csr     ............   .....  ... ..... .......               %csr     %rs1 %rd
 > --
-> 2.20.1
+> 2.17.1
+>
+>
 
