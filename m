@@ -1,67 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1hBqkb-00009z-PN
-	for mharc-qemu-riscv@gnu.org; Wed, 03 Apr 2019 21:01:05 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:40550)
+	id 1hBqkc-0000BG-9D
+	for mharc-qemu-riscv@gnu.org; Wed, 03 Apr 2019 21:01:06 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:40559)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1hBqkZ-00005A-DJ
-	for qemu-riscv@nongnu.org; Wed, 03 Apr 2019 21:01:04 -0400
+	(envelope-from <palmer@sifive.com>) id 1hBqkZ-00005I-Ft
+	for qemu-riscv@nongnu.org; Wed, 03 Apr 2019 21:01:05 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1hBqkT-0005co-GC
+	(envelope-from <palmer@sifive.com>) id 1hBqkT-0005cH-92
 	for qemu-riscv@nongnu.org; Wed, 03 Apr 2019 21:00:59 -0400
-Received: from mail-pl1-x644.google.com ([2607:f8b0:4864:20::644]:33788)
+Received: from mail-pg1-x544.google.com ([2607:f8b0:4864:20::544]:46031)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1hBqkP-0005RP-AR
-	for qemu-riscv@nongnu.org; Wed, 03 Apr 2019 21:00:55 -0400
-Received: by mail-pl1-x644.google.com with SMTP id t16so282285plo.0
-	for <qemu-riscv@nongnu.org>; Wed, 03 Apr 2019 18:00:47 -0700 (PDT)
+	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1hBqkN-0005WX-Gh
+	for qemu-riscv@nongnu.org; Wed, 03 Apr 2019 21:00:53 -0400
+Received: by mail-pg1-x544.google.com with SMTP id y3so315593pgk.12
+	for <qemu-riscv@nongnu.org>; Wed, 03 Apr 2019 18:00:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
-	h=subject:date:message-id:in-reply-to:references:mime-version
-	:content-transfer-encoding:cc:from:to;
-	bh=zcP6TUf1S2OgSYzxBqIMMRdcYGi1N4fsXvanFCgND0w=;
-	b=GWjWlo0dKa6yH3xQD2o4vPjQbyHMDDKWhZteD3//G6+G9WCPGx8gASZj248uJiULhh
-	daivta2veCZkDqr+l4F7IXS3m2e15vrLy/H3i4DitT1MgKXkGWrewMqTJYoW1PVgPGiN
-	hot/9LtyC5n/gDxBBckrA2gp/AUTJNLiIkPCCJK1nxJsbEP6TCzv6aDuvhcNE5B/on+T
-	X1CYn1nvzMB0KAdl3Yp+klmkfVpsURvMetaKy9l1LYbxUGDQ4EcgExrn65mZ3kl3VWTW
-	DzjWqOM/K8QnwY22353DZyCr2nnq7hZP5rdAqEz+cy/J0MaXyUIwtT7dWERVrjFXTxr7
-	Ewqw==
+	h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
+	:content-transfer-encoding;
+	bh=EFwD950YbDgxTond2eqTyKs9qEW7A6COt2oUNYCbnTY=;
+	b=cfySC4UlhYRWMca2saPGMD5Gcf6QiMu8C/4XTg9/8m9INyGs8RuDvTO79ICEYp/MOk
+	92Oj1AvERPuGmgm3a0LOZfZXnzd/dbKZ5nAAMIgHuHSkZ1s1yyv3/f00SyJDUjk7zQjg
+	JgLees4Fl9qzh2TWn6dw/Bv1cMKwZnb8KrN3E44jixMF4/MnDy8Pq4H+XE6DFMYobZJE
+	d8D7Kf8jahAvmYvWGvNc7Sr3BcOzrZHzJumacadbEbH74AO79yNAmDwyOntNfGZNarcA
+	nyQ3bepeO+gwIz8sSNkIteBSxDQwv1ZTuMFabFOat4h84xSwm8cOb9nqcKz6K102T+Es
+	eF8g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding:cc:from:to;
-	bh=zcP6TUf1S2OgSYzxBqIMMRdcYGi1N4fsXvanFCgND0w=;
-	b=B2k+Y9adnzrrKv6xdo2p//qYjIshg+j3sLXtR3fZen80fQwl88Vz4I+w6djeZgmjhC
-	ztZ1NP/U34pRj+/drm1W2gn/5kZ7bfy5fLX6SrVO+ksM/HqQTFg7yQFJVR9pBW0ADH/1
-	zQSm5jX4+ITz2vYgqz878iEFF9vgDNOo3+9//VKsDcOcIGdLDokreBQBYQFSP7yiooZJ
-	4/4rFqcfdXPadSgbwmQBjS178KjYx3d9Y44uSHcve9Ns9GD6BcSPqGWoF3+fES9DRswf
-	kQippLmJ2x0BgT2tuPMGggJnO5mjy2Fz4TdSj3r+JXAHEVfkT2sXBid4exYidJEjz/mg
-	B1Bg==
-X-Gm-Message-State: APjAAAV0tlP256kq10ONhVpUMgCRmBauRVH+clIJic+sldGkklxhBs49
-	IC6PtS1hA0+QPumdAzJjNmqe+1HC0UeukQ==
-X-Google-Smtp-Source: APXvYqxTqZ+iCPpLoH/fTEXR3P1o4xBO8L2RCcG/q5B6qC3BL4zvyxpOS3mQfymM1R30AZY7eVzhiA==
-X-Received: by 2002:a17:902:8ecc:: with SMTP id
-	x12mr3298872plo.0.1554339646081; 
-	Wed, 03 Apr 2019 18:00:46 -0700 (PDT)
-Received: from localhost ([12.206.222.5]) by smtp.gmail.com with ESMTPSA id
-	d3sm26303819pfn.113.2019.04.03.18.00.44
+	h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
+	:mime-version:content-transfer-encoding;
+	bh=EFwD950YbDgxTond2eqTyKs9qEW7A6COt2oUNYCbnTY=;
+	b=s3XLYC9TeBJICGqYVMkjCm/vSFdUc+VceFTGycq3Rk09kzHau2OTYjeu2GqxA4y5Ga
+	4lIjI1t7N00Wx2l7Oo9hQztI8TRbRvVSzyjF/Owcb2AYL0kwoa1+hzckC/WqIU9mT55Q
+	JjhpcseQZhcBsKZeOANiShQcSn9h6yq3+j5qijy2H3EDIi7EyCpTNch6V+oOH/5mrYNt
+	PeJRLST4esAjDzc6j64GQIZ5nBm+LibPUM56EicSl8izNrcFkwVSqf+6nmLVeUvkufre
+	93SQvVJRTINk5WkH7mq0GoJNCD6kvHQT3yxJClyiIxOfpjulR8v5pfk88VbZo/josCbr
+	G2sg==
+X-Gm-Message-State: APjAAAXGWOjuq+mH49jtaECM5Afu/g2Pskf9YpBqsKw8FYNFEC1Gsq0h
+	Lii77kpDAzdZUA1DB3AcmiaEZg==
+X-Google-Smtp-Source: APXvYqwQCBiWlybmtVTZBVRqrMoBOJtMDmiZucQyxuB82za03zMhjU3fBYJKaEHglXXu2AUzNbQDkQ==
+X-Received: by 2002:a65:47c6:: with SMTP id f6mr2781651pgs.173.1554339649568; 
+	Wed, 03 Apr 2019 18:00:49 -0700 (PDT)
+Received: from localhost ([12.206.222.5])
+	by smtp.gmail.com with ESMTPSA id p2sm2308898pfb.80.2019.04.03.18.00.48
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 03 Apr 2019 18:00:45 -0700 (PDT)
-Date: Wed,  3 Apr 2019 17:55:22 -0700
-Message-Id: <20190404005523.6513-2-palmer@sifive.com>
-X-Mailer: git-send-email 2.19.2
-In-Reply-To: <20190404005523.6513-1-palmer@sifive.com>
-References: <20190404005523.6513-1-palmer@sifive.com>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Cc: qemu-riscv@nongnu.org,       qemu-devel@nongnu.org,
-	Alistair Francis <Alistair.Francis@wdc.com>,
-	Alistair Francis <alistair.francis@wdc.com>, 
-	Palmer Dabbelt <palmer@sifive.com>
+	Wed, 03 Apr 2019 18:00:48 -0700 (PDT)
+Date: Wed, 03 Apr 2019 18:00:48 -0700 (PDT)
+X-Google-Original-Date: Wed, 03 Apr 2019 17:55:51 PDT (-0700)
+In-Reply-To: <CAKmqyKOAMGBcgRscu9QzpQYsA=qTeGgkK+03F=0YRhtzUFaXVw@mail.gmail.com>
+CC: Alistair Francis <Alistair.Francis@wdc.com>, qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
 From: Palmer Dabbelt <palmer@sifive.com>
-To: Peter Maydell <peter.maydell@linaro.org>
+To: alistair23@gmail.com
+Message-ID: <mhng-8467ed04-3f36-4b0c-a53c-270a3ef88074@palmer-si-x1c4>
+Mime-Version: 1.0 (MHng)
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::644
-Subject: [Qemu-riscv] [PULL 1/2] riscv: plic: Fix incorrect irq calculation
+X-Received-From: 2607:f8b0:4864:20::544
+Subject: Re: [Qemu-riscv] [PATCH for 4.0 v2 0/2] Update the QEMU PLIC
+ addresses
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -75,123 +73,37 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Thu, 04 Apr 2019 01:01:05 -0000
 
-From: Alistair Francis <Alistair.Francis@wdc.com>
+On Wed, 03 Apr 2019 16:32:11 PDT (-0700), alistair23@gmail.com wrote:
+> On Wed, Mar 27, 2019 at 8:23 PM Palmer Dabbelt <palmer@sifive.com> wrote:
+>>
+>> On Wed, 27 Mar 2019 11:51:15 PDT (-0700), Alistair Francis wrote:
+>> > This series updates the PLIC address to match the documentation.
+>> >
+>> > This fixes: https://github.com/riscv/opensbi/issues/97
+>> >
+>> > V2:
+>> >  - Squash patches to ensure biesctability
+>> >
+>> > Alistair Francis (2):
+>> >   riscv: plic: Fix incorrect irq calculation
+>> >   riscv: plic: Log guest errors
+>> >
+>> >  hw/riscv/sifive_plic.c      | 16 +++++++++++-----
+>> >  hw/riscv/sifive_u.c         |  2 +-
+>> >  include/hw/riscv/sifive_e.h |  2 +-
+>> >  include/hw/riscv/sifive_u.h |  4 ++--
+>> >  include/hw/riscv/virt.h     |  2 +-
+>> >  5 files changed, 16 insertions(+), 10 deletions(-)
+>> >
+>> > --
+>> > 2.21.0
+>>
+>> Thanks, I've got these on for-master.  I'll let them sit for a bit to see if
+>> there are any other comments, but
+>>
+>> Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
+>
+> Ping! Just want to make sure these make it into 4.0
 
-This patch fixes four different things, to maintain bisectability they
-have been merged into a single patch. The following fixes are below:
-
-sifive_plic: Fix incorrect irq calculation
-The irq is incorrectly calculated to be off by one. It has worked in the
-past as the priority_base offset has also been set incorrectly. We are
-about to fix the priority_base offset so first first the irq
-calculation.
-
-sifive_u: Fix PLIC priority base offset and numbering
-According to the FU540 manual the PLIC source priority address starts at
-an offset of 0x04 and not 0x00. The same manual also specifies that the
-PLIC only has 53 source priorities. Fix these two incorrect header
-files.
-
-We also need to over extend the plic_gpios[] array as the PLIC sources
-count from 1 and not 0.
-
-riscv: sifive_e: Fix PLIC priority base offset
-According to the FE31 manual the PLIC source priority address starts at
-an offset of 0x04 and not 0x00.
-
-riscv: virt: Fix PLIC priority base offset
-Update the virt offsets based on the newly updated SiFive U and SiFive E
-offsets.
-
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
-Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
----
- hw/riscv/sifive_plic.c      | 4 ++--
- hw/riscv/sifive_u.c         | 2 +-
- include/hw/riscv/sifive_e.h | 2 +-
- include/hw/riscv/sifive_u.h | 4 ++--
- include/hw/riscv/virt.h     | 2 +-
- 5 files changed, 7 insertions(+), 7 deletions(-)
-
-diff --git a/hw/riscv/sifive_plic.c b/hw/riscv/sifive_plic.c
-index 1c703e1a376a..70a85cd07578 100644
---- a/hw/riscv/sifive_plic.c
-+++ b/hw/riscv/sifive_plic.c
-@@ -206,7 +206,7 @@ static uint64_t sifive_plic_read(void *opaque, hwaddr addr, unsigned size)
-     if (addr >= plic->priority_base && /* 4 bytes per source */
-         addr < plic->priority_base + (plic->num_sources << 2))
-     {
--        uint32_t irq = (addr - plic->priority_base) >> 2;
-+        uint32_t irq = ((addr - plic->priority_base) >> 2) + 1;
-         if (RISCV_DEBUG_PLIC) {
-             qemu_log("plic: read priority: irq=%d priority=%d\n",
-                 irq, plic->source_priority[irq]);
-@@ -279,7 +279,7 @@ static void sifive_plic_write(void *opaque, hwaddr addr, uint64_t value,
-     if (addr >= plic->priority_base && /* 4 bytes per source */
-         addr < plic->priority_base + (plic->num_sources << 2))
-     {
--        uint32_t irq = (addr - plic->priority_base) >> 2;
-+        uint32_t irq = ((addr - plic->priority_base) >> 2) + 1;
-         plic->source_priority[irq] = value & 7;
-         if (RISCV_DEBUG_PLIC) {
-             qemu_log("plic: write priority: irq=%d priority=%d\n",
-diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-index 5ecc47cea35d..88381a750776 100644
---- a/hw/riscv/sifive_u.c
-+++ b/hw/riscv/sifive_u.c
-@@ -340,7 +340,7 @@ static void riscv_sifive_u_soc_realize(DeviceState *dev, Error **errp)
-     const struct MemmapEntry *memmap = sifive_u_memmap;
-     MemoryRegion *system_memory = get_system_memory();
-     MemoryRegion *mask_rom = g_new(MemoryRegion, 1);
--    qemu_irq plic_gpios[SIFIVE_U_PLIC_NUM_SOURCES];
-+    qemu_irq plic_gpios[SIFIVE_U_PLIC_NUM_SOURCES + 1];
-     int i;
-     Error *err = NULL;
-     NICInfo *nd = &nd_table[0];
-diff --git a/include/hw/riscv/sifive_e.h b/include/hw/riscv/sifive_e.h
-index 7b6d8aed968f..f715f8606fa6 100644
---- a/include/hw/riscv/sifive_e.h
-+++ b/include/hw/riscv/sifive_e.h
-@@ -70,7 +70,7 @@ enum {
- #define SIFIVE_E_PLIC_HART_CONFIG "M"
- #define SIFIVE_E_PLIC_NUM_SOURCES 127
- #define SIFIVE_E_PLIC_NUM_PRIORITIES 7
--#define SIFIVE_E_PLIC_PRIORITY_BASE 0x0
-+#define SIFIVE_E_PLIC_PRIORITY_BASE 0x04
- #define SIFIVE_E_PLIC_PENDING_BASE 0x1000
- #define SIFIVE_E_PLIC_ENABLE_BASE 0x2000
- #define SIFIVE_E_PLIC_ENABLE_STRIDE 0x80
-diff --git a/include/hw/riscv/sifive_u.h b/include/hw/riscv/sifive_u.h
-index be13cc1304cc..d859ea20f6a2 100644
---- a/include/hw/riscv/sifive_u.h
-+++ b/include/hw/riscv/sifive_u.h
-@@ -68,9 +68,9 @@ enum {
- };
- 
- #define SIFIVE_U_PLIC_HART_CONFIG "MS"
--#define SIFIVE_U_PLIC_NUM_SOURCES 127
-+#define SIFIVE_U_PLIC_NUM_SOURCES 53
- #define SIFIVE_U_PLIC_NUM_PRIORITIES 7
--#define SIFIVE_U_PLIC_PRIORITY_BASE 0x0
-+#define SIFIVE_U_PLIC_PRIORITY_BASE 0x04
- #define SIFIVE_U_PLIC_PENDING_BASE 0x1000
- #define SIFIVE_U_PLIC_ENABLE_BASE 0x2000
- #define SIFIVE_U_PLIC_ENABLE_STRIDE 0x80
-diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
-index f12deaebd697..568764b57088 100644
---- a/include/hw/riscv/virt.h
-+++ b/include/hw/riscv/virt.h
-@@ -59,7 +59,7 @@ enum {
- #define VIRT_PLIC_HART_CONFIG "MS"
- #define VIRT_PLIC_NUM_SOURCES 127
- #define VIRT_PLIC_NUM_PRIORITIES 7
--#define VIRT_PLIC_PRIORITY_BASE 0x0
-+#define VIRT_PLIC_PRIORITY_BASE 0x04
- #define VIRT_PLIC_PENDING_BASE 0x1000
- #define VIRT_PLIC_ENABLE_BASE 0x2000
- #define VIRT_PLIC_ENABLE_STRIDE 0x80
--- 
-2.19.2
-
+Thanks, this got lost in the shuffle.  I just forwarded along the PR.
 
