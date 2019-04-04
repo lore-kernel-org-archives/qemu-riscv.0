@@ -1,61 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1hBpd5-0002X3-GM
-	for mharc-qemu-riscv@gnu.org; Wed, 03 Apr 2019 19:49:15 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:43762)
+	id 1hBqkW-0008UA-PM
+	for mharc-qemu-riscv@gnu.org; Wed, 03 Apr 2019 21:01:00 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:40464)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1hBpd2-0002V7-O7
-	for qemu-riscv@nongnu.org; Wed, 03 Apr 2019 19:49:13 -0400
+	(envelope-from <palmer@sifive.com>) id 1hBqkT-0008Sw-IH
+	for qemu-riscv@nongnu.org; Wed, 03 Apr 2019 21:00:59 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1hBpOA-0005uc-JZ
-	for qemu-riscv@nongnu.org; Wed, 03 Apr 2019 19:33:52 -0400
-Received: from mail-lj1-x242.google.com ([2a00:1450:4864:20::242]:40980)
+	(envelope-from <palmer@sifive.com>) id 1hBqkR-0005b3-Dj
+	for qemu-riscv@nongnu.org; Wed, 03 Apr 2019 21:00:57 -0400
+Received: from mail-pg1-x541.google.com ([2607:f8b0:4864:20::541]:41795)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <alistair23@gmail.com>)
-	id 1hBpO0-0005bK-S6; Wed, 03 Apr 2019 19:33:42 -0400
-Received: by mail-lj1-x242.google.com with SMTP id k8so373694lja.8;
-	Wed, 03 Apr 2019 16:33:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=7eD8+8D+QxESEed2f/lfyuury4uaZ9o08tV2RBKmE0g=;
-	b=JHZozpd+P+Qn1DK069srAUyicV2or4Ve/CJF5DtMgafvAk+2X8GyiW7fe+aDQdJ7g9
-	HkKTwEHmCYM4/gpECplNKD7fTi7jx522ipnHAea+SPuh8pK8TNiT4wKN48qsvqGmE/dv
-	2dN3+XwHO64BuKibKWFd7sFDLIiik8SU/eMzxd73Q/vsqo3Z6rb4ax4CZ6UtHQuHFTe3
-	Leod0f2MUfPsuTok/h3xK9V/QhcwK9qz1oSrWdX8sA6Wel2zWcAops3O+4z7SE/AdLmA
-	AQkWtDyBjz3lO4IhOjFnuYLvdALPYi/uXXLdET/jhRcmwQX6/KRo0GG4GdD/tymuGUnt
-	NvWw==
+	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1hBqkL-0005PW-Ic
+	for qemu-riscv@nongnu.org; Wed, 03 Apr 2019 21:00:50 -0400
+Received: by mail-pg1-x541.google.com with SMTP id f6so326005pgs.8
+	for <qemu-riscv@nongnu.org>; Wed, 03 Apr 2019 18:00:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+	h=subject:date:message-id:mime-version:content-transfer-encoding:cc
+	:from:to; bh=QzgVTvtkYcaClV9ox8ihJNrfV9GwiuJCxeLPzizNnhA=;
+	b=Xj+Stpdme4HX1mfz64v7zadxaQ/N43BN/YYT4rQrTgisBby+h265Rmz1Rw6n7ynAiy
+	OS5x7K8OGXwZhll28OCJVUQ1xMz+8YLcdS/W0dztYXkQ4QEkjUx6n0g6xnRywd5qU1m0
+	73a4m32y8j7awQZ72nZn38OYnXLafxZf/YUw/6F3y0LI8j2sKhopVt55hK5OByAHTCrC
+	LfTSIIA7MZmoMrm/KekOWxDgdPasq/AVGE5++q7QcZlnXHYY6R3A/Am434MG7CTL2dRI
+	vwVB0H1E/7mlhHAeT196+j0RBKggeorOrp0uZw/cNciBpzPvDddfcxPXDhUoV414wnr1
+	P2Qw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=7eD8+8D+QxESEed2f/lfyuury4uaZ9o08tV2RBKmE0g=;
-	b=bnNd5eU4HmOAwVf56weIU/sHezerzwARLk031tQzF4o45CCSlyQzgPtSuSFfZGqwb4
-	Oey4YO5kLgjTdFZgnMm5bGsOdVDsEJ8RUKSdfAUjGB+qH9va9huFRT8W84nXZ9A8I2K8
-	ODAE30feqg6dmPswQTHS7Xp9RlDDhc8318DkAo9qJgoWKBtfgL18r03v0N09zzEFYP12
-	eknBxmX/USf+6nmyrvDjdD9bP8p/PDG1T2V9gDW2BA7WZyquxhUcqmtvtyuymFU51XOF
-	FYu3oIioxyujtA4lA2ZUys1K25/8uyb7uP5xvC25/zJThI7/bEcE6lNWBds51cPM3uvJ
-	aSPw==
-X-Gm-Message-State: APjAAAVV96E+IiRbfN2GBmrCQD1UuDBFxlHoEspxbo2DYG46NrGEZsQL
-	QxCObVIQjB9Yp4i+ArudLriV00UrUWCG/QSwUOs=
-X-Google-Smtp-Source: APXvYqxWUfDi5pWO/HqkHfM06IuhI+pg/Mm7/vid/q/1gpC07XfpRdC+R4DopWw03PxhDY+DEIku1dXQ9tSyZ61ZyWg=
-X-Received: by 2002:a2e:9843:: with SMTP id e3mr1385417ljj.28.1554334419083;
-	Wed, 03 Apr 2019 16:33:39 -0700 (PDT)
+	h=x-gm-message-state:subject:date:message-id:mime-version
+	:content-transfer-encoding:cc:from:to;
+	bh=QzgVTvtkYcaClV9ox8ihJNrfV9GwiuJCxeLPzizNnhA=;
+	b=QLvEzTvslZNvnY4HEX+F4PYJ5yCFmzvTGkCKpwSW+PvLmhzBogaEUaEDpnUcpueNd+
+	edGCRNonIOF3D4UPOdxLw9zwTHft3/4FnOsxFQekhzqEgRJoc9aTxoWEFnQR/QNx+6wN
+	/Jw48KPVoBDpkEkRiCR9ZYCvE+w1QO+0O3PcHWFce6Wj2tAEn7gej7tzVXzW9ujDYos4
+	3QTB45dRvzQojfQtki3JerNr8+K/jBHH2l21ioFpxF8JAg8rSGzwu1Sp75T3hOhXJYE7
+	+c/tGdvk7ptJ2ANzG0khAWW81yjt234H9bqAQFWl2YHS8yiFC85kqaSLrqB2F97fdmT1
+	1JVA==
+X-Gm-Message-State: APjAAAV1P0wr++3kKNTGlKYR84AWf9tJv3MRtyWWkHGbPUbEAxOaceET
+	/eeJ09lhDUkK/tVp18/js/q++fb6Ks1rNQ==
+X-Google-Smtp-Source: APXvYqySOPbMKxXN2ht5xb3gA3H59Nr/FIUSD3WKAC9DXcdrt3NDNpEKR8pjF+GKnfzjnXIHqo/asg==
+X-Received: by 2002:a62:304:: with SMTP id 4mr2630360pfd.99.1554339644322;
+	Wed, 03 Apr 2019 18:00:44 -0700 (PDT)
+Received: from localhost ([12.206.222.5]) by smtp.gmail.com with ESMTPSA id
+	c189sm25949214pfg.24.2019.04.03.18.00.43
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 03 Apr 2019 18:00:43 -0700 (PDT)
+Date: Wed,  3 Apr 2019 17:55:21 -0700
+Message-Id: <20190404005523.6513-1-palmer@sifive.com>
+X-Mailer: git-send-email 2.19.2
 MIME-Version: 1.0
-References: <cover.1553712571.git.alistair.francis@wdc.com>
-	<mhng-9286e210-d632-41e0-b30d-cfdef1a43396@palmer-si-x1c4>
-In-Reply-To: <mhng-9286e210-d632-41e0-b30d-cfdef1a43396@palmer-si-x1c4>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 3 Apr 2019 16:32:11 -0700
-Message-ID: <CAKmqyKOAMGBcgRscu9QzpQYsA=qTeGgkK+03F=0YRhtzUFaXVw@mail.gmail.com>
-To: Palmer Dabbelt <palmer@sifive.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
-	"qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
-	"open list:RISC-V" <qemu-riscv@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+Cc: qemu-riscv@nongnu.org,       qemu-devel@nongnu.org
+From: Palmer Dabbelt <palmer@sifive.com>
+To: Peter Maydell <peter.maydell@linaro.org>
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2a00:1450:4864:20::242
-Subject: Re: [Qemu-riscv] [PATCH for 4.0 v2 0/2] Update the QEMU PLIC
- addresses
+X-Received-From: 2607:f8b0:4864:20::541
+Subject: [Qemu-riscv] [PULL] RISC-V Patches for 4.0-rc3
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -67,38 +66,47 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Apr 2019 23:49:14 -0000
+X-List-Received-Date: Thu, 04 Apr 2019 01:00:59 -0000
 
-On Wed, Mar 27, 2019 at 8:23 PM Palmer Dabbelt <palmer@sifive.com> wrote:
->
-> On Wed, 27 Mar 2019 11:51:15 PDT (-0700), Alistair Francis wrote:
-> > This series updates the PLIC address to match the documentation.
-> >
-> > This fixes: https://github.com/riscv/opensbi/issues/97
-> >
-> > V2:
-> >  - Squash patches to ensure biesctability
-> >
-> > Alistair Francis (2):
-> >   riscv: plic: Fix incorrect irq calculation
-> >   riscv: plic: Log guest errors
-> >
-> >  hw/riscv/sifive_plic.c      | 16 +++++++++++-----
-> >  hw/riscv/sifive_u.c         |  2 +-
-> >  include/hw/riscv/sifive_e.h |  2 +-
-> >  include/hw/riscv/sifive_u.h |  4 ++--
-> >  include/hw/riscv/virt.h     |  2 +-
-> >  5 files changed, 16 insertions(+), 10 deletions(-)
-> >
-> > --
-> > 2.21.0
->
-> Thanks, I've got these on for-master.  I'll let them sit for a bit to see if
-> there are any other comments, but
->
-> Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
+The following changes since commit 49fc899f8d673dd9e73f3db0d9e9ea60b77c331b:
 
-Ping! Just want to make sure these make it into 4.0
+  Update version for v4.0.0-rc1 release (2019-03-26 17:02:29 +0000)
 
-Alistair
+are available in the Git repository at:
+
+  git://github.com/palmer-dabbelt/qemu.git tags/riscv-for-master-4.0-rc3
+
+for you to fetch changes up to b84ffcecdb7a6a3e9946d0d6d24703199c4880b3:
+
+  riscv: plic: Log guest errors (2019-03-27 20:23:03 -0700)
+
+----------------------------------------------------------------
+RISC-V Patches for 4.0-rc3
+
+This patch set contains a pair of tightly coupled PLIC bug fixes:
+
+* We were calculating the PLIC addresses incorrectly.
+* We were installing the wrong number of PLIC interrupts.
+
+The two bugs togther resulted in a mostly-working system, but they're
+impossible to seperate because fixing one bug would result in
+significant breakage.  As a result they're in the same patch.
+
+There is also a cleanup to use qemu_log_mask(LOG_GUEST_ERROR,...) for
+error reporting.
+
+As far as I know these are the last outstanding RISC-V patches for 4.0.
+
+----------------------------------------------------------------
+Alistair Francis (2):
+      riscv: plic: Fix incorrect irq calculation
+      riscv: plic: Log guest errors
+
+ hw/riscv/sifive_plic.c      | 16 +++++++++++-----
+ hw/riscv/sifive_u.c         |  2 +-
+ include/hw/riscv/sifive_e.h |  2 +-
+ include/hw/riscv/sifive_u.h |  4 ++--
+ include/hw/riscv/virt.h     |  2 +-
+ 5 files changed, 16 insertions(+), 10 deletions(-)
+
 
