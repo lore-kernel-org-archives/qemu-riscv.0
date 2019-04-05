@@ -1,66 +1,54 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1hCCtX-0002jM-D5
-	for mharc-qemu-riscv@gnu.org; Thu, 04 Apr 2019 20:39:47 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:49616)
+	id 1hCHpP-00083f-0q
+	for mharc-qemu-riscv@gnu.org; Fri, 05 Apr 2019 01:55:51 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:50190)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1hCCtS-0002gw-Ge
-	for qemu-riscv@nongnu.org; Thu, 04 Apr 2019 20:39:45 -0400
+	(envelope-from <1228455161@qq.com>) id 1hCHpN-00080t-2o
+	for qemu-riscv@nongnu.org; Fri, 05 Apr 2019 01:55:49 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1hCCtR-0003Ih-Dw
-	for qemu-riscv@nongnu.org; Thu, 04 Apr 2019 20:39:42 -0400
-Received: from mail-pf1-x42b.google.com ([2607:f8b0:4864:20::42b]:43582)
-	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1hCCtR-0003Cf-7Y
-	for qemu-riscv@nongnu.org; Thu, 04 Apr 2019 20:39:41 -0400
-Received: by mail-pf1-x42b.google.com with SMTP id c8so2247186pfd.10
-	for <qemu-riscv@nongnu.org>; Thu, 04 Apr 2019 17:39:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
-	h=subject:date:message-id:in-reply-to:references:mime-version
-	:content-transfer-encoding:cc:from:to;
-	bh=0KFxRvtPVKexQ8LwFfKj/IAm9GYBQc7B3RcgR3vfV4c=;
-	b=eWHG6nz0xeI2fQYubcku9OEhorB8SfZsrW30pfDQA3mLtwfqGlKM+Cdes7JK7uzixh
-	DPQ0DhWErHTO1McHMJtRK3JNtBdqinImTRdWXaO7rqErmRHydUFnOPARwcid2kyEj6wE
-	9fEi+A7sxSbV357MUTU2DpyPVFCtzP8ebVWJm8IS87tx1PCalXUSn6wHmhIUhXrXlOso
-	bC+eN92c6JTI3aCqlccWwf79ahGrNF0VEtGr9jFPsr/TJxw134GCQZMB1XVDQ67p9BLf
-	JGEWkeM7DwuOLyzySLw2nMBYMv3pOHXaLGJ3kvloY28HCUhENvHZOV8UpG0xpZBqxdV2
-	+0iw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding:cc:from:to;
-	bh=0KFxRvtPVKexQ8LwFfKj/IAm9GYBQc7B3RcgR3vfV4c=;
-	b=BymDFhPrPfgTrZmKFsIJWIxGu+OAEKQs+kSaRrQtVTf5ubx5+Vm+D9WsccJGcwumAr
-	4COYlD2+SIISlF+VB8Ovfc6S58KYRxOjrGhZAA3qip98YcAgpNOh69Wm0iD2t1g82G2t
-	FditdZICP5dvB2sb4tnq9d/GutDF0B2+jvRpgNVFRgIT/3BEmlEhrSjiD36EoJtPf5d7
-	QOWrAJ4l0kewxaw2er1+3tAeTh0ifuSt4X0bPwQb02XP3kxXTXeGGM4hD1PCOMgLfw6m
-	2aqxsjrx0agOxB/91uvWrwiQhwZDDxXoKc76DVokB7/lmRjwh5um/eqSzIn1tPRMkTcT
-	uFtw==
-X-Gm-Message-State: APjAAAUgJKLlGJA0CYr4yGJD5IVWk9h4M8b2uKhDhzOicDzL7v8fGc62
-	hayhE1oIRrC0eSK/wKXhWjcVi+V8+tOkuQ==
-X-Google-Smtp-Source: APXvYqwQR4PAgGMQeYPJyV2cpOIimiQ0sHh/FCawgm+xVhEkgP2RcUjii8eYQS5RSGJlLzp71NzdwA==
-X-Received: by 2002:a65:5a81:: with SMTP id c1mr8948237pgt.391.1554424779795; 
-	Thu, 04 Apr 2019 17:39:39 -0700 (PDT)
-Received: from localhost ([12.206.222.5]) by smtp.gmail.com with ESMTPSA id
-	c17sm29392383pfd.76.2019.04.04.17.39.38
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 04 Apr 2019 17:39:39 -0700 (PDT)
-Date: Thu,  4 Apr 2019 17:39:24 -0700
-Message-Id: <20190405003924.1906-3-palmer@sifive.com>
-X-Mailer: git-send-email 2.19.2
-In-Reply-To: <20190405003924.1906-1-palmer@sifive.com>
-References: <20190405003924.1906-1-palmer@sifive.com>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Cc: qemu-riscv@nongnu.org,       qemu-devel@nongnu.org,
-	Alistair Francis <Alistair.Francis@wdc.com>,
-	Alistair Francis <alistair.francis@wdc.com>, 
-	Palmer Dabbelt <palmer@sifive.com>
-From: Palmer Dabbelt <palmer@sifive.com>
-To: Peter Maydell <peter.maydell@linaro.org>
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
-	recognized.
-X-Received-From: 2607:f8b0:4864:20::42b
-Subject: [Qemu-riscv] [PULL 2/2] riscv: plic: Log guest errors
+	(envelope-from <1228455161@qq.com>) id 1hCHp8-00016A-Pj
+	for qemu-riscv@nongnu.org; Fri, 05 Apr 2019 01:55:36 -0400
+Received: from smtpbgau1.qq.com ([54.206.16.166]:55678)
+	by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.71) (envelope-from <1228455161@qq.com>) id 1hCHp6-0000hI-Ff
+	for qemu-riscv@nongnu.org; Fri, 05 Apr 2019 01:55:34 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
+	t=1554443719; bh=ckVRE+nzRz7UJgzi3HF1+9HXbpDStDn3JNo86AB5QIE=;
+	h=From:To:Subject:Mime-Version:Content-Type:Content-Transfer-Encoding:Date:Message-ID;
+	b=YamQxjAgEhgooLVAcwfd+dsHHteJSoXi9CiPRuy2fR9BRWcIPWtH0yVc6tLi1Kkux
+	vIVrM5SnDxlehaJLTt/2cxMYH14cQjF2vrNOwmimwIAw+j9gUETjs2vQRt+uI6JE1c
+	s47K7k6YBfcsNlPUENCW1KgO3Hf5rm5no+7BtSSU=
+X-QQ-FEAT: 3jlOKZxptE58OFyLegYAwZgl9mu7dUCmUVG5t2etWncAB5VbBb0QUIw7j1L2a
+	J29iuVG0Pl69BkCzy8w9kJ+SK8b7OWmHz9hodyvmNeH1NQaw0uoC1vwBdsldP8G58xsdoXx
+	PfytreIAn8i6oUIWFW4/a8JUQ3vKgpjVXxIRY4+npynyCDyic6sHNht2AWu4z7aXgo21Yie
+	lNy0i0GYlK9/8wn+0p0i/UbbWnmchZnrbEZrAKndTUx7T6lV9MoHB81tZy9tUVMjuk4Wjyt
+	pKhWFf4pbIBG8S
+X-QQ-SSF: 000000000000003000000000000000V
+X-HAS-ATTACH: no
+X-QQ-BUSINESS-ORIGIN: 2
+X-Originating-IP: 202.119.139.206
+X-QQ-STYLE: 
+X-QQ-mid: webmail47t1554443717t8432770
+From: "=?gb18030?B?wO7P/sHY?=" <1228455161@qq.com>
+To: "=?gb18030?B?cWVtdS1yaXNjdg==?=" <qemu-riscv@nongnu.org>
+Mime-Version: 1.0
+Content-Type: multipart/alternative;
+	boundary="----=_NextPart_5CA6EDC5_0A372570_64F4C4B7"
+Content-Transfer-Encoding: 8Bit
+Date: Fri, 5 Apr 2019 13:55:17 +0800
+X-Priority: 3
+Message-ID: <tencent_9349EB818EA590ABE334E66178E37FBF9107@qq.com>
+X-QQ-MIME: TCMime 1.0 by Tencent
+X-Mailer: QQMail 2.x
+X-QQ-Mailer: QQMail 2.x
+X-QQ-SENDSIZE: 520
+Received: from qq.com (unknown [127.0.0.1]) by smtp.qq.com (ESMTP) with SMTP
+	id ; Fri, 05 Apr 2019 13:55:18 +0800 (CST)
+Feedback-ID: webmail:qq.com:bgforeign:bgforeign2
+X-QQ-Bgrelay: 1
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 3.x
+X-Received-From: 54.206.16.166
+Subject: [Qemu-riscv] How can I get the framebuffer's address of qemu-riscv
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -72,57 +60,44 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Apr 2019 00:39:45 -0000
+X-List-Received-Date: Fri, 05 Apr 2019 05:55:50 -0000
 
-From: Alistair Francis <Alistair.Francis@wdc.com>
+This is a multi-part message in MIME format.
 
-Instead of using error_report() to print guest errors let's use
-qemu_log_mask(LOG_GUEST_ERROR,...) to log the error.
+------=_NextPart_5CA6EDC5_0A372570_64F4C4B7
+Content-Type: text/plain;
+	charset="gb18030"
+Content-Transfer-Encoding: base64
 
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
----
- hw/riscv/sifive_plic.c | 12 +++++++++---
- 1 file changed, 9 insertions(+), 3 deletions(-)
+RGVhciBNciBvciBNcnMsDQogICAgICAgIEknbSBydW5uaW5nIG15IGJhcmUtbWVudGFsIGV4
+YW1wbGVzIG9uIHFlbXUtcmlzY3YuIEFuZCBJIHdhbnQgdG8gaW1wbGVtZW50IEFQSSB0byBk
+cmF3IHZpZGVvIG9mIHFlbXUtcmlzY3YuIFNvIEkgaGF2ZSB0byBrbm93IHRoZSBhZGRyZXNz
+IG9mIGZyYW1lYnVmZmVyLiBJIGhhdmUgc2VlbiBxZW11LWkzODYgYW5kIGZpbmQgdGhhdCB0
+aGUgcG9pbnRlciB0byBmcmFtZWJ1ZmZlciBpcyBpbmNsdWRlZCBpbiBWRVNBIEJJT1MgRXh0
+ZW5zaW9uLiBIb3dldmVyLCBpdCBpc24ndCBzdWl0YWJsZSBmb3IgcWVtdS1yaXNjdi4gU28g
+aG93IGNhbiBJIGdldCB0aGUgZnJhbWVidWZmZXIncyBhZGRyZXNzIG9mIHFlbXUtcmlzY3Y/
+IHdoaWNoIG1hbnVhbCBzaG91bGQgSSByZWFkPyBQbGVhc2UgaGVscCBtZS4NCiAgICAgICAg
+QmVzdCBSZWdhcmRzLA0KICAgICAgICBUaHg=
 
-diff --git a/hw/riscv/sifive_plic.c b/hw/riscv/sifive_plic.c
-index 0315e035e5fb..07a032d93d2e 100644
---- a/hw/riscv/sifive_plic.c
-+++ b/hw/riscv/sifive_plic.c
-@@ -263,7 +263,9 @@ static uint64_t sifive_plic_read(void *opaque, hwaddr addr, unsigned size)
-     }
- 
- err:
--    error_report("plic: invalid register read: %08x", (uint32_t)addr);
-+    qemu_log_mask(LOG_GUEST_ERROR,
-+                  "%s: Invalid register read 0x%" HWADDR_PRIx "\n",
-+                  __func__, addr);
-     return 0;
- }
- 
-@@ -290,7 +292,9 @@ static void sifive_plic_write(void *opaque, hwaddr addr, uint64_t value,
-     } else if (addr >= plic->pending_base && /* 1 bit per source */
-                addr < plic->pending_base + (plic->num_sources >> 3))
-     {
--        error_report("plic: invalid pending write: %08x", (uint32_t)addr);
-+        qemu_log_mask(LOG_GUEST_ERROR,
-+                      "%s: invalid pending write: 0x%" HWADDR_PRIx "",
-+                      __func__, addr);
-         return;
-     } else if (addr >= plic->enable_base && /* 1 bit per source */
-         addr < plic->enable_base + plic->num_addrs * plic->enable_stride)
-@@ -340,7 +344,9 @@ static void sifive_plic_write(void *opaque, hwaddr addr, uint64_t value,
-     }
- 
- err:
--    error_report("plic: invalid register write: %08x", (uint32_t)addr);
-+    qemu_log_mask(LOG_GUEST_ERROR,
-+                  "%s: Invalid register write 0x%" HWADDR_PRIx "\n",
-+                  __func__, addr);
- }
- 
- static const MemoryRegionOps sifive_plic_ops = {
--- 
-2.19.2
+------=_NextPart_5CA6EDC5_0A372570_64F4C4B7
+Content-Type: text/html;
+	charset="gb18030"
+Content-Transfer-Encoding: base64
+
+PGRpdj5EZWFyIE1yIG9yIE1ycyw8L2Rpdj48ZGl2PiZuYnNwOyAmbmJzcDsgJm5ic3A7ICZu
+YnNwOyBJJ20gcnVubmluZyBteSBiYXJlLW1lbnRhbCBleGFtcGxlcyBvbiBxZW11LXJpc2N2
+LiBBbmQgSSB3YW50IHRvIGltcGxlbWVudCBBUEkgdG8gZHJhdyB2aWRlbyBvZiBxZW11LXJp
+c2N2LiBTbyBJIGhhdmUgdG8ga25vdyB0aGUgYWRkcmVzcyBvZiBmcmFtZWJ1ZmZlci4gSSBo
+YXZlIHNlZW4gcWVtdS1pMzg2IGFuZCBmaW5kIHRoYXQgdGhlIHBvaW50ZXIgdG8gZnJhbWVi
+dWZmZXIgaXMgaW5jbHVkZWQgaW4gVkVTQSBCSU9TIEV4dGVuc2lvbi4gSG93ZXZlciwgaXQg
+aXNuJ3Qgc3VpdGFibGUgZm9yIHFlbXUtcmlzY3YuIFNvIGhvdyBjYW4gSSBnZXQgdGhlIGZy
+YW1lYnVmZmVyJ3MgYWRkcmVzcyBvZiBxZW11LXJpc2N2PyB3aGljaCBtYW51YWwgc2hvdWxk
+IEkgcmVhZD8gUGxlYXNlIGhlbHAgbWUuPC9kaXY+PGRpdj4mbmJzcDsgJm5ic3A7ICZuYnNw
+OyAmbmJzcDsgQmVzdCBSZWdhcmRzLDwvZGl2PjxkaXY+Jm5ic3A7ICZuYnNwOyAmbmJzcDsg
+Jm5ic3A7IFRoeDwvZGl2Pg==
+
+------=_NextPart_5CA6EDC5_0A372570_64F4C4B7--
+
+
 
 
