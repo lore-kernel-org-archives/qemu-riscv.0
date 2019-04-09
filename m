@@ -1,59 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1hCI78-00051j-8K
-	for mharc-qemu-riscv@gnu.org; Fri, 05 Apr 2019 02:14:10 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:53552)
+	id 1hDuO4-00053p-Dy
+	for mharc-qemu-riscv@gnu.org; Tue, 09 Apr 2019 13:18:20 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:44285)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <peter.maydell@linaro.org>) id 1hCI75-000518-4m
-	for qemu-riscv@nongnu.org; Fri, 05 Apr 2019 02:14:08 -0400
+	(envelope-from <alistair23@gmail.com>) id 1hDuO2-00052m-NH
+	for qemu-riscv@nongnu.org; Tue, 09 Apr 2019 13:18:19 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <peter.maydell@linaro.org>) id 1hCI74-0001T8-0Z
-	for qemu-riscv@nongnu.org; Fri, 05 Apr 2019 02:14:07 -0400
-Received: from mail-oi1-x243.google.com ([2607:f8b0:4864:20::243]:33055)
+	(envelope-from <alistair23@gmail.com>) id 1hDuO1-0007Mf-5M
+	for qemu-riscv@nongnu.org; Tue, 09 Apr 2019 13:18:18 -0400
+Received: from mail-lj1-x242.google.com ([2a00:1450:4864:20::242]:40455)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <peter.maydell@linaro.org>)
-	id 1hCI73-0001RW-8m
-	for qemu-riscv@nongnu.org; Fri, 05 Apr 2019 02:14:05 -0400
-Received: by mail-oi1-x243.google.com with SMTP id e5so4000673oii.0
-	for <qemu-riscv@nongnu.org>; Thu, 04 Apr 2019 23:14:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+	(Exim 4.71) (envelope-from <alistair23@gmail.com>)
+	id 1hDuNx-0007JE-Q4; Tue, 09 Apr 2019 13:18:14 -0400
+Received: by mail-lj1-x242.google.com with SMTP id q66so15198682ljq.7;
+	Tue, 09 Apr 2019 10:18:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=Sfa7A/BS0sWHpIOJHxMtKCoQbarU1kfg4Zi58fPevvQ=;
-	b=MYz++ralrDRQiLuJ89FEkBurzdbW1qg6TEu0OfAWWXH1OmiOeFnY5L5aRGISp/1z/X
-	ShbChLn6FW05JlWu5myrsUAKZMzyiemvFBXUK4WJI8vg1+TbTsVxEAj2jxFcvyQG9tFF
-	Uj6+oKU6aLsbKJoT1vaF/lYZ9vMr7E4+w9qjfsZvbPbt5hTw3mWH9mBm0DtEIFfKx+iw
-	++zYwEio/zrqUzVV+Yg4Cp7I85F3chAXLgPzgWLmqDpdeDxzBKVBrZc8QtuqggddckEL
-	eZCSxbqXvGmrC3RpvMljguzyeUQuXSL5u7hzRWuwktBE+vilez6x/AsACtjCSKm4Ra7E
-	+K+Q==
+	:cc; bh=OnonMNV80jRNuDW0HKcJkFMxHIPbqFnbUDCUWGB/xO4=;
+	b=MdR8O1OOzdsBGxgX97FN/4AWlXTnJwJbz5ZAjg4kr4XHaAiZZqdS2zNupMvbkp9MPQ
+	JlTnv926ejZM/ThrM8OZyN0vsT9Sny4219BZmxC90y09PQiV8f3313IRDTiuGA3Jc0Fw
+	yJ31kG7GE/fRBSPq64kYkYVr+KcOsMRL8kk6gXJoU/XLXC4oSPVQfK3EZDpcxraS9/jl
+	PfWIVzUS7osz4WIMdPhyK/u0/dVuYLK0n24hylUoU8AQVqUjBsJXCG71OzXQUkxq2rCV
+	6Wqkiw7DisECj/2HuDTf5jQKORm9fPxZEIVHCzC0du+u+UHX1ZjFqYLB8lfOlgk4salg
+	UiSg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=Sfa7A/BS0sWHpIOJHxMtKCoQbarU1kfg4Zi58fPevvQ=;
-	b=tPHh0XECXAhJSPQ0D3OiKlPoYgBNg4XH1C8/2JH3KKrAk7GXiutRIpqZOWmvZ/gnwF
-	Gwd9SzVrfALSAYt6yvm6Nj6y0MBm6gyllA7HV8ikKVPvW7uBSsKfOY2ueJSlrKo8XY6W
-	P5kZn6+zvWLiJ7WlcZKUSok234w9zlEYX1htNB64p0eD+80U2mZsUgAuZ8IpYJrrhHVW
-	lVwll8rZjp7LcpgxwQWGH1YY8DHi44Gbhe+z1P0TE9U8pu0B9Rw9RLv+LqYZVbnfjOVc
-	mNXHxAJmTu9ly2wdbF3DLSszUqQ5L+I17uHD5DDCxnDfcAf+ZyxuPZ764Yr/HhtB2C8v
-	dSUw==
-X-Gm-Message-State: APjAAAVKGDe5cyT8PTzGkW3MXcMp0aXCxV82qLa/asjD7ph6gDn0Pdet
-	1Uzm2wZBulLBiCxY6yhJpYT3aunL6asIgz0tOlijQA==
-X-Google-Smtp-Source: APXvYqzMH6dtRrHcpdYxdpb/xdyHmV5Ne0ajQ7YlzJhkpY627+R8DFHKhga8LNSMqu1oQyI6DrMrNYIyHSaJP1B6lCo=
-X-Received: by 2002:aca:e84c:: with SMTP id f73mr5993605oih.163.1554444844230; 
-	Thu, 04 Apr 2019 23:14:04 -0700 (PDT)
+	bh=OnonMNV80jRNuDW0HKcJkFMxHIPbqFnbUDCUWGB/xO4=;
+	b=cX9wFCfPirT2BccrtGnXukQysjXn89q2FgPNVu6je1IU3pPA0Lp9l8MFFBXSHIiGGn
+	aeb8V8hfC35jlw0ILsDu0BDPQ0GjzkryypQO66FhCO3UdAAnhnjRRzQ45RHvX30aVMgD
+	v3FsL3pcLYeenHy6eAzukMiW0OHB7srWkSdi8r95TU+v8dXFjJevuZbY0dtUnJWQDLBU
+	wHotGEa6TvJemTxY3r48NqvtTjrc5sk+qguluae3fbEh5gUOPO1W52wlBmP1wTQLFben
+	ilG/uKiOUbvUZTehlq2ZsF83yy966nf3h+kaEIFUPuypbMEJwBHgdh0C2gzRgRWFQgxJ
+	uXHg==
+X-Gm-Message-State: APjAAAUhSKV8Lhh7ZF/uoNg9OgO+1uTcdsNp0sl7JdWajFD4YkLsVJl5
+	bkhAlbTETj6UbE8wy5q6wp+tIfNNVeV7hSByQZw=
+X-Google-Smtp-Source: APXvYqwlZ2OWuLdWS0KxXxDeitTp1oV5a00nHPU6FQvB/Lzbbtd50xe57zF9991COJ5Zf1N17XBrVmG8cZ7rmEIO1Po=
+X-Received: by 2002:a2e:2a03:: with SMTP id q3mr20229670ljq.56.1554830291303; 
+	Tue, 09 Apr 2019 10:18:11 -0700 (PDT)
 MIME-Version: 1.0
-References: <20190405003924.1906-1-palmer@sifive.com>
-In-Reply-To: <20190405003924.1906-1-palmer@sifive.com>
-From: Peter Maydell <peter.maydell@linaro.org>
-Date: Fri, 5 Apr 2019 13:13:53 +0700
-Message-ID: <CAFEAcA82u1SNuO-2AvCR8dx6XyyeZnrdWFbhmOvHun7hmxNFZg@mail.gmail.com>
-To: Palmer Dabbelt <palmer@sifive.com>
-Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
-	QEMU Developers <qemu-devel@nongnu.org>
+References: <cover.1553899050.git.alistair.francis@wdc.com>
+	<99590ce3f3572a2b02216a5d99cec03ccc3f35a8.1553899050.git.alistair.francis@wdc.com>
+	<6b9005b62d51d3a1f44da142936e3d2b4b4dead5.camel@hellion.org.uk>
+In-Reply-To: <6b9005b62d51d3a1f44da142936e3d2b4b4dead5.camel@hellion.org.uk>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 9 Apr 2019 10:16:39 -0700
+Message-ID: <CAKmqyKOcgsmU5s5gta9v8rX9=2XxzPd0+dpa_c38jzVYb7T4Ag@mail.gmail.com>
+To: Ian Campbell <ijc@hellion.org.uk>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
+	"qemu-devel@nongnu.org" <qemu-devel@nongnu.org>,
+	"qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>, 
+	"alistair23@gmail.com" <alistair23@gmail.com>,
+	"palmer@sifive.com" <palmer@sifive.com>
 Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::243
-Subject: Re: [Qemu-riscv] [PULL] RISC-V Patches for 4.0-rc3, v2
+X-Received-From: 2a00:1450:4864:20::242
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH for 4.1 v2 2/6] target/riscv:
+ Fall back to generating a RISC-V CPU
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -65,44 +70,40 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Apr 2019 06:14:08 -0000
+X-List-Received-Date: Tue, 09 Apr 2019 17:18:19 -0000
 
-On Fri, 5 Apr 2019 at 07:39, Palmer Dabbelt <palmer@sifive.com> wrote:
+On Thu, Apr 4, 2019 at 5:35 AM Ian Campbell <ijc@hellion.org.uk> wrote:
 >
-> The following changes since commit 061b51e9195670e9d190cdec46fabcb3c77763fb:
+> On Fri, 2019-03-29 at 22:39 +0000, Alistair Francis wrote:
+> > +    for (i = 0; i < strlen(riscv_cpu); i++) {
+> > +        if (i == 0 && riscv_cpu[i] == 'r' &&
+> > +            riscv_cpu[i + 1] == 'v') {
 >
->   Update version for v4.0.0-rc2 release (2019-04-02 17:01:20 +0100)
+> Dpes something somewhere else enforce a minimum length or can
+> `riscv_cpu[i + 1]` be past the end of the string?
 >
-> are available in the Git repository at:
->
->   git://github.com/palmer-dabbelt/qemu.git tags/riscv-for-master-4.0-rc3-v2
->
-> for you to fetch changes up to 79bcac250f96ba1d4fdecfdc6e3363c9024703a4:
->
->   riscv: plic: Log guest errors (2019-04-04 16:36:21 -0700)
->
-> ----------------------------------------------------------------
-> RISC-V Patches for 4.0-rc3, v2
->
-> This patch set contains a pair of tightly coupled PLIC bug fixes:
->
-> * We were calculating the PLIC addresses incorrectly.
-> * We were installing the wrong number of PLIC interrupts.
->
-> The two bugs togther resulted in a mostly-working system, but they're
-> impossible to seperate because fixing one bug would result in
-> significant breakage.  As a result they're in the same patch.
->
-> There is also a cleanup to use qemu_log_mask(LOG_GUEST_ERROR,...) for
-> error reporting.
->
-> As far as I know these are the last outstanding RISC-V patches for 4.0.
->
-> v2 no longer fails "make check" for me... sorry!
-Applied, thanks.
+> Similarly some more times below and also for the `i += 2` bits.
 
-Please update the changelog at https://wiki.qemu.org/ChangeLog/4.0
-for any user-visible changes.
+Good point, a valid string must be at least 5 characters so I have
+added a check before we start the parsing.
 
--- PMM
+Alistair
+
+>
+> > +            /* Starts with "rv" */
+> > +            i += 2;
+> > +            if (riscv_cpu[i] == '3' && riscv_cpu[i + 1] == '2') {
+> > +                i += 2;
+> > +                valid = true;
+> > +                rvxlen = RV32;
+> > +            }
+> > +            if (riscv_cpu[i] == '6' && riscv_cpu[i + 1] == '4') {
+> > +                i += 2;
+> > +                valid = true;
+> > +                rvxlen = RV64;
+> > +            }
+> > +        }
+>
+> Ian.
+>
 
