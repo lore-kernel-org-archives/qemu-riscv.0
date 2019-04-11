@@ -1,49 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1hEZNi-0007Lh-1a
-	for mharc-qemu-riscv@gnu.org; Thu, 11 Apr 2019 09:04:42 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:53991)
+	id 1hEbKb-0000H5-TO
+	for mharc-qemu-riscv@gnu.org; Thu, 11 Apr 2019 11:09:37 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:43892)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <imammedo@redhat.com>) id 1hEYTb-0003Vm-1b
-	for qemu-riscv@nongnu.org; Thu, 11 Apr 2019 08:06:44 -0400
+	(envelope-from <fintelia@gmail.com>) id 1hEbKZ-0000Fi-Gf
+	for qemu-riscv@nongnu.org; Thu, 11 Apr 2019 11:09:36 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <imammedo@redhat.com>) id 1hEYTZ-0005Ci-6t
-	for qemu-riscv@nongnu.org; Thu, 11 Apr 2019 08:06:43 -0400
-Received: from mx1.redhat.com ([209.132.183.28]:59316)
-	by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.71) (envelope-from <imammedo@redhat.com>)
-	id 1hEYTU-00058p-Od; Thu, 11 Apr 2019 08:06:37 -0400
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
-	[10.5.11.15])
-	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id CCB48368FF;
-	Thu, 11 Apr 2019 12:06:35 +0000 (UTC)
-Received: from localhost (unknown [10.43.2.182])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id 5AC825D6A9;
-	Thu, 11 Apr 2019 12:06:34 +0000 (UTC)
-Date: Thu, 11 Apr 2019 14:06:29 +0200
-From: Igor Mammedov <imammedo@redhat.com>
-To: Alistair Francis <Alistair.Francis@wdc.com>
-Cc: "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, "qemu-riscv@nongnu.org"
-	<qemu-riscv@nongnu.org>, "alistair23@gmail.com" <alistair23@gmail.com>, 
-	"palmer@sifive.com" <palmer@sifive.com>, "ijc@hellion.org.uk"
-	<ijc@hellion.org.uk>
-Message-ID: <20190411140629.3a672b39@redhat.com>
-In-Reply-To: <9043c3a6bc54faa98ed9fedc0c6c929c993a0bf9.1554937288.git.alistair.francis@wdc.com>
-References: <cover.1554937288.git.alistair.francis@wdc.com>
-	<9043c3a6bc54faa98ed9fedc0c6c929c993a0bf9.1554937288.git.alistair.francis@wdc.com>
+	(envelope-from <fintelia@gmail.com>) id 1hEbKY-0003ib-3p
+	for qemu-riscv@nongnu.org; Thu, 11 Apr 2019 11:09:35 -0400
+Received: from mail-lj1-x235.google.com ([2a00:1450:4864:20::235]:42459)
+	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+	(Exim 4.71) (envelope-from <fintelia@gmail.com>)
+	id 1hEbKQ-0003b4-J0; Thu, 11 Apr 2019 11:09:28 -0400
+Received: by mail-lj1-x235.google.com with SMTP id v22so5854185lje.9;
+	Thu, 11 Apr 2019 08:09:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:from:date:message-id:subject:to:cc;
+	bh=GhmylOpb5Yv5dSJKFVWQF6g1fmd6lBnSdN6XJjjnrXM=;
+	b=JKcSMSjH1gQoC7eSmzl0iq1rAUuY/3ThbEWoq14DClfPySb42ynCyP3p1Wzx1ncCaN
+	IFTrT5avkGkH9v7tAO/la9tQgypBtMlbTsdguWyalad/mCsP4iGRiK6jIB/Nyt2mJyOx
+	3FdnBN7HDVhGkNiAh7DNSgbCEWm9EbDfqZCGELBvDMEzld4+t3SLlFF1yFbk3xqK7Hy3
+	RcExy3jyi8Qb+smNtTdRjqUe557uuqo9FYcSgzN1KN7vEyN9Zh1msgFq/UgPJwOqVZhn
+	/wwCglpK5jJruc5wxY6st1xqbndk/pleNOBJWNtIy9n/exh4MWJ01D3RFF7zujFNPUZv
+	bo3A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to:cc;
+	bh=GhmylOpb5Yv5dSJKFVWQF6g1fmd6lBnSdN6XJjjnrXM=;
+	b=KlbyhZ1jsLAsaB7Kr1010IVaN+IHEbjFEqygcNhJJn3MrljN1I2buIDLBuDVzeND98
+	n4VbNCpx3lFGEal98hxUJcAjlKmi205Hj7ylWqS+mrP2CBaoMFaDtyCH0Avlrkjy6TUS
+	XF4Ox06wiw73HvIl05e9H6M7OFZNJQdG/gpgSyxip2SkiSvnzt2BdmFiW0nOmPswlPkZ
+	purS6wIJJ2Z0VpQ0uKQwFqkrRHOBOZiHu8ZTZtnk9g4a48eutTu/BCj8221LkwNgQP+Q
+	vxgbEaFvWI9Smydkzegm2GHPxV56TXtfKDHXMYxt9YsF896t3WW3GN3ro8iVdJnJ8e6N
+	+zzg==
+X-Gm-Message-State: APjAAAVVqAtoEsdK1Z35+uV0eYNYM3gDy8Nbi6yM7936gje62g48oWmj
+	1YauWc9IrVmfOrOwGtTc0yc7Qdjj+9j9xFL7RZrMs4lvGSU=
+X-Google-Smtp-Source: APXvYqxJgtSyxPInmxlpp7Mc6eimiiqvep4fOqZFpOhpB9+563HtulAG4Fbcc7/MVXMjOKVg6lLcpRnO6RhjChY328E=
+X-Received: by 2002:a2e:9812:: with SMTP id a18mr23881501ljj.146.1554995364357;
+	Thu, 11 Apr 2019 08:09:24 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
-	(mx1.redhat.com [10.5.110.30]);
-	Thu, 11 Apr 2019 12:06:36 +0000 (UTC)
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
-X-Received-From: 209.132.183.28
-X-Mailman-Approved-At: Thu, 11 Apr 2019 09:04:39 -0400
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH for 4.1 v3 6/6] riscv: Add a
- generic spike machine
+From: Jonathan Behrens <fintelia@gmail.com>
+Date: Thu, 11 Apr 2019 11:08:57 -0400
+Message-ID: <CANnJOVF2gE3b-C5zSb85SGoP+9cD9xOQQ5Z4tmsGouagR3xo0Q@mail.gmail.com>
+To: qemu-devel@nongnu.org
+Cc: Palmer Dabbelt <palmer@sifive.com>,
+	Alistair Francis <Alistair.Francis@wdc.com>, 
+	Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+	Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, qemu-riscv@nongnu.org
+Content-Type: multipart/alternative; boundary="00000000000052084a05864292aa"
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+	recognized.
+X-Received-From: 2a00:1450:4864:20::235
+Subject: [Qemu-riscv] [PATCH v2] target/riscv: Remove unused include of
+ riscv_htif.h for virt board riscv
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -55,179 +64,46 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Apr 2019 12:06:44 -0000
+X-List-Received-Date: Thu, 11 Apr 2019 15:09:36 -0000
 
-On Wed, 10 Apr 2019 23:11:00 +0000
-Alistair Francis <Alistair.Francis@wdc.com> wrote:
+--00000000000052084a05864292aa
+Content-Type: text/plain; charset="UTF-8"
 
-> Add a generic spike machine (not tied to a version) and deprecate the
-> spike mahines that are tied to a specific version. As we can now specify
-> the CPU via the command line we no londer need specific versions of the
-> spike machines.
-> 
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+Signed-off-by: Jonathan Behrens <fintelia@gmail.com>
+---
+ hw/riscv/virt.c | 1 -
+ 1 file changed, 1 deletion(-)
 
-For cpu and initial RAM related parts:
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index fc4c6b306e..3526463034 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -29,7 +29,6 @@
+ #include "hw/sysbus.h"
+ #include "hw/char/serial.h"
+ #include "target/riscv/cpu.h"
+-#include "hw/riscv/riscv_htif.h"
+ #include "hw/riscv/riscv_hart.h"
+ #include "hw/riscv/sifive_plic.h"
+ #include "hw/riscv/sifive_clint.h"
+-- 
+2.20.1
 
-Acked-by: Igor Mammedov <imammedo@redhat.com>
+--00000000000052084a05864292aa
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-a couple of questions below.
-> ---
->  hw/riscv/spike.c | 106 ++++++++++++++++++++++++++++++++++++++++++++++-
->  1 file changed, 105 insertions(+), 1 deletion(-)
-> 
-> diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
-> index 2a000a5800..9d3f7cec4d 100644
-> --- a/hw/riscv/spike.c
-> +++ b/hw/riscv/spike.c
-> @@ -39,6 +39,7 @@
->  #include "chardev/char.h"
->  #include "sysemu/arch_init.h"
->  #include "sysemu/device_tree.h"
-> +#include "sysemu/qtest.h"
->  #include "exec/address-spaces.h"
->  #include "elf.h"
->  
-> @@ -160,7 +161,89 @@ static void create_fdt(SpikeState *s, const struct MemmapEntry *memmap,
->          qemu_fdt_add_subnode(fdt, "/chosen");
->          qemu_fdt_setprop_string(fdt, "/chosen", "bootargs", cmdline);
->      }
-> - }
-> +}
-> +
-> +static void spike_board_init(MachineState *machine)
-> +{
-> +    const struct MemmapEntry *memmap = spike_memmap;
-> +
-> +    SpikeState *s = g_new0(SpikeState, 1);
-> +    MemoryRegion *system_memory = get_system_memory();
-> +    MemoryRegion *main_mem = g_new(MemoryRegion, 1);
-> +    MemoryRegion *mask_rom = g_new(MemoryRegion, 1);
-> +    int i;
-> +
-> +    /* Initialize SOC */
-> +    object_initialize_child(OBJECT(machine), "soc", &s->soc, sizeof(s->soc),
-> +                            TYPE_RISCV_HART_ARRAY, &error_abort, NULL);
-> +    object_property_set_str(OBJECT(&s->soc), machine->cpu_type, "cpu-type",
-> +                            &error_abort);
-> +    object_property_set_int(OBJECT(&s->soc), smp_cpus, "num-harts",
-> +                            &error_abort);
-> +    object_property_set_bool(OBJECT(&s->soc), true, "realized",
-> +                            &error_abort);
-> +
-> +    /* register system main memory (actual RAM) */
-> +    memory_region_init_ram(main_mem, NULL, "riscv.spike.ram",
-> +                           machine->ram_size, &error_fatal);
-do you really care about migration? if not then _nomigrate flavor would
-be more suitable.
+<div dir=3D"ltr"><div dir=3D"ltr">Signed-off-by: Jonathan Behrens &lt;<a hr=
+ef=3D"mailto:fintelia@gmail.com">fintelia@gmail.com</a>&gt;<br>---<br>=C2=
+=A0hw/riscv/virt.c | 1 -<br>=C2=A01 file changed, 1 deletion(-)<br><br>diff=
+ --git a/hw/riscv/virt.c b/hw/riscv/virt.c<br>index fc4c6b306e..3526463034 =
+100644<br>--- a/hw/riscv/virt.c<br>+++ b/hw/riscv/virt.c<br>@@ -29,7 +29,6 =
+@@<br>=C2=A0#include &quot;hw/sysbus.h&quot;<br>=C2=A0#include &quot;hw/cha=
+r/serial.h&quot;<br>=C2=A0#include &quot;target/riscv/cpu.h&quot;<br>-#incl=
+ude &quot;hw/riscv/riscv_htif.h&quot;<br>=C2=A0#include &quot;hw/riscv/risc=
+v_hart.h&quot;<br>=C2=A0#include &quot;hw/riscv/sifive_plic.h&quot;<br>=C2=
+=A0#include &quot;hw/riscv/sifive_clint.h&quot;<br>-- <br>2.20.1<br></div><=
+/div>
 
-> +    memory_region_add_subregion(system_memory, memmap[SPIKE_DRAM].base,
-> +        main_mem);
-> +
-> +    /* create device tree */
-> +    create_fdt(s, memmap, machine->ram_size, machine->kernel_cmdline);
-> +
-> +    /* boot rom */
-> +    memory_region_init_rom(mask_rom, NULL, "riscv.spike.mrom",
-> +                           memmap[SPIKE_MROM].size, &error_fatal);
-> +    memory_region_add_subregion(system_memory, memmap[SPIKE_MROM].base,
-> +                                mask_rom);
-> +
-> +    if (machine->kernel_filename) {
-> +        load_kernel(machine->kernel_filename);
-> +    }
-> +
-> +    /* reset vector */
-> +    uint32_t reset_vec[8] = {
-> +        0x00000297,                  /* 1:  auipc  t0, %pcrel_hi(dtb) */
-> +        0x02028593,                  /*     addi   a1, t0, %pcrel_lo(1b) */
-> +        0xf1402573,                  /*     csrr   a0, mhartid  */
-> +#if defined(TARGET_RISCV32)
-> +        0x0182a283,                  /*     lw     t0, 24(t0) */
-> +#elif defined(TARGET_RISCV64)
-> +        0x0182b283,                  /*     ld     t0, 24(t0) */
-> +#endif
-> +        0x00028067,                  /*     jr     t0 */
-> +        0x00000000,
-> +        memmap[SPIKE_DRAM].base,     /* start: .dword DRAM_BASE */
-> +        0x00000000,
-> +                                     /* dtb: */
-> +    };
-> +
-> +    /* copy in the reset vector in little_endian byte order */
-> +    for (i = 0; i < sizeof(reset_vec) >> 2; i++) {
-> +        reset_vec[i] = cpu_to_le32(reset_vec[i]);
-> +    }
-> +    rom_add_blob_fixed_as("mrom.reset", reset_vec, sizeof(reset_vec),
-> +                          memmap[SPIKE_MROM].base, &address_space_memory);
-> +
-> +    /* copy in the device tree */
-> +    if (fdt_pack(s->fdt) || fdt_totalsize(s->fdt) >
-> +            memmap[SPIKE_MROM].size - sizeof(reset_vec)) {
-> +        error_report("not enough space to store device-tree");
-> +        exit(1);
-> +    }
-> +    qemu_fdt_dumpdtb(s->fdt, fdt_totalsize(s->fdt));
-> +    rom_add_blob_fixed_as("mrom.fdt", s->fdt, fdt_totalsize(s->fdt),
-> +                          memmap[SPIKE_MROM].base + sizeof(reset_vec),
-> +                          &address_space_memory);
-> +
-> +    /* initialize HTIF using symbols found in load_kernel */
-> +    htif_mm_init(system_memory, mask_rom, &s->soc.harts[0].env, serial_hd(0));
-> +
-> +    /* Core Local Interruptor (timer and IPI) */
-> +    sifive_clint_create(memmap[SPIKE_CLINT].base, memmap[SPIKE_CLINT].size,
-> +        smp_cpus, SIFIVE_SIP_BASE, SIFIVE_TIMECMP_BASE, SIFIVE_TIME_BASE);
-> +}
->  
->  static void spike_v1_10_0_board_init(MachineState *machine)
->  {
-> @@ -172,6 +255,12 @@ static void spike_v1_10_0_board_init(MachineState *machine)
->      MemoryRegion *mask_rom = g_new(MemoryRegion, 1);
->      int i;
->  
-> +    if (!qtest_enabled()) {
-> +        info_report("The Spike v1.10.0 machine has been depreceated. "
-> +                    "Please use the deneric spike machine and specify the ISA "
-> +                    "versions using -cpu.");
-> +    }
-Did you mean deprecated in sense that machines will be removed in 2 releases
-according to QEMU's deprecation policy?
-
-> +
->      /* Initialize SOC */
->      object_initialize_child(OBJECT(machine), "soc", &s->soc, sizeof(s->soc),
->                              TYPE_RISCV_HART_ARRAY, &error_abort, NULL);
-> @@ -254,6 +343,12 @@ static void spike_v1_09_1_board_init(MachineState *machine)
->      MemoryRegion *mask_rom = g_new(MemoryRegion, 1);
->      int i;
->  
-> +    if (!qtest_enabled()) {
-> +        info_report("The Spike v1.09.1 machine has been depreceated. "
-> +                    "Please use the deneric spike machine and specify the ISA "
-> +                    "versions using -cpu.");
-> +    }
-> +
->      /* Initialize SOC */
->      object_initialize_child(OBJECT(machine), "soc", &s->soc, sizeof(s->soc),
->                              TYPE_RISCV_HART_ARRAY, &error_abort, NULL);
-> @@ -359,8 +454,17 @@ static void spike_v1_10_0_machine_init(MachineClass *mc)
->      mc->desc = "RISC-V Spike Board (Privileged ISA v1.10)";
->      mc->init = spike_v1_10_0_board_init;
->      mc->max_cpus = 1;
-> +}
-> +
-> +static void spike_machine_init(MachineClass *mc)
-> +{
-> +    mc->desc = "RISC-V Spike Board";
-> +    mc->init = spike_board_init;
-> +    mc->max_cpus = 1;
->      mc->is_default = 1;
-> +    mc->default_cpu_type = SPIKE_V1_10_0_CPU;
->  }
->  
->  DEFINE_MACHINE("spike_v1.9.1", spike_v1_09_1_machine_init)
->  DEFINE_MACHINE("spike_v1.10", spike_v1_10_0_machine_init)
-> +DEFINE_MACHINE("spike", spike_machine_init)
-
+--00000000000052084a05864292aa--
 
