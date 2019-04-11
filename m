@@ -1,63 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1hEMWu-0000tw-0A
-	for mharc-qemu-riscv@gnu.org; Wed, 10 Apr 2019 19:21:20 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:44289)
+	id 1hEYfQ-0006On-GI
+	for mharc-qemu-riscv@gnu.org; Thu, 11 Apr 2019 08:18:56 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:56428)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1hEMWs-0000sk-Mk
-	for qemu-riscv@nongnu.org; Wed, 10 Apr 2019 19:21:19 -0400
+	(envelope-from <peter.maydell@linaro.org>) id 1hEYfJ-0006Nj-Kr
+	for qemu-riscv@nongnu.org; Thu, 11 Apr 2019 08:18:51 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1hEMWr-0007t1-R2
-	for qemu-riscv@nongnu.org; Wed, 10 Apr 2019 19:21:18 -0400
-Received: from mail-lj1-x241.google.com ([2a00:1450:4864:20::241]:35360)
+	(envelope-from <peter.maydell@linaro.org>) id 1hEYfF-0001pS-Qn
+	for qemu-riscv@nongnu.org; Thu, 11 Apr 2019 08:18:49 -0400
+Received: from mail-oi1-x242.google.com ([2607:f8b0:4864:20::242]:39143)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <alistair23@gmail.com>)
-	id 1hEMWm-0007mE-NA; Wed, 10 Apr 2019 19:21:13 -0400
-Received: by mail-lj1-x241.google.com with SMTP id t4so3693255ljc.2;
-	Wed, 10 Apr 2019 16:21:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	(Exim 4.71) (envelope-from <peter.maydell@linaro.org>)
+	id 1hEYfE-0001mT-3T
+	for qemu-riscv@nongnu.org; Thu, 11 Apr 2019 08:18:45 -0400
+Received: by mail-oi1-x242.google.com with SMTP id n187so4684004oih.6
+	for <qemu-riscv@nongnu.org>; Thu, 11 Apr 2019 05:18:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=lJoXfOnx1+s02e6SfainK1cZ8EaORQ2JYPV9t1OAhcI=;
-	b=MJjUozcy9umqxZg/1mF3u6X0HMiT6TOGo9bjzEKRw58rNvvxxY8F3Ijb+xnXL/0FLK
-	KmOGvZkOqNm7Jrbyqdogd7UMv1Cq9E8In4LQcwk2R6frMgY4T7LINBI1AUvu9UTrxHFu
-	vpj7f3gDNtCOYse+Fx1qwFQpFMr6R8wfzSTO4vLESVRfNYrxQqALUTNldeG/++45tZ1i
-	82PR/HLfZQ/GVfZyeDhYBMZePoDP7lJkmufEG6aQYkjzHcI8F1PKx+zJlOXjoV6XJ3ps
-	Srw9Fxsy8G/Rschb2nOs9BNR0gjuxCNmZS7xf080L86ScCpsjYgO21Z2oCC6NQI8LYrU
-	KrYw==
+	:cc; bh=5uDn2ZUjwTyOqfDEKC5PGB65jziL38BFw27hm01Tnro=;
+	b=uB3A2tMUhvUkfXdbmXmds+5m0eo7PbAq2vCNG/tfMnsPAx5TSEKLLXg6GjgJWj2cxT
+	ovW9NuLcwNmXVTAgeShePvpFJKnGNfcs5qkTuS/9dO8WHgmaCs5PiafjWcv7t5s81A9/
+	t1YQzq3cmNzrs6kjg6VmnSRmC9ZsiDQQ5SqZm88GB9lsiKi1eN0IIo39yKiWelSboHFn
+	81JA3C3GUraKaotzFgXXc+3fYeyf9WwEpGA+YYjUtmEjhPDcK7/X19yqG1RPb75RGIVp
+	ydLaleLdwNeC3uzuQ0zgPacWCrZA9Fwmev0YZJr0pPUOUYJHCDtPypPiQbRoUhqeCM5N
+	+1dQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=lJoXfOnx1+s02e6SfainK1cZ8EaORQ2JYPV9t1OAhcI=;
-	b=gd1ASAcbUdqVNxp2MaCYX9XP96iFHZPSG4xGTbroVM4zDdLtKrz/BYKKLiuRvjPeo5
-	aHK4OZ1CPQQDJDWFvi94fldfcH+1pKBk6ZO0xFOohGnGdadfh6+X1CIImKFaMfwVGxWg
-	cIanaxJ0iVMh9pWqswLzl8+vIDVAuVSZpJfS/vb/uYszm64uFaN+sdGntj+QeKYE0wJs
-	qwejJAObIdjt5meDV6jJg0jzKEucSwkBxjqVU3ah9PgFw+CnY5QSI7NA9IUoTZWV6rjP
-	Gba35wtZHOhO47fibge6IFOVJz67nrvyxbXEF7l1RMfNlzTV/oEN+aVSzNFEW+sRpA1r
-	7BhA==
-X-Gm-Message-State: APjAAAWrY7NWRWpy7H+dvF/K19MLSfqMyIGJ91Fo6lRvy0ehJQS4rEUW
-	WnDSoOvlV9LxtMdOwfEU/H9LZXGEWLqmI2VJ1LM=
-X-Google-Smtp-Source: APXvYqxi/ZS1O88wmn/8y6xtWv//iFCQfXu/QUl/qLdKX9XYY5rT2DJtdC7Y5vt7f7z7dlSsXJDukLh6uxuau267Hu4=
-X-Received: by 2002:a2e:2a03:: with SMTP id q3mr24480631ljq.56.1554938469518; 
-	Wed, 10 Apr 2019 16:21:09 -0700 (PDT)
+	bh=5uDn2ZUjwTyOqfDEKC5PGB65jziL38BFw27hm01Tnro=;
+	b=CFxeOfwrfEHe0ZsowXMi/Kyfm5ImUmHy7pFuuBl5FjXFcz60bjB4+EEjrz8UaWUoyB
+	8BzXyfdu4iN5a3ef38ZD1YincvEIq67x742qRJ0un/ImhwJRv2WZJVG/Eug3/3xiwq6I
+	ag2rE6ziqzl6UuezVUI+hUYiBAm7BdEzNVnw4oI3Gbf7/Tv1QVa0LGJTL5CbSK22jnzm
+	zl3thOmaDyKVurWe9hF3R8zJC+tRqAYvvQ8bcr7MfhfWLzkQxZZjiZEGHm+P6IzAoJ9L
+	Q2VOGAIjS8daaDC/zrWDfVkDqj968xicnmv2imo4IGT7/6VYiEDhEAebxobX6nGLkxej
+	M4Rw==
+X-Gm-Message-State: APjAAAW2hXgDyOcX5y6rogqu4YztCOwk9PjLpJ34dmLVZPU6a1L8SV26
+	8p+PbJZOVlLvYUY2OMze1dS7cRxVzpLIEEfxznwEpA==
+X-Google-Smtp-Source: APXvYqwoJCLsDnUs9nsSHz1AfXCGntkb4a6dm7kQoNg/yXwiShyGXXazL7vKnPOidT/ohDPEHo2mkicXTJ7LdJNZKQI=
+X-Received: by 2002:aca:e84c:: with SMTP id f73mr5957965oih.163.1554985121752; 
+	Thu, 11 Apr 2019 05:18:41 -0700 (PDT)
 MIME-Version: 1.0
-References: <CANnJOVHbCGcgnHT3qVbHGFh_Ba0=FqABSoM2SG9ddf-fawwaYg@mail.gmail.com>
-In-Reply-To: <CANnJOVHbCGcgnHT3qVbHGFh_Ba0=FqABSoM2SG9ddf-fawwaYg@mail.gmail.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 10 Apr 2019 16:19:36 -0700
-Message-ID: <CAKmqyKNfm2jL+qDmnoXfur7CM2XGLOV2Vu6jNY5kNkxRcYFZpA@mail.gmail.com>
-To: Jonathan Behrens <fintelia@gmail.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>, 
-	Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
-	Palmer Dabbelt <palmer@sifive.com>, 
-	Alistair Francis <Alistair.Francis@wdc.com>,
-	"open list:RISC-V" <qemu-riscv@nongnu.org>, 
-	Sagar Karandikar <sagark@eecs.berkeley.edu>
+References: <cover.1554937288.git.alistair.francis@wdc.com>
+	<9043c3a6bc54faa98ed9fedc0c6c929c993a0bf9.1554937288.git.alistair.francis@wdc.com>
+	<20190411140629.3a672b39@redhat.com>
+In-Reply-To: <20190411140629.3a672b39@redhat.com>
+From: Peter Maydell <peter.maydell@linaro.org>
+Date: Thu, 11 Apr 2019 13:18:30 +0100
+Message-ID: <CAFEAcA-oOfZD=tas4QP3SeSOJJ+eM_9o=v05U=scsc78Z4p3FQ@mail.gmail.com>
+To: Igor Mammedov <imammedo@redhat.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>,
+	"alistair23@gmail.com" <alistair23@gmail.com>, 
+	"palmer@sifive.com" <palmer@sifive.com>,
+	"qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>, 
+	"qemu-devel@nongnu.org" <qemu-devel@nongnu.org>,
+	"ijc@hellion.org.uk" <ijc@hellion.org.uk>
 Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2a00:1450:4864:20::241
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH] target/riscv: Remove unused
- include of riscv_htif.h for virt board
+X-Received-From: 2607:f8b0:4864:20::242
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH for 4.1 v3 6/6] riscv: Add a
+ generic spike machine
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -69,49 +72,42 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Apr 2019 23:21:19 -0000
+X-List-Received-Date: Thu, 11 Apr 2019 12:18:51 -0000
 
-On Wed, Apr 10, 2019 at 9:30 AM Jonathan Behrens <fintelia@gmail.com> wrote:
+On Thu, 11 Apr 2019 at 13:07, Igor Mammedov <imammedo@redhat.com> wrote:
 >
-> Unless I'm missing something, the virt board doesn't support HTIF and
-> should not be including this header.
+> On Wed, 10 Apr 2019 23:11:00 +0000
+> Alistair Francis <Alistair.Francis@wdc.com> wrote:
+> > +    /* register system main memory (actual RAM) */
+> > +    memory_region_init_ram(main_mem, NULL, "riscv.spike.ram",
+> > +                           machine->ram_size, &error_fatal);
+> do you really care about migration? if not then _nomigrate flavor would
+> be more suitable.
 
-Thanks for the patch!
+Every machine model should care about migration, at least to
+the extent of making savevm/loadvm snapshots work. Using
+memory_region_init_ram_nomigrate() is a bad idea in new
+code: it exists only for the benefit of older code which
+is handling the migration of the backing RAM by hand for
+migration-compatibility reasons.
 
-You aren't missing anything, it can be removed.
+> >      /* Initialize SOC */
+> >      object_initialize_child(OBJECT(machine), "soc", &s->soc, sizeof(s->soc),
+> >                              TYPE_RISCV_HART_ARRAY, &error_abort, NULL);
+> > @@ -254,6 +343,12 @@ static void spike_v1_09_1_board_init(MachineState *machine)
+> >      MemoryRegion *mask_rom = g_new(MemoryRegion, 1);
+> >      int i;
+> >
+> > +    if (!qtest_enabled()) {
+> > +        info_report("The Spike v1.09.1 machine has been depreceated. "
+> > +                    "Please use the deneric spike machine and specify the ISA "
 
->
-> Jonathan
+"generic"
 
-Can you send a v2 without the uncertainty in the commit message? Can
-you also remove your name from the message? For such a small patch the
-commit title by itself will be enough.
+> > +                    "versions using -cpu.");
+> > +    }
+> > +
 
->
-> Signed-off-by: Jonathan Behrens <fintelia@gmail.com>
-
-With an updated commit message:
-
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-
-Alistair
-
-> ---
->  hw/riscv/virt.c | 1 -
->  1 file changed, 1 deletion(-)
->
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index fc4c6b306e..3526463034 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -29,7 +29,6 @@
->  #include "hw/sysbus.h"
->  #include "hw/char/serial.h"
->  #include "target/riscv/cpu.h"
-> -#include "hw/riscv/riscv_htif.h"
->  #include "hw/riscv/riscv_hart.h"
->  #include "hw/riscv/sifive_plic.h"
->  #include "hw/riscv/sifive_clint.h"
-> --
-> 2.20.1
+thanks
+-- PMM
 
