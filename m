@@ -1,63 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1hF3ft-0002Zc-6W
-	for mharc-qemu-riscv@gnu.org; Fri, 12 Apr 2019 17:25:29 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:55639)
+	id 1hF41t-0000Ya-8j
+	for mharc-qemu-riscv@gnu.org; Fri, 12 Apr 2019 17:48:13 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:59476)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1hF3fq-0002YH-O4
-	for qemu-riscv@nongnu.org; Fri, 12 Apr 2019 17:25:27 -0400
+	(envelope-from <palmer@sifive.com>) id 1hF41q-0000YD-PC
+	for qemu-riscv@nongnu.org; Fri, 12 Apr 2019 17:48:11 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1hF3fp-00008T-8T
-	for qemu-riscv@nongnu.org; Fri, 12 Apr 2019 17:25:26 -0400
-Received: from mail-lj1-x242.google.com ([2a00:1450:4864:20::242]:36022)
+	(envelope-from <palmer@sifive.com>) id 1hF41p-0005Op-NA
+	for qemu-riscv@nongnu.org; Fri, 12 Apr 2019 17:48:10 -0400
+Received: from mail-pg1-x542.google.com ([2607:f8b0:4864:20::542]:44069)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <alistair23@gmail.com>)
-	id 1hF3fk-00005o-IG; Fri, 12 Apr 2019 17:25:20 -0400
-Received: by mail-lj1-x242.google.com with SMTP id r24so10166160ljg.3;
-	Fri, 12 Apr 2019 14:25:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=v+dlaH22mcOQ+6MsKATDO01RNfc3AAh/8rBGTMkgIxk=;
-	b=g9pI7yCkScHDGnUlBrdZbdkFkSch+HGcZ/87LOlm7qA0WdkP+yFGyVl7wKkfxKLwd0
-	9RbBlQSTD+hqVBbVBRi1V1vPwtoa1BvJg7XhhWSxMWXXXctCUwvR66MfjlqkJTBzAZDK
-	w+A5yp4QB+z8cgpXiXSV7eYU2N32G6NVL0jAGLMw1iy2ONk95QiMniLHcgUcUzYWOSjy
-	rKBX0ts3SgkobzJ3aA+f5lTr3SMbR9kmDrSt0gWMgJxK2JmB4SCnw77uvHdcZ6c24wrF
-	w2WXKCXI4/I8DwXOdT3e4bqulIne1/7ED0c9nPLuVqxJ0pFPdiTjuopKUdjGAjie4lJ7
-	Juzg==
+	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1hF41p-0005Nl-Ea
+	for qemu-riscv@nongnu.org; Fri, 12 Apr 2019 17:48:09 -0400
+Received: by mail-pg1-x542.google.com with SMTP id i2so5783544pgj.11
+	for <qemu-riscv@nongnu.org>; Fri, 12 Apr 2019 14:48:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+	h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
+	:content-transfer-encoding;
+	bh=F3UZY2ASwvRN9UNuEcMbeX1oR/oKjU39wUXoZeThpzc=;
+	b=RA0HHkxU/SlzzDwixC942C95EeXwXOhOznrwbLOPWZYgXQWpwr23tW/TqpT8SM4LGK
+	oOLR3keqZojMSJ/6PKoiLWyttmAr9ku/rsbiFaiNOiT8IQmcJYmc3BlIcZIfIRgZ9J/F
+	BNBUIDyXWhaKGvTzlug28zJrsrWK9OXLn2J1DaHpjBEtiBWsHTMeFt9X2BPtgGTOehQf
+	usXYzAOjzUykCSHXRNl3kE/PsTLspjjLZyFsURan0vsstX6rEn/qdcsYZ6M4qh5Mkopl
+	yWTsHRlG5vWXf/dAOe2Z77adoXMPofaMe0sklL4yc1RV8xriqZnug/Qtoz2F5kUcD8yl
+	Y0sA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=v+dlaH22mcOQ+6MsKATDO01RNfc3AAh/8rBGTMkgIxk=;
-	b=f2FP5E4NeqL8kxpSlzD3U53n7YQyAa5Jp184GR8lKgD4kHVGVNwG4t07ONsg4UyOTI
-	hZMACdEf5odSIyEcQOmS94H/rv9xVt6oc47CbOmQ/ZRlhup4Qh/TSrjJGLgXU506t4Rp
-	BvvMjeenkCEe1MQ4Q4IKnRLRfsyPvxshLNGcstOaxNoVl9hntMIfa59rN3FbF2W9KTuA
-	ZsuVq/a1Dzl9gDicH/21Zo4haj0wrzC0eFpv8Y/00YSaKD4IfhzPlCy3Q5s46UHeTY+V
-	gGlNljBt8sQ1Sg/UbOuvqZPcysemWlFQ9WAlZ8Kjbj3G9bHViNZn0AnASUdwYbFeLruQ
-	iebw==
-X-Gm-Message-State: APjAAAWl22o9sskz++RviEkq3bi5L3oJDruF8T8lcWfkOQCAtA8yCFao
-	7EYJwMdW8j7NIclKKimu7KeTG7hSdLo+42WswbE=
-X-Google-Smtp-Source: APXvYqwGVr/ZvsKOQb7qi7aEAuS6FdMCKsNfjDywX+dT693YZy114dojuKU5zdm8fcCpONdwPsCAyPElXfnmLAZ2DCg=
-X-Received: by 2002:a2e:9843:: with SMTP id e3mr4014333ljj.28.1555104319148;
-	Fri, 12 Apr 2019 14:25:19 -0700 (PDT)
-MIME-Version: 1.0
-References: <CANnJOVHadZt5Vho5sy6FGVgUW_yvYZg7BGDiGJFtRBCquyOXZA@mail.gmail.com>
-	<CAKmqyKNVno+jR_PYxgnyqQOSQFCn_ai7GH+hYPgaO=fkqHDa6A@mail.gmail.com>
-	<CANnJOVHprai3DLd=PunsVDGUwaGvvA4ynou5_LhyGVztTf-tNQ@mail.gmail.com>
-In-Reply-To: <CANnJOVHprai3DLd=PunsVDGUwaGvvA4ynou5_LhyGVztTf-tNQ@mail.gmail.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 12 Apr 2019 14:23:42 -0700
-Message-ID: <CAKmqyKOSujRkv+JkgmP79FHVPZabg0QTki3c+BeFMTZpMFSYxA@mail.gmail.com>
-To: Jonathan Behrens <fintelia@gmail.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>, 
+	h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
+	:mime-version:content-transfer-encoding;
+	bh=F3UZY2ASwvRN9UNuEcMbeX1oR/oKjU39wUXoZeThpzc=;
+	b=uAki8PrKT+9Ed46LM3JCr1JobWi1EKCazeurrdTIOxF1Lva9J6h2YbSMucoqgooBPf
+	KagDYIY/xlxgFUEVLQNJHGEDcnifbP/N6glZTSY2esaceYs+9UlDOrKa6M0jBiLrDLJY
+	fiYlFXr4/ygnpp3FOkGdDxHpK/7U7hMhanNPl2gpD6af2Y1hu/RP5fs5aVUYo/eCihC6
+	tjhSPkvuUezOsIJFyUa+RNP7Fat1aPrCxehhuPtN2EnX9H67rhSDyOgP8OYGFtB0W2W0
+	ynQzdVMtO1zKhrQMBw/JYdOVW+D8mnKc0ZYfAm77Nr9YxUbsAUqEzh9si/6ieIfV4TOI
+	22yA==
+X-Gm-Message-State: APjAAAVKBcI/ko8XuQpcAS8hhUuFQZZ0vt7mIiccJfREbwjmLTO4KWkp
+	zJuRzcniaENDtspsxvqP504RBA==
+X-Google-Smtp-Source: APXvYqztZdvFNG6IcLSBN/1w1RJGJreSsDoA8dH4o52q+TBt/V8NbQx6msbUEKjSZVvEnUHLIpEW/Q==
+X-Received: by 2002:a63:1d5b:: with SMTP id d27mr54566323pgm.386.1555105687724;
+	Fri, 12 Apr 2019 14:48:07 -0700 (PDT)
+Received: from localhost ([12.206.222.5]) by smtp.gmail.com with ESMTPSA id
+	j19sm33087955pfr.155.2019.04.12.14.48.06
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 12 Apr 2019 14:48:06 -0700 (PDT)
+Date: Fri, 12 Apr 2019 14:48:06 -0700 (PDT)
+X-Google-Original-Date: Fri, 12 Apr 2019 14:45:46 PDT (-0700)
+In-Reply-To: <CAKmqyKOSujRkv+JkgmP79FHVPZabg0QTki3c+BeFMTZpMFSYxA@mail.gmail.com>
+CC: fintelia@gmail.com, qemu-devel@nongnu.org,
 	Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
-	Palmer Dabbelt <palmer@sifive.com>, 
-	Alistair Francis <Alistair.Francis@wdc.com>,
-	"open list:RISC-V" <qemu-riscv@nongnu.org>, 
-	Sagar Karandikar <sagark@eecs.berkeley.edu>
-Content-Type: text/plain; charset="UTF-8"
+	Alistair Francis <Alistair.Francis@wdc.com>, qemu-riscv@nongnu.org, 
+	sagark@eecs.berkeley.edu
+From: Palmer Dabbelt <palmer@sifive.com>
+To: alistair23@gmail.com
+Message-ID: <mhng-fe62b897-1d18-47aa-8dc1-ab08cad65092@palmer-si-x1c4>
+Mime-Version: 1.0 (MHng)
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2a00:1450:4864:20::242
+X-Received-From: 2607:f8b0:4864:20::542
 Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH] target/riscv: Do not allow
  sfence.vma from user mode
 X-BeenThere: qemu-riscv@nongnu.org
@@ -71,59 +73,65 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Apr 2019 21:25:27 -0000
+X-List-Received-Date: Fri, 12 Apr 2019 21:48:11 -0000
 
-On Fri, Apr 12, 2019 at 2:15 PM Jonathan Behrens <fintelia@gmail.com> wrote:
+I actually missed this.  I just added it to for-next on 
+github.com/palmer-dabbelt.
+
+Thanks for the ping!
+
+On Fri, 12 Apr 2019 14:23:42 PDT (-0700), alistair23@gmail.com wrote:
+> On Fri, Apr 12, 2019 at 2:15 PM Jonathan Behrens <fintelia@gmail.com> wrote:
+>>
+>> Just to double check, nothing further on this is need from me, right? It is set to be merged onto the master branch once the 4.0 release is out?
 >
-> Just to double check, nothing further on this is need from me, right? It is set to be merged onto the master branch once the 4.0 release is out?
-
-Thanks for checking!
-
-Yep you don't need to do anything, Palmer will merge it in the next
-RISC-V PR after 4.0.
-
-Alistair
-
+> Thanks for checking!
 >
-> Jonathan
+> Yep you don't need to do anything, Palmer will merge it in the next
+> RISC-V PR after 4.0.
 >
-> On Wed, Apr 3, 2019 at 7:11 PM Alistair Francis <alistair23@gmail.com> wrote:
+> Alistair
+>
 >>
->> On Mon, Apr 1, 2019 at 1:39 PM Jonathan Behrens <fintelia@gmail.com> wrote:
->> >
->> > The 'sfence.vma' instruction is privileged, and should only ever be allowed
->> > when executing in supervisor mode or higher.
->> >
->> > Jonathan
->> >
->> > Signed-off-by: Jonathan Behrens <fintelia@gmail.com>
+>> Jonathan
 >>
->> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
->>
->> Alistair
->>
->> > ---
->> >  target/riscv/op_helper.c | 7 ++++---
->> >  1 file changed, 4 insertions(+), 3 deletions(-)
->> >
->> > diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
->> > index b7dc18a41e..644d0fb35f 100644
->> > --- a/target/riscv/op_helper.c
->> > +++ b/target/riscv/op_helper.c
->> > @@ -145,9 +145,10 @@ void helper_tlb_flush(CPURISCVState *env)
->> >  {
->> >      RISCVCPU *cpu = riscv_env_get_cpu(env);
->> >      CPUState *cs = CPU(cpu);
->> > -    if (env->priv == PRV_S &&
->> > -        env->priv_ver >= PRIV_VERSION_1_10_0 &&
->> > -        get_field(env->mstatus, MSTATUS_TVM)) {
->> > +    if (!(env->priv >= PRV_S) ||
->> > +        (env->priv == PRV_S &&
->> > +         env->priv_ver >= PRIV_VERSION_1_10_0 &&
->> > +         get_field(env->mstatus, MSTATUS_TVM))) {
->> >          riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
->> >      } else {
->> >          tlb_flush(cs);
->> > --
->> > 2.20.1
+>> On Wed, Apr 3, 2019 at 7:11 PM Alistair Francis <alistair23@gmail.com> wrote:
+>>>
+>>> On Mon, Apr 1, 2019 at 1:39 PM Jonathan Behrens <fintelia@gmail.com> wrote:
+>>> >
+>>> > The 'sfence.vma' instruction is privileged, and should only ever be allowed
+>>> > when executing in supervisor mode or higher.
+>>> >
+>>> > Jonathan
+>>> >
+>>> > Signed-off-by: Jonathan Behrens <fintelia@gmail.com>
+>>>
+>>> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+>>>
+>>> Alistair
+>>>
+>>> > ---
+>>> >  target/riscv/op_helper.c | 7 ++++---
+>>> >  1 file changed, 4 insertions(+), 3 deletions(-)
+>>> >
+>>> > diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+>>> > index b7dc18a41e..644d0fb35f 100644
+>>> > --- a/target/riscv/op_helper.c
+>>> > +++ b/target/riscv/op_helper.c
+>>> > @@ -145,9 +145,10 @@ void helper_tlb_flush(CPURISCVState *env)
+>>> >  {
+>>> >      RISCVCPU *cpu = riscv_env_get_cpu(env);
+>>> >      CPUState *cs = CPU(cpu);
+>>> > -    if (env->priv == PRV_S &&
+>>> > -        env->priv_ver >= PRIV_VERSION_1_10_0 &&
+>>> > -        get_field(env->mstatus, MSTATUS_TVM)) {
+>>> > +    if (!(env->priv >= PRV_S) ||
+>>> > +        (env->priv == PRV_S &&
+>>> > +         env->priv_ver >= PRIV_VERSION_1_10_0 &&
+>>> > +         get_field(env->mstatus, MSTATUS_TVM))) {
+>>> >          riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
+>>> >      } else {
+>>> >          tlb_flush(cs);
+>>> > --
+>>> > 2.20.1
 
