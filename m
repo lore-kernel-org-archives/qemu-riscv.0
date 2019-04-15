@@ -1,51 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1hFx8O-0008BS-GI
-	for mharc-qemu-riscv@gnu.org; Mon, 15 Apr 2019 04:38:36 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:43487)
+	id 1hGBUA-0008CI-Te
+	for mharc-qemu-riscv@gnu.org; Mon, 15 Apr 2019 19:58:03 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:57949)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <imammedo@redhat.com>) id 1hFx8K-000896-Oo
-	for qemu-riscv@nongnu.org; Mon, 15 Apr 2019 04:38:34 -0400
+	(envelope-from <alistair23@gmail.com>) id 1hGBU6-0008A4-J5
+	for qemu-riscv@nongnu.org; Mon, 15 Apr 2019 19:57:59 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <imammedo@redhat.com>) id 1hFx8J-0006hd-1i
-	for qemu-riscv@nongnu.org; Mon, 15 Apr 2019 04:38:32 -0400
-Received: from mx1.redhat.com ([209.132.183.28]:50938)
-	by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.71) (envelope-from <imammedo@redhat.com>)
-	id 1hFx8E-0006eW-TF; Mon, 15 Apr 2019 04:38:27 -0400
-Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
-	[10.5.11.13])
-	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mx1.redhat.com (Postfix) with ESMTPS id 8C486330247;
-	Mon, 15 Apr 2019 08:38:24 +0000 (UTC)
-Received: from Igors-MacBook-Pro.local (ovpn-112-37.ams2.redhat.com
-	[10.36.112.37])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id 3F99C608C0;
-	Mon, 15 Apr 2019 08:38:22 +0000 (UTC)
-Date: Mon, 15 Apr 2019 10:38:15 +0200
-From: Igor Mammedov <imammedo@redhat.com>
-To: Alistair Francis <alistair23@gmail.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>, "qemu-devel@nongnu.org"
-	<qemu-devel@nongnu.org>, "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>,
-	"palmer@sifive.com" <palmer@sifive.com>, "ijc@hellion.org.uk"
-	<ijc@hellion.org.uk>
-Message-ID: <20190415103815.35f45e99@Igors-MacBook-Pro.local>
-In-Reply-To: <CAKmqyKOFs8Pv4np+BXyVYGRFwLKn9N-H7q=7JN+nBprAjHBYCQ@mail.gmail.com>
+	(envelope-from <alistair23@gmail.com>) id 1hGBU5-00040D-6h
+	for qemu-riscv@nongnu.org; Mon, 15 Apr 2019 19:57:58 -0400
+Received: from mail-lf1-x141.google.com ([2a00:1450:4864:20::141]:43303)
+	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+	(Exim 4.71) (envelope-from <alistair23@gmail.com>)
+	id 1hGBTy-0003re-H5; Mon, 15 Apr 2019 19:57:50 -0400
+Received: by mail-lf1-x141.google.com with SMTP id i68so3551742lfi.10;
+	Mon, 15 Apr 2019 16:57:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=utp70kpvqVYAgzmbP1/KSHWEj/gyntLc4EKiJ3F1dMY=;
+	b=tmTp+34p3fD1XZmlQwOt8RpbUB48npaVbjDtPz/NDerIywJXf/pjmUdw/84Jk0ac0K
+	E63vfEDWI6Oo+hWfzTlPteHYyuddmpgDZCgBSMS8ACyLrbMPQ4XBVcat/F5Qotst5ad6
+	8S251z5CzwSjYCoDZ9OsIrxeor1BpEFdzZshoB35Jjl0ktvBCCfeQBJdXC2eOngWjKLe
+	BQlbjP9W8ovqmYcWTQ57f/wXJDptuUFvN+H0OIGQMN69Pn8uNtDAzmCu+nTxdvmoOTxT
+	AWq1/XwqhE7nevOnFCdGJmuB8KEVJw3XQzE3/fYrQ1VM7CU+9cvBlv5lAM3fGJVLO0x+
+	qIrQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=utp70kpvqVYAgzmbP1/KSHWEj/gyntLc4EKiJ3F1dMY=;
+	b=U7z/ypinEG6G0i7h5YXZgcvdB99t7Gb8WTqlIHDl8GcHtMwGLShybcw6b0i/NJglnK
+	YR+lRizUuYoExkFYmJyMz/49EHJC7n7GGfD9fiUzCLh7ZfBOffS45LwGvTjJeKKsyuoM
+	GwcBSxkkR9+6Exi/gEknbB4dSSx8RvbHXgmRBQctGi3gjDc1+MtBOOWgdbSX15J8sojw
+	p1FctAOvQE8xoaGKY4Wps13B72MfHU4izaYWQv7F8Q9V8/6XPkIWzzCd3x1ERGpefLxB
+	aeqn8ySNFoGIOwHeEeKdYYRxDCrIdlu86DsvppVLnspN8PD9PhGU5zR5MYVnQPfEzDc1
+	rMTw==
+X-Gm-Message-State: APjAAAWS5RHOdZlkcyMbTf4dp7wmb/1ylKzWtA5DrGZcFHMLUxBVvbFj
+	whwwZ6qfcL3sWwLaD54hrQ+bk0ZprlZaf56e3QdihQGZGCU=
+X-Google-Smtp-Source: APXvYqxTsXW6Y+VaJ0pL/wd8dD1qKe9Mc5q23rk953OJM7jFGALhlPqFCZ0UzFT9hVwdpOfauGgITTHoyWLNp9KrDIU=
+X-Received: by 2002:a19:f512:: with SMTP id j18mr35428968lfb.48.1555372668825; 
+	Mon, 15 Apr 2019 16:57:48 -0700 (PDT)
+MIME-Version: 1.0
 References: <cover.1554937288.git.alistair.francis@wdc.com>
 	<efb2140df508fc04be96c5dc0f989923bfcb7424.1554937288.git.alistair.francis@wdc.com>
 	<20190411141848.119ee969@redhat.com>
 	<CAKmqyKOQ9a5Q8c83ufCgQgsa_RdQv01dDFCLFGmiSC8mkTw0LQ@mail.gmail.com>
 	<20190412103558.7be8383d@redhat.com>
 	<CAKmqyKOFs8Pv4np+BXyVYGRFwLKn9N-H7q=7JN+nBprAjHBYCQ@mail.gmail.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
-	(mx1.redhat.com [10.5.110.29]);
-	Mon, 15 Apr 2019 08:38:24 +0000 (UTC)
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
-X-Received-From: 209.132.183.28
+	<20190415103815.35f45e99@Igors-MacBook-Pro.local>
+In-Reply-To: <20190415103815.35f45e99@Igors-MacBook-Pro.local>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Mon, 15 Apr 2019 16:56:08 -0700
+Message-ID: <CAKmqyKOYif-SVvz3btkx+D9RDCFOmEaQSOR+0y4k18WLtrk3rQ@mail.gmail.com>
+To: Igor Mammedov <imammedo@redhat.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
+	"qemu-devel@nongnu.org" <qemu-devel@nongnu.org>,
+	"qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>, 
+	"palmer@sifive.com" <palmer@sifive.com>,
+	"ijc@hellion.org.uk" <ijc@hellion.org.uk>
+Content-Type: text/plain; charset="UTF-8"
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+	recognized.
+X-Received-From: 2a00:1450:4864:20::141
 Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH for 4.1 v3 2/6] target/riscv:
  Fall back to generating a RISC-V CPU
 X-BeenThere: qemu-riscv@nongnu.org
@@ -59,302 +74,163 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Apr 2019 08:38:34 -0000
+X-List-Received-Date: Mon, 15 Apr 2019 23:57:59 -0000
 
-On Fri, 12 Apr 2019 14:19:16 -0700
-Alistair Francis <alistair23@gmail.com> wrote:
+On Mon, Apr 15, 2019 at 1:38 AM Igor Mammedov <imammedo@redhat.com> wrote:
+>
+> On Fri, 12 Apr 2019 14:19:16 -0700
+> Alistair Francis <alistair23@gmail.com> wrote:
+>
 
-> On Fri, Apr 12, 2019 at 1:36 AM Igor Mammedov <imammedo@redhat.com> wrote:
-> >
-> > On Thu, 11 Apr 2019 13:42:20 -0700
-> > Alistair Francis <alistair23@gmail.com> wrote:
-> >
-> > > On Thu, Apr 11, 2019 at 5:18 AM Igor Mammedov <imammedo@redhat.com> wrote:
-> > > >
-> > > > On Wed, 10 Apr 2019 23:10:25 +0000
-> > > > Alistair Francis <Alistair.Francis@wdc.com> wrote:
-> > > >
-> > > > > If a user specifies a CPU that we don't understand then we want to fall
-> > > > > back to a CPU generated from the ISA string.
-> > > > It might look like a nice thing to do at the beginning, but
-> > > > fallbacks become a source of pain in future and get in the way
-> > > > of refactorings if there is a promise to maintain defaults (fallbacks)
-> > > > stable.
-> > > >
-> > > > I suggest do not fallback to anything, just fail cleanly
-> > > > with informative error telling users what is wrong and let user
-> > > > fix their invalid CLI in the first place.
+...
+
 > > >
-> > > Maybe fall back isn't the right word then, as this is the goal of this
-> > > series. Here is what I want to happen:
+> > > if it's programming error it should be assert
+> > > but in general instance_init()  should never fail.
+> >
+> > We are checking for a user specified CPU string, not a programming
+> > error so an assert() isn't correct here.
+> >
+> > If *init() can't fail how should this be handled?
+> typical flow for device object is
+>
+>  object_new(foo) -> foo_init_fn()
+>  set properties on foo
+>  set 'realize' property to 'true' -> foo_realize_fn()
+>
+> all checks should be performed in realize() or during property setting.
+
+I thought there was a reason realise didn't work, but now I can't see
+what it is. I can move it to realise.
+
+>
+> > > the same applies to errors or warnings within this function.
 > > >
-> > > User runs QEMU RISC-V without -cpu option:
-> > >     The user gets a CPU that supports "standard" ISA extensions, as
-> > > what happens now
+> > > > > > +    }
+> > > > > > +
+> > > > > > +    if (riscv_cpu[0] == 'r' && riscv_cpu[1] == 'v') {
+> > > > > > +        /* Starts with "rv" */
+> > > > > > +        if (riscv_cpu[2] == '3' && riscv_cpu[3] == '2') {
+> > > > > > +            valid = true;
+> > > > > > +            rvxlen = RV32;
+> > > > > > +        }
+> > > > > > +        if (riscv_cpu[2] == '6' && riscv_cpu[3] == '4') {
+> > > > > > +            valid = true;
+> > > > > > +            rvxlen = RV64;
+> > > > > > +        }
+> > > > > > +    }
+> > > > > > +
+> > > > > > +    if (!valid) {
+> > > > > > +        error_report("'%s' does not appear to be a valid RISC-V CPU",
+> > > > > > +                     riscv_cpu);
+> > > > > > +        exit(1);
+> > > > > > +    }
+> > > > > > +
+> > > > > > +    for (i = 4; i < strlen(riscv_cpu); i++) {
+> > > > > > +        switch (riscv_cpu[i]) {
+> > > > > > +        case 'i':
+> > > > > > +            if (target_misa & RVE) {
+> > > > > > +                error_report("I and E extensions are incompatible");
+> > > > > > +                exit(1);
+> > > > > > +            }
+> > > > > > +            target_misa |= RVI;
+> > > > > > +            continue;
+> > > > > > +        case 'e':
+> > > > > > +            if (target_misa & RVI) {
+> > > > > > +                error_report("I and E extensions are incompatible");
+> > > > > > +                exit(1);
+> > > > > > +            }
+> > > > > > +            target_misa |= RVE;
+> > > > > > +            continue;
+> > > > > > +        case 'g':
+> > > > > > +            target_misa |= RVI | RVM | RVA | RVF | RVD;
+> > > > > > +            continue;
+> > > > > > +        case 'm':
+> > > > > > +            target_misa |= RVM;
+> > > > > > +            continue;
+> > > > > > +        case 'a':
+> > > > > > +            target_misa |= RVA;
+> > > > > > +            continue;
+> > > > > > +        case 'f':
+> > > > > > +            target_misa |= RVF;
+> > > > > > +            continue;
+> > > > > > +        case 'd':
+> > > > > > +            target_misa |= RVD;
+> > > > > > +            continue;
+> > > > > > +        case 'c':
+> > > > > > +            target_misa |= RVC;
+> > > > > > +            continue;
+> > > > > > +        case 's':
+> > > > > > +            target_misa |= RVS;
+> > > > > > +            continue;
+> > > > > > +        case 'u':
+> > > > > > +            target_misa |= RVU;
+> > > > > > +            continue;
+> > > > > > +        default:
+> > > > > > +            warn_report("QEMU does not support the %c extension",
+> > > > > > +                        riscv_cpu[i]);
+> > > that's what looks to me like fallback, and what makes
+> > > CPU features for this CPU type non deterministic.
+> >
+> > What do you mean? QEMU will always parse the specified CPU string and
+> > create a CPU based on the features specified by the user. For each
+> > version of QEMU it will always result in the same outcome for the same
+> > user supplied command line argument.
+>
+> I've meant that here you would print warning and happily continue parsing
+> user input ignoring input error. One should error out instead and make
+> user fix error.
+
+Ah, ok. I can change this one to an error.
+
+>
+> >
+> > Newer QEMU versions will support more features though, so they will
+> > accept different options.
+> >
+> > > I'm not sure what you are trying to achieve here, but it look like
+> > > you are trying to verify MachineClass field in object constructor
+> > > along with other things.
+> >
+> > I'm just trying to parse the -cpu string option.
+> >
 > > >
-> > > User runs QEMU RISC-V with a CPU model that is hard coded in cpu.h
-> > > (such as TYPE_RISCV_CPU_SIFIVE_U54):
-> > >     The user gets a CPU that matches that hard coded CPU string/init
-> > >
-> > > User runs QEMU RISC-V with a RISC-V ISA string that isn't hardcoded
-> > > (for example rv64gcsuh):
-> > >     QEMU will dynamically create a CPU based on the specified bit
-> > > length (rv32/rv64) and the ISA extensions supported
-> > >     The goal of this is to allow new extensions to be enabled and
-> > > disabled as required. For example when we add a new extension maybe we
-> > > don't want it on by default but we want an option to enable it. Or
-> > > maybe a user wants to test their code on a model without compressed
-> > > instruction (c extension) support.
+> > > I'd put all MachineClass checks in class_init and abort on error
+> > > since invalid mcc->isa_str is codding error.
 > >
-> > From commit message I"g read it as fallback, so as far as user gets
-> > deterministic (always the same) CPU according to what they asked on CLI
-> > it's fine. In that case commit message probably should be rephrased.
-> >
-> > more bellow
-> > > Alistair
-> > >
-> > > >
-> > > >
-> > > > > At the moment the generated CPU is assumed to be a privledge spec
-> > > > > version 1.10 CPU with an MMU. This can be changed in the future.
-> > > > >
-> > > > > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> > > > > ---
-> > > > > v3:
-> > > > >  - Ensure a minimal length so we don't run off the end of the string.
-> > > > >  - Don't parse the rv32/rv64 in the loop
-> > > > >  target/riscv/cpu.c | 101 ++++++++++++++++++++++++++++++++++++++++++++-
-> > > > >  target/riscv/cpu.h |   2 +
-> > > > >  2 files changed, 102 insertions(+), 1 deletion(-)
-> > > > >
-> > > > > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> > > > > index d61bce6d55..27be9e412a 100644
-> > > > > --- a/target/riscv/cpu.c
-> > > > > +++ b/target/riscv/cpu.c
-> > > > > @@ -19,6 +19,7 @@
-> > > > >
-> > > > >  #include "qemu/osdep.h"
-> > > > >  #include "qemu/log.h"
-> > > > > +#include "qemu/error-report.h"
-> > > > >  #include "cpu.h"
-> > > > >  #include "exec/exec-all.h"
-> > > > >  #include "qapi/error.h"
-> > > > > @@ -103,6 +104,99 @@ static void set_resetvec(CPURISCVState *env, int resetvec)
-> > > > >  #endif
-> > > > >  }
-> > > > >
-> > > > > +static void riscv_generate_cpu_init(Object *obj)
-> > > > > +{
-> > > > > +    RISCVCPU *cpu = RISCV_CPU(obj);
-> > > > > +    CPURISCVState *env = &cpu->env;
-> > > > > +    RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(cpu);
-> > > > > +    const char *riscv_cpu = mcc->isa_str;
-> > > > > +    target_ulong target_misa = 0;
-> > > > > +    target_ulong rvxlen = 0;
-> > > > > +    int i;
-> > > > > +    bool valid = false;
-> > > > > +
-> > > > > +    /*
-> > > > > +     * We need at least 5 charecters for the string to be valid. Check that
-> > > > > +     * now so we can be lazier later.
-> > > > > +     */
-> > > > > +    if (strlen(riscv_cpu) < 5) {
-> > > > > +        error_report("'%s' does not appear to be a valid RISC-V ISA string",
-> > > > > +                     riscv_cpu);
-> > > > > +        exit(1);
-> >
-> > if it's programming error it should be assert
-> > but in general instance_init()  should never fail.
-> 
-> We are checking for a user specified CPU string, not a programming
-> error so an assert() isn't correct here.
-> 
-> If *init() can't fail how should this be handled?
-typical flow for device object is
+> > No, it's a user error.
+>
+> Parsing -cpu by assigning to class members user input looks unusual.
+>
+> We had a custom parsing for x86 & sparc cpus, but that was factored out
+> into compat utilities and we shouldn't do it anywhere else without very
+> compelling reason.
 
- object_new(foo) -> foo_init_fn()
- set properties on foo
- set 'realize' property to 'true' -> foo_realize_fn()
+I did see that, but it didn't seem to work the same way as this.
 
-all checks should be performed in realize() or during property setting.
+>
+> Currently it's preferred to use canonical form for cpu properties, like:
+>
+>   -cpu foo,prop1=x,prop2=y,...
 
-> > the same applies to errors or warnings within this function.
-> >
-> > > > > +    }
-> > > > > +
-> > > > > +    if (riscv_cpu[0] == 'r' && riscv_cpu[1] == 'v') {
-> > > > > +        /* Starts with "rv" */
-> > > > > +        if (riscv_cpu[2] == '3' && riscv_cpu[3] == '2') {
-> > > > > +            valid = true;
-> > > > > +            rvxlen = RV32;
-> > > > > +        }
-> > > > > +        if (riscv_cpu[2] == '6' && riscv_cpu[3] == '4') {
-> > > > > +            valid = true;
-> > > > > +            rvxlen = RV64;
-> > > > > +        }
-> > > > > +    }
-> > > > > +
-> > > > > +    if (!valid) {
-> > > > > +        error_report("'%s' does not appear to be a valid RISC-V CPU",
-> > > > > +                     riscv_cpu);
-> > > > > +        exit(1);
-> > > > > +    }
-> > > > > +
-> > > > > +    for (i = 4; i < strlen(riscv_cpu); i++) {
-> > > > > +        switch (riscv_cpu[i]) {
-> > > > > +        case 'i':
-> > > > > +            if (target_misa & RVE) {
-> > > > > +                error_report("I and E extensions are incompatible");
-> > > > > +                exit(1);
-> > > > > +            }
-> > > > > +            target_misa |= RVI;
-> > > > > +            continue;
-> > > > > +        case 'e':
-> > > > > +            if (target_misa & RVI) {
-> > > > > +                error_report("I and E extensions are incompatible");
-> > > > > +                exit(1);
-> > > > > +            }
-> > > > > +            target_misa |= RVE;
-> > > > > +            continue;
-> > > > > +        case 'g':
-> > > > > +            target_misa |= RVI | RVM | RVA | RVF | RVD;
-> > > > > +            continue;
-> > > > > +        case 'm':
-> > > > > +            target_misa |= RVM;
-> > > > > +            continue;
-> > > > > +        case 'a':
-> > > > > +            target_misa |= RVA;
-> > > > > +            continue;
-> > > > > +        case 'f':
-> > > > > +            target_misa |= RVF;
-> > > > > +            continue;
-> > > > > +        case 'd':
-> > > > > +            target_misa |= RVD;
-> > > > > +            continue;
-> > > > > +        case 'c':
-> > > > > +            target_misa |= RVC;
-> > > > > +            continue;
-> > > > > +        case 's':
-> > > > > +            target_misa |= RVS;
-> > > > > +            continue;
-> > > > > +        case 'u':
-> > > > > +            target_misa |= RVU;
-> > > > > +            continue;
-> > > > > +        default:
-> > > > > +            warn_report("QEMU does not support the %c extension",
-> > > > > +                        riscv_cpu[i]);
-> > that's what looks to me like fallback, and what makes
-> > CPU features for this CPU type non deterministic.
-> 
-> What do you mean? QEMU will always parse the specified CPU string and
-> create a CPU based on the features specified by the user. For each
-> version of QEMU it will always result in the same outcome for the same
-> user supplied command line argument.
+Yeah, but I don't see how that would work nicely.
 
-I've meant that here you would print warning and happily continue parsing
-user input ignoring input error. One should error out instead and make
-user fix error.
+Instead of:
+    -cpu rv64gcsu
+we would have:
+    -cpu rvgen,xlen=64,g=true,c=true,s=true,u=true
+which seems more complex for users
 
-> 
-> Newer QEMU versions will support more features though, so they will
-> accept different options.
-> 
-> > I'm not sure what you are trying to achieve here, but it look like
-> > you are trying to verify MachineClass field in object constructor
-> > along with other things.
-> 
-> I'm just trying to parse the -cpu string option.
-> 
-> >
-> > I'd put all MachineClass checks in class_init and abort on error
-> > since invalid mcc->isa_str is codding error.
-> 
-> No, it's a user error.
+>
+> and let the generic parser to do the job. For it to work you would need
+> to create a property per a cpu feature.
+>
+> This way it will work fine with -cpu and -device/device_add without any
+> custom parsing involved.
 
-Parsing -cpu by assigning to class members user input looks unusual.
+Although I think it's messy for users, it is the cleanest
+implementation in terms of QOM. Maybe that will be the only solution.
 
-We had a custom parsing for x86 & sparc cpus, but that was factored out
-into compat utilities and we shouldn't do it anywhere else without very
-compelling reason.
-
-Currently it's preferred to use canonical form for cpu properties, like:
-
-  -cpu foo,prop1=x,prop2=y,...
-
-and let the generic parser to do the job. For it to work you would need
-to create a property per a cpu feature.
-
-This way it will work fine with -cpu and -device/device_add without any
-custom parsing involved.
-
-> Alistair
-> 
-> > If you can make some checks compile time it would be even better.
-> >
-> >
-> > > > > +            continue;
-> > > > > +        }
-> > > > > +    }
-> > > > > +
-> > > > > +    set_misa(env, rvxlen | target_misa);
-> > > > > +    set_versions(env, USER_VERSION_2_02_0, PRIV_VERSION_1_10_0);
-> > > > > +    set_resetvec(env, DEFAULT_RSTVEC);
-> > > > > +    set_feature(env, RISCV_FEATURE_MMU);
-> > > > > +    set_feature(env, RISCV_FEATURE_PMP);
-> > > > > +}
-> > > > > +
-> > > > >  static void riscv_any_cpu_init(Object *obj)
-> > > > >  {
-> > > > >      CPURISCVState *env = &RISCV_CPU(obj)->env;
-> > > > > @@ -178,6 +272,7 @@ static void rv64imacu_nommu_cpu_init(Object *obj)
-> > > > >  static ObjectClass *riscv_cpu_class_by_name(const char *cpu_model)
-> > > > >  {
-> > > > >      ObjectClass *oc;
-> > > > > +    RISCVCPUClass *mcc;
-> > > > >      char *typename;
-> > > > >      char **cpuname;
-> > > > >
-> > > > > @@ -188,7 +283,10 @@ static ObjectClass *riscv_cpu_class_by_name(const char *cpu_model)
-> > > > >      g_free(typename);
-> > > > >      if (!oc || !object_class_dynamic_cast(oc, TYPE_RISCV_CPU) ||
-> > > > >          object_class_is_abstract(oc)) {
-> > > > > -        return NULL;
-> > > > > +        /* No CPU found, try the generic CPU and pass in the ISA string */
-> > > > > +        oc = object_class_by_name(TYPE_RISCV_CPU_GEN);
-> > > > > +        mcc = RISCV_CPU_CLASS(oc);
-> > > > > +        mcc->isa_str = g_strdup(cpu_model);
-> > > > >      }
-> > > > >      return oc;
-> > > > >  }
-> > > > > @@ -440,6 +538,7 @@ static const TypeInfo riscv_cpu_type_infos[] = {
-> > > > >          .class_init = riscv_cpu_class_init,
-> > > > >      },
-> > > > >      DEFINE_CPU(TYPE_RISCV_CPU_ANY,              riscv_any_cpu_init),
-> > > > > +    DEFINE_CPU(TYPE_RISCV_CPU_GEN,              riscv_generate_cpu_init),
-> > > > >  #if defined(TARGET_RISCV32)
-> > > > >      DEFINE_CPU(TYPE_RISCV_CPU_RV32GCSU_V1_09_1, rv32gcsu_priv1_09_1_cpu_init),
-> > > > >      DEFINE_CPU(TYPE_RISCV_CPU_RV32GCSU_V1_10_0, rv32gcsu_priv1_10_0_cpu_init),
-> > > > > diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> > > > > index 20bce8742e..453108a855 100644
-> > > > > --- a/target/riscv/cpu.h
-> > > > > +++ b/target/riscv/cpu.h
-> > > > > @@ -48,6 +48,7 @@
-> > > > >  #define CPU_RESOLVING_TYPE TYPE_RISCV_CPU
-> > > > >
-> > > > >  #define TYPE_RISCV_CPU_ANY              RISCV_CPU_TYPE_NAME("any")
-> > > > > +#define TYPE_RISCV_CPU_GEN              RISCV_CPU_TYPE_NAME("rv*")
-> > > > >  #define TYPE_RISCV_CPU_RV32GCSU_V1_09_1 RISCV_CPU_TYPE_NAME("rv32gcsu-v1.9.1")
-> > > > >  #define TYPE_RISCV_CPU_RV32GCSU_V1_10_0 RISCV_CPU_TYPE_NAME("rv32gcsu-v1.10.0")
-> > > > >  #define TYPE_RISCV_CPU_RV32IMACU_NOMMU  RISCV_CPU_TYPE_NAME("rv32imacu-nommu")
-> > > > > @@ -211,6 +212,7 @@ typedef struct RISCVCPUClass {
-> > > > >      /*< public >*/
-> > > > >      DeviceRealize parent_realize;
-> > > > >      void (*parent_reset)(CPUState *cpu);
-> > > > > +    const char *isa_str;
-> > > > >  } RISCVCPUClass;
-> > > > >
-> > > > >  /**
-> > > >
-> >
-
+Alistair
+...
 
