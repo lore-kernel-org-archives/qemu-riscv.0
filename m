@@ -1,58 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1hHfjF-0006h8-9u
-	for mharc-qemu-riscv@gnu.org; Fri, 19 Apr 2019 22:27:45 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:50720)
+	id 1hHfjN-0006pE-KI
+	for mharc-qemu-riscv@gnu.org; Fri, 19 Apr 2019 22:27:53 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:50754)
 	by lists.gnu.org with esmtp (Exim 4.71)
 	(envelope-from <prvs=0062c52f7=Alistair.Francis@wdc.com>)
-	id 1hHfjC-0006ez-Jk
-	for qemu-riscv@nongnu.org; Fri, 19 Apr 2019 22:27:43 -0400
+	id 1hHfjL-0006nC-J4
+	for qemu-riscv@nongnu.org; Fri, 19 Apr 2019 22:27:52 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
 	(envelope-from <prvs=0062c52f7=Alistair.Francis@wdc.com>)
-	id 1hHfjB-00043E-NL
-	for qemu-riscv@nongnu.org; Fri, 19 Apr 2019 22:27:42 -0400
-Received: from esa5.hgst.iphmx.com ([216.71.153.144]:8085)
+	id 1hHfjK-00045n-DZ
+	for qemu-riscv@nongnu.org; Fri, 19 Apr 2019 22:27:51 -0400
+Received: from esa5.hgst.iphmx.com ([216.71.153.144]:8108)
 	by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.71) (envelope-from <prvs=0062c52f7=Alistair.Francis@wdc.com>)
-	id 1hHfj8-0003t8-EW; Fri, 19 Apr 2019 22:27:38 -0400
+	id 1hHfjH-00044i-B5; Fri, 19 Apr 2019 22:27:47 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
 	d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
-	t=1555727259; x=1587263259;
+	t=1555727268; x=1587263268;
 	h=from:to:cc:subject:date:message-id:references:
 	in-reply-to:content-transfer-encoding:mime-version;
-	bh=K4Kvrz/j8HNzqz5+WWgZJQxNceE4NLdO3mJ8GLMWWHc=;
-	b=qBCN9QWxZlbN2ALAxajx2l9mpqRZ1Nja5ECmB3XcV4xfBpGVTj0G+ukZ
-	fEo3XR/BBVfvQm2W9ONLWmf29d4yUZ/fpeCcvrzthFiG8pwmwrVoIIfgT
-	cjXjk/0f2Ud13m9okIYKlTSzZMo0GsrjwFn4L/BzxOhNQjdUNmYJ06XUB
-	D8+YZ8lLJkLxKVAzu/nEnJV/A/Yir4sZ2B6Y8li23nosk/d91Nve+iGDw
-	aYGSrqYXicLH5c10TXm/K4yZKuQIdponxdmE1+t8DER4V2tKrrO3kUQTQ
-	F3a4Hn8M/K0A0MDxbzbpTQijfdpgpjVR8cI/sCWDimcy9wlQ5ZYShcymM w==;
-X-IronPort-AV: E=Sophos;i="5.60,372,1549900800"; d="scan'208";a="107617973"
-Received: from mail-bn3nam01lp2052.outbound.protection.outlook.com (HELO
-	NAM01-BN3-obe.outbound.protection.outlook.com) ([104.47.33.52])
-	by ob1.hgst.iphmx.com with ESMTP; 20 Apr 2019 10:27:37 +0800
+	bh=J7I4423ihyshSLrpJhMthxeHoJaEQpRuUgOBKuHYFbI=;
+	b=Ev1FE81JTB3yyZvffp2Bg3I/Lvd/x8bxPiVlINSPvK+GMrAsX0uJVChD
+	2BoBPoVFRvBomT7B+CX7GwtMebtafQCPwk6rlwucqttYVsVejnJ6NUxin
+	cMMzu+UffxwHgOr8e0tJw+MSEZxozXojZLQ+M6Y2t+QAAoRQeQVQMZ1nA
+	l5jGkafe9B2aqiuOngKHLLKtR3yUmdk9RpPia3fZSKk+PdgcW/nDyWuj2
+	nrSon+hSX/wYqqSRfgmagaq1DU2ANQ1lHdA0SAJ4BperNhwWAcUiZsjub
+	hw6qE3ZIxZk/0UCpevcEG8fNgvAPhCBlf5OkLRP1bso8NUu5+P0nJK9DU A==;
+X-IronPort-AV: E=Sophos;i="5.60,372,1549900800"; d="scan'208";a="107617999"
+Received: from mail-bn3nam01lp2056.outbound.protection.outlook.com (HELO
+	NAM01-BN3-obe.outbound.protection.outlook.com) ([104.47.33.56])
+	by ob1.hgst.iphmx.com with ESMTP; 20 Apr 2019 10:27:45 +0800
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=sharedspace.onmicrosoft.com; s=selector1-wdc-com;
 	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=K4Kvrz/j8HNzqz5+WWgZJQxNceE4NLdO3mJ8GLMWWHc=;
-	b=BIJPkPmr99pBoIaCjrStt7BHhGPILMctqv4raCfhT1xqJ4rYi1Zc4+gNsW7gRoNjLJLlwHDn0G27e5xYUwXlfPgGRKcAchdDJs7gK6AFppijWqMyjwGrT6DaxQWMDnxIkX5ZpNJmE4w5fn8LgfgqdhELXsxfYeYu2rdpi89v1+k=
+	bh=J7I4423ihyshSLrpJhMthxeHoJaEQpRuUgOBKuHYFbI=;
+	b=jNX50Kkc5TLhjhAyS7uXZ8bz8jXToGSy5pdHL9umlQX5OXelfPopGon+7S5F8GMDIj0SEPiAqulT0vNoJYWIg63EkC2gzF2ZW4Dsi+2BZM01oqnHKjBMrFeNRUeTS0le9phmbZ23c0G+N5o7RXTSS8295883+T83MoHipIg+pSI=
 Received: from BYAPR04MB4901.namprd04.prod.outlook.com (52.135.232.206) by
 	BYAPR04MB5319.namprd04.prod.outlook.com (20.178.49.208) with Microsoft
 	SMTP
 	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
-	15.20.1813.14; Sat, 20 Apr 2019 02:27:35 +0000
+	15.20.1813.14; Sat, 20 Apr 2019 02:27:44 +0000
 Received: from BYAPR04MB4901.namprd04.prod.outlook.com
 	([fe80::44e8:bd21:17b:348c]) by BYAPR04MB4901.namprd04.prod.outlook.com
 	([fe80::44e8:bd21:17b:348c%4]) with mapi id 15.20.1813.011;
-	Sat, 20 Apr 2019 02:27:35 +0000
+	Sat, 20 Apr 2019 02:27:44 +0000
 From: Alistair Francis <Alistair.Francis@wdc.com>
 To: "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, "qemu-riscv@nongnu.org"
 	<qemu-riscv@nongnu.org>
 CC: "palmer@sifive.com" <palmer@sifive.com>, Alistair Francis
 	<Alistair.Francis@wdc.com>, "alistair23@gmail.com" <alistair23@gmail.com>
-Thread-Topic: [PATCH v1 7/8] target/riscv: Add the HSTATUS register masks
-Thread-Index: AQHU9yCd9DDS05lKtkqdW1tD5SRAVg==
-Date: Sat, 20 Apr 2019 02:27:35 +0000
-Message-ID: <fee652e087d5bed01cccc67950cc49bf05268157.1555727081.git.alistair.francis@wdc.com>
+Thread-Topic: [PATCH v1 8/8] target/riscv: Add the HGATP register masks
+Thread-Index: AQHU9yCiCAsAIdrtYEmKBbky+tM4/g==
+Date: Sat, 20 Apr 2019 02:27:43 +0000
+Message-ID: <b91bacd428706e5cb44e4db83c75f7a03d6fae2b.1555727081.git.alistair.francis@wdc.com>
 References: <cover.1555727081.git.alistair.francis@wdc.com>
 In-Reply-To: <cover.1555727081.git.alistair.francis@wdc.com>
 Accept-Language: en-US
@@ -60,22 +60,22 @@ Content-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
 x-mailer: git-send-email 2.21.0
-x-clientproxiedby: BYAPR08CA0010.namprd08.prod.outlook.com
-	(2603:10b6:a03:100::23) To BYAPR04MB4901.namprd04.prod.outlook.com
+x-clientproxiedby: BYAPR05CA0002.namprd05.prod.outlook.com
+	(2603:10b6:a03:c0::15) To BYAPR04MB4901.namprd04.prod.outlook.com
 	(2603:10b6:a03:4f::14)
 authentication-results: spf=none (sender IP is )
 	smtp.mailfrom=Alistair.Francis@wdc.com; 
 x-ms-exchange-messagesentrepresentingtype: 1
 x-originating-ip: [199.255.44.250]
 x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 76660d64-6af8-48a8-794b-08d6c537bfd6
+x-ms-office365-filtering-correlation-id: 66232298-fecb-4e2e-7b7c-08d6c537c4e5
 x-ms-office365-filtering-ht: Tenant
 x-microsoft-antispam: BCL:0; PCL:0;
 	RULEID:(2390118)(7020095)(4652040)(8989299)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(5600141)(711020)(4605104)(4618075)(2017052603328)(7193020);
 	SRVR:BYAPR04MB5319; 
 x-ms-traffictypediagnostic: BYAPR04MB5319:
 wdcipoutbound: EOP-TRUE
-x-microsoft-antispam-prvs: <BYAPR04MB5319B62BCE3D7454D4F84CD690200@BYAPR04MB5319.namprd04.prod.outlook.com>
+x-microsoft-antispam-prvs: <BYAPR04MB5319526CA5E548A2A384277490200@BYAPR04MB5319.namprd04.prod.outlook.com>
 x-forefront-prvs: 0013079544
 x-forefront-antispam-report: SFV:NSPM;
 	SFS:(10019020)(376002)(366004)(136003)(396003)(346002)(39860400002)(199004)(189003)(50226002)(52116002)(6486002)(14454004)(446003)(6436002)(76176011)(476003)(486006)(3846002)(6116002)(97736004)(2616005)(7736002)(81156014)(8676002)(478600001)(8936002)(72206003)(386003)(6506007)(81166006)(102836004)(26005)(186003)(36756003)(316002)(6512007)(44832011)(53936002)(68736007)(66066001)(118296001)(25786009)(4326008)(305945005)(99286004)(54906003)(2906002)(11346002)(110136005)(2501003)(256004)(64756008)(66446008)(66556008)(73956011)(66946007)(4744005)(66476007)(71200400001)(5660300002)(71190400001)(86362001);
@@ -83,13 +83,13 @@ x-forefront-antispam-report: SFV:NSPM;
 	H:BYAPR04MB4901.namprd04.prod.outlook.com; FPR:; SPF:None;
 	LANG:en; PTR:InfoNoRecords; A:1; MX:1; 
 x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam-message-info: gFFXL5hOWDUW7BkKanWwiVPt+rEeuflfM+ENZ5xxRX2voxUlvE2FkVzYXn4d03ZfsndRLk7zHE2dPIQetXhegc05jvMmiuqRtOBrTckuIzQe4ExmW3sJhciWZVNFMSXuUwOiTfBPQkEtCEqEgD6CoQjwOwXYHpIQxTDStwbFbEctq3bzf4MytWCVxp32BMflRIx8rswAFsyHe+6MTDUyItnt26rklOwDcOhW119PQ0wZk7hwPo4WfmMuiegsV7S2MhyWWiiHaC3lKHRNKjAUekulHeqPtKpaYjHiiOg94lswrH3Iu9YejCAPCSNLtDk9KjkjM4SZiUhvLL2CE7gQMtGWZiSOho4jTIwAN2Yv0Yj6DGkLUjOovWyCW87W7y/h703ZrJ/eWmG09VggMdFAqWqFnMC7XPUJh21oCnI+CSc=
+x-microsoft-antispam-message-info: ooP5CuqNuqBQRrPfyA3Qsuw4Vui5goeMarQdbN2X77LJajD9IXYSLiCYyY/NFo8FuKg9YEwyxJkdX4zvqIXnV6khAQczOItI5axMBzZWm12sMAL/urU7AeyEwZ9dxFueU1X6a1CpqS6uiL3vdzQBfBeQ37BQhGjFeT3z7yGux3d8TonrQIXSnRnr0NvZiL/XQ20UT6E/1iejXxeW8BLslRBWfGyrPzVjZE9RmgGOAU98wH2U56ZKSHUfT/i2tGCYeJNJkyT6wfz3GPxXh0MGle9BCvvGLO2MjvBqUythy2nZmXvKrIYb/O6EOrKYv2NX+2JzRchaJbusJTcrk9PqqLWIFwMxY8zrptH9j52pn63FFJnm9pHQgvsVqNx9K5sIJFHTwia3sKqXVQ9cbFS5TXLT+Cr30ZeBA8YAH9jV8/8=
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 MIME-Version: 1.0
 X-OriginatorOrg: wdc.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 76660d64-6af8-48a8-794b-08d6c537bfd6
-X-MS-Exchange-CrossTenant-originalarrivaltime: 20 Apr 2019 02:27:35.5573 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 66232298-fecb-4e2e-7b7c-08d6c537c4e5
+X-MS-Exchange-CrossTenant-originalarrivaltime: 20 Apr 2019 02:27:43.9032 (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
@@ -97,7 +97,7 @@ X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR04MB5319
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
 X-Received-From: 216.71.153.144
-Subject: [Qemu-riscv] [PATCH v1 7/8] target/riscv: Add the HSTATUS register
+Subject: [Qemu-riscv] [PATCH v1 8/8] target/riscv: Add the HGATP register
  masks
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
@@ -110,25 +110,22 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 20 Apr 2019 02:27:43 -0000
+X-List-Received-Date: Sat, 20 Apr 2019 02:27:52 -0000
 
 U2lnbmVkLW9mZi1ieTogQWxpc3RhaXIgRnJhbmNpcyA8YWxpc3RhaXIuZnJhbmNpc0B3ZGMuY29t
-Pg0KLS0tDQogdGFyZ2V0L3Jpc2N2L2NwdV9iaXRzLmggfCAxOCArKysrKysrKysrKysrKysrKysN
-CiAxIGZpbGUgY2hhbmdlZCwgMTggaW5zZXJ0aW9ucygrKQ0KDQpkaWZmIC0tZ2l0IGEvdGFyZ2V0
-L3Jpc2N2L2NwdV9iaXRzLmggYi90YXJnZXQvcmlzY3YvY3B1X2JpdHMuaA0KaW5kZXggNTJjMjE2
-OTk3Ny4uYTE3OTEzN2JjMSAxMDA2NDQNCi0tLSBhL3RhcmdldC9yaXNjdi9jcHVfYml0cy5oDQor
-KysgYi90YXJnZXQvcmlzY3YvY3B1X2JpdHMuaA0KQEAgLTM4Miw2ICszODIsMjQgQEANCiAjZGVm
-aW5lIFNTVEFUVVNfU0QgU1NUQVRVUzY0X1NEDQogI2VuZGlmDQogDQorLyogaHN0YXR1cyBDU1Ig
-Yml0cyAqLw0KKyNkZWZpbmUgSFNUQVRVU19TUFJWICAgICAgICAgMHgwMDAwMDAwMQ0KKyNkZWZp
-bmUgSFNUQVRVU19TVEwgICAgICAgICAgMHgwMDAwMDA0MA0KKyNkZWZpbmUgSFNUQVRVU19TUFYg
-ICAgICAgICAgMHgwMDAwMDA4MA0KKyNkZWZpbmUgSFNUQVRVU19TUDJQICAgICAgICAgMHgwMDAw
-MDEwMA0KKyNkZWZpbmUgSFNUQVRVU19TUDJWICAgICAgICAgMHgwMDAwMDIwMA0KKyNkZWZpbmUg
-SFNUQVRVU19WVFZNICAgICAgICAgMHgwMDEwMDAwMA0KKyNkZWZpbmUgSFNUQVRVU19WVFNSICAg
-ICAgICAgMHgwMDQwMDAwMA0KKw0KKyNkZWZpbmUgSFNUQVRVUzMyX1dQUkkgICAgICAgMHhGRjhG
-Rjg3RQ0KKyNkZWZpbmUgSFNUQVRVUzY0X1dQUkkgICAgICAgMHhGRkZGRkZGRkZGOEZGODdFVUxM
-DQorDQorI2lmIGRlZmluZWQoVEFSR0VUX1JJU0NWMzIpDQorI2RlZmluZSBIU1RBVFVTX1dQUkkg
-SFNUQVRVUzMyX1dQUkkNCisjZWxpZiBkZWZpbmVkKFRBUkdFVF9SSVNDVjY0KQ0KKyNkZWZpbmUg
-SFNUQVRVU19XUFJJIEhTVEFUVVM2NF9XUFJJDQorI2VuZGlmDQorDQogLyogUHJpdmlsZWdlIG1v
-ZGVzICovDQogI2RlZmluZSBQUlZfVSAwDQogI2RlZmluZSBQUlZfUyAxDQotLSANCjIuMjEuMA0K
-DQo=
+Pg0KLS0tDQogdGFyZ2V0L3Jpc2N2L2NwdV9iaXRzLmggfCAxMSArKysrKysrKysrKw0KIDEgZmls
+ZSBjaGFuZ2VkLCAxMSBpbnNlcnRpb25zKCspDQoNCmRpZmYgLS1naXQgYS90YXJnZXQvcmlzY3Yv
+Y3B1X2JpdHMuaCBiL3RhcmdldC9yaXNjdi9jcHVfYml0cy5oDQppbmRleCBhMTc5MTM3YmMxLi5k
+YzlkNTNkNGJlIDEwMDY0NA0KLS0tIGEvdGFyZ2V0L3Jpc2N2L2NwdV9iaXRzLmgNCisrKyBiL3Rh
+cmdldC9yaXNjdi9jcHVfYml0cy5oDQpAQCAtMjA4LDYgKzIwOCwxNyBAQA0KICNkZWZpbmUgQ1NS
+X0hJREVMRUcgICAgICAgICAweGEwMw0KICNkZWZpbmUgQ1NSX0hHQVRQICAgICAgICAgICAweGE4
+MA0KIA0KKyNpZiBkZWZpbmVkKFRBUkdFVF9SSVNDVjMyKQ0KKyNkZWZpbmUgSEdBVFBfTU9ERSAg
+ICAgICAgICAgU0FUUDMyX01PREUNCisjZGVmaW5lIEhHQVRQX0FTSUQgICAgICAgICAgIFNBVFAz
+Ml9BU0lEDQorI2RlZmluZSBIR0FUUF9QUE4gICAgICAgICAgICBTQVRQMzJfUFBODQorI2VuZGlm
+DQorI2lmIGRlZmluZWQoVEFSR0VUX1JJU0NWNjQpDQorI2RlZmluZSBIR0FUUF9NT0RFICAgICAg
+ICAgICBTQVRQNjRfTU9ERQ0KKyNkZWZpbmUgSEdBVFBfQVNJRCAgICAgICAgICAgU0FUUDY0X0FT
+SUQNCisjZGVmaW5lIEhHQVRQX1BQTiAgICAgICAgICAgIFNBVFA2NF9QUE4NCisjZW5kaWYNCisN
+CiAvKiBQZXJmb3JtYW5jZSBDb3VudGVycyAqLw0KICNkZWZpbmUgQ1NSX01IUE1DT1VOVEVSMyAg
+ICAweGIwMw0KICNkZWZpbmUgQ1NSX01IUE1DT1VOVEVSNCAgICAweGIwNA0KLS0gDQoyLjIxLjAN
+Cg0K
 
