@@ -1,58 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1hHfj8-0006b6-NU
-	for mharc-qemu-riscv@gnu.org; Fri, 19 Apr 2019 22:27:38 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:50693)
+	id 1hHfjF-0006h8-9u
+	for mharc-qemu-riscv@gnu.org; Fri, 19 Apr 2019 22:27:45 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:50720)
 	by lists.gnu.org with esmtp (Exim 4.71)
 	(envelope-from <prvs=0062c52f7=Alistair.Francis@wdc.com>)
-	id 1hHfj6-0006ZE-Rb
-	for qemu-riscv@nongnu.org; Fri, 19 Apr 2019 22:27:37 -0400
+	id 1hHfjC-0006ez-Jk
+	for qemu-riscv@nongnu.org; Fri, 19 Apr 2019 22:27:43 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
 	(envelope-from <prvs=0062c52f7=Alistair.Francis@wdc.com>)
-	id 1hHfj5-0003y3-W7
-	for qemu-riscv@nongnu.org; Fri, 19 Apr 2019 22:27:36 -0400
+	id 1hHfjB-00043E-NL
+	for qemu-riscv@nongnu.org; Fri, 19 Apr 2019 22:27:42 -0400
 Received: from esa5.hgst.iphmx.com ([216.71.153.144]:8085)
 	by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.71) (envelope-from <prvs=0062c52f7=Alistair.Francis@wdc.com>)
-	id 1hHfj2-0003t8-3d; Fri, 19 Apr 2019 22:27:33 -0400
+	id 1hHfj8-0003t8-EW; Fri, 19 Apr 2019 22:27:38 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
 	d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
-	t=1555727253; x=1587263253;
+	t=1555727259; x=1587263259;
 	h=from:to:cc:subject:date:message-id:references:
 	in-reply-to:content-transfer-encoding:mime-version;
-	bh=EyShUaY3YtexDjDwIp1N7ntB/ze11x64g0jH4G3HcN8=;
-	b=NrbmbXK5BFQPyNuvaP3idmNPuZTUNI+5gNEX8LSao4oO65xBag6RvyMw
-	muebDJGGaV4MooaQApTWRcJUjf4+OuHZA6mWmr/E5Ce4s2dER/Tp75pVU
-	mRlyNyJyJYWHGzEboJtvMl7NwuB+JT3c5e+ZqJy39LZ6Qr/MBHfAIPej0
-	MUXsSIC6hBCpKTqDip2DU/tvGGOvoxjlmer7125YhxTtLOMZoN7GUgnwc
-	+U5VuKWhtN4fisG7wHp6v8tgBkF50y1D/6QY0kkxCI/VF/px/JCO5xfi2
-	olEUtQ7MGv/GiKp7cIO+PBdQWAgGoDmlvRfYtZmIonwrXpgpKyCDmiriB w==;
-X-IronPort-AV: E=Sophos;i="5.60,372,1549900800"; d="scan'208";a="107617969"
-Received: from mail-bn3nam01lp2057.outbound.protection.outlook.com (HELO
-	NAM01-BN3-obe.outbound.protection.outlook.com) ([104.47.33.57])
-	by ob1.hgst.iphmx.com with ESMTP; 20 Apr 2019 10:27:28 +0800
+	bh=K4Kvrz/j8HNzqz5+WWgZJQxNceE4NLdO3mJ8GLMWWHc=;
+	b=qBCN9QWxZlbN2ALAxajx2l9mpqRZ1Nja5ECmB3XcV4xfBpGVTj0G+ukZ
+	fEo3XR/BBVfvQm2W9ONLWmf29d4yUZ/fpeCcvrzthFiG8pwmwrVoIIfgT
+	cjXjk/0f2Ud13m9okIYKlTSzZMo0GsrjwFn4L/BzxOhNQjdUNmYJ06XUB
+	D8+YZ8lLJkLxKVAzu/nEnJV/A/Yir4sZ2B6Y8li23nosk/d91Nve+iGDw
+	aYGSrqYXicLH5c10TXm/K4yZKuQIdponxdmE1+t8DER4V2tKrrO3kUQTQ
+	F3a4Hn8M/K0A0MDxbzbpTQijfdpgpjVR8cI/sCWDimcy9wlQ5ZYShcymM w==;
+X-IronPort-AV: E=Sophos;i="5.60,372,1549900800"; d="scan'208";a="107617973"
+Received: from mail-bn3nam01lp2052.outbound.protection.outlook.com (HELO
+	NAM01-BN3-obe.outbound.protection.outlook.com) ([104.47.33.52])
+	by ob1.hgst.iphmx.com with ESMTP; 20 Apr 2019 10:27:37 +0800
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=sharedspace.onmicrosoft.com; s=selector1-wdc-com;
 	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=EyShUaY3YtexDjDwIp1N7ntB/ze11x64g0jH4G3HcN8=;
-	b=fiq5BZtivOhKHtN+qpqO1TpokW9j14fG237bVp8YbCCd3+JIIYcJqnRi1156oT8Sh6jw/aWaZMfaTg19Og8BaepItKMzqePOc+g6LhiGd49C2j9lxrA9drIDTj3kvmvegljdF41G9BHNrsM4MfrGrkcRFk9iqGM4jd2X4UKNWv0=
+	bh=K4Kvrz/j8HNzqz5+WWgZJQxNceE4NLdO3mJ8GLMWWHc=;
+	b=BIJPkPmr99pBoIaCjrStt7BHhGPILMctqv4raCfhT1xqJ4rYi1Zc4+gNsW7gRoNjLJLlwHDn0G27e5xYUwXlfPgGRKcAchdDJs7gK6AFppijWqMyjwGrT6DaxQWMDnxIkX5ZpNJmE4w5fn8LgfgqdhELXsxfYeYu2rdpi89v1+k=
 Received: from BYAPR04MB4901.namprd04.prod.outlook.com (52.135.232.206) by
 	BYAPR04MB5319.namprd04.prod.outlook.com (20.178.49.208) with Microsoft
 	SMTP
 	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
-	15.20.1813.14; Sat, 20 Apr 2019 02:27:27 +0000
+	15.20.1813.14; Sat, 20 Apr 2019 02:27:35 +0000
 Received: from BYAPR04MB4901.namprd04.prod.outlook.com
 	([fe80::44e8:bd21:17b:348c]) by BYAPR04MB4901.namprd04.prod.outlook.com
 	([fe80::44e8:bd21:17b:348c%4]) with mapi id 15.20.1813.011;
-	Sat, 20 Apr 2019 02:27:27 +0000
+	Sat, 20 Apr 2019 02:27:35 +0000
 From: Alistair Francis <Alistair.Francis@wdc.com>
 To: "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, "qemu-riscv@nongnu.org"
 	<qemu-riscv@nongnu.org>
 CC: "palmer@sifive.com" <palmer@sifive.com>, Alistair Francis
 	<Alistair.Francis@wdc.com>, "alistair23@gmail.com" <alistair23@gmail.com>
-Thread-Topic: [PATCH v1 6/8] target/riscv: Add Hypervisor CSR macros
-Thread-Index: AQHU9yCYhwD0w/8RPkqGpcTxuH6BXw==
-Date: Sat, 20 Apr 2019 02:27:26 +0000
-Message-ID: <68ede3d1b281db3709a35c525e21ce1fed8c966a.1555727081.git.alistair.francis@wdc.com>
+Thread-Topic: [PATCH v1 7/8] target/riscv: Add the HSTATUS register masks
+Thread-Index: AQHU9yCd9DDS05lKtkqdW1tD5SRAVg==
+Date: Sat, 20 Apr 2019 02:27:35 +0000
+Message-ID: <fee652e087d5bed01cccc67950cc49bf05268157.1555727081.git.alistair.francis@wdc.com>
 References: <cover.1555727081.git.alistair.francis@wdc.com>
 In-Reply-To: <cover.1555727081.git.alistair.francis@wdc.com>
 Accept-Language: en-US
@@ -60,22 +60,22 @@ Content-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
 x-mailer: git-send-email 2.21.0
-x-clientproxiedby: BYAPR05CA0027.namprd05.prod.outlook.com
-	(2603:10b6:a03:c0::40) To BYAPR04MB4901.namprd04.prod.outlook.com
+x-clientproxiedby: BYAPR08CA0010.namprd08.prod.outlook.com
+	(2603:10b6:a03:100::23) To BYAPR04MB4901.namprd04.prod.outlook.com
 	(2603:10b6:a03:4f::14)
 authentication-results: spf=none (sender IP is )
 	smtp.mailfrom=Alistair.Francis@wdc.com; 
 x-ms-exchange-messagesentrepresentingtype: 1
 x-originating-ip: [199.255.44.250]
 x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 7347cf56-0bd3-42e2-6161-08d6c537bac8
+x-ms-office365-filtering-correlation-id: 76660d64-6af8-48a8-794b-08d6c537bfd6
 x-ms-office365-filtering-ht: Tenant
 x-microsoft-antispam: BCL:0; PCL:0;
 	RULEID:(2390118)(7020095)(4652040)(8989299)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(5600141)(711020)(4605104)(4618075)(2017052603328)(7193020);
 	SRVR:BYAPR04MB5319; 
 x-ms-traffictypediagnostic: BYAPR04MB5319:
 wdcipoutbound: EOP-TRUE
-x-microsoft-antispam-prvs: <BYAPR04MB53191CDC68C330F2B224465190200@BYAPR04MB5319.namprd04.prod.outlook.com>
+x-microsoft-antispam-prvs: <BYAPR04MB5319B62BCE3D7454D4F84CD690200@BYAPR04MB5319.namprd04.prod.outlook.com>
 x-forefront-prvs: 0013079544
 x-forefront-antispam-report: SFV:NSPM;
 	SFS:(10019020)(376002)(366004)(136003)(396003)(346002)(39860400002)(199004)(189003)(50226002)(52116002)(6486002)(14454004)(446003)(6436002)(76176011)(476003)(486006)(3846002)(6116002)(97736004)(2616005)(7736002)(81156014)(8676002)(478600001)(8936002)(72206003)(386003)(6506007)(81166006)(102836004)(26005)(186003)(36756003)(316002)(6512007)(44832011)(53936002)(68736007)(66066001)(118296001)(25786009)(4326008)(305945005)(99286004)(54906003)(2906002)(11346002)(110136005)(2501003)(256004)(64756008)(66446008)(66556008)(73956011)(66946007)(4744005)(66476007)(71200400001)(5660300002)(71190400001)(86362001);
@@ -83,13 +83,13 @@ x-forefront-antispam-report: SFV:NSPM;
 	H:BYAPR04MB4901.namprd04.prod.outlook.com; FPR:; SPF:None;
 	LANG:en; PTR:InfoNoRecords; A:1; MX:1; 
 x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam-message-info: i0B7LyV5X2SyHMMfevsdP51OR9oAcnxy1tIjQ1RD+fWL4CHxYrlxv6c1NXwT7gOp6CKTtVHCFKgGsafRxhLCzo0e78GEng9/dxCPv58/3XrgAuBBUO7D0YJF0d5yEv0xlmKaVcxl4tRhAO9+fgAZHe0hSzHBuMr1Ga+lKibX/7BhPvXo+Eb30Cl7CdrmRDLHrNBcewtazaTx3vO9p4rNBdn3y18N+GpQ9nFZ0kMclfmzMx6Tji0sv36vVyRv2vsqytVop6pBS3Uymt6wO2bt5Sbd/QY2Sz/Sq1lf5HAshFi3Guo5utThZO89mqzHnySlL0+xLjOPrbCHa7fiDi4CFtSPmjNtg6/NYUTiA/iRk8ItNncaDS9KwTWwaDF92OI3JBnd80acMOFiD172LhhJt5r3IqjLV72eJxh1Wp0SruU=
+x-microsoft-antispam-message-info: gFFXL5hOWDUW7BkKanWwiVPt+rEeuflfM+ENZ5xxRX2voxUlvE2FkVzYXn4d03ZfsndRLk7zHE2dPIQetXhegc05jvMmiuqRtOBrTckuIzQe4ExmW3sJhciWZVNFMSXuUwOiTfBPQkEtCEqEgD6CoQjwOwXYHpIQxTDStwbFbEctq3bzf4MytWCVxp32BMflRIx8rswAFsyHe+6MTDUyItnt26rklOwDcOhW119PQ0wZk7hwPo4WfmMuiegsV7S2MhyWWiiHaC3lKHRNKjAUekulHeqPtKpaYjHiiOg94lswrH3Iu9YejCAPCSNLtDk9KjkjM4SZiUhvLL2CE7gQMtGWZiSOho4jTIwAN2Yv0Yj6DGkLUjOovWyCW87W7y/h703ZrJ/eWmG09VggMdFAqWqFnMC7XPUJh21oCnI+CSc=
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 MIME-Version: 1.0
 X-OriginatorOrg: wdc.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7347cf56-0bd3-42e2-6161-08d6c537bac8
-X-MS-Exchange-CrossTenant-originalarrivaltime: 20 Apr 2019 02:27:26.9893 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 76660d64-6af8-48a8-794b-08d6c537bfd6
+X-MS-Exchange-CrossTenant-originalarrivaltime: 20 Apr 2019 02:27:35.5573 (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
@@ -97,7 +97,8 @@ X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR04MB5319
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
 X-Received-From: 216.71.153.144
-Subject: [Qemu-riscv] [PATCH v1 6/8] target/riscv: Add Hypervisor CSR macros
+Subject: [Qemu-riscv] [PATCH v1 7/8] target/riscv: Add the HSTATUS register
+ masks
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -109,25 +110,25 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 20 Apr 2019 02:27:37 -0000
+X-List-Received-Date: Sat, 20 Apr 2019 02:27:43 -0000
 
-QWRkIHRoZSAxLjEwLjEgSHlwZXJ2aXNvciBDU1JzIGFuZCByZW1vdmUgdGhlIDEuOS4xIHNwZWMg
-dmVyc2lvbnMuDQoNClNpZ25lZC1vZmYtYnk6IEFsaXN0YWlyIEZyYW5jaXMgPGFsaXN0YWlyLmZy
-YW5jaXNAd2RjLmNvbT4NCi0tLQ0KIHRhcmdldC9yaXNjdi9jcHVfYml0cy5oIHwgOSArKysrKyst
-LS0NCiAxIGZpbGUgY2hhbmdlZCwgNiBpbnNlcnRpb25zKCspLCAzIGRlbGV0aW9ucygtKQ0KDQpk
-aWZmIC0tZ2l0IGEvdGFyZ2V0L3Jpc2N2L2NwdV9iaXRzLmggYi90YXJnZXQvcmlzY3YvY3B1X2Jp
-dHMuaA0KaW5kZXggZmU3MTY0NzU0Yi4uNTJjMjE2OTk3NyAxMDA2NDQNCi0tLSBhL3RhcmdldC9y
-aXNjdi9jcHVfYml0cy5oDQorKysgYi90YXJnZXQvcmlzY3YvY3B1X2JpdHMuaA0KQEAgLTIwMiw2
-ICsyMDIsMTIgQEANCiAjZGVmaW5lIENTUl9EUEMgICAgICAgICAgICAgMHg3YjENCiAjZGVmaW5l
-IENTUl9EU0NSQVRDSCAgICAgICAgMHg3YjINCiANCisvKiBIcGVydmlzb3IgQ1NScyAqLw0KKyNk
-ZWZpbmUgQ1NSX0hTVEFUVVMgICAgICAgICAweGEwMA0KKyNkZWZpbmUgQ1NSX0hFREVMRUcgICAg
-ICAgICAweGEwMg0KKyNkZWZpbmUgQ1NSX0hJREVMRUcgICAgICAgICAweGEwMw0KKyNkZWZpbmUg
-Q1NSX0hHQVRQICAgICAgICAgICAweGE4MA0KKw0KIC8qIFBlcmZvcm1hbmNlIENvdW50ZXJzICov
-DQogI2RlZmluZSBDU1JfTUhQTUNPVU5URVIzICAgIDB4YjAzDQogI2RlZmluZSBDU1JfTUhQTUNP
-VU5URVI0ICAgIDB4YjA0DQpAQCAtMjkyLDkgKzI5OCw2IEBADQogI2RlZmluZSBDU1JfTUhQTUNP
-VU5URVIzMUggIDB4YjlmDQogDQogLyogTGVnYWN5IEh5cGVydmlzb3IgVHJhcCBTZXR1cCAocHJp
-diB2MS45LjEpICovDQotI2RlZmluZSBDU1JfSFNUQVRVUyAgICAgICAgIDB4MjAwDQotI2RlZmlu
-ZSBDU1JfSEVERUxFRyAgICAgICAgIDB4MjAyDQotI2RlZmluZSBDU1JfSElERUxFRyAgICAgICAg
-IDB4MjAzDQogI2RlZmluZSBDU1JfSElFICAgICAgICAgICAgIDB4MjA0DQogI2RlZmluZSBDU1Jf
-SFRWRUMgICAgICAgICAgIDB4MjA1DQogDQotLSANCjIuMjEuMA0KDQo=
+U2lnbmVkLW9mZi1ieTogQWxpc3RhaXIgRnJhbmNpcyA8YWxpc3RhaXIuZnJhbmNpc0B3ZGMuY29t
+Pg0KLS0tDQogdGFyZ2V0L3Jpc2N2L2NwdV9iaXRzLmggfCAxOCArKysrKysrKysrKysrKysrKysN
+CiAxIGZpbGUgY2hhbmdlZCwgMTggaW5zZXJ0aW9ucygrKQ0KDQpkaWZmIC0tZ2l0IGEvdGFyZ2V0
+L3Jpc2N2L2NwdV9iaXRzLmggYi90YXJnZXQvcmlzY3YvY3B1X2JpdHMuaA0KaW5kZXggNTJjMjE2
+OTk3Ny4uYTE3OTEzN2JjMSAxMDA2NDQNCi0tLSBhL3RhcmdldC9yaXNjdi9jcHVfYml0cy5oDQor
+KysgYi90YXJnZXQvcmlzY3YvY3B1X2JpdHMuaA0KQEAgLTM4Miw2ICszODIsMjQgQEANCiAjZGVm
+aW5lIFNTVEFUVVNfU0QgU1NUQVRVUzY0X1NEDQogI2VuZGlmDQogDQorLyogaHN0YXR1cyBDU1Ig
+Yml0cyAqLw0KKyNkZWZpbmUgSFNUQVRVU19TUFJWICAgICAgICAgMHgwMDAwMDAwMQ0KKyNkZWZp
+bmUgSFNUQVRVU19TVEwgICAgICAgICAgMHgwMDAwMDA0MA0KKyNkZWZpbmUgSFNUQVRVU19TUFYg
+ICAgICAgICAgMHgwMDAwMDA4MA0KKyNkZWZpbmUgSFNUQVRVU19TUDJQICAgICAgICAgMHgwMDAw
+MDEwMA0KKyNkZWZpbmUgSFNUQVRVU19TUDJWICAgICAgICAgMHgwMDAwMDIwMA0KKyNkZWZpbmUg
+SFNUQVRVU19WVFZNICAgICAgICAgMHgwMDEwMDAwMA0KKyNkZWZpbmUgSFNUQVRVU19WVFNSICAg
+ICAgICAgMHgwMDQwMDAwMA0KKw0KKyNkZWZpbmUgSFNUQVRVUzMyX1dQUkkgICAgICAgMHhGRjhG
+Rjg3RQ0KKyNkZWZpbmUgSFNUQVRVUzY0X1dQUkkgICAgICAgMHhGRkZGRkZGRkZGOEZGODdFVUxM
+DQorDQorI2lmIGRlZmluZWQoVEFSR0VUX1JJU0NWMzIpDQorI2RlZmluZSBIU1RBVFVTX1dQUkkg
+SFNUQVRVUzMyX1dQUkkNCisjZWxpZiBkZWZpbmVkKFRBUkdFVF9SSVNDVjY0KQ0KKyNkZWZpbmUg
+SFNUQVRVU19XUFJJIEhTVEFUVVM2NF9XUFJJDQorI2VuZGlmDQorDQogLyogUHJpdmlsZWdlIG1v
+ZGVzICovDQogI2RlZmluZSBQUlZfVSAwDQogI2RlZmluZSBQUlZfUyAxDQotLSANCjIuMjEuMA0K
+DQo=
 
