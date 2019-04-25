@@ -1,66 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1hJjcp-0000CE-Po
-	for mharc-qemu-riscv@gnu.org; Thu, 25 Apr 2019 15:01:39 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:55180)
+	id 1hJmAo-0002Fw-3F
+	for mharc-qemu-riscv@gnu.org; Thu, 25 Apr 2019 17:44:54 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:59554)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1hJjcj-000065-UR
-	for qemu-riscv@nongnu.org; Thu, 25 Apr 2019 15:01:34 -0400
+	(envelope-from <palmer@sifive.com>) id 1hJmAk-0002Dn-1U
+	for qemu-riscv@nongnu.org; Thu, 25 Apr 2019 17:44:51 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1hJjYc-0006iB-S1
-	for qemu-riscv@nongnu.org; Thu, 25 Apr 2019 14:57:19 -0400
-Received: from mail-pf1-x441.google.com ([2607:f8b0:4864:20::441]:46593)
+	(envelope-from <palmer@sifive.com>) id 1hJmAi-00075u-AQ
+	for qemu-riscv@nongnu.org; Thu, 25 Apr 2019 17:44:49 -0400
+Received: from mail-pg1-x542.google.com ([2607:f8b0:4864:20::542]:44757)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1hJjYc-0006eC-Ie
-	for qemu-riscv@nongnu.org; Thu, 25 Apr 2019 14:57:18 -0400
-Received: by mail-pf1-x441.google.com with SMTP id j11so345854pff.13
-	for <qemu-riscv@nongnu.org>; Thu, 25 Apr 2019 11:57:18 -0700 (PDT)
+	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1hJmAh-00074e-VL
+	for qemu-riscv@nongnu.org; Thu, 25 Apr 2019 17:44:48 -0400
+Received: by mail-pg1-x542.google.com with SMTP id z16so482292pgv.11
+	for <qemu-riscv@nongnu.org>; Thu, 25 Apr 2019 14:44:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
 	h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
 	:content-transfer-encoding;
-	bh=ZqUiWIRkd4FGmMptUc+o/kwZ71iZ9LxeQlW+P3BZ/6I=;
-	b=Jxzmo/pIrqKp4pRWy47Qp/Ih9IvLTQE/lS9KFLF8CYMGdIuV3ODvRcEw9ij3xAU4tm
-	EHhd0eSKR36lt60mEp/o+2kiKigLgRTqBoQSaMgLM8yDf9bep98BOF4epxa4fdh4SV3u
-	i4rcdrzwmGLQAjW0cuNWLQ/APKBdcU0IJY9yXRSQoLjZbNQ08/yXyjHxqoEthWhb7vRl
-	Q9LEFHOZR1bpKJwosoE4y4FbLvFJwb80Od4/5AhlZj97PNhJzHqOuXi1LnNyY3JDRmJ9
-	jd2+ir4qjcGd6bgGSJlJlX0PSDnDW6TQU+NGrUFO8sLJAqEMez+YLgkCsg8T1ARdJozX
-	WkDg==
+	bh=eI0sNPeZTXsdITbC8xlF8yKeJGEYAE4gIbaxfs5hKLM=;
+	b=CNYdhoAF68uGPuPEQyYEuUotMhHdZU8koBx4Vjuh1Q3ZWMF4aAazm4nGmceI6XTVro
+	68l5FCJDHzJWNXtCCScF7dwzBj3oyjXXksdE/AdZZorK2+vqxsMbo2+NOwPKH9Vr0akl
+	90SWLVkAi944KqOjVvjk4LzF+2R3Ipt+mPDx8swqJ3bYSxvdGSIcbJjhRA6EUhAF5/B8
+	6kzykKjp+60Z2zDbJKi2gZ2ebDWdF9l7YpQcC7Jr9EU70cyXe9fqLvtMT8tkvfs2qWHz
+	JKVrhZ1JKQtyZbFlD5hEe3X7tyMbNpetjyjNSIOwi3e3l/Tm6WUYRnHMnSgrfdYoKG4I
+	pBoQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
 	:mime-version:content-transfer-encoding;
-	bh=ZqUiWIRkd4FGmMptUc+o/kwZ71iZ9LxeQlW+P3BZ/6I=;
-	b=F2IwBgm4vR3/UzBm6Vt4j6Rvdm5RtbARCptTMqRUjWXnlxvHloOUy/OZ5KsOvZ0guJ
-	NS45MNJlASkbBeikblH/24fS/IuQVlkYFA4qUSqIjK/SHNou5f8R4tklXImqyGhVcEUO
-	Kwj24+Ulu3zJPMIGgHOvEWpFbekQynHrij7ig7WUEFqfnDg4AdlS6b8Vns//mHvU89zT
-	u5zbGlBxgsgKfwCpapKKqxRCZUPXqqAfI1LUTe5Dz2k9hclyaNM7GgWD81ZnxRynWSDG
-	XBu8+QuifXrUyFrKB1IhheXVePr4g2fX+ImaTW4aGm+yBveJQxNJXJMwQFlQPIw7D2Wq
-	QMlw==
-X-Gm-Message-State: APjAAAXrMDQc9mpZWWNMe6vr5y9k0WexPlxdY9CX45RaTczQaGN0IU1w
-	gknIFYqQUe2iJO8UWZRNRrwYtQ==
-X-Google-Smtp-Source: APXvYqw+MzUsHOMRUqj2MyQSQs1lA7IxhmiMtkSD91VKJkahUOvo/AhAAuXgodOG+LUp7nTi+Ru9HA==
-X-Received: by 2002:a63:d34b:: with SMTP id u11mr7061204pgi.385.1556218637335; 
-	Thu, 25 Apr 2019 11:57:17 -0700 (PDT)
+	bh=eI0sNPeZTXsdITbC8xlF8yKeJGEYAE4gIbaxfs5hKLM=;
+	b=TRuS1FsTE12ZKufcmltivRkPcwbErLDrAz/2TiW7x3Ot2uqzNFyB6McflD1DV2TVfj
+	ZihHhgljk/4w5hiM3HbgoBmUfNsOD8eM75qwRxJFCpXDcImxlvQoVDlY1fUPcGwijeRO
+	bMsWF9FCXkRSmAY4pz4dCSlrmJebXVejtcRgMJZcSaR/zMoCY5SM9k31DtWONbLdfPNj
+	0B7zyX+StFgAu2aKrydwiDwVimYEM4SmHGkkvcjXz/D9zDdMxq5aKuHMoOjUfKHvhpVI
+	07OpSkfAJn0SCnUF1Vnav2gNlMsnTFtuwd6FoiRfygQy5zO9tEumUh6Jd4iOvzZfTuAb
+	ZQZA==
+X-Gm-Message-State: APjAAAU9Ggn8lO/UzHsQOAOJiiR/wmfgnv/V2NQkaJRd5o0IKIkyeaLn
+	cLPQtdLeTlwYUZuKkYySNkiSGA==
+X-Google-Smtp-Source: APXvYqzdxcL/ydxr2JUuAlxqDBBK7FWl6XZ7Z7NjjZlDtPajNUnE+nLjg2UDRJ7jjXYH25R4tCCftg==
+X-Received: by 2002:aa7:9148:: with SMTP id 8mr12561595pfi.176.1556228686299; 
+	Thu, 25 Apr 2019 14:44:46 -0700 (PDT)
 Received: from localhost ([134.134.139.92]) by smtp.gmail.com with ESMTPSA id
-	y20sm32537117pfe.188.2019.04.25.11.57.16
+	i10sm54672189pfj.7.2019.04.25.14.44.44
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Thu, 25 Apr 2019 11:57:16 -0700 (PDT)
-Date: Thu, 25 Apr 2019 11:57:16 -0700 (PDT)
-X-Google-Original-Date: Thu, 25 Apr 2019 11:56:10 PDT (-0700)
-In-Reply-To: <CANnJOVHbCGcgnHT3qVbHGFh_Ba0=FqABSoM2SG9ddf-fawwaYg@mail.gmail.com>
-CC: qemu-devel@nongnu.org, Alistair Francis <Alistair.Francis@wdc.com>,
-	sagark@eecs.berkeley.edu,
-	Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, qemu-riscv@nongnu.org
+	Thu, 25 Apr 2019 14:44:45 -0700 (PDT)
+Date: Thu, 25 Apr 2019 14:44:45 -0700 (PDT)
+X-Google-Original-Date: Thu, 25 Apr 2019 14:44:21 PDT (-0700)
+In-Reply-To: <CAKmqyKOZ2Dfhk1HgnJqG1hSHHSpm0bpuE-MK8A0aHNjmcT9=ug@mail.gmail.com>
+CC: fintelia@gmail.com, qemu-devel@nongnu.org,
+	Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+	Alistair Francis <Alistair.Francis@wdc.com>, qemu-riscv@nongnu.org, 
+	sagark@eecs.berkeley.edu
 From: Palmer Dabbelt <palmer@sifive.com>
-To: fintelia@gmail.com
-Message-ID: <mhng-5ee2a059-0cd2-4dc6-8952-2560c4f76161@palmer-si-x1e>
+To: alistair23@gmail.com
+Message-ID: <mhng-54197190-bad4-4193-8ccc-f07679f414ef@palmer-si-x1e>
 Mime-Version: 1.0 (MHng)
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::441
-Subject: Re: [Qemu-riscv] [PATCH] target/riscv: Remove unused include of
- riscv_htif.h for virt board
+X-Received-From: 2607:f8b0:4864:20::542
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH] target/riscv: Expose time
+ CSRs when allowed by [m|s]counteren
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -72,31 +73,209 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Apr 2019 19:01:34 -0000
+X-List-Received-Date: Thu, 25 Apr 2019 21:44:51 -0000
 
-On Wed, 10 Apr 2019 09:29:11 PDT (-0700), fintelia@gmail.com wrote:
-> Unless I'm missing something, the virt board doesn't support HTIF and
-> should not be including this header.
+On Fri, 19 Apr 2019 16:05:35 PDT (-0700), alistair23@gmail.com wrote:
+> On Mon, Apr 15, 2019 at 5:46 PM Jonathan Behrens <fintelia@gmail.com> wrote:
+>>
+>> For any chip that has a CLINT, we want the frequency of the time register and the frequency of the CLINT to match. That frequency, SIFIVE_CLINT_TIMEBASE_FREQ (=10MHz) is currently defined in hw/riscv/sifive_clint.h and so isn't visible to target/riscv/cpu.c where the CPURISCVState is first created. Instead, I first initialize the frequency to a reasonable default (1GHz) and then let the CLINT override the value if one is attached. Phrased differently, the values produced by the `sifive_clint.c: cpu_riscv_read_rtc()` and `csr.c: read_time()` must match, and this is one way of doing that.
 >
-> Jonathan
->
-> Signed-off-by: Jonathan Behrens <fintelia@gmail.com>
-> ---
->  hw/riscv/virt.c | 1 -
->  1 file changed, 1 deletion(-)
->
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index fc4c6b306e..3526463034 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -29,7 +29,6 @@
->  #include "hw/sysbus.h"
->  #include "hw/char/serial.h"
->  #include "target/riscv/cpu.h"
-> -#include "hw/riscv/riscv_htif.h"
->  #include "hw/riscv/riscv_hart.h"
->  #include "hw/riscv/sifive_plic.h"
->  #include "hw/riscv/sifive_clint.h"
+> Ah that seems fine. Can you add a comment in the code to indicate that
+> it will be overwritten later?
 
-Thanks!
+I don't see a v2, did I miss something?
+
+>
+> Alistair
+>
+>>
+>> I'd be open to other suggestions.
+>>
+>> Jonathan
+>>
+>> On Mon, Apr 15, 2019 at 8:23 PM Alistair Francis <alistair23@gmail.com> wrote:
+>>>
+>>> On Fri, Apr 12, 2019 at 12:04 PM Jonathan Behrens <fintelia@gmail.com> wrote:
+>>> >
+>>> > Currently mcounteren.TM acts as though it is hardwired to zero, even though
+>>> > QEMU
+>>> > allows it to be set. This change resolves the issue by allowing reads to the
+>>> > time and timeh control registers when running in a privileged mode where
+>>> > such
+>>> > accesses are allowed.
+>>> >
+>>> > Signed-off-by: Jonathan Behrens <fintelia@gmail.com>
+>>> > ---
+>>> >  hw/riscv/sifive_clint.c |  1 +
+>>> >  target/riscv/cpu.c      | 14 ++++++++++++++
+>>> >  target/riscv/cpu.h      |  2 ++
+>>> >  target/riscv/csr.c      | 17 +++++++++++------
+>>> >  4 files changed, 28 insertions(+), 6 deletions(-)
+>>> >
+>>> > diff --git a/hw/riscv/sifive_clint.c b/hw/riscv/sifive_clint.c
+>>> > index d4c159e937..3ad4fe6139 100644
+>>> > --- a/hw/riscv/sifive_clint.c
+>>> > +++ b/hw/riscv/sifive_clint.c
+>>> > @@ -237,6 +237,7 @@ DeviceState *sifive_clint_create(hwaddr addr, hwaddr
+>>> > size, uint32_t num_harts,
+>>> >          env->timer = timer_new_ns(QEMU_CLOCK_VIRTUAL,
+>>> >                                    &sifive_clint_timer_cb, cpu);
+>>> >          env->timecmp = 0;
+>>> > +        env->time_freq = SIFIVE_CLINT_TIMEBASE_FREQ;
+>>>
+>>> Why do you need to set this here?
+>>>
+>>> Alistair
+>>>
+>>> >      }
+>>> >
+>>> >      DeviceState *dev = qdev_create(NULL, TYPE_SIFIVE_CLINT);
+>>> > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+>>> > index d61bce6d55..ff17d54691 100644
+>>> > --- a/target/riscv/cpu.c
+>>> > +++ b/target/riscv/cpu.c
+>>> > @@ -103,12 +103,20 @@ static void set_resetvec(CPURISCVState *env, int
+>>> > resetvec)
+>>> >  #endif
+>>> >  }
+>>> >
+>>> > +static void set_time_freq(CPURISCVState *env, uint64_t freq)
+>>> > +{
+>>> > +#ifndef CONFIG_USER_ONLY
+>>> > +    env->time_freq = freq;
+>>> > +#endif
+>>> > +}
+>>> > +
+>>> >  static void riscv_any_cpu_init(Object *obj)
+>>> >  {
+>>> >      CPURISCVState *env = &RISCV_CPU(obj)->env;
+>>> >      set_misa(env, RVXLEN | RVI | RVM | RVA | RVF | RVD | RVC | RVU);
+>>> >      set_versions(env, USER_VERSION_2_02_0, PRIV_VERSION_1_10_0);
+>>> >      set_resetvec(env, DEFAULT_RSTVEC);
+>>> > +    set_time_freq(env, NANOSECONDS_PER_SECOND);
+>>> >  }
+>>> >
+>>> >  #if defined(TARGET_RISCV32)
+>>> > @@ -121,6 +129,7 @@ static void rv32gcsu_priv1_09_1_cpu_init(Object *obj)
+>>> >      set_resetvec(env, DEFAULT_RSTVEC);
+>>> >      set_feature(env, RISCV_FEATURE_MMU);
+>>> >      set_feature(env, RISCV_FEATURE_PMP);
+>>> > +    set_time_freq(env, NANOSECONDS_PER_SECOND);
+>>> >  }
+>>> >
+>>> >  static void rv32gcsu_priv1_10_0_cpu_init(Object *obj)
+>>> > @@ -131,6 +140,7 @@ static void rv32gcsu_priv1_10_0_cpu_init(Object *obj)
+>>> >      set_resetvec(env, DEFAULT_RSTVEC);
+>>> >      set_feature(env, RISCV_FEATURE_MMU);
+>>> >      set_feature(env, RISCV_FEATURE_PMP);
+>>> > +    set_time_freq(env, NANOSECONDS_PER_SECOND);
+>>> >  }
+>>> >
+>>> >  static void rv32imacu_nommu_cpu_init(Object *obj)
+>>> > @@ -140,6 +150,7 @@ static void rv32imacu_nommu_cpu_init(Object *obj)
+>>> >      set_versions(env, USER_VERSION_2_02_0, PRIV_VERSION_1_10_0);
+>>> >      set_resetvec(env, DEFAULT_RSTVEC);
+>>> >      set_feature(env, RISCV_FEATURE_PMP);
+>>> > +    set_time_freq(env, NANOSECONDS_PER_SECOND);
+>>> >  }
+>>> >
+>>> >  #elif defined(TARGET_RISCV64)
+>>> > @@ -152,6 +163,7 @@ static void rv64gcsu_priv1_09_1_cpu_init(Object *obj)
+>>> >      set_resetvec(env, DEFAULT_RSTVEC);
+>>> >      set_feature(env, RISCV_FEATURE_MMU);
+>>> >      set_feature(env, RISCV_FEATURE_PMP);
+>>> > +    set_time_freq(env, NANOSECONDS_PER_SECOND);
+>>> >  }
+>>> >
+>>> >  static void rv64gcsu_priv1_10_0_cpu_init(Object *obj)
+>>> > @@ -162,6 +174,7 @@ static void rv64gcsu_priv1_10_0_cpu_init(Object *obj)
+>>> >      set_resetvec(env, DEFAULT_RSTVEC);
+>>> >      set_feature(env, RISCV_FEATURE_MMU);
+>>> >      set_feature(env, RISCV_FEATURE_PMP);
+>>> > +    set_time_freq(env, NANOSECONDS_PER_SECOND);
+>>> >  }
+>>> >
+>>> >  static void rv64imacu_nommu_cpu_init(Object *obj)
+>>> > @@ -171,6 +184,7 @@ static void rv64imacu_nommu_cpu_init(Object *obj)
+>>> >      set_versions(env, USER_VERSION_2_02_0, PRIV_VERSION_1_10_0);
+>>> >      set_resetvec(env, DEFAULT_RSTVEC);
+>>> >      set_feature(env, RISCV_FEATURE_PMP);
+>>> > +    set_time_freq(env, NANOSECONDS_PER_SECOND);
+>>> >  }
+>>> >
+>>> >  #endif
+>>> > diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+>>> > index 20bce8742e..67b1769ad3 100644
+>>> > --- a/target/riscv/cpu.h
+>>> > +++ b/target/riscv/cpu.h
+>>> > @@ -173,7 +173,9 @@ struct CPURISCVState {
+>>> >      /* temporary htif regs */
+>>> >      uint64_t mfromhost;
+>>> >      uint64_t mtohost;
+>>> > +
+>>> >      uint64_t timecmp;
+>>> > +    uint64_t time_freq;
+>>> >
+>>> >      /* physical memory protection */
+>>> >      pmp_table_t pmp_state;
+>>> > diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+>>> > index e1d91b6c60..6083c782a1 100644
+>>> > --- a/target/riscv/csr.c
+>>> > +++ b/target/riscv/csr.c
+>>> > @@ -191,22 +191,31 @@ static int read_instreth(CPURISCVState *env, int
+>>> > csrno, target_ulong *val)
+>>> >  }
+>>> >  #endif /* TARGET_RISCV32 */
+>>> >
+>>> > -#if defined(CONFIG_USER_ONLY)
+>>> >  static int read_time(CPURISCVState *env, int csrno, target_ulong *val)
+>>> >  {
+>>> > +#if !defined(CONFIG_USER_ONLY)
+>>> > +    *val = muldiv64(qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL),
+>>> > +                    env->time_freq, NANOSECONDS_PER_SECOND);
+>>> > +#else
+>>> >      *val = cpu_get_host_ticks();
+>>> > +#endif
+>>> >      return 0;
+>>> >  }
+>>> >
+>>> >  #if defined(TARGET_RISCV32)
+>>> >  static int read_timeh(CPURISCVState *env, int csrno, target_ulong *val)
+>>> >  {
+>>> > +#if !defined(CONFIG_USER_ONLY)
+>>> > +    *val = muldiv64(qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL),
+>>> > +                    env->time_freq, NANOSECONDS_PER_SECOND) >> 32;
+>>> > +#else
+>>> >      *val = cpu_get_host_ticks() >> 32;
+>>> > +#endif
+>>> >      return 0;
+>>> >  }
+>>> >  #endif
+>>> >
+>>> > -#else /* CONFIG_USER_ONLY */
+>>> > +#if !defined(CONFIG_USER_ONLY)
+>>> >
+>>> >  /* Machine constants */
+>>> >
+>>> > @@ -854,14 +863,10 @@ static riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =
+>>> > {
+>>> >      [CSR_INSTRETH] =            { ctr,
+>>> > read_instreth                       },
+>>> >  #endif
+>>> >
+>>> > -    /* User-level time CSRs are only available in linux-user
+>>> > -     * In privileged mode, the monitor emulates these CSRs */
+>>> > -#if defined(CONFIG_USER_ONLY)
+>>> >      [CSR_TIME] =                { ctr,
+>>> > read_time                           },
+>>> >  #if defined(TARGET_RISCV32)
+>>> >      [CSR_TIMEH] =               { ctr,
+>>> > read_timeh                          },
+>>> >  #endif
+>>> > -#endif
+>>> >
+>>> >  #if !defined(CONFIG_USER_ONLY)
+>>> >      /* Machine Timers and Counters */
+>>> > --
+>>> > 2.20.1
 
