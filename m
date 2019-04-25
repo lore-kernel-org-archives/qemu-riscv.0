@@ -1,65 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1hJgrZ-0000y5-9L
-	for mharc-qemu-riscv@gnu.org; Thu, 25 Apr 2019 12:04:41 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:44597)
+	id 1hJgrb-0000zz-Eh
+	for mharc-qemu-riscv@gnu.org; Thu, 25 Apr 2019 12:04:44 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:44578)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1hJgrV-0000wD-Jn
-	for qemu-riscv@nongnu.org; Thu, 25 Apr 2019 12:04:39 -0400
+	(envelope-from <palmer@sifive.com>) id 1hJgrT-0000uM-L1
+	for qemu-riscv@nongnu.org; Thu, 25 Apr 2019 12:04:40 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1hJgrT-0002aZ-Ks
-	for qemu-riscv@nongnu.org; Thu, 25 Apr 2019 12:04:37 -0400
-Received: from mail-pf1-x441.google.com ([2607:f8b0:4864:20::441]:39837)
-	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1hJgrR-0002DL-L6
+	(envelope-from <palmer@sifive.com>) id 1hJgrO-0002KO-Mi
 	for qemu-riscv@nongnu.org; Thu, 25 Apr 2019 12:04:35 -0400
-Received: by mail-pf1-x441.google.com with SMTP id i17so132849pfo.6
-	for <qemu-riscv@nongnu.org>; Thu, 25 Apr 2019 09:04:27 -0700 (PDT)
+Received: from mail-pl1-x642.google.com ([2607:f8b0:4864:20::642]:38598)
+	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1hJgrK-0002AF-No
+	for qemu-riscv@nongnu.org; Thu, 25 Apr 2019 12:04:26 -0400
+Received: by mail-pl1-x642.google.com with SMTP id f36so20710plb.5
+	for <qemu-riscv@nongnu.org>; Thu, 25 Apr 2019 09:04:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
 	h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
 	:content-transfer-encoding;
-	bh=nhi46nyzqGvJUsRpUIwXn4Ih230PeA5yaDI3zHPp7Ds=;
-	b=BmJtYZ8J/xD6ihOgyyLGqo61mqPXKAlGpeCk8eMy3BpSMGG2POxmqyAU9N+CSUs7KL
-	8nMAsCjfk8bOCIer2qJCMMc3QD3UVRVHWOzyWTs11A++/MWBVHa09Gjmu9YnQv0OV3Yd
-	4Tc1Sw57j/QoDOWyWi37a6blUJTV0WLMPNtD/V2z7y8VrfD6C3sWrcz5l1cz53B/y/qM
-	ygZgAsk8/gs98MVSfYHMLxHOBQ5cY2BWGyAhnfCfWVj1Wk5kD+vhoCd1l2GFIOiZGzy6
-	Xo9vTJvqXK3xqaEDMS95rcuNe7C9TTNX28rCID6VhlzLG6SQThxOTZgnOjupQ8CcMceT
-	FlZA==
+	bh=hbMQ4FSCnBHERd/qG1GdGJuyGJ/ZShaDwSzsRdmQTiQ=;
+	b=CqA8UpBbjWnuH44g2YHPzKYVPgrybZaxWUPxtOCpmO69nL45pUUfIw2TwC/+9PDCAx
+	DPT1G7uRjCME2FIp5070wwh5PXLa/e62zvvGH9aqrR6EMap+VLZdtb2EkpdDiGBrHYci
+	mvMvUqLscelog88jCxBsZnxVc7fZLohymn+rYVKINX+cgiBeuCPIJrIlnsFVORZPIXiG
+	lDyiOetPvO4zGLwVhxCC7C8fKn9PvwiMq0/3aIUrrcZPsX0S3Io9yWEw+nxbcUgd1jLR
+	BdzlAiwN8UoWd5364ySkth7Ga+UfKHGyR9I5Ely0OTSb/W7ETTgMdhzXDmHpKilOPLVe
+	tllQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
 	:mime-version:content-transfer-encoding;
-	bh=nhi46nyzqGvJUsRpUIwXn4Ih230PeA5yaDI3zHPp7Ds=;
-	b=YlYOHXQ1YxLAsL2/r/3QJKVRpqlGBGumTNwsBkpy/MsadEnGXvQQI8GzkSkY4GQ3dR
-	9aXn7wEDbtPi+FmlgiWvCKc0StKCacaBWlfk0AYqj5ZcQPL5u6q/JvoMjl6eQGxvZQHw
-	+RhVOw9rLryw0pkTg4yxQAc4L5SLz2rIzvYkn+bTmTzm6vD6Gn9OgoyCpR0cDLtx9dID
-	8/LVqzvdiEB70O3rof9vBl8qOj514yTTc/HpnC10rAIgcw8JXTp7THg2EhwMLmxK/3xq
-	fitEoMpX1ZeuQtjDkO9f4sN8JnDvff2OW5MeSdvKGV1fCbnsUXTZAJ0GY7tp8iJM0hWZ
-	OOhg==
-X-Gm-Message-State: APjAAAWYEYhHwza1E7kh8SpbJzz0hy2zXYRByNvzZQCj86bEBHzV+5tA
-	0kp41rh0hODhk42gMEGLiWMIpg==
-X-Google-Smtp-Source: APXvYqyIlxn0wfwgG/0VZcBZRmVPftZZeAGxbl4jWf0vnZTBM0WfYIenJQxdICDbQDiZ5BpSsFywlA==
-X-Received: by 2002:a63:d84a:: with SMTP id k10mr37587766pgj.441.1556208266774;
-	Thu, 25 Apr 2019 09:04:26 -0700 (PDT)
-Received: from localhost ([134.134.139.92]) by smtp.gmail.com with ESMTPSA id
-	a80sm46498455pfj.61.2019.04.25.09.04.25
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	bh=hbMQ4FSCnBHERd/qG1GdGJuyGJ/ZShaDwSzsRdmQTiQ=;
+	b=Ba/8kAzBZzANL1Wr84BdhticHjVMaxTWa/rWrVuix/zudPM027BrQvR9bvhrNJ79Dz
+	YC1oaeX/nfshVeGkayZoHDMhSYFDxnEuMJwU9Hd68wIgbHwr8prKeAZdwZL7/BY/sWwn
+	XIPYI9w0iopUl8oeTWZk++h1EWeMUpeZNuqLhKv0gJEvjqsD80KUnYPY3TZG737Dfhro
+	wOqWB0NW3bg+Wx6/6L0cUvGoClQYynC4ukql1C5OkN9+DIWT+oMMrwbQ8hWuIasNsux3
+	Sk2Kb7wiqbXJITzGS6mJHysVQXogEriQRe6eT81IA0o5sfv1uo5s66GZUUBRop+8gK/b
+	dr/w==
+X-Gm-Message-State: APjAAAWCkZtRN+Q9YzMr9/Zr2DItIQuQsFjZDBSNnWr4L5bnEDojGPyU
+	2+SVExHW1UUcvIqRW2MPUs8Ofw==
+X-Google-Smtp-Source: APXvYqyW/myEZ/iKAutmmOeKPlPAkiRbLSlIJjwPjbG+ZMwKurqL3URMtgR12nSe535njgFx1qUf1Q==
+X-Received: by 2002:a17:902:bd4b:: with SMTP id
+	b11mr39673495plx.68.1556208265104; 
 	Thu, 25 Apr 2019 09:04:25 -0700 (PDT)
-Date: Thu, 25 Apr 2019 09:04:25 -0700 (PDT)
-X-Google-Original-Date: Thu, 25 Apr 2019 08:58:24 PDT (-0700)
-In-Reply-To: <20190401031155.21293-1-richard.henderson@linaro.org>
+Received: from localhost ([134.134.139.92]) by smtp.gmail.com with ESMTPSA id
+	a10sm29566912pfc.21.2019.04.25.09.04.23
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Thu, 25 Apr 2019 09:04:24 -0700 (PDT)
+Date: Thu, 25 Apr 2019 09:04:24 -0700 (PDT)
+X-Google-Original-Date: Thu, 25 Apr 2019 08:51:08 PDT (-0700)
+In-Reply-To: <20190401031155.21293-9-richard.henderson@linaro.org>
 CC: qemu-devel@nongnu.org, Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
 	Alistair Francis <Alistair.Francis@wdc.com>, qemu-riscv@nongnu.org
 From: Palmer Dabbelt <palmer@sifive.com>
 To: richard.henderson@linaro.org
-Message-ID: <mhng-f96f6f0d-cec7-477e-96c8-af5485b43bc7@palmer-si-x1e>
+Message-ID: <mhng-a0bb1fb9-5aa1-4354-8935-43c8b85dec5b@palmer-si-x1e>
 Mime-Version: 1.0 (MHng)
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::441
-Subject: Re: [Qemu-riscv] [PATCH for-4.1 0/8] target/riscv: decodetree
- improvments
+X-Received-From: 2607:f8b0:4864:20::642
+Subject: Re: [Qemu-riscv] [PATCH for-4.1 8/8] target/riscv: Remove spaces
+ from register names
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -73,45 +74,44 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Thu, 25 Apr 2019 16:04:40 -0000
 
-On Sun, 31 Mar 2019 20:11:47 PDT (-0700), richard.henderson@linaro.org wrote:
-> There's new support in decodetree for pattern groups.
-> I believe that patch 5, or something close to it, was
-> posted as an RFC as part of the original pattern group
-> patch set, but this cleans that up further.
+On Sun, 31 Mar 2019 20:11:55 PDT (-0700), richard.henderson@linaro.org wrote:
+> These extra spaces make the "-d op" dump look weird.
 >
+> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+> ---
+>  target/riscv/cpu.c | 16 ++++++++--------
+>  1 file changed, 8 insertions(+), 8 deletions(-)
 >
-> r~
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index d61bce6d55..624528efb5 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -29,17 +29,17 @@
+>  static const char riscv_exts[26] = "IEMAFDQCLBJTPVNSUHKORWXYZG";
 >
+>  const char * const riscv_int_regnames[] = {
+> -  "zero", "ra  ", "sp  ", "gp  ", "tp  ", "t0  ", "t1  ", "t2  ",
+> -  "s0  ", "s1  ", "a0  ", "a1  ", "a2  ", "a3  ", "a4  ", "a5  ",
+> -  "a6  ", "a7  ", "s2  ", "s3  ", "s4  ", "s5  ", "s6  ", "s7  ",
+> -  "s8  ", "s9  ", "s10 ", "s11 ", "t3  ", "t4  ", "t5  ", "t6  "
+> +  "zero", "ra", "sp",  "gp",  "tp", "t0", "t1", "t2",
+> +  "s0",   "s1", "a0",  "a1",  "a2", "a3", "a4", "a5",
+> +  "a6",   "a7", "s2",  "s3",  "s4", "s5", "s6", "s7",
+> +  "s8",   "s9", "s10", "s11", "t3", "t4", "t5", "t6"
+>  };
 >
-> Richard Henderson (8):
->   target/riscv: Name the argument sets for all of insn32 formats
->   target/riscv: Use --static-decode for decodetree
->   target/riscv: Merge argument sets for insn32 and insn16
->   target/riscv: Merge argument decode for RVC shifti
->   target/riscv: Use pattern groups in insn16.decode
->   target/riscv: Split RVC32 and RVC64 insns into separate files
->   target/riscv: Split gen_arith_imm into functional and temp
->   target/riscv: Remove spaces from register names
+>  const char * const riscv_fpr_regnames[] = {
+> -  "ft0 ", "ft1 ", "ft2 ", "ft3 ", "ft4 ", "ft5 ", "ft6 ",  "ft7 ",
+> -  "fs0 ", "fs1 ", "fa0 ", "fa1 ", "fa2 ", "fa3 ", "fa4 ",  "fa5 ",
+> -  "fa6 ", "fa7 ", "fs2 ", "fs3 ", "fs4 ", "fs5 ", "fs6 ",  "fs7 ",
+> -  "fs8 ", "fs9 ", "fs10", "fs11", "ft8 ", "ft9 ", "ft10",  "ft11"
+> +  "ft0", "ft1", "ft2",  "ft3",  "ft4", "ft5", "ft6",  "ft7",
+> +  "fs0", "fs1", "fa0",  "fa1",  "fa2", "fa3", "fa4",  "fa5",
+> +  "fa6", "fa7", "fs2",  "fs3",  "fs4", "fs5", "fs6",  "fs7",
+> +  "fs8", "fs9", "fs10", "fs11", "ft8", "ft9", "ft10", "ft11"
+>  };
 >
->  target/riscv/cpu.c                      |  16 +-
->  target/riscv/insn_trans/trans_rvc.inc.c | 347 ------------------------
->  target/riscv/insn_trans/trans_rvi.inc.c |  20 +-
->  target/riscv/translate.c                |  40 ++-
->  target/riscv/Makefile.objs              |  15 +-
->  target/riscv/insn16-32.decode           |  28 ++
->  target/riscv/insn16-64.decode           |  30 ++
->  target/riscv/insn16.decode              | 154 ++++++-----
->  target/riscv/insn32.decode              |  10 +-
->  9 files changed, 205 insertions(+), 455 deletions(-)
->  delete mode 100644 target/riscv/insn_trans/trans_rvc.inc.c
->  create mode 100644 target/riscv/insn16-32.decode
->  create mode 100644 target/riscv/insn16-64.decode
+>  const char * const riscv_excp_names[] = {
 
-Thanks!  I'm happy taking this as it stands, since all those decode issues I
-pointed out aren't regressions in this patch set.  Let me know if you want to
-fix those or if you want me to -- as you can probably tell my email queue is a
-bit long... :)
-
-I've dropped this on my integration branch, but I probably won't submit a pull
-for a week or so.
+Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
 
