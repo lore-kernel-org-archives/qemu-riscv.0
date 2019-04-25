@@ -1,65 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1hJgrR-0000sO-Jy
-	for mharc-qemu-riscv@gnu.org; Thu, 25 Apr 2019 12:04:33 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:44526)
+	id 1hJgrS-0000td-Rg
+	for mharc-qemu-riscv@gnu.org; Thu, 25 Apr 2019 12:04:34 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:44541)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1hJgrO-0000qh-OX
-	for qemu-riscv@nongnu.org; Thu, 25 Apr 2019 12:04:32 -0400
+	(envelope-from <palmer@sifive.com>) id 1hJgrQ-0000rc-JD
+	for qemu-riscv@nongnu.org; Thu, 25 Apr 2019 12:04:33 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <palmer@sifive.com>) id 1hJgrI-00028g-RC
-	for qemu-riscv@nongnu.org; Thu, 25 Apr 2019 12:04:28 -0400
-Received: from mail-pg1-x543.google.com ([2607:f8b0:4864:20::543]:41737)
+	(envelope-from <palmer@sifive.com>) id 1hJgrK-0002CC-SB
+	for qemu-riscv@nongnu.org; Thu, 25 Apr 2019 12:04:30 -0400
+Received: from mail-pf1-x443.google.com ([2607:f8b0:4864:20::443]:35892)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1hJgrG-00023r-PD
-	for qemu-riscv@nongnu.org; Thu, 25 Apr 2019 12:04:22 -0400
-Received: by mail-pg1-x543.google.com with SMTP id f6so64557pgs.8
-	for <qemu-riscv@nongnu.org>; Thu, 25 Apr 2019 09:04:22 -0700 (PDT)
+	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1hJgrI-00026L-T0
+	for qemu-riscv@nongnu.org; Thu, 25 Apr 2019 12:04:26 -0400
+Received: by mail-pf1-x443.google.com with SMTP id z5so141420pfn.3
+	for <qemu-riscv@nongnu.org>; Thu, 25 Apr 2019 09:04:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
 	h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
 	:content-transfer-encoding;
-	bh=DMilgU5pWVXVJqyQKg6DLOpKw13hMJzJvpmksOKlyeI=;
-	b=VLVmDRyfhK5PEOpIzU42x4VYbbJzTmHO6rsuU2e3+W8cyGwrtXSyO7xonbd+DSIRqx
-	eek5N2cbqkjafGokW1Hm+PLzAjuh+y6WmT9oQv8i0r48AJAeG0acH5NQal7mL+vDUWW6
-	GH7ndf1ltX8QJhXyPJf2AefkRzq4VXpczHVclQdbJTjcNc/1d37hkOBzpskif6OmagdZ
-	pFzQ/D6G6JxqMmz/SsB5gMTTe01SVsm+dBSedGsxsYHXybgMIOdRR4iNWdqUI7jhSKLG
-	FhIwrtatPfZk+c8BWK4TJ7o/8H0M/Idu7tsQOM6eq8jIDTOVXPUTWEIH1pON1BNVqcBP
-	Y/CQ==
+	bh=8j4EQ+z4JZAjNtM6a+zyFrsMsBg4l1V04NkmZnAwjo8=;
+	b=ESyql5DsvSimatErQK3eD8CJKnVmiU7vQL6i3JS6r5b8nMTS7p+FRp0SSbTi5nkFdI
+	1794lqTCzs+1pWFcCCjvnWFKE9L27U3BESCe996RoraN2XFfQzCZyIVMRuI+zclC6pta
+	FhUjOzGR6JjymAMdJ/aKcpFQIuVZCKI5ZEYuVI0HtlgkdeGxcnD5JTH4NdDYfBO1F4Sb
+	IquiS/bieV76SQsDz4FHaFLjda+BGu8L2MiAvpyB2BbPDjwgfUFm7TcsViNZAXz9ccoX
+	rYsFauaEaZkCfR2T9ZRi/wlyLduZ9pJRAliBjwfQzMneqiejwERQzjB0UptJMtX8Wjlf
+	rtjQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
 	:mime-version:content-transfer-encoding;
-	bh=DMilgU5pWVXVJqyQKg6DLOpKw13hMJzJvpmksOKlyeI=;
-	b=X6IsN+dEIpPXjhxle++NJoeVUr0IX1S5ygaqzl+LkDYu9ZLN6inTFMGfD9CjDaTytK
-	UZB8LzawbF9056Pq36s7wOb7fjvmUyjVjDwpAjtgfhHt0vDeGiv1YFLeBC+hf/Arht4r
-	mBCilzLbIIYqC3L6iyuB/axnnAhKk1whgMwwVBRESWKSEUtoea0BfCB4zR7Pa0inxHvr
-	WflzvV+89oUnZTrz7oXdrZxZErva0UZQ33h8ImPFUHwAn035ADzDA0IvzpjIHP3TC1ja
-	3bnTStzqrZm9LgLWaAL31jBiYsNLRxkv04xXYLRNpe0NJAo027CZZEUfUJBpW4P0amBb
-	XHBw==
-X-Gm-Message-State: APjAAAVyzAIjG6Jx9OrMlNeFaiGYw3QwSYdjrFYWapaykFebn8VjrO4d
-	XZozDP+QvEiq82nB70m3iKsDpw==
-X-Google-Smtp-Source: APXvYqwL/0aTLkMDJOKcIHsUQ1qsg0RYtqFH4TDQPTS3ZN1wjB7cEJgnilEKWpM+Hc7i1TEHGffqYg==
-X-Received: by 2002:aa7:91c8:: with SMTP id z8mr41870569pfa.110.1556208261650; 
-	Thu, 25 Apr 2019 09:04:21 -0700 (PDT)
+	bh=8j4EQ+z4JZAjNtM6a+zyFrsMsBg4l1V04NkmZnAwjo8=;
+	b=rnJTUHNlFZ6XitZpLhrusDrKYB88UlIvjDFNLDrCt/+pDUrCxNWONUJg+odtm9gdWi
+	2sx45g3uiozrjPcckQN/xPDGWLgUUXLopGZ8efugIn0/9WeUADkdpqkrD5L9C9uo+D1x
+	HpApbErwRaBJ7DHPKpzQzaqHPNaHyKr579vzU77a2guPqkrRb+pfz4wO5yVPnfvLEoG5
+	GkZ0df6wvQLby9avguPKX8MxVBJ5DaiLmLIlKmzwc6Ta3iXm2ITlgJp+njFCr00dEYLu
+	wJU2icvPfoAtwrpAvNrq5OEiupTBMMP87bpRCa+Xxru6VOkLrZ4oXkR31UcWpA8UdPbQ
+	1EoQ==
+X-Gm-Message-State: APjAAAVoK576zJpUaduFfSdoHJdzFChAA4kPikv1jjOY1fBNO+QfE1f8
+	JfK0+EU+y1nD1zsEt4lCSxqQgA==
+X-Google-Smtp-Source: APXvYqx8xSCTG1XGFxk7zRdEm709s1kOD+8eYtuOJq4wgWs1k/QRARRUGw1TqDhH6+o3BnN4JcYqcw==
+X-Received: by 2002:a65:6091:: with SMTP id t17mr37648271pgu.328.1556208263357;
+	Thu, 25 Apr 2019 09:04:23 -0700 (PDT)
 Received: from localhost ([134.134.139.92]) by smtp.gmail.com with ESMTPSA id
-	x66sm56203006pfb.78.2019.04.25.09.04.20
+	j19sm30173344pfh.41.2019.04.25.09.04.22
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Thu, 25 Apr 2019 09:04:20 -0700 (PDT)
-Date: Thu, 25 Apr 2019 09:04:20 -0700 (PDT)
-X-Google-Original-Date: Thu, 25 Apr 2019 08:19:57 PDT (-0700)
-In-Reply-To: <20190401031155.21293-7-richard.henderson@linaro.org>
+	Thu, 25 Apr 2019 09:04:22 -0700 (PDT)
+Date: Thu, 25 Apr 2019 09:04:22 -0700 (PDT)
+X-Google-Original-Date: Thu, 25 Apr 2019 08:50:30 PDT (-0700)
+In-Reply-To: <20190401031155.21293-8-richard.henderson@linaro.org>
 CC: qemu-devel@nongnu.org, Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
 	Alistair Francis <Alistair.Francis@wdc.com>, qemu-riscv@nongnu.org
 From: Palmer Dabbelt <palmer@sifive.com>
 To: richard.henderson@linaro.org
-Message-ID: <mhng-4618def7-9294-4a34-bed4-1c8d94531e91@palmer-si-x1e>
+Message-ID: <mhng-70de221d-edd7-4a93-8ab5-e5715e97a049@palmer-si-x1e>
 Mime-Version: 1.0 (MHng)
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::543
-Subject: Re: [Qemu-riscv] [PATCH for-4.1 6/8] target/riscv: Split RVC32 and
- RVC64 insns into separate files
+X-Received-From: 2607:f8b0:4864:20::443
+Subject: Re: [Qemu-riscv] [PATCH for-4.1 7/8] target/riscv: Split
+ gen_arith_imm into functional and temp
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -73,349 +73,100 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Thu, 25 Apr 2019 16:04:33 -0000
 
-On Sun, 31 Mar 2019 20:11:53 PDT (-0700), richard.henderson@linaro.org wrote:
-> This eliminates all functions in insn_trans/trans_rvc.inc.c,
-> so the entire file can be removed.
+On Sun, 31 Mar 2019 20:11:54 PDT (-0700), richard.henderson@linaro.org wrote:
+> The tcg_gen_fooi_tl functions have some immediate constant
+> folding built in, which match up with some of the riscv asm
+> builtin macros, like mv and not.
 >
 > Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 > ---
->  target/riscv/insn_trans/trans_rvc.inc.c | 115 ------------------------
->  target/riscv/translate.c                |   2 -
->  target/riscv/Makefile.objs              |   9 +-
->  target/riscv/insn16-32.decode           |  28 ++++++
->  target/riscv/insn16-64.decode           |  30 +++++++
->  target/riscv/insn16.decode              |  35 +-------
->  6 files changed, 67 insertions(+), 152 deletions(-)
->  delete mode 100644 target/riscv/insn_trans/trans_rvc.inc.c
->  create mode 100644 target/riscv/insn16-32.decode
->  create mode 100644 target/riscv/insn16-64.decode
+>  target/riscv/insn_trans/trans_rvi.inc.c | 14 +++++++-------
+>  target/riscv/translate.c                | 19 +++++++++++++++++--
+>  2 files changed, 24 insertions(+), 9 deletions(-)
 >
-> diff --git a/target/riscv/insn_trans/trans_rvc.inc.c b/target/riscv/insn_trans/trans_rvc.inc.c
-> deleted file mode 100644
-> index 43bff97f66..0000000000
-> --- a/target/riscv/insn_trans/trans_rvc.inc.c
-> +++ /dev/null
-> @@ -1,115 +0,0 @@
-> -/*
-> - * RISC-V translation routines for the RVC Compressed Instruction Set.
-> - *
-> - * Copyright (c) 2016-2017 Sagar Karandikar, sagark@eecs.berkeley.edu
-> - * Copyright (c) 2018 Peer Adelt, peer.adelt@hni.uni-paderborn.de
-> - *                    Bastian Koppelmann, kbastian@mail.uni-paderborn.de
-> - *
-> - * This program is free software; you can redistribute it and/or modify it
-> - * under the terms and conditions of the GNU General Public License,
-> - * version 2 or later, as published by the Free Software Foundation.
-> - *
-> - * This program is distributed in the hope it will be useful, but WITHOUT
-> - * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-> - * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-> - * more details.
-> - *
-> - * You should have received a copy of the GNU General Public License along with
-> - * this program.  If not, see <http://www.gnu.org/licenses/>.
-> - */
-> -
-> -static bool trans_c_flw_ld(DisasContext *ctx, arg_c_flw_ld *a)
-> -{
-> -#ifdef TARGET_RISCV32
-> -    /* C.FLW ( RV32FC-only ) */
-> -    REQUIRE_FPU;
-> -    REQUIRE_EXT(ctx, RVF);
-> -
-> -    arg_i arg;
-> -    decode_insn16_extract_cl_w(&arg, ctx->opcode);
-> -    return trans_flw(ctx, &arg);
-> -#else
-> -    /* C.LD ( RV64C/RV128C-only ) */
-> -    arg_i arg;
-> -    decode_insn16_extract_cl_d(&arg, ctx->opcode);
-> -    return trans_ld(ctx, &arg);
-> -#endif
-> -}
-> -
-> -static bool trans_c_fsw_sd(DisasContext *ctx, arg_c_fsw_sd *a)
-> -{
-> -#ifdef TARGET_RISCV32
-> -    /* C.FSW ( RV32FC-only ) */
-> -    REQUIRE_FPU;
-> -    REQUIRE_EXT(ctx, RVF);
-> -
-> -    arg_s arg;
-> -    decode_insn16_extract_cs_w(&arg, ctx->opcode);
-> -    return trans_fsw(ctx, &arg);
-> -#else
-> -    /* C.SD ( RV64C/RV128C-only ) */
-> -    arg_s arg;
-> -    decode_insn16_extract_cs_d(&arg, ctx->opcode);
-> -    return trans_sd(ctx, &arg);
-> -#endif
-> -}
-> -
-> -static bool trans_c_jal_addiw(DisasContext *ctx, arg_c_jal_addiw *a)
-> -{
-> -#ifdef TARGET_RISCV32
-> -    /* C.JAL */
-> -    arg_j tmp;
-> -    decode_insn16_extract_cj(&tmp, ctx->opcode);
-> -    arg_jal arg = { .rd = 1, .imm = tmp.imm };
-> -    return trans_jal(ctx, &arg);
-> -#else
-> -    /* C.ADDIW */
-> -    arg_addiw arg = { .rd = a->rd, .rs1 = a->rd, .imm = a->imm };
-> -    return trans_addiw(ctx, &arg);
-> -#endif
-> -}
-> -
-> -static bool trans_c_subw(DisasContext *ctx, arg_c_subw *a)
-> -{
-> -#ifdef TARGET_RISCV64
-> -    return trans_subw(ctx, a);
-> -#else
-> -    return false;
-> -#endif
-> -}
-> -
-> -static bool trans_c_addw(DisasContext *ctx, arg_c_addw *a)
-> -{
-> -#ifdef TARGET_RISCV64
-> -    return trans_addw(ctx, a);
-> -#else
-> -    return false;
-> -#endif
-> -}
-> -
-> -static bool trans_c_flwsp_ldsp(DisasContext *ctx, arg_c_flwsp_ldsp *a)
-> -{
-> -#ifdef TARGET_RISCV32
-> -    /* C.FLWSP */
-> -    arg_flw arg_flw = { .rd = a->rd, .rs1 = 2, .imm = a->uimm_flwsp };
-> -    return trans_flw(ctx, &arg_flw);
-> -#else
-> -    /* C.LDSP */
-> -    arg_ld arg_ld = { .rd = a->rd, .rs1 = 2, .imm = a->uimm_ldsp };
-> -    return trans_ld(ctx, &arg_ld);
-> -#endif
-> -    return false;
-> -}
-> -
-> -static bool trans_c_fswsp_sdsp(DisasContext *ctx, arg_c_fswsp_sdsp *a)
-> -{
-> -#ifdef TARGET_RISCV32
-> -    /* C.FSWSP */
-> -    arg_fsw a_fsw = { .rs1 = 2, .rs2 = a->rs2, .imm = a->uimm_fswsp };
-> -    return trans_fsw(ctx, &a_fsw);
-> -#else
-> -    /* C.SDSP */
-> -    arg_sd a_sd = { .rs1 = 2, .rs2 = a->rs2, .imm = a->uimm_sdsp };
-> -    return trans_sd(ctx, &a_sd);
-> -#endif
-> -}
+> diff --git a/target/riscv/insn_trans/trans_rvi.inc.c b/target/riscv/insn_trans/trans_rvi.inc.c
+> index caf91f9a05..620df5f323 100644
+> --- a/target/riscv/insn_trans/trans_rvi.inc.c
+> +++ b/target/riscv/insn_trans/trans_rvi.inc.c
+> @@ -223,7 +223,7 @@ static bool trans_sd(DisasContext *ctx, arg_sd *a)
+>
+>  static bool trans_addi(DisasContext *ctx, arg_addi *a)
+>  {
+> -    return gen_arith_imm(ctx, a, &tcg_gen_add_tl);
+> +    return gen_arith_imm_fn(ctx, a, &tcg_gen_addi_tl);
+>  }
+>
+>  static void gen_slt(TCGv ret, TCGv s1, TCGv s2)
+> @@ -239,25 +239,25 @@ static void gen_sltu(TCGv ret, TCGv s1, TCGv s2)
+>
+>  static bool trans_slti(DisasContext *ctx, arg_slti *a)
+>  {
+> -    return gen_arith_imm(ctx, a, &gen_slt);
+> +    return gen_arith_imm_tl(ctx, a, &gen_slt);
+>  }
+>
+>  static bool trans_sltiu(DisasContext *ctx, arg_sltiu *a)
+>  {
+> -    return gen_arith_imm(ctx, a, &gen_sltu);
+> +    return gen_arith_imm_tl(ctx, a, &gen_sltu);
+>  }
+>
+>  static bool trans_xori(DisasContext *ctx, arg_xori *a)
+>  {
+> -    return gen_arith_imm(ctx, a, &tcg_gen_xor_tl);
+> +    return gen_arith_imm_fn(ctx, a, &tcg_gen_xori_tl);
+>  }
+>  static bool trans_ori(DisasContext *ctx, arg_ori *a)
+>  {
+> -    return gen_arith_imm(ctx, a, &tcg_gen_or_tl);
+> +    return gen_arith_imm_fn(ctx, a, &tcg_gen_ori_tl);
+>  }
+>  static bool trans_andi(DisasContext *ctx, arg_andi *a)
+>  {
+> -    return gen_arith_imm(ctx, a, &tcg_gen_and_tl);
+> +    return gen_arith_imm_fn(ctx, a, &tcg_gen_andi_tl);
+>  }
+>  static bool trans_slli(DisasContext *ctx, arg_slli *a)
+>  {
+> @@ -364,7 +364,7 @@ static bool trans_and(DisasContext *ctx, arg_and *a)
+>  #ifdef TARGET_RISCV64
+>  static bool trans_addiw(DisasContext *ctx, arg_addiw *a)
+>  {
+> -    return gen_arith_imm(ctx, a, &gen_addw);
+> +    return gen_arith_imm_tl(ctx, a, &gen_addw);
+>  }
+>
+>  static bool trans_slliw(DisasContext *ctx, arg_slliw *a)
 > diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index a1cd29f80f..50d8f58e4b 100644
+> index 50d8f58e4b..fb66e886bf 100644
 > --- a/target/riscv/translate.c
 > +++ b/target/riscv/translate.c
-> @@ -685,8 +685,6 @@ static bool gen_shift(DisasContext *ctx, arg_r *a,
+> @@ -547,8 +547,23 @@ static int ex_rvc_shifti(int imm)
+>  /* Include the auto-generated decoder for 32 bit insn */
+>  #include "decode_insn32.inc.c"
 >
->  #pragma GCC diagnostic pop
->
-> -#include "insn_trans/trans_rvc.inc.c"
-> -
->  static void decode_opc(DisasContext *ctx)
+> -static bool gen_arith_imm(DisasContext *ctx, arg_i *a,
+> -                          void(*func)(TCGv, TCGv, TCGv))
+> +static bool gen_arith_imm_fn(DisasContext *ctx, arg_i *a,
+> +                             void (*func)(TCGv, TCGv, target_long))
+> +{
+> +    TCGv source1;
+> +    source1 = tcg_temp_new();
+> +
+> +    gen_get_gpr(source1, a->rs1);
+> +
+> +    (*func)(source1, source1, a->imm);
+> +
+> +    gen_set_gpr(a->rd, source1);
+> +    tcg_temp_free(source1);
+> +    return true;
+> +}
+> +
+> +static bool gen_arith_imm_tl(DisasContext *ctx, arg_i *a,
+> +                             void (*func)(TCGv, TCGv, TCGv))
 >  {
->      /* check for compressed insn */
-> diff --git a/target/riscv/Makefile.objs b/target/riscv/Makefile.objs
-> index c7a1b063ed..b1c79bc1d1 100644
-> --- a/target/riscv/Makefile.objs
-> +++ b/target/riscv/Makefile.objs
-> @@ -5,16 +5,19 @@ DECODETREE = $(SRC_PATH)/scripts/decodetree.py
->  decode32-y = $(SRC_PATH)/target/riscv/insn32.decode
->  decode32-$(TARGET_RISCV64) += $(SRC_PATH)/target/riscv/insn32-64.decode
->
-> +decode16-y = $(SRC_PATH)/target/riscv/insn16.decode
-> +decode16-$(TARGET_RISCV32) += $(SRC_PATH)/target/riscv/insn16-32.decode
-> +decode16-$(TARGET_RISCV64) += $(SRC_PATH)/target/riscv/insn16-64.decode
-> +
->  target/riscv/decode_insn32.inc.c: $(decode32-y) $(DECODETREE)
->  	$(call quiet-command, \
->  	  $(PYTHON) $(DECODETREE) -o $@ --static-decode decode_insn32 \
->            $(decode32-y), "GEN", $(TARGET_DIR)$@)
->
-> -target/riscv/decode_insn16.inc.c: \
-> -  $(SRC_PATH)/target/riscv/insn16.decode $(DECODETREE)
-> +target/riscv/decode_insn16.inc.c: $(decode16-y) $(DECODETREE)
->  	$(call quiet-command, \
->  	  $(PYTHON) $(DECODETREE) -o $@ --static-decode decode_insn16 \
-> -          --insnwidth 16 $<, "GEN", $(TARGET_DIR)$@)
-> +          --insnwidth 16 $(decode16-y), "GEN", $(TARGET_DIR)$@)
->
->  target/riscv/translate.o: target/riscv/decode_insn32.inc.c \
->  	target/riscv/decode_insn16.inc.c
-> diff --git a/target/riscv/insn16-32.decode b/target/riscv/insn16-32.decode
-> new file mode 100644
-> index 0000000000..0819b17028
-> --- /dev/null
-> +++ b/target/riscv/insn16-32.decode
-> @@ -0,0 +1,28 @@
-> +#
-> +# RISC-V translation routines for the RVXI Base Integer Instruction Set.
-> +#
-> +# Copyright (c) 2018 Peer Adelt, peer.adelt@hni.uni-paderborn.de
-> +#                    Bastian Koppelmann, kbastian@mail.uni-paderborn.de
-> +#
-> +# This program is free software; you can redistribute it and/or modify it
-> +# under the terms and conditions of the GNU General Public License,
-> +# version 2 or later, as published by the Free Software Foundation.
-> +#
-> +# This program is distributed in the hope it will be useful, but WITHOUT
-> +# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-> +# FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-> +# more details.
-> +#
-> +# You should have received a copy of the GNU General Public License along with
-> +# this program.  If not, see <http://www.gnu.org/licenses/>.
-> +
-> +# *** RV32C Standard Extension (Quadrant 0) ***
-> +flw               011  ... ... .. ... 00 @cl_w
-> +fsw               111  ... ... .. ... 00 @cs_w
-> +
-> +# *** RV32C Standard Extension (Quadrant 1) ***
-> +jal               001     ........... 01 @cj    rd=1  # C.JAL
-> +
-> +# *** RV32C Standard Extension (Quadrant 2) ***
-> +flw               011 .  .....  ..... 10 @c_lwsp
-> +fsw               111 .  .....  ..... 10 @c_swsp
-> diff --git a/target/riscv/insn16-64.decode b/target/riscv/insn16-64.decode
-> new file mode 100644
-> index 0000000000..055859d29f
-> --- /dev/null
-> +++ b/target/riscv/insn16-64.decode
-> @@ -0,0 +1,30 @@
-> +#
-> +# RISC-V translation routines for the RVXI Base Integer Instruction Set.
-> +#
-> +# Copyright (c) 2018 Peer Adelt, peer.adelt@hni.uni-paderborn.de
-> +#                    Bastian Koppelmann, kbastian@mail.uni-paderborn.de
-> +#
-> +# This program is free software; you can redistribute it and/or modify it
-> +# under the terms and conditions of the GNU General Public License,
-> +# version 2 or later, as published by the Free Software Foundation.
-> +#
-> +# This program is distributed in the hope it will be useful, but WITHOUT
-> +# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-> +# FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-> +# more details.
-> +#
-> +# You should have received a copy of the GNU General Public License along with
-> +# this program.  If not, see <http://www.gnu.org/licenses/>.
-> +
-> +# *** RV64C Standard Extension (Quadrant 0) ***
-> +ld                011  ... ... .. ... 00 @cl_d
-> +sd                111  ... ... .. ... 00 @cs_d
-> +
-> +# *** RV64C Standard Extension (Quadrant 1) ***
-> +addiw             001 .  .....  ..... 01 @ci
-> +subw              100 1 11 ... 00 ... 01 @cs_2
-> +addw              100 1 11 ... 01 ... 01 @cs_2
-> +
-> +# *** RV64C Standard Extension (Quadrant 2) ***
-> +ld                011 .  .....  ..... 10 @c_ldsp
-> +sd                111 .  .....  ..... 10 @c_sdsp
-> diff --git a/target/riscv/insn16.decode b/target/riscv/insn16.decode
-> index 3c79edf1c9..433c0e8c68 100644
-> --- a/target/riscv/insn16.decode
-> +++ b/target/riscv/insn16.decode
-> @@ -50,30 +50,12 @@
->  &u         imm rd       !extern
->  &shift     shamt rs1 rd !extern
->
-> -# Argument sets:
-> -&cl               rs1 rd
-> -&cl_dw     uimm   rs1 rd
-> -&ciw       nzuimm     rd
-> -&cs               rs1 rs2
-> -&cs_dw     uimm   rs1 rs2
-> -&cb        imm    rs1
-> -&cr               rd  rs2
-> -&c_shift   shamt      rd
-> -
-> -&c_ld      uimm  rd
-> -&c_sd      uimm  rs2
-> -
-> -&caddi16sp_lui  imm_lui imm_addi16sp rd
-> -&cflwsp_ldsp    uimm_flwsp uimm_ldsp rd
-> -&cfswsp_sdsp    uimm_fswsp uimm_sdsp rs2
->
->  # Formats 16:
->  @cr        ....  ..... .....  .. &r      rs2=%rs2_5       rs1=%rd     %rd
->  @ci        ... . ..... .....  .. &i      imm=%imm_ci      rs1=%rd     %rd
->  @cl_d      ... ... ... .. ... .. &i      imm=%uimm_cl_d   rs1=%rs1_3  rd=%rs2_3
->  @cl_w      ... ... ... .. ... .. &i      imm=%uimm_cl_w   rs1=%rs1_3  rd=%rs2_3
-> -@cl        ... ... ... .. ... .. &cl                      rs1=%rs1_3  rd=%rs2_3
-> -@cs        ... ... ... .. ... .. &cs                      rs1=%rs1_3  rs2=%rs2_3
->  @cs_2      ... ... ... .. ... .. &r      rs2=%rs2_3       rs1=%rs1_3  rd=%rs1_3
->  @cs_d      ... ... ... .. ... .. &s      imm=%uimm_cl_d   rs1=%rs1_3  rs2=%rs2_3
->  @cs_w      ... ... ... .. ... .. &s      imm=%uimm_cl_w   rs1=%rs1_3  rs2=%rs2_3
-> @@ -91,10 +73,6 @@
->
->  @c_addi4spn     ... .  ..... ..... .. &i imm=%nzuimm_ciw rs1=2 rd=%rs2_3
->  @c_addi16sp     ... .  ..... ..... .. &i imm=%imm_addi16sp rs1=2 rd=2
-> -@c_flwsp_ldsp   ... .  ..... ..... .. &cflwsp_ldsp uimm_flwsp=%uimm_6bit_lw \
-> -    uimm_ldsp=%uimm_6bit_ld %rd
-> -@c_fswsp_sdsp   ... .  ..... ..... .. &cfswsp_sdsp uimm_fswsp=%uimm_6bit_sw \
-> -    uimm_sdsp=%uimm_6bit_sd rs2=%rs2_5
->
->  @c_shift        ... . .. ... ..... .. \
->                  &shift rd=%rs1_3 rs1=%rs1_3 shamt=%shimm_6bit
-> @@ -103,7 +81,7 @@
->
->  @c_andi         ... . .. ... ..... .. &i imm=%imm_ci rs1=%rs1_3 rd=%rs1_3
->
-> -# *** RV64C Standard Extension (Quadrant 0) ***
-> +# *** RV32/64C Standard Extension (Quadrant 0) ***
->  {
->    # Opcode of all zeros is illegal; rd != 0, nzuimm == 0 is reserved.
->    illegal         000  000 000 00 --- 00
-> @@ -111,14 +89,11 @@
->  }
->  fld               001  ... ... .. ... 00 @cl_d
->  lw                010  ... ... .. ... 00 @cl_w
-> -c_flw_ld          011  --- ... -- ... 00 @cl    #Note: Must parse uimm manually
->  fsd               101  ... ... .. ... 00 @cs_d
->  sw                110  ... ... .. ... 00 @cs_w
-> -c_fsw_sd          111  --- ... -- ... 00 @cs    #Note: Must parse uimm manually
->
-> -# *** RV64C Standard Extension (Quadrant 1) ***
-> +# *** RV32/64C Standard Extension (Quadrant 1) ***
->  addi              000 .  .....  ..... 01 @ci
-> -c_jal_addiw       001 .  .....  ..... 01 @ci #Note: parse rd and/or imm manually
->  addi              010 .  .....  ..... 01 @c_li
->  {
->    addi            011 .  00010  ..... 01 @c_addi16sp
-> @@ -131,17 +106,14 @@ sub               100 0 11 ... 00 ... 01 @cs_2
->  xor               100 0 11 ... 01 ... 01 @cs_2
->  or                100 0 11 ... 10 ... 01 @cs_2
->  and               100 0 11 ... 11 ... 01 @cs_2
-> -c_subw            100 1 11 ... 00 ... 01 @cs_2
-> -c_addw            100 1 11 ... 01 ... 01 @cs_2
->  jal               101     ........... 01 @cj    rd=0  # C.J
->  beq               110  ... ...  ..... 01 @cb_z
->  bne               111  ... ...  ..... 01 @cb_z
->
-> -# *** RV64C Standard Extension (Quadrant 2) ***
-> +# *** RV32/64C Standard Extension (Quadrant 2) ***
->  slli              000 .  .....  ..... 10 @c_shift2
->  fld               001 .  .....  ..... 10 @c_ldsp
->  lw                010 .  .....  ..... 10 @c_lwsp
-> -c_flwsp_ldsp      011 .  .....  ..... 10 @c_flwsp_ldsp #C.LDSP:RV64;C.FLWSP:RV32
->  {
->    jalr            100 0  .....  00000 10 @c_jalr rd=0  # C.JR
->    addi            100 0  .....  ..... 10 @c_mv
-> @@ -153,4 +125,3 @@ c_flwsp_ldsp      011 .  .....  ..... 10 @c_flwsp_ldsp #C.LDSP:RV64;C.FLWSP:RV32
->  }
->  fsd               101   ......  ..... 10 @c_sdsp
->  sw                110 .  .....  ..... 10 @c_swsp
-> -c_fswsp_sdsp      111 .  .....  ..... 10 @c_fswsp_sdsp #C.SDSP:RV64;C.FSWSP:RV32
+>      TCGv source1, source2;
+>      source1 = tcg_temp_new();
 
 Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
 
