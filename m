@@ -1,104 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1hHfjN-0006pE-KI
-	for mharc-qemu-riscv@gnu.org; Fri, 19 Apr 2019 22:27:53 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:50754)
+	id 1hJV6p-0003vj-DH
+	for mharc-qemu-riscv@gnu.org; Wed, 24 Apr 2019 23:31:39 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:53089)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <prvs=0062c52f7=Alistair.Francis@wdc.com>)
-	id 1hHfjL-0006nC-J4
-	for qemu-riscv@nongnu.org; Fri, 19 Apr 2019 22:27:52 -0400
+	(envelope-from <palmer@sifive.com>) id 1hJV6n-0003v8-4B
+	for qemu-riscv@nongnu.org; Wed, 24 Apr 2019 23:31:38 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <prvs=0062c52f7=Alistair.Francis@wdc.com>)
-	id 1hHfjK-00045n-DZ
-	for qemu-riscv@nongnu.org; Fri, 19 Apr 2019 22:27:51 -0400
-Received: from esa5.hgst.iphmx.com ([216.71.153.144]:8108)
-	by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.71) (envelope-from <prvs=0062c52f7=Alistair.Francis@wdc.com>)
-	id 1hHfjH-00044i-B5; Fri, 19 Apr 2019 22:27:47 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-	d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
-	t=1555727268; x=1587263268;
-	h=from:to:cc:subject:date:message-id:references:
-	in-reply-to:content-transfer-encoding:mime-version;
-	bh=J7I4423ihyshSLrpJhMthxeHoJaEQpRuUgOBKuHYFbI=;
-	b=Ev1FE81JTB3yyZvffp2Bg3I/Lvd/x8bxPiVlINSPvK+GMrAsX0uJVChD
-	2BoBPoVFRvBomT7B+CX7GwtMebtafQCPwk6rlwucqttYVsVejnJ6NUxin
-	cMMzu+UffxwHgOr8e0tJw+MSEZxozXojZLQ+M6Y2t+QAAoRQeQVQMZ1nA
-	l5jGkafe9B2aqiuOngKHLLKtR3yUmdk9RpPia3fZSKk+PdgcW/nDyWuj2
-	nrSon+hSX/wYqqSRfgmagaq1DU2ANQ1lHdA0SAJ4BperNhwWAcUiZsjub
-	hw6qE3ZIxZk/0UCpevcEG8fNgvAPhCBlf5OkLRP1bso8NUu5+P0nJK9DU A==;
-X-IronPort-AV: E=Sophos;i="5.60,372,1549900800"; d="scan'208";a="107617999"
-Received: from mail-bn3nam01lp2056.outbound.protection.outlook.com (HELO
-	NAM01-BN3-obe.outbound.protection.outlook.com) ([104.47.33.56])
-	by ob1.hgst.iphmx.com with ESMTP; 20 Apr 2019 10:27:45 +0800
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=sharedspace.onmicrosoft.com; s=selector1-wdc-com;
-	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=J7I4423ihyshSLrpJhMthxeHoJaEQpRuUgOBKuHYFbI=;
-	b=jNX50Kkc5TLhjhAyS7uXZ8bz8jXToGSy5pdHL9umlQX5OXelfPopGon+7S5F8GMDIj0SEPiAqulT0vNoJYWIg63EkC2gzF2ZW4Dsi+2BZM01oqnHKjBMrFeNRUeTS0le9phmbZ23c0G+N5o7RXTSS8295883+T83MoHipIg+pSI=
-Received: from BYAPR04MB4901.namprd04.prod.outlook.com (52.135.232.206) by
-	BYAPR04MB5319.namprd04.prod.outlook.com (20.178.49.208) with Microsoft
-	SMTP
-	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
-	15.20.1813.14; Sat, 20 Apr 2019 02:27:44 +0000
-Received: from BYAPR04MB4901.namprd04.prod.outlook.com
-	([fe80::44e8:bd21:17b:348c]) by BYAPR04MB4901.namprd04.prod.outlook.com
-	([fe80::44e8:bd21:17b:348c%4]) with mapi id 15.20.1813.011;
-	Sat, 20 Apr 2019 02:27:44 +0000
-From: Alistair Francis <Alistair.Francis@wdc.com>
-To: "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, "qemu-riscv@nongnu.org"
-	<qemu-riscv@nongnu.org>
-CC: "palmer@sifive.com" <palmer@sifive.com>, Alistair Francis
-	<Alistair.Francis@wdc.com>, "alistair23@gmail.com" <alistair23@gmail.com>
-Thread-Topic: [PATCH v1 8/8] target/riscv: Add the HGATP register masks
-Thread-Index: AQHU9yCiCAsAIdrtYEmKBbky+tM4/g==
-Date: Sat, 20 Apr 2019 02:27:43 +0000
-Message-ID: <b91bacd428706e5cb44e4db83c75f7a03d6fae2b.1555727081.git.alistair.francis@wdc.com>
-References: <cover.1555727081.git.alistair.francis@wdc.com>
-In-Reply-To: <cover.1555727081.git.alistair.francis@wdc.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-mailer: git-send-email 2.21.0
-x-clientproxiedby: BYAPR05CA0002.namprd05.prod.outlook.com
-	(2603:10b6:a03:c0::15) To BYAPR04MB4901.namprd04.prod.outlook.com
-	(2603:10b6:a03:4f::14)
-authentication-results: spf=none (sender IP is )
-	smtp.mailfrom=Alistair.Francis@wdc.com; 
-x-ms-exchange-messagesentrepresentingtype: 1
-x-originating-ip: [199.255.44.250]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 66232298-fecb-4e2e-7b7c-08d6c537c4e5
-x-ms-office365-filtering-ht: Tenant
-x-microsoft-antispam: BCL:0; PCL:0;
-	RULEID:(2390118)(7020095)(4652040)(8989299)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(5600141)(711020)(4605104)(4618075)(2017052603328)(7193020);
-	SRVR:BYAPR04MB5319; 
-x-ms-traffictypediagnostic: BYAPR04MB5319:
-wdcipoutbound: EOP-TRUE
-x-microsoft-antispam-prvs: <BYAPR04MB5319526CA5E548A2A384277490200@BYAPR04MB5319.namprd04.prod.outlook.com>
-x-forefront-prvs: 0013079544
-x-forefront-antispam-report: SFV:NSPM;
-	SFS:(10019020)(376002)(366004)(136003)(396003)(346002)(39860400002)(199004)(189003)(50226002)(52116002)(6486002)(14454004)(446003)(6436002)(76176011)(476003)(486006)(3846002)(6116002)(97736004)(2616005)(7736002)(81156014)(8676002)(478600001)(8936002)(72206003)(386003)(6506007)(81166006)(102836004)(26005)(186003)(36756003)(316002)(6512007)(44832011)(53936002)(68736007)(66066001)(118296001)(25786009)(4326008)(305945005)(99286004)(54906003)(2906002)(11346002)(110136005)(2501003)(256004)(64756008)(66446008)(66556008)(73956011)(66946007)(4744005)(66476007)(71200400001)(5660300002)(71190400001)(86362001);
-	DIR:OUT; SFP:1102; SCL:1; SRVR:BYAPR04MB5319;
-	H:BYAPR04MB4901.namprd04.prod.outlook.com; FPR:; SPF:None;
-	LANG:en; PTR:InfoNoRecords; A:1; MX:1; 
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam-message-info: ooP5CuqNuqBQRrPfyA3Qsuw4Vui5goeMarQdbN2X77LJajD9IXYSLiCYyY/NFo8FuKg9YEwyxJkdX4zvqIXnV6khAQczOItI5axMBzZWm12sMAL/urU7AeyEwZ9dxFueU1X6a1CpqS6uiL3vdzQBfBeQ37BQhGjFeT3z7yGux3d8TonrQIXSnRnr0NvZiL/XQ20UT6E/1iejXxeW8BLslRBWfGyrPzVjZE9RmgGOAU98wH2U56ZKSHUfT/i2tGCYeJNJkyT6wfz3GPxXh0MGle9BCvvGLO2MjvBqUythy2nZmXvKrIYb/O6EOrKYv2NX+2JzRchaJbusJTcrk9PqqLWIFwMxY8zrptH9j52pn63FFJnm9pHQgvsVqNx9K5sIJFHTwia3sKqXVQ9cbFS5TXLT+Cr30ZeBA8YAH9jV8/8=
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-MIME-Version: 1.0
-X-OriginatorOrg: wdc.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 66232298-fecb-4e2e-7b7c-08d6c537c4e5
-X-MS-Exchange-CrossTenant-originalarrivaltime: 20 Apr 2019 02:27:43.9032 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR04MB5319
+	(envelope-from <palmer@sifive.com>) id 1hJV6l-0008QT-Vk
+	for qemu-riscv@nongnu.org; Wed, 24 Apr 2019 23:31:37 -0400
+Received: from mail-pf1-x443.google.com ([2607:f8b0:4864:20::443]:46506)
+	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+	(Exim 4.71) (envelope-from <palmer@sifive.com>) id 1hJV6l-0008OH-O5
+	for qemu-riscv@nongnu.org; Wed, 24 Apr 2019 23:31:35 -0400
+Received: by mail-pf1-x443.google.com with SMTP id 9so10372746pfj.13
+	for <qemu-riscv@nongnu.org>; Wed, 24 Apr 2019 20:31:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+	h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
+	:content-transfer-encoding;
+	bh=j1bdBX9DR+a2UlKdjzSodQr+4tFLxRnCT8oGf6airtM=;
+	b=Pmb0L2u2Ffhb3Hm5XnqnV20SVMdfuviL3+Ec1svlyuoYZxoIV0oRgEoUbO8OzJakUk
+	ApRaLYBiwySYuFEvTV4hSlPMhXkRJZRVh5FFVEYj1lqIkesg97NOTTot4LqLoJoLWlOO
+	JQ70Sv+jWbTnDEC2e+cKbEStY+j2DwUlxXRklrJaQFiqP3M3Bsl6NTRiIIOFgUWfkWfG
+	Yagjk9bZ4j6bSOjQQAoRyjCpW4lXYrnwvIiDpHwYV3yqF3tcBTXv5Iwq7m5T+Xx0z460
+	ATE3w2wQLZipnojTGQ2jfJyJZk2EgPEWGO+AS87eGXwj4A7xyYQXVwFG7xspMaj6oZVG
+	uFlg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
+	:mime-version:content-transfer-encoding;
+	bh=j1bdBX9DR+a2UlKdjzSodQr+4tFLxRnCT8oGf6airtM=;
+	b=D6eqghgWlGrhuV41i3N20ENNwe7zGClIxEHiu2hmKEwXLVmgGMHhouFL2wM6/yfEHp
+	3ZvxNvzLHuVHE9bTUzQY3s1OhIc1N+jiV44xgpHH1QSGvhws3tCiid4yV5YX6euMHcQA
+	gULpxjrrQwsTF837N3t3c7VhEX7o1xMUCm5wJQGINbOrFGWOkxkY1qn28lfXDbBPB0pC
+	e6qu6MClnlB4UiAHGrz56FlWT7DHNF6ZpGtGUUNlc4E6TqXwXORRMC3M1Ku/YlcdxTFp
+	4GHLusNOHqtcAuaOF0B/k3OkugOD2x7txTOvHVE7ZHBcSkl0oeFA2P9E2QdhIruRRewL
+	6dqQ==
+X-Gm-Message-State: APjAAAXeP+2Ne7uWo/Uf/UEoIWnmVUpDLid2fwccDNRRoBcSx6WetpPI
+	NGYzUOIdpgQCfHH5FunABh7c4Q==
+X-Google-Smtp-Source: APXvYqzpnrVXT/VtZ5K/2gMhHnvPQCP4Y0ak9DIIAlm25HRQBtR9Cz2sY/jyzmEB/nfUni7NffoUUw==
+X-Received: by 2002:aa7:83d1:: with SMTP id j17mr37569076pfn.78.1556163093368; 
+	Wed, 24 Apr 2019 20:31:33 -0700 (PDT)
+Received: from localhost ([67.51.191.132]) by smtp.gmail.com with ESMTPSA id
+	b7sm39531840pfj.67.2019.04.24.20.31.32
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Wed, 24 Apr 2019 20:31:32 -0700 (PDT)
+Date: Wed, 24 Apr 2019 20:31:32 -0700 (PDT)
+X-Google-Original-Date: Wed, 24 Apr 2019 16:39:54 PDT (-0700)
+In-Reply-To: <20190401031155.21293-2-richard.henderson@linaro.org>
+CC: qemu-devel@nongnu.org, Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+	Alistair Francis <Alistair.Francis@wdc.com>, qemu-riscv@nongnu.org
+From: Palmer Dabbelt <palmer@sifive.com>
+To: richard.henderson@linaro.org
+Message-ID: <mhng-4fc40e41-5464-469e-9334-1edc4f8294e3@palmer-si-x1e>
+Mime-Version: 1.0 (MHng)
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 216.71.153.144
-Subject: [Qemu-riscv] [PATCH v1 8/8] target/riscv: Add the HGATP register
- masks
+X-Received-From: 2607:f8b0:4864:20::443
+Subject: Re: [Qemu-riscv] [PATCH for-4.1 1/8] target/riscv: Name the
+ argument sets for all of insn32 formats
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -110,22 +71,55 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 20 Apr 2019 02:27:52 -0000
+X-List-Received-Date: Thu, 25 Apr 2019 03:31:38 -0000
 
-U2lnbmVkLW9mZi1ieTogQWxpc3RhaXIgRnJhbmNpcyA8YWxpc3RhaXIuZnJhbmNpc0B3ZGMuY29t
-Pg0KLS0tDQogdGFyZ2V0L3Jpc2N2L2NwdV9iaXRzLmggfCAxMSArKysrKysrKysrKw0KIDEgZmls
-ZSBjaGFuZ2VkLCAxMSBpbnNlcnRpb25zKCspDQoNCmRpZmYgLS1naXQgYS90YXJnZXQvcmlzY3Yv
-Y3B1X2JpdHMuaCBiL3RhcmdldC9yaXNjdi9jcHVfYml0cy5oDQppbmRleCBhMTc5MTM3YmMxLi5k
-YzlkNTNkNGJlIDEwMDY0NA0KLS0tIGEvdGFyZ2V0L3Jpc2N2L2NwdV9iaXRzLmgNCisrKyBiL3Rh
-cmdldC9yaXNjdi9jcHVfYml0cy5oDQpAQCAtMjA4LDYgKzIwOCwxNyBAQA0KICNkZWZpbmUgQ1NS
-X0hJREVMRUcgICAgICAgICAweGEwMw0KICNkZWZpbmUgQ1NSX0hHQVRQICAgICAgICAgICAweGE4
-MA0KIA0KKyNpZiBkZWZpbmVkKFRBUkdFVF9SSVNDVjMyKQ0KKyNkZWZpbmUgSEdBVFBfTU9ERSAg
-ICAgICAgICAgU0FUUDMyX01PREUNCisjZGVmaW5lIEhHQVRQX0FTSUQgICAgICAgICAgIFNBVFAz
-Ml9BU0lEDQorI2RlZmluZSBIR0FUUF9QUE4gICAgICAgICAgICBTQVRQMzJfUFBODQorI2VuZGlm
-DQorI2lmIGRlZmluZWQoVEFSR0VUX1JJU0NWNjQpDQorI2RlZmluZSBIR0FUUF9NT0RFICAgICAg
-ICAgICBTQVRQNjRfTU9ERQ0KKyNkZWZpbmUgSEdBVFBfQVNJRCAgICAgICAgICAgU0FUUDY0X0FT
-SUQNCisjZGVmaW5lIEhHQVRQX1BQTiAgICAgICAgICAgIFNBVFA2NF9QUE4NCisjZW5kaWYNCisN
-CiAvKiBQZXJmb3JtYW5jZSBDb3VudGVycyAqLw0KICNkZWZpbmUgQ1NSX01IUE1DT1VOVEVSMyAg
-ICAweGIwMw0KICNkZWZpbmUgQ1NSX01IUE1DT1VOVEVSNCAgICAweGIwNA0KLS0gDQoyLjIxLjAN
-Cg0K
+On Sun, 31 Mar 2019 20:11:48 PDT (-0700), richard.henderson@linaro.org wrote:
+> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+> ---
+>  target/riscv/insn32.decode | 10 +++++++---
+>  1 file changed, 7 insertions(+), 3 deletions(-)
+>
+> diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+> index 6f3ab7aa52..77f794ed70 100644
+> --- a/target/riscv/insn32.decode
+> +++ b/target/riscv/insn32.decode
+> @@ -34,9 +34,13 @@
+>  %imm_u    12:s20                 !function=ex_shift_12
+>
+>  # Argument sets:
+> +&empty
+
+If I understand decodetree correctly, this isn't used until patch 5.
+Otherwise,
+
+Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
+
+I don't care enough about this to make you re-spin the patch set, so I'm OK
+taking it as it stands unless there's anything else that crops up as I look
+through the rest of the patches...
+
+Thanks!
+
+>  &b    imm rs2 rs1
+>  &i    imm rs1 rd
+> +&j    imm rd
+>  &r    rd rs1 rs2
+> +&s    imm rs1 rs2
+> +&u    imm rd
+>  &shift     shamt rs1 rd
+>  &atomic    aq rl rs2 rs1 rd
+>
+> @@ -44,9 +48,9 @@
+>  @r       .......   ..... ..... ... ..... ....... &r                %rs2 %rs1 %rd
+>  @i       ............    ..... ... ..... ....... &i      imm=%imm_i     %rs1 %rd
+>  @b       .......   ..... ..... ... ..... ....... &b      imm=%imm_b %rs2 %rs1
+> -@s       .......   ..... ..... ... ..... .......         imm=%imm_s %rs2 %rs1
+> -@u       ....................      ..... .......         imm=%imm_u          %rd
+> -@j       ....................      ..... .......         imm=%imm_j          %rd
+> +@s       .......   ..... ..... ... ..... ....... &s      imm=%imm_s %rs2 %rs1
+> +@u       ....................      ..... ....... &u      imm=%imm_u          %rd
+> +@j       ....................      ..... ....... &j      imm=%imm_j          %rd
+>
+>  @sh      ......  ...... .....  ... ..... ....... &shift  shamt=%sh10      %rs1 %rd
+>  @csr     ............   .....  ... ..... .......               %csr     %rs1 %rd
 
