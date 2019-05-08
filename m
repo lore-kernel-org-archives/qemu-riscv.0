@@ -1,62 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1hOT2r-0003pu-3k
-	for mharc-qemu-riscv@gnu.org; Wed, 08 May 2019 16:20:05 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:47600)
+	id 1hOTOO-0003nE-7V
+	for mharc-qemu-riscv@gnu.org; Wed, 08 May 2019 16:42:20 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:51189)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1hOT2p-0003od-8D
-	for qemu-riscv@nongnu.org; Wed, 08 May 2019 16:20:04 -0400
+	(envelope-from <palmer@dabbelt.com>) id 1hOTOM-0003mp-0T
+	for qemu-riscv@nongnu.org; Wed, 08 May 2019 16:42:19 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1hOT2o-00018g-DH
-	for qemu-riscv@nongnu.org; Wed, 08 May 2019 16:20:03 -0400
-Received: from mail-lf1-x143.google.com ([2a00:1450:4864:20::143]:44278)
+	(envelope-from <palmer@dabbelt.com>) id 1hOTOJ-0000hN-SF
+	for qemu-riscv@nongnu.org; Wed, 08 May 2019 16:42:17 -0400
+Received: from mail-pl1-f193.google.com ([209.85.214.193]:39982)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <alistair23@gmail.com>)
-	id 1hOT2m-00016z-1m; Wed, 08 May 2019 16:20:00 -0400
-Received: by mail-lf1-x143.google.com with SMTP id n134so13657097lfn.11;
-	Wed, 08 May 2019 13:19:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=c74To35lqowx86X4mBSQThqsM7IlN3Oz7o+zU1qHIgo=;
-	b=tDrJLU0diaxbaQXT/ik3EYBDTrhUljZ0kcB3F3lZrwzVNTzE41cEJe0DZU6t+KR8+S
-	yo9AMNQiRHEoR1bTsWd8szWCzS2PJluyQf99RgnW4RvNKJxVSrhG7cjkBdX0WqaR+1HZ
-	tlDeP9JbrifSbsvuWnSv+DkG2XaH8Lwrttwb9TMCd/ns/qz9HJQy0JcZHjYPqmqYahKU
-	JATpxq1/nVrFvajrGYXUVfN1CQPOpZ+rnwsn9x2aN80di3Rpp+rDbnFN5HLdheRYVLT9
-	Vde5dYOPG0JctAKsDX5ITLXJPivh9z0yGQN3W7ILEEsn3bHj2Vt+mcevshq89lx/2kVN
-	C3ng==
+	(Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1hOTOJ-0000g8-Gl
+	for qemu-riscv@nongnu.org; Wed, 08 May 2019 16:42:15 -0400
+Received: by mail-pl1-f193.google.com with SMTP id b3so10466235plr.7
+	for <qemu-riscv@nongnu.org>; Wed, 08 May 2019 13:42:14 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=c74To35lqowx86X4mBSQThqsM7IlN3Oz7o+zU1qHIgo=;
-	b=lz4VkgHRrpS6w4gnUKJI5mJt7Hg55h69iPc1pkdGNlOUltxxEpsiBIgtUA3tnD94ph
-	j4GfQJlpNzSA3E0H05ef3E9xoI2cB0xPN/DlH/XGVmQufNh3BmGnZnyN7q8m2cu1hSDy
-	NiXjskywqAXxzqFif+yQAiQCLg6JsFCTK6AspGPJuYWD3ppdGjH9+y3ldfFXjSj0neuJ
-	HqH9efezvzkG9wXYJjJiRhmKzqUZGTG11Fhjp9byAdYqC0NSFmYgV8PtAPsbGeJgcsNV
-	Q1f4DpfIrKfooaSrrG8daT3d2HIxastqdPcedVoDo09EIGMmSk/OjFTdcvVRE3SPkzaj
-	uQ4A==
-X-Gm-Message-State: APjAAAXDFStnpsb+Bq0n6V1S5HrBF8ES4rlZKz7VeX4gjGOlMWvLvpos
-	63ZgvJozVLN78T78S9x78RCObJB7mnEgC5RO1Z8=
-X-Google-Smtp-Source: APXvYqxieY1iSbmKY+cuNBhIHGpmHwseYZzZg7F4Qrc9EAJpR7yrxBjJd6KxteIuwXxxcVQSn9is1eiotZtAERIg0sA=
-X-Received: by 2002:ac2:523a:: with SMTP id i26mr37714lfl.118.1557346798224;
-	Wed, 08 May 2019 13:19:58 -0700 (PDT)
-MIME-Version: 1.0
-References: <20190508173835.14528-1-jonathan@fintelia.io>
+	h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
+	:mime-version:content-transfer-encoding;
+	bh=VgyXF7ytFjodUj+gOQnaY7QDddkV2VcxBgtSMevZxes=;
+	b=dQvVsk123TSJu4CRGaDe6IesE4fKY1snaNc5hJutuPE4AhExCy90RLV02RtrEOsVpH
+	5fVDDrUtVC1c44dVy6zSwP9SMJC2EH14ibFae4yv0LkISEpSptnRLBNJWVvytK+VHGpr
+	Be6yPollztMb44beAwu0vS4UZrUdrOISNP2QSFXwmGPS2fGjYmEmNk+46VefK7CiLHA3
+	+dRB1e/hn5KGNoIL3LNxYQVcVJPZnEoOCzOKNMtj1gOpWiTm7n/Gd6z7F1icVIvdC8Sr
+	x+2bwLx6hq/ZszPYLZvZBFU2UWIVsfqH30KugqF85wi0DzfzYJcr06N3oMcdhr+NeIOj
+	0qJQ==
+X-Gm-Message-State: APjAAAWCwR61QeQWcLqOaQZRIR5mUyoR4/WsJrQSEGMtSUYa+7mih4ps
+	OzBpTp6J2LDC79j+Jm5ZtsomMA==
+X-Google-Smtp-Source: APXvYqzX1CSL1eBLsWHRghkkaBK8mhiYxSRkPCTUQ+BE4pndbij8Kv1gJwmv9RDqLbbVveLv82OFiA==
+X-Received: by 2002:a17:902:ba8e:: with SMTP id
+	k14mr50786062pls.80.1557348132885; 
+	Wed, 08 May 2019 13:42:12 -0700 (PDT)
+Received: from localhost ([12.206.222.5]) by smtp.gmail.com with ESMTPSA id
+	t65sm129557pfa.175.2019.05.08.13.42.12
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Wed, 08 May 2019 13:42:12 -0700 (PDT)
+Date: Wed, 08 May 2019 13:42:12 -0700 (PDT)
+X-Google-Original-Date: Wed, 08 May 2019 13:30:52 PDT (-0700)
 In-Reply-To: <20190508173835.14528-1-jonathan@fintelia.io>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 8 May 2019 13:17:53 -0700
-Message-ID: <CAKmqyKO-cWqxKCa0kZ=ivMmZn-0OK6ZVYk_BOM4M3ocRTGhKLw@mail.gmail.com>
-To: Jonathan Behrens <jonathan@fintelia.io>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
-	Palmer Dabbelt <palmer@sifive.com>, 
-	"open list:RISC-V" <qemu-riscv@nongnu.org>,
-	Jonathan Behrens <fintelia@gmail.com>, 
-	Sagar Karandikar <sagark@eecs.berkeley.edu>
-Content-Type: text/plain; charset="UTF-8"
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
-	recognized.
-X-Received-From: 2a00:1450:4864:20::143
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH] target/riscv: Only flush TLB
- if SATP.ASID changes
+CC: qemu-devel@nongnu.org, fintelia@gmail.com, qemu-riscv@nongnu.org,
+	sagark@eecs.berkeley.edu, jonathan@fintelia.io
+From: Palmer Dabbelt <palmer@sifive.com>
+To: jonathan@fintelia.io
+Message-ID: <mhng-80bf675e-e5bd-4102-9ecc-484829735eb8@palmer-si-x1e>
+Mime-Version: 1.0 (MHng)
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+	[fuzzy]
+X-Received-From: 209.85.214.193
+Subject: Re: [Qemu-riscv] [PATCH] target/riscv: Only flush TLB if SATP.ASID
+ changes
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -68,19 +62,13 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 May 2019 20:20:04 -0000
+X-List-Received-Date: Wed, 08 May 2019 20:42:19 -0000
 
-On Wed, May 8, 2019 at 10:39 AM Jonathan Behrens <jonathan@fintelia.io> wrote:
->
+On Wed, 08 May 2019 10:38:35 PDT (-0700), jonathan@fintelia.io wrote:
 > There is an analogous change for ARM here:
 > https://patchwork.kernel.org/patch/10649857
 >
 > Signed-off-by: Jonathan Behrens <jonathan@fintelia.io>
-
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-
-Alistair
-
 > ---
 >  target/riscv/csr.c | 4 +++-
 >  1 file changed, 3 insertions(+), 1 deletion(-)
@@ -100,7 +88,7 @@ Alistair
 >              env->satp = val;
 >          }
 >      }
-> --
-> 2.20.1
->
+
+Thanks!  I've taken this into my for-master branch, pending some testing I'll
+send it up.
 
