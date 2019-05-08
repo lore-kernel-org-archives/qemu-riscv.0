@@ -1,72 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1hOQfj-0003ji-6G
-	for mharc-qemu-riscv@gnu.org; Wed, 08 May 2019 13:48:03 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:44053)
+	id 1hOT2r-0003pu-3k
+	for mharc-qemu-riscv@gnu.org; Wed, 08 May 2019 16:20:05 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:47600)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <richard.henderson@linaro.org>) id 1hOQfg-0003iJ-Rp
-	for qemu-riscv@nongnu.org; Wed, 08 May 2019 13:48:01 -0400
+	(envelope-from <alistair23@gmail.com>) id 1hOT2p-0003od-8D
+	for qemu-riscv@nongnu.org; Wed, 08 May 2019 16:20:04 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <richard.henderson@linaro.org>) id 1hOQfe-0005cL-M1
-	for qemu-riscv@nongnu.org; Wed, 08 May 2019 13:48:00 -0400
-Received: from mail-pl1-x641.google.com ([2607:f8b0:4864:20::641]:40635)
+	(envelope-from <alistair23@gmail.com>) id 1hOT2o-00018g-DH
+	for qemu-riscv@nongnu.org; Wed, 08 May 2019 16:20:03 -0400
+Received: from mail-lf1-x143.google.com ([2a00:1450:4864:20::143]:44278)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
-	id 1hOQfd-0005bT-D7
-	for qemu-riscv@nongnu.org; Wed, 08 May 2019 13:47:57 -0400
-Received: by mail-pl1-x641.google.com with SMTP id b3so10263231plr.7
-	for <qemu-riscv@nongnu.org>; Wed, 08 May 2019 10:47:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
-	h=subject:to:cc:references:from:openpgp:message-id:date:user-agent
-	:mime-version:in-reply-to:content-language:content-transfer-encoding;
-	bh=cjdS/iI/gWEaK9rWXHcGPI8xgjgbFsWcVpG9/iPIp2Q=;
-	b=UWdAicsVFEab5M1waOBLO5bGjcSCSkAxQwwI5bVMkp5DJbn5pTV/8JQ7RHN5eqr4iG
-	hC5EdJJ3JGD+aP0ypv9mJHJhMfmbZlJ63A9j2n1oCVR1Zid6zB4fakRH+kXBhlDIyWJQ
-	EAFDb7Yin67TxUD+g1rm9WWZDBtZfpWbQ+YJ2TbXpqr7YtCqf1xBWVB+7p2O76b9Dcqs
-	TpjttZTDMTCjXGiIDXFcWK0cXAUOI5qi0GngbdNkmxMsrQc7oWqBn2XIWSTMvo6GxgFP
-	lz1AzGE9fCJOPvhktmwfEfmu66p8FI2wRPcDNRtRNUmQSPnUxOa3AWjW+hZckuMAiD5o
-	OtLA==
+	(Exim 4.71) (envelope-from <alistair23@gmail.com>)
+	id 1hOT2m-00016z-1m; Wed, 08 May 2019 16:20:00 -0400
+Received: by mail-lf1-x143.google.com with SMTP id n134so13657097lfn.11;
+	Wed, 08 May 2019 13:19:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=c74To35lqowx86X4mBSQThqsM7IlN3Oz7o+zU1qHIgo=;
+	b=tDrJLU0diaxbaQXT/ik3EYBDTrhUljZ0kcB3F3lZrwzVNTzE41cEJe0DZU6t+KR8+S
+	yo9AMNQiRHEoR1bTsWd8szWCzS2PJluyQf99RgnW4RvNKJxVSrhG7cjkBdX0WqaR+1HZ
+	tlDeP9JbrifSbsvuWnSv+DkG2XaH8Lwrttwb9TMCd/ns/qz9HJQy0JcZHjYPqmqYahKU
+	JATpxq1/nVrFvajrGYXUVfN1CQPOpZ+rnwsn9x2aN80di3Rpp+rDbnFN5HLdheRYVLT9
+	Vde5dYOPG0JctAKsDX5ITLXJPivh9z0yGQN3W7ILEEsn3bHj2Vt+mcevshq89lx/2kVN
+	C3ng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
-	:date:user-agent:mime-version:in-reply-to:content-language
-	:content-transfer-encoding;
-	bh=cjdS/iI/gWEaK9rWXHcGPI8xgjgbFsWcVpG9/iPIp2Q=;
-	b=ZKKH5a0ASfnDbl3zZqharYQDBhvilvtwgB0lUJ6qBzIoLtk81zng5luCEPUuY7I4c/
-	A5hQRBZ7ikjsI6qzhGNAccp23NIdE1Up8699tqM09WBhgj8N2ImmsH0NDOkZs1Eb2HvM
-	uJ71YJzLNx/iUq7ZozB9YihACnzIX5KtmQk404cE17rhbiFWYz1vUgyycb/2tGNC+KDh
-	Mv4f2hfsLUOS6+7YmQtLehPNZODiCKXIWoblmezgf8QUZs3k+lRB4mVtOSfK5rL8+F05
-	D8RQLAxLBInTVjhPi6U+czABeOEpz5GjitCXHHDomktim1O2APlkGu43JFXI7lP2OJaX
-	YHlw==
-X-Gm-Message-State: APjAAAUdXTGmQpRS1m+bYV1J3Eut1w7XV+p41fEZHr1DYnQh3SDXADnf
-	RrkRA4QZ3VjRlhc/NoajIN8hLA==
-X-Google-Smtp-Source: APXvYqym5uIZGg+r5HpNcu8VIZYcZJwEdbZ2B2gf7B2+rFT2U3q4JEUj0L5zu6IvQciZ+59AE8ml/Q==
-X-Received: by 2002:a17:902:f208:: with SMTP id
-	gn8mr9960720plb.312.1557337675809; 
-	Wed, 08 May 2019 10:47:55 -0700 (PDT)
-Received: from [192.168.1.11] (97-113-27-95.tukw.qwest.net. [97.113.27.95])
-	by smtp.gmail.com with ESMTPSA id
-	e6sm26615975pfl.115.2019.05.08.10.47.54
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 08 May 2019 10:47:55 -0700 (PDT)
-To: Jonathan Behrens <jonathan@fintelia.io>, qemu-devel@nongnu.org
-Cc: Palmer Dabbelt <palmer@sifive.com>, qemu-riscv@nongnu.org,
-	Jonathan Behrens <fintelia@gmail.com>,
-	Sagar Karandikar <sagark@eecs.berkeley.edu>
-References: <20190508173835.14528-1-jonathan@fintelia.io>
-From: Richard Henderson <richard.henderson@linaro.org>
-Openpgp: preference=signencrypt
-Message-ID: <c8e5df4d-f149-2f6a-8045-be2bf4de6e04@linaro.org>
-Date: Wed, 8 May 2019 10:47:53 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.6.1
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=c74To35lqowx86X4mBSQThqsM7IlN3Oz7o+zU1qHIgo=;
+	b=lz4VkgHRrpS6w4gnUKJI5mJt7Hg55h69iPc1pkdGNlOUltxxEpsiBIgtUA3tnD94ph
+	j4GfQJlpNzSA3E0H05ef3E9xoI2cB0xPN/DlH/XGVmQufNh3BmGnZnyN7q8m2cu1hSDy
+	NiXjskywqAXxzqFif+yQAiQCLg6JsFCTK6AspGPJuYWD3ppdGjH9+y3ldfFXjSj0neuJ
+	HqH9efezvzkG9wXYJjJiRhmKzqUZGTG11Fhjp9byAdYqC0NSFmYgV8PtAPsbGeJgcsNV
+	Q1f4DpfIrKfooaSrrG8daT3d2HIxastqdPcedVoDo09EIGMmSk/OjFTdcvVRE3SPkzaj
+	uQ4A==
+X-Gm-Message-State: APjAAAXDFStnpsb+Bq0n6V1S5HrBF8ES4rlZKz7VeX4gjGOlMWvLvpos
+	63ZgvJozVLN78T78S9x78RCObJB7mnEgC5RO1Z8=
+X-Google-Smtp-Source: APXvYqxieY1iSbmKY+cuNBhIHGpmHwseYZzZg7F4Qrc9EAJpR7yrxBjJd6KxteIuwXxxcVQSn9is1eiotZtAERIg0sA=
+X-Received: by 2002:ac2:523a:: with SMTP id i26mr37714lfl.118.1557346798224;
+	Wed, 08 May 2019 13:19:58 -0700 (PDT)
 MIME-Version: 1.0
+References: <20190508173835.14528-1-jonathan@fintelia.io>
 In-Reply-To: <20190508173835.14528-1-jonathan@fintelia.io>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+From: Alistair Francis <alistair23@gmail.com>
+Date: Wed, 8 May 2019 13:17:53 -0700
+Message-ID: <CAKmqyKO-cWqxKCa0kZ=ivMmZn-0OK6ZVYk_BOM4M3ocRTGhKLw@mail.gmail.com>
+To: Jonathan Behrens <jonathan@fintelia.io>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+	Palmer Dabbelt <palmer@sifive.com>, 
+	"open list:RISC-V" <qemu-riscv@nongnu.org>,
+	Jonathan Behrens <fintelia@gmail.com>, 
+	Sagar Karandikar <sagark@eecs.berkeley.edu>
+Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::641
+X-Received-From: 2a00:1450:4864:20::143
 Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH] target/riscv: Only flush TLB
  if SATP.ASID changes
 X-BeenThere: qemu-riscv@nongnu.org
@@ -80,20 +68,39 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 May 2019 17:48:01 -0000
+X-List-Received-Date: Wed, 08 May 2019 20:20:04 -0000
 
-On 5/8/19 10:38 AM, Jonathan Behrens wrote:
+On Wed, May 8, 2019 at 10:39 AM Jonathan Behrens <jonathan@fintelia.io> wrote:
+>
 > There is an analogous change for ARM here:
 > https://patchwork.kernel.org/patch/10649857
-> 
+>
 > Signed-off-by: Jonathan Behrens <jonathan@fintelia.io>
+
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+
+Alistair
+
 > ---
 >  target/riscv/csr.c | 4 +++-
 >  1 file changed, 3 insertions(+), 1 deletion(-)
-
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-
-
-r~
-
+>
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index 6083c782a1..1ec1222da1 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -732,7 +732,9 @@ static int write_satp(CPURISCVState *env, int csrno, target_ulong val)
+>          if (env->priv == PRV_S && get_field(env->mstatus, MSTATUS_TVM)) {
+>              return -1;
+>          } else {
+> -            tlb_flush(CPU(riscv_env_get_cpu(env)));
+> +            if((val ^ env->satp) & SATP_ASID) {
+> +                tlb_flush(CPU(riscv_env_get_cpu(env)));
+> +            }
+>              env->satp = val;
+>          }
+>      }
+> --
+> 2.20.1
+>
 
