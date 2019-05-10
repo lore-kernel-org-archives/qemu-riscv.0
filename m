@@ -1,63 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1hP7Jm-0007lz-Ht
-	for mharc-qemu-riscv@gnu.org; Fri, 10 May 2019 11:20:14 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:56257)
+	id 1hPAfm-00086Y-5M
+	for mharc-qemu-riscv@gnu.org; Fri, 10 May 2019 14:55:10 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:48557)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <richard.henderson@linaro.org>) id 1hP7Ji-0007fz-F6
-	for qemu-riscv@nongnu.org; Fri, 10 May 2019 11:20:12 -0400
+	(envelope-from <richard.henderson@linaro.org>) id 1hPAfZ-0007wJ-KB
+	for qemu-riscv@nongnu.org; Fri, 10 May 2019 14:55:08 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <richard.henderson@linaro.org>) id 1hP7Jh-000078-2m
-	for qemu-riscv@nongnu.org; Fri, 10 May 2019 11:20:10 -0400
-Received: from mail-pf1-x442.google.com ([2607:f8b0:4864:20::442]:35821)
+	(envelope-from <richard.henderson@linaro.org>) id 1hPAfR-0005tU-0G
+	for qemu-riscv@nongnu.org; Fri, 10 May 2019 14:54:57 -0400
+Received: from mail-pf1-x441.google.com ([2607:f8b0:4864:20::441]:36227)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
 	(Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
-	id 1hP7Jg-000068-Qz
-	for qemu-riscv@nongnu.org; Fri, 10 May 2019 11:20:08 -0400
-Received: by mail-pf1-x442.google.com with SMTP id t87so3416433pfa.2
-	for <qemu-riscv@nongnu.org>; Fri, 10 May 2019 08:20:08 -0700 (PDT)
+	id 1hPAfQ-0005rR-N5
+	for qemu-riscv@nongnu.org; Fri, 10 May 2019 14:54:48 -0400
+Received: by mail-pf1-x441.google.com with SMTP id v80so3700788pfa.3
+	for <qemu-riscv@nongnu.org>; Fri, 10 May 2019 11:54:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=jFiOLbzDz1sji7rdhiIl1UIG07vaIVhoy6dgsMAsHtw=;
-	b=xQ8t++6s8P84yjah1oodF4aP0tHt5TjP7r8j93p4dJPG7lprWwoEYapKJl0F3qFqpP
-	3QzK6CgZuYbhlNVv5SBTc1t6YJPbLHi+U3vniKmvLnIpeAZDwO18DqZI/vNW2ctlqfPs
-	tbIqHtj9MUSkfK2KcnVGajsMx/SNhEl3QtL0lAfzOJiTV6pY+Jx944Flm82eSWQy1inO
-	Z6MeKesS5KC1sr0+tIk6VX/V7f/JGTK2QFBuonjkpl5iD0SA37iqqahMSYTnATCVNdul
-	63OBQAaiQ5kYsGJdacgG/xKIy6wmbk5QZoeTt4FFNU5+CTY/Dyj84AjIys3D1fWqD74+
-	V1kg==
+	bh=2nv1Fz6coVTYizv8OMxkCDga0OEiAnrikMT8xHCBMUM=;
+	b=XgBIQLVJzunHW2aEjGIPsFY0aDf7tUEK+y/juLg1z7y3bxWJonO47Y3iA2Mqz0roev
+	IoLEp3BQ5hfdE0BNswP1g+XKkzwIffhlo2oXcxmxc8xCfVoIFZhNR1LDyLC5ztXAV1GL
+	ssi59GoxXntsSiPclIP9rGcBblfo55S4rkk9VuDM0GXwuq5VFqSq5fEbAZizCzN5XcZs
+	pFku/IYqEF2HIhcwJL8yc1X8+jQt99yNxMAPSRDtUGVL7SbD5MC6/wCsyk0t7s/P2cic
+	9K7kuw372YZcVu9kxrusBmYxrjpQHgVNO1EGUOLZCuOf8oilR3gjvmbQQwuhta8bBJ5m
+	w/4A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=jFiOLbzDz1sji7rdhiIl1UIG07vaIVhoy6dgsMAsHtw=;
-	b=m0F847UWGhXMp/vZinzQEXOoIQMi4nXkqV8qh3ZCnCBrRy8kHSSasMJsIOttlGntD+
-	Q2PO3bLsCAx/tDKmwx78j2+kWIBCLhcSxSgBze+n6xrMLwty0GAoQEBSoHbhBrEsVKp+
-	4lXOkCEWadNY0r7mgGl6e6LyoGBWrTzKIom3HI9ITfbl0J7Wya4r/M0TksyCrok7xnk+
-	fJkJYAjil0mbWID9cgw9Y243F4Et26r/mXP6Ni0N3nurpeIsI3ioepgvW5DY0G8jjuaG
-	Y+BpnmP6e4zICa/Iok7lMxLj7YTh4q3OapwO3o4IIfFkEEDbjdwywvxv4M9w8YxBFh8l
-	YylQ==
-X-Gm-Message-State: APjAAAXz+jexV3z5EujHAYFMY1jQ7giqYyNuTKk1dlNx8al3tPnhvcOd
-	TD43tCBVv2cQGSxZCDO/hkYdkADlOWg=
-X-Google-Smtp-Source: APXvYqwNtMn1Y1OzJ2nJNw4MNC2dIGvmgQNrZ7eHKVtuIfhczJaJG5t3ide5XsIiLAnCj/uPaUNkrQ==
-X-Received: by 2002:a62:570a:: with SMTP id l10mr14798979pfb.151.1557501607961;
-	Fri, 10 May 2019 08:20:07 -0700 (PDT)
+	bh=2nv1Fz6coVTYizv8OMxkCDga0OEiAnrikMT8xHCBMUM=;
+	b=Sl1yPrjrYEDgiwx1mZo3N0CnS8IEel3LIUpbCNNkSikBSc4XMDj3eU1xavJaMNVRRg
+	IFNpYHmblEeiby9n5GmSWetulPZC9lkqD9ajjQ9kACBwMvh/eKTeHJoHy250VzSPuyua
+	MihtOCbVL0bjtBlUwrZditWdmcCJZ0qawOA70DuTn9Jd/HBO0snZAt/95IDXnE/gkt4X
+	bzMAPA9oG8RvzOyJbJ5AY+nSwr3UXRFXmTfVxMYewsRoNbYe0gULfoDITbY27MOz3dUH
+	g61wAgRLr1OVQgjcTIRGJYjKik5L2II5p/YU5Rwf6P8Yw+fxWsvOjujDxLdpszXHFtnE
+	E5/Q==
+X-Gm-Message-State: APjAAAVn9U36fLkama81hX+k+YthYupd/3SWCjz06r7HGmR4ksVTctyL
+	lYz7hOhxiqd1DgOWupbekEOKpA==
+X-Google-Smtp-Source: APXvYqwxcyMpnDolABzz6ZvYP6GnCABGM65hutMFyw577lxqf11TSZkAWDcG2Q806aiORp11au2UYQ==
+X-Received: by 2002:aa7:9afc:: with SMTP id y28mr16719834pfp.101.1557514487752;
+	Fri, 10 May 2019 11:54:47 -0700 (PDT)
 Received: from localhost.localdomain (97-113-13-231.tukw.qwest.net.
-	[97.113.13.231])
-	by smtp.gmail.com with ESMTPSA id 19sm5920517pgz.24.2019.05.10.08.20.06
+	[97.113.13.231]) by smtp.gmail.com with ESMTPSA id
+	q20sm12733146pfi.166.2019.05.10.11.54.46
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 10 May 2019 08:20:07 -0700 (PDT)
+	Fri, 10 May 2019 11:54:46 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: peter.maydell@linaro.org, qemu-riscv@nongnu.org,
 	Palmer Dabbelt <palmer@sifive.com>
-Date: Fri, 10 May 2019 08:19:34 -0700
-Message-Id: <20190510151944.22981-18-richard.henderson@linaro.org>
+Date: Fri, 10 May 2019 11:54:36 -0700
+Message-Id: <20190510185438.29533-6-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20190510151944.22981-1-richard.henderson@linaro.org>
-References: <20190510151944.22981-1-richard.henderson@linaro.org>
+In-Reply-To: <20190510185438.29533-1-richard.henderson@linaro.org>
+References: <20190510185438.29533-1-richard.henderson@linaro.org>
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::442
-Subject: [Qemu-riscv] [PULL 17/27] target/riscv: Convert to
+X-Received-From: 2607:f8b0:4864:20::441
+Subject: [Qemu-riscv] [PULL v2 17/27] target/riscv: Convert to
  CPUClass::tlb_fill
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
@@ -70,7 +70,7 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 May 2019 15:20:12 -0000
+X-List-Received-Date: Fri, 10 May 2019 18:55:09 -0000
 
 Note that env->pc is removed from the qemu_log as that value is garbage.
 The PC isn't recovered until cpu_restore_state, called from
@@ -103,21 +103,26 @@ index 7d9f48973f..c17184f4e4 100644
  void riscv_cpu_list(void);
  
 diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 1bcf4eaeb8..34a54ef2ed 100644
+index 1bcf4eaeb8..b7675707e0 100644
 --- a/target/riscv/cpu.c
 +++ b/target/riscv/cpu.c
-@@ -355,9 +355,8 @@ static void riscv_cpu_class_init(ObjectClass *c, void *data)
+@@ -355,14 +355,13 @@ static void riscv_cpu_class_init(ObjectClass *c, void *data)
  #endif
      cc->gdb_stop_before_watchpoint = true;
      cc->disas_set_info = riscv_cpu_disas_set_info;
 -#ifdef CONFIG_USER_ONLY
 -    cc->handle_mmu_fault = riscv_cpu_handle_mmu_fault;
 -#else
-+    cc->tlb_fill = riscv_cpu_tlb_fill;
 +#ifndef CONFIG_USER_ONLY
      cc->do_unaligned_access = riscv_cpu_do_unaligned_access;
      cc->get_phys_page_debug = riscv_cpu_get_phys_page_debug;
  #endif
+ #ifdef CONFIG_TCG
+     cc->tcg_initialize = riscv_translate_init;
++    cc->tlb_fill = riscv_cpu_tlb_fill;
+ #endif
+     /* For now, mark unmigratable: */
+     cc->vmsd = &vmstate_riscv_cpu;
 diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
 index b17f169681..2535435260 100644
 --- a/target/riscv/cpu_helper.c
