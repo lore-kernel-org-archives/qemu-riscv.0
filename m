@@ -1,63 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1hOrVE-0007s3-3O
-	for mharc-qemu-riscv@gnu.org; Thu, 09 May 2019 18:27:00 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:33088)
+	id 1hP7Jm-0007lz-Ht
+	for mharc-qemu-riscv@gnu.org; Fri, 10 May 2019 11:20:14 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:56257)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <richard.henderson@linaro.org>) id 1hOrVC-0007pK-4a
-	for qemu-riscv@nongnu.org; Thu, 09 May 2019 18:26:59 -0400
+	(envelope-from <richard.henderson@linaro.org>) id 1hP7Ji-0007fz-F6
+	for qemu-riscv@nongnu.org; Fri, 10 May 2019 11:20:12 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <richard.henderson@linaro.org>) id 1hOrVA-0005Yj-Rx
-	for qemu-riscv@nongnu.org; Thu, 09 May 2019 18:26:58 -0400
-Received: from mail-pl1-x641.google.com ([2607:f8b0:4864:20::641]:34305)
+	(envelope-from <richard.henderson@linaro.org>) id 1hP7Jh-000078-2m
+	for qemu-riscv@nongnu.org; Fri, 10 May 2019 11:20:10 -0400
+Received: from mail-pf1-x442.google.com ([2607:f8b0:4864:20::442]:35821)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
 	(Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
-	id 1hOrVA-0005Xs-KM
-	for qemu-riscv@nongnu.org; Thu, 09 May 2019 18:26:56 -0400
-Received: by mail-pl1-x641.google.com with SMTP id w7so1821255plz.1
-	for <qemu-riscv@nongnu.org>; Thu, 09 May 2019 15:26:56 -0700 (PDT)
+	id 1hP7Jg-000068-Qz
+	for qemu-riscv@nongnu.org; Fri, 10 May 2019 11:20:08 -0400
+Received: by mail-pf1-x442.google.com with SMTP id t87so3416433pfa.2
+	for <qemu-riscv@nongnu.org>; Fri, 10 May 2019 08:20:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
 	bh=jFiOLbzDz1sji7rdhiIl1UIG07vaIVhoy6dgsMAsHtw=;
-	b=aV3a8BO/vH4AIMaRdqrMLk1KK2MOingD2OeAuNiWNFHsiWnleab5viMP3EWhF39+hv
-	FaPIkwdhPAcsdmAlDn32Fz/ZERWUx0YZdRRDHvipca806xlynz/qmF/5QqS+IXjJOe5m
-	QjqcPZA2Fldc1cP7H5iMHG84RGZeMSKHTgIOQ6KXXCcVROdQllrKGQUm9ZoMp/YEaz5w
-	Gb7F6G0OSp9KRTGXdLL5B0OE8UgJcU8GNvKi+L+FL/K4b1lvS8KicS6X17pyMaPHvZI9
-	VwL9j1/CKFi80H7p+41SwU1v08WRU81YqSFme27v+SCT/FtepvY+2tqK8rihQ0IdWXjE
-	i7OQ==
+	b=xQ8t++6s8P84yjah1oodF4aP0tHt5TjP7r8j93p4dJPG7lprWwoEYapKJl0F3qFqpP
+	3QzK6CgZuYbhlNVv5SBTc1t6YJPbLHi+U3vniKmvLnIpeAZDwO18DqZI/vNW2ctlqfPs
+	tbIqHtj9MUSkfK2KcnVGajsMx/SNhEl3QtL0lAfzOJiTV6pY+Jx944Flm82eSWQy1inO
+	Z6MeKesS5KC1sr0+tIk6VX/V7f/JGTK2QFBuonjkpl5iD0SA37iqqahMSYTnATCVNdul
+	63OBQAaiQ5kYsGJdacgG/xKIy6wmbk5QZoeTt4FFNU5+CTY/Dyj84AjIys3D1fWqD74+
+	V1kg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
 	bh=jFiOLbzDz1sji7rdhiIl1UIG07vaIVhoy6dgsMAsHtw=;
-	b=CzanHeMDxZorqvqr9yMGSp/yzpNNcnnPVPXsk22XN1KFRXsLNc+khq5TbU+jLUHgKi
-	dfdeKoooOZqvDipZBT2hPIhdroMeg/euFCZhL2B65GUBl2WYLhEIUgSyIVSYRexWQaTl
-	TUQ4kh9hHVs6rDPhiIRmi1MKBJXChSF8HwHo9P444b7gBebuZIwDVuD7spxIXX3nJkhf
-	D41K40qK0XagEf/tlWBeJjpsurGmPLRl2DZo4nNYxgD0EtEAyTO5mcAJSldUoPClkLtC
-	VhSUSbpQEQWtJtccekZL9SjZzD1zetiUsfJW/3ANZvowo8NwbCtlEpKLEhP06DEWsm+i
-	InQA==
-X-Gm-Message-State: APjAAAVdx/g4k4UHzBPCpBAfvbfY4gAQ1drFct/Xg7BmmtON9130PYLn
-	6LQN9JiMqa42dXOpuv/UMe9aHPKtA2M=
-X-Google-Smtp-Source: APXvYqyRhxKS3HJLmHWZIlct/g7K5dInKnJQrqJUzKdzyP9V+/VeU4viCSiVVAdOjwoeW7uk+tYGDw==
-X-Received: by 2002:a17:902:f24:: with SMTP id 33mr8499442ply.33.1557440815722;
-	Thu, 09 May 2019 15:26:55 -0700 (PDT)
+	b=m0F847UWGhXMp/vZinzQEXOoIQMi4nXkqV8qh3ZCnCBrRy8kHSSasMJsIOttlGntD+
+	Q2PO3bLsCAx/tDKmwx78j2+kWIBCLhcSxSgBze+n6xrMLwty0GAoQEBSoHbhBrEsVKp+
+	4lXOkCEWadNY0r7mgGl6e6LyoGBWrTzKIom3HI9ITfbl0J7Wya4r/M0TksyCrok7xnk+
+	fJkJYAjil0mbWID9cgw9Y243F4Et26r/mXP6Ni0N3nurpeIsI3ioepgvW5DY0G8jjuaG
+	Y+BpnmP6e4zICa/Iok7lMxLj7YTh4q3OapwO3o4IIfFkEEDbjdwywvxv4M9w8YxBFh8l
+	YylQ==
+X-Gm-Message-State: APjAAAXz+jexV3z5EujHAYFMY1jQ7giqYyNuTKk1dlNx8al3tPnhvcOd
+	TD43tCBVv2cQGSxZCDO/hkYdkADlOWg=
+X-Google-Smtp-Source: APXvYqwNtMn1Y1OzJ2nJNw4MNC2dIGvmgQNrZ7eHKVtuIfhczJaJG5t3ide5XsIiLAnCj/uPaUNkrQ==
+X-Received: by 2002:a62:570a:: with SMTP id l10mr14798979pfb.151.1557501607961;
+	Fri, 10 May 2019 08:20:07 -0700 (PDT)
 Received: from localhost.localdomain (97-113-13-231.tukw.qwest.net.
 	[97.113.13.231])
-	by smtp.gmail.com with ESMTPSA id m2sm4490521pfi.24.2019.05.09.15.26.54
+	by smtp.gmail.com with ESMTPSA id 19sm5920517pgz.24.2019.05.10.08.20.06
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 09 May 2019 15:26:54 -0700 (PDT)
+	Fri, 10 May 2019 08:20:07 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org,
+Cc: peter.maydell@linaro.org, qemu-riscv@nongnu.org,
 	Palmer Dabbelt <palmer@sifive.com>
-Date: Thu,  9 May 2019 15:26:21 -0700
-Message-Id: <20190509222631.14271-18-richard.henderson@linaro.org>
+Date: Fri, 10 May 2019 08:19:34 -0700
+Message-Id: <20190510151944.22981-18-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20190509222631.14271-1-richard.henderson@linaro.org>
-References: <20190509222631.14271-1-richard.henderson@linaro.org>
+In-Reply-To: <20190510151944.22981-1-richard.henderson@linaro.org>
+References: <20190510151944.22981-1-richard.henderson@linaro.org>
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::641
-Subject: [Qemu-riscv] [PATCH v3 17/27] target/riscv: Convert to
+X-Received-From: 2607:f8b0:4864:20::442
+Subject: [Qemu-riscv] [PULL 17/27] target/riscv: Convert to
  CPUClass::tlb_fill
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
@@ -70,7 +70,7 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 May 2019 22:26:59 -0000
+X-List-Received-Date: Fri, 10 May 2019 15:20:12 -0000
 
 Note that env->pc is removed from the qemu_log as that value is garbage.
 The PC isn't recovered until cpu_restore_state, called from
