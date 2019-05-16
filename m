@@ -1,64 +1,44 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1hPAfm-00086Y-5M
-	for mharc-qemu-riscv@gnu.org; Fri, 10 May 2019 14:55:10 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:48557)
+	id 1hRN7i-0002G1-TC
+	for mharc-qemu-riscv@gnu.org; Thu, 16 May 2019 16:37:06 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:53729)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <richard.henderson@linaro.org>) id 1hPAfZ-0007wJ-KB
-	for qemu-riscv@nongnu.org; Fri, 10 May 2019 14:55:08 -0400
+	(envelope-from <marco@peereboom.us>) id 1hRM6n-0005AC-VV
+	for qemu-riscv@nongnu.org; Thu, 16 May 2019 15:32:07 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <richard.henderson@linaro.org>) id 1hPAfR-0005tU-0G
-	for qemu-riscv@nongnu.org; Fri, 10 May 2019 14:54:57 -0400
-Received: from mail-pf1-x441.google.com ([2607:f8b0:4864:20::441]:36227)
-	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
-	id 1hPAfQ-0005rR-N5
-	for qemu-riscv@nongnu.org; Fri, 10 May 2019 14:54:48 -0400
-Received: by mail-pf1-x441.google.com with SMTP id v80so3700788pfa.3
-	for <qemu-riscv@nongnu.org>; Fri, 10 May 2019 11:54:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=2nv1Fz6coVTYizv8OMxkCDga0OEiAnrikMT8xHCBMUM=;
-	b=XgBIQLVJzunHW2aEjGIPsFY0aDf7tUEK+y/juLg1z7y3bxWJonO47Y3iA2Mqz0roev
-	IoLEp3BQ5hfdE0BNswP1g+XKkzwIffhlo2oXcxmxc8xCfVoIFZhNR1LDyLC5ztXAV1GL
-	ssi59GoxXntsSiPclIP9rGcBblfo55S4rkk9VuDM0GXwuq5VFqSq5fEbAZizCzN5XcZs
-	pFku/IYqEF2HIhcwJL8yc1X8+jQt99yNxMAPSRDtUGVL7SbD5MC6/wCsyk0t7s/P2cic
-	9K7kuw372YZcVu9kxrusBmYxrjpQHgVNO1EGUOLZCuOf8oilR3gjvmbQQwuhta8bBJ5m
-	w/4A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=2nv1Fz6coVTYizv8OMxkCDga0OEiAnrikMT8xHCBMUM=;
-	b=Sl1yPrjrYEDgiwx1mZo3N0CnS8IEel3LIUpbCNNkSikBSc4XMDj3eU1xavJaMNVRRg
-	IFNpYHmblEeiby9n5GmSWetulPZC9lkqD9ajjQ9kACBwMvh/eKTeHJoHy250VzSPuyua
-	MihtOCbVL0bjtBlUwrZditWdmcCJZ0qawOA70DuTn9Jd/HBO0snZAt/95IDXnE/gkt4X
-	bzMAPA9oG8RvzOyJbJ5AY+nSwr3UXRFXmTfVxMYewsRoNbYe0gULfoDITbY27MOz3dUH
-	g61wAgRLr1OVQgjcTIRGJYjKik5L2II5p/YU5Rwf6P8Yw+fxWsvOjujDxLdpszXHFtnE
-	E5/Q==
-X-Gm-Message-State: APjAAAVn9U36fLkama81hX+k+YthYupd/3SWCjz06r7HGmR4ksVTctyL
-	lYz7hOhxiqd1DgOWupbekEOKpA==
-X-Google-Smtp-Source: APXvYqwxcyMpnDolABzz6ZvYP6GnCABGM65hutMFyw577lxqf11TSZkAWDcG2Q806aiORp11au2UYQ==
-X-Received: by 2002:aa7:9afc:: with SMTP id y28mr16719834pfp.101.1557514487752;
-	Fri, 10 May 2019 11:54:47 -0700 (PDT)
-Received: from localhost.localdomain (97-113-13-231.tukw.qwest.net.
-	[97.113.13.231]) by smtp.gmail.com with ESMTPSA id
-	q20sm12733146pfi.166.2019.05.10.11.54.46
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 10 May 2019 11:54:46 -0700 (PDT)
-From: Richard Henderson <richard.henderson@linaro.org>
-To: qemu-devel@nongnu.org
-Cc: peter.maydell@linaro.org, qemu-riscv@nongnu.org,
-	Palmer Dabbelt <palmer@sifive.com>
-Date: Fri, 10 May 2019 11:54:36 -0700
-Message-Id: <20190510185438.29533-6-richard.henderson@linaro.org>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20190510185438.29533-1-richard.henderson@linaro.org>
-References: <20190510185438.29533-1-richard.henderson@linaro.org>
+	(envelope-from <marco@peereboom.us>) id 1hRM6j-0000lZ-C8
+	for qemu-riscv@nongnu.org; Thu, 16 May 2019 15:32:04 -0400
+Received: from 96-92-233-220-static.hfc.comcastbusiness.net
+	([96.92.233.220]:60695 helo=dcr0.decred.org)
+	by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.71) (envelope-from <marco@peereboom.us>) id 1hRM6f-0000hc-KI
+	for qemu-riscv@nongnu.org; Thu, 16 May 2019 15:31:59 -0400
+Received: from mail.peereboom.us
+	(104-0-143-237.lightspeed.austtx.sbcglobal.net [104.0.143.237])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by dcr0.decred.org (Postfix) with ESMTPS id 191A318B4072;
+	Thu, 16 May 2019 19:31:53 +0000 (UTC)
+Received: from [172.16.0.153] (cpe-70-114-171-172.austin.res.rr.com
+	[70.114.171.172])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by mail.peereboom.us (Postfix) with ESMTPSA id 6147F7232B;
+	Thu, 16 May 2019 14:31:51 -0500 (CDT)
+From: Marco Peereboom <marco@peereboom.us>
+Content-Type: multipart/signed;
+	boundary="Apple-Mail=_E206B6D1-759D-4DD8-A566-F3D2194E193F";
+	protocol="application/pgp-signature"; micalg=pgp-sha512
+Mime-Version: 1.0 (Mac OS X Mail 12.4 \(3445.104.8\))
+Date: Thu, 16 May 2019 14:31:48 -0500
+Message-Id: <95054557-05B0-4AAE-BA8B-55E088806F2C@peereboom.us>
+To: qemu-riscv@nongnu.org
+X-Mailer: Apple Mail (2.3445.104.8)
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2607:f8b0:4864:20::441
-Subject: [Qemu-riscv] [PULL v2 17/27] target/riscv: Convert to
- CPUClass::tlb_fill
+X-Received-From: 96.92.233.220
+X-Mailman-Approved-At: Thu, 16 May 2019 16:37:05 -0400
+Subject: [Qemu-riscv] Atomic issues on riscv64
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -70,148 +50,94 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 May 2019 18:55:09 -0000
+X-List-Received-Date: Thu, 16 May 2019 19:32:07 -0000
 
-Note that env->pc is removed from the qemu_log as that value is garbage.
-The PC isn't recovered until cpu_restore_state, called from
-cpu_loop_exit_restore, called from riscv_raise_exception.
 
-Cc: qemu-riscv@nongnu.org
-Cc: Palmer Dabbelt <palmer@sifive.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
----
- target/riscv/cpu.h        |  5 +++--
- target/riscv/cpu.c        |  5 ++---
- target/riscv/cpu_helper.c | 46 ++++++++++++++++++---------------------
- 3 files changed, 26 insertions(+), 30 deletions(-)
+--Apple-Mail=_E206B6D1-759D-4DD8-A566-F3D2194E193F
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=us-ascii
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 7d9f48973f..c17184f4e4 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -261,8 +261,9 @@ hwaddr riscv_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
- void  riscv_cpu_do_unaligned_access(CPUState *cs, vaddr addr,
-                                     MMUAccessType access_type, int mmu_idx,
-                                     uintptr_t retaddr);
--int riscv_cpu_handle_mmu_fault(CPUState *cpu, vaddr address, int size,
--                              int rw, int mmu_idx);
-+bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-+                        MMUAccessType access_type, int mmu_idx,
-+                        bool probe, uintptr_t retaddr);
- char *riscv_isa_string(RISCVCPU *cpu);
- void riscv_cpu_list(void);
- 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 1bcf4eaeb8..b7675707e0 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -355,14 +355,13 @@ static void riscv_cpu_class_init(ObjectClass *c, void *data)
- #endif
-     cc->gdb_stop_before_watchpoint = true;
-     cc->disas_set_info = riscv_cpu_disas_set_info;
--#ifdef CONFIG_USER_ONLY
--    cc->handle_mmu_fault = riscv_cpu_handle_mmu_fault;
--#else
-+#ifndef CONFIG_USER_ONLY
-     cc->do_unaligned_access = riscv_cpu_do_unaligned_access;
-     cc->get_phys_page_debug = riscv_cpu_get_phys_page_debug;
- #endif
- #ifdef CONFIG_TCG
-     cc->tcg_initialize = riscv_translate_init;
-+    cc->tlb_fill = riscv_cpu_tlb_fill;
- #endif
-     /* For now, mark unmigratable: */
-     cc->vmsd = &vmstate_riscv_cpu;
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index b17f169681..2535435260 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -379,53 +379,49 @@ void riscv_cpu_do_unaligned_access(CPUState *cs, vaddr addr,
-     riscv_raise_exception(env, cs->exception_index, retaddr);
- }
- 
--/* called by qemu's softmmu to fill the qemu tlb */
- void tlb_fill(CPUState *cs, target_ulong addr, int size,
-         MMUAccessType access_type, int mmu_idx, uintptr_t retaddr)
- {
--    int ret;
--    ret = riscv_cpu_handle_mmu_fault(cs, addr, size, access_type, mmu_idx);
--    if (ret == TRANSLATE_FAIL) {
--        RISCVCPU *cpu = RISCV_CPU(cs);
--        CPURISCVState *env = &cpu->env;
--        riscv_raise_exception(env, cs->exception_index, retaddr);
--    }
-+    riscv_cpu_tlb_fill(cs, addr, size, access_type, mmu_idx, false, retaddr);
- }
--
- #endif
- 
--int riscv_cpu_handle_mmu_fault(CPUState *cs, vaddr address, int size,
--        int rw, int mmu_idx)
-+bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-+                        MMUAccessType access_type, int mmu_idx,
-+                        bool probe, uintptr_t retaddr)
- {
-+#ifndef CONFIG_USER_ONLY
-     RISCVCPU *cpu = RISCV_CPU(cs);
-     CPURISCVState *env = &cpu->env;
--#if !defined(CONFIG_USER_ONLY)
-     hwaddr pa = 0;
-     int prot;
--#endif
-     int ret = TRANSLATE_FAIL;
- 
--    qemu_log_mask(CPU_LOG_MMU,
--            "%s pc " TARGET_FMT_lx " ad %" VADDR_PRIx " rw %d mmu_idx \
--             %d\n", __func__, env->pc, address, rw, mmu_idx);
-+    qemu_log_mask(CPU_LOG_MMU, "%s ad %" VADDR_PRIx " rw %d mmu_idx %d\n",
-+                  __func__, address, access_type, mmu_idx);
-+
-+    ret = get_physical_address(env, &pa, &prot, address, access_type, mmu_idx);
- 
--#if !defined(CONFIG_USER_ONLY)
--    ret = get_physical_address(env, &pa, &prot, address, rw, mmu_idx);
-     qemu_log_mask(CPU_LOG_MMU,
--            "%s address=%" VADDR_PRIx " ret %d physical " TARGET_FMT_plx
--             " prot %d\n", __func__, address, ret, pa, prot);
-+                  "%s address=%" VADDR_PRIx " ret %d physical " TARGET_FMT_plx
-+                  " prot %d\n", __func__, address, ret, pa, prot);
-+
-     if (riscv_feature(env, RISCV_FEATURE_PMP) &&
--        !pmp_hart_has_privs(env, pa, TARGET_PAGE_SIZE, 1 << rw)) {
-+        !pmp_hart_has_privs(env, pa, TARGET_PAGE_SIZE, 1 << access_type)) {
-         ret = TRANSLATE_FAIL;
-     }
-     if (ret == TRANSLATE_SUCCESS) {
-         tlb_set_page(cs, address & TARGET_PAGE_MASK, pa & TARGET_PAGE_MASK,
-                      prot, mmu_idx, TARGET_PAGE_SIZE);
--    } else if (ret == TRANSLATE_FAIL) {
--        raise_mmu_exception(env, address, rw);
-+        return true;
-+    } else if (probe) {
-+        return false;
-+    } else {
-+        raise_mmu_exception(env, address, access_type);
-+        riscv_raise_exception(env, cs->exception_index, retaddr);
-     }
- #else
--    switch (rw) {
-+    switch (access_type) {
-     case MMU_INST_FETCH:
-         cs->exception_index = RISCV_EXCP_INST_PAGE_FAULT;
-         break;
-@@ -436,8 +432,8 @@ int riscv_cpu_handle_mmu_fault(CPUState *cs, vaddr address, int size,
-         cs->exception_index = RISCV_EXCP_STORE_PAGE_FAULT;
-         break;
-     }
-+    cpu_loop_exit_restore(cs, retaddr);
- #endif
--    return ret;
- }
- 
- /*
--- 
-2.17.1
+While porting Go (https://golang.org/) to riscv64 we ran into a couple =
+of atomic issues.
 
+At first we thought that they were go issues but we have narrowed at it =
+down enough
+for it to be QEMU related. Basically atomics periodically fail and =
+because it is
+infrequent enough we wrote some test programs to bring them out quicker.
+
+Either one of these test programs will bring out the failure:
+* http://pastebitch.com/WaSP
+* http://pastebitch.com/
+
+You may have to run the programs more than once or play with TCOUNT and =
+NCOUNT
+for the issue to manifest itself. The programs will complain when the =
+expected value
+does not match the real value.
+
+Success: ok 40000000 40000000
+Failure: womp womp 39800640 40000000
+
+These failures do *NOT* occur on `qemu-risc64` or on hardware (sifive =
+unleashed boards).
+They do occur in `qemu-system-riscv64` running Linux.
+
+This was tested on `QEMU emulator version 3.1.94 (v4.0.0-rc4)`
+
+Kernel:
+Linux version 5.1.0-rc3-dirty (marco@void) (gcc version 8.3.0 (GCC)) #1 =
+SMP Thu Apr 11 15:18:36 CDT 2019
+
+gcc inside qemu:
+Using built-in specs.
+COLLECT_GCC=3Dgcc
+COLLECT_LTO_WRAPPER=3D/usr/libexec/gcc/riscv64-redhat-linux/7/lto-wrapper
+Target: riscv64-redhat-linux
+Configured with: ../configure --enable-bootstrap =
+--enable-languages=3Dc,c++,objc,obj-c++,fortran,lto --prefix=3D/usr =
+--mandir=3D/usr/share/man --infodir=3D/usr/share/info =
+--with-bugurl=3Dhttp://bugzilla.redhat.com/bugzilla --enable-shared =
+--enable-threads=3Dposix --enable-checking=3Drelease --enable-multilib =
+--with-system-zlib --enable-__cxa_atexit --disable-libunwind-exceptions =
+--enable-gnu-unique-object --enable-linker-build-id =
+--with-gcc-major-version-only --with-linker-hash-style=3Dgnu =
+--enable-plugin --enable-initfini-array --with-isl --disable-libmpx =
+--build=3Driscv64-redhat-linux
+Thread model: posix
+gcc version 7.3.1 20180303 (Red Hat 7.3.1-5) (GCC)
+
+We did try gcc 8.3.0 as well but this one is the one I use more =
+frequently.
+
+Let me know if you need more data and any help figuring this out would =
+be appreciated.
+
+--Apple-Mail=_E206B6D1-759D-4DD8-A566-F3D2194E193F
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+	filename=signature.asc
+Content-Type: application/pgp-signature;
+	name=signature.asc
+Content-Description: Message signed with OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEE8htVBWYODFIPzwuljM0W459K7ykFAlzduqQACgkQjM0W459K
+7yntDQ/+O9FtPFFldZbv+ACP0rnT6yYdEdM5+54aJ2/Q6Z9niX/w/FvjbvJcGOzk
+6OGy3wCIIbzpLSxYoI0/hkbjxw/72m9La9dL50HdCh4N7ghIQQ+kCcZUcJikCNGi
+19iFLua2XA5bIemUVzDsgXZSwMyt2mR/FiMQFl4LyKaUFYAXuhtJiSYA/3XaqTcC
+L0Jwjz14ZupNjIpuO9YZQKOdPzaS+wuXdtfDKxlM/edGDewCCykuSIfsouKEuXQA
+BjKiE4i1KKQbgsQserRr9d/SuhEZlq37/i1QuFgCTZNAc/TrWx3Z04a7XdH2ja3C
+2pP4IadSQeq4bUPk4/BGEp61h4EDEr81B/8FPwxxiNkA4cAjz8igSET7WlF591f8
+mrZJC7QWOLrcjhLoC6N+KXmVbh9YOWYJscrwJJ8edmul9/l4x85AAvAC0KoWQdET
+WSWNmcpbJC4cdK43thJC43bikdjY2HnzofQNKwpZRiy/TJ4OFLcNOJLpHtjo3dLU
+e2F4o5N/4UJUS0cePOPgVE7ONQ+5/FQuzs40+oDL9W8Wwk05him2h1+fDKksN2q7
+RrKVMjeG5drnw4I7OYFBodCgkU6H+fBXAcPtTjczCGn6wwa3G9zJs/IJkuYoGX33
+Q+rIKGL8VxyWS35i8MhxjcQWHaOsHMqvgCPPHv5wpvQkSNP2Rj0=
+=o9mW
+-----END PGP SIGNATURE-----
+
+--Apple-Mail=_E206B6D1-759D-4DD8-A566-F3D2194E193F--
 
