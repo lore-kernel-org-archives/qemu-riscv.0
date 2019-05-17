@@ -1,44 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1hRN7i-0002G1-TC
-	for mharc-qemu-riscv@gnu.org; Thu, 16 May 2019 16:37:06 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:53729)
+	id 1hRf91-00059F-Pq
+	for mharc-qemu-riscv@gnu.org; Fri, 17 May 2019 11:51:39 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:56797)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <marco@peereboom.us>) id 1hRM6n-0005AC-VV
-	for qemu-riscv@nongnu.org; Thu, 16 May 2019 15:32:07 -0400
+	(envelope-from <bmeng.cn@gmail.com>) id 1hRf8y-00058j-Jo
+	for qemu-riscv@nongnu.org; Fri, 17 May 2019 11:51:37 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <marco@peereboom.us>) id 1hRM6j-0000lZ-C8
-	for qemu-riscv@nongnu.org; Thu, 16 May 2019 15:32:04 -0400
-Received: from 96-92-233-220-static.hfc.comcastbusiness.net
-	([96.92.233.220]:60695 helo=dcr0.decred.org)
-	by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.71) (envelope-from <marco@peereboom.us>) id 1hRM6f-0000hc-KI
-	for qemu-riscv@nongnu.org; Thu, 16 May 2019 15:31:59 -0400
-Received: from mail.peereboom.us
-	(104-0-143-237.lightspeed.austtx.sbcglobal.net [104.0.143.237])
-	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by dcr0.decred.org (Postfix) with ESMTPS id 191A318B4072;
-	Thu, 16 May 2019 19:31:53 +0000 (UTC)
-Received: from [172.16.0.153] (cpe-70-114-171-172.austin.res.rr.com
-	[70.114.171.172])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by mail.peereboom.us (Postfix) with ESMTPSA id 6147F7232B;
-	Thu, 16 May 2019 14:31:51 -0500 (CDT)
-From: Marco Peereboom <marco@peereboom.us>
-Content-Type: multipart/signed;
-	boundary="Apple-Mail=_E206B6D1-759D-4DD8-A566-F3D2194E193F";
-	protocol="application/pgp-signature"; micalg=pgp-sha512
-Mime-Version: 1.0 (Mac OS X Mail 12.4 \(3445.104.8\))
-Date: Thu, 16 May 2019 14:31:48 -0500
-Message-Id: <95054557-05B0-4AAE-BA8B-55E088806F2C@peereboom.us>
-To: qemu-riscv@nongnu.org
-X-Mailer: Apple Mail (2.3445.104.8)
+	(envelope-from <bmeng.cn@gmail.com>) id 1hRf8x-0008RG-Jq
+	for qemu-riscv@nongnu.org; Fri, 17 May 2019 11:51:36 -0400
+Received: from mail-pl1-x644.google.com ([2607:f8b0:4864:20::644]:45069)
+	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+	(Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
+	id 1hRf8x-0008N0-Di; Fri, 17 May 2019 11:51:35 -0400
+Received: by mail-pl1-x644.google.com with SMTP id a5so3514324pls.12;
+	Fri, 17 May 2019 08:51:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:subject:date:message-id:in-reply-to:references;
+	bh=3zAQYjQsDk6oUPzzs0AgM3UySNo4uual9DRtUoAO6pM=;
+	b=IaqaipM9wsyddaBd0k7l+hr/riS3GbnPORDOHH05IpAgSh0lrZDDUj6Iep1GkvhJDf
+	zr6cIfCpBp4M7xgKY5Jh6lNbqIbVbI4MLWLIJUWrTfV8cwzbu1APRuC5RYVr6N4gmvu0
+	jnV72sjZ9UReJjAPKCcrcFR92Ml/rQn4tNTmv5fb+CseLmr4fOcJpuUmlmpDqmYGs4c3
+	R62GvNWQAxKV6yJ1l0J86K322n6J4An+8vSbyb9T3kbqXNtbKhVDxWgb8RDeEXd+5Nw0
+	R2gIHjIg8eccjK+2MBFL+T0cDuiWyjAkx0xPMkMaInY980TTRZsdys8sJmdk64La2QdT
+	9QYQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+	:references;
+	bh=3zAQYjQsDk6oUPzzs0AgM3UySNo4uual9DRtUoAO6pM=;
+	b=kWdvr8von6QSfwgP0BecR+97wHxORYdCVzHBWXpuXbOEuUy6WpFACwbvF6IdqT4Q+7
+	jz/EVCWdIPFTLDYJYSNQK2Lura37pO4GLZMCjQDTTfIHMh+rNjYRLuPeQwtLT3DpOMrW
+	2LUafiA9uLgZG3HaKaO1LJEMPSpQua9xkgZbl0oVS4wZYVx4W4bhCO1fiBBUVelVfNkX
+	E4TagWZ0xSIQuFES/Xlo7QXgzghH1nRY6klAnV//Oj5gwOWCCAABK+O736acAhLGXtI+
+	qjHJpC+onEXEyUuPr1sx8A3QkD+QuvGFYTXkbDbkKmn3G/TbKYtrHId6Z41usR22uD7t
+	q3Ug==
+X-Gm-Message-State: APjAAAXxWQUkrc0soR08CgPyouhFNmOPJib1r0VoPz1nT32w8aXGYn1H
+	TirGfE3VB+9uPnBDu5FZN534eQqG
+X-Google-Smtp-Source: APXvYqxPBxgHH9/6M15hHY4+uf1lwfsCs9teYzaMqmtCxeKz2k6oEtIetTviXRuA73Moh9/WcWDuyQ==
+X-Received: by 2002:a17:902:1621:: with SMTP id
+	g30mr16454605plg.326.1558108292036; 
+	Fri, 17 May 2019 08:51:32 -0700 (PDT)
+Received: from localhost.localdomain (unknown-224-80.windriver.com.
+	[147.11.224.80]) by smtp.gmail.com with ESMTPSA id
+	u123sm17564646pfu.67.2019.05.17.08.51.30
+	(version=TLS1 cipher=AES128-SHA bits=128/128);
+	Fri, 17 May 2019 08:51:31 -0700 (PDT)
+From: Bin Meng <bmeng.cn@gmail.com>
+To: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
+	Alistair Francis <Alistair.Francis@wdc.com>,
+	Palmer Dabbelt <palmer@sifive.com>
+Date: Fri, 17 May 2019 08:51:25 -0700
+Message-Id: <1558108285-19571-2-git-send-email-bmeng.cn@gmail.com>
+X-Mailer: git-send-email 1.7.1
+In-Reply-To: <1558108285-19571-1-git-send-email-bmeng.cn@gmail.com>
+References: <1558108285-19571-1-git-send-email-bmeng.cn@gmail.com>
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 96.92.233.220
-X-Mailman-Approved-At: Thu, 16 May 2019 16:37:05 -0400
-Subject: [Qemu-riscv] Atomic issues on riscv64
+X-Received-From: 2607:f8b0:4864:20::644
+Subject: [Qemu-riscv] [PATCH 2/2] riscv: sifive_u: Update the plic hart
+ config to support multicore
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -50,94 +70,56 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 May 2019 19:32:07 -0000
+X-List-Received-Date: Fri, 17 May 2019 15:51:37 -0000
 
+At present the PLIC is instantiated to support only one hart, while
+the machine allows at most 4 harts to be created. When more than 1
+hart is configured, PLIC needs to instantiated to support multicore,
+otherwise an SMP OS does not work.
 
---Apple-Mail=_E206B6D1-759D-4DD8-A566-F3D2194E193F
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=us-ascii
+Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
+---
 
-While porting Go (https://golang.org/) to riscv64 we ran into a couple =
-of atomic issues.
+ hw/riscv/sifive_u.c | 16 +++++++++++++++-
+ 1 file changed, 15 insertions(+), 1 deletion(-)
 
-At first we thought that they were go issues but we have narrowed at it =
-down enough
-for it to be QEMU related. Basically atomics periodically fail and =
-because it is
-infrequent enough we wrote some test programs to bring them out quicker.
+diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+index e2120ac..a416d5d 100644
+--- a/hw/riscv/sifive_u.c
++++ b/hw/riscv/sifive_u.c
+@@ -344,6 +344,8 @@ static void riscv_sifive_u_soc_realize(DeviceState *dev, Error **errp)
+     MemoryRegion *system_memory = get_system_memory();
+     MemoryRegion *mask_rom = g_new(MemoryRegion, 1);
+     qemu_irq plic_gpios[SIFIVE_U_PLIC_NUM_SOURCES];
++    char *plic_hart_config;
++    size_t plic_hart_config_len;
+     int i;
+     Error *err = NULL;
+     NICInfo *nd = &nd_table[0];
+@@ -357,9 +359,21 @@ static void riscv_sifive_u_soc_realize(DeviceState *dev, Error **errp)
+     memory_region_add_subregion(system_memory, memmap[SIFIVE_U_MROM].base,
+                                 mask_rom);
+ 
++    /* create PLIC hart topology configuration string */
++    plic_hart_config_len = (strlen(SIFIVE_U_PLIC_HART_CONFIG) + 1) * smp_cpus;
++    plic_hart_config = g_malloc0(plic_hart_config_len);
++    for (i = 0; i < smp_cpus; i++) {
++        if (i != 0) {
++            strncat(plic_hart_config, ",", plic_hart_config_len);
++        }
++        strncat(plic_hart_config, SIFIVE_U_PLIC_HART_CONFIG,
++                plic_hart_config_len);
++        plic_hart_config_len -= (strlen(SIFIVE_U_PLIC_HART_CONFIG) + 1);
++    }
++
+     /* MMIO */
+     s->plic = sifive_plic_create(memmap[SIFIVE_U_PLIC].base,
+-        (char *)SIFIVE_U_PLIC_HART_CONFIG,
++        plic_hart_config,
+         SIFIVE_U_PLIC_NUM_SOURCES,
+         SIFIVE_U_PLIC_NUM_PRIORITIES,
+         SIFIVE_U_PLIC_PRIORITY_BASE,
+-- 
+2.7.4
 
-Either one of these test programs will bring out the failure:
-* http://pastebitch.com/WaSP
-* http://pastebitch.com/
-
-You may have to run the programs more than once or play with TCOUNT and =
-NCOUNT
-for the issue to manifest itself. The programs will complain when the =
-expected value
-does not match the real value.
-
-Success: ok 40000000 40000000
-Failure: womp womp 39800640 40000000
-
-These failures do *NOT* occur on `qemu-risc64` or on hardware (sifive =
-unleashed boards).
-They do occur in `qemu-system-riscv64` running Linux.
-
-This was tested on `QEMU emulator version 3.1.94 (v4.0.0-rc4)`
-
-Kernel:
-Linux version 5.1.0-rc3-dirty (marco@void) (gcc version 8.3.0 (GCC)) #1 =
-SMP Thu Apr 11 15:18:36 CDT 2019
-
-gcc inside qemu:
-Using built-in specs.
-COLLECT_GCC=3Dgcc
-COLLECT_LTO_WRAPPER=3D/usr/libexec/gcc/riscv64-redhat-linux/7/lto-wrapper
-Target: riscv64-redhat-linux
-Configured with: ../configure --enable-bootstrap =
---enable-languages=3Dc,c++,objc,obj-c++,fortran,lto --prefix=3D/usr =
---mandir=3D/usr/share/man --infodir=3D/usr/share/info =
---with-bugurl=3Dhttp://bugzilla.redhat.com/bugzilla --enable-shared =
---enable-threads=3Dposix --enable-checking=3Drelease --enable-multilib =
---with-system-zlib --enable-__cxa_atexit --disable-libunwind-exceptions =
---enable-gnu-unique-object --enable-linker-build-id =
---with-gcc-major-version-only --with-linker-hash-style=3Dgnu =
---enable-plugin --enable-initfini-array --with-isl --disable-libmpx =
---build=3Driscv64-redhat-linux
-Thread model: posix
-gcc version 7.3.1 20180303 (Red Hat 7.3.1-5) (GCC)
-
-We did try gcc 8.3.0 as well but this one is the one I use more =
-frequently.
-
-Let me know if you need more data and any help figuring this out would =
-be appreciated.
-
---Apple-Mail=_E206B6D1-759D-4DD8-A566-F3D2194E193F
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
-	filename=signature.asc
-Content-Type: application/pgp-signature;
-	name=signature.asc
-Content-Description: Message signed with OpenPGP
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCgAdFiEE8htVBWYODFIPzwuljM0W459K7ykFAlzduqQACgkQjM0W459K
-7yntDQ/+O9FtPFFldZbv+ACP0rnT6yYdEdM5+54aJ2/Q6Z9niX/w/FvjbvJcGOzk
-6OGy3wCIIbzpLSxYoI0/hkbjxw/72m9La9dL50HdCh4N7ghIQQ+kCcZUcJikCNGi
-19iFLua2XA5bIemUVzDsgXZSwMyt2mR/FiMQFl4LyKaUFYAXuhtJiSYA/3XaqTcC
-L0Jwjz14ZupNjIpuO9YZQKOdPzaS+wuXdtfDKxlM/edGDewCCykuSIfsouKEuXQA
-BjKiE4i1KKQbgsQserRr9d/SuhEZlq37/i1QuFgCTZNAc/TrWx3Z04a7XdH2ja3C
-2pP4IadSQeq4bUPk4/BGEp61h4EDEr81B/8FPwxxiNkA4cAjz8igSET7WlF591f8
-mrZJC7QWOLrcjhLoC6N+KXmVbh9YOWYJscrwJJ8edmul9/l4x85AAvAC0KoWQdET
-WSWNmcpbJC4cdK43thJC43bikdjY2HnzofQNKwpZRiy/TJ4OFLcNOJLpHtjo3dLU
-e2F4o5N/4UJUS0cePOPgVE7ONQ+5/FQuzs40+oDL9W8Wwk05him2h1+fDKksN2q7
-RrKVMjeG5drnw4I7OYFBodCgkU6H+fBXAcPtTjczCGn6wwa3G9zJs/IJkuYoGX33
-Q+rIKGL8VxyWS35i8MhxjcQWHaOsHMqvgCPPHv5wpvQkSNP2Rj0=
-=o9mW
------END PGP SIGNATURE-----
-
---Apple-Mail=_E206B6D1-759D-4DD8-A566-F3D2194E193F--
 
