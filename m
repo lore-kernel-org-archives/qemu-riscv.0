@@ -1,64 +1,41 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1hRlV6-0008Vo-7h
-	for mharc-qemu-riscv@gnu.org; Fri, 17 May 2019 18:38:52 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:41971)
+	id 1hS4mw-0003A8-GM
+	for mharc-qemu-riscv@gnu.org; Sat, 18 May 2019 15:14:34 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:32872)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1hRlV3-0008UH-Md
-	for qemu-riscv@nongnu.org; Fri, 17 May 2019 18:38:50 -0400
+	(envelope-from <hmka2@cl.cam.ac.uk>) id 1hS4mu-00038C-9R
+	for qemu-riscv@nongnu.org; Sat, 18 May 2019 15:14:33 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1hRlV1-00076Q-Qi
-	for qemu-riscv@nongnu.org; Fri, 17 May 2019 18:38:49 -0400
-Received: from mail-lj1-x242.google.com ([2a00:1450:4864:20::242]:44285)
-	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <alistair23@gmail.com>)
-	id 1hRlUx-0006ur-B0; Fri, 17 May 2019 18:38:43 -0400
-Received: by mail-lj1-x242.google.com with SMTP id e13so7574686ljl.11;
-	Fri, 17 May 2019 15:38:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=x47A39VYZOP+woky4Q+6cPjRDZfu7U8RSR2tnt5LzTQ=;
-	b=XmpjZ4rAprbU8vCt1Pa54gKmcOel9oN/o9ByUym0NQwRuACmpv1IrcH8rlVovyRm0y
-	QUQG9u3ziVj3H9tJmGJMtmQgfwQUdHNPdu8eFInnluFxOvyulvl6kX1jRtKMF1WQ5Dw+
-	Igvh70yZH56zpyQpe9qpgKcYu0Uy2f0umsEyxr8loizJ9Ut7tC7r+id3YXQUEkPYwbEl
-	SHnUrSRFsXU1T83M//VrR8e39EbjxC/IntS4MElaUYDGNAYlimQHv1qQDMZ9IHcmDQ2X
-	BdQvkjsY5SVSK7IQiAMnxWyntEL+wEbvYjJZicgDn7y4KcsH3x2B14OljficbGZhmjHY
-	613Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=x47A39VYZOP+woky4Q+6cPjRDZfu7U8RSR2tnt5LzTQ=;
-	b=tyoJAJ9OktK6iOFlivvJlYpmiGXfleXD0kE5TqHyqZVYgKaiQQoprtWCJunluX3wqT
-	KZJN9lZqwy1+RaRLayZIsDBqTxMpZtFxEQza8yZWazJtcu4HU/d2IZfqifqZSPlfvRWX
-	fstVqTyNyhvdytkMO3yCZYXua1uM+53mzDqn+3QwCg9Ufx1vfPNZdBhFmZAeYqV2H9TM
-	dbkPIQPO96wOWNushHDEWdMHly292uw+g8qt9DCH3U3PB7uDnpWVBc/XFC36esyI+H+s
-	Crm4imJPBGYGxxUpTOhWH9DOkKURAUgG1hDfzYKfGtKjTM7GMHtYoRH6d+k8QJXjWUMo
-	ntCQ==
-X-Gm-Message-State: APjAAAUMZYNZ5+g/cfWkdOcLT+EKVM+p+okc6bE0sf8GZpTkv3m6/AFB
-	Eh1keRC/gETp5yLz9BkgfSHHMZ61bCuWR9WzwzY=
-X-Google-Smtp-Source: APXvYqxomiiqbdka5P0sOBDjfejaNdt16P7EZGFuiEF1SDYqAxE4VPgQguLZgi+4ZNEnGgdOHIv/WcCMgATu3JqvB0U=
-X-Received: by 2002:a2e:8909:: with SMTP id d9mr24382247lji.93.1558132721301; 
-	Fri, 17 May 2019 15:38:41 -0700 (PDT)
-MIME-Version: 1.0
-References: <20190517222342.26394-1-jonathan@fintelia.io>
-	<20190517222342.26394-3-jonathan@fintelia.io>
-In-Reply-To: <20190517222342.26394-3-jonathan@fintelia.io>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 17 May 2019 15:36:28 -0700
-Message-ID: <CAKmqyKMG6ffhQ5VYgLZ3XVfZ2-E_O9BH6UCanmLJ3awDDUfS_w@mail.gmail.com>
-To: Jonathan Behrens <jonathan@fintelia.io>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
-	"open list:RISC-V" <qemu-riscv@nongnu.org>, 
-	Sagar Karandikar <sagark@eecs.berkeley.edu>, 
-	Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
-	Palmer Dabbelt <palmer@sifive.com>, Jonathan Behrens <fintelia@gmail.com>,
-	Alistair Francis <Alistair.Francis@wdc.com>
-Content-Type: text/plain; charset="UTF-8"
+	(envelope-from <hmka2@cl.cam.ac.uk>) id 1hS4mt-0002c5-7g
+	for qemu-riscv@nongnu.org; Sat, 18 May 2019 15:14:32 -0400
+Received: from mta1.cl.cam.ac.uk ([2a05:b400:110::25:1]:44357)
+	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.71) (envelope-from <hmka2@cl.cam.ac.uk>)
+	id 1hS4mt-0002Zg-20; Sat, 18 May 2019 15:14:31 -0400
+Received: from cassia.cl.cam.ac.uk ([2001:630:212:238:b26e:bfff:fe2f:c7d9])
+	by mta1.cl.cam.ac.uk with esmtps
+	(TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.90_1)
+	(envelope-from <hmka2@cl.cam.ac.uk>)
+	id 1hS4mo-0002pg-Al; Sat, 18 May 2019 19:14:26 +0000
+Received: from hmka2 by cassia.cl.cam.ac.uk with local (Exim 4.90_1)
+	(envelope-from <hmka2@cl.cam.ac.uk>)
+	id 1hS4mo-0001jh-86; Sat, 18 May 2019 20:14:26 +0100
+From: Hesham Almatary <Hesham.Almatary@cl.cam.ac.uk>
+To: qemu-riscv@nongnu.org
+Cc: qemu-devel@nongnu.org, Hesham Almatary <Hesham.Almatary@cl.cam.ac.uk>,
+	Hesham Almatary <hesham.almatary@cl.cam.ac.uk>,
+	Palmer Dabbelt <palmer@sifive.com>,
+	Alistair Francis <Alistair.Francis@wdc.com>,
+	Sagar Karandikar <sagark@eecs.berkeley.edu>,
+	Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+Date: Sat, 18 May 2019 20:13:22 +0100
+Message-Id: <20190518191323.4907-1-Hesham.Almatary@cl.cam.ac.uk>
+X-Mailer: git-send-email 2.17.1
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2a00:1450:4864:20::242
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH for-4.1 2/2] target/riscv: Add
- support for -bios "firmware_filename" flag
+X-Received-From: 2a05:b400:110::25:1
+Subject: [Qemu-riscv] [PATCH 1/2] RISC-V: Raise access fault exceptions on
+ PMP violations
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -70,123 +47,66 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 May 2019 22:38:51 -0000
+X-List-Received-Date: Sat, 18 May 2019 19:14:33 -0000
 
-On Fri, May 17, 2019 at 3:25 PM Jonathan Behrens <jonathan@fintelia.io> wrote:
->
-> QEMU does not have any default firmware for RISC-V. However, it isn't possible
-> to run a normal kernel binary without firmware. Thus it has previously been
-> necessary to compile the two together into a single binary to pass with the
-> -kernel flag. This patch allows passing separate firmware and kernel binaries by
-> passing both the -bios and -kernel flags.
+Section 3.6 in RISC-V v1.10 privilege specification states that PMP violations
+report "access exceptions." The current PMP implementation has
+a bug which wrongly reports "page exceptions" on PMP violations.
 
-I've never been fully convinced of this, why not just use the generic loader?
+This patch fixes this bug by reporting the correct PMP access exceptions
+trap values.
 
-This does match other architectures though so it's fine to go in. I
-think you will also get better in_asm output with this as well, which
-is something the loader doesn't give you.
+Signed-off-by: Hesham Almatary <hesham.almatary@cl.cam.ac.uk>
+---
+ target/riscv/cpu_helper.c | 9 ++++++---
+ 1 file changed, 6 insertions(+), 3 deletions(-)
 
->
-> This is based on a previously proposed patch by Michael Clark:
-> https://patchwork.kernel.org/patch/10419975/
->
-> Signed-off-by: Jonathan Behrens <jonathan@fintelia.io>
-> ---
->  hw/riscv/virt.c | 66 ++++++++++++++++++++++++++++++++++++++++---------
->  1 file changed, 55 insertions(+), 11 deletions(-)
->
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index 87cc08016b..d7b1792b58 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -62,6 +62,40 @@ static const struct MemmapEntry {
->      [VIRT_PCIE_ECAM] =   { 0x30000000,    0x10000000 },
->  };
->
-> +
-> +static target_ulong load_firmware_and_kernel(const char *firmware_filename,
-> +                                             const char *kernel_filename,
-> +                                             uint64_t mem_size,
-> +                                             uint64_t* kernel_start,
-> +                                             uint64_t* kernel_end)
-> +{
-> +    uint64_t firmware_entry, firmware_end;
-> +    int size;
-> +
-> +    if (load_elf(firmware_filename, NULL, NULL, NULL,
-> +                 &firmware_entry, NULL, &firmware_end,
-> +                 0, EM_RISCV, 1, 0) < 0) {
-> +        error_report("could not load firmware '%s'", firmware_filename);
-> +        exit(1);
-> +    }
-> +
-> +    /* align kernel load address to the megapage after the firmware */
-> +#if defined(TARGET_RISCV32)
-> +    *kernel_start = (firmware_end + 0x3fffff) & ~0x3fffff;
-> +#else
-> +    *kernel_start = (firmware_end + 0x1fffff) & ~0x1fffff;
-> +#endif
-> +
-> +    size = load_image_targphys(kernel_filename, *kernel_start,
-> +                               mem_size - *kernel_start);
-> +    if (size == -1) {
-> +        error_report("could not load kernel '%s'", kernel_filename);
-> +        exit(1);
-> +    }
-> +    *kernel_end = *kernel_start + size;
-> +    return firmware_entry;
-> +}
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index 41d6db41c3..b48de36114 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -318,12 +318,13 @@ restart:
+ }
 
-This should be in a generic boot.c file and support added to all RISC-V boards.
+ static void raise_mmu_exception(CPURISCVState *env, target_ulong address,
+-                                MMUAccessType access_type)
++                                MMUAccessType access_type, bool pmp_violation)
+ {
+     CPUState *cs = CPU(riscv_env_get_cpu(env));
+     int page_fault_exceptions =
+         (env->priv_ver >= PRIV_VERSION_1_10_0) &&
+-        get_field(env->satp, SATP_MODE) != VM_1_10_MBARE;
++        get_field(env->satp, SATP_MODE) != VM_1_10_MBARE &&
++        !pmp_violation;
+     switch (access_type) {
+     case MMU_INST_FETCH:
+         cs->exception_index = page_fault_exceptions ?
+@@ -389,6 +390,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+     CPURISCVState *env = &cpu->env;
+     hwaddr pa = 0;
+     int prot;
++    bool pmp_violation = false;
+     int ret = TRANSLATE_FAIL;
 
-Alistair
+     qemu_log_mask(CPU_LOG_MMU, "%s ad %" VADDR_PRIx " rw %d mmu_idx %d\n",
+@@ -402,6 +404,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
 
-> +
->  static target_ulong load_kernel(const char *kernel_filename)
->  {
->      uint64_t kernel_entry;
-> @@ -423,19 +457,29 @@ static void riscv_virt_board_init(MachineState *machine)
->                                  mask_rom);
->
->      uint64_t entry = memmap[VIRT_DRAM].base;
-> -    if (machine->kernel_filename) {
-> +    if (machine->firmware && machine->kernel_filename) {
-> +        uint64_t kernel_start, kernel_end;
-> +        entry = load_firmware_and_kernel(machine->firmware,
-> +                                         machine->kernel_filename,
-> +                                         machine->ram_size, &kernel_start,
-> +                                         &kernel_end);
-> +
-> +        qemu_fdt_setprop_cells(fdt, "/chosen", "riscv,kernel-end",
-> +                               kernel_end >> 32, kernel_end);
-> +        qemu_fdt_setprop_cells(fdt, "/chosen", "riscv,kernel-start",
-> +                               kernel_start >> 32, kernel_start);
-> +    } else if (machine->kernel_filename) {
->          entry = load_kernel(machine->kernel_filename);
-> +    }
->
-> -        if (machine->initrd_filename) {
-> -            uint64_t start;
-> -            uint64_t end = load_initrd(machine->initrd_filename,
-> -                                       memmap[VIRT_DRAM].base, machine->ram_size,
-> -                                       &start);
-> -            qemu_fdt_setprop_cell(fdt, "/chosen",
-> -                                  "linux,initrd-start", start);
-> -            qemu_fdt_setprop_cell(fdt, "/chosen", "linux,initrd-end",
-> -                                  end);
-> -        }
-> +    if (machine->kernel_filename && machine->initrd_filename) {
-> +        uint64_t start;
-> +        uint64_t end = load_initrd(machine->initrd_filename,
-> +                                   memmap[VIRT_DRAM].base, machine->ram_size,
-> +                                   &start);
-> +
-> +        qemu_fdt_setprop_cell(fdt, "/chosen", "linux,initrd-start", start);
-> +        qemu_fdt_setprop_cell(fdt, "/chosen", "linux,initrd-end", end);
->      }
->
->      /* reset vector */
-> --
-> 2.20.1
->
+     if (riscv_feature(env, RISCV_FEATURE_PMP) &&
+         !pmp_hart_has_privs(env, pa, TARGET_PAGE_SIZE, 1 << access_type)) {
++        pmp_violation = true;
+         ret = TRANSLATE_FAIL;
+     }
+     if (ret == TRANSLATE_SUCCESS) {
+@@ -411,7 +414,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+     } else if (probe) {
+         return false;
+     } else {
+-        raise_mmu_exception(env, address, access_type);
++        raise_mmu_exception(env, address, access_type, pmp_violation);
+         riscv_raise_exception(env, cs->exception_index, retaddr);
+     }
+ #else
+--
+2.17.1
+
 
