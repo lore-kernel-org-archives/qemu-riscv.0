@@ -1,41 +1,68 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1hS8iB-0007Xr-Ih
-	for mharc-qemu-riscv@gnu.org; Sat, 18 May 2019 19:25:55 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:58386)
+	id 1hSlZa-00063E-8H
+	for mharc-qemu-riscv@gnu.org; Mon, 20 May 2019 12:55:38 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:50913)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <hmka2@cl.cam.ac.uk>) id 1hS8i9-0007Wq-6A
-	for qemu-riscv@nongnu.org; Sat, 18 May 2019 19:25:54 -0400
+	(envelope-from <alistair23@gmail.com>) id 1hSlZV-00061y-S2
+	for qemu-riscv@nongnu.org; Mon, 20 May 2019 12:55:36 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <hmka2@cl.cam.ac.uk>) id 1hS8i8-0004IZ-9i
-	for qemu-riscv@nongnu.org; Sat, 18 May 2019 19:25:53 -0400
-Received: from mta2.cl.cam.ac.uk ([2001:630:212:200::25:2]:53132)
+	(envelope-from <alistair23@gmail.com>) id 1hSlZU-0006iq-M7
+	for qemu-riscv@nongnu.org; Mon, 20 May 2019 12:55:33 -0400
+Received: from mail-lj1-x241.google.com ([2a00:1450:4864:20::241]:36136)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <hmka2@cl.cam.ac.uk>)
-	id 1hS8i8-0004IF-4E; Sat, 18 May 2019 19:25:52 -0400
-Received: from cassia.cl.cam.ac.uk ([2001:630:212:238:b26e:bfff:fe2f:c7d9])
-	by mta2.cl.cam.ac.uk with esmtps
-	(TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.86_2)
-	(envelope-from <hmka2@cl.cam.ac.uk>)
-	id 1hS8i7-000GB2-Dh; Sun, 19 May 2019 00:25:51 +0100
-Received: from hmka2 by cassia.cl.cam.ac.uk with local (Exim 4.90_1)
-	(envelope-from <hmka2@cl.cam.ac.uk>)
-	id 1hS8i7-00023k-CA; Sun, 19 May 2019 00:25:51 +0100
-From: Hesham Almatary <Hesham.Almatary@cl.cam.ac.uk>
-To: qemu-riscv@nongnu.org
-Cc: qemu-devel@nongnu.org, Hesham Almatary <Hesham.Almatary@cl.cam.ac.uk>,
-	Palmer Dabbelt <palmer@sifive.com>,
-	Alistair Francis <Alistair.Francis@wdc.com>,
-	Sagar Karandikar <sagark@eecs.berkeley.edu>,
-	Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-Date: Sun, 19 May 2019 00:25:02 +0100
-Message-Id: <20190518232502.5201-3-Hesham.Almatary@cl.cam.ac.uk>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20190518232502.5201-1-Hesham.Almatary@cl.cam.ac.uk>
-References: <20190518232502.5201-1-Hesham.Almatary@cl.cam.ac.uk>
+	(Exim 4.71) (envelope-from <alistair23@gmail.com>)
+	id 1hSlZS-0006ao-5a; Mon, 20 May 2019 12:55:30 -0400
+Received: by mail-lj1-x241.google.com with SMTP id z1so13165016ljb.3;
+	Mon, 20 May 2019 09:55:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=YdjGz1iUHCrBeRgBbXhnRBGUiP9Ld3ZHUDxu+Ht+8Lc=;
+	b=GX3V9piI9dxxscXO00totoRV5oqJuU0ZEdn/tA248nS3Z2/VjJJfEsrG3z6im1A3kj
+	yzckuUj0hVy054TJzIr+Jqnc8nb2df0PLLTWFTmK+9d+nrKgOpTjQKSJHKTwsSo71eZq
+	fugc7g6p/QwY+ViiaHMnk4C/U3G9Y2ECxdB7iDDeKSqC+Zi7H97FnxXFJlMwvFdQcINm
+	FBMgnovH87dhOJJRIo9U7ajb3FrWAr2Bqnu897GPzEmpR4Km+vY3IwliKv747fJJHQKy
+	jwzPisuV1fiEPhMc+BO41I+2zFuMub6kTjVelD+n31kStzjVvU6NRbI1QVd5J+K/VJhx
+	zIIQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=YdjGz1iUHCrBeRgBbXhnRBGUiP9Ld3ZHUDxu+Ht+8Lc=;
+	b=p9EjYnck7d7+EmqewHTh/N12qz74fROdIvwjvmJVJsNLuhHJDTrakpBb1Xcozl4vJ+
+	S8o5tv82LK6IaZCJYSWEEvDu7Rk1aatFQLxeh6+FteYICTkqEUWzRo+RdGC5pyYym6wb
+	BF4xCZUexmVW4W7e+3rsIxV1UgAOTvfeo1oasTEBOdYe7T/JoRDdepI3dCevVoMwPpDW
+	uxw8KnL3/K5T1WxiC/bB2N+D63HwMYtpXRSQAVXdpP3JtPFMXoVVfv/LNJDQttBfh2e8
+	x6Mm1EB6gXdrGhC0Q476C6C9eTJ/2xQJWjVKhXhmSeiGZOzix2TifP5zAcMXKJc8Z+EN
+	vlzg==
+X-Gm-Message-State: APjAAAWI+VNJ4ABZUItrZx/cNVXxSXS1JtoQkjr02ASkYkNAbKbK60PR
+	u+YJzmSydsq+cSHrSdJS1iFOXaZMmYEqQLWwPrQ=
+X-Google-Smtp-Source: APXvYqx8AaxMskIR9+aEGolBuyHzRQhdjCe+VAVMPR+j80crpkDnIrcHUaJxBuq/j2KRCb8xgHvXq0eG305OztEXYBk=
+X-Received: by 2002:a2e:9a4f:: with SMTP id k15mr32201778ljj.159.1558371324699;
+	Mon, 20 May 2019 09:55:24 -0700 (PDT)
+MIME-Version: 1.0
+References: <20190517222342.26394-1-jonathan@fintelia.io>
+	<20190517222342.26394-3-jonathan@fintelia.io>
+	<CAKmqyKMG6ffhQ5VYgLZ3XVfZ2-E_O9BH6UCanmLJ3awDDUfS_w@mail.gmail.com>
+	<CANnJOVFE51rFdV0h0T6_dV6r37kBLcBQCo7Csg8NOUoYkOELpQ@mail.gmail.com>
+In-Reply-To: <CANnJOVFE51rFdV0h0T6_dV6r37kBLcBQCo7Csg8NOUoYkOELpQ@mail.gmail.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Mon, 20 May 2019 09:53:10 -0700
+Message-ID: <CAKmqyKM3C59_w214=mqLFpfwPhUjcLL0EuOY0Yk3DQePx8ZTQg@mail.gmail.com>
+To: Jonathan Behrens <jonathan@fintelia.io>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+	"open list:RISC-V" <qemu-riscv@nongnu.org>, 
+	Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+	Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+	Palmer Dabbelt <palmer@sifive.com>, 
+	Alistair Francis <Alistair.Francis@wdc.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2001:630:212:200::25:2
-Subject: [Qemu-riscv] [PATCHv3 3/3] RISC-V: Check PMP during Page Table Walks
+X-Received-From: 2a00:1450:4864:20::241
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH for-4.1 2/2] target/riscv: Add
+ support for -bios "firmware_filename" flag
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -47,60 +74,43 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 18 May 2019 23:25:54 -0000
+X-List-Received-Date: Mon, 20 May 2019 16:55:36 -0000
 
-The PMP should be checked when doing a page table walk, and report access
-fault exception if the to-be-read PTE address failed the PMP check.
+On Sat, May 18, 2019 at 2:57 PM Jonathan Behrens <jonathan@fintelia.io> wro=
+te:
+>
+> > I've never been fully convinced of this, why not just use the generic l=
+oader?
+>
+> If I understand you are proposing passing bbl (or other firmware) with th=
+e -kernel flag, and then vmlinux (or another kernel) with the -initrd flag?=
+ Wouldn't this result in losing the ability to pass a real init ramdisk to =
+Linux? It also seems to open the possibility for strange bugs/compatibility=
+ issues later if firmware starts recognizing any "initrd" entries in the de=
+vice tree as kernel code to jump into.
 
-Suggested-by: Jonathan Behrens <fintelia@gmail.com>
-Signed-off-by: Hesham Almatary <Hesham.Almatary@cl.cam.ac.uk>
----
- target/riscv/cpu.h        |  1 +
- target/riscv/cpu_helper.c | 10 +++++++++-
- 2 files changed, 10 insertions(+), 1 deletion(-)
+No I mean passing in OpenSBI (or some other boot loader) via the
+-kernel option and then passing in the kernel with QEMU's generic
+device loader. This is documented as part of the OpenSBI boot flow:
+https://github.com/riscv/opensbi/blob/master/docs/platform/qemu_virt.md
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index c17184f4e4..ab3ba3f15a 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -94,6 +94,7 @@ enum {
- #define PRIV_VERSION_1_09_1 0x00010901
- #define PRIV_VERSION_1_10_0 0x00011000
+The only disadvantage with that is that we don't get debug symbols
+from the kernel, but it does mean that the boot loader in QEMU is much
+simpler.
 
-+#define TRANSLATE_PMP_FAIL 2
- #define TRANSLATE_FAIL 1
- #define TRANSLATE_SUCCESS 0
- #define NB_MMU_MODES 4
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 7c7282c680..d0b0f9cf88 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -211,6 +211,12 @@ restart:
+>
+> I do wonder though how compatible the current design is with providing de=
+fault firmware for riscv in the future.
+>
+> > This should be in a generic boot.c file and support added to all RISC-V=
+ boards.
+>
+> I can do this for v2.
 
-         /* check that physical address of PTE is legal */
-         target_ulong pte_addr = base + idx * ptesize;
-+
-+        if (riscv_feature(env, RISCV_FEATURE_PMP) &&
-+            !pmp_hart_has_privs(env, pte_addr, sizeof(target_ulong),
-+            1 << MMU_DATA_LOAD)) {
-+            return TRANSLATE_PMP_FAIL;
-+        }
- #if defined(TARGET_RISCV32)
-         target_ulong pte = ldl_phys(cs->as, pte_addr);
- #elif defined(TARGET_RISCV64)
-@@ -405,8 +411,10 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-     if (riscv_feature(env, RISCV_FEATURE_PMP) &&
-         (ret == TRANSLATE_SUCCESS) &&
-         !pmp_hart_has_privs(env, pa, TARGET_PAGE_SIZE, 1 << access_type)) {
-+        ret = TRANSLATE_PMP_FAIL;
-+    }
-+    if (ret == TRANSLATE_PMP_FAIL) {
-         pmp_violation = true;
--        ret = TRANSLATE_FAIL;
-     }
-     if (ret == TRANSLATE_SUCCESS) {
-         tlb_set_page(cs, address & TARGET_PAGE_MASK, pa & TARGET_PAGE_MASK,
---
-2.17.1
+Thanks
 
+Alistair
+
+>
+> Jonathan
 
