@@ -1,68 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1hSlZa-00063E-8H
-	for mharc-qemu-riscv@gnu.org; Mon, 20 May 2019 12:55:38 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:50913)
+	id 1hSqII-0007q3-MN
+	for mharc-qemu-riscv@gnu.org; Mon, 20 May 2019 17:58:06 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:32847)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1hSlZV-00061y-S2
-	for qemu-riscv@nongnu.org; Mon, 20 May 2019 12:55:36 -0400
+	(envelope-from <alistair23@gmail.com>) id 1hSqIF-0007pA-UY
+	for qemu-riscv@nongnu.org; Mon, 20 May 2019 17:58:04 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1hSlZU-0006iq-M7
-	for qemu-riscv@nongnu.org; Mon, 20 May 2019 12:55:33 -0400
-Received: from mail-lj1-x241.google.com ([2a00:1450:4864:20::241]:36136)
+	(envelope-from <alistair23@gmail.com>) id 1hSqIE-0002ox-WA
+	for qemu-riscv@nongnu.org; Mon, 20 May 2019 17:58:03 -0400
+Received: from mail-lf1-x144.google.com ([2a00:1450:4864:20::144]:33295)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
 	(Exim 4.71) (envelope-from <alistair23@gmail.com>)
-	id 1hSlZS-0006ao-5a; Mon, 20 May 2019 12:55:30 -0400
-Received: by mail-lj1-x241.google.com with SMTP id z1so13165016ljb.3;
-	Mon, 20 May 2019 09:55:26 -0700 (PDT)
+	id 1hSqIE-0002oP-Ol; Mon, 20 May 2019 17:58:02 -0400
+Received: by mail-lf1-x144.google.com with SMTP id x132so11482038lfd.0;
+	Mon, 20 May 2019 14:58:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=YdjGz1iUHCrBeRgBbXhnRBGUiP9Ld3ZHUDxu+Ht+8Lc=;
-	b=GX3V9piI9dxxscXO00totoRV5oqJuU0ZEdn/tA248nS3Z2/VjJJfEsrG3z6im1A3kj
-	yzckuUj0hVy054TJzIr+Jqnc8nb2df0PLLTWFTmK+9d+nrKgOpTjQKSJHKTwsSo71eZq
-	fugc7g6p/QwY+ViiaHMnk4C/U3G9Y2ECxdB7iDDeKSqC+Zi7H97FnxXFJlMwvFdQcINm
-	FBMgnovH87dhOJJRIo9U7ajb3FrWAr2Bqnu897GPzEmpR4Km+vY3IwliKv747fJJHQKy
-	jwzPisuV1fiEPhMc+BO41I+2zFuMub6kTjVelD+n31kStzjVvU6NRbI1QVd5J+K/VJhx
-	zIIQ==
+	:cc; bh=M6qMObBAkscLuAOv22PkbXDv/eymZ80GxzTPN5ZaAGU=;
+	b=H4jZHMWstN9+nBGIsm6NQE9JsWlZzbu1YF/Xq56BsgwFCx25koI68ZZRh67pE9X4bN
+	OFHpomQrg7ROSCLRPMevZtjyAQ2KDP6zUJVEdqqgC8ZBnT9F8p/OD/FcDkbPn6c5TzgE
+	zHiXp4GOf6fnEBGmkzntKEGmDJiBODi9ELB5+curJfYjy+A/Vy7q+im0KxHcEypQOBEX
+	2e4tsi5zHobGf38oe57RB/nOG7MfBv2OIVIIPbZAVPUmtkonvqyAjgB5yE9NVjAtSMtC
+	r32OLJzeTCwBypaENGo9DXhkrfKovZ3B6KAWvZwFOdvq+qRMdNItnn5pOlYW/MkpPHRg
+	w/9Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=YdjGz1iUHCrBeRgBbXhnRBGUiP9Ld3ZHUDxu+Ht+8Lc=;
-	b=p9EjYnck7d7+EmqewHTh/N12qz74fROdIvwjvmJVJsNLuhHJDTrakpBb1Xcozl4vJ+
-	S8o5tv82LK6IaZCJYSWEEvDu7Rk1aatFQLxeh6+FteYICTkqEUWzRo+RdGC5pyYym6wb
-	BF4xCZUexmVW4W7e+3rsIxV1UgAOTvfeo1oasTEBOdYe7T/JoRDdepI3dCevVoMwPpDW
-	uxw8KnL3/K5T1WxiC/bB2N+D63HwMYtpXRSQAVXdpP3JtPFMXoVVfv/LNJDQttBfh2e8
-	x6Mm1EB6gXdrGhC0Q476C6C9eTJ/2xQJWjVKhXhmSeiGZOzix2TifP5zAcMXKJc8Z+EN
-	vlzg==
-X-Gm-Message-State: APjAAAWI+VNJ4ABZUItrZx/cNVXxSXS1JtoQkjr02ASkYkNAbKbK60PR
-	u+YJzmSydsq+cSHrSdJS1iFOXaZMmYEqQLWwPrQ=
-X-Google-Smtp-Source: APXvYqx8AaxMskIR9+aEGolBuyHzRQhdjCe+VAVMPR+j80crpkDnIrcHUaJxBuq/j2KRCb8xgHvXq0eG305OztEXYBk=
-X-Received: by 2002:a2e:9a4f:: with SMTP id k15mr32201778ljj.159.1558371324699;
-	Mon, 20 May 2019 09:55:24 -0700 (PDT)
+	:message-id:subject:to:cc;
+	bh=M6qMObBAkscLuAOv22PkbXDv/eymZ80GxzTPN5ZaAGU=;
+	b=EFtbe69mj3chaW3qS7I3QM4trCTfCRM8anOWV0sfldI0AnhKeFBvFY1DR1isbxRIbV
+	JSXYg1HBEHgCf7wJcWA5jsiB+YdH943/yO7jyUOLfohmihyvN7+h+n3U9XEL3Pf5x6F6
+	/PQNXhIyx7WfQF5gPQdEvKUmscTZFeo+hijiOpniMiQNZYkS1q0PlfssSbMdlv75J/V7
+	Z2gD0Uy5iHHTvw1nftc/pM8qZSZRiXXm86AP8jPFQTUmlvNFt0ec3951xT37ypr4NdLN
+	RQB3C0D9DuiNFoi3pWlCW9ZgpE7Jn9aeDWtqELwiZ+f8aT8BR3N98BPtILicN1M8pQf6
+	eGWQ==
+X-Gm-Message-State: APjAAAWzhGJTReMCWo1+xUmc6p5oM1pkAKxo9gNb09BSF25nhaqbx/y4
+	flLm8jxO/e+rAD4odpA9W9Wcs6XMD7h9xrcgh0Y=
+X-Google-Smtp-Source: APXvYqzrxEFSVPHFC6sDQZcgFH4qxix6PpsnR9oSCUJA1bYJVS3KzfzmbB6Yei1/OdYQ6EonqJ0VmlD+XWVFVZW9BRQ=
+X-Received: by 2002:a19:4cd5:: with SMTP id
+	z204mr23321738lfa.113.1558389481043; 
+	Mon, 20 May 2019 14:58:01 -0700 (PDT)
 MIME-Version: 1.0
-References: <20190517222342.26394-1-jonathan@fintelia.io>
-	<20190517222342.26394-3-jonathan@fintelia.io>
-	<CAKmqyKMG6ffhQ5VYgLZ3XVfZ2-E_O9BH6UCanmLJ3awDDUfS_w@mail.gmail.com>
-	<CANnJOVFE51rFdV0h0T6_dV6r37kBLcBQCo7Csg8NOUoYkOELpQ@mail.gmail.com>
-In-Reply-To: <CANnJOVFE51rFdV0h0T6_dV6r37kBLcBQCo7Csg8NOUoYkOELpQ@mail.gmail.com>
+References: <20190518232502.5201-1-Hesham.Almatary@cl.cam.ac.uk>
+In-Reply-To: <20190518232502.5201-1-Hesham.Almatary@cl.cam.ac.uk>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 20 May 2019 09:53:10 -0700
-Message-ID: <CAKmqyKM3C59_w214=mqLFpfwPhUjcLL0EuOY0Yk3DQePx8ZTQg@mail.gmail.com>
-To: Jonathan Behrens <jonathan@fintelia.io>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
-	"open list:RISC-V" <qemu-riscv@nongnu.org>, 
+Date: Mon, 20 May 2019 14:55:46 -0700
+Message-ID: <CAKmqyKPuRKXQt7jRaEqMDZZc0HjFRPj9C6Mo5Ht=ZQ5ssBawCA@mail.gmail.com>
+To: Hesham Almatary <Hesham.Almatary@cl.cam.ac.uk>
+Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
 	Sagar Karandikar <sagark@eecs.berkeley.edu>, 
 	Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
 	Palmer Dabbelt <palmer@sifive.com>, 
+	"qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
 	Alistair Francis <Alistair.Francis@wdc.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2a00:1450:4864:20::241
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH for-4.1 2/2] target/riscv: Add
- support for -bios "firmware_filename" flag
+X-Received-From: 2a00:1450:4864:20::144
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCHv2 1/3] RISC-V: Raise access
+ fault exceptions on PMP violations
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -74,43 +70,75 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 May 2019 16:55:36 -0000
+X-List-Received-Date: Mon, 20 May 2019 21:58:05 -0000
 
-On Sat, May 18, 2019 at 2:57 PM Jonathan Behrens <jonathan@fintelia.io> wro=
-te:
+On Sat, May 18, 2019 at 6:35 PM Hesham Almatary
+<Hesham.Almatary@cl.cam.ac.uk> wrote:
 >
-> > I've never been fully convinced of this, why not just use the generic l=
-oader?
+> Section 3.6 in RISC-V v1.10 privilege specification states that PMP violations
+> report "access exceptions." The current PMP implementation has
+> a bug which wrongly reports "page exceptions" on PMP violations.
 >
-> If I understand you are proposing passing bbl (or other firmware) with th=
-e -kernel flag, and then vmlinux (or another kernel) with the -initrd flag?=
- Wouldn't this result in losing the ability to pass a real init ramdisk to =
-Linux? It also seems to open the possibility for strange bugs/compatibility=
- issues later if firmware starts recognizing any "initrd" entries in the de=
-vice tree as kernel code to jump into.
+> This patch fixes this bug by reporting the correct PMP access exceptions
+> trap values.
+>
+> Signed-off-by: Hesham Almatary <hesham.almatary@cl.cam.ac.uk>
 
-No I mean passing in OpenSBI (or some other boot loader) via the
--kernel option and then passing in the kernel with QEMU's generic
-device loader. This is documented as part of the OpenSBI boot flow:
-https://github.com/riscv/opensbi/blob/master/docs/platform/qemu_virt.md
-
-The only disadvantage with that is that we don't get debug symbols
-from the kernel, but it does mean that the boot loader in QEMU is much
-simpler.
-
->
-> I do wonder though how compatible the current design is with providing de=
-fault firmware for riscv in the future.
->
-> > This should be in a generic boot.c file and support added to all RISC-V=
- boards.
->
-> I can do this for v2.
-
-Thanks
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
+> ---
+>  target/riscv/cpu_helper.c | 9 ++++++---
+>  1 file changed, 6 insertions(+), 3 deletions(-)
 >
-> Jonathan
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index 41d6db41c3..b48de36114 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -318,12 +318,13 @@ restart:
+>  }
+>
+>  static void raise_mmu_exception(CPURISCVState *env, target_ulong address,
+> -                                MMUAccessType access_type)
+> +                                MMUAccessType access_type, bool pmp_violation)
+>  {
+>      CPUState *cs = CPU(riscv_env_get_cpu(env));
+>      int page_fault_exceptions =
+>          (env->priv_ver >= PRIV_VERSION_1_10_0) &&
+> -        get_field(env->satp, SATP_MODE) != VM_1_10_MBARE;
+> +        get_field(env->satp, SATP_MODE) != VM_1_10_MBARE &&
+> +        !pmp_violation;
+>      switch (access_type) {
+>      case MMU_INST_FETCH:
+>          cs->exception_index = page_fault_exceptions ?
+> @@ -389,6 +390,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+>      CPURISCVState *env = &cpu->env;
+>      hwaddr pa = 0;
+>      int prot;
+> +    bool pmp_violation = false;
+>      int ret = TRANSLATE_FAIL;
+>
+>      qemu_log_mask(CPU_LOG_MMU, "%s ad %" VADDR_PRIx " rw %d mmu_idx %d\n",
+> @@ -402,6 +404,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+>
+>      if (riscv_feature(env, RISCV_FEATURE_PMP) &&
+>          !pmp_hart_has_privs(env, pa, TARGET_PAGE_SIZE, 1 << access_type)) {
+> +        pmp_violation = true;
+>          ret = TRANSLATE_FAIL;
+>      }
+>      if (ret == TRANSLATE_SUCCESS) {
+> @@ -411,7 +414,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+>      } else if (probe) {
+>          return false;
+>      } else {
+> -        raise_mmu_exception(env, address, access_type);
+> +        raise_mmu_exception(env, address, access_type, pmp_violation);
+>          riscv_raise_exception(env, cs->exception_index, retaddr);
+>      }
+>  #else
+> --
+> 2.17.1
+>
+>
 
