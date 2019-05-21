@@ -1,64 +1,40 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1hSqIx-0008Kp-VY
-	for mharc-qemu-riscv@gnu.org; Mon, 20 May 2019 17:58:47 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:33006)
+	id 1hT2FO-0003Dv-9S
+	for mharc-qemu-riscv@gnu.org; Tue, 21 May 2019 06:43:54 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:54197)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1hSqIu-0008K2-FI
-	for qemu-riscv@nongnu.org; Mon, 20 May 2019 17:58:46 -0400
+	(envelope-from <hmka2@cl.cam.ac.uk>) id 1hT2FM-0003Do-E3
+	for qemu-riscv@nongnu.org; Tue, 21 May 2019 06:43:53 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1hSqIt-0003Af-HX
-	for qemu-riscv@nongnu.org; Mon, 20 May 2019 17:58:44 -0400
-Received: from mail-lf1-x142.google.com ([2a00:1450:4864:20::142]:38342)
-	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <alistair23@gmail.com>)
-	id 1hSqIt-00039z-Ai; Mon, 20 May 2019 17:58:43 -0400
-Received: by mail-lf1-x142.google.com with SMTP id y19so11465315lfy.5;
-	Mon, 20 May 2019 14:58:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=xQ8wxtVVJrqxmhNhATxeh1iXb26yhkLabtGZ1tf0t8A=;
-	b=NbgxvN+1+eKqibj8uQ88rZyvfTh4r2IbScwWDA8iNLomYAVFMSjvlnvLOvQeTk9me4
-	Xph3BMmAECd61PdTLUmTr/jurZh5DIJ75kjYmnKfV+hTo2wC7nBi+cn1L5y4e3yYmz/l
-	FYSLm/XugM4xGHVeidoYC6c1Jwt/3IBlRlz1B+zO4OLckSmnmyK2ShDKwoBQ+tqMaJ7L
-	gJiUzpYfJqMW3fFbbPEASMTeeAyWbVi/2xSdWGFzzyPuzUSKZF0TGG2I4VpIzTo+TkVZ
-	ZGYdwb47tYFzO9lrF+FVr2zu3dwnt1zpX1Mvi0L6X1rIsuPYa1GosPMR81zf8B64N91U
-	nUkg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=xQ8wxtVVJrqxmhNhATxeh1iXb26yhkLabtGZ1tf0t8A=;
-	b=JPHcLgRyqc+bZVd6NNUifuUIerD+1Ovv/fYFDWWlMag8zfWdYHUNmnJzKJabgdVe0p
-	lh5/Gu2KrLq156SwyM6XMrrlLC/u5YlI8yh/iXIXIG6cITZ9/bF9vBRksdnnRwtF3lJp
-	vOJyvPLSzhWaB43+As0hDVd7Hra3GXcqhSzNHgF40DCKOV77R13N4+39aV7i6udBoM6Z
-	6LTPSZ5gN5pp+R4mB4arIwNPCkJlMgSR+SDWNStTwROH7ymX0sB5A/3YgxCt8fXZ2Rs/
-	1CzQmELzVnHA5tbwSy5vGWucY1vFQjKgP/Alfm8vy2sHn1LcawiKPMJUXNEtWZrUQD5/
-	2bJQ==
-X-Gm-Message-State: APjAAAWK3TZ9sVzWze27NOTj+Ywu+BUxWpCiuvmSzWiEHOZnXti3d4yj
-	w2M3tvLxFt0LO7CnExSOSFNWN+G1F2BOSHwcTRs=
-X-Google-Smtp-Source: APXvYqyt6qWLhfRpN3+5Bab1f6Cn4XExEZKxlKxKlgYW0Y0bxNQ5N7ET/uyfu6p2kKqodQam+SOu5pnFAsZMNPnT83w=
-X-Received: by 2002:a19:4bd1:: with SMTP id y200mr38971010lfa.25.1558389521513;
-	Mon, 20 May 2019 14:58:41 -0700 (PDT)
-MIME-Version: 1.0
-References: <20190518232502.5201-1-Hesham.Almatary@cl.cam.ac.uk>
-	<20190518232502.5201-2-Hesham.Almatary@cl.cam.ac.uk>
-In-Reply-To: <20190518232502.5201-2-Hesham.Almatary@cl.cam.ac.uk>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 20 May 2019 14:56:25 -0700
-Message-ID: <CAKmqyKNa0QSudOZUmo+=0=7sz9PZ+kd_uF3noFZn6owQYvtgwg@mail.gmail.com>
-To: Hesham Almatary <Hesham.Almatary@cl.cam.ac.uk>
-Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
-	Sagar Karandikar <sagark@eecs.berkeley.edu>, 
-	Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
-	Palmer Dabbelt <palmer@sifive.com>, 
-	"qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
-	Alistair Francis <Alistair.Francis@wdc.com>
-Content-Type: text/plain; charset="UTF-8"
+	(envelope-from <hmka2@cl.cam.ac.uk>) id 1hT2FL-0002yN-6l
+	for qemu-riscv@nongnu.org; Tue, 21 May 2019 06:43:52 -0400
+Received: from mta1.cl.cam.ac.uk ([2a05:b400:110::25:1]:60463)
+	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.71) (envelope-from <hmka2@cl.cam.ac.uk>)
+	id 1hT2FK-0002um-VY; Tue, 21 May 2019 06:43:51 -0400
+Received: from cassia.cl.cam.ac.uk ([2001:630:212:238:b26e:bfff:fe2f:c7d9])
+	by mta1.cl.cam.ac.uk with esmtps
+	(TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.90_1)
+	(envelope-from <hmka2@cl.cam.ac.uk>)
+	id 1hT2FD-00015d-VQ; Tue, 21 May 2019 10:43:43 +0000
+Received: from hmka2 by cassia.cl.cam.ac.uk with local (Exim 4.90_1)
+	(envelope-from <hmka2@cl.cam.ac.uk>)
+	id 1hT2FD-0003VE-TM; Tue, 21 May 2019 11:43:43 +0100
+From: Hesham Almatary <Hesham.Almatary@cl.cam.ac.uk>
+To: qemu-riscv@nongnu.org
+Cc: qemu-devel@nongnu.org, Hesham Almatary <Hesham.Almatary@cl.cam.ac.uk>,
+	Palmer Dabbelt <palmer@sifive.com>,
+	Alistair Francis <Alistair.Francis@wdc.com>,
+	Sagar Karandikar <sagark@eecs.berkeley.edu>,
+	Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+Date: Tue, 21 May 2019 11:43:20 +0100
+Message-Id: <20190521104324.12835-1-Hesham.Almatary@cl.cam.ac.uk>
+X-Mailer: git-send-email 2.17.1
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2a00:1450:4864:20::142
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCHv2 2/3] RISC-V: Only Check PMP
- if MMU translation succeeds
+X-Received-From: 2a05:b400:110::25:1
+Subject: [Qemu-riscv] [PATCHv3 1/5] RISC-V: Only Check PMP if MMU
+ translation succeeds
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -70,46 +46,37 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 May 2019 21:58:46 -0000
+X-List-Received-Date: Tue, 21 May 2019 10:43:53 -0000
 
-On Sat, May 18, 2019 at 6:36 PM Hesham Almatary
-<Hesham.Almatary@cl.cam.ac.uk> wrote:
->
-> The current implementation unnecessarily checks for PMP even if MMU translation
-> failed. This may trigger a wrong PMP access exception instead of
-> a page exception.
->
-> For example, the very first instruction fetched after the first satp write in
-> S-Mode will trigger a PMP access fault instead of an instruction fetch page
-> fault.
->
-> This patch prioritises MMU exceptions over PMP exceptions and only checks for
-> PMP if MMU translation succeeds.
->
-> Signed-off-by: Hesham Almatary <hesham.almatary@cl.cam.ac.uk>
+The current implementation unnecessarily checks for PMP even if MMU translation
+failed. This may trigger a wrong PMP access exception instead of
+a page exception.
 
-This should come before patch 1 otherwise we will introduce a regression.
+For example, the very first instruction fetched after the first satp write in
+S-Mode will trigger a PMP access fault instead of an instruction fetch page
+fault.
 
-Alistair
+This patch prioritises MMU exceptions over PMP exceptions and only checks for
+PMP if MMU translation succeeds.
 
-> ---
->  target/riscv/cpu_helper.c | 1 +
->  1 file changed, 1 insertion(+)
->
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index b48de36114..7c7282c680 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -403,6 +403,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
->                    " prot %d\n", __func__, address, ret, pa, prot);
->
->      if (riscv_feature(env, RISCV_FEATURE_PMP) &&
-> +        (ret == TRANSLATE_SUCCESS) &&
->          !pmp_hart_has_privs(env, pa, TARGET_PAGE_SIZE, 1 << access_type)) {
->          pmp_violation = true;
->          ret = TRANSLATE_FAIL;
-> --
-> 2.17.1
->
->
+Signed-off-by: Hesham Almatary <Hesham.Almatary@cl.cam.ac.uk>
+---
+ target/riscv/cpu_helper.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index 41d6db41c3..40fb47e794 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -401,6 +401,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+                   " prot %d\n", __func__, address, ret, pa, prot);
+
+     if (riscv_feature(env, RISCV_FEATURE_PMP) &&
++        (ret == TRANSLATE_SUCCESS) &&
+         !pmp_hart_has_privs(env, pa, TARGET_PAGE_SIZE, 1 << access_type)) {
+         ret = TRANSLATE_FAIL;
+     }
+--
+2.17.1
+
 
