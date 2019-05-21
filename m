@@ -1,50 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1hTDGi-00056X-B9
-	for mharc-qemu-riscv@gnu.org; Tue, 21 May 2019 18:30:00 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:52245)
+	id 1hTDJw-0007Ay-Kv
+	for mharc-qemu-riscv@gnu.org; Tue, 21 May 2019 18:33:20 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:52813)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1hTDGf-00056M-UK
-	for qemu-riscv@nongnu.org; Tue, 21 May 2019 18:29:58 -0400
+	(envelope-from <alistair23@gmail.com>) id 1hTDJv-00079l-1q
+	for qemu-riscv@nongnu.org; Tue, 21 May 2019 18:33:19 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1hTDGe-0003Yj-G4
-	for qemu-riscv@nongnu.org; Tue, 21 May 2019 18:29:57 -0400
-Received: from mail-lj1-x244.google.com ([2a00:1450:4864:20::244]:39072)
+	(envelope-from <alistair23@gmail.com>) id 1hTDJu-0005Nb-5I
+	for qemu-riscv@nongnu.org; Tue, 21 May 2019 18:33:19 -0400
+Received: from mail-lj1-x243.google.com ([2a00:1450:4864:20::243]:38657)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
 	(Exim 4.71) (envelope-from <alistair23@gmail.com>)
-	id 1hTDGe-0003Xx-6O; Tue, 21 May 2019 18:29:56 -0400
-Received: by mail-lj1-x244.google.com with SMTP id a10so245513ljf.6;
-	Tue, 21 May 2019 15:29:55 -0700 (PDT)
+	id 1hTDJt-0005N0-U9; Tue, 21 May 2019 18:33:18 -0400
+Received: by mail-lj1-x243.google.com with SMTP id 14so256848ljj.5;
+	Tue, 21 May 2019 15:33:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=29BSCA2fkS1Y9BJS7UXNaiuMLiXUVDwP1BjDEnpvkxA=;
-	b=qZbe5ObguXzNiA/eaFZ6sK4inX5w1Gu9PHNciRaf9VThnF2MTjxRkiPvg8x9GMWoxE
-	Fqmks/afQ1IXeFntv1uKWDkwIDrbgQREwxHicQqaq/4x3g/NNzHnOwA1dl7Z9DwpQ0cj
-	k8X8YGjX0txyZySF4ebM1utR1PUUFKvGf5vhNPwhp7jxSOCSH7sMOEKDoYUIG3w0PEDN
-	oA9a6safnlfHPAf4ZY4rW8o4ZRUQ9ob07whBju7heUMlvJuFVY92gIkG5/4+i8cnhDkJ
-	keGcQGz3CvQQ0g8MN6/KUVNn8j2CHGl4bJy3w6mfbUG6NFDNLqCjL8vuveQ+QG62KjkJ
-	xsOQ==
+	:cc; bh=Qq8K7ub1MMu58My8La/+Jk01WXoSbdco5XkB1CZ5Nog=;
+	b=TzHGpn2LVD+QzGFnyCpaZcAdLLI2gYORYNiQSqTWQq/ncV2+9Xt2dq41nrTcB5nIBt
+	8sI3/rfexqe1r2jTrk7HwZtL2KGWeiMDCbKi7ddwJf/u6tp49gZ0BjQrGqGlHDoPm7cP
+	HVdgkySauOYsDpL4E48N2Cs6aIAhFkdnviIcEb3Kc+3VF/8iPoz7ZLPw1cL5oFiiMnbt
+	2Yp58j01um73YqYHzTwMvwbmA0k/WV/UMwOuY+SJCSJJUYugsFuw9xcdGYX1CIebS81l
+	z4yyFmW7nWdXTixuuqBJePOJx9tz1vz8bEFw+3ukdpkWVPGvY9xQLMHS3WmSoI1XPWos
+	awXg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=29BSCA2fkS1Y9BJS7UXNaiuMLiXUVDwP1BjDEnpvkxA=;
-	b=iKSh6Dmtl35Osqn1FuS/zcYiJRZ3bJCX2124bNMqh7oaXcohXGSgrWEEFmzA9pOjBP
-	AJ5oXbWgTdqjX4rH73SCQjv+PxPhEjKJBfejH3PgEHdGan8bT4ZHzryF69ejbyhhJTp0
-	2bBEg5eww6T4KMbOpjhhZKEyul6R5Sck7vsJa0TzdvMTVR3k0qIdh31tF+gsWfoOB+v7
-	80MKKFZRwh0TjWcUPLYU/JAWbRJ6ITvNcu9RZ+5Tot+K0kokP1XbHIkmIQCB6fbOaYVp
-	CkJd4QTNX2MUB3CUyG9peFuSfviAOSxtA5SFkCFwxL32V9e/v9Jv3mJu7YK5qPF8zIVC
-	LrEQ==
-X-Gm-Message-State: APjAAAWa8ianSE+cPwOn1xtF2z0N3cX4t/DpS28INAJt2O/8olSbQpz4
-	nYF5CFs6k9zJ+dKLAqGPLzTEnGyDd2eh6wFgTyQ=
-X-Google-Smtp-Source: APXvYqz/MAHXOTSVKA+RC6iK5rjiJDgdFXdWhoc29BHQOjv46/a65hjEHXd0beJuPIQngJUHJb3lQcGtQzLpthbLXCs=
-X-Received: by 2002:a2e:301a:: with SMTP id w26mr28574251ljw.153.1558477794257;
-	Tue, 21 May 2019 15:29:54 -0700 (PDT)
+	bh=Qq8K7ub1MMu58My8La/+Jk01WXoSbdco5XkB1CZ5Nog=;
+	b=Kzb9cF7Ia4/8Vm3ml5TTPdehzPrAnTtGA7eCbT3Tx0fPuVEXKg6/pL4lkGsBsno3Pr
+	oagtq7+YLx48T+iZ0lUjG95U04reQIc23RvigLm5QlxdMD+Q+nR5KRpZ+72QENn5VM0w
+	5Yxf05Mxh8OATR+TsKLux94XWMlxSiUaA0P6nXQ8tEikgsfukjBXEfPel/NgXf9UR9OF
+	BFtrVLFFrqYuBpdilCseiAZ3M+2YgIpasIpeby1V68LvkZOK2oxqg6vczI2eupOskD/w
+	+TayXxQeSD4qNUv8grERLLVODkYO/QV4gGNZxyiwNQRlRIG7ES18Oj6V6ue9YGnZ4I1S
+	xfKQ==
+X-Gm-Message-State: APjAAAUgRTd3QW8KEejDbM2kB86RuHpqlAZXSUuRIPVEltzacx6g7imO
+	j4Y4pVVVpAFv3mCg6AxSjNe02/smUmcsJj2jKZ0=
+X-Google-Smtp-Source: APXvYqxAXz2dw5W6Pmzsp7bnMT8CZ+Pg7nD2PahVQZcbqlspIXEptLRzgxsDe7+mN0lUfPb7S84i1XgNg6KSVSmLmtA=
+X-Received: by 2002:a2e:8583:: with SMTP id b3mr17083058lji.136.1558477996615; 
+	Tue, 21 May 2019 15:33:16 -0700 (PDT)
 MIME-Version: 1.0
 References: <20190521104324.12835-1-Hesham.Almatary@cl.cam.ac.uk>
-In-Reply-To: <20190521104324.12835-1-Hesham.Almatary@cl.cam.ac.uk>
+	<20190521104324.12835-5-Hesham.Almatary@cl.cam.ac.uk>
+In-Reply-To: <20190521104324.12835-5-Hesham.Almatary@cl.cam.ac.uk>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 21 May 2019 15:27:38 -0700
-Message-ID: <CAKmqyKP=n3p7-Nae29kqWSizo_=U6Pyrq_jnnVRzBtHok=tGpA@mail.gmail.com>
+Date: Tue, 21 May 2019 15:31:00 -0700
+Message-ID: <CAKmqyKOaPEC=YdbwJkqZJBwTw++_9Cum5HSChtfnx7_uOmZ_HQ@mail.gmail.com>
 To: Hesham Almatary <Hesham.Almatary@cl.cam.ac.uk>
 Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
 	Sagar Karandikar <sagark@eecs.berkeley.edu>, 
@@ -55,9 +56,9 @@ Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
 Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2a00:1450:4864:20::244
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCHv3 1/5] RISC-V: Only Check PMP
- if MMU translation succeeds
+X-Received-From: 2a00:1450:4864:20::243
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCHv3 5/5] RISC-V: Fix a PMP check
+ with the correct access size
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -69,46 +70,37 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 May 2019 22:29:58 -0000
+X-List-Received-Date: Tue, 21 May 2019 22:33:20 -0000
 
-On Tue, May 21, 2019 at 3:44 AM Hesham Almatary
+On Tue, May 21, 2019 at 3:45 AM Hesham Almatary
 <Hesham.Almatary@cl.cam.ac.uk> wrote:
 >
-> The current implementation unnecessarily checks for PMP even if MMU translation
-> failed. This may trigger a wrong PMP access exception instead of
-> a page exception.
+> The PMP check should be of the memory access size rather
+> than TARGET_PAGE_SIZE.
 >
-> For example, the very first instruction fetched after the first satp write in
-> S-Mode will trigger a PMP access fault instead of an instruction fetch page
-> fault.
->
-> This patch prioritises MMU exceptions over PMP exceptions and only checks for
-> PMP if MMU translation succeeds.
+> Signed-off-by: Hesham Almatary <Hesham.Almatary@cl.cam.ac.uk>
 
-It's probably worth noting in the commit message that this commit is
-only required for the future commits. Otherwise it is a little
-confusing.
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
->
-> Signed-off-by: Hesham Almatary <Hesham.Almatary@cl.cam.ac.uk>
 > ---
->  target/riscv/cpu_helper.c | 1 +
->  1 file changed, 1 insertion(+)
+>  target/riscv/cpu_helper.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >
 > diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index 41d6db41c3..40fb47e794 100644
+> index d0b0f9cf88..ce1f47e4e3 100644
 > --- a/target/riscv/cpu_helper.c
 > +++ b/target/riscv/cpu_helper.c
-> @@ -401,6 +401,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
->                    " prot %d\n", __func__, address, ret, pa, prot);
+> @@ -410,7 +410,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
 >
 >      if (riscv_feature(env, RISCV_FEATURE_PMP) &&
-> +        (ret == TRANSLATE_SUCCESS) &&
->          !pmp_hart_has_privs(env, pa, TARGET_PAGE_SIZE, 1 << access_type)) {
->          ret = TRANSLATE_FAIL;
+>          (ret == TRANSLATE_SUCCESS) &&
+> -        !pmp_hart_has_privs(env, pa, TARGET_PAGE_SIZE, 1 << access_type)) {
+> +        !pmp_hart_has_privs(env, pa, size, 1 << access_type)) {
+>          ret = TRANSLATE_PMP_FAIL;
 >      }
+>      if (ret == TRANSLATE_PMP_FAIL) {
 > --
 > 2.17.1
 >
