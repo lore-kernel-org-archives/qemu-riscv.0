@@ -1,42 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1hT2GE-0003nh-48
-	for mharc-qemu-riscv@gnu.org; Tue, 21 May 2019 06:44:46 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:54641)
+	id 1hTDGi-00056X-B9
+	for mharc-qemu-riscv@gnu.org; Tue, 21 May 2019 18:30:00 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:52245)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <hmka2@cl.cam.ac.uk>) id 1hT2GB-0003le-LP
-	for qemu-riscv@nongnu.org; Tue, 21 May 2019 06:44:44 -0400
+	(envelope-from <alistair23@gmail.com>) id 1hTDGf-00056M-UK
+	for qemu-riscv@nongnu.org; Tue, 21 May 2019 18:29:58 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <hmka2@cl.cam.ac.uk>) id 1hT2GA-0003wY-PH
-	for qemu-riscv@nongnu.org; Tue, 21 May 2019 06:44:43 -0400
-Received: from mta1.cl.cam.ac.uk ([2a05:b400:110::25:1]:41693)
-	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.71) (envelope-from <hmka2@cl.cam.ac.uk>)
-	id 1hT2GA-0003vd-Je; Tue, 21 May 2019 06:44:42 -0400
-Received: from cassia.cl.cam.ac.uk ([2001:630:212:238:b26e:bfff:fe2f:c7d9])
-	by mta1.cl.cam.ac.uk with esmtps
-	(TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.90_1)
-	(envelope-from <hmka2@cl.cam.ac.uk>)
-	id 1hT2G9-00017W-Qt; Tue, 21 May 2019 10:44:41 +0000
-Received: from hmka2 by cassia.cl.cam.ac.uk with local (Exim 4.90_1)
-	(envelope-from <hmka2@cl.cam.ac.uk>)
-	id 1hT2G9-0003rD-On; Tue, 21 May 2019 11:44:41 +0100
-From: Hesham Almatary <Hesham.Almatary@cl.cam.ac.uk>
-To: qemu-riscv@nongnu.org
-Cc: qemu-devel@nongnu.org, Hesham Almatary <Hesham.Almatary@cl.cam.ac.uk>,
-	Palmer Dabbelt <palmer@sifive.com>,
-	Alistair Francis <Alistair.Francis@wdc.com>,
-	Sagar Karandikar <sagark@eecs.berkeley.edu>,
-	Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-Date: Tue, 21 May 2019 11:43:24 +0100
-Message-Id: <20190521104324.12835-5-Hesham.Almatary@cl.cam.ac.uk>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20190521104324.12835-1-Hesham.Almatary@cl.cam.ac.uk>
+	(envelope-from <alistair23@gmail.com>) id 1hTDGe-0003Yj-G4
+	for qemu-riscv@nongnu.org; Tue, 21 May 2019 18:29:57 -0400
+Received: from mail-lj1-x244.google.com ([2a00:1450:4864:20::244]:39072)
+	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+	(Exim 4.71) (envelope-from <alistair23@gmail.com>)
+	id 1hTDGe-0003Xx-6O; Tue, 21 May 2019 18:29:56 -0400
+Received: by mail-lj1-x244.google.com with SMTP id a10so245513ljf.6;
+	Tue, 21 May 2019 15:29:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=29BSCA2fkS1Y9BJS7UXNaiuMLiXUVDwP1BjDEnpvkxA=;
+	b=qZbe5ObguXzNiA/eaFZ6sK4inX5w1Gu9PHNciRaf9VThnF2MTjxRkiPvg8x9GMWoxE
+	Fqmks/afQ1IXeFntv1uKWDkwIDrbgQREwxHicQqaq/4x3g/NNzHnOwA1dl7Z9DwpQ0cj
+	k8X8YGjX0txyZySF4ebM1utR1PUUFKvGf5vhNPwhp7jxSOCSH7sMOEKDoYUIG3w0PEDN
+	oA9a6safnlfHPAf4ZY4rW8o4ZRUQ9ob07whBju7heUMlvJuFVY92gIkG5/4+i8cnhDkJ
+	keGcQGz3CvQQ0g8MN6/KUVNn8j2CHGl4bJy3w6mfbUG6NFDNLqCjL8vuveQ+QG62KjkJ
+	xsOQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=29BSCA2fkS1Y9BJS7UXNaiuMLiXUVDwP1BjDEnpvkxA=;
+	b=iKSh6Dmtl35Osqn1FuS/zcYiJRZ3bJCX2124bNMqh7oaXcohXGSgrWEEFmzA9pOjBP
+	AJ5oXbWgTdqjX4rH73SCQjv+PxPhEjKJBfejH3PgEHdGan8bT4ZHzryF69ejbyhhJTp0
+	2bBEg5eww6T4KMbOpjhhZKEyul6R5Sck7vsJa0TzdvMTVR3k0qIdh31tF+gsWfoOB+v7
+	80MKKFZRwh0TjWcUPLYU/JAWbRJ6ITvNcu9RZ+5Tot+K0kokP1XbHIkmIQCB6fbOaYVp
+	CkJd4QTNX2MUB3CUyG9peFuSfviAOSxtA5SFkCFwxL32V9e/v9Jv3mJu7YK5qPF8zIVC
+	LrEQ==
+X-Gm-Message-State: APjAAAWa8ianSE+cPwOn1xtF2z0N3cX4t/DpS28INAJt2O/8olSbQpz4
+	nYF5CFs6k9zJ+dKLAqGPLzTEnGyDd2eh6wFgTyQ=
+X-Google-Smtp-Source: APXvYqz/MAHXOTSVKA+RC6iK5rjiJDgdFXdWhoc29BHQOjv46/a65hjEHXd0beJuPIQngJUHJb3lQcGtQzLpthbLXCs=
+X-Received: by 2002:a2e:301a:: with SMTP id w26mr28574251ljw.153.1558477794257;
+	Tue, 21 May 2019 15:29:54 -0700 (PDT)
+MIME-Version: 1.0
 References: <20190521104324.12835-1-Hesham.Almatary@cl.cam.ac.uk>
+In-Reply-To: <20190521104324.12835-1-Hesham.Almatary@cl.cam.ac.uk>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 21 May 2019 15:27:38 -0700
+Message-ID: <CAKmqyKP=n3p7-Nae29kqWSizo_=U6Pyrq_jnnVRzBtHok=tGpA@mail.gmail.com>
+To: Hesham Almatary <Hesham.Almatary@cl.cam.ac.uk>
+Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
+	Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+	Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+	Palmer Dabbelt <palmer@sifive.com>, 
+	"qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+	Alistair Francis <Alistair.Francis@wdc.com>
+Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2a05:b400:110::25:1
-Subject: [Qemu-riscv] [PATCHv3 5/5] RISC-V: Fix a PMP check with the correct
- access size
+X-Received-From: 2a00:1450:4864:20::244
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCHv3 1/5] RISC-V: Only Check PMP
+ if MMU translation succeeds
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -48,30 +69,48 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 May 2019 10:44:44 -0000
+X-List-Received-Date: Tue, 21 May 2019 22:29:58 -0000
 
-The PMP check should be of the memory access size rather
-than TARGET_PAGE_SIZE.
+On Tue, May 21, 2019 at 3:44 AM Hesham Almatary
+<Hesham.Almatary@cl.cam.ac.uk> wrote:
+>
+> The current implementation unnecessarily checks for PMP even if MMU translation
+> failed. This may trigger a wrong PMP access exception instead of
+> a page exception.
+>
+> For example, the very first instruction fetched after the first satp write in
+> S-Mode will trigger a PMP access fault instead of an instruction fetch page
+> fault.
+>
+> This patch prioritises MMU exceptions over PMP exceptions and only checks for
+> PMP if MMU translation succeeds.
 
-Signed-off-by: Hesham Almatary <Hesham.Almatary@cl.cam.ac.uk>
----
- target/riscv/cpu_helper.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+It's probably worth noting in the commit message that this commit is
+only required for the future commits. Otherwise it is a little
+confusing.
 
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index d0b0f9cf88..ce1f47e4e3 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -410,7 +410,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+Alistair
 
-     if (riscv_feature(env, RISCV_FEATURE_PMP) &&
-         (ret == TRANSLATE_SUCCESS) &&
--        !pmp_hart_has_privs(env, pa, TARGET_PAGE_SIZE, 1 << access_type)) {
-+        !pmp_hart_has_privs(env, pa, size, 1 << access_type)) {
-         ret = TRANSLATE_PMP_FAIL;
-     }
-     if (ret == TRANSLATE_PMP_FAIL) {
---
-2.17.1
-
+>
+> Signed-off-by: Hesham Almatary <Hesham.Almatary@cl.cam.ac.uk>
+> ---
+>  target/riscv/cpu_helper.c | 1 +
+>  1 file changed, 1 insertion(+)
+>
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index 41d6db41c3..40fb47e794 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -401,6 +401,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+>                    " prot %d\n", __func__, address, ret, pa, prot);
+>
+>      if (riscv_feature(env, RISCV_FEATURE_PMP) &&
+> +        (ret == TRANSLATE_SUCCESS) &&
+>          !pmp_hart_has_privs(env, pa, TARGET_PAGE_SIZE, 1 << access_type)) {
+>          ret = TRANSLATE_FAIL;
+>      }
+> --
+> 2.17.1
+>
+>
 
