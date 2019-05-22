@@ -1,67 +1,40 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1hTN2J-0001VY-3P
-	for mharc-qemu-riscv@gnu.org; Wed, 22 May 2019 04:55:47 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:36843)
+	id 1hTNI6-0001Pd-NM
+	for mharc-qemu-riscv@gnu.org; Wed, 22 May 2019 05:12:06 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:40799)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <hmka2@hermes.cam.ac.uk>) id 1hTN2F-0001Td-UQ
-	for qemu-riscv@nongnu.org; Wed, 22 May 2019 04:55:44 -0400
+	(envelope-from <hmka2@cl.cam.ac.uk>) id 1hTNI3-0001OF-1i
+	for qemu-riscv@nongnu.org; Wed, 22 May 2019 05:12:05 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <hmka2@hermes.cam.ac.uk>) id 1hTN2D-00084v-TH
-	for qemu-riscv@nongnu.org; Wed, 22 May 2019 04:55:43 -0400
-Received: from ppsw-30.csi.cam.ac.uk ([131.111.8.130]:36190)
-	by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.71) (envelope-from <hmka2@hermes.cam.ac.uk>)
-	id 1hTN2D-00082T-DX; Wed, 22 May 2019 04:55:41 -0400
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=cam.ac.uk; 
-	s=20180806.ppsw;
-	h=Sender:Content-Transfer-Encoding:Content-Type:Cc:To:
-	Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version:Reply-To:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
-	List-Subscribe:List-Post:List-Owner:List-Archive;
-	bh=hWICYit9ZoZqUVLQIM24sehgVFb9onayhJpo81di9Ig=;
-	b=blOOxGUBq9moB/M0Ta7X4tt7Ow
-	s7vmMf8syFgyozieQsFWIFgWgVk947PHCQCsJV98CHpa36YLpgxJeXcY73mMBoOS8NC5qX47NU41g
-	wmlgyqQ0mEWmKa+lM8zEKYRg36eyDf+Gb64+Y/mGTwkOja6S9BOEjNs/Bb1gn7h6uN5U=; 
-X-Cam-AntiVirus: no malware found
-X-Cam-ScannerInfo: http://help.uis.cam.ac.uk/email-scanner-virus
-Received: from mail-lj1-f178.google.com ([209.85.208.178]:40845)
-	by ppsw-30.csi.cam.ac.uk (smtp.hermes.cam.ac.uk [131.111.8.156]:587)
-	with esmtpsa (PLAIN:hmka2) (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
-	id 1hTN2A-000oM0-eS (Exim 4.91)
-	(return-path <hmka2@hermes.cam.ac.uk>); Wed, 22 May 2019 09:55:38 +0100
-Received: by mail-lj1-f178.google.com with SMTP id q62so1323350ljq.7;
-	Wed, 22 May 2019 01:55:38 -0700 (PDT)
-X-Gm-Message-State: APjAAAUur6NA7LCDqL/Vw7KLgCaQmwsLoGhNhzNa7Sv3BYvSNFF/aZhr
-	WzekODY+QZuegYj9OUoGInNjdVTE/lMl0iFb/q8=
-X-Google-Smtp-Source: APXvYqxZPGBeAuL9n6AAygEQn7VRf0yIZaxzq2ga5s1VBUMBcHK6qRlEaY0mpyPrsekkPYOSKwkSEXr9gxSZuC65wCQ=
-X-Received: by 2002:a2e:91c6:: with SMTP id u6mr26800701ljg.143.1558515338011; 
-	Wed, 22 May 2019 01:55:38 -0700 (PDT)
-MIME-Version: 1.0
-References: <20190521104324.12835-1-Hesham.Almatary@cl.cam.ac.uk>
-	<20190521104324.12835-5-Hesham.Almatary@cl.cam.ac.uk>
-	<CAKmqyKOaPEC=YdbwJkqZJBwTw++_9Cum5HSChtfnx7_uOmZ_HQ@mail.gmail.com>
-	<CANnJOVG-fqEsRqOu3e8Jd=OanGwi2eEKPK0_AqGcMV28QzVz+g@mail.gmail.com>
-In-Reply-To: <CANnJOVG-fqEsRqOu3e8Jd=OanGwi2eEKPK0_AqGcMV28QzVz+g@mail.gmail.com>
-From: Hesham Almatary <hesham.almatary@cl.cam.ac.uk>
-Date: Wed, 22 May 2019 09:55:01 +0100
-X-Gmail-Original-Message-ID: <CA+wsVCAiJ9i4yDooV3ZsAFM87m75Jx-hLbAMupfJdJvP-S-PGg@mail.gmail.com>
-Message-ID: <CA+wsVCAiJ9i4yDooV3ZsAFM87m75Jx-hLbAMupfJdJvP-S-PGg@mail.gmail.com>
-To: Jonathan Behrens <fintelia@gmail.com>
-Cc: Alistair Francis <alistair23@gmail.com>,
-	"open list:RISC-V" <qemu-riscv@nongnu.org>, 
-	Sagar Karandikar <sagark@eecs.berkeley.edu>, 
-	Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
-	Palmer Dabbelt <palmer@sifive.com>, 
-	"qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
-	Alistair Francis <Alistair.Francis@wdc.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Sender: "H.M.K. Almatary" <hmka2@hermes.cam.ac.uk>
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
-X-Received-From: 131.111.8.130
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCHv3 5/5] RISC-V: Fix a PMP check
- with the correct access size
+	(envelope-from <hmka2@cl.cam.ac.uk>) id 1hTNI2-0003pA-4e
+	for qemu-riscv@nongnu.org; Wed, 22 May 2019 05:12:03 -0400
+Received: from mta1.cl.cam.ac.uk ([2a05:b400:110::25:1]:59581)
+	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.71) (envelope-from <hmka2@cl.cam.ac.uk>)
+	id 1hTNI1-0003jh-VT; Wed, 22 May 2019 05:12:02 -0400
+Received: from cassia.cl.cam.ac.uk ([2001:630:212:238:b26e:bfff:fe2f:c7d9])
+	by mta1.cl.cam.ac.uk with esmtps
+	(TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.90_1)
+	(envelope-from <hmka2@cl.cam.ac.uk>)
+	id 1hTNHv-0007BG-LO; Wed, 22 May 2019 09:11:55 +0000
+Received: from hmka2 by cassia.cl.cam.ac.uk with local (Exim 4.90_1)
+	(envelope-from <hmka2@cl.cam.ac.uk>)
+	id 1hTNHv-0007PR-Ie; Wed, 22 May 2019 10:11:55 +0100
+From: Hesham Almatary <Hesham.Almatary@cl.cam.ac.uk>
+To: qemu-riscv@nongnu.org
+Cc: qemu-devel@nongnu.org, Hesham Almatary <Hesham.Almatary@cl.cam.ac.uk>,
+	Palmer Dabbelt <palmer@sifive.com>,
+	Alistair Francis <Alistair.Francis@wdc.com>,
+	Sagar Karandikar <sagark@eecs.berkeley.edu>,
+	Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+Date: Wed, 22 May 2019 10:09:47 +0100
+Message-Id: <20190522090947.22334-1-Hesham.Almatary@cl.cam.ac.uk>
+X-Mailer: git-send-email 2.17.1
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+	recognized.
+X-Received-From: 2a05:b400:110::25:1
+Subject: [Qemu-riscv] [PATCHv3 1/5] RISC-V: Only Check PMP if MMU
+ translation succeeds
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -73,72 +46,38 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 May 2019 08:55:45 -0000
+X-List-Received-Date: Wed, 22 May 2019 09:12:05 -0000
 
-On Wed, 22 May 2019 at 03:25, Jonathan Behrens <fintelia@gmail.com> wrote:
->
-> Hesham,
->
-> I don't think this is quite right. If I understand correctly, PMP permiss=
-ions are only validated on TLB fills, not on all accesses. (Is anyone able =
-to confirm this?) If so, this function can't just validate the range of a s=
-ingle access and then place the entire page into the TLB. However, the curr=
-ent code is also wrong because an access should succeed/fail based on the p=
-ermissions only for the range it actually touches even regardless of the pe=
-rmissions on the rest of the page. Now that I think about it, I'd also expe=
-ct that somewhere in the PMP logic would flush the TLB every time any of th=
-e related control registers change though I can't find anywhere that this i=
-s happening...
->
-I believe the TLB fill function is called on all accesses, but I might
-be wrong. I will wait for someone to confirm otherwise.
+The current implementation unnecessarily checks for PMP even if MMU translation
+failed. This may trigger a wrong PMP access exception instead of
+a page exception.
 
-It's mentioned in the spec that sfence.vma has to be executed after
-changing PMP configs, so it's a SW concern (i.e., not QEMU's).
+For example, the very first instruction fetched after the first satp write in
+S-Mode will trigger a PMP access fault instead of an instruction fetch page
+fault.
 
-> Sorry to keep raising complaints about this patch set, the interaction be=
-tween physical memory protection and paging is very subtle. Even some real =
-hardware has had errata related to it!
->
-> Jonathan
->
-> On Tue, May 21, 2019 at 6:33 PM Alistair Francis <alistair23@gmail.com> w=
-rote:
->>
->> On Tue, May 21, 2019 at 3:45 AM Hesham Almatary
->> <Hesham.Almatary@cl.cam.ac.uk> wrote:
->> >
->> > The PMP check should be of the memory access size rather
->> > than TARGET_PAGE_SIZE.
->> >
->> > Signed-off-by: Hesham Almatary <Hesham.Almatary@cl.cam.ac.uk>
->>
->> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
->>
->> Alistair
->>
->> > ---
->> >  target/riscv/cpu_helper.c | 2 +-
->> >  1 file changed, 1 insertion(+), 1 deletion(-)
->> >
->> > diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
->> > index d0b0f9cf88..ce1f47e4e3 100644
->> > --- a/target/riscv/cpu_helper.c
->> > +++ b/target/riscv/cpu_helper.c
->> > @@ -410,7 +410,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr addres=
-s, int size,
->> >
->> >      if (riscv_feature(env, RISCV_FEATURE_PMP) &&
->> >          (ret =3D=3D TRANSLATE_SUCCESS) &&
->> > -        !pmp_hart_has_privs(env, pa, TARGET_PAGE_SIZE, 1 << access_ty=
-pe)) {
->> > +        !pmp_hart_has_privs(env, pa, size, 1 << access_type)) {
->> >          ret =3D TRANSLATE_PMP_FAIL;
->> >      }
->> >      if (ret =3D=3D TRANSLATE_PMP_FAIL) {
->> > --
->> > 2.17.1
->> >
->> >
->>
+This patch prioritises MMU exceptions over PMP exceptions and only checks for
+PMP if MMU translation succeeds. This patch is required for future commits
+that properly report PMP exception violations if PTW succeeds.
+
+Signed-off-by: Hesham Almatary <Hesham.Almatary@cl.cam.ac.uk>
+---
+ target/riscv/cpu_helper.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index 41d6db41c3..40fb47e794 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -401,6 +401,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+                   " prot %d\n", __func__, address, ret, pa, prot);
+
+     if (riscv_feature(env, RISCV_FEATURE_PMP) &&
++        (ret == TRANSLATE_SUCCESS) &&
+         !pmp_hart_has_privs(env, pa, TARGET_PAGE_SIZE, 1 << access_type)) {
+         ret = TRANSLATE_FAIL;
+     }
+--
+2.17.1
+
 
