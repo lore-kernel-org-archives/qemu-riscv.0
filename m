@@ -1,58 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1hUK4C-0005nR-5Z
+	id 1hUK4C-0005oK-Or
 	for mharc-qemu-riscv@gnu.org; Fri, 24 May 2019 19:57:40 -0400
 Received: from eggs.gnu.org ([209.51.188.92]:60425)
 	by lists.gnu.org with esmtp (Exim 4.71)
 	(envelope-from <prvs=040baf4f1=alistair.francis@wdc.com>)
-	id 1hUK43-0005eB-9a
-	for qemu-riscv@nongnu.org; Fri, 24 May 2019 19:57:32 -0400
+	id 1hUK44-0005eB-JO
+	for qemu-riscv@nongnu.org; Fri, 24 May 2019 19:57:37 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
 	(envelope-from <prvs=040baf4f1=alistair.francis@wdc.com>)
-	id 1hUJur-0004Qu-00
-	for qemu-riscv@nongnu.org; Fri, 24 May 2019 19:48:02 -0400
+	id 1hUJul-0004LH-C8
+	for qemu-riscv@nongnu.org; Fri, 24 May 2019 19:47:56 -0400
 Received: from esa5.hgst.iphmx.com ([216.71.153.144]:51627)
 	by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.71) (envelope-from <prvs=040baf4f1=alistair.francis@wdc.com>)
-	id 1hUJum-00046f-K6; Fri, 24 May 2019 19:47:57 -0400
+	id 1hUJuj-00046f-Qt; Fri, 24 May 2019 19:47:54 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
 	d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
-	t=1558741677; x=1590277677;
+	t=1558741675; x=1590277675;
 	h=from:to:cc:subject:date:message-id:in-reply-to:
 	references:mime-version:content-transfer-encoding;
-	bh=6UOMESq+sGSeNp31YuaAf4E6LnUDjRVfecs88kpoRRw=;
-	b=SzpT+bCc9eQhK+Ohv7ilck76v3Cz+p4warf/FvvvWsRPJls5vCI91XDZ
-	MIpFdUsNyVMC3DW+rFvgO0V5KSxeIQ6B3YIuCl+jNCf4B8+VTfC3PmQ+c
-	PS0IYT40Ax1ItxR8sjii4332o+FPCL0rACLX73jZFVjE/3+5oBFx154yq
-	7TREDxWoW7pHwhZpf8OkkO3tS3TT0ZpwzlyeWJ83cIrUWmw0LAcD/lkzJ
-	iGMEybeqz01fONT9BQ5uTM1YJMh8Eeadvs3OaFh7mBi8D/eQEGOyP5M3P
-	y/5CaXsSu5jBla6ijQ5W03V77FCXCSpQp8rVnnqgZKpRV8T9sU5eFCWH6 Q==;
-X-IronPort-AV: E=Sophos;i="5.60,508,1549900800"; d="scan'208";a="110307767"
+	bh=+7s/1pLt/imVrzqtURoQsJvM9/dXUZZNehbEBN3Vwxk=;
+	b=AuBjcdbTQLOHuaeXIfUTkAJtIaGaYSxA97XDkNXVIK/j5006JhGsF+Iy
+	PqqK4rI0DIdP1uQhPxFWKC360AtefvwJWJ0sd4Xf4GZsnYF0c4L8oia++
+	nvRac6/e6Ko+zLHsXyanoR5zFxC9Dvo7FQqWZm0/PtqTJDgbQgeV/+uW8
+	R4V821m3LgfsfZunRV06B6uEpW1dlkjeEHTgobywaA3X74/MUzfop3xc5
+	8iysXQz+YfJVw2eOfpRDf4oVjeAbjaYlciYc6ZuRk0vRm1kXAslnq2IZP
+	ZSJzZlYgJDKr3tvGy2Zg2T7xOwhRW+ygvbT78K3s1CmtGq2TNBuFeFI8p g==;
+X-IronPort-AV: E=Sophos;i="5.60,508,1549900800"; d="scan'208";a="110307766"
 Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com)
 	([199.255.45.15])
-	by ob1.hgst.iphmx.com with ESMTP; 25 May 2019 07:47:57 +0800
-IronPort-SDR: b9YU08yZ1e/cDm7n2RYhU3DfylGXyfyKWZLMwaaihyLDR7HkXTqEC550pACmOJmwJUJ9PI1FWl
-	BITucjTTXaHpRrLaunUf3A6TKw6+8i61erufGrrPxKE4gfbKoQVSQjMK5yCugsOeEVA2LrDduE
-	W27H89zjvY/tkGmdKFKairn2cAprgsqSDn5oWsZX3prAy/hVnbU5Dpyvs+H1yPqh4tfJ0rs2rs
-	zzq4pmTqpSQqgtWolkT5aU65K6V1f/RZPZYIkOdVWZcWKa3wfcoBEeiYIdQXou87T5SeWP9WBF
-	2sBpa46QizNzwsaTH4dHfxhN
+	by ob1.hgst.iphmx.com with ESMTP; 25 May 2019 07:47:54 +0800
+IronPort-SDR: TsqjmL6Ktgk/3hCaIJT9Tgx9j2GQSEmI199zqrSrN8fNZZRGQgnhPAZMnBr9Ce20FhCKr4BqC4
+	+DepIpCzmgSegRdEi9GNQ88LZzCxYlbaTk9ngDoBWH6GqnYlt/bk2urYzzx2NoF9fyC3rot8VZ
+	Y0sv0TRFQ55XGoGAwAyqbBk427N6WValRshoicKoHHnmiHfgeXp+iRCQAifF+z3WktSo9eXIgM
+	Qu6LvjdSbUTPGjKWULIHvp3FELb2c2cXBJNllKYU7DdW3Z4NijGrCjz/4nLsCSvEL5FpmOTw5D
+	sG2UY9EgScxe/Me4Szs//U2S
 Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
-	by uls-op-cesaep02.wdc.com with ESMTP; 24 May 2019 16:25:35 -0700
-IronPort-SDR: 4GHc4TPyVjiu0qyZGLftRQE4HpABb+v1Yx4ocqa7NDLrD/Yjj6NAAkhhuaAeScwuHZWsU6gkuT
-	4fGELERE/hP9JFJJ5E+3vuIRFYitpJZSM5ED/UCbtnUBM9klak/GwAM6JwUxyBy1Gc9HBZHzEU
-	4x34nLJuWORDZfV6nCnaeclHmg8Wl6LHgmE1ZL5SCnWW3XoF9MKeSWdN8WjVwyDFIwJxgxDS/a
-	V3e/GgDPbd1WZ/yJS03Nsm0c1LRkq0qXOIPTzR+1Lp7FXk2oW8Bp2SmzmHIDf4Jaau36Q2UD9Z
-	kqk=
+	by uls-op-cesaep02.wdc.com with ESMTP; 24 May 2019 16:25:32 -0700
+IronPort-SDR: Z9hnk5mJfGfa5kUfWqU0jXKJtKjnH2NBQJ0EqyELhlXBn7Wg0zunv/aBM6SN9CQmpzkHm3PI2M
+	QjYX1RaYK/01otSUApQzai/gxuglQ7l4aFbXWvEi4wajPb2hqmVQQa5vfQ7FYjaWmqF5FADqSj
+	D7gdUuR2MyXEIG2QzcWdH6bE9Ptu1kkcoXDYFnqmbUYiJrxCCHxhx7L1/sHRyC5FOQbpVfH0mT
+	s9SAdGQRiRq79uvozIXqAndyvXehymrHG6NqVTOnnIs1ejaX4VXBydBKMsgFO0LE1cliTmavh4
+	MOw=
 Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
 	risc6-mainframe.int.fusionio.com) ([10.196.157.140])
-	by uls-op-cesaip01.wdc.com with ESMTP; 24 May 2019 16:47:56 -0700
+	by uls-op-cesaip01.wdc.com with ESMTP; 24 May 2019 16:47:54 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: palmer@sifive.com,
 	alistair.francis@wdc.com,
 	alistair23@gmail.com
-Date: Fri, 24 May 2019 16:46:01 -0700
-Message-Id: <fa8024eec75788eb25c124a4604ad7459a1663f7.1558741334.git.alistair.francis@wdc.com>
+Date: Fri, 24 May 2019 16:45:58 -0700
+Message-Id: <a16457bbdc3bf30a4bf6bbed688f80f48c7c2aac.1558741334.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <cover.1558741334.git.alistair.francis@wdc.com>
 References: <cover.1558741334.git.alistair.francis@wdc.com>
@@ -61,8 +61,8 @@ Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
 X-Received-From: 216.71.153.144
-Subject: [Qemu-riscv] [RFC v1 10/23] target/riscv: Add background CSRs
- accesses
+Subject: [Qemu-riscv] [RFC v1 09/23] target/riscv: Add Hypervisor CSR access
+ functions
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -74,169 +74,102 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 May 2019 23:57:32 -0000
+X-List-Received-Date: Fri, 24 May 2019 23:57:37 -0000
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/cpu_bits.h |  11 ++++
- target/riscv/csr.c      | 119 ++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 130 insertions(+)
+ target/riscv/csr.c | 68 ++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 68 insertions(+)
 
-diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-index c898bb1102..9c27727e6f 100644
---- a/target/riscv/cpu_bits.h
-+++ b/target/riscv/cpu_bits.h
-@@ -169,6 +169,17 @@
- #define CSR_SPTBR           0x180
- #define CSR_SATP            0x180
- 
-+/* Background CSRs */
-+#define CSR_BSSTATUS        0x200
-+#define CSR_BSIE            0x204
-+#define CSR_BSTVEC          0x205
-+#define CSR_BSSCRATCH       0x240
-+#define CSR_BSEPC           0x241
-+#define CSR_BSCAUSE         0x242
-+#define CSR_BSTVAL          0x243
-+#define CSR_BSIP            0x244
-+#define CSR_BSATP           0x280
-+
- /* Physical Memory Protection */
- #define CSR_PMPCFG0         0x3a0
- #define CSR_PMPCFG1         0x3a1
 diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index c52fde6e7f..908e166426 100644
+index c1fcb795cd..c52fde6e7f 100644
 --- a/target/riscv/csr.c
 +++ b/target/riscv/csr.c
-@@ -790,6 +790,115 @@ static int write_hgatp(CPURISCVState *env, int csrno, target_ulong val)
+@@ -82,6 +82,20 @@ static int smode(CPURISCVState *env, int csrno)
+     return -!riscv_has_ext(env, RVS);
+ }
+ 
++static int hmode(CPURISCVState *env, int csrno)
++{
++    if (riscv_has_ext(env, RVS) &&
++        riscv_has_ext(env, RVH)) {
++        /* Hypervisor extension is supported */
++        if ((env->priv == PRV_S && !riscv_cpu_virt_enabled(env)) ||
++            env->priv == PRV_M) {
++            return 0;
++        }
++    }
++
++        return -1;
++}
++
+ static int pmp(CPURISCVState *env, int csrno)
+ {
+     return -!riscv_feature(env, RISCV_FEATURE_PMP);
+@@ -727,6 +741,55 @@ static int write_satp(CPURISCVState *env, int csrno, target_ulong val)
      return 0;
  }
  
-+/* Background CSR Registers */
-+static int read_bsstatus(CPURISCVState *env, int csrno, target_ulong *val)
++/* Hypervisor Extensions */
++static int read_hstatus(CPURISCVState *env, int csrno, target_ulong *val)
 +{
-+    *val = env->bsstatus;
++    *val = env->hstatus;
 +    return 0;
 +}
 +
-+static int write_bsstatus(CPURISCVState *env, int csrno, target_ulong val)
++static int write_hstatus(CPURISCVState *env, int csrno, target_ulong val)
 +{
-+    env->bsstatus = val;
++    env->hstatus = val;
 +    return 0;
 +}
 +
-+static int read_bsie(CPURISCVState *env, int csrno, target_ulong *val)
++static int read_hedeleg(CPURISCVState *env, int csrno, target_ulong *val)
 +{
-+    *val = env->bsie;
++    *val = env->hedeleg;
 +    return 0;
 +}
 +
-+static int write_bsie(CPURISCVState *env, int csrno, target_ulong val)
++static int write_hedeleg(CPURISCVState *env, int csrno, target_ulong val)
 +{
-+    env->bsie = val;
++    env->hedeleg = val;
 +    return 0;
 +}
 +
-+static int read_bstvec(CPURISCVState *env, int csrno, target_ulong *val)
++static int read_hideleg(CPURISCVState *env, int csrno, target_ulong *val)
 +{
-+    *val = env->bstvec;
++    *val = env->hideleg;
 +    return 0;
 +}
 +
-+static int write_bstvec(CPURISCVState *env, int csrno, target_ulong val)
++static int write_hideleg(CPURISCVState *env, int csrno, target_ulong val)
 +{
-+    env->bstvec = val;
++    env->hideleg = val;
 +    return 0;
 +}
 +
-+static int read_bsscratch(CPURISCVState *env, int csrno, target_ulong *val)
++static int read_hgatp(CPURISCVState *env, int csrno, target_ulong *val)
 +{
-+    *val = env->bsscratch;
++    *val = env->hgatp;
 +    return 0;
 +}
 +
-+static int write_bsscratch(CPURISCVState *env, int csrno, target_ulong val)
++static int write_hgatp(CPURISCVState *env, int csrno, target_ulong val)
 +{
-+    env->bsscratch = val;
-+    return 0;
-+}
-+
-+static int read_bsepc(CPURISCVState *env, int csrno, target_ulong *val)
-+{
-+    *val = env->bsepc;
-+    return 0;
-+}
-+
-+static int write_bsepc(CPURISCVState *env, int csrno, target_ulong val)
-+{
-+    env->bsepc = val;
-+    return 0;
-+}
-+
-+static int read_bscause(CPURISCVState *env, int csrno, target_ulong *val)
-+{
-+    *val = env->bscause;
-+    return 0;
-+}
-+
-+static int write_bscause(CPURISCVState *env, int csrno, target_ulong val)
-+{
-+    env->bscause = val;
-+    return 0;
-+}
-+
-+static int read_bstval(CPURISCVState *env, int csrno, target_ulong *val)
-+{
-+    *val = env->bstval;
-+    return 0;
-+}
-+
-+static int write_bstval(CPURISCVState *env, int csrno, target_ulong val)
-+{
-+    env->bstval = val;
-+    return 0;
-+}
-+
-+static int read_bsip(CPURISCVState *env, int csrno, target_ulong *val)
-+{
-+    *val = (target_ulong)atomic_read(&env->bsip);
-+    return 0;
-+}
-+
-+static int write_bsip(CPURISCVState *env, int csrno, target_ulong val)
-+{
-+    atomic_set(&env->bsip, val);
-+    return 0;
-+}
-+
-+static int read_bsatp(CPURISCVState *env, int csrno, target_ulong *val)
-+{
-+    *val = env->bsatp;
-+    return 0;
-+}
-+
-+static int write_bsatp(CPURISCVState *env, int csrno, target_ulong val)
-+{
-+    env->bsatp = val;
++    env->hgatp = val;
 +    return 0;
 +}
 +
  /* Physical Memory Protection */
  static int read_pmpcfg(CPURISCVState *env, int csrno, target_ulong *val)
  {
-@@ -978,6 +1087,16 @@ static riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
-     [CSR_HIDELEG] =             { hmode,   read_hideleg,     write_hideleg    },
-     [CSR_HGATP] =               { hmode,   read_hgatp,       write_hgatp      },
+@@ -910,6 +973,11 @@ static riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+     /* Supervisor Protection and Translation */
+     [CSR_SATP] =                { smode, read_satp,        write_satp        },
  
-+    [CSR_BSSTATUS] =            { hmode,   read_bsstatus,    write_bsstatus   },
-+    [CSR_BSIE] =                { hmode,   read_bsie,        write_bsie       },
-+    [CSR_BSTVEC] =              { hmode,   read_bstvec,      write_bstvec     },
-+    [CSR_BSSCRATCH] =           { hmode,   read_bsscratch,   write_bsscratch  },
-+    [CSR_BSEPC] =               { hmode,   read_bsepc,       write_bsepc      },
-+    [CSR_BSCAUSE] =             { hmode,   read_bscause,     write_bscause    },
-+    [CSR_BSTVAL] =              { hmode,   read_bstval,      write_bstval     },
-+    [CSR_BSIP] =                { hmode,   read_bsip,        write_bsip       },
-+    [CSR_BSATP] =               { hmode,   read_bsatp,       write_bsatp      },
++    [CSR_HSTATUS] =             { hmode,   read_hstatus,     write_hstatus    },
++    [CSR_HEDELEG] =             { hmode,   read_hedeleg,     write_hedeleg    },
++    [CSR_HIDELEG] =             { hmode,   read_hideleg,     write_hideleg    },
++    [CSR_HGATP] =               { hmode,   read_hgatp,       write_hgatp      },
 +
      /* Physical Memory Protection */
      [CSR_PMPCFG0  ... CSR_PMPADDR9] =  { pmp,   read_pmpcfg,  write_pmpcfg   },
