@@ -1,60 +1,68 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1hUK3i-0005K8-3I
-	for mharc-qemu-riscv@gnu.org; Fri, 24 May 2019 19:57:10 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:60137)
+	id 1hUK3t-0005VA-7U
+	for mharc-qemu-riscv@gnu.org; Fri, 24 May 2019 19:57:21 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:60254)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1hUK3f-0005Ao-Dd
-	for qemu-riscv@nongnu.org; Fri, 24 May 2019 19:57:08 -0400
+	(envelope-from <prvs=040baf4f1=alistair.francis@wdc.com>)
+	id 1hUK3q-0005Kz-NY
+	for qemu-riscv@nongnu.org; Fri, 24 May 2019 19:57:19 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <alistair23@gmail.com>) id 1hUJxv-0007BX-37
-	for qemu-riscv@nongnu.org; Fri, 24 May 2019 19:51:15 -0400
-Received: from mail-lf1-x144.google.com ([2a00:1450:4864:20::144]:35677)
-	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <alistair23@gmail.com>)
-	id 1hUJxl-00072F-Aq; Fri, 24 May 2019 19:51:03 -0400
-Received: by mail-lf1-x144.google.com with SMTP id c17so8302770lfi.2;
-	Fri, 24 May 2019 16:50:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=j+HvD6J2CQkTJW83AP1VhzckRtl5qvaf4UrqX6hfIIY=;
-	b=BIptT/b5XP2joQqheGYKoD056GkElMnALkPtgtd8EO9hrsfph32fdAqupkqSqtTjoc
-	V8sfBHjofxLiKJGc3+Reqtz9TswL2nZsrx8IpsxvVG62KO2HBJ6IVtmFydXneGG+1ZSj
-	apsKTOSQZE16v/n4JDGs6zXBt3r9xz1/N6xT6oKs92eK0+Y8bm66VxnqECcJdNq0q7M6
-	A6/GWZYrsOA4/Ub6lcJjj9ct1p+obnxzgmytwB17yQsI2KOdbetY+XNGAeJBxG6Lq268
-	9qOZH/B/IS5148GDJo2+57dbiSLRRBoDlKUJ4zWWqTbW/Dew6HnAf2jeUBhw917P7V33
-	FQ5w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=j+HvD6J2CQkTJW83AP1VhzckRtl5qvaf4UrqX6hfIIY=;
-	b=WdjidoiNU/N+nweRQj8o4RAWBooEedYK+b0WtIKh4qyPqoht34Atx0cMWwavsb3LkA
-	e6YV/DvKUffur+D3EXdCs4h7WoLtQZ4j7OqpHXBaJxqhLxI0dz7jDKVIy/67uxvsxTi0
-	X0H8uy2pYaohxDFmV9ql3Or/JAq01HrY5POBWVQUf3qFo4pdk1kTKhnAs0F1abRb0stw
-	tOApXrXH9eIACWHOPjBIwa8xX3NAtYE8kYsVCeMR/8pi9CvtkCLMHwGRe1yDw7G+NXhQ
-	q6gjWYPe1xOfwEXyNvfXfGfbo6aepL8R5VuX1gzormBjwE6DGdVCPqUVcsYT0qjr2Jmb
-	2M5Q==
-X-Gm-Message-State: APjAAAWMLpQSa70Gq6MzK17OkWWc3Y6iogCUOIidkffpDsj2Iv8+3DOU
-	WTHNHK1C0rQskLryWz0/TU1mvVP9xM8XvOM5F0A=
-X-Google-Smtp-Source: APXvYqyNI9wgIxmri3ZSnts/NaVvhAOg3PT5sDLgZMzdu2E6h+XAQpqiT52deDeomYZR3vt8dYmt84jrVxv/It9HbzU=
-X-Received: by 2002:ac2:4576:: with SMTP id k22mr3295183lfm.156.1558741854512; 
-	Fri, 24 May 2019 16:50:54 -0700 (PDT)
-MIME-Version: 1.0
-References: <cover.1558741334.git.alistair.francis@wdc.com>
+	(envelope-from <prvs=040baf4f1=alistair.francis@wdc.com>)
+	id 1hUJvN-0004oC-06
+	for qemu-riscv@nongnu.org; Fri, 24 May 2019 19:48:33 -0400
+Received: from esa1.hgst.iphmx.com ([68.232.141.245]:5536)
+	by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.71) (envelope-from <prvs=040baf4f1=alistair.francis@wdc.com>)
+	id 1hUJvL-0004l4-Gp; Fri, 24 May 2019 19:48:32 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+	d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+	t=1558741711; x=1590277711;
+	h=from:to:cc:subject:date:message-id:in-reply-to:
+	references:mime-version:content-transfer-encoding;
+	bh=Q417YyWRkJW+frGSJUz87YKMObdZQ7KF7pmDlZ3Rq0g=;
+	b=BU2Jkq8hMpCItnzGNKbAFZO7TPccsc35EvUAJZduCa5FOR6+VGSS6X8I
+	ggfYV9hK832CcjR9I/lBZknGnMliqVMR4ltT47aum5ue5cVfYOUDWHGK/
+	fZbIOX3CYIJGh9qlo9ioT84vGWlsDxYF7QAPPH/ll8lbyDdaJED36TesN
+	UZJrNnKfZrHEV9q2e4QLlRnjlCZG9/Dhrgr+Sgfy7amhMdU5fX9Vo/b9C
+	7hHHXR7VQNR2k2Rmbe6rEKfCHsf3UL3CB2378oilPfss5MGZN+q6jirxJ
+	FL/NTDR+bVpFYOPBUtHRHoGM6kYUHffX6vuBAPwStEQeFE/8fQeuf4M8Q Q==;
+X-IronPort-AV: E=Sophos;i="5.60,508,1549900800"; d="scan'208";a="215265042"
+Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com)
+	([199.255.45.15])
+	by ob1.hgst.iphmx.com with ESMTP; 25 May 2019 07:48:30 +0800
+IronPort-SDR: 4iqjTt33V8tk0yPgbnrIZWolHOdZQywo2TeIcNT3ZL59YwTRS6ud7K4vI/2lidMxS5785EIpbm
+	dayluGzo4hAj63+gFp3/18xXrptO+H+qpkJ4JeJS7XL8WfSUAiQoKc2BqrFHFQavI0HTaOhnwo
+	e1MbGi9tOa4G3R5uI4bRbZgfrPY6SHpMYz1Y/S5I2sivMAkhKh13UQG+TLnOlugejrkvuAZSGW
+	LXIIVwnAviUG/Rk4c6O11j+c8BcFPm12UgSuelzjMGrHnolbqPnyxgH6F+bizvjNux7hHAvzua
+	wZz75qB43j/aUeytmNZnL3MN
+Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
+	by uls-op-cesaep02.wdc.com with ESMTP; 24 May 2019 16:26:10 -0700
+IronPort-SDR: C4BDV/o8KqCWpunJWlO5TEhGOSfZS425QX29HVKX6dWvu7PHeh3Lgkr5PelSm7FDFzeX+eFBGp
+	dffLU0yUyPU3LEUn/znqi3lAyfAKSBgY/otHaGtsgHnvJx8x8aLZqha9xaUTBZWNH6U2VPv40h
+	OaUjswCAQUEvjqLxI37ZWyDxPKvoaxqfzPlB3k+etpF+aZhHKnYNCsWBnfpsHf6p73UXYFaKh7
+	C/e9BTfn4USfAGrUeyXu040icdUu86i0faxDzveS2TDSiKsH7mMHH/vbNbeSsfHHVrAXsCx0QK
+	9rY=
+Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
+	risc6-mainframe.int.fusionio.com) ([10.196.157.140])
+	by uls-op-cesaip01.wdc.com with ESMTP; 24 May 2019 16:48:31 -0700
+From: Alistair Francis <alistair.francis@wdc.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: palmer@sifive.com,
+	alistair.francis@wdc.com,
+	alistair23@gmail.com
+Date: Fri, 24 May 2019 16:46:36 -0700
+Message-Id: <0c227e8cc03a2b33f67e497b94e6d8283e98d96e.1558741334.git.alistair.francis@wdc.com>
+X-Mailer: git-send-email 2.21.0
 In-Reply-To: <cover.1558741334.git.alistair.francis@wdc.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 24 May 2019 16:50:28 -0700
-Message-ID: <CAKmqyKOEbM+defS=7PjxTsAxaes-hq+sQKAg7p1QRWvMCrgwbA@mail.gmail.com>
-To: Alistair Francis <alistair.francis@wdc.com>,
-	Atish Patra <Atish.Patra@wdc.com>, Anup.Patel@wdc.com
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
-	"open list:RISC-V" <qemu-riscv@nongnu.org>, 
-	Palmer Dabbelt <palmer@sifive.com>
-Content-Type: text/plain; charset="UTF-8"
+References: <cover.1558741334.git.alistair.francis@wdc.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2a00:1450:4864:20::144
-Subject: Re: [Qemu-riscv] [RFC v1 00/23] Add RISC-V Hypervisor Extension
+X-Received-From: 68.232.141.245
+Subject: [Qemu-riscv] [RFC v1 23/23] target/riscv: Allow enabling the
+ Hypervisor extension
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -66,144 +74,49 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 May 2019 23:57:09 -0000
+X-List-Received-Date: Fri, 24 May 2019 23:57:19 -0000
 
-On Fri, May 24, 2019 at 4:47 PM Alistair Francis
-<alistair.francis@wdc.com> wrote:
->
-> This patch series adds the RISC-V Hypervisor extension 0.3. This is the
-> latest draft spec of the Hypervisor extension.
+Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+---
+ target/riscv/cpu.c | 4 ++++
+ target/riscv/cpu.h | 1 +
+ 2 files changed, 5 insertions(+)
 
-Argh! I forgot to CC Atish and Anup, they are CCed now.
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index c1495ef037..b17dfb86c6 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -436,6 +436,9 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+         if (cpu->cfg.ext_u) {
+             target_misa |= RVU;
+         }
++        if (cpu->cfg.ext_h) {
++            target_misa |= RVH;
++        }
+ 
+         set_misa(env, RVXLEN | target_misa);
+     }
+@@ -472,6 +475,7 @@ static Property riscv_cpu_properties[] = {
+     DEFINE_PROP_BOOL("c", RISCVCPU, cfg.ext_c, true),
+     DEFINE_PROP_BOOL("s", RISCVCPU, cfg.ext_s, true),
+     DEFINE_PROP_BOOL("u", RISCVCPU, cfg.ext_u, true),
++    DEFINE_PROP_BOOL("h", RISCVCPU, cfg.ext_h, false),
+     DEFINE_PROP_STRING("priv_spec", RISCVCPU, cfg.priv_spec),
+     DEFINE_PROP_STRING("user_spec", RISCVCPU, cfg.user_spec),
+     DEFINE_PROP_BOOL("mmu", RISCVCPU, cfg.mmu, true),
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 9897392ab7..d2cfc69e9a 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -259,6 +259,7 @@ typedef struct RISCVCPU {
+         bool ext_c;
+         bool ext_s;
+         bool ext_u;
++        bool ext_h;
+ 
+         char *priv_spec;
+         char *user_spec;
+-- 
+2.21.0
 
-Just an FYI I will be on vacation next week, so any replys to this
-series might be a little delayed.
-
-Alistair
-
->
-> This series applies ontop of the RISC-V tree as it requires the previous
-> Hypervisor extension patches as well as the CPU parsing patches, both of
-> which have been accepted to the RISC-V tree. The full Hypervisor support
-> is avaliable at my GitHub (see below) which includes all required patches.
-> This series won't apply ontop of master.
->
-> The Hypervisor extension is disabled by default, so this series should
-> result in no changes to anyone using QEMU unless they enable the
-> extension. The extention can be enabled with the -cpu property (see
-> below).
->
-> At the moment the spec does not include information about the mstatush
-> register. As it is not in the spec I haven't added it to QEMU. This
-> means the extension won't work correctly for 32-bit guests. This should
-> be a small fix to add the CSR once the spec is updated.
->
-> All testing of this implementation has been done by using the baremetal
-> Xvisor Hypervisor. We are able to run two Linux guests (that's all I
-> have tried) as guests.
->
-> At the moment this spec is in a draft state and is subject to change. As
-> QEMU is extreamly useful in early bring up I think it makes sense for
-> QEMU to support non-frozen extensions. I would like to decide with this
-> series how QEMU will handle all future non-frozen extensions. That is a
-> standard way that QEMU users can test future RISC-V extensions while
-> still understanding things will change. One idea is just to disable it by
-> default, another option is to maybe use the Kconfig to make it a compile
-> time option which developers can use. Should we also display a warning
-> when running non-frozen extensions?
->
-> Thanks to Anup for doing the initial port of Xvisor. The port is avaliable here:
-> https://github.com/avpatel/xvisor-next and will run on QEMU.
->
-> Also thanks to Atish for implementing the SBI call support in Xvisor and
-> for lots of help debugging.
->
-> To run this yourself:
->  1. Apply this patch series to QEMU. The latest branch can be found here:
->       https://github.com/alistair23/qemu/tree/mainline/alistair/riscv-hyp-work.next
->  2. Get the version of OpenSBI that supports the H extenstion. This can
->     be found here:
->       https://github.com/riscv/opensbi/tree/hyp_ext_changes_v1
->  3. Build the next release of Xvisor. It is avaliable here:
->       https://github.com/avpatel/xvisor-next
->  4. Make sure you build the Xvisor tests, see here for details:
->       https://github.com/avpatel/xvisor-next/tree/master/tests/riscv/virt64/linux
->  5. Run QEMU:
->      ./riscv64-softmmu/qemu-system-riscv64 -nographic \
->        -machine virt -cpu rv64,h=true\
->        -serial mon:stdio -serial null -m 4G \
->        -device loader,file=vmm.bin,addr=0x80200000 \
->        -kernel fw_jump.elf \
->        -initrd vmm-disk-linux.img \
->        -append "vmm.console=uart@10000000 vmm.bootcmd=\"vfs mount initrd /;vfs run /boot.xscript;vfs cat /system/banner.txt\""
->
->    Once you get to the prompt you can start the geust by running:
->      guest kick guest0
->    You can then bind to the serial port using:
->      vserial bind guest0/uart0
->    Then you can start Linux using:
->      autoexec
->
->  This was all tested with the mainline 5.1 kernel. I don't know if it
->  will work on older kernels.
->
-> So far all of the QEMU work has been tested on Xvisor.
->
-> Known Issues/TODO:
->  - Add mstatush to support 32-bit Hypervisors
->  - Add support for bsstatus.FS and sstatus.FS from the Hypervisor spec
->  - Fix the random hang that sometimes appears when running a Hypervisor guest
->
-> There is also on going work from Anup to port KVM.
-> We have code complete implementation of RISC-V KVM kernel module and
-> RISC-V KVMTOOL. Currently, we are debugging KVM on QEMU and we will
-> send-out RFC PATCHES for KVM in June/July 2019.
-> The KVM RISC-V kernel module is available in riscv_kvm_v1
-> branch at: https://github.com/avpatel/linux.git
-> The KVMTOOL RISC-V port is available in riscv_v1 branch of
-> https://github.com/avpatel/kvmtool.git
->
-> There is very early work on a Xen port as well which is avaliable here:
-> https://github.com/alistair23/xen/tree/alistair/riscv-port
->
-> Alistair Francis (23):
->   target/riscv: Don't set write permissions on dirty PTEs
->   target/riscv: Add the Hypervisor extension
->   target/riscv: Add the virtulisation mode
->   target/riscv: Add the force HS exception mode
->   target/riscv: Add the Hypervisor CSRs to CPUState
->   target/riscv: Dump Hypervisor registers if enabled
->   target/riscv: Remove strict perm checking for CSR R/W
->   target/riscv: Add support for background interrupt setting
->   target/riscv: Add Hypervisor CSR access functions
->   target/riscv: Add background CSRs accesses
->   target/riscv: Add background register swapping function
->   target/ricsv: Flush the TLB on virtulisation mode changes
->   target/riscv: Generate illegal instruction on WFI when V=1
->   riscv: plic: Remove unused interrupt functions
->   riscv: plic: Always set sip.SEIP bit for HS
->   target/riscv: Add hypvervisor trap support
->   target/riscv: Add Hypervisor trap return support
->   target/riscv: Add hfence instructions
->   target/riscv: Allow specifying MMU stage
->   target/riscv: Allow specifying number of MMU stages
->   target/riscv: Implement second stage MMU
->   target/riscv: Call the second stage MMU in virtualisation mode
->   target/riscv: Allow enabling the Hypervisor extension
->
->  hw/riscv/sifive_plic.c                        |  24 +-
->  include/hw/riscv/sifive_plic.h                |   3 -
->  target/riscv/cpu.c                            |  31 ++
->  target/riscv/cpu.h                            |  26 ++
->  target/riscv/cpu_bits.h                       |  32 +-
->  target/riscv/cpu_helper.c                     | 430 ++++++++++++++++--
->  target/riscv/csr.c                            | 194 +++++++-
->  target/riscv/insn32.decode                    |  23 +-
->  .../riscv/insn_trans/trans_privileged.inc.c   |  40 ++
->  target/riscv/op_helper.c                      |  71 ++-
->  10 files changed, 782 insertions(+), 92 deletions(-)
->
-> --
-> 2.21.0
->
 
