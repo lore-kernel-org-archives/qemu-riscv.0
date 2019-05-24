@@ -1,58 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1hUK4E-0005qm-9J
-	for mharc-qemu-riscv@gnu.org; Fri, 24 May 2019 19:57:42 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:60399)
+	id 1hUK4F-0005s8-9R
+	for mharc-qemu-riscv@gnu.org; Fri, 24 May 2019 19:57:43 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:60425)
 	by lists.gnu.org with esmtp (Exim 4.71)
 	(envelope-from <prvs=040baf4f1=alistair.francis@wdc.com>)
-	id 1hUK43-0005au-Al
-	for qemu-riscv@nongnu.org; Fri, 24 May 2019 19:57:32 -0400
+	id 1hUK49-0005eB-F7
+	for qemu-riscv@nongnu.org; Fri, 24 May 2019 19:57:38 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
 	(envelope-from <prvs=040baf4f1=alistair.francis@wdc.com>)
-	id 1hUJuq-0004QY-Oh
-	for qemu-riscv@nongnu.org; Fri, 24 May 2019 19:48:01 -0400
+	id 1hUJud-0004FG-BZ
+	for qemu-riscv@nongnu.org; Fri, 24 May 2019 19:47:48 -0400
 Received: from esa5.hgst.iphmx.com ([216.71.153.144]:51627)
 	by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.71) (envelope-from <prvs=040baf4f1=alistair.francis@wdc.com>)
-	id 1hUJup-00046f-9T; Fri, 24 May 2019 19:47:59 -0400
+	id 1hUJuc-00046f-1p; Fri, 24 May 2019 19:47:46 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
 	d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
-	t=1558741680; x=1590277680;
+	t=1558741667; x=1590277667;
 	h=from:to:cc:subject:date:message-id:in-reply-to:
 	references:mime-version:content-transfer-encoding;
-	bh=al8LxCnIVbOOxV+CyVlDV2vfxMzKewDCHGGm9YaIPx8=;
-	b=qk7ieMjJMmcupPcrKB5VoMNFPOtFjUQNWa8ofJdYX9hqNXRfBGrDMvvy
-	Cz4tHx38/CL08bd9546e3H2xWhihqTxPSY1Xv595jbMg8ONw86lyqj+EW
-	sTqKW8/dmTIvhunpCHiTj6Pc67qO3oVZH5uvpN/TtPFYbr4BS0iOyeHpJ
-	Wr63rvXM4HY7Bhm8R1u9Cq0JYjMpH6u7rv2CFIKILx9BKnXy6CngtH0+/
-	y7zWlM2zwS7GvhgwXR9x1nqGxYMTmVW1xN9SufBO1T/3lYIXgizi23V96
-	pvehgBM31EDduiE25WS/NS3nsl9J8zXPFUm5xW+PB83FP3AxdJMgEOKqx Q==;
-X-IronPort-AV: E=Sophos;i="5.60,508,1549900800"; d="scan'208";a="110307768"
+	bh=8W/Bpt+bnTxpriny1g+X2aDXu+9emJzs2m4jnMhgMXE=;
+	b=FgUhBVd7Uul69hKWXMr0IL+RvmE5QLFwL7pOZxX1b0emtdlFDHRBs0tP
+	/LqUIDPD83SwjYAROTaIKzYXcPjguaxdEcQ3FgXp+85H3G922N0pHIzJu
+	4PHdGW9Zz504lxlPU078K8hEJNmGyrEbPneY3MwZuPd7q0tFPbx8t9Si3
+	8gUd6tj6aaJ2Dm38axLah2LUxzmAD5fGiky+eejYwT5qE9kAY062jftPJ
+	oj75VWZxYV1CMQ87EXekWTHOHh83P0PVFMum7S8ezHtqH1goW6Nwo6aVc
+	FvSfQtZXyFTl9tAmOuqf1zM4mOuUkGer5EFx9RfP1nuX8/kMOpktGhQzp Q==;
+X-IronPort-AV: E=Sophos;i="5.60,508,1549900800"; d="scan'208";a="110307763"
 Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com)
 	([199.255.45.15])
-	by ob1.hgst.iphmx.com with ESMTP; 25 May 2019 07:47:59 +0800
-IronPort-SDR: KgtMtEoXYCkJJxzZmvKUg2rmvtu9pUqBnIQiR0zXFyV1Cy4XZcbYi1/hIaPPk2CYhpsrpNFydX
-	CiNqC07sKxCnAB8fE0QAWyrRiGoHhTK2iyl5kNmu7aB7HFn7yvHw+SK9iL7vgvY6nqXu+eupPR
-	a1T3JYTvGa8/Mq17YwxEuESJtkdWFPtGJERyy4BmWM5HOO9oU+UxtnEQmifM+k3WL5MVqSnkHa
-	qOx1so3cp21YExekbmzgNeIXWglVeVdQ09HtptqFalecR1TweTNCSWV5vqD228RQUhockR29wt
-	rrLjEjlRAG0ibpl8VcxX7BLw
-Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
-	by uls-op-cesaep02.wdc.com with ESMTP; 24 May 2019 16:25:38 -0700
-IronPort-SDR: UNkXA2uZYN8Ntjqye84htA1ZmgQ6WCZfSpvGc0aW7/SqXxT1hc3WiaE+/TNTYvjkVm9P8A5Ey+
-	WW6QdQt343l7RsLMtHGRr3sq7qfYdI72eTdbNtjQJ85asM5fLe+EaTDZwehLOlbg2Q+Sk7+seU
-	/GYNK2KjQic80R4Cl4oHEkuHhWLzhA0l1gqKGLmxkyX5lAgFUBoTKOvdZiOxStA1PPCHnHiU9i
-	ALyPDMmFkJghmDqOPYBTJLJMhC3vLEYQde+D4812eGtRzYskV3Md2D8cp3p/J3VtKyGzPyPuQX
-	S6A=
+	by ob1.hgst.iphmx.com with ESMTP; 25 May 2019 07:47:46 +0800
+IronPort-SDR: lA1CSAWamz4KuB63bbdv6mSvwjf85qYRi65r5ED4CIwGCZ4NqCRu3L7Cp2EOM5PSkbskunfgoh
+	3o2lKoCieQBrnJongogq7DoQAKWKobMiNiKcIrSSrCcTgUPvrU34Olq+MgTY+W5ywiCPkbTEMT
+	2mRf4aDdauTXqt4lJgmFpvD2msaUWb9EawrNV9dfoGOQnpiIUr/e5HD2KgfM6L/gWHBJDBp2Es
+	6XWqoJ2PNjQjnHeSUd8HNUuQCjuGjgFSyuk1k7c7oywZfHBNGM1q2rmVTI7vA47qkaymFJ2jyI
+	l2ciVC9r5JXsYN2/hHGi75a5
+Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
+	by uls-op-cesaep02.wdc.com with ESMTP; 24 May 2019 16:25:25 -0700
+IronPort-SDR: 2sIWyjCoeXGiVvMSbcmPXz/rEljj2QnCA05+K/Q6rCt+lo9bdK4xI2rH9g56dq7bktMusJNwIe
+	51paDrLFjz+201Sekdpy1Nl/RNBWk0698udLs6KEd6PCGysT83zPM0jRyIn3XyrT5Uddk/PMaL
+	0Xm6LRRxLD1X0i+N1eiTX1OcVR6MHWqMjY9UR3N51q6FMZOdQ0bZS2vhE+INx44GUT5q26Pcny
+	oPrlkVIIUxCVsD5SS24/WpdRSuvxro0QKtLFPrA1QWjUh0C16Kx4wrBuXYDBof5eoKBt3vC7sT
+	LLU=
 Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
 	risc6-mainframe.int.fusionio.com) ([10.196.157.140])
-	by uls-op-cesaip01.wdc.com with ESMTP; 24 May 2019 16:47:59 -0700
+	by uls-op-cesaip02.wdc.com with ESMTP; 24 May 2019 16:47:45 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: palmer@sifive.com,
 	alistair.francis@wdc.com,
 	alistair23@gmail.com
-Date: Fri, 24 May 2019 16:46:04 -0700
-Message-Id: <65714aac56e24d23840b733f0245f9d0b5ecf450.1558741334.git.alistair.francis@wdc.com>
+Date: Fri, 24 May 2019 16:45:51 -0700
+Message-Id: <c5c48ddbbc09c4a8c3e1418d49796a32287717b9.1558741334.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <cover.1558741334.git.alistair.francis@wdc.com>
 References: <cover.1558741334.git.alistair.francis@wdc.com>
@@ -61,8 +61,8 @@ Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
 X-Received-From: 216.71.153.144
-Subject: [Qemu-riscv] [RFC v1 11/23] target/riscv: Add background register
- swapping function
+Subject: [Qemu-riscv] [RFC v1 06/23] target/riscv: Dump Hypervisor registers
+ if enabled
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -74,103 +74,59 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 May 2019 23:57:32 -0000
+X-List-Received-Date: Fri, 24 May 2019 23:57:38 -0000
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/cpu.h        |  1 +
- target/riscv/cpu_bits.h   |  5 ++++
- target/riscv/cpu_helper.c | 52 +++++++++++++++++++++++++++++++++++++++
- 3 files changed, 58 insertions(+)
+ target/riscv/cpu.c | 27 +++++++++++++++++++++++++++
+ 1 file changed, 27 insertions(+)
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index b99d2b7af2..9897392ab7 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -319,6 +319,7 @@ void riscv_cpu_list(void);
- #define cpu_mmu_index riscv_cpu_mmu_index
- 
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 65556ac543..c1495ef037 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -220,14 +220,41 @@ static void riscv_cpu_dump_state(CPUState *cs, FILE *f, int flags)
  #ifndef CONFIG_USER_ONLY
-+void riscv_cpu_swap_background_regs(CPURISCVState *env);
- int riscv_cpu_claim_interrupts(RISCVCPU *cpu, uint32_t interrupts);
- uint32_t riscv_cpu_update_mip(RISCVCPU *cpu, uint32_t mask, uint32_t value);
- #define BOOL_TO_MASK(x) (-!!(x)) /* helper for riscv_cpu_update_mip value */
-diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-index 9c27727e6f..28117bdd32 100644
---- a/target/riscv/cpu_bits.h
-+++ b/target/riscv/cpu_bits.h
-@@ -550,3 +550,8 @@
- #define SIP_SSIP                           MIP_SSIP
- #define SIP_STIP                           MIP_STIP
- #define SIP_SEIP                           MIP_SEIP
-+
-+/* MIE masks */
-+#define MIE_SEIE                           (1 << IRQ_S_EXT)
-+#define MIE_STIE                           (1 << IRQ_S_TIMER)
-+#define MIE_SSIE                           (1 << IRQ_S_SOFT)
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 1f466effcf..0128546e6a 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -86,6 +86,58 @@ bool riscv_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
+     qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mhartid ", env->mhartid);
+     qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mstatus ", env->mstatus);
++    if (riscv_has_ext(env, RVH)) {
++        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "hstatus ", env->hstatus);
++        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "bstatus ", env->bsstatus);
++    }
+     qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mip     ",
+                  (target_ulong)atomic_read(&env->mip));
++    if (riscv_has_ext(env, RVH)) {
++        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "bsip    ",
++                     (target_ulong)atomic_read(&env->bsip));
++    }
+     qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mie     ", env->mie);
++    if (riscv_has_ext(env, RVH)) {
++        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "bsie    ", env->bsie);
++    }
+     qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mideleg ", env->mideleg);
++    if (riscv_has_ext(env, RVH)) {
++        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "hideleg ", env->hideleg);
++    }
+     qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "medeleg ", env->medeleg);
++    if (riscv_has_ext(env, RVH)) {
++        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "hedeleg ", env->hedeleg);
++    }
+     qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mtvec   ", env->mtvec);
++    if (riscv_has_ext(env, RVH)) {
++        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "bstvec  ", env->bstvec);
++    }
+     qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mepc    ", env->mepc);
++    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "sepc    ", env->sepc);
++    if (riscv_has_ext(env, RVH)) {
++        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "bsepc   ", env->bsepc);
++    }
+     qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mcause  ", env->mcause);
++    if (riscv_has_ext(env, RVH)) {
++        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "bscause ", env->bscause);
++    }
+ #endif
  
- #if !defined(CONFIG_USER_ONLY)
- 
-+void riscv_cpu_swap_background_regs(CPURISCVState *env)
-+{
-+    RISCVCPU *cpu = riscv_env_get_cpu(env);
-+    target_ulong tmp;
-+    target_ulong mstatus_mask = MSTATUS_MXR | MSTATUS_SUM | MSTATUS_FS |
-+                                MSTATUS_SPP | MSTATUS_SPIE | MSTATUS_SIE;
-+    target_ulong sie_mask = MIE_SEIE | MIE_STIE | MIE_SSIE;
-+
-+    g_assert(riscv_has_ext(env, RVH));
-+
-+#if defined(TARGET_RISCV64)
-+    mstatus_mask |= MSTATUS64_UXL;
-+#endif
-+
-+    tmp = env->bsstatus & mstatus_mask;
-+    env->bsstatus = env->mstatus & mstatus_mask;
-+    env->mstatus = (env->mstatus & ~mstatus_mask) | tmp;
-+
-+    tmp = env->bsie & sie_mask;
-+    env->bsie = env->mie & sie_mask;
-+    env->mie = (env->mie & ~sie_mask) | tmp;
-+
-+    tmp = env->bstvec;
-+    env->bstvec = env->stvec;
-+    env->stvec = tmp;
-+
-+    tmp = env->bsscratch;
-+    env->bsscratch = env->sscratch;
-+    env->sscratch = tmp;
-+
-+    tmp = env->bsepc;
-+    env->bsepc = env->sepc;
-+    env->sepc = tmp;
-+
-+    tmp = env->bscause;
-+    env->bscause = env->scause;
-+    env->scause = tmp;
-+
-+    tmp = env->bstval;
-+    env->bstval = env->sbadaddr;
-+    env->sbadaddr = tmp;
-+
-+    tmp = env->bsatp;
-+    env->bsatp = env->satp;
-+    env->satp = tmp;
-+
-+    tmp = (target_ulong)atomic_read(&env->bsip);
-+    tmp = riscv_cpu_update_mip(cpu, (MIP_SSIP | MIP_STIP | MIP_SEIP), tmp);
-+    tmp &= MIP_SSIP | MIP_STIP | MIP_SEIP;
-+    atomic_set(&env->bsip, tmp);
-+}
-+
- bool riscv_cpu_virt_enabled(CPURISCVState *env)
- {
-     bool tmp;
+     for (i = 0; i < 32; i++) {
 -- 
 2.21.0
 
