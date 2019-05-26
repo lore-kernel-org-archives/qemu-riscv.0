@@ -1,56 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1hUhxg-0003zh-Cf
+	id 1hUhxg-000403-Ko
 	for mharc-qemu-riscv@gnu.org; Sat, 25 May 2019 21:28:32 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:54116)
+Received: from eggs.gnu.org ([209.51.188.92]:54224)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <palmer@dabbelt.com>) id 1hUhxR-0003S6-2i
+	(envelope-from <palmer@dabbelt.com>) id 1hUhxR-0003Yx-KH
 	for qemu-riscv@nongnu.org; Sat, 25 May 2019 21:28:20 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <palmer@dabbelt.com>) id 1hUhfr-0005nY-Dj
-	for qemu-riscv@nongnu.org; Sat, 25 May 2019 21:10:08 -0400
-Received: from mail-pf1-f194.google.com ([209.85.210.194]:46012)
-	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1hUhfr-0005mg-7E
+	(envelope-from <palmer@dabbelt.com>) id 1hUhfq-0005lV-3v
 	for qemu-riscv@nongnu.org; Sat, 25 May 2019 21:10:07 -0400
-Received: by mail-pf1-f194.google.com with SMTP id s11so7490052pfm.12
-	for <qemu-riscv@nongnu.org>; Sat, 25 May 2019 18:10:07 -0700 (PDT)
+Received: from mail-pl1-f193.google.com ([209.85.214.193]:34888)
+	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+	(Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1hUhfp-0005l2-Tb
+	for qemu-riscv@nongnu.org; Sat, 25 May 2019 21:10:06 -0400
+Received: by mail-pl1-f193.google.com with SMTP id p1so5655469plo.2
+	for <qemu-riscv@nongnu.org>; Sat, 25 May 2019 18:10:05 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding:cc:from:to;
-	bh=AGynrsN21pUOx1n9WYF4sVDzoqOhDbKXNfRUTxBfjrw=;
-	b=FqvlT/8QgERKHy3uNCGnzyGA9qLQz7aaAViQX7cgVwrea/uVCamnjakrLF3Q4ReBeT
-	sttWX0yZ0I6OlQoVS4tGpqn+soNBo2BqcYC5SgKuuhU/iuafWKlypL9HsMIHoNgG0+ee
-	+fXoIcEBhGl/BzcDEP0wTWw1XxfoNCnLDNDzZcSfccfQymVp8TAtF/qWistgMvFd3nOk
-	zD5zbO9w3NGaC2/sJ412LpXbI1pISwXm6i4glrAyJOyaunoE1XBkjLpJCAdP8MT5qvHl
-	usUXVc+pkm19D+R3eSNlrE5AfhcQ9QgkJAOw75VWFvwkm08dn2gAqrLGR2KXEghoGEzi
-	84zQ==
-X-Gm-Message-State: APjAAAXEq5CkJPQ/KcbRFJmtsedx+QYkI1O6Sh+xQ87i08Z90zyoZ9Sw
-	102gd3y7CHWD71lnhEBXmyQh3vtNjtw=
-X-Google-Smtp-Source: APXvYqwZY92aKwMSdJQkCQ2IbMRsfUvYIvnktU69XpIv7DBfceh2O5y1c7D6P9AsqkIeKoTCD+mQLw==
-X-Received: by 2002:aa7:8dcd:: with SMTP id j13mr22711737pfr.107.1558833005679;
-	Sat, 25 May 2019 18:10:05 -0700 (PDT)
+	bh=LXJd80+rVzo+6MrKZjE1/RNSK5bbLw+nuyiN2acnnV0=;
+	b=OXV/OHeYq/a+iQ6lysqj7fflrzZXW40HkAYBE93hGGQItmX6Nds2UkkvNWUzdXKEEY
+	NJtb1HFb8aZmjC9tFAhF2L1KUEIsDBQRZD4Digm2KqQkjHCYOpIQQ53hLFnT3BYftTyL
+	7mctCll/McnNd2X2A83J5QBoS7VhYmX50ICG7G9xVsE+LqxSC+yAfqw+dQXWXxgrFbOl
+	+PZV7SRgb95Dw+6Djq+A12gIiFHhVidasb8VKyuX4Gf8U73yhk5FlImdvbpPdBGuka9T
+	rVD/FpGaZHIDFJ2TYPQjymU7EamI5PEsMH1sU18rz+U+0JwwbgnVjMRru/XJU2BIqmQI
+	mqZQ==
+X-Gm-Message-State: APjAAAXULFdQXmbUnnAkwe4C73RCfzVzBA9I0pDHRpVZtB15vU55sFxV
+	zpkPtgRjOyapOBhaNCQj9bus6sQVf3U=
+X-Google-Smtp-Source: APXvYqyiy41NSKoY3Tb0+XF2asLqi4OG3ntQxI8DozLIf6MZqvZVPr1cwPPeX1PdtQSI3NojP2k8AA==
+X-Received: by 2002:a17:902:b195:: with SMTP id
+	s21mr15276485plr.16.1558833004404; 
+	Sat, 25 May 2019 18:10:04 -0700 (PDT)
 Received: from localhost ([12.206.222.5]) by smtp.gmail.com with ESMTPSA id
-	e123sm6733854pgc.29.2019.05.25.18.10.04
+	u20sm7544774pfm.145.2019.05.25.18.10.03
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Sat, 25 May 2019 18:10:05 -0700 (PDT)
-Date: Sat, 25 May 2019 18:09:23 -0700
-Message-Id: <20190526010948.3923-5-palmer@sifive.com>
+	Sat, 25 May 2019 18:10:03 -0700 (PDT)
+Date: Sat, 25 May 2019 18:09:22 -0700
+Message-Id: <20190526010948.3923-4-palmer@sifive.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <20190526010948.3923-1-palmer@sifive.com>
 References: <20190526010948.3923-1-palmer@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Cc: qemu-riscv@nongnu.org,       qemu-devel@nongnu.org,
-	Richard Henderson <richard.henderson@linaro.org>,
+	Fabien Chouteau <chouteau@adacore.com>,
+	Richard Henderson <richard.henderson@linaro.org>, 
+	Alistair Francis <alistair.francis@wdc.com>,
 	Palmer Dabbelt <palmer@sifive.com>
 From: Palmer Dabbelt <palmer@sifive.com>
 To: Peter Maydell <peter.maydell@linaro.org>
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
 	[fuzzy]
-X-Received-From: 209.85.210.194
-Subject: [Qemu-riscv] [PULL 04/29] target/riscv: Name the argument sets for
- all of insn32 formats
+X-Received-From: 209.85.214.193
+Subject: [Qemu-riscv] [PULL 03/29] RISC-V: fix single stepping over ret and
+ other branching instructions
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -64,81 +67,148 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Sun, 26 May 2019 01:28:21 -0000
 
-From: Richard Henderson <richard.henderson@linaro.org>
+From: Fabien Chouteau <chouteau@adacore.com>
 
-Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
-Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
+This patch introduces wrappers around the tcg_gen_exit_tb() and
+tcg_gen_lookup_and_goto_ptr() functions that handle single stepping,
+i.e. call gen_exception_debug() when single stepping is enabled.
+
+Theses functions are then used instead of the originals, bringing single
+stepping handling in places where it was previously ignored such as jalr
+and system branch instructions (ecall, mret, sret, etc.).
+
+Signed-off-by: Fabien Chouteau <chouteau@adacore.com>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
 ---
- target/riscv/insn32.decode | 10 +++++++---
- target/riscv/translate.c   | 18 ++++++++++++++++++
- 2 files changed, 25 insertions(+), 3 deletions(-)
+ .../riscv/insn_trans/trans_privileged.inc.c   |  8 ++---
+ target/riscv/insn_trans/trans_rvi.inc.c       |  6 ++--
+ target/riscv/translate.c                      | 30 +++++++++++++++----
+ 3 files changed, 32 insertions(+), 12 deletions(-)
 
-diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index 6f3ab7aa52d3..77f794ed703d 100644
---- a/target/riscv/insn32.decode
-+++ b/target/riscv/insn32.decode
-@@ -34,9 +34,13 @@
- %imm_u    12:s20                 !function=ex_shift_12
+diff --git a/target/riscv/insn_trans/trans_privileged.inc.c b/target/riscv/insn_trans/trans_privileged.inc.c
+index acb605923e68..664d6ba3f2cc 100644
+--- a/target/riscv/insn_trans/trans_privileged.inc.c
++++ b/target/riscv/insn_trans/trans_privileged.inc.c
+@@ -22,7 +22,7 @@ static bool trans_ecall(DisasContext *ctx, arg_ecall *a)
+ {
+     /* always generates U-level ECALL, fixed in do_interrupt handler */
+     generate_exception(ctx, RISCV_EXCP_U_ECALL);
+-    tcg_gen_exit_tb(NULL, 0); /* no chaining */
++    exit_tb(ctx); /* no chaining */
+     ctx->base.is_jmp = DISAS_NORETURN;
+     return true;
+ }
+@@ -30,7 +30,7 @@ static bool trans_ecall(DisasContext *ctx, arg_ecall *a)
+ static bool trans_ebreak(DisasContext *ctx, arg_ebreak *a)
+ {
+     generate_exception(ctx, RISCV_EXCP_BREAKPOINT);
+-    tcg_gen_exit_tb(NULL, 0); /* no chaining */
++    exit_tb(ctx); /* no chaining */
+     ctx->base.is_jmp = DISAS_NORETURN;
+     return true;
+ }
+@@ -47,7 +47,7 @@ static bool trans_sret(DisasContext *ctx, arg_sret *a)
  
- # Argument sets:
-+&empty
- &b    imm rs2 rs1
- &i    imm rs1 rd
-+&j    imm rd
- &r    rd rs1 rs2
-+&s    imm rs1 rs2
-+&u    imm rd
- &shift     shamt rs1 rd
- &atomic    aq rl rs2 rs1 rd
+     if (has_ext(ctx, RVS)) {
+         gen_helper_sret(cpu_pc, cpu_env, cpu_pc);
+-        tcg_gen_exit_tb(NULL, 0); /* no chaining */
++        exit_tb(ctx); /* no chaining */
+         ctx->base.is_jmp = DISAS_NORETURN;
+     } else {
+         return false;
+@@ -68,7 +68,7 @@ static bool trans_mret(DisasContext *ctx, arg_mret *a)
+ #ifndef CONFIG_USER_ONLY
+     tcg_gen_movi_tl(cpu_pc, ctx->base.pc_next);
+     gen_helper_mret(cpu_pc, cpu_env, cpu_pc);
+-    tcg_gen_exit_tb(NULL, 0); /* no chaining */
++    exit_tb(ctx); /* no chaining */
+     ctx->base.is_jmp = DISAS_NORETURN;
+     return true;
+ #else
+diff --git a/target/riscv/insn_trans/trans_rvi.inc.c b/target/riscv/insn_trans/trans_rvi.inc.c
+index d420a4d8b2e9..37b0b9dd198e 100644
+--- a/target/riscv/insn_trans/trans_rvi.inc.c
++++ b/target/riscv/insn_trans/trans_rvi.inc.c
+@@ -60,7 +60,7 @@ static bool trans_jalr(DisasContext *ctx, arg_jalr *a)
+     if (a->rd != 0) {
+         tcg_gen_movi_tl(cpu_gpr[a->rd], ctx->pc_succ_insn);
+     }
+-    tcg_gen_lookup_and_goto_ptr();
++    lookup_and_goto_ptr(ctx);
  
-@@ -44,9 +48,9 @@
- @r       .......   ..... ..... ... ..... ....... &r                %rs2 %rs1 %rd
- @i       ............    ..... ... ..... ....... &i      imm=%imm_i     %rs1 %rd
- @b       .......   ..... ..... ... ..... ....... &b      imm=%imm_b %rs2 %rs1
--@s       .......   ..... ..... ... ..... .......         imm=%imm_s %rs2 %rs1
--@u       ....................      ..... .......         imm=%imm_u          %rd
--@j       ....................      ..... .......         imm=%imm_j          %rd
-+@s       .......   ..... ..... ... ..... ....... &s      imm=%imm_s %rs2 %rs1
-+@u       ....................      ..... ....... &u      imm=%imm_u          %rd
-+@j       ....................      ..... ....... &j      imm=%imm_j          %rd
- 
- @sh      ......  ...... .....  ... ..... ....... &shift  shamt=%sh10      %rs1 %rd
- @csr     ............   .....  ... ..... .......               %csr     %rs1 %rd
+     if (misaligned) {
+         gen_set_label(misaligned);
+@@ -483,7 +483,7 @@ static bool trans_fence_i(DisasContext *ctx, arg_fence_i *a)
+      * however we need to end the translation block
+      */
+     tcg_gen_movi_tl(cpu_pc, ctx->pc_succ_insn);
+-    tcg_gen_exit_tb(NULL, 0);
++    exit_tb(ctx);
+     ctx->base.is_jmp = DISAS_NORETURN;
+     return true;
+ }
+@@ -504,7 +504,7 @@ static bool trans_fence_i(DisasContext *ctx, arg_fence_i *a)
+     gen_io_end(); \
+     gen_set_gpr(a->rd, dest); \
+     tcg_gen_movi_tl(cpu_pc, ctx->pc_succ_insn); \
+-    tcg_gen_exit_tb(NULL, 0); \
++    exit_tb(ctx); \
+     ctx->base.is_jmp = DISAS_NORETURN; \
+     tcg_temp_free(source1); \
+     tcg_temp_free(csr_store); \
 diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 840ecbef36e7..928374242e83 100644
+index 2ff6b49487b7..840ecbef36e7 100644
 --- a/target/riscv/translate.c
 +++ b/target/riscv/translate.c
-@@ -687,11 +687,29 @@ static bool gen_shift(DisasContext *ctx, arg_r *a,
- #include "insn_trans/trans_rvd.inc.c"
- #include "insn_trans/trans_privileged.inc.c"
+@@ -109,6 +109,26 @@ static void gen_exception_debug(void)
+     tcg_temp_free_i32(helper_tmp);
+ }
  
-+/*
-+ * Auto-generated decoder.
-+ * Note that the 16-bit decoder reuses some of the trans_* functions
-+ * initially declared by the 32-bit decoder, which results in duplicate
-+ * declaration warnings.  Suppress them.
-+ */
-+#ifdef CONFIG_PRAGMA_DIAGNOSTIC_AVAILABLE
-+# pragma GCC diagnostic push
-+# pragma GCC diagnostic ignored "-Wredundant-decls"
-+# ifdef __clang__
-+#  pragma GCC diagnostic ignored "-Wtypedef-redefinition"
-+# endif
-+#endif
++/* Wrapper around tcg_gen_exit_tb that handles single stepping */
++static void exit_tb(DisasContext *ctx)
++{
++    if (ctx->base.singlestep_enabled) {
++        gen_exception_debug();
++    } else {
++        tcg_gen_exit_tb(NULL, 0);
++    }
++}
 +
- bool decode_insn16(DisasContext *ctx, uint16_t insn);
- /* auto-generated decoder*/
- #include "decode_insn16.inc.c"
- #include "insn_trans/trans_rvc.inc.c"
- 
-+#ifdef CONFIG_PRAGMA_DIAGNOSTIC_AVAILABLE
-+# pragma GCC diagnostic pop
-+#endif
++/* Wrapper around tcg_gen_lookup_and_goto_ptr that handles single stepping */
++static void lookup_and_goto_ptr(DisasContext *ctx)
++{
++    if (ctx->base.singlestep_enabled) {
++        gen_exception_debug();
++    } else {
++        tcg_gen_lookup_and_goto_ptr();
++    }
++}
 +
- static void decode_opc(DisasContext *ctx)
+ static void gen_exception_illegal(DisasContext *ctx)
  {
-     /* check for compressed insn */
+     generate_exception(ctx, RISCV_EXCP_ILLEGAL_INST);
+@@ -138,14 +158,14 @@ static void gen_goto_tb(DisasContext *ctx, int n, target_ulong dest)
+         /* chaining is only allowed when the jump is to the same page */
+         tcg_gen_goto_tb(n);
+         tcg_gen_movi_tl(cpu_pc, dest);
++
++        /* No need to check for single stepping here as use_goto_tb() will
++         * return false in case of single stepping.
++         */
+         tcg_gen_exit_tb(ctx->base.tb, n);
+     } else {
+         tcg_gen_movi_tl(cpu_pc, dest);
+-        if (ctx->base.singlestep_enabled) {
+-            gen_exception_debug();
+-        } else {
+-            tcg_gen_lookup_and_goto_ptr();
+-        }
++        lookup_and_goto_ptr(ctx);
+     }
+ }
+ 
 -- 
 2.21.0
 
