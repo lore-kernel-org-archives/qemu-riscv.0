@@ -1,42 +1,41 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1hUhxL-0003ZS-3A
+	id 1hUhxL-0003aq-Nb
 	for mharc-qemu-riscv@gnu.org; Sat, 25 May 2019 21:28:11 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:53897)
+Received: from eggs.gnu.org ([209.51.188.92]:54116)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <palmer@dabbelt.com>) id 1hUhxE-0003HK-UB
-	for qemu-riscv@nongnu.org; Sat, 25 May 2019 21:28:05 -0400
+	(envelope-from <palmer@dabbelt.com>) id 1hUhxI-0003S6-Kb
+	for qemu-riscv@nongnu.org; Sat, 25 May 2019 21:28:09 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <palmer@dabbelt.com>) id 1hUhgJ-0006RU-Ei
-	for qemu-riscv@nongnu.org; Sat, 25 May 2019 21:10:36 -0400
-Received: from mail-pl1-f196.google.com ([209.85.214.196]:44528)
+	(envelope-from <palmer@dabbelt.com>) id 1hUhgB-0006Gb-L4
+	for qemu-riscv@nongnu.org; Sat, 25 May 2019 21:10:28 -0400
+Received: from mail-pg1-f172.google.com ([209.85.215.172]:40298)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1hUhgJ-0006Qu-9K
-	for qemu-riscv@nongnu.org; Sat, 25 May 2019 21:10:35 -0400
-Received: by mail-pl1-f196.google.com with SMTP id c5so5633460pll.11
-	for <qemu-riscv@nongnu.org>; Sat, 25 May 2019 18:10:35 -0700 (PDT)
+	(Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1hUhgB-0006Fy-F6
+	for qemu-riscv@nongnu.org; Sat, 25 May 2019 21:10:27 -0400
+Received: by mail-pg1-f172.google.com with SMTP id d30so7081005pgm.7
+	for <qemu-riscv@nongnu.org>; Sat, 25 May 2019 18:10:27 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding:cc:from:to;
-	bh=XBhUGLLDCqlPrL4Y4ENmCJmXPWom5sz/dBlkDrNXnDE=;
-	b=GMgtwfUvEMuYMXCGp5UxgWzvS8H4qDwBlj6EOymKs67Ju7bwhsuTcBLbeR6ZWuyPlW
-	lwr9OCXm48H7t3ZHheqT8BBm6Jn4MZtizuwiQZT6hIY807DVcHALIMxqh23FgTPHFEYB
-	KYMPxvpwYLmQgJK4QGsttnbZjeTpsi/8VbovacxcF8a238Pitf9CDBdNh4vi+Db+fJbi
-	TtTzJCtkJAvWO11PJYa3wibOzzqpjfjAWEzHeUAsejIjVwsYeZFCOYnCcqSpQScuSxe4
-	fvFlaPkkRgvcxZ1/GB+8CfkQKansn2v3CexGbDrK/D4EBxSEg42W0v0GSAvfGAX3OuYW
-	TwHQ==
-X-Gm-Message-State: APjAAAUzhHfgypo/lBjMrTipeaOs+h51+PV4BoEYdpdnNZ+KnlxS7G0M
-	KlsJEJfiZhr/V9A+1i4Lez2i8S8jZFI=
-X-Google-Smtp-Source: APXvYqy5S9tSZkUyRQwqUKgWOFqFq2ytw2Ni6rzsi6AFQrXL1cRdX7k52Urgb1+JJDTJuGEwcxOQ3w==
-X-Received: by 2002:a17:902:8a91:: with SMTP id
-	p17mr52728975plo.60.1558833033700; 
-	Sat, 25 May 2019 18:10:33 -0700 (PDT)
+	bh=DrfuOvljxEFhT82DbF62j50YM7gx233MXTyQHjUvuWU=;
+	b=bYcKpfdz4cCMrAvu902vYdXiOegX7F2lxhmDh67P3Vt3ac8lwg0/S63mIotfUy9zJ0
+	H1EesSEZmAVvQuQEcPbIuPbrHo8G+izdZ5dB330sIgTR6UPgrPdWgnGOSMjwQsj8XA7M
+	5T+RhE/5Qn8i0soFEgI2czaWEFC9K/aI/Vm/j5Go0VpUrjf4cARQJpMGdiahC6DrCaig
+	IBjc0UdzdsWgIocKI6GXU43s3jKDYTSP0ps+TMjuoHL106cSZ6AmL2ysUEjknNfbKwd8
+	5HQHBpnw76rIF8G7ZED5m575RldAihAO8OcO3f+UD0/c1z8155K3fRp2lS5vmuO9Gedh
+	fPeg==
+X-Gm-Message-State: APjAAAVSQLisCLrX4oldUvrTN3pOuhJr7Kbx6z0GbrF9vTbuzHSSA2/9
+	0IxHeoaQSz/vCyVWzu2xUlbKvAfNN1E=
+X-Google-Smtp-Source: APXvYqzN1jgLu30vHNwmopJC3v+QatjUhO/sKIwGI8cYsP3STg7KukDdBX/2IegoNab4ZQs811a/xw==
+X-Received: by 2002:a65:6295:: with SMTP id f21mr14955958pgv.416.1558833025924;
+	Sat, 25 May 2019 18:10:25 -0700 (PDT)
 Received: from localhost ([12.206.222.5])
-	by smtp.gmail.com with ESMTPSA id k3sm6902397pfa.36.2019.05.25.18.10.33
+	by smtp.gmail.com with ESMTPSA id y7sm8353520pge.89.2019.05.25.18.10.24
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Sat, 25 May 2019 18:10:33 -0700 (PDT)
-Date: Sat, 25 May 2019 18:09:42 -0700
-Message-Id: <20190526010948.3923-24-palmer@sifive.com>
+	Sat, 25 May 2019 18:10:24 -0700 (PDT)
+Date: Sat, 25 May 2019 18:09:36 -0700
+Message-Id: <20190526010948.3923-18-palmer@sifive.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <20190526010948.3923-1-palmer@sifive.com>
 References: <20190526010948.3923-1-palmer@sifive.com>
@@ -50,9 +49,9 @@ From: Palmer Dabbelt <palmer@sifive.com>
 To: Peter Maydell <peter.maydell@linaro.org>
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
 	[fuzzy]
-X-Received-From: 209.85.214.196
-Subject: [Qemu-riscv] [PULL 23/29] target/riscv: Allow setting mstatus
- virtulisation bits
+X-Received-From: 209.85.215.172
+Subject: [Qemu-riscv] [PULL 17/29] target/riscv: Deprecate the generic no
+ MMU CPUs
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -64,59 +63,37 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 26 May 2019 01:28:06 -0000
+X-List-Received-Date: Sun, 26 May 2019 01:28:09 -0000
 
 From: Alistair Francis <Alistair.Francis@wdc.com>
 
+These can now be specified via the command line so we no longer need
+these.
+
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-Revieweb-by: Palmer Dabbelt <palmer@sifive.com>
+Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
 Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
 ---
- target/riscv/csr.c | 17 ++++++++---------
- 1 file changed, 8 insertions(+), 9 deletions(-)
+ qemu-deprecated.texi | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index f9d8d150e012..e6d68a99560d 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -290,7 +290,6 @@ static int write_mstatus(CPURISCVState *env, int csrno, target_ulong val)
- {
-     target_ulong mstatus = env->mstatus;
-     target_ulong mask = 0;
--    target_ulong mpp = get_field(val, MSTATUS_MPP);
+diff --git a/qemu-deprecated.texi b/qemu-deprecated.texi
+index fbdde3d1b4af..9dca81f461e3 100644
+--- a/qemu-deprecated.texi
++++ b/qemu-deprecated.texi
+@@ -147,6 +147,12 @@ four CPUs are: ``rv32gcsu-v1.9.1``, ``rv32gcsu-v1.10.0``, ``rv64gcsu-v1.9.1`` an
+ ``rv64gcsu-v1.10.0``. Instead the version can be specified via the CPU ``priv_spec``
+ option when using the ``rv32`` or ``rv64`` CPUs.
  
-     /* flush tlb on mstatus fields that affect VM */
-     if (env->priv_ver <= PRIV_VERSION_1_09_1) {
-@@ -305,7 +304,7 @@ static int write_mstatus(CPURISCVState *env, int csrno, target_ulong val)
-                 MSTATUS_VM : 0);
-     }
-     if (env->priv_ver >= PRIV_VERSION_1_10_0) {
--        if ((val ^ mstatus) & (MSTATUS_MXR | MSTATUS_MPP |
-+        if ((val ^ mstatus) & (MSTATUS_MXR | MSTATUS_MPP | MSTATUS_MPV |
-                 MSTATUS_MPRV | MSTATUS_SUM)) {
-             tlb_flush(CPU(riscv_env_get_cpu(env)));
-         }
-@@ -313,13 +312,13 @@ static int write_mstatus(CPURISCVState *env, int csrno, target_ulong val)
-             MSTATUS_SPP | MSTATUS_FS | MSTATUS_MPRV | MSTATUS_SUM |
-             MSTATUS_MPP | MSTATUS_MXR | MSTATUS_TVM | MSTATUS_TSR |
-             MSTATUS_TW;
--    }
--
--    /* silenty discard mstatus.mpp writes for unsupported modes */
--    if (mpp == PRV_H ||
--        (!riscv_has_ext(env, RVS) && mpp == PRV_S) ||
--        (!riscv_has_ext(env, RVU) && mpp == PRV_U)) {
--        mask &= ~MSTATUS_MPP;
-+#if defined(TARGET_RISCV64)
-+            /*
-+             * RV32: MPV and MTL are not in mstatus. The current plan is to
-+             * add them to mstatush. For now, we just don't support it.
-+             */
-+            mask |= MSTATUS_MPP | MSTATUS_MPV;
-+#endif
-     }
++@subsection RISC-V ISA CPUs (since 4.1)
++
++The RISC-V no MMU cpus have been depcreated. The two CPUs: ``rv32imacu-nommu`` and
++``rv64imacu-nommu`` should no longer be used. Instead the MMU status can be specified
++via the CPU ``mmu`` option when using the ``rv32`` or ``rv64`` CPUs.
++
+ @section System emulator devices
  
-     mstatus = (mstatus & ~mask) | (val & mask);
+ @subsection bluetooth (since 3.1)
 -- 
 2.21.0
 
