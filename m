@@ -1,56 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1hUhxF-0003Rz-DC
-	for mharc-qemu-riscv@gnu.org; Sat, 25 May 2019 21:28:05 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:53756)
+	id 1hUhxH-0003Ua-DG
+	for mharc-qemu-riscv@gnu.org; Sat, 25 May 2019 21:28:07 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:53938)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <palmer@dabbelt.com>) id 1hUhxC-0003GC-9r
-	for qemu-riscv@nongnu.org; Sat, 25 May 2019 21:28:03 -0400
+	(envelope-from <palmer@dabbelt.com>) id 1hUhxD-0003Hg-Ma
+	for qemu-riscv@nongnu.org; Sat, 25 May 2019 21:28:04 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <palmer@dabbelt.com>) id 1hUhgN-0006Uj-Vs
-	for qemu-riscv@nongnu.org; Sat, 25 May 2019 21:10:41 -0400
-Received: from mail-pg1-f181.google.com ([209.85.215.181]:38616)
+	(envelope-from <palmer@dabbelt.com>) id 1hUhgL-0006T0-HP
+	for qemu-riscv@nongnu.org; Sat, 25 May 2019 21:10:38 -0400
+Received: from mail-pl1-f179.google.com ([209.85.214.179]:38488)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1hUhgN-0006UA-PD
-	for qemu-riscv@nongnu.org; Sat, 25 May 2019 21:10:39 -0400
-Received: by mail-pg1-f181.google.com with SMTP id v11so7092353pgl.5
-	for <qemu-riscv@nongnu.org>; Sat, 25 May 2019 18:10:39 -0700 (PDT)
+	(Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1hUhgL-0006SP-CN
+	for qemu-riscv@nongnu.org; Sat, 25 May 2019 21:10:37 -0400
+Received: by mail-pl1-f179.google.com with SMTP id f97so5646502plb.5
+	for <qemu-riscv@nongnu.org>; Sat, 25 May 2019 18:10:37 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding:cc:from:to;
-	bh=niN4BQwRj/iTWl309DyTteKW5yqNgmgqemJXUQlVM6Q=;
-	b=OeyB9fDVLMie+fmlpORpP141kOsi0DeQEj97dAbJQMFdZVbgwg/w0UPpa7hffssKwe
-	pcRFzeKfOAMwua8falNzQxv0dQdvEoIN/NnW3SUgkSbnNNo+J+CeADXTDyjCscfpzvGd
-	ELfO8YV3cv3hVhmMxTEd+iy+HtmyH3hiiLDkXyWyqDXaLOier4glixqYBIbPF8oZH2L1
-	lvJ6jc6WE7qGYD4rA5gQSpao4Y8sK/0k/884e6nOXeK6hG/jl3bY5bCw62/4R7X3Wb8K
-	tI0fYVA3LAjw28BCMZQtDvt+9fGm5siKz4cCWqkUNOBlOT1j9lklnhYhWMc0KRagTWQH
-	tBqw==
-X-Gm-Message-State: APjAAAVGHHKc/UOr4FwZE7neAGyhnRAjRZrUOwRZEoYPC3A63sP0CZpv
-	wNI3IyqplaaQYs7O4czuOYutTHQDRLg=
-X-Google-Smtp-Source: APXvYqxFrBxvVTpxjJFShiK4u0T6spM17yF8HNMDiZvO6E4GU6DAqlnoeguQd7cKu7fk3NdQCW8QjA==
-X-Received: by 2002:a63:1224:: with SMTP id h36mr24384550pgl.9.1558833038226; 
-	Sat, 25 May 2019 18:10:38 -0700 (PDT)
+	bh=J7lhhgtf0sOTXH1yJE/Uqjkv+hDa7WrYfOdgGU5K6D4=;
+	b=Zj67okfO/fSeufhDRzp/uWc2OcTSeB36YuYUFVCXBLQpPY1Y3R7AwtLGwg+1qIDyXc
+	8cpubUhumSQqpy2zUcjzpun++71cF1E0/CE4R0DyXBhHvlXDRzsqeIV8vutyYSi03Kbj
+	MklmY0KGY7+d/ENFUjov5aOhvJ7bxiwIi6mT1Cmr1Jm2VK34vqXdJAHdxx6L3zrXB1TK
+	Qmz2QL2PcUc8JIGQYC5GfvyEJv9yo0XIbQMjqkjbSQDl3fwmvgk10BUvq5OFbwiYDkk+
+	NlGATkNtIUZWGRhM9ZzQCeIWZF9qY2heHKeAUW1XiLh2omUEX2KJCKoMGVUmnHczcsTd
+	mrXw==
+X-Gm-Message-State: APjAAAWs5P+rvrxK95zvl6m83gxEcJdfP91S3Zb24FC0e8s+g/lbm54U
+	Qufa52zh27fiM+6Gbz3FAD6mNyC+zA0=
+X-Google-Smtp-Source: APXvYqx3aSfewtpSAEOx4sclNnBttL3hHIQSuLNFe9dadntDNBnK9LAGKDhPeKWUHYLb5vtuO1WPaQ==
+X-Received: by 2002:a17:902:2d:: with SMTP id
+	42mr118552335pla.34.1558833035950; 
+	Sat, 25 May 2019 18:10:35 -0700 (PDT)
 Received: from localhost ([12.206.222.5]) by smtp.gmail.com with ESMTPSA id
-	a11sm6828548pff.128.2019.05.25.18.10.37
+	g22sm6826305pfo.28.2019.05.25.18.10.35
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Sat, 25 May 2019 18:10:37 -0700 (PDT)
-Date: Sat, 25 May 2019 18:09:46 -0700
-Message-Id: <20190526010948.3923-28-palmer@sifive.com>
+	Sat, 25 May 2019 18:10:35 -0700 (PDT)
+Date: Sat, 25 May 2019 18:09:44 -0700
+Message-Id: <20190526010948.3923-26-palmer@sifive.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <20190526010948.3923-1-palmer@sifive.com>
 References: <20190526010948.3923-1-palmer@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Cc: qemu-riscv@nongnu.org,       qemu-devel@nongnu.org,
-	Richard Henderson <richard.henderson@linaro.org>,
+	Alistair Francis <Alistair.Francis@wdc.com>,
+	Alistair Francis <alistair.francis@wdc.com>, 
 	Palmer Dabbelt <palmer@sifive.com>
 From: Palmer Dabbelt <palmer@sifive.com>
 To: Peter Maydell <peter.maydell@linaro.org>
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
 	[fuzzy]
-X-Received-From: 209.85.215.181
-Subject: [Qemu-riscv] [PULL 27/29] target/riscv: Add checks for several RVC
- reserved operands
+X-Received-From: 209.85.214.179
+Subject: [Qemu-riscv] [PULL 25/29] target/riscv: Add the HSTATUS register
+ masks
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -62,70 +64,46 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 26 May 2019 01:28:03 -0000
+X-List-Received-Date: Sun, 26 May 2019 01:28:04 -0000
 
-From: Richard Henderson <richard.henderson@linaro.org>
+From: Alistair Francis <Alistair.Francis@wdc.com>
 
-C.ADDI16SP, C.LWSP, C.JR, C.ADDIW, C.LDSP all have reserved
-operands that were not diagnosed.
-
-Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
-Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
+Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+Reviwed-by: Palmer Dabbelt <palmer@sifive.com>
 Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
 ---
- target/riscv/insn16-64.decode | 10 ++++++++--
- target/riscv/insn16.decode    |  7 ++++++-
- 2 files changed, 14 insertions(+), 3 deletions(-)
+ target/riscv/cpu_bits.h | 18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
 
-diff --git a/target/riscv/insn16-64.decode b/target/riscv/insn16-64.decode
-index 055859d29f61..672e1e916f6b 100644
---- a/target/riscv/insn16-64.decode
-+++ b/target/riscv/insn16-64.decode
-@@ -21,10 +21,16 @@ ld                011  ... ... .. ... 00 @cl_d
- sd                111  ... ... .. ... 00 @cs_d
+diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+index 52c21699774f..a179137bc1f2 100644
+--- a/target/riscv/cpu_bits.h
++++ b/target/riscv/cpu_bits.h
+@@ -382,6 +382,24 @@
+ #define SSTATUS_SD SSTATUS64_SD
+ #endif
  
- # *** RV64C Standard Extension (Quadrant 1) ***
--addiw             001 .  .....  ..... 01 @ci
-+{
-+  illegal         001 -  00000  ----- 01 # c.addiw, RES rd=0
-+  addiw           001 .  .....  ..... 01 @ci
-+}
- subw              100 1 11 ... 00 ... 01 @cs_2
- addw              100 1 11 ... 01 ... 01 @cs_2
- 
- # *** RV64C Standard Extension (Quadrant 2) ***
--ld                011 .  .....  ..... 10 @c_ldsp
-+{
-+  illegal         011 -  00000  ----- 10 # c.ldsp, RES rd=0
-+  ld              011 .  .....  ..... 10 @c_ldsp
-+}
- sd                111 .  .....  ..... 10 @c_sdsp
-diff --git a/target/riscv/insn16.decode b/target/riscv/insn16.decode
-index 433c0e8c6861..1cb93876fe0f 100644
---- a/target/riscv/insn16.decode
-+++ b/target/riscv/insn16.decode
-@@ -96,6 +96,7 @@ sw                110  ... ... .. ... 00 @cs_w
- addi              000 .  .....  ..... 01 @ci
- addi              010 .  .....  ..... 01 @c_li
- {
-+  illegal         011 0  -----  00000 01 # c.addi16sp and c.lui, RES nzimm=0
-   addi            011 .  00010  ..... 01 @c_addi16sp
-   lui             011 .  .....  ..... 01 @c_lui
- }
-@@ -113,8 +114,12 @@ bne               111  ... ...  ..... 01 @cb_z
- # *** RV32/64C Standard Extension (Quadrant 2) ***
- slli              000 .  .....  ..... 10 @c_shift2
- fld               001 .  .....  ..... 10 @c_ldsp
--lw                010 .  .....  ..... 10 @c_lwsp
- {
-+  illegal         010 -  00000  ----- 10 # c.lwsp, RES rd=0
-+  lw              010 .  .....  ..... 10 @c_lwsp
-+}
-+{
-+  illegal         100 0  00000  00000 10 # c.jr, RES rs1=0
-   jalr            100 0  .....  00000 10 @c_jalr rd=0  # C.JR
-   addi            100 0  .....  ..... 10 @c_mv
- }
++/* hstatus CSR bits */
++#define HSTATUS_SPRV         0x00000001
++#define HSTATUS_STL          0x00000040
++#define HSTATUS_SPV          0x00000080
++#define HSTATUS_SP2P         0x00000100
++#define HSTATUS_SP2V         0x00000200
++#define HSTATUS_VTVM         0x00100000
++#define HSTATUS_VTSR         0x00400000
++
++#define HSTATUS32_WPRI       0xFF8FF87E
++#define HSTATUS64_WPRI       0xFFFFFFFFFF8FF87EULL
++
++#if defined(TARGET_RISCV32)
++#define HSTATUS_WPRI HSTATUS32_WPRI
++#elif defined(TARGET_RISCV64)
++#define HSTATUS_WPRI HSTATUS64_WPRI
++#endif
++
+ /* Privilege modes */
+ #define PRV_U 0
+ #define PRV_S 1
 -- 
 2.21.0
 
