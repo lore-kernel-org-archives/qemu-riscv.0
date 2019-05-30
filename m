@@ -1,42 +1,37 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1hWLTY-0001BB-Hi
-	for mharc-qemu-riscv@gnu.org; Thu, 30 May 2019 09:52:12 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:43696)
+	id 1hWRfZ-0003is-Ui
+	for mharc-qemu-riscv@gnu.org; Thu, 30 May 2019 16:29:01 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:40895)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <hmka2@cl.cam.ac.uk>) id 1hWLTQ-00016c-Vz
-	for qemu-riscv@nongnu.org; Thu, 30 May 2019 09:52:05 -0400
+	(envelope-from <joel@sing.id.au>) id 1hWOjt-00051s-Vx
+	for qemu-riscv@nongnu.org; Thu, 30 May 2019 13:21:19 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <hmka2@cl.cam.ac.uk>) id 1hWLTQ-0005uq-2x
-	for qemu-riscv@nongnu.org; Thu, 30 May 2019 09:52:04 -0400
-Received: from mta2.cl.cam.ac.uk ([2001:630:212:200::25:2]:36650)
-	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <hmka2@cl.cam.ac.uk>)
-	id 1hWLTP-0005tr-TE; Thu, 30 May 2019 09:52:04 -0400
-Received: from cassia.cl.cam.ac.uk ([2001:630:212:238:b26e:bfff:fe2f:c7d9])
-	by mta2.cl.cam.ac.uk with esmtps
-	(TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.86_2)
-	(envelope-from <hmka2@cl.cam.ac.uk>)
-	id 1hWLTP-000Gd7-5n; Thu, 30 May 2019 14:52:03 +0100
-Received: from hmka2 by cassia.cl.cam.ac.uk with local (Exim 4.90_1)
-	(envelope-from <hmka2@cl.cam.ac.uk>)
-	id 1hWLTP-0005fw-43; Thu, 30 May 2019 14:52:03 +0100
-From: Hesham Almatary <Hesham.Almatary@cl.cam.ac.uk>
+	(envelope-from <joel@sing.id.au>) id 1hWOjs-00022U-Em
+	for qemu-riscv@nongnu.org; Thu, 30 May 2019 13:21:17 -0400
+Received: from stingray.exigere.com.au ([162.217.113.74]:39369)
+	by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.71) (envelope-from <joel@sing.id.au>) id 1hWOjs-0008WB-7a
+	for qemu-riscv@nongnu.org; Thu, 30 May 2019 13:21:16 -0400
+Received: from hippo.sing.id.au (exi2311632.lnk.telstra.net [144.139.233.124])
+	by stingray.exigere.com.au (OpenSMTPD) with ESMTPSA id 2eb34dec
+	(TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256:NO)
+	for <qemu-riscv@nongnu.org>; Fri, 31 May 2019 03:37:26 +1000 (AEST)
+Received: from localhost (hippo.sing.id.au [local])
+	by hippo.sing.id.au (OpenSMTPD) with ESMTPA id 8a9b0002
+	for <qemu-riscv@nongnu.org>; Fri, 31 May 2019 03:20:04 +1000 (AEST)
+Date: Fri, 31 May 2019 03:20:04 +1000
+From: Joel Sing <joel@sing.id.au>
 To: qemu-riscv@nongnu.org
-Cc: qemu-devel@nongnu.org, Hesham Almatary <Hesham.Almatary@cl.cam.ac.uk>,
-	Palmer Dabbelt <palmer@sifive.com>,
-	Alistair Francis <Alistair.Francis@wdc.com>,
-	Sagar Karandikar <sagark@eecs.berkeley.edu>,
-	Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-Date: Thu, 30 May 2019 14:51:35 +0100
-Message-Id: <20190530135135.19715-6-Hesham.Almatary@cl.cam.ac.uk>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20190530135135.19715-1-Hesham.Almatary@cl.cam.ac.uk>
-References: <20190530135135.19715-1-Hesham.Almatary@cl.cam.ac.uk>
+Message-ID: <20190530172003.GY61734@hippo.sing.id.au>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+User-Agent: Mutt/1.10.1 (2018-07-13)
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2001:630:212:200::25:2
-Subject: [Qemu-riscv] [PATCHv4 6/6] RISC-V: Fix a PMP check with the correct
- access size
+X-Received-From: 162.217.113.74
+X-Mailman-Approved-At: Thu, 30 May 2019 16:29:00 -0400
+Subject: [Qemu-riscv] atomic failures on qemu-system-riscv64
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -48,32 +43,65 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 May 2019 13:52:06 -0000
+X-List-Received-Date: Thu, 30 May 2019 17:21:19 -0000
 
-The PMP check should be of the memory access size rather
-than TARGET_PAGE_SIZE.
+While working on a Go (www.golang.org) port for riscv, I've run
+into issues with atomics (namely LR/SC) on qemu-system-riscv64.
+There are several reproducers for this problem including (using
+gcc builtin atomics):
 
-Signed-off-by: Hesham Almatary <Hesham.Almatary@cl.cam.ac.uk>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
----
- target/riscv/cpu_helper.c | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+  https://gist.github.com/4a6f656c/8433032a3f70893a278259f8108aad90
+
+And a version using inline assembly:
+
+  https://gist.github.com/4a6f656c/d883091f5ca811822720213be343a75a
+
+Depending on the qemu configuration the number of threads may
+need increasing (to force context switching) and/or run in a
+loop. Go's sync/atomic tests also fail regularly.
+
+Having dug into the qemu code, what I believe is happening is
+along the lines of the following:
+
+1. Thread 1 runs and executes an LR - this assigns an address
+   to load_res and a value to load_val (say 1).
+
+2. A context switch occurs and thread 2 is now run - it runs
+   an LR and SC on the same address modifying the stored value.
+   Another LR is executed loading load_val with the current
+   value (say 3).
+
+3. A context switch occurs and thread 1 is now run again, it
+   continues on its LR/SC sequence and now runs the SC instruction.
+   This is based on the assumption that it had a reservation
+   and the SC will fail if the memory has changed. The underlying
+   implementation of SC is a cmpxchg with the value in load_val
+   - this no longer has the original value and hence successfully
+   compares (as does the tcg_gen_setcond_tl() between the returned
+   value and load_val) thus the SC succeeds when it should not.
+
+The diff below clears load_res when the mode changes - with this
+applied the reproducers work correctly, as do Go's atomic tests.
+I'm not sure this "fix" is 100% correct, but it certainly verifies
+where the problem lies. It does also fall inline with the RISCV
+spec:
+
+"The SC must fail if there is an observable memory access from
+another hart to the address, or if there is an intervening context
+switch on this hart, or if in the meantime the hart executed a
+privileged exception-return instruction."
 
 diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 00bc4f1712..64c12d83dc 100644
+index b17f169681..9875b8e5d3 100644
 --- a/target/riscv/cpu_helper.c
 +++ b/target/riscv/cpu_helper.c
-@@ -417,8 +417,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-
-     if (riscv_feature(env, RISCV_FEATURE_PMP) &&
-         (ret == TRANSLATE_SUCCESS) &&
--        !pmp_hart_has_privs(env, pa, TARGET_PAGE_SIZE, 1 << access_type,
--        mode)) {
-+        !pmp_hart_has_privs(env, pa, size, 1 << access_type, mode)) {
-         ret = TRANSLATE_PMP_FAIL;
+@@ -113,6 +113,8 @@ void riscv_cpu_set_mode(CPURISCVState *env, target_ulong newpriv)
      }
-     if (ret == TRANSLATE_PMP_FAIL) {
---
-2.17.1
-
+     /* tlb_flush is unnecessary as mode is contained in mmu_idx */
+     env->priv = newpriv;
++
++    env->load_res = 0;
+ }
+ 
+ /* get_physical_address - get the physical address for this virtual address
 
