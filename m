@@ -1,62 +1,42 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1hWKpC-0007jv-Qf
-	for mharc-qemu-riscv@gnu.org; Thu, 30 May 2019 09:10:30 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:36015)
+	id 1hWLTN-00014B-SD
+	for mharc-qemu-riscv@gnu.org; Thu, 30 May 2019 09:52:01 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:43603)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <hmka2@hermes.cam.ac.uk>) id 1hWKpA-0007jo-GJ
-	for qemu-riscv@nongnu.org; Thu, 30 May 2019 09:10:29 -0400
+	(envelope-from <hmka2@cl.cam.ac.uk>) id 1hWLTL-00012m-Lv
+	for qemu-riscv@nongnu.org; Thu, 30 May 2019 09:52:00 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <hmka2@hermes.cam.ac.uk>) id 1hWKp8-0003R3-Jd
-	for qemu-riscv@nongnu.org; Thu, 30 May 2019 09:10:28 -0400
-Received: from ppsw-41.csi.cam.ac.uk ([131.111.8.141]:37046)
-	by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.71) (envelope-from <hmka2@hermes.cam.ac.uk>)
-	id 1hWKp3-0003M7-Ad; Thu, 30 May 2019 09:10:23 -0400
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=cam.ac.uk; 
-	s=20180806.ppsw;
-	h=Sender:Content-Type:Cc:To:Subject:Message-ID:Date:From:
-	In-Reply-To:References:MIME-Version:Reply-To:Content-Transfer-Encoding:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
-	List-Subscribe:List-Post:List-Owner:List-Archive;
-	bh=qUpRepGQOt/XAQs+elq3yyHkbiLJfY8ZvXaWCQVA4t0=;
-	b=MINGF1A8ONF8BOCYmJqjvbsMP9
-	jEsXyYo70KR8bF06IKMtJL3sK8QWTT20SqxERJwdGR7AQUG4C/MkMpkt6OshaVvsrt/vhLEDLI9yh
-	Y2HjeFK9pz5tDx2YuufXUlThjNuXy9CO0AskvB6iSNVQhilcwAMJjApjBGMwdn5bu9Z0=; 
-X-Cam-AntiVirus: no malware found
-X-Cam-ScannerInfo: http://help.uis.cam.ac.uk/email-scanner-virus
-Received: from mail-lf1-f43.google.com ([209.85.167.43]:41406)
-	by ppsw-41.csi.cam.ac.uk (smtp.hermes.cam.ac.uk [131.111.8.159]:587)
-	with esmtpsa (PLAIN:hmka2) (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
-	id 1hWKp0-0013gu-Re (Exim 4.91)
-	(return-path <hmka2@hermes.cam.ac.uk>); Thu, 30 May 2019 14:10:18 +0100
-Received: by mail-lf1-f43.google.com with SMTP id 136so4973471lfa.8;
-	Thu, 30 May 2019 06:10:15 -0700 (PDT)
-X-Gm-Message-State: APjAAAVH5beLq3pu7j5w/Rn/6bDOyA1y1BFagdV1YBI84HQvOyOm0kB7
-	0a4DLPGgnUAZrQRMTPrvWwhnnnwbLxgbeJ5GZJY=
-X-Google-Smtp-Source: APXvYqwaPsVJx1kMtWL8CMB8ZJxgjHxb3ij6MH8SOVOuGYszQ3HIpdHZi5/AG5ad4BsXmkoiPxYyzUGo8GFFrJ8p7h0=
-X-Received: by 2002:a19:488e:: with SMTP id v136mr2031057lfa.192.1559221814232;
-	Thu, 30 May 2019 06:10:14 -0700 (PDT)
-MIME-Version: 1.0
-References: <20190521104324.12835-1-Hesham.Almatary@cl.cam.ac.uk>
-	<20190521104324.12835-3-Hesham.Almatary@cl.cam.ac.uk>
-	<CAKmqyKOT_15kFNjHkUgk+bs6GwGrDrAOPoe+t0u3T6hg6TqiPQ@mail.gmail.com>
-	<CA+wsVCDgogUXBDNiWm7R19fAyNw-3ybPiW4O8yA=Wt8oqyShFg@mail.gmail.com>
-	<CAKmqyKNN-R1jJB3DXQqvPQsu+8W3jH+mrCD+iBbdH+J_JwRbgg@mail.gmail.com>
-In-Reply-To: <CAKmqyKNN-R1jJB3DXQqvPQsu+8W3jH+mrCD+iBbdH+J_JwRbgg@mail.gmail.com>
-From: Hesham Almatary <hesham.almatary@cl.cam.ac.uk>
-Date: Thu, 30 May 2019 15:09:37 +0200
-X-Gmail-Original-Message-ID: <CA+wsVCBgEQUCHeBAe84ZkCeRb9bNw3xQ6gbSORQ9Oc0_YPM66A@mail.gmail.com>
-Message-ID: <CA+wsVCBgEQUCHeBAe84ZkCeRb9bNw3xQ6gbSORQ9Oc0_YPM66A@mail.gmail.com>
-To: Alistair Francis <alistair23@gmail.com>
-Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>, 
-	"qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
-Sender: "H.M.K. Almatary" <hmka2@hermes.cam.ac.uk>
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
-X-Received-From: 131.111.8.141
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCHv3 3/5] RISC-V: Check PMP
- during Page Table Walks
+	(envelope-from <hmka2@cl.cam.ac.uk>) id 1hWLTK-0005nW-Kv
+	for qemu-riscv@nongnu.org; Thu, 30 May 2019 09:51:59 -0400
+Received: from mta2.cl.cam.ac.uk ([2001:630:212:200::25:2]:55766)
+	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+	(Exim 4.71) (envelope-from <hmka2@cl.cam.ac.uk>)
+	id 1hWLTK-0005lP-Ek; Thu, 30 May 2019 09:51:58 -0400
+Received: from cassia.cl.cam.ac.uk ([2001:630:212:238:b26e:bfff:fe2f:c7d9])
+	by mta2.cl.cam.ac.uk with esmtps
+	(TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.86_2)
+	(envelope-from <hmka2@cl.cam.ac.uk>)
+	id 1hWLTI-000Gcc-9v; Thu, 30 May 2019 14:51:56 +0100
+Received: from hmka2 by cassia.cl.cam.ac.uk with local (Exim 4.90_1)
+	(envelope-from <hmka2@cl.cam.ac.uk>)
+	id 1hWLTI-0005Tw-8G; Thu, 30 May 2019 14:51:56 +0100
+From: Hesham Almatary <Hesham.Almatary@cl.cam.ac.uk>
+To: qemu-riscv@nongnu.org
+Cc: qemu-devel@nongnu.org, Hesham Almatary <Hesham.Almatary@cl.cam.ac.uk>,
+	Palmer Dabbelt <palmer@sifive.com>,
+	Alistair Francis <Alistair.Francis@wdc.com>,
+	Sagar Karandikar <sagark@eecs.berkeley.edu>,
+	Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+Date: Thu, 30 May 2019 14:51:31 +0100
+Message-Id: <20190530135135.19715-2-Hesham.Almatary@cl.cam.ac.uk>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20190530135135.19715-1-Hesham.Almatary@cl.cam.ac.uk>
+References: <20190530135135.19715-1-Hesham.Almatary@cl.cam.ac.uk>
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+	recognized.
+X-Received-From: 2001:630:212:200::25:2
+Subject: [Qemu-riscv] [PATCHv4 2/6] RISC-V: Raise access fault exceptions on
+ PMP violations
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -68,96 +48,67 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 May 2019 13:10:29 -0000
+X-List-Received-Date: Thu, 30 May 2019 13:52:00 -0000
 
-On Thu, 30 May 2019 at 05:07, Alistair Francis <alistair23@gmail.com> wrote:
->
-> On Wed, May 22, 2019 at 2:27 AM Hesham Almatary
-> <hesham.almatary@cl.cam.ac.uk> wrote:
-> >
-> > On Tue, 21 May 2019 at 23:40, Alistair Francis <alistair23@gmail.com> wrote:
-> > >
-> > > On Tue, May 21, 2019 at 3:44 AM Hesham Almatary
-> > > <Hesham.Almatary@cl.cam.ac.uk> wrote:
-> > > >
-> > > > The PMP should be checked when doing a page table walk, and report access
-> > > > fault exception if the to-be-read PTE failed the PMP check.
-> > > >
-> > > > Suggested-by: Jonathan Behrens <fintelia@gmail.com>
-> > > > Signed-off-by: Hesham Almatary <Hesham.Almatary@cl.cam.ac.uk>
-> > > > ---
-> > > >  target/riscv/cpu.h        |  1 +
-> > > >  target/riscv/cpu_helper.c | 10 +++++++++-
-> > > >  2 files changed, 10 insertions(+), 1 deletion(-)
-> > > >
-> > > > diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> > > > index c17184f4e4..ab3ba3f15a 100644
-> > > > --- a/target/riscv/cpu.h
-> > > > +++ b/target/riscv/cpu.h
-> > > > @@ -94,6 +94,7 @@ enum {
-> > > >  #define PRIV_VERSION_1_09_1 0x00010901
-> > > >  #define PRIV_VERSION_1_10_0 0x00011000
-> > > >
-> > > > +#define TRANSLATE_PMP_FAIL 2
-> > > >  #define TRANSLATE_FAIL 1
-> > > >  #define TRANSLATE_SUCCESS 0
-> > > >  #define NB_MMU_MODES 4
-> > > > diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> > > > index 7c7282c680..d0b0f9cf88 100644
-> > > > --- a/target/riscv/cpu_helper.c
-> > > > +++ b/target/riscv/cpu_helper.c
-> > > > @@ -211,6 +211,12 @@ restart:
-> > > >
-> > > >          /* check that physical address of PTE is legal */
-> > > >          target_ulong pte_addr = base + idx * ptesize;
-> > > > +
-> > > > +        if (riscv_feature(env, RISCV_FEATURE_PMP) &&
-> > > > +            !pmp_hart_has_privs(env, pte_addr, sizeof(target_ulong),
-> > > > +            1 << MMU_DATA_LOAD)) {
-> > >
-> > > I see a problem here.
-> > >
-> > > pmp_hart_has_privs() checks permissions based on the current value of
-> > > env->priv. This might not always be the correct permissions to check,
-> > > we should instead use the current mode to check permissions.
-> > >
-> > That is not clear to me. Isn't env->priv the current privildge mode?
-> > Could you please elaborate on what other cases this might not be the case?
->
-> Sorry for the delay. The RISC-V Hypervisor Extension allows load/store
-> operations to be carried out as a previous privilege. The mstatus.MPRV
-> and hstatus.SPRV allow this.
->
-No problem, thanks for the clarification.
-You are right, I haven't considered MPRV. I fixed that in a separate
-commit in a v4 series of patches.
-> Alistair
->
-> >
-> > > The best way to do this to me is to probably provide a privileged mode
-> > > override to the function, can you add that?
-> > >
-> > > Alistair
-> > >
-> > > > +            return TRANSLATE_PMP_FAIL;
-> > > > +        }
-> > > >  #if defined(TARGET_RISCV32)
-> > > >          target_ulong pte = ldl_phys(cs->as, pte_addr);
-> > > >  #elif defined(TARGET_RISCV64)
-> > > > @@ -405,8 +411,10 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-> > > >      if (riscv_feature(env, RISCV_FEATURE_PMP) &&
-> > > >          (ret == TRANSLATE_SUCCESS) &&
-> > > >          !pmp_hart_has_privs(env, pa, TARGET_PAGE_SIZE, 1 << access_type)) {
-> > > > +        ret = TRANSLATE_PMP_FAIL;
-> > > > +    }
-> > > > +    if (ret == TRANSLATE_PMP_FAIL) {
-> > > >          pmp_violation = true;
-> > > > -        ret = TRANSLATE_FAIL;
-> > > >      }
-> > > >      if (ret == TRANSLATE_SUCCESS) {
-> > > >          tlb_set_page(cs, address & TARGET_PAGE_MASK, pa & TARGET_PAGE_MASK,
-> > > > --
-> > > > 2.17.1
-> > > >
-> > > >
+Section 3.6 in RISC-V v1.10 privilege specification states that PMP violations
+report "access exceptions." The current PMP implementation has
+a bug which wrongly reports "page exceptions" on PMP violations.
+
+This patch fixes this bug by reporting the correct PMP access exceptions
+trap values.
+
+Signed-off-by: Hesham Almatary <Hesham.Almatary@cl.cam.ac.uk>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+---
+ target/riscv/cpu_helper.c | 9 ++++++---
+ 1 file changed, 6 insertions(+), 3 deletions(-)
+
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index 40fb47e794..7c7282c680 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -318,12 +318,13 @@ restart:
+ }
+
+ static void raise_mmu_exception(CPURISCVState *env, target_ulong address,
+-                                MMUAccessType access_type)
++                                MMUAccessType access_type, bool pmp_violation)
+ {
+     CPUState *cs = CPU(riscv_env_get_cpu(env));
+     int page_fault_exceptions =
+         (env->priv_ver >= PRIV_VERSION_1_10_0) &&
+-        get_field(env->satp, SATP_MODE) != VM_1_10_MBARE;
++        get_field(env->satp, SATP_MODE) != VM_1_10_MBARE &&
++        !pmp_violation;
+     switch (access_type) {
+     case MMU_INST_FETCH:
+         cs->exception_index = page_fault_exceptions ?
+@@ -389,6 +390,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+     CPURISCVState *env = &cpu->env;
+     hwaddr pa = 0;
+     int prot;
++    bool pmp_violation = false;
+     int ret = TRANSLATE_FAIL;
+
+     qemu_log_mask(CPU_LOG_MMU, "%s ad %" VADDR_PRIx " rw %d mmu_idx %d\n",
+@@ -403,6 +405,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+     if (riscv_feature(env, RISCV_FEATURE_PMP) &&
+         (ret == TRANSLATE_SUCCESS) &&
+         !pmp_hart_has_privs(env, pa, TARGET_PAGE_SIZE, 1 << access_type)) {
++        pmp_violation = true;
+         ret = TRANSLATE_FAIL;
+     }
+     if (ret == TRANSLATE_SUCCESS) {
+@@ -412,7 +415,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+     } else if (probe) {
+         return false;
+     } else {
+-        raise_mmu_exception(env, address, access_type);
++        raise_mmu_exception(env, address, access_type, pmp_violation);
+         riscv_raise_exception(env, cs->exception_index, retaddr);
+     }
+ #else
+--
+2.17.1
+
 
