@@ -1,62 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1hWBsH-0005Pt-9p
-	for mharc-qemu-riscv@gnu.org; Wed, 29 May 2019 23:37:05 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:36241)
+	id 1hWIkR-0007iQ-TJ
+	for mharc-qemu-riscv@gnu.org; Thu, 30 May 2019 06:57:27 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:39264)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <bmeng.cn@gmail.com>) id 1hWBsE-0005PV-Iw
-	for qemu-riscv@nongnu.org; Wed, 29 May 2019 23:37:03 -0400
+	(envelope-from <peter.maydell@linaro.org>) id 1hWIkP-0007ho-Ka
+	for qemu-riscv@nongnu.org; Thu, 30 May 2019 06:57:26 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <bmeng.cn@gmail.com>) id 1hWBsD-0005rQ-Qe
-	for qemu-riscv@nongnu.org; Wed, 29 May 2019 23:37:02 -0400
-Received: from mail-ed1-x544.google.com ([2a00:1450:4864:20::544]:40008)
+	(envelope-from <peter.maydell@linaro.org>) id 1hWIkO-0002uE-JX
+	for qemu-riscv@nongnu.org; Thu, 30 May 2019 06:57:25 -0400
+Received: from mail-oi1-x244.google.com ([2607:f8b0:4864:20::244]:38443)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
-	id 1hWBsD-0005mE-FF; Wed, 29 May 2019 23:37:01 -0400
-Received: by mail-ed1-x544.google.com with SMTP id r18so5942275edo.7;
-	Wed, 29 May 2019 20:37:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	(Exim 4.71) (envelope-from <peter.maydell@linaro.org>)
+	id 1hWIkO-0002rc-DD
+	for qemu-riscv@nongnu.org; Thu, 30 May 2019 06:57:24 -0400
+Received: by mail-oi1-x244.google.com with SMTP id 18so3797943oij.5
+	for <qemu-riscv@nongnu.org>; Thu, 30 May 2019 03:57:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=4eG+VP0ofgFTRUD96ocaiDBqUmzcXIw5Kumk2DTsAjo=;
-	b=cadT/9j5INN3q10RicMlUsKTN/PpYo9/s4qZP5XPfRmBZOmLKFYTiUjUeakS6nZiwm
-	cS16MOiSXgTur5T3+pOFWxXrbjNm/qLei6NBpfmtnf1ProS98m6uZxZ2Kjvx/xvH/tIF
-	UOi/ZGa0lHOKnuNsvsvjkpe2WgZhppFcpP5Tf57ZlyAOwweM4BLKdcpiCwl+mEQqUDXW
-	XJBVYCUEK/XI0roYjM/9EhdoHPOhpb/c3UqcMDiA5mGIrOXwlZ8+dkJGu3e2cmXIfP/8
-	5a38UPOAPEOnEfMQk8qZQyYn3P5AqeXGcxZ8lJ2IASM4ij5SgMExNxsX9j9vHpa2rfaf
-	hQxA==
+	:cc; bh=8CUGtddsQAcpIedVPK7EXveMNL6giQ7v3lJi/i4QwOk=;
+	b=bzPPLeoowxHw8ZPNXM8RxeuD0sTMM6S0gjpSG70GcVSRudlJBBWeTMM1rF5F5Ke6T3
+	LiEK5muKGjMe0VW1nGasvrtxFASjQT9ghGNTEk69aRjEPkVhhzSXydVbDPf+BBvwqZgv
+	v10LUoxHcMzCdw6tfqSQIdPfsPOWbdZAXdEPkY92uV0LCQ3C2g+g5ILqohoIFWzhjJZL
+	wcxSWUGGbJKUkrllgA0Am2/msjHHenxOVXyJDMt4Oy9Ze28K9/ejmXIcrVELhka4khK/
+	KmODPMD7YObw+SG4HxZj0FCB6tqQzIPVeY4cEryZGG1VaeQJYKsuhrvtz/yj3faOkhys
+	2KdA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=4eG+VP0ofgFTRUD96ocaiDBqUmzcXIw5Kumk2DTsAjo=;
-	b=SIGXba7ZbID2ejedboMFmQxxU+dI4vCXHt6nc3mBT/A9a5Br/euGiB5tl08kQw2yHr
-	xir/KuXvLMGRetvnUAGeQvRnufmEqbOoqY2n2SRQJyBxbygVc0879uOU8vu+mm0+H9JY
-	aMddrkFejL8uD7PzQtDXuo5R2Tlf76h2e2xU2/OIPP+7jSDYn+hI7XZ2raNSl1hg+9U6
-	bRQ5av6p2VgozDzeIo/lw9HMdaEpXWlE0vX1Co/4FSqPP/J8LGGF2zgG9IzSRqGW/mm0
-	JuwSAEtZK3h0xSeSXh0ccqbngAwPLhhwAxPgJWwfj0XDuAj8wcW8pHnbDFSvTRDXUFRg
-	rhug==
-X-Gm-Message-State: APjAAAVUQyNLudkMBwOQM6xxa9KOS+r+LXV4iG1DrOtT7bxvC4Z0bTtz
-	m4D4A20NIgxRqx9yw/PKFl/NK1rc04joU6VBAAQ=
-X-Google-Smtp-Source: APXvYqx8Tikl0eEw5GmO5NSNwSH+0RcMLRAJ2nRJEiCHzG5Nni8jiupfT6nOTgSbj+69eVRbt8EibqMhYGHP7Y6KWOs=
-X-Received: by 2002:aa7:c554:: with SMTP id s20mr308892edr.15.1559187418048;
-	Wed, 29 May 2019 20:36:58 -0700 (PDT)
+	bh=8CUGtddsQAcpIedVPK7EXveMNL6giQ7v3lJi/i4QwOk=;
+	b=XssVqF9A5wfhbvVCER9lBr9n4tOwybNyRAa0j5fN48TpRtKjYRrtsPUDvljX4MkVzl
+	NIB/Ekjw1MRQqbdm73ObgO/2dtlaz49rwCcrgTyZoweGW+RnOPegrvbAYL9423XsC+I0
+	zjQUEX6eIX4tAFPws0Fm6XY1lCxjZalL9WfrNCFCUZgLxrGok8cz7phIpGHnA+fgVIX3
+	ugp4sj7KITh4vXFn4PnEMoEMU5QETmfKNzznXuiFVWZe1tR8XDytel2L1Jfa7LQSLFe2
+	kIoDQUxR/B0QRU0jsCLW8QnDiqpeZ6M9WB7t5ZHG28E9/amZGip2nn5JWqATBkXBpdQS
+	Lj4A==
+X-Gm-Message-State: APjAAAWN+FSfsCr86/UIDpdRqDwgGyq6cn/g5FwBszu7bqhlVp2rOY0f
+	YK9JpDUBbUgAyK1w9ROaEcPf0zNPDfRRiXSVdvAScA==
+X-Google-Smtp-Source: APXvYqyPQ9nqn37SloKIULf2etAGLfCBkH00WHyi0wZur1IOn2ahOeCnNybcpbK/80a0otx0Bl/ZJJek0Zg0eIY+wiY=
+X-Received: by 2002:aca:5785:: with SMTP id l127mr1910631oib.48.1559213843255; 
+	Thu, 30 May 2019 03:57:23 -0700 (PDT)
 MIME-Version: 1.0
-References: <1559119921-6098-1-git-send-email-bmeng.cn@gmail.com>
-	<CAKmqyKNAL8KtVgfCx6yhaNYEL=_wnZ5Vf1eSjxwtg0x6_q+UHw@mail.gmail.com>
-In-Reply-To: <CAKmqyKNAL8KtVgfCx6yhaNYEL=_wnZ5Vf1eSjxwtg0x6_q+UHw@mail.gmail.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Thu, 30 May 2019 11:36:46 +0800
-Message-ID: <CAEUhbmXLr3zXhbphXRvqfyW1FH9qo3yoPwnFoRoYNtbwkrBBKw@mail.gmail.com>
-To: Alistair Francis <alistair23@gmail.com>
-Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>, 
-	"qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
-	Alistair Francis <Alistair.Francis@wdc.com>, 
-	Palmer Dabbelt <palmer@sifive.com>
+References: <20190526010948.3923-1-palmer@sifive.com>
+	<20190526010948.3923-2-palmer@sifive.com>
+In-Reply-To: <20190526010948.3923-2-palmer@sifive.com>
+From: Peter Maydell <peter.maydell@linaro.org>
+Date: Thu, 30 May 2019 11:57:12 +0100
+Message-ID: <CAFEAcA-01sahAvfLRoe3e9RfCcgmk4+Ubceufg9hhmwQAFpbRQ@mail.gmail.com>
+To: Palmer Dabbelt <palmer@sifive.com>
+Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
+	QEMU Developers <qemu-devel@nongnu.org>, 
+	Fabien Chouteau <chouteau@adacore.com>
 Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
 	recognized.
-X-Received-From: 2a00:1450:4864:20::544
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH] riscv: virt: Correct pci
- "bus-range" encoding
+X-Received-From: 2607:f8b0:4864:20::244
+Subject: Re: [Qemu-riscv] [PULL 01/29] SiFive RISC-V GPIO Device
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -68,27 +67,58 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 May 2019 03:37:03 -0000
+X-List-Received-Date: Thu, 30 May 2019 10:57:26 -0000
 
-Hi Alistair,
-
-On Thu, May 30, 2019 at 11:14 AM Alistair Francis <alistair23@gmail.com> wrote:
+On Sun, 26 May 2019 at 02:10, Palmer Dabbelt <palmer@sifive.com> wrote:
 >
-> On Wed, May 29, 2019 at 1:52 AM Bin Meng <bmeng.cn@gmail.com> wrote:
-> >
-> > The largest pci bus number should be calculated from ECAM size,
-> > instead of its base address.
-> >
-> > Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
+> From: Fabien Chouteau <chouteau@adacore.com>
 >
-> This seems ok, can you maybe explain what this fixes?
+> QEMU model of the GPIO device on the SiFive E300 series SOCs.
 >
+> The pins are not used by a board definition yet, however this
+> implementation can already be used to trigger GPIO interrupts from the
+> software by configuring a pin as both output and input.
+>
+> Signed-off-by: Fabien Chouteau <chouteau@adacore.com>
+> Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
+> Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
 
-The logic is wrong, as the commit message said. With current wrong
-logic, the largest pci bus number encoded in "bus-ranges" property was
-wrongly set to 0x2ff in this case. Per pci spec, the bus number should
-not exceed 0xff.
+Hi; this patch causes Coverity to complain about a memory
+leak (CID 1401707):
 
-Regards,
-Bin
+>  static void riscv_sifive_e_soc_realize(DeviceState *dev, Error **errp)
+>  {
+>      const struct MemmapEntry *memmap = sifive_e_memmap;
+> +    Error *err = NULL;
+>
+>      SiFiveESoCState *s = RISCV_E_SOC(dev);
+>      MemoryRegion *sys_mem = get_system_memory();
+> @@ -184,8 +188,28 @@ static void riscv_sifive_e_soc_realize(DeviceState *dev, Error **errp)
+>      sifive_mmio_emulate(sys_mem, "riscv.sifive.e.aon",
+>          memmap[SIFIVE_E_AON].base, memmap[SIFIVE_E_AON].size);
+>      sifive_prci_create(memmap[SIFIVE_E_PRCI].base);
+> -    sifive_mmio_emulate(sys_mem, "riscv.sifive.e.gpio0",
+> -        memmap[SIFIVE_E_GPIO0].base, memmap[SIFIVE_E_GPIO0].size);
+> +
+> +    /* GPIO */
+> +
+> +    object_property_set_bool(OBJECT(&s->gpio), true, "realized", &err);
+> +    if (err) {
+> +        error_propagate(errp, err);
+> +        return;
+> +    }
+
+This function allocated xip_mem and mask_rom via g_new() but
+then this error-exit doesn't free them.
+
+The best way to fix this is to stop doing separate memory
+allocations at all -- instead just have fields in the
+SiFiveESoCState struct
+   MemoryRegion xip_mem;
+   Memory_Region mask_rom;
+
+and pass &s->xip_mem etc where currently the code uses xip_mem.
+
+thanks
+-- PMM
 
