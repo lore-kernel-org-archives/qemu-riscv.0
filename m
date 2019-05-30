@@ -1,61 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1hWIkR-0007iQ-TJ
-	for mharc-qemu-riscv@gnu.org; Thu, 30 May 2019 06:57:27 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:39264)
+	id 1hWKpC-0007jv-Qf
+	for mharc-qemu-riscv@gnu.org; Thu, 30 May 2019 09:10:30 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:36015)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <peter.maydell@linaro.org>) id 1hWIkP-0007ho-Ka
-	for qemu-riscv@nongnu.org; Thu, 30 May 2019 06:57:26 -0400
+	(envelope-from <hmka2@hermes.cam.ac.uk>) id 1hWKpA-0007jo-GJ
+	for qemu-riscv@nongnu.org; Thu, 30 May 2019 09:10:29 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <peter.maydell@linaro.org>) id 1hWIkO-0002uE-JX
-	for qemu-riscv@nongnu.org; Thu, 30 May 2019 06:57:25 -0400
-Received: from mail-oi1-x244.google.com ([2607:f8b0:4864:20::244]:38443)
-	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <peter.maydell@linaro.org>)
-	id 1hWIkO-0002rc-DD
-	for qemu-riscv@nongnu.org; Thu, 30 May 2019 06:57:24 -0400
-Received: by mail-oi1-x244.google.com with SMTP id 18so3797943oij.5
-	for <qemu-riscv@nongnu.org>; Thu, 30 May 2019 03:57:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=8CUGtddsQAcpIedVPK7EXveMNL6giQ7v3lJi/i4QwOk=;
-	b=bzPPLeoowxHw8ZPNXM8RxeuD0sTMM6S0gjpSG70GcVSRudlJBBWeTMM1rF5F5Ke6T3
-	LiEK5muKGjMe0VW1nGasvrtxFASjQT9ghGNTEk69aRjEPkVhhzSXydVbDPf+BBvwqZgv
-	v10LUoxHcMzCdw6tfqSQIdPfsPOWbdZAXdEPkY92uV0LCQ3C2g+g5ILqohoIFWzhjJZL
-	wcxSWUGGbJKUkrllgA0Am2/msjHHenxOVXyJDMt4Oy9Ze28K9/ejmXIcrVELhka4khK/
-	KmODPMD7YObw+SG4HxZj0FCB6tqQzIPVeY4cEryZGG1VaeQJYKsuhrvtz/yj3faOkhys
-	2KdA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=8CUGtddsQAcpIedVPK7EXveMNL6giQ7v3lJi/i4QwOk=;
-	b=XssVqF9A5wfhbvVCER9lBr9n4tOwybNyRAa0j5fN48TpRtKjYRrtsPUDvljX4MkVzl
-	NIB/Ekjw1MRQqbdm73ObgO/2dtlaz49rwCcrgTyZoweGW+RnOPegrvbAYL9423XsC+I0
-	zjQUEX6eIX4tAFPws0Fm6XY1lCxjZalL9WfrNCFCUZgLxrGok8cz7phIpGHnA+fgVIX3
-	ugp4sj7KITh4vXFn4PnEMoEMU5QETmfKNzznXuiFVWZe1tR8XDytel2L1Jfa7LQSLFe2
-	kIoDQUxR/B0QRU0jsCLW8QnDiqpeZ6M9WB7t5ZHG28E9/amZGip2nn5JWqATBkXBpdQS
-	Lj4A==
-X-Gm-Message-State: APjAAAWN+FSfsCr86/UIDpdRqDwgGyq6cn/g5FwBszu7bqhlVp2rOY0f
-	YK9JpDUBbUgAyK1w9ROaEcPf0zNPDfRRiXSVdvAScA==
-X-Google-Smtp-Source: APXvYqyPQ9nqn37SloKIULf2etAGLfCBkH00WHyi0wZur1IOn2ahOeCnNybcpbK/80a0otx0Bl/ZJJek0Zg0eIY+wiY=
-X-Received: by 2002:aca:5785:: with SMTP id l127mr1910631oib.48.1559213843255; 
-	Thu, 30 May 2019 03:57:23 -0700 (PDT)
+	(envelope-from <hmka2@hermes.cam.ac.uk>) id 1hWKp8-0003R3-Jd
+	for qemu-riscv@nongnu.org; Thu, 30 May 2019 09:10:28 -0400
+Received: from ppsw-41.csi.cam.ac.uk ([131.111.8.141]:37046)
+	by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.71) (envelope-from <hmka2@hermes.cam.ac.uk>)
+	id 1hWKp3-0003M7-Ad; Thu, 30 May 2019 09:10:23 -0400
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=cam.ac.uk; 
+	s=20180806.ppsw;
+	h=Sender:Content-Type:Cc:To:Subject:Message-ID:Date:From:
+	In-Reply-To:References:MIME-Version:Reply-To:Content-Transfer-Encoding:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+	List-Subscribe:List-Post:List-Owner:List-Archive;
+	bh=qUpRepGQOt/XAQs+elq3yyHkbiLJfY8ZvXaWCQVA4t0=;
+	b=MINGF1A8ONF8BOCYmJqjvbsMP9
+	jEsXyYo70KR8bF06IKMtJL3sK8QWTT20SqxERJwdGR7AQUG4C/MkMpkt6OshaVvsrt/vhLEDLI9yh
+	Y2HjeFK9pz5tDx2YuufXUlThjNuXy9CO0AskvB6iSNVQhilcwAMJjApjBGMwdn5bu9Z0=; 
+X-Cam-AntiVirus: no malware found
+X-Cam-ScannerInfo: http://help.uis.cam.ac.uk/email-scanner-virus
+Received: from mail-lf1-f43.google.com ([209.85.167.43]:41406)
+	by ppsw-41.csi.cam.ac.uk (smtp.hermes.cam.ac.uk [131.111.8.159]:587)
+	with esmtpsa (PLAIN:hmka2) (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+	id 1hWKp0-0013gu-Re (Exim 4.91)
+	(return-path <hmka2@hermes.cam.ac.uk>); Thu, 30 May 2019 14:10:18 +0100
+Received: by mail-lf1-f43.google.com with SMTP id 136so4973471lfa.8;
+	Thu, 30 May 2019 06:10:15 -0700 (PDT)
+X-Gm-Message-State: APjAAAVH5beLq3pu7j5w/Rn/6bDOyA1y1BFagdV1YBI84HQvOyOm0kB7
+	0a4DLPGgnUAZrQRMTPrvWwhnnnwbLxgbeJ5GZJY=
+X-Google-Smtp-Source: APXvYqwaPsVJx1kMtWL8CMB8ZJxgjHxb3ij6MH8SOVOuGYszQ3HIpdHZi5/AG5ad4BsXmkoiPxYyzUGo8GFFrJ8p7h0=
+X-Received: by 2002:a19:488e:: with SMTP id v136mr2031057lfa.192.1559221814232;
+	Thu, 30 May 2019 06:10:14 -0700 (PDT)
 MIME-Version: 1.0
-References: <20190526010948.3923-1-palmer@sifive.com>
-	<20190526010948.3923-2-palmer@sifive.com>
-In-Reply-To: <20190526010948.3923-2-palmer@sifive.com>
-From: Peter Maydell <peter.maydell@linaro.org>
-Date: Thu, 30 May 2019 11:57:12 +0100
-Message-ID: <CAFEAcA-01sahAvfLRoe3e9RfCcgmk4+Ubceufg9hhmwQAFpbRQ@mail.gmail.com>
-To: Palmer Dabbelt <palmer@sifive.com>
-Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
-	QEMU Developers <qemu-devel@nongnu.org>, 
-	Fabien Chouteau <chouteau@adacore.com>
+References: <20190521104324.12835-1-Hesham.Almatary@cl.cam.ac.uk>
+	<20190521104324.12835-3-Hesham.Almatary@cl.cam.ac.uk>
+	<CAKmqyKOT_15kFNjHkUgk+bs6GwGrDrAOPoe+t0u3T6hg6TqiPQ@mail.gmail.com>
+	<CA+wsVCDgogUXBDNiWm7R19fAyNw-3ybPiW4O8yA=Wt8oqyShFg@mail.gmail.com>
+	<CAKmqyKNN-R1jJB3DXQqvPQsu+8W3jH+mrCD+iBbdH+J_JwRbgg@mail.gmail.com>
+In-Reply-To: <CAKmqyKNN-R1jJB3DXQqvPQsu+8W3jH+mrCD+iBbdH+J_JwRbgg@mail.gmail.com>
+From: Hesham Almatary <hesham.almatary@cl.cam.ac.uk>
+Date: Thu, 30 May 2019 15:09:37 +0200
+X-Gmail-Original-Message-ID: <CA+wsVCBgEQUCHeBAe84ZkCeRb9bNw3xQ6gbSORQ9Oc0_YPM66A@mail.gmail.com>
+Message-ID: <CA+wsVCBgEQUCHeBAe84ZkCeRb9bNw3xQ6gbSORQ9Oc0_YPM66A@mail.gmail.com>
+To: Alistair Francis <alistair23@gmail.com>
+Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+	"qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
-	recognized.
-X-Received-From: 2607:f8b0:4864:20::244
-Subject: Re: [Qemu-riscv] [PULL 01/29] SiFive RISC-V GPIO Device
+Sender: "H.M.K. Almatary" <hmka2@hermes.cam.ac.uk>
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+X-Received-From: 131.111.8.141
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCHv3 3/5] RISC-V: Check PMP
+ during Page Table Walks
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -67,58 +68,96 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 May 2019 10:57:26 -0000
+X-List-Received-Date: Thu, 30 May 2019 13:10:29 -0000
 
-On Sun, 26 May 2019 at 02:10, Palmer Dabbelt <palmer@sifive.com> wrote:
+On Thu, 30 May 2019 at 05:07, Alistair Francis <alistair23@gmail.com> wrote:
 >
-> From: Fabien Chouteau <chouteau@adacore.com>
+> On Wed, May 22, 2019 at 2:27 AM Hesham Almatary
+> <hesham.almatary@cl.cam.ac.uk> wrote:
+> >
+> > On Tue, 21 May 2019 at 23:40, Alistair Francis <alistair23@gmail.com> wrote:
+> > >
+> > > On Tue, May 21, 2019 at 3:44 AM Hesham Almatary
+> > > <Hesham.Almatary@cl.cam.ac.uk> wrote:
+> > > >
+> > > > The PMP should be checked when doing a page table walk, and report access
+> > > > fault exception if the to-be-read PTE failed the PMP check.
+> > > >
+> > > > Suggested-by: Jonathan Behrens <fintelia@gmail.com>
+> > > > Signed-off-by: Hesham Almatary <Hesham.Almatary@cl.cam.ac.uk>
+> > > > ---
+> > > >  target/riscv/cpu.h        |  1 +
+> > > >  target/riscv/cpu_helper.c | 10 +++++++++-
+> > > >  2 files changed, 10 insertions(+), 1 deletion(-)
+> > > >
+> > > > diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> > > > index c17184f4e4..ab3ba3f15a 100644
+> > > > --- a/target/riscv/cpu.h
+> > > > +++ b/target/riscv/cpu.h
+> > > > @@ -94,6 +94,7 @@ enum {
+> > > >  #define PRIV_VERSION_1_09_1 0x00010901
+> > > >  #define PRIV_VERSION_1_10_0 0x00011000
+> > > >
+> > > > +#define TRANSLATE_PMP_FAIL 2
+> > > >  #define TRANSLATE_FAIL 1
+> > > >  #define TRANSLATE_SUCCESS 0
+> > > >  #define NB_MMU_MODES 4
+> > > > diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> > > > index 7c7282c680..d0b0f9cf88 100644
+> > > > --- a/target/riscv/cpu_helper.c
+> > > > +++ b/target/riscv/cpu_helper.c
+> > > > @@ -211,6 +211,12 @@ restart:
+> > > >
+> > > >          /* check that physical address of PTE is legal */
+> > > >          target_ulong pte_addr = base + idx * ptesize;
+> > > > +
+> > > > +        if (riscv_feature(env, RISCV_FEATURE_PMP) &&
+> > > > +            !pmp_hart_has_privs(env, pte_addr, sizeof(target_ulong),
+> > > > +            1 << MMU_DATA_LOAD)) {
+> > >
+> > > I see a problem here.
+> > >
+> > > pmp_hart_has_privs() checks permissions based on the current value of
+> > > env->priv. This might not always be the correct permissions to check,
+> > > we should instead use the current mode to check permissions.
+> > >
+> > That is not clear to me. Isn't env->priv the current privildge mode?
+> > Could you please elaborate on what other cases this might not be the case?
 >
-> QEMU model of the GPIO device on the SiFive E300 series SOCs.
+> Sorry for the delay. The RISC-V Hypervisor Extension allows load/store
+> operations to be carried out as a previous privilege. The mstatus.MPRV
+> and hstatus.SPRV allow this.
 >
-> The pins are not used by a board definition yet, however this
-> implementation can already be used to trigger GPIO interrupts from the
-> software by configuring a pin as both output and input.
+No problem, thanks for the clarification.
+You are right, I haven't considered MPRV. I fixed that in a separate
+commit in a v4 series of patches.
+> Alistair
 >
-> Signed-off-by: Fabien Chouteau <chouteau@adacore.com>
-> Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
-> Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
-
-Hi; this patch causes Coverity to complain about a memory
-leak (CID 1401707):
-
->  static void riscv_sifive_e_soc_realize(DeviceState *dev, Error **errp)
->  {
->      const struct MemmapEntry *memmap = sifive_e_memmap;
-> +    Error *err = NULL;
->
->      SiFiveESoCState *s = RISCV_E_SOC(dev);
->      MemoryRegion *sys_mem = get_system_memory();
-> @@ -184,8 +188,28 @@ static void riscv_sifive_e_soc_realize(DeviceState *dev, Error **errp)
->      sifive_mmio_emulate(sys_mem, "riscv.sifive.e.aon",
->          memmap[SIFIVE_E_AON].base, memmap[SIFIVE_E_AON].size);
->      sifive_prci_create(memmap[SIFIVE_E_PRCI].base);
-> -    sifive_mmio_emulate(sys_mem, "riscv.sifive.e.gpio0",
-> -        memmap[SIFIVE_E_GPIO0].base, memmap[SIFIVE_E_GPIO0].size);
-> +
-> +    /* GPIO */
-> +
-> +    object_property_set_bool(OBJECT(&s->gpio), true, "realized", &err);
-> +    if (err) {
-> +        error_propagate(errp, err);
-> +        return;
-> +    }
-
-This function allocated xip_mem and mask_rom via g_new() but
-then this error-exit doesn't free them.
-
-The best way to fix this is to stop doing separate memory
-allocations at all -- instead just have fields in the
-SiFiveESoCState struct
-   MemoryRegion xip_mem;
-   Memory_Region mask_rom;
-
-and pass &s->xip_mem etc where currently the code uses xip_mem.
-
-thanks
--- PMM
+> >
+> > > The best way to do this to me is to probably provide a privileged mode
+> > > override to the function, can you add that?
+> > >
+> > > Alistair
+> > >
+> > > > +            return TRANSLATE_PMP_FAIL;
+> > > > +        }
+> > > >  #if defined(TARGET_RISCV32)
+> > > >          target_ulong pte = ldl_phys(cs->as, pte_addr);
+> > > >  #elif defined(TARGET_RISCV64)
+> > > > @@ -405,8 +411,10 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+> > > >      if (riscv_feature(env, RISCV_FEATURE_PMP) &&
+> > > >          (ret == TRANSLATE_SUCCESS) &&
+> > > >          !pmp_hart_has_privs(env, pa, TARGET_PAGE_SIZE, 1 << access_type)) {
+> > > > +        ret = TRANSLATE_PMP_FAIL;
+> > > > +    }
+> > > > +    if (ret == TRANSLATE_PMP_FAIL) {
+> > > >          pmp_violation = true;
+> > > > -        ret = TRANSLATE_FAIL;
+> > > >      }
+> > > >      if (ret == TRANSLATE_SUCCESS) {
+> > > >          tlb_set_page(cs, address & TARGET_PAGE_MASK, pa & TARGET_PAGE_MASK,
+> > > > --
+> > > > 2.17.1
+> > > >
+> > > >
 
