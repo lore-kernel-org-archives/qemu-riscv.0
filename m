@@ -1,54 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.71)
-	id 1hYfBA-0003OU-NN
-	for mharc-qemu-riscv@gnu.org; Wed, 05 Jun 2019 19:18:48 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:47919)
+	id 1hYrvj-0006eD-9M
+	for mharc-qemu-riscv@gnu.org; Thu, 06 Jun 2019 08:55:43 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:60051)
 	by lists.gnu.org with esmtp (Exim 4.71)
-	(envelope-from <palmer@dabbelt.com>) id 1hYfB8-0003O9-De
-	for qemu-riscv@nongnu.org; Wed, 05 Jun 2019 19:18:48 -0400
+	(envelope-from <bmeng.cn@gmail.com>) id 1hYrvf-0006cU-TZ
+	for qemu-riscv@nongnu.org; Thu, 06 Jun 2019 08:55:40 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
-	(envelope-from <palmer@dabbelt.com>) id 1hYfB6-0006nG-Oq
-	for qemu-riscv@nongnu.org; Wed, 05 Jun 2019 19:18:46 -0400
-Received: from mail-pf1-f177.google.com ([209.85.210.177]:39306)
+	(envelope-from <bmeng.cn@gmail.com>) id 1hYrve-0001Qw-Vr
+	for qemu-riscv@nongnu.org; Thu, 06 Jun 2019 08:55:39 -0400
+Received: from mail-ed1-x543.google.com ([2a00:1450:4864:20::543]:41192)
 	by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
-	(Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1hYfB4-0006fo-KL
-	for qemu-riscv@nongnu.org; Wed, 05 Jun 2019 19:18:43 -0400
-Received: by mail-pf1-f177.google.com with SMTP id j2so247455pfe.6
-	for <qemu-riscv@nongnu.org>; Wed, 05 Jun 2019 16:18:39 -0700 (PDT)
+	(Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
+	id 1hYrve-00007s-PD; Thu, 06 Jun 2019 08:55:38 -0400
+Received: by mail-ed1-x543.google.com with SMTP id p15so3172667eds.8;
+	Thu, 06 Jun 2019 05:55:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=qKOB3VuDlc0WnIjDjWXfVQ61z9FILkUE5p8n5dJH9dc=;
+	b=HSRqDM0tkQEmFFNFlL+unjNbBWQvoAG9/CnVf9n/vhMBtPRbMmamPTPhForYIxZ/+p
+	YITM5We/y5Z7jboRF8rImjP+C9bE/ARn2Fcy18nnX3b3vARt5GdLxj5Nj1NUbudBB4mw
+	QMPTdw3mgrxxFWdNiuMQ8KU0rFPQATrvSzcouoYwvvUzlqXO9fb/GJJyJZqTBz2vuGGM
+	HQ1exyIVdRoGkirKhgqbbPx+ZLwtAW0TJgxqEgpg/3+m9uzztzEJ+hLcX65x6Ba7QC95
+	uqt09xDzHxNGFO+HWUo/evxK7wis2IeEMkE0hTou+rHmU3mQZn7JR9mJL40FGJXsHAUy
+	XB/g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
-	:mime-version:content-transfer-encoding;
-	bh=1hvlKOc9w4Q3jxGo5vC2gxT2yoW3uiDs1SLjD/Ak6y8=;
-	b=E/8xJMLIcXwP2yNf7tXe5xiSRphYBGvKERe8Q5OSjVHeBuDXco+gqvgQk9PYfKxRHc
-	UAsFwQEhgIHH/GudYOcYy4SgmKRukMBco0jkOzZA8dsKE1udPQUrjTmWOyvOoW7w8IS7
-	m+CicQXA3H10Bp7YDsQet1KCNA04XMRU5rDy1HIfJUY1J4+lMD8HOLiUqyqBrzPXWDC+
-	Kt3Xq4l6BhSPix4VOzmR2K84Ibz8YHO9ZzvYa4bawvQ50QpCtBXpN6t0dlzlqFuIyejq
-	PCwZviRov/VIY8W2Bbo/mdCrxLOeZ5QNsjieuKE37o5nNk1TOWWF6vEXyiCVDCCHJjYf
-	9VHw==
-X-Gm-Message-State: APjAAAXNi5Fw+fEJLA2/WQjTo6Z6I2/7UfBb4vA/nkocDZF4LR8qrBWI
-	MCGVlkCOGI1y3mzjAaCaBn3QtQ==
-X-Google-Smtp-Source: APXvYqwGk2GeNAq0Bdypn3FnInQ7Y6vZE+/jjTOvfuby8cGlHN9m31aLjovLjTvzACqwanm/x88TZw==
-X-Received: by 2002:a62:b503:: with SMTP id y3mr47820106pfe.4.1559776717479;
-	Wed, 05 Jun 2019 16:18:37 -0700 (PDT)
-Received: from localhost ([12.206.222.5])
-	by smtp.gmail.com with ESMTPSA id s5sm15678pgj.60.2019.06.05.16.18.36
-	(version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-	Wed, 05 Jun 2019 16:18:36 -0700 (PDT)
-Date: Wed, 05 Jun 2019 16:18:36 -0700 (PDT)
-X-Google-Original-Date: Wed, 05 Jun 2019 16:18:21 PDT (-0700)
-In-Reply-To: <B1A3E8F6-F8C2-4EDB-A31B-EBB4CA636CA3@decred.org>
-CC: qemu-devel@nongnu.org,       qemu-riscv@nongnu.org
-From: Palmer Dabbelt <palmer@sifive.com>
-To: marco@decred.org
-Message-ID: <mhng-6493b48f-57c1-47cd-9157-50cb533f91df@palmer-si-x1e>
-Mime-Version: 1.0 (MHng)
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
-	[fuzzy]
-X-Received-From: 209.85.210.177
-Subject: Re: [Qemu-riscv] [Qemu-devel] Fwd: [joel@sing.id.au: atomic
- failures on qemu-system-riscv64]
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=qKOB3VuDlc0WnIjDjWXfVQ61z9FILkUE5p8n5dJH9dc=;
+	b=gtP/d2ht8WORSFuUplVwpUOqzJHUe75QyEtXC1ue25QO/LfHYVbuz7zfrPLj1ITyl2
+	qXDXlLsBmEb8pmQ3WmPG2gDFOzT/hj1QO+L+gyLgSV625dyAdC7m4NHM3RY70e4+478i
+	vwNNs3ifiCzLoB0ROzPLeanbjkhZq4x6AdCQSE6jKgyVmdiWuUKMIJ7oWaZIaQVppo33
+	thXk2pND1idhbgDfhJACjz5vXsWkt8Knjy5gzkvQN6kRxYmYnz9orS7pmDmeo61pRr2o
+	IqAJHbWzVSzBSAqQTPUZGE/oXOgQYAjxQh91DIQmY8CtRnzVOIEGlEbBF1u4NbhRauXo
+	lO6Q==
+X-Gm-Message-State: APjAAAWbyLisiREqSTawxxuf3/h78o6AVTXE4UGhsYOEbku3IZGzIaZ7
+	+Em5Mq4jTbIygIwl/Z0T5pchLkNXsPww8bHFWt0=
+X-Google-Smtp-Source: APXvYqwjGUkmJZOkoFUulGipThJG9uhva1jCC8X3EQmGowTjLHtn4+oDhgAMnT9rbETTeWhhvwY4vvSABAX2ppalOCU=
+X-Received: by 2002:a17:906:1f55:: with SMTP id
+	d21mr40274342ejk.87.1559825725039; 
+	Thu, 06 Jun 2019 05:55:25 -0700 (PDT)
+MIME-Version: 1.0
+References: <1559119921-6098-1-git-send-email-bmeng.cn@gmail.com>
+	<CAKmqyKNAL8KtVgfCx6yhaNYEL=_wnZ5Vf1eSjxwtg0x6_q+UHw@mail.gmail.com>
+	<CAEUhbmXLr3zXhbphXRvqfyW1FH9qo3yoPwnFoRoYNtbwkrBBKw@mail.gmail.com>
+In-Reply-To: <CAEUhbmXLr3zXhbphXRvqfyW1FH9qo3yoPwnFoRoYNtbwkrBBKw@mail.gmail.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Thu, 6 Jun 2019 20:55:13 +0800
+Message-ID: <CAEUhbmUAKoFPqBLVW4FHmiESaF8fqEtjqDb1LKf4ivG3g2z0ZQ@mail.gmail.com>
+To: Alistair Francis <alistair23@gmail.com>
+Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+	"qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+	Alistair Francis <Alistair.Francis@wdc.com>, 
+	Palmer Dabbelt <palmer@sifive.com>
+Content-Type: text/plain; charset="UTF-8"
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+	recognized.
+X-Received-From: 2a00:1450:4864:20::543
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH] riscv: virt: Correct pci
+ "bus-range" encoding
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -60,143 +70,29 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 	<mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Jun 2019 23:18:48 -0000
+X-List-Received-Date: Thu, 06 Jun 2019 12:55:41 -0000
 
-On Wed, 05 Jun 2019 13:59:53 PDT (-0700), marco@decred.org wrote:
-> Joel is on vacation so here it is again.
+On Thu, May 30, 2019 at 11:36 AM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
->> Begin forwarded message:
->> 
->> From: Alistair Francis <Alistair.Francis@wdc.com>
->> Subject: Re: [joel@sing.id.au: atomic failures on qemu-system-riscv64]
->> Date: June 5, 2019 at 7:19:53 PM GMT+1
->> To: "joel@sing.id.au" <joel@sing.id.au>, "palmer@sifive.com" <palmer@sifive.com>
->> Cc: "marco@decred.org" <marco@decred.org>, "me@carlosedp.com" <me@carlosedp.com>
->> 
->> On Fri, 2019-05-31 at 03:21 +1000, Joel Sing wrote:
->>> I've just sent this to qemu-riscv@nongnu.org - forwarding for
->>> visibility...
->> 
->> Hello Joel,
->> 
->> Can you please send this to the QEMU mailing list?
->> https://wiki.qemu.org/Contribute/MailingLists
->> 
->>> 
->>> ----- Forwarded message from Joel Sing <joel@sing.id.au> -----
->>> 
->>> Date: Fri, 31 May 2019 03:20:03 +1000
->>> From: Joel Sing <joel@sing.id.au>
->>> To: qemu-riscv@nongnu.org
->>> Subject: atomic failures on qemu-system-riscv64
->>> User-Agent: Mutt/1.10.1 (2018-07-13)
->>> 
->>> While working on a Go (www.golang.org) port for riscv, I've run
->>> into issues with atomics (namely LR/SC) on qemu-system-riscv64.
->>> There are several reproducers for this problem including (using
->>> gcc builtin atomics):
->>> 
->>>  https://gist.github.com/4a6f656c/8433032a3f70893a278259f8108aad90
->>> 
->>> And a version using inline assembly:
->>> 
->>>  https://gist.github.com/4a6f656c/d883091f5ca811822720213be343a75a
->>> 
->>> Depending on the qemu configuration the number of threads may
->>> need increasing (to force context switching) and/or run in a
->>> loop. Go's sync/atomic tests also fail regularly.
->>> 
->>> Having dug into the qemu code, what I believe is happening is
->>> along the lines of the following:
->>> 
->>> 1. Thread 1 runs and executes an LR - this assigns an address
->>>   to load_res and a value to load_val (say 1).
->>> 
->>> 2. A context switch occurs and thread 2 is now run - it runs
->>>   an LR and SC on the same address modifying the stored value.
->>>   Another LR is executed loading load_val with the current
->>>   value (say 3).
->>> 
->>> 3. A context switch occurs and thread 1 is now run again, it
->>>   continues on its LR/SC sequence and now runs the SC instruction.
->>>   This is based on the assumption that it had a reservation
->>>   and the SC will fail if the memory has changed. The underlying
->>>   implementation of SC is a cmpxchg with the value in load_val
->>>   - this no longer has the original value and hence successfully
->>>   compares (as does the tcg_gen_setcond_tl() between the returned
->>>   value and load_val) thus the SC succeeds when it should not.
->>> 
->>> The diff below clears load_res when the mode changes - with this
->>> applied the reproducers work correctly, as do Go's atomic tests.
->>> I'm not sure this "fix" is 100% correct, but it certainly verifies
->>> where the problem lies. It does also fall inline with the RISCV
->>> spec:
->>> 
->>> "The SC must fail if there is an observable memory access from
->>> another hart to the address, or if there is an intervening context
->>> switch on this hart, or if in the meantime the hart executed a
->>> privileged exception-return instruction."
+> Hi Alistair,
+>
+> On Thu, May 30, 2019 at 11:14 AM Alistair Francis <alistair23@gmail.com> wrote:
+> >
+> > On Wed, May 29, 2019 at 1:52 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+> > >
+> > > The largest pci bus number should be calculated from ECAM size,
+> > > instead of its base address.
+> > >
+> > > Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
+> >
+> > This seems ok, can you maybe explain what this fixes?
+> >
+>
+> The logic is wrong, as the commit message said. With current wrong
+> logic, the largest pci bus number encoded in "bus-ranges" property was
+> wrongly set to 0x2ff in this case. Per pci spec, the bus number should
+> not exceed 0xff.
+>
 
-Sorry about this, but that wording is actually a bug in the ISA manual.  The
-current version says
-
-    An SC must fail if there is
-    another SC (to any address) between the LR and the SC in program
-    order.  The precise statement of the atomicity requirements for
-    successful LR/SC sequences is defined by the Atomicity Axiom in
-    Section~\ref{sec:rvwmo}.
-    
-    \begin{commentary}
-    A store-conditional instruction to a scratch word of memory should be used
-    during a preemptive context switch to forcibly yield any existing load
-    reservation.
-    \end{commentary}
-
-The text in version 2.2 was changed because it doesn't really have meaning:
-harts are a hardware construct, but context switches are a software context.
-There were a few of these bugs floating around the ISA manual and we cleaned
-them up more than a year ago, but the version on the RISC-V website hasn't
-changed.  The ratified ISA manual will have the correct wording.
-
-That said, the Linux user ABI allows programs to rely on reservations being
-shot down on context switches -- if that wasn't the case then LR/SC would be
-useless.  That's how the ambiguous wording snuck into the user ISA manual: we
-confused the ISA behavior (ie, what the hardware does) with the user ABI
-behavior (ie, what programs can rely on).
-
-The reason you're only seeing this in QEMU is because the hardware has a
-timeout on load reservations of something like 1000 cycles, and the Linux
-context switching code takes longer than that timeout.  For some reason I
-remember having fixed this bug in Linux, but I must have forgotten to actually
-send out the patch.
-
-Also, unless I'm misunderstanding something our implementation of LR/SC is
-pretty broken.  We're just using a CAS to check if the value changed, which
-suffers from the ABA problem that LR/SC is there to fix in the first place.  I
-might be missing something here, though, as it looks like MIPS is doing
-essentially the same thing.
-
->>> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
->>> index b17f169681..9875b8e5d3 100644
->>> --- a/target/riscv/cpu_helper.c
->>> +++ b/target/riscv/cpu_helper.c
->>> @@ -113,6 +113,8 @@ void riscv_cpu_set_mode(CPURISCVState *env,
->>> target_ulong newpriv)
->>>     }
->>>     /* tlb_flush is unnecessary as mode is contained in mmu_idx */
->>>     env->priv = newpriv;
->>> +
->>> +    env->load_res = 0;
->> 
->> This looks ok to me, I'll read the spec to double check though. Do you
->> mind adding a comment in the code as to why this is required?
->> 
->> Alistair
->> 
->>> }
->>> 
->>> /* get_physical_address - get the physical address for this virtual
->>> address
->>> 
->>> ----- End forwarded message -----
+Ping?
 
