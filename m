@@ -1,58 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hZMsy-00053b-0t
-	for mharc-qemu-riscv@gnu.org; Fri, 07 Jun 2019 17:58:56 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:48189)
+	id 1hZMt0-00054y-VP
+	for mharc-qemu-riscv@gnu.org; Fri, 07 Jun 2019 17:58:59 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:48160)
  by lists.gnu.org with esmtp (Exim 4.86_2)
  (envelope-from <prvs=0547f94d1=alistair.francis@wdc.com>)
- id 1hZMsm-0004xV-NT
- for qemu-riscv@nongnu.org; Fri, 07 Jun 2019 17:58:46 -0400
+ id 1hZMsl-0004xD-HY
+ for qemu-riscv@nongnu.org; Fri, 07 Jun 2019 17:58:44 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
  (envelope-from <prvs=0547f94d1=alistair.francis@wdc.com>)
- id 1hZMsi-0002M6-Tv
+ id 1hZMsi-0002ML-U2
  for qemu-riscv@nongnu.org; Fri, 07 Jun 2019 17:58:42 -0400
 Received: from esa2.hgst.iphmx.com ([68.232.143.124]:38196)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <prvs=0547f94d1=alistair.francis@wdc.com>)
- id 1hZMsV-0002BV-1X; Fri, 07 Jun 2019 17:58:28 -0400
+ id 1hZMsX-0002BV-JJ; Fri, 07 Jun 2019 17:58:29 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1559944718; x=1591480718;
+ t=1559944722; x=1591480722;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=3r0rnJKxky1k1303Ow03vzZghGPK40tyE2AGu4Wbl6A=;
- b=Hdn4ASpQhsUh5ul/jBnLm7DbKYQwWAhxu8u8z4GbA/egxNI7h9e0mSrT
- 3m0Iz0RKJbglMxoSQaGWTjmb596f58oRDGblRr1nU1natmYN5p2JtgVAt
- c8rvvYmMGEOGOdMwmzpbkJEyZOs9TANwtXJ6kqRcB5vSJo0raZc9jV5Mz
- 2Tpt/MGiD5ATk+tHD75Zel1FlmzJwBKhN1qKa5stxua2f2ikMnvUbKfWd
- QGWft59cilq4nGvdMk21hjJvBEx7oKiDGVsNxFHZ+gImed0kmbpPPsw0l
- VxikPKiXETIOafpFDOv/alBp5jv/lm//ZSvggF9Nv5Mu1ubG3ffNbJGEj Q==;
-X-IronPort-AV: E=Sophos;i="5.63,564,1557158400"; d="scan'208";a="209711286"
+ bh=qDL5/qlAQFtYrCOkIfH5+w4MhTN/n5JyM640ZKPXzXk=;
+ b=ialvrKUrqeTDm4Ggw2w99bFRH8kkwVg38EEjoPH0ehSANDS+VFIgK2wl
+ trvtcYlsKMAHAhLEfxsVSGbZUJT7P6l8dwDeFLMUuaB8T6q3xu4ZEF7Pk
+ 2bLWIMBEQHCNBhp8UVaJwxmaXC2y2L3qVvN0RsED1IFjvVhsqsnOkIhnS
+ 0BqNPP9xTyhNY7j4MJy3Xg3V/b2mlltEQETPXpXj7oXJE2NMiBfe03tLG
+ l/WTO8KxIeuU7bGmlmUpL1AWMr0NVZQeFjD8w2q2QUjBpUsTh7Wf6fXL/
+ 5S/Epajo3y2/3XpzNgDSg0yHyN3jwCuhnIoaa12vi77PByBRiCJHxT9rG Q==;
+X-IronPort-AV: E=Sophos;i="5.63,564,1557158400"; d="scan'208";a="209711287"
 Received: from h199-255-45-14.hgst.com (HELO uls-op-cesaep01.wdc.com)
  ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 08 Jun 2019 05:58:34 +0800
-IronPort-SDR: LoiIYj88QYhvPFBw3obBLBrETYTu0bdFVXQ+wtiYZ++33Zr+44PNCKYDKtVJCRx4f74v8Q/BGW
- Kn8+750/hQVg4+d3yLo5qBaY4KXvP3KMeHgB3NU3Lzvjk8E0ulNbWZZrgh4neOKUPgNHqAHY8W
- NduWdi/YGVmCQ4+eDHMsPW9TOkC4ykgq1Ka4JDURtanNiLITFX5OtNxG5d/5AEbxK2exH/bmIc
- 7ihsECCJGO8uVlJTiqtiPNrbKdEYmRcxTsKlHlzOr+KhzK74xVXaxsYebqS/YOEgKe4kSiJI/V
- KpXou3FXAcTTFpQpxcGeea15
+ by ob1.hgst.iphmx.com with ESMTP; 08 Jun 2019 05:58:39 +0800
+IronPort-SDR: YkToNWuf3EZposF6k3G0YtA9V1QG3lJp6oEkAusnG8cxPwYIPnlIJRsFcrnBRHW/PgxJQJ3mG6
+ 9hd+ATvxgVa1E3wowpLc+ysQhCUCDxymd39Yflhdp72lG1MmoYbf/5y+AyRDauio+4Hgat8yM+
+ uu59vdeoN5JYq7XjF+s9rQn+EgC6tr6nzORndtVYw1qDISEqcqzVhKWxr+8LtJXx7gtjqnHSvP
+ pz4wKNzIXh0FfS/wErbLkGXU3yF8diEYLaxIPEMgriPbd2ouArddZY4dASuD94bHdZK7qFnAtw
+ S1d/h6/kxsVqAJaYv95D2muW
 Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
- by uls-op-cesaep01.wdc.com with ESMTP; 07 Jun 2019 14:33:16 -0700
-IronPort-SDR: MH/+9PLGNiB9QKCecC9fg7RF0DJmMkp/MCx6et5HxnTndWfijKt8QOtR0bPR2iU0VNvE8ot+IN
- /ghYHT1RffjqmIntv4W8KRV9AA3KVDPAAmx/f6XXSN4o3fQCs9rGxRaI3q4rD4ycuo01eTm91T
- W9TZb4b0LZpgCIHlhpGvuyPhNTNbqaU4prpu+JMkU8OY7nWjptVSk+wyb/P8J28oInG1yD7j5N
- gxakMe6Va4CFW6ouJV22OnffnXoE6slZkXRMGh0VWPnR+i9t+BjxUNBuVp20I/2tZvPDBCzGGg
- 1ys=
+ by uls-op-cesaep01.wdc.com with ESMTP; 07 Jun 2019 14:33:20 -0700
+IronPort-SDR: K6XOMUP0nviRisQvhWO47CCKfxLr2N4UJ27pfjSsnEEHkF3higmkMISk8mttftnNNUOTJdp/S1
+ x8zIcmL4UGlqv81gEcAc2BStSxrcQRamudfBfLiI1W+ThbHTySp/Uk1OYSZ3lDy9soYN0WK1b6
+ AALVnESe/aqa6F8YcJh/5AxUUujcG+72k4w7LR9P/X5Gmm/H+a5MJNaYFu98u96W8puMRXUXYs
+ 0qlD0wJi5UKtwHXESIFN995H+uy0vHaggYonjZ6RhajpBi64QHqeKyJpBg76t5/OTeoay2iPu/
+ VZw=
 Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
  risc6-mainframe.int.fusionio.com) ([10.196.157.140])
- by uls-op-cesaip01.wdc.com with ESMTP; 07 Jun 2019 14:58:24 -0700
+ by uls-op-cesaip01.wdc.com with ESMTP; 07 Jun 2019 14:58:27 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: palmer@sifive.com,
 	alistair.francis@wdc.com,
 	alistair23@gmail.com
-Date: Fri,  7 Jun 2019 14:56:14 -0700
-Message-Id: <7e98057587fcb614456fddd0f5d17ab1c250226e.1559944445.git.alistair.francis@wdc.com>
+Date: Fri,  7 Jun 2019 14:56:17 -0700
+Message-Id: <38a35baa3815eefd2e7a626aaa72f7d5f680e5e2.1559944445.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <cover.1559944445.git.alistair.francis@wdc.com>
 References: <cover.1559944445.git.alistair.francis@wdc.com>
@@ -61,8 +61,8 @@ Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
 X-Received-From: 68.232.143.124
-Subject: [Qemu-riscv] [PATCH v1 17/27] target/riscv: Add hypvervisor trap
- support
+Subject: [Qemu-riscv] [PATCH v1 18/27] target/riscv: Add Hypervisor trap
+ return support
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -78,151 +78,106 @@ X-List-Received-Date: Fri, 07 Jun 2019 21:58:46 -0000
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/cpu_bits.h   |  4 +--
- target/riscv/cpu_helper.c | 71 +++++++++++++++++++++++++++++++++------
- target/riscv/csr.c        |  4 +--
- 3 files changed, 65 insertions(+), 14 deletions(-)
+ target/riscv/op_helper.c | 66 ++++++++++++++++++++++++++++++++--------
+ 1 file changed, 54 insertions(+), 12 deletions(-)
 
-diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-index 28117bdd32..8966c1bff6 100644
---- a/target/riscv/cpu_bits.h
-+++ b/target/riscv/cpu_bits.h
-@@ -508,8 +508,8 @@
- #define RISCV_EXCP_STORE_AMO_ADDR_MIS      0x6
- #define RISCV_EXCP_STORE_AMO_ACCESS_FAULT  0x7
- #define RISCV_EXCP_U_ECALL                 0x8
--#define RISCV_EXCP_S_ECALL                 0x9
--#define RISCV_EXCP_H_ECALL                 0xa
-+#define RISCV_EXCP_HS_ECALL                0x9
-+#define RISCV_EXCP_VS_ECALL                0xa
- #define RISCV_EXCP_M_ECALL                 0xb
- #define RISCV_EXCP_INST_PAGE_FAULT         0xc /* since: priv-1.10.0 */
- #define RISCV_EXCP_LOAD_PAGE_FAULT         0xd /* since: priv-1.10.0 */
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 6d6fff83a3..d1f73396e4 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -605,6 +605,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+index e08bb8dd5a..60dcd73fc7 100644
+--- a/target/riscv/op_helper.c
++++ b/target/riscv/op_helper.c
+@@ -73,6 +73,8 @@ target_ulong helper_csrrc(CPURISCVState *env, target_ulong src,
  
-     RISCVCPU *cpu = RISCV_CPU(cs);
-     CPURISCVState *env = &cpu->env;
-+    target_ulong s;
- 
-     /* cs->exception is 32-bits wide unlike mcause which is XLEN-bits wide
-      * so we mask off the MSB and separate into trap type and cause.
-@@ -614,13 +615,6 @@ void riscv_cpu_do_interrupt(CPUState *cs)
-     target_ulong deleg = async ? env->mideleg : env->medeleg;
-     target_ulong tval = 0;
- 
--    static const int ecall_cause_map[] = {
--        [PRV_U] = RISCV_EXCP_U_ECALL,
--        [PRV_S] = RISCV_EXCP_S_ECALL,
--        [PRV_H] = RISCV_EXCP_H_ECALL,
--        [PRV_M] = RISCV_EXCP_M_ECALL
--    };
--
-     if (!async) {
-         /* set tval to badaddr for traps with address information */
-         switch (cause) {
-@@ -641,7 +635,16 @@ void riscv_cpu_do_interrupt(CPUState *cs)
-         /* ecall is dispatched as one cause so translate based on mode */
-         if (cause == RISCV_EXCP_U_ECALL) {
-             assert(env->priv <= 3);
--            cause = ecall_cause_map[env->priv];
+ target_ulong helper_sret(CPURISCVState *env, target_ulong cpu_pc_deb)
+ {
++    target_ulong prev_priv, prev_virt, mstatus;
 +
-+            if (env->priv == PRV_M) {
-+                cause = RISCV_EXCP_M_ECALL;
-+            } else if (env->priv == PRV_S && riscv_cpu_virt_enabled(env)) {
-+                cause = RISCV_EXCP_VS_ECALL;
-+            } else if (env->priv == PRV_S && !riscv_cpu_virt_enabled(env)) {
-+                cause = RISCV_EXCP_HS_ECALL;
-+            } else if (env->priv == PRV_U) {
-+                cause = RISCV_EXCP_U_ECALL;
-+            }
-         }
+     if (!(env->priv >= PRV_S)) {
+         riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
+     }
+@@ -87,16 +89,46 @@ target_ulong helper_sret(CPURISCVState *env, target_ulong cpu_pc_deb)
+         riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
      }
  
-@@ -651,7 +654,42 @@ void riscv_cpu_do_interrupt(CPUState *cs)
-     if (env->priv <= PRV_S &&
-             cause < TARGET_LONG_BITS && ((deleg >> cause) & 1)) {
-         /* handle the trap in S-mode */
--        target_ulong s = env->mstatus;
-+        if (riscv_has_ext(env, RVH)) {
-+            target_ulong hdeleg = async ? env->hideleg : env->hedeleg;
+-    target_ulong mstatus = env->mstatus;
+-    target_ulong prev_priv = get_field(mstatus, MSTATUS_SPP);
+-    mstatus = set_field(mstatus,
+-        env->priv_ver >= PRIV_VERSION_1_10_0 ?
+-        MSTATUS_SIE : MSTATUS_UIE << prev_priv,
+-        get_field(mstatus, MSTATUS_SPIE));
+-    mstatus = set_field(mstatus, MSTATUS_SPIE, 0);
+-    mstatus = set_field(mstatus, MSTATUS_SPP, PRV_U);
++    mstatus = env->mstatus;
 +
-+            if (riscv_cpu_virt_enabled(env) && ((hdeleg >> cause) & 1) &&
-+                !riscv_cpu_force_hs_excep_enabled(env)) {
-+                /* Trap to VS mode */
-+            } else if (riscv_cpu_virt_enabled(env)) {
-+                /* Trap into HS mode, from virt */
-+                riscv_cpu_swap_background_regs(env);
-+                env->hstatus = set_field(env->hstatus, HSTATUS_SP2V,
-+                                         get_field(env->hstatus, HSTATUS_SPV));
-+                env->hstatus = set_field(env->hstatus, HSTATUS_SP2P,
-+                                         get_field(env->mstatus, SSTATUS_SPP));
-+                env->hstatus = set_field(env->hstatus, HSTATUS_SPV,
-+                                         riscv_cpu_virt_enabled(env));
++    if (riscv_has_ext(env, RVH) && !riscv_cpu_virt_enabled(env)) {
++        /* We support Hypervisor extensions and virtulisation is disabled */
++        target_ulong hstatus = env->hstatus;
 +
-+                if (riscv_cpu_force_hs_excep_enabled(env)) {
-+                    env->hstatus = set_field(env->hstatus, HSTATUS_STL, 1);
-+                } else {
-+                    env->hstatus = set_field(env->hstatus, HSTATUS_STL, 0);
-+                }
++        prev_priv = get_field(mstatus, MSTATUS_SPP);
++        prev_virt = get_field(hstatus, HSTATUS_SPV);
 +
-+                riscv_cpu_set_virt_enabled(env, VIRT_OFF);
-+                riscv_cpu_set_force_hs_excep(env, CLEAR_HS_EXCEP);
-+            } else {
-+                /* Trap into HS mode */
-+                env->hstatus = set_field(env->hstatus, HSTATUS_SP2V,
-+                                         get_field(env->hstatus, HSTATUS_SPV));
-+                env->hstatus = set_field(env->hstatus, HSTATUS_SP2P,
-+                                         get_field(env->mstatus, SSTATUS_SPP));
-+                env->hstatus = set_field(env->hstatus, HSTATUS_SPV,
-+                                         riscv_cpu_virt_enabled(env));
-+            }
++        hstatus = set_field(hstatus, HSTATUS_SPV,
++                                 get_field(hstatus, HSTATUS_SP2V));
++        mstatus = set_field(mstatus, MSTATUS_SPP,
++                            get_field(hstatus, HSTATUS_SP2P));
++        hstatus = set_field(hstatus, HSTATUS_SP2V, 0);
++        hstatus = set_field(hstatus, HSTATUS_SP2P, 0);
++        mstatus = set_field(mstatus, SSTATUS_SIE,
++                            get_field(mstatus, SSTATUS_SPIE));
++        mstatus = set_field(mstatus, SSTATUS_SPIE, 1);
++
++        env->mstatus = mstatus;
++        env->hstatus = hstatus;
++
++        if (prev_virt == VIRT_ON) {
++            riscv_cpu_swap_background_regs(env);
 +        }
 +
-+        s = env->mstatus;
-         s = set_field(s, MSTATUS_SPIE, env->priv_ver >= PRIV_VERSION_1_10_0 ?
-             get_field(s, MSTATUS_SIE) : get_field(s, MSTATUS_UIE << env->priv));
-         s = set_field(s, MSTATUS_SPP, env->priv);
-@@ -665,7 +703,20 @@ void riscv_cpu_do_interrupt(CPUState *cs)
-         riscv_cpu_set_mode(env, PRV_S);
-     } else {
-         /* handle the trap in M-mode */
--        target_ulong s = env->mstatus;
-+        if (riscv_has_ext(env, RVH)) {
-+            if (riscv_cpu_virt_enabled(env)) {
-+                riscv_cpu_swap_background_regs(env);
-+            }
-+            env->mstatus = set_field(env->mstatus, MSTATUS_MPV,
-+                                     riscv_cpu_virt_enabled(env));
-+            env->mstatus = set_field(env->mstatus, MSTATUS_MTL,
-+                                     riscv_cpu_force_hs_excep_enabled(env));
++        riscv_cpu_set_virt_enabled(env, prev_virt);
++    } else {
++        prev_priv = get_field(mstatus, MSTATUS_SPP);
 +
-+            /* Trapping to M mode, virt is disabled */
-+            riscv_cpu_set_virt_enabled(env, VIRT_OFF);
++        mstatus = set_field(mstatus,
++            env->priv_ver >= PRIV_VERSION_1_10_0 ?
++            MSTATUS_SIE : MSTATUS_UIE << prev_priv,
++            get_field(mstatus, MSTATUS_SPIE));
++        mstatus = set_field(mstatus, MSTATUS_SPIE, 0);
++        mstatus = set_field(mstatus, MSTATUS_SPP, PRV_U);
++        env->mstatus = mstatus;
++    }
++
+     riscv_cpu_set_mode(env, prev_priv);
+-    env->mstatus = mstatus;
+ 
+     return retpc;
+ }
+@@ -114,14 +146,24 @@ target_ulong helper_mret(CPURISCVState *env, target_ulong cpu_pc_deb)
+ 
+     target_ulong mstatus = env->mstatus;
+     target_ulong prev_priv = get_field(mstatus, MSTATUS_MPP);
++    target_ulong prev_virt = get_field(mstatus, MSTATUS_MPV);
+     mstatus = set_field(mstatus,
+         env->priv_ver >= PRIV_VERSION_1_10_0 ?
+         MSTATUS_MIE : MSTATUS_UIE << prev_priv,
+         get_field(mstatus, MSTATUS_MPIE));
+-    mstatus = set_field(mstatus, MSTATUS_MPIE, 0);
+-    mstatus = set_field(mstatus, MSTATUS_MPP, PRV_U);
+-    riscv_cpu_set_mode(env, prev_priv);
++    mstatus = set_field(mstatus, MSTATUS_MPIE, 1);
++    mstatus = set_field(mstatus, MSTATUS_MPP, 0);
++    mstatus = set_field(mstatus, MSTATUS_MPV, 0);
+     env->mstatus = mstatus;
++    riscv_cpu_set_mode(env, prev_priv);
++
++    if (riscv_has_ext(env, RVH)) {
++        if (prev_virt == VIRT_ON) {
++            riscv_cpu_swap_background_regs(env);
 +        }
 +
-+        s = env->mstatus;
-         s = set_field(s, MSTATUS_MPIE, env->priv_ver >= PRIV_VERSION_1_10_0 ?
-             get_field(s, MSTATUS_MIE) : get_field(s, MSTATUS_UIE << env->priv));
-         s = set_field(s, MSTATUS_MPP, env->priv);
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index c55eea44ec..9a1e29f39c 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -239,8 +239,8 @@ static const target_ulong delegable_excps =
-     (1ULL << (RISCV_EXCP_STORE_AMO_ADDR_MIS)) |
-     (1ULL << (RISCV_EXCP_STORE_AMO_ACCESS_FAULT)) |
-     (1ULL << (RISCV_EXCP_U_ECALL)) |
--    (1ULL << (RISCV_EXCP_S_ECALL)) |
--    (1ULL << (RISCV_EXCP_H_ECALL)) |
-+    (1ULL << (RISCV_EXCP_VS_ECALL)) |
-+    (1ULL << (RISCV_EXCP_HS_ECALL)) |
-     (1ULL << (RISCV_EXCP_M_ECALL)) |
-     (1ULL << (RISCV_EXCP_INST_PAGE_FAULT)) |
-     (1ULL << (RISCV_EXCP_LOAD_PAGE_FAULT)) |
++        riscv_cpu_set_virt_enabled(env, prev_virt);
++    }
+ 
+     return retpc;
+ }
 -- 
 2.21.0
 
