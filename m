@@ -1,58 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hZMt8-00058u-Vm
-	for mharc-qemu-riscv@gnu.org; Fri, 07 Jun 2019 17:59:07 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:48236)
+	id 1hZMtA-00059G-LH
+	for mharc-qemu-riscv@gnu.org; Fri, 07 Jun 2019 17:59:08 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:48331)
  by lists.gnu.org with esmtp (Exim 4.86_2)
  (envelope-from <prvs=0547f94d1=alistair.francis@wdc.com>)
- id 1hZMsr-00051Y-Ef
- for qemu-riscv@nongnu.org; Fri, 07 Jun 2019 17:58:51 -0400
+ id 1hZMsv-00053B-Jy
+ for qemu-riscv@nongnu.org; Fri, 07 Jun 2019 17:58:55 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
  (envelope-from <prvs=0547f94d1=alistair.francis@wdc.com>)
- id 1hZMsp-0002SO-CL
- for qemu-riscv@nongnu.org; Fri, 07 Jun 2019 17:58:48 -0400
+ id 1hZMsu-0002WJ-Al
+ for qemu-riscv@nongnu.org; Fri, 07 Jun 2019 17:58:53 -0400
 Received: from esa4.hgst.iphmx.com ([216.71.154.42]:5597)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <prvs=0547f94d1=alistair.francis@wdc.com>)
- id 1hZMsb-0002G5-4s; Fri, 07 Jun 2019 17:58:39 -0400
+ id 1hZMsm-0002G5-US; Fri, 07 Jun 2019 17:58:46 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1559944713; x=1591480713;
+ t=1559944725; x=1591480725;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=g/Uwz4lDVLWeFKaIssKUkLrYCwbb8YpdK08EwfG+Gdw=;
- b=XswQsVbue+rPDOu7WGxTqMapOv7m7wPCliLhCbLDgTWKDBOjf+7zWwfr
- JzNDKkYJ/Dt+HHB50aAoaSOGEETxuU1gYjR4yYAc6vHIcMkjO87V9TOWJ
- aHMEZNa0E38LT1Au0RUG2HCXwC9T6llPSapXL5NQ9n5FyXPmlb1029XW/
- xv/kHZRYGsmoWg2HBTXa0/MNfh6F8yEqF5RV1ZvegNEzJPvuF1MSzayN3
- HUYMFh77UzxeXZei6HcAkApbfAfptQ6OLhCoS08LuPAjnRlae0tGHuwar
- kr28NLZRz35/JPnfU8Ok+AoymnA9Pra2kwkQ4X3/30kOJA/re/mbMNDEL Q==;
-X-IronPort-AV: E=Sophos;i="5.63,564,1557158400"; d="scan'208";a="110059639"
-Received: from h199-255-45-15.hgst.com (HELO uls-op-cesaep02.wdc.com)
- ([199.255.45.15])
- by ob1.hgst.iphmx.com with ESMTP; 08 Jun 2019 05:58:30 +0800
-IronPort-SDR: eHVB5bLV7k5DMHDbI56eSzYyBneBU0fEesIZS1cBL0DgADTMQtOhDwEa/Zn3aYHDPTwAeW61j2
- ebXapWJP87+VJBLU+xVVoD5ZvJTMcNGB7WI+WnIoaWNnAee7lneeUeZtOMJHtuFH65ZHOxyfw5
- 62i2dWKc0wJrS9KFDmf0xXT5BkEYtKCrERfhruYOeSc4y6AzFRYVYfc+EbyzFgSWSPQKK3qNr6
- rYRgTiWM1rSO10iVpCwjSn9J8NdklluWan40Ts57YHwlNixlI53WC19GaccfDGm4Dn/E+Vs1P+
- i8pMy3U6f16XYJysW32QzPF2
-Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
- by uls-op-cesaep02.wdc.com with ESMTP; 07 Jun 2019 14:35:47 -0700
-IronPort-SDR: 0jtIU4J3x1e0SdRB6DAcOj92+ICDAAoH3eysqBXWqGsLOrvIir7/nleMujJ2PAbEhZsCtG034k
- UenJ0aUq0LjYu4139SZbsXCmfYUXdmIWbotLL2NQ3t8okrNsyYD/zp/GCPe2vK46hxnZJQ+4gj
- k5AyFPse51OMtMsgXfMOqIf9sVUfq+smxK86JXIZHl1YsGpmt0izXVN09D0umIcoUtOpmbXXWo
- tsCbYfiJWZCS0E7OZicbp74r1Fxx0MgBbymQJp8ljotVWsKslLUAL3wiYwDIPoQih16RC8nDxh
- rsk=
+ bh=uDlmyEl8/iyH+a7PIwdMvHr7+FN/0ar1iq3TrAcccO4=;
+ b=Kg9m4WgKKiYZxLYWMevtRSXXHzs7JYYHlWqp6LLPKKgIHLZw2gJzyBrH
+ vhO5BC/nmY9/2iKik6ebDiARZlVp3jx5MG0tuaEBlzSgpr38xPLslCDGl
+ MU2+D2/WQllEgEjqrJVo+xpjeWyvx3xTEqd1QC1FEMrzROr26cs5n7tOr
+ skrCdfOFM0T8ikQCUb//+g9RyvAolFfhFlLGpsB0ueZJiEzfyXYhK3v1E
+ bOuiH0t22wWaOsjN82mIwT7mPaHVsqy5AcTqnwtLufW579HkyLAGJMXzQ
+ uXzDN2LLnWBS7jpHPagSzsfTHRWPu7Ep9TyqXkVHY7O05mp9arB++Xp+r A==;
+X-IronPort-AV: E=Sophos;i="5.63,564,1557158400"; d="scan'208";a="110059650"
+Received: from h199-255-45-14.hgst.com (HELO uls-op-cesaep01.wdc.com)
+ ([199.255.45.14])
+ by ob1.hgst.iphmx.com with ESMTP; 08 Jun 2019 05:58:39 +0800
+IronPort-SDR: ZgAqnItII89zxnu94ZEh4GZCO8GxZDNMu8i54sUaaMiFH574c7nOyje6FrwxX6syVGkJj48CJB
+ PcffX2bobHzkHvE2b23jveM6DQYhfduAw/OTZohJp2Dart9O0WUJJvNrTkFyfdnhESQtwR3JPp
+ qR8gTfJ612bsxrjJVH1mCXpWWa0lgIwlXAyqwvi5nRX2wBD7lnrP4EL/0iwGNzk39rYKNAsrXV
+ if+m3bd4yTM+8fdBHdDgcOAHa+JwzGsdxcKjLKTBdtyJNmqkwtSpzZbbxg6IgE0oQDgbi8PGna
+ rH3gRL6McP+WWvIoItSfdWye
+Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
+ by uls-op-cesaep01.wdc.com with ESMTP; 07 Jun 2019 14:33:31 -0700
+IronPort-SDR: 9ojSvJkkTuW2yyR2ktj+CMPmT3xUGvoWl3WnoCR92Izxnu2vnla4M24AqgiQshUqe6SMTEvVBv
+ WwuEaCKf26ym49dfbUcSVT8UAcfnNEaeL7iEroclnn9UOAzfFgEI5W3CWgiQF4DrkjEzntpM0B
+ OUrEy1zC1D2ZTymRX2UNQW9bcVvZcbYu16tbHkGBhwMaHeRpV34L7ijqYjjSF+LLBEFdljL3hw
+ uUmhMQ0ygqnriG0vRivyY1p5QUZXKppc1WghBsYm1eKQjRLI5IntjCl15FtaSoMTBdUw5gamxy
+ Ep4=
 Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
  risc6-mainframe.int.fusionio.com) ([10.196.157.140])
- by uls-op-cesaip02.wdc.com with ESMTP; 07 Jun 2019 14:58:30 -0700
+ by uls-op-cesaip01.wdc.com with ESMTP; 07 Jun 2019 14:58:39 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: palmer@sifive.com,
 	alistair.francis@wdc.com,
 	alistair23@gmail.com
-Date: Fri,  7 Jun 2019 14:56:20 -0700
-Message-Id: <7c96977698624556f5cfe6cc0e429cc465c7e5f6.1559944445.git.alistair.francis@wdc.com>
+Date: Fri,  7 Jun 2019 14:56:29 -0700
+Message-Id: <a670be188dcc9e07b189280689588f9eb5e5f457.1559944445.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <cover.1559944445.git.alistair.francis@wdc.com>
 References: <cover.1559944445.git.alistair.francis@wdc.com>
@@ -61,7 +61,8 @@ Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
 X-Received-From: 216.71.154.42
-Subject: [Qemu-riscv] [PATCH v1 19/27] target/riscv: Add hfence instructions
+Subject: [Qemu-riscv] [PATCH v1 22/27] target/riscv: Respect MPRV and SPRV
+ for floating point ops
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -73,101 +74,43 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Jun 2019 21:58:51 -0000
+X-List-Received-Date: Fri, 07 Jun 2019 21:58:56 -0000
+
+Respect the contents of MSTATUS.MPRV and HSTATUS.SPRV when performing
+floating point operations when V=0.
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/insn32.decode                    | 23 ++++++-----
- .../riscv/insn_trans/trans_privileged.inc.c   | 40 +++++++++++++++++++
- 2 files changed, 54 insertions(+), 9 deletions(-)
+ target/riscv/translate.c | 16 +++++++++++++++-
+ 1 file changed, 15 insertions(+), 1 deletion(-)
 
-diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index 77f794ed70..5bbf6add9c 100644
---- a/target/riscv/insn32.decode
-+++ b/target/riscv/insn32.decode
-@@ -63,20 +63,25 @@
- @r2_rm   .......   ..... ..... ... ..... ....... %rs1 %rm %rd
- @r2      .......   ..... ..... ... ..... ....... %rs1 %rd
- 
-+@hfence_gvma ....... ..... .....   ... ..... ....... %rs2 %rs1
-+@hfence_bvma ....... ..... .....   ... ..... ....... %rs2 %rs1
-+
- @sfence_vma ....... ..... .....   ... ..... ....... %rs2 %rs1
- @sfence_vm  ....... ..... .....   ... ..... ....... %rs1
- 
- 
- # *** Privileged Instructions ***
--ecall      000000000000     00000 000 00000 1110011
--ebreak     000000000001     00000 000 00000 1110011
--uret       0000000    00010 00000 000 00000 1110011
--sret       0001000    00010 00000 000 00000 1110011
--hret       0010000    00010 00000 000 00000 1110011
--mret       0011000    00010 00000 000 00000 1110011
--wfi        0001000    00101 00000 000 00000 1110011
--sfence_vma 0001001    ..... ..... 000 00000 1110011 @sfence_vma
--sfence_vm  0001000    00100 ..... 000 00000 1110011 @sfence_vm
-+ecall       000000000000     00000 000 00000 1110011
-+ebreak      000000000001     00000 000 00000 1110011
-+uret        0000000    00010 00000 000 00000 1110011
-+sret        0001000    00010 00000 000 00000 1110011
-+hret        0010000    00010 00000 000 00000 1110011
-+mret        0011000    00010 00000 000 00000 1110011
-+wfi         0001000    00101 00000 000 00000 1110011
-+hfence_gvma 1010001    ..... ..... 000 00000 1110011 @hfence_gvma
-+hfence_bvma 0010001    ..... ..... 000 00000 1110011 @hfence_bvma
-+sfence_vma  0001001    ..... ..... 000 00000 1110011 @sfence_vma
-+sfence_vm   0001000    00100 ..... 000 00000 1110011 @sfence_vm
- 
- # *** RV32I Base Instruction Set ***
- lui      ....................       ..... 0110111 @u
-diff --git a/target/riscv/insn_trans/trans_privileged.inc.c b/target/riscv/insn_trans/trans_privileged.inc.c
-index 664d6ba3f2..ac953ad30d 100644
---- a/target/riscv/insn_trans/trans_privileged.inc.c
-+++ b/target/riscv/insn_trans/trans_privileged.inc.c
-@@ -108,3 +108,43 @@ static bool trans_sfence_vm(DisasContext *ctx, arg_sfence_vm *a)
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index 1c3cd1c94b..d4fa7d056d 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -765,7 +765,21 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
+     ctx->mstatus_fs = ctx->base.tb->flags & TB_FLAGS_MSTATUS_FS;
+     ctx->priv_ver = env->priv_ver;
+ #if !defined(CONFIG_USER_ONLY)
+-    ctx->virt_enabled = riscv_cpu_virt_enabled(env);
++    if (riscv_has_ext(env, RVH)) {
++        ctx->virt_enabled = riscv_cpu_virt_enabled(env);
++        if (env->priv_ver == PRV_M &&
++            get_field(env->mstatus, MSTATUS_MPRV) &&
++            get_field(env->mstatus, MSTATUS_MPV)) {
++            ctx->virt_enabled = true;
++        } else if (env->priv == PRV_S &&
++                   !riscv_cpu_virt_enabled(env) &&
++                   get_field(env->hstatus, HSTATUS_SPRV) &&
++                   get_field(env->hstatus, HSTATUS_SPV)) {
++            ctx->virt_enabled = true;
++        }
++    } else {
++        ctx->virt_enabled = false;
++    }
+ #else
+     ctx->virt_enabled = false;
  #endif
-     return false;
- }
-+
-+static bool trans_hfence_gvma(DisasContext *ctx, arg_sfence_vma *a)
-+{
-+#ifndef CONFIG_USER_ONLY
-+    if (ctx->priv_ver == PRIV_VERSION_1_10_0 &&
-+        has_ext(ctx, RVH)) {
-+        /* Hpervisor extensions exist */
-+        /*
-+         * if (env->priv == PRV_M ||
-+         *   (env->priv == PRV_S &&
-+         *    !riscv_cpu_virt_enabled(env) &&
-+         *    get_field(ctx->mstatus_fs, MSTATUS_TVM))) {
-+         */
-+            gen_helper_tlb_flush(cpu_env);
-+            return true;
-+        /* } */
-+    }
-+#endif
-+    return false;
-+}
-+
-+static bool trans_hfence_bvma(DisasContext *ctx, arg_sfence_vma *a)
-+{
-+#ifndef CONFIG_USER_ONLY
-+    if (ctx->priv_ver == PRIV_VERSION_1_10_0 &&
-+        has_ext(ctx, RVH)) {
-+        /* Hpervisor extensions exist */
-+        /*
-+         * if (env->priv == PRV_M ||
-+         *   (env->priv == PRV_S &&
-+         *    !riscv_cpu_virt_enabled(env) &&
-+         *    get_field(ctx->mstatus_fs, MSTATUS_TVM))) {
-+         */
-+            gen_helper_tlb_flush(cpu_env);
-+            return true;
-+        /* } */
-+    }
-+#endif
-+    return false;
-+}
 -- 
 2.21.0
 
