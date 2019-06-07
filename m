@@ -1,61 +1,68 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hZ4yF-0003dn-Iy
-	for mharc-qemu-riscv@gnu.org; Thu, 06 Jun 2019 22:51:11 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:50408)
+	id 1hZMrz-0004Cn-9U
+	for mharc-qemu-riscv@gnu.org; Fri, 07 Jun 2019 17:57:55 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47685)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <richard.henderson@linaro.org>) id 1hZ4yB-0003dO-Rh
- for qemu-riscv@nongnu.org; Thu, 06 Jun 2019 22:51:10 -0400
+ (envelope-from <prvs=0547f94d1=alistair.francis@wdc.com>)
+ id 1hZMru-00042S-RL
+ for qemu-riscv@nongnu.org; Fri, 07 Jun 2019 17:57:51 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <richard.henderson@linaro.org>) id 1hZ4yA-00027G-LY
- for qemu-riscv@nongnu.org; Thu, 06 Jun 2019 22:51:07 -0400
-Received: from mail-wr1-x42b.google.com ([2a00:1450:4864:20::42b]:33701)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
- id 1hZ4y9-00021Q-2F
- for qemu-riscv@nongnu.org; Thu, 06 Jun 2019 22:51:06 -0400
-Received: by mail-wr1-x42b.google.com with SMTP id n9so591537wru.0
- for <qemu-riscv@nongnu.org>; Thu, 06 Jun 2019 19:51:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=iR9Qzpwk7DjB6XO2UJkWE7zhNl2FqiN9AhAoa0DSBIY=;
- b=xKDGJQqw8uCeMlNs1IbX/lnPgWSgB84U7vHPWxlpZarjatI25isaklL0Ys2TtLwWm1
- ghNlRSVSf1fThSiQS3iQ+u8jrMYO5QH1b3EptNJch6OmEl2Eb5jzr9S9NlyH7O4OSAl1
- u0+3iXbqMx8LgPNafpaYvybA/smGQ9C5/2PxJXLoSzAQ0tb7Lv7Zo+HLx7lEKd+6x6sa
- 0R6q1JQqNEHUII3pAu3h+kriNAchcnN7VqW0jcXqrfP0M+7Uusz3/dXfqkELvn6FXiSj
- NUzYNWBkYMhk+qt6IJ04XGDT63v+MGEkLRzA+Eqygj5Rzn8EcgGkJX0VKX61o2EuGaPm
- LDFQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=iR9Qzpwk7DjB6XO2UJkWE7zhNl2FqiN9AhAoa0DSBIY=;
- b=tPKtnZJugIe5olUY+X13LjcMR70uX/7X2vIvfiw9UYHGEUFLf+yIVldxnndPc/s1Bn
- oa9lX1QGJ2+v+gvl7JUHuk23y7TYerdLtFmeZ8KIJAu3HspszU8uYFKDT0y5oATzmI/I
- uSghqQ5wVNNbf2pb+3XmnjQ4uCUM+hioSKDLWXsvNIOifHqiGhNYYvOO0pjaKPLaaLeA
- 3MvSlCWy2XWoKRhzf05OeN91i0uhAY/f3JydbvyZKNvy3qJd7nCqIcfbSB3pzLrNkUtb
- PexKR8sFfpWGsb/pVmFSzW3iffz4hne/0OGCpRdpiQE8RZw9PSf003v1Lzagq+/OTk3k
- ro4w==
-X-Gm-Message-State: APjAAAWQT0v0aSKy58a9ekMr1tznyXSDOtp7yQIW5QuGx31F4SAzjpQH
- Ps74ZffecavomfR760S3ccx8A0x4VmhFuEin63nHZQ==
-X-Google-Smtp-Source: APXvYqxO9JGs6jSihPapMPEekjodV6ZXk/uOTtsUDh2KFG39Ou4iaql/Q3pJUGJZ/wRc5Ab9kA23pdeSRbMkq7OttWU=
-X-Received: by 2002:adf:9062:: with SMTP id h89mr30956137wrh.20.1559875860223; 
- Thu, 06 Jun 2019 19:51:00 -0700 (PDT)
+ (envelope-from <prvs=0547f94d1=alistair.francis@wdc.com>)
+ id 1hZMrt-0001jN-GM
+ for qemu-riscv@nongnu.org; Fri, 07 Jun 2019 17:57:50 -0400
+Received: from esa3.hgst.iphmx.com ([216.71.153.141]:8436)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <prvs=0547f94d1=alistair.francis@wdc.com>)
+ id 1hZMrp-0001Ty-ES; Fri, 07 Jun 2019 17:57:46 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1559944666; x=1591480666;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=Ao9gCKvSoFwU8QM28M/2smcm/7HnPQ04kDU0bSYTT4c=;
+ b=Y3U9ukP2mCWUjZiHZPafZugfGp63ExirFKwN7XryEiHjQLuOh/snYfAK
+ LFwtnOrxDUft4Y8oDQzp3GpfuKfPug6TMNtEsj2HVfrkr+fqsDzySLY1i
+ PNMu+/x3i/lweqd0HspKmrs+6Z3ytMAclAcO8toe7/UnffUJMveYoUdIL
+ 15Fuz9kJDbD+VxXXyPfjtgmxO9u5jWRps/lb+UYbYRjkxcvLL96LWV5Kp
+ oEHhGT3ZWamMsjVbwZBIToj0X9hzeqzMyrWmQn8mpM/Hrsp/z5juYpMq0
+ N2DKqYaPGSGJQcb2CU0ktZt2JIhueu8ihhGo3cWNs4imLR9cmGEjfFzGE A==;
+X-IronPort-AV: E=Sophos;i="5.63,564,1557158400"; d="scan'208";a="115014074"
+Received: from h199-255-45-15.hgst.com (HELO uls-op-cesaep02.wdc.com)
+ ([199.255.45.15])
+ by ob1.hgst.iphmx.com with ESMTP; 08 Jun 2019 05:57:35 +0800
+IronPort-SDR: wNDbZ17nImoEN6JiXEAFRCEp1mLryFaW5Rcvu1F0u7RraM/g5mUXx1VbT5kEDtYbClukBsZlYM
+ HI7HuAlMGfgFIkiZtBpAAN/x6Roon3EeX8TSZ2XwVe8YrfUTEdU5ylTOFLw6q8TpWphzwQiypp
+ +FziAFTDc7Gg/1oALn5KCsl9IlhSaMiFf2YWgOqQUo0kX2P5pG+dmPHg/eibPzFmXnWG8SZH+B
+ G0qZ130mwgYJHXyQhIq3CuEf8QaC3KDOdpnm6FjioIvsgrJNihDg8dD7/mtdeeWIPfIl+9EW3A
+ f5Smuwir3JnXVvEh50NXasoO
+Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
+ by uls-op-cesaep02.wdc.com with ESMTP; 07 Jun 2019 14:34:50 -0700
+IronPort-SDR: L3+iLm/r5o0XqAWrLkYvg+PLgrcIsCDSYTOmu69AZ03dbRbjwBk4M3Xmg2nKTatU0owbcR4C7p
+ Lr8loeVLldljElXEpLz9Az/6GJJ7C2hcHXszxF7WKkIvuI4qCiVoTHQbKn8lacSI+drKMW+PKV
+ rg6i6KitewcptUgHu4tCvhRw9TFJ35IfWodcAvK45VMeJVTpTL/Ie+txDaMOOwURu2XA2kUSpb
+ JutCMIKlXAl+fnFlJj1K4Bu6jvGp65rb4JqaubjIzvlyMWOZL7VV3KSW2XOIn10JzDo6E6l1v+
+ ezA=
+Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
+ risc6-mainframe.int.fusionio.com) ([10.196.157.140])
+ by uls-op-cesaip02.wdc.com with ESMTP; 07 Jun 2019 14:57:34 -0700
+From: Alistair Francis <alistair.francis@wdc.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: palmer@sifive.com,
+	alistair.francis@wdc.com,
+	alistair23@gmail.com
+Date: Fri,  7 Jun 2019 14:55:24 -0700
+Message-Id: <76631304f89487485c4b745f601796f1e1f70e41.1559944445.git.alistair.francis@wdc.com>
+X-Mailer: git-send-email 2.21.0
+In-Reply-To: <cover.1559944445.git.alistair.francis@wdc.com>
+References: <cover.1559944445.git.alistair.francis@wdc.com>
 MIME-Version: 1.0
-References: <B1A3E8F6-F8C2-4EDB-A31B-EBB4CA636CA3@decred.org>
- <mhng-6493b48f-57c1-47cd-9157-50cb533f91df@palmer-si-x1e>
-In-Reply-To: <mhng-6493b48f-57c1-47cd-9157-50cb533f91df@palmer-si-x1e>
-From: Richard Henderson <richard.henderson@linaro.org>
-Date: Thu, 6 Jun 2019 21:50:57 -0500
-Message-ID: <CAFXwXrkEVJgPEZtvzyekJEZDk90XvntHkdfUe0s37RZ-ir1MKw@mail.gmail.com>
-To: Palmer Dabbelt <palmer@sifive.com>
-Cc: marco@decred.org, "open list:RISC-V" <qemu-riscv@nongnu.org>,
- qemu-devel@nongnu.org
-Content-Type: multipart/alternative; boundary="0000000000008b0057058ab2e690"
+Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::42b
-Subject: Re: [Qemu-riscv] [Qemu-devel] Fwd: [joel@sing.id.au: atomic
- failures on qemu-system-riscv64]
+X-Received-From: 216.71.153.141
+Subject: [Qemu-riscv] [PATCH v1 02/27] target/riscv: Add the Hypervisor
+ extension
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -67,75 +74,26 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Jun 2019 02:51:10 -0000
+X-List-Received-Date: Fri, 07 Jun 2019 21:57:52 -0000
 
---0000000000008b0057058ab2e690
-Content-Type: text/plain; charset="UTF-8"
+Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+---
+ target/riscv/cpu.h | 1 +
+ 1 file changed, 1 insertion(+)
 
->
-> Also, unless I'm misunderstanding something our implementation of LR/SC is
->
-pretty broken.  We're just using a CAS to check if the value changed, which
-> suffers from the ABA problem that LR/SC is there to fix in the first
-> place.  I
-> might be missing something here, though, as it looks like MIPS is doing
-> essentially the same thing.
->
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 8937bda918..3337d1aef3 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -81,6 +81,7 @@
+ #define RVC RV('C')
+ #define RVS RV('S')
+ #define RVU RV('U')
++#define RVH RV('H')
+ 
+ /* S extension denotes that Supervisor mode exists, however it is possible
+    to have a core that support S mode but does not have an MMU and there
+-- 
+2.21.0
 
-All of our load-lock/store-conditional implementations do the same.
-
-You are correct that we do not implement the exact correct semantics.
-Correct semantics, as far as I know, cannot be modeled without emulating
-everything in a serial context, including caches.
-
-We therefore make a considered choice to observe that while ll/sc can be
-used to do all kinds of wild and woolly things, no one actually does so.
-What people actually do is write portable code, using c/c++ atomic
-primitives. And that all of these can be done with cmpxchg, because that's
-what x86 has.
-
-Using that choice, we can provide multi-threaded smp emulation that,
-demonstrably, works.
-
->
-
-r~
-
->
-
---0000000000008b0057058ab2e690
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"auto"><div><div class=3D"gmail_quote"><blockquote class=3D"gmai=
-l_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left=
-:1ex">Also, unless I&#39;m misunderstanding something our implementation of=
- LR/SC is<br></blockquote><blockquote class=3D"gmail_quote" style=3D"margin=
-:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">
-pretty broken.=C2=A0 We&#39;re just using a CAS to check if the value chang=
-ed, which<br>
-suffers from the ABA problem that LR/SC is there to fix in the first place.=
-=C2=A0 I<br>
-might be missing something here, though, as it looks like MIPS is doing<br>
-essentially the same thing.<br></blockquote></div></div><div dir=3D"auto"><=
-br></div><div dir=3D"auto">All of our load-lock/store-conditional implement=
-ations do the same.</div><div dir=3D"auto"><br></div><div dir=3D"auto">You =
-are correct that we do not implement the exact correct semantics.=C2=A0 Cor=
-rect semantics, as far as I know, cannot be modeled without emulating every=
-thing in a serial context, including caches.</div><div dir=3D"auto"><br></d=
-iv><div dir=3D"auto">We therefore make a considered choice to observe that =
-while ll/sc can be used to do all kinds of wild and woolly things, no one a=
-ctually does so. What people actually do is write portable code, using c/c+=
-+ atomic primitives. And that all of these can be done with cmpxchg, becaus=
-e that&#39;s what x86 has.</div><div dir=3D"auto"><br></div><div dir=3D"aut=
-o">Using that choice, we can provide multi-threaded smp emulation that, dem=
-onstrably, works.</div><div dir=3D"auto"><div class=3D"gmail_quote"><blockq=
-uote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc =
-solid;padding-left:1ex"></blockquote></div></div><div dir=3D"auto"><br></di=
-v><div dir=3D"auto"><br></div><div dir=3D"auto">r~</div><div dir=3D"auto"><=
-div class=3D"gmail_quote"><blockquote class=3D"gmail_quote" style=3D"margin=
-:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">
-</blockquote></div></div></div>
-
---0000000000008b0057058ab2e690--
 
