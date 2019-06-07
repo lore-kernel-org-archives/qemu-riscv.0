@@ -1,58 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hZMtF-0005Ek-5P
-	for mharc-qemu-riscv@gnu.org; Fri, 07 Jun 2019 17:59:13 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:48403)
+	id 1hZMtG-0005H0-MP
+	for mharc-qemu-riscv@gnu.org; Fri, 07 Jun 2019 17:59:16 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:48502)
  by lists.gnu.org with esmtp (Exim 4.86_2)
  (envelope-from <prvs=0547f94d1=alistair.francis@wdc.com>)
- id 1hZMt1-00055Y-EF
- for qemu-riscv@nongnu.org; Fri, 07 Jun 2019 17:59:02 -0400
+ id 1hZMt8-00058L-K8
+ for qemu-riscv@nongnu.org; Fri, 07 Jun 2019 17:59:08 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
  (envelope-from <prvs=0547f94d1=alistair.francis@wdc.com>)
- id 1hZMsz-0002aT-H9
- for qemu-riscv@nongnu.org; Fri, 07 Jun 2019 17:58:58 -0400
-Received: from esa4.hgst.iphmx.com ([216.71.154.42]:5604)
+ id 1hZMt7-0002eO-Gb
+ for qemu-riscv@nongnu.org; Fri, 07 Jun 2019 17:59:06 -0400
+Received: from esa3.hgst.iphmx.com ([216.71.153.141]:8524)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <prvs=0547f94d1=alistair.francis@wdc.com>)
- id 1hZMss-0002I6-Oz; Fri, 07 Jun 2019 17:58:51 -0400
+ id 1hZMt0-0002Zm-0m; Fri, 07 Jun 2019 17:58:58 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1559944731; x=1591480731;
+ t=1559944738; x=1591480738;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=HGB259F/shx3Q5OuoB23BWIGW02KFgpdAoALdKANFts=;
- b=QVBE/SMxyYpCTtvNlUPtJpJVkpCNHeNSnro2CDKZEHC//A/BGbjPQ87w
- 1NFX+GL9+f5sS6u+exDDgWSSajoG6AjsDgFKThSUuVOTh9VF8yg4fAhh0
- 7WhcTF2iL0qqEN2VuN6Kuj334tHxcX73kIsluWDxdbu/SSMFLv/f4JOkT
- AlcdWuuSqkM+1nnWJt6LZjZAdN3JUcMaNDumWLWxqAX8QSLjTjt7bC7yN
- rONe+jmGyZZlBgNt8MIRvh28o5sB6MEJwzz8yBOIu5KyEnwtN0Xxxfzw1
- 3seYLZEREylJ76N0yNXxQ96bsP4s8VlIh8TwNMKN5aJwYHyFM0X7CEoRK A==;
-X-IronPort-AV: E=Sophos;i="5.63,564,1557158400"; d="scan'208";a="110059641"
-Received: from h199-255-45-15.hgst.com (HELO uls-op-cesaep02.wdc.com)
- ([199.255.45.15])
- by ob1.hgst.iphmx.com with ESMTP; 08 Jun 2019 05:58:33 +0800
-IronPort-SDR: bM4bSW2q5k30+uGKxhBvB8DdKROpy2wBYfg2AT4rZqqIBS0xieHN9Y8u1AlLPnDlFdH3VvNmWg
- eT7BiPNLyVdSJWf/G8I/ViMfXyWnjWqwbKdFz07uqRkSDl5hTu7YqLeDyKHCMg9sV+MKpjopRB
- 7Aeq6YoEaQKnBWw0p8gYrE/6sMzDnxOc1qE3qKF4BzVc/h/PI+FUbaYiaSAbploOmqSy69dWeT
- Suy1opLRmlxffp9d2RVKYe2B8AMDMo+bolIg5nHu6UlyLh08Ez76TOue6XjiCkrAkJ34ifL9bM
- w4k2MX/IzMIuioEZClsz6Iqk
-Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
- by uls-op-cesaep02.wdc.com with ESMTP; 07 Jun 2019 14:35:49 -0700
-IronPort-SDR: F089VMV7ip1BOub4O3fwSbnqFVfM7dBEWS3ElFxblB3Zm2u7DN9K6HZy6JO2+WveXsc1O/GNMQ
- mrX9vMXAZqIUVwx3Kj8aecnabNcNA6J8BqWAnOe/A/Ssc+OiXyejyFLyY3nG9AvAAyE72rTaxS
- n9rh590kG6JfTLGE5x/LNR/wiTue/LSfzhOJ2OFSPKUDfMfZeOZlX4+19O8oEk12b3/AAbj+eg
- dVoqSonO1arWCll/fkaXZXOt74j+ojW+JNhEKg+pUz+YU6Q1lXRkxEWfjtlJ8fP015JnqSxMQQ
- 358=
+ bh=J37KwDGOi5pY/Ftm28bdrS5FkijI2Jdfz8xPvHtNcKY=;
+ b=cDkiEiecZkM1sQ24rknKJYNMZlb90bIFmZZZV+k2REiwpTaczFMlqieI
+ jCuRja6FWluW/c2C2tbcbvQw6wSpXQ6dtdDgQiajfywmiDgzKiNK9CRI9
+ divVjnxIOZWiHGv+hkyGpgiYWUxZ2Vm1JQbFtrnE5voON75nXO4QusYX+
+ AHfYDsDCaguk+q9riRnGlm+J+t7mp0xb5YNrb/q7SAkIN6/xXzk+OA/Wl
+ Q1+6r9tkdhSl1nQnZITNFOvPZ55oA1am3hxSiiVMk/hEvHI5VpMVH3Z6D
+ WnYa2zhYOmjwrIaKJ57GTgPlAx/gwIqVB/UPaFLPbIceAiV2sfTq4i/Cd A==;
+X-IronPort-AV: E=Sophos;i="5.63,564,1557158400"; d="scan'208";a="115014142"
+Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
+ ([199.255.45.14])
+ by ob1.hgst.iphmx.com with ESMTP; 08 Jun 2019 05:58:57 +0800
+IronPort-SDR: 9YLZCnyrLaDN25VkKH9zXakSBWTMyhXtzVt3dQBwZQ5MsyzDiyJCARu53zUgn0qFh90qXk5FtD
+ c3AOyYInAVgbJwaY0+xW2Byk1fdId92ffsETmF5ekBHvDr/Oc3n3KDY5LIcalYr3VqUxG8OyEj
+ ame2WNimVeSHk1gFFvVY3FKonNlthAtxLj0EdCakxKo3gzDQEOQy+fb0nU9XeKldiVV86Qbo5v
+ ZWs7DC8lnfyZRKr51tV1OaoyTyNfOenF1i06dkC6sJZB7kotgkIXvjSe8RkCn7w5X/HIMrxsuY
+ q/Fz2gvWsm7WfwbL3x3apgJr
+Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
+ by uls-op-cesaep01.wdc.com with ESMTP; 07 Jun 2019 14:33:49 -0700
+IronPort-SDR: plml2cvWT6z3yKyoMu2b4rUTvzu/vPVVMTIf1LRZmbSeKM2Il4GfH0wv9uWI/8VBl9wVNPtY3t
+ ji+p9a5eByZEGPwtvwndoeOGYJLslceRA0v1q9fQlpn/4TI2ha9eh9T42dlgvFJro6N/vLEtva
+ bkLiqHay8oHEB/Nrsle4uEMIjwJMtrdatJhEjMRtmNGSVjlTHIM0/mqHMYehmU7apRB5YNGrIa
+ cpg+hlPuO7PSXnR+Opf5jeHpQzEKRQvzFY3SzHNK18JdFJbxga4Bt988POzThyzhX8EJ09ciDE
+ z+k=
 Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
  risc6-mainframe.int.fusionio.com) ([10.196.157.140])
- by uls-op-cesaip02.wdc.com with ESMTP; 07 Jun 2019 14:58:33 -0700
+ by uls-op-cesaip01.wdc.com with ESMTP; 07 Jun 2019 14:58:56 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: palmer@sifive.com,
 	alistair.francis@wdc.com,
 	alistair23@gmail.com
-Date: Fri,  7 Jun 2019 14:56:23 -0700
-Message-Id: <3e2a7994e94a981169809531bacac01003c1a156.1559944445.git.alistair.francis@wdc.com>
+Date: Fri,  7 Jun 2019 14:56:46 -0700
+Message-Id: <77ba193a34b10576a6f3e6fb9bb63d35b3617732.1559944445.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <cover.1559944445.git.alistair.francis@wdc.com>
 References: <cover.1559944445.git.alistair.francis@wdc.com>
@@ -60,9 +60,9 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 216.71.154.42
-Subject: [Qemu-riscv] [PATCH v1 20/27] target/riscv: Disable guest FP
- support based on backgrond status
+X-Received-From: 216.71.153.141
+Subject: [Qemu-riscv] [PATCH v1 27/27] target/riscv: Allow enabling the
+ Hypervisor extension
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -74,31 +74,48 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Jun 2019 21:59:03 -0000
-
-When the Hypervisor extension is in use we only enable floating point
-support when both status and bsstatus have enabled floating point
-support.
+X-List-Received-Date: Fri, 07 Jun 2019 21:59:08 -0000
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/cpu_helper.c | 3 +++
- 1 file changed, 3 insertions(+)
+ target/riscv/cpu.c | 4 ++++
+ target/riscv/cpu.h | 1 +
+ 2 files changed, 5 insertions(+)
 
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index d1f73396e4..b009049cc4 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -193,6 +193,9 @@ void riscv_cpu_set_force_hs_excep(CPURISCVState *env, bool enable)
- bool riscv_cpu_fp_enabled(CPURISCVState *env)
- {
-     if (env->mstatus & MSTATUS_FS) {
-+        if (riscv_cpu_virt_enabled(env) && !(env->bsstatus & MSTATUS_FS)) {
-+            return false;
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 6111f0f0bc..38583e7a6e 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -436,6 +436,9 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+         if (cpu->cfg.ext_u) {
+             target_misa |= RVU;
+         }
++        if (cpu->cfg.ext_h) {
++            target_misa |= RVH;
 +        }
-         return true;
-     }
  
+         set_misa(env, RVXLEN | target_misa);
+     }
+@@ -472,6 +475,7 @@ static Property riscv_cpu_properties[] = {
+     DEFINE_PROP_BOOL("c", RISCVCPU, cfg.ext_c, true),
+     DEFINE_PROP_BOOL("s", RISCVCPU, cfg.ext_s, true),
+     DEFINE_PROP_BOOL("u", RISCVCPU, cfg.ext_u, true),
++    DEFINE_PROP_BOOL("h", RISCVCPU, cfg.ext_h, false),
+     DEFINE_PROP_STRING("priv_spec", RISCVCPU, cfg.priv_spec),
+     DEFINE_PROP_STRING("user_spec", RISCVCPU, cfg.user_spec),
+     DEFINE_PROP_BOOL("mmu", RISCVCPU, cfg.mmu, true),
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 5b3b32dbbc..342e628379 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -259,6 +259,7 @@ typedef struct RISCVCPU {
+         bool ext_c;
+         bool ext_s;
+         bool ext_u;
++        bool ext_h;
+ 
+         char *priv_spec;
+         char *user_spec;
 -- 
 2.21.0
 
