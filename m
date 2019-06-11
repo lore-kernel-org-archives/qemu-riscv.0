@@ -1,55 +1,50 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hZU6a-0001Wx-3e
-	for mharc-qemu-riscv@gnu.org; Sat, 08 Jun 2019 01:41:28 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:59723)
+	id 1hagXW-0001fC-PU
+	for mharc-qemu-riscv@gnu.org; Tue, 11 Jun 2019 09:10:15 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:54231)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <palmer@dabbelt.com>) id 1hZU6P-0001Vr-Vm
- for qemu-riscv@nongnu.org; Sat, 08 Jun 2019 01:41:19 -0400
+ (envelope-from <kraxel@redhat.com>) id 1haaWJ-0002RL-SN
+ for qemu-riscv@nongnu.org; Tue, 11 Jun 2019 02:44:37 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmer@dabbelt.com>) id 1hZU6O-0001WF-U2
- for qemu-riscv@nongnu.org; Sat, 08 Jun 2019 01:41:17 -0400
-Received: from mail-pf1-f172.google.com ([209.85.210.172]:35416)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1hZU6M-0001Ut-UX
- for qemu-riscv@nongnu.org; Sat, 08 Jun 2019 01:41:16 -0400
-Received: by mail-pf1-f172.google.com with SMTP id d126so2332396pfd.2
- for <qemu-riscv@nongnu.org>; Fri, 07 Jun 2019 22:41:13 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
- :mime-version:content-transfer-encoding;
- bh=0xFujibSNYzWMLVp8zBawg+0B0c5vMsRBy4UZe+YTh8=;
- b=AYihXmP1cnU9FxAWYt5PXDhHG4jVeqh7+OfwqyaLY4hd+NYyHyD3gpFHZyBTdTT4tu
- 3bUGNbNRO0wWDDZACUfUwH5JWhZgR3VFJkPjq510NGU+OPpZz06AcErHiwEvrYHAgDho
- GQsEkjLyAsE5mT6MwrOEHgx3N0/ajwb8EuAd6aBfQ2HtbJMI/Nu2gSFHTJBEZJ4ZgGRT
- /mJYRUM2ITnCYrlEpQhj/xY++6mXBt6K71FouuvA/+NH1JKAVpw1dn2Pg8rNjxv8bwWA
- mrWEa085lB/bfo92mkRfQzJZ2Arv3qwB1VtCO6y1enYnwe5ab8sTaCM7cs9xaHIYm4ol
- V9Sw==
-X-Gm-Message-State: APjAAAVbT4QTCyrpSTwFyrs9R/D/TTx/NOyNUQ669dTKnVkNOLzAKQNN
- n1R1iN/83kBW61+cK3mkQi5skg==
-X-Google-Smtp-Source: APXvYqwWwPq6c5pMpiwr3aOT4NFXgsBFf+bMOBpBtkrZ19WmSIA9Uq49ihBfsjjwpEZqAqV6FW943A==
-X-Received: by 2002:a17:90a:9514:: with SMTP id
- t20mr9413798pjo.124.1559972472276; 
- Fri, 07 Jun 2019 22:41:12 -0700 (PDT)
-Received: from localhost ([12.206.222.5])
- by smtp.gmail.com with ESMTPSA id r11sm955628pgs.39.2019.06.07.22.41.10
- (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
- Fri, 07 Jun 2019 22:41:11 -0700 (PDT)
-Date: Fri, 07 Jun 2019 22:41:11 -0700 (PDT)
-X-Google-Original-Date: Fri, 07 Jun 2019 18:33:12 PDT (-0700)
-In-Reply-To: <CAFXwXrkEVJgPEZtvzyekJEZDk90XvntHkdfUe0s37RZ-ir1MKw@mail.gmail.com>
-CC: marco@decred.org, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-From: Palmer Dabbelt <palmer@sifive.com>
-To: richard.henderson@linaro.org
-Message-ID: <mhng-9a9b8dc8-4249-4695-9b30-9303df3a9c6d@palmer-si-x1e>
-Mime-Version: 1.0 (MHng)
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
+ (envelope-from <kraxel@redhat.com>) id 1haaJH-00083C-Ft
+ for qemu-riscv@nongnu.org; Tue, 11 Jun 2019 02:31:08 -0400
+Received: from mx1.redhat.com ([209.132.183.28]:44678)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <kraxel@redhat.com>)
+ id 1haaJ5-0007do-0T; Tue, 11 Jun 2019 02:30:56 -0400
+Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
+ [10.5.11.16])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mx1.redhat.com (Postfix) with ESMTPS id 0A31D356F6;
+ Tue, 11 Jun 2019 06:30:23 +0000 (UTC)
+Received: from sirius.home.kraxel.org (ovpn-117-25.ams2.redhat.com
+ [10.36.117.25])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 4F83951409;
+ Tue, 11 Jun 2019 06:30:20 +0000 (UTC)
+Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
+ id 475B616E18; Tue, 11 Jun 2019 08:30:19 +0200 (CEST)
+Date: Tue, 11 Jun 2019 08:30:19 +0200
+From: Gerd Hoffmann <kraxel@redhat.com>
+To: Palmer Dabbelt <palmer@sifive.com>
+Cc: alistair23@gmail.com, qemu-riscv@nongnu.org, sagark@eecs.berkeley.edu,
+ onathan@fintelia.io, Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ qemu-devel@nongnu.org, Alistair Francis <Alistair.Francis@wdc.com>
+Message-ID: <20190611063019.2uiatioxh73lrgqz@sirius.home.kraxel.org>
+References: <CAKmqyKMs4nt0eddFkXHG9vOdxnj=yB8jx8s9NivNiwvVg8TObA@mail.gmail.com>
+ <mhng-03d5c9ed-4818-4efc-99e0-cdceab2eab3d@palmer-si-x1e>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <mhng-03d5c9ed-4818-4efc-99e0-cdceab2eab3d@palmer-si-x1e>
+User-Agent: NeoMutt/20180716
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+ (mx1.redhat.com [10.5.110.30]); Tue, 11 Jun 2019 06:30:28 +0000 (UTC)
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
- [fuzzy]
-X-Received-From: 209.85.210.172
-Subject: Re: [Qemu-riscv] [Qemu-devel] Fwd: [joel@sing.id.au: atomic
- failures on qemu-system-riscv64]
+X-Received-From: 209.132.183.28
+X-Mailman-Approved-At: Tue, 11 Jun 2019 09:10:10 -0400
+Subject: Re: [Qemu-riscv] [Qemu-devel] RISC-V: Include ROM in QEMU
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -61,34 +56,42 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 08 Jun 2019 05:41:20 -0000
+X-List-Received-Date: Tue, 11 Jun 2019 06:44:37 -0000
 
-On Thu, 06 Jun 2019 19:50:57 PDT (-0700), richard.henderson@linaro.org wrote:
->>
->> Also, unless I'm misunderstanding something our implementation of LR/SC is
->>
-> pretty broken.  We're just using a CAS to check if the value changed, which
->> suffers from the ABA problem that LR/SC is there to fix in the first
->> place.  I
->> might be missing something here, though, as it looks like MIPS is doing
->> essentially the same thing.
->>
->
-> All of our load-lock/store-conditional implementations do the same.
->
-> You are correct that we do not implement the exact correct semantics.
-> Correct semantics, as far as I know, cannot be modeled without emulating
-> everything in a serial context, including caches.
->
-> We therefore make a considered choice to observe that while ll/sc can be
-> used to do all kinds of wild and woolly things, no one actually does so.
-> What people actually do is write portable code, using c/c++ atomic
-> primitives. And that all of these can be done with cmpxchg, because that's
-> what x86 has.
->
-> Using that choice, we can provide multi-threaded smp emulation that,
-> demonstrably, works.
+On Fri, Jun 07, 2019 at 05:03:42PM -0700, Palmer Dabbelt wrote:
+> On Thu, 06 Jun 2019 16:22:47 PDT (-0700), alistair23@gmail.com wrote:
+> > Hello,
+> > 
+> > As a test of the waters, how would the QEMU community feel about
+> > including the RISC-V OpenSBI project as a ROM submodule?
+> > 
+> > The idea would be to have OpenSBI (similar to ATF for ARM and a BIOS
+> > for x86) included by default to simplify the QEMU RISC-V boot process
+> > for users. This would remove the requirement for users/developers to
+> > build a RISC-V firmware. The goal here is to allow people to just
+> > download and run their kernel as easily as they currently do for x86.
+> > 
+> > We would make sure that it can be disabled! That is users/developers
+> > can use their own (or none) if they want to. The idea here is just to
+> > simplify the boot process, not lock anyone out.
+> 
+> I like it.  My only question is about the mechanics of doing so: are we just
+> going to assume there's a cross compiler in PATH?  I guess that's less of a
+> usability headache than needing a complier and a firmware.
 
-OK, that makes sense.  I was just worried that we were screwing something up on
-our end.
+Usual way to add firmware:
+
+  (1) Add a submodule below roms/
+  (2) Add rules to build the firmware to roms/Makefile.  Firmware
+      maintainers can use them, and they also document the build process.
+      A normal qemu build will not automatically build the firmware
+      though.
+  (3) Place a pre-built binary in pc-bios/
+
+There is some cross compiler detection logic in roms/Makefile which you
+can use.
+
+cheers,
+  Gerd
+
 
