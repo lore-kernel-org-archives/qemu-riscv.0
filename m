@@ -1,55 +1,55 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hbii5-0008BB-7b
-	for mharc-qemu-riscv@gnu.org; Fri, 14 Jun 2019 05:41:25 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42052)
+	id 1hbii7-0008Ca-N7
+	for mharc-qemu-riscv@gnu.org; Fri, 14 Jun 2019 05:41:28 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:42082)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <palmer@dabbelt.com>) id 1hbihy-000886-GO
- for qemu-riscv@nongnu.org; Fri, 14 Jun 2019 05:41:20 -0400
+ (envelope-from <palmer@dabbelt.com>) id 1hbihz-00088j-S3
+ for qemu-riscv@nongnu.org; Fri, 14 Jun 2019 05:41:21 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmer@dabbelt.com>) id 1hbihx-00061B-G1
- for qemu-riscv@nongnu.org; Fri, 14 Jun 2019 05:41:18 -0400
-Received: from mail-yw1-f68.google.com ([209.85.161.68]:34045)
+ (envelope-from <palmer@dabbelt.com>) id 1hbihy-000626-Oj
+ for qemu-riscv@nongnu.org; Fri, 14 Jun 2019 05:41:19 -0400
+Received: from mail-wr1-f65.google.com ([209.85.221.65]:33106)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1hbihx-0005zM-7g
- for qemu-riscv@nongnu.org; Fri, 14 Jun 2019 05:41:17 -0400
-Received: by mail-yw1-f68.google.com with SMTP id a11so838184ywc.1
- for <qemu-riscv@nongnu.org>; Fri, 14 Jun 2019 02:41:15 -0700 (PDT)
+ (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1hbihy-00061L-I8
+ for qemu-riscv@nongnu.org; Fri, 14 Jun 2019 05:41:18 -0400
+Received: by mail-wr1-f65.google.com with SMTP id n9so1824648wru.0
+ for <qemu-riscv@nongnu.org>; Fri, 14 Jun 2019 02:41:18 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
  :mime-version:content-transfer-encoding;
- bh=tnoOKx5YEaCxTRjixNQN8WLain0g/428iMlYG1AWqIc=;
- b=VZhPx7tmmVRzNQILDgvfO+r653w1KiSBfaiEV3m2ckxEVFTO0+wJia3g2mk2bz1+lb
- RGXLGwWn6g+LNSV4J1OtZr1VQulOIE2owkiFzrw8AumPgcCbe756BVMaQ7Xumrq3mLfR
- rMeQ3re3G8dy6wiz3OEe6v9dQi9CqlZzeYgc8+1k7Xe+JjLvAvPN/twMyiR2t682YOAt
- y7yfDHyQTvmizcolhc7ID3v1xsmFkoK5DyQovQGDbj8AnlKeFsVQ6o/FoGUZDZvD+IZ7
- ddw+PKrlnfG9sZzndpk5dbROrMSGod+lfMf7kDKoS4VjPrvP/cbBb/PEgyx0aZGQUycX
- +j2Q==
-X-Gm-Message-State: APjAAAWMSHvg3AkO1OsJYIPpGjw2sxUKuUhnyF5j/y45US40kkSdPBI3
- 4EhL6DcH/WB7Vyrv+YmlVOLKew==
-X-Google-Smtp-Source: APXvYqyXYTHKSguw7s+WIwzcU7inKgH1NhKOIq7G1TVFv4QUoD4s2kXzhklpPS8YcJQ0XkcciIQ8dw==
-X-Received: by 2002:a0d:e60a:: with SMTP id p10mr22784386ywe.370.1560505274951; 
- Fri, 14 Jun 2019 02:41:14 -0700 (PDT)
+ bh=sEWBGp8G/UULxSDitnnJIXQ9jsKma8nu50a+q3IMm4U=;
+ b=nBlZ496W1fMp+8VwQvYuC5vMoKzqPkG8aKNFGtdiF4c+/301pJZDAeitFYfIhl4oId
+ /tzea7yc+iPaC32PS/RvmmMBbEWlf6qkepcVd6saNKQnAenqnYLFwQOrJZ1VuIaOC7uz
+ 6JHwqxxqZEowZscNLIoAUVn37XVSlGVkMjboRbguuwRJmmQZEvLTlbMFtUHV9yjOhpvG
+ J+zsvUe1TagrysP21XQZI8UyGRv3LVt44Wx+pv0DWlZuUmegCgW/ygpXjvNkHofxOpWJ
+ a2e7c74GGjedMLd49mLfU9lKVqVQesXCwMNJMm87l3jUMYSfi76qHj8sSiEgiTeuk/fh
+ +TPg==
+X-Gm-Message-State: APjAAAV098nKomezAwJZthhyJdPhW1OVLP639/WuZOW67CilD73INRiH
+ UcOGWXWp0wXPfTLSs4zFmYTDpg==
+X-Google-Smtp-Source: APXvYqwZv/gF4TSR9gcOXHS6hnSKTL8pP1mtl+OC3fesqqwNdXY7i5zFjtIZXyGtCKwIO4kXumC/8w==
+X-Received: by 2002:a5d:53ca:: with SMTP id a10mr122790wrw.131.1560505277063; 
+ Fri, 14 Jun 2019 02:41:17 -0700 (PDT)
 Received: from localhost ([83.137.6.186])
- by smtp.gmail.com with ESMTPSA id s5sm690942ywe.92.2019.06.14.02.41.13
+ by smtp.gmail.com with ESMTPSA id k125sm3380586wmf.41.2019.06.14.02.41.16
  (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
- Fri, 14 Jun 2019 02:41:14 -0700 (PDT)
-Date: Fri, 14 Jun 2019 02:41:14 -0700 (PDT)
-X-Google-Original-Date: Fri, 14 Jun 2019 02:27:47 PDT (-0700)
-In-Reply-To: <d4664adffe008df43f2a0760dd4e2b9cb834b652.1558131003.git.alistair.francis@wdc.com>
+ Fri, 14 Jun 2019 02:41:16 -0700 (PDT)
+Date: Fri, 14 Jun 2019 02:41:16 -0700 (PDT)
+X-Google-Original-Date: Fri, 14 Jun 2019 02:41:10 PDT (-0700)
+In-Reply-To: <7e9b4a6cc07a931e62da9c18c40849690eef7150.1558131003.git.alistair.francis@wdc.com>
 CC: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
  Alistair Francis <Alistair.Francis@wdc.com>, alistair23@gmail.com
 From: Palmer Dabbelt <palmer@sifive.com>
 To: Alistair Francis <Alistair.Francis@wdc.com>
-Message-ID: <mhng-bd7fc2fb-94f7-4afa-b03c-4f8674d5ade4@palmer-si-x1e>
+Message-ID: <mhng-d2259f3e-29d6-47f5-b6a8-7b9224ae7a4e@palmer-si-x1e>
 Mime-Version: 1.0 (MHng)
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
  [fuzzy]
-X-Received-From: 209.85.161.68
-Subject: Re: [Qemu-riscv] [PATCH v1 3/4] disas/riscv: Fix `rdinstreth`
- constraint
+X-Received-From: 209.85.221.65
+Subject: Re: [Qemu-riscv] [PATCH v1 4/4] target/riscv: Implement
+ riscv_cpu_unassigned_access
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -61,36 +61,78 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Jun 2019 09:41:20 -0000
+X-List-Received-Date: Fri, 14 Jun 2019 09:41:22 -0000
 
-On Fri, 17 May 2019 15:11:04 PDT (-0700), Alistair Francis wrote:
+On Fri, 17 May 2019 15:11:06 PDT (-0700), Alistair Francis wrote:
 > From: Michael Clark <mjc@sifive.com>
 >
-> The constraint for `rdinstreth` was comparing the csr number to 0xc80,
-> which is `cycleh` instead. Fix this.
+> This patch adds support for the riscv_cpu_unassigned_access call
+> and will raise a load or store access fault.
 >
-> Author: Wladimir J. van der Laan <laanwj@gmail.com>
-
-I'm not sure what this tag is supposed to mean.  If this is the actual author
-of the patch, then shouldn't it also have a SOB?
-
 > Signed-off-by: Michael Clark <mjc@sifive.com>
+> [Changes by AF:
+>  - Squash two patches and rewrite commit message
+>  - Set baddr to the access address
+> ]
 > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 > ---
->  disas/riscv.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  target/riscv/cpu.c        |  1 +
+>  target/riscv/cpu.h        |  2 ++
+>  target/riscv/cpu_helper.c | 16 ++++++++++++++++
+>  3 files changed, 19 insertions(+)
 >
-> diff --git a/disas/riscv.c b/disas/riscv.c
-> index 3ab4586f0a..c2578a3c4b 100644
-> --- a/disas/riscv.c
-> +++ b/disas/riscv.c
-> @@ -614,7 +614,7 @@ static const rvc_constraint rvcc_rdtime[] = { rvc_rs1_eq_x0, rvc_csr_eq_0xc01, r
->  static const rvc_constraint rvcc_rdinstret[] = { rvc_rs1_eq_x0, rvc_csr_eq_0xc02, rvc_end };
->  static const rvc_constraint rvcc_rdcycleh[] = { rvc_rs1_eq_x0, rvc_csr_eq_0xc80, rvc_end };
->  static const rvc_constraint rvcc_rdtimeh[] = { rvc_rs1_eq_x0, rvc_csr_eq_0xc81, rvc_end };
-> -static const rvc_constraint rvcc_rdinstreth[] = { rvc_rs1_eq_x0, rvc_csr_eq_0xc80, rvc_end };
-> +static const rvc_constraint rvcc_rdinstreth[] = { rvc_rs1_eq_x0, rvc_csr_eq_0xc82, rvc_end };
->  static const rvc_constraint rvcc_frcsr[] = { rvc_rs1_eq_x0, rvc_csr_eq_0x003, rvc_end };
->  static const rvc_constraint rvcc_frrm[] = { rvc_rs1_eq_x0, rvc_csr_eq_0x002, rvc_end };
->  static const rvc_constraint rvcc_frflags[] = { rvc_rs1_eq_x0, rvc_csr_eq_0x001, rvc_end };
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index b7675707e0..bfe92235d3 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -356,6 +356,7 @@ static void riscv_cpu_class_init(ObjectClass *c, void *data)
+>      cc->gdb_stop_before_watchpoint = true;
+>      cc->disas_set_info = riscv_cpu_disas_set_info;
+>  #ifndef CONFIG_USER_ONLY
+> +    cc->do_unassigned_access = riscv_cpu_unassigned_access;
+>      cc->do_unaligned_access = riscv_cpu_do_unaligned_access;
+>      cc->get_phys_page_debug = riscv_cpu_get_phys_page_debug;
+>  #endif
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index c17184f4e4..8250175811 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -264,6 +264,8 @@ void  riscv_cpu_do_unaligned_access(CPUState *cs, vaddr addr,
+>  bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+>                          MMUAccessType access_type, int mmu_idx,
+>                          bool probe, uintptr_t retaddr);
+> +void riscv_cpu_unassigned_access(CPUState *cpu, hwaddr addr, bool is_write,
+> +                                 bool is_exec, int unused, unsigned size);
+>  char *riscv_isa_string(RISCVCPU *cpu);
+>  void riscv_cpu_list(void);
+>
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index 41d6db41c3..202b6f021d 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -356,6 +356,22 @@ hwaddr riscv_cpu_get_phys_page_debug(CPUState *cs, vaddr addr)
+>      return phys_addr;
+>  }
+>
+> +void riscv_cpu_unassigned_access(CPUState *cs, hwaddr addr, bool is_write,
+> +                                 bool is_exec, int unused, unsigned size)
+> +{
+> +    RISCVCPU *cpu = RISCV_CPU(cs);
+> +    CPURISCVState *env = &cpu->env;
+> +
+> +    if (is_write) {
+> +        cs->exception_index = RISCV_EXCP_STORE_AMO_ACCESS_FAULT;
+> +    } else {
+> +        cs->exception_index = RISCV_EXCP_LOAD_ACCESS_FAULT;
+> +    }
+> +
+> +    env->badaddr = addr;
+> +    riscv_raise_exception(&cpu->env, cs->exception_index, GETPC());
+> +}
+> +
+>  void riscv_cpu_do_unaligned_access(CPUState *cs, vaddr addr,
+>                                     MMUAccessType access_type, int mmu_idx,
+>                                     uintptr_t retaddr)
+
+Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
 
