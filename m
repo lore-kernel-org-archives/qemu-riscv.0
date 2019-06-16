@@ -1,55 +1,38 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hcQJz-0003rK-Uh
-	for mharc-qemu-riscv@gnu.org; Sun, 16 Jun 2019 04:15:27 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:56746)
+	id 1hcahK-00027S-V3
+	for mharc-qemu-riscv@gnu.org; Sun, 16 Jun 2019 15:20:14 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:38993)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <palmer@dabbelt.com>) id 1hcQJx-0003oq-7T
- for qemu-riscv@nongnu.org; Sun, 16 Jun 2019 04:15:26 -0400
+ (envelope-from <joel@sing.id.au>) id 1hcahI-00025a-4z
+ for qemu-riscv@nongnu.org; Sun, 16 Jun 2019 15:20:13 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmer@dabbelt.com>) id 1hcQJw-0001bD-1z
- for qemu-riscv@nongnu.org; Sun, 16 Jun 2019 04:15:25 -0400
-Received: from mail-wm1-f66.google.com ([209.85.128.66]:39263)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1hcQJv-0001aR-RY
- for qemu-riscv@nongnu.org; Sun, 16 Jun 2019 04:15:23 -0400
-Received: by mail-wm1-f66.google.com with SMTP id z23so6018838wma.4
- for <qemu-riscv@nongnu.org>; Sun, 16 Jun 2019 01:15:23 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
- :mime-version:content-transfer-encoding;
- bh=MAPTb1gHYmhUvkCjrnUgb2AR28xywHkPNE5DYPJmeQ0=;
- b=ecg+80GA18SxDayJS5s4ZX2lC/HOwERJEzB+DCcOCzhl7Wi2FF749hK54fc7AeGw27
- PipWOysXIBUjXl6MwA8Av+cR6UXCsqGNEkpRBVrenZkYmqLHiZFYv83SqMUbreoEPyZq
- UqN3KMusCPWw/Ee7dAQ17gUMzdxEDxjttd4QFtZ4yqAatSj71lHDk/3sZuuS7T2BhAr6
- G6KM42k+2XQSXzbYibIxO7Kn/JBjWJ+0pANVQSHwv9kWOhGwlS9AGuXdDJ0xudebKlTM
- wpP+HDrNfvpXlKr4qj5/cG0z1WO9x/p7OUGm7jwQGoDRsLIcFJipBKkZj7BJRjJCuKkl
- 5YIw==
-X-Gm-Message-State: APjAAAUA0oOKKzTDtnPhkv4IYvq6K5I5sJSguf+q12rUjKls1O159SKr
- 8Dlx4Ohy338oRAMFXo9fY+wYiMYlXMhPQg==
-X-Google-Smtp-Source: APXvYqxN9ew032ceUIPVjHSXKS4SRDC3ELzEoaozxSbZrexYbRdTVyCQE8cHHEmYjsh0D79d67TKSQ==
-X-Received: by 2002:a1c:44d7:: with SMTP id
- r206mr14702954wma.164.1560672921844; 
- Sun, 16 Jun 2019 01:15:21 -0700 (PDT)
-Received: from localhost ([83.137.6.189])
- by smtp.gmail.com with ESMTPSA id d3sm21324189wrf.87.2019.06.16.01.15.21
- (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
- Sun, 16 Jun 2019 01:15:21 -0700 (PDT)
-Date: Sun, 16 Jun 2019 01:15:21 -0700 (PDT)
-X-Google-Original-Date: Sun, 16 Jun 2019 01:07:34 PDT (-0700)
-In-Reply-To: <13fe08a2-c89c-b015-3799-067e0f04bfd3@redhat.com>
-CC: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-From: Palmer Dabbelt <palmer@sifive.com>
-To: philmd@redhat.com
-Message-ID: <mhng-fb0f4eaf-5e38-4e66-958a-9942273b48c3@palmer-si-x1e>
-Mime-Version: 1.0 (MHng)
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
- [fuzzy]
-X-Received-From: 209.85.128.66
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH] RISC-V: Fix a memory leak
- when realizing a sifive_e
+ (envelope-from <joel@sing.id.au>) id 1hcahG-0001rw-N0
+ for qemu-riscv@nongnu.org; Sun, 16 Jun 2019 15:20:12 -0400
+Received: from stingray.exigere.com.au ([162.217.113.74]:12247)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <joel@sing.id.au>)
+ id 1hcahG-00013u-IH; Sun, 16 Jun 2019 15:20:10 -0400
+Received: from hippo.sing.id.au (exi2311632.lnk.telstra.net [144.139.233.124])
+ by stingray.exigere.com.au (OpenSMTPD) with ESMTPSA id e5bfd7b9
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256:NO); 
+ Mon, 17 Jun 2019 05:42:25 +1000 (AEST)
+Received: from localhost (hippo.sing.id.au [local])
+ by hippo.sing.id.au (OpenSMTPD) with ESMTPA id 7e842b5a;
+ Mon, 17 Jun 2019 05:19:01 +1000 (AEST)
+Date: Mon, 17 Jun 2019 05:19:01 +1000
+From: Joel Sing <joel@sing.id.au>
+To: qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+Cc: Alistair.Francis@wdc.com, palmer@sifive.com, me@carlosedp.com,
+ marco@decred.org
+Message-ID: <20190616191900.GH61734@hippo.sing.id.au>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 162.217.113.74
+Subject: [Qemu-riscv] [PATCH] atomic failures on qemu-system-riscv64
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -61,91 +44,114 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 16 Jun 2019 08:15:26 -0000
+X-List-Received-Date: Sun, 16 Jun 2019 19:20:13 -0000
 
-On Fri, 14 Jun 2019 05:25:50 PDT (-0700), philmd@redhat.com wrote:
-> On 6/14/19 2:08 PM, Palmer Dabbelt wrote:
->> Coverity pointed out a memory leak in riscv_sifive_e_soc_realize(),
->> where a pair of recently added MemoryRegion instances would not be freed
->> if there were errors elsewhere in the function.  The fix here is to
->> simply not use dynamic allocation for these instances: there's always
->> one of each in SiFiveESoCState, so instead we just include them within
->> the struct.
->>
->> Thanks to Peter for pointing out the bug and suggesting the fix!
->
-> a.k.a. Suggested-by: Peter Maydell <peter.maydell@linaro.org>
->
-> Maybe the thanks can go below the '---' tag, so it doesn't stay in the
-> git history.
+While working on a Go (www.golang.org) port for riscv, I've run
+into issues with atomics (namely LR/SC) on qemu-system-riscv64.
+There are several reproducers for this problem including one
+using gcc builtin atomics:
 
-Works for me.
+  https://gist.github.com/4a6f656c/8433032a3f70893a278259f8108aad90
 
->
->>
->> Fixes: 30efbf330a45 ("SiFive RISC-V GPIO Device")
->> Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
->
-> Reviewed-by: Philippe Mathieu-Daudé <philmd@redhat.com>
+And a version using inline assembly:
 
-Thanks!
+  https://gist.github.com/4a6f656c/d883091f5ca811822720213be343a75a
 
->
->> ---
->>  hw/riscv/sifive_e.c         | 12 +++++-------
->>  include/hw/riscv/sifive_e.h |  2 ++
->>  2 files changed, 7 insertions(+), 7 deletions(-)
->>
->> diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
->> index 80ac56fa7d5e..83375afcd1d6 100644
->> --- a/hw/riscv/sifive_e.c
->> +++ b/hw/riscv/sifive_e.c
->> @@ -158,17 +158,15 @@ static void riscv_sifive_e_soc_realize(DeviceState *dev, Error **errp)
->>
->>      SiFiveESoCState *s = RISCV_E_SOC(dev);
->>      MemoryRegion *sys_mem = get_system_memory();
->> -    MemoryRegion *xip_mem = g_new(MemoryRegion, 1);
->> -    MemoryRegion *mask_rom = g_new(MemoryRegion, 1);
->>
->>      object_property_set_bool(OBJECT(&s->cpus), true, "realized",
->>                              &error_abort);
->>
->>      /* Mask ROM */
->> -    memory_region_init_rom(mask_rom, NULL, "riscv.sifive.e.mrom",
->> +    memory_region_init_rom(&s->mask_rom, NULL, "riscv.sifive.e.mrom",
->>          memmap[SIFIVE_E_MROM].size, &error_fatal);
->>      memory_region_add_subregion(sys_mem,
->> -        memmap[SIFIVE_E_MROM].base, mask_rom);
->> +        memmap[SIFIVE_E_MROM].base, &s->mask_rom);
->>
->>      /* MMIO */
->>      s->plic = sifive_plic_create(memmap[SIFIVE_E_PLIC].base,
->> @@ -228,10 +226,10 @@ static void riscv_sifive_e_soc_realize(DeviceState *dev, Error **errp)
->>          memmap[SIFIVE_E_PWM2].base, memmap[SIFIVE_E_PWM2].size);
->>
->>      /* Flash memory */
->> -    memory_region_init_ram(xip_mem, NULL, "riscv.sifive.e.xip",
->> +    memory_region_init_ram(&s->xip_mem, NULL, "riscv.sifive.e.xip",
->>          memmap[SIFIVE_E_XIP].size, &error_fatal);
->> -    memory_region_set_readonly(xip_mem, true);
->> -    memory_region_add_subregion(sys_mem, memmap[SIFIVE_E_XIP].base, xip_mem);
->> +    memory_region_set_readonly(&s->xip_mem, true);
->> +    memory_region_add_subregion(sys_mem, memmap[SIFIVE_E_XIP].base, &s->xip_mem);
->>  }
->>
->>  static void riscv_sifive_e_machine_init(MachineClass *mc)
->> diff --git a/include/hw/riscv/sifive_e.h b/include/hw/riscv/sifive_e.h
->> index 3b14eb74621f..d175b24cb209 100644
->> --- a/include/hw/riscv/sifive_e.h
->> +++ b/include/hw/riscv/sifive_e.h
->> @@ -33,6 +33,8 @@ typedef struct SiFiveESoCState {
->>      RISCVHartArrayState cpus;
->>      DeviceState *plic;
->>      SIFIVEGPIOState gpio;
->> +    MemoryRegion xip_mem;
->> +    MemoryRegion mask_rom;
->>  } SiFiveESoCState;
->>
->>  typedef struct SiFiveEState {
->>
+Depending on the qemu configuration the number of threads may
+need increasing (to force context switching) and/or run in a
+loop. Go's sync/atomic tests also fail regularly.
+
+Having dug into the qemu code, what I believe is happening is
+along the lines of the following while running the typical CAS
+sequence:
+
+1. Thread 1 runs and executes an LR - this assigns an address
+   to load_res and a value to load_val (say 1). It performs a
+   comparison, the value matches and decides to continue with
+   its SC.
+
+2. A context switch occurs and thread 2 is now run - it runs
+   an LR and SC on the same address modifying the stored value.
+   Another LR is executed loading load_val with the current
+   value (say 3).
+
+3. A context switch occurs and thread 1 is now run again, it
+   continues on its LR/SC sequence and now runs the SC instruction.
+   This is based on the assumption that it had a reservation
+   and the SC will fail if the memory has changed. The underlying
+   implementation of SC is a cmpxchg with the value in load_val
+   - this no longer has the original value and hence successfully
+   compares (as does the tcg_gen_setcond_tl() between the returned
+   value and load_val) thus the SC succeeds when it should not.
+
+The diff below clears load_res when the mode changes - with this
+applied the reproducers work correctly, as do Go's atomic tests.
+This is inline with v2.2 of the RISCV ISA specification:
+
+"The SC must fail if there is an observable memory access from
+another hart to the address, or if there is an intervening context
+switch on this hart, or if in the meantime the hart executed a
+privileged exception-return instruction."
+
+However, it is worth noting that this language was changed in
+later revisions of the specification and now states that an
+LR/SC must fail if there is an SC to any address in between.
+On its own this does not prevent the above context-switch
+scenario and an additional note says that the kernel "should"
+forcibly break a load reservation by running an SC instruction
+on a preemptive context switch. The riscv linux kernel does not
+currently do this, however a diff exists to change this:
+
+  https://lore.kernel.org/linux-riscv/20190607222222.15300-1-palmer@sifive.com/
+
+As such, the below diff clears the load reservation on both
+mode changes and on execution of an SC instruction. This results
+in correct behaviour on both a patched and unpatched kernel and
+seems to be the safer approach.
+
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index b17f169681..19029429a7 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -113,6 +113,15 @@ void riscv_cpu_set_mode(CPURISCVState *env, target_ulong newpriv)
+     }
+     /* tlb_flush is unnecessary as mode is contained in mmu_idx */
+     env->priv = newpriv;
++
++    /* Clear the load reservation - otherwise a reservation placed in one
++     * context/process can be used by another, resulting in an SC succeeding
++     * incorrectly. Version 2.2 of the ISA specification explicitly requires
++     * this behaviour, while later revisions say that the kernel "should" use
++     * an SC instruction to force the yielding of a load reservation on a
++     * preemptive context switch. As a result, do both.
++     */
++    env->load_res = 0;
+ }
+ 
+ /* get_physical_address - get the physical address for this virtual address
+diff --git a/target/riscv/insn_trans/trans_rva.inc.c b/target/riscv/insn_trans/trans_rva.inc.c
+index f6dbbc065e..bb560a9d05 100644
+--- a/target/riscv/insn_trans/trans_rva.inc.c
++++ b/target/riscv/insn_trans/trans_rva.inc.c
+@@ -61,13 +61,19 @@ static inline bool gen_sc(DisasContext *ctx, arg_atomic *a, TCGMemOp mop)
+ 
+     gen_set_label(l1);
+     /*
+-     * Address comparion failure.  However, we still need to
++     * Address comparison failure.  However, we still need to
+      * provide the memory barrier implied by AQ/RL.
+      */
+     tcg_gen_mb(TCG_MO_ALL + a->aq * TCG_BAR_LDAQ + a->rl * TCG_BAR_STRL);
+     tcg_gen_movi_tl(dat, 1);
+     gen_set_gpr(a->rd, dat);
+ 
++    /*
++     * Clear the load reservation, since an SC must fail if there is
++     * an SC to any address, in between an LR and SC pair.
++     */
++    tcg_gen_movi_tl(load_res, 0);
++
+     gen_set_label(l2);
+     tcg_temp_free(dat);
+     tcg_temp_free(src1);
 
