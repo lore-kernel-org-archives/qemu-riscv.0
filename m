@@ -1,63 +1,77 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hcvKC-0000w7-MK
-	for mharc-qemu-riscv@gnu.org; Mon, 17 Jun 2019 13:21:45 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:41953)
+	id 1hd0Hh-0005RJ-P1
+	for mharc-qemu-riscv@gnu.org; Mon, 17 Jun 2019 18:39:31 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:36449)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <alistair23@gmail.com>) id 1hcvK9-0000tJ-0X
- for qemu-riscv@nongnu.org; Mon, 17 Jun 2019 13:21:43 -0400
+ (envelope-from <richard.henderson@linaro.org>) id 1hd0HZ-0005NN-97
+ for qemu-riscv@nongnu.org; Mon, 17 Jun 2019 18:39:23 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1hcvK7-0003R7-4a
- for qemu-riscv@nongnu.org; Mon, 17 Jun 2019 13:21:40 -0400
-Received: from mail-lf1-x141.google.com ([2a00:1450:4864:20::141]:36761)
+ (envelope-from <richard.henderson@linaro.org>) id 1hd0HY-0004XN-Cj
+ for qemu-riscv@nongnu.org; Mon, 17 Jun 2019 18:39:21 -0400
+Received: from mail-pf1-x444.google.com ([2607:f8b0:4864:20::444]:37108)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1hcvK6-0003P9-K4; Mon, 17 Jun 2019 13:21:39 -0400
-Received: by mail-lf1-x141.google.com with SMTP id q26so7117563lfc.3;
- Mon, 17 Jun 2019 10:21:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=UvEXy6R2Oa0rw1CPw6Eg9Azivk9jG3zrLJWOzgsj+sI=;
- b=q7Cm14UcndjBBBGQs1VXcwRC8FOqZfvLoKvafiy+9Istjldw3CdnWgzwRiLLcMDfA8
- k8WUdnUIMEsPR2rzBKY0yc5fFokRib8UpISVqE77ise2Omj9bf3NWtJnSxAop3vgxUlz
- wTWOg/neRdw0uhxTI2SgqvvHL8A/KQfvPFoCGTe7mJQ2kynMmOmEz6ZIO+PEgCTfNUOG
- Kz7/l56cS1tgHSHXg+bLNFBLIBb1khW/YwR74e8SlxVjC1MMLJMG6eNwjSgEhbtDSEuh
- P3VxC+yG3fiUR3vOSXAJk4f4OcMIgfrVCLx8FoAsmI4h5ZOTi5XXfPXkJeiIDSqPgtiu
- 6TVA==
+ (Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
+ id 1hd0HW-0004S1-BC
+ for qemu-riscv@nongnu.org; Mon, 17 Jun 2019 18:39:20 -0400
+Received: by mail-pf1-x444.google.com with SMTP id 19so6437701pfa.4
+ for <qemu-riscv@nongnu.org>; Mon, 17 Jun 2019 15:39:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=subject:to:cc:references:from:openpgp:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=8Ib9AHVpoMnLsjFKadmymVirMZiS1xyBiQ4dEr91e28=;
+ b=aCDjJxcbhXXUfGDGDHyEy/AAi0c6tLpgrWu3vTNpTdWGRepfseRTMX6AHnFofkr9CD
+ kc9ktqdDEfGuOu44uDAF74GCakznV7XLmJJ+utN1K1nByB0er3Hm299NFJYUE2S7/TpZ
+ hjezfE2DyVJtMWX9YWMi0j7uiQ1MRSzqJjv6avCUYwNBqWiTkHCAiLa3omKBVSjqWPWR
+ ds4cFVOf0f61MiVa6YkUTTP3ZPI66/ASu9v0RFAEfpzOPDHwuvviO8Jbflf8VdQNJuul
+ 0ElqbNGPm+jmAQJHg4Xt4kndP5FkYUZScQh0dyOSh9GfoUIu/zXqLmHtvcXwjrNl7zrY
+ A5LQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=UvEXy6R2Oa0rw1CPw6Eg9Azivk9jG3zrLJWOzgsj+sI=;
- b=U3UPb7Loz81y7inNPsw/g4RVtzjXrSTtpaLcZExxeCcwsLsB/WhQxR4hydmkaKoU8N
- y9KFhdj0b93jydPOdO2kFHb1cEV70bOJWe7efAXYnvSygt/ZrVM0iA6+au2XxXtiCIn6
- bjrAXApQq5ctzX/2Rfu+n+3eBp9DSMcYTS/8eCALrYJryA+i05POllADrXFdsENybqI5
- GSMJWsi3Djs4DGgNTQuI7xDcbjQ/er095sHs3EQhaW9fwTPhg+cau39mkjiLywfgtdO5
- IN473E+2IpiS9n248qbZ1DZ7yE98oH8SlVxcXUtrMkjWRUKaacycXE7PpWFPzzr4NbSl
- pKyw==
-X-Gm-Message-State: APjAAAVRwkba3Scb+dOxeOYw74urNQiT589cZyO2WDkYXapOP+mazzKG
- cZ6DDAo3hy1ggDBMyNULW30PPQHYbkKkMdBimFE=
-X-Google-Smtp-Source: APXvYqxzBbqiKphbJeBOyYKPL0V+OWiDjyEQraqhUILNDPVMtsIu9zFAriFzm9tMU7ZeEwX6hShWA0M0pOxZiy8xgfw=
-X-Received: by 2002:a19:4c05:: with SMTP id z5mr46726034lfa.5.1560792096478;
- Mon, 17 Jun 2019 10:21:36 -0700 (PDT)
+ h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
+ :date:user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=8Ib9AHVpoMnLsjFKadmymVirMZiS1xyBiQ4dEr91e28=;
+ b=eP8y/aYma7eZJLeaTuL+tqeu4uwUGEPHm8kUGtnytqghh14FEQLMVnR8vTx1Q189hd
+ jCeJ/yN8WAjokS5WRqZ/XuKLWIB4fBfMD8gdpLIudpAripfO2kY2jax5mo2Hv2dPvbA4
+ /BQQLhgHhq1muG5oqc95lMiT1VKZtiHlWwIhDLyTofUucDx6YQZPmVEF6YRnLFMcYVfE
+ 1oSnQttUsm9/9NtK2U7kJmMwHLApkxPY2h8BpIzZF3B4wpRuYDLDuuCvx7u3khCcnD2r
+ 1I/SqIdm0QgEs0XVZgK2FgDumzqg5AshN5mOLyiEizfcaOOd9McLfqB6psiOZub46LVO
+ SwNw==
+X-Gm-Message-State: APjAAAXep4m/p11yrwCrslrBlsgOibNW6Yk51kihk9ZBxR14UgIYNCcU
+ HuX2RyjPRJOafbq3upg6+wl20A==
+X-Google-Smtp-Source: APXvYqxJrXMvcpi+oAA/LnQKr48m7ybmO4FVBqqrAQEg/tRBK7dQQ26iHpJsCmKmh2JrUeiO3MFLug==
+X-Received: by 2002:a17:90a:dc86:: with SMTP id
+ j6mr1391108pjv.141.1560811154821; 
+ Mon, 17 Jun 2019 15:39:14 -0700 (PDT)
+Received: from [192.168.1.11] (97-113-2-33.tukw.qwest.net. [97.113.2.33])
+ by smtp.gmail.com with ESMTPSA id k13sm12765885pgq.45.2019.06.17.15.39.08
+ (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+ Mon, 17 Jun 2019 15:39:14 -0700 (PDT)
+To: =?UTF-8?Q?Alex_Benn=c3=a9e?= <alex.bennee@linaro.org>,
+ qemu-devel@nongnu.org
+Cc: "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Palmer Dabbelt <palmer@sifive.com>, "Emilio G. Cota" <cota@braap.org>,
+ Alistair Francis <Alistair.Francis@wdc.com>
+References: <20190614171200.21078-1-alex.bennee@linaro.org>
+ <20190614171200.21078-34-alex.bennee@linaro.org>
+From: Richard Henderson <richard.henderson@linaro.org>
+Openpgp: preference=signencrypt
+Message-ID: <98e88256-7a88-b505-9bde-0836cf21c654@linaro.org>
+Date: Mon, 17 Jun 2019 15:38:45 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.7.0
 MIME-Version: 1.0
-References: <13fe08a2-c89c-b015-3799-067e0f04bfd3@redhat.com>
- <mhng-fb0f4eaf-5e38-4e66-958a-9942273b48c3@palmer-si-x1e>
-In-Reply-To: <mhng-fb0f4eaf-5e38-4e66-958a-9942273b48c3@palmer-si-x1e>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 17 Jun 2019 10:18:49 -0700
-Message-ID: <CAKmqyKPCXy3_YMuXmhYpoGvay4m5BpsOrs4VtFF9cU9gL-bedg@mail.gmail.com>
-To: Palmer Dabbelt <palmer@sifive.com>
-Cc: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>, 
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+In-Reply-To: <20190614171200.21078-34-alex.bennee@linaro.org>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::141
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH] RISC-V: Fix a memory leak
- when realizing a sifive_e
+X-Received-From: 2607:f8b0:4864:20::444
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v3 33/50] target/riscv: fetch
+ code with translator_ld
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -69,106 +83,23 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Jun 2019 17:21:43 -0000
+X-List-Received-Date: Mon, 17 Jun 2019 22:39:23 -0000
 
-On Sun, Jun 16, 2019 at 1:15 AM Palmer Dabbelt <palmer@sifive.com> wrote:
->
-> On Fri, 14 Jun 2019 05:25:50 PDT (-0700), philmd@redhat.com wrote:
-> > On 6/14/19 2:08 PM, Palmer Dabbelt wrote:
-> >> Coverity pointed out a memory leak in riscv_sifive_e_soc_realize(),
-> >> where a pair of recently added MemoryRegion instances would not be fre=
-ed
-> >> if there were errors elsewhere in the function.  The fix here is to
-> >> simply not use dynamic allocation for these instances: there's always
-> >> one of each in SiFiveESoCState, so instead we just include them within
-> >> the struct.
-> >>
-> >> Thanks to Peter for pointing out the bug and suggesting the fix!
-> >
-> > a.k.a. Suggested-by: Peter Maydell <peter.maydell@linaro.org>
-> >
-> > Maybe the thanks can go below the '---' tag, so it doesn't stay in the
-> > git history.
->
-> Works for me.
+On 6/14/19 10:11 AM, Alex Bennée wrote:
+> +++ b/target/riscv/translate.c
+> @@ -793,7 +793,7 @@ static void riscv_tr_translate_insn(DisasContextBase *dcbase, CPUState *cpu)
+>      DisasContext *ctx = container_of(dcbase, DisasContext, base);
+>      CPURISCVState *env = cpu->env_ptr;
+>  
+> -    ctx->opcode = cpu_ldl_code(env, ctx->base.pc_next);
+> +    ctx->opcode = translator_ldl(env, ctx->base.pc_next);
 
-With the updated Suggested-by line:
+I'll note for the riscv folks that this is an existing bug, reading too much in
+the case of an RVC instruction.  This could well matter for the last 2-byte
+instruction at the end of a page.
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
-Alistair
 
->
-> >
-> >>
-> >> Fixes: 30efbf330a45 ("SiFive RISC-V GPIO Device")
-> >> Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
-> >
-> > Reviewed-by: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
->
-> Thanks!
->
-> >
-> >> ---
-> >>  hw/riscv/sifive_e.c         | 12 +++++-------
-> >>  include/hw/riscv/sifive_e.h |  2 ++
-> >>  2 files changed, 7 insertions(+), 7 deletions(-)
-> >>
-> >> diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
-> >> index 80ac56fa7d5e..83375afcd1d6 100644
-> >> --- a/hw/riscv/sifive_e.c
-> >> +++ b/hw/riscv/sifive_e.c
-> >> @@ -158,17 +158,15 @@ static void riscv_sifive_e_soc_realize(DeviceSta=
-te *dev, Error **errp)
-> >>
-> >>      SiFiveESoCState *s =3D RISCV_E_SOC(dev);
-> >>      MemoryRegion *sys_mem =3D get_system_memory();
-> >> -    MemoryRegion *xip_mem =3D g_new(MemoryRegion, 1);
-> >> -    MemoryRegion *mask_rom =3D g_new(MemoryRegion, 1);
-> >>
-> >>      object_property_set_bool(OBJECT(&s->cpus), true, "realized",
-> >>                              &error_abort);
-> >>
-> >>      /* Mask ROM */
-> >> -    memory_region_init_rom(mask_rom, NULL, "riscv.sifive.e.mrom",
-> >> +    memory_region_init_rom(&s->mask_rom, NULL, "riscv.sifive.e.mrom",
-> >>          memmap[SIFIVE_E_MROM].size, &error_fatal);
-> >>      memory_region_add_subregion(sys_mem,
-> >> -        memmap[SIFIVE_E_MROM].base, mask_rom);
-> >> +        memmap[SIFIVE_E_MROM].base, &s->mask_rom);
-> >>
-> >>      /* MMIO */
-> >>      s->plic =3D sifive_plic_create(memmap[SIFIVE_E_PLIC].base,
-> >> @@ -228,10 +226,10 @@ static void riscv_sifive_e_soc_realize(DeviceSta=
-te *dev, Error **errp)
-> >>          memmap[SIFIVE_E_PWM2].base, memmap[SIFIVE_E_PWM2].size);
-> >>
-> >>      /* Flash memory */
-> >> -    memory_region_init_ram(xip_mem, NULL, "riscv.sifive.e.xip",
-> >> +    memory_region_init_ram(&s->xip_mem, NULL, "riscv.sifive.e.xip",
-> >>          memmap[SIFIVE_E_XIP].size, &error_fatal);
-> >> -    memory_region_set_readonly(xip_mem, true);
-> >> -    memory_region_add_subregion(sys_mem, memmap[SIFIVE_E_XIP].base, x=
-ip_mem);
-> >> +    memory_region_set_readonly(&s->xip_mem, true);
-> >> +    memory_region_add_subregion(sys_mem, memmap[SIFIVE_E_XIP].base, &=
-s->xip_mem);
-> >>  }
-> >>
-> >>  static void riscv_sifive_e_machine_init(MachineClass *mc)
-> >> diff --git a/include/hw/riscv/sifive_e.h b/include/hw/riscv/sifive_e.h
-> >> index 3b14eb74621f..d175b24cb209 100644
-> >> --- a/include/hw/riscv/sifive_e.h
-> >> +++ b/include/hw/riscv/sifive_e.h
-> >> @@ -33,6 +33,8 @@ typedef struct SiFiveESoCState {
-> >>      RISCVHartArrayState cpus;
-> >>      DeviceState *plic;
-> >>      SIFIVEGPIOState gpio;
-> >> +    MemoryRegion xip_mem;
-> >> +    MemoryRegion mask_rom;
-> >>  } SiFiveESoCState;
-> >>
-> >>  typedef struct SiFiveEState {
-> >>
->
+r~
 
