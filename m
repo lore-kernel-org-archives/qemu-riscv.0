@@ -1,61 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hcv7S-0005i0-V9
-	for mharc-qemu-riscv@gnu.org; Mon, 17 Jun 2019 13:08:34 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37475)
+	id 1hcvE8-0004Ge-42
+	for mharc-qemu-riscv@gnu.org; Mon, 17 Jun 2019 13:15:29 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:40099)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <alistair23@gmail.com>) id 1hcv7Q-0005dY-E8
- for qemu-riscv@nongnu.org; Mon, 17 Jun 2019 13:08:33 -0400
+ (envelope-from <alistair23@gmail.com>) id 1hcvE2-0004Bn-TJ
+ for qemu-riscv@nongnu.org; Mon, 17 Jun 2019 13:15:24 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1hcv7P-0000FN-DJ
- for qemu-riscv@nongnu.org; Mon, 17 Jun 2019 13:08:32 -0400
-Received: from mail-lj1-x243.google.com ([2a00:1450:4864:20::243]:39700)
+ (envelope-from <alistair23@gmail.com>) id 1hcvE1-0003eB-41
+ for qemu-riscv@nongnu.org; Mon, 17 Jun 2019 13:15:22 -0400
+Received: from mail-lf1-x143.google.com ([2a00:1450:4864:20::143]:38009)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1hcv7M-00008D-Sv; Mon, 17 Jun 2019 13:08:29 -0400
-Received: by mail-lj1-x243.google.com with SMTP id v18so10042100ljh.6;
- Mon, 17 Jun 2019 10:08:28 -0700 (PDT)
+ id 1hcvDy-0003aB-QO; Mon, 17 Jun 2019 13:15:20 -0400
+Received: by mail-lf1-x143.google.com with SMTP id b11so7091278lfa.5;
+ Mon, 17 Jun 2019 10:15:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=0hrRRgMO2XtUkfzFyfRARDAR6X0+SctDDT9Im4dP8Vs=;
- b=O61tMpNTiqCuqJvEfhU0RpY5m+EgOAhk1sdhUpYhNkZWbCfbazN5cCPxNcQRVaWMF6
- P2s8VrNhj3+nQRgugfpFrdpATxsj4ZcPHRVN4vjxvrl3BVVkv6wfoLg81zY4bPtxADsw
- G/rUCzf/ryMKdKxVb4v9FNCPMnU8bk0yUw0nV3MT32pRLNUxu1hYHH4z+grPYnhmij0p
- nYnay7EVd003vmY0wnM0CnC4SWYffsToW1AtFJCcM3y8dMyOtXPvxpUHYmbVrIHtnNDM
- 1qoVa63wInP4H+gXAnxGFvKSowCDG1K5OZN0uvOP1I9BWhDestgk05XWg/+HUT0FHrJ7
- Vgeg==
+ :cc; bh=K+x7AQu53uygU1oaBt5GPKty0iv5sR5jknseIKEMUgo=;
+ b=lfaSkP9lF0xySR+QRe6Cy4HF3eBmqfEWYcmscpBLsuQUh/oGvb/8f9nyhwh8OmL8TT
+ CUpTGwdh3xctcUEhNRSumMACJyByacE3gVhf3/rZ7OffkjXVMcJtBQMzdQ+6/n1A1ADZ
+ YMlPwxWIqF8RsTRXoxpTK8w3YS58VGBpZJEjSCQx6Bw/TFqahBcbzgPlB2YDRPIlktgC
+ 2SAYljEdMx2tJ8eqGqV1VKQ8Ael5Rq2myypB92eAgxP/n6FjzXmh/Fvs/w7wLUHf5hDZ
+ Gz5rwv8jJ8u+HeSvIs0PUhLrPGOB2UDCevCYXVqLWYID0wYmPBuSQVKdeqAOo9xx952+
+ 2SPQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=0hrRRgMO2XtUkfzFyfRARDAR6X0+SctDDT9Im4dP8Vs=;
- b=L2HuH0elz20aT6HHFkcQxl/ffSPgW+X7EpF4D6hJAc5DZlEBorCl2rsSnMuH9LGrGd
- WhRTkfh2Iz7C6NZnnbFTP+qSN121ewF9zSIfpqDxygP4gK/tnOR1GICQnitoNWskPhNT
- VevsRyVMQt776CCgxKGMFMUXzqjG8xndj9aebLJ0RGeixfo4Za5JKe0AcntcAlQgRnCE
- okEb2i7hSDuTPQZanHdfnXXcBDG0zsP6X0YyL978oUz7U4NPzMoghhRYKYJSiTJja4Wn
- dO/TSskl1cv4xR/vF6n6trxh3ZoMzefWy6mswByTDRxWkILgOMD0ZkewDxkLsykjs4VT
- J9OQ==
-X-Gm-Message-State: APjAAAU4+LPFcOHAVUgMnlAaZBG/3w1RUjNrUm10iy3mAbNwEngdeQeo
- xg+lqaRA/a4ARsVVlZ8cX3ukotDTWFEckrb6cB4=
-X-Google-Smtp-Source: APXvYqyP7APFa0lOxtv7oP+QeA+1h/YjUDHpPlP4U3tcUB3+Hbu0VL2lIx9mJXbhvz5bdHq7X4yJDc8jC0rvC1nRsLg=
-X-Received: by 2002:a2e:9188:: with SMTP id f8mr323422ljg.33.1560791306223;
- Mon, 17 Jun 2019 10:08:26 -0700 (PDT)
+ bh=K+x7AQu53uygU1oaBt5GPKty0iv5sR5jknseIKEMUgo=;
+ b=PaGXLTt6PnByOfMoccE91Xdzqpf/f0EHJr2hnx/7t0g53wE8k0YcbC+C4w3PuDYEoJ
+ ZcilBoZbnGwsETXBQM5/VZIYAlD23AHRwPOklG6S3hEg25/iqzSRpMRwxEvaFSMumELx
+ lz1bdyhZlG48BI26VUzDqhmE9eqOE4REbKw1XMyaphcxjucaj1NHf/9OFwM4OJ+fNgBz
+ BFGdJpB8CGIzfZEzInppv2XVhJCrrJINmbqmDbZdJE1UjI6hN02p8wrxdxLSPlLKchNY
+ lO3pzzV+E1ZxPCwmda+HoE7h9R6ieS5QluBYgfwdQccE72qTNCF/lF9Az0ERYV5bnCEd
+ 9zXQ==
+X-Gm-Message-State: APjAAAUpm0I1lELi0oy7d8y+mB+VAux4CQsP//rpMVBVqQZED/Cxjncd
+ 1mGYYeEeYzam4NydiuohKlw83pFWCiXn72fMKT4=
+X-Google-Smtp-Source: APXvYqwY5Ttazos/3DeMn1o9pS//LL00uOECszMPL+61NaE3JDRZHfGxXROPowXbnhklPU+flsNpQxAUM39Ft3LYRmc=
+X-Received: by 2002:a19:bec1:: with SMTP id o184mr26124571lff.86.1560791717179; 
+ Mon, 17 Jun 2019 10:15:17 -0700 (PDT)
 MIME-Version: 1.0
-References: <d4664adffe008df43f2a0760dd4e2b9cb834b652.1558131003.git.alistair.francis@wdc.com>
- <mhng-bd7fc2fb-94f7-4afa-b03c-4f8674d5ade4@palmer-si-x1e>
-In-Reply-To: <mhng-bd7fc2fb-94f7-4afa-b03c-4f8674d5ade4@palmer-si-x1e>
+References: <1560525351-590-1-git-send-email-bmeng.cn@gmail.com>
+In-Reply-To: <1560525351-590-1-git-send-email-bmeng.cn@gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 17 Jun 2019 10:05:39 -0700
-Message-ID: <CAKmqyKNV8PY1hgXq7QO9SxwdXCWxCBGw5pvgSgBpPy4pVvB7Dw@mail.gmail.com>
-To: Palmer Dabbelt <palmer@sifive.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
+Date: Mon, 17 Jun 2019 10:12:30 -0700
+Message-ID: <CAKmqyKMVH9MCPRD3DYm9-O59H2=DVXA8L9Sa3pNsYs=wbZRiug@mail.gmail.com>
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ Palmer Dabbelt <palmer@sifive.com>
 Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::243
-Subject: Re: [Qemu-riscv] [PATCH v1 3/4] disas/riscv: Fix `rdinstreth`
- constraint
+X-Received-From: 2a00:1450:4864:20::143
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH] riscv: sifive_test: Add reset
+ functionality
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -67,45 +67,64 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Jun 2019 17:08:33 -0000
+X-List-Received-Date: Mon, 17 Jun 2019 17:15:26 -0000
 
-On Fri, Jun 14, 2019 at 2:41 AM Palmer Dabbelt <palmer@sifive.com> wrote:
+On Fri, Jun 14, 2019 at 8:30 AM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
-> On Fri, 17 May 2019 15:11:04 PDT (-0700), Alistair Francis wrote:
-> > From: Michael Clark <mjc@sifive.com>
-> >
-> > The constraint for `rdinstreth` was comparing the csr number to 0xc80,
-> > which is `cycleh` instead. Fix this.
-> >
-> > Author: Wladimir J. van der Laan <laanwj@gmail.com>
+> This adds a reset opcode for sifive_test device to trigger a system
+> reset for testing purpose.
 >
-> I'm not sure what this tag is supposed to mean.  If this is the actual author
-> of the patch, then shouldn't it also have a SOB?
+> Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
+> ---
+>
+>  hw/riscv/sifive_test.c         | 4 ++++
+>  include/hw/riscv/sifive_test.h | 3 ++-
+>  2 files changed, 6 insertions(+), 1 deletion(-)
+>
+> diff --git a/hw/riscv/sifive_test.c b/hw/riscv/sifive_test.c
+> index 24a04d7..cd86831 100644
+> --- a/hw/riscv/sifive_test.c
+> +++ b/hw/riscv/sifive_test.c
+> @@ -21,6 +21,7 @@
+>  #include "qemu/osdep.h"
+>  #include "hw/sysbus.h"
+>  #include "qemu/module.h"
+> +#include "sysemu/sysemu.h"
+>  #include "target/riscv/cpu.h"
+>  #include "hw/riscv/sifive_test.h"
+>
+> @@ -40,6 +41,9 @@ static void sifive_test_write(void *opaque, hwaddr addr,
+>              exit(code);
+>          case FINISHER_PASS:
+>              exit(0);
+> +        case FINISHER_RESET:
+> +            qemu_system_reset_request(SHUTDOWN_CAUSE_GUEST_RESET);
+> +            return;
+>          default:
+>              break;
+>          }
+> diff --git a/include/hw/riscv/sifive_test.h b/include/hw/riscv/sifive_test.h
+> index 71d4c9f..c186a31 100644
+> --- a/include/hw/riscv/sifive_test.h
+> +++ b/include/hw/riscv/sifive_test.h
+> @@ -34,7 +34,8 @@ typedef struct SiFiveTestState {
+>
+>  enum {
+>      FINISHER_FAIL = 0x3333,
+> -    FINISHER_PASS = 0x5555
+> +    FINISHER_PASS = 0x5555,
+> +    FINISHER_RESET = 0x7777
 
-I'm not sure either, that is the line that the patch had and I didn't
-want to change it. I'm not sure what usually happens in cases like
-this.
+Do you mind sharing where you got this value from? I can't find
+details on this device in the SiFive manuals.
 
 Alistair
 
+>  };
 >
-> > Signed-off-by: Michael Clark <mjc@sifive.com>
-> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> > ---
-> >  disas/riscv.c | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> >
-> > diff --git a/disas/riscv.c b/disas/riscv.c
-> > index 3ab4586f0a..c2578a3c4b 100644
-> > --- a/disas/riscv.c
-> > +++ b/disas/riscv.c
-> > @@ -614,7 +614,7 @@ static const rvc_constraint rvcc_rdtime[] = { rvc_rs1_eq_x0, rvc_csr_eq_0xc01, r
-> >  static const rvc_constraint rvcc_rdinstret[] = { rvc_rs1_eq_x0, rvc_csr_eq_0xc02, rvc_end };
-> >  static const rvc_constraint rvcc_rdcycleh[] = { rvc_rs1_eq_x0, rvc_csr_eq_0xc80, rvc_end };
-> >  static const rvc_constraint rvcc_rdtimeh[] = { rvc_rs1_eq_x0, rvc_csr_eq_0xc81, rvc_end };
-> > -static const rvc_constraint rvcc_rdinstreth[] = { rvc_rs1_eq_x0, rvc_csr_eq_0xc80, rvc_end };
-> > +static const rvc_constraint rvcc_rdinstreth[] = { rvc_rs1_eq_x0, rvc_csr_eq_0xc82, rvc_end };
-> >  static const rvc_constraint rvcc_frcsr[] = { rvc_rs1_eq_x0, rvc_csr_eq_0x003, rvc_end };
-> >  static const rvc_constraint rvcc_frrm[] = { rvc_rs1_eq_x0, rvc_csr_eq_0x002, rvc_end };
-> >  static const rvc_constraint rvcc_frflags[] = { rvc_rs1_eq_x0, rvc_csr_eq_0x001, rvc_end };
+>  DeviceState *sifive_test_create(hwaddr addr);
+> --
+> 2.7.4
+>
+>
 
