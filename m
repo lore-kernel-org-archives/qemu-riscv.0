@@ -1,48 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hcnIG-0000Df-O2
-	for mharc-qemu-riscv@gnu.org; Mon, 17 Jun 2019 04:47:14 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:47217)
+	id 1hcv7S-0005i0-V9
+	for mharc-qemu-riscv@gnu.org; Mon, 17 Jun 2019 13:08:34 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:37475)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <chouteau@adacore.com>) id 1hcnIC-0000Ci-OR
- for qemu-riscv@nongnu.org; Mon, 17 Jun 2019 04:47:10 -0400
+ (envelope-from <alistair23@gmail.com>) id 1hcv7Q-0005dY-E8
+ for qemu-riscv@nongnu.org; Mon, 17 Jun 2019 13:08:33 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <chouteau@adacore.com>) id 1hcnIA-00075t-Pz
- for qemu-riscv@nongnu.org; Mon, 17 Jun 2019 04:47:08 -0400
-Received: from mel.act-europe.fr ([194.98.77.210]:45276
- helo=smtp.eu.adacore.com)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <chouteau@adacore.com>)
- id 1hcnI4-0006xD-Jb; Mon, 17 Jun 2019 04:47:01 -0400
-Received: from localhost (localhost [127.0.0.1])
- by filtered-smtp.eu.adacore.com (Postfix) with ESMTP id BE6E38137C;
- Mon, 17 Jun 2019 10:46:56 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at eu.adacore.com
-Received: from smtp.eu.adacore.com ([127.0.0.1])
- by localhost (smtp.eu.adacore.com [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id CUhdtC4H-o5Z; Mon, 17 Jun 2019 10:46:56 +0200 (CEST)
-Received: from [192.168.0.17] (89-157-139-225.rev.numericable.fr
- [89.157.139.225])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (No client certificate requested)
- by smtp.eu.adacore.com (Postfix) with ESMTPSA id ADBD381354;
- Mon, 17 Jun 2019 10:46:55 +0200 (CEST)
-To: Palmer Dabbelt <palmer@sifive.com>,
- Peter Maydell <peter.maydell@linaro.org>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-References: <mhng-1958cec5-7d9d-483b-bb14-72e53bbde47f@palmer-si-x1e>
-From: Fabien Chouteau <chouteau@adacore.com>
-Message-ID: <46a4a99c-2240-dc68-9088-7ec985c26203@adacore.com>
-Date: Mon, 17 Jun 2019 10:46:53 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.7.0
+ (envelope-from <alistair23@gmail.com>) id 1hcv7P-0000FN-DJ
+ for qemu-riscv@nongnu.org; Mon, 17 Jun 2019 13:08:32 -0400
+Received: from mail-lj1-x243.google.com ([2a00:1450:4864:20::243]:39700)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <alistair23@gmail.com>)
+ id 1hcv7M-00008D-Sv; Mon, 17 Jun 2019 13:08:29 -0400
+Received: by mail-lj1-x243.google.com with SMTP id v18so10042100ljh.6;
+ Mon, 17 Jun 2019 10:08:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=0hrRRgMO2XtUkfzFyfRARDAR6X0+SctDDT9Im4dP8Vs=;
+ b=O61tMpNTiqCuqJvEfhU0RpY5m+EgOAhk1sdhUpYhNkZWbCfbazN5cCPxNcQRVaWMF6
+ P2s8VrNhj3+nQRgugfpFrdpATxsj4ZcPHRVN4vjxvrl3BVVkv6wfoLg81zY4bPtxADsw
+ G/rUCzf/ryMKdKxVb4v9FNCPMnU8bk0yUw0nV3MT32pRLNUxu1hYHH4z+grPYnhmij0p
+ nYnay7EVd003vmY0wnM0CnC4SWYffsToW1AtFJCcM3y8dMyOtXPvxpUHYmbVrIHtnNDM
+ 1qoVa63wInP4H+gXAnxGFvKSowCDG1K5OZN0uvOP1I9BWhDestgk05XWg/+HUT0FHrJ7
+ Vgeg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=0hrRRgMO2XtUkfzFyfRARDAR6X0+SctDDT9Im4dP8Vs=;
+ b=L2HuH0elz20aT6HHFkcQxl/ffSPgW+X7EpF4D6hJAc5DZlEBorCl2rsSnMuH9LGrGd
+ WhRTkfh2Iz7C6NZnnbFTP+qSN121ewF9zSIfpqDxygP4gK/tnOR1GICQnitoNWskPhNT
+ VevsRyVMQt776CCgxKGMFMUXzqjG8xndj9aebLJ0RGeixfo4Za5JKe0AcntcAlQgRnCE
+ okEb2i7hSDuTPQZanHdfnXXcBDG0zsP6X0YyL978oUz7U4NPzMoghhRYKYJSiTJja4Wn
+ dO/TSskl1cv4xR/vF6n6trxh3ZoMzefWy6mswByTDRxWkILgOMD0ZkewDxkLsykjs4VT
+ J9OQ==
+X-Gm-Message-State: APjAAAU4+LPFcOHAVUgMnlAaZBG/3w1RUjNrUm10iy3mAbNwEngdeQeo
+ xg+lqaRA/a4ARsVVlZ8cX3ukotDTWFEckrb6cB4=
+X-Google-Smtp-Source: APXvYqyP7APFa0lOxtv7oP+QeA+1h/YjUDHpPlP4U3tcUB3+Hbu0VL2lIx9mJXbhvz5bdHq7X4yJDc8jC0rvC1nRsLg=
+X-Received: by 2002:a2e:9188:: with SMTP id f8mr323422ljg.33.1560791306223;
+ Mon, 17 Jun 2019 10:08:26 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <mhng-1958cec5-7d9d-483b-bb14-72e53bbde47f@palmer-si-x1e>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 3.x
-X-Received-From: 194.98.77.210
-Subject: Re: [Qemu-riscv] [PULL 01/29] SiFive RISC-V GPIO Device
+References: <d4664adffe008df43f2a0760dd4e2b9cb834b652.1558131003.git.alistair.francis@wdc.com>
+ <mhng-bd7fc2fb-94f7-4afa-b03c-4f8674d5ade4@palmer-si-x1e>
+In-Reply-To: <mhng-bd7fc2fb-94f7-4afa-b03c-4f8674d5ade4@palmer-si-x1e>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Mon, 17 Jun 2019 10:05:39 -0700
+Message-ID: <CAKmqyKNV8PY1hgXq7QO9SxwdXCWxCBGw5pvgSgBpPy4pVvB7Dw@mail.gmail.com>
+To: Palmer Dabbelt <palmer@sifive.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2a00:1450:4864:20::243
+Subject: Re: [Qemu-riscv] [PATCH v1 3/4] disas/riscv: Fix `rdinstreth`
+ constraint
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -54,10 +67,45 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Jun 2019 08:47:10 -0000
+X-List-Received-Date: Mon, 17 Jun 2019 17:08:33 -0000
 
-On 14/06/2019 14:10, Palmer Dabbelt wrote:
-> Sorry this took a while to fix, I've just sent a patch to fix the memory leak.
+On Fri, Jun 14, 2019 at 2:41 AM Palmer Dabbelt <palmer@sifive.com> wrote:
+>
+> On Fri, 17 May 2019 15:11:04 PDT (-0700), Alistair Francis wrote:
+> > From: Michael Clark <mjc@sifive.com>
+> >
+> > The constraint for `rdinstreth` was comparing the csr number to 0xc80,
+> > which is `cycleh` instead. Fix this.
+> >
+> > Author: Wladimir J. van der Laan <laanwj@gmail.com>
+>
+> I'm not sure what this tag is supposed to mean.  If this is the actual author
+> of the patch, then shouldn't it also have a SOB?
 
-Thank you for taking care of this!
+I'm not sure either, that is the line that the patch had and I didn't
+want to change it. I'm not sure what usually happens in cases like
+this.
+
+Alistair
+
+>
+> > Signed-off-by: Michael Clark <mjc@sifive.com>
+> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> > ---
+> >  disas/riscv.c | 2 +-
+> >  1 file changed, 1 insertion(+), 1 deletion(-)
+> >
+> > diff --git a/disas/riscv.c b/disas/riscv.c
+> > index 3ab4586f0a..c2578a3c4b 100644
+> > --- a/disas/riscv.c
+> > +++ b/disas/riscv.c
+> > @@ -614,7 +614,7 @@ static const rvc_constraint rvcc_rdtime[] = { rvc_rs1_eq_x0, rvc_csr_eq_0xc01, r
+> >  static const rvc_constraint rvcc_rdinstret[] = { rvc_rs1_eq_x0, rvc_csr_eq_0xc02, rvc_end };
+> >  static const rvc_constraint rvcc_rdcycleh[] = { rvc_rs1_eq_x0, rvc_csr_eq_0xc80, rvc_end };
+> >  static const rvc_constraint rvcc_rdtimeh[] = { rvc_rs1_eq_x0, rvc_csr_eq_0xc81, rvc_end };
+> > -static const rvc_constraint rvcc_rdinstreth[] = { rvc_rs1_eq_x0, rvc_csr_eq_0xc80, rvc_end };
+> > +static const rvc_constraint rvcc_rdinstreth[] = { rvc_rs1_eq_x0, rvc_csr_eq_0xc82, rvc_end };
+> >  static const rvc_constraint rvcc_frcsr[] = { rvc_rs1_eq_x0, rvc_csr_eq_0x003, rvc_end };
+> >  static const rvc_constraint rvcc_frrm[] = { rvc_rs1_eq_x0, rvc_csr_eq_0x002, rvc_end };
+> >  static const rvc_constraint rvcc_frflags[] = { rvc_rs1_eq_x0, rvc_csr_eq_0x001, rvc_end };
 
