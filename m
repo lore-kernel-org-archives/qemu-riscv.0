@@ -1,58 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hd30i-00072q-EF
-	for mharc-qemu-riscv@gnu.org; Mon, 17 Jun 2019 21:34:08 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:41083)
+	id 1hd30l-00075C-QC
+	for mharc-qemu-riscv@gnu.org; Mon, 17 Jun 2019 21:34:12 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:41096)
  by lists.gnu.org with esmtp (Exim 4.86_2)
  (envelope-from <prvs=0651fb9a1=alistair.francis@wdc.com>)
- id 1hd30b-0006zc-M9
- for qemu-riscv@nongnu.org; Mon, 17 Jun 2019 21:34:03 -0400
+ id 1hd30g-00070f-Hn
+ for qemu-riscv@nongnu.org; Mon, 17 Jun 2019 21:34:08 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
  (envelope-from <prvs=0651fb9a1=alistair.francis@wdc.com>)
- id 1hd30Z-0000Uo-Oy
- for qemu-riscv@nongnu.org; Mon, 17 Jun 2019 21:34:01 -0400
+ id 1hd30c-0000Yt-Ui
+ for qemu-riscv@nongnu.org; Mon, 17 Jun 2019 21:34:04 -0400
 Received: from esa5.hgst.iphmx.com ([216.71.153.144]:24430)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <prvs=0651fb9a1=alistair.francis@wdc.com>)
- id 1hd30J-0000A1-HE; Mon, 17 Jun 2019 21:33:43 -0400
+ id 1hd30P-0000A1-B2; Mon, 17 Jun 2019 21:33:50 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1560821624; x=1592357624;
+ t=1560821630; x=1592357630;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=Ve7Ap2V5Mkzuo0d+Wcq3sQxhlCvQxeKzZZrn5vyIJDU=;
- b=ECp8H+q9NOjnPlJvWupXQmAadkLWhNBcEJ2h6cv3bATQBGLld+CPkxLh
- eoIwk/vmq7JOwkTFggWLDCdkcYQAxVOQc8MfvzIXs2+5T47PVRG43mujy
- R9RhcXrH58ha+OAcfdVwqWmVFsdMuaE5TAnOFLEXlDp51/c0LCe5T3YmZ
- Ak/o1SHBawA00xJ+TLQZ1j5kJs3ZV05nugmdKPyEDrKK7bBMF82/uSonc
- hO/qlqw5VOvuD3JP/LUmh1zdPJliPGtmZC0aOsYlJMzXAyMy9eH/E60kk
- tzzpQdKCGxyq2a15+J+ycQrXZnSTJcIOjhQ0D2HA8HQ416gMYXJdBct2s w==;
-X-IronPort-AV: E=Sophos;i="5.63,386,1557158400"; d="scan'208";a="112055106"
+ bh=uH8d/1+DYmxt/Xfe8gKKkT1GvkSK1xuKXxkSixU4Pc0=;
+ b=pd1UHrMvpKCOIzmVrfA9KMzYBSNEkVMHt0xraEKC50MMN0RzFEYRNiJQ
+ G13fhd/AduBmBeugmEs7oiKU/GejMbukju/hc6TT38HTI4bau7z5gip9s
+ klNvq2MCPlyfr/F0L9Z/Z3L6s6BWWpwTonW3OdjZfFQQ+H2WRAoeRhYQx
+ erUYKMlCjSdvTInHuVDIiyXJ8U4z2HuS5gY1Xs6S0wB2SZV5zkdP9N3Ld
+ pA7v+7NAj2GhjJF91sdZXLB818pvE1i3jZLyG9rWWHgT7/DMRFqHjCmNd
+ pAHdNFF32OtDYeRYniIMWj2whqXk+Y4wKMSVniLp4qyLtyVpUUE+o0Bje g==;
+X-IronPort-AV: E=Sophos;i="5.63,386,1557158400"; d="scan'208";a="112055111"
 Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com)
  ([199.255.45.15])
- by ob1.hgst.iphmx.com with ESMTP; 18 Jun 2019 09:33:43 +0800
-IronPort-SDR: ZhQj4XHgkWXVSjUqRGOx0ABHujaYrrIWVqhsZdSar8fQMqxA792Hwrd9eJE/GScz6tb461x5rA
- VvQpkM0/0Wg0lLFXi+UQsfr/7Y2RFJOx8zvzFYqqtwXrt4Iiycl23neI5yafRduoepsoyywgTI
- 0c3AQmWDgWWpJokNzfzTspy2IJWmVkdbHJcVm3UPeZXgQ2SToKAz51bLzEY4wRcbC86MVKYZH5
- xXGele0dZCtm4kPQ/fG1i6Aw9Cx2Agr+4lNOGTLe+yotAMCEfV5npNcmeAvzdecpB7bHyZxqMh
- 7+bLqEiKt9EDfx4fRH24qGDD
+ by ob1.hgst.iphmx.com with ESMTP; 18 Jun 2019 09:33:46 +0800
+IronPort-SDR: mH6/vsWpBn+SZNGPzspR0dN5sgjpMWvW2sDL7iT5jD3h4qtw0+mglclnlka63oncxYDcDO0AAz
+ xb0K+c+4/wZOMEZIGSx80fgYQLUiAdgi+oW0OxTPgggiA4AVbIjL+vpnLyOxphg4waXL4WGQMT
+ HAIDfKherUyiVKFq6h8t8OHT/5DfahFHUyf7uNtjDc7K7KS6nqnMJyCFk5vAJDw6IFWyzpmB9D
+ eKz1pXoXBv4iyCnL9sFWN8Hypta6ZduGQRUXtXB19eE8H/Ze6o1sLm6ukmIfHKryhqsdfiBEne
+ Azxwde8w9zZgsap6sSkcNrf4
 Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
- by uls-op-cesaep02.wdc.com with ESMTP; 17 Jun 2019 18:33:13 -0700
-IronPort-SDR: h2r49Tu76lOiElmHZIxKCo4Ci+Vm4kHWtUvtBTOi+ET5XNLkwZySy8+uOF+QQO51i5p/hBltGU
- 3e5ER8uFdAHtlsRWqBX4cimCldQZJ3iv3/6opkROw3mK6XbpeMoODmAz3JQHKUCFeMSqN0PoK4
- p5HovBl88flZMEZKVqehgxBPK/RDRXFlxHUnQiC1SsYuFu8SoMs3gs8nVNWbSJ14ZOVokDgQ0x
- 91oWU9NlA8h22Hfnm9AoimYFJdCDVRXMAlmQIhtnFaIFiXU9ZLTxLCPuMx6pCwVvWgnXnHy2Uk
- bxg=
+ by uls-op-cesaep02.wdc.com with ESMTP; 17 Jun 2019 18:33:15 -0700
+IronPort-SDR: lNFw6ircjrCK71GcwOT2l+NmTHmvbYfifZJ4pmli0yXcGnYb9INWjrbEYNG5hWu32wMpi+Xx1J
+ UaNWvvWQiRWcgczt3t3yT5idls7zSuG4gy9reLHxkZ1YNtEBK/s4w2+lhI9XKGbwuEiwlLywlJ
+ 33pC2dZG6LV+1r4oLb2/NICe4kVJc0+KPzg45wPUsfHZk2PIqbigx2hT2o9C28PaDznY4wib8M
+ lUKv/EolHNC0k6QGIl3r1H/pyOAdYUnSOmo3YJZOOpUZzcVPFw8G4TKGWOYpt/RYSJy7TMZtvl
+ 37k=
 Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
  risc6-mainframe.int.fusionio.com) ([10.196.157.140])
- by uls-op-cesaip02.wdc.com with ESMTP; 17 Jun 2019 18:33:43 -0700
+ by uls-op-cesaip02.wdc.com with ESMTP; 17 Jun 2019 18:33:46 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: palmer@sifive.com,
 	alistair.francis@wdc.com,
 	alistair23@gmail.com
-Date: Mon, 17 Jun 2019 18:31:22 -0700
-Message-Id: <4ae1c7156ed0e8b0d2441c9e5954dfe623792d13.1560821342.git.alistair.francis@wdc.com>
+Date: Mon, 17 Jun 2019 18:31:25 -0700
+Message-Id: <b1a3188a4d5538d4d0ed0a77114926a2fdae1258.1560821342.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.22.0
 In-Reply-To: <cover.1560821342.git.alistair.francis@wdc.com>
 References: <cover.1560821342.git.alistair.francis@wdc.com>
@@ -61,8 +61,8 @@ Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
 X-Received-From: 216.71.153.144
-Subject: [Qemu-riscv] [PATCH v1 8/9] target/riscv: Add support for
- disabling/enabling Counters
+Subject: [Qemu-riscv] [PATCH v1 9/9] target/riscv: Add Zifencei and Zicsr as
+ command line options
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -74,61 +74,57 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Jun 2019 01:34:05 -0000
+X-List-Received-Date: Tue, 18 Jun 2019 01:34:08 -0000
 
-Add support for disabling/enabling the "Counters" extension.
+For completeness let's add Zifencei and Zicsr as command line options,
+even though they can't be disabled at the moment.
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/cpu.c | 1 +
- target/riscv/cpu.h | 1 +
- target/riscv/csr.c | 7 +++++++
- 3 files changed, 9 insertions(+)
+ target/riscv/cpu.c | 9 +++++++++
+ target/riscv/cpu.h | 2 ++
+ 2 files changed, 11 insertions(+)
 
 diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index ddbe922958..5af1c9b38c 100644
+index 5af1c9b38c..53cf8607f7 100644
 --- a/target/riscv/cpu.c
 +++ b/target/riscv/cpu.c
-@@ -440,6 +440,7 @@ static Property riscv_cpu_properties[] = {
-     DEFINE_PROP_BOOL("c", RISCVCPU, cfg.ext_c, true),
+@@ -409,6 +409,13 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+         set_misa(env, RVXLEN | target_misa);
+     }
+ 
++    if (!cpu->cfg.ext_ifencei) {
++        warn_report("QEMU does not support disabling Zifencei");
++    }
++    if (!cpu->cfg.ext_icsr) {
++        warn_report("QEMU does not support disabling Zicsr");
++    }
++
+     riscv_cpu_register_gdb_regs_for_features(cs);
+ 
+     qemu_init_vcpu(cs);
+@@ -441,6 +448,8 @@ static Property riscv_cpu_properties[] = {
      DEFINE_PROP_BOOL("s", RISCVCPU, cfg.ext_s, true),
      DEFINE_PROP_BOOL("u", RISCVCPU, cfg.ext_u, true),
-+    DEFINE_PROP_BOOL("Counters", RISCVCPU, cfg.ext_counters, true),
+     DEFINE_PROP_BOOL("Counters", RISCVCPU, cfg.ext_counters, true),
++    DEFINE_PROP_BOOL("Zifencei", RISCVCPU, cfg.ext_ifencei, true),
++    DEFINE_PROP_BOOL("Zicsr", RISCVCPU, cfg.ext_icsr, true),
      DEFINE_PROP_STRING("priv_spec", RISCVCPU, cfg.priv_spec),
      DEFINE_PROP_BOOL("mmu", RISCVCPU, cfg.mmu, true),
      DEFINE_PROP_BOOL("pmp", RISCVCPU, cfg.pmp, true),
 diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index a558c353f0..786f620564 100644
+index 786f620564..b4c212dfcf 100644
 --- a/target/riscv/cpu.h
 +++ b/target/riscv/cpu.h
-@@ -221,6 +221,7 @@ typedef struct RISCVCPU {
-         bool ext_c;
+@@ -222,6 +222,8 @@ typedef struct RISCVCPU {
          bool ext_s;
          bool ext_u;
-+        bool ext_counters;
+         bool ext_counters;
++        bool ext_ifencei;
++        bool ext_icsr;
  
          char *priv_spec;
          char *user_spec;
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 437387fd28..a9aa8ab1b5 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -56,8 +56,15 @@ static int fs(CPURISCVState *env, int csrno)
- static int ctr(CPURISCVState *env, int csrno)
- {
- #if !defined(CONFIG_USER_ONLY)
-+    CPUState *cs = env_cpu(env);
-+    RISCVCPU *cpu = RISCV_CPU(cs);
-     uint32_t ctr_en = ~0u;
- 
-+    if (!cpu->cfg.ext_counters) {
-+        /* The Counters extensions is not enabled */
-+        return -1;
-+    }
-+
-     if (env->priv < PRV_M) {
-         ctr_en &= env->mcounteren;
-     }
 -- 
 2.22.0
 
