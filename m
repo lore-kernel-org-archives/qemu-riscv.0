@@ -1,58 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hd30H-0006tK-IO
-	for mharc-qemu-riscv@gnu.org; Mon, 17 Jun 2019 21:33:41 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:40998)
+	id 1hd30f-00070X-Hh
+	for mharc-qemu-riscv@gnu.org; Mon, 17 Jun 2019 21:34:06 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:41035)
  by lists.gnu.org with esmtp (Exim 4.86_2)
  (envelope-from <prvs=0651fb9a1=alistair.francis@wdc.com>)
- id 1hd30E-0006lu-Fb
- for qemu-riscv@nongnu.org; Mon, 17 Jun 2019 21:33:39 -0400
+ id 1hd30J-0006wm-Q1
+ for qemu-riscv@nongnu.org; Mon, 17 Jun 2019 21:33:48 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
  (envelope-from <prvs=0651fb9a1=alistair.francis@wdc.com>)
- id 1hd30D-00008W-EB
- for qemu-riscv@nongnu.org; Mon, 17 Jun 2019 21:33:38 -0400
-Received: from esa3.hgst.iphmx.com ([216.71.153.141]:60680)
+ id 1hd30I-0000Fm-HR
+ for qemu-riscv@nongnu.org; Mon, 17 Jun 2019 21:33:43 -0400
+Received: from esa5.hgst.iphmx.com ([216.71.153.144]:24430)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <prvs=0651fb9a1=alistair.francis@wdc.com>)
- id 1hd30A-0008QF-Uf; Mon, 17 Jun 2019 21:33:35 -0400
+ id 1hd30G-0000A1-1s; Mon, 17 Jun 2019 21:33:40 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1560821615; x=1592357615;
+ t=1560821621; x=1592357621;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=tqX0fYHQddrpY4KXEEAbz2+C779KVIJCqxSKXh0arRw=;
- b=FJchp/Z01A5fmDXCvNKYqOX/3R2AiWMy5qApG0DT/vEHHHjPoFOhXZ8V
- b5+jabbP0b0snfIk6LLw7ASCw/0OjjzvXD+aDNK4vF5fxzr07YnvWzXkV
- vgE9Gb5WOf8XQTxj69A2kFrDKHRD8oP83zRs0b8JO4+eVdArM1kpQx60z
- bC6tFT8lUE6U9tLv2cNzAD2FULisskfiR7f3J57AS/m/N5PKT1+PJYCMt
- VJJBCIEdCn7CLlR7/jsbOFgO22xvxnbYG9FVaZALJi8/CQV/cNPQ3mDsc
- 5SxmWG5NanayFReXDvj21xANCyLVNSUJQPktsjcW0zu0hu9DB1kL+2RJ2 g==;
-X-IronPort-AV: E=Sophos;i="5.63,386,1557158400"; d="scan'208";a="115717034"
-Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
- ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 18 Jun 2019 09:33:34 +0800
-IronPort-SDR: cp9ajpirFhe8vkpB/SRmOQGjypRngaLzn/Qu8ZpYkjVt9vT8hxP0pUfuN2OExOnVQdi28+nKx1
- DkAdFdu+p4Iv5qjjL7eyC7rHAya4Glouj4/ARKNy6g316SVmGmGmUF0bpkOnhg5/VptCVoNIr1
- 0BpbRsN1x3A9kW+vrrsnXDPxvhdybwqE5lmO7/zKSkcoSzCRMYnnwVVyAnw+IyzGzOQvSZY7ea
- GPGyWvb2ygi4C6mri144HMSFRgQ3ZhD2N+7X1DUHXmByrPPGW+enqJcXlTU8ko0TjroPMHOq2Q
- yfJeseQoraBko+hUmBZifApe
-Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
- by uls-op-cesaep01.wdc.com with ESMTP; 17 Jun 2019 18:33:07 -0700
-IronPort-SDR: nL3S6vzMVwNY/N+ThlmOTPSJdMsRn9vKFmo6aWI4e84Mye16/5V6GAKGBKc++GOilzDaqdCfEA
- qOr0g4i5eICi6QMa92qz5Y8yCfo3n2zkBWJ580PQfssCjFKoUHYWAT8HCt483oaGcufTQ1WpQo
- wcO64g2W/gFTPYfiujwPJs10zhqpESjPTcN+sLNwL5oGBuNQT4wr0uQu6nkq5S6Zkr5lGxiarN
- qqeDUYOAh5AAeKbVZ9xuEoBs/1cc6mz8lOmb0Q7PfQhZjKcRqPMwbauzaADOWd3aPtbl2V979o
- H+w=
+ bh=1DnzSt3sQDws/SE2q/bnTC49Un43YEdEs+g3y0l0KYg=;
+ b=WNctb61J+9jHlFBAgYh955a4Ph0+0hfnoBpOThMXwwnnFb4ukPB3vLsY
+ yjR3EokVYZk5fclcc4cpTQj8WvKj0Ez2jxd57Vvt/Cnr6wna8fRyC0jzb
+ 15tVyxIGZg25wO3L/pl6mfWFQuEtJ9I44wwCiZMkhMFR51AcnNnkRABLv
+ U82kQtZ+QR0G6WD/L2vIrTsznmYFQZBDFwkHYPPs+O7ni1NeBqohnyYYx
+ n96EIO9sE1dhRBxaAq/G+03avlcel2EGncONmGXflhLjYOBUJAhya1OZt
+ dAlZHdb54cxTYF5+yPvGm7lld7hcMsRVzOz3TvLtvlrhv/JbqWPHnv7+Q g==;
+X-IronPort-AV: E=Sophos;i="5.63,386,1557158400"; d="scan'208";a="112055101"
+Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com)
+ ([199.255.45.15])
+ by ob1.hgst.iphmx.com with ESMTP; 18 Jun 2019 09:33:38 +0800
+IronPort-SDR: YBoaTcgeHuQmWtwjEceuKgQyr62f5QVv4gAALma4fWRDHiFiGuoesIcrltWCdHHWSmA54lt7Lw
+ PP1PWZqnN5ErtDbspe0/Fur7dHKPVzbD2dTgQltA/HYtbvUdVI5F5p3CJV20HLRs+PjeMzOrmY
+ 0KI1mx0b39/eTnvPE3FXSt5cNMtxtMrW0xgY0JtyuNDAX02Tzqho3hm5i9KFEs/VC7o0vD4Xa4
+ uI6DiMe/o2/I76+3Z/7EyAfXR2wC//jW2ORzvNsB3NeU+E6kBnbmTewwVUzyAf6YeMfFI17GaK
+ m2VjdZo3XV7EfPzRMqqNw/ow
+Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
+ by uls-op-cesaep02.wdc.com with ESMTP; 17 Jun 2019 18:33:07 -0700
+IronPort-SDR: RS7siusuP5TGzbvWZZ2x2Mnk/ZZGiH2qzf91ExeyColmx7cSvCM/UFjSCxzQNojCLyEaC+nnCX
+ idkYNfgS85CERjr4Ejc6POxMOo/flTPyg3HeXNLd8Hh+tqy0MT4Xb+x9CzDaGfHZ91dNu+sWDG
+ u6Qq1twsya0N4qHTjNcskpM1Zgk1Q2PZajbeilxeU0/0sgAbH5BwXXZDsOOhB5nZU+zY7ytnBo
+ Jw9UbVYgYjdqRC0hmZC2yM4ZFRwhrPKcupTOU64V/FmEvj0VfklKdWLgwmEn6OukMO0iDdNDrw
+ hUQ=
 Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
  risc6-mainframe.int.fusionio.com) ([10.196.157.140])
- by uls-op-cesaip02.wdc.com with ESMTP; 17 Jun 2019 18:33:34 -0700
+ by uls-op-cesaip01.wdc.com with ESMTP; 17 Jun 2019 18:33:37 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: palmer@sifive.com,
 	alistair.francis@wdc.com,
 	alistair23@gmail.com
-Date: Mon, 17 Jun 2019 18:31:13 -0700
-Message-Id: <6a7392df062afc1d7b4914d92da43f0711ec14ec.1560821342.git.alistair.francis@wdc.com>
+Date: Mon, 17 Jun 2019 18:31:16 -0700
+Message-Id: <c22007097ef0d92ebaf9c642f2e38ac86c5c4013.1560821342.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.22.0
 In-Reply-To: <cover.1560821342.git.alistair.francis@wdc.com>
 References: <cover.1560821342.git.alistair.francis@wdc.com>
@@ -60,9 +60,9 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 216.71.153.141
-Subject: [Qemu-riscv] [PATCH v1 5/9] qemu-deprecated.texi: Deprecate the
- RISC-V privledge spec 1.09.1
+X-Received-From: 216.71.153.144
+Subject: [Qemu-riscv] [PATCH v1 6/9] target/riscv: Require either I or E
+ base extension
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -74,35 +74,30 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Jun 2019 01:33:39 -0000
-
-Deprecate the RISC-V privledge spec version 1.09.1 in favour of the new
-1.10.0 and the ratified 1.11.0.
+X-List-Received-Date: Tue, 18 Jun 2019 01:33:56 -0000
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- qemu-deprecated.texi | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ target/riscv/cpu.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/qemu-deprecated.texi b/qemu-deprecated.texi
-index 50292d820b..b1111debf7 100644
---- a/qemu-deprecated.texi
-+++ b/qemu-deprecated.texi
-@@ -138,6 +138,14 @@ The ``acl_show'', ``acl_reset'', ``acl_policy'', ``acl_add'', and
- ``acl_remove'' commands are deprecated with no replacement. Authorization
- for VNC should be performed using the pluggable QAuthZ objects.
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index a23d83921a..21bfaa9722 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -373,6 +373,12 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+                        return;
+        }
  
-+@section Guest Emulator ISAs
++        if (!cpu->cfg.ext_i && !cpu->cfg.ext_e) {
++            error_setg(errp,
++                       "Either I or E extension must be set");
++                       return;
++       }
 +
-+@subsection RISC-V ISA privledge specification version 1.09.1 (since 4.1)
-+
-+The RISC-V ISA privledge specification version 1.09.1 has been deprecated.
-+QEMU supports both the newer version 1.10.0 and the ratified version 1.11.0, these
-+should be used instead of the 1.09.1 version.
-+
- @section System emulator CPUS
- 
- @subsection RISC-V ISA CPUs (since 4.1)
+        if (cpu->cfg.ext_g && !(cpu->cfg.ext_i & cpu->cfg.ext_m &
+                                cpu->cfg.ext_a & cpu->cfg.ext_f &
+                                cpu->cfg.ext_d)) {
 -- 
 2.22.0
 
