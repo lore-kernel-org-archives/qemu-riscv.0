@@ -1,58 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hd30E-0006l9-5P
-	for mharc-qemu-riscv@gnu.org; Mon, 17 Jun 2019 21:33:38 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:40934)
+	id 1hd30G-0006qe-Ec
+	for mharc-qemu-riscv@gnu.org; Mon, 17 Jun 2019 21:33:40 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:40963)
  by lists.gnu.org with esmtp (Exim 4.86_2)
  (envelope-from <prvs=0651fb9a1=alistair.francis@wdc.com>)
- id 1hd30A-0006dO-3Z
- for qemu-riscv@nongnu.org; Mon, 17 Jun 2019 21:33:35 -0400
+ id 1hd30C-0006hI-0z
+ for qemu-riscv@nongnu.org; Mon, 17 Jun 2019 21:33:37 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
  (envelope-from <prvs=0651fb9a1=alistair.francis@wdc.com>)
- id 1hd308-0008Ux-UB
- for qemu-riscv@nongnu.org; Mon, 17 Jun 2019 21:33:34 -0400
-Received: from esa3.hgst.iphmx.com ([216.71.153.141]:60672)
+ id 1hd30A-00005W-Rh
+ for qemu-riscv@nongnu.org; Mon, 17 Jun 2019 21:33:35 -0400
+Received: from esa6.hgst.iphmx.com ([216.71.154.45]:54812)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <prvs=0651fb9a1=alistair.francis@wdc.com>)
- id 1hd305-0008L1-Gs; Mon, 17 Jun 2019 21:33:30 -0400
+ id 1hd308-0008Ta-Ec; Mon, 17 Jun 2019 21:33:32 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1560821609; x=1592357609;
+ t=1560821612; x=1592357612;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=yjAxmHO+IlbgcE9s5eMCiJERcKojM3+lW9tXUnlXSrU=;
- b=cB/pcKUPRcGQKzDHIUan4UjlvWrAdL6lfYLEQZbqG12NK4m1IG8N0TGc
- kEqDeeRMBamty+vN93n2h0U7eSEbBf+q2q9poYGP44JlH+Ukv58wm6C7w
- kfto8cBZZxuSDBkIFQPymcYYBI8Jp45zRYCLR/RYIFdU2X3p0cPkXb/Ws
- zGl0s0x9VhmWhWvv+kbPVXcsq74d4kLnqMM+fxyQAzsuFDEp8LzopcQOI
- Klj2PntFlCsKiJQrtkm4Fv0IazeCcDIJmqiJBwiW1KePKi8LKhohyjrX8
- S82YWKblCyr0jx1W5/lo1wkYcd49mwR2rmRVqPWcwu2lhrcAZ/I8Cr8cz g==;
-X-IronPort-AV: E=Sophos;i="5.63,386,1557158400"; d="scan'208";a="115717009"
-Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
- ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 18 Jun 2019 09:33:23 +0800
-IronPort-SDR: VG9tu8UusbKDclV52Qd+JWCPBXe80xj/UjdpEMallRNVW23hAcbkFcSpsYPRB7IGB+DP+QuAwD
- CLLVDblnEZ0DdUtBlJX06FWDm9iTN4b9Bgoz4mjwxcQ8XwEV50QA8GIxeqHnEPi6xD2XgzDdB1
- eQfomJy+P/qiWXVeRVDiYEyVpJHcabBNbmHlRfJdTPObpbB0t+peFZH1AhViputiF4y4O7/Fmk
- 2L9/+YGsTwQGv2wE+YHBdV/wYcd2j6a1h5ekRKKm1nqKBF4d2TwUiagVoyCBOxfx2zIrZydVD0
- ZpCajrvFv9WKskeEkUwa28HI
+ bh=fQX+cG1dHeaRtULmRePJFSd6JTXSO12ulMWO1V2QRmM=;
+ b=MYOC1BCozjgb87Rjk92azcqd8ptHW8nb3+HyhWg+hJ3/kAtQERQxcbZ/
+ cy0SjsPsoJ+v2pw4ut/p3Q+zuxFOiBNWC0nnl2SmM29xK4QksXwcc8N+I
+ /zX5tF3Y6AqVGZmpyABkmNLA1Ze8m5M3P5ff4OFRpqltUcdRspQZ3ALcU
+ sdUM+SYs0tDL1uZOODYcSH/vF38z7vCXiBMDZ2STQkT6X9pdkCPn2lHL9
+ dqcVQPJUzUtnNylPrgz8g+w1KqKh0OJ0kD1EqKSO5xBGzJw+ooie8r/Dg
+ k9V9YfROJPRsmmJhlc8UGZPKHGwUII6DesseBNqTC/zFtKPGRYLk0RvT0 Q==;
+X-IronPort-AV: E=Sophos;i="5.63,386,1557158400"; d="scan'208";a="112457248"
+Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com)
+ ([199.255.45.15])
+ by ob1.hgst.iphmx.com with ESMTP; 18 Jun 2019 09:33:31 +0800
+IronPort-SDR: NQSOEOZiLa4568M+FVKFKvvyq2EameQZqdrkof07Ax8bpixmr4BNMU4Au6RMMOFjOQcII2a+nN
+ fshcX80/9Mbdpd/vdQGAibyNO9BXGtdE8kNudiM0jf6Qj12s6j5Lt+16equn5eHtL7YdWs88aM
+ q7o4iqkmGasMRrPgRVPgEc2lloOYTaGNnI2kf9efOtKwhutVC/6GMB88IIZm7D6N6dM9rkBHZ8
+ qNrHFQl/LcY0BgG79EgypVIO7t3XbjcYkCyuSMxx06F1fHz80f5hG7j0LtgkjTxADegIszM4Zg
+ pqtx8VQBnDEIg+PD2KwZ0jS3
 Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
- by uls-op-cesaep01.wdc.com with ESMTP; 17 Jun 2019 18:32:55 -0700
-IronPort-SDR: fYEWfEtGYkogHAAdOUQhiEpK0YpltRAVwxyjJ1ba6TtZ6/LYMtoK5UZXsF2+TBzCCrAm9UeKfM
- p5X8FFSipXFcnI74gK78VrATK4acqM1jQ0Khzr52kH/+6pfcRKsVf6uBJt8Mkr0yySIM/TTJkN
- ICGEkLqL8jcwiikC3JkblcrO7n6/6V6Nm6CGOCzJBVgCe3drfRBwwsaFsLg5S0WYdlMiJUvFyb
- xmZ/NZDZvLAbdeVcsUBgh2fxEYzRfBDQXQU6aXLZOaqLVkEe3b7uxPMINmE2/f5SWwCAdKkn6M
- uns=
+ by uls-op-cesaep02.wdc.com with ESMTP; 17 Jun 2019 18:33:01 -0700
+IronPort-SDR: PnhoWeBSZG2DKf0SQU9P6AF2lge+IA7BxVUUis0mxYjgcpYY8FoPcsNal+MiWkIgfcgizQ7vYX
+ TH55qx0pFtg8RnJtRcRjXtujxJKFMFNe0gtNFMR+MNi4NgZt30XbNHxmgCeWvQrpsmJQ8wvFmM
+ 9hWvqnysb5v/ubdnxKD371Zca2r6Ms+epFZwlfIbSF9JwjTveqL3kEP78txqntxL/3q6myZy8w
+ bzB7dc5PAi3fOstwggdD+j8iB1JC9SsAAtboqlj5HWigh8upDi8EMclrqmKy0EyS3Vnksg0sm4
+ Qh8=
 Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
  risc6-mainframe.int.fusionio.com) ([10.196.157.140])
- by uls-op-cesaip01.wdc.com with ESMTP; 17 Jun 2019 18:33:23 -0700
+ by uls-op-cesaip01.wdc.com with ESMTP; 17 Jun 2019 18:33:31 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: palmer@sifive.com,
 	alistair.francis@wdc.com,
 	alistair23@gmail.com
-Date: Mon, 17 Jun 2019 18:31:02 -0700
-Message-Id: <1483cda620f3bff57b7c47ad74c44f586cfde4a5.1560821342.git.alistair.francis@wdc.com>
+Date: Mon, 17 Jun 2019 18:31:11 -0700
+Message-Id: <313968903b6233d286c32bb0f52ac1620033a761.1560821342.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.22.0
 In-Reply-To: <cover.1560821342.git.alistair.francis@wdc.com>
 References: <cover.1560821342.git.alistair.francis@wdc.com>
@@ -60,8 +60,9 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 216.71.153.141
-Subject: [Qemu-riscv] [PATCH v1 1/9] target/riscv: Restructure deprecatd CPUs
+X-Received-From: 216.71.154.45
+Subject: [Qemu-riscv] [PATCH v1 4/9] target/riscv: Set privledge spec 1.11.0
+ as default
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -73,79 +74,49 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Jun 2019 01:33:35 -0000
+X-List-Received-Date: Tue, 18 Jun 2019 01:33:37 -0000
 
-Restructure the deprecated CPUs to make it clear in the code that these
-are depreated. They are already marked as deprecated in
-qemu-deprecated.texi. There are no functional changes.
+Set the priv spec version 1.11.0 as the default and allow selecting it
+via the command line.
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/cpu.c | 18 ++++++++++--------
- target/riscv/cpu.h | 13 +++++++------
- 2 files changed, 17 insertions(+), 14 deletions(-)
+ target/riscv/cpu.c | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
 
 diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 0632ac08cf..a4dd7ae6fc 100644
+index a4dd7ae6fc..a23d83921a 100644
 --- a/target/riscv/cpu.c
 +++ b/target/riscv/cpu.c
-@@ -558,18 +558,20 @@ static const TypeInfo riscv_cpu_type_infos[] = {
-     DEFINE_CPU(TYPE_RISCV_CPU_ANY,              riscv_any_cpu_init),
- #if defined(TARGET_RISCV32)
-     DEFINE_CPU(TYPE_RISCV_CPU_BASE32,           riscv_base32_cpu_init),
--    DEFINE_CPU(TYPE_RISCV_CPU_RV32GCSU_V1_09_1, rv32gcsu_priv1_09_1_cpu_init),
--    DEFINE_CPU(TYPE_RISCV_CPU_RV32GCSU_V1_10_0, rv32gcsu_priv1_10_0_cpu_init),
--    DEFINE_CPU(TYPE_RISCV_CPU_RV32IMACU_NOMMU,  rv32imacu_nommu_cpu_init),
-     DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E31,       rv32imacu_nommu_cpu_init),
--    DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_U34,       rv32gcsu_priv1_10_0_cpu_init)
-+    DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_U34,       rv32gcsu_priv1_10_0_cpu_init),
-+    /* Depreacted */
-+    DEFINE_CPU(TYPE_RISCV_CPU_RV32IMACU_NOMMU,  rv32imacu_nommu_cpu_init),
-+    DEFINE_CPU(TYPE_RISCV_CPU_RV32GCSU_V1_09_1, rv32gcsu_priv1_09_1_cpu_init),
-+    DEFINE_CPU(TYPE_RISCV_CPU_RV32GCSU_V1_10_0, rv32gcsu_priv1_10_0_cpu_init)
- #elif defined(TARGET_RISCV64)
-     DEFINE_CPU(TYPE_RISCV_CPU_BASE64,           riscv_base64_cpu_init),
--    DEFINE_CPU(TYPE_RISCV_CPU_RV64GCSU_V1_09_1, rv64gcsu_priv1_09_1_cpu_init),
--    DEFINE_CPU(TYPE_RISCV_CPU_RV64GCSU_V1_10_0, rv64gcsu_priv1_10_0_cpu_init),
--    DEFINE_CPU(TYPE_RISCV_CPU_RV64IMACU_NOMMU,  rv64imacu_nommu_cpu_init),
-     DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E51,       rv64imacu_nommu_cpu_init),
--    DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_U54,       rv64gcsu_priv1_10_0_cpu_init)
-+    DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_U54,       rv64gcsu_priv1_10_0_cpu_init),
-+    /* Deprecated */
-+    DEFINE_CPU(TYPE_RISCV_CPU_RV64IMACU_NOMMU,  rv64imacu_nommu_cpu_init),
-+    DEFINE_CPU(TYPE_RISCV_CPU_RV64GCSU_V1_09_1, rv64gcsu_priv1_09_1_cpu_init),
-+    DEFINE_CPU(TYPE_RISCV_CPU_RV64GCSU_V1_10_0, rv64gcsu_priv1_10_0_cpu_init)
- #endif
- };
+@@ -111,7 +111,7 @@ static void riscv_any_cpu_init(Object *obj)
+ {
+     CPURISCVState *env = &RISCV_CPU(obj)->env;
+     set_misa(env, RVXLEN | RVI | RVM | RVA | RVF | RVD | RVC | RVU);
+-    set_versions(env, USER_VERSION_2_02_0, PRIV_VERSION_1_10_0);
++    set_versions(env, USER_VERSION_2_02_0, PRIV_VERSION_1_11_0);
+     set_resetvec(env, DEFAULT_RSTVEC);
+ }
  
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index b47cde5017..1668d12018 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -35,16 +35,17 @@
- #define TYPE_RISCV_CPU_ANY              RISCV_CPU_TYPE_NAME("any")
- #define TYPE_RISCV_CPU_BASE32           RISCV_CPU_TYPE_NAME("rv32")
- #define TYPE_RISCV_CPU_BASE64           RISCV_CPU_TYPE_NAME("rv64")
--#define TYPE_RISCV_CPU_RV32GCSU_V1_09_1 RISCV_CPU_TYPE_NAME("rv32gcsu-v1.9.1")
--#define TYPE_RISCV_CPU_RV32GCSU_V1_10_0 RISCV_CPU_TYPE_NAME("rv32gcsu-v1.10.0")
--#define TYPE_RISCV_CPU_RV32IMACU_NOMMU  RISCV_CPU_TYPE_NAME("rv32imacu-nommu")
--#define TYPE_RISCV_CPU_RV64GCSU_V1_09_1 RISCV_CPU_TYPE_NAME("rv64gcsu-v1.9.1")
--#define TYPE_RISCV_CPU_RV64GCSU_V1_10_0 RISCV_CPU_TYPE_NAME("rv64gcsu-v1.10.0")
--#define TYPE_RISCV_CPU_RV64IMACU_NOMMU  RISCV_CPU_TYPE_NAME("rv64imacu-nommu")
- #define TYPE_RISCV_CPU_SIFIVE_E31       RISCV_CPU_TYPE_NAME("sifive-e31")
- #define TYPE_RISCV_CPU_SIFIVE_E51       RISCV_CPU_TYPE_NAME("sifive-e51")
- #define TYPE_RISCV_CPU_SIFIVE_U34       RISCV_CPU_TYPE_NAME("sifive-u34")
- #define TYPE_RISCV_CPU_SIFIVE_U54       RISCV_CPU_TYPE_NAME("sifive-u54")
-+/* Deprecated */
-+#define TYPE_RISCV_CPU_RV32IMACU_NOMMU  RISCV_CPU_TYPE_NAME("rv32imacu-nommu")
-+#define TYPE_RISCV_CPU_RV32GCSU_V1_09_1 RISCV_CPU_TYPE_NAME("rv32gcsu-v1.9.1")
-+#define TYPE_RISCV_CPU_RV32GCSU_V1_10_0 RISCV_CPU_TYPE_NAME("rv32gcsu-v1.10.0")
-+#define TYPE_RISCV_CPU_RV64IMACU_NOMMU  RISCV_CPU_TYPE_NAME("rv64imacu-nommu")
-+#define TYPE_RISCV_CPU_RV64GCSU_V1_09_1 RISCV_CPU_TYPE_NAME("rv64gcsu-v1.9.1")
-+#define TYPE_RISCV_CPU_RV64GCSU_V1_10_0 RISCV_CPU_TYPE_NAME("rv64gcsu-v1.10.0")
+@@ -316,7 +316,7 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+     RISCVCPU *cpu = RISCV_CPU(dev);
+     CPURISCVState *env = &cpu->env;
+     RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(dev);
+-    int priv_version = PRIV_VERSION_1_10_0;
++    int priv_version = PRIV_VERSION_1_11_0;
+     int user_version = USER_VERSION_2_02_0;
+     target_ulong target_misa = 0;
+     Error *local_err = NULL;
+@@ -328,7 +328,9 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+     }
  
- #define RV32 ((target_ulong)1 << (TARGET_LONG_BITS - 2))
- #define RV64 ((target_ulong)2 << (TARGET_LONG_BITS - 2))
+     if (cpu->cfg.priv_spec) {
+-        if (!g_strcmp0(cpu->cfg.priv_spec, "v1.10.0")) {
++        if (!g_strcmp0(cpu->cfg.priv_spec, "v1.11.0")) {
++            priv_version = PRIV_VERSION_1_11_0;
++        } else if (!g_strcmp0(cpu->cfg.priv_spec, "v1.10.0")) {
+             priv_version = PRIV_VERSION_1_10_0;
+         } else if (!g_strcmp0(cpu->cfg.priv_spec, "v1.9.1")) {
+             priv_version = PRIV_VERSION_1_09_1;
 -- 
 2.22.0
 
