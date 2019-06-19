@@ -1,62 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hdcK7-0004Uy-22
-	for mharc-qemu-riscv@gnu.org; Wed, 19 Jun 2019 11:16:31 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:40063)
+	id 1hdcM6-0005fs-EM
+	for mharc-qemu-riscv@gnu.org; Wed, 19 Jun 2019 11:18:34 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:40421)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <bmeng.cn@gmail.com>) id 1hdcK3-0004QS-4A
- for qemu-riscv@nongnu.org; Wed, 19 Jun 2019 11:16:28 -0400
+ (envelope-from <bmeng.cn@gmail.com>) id 1hdcM4-0005cJ-0k
+ for qemu-riscv@nongnu.org; Wed, 19 Jun 2019 11:18:33 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <bmeng.cn@gmail.com>) id 1hdcK2-0005Di-4T
- for qemu-riscv@nongnu.org; Wed, 19 Jun 2019 11:16:27 -0400
-Received: from mail-ed1-x542.google.com ([2a00:1450:4864:20::542]:43007)
+ (envelope-from <bmeng.cn@gmail.com>) id 1hdcLy-0006Kw-EG
+ for qemu-riscv@nongnu.org; Wed, 19 Jun 2019 11:18:30 -0400
+Received: from mail-ed1-x544.google.com ([2a00:1450:4864:20::544]:38985)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
- id 1hdcJz-0005CB-Ve; Wed, 19 Jun 2019 11:16:24 -0400
-Received: by mail-ed1-x542.google.com with SMTP id z25so27719497edq.9;
- Wed, 19 Jun 2019 08:16:23 -0700 (PDT)
+ id 1hdcLu-0006Be-SA; Wed, 19 Jun 2019 11:18:24 -0400
+Received: by mail-ed1-x544.google.com with SMTP id m10so27773611edv.6;
+ Wed, 19 Jun 2019 08:18:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=ZmOayp97dTILQ2V5VnPYKdnTM/WfPEcqF+03l5Eol6g=;
- b=OBzQ9/kpTyiDdU7jSGRCEC0uTn06F/zWtllZe1joLTGpV0nliFMYXkbZcg+DMoTeIE
- /nmesKxVYiGpqW0jfV5+pGyDPhUR5/zubK82/b5L77OKLwghdFQjbhwkAbrRAM4c6wAz
- HBYI7TNiMo1fTZcsVBF7cL3Wbbxb+OSXuI+kuZ/5SFkC3J01wuLozLTvAZJFI3O0T2ci
- cSC1mH63nvUDnxsqbAiwpPS2oQL2nWzY58oQcC9J1/lS2Dcyb3KetbkSG1XBlOVD4R4c
- 1zpfxnuMLQsXgVa1C0Xk2OBk4PK6Wt9ISKELW4mcI+PYm6JAJJLNMeCB68PYAggy2ecu
- /8Xg==
+ :cc; bh=7U8x15Ygol6ToivrArynOYp6txXvxaeGK2YxgLl1UGM=;
+ b=RBZzIIJLHxR3QRg2He2ht8kioDjZcw4E96Gf0zEYayXwIHgHWo8GWlLygqHWhAUglU
+ qcgM2/nKNprbF7s3ANOOj068R7l8DzPHGGG5zReaI3GqvbeZXdyp01FhJ+AgSOguSzKf
+ 0o1346JTsNKu9UxzkKZc4pQSgnl+UZ5yRKbFsMCrtKsnW95JKsXbDx76GSxpp935Yyq+
+ BQ8EJ4B3RDLaTVSXXCDcsiWcH7bg0pSfeQ9k0DD4/13IgR3QoJTkMULqZXZVSCsYmXvW
+ fVnJ3qBhTanIhfNFXhF+bTJlVODaf+Y8WQ9xB5zTUlW3KLfywwGK6CZj1jAM7LKe+d43
+ aW9A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=ZmOayp97dTILQ2V5VnPYKdnTM/WfPEcqF+03l5Eol6g=;
- b=huJ9mJO3wwry947F4Emkn/zie5j9mWZkiMNA4CuKs6YPfLrUAh56JF1cVEBJRIVSND
- b1L3CnxMnyTssqb+oY037W+t/TwEGx216beDNvKvPviubbMQ6fk4BJWjAiqSi05Kp9zT
- SEmMydRpWjbhhq9raXeF56vjCcvTfV8P+pdGgl5t/y8HByB1nK7x26I1fdX9e42DeLEq
- 7DRloD+vtZa55Bro9UQ4kJ6rf7Q5sc2z6WnvprjBpiFP6k233nx4rkEYU6JrLg/EjUsk
- 267Whx+cJC4eCvwEF050AORW3zlQstw1bM9cT9CiVGzqMC1iqU8Z6bgdKwAprdNoxB+h
- zJxA==
-X-Gm-Message-State: APjAAAVTQshsLADw4r0TmjmtRr9OPHyP7mL9gawkk746Iv9OXaslqmj6
- BKHCHblwkHu6+8rS+x5RUkV6QGiyDeNAd2r682xt0Hsf
-X-Google-Smtp-Source: APXvYqzs/RaRVJ/3j4phMtEU1Z5obxOY3xze7lf+XFvltawWY7UuWF9sSktMyxnWq3motFyjl/ECuLdRSnHJywhOdA4=
-X-Received: by 2002:a17:906:ad86:: with SMTP id
- la6mr9413414ejb.43.1560957383081; 
- Wed, 19 Jun 2019 08:16:23 -0700 (PDT)
+ bh=7U8x15Ygol6ToivrArynOYp6txXvxaeGK2YxgLl1UGM=;
+ b=ZulNYlGGVQK3KZk1pcRVFiVPJnVQlIZhfLP026/lZ5qklU4vSM1B0JEyIKOnhFftw1
+ JvxwxXrCqjwuD73R/AgMyGGLSDlu5+LXO39vJ4tov0NmZaDT60f+1lSY0I7et/H6pNar
+ zRUeiekPwVwn8d4t8HWM5WCJKcniVtJdR1MfbO0bvdeMjVQDh3uTE0OvVDx/rU0ZplZW
+ cKC1iC/YuXuh7/ATe8Epg0zNLNrFiBfuZd/S2vnJxhiu/8CKu5fh2zWZDlRFMimcv/fF
+ d/9YrOcat2ZmJalcCkX0+6OFx0MWa6VXrL8o/xkpsuvkC+Y3+Ozm5f2dhDMcOYsjn/p+
+ b15g==
+X-Gm-Message-State: APjAAAUDJ6sqOipNtqG5zyZjyKt/7Tzz60B01oLh5SxYE3I8V7ncfSMR
+ mh3Ds9FrdmVQ2PNxCCFgeTyIlS1LcGuVkK3+FK0=
+X-Google-Smtp-Source: APXvYqx7ongO0sh29usVxUbFne6vb7//im0Dx97b3A1jUFueAQbvquon2ni+3SnEx6GJdAZLrbxVnLYmA4ORybh6cSc=
+X-Received: by 2002:a50:94e6:: with SMTP id t35mr94208723eda.137.1560957496029; 
+ Wed, 19 Jun 2019 08:18:16 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1560904640.git.alistair.francis@wdc.com>
- <99fc8fe28f2a0493f248d50d32d4b1bc649536ab.1560904640.git.alistair.francis@wdc.com>
-In-Reply-To: <99fc8fe28f2a0493f248d50d32d4b1bc649536ab.1560904640.git.alistair.francis@wdc.com>
+ <2fd2fa66cf561d8041f75351c28ed025828c56ff.1560904640.git.alistair.francis@wdc.com>
+ <CAAhSdy12uKV14cdxvUniSLFw_iF5WNKjoLCanS3Bs=33w-c9xA@mail.gmail.com>
+In-Reply-To: <CAAhSdy12uKV14cdxvUniSLFw_iF5WNKjoLCanS3Bs=33w-c9xA@mail.gmail.com>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Wed, 19 Jun 2019 23:16:11 +0800
-Message-ID: <CAEUhbmXKv7-r3KyDGnq8ysmyccy1tVgBDqwLcf46U96BZOiKYw@mail.gmail.com>
-To: Alistair Francis <alistair.francis@wdc.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Alistair Francis <alistair23@gmail.com>, Palmer Dabbelt <palmer@sifive.com>
+Date: Wed, 19 Jun 2019 23:18:05 +0800
+Message-ID: <CAEUhbmXYfdAojDtNxXz8XYRk0X1jt+qLB6oVP1pFKNcjWjeh5w@mail.gmail.com>
+To: Anup Patel <anup@brainfault.org>
+Cc: Alistair Francis <alistair.francis@wdc.com>,
+ Alistair Francis <alistair23@gmail.com>, 
+ Palmer Dabbelt <palmer@sifive.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ QEMU Developers <qemu-devel@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::542
-Subject: Re: [Qemu-riscv] [Qemu-devel] [RFC v1 3/5] hw/riscv: Extend the
- kernel loading support
+X-Received-From: 2a00:1450:4864:20::544
+Subject: Re: [Qemu-riscv] [Qemu-devel] [RFC v1 4/5] roms: Add OpenSBI
+ version 0.3
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -68,47 +69,41 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Jun 2019 15:16:29 -0000
+X-List-Received-Date: Wed, 19 Jun 2019 15:18:33 -0000
 
-On Wed, Jun 19, 2019 at 8:56 AM Alistair Francis
-<alistair.francis@wdc.com> wrote:
+On Wed, Jun 19, 2019 at 1:14 PM Anup Patel <anup@brainfault.org> wrote:
 >
-> Extend the RISC-V kernel loader to support uImage and Image files.
-> A Linux kernel can now be booted with:
+> On Wed, Jun 19, 2019 at 6:24 AM Alistair Francis
+> <alistair.francis@wdc.com> wrote:
+> >
+> > Add OpenSBI version 0.3 as a git submodule and as a prebult binary.
+> >
+> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> > ---
+> >  .gitmodules                         |   3 +++
+> >  Makefile                            |   3 ++-
+> >  configure                           |   1 +
+> >  pc-bios/opensbi-riscv32-fw_jump.elf | Bin 0 -> 197988 bytes
+> >  pc-bios/opensbi-riscv64-fw_jump.elf | Bin 0 -> 200192 bytes
+> >  roms/Makefile                       |  17 +++++++++++++++++
+> >  roms/opensbi                        |   1 +
+> >  7 files changed, 24 insertions(+), 1 deletion(-)
+> >  create mode 100644 pc-bios/opensbi-riscv32-fw_jump.elf
+> >  create mode 100644 pc-bios/opensbi-riscv64-fw_jump.elf
+> >  create mode 160000 roms/opensbi
+> >
 >
->     qemu-system-riscv64 -machine virt -bios fw_jump.elf -kernel Image
+> The OpenSBI firmwares are platform specific so we should have
+> machine directory under pc-bios/ directory
 >
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> ---
->  hw/riscv/boot.c | 19 ++++++++++++++-----
->  1 file changed, 14 insertions(+), 5 deletions(-)
->
-> diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
-> index 392ca0cb2e..7f68035a3f 100644
-> --- a/hw/riscv/boot.c
-> +++ b/hw/riscv/boot.c
-> @@ -67,13 +67,22 @@ target_ulong riscv_load_kernel(MachineState *machine,
->      uint64_t kernel_entry, kernel_high;
->
->      if (load_elf(kernel_filename, NULL, kernel_translate, machine,
-> -                 &kernel_entry, NULL, &kernel_high,
-> -                 0, EM_RISCV, 1, 0) < 0) {
-> -        error_report("could not load kernel '%s'", kernel_filename);
-> -        exit(1);
-> +                 &kernel_entry, NULL, &kernel_high, 0, EM_RISCV, 1, 0) > 0) {
-> +        return kernel_entry;
-> +    }
-> +
-> +    if (load_uimage_as(kernel_filename, &kernel_entry, NULL, NULL,
-> +                       kernel_translate, machine, NULL) > 0) {
+> So for virt machine we will have:
+> pc-bios/riscv32/virt/fw_jump.elf
+> pc-bios/riscv64/virt/fw_jump.elf
 
-We should not set the 'kernel_translate' here for uImage.
+And we should only integrate plain binary image for "bios" images here.
 
-In fact, the whole kernel_translate() is not necessary.
-
-> +        return kernel_entry;
-> +    }
-> +
+pc-bios/riscv32/virt/fw_jump.bin
+pc-bios/riscv64/virt/fw_jump.bin
 
 Regards,
 Bin
