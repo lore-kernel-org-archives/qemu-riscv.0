@@ -1,61 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hdbS4-0006L9-Rw
-	for mharc-qemu-riscv@gnu.org; Wed, 19 Jun 2019 10:20:43 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:55362)
+	id 1hdbXh-0004Za-42
+	for mharc-qemu-riscv@gnu.org; Wed, 19 Jun 2019 10:26:29 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:56923)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <alistair23@gmail.com>) id 1hdbRh-0006Co-Jj
- for qemu-riscv@nongnu.org; Wed, 19 Jun 2019 10:20:22 -0400
+ (envelope-from <bmeng.cn@gmail.com>) id 1hdbXf-0004Vn-6z
+ for qemu-riscv@nongnu.org; Wed, 19 Jun 2019 10:26:28 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1hdbRf-00039r-VO
- for qemu-riscv@nongnu.org; Wed, 19 Jun 2019 10:20:17 -0400
-Received: from mail-lf1-x143.google.com ([2a00:1450:4864:20::143]:36207)
+ (envelope-from <bmeng.cn@gmail.com>) id 1hdbXd-0000Aj-W2
+ for qemu-riscv@nongnu.org; Wed, 19 Jun 2019 10:26:27 -0400
+Received: from mail-ed1-x542.google.com ([2a00:1450:4864:20::542]:34185)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1hdbRX-0002yw-SL; Wed, 19 Jun 2019 10:20:08 -0400
-Received: by mail-lf1-x143.google.com with SMTP id q26so12293874lfc.3;
- Wed, 19 Jun 2019 07:20:05 -0700 (PDT)
+ (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
+ id 1hdbXX-0008Sd-GS; Wed, 19 Jun 2019 10:26:21 -0400
+Received: by mail-ed1-x542.google.com with SMTP id s49so27585801edb.1;
+ Wed, 19 Jun 2019 07:26:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=xFlM4YqK6Ynh+xOXuEnAoR5f/r3sxH1cbUi/rehTRh8=;
- b=eZNpqDi8B8iXv1WtOJgSWlY430tRosxIX632Pdcs+19qgp7bnLfm4yYyAWdboyINka
- MXX+IyMnFMXiVjzABvgQdIYFuwvgv8TMYERnISwAns8cE1Z3BhiotwoPuBdEGKMPWNtY
- C4O4s+MOtUBS29r3MUAhI03fl0yzeq11b4VOHyBi1Mh/URgO5YYQVtMUbRR++J2MGdxa
- z7m/AnKsrm3HD+vUcTdyqXzTejFOOeBkpcddznASyeCVXhwwjcsU95T3H7siMczEgaDG
- ljTn/0FDydeWF/O7HpP82uqi3dtAtIMODp//uQlDzoqXYea5j25HLGTZ7wjUTMEcdoYF
- VnVA==
+ :cc; bh=0Hof27XfEBt6nFyXuNV4cBKbPYkLIx8aVPU3b0vospE=;
+ b=LdsumGEEHskfOYkQ582NoSl+dETkWeBmrTybLSX4koLP8+AAlsmaYG45otIo3OfxS7
+ dXz42Xhq/NWTlxoyTpPcB26hJTBGklGYVMkE3vwsWrLo0vkDBt5rX7bjOC/X8XqY4qgR
+ BlAfqSnUUkBhfn9RlnbIUUmTgjdOBTwU6LUf07LK6TbM038x85OEY9HaRHudw7BbP4x5
+ D0P6prcL5TwYCBqDGfw+SMNPEAfrKU/w4eMk+p9xtQ+rHKZ+z5Iy6CDSg9DPzMs9y0Hs
+ 0DfVY4/VerOhdC0HfkO58Azq+vmoM5w2WRKFSOvtK3ZpTXl/dlrUMEoOfAMiRjmd8lQo
+ 9WCg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=xFlM4YqK6Ynh+xOXuEnAoR5f/r3sxH1cbUi/rehTRh8=;
- b=IuoThk4iIrRwH4BHBq26QyK5YXo/6c9LD6uMCwMLG80D9ALch0veVqD9w4omROKlHv
- kS8M/7DmaReoPxaGt5P+MOzmYKTbs7JGNUuov0C8RozbdKM1H99rGdgw8e/vClwmy8XU
- N0hWfH0xKeSMhdsJD10T2XJPYSKE6XN9pG9AOYl7YM3mUp/iBOXqgduOkevUBeLDPaMR
- RvhIlGwfSc7yZugoP0Fvy5RgstAP862HlHRAyQ5XYYCFWb0AY+wFrgfE4xnkdgIvWe/u
- yIAo514+Ku4ZsiYUeJzzqpvb6lHUKuwwovJDC9ksaxXsNMZV4fHIspV4uqYQ0yDaDzOF
- 3Nag==
-X-Gm-Message-State: APjAAAV6VedbRvwuH6oaTU9NzWHSEOazdgg+vmhZpSyPKr2ipLzJhIro
- V4YRGyvhaR23E9BXDDkXuXyJYiYua/I6h9NYa0E=
-X-Google-Smtp-Source: APXvYqwc7mmlrYFEGy16UuTI2cxCJ9XaE/G0kCsn3E2W6Skl8OWUbBbfQtOORDH4hJbgcbYspUUElkxhEApScMeoM3o=
-X-Received: by 2002:a19:710b:: with SMTP id m11mr56672087lfc.135.1560954004088; 
- Wed, 19 Jun 2019 07:20:04 -0700 (PDT)
+ bh=0Hof27XfEBt6nFyXuNV4cBKbPYkLIx8aVPU3b0vospE=;
+ b=uZCf+pCRyUCiGHhmR7kc9INpbScljt0lJWQVY3QSY0AsMOge9FWPTXlPlvp8E4SS0M
+ u59X4R5ZUdK8ATUXoXB5xji2NJkXJTr7QZDsmSmNajOfcteDMCbyOv5QF9B4yf0axjQc
+ x2U+/+ci2gcchb5aUIazqd07b1+gAcareJdeTmRjCZ/4xbhCPynLkc8sKD3Ai+cNW8fb
+ OpOKa4sICpyYgWqPBMeRaekn2/oLmfZJiH03Mb1wUxJj6/Vi1t3V2WhDc2ODGKbYQeIy
+ cQfA6uSSYNSYrXzsAACNhd5Zh2iTtO5TC7e1ii4HcpWSCLetqKlTk/5gs87SEaOor5wU
+ 3Jcw==
+X-Gm-Message-State: APjAAAXMhYwta7h+0mL2iO+BcY96OnKjsBtxLb4wVX6zSi14FrlaOxrt
+ WhLC6vcjK65yzhvB01hcryHA1BPaBPeG0ERSjtc=
+X-Google-Smtp-Source: APXvYqzd/a/M3y3H3x7fMMcBnodu7IJ1CIyI8oD9iAMp6R8rKUVnkcQryNI35YDFXFuTH/pMQf2CUNnZoZ1FQg85oM8=
+X-Received: by 2002:a50:94e6:: with SMTP id t35mr93884542eda.137.1560954378292; 
+ Wed, 19 Jun 2019 07:26:18 -0700 (PDT)
 MIME-Version: 1.0
-References: <cover.1560821342.git.alistair.francis@wdc.com>
- <mhng-966cacce-c410-473d-b043-996f3cff9a36@palmer-si-x1e>
-In-Reply-To: <mhng-966cacce-c410-473d-b043-996f3cff9a36@palmer-si-x1e>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 19 Jun 2019 07:19:38 -0700
-Message-ID: <CAKmqyKPRWASwUPQUROPWyrNC8gXTnizXTaXYdpbEAmkfjOZo1g@mail.gmail.com>
-To: Palmer Dabbelt <palmer@sifive.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>
+References: <cover.1560904640.git.alistair.francis@wdc.com>
+In-Reply-To: <cover.1560904640.git.alistair.francis@wdc.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Wed, 19 Jun 2019 22:26:04 +0800
+Message-ID: <CAEUhbmViJpKtiNXm7CYdF7SPRkOPkvpXJ5+We2m9tZSK_BWi-g@mail.gmail.com>
+To: Alistair Francis <alistair.francis@wdc.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Alistair Francis <alistair23@gmail.com>, Palmer Dabbelt <palmer@sifive.com>
 Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::143
-Subject: Re: [Qemu-riscv] [PATCH v1 0/9] Update the RISC-V specification
- versions
+X-Received-From: 2a00:1450:4864:20::542
+Subject: Re: [Qemu-riscv] [Qemu-devel] [RFC v1 0/5] RISC-V: Add firmware
+ loading support and default
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -67,78 +66,90 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Jun 2019 14:20:26 -0000
+X-List-Received-Date: Wed, 19 Jun 2019 14:26:28 -0000
 
-On Wed, Jun 19, 2019 at 3:58 AM Palmer Dabbelt <palmer@sifive.com> wrote:
+On Wed, Jun 19, 2019 at 8:56 AM Alistair Francis
+<alistair.francis@wdc.com> wrote:
 >
-> On Mon, 17 Jun 2019 18:31:00 PDT (-0700), Alistair Francis wrote:
-> > Based-on: <cover.1555726824.git.alistair.francis@wdc.com>
-> >
-> > Now that the RISC-V spec has started to be ratified let's update our
-> > QEMU implementation. There are a few things going on here:
-> >  - Add priv version 1.11.0 to QEMU
-> >     - This is the ratified version of the Privledge spec
-> >     - There are almost no changes to 1.10
-> >  - Mark the 1.09.1 privledge spec as depreated
-> >      - Let's aim to remove it in two releases
-> >  - Set priv version 1.11.0 as the default
-> >  - Remove the user_spec version
-> >      - This doesn't really mean anything so let's remove it
-> >  - Add support for the "Counters" extension
-> >  - Add command line options for Zifencei and Zicsr
+> This is an RFC as it will break ALL current users! See below for details.
 >
-> Thanks!  I'll look at the code, but I've currently got this queued up behind
-> your hypervisor patches so it might take a bit.  LMK if you want me to invert
-> the priority on these.  I'll probably be buried until the start of July.
-
-Let's move the Hypervisor patches to the back then. There is a new
-spec version now anyway so I'll have to update them for that.
-
-Alistair
-
+> This series consolidates the current RISC-V kernel loading
+> impelementation while also adding support for the -bios option and more
+> advanced kernel image types.
 >
-> > We can remove the spec version as it's unused and has never been exposed
-> > to users. The idea is to match the specs in specifying the version. To
-> > handle versions in the future we can extend the extension props to
-> > handle version information.
-> >
-> > For example something like this: -cpu rv64,i=2.2,c=2.0,h=0.4,priv_spec=1.11
-> >
-> > NOTE: This isn't supported today as we only have one of each version.
-> >
-> > This will be a future change if we decide to support multiple versions
-> > of extensions.
-> >
-> > The "priv_spec" string doesn't really match, but I don't have a better
-> > way to say "Machine ISA" and "Supervisor ISA" which is what is included
-> > in "priv_spec".
-> >
-> > For completeness I have also added the Counters, Zifencei and Zicsr
-> > extensions.
-> >
-> > Everything else seems to match the spec names/style.
-> >
-> > Please let me know if I'm missing something. QEMU 4.1 is the first
-> > release to support the extensions from the command line, so we can
-> > easily change it until then. After that it'll take more work to change
-> > the command line interface.
-> >
-> > Alistair Francis (9):
-> >   target/riscv: Restructure deprecatd CPUs
-> >   target/riscv: Add the privledge spec version 1.11.0
-> >   target/riscv: Comment in the mcountinhibit CSR
-> >   target/riscv: Set privledge spec 1.11.0 as default
-> >   qemu-deprecated.texi: Deprecate the RISC-V privledge spec 1.09.1
-> >   target/riscv: Require either I or E base extension
-> >   target/riscv: Remove user version information
-> >   target/riscv: Add support for disabling/enabling Counters
-> >   target/riscv: Add Zifencei and Zicsr as command line options
-> >
-> >  qemu-deprecated.texi                          |  8 +++
-> >  target/riscv/cpu.c                            | 72 ++++++++++---------
-> >  target/riscv/cpu.h                            | 19 ++---
-> >  target/riscv/cpu_bits.h                       |  1 +
-> >  target/riscv/csr.c                            | 13 +++-
-> >  .../riscv/insn_trans/trans_privileged.inc.c   |  2 +-
-> >  6 files changed, 71 insertions(+), 44 deletions(-)
+> After consolidating the kernel loading we can extend the boot loader to
+> support a -bios option. We can also extend the kernel loading options to
+> support not just ELF files but other standard formats.
+>
+> Finally we can include the OpenSBI firmware by default for QEMU users.
+>
+> At the end of this series we are in the good place of no longer
+> requiring users to build firmware to boot a kernel. Instead users can
+> just run QEMu with the -kernel option and everything will work. They can
+
+This is great. I like booting kernel directly for testing without
+bothering the firmware stuff.
+
+> also override the firmware with their own using the -bios option. Using
+> "-bios none" will result in no firmware being loaded (as it is today).
+>
+> !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+>
+> Unfortunately this series (patch 5 specifically) results in all current
+> Linux boots being broken as users are already loading in their own
+> firmware, which overlaps with the now included default. They will
+> see this error:
+>
+>   rom: requested regions overlap (rom phdr #0: ./images/qemuriscv64/fw_jump.elf. free=0x0000000080008090, addr=0x0000000080000000)
+>   qemu-system-riscv64: rom check and register reset failed
+>
+> If a current user specieifies "-bios none" their flow will continue
+> working. A user can instead no longer load their firmware and
+> use the default or they can load their firmware with the -bios option.
+>
+> At the moment the best idea I have to not break all users is to only
+> include the default firmware if the user specifies "-bios opensbi".
+> That is change the default to not loading the firmware. Then we can work
+> on updating documentation and maybe in future change the default to
+> include a firmware and anyone who doesn't want a default firmware can
+> specify "-bios none".
+>
+> Any other ideas on how to not break everything?
+>
+>
+>
+> Alistair Francis (5):
+>   hw/riscv: Split out the boot functions
+>   hw/riscv: Add support for loading a firmware
+>   hw/riscv: Extend the kernel loading support
+>   roms: Add OpenSBI version 0.3
+>   hw/riscv: Load OpenSBI as the default firmware
+>
+>  .gitmodules                         |   3 +
+>  Makefile                            |   3 +-
+>  configure                           |   1 +
+>  hw/riscv/Makefile.objs              |   1 +
+>  hw/riscv/boot.c                     | 143 ++++++++++++++++++++++++++++
+>  hw/riscv/sifive_e.c                 |  17 +---
+>  hw/riscv/sifive_u.c                 |  19 +---
+>  hw/riscv/spike.c                    |  21 +---
+>  hw/riscv/virt.c                     |  54 ++---------
+>  include/hw/riscv/boot.h             |  30 ++++++
+>  pc-bios/opensbi-riscv32-fw_jump.elf | Bin 0 -> 197988 bytes
+>  pc-bios/opensbi-riscv64-fw_jump.elf | Bin 0 -> 200192 bytes
+
+Since we are considering adding "bios" images, I prefer to add the
+pure binary images instead of ELF images here.
+
+>  roms/Makefile                       |  17 ++++
+>  roms/opensbi                        |   1 +
+>  14 files changed, 216 insertions(+), 94 deletions(-)
+>  create mode 100644 hw/riscv/boot.c
+>  create mode 100644 include/hw/riscv/boot.h
+>  create mode 100644 pc-bios/opensbi-riscv32-fw_jump.elf
+>  create mode 100644 pc-bios/opensbi-riscv64-fw_jump.elf
+>  create mode 160000 roms/opensbi
+
+Regards,
+Bin
 
