@@ -1,37 +1,57 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hdcac-0002tS-8i
-	for mharc-qemu-riscv@gnu.org; Wed, 19 Jun 2019 11:33:35 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44565)
+	id 1hdedA-0002rY-8I
+	for mharc-qemu-riscv@gnu.org; Wed, 19 Jun 2019 13:44:21 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49803)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <quentin.mundell@protonmail.com>) id 1hdcaX-0002pp-Jy
- for qemu-riscv@nongnu.org; Wed, 19 Jun 2019 11:33:31 -0400
+ (envelope-from <fintelia@gmail.com>) id 1hdecw-0002TU-Ee
+ for qemu-riscv@nongnu.org; Wed, 19 Jun 2019 13:44:11 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <quentin.mundell@protonmail.com>) id 1hdcaV-0005r5-8j
- for qemu-riscv@nongnu.org; Wed, 19 Jun 2019 11:33:29 -0400
-Received: from mail-40135.protonmail.ch ([185.70.40.135]:11926)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <quentin.mundell@protonmail.com>)
- id 1hdcaS-0005lb-QA
- for qemu-riscv@nongnu.org; Wed, 19 Jun 2019 11:33:27 -0400
-Date: Wed, 19 Jun 2019 15:33:13 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=protonmail.com;
- s=default; t=1560958397;
- bh=l+j+00A6Afe5tXuXYDzDxMx1T5rqu9WY13ia2hDg8sc=;
- h=Date:To:From:Reply-To:Subject:Feedback-ID:From;
- b=I1Dyz1yj7KC1nVb2Uu+xj1f6EXQ8V/6EFOWi1B9Wwkfvok1Wc14Ko+11CwjtiRbaE
- zmkHhJUJPDeT8eIE+fpGyFL6AABk5AIBNscvrBK29lsJdeEiA2tuSyod2oDQ0Lx++0
- vuqyTxyE4/9/FIm+trNOTkvX9TjhK84pJ1Lnq3/4=
-To: "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>
-From: Quentin Mundell <quentin.mundell@protonmail.com>
-Reply-To: Quentin Mundell <quentin.mundell@protonmail.com>
-Message-ID: <Gpx9RF86BWnRvLPI5Kz0PRHM3oiLy4nkgS-FiQueS0d3dSS4N-N008stUGzVV-NctfG95esZlphJJ1A7J4rlkU6VniTM_Oxyrg1MfRpGwlA=@protonmail.com>
-Feedback-ID: gBLPg9rW5wfp_bU1qG_NMga7H8Xt3ECyEnN_CmBbGEkU52qPG7hPf4oVg3Q-Scu5KvJCR5nhixecbLVi3_LVEA==:Ext:ProtonMail
+ (envelope-from <fintelia@gmail.com>) id 1hdeQk-0000sy-V8
+ for qemu-riscv@nongnu.org; Wed, 19 Jun 2019 13:31:32 -0400
+Received: from mail-lj1-x22b.google.com ([2a00:1450:4864:20::22b]:45681)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <fintelia@gmail.com>) id 1hdeQk-0000pD-IF
+ for qemu-riscv@nongnu.org; Wed, 19 Jun 2019 13:31:30 -0400
+Received: by mail-lj1-x22b.google.com with SMTP id m23so4033256lje.12
+ for <qemu-riscv@nongnu.org>; Wed, 19 Jun 2019 10:31:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=a3mL3ZUVava+pP1RmOAzINwSq3TIHF8Ye3R0BSoCEok=;
+ b=YUQo0Vsbem+8lHwY+tf6EldVwcUo70mInKbcGZJhbv+C5A2KSAEwdKbLNAVUu+ao/K
+ uCJ+ETBuYGiRoMcLtMZgUTPAlKv8WsBzLJonJg9qqHyaNUvVy1ybJ9Q61kZa67Sz1qBr
+ mMw3ZpPDvudwjffMm/mclc/4y1RHiYaibUZZMO9/hD9j6LXefhJ7Xpt4NfLpE3nmSu6T
+ 9lRw8MNPRgGuqFOA4uBDkgjAe7FFZBlz7/IE6QkMt5XmzDbbnauk3Qo+JU6cGsFJZXAU
+ TRREuHgxgyymm7qjRsKOujQ4fgZYJTRr/wcaqnVWuM4+BJlWMm4ZKrS3VXpRbQ3F6OoD
+ eKdw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=a3mL3ZUVava+pP1RmOAzINwSq3TIHF8Ye3R0BSoCEok=;
+ b=BJvmWqXxt7PxUwDrFuFXLnTmvKdnua/FTasQ7dQSCDgeeClfAYsfpKOKC9UpTLief9
+ tqhYrqAD1anALniVeV6QHu6oUsUB2P3ojTierYDqj0CI3eoQtImn32iaJ+la5rGqu4Fo
+ DvV6BbtIjLZLrjnMfRY9JJQYfimuG9jhvtzdjv+uBv49fvZrHJyWZdSx8Dzwg0PIyuUw
+ b4zSI2NarA8vXTachozXnMh1CajtCFg/HIX7mpa3pQTNcsHbTiWnJ++987PJ20o6WsGl
+ EuQQLxLtGuKDi5XyBrD+wwJ2jJlaczxh0sJoADO0nTvCf1wfCu2syUc48j3yxCcIo+K7
+ c1iA==
+X-Gm-Message-State: APjAAAW7T0C8lxZXBLsDvbdkMiY+e2Q2vWskjebfdkyjhAxl38df1xIW
+ zmcOw1sa/ASskjPrgrbgS/aygByABS8S3KGtE+c=
+X-Google-Smtp-Source: APXvYqyK17AwV8CF/YvfEfnObghtzfkAqnccgO21yQK5fTwjX5CCH53zjE+wHomvjEIIiqvsqgAhQHn0xcB+0P8q8g4=
+X-Received: by 2002:a2e:8847:: with SMTP id z7mr4722985ljj.51.1560965480847;
+ Wed, 19 Jun 2019 10:31:20 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/alternative;
- boundary="b1_fdf2e8da67b82f0e29cafd79dac8d1ef"
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
-X-Received-From: 185.70.40.135
-Subject: [Qemu-riscv] TLB refresh issue
+References: <Gpx9RF86BWnRvLPI5Kz0PRHM3oiLy4nkgS-FiQueS0d3dSS4N-N008stUGzVV-NctfG95esZlphJJ1A7J4rlkU6VniTM_Oxyrg1MfRpGwlA=@protonmail.com>
+In-Reply-To: <Gpx9RF86BWnRvLPI5Kz0PRHM3oiLy4nkgS-FiQueS0d3dSS4N-N008stUGzVV-NctfG95esZlphJJ1A7J4rlkU6VniTM_Oxyrg1MfRpGwlA=@protonmail.com>
+From: Jonathan Behrens <fintelia@gmail.com>
+Date: Wed, 19 Jun 2019 13:30:51 -0400
+Message-ID: <CANnJOVEAbK1Bc+TTE9xGozDcxTt6ezpdDnpQ+LRafgV-1gy=ug@mail.gmail.com>
+To: Quentin Mundell <quentin.mundell@protonmail.com>
+Cc: "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>
+Content-Type: multipart/alternative; boundary="000000000000fe1ba2058bb098f8"
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2a00:1450:4864:20::22b
+Subject: Re: [Qemu-riscv] TLB refresh issue
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -43,73 +63,99 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Jun 2019 15:33:31 -0000
+X-List-Received-Date: Wed, 19 Jun 2019 17:44:11 -0000
 
-This is a multi-part message in MIME format.
+--000000000000fe1ba2058bb098f8
+Content-Type: text/plain; charset="UTF-8"
 
---b1_fdf2e8da67b82f0e29cafd79dac8d1ef
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: base64
-
-SGVsbG8sCgpJIGhhdmUgdXBkYXRlZCBteSBRRU1VIHZlcnNpb24gKGZyb20gMy54IHRvIHRvZGF5
-J3MgbWFzdGVyKS4KSSBub3cgZ2V0IGFsbCBzb3J0IG9mIHdlaXJkIGFuZCBub3QgZWFzaWx5IHJl
-cHJvZHVjaWJsZSBleGNlcHRpb25zIHRyaWdnZXJlZCBpbiBteSByaXNjLXYgZ3Vlc3QsIGhhcHBl
-bmluZyBmcm9tIGJvdGggdXNlciBhbmQgc3VwZXJ2aXNvciBtb2RlLgoKVGhlIGNvbW1hbmQgSSB1
-c2UgaXMgcm91Z2hseSBgcWVtdS1zeXN0ZW0tcmlzY3Y2NCAtbWFjaGluZSBzaWZpdmVfdSAtbSAx
-MDI0IC1rZXJuZWwgbXliaW5hcnkuZWxmYCAoc29ycnksIEkgY2Fubm90IHNoYXJlIHRoZSBlbGYp
-LgoKSSBoYXZlIGJpc2VjdGVkIHRoaXMgaXNzdWUgYmFjayB0byBjb21taXQgYzdiOTUxNzE4ODE1
-NjkyODQ1MDFlZDAxZmVjN2FjYjg2NTRkYjdiLgpTb21lIFRMQiBmbHVzaGVzIHdlcmUgcmVtb3Zl
-ZCBpbiB0aGUgZm9sbG93aW5nIHBsYWNlczoKdGFyZ2V0L3Jpc2N2L2NwdV9oZWxwZXIuYzogYGNz
-cl93cml0ZV9oZWxwZXIoZW52LCBzLCBDU1JfTVNUQVRVUyk7YCAtPiBgZW52LT5tc3RhdHVzID0g
-cztgICh0d2ljZSkKdGFyZ2V0L3Jpc2N2L29wX2hlbHBlci5jOiBgY3NyX3dyaXRlX2hlbHBlcihl
-bnYsIHMsIENTUl9NU1RBVFVTKTtgIC0+IGBlbnYtPm1zdGF0dXMgPSBzO2AgKHR3aWNlKQpUaGVz
-ZSBhcmUgdGhlIHBsYWNlcyB3aGVyZSB0aGUgcHJpdmlsZWdlZCBtb2RlIGlzIHN3aXRjaGVkLgoK
-SWYgSSBhZGQgdGhlbSBiYWNrIChgdGxiX2ZsdXNoKGVudl9jcHUoZW52KSk7YCksIGV2ZXJ5dGhp
-bmcgaXMgZmluZSBhZ2Fpbi4KCkhvd2V2ZXIsIGluIHRoZSBgcmlzY3ZfY3B1X3NldF9tb2RlYCBm
-dW5jdGlvbiwgSSBzZWUgdGhlIGZvbGxvd2luZyBjb21tZW50Ogo+IHRsYl9mbHVzaCBpcyB1bm5l
-Y2Vzc2FyeSBhcyBtb2RlIGlzIGNvbnRhaW5lZCBpbiBtbXVfaWR4Ckl0IHdvdWxkIHN1Z2dlc3Qg
-YWRkaW5nIGJhY2sgVExCIGZsdXNoZXMgaXMgbm90IHRoZSB3YXkgdG8gZ28uLi4KCkRvZXMgc29t
-ZW9uZSB3aXRoIGJldHRlciBrbm93bGVkZ2Ugb2YgdGhlIGNvZGViYXNlIGNhbiB0ZWxsIG1lIGhv
-dyB0byBwcm9jZWVkIGhlcmU/Ci0gU2hvdWxkIEkgc3VibWl0IGEgcGF0Y2ggYWRkaW5nIGJhY2sg
-dGhlIFRMQiBmbHVzaGVzPwotIElzIGl0IGFuIGlzc3VlIHNvbWV3aGVyZSBlbHNlPwoKUmVnYXJk
-cwpRTQ==
+I wasn't able to find the commit you bisected to, but is your code
+executing a `sfence.vma` instruction after every instance that it changes
+satp? Until recently this wasn't necessary with QEMU because QEMU flushed
+the TLB more aggressively than required by the spec, but the behavior was
+chayou are referringnged in a recent commit
+<https://github.com/qemu/qemu/commit/1e0d985fa9136a563168a3da66f3d17820404ee2#diff-243969738b77de10c014622a3d749a44>.
 
 
---b1_fdf2e8da67b82f0e29cafd79dac8d1ef
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: base64
+Jonathan
 
-PGRpdj5IZWxsbyw8YnI+PC9kaXY+PGRpdj48YnI+PC9kaXY+PGRpdj5JIGhhdmUgdXBkYXRlZCBt
-eSBRRU1VIHZlcnNpb24gKGZyb20gMy54IHRvIHRvZGF5J3MgbWFzdGVyKS48YnI+PC9kaXY+PGRp
-dj5JIG5vdyBnZXQgYWxsIHNvcnQgb2Ygd2VpcmQgYW5kIG5vdCBlYXNpbHkgcmVwcm9kdWNpYmxl
-IGV4Y2VwdGlvbnMgdHJpZ2dlcmVkIGluIG15IHJpc2MtdiBndWVzdCwgaGFwcGVuaW5nIGZyb20g
-Ym90aCB1c2VyIGFuZCBzdXBlcnZpc29yIG1vZGUuPGJyPjwvZGl2PjxkaXY+PGJyPjwvZGl2Pjxk
-aXY+VGhlIGNvbW1hbmQgSSB1c2UgaXMgcm91Z2hseSBgcWVtdS1zeXN0ZW0tcmlzY3Y2NCAtbWFj
-aGluZSBzaWZpdmVfdSAtbSAxMDI0IC1rZXJuZWwgbXliaW5hcnkuZWxmYCAoc29ycnksIEkgY2Fu
-bm90IHNoYXJlIHRoZSBlbGYpLjxicj48L2Rpdj48ZGl2Pjxicj48L2Rpdj48ZGl2PjxkaXY+SSBo
-YXZlIGJpc2VjdGVkIHRoaXMgaXNzdWUgYmFjayB0byBjb21taXQgYzdiOTUxNzE4ODE1NjkyODQ1
-MDFlZDAxZmVjN2FjYjg2NTRkYjdiLjxicj4NClNvbWUgVExCIGZsdXNoZXMgd2VyZSByZW1vdmVk
-IGluIHRoZSBmb2xsb3dpbmcgcGxhY2VzOjxicj4NCnRhcmdldC9yaXNjdi9jcHVfaGVscGVyLmM6
-IGBjc3Jfd3JpdGVfaGVscGVyKGVudiwgcywgQ1NSX01TVEFUVVMpO2AgLSZndDsgYGVudi0mZ3Q7
-bXN0YXR1cyA9IHM7YCAodHdpY2UpPGJyPg0KdGFyZ2V0L3Jpc2N2L29wX2hlbHBlci5jOiBgY3Ny
-X3dyaXRlX2hlbHBlcihlbnYsIHMsIENTUl9NU1RBVFVTKTtgIC0mZ3Q7IGBlbnYtJmd0O21zdGF0
-dXMgPSBzO2AgKHR3aWNlKTwvZGl2PjxkaXY+VGhlc2UgYXJlIHRoZSBwbGFjZXMgd2hlcmUgdGhl
-IHByaXZpbGVnZWQgbW9kZSBpcyBzd2l0Y2hlZC48YnI+PC9kaXY+PGRpdj48YnI+PC9kaXY+PGRp
-dj5JZiBJIGFkZCB0aGVtIGJhY2sgKGB0bGJfZmx1c2goZW52X2NwdShlbnYpKTtgKSwgZXZlcnl0
-aGluZyBpcyBmaW5lIGFnYWluLjxicj48L2Rpdj48ZGl2Pjxicj48L2Rpdj48ZGl2Pkhvd2V2ZXIs
-IGluIHRoZSBgcmlzY3ZfY3B1X3NldF9tb2RlYCBmdW5jdGlvbiwgSSBzZWUgdGhlIGZvbGxvd2lu
-ZyBjb21tZW50OiA8YnI+PC9kaXY+PGRpdj4mZ3Q7IHRsYl9mbHVzaCBpcyB1bm5lY2Vzc2FyeSBh
-cyBtb2RlIGlzIGNvbnRhaW5lZCBpbiBtbXVfaWR4PGJyPjwvZGl2PjxkaXY+SXQgd291bGQgc3Vn
-Z2VzdCBhZGRpbmcgYmFjayBUTEIgZmx1c2hlcyBpcyBub3QgdGhlIHdheSB0byBnby4uLjxicj48
-L2Rpdj48ZGl2Pjxicj48L2Rpdj48ZGl2PkRvZXMgc29tZW9uZSB3aXRoIGJldHRlciBrbm93bGVk
-Z2Ugb2YgdGhlIGNvZGViYXNlIGNhbiB0ZWxsIG1lIGhvdyB0byBwcm9jZWVkIGhlcmU/PGJyPjwv
-ZGl2PjxkaXY+LSBTaG91bGQgSSBzdWJtaXQgYSBwYXRjaCBhZGRpbmcgYmFjayB0aGUgVExCIGZs
-dXNoZXM/PGJyPjwvZGl2PjxkaXY+LSBJcyBpdCBhbiBpc3N1ZSBzb21ld2hlcmUgZWxzZT88YnI+
-PC9kaXY+PGRpdj48YnI+PC9kaXY+PGRpdj5SZWdhcmRzPGJyPjwvZGl2PjxkaXY+UU08YnI+PC9k
-aXY+PGRpdj48YnI+PC9kaXY+PC9kaXY+PGRpdj48YnI+PC9kaXY+
+On Wed, Jun 19, 2019 at 11:46 AM Quentin Mundell via Qemu-riscv <
+qemu-riscv@nongnu.org> wrote:
 
+> Hello,
+>
+> I have updated my QEMU version (from 3.x to today's master).
+> I now get all sort of weird and not easily reproducible exceptions
+> triggered in my risc-v guest, happening from both user and supervisor mode.
+>
+> The command I use is roughly `qemu-system-riscv64 -machine sifive_u -m
+> 1024 -kernel mybinary.elf` (sorry, I cannot share the elf).
+>
+> I have bisected this issue back to commit
+> c7b95171881569284501ed01fec7acb8654db7b.
+> Some TLB flushes were removed in the following places:
+> target/riscv/cpu_helper.c: `csr_write_helper(env, s, CSR_MSTATUS);` ->
+> `env->mstatus = s;` (twice)
+> target/riscv/op_helper.c: `csr_write_helper(env, s, CSR_MSTATUS);` ->
+> `env->mstatus = s;` (twice)
+> These are the places where the privileged mode is switched.
+>
+> If I add them back (`tlb_flush(env_cpu(env));`), everything is fine again.
+>
+> However, in the `riscv_cpu_set_mode` function, I see the following
+> comment:
+> > tlb_flush is unnecessary as mode is contained in mmu_idx
+> It would suggest adding back TLB flushes is not the way to go...
+>
+> Does someone with better knowledge of the codebase can tell me how to
+> proceed here?
+> - Should I submit a patch adding back the TLB flushes?
+> - Is it an issue somewhere else?
+>
+> Regards
+> QM
+>
+>
+>
 
+--000000000000fe1ba2058bb098f8
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
---b1_fdf2e8da67b82f0e29cafd79dac8d1ef--
+<div dir=3D"ltr"><div>I wasn&#39;t able to find the commit you bisected to,=
+ but is your code executing a `sfence.vma` instruction after every instance=
+ that it changes satp? Until recently this wasn&#39;t necessary with QEMU b=
+ecause QEMU flushed the TLB more aggressively than required by the spec, bu=
+t <a href=3D"https://github.com/qemu/qemu/commit/1e0d985fa9136a563168a3da66=
+f3d17820404ee2#diff-243969738b77de10c014622a3d749a44">the behavior was chay=
+ou are referringnged in a recent commit</a>. <br></div><div><br></div><div>=
+Jonathan</div></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
+=3D"gmail_attr">On Wed, Jun 19, 2019 at 11:46 AM Quentin Mundell via Qemu-r=
+iscv &lt;<a href=3D"mailto:qemu-riscv@nongnu.org">qemu-riscv@nongnu.org</a>=
+&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px =
+0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><div=
+>Hello,<br></div><div><br></div><div>I have updated my QEMU version (from 3=
+.x to today&#39;s master).<br></div><div>I now get all sort of weird and no=
+t easily reproducible exceptions triggered in my risc-v guest, happening fr=
+om both user and supervisor mode.<br></div><div><br></div><div>The command =
+I use is roughly `qemu-system-riscv64 -machine sifive_u -m 1024 -kernel myb=
+inary.elf` (sorry, I cannot share the elf).<br></div><div><br></div><div><d=
+iv>I have bisected this issue back to commit c7b95171881569284501ed01fec7ac=
+b8654db7b.<br>
+Some TLB flushes were removed in the following places:<br>
+target/riscv/cpu_helper.c: `csr_write_helper(env, s, CSR_MSTATUS);` -&gt; `=
+env-&gt;mstatus =3D s;` (twice)<br>
+target/riscv/op_helper.c: `csr_write_helper(env, s, CSR_MSTATUS);` -&gt; `e=
+nv-&gt;mstatus =3D s;` (twice)</div><div>These are the places where the pri=
+vileged mode is switched.<br></div><div><br></div><div>If I add them back (=
+`tlb_flush(env_cpu(env));`), everything is fine again.<br></div><div><br></=
+div><div>However, in the `riscv_cpu_set_mode` function, I see the following=
+ comment: <br></div><div>&gt; tlb_flush is unnecessary as mode is contained=
+ in mmu_idx<br></div><div>It would suggest adding back TLB flushes is not t=
+he way to go...<br></div><div><br></div><div>Does someone with better knowl=
+edge of the codebase can tell me how to proceed here?<br></div><div>- Shoul=
+d I submit a patch adding back the TLB flushes?<br></div><div>- Is it an is=
+sue somewhere else?<br></div><div><br></div><div>Regards<br></div><div>QM<b=
+r></div><div><br></div></div><div><br></div></blockquote></div>
 
+--000000000000fe1ba2058bb098f8--
 
