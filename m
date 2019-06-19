@@ -1,61 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hdhD2-0006mK-69
-	for mharc-qemu-riscv@gnu.org; Wed, 19 Jun 2019 16:29:32 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:40381)
+	id 1hdhk0-0005Uz-Nb
+	for mharc-qemu-riscv@gnu.org; Wed, 19 Jun 2019 17:03:36 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47605)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <alistair23@gmail.com>) id 1hdhCz-0006h3-D4
- for qemu-riscv@nongnu.org; Wed, 19 Jun 2019 16:29:30 -0400
+ (envelope-from <alistair23@gmail.com>) id 1hdhjx-0005Ss-RG
+ for qemu-riscv@nongnu.org; Wed, 19 Jun 2019 17:03:35 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1hdhCx-0005Qq-Uq
- for qemu-riscv@nongnu.org; Wed, 19 Jun 2019 16:29:29 -0400
-Received: from mail-io1-xd43.google.com ([2607:f8b0:4864:20::d43]:44122)
+ (envelope-from <alistair23@gmail.com>) id 1hdhjt-0003Yk-Uz
+ for qemu-riscv@nongnu.org; Wed, 19 Jun 2019 17:03:31 -0400
+Received: from mail-lj1-x242.google.com ([2a00:1450:4864:20::242]:45262)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1hdhCu-0005Li-Tn; Wed, 19 Jun 2019 16:29:25 -0400
-Received: by mail-io1-xd43.google.com with SMTP id s7so990128iob.11;
- Wed, 19 Jun 2019 13:29:24 -0700 (PDT)
+ id 1hdhjq-0003PS-0r; Wed, 19 Jun 2019 17:03:29 -0400
+Received: by mail-lj1-x242.google.com with SMTP id m23so536250lje.12;
+ Wed, 19 Jun 2019 14:03:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=tJNIjE84BtegdMtCqC8OwSJECYQW8iiIXi7sWNQvQrc=;
- b=VlJo1wewOQVkAEiGoHLR6YW+8CG7VmxoRHApUeu5+6KfkgKlXVdkPsQk1IT1ryeRbZ
- ErMZVcdkgft/QtNvq1gAIHYshzOLs8ZFwP8sDSGK3tKdbhZgsfq+x9MjK84kPRyywJ8n
- 8RzHWYWa+0sZFW5Vi9i5Jd2Fu9q8HMeU3hZIU0zyF05vgt7w+imsC0SluPvmCaVI0WyX
- Oy9dH0LeCrzVnLDLmW56QFSkyR/CYhpw/y8Q7Ihnwasz+MClsv8vyDcI/9KQ4m+t8sMK
- JJTZGd6gFG3vMGvKc5nSUdesdzsbRwoorp4w5JNWY8+A7SYYsnoBe/K8mhc04qWVpUeh
- oiig==
+ :cc:content-transfer-encoding;
+ bh=Nhvb1xNnaxOCt74u1oVKsx4vkjdfV+cnmA4aS9DBrCA=;
+ b=Y7EGymSQKdVonxwR3B3UdurwDPhsIwNjZ+7XSuCISzkKVX/MAiBTuFba6GrjD8lieg
+ +P0EyuN00CquUUaIwAC51FIzk3A15L+3tpjxMMjuC8Fk6dvXztujk1sEGw2yzMlgjTEh
+ AcFF9rgqOdeSuOqSdJbG3y6c1MY5TfbtRK9b1RQ7N2WepJmJTPduXVFpfrW70vea0OL9
+ sB/FvYtYfoKWBNjPMVHfHED+WOlojljcJsBzkpdWQhsmhFtGHl8S687k0OdoAzEY7GuN
+ uB6+EIg5Wj7JsOLNC5dMFtq6LIBYspSkGVOclEmH2WlZ15MhT0r8saP3R1FVg1ajSUQ8
+ XFbw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=tJNIjE84BtegdMtCqC8OwSJECYQW8iiIXi7sWNQvQrc=;
- b=MWEjeUCgZZwF28MF9qwehMumuYd48WjcBxzDWZO0ks4CaX9Drcq8DEK8WmGgQq3EiP
- aMEiM7JmiTjFv1vqrZJmO+jQ5fmoLTJhCztNoF+3FC27EUIOTI/7l6888tz+3Nz+3YSD
- 6+4PH1PDZZVEgjkswQAigiPMTypHRgJ0lNahghk5XTC2jVYf+sSZnZwKObnvthw8v0Rb
- eOeBrJ0RggD1QlRHPyrKnuXBd1PR51gsJPuuteOWn3FVQiIqci514IIru5koqkTUfomT
- +rngxOd2QTQl4JKu7pM5o1Ckyp+BsHytD4IG41vwRjLKyfZiOFjrMFvcIM/JNDjc4+EO
- 8x4g==
-X-Gm-Message-State: APjAAAVn0BOkoZTo7q2AHDkCwz3sW5pL9wCBRqpZWkvnTVVQfWKUB1yF
- TbHG9FRFA7prN/ELjUoZLHHnqNxvaUHicNosd0U=
-X-Google-Smtp-Source: APXvYqz703AB7KXaPy74y6AnfRsuG54xLSvAhtHduqUB4713/yUFj0uRS2cltCjdXWIgE+nl7nMtbKT63q2kLIec+L4=
-X-Received: by 2002:a5d:88c6:: with SMTP id i6mr78618232iol.107.1560976163811; 
- Wed, 19 Jun 2019 13:29:23 -0700 (PDT)
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=Nhvb1xNnaxOCt74u1oVKsx4vkjdfV+cnmA4aS9DBrCA=;
+ b=svttEbY+0xdhPjHlhqGbsmD8r+wNMygaWVVzlumriitKE7ht6N/YCtRmk7NSRdv0Ho
+ d18vrS9RU+fZYfmGAYZC9NmC4cCADVWWnI6K7C5mf60fFX7Z4jjwNofLmLr3QmD0SseV
+ jRVb7vhsx51V6z5MNuqHEW47S7HgwXpt3P5gUZ9KbgbvHYAHSk8cp0Bq8rV93fp4/p34
+ U8jAjSfndaA5MDjS4wvOX7pKg7Ki/gkrVw2NO7QZQ5krL5jh/Dvt618A70+HTXE+qrfn
+ N7+6dh/bi+FLkmSBFjDFmm9sa5I5JWPBm5wj0XteSB0ZWa2a1ElvTFHSVnat5zFQr2tx
+ Dy/w==
+X-Gm-Message-State: APjAAAUj1nVVBUek9kkxQQL6j/39NZ879P+Gwl/MSBQL0zzRPrUlShAs
+ JNjTdnaHqGCyZmvv2aaA3ViZvF/AfJ0nm0sbkpU=
+X-Google-Smtp-Source: APXvYqxfPXlZlF7TrSQVbARv9zk4bPgNHt6L9ax4lQEOTbHlRIdoXPv1yd1Ar3bqpYCO/IIZas+BY+BCSJ4ANrr7ljA=
+X-Received: by 2002:a2e:480a:: with SMTP id v10mr17213246lja.94.1560978197339; 
+ Wed, 19 Jun 2019 14:03:17 -0700 (PDT)
 MIME-Version: 1.0
-References: <4e552352bb35b1f4b086e260be369464df7c490e.1558131003.git.alistair.francis@wdc.com>
- <mhng-96573692-b788-4185-85a6-435e87a7d7eb@palmer-si-x1e>
-In-Reply-To: <mhng-96573692-b788-4185-85a6-435e87a7d7eb@palmer-si-x1e>
+References: <cover.1560904640.git.alistair.francis@wdc.com>
+ <e718da8df07915765217dece609255b6ad196955.1560904640.git.alistair.francis@wdc.com>
+ <CAEUhbmUz5xHqhuEvDWHBTpKN+k3uuNPQxNCGFWOfR21hMhWtPw@mail.gmail.com>
+ <CANnJOVH34B0efKNSjNHD5ZmuWqAsybsmiwFXEQYvTye+oJBV=A@mail.gmail.com>
+ <CAEUhbmU_fjS4-DeZwnC7u4gQc3h44m4yYQ7vUA3-N0Wk64z5uw@mail.gmail.com>
+In-Reply-To: <CAEUhbmU_fjS4-DeZwnC7u4gQc3h44m4yYQ7vUA3-N0Wk64z5uw@mail.gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 19 Jun 2019 13:26:35 -0700
-Message-ID: <CAKmqyKOVYoqr2BATYVCDVj96S8cYtc0LqsY3nuCXv9+M29jWtQ@mail.gmail.com>
-To: Palmer Dabbelt <palmer@sifive.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>
+Date: Wed, 19 Jun 2019 14:00:28 -0700
+Message-ID: <CAKmqyKPsKs70kGpkGbpoO+QvA_8zkhc_39HHY41+3eJGXYfyng@mail.gmail.com>
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Jonathan Behrens <fintelia@gmail.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Palmer Dabbelt <palmer@sifive.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::d43
-Subject: Re: [Qemu-riscv] [PATCH v1 2/4] disas/riscv: Disassemble reserved
- compressed encodings as illegal
+X-Received-From: 2a00:1450:4864:20::242
+Subject: Re: [Qemu-riscv] [Qemu-devel] [RFC v1 2/5] hw/riscv: Add support
+ for loading a firmware
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -67,146 +73,104 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Jun 2019 20:29:30 -0000
+X-List-Received-Date: Wed, 19 Jun 2019 21:03:35 -0000
 
-On Fri, Jun 14, 2019 at 2:18 AM Palmer Dabbelt <palmer@sifive.com> wrote:
+On Wed, Jun 19, 2019 at 8:30 AM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
-> On Fri, 17 May 2019 15:11:01 PDT (-0700), Alistair Francis wrote:
-> > From: Michael Clark <mjc@sifive.com>
-> >
-> > Due to the design of the disassembler, the immediate is not
-> > known during decoding of the opcode; so to handle compressed
-> > encodings with reserved immediate values (non-zero), we need
-> > to add an additional check during decompression to match
-> > reserved encodings with zero immediates and translate them
-> > into the illegal instruction.
-> >
-> > The following compressed opcodes have reserved encodings with
-> > zero immediates: c.addi4spn, c.addi, c.lui, c.addi16sp, c.srli,
-> > c.srai, c.andi and c.slli
-> >
-> > Signed-off-by: Michael Clark <mjc@sifive.com>
-> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> > ---
-> >  disas/riscv.c | 51 ++++++++++++++++++++++++++++++++++-----------------
-> >  1 file changed, 34 insertions(+), 17 deletions(-)
-> >
-> > diff --git a/disas/riscv.c b/disas/riscv.c
-> > index 59a9b0437a..3ab4586f0a 100644
-> > --- a/disas/riscv.c
-> > +++ b/disas/riscv.c
-> > @@ -504,14 +504,19 @@ typedef struct {
-> >      const rvc_constraint *constraints;
-> >  } rv_comp_data;
-> >
-> > +enum {
-> > +    rvcd_imm_nz = 0x1
-> > +};
-> > +
-> >  typedef struct {
-> >      const char * const name;
-> >      const rv_codec codec;
-> >      const char * const format;
-> >      const rv_comp_data *pseudo;
-> > -    const int decomp_rv32;
-> > -    const int decomp_rv64;
-> > -    const int decomp_rv128;
-> > +    const short decomp_rv32;
-> > +    const short decomp_rv64;
-> > +    const short decomp_rv128;
-> > +    const short decomp_data;
-> >  } rv_opcode_data;
-> >
-> >  /* register names */
-> > @@ -1011,7 +1016,7 @@ const rv_opcode_data opcode_data[] = {
-> >      { "fcvt.q.lu", rv_codec_r_m, rv_fmt_rm_frd_rs1, NULL, 0, 0, 0 },
-> >      { "fmv.x.q", rv_codec_r, rv_fmt_rd_frs1, NULL, 0, 0, 0 },
-> >      { "fmv.q.x", rv_codec_r, rv_fmt_frd_rs1, NULL, 0, 0, 0 },
-> > -    { "c.addi4spn", rv_codec_ciw_4spn, rv_fmt_rd_rs1_imm, NULL, rv_op_addi, rv_op_addi, rv_op_addi },
-> > +    { "c.addi4spn", rv_codec_ciw_4spn, rv_fmt_rd_rs1_imm, NULL, rv_op_addi, rv_op_addi, rv_op_addi, rvcd_imm_nz },
-> >      { "c.fld", rv_codec_cl_ld, rv_fmt_frd_offset_rs1, NULL, rv_op_fld, rv_op_fld, 0 },
-> >      { "c.lw", rv_codec_cl_lw, rv_fmt_rd_offset_rs1, NULL, rv_op_lw, rv_op_lw, rv_op_lw },
-> >      { "c.flw", rv_codec_cl_lw, rv_fmt_frd_offset_rs1, NULL, rv_op_flw, 0, 0 },
-> > @@ -1019,14 +1024,14 @@ const rv_opcode_data opcode_data[] = {
-> >      { "c.sw", rv_codec_cs_sw, rv_fmt_rs2_offset_rs1, NULL, rv_op_sw, rv_op_sw, rv_op_sw },
-> >      { "c.fsw", rv_codec_cs_sw, rv_fmt_frs2_offset_rs1, NULL, rv_op_fsw, 0, 0 },
-> >      { "c.nop", rv_codec_ci_none, rv_fmt_none, NULL, rv_op_addi, rv_op_addi, rv_op_addi },
-> > -    { "c.addi", rv_codec_ci, rv_fmt_rd_rs1_imm, NULL, rv_op_addi, rv_op_addi, rv_op_addi },
-> > +    { "c.addi", rv_codec_ci, rv_fmt_rd_rs1_imm, NULL, rv_op_addi, rv_op_addi, rv_op_addi, rvcd_imm_nz },
-> >      { "c.jal", rv_codec_cj_jal, rv_fmt_rd_offset, NULL, rv_op_jal, 0, 0 },
-> >      { "c.li", rv_codec_ci_li, rv_fmt_rd_rs1_imm, NULL, rv_op_addi, rv_op_addi, rv_op_addi },
-> > -    { "c.addi16sp", rv_codec_ci_16sp, rv_fmt_rd_rs1_imm, NULL, rv_op_addi, rv_op_addi, rv_op_addi },
-> > -    { "c.lui", rv_codec_ci_lui, rv_fmt_rd_imm, NULL, rv_op_lui, rv_op_lui, rv_op_lui },
-> > -    { "c.srli", rv_codec_cb_sh6, rv_fmt_rd_rs1_imm, NULL, rv_op_srli, rv_op_srli, rv_op_srli },
-> > -    { "c.srai", rv_codec_cb_sh6, rv_fmt_rd_rs1_imm, NULL, rv_op_srai, rv_op_srai, rv_op_srai },
-> > -    { "c.andi", rv_codec_cb_imm, rv_fmt_rd_rs1_imm, NULL, rv_op_andi, rv_op_andi, rv_op_andi },
-> > +    { "c.addi16sp", rv_codec_ci_16sp, rv_fmt_rd_rs1_imm, NULL, rv_op_addi, rv_op_addi, rv_op_addi, rvcd_imm_nz },
-> > +    { "c.lui", rv_codec_ci_lui, rv_fmt_rd_imm, NULL, rv_op_lui, rv_op_lui, rv_op_lui, rvcd_imm_nz },
-> > +    { "c.srli", rv_codec_cb_sh6, rv_fmt_rd_rs1_imm, NULL, rv_op_srli, rv_op_srli, rv_op_srli, rvcd_imm_nz },
-> > +    { "c.srai", rv_codec_cb_sh6, rv_fmt_rd_rs1_imm, NULL, rv_op_srai, rv_op_srai, rv_op_srai, rvcd_imm_nz },
-> > +    { "c.andi", rv_codec_cb_imm, rv_fmt_rd_rs1_imm, NULL, rv_op_andi, rv_op_andi, rv_op_andi, rvcd_imm_nz },
+> Hi,
 >
-> Unless I'm missing something, c.andi can have a zero immediate.
+> On Wed, Jun 19, 2019 at 11:26 PM Jonathan Behrens <fintelia@gmail.com> wr=
+ote:
+> >
+> > I was actually just writing up the same thing.  Shifting all the addres=
+ses in the ELF file by 2 or 4MB is somewhat surprising behavior, especially=
+ because this will apply to segments that are mapped even at much higher ad=
+dresses. If you want a segment aligned to a 1GB superpage boundary you now =
+need to place it slightly below so that it will be bumped up to the right p=
+lace. Further, ANDing all addresses with 0x7fffffff makes it impossible to =
+map anything beyond the first 2GB of RAM.
+> >
+>
+> Yes, current kernel_translate() logic is tightly coupled to the kernel
+> entry VA, and if we link kernel at some other address it will just
+> fail.
 
-Yeah, I'll remove that.
+I thought this was required but it looks like it isn't. I have remove
+the kernel_translate() function.
+
+>
+> > Jonathan
+> >
+> > On Wed, Jun 19, 2019 at 11:16 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+> >>
+> >> On Wed, Jun 19, 2019 at 8:53 AM Alistair Francis
+> >> <alistair.francis@wdc.com> wrote:
+> >> >
+> >> > Add support for loading a firmware file for the virt machine and the
+> >> > SiFive U. This can be run with the following command:
+> >> >
+> >> >     qemu-system-riscv64 -machine virt -bios fw_jump.elf -kernel vmli=
+nux
+> >> >
+> >> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> >> > ---
+> >> >  hw/riscv/boot.c         | 41 ++++++++++++++++++++++++++++++++++++++=
++--
+> >> >  hw/riscv/sifive_e.c     |  2 +-
+> >> >  hw/riscv/sifive_u.c     |  6 +++++-
+> >> >  hw/riscv/spike.c        |  6 +++---
+> >> >  hw/riscv/virt.c         |  7 ++++++-
+> >> >  include/hw/riscv/boot.h |  4 +++-
+> >> >  6 files changed, 57 insertions(+), 9 deletions(-)
+> >> >
+> >> > diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
+> >> > index 62f94aaf8a..392ca0cb2e 100644
+> >> > --- a/hw/riscv/boot.c
+> >> > +++ b/hw/riscv/boot.c
+> >> > @@ -23,13 +23,50 @@
+> >> >  #include "exec/cpu-defs.h"
+> >> >  #include "hw/loader.h"
+> >> >  #include "hw/riscv/boot.h"
+> >> > +#include "hw/boards.h"
+> >> >  #include "elf.h"
+> >> >
+> >> > -target_ulong riscv_load_kernel(const char *kernel_filename)
+> >> > +#if defined(TARGET_RISCV32)
+> >> > +# define KERNEL_BOOT_ADDRESS 0x80400000
+> >> > +#else
+> >> > +# define KERNEL_BOOT_ADDRESS 0x80200000
+> >> > +#endif
+> >> > +
+> >> > +static uint64_t kernel_translate(void *opaque, uint64_t addr)
+> >> > +{
+> >> > +    MachineState *machine =3D opaque;
+> >> > +
+> >> > +    /*
+> >> > +     * If the user specified a firmware move the kernel to the offs=
+et
+> >> > +     * start address.
+> >> > +     */
+> >>
+> >> Why?
+
+Removed.
+
+> >>
+> >> > +    if (machine->firmware) {
+> >> > +        return (addr & 0x7fffffff) + KERNEL_BOOT_ADDRESS;
+> >>
+> >> So with both "-bios" and "-kernel", the kernel address will be moved
+> >> to another address other than 0x80200000 (for 64-bit). This does not
+> >> look good to me.
+> >>
+>
+> So why not simply return KERNEL_BOOT_ADDRESS in kernel_translate()?
+
+That's what I am doing now.
 
 Alistair
 
 >
-> >      { "c.sub", rv_codec_cs, rv_fmt_rd_rs1_rs2, NULL, rv_op_sub, rv_op_sub, rv_op_sub },
-> >      { "c.xor", rv_codec_cs, rv_fmt_rd_rs1_rs2, NULL, rv_op_xor, rv_op_xor, rv_op_xor },
-> >      { "c.or", rv_codec_cs, rv_fmt_rd_rs1_rs2, NULL, rv_op_or, rv_op_or, rv_op_or },
-> > @@ -1036,7 +1041,7 @@ const rv_opcode_data opcode_data[] = {
-> >      { "c.j", rv_codec_cj, rv_fmt_rd_offset, NULL, rv_op_jal, rv_op_jal, rv_op_jal },
-> >      { "c.beqz", rv_codec_cb, rv_fmt_rs1_rs2_offset, NULL, rv_op_beq, rv_op_beq, rv_op_beq },
-> >      { "c.bnez", rv_codec_cb, rv_fmt_rs1_rs2_offset, NULL, rv_op_bne, rv_op_bne, rv_op_bne },
-> > -    { "c.slli", rv_codec_ci_sh6, rv_fmt_rd_rs1_imm, NULL, rv_op_slli, rv_op_slli, rv_op_slli },
-> > +    { "c.slli", rv_codec_ci_sh6, rv_fmt_rd_rs1_imm, NULL, rv_op_slli, rv_op_slli, rv_op_slli, rvcd_imm_nz },
-> >      { "c.fldsp", rv_codec_ci_ldsp, rv_fmt_frd_offset_rs1, NULL, rv_op_fld, rv_op_fld, rv_op_fld },
-> >      { "c.lwsp", rv_codec_ci_lwsp, rv_fmt_rd_offset_rs1, NULL, rv_op_lw, rv_op_lw, rv_op_lw },
-> >      { "c.flwsp", rv_codec_ci_lwsp, rv_fmt_frd_offset_rs1, NULL, rv_op_flw, 0, 0 },
-> > @@ -2795,8 +2800,12 @@ static void decode_inst_decompress_rv32(rv_decode *dec)
-> >  {
-> >      int decomp_op = opcode_data[dec->op].decomp_rv32;
-> >      if (decomp_op != rv_op_illegal) {
-> > -        dec->op = decomp_op;
-> > -        dec->codec = opcode_data[decomp_op].codec;
-> > +        if ((opcode_data[dec->op].decomp_data & rvcd_imm_nz) && dec->imm == 0) {
-> > +            dec->op = rv_op_illegal;
-> > +        } else {
-> > +            dec->op = decomp_op;
-> > +            dec->codec = opcode_data[decomp_op].codec;
-> > +        }
-> >      }
-> >  }
-> >
-> > @@ -2804,8 +2813,12 @@ static void decode_inst_decompress_rv64(rv_decode *dec)
-> >  {
-> >      int decomp_op = opcode_data[dec->op].decomp_rv64;
-> >      if (decomp_op != rv_op_illegal) {
-> > -        dec->op = decomp_op;
-> > -        dec->codec = opcode_data[decomp_op].codec;
-> > +        if ((opcode_data[dec->op].decomp_data & rvcd_imm_nz) && dec->imm == 0) {
-> > +            dec->op = rv_op_illegal;
-> > +        } else {
-> > +            dec->op = decomp_op;
-> > +            dec->codec = opcode_data[decomp_op].codec;
-> > +        }
-> >      }
-> >  }
-> >
-> > @@ -2813,8 +2826,12 @@ static void decode_inst_decompress_rv128(rv_decode *dec)
-> >  {
-> >      int decomp_op = opcode_data[dec->op].decomp_rv128;
-> >      if (decomp_op != rv_op_illegal) {
-> > -        dec->op = decomp_op;
-> > -        dec->codec = opcode_data[decomp_op].codec;
-> > +        if ((opcode_data[dec->op].decomp_data & rvcd_imm_nz) && dec->imm == 0) {
-> > +            dec->op = rv_op_illegal;
-> > +        } else {
-> > +            dec->op = decomp_op;
-> > +            dec->codec = opcode_data[decomp_op].codec;
-> > +        }
-> >      }
-> >  }
+> Regards,
+> Bin
 
