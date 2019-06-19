@@ -1,64 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hdc0m-0006AN-9g
-	for mharc-qemu-riscv@gnu.org; Wed, 19 Jun 2019 10:56:32 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:34652)
+	id 1hdcJy-0004FF-Fi
+	for mharc-qemu-riscv@gnu.org; Wed, 19 Jun 2019 11:16:22 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:40000)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <bmeng.cn@gmail.com>) id 1hdc0h-0005uw-U6
- for qemu-riscv@nongnu.org; Wed, 19 Jun 2019 10:56:29 -0400
+ (envelope-from <bmeng.cn@gmail.com>) id 1hdcJv-00049S-N4
+ for qemu-riscv@nongnu.org; Wed, 19 Jun 2019 11:16:20 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <bmeng.cn@gmail.com>) id 1hdbnT-0004BH-Q5
- for qemu-riscv@nongnu.org; Wed, 19 Jun 2019 10:42:50 -0400
-Received: from mail-ed1-x544.google.com ([2a00:1450:4864:20::544]:37918)
+ (envelope-from <bmeng.cn@gmail.com>) id 1hdcJu-00058a-9m
+ for qemu-riscv@nongnu.org; Wed, 19 Jun 2019 11:16:19 -0400
+Received: from mail-ed1-x542.google.com ([2a00:1450:4864:20::542]:45837)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
- id 1hdbnR-00046j-KX; Wed, 19 Jun 2019 10:42:45 -0400
-Received: by mail-ed1-x544.google.com with SMTP id r12so25401296edo.5;
- Wed, 19 Jun 2019 07:42:44 -0700 (PDT)
+ id 1hdcJr-00051K-B2; Wed, 19 Jun 2019 11:16:15 -0400
+Received: by mail-ed1-x542.google.com with SMTP id a14so27704706edv.12;
+ Wed, 19 Jun 2019 08:16:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=h2vkCkvykHaLWXR5z6CCLD3PMw69h+AfbOyy25hOpi8=;
- b=i+abylgV4RehHNW7tGrRRlgf023r+/JwrKuzfvLtSBgVAe1KiXlgLLSUp5pWgGwpoI
- I7ph3ErXjXEOPfbR5GLb3BycDpR6IvsCIhUJEDGuxbgJDN3nsqLHaY1qC4YlxcpPiaXa
- CGvfOtLjBEXMfpM02ypHP4a85hFLgfSvkadBJtb4D2KKYZ1TDXERhVX6LfGg4kx6ZRuV
- FNs415ADbmWp6raTcOqz8UZCC+Wma4iXvX6oduiFw38dmbxh3E0VTDJiyGMLCzyNAeL9
- aIHpwrbGn46Ygtsh9YDFCQaPCnmnUryyAwoEezeMj9CwXd4jLkwu8Zk1hNVxRL78XIcO
- uEZw==
+ :cc; bh=CUcAH5CsXUAkg9VQuHl1C6HetctEYF20Kq7+gMk+jKw=;
+ b=uLa3oqbP81fGKr8ZnPIekXNo+YEBTvLe/fe0p3288y/zjHNfVlPQwJOXrABDKv4uTe
+ gqVG76RWZRliwof70STHOnm9B9CGw1HSrb9hlwOQ8Gt8kKAQi43w6iDDW8/QBwuQUiOd
+ kO7cm4G28gqSr4R+MmRJdAYPJSwxG9iudX82gi1gUkfRHO21WmaJFBeKxh5euopyAMc9
+ MvcfDbVRO3KU4F6abmA+0wECV6iVfuXup1UVOf6m74WSSzr3B9Dg6dtkoz1gqt2GZfvb
+ VdL9QFR3WlB38u8P06wYFoOtxZRRe4YpTzQzIKifVf5qGwKZngz5GtwaGDxguKPyicyD
+ rggw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=h2vkCkvykHaLWXR5z6CCLD3PMw69h+AfbOyy25hOpi8=;
- b=LiGlNKFIScWnyXblian2IFvKhRjmFllMcgYxgJA5PpW0PJDC6e6TtW9uEK9dyC6AM0
- Ia9+RUbww4qwSpfpiekWc2jbcx9NuKaNp4mTRcWTr7rmQlpKUld1xae0qqOqLLzNs1lh
- era1D8mX+aHRsZZOFXEqcAI3OxNmy/vM8L6HBeXrncjZrvTUZx5CFhHcc57BV31r1pSo
- 0RVIqXz5LNVitQVYDDuJtIjb8ypvq/VLSVwS5aYiizFuySVJRTYgd0ZiK31zO7Mte/Rw
- O2mCXp/R739Kxhl/fnqpZN5SnUl2tDp/0eangOLOA3pAje58QiW42WaQY+JbUE87nM3u
- 81Gw==
-X-Gm-Message-State: APjAAAUMHgdfgaQDCw2sUj4Qu6dwpTE2ViWc5ZQCIP7y41ZUx2WL5bW7
- cGjSsKcNGXDwaXtSpeUfQ1zcLYA2ZbIgf+c5jBc=
-X-Google-Smtp-Source: APXvYqxDt4hmegmzZY/GnCoMEZAKFuIpoRXnxW4cVoeA23DfrFoWJW99TJ0Im4f/2yVkYrLwBukDLhe+4WkTMltYEhg=
-X-Received: by 2002:a17:906:4f8f:: with SMTP id
- o15mr6478965eju.129.1560955363577; 
- Wed, 19 Jun 2019 07:42:43 -0700 (PDT)
+ bh=CUcAH5CsXUAkg9VQuHl1C6HetctEYF20Kq7+gMk+jKw=;
+ b=UHQ/ZON2XvCSaeDmzWAbsnRM05ivpp/SHAuGvUHkNb+bIo7xSlhhLFPzw77G4AbWKM
+ V/utBFTDDn00cr6EQkoG5tDGbRyzWLb4qvtM1b5XIu/UIhLLzesp0hGPSqo74VKP2zrJ
+ fJCq60j1U8G0BPCjxZhkjqp9fxJGHI8+EURqbIqgUFEM8xucvLEyrrSMkihWRz0W+gT0
+ 64DuEu4Md0gzJzUrjKH5oEPrmFF2StLTqvwEljggcku5RRTKPeYocBgpecxx9e1phD99
+ b4RwUw4vC/Z1XkvNCq+ySOPBMKyCwx+Trl56JWEeHRDSjc2eEf5Q9vzrSGD+5D1uHERs
+ S0nA==
+X-Gm-Message-State: APjAAAWKsPgumm1t4x37ztb9qjYjHmg1606THk5KkHl60dId30tKrOoX
+ JO0N83c0w/28Q37O0GBWPnJfDrH6r+DENuDJcqY=
+X-Google-Smtp-Source: APXvYqyIqd1LLLUSaUwp7hVuG4OX+WrjlwIV1EdWgSTfTWNB21e1iOCtgU7Nul1GMVfGlzaNPBonEMgZsqhzmt+1GNg=
+X-Received: by 2002:a50:c28a:: with SMTP id o10mr64395139edf.182.1560957374091; 
+ Wed, 19 Jun 2019 08:16:14 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1560904640.git.alistair.francis@wdc.com>
- <CAEUhbmViJpKtiNXm7CYdF7SPRkOPkvpXJ5+We2m9tZSK_BWi-g@mail.gmail.com>
- <CAKmqyKM4UU+CPKu07AK65bNofbbxxaRkSACqoV_vfFEaH-195A@mail.gmail.com>
-In-Reply-To: <CAKmqyKM4UU+CPKu07AK65bNofbbxxaRkSACqoV_vfFEaH-195A@mail.gmail.com>
+ <b511243b947debd710ea225699a4d7e312568da8.1560904640.git.alistair.francis@wdc.com>
+In-Reply-To: <b511243b947debd710ea225699a4d7e312568da8.1560904640.git.alistair.francis@wdc.com>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Wed, 19 Jun 2019 22:42:30 +0800
-Message-ID: <CAEUhbmUwAVLXY9SSoryWBDeNL8gUfBCE+xweSSmuE9KwzWeX=w@mail.gmail.com>
-To: Alistair Francis <alistair23@gmail.com>
-Cc: Alistair Francis <alistair.francis@wdc.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+Date: Wed, 19 Jun 2019 23:16:02 +0800
+Message-ID: <CAEUhbmWpxLHu3Tf9k+UT9K-6dqLGtDkybTb4S8beCQ0nv9Ghqw@mail.gmail.com>
+To: Alistair Francis <alistair.francis@wdc.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Palmer Dabbelt <palmer@sifive.com>
+ Alistair Francis <alistair23@gmail.com>, Palmer Dabbelt <palmer@sifive.com>
 Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::544
-Subject: Re: [Qemu-riscv] [Qemu-devel] [RFC v1 0/5] RISC-V: Add firmware
- loading support and default
+X-Received-From: 2a00:1450:4864:20::542
+Subject: Re: [Qemu-riscv] [Qemu-devel] [RFC v1 1/5] hw/riscv: Split out the
+ boot functions
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -70,93 +67,104 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Jun 2019 14:56:29 -0000
+X-List-Received-Date: Wed, 19 Jun 2019 15:16:21 -0000
 
-On Wed, Jun 19, 2019 at 10:30 PM Alistair Francis <alistair23@gmail.com> wrote:
+On Wed, Jun 19, 2019 at 8:51 AM Alistair Francis
+<alistair.francis@wdc.com> wrote:
 >
-> On Wed, Jun 19, 2019 at 7:26 AM Bin Meng <bmeng.cn@gmail.com> wrote:
-> >
-> > On Wed, Jun 19, 2019 at 8:56 AM Alistair Francis
-> > <alistair.francis@wdc.com> wrote:
-> > >
-> > > This is an RFC as it will break ALL current users! See below for details.
-> > >
-> > > This series consolidates the current RISC-V kernel loading
-> > > impelementation while also adding support for the -bios option and more
-> > > advanced kernel image types.
-> > >
-> > > After consolidating the kernel loading we can extend the boot loader to
-> > > support a -bios option. We can also extend the kernel loading options to
-> > > support not just ELF files but other standard formats.
-> > >
-> > > Finally we can include the OpenSBI firmware by default for QEMU users.
-> > >
-> > > At the end of this series we are in the good place of no longer
-> > > requiring users to build firmware to boot a kernel. Instead users can
-> > > just run QEMu with the -kernel option and everything will work. They can
-> >
-> > This is great. I like booting kernel directly for testing without
-> > bothering the firmware stuff.
+> Split the common RISC-V boot functions into a seperate file. This allows
+> us to share the common code.
 >
-> That's the goal! Now we just need to not break everything.
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> ---
+>  hw/riscv/Makefile.objs  |  1 +
+>  hw/riscv/boot.c         | 69 +++++++++++++++++++++++++++++++++++++++++
+>  hw/riscv/sifive_e.c     | 17 ++--------
+>  hw/riscv/sifive_u.c     | 17 ++--------
+>  hw/riscv/spike.c        | 21 +++----------
+>  hw/riscv/virt.c         | 51 +++---------------------------
+>  include/hw/riscv/boot.h | 27 ++++++++++++++++
+>  7 files changed, 110 insertions(+), 93 deletions(-)
+>  create mode 100644 hw/riscv/boot.c
+>  create mode 100644 include/hw/riscv/boot.h
 >
-> >
-> > > also override the firmware with their own using the -bios option. Using
-> > > "-bios none" will result in no firmware being loaded (as it is today).
-> > >
-> > > !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-> > >
-> > > Unfortunately this series (patch 5 specifically) results in all current
-> > > Linux boots being broken as users are already loading in their own
-> > > firmware, which overlaps with the now included default. They will
-> > > see this error:
-> > >
-> > >   rom: requested regions overlap (rom phdr #0: ./images/qemuriscv64/fw_jump.elf. free=0x0000000080008090, addr=0x0000000080000000)
-> > >   qemu-system-riscv64: rom check and register reset failed
-> > >
-> > > If a current user specieifies "-bios none" their flow will continue
-> > > working. A user can instead no longer load their firmware and
-> > > use the default or they can load their firmware with the -bios option.
-> > >
-> > > At the moment the best idea I have to not break all users is to only
-> > > include the default firmware if the user specifies "-bios opensbi".
-> > > That is change the default to not loading the firmware. Then we can work
-> > > on updating documentation and maybe in future change the default to
-> > > include a firmware and anyone who doesn't want a default firmware can
-> > > specify "-bios none".
-> > >
-> > > Any other ideas on how to not break everything?
-> > >
-> > >
-> > >
-> > > Alistair Francis (5):
-> > >   hw/riscv: Split out the boot functions
-> > >   hw/riscv: Add support for loading a firmware
-> > >   hw/riscv: Extend the kernel loading support
-> > >   roms: Add OpenSBI version 0.3
-> > >   hw/riscv: Load OpenSBI as the default firmware
-> > >
-> > >  .gitmodules                         |   3 +
-> > >  Makefile                            |   3 +-
-> > >  configure                           |   1 +
-> > >  hw/riscv/Makefile.objs              |   1 +
-> > >  hw/riscv/boot.c                     | 143 ++++++++++++++++++++++++++++
-> > >  hw/riscv/sifive_e.c                 |  17 +---
-> > >  hw/riscv/sifive_u.c                 |  19 +---
-> > >  hw/riscv/spike.c                    |  21 +---
-> > >  hw/riscv/virt.c                     |  54 ++---------
-> > >  include/hw/riscv/boot.h             |  30 ++++++
-> > >  pc-bios/opensbi-riscv32-fw_jump.elf | Bin 0 -> 197988 bytes
-> > >  pc-bios/opensbi-riscv64-fw_jump.elf | Bin 0 -> 200192 bytes
-> >
-> > Since we are considering adding "bios" images, I prefer to add the
-> > pure binary images instead of ELF images here.
->
-> I didn't think about that. Can we just boot them in QEMU like we do
-> with the ELFs?
+> diff --git a/hw/riscv/Makefile.objs b/hw/riscv/Makefile.objs
+> index a65027304a..eb9d4f9ffc 100644
+> --- a/hw/riscv/Makefile.objs
+> +++ b/hw/riscv/Makefile.objs
+> @@ -1,3 +1,4 @@
+> +obj-y += boot.o
+>  obj-$(CONFIG_SPIKE) += riscv_htif.o
+>  obj-$(CONFIG_HART) += riscv_hart.o
+>  obj-$(CONFIG_SIFIVE_E) += sifive_e.o
+> diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
+> new file mode 100644
+> index 0000000000..62f94aaf8a
+> --- /dev/null
+> +++ b/hw/riscv/boot.c
+> @@ -0,0 +1,69 @@
+> +/*
+> + * QEMU RISC-V Boot Helper
+> + *
+> + * Copyright (c) 2017 SiFive, Inc.
+> + * Copyright (c) 2019 Alistair Francis <alistair.francis@wdc.com>
+> + *
+> + * This program is free software; you can redistribute it and/or modify it
+> + * under the terms and conditions of the GNU General Public License,
+> + * version 2 or later, as published by the Free Software Foundation.
+> + *
+> + * This program is distributed in the hope it will be useful, but WITHOUT
+> + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+> + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+> + * more details.
+> + *
+> + * You should have received a copy of the GNU General Public License along with
+> + * this program.  If not, see <http://www.gnu.org/licenses/>.
+> + */
+> +
+> +#include "qemu/osdep.h"
+> +#include "qemu/units.h"
+> +#include "qemu/error-report.h"
+> +#include "exec/cpu-defs.h"
+> +#include "hw/loader.h"
+> +#include "hw/riscv/boot.h"
+> +#include "elf.h"
+> +
+> +target_ulong riscv_load_kernel(const char *kernel_filename)
+> +{
+> +    uint64_t kernel_entry, kernel_high;
+> +
+> +    if (load_elf(kernel_filename, NULL, NULL, NULL,
+> +                 &kernel_entry, NULL, &kernel_high,
+> +                 0, EM_RISCV, 1, 0) < 0) {
+> +        error_report("could not load kernel '%s'", kernel_filename);
+> +        exit(1);
+> +    }
+> +
+> +    return kernel_entry;
+> +}
+> +
+> +hwaddr riscv_load_initrd(const char *filename, uint64_t mem_size,
+> +                         uint64_t kernel_entry, hwaddr *start)
+> +{
+> +    int size;
+> +
+> +    /* We want to put the initrd far enough into RAM that when the
 
-Yes, use load_image_targphys() instead of load_elf().
+nits: /* should be on a separate line
 
-Regards,
-Bin
+> +     * kernel is uncompressed it will not clobber the initrd. However
+> +     * on boards without much RAM we must ensure that we still leave
+> +     * enough room for a decent sized initrd, and on boards with large
+> +     * amounts of RAM we must avoid the initrd being so far up in RAM
+> +     * that it is outside lowmem and inaccessible to the kernel.
+> +     * So for boards with less  than 256MB of RAM we put the initrd
+> +     * halfway into RAM, and for boards with 256MB of RAM or more we put
+> +     * the initrd at 128MB.
+> +     */
+
+[snip]
+
+Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+Tested-by: Bin Meng <bmeng.cn@gmail.com>
 
