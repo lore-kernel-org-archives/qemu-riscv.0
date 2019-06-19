@@ -1,57 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hdedA-0002rY-8I
-	for mharc-qemu-riscv@gnu.org; Wed, 19 Jun 2019 13:44:21 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49803)
+	id 1hdfIP-0005Ee-Qc
+	for mharc-qemu-riscv@gnu.org; Wed, 19 Jun 2019 14:26:58 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:33525)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <fintelia@gmail.com>) id 1hdecw-0002TU-Ee
- for qemu-riscv@nongnu.org; Wed, 19 Jun 2019 13:44:11 -0400
+ (envelope-from <alistair23@gmail.com>) id 1hdfII-0005DF-22
+ for qemu-riscv@nongnu.org; Wed, 19 Jun 2019 14:26:52 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <fintelia@gmail.com>) id 1hdeQk-0000sy-V8
- for qemu-riscv@nongnu.org; Wed, 19 Jun 2019 13:31:32 -0400
-Received: from mail-lj1-x22b.google.com ([2a00:1450:4864:20::22b]:45681)
+ (envelope-from <alistair23@gmail.com>) id 1hdfIC-00043s-Ra
+ for qemu-riscv@nongnu.org; Wed, 19 Jun 2019 14:26:46 -0400
+Received: from mail-lj1-x244.google.com ([2a00:1450:4864:20::244]:45489)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <fintelia@gmail.com>) id 1hdeQk-0000pD-IF
- for qemu-riscv@nongnu.org; Wed, 19 Jun 2019 13:31:30 -0400
-Received: by mail-lj1-x22b.google.com with SMTP id m23so4033256lje.12
- for <qemu-riscv@nongnu.org>; Wed, 19 Jun 2019 10:31:22 -0700 (PDT)
+ (Exim 4.71) (envelope-from <alistair23@gmail.com>)
+ id 1hdfHz-0003uE-Du; Wed, 19 Jun 2019 14:26:32 -0400
+Received: by mail-lj1-x244.google.com with SMTP id m23so125904lje.12;
+ Wed, 19 Jun 2019 11:26:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=a3mL3ZUVava+pP1RmOAzINwSq3TIHF8Ye3R0BSoCEok=;
- b=YUQo0Vsbem+8lHwY+tf6EldVwcUo70mInKbcGZJhbv+C5A2KSAEwdKbLNAVUu+ao/K
- uCJ+ETBuYGiRoMcLtMZgUTPAlKv8WsBzLJonJg9qqHyaNUvVy1ybJ9Q61kZa67Sz1qBr
- mMw3ZpPDvudwjffMm/mclc/4y1RHiYaibUZZMO9/hD9j6LXefhJ7Xpt4NfLpE3nmSu6T
- 9lRw8MNPRgGuqFOA4uBDkgjAe7FFZBlz7/IE6QkMt5XmzDbbnauk3Qo+JU6cGsFJZXAU
- TRREuHgxgyymm7qjRsKOujQ4fgZYJTRr/wcaqnVWuM4+BJlWMm4ZKrS3VXpRbQ3F6OoD
- eKdw==
+ :cc; bh=jbTLfhqFuBYmR+7B5rL/+DxTdb0jONhMb1XonifqEPQ=;
+ b=K40F6/yYRetvAf8zkOHpgd9iYxfrA/8mvPcNRw09+qLptCFiKt9geGakIGzrtfoJw3
+ WRSo3Bc/ZLO9WoF/jxwX0GS1LQo2KuzIgrE8n7oCANNrIkNiofmc+6jQImhN+6XiS9dI
+ ilXNdq4OQVH1XkVAyjBB2Ox4RJsRrJjrSsSLpBv1SvHDpiJx2JwUXMQM+3FTVU/h5Pz8
+ IEXtEkl8DqRn18m9/DE354lcqL6EkhkfmqMoyDNe556mhhr35dj9Bia+STDqcTPKFSiS
+ mi6jBEdBpYBArcBmNTE9H/QUsYOM1BAB+mO+yKZ8qP4rn5ue5YiRUOQG3IA25GoHercv
+ m1Dg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=a3mL3ZUVava+pP1RmOAzINwSq3TIHF8Ye3R0BSoCEok=;
- b=BJvmWqXxt7PxUwDrFuFXLnTmvKdnua/FTasQ7dQSCDgeeClfAYsfpKOKC9UpTLief9
- tqhYrqAD1anALniVeV6QHu6oUsUB2P3ojTierYDqj0CI3eoQtImn32iaJ+la5rGqu4Fo
- DvV6BbtIjLZLrjnMfRY9JJQYfimuG9jhvtzdjv+uBv49fvZrHJyWZdSx8Dzwg0PIyuUw
- b4zSI2NarA8vXTachozXnMh1CajtCFg/HIX7mpa3pQTNcsHbTiWnJ++987PJ20o6WsGl
- EuQQLxLtGuKDi5XyBrD+wwJ2jJlaczxh0sJoADO0nTvCf1wfCu2syUc48j3yxCcIo+K7
- c1iA==
-X-Gm-Message-State: APjAAAW7T0C8lxZXBLsDvbdkMiY+e2Q2vWskjebfdkyjhAxl38df1xIW
- zmcOw1sa/ASskjPrgrbgS/aygByABS8S3KGtE+c=
-X-Google-Smtp-Source: APXvYqyK17AwV8CF/YvfEfnObghtzfkAqnccgO21yQK5fTwjX5CCH53zjE+wHomvjEIIiqvsqgAhQHn0xcB+0P8q8g4=
-X-Received: by 2002:a2e:8847:: with SMTP id z7mr4722985ljj.51.1560965480847;
- Wed, 19 Jun 2019 10:31:20 -0700 (PDT)
+ bh=jbTLfhqFuBYmR+7B5rL/+DxTdb0jONhMb1XonifqEPQ=;
+ b=SHtC9oqNSt+SjmdZNqg5el+vjUl8IO54561DS6dv8uaUIQYB1if4OHADuijCPw5Msd
+ kjQd8sAY0LBH+q9dV2jgY+0UsNPtl0OY5/rjwtI4FCe7IG1cF2aBEJalLLJt/TV6W+KK
+ GfixE2FB5Fw+rpoOMQ1o82c+ySnBdckMDDCvhFQs0FOLD3+SpjpqA1wlIokspqOaNrRp
+ SnNY44V3sDHBPBdAsDwYeQP8Y+y4hW3IU7XlqHsEAoqoynmpxXMykhWv7pjVLkEZPjoA
+ sd5qp2h7YJHQi8wO2LAglRPiMBLji0mrAxBBFtUoe+/8YgP8uyoHTd8hyFGNPkLrwXOq
+ BtMw==
+X-Gm-Message-State: APjAAAWs4pA5TAsqoawfPb1WsLud9R2gE94YXoHPLfuuwWg4US5BCIjG
+ 89BLZ8DdN3loNgYuJLsZNysJM85toKeiSHW4GCo=
+X-Google-Smtp-Source: APXvYqzfXpcfjMAIr3/CNouOel0W7NWr0rsVsiMItxLgx2hEgHo4afj/BkN8oVAnJ5PA6c7bBIH/i3qG9vQSvYYHoD4=
+X-Received: by 2002:a2e:9758:: with SMTP id f24mr15412089ljj.58.1560968786788; 
+ Wed, 19 Jun 2019 11:26:26 -0700 (PDT)
 MIME-Version: 1.0
-References: <Gpx9RF86BWnRvLPI5Kz0PRHM3oiLy4nkgS-FiQueS0d3dSS4N-N008stUGzVV-NctfG95esZlphJJ1A7J4rlkU6VniTM_Oxyrg1MfRpGwlA=@protonmail.com>
-In-Reply-To: <Gpx9RF86BWnRvLPI5Kz0PRHM3oiLy4nkgS-FiQueS0d3dSS4N-N008stUGzVV-NctfG95esZlphJJ1A7J4rlkU6VniTM_Oxyrg1MfRpGwlA=@protonmail.com>
-From: Jonathan Behrens <fintelia@gmail.com>
-Date: Wed, 19 Jun 2019 13:30:51 -0400
-Message-ID: <CANnJOVEAbK1Bc+TTE9xGozDcxTt6ezpdDnpQ+LRafgV-1gy=ug@mail.gmail.com>
-To: Quentin Mundell <quentin.mundell@protonmail.com>
-Cc: "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>
-Content-Type: multipart/alternative; boundary="000000000000fe1ba2058bb098f8"
+References: <cover.1560904640.git.alistair.francis@wdc.com>
+ <CAEUhbmViJpKtiNXm7CYdF7SPRkOPkvpXJ5+We2m9tZSK_BWi-g@mail.gmail.com>
+ <CAKmqyKM4UU+CPKu07AK65bNofbbxxaRkSACqoV_vfFEaH-195A@mail.gmail.com>
+ <CAEUhbmUwAVLXY9SSoryWBDeNL8gUfBCE+xweSSmuE9KwzWeX=w@mail.gmail.com>
+In-Reply-To: <CAEUhbmUwAVLXY9SSoryWBDeNL8gUfBCE+xweSSmuE9KwzWeX=w@mail.gmail.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Wed, 19 Jun 2019 11:23:37 -0700
+Message-ID: <CAKmqyKMmm-38DijX_wL=pAbvxzLQ+KSOtd1xg_GrT4Az70GKsw@mail.gmail.com>
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Alistair Francis <alistair.francis@wdc.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Palmer Dabbelt <palmer@sifive.com>
+Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::22b
-Subject: Re: [Qemu-riscv] TLB refresh issue
+X-Received-From: 2a00:1450:4864:20::244
+Subject: Re: [Qemu-riscv] [Qemu-devel] [RFC v1 0/5] RISC-V: Add firmware
+ loading support and default
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -63,99 +70,100 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Jun 2019 17:44:11 -0000
+X-List-Received-Date: Wed, 19 Jun 2019 18:26:53 -0000
 
---000000000000fe1ba2058bb098f8
-Content-Type: text/plain; charset="UTF-8"
+On Wed, Jun 19, 2019 at 7:42 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+>
+> On Wed, Jun 19, 2019 at 10:30 PM Alistair Francis <alistair23@gmail.com> wrote:
+> >
+> > On Wed, Jun 19, 2019 at 7:26 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+> > >
+> > > On Wed, Jun 19, 2019 at 8:56 AM Alistair Francis
+> > > <alistair.francis@wdc.com> wrote:
+> > > >
+> > > > This is an RFC as it will break ALL current users! See below for details.
+> > > >
+> > > > This series consolidates the current RISC-V kernel loading
+> > > > impelementation while also adding support for the -bios option and more
+> > > > advanced kernel image types.
+> > > >
+> > > > After consolidating the kernel loading we can extend the boot loader to
+> > > > support a -bios option. We can also extend the kernel loading options to
+> > > > support not just ELF files but other standard formats.
+> > > >
+> > > > Finally we can include the OpenSBI firmware by default for QEMU users.
+> > > >
+> > > > At the end of this series we are in the good place of no longer
+> > > > requiring users to build firmware to boot a kernel. Instead users can
+> > > > just run QEMu with the -kernel option and everything will work. They can
+> > >
+> > > This is great. I like booting kernel directly for testing without
+> > > bothering the firmware stuff.
+> >
+> > That's the goal! Now we just need to not break everything.
+> >
+> > >
+> > > > also override the firmware with their own using the -bios option. Using
+> > > > "-bios none" will result in no firmware being loaded (as it is today).
+> > > >
+> > > > !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+> > > >
+> > > > Unfortunately this series (patch 5 specifically) results in all current
+> > > > Linux boots being broken as users are already loading in their own
+> > > > firmware, which overlaps with the now included default. They will
+> > > > see this error:
+> > > >
+> > > >   rom: requested regions overlap (rom phdr #0: ./images/qemuriscv64/fw_jump.elf. free=0x0000000080008090, addr=0x0000000080000000)
+> > > >   qemu-system-riscv64: rom check and register reset failed
+> > > >
+> > > > If a current user specieifies "-bios none" their flow will continue
+> > > > working. A user can instead no longer load their firmware and
+> > > > use the default or they can load their firmware with the -bios option.
+> > > >
+> > > > At the moment the best idea I have to not break all users is to only
+> > > > include the default firmware if the user specifies "-bios opensbi".
+> > > > That is change the default to not loading the firmware. Then we can work
+> > > > on updating documentation and maybe in future change the default to
+> > > > include a firmware and anyone who doesn't want a default firmware can
+> > > > specify "-bios none".
+> > > >
+> > > > Any other ideas on how to not break everything?
+> > > >
+> > > >
+> > > >
+> > > > Alistair Francis (5):
+> > > >   hw/riscv: Split out the boot functions
+> > > >   hw/riscv: Add support for loading a firmware
+> > > >   hw/riscv: Extend the kernel loading support
+> > > >   roms: Add OpenSBI version 0.3
+> > > >   hw/riscv: Load OpenSBI as the default firmware
+> > > >
+> > > >  .gitmodules                         |   3 +
+> > > >  Makefile                            |   3 +-
+> > > >  configure                           |   1 +
+> > > >  hw/riscv/Makefile.objs              |   1 +
+> > > >  hw/riscv/boot.c                     | 143 ++++++++++++++++++++++++++++
+> > > >  hw/riscv/sifive_e.c                 |  17 +---
+> > > >  hw/riscv/sifive_u.c                 |  19 +---
+> > > >  hw/riscv/spike.c                    |  21 +---
+> > > >  hw/riscv/virt.c                     |  54 ++---------
+> > > >  include/hw/riscv/boot.h             |  30 ++++++
+> > > >  pc-bios/opensbi-riscv32-fw_jump.elf | Bin 0 -> 197988 bytes
+> > > >  pc-bios/opensbi-riscv64-fw_jump.elf | Bin 0 -> 200192 bytes
+> > >
+> > > Since we are considering adding "bios" images, I prefer to add the
+> > > pure binary images instead of ELF images here.
+> >
+> > I didn't think about that. Can we just boot them in QEMU like we do
+> > with the ELFs?
+>
+> Yes, use load_image_targphys() instead of load_elf().
 
-I wasn't able to find the commit you bisected to, but is your code
-executing a `sfence.vma` instruction after every instance that it changes
-satp? Until recently this wasn't necessary with QEMU because QEMU flushed
-the TLB more aggressively than required by the spec, but the behavior was
-chayou are referringnged in a recent commit
-<https://github.com/qemu/qemu/commit/1e0d985fa9136a563168a3da66f3d17820404ee2#diff-243969738b77de10c014622a3d749a44>.
+Ah, that is obvious. I'll update it to use the bin files then.
 
+Alistair
 
-Jonathan
-
-On Wed, Jun 19, 2019 at 11:46 AM Quentin Mundell via Qemu-riscv <
-qemu-riscv@nongnu.org> wrote:
-
-> Hello,
 >
-> I have updated my QEMU version (from 3.x to today's master).
-> I now get all sort of weird and not easily reproducible exceptions
-> triggered in my risc-v guest, happening from both user and supervisor mode.
->
-> The command I use is roughly `qemu-system-riscv64 -machine sifive_u -m
-> 1024 -kernel mybinary.elf` (sorry, I cannot share the elf).
->
-> I have bisected this issue back to commit
-> c7b95171881569284501ed01fec7acb8654db7b.
-> Some TLB flushes were removed in the following places:
-> target/riscv/cpu_helper.c: `csr_write_helper(env, s, CSR_MSTATUS);` ->
-> `env->mstatus = s;` (twice)
-> target/riscv/op_helper.c: `csr_write_helper(env, s, CSR_MSTATUS);` ->
-> `env->mstatus = s;` (twice)
-> These are the places where the privileged mode is switched.
->
-> If I add them back (`tlb_flush(env_cpu(env));`), everything is fine again.
->
-> However, in the `riscv_cpu_set_mode` function, I see the following
-> comment:
-> > tlb_flush is unnecessary as mode is contained in mmu_idx
-> It would suggest adding back TLB flushes is not the way to go...
->
-> Does someone with better knowledge of the codebase can tell me how to
-> proceed here?
-> - Should I submit a patch adding back the TLB flushes?
-> - Is it an issue somewhere else?
->
-> Regards
-> QM
->
->
->
-
---000000000000fe1ba2058bb098f8
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div>I wasn&#39;t able to find the commit you bisected to,=
- but is your code executing a `sfence.vma` instruction after every instance=
- that it changes satp? Until recently this wasn&#39;t necessary with QEMU b=
-ecause QEMU flushed the TLB more aggressively than required by the spec, bu=
-t <a href=3D"https://github.com/qemu/qemu/commit/1e0d985fa9136a563168a3da66=
-f3d17820404ee2#diff-243969738b77de10c014622a3d749a44">the behavior was chay=
-ou are referringnged in a recent commit</a>. <br></div><div><br></div><div>=
-Jonathan</div></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
-=3D"gmail_attr">On Wed, Jun 19, 2019 at 11:46 AM Quentin Mundell via Qemu-r=
-iscv &lt;<a href=3D"mailto:qemu-riscv@nongnu.org">qemu-riscv@nongnu.org</a>=
-&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px =
-0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><div=
->Hello,<br></div><div><br></div><div>I have updated my QEMU version (from 3=
-.x to today&#39;s master).<br></div><div>I now get all sort of weird and no=
-t easily reproducible exceptions triggered in my risc-v guest, happening fr=
-om both user and supervisor mode.<br></div><div><br></div><div>The command =
-I use is roughly `qemu-system-riscv64 -machine sifive_u -m 1024 -kernel myb=
-inary.elf` (sorry, I cannot share the elf).<br></div><div><br></div><div><d=
-iv>I have bisected this issue back to commit c7b95171881569284501ed01fec7ac=
-b8654db7b.<br>
-Some TLB flushes were removed in the following places:<br>
-target/riscv/cpu_helper.c: `csr_write_helper(env, s, CSR_MSTATUS);` -&gt; `=
-env-&gt;mstatus =3D s;` (twice)<br>
-target/riscv/op_helper.c: `csr_write_helper(env, s, CSR_MSTATUS);` -&gt; `e=
-nv-&gt;mstatus =3D s;` (twice)</div><div>These are the places where the pri=
-vileged mode is switched.<br></div><div><br></div><div>If I add them back (=
-`tlb_flush(env_cpu(env));`), everything is fine again.<br></div><div><br></=
-div><div>However, in the `riscv_cpu_set_mode` function, I see the following=
- comment: <br></div><div>&gt; tlb_flush is unnecessary as mode is contained=
- in mmu_idx<br></div><div>It would suggest adding back TLB flushes is not t=
-he way to go...<br></div><div><br></div><div>Does someone with better knowl=
-edge of the codebase can tell me how to proceed here?<br></div><div>- Shoul=
-d I submit a patch adding back the TLB flushes?<br></div><div>- Is it an is=
-sue somewhere else?<br></div><div><br></div><div>Regards<br></div><div>QM<b=
-r></div><div><br></div></div><div><br></div></blockquote></div>
-
---000000000000fe1ba2058bb098f8--
+> Regards,
+> Bin
 
