@@ -1,66 +1,37 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hdcXQ-0008Ui-R3
-	for mharc-qemu-riscv@gnu.org; Wed, 19 Jun 2019 11:30:16 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43680)
+	id 1hdcac-0002tS-8i
+	for mharc-qemu-riscv@gnu.org; Wed, 19 Jun 2019 11:33:35 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44565)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <bmeng.cn@gmail.com>) id 1hdcXO-0008Pw-3L
- for qemu-riscv@nongnu.org; Wed, 19 Jun 2019 11:30:15 -0400
+ (envelope-from <quentin.mundell@protonmail.com>) id 1hdcaX-0002pp-Jy
+ for qemu-riscv@nongnu.org; Wed, 19 Jun 2019 11:33:31 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <bmeng.cn@gmail.com>) id 1hdcXM-000472-Pl
- for qemu-riscv@nongnu.org; Wed, 19 Jun 2019 11:30:14 -0400
-Received: from mail-ed1-x542.google.com ([2a00:1450:4864:20::542]:41229)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
- id 1hdcXM-00046G-Ie; Wed, 19 Jun 2019 11:30:12 -0400
-Received: by mail-ed1-x542.google.com with SMTP id p15so27796809eds.8;
- Wed, 19 Jun 2019 08:30:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=TgkZtnD/t/xdS+UbH52wzHUHwNkuIhtBPcIdqds31kU=;
- b=d7lfl9a5IuIhtj/qQTVTZ5SHujXRz4WcNPtl4zDxTq3y9f4Y1F90hy2Y/xNG9H81+q
- rDLja8NnCQJ6FH3qllzUOh3N5QEOYabkzJPvnDBfsWtIPzAErS598XAzMF6Z/ukjcnYN
- 6eUJN64exddvPbs6ajEVdev1rHRnZcy0DkD9HokXyJMX+iIeXlg8rUobK59cyBALdFhh
- 8NRi7jHmpVlW/uufoVE4wTLdg4i86PSwdHgDuxA5bElSIEkLJCGaQWbVOihdEwErEvCY
- v2JsezmTS7FLxJNDIA+UNrg3Gg1IEuz7IRdaAHIKTpAX+UKmMaBfPhXjQ/3iac04qUDR
- ugKg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=TgkZtnD/t/xdS+UbH52wzHUHwNkuIhtBPcIdqds31kU=;
- b=LdPc0iJt3+kpGjmO0wU86fRDqIRynficXA1M19XlDiwwp2bGqL63UTVYqCuF9Rifm7
- w1vamAclLq0He6NfTHsyW1isY1cHlpTeauYrfK2Z98qQ5bpZXyliTMwr2TX69hXocXE0
- fr9K7i/yo3Vcp9nWY2HfiMcRSjCCDSdlO+1fXKe/WGBYJzYYOvGNXgAgY72fzN+Z8y4b
- fsOq8WgqQDqgaud8ng4EcTlaX3dNpL44IMZ+YvaDQCwZ8kLq0i6nujYYB6UC61J+kgFe
- /uKA90T7PXSPcSNUZTdJzqR3jVZtLl1ZpMy6MxfyM4Je1uR2IQdMfWbYs0mfBPtPM+Wa
- vSfw==
-X-Gm-Message-State: APjAAAUIb9hMW15m9WDuQC99qstQaw4083VCcXmG5XXLGI4XIfKVUJfR
- 3dimCiRuUTJbuTTqnGEl60huQ5I1l7cqJcNbCro=
-X-Google-Smtp-Source: APXvYqx4V/DrFCnsqSaCZWQ3nxGT0vgzw2rlVo1u+lvdYPf4JZ2mYpWWlXHiNd6noZqRv+m82HCb+uUmaz/ltAq6woo=
-X-Received: by 2002:a50:ad0c:: with SMTP id y12mr85924080edc.25.1560958211233; 
- Wed, 19 Jun 2019 08:30:11 -0700 (PDT)
+ (envelope-from <quentin.mundell@protonmail.com>) id 1hdcaV-0005r5-8j
+ for qemu-riscv@nongnu.org; Wed, 19 Jun 2019 11:33:29 -0400
+Received: from mail-40135.protonmail.ch ([185.70.40.135]:11926)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <quentin.mundell@protonmail.com>)
+ id 1hdcaS-0005lb-QA
+ for qemu-riscv@nongnu.org; Wed, 19 Jun 2019 11:33:27 -0400
+Date: Wed, 19 Jun 2019 15:33:13 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=protonmail.com;
+ s=default; t=1560958397;
+ bh=l+j+00A6Afe5tXuXYDzDxMx1T5rqu9WY13ia2hDg8sc=;
+ h=Date:To:From:Reply-To:Subject:Feedback-ID:From;
+ b=I1Dyz1yj7KC1nVb2Uu+xj1f6EXQ8V/6EFOWi1B9Wwkfvok1Wc14Ko+11CwjtiRbaE
+ zmkHhJUJPDeT8eIE+fpGyFL6AABk5AIBNscvrBK29lsJdeEiA2tuSyod2oDQ0Lx++0
+ vuqyTxyE4/9/FIm+trNOTkvX9TjhK84pJ1Lnq3/4=
+To: "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>
+From: Quentin Mundell <quentin.mundell@protonmail.com>
+Reply-To: Quentin Mundell <quentin.mundell@protonmail.com>
+Message-ID: <Gpx9RF86BWnRvLPI5Kz0PRHM3oiLy4nkgS-FiQueS0d3dSS4N-N008stUGzVV-NctfG95esZlphJJ1A7J4rlkU6VniTM_Oxyrg1MfRpGwlA=@protonmail.com>
+Feedback-ID: gBLPg9rW5wfp_bU1qG_NMga7H8Xt3ECyEnN_CmBbGEkU52qPG7hPf4oVg3Q-Scu5KvJCR5nhixecbLVi3_LVEA==:Ext:ProtonMail
 MIME-Version: 1.0
-References: <cover.1560904640.git.alistair.francis@wdc.com>
- <e718da8df07915765217dece609255b6ad196955.1560904640.git.alistair.francis@wdc.com>
- <CAEUhbmUz5xHqhuEvDWHBTpKN+k3uuNPQxNCGFWOfR21hMhWtPw@mail.gmail.com>
- <CANnJOVH34B0efKNSjNHD5ZmuWqAsybsmiwFXEQYvTye+oJBV=A@mail.gmail.com>
-In-Reply-To: <CANnJOVH34B0efKNSjNHD5ZmuWqAsybsmiwFXEQYvTye+oJBV=A@mail.gmail.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Wed, 19 Jun 2019 23:30:00 +0800
-Message-ID: <CAEUhbmU_fjS4-DeZwnC7u4gQc3h44m4yYQ7vUA3-N0Wk64z5uw@mail.gmail.com>
-To: Jonathan Behrens <fintelia@gmail.com>
-Cc: Alistair Francis <alistair.francis@wdc.com>,
- Alistair Francis <alistair23@gmail.com>, 
- Palmer Dabbelt <palmer@sifive.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>,
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2a00:1450:4864:20::542
-Subject: Re: [Qemu-riscv] [Qemu-devel] [RFC v1 2/5] hw/riscv: Add support
- for loading a firmware
+Content-Type: multipart/alternative;
+ boundary="b1_fdf2e8da67b82f0e29cafd79dac8d1ef"
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+X-Received-From: 185.70.40.135
+Subject: [Qemu-riscv] TLB refresh issue
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -72,89 +43,73 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Jun 2019 15:30:15 -0000
+X-List-Received-Date: Wed, 19 Jun 2019 15:33:31 -0000
 
-Hi,
+This is a multi-part message in MIME format.
 
-On Wed, Jun 19, 2019 at 11:26 PM Jonathan Behrens <fintelia@gmail.com> wrot=
-e:
->
-> I was actually just writing up the same thing.  Shifting all the addresse=
-s in the ELF file by 2 or 4MB is somewhat surprising behavior, especially b=
-ecause this will apply to segments that are mapped even at much higher addr=
-esses. If you want a segment aligned to a 1GB superpage boundary you now ne=
-ed to place it slightly below so that it will be bumped up to the right pla=
-ce. Further, ANDing all addresses with 0x7fffffff makes it impossible to ma=
-p anything beyond the first 2GB of RAM.
->
+--b1_fdf2e8da67b82f0e29cafd79dac8d1ef
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: base64
 
-Yes, current kernel_translate() logic is tightly coupled to the kernel
-entry VA, and if we link kernel at some other address it will just
-fail.
+SGVsbG8sCgpJIGhhdmUgdXBkYXRlZCBteSBRRU1VIHZlcnNpb24gKGZyb20gMy54IHRvIHRvZGF5
+J3MgbWFzdGVyKS4KSSBub3cgZ2V0IGFsbCBzb3J0IG9mIHdlaXJkIGFuZCBub3QgZWFzaWx5IHJl
+cHJvZHVjaWJsZSBleGNlcHRpb25zIHRyaWdnZXJlZCBpbiBteSByaXNjLXYgZ3Vlc3QsIGhhcHBl
+bmluZyBmcm9tIGJvdGggdXNlciBhbmQgc3VwZXJ2aXNvciBtb2RlLgoKVGhlIGNvbW1hbmQgSSB1
+c2UgaXMgcm91Z2hseSBgcWVtdS1zeXN0ZW0tcmlzY3Y2NCAtbWFjaGluZSBzaWZpdmVfdSAtbSAx
+MDI0IC1rZXJuZWwgbXliaW5hcnkuZWxmYCAoc29ycnksIEkgY2Fubm90IHNoYXJlIHRoZSBlbGYp
+LgoKSSBoYXZlIGJpc2VjdGVkIHRoaXMgaXNzdWUgYmFjayB0byBjb21taXQgYzdiOTUxNzE4ODE1
+NjkyODQ1MDFlZDAxZmVjN2FjYjg2NTRkYjdiLgpTb21lIFRMQiBmbHVzaGVzIHdlcmUgcmVtb3Zl
+ZCBpbiB0aGUgZm9sbG93aW5nIHBsYWNlczoKdGFyZ2V0L3Jpc2N2L2NwdV9oZWxwZXIuYzogYGNz
+cl93cml0ZV9oZWxwZXIoZW52LCBzLCBDU1JfTVNUQVRVUyk7YCAtPiBgZW52LT5tc3RhdHVzID0g
+cztgICh0d2ljZSkKdGFyZ2V0L3Jpc2N2L29wX2hlbHBlci5jOiBgY3NyX3dyaXRlX2hlbHBlcihl
+bnYsIHMsIENTUl9NU1RBVFVTKTtgIC0+IGBlbnYtPm1zdGF0dXMgPSBzO2AgKHR3aWNlKQpUaGVz
+ZSBhcmUgdGhlIHBsYWNlcyB3aGVyZSB0aGUgcHJpdmlsZWdlZCBtb2RlIGlzIHN3aXRjaGVkLgoK
+SWYgSSBhZGQgdGhlbSBiYWNrIChgdGxiX2ZsdXNoKGVudl9jcHUoZW52KSk7YCksIGV2ZXJ5dGhp
+bmcgaXMgZmluZSBhZ2Fpbi4KCkhvd2V2ZXIsIGluIHRoZSBgcmlzY3ZfY3B1X3NldF9tb2RlYCBm
+dW5jdGlvbiwgSSBzZWUgdGhlIGZvbGxvd2luZyBjb21tZW50Ogo+IHRsYl9mbHVzaCBpcyB1bm5l
+Y2Vzc2FyeSBhcyBtb2RlIGlzIGNvbnRhaW5lZCBpbiBtbXVfaWR4Ckl0IHdvdWxkIHN1Z2dlc3Qg
+YWRkaW5nIGJhY2sgVExCIGZsdXNoZXMgaXMgbm90IHRoZSB3YXkgdG8gZ28uLi4KCkRvZXMgc29t
+ZW9uZSB3aXRoIGJldHRlciBrbm93bGVkZ2Ugb2YgdGhlIGNvZGViYXNlIGNhbiB0ZWxsIG1lIGhv
+dyB0byBwcm9jZWVkIGhlcmU/Ci0gU2hvdWxkIEkgc3VibWl0IGEgcGF0Y2ggYWRkaW5nIGJhY2sg
+dGhlIFRMQiBmbHVzaGVzPwotIElzIGl0IGFuIGlzc3VlIHNvbWV3aGVyZSBlbHNlPwoKUmVnYXJk
+cwpRTQ==
 
-> Jonathan
->
-> On Wed, Jun 19, 2019 at 11:16 AM Bin Meng <bmeng.cn@gmail.com> wrote:
->>
->> On Wed, Jun 19, 2019 at 8:53 AM Alistair Francis
->> <alistair.francis@wdc.com> wrote:
->> >
->> > Add support for loading a firmware file for the virt machine and the
->> > SiFive U. This can be run with the following command:
->> >
->> >     qemu-system-riscv64 -machine virt -bios fw_jump.elf -kernel vmlinu=
-x
->> >
->> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
->> > ---
->> >  hw/riscv/boot.c         | 41 +++++++++++++++++++++++++++++++++++++++-=
--
->> >  hw/riscv/sifive_e.c     |  2 +-
->> >  hw/riscv/sifive_u.c     |  6 +++++-
->> >  hw/riscv/spike.c        |  6 +++---
->> >  hw/riscv/virt.c         |  7 ++++++-
->> >  include/hw/riscv/boot.h |  4 +++-
->> >  6 files changed, 57 insertions(+), 9 deletions(-)
->> >
->> > diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
->> > index 62f94aaf8a..392ca0cb2e 100644
->> > --- a/hw/riscv/boot.c
->> > +++ b/hw/riscv/boot.c
->> > @@ -23,13 +23,50 @@
->> >  #include "exec/cpu-defs.h"
->> >  #include "hw/loader.h"
->> >  #include "hw/riscv/boot.h"
->> > +#include "hw/boards.h"
->> >  #include "elf.h"
->> >
->> > -target_ulong riscv_load_kernel(const char *kernel_filename)
->> > +#if defined(TARGET_RISCV32)
->> > +# define KERNEL_BOOT_ADDRESS 0x80400000
->> > +#else
->> > +# define KERNEL_BOOT_ADDRESS 0x80200000
->> > +#endif
->> > +
->> > +static uint64_t kernel_translate(void *opaque, uint64_t addr)
->> > +{
->> > +    MachineState *machine =3D opaque;
->> > +
->> > +    /*
->> > +     * If the user specified a firmware move the kernel to the offset
->> > +     * start address.
->> > +     */
->>
->> Why?
->>
->> > +    if (machine->firmware) {
->> > +        return (addr & 0x7fffffff) + KERNEL_BOOT_ADDRESS;
->>
->> So with both "-bios" and "-kernel", the kernel address will be moved
->> to another address other than 0x80200000 (for 64-bit). This does not
->> look good to me.
->>
 
-So why not simply return KERNEL_BOOT_ADDRESS in kernel_translate()?
+--b1_fdf2e8da67b82f0e29cafd79dac8d1ef
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: base64
 
-Regards,
-Bin
+PGRpdj5IZWxsbyw8YnI+PC9kaXY+PGRpdj48YnI+PC9kaXY+PGRpdj5JIGhhdmUgdXBkYXRlZCBt
+eSBRRU1VIHZlcnNpb24gKGZyb20gMy54IHRvIHRvZGF5J3MgbWFzdGVyKS48YnI+PC9kaXY+PGRp
+dj5JIG5vdyBnZXQgYWxsIHNvcnQgb2Ygd2VpcmQgYW5kIG5vdCBlYXNpbHkgcmVwcm9kdWNpYmxl
+IGV4Y2VwdGlvbnMgdHJpZ2dlcmVkIGluIG15IHJpc2MtdiBndWVzdCwgaGFwcGVuaW5nIGZyb20g
+Ym90aCB1c2VyIGFuZCBzdXBlcnZpc29yIG1vZGUuPGJyPjwvZGl2PjxkaXY+PGJyPjwvZGl2Pjxk
+aXY+VGhlIGNvbW1hbmQgSSB1c2UgaXMgcm91Z2hseSBgcWVtdS1zeXN0ZW0tcmlzY3Y2NCAtbWFj
+aGluZSBzaWZpdmVfdSAtbSAxMDI0IC1rZXJuZWwgbXliaW5hcnkuZWxmYCAoc29ycnksIEkgY2Fu
+bm90IHNoYXJlIHRoZSBlbGYpLjxicj48L2Rpdj48ZGl2Pjxicj48L2Rpdj48ZGl2PjxkaXY+SSBo
+YXZlIGJpc2VjdGVkIHRoaXMgaXNzdWUgYmFjayB0byBjb21taXQgYzdiOTUxNzE4ODE1NjkyODQ1
+MDFlZDAxZmVjN2FjYjg2NTRkYjdiLjxicj4NClNvbWUgVExCIGZsdXNoZXMgd2VyZSByZW1vdmVk
+IGluIHRoZSBmb2xsb3dpbmcgcGxhY2VzOjxicj4NCnRhcmdldC9yaXNjdi9jcHVfaGVscGVyLmM6
+IGBjc3Jfd3JpdGVfaGVscGVyKGVudiwgcywgQ1NSX01TVEFUVVMpO2AgLSZndDsgYGVudi0mZ3Q7
+bXN0YXR1cyA9IHM7YCAodHdpY2UpPGJyPg0KdGFyZ2V0L3Jpc2N2L29wX2hlbHBlci5jOiBgY3Ny
+X3dyaXRlX2hlbHBlcihlbnYsIHMsIENTUl9NU1RBVFVTKTtgIC0mZ3Q7IGBlbnYtJmd0O21zdGF0
+dXMgPSBzO2AgKHR3aWNlKTwvZGl2PjxkaXY+VGhlc2UgYXJlIHRoZSBwbGFjZXMgd2hlcmUgdGhl
+IHByaXZpbGVnZWQgbW9kZSBpcyBzd2l0Y2hlZC48YnI+PC9kaXY+PGRpdj48YnI+PC9kaXY+PGRp
+dj5JZiBJIGFkZCB0aGVtIGJhY2sgKGB0bGJfZmx1c2goZW52X2NwdShlbnYpKTtgKSwgZXZlcnl0
+aGluZyBpcyBmaW5lIGFnYWluLjxicj48L2Rpdj48ZGl2Pjxicj48L2Rpdj48ZGl2Pkhvd2V2ZXIs
+IGluIHRoZSBgcmlzY3ZfY3B1X3NldF9tb2RlYCBmdW5jdGlvbiwgSSBzZWUgdGhlIGZvbGxvd2lu
+ZyBjb21tZW50OiA8YnI+PC9kaXY+PGRpdj4mZ3Q7IHRsYl9mbHVzaCBpcyB1bm5lY2Vzc2FyeSBh
+cyBtb2RlIGlzIGNvbnRhaW5lZCBpbiBtbXVfaWR4PGJyPjwvZGl2PjxkaXY+SXQgd291bGQgc3Vn
+Z2VzdCBhZGRpbmcgYmFjayBUTEIgZmx1c2hlcyBpcyBub3QgdGhlIHdheSB0byBnby4uLjxicj48
+L2Rpdj48ZGl2Pjxicj48L2Rpdj48ZGl2PkRvZXMgc29tZW9uZSB3aXRoIGJldHRlciBrbm93bGVk
+Z2Ugb2YgdGhlIGNvZGViYXNlIGNhbiB0ZWxsIG1lIGhvdyB0byBwcm9jZWVkIGhlcmU/PGJyPjwv
+ZGl2PjxkaXY+LSBTaG91bGQgSSBzdWJtaXQgYSBwYXRjaCBhZGRpbmcgYmFjayB0aGUgVExCIGZs
+dXNoZXM/PGJyPjwvZGl2PjxkaXY+LSBJcyBpdCBhbiBpc3N1ZSBzb21ld2hlcmUgZWxzZT88YnI+
+PC9kaXY+PGRpdj48YnI+PC9kaXY+PGRpdj5SZWdhcmRzPGJyPjwvZGl2PjxkaXY+UU08YnI+PC9k
+aXY+PGRpdj48YnI+PC9kaXY+PC9kaXY+PGRpdj48YnI+PC9kaXY+
+
+
+
+--b1_fdf2e8da67b82f0e29cafd79dac8d1ef--
+
 
