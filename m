@@ -1,64 +1,68 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hdMTC-0008H1-7I
-	for mharc-qemu-riscv@gnu.org; Tue, 18 Jun 2019 18:20:51 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49874)
+	id 1hdOov-0007lL-NL
+	for mharc-qemu-riscv@gnu.org; Tue, 18 Jun 2019 20:51:25 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:48401)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <alistair23@gmail.com>) id 1hdMT6-0008DL-Rg
- for qemu-riscv@nongnu.org; Tue, 18 Jun 2019 18:20:45 -0400
+ (envelope-from <prvs=066539cd8=alistair.francis@wdc.com>)
+ id 1hdOos-0007hu-4z
+ for qemu-riscv@nongnu.org; Tue, 18 Jun 2019 20:51:24 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1hdMT5-0002RN-01
- for qemu-riscv@nongnu.org; Tue, 18 Jun 2019 18:20:44 -0400
-Received: from mail-lf1-x143.google.com ([2a00:1450:4864:20::143]:34218)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1hdMT3-0002PC-8r; Tue, 18 Jun 2019 18:20:42 -0400
-Received: by mail-lf1-x143.google.com with SMTP id y198so10492834lfa.1;
- Tue, 18 Jun 2019 15:20:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=2R/yr25SgwJbeYXTxlBioodxbM8AJCpuqbKHCdOCpkI=;
- b=GHDSCWN346NM9o0bkA8uNM7U7muahYAgfkhlRBin8BfU4qUoCHeaQ2cBeukW9AJjZV
- NC5R2oeFDpSmYj6T4iRv8oFnWvCAvb3GtvGqoQ/d2FJZwZuOt/nvsheTEQXhoasX8suU
- KwmIObg+dPdUUGJjQtrVSB9JuK22rXhhfXN4Q+ebI1lBXxbhgB8aOfsYzoQKJotEi16v
- /dgSq5uhAW/+LuPnXcMIUMaixbPil2Iqa1l4yYMbOujqOcMh0Ccm6dtIDbn7zEI8d37y
- m85RT0Nyql1nzx31iuVXGf/xop0sPScTFWGvnKtGBvYlCkkWt2LH5SYgoFzggxOk/gwF
- C+9g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=2R/yr25SgwJbeYXTxlBioodxbM8AJCpuqbKHCdOCpkI=;
- b=uDAPuJ2SRgheBsdTNS0zVcE+mts7N2t08R6cztJLJolgNut2Kn7mQMA7u1Zu1sRB/O
- jY2tFSnB3q264fBXFlLtEvnSLqtOawcVBR5PYiZJXM4gSrFhZsVmh2dOBWaYAU134Pd+
- 2v3kxtILrUYDNzvLJICNFr1jGR8+71TFVOAjJA9E9w6bvbhXyz2gd6qAe8NWQZ5/umOw
- GKUesM8rCtl8utzjvxZxwfm/RHQPoSFmvsG2SfFmkrFrKGQv22KuOw3kLTUYnyqphg2p
- aBkmZq80kCBRJslOzgecczLl8rYKBOaMCl62M8fLiKHpKdnGwuYlnSWDBcGv398IetAE
- iKFg==
-X-Gm-Message-State: APjAAAXeIGu5/4QmRBD4puc8bxYFf+1pRzzMyg9ndBa4AzlH35ca9+bV
- K42hWLlDOFv2jnlNrota84qOIOHO+ZBO8JVnhq8=
-X-Google-Smtp-Source: APXvYqymdOPTTFJaDZRbMMvljpiUBIDKVRL/ugfo3eICEKqcQgng6XJo9TKTmOTiFs5qSaz/Z31b9mIInZqdguMKucU=
-X-Received: by 2002:a19:710b:: with SMTP id m11mr54416271lfc.135.1560896439982; 
- Tue, 18 Jun 2019 15:20:39 -0700 (PDT)
+ (envelope-from <prvs=066539cd8=alistair.francis@wdc.com>)
+ id 1hdOfF-0003jp-OB
+ for qemu-riscv@nongnu.org; Tue, 18 Jun 2019 20:41:26 -0400
+Received: from esa4.hgst.iphmx.com ([216.71.154.42]:29347)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <prvs=066539cd8=alistair.francis@wdc.com>)
+ id 1hdOfB-0003bv-7I; Tue, 18 Jun 2019 20:41:21 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1560904882; x=1592440882;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=g+DlYUF0KXQmOfcWFncWarLKZPO22IikCZf0/MBOpR8=;
+ b=Xq8nULFYlGtalKu92iOn3ts7iLfbwq36cq1z/pTH+in/xySwiUu4/HwG
+ aCG0eUxHVXioDyGgp01/Kt72Ay+wb5B8KU2Gfcuf9RzY7+fcyjYI/sjih
+ bnLExxaJJgfzFvA/TUb8OqteN3T7QfppJNB92b8u+p3Isl9kUsNd8q1Ux
+ X8fj1ynPdMM2cd4HtDFtTaXmVmD1/S2eszrsja1swpPF6PileSil9RE5K
+ Ju8IAYRYOidgNaxqSQq1GWucdcFbYrQh4lGLKCuFRj6EnoNz1DWkRYDrC
+ VwyC6rusBZmr8jarNOndH9AkuHodXHN6TnOe/yBg5nykapDcvpBP0Fobg Q==;
+X-IronPort-AV: E=Sophos;i="5.63,390,1557158400"; d="scan'208";a="110901050"
+Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
+ ([199.255.45.14])
+ by ob1.hgst.iphmx.com with ESMTP; 19 Jun 2019 08:41:21 +0800
+IronPort-SDR: XGOi74afuiC99Kt4HJOmDP+3XxTzETrdAgC0GtgzgGHLBDXX5K+AVhIEQpTbEXGHtguMUoJyXD
+ N+JOu0yBSdtmuSb0gholp+Eue8YBLj3ixoXptVLkR9I4i1fCSa38/Y0iJ1bvzIZCr9lM+fwmBV
+ ksMUF1ISSZ75QglSD1fY1pK8YLalppLDsP3Z/0TKgcsZ4su++slFKmtzztm2QCMm2W4HI+VWMo
+ dI20YJxq0n7mytKLLfzCy26OS2eM/VWQ8kqTqVYIiAFSRBD4rxSU4ieXP8dUs5aOWNFzXxEthv
+ KrXHMtf5QDn2gjmnber9HCKW
+Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
+ by uls-op-cesaep01.wdc.com with ESMTP; 18 Jun 2019 17:40:48 -0700
+IronPort-SDR: Yl4uYO6KobM0PvSMbhx+JP+dRA20CLvDsu3pSUZyX1tsyc50odeXspd790VXFNpx7FcoJMQvVI
+ a5ns4UpcJw8LpsB3YnGsGaQw+i+aE9JrK+kdvQE6F5p7w9eWx/RFMU+UrI9V6BaNVw1PVMqSC/
+ 2OwRmM2IxV1J45ACxIhCc+xkFPFhMwP9w1fGJx9hyMHIr1yzGEyJlD8Kv5HNbbY2MkAuedONI8
+ ZcmjN+DUF+0TDgK87OIOFaH+xwOLHmuGdg7wIP/IJmL83p4gHTOFs/pGMGwY2gGGlGhkQWg37O
+ jD4=
+Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
+ risc6-mainframe.int.fusionio.com) ([10.196.157.140])
+ by uls-op-cesaip02.wdc.com with ESMTP; 18 Jun 2019 17:41:20 -0700
+From: Alistair Francis <alistair.francis@wdc.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: palmer@sifive.com,
+	alistair.francis@wdc.com,
+	alistair23@gmail.com
+Date: Tue, 18 Jun 2019 17:38:58 -0700
+Message-Id: <3d7dd8bc94dbfddf0c01cfc7f3bebc937d1e6894.1560904640.git.alistair.francis@wdc.com>
+X-Mailer: git-send-email 2.22.0
+In-Reply-To: <cover.1560904640.git.alistair.francis@wdc.com>
+References: <cover.1560904640.git.alistair.francis@wdc.com>
 MIME-Version: 1.0
-References: <CAKmqyKMs4nt0eddFkXHG9vOdxnj=yB8jx8s9NivNiwvVg8TObA@mail.gmail.com>
- <mhng-03d5c9ed-4818-4efc-99e0-cdceab2eab3d@palmer-si-x1e>
- <20190611063019.2uiatioxh73lrgqz@sirius.home.kraxel.org>
-In-Reply-To: <20190611063019.2uiatioxh73lrgqz@sirius.home.kraxel.org>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 18 Jun 2019 15:17:52 -0700
-Message-ID: <CAKmqyKMgNrGchEa0D+FsbmoOfs259awtge20EaNb=Bv1JtP6vA@mail.gmail.com>
-To: Gerd Hoffmann <kraxel@redhat.com>
-Cc: Palmer Dabbelt <palmer@sifive.com>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, onathan@fintelia.io, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Alistair Francis <Alistair.Francis@wdc.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::143
-Subject: Re: [Qemu-riscv] [Qemu-devel] RISC-V: Include ROM in QEMU
+X-Received-From: 216.71.154.42
+Subject: [Qemu-riscv] [RFC v1 5/5] hw/riscv: Load OpenSBI as the default
+ firmware
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -70,50 +74,116 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Jun 2019 22:20:45 -0000
+X-List-Received-Date: Wed, 19 Jun 2019 00:51:24 -0000
 
-On Mon, Jun 10, 2019 at 11:30 PM Gerd Hoffmann <kraxel@redhat.com> wrote:
->
-> On Fri, Jun 07, 2019 at 05:03:42PM -0700, Palmer Dabbelt wrote:
-> > On Thu, 06 Jun 2019 16:22:47 PDT (-0700), alistair23@gmail.com wrote:
-> > > Hello,
-> > >
-> > > As a test of the waters, how would the QEMU community feel about
-> > > including the RISC-V OpenSBI project as a ROM submodule?
-> > >
-> > > The idea would be to have OpenSBI (similar to ATF for ARM and a BIOS
-> > > for x86) included by default to simplify the QEMU RISC-V boot process
-> > > for users. This would remove the requirement for users/developers to
-> > > build a RISC-V firmware. The goal here is to allow people to just
-> > > download and run their kernel as easily as they currently do for x86.
-> > >
-> > > We would make sure that it can be disabled! That is users/developers
-> > > can use their own (or none) if they want to. The idea here is just to
-> > > simplify the boot process, not lock anyone out.
-> >
-> > I like it.  My only question is about the mechanics of doing so: are we just
-> > going to assume there's a cross compiler in PATH?  I guess that's less of a
-> > usability headache than needing a complier and a firmware.
->
-> Usual way to add firmware:
->
->   (1) Add a submodule below roms/
->   (2) Add rules to build the firmware to roms/Makefile.  Firmware
->       maintainers can use them, and they also document the build process.
->       A normal qemu build will not automatically build the firmware
->       though.
->   (3) Place a pre-built binary in pc-bios/
->
-> There is some cross compiler detection logic in roms/Makefile which you
-> can use.
+If the user hasn't specified a firmware to load (with -bios) or
+specified no bios (with -bios none) then load OpenSBI by default. This
+allows users to boot a RISC-V kernel with just -kernel.
 
-Thanks for the info. I have it all working now, just running a few
-more tests. I will send my patches out today or tomorrow.
+Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+---
+ hw/riscv/boot.c         | 28 ++++++++++++++++++++++++++++
+ hw/riscv/sifive_u.c     |  4 +---
+ hw/riscv/virt.c         |  4 +---
+ include/hw/riscv/boot.h |  1 +
+ 4 files changed, 31 insertions(+), 6 deletions(-)
 
-Alistair
+diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
+index 7f68035a3f..5f021591ed 100644
+--- a/hw/riscv/boot.c
++++ b/hw/riscv/boot.c
+@@ -18,6 +18,7 @@
+  */
+ 
+ #include "qemu/osdep.h"
++#include "qemu-common.h"
+ #include "qemu/units.h"
+ #include "qemu/error-report.h"
+ #include "exec/cpu-defs.h"
+@@ -32,6 +33,12 @@
+ # define KERNEL_BOOT_ADDRESS 0x80200000
+ #endif
+ 
++#if defined(TARGET_RISCV32)
++# define BIOS_FILENAME "opensbi-riscv32-fw_jump.elf"
++#else
++# define BIOS_FILENAME "opensbi-riscv64-fw_jump.elf"
++#endif
++
+ static uint64_t kernel_translate(void *opaque, uint64_t addr)
+ {
+     MachineState *machine = opaque;
+@@ -47,6 +54,27 @@ static uint64_t kernel_translate(void *opaque, uint64_t addr)
+     }
+ }
+ 
++void riscv_find_and_load_firmware(MachineState *machine)
++{
++    char *firmware_filename;
++
++    if (!machine->firmware) {
++        /* The user didn't specify a firmware, default to OpenSBI */
++        firmware_filename = qemu_find_file(QEMU_FILE_TYPE_BIOS, BIOS_FILENAME);
++    } else {
++        firmware_filename = machine->firmware;
++    }
++
++    if (strcmp(firmware_filename, "none")) {
++        /* If not "none" load the firmware */
++        riscv_load_firmware(firmware_filename);
++    }
++
++    if (!machine->firmware) {
++        g_free(firmware_filename);
++    }
++}
++
+ target_ulong riscv_load_firmware(const char *firmware_filename)
+ {
+     uint64_t firmware_entry, firmware_start, firmware_end;
+diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+index 03a6c64d04..77666d0f4d 100644
+--- a/hw/riscv/sifive_u.c
++++ b/hw/riscv/sifive_u.c
+@@ -266,9 +266,7 @@ static void riscv_sifive_u_init(MachineState *machine)
+     /* create device tree */
+     create_fdt(s, memmap, machine->ram_size, machine->kernel_cmdline);
+ 
+-    if (machine->firmware) {
+-        riscv_load_firmware(machine->firmware);
+-    }
++    riscv_find_and_load_firmware(machine);
+ 
+     if (machine->kernel_filename) {
+         riscv_load_kernel(machine, machine->kernel_filename);
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index d3670b5a7c..2a7e850666 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -380,9 +380,7 @@ static void riscv_virt_board_init(MachineState *machine)
+     memory_region_add_subregion(system_memory, memmap[VIRT_MROM].base,
+                                 mask_rom);
+ 
+-    if (machine->firmware) {
+-        riscv_load_firmware(machine->firmware);
+-    }
++    riscv_find_and_load_firmware(machine);
+ 
+     if (machine->kernel_filename) {
+         uint64_t kernel_entry = riscv_load_kernel(machine,
+diff --git a/include/hw/riscv/boot.h b/include/hw/riscv/boot.h
+index 6f586939c7..df2e2480e6 100644
+--- a/include/hw/riscv/boot.h
++++ b/include/hw/riscv/boot.h
+@@ -20,6 +20,7 @@
+ #ifndef RISCV_BOOT_H
+ #define RISCV_BOOT_H
+ 
++void riscv_find_and_load_firmware(MachineState *machine);
+ target_ulong riscv_load_firmware(const char *firmware_filename);
+ target_ulong riscv_load_kernel(MachineState *machine,
+                                const char *kernel_filename);
+-- 
+2.22.0
 
->
-> cheers,
->   Gerd
->
 
