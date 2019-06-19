@@ -1,64 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hdfIP-0005Ee-Qc
-	for mharc-qemu-riscv@gnu.org; Wed, 19 Jun 2019 14:26:58 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:33525)
+	id 1hdfNI-0006Gq-AR
+	for mharc-qemu-riscv@gnu.org; Wed, 19 Jun 2019 14:32:02 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:34148)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <alistair23@gmail.com>) id 1hdfII-0005DF-22
- for qemu-riscv@nongnu.org; Wed, 19 Jun 2019 14:26:52 -0400
+ (envelope-from <alistair23@gmail.com>) id 1hdfNC-0006Bc-9z
+ for qemu-riscv@nongnu.org; Wed, 19 Jun 2019 14:31:56 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1hdfIC-00043s-Ra
- for qemu-riscv@nongnu.org; Wed, 19 Jun 2019 14:26:46 -0400
-Received: from mail-lj1-x244.google.com ([2a00:1450:4864:20::244]:45489)
+ (envelope-from <alistair23@gmail.com>) id 1hdfN8-0007JA-9b
+ for qemu-riscv@nongnu.org; Wed, 19 Jun 2019 14:31:52 -0400
+Received: from mail-lj1-x244.google.com ([2a00:1450:4864:20::244]:38001)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1hdfHz-0003uE-Du; Wed, 19 Jun 2019 14:26:32 -0400
-Received: by mail-lj1-x244.google.com with SMTP id m23so125904lje.12;
- Wed, 19 Jun 2019 11:26:28 -0700 (PDT)
+ id 1hdfN7-0006Wd-NA; Wed, 19 Jun 2019 14:31:50 -0400
+Received: by mail-lj1-x244.google.com with SMTP id r9so178703ljg.5;
+ Wed, 19 Jun 2019 11:30:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=jbTLfhqFuBYmR+7B5rL/+DxTdb0jONhMb1XonifqEPQ=;
- b=K40F6/yYRetvAf8zkOHpgd9iYxfrA/8mvPcNRw09+qLptCFiKt9geGakIGzrtfoJw3
- WRSo3Bc/ZLO9WoF/jxwX0GS1LQo2KuzIgrE8n7oCANNrIkNiofmc+6jQImhN+6XiS9dI
- ilXNdq4OQVH1XkVAyjBB2Ox4RJsRrJjrSsSLpBv1SvHDpiJx2JwUXMQM+3FTVU/h5Pz8
- IEXtEkl8DqRn18m9/DE354lcqL6EkhkfmqMoyDNe556mhhr35dj9Bia+STDqcTPKFSiS
- mi6jBEdBpYBArcBmNTE9H/QUsYOM1BAB+mO+yKZ8qP4rn5ue5YiRUOQG3IA25GoHercv
- m1Dg==
+ :cc; bh=paIx1MKr5p+JfN/Ung7EX+r3ky7E3NP3QTTX1JKc308=;
+ b=F0jVt/LB/MB+t3oOfRVqlcZ1rB3HqHXtaTsYN+5BU5LtxyqFKcrijhm7lsVE1BsQSN
+ BP+bQ2EEvYIU4KufdHUW5XQOx/B64v4r+YxZSIdb84A/3AjYLFvesP3db5gULmoUJKhX
+ 7e6F7X3LfWYA3EdtVFzItQXkqLMEN9eaHp3YMGq+dxxiEArS9WzUNMvugSK0YrCu/ret
+ lI3132BpZFQ586hJb0YApGy5QyZzHObDlw5ZRCNH/atQdLTekf6bSQcJatRbiU0HfSpS
+ AhyWLq0klEGvLplY0F00+XdjzFXIxGguXWteYb3PQqCZgBKyIcQvI3aY9V2snVeV+/Lm
+ Dhbg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=jbTLfhqFuBYmR+7B5rL/+DxTdb0jONhMb1XonifqEPQ=;
- b=SHtC9oqNSt+SjmdZNqg5el+vjUl8IO54561DS6dv8uaUIQYB1if4OHADuijCPw5Msd
- kjQd8sAY0LBH+q9dV2jgY+0UsNPtl0OY5/rjwtI4FCe7IG1cF2aBEJalLLJt/TV6W+KK
- GfixE2FB5Fw+rpoOMQ1o82c+ySnBdckMDDCvhFQs0FOLD3+SpjpqA1wlIokspqOaNrRp
- SnNY44V3sDHBPBdAsDwYeQP8Y+y4hW3IU7XlqHsEAoqoynmpxXMykhWv7pjVLkEZPjoA
- sd5qp2h7YJHQi8wO2LAglRPiMBLji0mrAxBBFtUoe+/8YgP8uyoHTd8hyFGNPkLrwXOq
- BtMw==
-X-Gm-Message-State: APjAAAWs4pA5TAsqoawfPb1WsLud9R2gE94YXoHPLfuuwWg4US5BCIjG
- 89BLZ8DdN3loNgYuJLsZNysJM85toKeiSHW4GCo=
-X-Google-Smtp-Source: APXvYqzfXpcfjMAIr3/CNouOel0W7NWr0rsVsiMItxLgx2hEgHo4afj/BkN8oVAnJ5PA6c7bBIH/i3qG9vQSvYYHoD4=
-X-Received: by 2002:a2e:9758:: with SMTP id f24mr15412089ljj.58.1560968786788; 
- Wed, 19 Jun 2019 11:26:26 -0700 (PDT)
+ bh=paIx1MKr5p+JfN/Ung7EX+r3ky7E3NP3QTTX1JKc308=;
+ b=m1/5lyov8dOiMjbCjl/477vQd7oMYOofY0lh3+Zb4+FkP2MtIX1jTU703KBzNEbErJ
+ loEJ/HmJsZmK1bA69w+6So4fn4nS1v6oOjzkma/AajdIfkH2yIwAjVc9zwc74Skz3oqe
+ bDUcspFjaTCiq605y2rgRPw3TNCGXg1ob7AKj1MDf5e+KpyNUkSC1zM7BvqessURHAXq
+ 7EkSlVwdj/3hUo7kTst5ZOZnDOggBtHwqft+O6QOv4NMuypcWS3uY+KFfKHSfZh8eFs9
+ 5JdEs2uZ49QQQaCGuv5elDDHHho9szqfZkVwdCriKHKNhK1iPNxZhfYKle4+Gf0sORLd
+ j2Gg==
+X-Gm-Message-State: APjAAAWTv7FgSCFQ+eXkyLX/gwa5HwABbt5DVPQvJX7ucf3clHTeN7NJ
+ GLPxBwoHsFMaqs5GqJuXxFQNwkD7q0KtpEcrEuNnEkoS
+X-Google-Smtp-Source: APXvYqx6+u731AaiOqIJ4agXbR6j4fAJgE1/holsCYfc8yKwhdssj53/L3VrQY2OzapdElMrfqAxqM5xar2HpCc8OqE=
+X-Received: by 2002:a2e:94ca:: with SMTP id r10mr8294674ljh.196.1560969035692; 
+ Wed, 19 Jun 2019 11:30:35 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1560904640.git.alistair.francis@wdc.com>
- <CAEUhbmViJpKtiNXm7CYdF7SPRkOPkvpXJ5+We2m9tZSK_BWi-g@mail.gmail.com>
- <CAKmqyKM4UU+CPKu07AK65bNofbbxxaRkSACqoV_vfFEaH-195A@mail.gmail.com>
- <CAEUhbmUwAVLXY9SSoryWBDeNL8gUfBCE+xweSSmuE9KwzWeX=w@mail.gmail.com>
-In-Reply-To: <CAEUhbmUwAVLXY9SSoryWBDeNL8gUfBCE+xweSSmuE9KwzWeX=w@mail.gmail.com>
+ <2fd2fa66cf561d8041f75351c28ed025828c56ff.1560904640.git.alistair.francis@wdc.com>
+ <CAAhSdy12uKV14cdxvUniSLFw_iF5WNKjoLCanS3Bs=33w-c9xA@mail.gmail.com>
+ <CAEUhbmXYfdAojDtNxXz8XYRk0X1jt+qLB6oVP1pFKNcjWjeh5w@mail.gmail.com>
+In-Reply-To: <CAEUhbmXYfdAojDtNxXz8XYRk0X1jt+qLB6oVP1pFKNcjWjeh5w@mail.gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 19 Jun 2019 11:23:37 -0700
-Message-ID: <CAKmqyKMmm-38DijX_wL=pAbvxzLQ+KSOtd1xg_GrT4Az70GKsw@mail.gmail.com>
+Date: Wed, 19 Jun 2019 11:27:46 -0700
+Message-ID: <CAKmqyKPSsFQw0xoeoP7376UpS6LWN1T5Kc53Q7tStZsgwKiNiQ@mail.gmail.com>
 To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Alistair Francis <alistair.francis@wdc.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Palmer Dabbelt <palmer@sifive.com>
+Cc: Anup Patel <anup@brainfault.org>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Palmer Dabbelt <palmer@sifive.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ QEMU Developers <qemu-devel@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
 X-Received-From: 2a00:1450:4864:20::244
-Subject: Re: [Qemu-riscv] [Qemu-devel] [RFC v1 0/5] RISC-V: Add firmware
- loading support and default
+Subject: Re: [Qemu-riscv] [Qemu-devel] [RFC v1 4/5] roms: Add OpenSBI
+ version 0.3
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -70,96 +70,50 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Jun 2019 18:26:53 -0000
+X-List-Received-Date: Wed, 19 Jun 2019 18:31:58 -0000
 
-On Wed, Jun 19, 2019 at 7:42 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+On Wed, Jun 19, 2019 at 8:18 AM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
-> On Wed, Jun 19, 2019 at 10:30 PM Alistair Francis <alistair23@gmail.com> wrote:
+> On Wed, Jun 19, 2019 at 1:14 PM Anup Patel <anup@brainfault.org> wrote:
 > >
-> > On Wed, Jun 19, 2019 at 7:26 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+> > On Wed, Jun 19, 2019 at 6:24 AM Alistair Francis
+> > <alistair.francis@wdc.com> wrote:
 > > >
-> > > On Wed, Jun 19, 2019 at 8:56 AM Alistair Francis
-> > > <alistair.francis@wdc.com> wrote:
-> > > >
-> > > > This is an RFC as it will break ALL current users! See below for details.
-> > > >
-> > > > This series consolidates the current RISC-V kernel loading
-> > > > impelementation while also adding support for the -bios option and more
-> > > > advanced kernel image types.
-> > > >
-> > > > After consolidating the kernel loading we can extend the boot loader to
-> > > > support a -bios option. We can also extend the kernel loading options to
-> > > > support not just ELF files but other standard formats.
-> > > >
-> > > > Finally we can include the OpenSBI firmware by default for QEMU users.
-> > > >
-> > > > At the end of this series we are in the good place of no longer
-> > > > requiring users to build firmware to boot a kernel. Instead users can
-> > > > just run QEMu with the -kernel option and everything will work. They can
+> > > Add OpenSBI version 0.3 as a git submodule and as a prebult binary.
 > > >
-> > > This is great. I like booting kernel directly for testing without
-> > > bothering the firmware stuff.
+> > > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> > > ---
+> > >  .gitmodules                         |   3 +++
+> > >  Makefile                            |   3 ++-
+> > >  configure                           |   1 +
+> > >  pc-bios/opensbi-riscv32-fw_jump.elf | Bin 0 -> 197988 bytes
+> > >  pc-bios/opensbi-riscv64-fw_jump.elf | Bin 0 -> 200192 bytes
+> > >  roms/Makefile                       |  17 +++++++++++++++++
+> > >  roms/opensbi                        |   1 +
+> > >  7 files changed, 24 insertions(+), 1 deletion(-)
+> > >  create mode 100644 pc-bios/opensbi-riscv32-fw_jump.elf
+> > >  create mode 100644 pc-bios/opensbi-riscv64-fw_jump.elf
+> > >  create mode 160000 roms/opensbi
+> > >
 > >
-> > That's the goal! Now we just need to not break everything.
+> > The OpenSBI firmwares are platform specific so we should have
+> > machine directory under pc-bios/ directory
 > >
-> > >
-> > > > also override the firmware with their own using the -bios option. Using
-> > > > "-bios none" will result in no firmware being loaded (as it is today).
-> > > >
-> > > > !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-> > > >
-> > > > Unfortunately this series (patch 5 specifically) results in all current
-> > > > Linux boots being broken as users are already loading in their own
-> > > > firmware, which overlaps with the now included default. They will
-> > > > see this error:
-> > > >
-> > > >   rom: requested regions overlap (rom phdr #0: ./images/qemuriscv64/fw_jump.elf. free=0x0000000080008090, addr=0x0000000080000000)
-> > > >   qemu-system-riscv64: rom check and register reset failed
-> > > >
-> > > > If a current user specieifies "-bios none" their flow will continue
-> > > > working. A user can instead no longer load their firmware and
-> > > > use the default or they can load their firmware with the -bios option.
-> > > >
-> > > > At the moment the best idea I have to not break all users is to only
-> > > > include the default firmware if the user specifies "-bios opensbi".
-> > > > That is change the default to not loading the firmware. Then we can work
-> > > > on updating documentation and maybe in future change the default to
-> > > > include a firmware and anyone who doesn't want a default firmware can
-> > > > specify "-bios none".
-> > > >
-> > > > Any other ideas on how to not break everything?
-> > > >
-> > > >
-> > > >
-> > > > Alistair Francis (5):
-> > > >   hw/riscv: Split out the boot functions
-> > > >   hw/riscv: Add support for loading a firmware
-> > > >   hw/riscv: Extend the kernel loading support
-> > > >   roms: Add OpenSBI version 0.3
-> > > >   hw/riscv: Load OpenSBI as the default firmware
-> > > >
-> > > >  .gitmodules                         |   3 +
-> > > >  Makefile                            |   3 +-
-> > > >  configure                           |   1 +
-> > > >  hw/riscv/Makefile.objs              |   1 +
-> > > >  hw/riscv/boot.c                     | 143 ++++++++++++++++++++++++++++
-> > > >  hw/riscv/sifive_e.c                 |  17 +---
-> > > >  hw/riscv/sifive_u.c                 |  19 +---
-> > > >  hw/riscv/spike.c                    |  21 +---
-> > > >  hw/riscv/virt.c                     |  54 ++---------
-> > > >  include/hw/riscv/boot.h             |  30 ++++++
-> > > >  pc-bios/opensbi-riscv32-fw_jump.elf | Bin 0 -> 197988 bytes
-> > > >  pc-bios/opensbi-riscv64-fw_jump.elf | Bin 0 -> 200192 bytes
-> > >
-> > > Since we are considering adding "bios" images, I prefer to add the
-> > > pure binary images instead of ELF images here.
-> >
-> > I didn't think about that. Can we just boot them in QEMU like we do
-> > with the ELFs?
->
-> Yes, use load_image_targphys() instead of load_elf().
+> > So for virt machine we will have:
+> > pc-bios/riscv32/virt/fw_jump.elf
+> > pc-bios/riscv64/virt/fw_jump.elf
 
-Ah, that is obvious. I'll update it to use the bin files then.
+I have updated the names to indicate the machine. The pc-bios directly
+appears to be flat (at least for binaries) so I don't want to add
+subdirectories.
+
+>
+> And we should only integrate plain binary image for "bios" images here.
+>
+> pc-bios/riscv32/virt/fw_jump.bin
+> pc-bios/riscv64/virt/fw_jump.bin
+
+Yep, fixed.
 
 Alistair
 
