@@ -1,64 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hdfNI-0006Gq-AR
-	for mharc-qemu-riscv@gnu.org; Wed, 19 Jun 2019 14:32:02 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:34148)
+	id 1hdfNP-0006Iy-0q
+	for mharc-qemu-riscv@gnu.org; Wed, 19 Jun 2019 14:32:08 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:34230)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <alistair23@gmail.com>) id 1hdfNC-0006Bc-9z
- for qemu-riscv@nongnu.org; Wed, 19 Jun 2019 14:31:56 -0400
+ (envelope-from <alistair23@gmail.com>) id 1hdfNI-0006Gm-8z
+ for qemu-riscv@nongnu.org; Wed, 19 Jun 2019 14:32:03 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1hdfN8-0007JA-9b
- for qemu-riscv@nongnu.org; Wed, 19 Jun 2019 14:31:52 -0400
-Received: from mail-lj1-x244.google.com ([2a00:1450:4864:20::244]:38001)
+ (envelope-from <alistair23@gmail.com>) id 1hdfNC-0007L8-8Z
+ for qemu-riscv@nongnu.org; Wed, 19 Jun 2019 14:31:58 -0400
+Received: from mail-lf1-x144.google.com ([2a00:1450:4864:20::144]:45311)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1hdfN7-0006Wd-NA; Wed, 19 Jun 2019 14:31:50 -0400
-Received: by mail-lj1-x244.google.com with SMTP id r9so178703ljg.5;
- Wed, 19 Jun 2019 11:30:36 -0700 (PDT)
+ id 1hdfN1-0004gy-16; Wed, 19 Jun 2019 14:31:45 -0400
+Received: by mail-lf1-x144.google.com with SMTP id u10so347585lfm.12;
+ Wed, 19 Jun 2019 11:27:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=paIx1MKr5p+JfN/Ung7EX+r3ky7E3NP3QTTX1JKc308=;
- b=F0jVt/LB/MB+t3oOfRVqlcZ1rB3HqHXtaTsYN+5BU5LtxyqFKcrijhm7lsVE1BsQSN
- BP+bQ2EEvYIU4KufdHUW5XQOx/B64v4r+YxZSIdb84A/3AjYLFvesP3db5gULmoUJKhX
- 7e6F7X3LfWYA3EdtVFzItQXkqLMEN9eaHp3YMGq+dxxiEArS9WzUNMvugSK0YrCu/ret
- lI3132BpZFQ586hJb0YApGy5QyZzHObDlw5ZRCNH/atQdLTekf6bSQcJatRbiU0HfSpS
- AhyWLq0klEGvLplY0F00+XdjzFXIxGguXWteYb3PQqCZgBKyIcQvI3aY9V2snVeV+/Lm
- Dhbg==
+ :cc; bh=baG0ZY48oeLj8bIsj23f144gEXebOMnLjiIPghc9Bk4=;
+ b=MZwIzoGt+TjSFdj/GI3HoP2fZFBo8RngE2HghpF+nxE8OY7KK3EkXX85gBtncwI8RK
+ vaQbdmr50A+dZKJIUpcCkx03CKeq9gPlA5skrWjxGO6D1fQfVrG2iE0VfiUGTqV9bQfL
+ BqBi1TI5s3Z0DTqLyyyCFQq7NXxjWxvZRIjNmawMkw0iAlCzHoB7kFpjkPPYjgGsVcfm
+ B9GvaZkGtEapTFuAF4vjIJVLbH1wh6KE7H4YC3TkkpXtja7RtelFZ6JjS0aF6OdT/STQ
+ HWtQA073fhpwWOXFwBqkeiXHl2AA5zJE8r9gdmP1svMiAKTTOob87LRsk54P2vJkRb4r
+ Gxtw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=paIx1MKr5p+JfN/Ung7EX+r3ky7E3NP3QTTX1JKc308=;
- b=m1/5lyov8dOiMjbCjl/477vQd7oMYOofY0lh3+Zb4+FkP2MtIX1jTU703KBzNEbErJ
- loEJ/HmJsZmK1bA69w+6So4fn4nS1v6oOjzkma/AajdIfkH2yIwAjVc9zwc74Skz3oqe
- bDUcspFjaTCiq605y2rgRPw3TNCGXg1ob7AKj1MDf5e+KpyNUkSC1zM7BvqessURHAXq
- 7EkSlVwdj/3hUo7kTst5ZOZnDOggBtHwqft+O6QOv4NMuypcWS3uY+KFfKHSfZh8eFs9
- 5JdEs2uZ49QQQaCGuv5elDDHHho9szqfZkVwdCriKHKNhK1iPNxZhfYKle4+Gf0sORLd
- j2Gg==
-X-Gm-Message-State: APjAAAWTv7FgSCFQ+eXkyLX/gwa5HwABbt5DVPQvJX7ucf3clHTeN7NJ
- GLPxBwoHsFMaqs5GqJuXxFQNwkD7q0KtpEcrEuNnEkoS
-X-Google-Smtp-Source: APXvYqx6+u731AaiOqIJ4agXbR6j4fAJgE1/holsCYfc8yKwhdssj53/L3VrQY2OzapdElMrfqAxqM5xar2HpCc8OqE=
-X-Received: by 2002:a2e:94ca:: with SMTP id r10mr8294674ljh.196.1560969035692; 
- Wed, 19 Jun 2019 11:30:35 -0700 (PDT)
+ bh=baG0ZY48oeLj8bIsj23f144gEXebOMnLjiIPghc9Bk4=;
+ b=eZAT5o2E+wF3sdlIu+3Rw9ZaLt6jwS/rvzUrm9MgT1GjK8risoxBZpHuMVRbFYCyS/
+ 4RMF9tXbA3m13PGczbwd0CM1mp7pu6+aYK6vkbFxTQn0ItKKrjZnX0EwebsBnyjHLFAX
+ BfTo4eTK129N1aCXTmq3NCvmCPnjQn5NuwShMqGN4PwRel2T9LsIvO8xGJRqZWUJbybm
+ I46loRr3alZSf9xldX66Cx94tBSIFMvWxWQydaBLKWpaBYdD7X5mWaxLg7SrBvuCMeYD
+ Oa6Nq7XI/v2dR6OI/mlRTDrnvWuhDZce8axJqhDlkZsL8WtPKC11kH2i1A09gfGwhqdN
+ 3mdA==
+X-Gm-Message-State: APjAAAUcVBb390iO5kXBkbUmBRBO4ZaqODmtiCt0YRpZuqTTTYrQmRrv
+ v/k5yt8v8oVSw/4d48YQTTAw0fWOpEt/txityKg=
+X-Google-Smtp-Source: APXvYqxNNyXMTL4W4IIpx9Z1pkbz4iTbyIPquHTIvzZlyPI2MtFN3JW6YIUxb8syDuMt/NMiT4aNHuvSGUwR/QD9jBA=
+X-Received: by 2002:ac2:4990:: with SMTP id f16mr5665962lfl.93.1560968862450; 
+ Wed, 19 Jun 2019 11:27:42 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1560904640.git.alistair.francis@wdc.com>
- <2fd2fa66cf561d8041f75351c28ed025828c56ff.1560904640.git.alistair.francis@wdc.com>
- <CAAhSdy12uKV14cdxvUniSLFw_iF5WNKjoLCanS3Bs=33w-c9xA@mail.gmail.com>
- <CAEUhbmXYfdAojDtNxXz8XYRk0X1jt+qLB6oVP1pFKNcjWjeh5w@mail.gmail.com>
-In-Reply-To: <CAEUhbmXYfdAojDtNxXz8XYRk0X1jt+qLB6oVP1pFKNcjWjeh5w@mail.gmail.com>
+ <b511243b947debd710ea225699a4d7e312568da8.1560904640.git.alistair.francis@wdc.com>
+ <CAEUhbmWpxLHu3Tf9k+UT9K-6dqLGtDkybTb4S8beCQ0nv9Ghqw@mail.gmail.com>
+In-Reply-To: <CAEUhbmWpxLHu3Tf9k+UT9K-6dqLGtDkybTb4S8beCQ0nv9Ghqw@mail.gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 19 Jun 2019 11:27:46 -0700
-Message-ID: <CAKmqyKPSsFQw0xoeoP7376UpS6LWN1T5Kc53Q7tStZsgwKiNiQ@mail.gmail.com>
+Date: Wed, 19 Jun 2019 11:24:53 -0700
+Message-ID: <CAKmqyKMLdJKsodh9gJq3vW+Rvo8g29frFxbXjVwqRQSgCs3-KQ@mail.gmail.com>
 To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Anup Patel <anup@brainfault.org>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Palmer Dabbelt <palmer@sifive.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>,
- QEMU Developers <qemu-devel@nongnu.org>
+Cc: Alistair Francis <alistair.francis@wdc.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Palmer Dabbelt <palmer@sifive.com>
 Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::244
-Subject: Re: [Qemu-riscv] [Qemu-devel] [RFC v1 4/5] roms: Add OpenSBI
- version 0.3
+X-Received-From: 2a00:1450:4864:20::144
+Subject: Re: [Qemu-riscv] [Qemu-devel] [RFC v1 1/5] hw/riscv: Split out the
+ boot functions
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -70,54 +69,113 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Jun 2019 18:31:58 -0000
+X-List-Received-Date: Wed, 19 Jun 2019 18:32:04 -0000
 
-On Wed, Jun 19, 2019 at 8:18 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+On Wed, Jun 19, 2019 at 8:16 AM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
-> On Wed, Jun 19, 2019 at 1:14 PM Anup Patel <anup@brainfault.org> wrote:
+> On Wed, Jun 19, 2019 at 8:51 AM Alistair Francis
+> <alistair.francis@wdc.com> wrote:
 > >
-> > On Wed, Jun 19, 2019 at 6:24 AM Alistair Francis
-> > <alistair.francis@wdc.com> wrote:
-> > >
-> > > Add OpenSBI version 0.3 as a git submodule and as a prebult binary.
-> > >
-> > > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> > > ---
-> > >  .gitmodules                         |   3 +++
-> > >  Makefile                            |   3 ++-
-> > >  configure                           |   1 +
-> > >  pc-bios/opensbi-riscv32-fw_jump.elf | Bin 0 -> 197988 bytes
-> > >  pc-bios/opensbi-riscv64-fw_jump.elf | Bin 0 -> 200192 bytes
-> > >  roms/Makefile                       |  17 +++++++++++++++++
-> > >  roms/opensbi                        |   1 +
-> > >  7 files changed, 24 insertions(+), 1 deletion(-)
-> > >  create mode 100644 pc-bios/opensbi-riscv32-fw_jump.elf
-> > >  create mode 100644 pc-bios/opensbi-riscv64-fw_jump.elf
-> > >  create mode 160000 roms/opensbi
-> > >
+> > Split the common RISC-V boot functions into a seperate file. This allows
+> > us to share the common code.
 > >
-> > The OpenSBI firmwares are platform specific so we should have
-> > machine directory under pc-bios/ directory
+> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> > ---
+> >  hw/riscv/Makefile.objs  |  1 +
+> >  hw/riscv/boot.c         | 69 +++++++++++++++++++++++++++++++++++++++++
+> >  hw/riscv/sifive_e.c     | 17 ++--------
+> >  hw/riscv/sifive_u.c     | 17 ++--------
+> >  hw/riscv/spike.c        | 21 +++----------
+> >  hw/riscv/virt.c         | 51 +++---------------------------
+> >  include/hw/riscv/boot.h | 27 ++++++++++++++++
+> >  7 files changed, 110 insertions(+), 93 deletions(-)
+> >  create mode 100644 hw/riscv/boot.c
+> >  create mode 100644 include/hw/riscv/boot.h
 > >
-> > So for virt machine we will have:
-> > pc-bios/riscv32/virt/fw_jump.elf
-> > pc-bios/riscv64/virt/fw_jump.elf
+> > diff --git a/hw/riscv/Makefile.objs b/hw/riscv/Makefile.objs
+> > index a65027304a..eb9d4f9ffc 100644
+> > --- a/hw/riscv/Makefile.objs
+> > +++ b/hw/riscv/Makefile.objs
+> > @@ -1,3 +1,4 @@
+> > +obj-y += boot.o
+> >  obj-$(CONFIG_SPIKE) += riscv_htif.o
+> >  obj-$(CONFIG_HART) += riscv_hart.o
+> >  obj-$(CONFIG_SIFIVE_E) += sifive_e.o
+> > diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
+> > new file mode 100644
+> > index 0000000000..62f94aaf8a
+> > --- /dev/null
+> > +++ b/hw/riscv/boot.c
+> > @@ -0,0 +1,69 @@
+> > +/*
+> > + * QEMU RISC-V Boot Helper
+> > + *
+> > + * Copyright (c) 2017 SiFive, Inc.
+> > + * Copyright (c) 2019 Alistair Francis <alistair.francis@wdc.com>
+> > + *
+> > + * This program is free software; you can redistribute it and/or modify it
+> > + * under the terms and conditions of the GNU General Public License,
+> > + * version 2 or later, as published by the Free Software Foundation.
+> > + *
+> > + * This program is distributed in the hope it will be useful, but WITHOUT
+> > + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+> > + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+> > + * more details.
+> > + *
+> > + * You should have received a copy of the GNU General Public License along with
+> > + * this program.  If not, see <http://www.gnu.org/licenses/>.
+> > + */
+> > +
+> > +#include "qemu/osdep.h"
+> > +#include "qemu/units.h"
+> > +#include "qemu/error-report.h"
+> > +#include "exec/cpu-defs.h"
+> > +#include "hw/loader.h"
+> > +#include "hw/riscv/boot.h"
+> > +#include "elf.h"
+> > +
+> > +target_ulong riscv_load_kernel(const char *kernel_filename)
+> > +{
+> > +    uint64_t kernel_entry, kernel_high;
+> > +
+> > +    if (load_elf(kernel_filename, NULL, NULL, NULL,
+> > +                 &kernel_entry, NULL, &kernel_high,
+> > +                 0, EM_RISCV, 1, 0) < 0) {
+> > +        error_report("could not load kernel '%s'", kernel_filename);
+> > +        exit(1);
+> > +    }
+> > +
+> > +    return kernel_entry;
+> > +}
+> > +
+> > +hwaddr riscv_load_initrd(const char *filename, uint64_t mem_size,
+> > +                         uint64_t kernel_entry, hwaddr *start)
+> > +{
+> > +    int size;
+> > +
+> > +    /* We want to put the initrd far enough into RAM that when the
+>
+> nits: /* should be on a separate line
 
-I have updated the names to indicate the machine. The pc-bios directly
-appears to be flat (at least for binaries) so I don't want to add
-subdirectories.
+Fixed
 
 >
-> And we should only integrate plain binary image for "bios" images here.
+> > +     * kernel is uncompressed it will not clobber the initrd. However
+> > +     * on boards without much RAM we must ensure that we still leave
+> > +     * enough room for a decent sized initrd, and on boards with large
+> > +     * amounts of RAM we must avoid the initrd being so far up in RAM
+> > +     * that it is outside lowmem and inaccessible to the kernel.
+> > +     * So for boards with less  than 256MB of RAM we put the initrd
+> > +     * halfway into RAM, and for boards with 256MB of RAM or more we put
+> > +     * the initrd at 128MB.
+> > +     */
 >
-> pc-bios/riscv32/virt/fw_jump.bin
-> pc-bios/riscv64/virt/fw_jump.bin
+> [snip]
+>
+> Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+> Tested-by: Bin Meng <bmeng.cn@gmail.com>
 
-Yep, fixed.
+Thanks!
 
 Alistair
-
->
-> Regards,
-> Bin
 
