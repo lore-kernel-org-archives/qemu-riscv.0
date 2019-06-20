@@ -1,65 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hdxo7-0000Kh-H1
-	for mharc-qemu-riscv@gnu.org; Thu, 20 Jun 2019 10:12:57 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:58401)
+	id 1he1cw-0005cQ-Gn
+	for mharc-qemu-riscv@gnu.org; Thu, 20 Jun 2019 14:17:40 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:43272)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <prvs=067b53019=alistair.francis@wdc.com>)
- id 1hdxnu-0000Be-V3
- for qemu-riscv@nongnu.org; Thu, 20 Jun 2019 10:12:46 -0400
+ (envelope-from <alistair23@gmail.com>) id 1he1cY-0005Kx-M5
+ for qemu-riscv@nongnu.org; Thu, 20 Jun 2019 14:17:17 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <prvs=067b53019=alistair.francis@wdc.com>)
- id 1hdxn6-0007DJ-Vu
- for qemu-riscv@nongnu.org; Thu, 20 Jun 2019 10:11:54 -0400
-Received: from esa4.hgst.iphmx.com ([216.71.154.42]:49364)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <prvs=067b53019=alistair.francis@wdc.com>)
- id 1hdxiC-0001sn-AO; Thu, 20 Jun 2019 10:06:48 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1561039608; x=1592575608;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=aDFs969XL5AXSdtpm8ovgxOKxL/V+B6FYyv+c9Aerso=;
- b=a1zS//7CRw+PgL/ujH/+w1A5QEt4hJ5ANgNBgGKkpjiy/BavV+Wn2r1P
- eAbRSlt7T4czcODbyxqd1/785PD5rnFrbFFwnV3Rv/Sl1ids2H94YIU+3
- f+2kGNlMwgkVH+xE0BhVNHmF+hM+Xn2hUd+KbzXfkSMcF+qolsT5kM+0D
- Zeg8ivkAGO9rMkRILgPECLadFjrMIfYqyABt9HPuugKqV6UA+erOujwmh
- hJrHMjDQ5zSrOCKr0GoBYb3b7y+sX1XZwg6p2Qjrq7vdnRkFwlqd+SJhb
- apSwHIf0H2oTZhergG5sdqym4qwTbcVcK2EOf7SDG79q6NwuNd3CT1K28 w==;
-X-IronPort-AV: E=Sophos;i="5.63,397,1557158400"; d="scan'208";a="111048658"
-Received: from h199-255-45-15.hgst.com (HELO uls-op-cesaep02.wdc.com)
- ([199.255.45.15])
- by ob1.hgst.iphmx.com with ESMTP; 20 Jun 2019 22:06:43 +0800
-IronPort-SDR: /UV2l8Za4dTh9E3IktCR8GW8U7xrg2P6bDcskDFOZHnFZt2XsS145QcCdD+aCozZ3IreDJW6Qa
- HhlD49A5esgjg1Rwz/+8K6aQZI3mW9x/Ne/XjNMMqIZU10Pg6NwzhAvzIzx7QZAax58rjgZ2Dc
- REi75zO0NYvuE098izU2mFqBX7JBGhMZEbg2+/Fj8faqCXq+q8eK7nga2lop5JynLU0Qb7Zh6V
- OLHAyI+NyJtIXUzJ+oGeouRbjeY7IUfkdDyMr1KlAUNIgiGbtrOWFM/kDAioZlqif1lK4wmSf3
- i3o/iV8nttnc/UIFoNTzSxbh
-Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
- by uls-op-cesaep02.wdc.com with ESMTP; 20 Jun 2019 07:06:09 -0700
-IronPort-SDR: 8z8EiX0ctjKBWp4roZLmnd8DfV8yk9j7ySFRwJX0J4JhAacYrYzA9UaJwkIexAO48r6YaR+jUV
- 6IvlUEjjdPFlpFjWb/UGOd9n2WtjVlA7WfMcaf9elrKeOsLfhyNaPqMrsAfxF8SGBo0+LTH/Q1
- F7JSwevYgQbkulAxfu/tOzvmDN50KEON0o+PCvkiS/1ilZyYHtvvRqZpyNxOTI+Sv0FNxhFxCr
- GAp+AMl3572sAMsyKnCxfHTCdnSJyT3eQWmZQ5VC3sfTnClyv/2mqeVwokNDvSDpj0K/kxzRg/
- AMo=
-Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
- risc6-mainframe.int.fusionio.com) ([10.196.157.140])
- by uls-op-cesaip01.wdc.com with ESMTP; 20 Jun 2019 07:06:44 -0700
-From: Alistair Francis <alistair.francis@wdc.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: palmer@sifive.com, alistair.francis@wdc.com, alistair23@gmail.com,
- richard.henderson@linaro.org
-Date: Thu, 20 Jun 2019 07:04:18 -0700
-Message-Id: <79729cc88ca509e08b5c4aa0aa8a52847af70c0f.1561039316.git.alistair.francis@wdc.com>
-X-Mailer: git-send-email 2.22.0
+ (envelope-from <alistair23@gmail.com>) id 1he1OR-0003cs-0d
+ for qemu-riscv@nongnu.org; Thu, 20 Jun 2019 14:03:47 -0400
+Received: from mail-io1-xd43.google.com ([2607:f8b0:4864:20::d43]:42110)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <alistair23@gmail.com>)
+ id 1he1OP-0003b0-0h; Thu, 20 Jun 2019 14:02:38 -0400
+Received: by mail-io1-xd43.google.com with SMTP id u19so134381ior.9;
+ Thu, 20 Jun 2019 11:02:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=xiAL8Dxd5KKhwRlNQNGWU4L7hroSCK2EcEjlwDL61N4=;
+ b=nAtWZaZA+2zAJWhyY+3kZbjuLSPj4T4rW2ipk2G+CEhrTVZjwDMUjiDqpQ+J1Vp3sJ
+ ysgoUsf87zmap8jBti7TkO8kaLBfWjNpvMDJDenfu4et3TiY/kB1Ethp1GOkwhZxG/Aa
+ U3JnkGkZoq6xGKfPGGXuiDfJxVv6qfpWnw6jsnNYUIJCYsKJKYv2zBL6Z8+IxYFxADLQ
+ 69AHNWqLi7NznwOT94OcXViGAKiRodqF+1KsCWcwZ3bcLq9EwcJPK/7/HhaEpu3WHZm9
+ wVsmmGhGSZMikRP25q3JYpBEZQOLjA6/sZmVfDO+u4ltIg23rUOEkEjvy32dkLC5i+ot
+ WXqw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=xiAL8Dxd5KKhwRlNQNGWU4L7hroSCK2EcEjlwDL61N4=;
+ b=TOkseE5F3kdr42BDDouGVy8XN3cHf/fgze4g7UeKE7JAOJiyK5Cxh0PBxCbxrbxTAd
+ O0NPE+S1Juk2oNzLZqyqtURh//7JVNBtJEMQVfgronUVGZZuAFdUwDu3x4sgmdCbxiF6
+ j7/micxIwdMultgibwU6l0DnQkh7jY3ISOAEIONHaWQXWyzq11mYUHib7FlzUT3kjbfP
+ 35SaUTkD+tIz8hdxWhN6xEoC4IeETTOU8LM2PYu/wbTAbQpKPoJf6jZRIuR9OfuJoKvB
+ 7bspRHqOPB3g+lVVLulXx8VCVtePHBPwP0fyqNEGC2cT+IcT9z2uEsy3+IJ7+25ISKda
+ uHMA==
+X-Gm-Message-State: APjAAAWlAoMfgG+TsI8dAsl6TtSm1t0dcUxnTWhxE4G6259IIpwwk9fy
+ RoZMdEnzW6gIS5QHE9cwfZBoadZEdSh6tGj8W1A=
+X-Google-Smtp-Source: APXvYqzEv97+JGJmkjfEWflVP0LRCdOQQn1qfqB0t5t+kx20rca4EC7WwpmshMonUmtP6XaKHDHjm5iDJTRH94pDvCQ=
+X-Received: by 2002:a02:6597:: with SMTP id u145mr6327558jab.26.1561053754290; 
+ Thu, 20 Jun 2019 11:02:34 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <cover.1560904640.git.alistair.francis@wdc.com>
+ <CAEUhbmViJpKtiNXm7CYdF7SPRkOPkvpXJ5+We2m9tZSK_BWi-g@mail.gmail.com>
+ <CAKmqyKM4UU+CPKu07AK65bNofbbxxaRkSACqoV_vfFEaH-195A@mail.gmail.com>
+ <CAEUhbmUwAVLXY9SSoryWBDeNL8gUfBCE+xweSSmuE9KwzWeX=w@mail.gmail.com>
+ <CAKmqyKMmm-38DijX_wL=pAbvxzLQ+KSOtd1xg_GrT4Az70GKsw@mail.gmail.com>
+ <11f4e4ff6037427f52824ba586f8a330c12d8dfd.camel@redhat.com>
+In-Reply-To: <11f4e4ff6037427f52824ba586f8a330c12d8dfd.camel@redhat.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Thu, 20 Jun 2019 10:59:43 -0700
+Message-ID: <CAKmqyKOh3J07yg3dbaNcOaSzfbDZJJ-kjN3pBh+KqAKq05hzTA@mail.gmail.com>
+To: Andrea Bolognani <abologna@redhat.com>
+Cc: Bin Meng <bmeng.cn@gmail.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Palmer Dabbelt <palmer@sifive.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 216.71.154.42
-Subject: [Qemu-riscv] [PATCH v1 1/1] tcg/riscv: Fix RISC-VH host build
- failure
+X-Received-From: 2607:f8b0:4864:20::d43
+Subject: Re: [Qemu-riscv] [Qemu-devel] [RFC v1 0/5] RISC-V: Add firmware
+ loading support and default
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -71,36 +72,50 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Jun 2019 14:12:51 -0000
+X-List-Received-Date: Thu, 20 Jun 2019 18:17:17 -0000
 
-Commit 269bd5d8 "cpu: Move the softmmu tlb to CPUNegativeOffsetState'
-broke the RISC-V host build as there are two variables that are used but
-not defined.
+On Thu, Jun 20, 2019 at 1:16 AM Andrea Bolognani <abologna@redhat.com> wrote:
+>
+> On Wed, 2019-06-19 at 11:23 -0700, Alistair Francis wrote:
+> > On Wed, Jun 19, 2019 at 7:42 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+> > > On Wed, Jun 19, 2019 at 10:30 PM Alistair Francis <alistair23@gmail.com> wrote:
+> > > > On Wed, Jun 19, 2019 at 7:26 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+> > > > > >  pc-bios/opensbi-riscv32-fw_jump.elf | Bin 0 -> 197988 bytes
+> > > > > >  pc-bios/opensbi-riscv64-fw_jump.elf | Bin 0 -> 200192 bytes
+> > > > >
+> > > > > Since we are considering adding "bios" images, I prefer to add the
+> > > > > pure binary images instead of ELF images here.
+> > > >
+> > > > I didn't think about that. Can we just boot them in QEMU like we do
+> > > > with the ELFs?
+> > >
+> > > Yes, use load_image_targphys() instead of load_elf().
+> >
+> > Ah, that is obvious. I'll update it to use the bin files then.
+>
+> I'm unclear on the advantages of using one format over the other,
 
-This patch renames the undefined variables mask_off and table_off to the
-existing (but unused) mask_ofs and table_ofs variables.
+The main one that I see is that everyone else is already using .bin
+and no one else is using .elf.
 
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
----
- tcg/riscv/tcg-target.inc.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+> but one question comes to mind: once this is in, we will probably
+> want to have OpenSBI packaged separately in distributions, the same
+> way it already happens for SeaBIOS, SLOF and edk2-based firmwares.
+>
+> Will using either of the formats prevent that from happening?
 
-diff --git a/tcg/riscv/tcg-target.inc.c b/tcg/riscv/tcg-target.inc.c
-index 1f0ae64aae..3e76bf5738 100644
---- a/tcg/riscv/tcg-target.inc.c
-+++ b/tcg/riscv/tcg-target.inc.c
-@@ -980,8 +980,8 @@ static void tcg_out_tlb_load(TCGContext *s, TCGReg addrl,
-     int table_ofs = fast_ofs + offsetof(CPUTLBDescFast, table);
-     TCGReg mask_base = TCG_AREG0, table_base = TCG_AREG0;
- 
--    tcg_out_ld(s, TCG_TYPE_PTR, TCG_REG_TMP0, mask_base, mask_off);
--    tcg_out_ld(s, TCG_TYPE_PTR, TCG_REG_TMP1, table_base, table_off);
-+    tcg_out_ld(s, TCG_TYPE_PTR, TCG_REG_TMP0, mask_base, mask_ofs);
-+    tcg_out_ld(s, TCG_TYPE_PTR, TCG_REG_TMP1, table_base, table_ofs);
- 
-     tcg_out_opc_imm(s, OPC_SRLI, TCG_REG_TMP2, addrl,
-                     TARGET_PAGE_BITS - CPU_TLB_ENTRY_BITS);
--- 
-2.22.0
+Both options allow this.
 
+OE-Core already packages OpenSBI by default, Fedora and Debian are
+moving to OpenSBI for RISC-V targets as well.
+
+Any distro that supports the RISC-V toolchain (which is all
+upstreamed) can build OpenSBI.
+
+Alistair
+
+>
+> --
+> Andrea Bolognani / Red Hat / Virtualization
+>
 
