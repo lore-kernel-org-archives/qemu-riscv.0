@@ -1,50 +1,41 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hdsFy-0001vl-KC
-	for mharc-qemu-riscv@gnu.org; Thu, 20 Jun 2019 04:17:18 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:57563)
+	id 1hdu9K-0007Gf-3D
+	for mharc-qemu-riscv@gnu.org; Thu, 20 Jun 2019 06:18:34 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:37007)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <abologna@redhat.com>) id 1hdsFu-0001oZ-Pd
- for qemu-riscv@nongnu.org; Thu, 20 Jun 2019 04:17:16 -0400
+ (envelope-from <quentin.mundell@protonmail.com>) id 1hdu9H-0006ft-9t
+ for qemu-riscv@nongnu.org; Thu, 20 Jun 2019 06:18:32 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <abologna@redhat.com>) id 1hdsFG-0002DI-UQ
- for qemu-riscv@nongnu.org; Thu, 20 Jun 2019 04:16:35 -0400
-Received: from mx1.redhat.com ([209.132.183.28]:50636)
+ (envelope-from <quentin.mundell@protonmail.com>) id 1hdtye-0002CU-6o
+ for qemu-riscv@nongnu.org; Thu, 20 Jun 2019 06:07:33 -0400
+Received: from mail-40135.protonmail.ch ([185.70.40.135]:61194)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <abologna@redhat.com>)
- id 1hdsFF-00025y-ER; Thu, 20 Jun 2019 04:16:33 -0400
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
- [10.5.11.12])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id DD1D6307D935;
- Thu, 20 Jun 2019 08:16:19 +0000 (UTC)
-Received: from kinshicho (unknown [10.43.2.73])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 8393E60FAB;
- Thu, 20 Jun 2019 08:16:16 +0000 (UTC)
-Message-ID: <11f4e4ff6037427f52824ba586f8a330c12d8dfd.camel@redhat.com>
-From: Andrea Bolognani <abologna@redhat.com>
-To: Alistair Francis <alistair23@gmail.com>, Bin Meng <bmeng.cn@gmail.com>
-Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>, Palmer Dabbelt
- <palmer@sifive.com>, Alistair Francis <alistair.francis@wdc.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
-Date: Thu, 20 Jun 2019 10:16:14 +0200
-In-Reply-To: <CAKmqyKMmm-38DijX_wL=pAbvxzLQ+KSOtd1xg_GrT4Az70GKsw@mail.gmail.com>
-References: <cover.1560904640.git.alistair.francis@wdc.com>
- <CAEUhbmViJpKtiNXm7CYdF7SPRkOPkvpXJ5+We2m9tZSK_BWi-g@mail.gmail.com>
- <CAKmqyKM4UU+CPKu07AK65bNofbbxxaRkSACqoV_vfFEaH-195A@mail.gmail.com>
- <CAEUhbmUwAVLXY9SSoryWBDeNL8gUfBCE+xweSSmuE9KwzWeX=w@mail.gmail.com>
- <CAKmqyKMmm-38DijX_wL=pAbvxzLQ+KSOtd1xg_GrT4Az70GKsw@mail.gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.32.2 (3.32.2-1.fc30) 
+ (Exim 4.71) (envelope-from <quentin.mundell@protonmail.com>)
+ id 1hdtR7-0007BN-Ss
+ for qemu-riscv@nongnu.org; Thu, 20 Jun 2019 05:32:54 -0400
+Date: Thu, 20 Jun 2019 09:32:49 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=protonmail.com;
+ s=default; t=1561023170;
+ bh=cw73SfkFuDbOq88fj9jzmF1oPpQhYxDqNCRb+cnJRQo=;
+ h=Date:To:From:Reply-To:Subject:In-Reply-To:References:Feedback-ID:
+ From;
+ b=LisCYXkJPcLTJHElU7QM7A+HLbdtctV8YcU8MFi9E6POv/2u74rDXoi9LOzCXOvEG
+ Wvs4IRTA25YwnLMTqFVcm8gz1buPjiNljHVxxCKpnDdXl8fZWDFmXDTVY2Ehoi/j8M
+ kZPgPZlM0oj0+KzCYLV2OtV1MJyNGpDLvfyP3imQ=
+To: "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>
+From: Quentin Mundell <quentin.mundell@protonmail.com>
+Reply-To: Quentin Mundell <quentin.mundell@protonmail.com>
+Message-ID: <2tpMqWtbo4E8ZRuLZ07ldGITU5rCPpdyvW0lS1kGTDly5GhRUmbSuvepoodO5KZVHXnejpSHJuujarzlF3HcWccYYVn6p2wFNV7thu9rnFo=@protonmail.com>
+In-Reply-To: <CANnJOVEAbK1Bc+TTE9xGozDcxTt6ezpdDnpQ+LRafgV-1gy=ug@mail.gmail.com>
+References: <Gpx9RF86BWnRvLPI5Kz0PRHM3oiLy4nkgS-FiQueS0d3dSS4N-N008stUGzVV-NctfG95esZlphJJ1A7J4rlkU6VniTM_Oxyrg1MfRpGwlA=@protonmail.com>
+ <CANnJOVEAbK1Bc+TTE9xGozDcxTt6ezpdDnpQ+LRafgV-1gy=ug@mail.gmail.com>
+Feedback-ID: gBLPg9rW5wfp_bU1qG_NMga7H8Xt3ECyEnN_CmBbGEkU52qPG7hPf4oVg3Q-Scu5KvJCR5nhixecbLVi3_LVEA==:Ext:ProtonMail
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.48]); Thu, 20 Jun 2019 08:16:20 +0000 (UTC)
+Content-Type: multipart/alternative;
+ boundary="b1_341ea30fea3a7663a750718f013db56d"
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
-X-Received-From: 209.132.183.28
-Subject: Re: [Qemu-riscv] [Qemu-devel] [RFC v1 0/5] RISC-V: Add firmware
- loading support and default
+X-Received-From: 185.70.40.135
+Subject: Re: [Qemu-riscv] TLB refresh issue
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -56,33 +47,127 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Jun 2019 08:17:16 -0000
+X-List-Received-Date: Thu, 20 Jun 2019 10:18:32 -0000
 
-On Wed, 2019-06-19 at 11:23 -0700, Alistair Francis wrote:
-> On Wed, Jun 19, 2019 at 7:42 AM Bin Meng <bmeng.cn@gmail.com> wrote:
-> > On Wed, Jun 19, 2019 at 10:30 PM Alistair Francis <alistair23@gmail.com> wrote:
-> > > On Wed, Jun 19, 2019 at 7:26 AM Bin Meng <bmeng.cn@gmail.com> wrote:
-> > > > >  pc-bios/opensbi-riscv32-fw_jump.elf | Bin 0 -> 197988 bytes
-> > > > >  pc-bios/opensbi-riscv64-fw_jump.elf | Bin 0 -> 200192 bytes
-> > > > 
-> > > > Since we are considering adding "bios" images, I prefer to add the
-> > > > pure binary images instead of ELF images here.
-> > > 
-> > > I didn't think about that. Can we just boot them in QEMU like we do
-> > > with the ELFs?
-> > 
-> > Yes, use load_image_targphys() instead of load_elf().
-> 
-> Ah, that is obvious. I'll update it to use the bin files then.
+This is a multi-part message in MIME format.
 
-I'm unclear on the advantages of using one format over the other,
-but one question comes to mind: once this is in, we will probably
-want to have OpenSBI packaged separately in distributions, the same
-way it already happens for SeaBIOS, SLOF and edk2-based firmwares.
+--b1_341ea30fea3a7663a750718f013db56d
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: base64
 
-Will using either of the formats prevent that from happening?
+U29ycnksIHRoZXJlIHdhcyBhIHR5cG8gaW4gdGhlIGNvbW1pdCBoYXNoLCBoZXJlIGlzIHRoZSBn
+b29kIG9uZTogaHR0cHM6Ly9naXRodWIuY29tL3FlbXUvcWVtdS9jb21taXQvYzdiOTUxNzE4ODE1
+Njk0Mjg0NTAxZWQwMWZlYzdhY2I4NjU0ZGI3YiNkaWZmLWY1ZjAxN2VlMTc0Njc3YjIzODMwNTMx
+Y2FiNTQ1ZTc4TDUzMQoKSSBoYXZlIGRvdWJsZSBjaGVja2VkIG15IHZtYSBmZW5jZXMgYW5kIEkg
+dGhpbmsgdGhlIGxvZ2ljIGJlaGluZCBpcyBjb3JyZWN0IChJIG9ubHkgZmx1c2ggd2hlbiBuZWVk
+ZWQgd2l0aCByZWdhcmQgdG8gQVNJRHMpLgpBcyBhIHRlc3QsIEkgaGF2ZSBhZGRlZCBhIGZ1bGwg
+YHNmZW5jZS52bWFgIGJhcnJpZXIgYWZ0ZXIgZXZlcnkgYHNhdHBgIHdyaXRlOiBJIHN0aWxsIGhh
+dmUgdGhlIHNhbWUgcmFuZG9tIGNyYXNoZXMuCgpRTS4KCuKAkOKAkOKAkOKAkOKAkOKAkOKAkCBP
+cmlnaW5hbCBNZXNzYWdlIOKAkOKAkOKAkOKAkOKAkOKAkOKAkApPbiBXZWRuZXNkYXksIEp1bmUg
+MTksIDIwMTkgNzozMCBQTSwgSm9uYXRoYW4gQmVocmVucyA8ZmludGVsaWFAZ21haWwuY29tPiB3
+cm90ZToKCj4gSSB3YXNuJ3QgYWJsZSB0byBmaW5kIHRoZSBjb21taXQgeW91IGJpc2VjdGVkIHRv
+LCBidXQgaXMgeW91ciBjb2RlIGV4ZWN1dGluZyBhIGBzZmVuY2Uudm1hYCBpbnN0cnVjdGlvbiBh
+ZnRlciBldmVyeSBpbnN0YW5jZSB0aGF0IGl0IGNoYW5nZXMgc2F0cD8gVW50aWwgcmVjZW50bHkg
+dGhpcyB3YXNuJ3QgbmVjZXNzYXJ5IHdpdGggUUVNVSBiZWNhdXNlIFFFTVUgZmx1c2hlZCB0aGUg
+VExCIG1vcmUgYWdncmVzc2l2ZWx5IHRoYW4gcmVxdWlyZWQgYnkgdGhlIHNwZWMsIGJ1dCBbdGhl
+IGJlaGF2aW9yIHdhcyBjaGF5b3UgYXJlIHJlZmVycmluZ25nZWQgaW4gYSByZWNlbnQgY29tbWl0
+XShodHRwczovL2dpdGh1Yi5jb20vcWVtdS9xZW11L2NvbW1pdC8xZTBkOTg1ZmE5MTM2YTU2MzE2
+OGEzZGE2NmYzZDE3ODIwNDA0ZWUyI2RpZmYtMjQzOTY5NzM4Yjc3ZGUxMGMwMTQ2MjJhM2Q3NDlh
+NDQpLgo+Cj4gSm9uYXRoYW4KPgo+IE9uIFdlZCwgSnVuIDE5LCAyMDE5IGF0IDExOjQ2IEFNIFF1
+ZW50aW4gTXVuZGVsbCB2aWEgUWVtdS1yaXNjdiA8cWVtdS1yaXNjdkBub25nbnUub3JnPiB3cm90
+ZToKPgo+PiBIZWxsbywKPj4KPj4gSSBoYXZlIHVwZGF0ZWQgbXkgUUVNVSB2ZXJzaW9uIChmcm9t
+IDMueCB0byB0b2RheSdzIG1hc3RlcikuCj4+IEkgbm93IGdldCBhbGwgc29ydCBvZiB3ZWlyZCBh
+bmQgbm90IGVhc2lseSByZXByb2R1Y2libGUgZXhjZXB0aW9ucyB0cmlnZ2VyZWQgaW4gbXkgcmlz
+Yy12IGd1ZXN0LCBoYXBwZW5pbmcgZnJvbSBib3RoIHVzZXIgYW5kIHN1cGVydmlzb3IgbW9kZS4K
+Pj4KPj4gVGhlIGNvbW1hbmQgSSB1c2UgaXMgcm91Z2hseSBgcWVtdS1zeXN0ZW0tcmlzY3Y2NCAt
+bWFjaGluZSBzaWZpdmVfdSAtbSAxMDI0IC1rZXJuZWwgbXliaW5hcnkuZWxmYCAoc29ycnksIEkg
+Y2Fubm90IHNoYXJlIHRoZSBlbGYpLgo+Pgo+PiBJIGhhdmUgYmlzZWN0ZWQgdGhpcyBpc3N1ZSBi
+YWNrIHRvIGNvbW1pdCBjN2I5NTE3MTg4MTU2OTI4NDUwMWVkMDFmZWM3YWNiODY1NGRiN2IuCj4+
+IFNvbWUgVExCIGZsdXNoZXMgd2VyZSByZW1vdmVkIGluIHRoZSBmb2xsb3dpbmcgcGxhY2VzOgo+
+PiB0YXJnZXQvcmlzY3YvY3B1X2hlbHBlci5jOiBgY3NyX3dyaXRlX2hlbHBlcihlbnYsIHMsIENT
+Ul9NU1RBVFVTKTtgIC0+IGBlbnYtPm1zdGF0dXMgPSBzO2AgKHR3aWNlKQo+PiB0YXJnZXQvcmlz
+Y3Yvb3BfaGVscGVyLmM6IGBjc3Jfd3JpdGVfaGVscGVyKGVudiwgcywgQ1NSX01TVEFUVVMpO2Ag
+LT4gYGVudi0+bXN0YXR1cyA9IHM7YCAodHdpY2UpCj4+IFRoZXNlIGFyZSB0aGUgcGxhY2VzIHdo
+ZXJlIHRoZSBwcml2aWxlZ2VkIG1vZGUgaXMgc3dpdGNoZWQuCj4+Cj4+IElmIEkgYWRkIHRoZW0g
+YmFjayAoYHRsYl9mbHVzaChlbnZfY3B1KGVudikpO2ApLCBldmVyeXRoaW5nIGlzIGZpbmUgYWdh
+aW4uCj4+Cj4+IEhvd2V2ZXIsIGluIHRoZSBgcmlzY3ZfY3B1X3NldF9tb2RlYCBmdW5jdGlvbiwg
+SSBzZWUgdGhlIGZvbGxvd2luZyBjb21tZW50Ogo+Pj4gdGxiX2ZsdXNoIGlzIHVubmVjZXNzYXJ5
+IGFzIG1vZGUgaXMgY29udGFpbmVkIGluIG1tdV9pZHgKPj4gSXQgd291bGQgc3VnZ2VzdCBhZGRp
+bmcgYmFjayBUTEIgZmx1c2hlcyBpcyBub3QgdGhlIHdheSB0byBnby4uLgo+Pgo+PiBEb2VzIHNv
+bWVvbmUgd2l0aCBiZXR0ZXIga25vd2xlZGdlIG9mIHRoZSBjb2RlYmFzZSBjYW4gdGVsbCBtZSBo
+b3cgdG8gcHJvY2VlZCBoZXJlPwo+PiAtIFNob3VsZCBJIHN1Ym1pdCBhIHBhdGNoIGFkZGluZyBi
+YWNrIHRoZSBUTEIgZmx1c2hlcz8KPj4gLSBJcyBpdCBhbiBpc3N1ZSBzb21ld2hlcmUgZWxzZT8K
+Pj4KPj4gUmVnYXJkcwo+PiBRTQ==
 
--- 
-Andrea Bolognani / Red Hat / Virtualization
+
+--b1_341ea30fea3a7663a750718f013db56d
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: base64
+
+PGRpdj5Tb3JyeSwgdGhlcmUgd2FzIGEgdHlwbyBpbiB0aGUgY29tbWl0IGhhc2gsIGhlcmUgaXMg
+dGhlIGdvb2Qgb25lOiA8YSBocmVmPSJodHRwczovL2dpdGh1Yi5jb20vcWVtdS9xZW11L2NvbW1p
+dC9jN2I5NTE3MTg4MTU2OTQyODQ1MDFlZDAxZmVjN2FjYjg2NTRkYjdiI2RpZmYtZjVmMDE3ZWUx
+NzQ2NzdiMjM4MzA1MzFjYWI1NDVlNzhMNTMxIj5odHRwczovL2dpdGh1Yi5jb20vcWVtdS9xZW11
+L2NvbW1pdC9jN2I5NTE3MTg4MTU2OTQyODQ1MDFlZDAxZmVjN2FjYjg2NTRkYjdiI2RpZmYtZjVm
+MDE3ZWUxNzQ2NzdiMjM4MzA1MzFjYWI1NDVlNzhMNTMxPC9hPjxicj48L2Rpdj48ZGl2Pjxicj48
+L2Rpdj48ZGl2PkkgaGF2ZSBkb3VibGUgY2hlY2tlZCBteSB2bWEgZmVuY2VzIGFuZCBJIHRoaW5r
+IHRoZSBsb2dpYyBiZWhpbmQgaXMgY29ycmVjdCAoSSBvbmx5IGZsdXNoIHdoZW4gbmVlZGVkIHdp
+dGggcmVnYXJkIHRvIEFTSURzKS48YnI+PC9kaXY+PGRpdj5BcyBhIHRlc3QsIEkgaGF2ZSBhZGRl
+ZCBhIGZ1bGwgIGBzZmVuY2Uudm1hYCBiYXJyaWVyIGFmdGVyIGV2ZXJ5IGBzYXRwYCB3cml0ZTog
+SSBzdGlsbCBoYXZlIHRoZSBzYW1lIHJhbmRvbSBjcmFzaGVzLjxicj48L2Rpdj48ZGl2Pjxicj48
+L2Rpdj48ZGl2PlFNLjxicj48L2Rpdj48ZGl2Pjxicj48L2Rpdj48ZGl2PuKAkOKAkOKAkOKAkOKA
+kOKAkOKAkCBPcmlnaW5hbCBNZXNzYWdlIOKAkOKAkOKAkOKAkOKAkOKAkOKAkDxicj48L2Rpdj48
+ZGl2PiBPbiBXZWRuZXNkYXksIEp1bmUgMTksIDIwMTkgNzozMCBQTSwgSm9uYXRoYW4gQmVocmVu
+cyAmbHQ7ZmludGVsaWFAZ21haWwuY29tJmd0OyB3cm90ZTo8YnI+PC9kaXY+PGRpdj4gPGJyPjwv
+ZGl2PjxibG9ja3F1b3RlIGNsYXNzPSJwcm90b25tYWlsX3F1b3RlIiB0eXBlPSJjaXRlIj48ZGl2
+IGRpcj0ibHRyIj48ZGl2Pkkgd2Fzbid0IGFibGUgdG8gZmluZCB0aGUgY29tbWl0IHlvdSBiaXNl
+Y3RlZCB0bywgYnV0IGlzIHlvdXIgY29kZSBleGVjdXRpbmcgYSBgc2ZlbmNlLnZtYWAgaW5zdHJ1
+Y3Rpb24gYWZ0ZXIgZXZlcnkgaW5zdGFuY2UgdGhhdCBpdCBjaGFuZ2VzIHNhdHA/IFVudGlsIHJl
+Y2VudGx5IHRoaXMgd2Fzbid0IG5lY2Vzc2FyeSB3aXRoIFFFTVUgYmVjYXVzZSBRRU1VIGZsdXNo
+ZWQgdGhlIFRMQiBtb3JlIGFnZ3Jlc3NpdmVseSB0aGFuIHJlcXVpcmVkIGJ5IHRoZSBzcGVjLCBi
+dXQgPGEgaHJlZj0iaHR0cHM6Ly9naXRodWIuY29tL3FlbXUvcWVtdS9jb21taXQvMWUwZDk4NWZh
+OTEzNmE1NjMxNjhhM2RhNjZmM2QxNzgyMDQwNGVlMiNkaWZmLTI0Mzk2OTczOGI3N2RlMTBjMDE0
+NjIyYTNkNzQ5YTQ0Ij50aGUgYmVoYXZpb3Igd2FzIGNoYXlvdSBhcmUgcmVmZXJyaW5nbmdlZCBp
+biBhIHJlY2VudCBjb21taXQ8L2E+LiA8YnI+PC9kaXY+PGRpdj48YnI+PC9kaXY+PGRpdj5Kb25h
+dGhhbjxicj48L2Rpdj48L2Rpdj48ZGl2Pjxicj48L2Rpdj48ZGl2IGNsYXNzPSJnbWFpbF9xdW90
+ZSI+PGRpdiBkaXI9Imx0ciI+T24gV2VkLCBKdW4gMTksIDIwMTkgYXQgMTE6NDYgQU0gUXVlbnRp
+biBNdW5kZWxsIHZpYSBRZW11LXJpc2N2ICZsdDs8YSBocmVmPSJtYWlsdG86cWVtdS1yaXNjdkBu
+b25nbnUub3JnIj5xZW11LXJpc2N2QG5vbmdudS5vcmc8L2E+Jmd0OyB3cm90ZTo8YnI+PC9kaXY+
+PGJsb2NrcXVvdGUgc3R5bGU9Im1hcmdpbjowcHggMHB4IDBweCAwLjhleDtib3JkZXItbGVmdDox
+cHggc29saWQgcmdiKDIwNCwyMDQsMjA0KTtwYWRkaW5nLWxlZnQ6MWV4IiBjbGFzcz0iZ21haWxf
+cXVvdGUiPjxkaXY+SGVsbG8sPGJyPjwvZGl2PjxkaXY+PGJyPjwvZGl2PjxkaXY+SSBoYXZlIHVw
+ZGF0ZWQgbXkgUUVNVSB2ZXJzaW9uIChmcm9tIDMueCB0byB0b2RheSdzIG1hc3RlcikuPGJyPjwv
+ZGl2PjxkaXY+SSBub3cgZ2V0IGFsbCBzb3J0IG9mIHdlaXJkIGFuZCBub3QgZWFzaWx5IHJlcHJv
+ZHVjaWJsZSBleGNlcHRpb25zIHRyaWdnZXJlZCBpbiBteSByaXNjLXYgZ3Vlc3QsIGhhcHBlbmlu
+ZyBmcm9tIGJvdGggdXNlciBhbmQgc3VwZXJ2aXNvciBtb2RlLjxicj48L2Rpdj48ZGl2Pjxicj48
+L2Rpdj48ZGl2PlRoZSBjb21tYW5kIEkgdXNlIGlzIHJvdWdobHkgYHFlbXUtc3lzdGVtLXJpc2N2
+NjQgLW1hY2hpbmUgc2lmaXZlX3UgLW0gMTAyNCAta2VybmVsIG15YmluYXJ5LmVsZmAgKHNvcnJ5
+LCBJIGNhbm5vdCBzaGFyZSB0aGUgZWxmKS48YnI+PC9kaXY+PGRpdj48YnI+PC9kaXY+PGRpdj48
+ZGl2PjxkaXY+SSBoYXZlIGJpc2VjdGVkIHRoaXMgaXNzdWUgYmFjayB0byBjb21taXQgYzdiOTUx
+NzE4ODE1NjkyODQ1MDFlZDAxZmVjN2FjYjg2NTRkYjdiLjxicj48L2Rpdj48ZGl2PiBTb21lIFRM
+QiBmbHVzaGVzIHdlcmUgcmVtb3ZlZCBpbiB0aGUgZm9sbG93aW5nIHBsYWNlczo8YnI+PC9kaXY+
+PGRpdj4gdGFyZ2V0L3Jpc2N2L2NwdV9oZWxwZXIuYzogYGNzcl93cml0ZV9oZWxwZXIoZW52LCBz
+LCBDU1JfTVNUQVRVUyk7YCAtJmd0OyBgZW52LSZndDttc3RhdHVzID0gcztgICh0d2ljZSk8YnI+
+PC9kaXY+PGRpdj4gdGFyZ2V0L3Jpc2N2L29wX2hlbHBlci5jOiBgY3NyX3dyaXRlX2hlbHBlcihl
+bnYsIHMsIENTUl9NU1RBVFVTKTtgIC0mZ3Q7IGBlbnYtJmd0O21zdGF0dXMgPSBzO2AgKHR3aWNl
+KTxicj48L2Rpdj48L2Rpdj48ZGl2PlRoZXNlIGFyZSB0aGUgcGxhY2VzIHdoZXJlIHRoZSBwcml2
+aWxlZ2VkIG1vZGUgaXMgc3dpdGNoZWQuPGJyPjwvZGl2PjxkaXY+PGJyPjwvZGl2PjxkaXY+SWYg
+SSBhZGQgdGhlbSBiYWNrIChgdGxiX2ZsdXNoKGVudl9jcHUoZW52KSk7YCksIGV2ZXJ5dGhpbmcg
+aXMgZmluZSBhZ2Fpbi48YnI+PC9kaXY+PGRpdj48YnI+PC9kaXY+PGRpdj5Ib3dldmVyLCBpbiB0
+aGUgYHJpc2N2X2NwdV9zZXRfbW9kZWAgZnVuY3Rpb24sIEkgc2VlIHRoZSBmb2xsb3dpbmcgY29t
+bWVudDogPGJyPjwvZGl2PjxkaXY+Jmd0OyB0bGJfZmx1c2ggaXMgdW5uZWNlc3NhcnkgYXMgbW9k
+ZSBpcyBjb250YWluZWQgaW4gbW11X2lkeDxicj48L2Rpdj48ZGl2Pkl0IHdvdWxkIHN1Z2dlc3Qg
+YWRkaW5nIGJhY2sgVExCIGZsdXNoZXMgaXMgbm90IHRoZSB3YXkgdG8gZ28uLi48YnI+PC9kaXY+
+PGRpdj48YnI+PC9kaXY+PGRpdj5Eb2VzIHNvbWVvbmUgd2l0aCBiZXR0ZXIga25vd2xlZGdlIG9m
+IHRoZSBjb2RlYmFzZSBjYW4gdGVsbCBtZSBob3cgdG8gcHJvY2VlZCBoZXJlPzxicj48L2Rpdj48
+ZGl2Pi0gU2hvdWxkIEkgc3VibWl0IGEgcGF0Y2ggYWRkaW5nIGJhY2sgdGhlIFRMQiBmbHVzaGVz
+Pzxicj48L2Rpdj48ZGl2Pi0gSXMgaXQgYW4gaXNzdWUgc29tZXdoZXJlIGVsc2U/PGJyPjwvZGl2
+PjxkaXY+PGJyPjwvZGl2PjxkaXY+UmVnYXJkczxicj48L2Rpdj48ZGl2PlFNPGJyPjwvZGl2Pjxk
+aXY+PGJyPjwvZGl2PjwvZGl2PjxkaXY+PGJyPjwvZGl2PjwvYmxvY2txdW90ZT48L2Rpdj48L2Js
+b2NrcXVvdGU+PGRpdj48YnI+PC9kaXY+
+
+
+
+--b1_341ea30fea3a7663a750718f013db56d--
 
 
