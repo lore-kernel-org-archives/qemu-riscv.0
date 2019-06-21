@@ -1,54 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1he9g1-0004Qf-GG
-	for mharc-qemu-riscv@gnu.org; Thu, 20 Jun 2019 22:53:21 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:34301)
+	id 1heCHz-0003y2-Cb
+	for mharc-qemu-riscv@gnu.org; Fri, 21 Jun 2019 01:40:43 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:39490)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <palmer@dabbelt.com>) id 1he9fz-0004QP-0j
- for qemu-riscv@nongnu.org; Thu, 20 Jun 2019 22:53:20 -0400
+ (envelope-from <bmeng.cn@gmail.com>) id 1heCHv-0003xi-Ah
+ for qemu-riscv@nongnu.org; Fri, 21 Jun 2019 01:40:40 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmer@dabbelt.com>) id 1he9fx-00035B-Rz
- for qemu-riscv@nongnu.org; Thu, 20 Jun 2019 22:53:18 -0400
-Received: from mail-pg1-f194.google.com ([209.85.215.194]:43376)
+ (envelope-from <bmeng.cn@gmail.com>) id 1heCHt-0000Mx-SH
+ for qemu-riscv@nongnu.org; Fri, 21 Jun 2019 01:40:39 -0400
+Received: from mail-ed1-x542.google.com ([2a00:1450:4864:20::542]:39924)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1he9fw-00031z-TY
- for qemu-riscv@nongnu.org; Thu, 20 Jun 2019 22:53:17 -0400
-Received: by mail-pg1-f194.google.com with SMTP id f25so2589692pgv.10
- for <qemu-riscv@nongnu.org>; Thu, 20 Jun 2019 19:53:12 -0700 (PDT)
+ (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
+ id 1heCHt-0000Km-JO; Fri, 21 Jun 2019 01:40:37 -0400
+Received: by mail-ed1-x542.google.com with SMTP id m10so8252149edv.6;
+ Thu, 20 Jun 2019 22:40:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=o59gUalJo4RKw6pqJfxFJsqsjRMfLXyqE1ZDiXHrwW4=;
+ b=NQe1Ugv6GxRUsh4W9Jwu0kBJM0RvcQgvSZ9K/zJrIg2eO25IF9K5f/af8iZJISN5LB
+ k/dz1UPjNDqO3PAIilh8WM9PbEWtBCRDpL7mvIzptK7TwqBx/DZp3fxRmTlKMubgJ9ez
+ jEVpFxZJhl+WLDJ5Y509jf8kCgP5obRDzINMsnp4vF0lJpd7ij4WB+igtu4qFJqifYHm
+ urnIXgnVJcsi+PiX9O2ffQ0oRx+vSOrgGjJXXVUIJklcMscaPCCEN4Tfuuo66EhxgADO
+ gz7nDN34vQeVjuMGJ+urbBkRsppSvEwQlJi4QeEFCvxRZHFcnUYYq8tRx1qNOoSl8UuN
+ Yx/w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
- :mime-version:content-transfer-encoding;
- bh=1sg7t4xVmFFuHBhmUA6Os6hJRKuxDj/Ex9oY3/bsjjI=;
- b=dzJ7wc5ZyPMm+jEnzLB5cnqzOfDGdPnHGOdOLCjjv0XA57v2BnfcP3smP1hb07lbxM
- 8cGGqxmzJ4s5Xu7VyiVK1mmZM3X7VkiMHAve21z/1GdRjLDWOgur/8XDpjCzCdR4xsnY
- g4ftsyqKLa/nbxp/IxdEWxu0vRlNYA9TKiaRfsc65G5xDu4BNKXWpxXOlkYQIqlfRpkl
- mgvWsDgvBSoTlSsPkm7F2UjwLgidkTs9dcaKCcRu2XKNmp0ZZsnIPke6AQeRHq0oBZiF
- A0b6bCqNzCoB+LtbN4NNKBWCHJYJpa9vx1xTawKLOkcX+PVgLTs3UtMZAFMSWvzj2hzD
- ZUNQ==
-X-Gm-Message-State: APjAAAXSB0RkPod7qb0V1KNbG5KGNOeX91mCfgTE3HXQlI5ZAR0wVK+E
- O+4LwnofqF4/pqYQcMrGAGxJWA==
-X-Google-Smtp-Source: APXvYqz8z/bib8XbyJo4M6R/NWdCl4LDm2nD/3prLsl2GYZOGLt6dMeRHUliLKil+31uatJubdXvTQ==
-X-Received: by 2002:a17:90a:2506:: with SMTP id
- j6mr3386592pje.129.1561085591310; 
- Thu, 20 Jun 2019 19:53:11 -0700 (PDT)
-Received: from localhost (amx-tls3.starhub.net.sg. [203.116.164.13])
- by smtp.gmail.com with ESMTPSA id d19sm880546pjs.22.2019.06.20.19.53.09
- (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
- Thu, 20 Jun 2019 19:53:10 -0700 (PDT)
-Date: Thu, 20 Jun 2019 19:53:10 -0700 (PDT)
-X-Google-Original-Date: Thu, 20 Jun 2019 19:39:53 PDT (-0700)
-In-Reply-To: <CAEUhbmVf8jTtsZD-+2jcGah-kS+bPM6xdkSML2Qq_NTmeoU3zA@mail.gmail.com>
-CC: alistair23@gmail.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=o59gUalJo4RKw6pqJfxFJsqsjRMfLXyqE1ZDiXHrwW4=;
+ b=byQa6GVy3PRg1N5FfgYsfEAomEvAPGP841USeBKF/h7VmkZgM0prsLP4ym1RElRY9/
+ 8JRDYxEIKMbx9sk4HsUBZOoKr5xAv+OIzLFVUH2bKEohtFGfmYKHPVrp9yOBP/rVeCgS
+ ZDO21ga+vmw2YjPU+9aQqoG/Ws/+5XcJ3458JbWV5WZfHrgbWWgOmxrPsWovy2sHTiwm
+ ++ygs4LfutNB0uGnfp0IaoqyZQvxssh5dKQe2PkTB9Zpj5326m6nZGfLAS4kzvTSbevX
+ fRmkdGESfpvOFMXDv5XTNQ8yryhiCVDA5WoKGMyTSHB/jJ4LLUNiHMe4qNDfVUq1rjIH
+ 7DAw==
+X-Gm-Message-State: APjAAAXYcr6X4LA1Xj9T9v0HS4g/p/snqdEGb/Kt+OyvqLNOlVIosHGk
+ x7LB+bdP0Bm2LlqivkAhFddN5Z2XXuhDat8rg3k=
+X-Google-Smtp-Source: APXvYqxv9BQl0mDVkGKsPEjDLMSr6OAoTxdGezFx2EbZSPDQOts9nMIOsJHZTlOMY15VujtyGW4z+MYAYmLxd/EieAI=
+X-Received: by 2002:a17:906:4f8f:: with SMTP id
+ o15mr15003739eju.129.1561095635464; 
+ Thu, 20 Jun 2019 22:40:35 -0700 (PDT)
+MIME-Version: 1.0
+References: <CAEUhbmVf8jTtsZD-+2jcGah-kS+bPM6xdkSML2Qq_NTmeoU3zA@mail.gmail.com>
+ <mhng-b2b4a62d-2575-4933-a1c9-dea2c5881abc@palmer-si-x1e>
+In-Reply-To: <mhng-b2b4a62d-2575-4933-a1c9-dea2c5881abc@palmer-si-x1e>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Fri, 21 Jun 2019 13:40:24 +0800
+Message-ID: <CAEUhbmWJYE+BUfE5v-TrmQ=xzhV8HuxFhBQrtU74T6TKfTZXCw@mail.gmail.com>
+To: Palmer Dabbelt <palmer@sifive.com>
+Cc: Alistair Francis <alistair23@gmail.com>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  Alistair Francis <Alistair.Francis@wdc.com>
-From: Palmer Dabbelt <palmer@sifive.com>
-To: bmeng.cn@gmail.com
-Message-ID: <mhng-b2b4a62d-2575-4933-a1c9-dea2c5881abc@palmer-si-x1e>
-Mime-Version: 1.0 (MHng)
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
- [fuzzy]
-X-Received-From: 209.85.215.194
+Content-Type: text/plain; charset="UTF-8"
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2a00:1450:4864:20::542
 Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH] riscv: sifive_test: Add reset
  functionality
 X-BeenThere: qemu-riscv@nongnu.org
@@ -62,80 +69,92 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Jun 2019 02:53:20 -0000
+X-List-Received-Date: Fri, 21 Jun 2019 05:40:40 -0000
 
-On Wed, 19 Jun 2019 06:42:21 PDT (-0700), bmeng.cn@gmail.com wrote:
-> Hi Alistair,
+Hi Palmer,
+
+On Fri, Jun 21, 2019 at 10:53 AM Palmer Dabbelt <palmer@sifive.com> wrote:
 >
-> On Tue, Jun 18, 2019 at 1:15 AM Alistair Francis <alistair23@gmail.com> wrote:
->>
->> On Fri, Jun 14, 2019 at 8:30 AM Bin Meng <bmeng.cn@gmail.com> wrote:
->> >
->> > This adds a reset opcode for sifive_test device to trigger a system
->> > reset for testing purpose.
->> >
->> > Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
->> > ---
->> >
->> >  hw/riscv/sifive_test.c         | 4 ++++
->> >  include/hw/riscv/sifive_test.h | 3 ++-
->> >  2 files changed, 6 insertions(+), 1 deletion(-)
->> >
->> > diff --git a/hw/riscv/sifive_test.c b/hw/riscv/sifive_test.c
->> > index 24a04d7..cd86831 100644
->> > --- a/hw/riscv/sifive_test.c
->> > +++ b/hw/riscv/sifive_test.c
->> > @@ -21,6 +21,7 @@
->> >  #include "qemu/osdep.h"
->> >  #include "hw/sysbus.h"
->> >  #include "qemu/module.h"
->> > +#include "sysemu/sysemu.h"
->> >  #include "target/riscv/cpu.h"
->> >  #include "hw/riscv/sifive_test.h"
->> >
->> > @@ -40,6 +41,9 @@ static void sifive_test_write(void *opaque, hwaddr addr,
->> >              exit(code);
->> >          case FINISHER_PASS:
->> >              exit(0);
->> > +        case FINISHER_RESET:
->> > +            qemu_system_reset_request(SHUTDOWN_CAUSE_GUEST_RESET);
->> > +            return;
->> >          default:
->> >              break;
->> >          }
->> > diff --git a/include/hw/riscv/sifive_test.h b/include/hw/riscv/sifive_test.h
->> > index 71d4c9f..c186a31 100644
->> > --- a/include/hw/riscv/sifive_test.h
->> > +++ b/include/hw/riscv/sifive_test.h
->> > @@ -34,7 +34,8 @@ typedef struct SiFiveTestState {
->> >
->> >  enum {
->> >      FINISHER_FAIL = 0x3333,
->> > -    FINISHER_PASS = 0x5555
->> > +    FINISHER_PASS = 0x5555,
->> > +    FINISHER_RESET = 0x7777
->>
->> Do you mind sharing where you got this value from? I can't find
->> details on this device in the SiFive manuals.
->>
+> On Wed, 19 Jun 2019 06:42:21 PDT (-0700), bmeng.cn@gmail.com wrote:
+> > Hi Alistair,
+> >
+> > On Tue, Jun 18, 2019 at 1:15 AM Alistair Francis <alistair23@gmail.com> wrote:
+> >>
+> >> On Fri, Jun 14, 2019 at 8:30 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+> >> >
+> >> > This adds a reset opcode for sifive_test device to trigger a system
+> >> > reset for testing purpose.
+> >> >
+> >> > Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
+> >> > ---
+> >> >
+> >> >  hw/riscv/sifive_test.c         | 4 ++++
+> >> >  include/hw/riscv/sifive_test.h | 3 ++-
+> >> >  2 files changed, 6 insertions(+), 1 deletion(-)
+> >> >
+> >> > diff --git a/hw/riscv/sifive_test.c b/hw/riscv/sifive_test.c
+> >> > index 24a04d7..cd86831 100644
+> >> > --- a/hw/riscv/sifive_test.c
+> >> > +++ b/hw/riscv/sifive_test.c
+> >> > @@ -21,6 +21,7 @@
+> >> >  #include "qemu/osdep.h"
+> >> >  #include "hw/sysbus.h"
+> >> >  #include "qemu/module.h"
+> >> > +#include "sysemu/sysemu.h"
+> >> >  #include "target/riscv/cpu.h"
+> >> >  #include "hw/riscv/sifive_test.h"
+> >> >
+> >> > @@ -40,6 +41,9 @@ static void sifive_test_write(void *opaque, hwaddr addr,
+> >> >              exit(code);
+> >> >          case FINISHER_PASS:
+> >> >              exit(0);
+> >> > +        case FINISHER_RESET:
+> >> > +            qemu_system_reset_request(SHUTDOWN_CAUSE_GUEST_RESET);
+> >> > +            return;
+> >> >          default:
+> >> >              break;
+> >> >          }
+> >> > diff --git a/include/hw/riscv/sifive_test.h b/include/hw/riscv/sifive_test.h
+> >> > index 71d4c9f..c186a31 100644
+> >> > --- a/include/hw/riscv/sifive_test.h
+> >> > +++ b/include/hw/riscv/sifive_test.h
+> >> > @@ -34,7 +34,8 @@ typedef struct SiFiveTestState {
+> >> >
+> >> >  enum {
+> >> >      FINISHER_FAIL = 0x3333,
+> >> > -    FINISHER_PASS = 0x5555
+> >> > +    FINISHER_PASS = 0x5555,
+> >> > +    FINISHER_RESET = 0x7777
+> >>
+> >> Do you mind sharing where you got this value from? I can't find
+> >> details on this device in the SiFive manuals.
+> >>
+> >
+> > I don't think this is a device that actually exists on SiFive's
+> > chipset. It's hypothetical.
 >
-> I don't think this is a device that actually exists on SiFive's
-> chipset. It's hypothetical.
+> The device actually does exist in the hardware, but that's just an
+> implementation quirk.  Essentially what's going on here is that the RTL
+> contains this device, which has a register and then a behavioral verilog block
+> that causes simulations to terminate.  This is how we exit from tests in RTL
+> simulation, and we've just gone ahead and implemented the same device in QEMU
+> in order to make it easy to have compatibility with those bare-metal tests.
+> Due to how our design flow is set up we end up with exactly the same block in
+> the ASIC.  The register is still there, but the behavioral code to exit
+> simulations doesn't do anything so it's essentially just a useless device.
+> Since it's useless we don't bother writing it up in the ASIC documentation, but
+> it should be in the RTL documentation.
+>
+> I'm not opposed to extending the interface in the suggested fashion, but I
+> wanted to check with the hardware team first to see if they're doing anything
+> with the other numbers.  I'm out of the office (and somewhat backed up on code
+> review) until July, so it might take a bit to dig through this.
 
-The device actually does exist in the hardware, but that's just an
-implementation quirk.  Essentially what's going on here is that the RTL
-contains this device, which has a register and then a behavioral verilog block
-that causes simulations to terminate.  This is how we exit from tests in RTL
-simulation, and we've just gone ahead and implemented the same device in QEMU
-in order to make it easy to have compatibility with those bare-metal tests.
-Due to how our design flow is set up we end up with exactly the same block in
-the ASIC.  The register is still there, but the behavioral code to exit
-simulations doesn't do anything so it's essentially just a useless device.
-Since it's useless we don't bother writing it up in the ASIC documentation, but
-it should be in the RTL documentation.
+Thanks for the clarification. The main reason of adding this
+functionality is to provide software a way of rebooting the whole
+system. Please provide update after you consult SiFive hardware guys
+:)
 
-I'm not opposed to extending the interface in the suggested fashion, but I
-wanted to check with the hardware team first to see if they're doing anything
-with the other numbers.  I'm out of the office (and somewhat backed up on code
-review) until July, so it might take a bit to dig through this.
+Regards,
+Bin
 
