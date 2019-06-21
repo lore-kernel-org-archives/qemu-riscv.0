@@ -1,68 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1he22Y-0002Wb-2h
-	for mharc-qemu-riscv@gnu.org; Thu, 20 Jun 2019 14:44:06 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:48719)
+	id 1he9cg-0002sM-Ms
+	for mharc-qemu-riscv@gnu.org; Thu, 20 Jun 2019 22:49:56 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59564)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <david.abdurachmanov@gmail.com>) id 1he22U-0002Tq-R2
- for qemu-riscv@nongnu.org; Thu, 20 Jun 2019 14:44:03 -0400
+ (envelope-from <palmer@dabbelt.com>) id 1he9cd-0002qw-Cp
+ for qemu-riscv@nongnu.org; Thu, 20 Jun 2019 22:49:52 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <david.abdurachmanov@gmail.com>) id 1he22S-0006g1-FP
- for qemu-riscv@nongnu.org; Thu, 20 Jun 2019 14:44:02 -0400
-Received: from mail-wm1-x342.google.com ([2a00:1450:4864:20::342]:37897)
+ (envelope-from <palmer@dabbelt.com>) id 1he9cc-0007PG-0y
+ for qemu-riscv@nongnu.org; Thu, 20 Jun 2019 22:49:51 -0400
+Received: from mail-pl1-f195.google.com ([209.85.214.195]:43345)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <david.abdurachmanov@gmail.com>)
- id 1he22R-0006Ya-12; Thu, 20 Jun 2019 14:44:00 -0400
-Received: by mail-wm1-x342.google.com with SMTP id s15so4132351wmj.3;
- Thu, 20 Jun 2019 11:43:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=4LHMsPVDcn9PlAIhAnE2zQdJYzMjOMz4tYmhiXFGkXU=;
- b=DIEa/OcKePFVd0woY+rfgOf+DVEAU02v/1ofyB8ArOPL2tuoI7qBoWvDFGW/T7uR5C
- qf/GiPopO+HFpxduf2zY0O1wofg2/Hlr1GnGwE7iJRNOfJcvLP9mmbSyg9lxGeRkeSkw
- qAiLipIBAnX6nE/UlMg+zPjy5X92l8hKfVbN2YDeycADI4o3xPeiRQAssBvC3ip6hgff
- amYh7LYAGwct5ZSYKtTvuUtZWUFutSRwkQhEZjMS320rvIMzfGxg04waE6wmvuZAUTnr
- YCiNJZNG3rxMxCfqUBZCyKakA5fvjbhqp741gKmz1V8695fbMSr5qzc1ezHaBdPc4OsJ
- Ntnw==
+ (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1he9ca-0007K5-VD
+ for qemu-riscv@nongnu.org; Thu, 20 Jun 2019 22:49:49 -0400
+Received: by mail-pl1-f195.google.com with SMTP id cl9so2220652plb.10
+ for <qemu-riscv@nongnu.org>; Thu, 20 Jun 2019 19:49:46 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=4LHMsPVDcn9PlAIhAnE2zQdJYzMjOMz4tYmhiXFGkXU=;
- b=M8Fyik/Qc3kERXfXRwAEYrD1kyUw/McnxJMM6DnTwbI4jMQzI18YEuo+FQaAV5dHTD
- 1OfuzOEbbnxNGLCVNPJgnkZ62hRrCKb7UXq3Xx4bWiDLvQC+DBAMuM14dML7mQS//uuW
- QS1gorFX/1KQzfKQcs0Bu7QeIxRhG8BBon6MIZqnUVj3xgKl8ok7xqLhdJZrUcUfYFse
- LKG2Ibge0dCKHTR3WEokk8R/FndYRv3BFgqz7XsigVjgxJOWDl8eoxlMMdHhsxcpqFZh
- aPeEGRyQfP3qvRpHarmGV8KK7lP4NfT9+WmRUaOnwrIywOGX8VkoS6rdaZlcQkCVFND9
- fxbg==
-X-Gm-Message-State: APjAAAW2ruWbRQ/HYxfESkW08R/gAUqw5KFuqXN72oR/2klCPCgYxuUn
- oSHT0j605f7HaKLWCXScQTMzf/ZTjzeGssFzb4o=
-X-Google-Smtp-Source: APXvYqz5RaK0zsv/ikbd+49AyZojYpd17FQZ7/cyo6rHKai9DlU1fLYhT64Uf2moixj9RkBTSRhJvCIvvTlN7w7s/QI=
-X-Received: by 2002:a7b:c8d4:: with SMTP id f20mr682472wml.90.1561056227519;
- Thu, 20 Jun 2019 11:43:47 -0700 (PDT)
-MIME-Version: 1.0
-References: <cover.1560904640.git.alistair.francis@wdc.com>
- <CAEUhbmViJpKtiNXm7CYdF7SPRkOPkvpXJ5+We2m9tZSK_BWi-g@mail.gmail.com>
- <CAKmqyKM4UU+CPKu07AK65bNofbbxxaRkSACqoV_vfFEaH-195A@mail.gmail.com>
- <CAEUhbmUwAVLXY9SSoryWBDeNL8gUfBCE+xweSSmuE9KwzWeX=w@mail.gmail.com>
- <CAKmqyKMmm-38DijX_wL=pAbvxzLQ+KSOtd1xg_GrT4Az70GKsw@mail.gmail.com>
- <11f4e4ff6037427f52824ba586f8a330c12d8dfd.camel@redhat.com>
- <CAKmqyKOh3J07yg3dbaNcOaSzfbDZJJ-kjN3pBh+KqAKq05hzTA@mail.gmail.com>
-In-Reply-To: <CAKmqyKOh3J07yg3dbaNcOaSzfbDZJJ-kjN3pBh+KqAKq05hzTA@mail.gmail.com>
-From: David Abdurachmanov <david.abdurachmanov@gmail.com>
-Date: Thu, 20 Jun 2019 21:43:36 +0300
-Message-ID: <CAEn-LTo_e-Owk3hKGGsfSDkWLVEK2reO3ZU=y_hNDOtYVKgusw@mail.gmail.com>
-To: Alistair Francis <alistair23@gmail.com>
-Cc: Andrea Bolognani <abologna@redhat.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bmeng.cn@gmail.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Palmer Dabbelt <palmer@sifive.com>
-Content-Type: text/plain; charset="UTF-8"
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2a00:1450:4864:20::342
-Subject: Re: [Qemu-riscv] [Qemu-devel] [RFC v1 0/5] RISC-V: Add firmware
- loading support and default
+ h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
+ :mime-version:content-transfer-encoding;
+ bh=aw5wQUD3VPHO+OMY2qMWNTo++9Jftg7mvus/qfGsyqE=;
+ b=e9kvS06CCWw/bX9gC4yGtPhCvflRJ2IpT3Ghw2oUskP8Q91NK+EYinhbZ/stMn+35J
+ gK9G/+BLpO5mIC8Zgkv6QBNzqgYr6siWU6wTWMLaYv0IvWnWfJHki7Iy/FT6yLAeQs+w
+ OF1L2h85SjqO09mbCQ6lw2TyXbERwSXokyD4JyZmOSvVrXUBExFYsJ1btPHB+ojhJtoC
+ BJSFGoODKw7MmxXZS4ehST0w89avU2/P5ayho1lPi1NWpOoALCF/XHTKTs3uao9ngTu+
+ YzNiBwNfwM0jTMgL+yaKRtX3f1ah5FKA3RW1bEQVqGVVLRhnul6Bc8UJJvF7rvVbwnHF
+ Pcyw==
+X-Gm-Message-State: APjAAAWBhwwjKVJy6iAhsydEC9Jw9aUlpnNydYvRprRy9KAgmf4XYNsj
+ Cfy1O3SP/kuGkkNosBDH7CXrfg==
+X-Google-Smtp-Source: APXvYqyfTMyEBgN9jjzkVHj92pAld7l8OPxCMiJDL7IwcJepCj6g1F4eYyELMa6BA8U7TNxYwl0QEQ==
+X-Received: by 2002:a17:902:8f87:: with SMTP id
+ z7mr100620972plo.65.1561085385651; 
+ Thu, 20 Jun 2019 19:49:45 -0700 (PDT)
+Received: from localhost (amx-tls3.starhub.net.sg. [203.116.164.13])
+ by smtp.gmail.com with ESMTPSA id h21sm863887pgg.75.2019.06.20.19.49.43
+ (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+ Thu, 20 Jun 2019 19:49:44 -0700 (PDT)
+Date: Thu, 20 Jun 2019 19:49:44 -0700 (PDT)
+X-Google-Original-Date: Thu, 20 Jun 2019 19:41:46 PDT (-0700)
+In-Reply-To: <CAKmqyKPRWASwUPQUROPWyrNC8gXTnizXTaXYdpbEAmkfjOZo1g@mail.gmail.com>
+CC: Alistair Francis <Alistair.Francis@wdc.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+From: Palmer Dabbelt <palmer@sifive.com>
+To: alistair23@gmail.com
+Message-ID: <mhng-2816be05-3e0d-4cb6-a39e-082b071f8ba2@palmer-si-x1e>
+Mime-Version: 1.0 (MHng)
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+ [fuzzy]
+X-Received-From: 209.85.214.195
+Subject: Re: [Qemu-riscv] [PATCH v1 0/9] Update the RISC-V specification
+ versions
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -74,57 +62,82 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Jun 2019 18:44:04 -0000
+X-List-Received-Date: Fri, 21 Jun 2019 02:49:53 -0000
 
-On Thu, Jun 20, 2019 at 9:18 PM Alistair Francis <alistair23@gmail.com> wrote:
+On Wed, 19 Jun 2019 07:19:38 PDT (-0700), alistair23@gmail.com wrote:
+> On Wed, Jun 19, 2019 at 3:58 AM Palmer Dabbelt <palmer@sifive.com> wrote:
+>>
+>> On Mon, 17 Jun 2019 18:31:00 PDT (-0700), Alistair Francis wrote:
+>> > Based-on: <cover.1555726824.git.alistair.francis@wdc.com>
+>> >
+>> > Now that the RISC-V spec has started to be ratified let's update our
+>> > QEMU implementation. There are a few things going on here:
+>> >  - Add priv version 1.11.0 to QEMU
+>> >     - This is the ratified version of the Privledge spec
+>> >     - There are almost no changes to 1.10
+>> >  - Mark the 1.09.1 privledge spec as depreated
+>> >      - Let's aim to remove it in two releases
+>> >  - Set priv version 1.11.0 as the default
+>> >  - Remove the user_spec version
+>> >      - This doesn't really mean anything so let's remove it
+>> >  - Add support for the "Counters" extension
+>> >  - Add command line options for Zifencei and Zicsr
+>>
+>> Thanks!  I'll look at the code, but I've currently got this queued up behind
+>> your hypervisor patches so it might take a bit.  LMK if you want me to invert
+>> the priority on these.  I'll probably be buried until the start of July.
 >
-> On Thu, Jun 20, 2019 at 1:16 AM Andrea Bolognani <abologna@redhat.com> wrote:
-> >
-> > On Wed, 2019-06-19 at 11:23 -0700, Alistair Francis wrote:
-> > > On Wed, Jun 19, 2019 at 7:42 AM Bin Meng <bmeng.cn@gmail.com> wrote:
-> > > > On Wed, Jun 19, 2019 at 10:30 PM Alistair Francis <alistair23@gmail.com> wrote:
-> > > > > On Wed, Jun 19, 2019 at 7:26 AM Bin Meng <bmeng.cn@gmail.com> wrote:
-> > > > > > >  pc-bios/opensbi-riscv32-fw_jump.elf | Bin 0 -> 197988 bytes
-> > > > > > >  pc-bios/opensbi-riscv64-fw_jump.elf | Bin 0 -> 200192 bytes
-> > > > > >
-> > > > > > Since we are considering adding "bios" images, I prefer to add the
-> > > > > > pure binary images instead of ELF images here.
-> > > > >
-> > > > > I didn't think about that. Can we just boot them in QEMU like we do
-> > > > > with the ELFs?
-> > > >
-> > > > Yes, use load_image_targphys() instead of load_elf().
-> > >
-> > > Ah, that is obvious. I'll update it to use the bin files then.
-> >
-> > I'm unclear on the advantages of using one format over the other,
->
-> The main one that I see is that everyone else is already using .bin
-> and no one else is using .elf.
->
-> > but one question comes to mind: once this is in, we will probably
-> > want to have OpenSBI packaged separately in distributions, the same
-> > way it already happens for SeaBIOS, SLOF and edk2-based firmwares.
-> >
-> > Will using either of the formats prevent that from happening?
->
-> Both options allow this.
->
-> OE-Core already packages OpenSBI by default, Fedora and Debian are
-> moving to OpenSBI for RISC-V targets as well.
+> Let's move the Hypervisor patches to the back then. There is a new
+> spec version now anyway so I'll have to update them for that.
 
-Fedora uses OpenSBI for the last 2 or 3 months now. I don't plan to update
-BBL builds. OpenSBI packages in Fedora/RISCV isn't finalized, but it does
-ship *.elf and *.bin files.
->
-> Any distro that supports the RISC-V toolchain (which is all
-> upstreamed) can build OpenSBI.
+OK.  Do you want me to just drop them and wait for a v2 / draft 0.4?
+
 >
 > Alistair
 >
-> >
-> > --
-> > Andrea Bolognani / Red Hat / Virtualization
-> >
->
+>>
+>> > We can remove the spec version as it's unused and has never been exposed
+>> > to users. The idea is to match the specs in specifying the version. To
+>> > handle versions in the future we can extend the extension props to
+>> > handle version information.
+>> >
+>> > For example something like this: -cpu rv64,i=2.2,c=2.0,h=0.4,priv_spec=1.11
+>> >
+>> > NOTE: This isn't supported today as we only have one of each version.
+>> >
+>> > This will be a future change if we decide to support multiple versions
+>> > of extensions.
+>> >
+>> > The "priv_spec" string doesn't really match, but I don't have a better
+>> > way to say "Machine ISA" and "Supervisor ISA" which is what is included
+>> > in "priv_spec".
+>> >
+>> > For completeness I have also added the Counters, Zifencei and Zicsr
+>> > extensions.
+>> >
+>> > Everything else seems to match the spec names/style.
+>> >
+>> > Please let me know if I'm missing something. QEMU 4.1 is the first
+>> > release to support the extensions from the command line, so we can
+>> > easily change it until then. After that it'll take more work to change
+>> > the command line interface.
+>> >
+>> > Alistair Francis (9):
+>> >   target/riscv: Restructure deprecatd CPUs
+>> >   target/riscv: Add the privledge spec version 1.11.0
+>> >   target/riscv: Comment in the mcountinhibit CSR
+>> >   target/riscv: Set privledge spec 1.11.0 as default
+>> >   qemu-deprecated.texi: Deprecate the RISC-V privledge spec 1.09.1
+>> >   target/riscv: Require either I or E base extension
+>> >   target/riscv: Remove user version information
+>> >   target/riscv: Add support for disabling/enabling Counters
+>> >   target/riscv: Add Zifencei and Zicsr as command line options
+>> >
+>> >  qemu-deprecated.texi                          |  8 +++
+>> >  target/riscv/cpu.c                            | 72 ++++++++++---------
+>> >  target/riscv/cpu.h                            | 19 ++---
+>> >  target/riscv/cpu_bits.h                       |  1 +
+>> >  target/riscv/csr.c                            | 13 +++-
+>> >  .../riscv/insn_trans/trans_privileged.inc.c   |  2 +-
+>> >  6 files changed, 71 insertions(+), 44 deletions(-)
 
