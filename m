@@ -1,56 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1he9cg-0002sM-Ms
-	for mharc-qemu-riscv@gnu.org; Thu, 20 Jun 2019 22:49:56 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:59564)
+	id 1he9g1-0004Qf-GG
+	for mharc-qemu-riscv@gnu.org; Thu, 20 Jun 2019 22:53:21 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:34301)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <palmer@dabbelt.com>) id 1he9cd-0002qw-Cp
- for qemu-riscv@nongnu.org; Thu, 20 Jun 2019 22:49:52 -0400
+ (envelope-from <palmer@dabbelt.com>) id 1he9fz-0004QP-0j
+ for qemu-riscv@nongnu.org; Thu, 20 Jun 2019 22:53:20 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmer@dabbelt.com>) id 1he9cc-0007PG-0y
- for qemu-riscv@nongnu.org; Thu, 20 Jun 2019 22:49:51 -0400
-Received: from mail-pl1-f195.google.com ([209.85.214.195]:43345)
+ (envelope-from <palmer@dabbelt.com>) id 1he9fx-00035B-Rz
+ for qemu-riscv@nongnu.org; Thu, 20 Jun 2019 22:53:18 -0400
+Received: from mail-pg1-f194.google.com ([209.85.215.194]:43376)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1he9ca-0007K5-VD
- for qemu-riscv@nongnu.org; Thu, 20 Jun 2019 22:49:49 -0400
-Received: by mail-pl1-f195.google.com with SMTP id cl9so2220652plb.10
- for <qemu-riscv@nongnu.org>; Thu, 20 Jun 2019 19:49:46 -0700 (PDT)
+ (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1he9fw-00031z-TY
+ for qemu-riscv@nongnu.org; Thu, 20 Jun 2019 22:53:17 -0400
+Received: by mail-pg1-f194.google.com with SMTP id f25so2589692pgv.10
+ for <qemu-riscv@nongnu.org>; Thu, 20 Jun 2019 19:53:12 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
  :mime-version:content-transfer-encoding;
- bh=aw5wQUD3VPHO+OMY2qMWNTo++9Jftg7mvus/qfGsyqE=;
- b=e9kvS06CCWw/bX9gC4yGtPhCvflRJ2IpT3Ghw2oUskP8Q91NK+EYinhbZ/stMn+35J
- gK9G/+BLpO5mIC8Zgkv6QBNzqgYr6siWU6wTWMLaYv0IvWnWfJHki7Iy/FT6yLAeQs+w
- OF1L2h85SjqO09mbCQ6lw2TyXbERwSXokyD4JyZmOSvVrXUBExFYsJ1btPHB+ojhJtoC
- BJSFGoODKw7MmxXZS4ehST0w89avU2/P5ayho1lPi1NWpOoALCF/XHTKTs3uao9ngTu+
- YzNiBwNfwM0jTMgL+yaKRtX3f1ah5FKA3RW1bEQVqGVVLRhnul6Bc8UJJvF7rvVbwnHF
- Pcyw==
-X-Gm-Message-State: APjAAAWBhwwjKVJy6iAhsydEC9Jw9aUlpnNydYvRprRy9KAgmf4XYNsj
- Cfy1O3SP/kuGkkNosBDH7CXrfg==
-X-Google-Smtp-Source: APXvYqyfTMyEBgN9jjzkVHj92pAld7l8OPxCMiJDL7IwcJepCj6g1F4eYyELMa6BA8U7TNxYwl0QEQ==
-X-Received: by 2002:a17:902:8f87:: with SMTP id
- z7mr100620972plo.65.1561085385651; 
- Thu, 20 Jun 2019 19:49:45 -0700 (PDT)
+ bh=1sg7t4xVmFFuHBhmUA6Os6hJRKuxDj/Ex9oY3/bsjjI=;
+ b=dzJ7wc5ZyPMm+jEnzLB5cnqzOfDGdPnHGOdOLCjjv0XA57v2BnfcP3smP1hb07lbxM
+ 8cGGqxmzJ4s5Xu7VyiVK1mmZM3X7VkiMHAve21z/1GdRjLDWOgur/8XDpjCzCdR4xsnY
+ g4ftsyqKLa/nbxp/IxdEWxu0vRlNYA9TKiaRfsc65G5xDu4BNKXWpxXOlkYQIqlfRpkl
+ mgvWsDgvBSoTlSsPkm7F2UjwLgidkTs9dcaKCcRu2XKNmp0ZZsnIPke6AQeRHq0oBZiF
+ A0b6bCqNzCoB+LtbN4NNKBWCHJYJpa9vx1xTawKLOkcX+PVgLTs3UtMZAFMSWvzj2hzD
+ ZUNQ==
+X-Gm-Message-State: APjAAAXSB0RkPod7qb0V1KNbG5KGNOeX91mCfgTE3HXQlI5ZAR0wVK+E
+ O+4LwnofqF4/pqYQcMrGAGxJWA==
+X-Google-Smtp-Source: APXvYqz8z/bib8XbyJo4M6R/NWdCl4LDm2nD/3prLsl2GYZOGLt6dMeRHUliLKil+31uatJubdXvTQ==
+X-Received: by 2002:a17:90a:2506:: with SMTP id
+ j6mr3386592pje.129.1561085591310; 
+ Thu, 20 Jun 2019 19:53:11 -0700 (PDT)
 Received: from localhost (amx-tls3.starhub.net.sg. [203.116.164.13])
- by smtp.gmail.com with ESMTPSA id h21sm863887pgg.75.2019.06.20.19.49.43
+ by smtp.gmail.com with ESMTPSA id d19sm880546pjs.22.2019.06.20.19.53.09
  (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
- Thu, 20 Jun 2019 19:49:44 -0700 (PDT)
-Date: Thu, 20 Jun 2019 19:49:44 -0700 (PDT)
-X-Google-Original-Date: Thu, 20 Jun 2019 19:41:46 PDT (-0700)
-In-Reply-To: <CAKmqyKPRWASwUPQUROPWyrNC8gXTnizXTaXYdpbEAmkfjOZo1g@mail.gmail.com>
-CC: Alistair Francis <Alistair.Francis@wdc.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
+ Thu, 20 Jun 2019 19:53:10 -0700 (PDT)
+Date: Thu, 20 Jun 2019 19:53:10 -0700 (PDT)
+X-Google-Original-Date: Thu, 20 Jun 2019 19:39:53 PDT (-0700)
+In-Reply-To: <CAEUhbmVf8jTtsZD-+2jcGah-kS+bPM6xdkSML2Qq_NTmeoU3zA@mail.gmail.com>
+CC: alistair23@gmail.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
+ Alistair Francis <Alistair.Francis@wdc.com>
 From: Palmer Dabbelt <palmer@sifive.com>
-To: alistair23@gmail.com
-Message-ID: <mhng-2816be05-3e0d-4cb6-a39e-082b071f8ba2@palmer-si-x1e>
+To: bmeng.cn@gmail.com
+Message-ID: <mhng-b2b4a62d-2575-4933-a1c9-dea2c5881abc@palmer-si-x1e>
 Mime-Version: 1.0 (MHng)
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
  [fuzzy]
-X-Received-From: 209.85.214.195
-Subject: Re: [Qemu-riscv] [PATCH v1 0/9] Update the RISC-V specification
- versions
+X-Received-From: 209.85.215.194
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH] riscv: sifive_test: Add reset
+ functionality
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -62,82 +62,80 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Jun 2019 02:49:53 -0000
+X-List-Received-Date: Fri, 21 Jun 2019 02:53:20 -0000
 
-On Wed, 19 Jun 2019 07:19:38 PDT (-0700), alistair23@gmail.com wrote:
-> On Wed, Jun 19, 2019 at 3:58 AM Palmer Dabbelt <palmer@sifive.com> wrote:
->>
->> On Mon, 17 Jun 2019 18:31:00 PDT (-0700), Alistair Francis wrote:
->> > Based-on: <cover.1555726824.git.alistair.francis@wdc.com>
->> >
->> > Now that the RISC-V spec has started to be ratified let's update our
->> > QEMU implementation. There are a few things going on here:
->> >  - Add priv version 1.11.0 to QEMU
->> >     - This is the ratified version of the Privledge spec
->> >     - There are almost no changes to 1.10
->> >  - Mark the 1.09.1 privledge spec as depreated
->> >      - Let's aim to remove it in two releases
->> >  - Set priv version 1.11.0 as the default
->> >  - Remove the user_spec version
->> >      - This doesn't really mean anything so let's remove it
->> >  - Add support for the "Counters" extension
->> >  - Add command line options for Zifencei and Zicsr
->>
->> Thanks!  I'll look at the code, but I've currently got this queued up behind
->> your hypervisor patches so it might take a bit.  LMK if you want me to invert
->> the priority on these.  I'll probably be buried until the start of July.
+On Wed, 19 Jun 2019 06:42:21 PDT (-0700), bmeng.cn@gmail.com wrote:
+> Hi Alistair,
 >
-> Let's move the Hypervisor patches to the back then. There is a new
-> spec version now anyway so I'll have to update them for that.
+> On Tue, Jun 18, 2019 at 1:15 AM Alistair Francis <alistair23@gmail.com> wrote:
+>>
+>> On Fri, Jun 14, 2019 at 8:30 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+>> >
+>> > This adds a reset opcode for sifive_test device to trigger a system
+>> > reset for testing purpose.
+>> >
+>> > Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
+>> > ---
+>> >
+>> >  hw/riscv/sifive_test.c         | 4 ++++
+>> >  include/hw/riscv/sifive_test.h | 3 ++-
+>> >  2 files changed, 6 insertions(+), 1 deletion(-)
+>> >
+>> > diff --git a/hw/riscv/sifive_test.c b/hw/riscv/sifive_test.c
+>> > index 24a04d7..cd86831 100644
+>> > --- a/hw/riscv/sifive_test.c
+>> > +++ b/hw/riscv/sifive_test.c
+>> > @@ -21,6 +21,7 @@
+>> >  #include "qemu/osdep.h"
+>> >  #include "hw/sysbus.h"
+>> >  #include "qemu/module.h"
+>> > +#include "sysemu/sysemu.h"
+>> >  #include "target/riscv/cpu.h"
+>> >  #include "hw/riscv/sifive_test.h"
+>> >
+>> > @@ -40,6 +41,9 @@ static void sifive_test_write(void *opaque, hwaddr addr,
+>> >              exit(code);
+>> >          case FINISHER_PASS:
+>> >              exit(0);
+>> > +        case FINISHER_RESET:
+>> > +            qemu_system_reset_request(SHUTDOWN_CAUSE_GUEST_RESET);
+>> > +            return;
+>> >          default:
+>> >              break;
+>> >          }
+>> > diff --git a/include/hw/riscv/sifive_test.h b/include/hw/riscv/sifive_test.h
+>> > index 71d4c9f..c186a31 100644
+>> > --- a/include/hw/riscv/sifive_test.h
+>> > +++ b/include/hw/riscv/sifive_test.h
+>> > @@ -34,7 +34,8 @@ typedef struct SiFiveTestState {
+>> >
+>> >  enum {
+>> >      FINISHER_FAIL = 0x3333,
+>> > -    FINISHER_PASS = 0x5555
+>> > +    FINISHER_PASS = 0x5555,
+>> > +    FINISHER_RESET = 0x7777
+>>
+>> Do you mind sharing where you got this value from? I can't find
+>> details on this device in the SiFive manuals.
+>>
+>
+> I don't think this is a device that actually exists on SiFive's
+> chipset. It's hypothetical.
 
-OK.  Do you want me to just drop them and wait for a v2 / draft 0.4?
+The device actually does exist in the hardware, but that's just an
+implementation quirk.  Essentially what's going on here is that the RTL
+contains this device, which has a register and then a behavioral verilog block
+that causes simulations to terminate.  This is how we exit from tests in RTL
+simulation, and we've just gone ahead and implemented the same device in QEMU
+in order to make it easy to have compatibility with those bare-metal tests.
+Due to how our design flow is set up we end up with exactly the same block in
+the ASIC.  The register is still there, but the behavioral code to exit
+simulations doesn't do anything so it's essentially just a useless device.
+Since it's useless we don't bother writing it up in the ASIC documentation, but
+it should be in the RTL documentation.
 
->
-> Alistair
->
->>
->> > We can remove the spec version as it's unused and has never been exposed
->> > to users. The idea is to match the specs in specifying the version. To
->> > handle versions in the future we can extend the extension props to
->> > handle version information.
->> >
->> > For example something like this: -cpu rv64,i=2.2,c=2.0,h=0.4,priv_spec=1.11
->> >
->> > NOTE: This isn't supported today as we only have one of each version.
->> >
->> > This will be a future change if we decide to support multiple versions
->> > of extensions.
->> >
->> > The "priv_spec" string doesn't really match, but I don't have a better
->> > way to say "Machine ISA" and "Supervisor ISA" which is what is included
->> > in "priv_spec".
->> >
->> > For completeness I have also added the Counters, Zifencei and Zicsr
->> > extensions.
->> >
->> > Everything else seems to match the spec names/style.
->> >
->> > Please let me know if I'm missing something. QEMU 4.1 is the first
->> > release to support the extensions from the command line, so we can
->> > easily change it until then. After that it'll take more work to change
->> > the command line interface.
->> >
->> > Alistair Francis (9):
->> >   target/riscv: Restructure deprecatd CPUs
->> >   target/riscv: Add the privledge spec version 1.11.0
->> >   target/riscv: Comment in the mcountinhibit CSR
->> >   target/riscv: Set privledge spec 1.11.0 as default
->> >   qemu-deprecated.texi: Deprecate the RISC-V privledge spec 1.09.1
->> >   target/riscv: Require either I or E base extension
->> >   target/riscv: Remove user version information
->> >   target/riscv: Add support for disabling/enabling Counters
->> >   target/riscv: Add Zifencei and Zicsr as command line options
->> >
->> >  qemu-deprecated.texi                          |  8 +++
->> >  target/riscv/cpu.c                            | 72 ++++++++++---------
->> >  target/riscv/cpu.h                            | 19 ++---
->> >  target/riscv/cpu_bits.h                       |  1 +
->> >  target/riscv/csr.c                            | 13 +++-
->> >  .../riscv/insn_trans/trans_privileged.inc.c   |  2 +-
->> >  6 files changed, 71 insertions(+), 44 deletions(-)
+I'm not opposed to extending the interface in the suggested fashion, but I
+wanted to check with the hardware team first to see if they're doing anything
+with the other numbers.  I'm out of the office (and somewhat backed up on code
+review) until July, so it might take a bit to dig through this.
 
