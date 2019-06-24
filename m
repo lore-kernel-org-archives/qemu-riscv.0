@@ -1,42 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hfTPj-0007jK-IG
-	for mharc-qemu-riscv@gnu.org; Mon, 24 Jun 2019 14:09:59 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:57345)
+	id 1hfVO4-0007sd-Tj
+	for mharc-qemu-riscv@gnu.org; Mon, 24 Jun 2019 16:16:26 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59842)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <joel@sing.id.au>) id 1hfTPg-0007hF-0o
- for qemu-riscv@nongnu.org; Mon, 24 Jun 2019 14:09:57 -0400
+ (envelope-from <alistair23@gmail.com>) id 1hfVO0-0007qW-1E
+ for qemu-riscv@nongnu.org; Mon, 24 Jun 2019 16:16:22 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <joel@sing.id.au>) id 1hfTPe-0002EM-PT
- for qemu-riscv@nongnu.org; Mon, 24 Jun 2019 14:09:55 -0400
-Received: from stingray.exigere.com.au ([162.217.113.74]:23701)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <joel@sing.id.au>)
- id 1hfTPb-0000UC-AS; Mon, 24 Jun 2019 14:09:52 -0400
-Received: from hippo.sing.id.au (exi2311632.lnk.telstra.net [144.139.233.124])
- by stingray.exigere.com.au (OpenSMTPD) with ESMTPSA id a7f122bb
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256:NO); 
- Tue, 25 Jun 2019 04:34:49 +1000 (AEST)
-Received: from localhost (hippo.sing.id.au [local])
- by hippo.sing.id.au (OpenSMTPD) with ESMTPA id c019513a;
- Tue, 25 Jun 2019 04:08:38 +1000 (AEST)
-Date: Tue, 25 Jun 2019 04:08:38 +1000
-From: Joel Sing <joel@sing.id.au>
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, me@carlosedp.com,
- palmer@sifive.com, Alistair.Francis@wdc.com, marco@decred.org
-Message-ID: <20190624180837.GM61734@hippo.sing.id.au>
-References: <20190616191900.GH61734@hippo.sing.id.au>
- <41ef5fbf-f438-e60a-2fba-a72e3ad422f9@linaro.org>
+ (envelope-from <alistair23@gmail.com>) id 1hfVNy-000226-PW
+ for qemu-riscv@nongnu.org; Mon, 24 Jun 2019 16:16:19 -0400
+Received: from mail-lj1-x242.google.com ([2a00:1450:4864:20::242]:40841)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <alistair23@gmail.com>)
+ id 1hfVNs-0001qY-Ac; Mon, 24 Jun 2019 16:16:12 -0400
+Received: by mail-lj1-x242.google.com with SMTP id a21so13872201ljh.7;
+ Mon, 24 Jun 2019 13:16:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=5PQ5wmDY5RAVnyBwr117W10VjHZMVuGv+wq1nmeJyqo=;
+ b=HsNBigXcs+wmP1ZRAr1PBmp8Jk4OY+PHDlxliy6rmsOCp2YOnGsgxe+gaiUEZkVXSU
+ P6CJRJBmBrlHJRYsclJJdolIZ+E8X9EUkgJC1O+UN143meCqMpPiojduBL2W/tpvokJc
+ 0dDpdFWh4HvtrypfJbGifi0fQD1SRnf1BbqA5RlDr4lV+Y6n5bnmO2osiKa/FMAqISkf
+ Fxy1vZB3NrDaDpht6OiavagcRx+EfVLQGm+lxrek20kk/6WgDca4kfMBs1nSjHsR8pBh
+ aQBHMIVYsT7JPovoq7COGEuqzG1wyN2s/O1ZtjFyVfxiQb0p7Po5WwkcmOmRq5iQIXnE
+ gCIg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=5PQ5wmDY5RAVnyBwr117W10VjHZMVuGv+wq1nmeJyqo=;
+ b=XFyBGHcwU+HsIp1Iy7eZt3VUWTQduTfKaowwpq3aCGJQqWHrIaMTE5DK4bkkWRKT9c
+ N+O5bQPKqdpHlk0OxGNbyd61qD8hdRIXdNFKMWSytFVo5pOS6mteDOHkEFgptn/r3RZK
+ J7TtVtuIYWOptHU/NndVrIH1U25EOTqy0BPJRSAgNBigYVLRobev0tKIV0CkmnoySLt6
+ 2sAZBAFuG6g06JDl6ONXXMMlkT9LZo9avCQ2UcrMRMqgRz6j+amEq9XUo+izoVIUAMrp
+ LAht7vrqLyc+LoXzexxnaQofEKIbqqzx20fwbneLwRwk+RZz9TWGxOvlgSLqEQJspiTq
+ WCBw==
+X-Gm-Message-State: APjAAAWI5HCiVY77On7ak5bQThgMgeBOpQHPz/VwKOu5bNZLdS59nWaW
+ knatzpCcqPflKWyOHQlEEe/a7UFq1jfSbw19KXc=
+X-Google-Smtp-Source: APXvYqxLleBKFFqbRU3rF6kr4AlVZ3YJcalXYks+89F4X3sRDsgvL2kxKL3EdpSxQXJI7tz8uT30cyvSxuKxgLPC8z0=
+X-Received: by 2002:a2e:9758:: with SMTP id f24mr30378518ljj.58.1561407370029; 
+ Mon, 24 Jun 2019 13:16:10 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <41ef5fbf-f438-e60a-2fba-a72e3ad422f9@linaro.org>
-User-Agent: Mutt/1.10.1 (2018-07-13)
+References: <cover.1560821342.git.alistair.francis@wdc.com>
+ <mhng-1bb3bc4e-1846-4e2a-ab19-ab4436041f63@palmer-si-x1e>
+In-Reply-To: <mhng-1bb3bc4e-1846-4e2a-ab19-ab4436041f63@palmer-si-x1e>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Mon, 24 Jun 2019 13:13:15 -0700
+Message-ID: <CAKmqyKN01ZWxSZH+VLa1QTXuwiSUZ9mycY9iOMZm7=b1E6xDOQ@mail.gmail.com>
+To: Palmer Dabbelt <palmer@sifive.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 162.217.113.74
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH] atomic failures on
- qemu-system-riscv64
+X-Received-From: 2a00:1450:4864:20::242
+Subject: Re: [Qemu-riscv] [PATCH v1 0/9] Update the RISC-V specification
+ versions
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -48,109 +67,80 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Jun 2019 18:09:57 -0000
+X-List-Received-Date: Mon, 24 Jun 2019 20:16:22 -0000
 
-On 19-06-17 16:52:44, Richard Henderson wrote:
-> On 6/16/19 12:19 PM, Joel Sing wrote:
-> > +    /*
-> > +     * Clear the load reservation, since an SC must fail if there is
-> > +     * an SC to any address, in between an LR and SC pair.
-> > +     */
-> > +    tcg_gen_movi_tl(load_res, 0);
-> > +
-> >      gen_set_label(l2);
-> 
-> This clear needs to be moved down below label l2.
-> Otherwise, with lr / sc / sc, the second sc could succeed in error.
+On Mon, Jun 24, 2019 at 2:33 AM Palmer Dabbelt <palmer@sifive.com> wrote:
+>
+> On Mon, 17 Jun 2019 18:31:00 PDT (-0700), Alistair Francis wrote:
+> > Based-on: <cover.1555726824.git.alistair.francis@wdc.com>
+> >
+> > Now that the RISC-V spec has started to be ratified let's update our
+> > QEMU implementation. There are a few things going on here:
+> >  - Add priv version 1.11.0 to QEMU
+> >     - This is the ratified version of the Privledge spec
+> >     - There are almost no changes to 1.10
+> >  - Mark the 1.09.1 privledge spec as depreated
+> >      - Let's aim to remove it in two releases
+> >  - Set priv version 1.11.0 as the default
+> >  - Remove the user_spec version
+> >      - This doesn't really mean anything so let's remove it
+> >  - Add support for the "Counters" extension
+> >  - Add command line options for Zifencei and Zicsr
+> >
+> > We can remove the spec version as it's unused and has never been exposed
+> > to users. The idea is to match the specs in specifying the version. To
+> > handle versions in the future we can extend the extension props to
+> > handle version information.
+> >
+> > For example something like this: -cpu rv64,i=2.2,c=2.0,h=0.4,priv_spec=1.11
+> >
+> > NOTE: This isn't supported today as we only have one of each version.
+> >
+> > This will be a future change if we decide to support multiple versions
+> > of extensions.
+> >
+> > The "priv_spec" string doesn't really match, but I don't have a better
+> > way to say "Machine ISA" and "Supervisor ISA" which is what is included
+> > in "priv_spec".
+> >
+> > For completeness I have also added the Counters, Zifencei and Zicsr
+> > extensions.
+> >
+> > Everything else seems to match the spec names/style.
+> >
+> > Please let me know if I'm missing something. QEMU 4.1 is the first
+> > release to support the extensions from the command line, so we can
+> > easily change it until then. After that it'll take more work to change
+> > the command line interface.
+> >
+> > Alistair Francis (9):
+> >   target/riscv: Restructure deprecatd CPUs
+> >   target/riscv: Add the privledge spec version 1.11.0
+> >   target/riscv: Comment in the mcountinhibit CSR
+> >   target/riscv: Set privledge spec 1.11.0 as default
+> >   qemu-deprecated.texi: Deprecate the RISC-V privledge spec 1.09.1
+> >   target/riscv: Require either I or E base extension
+> >   target/riscv: Remove user version information
+> >   target/riscv: Add support for disabling/enabling Counters
+> >   target/riscv: Add Zifencei and Zicsr as command line options
+> >
+> >  qemu-deprecated.texi                          |  8 +++
+> >  target/riscv/cpu.c                            | 72 ++++++++++---------
+> >  target/riscv/cpu.h                            | 19 ++---
+> >  target/riscv/cpu_bits.h                       |  1 +
+> >  target/riscv/csr.c                            | 13 +++-
+> >  .../riscv/insn_trans/trans_privileged.inc.c   |  2 +-
+> >  6 files changed, 71 insertions(+), 44 deletions(-)
+>
+> Aside from the comments on 3 and 9
+>
+> Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
+>
+> I've got these, along with my proposed modifications, queued up.  LMK if that's
+> a problem, particularly the two-patch replacement for 9 needs a review as it's
+> entirely new code.
 
-Indeed, thanks.
+I haven't looked at the new code yet, but it all passes my tests so LGTM.
 
-> FWIW, other targets have used -1 as the "invalid" load reservation, since the
-> architecture does not require address 0 to be unmapped.  This should be quite
-> visible in M-mode with paging disabled and ram at offset 0.  Often, other
-> targets require alignment for the lr/sc address, though I don't see that for riscv.
-
-I've switched to -1 as suggested. Regarding the alignment for reservations, the
-specification does require this, although I do not recall seeing any enforcement
-of this by qemu itself.
-
-New diff follows.
-
-From 8ef31a2ce8ef1cbeee92995a0b2994f480e9bb6d Mon Sep 17 00:00:00 2001
-From: Joel Sing <joel@sing.id.au>
-Date: Tue, 25 Jun 2019 02:44:24 +1000
-Subject: [PATCH] Clear load reservations on qemu riscv target
-
-This prevents a load reservation from being placed in one context/process,
-then being used in another, resulting in an SC succeeding incorrectly and
-breaking atomics.
-
-Signed-off-by: Joel Sing <joel@sing.id.au>
----
- target/riscv/cpu.c                      | 1 +
- target/riscv/cpu_helper.c               | 9 +++++++++
- target/riscv/insn_trans/trans_rva.inc.c | 8 +++++++-
- 3 files changed, 17 insertions(+), 1 deletion(-)
-
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index d61bce6d55..e7c8bf48fc 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -281,6 +281,7 @@ static void riscv_cpu_reset(CPUState *cs)
-     env->pc = env->resetvec;
- #endif
-     cs->exception_index = EXCP_NONE;
-+    env->load_res = -1;
-     set_default_nan_mode(1, &env->fp_status);
- }
- 
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index b17f169681..6a07b12e65 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -113,6 +113,15 @@ void riscv_cpu_set_mode(CPURISCVState *env, target_ulong newpriv)
-     }
-     /* tlb_flush is unnecessary as mode is contained in mmu_idx */
-     env->priv = newpriv;
-+
-+    /* Clear the load reservation - otherwise a reservation placed in one
-+     * context/process can be used by another, resulting in an SC succeeding
-+     * incorrectly. Version 2.2 of the ISA specification explicitly requires
-+     * this behaviour, while later revisions say that the kernel "should" use
-+     * an SC instruction to force the yielding of a load reservation on a
-+     * preemptive context switch. As a result, do both.
-+     */
-+    env->load_res = -1;
- }
- 
- /* get_physical_address - get the physical address for this virtual address
-diff --git a/target/riscv/insn_trans/trans_rva.inc.c b/target/riscv/insn_trans/trans_rva.inc.c
-index f6dbbc065e..fadd88849e 100644
---- a/target/riscv/insn_trans/trans_rva.inc.c
-+++ b/target/riscv/insn_trans/trans_rva.inc.c
-@@ -61,7 +61,7 @@ static inline bool gen_sc(DisasContext *ctx, arg_atomic *a, TCGMemOp mop)
- 
-     gen_set_label(l1);
-     /*
--     * Address comparion failure.  However, we still need to
-+     * Address comparison failure.  However, we still need to
-      * provide the memory barrier implied by AQ/RL.
-      */
-     tcg_gen_mb(TCG_MO_ALL + a->aq * TCG_BAR_LDAQ + a->rl * TCG_BAR_STRL);
-@@ -69,6 +69,12 @@ static inline bool gen_sc(DisasContext *ctx, arg_atomic *a, TCGMemOp mop)
-     gen_set_gpr(a->rd, dat);
- 
-     gen_set_label(l2);
-+    /*
-+     * Clear the load reservation, since an SC must fail if there is
-+     * an SC to any address, in between an LR and SC pair.
-+     */
-+    tcg_gen_movi_tl(load_res, -1);
-+
-     tcg_temp_free(dat);
-     tcg_temp_free(src1);
-     tcg_temp_free(src2);
--- 
-2.21.0
-
+Alistair
 
