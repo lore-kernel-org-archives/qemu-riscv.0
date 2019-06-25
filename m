@@ -1,60 +1,57 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hfiYc-0000Kc-T4
-	for mharc-qemu-riscv@gnu.org; Tue, 25 Jun 2019 06:20:10 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:35094)
+	id 1hfiYe-0000OR-1A
+	for mharc-qemu-riscv@gnu.org; Tue, 25 Jun 2019 06:20:12 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:35125)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <palmer@dabbelt.com>) id 1hfiYZ-0000E2-V6
- for qemu-riscv@nongnu.org; Tue, 25 Jun 2019 06:20:09 -0400
+ (envelope-from <palmer@dabbelt.com>) id 1hfiYc-0000It-80
+ for qemu-riscv@nongnu.org; Tue, 25 Jun 2019 06:20:11 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmer@dabbelt.com>) id 1hfiYY-00030i-GG
- for qemu-riscv@nongnu.org; Tue, 25 Jun 2019 06:20:07 -0400
-Received: from mail-pf1-f195.google.com ([209.85.210.195]:39837)
+ (envelope-from <palmer@dabbelt.com>) id 1hfiYa-00032n-9r
+ for qemu-riscv@nongnu.org; Tue, 25 Jun 2019 06:20:10 -0400
+Received: from mail-pl1-f196.google.com ([209.85.214.196]:44251)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1hfiYY-0002zh-7w
- for qemu-riscv@nongnu.org; Tue, 25 Jun 2019 06:20:06 -0400
-Received: by mail-pf1-f195.google.com with SMTP id j2so9243080pfe.6
- for <qemu-riscv@nongnu.org>; Tue, 25 Jun 2019 03:20:06 -0700 (PDT)
+ (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1hfiYa-00031k-1j
+ for qemu-riscv@nongnu.org; Tue, 25 Jun 2019 06:20:08 -0400
+Received: by mail-pl1-f196.google.com with SMTP id t7so8592585plr.11
+ for <qemu-riscv@nongnu.org>; Tue, 25 Jun 2019 03:20:07 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
  :mime-version:content-transfer-encoding;
- bh=eYufa29gR8Qoq691MeFTHr9ktSdVsXgSvRUvOy0sXpM=;
- b=jfg23ihUU+7p6b0oSirJO+PGTZxbnL4DDP4x+yhBEcyiqXz+VmS1jeZFkPkZoo8xhV
- IPFCZ5kXV05xOVOgfX1TzwIXvYOlMiS3v5pbTvgJtJstiaSIKjbijnhrwaqBclMSb8Rd
- N5LRlDOyIgbZGUF/aNTEaHBh/iwPc0yjUzIgsEXx8aKMgWWArZL0h6dzRI2xgGnZJvxF
- sGL0oC84PoQNPNix/NA0Iq0sYIFOpGtwGSruZ6SYtgXEBvLnFDx8eKZVz2jeleRalwSX
- 2jAbFAO81DC2WThlsxVgVTte3HjarvHAlpCNbOloG4ZhIEg0SGT6nht5+SxnTCpCawnL
- PweQ==
-X-Gm-Message-State: APjAAAXev+GJBkuZfzGDgwY1KuweqynNBFmHJR+lF1xFZGnJVoFU52Ad
- om5G1w4k1pm4DYmriQthNrvqasQ7j4tyJi8A
-X-Google-Smtp-Source: APXvYqyNg+Y5CTHPzBny3L/12ops6+PaQFKzzzwPHDQTZWTYBhXFA5OShJ/UrOo6bLBsTQjNSznQjQ==
-X-Received: by 2002:a17:90a:9a83:: with SMTP id
- e3mr30365096pjp.105.1561458004906; 
- Tue, 25 Jun 2019 03:20:04 -0700 (PDT)
+ bh=hVOzHgObz/WAB1ABY7SiVI5U/KHR8XjQBJa5AUD1T4Y=;
+ b=lX/0KGLzAPnB5TC2maMZrdz9ILPmLG3gWiTPdlPhPLyhf7mXXxrbjq+Ws17cv43szJ
+ pStuvwTNZxzgjS+GytAZh8yKgI0g3h5UloTB9moYv+zdtAShAW8F2UhfSOTyXAzKD1h6
+ y5ytMXH0R7fxrDl9OpjlkUO7hVNg/enn0XRnaDG5n/jMq1LbZ9Nvo07Oi/JYrcOLm4Rp
+ C+iYub0rRVdw9OTjMN3AsCyleShQ+KF7p3ZtDJE8VCd1mwJgKeHaM8UQ5STX+nYYSTS0
+ U3XhRryJx2Pnd9fX5cIcWibziTUN/UAUSbyWpKD0ZW1pBavh6DXNKEkUxZ3nauo3NcMk
+ YYuw==
+X-Gm-Message-State: APjAAAVKKt6ME6W4uegCXzyimzVEZeqL0V50m2toIMRWFUPd2o32J4Da
+ HuZXFUL3BWqqvEv61V40Rn+HZg==
+X-Google-Smtp-Source: APXvYqz8V1r0oOEQKqYQIzbdGpZOU9uM3zP2w9wQjM2BRxIZc9HO+u7rebMKWnjF9uUFlvIFgbqo3g==
+X-Received: by 2002:a17:902:9307:: with SMTP id
+ bc7mr11505212plb.183.1561458006876; 
+ Tue, 25 Jun 2019 03:20:06 -0700 (PDT)
 Received: from localhost (220-132-236-182.HINET-IP.hinet.net.
  [220.132.236.182])
- by smtp.gmail.com with ESMTPSA id i126sm18198466pfb.32.2019.06.25.03.20.04
+ by smtp.gmail.com with ESMTPSA id c9sm14972729pfn.3.2019.06.25.03.20.06
  (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
- Tue, 25 Jun 2019 03:20:04 -0700 (PDT)
-Date: Tue, 25 Jun 2019 03:20:04 -0700 (PDT)
-X-Google-Original-Date: Tue, 25 Jun 2019 03:09:31 PDT (-0700)
-In-Reply-To: <20190624234144.10768-1-atish.patra@wdc.com>
-CC: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
- Atish Patra <Atish.Patra@wdc.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>,
- Alistair Francis <Alistair.Francis@wdc.com>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, sagark@eecs.berkeley.edu
+ Tue, 25 Jun 2019 03:20:06 -0700 (PDT)
+Date: Tue, 25 Jun 2019 03:20:06 -0700 (PDT)
+X-Google-Original-Date: Tue, 25 Jun 2019 03:15:42 PDT (-0700)
+In-Reply-To: <cover.1561419713.git.alistair.francis@wdc.com>
+CC: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
+ Alistair Francis <Alistair.Francis@wdc.com>, alistair23@gmail.com
 From: Palmer Dabbelt <palmer@sifive.com>
-To: Atish Patra <Atish.Patra@wdc.com>
-Message-ID: <mhng-7c1a8a81-ee0d-4e95-87b9-ef9543ad121c@palmer-si-x1e>
+To: Alistair Francis <Alistair.Francis@wdc.com>
+Message-ID: <mhng-d7c50a12-d355-4c7a-8c97-3952fda6b355@palmer-si-x1e>
 Mime-Version: 1.0 (MHng)
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
  [fuzzy]
-X-Received-From: 209.85.210.195
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v2] riscv: virt: Add
- cpu-topology DT node.
+X-Received-From: 209.85.214.196
+Subject: Re: [Qemu-riscv] [PATCH v2 0/4] Miscellaneous patches from the
+ RISC-V fork
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -66,84 +63,35 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Jun 2019 10:20:09 -0000
+X-List-Received-Date: Tue, 25 Jun 2019 10:20:11 -0000
 
-On Mon, 24 Jun 2019 16:41:44 PDT (-0700), Atish Patra wrote:
-> Currently, there is no cpu topology defined in RISC-V.
-> Define a device tree node that clearly describes the
-> entire topology. This saves the trouble of scanning individual
-> cache to figure out the topology.
+On Mon, 24 Jun 2019 16:42:27 PDT (-0700), Alistair Francis wrote:
+> This should be the last series bringing the patches from the RISC-V fork
+> into mainline QEMU.
 >
-> Here is the linux kernel patch series that enables topology
-> for RISC-V.
+> v2:
+>  - Add Wladimir's SOB line, after talking to them
+>  - Allow c.andi to have a 0 immediate
 >
-> http://lists.infradead.org/pipermail/linux-riscv/2019-June/005072.html
+> Dayeol Lee (1):
+>   target/riscv: Fix PMP range boundary address bug
 >
-> CPU topology after applying this patch in QEMU & above series in kernel
+> Michael Clark (3):
+>   disas/riscv: Disassemble reserved compressed encodings as illegal
+>   disas/riscv: Fix `rdinstreth` constraint
+>   target/riscv: Implement riscv_cpu_unassigned_access
 >
-> / # cat /sys/devices/system/cpu/cpu2/topology/thread_siblings_list
-> 2
-> / # cat /sys/devices/system/cpu/cpu2/topology/physical_package_id
-> 0
-> / # cat /sys/devices/system/cpu/cpu2/topology/core_siblings_list
-> 0-7
->
-> Signed-off-by: Atish Patra <atish.patra@wdc.com>
-> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+>  disas/riscv.c             | 51 ++++++++++++++++++++++++++-------------
+>  target/riscv/cpu.c        |  1 +
+>  target/riscv/cpu.h        |  2 ++
+>  target/riscv/cpu_helper.c | 16 ++++++++++++
+>  target/riscv/pmp.c        |  2 +-
+>  5 files changed, 54 insertions(+), 18 deletions(-)
 
-Thanks.  This is in the queue for 4.1, which is just pending Alistar's review
-on those two Z patches I reworked.
+Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
 
-> ---
->  hw/riscv/virt.c | 22 ++++++++++++++++++++--
->  1 file changed, 20 insertions(+), 2 deletions(-)
->
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index 84d94d0c42d8..45a1edcd6c4a 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -191,6 +191,7 @@ static void *create_fdt(RISCVVirtState *s, const struct MemmapEntry *memmap,
->
->      for (cpu = s->soc.num_harts - 1; cpu >= 0; cpu--) {
->          int cpu_phandle = phandle++;
-> +        int intc_phandle;
->          nodename = g_strdup_printf("/cpus/cpu@%d", cpu);
->          char *intc = g_strdup_printf("/cpus/cpu@%d/interrupt-controller", cpu);
->          char *isa = riscv_isa_string(&s->soc.harts[cpu]);
-> @@ -203,9 +204,12 @@ static void *create_fdt(RISCVVirtState *s, const struct MemmapEntry *memmap,
->          qemu_fdt_setprop_string(fdt, nodename, "status", "okay");
->          qemu_fdt_setprop_cell(fdt, nodename, "reg", cpu);
->          qemu_fdt_setprop_string(fdt, nodename, "device_type", "cpu");
-> +        qemu_fdt_setprop_cell(fdt, nodename, "phandle", cpu_phandle);
-> +        qemu_fdt_setprop_cell(fdt, nodename, "linux,phandle", cpu_phandle);
-> +        intc_phandle = phandle++;
->          qemu_fdt_add_subnode(fdt, intc);
-> -        qemu_fdt_setprop_cell(fdt, intc, "phandle", cpu_phandle);
-> -        qemu_fdt_setprop_cell(fdt, intc, "linux,phandle", cpu_phandle);
-> +        qemu_fdt_setprop_cell(fdt, intc, "phandle", intc_phandle);
-> +        qemu_fdt_setprop_cell(fdt, intc, "linux,phandle", intc_phandle);
->          qemu_fdt_setprop_string(fdt, intc, "compatible", "riscv,cpu-intc");
->          qemu_fdt_setprop(fdt, intc, "interrupt-controller", NULL, 0);
->          qemu_fdt_setprop_cell(fdt, intc, "#interrupt-cells", 1);
-> @@ -214,6 +218,20 @@ static void *create_fdt(RISCVVirtState *s, const struct MemmapEntry *memmap,
->          g_free(nodename);
->      }
->
-> +    /* Add cpu-topology node */
-> +    qemu_fdt_add_subnode(fdt, "/cpus/cpu-map");
-> +    qemu_fdt_add_subnode(fdt, "/cpus/cpu-map/cluster0");
-> +    for (cpu = s->soc.num_harts - 1; cpu >= 0; cpu--) {
-> +        char *core_nodename = g_strdup_printf("/cpus/cpu-map/cluster0/core%d",
-> +                                              cpu);
-> +        char *cpu_nodename = g_strdup_printf("/cpus/cpu@%d", cpu);
-> +        uint32_t intc_phandle = qemu_fdt_get_phandle(fdt, cpu_nodename);
-> +        qemu_fdt_add_subnode(fdt, core_nodename);
-> +        qemu_fdt_setprop_cell(fdt, core_nodename, "cpu", intc_phandle);
-> +        g_free(core_nodename);
-> +        g_free(cpu_nodename);
-> +    }
-> +
->      cells =  g_new0(uint32_t, s->soc.num_harts * 4);
->      for (cpu = 0; cpu < s->soc.num_harts; cpu++) {
->          nodename =
+1 and 4 were already in, so I'm leaving them towards the front of the queue.
+The others are in now.
+
+Thanks!
 
