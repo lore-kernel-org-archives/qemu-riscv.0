@@ -1,53 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hfiNU-0001e0-SY
-	for mharc-qemu-riscv@gnu.org; Tue, 25 Jun 2019 06:08:40 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:60625)
+	id 1hfiYc-0000Kc-T4
+	for mharc-qemu-riscv@gnu.org; Tue, 25 Jun 2019 06:20:10 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:35094)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <palmer@dabbelt.com>) id 1hfiNS-0001WD-FQ
- for qemu-riscv@nongnu.org; Tue, 25 Jun 2019 06:08:39 -0400
+ (envelope-from <palmer@dabbelt.com>) id 1hfiYZ-0000E2-V6
+ for qemu-riscv@nongnu.org; Tue, 25 Jun 2019 06:20:09 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmer@dabbelt.com>) id 1hfiNR-0007RI-6e
- for qemu-riscv@nongnu.org; Tue, 25 Jun 2019 06:08:38 -0400
-Received: from mail-pg1-f196.google.com ([209.85.215.196]:45505)
+ (envelope-from <palmer@dabbelt.com>) id 1hfiYY-00030i-GG
+ for qemu-riscv@nongnu.org; Tue, 25 Jun 2019 06:20:07 -0400
+Received: from mail-pf1-f195.google.com ([209.85.210.195]:39837)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1hfiNR-0007Qb-0T
- for qemu-riscv@nongnu.org; Tue, 25 Jun 2019 06:08:37 -0400
-Received: by mail-pg1-f196.google.com with SMTP id z19so5770639pgl.12
- for <qemu-riscv@nongnu.org>; Tue, 25 Jun 2019 03:08:36 -0700 (PDT)
+ (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1hfiYY-0002zh-7w
+ for qemu-riscv@nongnu.org; Tue, 25 Jun 2019 06:20:06 -0400
+Received: by mail-pf1-f195.google.com with SMTP id j2so9243080pfe.6
+ for <qemu-riscv@nongnu.org>; Tue, 25 Jun 2019 03:20:06 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:date:message-id:mime-version
- :content-transfer-encoding:cc:from:to;
- bh=7wvZosJ1yqszSgub/Ojdg6XCIa9KX+av7xHMiaUWf30=;
- b=MAYx2RBs7hG5zRr6BoHaRcPHBDJQzpgh3dB+iUQ1VyvdbZt1L+c3HR/9VjCChNcviY
- nBP0MQHOTbIAclv7IDU4hbMUFqezVbfQA52E7psWxa3A+mc4irTSx+tPvN8VyV3mJYZA
- YMI2wOqs6X9VNBEQ4YZ/c8uiGobKpgJZsaH6yHPBy2JiwxbaDHopGiqKFpWgY5PIXVyU
- 89DjN+QJSBPLRP07hoJJGEpsC0DLcKH6pAvCqzM3U2FPGdiBtgE+uwfIE2lv5mrtu3GM
- tq4Xv2fUIdeNjHE1/9a3bPNjcjZFrVLJz/nAp685zWofJwIbvjw1syXZwXYUuIprDgKU
- juhw==
-X-Gm-Message-State: APjAAAXjGGFddE7gpoCqBlrknHnehGSVnh788RjqjbARaJtDfI3LIcwY
- wwyXogQeR5YSD4XQGu6+bWTjVQ==
-X-Google-Smtp-Source: APXvYqw5s9vRuR4YZ0jyxqpcxR9Ry0hi4GcUetfhULDhp2REhv8jbhDevzDeoLZJjVvXCpCYeqEfsA==
-X-Received: by 2002:a63:3383:: with SMTP id z125mr24262769pgz.8.1561457315890; 
- Tue, 25 Jun 2019 03:08:35 -0700 (PDT)
+ h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
+ :mime-version:content-transfer-encoding;
+ bh=eYufa29gR8Qoq691MeFTHr9ktSdVsXgSvRUvOy0sXpM=;
+ b=jfg23ihUU+7p6b0oSirJO+PGTZxbnL4DDP4x+yhBEcyiqXz+VmS1jeZFkPkZoo8xhV
+ IPFCZ5kXV05xOVOgfX1TzwIXvYOlMiS3v5pbTvgJtJstiaSIKjbijnhrwaqBclMSb8Rd
+ N5LRlDOyIgbZGUF/aNTEaHBh/iwPc0yjUzIgsEXx8aKMgWWArZL0h6dzRI2xgGnZJvxF
+ sGL0oC84PoQNPNix/NA0Iq0sYIFOpGtwGSruZ6SYtgXEBvLnFDx8eKZVz2jeleRalwSX
+ 2jAbFAO81DC2WThlsxVgVTte3HjarvHAlpCNbOloG4ZhIEg0SGT6nht5+SxnTCpCawnL
+ PweQ==
+X-Gm-Message-State: APjAAAXev+GJBkuZfzGDgwY1KuweqynNBFmHJR+lF1xFZGnJVoFU52Ad
+ om5G1w4k1pm4DYmriQthNrvqasQ7j4tyJi8A
+X-Google-Smtp-Source: APXvYqyNg+Y5CTHPzBny3L/12ops6+PaQFKzzzwPHDQTZWTYBhXFA5OShJ/UrOo6bLBsTQjNSznQjQ==
+X-Received: by 2002:a17:90a:9a83:: with SMTP id
+ e3mr30365096pjp.105.1561458004906; 
+ Tue, 25 Jun 2019 03:20:04 -0700 (PDT)
 Received: from localhost (220-132-236-182.HINET-IP.hinet.net.
  [220.132.236.182])
- by smtp.gmail.com with ESMTPSA id y193sm13717005pgd.41.2019.06.25.03.08.34
+ by smtp.gmail.com with ESMTPSA id i126sm18198466pfb.32.2019.06.25.03.20.04
  (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
- Tue, 25 Jun 2019 03:08:35 -0700 (PDT)
-Date: Tue, 25 Jun 2019 03:07:58 -0700
-Message-Id: <20190625100757.12580-1-palmer@sifive.com>
-X-Mailer: git-send-email 2.21.0
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Cc: qemu-devel@nongnu.org,       qemu-riscv@nongnu.org,
- Palmer Dabbelt <palmer@sifive.com>
+ Tue, 25 Jun 2019 03:20:04 -0700 (PDT)
+Date: Tue, 25 Jun 2019 03:20:04 -0700 (PDT)
+X-Google-Original-Date: Tue, 25 Jun 2019 03:09:31 PDT (-0700)
+In-Reply-To: <20190624234144.10768-1-atish.patra@wdc.com>
+CC: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
+ Atish Patra <Atish.Patra@wdc.com>, 
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, sagark@eecs.berkeley.edu
 From: Palmer Dabbelt <palmer@sifive.com>
-To: Alistair Francis <Alistair.Francis@wdc.com>
+To: Atish Patra <Atish.Patra@wdc.com>
+Message-ID: <mhng-7c1a8a81-ee0d-4e95-87b9-ef9543ad121c@palmer-si-x1e>
+Mime-Version: 1.0 (MHng)
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
  [fuzzy]
-X-Received-From: 209.85.215.196
-Subject: [Qemu-riscv] [PATCH] RISC-V: Add support for the Zicsr extension
+X-Received-From: 209.85.210.195
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v2] riscv: virt: Add
+ cpu-topology DT node.
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -59,67 +66,84 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Jun 2019 10:08:39 -0000
+X-List-Received-Date: Tue, 25 Jun 2019 10:20:09 -0000
 
-The various CSR instructions have been split out of the base ISA as part
-of the ratification process.  This patch adds a Zicsr argument, which
-disables all the CSR instructions.
+On Mon, 24 Jun 2019 16:41:44 PDT (-0700), Atish Patra wrote:
+> Currently, there is no cpu topology defined in RISC-V.
+> Define a device tree node that clearly describes the
+> entire topology. This saves the trouble of scanning individual
+> cache to figure out the topology.
+>
+> Here is the linux kernel patch series that enables topology
+> for RISC-V.
+>
+> http://lists.infradead.org/pipermail/linux-riscv/2019-June/005072.html
+>
+> CPU topology after applying this patch in QEMU & above series in kernel
+>
+> / # cat /sys/devices/system/cpu/cpu2/topology/thread_siblings_list
+> 2
+> / # cat /sys/devices/system/cpu/cpu2/topology/physical_package_id
+> 0
+> / # cat /sys/devices/system/cpu/cpu2/topology/core_siblings_list
+> 0-7
+>
+> Signed-off-by: Atish Patra <atish.patra@wdc.com>
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
----
- target/riscv/cpu.c | 1 +
- target/riscv/cpu.h | 1 +
- target/riscv/csr.c | 5 +++++
- 3 files changed, 7 insertions(+)
+Thanks.  This is in the queue for 4.1, which is just pending Alistar's review
+on those two Z patches I reworked.
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index bbad39a337b3..915b9e77df33 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -442,6 +442,7 @@ static Property riscv_cpu_properties[] = {
-     DEFINE_PROP_BOOL("u", RISCVCPU, cfg.ext_u, true),
-     DEFINE_PROP_BOOL("Counters", RISCVCPU, cfg.ext_counters, true),
-     DEFINE_PROP_BOOL("Zifencei", RISCVCPU, cfg.ext_ifencei, true),
-+    DEFINE_PROP_BOOL("Zicsr", RISCVCPU, cfg.ext_icsr, true),
-     DEFINE_PROP_STRING("priv_spec", RISCVCPU, cfg.priv_spec),
-     DEFINE_PROP_BOOL("mmu", RISCVCPU, cfg.mmu, true),
-     DEFINE_PROP_BOOL("pmp", RISCVCPU, cfg.pmp, true),
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index ba551cd3082c..0adb307f3298 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -224,6 +224,7 @@ typedef struct RISCVCPU {
-         bool ext_u;
-         bool ext_counters;
-         bool ext_ifencei;
-+        bool ext_icsr;
- 
-         char *priv_spec;
-         char *user_spec;
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index de67741f3648..ff988917b995 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -793,6 +793,7 @@ int riscv_csrrw(CPURISCVState *env, int csrno, target_ulong *ret_value,
- {
-     int ret;
-     target_ulong old_value;
-+    RISCVCPU *cpu = env_archcpu(env);
- 
-     /* check privileges and return -1 if check fails */
- #if !defined(CONFIG_USER_ONLY)
-@@ -803,6 +804,10 @@ int riscv_csrrw(CPURISCVState *env, int csrno, target_ulong *ret_value,
-     }
- #endif
- 
-+    /* ensure the CSR extension is enabled. */
-+    if (!cpu->cfg.ext_icsr)
-+        return -1;
-+
-     /* check predicate */
-     if (!csr_ops[csrno].predicate || csr_ops[csrno].predicate(env, csrno) < 0) {
-         return -1;
--- 
-2.21.0
-
+> ---
+>  hw/riscv/virt.c | 22 ++++++++++++++++++++--
+>  1 file changed, 20 insertions(+), 2 deletions(-)
+>
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index 84d94d0c42d8..45a1edcd6c4a 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -191,6 +191,7 @@ static void *create_fdt(RISCVVirtState *s, const struct MemmapEntry *memmap,
+>
+>      for (cpu = s->soc.num_harts - 1; cpu >= 0; cpu--) {
+>          int cpu_phandle = phandle++;
+> +        int intc_phandle;
+>          nodename = g_strdup_printf("/cpus/cpu@%d", cpu);
+>          char *intc = g_strdup_printf("/cpus/cpu@%d/interrupt-controller", cpu);
+>          char *isa = riscv_isa_string(&s->soc.harts[cpu]);
+> @@ -203,9 +204,12 @@ static void *create_fdt(RISCVVirtState *s, const struct MemmapEntry *memmap,
+>          qemu_fdt_setprop_string(fdt, nodename, "status", "okay");
+>          qemu_fdt_setprop_cell(fdt, nodename, "reg", cpu);
+>          qemu_fdt_setprop_string(fdt, nodename, "device_type", "cpu");
+> +        qemu_fdt_setprop_cell(fdt, nodename, "phandle", cpu_phandle);
+> +        qemu_fdt_setprop_cell(fdt, nodename, "linux,phandle", cpu_phandle);
+> +        intc_phandle = phandle++;
+>          qemu_fdt_add_subnode(fdt, intc);
+> -        qemu_fdt_setprop_cell(fdt, intc, "phandle", cpu_phandle);
+> -        qemu_fdt_setprop_cell(fdt, intc, "linux,phandle", cpu_phandle);
+> +        qemu_fdt_setprop_cell(fdt, intc, "phandle", intc_phandle);
+> +        qemu_fdt_setprop_cell(fdt, intc, "linux,phandle", intc_phandle);
+>          qemu_fdt_setprop_string(fdt, intc, "compatible", "riscv,cpu-intc");
+>          qemu_fdt_setprop(fdt, intc, "interrupt-controller", NULL, 0);
+>          qemu_fdt_setprop_cell(fdt, intc, "#interrupt-cells", 1);
+> @@ -214,6 +218,20 @@ static void *create_fdt(RISCVVirtState *s, const struct MemmapEntry *memmap,
+>          g_free(nodename);
+>      }
+>
+> +    /* Add cpu-topology node */
+> +    qemu_fdt_add_subnode(fdt, "/cpus/cpu-map");
+> +    qemu_fdt_add_subnode(fdt, "/cpus/cpu-map/cluster0");
+> +    for (cpu = s->soc.num_harts - 1; cpu >= 0; cpu--) {
+> +        char *core_nodename = g_strdup_printf("/cpus/cpu-map/cluster0/core%d",
+> +                                              cpu);
+> +        char *cpu_nodename = g_strdup_printf("/cpus/cpu@%d", cpu);
+> +        uint32_t intc_phandle = qemu_fdt_get_phandle(fdt, cpu_nodename);
+> +        qemu_fdt_add_subnode(fdt, core_nodename);
+> +        qemu_fdt_setprop_cell(fdt, core_nodename, "cpu", intc_phandle);
+> +        g_free(core_nodename);
+> +        g_free(cpu_nodename);
+> +    }
+> +
+>      cells =  g_new0(uint32_t, s->soc.num_harts * 4);
+>      for (cpu = 0; cpu < s->soc.num_harts; cpu++) {
+>          nodename =
 
