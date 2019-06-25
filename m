@@ -1,52 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hfnUs-0001rD-TV
-	for mharc-qemu-riscv@gnu.org; Tue, 25 Jun 2019 11:36:40 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:34022)
+	id 1hfnXh-0004sz-Kz
+	for mharc-qemu-riscv@gnu.org; Tue, 25 Jun 2019 11:39:33 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:34938)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <richard.henderson@linaro.org>) id 1hfnUo-0001pt-Mi
- for qemu-riscv@nongnu.org; Tue, 25 Jun 2019 11:36:36 -0400
+ (envelope-from <richard.henderson@linaro.org>) id 1hfnXe-0004o5-Bg
+ for qemu-riscv@nongnu.org; Tue, 25 Jun 2019 11:39:32 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <richard.henderson@linaro.org>) id 1hfnUn-0006kT-8M
- for qemu-riscv@nongnu.org; Tue, 25 Jun 2019 11:36:34 -0400
-Received: from mail-wr1-x443.google.com ([2a00:1450:4864:20::443]:34100)
+ (envelope-from <richard.henderson@linaro.org>) id 1hfnXc-00016C-Cq
+ for qemu-riscv@nongnu.org; Tue, 25 Jun 2019 11:39:30 -0400
+Received: from mail-wr1-x443.google.com ([2a00:1450:4864:20::443]:36974)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
- id 1hfnUm-0006ij-FI
- for qemu-riscv@nongnu.org; Tue, 25 Jun 2019 11:36:32 -0400
-Received: by mail-wr1-x443.google.com with SMTP id k11so18444018wrl.1
- for <qemu-riscv@nongnu.org>; Tue, 25 Jun 2019 08:36:32 -0700 (PDT)
+ id 1hfnXa-000139-KL
+ for qemu-riscv@nongnu.org; Tue, 25 Jun 2019 11:39:28 -0400
+Received: by mail-wr1-x443.google.com with SMTP id v14so18429030wrr.4
+ for <qemu-riscv@nongnu.org>; Tue, 25 Jun 2019 08:39:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=subject:to:cc:references:from:openpgp:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=EOXiXqRkOBnlWG2kLlaZsuMqLACxnqUCtoQCgNdNGHQ=;
- b=EAKAeXQHuYOaCw0CIJlmAGs81ognnLHgoWaMTWsDTlE3lyiu1V07NAMO0KGKbIAk93
- 4egUneO+TZab3oeGry0d/jmfRG98vpMS1tQRy+gEOT8pYQU5Zer9qMpvpGo3N0k8qZtu
- jY5+lqS09EXSZfhDKtRjFucCVQy+vdzGXxxWCIQnoVOTEnKlTn3H0CO839T89bbyieZD
- 5G6oZjOxMxcfu6Q4GVX1kIYHFSgx8dAEwBCBNqK3ypNAvEJv3A4oiUu1bHSnFeXbCeqq
- ttjKSNNmjAUl/Iqev0Ku7DeeTBPUO/wb1XpWrG6bzc0fMxQtQm/mRB2lDC3Dv7NnDfhV
- 7rUw==
+ bh=lCDJTC6WA+l8tBCmzLMSHsK4MkvDe8DwdEoZdZKwBkE=;
+ b=pizo1+BFwkEzlbY2wkUShLk7cWZqWy1pYEPGkNzPlEaGgcx6BmbbeXjgg7/R5x2H4R
+ XNu6QoFA3DwhzH308t9eEwlNZWWAVvnsdfuP1pHRJk6a09LxPW6hYKxe+uaDRD8MXaeK
+ 2dG57RUueET6MgQS/pGUeTcZhSuueXUX87lgZYu+0Av4mvZ/lFhiEyJK7KdIRomCJpp9
+ //0xws3MQH4vzABBGptkCdmbHFRf/tW0GjYp8JJKicF6sVCHoIITMjEbCuzW4SbT0ooA
+ N/50xtbEEC6X1OYBZDIy5aUjT5xfA6+f9xfBi3vHMZ6X1bPvE1g5W1l361HbZJ2rDc8Q
+ bzbQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
  :date:user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=EOXiXqRkOBnlWG2kLlaZsuMqLACxnqUCtoQCgNdNGHQ=;
- b=LGmeMv4gmPIpftgcPYD32xgzy1K0SzrT4TOHbVFBZbOgfR4HHH+iQ6Lys2z6qfJ6K7
- zVXjEOABFmlpnTQK0H20WcQbPuvzjP7uC5HR0oeY1KfQGJqnVNmW9NMjtfyFjQe140RP
- XtdT6Hub06+ZnVChyb1vlSDrfvDFgDHMc+zwKN5J7SOExYBW8cUVODpZOQ//LONmBMJV
- UnguVgcfkaEED8kKXaQ4hzzIKzP4/xKE0BzuFN/ubcMNXdaKwbOGOzwp/OFkzEVrH7/A
- gWeLhs9llKGvYqZhWtTpm3uDoH2Yssoz5sgYYJ9GUJCj4hJxcpZbuEEWMQaX9k2I/LvM
- ZvZQ==
-X-Gm-Message-State: APjAAAVOx9eOG8uVJnXa8ph7vGMrQwgAeqhUpWHXpT4vopZtc4HKc4gi
- tAJCm4aHbuosuZNq72e0OTqN5g==
-X-Google-Smtp-Source: APXvYqyD8hCkcsWYnDQpfX9oIVeRdGOMYAkW+61Y+0dj0/ziOrt4vQK3ol4hCy9Bp+n/Zn1lA31njg==
-X-Received: by 2002:adf:b64e:: with SMTP id i14mr63977390wre.248.1561476990653; 
- Tue, 25 Jun 2019 08:36:30 -0700 (PDT)
+ bh=lCDJTC6WA+l8tBCmzLMSHsK4MkvDe8DwdEoZdZKwBkE=;
+ b=IzZ/gE0fE+IKLf+NioVOgABCQDigEvXlIRpoliocM0koLmlKfTwoTPFDSVBilRfZOZ
+ yna+T8wFVWa/fjJSYew49y9jjAi6UhhHjUWkGYlVbHJDO/irobBRi/OZtlbzi4INMXCl
+ kaefLZsOKOwk6qVfU9AnwkvHDmDUCbOdKgLzNewFlPzckBVdAdPeRNap2nnAWHOvq4jD
+ 5F9VSvMhvCpoAaKZdAvq9J9j25Uq7xLOwrnTIzwbHs+fkBTCVyJTw0FjY8oE5gbNkGqv
+ D9rwpdvf4RteeS6UUdBjDfyRihGg74o6QWw1r0A7nv09gjwplhsUfIn8P6MPECksd7xi
+ irlA==
+X-Gm-Message-State: APjAAAVHP2t3DvQMwV9hOsBaQA055tqkWBkZZj0eXl5GDenGX1FPSBC1
+ ICe/uTxXoDZ0VWDutpy8VyZQpg==
+X-Google-Smtp-Source: APXvYqyat9rGILno5raa15hBSeamTMcNmvl24nhZYjbFdI6cvKCYhH/HuBo/Euu9J3tFtW8O+wDKOQ==
+X-Received: by 2002:adf:fbc7:: with SMTP id d7mr7961685wrs.224.1561477163765; 
+ Tue, 25 Jun 2019 08:39:23 -0700 (PDT)
 Received: from [192.168.2.137] (93-34-153-63.ip50.fastwebnet.it.
  [93.34.153.63])
- by smtp.gmail.com with ESMTPSA id 128sm4317958wme.12.2019.06.25.08.36.29
+ by smtp.gmail.com with ESMTPSA id x3sm15194507wrp.78.2019.06.25.08.39.22
  (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
- Tue, 25 Jun 2019 08:36:30 -0700 (PDT)
+ Tue, 25 Jun 2019 08:39:23 -0700 (PDT)
 To: Joel Sing <joel@sing.id.au>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, me@carlosedp.com,
  palmer@sifive.com, Alistair.Francis@wdc.com, marco@decred.org
@@ -55,8 +55,8 @@ References: <20190616191900.GH61734@hippo.sing.id.au>
  <20190624180837.GM61734@hippo.sing.id.au>
 From: Richard Henderson <richard.henderson@linaro.org>
 Openpgp: preference=signencrypt
-Message-ID: <2dec03cb-22af-4d0d-f182-3bee9db83d6f@linaro.org>
-Date: Tue, 25 Jun 2019 17:36:28 +0200
+Message-ID: <8ec410f8-d2a0-69ef-e3b7-925ef09717df@linaro.org>
+Date: Tue, 25 Jun 2019 17:39:21 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
  Thunderbird/60.7.0
 MIME-Version: 1.0
@@ -80,23 +80,29 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Jun 2019 15:36:36 -0000
+X-List-Received-Date: Tue, 25 Jun 2019 15:39:32 -0000
 
 On 6/24/19 8:08 PM, Joel Sing wrote:
-> Regarding the alignment for reservations, the
-> specification does require this, although I do not recall seeing any enforcement
-> of this by qemu itself.
+> From 8ef31a2ce8ef1cbeee92995a0b2994f480e9bb6d Mon Sep 17 00:00:00 2001
+> From: Joel Sing <joel@sing.id.au>
+> Date: Tue, 25 Jun 2019 02:44:24 +1000
+> Subject: [PATCH] Clear load reservations on qemu riscv target
+> 
+> This prevents a load reservation from being placed in one context/process,
+> then being used in another, resulting in an SC succeeding incorrectly and
+> breaking atomics.
+> 
+> Signed-off-by: Joel Sing <joel@sing.id.au>
 
-Ah, I see it now.  Enforcement begins here:
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
-static bool trans_lr_w(DisasContext *ctx, arg_lr_w *a)
-{
-    REQUIRE_EXT(ctx, RVA);
-    return gen_lr(ctx, a, (MO_ALIGN | MO_TESL));
-                           ^^^^^^^^
+> +    /* Clear the load reservation - otherwise a reservation placed in one
 
-This will force softmmu (but notably not linux-user; a design limitation) to
-generate an alignment fault for an unaligned address.
+Excepting this line, which will fail checkpatch.pl.
+Needs to be formatted as
+
+    /*
+     * Clear the load...
 
 
 r~
