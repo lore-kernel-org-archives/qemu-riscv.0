@@ -1,74 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hfnXh-0004sz-Kz
-	for mharc-qemu-riscv@gnu.org; Tue, 25 Jun 2019 11:39:33 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:34938)
+	id 1hfowr-00087T-T8
+	for mharc-qemu-riscv@gnu.org; Tue, 25 Jun 2019 13:09:37 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:55852)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <richard.henderson@linaro.org>) id 1hfnXe-0004o5-Bg
- for qemu-riscv@nongnu.org; Tue, 25 Jun 2019 11:39:32 -0400
+ (envelope-from <alistair23@gmail.com>) id 1hfowo-000842-W3
+ for qemu-riscv@nongnu.org; Tue, 25 Jun 2019 13:09:36 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <richard.henderson@linaro.org>) id 1hfnXc-00016C-Cq
- for qemu-riscv@nongnu.org; Tue, 25 Jun 2019 11:39:30 -0400
-Received: from mail-wr1-x443.google.com ([2a00:1450:4864:20::443]:36974)
+ (envelope-from <alistair23@gmail.com>) id 1hfown-0003tq-Su
+ for qemu-riscv@nongnu.org; Tue, 25 Jun 2019 13:09:34 -0400
+Received: from mail-lf1-x141.google.com ([2a00:1450:4864:20::141]:39373)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
- id 1hfnXa-000139-KL
- for qemu-riscv@nongnu.org; Tue, 25 Jun 2019 11:39:28 -0400
-Received: by mail-wr1-x443.google.com with SMTP id v14so18429030wrr.4
- for <qemu-riscv@nongnu.org>; Tue, 25 Jun 2019 08:39:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=subject:to:cc:references:from:openpgp:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=lCDJTC6WA+l8tBCmzLMSHsK4MkvDe8DwdEoZdZKwBkE=;
- b=pizo1+BFwkEzlbY2wkUShLk7cWZqWy1pYEPGkNzPlEaGgcx6BmbbeXjgg7/R5x2H4R
- XNu6QoFA3DwhzH308t9eEwlNZWWAVvnsdfuP1pHRJk6a09LxPW6hYKxe+uaDRD8MXaeK
- 2dG57RUueET6MgQS/pGUeTcZhSuueXUX87lgZYu+0Av4mvZ/lFhiEyJK7KdIRomCJpp9
- //0xws3MQH4vzABBGptkCdmbHFRf/tW0GjYp8JJKicF6sVCHoIITMjEbCuzW4SbT0ooA
- N/50xtbEEC6X1OYBZDIy5aUjT5xfA6+f9xfBi3vHMZ6X1bPvE1g5W1l361HbZJ2rDc8Q
- bzbQ==
+ (Exim 4.71) (envelope-from <alistair23@gmail.com>)
+ id 1hfowl-0003qq-B8; Tue, 25 Jun 2019 13:09:31 -0400
+Received: by mail-lf1-x141.google.com with SMTP id p24so13182622lfo.6;
+ Tue, 25 Jun 2019 10:09:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=lmVDqZcXAzlpBStGwkiT9Uw2BMcZ0MeP+OnYTD8rSgY=;
+ b=QhS0CHPZHYLSMLXU9XNrzbRIZl5+yokkq4xiasNT+lHu9iBha3dEZ1oyazYxcU60m7
+ f+/w7/yHXzjyvmEoC6cVP1h5fElbxe/ahkK54Pkq68Mgd8vV+axwaA35NH+ibsN3vvlf
+ fABEVwRpcc6h6DenwHWfH/4NNAW8O5XiShv4OMFfIlzJycOyMYnpQvPQMcQxpgqC9A4a
+ M8YX6NNSC9AABB/GITovqi7THgDNRWqU2lVri+qJPIJCiw5AAh6dUTCZgKmKuOzEA0A5
+ VbVaZYTZIlUBhYSgw94MubstwQ2Fy5TgORE2cqUP/sb2x+Luo9lkpgVdT/ch4+0tnCWu
+ B2QQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
- :date:user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=lCDJTC6WA+l8tBCmzLMSHsK4MkvDe8DwdEoZdZKwBkE=;
- b=IzZ/gE0fE+IKLf+NioVOgABCQDigEvXlIRpoliocM0koLmlKfTwoTPFDSVBilRfZOZ
- yna+T8wFVWa/fjJSYew49y9jjAi6UhhHjUWkGYlVbHJDO/irobBRi/OZtlbzi4INMXCl
- kaefLZsOKOwk6qVfU9AnwkvHDmDUCbOdKgLzNewFlPzckBVdAdPeRNap2nnAWHOvq4jD
- 5F9VSvMhvCpoAaKZdAvq9J9j25Uq7xLOwrnTIzwbHs+fkBTCVyJTw0FjY8oE5gbNkGqv
- D9rwpdvf4RteeS6UUdBjDfyRihGg74o6QWw1r0A7nv09gjwplhsUfIn8P6MPECksd7xi
- irlA==
-X-Gm-Message-State: APjAAAVHP2t3DvQMwV9hOsBaQA055tqkWBkZZj0eXl5GDenGX1FPSBC1
- ICe/uTxXoDZ0VWDutpy8VyZQpg==
-X-Google-Smtp-Source: APXvYqyat9rGILno5raa15hBSeamTMcNmvl24nhZYjbFdI6cvKCYhH/HuBo/Euu9J3tFtW8O+wDKOQ==
-X-Received: by 2002:adf:fbc7:: with SMTP id d7mr7961685wrs.224.1561477163765; 
- Tue, 25 Jun 2019 08:39:23 -0700 (PDT)
-Received: from [192.168.2.137] (93-34-153-63.ip50.fastwebnet.it.
- [93.34.153.63])
- by smtp.gmail.com with ESMTPSA id x3sm15194507wrp.78.2019.06.25.08.39.22
- (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
- Tue, 25 Jun 2019 08:39:23 -0700 (PDT)
-To: Joel Sing <joel@sing.id.au>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, me@carlosedp.com,
- palmer@sifive.com, Alistair.Francis@wdc.com, marco@decred.org
-References: <20190616191900.GH61734@hippo.sing.id.au>
- <41ef5fbf-f438-e60a-2fba-a72e3ad422f9@linaro.org>
- <20190624180837.GM61734@hippo.sing.id.au>
-From: Richard Henderson <richard.henderson@linaro.org>
-Openpgp: preference=signencrypt
-Message-ID: <8ec410f8-d2a0-69ef-e3b7-925ef09717df@linaro.org>
-Date: Tue, 25 Jun 2019 17:39:21 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.7.0
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=lmVDqZcXAzlpBStGwkiT9Uw2BMcZ0MeP+OnYTD8rSgY=;
+ b=tANrJQy2E3Yb4hUvwMiCNgvEcUatv2Vey3LZfNQmJmATwTkgmGBG5gYXwRDfYZu4qM
+ stV9jWeipKrZCOPHXa/reOA02RBWtaSCcjn7McwZ215UeS1WcLgKFEiUJ7LNWTBH8NGZ
+ Vo/hWevtVXnYVip1+P2zzSKvoUWQRMUWuInhVi+5WW1TbiJfr2c66PjADu+2lWrD/coW
+ Xs3i62TX8P0A4geKrLhC4GZ5w9WaBjLdCCJBTm67kw99A71NW/vbAQ1L/Bk5Oh6iGiLj
+ mcKp67UvNjv6zpXipbegZQ6zLPRvHfMjLcyV/Sy7a+NlQhqrb23o5VLg3Yrie9mV8pmA
+ g3Dw==
+X-Gm-Message-State: APjAAAVdysiO+MngLGZC/wqZantdVpmg0nq5hP6vzoddi/eKSvlR2dbi
+ 6oiQVVDmKRER3DMlaqi8UFPhBztlxPsPkhDvEdc=
+X-Google-Smtp-Source: APXvYqzWM40d1wWSSTqaSHRf9o09sK1TaS6EytbDp9CooyT4o6TiZX6UaIGdHxOohHxJJOyRoJ27627sp90to4zA/ww=
+X-Received: by 2002:a19:6a01:: with SMTP id u1mr14684005lfu.141.1561482569618; 
+ Tue, 25 Jun 2019 10:09:29 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20190624180837.GM61734@hippo.sing.id.au>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+References: <cover.1561414240.git.alistair.francis@wdc.com>
+In-Reply-To: <cover.1561414240.git.alistair.francis@wdc.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 25 Jun 2019 10:06:33 -0700
+Message-ID: <CAKmqyKOpxtB7SrT2i_UjVsE38=nzf1_q0fmYPhJ4D716j3ZriQ@mail.gmail.com>
+To: Alistair Francis <alistair.francis@wdc.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Palmer Dabbelt <palmer@sifive.com>
+Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::443
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH] atomic failures on
- qemu-system-riscv64
+X-Received-From: 2a00:1450:4864:20::141
+Subject: Re: [Qemu-riscv] [PATCH v1 0/5] RISC-V: Add firmware loading
+ support and default
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -80,30 +66,83 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Jun 2019 15:39:32 -0000
+X-List-Received-Date: Tue, 25 Jun 2019 17:09:36 -0000
 
-On 6/24/19 8:08 PM, Joel Sing wrote:
-> From 8ef31a2ce8ef1cbeee92995a0b2994f480e9bb6d Mon Sep 17 00:00:00 2001
-> From: Joel Sing <joel@sing.id.au>
-> Date: Tue, 25 Jun 2019 02:44:24 +1000
-> Subject: [PATCH] Clear load reservations on qemu riscv target
-> 
-> This prevents a load reservation from being placed in one context/process,
-> then being used in another, resulting in an SC succeeding incorrectly and
-> breaking atomics.
-> 
-> Signed-off-by: Joel Sing <joel@sing.id.au>
+On Mon, Jun 24, 2019 at 3:14 PM Alistair Francis
+<alistair.francis@wdc.com> wrote:
+>
+> This series consolidates the current RISC-V kernel loading
+> impelementation while also adding support for the -bios option and more
+> advanced kernel image types.
+>
+> After consolidating the kernel loading we can extend the boot loader to
+> support a -bios option. We can also extend the kernel loading options to
+> support not just ELF files but other standard formats.
+>
+> Finally we can include the OpenSBI firmware for QEMU users.
+>
+> To avoid breakages we have not changed the default behaviour of QEMU.
+> The plan is to change the default though, which is why an entry to the
+> qemu-deprecated.texi file has been added as well as a new warning.
+>
+> After this series QEMU 4.1 has three options:
+>  1. ``-bios none`` - This is the current default behavior if no -bios option
+>       is included. QEMU will not automatically load any firmware. It is up
+>       to the user to load all the images they need.
+>  2. ``-bios default`` - In a future QEMU release this will become the default
+>       behaviour if no -bios option is specified. This option will load the
+>       default OpenSBI firmware automatically. The firmware is included with
+>       the QEMU release and no user interaction is required. All a user needs
+>       to do is specify the kernel they want to boot with the -kernel option
+>  3. ``-bios <file>`` - Tells QEMU to load the specified file as the firmwrae.
+>
+> All users should transition to using a -bios option. We can start
+> updating all documentation after the release of 4.1.
+>
+> At the end of this series and the transition period we are in the good
+> place of no longer requiring users to build firmware to boot a kernel.
+> Instead users can just run QEMU with the -kernel option and everything
+> will work. They can also override the firmware with their own using
+> the -bios option. Using "-bios none" will result in no firmware being
+> loaded (as it is today).
+>
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+@Palmer Dabbelt can this go in your 4.1 PR? It has been reviewed and tested.
 
-> +    /* Clear the load reservation - otherwise a reservation placed in one
+Alistair
 
-Excepting this line, which will fail checkpatch.pl.
-Needs to be formatted as
-
-    /*
-     * Clear the load...
-
-
-r~
+>
+> Alistair Francis (5):
+>   hw/riscv: Split out the boot functions
+>   hw/riscv: Add support for loading a firmware
+>   hw/riscv: Extend the kernel loading support
+>   roms: Add OpenSBI version 0.3
+>   hw/riscv: Load OpenSBI as the default firmware
+>
+>  .gitmodules                                  |   3 +
+>  Makefile                                     |   5 +-
+>  hw/riscv/Makefile.objs                       |   1 +
+>  hw/riscv/boot.c                              | 154 +++++++++++++++++++
+>  hw/riscv/sifive_e.c                          |  17 +-
+>  hw/riscv/sifive_u.c                          |  22 +--
+>  hw/riscv/spike.c                             |  21 +--
+>  hw/riscv/virt.c                              |  60 ++------
+>  include/hw/riscv/boot.h                      |  32 ++++
+>  pc-bios/opensbi-riscv32-virt-fw_jump.bin     | Bin 0 -> 28848 bytes
+>  pc-bios/opensbi-riscv64-sifive_u-fw_jump.bin | Bin 0 -> 28904 bytes
+>  pc-bios/opensbi-riscv64-virt-fw_jump.bin     | Bin 0 -> 28904 bytes
+>  qemu-deprecated.texi                         |  20 +++
+>  roms/Makefile                                |  48 ++++--
+>  roms/opensbi                                 |   1 +
+>  15 files changed, 278 insertions(+), 106 deletions(-)
+>  create mode 100644 hw/riscv/boot.c
+>  create mode 100644 include/hw/riscv/boot.h
+>  create mode 100644 pc-bios/opensbi-riscv32-virt-fw_jump.bin
+>  create mode 100644 pc-bios/opensbi-riscv64-sifive_u-fw_jump.bin
+>  create mode 100644 pc-bios/opensbi-riscv64-virt-fw_jump.bin
+>  create mode 160000 roms/opensbi
+>
+> --
+> 2.22.0
+>
 
