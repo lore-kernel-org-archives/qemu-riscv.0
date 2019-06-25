@@ -1,60 +1,74 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hfnGR-0006wn-8S
-	for mharc-qemu-riscv@gnu.org; Tue, 25 Jun 2019 11:21:43 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:58510)
+	id 1hfnUs-0001rD-TV
+	for mharc-qemu-riscv@gnu.org; Tue, 25 Jun 2019 11:36:40 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:34022)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <alistair23@gmail.com>) id 1hfnGN-0006nt-ID
- for qemu-riscv@nongnu.org; Tue, 25 Jun 2019 11:21:41 -0400
+ (envelope-from <richard.henderson@linaro.org>) id 1hfnUo-0001pt-Mi
+ for qemu-riscv@nongnu.org; Tue, 25 Jun 2019 11:36:36 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1hfnGJ-00039K-JF
- for qemu-riscv@nongnu.org; Tue, 25 Jun 2019 11:21:37 -0400
-Received: from mail-lj1-x243.google.com ([2a00:1450:4864:20::243]:42522)
+ (envelope-from <richard.henderson@linaro.org>) id 1hfnUn-0006kT-8M
+ for qemu-riscv@nongnu.org; Tue, 25 Jun 2019 11:36:34 -0400
+Received: from mail-wr1-x443.google.com ([2a00:1450:4864:20::443]:34100)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1hfnGA-0002xt-5D; Tue, 25 Jun 2019 11:21:28 -0400
-Received: by mail-lj1-x243.google.com with SMTP id t28so16667463lje.9;
- Tue, 25 Jun 2019 08:21:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=8k32kILfnaI5q812rKLEj40kaQZaiC/LxwuWyTXi9RA=;
- b=LzPADc7Z9xCfUkU2D7n5+DVcZVms89cCExZBkpS3KcfgenQYOa6qTV2aCXfFaTrT7x
- ts3W+YBR9v6BVViFXG8nFnc7dCzD1cV5rdYr8jObb0/LAkEgpI4ijKeNGpKY1W7Kfyv4
- xRYNb2jX+qrWQUkJsyt93K5/bSk+SxtPD5onkK1Ua/dVEgOTQHsYC1YlHuMxzZ56s7AI
- LHAZxTbZF5T2CXmW0v5s6ETcArESVwXYAq0R8fqGwBl7YISlyUJ7CryDU6pXOpd/pGjT
- FF5If98U365UfkDeEzAkAOMYzTmm+9p4MufCHAU3VVqB3yYP7dY559RFc5Zim10bIJuS
- lYUg==
+ (Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
+ id 1hfnUm-0006ij-FI
+ for qemu-riscv@nongnu.org; Tue, 25 Jun 2019 11:36:32 -0400
+Received: by mail-wr1-x443.google.com with SMTP id k11so18444018wrl.1
+ for <qemu-riscv@nongnu.org>; Tue, 25 Jun 2019 08:36:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=subject:to:cc:references:from:openpgp:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=EOXiXqRkOBnlWG2kLlaZsuMqLACxnqUCtoQCgNdNGHQ=;
+ b=EAKAeXQHuYOaCw0CIJlmAGs81ognnLHgoWaMTWsDTlE3lyiu1V07NAMO0KGKbIAk93
+ 4egUneO+TZab3oeGry0d/jmfRG98vpMS1tQRy+gEOT8pYQU5Zer9qMpvpGo3N0k8qZtu
+ jY5+lqS09EXSZfhDKtRjFucCVQy+vdzGXxxWCIQnoVOTEnKlTn3H0CO839T89bbyieZD
+ 5G6oZjOxMxcfu6Q4GVX1kIYHFSgx8dAEwBCBNqK3ypNAvEJv3A4oiUu1bHSnFeXbCeqq
+ ttjKSNNmjAUl/Iqev0Ku7DeeTBPUO/wb1XpWrG6bzc0fMxQtQm/mRB2lDC3Dv7NnDfhV
+ 7rUw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=8k32kILfnaI5q812rKLEj40kaQZaiC/LxwuWyTXi9RA=;
- b=AvekQDQN1Qt9OlXWzWspx8qEh3hbB3RL1PLynD9NCk0ANsn/7K0tGYMIj8I68wwgHO
- BSHOhMC+z9r/yFm2SHqBwehw/oh5lXiV/fdE0EuNhBfDHqBwPjf/biUlfAZ9JQUemfo+
- nf8aRSMZnuKzkcNmMEqHV22f305U4Q5BE2JGTf+z32BSkmkX5QAnf+XxLgsTNBJJkccu
- CMl54CzIeRYGLlYYrIwRYZU1n/jlztUHO65PRHrkhMg5ItH9dHuT9vVREvbn1eXI57IC
- 88kmhdjUoTo6yB/WSmYe0mTqVnPSsd563uQ9fks28PSOLr7iUbJCOQnNS1TBmJTYYtvT
- oQkA==
-X-Gm-Message-State: APjAAAU3tCt5d14+QnIJqfrrf/8HQVGjmuo0T1az44ca8H0GCfD1/l+E
- UhYDnxjXENlrI13K37Fjd6GOZvs3QoIBw9u0K4s=
-X-Google-Smtp-Source: APXvYqyt5vs93B1JGMEqOzbZv0GdGKu8NeMpS3WTZpBTmP5TS/HxWaSCmqPWUfdtEvHf981dm9gMwZHY2AeucRRG8M4=
-X-Received: by 2002:a2e:9758:: with SMTP id f24mr33283818ljj.58.1561476083998; 
- Tue, 25 Jun 2019 08:21:23 -0700 (PDT)
+ h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
+ :date:user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=EOXiXqRkOBnlWG2kLlaZsuMqLACxnqUCtoQCgNdNGHQ=;
+ b=LGmeMv4gmPIpftgcPYD32xgzy1K0SzrT4TOHbVFBZbOgfR4HHH+iQ6Lys2z6qfJ6K7
+ zVXjEOABFmlpnTQK0H20WcQbPuvzjP7uC5HR0oeY1KfQGJqnVNmW9NMjtfyFjQe140RP
+ XtdT6Hub06+ZnVChyb1vlSDrfvDFgDHMc+zwKN5J7SOExYBW8cUVODpZOQ//LONmBMJV
+ UnguVgcfkaEED8kKXaQ4hzzIKzP4/xKE0BzuFN/ubcMNXdaKwbOGOzwp/OFkzEVrH7/A
+ gWeLhs9llKGvYqZhWtTpm3uDoH2Yssoz5sgYYJ9GUJCj4hJxcpZbuEEWMQaX9k2I/LvM
+ ZvZQ==
+X-Gm-Message-State: APjAAAVOx9eOG8uVJnXa8ph7vGMrQwgAeqhUpWHXpT4vopZtc4HKc4gi
+ tAJCm4aHbuosuZNq72e0OTqN5g==
+X-Google-Smtp-Source: APXvYqyD8hCkcsWYnDQpfX9oIVeRdGOMYAkW+61Y+0dj0/ziOrt4vQK3ol4hCy9Bp+n/Zn1lA31njg==
+X-Received: by 2002:adf:b64e:: with SMTP id i14mr63977390wre.248.1561476990653; 
+ Tue, 25 Jun 2019 08:36:30 -0700 (PDT)
+Received: from [192.168.2.137] (93-34-153-63.ip50.fastwebnet.it.
+ [93.34.153.63])
+ by smtp.gmail.com with ESMTPSA id 128sm4317958wme.12.2019.06.25.08.36.29
+ (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+ Tue, 25 Jun 2019 08:36:30 -0700 (PDT)
+To: Joel Sing <joel@sing.id.au>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, me@carlosedp.com,
+ palmer@sifive.com, Alistair.Francis@wdc.com, marco@decred.org
+References: <20190616191900.GH61734@hippo.sing.id.au>
+ <41ef5fbf-f438-e60a-2fba-a72e3ad422f9@linaro.org>
+ <20190624180837.GM61734@hippo.sing.id.au>
+From: Richard Henderson <richard.henderson@linaro.org>
+Openpgp: preference=signencrypt
+Message-ID: <2dec03cb-22af-4d0d-f182-3bee9db83d6f@linaro.org>
+Date: Tue, 25 Jun 2019 17:36:28 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.7.0
 MIME-Version: 1.0
-References: <20190625100757.12580-1-palmer@sifive.com>
-In-Reply-To: <20190625100757.12580-1-palmer@sifive.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 25 Jun 2019 08:20:55 -0700
-Message-ID: <CAKmqyKOGKuMJXSPJJEWn7s6OkUZ4ZRL7KFOqtaBWTErrbi6+aQ@mail.gmail.com>
-To: Palmer Dabbelt <palmer@sifive.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
+In-Reply-To: <20190624180837.GM61734@hippo.sing.id.au>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::243
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH] RISC-V: Add support for the
- Zicsr extension
+X-Received-From: 2a00:1450:4864:20::443
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH] atomic failures on
+ qemu-system-riscv64
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -66,80 +80,24 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Jun 2019 15:21:41 -0000
+X-List-Received-Date: Tue, 25 Jun 2019 15:36:36 -0000
 
-On Tue, Jun 25, 2019 at 3:09 AM Palmer Dabbelt <palmer@sifive.com> wrote:
->
-> The various CSR instructions have been split out of the base ISA as part
-> of the ratification process.  This patch adds a Zicsr argument, which
-> disables all the CSR instructions.
->
-> Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
-> ---
->  target/riscv/cpu.c | 1 +
->  target/riscv/cpu.h | 1 +
->  target/riscv/csr.c | 5 +++++
->  3 files changed, 7 insertions(+)
->
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index bbad39a337b3..915b9e77df33 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -442,6 +442,7 @@ static Property riscv_cpu_properties[] = {
->      DEFINE_PROP_BOOL("u", RISCVCPU, cfg.ext_u, true),
->      DEFINE_PROP_BOOL("Counters", RISCVCPU, cfg.ext_counters, true),
->      DEFINE_PROP_BOOL("Zifencei", RISCVCPU, cfg.ext_ifencei, true),
-> +    DEFINE_PROP_BOOL("Zicsr", RISCVCPU, cfg.ext_icsr, true),
->      DEFINE_PROP_STRING("priv_spec", RISCVCPU, cfg.priv_spec),
->      DEFINE_PROP_BOOL("mmu", RISCVCPU, cfg.mmu, true),
->      DEFINE_PROP_BOOL("pmp", RISCVCPU, cfg.pmp, true),
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index ba551cd3082c..0adb307f3298 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -224,6 +224,7 @@ typedef struct RISCVCPU {
->          bool ext_u;
->          bool ext_counters;
->          bool ext_ifencei;
-> +        bool ext_icsr;
->
->          char *priv_spec;
->          char *user_spec;
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index de67741f3648..ff988917b995 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -793,6 +793,7 @@ int riscv_csrrw(CPURISCVState *env, int csrno, target_ulong *ret_value,
->  {
->      int ret;
->      target_ulong old_value;
-> +    RISCVCPU *cpu = env_archcpu(env);
->
->      /* check privileges and return -1 if check fails */
->  #if !defined(CONFIG_USER_ONLY)
-> @@ -803,6 +804,10 @@ int riscv_csrrw(CPURISCVState *env, int csrno, target_ulong *ret_value,
->      }
->  #endif
->
-> +    /* ensure the CSR extension is enabled. */
-> +    if (!cpu->cfg.ext_icsr)
-> +        return -1;
+On 6/24/19 8:08 PM, Joel Sing wrote:
+> Regarding the alignment for reservations, the
+> specification does require this, although I do not recall seeing any enforcement
+> of this by qemu itself.
 
-QEMU style include curly braces around a single line if. Plus I think
-it makes it less error prone. Can you add braces?
+Ah, I see it now.  Enforcement begins here:
 
-After that:
+static bool trans_lr_w(DisasContext *ctx, arg_lr_w *a)
+{
+    REQUIRE_EXT(ctx, RVA);
+    return gen_lr(ctx, a, (MO_ALIGN | MO_TESL));
+                           ^^^^^^^^
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+This will force softmmu (but notably not linux-user; a design limitation) to
+generate an alignment fault for an unaligned address.
 
-Alistair
 
-> +
->      /* check predicate */
->      if (!csr_ops[csrno].predicate || csr_ops[csrno].predicate(env, csrno) < 0) {
->          return -1;
-> --
-> 2.21.0
->
->
+r~
 
