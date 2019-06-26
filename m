@@ -1,65 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hfx2L-0006E8-K2
-	for mharc-qemu-riscv@gnu.org; Tue, 25 Jun 2019 21:47:49 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:40438)
+	id 1hg161-00005d-V3
+	for mharc-qemu-riscv@gnu.org; Wed, 26 Jun 2019 02:07:53 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:41763)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <bmeng.cn@gmail.com>) id 1hfx2J-0006AQ-3Z
- for qemu-riscv@nongnu.org; Tue, 25 Jun 2019 21:47:48 -0400
+ (envelope-from <palmer@dabbelt.com>) id 1hg160-000051-2D
+ for qemu-riscv@nongnu.org; Wed, 26 Jun 2019 02:07:53 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <bmeng.cn@gmail.com>) id 1hfx2H-0003T8-Uk
- for qemu-riscv@nongnu.org; Tue, 25 Jun 2019 21:47:46 -0400
-Received: from mail-ed1-x544.google.com ([2a00:1450:4864:20::544]:36571)
+ (envelope-from <palmer@dabbelt.com>) id 1hg15z-0002ib-0v
+ for qemu-riscv@nongnu.org; Wed, 26 Jun 2019 02:07:52 -0400
+Received: from mail-pg1-f195.google.com ([209.85.215.195]:38438)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
- id 1hfx2H-0003Ql-NC; Tue, 25 Jun 2019 21:47:45 -0400
-Received: by mail-ed1-x544.google.com with SMTP id k21so795124edq.3;
- Tue, 25 Jun 2019 18:47:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=aijH6h8Z+aHSNtZKIGH50atEy0CtUTuJRTMmgt215Rc=;
- b=JBp0SL8VU0hVJlwLg22CgU/qyaDPrOJ4QEOorwO+vOJoqdUvZ3gvxGtsRHzw1VfB5r
- SJLidp5fN7k5v0IUOX0bBdDdHp97VAjDrumff2v03jKUFVl5HrpzxTqVVLXh5YS+eIey
- q0ubuCJDb2u1hMw00g72qIGs84KGFG6PsNtvBUHW3FfG5koIddLW4bkcDaOXtN29qTmV
- PVnSCdMPnSgtSNZu8bNAj4ouF0RdvuJvHAFYn5etQE/Enb/5+GbULA8VjQ23LCia8SoN
- +B8D2vacyLI4FEFIFpIAZKfAlnouZmC4eXSfRmyho9ZQB2kxOm3xVa4WV5a9RhncSwZA
- 5XwQ==
+ (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1hg15y-0002ho-RV
+ for qemu-riscv@nongnu.org; Wed, 26 Jun 2019 02:07:50 -0400
+Received: by mail-pg1-f195.google.com with SMTP id z75so670759pgz.5
+ for <qemu-riscv@nongnu.org>; Tue, 25 Jun 2019 23:07:50 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=aijH6h8Z+aHSNtZKIGH50atEy0CtUTuJRTMmgt215Rc=;
- b=h7f6WaZCpcfzJ3Xg+EQVPZVF1cIw1ma/mEmiUwFvQIvN0R4a0gp03ycqshsleJx5av
- h5q4YY3JSz2UdqSBiSAVMKgKtZcr2pKO6qLdXbYnTWN3FR2Z+FN5b3ugKBoKQx4HDde1
- v+wUwPtOtiuDtWEOEh0RUek7ev9Fv5lVzV+nocy0XdYoxH5fwpq6i0smKLYSsUfAijHD
- EuXiPfCvKiXi6JWKJpXEyWRrPOdWqhaL48WyStJ+6jFmf3Q/enMrmtPvm8MQsrrklGNM
- uCDrRRjPz9Hz5bZ+ZytCZQKWUs1aQGTa9PnTNrNmE9h+6k+dx4GeiqkHZ4XPjtsPpvY2
- Ej+w==
-X-Gm-Message-State: APjAAAVJeWh3mkNBgDASbic05NVbFecJNEOwqQlrqhuJrLFzFld0zGZe
- G7VpQN7Wxsa6f7hPyioTyiSx4slclos5tRhM2cwlyo3Q
-X-Google-Smtp-Source: APXvYqznkXPKAe3NnJTOjzzHsdOEUKvhSX2HpycfBdPckCav71KZVHnTXkSb1vDse76SbWpIPQrbe+9C4F76uO9ZPJo=
-X-Received: by 2002:a50:b388:: with SMTP id s8mr1795255edd.15.1561513664653;
- Tue, 25 Jun 2019 18:47:44 -0700 (PDT)
-MIME-Version: 1.0
-References: <1559119921-6098-1-git-send-email-bmeng.cn@gmail.com>
- <CAKmqyKNAL8KtVgfCx6yhaNYEL=_wnZ5Vf1eSjxwtg0x6_q+UHw@mail.gmail.com>
- <CAEUhbmXLr3zXhbphXRvqfyW1FH9qo3yoPwnFoRoYNtbwkrBBKw@mail.gmail.com>
- <CAEUhbmUAKoFPqBLVW4FHmiESaF8fqEtjqDb1LKf4ivG3g2z0ZQ@mail.gmail.com>
- <CAKmqyKPO8CERWMZQEfEM1Q7HBTysB8cG5LsR1wdc334YX5tmgg@mail.gmail.com>
-In-Reply-To: <CAKmqyKPO8CERWMZQEfEM1Q7HBTysB8cG5LsR1wdc334YX5tmgg@mail.gmail.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Wed, 26 Jun 2019 09:47:33 +0800
-Message-ID: <CAEUhbmVGdeX7j1ep1vJKhZ8a-4K2j-G40LjBJqDkXOi4WM-B9w@mail.gmail.com>
-To: Alistair Francis <alistair23@gmail.com>
-Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Alistair Francis <Alistair.Francis@wdc.com>, 
- Palmer Dabbelt <palmer@sifive.com>
-Content-Type: text/plain; charset="UTF-8"
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2a00:1450:4864:20::544
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH] riscv: virt: Correct pci
- "bus-range" encoding
+ h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
+ :mime-version:content-transfer-encoding;
+ bh=EmGZqkWZXz+TznH7WqJXu6yj6AO4KHO44rr6hePQgrs=;
+ b=oT4zQ1LModB/DnyPs2TUZQZY+gNMAsdIwakLCLfaFzpQZpgE3VeqpX6/laGhfWrer8
+ uICpG/TMxGzoJ97AUXCDd8ljh7fgqCMNVlcBK27/5NgGquEKGoD3rwmBjoJGcqx70cgU
+ hbEobf2cdj5CdjeZ50RSxlVVSrtSoK5Li4e7kVQ2pyJ2SU7d/nPaUv/bKRyVUyN/QKwD
+ eibBGAxLQ3mKMSrsOV+182CFre1YZHVs3vHYuVh8cV/tebFQQe5qmlmsm6UVzhITydt0
+ AU/r7icOYlE6vKWsqGpKq0ag3599GYVvN1+7/3B8KJAJKL86tA5B9Eu221pUzixB52wH
+ AEbQ==
+X-Gm-Message-State: APjAAAVc0HmgmHu/3rFWSDyGX/snU8S390SBqzLKKMO9qbxZZtr12Xdn
+ dkEtQeGgrU1YpfeNVCPfoIOVUA==
+X-Google-Smtp-Source: APXvYqzXFdyOlcRsq0ehCife6IjFondFhfG8Gxh0s/+OgauV14yDlln/7qLxLGHJP4njXHScufagBg==
+X-Received: by 2002:a63:2323:: with SMTP id j35mr1215735pgj.166.1561529269373; 
+ Tue, 25 Jun 2019 23:07:49 -0700 (PDT)
+Received: from localhost (220-132-236-182.HINET-IP.hinet.net.
+ [220.132.236.182])
+ by smtp.gmail.com with ESMTPSA id x65sm20879927pfd.139.2019.06.25.23.07.48
+ (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+ Tue, 25 Jun 2019 23:07:48 -0700 (PDT)
+Date: Tue, 25 Jun 2019 23:07:48 -0700 (PDT)
+X-Google-Original-Date: Tue, 25 Jun 2019 22:32:56 PDT (-0700)
+In-Reply-To: <CAKmqyKOGKuMJXSPJJEWn7s6OkUZ4ZRL7KFOqtaBWTErrbi6+aQ@mail.gmail.com>
+CC: Alistair Francis <Alistair.Francis@wdc.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
+From: Palmer Dabbelt <palmer@sifive.com>
+To: alistair23@gmail.com
+Message-ID: <mhng-9ce79f43-2d09-489c-a089-be1ad81057ee@palmer-si-x1e>
+Mime-Version: 1.0 (MHng)
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+ [fuzzy]
+X-Received-From: 209.85.215.195
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH] RISC-V: Add support for the
+ Zicsr extension
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -71,42 +62,84 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Jun 2019 01:47:48 -0000
+X-List-Received-Date: Wed, 26 Jun 2019 06:07:53 -0000
 
-Hi,
-
-On Fri, Jun 7, 2019 at 2:46 AM Alistair Francis <alistair23@gmail.com> wrote:
+On Tue, 25 Jun 2019 08:20:55 PDT (-0700), alistair23@gmail.com wrote:
+> On Tue, Jun 25, 2019 at 3:09 AM Palmer Dabbelt <palmer@sifive.com> wrote:
+>>
+>> The various CSR instructions have been split out of the base ISA as part
+>> of the ratification process.  This patch adds a Zicsr argument, which
+>> disables all the CSR instructions.
+>>
+>> Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
+>> ---
+>>  target/riscv/cpu.c | 1 +
+>>  target/riscv/cpu.h | 1 +
+>>  target/riscv/csr.c | 5 +++++
+>>  3 files changed, 7 insertions(+)
+>>
+>> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+>> index bbad39a337b3..915b9e77df33 100644
+>> --- a/target/riscv/cpu.c
+>> +++ b/target/riscv/cpu.c
+>> @@ -442,6 +442,7 @@ static Property riscv_cpu_properties[] = {
+>>      DEFINE_PROP_BOOL("u", RISCVCPU, cfg.ext_u, true),
+>>      DEFINE_PROP_BOOL("Counters", RISCVCPU, cfg.ext_counters, true),
+>>      DEFINE_PROP_BOOL("Zifencei", RISCVCPU, cfg.ext_ifencei, true),
+>> +    DEFINE_PROP_BOOL("Zicsr", RISCVCPU, cfg.ext_icsr, true),
+>>      DEFINE_PROP_STRING("priv_spec", RISCVCPU, cfg.priv_spec),
+>>      DEFINE_PROP_BOOL("mmu", RISCVCPU, cfg.mmu, true),
+>>      DEFINE_PROP_BOOL("pmp", RISCVCPU, cfg.pmp, true),
+>> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+>> index ba551cd3082c..0adb307f3298 100644
+>> --- a/target/riscv/cpu.h
+>> +++ b/target/riscv/cpu.h
+>> @@ -224,6 +224,7 @@ typedef struct RISCVCPU {
+>>          bool ext_u;
+>>          bool ext_counters;
+>>          bool ext_ifencei;
+>> +        bool ext_icsr;
+>>
+>>          char *priv_spec;
+>>          char *user_spec;
+>> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+>> index de67741f3648..ff988917b995 100644
+>> --- a/target/riscv/csr.c
+>> +++ b/target/riscv/csr.c
+>> @@ -793,6 +793,7 @@ int riscv_csrrw(CPURISCVState *env, int csrno, target_ulong *ret_value,
+>>  {
+>>      int ret;
+>>      target_ulong old_value;
+>> +    RISCVCPU *cpu = env_archcpu(env);
+>>
+>>      /* check privileges and return -1 if check fails */
+>>  #if !defined(CONFIG_USER_ONLY)
+>> @@ -803,6 +804,10 @@ int riscv_csrrw(CPURISCVState *env, int csrno, target_ulong *ret_value,
+>>      }
+>>  #endif
+>>
+>> +    /* ensure the CSR extension is enabled. */
+>> +    if (!cpu->cfg.ext_icsr)
+>> +        return -1;
 >
-> On Thu, Jun 6, 2019 at 5:55 AM Bin Meng <bmeng.cn@gmail.com> wrote:
-> >
-> > On Thu, May 30, 2019 at 11:36 AM Bin Meng <bmeng.cn@gmail.com> wrote:
-> > >
-> > > Hi Alistair,
-> > >
-> > > On Thu, May 30, 2019 at 11:14 AM Alistair Francis <alistair23@gmail.com> wrote:
-> > > >
-> > > > On Wed, May 29, 2019 at 1:52 AM Bin Meng <bmeng.cn@gmail.com> wrote:
-> > > > >
-> > > > > The largest pci bus number should be calculated from ECAM size,
-> > > > > instead of its base address.
-> > > > >
-> > > > > Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
-> > > >
-> > > > This seems ok, can you maybe explain what this fixes?
-> > > >
-> > >
-> > > The logic is wrong, as the commit message said. With current wrong
-> > > logic, the largest pci bus number encoded in "bus-ranges" property was
-> > > wrongly set to 0x2ff in this case. Per pci spec, the bus number should
-> > > not exceed 0xff.
-> > >
-> >
-> > Ping?
+> QEMU style include curly braces around a single line if. Plus I think
+> it makes it less error prone. Can you add braces?
+>
+> After that:
 >
 > Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-Can this go in the 4.1 PR?
+Thanks.
 
-Regards,
-Bin
+>
+> Alistair
+>
+>> +
+>>      /* check predicate */
+>>      if (!csr_ops[csrno].predicate || csr_ops[csrno].predicate(env, csrno) < 0) {
+>>          return -1;
+>> --
+>> 2.21.0
+>>
+>>
 
