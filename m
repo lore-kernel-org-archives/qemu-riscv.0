@@ -1,59 +1,57 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hgWHW-00039D-0O
-	for mharc-qemu-riscv@gnu.org; Thu, 27 Jun 2019 11:25:50 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:60983)
+	id 1hgWHT-00037C-QM
+	for mharc-qemu-riscv@gnu.org; Thu, 27 Jun 2019 11:25:47 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:60863)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <palmer@dabbelt.com>) id 1hgWGz-00023L-Ud
- for qemu-riscv@nongnu.org; Thu, 27 Jun 2019 11:25:23 -0400
+ (envelope-from <palmer@dabbelt.com>) id 1hgWGg-0001le-MV
+ for qemu-riscv@nongnu.org; Thu, 27 Jun 2019 11:24:59 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmer@dabbelt.com>) id 1hgWGn-0007qR-C7
- for qemu-riscv@nongnu.org; Thu, 27 Jun 2019 11:25:12 -0400
-Received: from mail-pl1-f195.google.com ([209.85.214.195]:34151)
+ (envelope-from <palmer@dabbelt.com>) id 1hgWGc-0007gJ-Kg
+ for qemu-riscv@nongnu.org; Thu, 27 Jun 2019 11:24:55 -0400
+Received: from mail-pl1-f172.google.com ([209.85.214.172]:46278)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1hgWGm-0006gL-0z
- for qemu-riscv@nongnu.org; Thu, 27 Jun 2019 11:25:05 -0400
-Received: by mail-pl1-f195.google.com with SMTP id i2so1492525plt.1
- for <qemu-riscv@nongnu.org>; Thu, 27 Jun 2019 08:23:41 -0700 (PDT)
+ (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1hgWGa-00075N-Vk
+ for qemu-riscv@nongnu.org; Thu, 27 Jun 2019 11:24:54 -0400
+Received: by mail-pl1-f172.google.com with SMTP id e5so1467401pls.13
+ for <qemu-riscv@nongnu.org>; Thu, 27 Jun 2019 08:24:15 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding:cc:from:to;
- bh=88zslYUcPLzZ8t2plNr1KKUO0CCDFAsO4z2B6UJDjVI=;
- b=P4eTOCqrvpbCKfOtIjg5P30EziwfLi+kXtgaUIzTSnE62U+sau7SJEn7pbmf1/kxSm
- siFazXh36NgB6yDg1p3ocouOLCFl0UmC97oE60ZoTbUomgDFzdRRns71aKahaXWCEzUL
- ewQfVt60InkvALq7A6f5REVdy7Wr++nF0Ytzwmp4Us7tkS2c4yn3nDWN2BGYm8F2rsSG
- TEChD/Kv1bcpwe0vtumlXC5Wx/kkljRF2pGBpz7ZGVyhdJICDPqm+AlQ9itgd7e1CKdN
- 6FD9QK3Py98AVMVs2ZEcVCBbCwiZARFtkNbSdIcPKTSLX1mcJo4Qucey5cR7i1j7Gh3j
- vOEw==
-X-Gm-Message-State: APjAAAUazg0deIK2IoS0R1961VGPb42jIOtGL+wWNOuZD5Q8ai2+AeDH
- B+uK6C/3BRxmICKEqUF7xkWrNQuFg5I6ng==
-X-Google-Smtp-Source: APXvYqzfYJMkURulSsXl5tjWUD75OA2vhPy3ZvA/dEdMimihJ4Cy0ZlHAntJAM8QtQyj57rBifNmUQ==
-X-Received: by 2002:a17:902:2a27:: with SMTP id
- i36mr5241418plb.161.1561649019753; 
- Thu, 27 Jun 2019 08:23:39 -0700 (PDT)
+ bh=NIyWvQXIInPHkbPMAYxhV18GTR99MjAgFa+NcGYzhSA=;
+ b=jENrlm8Xw3q1mvk48lyBpQ7fzUsjii4kAc2mKVKzTLvCc2ljBqJg2OE51O1USKdWB4
+ GqiS5CNnmWnT45MSFVF+VSxR+HiI5hGdKB0xzN6lhImHG5z1vwh1QJkPBr5r8tVSykp0
+ VO05GguptWwCBzlR3JVDhC8IRv4zcvzwr4VfyVsRplfoKSP1+FGzDGUtTPkBR5Pg5Bdh
+ ntZOWdkkldunLTzvl0mHw0o6p6nJB9er2tuW7J1ZKef1ljiUUOL61HiUjWoGOTCELMr9
+ RkF/A2VEULQYHiNuHiJnhOBVjYj3aJRKV7l9t91ZMQHBxk25qxHJIISJdm3YyLAZcFZp
+ PAmg==
+X-Gm-Message-State: APjAAAXFWSjfzpuR2oMAUi4JRQSzWlApqkc2vXh380s52M1wSJnwRBj8
+ CYOEHEwNc9sAN1sCoiqZ4x43XZf2DAziGA==
+X-Google-Smtp-Source: APXvYqyi3rn8zrtd2Z0uYr+mkuIokMLDTPl1fr1eT2EsA1ZtcmCbhAsa1L/p0Spok4JtIQPhLNvGDg==
+X-Received: by 2002:a17:902:2f84:: with SMTP id
+ t4mr5429590plb.57.1561649053705; 
+ Thu, 27 Jun 2019 08:24:13 -0700 (PDT)
 Received: from localhost (220-132-236-182.HINET-IP.hinet.net.
  [220.132.236.182])
- by smtp.gmail.com with ESMTPSA id q126sm5110291pfq.123.2019.06.27.08.23.38
+ by smtp.gmail.com with ESMTPSA id w18sm4578420pfj.37.2019.06.27.08.24.12
  (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
- Thu, 27 Jun 2019 08:23:39 -0700 (PDT)
-Date: Thu, 27 Jun 2019 08:19:44 -0700
-Message-Id: <20190627152011.18686-8-palmer@sifive.com>
+ Thu, 27 Jun 2019 08:24:13 -0700 (PDT)
+Date: Thu, 27 Jun 2019 08:19:58 -0700
+Message-Id: <20190627152011.18686-22-palmer@sifive.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <20190627152011.18686-1-palmer@sifive.com>
 References: <20190627152011.18686-1-palmer@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Cc: qemu-riscv@nongnu.org,       qemu-devel@nongnu.org,
- Hesham Almatary <Hesham.Almatary@cl.cam.ac.uk>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Palmer Dabbelt <palmer@sifive.com>
+ Palmer Dabbelt <palmer@sifive.com>, Alistair Francis <alistair.francis@wdc.com>
 From: Palmer Dabbelt <palmer@sifive.com>
 To: Peter Maydell <peter.maydell@linaro.org>
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
  [fuzzy]
-X-Received-From: 209.85.214.195
-Subject: [Qemu-riscv] [PULL 07/34] RISC-V: Check for the effective memory
- privilege mode during PMP checks
+X-Received-From: 209.85.214.172
+Subject: [Qemu-riscv] [PULL 21/34] RISC-V: Add support for the Zifencei
+ extension
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -65,107 +63,89 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Jun 2019 15:25:31 -0000
+X-List-Received-Date: Thu, 27 Jun 2019 15:25:00 -0000
+X-List-Received-Date: Thu, 27 Jun 2019 15:25:00 -0000
 
-From: Hesham Almatary <Hesham.Almatary@cl.cam.ac.uk>
+fence.i has been split out of the base ISA as part of the ratification
+process.  This patch adds a Zifencei argument, which disables the
+fence.i instruction.
 
-The current PMP check function checks for env->priv which is not the effective
-memory privilege mode.
-
-For example, mstatus.MPRV could be set while executing in M-Mode, and in that
-case the privilege mode for the PMP check should be S-Mode rather than M-Mode
-(in env->priv) if mstatus.MPP == PRV_S.
-
-This patch passes the effective memory privilege mode to the PMP check.
-Functions that call the PMP check should pass the correct memory privilege mode
-after reading mstatus' MPRV/MPP or hstatus.SPRV (if Hypervisor mode exists).
-
-Suggested-by: Alistair Francis <alistair.francis@wdc.com>
-Signed-off-by: Hesham Almatary <Hesham.Almatary@cl.cam.ac.uk>
-Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
 Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/cpu_helper.c | 10 +++++++++-
- target/riscv/pmp.c        |  6 +++---
- target/riscv/pmp.h        |  2 +-
- 3 files changed, 13 insertions(+), 5 deletions(-)
+ target/riscv/cpu.c                      | 1 +
+ target/riscv/cpu.h                      | 1 +
+ target/riscv/insn_trans/trans_rvi.inc.c | 4 ++++
+ target/riscv/translate.c                | 3 +++
+ 4 files changed, 9 insertions(+)
 
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index ffbfaf433268..71b8123b1019 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -427,19 +427,27 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-     int prot;
-     bool pmp_violation = false;
-     int ret = TRANSLATE_FAIL;
-+    int mode = mmu_idx;
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index be90fa7d0808..bbad39a337b3 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -441,6 +441,7 @@ static Property riscv_cpu_properties[] = {
+     DEFINE_PROP_BOOL("s", RISCVCPU, cfg.ext_s, true),
+     DEFINE_PROP_BOOL("u", RISCVCPU, cfg.ext_u, true),
+     DEFINE_PROP_BOOL("Counters", RISCVCPU, cfg.ext_counters, true),
++    DEFINE_PROP_BOOL("Zifencei", RISCVCPU, cfg.ext_ifencei, true),
+     DEFINE_PROP_STRING("priv_spec", RISCVCPU, cfg.priv_spec),
+     DEFINE_PROP_BOOL("mmu", RISCVCPU, cfg.mmu, true),
+     DEFINE_PROP_BOOL("pmp", RISCVCPU, cfg.pmp, true),
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 4d4e0f89e206..ba551cd3082c 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -223,6 +223,7 @@ typedef struct RISCVCPU {
+         bool ext_s;
+         bool ext_u;
+         bool ext_counters;
++        bool ext_ifencei;
  
-     qemu_log_mask(CPU_LOG_MMU, "%s ad %" VADDR_PRIx " rw %d mmu_idx %d\n",
-                   __func__, address, access_type, mmu_idx);
+         char *priv_spec;
+         char *user_spec;
+diff --git a/target/riscv/insn_trans/trans_rvi.inc.c b/target/riscv/insn_trans/trans_rvi.inc.c
+index 6cda078ed6ba..ea6473111ce8 100644
+--- a/target/riscv/insn_trans/trans_rvi.inc.c
++++ b/target/riscv/insn_trans/trans_rvi.inc.c
+@@ -484,6 +484,10 @@ static bool trans_fence(DisasContext *ctx, arg_fence *a)
  
-     ret = get_physical_address(env, &pa, &prot, address, access_type, mmu_idx);
- 
-+    if (mode == PRV_M && access_type != MMU_INST_FETCH) {
-+        if (get_field(env->mstatus, MSTATUS_MPRV)) {
-+            mode = get_field(env->mstatus, MSTATUS_MPP);
-+        }
+ static bool trans_fence_i(DisasContext *ctx, arg_fence_i *a)
+ {
++    if (!ctx->ext_ifencei) {
++        return false;
 +    }
 +
-     qemu_log_mask(CPU_LOG_MMU,
-                   "%s address=%" VADDR_PRIx " ret %d physical " TARGET_FMT_plx
-                   " prot %d\n", __func__, address, ret, pa, prot);
+     /*
+      * FENCE_I is a no-op in QEMU,
+      * however we need to end the translation block
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index 313c27b70073..8d6ab732588d 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -54,6 +54,7 @@ typedef struct DisasContext {
+        to any system register, which includes CSR_FRM, so we do not have
+        to reset this known value.  */
+     int frm;
++    bool ext_ifencei;
+ } DisasContext;
  
-     if (riscv_feature(env, RISCV_FEATURE_PMP) &&
-         (ret == TRANSLATE_SUCCESS) &&
--        !pmp_hart_has_privs(env, pa, TARGET_PAGE_SIZE, 1 << access_type)) {
-+        !pmp_hart_has_privs(env, pa, TARGET_PAGE_SIZE, 1 << access_type,
-+        mode)) {
-         pmp_violation = true;
-         ret = TRANSLATE_FAIL;
-     }
-diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-index e0fe2064074a..5944f4cb6607 100644
---- a/target/riscv/pmp.c
-+++ b/target/riscv/pmp.c
-@@ -228,7 +228,7 @@ static int pmp_is_in_range(CPURISCVState *env, int pmp_index, target_ulong addr)
-  * Check if the address has required RWX privs to complete desired operation
-  */
- bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
--    target_ulong size, pmp_priv_t privs)
-+    target_ulong size, pmp_priv_t privs, target_ulong mode)
+ #ifdef TARGET_RISCV64
+@@ -752,6 +753,7 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
  {
-     int i = 0;
-     int ret = -1;
-@@ -264,7 +264,7 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
-             }
+     DisasContext *ctx = container_of(dcbase, DisasContext, base);
+     CPURISCVState *env = cs->env_ptr;
++    RISCVCPU *cpu = RISCV_CPU(cs);
  
-             allowed_privs = PMP_READ | PMP_WRITE | PMP_EXEC;
--            if ((env->priv != PRV_M) || pmp_is_locked(env, i)) {
-+            if ((mode != PRV_M) || pmp_is_locked(env, i)) {
-                 allowed_privs &= env->pmp_state.pmp[i].cfg_reg;
-             }
+     ctx->pc_succ_insn = ctx->base.pc_first;
+     ctx->mem_idx = ctx->base.tb->flags & TB_FLAGS_MMU_MASK;
+@@ -759,6 +761,7 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
+     ctx->priv_ver = env->priv_ver;
+     ctx->misa = env->misa;
+     ctx->frm = -1;  /* unknown rounding mode */
++    ctx->ext_ifencei = cpu->cfg.ext_ifencei;
+ }
  
-@@ -280,7 +280,7 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
- 
-     /* No rule matched */
-     if (ret == -1) {
--        if (env->priv == PRV_M) {
-+        if (mode == PRV_M) {
-             ret = 1; /* Privileged spec v1.10 states if no PMP entry matches an
-                       * M-Mode access, the access succeeds */
-         } else {
-diff --git a/target/riscv/pmp.h b/target/riscv/pmp.h
-index 66790950eb75..8e19793132db 100644
---- a/target/riscv/pmp.h
-+++ b/target/riscv/pmp.h
-@@ -59,6 +59,6 @@ void pmpaddr_csr_write(CPURISCVState *env, uint32_t addr_index,
-     target_ulong val);
- target_ulong pmpaddr_csr_read(CPURISCVState *env, uint32_t addr_index);
- bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
--    target_ulong size, pmp_priv_t priv);
-+    target_ulong size, pmp_priv_t priv, target_ulong mode);
- 
- #endif
+ static void riscv_tr_tb_start(DisasContextBase *db, CPUState *cpu)
 -- 
 2.21.0
 
