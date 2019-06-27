@@ -1,77 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hgZ3c-0000Bb-A3
-	for mharc-qemu-riscv@gnu.org; Thu, 27 Jun 2019 14:23:40 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:46249)
+	id 1hgaYz-0000KG-HD
+	for mharc-qemu-riscv@gnu.org; Thu, 27 Jun 2019 16:00:09 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:39281)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <richard.henderson@linaro.org>) id 1hgZ3S-0000A0-64
- for qemu-riscv@nongnu.org; Thu, 27 Jun 2019 14:23:31 -0400
+ (envelope-from <alistair23@gmail.com>) id 1hgaYt-0000Jw-RK
+ for qemu-riscv@nongnu.org; Thu, 27 Jun 2019 16:00:04 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <richard.henderson@linaro.org>) id 1hgZ3O-0000oO-Hy
- for qemu-riscv@nongnu.org; Thu, 27 Jun 2019 14:23:29 -0400
-Received: from mail-wr1-x42e.google.com ([2a00:1450:4864:20::42e]:42068)
+ (envelope-from <alistair23@gmail.com>) id 1hgaYr-0005P1-8l
+ for qemu-riscv@nongnu.org; Thu, 27 Jun 2019 16:00:03 -0400
+Received: from mail-lf1-x141.google.com ([2a00:1450:4864:20::141]:43476)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
- id 1hgZ3O-0000mt-6e
- for qemu-riscv@nongnu.org; Thu, 27 Jun 2019 14:23:26 -0400
-Received: by mail-wr1-x42e.google.com with SMTP id x17so3618748wrl.9
- for <qemu-riscv@nongnu.org>; Thu, 27 Jun 2019 11:23:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=subject:to:cc:references:from:openpgp:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=XHp8+tIwjJe2/rw2N5bKvIwg8l7AbHaMGD1fdKFN1To=;
- b=PT5RJwExb2hmI8hTSpr3GMwgePtG4LfagySi2VEmyfn+h9UW1WRzZ2Bb5Xz8s4G8Nu
- lHGU2lZzv+TEWLLvxwBWmMvgAoJz5R9aH61p4HhErADwsjRDak1pvmcK09sGk65/3/bD
- 8gBxzi4lmDmFNQQrAzeA8uCqIQ4Ap9g7a6MMiiD4ukJS1riTVnUVFDrxF5MINbX3cSZK
- kQbce57yiqyMh8mF5uc5sGCMRl8Gzzq80+G5/iB+wtM2xzfMqigv9KG+29XgRYEqyqBZ
- TA42/PJeHZDXa5v8LDo1FBdmqmy3k9R4eF09YMTCtonX2s1QcaXJQEJ7rm9Y/teQadgz
- LRNw==
+ (Exim 4.71) (envelope-from <alistair23@gmail.com>)
+ id 1hgaYq-0005Lc-SS; Thu, 27 Jun 2019 16:00:01 -0400
+Received: by mail-lf1-x141.google.com with SMTP id j29so2371255lfk.10;
+ Thu, 27 Jun 2019 12:59:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=rYjYxm+SVEDCvYa7FbIYeK0ER/2x8MIotQD4iyLmSrc=;
+ b=AZNnRf5j6kBncSj/JZP59ulTbj2IuyED9Oc11eg7T8B4HBZTwLIO00479CgcynuJRe
+ WcPZZS4ncOZ/8MC63UQcnLskBBE3agawkU9giTlUkmwDad2xGJ1nqwZuPThAMxLGsXav
+ JiF/0RsE7L6tpQTJjy9kmU9fUYCYonaudSMQqsGohT0w5l9JVKJMbSUnlGJMlKX1GPUt
+ y8Yxha6dChZpx9ibBLgc13SKnVOYeBSgEIXl6wISM/vtebmnRwGDka1RVh4dfbNs71sP
+ s9kkpJsfSgRggxGi5/5eQ+feGDeMjSjW81tPSwe6a4D36/yMjN6tehGf0EI8Q3OB15JO
+ ajCw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
- :date:user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=XHp8+tIwjJe2/rw2N5bKvIwg8l7AbHaMGD1fdKFN1To=;
- b=p8UQIOuJknthPfjyK96nkiVFat+MNoNtI2ke0s7DLayH6r0W39Y5TmstY91jivc6We
- 7zBrvIE/VTCPa4fW31YJdXc1RTZzfQ9okgVNgaDMgbuqSLgcERXuljFlFd7bUVddi9a4
- DgX8UbR0WXdc3g9faOQ1K9C9jmPPnTQUXXlRL9t+fr0OaUR7ve2IybtUb/kyfQR4v0Cp
- wo3fIyZGAyzas2jvyPfpGtCvioqhVZPuek5I7MUpcVUF3wQbzD7Qab5CcXTUYlbWG099
- AizHNwbuU03kdxJxBtfcdhQ+meXW99YYbcZBp5ZxEOm0v+miDJXJszLrqC3CdDqE51wP
- wuoQ==
-X-Gm-Message-State: APjAAAUxgfRkE71a2L5Drx9HritoyUGseSt6nma+9jqqew0uUHutnwjP
- PqkSpIdH+GJsFYjYarYxlfUTgw==
-X-Google-Smtp-Source: APXvYqxrze6QECLRx0XiGOz9FifEdePGDqx7OdhULsAGe4wngSxq6jRF8Cxet7cVeN3Qfpka/pHB9A==
-X-Received: by 2002:adf:ce82:: with SMTP id r2mr4166449wrn.223.1561659803147; 
- Thu, 27 Jun 2019 11:23:23 -0700 (PDT)
-Received: from [192.168.2.137] (93-34-153-63.ip50.fastwebnet.it.
- [93.34.153.63])
- by smtp.gmail.com with ESMTPSA id a2sm12152895wmj.9.2019.06.27.11.23.22
- (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
- Thu, 27 Jun 2019 11:23:22 -0700 (PDT)
-To: Jonathan Behrens <fintelia@gmail.com>, Palmer Dabbelt <palmer@sifive.com>
-Cc: Peter Maydell <peter.maydell@linaro.org>,
- Hesham Almatary <Hesham.Almatary@cl.cam.ac.uk>,
- Alistair Francis <alistair.francis@wdc.com>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>,
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
-References: <20190627152011.18686-1-palmer@sifive.com>
- <20190627152011.18686-11-palmer@sifive.com>
- <CANnJOVF3F_k1LpSYp8OdxSx6LtQR5p-XR5fMKCsXg_0pxySg+Q@mail.gmail.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-Openpgp: preference=signencrypt
-Message-ID: <c64fa0e8-fd9c-8e86-418c-0553f56a0f34@linaro.org>
-Date: Thu, 27 Jun 2019 20:23:20 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.7.0
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=rYjYxm+SVEDCvYa7FbIYeK0ER/2x8MIotQD4iyLmSrc=;
+ b=GLCe70JDK8Cqsy7qM3+zsNs1YfhLFZdWrTY3uFZTybiwj33nIxYqa2z1K2/f1rC+xP
+ MPTz25GlAxXBGKH0ZuV/JV1zoHu4+/TeclOQYoHMIK5QCPNzmey3ICZzVmK8iTP+Ou5H
+ ShMhgtACw3IHpdXBmxKL5b0FGUWqcf69W/bix8q4k5IALhyJUhpO0u/f1M16ll8O42Hs
+ lBktIeI7Q6noQjaBCAlkq2w2S+WXfkle0u/3l7nHgpTg4OO++RpShuMB+1tX6EPpbU+a
+ TkzimfKRf1eoQiWhPDAWx6Bwn/pVieCsXBnXpl0GdNYVHvhWhFyBmIcVAWhA2D5fSYTE
+ Igog==
+X-Gm-Message-State: APjAAAULmi9OwhxNGwnQj+JLQtY7HIU1G+7WrtrVTYqJWG2X50FLYKzq
+ oeFfDxkwn7300/CV/3/8fKg6u7LcZCkcuwKM+kg=
+X-Google-Smtp-Source: APXvYqw34xBrTkX94WBDaG28yGsuQR3dFfFuhejcgn1ab8IUraX7s2LwNq3w/oBGRODyw1xZ7b5OhVTjmnlouWOkzR4=
+X-Received: by 2002:a19:6a01:: with SMTP id u1mr2970093lfu.141.1561665596272; 
+ Thu, 27 Jun 2019 12:59:56 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <CANnJOVF3F_k1LpSYp8OdxSx6LtQR5p-XR5fMKCsXg_0pxySg+Q@mail.gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+References: <CAEUhbmVZm-dhvT40Ck4d159SHin_D-U47+CHShjajzM1f-P9Gw@mail.gmail.com>
+ <mhng-4265f77a-c58a-4851-871a-093b4212df1d@palmer-si-x1e>
+In-Reply-To: <mhng-4265f77a-c58a-4851-871a-093b4212df1d@palmer-si-x1e>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Thu, 27 Jun 2019 12:56:57 -0700
+Message-ID: <CAKmqyKMAGJFgJV1Y9W+ne_=jipqGMtZMKRHJmN5qpNVZrKUTeg@mail.gmail.com>
+To: Palmer Dabbelt <palmer@sifive.com>
+Cc: Bin Meng <bmeng.cn@gmail.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Jonathan Behrens <fintelia@gmail.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Alistair Francis <Alistair.Francis@wdc.com>
+Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::42e
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PULL 10/34] RISC-V: Fix a PMP check
- with the correct access size
+X-Received-From: 2a00:1450:4864:20::141
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH for 4.1 v3] target/riscv:
+ Expose time CSRs when allowed by [m|s]counteren
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -83,66 +70,53 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Jun 2019 18:23:32 -0000
+X-List-Received-Date: Thu, 27 Jun 2019 20:00:05 -0000
 
-On 6/27/19 7:44 PM, Jonathan Behrens wrote:
-> I think this patch is slightly incorrect. If the PMP region is valid for
-> the size of the access, but not the rest of the page then a few lines down
-> in this function the entire page should not be placed into the TLB. Instead
-> only the portion of the page that passed the access check should be
-> included. To give an example of where this goes wrong, in the code below
-> access to address 0x90000008 should always fail due to PMP rules, but if
-> the TLB has already been primed by loading the (allowed) address 0x90000000
-> then no fault will be triggered. Notably, this code also executes
-> improperly without the patch because the first `ld` instruction traps when
-> it shouldn't.
-> 
->   li t0, 0x0000000024000000 // region[0]: 0x90000000..0x90000007
->   csrw pmpaddr0, t0
-> 
->   li t0, 0x00000000240001FF // region[1]: 0x90000000..0x90000fff
->   csrw pmpaddr1, t0
-> 
->   li t0, 0x1F0000000000989F // cfg[0] = LXRW, cfg[1] = L
->   csrw pmpcfg0, t0
-> 
->   sfence.vma
-> 
->   li t0, 0x90000000
->   ld s0, 0(t0)
->   ld s1, 8(t0) // NO TRAP: address is incorrectly in TLB!
+On Wed, Jun 26, 2019 at 1:25 AM Palmer Dabbelt <palmer@sifive.com> wrote:
+>
+> On Tue, 25 Jun 2019 23:58:34 PDT (-0700), bmeng.cn@gmail.com wrote:
+> > On Wed, Jun 26, 2019 at 4:23 AM Jonathan Behrens <fintelia@gmail.com> wrote:
+> >>
+> >> I just did some testing on a HiFive Unleashed board and can confirm what
+> >> you are saying. The low 5 bits of both mcounteren and scounteren are
+> >> writable (if you try to write 0xFFFFFFFF to them, they'll take on the value
+> >> 0x1F) but even with the TM bit set in both mcounteren and scounteren the
+> >> rdtime instruction always generates an illegal instruction exception.
+> >>
+> >
+> > Then I would think the FU540 is not spec complaint :)
+>
+> Ya, it's an errata.  There's a handful of them :)
+>
+> >> Reading through the relevant chapter of the spec, I still think that having
+> >> mcounteren.TM be writable but making rdtime unconditionally trap is
+> >> non-conformant. If other people feel strongly that rdtime should always
+> >
+> > Agree. To test hardware (FU540) compatibility in QEMU, maybe we can
+> > add a cpu property to allow hard-wiring mcounteren.TM to zero?
+>
+> In theory we should have properties to control the behavior of all WARL fields,
+> but it's a lot of work.  I'd be happy to take a patch for any of them.
 
-Nice test case.
+Hmmm... We should avoid taking patches that don't adhere to the spec
+just to match some hardware. In the case that core/popular software
+doesn't work it probably makes sense, but in general it's probably not
+the best move.
 
-> I think that the proper fix would be to first do a PMP check for the full
-> PAGE_SIZE and execute normally if it passes. Then in the event the full
-> page fails, there could be a more granular PMP check with only the accessed
-> region inserted as an entry in the TLB.
+Alistair
 
-This feature looks to be almost identical to the ARM m-profile MPU.
-
-The fix is:
-
-If the PMP check is valid for the entire page, then continue to call
-tlb_set_page with size=TARGET_PAGE_SIZE.
-
-If the PMP check is valid for the current access, but not for the entire page,
-then call tlb_set_page with any size < TARGET_PAGE_SIZE.  This change alone is
-sufficient, even though the full argument tuple (paddr, vaddr, size) no longer
-quite make perfect sense.  (For the arm mpu, we compute some 1 << rsize, but
-the actual value is never used; setting size=1 would be sufficient.)
-
-Any size < TARGET_PAGE_SIZE will cause TLB_RECHECK to be set for the page,
-which will force all accesses to the page to go back through riscv_cpu_tlb_fill
-for re-validation.
-
-
-> Unrelated question: should I be sending "Reviewed By" lines if I read
-> through patches that seem reasonable? Or there some formal process I'd have
-> to go through first to be approved?
-
-No formal process.  More eyes are always welcome.
-
-
-r~
+>
+> >> require trapping into firmware then the natural change would be to simply
+> >> hardwire mcounteren.TM to zero (the value in scounteren wouldn't matter in
+> >> that case so it could be left writable). My own (biased) personal feeling
+> >> is that this full implementation makes sense at least for the `virt`
+> >> machine type because it represents a clear case where deviating from
+> >> current hardware enables a performance boost, and would not break
+> >> compatibility with any current software: both OpenSBI and BBL try to enable
+> >> hardware handling of rdtime when the platform claims to support it.
+> >>
+> >
+> > Regards,
+> > Bin
+>
 
