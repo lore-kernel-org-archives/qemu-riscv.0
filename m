@@ -1,57 +1,43 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hg3LU-0005rn-AB
-	for mharc-qemu-riscv@gnu.org; Wed, 26 Jun 2019 04:32:01 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:46932)
+	id 1hgSqh-000075-VP
+	for mharc-qemu-riscv@gnu.org; Thu, 27 Jun 2019 07:45:55 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:37272)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <palmer@dabbelt.com>) id 1hg3LQ-0005qV-3L
- for qemu-riscv@nongnu.org; Wed, 26 Jun 2019 04:31:58 -0400
+ (envelope-from <jonathan.cameron@huawei.com>) id 1hgSqW-0008TA-Gg
+ for qemu-riscv@nongnu.org; Thu, 27 Jun 2019 07:45:48 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmer@dabbelt.com>) id 1hg3LP-0008Ea-40
- for qemu-riscv@nongnu.org; Wed, 26 Jun 2019 04:31:56 -0400
-Received: from mail-pg1-f195.google.com ([209.85.215.195]:35979)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1hg3LO-0008Dc-Uj
- for qemu-riscv@nongnu.org; Wed, 26 Jun 2019 04:31:55 -0400
-Received: by mail-pg1-f195.google.com with SMTP id c13so876343pgg.3
- for <qemu-riscv@nongnu.org>; Wed, 26 Jun 2019 01:31:54 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
- :mime-version:content-transfer-encoding;
- bh=xpkB33jinwT4ATtBFOv4jybsidxDTYPFps6HY6FF87s=;
- b=nWf6fBUgIMvaqcAt3J3UhfOu1xGFquOTCt37jWtowWXg5zIi+mZjMEdAzC3Hc1zuWx
- /aY8DgsUa1hTYTcPb1rSX7rIgeAIlnXtxJ+Qtx0DKp5RjPTD6e06MstFYUVf9dSi/Bwr
- F7cgCY8TAM8Pr1LhRqyjBuTjofYc7BGxYDeIIHtKD+z6/mMLj8j0i2/ZyhO4EgTSFlIi
- Nmwo/r9r6xR2yWE/JGBkAtuiX6rOApMxG8LdIbJvTwA8c0+FQCEky9Ok9PqKSIbsC/VI
- VV9bYoVuPhOp9lQtJOkrDkQtnxSdRzi+z8QymgHuei6Jps0dyUMN8H/giozNs1pFjPIM
- ieXA==
-X-Gm-Message-State: APjAAAX6Q7hJkqJeFzqIBAk0IcX/ZcKIIgyBEGRbiFNi6/7TX+Knm1MF
- oWSP41vDJmJKquzypkqt+jTHaA==
-X-Google-Smtp-Source: APXvYqxgGnZV+BTlb+7uwRMI2mgKZEB0znw2F4ZiRPu6mPhxsRIXoV7k9cMaZx6+1qSuR7x6/Zzztw==
-X-Received: by 2002:a63:2310:: with SMTP id j16mr1863717pgj.238.1561537913693; 
- Wed, 26 Jun 2019 01:31:53 -0700 (PDT)
-Received: from localhost (220-132-236-182.HINET-IP.hinet.net.
- [220.132.236.182])
- by smtp.gmail.com with ESMTPSA id h18sm11451962pfr.75.2019.06.26.01.31.52
- (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
- Wed, 26 Jun 2019 01:31:53 -0700 (PDT)
-Date: Wed, 26 Jun 2019 01:31:53 -0700 (PDT)
-X-Google-Original-Date: Wed, 26 Jun 2019 01:31:49 PDT (-0700)
-In-Reply-To: <77792d70-b438-df37-6fe4-b5723f7da99d@linaro.org>
-CC: joel@sing.id.au, qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- me@carlosedp.com, 
- Alistair Francis <Alistair.Francis@wdc.com>, marco@decred.org
-From: Palmer Dabbelt <palmer@sifive.com>
-To: richard.henderson@linaro.org
-Message-ID: <mhng-5938add3-68fb-43bb-b0cb-60fd330a8866@palmer-si-x1e>
-Mime-Version: 1.0 (MHng)
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
+ (envelope-from <jonathan.cameron@huawei.com>) id 1hgSqU-0002OB-FP
+ for qemu-riscv@nongnu.org; Thu, 27 Jun 2019 07:45:44 -0400
+Received: from szxga05-in.huawei.com ([45.249.212.191]:2252 helo=huawei.com)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <jonathan.cameron@huawei.com>)
+ id 1hgSqJ-00024O-Da; Thu, 27 Jun 2019 07:45:33 -0400
+Received: from DGGEMS405-HUB.china.huawei.com (unknown [172.30.72.60])
+ by Forcepoint Email with ESMTP id D6681E3C38229B7D357A;
+ Thu, 27 Jun 2019 19:45:17 +0800 (CST)
+Received: from localhost (10.202.226.61) by DGGEMS405-HUB.china.huawei.com
+ (10.3.19.205) with Microsoft SMTP Server id 14.3.439.0; Thu, 27 Jun 2019
+ 19:45:11 +0800
+Date: Thu, 27 Jun 2019 12:45:02 +0100
+From: Jonathan Cameron <jonathan.cameron@huawei.com>
+To: Alistair Francis <alistair.francis@wdc.com>
+CC: <qemu-devel@nongnu.org>, <qemu-riscv@nongnu.org>, <alistair23@gmail.com>, 
+ <palmer@sifive.com>
+Message-ID: <20190627124502.0000681e@huawei.com>
+In-Reply-To: <c010cba5f307352f3f2b699231286d54d0e029df.1561414240.git.alistair.francis@wdc.com>
+References: <cover.1561414240.git.alistair.francis@wdc.com>
+ <c010cba5f307352f3f2b699231286d54d0e029df.1561414240.git.alistair.francis@wdc.com>
+Organization: Huawei
+X-Mailer: Claws Mail 3.17.3 (GTK+ 2.24.32; i686-w64-mingw32)
+MIME-Version: 1.0
+Content-Type: text/plain; charset="US-ASCII"
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.202.226.61]
+X-CFilter-Loop: Reflected
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
- [fuzzy]
-X-Received-From: 209.85.215.195
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH] atomic failures on
- qemu-system-riscv64
+X-Received-From: 45.249.212.191
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v1 4/5] roms: Add OpenSBI
+ version 0.3
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -63,22 +49,109 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Jun 2019 08:31:58 -0000
+X-List-Received-Date: Thu, 27 Jun 2019 11:45:49 -0000
 
-On Wed, 26 Jun 2019 01:30:35 PDT (-0700), richard.henderson@linaro.org wrote:
-> On 6/26/19 10:25 AM, Palmer Dabbelt wrote:
->>> You misunderstand.  The code is exactly correct as-is.  The alignment check
->>> happens implicitly as a part of the softmmu tlb resolution.
->>
->> Sorry, I thought you said it wasn't happening for linux-user?  If it happens
->> for both then we're good.
->
-> Oh, that.  No, there's no better way for linux-user.  Though honestly, if we're
-> going to fix this, it should be done in tcg/* rather than adding hacks within
-> target/riscv.
+On Mon, 24 Jun 2019 15:11:57 -0700
+Alistair Francis <alistair.francis@wdc.com> wrote:
 
-OK, I'm fine punting on it for now.  If I ever get time to fix it up then we'll
-attempt to do so genericly.
+> Add OpenSBI version 0.3 as a git submodule and as a prebult binary.
+> 
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+Hi Alistair,
 
-Thanks!
+Looks like a cut and paste buglet in the Makefile for the roms.
+
+Jonathan
+
+> 
+> diff --git a/roms/Makefile b/roms/Makefile
+> index 078d3fb705..562ed726fd 100644
+> --- a/roms/Makefile
+> +++ b/roms/Makefile
+> @@ -37,6 +37,8 @@ find-cross-prefix = $(subst gcc,,$(notdir $(call find-cross-gcc,$(1))))
+>  powerpc64_cross_prefix := $(call find-cross-prefix,powerpc64)
+>  powerpc_cross_prefix := $(call find-cross-prefix,powerpc)
+>  x86_64_cross_prefix := $(call find-cross-prefix,x86_64)
+> +riscv32_cross_prefix := $(call find-cross-prefix,riscv32)
+> +riscv64_cross_prefix := $(call find-cross-prefix,riscv64)
+>  
+>  # tag our seabios builds
+>  SEABIOS_EXTRAVERSION="-prebuilt.qemu.org"
+> @@ -52,18 +54,21 @@ EDK2_EFIROM = edk2/BaseTools/Source/C/bin/EfiRom
+>  default:
+>  	@echo "nothing is build by default"
+>  	@echo "available build targets:"
+> -	@echo "  bios           -- update bios.bin (seabios)"
+> -	@echo "  vgabios        -- update vgabios binaries (seabios)"
+> -	@echo "  sgabios        -- update sgabios binaries"
+> -	@echo "  pxerom         -- update nic roms (bios only)"
+> -	@echo "  efirom         -- update nic roms (bios+efi)"
+> -	@echo "  slof           -- update slof.bin"
+> -	@echo "  skiboot        -- update skiboot.lid"
+> -	@echo "  u-boot.e500    -- update u-boot.e500"
+> -	@echo "  u-boot.sam460  -- update u-boot.sam460"
+> -	@echo "  efi            -- update UEFI (edk2) platform firmware"
+> -	@echo "  clean          -- delete the files generated by the previous" \
+> -	                          "build targets"
+> +	@echo "  bios               -- update bios.bin (seabios)"
+> +	@echo "  vgabios            -- update vgabios binaries (seabios)"
+> +	@echo "  sgabios            -- update sgabios binaries"
+> +	@echo "  pxerom             -- update nic roms (bios only)"
+> +	@echo "  efirom             -- update nic roms (bios+efi)"
+> +	@echo "  slof               -- update slof.bin"
+> +	@echo "  skiboot            -- update skiboot.lid"
+> +	@echo "  u-boot.e500        -- update u-boot.e500"
+> +	@echo "  u-boot.sam460      -- update u-boot.sam460"
+> +	@echo "  efi                -- update UEFI (edk2) platform firmware"
+> +	@echo "  opensbi32-virt     -- update OpenSBI for 32-bit virt machine"
+> +	@echo "  opensbi64-virt     -- update OpenSBI for 64-bit virt machine"
+> +	@echo "  opensbi64-sifive_u -- update OpenSBI for 64-bit sifive_u machine"
+> +	@echo "  clean              -- delete the files generated by the previous" \
+> +	                              "build targets"
+>  
+>  bios: build-seabios-config-seabios-128k build-seabios-config-seabios-256k
+>  	cp seabios/builds/seabios-128k/bios.bin ../pc-bios/bios.bin
+> @@ -162,6 +167,24 @@ skiboot:
+>  efi: edk2-basetools
+>  	$(MAKE) -f Makefile.edk2
+>  
+> +opensbi32-virt:
+> +	$(MAKE) -C opensbi \
+> +		CROSS_COMPILE=$(riscv32_cross_prefix) \
+> +		PLATFORM="qemu/virt"
+> +	cp opensbi/build/platform/qemu/virt/firmware/fw_jump.bin ../pc-bios/opensbi-riscv32-virt-fw_jump.bin
+> +
+> +opensbi64-virt:
+> +	$(MAKE) -C opensbi \
+> +		CROSS_COMPILE=$(riscv64_cross_prefix) \
+> +		PLATFORM="qemu/virt"
+> +	cp opensbi/build/platform/qemu/virt/firmware/fw_jump.bin ../pc-bios/opensbi-riscv64-virt-fw_jump.bin
+> +
+> +opensbi64-virt:
+
+Cut and paste bug, 
+opensbi64-sifive_u
+
+> +	$(MAKE) -C opensbi \
+> +		CROSS_COMPILE=$(riscv64_cross_prefix) \
+> +		PLATFORM="qemu/sifive_u"
+> +	cp opensbi/build/platform/qemu/virt/firmware/fw_jump.bin ../pc-bios/opensbi-riscv64-sifive_u-fw_jump.bin
+> +
+>  clean:
+>  	rm -rf seabios/.config seabios/out seabios/builds
+>  	$(MAKE) -C sgabios clean
+> @@ -173,3 +196,4 @@ clean:
+>  	$(MAKE) -C u-boot-sam460ex distclean
+>  	$(MAKE) -C skiboot clean
+>  	$(MAKE) -f Makefile.edk2 clean
+> +	$(MAKE) -C opensbi clean
+> diff --git a/roms/opensbi b/roms/opensbi
+> new file mode 160000
+> index 0000000000..ca20ac0cd4
+> --- /dev/null
+> +++ b/roms/opensbi
+> @@ -0,0 +1 @@
+> +Subproject commit ca20ac0cd4c099006d4eea4d9ac7bd7b58e2ae0f
+
+
 
