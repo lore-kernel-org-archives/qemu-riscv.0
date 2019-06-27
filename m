@@ -1,42 +1,43 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hgWHo-0003Nc-QM
-	for mharc-qemu-riscv@gnu.org; Thu, 27 Jun 2019 11:26:11 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:33011)
+	id 1hgWHm-0003Lz-TQ
+	for mharc-qemu-riscv@gnu.org; Thu, 27 Jun 2019 11:26:06 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:32975)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <palmer@dabbelt.com>) id 1hgWHW-0003A2-ON
- for qemu-riscv@nongnu.org; Thu, 27 Jun 2019 11:25:54 -0400
-Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmer@dabbelt.com>) id 1hgWHU-000056-Jr
+ (envelope-from <palmer@dabbelt.com>) id 1hgWHU-00037k-JJ
  for qemu-riscv@nongnu.org; Thu, 27 Jun 2019 11:25:50 -0400
-Received: from mail-pg1-f176.google.com ([209.85.215.176]:33717)
+Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
+ (envelope-from <palmer@dabbelt.com>) id 1hgWHT-0008UQ-6Y
+ for qemu-riscv@nongnu.org; Thu, 27 Jun 2019 11:25:48 -0400
+Received: from mail-pl1-f194.google.com ([209.85.214.194]:39135)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1hgWHT-0006yQ-Fb
- for qemu-riscv@nongnu.org; Thu, 27 Jun 2019 11:25:47 -0400
-Received: by mail-pg1-f176.google.com with SMTP id m4so1187866pgk.0
- for <qemu-riscv@nongnu.org>; Thu, 27 Jun 2019 08:24:05 -0700 (PDT)
+ (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1hgWHQ-0006zr-28
+ for qemu-riscv@nongnu.org; Thu, 27 Jun 2019 11:25:44 -0400
+Received: by mail-pl1-f194.google.com with SMTP id b7so1484676pls.6
+ for <qemu-riscv@nongnu.org>; Thu, 27 Jun 2019 08:24:07 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding:cc:from:to;
- bh=tqiS7O8nKvNing+E8WwiszCtPiLlK33kP79Ar4czLaU=;
- b=O66Ta0sTT8YFDxlVUREJaC6EaV2ajA7TRHJrvPtr0P0711/pDIk+EYxPAJzhPLNzYP
- Uhc6pw6zUgVHXs7iwr7PrOzJQXq7WXmaL0UygD2Yk43XMXwZxoLPFVimnAfSUHz24zHZ
- eyUrcz7sn8XEW2k0JqsfLxVlDIMcTZmqrZlHkPBnV3Zctz/FzPh3eVs3DCRxtrpsMmtB
- NpwuHxn7C8RKoa2IXPOCzmK2tluTdsiuCDKG/eSNTGkJnLdIlA65l+iJ57CGCkwPTGod
- qRcUM0r4EOi+4TJVyA1L0gIPDylsN6grGLCuDNBAvzybuKhBOOqEEUip881/Hp+BJEXz
- cYvw==
-X-Gm-Message-State: APjAAAWv+aItHidPWfw4mT7KzCnjBjFe2T5Qg0NJhru7OBYoye32Ol7A
- iHoJerBBX1m0xgu1zdxe2AMiI+2S4/gJ1g==
-X-Google-Smtp-Source: APXvYqz4HgwfLHomu9GYtfbmHFaxeAkcApncvVLSSz0rgVyDrt/RXlulYvCVWYc0EhsHxAUulnhFYA==
-X-Received: by 2002:a63:1462:: with SMTP id 34mr4283972pgu.417.1561649044358; 
- Thu, 27 Jun 2019 08:24:04 -0700 (PDT)
+ bh=WFOcqA5bhC2gv8hijUonjP/cUpFUXz32Bb/6MGXuT1U=;
+ b=rQrGgeuqahp+b/Dj8xVaSWm7Qw0siuAf5yjqjcXY1KU7NSSv+tdDcoVRdzFhMQ7Iqe
+ Evykwotj+wNqQY0/MR7p9rJ4RxJ5/Jq9r0tzSEnua1vKuDpUP00q5RGsRA7enyU9MQQq
+ J3Qa8anEBRwsXNKuVNIXMFGyh4AfyeXrhto/jHln+LTXcqoPZM04fydoSW2Y+VwsHOpc
+ kZu0S9WPx4+ovLHrQ9BCMr+43LFEp1Ywn7RvhUGNYMiok1H4ks8AUp3RAX8ONrtomz8v
+ H7fwAKLh5UuNmx8FBlORahmnPDHU2HMZ+BuyzNfzXzTTULgcnBZW73koU1jyDTfIc7Gf
+ mQyw==
+X-Gm-Message-State: APjAAAWm+wzSQjrTZ9VQv6BZ/xc6IjuMRuBM2xLyIIjc14U+BA6FJ5Fe
+ IBcDixZltIw4W02u8nrsK8SmR9spA/K1WA==
+X-Google-Smtp-Source: APXvYqxG+ii9erYoAAqHdSYPSfz4oS3lxy4uCURenbKkx2GKib/HRzewyohSuqz9t37LPiWGQUwmlw==
+X-Received: by 2002:a17:902:f204:: with SMTP id
+ gn4mr5376927plb.3.1561649046472; 
+ Thu, 27 Jun 2019 08:24:06 -0700 (PDT)
 Received: from localhost (220-132-236-182.HINET-IP.hinet.net.
  [220.132.236.182])
- by smtp.gmail.com with ESMTPSA id d123sm3437041pfc.144.2019.06.27.08.24.03
+ by smtp.gmail.com with ESMTPSA id p6sm2648446pgs.77.2019.06.27.08.24.05
  (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
- Thu, 27 Jun 2019 08:24:03 -0700 (PDT)
-Date: Thu, 27 Jun 2019 08:19:54 -0700
-Message-Id: <20190627152011.18686-18-palmer@sifive.com>
+ Thu, 27 Jun 2019 08:24:06 -0700 (PDT)
+Date: Thu, 27 Jun 2019 08:19:55 -0700
+Message-Id: <20190627152011.18686-19-palmer@sifive.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <20190627152011.18686-1-palmer@sifive.com>
 References: <20190627152011.18686-1-palmer@sifive.com>
@@ -48,9 +49,9 @@ From: Palmer Dabbelt <palmer@sifive.com>
 To: Peter Maydell <peter.maydell@linaro.org>
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
  [fuzzy]
-X-Received-From: 209.85.215.176
-Subject: [Qemu-riscv] [PULL 17/34] qemu-deprecated.texi: Deprecate the
- RISC-V privledge spec 1.09.1
+X-Received-From: 209.85.214.194
+Subject: [Qemu-riscv] [PULL 18/34] target/riscv: Require either I or E base
+ extension
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -62,38 +63,34 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Jun 2019 15:25:58 -0000
+X-List-Received-Date: Thu, 27 Jun 2019 15:25:50 -0000
 
 From: Alistair Francis <alistair.francis@wdc.com>
 
-Deprecate the RISC-V privledge spec version 1.09.1 in favour of the new
-1.10.0 and the ratified 1.11.0.
-
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
 Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
 ---
- qemu-deprecated.texi | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ target/riscv/cpu.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/qemu-deprecated.texi b/qemu-deprecated.texi
-index df04f2840bd9..97ea4ef3001a 100644
---- a/qemu-deprecated.texi
-+++ b/qemu-deprecated.texi
-@@ -144,6 +144,14 @@ The ``acl_show'', ``acl_reset'', ``acl_policy'', ``acl_add'', and
- ``acl_remove'' commands are deprecated with no replacement. Authorization
- for VNC should be performed using the pluggable QAuthZ objects.
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index ba1325f43533..1689ffecf85f 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -373,6 +373,12 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+                        return;
+        }
  
-+@section Guest Emulator ISAs
++        if (!cpu->cfg.ext_i && !cpu->cfg.ext_e) {
++            error_setg(errp,
++                       "Either I or E extension must be set");
++                       return;
++       }
 +
-+@subsection RISC-V ISA privledge specification version 1.09.1 (since 4.1)
-+
-+The RISC-V ISA privledge specification version 1.09.1 has been deprecated.
-+QEMU supports both the newer version 1.10.0 and the ratified version 1.11.0, these
-+should be used instead of the 1.09.1 version.
-+
- @section System emulator CPUS
- 
- @subsection RISC-V ISA CPUs (since 4.1)
+        if (cpu->cfg.ext_g && !(cpu->cfg.ext_i & cpu->cfg.ext_m &
+                                cpu->cfg.ext_a & cpu->cfg.ext_f &
+                                cpu->cfg.ext_d)) {
 -- 
 2.21.0
 
