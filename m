@@ -1,75 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hgXll-0004k0-VJ
-	for mharc-qemu-riscv@gnu.org; Thu, 27 Jun 2019 13:01:09 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:56774)
+	id 1hgYS3-0002KA-OP
+	for mharc-qemu-riscv@gnu.org; Thu, 27 Jun 2019 13:44:51 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:37428)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <richard.henderson@linaro.org>) id 1hgXlb-0004f5-Ev
- for qemu-riscv@nongnu.org; Thu, 27 Jun 2019 13:01:05 -0400
+ (envelope-from <fintelia@gmail.com>) id 1hgYS1-0002JE-CD
+ for qemu-riscv@nongnu.org; Thu, 27 Jun 2019 13:44:50 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <richard.henderson@linaro.org>) id 1hgXlZ-00039O-Sw
- for qemu-riscv@nongnu.org; Thu, 27 Jun 2019 13:00:59 -0400
-Received: from mail-wr1-x431.google.com ([2a00:1450:4864:20::431]:40281)
+ (envelope-from <fintelia@gmail.com>) id 1hgYRw-0003Ck-KV
+ for qemu-riscv@nongnu.org; Thu, 27 Jun 2019 13:44:46 -0400
+Received: from mail-lj1-x241.google.com ([2a00:1450:4864:20::241]:39891)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
- id 1hgXlZ-00038K-Lr
- for qemu-riscv@nongnu.org; Thu, 27 Jun 2019 13:00:57 -0400
-Received: by mail-wr1-x431.google.com with SMTP id p11so3384514wre.7
- for <qemu-riscv@nongnu.org>; Thu, 27 Jun 2019 10:00:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=subject:to:cc:references:from:openpgp:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=SnSainN7M3Jy3O1rgRnoNBqbG4J9t9BpOQidGj9hFwY=;
- b=EtP5PnZk571qKEmx7oyF0sYqGj3PXCw7XpKQ+9ORcJiqQK2uCURDIA8ecVTG1WYT6C
- 6PE/7YRbOmmX0QvjLGmw1nrl6gHCnVpdbdGnhQFEoxr1kRn8yLHXZBQ4Be90gigdtcl/
- HzFiJRh4P6Y/WJCMw9iEzalL5nn2hRzHRw6ajk8octp1qmEvrK6mh6fBLVyagVngUsE+
- b3RSnYVT1L2fSScIP8hRKmIXB54bAd/uhz8ZAtyTJLjna6DkB9HyLtmB6PmSmXKx46qE
- 8cJnk5GcIyEIuLJzDv1Q7FxuVLTO8/rwiAzbH9tz48esWGBu4CTKKSHuqA0rW2umz65J
- /QTA==
+ (Exim 4.71) (envelope-from <fintelia@gmail.com>)
+ id 1hgYRt-00035Y-C2; Thu, 27 Jun 2019 13:44:42 -0400
+Received: by mail-lj1-x241.google.com with SMTP id v18so3239990ljh.6;
+ Thu, 27 Jun 2019 10:44:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=0qJOU4T9A+Rgo+KUWUOXYaNJYMQ+KH3leoUF1qgEo/8=;
+ b=gKCkLQg/+PShoplCFDLy0X9iaLC2OCi3K56QnXinjkOoLFoGJ7K+hptYhrHMLbd9UM
+ 3euNXo4ZLxzFzvDBZygC9PioJZzs1mBl9Giq+VUeidnYNg/1zaFbMt/JZKar5pqTI0E2
+ IH/0kwdU4BTiSZqUzRPexi+UtHOqwMW0bXd3e/L88wMyihPZoo+O51ewgqTkUCEiaFCh
+ G2n7Z2j8vzV8pNlIdQIagpCVm4i4VZMRVjuUenmozowig3ohZmrL77QYwy3Q4zqxb0Xb
+ ozcAOUejVZUOxFfkY3xAVpeh/c8o8w88kYDNl3WVuP/uJs0//0jJrn8OhOLxAOybwXVY
+ wwyQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
- :date:user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=SnSainN7M3Jy3O1rgRnoNBqbG4J9t9BpOQidGj9hFwY=;
- b=W1fchA5Ouz3uYN2uXNM2iTSpElKwDwe5n4kcXs+3UWXlfU4En2XMFi1WvLTZuNxGIY
- mO134KvTOfxtT1wBrWB4KIhc3Nr5qImoyuqBIkxweqpUn+SaN1s4gj7XIS+9ny0A4saY
- YOKug0wVZXcd0bPUVtuv+OSfHSlWmxQUT2Z4h1j1SsdppZbklMqtiorlQrTzRa322WSQ
- PKGcosO3TSbpvSaEYj54vtHmtMOnsUJBMP5011M4Dosu+9KvVidcKAgRLYim2+ZflnyF
- ZoInH0fzRS9vhYlEFeVhBxrt7CVPfx8AoCxAJ6UvZwFLdJnu+dccsPqWRui48LBfAuyw
- QcRw==
-X-Gm-Message-State: APjAAAUSdBUR6iqzTlLhtYOmysBqgk8Wtvf3AY+kMsersOVhi7q9r+9L
- hA3aZpt0RDs6OxBok2XlrxDzMg==
-X-Google-Smtp-Source: APXvYqxWsHKtIWMoWUp6unAcBKIkpxQuCFIsm2HWhI5LMEWf0lHUskV1L+M5/hC6+ze0dxi6+dBetA==
-X-Received: by 2002:a5d:5542:: with SMTP id g2mr3982796wrw.232.1561654856051; 
- Thu, 27 Jun 2019 10:00:56 -0700 (PDT)
-Received: from [192.168.2.137] (93-34-153-63.ip50.fastwebnet.it.
- [93.34.153.63])
- by smtp.gmail.com with ESMTPSA id u18sm4918271wmd.19.2019.06.27.10.00.55
- (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
- Thu, 27 Jun 2019 10:00:55 -0700 (PDT)
-To: Hesham Almatary <Hesham.Almatary@cl.cam.ac.uk>, qemu-riscv@nongnu.org
-Cc: Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Palmer Dabbelt <palmer@sifive.com>, qemu-devel@nongnu.org,
- Alistair Francis <Alistair.Francis@wdc.com>
-References: <20190627121828.8376-1-Hesham.Almatary@cl.cam.ac.uk>
- <20190627121828.8376-3-Hesham.Almatary@cl.cam.ac.uk>
-From: Richard Henderson <richard.henderson@linaro.org>
-Openpgp: preference=signencrypt
-Message-ID: <77c4044f-93dc-0608-496e-edf8bd8f77d7@linaro.org>
-Date: Thu, 27 Jun 2019 19:00:53 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.7.0
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=0qJOU4T9A+Rgo+KUWUOXYaNJYMQ+KH3leoUF1qgEo/8=;
+ b=F1CtT1X2XZbuiPitx/fAYwKRXbG1bDYyXlvrdkFB02JyDSbEyOuCmpmi6P3pHFv8hy
+ xaij321zT2kRIHgwgWlnoHdp3ysVniUfDGgLgMa3dZj+CC8sLIQwSRIvAClS5e58aFX1
+ 3X/Ii2rzdcfJk19V4gID8ehJUKI6JHuxUr7pvny2VsHXnakbnxHTQpWRkPQKe1F8F0iZ
+ j4QRl06gNdizbS2jyKBW72IeSRD70wHoVM9NhgbL5cx5oJbKvmkM51aYaqtRVLOfvNcr
+ HbyMYr0Zoss6hFxvEG6rFVw+TExsnOjTmT/nlbLDrzaX1piEhqhiRthRAm5X0vBgLbKh
+ bJxw==
+X-Gm-Message-State: APjAAAUb7ZMX+2thmtCYstmT6mteijs/Peth82ykD1Wf6OEu8hFT/bLI
+ RLs93eg9t9YTSDqpjeLU9bj9O2/yAqgk3CGzJBc=
+X-Google-Smtp-Source: APXvYqzVhVvV7KdV7YJydYeWk9vSo1O5VS+ZDj/VodpS1pL3jdugrAefpf4Er2frOLWs5h0ZDsX356z//YDFuEGzMW4=
+X-Received: by 2002:a2e:9a82:: with SMTP id p2mr3510779lji.64.1561657477249;
+ Thu, 27 Jun 2019 10:44:37 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20190627121828.8376-3-Hesham.Almatary@cl.cam.ac.uk>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+References: <20190627152011.18686-1-palmer@sifive.com>
+ <20190627152011.18686-11-palmer@sifive.com>
+In-Reply-To: <20190627152011.18686-11-palmer@sifive.com>
+From: Jonathan Behrens <fintelia@gmail.com>
+Date: Thu, 27 Jun 2019 13:44:06 -0400
+Message-ID: <CANnJOVF3F_k1LpSYp8OdxSx6LtQR5p-XR5fMKCsXg_0pxySg+Q@mail.gmail.com>
+To: Palmer Dabbelt <palmer@sifive.com>
+Cc: Peter Maydell <peter.maydell@linaro.org>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Hesham Almatary <Hesham.Almatary@cl.cam.ac.uk>
+Content-Type: multipart/alternative; boundary="000000000000313df8058c51b7e6"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::431
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCHv4 3/6] RISC-V: Check for the
- effective memory privilege mode during PMP checks
+X-Received-From: 2a00:1450:4864:20::241
+Subject: Re: [Qemu-riscv] [PULL 10/34] RISC-V: Fix a PMP check with the
+ correct access size
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -81,29 +69,160 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Jun 2019 17:01:07 -0000
+X-List-Received-Date: Thu, 27 Jun 2019 17:44:50 -0000
 
-On 6/27/19 2:18 PM, Hesham Almatary wrote:
-> @@ -392,19 +392,27 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
->      int prot;
->      bool pmp_violation = false;
->      int ret = TRANSLATE_FAIL;
-> +    int mode = mmu_idx;
-> 
->      qemu_log_mask(CPU_LOG_MMU, "%s ad %" VADDR_PRIx " rw %d mmu_idx %d\n",
->                    __func__, address, access_type, mmu_idx);
-> 
->      ret = get_physical_address(env, &pa, &prot, address, access_type, mmu_idx);
-> 
-> +    if (mode == PRV_M && access_type != MMU_INST_FETCH) {
-> +        if (get_field(env->mstatus, MSTATUS_MPRV)) {
-> +            mode = get_field(env->mstatus, MSTATUS_MPP);
-> +        }
-> +    }
+--000000000000313df8058c51b7e6
+Content-Type: text/plain; charset="UTF-8"
 
-This hunk looks like it belongs in riscv_cpu_mmu_index instead.
-Passing the (corrected) mmu_idx on to pmp_hart_has_privs looks right.
+I think this patch is slightly incorrect. If the PMP region is valid for
+the size of the access, but not the rest of the page then a few lines down
+in this function the entire page should not be placed into the TLB. Instead
+only the portion of the page that passed the access check should be
+included. To give an example of where this goes wrong, in the code below
+access to address 0x90000008 should always fail due to PMP rules, but if
+the TLB has already been primed by loading the (allowed) address 0x90000000
+then no fault will be triggered. Notably, this code also executes
+improperly without the patch because the first `ld` instruction traps when
+it shouldn't.
 
+  li t0, 0x0000000024000000 // region[0]: 0x90000000..0x90000007
+  csrw pmpaddr0, t0
 
-r~
+  li t0, 0x00000000240001FF // region[1]: 0x90000000..0x90000fff
+  csrw pmpaddr1, t0
+
+  li t0, 0x1F0000000000989F // cfg[0] = LXRW, cfg[1] = L
+  csrw pmpcfg0, t0
+
+  sfence.vma
+
+  li t0, 0x90000000
+  ld s0, 0(t0)
+  ld s1, 8(t0) // NO TRAP: address is incorrectly in TLB!
+
+  sfence.vma
+  ld s1, 8(t0) // TRAP: TLB has been flushed!
+
+I think that the proper fix would be to first do a PMP check for the full
+PAGE_SIZE and execute normally if it passes. Then in the event the full
+page fails, there could be a more granular PMP check with only the accessed
+region inserted as an entry in the TLB.
+
+Unrelated question: should I be sending "Reviewed By" lines if I read
+through patches that seem reasonable? Or there some formal process I'd have
+to go through first to be approved?
+
+Jonathan
+
+On Thu, Jun 27, 2019 at 11:43 AM Palmer Dabbelt <palmer@sifive.com> wrote:
+
+> From: Hesham Almatary <Hesham.Almatary@cl.cam.ac.uk>
+>
+> The PMP check should be of the memory access size rather
+> than TARGET_PAGE_SIZE.
+>
+> Signed-off-by: Hesham Almatary <Hesham.Almatary@cl.cam.ac.uk>
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+> Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
+> ---
+>  target/riscv/cpu_helper.c | 3 +--
+>  1 file changed, 1 insertion(+), 2 deletions(-)
+>
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index 66be83210f11..e1b079e69c60 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -452,8 +452,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address,
+> int size,
+>
+>      if (riscv_feature(env, RISCV_FEATURE_PMP) &&
+>          (ret == TRANSLATE_SUCCESS) &&
+> -        !pmp_hart_has_privs(env, pa, TARGET_PAGE_SIZE, 1 << access_type,
+> -        mode)) {
+> +        !pmp_hart_has_privs(env, pa, size, 1 << access_type, mode)) {
+>          ret = TRANSLATE_PMP_FAIL;
+>      }
+>      if (ret == TRANSLATE_PMP_FAIL) {
+> --
+> 2.21.0
+>
+>
+>
+
+--000000000000313df8058c51b7e6
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div>I think this patch is slightly incorrect. If the PMP =
+region is valid for the size of the access, but not the rest of the page th=
+en a few lines down in this function the entire page should not be placed i=
+nto the TLB. Instead only the portion of the page that passed the access ch=
+eck should be included. To give an example of where this goes wrong, in the=
+ code below access to address 0x90000008 should always fail due to PMP rule=
+s, but if the TLB has already been primed by loading the (allowed) address =
+0x90000000 then no fault will be triggered. Notably, this code also execute=
+s improperly without the patch because the first `ld` instruction traps whe=
+n it shouldn&#39;t.<br></div><div><br></div><div><span style=3D"font-family=
+:courier new,monospace">=C2=A0 li t0, 0x0000000024000000 // region[0]: 0x90=
+000000..0x90000007<br>=C2=A0 csrw pmpaddr0, t0<br><br>=C2=A0 li t0, 0x00000=
+000240001FF // region[1]: 0x90000000..0x90000fff<br>=C2=A0 csrw pmpaddr1, t=
+0<br><br>=C2=A0 li t0, 0x1F0000000000989F // cfg[0] =3D LXRW, cfg[1] =3D L<=
+br>=C2=A0 csrw pmpcfg0, t0<br><br>=C2=A0 sfence.vma<br><br>=C2=A0 li t0, 0x=
+90000000<br>=C2=A0 ld s0, 0(t0)<br>=C2=A0 ld s1, 8(t0) // NO TRAP: address =
+is incorrectly in TLB!<br><br>=C2=A0 sfence.vma<br>=C2=A0 ld s1, 8(t0) // T=
+RAP: TLB has been flushed!<br></span></div><div><br></div><div></div><div>I=
+ think that the proper fix would be to first do a PMP check for the full PA=
+GE_SIZE and execute normally if it passes. Then in the event the full page =
+fails, there could be a more granular PMP check with only the accessed regi=
+on inserted as an entry in the TLB.</div><div><br></div><div>Unrelated ques=
+tion: should I be sending &quot;Reviewed By&quot; lines if I read through  =
+patches that seem reasonable? Or there some formal process I&#39;d have to =
+go through first to be approved?<br></div><div><br></div><div>Jonathan<br><=
+/div></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_a=
+ttr">On Thu, Jun 27, 2019 at 11:43 AM Palmer Dabbelt &lt;<a href=3D"mailto:=
+palmer@sifive.com" target=3D"_blank">palmer@sifive.com</a>&gt; wrote:<br></=
+div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;bor=
+der-left:1px solid rgb(204,204,204);padding-left:1ex">From: Hesham Almatary=
+ &lt;<a href=3D"mailto:Hesham.Almatary@cl.cam.ac.uk" target=3D"_blank">Hesh=
+am.Almatary@cl.cam.ac.uk</a>&gt;<br>
+<br>
+The PMP check should be of the memory access size rather<br>
+than TARGET_PAGE_SIZE.<br>
+<br>
+Signed-off-by: Hesham Almatary &lt;<a href=3D"mailto:Hesham.Almatary@cl.cam=
+.ac.uk" target=3D"_blank">Hesham.Almatary@cl.cam.ac.uk</a>&gt;<br>
+Reviewed-by: Alistair Francis &lt;<a href=3D"mailto:alistair.francis@wdc.co=
+m" target=3D"_blank">alistair.francis@wdc.com</a>&gt;<br>
+Signed-off-by: Palmer Dabbelt &lt;<a href=3D"mailto:palmer@sifive.com" targ=
+et=3D"_blank">palmer@sifive.com</a>&gt;<br>
+---<br>
+=C2=A0target/riscv/cpu_helper.c | 3 +--<br>
+=C2=A01 file changed, 1 insertion(+), 2 deletions(-)<br>
+<br>
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c<br>
+index 66be83210f11..e1b079e69c60 100644<br>
+--- a/target/riscv/cpu_helper.c<br>
++++ b/target/riscv/cpu_helper.c<br>
+@@ -452,8 +452,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, in=
+t size,<br>
+<br>
+=C2=A0 =C2=A0 =C2=A0if (riscv_feature(env, RISCV_FEATURE_PMP) &amp;&amp;<br=
+>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0(ret =3D=3D TRANSLATE_SUCCESS) &amp;&amp;=
+<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 !pmp_hart_has_privs(env, pa, TARGET_PAGE_SIZE,=
+ 1 &lt;&lt; access_type,<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 mode)) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 !pmp_hart_has_privs(env, pa, size, 1 &lt;&lt; =
+access_type, mode)) {<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0ret =3D TRANSLATE_PMP_FAIL;<br>
+=C2=A0 =C2=A0 =C2=A0}<br>
+=C2=A0 =C2=A0 =C2=A0if (ret =3D=3D TRANSLATE_PMP_FAIL) {<br>
+-- <br>
+2.21.0<br>
+<br>
+<br>
+</blockquote></div>
+
+--000000000000313df8058c51b7e6--
 
