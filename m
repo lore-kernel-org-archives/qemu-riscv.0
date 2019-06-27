@@ -1,57 +1,57 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hgWHT-00037C-QM
-	for mharc-qemu-riscv@gnu.org; Thu, 27 Jun 2019 11:25:47 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:60863)
+	id 1hgWHX-0003BC-4L
+	for mharc-qemu-riscv@gnu.org; Thu, 27 Jun 2019 11:25:53 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:32860)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <palmer@dabbelt.com>) id 1hgWGg-0001le-MV
- for qemu-riscv@nongnu.org; Thu, 27 Jun 2019 11:24:59 -0400
+ (envelope-from <palmer@dabbelt.com>) id 1hgWHO-0002xU-MA
+ for qemu-riscv@nongnu.org; Thu, 27 Jun 2019 11:25:43 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmer@dabbelt.com>) id 1hgWGc-0007gJ-Kg
- for qemu-riscv@nongnu.org; Thu, 27 Jun 2019 11:24:55 -0400
-Received: from mail-pl1-f172.google.com ([209.85.214.172]:46278)
+ (envelope-from <palmer@dabbelt.com>) id 1hgWHI-0008LF-VL
+ for qemu-riscv@nongnu.org; Thu, 27 Jun 2019 11:25:38 -0400
+Received: from mail-pf1-f194.google.com ([209.85.210.194]:46024)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1hgWGa-00075N-Vk
- for qemu-riscv@nongnu.org; Thu, 27 Jun 2019 11:24:54 -0400
-Received: by mail-pl1-f172.google.com with SMTP id e5so1467401pls.13
- for <qemu-riscv@nongnu.org>; Thu, 27 Jun 2019 08:24:15 -0700 (PDT)
+ (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1hgWHE-00073A-DF
+ for qemu-riscv@nongnu.org; Thu, 27 Jun 2019 11:25:34 -0400
+Received: by mail-pf1-f194.google.com with SMTP id r1so1388021pfq.12
+ for <qemu-riscv@nongnu.org>; Thu, 27 Jun 2019 08:24:12 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding:cc:from:to;
- bh=NIyWvQXIInPHkbPMAYxhV18GTR99MjAgFa+NcGYzhSA=;
- b=jENrlm8Xw3q1mvk48lyBpQ7fzUsjii4kAc2mKVKzTLvCc2ljBqJg2OE51O1USKdWB4
- GqiS5CNnmWnT45MSFVF+VSxR+HiI5hGdKB0xzN6lhImHG5z1vwh1QJkPBr5r8tVSykp0
- VO05GguptWwCBzlR3JVDhC8IRv4zcvzwr4VfyVsRplfoKSP1+FGzDGUtTPkBR5Pg5Bdh
- ntZOWdkkldunLTzvl0mHw0o6p6nJB9er2tuW7J1ZKef1ljiUUOL61HiUjWoGOTCELMr9
- RkF/A2VEULQYHiNuHiJnhOBVjYj3aJRKV7l9t91ZMQHBxk25qxHJIISJdm3YyLAZcFZp
- PAmg==
-X-Gm-Message-State: APjAAAXFWSjfzpuR2oMAUi4JRQSzWlApqkc2vXh380s52M1wSJnwRBj8
- CYOEHEwNc9sAN1sCoiqZ4x43XZf2DAziGA==
-X-Google-Smtp-Source: APXvYqyi3rn8zrtd2Z0uYr+mkuIokMLDTPl1fr1eT2EsA1ZtcmCbhAsa1L/p0Spok4JtIQPhLNvGDg==
-X-Received: by 2002:a17:902:2f84:: with SMTP id
- t4mr5429590plb.57.1561649053705; 
- Thu, 27 Jun 2019 08:24:13 -0700 (PDT)
+ bh=56FAFtkHihj7lBOpqOA5w6wtEoTrLs+0s6GAeWUEf7s=;
+ b=B0op/A3jOaOmj27E6WMiFvaM2+CYtpcitvjxjSVKojQff/0zYIo0Lgw/hXY9sVx0Yz
+ xjpjHLkJ3/uftiwHE6HSI9axGShl7t1bVGyd0T9HsLk7ZnzzhiH5FKtnBlFnivsN+7ST
+ +TIK56fFnQFn9O390pA1PgawYVYPPpUdxnXCMMAyuazeaPklJxdAC/RYmL5Nx0dd6xmD
+ VOpuYZQeYW05g4STZEtxR5/LdVgpZNIY2BlAGGhaZLFc02xutqgYhjLAPpoWQXR/QukW
+ DgEmpA5W2vxFi2RdHxk2ENJqLkXKEDRt7RMEjjlOgfLPgqUJeN+BTtQZ/ufmdU/OVSE0
+ G/uw==
+X-Gm-Message-State: APjAAAVzlYk25bPrON0RW7zQ6MxgL205EU7fxXDmCx3TPKusIb0J7djA
+ m8gxIl81iNLXWeExIYp1bJYvi/SzNvsZEA==
+X-Google-Smtp-Source: APXvYqyIIuZsa+j5GzTld6a/ExDZ9EJInLfWeq8nkF9zyM7oCEShkHvDjRjJNaKEgt8hyvx+o5Mg1g==
+X-Received: by 2002:a17:90a:4f0e:: with SMTP id
+ p14mr6531544pjh.40.1561649050833; 
+ Thu, 27 Jun 2019 08:24:10 -0700 (PDT)
 Received: from localhost (220-132-236-182.HINET-IP.hinet.net.
  [220.132.236.182])
- by smtp.gmail.com with ESMTPSA id w18sm4578420pfj.37.2019.06.27.08.24.12
+ by smtp.gmail.com with ESMTPSA id e4sm3143729pfi.35.2019.06.27.08.24.10
  (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
- Thu, 27 Jun 2019 08:24:13 -0700 (PDT)
-Date: Thu, 27 Jun 2019 08:19:58 -0700
-Message-Id: <20190627152011.18686-22-palmer@sifive.com>
+ Thu, 27 Jun 2019 08:24:10 -0700 (PDT)
+Date: Thu, 27 Jun 2019 08:19:57 -0700
+Message-Id: <20190627152011.18686-21-palmer@sifive.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <20190627152011.18686-1-palmer@sifive.com>
 References: <20190627152011.18686-1-palmer@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Cc: qemu-riscv@nongnu.org,       qemu-devel@nongnu.org,
- Palmer Dabbelt <palmer@sifive.com>, Alistair Francis <alistair.francis@wdc.com>
+ Alistair Francis <alistair.francis@wdc.com>, Palmer Dabbelt <palmer@sifive.com>
 From: Palmer Dabbelt <palmer@sifive.com>
 To: Peter Maydell <peter.maydell@linaro.org>
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
  [fuzzy]
-X-Received-From: 209.85.214.172
-Subject: [Qemu-riscv] [PULL 21/34] RISC-V: Add support for the Zifencei
- extension
+X-Received-From: 209.85.210.194
+Subject: [Qemu-riscv] [PULL 20/34] target/riscv: Add support for
+ disabling/enabling Counters
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -63,89 +63,79 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Jun 2019 15:25:00 -0000
-X-List-Received-Date: Thu, 27 Jun 2019 15:25:00 -0000
+X-List-Received-Date: Thu, 27 Jun 2019 15:25:43 -0000
 
-fence.i has been split out of the base ISA as part of the ratification
-process.  This patch adds a Zifencei argument, which disables the
-fence.i instruction.
+From: Alistair Francis <alistair.francis@wdc.com>
 
+Add support for disabling/enabling the "Counters" extension.
+
+Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
 Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/cpu.c                      | 1 +
- target/riscv/cpu.h                      | 1 +
- target/riscv/insn_trans/trans_rvi.inc.c | 4 ++++
- target/riscv/translate.c                | 3 +++
- 4 files changed, 9 insertions(+)
+ target/riscv/cpu.c |  1 +
+ target/riscv/cpu.h |  1 +
+ target/riscv/csr.c | 17 ++++++++++++-----
+ 3 files changed, 14 insertions(+), 5 deletions(-)
 
 diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index be90fa7d0808..bbad39a337b3 100644
+index 6a54ebf10c62..be90fa7d0808 100644
 --- a/target/riscv/cpu.c
 +++ b/target/riscv/cpu.c
-@@ -441,6 +441,7 @@ static Property riscv_cpu_properties[] = {
+@@ -440,6 +440,7 @@ static Property riscv_cpu_properties[] = {
+     DEFINE_PROP_BOOL("c", RISCVCPU, cfg.ext_c, true),
      DEFINE_PROP_BOOL("s", RISCVCPU, cfg.ext_s, true),
      DEFINE_PROP_BOOL("u", RISCVCPU, cfg.ext_u, true),
-     DEFINE_PROP_BOOL("Counters", RISCVCPU, cfg.ext_counters, true),
-+    DEFINE_PROP_BOOL("Zifencei", RISCVCPU, cfg.ext_ifencei, true),
++    DEFINE_PROP_BOOL("Counters", RISCVCPU, cfg.ext_counters, true),
      DEFINE_PROP_STRING("priv_spec", RISCVCPU, cfg.priv_spec),
      DEFINE_PROP_BOOL("mmu", RISCVCPU, cfg.mmu, true),
      DEFINE_PROP_BOOL("pmp", RISCVCPU, cfg.pmp, true),
 diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 4d4e0f89e206..ba551cd3082c 100644
+index 0855277b92d4..4d4e0f89e206 100644
 --- a/target/riscv/cpu.h
 +++ b/target/riscv/cpu.h
-@@ -223,6 +223,7 @@ typedef struct RISCVCPU {
+@@ -222,6 +222,7 @@ typedef struct RISCVCPU {
+         bool ext_c;
          bool ext_s;
          bool ext_u;
-         bool ext_counters;
-+        bool ext_ifencei;
++        bool ext_counters;
  
          char *priv_spec;
          char *user_spec;
-diff --git a/target/riscv/insn_trans/trans_rvi.inc.c b/target/riscv/insn_trans/trans_rvi.inc.c
-index 6cda078ed6ba..ea6473111ce8 100644
---- a/target/riscv/insn_trans/trans_rvi.inc.c
-+++ b/target/riscv/insn_trans/trans_rvi.inc.c
-@@ -484,6 +484,10 @@ static bool trans_fence(DisasContext *ctx, arg_fence *a)
- 
- static bool trans_fence_i(DisasContext *ctx, arg_fence_i *a)
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index 448162e484a3..de67741f3648 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -56,17 +56,24 @@ static int fs(CPURISCVState *env, int csrno)
+ static int ctr(CPURISCVState *env, int csrno)
  {
-+    if (!ctx->ext_ifencei) {
-+        return false;
+ #if !defined(CONFIG_USER_ONLY)
++    CPUState *cs = env_cpu(env);
++    RISCVCPU *cpu = RISCV_CPU(cs);
++    uint32_t ctr_en = ~0u;
++
++    if (!cpu->cfg.ext_counters) {
++        /* The Counters extensions is not enabled */
++        return -1;
 +    }
 +
      /*
-      * FENCE_I is a no-op in QEMU,
-      * however we need to end the translation block
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 313c27b70073..8d6ab732588d 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -54,6 +54,7 @@ typedef struct DisasContext {
-        to any system register, which includes CSR_FRM, so we do not have
-        to reset this known value.  */
-     int frm;
-+    bool ext_ifencei;
- } DisasContext;
+-     * The counters are always enabled on newer priv specs, as the CSR has
+-     * changed from controlling that the counters can be read to controlling
+-     * that the counters increment.
++     * The counters are always enabled at run time on newer priv specs, as the
++     * CSR has changed from controlling that the counters can be read to
++     * controlling that the counters increment.
+      */
+     if (env->priv_ver > PRIV_VERSION_1_09_1) {
+         return 0;
+     }
  
- #ifdef TARGET_RISCV64
-@@ -752,6 +753,7 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
- {
-     DisasContext *ctx = container_of(dcbase, DisasContext, base);
-     CPURISCVState *env = cs->env_ptr;
-+    RISCVCPU *cpu = RISCV_CPU(cs);
- 
-     ctx->pc_succ_insn = ctx->base.pc_first;
-     ctx->mem_idx = ctx->base.tb->flags & TB_FLAGS_MMU_MASK;
-@@ -759,6 +761,7 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
-     ctx->priv_ver = env->priv_ver;
-     ctx->misa = env->misa;
-     ctx->frm = -1;  /* unknown rounding mode */
-+    ctx->ext_ifencei = cpu->cfg.ext_ifencei;
- }
- 
- static void riscv_tr_tb_start(DisasContextBase *db, CPUState *cpu)
+-    uint32_t ctr_en = ~0u;
+-
+     if (env->priv < PRV_M) {
+         ctr_en &= env->mcounteren;
+     }
 -- 
 2.21.0
 
