@@ -1,58 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hgWI5-0003jE-1K
+	id 1hgWI5-0003kF-Ai
 	for mharc-qemu-riscv@gnu.org; Thu, 27 Jun 2019 11:26:25 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:33180)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:33300)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <palmer@dabbelt.com>) id 1hgWHd-0003Fm-MM
- for qemu-riscv@nongnu.org; Thu, 27 Jun 2019 11:25:59 -0400
+ (envelope-from <palmer@dabbelt.com>) id 1hgWHk-0003Ky-Mo
+ for qemu-riscv@nongnu.org; Thu, 27 Jun 2019 11:26:08 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmer@dabbelt.com>) id 1hgWHa-0000EK-GZ
- for qemu-riscv@nongnu.org; Thu, 27 Jun 2019 11:25:57 -0400
-Received: from mail-pg1-f194.google.com ([209.85.215.194]:41896)
+ (envelope-from <palmer@dabbelt.com>) id 1hgWHf-0000K6-5r
+ for qemu-riscv@nongnu.org; Thu, 27 Jun 2019 11:26:04 -0400
+Received: from mail-pf1-f195.google.com ([209.85.210.195]:37211)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1hgWHY-0007AA-EN
- for qemu-riscv@nongnu.org; Thu, 27 Jun 2019 11:25:53 -0400
-Received: by mail-pg1-f194.google.com with SMTP id c70so1047900pga.8
- for <qemu-riscv@nongnu.org>; Thu, 27 Jun 2019 08:24:22 -0700 (PDT)
+ (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1hgWHd-0007NM-RT
+ for qemu-riscv@nongnu.org; Thu, 27 Jun 2019 11:25:58 -0400
+Received: by mail-pf1-f195.google.com with SMTP id 19so1409539pfa.4
+ for <qemu-riscv@nongnu.org>; Thu, 27 Jun 2019 08:24:38 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding:cc:from:to;
- bh=MsITP9g02yPdJ/4apRI29XJbL0BqwsUIcjd2jJ0cnTY=;
- b=SAjFhTy8Gp1k0PmQm/TGP1Byu0mwHOJABr0HfC7NyPaLJ5t3p53xXJNF4iUAAfQCB2
- dD+wRlulqGr8X2drtOPrh2Sy89UZaX7szY3e7ozLGXyeWE1yh3Q1uAcVz2F1PpoLi8wI
- 017MBygXoUr7gpP5VMqob5fZsmJdLa4Or6wfntrFnLFgbdXX9T+526pP3OuQKJW94A4g
- +/W3WV/ESo/x6PE+442KZ1v6TOzC3G3nwSIqWffWbydG0lr4l4VJZbdFxq7zQuJI/EPD
- 25v40j0CcG/ILR8JQ4pZ+R1Ng4XFMuPcr0sXurv96XdVYWE13CbfaRQORf8qrEJMgPV1
- ENew==
-X-Gm-Message-State: APjAAAWFac3GmJaEhdq/kLM2jvkxwWzLrmFbJq+8TjpQ3gnoSEEJJLhp
- rBrXxTqMaDE3a3jIMAtRsGYmBRt84t3CLA==
-X-Google-Smtp-Source: APXvYqwP3X0J8lWjIMxxmjd7unuQEoMoZbWww3FjeBzFoPZmdGngKnGlZcGK9un87W8Y8mo+4XkOCQ==
-X-Received: by 2002:a17:90a:b011:: with SMTP id
- x17mr6764327pjq.113.1561649060874; 
- Thu, 27 Jun 2019 08:24:20 -0700 (PDT)
+ bh=AjHoyr0UySwycrqVbGqhPd/G36L+Az+7aEEjVYksGCg=;
+ b=pLA2vLGcoChlYeltsieEkzD9IYdxP9Z9PCqOe7RwarPxe0jRQayzFL8RmiBWe3YC/b
+ aao06bNSPRNSyXDKqIW9TEjHlfTDgJuOUzei8womvFcyF+gnoNqNj8zRETaHfmBtd4W2
+ TfBCSRMgMkN/nzbbbuRYUpEXTJxAKofIFdH/B4H9NGSfdYLB8mCetT3ww0gz6jewxepR
+ oJ84GJeVoh1XCTiFfCWi92cR57oROMPdsZ1eS55SC2eHGEiYNiBvFH/lMoR8ewvutJAB
+ GmgX+EcwmozE06SKilxStcXvcj5+PA9yjRsLJ2dfzF6cAn5F0tRHOfCcVGZKnJKeL4iR
+ Dy5Q==
+X-Gm-Message-State: APjAAAVAuXEvlsM1yDR7FuU5xWrBgQUIdAhpJDQS/KbsBz7QzQhdc4vH
+ IuI2f5pm6tqKEHUNbPL2uqnqXMqKP2Wmng==
+X-Google-Smtp-Source: APXvYqxsI4LGENnkg5LVnu2MLhFJH2kqk+wWwIKrxB20ZTCAugiZfap9XF2kRdnI0AvEWN65BiXYyg==
+X-Received: by 2002:a65:538d:: with SMTP id x13mr4355737pgq.190.1561649076935; 
+ Thu, 27 Jun 2019 08:24:36 -0700 (PDT)
 Received: from localhost (220-132-236-182.HINET-IP.hinet.net.
  [220.132.236.182])
- by smtp.gmail.com with ESMTPSA id q10sm2309063pgg.35.2019.06.27.08.24.20
+ by smtp.gmail.com with ESMTPSA id e4sm3144669pfi.35.2019.06.27.08.24.36
  (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
- Thu, 27 Jun 2019 08:24:20 -0700 (PDT)
-Date: Thu, 27 Jun 2019 08:20:01 -0700
-Message-Id: <20190627152011.18686-25-palmer@sifive.com>
+ Thu, 27 Jun 2019 08:24:36 -0700 (PDT)
+Date: Thu, 27 Jun 2019 08:20:07 -0700
+Message-Id: <20190627152011.18686-31-palmer@sifive.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <20190627152011.18686-1-palmer@sifive.com>
 References: <20190627152011.18686-1-palmer@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Cc: qemu-riscv@nongnu.org,       qemu-devel@nongnu.org,
- Jim Wilson <jimw@sifive.com>, Laurent Vivier <laurent@vivier.eu>,
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
  Palmer Dabbelt <palmer@sifive.com>
 From: Palmer Dabbelt <palmer@sifive.com>
 To: Peter Maydell <peter.maydell@linaro.org>
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
  [fuzzy]
-X-Received-From: 209.85.215.194
-Subject: [Qemu-riscv] [PULL 24/34] RISC-V: Update syscall list for 32-bit
- support.
+X-Received-From: 209.85.210.195
+Subject: [Qemu-riscv] [PULL 30/34] hw/riscv: Split out the boot functions
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -64,58 +62,387 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Jun 2019 15:26:00 -0000
+X-List-Received-Date: Thu, 27 Jun 2019 15:26:08 -0000
 
-From: Jim Wilson <jimw@sifive.com>
+From: Alistair Francis <alistair.francis@wdc.com>
 
-32-bit RISC-V uses _llseek instead of lseek as syscall number 62.
-Update syscall list from open-embedded build, primarily because
-32-bit RISC-V requires statx support.
+Split the common RISC-V boot functions into a seperate file. This allows
+us to share the common code.
 
-Tested with cross gcc testsuite runs for rv32 and rv64, with the
-pending statx patch also applied.
-
-Signed-off-by: Jim Wilson <jimw@sifive.com>
-Reviewed-by: Laurent Vivier <laurent@vivier.eu>
+Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+Tested-by: Bin Meng <bmeng.cn@gmail.com>
 Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
 ---
- linux-user/riscv/syscall_nr.h | 15 ++++++++++++++-
- 1 file changed, 14 insertions(+), 1 deletion(-)
+ hw/riscv/Makefile.objs  |  1 +
+ hw/riscv/boot.c         | 69 +++++++++++++++++++++++++++++++++++++++++
+ hw/riscv/sifive_e.c     | 17 ++--------
+ hw/riscv/sifive_u.c     | 17 ++--------
+ hw/riscv/spike.c        | 21 +++----------
+ hw/riscv/virt.c         | 51 +++---------------------------
+ include/hw/riscv/boot.h | 27 ++++++++++++++++
+ 7 files changed, 110 insertions(+), 93 deletions(-)
+ create mode 100644 hw/riscv/boot.c
+ create mode 100644 include/hw/riscv/boot.h
 
-diff --git a/linux-user/riscv/syscall_nr.h b/linux-user/riscv/syscall_nr.h
-index dab6509e3ade..5c8728220994 100644
---- a/linux-user/riscv/syscall_nr.h
-+++ b/linux-user/riscv/syscall_nr.h
-@@ -72,7 +72,11 @@
- #define TARGET_NR_pipe2 59
- #define TARGET_NR_quotactl 60
- #define TARGET_NR_getdents64 61
-+#ifdef TARGET_RISCV32
-+#define TARGET_NR__llseek 62
-+#else
- #define TARGET_NR_lseek 62
-+#endif
- #define TARGET_NR_read 63
- #define TARGET_NR_write 64
- #define TARGET_NR_readv 65
-@@ -286,7 +290,16 @@
- #define TARGET_NR_membarrier 283
- #define TARGET_NR_mlock2 284
- #define TARGET_NR_copy_file_range 285
-+#define TARGET_NR_preadv2 286
-+#define TARGET_NR_pwritev2 287
-+#define TARGET_NR_pkey_mprotect 288
-+#define TARGET_NR_pkey_alloc 289
-+#define TARGET_NR_pkey_free 290
-+#define TARGET_NR_statx 291
-+#define TARGET_NR_io_pgetevents 292
-+#define TARGET_NR_rseq 293
-+#define TARGET_NR_kexec_file_load 294
+diff --git a/hw/riscv/Makefile.objs b/hw/riscv/Makefile.objs
+index a65027304a2c..eb9d4f9ffc9e 100644
+--- a/hw/riscv/Makefile.objs
++++ b/hw/riscv/Makefile.objs
+@@ -1,3 +1,4 @@
++obj-y += boot.o
+ obj-$(CONFIG_SPIKE) += riscv_htif.o
+ obj-$(CONFIG_HART) += riscv_hart.o
+ obj-$(CONFIG_SIFIVE_E) += sifive_e.o
+diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
+new file mode 100644
+index 000000000000..0c8e72e455d7
+--- /dev/null
++++ b/hw/riscv/boot.c
+@@ -0,0 +1,69 @@
++/*
++ * QEMU RISC-V Boot Helper
++ *
++ * Copyright (c) 2017 SiFive, Inc.
++ * Copyright (c) 2019 Alistair Francis <alistair.francis@wdc.com>
++ *
++ * This program is free software; you can redistribute it and/or modify it
++ * under the terms and conditions of the GNU General Public License,
++ * version 2 or later, as published by the Free Software Foundation.
++ *
++ * This program is distributed in the hope it will be useful, but WITHOUT
++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
++ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
++ * more details.
++ *
++ * You should have received a copy of the GNU General Public License along with
++ * this program.  If not, see <http://www.gnu.org/licenses/>.
++ */
++
++#include "qemu/osdep.h"
++#include "qemu/units.h"
++#include "qemu/error-report.h"
++#include "exec/cpu-defs.h"
++#include "hw/loader.h"
++#include "hw/riscv/boot.h"
++#include "elf.h"
++
++target_ulong riscv_load_kernel(const char *kernel_filename)
++{
++    uint64_t kernel_entry, kernel_high;
++
++    if (load_elf(kernel_filename, NULL, NULL, NULL,
++                 &kernel_entry, NULL, &kernel_high, 0, EM_RISCV, 1, 0) < 0) {
++        error_report("could not load kernel '%s'", kernel_filename);
++        exit(1);
++    }
++
++    return kernel_entry;
++}
++
++hwaddr riscv_load_initrd(const char *filename, uint64_t mem_size,
++                         uint64_t kernel_entry, hwaddr *start)
++{
++    int size;
++
++    /*
++     * We want to put the initrd far enough into RAM that when the
++     * kernel is uncompressed it will not clobber the initrd. However
++     * on boards without much RAM we must ensure that we still leave
++     * enough room for a decent sized initrd, and on boards with large
++     * amounts of RAM we must avoid the initrd being so far up in RAM
++     * that it is outside lowmem and inaccessible to the kernel.
++     * So for boards with less  than 256MB of RAM we put the initrd
++     * halfway into RAM, and for boards with 256MB of RAM or more we put
++     * the initrd at 128MB.
++     */
++    *start = kernel_entry + MIN(mem_size / 2, 128 * MiB);
++
++    size = load_ramdisk(filename, *start, mem_size - *start);
++    if (size == -1) {
++        size = load_image_targphys(filename, *start, mem_size - *start);
++        if (size == -1) {
++            error_report("could not load ramdisk '%s'", filename);
++            exit(1);
++        }
++    }
++
++    return *start + size;
++}
+diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
+index a5b4086da36d..d27f626529fe 100644
+--- a/hw/riscv/sifive_e.c
++++ b/hw/riscv/sifive_e.c
+@@ -44,10 +44,10 @@
+ #include "hw/riscv/sifive_prci.h"
+ #include "hw/riscv/sifive_uart.h"
+ #include "hw/riscv/sifive_e.h"
++#include "hw/riscv/boot.h"
+ #include "chardev/char.h"
+ #include "sysemu/arch_init.h"
+ #include "exec/address-spaces.h"
+-#include "elf.h"
  
--#define TARGET_NR_syscalls (TARGET_NR_copy_file_range + 1)
-+#define TARGET_NR_syscalls (TARGET_NR_kexec_file_load + 1)
+ static const struct MemmapEntry {
+     hwaddr base;
+@@ -74,19 +74,6 @@ static const struct MemmapEntry {
+     [SIFIVE_E_DTIM] =     { 0x80000000,     0x4000 }
+ };
  
- #endif
+-static target_ulong load_kernel(const char *kernel_filename)
+-{
+-    uint64_t kernel_entry, kernel_high;
+-
+-    if (load_elf(kernel_filename, NULL, NULL, NULL,
+-                 &kernel_entry, NULL, &kernel_high,
+-                 0, EM_RISCV, 1, 0) < 0) {
+-        error_report("could not load kernel '%s'", kernel_filename);
+-        exit(1);
+-    }
+-    return kernel_entry;
+-}
+-
+ static void sifive_mmio_emulate(MemoryRegion *parent, const char *name,
+                              uintptr_t offset, uintptr_t length)
+ {
+@@ -131,7 +118,7 @@ static void riscv_sifive_e_init(MachineState *machine)
+                           memmap[SIFIVE_E_MROM].base, &address_space_memory);
+ 
+     if (machine->kernel_filename) {
+-        load_kernel(machine->kernel_filename);
++        riscv_load_kernel(machine->kernel_filename);
+     }
+ }
+ 
+diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+index a416d5d08b4d..f6b9c12e6094 100644
+--- a/hw/riscv/sifive_u.c
++++ b/hw/riscv/sifive_u.c
+@@ -41,11 +41,11 @@
+ #include "hw/riscv/sifive_uart.h"
+ #include "hw/riscv/sifive_prci.h"
+ #include "hw/riscv/sifive_u.h"
++#include "hw/riscv/boot.h"
+ #include "chardev/char.h"
+ #include "sysemu/arch_init.h"
+ #include "sysemu/device_tree.h"
+ #include "exec/address-spaces.h"
+-#include "elf.h"
+ 
+ #include <libfdt.h>
+ 
+@@ -65,19 +65,6 @@ static const struct MemmapEntry {
+ 
+ #define GEM_REVISION        0x10070109
+ 
+-static target_ulong load_kernel(const char *kernel_filename)
+-{
+-    uint64_t kernel_entry, kernel_high;
+-
+-    if (load_elf(kernel_filename, NULL, NULL, NULL,
+-                 &kernel_entry, NULL, &kernel_high,
+-                 0, EM_RISCV, 1, 0) < 0) {
+-        error_report("could not load kernel '%s'", kernel_filename);
+-        exit(1);
+-    }
+-    return kernel_entry;
+-}
+-
+ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
+     uint64_t mem_size, const char *cmdline)
+ {
+@@ -283,7 +270,7 @@ static void riscv_sifive_u_init(MachineState *machine)
+     create_fdt(s, memmap, machine->ram_size, machine->kernel_cmdline);
+ 
+     if (machine->kernel_filename) {
+-        load_kernel(machine->kernel_filename);
++        riscv_load_kernel(machine->kernel_filename);
+     }
+ 
+     /* reset vector */
+diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
+index 5b33d4be3bbc..e68be00a5fe8 100644
+--- a/hw/riscv/spike.c
++++ b/hw/riscv/spike.c
+@@ -36,12 +36,12 @@
+ #include "hw/riscv/riscv_hart.h"
+ #include "hw/riscv/sifive_clint.h"
+ #include "hw/riscv/spike.h"
++#include "hw/riscv/boot.h"
+ #include "chardev/char.h"
+ #include "sysemu/arch_init.h"
+ #include "sysemu/device_tree.h"
+ #include "sysemu/qtest.h"
+ #include "exec/address-spaces.h"
+-#include "elf.h"
+ 
+ #include <libfdt.h>
+ 
+@@ -54,19 +54,6 @@ static const struct MemmapEntry {
+     [SPIKE_DRAM] =     { 0x80000000,        0x0 },
+ };
+ 
+-static target_ulong load_kernel(const char *kernel_filename)
+-{
+-    uint64_t kernel_entry, kernel_high;
+-
+-    if (load_elf_ram_sym(kernel_filename, NULL, NULL, NULL,
+-            &kernel_entry, NULL, &kernel_high, 0, EM_RISCV, 1, 0,
+-            NULL, true, htif_symbol_callback) < 0) {
+-        error_report("could not load kernel '%s'", kernel_filename);
+-        exit(1);
+-    }
+-    return kernel_entry;
+-}
+-
+ static void create_fdt(SpikeState *s, const struct MemmapEntry *memmap,
+     uint64_t mem_size, const char *cmdline)
+ {
+@@ -199,7 +186,7 @@ static void spike_board_init(MachineState *machine)
+                                 mask_rom);
+ 
+     if (machine->kernel_filename) {
+-        load_kernel(machine->kernel_filename);
++        riscv_load_kernel(machine->kernel_filename);
+     }
+ 
+     /* reset vector */
+@@ -287,7 +274,7 @@ static void spike_v1_10_0_board_init(MachineState *machine)
+                                 mask_rom);
+ 
+     if (machine->kernel_filename) {
+-        load_kernel(machine->kernel_filename);
++        riscv_load_kernel(machine->kernel_filename);
+     }
+ 
+     /* reset vector */
+@@ -372,7 +359,7 @@ static void spike_v1_09_1_board_init(MachineState *machine)
+                                 mask_rom);
+ 
+     if (machine->kernel_filename) {
+-        load_kernel(machine->kernel_filename);
++        riscv_load_kernel(machine->kernel_filename);
+     }
+ 
+     /* reset vector */
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index 28d96daf8c5b..485aefa99523 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -34,13 +34,13 @@
+ #include "hw/riscv/sifive_clint.h"
+ #include "hw/riscv/sifive_test.h"
+ #include "hw/riscv/virt.h"
++#include "hw/riscv/boot.h"
+ #include "chardev/char.h"
+ #include "sysemu/arch_init.h"
+ #include "sysemu/device_tree.h"
+ #include "exec/address-spaces.h"
+ #include "hw/pci/pci.h"
+ #include "hw/pci-host/gpex.h"
+-#include "elf.h"
+ 
+ #include <libfdt.h>
+ 
+@@ -61,47 +61,6 @@ static const struct MemmapEntry {
+     [VIRT_PCIE_ECAM] =   { 0x30000000,    0x10000000 },
+ };
+ 
+-static target_ulong load_kernel(const char *kernel_filename)
+-{
+-    uint64_t kernel_entry, kernel_high;
+-
+-    if (load_elf(kernel_filename, NULL, NULL, NULL,
+-                 &kernel_entry, NULL, &kernel_high,
+-                 0, EM_RISCV, 1, 0) < 0) {
+-        error_report("could not load kernel '%s'", kernel_filename);
+-        exit(1);
+-    }
+-    return kernel_entry;
+-}
+-
+-static hwaddr load_initrd(const char *filename, uint64_t mem_size,
+-                          uint64_t kernel_entry, hwaddr *start)
+-{
+-    int size;
+-
+-    /* We want to put the initrd far enough into RAM that when the
+-     * kernel is uncompressed it will not clobber the initrd. However
+-     * on boards without much RAM we must ensure that we still leave
+-     * enough room for a decent sized initrd, and on boards with large
+-     * amounts of RAM we must avoid the initrd being so far up in RAM
+-     * that it is outside lowmem and inaccessible to the kernel.
+-     * So for boards with less  than 256MB of RAM we put the initrd
+-     * halfway into RAM, and for boards with 256MB of RAM or more we put
+-     * the initrd at 128MB.
+-     */
+-    *start = kernel_entry + MIN(mem_size / 2, 128 * MiB);
+-
+-    size = load_ramdisk(filename, *start, mem_size - *start);
+-    if (size == -1) {
+-        size = load_image_targphys(filename, *start, mem_size - *start);
+-        if (size == -1) {
+-            error_report("could not load ramdisk '%s'", filename);
+-            exit(1);
+-        }
+-    }
+-    return *start + size;
+-}
+-
+ static void create_pcie_irq_map(void *fdt, char *nodename,
+                                 uint32_t plic_phandle)
+ {
+@@ -440,13 +399,13 @@ static void riscv_virt_board_init(MachineState *machine)
+                                 mask_rom);
+ 
+     if (machine->kernel_filename) {
+-        uint64_t kernel_entry = load_kernel(machine->kernel_filename);
++        uint64_t kernel_entry = riscv_load_kernel(machine->kernel_filename);
+ 
+         if (machine->initrd_filename) {
+             hwaddr start;
+-            hwaddr end = load_initrd(machine->initrd_filename,
+-                                     machine->ram_size, kernel_entry,
+-                                     &start);
++            hwaddr end = riscv_load_initrd(machine->initrd_filename,
++                                           machine->ram_size, kernel_entry,
++                                           &start);
+             qemu_fdt_setprop_cell(fdt, "/chosen",
+                                   "linux,initrd-start", start);
+             qemu_fdt_setprop_cell(fdt, "/chosen", "linux,initrd-end",
+diff --git a/include/hw/riscv/boot.h b/include/hw/riscv/boot.h
+new file mode 100644
+index 000000000000..f84fd6c2df5e
+--- /dev/null
++++ b/include/hw/riscv/boot.h
+@@ -0,0 +1,27 @@
++/*
++ * QEMU RISC-V Boot Helper
++ *
++ * Copyright (c) 2017 SiFive, Inc.
++ * Copyright (c) 2019 Alistair Francis <alistair.francis@wdc.com>
++ *
++ * This program is free software; you can redistribute it and/or modify it
++ * under the terms and conditions of the GNU General Public License,
++ * version 2 or later, as published by the Free Software Foundation.
++ *
++ * This program is distributed in the hope it will be useful, but WITHOUT
++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
++ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
++ * more details.
++ *
++ * You should have received a copy of the GNU General Public License along with
++ * this program.  If not, see <http://www.gnu.org/licenses/>.
++ */
++
++#ifndef RISCV_BOOT_H
++#define RISCV_BOOT_H
++
++target_ulong riscv_load_kernel(const char *kernel_filename);
++hwaddr riscv_load_initrd(const char *filename, uint64_t mem_size,
++                         uint64_t kernel_entry, hwaddr *start);
++
++#endif /* RISCV_BOOT_H */
 -- 
 2.21.0
 
