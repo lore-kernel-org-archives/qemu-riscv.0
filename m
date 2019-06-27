@@ -1,58 +1,57 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hgWFm-0001Vp-It
-	for mharc-qemu-riscv@gnu.org; Thu, 27 Jun 2019 11:24:03 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:60687)
+	id 1hgWFo-0001Wq-IW
+	for mharc-qemu-riscv@gnu.org; Thu, 27 Jun 2019 11:24:05 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:60672)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <palmer@dabbelt.com>) id 1hgWFg-0001O3-4V
- for qemu-riscv@nongnu.org; Thu, 27 Jun 2019 11:23:58 -0400
+ (envelope-from <palmer@dabbelt.com>) id 1hgWFb-0001Ig-7K
+ for qemu-riscv@nongnu.org; Thu, 27 Jun 2019 11:23:56 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmer@dabbelt.com>) id 1hgWFQ-0006gb-V7
- for qemu-riscv@nongnu.org; Thu, 27 Jun 2019 11:23:45 -0400
-Received: from mail-pg1-f193.google.com ([209.85.215.193]:33380)
+ (envelope-from <palmer@dabbelt.com>) id 1hgWFQ-0006fg-2t
+ for qemu-riscv@nongnu.org; Thu, 27 Jun 2019 11:23:43 -0400
+Received: from mail-pg1-f195.google.com ([209.85.215.195]:37488)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1hgWFN-0006bn-UO
- for qemu-riscv@nongnu.org; Thu, 27 Jun 2019 11:23:38 -0400
-Received: by mail-pg1-f193.google.com with SMTP id m4so1187265pgk.0
- for <qemu-riscv@nongnu.org>; Thu, 27 Jun 2019 08:23:35 -0700 (PDT)
+ (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1hgWFM-0006XZ-GM
+ for qemu-riscv@nongnu.org; Thu, 27 Jun 2019 11:23:37 -0400
+Received: by mail-pg1-f195.google.com with SMTP id 25so1178424pgy.4
+ for <qemu-riscv@nongnu.org>; Thu, 27 Jun 2019 08:23:30 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding:cc:from:to;
- bh=Iw6+m+IE1PHOTPzSnV8qMJ+Sj/ZsLxY0VeWDR+SUS50=;
- b=NuPHN7ibbDMm5zHWxFx2b5GhYMm79dZrpGf9eJG3hE9gwPxIehhbSZeT0PXwqyBYHg
- b/xFFxd+8H8GTtUT2Ukk22yCeH/ljIVJbyxOY3P3SK3Wj0QFnLGWcCRHbE8LIVETfLzX
- xd2Kn9BVrgcRnZjLOOfnm8BekgEjJKwhs0zz/JLxw/1G+mdni4I5cFrUsSaBy2ur8B7M
- n9dtkEZBPM1sP1uh+fD/FQLB5vC5n+UcR9lcASujFpYWtQRdVt9thuufpHywGwcdq3xy
- DBvbTEv/ME/G93fDjCk6twBws2+t7ox12jaJ2LNr+o78ZKjAzlMdhJhdfKqo3YFs/+D1
- yuUg==
-X-Gm-Message-State: APjAAAUB9IPIruFDQkhbMgFhwp9CAO7Tq5QasiABSV13EPCCONE+1kNi
- G9a+dyz5HhvlQmgTMk4v78pA+JmWSXKAiw==
-X-Google-Smtp-Source: APXvYqx7QFAz0ycxwYn64N6rMCpYYUd5z3YRPOnYVpiuJW21aJOrTXHvztilDPsGl48ZbuyUtf2fIw==
-X-Received: by 2002:a63:1864:: with SMTP id 36mr2871248pgy.272.1561649014575; 
- Thu, 27 Jun 2019 08:23:34 -0700 (PDT)
+ bh=TZ7LklPK8UvVtDwbEWjV8Myyoa+ER/F09z/DtS5QZ9Q=;
+ b=NR7qJf7RiGxjtM0cf/g+fgnBdjsMOyrny4x1TCnoMzNecjWWC8qOmceZ90wCTRgpUj
+ 5F6l5nDq1TBRumYXeeLgYGu+9gPFg2OkJ8AIe8yvSGeYEvYcUJys2IqP2fyFz8BIxevR
+ JrcH0PXYKsHqVoVFh8R7lEIS6Yrl87dP3Iua1hcBv8BxU2orsb6G/4OayH54gBD8GVMv
+ RSvIZl6TL0cRQna6GsVJb0TiQ5ZGuIPIJ+QsX/v/z2eyrsdMtr59LH9Wl3kgmTR78V+G
+ 7FmcLVXp9ANeBXzpCQ0usv+tIZoyNJ10K4+lMV+a+PYbB2v+8cLgDx6Ss73WtFMUg29a
+ 0YZg==
+X-Gm-Message-State: APjAAAW0EFw+fTTsnXtlKPpKJwrQabskbVfYb641rR1iA6sFSP5Sg/mB
+ izs2DcO0vlXNDoojrJCXaWyr+9cFRRliuA==
+X-Google-Smtp-Source: APXvYqz96Z5D+cDoqKbBihFB+I4HnE63ScZ4XIrhinLF5xe1t36Ibe09/oWBTCkDhgvNQ92gzY61Fw==
+X-Received: by 2002:a65:45c1:: with SMTP id m1mr4496552pgr.260.1561649009389; 
+ Thu, 27 Jun 2019 08:23:29 -0700 (PDT)
 Received: from localhost (220-132-236-182.HINET-IP.hinet.net.
  [220.132.236.182])
- by smtp.gmail.com with ESMTPSA id i126sm3786390pfb.32.2019.06.27.08.23.33
+ by smtp.gmail.com with ESMTPSA id h1sm4117306pfg.55.2019.06.27.08.23.28
  (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
- Thu, 27 Jun 2019 08:23:34 -0700 (PDT)
-Date: Thu, 27 Jun 2019 08:19:42 -0700
-Message-Id: <20190627152011.18686-6-palmer@sifive.com>
+ Thu, 27 Jun 2019 08:23:28 -0700 (PDT)
+Date: Thu, 27 Jun 2019 08:19:40 -0700
+Message-Id: <20190627152011.18686-4-palmer@sifive.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <20190627152011.18686-1-palmer@sifive.com>
 References: <20190627152011.18686-1-palmer@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Cc: qemu-riscv@nongnu.org,       qemu-devel@nongnu.org,
- Hesham Almatary <Hesham.Almatary@cl.cam.ac.uk>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Palmer Dabbelt <palmer@sifive.com>
+ Dayeol Lee <dayeol@berkeley.edu>, Alistair Francis <alistair.francis@wdc.com>,
+ Michael Clark <mjc@sifive.com>, Palmer Dabbelt <palmer@sifive.com>
 From: Palmer Dabbelt <palmer@sifive.com>
 To: Peter Maydell <peter.maydell@linaro.org>
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
  [fuzzy]
-X-Received-From: 209.85.215.193
-Subject: [Qemu-riscv] [PULL 05/34] RISC-V: Only Check PMP if MMU translation
- succeeds
+X-Received-From: 209.85.215.195
+Subject: [Qemu-riscv] [PULL 03/34] target/riscv: Fix PMP range boundary
+ address bug
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -64,41 +63,46 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Jun 2019 15:23:59 -0000
+X-List-Received-Date: Thu, 27 Jun 2019 15:23:57 -0000
 
-From: Hesham Almatary <Hesham.Almatary@cl.cam.ac.uk>
+From: Dayeol Lee <dayeol@berkeley.edu>
 
-The current implementation unnecessarily checks for PMP even if MMU translation
-failed. This may trigger a wrong PMP access exception instead of
-a page exception.
+A wrong address is passed to `pmp_is_in_range` while checking if a
+memory access is within a PMP range.
+Since the ending address of the pmp range (i.e., pmp_state.addr[i].ea)
+is set to the last address in the range (i.e., pmp base + pmp size - 1),
+memory accesses containg the last address in the range will always fail.
 
-For example, the very first instruction fetched after the first satp write in
-S-Mode will trigger a PMP access fault instead of an instruction fetch page
-fault.
+For example, assume that a PMP range is 4KB from 0x87654000 such that
+the last address within the range is 0x87654fff.
+1-byte access to 0x87654fff should be considered to be fully inside the
+PMP range.
+However the access now fails and complains partial inclusion because
+pmp_is_in_range(env, i, addr + size) returns 0 whereas
+pmp_is_in_range(env, i, addr) returns 1.
 
-This patch prioritises MMU exceptions over PMP exceptions and only checks for
-PMP if MMU translation succeeds. This patch is required for future commits
-that properly report PMP exception violations if PTW succeeds.
-
-Signed-off-by: Hesham Almatary <Hesham.Almatary@cl.cam.ac.uk>
+Signed-off-by: Dayeol Lee <dayeol@berkeley.edu>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Michael Clark <mjc@sifive.com>
+Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
 ---
- target/riscv/cpu_helper.c | 1 +
- 1 file changed, 1 insertion(+)
+ target/riscv/pmp.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 0bbfb7f48b79..a45b05ef8395 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -436,6 +436,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-                   " prot %d\n", __func__, address, ret, pa, prot);
+diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
+index fed1c3c0301b..e0fe2064074a 100644
+--- a/target/riscv/pmp.c
++++ b/target/riscv/pmp.c
+@@ -245,7 +245,7 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
+          from low to high */
+     for (i = 0; i < MAX_RISCV_PMPS; i++) {
+         s = pmp_is_in_range(env, i, addr);
+-        e = pmp_is_in_range(env, i, addr + size);
++        e = pmp_is_in_range(env, i, addr + size - 1);
  
-     if (riscv_feature(env, RISCV_FEATURE_PMP) &&
-+        (ret == TRANSLATE_SUCCESS) &&
-         !pmp_hart_has_privs(env, pa, TARGET_PAGE_SIZE, 1 << access_type)) {
-         ret = TRANSLATE_FAIL;
-     }
+         /* partially inside */
+         if ((s + e) == 1) {
 -- 
 2.21.0
 
