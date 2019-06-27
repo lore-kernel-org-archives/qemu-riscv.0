@@ -1,59 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hgWGi-0001mx-H7
-	for mharc-qemu-riscv@gnu.org; Thu, 27 Jun 2019 11:25:00 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:60815)
+	id 1hgWHQ-000300-DU
+	for mharc-qemu-riscv@gnu.org; Thu, 27 Jun 2019 11:25:44 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:60951)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <palmer@dabbelt.com>) id 1hgWGc-0001ky-J1
- for qemu-riscv@nongnu.org; Thu, 27 Jun 2019 11:24:57 -0400
+ (envelope-from <palmer@dabbelt.com>) id 1hgWGp-0001pv-Ph
+ for qemu-riscv@nongnu.org; Thu, 27 Jun 2019 11:25:13 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmer@dabbelt.com>) id 1hgWGZ-0007cL-VC
- for qemu-riscv@nongnu.org; Thu, 27 Jun 2019 11:24:52 -0400
-Received: from mail-pl1-f196.google.com ([209.85.214.196]:32914)
+ (envelope-from <palmer@dabbelt.com>) id 1hgWGn-0007q9-6v
+ for qemu-riscv@nongnu.org; Thu, 27 Jun 2019 11:25:07 -0400
+Received: from mail-pg1-f195.google.com ([209.85.215.195]:34310)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1hgWGY-0006lC-Mo
- for qemu-riscv@nongnu.org; Thu, 27 Jun 2019 11:24:50 -0400
-Received: by mail-pl1-f196.google.com with SMTP id c14so1499284plo.0
- for <qemu-riscv@nongnu.org>; Thu, 27 Jun 2019 08:23:48 -0700 (PDT)
+ (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1hgWGk-0007HL-Av
+ for qemu-riscv@nongnu.org; Thu, 27 Jun 2019 11:25:04 -0400
+Received: by mail-pg1-f195.google.com with SMTP id p10so1187973pgn.1
+ for <qemu-riscv@nongnu.org>; Thu, 27 Jun 2019 08:24:29 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding:cc:from:to;
- bh=EKsqQug7v7zszsNqo0b9Js3bl54LND9OiSrVub9vLW4=;
- b=PwbZoIfWasLfVwnLTBuiuj52DUvcxrUOZRe/DPE7mjzCy9nxEpH4Yl4zGLsyZdwM5I
- hGQtVoQYbVuLMn1Cje5WxvIN6OE69AqeRShE9djgQnFQdHH95r8I6iB16PI9xVSOv36B
- HNA87J3/85pszsJRXV+mHx3Q+mYnEthgbuk884LHAv8c8gXp3cX9JpLyb0tH8GPBaaib
- d38LVj7v77e+Okb4GKyV6x2VA22BhU66y1LgPIoucPQjyx1GNXBCI+qI6j0fqXCjzONt
- OLpDkx2vV/bu06l/Pt9mMr7benPENSG6fOkcZHl4NmTjh/1scthCKfg59e3MFwWYTLiy
- vRig==
-X-Gm-Message-State: APjAAAV5P7AiTT/WggzhS83f50wXlyOfa5n15Zm0LDPZyp9oY/MRuGZg
- fxxi08qKs9MkbZ9cXO/hUq/utMoIyFPxHw==
-X-Google-Smtp-Source: APXvYqyRMQg2H4LjYcqHOJbejMMN+hBHC7SOa/P/+uW0VsKzuXmE5DIcEDTPnnw01BoTEWHqExXJ+A==
-X-Received: by 2002:a17:902:a517:: with SMTP id
- s23mr5262268plq.306.1561649026947; 
- Thu, 27 Jun 2019 08:23:46 -0700 (PDT)
+ bh=jNAXnuen/EqceGboq9jqUh/HLce5kvK8361K7LpbToc=;
+ b=tdF6K4X4iqb+izhf4Ewp9OI/g++4N+wulBp92CMvM2ZDaflafG/FN/QcezlH5rE1xn
+ 9v0aRAqFsNAtvXzxtdaZvuxqMT5Db/y7nrmkDpjn0TYYxshQWvnEeOPDRkkURcg28G3s
+ +DV6E0iO2A+WIzF1Iixpam2k66/UQq3+nkBaYuwZ49sjDx1t8Ey5e6drmZvO62h65zsd
+ DJmi2zgCclA0PP/RR0bSL+QZCDReB48zrNUiN/ZaIvlQ8dewsU9+05SbNuTrvXIFNz48
+ j+bRxOVfGluChul7LdMnex0kNvCu/sUK4MwA/PSydbysx5ygdjBd/vfJKHj6lxSLio5+
+ 3jzA==
+X-Gm-Message-State: APjAAAUesMOIJHFwcidWHVvhV1q/Ab6YEDZty1mPxhO1H6SVKxqNzAYT
+ ps0yQo9NWOK9aQKtIOBzLWCMSQL+QPGcWw==
+X-Google-Smtp-Source: APXvYqzWMlnaE1X5C4yiofYhLiuqPsrEf8BZb+R6LZa9V7v6zwnulh0AdTxVJXGYiVDMXNA1xiNb8Q==
+X-Received: by 2002:a17:90a:71cb:: with SMTP id
+ m11mr6419278pjs.40.1561649068364; 
+ Thu, 27 Jun 2019 08:24:28 -0700 (PDT)
 Received: from localhost (220-132-236-182.HINET-IP.hinet.net.
  [220.132.236.182])
- by smtp.gmail.com with ESMTPSA id o14sm5045356pjp.29.2019.06.27.08.23.46
+ by smtp.gmail.com with ESMTPSA id k3sm2637153pgo.81.2019.06.27.08.24.27
  (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
- Thu, 27 Jun 2019 08:23:46 -0700 (PDT)
-Date: Thu, 27 Jun 2019 08:19:47 -0700
-Message-Id: <20190627152011.18686-11-palmer@sifive.com>
+ Thu, 27 Jun 2019 08:24:27 -0700 (PDT)
+Date: Thu, 27 Jun 2019 08:20:04 -0700
+Message-Id: <20190627152011.18686-28-palmer@sifive.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <20190627152011.18686-1-palmer@sifive.com>
 References: <20190627152011.18686-1-palmer@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Cc: qemu-riscv@nongnu.org,       qemu-devel@nongnu.org,
- Hesham Almatary <Hesham.Almatary@cl.cam.ac.uk>,
+ "Wladimir J. van der Laan" <laanwj@gmail.com>, Michael Clark <mjc@sifive.com>,
  Alistair Francis <alistair.francis@wdc.com>, 
  Palmer Dabbelt <palmer@sifive.com>
 From: Palmer Dabbelt <palmer@sifive.com>
 To: Peter Maydell <peter.maydell@linaro.org>
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
  [fuzzy]
-X-Received-From: 209.85.214.196
-Subject: [Qemu-riscv] [PULL 10/34] RISC-V: Fix a PMP check with the correct
- access size
+X-Received-From: 209.85.215.195
+Subject: [Qemu-riscv] [PULL 27/34] disas/riscv: Fix `rdinstreth` constraint
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -65,34 +64,46 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Jun 2019 15:24:57 -0000
+X-List-Received-Date: Thu, 27 Jun 2019 15:25:20 -0000
+X-List-Received-Date: Thu, 27 Jun 2019 15:25:20 -0000
 
-From: Hesham Almatary <Hesham.Almatary@cl.cam.ac.uk>
+From: "Wladimir J. van der Laan" <laanwj@gmail.com>
 
-The PMP check should be of the memory access size rather
-than TARGET_PAGE_SIZE.
+The constraint for `rdinstreth` was comparing the csr number to 0xc80,
+which is `cycleh` instead. Fix this.
 
-Signed-off-by: Hesham Almatary <Hesham.Almatary@cl.cam.ac.uk>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Signed-off-by: Wladimir J. van der Laan <laanwj@gmail.com>
+Signed-off-by: Michael Clark <mjc@sifive.com>
+Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
 Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
 ---
- target/riscv/cpu_helper.c | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+ disas/riscv.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 66be83210f11..e1b079e69c60 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -452,8 +452,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
- 
-     if (riscv_feature(env, RISCV_FEATURE_PMP) &&
-         (ret == TRANSLATE_SUCCESS) &&
--        !pmp_hart_has_privs(env, pa, TARGET_PAGE_SIZE, 1 << access_type,
--        mode)) {
-+        !pmp_hart_has_privs(env, pa, size, 1 << access_type, mode)) {
-         ret = TRANSLATE_PMP_FAIL;
-     }
-     if (ret == TRANSLATE_PMP_FAIL) {
+diff --git a/disas/riscv.c b/disas/riscv.c
+index d37312705516..278d9be9247e 100644
+--- a/disas/riscv.c
++++ b/disas/riscv.c
+@@ -614,7 +614,8 @@ static const rvc_constraint rvcc_rdtime[] = { rvc_rs1_eq_x0, rvc_csr_eq_0xc01, r
+ static const rvc_constraint rvcc_rdinstret[] = { rvc_rs1_eq_x0, rvc_csr_eq_0xc02, rvc_end };
+ static const rvc_constraint rvcc_rdcycleh[] = { rvc_rs1_eq_x0, rvc_csr_eq_0xc80, rvc_end };
+ static const rvc_constraint rvcc_rdtimeh[] = { rvc_rs1_eq_x0, rvc_csr_eq_0xc81, rvc_end };
+-static const rvc_constraint rvcc_rdinstreth[] = { rvc_rs1_eq_x0, rvc_csr_eq_0xc80, rvc_end };
++static const rvc_constraint rvcc_rdinstreth[] = { rvc_rs1_eq_x0,
++                                                  rvc_csr_eq_0xc82, rvc_end };
+ static const rvc_constraint rvcc_frcsr[] = { rvc_rs1_eq_x0, rvc_csr_eq_0x003, rvc_end };
+ static const rvc_constraint rvcc_frrm[] = { rvc_rs1_eq_x0, rvc_csr_eq_0x002, rvc_end };
+ static const rvc_constraint rvcc_frflags[] = { rvc_rs1_eq_x0, rvc_csr_eq_0x001, rvc_end };
+@@ -1038,7 +1039,7 @@ const rv_opcode_data opcode_data[] = {
+     { "c.srai", rv_codec_cb_sh6, rv_fmt_rd_rs1_imm, NULL, rv_op_srai,
+       rv_op_srai, rv_op_srai, rvcd_imm_nz },
+     { "c.andi", rv_codec_cb_imm, rv_fmt_rd_rs1_imm, NULL, rv_op_andi,
+-      rv_op_andi, rv_op_andi, rvcd_imm_nz },
++      rv_op_andi, rv_op_andi },
+     { "c.sub", rv_codec_cs, rv_fmt_rd_rs1_rs2, NULL, rv_op_sub, rv_op_sub, rv_op_sub },
+     { "c.xor", rv_codec_cs, rv_fmt_rd_rs1_rs2, NULL, rv_op_xor, rv_op_xor, rv_op_xor },
+     { "c.or", rv_codec_cs, rv_fmt_rd_rs1_rs2, NULL, rv_op_or, rv_op_or, rv_op_or },
 -- 
 2.21.0
 
