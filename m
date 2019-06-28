@@ -1,57 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hgulC-0000VM-Bg
+	id 1hgulC-0000WF-OI
 	for mharc-qemu-riscv@gnu.org; Fri, 28 Jun 2019 13:34:06 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:54931)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:55027)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <palmer@dabbelt.com>) id 1hgul0-0008Vm-9N
- for qemu-riscv@nongnu.org; Fri, 28 Jun 2019 13:33:56 -0400
+ (envelope-from <palmer@dabbelt.com>) id 1hgul5-0000EW-Jw
+ for qemu-riscv@nongnu.org; Fri, 28 Jun 2019 13:34:02 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmer@dabbelt.com>) id 1hguku-0000e0-Or
- for qemu-riscv@nongnu.org; Fri, 28 Jun 2019 13:33:52 -0400
-Received: from mail-pg1-f196.google.com ([209.85.215.196]:37709)
+ (envelope-from <palmer@dabbelt.com>) id 1hgul2-0000mN-DC
+ for qemu-riscv@nongnu.org; Fri, 28 Jun 2019 13:33:59 -0400
+Received: from mail-pf1-f195.google.com ([209.85.210.195]:41711)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1hguku-0000ab-Hs
- for qemu-riscv@nongnu.org; Fri, 28 Jun 2019 13:33:48 -0400
-Received: by mail-pg1-f196.google.com with SMTP id g15so990289pgi.4
- for <qemu-riscv@nongnu.org>; Fri, 28 Jun 2019 10:33:45 -0700 (PDT)
+ (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1hgul2-0000fR-71
+ for qemu-riscv@nongnu.org; Fri, 28 Jun 2019 13:33:56 -0400
+Received: by mail-pf1-f195.google.com with SMTP id m30so3319973pff.8
+ for <qemu-riscv@nongnu.org>; Fri, 28 Jun 2019 10:33:51 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding:cc:from:to;
- bh=/utRw/o8PW3YQm+ZhJWNBeL8gDnPNYLiS6dXiDJvvqI=;
- b=nY6zmZbIy1v2kgXUaCcMSLU2OGpqdDzfeJXiJy1Pwq/9suzrZdlW3nvYUCkQNpUDg3
- /5ACpsvBq74kOcsO9t/OcTSISecIhstkrKqIKjkX7DmWSWJlhYsFIH0ELcWf5Tvzd6mF
- MCocr0f0bLfqSl2/iKV47bX+wf5K9nvmaEzHZeW5LyP18J2FCzWuZhhpZK9224jMTgsd
- PjNlPixFbQDGOWNj4O+ENnJCCYpWdjIj4VLTH+rgHi8c0tHGJBucn4vcry+e679k+Cqj
- e6ILMjubgyVy5aUI32blsIuD2FyO6djj0zJeKIT7PbZO622+UoaCTv1plBPZODZqt3i6
- KP7g==
-X-Gm-Message-State: APjAAAUf3dsRduVJEocMEn4kzuQOokR+HRGtz4ZsqAKhoeXZxzbebsm7
- Nib9Ft8Lx6ibZp796QS2A4LwNfKQZZCLw3ak
-X-Google-Smtp-Source: APXvYqzfaMjMMQgI9TpXaxgnob1w6PAJnW8K2KqVZ/8sgcG0/Eu6o+E6g/YEij18vRQZmXP7iS3eng==
-X-Received: by 2002:a63:4c46:: with SMTP id m6mr10688357pgl.59.1561743224665; 
- Fri, 28 Jun 2019 10:33:44 -0700 (PDT)
+ bh=8AbRazPuGbBA4/wcOJ0NXPkCs6Kyha3rsVtogdXoPZc=;
+ b=l+V+asTgoDy7E1rCU0Y42qGSjjldR0s0c0WUoIQSHukr8d7OimP/a+Q7+0wrm9vIjG
+ HMMaV8Oc+tZkRRQYpPj58uy6ixXo0pcD19feGzTLoTzn+12uDr+g2dwA+bKjqm8IdDSl
+ JAiHpm4kgB2+GK4fo3K29vYXrTaEB3Bc5AfTFXWaXYvvvKLp27eC3ABlCYv4uSCBfA2J
+ 8quncA60fs/j6I/oHmSt8HHJFWlPBbDOOehOU7qHXjUcjAAhdP6q97+O8k9nLYLmvBsq
+ u2kHmCy813SYoCbXSa0a/yFk8tNOMrgUtPLak4qBy+hWEJa993S5uy/dCNVVQXtAuk0F
+ BOcQ==
+X-Gm-Message-State: APjAAAWp6hpgoCmzbLxq7MC/bYSeyRyo+kQLejWKtm9CiZKfhg4GrJfM
+ /Y3p/VzELqOmtkPREagkoy8E9A==
+X-Google-Smtp-Source: APXvYqxfodMerfjoAXuAZBJVvxFtBLdj0y5A0PYRaLJYrY0ggS0qGIs+o+tz1+mErYtldZexIfaOsw==
+X-Received: by 2002:a63:c20e:: with SMTP id b14mr10160941pgd.96.1561743230047; 
+ Fri, 28 Jun 2019 10:33:50 -0700 (PDT)
 Received: from localhost (220-132-236-182.HINET-IP.hinet.net.
  [220.132.236.182])
- by smtp.gmail.com with ESMTPSA id x25sm3202020pfm.48.2019.06.28.10.33.43
+ by smtp.gmail.com with ESMTPSA id i14sm4626583pfk.0.2019.06.28.10.33.49
  (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
- Fri, 28 Jun 2019 10:33:43 -0700 (PDT)
-Date: Fri, 28 Jun 2019 10:32:16 -0700
-Message-Id: <20190628173227.31925-24-palmer@sifive.com>
+ Fri, 28 Jun 2019 10:33:49 -0700 (PDT)
+Date: Fri, 28 Jun 2019 10:32:18 -0700
+Message-Id: <20190628173227.31925-26-palmer@sifive.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <20190628173227.31925-1-palmer@sifive.com>
 References: <20190628173227.31925-1-palmer@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Cc: qemu-devel@nongnu.org,       qemu-riscv@nongnu.org,
- Joel Sing <joel@sing.id.au>, Palmer Dabbelt <palmer@sifive.com>,
- Richard Henderson <richard.henderson@linaro.org>
+ Atish Patra <atish.patra@wdc.com>, Alistair Francis <alistair.francis@wdc.com>,
+ Palmer Dabbelt <palmer@sifive.com>
 From: Palmer Dabbelt <palmer@sifive.com>
 To: Peter Maydell <peter.maydell@linaro.org>
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
  [fuzzy]
-X-Received-From: 209.85.215.196
-Subject: [Qemu-riscv] [PULL 23/34] RISC-V: Clear load reservations on
- context switch and SC
+X-Received-From: 209.85.210.195
+Subject: [Qemu-riscv] [PULL 25/34] riscv: virt: Add cpu-topology DT node.
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -63,83 +62,84 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Jun 2019 17:33:57 -0000
+X-List-Received-Date: Fri, 28 Jun 2019 17:34:02 -0000
 
-From: Joel Sing <joel@sing.id.au>
+From: Atish Patra <atish.patra@wdc.com>
 
-This prevents a load reservation from being placed in one context/process,
-then being used in another, resulting in an SC succeeding incorrectly and
-breaking atomics.
+Currently, there is no cpu topology defined in RISC-V.
+Define a device tree node that clearly describes the
+entire topology. This saves the trouble of scanning individual
+cache to figure out the topology.
 
-Signed-off-by: Joel Sing <joel@sing.id.au>
-Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Here is the linux kernel patch series that enables topology
+for RISC-V.
+
+http://lists.infradead.org/pipermail/linux-riscv/2019-June/005072.html
+
+CPU topology after applying this patch in QEMU & above series in kernel
+
+/ # cat /sys/devices/system/cpu/cpu2/topology/thread_siblings_list
+2
+/ # cat /sys/devices/system/cpu/cpu2/topology/physical_package_id
+0
+/ # cat /sys/devices/system/cpu/cpu2/topology/core_siblings_list
+0-7
+
+Signed-off-by: Atish Patra <atish.patra@wdc.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
 ---
- target/riscv/cpu.c                      |  1 +
- target/riscv/cpu_helper.c               | 10 ++++++++++
- target/riscv/insn_trans/trans_rva.inc.c |  8 +++++++-
- 3 files changed, 18 insertions(+), 1 deletion(-)
+ hw/riscv/virt.c | 22 ++++++++++++++++++++--
+ 1 file changed, 20 insertions(+), 2 deletions(-)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 915b9e77df33..f8d07bd20ad7 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -297,6 +297,7 @@ static void riscv_cpu_reset(CPUState *cs)
-     env->pc = env->resetvec;
- #endif
-     cs->exception_index = EXCP_NONE;
-+    env->load_res = -1;
-     set_default_nan_mode(1, &env->fp_status);
- }
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index 487f61404b21..28d96daf8c5b 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -191,6 +191,7 @@ static void *create_fdt(RISCVVirtState *s, const struct MemmapEntry *memmap,
  
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index e1b079e69c60..e32b6126af05 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -132,6 +132,16 @@ void riscv_cpu_set_mode(CPURISCVState *env, target_ulong newpriv)
+     for (cpu = s->soc.num_harts - 1; cpu >= 0; cpu--) {
+         int cpu_phandle = phandle++;
++        int intc_phandle;
+         nodename = g_strdup_printf("/cpus/cpu@%d", cpu);
+         char *intc = g_strdup_printf("/cpus/cpu@%d/interrupt-controller", cpu);
+         char *isa = riscv_isa_string(&s->soc.harts[cpu]);
+@@ -203,9 +204,12 @@ static void *create_fdt(RISCVVirtState *s, const struct MemmapEntry *memmap,
+         qemu_fdt_setprop_string(fdt, nodename, "status", "okay");
+         qemu_fdt_setprop_cell(fdt, nodename, "reg", cpu);
+         qemu_fdt_setprop_string(fdt, nodename, "device_type", "cpu");
++        qemu_fdt_setprop_cell(fdt, nodename, "phandle", cpu_phandle);
++        qemu_fdt_setprop_cell(fdt, nodename, "linux,phandle", cpu_phandle);
++        intc_phandle = phandle++;
+         qemu_fdt_add_subnode(fdt, intc);
+-        qemu_fdt_setprop_cell(fdt, intc, "phandle", cpu_phandle);
+-        qemu_fdt_setprop_cell(fdt, intc, "linux,phandle", cpu_phandle);
++        qemu_fdt_setprop_cell(fdt, intc, "phandle", intc_phandle);
++        qemu_fdt_setprop_cell(fdt, intc, "linux,phandle", intc_phandle);
+         qemu_fdt_setprop_string(fdt, intc, "compatible", "riscv,cpu-intc");
+         qemu_fdt_setprop(fdt, intc, "interrupt-controller", NULL, 0);
+         qemu_fdt_setprop_cell(fdt, intc, "#interrupt-cells", 1);
+@@ -214,6 +218,20 @@ static void *create_fdt(RISCVVirtState *s, const struct MemmapEntry *memmap,
+         g_free(nodename);
      }
-     /* tlb_flush is unnecessary as mode is contained in mmu_idx */
-     env->priv = newpriv;
+ 
++    /* Add cpu-topology node */
++    qemu_fdt_add_subnode(fdt, "/cpus/cpu-map");
++    qemu_fdt_add_subnode(fdt, "/cpus/cpu-map/cluster0");
++    for (cpu = s->soc.num_harts - 1; cpu >= 0; cpu--) {
++        char *core_nodename = g_strdup_printf("/cpus/cpu-map/cluster0/core%d",
++                                              cpu);
++        char *cpu_nodename = g_strdup_printf("/cpus/cpu@%d", cpu);
++        uint32_t intc_phandle = qemu_fdt_get_phandle(fdt, cpu_nodename);
++        qemu_fdt_add_subnode(fdt, core_nodename);
++        qemu_fdt_setprop_cell(fdt, core_nodename, "cpu", intc_phandle);
++        g_free(core_nodename);
++        g_free(cpu_nodename);
++    }
 +
-+    /*
-+     * Clear the load reservation - otherwise a reservation placed in one
-+     * context/process can be used by another, resulting in an SC succeeding
-+     * incorrectly. Version 2.2 of the ISA specification explicitly requires
-+     * this behaviour, while later revisions say that the kernel "should" use
-+     * an SC instruction to force the yielding of a load reservation on a
-+     * preemptive context switch. As a result, do both.
-+     */
-+    env->load_res = -1;
- }
- 
- /* get_physical_address - get the physical address for this virtual address
-diff --git a/target/riscv/insn_trans/trans_rva.inc.c b/target/riscv/insn_trans/trans_rva.inc.c
-index f6dbbc065e15..fadd88849e2b 100644
---- a/target/riscv/insn_trans/trans_rva.inc.c
-+++ b/target/riscv/insn_trans/trans_rva.inc.c
-@@ -61,7 +61,7 @@ static inline bool gen_sc(DisasContext *ctx, arg_atomic *a, TCGMemOp mop)
- 
-     gen_set_label(l1);
-     /*
--     * Address comparion failure.  However, we still need to
-+     * Address comparison failure.  However, we still need to
-      * provide the memory barrier implied by AQ/RL.
-      */
-     tcg_gen_mb(TCG_MO_ALL + a->aq * TCG_BAR_LDAQ + a->rl * TCG_BAR_STRL);
-@@ -69,6 +69,12 @@ static inline bool gen_sc(DisasContext *ctx, arg_atomic *a, TCGMemOp mop)
-     gen_set_gpr(a->rd, dat);
- 
-     gen_set_label(l2);
-+    /*
-+     * Clear the load reservation, since an SC must fail if there is
-+     * an SC to any address, in between an LR and SC pair.
-+     */
-+    tcg_gen_movi_tl(load_res, -1);
-+
-     tcg_temp_free(dat);
-     tcg_temp_free(src1);
-     tcg_temp_free(src2);
+     cells =  g_new0(uint32_t, s->soc.num_harts * 4);
+     for (cpu = 0; cpu < s->soc.num_harts; cpu++) {
+         nodename =
 -- 
 2.21.0
 
