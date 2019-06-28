@@ -1,42 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hgnSi-0000Jt-Nh
-	for mharc-qemu-riscv@gnu.org; Fri, 28 Jun 2019 05:46:32 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49726)
+	id 1hgtXo-0002Uq-LZ
+	for mharc-qemu-riscv@gnu.org; Fri, 28 Jun 2019 12:16:12 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:37916)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <jonathan.cameron@huawei.com>) id 1hgnSf-0000DY-Gn
- for qemu-riscv@nongnu.org; Fri, 28 Jun 2019 05:46:30 -0400
+ (envelope-from <alistair23@gmail.com>) id 1hgtXc-0002ST-Bc
+ for qemu-riscv@nongnu.org; Fri, 28 Jun 2019 12:16:04 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <jonathan.cameron@huawei.com>) id 1hgnSe-0003kf-4s
- for qemu-riscv@nongnu.org; Fri, 28 Jun 2019 05:46:29 -0400
-Received: from szxga07-in.huawei.com ([45.249.212.35]:41958 helo=huawei.com)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <jonathan.cameron@huawei.com>)
- id 1hgnSZ-0003ce-RE; Fri, 28 Jun 2019 05:46:25 -0400
-Received: from DGGEMS403-HUB.china.huawei.com (unknown [172.30.72.58])
- by Forcepoint Email with ESMTP id A68261633AD0EC10BFFE;
- Fri, 28 Jun 2019 17:46:16 +0800 (CST)
-Received: from localhost (10.202.226.61) by DGGEMS403-HUB.china.huawei.com
- (10.3.19.203) with Microsoft SMTP Server id 14.3.439.0; Fri, 28 Jun 2019
- 17:46:14 +0800
-Date: Fri, 28 Jun 2019 10:46:05 +0100
-From: Jonathan Cameron <jonathan.cameron@huawei.com>
-To: Palmer Dabbelt <palmer@sifive.com>
-CC: Peter Maydell <peter.maydell@linaro.org>, Alistair Francis
- <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
- <qemu-riscv@nongnu.org>, <qemu-devel@nongnu.org>
-Message-ID: <20190628104605.000062c4@huawei.com>
-In-Reply-To: <20190627152011.18686-34-palmer@sifive.com>
+ (envelope-from <alistair23@gmail.com>) id 1hgtXX-0002SL-Ue
+ for qemu-riscv@nongnu.org; Fri, 28 Jun 2019 12:16:00 -0400
+Received: from mail-lj1-x242.google.com ([2a00:1450:4864:20::242]:45893)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <alistair23@gmail.com>)
+ id 1hgtXP-0002Kj-2z; Fri, 28 Jun 2019 12:15:48 -0400
+Received: by mail-lj1-x242.google.com with SMTP id m23so6515215lje.12;
+ Fri, 28 Jun 2019 09:15:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=kGfs/pDuD2+4ZaZgN+H9upC9XdGr3S+bBJO6U2nqcQ8=;
+ b=GT480DgILQcnU6bx4gfGOHWzakV3fbBGKzku25eUJ5ThKsm8IaC3evlXQl6v/jVryc
+ nB5lnx3FZeH7KJxPES6Bl+7Qx4+DCsRuJCQVlkzHtcED6OmU7kaROuWqYWjH0/AjPo+2
+ wz64xC/rtCsl3FqSR+HIJTtiCV2FHBzpwxnP5iikt/FYDMlvbWdOk6guL1v02JipUich
+ 9yR6h742J+bTeAphJhbtNJq2MSqHV+LFN7a6Z+rZAvVo0rcmFHtJeidZ7r6p3HYb+tp+
+ zKzotHmk9wyha4DZ5JkrQNp/KBU+8wvVVsq0exdHYuMIm/VpVs2ObDU6ERlpx0OGsvby
+ gCqg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=kGfs/pDuD2+4ZaZgN+H9upC9XdGr3S+bBJO6U2nqcQ8=;
+ b=DQacO5Es2uSOElAxpwGawOXnGWEM3H+FBX1wrt48zHTcShNLCsyDlLDKvExc4ooP3B
+ +/NdFLwGhvs4zmskm9Jj95SSyVyY0h2yRYLmEMKnilrp0J2MA3Sk/wR15NbRweHKq+nJ
+ cRcKXatNqljFZjymND8x+uSupa49r+JTOvGGcSpHm2FSXHYpK1AkcVaevMHvIj170hy6
+ CcBCa5FONMxqwkVYTB4uWI6j1p0F8uKUZ9mFjW7O3oXO8lWROWo7dyHFr5wdTbxGsLV4
+ 8Vzs2B5hLZEpJmx1nv9wTJDgMET1mRqcuXfpIeU6BwSfnU6aArzoCnP+rF7/ZGIKEsXW
+ 3+6A==
+X-Gm-Message-State: APjAAAXpqi557OvUIJA05RlnVL6zZstbjkYwVe0GIKKIeq3/R1xJtbxK
+ 2XUXYxwlw0ml+u2SyBpZL3nlKSL4PJYe50/Mluc=
+X-Google-Smtp-Source: APXvYqyfwvJGJmnpBKWDhtLJqAo7GM9AvMgeQsEyz6G5Xotfz3w4lux6r+9atwfR9IcLU+/WdOm5OZMblz70Ngjdqcs=
+X-Received: by 2002:a2e:480a:: with SMTP id v10mr6436395lja.94.1561738545282; 
+ Fri, 28 Jun 2019 09:15:45 -0700 (PDT)
+MIME-Version: 1.0
 References: <20190627152011.18686-1-palmer@sifive.com>
  <20190627152011.18686-34-palmer@sifive.com>
-Organization: Huawei
-X-Mailer: Claws Mail 3.17.3 (GTK+ 2.24.32; i686-w64-mingw32)
-MIME-Version: 1.0
-Content-Type: text/plain; charset="US-ASCII"
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.202.226.61]
-X-CFilter-Loop: Reflected
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
-X-Received-From: 45.249.212.35
+ <20190628104605.000062c4@huawei.com>
+In-Reply-To: <20190628104605.000062c4@huawei.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Fri, 28 Jun 2019 09:12:45 -0700
+Message-ID: <CAKmqyKP1c5GHKaDuOvu11UtCwnrUosxTtoDAeW7GOS=s+h27aw@mail.gmail.com>
+To: Jonathan Cameron <jonathan.cameron@huawei.com>
+Cc: Palmer Dabbelt <palmer@sifive.com>,
+ Peter Maydell <peter.maydell@linaro.org>, 
+ Bin Meng <bmeng.cn@gmail.com>, Alistair Francis <alistair.francis@wdc.com>, 
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2a00:1450:4864:20::242
 Subject: Re: [Qemu-riscv] [Qemu-devel] [PULL 33/34] roms: Add OpenSBI
  version 0.3
 X-BeenThere: qemu-riscv@nongnu.org
@@ -50,121 +70,137 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Jun 2019 09:46:31 -0000
+X-List-Received-Date: Fri, 28 Jun 2019 16:16:07 -0000
 
-On Thu, 27 Jun 2019 08:20:10 -0700
-Palmer Dabbelt <palmer@sifive.com> wrote:
+On Fri, Jun 28, 2019 at 2:47 AM Jonathan Cameron
+<jonathan.cameron@huawei.com> wrote:
+>
+> On Thu, 27 Jun 2019 08:20:10 -0700
+> Palmer Dabbelt <palmer@sifive.com> wrote:
+>
+> > From: Alistair Francis <alistair.francis@wdc.com>
+> >
+> > Add OpenSBI version 0.3 as a git submodule and as a prebult binary.
+> >
+> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> > Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+> > Tested-by: Bin Meng <bmeng.cn@gmail.com>
+> > Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
+>
+> I sent a late bug report on this one.. Hence posting here as well
+> to make sure it doesn't fall through the cracks!
+>
+> Right now you can't actually build the opensbi64-virt firmware
+> due to cut and paste error in the Makefile.
 
-> From: Alistair Francis <alistair.francis@wdc.com>
-> 
-> Add OpenSBI version 0.3 as a git submodule and as a prebult binary.
-> 
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
-> Tested-by: Bin Meng <bmeng.cn@gmail.com>
-> Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
+Ah, thanks for the bug report.
 
-I sent a late bug report on this one.. Hence posting here as well
-to make sure it doesn't fall through the cracks!
+@Palmer Dabbelt I'm just going to send you a fixup commit. Can you
+apply it to your tree and send a PRv2?
 
-Right now you can't actually build the opensbi64-virt firmware
-due to cut and paste error in the Makefile.
+>
+> As a side note, I hit this because OpenSBI 0.3 is resulting in a login
+> loop on a debian test image and the current upstream isn't.  I haven't
+> debugged yet, but someone else may hit that problem.
 
-As a side note, I hit this because OpenSBI 0.3 is resulting in a login
-loop on a debian test image and the current upstream isn't.  I haven't
-debugged yet, but someone else may hit that problem.
+Unfortunately OpenSBI 0.3 is a little old now, in saying that I didn't
+know there are bugs in it? Which kernel are you using?
 
-Thanks,
+Alistair
 
-Jonathan
-
-> diff --git a/roms/Makefile b/roms/Makefile
-> index 078d3fb70563..562ed726fd6b 100644
-> --- a/roms/Makefile
-> +++ b/roms/Makefile
-> @@ -37,6 +37,8 @@ find-cross-prefix = $(subst gcc,,$(notdir $(call find-cross-gcc,$(1))))
->  powerpc64_cross_prefix := $(call find-cross-prefix,powerpc64)
->  powerpc_cross_prefix := $(call find-cross-prefix,powerpc)
->  x86_64_cross_prefix := $(call find-cross-prefix,x86_64)
-> +riscv32_cross_prefix := $(call find-cross-prefix,riscv32)
-> +riscv64_cross_prefix := $(call find-cross-prefix,riscv64)
->  
->  # tag our seabios builds
->  SEABIOS_EXTRAVERSION="-prebuilt.qemu.org"
-> @@ -52,18 +54,21 @@ EDK2_EFIROM = edk2/BaseTools/Source/C/bin/EfiRom
->  default:
->  	@echo "nothing is build by default"
->  	@echo "available build targets:"
-> -	@echo "  bios           -- update bios.bin (seabios)"
-> -	@echo "  vgabios        -- update vgabios binaries (seabios)"
-> -	@echo "  sgabios        -- update sgabios binaries"
-> -	@echo "  pxerom         -- update nic roms (bios only)"
-> -	@echo "  efirom         -- update nic roms (bios+efi)"
-> -	@echo "  slof           -- update slof.bin"
-> -	@echo "  skiboot        -- update skiboot.lid"
-> -	@echo "  u-boot.e500    -- update u-boot.e500"
-> -	@echo "  u-boot.sam460  -- update u-boot.sam460"
-> -	@echo "  efi            -- update UEFI (edk2) platform firmware"
-> -	@echo "  clean          -- delete the files generated by the previous" \
-> -	                          "build targets"
-> +	@echo "  bios               -- update bios.bin (seabios)"
-> +	@echo "  vgabios            -- update vgabios binaries (seabios)"
-> +	@echo "  sgabios            -- update sgabios binaries"
-> +	@echo "  pxerom             -- update nic roms (bios only)"
-> +	@echo "  efirom             -- update nic roms (bios+efi)"
-> +	@echo "  slof               -- update slof.bin"
-> +	@echo "  skiboot            -- update skiboot.lid"
-> +	@echo "  u-boot.e500        -- update u-boot.e500"
-> +	@echo "  u-boot.sam460      -- update u-boot.sam460"
-> +	@echo "  efi                -- update UEFI (edk2) platform firmware"
-> +	@echo "  opensbi32-virt     -- update OpenSBI for 32-bit virt machine"
-> +	@echo "  opensbi64-virt     -- update OpenSBI for 64-bit virt machine"
-> +	@echo "  opensbi64-sifive_u -- update OpenSBI for 64-bit sifive_u machine"
-> +	@echo "  clean              -- delete the files generated by the previous" \
-> +	                              "build targets"
->  
->  bios: build-seabios-config-seabios-128k build-seabios-config-seabios-256k
->  	cp seabios/builds/seabios-128k/bios.bin ../pc-bios/bios.bin
-> @@ -162,6 +167,24 @@ skiboot:
->  efi: edk2-basetools
->  	$(MAKE) -f Makefile.edk2
->  
-> +opensbi32-virt:
-> +	$(MAKE) -C opensbi \
-> +		CROSS_COMPILE=$(riscv32_cross_prefix) \
-> +		PLATFORM="qemu/virt"
-> +	cp opensbi/build/platform/qemu/virt/firmware/fw_jump.bin ../pc-bios/opensbi-riscv32-virt-fw_jump.bin
-> +
-> +opensbi64-virt:
-> +	$(MAKE) -C opensbi \
-> +		CROSS_COMPILE=$(riscv64_cross_prefix) \
-> +		PLATFORM="qemu/virt"
-> +	cp opensbi/build/platform/qemu/virt/firmware/fw_jump.bin ../pc-bios/opensbi-riscv64-virt-fw_jump.bin
-> +
-> +opensbi64-virt:
-
-Cut and paste buglet.  opensbi64-sifive_u
-
-> +	$(MAKE) -C opensbi \
-> +		CROSS_COMPILE=$(riscv64_cross_prefix) \
-> +		PLATFORM="qemu/sifive_u"
-> +	cp opensbi/build/platform/qemu/virt/firmware/fw_jump.bin ../pc-bios/opensbi-riscv64-sifive_u-fw_jump.bin
-> +
->  clean:
->  	rm -rf seabios/.config seabios/out seabios/builds
->  	$(MAKE) -C sgabios clean
-> @@ -173,3 +196,4 @@ clean:
->  	$(MAKE) -C u-boot-sam460ex distclean
->  	$(MAKE) -C skiboot clean
->  	$(MAKE) -f Makefile.edk2 clean
-> +	$(MAKE) -C opensbi clean
-> diff --git a/roms/opensbi b/roms/opensbi
-> new file mode 160000
-> index 000000000000..ca20ac0cd4c0
-> --- /dev/null
-> +++ b/roms/opensbi
-> @@ -0,0 +1 @@
-> +Subproject commit ca20ac0cd4c099006d4eea4d9ac7bd7b58e2ae0f
-
-
+>
+> Thanks,
+>
+> Jonathan
+>
+> > diff --git a/roms/Makefile b/roms/Makefile
+> > index 078d3fb70563..562ed726fd6b 100644
+> > --- a/roms/Makefile
+> > +++ b/roms/Makefile
+> > @@ -37,6 +37,8 @@ find-cross-prefix = $(subst gcc,,$(notdir $(call find-cross-gcc,$(1))))
+> >  powerpc64_cross_prefix := $(call find-cross-prefix,powerpc64)
+> >  powerpc_cross_prefix := $(call find-cross-prefix,powerpc)
+> >  x86_64_cross_prefix := $(call find-cross-prefix,x86_64)
+> > +riscv32_cross_prefix := $(call find-cross-prefix,riscv32)
+> > +riscv64_cross_prefix := $(call find-cross-prefix,riscv64)
+> >
+> >  # tag our seabios builds
+> >  SEABIOS_EXTRAVERSION="-prebuilt.qemu.org"
+> > @@ -52,18 +54,21 @@ EDK2_EFIROM = edk2/BaseTools/Source/C/bin/EfiRom
+> >  default:
+> >       @echo "nothing is build by default"
+> >       @echo "available build targets:"
+> > -     @echo "  bios           -- update bios.bin (seabios)"
+> > -     @echo "  vgabios        -- update vgabios binaries (seabios)"
+> > -     @echo "  sgabios        -- update sgabios binaries"
+> > -     @echo "  pxerom         -- update nic roms (bios only)"
+> > -     @echo "  efirom         -- update nic roms (bios+efi)"
+> > -     @echo "  slof           -- update slof.bin"
+> > -     @echo "  skiboot        -- update skiboot.lid"
+> > -     @echo "  u-boot.e500    -- update u-boot.e500"
+> > -     @echo "  u-boot.sam460  -- update u-boot.sam460"
+> > -     @echo "  efi            -- update UEFI (edk2) platform firmware"
+> > -     @echo "  clean          -- delete the files generated by the previous" \
+> > -                               "build targets"
+> > +     @echo "  bios               -- update bios.bin (seabios)"
+> > +     @echo "  vgabios            -- update vgabios binaries (seabios)"
+> > +     @echo "  sgabios            -- update sgabios binaries"
+> > +     @echo "  pxerom             -- update nic roms (bios only)"
+> > +     @echo "  efirom             -- update nic roms (bios+efi)"
+> > +     @echo "  slof               -- update slof.bin"
+> > +     @echo "  skiboot            -- update skiboot.lid"
+> > +     @echo "  u-boot.e500        -- update u-boot.e500"
+> > +     @echo "  u-boot.sam460      -- update u-boot.sam460"
+> > +     @echo "  efi                -- update UEFI (edk2) platform firmware"
+> > +     @echo "  opensbi32-virt     -- update OpenSBI for 32-bit virt machine"
+> > +     @echo "  opensbi64-virt     -- update OpenSBI for 64-bit virt machine"
+> > +     @echo "  opensbi64-sifive_u -- update OpenSBI for 64-bit sifive_u machine"
+> > +     @echo "  clean              -- delete the files generated by the previous" \
+> > +                                   "build targets"
+> >
+> >  bios: build-seabios-config-seabios-128k build-seabios-config-seabios-256k
+> >       cp seabios/builds/seabios-128k/bios.bin ../pc-bios/bios.bin
+> > @@ -162,6 +167,24 @@ skiboot:
+> >  efi: edk2-basetools
+> >       $(MAKE) -f Makefile.edk2
+> >
+> > +opensbi32-virt:
+> > +     $(MAKE) -C opensbi \
+> > +             CROSS_COMPILE=$(riscv32_cross_prefix) \
+> > +             PLATFORM="qemu/virt"
+> > +     cp opensbi/build/platform/qemu/virt/firmware/fw_jump.bin ../pc-bios/opensbi-riscv32-virt-fw_jump.bin
+> > +
+> > +opensbi64-virt:
+> > +     $(MAKE) -C opensbi \
+> > +             CROSS_COMPILE=$(riscv64_cross_prefix) \
+> > +             PLATFORM="qemu/virt"
+> > +     cp opensbi/build/platform/qemu/virt/firmware/fw_jump.bin ../pc-bios/opensbi-riscv64-virt-fw_jump.bin
+> > +
+> > +opensbi64-virt:
+>
+> Cut and paste buglet.  opensbi64-sifive_u
+>
+> > +     $(MAKE) -C opensbi \
+> > +             CROSS_COMPILE=$(riscv64_cross_prefix) \
+> > +             PLATFORM="qemu/sifive_u"
+> > +     cp opensbi/build/platform/qemu/virt/firmware/fw_jump.bin ../pc-bios/opensbi-riscv64-sifive_u-fw_jump.bin
+> > +
+> >  clean:
+> >       rm -rf seabios/.config seabios/out seabios/builds
+> >       $(MAKE) -C sgabios clean
+> > @@ -173,3 +196,4 @@ clean:
+> >       $(MAKE) -C u-boot-sam460ex distclean
+> >       $(MAKE) -C skiboot clean
+> >       $(MAKE) -f Makefile.edk2 clean
+> > +     $(MAKE) -C opensbi clean
+> > diff --git a/roms/opensbi b/roms/opensbi
+> > new file mode 160000
+> > index 000000000000..ca20ac0cd4c0
+> > --- /dev/null
+> > +++ b/roms/opensbi
+> > @@ -0,0 +1 @@
+> > +Subproject commit ca20ac0cd4c099006d4eea4d9ac7bd7b58e2ae0f
+>
+>
+>
 
