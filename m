@@ -1,58 +1,57 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hgulA-0000SA-Lc
-	for mharc-qemu-riscv@gnu.org; Fri, 28 Jun 2019 13:34:04 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:55032)
+	id 1hgulB-0000UN-NP
+	for mharc-qemu-riscv@gnu.org; Fri, 28 Jun 2019 13:34:05 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:54863)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <palmer@dabbelt.com>) id 1hgul5-0000Eq-NR
- for qemu-riscv@nongnu.org; Fri, 28 Jun 2019 13:34:02 -0400
+ (envelope-from <palmer@dabbelt.com>) id 1hgukt-0008Q5-9d
+ for qemu-riscv@nongnu.org; Fri, 28 Jun 2019 13:33:51 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmer@dabbelt.com>) id 1hgul2-0000mv-Kv
- for qemu-riscv@nongnu.org; Fri, 28 Jun 2019 13:33:59 -0400
-Received: from mail-pf1-f193.google.com ([209.85.210.193]:32963)
+ (envelope-from <palmer@dabbelt.com>) id 1hguko-0000X1-JU
+ for qemu-riscv@nongnu.org; Fri, 28 Jun 2019 13:33:46 -0400
+Received: from mail-pl1-f195.google.com ([209.85.214.195]:44343)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1hgul2-0000ii-Af
- for qemu-riscv@nongnu.org; Fri, 28 Jun 2019 13:33:56 -0400
-Received: by mail-pf1-f193.google.com with SMTP id x15so3338714pfq.0
- for <qemu-riscv@nongnu.org>; Fri, 28 Jun 2019 10:33:54 -0700 (PDT)
+ (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1hguko-0000Sp-BO
+ for qemu-riscv@nongnu.org; Fri, 28 Jun 2019 13:33:42 -0400
+Received: by mail-pl1-f195.google.com with SMTP id t7so3600267plr.11
+ for <qemu-riscv@nongnu.org>; Fri, 28 Jun 2019 10:33:37 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding:cc:from:to;
- bh=2SpGyiOcwOu2Di4eZ5MXnUZbt0L4DyvH2AZMNviRqJg=;
- b=EQ98G8JeWANjgQ0uDQzDz+hgEC+ylhSsjuECNxWO1V7ZPeIyx695Ohlmp1ajKie0Xi
- 4wVQl6kPUh9x1V/WdKk8PkDgJLGPZiCE51Fueb8CJORM89ciOh5WxAs3PtJzZq2peOMV
- 4ZN134c2QcwoEafTHODsHH89ymiuElU0lGgi9B9FoqAhsJT2ZV+a6HTZJHmh7+P6oyDb
- o2Rv3JvbQwUBocoTyUVi5AFYHLYiLA1kP2VSY9RP8pkOs5XTchZU8noEqw0Vljj7P0t7
- 3UzYGh7plk+90kui9b96/tBb2rKfAuCt78rvyF1G/ycL0UVUxtIsIwEyABkKDDtMtynm
- /l9w==
-X-Gm-Message-State: APjAAAU7e96h9NJmxvUbUaTXrH8E2M8Sur8LqSYzXRepIPd2qUq77Z9z
- Z+svNyRAob2wOIEmmzNmeAJCo/lo1aRoo/LH
-X-Google-Smtp-Source: APXvYqzDN2m3lGxJBi+RHWhIEmiGMS39A+cmVYnEuAnkn5jvKs5C7Oc74rROIsvPDS1U5NxYJ0nAwg==
-X-Received: by 2002:a17:90a:bf08:: with SMTP id
- c8mr14537424pjs.75.1561743233227; 
- Fri, 28 Jun 2019 10:33:53 -0700 (PDT)
+ bh=56FAFtkHihj7lBOpqOA5w6wtEoTrLs+0s6GAeWUEf7s=;
+ b=OyqOiUPlrUR4xixNjxlbKekiGapmr1zf1dhNXpUZj8ggk/92BssFLyQMyL105XSIDA
+ Kh2xWKiti/wDzGnJa9G5Twm0YX0xk47MZJkbp6Dpv1p1Mod/1NU8BMp7pCALNTRsMuot
+ UrnnyksZodNAD2r7+JdXdlVXrJA6SThnCoZuamwSTN6nLm11aqTuRwA19O/f0oagCFMS
+ sRnNh5aq9ayvATkKYk6OI+Mnu3xbUV0LDU3NxkMGhTTaWhtT6RE/ChSpkmIfSE6khyWz
+ FbuhXFuXX2Xl6minSIHoIDjYddKCa/ktCujAmkvrZxmwJ9RVqgP0kUW3xEQTpQTXEq7P
+ n0Pw==
+X-Gm-Message-State: APjAAAUzIuo+uALifCbhMmLxuNgluyiT+BHGs8TtlP+p0E+pW1pN2YT9
+ D8hQZSEWdQzKVtLhOzfNPgqP7A==
+X-Google-Smtp-Source: APXvYqznNQ3eyCoXZAq52CxrgbT9M04glq+FVOGTOz6PPGiXCQKbizbiMV9h4/veE8ZXLHtRnOcjwQ==
+X-Received: by 2002:a17:902:aa95:: with SMTP id
+ d21mr12497216plr.185.1561743216016; 
+ Fri, 28 Jun 2019 10:33:36 -0700 (PDT)
 Received: from localhost (220-132-236-182.HINET-IP.hinet.net.
  [220.132.236.182])
- by smtp.gmail.com with ESMTPSA id w10sm2512839pgs.32.2019.06.28.10.33.52
+ by smtp.gmail.com with ESMTPSA id y5sm2156224pgv.12.2019.06.28.10.33.34
  (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
- Fri, 28 Jun 2019 10:33:52 -0700 (PDT)
-Date: Fri, 28 Jun 2019 10:32:19 -0700
-Message-Id: <20190628173227.31925-27-palmer@sifive.com>
+ Fri, 28 Jun 2019 10:33:35 -0700 (PDT)
+Date: Fri, 28 Jun 2019 10:32:13 -0700
+Message-Id: <20190628173227.31925-21-palmer@sifive.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <20190628173227.31925-1-palmer@sifive.com>
 References: <20190628173227.31925-1-palmer@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Cc: qemu-devel@nongnu.org,       qemu-riscv@nongnu.org,
- Michael Clark <mjc@sifive.com>, Alistair Francis <alistair.francis@wdc.com>,
- Palmer Dabbelt <palmer@sifive.com>
+ Alistair Francis <alistair.francis@wdc.com>, Palmer Dabbelt <palmer@sifive.com>
 From: Palmer Dabbelt <palmer@sifive.com>
 To: Peter Maydell <peter.maydell@linaro.org>
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
  [fuzzy]
-X-Received-From: 209.85.210.193
-Subject: [Qemu-riscv] [PULL 26/34] disas/riscv: Disassemble reserved
- compressed encodings as illegal
+X-Received-From: 209.85.214.195
+Subject: [Qemu-riscv] [PULL 20/34] target/riscv: Add support for
+ disabling/enabling Counters
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -64,152 +63,79 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Jun 2019 17:34:02 -0000
+X-List-Received-Date: Fri, 28 Jun 2019 17:33:52 -0000
 
-From: Michael Clark <mjc@sifive.com>
+From: Alistair Francis <alistair.francis@wdc.com>
 
-Due to the design of the disassembler, the immediate is not
-known during decoding of the opcode; so to handle compressed
-encodings with reserved immediate values (non-zero), we need
-to add an additional check during decompression to match
-reserved encodings with zero immediates and translate them
-into the illegal instruction.
+Add support for disabling/enabling the "Counters" extension.
 
-The following compressed opcodes have reserved encodings with
-zero immediates: c.addi4spn, c.addi, c.lui, c.addi16sp, c.srli,
-c.srai, c.andi and c.slli
-
-Signed-off-by: Michael Clark <mjc@sifive.com>
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-[Palmer: Broke long lines]
 Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
 Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
 ---
- disas/riscv.c | 62 +++++++++++++++++++++++++++++++++++++--------------
- 1 file changed, 45 insertions(+), 17 deletions(-)
+ target/riscv/cpu.c |  1 +
+ target/riscv/cpu.h |  1 +
+ target/riscv/csr.c | 17 ++++++++++++-----
+ 3 files changed, 14 insertions(+), 5 deletions(-)
 
-diff --git a/disas/riscv.c b/disas/riscv.c
-index 59a9b0437a5f..d37312705516 100644
---- a/disas/riscv.c
-+++ b/disas/riscv.c
-@@ -504,14 +504,19 @@ typedef struct {
-     const rvc_constraint *constraints;
- } rv_comp_data;
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 6a54ebf10c62..be90fa7d0808 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -440,6 +440,7 @@ static Property riscv_cpu_properties[] = {
+     DEFINE_PROP_BOOL("c", RISCVCPU, cfg.ext_c, true),
+     DEFINE_PROP_BOOL("s", RISCVCPU, cfg.ext_s, true),
+     DEFINE_PROP_BOOL("u", RISCVCPU, cfg.ext_u, true),
++    DEFINE_PROP_BOOL("Counters", RISCVCPU, cfg.ext_counters, true),
+     DEFINE_PROP_STRING("priv_spec", RISCVCPU, cfg.priv_spec),
+     DEFINE_PROP_BOOL("mmu", RISCVCPU, cfg.mmu, true),
+     DEFINE_PROP_BOOL("pmp", RISCVCPU, cfg.pmp, true),
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 0855277b92d4..4d4e0f89e206 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -222,6 +222,7 @@ typedef struct RISCVCPU {
+         bool ext_c;
+         bool ext_s;
+         bool ext_u;
++        bool ext_counters;
  
-+enum {
-+    rvcd_imm_nz = 0x1
-+};
+         char *priv_spec;
+         char *user_spec;
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index 448162e484a3..de67741f3648 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -56,17 +56,24 @@ static int fs(CPURISCVState *env, int csrno)
+ static int ctr(CPURISCVState *env, int csrno)
+ {
+ #if !defined(CONFIG_USER_ONLY)
++    CPUState *cs = env_cpu(env);
++    RISCVCPU *cpu = RISCV_CPU(cs);
++    uint32_t ctr_en = ~0u;
 +
- typedef struct {
-     const char * const name;
-     const rv_codec codec;
-     const char * const format;
-     const rv_comp_data *pseudo;
--    const int decomp_rv32;
--    const int decomp_rv64;
--    const int decomp_rv128;
-+    const short decomp_rv32;
-+    const short decomp_rv64;
-+    const short decomp_rv128;
-+    const short decomp_data;
- } rv_opcode_data;
- 
- /* register names */
-@@ -1011,7 +1016,8 @@ const rv_opcode_data opcode_data[] = {
-     { "fcvt.q.lu", rv_codec_r_m, rv_fmt_rm_frd_rs1, NULL, 0, 0, 0 },
-     { "fmv.x.q", rv_codec_r, rv_fmt_rd_frs1, NULL, 0, 0, 0 },
-     { "fmv.q.x", rv_codec_r, rv_fmt_frd_rs1, NULL, 0, 0, 0 },
--    { "c.addi4spn", rv_codec_ciw_4spn, rv_fmt_rd_rs1_imm, NULL, rv_op_addi, rv_op_addi, rv_op_addi },
-+    { "c.addi4spn", rv_codec_ciw_4spn, rv_fmt_rd_rs1_imm, NULL, rv_op_addi,
-+      rv_op_addi, rv_op_addi, rvcd_imm_nz },
-     { "c.fld", rv_codec_cl_ld, rv_fmt_frd_offset_rs1, NULL, rv_op_fld, rv_op_fld, 0 },
-     { "c.lw", rv_codec_cl_lw, rv_fmt_rd_offset_rs1, NULL, rv_op_lw, rv_op_lw, rv_op_lw },
-     { "c.flw", rv_codec_cl_lw, rv_fmt_frd_offset_rs1, NULL, rv_op_flw, 0, 0 },
-@@ -1019,14 +1025,20 @@ const rv_opcode_data opcode_data[] = {
-     { "c.sw", rv_codec_cs_sw, rv_fmt_rs2_offset_rs1, NULL, rv_op_sw, rv_op_sw, rv_op_sw },
-     { "c.fsw", rv_codec_cs_sw, rv_fmt_frs2_offset_rs1, NULL, rv_op_fsw, 0, 0 },
-     { "c.nop", rv_codec_ci_none, rv_fmt_none, NULL, rv_op_addi, rv_op_addi, rv_op_addi },
--    { "c.addi", rv_codec_ci, rv_fmt_rd_rs1_imm, NULL, rv_op_addi, rv_op_addi, rv_op_addi },
-+    { "c.addi", rv_codec_ci, rv_fmt_rd_rs1_imm, NULL, rv_op_addi, rv_op_addi,
-+      rv_op_addi, rvcd_imm_nz },
-     { "c.jal", rv_codec_cj_jal, rv_fmt_rd_offset, NULL, rv_op_jal, 0, 0 },
-     { "c.li", rv_codec_ci_li, rv_fmt_rd_rs1_imm, NULL, rv_op_addi, rv_op_addi, rv_op_addi },
--    { "c.addi16sp", rv_codec_ci_16sp, rv_fmt_rd_rs1_imm, NULL, rv_op_addi, rv_op_addi, rv_op_addi },
--    { "c.lui", rv_codec_ci_lui, rv_fmt_rd_imm, NULL, rv_op_lui, rv_op_lui, rv_op_lui },
--    { "c.srli", rv_codec_cb_sh6, rv_fmt_rd_rs1_imm, NULL, rv_op_srli, rv_op_srli, rv_op_srli },
--    { "c.srai", rv_codec_cb_sh6, rv_fmt_rd_rs1_imm, NULL, rv_op_srai, rv_op_srai, rv_op_srai },
--    { "c.andi", rv_codec_cb_imm, rv_fmt_rd_rs1_imm, NULL, rv_op_andi, rv_op_andi, rv_op_andi },
-+    { "c.addi16sp", rv_codec_ci_16sp, rv_fmt_rd_rs1_imm, NULL, rv_op_addi,
-+      rv_op_addi, rv_op_addi, rvcd_imm_nz },
-+    { "c.lui", rv_codec_ci_lui, rv_fmt_rd_imm, NULL, rv_op_lui, rv_op_lui,
-+      rv_op_lui, rvcd_imm_nz },
-+    { "c.srli", rv_codec_cb_sh6, rv_fmt_rd_rs1_imm, NULL, rv_op_srli,
-+      rv_op_srli, rv_op_srli, rvcd_imm_nz },
-+    { "c.srai", rv_codec_cb_sh6, rv_fmt_rd_rs1_imm, NULL, rv_op_srai,
-+      rv_op_srai, rv_op_srai, rvcd_imm_nz },
-+    { "c.andi", rv_codec_cb_imm, rv_fmt_rd_rs1_imm, NULL, rv_op_andi,
-+      rv_op_andi, rv_op_andi, rvcd_imm_nz },
-     { "c.sub", rv_codec_cs, rv_fmt_rd_rs1_rs2, NULL, rv_op_sub, rv_op_sub, rv_op_sub },
-     { "c.xor", rv_codec_cs, rv_fmt_rd_rs1_rs2, NULL, rv_op_xor, rv_op_xor, rv_op_xor },
-     { "c.or", rv_codec_cs, rv_fmt_rd_rs1_rs2, NULL, rv_op_or, rv_op_or, rv_op_or },
-@@ -1036,7 +1048,8 @@ const rv_opcode_data opcode_data[] = {
-     { "c.j", rv_codec_cj, rv_fmt_rd_offset, NULL, rv_op_jal, rv_op_jal, rv_op_jal },
-     { "c.beqz", rv_codec_cb, rv_fmt_rs1_rs2_offset, NULL, rv_op_beq, rv_op_beq, rv_op_beq },
-     { "c.bnez", rv_codec_cb, rv_fmt_rs1_rs2_offset, NULL, rv_op_bne, rv_op_bne, rv_op_bne },
--    { "c.slli", rv_codec_ci_sh6, rv_fmt_rd_rs1_imm, NULL, rv_op_slli, rv_op_slli, rv_op_slli },
-+    { "c.slli", rv_codec_ci_sh6, rv_fmt_rd_rs1_imm, NULL, rv_op_slli,
-+      rv_op_slli, rv_op_slli, rvcd_imm_nz },
-     { "c.fldsp", rv_codec_ci_ldsp, rv_fmt_frd_offset_rs1, NULL, rv_op_fld, rv_op_fld, rv_op_fld },
-     { "c.lwsp", rv_codec_ci_lwsp, rv_fmt_rd_offset_rs1, NULL, rv_op_lw, rv_op_lw, rv_op_lw },
-     { "c.flwsp", rv_codec_ci_lwsp, rv_fmt_frd_offset_rs1, NULL, rv_op_flw, 0, 0 },
-@@ -2795,8 +2808,13 @@ static void decode_inst_decompress_rv32(rv_decode *dec)
- {
-     int decomp_op = opcode_data[dec->op].decomp_rv32;
-     if (decomp_op != rv_op_illegal) {
--        dec->op = decomp_op;
--        dec->codec = opcode_data[decomp_op].codec;
-+        if ((opcode_data[dec->op].decomp_data & rvcd_imm_nz)
-+            && dec->imm == 0) {
-+            dec->op = rv_op_illegal;
-+        } else {
-+            dec->op = decomp_op;
-+            dec->codec = opcode_data[decomp_op].codec;
-+        }
++    if (!cpu->cfg.ext_counters) {
++        /* The Counters extensions is not enabled */
++        return -1;
++    }
++
+     /*
+-     * The counters are always enabled on newer priv specs, as the CSR has
+-     * changed from controlling that the counters can be read to controlling
+-     * that the counters increment.
++     * The counters are always enabled at run time on newer priv specs, as the
++     * CSR has changed from controlling that the counters can be read to
++     * controlling that the counters increment.
+      */
+     if (env->priv_ver > PRIV_VERSION_1_09_1) {
+         return 0;
      }
- }
  
-@@ -2804,8 +2822,13 @@ static void decode_inst_decompress_rv64(rv_decode *dec)
- {
-     int decomp_op = opcode_data[dec->op].decomp_rv64;
-     if (decomp_op != rv_op_illegal) {
--        dec->op = decomp_op;
--        dec->codec = opcode_data[decomp_op].codec;
-+        if ((opcode_data[dec->op].decomp_data & rvcd_imm_nz)
-+            && dec->imm == 0) {
-+            dec->op = rv_op_illegal;
-+        } else {
-+            dec->op = decomp_op;
-+            dec->codec = opcode_data[decomp_op].codec;
-+        }
+-    uint32_t ctr_en = ~0u;
+-
+     if (env->priv < PRV_M) {
+         ctr_en &= env->mcounteren;
      }
- }
- 
-@@ -2813,8 +2836,13 @@ static void decode_inst_decompress_rv128(rv_decode *dec)
- {
-     int decomp_op = opcode_data[dec->op].decomp_rv128;
-     if (decomp_op != rv_op_illegal) {
--        dec->op = decomp_op;
--        dec->codec = opcode_data[decomp_op].codec;
-+        if ((opcode_data[dec->op].decomp_data & rvcd_imm_nz)
-+            && dec->imm == 0) {
-+            dec->op = rv_op_illegal;
-+        } else {
-+            dec->op = decomp_op;
-+            dec->codec = opcode_data[decomp_op].codec;
-+        }
-     }
- }
- 
 -- 
 2.21.0
 
