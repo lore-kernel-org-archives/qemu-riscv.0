@@ -1,64 +1,55 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hgvZu-0005oQ-L1
-	for mharc-qemu-riscv@gnu.org; Fri, 28 Jun 2019 14:26:31 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:36185)
+	id 1hgxE7-0005vz-86
+	for mharc-qemu-riscv@gnu.org; Fri, 28 Jun 2019 16:12:07 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:41324)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <alistair23@gmail.com>) id 1hgvZp-0005n9-RU
- for qemu-riscv@nongnu.org; Fri, 28 Jun 2019 14:26:27 -0400
+ (envelope-from <bounce+d13a72.9b4e76-qemu-riscv=nongnu.org@fintelia.io>)
+ id 1hgxE3-0005tz-ET
+ for qemu-riscv@nongnu.org; Fri, 28 Jun 2019 16:12:05 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1hgvZn-0007e9-3c
- for qemu-riscv@nongnu.org; Fri, 28 Jun 2019 14:26:25 -0400
-Received: from mail-lj1-x242.google.com ([2a00:1450:4864:20::242]:44368)
+ (envelope-from <bounce+d13a72.9b4e76-qemu-riscv=nongnu.org@fintelia.io>)
+ id 1hgxE1-00012E-6a
+ for qemu-riscv@nongnu.org; Fri, 28 Jun 2019 16:12:03 -0400
+Received: from rs224.mailgun.us ([209.61.151.224]:28037)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1hgvZm-0007ct-S8; Fri, 28 Jun 2019 14:26:23 -0400
-Received: by mail-lj1-x242.google.com with SMTP id k18so6883306ljc.11;
- Fri, 28 Jun 2019 11:26:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=uD2MQOPp4yIo0Q7aUKtJd7ZiJNAt2RAb/dO8AfPehd8=;
- b=kX25EMlDg3vy/Uyfxu0LzEh0MjWxTP1UGNPe54vZmf2aElYQoiNAUFf+AHKqCac23E
- OYhtDu063jI2ug2+k0xH7wRjulPrIFe0Xo9DZZhryLG5ceby4I27GNk23O9sY9tGDF6H
- NrvEZQ493jaltuj2uFRdmtaTnXKjZZrMSR4KKwM7cY0XCuEzkpOZpMh7aD/jS9xLwpTL
- Q8YH+tz3WpsAHJhBn7Ozun7w3AuQ7CFojvO4pWPeY8hDVHasxVEOJpES27JyzktbipOJ
- nNPXbNANfTA4pBW3lKIiyCQkwtIaA2QlTf4KnPuxp+lAFbnfx0M7nW92f2nSZFmg+7VR
- 4Gmw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=uD2MQOPp4yIo0Q7aUKtJd7ZiJNAt2RAb/dO8AfPehd8=;
- b=Fqiuw7TOEmGIjxHWXe9BAeaT+0mPtXMaRlFZqKtV2/MhIVeYMq3ZxFUR4qRm7cgsp+
- cD4D0DCR4pW489YW6e5fFMY2fRFtHu7Ynxo/+Rnq8+u+FFrRKgthj79V3MJj9OGlMBqh
- AmBI+UP5rUVyz1NGbpR3UB5YOcBBaiPZVTxK9Vb/Es2spHV2xprnsaMHi2QItXfFJ7H9
- ZRbsZgJIL8u+GYD6eji+fpYAkrFaHYRixQ73nBxYmPqSxTSdrmdOBGpv5Nh9K5/hob5T
- lDAHYe9r1ow71HNpHSa9ltje0RDcWS8nrLwxXWP+967wuiNI1YHOzQqCCs/wGkbkostx
- SgNw==
-X-Gm-Message-State: APjAAAVg0/hOBHqjDr0H5L2jrwYAL9WAyxRkQ60+rB5wDhxY3QaxjuuB
- ETMA1dPs5IUIMS3nLeusMWqq8ZFr7J8vJnb4SfE=
-X-Google-Smtp-Source: APXvYqxC7nzFm3U8Ay70Vc0zdy1Z4rUqweoClfCAFF/7ciKmtzTWsE76RsjiKUrgyuhK6UWubZmhW+EJJ8d7dZwhaPQ=
-X-Received: by 2002:a2e:86cc:: with SMTP id n12mr6947159ljj.146.1561746380790; 
- Fri, 28 Jun 2019 11:26:20 -0700 (PDT)
-MIME-Version: 1.0
-References: <CAKmqyKMAGJFgJV1Y9W+ne_=jipqGMtZMKRHJmN5qpNVZrKUTeg@mail.gmail.com>
- <mhng-89e59e27-71b5-4452-93af-a889983f711c@palmer-si-x1e>
-In-Reply-To: <mhng-89e59e27-71b5-4452-93af-a889983f711c@palmer-si-x1e>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 28 Jun 2019 11:23:20 -0700
-Message-ID: <CAKmqyKNiZheaqC5UHkOMY+s54vgR8ho1gequAM4Sts3=25DzkA@mail.gmail.com>
-To: Palmer Dabbelt <palmer@sifive.com>
-Cc: Bin Meng <bmeng.cn@gmail.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ (Exim 4.71)
+ (envelope-from <bounce+d13a72.9b4e76-qemu-riscv=nongnu.org@fintelia.io>)
+ id 1hgxE1-00010A-1Y
+ for qemu-riscv@nongnu.org; Fri, 28 Jun 2019 16:12:01 -0400
+DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=fintelia.io; q=dns/txt;
+ s=pic; 
+ t=1561752718; h=Content-Transfer-Encoding: MIME-Version: Message-Id:
+ Date: Subject: Cc: To: From: Sender;
+ bh=rK9dVQoGRf7gzhJQ62FeEPYEuGqaPsFuSSy+cUnHJAI=;
+ b=gZ2Und5WnREAXSydkjIhE0XtIerlfqdGvpmZ+GcbgtEmuUBeIQC9FKhdkDab6kI9cHmXo/EE
+ ZZVYMP0AX4WvG2QoExoSXNtgjOceK2r+bCDi2Rmvo03/paShH1bIRazvT6sZKxWXEbIONZWM
+ kbtRwkteoyjcxboMvCicnUIFyVP3bfB3/Bl8xSbi4YzeEu/ttsVvO72paeWAZ8TDfUCsbrGX
+ hImX0TlZMSQ/mVTD6j6TohPULkmsjDkNtRhbLXZkTV+M7WYx19Sttx71jcGx+8Hju4dIlX+J
+ Ro0BOZXlxYcY+tTSlvavs4vaZSNlIKzBIS0jzYcNMjH00GQvROrAkQ==
+X-Mailgun-Sending-Ip: 209.61.151.224
+X-Mailgun-Sid: WyJkNjk0ZSIsICJxZW11LXJpc2N2QG5vbmdudS5vcmciLCAiOWI0ZTc2Il0=
+Sender: jonathan@fintelia.io
+Received: from jonathan-ThinkPad-X1-Carbon.csail.mit.edu
+ (30-9-3.wireless.csail.mit.edu [128.30.9.3])
+ by mxa.mailgun.org with ESMTP id 5d16748d.7f301001b800-smtp-out-n02;
+ Fri, 28 Jun 2019 20:11:57 -0000 (UTC)
+From: jonathan@fintelia.io
+To: qemu-riscv@nongnu.org
+Cc: Jonathan Behrens <jonathan@fintelia.io>,
+ Palmer Dabbelt <palmer@sifive.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Jonathan Behrens <fintelia@gmail.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Alistair Francis <Alistair.Francis@wdc.com>
-Content-Type: text/plain; charset="UTF-8"
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2a00:1450:4864:20::242
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH for 4.1 v3] target/riscv:
- Expose time CSRs when allowed by [m|s]counteren
+ qemu-devel@nongnu.org (open list:All patches CC here)
+Date: Fri, 28 Jun 2019 16:11:33 -0400
+Message-Id: <20190628201133.14235-1-jonathan@fintelia.io>
+X-Mailer: git-send-email 2.22.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+X-Received-From: 209.61.151.224
+Subject: [Qemu-riscv] [PATCH] target/riscv: Hardwire mcounter.TM and upper
+ bits of [m|s]counteren
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -70,75 +61,50 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Jun 2019 18:26:28 -0000
+X-List-Received-Date: Fri, 28 Jun 2019 20:12:05 -0000
 
-On Thu, Jun 27, 2019 at 11:12 PM Palmer Dabbelt <palmer@sifive.com> wrote:
->
-> On Thu, 27 Jun 2019 12:56:57 PDT (-0700), alistair23@gmail.com wrote:
-> > On Wed, Jun 26, 2019 at 1:25 AM Palmer Dabbelt <palmer@sifive.com> wrote:
-> >>
-> >> On Tue, 25 Jun 2019 23:58:34 PDT (-0700), bmeng.cn@gmail.com wrote:
-> >> > On Wed, Jun 26, 2019 at 4:23 AM Jonathan Behrens <fintelia@gmail.com> wrote:
-> >> >>
-> >> >> I just did some testing on a HiFive Unleashed board and can confirm what
-> >> >> you are saying. The low 5 bits of both mcounteren and scounteren are
-> >> >> writable (if you try to write 0xFFFFFFFF to them, they'll take on the value
-> >> >> 0x1F) but even with the TM bit set in both mcounteren and scounteren the
-> >> >> rdtime instruction always generates an illegal instruction exception.
-> >> >>
-> >> >
-> >> > Then I would think the FU540 is not spec complaint :)
-> >>
-> >> Ya, it's an errata.  There's a handful of them :)
-> >>
-> >> >> Reading through the relevant chapter of the spec, I still think that having
-> >> >> mcounteren.TM be writable but making rdtime unconditionally trap is
-> >> >> non-conformant. If other people feel strongly that rdtime should always
-> >> >
-> >> > Agree. To test hardware (FU540) compatibility in QEMU, maybe we can
-> >> > add a cpu property to allow hard-wiring mcounteren.TM to zero?
-> >>
-> >> In theory we should have properties to control the behavior of all WARL fields,
-> >> but it's a lot of work.  I'd be happy to take a patch for any of them.
-> >
-> > Hmmm... We should avoid taking patches that don't adhere to the spec
-> > just to match some hardware. In the case that core/popular software
-> > doesn't work it probably makes sense, but in general it's probably not
-> > the best move.
->
-> WARL is Write Any Read Legal.  Essentially it means that the hardware gets to
-> decide what sort of behavior that field has, and is the mechanism for optional
-> features in the ISA.  In this case it'd be entirely within spec, specifically:
->
->     Registers mcounteren and scounteren are WARL registers that must be
->     implemented if U-mode and S-mode are implemented. Any of the bits may
->     contain a hardwired value of zero, indicating reads to the corresponding
->     counter will cause an illegal instruction exception when executing in a
->     less-privileged mode.
->
-> Taking a patch that matches the out-of-spec FU540 behavior doesn't make any
-> sense, I don't want to implement errata in QEMU :)
+From: Jonathan Behrens <jonathan@fintelia.io>
 
-Ah, I misread your email. That is fine then :)
+QEMU currently always triggers an illegal instruction exception when code
+attempts to read the time CSR. This is valid behavor, but only if the TM bit in
+mcounteren is hardwired to zero. This change also corrects mcounteren and scounteren CSRs to be 32-bits on both
+32-bit and 64-bit targets.
 
-Alistair
+Signed-off-by: Jonathan Behrens <jonathan@fintelia.io>
+---
+ target/riscv/cpu.h | 4 ++--
+ target/riscv/csr.c | 3 ++-
+ 2 files changed, 4 insertions(+), 3 deletions(-)
 
->
-> >
-> > Alistair
-> >
-> >>
-> >> >> require trapping into firmware then the natural change would be to simply
-> >> >> hardwire mcounteren.TM to zero (the value in scounteren wouldn't matter in
-> >> >> that case so it could be left writable). My own (biased) personal feeling
-> >> >> is that this full implementation makes sense at least for the `virt`
-> >> >> machine type because it represents a clear case where deviating from
-> >> >> current hardware enables a performance boost, and would not break
-> >> >> compatibility with any current software: both OpenSBI and BBL try to enable
-> >> >> hardware handling of rdtime when the platform claims to support it.
-> >> >>
-> >> >
-> >> > Regards,
-> >> > Bin
-> >>
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 0adb307f32..2d0cbe9c78 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -151,8 +151,8 @@ struct CPURISCVState {
+     target_ulong mcause;
+     target_ulong mtval;  /* since: priv-1.10.0 */
+ 
+-    target_ulong scounteren;
+-    target_ulong mcounteren;
++    uint32_t scounteren;
++    uint32_t mcounteren;
+ 
+     target_ulong sscratch;
+     target_ulong mscratch;
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index e0d4586760..89cf9734c3 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -473,7 +473,8 @@ static int write_mcounteren(CPURISCVState *env, int csrno, target_ulong val)
+     if (env->priv_ver < PRIV_VERSION_1_10_0) {
+         return -1;
+     }
+-    env->mcounteren = val;
++    /* mcounteren.TM is hardwired to zero, all other bits are writable */
++    env->mcounteren = val & ~(1 << (CSR_TIME & 31));
+     return 0;
+ }
+ 
+-- 
+2.22.0
 
