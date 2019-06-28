@@ -1,64 +1,57 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hgtZe-0003ta-1E
-	for mharc-qemu-riscv@gnu.org; Fri, 28 Jun 2019 12:18:07 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:38323)
+	id 1hguP0-0007zL-V9
+	for mharc-qemu-riscv@gnu.org; Fri, 28 Jun 2019 13:11:10 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49395)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <prvs=075cc3f16=alistair.francis@wdc.com>)
- id 1hgtZZ-0003q7-29
- for qemu-riscv@nongnu.org; Fri, 28 Jun 2019 12:18:02 -0400
+ (envelope-from <palmer@dabbelt.com>) id 1hguOw-0007sI-DH
+ for qemu-riscv@nongnu.org; Fri, 28 Jun 2019 13:11:09 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <prvs=075cc3f16=alistair.francis@wdc.com>)
- id 1hgtZW-0004PB-RA
- for qemu-riscv@nongnu.org; Fri, 28 Jun 2019 12:18:00 -0400
-Received: from esa2.hgst.iphmx.com ([68.232.143.124]:63621)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <prvs=075cc3f16=alistair.francis@wdc.com>)
- id 1hgtZT-0004It-IR; Fri, 28 Jun 2019 12:17:56 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1561738741; x=1593274741;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=s9wRAO6C8hWPO5VAyLqjZCKMAchxKjpN7eIm/4AxpTY=;
- b=DtdPoa5DdI/O+eGsQGKhosVm51C1jYQptsT8LXeej4gOmcfEX/XO6Yak
- GU19d1NOmdLQ2by9V3EVY3KhvYaqBrt+cvi6DTpTkFZygxooYpnYwHmMz
- iidtUURMfF07h0YPnKMGdMk9PJezktvv3q0ES7rzesvTrj3ANCD2Goccy
- u1bDmm+evVuSXJqzC5xYJRvzLLg172GHOMBpso00E4TXNvmhW0x+Eabwq
- djw2ty8jq6jY0s5DxB2g9W5iQy4khZOjUNs5C4n/hiUs49X0UlwA1y80/
- aKXt5SuBTMMmyTpGUbTqmmZxzXDT6nTwdXMxDpH3Ght0FPd1esGzGR2WO g==;
-X-IronPort-AV: E=Sophos;i="5.63,428,1557158400"; d="scan'208";a="211619633"
-Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
- ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 29 Jun 2019 00:18:42 +0800
-IronPort-SDR: 4poUFJKLkehlElB4ml2LBEsOC+1k5e1lnyK1cMRiTqVXZE3WFQbBAPrxMqKynM+RiV8LDA015S
- UwPuzWyESeeyOxXZSiQoFZqWDlMEe1vK+Y3LxkM1mOZX7YrjK4zxUxgIynnpMQ9v1Vm3yaRNOJ
- fQP7TjzXO2oLmw3ve21MGvAhZkVXOY3o0L+jwgBTKbc5b9L/VphcNNRh8CRYOusoOVOkosmlwU
- EX00yxw3ws5ful0MYoEiuGYy/kgKXPcwuGieGtkmqAoGw+3sVZl5SXPNKvX/y4fMQ/84fEqBJ0
- 8IkfHPRm7gz1j/+N+DpRGRk/
-Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
- by uls-op-cesaep01.wdc.com with ESMTP; 28 Jun 2019 09:16:48 -0700
-IronPort-SDR: XUtBhMnO7xi1KTZ892JExVz2LtgjRVBTbT4TE3f03+PXE712QBWQXQMSmZWv/PxBTFidHMSwH/
- golFUsmnPLf1GlY0MEnp7n0apX+oHzZCxRl7fAs4pP++OrzAxzAP/UjwMrZv6MQ69M/swXwIdJ
- 2w6CiQs6Qknszgj43HE8DE6llQCGixIzJlNOFGyTcPETOHl1FDYV1srUtfs/nmfd5obC9CZ9LZ
- XFzVQ9WcfLI9+lfuUOwOM4hQkrBIKzunzMS+p/EBmdp6KgUXs/bvf+zrkdW6sUa+ilCtVnyxzB
- 1TI=
-Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
- risc6-mainframe.int.fusionio.com) ([10.196.157.140])
- by uls-op-cesaip02.wdc.com with ESMTP; 28 Jun 2019 09:17:43 -0700
-From: Alistair Francis <alistair.francis@wdc.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org,
-	palmer@sifive.com
-Cc: Alistair Francis <alistair.francis@wdc.com>
-Date: Fri, 28 Jun 2019 09:15:03 -0700
-Message-Id: <20190628161503.16760-1-alistair.francis@wdc.com>
-X-Mailer: git-send-email 2.22.0
-MIME-Version: 1.0
+ (envelope-from <palmer@dabbelt.com>) id 1hguOq-0000UF-M5
+ for qemu-riscv@nongnu.org; Fri, 28 Jun 2019 13:11:04 -0400
+Received: from mail-pg1-f194.google.com ([209.85.215.194]:43881)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1hguOq-0000Sa-FO
+ for qemu-riscv@nongnu.org; Fri, 28 Jun 2019 13:11:00 -0400
+Received: by mail-pg1-f194.google.com with SMTP id f25so2856573pgv.10
+ for <qemu-riscv@nongnu.org>; Fri, 28 Jun 2019 10:10:58 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
+ :mime-version:content-transfer-encoding;
+ bh=qsZxWBRfqOSKuGdf+FUzca3A9uj05+G06E/pE6sKexs=;
+ b=AmLLfvZJTkPPwU21LUbLMuHZyRE1IsmZFKyk43e9H0V5AaC3M69uAhHm4yANWvvC7Z
+ e0I+SDqr1cMH/KwcxT7uspMzNIgukgHUZ7fZ5HEQ1l9cuI3we/DG3QVYnIOAxiWvyktn
+ L+xxk4fBpzbjp8D2FOB8vYXndOfqrTMiRtmo9J5ZbfodfgwutsGX//mha6S47y/X9RZg
+ A9kzCn9ahjwp7rrlwEGk0dC2l0WAsMyHooEJvRCVTTUt9OuSBQemh7t4eNKjhdCEEk/3
+ v0vcRZaT1uLuXfnJvqW0vBVB6elFZXehVSuk0rqm4SsCLyKNXtzQmuoR/ul9NRWywsKe
+ knlA==
+X-Gm-Message-State: APjAAAWMaMzFXFpdBkt7AZugTCjo6+v7PH5msBQKTBB9WWISkkrvr+ne
+ JzS8jJ6UT5Pme/nCEL0XDdUZFw==
+X-Google-Smtp-Source: APXvYqwhxy7rUFmQTQByUy2VCRxXG9iJcpKMVJXC5kdigBen8pIygSmMaAna3DamSvqYxVt6qO/COg==
+X-Received: by 2002:a63:2985:: with SMTP id p127mr9643736pgp.400.1561741857530; 
+ Fri, 28 Jun 2019 10:10:57 -0700 (PDT)
+Received: from localhost (220-132-236-182.HINET-IP.hinet.net.
+ [220.132.236.182])
+ by smtp.gmail.com with ESMTPSA id s16sm2774612pfm.26.2019.06.28.10.10.56
+ (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+ Fri, 28 Jun 2019 10:10:56 -0700 (PDT)
+Date: Fri, 28 Jun 2019 10:10:56 -0700 (PDT)
+X-Google-Original-Date: Fri, 28 Jun 2019 10:09:52 PDT (-0700)
+In-Reply-To: <CAKmqyKP1c5GHKaDuOvu11UtCwnrUosxTtoDAeW7GOS=s+h27aw@mail.gmail.com>
+CC: jonathan.cameron@huawei.com, Peter Maydell <peter.maydell@linaro.org>,
+ bmeng.cn@gmail.com, Alistair Francis <Alistair.Francis@wdc.com>,
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+From: Palmer Dabbelt <palmer@sifive.com>
+To: alistair23@gmail.com
+Message-ID: <mhng-6abcb5c2-bf03-436b-a614-a9ba5a0aca7f@palmer-si-x1e>
+Mime-Version: 1.0 (MHng)
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 68.232.143.124
-Subject: [Qemu-riscv] [PATCH] fixup! roms: Add OpenSBI version 0.3
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+ [fuzzy]
+X-Received-From: 209.85.215.194
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PULL 33/34] roms: Add OpenSBI
+ version 0.3
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -70,26 +63,141 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Jun 2019 16:18:03 -0000
+X-List-Received-Date: Fri, 28 Jun 2019 17:11:09 -0000
 
----
- roms/Makefile | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On Fri, 28 Jun 2019 09:12:45 PDT (-0700), alistair23@gmail.com wrote:
+> On Fri, Jun 28, 2019 at 2:47 AM Jonathan Cameron
+> <jonathan.cameron@huawei.com> wrote:
+>>
+>> On Thu, 27 Jun 2019 08:20:10 -0700
+>> Palmer Dabbelt <palmer@sifive.com> wrote:
+>>
+>> > From: Alistair Francis <alistair.francis@wdc.com>
+>> >
+>> > Add OpenSBI version 0.3 as a git submodule and as a prebult binary.
+>> >
+>> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+>> > Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+>> > Tested-by: Bin Meng <bmeng.cn@gmail.com>
+>> > Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
+>>
+>> I sent a late bug report on this one.. Hence posting here as well
+>> to make sure it doesn't fall through the cracks!
+>>
+>> Right now you can't actually build the opensbi64-virt firmware
+>> due to cut and paste error in the Makefile.
+>
+> Ah, thanks for the bug report.
+>
+> @Palmer Dabbelt I'm just going to send you a fixup commit. Can you
+> apply it to your tree and send a PRv2?
 
-diff --git a/roms/Makefile b/roms/Makefile
-index 562ed726fd..dc70fb5aea 100644
---- a/roms/Makefile
-+++ b/roms/Makefile
-@@ -179,7 +179,7 @@ opensbi64-virt:
- 		PLATFORM="qemu/virt"
- 	cp opensbi/build/platform/qemu/virt/firmware/fw_jump.bin ../pc-bios/opensbi-riscv64-virt-fw_jump.bin
- 
--opensbi64-virt:
-+opensbi64-sifive_u:
- 	$(MAKE) -C opensbi \
- 		CROSS_COMPILE=$(riscv64_cross_prefix) \
- 		PLATFORM="qemu/sifive_u"
--- 
-2.22.0
+WFM.
 
+>
+>>
+>> As a side note, I hit this because OpenSBI 0.3 is resulting in a login
+>> loop on a debian test image and the current upstream isn't.  I haven't
+>> debugged yet, but someone else may hit that problem.
+>
+> Unfortunately OpenSBI 0.3 is a little old now, in saying that I didn't
+> know there are bugs in it? Which kernel are you using?
+>
+> Alistair
+>
+>>
+>> Thanks,
+>>
+>> Jonathan
+>>
+>> > diff --git a/roms/Makefile b/roms/Makefile
+>> > index 078d3fb70563..562ed726fd6b 100644
+>> > --- a/roms/Makefile
+>> > +++ b/roms/Makefile
+>> > @@ -37,6 +37,8 @@ find-cross-prefix = $(subst gcc,,$(notdir $(call find-cross-gcc,$(1))))
+>> >  powerpc64_cross_prefix := $(call find-cross-prefix,powerpc64)
+>> >  powerpc_cross_prefix := $(call find-cross-prefix,powerpc)
+>> >  x86_64_cross_prefix := $(call find-cross-prefix,x86_64)
+>> > +riscv32_cross_prefix := $(call find-cross-prefix,riscv32)
+>> > +riscv64_cross_prefix := $(call find-cross-prefix,riscv64)
+>> >
+>> >  # tag our seabios builds
+>> >  SEABIOS_EXTRAVERSION="-prebuilt.qemu.org"
+>> > @@ -52,18 +54,21 @@ EDK2_EFIROM = edk2/BaseTools/Source/C/bin/EfiRom
+>> >  default:
+>> >       @echo "nothing is build by default"
+>> >       @echo "available build targets:"
+>> > -     @echo "  bios           -- update bios.bin (seabios)"
+>> > -     @echo "  vgabios        -- update vgabios binaries (seabios)"
+>> > -     @echo "  sgabios        -- update sgabios binaries"
+>> > -     @echo "  pxerom         -- update nic roms (bios only)"
+>> > -     @echo "  efirom         -- update nic roms (bios+efi)"
+>> > -     @echo "  slof           -- update slof.bin"
+>> > -     @echo "  skiboot        -- update skiboot.lid"
+>> > -     @echo "  u-boot.e500    -- update u-boot.e500"
+>> > -     @echo "  u-boot.sam460  -- update u-boot.sam460"
+>> > -     @echo "  efi            -- update UEFI (edk2) platform firmware"
+>> > -     @echo "  clean          -- delete the files generated by the previous" \
+>> > -                               "build targets"
+>> > +     @echo "  bios               -- update bios.bin (seabios)"
+>> > +     @echo "  vgabios            -- update vgabios binaries (seabios)"
+>> > +     @echo "  sgabios            -- update sgabios binaries"
+>> > +     @echo "  pxerom             -- update nic roms (bios only)"
+>> > +     @echo "  efirom             -- update nic roms (bios+efi)"
+>> > +     @echo "  slof               -- update slof.bin"
+>> > +     @echo "  skiboot            -- update skiboot.lid"
+>> > +     @echo "  u-boot.e500        -- update u-boot.e500"
+>> > +     @echo "  u-boot.sam460      -- update u-boot.sam460"
+>> > +     @echo "  efi                -- update UEFI (edk2) platform firmware"
+>> > +     @echo "  opensbi32-virt     -- update OpenSBI for 32-bit virt machine"
+>> > +     @echo "  opensbi64-virt     -- update OpenSBI for 64-bit virt machine"
+>> > +     @echo "  opensbi64-sifive_u -- update OpenSBI for 64-bit sifive_u machine"
+>> > +     @echo "  clean              -- delete the files generated by the previous" \
+>> > +                                   "build targets"
+>> >
+>> >  bios: build-seabios-config-seabios-128k build-seabios-config-seabios-256k
+>> >       cp seabios/builds/seabios-128k/bios.bin ../pc-bios/bios.bin
+>> > @@ -162,6 +167,24 @@ skiboot:
+>> >  efi: edk2-basetools
+>> >       $(MAKE) -f Makefile.edk2
+>> >
+>> > +opensbi32-virt:
+>> > +     $(MAKE) -C opensbi \
+>> > +             CROSS_COMPILE=$(riscv32_cross_prefix) \
+>> > +             PLATFORM="qemu/virt"
+>> > +     cp opensbi/build/platform/qemu/virt/firmware/fw_jump.bin ../pc-bios/opensbi-riscv32-virt-fw_jump.bin
+>> > +
+>> > +opensbi64-virt:
+>> > +     $(MAKE) -C opensbi \
+>> > +             CROSS_COMPILE=$(riscv64_cross_prefix) \
+>> > +             PLATFORM="qemu/virt"
+>> > +     cp opensbi/build/platform/qemu/virt/firmware/fw_jump.bin ../pc-bios/opensbi-riscv64-virt-fw_jump.bin
+>> > +
+>> > +opensbi64-virt:
+>>
+>> Cut and paste buglet.  opensbi64-sifive_u
+>>
+>> > +     $(MAKE) -C opensbi \
+>> > +             CROSS_COMPILE=$(riscv64_cross_prefix) \
+>> > +             PLATFORM="qemu/sifive_u"
+>> > +     cp opensbi/build/platform/qemu/virt/firmware/fw_jump.bin ../pc-bios/opensbi-riscv64-sifive_u-fw_jump.bin
+>> > +
+>> >  clean:
+>> >       rm -rf seabios/.config seabios/out seabios/builds
+>> >       $(MAKE) -C sgabios clean
+>> > @@ -173,3 +196,4 @@ clean:
+>> >       $(MAKE) -C u-boot-sam460ex distclean
+>> >       $(MAKE) -C skiboot clean
+>> >       $(MAKE) -f Makefile.edk2 clean
+>> > +     $(MAKE) -C opensbi clean
+>> > diff --git a/roms/opensbi b/roms/opensbi
+>> > new file mode 160000
+>> > index 000000000000..ca20ac0cd4c0
+>> > --- /dev/null
+>> > +++ b/roms/opensbi
+>> > @@ -0,0 +1 @@
+>> > +Subproject commit ca20ac0cd4c099006d4eea4d9ac7bd7b58e2ae0f
+>>
+>>
+>>
 
