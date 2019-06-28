@@ -1,57 +1,57 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hgul9-0000Pc-O6
-	for mharc-qemu-riscv@gnu.org; Fri, 28 Jun 2019 13:34:03 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:54763)
+	id 1hgulA-0000QS-4o
+	for mharc-qemu-riscv@gnu.org; Fri, 28 Jun 2019 13:34:04 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:54887)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <palmer@dabbelt.com>) id 1hgukh-0008La-IK
- for qemu-riscv@nongnu.org; Fri, 28 Jun 2019 13:33:38 -0400
+ (envelope-from <palmer@dabbelt.com>) id 1hguku-0008QP-IQ
+ for qemu-riscv@nongnu.org; Fri, 28 Jun 2019 13:33:51 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmer@dabbelt.com>) id 1hgukY-0000K5-Mt
- for qemu-riscv@nongnu.org; Fri, 28 Jun 2019 13:33:34 -0400
-Received: from mail-pf1-f178.google.com ([209.85.210.178]:40096)
+ (envelope-from <palmer@dabbelt.com>) id 1hgukq-0000Yn-OE
+ for qemu-riscv@nongnu.org; Fri, 28 Jun 2019 13:33:48 -0400
+Received: from mail-pl1-f170.google.com ([209.85.214.170]:33439)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1hgukY-0000If-Ee
- for qemu-riscv@nongnu.org; Fri, 28 Jun 2019 13:33:26 -0400
-Received: by mail-pf1-f178.google.com with SMTP id p184so3324155pfp.7
- for <qemu-riscv@nongnu.org>; Fri, 28 Jun 2019 10:33:26 -0700 (PDT)
+ (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1hgukq-0000XK-HQ
+ for qemu-riscv@nongnu.org; Fri, 28 Jun 2019 13:33:44 -0400
+Received: by mail-pl1-f170.google.com with SMTP id c14so3626591plo.0
+ for <qemu-riscv@nongnu.org>; Fri, 28 Jun 2019 10:33:43 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding:cc:from:to;
- bh=CCTUA83WsmaGam2XV7hw8vEWvHgX2YXg8c48BvbdAho=;
- b=VlUOPmuIbfwvW45XgQ+sT7s9Ju0zcjn9d7nvAxuijslpDL5PoT0L0dJhK3GfNlue5o
- A8LD1/soPvF/6OmF1GE6yTJFbBfJ+YJkTDsTty47lXjOW2J/BtBYFdV8Hc71QN2plSAb
- LqeBSq3bnsboxkxQUPdVrtcUgqFGZs0O1wOrQY5XJehyODBPrM/PMmNwGKtVCKro1Q3r
- EmatV1oPG6QNNQmkE4bmmv/4Bgr9C+xnfv/QxYcn/dWOF91HMpBj+T+FhQX2gX33JY1u
- RlxTSHyovF1FgBKp+97gMIUdF3wYluKSk9X81k3wBZtof1C4VW2D0T0tTW5odfAJxDhf
- 4fcw==
-X-Gm-Message-State: APjAAAUy7E/iIezgf5srL5Q9UVLBEfBSz+/3JP/TzQEHGzNmpihIDER+
- KQu0GO/IEjwIgiAkxXgDvJinlg==
-X-Google-Smtp-Source: APXvYqyjebOnfjPvXX+QHILdKfDk4xPc0WaY9uOOJ1IZpiws46erv+8vmIkfOQ4i0M6fg8lWf9jhqQ==
-X-Received: by 2002:a17:90a:2562:: with SMTP id
- j89mr14607457pje.123.1561743205281; 
- Fri, 28 Jun 2019 10:33:25 -0700 (PDT)
+ bh=/3ducq0eP8I5aPrZO6qPfK+y5RApmcrkJq95TSYVf1E=;
+ b=VYXJ91oR1cVzBonC6HPBZhAlUca/fyzCoJ64HRCSBCTpNerb6O0YKAr4JY8z76C8lh
+ xPbcv4HhEXFvfv7gzfnqjvEDzxig+j3PyzRQ4h/ORT0flkV14l37EYI8XLLi5sW5xqh5
+ UUTfXlgz7Zaf/OVNBqfkDFiNP8Y+Kz+1avuimnYR1K6irE5GZ8RWSF8FGxUxJli5WKp8
+ Qy5QVRZcsgoykWWhBsri06au43qGUk7u+Ol7EqzWqjlRCYW3rFdDm/4qwuR0MCrkBU5u
+ uxgmvDEw8YKtLBtruYhFQa/XS8MexNkJM3CNNZ1GBQjH/6+x+VYInAy+ZS4EZwrQh+XC
+ xcXQ==
+X-Gm-Message-State: APjAAAXvwBXdr3rbkuzaxh6x7FeA8/J9aH87ItwfNxYND4dY8JaDH893
+ VH9tkF6d7+EDYdSGVy5WuA+n8fGx6Zxuy9SU
+X-Google-Smtp-Source: APXvYqz+Cn6cULfB49bYnTfkiB0ZUe9nBFjxIo40XblR2bGuHf9pXctMRWsUR0R2VbjHSXlr5q8qow==
+X-Received: by 2002:a17:902:a414:: with SMTP id
+ p20mr12298235plq.187.1561743222066; 
+ Fri, 28 Jun 2019 10:33:42 -0700 (PDT)
 Received: from localhost (220-132-236-182.HINET-IP.hinet.net.
  [220.132.236.182])
- by smtp.gmail.com with ESMTPSA id l13sm2470753pjq.20.2019.06.28.10.33.23
+ by smtp.gmail.com with ESMTPSA id f7sm2742671pfd.43.2019.06.28.10.33.40
  (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
- Fri, 28 Jun 2019 10:33:24 -0700 (PDT)
-Date: Fri, 28 Jun 2019 10:32:09 -0700
-Message-Id: <20190628173227.31925-17-palmer@sifive.com>
+ Fri, 28 Jun 2019 10:33:41 -0700 (PDT)
+Date: Fri, 28 Jun 2019 10:32:15 -0700
+Message-Id: <20190628173227.31925-23-palmer@sifive.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <20190628173227.31925-1-palmer@sifive.com>
 References: <20190628173227.31925-1-palmer@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Cc: qemu-devel@nongnu.org,       qemu-riscv@nongnu.org,
- Alistair Francis <alistair.francis@wdc.com>, Palmer Dabbelt <palmer@sifive.com>
+ Palmer Dabbelt <palmer@sifive.com>, Alistair Francis <alistair.francis@wdc.com>
 From: Palmer Dabbelt <palmer@sifive.com>
 To: Peter Maydell <peter.maydell@linaro.org>
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
  [fuzzy]
-X-Received-From: 209.85.210.178
-Subject: [Qemu-riscv] [PULL 16/34] target/riscv: Set privledge spec 1.11.0
- as default
+X-Received-From: 209.85.214.170
+Subject: [Qemu-riscv] [PULL 22/34] RISC-V: Add support for the Zicsr
+ extension
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -63,53 +63,68 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Jun 2019 17:33:42 -0000
+X-List-Received-Date: Fri, 28 Jun 2019 17:33:54 -0000
 
-From: Alistair Francis <alistair.francis@wdc.com>
+The various CSR instructions have been split out of the base ISA as part
+of the ratification process.  This patch adds a Zicsr argument, which
+disables all the CSR instructions.
 
-Set the priv spec version 1.11.0 as the default and allow selecting it
-via the command line.
-
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
 Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/cpu.c | 8 +++++---
- 1 file changed, 5 insertions(+), 3 deletions(-)
+ target/riscv/cpu.c | 1 +
+ target/riscv/cpu.h | 1 +
+ target/riscv/csr.c | 6 ++++++
+ 3 files changed, 8 insertions(+)
 
 diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 17467c3d8705..ba1325f43533 100644
+index bbad39a337b3..915b9e77df33 100644
 --- a/target/riscv/cpu.c
 +++ b/target/riscv/cpu.c
-@@ -111,7 +111,7 @@ static void riscv_any_cpu_init(Object *obj)
+@@ -442,6 +442,7 @@ static Property riscv_cpu_properties[] = {
+     DEFINE_PROP_BOOL("u", RISCVCPU, cfg.ext_u, true),
+     DEFINE_PROP_BOOL("Counters", RISCVCPU, cfg.ext_counters, true),
+     DEFINE_PROP_BOOL("Zifencei", RISCVCPU, cfg.ext_ifencei, true),
++    DEFINE_PROP_BOOL("Zicsr", RISCVCPU, cfg.ext_icsr, true),
+     DEFINE_PROP_STRING("priv_spec", RISCVCPU, cfg.priv_spec),
+     DEFINE_PROP_BOOL("mmu", RISCVCPU, cfg.mmu, true),
+     DEFINE_PROP_BOOL("pmp", RISCVCPU, cfg.pmp, true),
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index ba551cd3082c..0adb307f3298 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -224,6 +224,7 @@ typedef struct RISCVCPU {
+         bool ext_u;
+         bool ext_counters;
+         bool ext_ifencei;
++        bool ext_icsr;
+ 
+         char *priv_spec;
+         char *user_spec;
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index de67741f3648..e0d45867607a 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -793,6 +793,7 @@ int riscv_csrrw(CPURISCVState *env, int csrno, target_ulong *ret_value,
  {
-     CPURISCVState *env = &RISCV_CPU(obj)->env;
-     set_misa(env, RVXLEN | RVI | RVM | RVA | RVF | RVD | RVC | RVU);
--    set_versions(env, USER_VERSION_2_02_0, PRIV_VERSION_1_10_0);
-+    set_versions(env, USER_VERSION_2_02_0, PRIV_VERSION_1_11_0);
-     set_resetvec(env, DEFAULT_RSTVEC);
- }
+     int ret;
+     target_ulong old_value;
++    RISCVCPU *cpu = env_archcpu(env);
  
-@@ -316,7 +316,7 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
-     RISCVCPU *cpu = RISCV_CPU(dev);
-     CPURISCVState *env = &cpu->env;
-     RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(dev);
--    int priv_version = PRIV_VERSION_1_10_0;
-+    int priv_version = PRIV_VERSION_1_11_0;
-     int user_version = USER_VERSION_2_02_0;
-     target_ulong target_misa = 0;
-     Error *local_err = NULL;
-@@ -328,7 +328,9 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+     /* check privileges and return -1 if check fails */
+ #if !defined(CONFIG_USER_ONLY)
+@@ -803,6 +804,11 @@ int riscv_csrrw(CPURISCVState *env, int csrno, target_ulong *ret_value,
      }
+ #endif
  
-     if (cpu->cfg.priv_spec) {
--        if (!g_strcmp0(cpu->cfg.priv_spec, "v1.10.0")) {
-+        if (!g_strcmp0(cpu->cfg.priv_spec, "v1.11.0")) {
-+            priv_version = PRIV_VERSION_1_11_0;
-+        } else if (!g_strcmp0(cpu->cfg.priv_spec, "v1.10.0")) {
-             priv_version = PRIV_VERSION_1_10_0;
-         } else if (!g_strcmp0(cpu->cfg.priv_spec, "v1.9.1")) {
-             priv_version = PRIV_VERSION_1_09_1;
++    /* ensure the CSR extension is enabled. */
++    if (!cpu->cfg.ext_icsr) {
++        return -1;
++    }
++
+     /* check predicate */
+     if (!csr_ops[csrno].predicate || csr_ops[csrno].predicate(env, csrno) < 0) {
+         return -1;
 -- 
 2.21.0
 
