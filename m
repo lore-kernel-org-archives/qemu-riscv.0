@@ -1,58 +1,44 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hgk7e-0001uc-WA
-	for mharc-qemu-riscv@gnu.org; Fri, 28 Jun 2019 02:12:35 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:35656)
+	id 1hgnSi-0000Jt-Nh
+	for mharc-qemu-riscv@gnu.org; Fri, 28 Jun 2019 05:46:32 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49726)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <palmer@dabbelt.com>) id 1hgk7c-0001u2-Fj
- for qemu-riscv@nongnu.org; Fri, 28 Jun 2019 02:12:33 -0400
+ (envelope-from <jonathan.cameron@huawei.com>) id 1hgnSf-0000DY-Gn
+ for qemu-riscv@nongnu.org; Fri, 28 Jun 2019 05:46:30 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmer@dabbelt.com>) id 1hgk7b-0006HD-8J
- for qemu-riscv@nongnu.org; Fri, 28 Jun 2019 02:12:32 -0400
-Received: from mail-pf1-f195.google.com ([209.85.210.195]:34420)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1hgk7b-0006Gs-26
- for qemu-riscv@nongnu.org; Fri, 28 Jun 2019 02:12:31 -0400
-Received: by mail-pf1-f195.google.com with SMTP id c85so2437989pfc.1
- for <qemu-riscv@nongnu.org>; Thu, 27 Jun 2019 23:12:30 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
- :mime-version:content-transfer-encoding;
- bh=19UBy/JSb09LAOfOQp8wf6xbaoZKZ3jSDn4GxSTUbTs=;
- b=U6Zmg7p82xP+CUYe5cWk5TpDK4QV+Q94DWhlFFUpkIXi52gGNUQ1GL745atdsRsfRY
- MICIBQWLLtYB8+h2XJ/imz1NX0LfTkQMV2xylbgWxri9wjxy+h9bjI7bgrohGZ+xHJtZ
- YzwbnJHfT+kn7C416GJwSvbg4sRsfESdo0hJDgESX7hLxNW9UJ02rj12Cb6jawMVEfYN
- u7KBAklSNwC9OU9N8Mx0kDrmk+MwHYiTubzdoX/W/kBqFFOk1jn7ozWIsTXDKYQJowUc
- DHhtPzBP00HwwTxJDpOtK9kfyAxjlJdBcp0Tn4fZXfkwCBXnq3BSX/H9O314cuwDvlG6
- kRww==
-X-Gm-Message-State: APjAAAWO7Dx4Vm6grDCREXPCs7nuGacu5lfK0Q7nm15EBkoBa8C4JLn6
- aWWdGSJMHJ86qHnmyWvaOc14cw==
-X-Google-Smtp-Source: APXvYqwKqswnoVUvbs2i+DYMAIFFSOFeFWiLi0HZ6GDexWiv/+I3SewaSCWApgS0kl3muTFG1aA6qw==
-X-Received: by 2002:a17:90a:3590:: with SMTP id
- r16mr11072790pjb.44.1561702348388; 
- Thu, 27 Jun 2019 23:12:28 -0700 (PDT)
-Received: from localhost (220-132-236-182.HINET-IP.hinet.net.
- [220.132.236.182])
- by smtp.gmail.com with ESMTPSA id m101sm940730pjb.7.2019.06.27.23.12.27
- (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
- Thu, 27 Jun 2019 23:12:27 -0700 (PDT)
-Date: Thu, 27 Jun 2019 23:12:27 -0700 (PDT)
-X-Google-Original-Date: Thu, 27 Jun 2019 22:01:42 PDT (-0700)
-In-Reply-To: <CAKmqyKMAGJFgJV1Y9W+ne_=jipqGMtZMKRHJmN5qpNVZrKUTeg@mail.gmail.com>
-CC: bmeng.cn@gmail.com, qemu-riscv@nongnu.org, sagark@eecs.berkeley.edu,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, fintelia@gmail.com,
- qemu-devel@nongnu.org, Alistair Francis <Alistair.Francis@wdc.com>
-From: Palmer Dabbelt <palmer@sifive.com>
-To: alistair23@gmail.com
-Message-ID: <mhng-89e59e27-71b5-4452-93af-a889983f711c@palmer-si-x1e>
-Mime-Version: 1.0 (MHng)
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
+ (envelope-from <jonathan.cameron@huawei.com>) id 1hgnSe-0003kf-4s
+ for qemu-riscv@nongnu.org; Fri, 28 Jun 2019 05:46:29 -0400
+Received: from szxga07-in.huawei.com ([45.249.212.35]:41958 helo=huawei.com)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <jonathan.cameron@huawei.com>)
+ id 1hgnSZ-0003ce-RE; Fri, 28 Jun 2019 05:46:25 -0400
+Received: from DGGEMS403-HUB.china.huawei.com (unknown [172.30.72.58])
+ by Forcepoint Email with ESMTP id A68261633AD0EC10BFFE;
+ Fri, 28 Jun 2019 17:46:16 +0800 (CST)
+Received: from localhost (10.202.226.61) by DGGEMS403-HUB.china.huawei.com
+ (10.3.19.203) with Microsoft SMTP Server id 14.3.439.0; Fri, 28 Jun 2019
+ 17:46:14 +0800
+Date: Fri, 28 Jun 2019 10:46:05 +0100
+From: Jonathan Cameron <jonathan.cameron@huawei.com>
+To: Palmer Dabbelt <palmer@sifive.com>
+CC: Peter Maydell <peter.maydell@linaro.org>, Alistair Francis
+ <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
+ <qemu-riscv@nongnu.org>, <qemu-devel@nongnu.org>
+Message-ID: <20190628104605.000062c4@huawei.com>
+In-Reply-To: <20190627152011.18686-34-palmer@sifive.com>
+References: <20190627152011.18686-1-palmer@sifive.com>
+ <20190627152011.18686-34-palmer@sifive.com>
+Organization: Huawei
+X-Mailer: Claws Mail 3.17.3 (GTK+ 2.24.32; i686-w64-mingw32)
+MIME-Version: 1.0
+Content-Type: text/plain; charset="US-ASCII"
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.202.226.61]
+X-CFilter-Loop: Reflected
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
- [fuzzy]
-X-Received-From: 209.85.210.195
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH for 4.1 v3] target/riscv:
- Expose time CSRs when allowed by [m|s]counteren
+X-Received-From: 45.249.212.35
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PULL 33/34] roms: Add OpenSBI
+ version 0.3
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -64,68 +50,121 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Jun 2019 06:12:33 -0000
+X-List-Received-Date: Fri, 28 Jun 2019 09:46:31 -0000
 
-On Thu, 27 Jun 2019 12:56:57 PDT (-0700), alistair23@gmail.com wrote:
-> On Wed, Jun 26, 2019 at 1:25 AM Palmer Dabbelt <palmer@sifive.com> wrote:
->>
->> On Tue, 25 Jun 2019 23:58:34 PDT (-0700), bmeng.cn@gmail.com wrote:
->> > On Wed, Jun 26, 2019 at 4:23 AM Jonathan Behrens <fintelia@gmail.com> wrote:
->> >>
->> >> I just did some testing on a HiFive Unleashed board and can confirm what
->> >> you are saying. The low 5 bits of both mcounteren and scounteren are
->> >> writable (if you try to write 0xFFFFFFFF to them, they'll take on the value
->> >> 0x1F) but even with the TM bit set in both mcounteren and scounteren the
->> >> rdtime instruction always generates an illegal instruction exception.
->> >>
->> >
->> > Then I would think the FU540 is not spec complaint :)
->>
->> Ya, it's an errata.  There's a handful of them :)
->>
->> >> Reading through the relevant chapter of the spec, I still think that having
->> >> mcounteren.TM be writable but making rdtime unconditionally trap is
->> >> non-conformant. If other people feel strongly that rdtime should always
->> >
->> > Agree. To test hardware (FU540) compatibility in QEMU, maybe we can
->> > add a cpu property to allow hard-wiring mcounteren.TM to zero?
->>
->> In theory we should have properties to control the behavior of all WARL fields,
->> but it's a lot of work.  I'd be happy to take a patch for any of them.
->
-> Hmmm... We should avoid taking patches that don't adhere to the spec
-> just to match some hardware. In the case that core/popular software
-> doesn't work it probably makes sense, but in general it's probably not
-> the best move.
+On Thu, 27 Jun 2019 08:20:10 -0700
+Palmer Dabbelt <palmer@sifive.com> wrote:
 
-WARL is Write Any Read Legal.  Essentially it means that the hardware gets to
-decide what sort of behavior that field has, and is the mechanism for optional
-features in the ISA.  In this case it'd be entirely within spec, specifically:
+> From: Alistair Francis <alistair.francis@wdc.com>
+> 
+> Add OpenSBI version 0.3 as a git submodule and as a prebult binary.
+> 
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+> Tested-by: Bin Meng <bmeng.cn@gmail.com>
+> Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
 
-    Registers mcounteren and scounteren are WARL registers that must be
-    implemented if U-mode and S-mode are implemented. Any of the bits may
-    contain a hardwired value of zero, indicating reads to the corresponding
-    counter will cause an illegal instruction exception when executing in a
-    less-privileged mode.
+I sent a late bug report on this one.. Hence posting here as well
+to make sure it doesn't fall through the cracks!
 
-Taking a patch that matches the out-of-spec FU540 behavior doesn't make any
-sense, I don't want to implement errata in QEMU :)
+Right now you can't actually build the opensbi64-virt firmware
+due to cut and paste error in the Makefile.
 
->
-> Alistair
->
->>
->> >> require trapping into firmware then the natural change would be to simply
->> >> hardwire mcounteren.TM to zero (the value in scounteren wouldn't matter in
->> >> that case so it could be left writable). My own (biased) personal feeling
->> >> is that this full implementation makes sense at least for the `virt`
->> >> machine type because it represents a clear case where deviating from
->> >> current hardware enables a performance boost, and would not break
->> >> compatibility with any current software: both OpenSBI and BBL try to enable
->> >> hardware handling of rdtime when the platform claims to support it.
->> >>
->> >
->> > Regards,
->> > Bin
->>
+As a side note, I hit this because OpenSBI 0.3 is resulting in a login
+loop on a debian test image and the current upstream isn't.  I haven't
+debugged yet, but someone else may hit that problem.
+
+Thanks,
+
+Jonathan
+
+> diff --git a/roms/Makefile b/roms/Makefile
+> index 078d3fb70563..562ed726fd6b 100644
+> --- a/roms/Makefile
+> +++ b/roms/Makefile
+> @@ -37,6 +37,8 @@ find-cross-prefix = $(subst gcc,,$(notdir $(call find-cross-gcc,$(1))))
+>  powerpc64_cross_prefix := $(call find-cross-prefix,powerpc64)
+>  powerpc_cross_prefix := $(call find-cross-prefix,powerpc)
+>  x86_64_cross_prefix := $(call find-cross-prefix,x86_64)
+> +riscv32_cross_prefix := $(call find-cross-prefix,riscv32)
+> +riscv64_cross_prefix := $(call find-cross-prefix,riscv64)
+>  
+>  # tag our seabios builds
+>  SEABIOS_EXTRAVERSION="-prebuilt.qemu.org"
+> @@ -52,18 +54,21 @@ EDK2_EFIROM = edk2/BaseTools/Source/C/bin/EfiRom
+>  default:
+>  	@echo "nothing is build by default"
+>  	@echo "available build targets:"
+> -	@echo "  bios           -- update bios.bin (seabios)"
+> -	@echo "  vgabios        -- update vgabios binaries (seabios)"
+> -	@echo "  sgabios        -- update sgabios binaries"
+> -	@echo "  pxerom         -- update nic roms (bios only)"
+> -	@echo "  efirom         -- update nic roms (bios+efi)"
+> -	@echo "  slof           -- update slof.bin"
+> -	@echo "  skiboot        -- update skiboot.lid"
+> -	@echo "  u-boot.e500    -- update u-boot.e500"
+> -	@echo "  u-boot.sam460  -- update u-boot.sam460"
+> -	@echo "  efi            -- update UEFI (edk2) platform firmware"
+> -	@echo "  clean          -- delete the files generated by the previous" \
+> -	                          "build targets"
+> +	@echo "  bios               -- update bios.bin (seabios)"
+> +	@echo "  vgabios            -- update vgabios binaries (seabios)"
+> +	@echo "  sgabios            -- update sgabios binaries"
+> +	@echo "  pxerom             -- update nic roms (bios only)"
+> +	@echo "  efirom             -- update nic roms (bios+efi)"
+> +	@echo "  slof               -- update slof.bin"
+> +	@echo "  skiboot            -- update skiboot.lid"
+> +	@echo "  u-boot.e500        -- update u-boot.e500"
+> +	@echo "  u-boot.sam460      -- update u-boot.sam460"
+> +	@echo "  efi                -- update UEFI (edk2) platform firmware"
+> +	@echo "  opensbi32-virt     -- update OpenSBI for 32-bit virt machine"
+> +	@echo "  opensbi64-virt     -- update OpenSBI for 64-bit virt machine"
+> +	@echo "  opensbi64-sifive_u -- update OpenSBI for 64-bit sifive_u machine"
+> +	@echo "  clean              -- delete the files generated by the previous" \
+> +	                              "build targets"
+>  
+>  bios: build-seabios-config-seabios-128k build-seabios-config-seabios-256k
+>  	cp seabios/builds/seabios-128k/bios.bin ../pc-bios/bios.bin
+> @@ -162,6 +167,24 @@ skiboot:
+>  efi: edk2-basetools
+>  	$(MAKE) -f Makefile.edk2
+>  
+> +opensbi32-virt:
+> +	$(MAKE) -C opensbi \
+> +		CROSS_COMPILE=$(riscv32_cross_prefix) \
+> +		PLATFORM="qemu/virt"
+> +	cp opensbi/build/platform/qemu/virt/firmware/fw_jump.bin ../pc-bios/opensbi-riscv32-virt-fw_jump.bin
+> +
+> +opensbi64-virt:
+> +	$(MAKE) -C opensbi \
+> +		CROSS_COMPILE=$(riscv64_cross_prefix) \
+> +		PLATFORM="qemu/virt"
+> +	cp opensbi/build/platform/qemu/virt/firmware/fw_jump.bin ../pc-bios/opensbi-riscv64-virt-fw_jump.bin
+> +
+> +opensbi64-virt:
+
+Cut and paste buglet.  opensbi64-sifive_u
+
+> +	$(MAKE) -C opensbi \
+> +		CROSS_COMPILE=$(riscv64_cross_prefix) \
+> +		PLATFORM="qemu/sifive_u"
+> +	cp opensbi/build/platform/qemu/virt/firmware/fw_jump.bin ../pc-bios/opensbi-riscv64-sifive_u-fw_jump.bin
+> +
+>  clean:
+>  	rm -rf seabios/.config seabios/out seabios/builds
+>  	$(MAKE) -C sgabios clean
+> @@ -173,3 +196,4 @@ clean:
+>  	$(MAKE) -C u-boot-sam460ex distclean
+>  	$(MAKE) -C skiboot clean
+>  	$(MAKE) -f Makefile.edk2 clean
+> +	$(MAKE) -C opensbi clean
+> diff --git a/roms/opensbi b/roms/opensbi
+> new file mode 160000
+> index 000000000000..ca20ac0cd4c0
+> --- /dev/null
+> +++ b/roms/opensbi
+> @@ -0,0 +1 @@
+> +Subproject commit ca20ac0cd4c099006d4eea4d9ac7bd7b58e2ae0f
+
+
 
