@@ -1,59 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hgujz-00083B-P1
-	for mharc-qemu-riscv@gnu.org; Fri, 28 Jun 2019 13:32:51 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:54324)
+	id 1hgukU-00088v-9A
+	for mharc-qemu-riscv@gnu.org; Fri, 28 Jun 2019 13:33:22 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:54359)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <palmer@dabbelt.com>) id 1hguju-00080k-57
- for qemu-riscv@nongnu.org; Fri, 28 Jun 2019 13:32:49 -0400
+ (envelope-from <palmer@dabbelt.com>) id 1hgujy-00082L-Ol
+ for qemu-riscv@nongnu.org; Fri, 28 Jun 2019 13:32:53 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmer@dabbelt.com>) id 1hgujr-0008De-3z
- for qemu-riscv@nongnu.org; Fri, 28 Jun 2019 13:32:46 -0400
-Received: from mail-pg1-f196.google.com ([209.85.215.196]:37618)
+ (envelope-from <palmer@dabbelt.com>) id 1hgujw-0008Hf-5q
+ for qemu-riscv@nongnu.org; Fri, 28 Jun 2019 13:32:50 -0400
+Received: from mail-pf1-f195.google.com ([209.85.210.195]:39104)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1hgujq-0008D2-TS
- for qemu-riscv@nongnu.org; Fri, 28 Jun 2019 13:32:43 -0400
-Received: by mail-pg1-f196.google.com with SMTP id g15so988964pgi.4
- for <qemu-riscv@nongnu.org>; Fri, 28 Jun 2019 10:32:42 -0700 (PDT)
+ (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1hguju-0008Ff-49
+ for qemu-riscv@nongnu.org; Fri, 28 Jun 2019 13:32:46 -0400
+Received: by mail-pf1-f195.google.com with SMTP id j2so3324241pfe.6
+ for <qemu-riscv@nongnu.org>; Fri, 28 Jun 2019 10:32:45 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding:cc:from:to;
- bh=93jKVryLi5S9dNljnJoTk5o5gCPNFkrJiDJGBHe6zKM=;
- b=e8BMabWMdgcKMKdNAKYzk9xVf/AJxYj1MbGTZiS8yQhPDtJnQQND2G6KRzK620Ola2
- ancBVFCZY4sMpKsRnQQqOyCLjBYBM/jzchuCIzPWA/omZzZe40oNb+zbgGp5sdjH7QAQ
- CLw8kSCuymvlS9rwXXUY3eaDPgl8jsGxXydeWOuvvgh2MeiD9tdNp4jD11cQfTvDuBxI
- 5P763K9lSYqBajzA9xoDPgKYeguvbqjmoICVK0J2MF6eaGg3KE7HSi7ykMnoQsfrb3nU
- AxFlv6kQvdBDCaGboOYxiU0PmwnzlA0oBMmKmzmA8kRs1bT/yaYFIydnSuemRgojBV0u
- s1wg==
-X-Gm-Message-State: APjAAAWYmgL7E1NB0NeH5QS/OfrHp5RaeYjoHZzNvHuoeJsS0ggm2GW3
- LhiUAtKgMZMVrrnQI3Esz8oVkA==
-X-Google-Smtp-Source: APXvYqyYhL0QcB4X0yTQn+5v7BSpoyuzKC1hRlbT+1pEk8oJenCMqSbQMIyS51vCPgSio3m1xLdFFw==
-X-Received: by 2002:a17:90a:eb08:: with SMTP id
- j8mr14902053pjz.72.1561743161587; 
- Fri, 28 Jun 2019 10:32:41 -0700 (PDT)
+ bh=skpCsY6OAelSjirFF1wZzpzLaY2+CMd8k4r3QNyFPh4=;
+ b=WrGgcGm6V3MsA5gkDk8XJiAQLxXtbVolUMqR0YwwsQtWdyKmIFuDJg/oy8lvuRPJv8
+ /kePZrk5P/OFOfvQw9Y4ke3QKEAXVKQ6FnKtRiB40KD9/4VdemfmcYyFYj+m0gSIP8Ho
+ peXJ/B/Vwk4HSsstam5YSROueZthuXo9I0XL2hT8hnEv/fe4jiQQMJi/wtKPHl48P6Bb
+ 6N8S8wF/9Es0w+HvAfdzG7XyE/yYohUZAlXrZdSvydwZesRHKaRRd4DRaNCC2NDKfGLd
+ fyar8U/SnpfiBn6yh1ftQzL3SaEf1u8SOym+kPJSTjmCEg5Bi4YUW1TwsKgEGsAHs3rY
+ K+2Q==
+X-Gm-Message-State: APjAAAXtRPlTU+vM4EeeSsTFVkjRv/D8y70347rUJFwjzLOwxIL0lsYZ
+ XxAGxhTLCPtvqZlFJZz23K7lgA==
+X-Google-Smtp-Source: APXvYqxI+aNpPXccr3z4WvuSCLEVcgWxMDCBxvRF+WloAzPZChPklHOGWTUMyC0Cpcp9l8wwBcYXXg==
+X-Received: by 2002:a63:480a:: with SMTP id v10mr10470045pga.60.1561743164768; 
+ Fri, 28 Jun 2019 10:32:44 -0700 (PDT)
 Received: from localhost (220-132-236-182.HINET-IP.hinet.net.
  [220.132.236.182])
- by smtp.gmail.com with ESMTPSA id b5sm5998657pga.72.2019.06.28.10.32.40
+ by smtp.gmail.com with ESMTPSA id v9sm2547121pgj.69.2019.06.28.10.32.43
  (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
- Fri, 28 Jun 2019 10:32:40 -0700 (PDT)
-Date: Fri, 28 Jun 2019 10:31:54 -0700
-Message-Id: <20190628173227.31925-2-palmer@sifive.com>
+ Fri, 28 Jun 2019 10:32:43 -0700 (PDT)
+Date: Fri, 28 Jun 2019 10:31:55 -0700
+Message-Id: <20190628173227.31925-3-palmer@sifive.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <20190628173227.31925-1-palmer@sifive.com>
 References: <20190628173227.31925-1-palmer@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Cc: qemu-devel@nongnu.org,       qemu-riscv@nongnu.org,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
+ Nathaniel Graff <nathaniel.graff@sifive.com>, Michael Clark <mjc@sifive.com>,
  Palmer Dabbelt <palmer@sifive.com>
 From: Palmer Dabbelt <palmer@sifive.com>
 To: Peter Maydell <peter.maydell@linaro.org>
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
  [fuzzy]
-X-Received-From: 209.85.215.196
-Subject: [Qemu-riscv] [PULL 01/34] target/riscv: Allow setting ISA
- extensions via CPU props
+X-Received-From: 209.85.210.195
+Subject: [Qemu-riscv] [PULL 02/34] sifive_prci: Read and write PRCI registers
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -65,160 +62,148 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Jun 2019 17:32:50 -0000
+X-List-Received-Date: Fri, 28 Jun 2019 17:32:54 -0000
 
-From: Alistair Francis <Alistair.Francis@wdc.com>
+From: Nathaniel Graff <nathaniel.graff@sifive.com>
 
-This patch allows us to enable/disable the RISC-V ISA extensions from
-the QEMU command line. This works with the rv32 and rv64 machines. The
-idea is that in the future we can now add extensions and leave them
-disabled by default until enabled by the user.
+Writes to the SiFive PRCI registers are preserved while leaving the
+ready bits set for the HFX/HFR oscillators and the lock bit set for the
+PLL.
 
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+Signed-off-by: Nathaniel Graff <nathaniel.graff@sifive.com>
+Reviewed-by: Michael Clark <mjc@sifive.com>
 Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
 ---
- target/riscv/cpu.c | 70 ++++++++++++++++++++++++++++++++++++++++++++--
- target/riscv/cpu.h | 11 ++++++++
- 2 files changed, 79 insertions(+), 2 deletions(-)
+ hw/riscv/sifive_prci.c         | 49 ++++++++++++++++++++++++++++------
+ include/hw/riscv/sifive_prci.h | 32 ++++++++++++++++++++++
+ 2 files changed, 73 insertions(+), 8 deletions(-)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 6f2b64422086..0632ac08cf35 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -24,6 +24,7 @@
- #include "cpu.h"
- #include "exec/exec-all.h"
- #include "qapi/error.h"
-+#include "qemu/error-report.h"
- #include "hw/qdev-properties.h"
- #include "migration/vmstate.h"
+diff --git a/hw/riscv/sifive_prci.c b/hw/riscv/sifive_prci.c
+index fa136b5a9fe9..f406682c91f1 100644
+--- a/hw/riscv/sifive_prci.c
++++ b/hw/riscv/sifive_prci.c
+@@ -24,15 +24,18 @@
+ #include "target/riscv/cpu.h"
+ #include "hw/riscv/sifive_prci.h"
  
-@@ -119,7 +120,8 @@ static void riscv_any_cpu_init(Object *obj)
- static void riscv_base32_cpu_init(Object *obj)
+-/* currently implements enough to mock freedom-e-sdk BSP clock programming */
+-
+ static uint64_t sifive_prci_read(void *opaque, hwaddr addr, unsigned int size)
  {
-     CPURISCVState *env = &RISCV_CPU(obj)->env;
--    set_misa(env, RV32 | RVI | RVM | RVA | RVF | RVD | RVC | RVS | RVU);
-+    /* We set this in the realise function */
-+    set_misa(env, 0);
- }
- 
- static void rv32gcsu_priv1_09_1_cpu_init(Object *obj)
-@@ -156,7 +158,8 @@ static void rv32imacu_nommu_cpu_init(Object *obj)
- static void riscv_base64_cpu_init(Object *obj)
- {
-     CPURISCVState *env = &RISCV_CPU(obj)->env;
--    set_misa(env, RV64 | RVI | RVM | RVA | RVF | RVD | RVC | RVS | RVU);
-+    /* We set this in the realise function */
-+    set_misa(env, 0);
- }
- 
- static void rv64gcsu_priv1_09_1_cpu_init(Object *obj)
-@@ -315,6 +318,7 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
-     RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(dev);
-     int priv_version = PRIV_VERSION_1_10_0;
-     int user_version = USER_VERSION_2_02_0;
-+    target_ulong target_misa = 0;
-     Error *local_err = NULL;
- 
-     cpu_exec_realizefn(cs, &local_err);
-@@ -358,6 +362,58 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
-         set_feature(env, RISCV_FEATURE_PMP);
+-    if (addr == 0 /* PRCI_HFROSCCFG */) {
+-        return 1 << 31; /* ROSC_RDY */
+-    }
+-    if (addr == 8 /* PRCI_PLLCFG    */) {
+-        return 1 << 31; /* PLL_LOCK */
++    SiFivePRCIState *s = opaque;
++    switch (addr) {
++    case SIFIVE_PRCI_HFROSCCFG:
++        return s->hfrosccfg;
++    case SIFIVE_PRCI_HFXOSCCFG:
++        return s->hfxosccfg;
++    case SIFIVE_PRCI_PLLCFG:
++        return s->pllcfg;
++    case SIFIVE_PRCI_PLLOUTDIV:
++        return s->plloutdiv;
      }
- 
-+    /* If misa isn't set (rv32 and rv64 machines) set it here */
-+    if (!env->misa) {
-+        /* Do some ISA extension error checking */
-+        if (cpu->cfg.ext_i && cpu->cfg.ext_e) {
-+            error_setg(errp,
-+                       "I and E extensions are incompatible");
-+                       return;
-+       }
-+
-+       if (cpu->cfg.ext_g && !(cpu->cfg.ext_i & cpu->cfg.ext_m &
-+                               cpu->cfg.ext_a & cpu->cfg.ext_f &
-+                               cpu->cfg.ext_d)) {
-+            warn_report("Setting G will also set IMAFD");
-+            cpu->cfg.ext_i = true;
-+            cpu->cfg.ext_m = true;
-+            cpu->cfg.ext_a = true;
-+            cpu->cfg.ext_f = true;
-+            cpu->cfg.ext_d = true;
-+        }
-+
-+        /* Set the ISA extensions, checks should have happened above */
-+        if (cpu->cfg.ext_i) {
-+            target_misa |= RVI;
-+        }
-+        if (cpu->cfg.ext_e) {
-+            target_misa |= RVE;
-+        }
-+        if (cpu->cfg.ext_m) {
-+            target_misa |= RVM;
-+        }
-+        if (cpu->cfg.ext_a) {
-+            target_misa |= RVA;
-+        }
-+        if (cpu->cfg.ext_f) {
-+            target_misa |= RVF;
-+        }
-+        if (cpu->cfg.ext_d) {
-+            target_misa |= RVD;
-+        }
-+        if (cpu->cfg.ext_c) {
-+            target_misa |= RVC;
-+        }
-+        if (cpu->cfg.ext_s) {
-+            target_misa |= RVS;
-+        }
-+        if (cpu->cfg.ext_u) {
-+            target_misa |= RVU;
-+        }
-+
-+        set_misa(env, RVXLEN | target_misa);
+     hw_error("%s: read: addr=0x%x\n", __func__, (int)addr);
+     return 0;
+@@ -41,7 +44,30 @@ static uint64_t sifive_prci_read(void *opaque, hwaddr addr, unsigned int size)
+ static void sifive_prci_write(void *opaque, hwaddr addr,
+            uint64_t val64, unsigned int size)
+ {
+-    /* discard writes */
++    SiFivePRCIState *s = opaque;
++    switch (addr) {
++    case SIFIVE_PRCI_HFROSCCFG:
++        s->hfrosccfg = (uint32_t) val64;
++        /* OSC stays ready */
++        s->hfrosccfg |= SIFIVE_PRCI_HFROSCCFG_RDY;
++        break;
++    case SIFIVE_PRCI_HFXOSCCFG:
++        s->hfxosccfg = (uint32_t) val64;
++        /* OSC stays ready */
++        s->hfxosccfg |= SIFIVE_PRCI_HFXOSCCFG_RDY;
++        break;
++    case SIFIVE_PRCI_PLLCFG:
++        s->pllcfg = (uint32_t) val64;
++        /* PLL stays locked */
++        s->pllcfg |= SIFIVE_PRCI_PLLCFG_LOCK;
++        break;
++    case SIFIVE_PRCI_PLLOUTDIV:
++        s->plloutdiv = (uint32_t) val64;
++        break;
++    default:
++        hw_error("%s: bad write: addr=0x%x v=0x%x\n",
++                 __func__, (int)addr, (int)val64);
 +    }
+ }
+ 
+ static const MemoryRegionOps sifive_prci_ops = {
+@@ -61,6 +87,13 @@ static void sifive_prci_init(Object *obj)
+     memory_region_init_io(&s->mmio, obj, &sifive_prci_ops, s,
+                           TYPE_SIFIVE_PRCI, 0x8000);
+     sysbus_init_mmio(SYS_BUS_DEVICE(obj), &s->mmio);
 +
-     riscv_cpu_register_gdb_regs_for_features(cs);
- 
-     qemu_init_vcpu(cs);
-@@ -379,6 +435,16 @@ static const VMStateDescription vmstate_riscv_cpu = {
- };
- 
- static Property riscv_cpu_properties[] = {
-+    DEFINE_PROP_BOOL("i", RISCVCPU, cfg.ext_i, true),
-+    DEFINE_PROP_BOOL("e", RISCVCPU, cfg.ext_e, false),
-+    DEFINE_PROP_BOOL("g", RISCVCPU, cfg.ext_g, true),
-+    DEFINE_PROP_BOOL("m", RISCVCPU, cfg.ext_m, true),
-+    DEFINE_PROP_BOOL("a", RISCVCPU, cfg.ext_a, true),
-+    DEFINE_PROP_BOOL("f", RISCVCPU, cfg.ext_f, true),
-+    DEFINE_PROP_BOOL("d", RISCVCPU, cfg.ext_d, true),
-+    DEFINE_PROP_BOOL("c", RISCVCPU, cfg.ext_c, true),
-+    DEFINE_PROP_BOOL("s", RISCVCPU, cfg.ext_s, true),
-+    DEFINE_PROP_BOOL("u", RISCVCPU, cfg.ext_u, true),
-     DEFINE_PROP_STRING("priv_spec", RISCVCPU, cfg.priv_spec),
-     DEFINE_PROP_STRING("user_spec", RISCVCPU, cfg.user_spec),
-     DEFINE_PROP_BOOL("mmu", RISCVCPU, cfg.mmu, true),
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 6c5de37b2520..b47cde501766 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -211,6 +211,17 @@ typedef struct RISCVCPU {
- 
-     /* Configuration Settings */
-     struct {
-+        bool ext_i;
-+        bool ext_e;
-+        bool ext_g;
-+        bool ext_m;
-+        bool ext_a;
-+        bool ext_f;
-+        bool ext_d;
-+        bool ext_c;
-+        bool ext_s;
-+        bool ext_u;
++    s->hfrosccfg = (SIFIVE_PRCI_HFROSCCFG_RDY | SIFIVE_PRCI_HFROSCCFG_EN);
++    s->hfxosccfg = (SIFIVE_PRCI_HFROSCCFG_RDY | SIFIVE_PRCI_HFROSCCFG_EN);
++    s->pllcfg = (SIFIVE_PRCI_PLLCFG_REFSEL | SIFIVE_PRCI_PLLCFG_BYPASS |
++                SIFIVE_PRCI_PLLCFG_LOCK);
++    s->plloutdiv = SIFIVE_PRCI_PLLOUTDIV_DIV1;
 +
-         char *priv_spec;
-         char *user_spec;
-         bool mmu;
+ }
+ 
+ static const TypeInfo sifive_prci_info = {
+diff --git a/include/hw/riscv/sifive_prci.h b/include/hw/riscv/sifive_prci.h
+index b6f4c486cc1e..bd51c4af3c1c 100644
+--- a/include/hw/riscv/sifive_prci.h
++++ b/include/hw/riscv/sifive_prci.h
+@@ -19,6 +19,34 @@
+ #ifndef HW_SIFIVE_PRCI_H
+ #define HW_SIFIVE_PRCI_H
+ 
++enum {
++    SIFIVE_PRCI_HFROSCCFG   = 0x0,
++    SIFIVE_PRCI_HFXOSCCFG   = 0x4,
++    SIFIVE_PRCI_PLLCFG      = 0x8,
++    SIFIVE_PRCI_PLLOUTDIV   = 0xC
++};
++
++enum {
++    SIFIVE_PRCI_HFROSCCFG_RDY   = (1 << 31),
++    SIFIVE_PRCI_HFROSCCFG_EN    = (1 << 30)
++};
++
++enum {
++    SIFIVE_PRCI_HFXOSCCFG_RDY   = (1 << 31),
++    SIFIVE_PRCI_HFXOSCCFG_EN    = (1 << 30)
++};
++
++enum {
++    SIFIVE_PRCI_PLLCFG_PLLSEL   = (1 << 16),
++    SIFIVE_PRCI_PLLCFG_REFSEL   = (1 << 17),
++    SIFIVE_PRCI_PLLCFG_BYPASS   = (1 << 18),
++    SIFIVE_PRCI_PLLCFG_LOCK     = (1 << 31)
++};
++
++enum {
++    SIFIVE_PRCI_PLLOUTDIV_DIV1  = (1 << 8)
++};
++
+ #define TYPE_SIFIVE_PRCI "riscv.sifive.prci"
+ 
+ #define SIFIVE_PRCI(obj) \
+@@ -30,6 +58,10 @@ typedef struct SiFivePRCIState {
+ 
+     /*< public >*/
+     MemoryRegion mmio;
++    uint32_t hfrosccfg;
++    uint32_t hfxosccfg;
++    uint32_t pllcfg;
++    uint32_t plloutdiv;
+ } SiFivePRCIState;
+ 
+ DeviceState *sifive_prci_create(hwaddr addr);
 -- 
 2.21.0
 
