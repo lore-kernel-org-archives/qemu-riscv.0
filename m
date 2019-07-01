@@ -1,67 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hi3VG-00064R-LY
-	for mharc-qemu-riscv@gnu.org; Mon, 01 Jul 2019 17:06:22 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53616)
+	id 1hi40n-0003Ce-57
+	for mharc-qemu-riscv@gnu.org; Mon, 01 Jul 2019 17:38:58 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:48086)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <alistair23@gmail.com>) id 1hi3VE-0005zW-8A
- for qemu-riscv@nongnu.org; Mon, 01 Jul 2019 17:06:21 -0400
+ (envelope-from <peter.maydell@linaro.org>) id 1hi40j-000396-5M
+ for qemu-riscv@nongnu.org; Mon, 01 Jul 2019 17:38:55 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1hi3VC-0004uL-Tr
- for qemu-riscv@nongnu.org; Mon, 01 Jul 2019 17:06:20 -0400
-Received: from mail-lj1-f195.google.com ([209.85.208.195]:39389)
+ (envelope-from <peter.maydell@linaro.org>) id 1hi40i-0003n4-3d
+ for qemu-riscv@nongnu.org; Mon, 01 Jul 2019 17:38:53 -0400
+Received: from mail-ot1-f68.google.com ([209.85.210.68]:46654)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1hi3VC-0004sH-JP; Mon, 01 Jul 2019 17:06:18 -0400
-Received: by mail-lj1-f195.google.com with SMTP id v18so14657167ljh.6;
- Mon, 01 Jul 2019 14:06:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ (Exim 4.71) (envelope-from <peter.maydell@linaro.org>)
+ id 1hi40h-0003li-R6
+ for qemu-riscv@nongnu.org; Mon, 01 Jul 2019 17:38:51 -0400
+Received: by mail-ot1-f68.google.com with SMTP id z23so15003466ote.13
+ for <qemu-riscv@nongnu.org>; Mon, 01 Jul 2019 14:38:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=CiQddWFCGIJ0zGgct0o78x4tAwZKPanPdL187jV3a1o=;
- b=Z3Mrfp2jyaXqOFVpgYFMVQrj0y8JCxTLRN1Nv+9fjFOrq1/9aD+kg/L7vexn5ofbzD
- WTDjVuIufH8/idNYio9sibkSh3fU79NtFyLVtzZmX0sWO+zTsur8JlsknfE4gVr1EiHC
- TWTB392XmZu/Thq9fO8uDbZXaFc05gw1TOwReoaY2DygkPVNufpf2FMaLxmdfieeePqO
- sUnSznJG5owPtLTUq7l5/AuGnJeNs95FwKG/ty1Hjf3qJ3rhGLgo5842srpiiqMOBNo9
- sugEtc2/cgXoP0uoiwVuqsjJhVX6twTCZiCgOT/l9qrttIrO7+VJcm24WggODS0SOTdy
- b//g==
+ :cc; bh=W8795A1pwOViSCWz1XBqs1T8IqRWO2Ds5kmBMPEZLI4=;
+ b=v4EZ0Nbl+SmW3fn/AY9Fg08WXYJ/sMj2juEwN3ISuBZPGAX1wGa6SH6F/VYHlnbEGC
+ Clr5wTGQ5aU+0J8ObP9RfaGebhhAC3EB2bRsgXc1Yud0sV1VqvczITQWElDrA2QzRIPa
+ cjUu7/Yv9qhe3kqBzOapCiTXzrMmR4MWDkUmlfPiC4Mctl3VXKiCvXGpSRptqRe874hN
+ Pd59pRfSAxKAXNVUQs7ykPb7drHrRnYuxUuXIq8G8dIsRkiwEQBhSIzyj+3dJ9JiWm5P
+ ZYcBBi0btbIl8Diw5loHeBR12Ggxn4AylD/6RMXycl3hOrKkaY9+dT4wd0I7HGKFj02Z
+ Brmg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=CiQddWFCGIJ0zGgct0o78x4tAwZKPanPdL187jV3a1o=;
- b=PbtEd8FFKBuz9P8eVKyGHw/d4fa1mxs/Fubio3ECaSRURXDclgIp5fenQwYAM5XUBE
- DrTu9n5ZaigOJJzJymM96FXArqAW5G6gD86OndjJ13W+XUT/cHaqMGHV0wSizi8SeWB+
- 0+kUGWeuiOwSZs96imJovLzJjOHwDx8lcqxEbYaWkuNcntWcTiQUvGDzoizrIRz1ET5A
- LeS09pivxzt8F21Ttuwo/NZct37Y85tfFlSBiEsnGoF6RWFHx6NmHarc0KlTe43oySoh
- hxc+m3st5Umf8DtHJ7ES0JU91cJRGNSaSgBqsDU1c8omEALeyjBJe9pvRs+8f2x7aHPz
- woOg==
-X-Gm-Message-State: APjAAAWK1mQj8C1++fDjB3kRVMAnrW3UIUbzsynJtcuVCNTOm15E/KOC
- lB7tVcVpRm/bjMHvY55UJtg9X/DhIoc/zb/PPt1AKW1J
-X-Google-Smtp-Source: APXvYqzf5tSQUl2CAsaQ08aD4OLB15/XDuQ+qxM4ZgM/CW3I6jZJ6LteZ+5lLbWzRK2M+gks95vk/sBXuCkwK+WDjKw=
-X-Received: by 2002:a2e:5d5a:: with SMTP id r87mr14641276ljb.196.1561999329481; 
- Mon, 01 Jul 2019 09:42:09 -0700 (PDT)
+ bh=W8795A1pwOViSCWz1XBqs1T8IqRWO2Ds5kmBMPEZLI4=;
+ b=EsfsC9l/fAH9hEGMiBAOmOcx4WsnlmlkKwlvoS+pKwt1y3Quu77Ljc5ILxppkazCjc
+ sIfBskXuHA3QMREljvQLBdVEqMDBXhXAPyGHS+OwzTWe0AZCILtio41lXpmrLQINKWo5
+ FEbU+1c7t+AIhylDoBQDl1hyL9q3Dj0LjLJtm+io8xd7K2VaefnKSmSL8ZG7Fd78NFQf
+ nvldAzvcLzWi20QT4zEqUNODXYGrVmC6QbesmcgIYDMz4W/aWHtJ894sqTohS6c1IhMu
+ L+I9a/y3K3IXetFGnIwpZiK3CpnFEjKyD2I91El7Es+JyA6w1rtf+IfGt7zmuzg3PBFM
+ hrDQ==
+X-Gm-Message-State: APjAAAVayq2av7pYw4mT7Gfm6BOnZvQlqTvi8DTfaAAGZ7MS+ED20sc2
+ LuCHTe4FYFsp6t28ibu0ox9G/uJJ/YBsyy+R2V3RiIfat/o=
+X-Google-Smtp-Source: APXvYqzT7KIi+tGQIrOHSMjSPbaI/TSJJW+3RrUrMt2b8Cyb6jjA/Tl4/JqMlccyz3LWeKBMXwCG81Quj+jm+RrmqvU=
+X-Received: by 2002:a9d:7245:: with SMTP id a5mr21354692otk.232.1562000171096; 
+ Mon, 01 Jul 2019 09:56:11 -0700 (PDT)
 MIME-Version: 1.0
-References: <20190627152011.18686-1-palmer@sifive.com>
- <20190627152011.18686-34-palmer@sifive.com>
- <20190628104605.000062c4@huawei.com>
- <CAKmqyKP1c5GHKaDuOvu11UtCwnrUosxTtoDAeW7GOS=s+h27aw@mail.gmail.com>
- <20190701134029.00004b97@huawei.com>
- <CAAhSdy1c47+MaD4GixWB+u-+1Rb9ULAj0NweSzyzy+VdCXns0Q@mail.gmail.com>
-In-Reply-To: <CAAhSdy1c47+MaD4GixWB+u-+1Rb9ULAj0NweSzyzy+VdCXns0Q@mail.gmail.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 1 Jul 2019 09:39:07 -0700
-Message-ID: <CAKmqyKN4-ec9DYRvUK4vOUiE_yer48xXghTdkmYWeLAzezE+LA@mail.gmail.com>
-To: Anup Patel <anup@brainfault.org>
-Cc: Jonathan Cameron <jonathan.cameron@huawei.com>,
- Peter Maydell <peter.maydell@linaro.org>, 
- "open list:RISC-V" <qemu-riscv@nongnu.org>, Palmer Dabbelt <palmer@sifive.com>,
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>
+References: <20190628173227.31925-1-palmer@sifive.com>
+In-Reply-To: <20190628173227.31925-1-palmer@sifive.com>
+From: Peter Maydell <peter.maydell@linaro.org>
+Date: Mon, 1 Jul 2019 17:55:59 +0100
+Message-ID: <CAFEAcA_C8DM51ac-hOU++OUyMEdSgJQaEMnazsCDn3=Cb2vOqA@mail.gmail.com>
+To: Palmer Dabbelt <palmer@sifive.com>
+Cc: QEMU Developers <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
  [fuzzy]
-X-Received-From: 209.85.208.195
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PULL 33/34] roms: Add OpenSBI
- version 0.3
+X-Received-From: 209.85.210.68
+Subject: Re: [Qemu-riscv] [PULL] RISC-V Patches for the 4.1 Soft Freeze,
+ Part 2 v2
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -73,93 +66,57 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Jul 2019 21:06:21 -0000
+X-List-Received-Date: Mon, 01 Jul 2019 21:38:56 -0000
 
-On Mon, Jul 1, 2019 at 6:23 AM Anup Patel <anup@brainfault.org> wrote:
+On Fri, 28 Jun 2019 at 18:32, Palmer Dabbelt <palmer@sifive.com> wrote:
 >
-> On Mon, Jul 1, 2019 at 6:12 PM Jonathan Cameron
-> <jonathan.cameron@huawei.com> wrote:
-> >
-> > On Fri, 28 Jun 2019 09:12:45 -0700
-> > Alistair Francis <alistair23@gmail.com> wrote:
-> >
-> > > On Fri, Jun 28, 2019 at 2:47 AM Jonathan Cameron
-> > > <jonathan.cameron@huawei.com> wrote:
-> > > >
-> > > > On Thu, 27 Jun 2019 08:20:10 -0700
-> > > > Palmer Dabbelt <palmer@sifive.com> wrote:
-> > > >
-> > > > > From: Alistair Francis <alistair.francis@wdc.com>
-> > > > >
-> > > > > Add OpenSBI version 0.3 as a git submodule and as a prebult binary.
-> > > > >
-> > > > > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> > > > > Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
-> > > > > Tested-by: Bin Meng <bmeng.cn@gmail.com>
-> > > > > Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
-> > > >
-> > > > I sent a late bug report on this one.. Hence posting here as well
-> > > > to make sure it doesn't fall through the cracks!
-> > > >
-> > > > Right now you can't actually build the opensbi64-virt firmware
-> > > > due to cut and paste error in the Makefile.
-> > >
-> > > Ah, thanks for the bug report.
-> > >
-> > > @Palmer Dabbelt I'm just going to send you a fixup commit. Can you
-> > > apply it to your tree and send a PRv2?
-> > >
-> > > >
-> > > > As a side note, I hit this because OpenSBI 0.3 is resulting in a login
-> > > > loop on a debian test image and the current upstream isn't.  I haven't
-> > > > debugged yet, but someone else may hit that problem.
-> > >
-> > > Unfortunately OpenSBI 0.3 is a little old now, in saying that I didn't
-> > > know there are bugs in it? Which kernel are you using?
-> >
-> > Mainline 5.2.0-rc5.
-> >
-> > Just in case I also checked 5.2.0-rc7
-> >
-> > I tried doing an odd git bisect with good and bad reversed to figure out
-> > what fixed the problem, but boot wedged at "Run /sbin/init as init process."
-> >
-> > The wedge was bisected to:
-> >
-> > 4e2cd47820 ("lib: Flush everything when remote TLB flush range is too large")
-> >
-> > Which the patch correctly identifies as a problem introduced this kernel cycle.
-> > 5.2-rc1.
-> >
-> > So on that basis alone I'd suggest we want to move to a more recent openSBI
-> > asap, after all the 5.2 kernel will be out in a week or so.
-> >
-> > I'm a bit short on time (flight to catch), so haven't pushed that fix that
-> > far back in the tree yet in order to figure what is causing the login loop.
-> > Won't have access to relevant build machines until Wednesday.
-> >
-> > That patch cherry-picked on lib: Optimize TLB flush IPIs
-> > seems fine, so it is before that point...
-> >
-> > Passing that point would require real effort though as the two patches
-> > are changing the same code.
-> >
-> > So I had a go from the other end (0.3) to see if it was fixed quickly.
-> > Ran out of time, but at
-> > "firmware: Reset all registers and flush the icache" it superficially all
-> > seems to be working with no TLB related hang, or login loop.
+> merged tag 'mips-queue-jun-21-2019'
+> The following changes since commit 474f3938d79ab36b9231c9ad3b5a9314c2aeacde:
 >
-> We plan to release OpenSBI 0.4 in couple of days. It would be best
-> to pick-up OpenSBI 0.4 FW_JUMP binaries.
-
-Great! When the 0.4 release comes out I'll send a patch to update the
-QEMU binaries and submodules. If this PR is merged before then we can
-just update on top of this (as 5.1 and earlier kernels will work with
-0.3) and it not it can be squashed into this PR.
-
-Alistair
-
+>   Merge remote-tracking branch 'remotes/amarkovic/tags/mips-queue-jun-21-2019' into staging (2019-06-21 15:40:50 +0100)
 >
-> Regards,
-> Anup
+> are available in the Git repository at:
+>
+>   git://github.com/palmer-dabbelt/qemu.git tags/riscv-for-master-4.1-sf1-v2
+>
+> for you to fetch changes up to 56bf43fc565a2fa3e0a618ab45e1c82896d0782a:
+>
+>   hw/riscv: Load OpenSBI as the default firmware (2019-06-28 10:10:30 -0700)
+>
+> ----------------------------------------------------------------
+> RISC-V Patches for the 4.1 Soft Freeze, Part 2 v2
+>
+> This pull request contains a handful of patches that I'd like to target
+> for the 4.1 soft freeze.  There are a handful of new features:
+>
+> * The -bios option now works sanely, including both a built-in copy of
+>   OpenSBI and the ability to load external versions.  Users no longer
+>   need to figure out how to build their own firmware.
+> * Support for the 1.11.0, the latest privileged specification.
+> * Support for reading and writing the PRCI registers.
+> * Better control over the ISA of the target machine.
+> * Support for the cpu-topology device tree node.
+>
+> Additionally, there are a handful of bug fixes including:
+>
+> * Load reservations are now broken by both store conditional and by
+>   scheduling, which fixes issues with parallel applications.
+> * Various fixes to the PMP implementation.
+> * Fixes to the 32-bit linux-user syscall ABI.
+> * Various fixes for instruction decodeing.
+> * A fix to the PCI device tree "bus-range" property.
+>
+> This boots 32-bit and 64-bit OpenEmbedded.
+>
+> Changes since v1 [riscv-for-master-4.1-sf1]:
+>
+> * Contains a fix to the sifive_u OpenSBI integration.
+
+Hi; I had some comments about the opensbi blobs (and in particular
+a question about the licensing), so I'm not going to apply this.
+You might want to send a v2 which has everything except the new
+blobs, while we figure out what we want to do about them.
+
+thanks
+-- PMM
 
