@@ -1,56 +1,75 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hiAAG-0008IZ-IB
-	for mharc-qemu-riscv@gnu.org; Tue, 02 Jul 2019 00:13:08 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:41693)
+	id 1hiCol-0000Ib-BM
+	for mharc-qemu-riscv@gnu.org; Tue, 02 Jul 2019 03:03:07 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:38751)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <armbru@redhat.com>) id 1hiAAC-0008Dm-C0
- for qemu-riscv@nongnu.org; Tue, 02 Jul 2019 00:13:06 -0400
+ (envelope-from <anup@brainfault.org>) id 1hiCoj-0000Eh-KG
+ for qemu-riscv@nongnu.org; Tue, 02 Jul 2019 03:03:06 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <armbru@redhat.com>) id 1hiAA8-0005LB-Ng
- for qemu-riscv@nongnu.org; Tue, 02 Jul 2019 00:13:02 -0400
-Received: from mx1.redhat.com ([209.132.183.28]:53026)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <armbru@redhat.com>)
- id 1hiAA0-0005BJ-BX; Tue, 02 Jul 2019 00:12:53 -0400
-Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
- [10.5.11.16])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id E41F22E97C8;
- Tue,  2 Jul 2019 04:12:42 +0000 (UTC)
-Received: from blackfin.pond.sub.org (ovpn-116-102.ams2.redhat.com
- [10.36.116.102])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 2A3665C28D;
- Tue,  2 Jul 2019 04:12:40 +0000 (UTC)
-Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
- id AFFC4111BD5C; Tue,  2 Jul 2019 06:12:38 +0200 (CEST)
-From: Markus Armbruster <armbru@redhat.com>
-To: Peter Maydell <peter.maydell@linaro.org>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>,
- "qemu-riscv\@nongnu.org" <qemu-riscv@nongnu.org>,
- Jeff Cody <codyprime@gmail.com>, "palmer\@sifive.com" <palmer@sifive.com>,
- "qemu-devel\@nongnu.org" <qemu-devel@nongnu.org>,
- Stefan Hajnoczi <stefanha@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
- "bmeng.cn\@gmail.com" <bmeng.cn@gmail.com>
+ (envelope-from <anup@brainfault.org>) id 1hiCoi-0002hK-Ca
+ for qemu-riscv@nongnu.org; Tue, 02 Jul 2019 03:03:05 -0400
+Received: from mail-wm1-x344.google.com ([2a00:1450:4864:20::344]:37712)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <anup@brainfault.org>) id 1hiCoh-0002gf-WA
+ for qemu-riscv@nongnu.org; Tue, 02 Jul 2019 03:03:04 -0400
+Received: by mail-wm1-x344.google.com with SMTP id f17so1968526wme.2
+ for <qemu-riscv@nongnu.org>; Tue, 02 Jul 2019 00:03:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=brainfault-org.20150623.gappssmtp.com; s=20150623;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=BBAmZmdgcdDCD9usnpWrZf0ZUqD4D/I7QKuIr/LnZ0w=;
+ b=jkJskk3/98WO1x9NFoL7SWQirw65UzlxaGT8hrGFRCnUCA09cALgQ+52zdIZpqwnOJ
+ gvC8K4pPnDytZ66YInszUTzzlYq5scoTUHwsynwDF16TDH1ta8qleAmk3ITUMg8oqs/U
+ FOtwi4r9uEUJxo1CG/e2EwlGeCkjd9Csu8w9p1pRQg1Dd7YYZlfGYjeh/RiFWUEHsvYK
+ ju9YX7cnAlPaX6Ck5abB0dqrFfFqHzDs+PsdIgm67LnwO0NrNCj6iqUHmMoGEzj2u2gY
+ LuOKd9XTD3sbzONI4fX3tjKqRa5MAzW27E9+R5DcHQH/eZPrfQe8d3JgT7A8UeK0FCOt
+ pxbg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=BBAmZmdgcdDCD9usnpWrZf0ZUqD4D/I7QKuIr/LnZ0w=;
+ b=J6hnc03cn8HaWcRGh3y3BoaBs8qSswC1IFRr4kR4d9pwf3L9ZTI0dnTSIZvC+yVl/u
+ EbUcUAvrfGtJXs1qf6UykLSd59FNJ+Q8SZw0E+K+voNoL/83PLIbnXqmqKxuIVAvFuFp
+ 5dBv+OKT+PQT3Rr+hwm/j7h3hy3I6PfoiVPegkhZtAiyIoOa5PArhAezHrLJevmTIa1L
+ fPSXo24Zibonik5TnqqO+U00+dCeouTaprGT4RzHMftL9MMYynzYKRy45WCqCeyVjpmH
+ lI/TA/1nnE5J32smtKl8KWf/+ELv3VimN6NTuTVil1II8Pcn63yXuflRISvzPgP2SWfE
+ dizA==
+X-Gm-Message-State: APjAAAXZw5O6yRQPISGS/nEbmrxPlJ4TKXJ47wlGLgPJu7xswu4y+XiL
+ kmipkr1WM6GlMjoEKMyWmr6B8X+ddUKPvzVi3RFSvQ==
+X-Google-Smtp-Source: APXvYqwshUJg51/IqmFHtP5wqfAw17GO1Mgfkp7BurlTalAFHP6l+zwVmunfJPNbhoSaFvma7U6LNsYIoeMtSdQH89k=
+X-Received: by 2002:a05:600c:254b:: with SMTP id
+ e11mr1952064wma.171.1562050982287; 
+ Tue, 02 Jul 2019 00:03:02 -0700 (PDT)
+MIME-Version: 1.0
 References: <20190627152011.18686-1-palmer@sifive.com>
  <20190627152011.18686-34-palmer@sifive.com>
  <CAFEAcA8sscJQ2GCwL1gM+EcRtfHQb1v0BwORt6ncH54x51TCVg@mail.gmail.com>
  <5896113812cd914308e5b617377f8e8205224cfe.camel@wdc.com>
  <CAFEAcA_-h6b_f1fuWh7NkGo+FT0xSyCDXgd3b4pwEvNDN8HcJw@mail.gmail.com>
-Date: Tue, 02 Jul 2019 06:12:38 +0200
-In-Reply-To: <CAFEAcA_-h6b_f1fuWh7NkGo+FT0xSyCDXgd3b4pwEvNDN8HcJw@mail.gmail.com>
- (Peter Maydell's message of "Mon, 1 Jul 2019 19:01:12 +0100")
-Message-ID: <87a7dxqdl5.fsf@dusky.pond.sub.org>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/26.2 (gnu/linux)
-MIME-Version: 1.0
-Content-Type: text/plain
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.29]); Tue, 02 Jul 2019 04:12:43 +0000 (UTC)
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
-X-Received-From: 209.132.183.28
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PULL 33/34] roms: Add OpenSBI
- version 0.3
+ <efaaaa7aabddfb8481af4c5b2eeec23513f8fcb8.camel@wdc.com>
+ <CAFEAcA_cwm_1VhGW7yGL6=ja7TuO3c9perBs_OoWMaXBhJYH9g@mail.gmail.com>
+ <9363cb8764e800d8c30ff6722c680e4aa8bd9271.camel@wdc.com>
+In-Reply-To: <9363cb8764e800d8c30ff6722c680e4aa8bd9271.camel@wdc.com>
+From: Anup Patel <anup@brainfault.org>
+Date: Tue, 2 Jul 2019 12:32:51 +0530
+Message-ID: <CAAhSdy32YLhqXi2Gsk7zYfhUx1r2US=AsJn2E0WVSvNutHQ8_Q@mail.gmail.com>
+To: Alistair Francis <Alistair.Francis@wdc.com>
+Cc: "peter.maydell@linaro.org" <peter.maydell@linaro.org>, 
+ "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>,
+ "codyprime@gmail.com" <codyprime@gmail.com>, 
+ "palmer@sifive.com" <palmer@sifive.com>,
+ "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, 
+ "stefanha@redhat.com" <stefanha@redhat.com>,
+ "pbonzini@redhat.com" <pbonzini@redhat.com>, 
+ "alistair23@gmail.com" <alistair23@gmail.com>,
+ "bmeng.cn@gmail.com" <bmeng.cn@gmail.com>, 
+ "eblake@redhat.com" <eblake@redhat.com>
+Content-Type: text/plain; charset="UTF-8"
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2a00:1450:4864:20::344
+Subject: Re: [Qemu-riscv] [PULL 33/34] roms: Add OpenSBI version 0.3
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -62,99 +81,47 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Jul 2019 04:13:06 -0000
+X-List-Received-Date: Tue, 02 Jul 2019 07:03:06 -0000
 
-Peter Maydell <peter.maydell@linaro.org> writes:
-
-> On Mon, 1 Jul 2019 at 18:50, Alistair Francis <Alistair.Francis@wdc.com> wrote:
->>
->> On Mon, 2019-07-01 at 17:54 +0100, Peter Maydell wrote:
->> > On Thu, 27 Jun 2019 at 16:24, Palmer Dabbelt <palmer@sifive.com>
->> > wrote:
->> > > From: Alistair Francis <alistair.francis@wdc.com>
->> > >
->> > > Add OpenSBI version 0.3 as a git submodule and as a prebult binary.
->> > >
->> > > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
->> > > Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
->> > > Tested-by: Bin Meng <bmeng.cn@gmail.com>
->> > > Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
->> > > ---
->> > >  .gitmodules                                  |   3 ++
->> > >  Makefile                                     |   5 +-
->> > >  pc-bios/opensbi-riscv32-virt-fw_jump.bin     | Bin 0 -> 28848
->> > > bytes
->> > >  pc-bios/opensbi-riscv64-sifive_u-fw_jump.bin | Bin 0 -> 28904
->> > > bytes
->> > >  pc-bios/opensbi-riscv64-virt-fw_jump.bin     | Bin 0 -> 28904
->> > > bytes
->> > >  roms/Makefile                                |  48 ++++++++++++++-
->> > > ----
->> > >  roms/opensbi                                 |   1 +
->> > >  7 files changed, 44 insertions(+), 13 deletions(-)
->> > >  create mode 100644 pc-bios/opensbi-riscv32-virt-fw_jump.bin
->> > >  create mode 100644 pc-bios/opensbi-riscv64-sifive_u-fw_jump.bin
->> > >  create mode 100644 pc-bios/opensbi-riscv64-virt-fw_jump.bin
->> > >  create mode 160000 roms/opensbi
->> > >
->> > > diff --git a/.gitmodules b/.gitmodules
->> > > index 2857eec76377..7a10e72e09cd 100644
->> > > --- a/.gitmodules
->> > > +++ b/.gitmodules
->> > > @@ -55,3 +55,6 @@
->> > >  [submodule "slirp"]
->> > >         path = slirp
->> > >         url = https://git.qemu.org/git/libslirp.git
->> > > +[submodule "roms/opensbi"]
->> > > +       path = roms/opensbi
->> > > +       url = https://github.com/riscv/opensbi.git
->> >
->> > It would be nice to state the license for new blobs we're
->> > adding to the source tree... In particular, I find the
->> > readme at https://github.com/riscv/opensbi a bit confusing
->> > because it says it's 2-BSD but also that some parts are Apache-2.0;
->> > the latter is *not* GPL-2.0 compatible. That makes it not completely
->> > obvious to me that we can ship this with QEMU.
->>
->> Ah, I didn't realise there is Apache-2.0 code in there.
->>
->> In this case all of the code we are using (we aren't using the Kendryte
->> code with QEMU) is BSD-2-Clause. Even then though does it matter if it
->> is GPL compatible? This isn't being linked with QEMU it is just being
->> included with QEMU.
+On Tue, Jul 2, 2019 at 2:57 AM Alistair Francis
+<Alistair.Francis@wdc.com> wrote:
 >
-> Yeah, if we're not building the apache-2.0 parts then I think
-> we're OK, and as you say there's the question of whether QEMU's
-> GPL affects what we ship as mere bios blobs to run as guest
-> code anyway. But it's sufficiently not a "really obviously ok"
-> that I'd like a second opinion; cc'd some people who might have
-> second opinions.
+> On Mon, 2019-07-01 at 19:13 +0100, Peter Maydell wrote:
+> > On Mon, 1 Jul 2019 at 19:09, Alistair Francis <
+> > Alistair.Francis@wdc.com> wrote:
+> > > On Mon, 2019-07-01 at 19:01 +0100, Peter Maydell wrote:
+> > > > On Mon, 1 Jul 2019 at 18:50, Alistair Francis <
+> > > > Alistair.Francis@wdc.com> wrote:
+> > > > > PS: It seems like there are still some issues with this patch
+> > > > > so
+> > > > > maybe
+> > > > > it's worth dropping this patch from the PR so that we can get
+> > > > > everything else merged.
+> > > >
+> > > > Yeah, that would be my suggestion.
+> > >
+> > > Can you do that when you merge it or does Palmer have to send the
+> > > PR
+> > > again?
+> >
+> > Palmer needs to respin it -- pulls are signed and I can't
+> > modify them, only either apply them or not. (Technically I
+> > could in theory cherry-pick all the other commits out of them
+> > but that would be a huge amount of manual labour.)
+>
+> No worries.
+>
+> @Palmer can you please drop these two patches from this PR?
+>
+> hw/riscv: Load OpenSBI as the default firmware
+> roms: Add OpenSBI version 0.3
+>
+> Sorry for the all the last minute changes. I'll wait until OpenSBI 0.4
+> to respin those two patches.
 
-You need an expert opinion.
+OpenSBI v0.4 is now available.
+(Refer, https://github.com/riscv/opensbi/releases/tag/v0.4)
 
-My non-expert opinion: we can't distribute anything that's not
-compatible with GPLv2, at least as long as LICENSE makes the following
-claims:
-
-    1) QEMU as a whole is released under the GNU General Public License,
-    version 2.
-
-    2) Parts of QEMU have specific licenses which are compatible with the
-    GNU General Public License, version 2. Hence each source file contains
-    its own licensing information.  Source files with no licensing information
-    are released under the GNU General Public License, version 2 or (at your
-    option) any later version.
-
-    As of July 2013, contributions under version 2 of the GNU General Public
-    License (and no later version) are only accepted for the following files
-    or directories: bsd-user/, linux-user/, hw/vfio/, hw/xen/xen_pt*.
-
-    3) The Tiny Code Generator (TCG) is released under the BSD license
-       (see license headers in files).
-
-Complicating things further just to distribute a firmware blob would be
-a mistake.  Our licensing situation is already complex enough for me to
-call it a mistake.
-
-[...]
+Regards,
+Anup
 
