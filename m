@@ -1,75 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hiCol-0000Ib-BM
-	for mharc-qemu-riscv@gnu.org; Tue, 02 Jul 2019 03:03:07 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:38751)
+	id 1hiG5h-0007BP-Ho
+	for mharc-qemu-riscv@gnu.org; Tue, 02 Jul 2019 06:32:49 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:48582)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <anup@brainfault.org>) id 1hiCoj-0000Eh-KG
- for qemu-riscv@nongnu.org; Tue, 02 Jul 2019 03:03:06 -0400
+ (envelope-from <pbonzini@redhat.com>) id 1hiG5c-0007A4-ER
+ for qemu-riscv@nongnu.org; Tue, 02 Jul 2019 06:32:46 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <anup@brainfault.org>) id 1hiCoi-0002hK-Ca
- for qemu-riscv@nongnu.org; Tue, 02 Jul 2019 03:03:05 -0400
-Received: from mail-wm1-x344.google.com ([2a00:1450:4864:20::344]:37712)
+ (envelope-from <pbonzini@redhat.com>) id 1hiG5Y-00071V-5Q
+ for qemu-riscv@nongnu.org; Tue, 02 Jul 2019 06:32:42 -0400
+Received: from mail-wm1-f48.google.com ([209.85.128.48]:40654)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <anup@brainfault.org>) id 1hiCoh-0002gf-WA
- for qemu-riscv@nongnu.org; Tue, 02 Jul 2019 03:03:04 -0400
-Received: by mail-wm1-x344.google.com with SMTP id f17so1968526wme.2
- for <qemu-riscv@nongnu.org>; Tue, 02 Jul 2019 00:03:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=brainfault-org.20150623.gappssmtp.com; s=20150623;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=BBAmZmdgcdDCD9usnpWrZf0ZUqD4D/I7QKuIr/LnZ0w=;
- b=jkJskk3/98WO1x9NFoL7SWQirw65UzlxaGT8hrGFRCnUCA09cALgQ+52zdIZpqwnOJ
- gvC8K4pPnDytZ66YInszUTzzlYq5scoTUHwsynwDF16TDH1ta8qleAmk3ITUMg8oqs/U
- FOtwi4r9uEUJxo1CG/e2EwlGeCkjd9Csu8w9p1pRQg1Dd7YYZlfGYjeh/RiFWUEHsvYK
- ju9YX7cnAlPaX6Ck5abB0dqrFfFqHzDs+PsdIgm67LnwO0NrNCj6iqUHmMoGEzj2u2gY
- LuOKd9XTD3sbzONI4fX3tjKqRa5MAzW27E9+R5DcHQH/eZPrfQe8d3JgT7A8UeK0FCOt
- pxbg==
+ (Exim 4.71) (envelope-from <pbonzini@redhat.com>) id 1hiG5T-0006st-Ow
+ for qemu-riscv@nongnu.org; Tue, 02 Jul 2019 06:32:37 -0400
+Received: by mail-wm1-f48.google.com with SMTP id v19so383414wmj.5
+ for <qemu-riscv@nongnu.org>; Tue, 02 Jul 2019 03:32:29 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=BBAmZmdgcdDCD9usnpWrZf0ZUqD4D/I7QKuIr/LnZ0w=;
- b=J6hnc03cn8HaWcRGh3y3BoaBs8qSswC1IFRr4kR4d9pwf3L9ZTI0dnTSIZvC+yVl/u
- EbUcUAvrfGtJXs1qf6UykLSd59FNJ+Q8SZw0E+K+voNoL/83PLIbnXqmqKxuIVAvFuFp
- 5dBv+OKT+PQT3Rr+hwm/j7h3hy3I6PfoiVPegkhZtAiyIoOa5PArhAezHrLJevmTIa1L
- fPSXo24Zibonik5TnqqO+U00+dCeouTaprGT4RzHMftL9MMYynzYKRy45WCqCeyVjpmH
- lI/TA/1nnE5J32smtKl8KWf/+ELv3VimN6NTuTVil1II8Pcn63yXuflRISvzPgP2SWfE
- dizA==
-X-Gm-Message-State: APjAAAXZw5O6yRQPISGS/nEbmrxPlJ4TKXJ47wlGLgPJu7xswu4y+XiL
- kmipkr1WM6GlMjoEKMyWmr6B8X+ddUKPvzVi3RFSvQ==
-X-Google-Smtp-Source: APXvYqwshUJg51/IqmFHtP5wqfAw17GO1Mgfkp7BurlTalAFHP6l+zwVmunfJPNbhoSaFvma7U6LNsYIoeMtSdQH89k=
-X-Received: by 2002:a05:600c:254b:: with SMTP id
- e11mr1952064wma.171.1562050982287; 
- Tue, 02 Jul 2019 00:03:02 -0700 (PDT)
-MIME-Version: 1.0
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=Yjn5fIAjsuTiAkzRM9YhZGZLVS1yAVdOnuz6kuPBWQY=;
+ b=rvi6feQJirMoYb3ufuxGSkPCnUmhqCpgD7HmXp5wiMFcl5pNtyMGI1j7tqsZPPDwkK
+ t4c3J1uKeA6zT/W0xUaPe5hVgt1N06m8X6Y08gqwDAHvIHaY3tZSZPM8DMhfODiSlp3b
+ yqcsBVl4Z8UzkZD/r6UPX+StfuFiezWNvjEBP3bS+ES89Rb1QcP0gckpNeen6WRft3ps
+ Hem6Fd56mP4GR24P34h7MW2CuRelUBdVaRmqESMJDCNEioke2wXTAvn0G7lPSdnNUSc7
+ 56JS1mdulde26BSfYLr0tKcAoHbkS1nZ+EPhnCANfgum+66Uox7o0vW7DQHtry5bCMka
+ Oqyg==
+X-Gm-Message-State: APjAAAWPRpdE9PSZFfeWYy4TkD2gz2GFCNttzbWHW09ooGB2Qyc1WOEE
+ IlK2PrpWP/vIao3cse4+LKnQVA==
+X-Google-Smtp-Source: APXvYqyoS2q3CVHOHTcU/rAU+Q+Kx2F55SmRYS2gFUNQT467SuoCzplNSG7CukYyAai/E1WFDQFBFg==
+X-Received: by 2002:a7b:cbcb:: with SMTP id n11mr2921393wmi.146.1562063548849; 
+ Tue, 02 Jul 2019 03:32:28 -0700 (PDT)
+Received: from ?IPv6:2001:b07:6468:f312:68f6:70ea:5bb4:f73?
+ ([2001:b07:6468:f312:68f6:70ea:5bb4:f73])
+ by smtp.gmail.com with ESMTPSA id x8sm2484773wmc.5.2019.07.02.03.32.27
+ (version=TLS1_3 cipher=AEAD-AES128-GCM-SHA256 bits=128/128);
+ Tue, 02 Jul 2019 03:32:28 -0700 (PDT)
+To: Markus Armbruster <armbru@redhat.com>,
+ Peter Maydell <peter.maydell@linaro.org>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>,
+ "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>,
+ Jeff Cody <codyprime@gmail.com>, "palmer@sifive.com" <palmer@sifive.com>,
+ "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>,
+ Stefan Hajnoczi <stefanha@redhat.com>,
+ "bmeng.cn@gmail.com" <bmeng.cn@gmail.com>
 References: <20190627152011.18686-1-palmer@sifive.com>
  <20190627152011.18686-34-palmer@sifive.com>
  <CAFEAcA8sscJQ2GCwL1gM+EcRtfHQb1v0BwORt6ncH54x51TCVg@mail.gmail.com>
  <5896113812cd914308e5b617377f8e8205224cfe.camel@wdc.com>
  <CAFEAcA_-h6b_f1fuWh7NkGo+FT0xSyCDXgd3b4pwEvNDN8HcJw@mail.gmail.com>
- <efaaaa7aabddfb8481af4c5b2eeec23513f8fcb8.camel@wdc.com>
- <CAFEAcA_cwm_1VhGW7yGL6=ja7TuO3c9perBs_OoWMaXBhJYH9g@mail.gmail.com>
- <9363cb8764e800d8c30ff6722c680e4aa8bd9271.camel@wdc.com>
-In-Reply-To: <9363cb8764e800d8c30ff6722c680e4aa8bd9271.camel@wdc.com>
-From: Anup Patel <anup@brainfault.org>
-Date: Tue, 2 Jul 2019 12:32:51 +0530
-Message-ID: <CAAhSdy32YLhqXi2Gsk7zYfhUx1r2US=AsJn2E0WVSvNutHQ8_Q@mail.gmail.com>
-To: Alistair Francis <Alistair.Francis@wdc.com>
-Cc: "peter.maydell@linaro.org" <peter.maydell@linaro.org>, 
- "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>,
- "codyprime@gmail.com" <codyprime@gmail.com>, 
- "palmer@sifive.com" <palmer@sifive.com>,
- "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, 
- "stefanha@redhat.com" <stefanha@redhat.com>,
- "pbonzini@redhat.com" <pbonzini@redhat.com>, 
- "alistair23@gmail.com" <alistair23@gmail.com>,
- "bmeng.cn@gmail.com" <bmeng.cn@gmail.com>, 
- "eblake@redhat.com" <eblake@redhat.com>
-Content-Type: text/plain; charset="UTF-8"
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2a00:1450:4864:20::344
-Subject: Re: [Qemu-riscv] [PULL 33/34] roms: Add OpenSBI version 0.3
+ <87a7dxqdl5.fsf@dusky.pond.sub.org>
+From: Paolo Bonzini <pbonzini@redhat.com>
+Message-ID: <d5fb05ba-e313-b9db-9cfa-2c6f7c1b90f8@redhat.com>
+Date: Tue, 2 Jul 2019 12:32:28 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.7.2
+MIME-Version: 1.0
+In-Reply-To: <87a7dxqdl5.fsf@dusky.pond.sub.org>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+ [fuzzy]
+X-Received-From: 209.85.128.48
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PULL 33/34] roms: Add OpenSBI
+ version 0.3
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -81,47 +76,59 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Jul 2019 07:03:06 -0000
+X-List-Received-Date: Tue, 02 Jul 2019 10:32:46 -0000
 
-On Tue, Jul 2, 2019 at 2:57 AM Alistair Francis
-<Alistair.Francis@wdc.com> wrote:
->
-> On Mon, 2019-07-01 at 19:13 +0100, Peter Maydell wrote:
-> > On Mon, 1 Jul 2019 at 19:09, Alistair Francis <
-> > Alistair.Francis@wdc.com> wrote:
-> > > On Mon, 2019-07-01 at 19:01 +0100, Peter Maydell wrote:
-> > > > On Mon, 1 Jul 2019 at 18:50, Alistair Francis <
-> > > > Alistair.Francis@wdc.com> wrote:
-> > > > > PS: It seems like there are still some issues with this patch
-> > > > > so
-> > > > > maybe
-> > > > > it's worth dropping this patch from the PR so that we can get
-> > > > > everything else merged.
-> > > >
-> > > > Yeah, that would be my suggestion.
-> > >
-> > > Can you do that when you merge it or does Palmer have to send the
-> > > PR
-> > > again?
-> >
-> > Palmer needs to respin it -- pulls are signed and I can't
-> > modify them, only either apply them or not. (Technically I
-> > could in theory cherry-pick all the other commits out of them
-> > but that would be a huge amount of manual labour.)
->
-> No worries.
->
-> @Palmer can you please drop these two patches from this PR?
->
-> hw/riscv: Load OpenSBI as the default firmware
-> roms: Add OpenSBI version 0.3
->
-> Sorry for the all the last minute changes. I'll wait until OpenSBI 0.4
-> to respin those two patches.
+On 02/07/19 06:12, Markus Armbruster wrote:
+>> Yeah, if we're not building the apache-2.0 parts then I think
+>> we're OK, and as you say there's the question of whether QEMU's
+>> GPL affects what we ship as mere bios blobs to run as guest
+>> code anyway. But it's sufficiently not a "really obviously ok"
+>> that I'd like a second opinion; cc'd some people who might have
+>> second opinions.
+> 
+> You need an expert opinion.
+> 
+> My non-expert opinion: we can't distribute anything that's not
+> compatible with GPLv2
 
-OpenSBI v0.4 is now available.
-(Refer, https://github.com/riscv/opensbi/releases/tag/v0.4)
+Guest code is not part of QEMU.  We don't say that SeaBIOS, SLOF, etc. 
+are part of QEMU; it constitutes mere aggregation with the GPLv2 QEMU 
+sources, so it _is_ possible to distribute APSL2 guest code with QEMU.  
+IANAL, but I'm fairly sure about this.
 
-Regards,
-Anup
+However I agree that LICENSE needs to be updated, something like this:
+
+diff --git a/LICENSE b/LICENSE
+index 0e0b4b9553..81b9b3572d 100644
+--- a/LICENSE
++++ b/LICENSE
+@@ -1,13 +1,18 @@
+-The following points clarify the QEMU license:
++The QEMU distribution includes both the QEMU emulator and
++various firmware files.  These are separate programs that are
++distributed together for our users' convenience, and they have
++separate license.
+ 
+-1) QEMU as a whole is released under the GNU General Public License,
+-version 2.
++The following points clarify the license of the QEMU emulator:
+ 
+-2) Parts of QEMU have specific licenses which are compatible with the
+-GNU General Public License, version 2. Hence each source file contains
+-its own licensing information.  Source files with no licensing information
+-are released under the GNU General Public License, version 2 or (at your
+-option) any later version.
++1) The QEMU emulator as a whole is released under the GNU General
++Public License, version 2.
++
++2) Parts of the QEMU emulator have specific licenses which are compatible
++with the GNU General Public License, version 2. Hence each source file
++contains its own licensing information.  Source files with no licensing
++information are released under the GNU General Public License, version
++2 or (at your option) any later version.
+ 
+ As of July 2013, contributions under version 2 of the GNU General Public
+ License (and no later version) are only accepted for the following files
+
+Paolo
 
