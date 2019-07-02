@@ -1,65 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hi7ZF-0005f4-L0
-	for mharc-qemu-riscv@gnu.org; Mon, 01 Jul 2019 21:26:45 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:39945)
+	id 1hiAAG-0008IZ-IB
+	for mharc-qemu-riscv@gnu.org; Tue, 02 Jul 2019 00:13:08 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:41693)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <bmeng.cn@gmail.com>) id 1hi7ZC-0005VO-Pw
- for qemu-riscv@nongnu.org; Mon, 01 Jul 2019 21:26:43 -0400
+ (envelope-from <armbru@redhat.com>) id 1hiAAC-0008Dm-C0
+ for qemu-riscv@nongnu.org; Tue, 02 Jul 2019 00:13:06 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <bmeng.cn@gmail.com>) id 1hi7ZB-0001oW-Uu
- for qemu-riscv@nongnu.org; Mon, 01 Jul 2019 21:26:42 -0400
-Received: from mail-ed1-x542.google.com ([2a00:1450:4864:20::542]:33882)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
- id 1hi7ZB-0001oR-JI; Mon, 01 Jul 2019 21:26:41 -0400
-Received: by mail-ed1-x542.google.com with SMTP id s49so25733865edb.1;
- Mon, 01 Jul 2019 18:26:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=1nT6RCzhoW9fTgxDD6WsSBGm0pOf4Ir8rW7Q20NZpTo=;
- b=AEdgduj2fpPUPddZjLdryXwYgh2tlHGsgZsgw0GmlIGEg0WJ+RPM7c9qOmv7P6646P
- xnglk1m0CHOa/PgQd4jshi/Ikxy94oIGkC1FZj+YkFUotFQBdtUZqJpT8p0FzHYuOcni
- sdHIv3YRl80hnyGRwYOWtn23L9CFfDw5hzz5n1tCJR2sWEpOCq2a2CNA9FsB4jYRK5KV
- bjyF/LOq7YgzzIbrlT9GAk48SVSJGovx66ksu+nuIlsGa43IRg8dbumFVhCSithDpMex
- HTyusaWhrMrLiUEv5NL33GljIwvAu5skc+F2mhJI17uCu7iRzLaQpNvm0M49GyWmNL2G
- jhwQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=1nT6RCzhoW9fTgxDD6WsSBGm0pOf4Ir8rW7Q20NZpTo=;
- b=DdwWmSW9L303kPofA3Gfs+FRvPcVli1gD9vb817Bp04EUUXObTcOGEXOJAYOo4tPa7
- HCGpzGayIj8TEUH//Wjf/EKEWGo1h63NYd4ADYWpsifKHVB4nA5yVtXVz5Vqa+E4DZN1
- sJB8Ju/Qcl/k3jv8U5ApZ3VWCqiH5oJLtWfLBFmdzkp9XK4R5O9rlUpAr2CUThHRvDFW
- SYFUt+745va4CkBucrQ5gmgmTnjx+xdc9Av76gipMPfNRJWNqDTIKaByr+WdzQ69olBB
- HqM+AkWdWyDk/Yxaqc4MEjeEaGpo9Wwr+KOHl9cpu10mVpcHZ2tPMiEl3NntUrHN3UD/
- EKPw==
-X-Gm-Message-State: APjAAAWhx0/7luiWkA6yRwtDDUd8dbOtzju5ukGzKOssv/RGLkp9eV9Q
- BIKnHmBvU5+mu7SFd2XzZRmxiMUg5ds3b89/hXk=
-X-Google-Smtp-Source: APXvYqx3dSHpMyWZYauhLTIklNiaVIi+7cOKFdkJuJ+94wbyIzo8YEDkOPEHtk3tnxDOKFxID4vJGjB2yzk/0pA+Irw=
-X-Received: by 2002:a50:94e6:: with SMTP id t35mr32906403eda.137.1562030799386; 
- Mon, 01 Jul 2019 18:26:39 -0700 (PDT)
+ (envelope-from <armbru@redhat.com>) id 1hiAA8-0005LB-Ng
+ for qemu-riscv@nongnu.org; Tue, 02 Jul 2019 00:13:02 -0400
+Received: from mx1.redhat.com ([209.132.183.28]:53026)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <armbru@redhat.com>)
+ id 1hiAA0-0005BJ-BX; Tue, 02 Jul 2019 00:12:53 -0400
+Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
+ [10.5.11.16])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mx1.redhat.com (Postfix) with ESMTPS id E41F22E97C8;
+ Tue,  2 Jul 2019 04:12:42 +0000 (UTC)
+Received: from blackfin.pond.sub.org (ovpn-116-102.ams2.redhat.com
+ [10.36.116.102])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 2A3665C28D;
+ Tue,  2 Jul 2019 04:12:40 +0000 (UTC)
+Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
+ id AFFC4111BD5C; Tue,  2 Jul 2019 06:12:38 +0200 (CEST)
+From: Markus Armbruster <armbru@redhat.com>
+To: Peter Maydell <peter.maydell@linaro.org>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>,
+ "qemu-riscv\@nongnu.org" <qemu-riscv@nongnu.org>,
+ Jeff Cody <codyprime@gmail.com>, "palmer\@sifive.com" <palmer@sifive.com>,
+ "qemu-devel\@nongnu.org" <qemu-devel@nongnu.org>,
+ Stefan Hajnoczi <stefanha@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
+ "bmeng.cn\@gmail.com" <bmeng.cn@gmail.com>
+References: <20190627152011.18686-1-palmer@sifive.com>
+ <20190627152011.18686-34-palmer@sifive.com>
+ <CAFEAcA8sscJQ2GCwL1gM+EcRtfHQb1v0BwORt6ncH54x51TCVg@mail.gmail.com>
+ <5896113812cd914308e5b617377f8e8205224cfe.camel@wdc.com>
+ <CAFEAcA_-h6b_f1fuWh7NkGo+FT0xSyCDXgd3b4pwEvNDN8HcJw@mail.gmail.com>
+Date: Tue, 02 Jul 2019 06:12:38 +0200
+In-Reply-To: <CAFEAcA_-h6b_f1fuWh7NkGo+FT0xSyCDXgd3b4pwEvNDN8HcJw@mail.gmail.com>
+ (Peter Maydell's message of "Mon, 1 Jul 2019 19:01:12 +0100")
+Message-ID: <87a7dxqdl5.fsf@dusky.pond.sub.org>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/26.2 (gnu/linux)
 MIME-Version: 1.0
-References: <20190701154617.22908-1-jonathan@fintelia.io>
- <CAKmqyKOsMO7SvvDfiqhywxb=oaqo=NDjw==reVpU9sLh+3dGuw@mail.gmail.com>
-In-Reply-To: <CAKmqyKOsMO7SvvDfiqhywxb=oaqo=NDjw==reVpU9sLh+3dGuw@mail.gmail.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Tue, 2 Jul 2019 09:26:26 +0800
-Message-ID: <CAEUhbmXBnu_Fet99AjQj6XZ10m045N8kY7d8VNy28ktmFBsrQQ@mail.gmail.com>
-To: Alistair Francis <alistair23@gmail.com>
-Cc: Jonathan Behrens <jonathan@fintelia.io>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Palmer Dabbelt <palmer@sifive.com>, 
- "open list:All patches CC here" <qemu-devel@nongnu.org>,
- Alistair Francis <Alistair.Francis@wdc.com>
-Content-Type: text/plain; charset="UTF-8"
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2a00:1450:4864:20::542
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v2] target/riscv: Hardwire
- mcounter.TM and upper bits of [m|s]counteren
+Content-Type: text/plain
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+ (mx1.redhat.com [10.5.110.29]); Tue, 02 Jul 2019 04:12:43 +0000 (UTC)
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+X-Received-From: 209.132.183.28
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PULL 33/34] roms: Add OpenSBI
+ version 0.3
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -71,28 +62,99 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Jul 2019 01:26:43 -0000
+X-List-Received-Date: Tue, 02 Jul 2019 04:13:06 -0000
 
-On Tue, Jul 2, 2019 at 8:20 AM Alistair Francis <alistair23@gmail.com> wrote:
->
-> On Mon, Jul 1, 2019 at 8:56 AM <jonathan@fintelia.io> wrote:
-> >
-> > From: Jonathan Behrens <jonathan@fintelia.io>
-> >
-> > QEMU currently always triggers an illegal instruction exception when
-> > code attempts to read the time CSR. This is valid behavor, but only if
-> > the TM bit in mcounteren is hardwired to zero. This change also
-> > corrects mcounteren and scounteren CSRs to be 32-bits on both 32-bit
-> > and 64-bit targets.
-> >
-> > Signed-off-by: Jonathan Behrens <jonathan@fintelia.io>
->
-> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
->
+Peter Maydell <peter.maydell@linaro.org> writes:
 
-I am a little bit lost here. I think we agreed to allow directly read
-to time CSR when mcounteren.TM is set, no?
+> On Mon, 1 Jul 2019 at 18:50, Alistair Francis <Alistair.Francis@wdc.com> wrote:
+>>
+>> On Mon, 2019-07-01 at 17:54 +0100, Peter Maydell wrote:
+>> > On Thu, 27 Jun 2019 at 16:24, Palmer Dabbelt <palmer@sifive.com>
+>> > wrote:
+>> > > From: Alistair Francis <alistair.francis@wdc.com>
+>> > >
+>> > > Add OpenSBI version 0.3 as a git submodule and as a prebult binary.
+>> > >
+>> > > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+>> > > Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+>> > > Tested-by: Bin Meng <bmeng.cn@gmail.com>
+>> > > Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
+>> > > ---
+>> > >  .gitmodules                                  |   3 ++
+>> > >  Makefile                                     |   5 +-
+>> > >  pc-bios/opensbi-riscv32-virt-fw_jump.bin     | Bin 0 -> 28848
+>> > > bytes
+>> > >  pc-bios/opensbi-riscv64-sifive_u-fw_jump.bin | Bin 0 -> 28904
+>> > > bytes
+>> > >  pc-bios/opensbi-riscv64-virt-fw_jump.bin     | Bin 0 -> 28904
+>> > > bytes
+>> > >  roms/Makefile                                |  48 ++++++++++++++-
+>> > > ----
+>> > >  roms/opensbi                                 |   1 +
+>> > >  7 files changed, 44 insertions(+), 13 deletions(-)
+>> > >  create mode 100644 pc-bios/opensbi-riscv32-virt-fw_jump.bin
+>> > >  create mode 100644 pc-bios/opensbi-riscv64-sifive_u-fw_jump.bin
+>> > >  create mode 100644 pc-bios/opensbi-riscv64-virt-fw_jump.bin
+>> > >  create mode 160000 roms/opensbi
+>> > >
+>> > > diff --git a/.gitmodules b/.gitmodules
+>> > > index 2857eec76377..7a10e72e09cd 100644
+>> > > --- a/.gitmodules
+>> > > +++ b/.gitmodules
+>> > > @@ -55,3 +55,6 @@
+>> > >  [submodule "slirp"]
+>> > >         path = slirp
+>> > >         url = https://git.qemu.org/git/libslirp.git
+>> > > +[submodule "roms/opensbi"]
+>> > > +       path = roms/opensbi
+>> > > +       url = https://github.com/riscv/opensbi.git
+>> >
+>> > It would be nice to state the license for new blobs we're
+>> > adding to the source tree... In particular, I find the
+>> > readme at https://github.com/riscv/opensbi a bit confusing
+>> > because it says it's 2-BSD but also that some parts are Apache-2.0;
+>> > the latter is *not* GPL-2.0 compatible. That makes it not completely
+>> > obvious to me that we can ship this with QEMU.
+>>
+>> Ah, I didn't realise there is Apache-2.0 code in there.
+>>
+>> In this case all of the code we are using (we aren't using the Kendryte
+>> code with QEMU) is BSD-2-Clause. Even then though does it matter if it
+>> is GPL compatible? This isn't being linked with QEMU it is just being
+>> included with QEMU.
+>
+> Yeah, if we're not building the apache-2.0 parts then I think
+> we're OK, and as you say there's the question of whether QEMU's
+> GPL affects what we ship as mere bios blobs to run as guest
+> code anyway. But it's sufficiently not a "really obviously ok"
+> that I'd like a second opinion; cc'd some people who might have
+> second opinions.
 
-Regards,
-Bin
+You need an expert opinion.
+
+My non-expert opinion: we can't distribute anything that's not
+compatible with GPLv2, at least as long as LICENSE makes the following
+claims:
+
+    1) QEMU as a whole is released under the GNU General Public License,
+    version 2.
+
+    2) Parts of QEMU have specific licenses which are compatible with the
+    GNU General Public License, version 2. Hence each source file contains
+    its own licensing information.  Source files with no licensing information
+    are released under the GNU General Public License, version 2 or (at your
+    option) any later version.
+
+    As of July 2013, contributions under version 2 of the GNU General Public
+    License (and no later version) are only accepted for the following files
+    or directories: bsd-user/, linux-user/, hw/vfio/, hw/xen/xen_pt*.
+
+    3) The Tiny Code Generator (TCG) is released under the BSD license
+       (see license headers in files).
+
+Complicating things further just to distribute a firmware blob would be
+a mistake.  Our licensing situation is already complex enough for me to
+call it a mistake.
+
+[...]
 
