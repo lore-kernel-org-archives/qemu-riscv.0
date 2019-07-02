@@ -1,70 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hi4ZL-0005QR-5a
-	for mharc-qemu-riscv@gnu.org; Mon, 01 Jul 2019 18:14:40 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:58891)
+	id 1hi7ZF-0005f4-L0
+	for mharc-qemu-riscv@gnu.org; Mon, 01 Jul 2019 21:26:45 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:39945)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <peter.maydell@linaro.org>) id 1hi4ZA-0005Lk-1N
- for qemu-riscv@nongnu.org; Mon, 01 Jul 2019 18:14:32 -0400
+ (envelope-from <bmeng.cn@gmail.com>) id 1hi7ZC-0005VO-Pw
+ for qemu-riscv@nongnu.org; Mon, 01 Jul 2019 21:26:43 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <peter.maydell@linaro.org>) id 1hi4Z7-0003o6-E4
- for qemu-riscv@nongnu.org; Mon, 01 Jul 2019 18:14:27 -0400
-Received: from mail-ot1-f66.google.com ([209.85.210.66]:44389)
+ (envelope-from <bmeng.cn@gmail.com>) id 1hi7ZB-0001oW-Uu
+ for qemu-riscv@nongnu.org; Mon, 01 Jul 2019 21:26:42 -0400
+Received: from mail-ed1-x542.google.com ([2a00:1450:4864:20::542]:33882)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <peter.maydell@linaro.org>)
- id 1hi4Z7-0003nt-9U
- for qemu-riscv@nongnu.org; Mon, 01 Jul 2019 18:14:25 -0400
-Received: by mail-ot1-f66.google.com with SMTP id b7so15072644otl.11
- for <qemu-riscv@nongnu.org>; Mon, 01 Jul 2019 15:14:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
+ id 1hi7ZB-0001oR-JI; Mon, 01 Jul 2019 21:26:41 -0400
+Received: by mail-ed1-x542.google.com with SMTP id s49so25733865edb.1;
+ Mon, 01 Jul 2019 18:26:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=BH24mY7k31TZuEACtPdnoer+3QK+UzkYFwAlGUuW/xc=;
- b=PG2Gf8lnkqL04b54KHIPw303yj+wZif5+Nx9aTpQBUdj5AbSYQXUAps5bD+h8EObaG
- outuZZHpWugFVGZ2bjAs4gkr0Nb6EoJcxcqanqFNDFA9pp5hzcqwbpcVMQep5R/T8dQ9
- xg/QooE7bfVEXbZ7T6G5YLwI7ekHCKo7XrSQdCkeb8ywqyHJN8CAeIqKtm4XAm1oK5o7
- u824WE2f8nWeA9MVLlVJrq+O22Te9CoqsH1/cztSfuw8zObSmgzc5kstX+FNzG0Mgw2+
- ZBDVfy/1PG+WEBj6kZc2m1b7jBFAsR5rTfFRuct9dR5ZtoakOZUWn8em7oAezRXWallN
- Blzg==
+ :cc; bh=1nT6RCzhoW9fTgxDD6WsSBGm0pOf4Ir8rW7Q20NZpTo=;
+ b=AEdgduj2fpPUPddZjLdryXwYgh2tlHGsgZsgw0GmlIGEg0WJ+RPM7c9qOmv7P6646P
+ xnglk1m0CHOa/PgQd4jshi/Ikxy94oIGkC1FZj+YkFUotFQBdtUZqJpT8p0FzHYuOcni
+ sdHIv3YRl80hnyGRwYOWtn23L9CFfDw5hzz5n1tCJR2sWEpOCq2a2CNA9FsB4jYRK5KV
+ bjyF/LOq7YgzzIbrlT9GAk48SVSJGovx66ksu+nuIlsGa43IRg8dbumFVhCSithDpMex
+ HTyusaWhrMrLiUEv5NL33GljIwvAu5skc+F2mhJI17uCu7iRzLaQpNvm0M49GyWmNL2G
+ jhwQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=BH24mY7k31TZuEACtPdnoer+3QK+UzkYFwAlGUuW/xc=;
- b=IUd/KwAA7p4MQvU5hl4RmdRE962OKTuWLMKm7ygdwrRaMls/YnWvKX8W1qfEhWem8h
- Z4I67MfeP7EiHw0mQ076j5aZpBVJIKQKy3MDoywaTjJEgsJiOu+u0XuUiyTCU9AtO2R6
- FbGAai7nXHgssGHaNBtUHsj1Ebodg2UlMmEcS9hcEuw60dhJLWJtEhSydztjflpb+70L
- IEApJoyroMG4aeEgenHFACZonjcP/j2GYzhS/CH5YkPhNeeXCZM8T5kIy2sqMRz49AxN
- xVN+0eRP15tiTRqtwoNIWy10xytEFDEy6mz3RQ/6dEjGXjc1zeE8gMcR9z1wEMnVAYan
- EE/w==
-X-Gm-Message-State: APjAAAWYLgQow3IVgZro6KC5LnAExVL8CyCq94Cd0K8GsPCdE9c5V+aX
- T5Yf8tE2BRxdWvnoRMsDMnHvojmhi9i4IjDinD4n99RviGM=
-X-Google-Smtp-Source: APXvYqxurZRvyLXBTyGMagF+p8aXINbgp9r1YhxiIZyGtOtKkuw44zNowbC/NUnXNTNz2ius8HACwgpp5BWCKF67CGc=
-X-Received: by 2002:a9d:4d81:: with SMTP id u1mr9605025otk.221.1562004794476; 
- Mon, 01 Jul 2019 11:13:14 -0700 (PDT)
+ bh=1nT6RCzhoW9fTgxDD6WsSBGm0pOf4Ir8rW7Q20NZpTo=;
+ b=DdwWmSW9L303kPofA3Gfs+FRvPcVli1gD9vb817Bp04EUUXObTcOGEXOJAYOo4tPa7
+ HCGpzGayIj8TEUH//Wjf/EKEWGo1h63NYd4ADYWpsifKHVB4nA5yVtXVz5Vqa+E4DZN1
+ sJB8Ju/Qcl/k3jv8U5ApZ3VWCqiH5oJLtWfLBFmdzkp9XK4R5O9rlUpAr2CUThHRvDFW
+ SYFUt+745va4CkBucrQ5gmgmTnjx+xdc9Av76gipMPfNRJWNqDTIKaByr+WdzQ69olBB
+ HqM+AkWdWyDk/Yxaqc4MEjeEaGpo9Wwr+KOHl9cpu10mVpcHZ2tPMiEl3NntUrHN3UD/
+ EKPw==
+X-Gm-Message-State: APjAAAWhx0/7luiWkA6yRwtDDUd8dbOtzju5ukGzKOssv/RGLkp9eV9Q
+ BIKnHmBvU5+mu7SFd2XzZRmxiMUg5ds3b89/hXk=
+X-Google-Smtp-Source: APXvYqx3dSHpMyWZYauhLTIklNiaVIi+7cOKFdkJuJ+94wbyIzo8YEDkOPEHtk3tnxDOKFxID4vJGjB2yzk/0pA+Irw=
+X-Received: by 2002:a50:94e6:: with SMTP id t35mr32906403eda.137.1562030799386; 
+ Mon, 01 Jul 2019 18:26:39 -0700 (PDT)
 MIME-Version: 1.0
-References: <20190627152011.18686-1-palmer@sifive.com>
- <20190627152011.18686-34-palmer@sifive.com>
- <CAFEAcA8sscJQ2GCwL1gM+EcRtfHQb1v0BwORt6ncH54x51TCVg@mail.gmail.com>
- <5896113812cd914308e5b617377f8e8205224cfe.camel@wdc.com>
- <CAFEAcA_-h6b_f1fuWh7NkGo+FT0xSyCDXgd3b4pwEvNDN8HcJw@mail.gmail.com>
- <efaaaa7aabddfb8481af4c5b2eeec23513f8fcb8.camel@wdc.com>
-In-Reply-To: <efaaaa7aabddfb8481af4c5b2eeec23513f8fcb8.camel@wdc.com>
-From: Peter Maydell <peter.maydell@linaro.org>
-Date: Mon, 1 Jul 2019 19:13:03 +0100
-Message-ID: <CAFEAcA_cwm_1VhGW7yGL6=ja7TuO3c9perBs_OoWMaXBhJYH9g@mail.gmail.com>
-To: Alistair Francis <Alistair.Francis@wdc.com>
-Cc: "codyprime@gmail.com" <codyprime@gmail.com>,
- "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, 
- "stefanha@redhat.com" <stefanha@redhat.com>,
- "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>, 
- "bmeng.cn@gmail.com" <bmeng.cn@gmail.com>,
- "eblake@redhat.com" <eblake@redhat.com>, 
- "pbonzini@redhat.com" <pbonzini@redhat.com>,
- "palmer@sifive.com" <palmer@sifive.com>
+References: <20190701154617.22908-1-jonathan@fintelia.io>
+ <CAKmqyKOsMO7SvvDfiqhywxb=oaqo=NDjw==reVpU9sLh+3dGuw@mail.gmail.com>
+In-Reply-To: <CAKmqyKOsMO7SvvDfiqhywxb=oaqo=NDjw==reVpU9sLh+3dGuw@mail.gmail.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Tue, 2 Jul 2019 09:26:26 +0800
+Message-ID: <CAEUhbmXBnu_Fet99AjQj6XZ10m045N8kY7d8VNy28ktmFBsrQQ@mail.gmail.com>
+To: Alistair Francis <alistair23@gmail.com>
+Cc: Jonathan Behrens <jonathan@fintelia.io>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Palmer Dabbelt <palmer@sifive.com>, 
+ "open list:All patches CC here" <qemu-devel@nongnu.org>,
+ Alistair Francis <Alistair.Francis@wdc.com>
 Content-Type: text/plain; charset="UTF-8"
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
- [fuzzy]
-X-Received-From: 209.85.210.66
-Subject: Re: [Qemu-riscv] [PULL 33/34] roms: Add OpenSBI version 0.3
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2a00:1450:4864:20::542
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v2] target/riscv: Hardwire
+ mcounter.TM and upper bits of [m|s]counteren
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -76,28 +71,28 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Jul 2019 22:14:33 -0000
+X-List-Received-Date: Tue, 02 Jul 2019 01:26:43 -0000
 
-On Mon, 1 Jul 2019 at 19:09, Alistair Francis <Alistair.Francis@wdc.com> wrote:
+On Tue, Jul 2, 2019 at 8:20 AM Alistair Francis <alistair23@gmail.com> wrote:
 >
-> On Mon, 2019-07-01 at 19:01 +0100, Peter Maydell wrote:
-> > On Mon, 1 Jul 2019 at 18:50, Alistair Francis <
-> > Alistair.Francis@wdc.com> wrote:
-> > > PS: It seems like there are still some issues with this patch so
-> > > maybe
-> > > it's worth dropping this patch from the PR so that we can get
-> > > everything else merged.
+> On Mon, Jul 1, 2019 at 8:56 AM <jonathan@fintelia.io> wrote:
 > >
-> > Yeah, that would be my suggestion.
+> > From: Jonathan Behrens <jonathan@fintelia.io>
+> >
+> > QEMU currently always triggers an illegal instruction exception when
+> > code attempts to read the time CSR. This is valid behavor, but only if
+> > the TM bit in mcounteren is hardwired to zero. This change also
+> > corrects mcounteren and scounteren CSRs to be 32-bits on both 32-bit
+> > and 64-bit targets.
+> >
+> > Signed-off-by: Jonathan Behrens <jonathan@fintelia.io>
 >
-> Can you do that when you merge it or does Palmer have to send the PR
-> again?
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+>
 
-Palmer needs to respin it -- pulls are signed and I can't
-modify them, only either apply them or not. (Technically I
-could in theory cherry-pick all the other commits out of them
-but that would be a huge amount of manual labour.)
+I am a little bit lost here. I think we agreed to allow directly read
+to time CSR when mcounteren.TM is set, no?
 
-thanks
--- PMM
+Regards,
+Bin
 
