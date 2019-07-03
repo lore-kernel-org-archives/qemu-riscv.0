@@ -1,71 +1,57 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hiLMK-0006Ix-Tp
-	for mharc-qemu-riscv@gnu.org; Tue, 02 Jul 2019 12:10:20 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:45483)
+	id 1hiapI-0005FD-DD
+	for mharc-qemu-riscv@gnu.org; Wed, 03 Jul 2019 04:41:16 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:51039)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <alistair23@gmail.com>) id 1hiLMI-0006Eb-Od
- for qemu-riscv@nongnu.org; Tue, 02 Jul 2019 12:10:19 -0400
+ (envelope-from <palmer@dabbelt.com>) id 1hiapF-0005Ed-9g
+ for qemu-riscv@nongnu.org; Wed, 03 Jul 2019 04:41:14 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1hiLMH-0004MD-Js
- for qemu-riscv@nongnu.org; Tue, 02 Jul 2019 12:10:18 -0400
-Received: from mail-lf1-x12a.google.com ([2a00:1450:4864:20::12a]:38243)
+ (envelope-from <palmer@dabbelt.com>) id 1hiapD-00064L-QM
+ for qemu-riscv@nongnu.org; Wed, 03 Jul 2019 04:41:13 -0400
+Received: from mail-lj1-f194.google.com ([209.85.208.194]:34888)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1hiLMH-0004LV-BR; Tue, 02 Jul 2019 12:10:17 -0400
-Received: by mail-lf1-x12a.google.com with SMTP id b11so11804711lfa.5;
- Tue, 02 Jul 2019 09:10:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=e6GUwIEJRJInD6g30ZmNZWphRlh4i8Ly/oky3N51j50=;
- b=Nob0cM7yqPSCu1qJdBNYPbq6ZUAKL7syZEhZj+7D6FAHvyEDn7k2X0w21HXPv6Ux0O
- wgQZpK4ki92IE30jCC0YsnlJOEU/+HYYemkXdKzewOOj7qQGe8F4VJQrBYyLM8t7XvVf
- IyylY1uAc7nJkk2/Pafo7HQr/8qw9CQI1+Ez098DGXKnBu5HSm4csdAYE+aFYf4cPqvq
- SB5q22Linz0G9l+w2y5RBWlNbhN+f912BhampRMstD3dubAAKbBDMV5+ezRVzfa0TPXB
- 0zd+ltFEW+jWdqThS+pcGj9Sws58tI3j98Mlkq8XKnvhsTDZKMD/qThcBOyfAQtr8t8i
- 4rjQ==
+ (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1hiapD-000616-EO
+ for qemu-riscv@nongnu.org; Wed, 03 Jul 2019 04:41:11 -0400
+Received: by mail-lj1-f194.google.com with SMTP id x25so1497745ljh.2
+ for <qemu-riscv@nongnu.org>; Wed, 03 Jul 2019 01:41:11 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=e6GUwIEJRJInD6g30ZmNZWphRlh4i8Ly/oky3N51j50=;
- b=JWe9tZMtnff6aylfLju8lnO22mwyqNp+KfBTPHm/8YLmlnHNEg/7uTpdmf5BVR/b66
- SB4+0HFP0I5oBLA1tVwVEPVu3b2MBvRCaD/Tak8wqioDQH/nSqoLoSP0fhl8yv80XGV/
- lTdlN4gPSxuaFQJ+LQUal2fdf4g509vSquiPfVntzmLh/TIAlVE+6SKl5lwGVIabCsQb
- tXtWPJP/KT0pJ6YmRmnwT5YlcCeIMsgZE5uaKJ1CUqJjm0wBRen52DVTFWa63t6iWnog
- MyMC8JccHGzDIEA/EAiL0L3nrRpPPkWf9UPEHOzfSqhJFeqXwW7MYZS9NRvAjEoagOPO
- MeOQ==
-X-Gm-Message-State: APjAAAUads8MmCYPeueOI6ibiCJPX7aBVuXdpt0wKTEa4BHPWBXNJ4Iz
- skCgIOxiYTdiGfuLukGv76BJGMahoJCERr1YNOw=
-X-Google-Smtp-Source: APXvYqycel78Ncmhi84E+YrexHfY/PmgpYqeTshoevtDYxL/2/wWN/2OVM8lIKbEUe4hZzV9KH3KvoBt+jtTVeGwlwQ=
-X-Received: by 2002:ac2:4990:: with SMTP id f16mr14702963lfl.93.1562083815887; 
- Tue, 02 Jul 2019 09:10:15 -0700 (PDT)
+ h=x-gm-message-state:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding:cc:from:to;
+ bh=93jKVryLi5S9dNljnJoTk5o5gCPNFkrJiDJGBHe6zKM=;
+ b=it2oDK2N15sbEnzag5It+iaKetJfyliYQyVFnsJAsrnGETzMD3fjm20gp7pdkqpM0f
+ ifUrymX3T3xssGf8KMPe7FbLx7fFZRQ52o82VFjSRibElLXrt2iTdB308yQavRWZJE1l
+ oVJ0BUawk54M+SnPGmxcezqw7p7BZM+cbLyvobb1nuYzclBhyeMHkyEC5vok8ddW6BB7
+ hf3fTDSs62tLVwWYqRWRVo0Zo+7ZXDhTbB1lD6lsFZdLPi5GeCNCC11Y//SRNs0Kxk+U
+ eR62nW1pNCuJEOM1i68B6qV42JaryoOX4cnGUoUvQI87ECn30uSOZ/OV25HhovOWQy5l
+ qw/A==
+X-Gm-Message-State: APjAAAVQc7Yk0UBBcE09SSdqjIMSgIGOlV3rEtk4mrdWV1jgZKt8gSWJ
+ 42pEUllP9//7oZfoTtJrv1olnA==
+X-Google-Smtp-Source: APXvYqxF29YV6ctXDQkyS9llFQlj3CoAw0Wn8F31MrLz6nfHtJBGTCgjump1btJJGPXzxqxfyf5lMw==
+X-Received: by 2002:a2e:8495:: with SMTP id b21mr20106029ljh.149.1562143270035; 
+ Wed, 03 Jul 2019 01:41:10 -0700 (PDT)
+Received: from localhost ([134.17.27.127])
+ by smtp.gmail.com with ESMTPSA id i62sm342234lji.14.2019.07.03.01.41.09
+ (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+ Wed, 03 Jul 2019 01:41:09 -0700 (PDT)
+Date: Wed,  3 Jul 2019 01:40:17 -0700
+Message-Id: <20190703084048.6980-2-palmer@sifive.com>
+X-Mailer: git-send-email 2.21.0
+In-Reply-To: <20190703084048.6980-1-palmer@sifive.com>
+References: <20190703084048.6980-1-palmer@sifive.com>
 MIME-Version: 1.0
-References: <20190627152011.18686-1-palmer@sifive.com>
- <20190627152011.18686-34-palmer@sifive.com>
- <CAFEAcA8sscJQ2GCwL1gM+EcRtfHQb1v0BwORt6ncH54x51TCVg@mail.gmail.com>
- <5896113812cd914308e5b617377f8e8205224cfe.camel@wdc.com>
- <CAFEAcA_-h6b_f1fuWh7NkGo+FT0xSyCDXgd3b4pwEvNDN8HcJw@mail.gmail.com>
- <87a7dxqdl5.fsf@dusky.pond.sub.org>
- <d5fb05ba-e313-b9db-9cfa-2c6f7c1b90f8@redhat.com>
-In-Reply-To: <d5fb05ba-e313-b9db-9cfa-2c6f7c1b90f8@redhat.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 2 Jul 2019 09:07:11 -0700
-Message-ID: <CAKmqyKONeFL2YVeKPFW0Z9U=hEmJ6uz1RJs+7Eg==vf9X_qKVg@mail.gmail.com>
-To: Paolo Bonzini <pbonzini@redhat.com>
-Cc: Markus Armbruster <armbru@redhat.com>,
- Peter Maydell <peter.maydell@linaro.org>, 
- "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>,
- Jeff Cody <codyprime@gmail.com>, "palmer@sifive.com" <palmer@sifive.com>,
- "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, 
+Content-Transfer-Encoding: 8bit
+Cc: qemu-devel@nongnu.org,       qemu-riscv@nongnu.org,
  Alistair Francis <Alistair.Francis@wdc.com>,
- Stefan Hajnoczi <stefanha@redhat.com>, 
- "bmeng.cn@gmail.com" <bmeng.cn@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2a00:1450:4864:20::12a
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PULL 33/34] roms: Add OpenSBI
- version 0.3
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Palmer Dabbelt <palmer@sifive.com>
+From: Palmer Dabbelt <palmer@sifive.com>
+To: Peter Maydell <peter.maydell@linaro.org>
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+ [fuzzy]
+X-Received-From: 209.85.208.194
+Subject: [Qemu-riscv] [PULL 01/32] target/riscv: Allow setting ISA
+ extensions via CPU props
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -77,71 +63,161 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Jul 2019 16:10:20 -0000
+X-List-Received-Date: Wed, 03 Jul 2019 08:41:14 -0000
 
-On Tue, Jul 2, 2019 at 3:34 AM Paolo Bonzini <pbonzini@redhat.com> wrote:
->
-> On 02/07/19 06:12, Markus Armbruster wrote:
-> >> Yeah, if we're not building the apache-2.0 parts then I think
-> >> we're OK, and as you say there's the question of whether QEMU's
-> >> GPL affects what we ship as mere bios blobs to run as guest
-> >> code anyway. But it's sufficiently not a "really obviously ok"
-> >> that I'd like a second opinion; cc'd some people who might have
-> >> second opinions.
-> >
-> > You need an expert opinion.
-> >
-> > My non-expert opinion: we can't distribute anything that's not
-> > compatible with GPLv2
->
-> Guest code is not part of QEMU.  We don't say that SeaBIOS, SLOF, etc.
-> are part of QEMU; it constitutes mere aggregation with the GPLv2 QEMU
-> sources, so it _is_ possible to distribute APSL2 guest code with QEMU.
-> IANAL, but I'm fairly sure about this.
+From: Alistair Francis <Alistair.Francis@wdc.com>
 
-This is my understanding as well. We aren't linking OpenSBI with QEMU
-so we should be fine to release it with any license.
+This patch allows us to enable/disable the RISC-V ISA extensions from
+the QEMU command line. This works with the rv32 and rv64 machines. The
+idea is that in the future we can now add extensions and leave them
+disabled by default until enabled by the user.
 
->
-> However I agree that LICENSE needs to be updated, something like this:
->
-> diff --git a/LICENSE b/LICENSE
-> index 0e0b4b9553..81b9b3572d 100644
-> --- a/LICENSE
-> +++ b/LICENSE
-> @@ -1,13 +1,18 @@
-> -The following points clarify the QEMU license:
-> +The QEMU distribution includes both the QEMU emulator and
-> +various firmware files.  These are separate programs that are
-> +distributed together for our users' convenience, and they have
-> +separate license.
->
-> -1) QEMU as a whole is released under the GNU General Public License,
-> -version 2.
-> +The following points clarify the license of the QEMU emulator:
->
-> -2) Parts of QEMU have specific licenses which are compatible with the
-> -GNU General Public License, version 2. Hence each source file contains
-> -its own licensing information.  Source files with no licensing information
-> -are released under the GNU General Public License, version 2 or (at your
-> -option) any later version.
-> +1) The QEMU emulator as a whole is released under the GNU General
-> +Public License, version 2.
-> +
-> +2) Parts of the QEMU emulator have specific licenses which are compatible
-> +with the GNU General Public License, version 2. Hence each source file
-> +contains its own licensing information.  Source files with no licensing
-> +information are released under the GNU General Public License, version
-> +2 or (at your option) any later version.
->
->  As of July 2013, contributions under version 2 of the GNU General Public
->  License (and no later version) are only accepted for the following files
+Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
+---
+ target/riscv/cpu.c | 70 ++++++++++++++++++++++++++++++++++++++++++++--
+ target/riscv/cpu.h | 11 ++++++++
+ 2 files changed, 79 insertions(+), 2 deletions(-)
 
-Ok, I'll update the QEMU LICENSE file in the next patch version.
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 6f2b64422086..0632ac08cf35 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -24,6 +24,7 @@
+ #include "cpu.h"
+ #include "exec/exec-all.h"
+ #include "qapi/error.h"
++#include "qemu/error-report.h"
+ #include "hw/qdev-properties.h"
+ #include "migration/vmstate.h"
+ 
+@@ -119,7 +120,8 @@ static void riscv_any_cpu_init(Object *obj)
+ static void riscv_base32_cpu_init(Object *obj)
+ {
+     CPURISCVState *env = &RISCV_CPU(obj)->env;
+-    set_misa(env, RV32 | RVI | RVM | RVA | RVF | RVD | RVC | RVS | RVU);
++    /* We set this in the realise function */
++    set_misa(env, 0);
+ }
+ 
+ static void rv32gcsu_priv1_09_1_cpu_init(Object *obj)
+@@ -156,7 +158,8 @@ static void rv32imacu_nommu_cpu_init(Object *obj)
+ static void riscv_base64_cpu_init(Object *obj)
+ {
+     CPURISCVState *env = &RISCV_CPU(obj)->env;
+-    set_misa(env, RV64 | RVI | RVM | RVA | RVF | RVD | RVC | RVS | RVU);
++    /* We set this in the realise function */
++    set_misa(env, 0);
+ }
+ 
+ static void rv64gcsu_priv1_09_1_cpu_init(Object *obj)
+@@ -315,6 +318,7 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+     RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(dev);
+     int priv_version = PRIV_VERSION_1_10_0;
+     int user_version = USER_VERSION_2_02_0;
++    target_ulong target_misa = 0;
+     Error *local_err = NULL;
+ 
+     cpu_exec_realizefn(cs, &local_err);
+@@ -358,6 +362,58 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+         set_feature(env, RISCV_FEATURE_PMP);
+     }
+ 
++    /* If misa isn't set (rv32 and rv64 machines) set it here */
++    if (!env->misa) {
++        /* Do some ISA extension error checking */
++        if (cpu->cfg.ext_i && cpu->cfg.ext_e) {
++            error_setg(errp,
++                       "I and E extensions are incompatible");
++                       return;
++       }
++
++       if (cpu->cfg.ext_g && !(cpu->cfg.ext_i & cpu->cfg.ext_m &
++                               cpu->cfg.ext_a & cpu->cfg.ext_f &
++                               cpu->cfg.ext_d)) {
++            warn_report("Setting G will also set IMAFD");
++            cpu->cfg.ext_i = true;
++            cpu->cfg.ext_m = true;
++            cpu->cfg.ext_a = true;
++            cpu->cfg.ext_f = true;
++            cpu->cfg.ext_d = true;
++        }
++
++        /* Set the ISA extensions, checks should have happened above */
++        if (cpu->cfg.ext_i) {
++            target_misa |= RVI;
++        }
++        if (cpu->cfg.ext_e) {
++            target_misa |= RVE;
++        }
++        if (cpu->cfg.ext_m) {
++            target_misa |= RVM;
++        }
++        if (cpu->cfg.ext_a) {
++            target_misa |= RVA;
++        }
++        if (cpu->cfg.ext_f) {
++            target_misa |= RVF;
++        }
++        if (cpu->cfg.ext_d) {
++            target_misa |= RVD;
++        }
++        if (cpu->cfg.ext_c) {
++            target_misa |= RVC;
++        }
++        if (cpu->cfg.ext_s) {
++            target_misa |= RVS;
++        }
++        if (cpu->cfg.ext_u) {
++            target_misa |= RVU;
++        }
++
++        set_misa(env, RVXLEN | target_misa);
++    }
++
+     riscv_cpu_register_gdb_regs_for_features(cs);
+ 
+     qemu_init_vcpu(cs);
+@@ -379,6 +435,16 @@ static const VMStateDescription vmstate_riscv_cpu = {
+ };
+ 
+ static Property riscv_cpu_properties[] = {
++    DEFINE_PROP_BOOL("i", RISCVCPU, cfg.ext_i, true),
++    DEFINE_PROP_BOOL("e", RISCVCPU, cfg.ext_e, false),
++    DEFINE_PROP_BOOL("g", RISCVCPU, cfg.ext_g, true),
++    DEFINE_PROP_BOOL("m", RISCVCPU, cfg.ext_m, true),
++    DEFINE_PROP_BOOL("a", RISCVCPU, cfg.ext_a, true),
++    DEFINE_PROP_BOOL("f", RISCVCPU, cfg.ext_f, true),
++    DEFINE_PROP_BOOL("d", RISCVCPU, cfg.ext_d, true),
++    DEFINE_PROP_BOOL("c", RISCVCPU, cfg.ext_c, true),
++    DEFINE_PROP_BOOL("s", RISCVCPU, cfg.ext_s, true),
++    DEFINE_PROP_BOOL("u", RISCVCPU, cfg.ext_u, true),
+     DEFINE_PROP_STRING("priv_spec", RISCVCPU, cfg.priv_spec),
+     DEFINE_PROP_STRING("user_spec", RISCVCPU, cfg.user_spec),
+     DEFINE_PROP_BOOL("mmu", RISCVCPU, cfg.mmu, true),
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 6c5de37b2520..b47cde501766 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -211,6 +211,17 @@ typedef struct RISCVCPU {
+ 
+     /* Configuration Settings */
+     struct {
++        bool ext_i;
++        bool ext_e;
++        bool ext_g;
++        bool ext_m;
++        bool ext_a;
++        bool ext_f;
++        bool ext_d;
++        bool ext_c;
++        bool ext_s;
++        bool ext_u;
++
+         char *priv_spec;
+         char *user_spec;
+         bool mmu;
+-- 
+2.21.0
 
-Alistair
-
->
-> Paolo
->
 
