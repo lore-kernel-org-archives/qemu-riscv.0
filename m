@@ -1,67 +1,55 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hijbf-0001OT-6L
-	for mharc-qemu-riscv@gnu.org; Wed, 03 Jul 2019 14:03:48 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:55459)
+	id 1hikbh-0002Zk-Hh
+	for mharc-qemu-riscv@gnu.org; Wed, 03 Jul 2019 15:07:53 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:39476)
  by lists.gnu.org with esmtp (Exim 4.86_2)
  (envelope-from <bounce+d13a72.9b4e76-qemu-riscv=nongnu.org@fintelia.io>)
- id 1hijbX-0001Fq-Pa
- for qemu-riscv@nongnu.org; Wed, 03 Jul 2019 14:03:40 -0400
+ id 1hikba-0002Y7-QV
+ for qemu-riscv@nongnu.org; Wed, 03 Jul 2019 15:07:48 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
  (envelope-from <bounce+d13a72.9b4e76-qemu-riscv=nongnu.org@fintelia.io>)
- id 1hijbW-0005rH-Oo
- for qemu-riscv@nongnu.org; Wed, 03 Jul 2019 14:03:39 -0400
-Received: from rs224.mailgun.us ([209.61.151.224]:56334)
+ id 1hikbY-0007SX-0x
+ for qemu-riscv@nongnu.org; Wed, 03 Jul 2019 15:07:46 -0400
+Received: from rs224.mailgun.us ([209.61.151.224]:55910)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71)
  (envelope-from <bounce+d13a72.9b4e76-qemu-riscv=nongnu.org@fintelia.io>)
- id 1hijbU-0005lw-GG
- for qemu-riscv@nongnu.org; Wed, 03 Jul 2019 14:03:37 -0400
+ id 1hikbX-0007S1-LI
+ for qemu-riscv@nongnu.org; Wed, 03 Jul 2019 15:07:43 -0400
 DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=fintelia.io; q=dns/txt;
  s=pic; 
- t=1562177012; h=Content-Type: Cc: To: Subject: Message-ID: Date: From:
- In-Reply-To: References: MIME-Version: Sender;
- bh=cFsveXpt62Kbr2tJ04ztChy5Zigq6AHRo8hGSNeg8p4=;
- b=7PV+YFqSdg0FnA5FdHFZyGlU8IApcFNK+DFFQyvgPY3SfQtvqjN+KQmVij+bHpRtZyspb8DD
- +ujE8G1HO9BVAW62/5Z7iWpZlFFgc3UbGEud8jd5lakgDLECUxJANIqHzFEC/bkc73TvSCHO
- 0xQBh0gaLS48mARhM6/oH7azSAlV94lYJWbsXe6qjRXCEHbcxdCHZCqBoEOzs2hR2YTAi2Kn
- kwjhRoz2cP8Q7/SFIeTOgjBwXvFpdqfNYe6IHEXHEytZU1TzTKlIsULLiA8poZ5Tv4ZYWETM
- R+Y3QAZSbaJndSTB4nKWrpWHZr2L/tc6hZSb19gCFhZLr+vddwvwfA==
+ t=1562180863; h=Content-Transfer-Encoding: MIME-Version: Message-Id:
+ Date: Subject: Cc: To: From: Sender;
+ bh=bhPgRYbSneY4s1bR3e/dhpZYjODq0ldO7IJvZCUOrog=;
+ b=nz8LrS24O+aTiaMwKtg7GrpUegoY6lMFo1yLqgQ43Qh1kwmJDhQxrHdSmTFirhw5687Qt2wG
+ PUipJ+q+Nl0GNqeAFzD5eCmX9UBGxobuek1UJjzfKG6T3g6nuqJxURdJIGU0vDD3GHKyu/Kl
+ DtZJl3bvUCVRvBsHsCmxTDAEBqoDF/xsbKxOmo/+s9YW9+hWJa9B5X0HKkF5zbzxzodCrW7A
+ tRLTFYHEkwaK+K+UR4gwrrjMGjEX+z7vtiI97fK8IU11by4rKWUXsUlXxYSSfhtBFCMns4iu
+ MlKJw7V6qMMHxt3UBxnTSeUhdWgrX7okwkXWG9/eKgITD69veXNGuA==
 X-Mailgun-Sending-Ip: 209.61.151.224
 X-Mailgun-Sid: WyJkNjk0ZSIsICJxZW11LXJpc2N2QG5vbmdudS5vcmciLCAiOWI0ZTc2Il0=
 Sender: jonathan@fintelia.io
-Received: from mail-lf1-f50.google.com (mail-lf1-f50.google.com
- [209.85.167.50])
- by mxa.mailgun.org with ESMTP id 5d1cedf3.7fc2f111b030-smtp-out-n02;
- Wed, 03 Jul 2019 18:03:31 -0000 (UTC)
-Received: by mail-lf1-f50.google.com with SMTP id z15so2392517lfh.13;
- Wed, 03 Jul 2019 11:03:31 -0700 (PDT)
-X-Gm-Message-State: APjAAAUNo8WnduhiZa61H6vJ65JHFWDaNauAJurHs0s/9EJajyQkmGt7
- 4r1rqJQGun0DKs4xQaaf5nmgFODwzqXShxBbC0A=
-X-Google-Smtp-Source: APXvYqyfkgQCPmcR1HsXdOf3vkEZa5etH7twRV+o969RC9jqcMtEoMisHD18e7OZIoxF79/wPFUY0d7yrmPLsnxsQcM=
-X-Received: by 2002:ac2:518d:: with SMTP id u13mr18744065lfi.40.1562177010158; 
- Wed, 03 Jul 2019 11:03:30 -0700 (PDT)
-MIME-Version: 1.0
-References: <20190701154617.22908-1-jonathan@fintelia.io>
- <CAKmqyKOsMO7SvvDfiqhywxb=oaqo=NDjw==reVpU9sLh+3dGuw@mail.gmail.com>
- <CAEUhbmXBnu_Fet99AjQj6XZ10m045N8kY7d8VNy28ktmFBsrQQ@mail.gmail.com>
-In-Reply-To: <CAEUhbmXBnu_Fet99AjQj6XZ10m045N8kY7d8VNy28ktmFBsrQQ@mail.gmail.com>
+Received: from jonathan-ThinkPad-X1-Carbon.csail.mit.edu
+ (30-9-3.wireless.csail.mit.edu [128.30.9.3])
+ by mxa.mailgun.org with ESMTP id 5d1cfcfc.7f5bee2bd210-smtp-out-n01;
+ Wed, 03 Jul 2019 19:07:40 -0000 (UTC)
 From: Jonathan Behrens <jonathan@fintelia.io>
-Date: Wed, 3 Jul 2019 14:02:56 -0400
-X-Gmail-Original-Message-ID: <CANnJOVGXcTkH2_2cRqAv0CnZx4xHQ_npEjW-au-FPxe_cU0=5Q@mail.gmail.com>
-Message-ID: <CANnJOVGXcTkH2_2cRqAv0CnZx4xHQ_npEjW-au-FPxe_cU0=5Q@mail.gmail.com>
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Alistair Francis <alistair23@gmail.com>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+To: qemu-devel@nongnu.org
+Cc: Jonathan Behrens <jonathan@fintelia.io>,
+ Palmer Dabbelt <palmer@sifive.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Palmer Dabbelt <palmer@sifive.com>, 
- "open list:All patches CC here" <qemu-devel@nongnu.org>,
- Alistair Francis <Alistair.Francis@wdc.com>
-Content-Type: multipart/alternative; boundary="000000000000c45219058ccaad2f"
+ qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
+Date: Wed,  3 Jul 2019 15:07:14 -0400
+Message-Id: <20190703190715.5328-1-jonathan@fintelia.io>
+X-Mailer: git-send-email 2.22.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
 X-Received-From: 209.61.151.224
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v2] target/riscv: Hardwire
- mcounter.TM and upper bits of [m|s]counteren
+Subject: [Qemu-riscv] [PATCH] target/riscv: Disallow WFI instruction from
+ U-mode
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -73,90 +61,32 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Jul 2019 18:03:41 -0000
+X-List-Received-Date: Wed, 03 Jul 2019 19:07:48 -0000
 
---000000000000c45219058ccaad2f
-Content-Type: text/plain; charset="UTF-8"
+Signed-off-by: Jonathan Behrens <jonathan@fintelia.io>
+---
+ target/riscv/op_helper.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-Bin, that proposal proved to be somewhat more controversial than I was
-expecting, since it was different than how currently available hardware
-worked. This option seemed much more likely to be accepted in the short
-term.
-
-Jonathan
-
-On Mon, Jul 1, 2019 at 9:26 PM Bin Meng <bmeng.cn@gmail.com> wrote:
-
-> On Tue, Jul 2, 2019 at 8:20 AM Alistair Francis <alistair23@gmail.com>
-> wrote:
-> >
-> > On Mon, Jul 1, 2019 at 8:56 AM <jonathan@fintelia.io> wrote:
-> > >
-> > > From: Jonathan Behrens <jonathan@fintelia.io>
-> > >
-> > > QEMU currently always triggers an illegal instruction exception when
-> > > code attempts to read the time CSR. This is valid behavor, but only if
-> > > the TM bit in mcounteren is hardwired to zero. This change also
-> > > corrects mcounteren and scounteren CSRs to be 32-bits on both 32-bit
-> > > and 64-bit targets.
-> > >
-> > > Signed-off-by: Jonathan Behrens <jonathan@fintelia.io>
-> >
-> > Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-> >
->
-> I am a little bit lost here. I think we agreed to allow directly read
-> to time CSR when mcounteren.TM is set, no?
->
-> Regards,
-> Bin
->
-
---000000000000c45219058ccaad2f
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div>Bin, that proposal proved to be somewhat more controv=
-ersial than I was expecting, since it was different than how currently avai=
-lable hardware worked. This option seemed much more likely to be accepted i=
-n the short term. <br></div><div><br></div><div>Jonathan<br></div></div><br=
-><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Mon, J=
-ul 1, 2019 at 9:26 PM Bin Meng &lt;<a href=3D"mailto:bmeng.cn@gmail.com" ta=
-rget=3D"_blank">bmeng.cn@gmail.com</a>&gt; wrote:<br></div><blockquote clas=
-s=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid r=
-gb(204,204,204);padding-left:1ex">On Tue, Jul 2, 2019 at 8:20 AM Alistair F=
-rancis &lt;<a href=3D"mailto:alistair23@gmail.com" target=3D"_blank">alista=
-ir23@gmail.com</a>&gt; wrote:<br>
-&gt;<br>
-&gt; On Mon, Jul 1, 2019 at 8:56 AM &lt;<a href=3D"mailto:jonathan@fintelia=
-.io" target=3D"_blank">jonathan@fintelia.io</a>&gt; wrote:<br>
-&gt; &gt;<br>
-&gt; &gt; From: Jonathan Behrens &lt;<a href=3D"mailto:jonathan@fintelia.io=
-" target=3D"_blank">jonathan@fintelia.io</a>&gt;<br>
-&gt; &gt;<br>
-&gt; &gt; QEMU currently always triggers an illegal instruction exception w=
-hen<br>
-&gt; &gt; code attempts to read the time CSR. This is valid behavor, but on=
-ly if<br>
-&gt; &gt; the TM bit in mcounteren is hardwired to zero. This change also<b=
-r>
-&gt; &gt; corrects mcounteren and scounteren CSRs to be 32-bits on both 32-=
-bit<br>
-&gt; &gt; and 64-bit targets.<br>
-&gt; &gt;<br>
-&gt; &gt; Signed-off-by: Jonathan Behrens &lt;<a href=3D"mailto:jonathan@fi=
-ntelia.io" target=3D"_blank">jonathan@fintelia.io</a>&gt;<br>
-&gt;<br>
-&gt; Reviewed-by: Alistair Francis &lt;<a href=3D"mailto:alistair.francis@w=
-dc.com" target=3D"_blank">alistair.francis@wdc.com</a>&gt;<br>
-&gt;<br>
-<br>
-I am a little bit lost here. I think we agreed to allow directly read<br>
-to time CSR when mcounteren.TM is set, no?<br>
-<br>
-Regards,<br>
-Bin<br>
-</blockquote></div>
-
---000000000000c45219058ccaad2f--
+diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+index 331cc36232..2e5a980192 100644
+--- a/target/riscv/op_helper.c
++++ b/target/riscv/op_helper.c
+@@ -129,10 +129,10 @@ target_ulong helper_mret(CPURISCVState *env, target_ulong cpu_pc_deb)
+ void helper_wfi(CPURISCVState *env)
+ {
+     CPUState *cs = env_cpu(env);
+-
+-    if (env->priv == PRV_S &&
+-        env->priv_ver >= PRIV_VERSION_1_10_0 &&
+-        get_field(env->mstatus, MSTATUS_TW)) {
++    if (!(env->priv >= PRV_S) ||
++        (env->priv == PRV_S &&
++         env->priv_ver >= PRIV_VERSION_1_10_0 &&
++         get_field(env->mstatus, MSTATUS_TW))) {
+         riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
+     } else {
+         cs->halted = 1;
+-- 
+2.22.0
 
