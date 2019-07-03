@@ -1,55 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hiaqF-0006jJ-JE
-	for mharc-qemu-riscv@gnu.org; Wed, 03 Jul 2019 04:42:15 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:51641)
+	id 1hiaqN-0006m2-1O
+	for mharc-qemu-riscv@gnu.org; Wed, 03 Jul 2019 04:42:23 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:51759)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <palmer@dabbelt.com>) id 1hiaq7-0006Mj-Hl
- for qemu-riscv@nongnu.org; Wed, 03 Jul 2019 04:42:12 -0400
+ (envelope-from <palmer@dabbelt.com>) id 1hiaqA-0006Uv-5k
+ for qemu-riscv@nongnu.org; Wed, 03 Jul 2019 04:42:14 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmer@dabbelt.com>) id 1hiaq5-0008Dw-Lv
- for qemu-riscv@nongnu.org; Wed, 03 Jul 2019 04:42:07 -0400
-Received: from mail-lj1-f174.google.com ([209.85.208.174]:42423)
+ (envelope-from <palmer@dabbelt.com>) id 1hiaq6-0008I8-PE
+ for qemu-riscv@nongnu.org; Wed, 03 Jul 2019 04:42:10 -0400
+Received: from mail-lj1-f196.google.com ([209.85.208.196]:36554)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1hiaq5-0007TD-As
- for qemu-riscv@nongnu.org; Wed, 03 Jul 2019 04:42:05 -0400
-Received: by mail-lj1-f174.google.com with SMTP id t28so1455469lje.9
- for <qemu-riscv@nongnu.org>; Wed, 03 Jul 2019 01:41:47 -0700 (PDT)
+ (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1hiaq6-0007bn-CN
+ for qemu-riscv@nongnu.org; Wed, 03 Jul 2019 04:42:06 -0400
+Received: by mail-lj1-f196.google.com with SMTP id i21so1493168ljj.3
+ for <qemu-riscv@nongnu.org>; Wed, 03 Jul 2019 01:41:51 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding:cc:from:to;
- bh=NIyWvQXIInPHkbPMAYxhV18GTR99MjAgFa+NcGYzhSA=;
- b=V72d1FvtGGOH907BCW9qRpdFgqCGhhfcq1pS4k2WDOyJs6AbHi4B7XQRlf21QBdOAt
- L22k/9elP+EkspB+ME4nEz+2xksh6TW3UwVCtX50EIJG3pU7E6vLXO/qRRJbPxf1vpMh
- XW64fs/KzESVCxNZqocPhz1BbDyzCxrH0fvgrzcYUIZOFbmiiRqqABVusuvmBBI1qyYu
- gnfbVuqkNbTB9JUt1ju6VNORFns0UX48SmRqNq+GqIYZ46hn9J9bYyLhNLMFLyIceewJ
- 9rf+xSqmyosYi+RsadePso1FdA9qwRKKlYxmOFnF/9p3RH0CrnOnSbs/ntYxq5fo4Aq/
- lbjA==
-X-Gm-Message-State: APjAAAWQsnZZgOqFfwEaKi2bOlSkumqTleDzQwmXoYIOmHGJkbfHGvFV
- 4Kmh+7ZH4KytfUdR8+h4qJKxgQ==
-X-Google-Smtp-Source: APXvYqxMDGgINtI+spwh9sC7J1MM+5xr0t1R2SipoUHXZjD41tEulPGQ4NpVyMuKTnQN5d9zlYr11g==
-X-Received: by 2002:a2e:5c88:: with SMTP id q130mr6282150ljb.176.1562143306550; 
- Wed, 03 Jul 2019 01:41:46 -0700 (PDT)
+ bh=/utRw/o8PW3YQm+ZhJWNBeL8gDnPNYLiS6dXiDJvvqI=;
+ b=S+imhaoMir++Okco/pDz2LWk67xNIGFcmSd+v0TnbuCXqlSfWbBnYvjwE66GrdMSXH
+ t7Pa69IRyENMpk1ukhOr8lLDYxAMyZ8apNelv94OXSBtbtzBYjBtu0KpASYnrzirzolV
+ 9woNYZx+pEDcvnPoELi+s29uHT/rJtejBq68rhQdhz8xmD3kiA//il5shuUWsp5Q35yj
+ GPx6ztTnha96BOcpSmT5Y740o1z5pp8HVEUgcl5gPDKCG8GqKdrmkHwRoViHxOhJEqMi
+ pwc4xYNyis9euhESjEPWFefclHPJYGXvmzPGZy5Z71Zkr4HIozeTnE/eJfQ+oH4rQ3gU
+ AMug==
+X-Gm-Message-State: APjAAAVrZF0QFQJu/hhaCinKm1JzWJB7CY1oKYc7ZbDB4Dh03K8m0kTj
+ 9evUPdhV7VaFkknWLkfkDkpAXA==
+X-Google-Smtp-Source: APXvYqwGpBWt6Yx/6IWdhDu+RLCVxAo7bxHLoVhzx6fS4509MFLkLUkGWQEljy2TjaFY7EVf0lk+Cg==
+X-Received: by 2002:a2e:980e:: with SMTP id a14mr20931995ljj.60.1562143310149; 
+ Wed, 03 Jul 2019 01:41:50 -0700 (PDT)
 Received: from localhost ([134.17.27.127])
- by smtp.gmail.com with ESMTPSA id 2sm336790lju.52.2019.07.03.01.41.45
+ by smtp.gmail.com with ESMTPSA id z6sm319879lfa.45.2019.07.03.01.41.49
  (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
- Wed, 03 Jul 2019 01:41:45 -0700 (PDT)
-Date: Wed,  3 Jul 2019 01:40:37 -0700
-Message-Id: <20190703084048.6980-22-palmer@sifive.com>
+ Wed, 03 Jul 2019 01:41:49 -0700 (PDT)
+Date: Wed,  3 Jul 2019 01:40:39 -0700
+Message-Id: <20190703084048.6980-24-palmer@sifive.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <20190703084048.6980-1-palmer@sifive.com>
 References: <20190703084048.6980-1-palmer@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Cc: qemu-devel@nongnu.org,       qemu-riscv@nongnu.org,
- Palmer Dabbelt <palmer@sifive.com>, Alistair Francis <alistair.francis@wdc.com>
+ Joel Sing <joel@sing.id.au>, Palmer Dabbelt <palmer@sifive.com>,
+ Richard Henderson <richard.henderson@linaro.org>
 From: Palmer Dabbelt <palmer@sifive.com>
 To: Peter Maydell <peter.maydell@linaro.org>
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
  [fuzzy]
-X-Received-From: 209.85.208.174
-Subject: [Qemu-riscv] [PULL 21/32] RISC-V: Add support for the Zifencei
- extension
+X-Received-From: 209.85.208.196
+Subject: [Qemu-riscv] [PULL 23/32] RISC-V: Clear load reservations on
+ context switch and SC
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -61,88 +62,83 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Jul 2019 08:42:13 -0000
+X-List-Received-Date: Wed, 03 Jul 2019 08:42:14 -0000
 
-fence.i has been split out of the base ISA as part of the ratification
-process.  This patch adds a Zifencei argument, which disables the
-fence.i instruction.
+From: Joel Sing <joel@sing.id.au>
 
+This prevents a load reservation from being placed in one context/process,
+then being used in another, resulting in an SC succeeding incorrectly and
+breaking atomics.
+
+Signed-off-by: Joel Sing <joel@sing.id.au>
+Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/cpu.c                      | 1 +
- target/riscv/cpu.h                      | 1 +
- target/riscv/insn_trans/trans_rvi.inc.c | 4 ++++
- target/riscv/translate.c                | 3 +++
- 4 files changed, 9 insertions(+)
+ target/riscv/cpu.c                      |  1 +
+ target/riscv/cpu_helper.c               | 10 ++++++++++
+ target/riscv/insn_trans/trans_rva.inc.c |  8 +++++++-
+ 3 files changed, 18 insertions(+), 1 deletion(-)
 
 diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index be90fa7d0808..bbad39a337b3 100644
+index 915b9e77df33..f8d07bd20ad7 100644
 --- a/target/riscv/cpu.c
 +++ b/target/riscv/cpu.c
-@@ -441,6 +441,7 @@ static Property riscv_cpu_properties[] = {
-     DEFINE_PROP_BOOL("s", RISCVCPU, cfg.ext_s, true),
-     DEFINE_PROP_BOOL("u", RISCVCPU, cfg.ext_u, true),
-     DEFINE_PROP_BOOL("Counters", RISCVCPU, cfg.ext_counters, true),
-+    DEFINE_PROP_BOOL("Zifencei", RISCVCPU, cfg.ext_ifencei, true),
-     DEFINE_PROP_STRING("priv_spec", RISCVCPU, cfg.priv_spec),
-     DEFINE_PROP_BOOL("mmu", RISCVCPU, cfg.mmu, true),
-     DEFINE_PROP_BOOL("pmp", RISCVCPU, cfg.pmp, true),
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 4d4e0f89e206..ba551cd3082c 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -223,6 +223,7 @@ typedef struct RISCVCPU {
-         bool ext_s;
-         bool ext_u;
-         bool ext_counters;
-+        bool ext_ifencei;
- 
-         char *priv_spec;
-         char *user_spec;
-diff --git a/target/riscv/insn_trans/trans_rvi.inc.c b/target/riscv/insn_trans/trans_rvi.inc.c
-index 6cda078ed6ba..ea6473111ce8 100644
---- a/target/riscv/insn_trans/trans_rvi.inc.c
-+++ b/target/riscv/insn_trans/trans_rvi.inc.c
-@@ -484,6 +484,10 @@ static bool trans_fence(DisasContext *ctx, arg_fence *a)
- 
- static bool trans_fence_i(DisasContext *ctx, arg_fence_i *a)
- {
-+    if (!ctx->ext_ifencei) {
-+        return false;
-+    }
-+
-     /*
-      * FENCE_I is a no-op in QEMU,
-      * however we need to end the translation block
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 313c27b70073..8d6ab732588d 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -54,6 +54,7 @@ typedef struct DisasContext {
-        to any system register, which includes CSR_FRM, so we do not have
-        to reset this known value.  */
-     int frm;
-+    bool ext_ifencei;
- } DisasContext;
- 
- #ifdef TARGET_RISCV64
-@@ -752,6 +753,7 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
- {
-     DisasContext *ctx = container_of(dcbase, DisasContext, base);
-     CPURISCVState *env = cs->env_ptr;
-+    RISCVCPU *cpu = RISCV_CPU(cs);
- 
-     ctx->pc_succ_insn = ctx->base.pc_first;
-     ctx->mem_idx = ctx->base.tb->flags & TB_FLAGS_MMU_MASK;
-@@ -759,6 +761,7 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
-     ctx->priv_ver = env->priv_ver;
-     ctx->misa = env->misa;
-     ctx->frm = -1;  /* unknown rounding mode */
-+    ctx->ext_ifencei = cpu->cfg.ext_ifencei;
+@@ -297,6 +297,7 @@ static void riscv_cpu_reset(CPUState *cs)
+     env->pc = env->resetvec;
+ #endif
+     cs->exception_index = EXCP_NONE;
++    env->load_res = -1;
+     set_default_nan_mode(1, &env->fp_status);
  }
  
- static void riscv_tr_tb_start(DisasContextBase *db, CPUState *cpu)
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index e1b079e69c60..e32b6126af05 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -132,6 +132,16 @@ void riscv_cpu_set_mode(CPURISCVState *env, target_ulong newpriv)
+     }
+     /* tlb_flush is unnecessary as mode is contained in mmu_idx */
+     env->priv = newpriv;
++
++    /*
++     * Clear the load reservation - otherwise a reservation placed in one
++     * context/process can be used by another, resulting in an SC succeeding
++     * incorrectly. Version 2.2 of the ISA specification explicitly requires
++     * this behaviour, while later revisions say that the kernel "should" use
++     * an SC instruction to force the yielding of a load reservation on a
++     * preemptive context switch. As a result, do both.
++     */
++    env->load_res = -1;
+ }
+ 
+ /* get_physical_address - get the physical address for this virtual address
+diff --git a/target/riscv/insn_trans/trans_rva.inc.c b/target/riscv/insn_trans/trans_rva.inc.c
+index f6dbbc065e15..fadd88849e2b 100644
+--- a/target/riscv/insn_trans/trans_rva.inc.c
++++ b/target/riscv/insn_trans/trans_rva.inc.c
+@@ -61,7 +61,7 @@ static inline bool gen_sc(DisasContext *ctx, arg_atomic *a, TCGMemOp mop)
+ 
+     gen_set_label(l1);
+     /*
+-     * Address comparion failure.  However, we still need to
++     * Address comparison failure.  However, we still need to
+      * provide the memory barrier implied by AQ/RL.
+      */
+     tcg_gen_mb(TCG_MO_ALL + a->aq * TCG_BAR_LDAQ + a->rl * TCG_BAR_STRL);
+@@ -69,6 +69,12 @@ static inline bool gen_sc(DisasContext *ctx, arg_atomic *a, TCGMemOp mop)
+     gen_set_gpr(a->rd, dat);
+ 
+     gen_set_label(l2);
++    /*
++     * Clear the load reservation, since an SC must fail if there is
++     * an SC to any address, in between an LR and SC pair.
++     */
++    tcg_gen_movi_tl(load_res, -1);
++
+     tcg_temp_free(dat);
+     tcg_temp_free(src1);
+     tcg_temp_free(src2);
 -- 
 2.21.0
 
