@@ -1,38 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hjOqS-0006jz-75
-	for mharc-qemu-riscv@gnu.org; Fri, 05 Jul 2019 10:05:48 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:45356)
+	id 1hkT2x-0008WE-Uz
+	for mharc-qemu-riscv@gnu.org; Mon, 08 Jul 2019 08:47:09 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:40937)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <georg.kotheimer@kernkonzept.com>) id 1hjOqH-0006Zf-QO
- for qemu-riscv@nongnu.org; Fri, 05 Jul 2019 10:05:40 -0400
+ (envelope-from <palmer@dabbelt.com>) id 1hkT2r-0008Vm-CR
+ for qemu-riscv@nongnu.org; Mon, 08 Jul 2019 08:47:03 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <georg.kotheimer@kernkonzept.com>) id 1hjOqD-0003c1-J3
- for qemu-riscv@nongnu.org; Fri, 05 Jul 2019 10:05:36 -0400
-Received: from serv1.kernkonzept.com ([2a01:4f8:1c1c:b490::2]:52459
- helo=mx.kernkonzept.com)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <georg.kotheimer@kernkonzept.com>)
- id 1hjOq4-00019Q-CA; Fri, 05 Jul 2019 10:05:24 -0400
-Received: from [95.90.166.246] (helo=tweek.localnet)
- by mx.kernkonzept.com with esmtpsa (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.89) id 1hjOpe-0003QJ-7W; Fri, 05 Jul 2019 16:04:58 +0200
-From: Georg Kotheimer <georg.kotheimer@kernkonzept.com>
-To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
-Cc: Alistair Francis <alistair.francis@wdc.com>,
- Palmer Dabbelt <palmer@sifive.com>, qemu-riscv@nongnu.org
-Date: Fri, 05 Jul 2019 16:04:57 +0200
-Message-ID: <3120585.xbh9iPihlS@tweek>
-In-Reply-To: <345cc679-deac-ce52-664b-0ac5883671ca@linaro.org>
-References: <20190703142617.21073-1-georg.kotheimer@kernkonzept.com>
- <345cc679-deac-ce52-664b-0ac5883671ca@linaro.org>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2a01:4f8:1c1c:b490::2
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH] RISC-V: Select FPU gdb xml
- file based on the supported extensions
+ (envelope-from <palmer@dabbelt.com>) id 1hkT2l-00046w-1r
+ for qemu-riscv@nongnu.org; Mon, 08 Jul 2019 08:46:59 -0400
+Received: from mail-lj1-f196.google.com ([209.85.208.196]:40450)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1hkT2g-00043Y-JM
+ for qemu-riscv@nongnu.org; Mon, 08 Jul 2019 08:46:53 -0400
+Received: by mail-lj1-f196.google.com with SMTP id m8so6277180lji.7
+ for <qemu-riscv@nongnu.org>; Mon, 08 Jul 2019 05:46:44 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
+ :mime-version:content-transfer-encoding;
+ bh=Y/jtFao6VAyZjhlyG7vlyADHIkDbBiTq0IGy4aFAAnw=;
+ b=eCYcGw31QPzSxwN5WkaDhAjyn7D+OmBR5esFcaRmHHIJ/HBT4wDTr0EHnRmEDN9Xom
+ pZOQQYfnnHLtOBJgcxeVMJhWqVN2XdfSrb40RPOoDMSAbQgRurjTq3A0LUr5TqxSsIdw
+ xSGUzrgIvdIx1/oQnHFVqH0u/qaqjmGl25/Q/J6NiOKdOYd/Iu2sPvbaJiVwjhL+NmRo
+ 7oh6AupDjUMP8mxTEamq/QLg0hOCq84yx/8A3w2rX9EVYrTJXfnOTMt8Z3wdcVkj5B8k
+ BlpAzxM5hv+JJLRqOKxFOo5xb/or7UqLoOEoYKLE4ojhgktTy1s/5EwMaIxumJTfYWwS
+ xm8g==
+X-Gm-Message-State: APjAAAX3jAsZhYeBpNrUUS2I1AmA7l0k5WpllPQ0stBBnQIBZiWCBwSJ
+ kWiuMPP6TcFy6qlFcdef44BK0w==
+X-Google-Smtp-Source: APXvYqwq+eYH/ADKYDrC7K+UEUfe0PIs8dTk0JwZTzGIIJfQV3Ef6rlyPF1npketr68+2BunTQkE4g==
+X-Received: by 2002:a2e:9209:: with SMTP id k9mr10168716ljg.96.1562590002984; 
+ Mon, 08 Jul 2019 05:46:42 -0700 (PDT)
+Received: from localhost ([134.17.27.127])
+ by smtp.gmail.com with ESMTPSA id p9sm3664382lji.107.2019.07.08.05.46.41
+ (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+ Mon, 08 Jul 2019 05:46:42 -0700 (PDT)
+Date: Mon, 08 Jul 2019 05:46:42 -0700 (PDT)
+X-Google-Original-Date: Mon, 08 Jul 2019 05:46:40 PDT (-0700)
+In-Reply-To: <c64fa0e8-fd9c-8e86-418c-0553f56a0f34@linaro.org>
+CC: fintelia@gmail.com, Peter Maydell <peter.maydell@linaro.org>,
+ Hesham.Almatary@cl.cam.ac.uk, Alistair Francis <Alistair.Francis@wdc.com>,
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+From: Palmer Dabbelt <palmer@sifive.com>
+To: richard.henderson@linaro.org
+Message-ID: <mhng-3d187b03-c0e9-4b44-aec3-1b09fcf01fa5@palmer-si-x1e>
+Mime-Version: 1.0 (MHng)
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+ [fuzzy]
+X-Received-From: 209.85.208.196
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PULL 10/34] RISC-V: Fix a PMP check
+ with the correct access size
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -44,55 +62,79 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Jul 2019 14:05:40 -0000
+X-List-Received-Date: Mon, 08 Jul 2019 12:47:05 -0000
 
-> While this appears reasonable, I wonder if RVF w/o RVD actually works?
+On Thu, 27 Jun 2019 11:23:20 PDT (-0700), richard.henderson@linaro.org wrote:
+> On 6/27/19 7:44 PM, Jonathan Behrens wrote:
+>> I think this patch is slightly incorrect. If the PMP region is valid for
+>> the size of the access, but not the rest of the page then a few lines down
+>> in this function the entire page should not be placed into the TLB. Instead
+>> only the portion of the page that passed the access check should be
+>> included. To give an example of where this goes wrong, in the code below
+>> access to address 0x90000008 should always fail due to PMP rules, but if
+>> the TLB has already been primed by loading the (allowed) address 0x90000000
+>> then no fault will be triggered. Notably, this code also executes
+>> improperly without the patch because the first `ld` instruction traps when
+>> it shouldn't.
+>>
+>>   li t0, 0x0000000024000000 // region[0]: 0x90000000..0x90000007
+>>   csrw pmpaddr0, t0
+>>
+>>   li t0, 0x00000000240001FF // region[1]: 0x90000000..0x90000fff
+>>   csrw pmpaddr1, t0
+>>
+>>   li t0, 0x1F0000000000989F // cfg[0] = LXRW, cfg[1] = L
+>>   csrw pmpcfg0, t0
+>>
+>>   sfence.vma
+>>
+>>   li t0, 0x90000000
+>>   ld s0, 0(t0)
+>>   ld s1, 8(t0) // NO TRAP: address is incorrectly in TLB!
 >
-> Examining the two get/set functions, they always transfer 64 bits for the fpu
-> registers.
+> Nice test case.
+>
+>> I think that the proper fix would be to first do a PMP check for the full
+>> PAGE_SIZE and execute normally if it passes. Then in the event the full
+>> page fails, there could be a more granular PMP check with only the accessed
+>> region inserted as an entry in the TLB.
+>
+> This feature looks to be almost identical to the ARM m-profile MPU.
+>
+> The fix is:
+>
+> If the PMP check is valid for the entire page, then continue to call
+> tlb_set_page with size=TARGET_PAGE_SIZE.
+>
+> If the PMP check is valid for the current access, but not for the entire page,
+> then call tlb_set_page with any size < TARGET_PAGE_SIZE.  This change alone is
+> sufficient, even though the full argument tuple (paddr, vaddr, size) no longer
+> quite make perfect sense.  (For the arm mpu, we compute some 1 << rsize, but
+> the actual value is never used; setting size=1 would be sufficient.)
+>
+> Any size < TARGET_PAGE_SIZE will cause TLB_RECHECK to be set for the page,
+> which will force all accesses to the page to go back through riscv_cpu_tlb_fill
+> for re-validation.
 
-Wouldn't that implicate that FPU debugging has never been working properly on
-RV32, as prior to my changes the FPU registers on RV32 were always 32 bits
-wide? Nope, it does work (tested with a build not containing my changes), but
-for all the wrong reasons. The get/set functions should be modified so that
-they take the actual size of the floating point registers into account.
+RISC-V allows another option: support for fine-grained PMPs is optional, which
+allows implementations ignore this issue to save on hardware costs.  It looks
+like Rocket leaves this as a parameter
 
+   https://github.com/chipsalliance/rocket-chip/blob/master/src/main/scala/rocket/TLB.scala#L159
 
-> In addition, there's a suspicious use of sizeof(target_ulong) when transferring
-> the fpu related csr registers, which definitely shouldn't work with the shared
-> files above.  If the xml file is correct, this should always be uint32_t.
+but our implementations always have page-granularity PMPs if virtual memory is
+supported.
 
-Good catch. According to the RISC-V ISA specification the fcsr is always 32
-bit wide.
+Unless anyone objects, I'll restrict the PMP granularity to 4K on all systems
+that support virtual memory as a bug fix.  We can add the configuration option
+in as a feature.
 
-I did a little bit of investigation and found the following contradiction in
-the gdb xml files. The registers fflags/frm/fcsr are listed in general csr
-file as well as in the fpu file. For RV64 the bitsize of the two definitions
-differs.
-
-gdb-xml/riscv-32bit-csr.xml:
-   <reg name="fflags" bitsize="32"/>
-   <reg name="frm" bitsize="32"/>
-   <reg name="fcsr" bitsize="32"/>
-
-gdb-xml/riscv-64bit-csr.xml:
-   <reg name="fflags" bitsize="64"/>
-   <reg name="frm" bitsize="64"/>
-   <reg name="fcsr" bitsize="64"/>
-
-gdb-xml/riscv-fpu-f.xml: (former riscv-32bit-fpu.xml)
-   <reg name="fflags" bitsize="32" type="int" regnum="66"/>
-   <reg name="frm" bitsize="32" type="int" regnum="67"/>
-   <reg name="fcsr" bitsize="32" type="int" regnum="68"/>
-
-gdb-xml/riscv-fpu-d.xml: (former riscv-64bit-fpu.xml)
-   <reg name="fflags" bitsize="32" type="int" regnum="66"/>
-   <reg name="frm" bitsize="32" type="int" regnum="67"/>
-   <reg name="fcsr" bitsize="32" type="int" regnum="68"/>
-
-I don't know if this is on purpose, but my guess would be that fflags/frm/fcsr
-don't belong into riscv-32/64bit-csr.xml, and the bitsize should be 32
-regardless of the architecture's bitness.
-
-
+>> Unrelated question: should I be sending "Reviewed By" lines if I read
+>> through patches that seem reasonable? Or there some formal process I'd have
+>> to go through first to be approved?
+>
+> No formal process.  More eyes are always welcome.
+>
+>
+> r~
 
