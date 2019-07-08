@@ -1,69 +1,72 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hkYkV-0001y1-Sf
-	for mharc-qemu-riscv@gnu.org; Mon, 08 Jul 2019 14:52:27 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:56054)
+	id 1hkYkc-00020N-5D
+	for mharc-qemu-riscv@gnu.org; Mon, 08 Jul 2019 14:52:35 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:56139)
  by lists.gnu.org with esmtp (Exim 4.86_2)
  (envelope-from <prvs=085e8ccea=alistair.francis@wdc.com>)
- id 1hkYkS-0001vj-TN
- for qemu-riscv@nongnu.org; Mon, 08 Jul 2019 14:52:26 -0400
+ id 1hkYkX-0001yr-TH
+ for qemu-riscv@nongnu.org; Mon, 08 Jul 2019 14:52:31 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
  (envelope-from <prvs=085e8ccea=alistair.francis@wdc.com>)
- id 1hkYkR-0007gp-QL
- for qemu-riscv@nongnu.org; Mon, 08 Jul 2019 14:52:24 -0400
-Received: from esa6.hgst.iphmx.com ([216.71.154.45]:34026)
+ id 1hkYkU-0007ns-Qr
+ for qemu-riscv@nongnu.org; Mon, 08 Jul 2019 14:52:29 -0400
+Received: from esa6.hgst.iphmx.com ([216.71.154.45]:34036)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <prvs=085e8ccea=alistair.francis@wdc.com>)
- id 1hkYkO-0007Tx-TH; Mon, 08 Jul 2019 14:52:21 -0400
+ id 1hkYkR-0007eP-Eo; Mon, 08 Jul 2019 14:52:23 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1562611941; x=1594147941;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=uH/qkDo1j7ujLLdk0clrf+B7ILiNXAyEMMTKL2p6PX8=;
- b=Nf0cqUeZNrSXfrB+RA4MKQhJmF8DlwEeZ1vGHCUUoNBIkRlu6S2S4KQ3
- uX9lHUsSlbKDK53T9QmvSp7aTYMPYvBn1oFeZEqw/FGNE35bV3sWGIMW2
- ZCaNT6Caj41m0t1MFo+lQ4Hf+a2sQmobVLh8WVfy8m94i3ebVhJgjTg02
- YrhT6f/wzg/uGVU9RZzoNWDnghtrAnPv3o0IzX0xh+6LK6KTiQizXF2H5
- yEeUcTZk8ZXPguE3N1aq2TYdKAsgzeXSb4NRH8LtjCey4aIPV6G7nLpdN
- /opXhCo9JWXMgKdJeHCovM5a1aF6baw8YrVFGrDPKiFpkHdNCLBwyhVMb g==;
-IronPort-SDR: kyDHa5/+E1dyV9LuAzJTkH8CTm1bcOMXwNrk0h6rLTtyGTkcSg1YYbKZws27JsK8FYNKtVPwzN
- YhAvNkSN+uV8iH3QxIebfh5na6uxAOUKj46PsyTmTOqMqJSRCwdQBxYEGFXdlWlLn9ewJgKljq
- Euqhhf6z71MMRLy7SB9RL/BdK66XfbFOKe9r0y0AO+dbFghXVtCn1mBsftE5nsE742ayedbnWs
- nNS4+0HppC6AAUOOj+Aoh4qinpCOgjHxwjzkQYClZhDPHUfaNbzhfjB1ZLJZSSefL6qusd0E8s
- /9Y=
-X-IronPort-AV: E=Sophos;i="5.63,466,1557158400"; d="scan'208";a="114094437"
+ t=1562611944; x=1594147944;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=T6YiDf12c8wOd9ACRSmxjp+ckUQZqqOt2r2ntOHABno=;
+ b=IhqGYys1BRaRtdnBNWJ4an1KaHxAaQxDRypJ5uyIsi9PRGIoKQ+/5BB6
+ WT0RUp1ENZa6tx0+J2GbyyIUhLItpEcCMzVgGVkUXIIb5eEwnRoBPZluq
+ HUAp4TYkqCH8ID4e13qQ7bZTgdy4ykRQCJeg7gfgl3NLFFIyYTwr1RoNL
+ X6Aw35qw6P7pH5dYwYVEILkB6mZSpkU7mk/RgZlwfr9pq5WmdBsmNwNDA
+ 7FZS0bZG40yQKVzJi1IQn980F1svocYzMa0DO1L7tDCcbqvmUncvfmKc7
+ znU+tBDc/+dvK9rrdneoA//cOzu/ppFYP00nzt9l9lx5kpBiIhHS5sqIL A==;
+IronPort-SDR: LB9AG0i0YwfuxTfy0LvgameF1xlTlXqUiQkrABkLlvwxTkK35I8+VtHbt16U0dJtBxvIFMtAyB
+ kDpeBqkwbJ9CUMHi53FQEFQ1mNKOx9DPYT/DUFbvDkJl9m63E/tngBQQyGI1nbRi/bJol0y6bj
+ fvzuHrpmexduIotYHYHbAH7S8zMsIS+rooD4R1k6WWBVdj9chGcYZH0p7IEOoxiIF0iXKVhb5+
+ x+BnVSqkUWtt8eF+B5qixTpaiEsCyQ6obkQ57+457HnOz1Y0pbacY9jyUZioFa8oKiY6fA5zLS
+ vQ8=
+X-IronPort-AV: E=Sophos;i="5.63,466,1557158400"; d="scan'208";a="114094446"
 Received: from h199-255-45-14.hgst.com (HELO uls-op-cesaep01.wdc.com)
  ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 09 Jul 2019 02:52:17 +0800
-IronPort-SDR: sMTAdbsjPN8JRjOv0H5as+1T7/fW2UEerkVZPwM4oHJyiS//gdJ6HRMsMDin8ngpfUzWbs/mXB
- kDnSeuuPgBOXjhfTVX4tV/mhcGGwCMoGKiK8SbCA7BhfglNwmCjZEP6KkAej7R5LVhi/Ub6je6
- fg5oPelyGzsQDX1QCTc6+7H3g8mrUQ9S2QIlVO8HHtNl2Z8ssjd9PX1/0Z2i2HrBuGBGG2/P5r
- s2VW/FaZmwTm8GtI9B/9GK4aqKDr50afg8/q51JkknZgbrmWKkG4EcLpjci5ZfpTT6Ig8joJ9f
- a12g3eOmt/ORZphWbslvSARQ
+ by ob1.hgst.iphmx.com with ESMTP; 09 Jul 2019 02:52:23 +0800
+IronPort-SDR: NZB23f5wkNAHHnC5SHq3Fo3FGKuRNudJwJ5RVCmf+fp5lC/ToRjkd2WXomOGP+q2ZwmSJN23Sc
+ XCxcecTY1Ao4otw2J+vPLZEM8veHpM/VHqkQ+49WiEswTu+UxL+tQVv1Ji42SNPZtt3SGdCVzB
+ x9dPqmjSKCk0Ws6keosdDOwFtgDH/mGqcyw+WKiTPst6DuWZBJ7YpJAiBGsBlqPt/JWvCkN/yj
+ RgXxDHxKhIdud7qnQH8hYpFtXnn8jlotGwwPcRMtKDRcGolhqBsonlUukOrkm8LW8wKqRdWFi5
+ bd6aMwivulDXTgMZzyCUFoG/
 Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
- by uls-op-cesaep01.wdc.com with ESMTP; 08 Jul 2019 11:51:05 -0700
-IronPort-SDR: 2CDX3KCgjO4UtPgO4JCzKn2W0LO8r5MBzp8ocAF72h1yX2uC3Efcu+2oKRD+LNH8da8rU8giR0
- O/hSTJ7uuNV+Jj/ap0gDmq81N9AjLsJz2ceYtPYhYLV+yIdZlQk2FtT4qfdu9yvSF762ZTL1me
- kUzpPHuOdvnHeNw+NJVr9L3SAwwIyFkuXEg6UB2SkslCxcdhW/uE9fjVkMKJPETJIgAcVlvHNM
- sSbAuKJ4YzqXYDw/hbO59wmCO9of2rgsXCoq0pB/EjVFlm9z31Xdss5iYapQZT9SKNN5NGo6Ny
- OH8=
+ by uls-op-cesaep01.wdc.com with ESMTP; 08 Jul 2019 11:51:11 -0700
+IronPort-SDR: 9hPGORpEkam5d22xCJG4dovNcn4HlwdHNtmA2Qrdw4lo9v1FQBEO+fHQPk9qo2E7MRRs3203CX
+ t5ix7dhhAc3r3+sCpz63COvNH1tGPIzN0Pxi/Pa1XLviH5TyruxP76w6J4tDIToaNqCpk+xtez
+ gjXmmQZkbc/peCv8x+8yryKtYREuWz4brhrGJ9Bzbn7PxQv/P9CmJsZ+cmOHh8Dhi6SC+drOjd
+ ZPO9tDFFl6BhKSLVoQFl7NspTO4ztunUI2pDUQiSfGp7u9788FM4IDtdFx6LQreH1ckhKH/IPY
+ DX0=
 Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
  risc6-mainframe.int.fusionio.com) ([10.196.157.140])
- by uls-op-cesaip01.wdc.com with ESMTP; 08 Jul 2019 11:52:18 -0700
+ by uls-op-cesaip01.wdc.com with ESMTP; 08 Jul 2019 11:52:23 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: palmer@sifive.com, alistair.francis@wdc.com, alistair23@gmail.com,
  stefanha@redhat.com, peter.maydell@linaro.org, codyprime@gmail.com,
  bmeng.cn@gmail.com, pbonzini@redhat.com, anup@brainfault.org
-Date: Mon,  8 Jul 2019 11:49:35 -0700
-Message-Id: <cover.1562611535.git.alistair.francis@wdc.com>
+Date: Mon,  8 Jul 2019 11:49:40 -0700
+Message-Id: <238062dcf3a9b99a048c8e7ae439cad7745af1da.1562611535.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.22.0
+In-Reply-To: <cover.1562611535.git.alistair.francis@wdc.com>
+References: <cover.1562611535.git.alistair.francis@wdc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: FreeBSD 9.x
 X-Received-From: 216.71.154.45
-Subject: [Qemu-riscv] [PATCH v1 0/2]  RISC-V: Add default OpenSBI ROM
+Subject: [Qemu-riscv] [PATCH v1 2/2] hw/riscv: Load OpenSBI as the default
+ firmware
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -75,62 +78,189 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Jul 2019 18:52:26 -0000
+X-List-Received-Date: Mon, 08 Jul 2019 18:52:31 -0000
 
-This series includes the OpenSBI firmware for QEMU RISC-V users.
+If the user hasn't specified a firmware to load (with -bios) or
+specified no bios (with -bios none) then load OpenSBI by default. This
+allows users to boot a RISC-V kernel with just -kernel.
 
-To avoid breakages we have not changed the default behaviour of QEMU.
-The plan is to change the default though, which is why an entry to the
-qemu-deprecated.texi file has been added as well as a new warning.
+Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+Tested-by: Bin Meng <bmeng.cn@gmail.com>
+---
+ hw/riscv/boot.c         | 49 +++++++++++++++++++++++++++++++++++++++++
+ hw/riscv/sifive_u.c     |  7 +++---
+ hw/riscv/virt.c         | 11 ++++++---
+ include/hw/riscv/boot.h |  3 +++
+ qemu-deprecated.texi    | 20 +++++++++++++++++
+ 5 files changed, 84 insertions(+), 6 deletions(-)
 
-After this series QEMU 4.1 has three options:
- 1. ``-bios none`` - This is the current default behavior if no -bios option
-      is included. QEMU will not automatically load any firmware. It is up
-      to the user to load all the images they need.
- 2. ``-bios default`` - In a future QEMU release this will become the default
-      behaviour if no -bios option is specified. This option will load the
-      default OpenSBI firmware automatically. The firmware is included with
-      the QEMU release and no user interaction is required. All a user needs
-      to do is specify the kernel they want to boot with the -kernel option
- 3. ``-bios <file>`` - Tells QEMU to load the specified file as the firmwrae.
-
-All users should transition to using a -bios option. We can start
-updating all documentation after the release of 4.1.
-
-At the end of this series and the transition period we are in the good
-place of no longer requiring users to build firmware to boot a kernel.
-Instead users can just run QEMU with the -kernel option and everything
-will work. They can also override the firmware with their own using
-the -bios option. Using "-bios none" will result in no firmware being
-loaded (as it is today).
-
-This is based on my original series adding OpenSBI support but now has
-improved documentation changes around the license.
-
-Alistair Francis (2):
-  roms: Add OpenSBI version 0.4
-  hw/riscv: Load OpenSBI as the default firmware
-
- .gitmodules                                  |   3 ++
- LICENSE                                      |  21 +++++---
- Makefile                                     |   5 +-
- hw/riscv/boot.c                              |  49 +++++++++++++++++++
- hw/riscv/sifive_u.c                          |   7 +--
- hw/riscv/virt.c                              |  11 +++--
- include/hw/riscv/boot.h                      |   3 ++
- pc-bios/README                               |  11 +++++
- pc-bios/opensbi-riscv32-virt-fw_jump.bin     | Bin 0 -> 36888 bytes
- pc-bios/opensbi-riscv64-sifive_u-fw_jump.bin | Bin 0 -> 40968 bytes
- pc-bios/opensbi-riscv64-virt-fw_jump.bin     | Bin 0 -> 40968 bytes
- qemu-deprecated.texi                         |  20 ++++++++
- roms/Makefile                                |  48 +++++++++++++-----
- roms/opensbi                                 |   1 +
- 14 files changed, 152 insertions(+), 27 deletions(-)
- create mode 100755 pc-bios/opensbi-riscv32-virt-fw_jump.bin
- create mode 100755 pc-bios/opensbi-riscv64-sifive_u-fw_jump.bin
- create mode 100755 pc-bios/opensbi-riscv64-virt-fw_jump.bin
- create mode 160000 roms/opensbi
-
+diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
+index ff023f42d0..c7d72f682f 100644
+--- a/hw/riscv/boot.c
++++ b/hw/riscv/boot.c
+@@ -18,6 +18,7 @@
+  */
+ 
+ #include "qemu/osdep.h"
++#include "qemu-common.h"
+ #include "qemu/units.h"
+ #include "qemu/error-report.h"
+ #include "exec/cpu-defs.h"
+@@ -32,6 +33,54 @@
+ # define KERNEL_BOOT_ADDRESS 0x80200000
+ #endif
+ 
++void riscv_find_and_load_firmware(MachineState *machine,
++                                  const char *default_machine_firmware,
++                                  hwaddr firmware_load_addr)
++{
++    char *firmware_filename;
++
++    if (!machine->firmware) {
++        /*
++         * The user didn't specify -bios.
++         * At the moment we default to loading nothing when this hapens.
++         * In the future this defaul will change to loading the prebuilt
++         * OpenSBI firmware. Let's warn the user and then continue.
++        */
++        warn_report("No -bios option specified. Not loading a firmware.");
++        warn_report("This default will change in QEMU 4.3. Please use the " \
++                    "-bios option to aviod breakages when this happens.");
++        warn_report("See QEMU's deprecation documentation for details");
++        return;
++    }
++
++    if (!strcmp(machine->firmware, "default")) {
++        /*
++         * The user has specified "-bios default". That means we are going to
++         * load the OpenSBI binary included in the QEMU source.
++         *
++         * We can't load the binary by default as it will break existing users
++         * as users are already loading their own firmware.
++         *
++         * Let's try to get everyone to specify the -bios option at all times,
++         * so then in the future we can make "-bios default" the default option
++         * if no -bios option is set without breaking anything.
++         */
++        firmware_filename = qemu_find_file(QEMU_FILE_TYPE_BIOS,
++                                           default_machine_firmware);
++    } else {
++        firmware_filename = machine->firmware;
++    }
++
++    if (strcmp(firmware_filename, "none")) {
++        /* If not "none" load the firmware */
++        riscv_load_firmware(firmware_filename, firmware_load_addr);
++    }
++
++    if (!strcmp(machine->firmware, "default")) {
++        g_free(firmware_filename);
++    }
++}
++
+ target_ulong riscv_load_firmware(const char *firmware_filename,
+                                  hwaddr firmware_load_addr)
+ {
+diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+index ca53a9290d..71b8083c05 100644
+--- a/hw/riscv/sifive_u.c
++++ b/hw/riscv/sifive_u.c
+@@ -49,6 +49,8 @@
+ 
+ #include <libfdt.h>
+ 
++#define BIOS_FILENAME "opensbi-riscv64-sifive_u-fw_jump.bin"
++
+ static const struct MemmapEntry {
+     hwaddr base;
+     hwaddr size;
+@@ -269,9 +271,8 @@ static void riscv_sifive_u_init(MachineState *machine)
+     /* create device tree */
+     create_fdt(s, memmap, machine->ram_size, machine->kernel_cmdline);
+ 
+-    if (machine->firmware) {
+-        riscv_load_firmware(machine->firmware, memmap[SIFIVE_U_DRAM].base);
+-    }
++    riscv_find_and_load_firmware(machine, BIOS_FILENAME,
++                                 memmap[SIFIVE_U_DRAM].base);
+ 
+     if (machine->kernel_filename) {
+         riscv_load_kernel(machine->kernel_filename);
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index ecdc77d728..25faf3b417 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -44,6 +44,12 @@
+ 
+ #include <libfdt.h>
+ 
++#if defined(TARGET_RISCV32)
++# define BIOS_FILENAME "opensbi-riscv32-virt-fw_jump.bin"
++#else
++# define BIOS_FILENAME "opensbi-riscv64-virt-fw_jump.bin"
++#endif
++
+ static const struct MemmapEntry {
+     hwaddr base;
+     hwaddr size;
+@@ -399,9 +405,8 @@ static void riscv_virt_board_init(MachineState *machine)
+     memory_region_add_subregion(system_memory, memmap[VIRT_MROM].base,
+                                 mask_rom);
+ 
+-    if (machine->firmware) {
+-        riscv_load_firmware(machine->firmware, memmap[VIRT_DRAM].base);
+-    }
++    riscv_find_and_load_firmware(machine, BIOS_FILENAME,
++                                 memmap[VIRT_DRAM].base);
+ 
+     if (machine->kernel_filename) {
+         uint64_t kernel_entry = riscv_load_kernel(machine->kernel_filename);
+diff --git a/include/hw/riscv/boot.h b/include/hw/riscv/boot.h
+index daa179b600..d56f2ae3eb 100644
+--- a/include/hw/riscv/boot.h
++++ b/include/hw/riscv/boot.h
+@@ -20,6 +20,9 @@
+ #ifndef RISCV_BOOT_H
+ #define RISCV_BOOT_H
+ 
++void riscv_find_and_load_firmware(MachineState *machine,
++                                  const char *default_machine_firmware,
++                                  hwaddr firmware_load_addr);
+ target_ulong riscv_load_firmware(const char *firmware_filename,
+                                  hwaddr firmware_load_addr);
+ target_ulong riscv_load_kernel(const char *kernel_filename);
+diff --git a/qemu-deprecated.texi b/qemu-deprecated.texi
+index c90b08d553..fff07bb2a3 100644
+--- a/qemu-deprecated.texi
++++ b/qemu-deprecated.texi
+@@ -121,6 +121,26 @@ the backing storage specified with @option{-mem-path} can actually provide
+ the guest RAM configured with @option{-m} and QEMU will fail to start up if
+ RAM allocation is unsuccessful.
+ 
++@subsection RISC-V -bios (since 4.1)
++
++QEMU 4.1 introduced support for the -bios option in QEMU for RISC-V for the
++RISC-V virt machine and sifive_u machine.
++
++QEMU 4.1 has no changes to the default behaviour to avoid breakages. This
++default will change in a future QEMU release, so please prepare now. All users
++of the virt or sifive_u machine must change their command line usage.
++
++QEMU 4.1 has three options, please migrate to one of these three:
++ 1. ``-bios none`` - This is the current default behavior if no -bios option
++      is included. QEMU will not automatically load any firmware. It is up
++      to the user to load all the images they need.
++ 2. ``-bios default`` - In a future QEMU release this will become the default
++      behaviour if no -bios option is specified. This option will load the
++      default OpenSBI firmware automatically. The firmware is included with
++      the QEMU release and no user interaction is required. All a user needs
++      to do is specify the kernel they want to boot with the -kernel option
++ 3. ``-bios <file>`` - Tells QEMU to load the specified file as the firmwrae.
++
+ @section QEMU Machine Protocol (QMP) commands
+ 
+ @subsection block-dirty-bitmap-add "autoload" parameter (since 2.12.0)
 -- 
 2.22.0
 
