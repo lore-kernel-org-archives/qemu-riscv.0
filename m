@@ -1,56 +1,50 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hkT2x-0008WE-Uz
-	for mharc-qemu-riscv@gnu.org; Mon, 08 Jul 2019 08:47:09 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:40937)
+	id 1hkWYe-0005ob-SB
+	for mharc-qemu-riscv@gnu.org; Mon, 08 Jul 2019 12:32:06 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49399)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <palmer@dabbelt.com>) id 1hkT2r-0008Vm-CR
- for qemu-riscv@nongnu.org; Mon, 08 Jul 2019 08:47:03 -0400
+ (envelope-from <chouteau@adacore.com>) id 1hkWYc-0005nN-1Y
+ for qemu-riscv@nongnu.org; Mon, 08 Jul 2019 12:32:03 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmer@dabbelt.com>) id 1hkT2l-00046w-1r
- for qemu-riscv@nongnu.org; Mon, 08 Jul 2019 08:46:59 -0400
-Received: from mail-lj1-f196.google.com ([209.85.208.196]:40450)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1hkT2g-00043Y-JM
- for qemu-riscv@nongnu.org; Mon, 08 Jul 2019 08:46:53 -0400
-Received: by mail-lj1-f196.google.com with SMTP id m8so6277180lji.7
- for <qemu-riscv@nongnu.org>; Mon, 08 Jul 2019 05:46:44 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
- :mime-version:content-transfer-encoding;
- bh=Y/jtFao6VAyZjhlyG7vlyADHIkDbBiTq0IGy4aFAAnw=;
- b=eCYcGw31QPzSxwN5WkaDhAjyn7D+OmBR5esFcaRmHHIJ/HBT4wDTr0EHnRmEDN9Xom
- pZOQQYfnnHLtOBJgcxeVMJhWqVN2XdfSrb40RPOoDMSAbQgRurjTq3A0LUr5TqxSsIdw
- xSGUzrgIvdIx1/oQnHFVqH0u/qaqjmGl25/Q/J6NiOKdOYd/Iu2sPvbaJiVwjhL+NmRo
- 7oh6AupDjUMP8mxTEamq/QLg0hOCq84yx/8A3w2rX9EVYrTJXfnOTMt8Z3wdcVkj5B8k
- BlpAzxM5hv+JJLRqOKxFOo5xb/or7UqLoOEoYKLE4ojhgktTy1s/5EwMaIxumJTfYWwS
- xm8g==
-X-Gm-Message-State: APjAAAX3jAsZhYeBpNrUUS2I1AmA7l0k5WpllPQ0stBBnQIBZiWCBwSJ
- kWiuMPP6TcFy6qlFcdef44BK0w==
-X-Google-Smtp-Source: APXvYqwq+eYH/ADKYDrC7K+UEUfe0PIs8dTk0JwZTzGIIJfQV3Ef6rlyPF1npketr68+2BunTQkE4g==
-X-Received: by 2002:a2e:9209:: with SMTP id k9mr10168716ljg.96.1562590002984; 
- Mon, 08 Jul 2019 05:46:42 -0700 (PDT)
-Received: from localhost ([134.17.27.127])
- by smtp.gmail.com with ESMTPSA id p9sm3664382lji.107.2019.07.08.05.46.41
- (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
- Mon, 08 Jul 2019 05:46:42 -0700 (PDT)
-Date: Mon, 08 Jul 2019 05:46:42 -0700 (PDT)
-X-Google-Original-Date: Mon, 08 Jul 2019 05:46:40 PDT (-0700)
-In-Reply-To: <c64fa0e8-fd9c-8e86-418c-0553f56a0f34@linaro.org>
-CC: fintelia@gmail.com, Peter Maydell <peter.maydell@linaro.org>,
- Hesham.Almatary@cl.cam.ac.uk, Alistair Francis <Alistair.Francis@wdc.com>,
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-From: Palmer Dabbelt <palmer@sifive.com>
-To: richard.henderson@linaro.org
-Message-ID: <mhng-3d187b03-c0e9-4b44-aec3-1b09fcf01fa5@palmer-si-x1e>
-Mime-Version: 1.0 (MHng)
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
- [fuzzy]
-X-Received-From: 209.85.208.196
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PULL 10/34] RISC-V: Fix a PMP check
- with the correct access size
+ (envelope-from <chouteau@adacore.com>) id 1hkWYb-0005px-1y
+ for qemu-riscv@nongnu.org; Mon, 08 Jul 2019 12:32:01 -0400
+Received: from mel.act-europe.fr ([194.98.77.210]:46083
+ helo=smtp.eu.adacore.com)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <chouteau@adacore.com>)
+ id 1hkWYY-0005bn-QM; Mon, 08 Jul 2019 12:31:58 -0400
+Received: from localhost (localhost [127.0.0.1])
+ by filtered-smtp.eu.adacore.com (Postfix) with ESMTP id 99B5881388;
+ Mon,  8 Jul 2019 18:31:55 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at eu.adacore.com
+Received: from smtp.eu.adacore.com ([127.0.0.1])
+ by localhost (smtp.eu.adacore.com [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id 6L-nMUoHqIIY; Mon,  8 Jul 2019 18:31:55 +0200 (CEST)
+Received: from [192.168.0.19] (89-157-139-225.rev.numericable.fr
+ [89.157.139.225])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (No client certificate requested)
+ by smtp.eu.adacore.com (Postfix) with ESMTPSA id 23C4581387;
+ Mon,  8 Jul 2019 18:31:55 +0200 (CEST)
+To: Bin Meng <bmeng.cn@gmail.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org, Alistair Francis <Alistair.Francis@wdc.com>,
+ Palmer Dabbelt <palmer@sifive.com>
+References: <1558108285-19571-1-git-send-email-bmeng.cn@gmail.com>
+ <1558108285-19571-2-git-send-email-bmeng.cn@gmail.com>
+From: Fabien Chouteau <chouteau@adacore.com>
+Message-ID: <9338c7b4-6a05-2189-b93d-25cb2bd4dd54@adacore.com>
+Date: Mon, 8 Jul 2019 18:31:53 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.7.0
+MIME-Version: 1.0
+In-Reply-To: <1558108285-19571-2-git-send-email-bmeng.cn@gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 3.x
+X-Received-From: 194.98.77.210
+Subject: Re: [Qemu-riscv] [PATCH 2/2] riscv: sifive_u: Update the plic hart
+ config to support multicore
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -62,79 +56,49 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Jul 2019 12:47:05 -0000
+X-List-Received-Date: Mon, 08 Jul 2019 16:32:03 -0000
 
-On Thu, 27 Jun 2019 11:23:20 PDT (-0700), richard.henderson@linaro.org wrote:
-> On 6/27/19 7:44 PM, Jonathan Behrens wrote:
->> I think this patch is slightly incorrect. If the PMP region is valid for
->> the size of the access, but not the rest of the page then a few lines down
->> in this function the entire page should not be placed into the TLB. Instead
->> only the portion of the page that passed the access check should be
->> included. To give an example of where this goes wrong, in the code below
->> access to address 0x90000008 should always fail due to PMP rules, but if
->> the TLB has already been primed by loading the (allowed) address 0x90000000
->> then no fault will be triggered. Notably, this code also executes
->> improperly without the patch because the first `ld` instruction traps when
->> it shouldn't.
->>
->>   li t0, 0x0000000024000000 // region[0]: 0x90000000..0x90000007
->>   csrw pmpaddr0, t0
->>
->>   li t0, 0x00000000240001FF // region[1]: 0x90000000..0x90000fff
->>   csrw pmpaddr1, t0
->>
->>   li t0, 0x1F0000000000989F // cfg[0] = LXRW, cfg[1] = L
->>   csrw pmpcfg0, t0
->>
->>   sfence.vma
->>
->>   li t0, 0x90000000
->>   ld s0, 0(t0)
->>   ld s1, 8(t0) // NO TRAP: address is incorrectly in TLB!
->
-> Nice test case.
->
->> I think that the proper fix would be to first do a PMP check for the full
->> PAGE_SIZE and execute normally if it passes. Then in the event the full
->> page fails, there could be a more granular PMP check with only the accessed
->> region inserted as an entry in the TLB.
->
-> This feature looks to be almost identical to the ARM m-profile MPU.
->
-> The fix is:
->
-> If the PMP check is valid for the entire page, then continue to call
-> tlb_set_page with size=TARGET_PAGE_SIZE.
->
-> If the PMP check is valid for the current access, but not for the entire page,
-> then call tlb_set_page with any size < TARGET_PAGE_SIZE.  This change alone is
-> sufficient, even though the full argument tuple (paddr, vaddr, size) no longer
-> quite make perfect sense.  (For the arm mpu, we compute some 1 << rsize, but
-> the actual value is never used; setting size=1 would be sufficient.)
->
-> Any size < TARGET_PAGE_SIZE will cause TLB_RECHECK to be set for the page,
-> which will force all accesses to the page to go back through riscv_cpu_tlb_fill
-> for re-validation.
+Hi Bin,
 
-RISC-V allows another option: support for fine-grained PMPs is optional, which
-allows implementations ignore this issue to save on hardware costs.  It looks
-like Rocket leaves this as a parameter
+Thanks for this patch.
 
-   https://github.com/chipsalliance/rocket-chip/blob/master/src/main/scala/rocket/TLB.scala#L159
+I know I am very late to the game but I have a comment here.
 
-but our implementations always have page-granularity PMPs if virtual memory is
-supported.
+On 17/05/2019 17:51, Bin Meng wrote:
+> +    /* create PLIC hart topology configuration string */
+> +    plic_hart_config_len = (strlen(SIFIVE_U_PLIC_HART_CONFIG) + 1) * smp_cpus;
+> +    plic_hart_config = g_malloc0(plic_hart_config_len);
+> +    for (i = 0; i < smp_cpus; i++) {
+> +        if (i != 0) {
+> +            strncat(plic_hart_config, ",", plic_hart_config_len);
+> +        }
+> +        strncat(plic_hart_config, SIFIVE_U_PLIC_HART_CONFIG,
+> +                plic_hart_config_len);
+> +        plic_hart_config_len -= (strlen(SIFIVE_U_PLIC_HART_CONFIG) + 1);
+> +    }
+> +
 
-Unless anyone objects, I'll restrict the PMP granularity to 4K on all systems
-that support virtual memory as a bug fix.  We can add the configuration option
-in as a feature.
+This will create up to 4 MS PLIC devices. However on the Unleashed FU540 the PLICs are M,MS,MS,MS,MS because of the monitor hart #0.
 
->> Unrelated question: should I be sending "Reviewed By" lines if I read
->> through patches that seem reasonable? Or there some formal process I'd have
->> to go through first to be approved?
->
-> No formal process.  More eyes are always welcome.
->
->
-> r~
+This means a different memory layout than the real hardware.
+
+For instance address 0x0C00_2080 will be hart #0 S-Mode interrupt enables in QEMU, instead of #1 M-Mode interrupt enables for the real hardware.
+
+To fix this I suggest to change this loop to:
+
+    for (i = 0; i < smp_cpus; i++) {
+        if (i != 0) {
+            strncat(plic_hart_config, "," SIFIVE_U_PLIC_HART_CONFIG,
+                    plic_hart_config_len);
+        } else {
+            strncat(plic_hart_config, "M", plic_hart_config_len);
+        }
+        plic_hart_config_len -= (strlen(SIFIVE_U_PLIC_HART_CONFIG) + 1);
+    }
+
+This will make hart #0 PLIC in M mode and the others in MS.
+
+What do you think?
+
+Best regards,
 
