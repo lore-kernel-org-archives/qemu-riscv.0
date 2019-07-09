@@ -1,56 +1,54 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hkliB-00024T-SL
-	for mharc-qemu-riscv@gnu.org; Tue, 09 Jul 2019 04:42:55 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:34663)
+	id 1hkmkV-0002Ds-QM
+	for mharc-qemu-riscv@gnu.org; Tue, 09 Jul 2019 05:49:23 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49309)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <palmer@dabbelt.com>) id 1hkli9-000245-Rn
- for qemu-riscv@nongnu.org; Tue, 09 Jul 2019 04:42:54 -0400
+ (envelope-from <palmer@dabbelt.com>) id 1hkmkR-00029f-P0
+ for qemu-riscv@nongnu.org; Tue, 09 Jul 2019 05:49:21 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmer@dabbelt.com>) id 1hkli8-0002D6-Tz
- for qemu-riscv@nongnu.org; Tue, 09 Jul 2019 04:42:53 -0400
-Received: from mail-lj1-f193.google.com ([209.85.208.193]:36290)
+ (envelope-from <palmer@dabbelt.com>) id 1hkmkM-0002R9-QB
+ for qemu-riscv@nongnu.org; Tue, 09 Jul 2019 05:49:19 -0400
+Received: from mail-lf1-f66.google.com ([209.85.167.66]:36890)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1hkli8-0002Cf-M9
- for qemu-riscv@nongnu.org; Tue, 09 Jul 2019 04:42:52 -0400
-Received: by mail-lj1-f193.google.com with SMTP id i21so18751621ljj.3
- for <qemu-riscv@nongnu.org>; Tue, 09 Jul 2019 01:42:52 -0700 (PDT)
+ (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1hkmkL-0002DB-FS
+ for qemu-riscv@nongnu.org; Tue, 09 Jul 2019 05:49:13 -0400
+Received: by mail-lf1-f66.google.com with SMTP id c9so11208596lfh.4
+ for <qemu-riscv@nongnu.org>; Tue, 09 Jul 2019 02:48:56 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
  :mime-version:content-transfer-encoding;
- bh=cPf0d2wTAJY5YS4rWQhBSWq2io4ceTTFA1ysSpT6pqg=;
- b=RRcMsONXJINomcIRzQnurZGFyR/OrCnmR/iR88hJHWflm3BHjBAH2f7Y2HIAdHqmdl
- GPYHtB2V+tCZXUlH+tZlwsQz24ZKs6zNDjNgAJregS6yb9aEgXwZJVvH8PEbUB2L4xqM
- pFKxldEP8rrFC7LlcwhIWHWoObtwAuEmelzz6eNhbFOTrC6NcH6C3UiTiMsmwb8UDapJ
- JQMaoQAW8wkv3gvwk+e/D8JOdVyS109mi8UXZjVDO0EwZkCpoMQgOSLSp9nQpEHWcNkY
- GZP2wlzQgMLelzfOUxsKSAidgNVNUi0Lp+YnmCZPihIdDCVMo0A12koLWH+bG3NhDxv1
- A+xg==
-X-Gm-Message-State: APjAAAW5P5jq3/Ao6J2Aejww4zhgxbTppCq7P0gT7dP2BIjo6ZcSP8GB
- DRaMWhN/om5wm6xO4iaSGlVWsQ==
-X-Google-Smtp-Source: APXvYqy41qd1KxNUxB0gp728wcOiPWqEsZwHMWTood2xWsRLj592Dh28zy75OlUnpgC3o8UBLU21Lg==
-X-Received: by 2002:a2e:9b4a:: with SMTP id o10mr13355936ljj.137.1562661771152; 
- Tue, 09 Jul 2019 01:42:51 -0700 (PDT)
+ bh=88dB74LrdlmRR54RcqZMhu/hZ90dwrhWL2qyOHIbZ1Y=;
+ b=hBJTKPumZrM8shbU3lnDXmv1k+cJFxP7Z29+viNyJv/mqiqIuaZOIoNSmzrVw79w2O
+ RWvWJ4pIW0NJ1qEKg/fhgk/LLHgnE+ZS4B9RQykP6+lnZsRJUgrjiLFYQwVRmY6OBEsa
+ hjlSaThSDrt+13wdBOMNR9D6+GG3W8xAmG4a/8MCrVr3LHEtdvNo4yRGAtO0EUZAEe8s
+ ewrzz8Kn58c9a745p8nmoZO8DaE4cJHHjdU18U52TSpM6JbAqlySKhWZHG/ToxPblepU
+ EUof30X8dCg6+tVqg84AvXUp7bJ47ubypeA80ie0orlVm2MaTzkuophabOmZ5I8+ZYTp
+ rX/w==
+X-Gm-Message-State: APjAAAVnzyF4aupCQ1p5+x19reMXXlOtEmeZbtIlsx9P4LzO8NhGSVtJ
+ XIRBQZ9Hous9MN4GKMSE84xg0187GcR11vKr
+X-Google-Smtp-Source: APXvYqxw8E2ikxdIIoACspJd1z1W9Jwn5yT7ytU/1eYuDeYBIR+sdNYlQViXRpZHH5BgQwYFQynvDA==
+X-Received: by 2002:a19:f819:: with SMTP id a25mr9055459lff.183.1562665734588; 
+ Tue, 09 Jul 2019 02:48:54 -0700 (PDT)
 Received: from localhost ([134.17.27.127])
- by smtp.gmail.com with ESMTPSA id z25sm1909232lfi.51.2019.07.09.01.42.50
+ by smtp.gmail.com with ESMTPSA id v22sm3239669lfe.49.2019.07.09.02.48.52
  (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
- Tue, 09 Jul 2019 01:42:50 -0700 (PDT)
-Date: Tue, 09 Jul 2019 01:42:50 -0700 (PDT)
-X-Google-Original-Date: Tue, 09 Jul 2019 01:42:46 PDT (-0700)
-In-Reply-To: <CAFEAcA8Bf4Zt4U6p3uMsn8cwv+=7ZHxOt7y2FZzB8TYkyo8AHA@mail.gmail.com>
-CC: Alistair Francis <Alistair.Francis@wdc.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org, alistair23@gmail.com, stefanha@redhat.com,
- codyprime@gmail.com, 
- bmeng.cn@gmail.com, pbonzini@redhat.com, anup@brainfault.org
+ Tue, 09 Jul 2019 02:48:53 -0700 (PDT)
+Date: Tue, 09 Jul 2019 02:48:53 -0700 (PDT)
+X-Google-Original-Date: Tue, 09 Jul 2019 02:48:50 PDT (-0700)
+In-Reply-To: <1560525351-590-1-git-send-email-bmeng.cn@gmail.com>
+CC: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
+ Alistair Francis <Alistair.Francis@wdc.com>
 From: Palmer Dabbelt <palmer@sifive.com>
-To: Peter Maydell <peter.maydell@linaro.org>
-Message-ID: <mhng-115240ce-f484-4ad9-ad3a-2103abfb1579@palmer-si-x1e>
+To: bmeng.cn@gmail.com
+Message-ID: <mhng-4825dce4-e510-41cd-b97c-0e599d6a2369@palmer-si-x1e>
 Mime-Version: 1.0 (MHng)
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
  [fuzzy]
-X-Received-From: 209.85.208.193
-Subject: Re: [Qemu-riscv] [PATCH v1 0/2] RISC-V: Add default OpenSBI ROM
+X-Received-From: 209.85.167.66
+Subject: Re: [Qemu-riscv] [PATCH] riscv: sifive_test: Add reset functionality
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -62,25 +60,70 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Jul 2019 08:42:55 -0000
+X-List-Received-Date: Tue, 09 Jul 2019 09:49:21 -0000
 
-On Tue, 09 Jul 2019 01:37:08 PDT (-0700), Peter Maydell wrote:
-> On Tue, 9 Jul 2019 at 09:35, Palmer Dabbelt <palmer@sifive.com> wrote:
->> I haven't looked at the code yet, but as the last one was fine it's probably
->> OK.  My only issue here is the timing: it's after the soft freeze so if I
->> understand correctly we're not supposed to take any new features into 4.1.
->> That's kind of unfortunate because it's somewhat unobtrusive and super useful.
->>
->> Peter: would you be OK taking this some time later this week?  I'd want to dig
->> through it and then bang on it a bit first.  If not then I'll queue it up for
->> 4.2.
+On Fri, 14 Jun 2019 08:15:51 PDT (-0700), bmeng.cn@gmail.com wrote:
+> This adds a reset opcode for sifive_test device to trigger a system
+> reset for testing purpose.
 >
-> The first attempt at putting this into master got onto the list before
-> freeze, so it's OK. Plus this clearly will only affect users using the
-> riscv boards, so it's a limited-scope change. So I think we're better
-> off putting it into 4.1 rather than not, assuming you're happy with
-> the level of testing it's had.
+> Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
+> ---
+>
+>  hw/riscv/sifive_test.c         | 4 ++++
+>  include/hw/riscv/sifive_test.h | 3 ++-
+>  2 files changed, 6 insertions(+), 1 deletion(-)
+>
+> diff --git a/hw/riscv/sifive_test.c b/hw/riscv/sifive_test.c
+> index 24a04d7..cd86831 100644
+> --- a/hw/riscv/sifive_test.c
+> +++ b/hw/riscv/sifive_test.c
+> @@ -21,6 +21,7 @@
+>  #include "qemu/osdep.h"
+>  #include "hw/sysbus.h"
+>  #include "qemu/module.h"
+> +#include "sysemu/sysemu.h"
+>  #include "target/riscv/cpu.h"
+>  #include "hw/riscv/sifive_test.h"
+>
+> @@ -40,6 +41,9 @@ static void sifive_test_write(void *opaque, hwaddr addr,
+>              exit(code);
+>          case FINISHER_PASS:
+>              exit(0);
+> +        case FINISHER_RESET:
+> +            qemu_system_reset_request(SHUTDOWN_CAUSE_GUEST_RESET);
+> +            return;
+>          default:
+>              break;
+>          }
+> diff --git a/include/hw/riscv/sifive_test.h b/include/hw/riscv/sifive_test.h
+> index 71d4c9f..c186a31 100644
+> --- a/include/hw/riscv/sifive_test.h
+> +++ b/include/hw/riscv/sifive_test.h
+> @@ -34,7 +34,8 @@ typedef struct SiFiveTestState {
+>
+>  enum {
+>      FINISHER_FAIL = 0x3333,
+> -    FINISHER_PASS = 0x5555
+> +    FINISHER_PASS = 0x5555,
+> +    FINISHER_RESET = 0x7777
+>  };
+>
+>  DeviceState *sifive_test_create(hwaddr addr);
 
-Awesome.  I always test stuff myself a bit, but with any luck I should be able
-to get a good look at it over the next few days.
+Poking around the hardware side, it looks like we're silently ignoring all
+codes aside from 0x3333 and 0x5555.  As a result there's really no way to test
+if this added reset is going to work, so this should be a "sifive,test1"
+instead of a "sifive,test0".  It's backwards compatible, so the compat string
+in the device trees should look something like
+
+    compatible = "sifive,test1", "sifive,test0";
+
+With that it should be fine, pending the change to our hardware to reserve this
+as an error code within "sifive,test0" devices.
+
+Do you mind also submitting a device tree binding to Linux that describes this
+device?  That way we can all stay on the same page about what the pair of
+interfaces do.
+
+Thanks!
 
