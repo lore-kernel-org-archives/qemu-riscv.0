@@ -1,58 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hklau-0003Cx-NI
-	for mharc-qemu-riscv@gnu.org; Tue, 09 Jul 2019 04:35:25 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:32874)
+	id 1hklct-0004k6-1N
+	for mharc-qemu-riscv@gnu.org; Tue, 09 Jul 2019 04:37:27 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:33282)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <palmer@dabbelt.com>) id 1hklaq-00036D-2y
- for qemu-riscv@nongnu.org; Tue, 09 Jul 2019 04:35:21 -0400
+ (envelope-from <peter.maydell@linaro.org>) id 1hklcq-0004jX-PU
+ for qemu-riscv@nongnu.org; Tue, 09 Jul 2019 04:37:25 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmer@dabbelt.com>) id 1hklao-0005JM-6V
- for qemu-riscv@nongnu.org; Tue, 09 Jul 2019 04:35:20 -0400
-Received: from mail-lj1-f193.google.com ([209.85.208.193]:37546)
+ (envelope-from <peter.maydell@linaro.org>) id 1hklcp-0006YN-S6
+ for qemu-riscv@nongnu.org; Tue, 09 Jul 2019 04:37:24 -0400
+Received: from mail-oi1-x242.google.com ([2607:f8b0:4864:20::242]:41044)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1hklak-0005FZ-HY
- for qemu-riscv@nongnu.org; Tue, 09 Jul 2019 04:35:16 -0400
-Received: by mail-lj1-f193.google.com with SMTP id z28so9795819ljn.4
- for <qemu-riscv@nongnu.org>; Tue, 09 Jul 2019 01:35:13 -0700 (PDT)
+ (Exim 4.71) (envelope-from <peter.maydell@linaro.org>)
+ id 1hklcn-0006WV-Tv
+ for qemu-riscv@nongnu.org; Tue, 09 Jul 2019 04:37:22 -0400
+Received: by mail-oi1-x242.google.com with SMTP id g7so14757441oia.8
+ for <qemu-riscv@nongnu.org>; Tue, 09 Jul 2019 01:37:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=en7JuXeewC1PJQ+dn18CZPtUz2HVgySyM2WeaGGQfzA=;
+ b=i6638KnPqCv9KbxRUa9B5iXhjsG9cHe40m0ry2TVx1scMtwzsDEowXkzJKPw64WG5s
+ Q1raZiHbu4bcKmgIE6P9amLTuPNMTvmYzb229oToISge0T2I/9KdFXIh86qUIip/gtJ2
+ tqNHr3822uShQhnBujZP4MG/r8VTeWhwGhKyU03aaiuVoGRCDif+L+RxtpTnLL/eS4K9
+ lLyFYYH2XysT3n/Ktv1tXmQJiqlSnwuLW060AWv3jBkqXBX2nQkn8Ob3VwoMLsxquQVt
+ gv5xoy0YEicHctProoopKITBld9lK1IZIq1E3vztmuKVYGGPyAduWRgYfh5l9r8i1nZ2
+ uZ+w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
- :mime-version:content-transfer-encoding;
- bh=GYMbqe1dcstlszXv15EOGlB7KmvBfKwbQYnSClGpi8g=;
- b=Kt6L1IHl3UzVYmHdnhbhkAc+DoMZ2WEDIxLONhXWma+Rr8cnZ2ZbzFC9Q8pg3IXnQO
- fZNUaFW0QMerL62u0hWjWeHvQ6vSTbFOP56tGJFxP+z5TlfXKHwXNRZc4c+xfVfgJbIP
- qn2hXeb6B+1y+8wOnR49Nvm5smYeEnx38v2q7gXa975zJmm0F2GI9JmVtjzdQeGAg96O
- 71RmTis4BWqOUrGuMhuHQnSgk8W5VlTadq6UR+FKa3zED1vCdQ0bURghfuay7tkLmxQZ
- 8PHbG/YE0hdz5RUdwLr7UcaGalbgfX84DDA0jGz3PXENayXA8nFaVr6aP+TNbzhINsYF
- uxZQ==
-X-Gm-Message-State: APjAAAUEineE0L++yRkNxqD95JD/dCR7+BdK86yvv4qkag7mJQR8cJI4
- VERxkiOTqj0cshP6hlqTicnHWg==
-X-Google-Smtp-Source: APXvYqwDImJ+dHC3VPo4FUQ0PYlVNv+jScFOB00nbpJUWs1+6PxVulCNLRrp/lZnmk8d+UtpBMuSVA==
-X-Received: by 2002:a2e:a311:: with SMTP id l17mr12676218lje.214.1562661311753; 
- Tue, 09 Jul 2019 01:35:11 -0700 (PDT)
-Received: from localhost ([134.17.27.127])
- by smtp.gmail.com with ESMTPSA id t1sm2382704lji.52.2019.07.09.01.35.10
- (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
- Tue, 09 Jul 2019 01:35:11 -0700 (PDT)
-Date: Tue, 09 Jul 2019 01:35:11 -0700 (PDT)
-X-Google-Original-Date: Tue, 09 Jul 2019 01:35:06 PDT (-0700)
-In-Reply-To: <cover.1562611535.git.alistair.francis@wdc.com>
-CC: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- Alistair Francis <Alistair.Francis@wdc.com>, alistair23@gmail.com,
- stefanha@redhat.com, 
- Peter Maydell <peter.maydell@linaro.org>, codyprime@gmail.com,
- bmeng.cn@gmail.com, pbonzini@redhat.com, anup@brainfault.org
-From: Palmer Dabbelt <palmer@sifive.com>
-To: Alistair Francis <Alistair.Francis@wdc.com>,
- Peter Maydell <peter.maydell@linaro.org>
-Message-ID: <mhng-2211c89e-80c2-45d7-a471-ec0c30d871a4@palmer-si-x1e>
-Mime-Version: 1.0 (MHng)
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
- [fuzzy]
-X-Received-From: 209.85.208.193
-Subject: Re: [Qemu-riscv] [PATCH v1 0/2]  RISC-V: Add default OpenSBI ROM
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=en7JuXeewC1PJQ+dn18CZPtUz2HVgySyM2WeaGGQfzA=;
+ b=sGha+Eer7qq+CDeynDkuaGMTs2wAqkQrzidGhpxPR1xvKgupxVf/xucN/XgvqrYC2J
+ 1Tuiku4ajEfgdz6b8o9LPBw8e6RpflXD4+Ijj9O5eLgyTKK5XOy/akTITwJm8nYjmc55
+ kaGFTwfmT2lAxHDkunmsFqEvbNF5rhYPhUqsRoDda/D+27vMUrWQ6UnVSt9kW2+9+yWP
+ HvAX8Ht3ZNABWq7srXhq0ov/r2jCzV/AG/nq1iQ/tIbhLqnaYZlWuRL5P/qBoMS7OKzT
+ s+Ssl3kylU5Tr2YUFnxYJU4yJUxeqUY0Tt5G++zOZZNLam9q+g0YH1JD8U9tZMfSdqjc
+ D58g==
+X-Gm-Message-State: APjAAAXe9XwGSn1Ns08JRdRHaLVb3KUHyXxPaMSsHj5YvuDDRxRRplI9
+ icBCegRP5CNaf1KILPcvgtpd/Tua5XRZFRU8hVx8dQ==
+X-Google-Smtp-Source: APXvYqxPTenHjCQRzGctS/gh93DJMEIHCAJ5zw4LXPujZMnr1NSXdTM2uEyWJLhNkLtFHTstK5vtjYddGPflHXjRdSg=
+X-Received: by 2002:a05:6808:d4:: with SMTP id
+ t20mr1065721oic.170.1562661439441; 
+ Tue, 09 Jul 2019 01:37:19 -0700 (PDT)
+MIME-Version: 1.0
+References: <cover.1562611535.git.alistair.francis@wdc.com>
+ <mhng-2211c89e-80c2-45d7-a471-ec0c30d871a4@palmer-si-x1e>
+In-Reply-To: <mhng-2211c89e-80c2-45d7-a471-ec0c30d871a4@palmer-si-x1e>
+From: Peter Maydell <peter.maydell@linaro.org>
+Date: Tue, 9 Jul 2019 09:37:08 +0100
+Message-ID: <CAFEAcA8Bf4Zt4U6p3uMsn8cwv+=7ZHxOt7y2FZzB8TYkyo8AHA@mail.gmail.com>
+To: Palmer Dabbelt <palmer@sifive.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>,
+ QEMU Developers <qemu-devel@nongnu.org>, 
+ "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ Alistair Francis <alistair23@gmail.com>, 
+ Stefan Hajnoczi <stefanha@redhat.com>, Jeff Cody <codyprime@gmail.com>,
+ Bin Meng <bmeng.cn@gmail.com>, 
+ Paolo Bonzini <pbonzini@redhat.com>, Anup Patel <anup@brainfault.org>
+Content-Type: text/plain; charset="UTF-8"
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2607:f8b0:4864:20::242
+Subject: Re: [Qemu-riscv] [PATCH v1 0/2] RISC-V: Add default OpenSBI ROM
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -64,69 +72,24 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Jul 2019 08:35:22 -0000
+X-List-Received-Date: Tue, 09 Jul 2019 08:37:25 -0000
 
-On Mon, 08 Jul 2019 11:49:35 PDT (-0700), Alistair Francis wrote:
-> This series includes the OpenSBI firmware for QEMU RISC-V users.
+On Tue, 9 Jul 2019 at 09:35, Palmer Dabbelt <palmer@sifive.com> wrote:
+> I haven't looked at the code yet, but as the last one was fine it's probably
+> OK.  My only issue here is the timing: it's after the soft freeze so if I
+> understand correctly we're not supposed to take any new features into 4.1.
+> That's kind of unfortunate because it's somewhat unobtrusive and super useful.
 >
-> To avoid breakages we have not changed the default behaviour of QEMU.
-> The plan is to change the default though, which is why an entry to the
-> qemu-deprecated.texi file has been added as well as a new warning.
->
-> After this series QEMU 4.1 has three options:
->  1. ``-bios none`` - This is the current default behavior if no -bios option
->       is included. QEMU will not automatically load any firmware. It is up
->       to the user to load all the images they need.
->  2. ``-bios default`` - In a future QEMU release this will become the default
->       behaviour if no -bios option is specified. This option will load the
->       default OpenSBI firmware automatically. The firmware is included with
->       the QEMU release and no user interaction is required. All a user needs
->       to do is specify the kernel they want to boot with the -kernel option
->  3. ``-bios <file>`` - Tells QEMU to load the specified file as the firmwrae.
->
-> All users should transition to using a -bios option. We can start
-> updating all documentation after the release of 4.1.
+> Peter: would you be OK taking this some time later this week?  I'd want to dig
+> through it and then bang on it a bit first.  If not then I'll queue it up for
+> 4.2.
 
-I haven't looked at the code yet, but as the last one was fine it's probably
-OK.  My only issue here is the timing: it's after the soft freeze so if I
-understand correctly we're not supposed to take any new features into 4.1.
-That's kind of unfortunate because it's somewhat unobtrusive and super useful.
+The first attempt at putting this into master got onto the list before
+freeze, so it's OK. Plus this clearly will only affect users using the
+riscv boards, so it's a limited-scope change. So I think we're better
+off putting it into 4.1 rather than not, assuming you're happy with
+the level of testing it's had.
 
-Peter: would you be OK taking this some time later this week?  I'd want to dig
-through it and then bang on it a bit first.  If not then I'll queue it up for
-4.2.
-
-> At the end of this series and the transition period we are in the good
-> place of no longer requiring users to build firmware to boot a kernel.
-> Instead users can just run QEMU with the -kernel option and everything
-> will work. They can also override the firmware with their own using
-> the -bios option. Using "-bios none" will result in no firmware being
-> loaded (as it is today).
->
-> This is based on my original series adding OpenSBI support but now has
-> improved documentation changes around the license.
->
-> Alistair Francis (2):
->   roms: Add OpenSBI version 0.4
->   hw/riscv: Load OpenSBI as the default firmware
->
->  .gitmodules                                  |   3 ++
->  LICENSE                                      |  21 +++++---
->  Makefile                                     |   5 +-
->  hw/riscv/boot.c                              |  49 +++++++++++++++++++
->  hw/riscv/sifive_u.c                          |   7 +--
->  hw/riscv/virt.c                              |  11 +++--
->  include/hw/riscv/boot.h                      |   3 ++
->  pc-bios/README                               |  11 +++++
->  pc-bios/opensbi-riscv32-virt-fw_jump.bin     | Bin 0 -> 36888 bytes
->  pc-bios/opensbi-riscv64-sifive_u-fw_jump.bin | Bin 0 -> 40968 bytes
->  pc-bios/opensbi-riscv64-virt-fw_jump.bin     | Bin 0 -> 40968 bytes
->  qemu-deprecated.texi                         |  20 ++++++++
->  roms/Makefile                                |  48 +++++++++++++-----
->  roms/opensbi                                 |   1 +
->  14 files changed, 152 insertions(+), 27 deletions(-)
->  create mode 100755 pc-bios/opensbi-riscv32-virt-fw_jump.bin
->  create mode 100755 pc-bios/opensbi-riscv64-sifive_u-fw_jump.bin
->  create mode 100755 pc-bios/opensbi-riscv64-virt-fw_jump.bin
->  create mode 160000 roms/opensbi
+thanks
+-- PMM
 
