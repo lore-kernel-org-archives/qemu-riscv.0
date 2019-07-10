@@ -1,60 +1,46 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hlHjO-0005vN-BM
-	for mharc-qemu-riscv@gnu.org; Wed, 10 Jul 2019 14:54:31 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53838)
+	id 1hlKH8-00029J-8J
+	for mharc-qemu-riscv@gnu.org; Wed, 10 Jul 2019 17:37:18 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59538)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <alistair23@gmail.com>) id 1hlHjK-0005si-58
- for qemu-riscv@nongnu.org; Wed, 10 Jul 2019 14:54:15 -0400
+ (envelope-from <crosa@redhat.com>) id 1hlJDO-0000st-Jq
+ for qemu-riscv@nongnu.org; Wed, 10 Jul 2019 16:29:24 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1hlHjH-0003Hn-Oq
- for qemu-riscv@nongnu.org; Wed, 10 Jul 2019 14:54:14 -0400
-Received: from mail-lf1-x143.google.com ([2a00:1450:4864:20::143]:42582)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1hlHjD-00032x-57; Wed, 10 Jul 2019 14:54:08 -0400
-Received: by mail-lf1-x143.google.com with SMTP id s19so2315459lfb.9;
- Wed, 10 Jul 2019 11:53:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=eZLYPg9RnRoxztz7McysZLtsI4n157cUMqea2jiRikQ=;
- b=hE3qLOJqY6j2FJRM/XkfXYu7iDUbUnqAs/bzCM51owZMuNp/+9B+jnZjR6cDF2nHhD
- B1zofnWQ2iDEUdnaaUHyKfM/I3IPTY8i39IBtu9VQv5zAeafEAQ6AOJa9Pn9uOLnum8w
- PU+68lTy0x7JnIu64JZoBmoVMcZjWXJOWva/kubcXFb8PbUOcu6klbCbCL1ANTeBOf9m
- wYUez073OprclnG2fMk1Gv7pA8vkjpfq4bcT3tY1PAYRAaIuRTxxOEBlUFwXRiV7aME7
- CbHvDCUpHR7qfBMjSPmakGicOWs5AuIOwsmjfAz3OCYb+Ct52I60+1AxMOzvJOlpt11w
- sEqA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=eZLYPg9RnRoxztz7McysZLtsI4n157cUMqea2jiRikQ=;
- b=pOhsSyLZwPfxm1tbD4bfoAaxoRJ1vRzTBZ17Cr29A0WwSVjtzyUVdTclrbHEedV62x
- o6ZUR8ENtd4TYOXES6pZCbFT7SBtCXTtapbCfpt2LQLbDjYMMeRiLTIczGizw3BR6z4c
- 3r7huF6LMW+TyaD8GbRlbcAN7R1VsPjvoWad8EGglirigIdt485jUh3iGKMllMCN4QOY
- ZajK1Hnc6XpZCCaBqO4MGvGOzOs85CRDsiLr0tPvV40CAT3br0pBro1+qEkhGSYYW2TU
- l35p/g/Lgh4uzT5XAtZBJMtUuDkGBvuadKdoqUVxY1LdMWQeQRrg1qkJqgnuClG67Rh+
- KnNQ==
-X-Gm-Message-State: APjAAAUKlKEF51sfy00X6A8ig6ze9YvcpP/A6CwHt62tpvbx+Y8bWn4b
- maAvUhmg0eiDL/h1KN+sAcl3/o/ky102sMk5YZs=
-X-Google-Smtp-Source: APXvYqxdM3LZbhSr0rkF0G18c5ZXu+W6RhL1K2ZRVXw10Tsf3y0Hm/sQkkgju/kCgrKTJn3RMXjDnu27UTW0yhmNs7U=
-X-Received: by 2002:a19:6904:: with SMTP id e4mr4776090lfc.156.1562784835616; 
- Wed, 10 Jul 2019 11:53:55 -0700 (PDT)
-MIME-Version: 1.0
-References: <1562781026-27570-1-git-send-email-chihmin.chao@sifive.com>
-In-Reply-To: <1562781026-27570-1-git-send-email-chihmin.chao@sifive.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 10 Jul 2019 11:50:44 -0700
-Message-ID: <CAKmqyKMHxX6dhopB8fxH31HGAQ3y-EvL+09jNvp3xMS-dxirQA@mail.gmail.com>
+ (envelope-from <crosa@redhat.com>) id 1hlJDN-0001eT-43
+ for qemu-riscv@nongnu.org; Wed, 10 Jul 2019 16:29:22 -0400
+Received: from mx1.redhat.com ([209.132.183.28]:32942)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <crosa@redhat.com>) id 1hlJDK-0001WC-IS
+ for qemu-riscv@nongnu.org; Wed, 10 Jul 2019 16:29:19 -0400
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
+ [10.5.11.13])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mx1.redhat.com (Postfix) with ESMTPS id 16260C04AC70;
+ Wed, 10 Jul 2019 20:23:44 +0000 (UTC)
+Received: from localhost.localdomain (ovpn-125-95.rdu2.redhat.com
+ [10.10.125.95])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 00E3E60A97;
+ Wed, 10 Jul 2019 20:23:42 +0000 (UTC)
+Date: Wed, 10 Jul 2019 16:23:41 -0400
+From: Cleber Rosa <crosa@redhat.com>
 To: Chih-Min Chao <chihmin.chao@sifive.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Eduardo Habkost <ehabkost@redhat.com>, Cornelia Huck <cohuck@redhat.com>, 
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>, 
- Cleber Rosa <crosa@redhat.com>, Caio Carrara <ccarrara@redhat.com>
-Content-Type: text/plain; charset="UTF-8"
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2a00:1450:4864:20::143
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
+ Eduardo Habkost <ehabkost@redhat.com>, Cornelia Huck <cohuck@redhat.com>,
+ Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <f4bug@amsat.org>
+Message-ID: <20190710202316.GA27117@localhost.localdomain>
+References: <1562781026-27570-1-git-send-email-chihmin.chao@sifive.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <1562781026-27570-1-git-send-email-chihmin.chao@sifive.com>
+User-Agent: Mutt/1.12.0 (2019-05-25)
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+ (mx1.redhat.com [10.5.110.31]); Wed, 10 Jul 2019 20:23:44 +0000 (UTC)
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+X-Received-From: 209.132.183.28
+X-Mailman-Approved-At: Wed, 10 Jul 2019 17:37:14 -0400
 Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH] tests/boot_linux_console: add
  a test for riscv64 + virt
 X-BeenThere: qemu-riscv@nongnu.org
@@ -68,30 +54,25 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Jul 2019 18:54:15 -0000
+X-List-Received-Date: Wed, 10 Jul 2019 20:29:25 -0000
 
-On Wed, Jul 10, 2019 at 10:51 AM Chih-Min Chao <chihmin.chao@sifive.com> wrote:
->
+On Wed, Jul 10, 2019 at 10:50:23AM -0700, Chih-Min Chao wrote:
 > Similar to the mips + malta test, it boots a Linux kernel on a virt
 > board and verify the serial is working.  Also, it relies on the serial
 > device set by the machine itself.
->
+> 
 > If riscv64 is a target being built, "make check-acceptance" will
 > automatically include this test by the use of the "arch:riscv64" tags.
->
+> 
 > Alternatively, this test can be run using:
->
+> 
 >   $ avocado run -t arch:riscv64 tests/acceptance
->
+> 
 > Signed-off-by: Chih-Min Chao <chihmin.chao@sifive.com>
-
-Awesome! Thanks for the test case. This will help a lot with RISC-V
-regressions in QEMU.
-
 > ---
 >  tests/acceptance/boot_linux_console.py | 40 ++++++++++++++++++++++++++++++++++
 >  1 file changed, 40 insertions(+)
->
+> 
 > diff --git a/tests/acceptance/boot_linux_console.py b/tests/acceptance/boot_linux_console.py
 > index 3215950..bbc6b06 100644
 > --- a/tests/acceptance/boot_linux_console.py
@@ -108,20 +89,8 @@ regressions in QEMU.
 > +        """
 > +
 > +        kernel_url = ('https://github.com/chihminchao/test-binary/raw/'
-
-These images need to be built with a standard build flow. Having them
-built from SiFive's custom scripts will make debugging problems in the
-future impossible. I'm also a little worried here about GPL
-violations, I'm not sure if it's enough to just point to a script SHA
-to meet GPL source disclosure. I know companies have huge headaches
-meeting GPL requirements so this seems too easy.
-
 > +                      '0b7787305d9e40815c05a805266cc74ff356239e/qemu/riscv64/'
 > +                      'bbl_w_kernel.gz')
-
-Don't use BBL, most people use OpenSBI now which is what we should be
-testing with.
-
 > +        kernel_hash = 'c7f6cc7967975ad42dc61ee0535db01c9cbd0968'
 > +        kernel_path_gz = self.fetch_asset(kernel_url, asset_hash=kernel_hash)
 > +        kernel_path = self.workdir + "bbl_w_kernel"
@@ -129,16 +98,45 @@ testing with.
 > +        with gzip.open(kernel_path_gz, 'rb') as f_in:
 > +            with open(kernel_path, 'wb') as f_out:
 > +                shutil.copyfileobj(f_in, f_out)
+
+There are currently two patterns for extracting a gzipped file
+in this test.  So, this is not a must, but maybe you'd prefer:
+
+---
+diff --git a/tests/acceptance/boot_linux_console.py b/tests/acceptance/boot_linux_console.py
+index bbc6b0683f..9f819e20e1 100644
+--- a/tests/acceptance/boot_linux_console.py
++++ b/tests/acceptance/boot_linux_console.py
+@@ -365,12 +365,8 @@ class BootLinuxConsole(Test):
+                       '0b7787305d9e40815c05a805266cc74ff356239e/qemu/riscv64/'
+                       'bbl_w_kernel.gz')
+         kernel_hash = 'c7f6cc7967975ad42dc61ee0535db01c9cbd0968'
+-        kernel_path_gz = self.fetch_asset(kernel_url, asset_hash=kernel_hash)
+-        kernel_path = self.workdir + "bbl_w_kernel"
+-
+-        with gzip.open(kernel_path_gz, 'rb') as f_in:
+-            with open(kernel_path, 'wb') as f_out:
+-                shutil.copyfileobj(f_in, f_out)
++        kernel_path = self.fetch_asset(kernel_url, asset_hash=kernel_hash)
++        uncompressed_kernel = archive.uncompress(kernel_path, self.workdir)
+ 
+         initrd_url = ('https://github.com/groeck/linux-build-test/raw/'
+                       '8584a59ed9e5eb5ee7ca91f6d74bbb06619205b8/rootfs/'
+@@ -382,7 +378,7 @@ class BootLinuxConsole(Test):
+         self.vm.set_console()
+         kernel_command_line = (self.KERNEL_COMMON_COMMAND_LINE
+                                + 'console=ttyS0 noreboot')
+-        self.vm.add_args('-kernel', kernel_path,
++        self.vm.add_args('-kernel', uncompressed_kernel,
+                          '-initrd', initrd_path,
+                          '-append', kernel_command_line)
+         self.vm.launch()
+---
+
 > +
 > +        initrd_url = ('https://github.com/groeck/linux-build-test/raw/'
 > +                      '8584a59ed9e5eb5ee7ca91f6d74bbb06619205b8/rootfs/'
 > +                      'riscv64/rootfs.cpio.gz')
-
-Same comment about build tools.
-
-
-Alistair
-
 > +        initrd_hash = 'f4867d263754961b6f626cdcdc0cb334c47e3b49'
 > +        initrd_path = self.fetch_asset(initrd_url, asset_hash=initrd_hash)
 > +
@@ -158,8 +156,14 @@ Alistair
 > +                                               'sifive')
 > +        self.exec_command_and_wait_for_pattern('reboot',
 > +                                               'reboot: Restarting system')
-> --
+> -- 
 > 2.7.4
->
->
+> 
+> 
+
+It'd be nice to also add riscv64 to the target list in .travis.yaml
+"acceptance tests" job.
+
+Regards and many thanks for this contribution!
+- Cleber.
 
