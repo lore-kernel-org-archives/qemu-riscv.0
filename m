@@ -1,48 +1,71 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hlKH8-00029J-8J
-	for mharc-qemu-riscv@gnu.org; Wed, 10 Jul 2019 17:37:18 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:59538)
+	id 1hlLLx-0000ED-Pk
+	for mharc-qemu-riscv@gnu.org; Wed, 10 Jul 2019 18:46:21 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47459)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <crosa@redhat.com>) id 1hlJDO-0000st-Jq
- for qemu-riscv@nongnu.org; Wed, 10 Jul 2019 16:29:24 -0400
+ (envelope-from <groeck7@gmail.com>) id 1hlLLt-0000BY-Oe
+ for qemu-riscv@nongnu.org; Wed, 10 Jul 2019 18:46:19 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <crosa@redhat.com>) id 1hlJDN-0001eT-43
- for qemu-riscv@nongnu.org; Wed, 10 Jul 2019 16:29:22 -0400
-Received: from mx1.redhat.com ([209.132.183.28]:32942)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <crosa@redhat.com>) id 1hlJDK-0001WC-IS
- for qemu-riscv@nongnu.org; Wed, 10 Jul 2019 16:29:19 -0400
-Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
- [10.5.11.13])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id 16260C04AC70;
- Wed, 10 Jul 2019 20:23:44 +0000 (UTC)
-Received: from localhost.localdomain (ovpn-125-95.rdu2.redhat.com
- [10.10.125.95])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 00E3E60A97;
- Wed, 10 Jul 2019 20:23:42 +0000 (UTC)
-Date: Wed, 10 Jul 2019 16:23:41 -0400
-From: Cleber Rosa <crosa@redhat.com>
-To: Chih-Min Chao <chihmin.chao@sifive.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- Eduardo Habkost <ehabkost@redhat.com>, Cornelia Huck <cohuck@redhat.com>,
- Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <f4bug@amsat.org>
-Message-ID: <20190710202316.GA27117@localhost.localdomain>
-References: <1562781026-27570-1-git-send-email-chihmin.chao@sifive.com>
+ (envelope-from <groeck7@gmail.com>) id 1hlLLs-0007Gb-9m
+ for qemu-riscv@nongnu.org; Wed, 10 Jul 2019 18:46:17 -0400
+Received: from mail-pf1-x444.google.com ([2607:f8b0:4864:20::444]:38625)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <groeck7@gmail.com>)
+ id 1hlLLo-0007Ai-Fv; Wed, 10 Jul 2019 18:46:12 -0400
+Received: by mail-pf1-x444.google.com with SMTP id y15so1773262pfn.5;
+ Wed, 10 Jul 2019 15:46:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=sender:date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to:user-agent;
+ bh=KKxwigC1RbbkDnCUdHHQVLNpZHyQ6fBaSBo+9k6uJSs=;
+ b=crgTl98vRbJNfPpu2RsB+HBVGvZxB1v9KKKC4aNFRoVWerT6/Bu3pvVGbCbh0aZnT6
+ DqFvpEtM3T/CIwsRvIdr4jl+kfQ1zSJNl9XzQK6GggSXu4ZIFVyMPz2b031FcXcXOIJi
+ b52f/fknJYCFOcchiTu/7RXDHCTnE427IGPaNuz18B908YsmLtd05xkncjUOw9HWEBLE
+ xwqWX4UG4SvsQvcEanls7n+hmkjovzG2Vy3Zbo400qbh6utw52CZFURbdUl7JcWtdmfQ
+ reOpuvKhdJaJNQydFrXHqKER6ED71hEmQ3aWsR8UUptyc15gXfbxqPFApmjjHcD2myae
+ 7jmw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:sender:date:from:to:cc:subject:message-id
+ :references:mime-version:content-disposition:in-reply-to:user-agent;
+ bh=KKxwigC1RbbkDnCUdHHQVLNpZHyQ6fBaSBo+9k6uJSs=;
+ b=eLqX14roFNNi7S/KYTpqUnzsH9rQ/4vfJjCjbrnd7NphT8x5cO+6MYAy4wdMyMfZnM
+ Thw94h/+UT08ypN7FQnzWBvkm/VqrIkc+POcUyKjboRE4+Vyux9DgtVrZxWrtrlP5Z9Q
+ mk4ZQa89GYfU+V0AYRGgGfSvwOHKKCtuTfhcGu1aHrBuVRq1fz1Gt3pNkTwKaK3TFj9k
+ 4nEbjXszEZW/IXFwgM0PJ2hsfLpknDsXZJrEFHZ1TvwN3SyqhLAlZpMSH0UOcN6nCqbH
+ Nq56iuu6T8BpY4AXJS2ddNP1oCbaiuXj8fx21Cf1eS9mkydRIVuzrhOIqc7E5L/P4qw9
+ BFgw==
+X-Gm-Message-State: APjAAAXfOJYB3Qvze1uPdso3f/CeccJJLLeO/qL0T4oF05dpfLpS90EY
+ qLcaZJ6I4LK26yxc10gGBoo=
+X-Google-Smtp-Source: APXvYqxCsA1SP7cPZafTgLVABkkeLKJ826HYQZH/WA5juo2h6T24E1CVq4hOst2VEuMVjq7DX+rOoQ==
+X-Received: by 2002:a17:90a:bb0c:: with SMTP id
+ u12mr901214pjr.132.1562798769969; 
+ Wed, 10 Jul 2019 15:46:09 -0700 (PDT)
+Received: from localhost ([2600:1700:e321:62f0:329c:23ff:fee3:9d7c])
+ by smtp.gmail.com with ESMTPSA id e11sm3311363pfm.35.2019.07.10.15.46.08
+ (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+ Wed, 10 Jul 2019 15:46:08 -0700 (PDT)
+Sender: Guenter Roeck <groeck7@gmail.com>
+Date: Wed, 10 Jul 2019 15:46:07 -0700
+From: Guenter Roeck <linux@roeck-us.net>
+To: Alistair Francis <alistair.francis@wdc.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, peter.maydell@linaro.org,
+ codyprime@gmail.com, anup@brainfault.org, palmer@sifive.com,
+ stefanha@redhat.com, pbonzini@redhat.com, alistair23@gmail.com,
+ bmeng.cn@gmail.com
+Message-ID: <20190710224607.GA24207@roeck-us.net>
+References: <cover.1562611535.git.alistair.francis@wdc.com>
+ <238062dcf3a9b99a048c8e7ae439cad7745af1da.1562611535.git.alistair.francis@wdc.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <1562781026-27570-1-git-send-email-chihmin.chao@sifive.com>
-User-Agent: Mutt/1.12.0 (2019-05-25)
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.31]); Wed, 10 Jul 2019 20:23:44 +0000 (UTC)
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
-X-Received-From: 209.132.183.28
-X-Mailman-Approved-At: Wed, 10 Jul 2019 17:37:14 -0400
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH] tests/boot_linux_console: add
- a test for riscv64 + virt
+In-Reply-To: <238062dcf3a9b99a048c8e7ae439cad7745af1da.1562611535.git.alistair.francis@wdc.com>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2607:f8b0:4864:20::444
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v1 2/2] hw/riscv: Load OpenSBI
+ as the default firmware
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -54,116 +77,194 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Jul 2019 20:29:25 -0000
+X-List-Received-Date: Wed, 10 Jul 2019 22:46:19 -0000
 
-On Wed, Jul 10, 2019 at 10:50:23AM -0700, Chih-Min Chao wrote:
-> Similar to the mips + malta test, it boots a Linux kernel on a virt
-> board and verify the serial is working.  Also, it relies on the serial
-> device set by the machine itself.
+On Mon, Jul 08, 2019 at 11:49:40AM -0700, Alistair Francis wrote:
+> If the user hasn't specified a firmware to load (with -bios) or
+> specified no bios (with -bios none) then load OpenSBI by default. This
+> allows users to boot a RISC-V kernel with just -kernel.
 > 
-> If riscv64 is a target being built, "make check-acceptance" will
-> automatically include this test by the use of the "arch:riscv64" tags.
-> 
-> Alternatively, this test can be run using:
-> 
->   $ avocado run -t arch:riscv64 tests/acceptance
-> 
-> Signed-off-by: Chih-Min Chao <chihmin.chao@sifive.com>
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+> Tested-by: Bin Meng <bmeng.cn@gmail.com>
 > ---
->  tests/acceptance/boot_linux_console.py | 40 ++++++++++++++++++++++++++++++++++
->  1 file changed, 40 insertions(+)
+>  hw/riscv/boot.c         | 49 +++++++++++++++++++++++++++++++++++++++++
+>  hw/riscv/sifive_u.c     |  7 +++---
+>  hw/riscv/virt.c         | 11 ++++++---
+>  include/hw/riscv/boot.h |  3 +++
+>  qemu-deprecated.texi    | 20 +++++++++++++++++
+>  5 files changed, 84 insertions(+), 6 deletions(-)
 > 
-> diff --git a/tests/acceptance/boot_linux_console.py b/tests/acceptance/boot_linux_console.py
-> index 3215950..bbc6b06 100644
-> --- a/tests/acceptance/boot_linux_console.py
-> +++ b/tests/acceptance/boot_linux_console.py
-> @@ -354,3 +354,43 @@ class BootLinuxConsole(Test):
->          self.vm.launch()
->          console_pattern = 'Kernel command line: %s' % kernel_command_line
->          self.wait_for_console_pattern(console_pattern)
+> diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
+> index ff023f42d0..c7d72f682f 100644
+> --- a/hw/riscv/boot.c
+> +++ b/hw/riscv/boot.c
+> @@ -18,6 +18,7 @@
+>   */
+>  
+>  #include "qemu/osdep.h"
+> +#include "qemu-common.h"
+>  #include "qemu/units.h"
+>  #include "qemu/error-report.h"
+>  #include "exec/cpu-defs.h"
+> @@ -32,6 +33,54 @@
+>  # define KERNEL_BOOT_ADDRESS 0x80200000
+>  #endif
+>  
+> +void riscv_find_and_load_firmware(MachineState *machine,
+> +                                  const char *default_machine_firmware,
+> +                                  hwaddr firmware_load_addr)
+> +{
+> +    char *firmware_filename;
 > +
-> +    def test_riscv64_virt(self):
-> +        """
-> +        :avocado: tags=arch:riscv64
-> +        :avocado: tags=machine:virt
-> +        """
+> +    if (!machine->firmware) {
+> +        /*
+> +         * The user didn't specify -bios.
+> +         * At the moment we default to loading nothing when this hapens.
+> +         * In the future this defaul will change to loading the prebuilt
+> +         * OpenSBI firmware. Let's warn the user and then continue.
+> +        */
+> +        warn_report("No -bios option specified. Not loading a firmware.");
+> +        warn_report("This default will change in QEMU 4.3. Please use the " \
+> +                    "-bios option to aviod breakages when this happens.");
+> +        warn_report("See QEMU's deprecation documentation for details");
+> +        return;
+> +    }
 > +
-> +        kernel_url = ('https://github.com/chihminchao/test-binary/raw/'
-> +                      '0b7787305d9e40815c05a805266cc74ff356239e/qemu/riscv64/'
-> +                      'bbl_w_kernel.gz')
-> +        kernel_hash = 'c7f6cc7967975ad42dc61ee0535db01c9cbd0968'
-> +        kernel_path_gz = self.fetch_asset(kernel_url, asset_hash=kernel_hash)
-> +        kernel_path = self.workdir + "bbl_w_kernel"
-> +
-> +        with gzip.open(kernel_path_gz, 'rb') as f_in:
-> +            with open(kernel_path, 'wb') as f_out:
-> +                shutil.copyfileobj(f_in, f_out)
+> +    if (!strcmp(machine->firmware, "default")) {
+> +        /*
+> +         * The user has specified "-bios default". That means we are going to
+> +         * load the OpenSBI binary included in the QEMU source.
+> +         *
+> +         * We can't load the binary by default as it will break existing users
+> +         * as users are already loading their own firmware.
+> +         *
+> +         * Let's try to get everyone to specify the -bios option at all times,
+> +         * so then in the future we can make "-bios default" the default option
+> +         * if no -bios option is set without breaking anything.
+> +         */
+> +        firmware_filename = qemu_find_file(QEMU_FILE_TYPE_BIOS,
+> +                                           default_machine_firmware);
 
-There are currently two patterns for extracting a gzipped file
-in this test.  So, this is not a must, but maybe you'd prefer:
+This can return NULL if the file is not found (such as after a bad install) ...
 
----
-diff --git a/tests/acceptance/boot_linux_console.py b/tests/acceptance/boot_linux_console.py
-index bbc6b0683f..9f819e20e1 100644
---- a/tests/acceptance/boot_linux_console.py
-+++ b/tests/acceptance/boot_linux_console.py
-@@ -365,12 +365,8 @@ class BootLinuxConsole(Test):
-                       '0b7787305d9e40815c05a805266cc74ff356239e/qemu/riscv64/'
-                       'bbl_w_kernel.gz')
-         kernel_hash = 'c7f6cc7967975ad42dc61ee0535db01c9cbd0968'
--        kernel_path_gz = self.fetch_asset(kernel_url, asset_hash=kernel_hash)
--        kernel_path = self.workdir + "bbl_w_kernel"
--
--        with gzip.open(kernel_path_gz, 'rb') as f_in:
--            with open(kernel_path, 'wb') as f_out:
--                shutil.copyfileobj(f_in, f_out)
-+        kernel_path = self.fetch_asset(kernel_url, asset_hash=kernel_hash)
-+        uncompressed_kernel = archive.uncompress(kernel_path, self.workdir)
- 
-         initrd_url = ('https://github.com/groeck/linux-build-test/raw/'
-                       '8584a59ed9e5eb5ee7ca91f6d74bbb06619205b8/rootfs/'
-@@ -382,7 +378,7 @@ class BootLinuxConsole(Test):
-         self.vm.set_console()
-         kernel_command_line = (self.KERNEL_COMMON_COMMAND_LINE
-                                + 'console=ttyS0 noreboot')
--        self.vm.add_args('-kernel', kernel_path,
-+        self.vm.add_args('-kernel', uncompressed_kernel,
-                          '-initrd', initrd_path,
-                          '-append', kernel_command_line)
-         self.vm.launch()
----
-
+> +    } else {
+> +        firmware_filename = machine->firmware;
+> +    }
 > +
-> +        initrd_url = ('https://github.com/groeck/linux-build-test/raw/'
-> +                      '8584a59ed9e5eb5ee7ca91f6d74bbb06619205b8/rootfs/'
-> +                      'riscv64/rootfs.cpio.gz')
-> +        initrd_hash = 'f4867d263754961b6f626cdcdc0cb334c47e3b49'
-> +        initrd_path = self.fetch_asset(initrd_url, asset_hash=initrd_hash)
-> +
-> +        self.vm.set_machine('virt')
-> +        self.vm.set_console()
-> +        kernel_command_line = (self.KERNEL_COMMON_COMMAND_LINE
-> +                               + 'console=ttyS0 noreboot')
-> +        self.vm.add_args('-kernel', kernel_path,
-> +                         '-initrd', initrd_path,
-> +                         '-append', kernel_command_line)
-> +        self.vm.launch()
-> +        self.wait_for_console_pattern('Boot successful.')
-> +
-> +        self.exec_command_and_wait_for_pattern('cat /proc/cpuinfo',
-> +                                               'isa')
-> +        self.exec_command_and_wait_for_pattern('uname -a',
-> +                                               'sifive')
-> +        self.exec_command_and_wait_for_pattern('reboot',
-> +                                               'reboot: Restarting system')
-> -- 
-> 2.7.4
-> 
-> 
+> +    if (strcmp(firmware_filename, "none")) {
 
-It'd be nice to also add riscv64 to the target list in .travis.yaml
-"acceptance tests" job.
+... which will then crash here.
 
-Regards and many thanks for this contribution!
-- Cleber.
+> +        /* If not "none" load the firmware */
+> +        riscv_load_firmware(firmware_filename, firmware_load_addr);
+> +    }
+> +
+> +    if (!strcmp(machine->firmware, "default")) {
+> +        g_free(firmware_filename);
+> +    }
+> +}
+> +
+>  target_ulong riscv_load_firmware(const char *firmware_filename,
+>                                   hwaddr firmware_load_addr)
+>  {
+> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+> index ca53a9290d..71b8083c05 100644
+> --- a/hw/riscv/sifive_u.c
+> +++ b/hw/riscv/sifive_u.c
+> @@ -49,6 +49,8 @@
+>  
+>  #include <libfdt.h>
+>  
+> +#define BIOS_FILENAME "opensbi-riscv64-sifive_u-fw_jump.bin"
+> +
+>  static const struct MemmapEntry {
+>      hwaddr base;
+>      hwaddr size;
+> @@ -269,9 +271,8 @@ static void riscv_sifive_u_init(MachineState *machine)
+>      /* create device tree */
+>      create_fdt(s, memmap, machine->ram_size, machine->kernel_cmdline);
+>  
+> -    if (machine->firmware) {
+> -        riscv_load_firmware(machine->firmware, memmap[SIFIVE_U_DRAM].base);
+> -    }
+> +    riscv_find_and_load_firmware(machine, BIOS_FILENAME,
+> +                                 memmap[SIFIVE_U_DRAM].base);
+>  
+>      if (machine->kernel_filename) {
+>          riscv_load_kernel(machine->kernel_filename);
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index ecdc77d728..25faf3b417 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -44,6 +44,12 @@
+>  
+>  #include <libfdt.h>
+>  
+> +#if defined(TARGET_RISCV32)
+> +# define BIOS_FILENAME "opensbi-riscv32-virt-fw_jump.bin"
+> +#else
+> +# define BIOS_FILENAME "opensbi-riscv64-virt-fw_jump.bin"
+> +#endif
+> +
+>  static const struct MemmapEntry {
+>      hwaddr base;
+>      hwaddr size;
+> @@ -399,9 +405,8 @@ static void riscv_virt_board_init(MachineState *machine)
+>      memory_region_add_subregion(system_memory, memmap[VIRT_MROM].base,
+>                                  mask_rom);
+>  
+> -    if (machine->firmware) {
+> -        riscv_load_firmware(machine->firmware, memmap[VIRT_DRAM].base);
+> -    }
+> +    riscv_find_and_load_firmware(machine, BIOS_FILENAME,
+> +                                 memmap[VIRT_DRAM].base);
+>  
+>      if (machine->kernel_filename) {
+>          uint64_t kernel_entry = riscv_load_kernel(machine->kernel_filename);
+> diff --git a/include/hw/riscv/boot.h b/include/hw/riscv/boot.h
+> index daa179b600..d56f2ae3eb 100644
+> --- a/include/hw/riscv/boot.h
+> +++ b/include/hw/riscv/boot.h
+> @@ -20,6 +20,9 @@
+>  #ifndef RISCV_BOOT_H
+>  #define RISCV_BOOT_H
+>  
+> +void riscv_find_and_load_firmware(MachineState *machine,
+> +                                  const char *default_machine_firmware,
+> +                                  hwaddr firmware_load_addr);
+>  target_ulong riscv_load_firmware(const char *firmware_filename,
+>                                   hwaddr firmware_load_addr);
+>  target_ulong riscv_load_kernel(const char *kernel_filename);
+> diff --git a/qemu-deprecated.texi b/qemu-deprecated.texi
+> index c90b08d553..fff07bb2a3 100644
+> --- a/qemu-deprecated.texi
+> +++ b/qemu-deprecated.texi
+> @@ -121,6 +121,26 @@ the backing storage specified with @option{-mem-path} can actually provide
+>  the guest RAM configured with @option{-m} and QEMU will fail to start up if
+>  RAM allocation is unsuccessful.
+>  
+> +@subsection RISC-V -bios (since 4.1)
+> +
+> +QEMU 4.1 introduced support for the -bios option in QEMU for RISC-V for the
+> +RISC-V virt machine and sifive_u machine.
+> +
+> +QEMU 4.1 has no changes to the default behaviour to avoid breakages. This
+> +default will change in a future QEMU release, so please prepare now. All users
+> +of the virt or sifive_u machine must change their command line usage.
+> +
+> +QEMU 4.1 has three options, please migrate to one of these three:
+> + 1. ``-bios none`` - This is the current default behavior if no -bios option
+> +      is included. QEMU will not automatically load any firmware. It is up
+> +      to the user to load all the images they need.
+> + 2. ``-bios default`` - In a future QEMU release this will become the default
+> +      behaviour if no -bios option is specified. This option will load the
+> +      default OpenSBI firmware automatically. The firmware is included with
+> +      the QEMU release and no user interaction is required. All a user needs
+> +      to do is specify the kernel they want to boot with the -kernel option
+> + 3. ``-bios <file>`` - Tells QEMU to load the specified file as the firmwrae.
+> +
+>  @section QEMU Machine Protocol (QMP) commands
+>  
+>  @subsection block-dirty-bitmap-add "autoload" parameter (since 2.12.0)
 
