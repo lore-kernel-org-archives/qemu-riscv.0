@@ -1,58 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hlNWE-0000zd-Bq
-	for mharc-qemu-riscv@gnu.org; Wed, 10 Jul 2019 21:05:06 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:60427)
+	id 1hlNWX-0001cP-1t
+	for mharc-qemu-riscv@gnu.org; Wed, 10 Jul 2019 21:05:25 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:60531)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <groeck7@gmail.com>) id 1hlNW2-0000mb-QA
- for qemu-riscv@nongnu.org; Wed, 10 Jul 2019 21:05:04 -0400
+ (envelope-from <groeck7@gmail.com>) id 1hlNWK-0001Bw-Q4
+ for qemu-riscv@nongnu.org; Wed, 10 Jul 2019 21:05:22 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <groeck7@gmail.com>) id 1hlNVs-0003JH-VT
- for qemu-riscv@nongnu.org; Wed, 10 Jul 2019 21:04:54 -0400
-Received: from mail-pf1-x443.google.com ([2607:f8b0:4864:20::443]:37123)
+ (envelope-from <groeck7@gmail.com>) id 1hlNWA-0003c9-UO
+ for qemu-riscv@nongnu.org; Wed, 10 Jul 2019 21:05:12 -0400
+Received: from mail-pl1-x641.google.com ([2607:f8b0:4864:20::641]:41773)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <groeck7@gmail.com>)
- id 1hlNVY-0002ya-82; Wed, 10 Jul 2019 21:04:25 -0400
-Received: by mail-pf1-x443.google.com with SMTP id 19so1909709pfa.4;
- Wed, 10 Jul 2019 18:04:24 -0700 (PDT)
+ id 1hlNVn-0003By-0m; Wed, 10 Jul 2019 21:04:41 -0400
+Received: by mail-pl1-x641.google.com with SMTP id m9so2076302pls.8;
+ Wed, 10 Jul 2019 18:04:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=sender:date:from:to:cc:subject:message-id:references:mime-version
  :content-disposition:in-reply-to:user-agent;
- bh=kI2z/r/F8kG/u3ONokx7PbjTIDA9B9vpkbxgyLya3O8=;
- b=PDd0GmAouGgzUkNfUQ+AUp1JIkRzgDivjFvKIDKwGjck6FOQn2wDLldV20DC28/U1u
- XtRLYobZ+vWiqkzbed0c18qA/OxaezRzTZOXyEKswI2U4cbJMHJ8z8XMFBqNcjWaIs+j
- 0HpMJtx1X3gek7wRLdBGEvqES2KocWkXtKDqZdQ2p+IJAWpLodS4xXWMrYLmZt59Zuyx
- OEV0zXLIgxT/nsGjsiU3Wkc6iRRIemho3+jSUonDtNptBfLayX4UXLa1N7SoynuOBrdI
- ArDebmByJgx/UjiC5EfOcglhXNE7BAvUixIfgxiGsU8SPW8TuJAVZ/bZ97NlzdxzX89w
- VADw==
+ bh=0H/wqK+97+E7/2C0v0UlAlXLSe6WYFo3pbcBcwLAanY=;
+ b=TKkKrWU+Kb1jOXUT4fBnOKQ743ll9oSB18RPAPppLMpb/MqSnCttH6vFKidKCi0DvP
+ hiNUq09WyAIuFUb7sdeerCjOo9B8QCYoQT+YwxaVG7xl95Sszt0G5SBPDYGk9/x0LK5P
+ 4PGonh7jrIdjXh3Fy4gQd5vPauFv7vcchdFEbYysW8B3gcNyzpCXhXqcloRyQRkmH+9g
+ UgJgD0rDbCCo2TM3INP1oiREgvZgrVAU5HlKkyIcz8GZA+7DNqN09N2rm/xEV35THxGK
+ G9rvq61C5IdYLOSXVHVZeShavn17rFsbYc3RKEZRqw4ez9JMgH/yOp8Wlb6Edi5U+do+
+ 4Dgw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:sender:date:from:to:cc:subject:message-id
  :references:mime-version:content-disposition:in-reply-to:user-agent;
- bh=kI2z/r/F8kG/u3ONokx7PbjTIDA9B9vpkbxgyLya3O8=;
- b=IBxYhmrMxXOJboJ4t/pP+w/UsPoMrNXNZcyC26NFfVlZG0+C6J9mTsFN/ylNn7LlSy
- d7tGRTxhkFnzw3bE3t21OCjAsRlqYhlMppOGVngnNoTv3nA9/Pg2zYY+O8wFQVXwVyKc
- SOD3aZ0lOhOmA8c1fjhSHn+17xvNHHwLr9rgoyswO1fFHqwS7cL/XefX++6wv4TAkrWS
- pjb3aKqZTmRmu5MTcR+hoTwXZA/9sAkShjo9RwFSEldBp1YBVI3ujyT8e+ziRj1IHXwT
- jRWTdcYrM4DIhp2N9mBJQCyfYut+IZJhiz1WPyGuoztbTDVoRm5tGTLF0AgBDLj3iudX
- 8tNg==
-X-Gm-Message-State: APjAAAVgb211zEJdrEezZ8TJoegeBex+MlO4uWUn5CoaDPZe9BoLu06F
- 6TIhrTE9HMoXS8LKdXx12es=
-X-Google-Smtp-Source: APXvYqzorc1kAT349tAKvjqlcReFTyKIa92eZIJrjxvTumZg29D1BTJun8sAJzNqnH8M7eTOOdwj9A==
-X-Received: by 2002:a63:2807:: with SMTP id o7mr1295492pgo.219.1562807061447; 
- Wed, 10 Jul 2019 18:04:21 -0700 (PDT)
+ bh=0H/wqK+97+E7/2C0v0UlAlXLSe6WYFo3pbcBcwLAanY=;
+ b=ati77gmmU1vfH2S4NJod42xLwbJBmc+H7siACAY9QHOUiFeDe0KuURoFn8qvffaaAe
+ 5qtgfeQmgaDrn4YESaLEOJnQTTGgCxk0BEGOryZuuzuwdauaOKPHjxyYL4KETLrvL152
+ bNfAGBquHbS+sz2G5gOYzXU6bryDozrzno2r4MTPQdGsGXKLkHMqW0QqQ/OF325BkBOt
+ 77d4uL/hvHY+NwkomIxNtHZPTFxj5BHtY12mNlyEMJtHSc7xQSkfxTkBHpyDrG7rGIKf
+ S+v4xVVeTKWnzm65tHHhg2+Nu4snbcqVj9wst5xpmAKEuVsINgwNNN28X+knAkpLgUqu
+ n31w==
+X-Gm-Message-State: APjAAAVGAymiCYz68q3MpUppSxtIlvx9GeZs2hliq94b/6TUi+Bx+0wd
+ VWVrdIhLiyX3FqN8vMUrOVE=
+X-Google-Smtp-Source: APXvYqx9auy8CdD6sckmozg1E6nkGJMMj8DQnd0s0bSiRVeCnHpIoJxWjUn6qs0S2JZR65FnPK3S5w==
+X-Received: by 2002:a17:902:d81:: with SMTP id 1mr1357461plv.323.1562807074855; 
+ Wed, 10 Jul 2019 18:04:34 -0700 (PDT)
 Received: from localhost ([2600:1700:e321:62f0:329c:23ff:fee3:9d7c])
- by smtp.gmail.com with ESMTPSA id s24sm3717767pfh.133.2019.07.10.18.04.19
+ by smtp.gmail.com with ESMTPSA id t11sm2954909pgp.1.2019.07.10.18.04.33
  (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
- Wed, 10 Jul 2019 18:04:20 -0700 (PDT)
+ Wed, 10 Jul 2019 18:04:33 -0700 (PDT)
 Sender: Guenter Roeck <groeck7@gmail.com>
-Date: Wed, 10 Jul 2019 18:04:18 -0700
+Date: Wed, 10 Jul 2019 18:04:32 -0700
 From: Guenter Roeck <linux@roeck-us.net>
 To: Alistair Francis <alistair.francis@wdc.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, palmer@sifive.com,
  alistair23@gmail.com, peter.maydell@linaro.org, codyprime@gmail.com,
  anup@brainfault.org, stefanha@redhat.com, pbonzini@redhat.com,
  bmeng.cn@gmail.com
-Message-ID: <20190711010418.GA707@roeck-us.net>
+Message-ID: <20190711010432.GB707@roeck-us.net>
 References: <cover.1562803960.git.alistair.francis@wdc.com>
  <1ef8cbbcf0c74fe423019eb91d58543b7778e062.1562803960.git.alistair.francis@wdc.com>
 MIME-Version: 1.0
@@ -62,7 +62,7 @@ In-Reply-To: <1ef8cbbcf0c74fe423019eb91d58543b7778e062.1562803960.git.alistair.f
 User-Agent: Mutt/1.5.24 (2015-08-30)
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::443
+X-Received-From: 2607:f8b0:4864:20::641
 Subject: Re: [Qemu-riscv] [PATCH v2 1/2] roms: Add OpenSBI version 0.4
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -75,7 +75,7 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Jul 2019 01:05:04 -0000
+X-List-Received-Date: Thu, 11 Jul 2019 01:05:22 -0000
 
 On Wed, Jul 10, 2019 at 05:14:04PM -0700, Alistair Francis wrote:
 > Add OpenSBI version 0.4 as a git submodule and as a prebult binary.
@@ -100,7 +100,7 @@ On Wed, Jul 10, 2019 at 05:14:04PM -0700, Alistair Francis wrote:
 > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 > Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
 
-Reviewed-by: Guenter Roeck <linux@roeck-us.net>
+Tested-by: Guenter Roeck <linux@roeck-us.net>
 
 > ---
 >  .gitmodules                                  |   3 ++
