@@ -1,63 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hlMFE-00013E-J8
-	for mharc-qemu-riscv@gnu.org; Wed, 10 Jul 2019 19:43:28 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37691)
+	id 1hlMlk-0007Ro-SE
+	for mharc-qemu-riscv@gnu.org; Wed, 10 Jul 2019 20:17:04 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47676)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <alistair23@gmail.com>) id 1hlMFA-00011q-K5
- for qemu-riscv@nongnu.org; Wed, 10 Jul 2019 19:43:26 -0400
+ (envelope-from <prvs=088e9cfd1=alistair.francis@wdc.com>)
+ id 1hlMli-0007OR-Cf
+ for qemu-riscv@nongnu.org; Wed, 10 Jul 2019 20:17:03 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1hlMF9-0006yU-GW
- for qemu-riscv@nongnu.org; Wed, 10 Jul 2019 19:43:24 -0400
-Received: from mail-lj1-x243.google.com ([2a00:1450:4864:20::243]:39959)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1hlMF8-0006ve-Tw; Wed, 10 Jul 2019 19:43:23 -0400
-Received: by mail-lj1-x243.google.com with SMTP id m8so3819130lji.7;
- Wed, 10 Jul 2019 16:43:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=DfhVHYSytc0MgA0TW7DwzRhmzhW67lpM3yCAcd655Kw=;
- b=D+uw66L22Ir1xjEZPyaQPa+POoAwPXMNKwGFH3WVHYTXP3/UH+MTViw1SUUzebqjNz
- uYv+pSJAfvNPvFcf6CTXAN2D9c5gahJyLV+0a+u6Mk4pYlTdXMTdA/F4/Pv6zkZSfUKH
- XlW5+/BFucu/WwNV3s2D0a9DMvXs9i82Fx+dNBFp2lPwmPaLJGnra8iyQPvt+o8iTRVe
- denI+ZTvdSQa9htnlBiLxr95tTJPxwgVe41QUR/foL3ygzUQ0aW67s/grwZcgiVAl58C
- kpOlEJ+T8CFxBch8m3Vy5gTFHPpOZ07RWBX2sNROuPaZ9oLmmS8cvknMp6BohF5s+YY+
- GfKg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=DfhVHYSytc0MgA0TW7DwzRhmzhW67lpM3yCAcd655Kw=;
- b=q6HVJ9BX7YrTar8Iz25dfRfpufg3Lrt210uwT4S/WUCFmz0xcPF5er5UEr1ThaNWqx
- HobDJJTns9JrkAeBLU1E4qrqT4yQJQThV/0FQU7ak/imSD+N7xN8mXA3biC9HvGvCMO+
- 3SnNI3vY14xGkrSHDDJpIfWvbMBSd0DOF280rrQ6weEnE2d7ZIkVTkZ4hRRQqslNjBdR
- 1HbY2XsTiEk9/BR8pIF+V1EKyiNlGLSjdXZJrelyjOLZyWsGCA8uVWcAcTVqkfj3XIE7
- W7QOGsIAylLZ6UrYnJvePjlrIAceKdGOJAtnH7O9MjYBc9bs3Ta4pHiplobKZhtle5SM
- Abdw==
-X-Gm-Message-State: APjAAAWOsksAvOvLewZuBPsIDA4VJ3dQJx3wyIQ5m7i3zzckuIlqS5Is
- i0Fz841yXJ95yKWJ3G80PFCS8ijLYJpdGId2zIc=
-X-Google-Smtp-Source: APXvYqwTPk3DJ3xGzlJVRW8xEkJiq9/ROPnpePoY9j5lznmf+SW6ZwLD18ZcnELiqYC73okKWzvLPJ1gJCv0ciM3LLU=
-X-Received: by 2002:a2e:86cc:: with SMTP id n12mr467631ljj.146.1562802200656; 
- Wed, 10 Jul 2019 16:43:20 -0700 (PDT)
+ (envelope-from <prvs=088e9cfd1=alistair.francis@wdc.com>)
+ id 1hlMlh-0004Er-6I
+ for qemu-riscv@nongnu.org; Wed, 10 Jul 2019 20:17:02 -0400
+Received: from esa4.hgst.iphmx.com ([216.71.154.42]:33483)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <prvs=088e9cfd1=alistair.francis@wdc.com>)
+ id 1hlMle-00043Y-28; Wed, 10 Jul 2019 20:16:58 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1562804218; x=1594340218;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=iJakTHifpUX7sP4t7RCs+ZOYW8GQuYlCP1wr5W3XNQQ=;
+ b=NSBUdhai4RWDhPnVqWTS2lVx/HB9R5dL1jQX7qAbuJFVM5aEJQg+gRGB
+ Pi+9A9jhrwta9gbzKxJNROxJQW4pcwj6Zuv+gCqywvzvICEh/LdM0UC7I
+ q8R+dIJymk9nLU2D3FvVNP5EI01MZMLUVx7Hw+RLht3EJENwvIkiyMVU7
+ 9Vmtf/5zRgcl/0r7Ylq6JFM5ee/GOG/MtQMLNyURO3h/P4xQVNaY3+5c3
+ 3UqTIMHir5ZKvNfOLquqME/DSPqbBYaTWOuTbfF7wdgFOfA869c4jPQVj
+ ctEO4x6XKGxT5DWtgGgTVuTefsvuGNL3JDe5dXg/NiW98jFtl9dKnR6Z1 A==;
+IronPort-SDR: 2MxN2X9UUu6Q+tu95Zl3+wh1j8pswLu4CuanEi6+AZk/oOho5YLvZxKIEUJYjmVO9R4CZt5rgP
+ jG+1rfJrFUnT9h7MApMESdze2K42QIirgCDhibyJ84bt3fONKljO7KqzIcXEa1jiX+wRgLrYc2
+ hzZgqOBpd1xekP6+T4CmI1yTVixE+k3vvXPy9uV31jUCXjikZ/okWpV13vYjbG75UdpOrZwVdi
+ h2q2QWuUI9Vl+svO3tHrqQKmo+ar4QBIPCky5RIe2N5RGFn6M8P44UmulmoC7/S/1mb+IgEvTz
+ jDg=
+X-IronPort-AV: E=Sophos;i="5.63,476,1557158400"; d="scan'208";a="112725454"
+Received: from h199-255-45-14.hgst.com (HELO uls-op-cesaep01.wdc.com)
+ ([199.255.45.14])
+ by ob1.hgst.iphmx.com with ESMTP; 11 Jul 2019 08:16:48 +0800
+IronPort-SDR: hgmjOd7divxrZY7vOoph8/dcNyB6+JBeujBfGEF+b/LBZwwAq1Pily54grtMKHOSeozL65qTKJ
+ TlqVbBQCEw2D322DGxvqQgOemaFbVVwuMzYIRUV9+0zrKKYijdHD0jkGWNXzVxiMQoysLGigG5
+ m4KRH9F/TdSwnKFTx96plofJFYuHPDZpYURmqIVGdSZJEmcTsLvhodVo+vlcRTXleKEy1r2vsX
+ qYrbydCp8KJnZg8KDG5BLNGsmgGwN0eF3cqBttKSoNnevFcsquF7rSy1kVtjgqWHfQoJ/TvSIs
+ vLWfQdcauixSsqIuve3QO0H5
+Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
+ by uls-op-cesaep01.wdc.com with ESMTP; 10 Jul 2019 17:15:32 -0700
+IronPort-SDR: 55+1A/Ns0YKLXv7Hss4fMudEgG1HhvtiZFxwnq8qYCJabkqNOnCG5N7RxI7KutOSZIb+Z5vDjh
+ BlPAhUe5aSIJkdf7zEy1HJJxVylKso8r/SpI0iUWtn+TmlXy1dLIXRarjnJrQBv464QKmuKpnk
+ GYzvmmVCrtUJAk0Onm9Q3u35ol4wGavlBGmwCfrPrzabxTUMn20m4H2JtXWHIEhkHA9d1vT53K
+ oLhv5W86ynw+4x5q6gOrP+Nb2LMj1R6tAR1X38fucSudxpAgbOnqBc+66K/zif0miQO9mLkDOJ
+ VR0=
+Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
+ risc6-mainframe.int.fusionio.com) ([10.196.157.140])
+ by uls-op-cesaip01.wdc.com with ESMTP; 10 Jul 2019 17:16:47 -0700
+From: Alistair Francis <alistair.francis@wdc.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: palmer@sifive.com, alistair.francis@wdc.com, alistair23@gmail.com,
+ linux@roeck-us.net, peter.maydell@linaro.org, codyprime@gmail.com,
+ anup@brainfault.org, stefanha@redhat.com, pbonzini@redhat.com,
+ bmeng.cn@gmail.com
+Date: Wed, 10 Jul 2019 17:14:02 -0700
+Message-Id: <cover.1562803960.git.alistair.francis@wdc.com>
+X-Mailer: git-send-email 2.22.0
 MIME-Version: 1.0
-References: <1558108285-19571-1-git-send-email-bmeng.cn@gmail.com>
- <1558108285-19571-2-git-send-email-bmeng.cn@gmail.com>
- <9338c7b4-6a05-2189-b93d-25cb2bd4dd54@adacore.com>
-In-Reply-To: <9338c7b4-6a05-2189-b93d-25cb2bd4dd54@adacore.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 10 Jul 2019 16:40:07 -0700
-Message-ID: <CAKmqyKPXVseNcpVBNOLONq2M6jzsSL_CDsX+1xhupvis3_8amA@mail.gmail.com>
-To: Fabien Chouteau <chouteau@adacore.com>
-Cc: Bin Meng <bmeng.cn@gmail.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Alistair Francis <Alistair.Francis@wdc.com>, 
- Palmer Dabbelt <palmer@sifive.com>
-Content-Type: text/plain; charset="UTF-8"
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2a00:1450:4864:20::243
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH 2/2] riscv: sifive_u: Update
- the plic hart config to support multicore
+Content-Transfer-Encoding: 8bit
+X-detected-operating-system: by eggs.gnu.org: FreeBSD 9.x
+X-Received-From: 216.71.154.42
+Subject: [Qemu-riscv] [PATCH v2 0/2]  RISC-V: Add default OpenSBI ROM
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -69,58 +76,66 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Jul 2019 23:43:26 -0000
+X-List-Received-Date: Thu, 11 Jul 2019 00:17:03 -0000
 
-On Mon, Jul 8, 2019 at 9:32 AM Fabien Chouteau <chouteau@adacore.com> wrote:
->
-> Hi Bin,
->
-> Thanks for this patch.
->
-> I know I am very late to the game but I have a comment here.
->
-> On 17/05/2019 17:51, Bin Meng wrote:
-> > +    /* create PLIC hart topology configuration string */
-> > +    plic_hart_config_len = (strlen(SIFIVE_U_PLIC_HART_CONFIG) + 1) * smp_cpus;
-> > +    plic_hart_config = g_malloc0(plic_hart_config_len);
-> > +    for (i = 0; i < smp_cpus; i++) {
-> > +        if (i != 0) {
-> > +            strncat(plic_hart_config, ",", plic_hart_config_len);
-> > +        }
-> > +        strncat(plic_hart_config, SIFIVE_U_PLIC_HART_CONFIG,
-> > +                plic_hart_config_len);
-> > +        plic_hart_config_len -= (strlen(SIFIVE_U_PLIC_HART_CONFIG) + 1);
-> > +    }
-> > +
->
-> This will create up to 4 MS PLIC devices. However on the Unleashed FU540 the PLICs are M,MS,MS,MS,MS because of the monitor hart #0.
->
-> This means a different memory layout than the real hardware.
->
-> For instance address 0x0C00_2080 will be hart #0 S-Mode interrupt enables in QEMU, instead of #1 M-Mode interrupt enables for the real hardware.
->
-> To fix this I suggest to change this loop to:
->
->     for (i = 0; i < smp_cpus; i++) {
->         if (i != 0) {
->             strncat(plic_hart_config, "," SIFIVE_U_PLIC_HART_CONFIG,
->                     plic_hart_config_len);
->         } else {
->             strncat(plic_hart_config, "M", plic_hart_config_len);
->         }
->         plic_hart_config_len -= (strlen(SIFIVE_U_PLIC_HART_CONFIG) + 1);
->     }
->
-> This will make hart #0 PLIC in M mode and the others in MS.
->
-> What do you think?
+This series includes the OpenSBI firmware for QEMU RISC-V users.
 
-I think I understand what you mean, in which case I also think you are
-correct. Do you want to send a patch and we can discuss there?
+To avoid breakages we have not changed the default behaviour of QEMU.
+The plan is to change the default though, which is why an entry to the
+qemu-deprecated.texi file has been added as well as a new warning.
 
-Alistair
+After this series QEMU 4.1 has three options:
+ 1. ``-bios none`` - This is the current default behavior if no -bios option
+      is included. QEMU will not automatically load any firmware. It is up
+      to the user to load all the images they need.
+ 2. ``-bios default`` - In a future QEMU release this will become the default
+      behaviour if no -bios option is specified. This option will load the
+      default OpenSBI firmware automatically. The firmware is included with
+      the QEMU release and no user interaction is required. All a user needs
+      to do is specify the kernel they want to boot with the -kernel option
+ 3. ``-bios <file>`` - Tells QEMU to load the specified file as the firmwrae.
 
->
-> Best regards,
->
+All users should transition to using a -bios option. We can start
+updating all documentation after the release of 4.1.
+
+At the end of this series and the transition period we are in the good
+place of no longer requiring users to build firmware to boot a kernel.
+Instead users can just run QEMU with the -kernel option and everything
+will work. They can also override the firmware with their own using
+the -bios option. Using "-bios none" will result in no firmware being
+loaded (as it is today).
+
+The commits can be found here: https://github.com/alistair23/qemu/tree/mainline/alistair/opensbi.next
+
+v2:
+ - Error and exit if we can't load the default firmware
+
+
+Alistair Francis (2):
+  roms: Add OpenSBI version 0.4
+  hw/riscv: Load OpenSBI as the default firmware
+
+ .gitmodules                                  |   3 ++
+ LICENSE                                      |  21 +++++---
+ Makefile                                     |   5 +-
+ hw/riscv/boot.c                              |  54 +++++++++++++++++++
+ hw/riscv/sifive_u.c                          |   7 +--
+ hw/riscv/virt.c                              |  11 ++--
+ include/hw/riscv/boot.h                      |   3 ++
+ pc-bios/README                               |  11 ++++
+ pc-bios/opensbi-riscv32-virt-fw_jump.bin     | Bin 0 -> 36888 bytes
+ pc-bios/opensbi-riscv64-sifive_u-fw_jump.bin | Bin 0 -> 40968 bytes
+ pc-bios/opensbi-riscv64-virt-fw_jump.bin     | Bin 0 -> 40968 bytes
+ qemu-deprecated.texi                         |  20 +++++++
+ roms/Makefile                                |  48 ++++++++++++-----
+ roms/opensbi                                 |   1 +
+ 14 files changed, 157 insertions(+), 27 deletions(-)
+ create mode 100755 pc-bios/opensbi-riscv32-virt-fw_jump.bin
+ create mode 100755 pc-bios/opensbi-riscv64-sifive_u-fw_jump.bin
+ create mode 100755 pc-bios/opensbi-riscv64-virt-fw_jump.bin
+ create mode 160000 roms/opensbi
+
+-- 
+2.22.0
+
 
