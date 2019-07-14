@@ -1,68 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hlaSw-0007SU-Nm
-	for mharc-qemu-riscv@gnu.org; Thu, 11 Jul 2019 10:54:34 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:41778)
+	id 1hmV6F-0006zi-V8
+	for mharc-qemu-riscv@gnu.org; Sat, 13 Jul 2019 23:22:55 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49043)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <philmd@redhat.com>) id 1hlaSu-0007Rg-8Q
- for qemu-riscv@nongnu.org; Thu, 11 Jul 2019 10:54:33 -0400
+ (envelope-from <bmeng.cn@gmail.com>) id 1hmV6E-0006zc-AQ
+ for qemu-riscv@nongnu.org; Sat, 13 Jul 2019 23:22:55 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <philmd@redhat.com>) id 1hlaSs-0008Nj-VH
- for qemu-riscv@nongnu.org; Thu, 11 Jul 2019 10:54:32 -0400
-Received: from mail-wm1-f66.google.com ([209.85.128.66]:51974)
+ (envelope-from <bmeng.cn@gmail.com>) id 1hmV6D-0002HD-AG
+ for qemu-riscv@nongnu.org; Sat, 13 Jul 2019 23:22:54 -0400
+Received: from mail-ed1-x541.google.com ([2a00:1450:4864:20::541]:38030)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <philmd@redhat.com>) id 1hlaSs-0008N8-On
- for qemu-riscv@nongnu.org; Thu, 11 Jul 2019 10:54:30 -0400
-Received: by mail-wm1-f66.google.com with SMTP id 207so6014891wma.1
- for <qemu-riscv@nongnu.org>; Thu, 11 Jul 2019 07:54:30 -0700 (PDT)
+ (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
+ id 1hmV6D-0002EZ-34; Sat, 13 Jul 2019 23:22:53 -0400
+Received: by mail-ed1-x541.google.com with SMTP id r12so12366817edo.5;
+ Sat, 13 Jul 2019 20:22:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=Q08jYk21ViY8XgmFrkgiDweXa0UOtGJGIiHOB+F8ez4=;
+ b=SOx4d1RtgKGlPEYklSi415+eZcmTCC3oyPfUiCbHPwW5OF9XnycOYHw/1JNkYkl7Y2
+ 42cYqRf89fxWrWgFYTDTSzhNDx/dO+AfzlnoO2sCJAwncXKd/sX3YNl4BUvg8JZ1344F
+ z4Bj23NQ/qvyEQX18KtC9Rxw7RXLt1ki++m8jhFeqaZjetYZbDRm/ouYLSFwNC63SSNp
+ phJZVH4rHbYuqKXxK+W6xUHDy1DFZ/9+MfMJK+LQm5D3qJHt0KIdS8CYv7QJdWSCSJgx
+ HLJ3wxpmtNy3EAUmgmqcMc6arVnIWreRh/dwh+ENPnXg61vXvP4+36/7rESeoAv6MutA
+ FifA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
- :date:user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=/6MeRYrRwqCtEhEaB9G/1CulgLNtUGvQmksO0T+gDvU=;
- b=g4IGqIVkG3RsNq5rRV/oaiDVX7u9lo1l2gnPBnAcR5XWd+B+Jhh/ljuEbOOvKK0YD4
- noXBvajdm469M9N8iEXS6IK5CtSP5gB7tLwv4qVc4wmz16y5sTG0VxU3wCEkvWP/iZka
- I6nlWQBL2+kNX5UtRL7qLcVWHwA6nxq4ev9QhjmlXcOXFoq8JAfe9OLUVkbd0BbbDAn9
- uUFRIkwAob1x/ZQz0Og0iuprwM4YZ3NaZgqsOwNPBI/oq5ZBBbW+1b4quNDcBOuDPI1G
- dJVS/ZUCzpuiXpXej2892SmB7ckxkbwp7xgwr5AHCshgOSvr8QoIFGSoCoGOT6xRT3aE
- PtGA==
-X-Gm-Message-State: APjAAAVnlrTOqPYCpaPugGwr7zSd+aqjkKKXSlYmg2jhadn1agMOKcsv
- VhlRnumcy691DA4JPyoJRVK7VA==
-X-Google-Smtp-Source: APXvYqx/D0Ft7Vf3CoOfC6h/1Ov2SRupSDr6w6ECrWCgEDvHQppwhE/z9gRaeQ3rGNIATH9J9ifB9w==
-X-Received: by 2002:a1c:a101:: with SMTP id k1mr4796831wme.98.1562856869187;
- Thu, 11 Jul 2019 07:54:29 -0700 (PDT)
-Received: from [192.168.1.103] (62.red-83-42-61.dynamicip.rima-tde.net.
- [83.42.61.62])
- by smtp.gmail.com with ESMTPSA id j33sm10014882wre.42.2019.07.11.07.54.28
- (version=TLS1_3 cipher=AEAD-AES128-GCM-SHA256 bits=128/128);
- Thu, 11 Jul 2019 07:54:28 -0700 (PDT)
-To: Alistair Francis <alistair23@gmail.com>
-Cc: Chih-Min Chao <chihmin.chao@sifive.com>,
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, Cleber Rosa <crosa@redhat.com>,
- Cornelia Huck <cohuck@redhat.com>, Eduardo Habkost <ehabkost@redhat.com>,
- Caio Carrara <ccarrara@redhat.com>, =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?=
- <f4bug@amsat.org>
-References: <1562781026-27570-1-git-send-email-chihmin.chao@sifive.com>
- <57c27698-c9ee-72f9-7074-0c0eee2ab275@redhat.com>
- <CAKmqyKNbPs9d3_BCkB2=E21TgWdTeTd5K=cZxQhAoCs3TZJkqA@mail.gmail.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>
-Openpgp: id=89C1E78F601EE86C867495CBA2A3FD6EDEADC0DE;
- url=http://pgp.mit.edu/pks/lookup?op=get&search=0xA2A3FD6EDEADC0DE
-Message-ID: <ebb45913-aaa5-1198-56eb-df98671b2bdb@redhat.com>
-Date: Thu, 11 Jul 2019 16:54:27 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.7.0
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=Q08jYk21ViY8XgmFrkgiDweXa0UOtGJGIiHOB+F8ez4=;
+ b=hIimuGw/LzM2q2QOYG099xdymGi5lch6xlGxmlncTezbdSLJWI9PPMImiDpK0kzpc0
+ MswAeRyGyYM0EpiWH1vmjuXyWmdhHG9kA5c3u9aBUU76kKhcagZn1oKg+x5OJcRtuKR/
+ PBoIuw+9VVdkjBiazh3OeeROIFDIykOhYpzmBKvYwOP9g5l9J1AKWmecXz1g11H/rk3d
+ KHEQdEvgflKJX6w8tdApraotzK3mUvh502hsRBm2M+b9xGRtQMjxRW8uMTGaoX+w+H+X
+ 2h2SdjqwIOE+BoM1QSQtVHSdWSiOe/fIMeREPfWMpdq94pEkzVC0x23nEW0sIhoCQyp4
+ fg9A==
+X-Gm-Message-State: APjAAAVJWU+fhxgwij2VN6KhlHDVRm/6WzwH3Q+J/NOBJ+Y1a264bOk+
+ VW2FQI+wnXadq3P0hVOMtZqlF7/j/w4Wl0rDEY2i+Jrq
+X-Google-Smtp-Source: APXvYqz6F+JrDB6jRL9xZXNKfnMAlN7NdSQmHKNA12/Ah74h99EDSKIBq4pyx64Nmpzkvx7PAq9X9a+LJZ1dGy5JiAc=
+X-Received: by 2002:aa7:d6d3:: with SMTP id x19mr16587926edr.119.1563074571668; 
+ Sat, 13 Jul 2019 20:22:51 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <CAKmqyKNbPs9d3_BCkB2=E21TgWdTeTd5K=cZxQhAoCs3TZJkqA@mail.gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
- [fuzzy]
-X-Received-From: 209.85.128.66
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH] tests/boot_linux_console: add
- a test for riscv64 + virt
+References: <1558108285-19571-1-git-send-email-bmeng.cn@gmail.com>
+ <1558108285-19571-2-git-send-email-bmeng.cn@gmail.com>
+ <9338c7b4-6a05-2189-b93d-25cb2bd4dd54@adacore.com>
+In-Reply-To: <9338c7b4-6a05-2189-b93d-25cb2bd4dd54@adacore.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Sun, 14 Jul 2019 11:22:41 +0800
+Message-ID: <CAEUhbmUtdvkYPm4DZL4MSeV5imaj82x2xtPkQ0yLKF599N=vXw@mail.gmail.com>
+To: Fabien Chouteau <chouteau@adacore.com>
+Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ Palmer Dabbelt <palmer@sifive.com>
+Content-Type: text/plain; charset="UTF-8"
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2a00:1450:4864:20::541
+Subject: Re: [Qemu-riscv] [PATCH 2/2] riscv: sifive_u: Update the plic hart
+ config to support multicore
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -74,112 +69,64 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Jul 2019 14:54:33 -0000
+X-List-Received-Date: Sun, 14 Jul 2019 03:22:55 -0000
 
-On 7/11/19 4:43 PM, Alistair Francis wrote:
-> On Thu, Jul 11, 2019 at 6:56 AM Philippe Mathieu-Daudé
-> <philmd@redhat.com> wrote:
->>
->> Hi Chih-Min,
->>
->> On 7/10/19 7:50 PM, Chih-Min Chao wrote:
->>> Similar to the mips + malta test, it boots a Linux kernel on a virt
->>> board and verify the serial is working.  Also, it relies on the serial
->>> device set by the machine itself.
->>
->> Good idea!
->>
->>>
->>> If riscv64 is a target being built, "make check-acceptance" will
->>> automatically include this test by the use of the "arch:riscv64" tags.
->>>
->>> Alternatively, this test can be run using:
->>>
->>>   $ avocado run -t arch:riscv64 tests/acceptance
->>>
->>> Signed-off-by: Chih-Min Chao <chihmin.chao@sifive.com>
->>> ---
->>>  tests/acceptance/boot_linux_console.py | 40 ++++++++++++++++++++++++++++++++++
->>>  1 file changed, 40 insertions(+)
->>>
->>> diff --git a/tests/acceptance/boot_linux_console.py b/tests/acceptance/boot_linux_console.py
->>> index 3215950..bbc6b06 100644
->>> --- a/tests/acceptance/boot_linux_console.py
->>> +++ b/tests/acceptance/boot_linux_console.py
->>> @@ -354,3 +354,43 @@ class BootLinuxConsole(Test):
->>>          self.vm.launch()
->>>          console_pattern = 'Kernel command line: %s' % kernel_command_line
->>>          self.wait_for_console_pattern(console_pattern)
->>> +
->>> +    def test_riscv64_virt(self):
->>> +        """
->>> +        :avocado: tags=arch:riscv64
->>> +        :avocado: tags=machine:virt
->>> +        """
->>> +
->>> +        kernel_url = ('https://github.com/chihminchao/test-binary/raw/'
->>> +                      '0b7787305d9e40815c05a805266cc74ff356239e/qemu/riscv64/'
->>> +                      'bbl_w_kernel.gz')
->>
->> I recommend you to extract fw_jump.elf from [1] and
->> vmlinux-4.19.0-5-riscv64 from [2] with the extract_from_deb() helper.
->>
->> [1] https://packages.debian.org/sid/all/opensbi
->> [2] https://packages.debian.org/sid/linux-image-4.19.0-5-riscv64
-> 
-> This will works as well if you don't want to bother building the
-> images yourself. Ideally we could use a newer kernel then 4.19 but for
-> an acceptance test it probably doesn't matter much.
+Hi Fabien,
 
-This one is available in 'experimental', in case you want to test it
-too, but I'd rather use some stable channel for testing:
+On Tue, Jul 9, 2019 at 12:31 AM Fabien Chouteau <chouteau@adacore.com> wrote:
+>
+> Hi Bin,
+>
+> Thanks for this patch.
+>
+> I know I am very late to the game but I have a comment here.
+>
+> On 17/05/2019 17:51, Bin Meng wrote:
+> > +    /* create PLIC hart topology configuration string */
+> > +    plic_hart_config_len = (strlen(SIFIVE_U_PLIC_HART_CONFIG) + 1) * smp_cpus;
+> > +    plic_hart_config = g_malloc0(plic_hart_config_len);
+> > +    for (i = 0; i < smp_cpus; i++) {
+> > +        if (i != 0) {
+> > +            strncat(plic_hart_config, ",", plic_hart_config_len);
+> > +        }
+> > +        strncat(plic_hart_config, SIFIVE_U_PLIC_HART_CONFIG,
+> > +                plic_hart_config_len);
+> > +        plic_hart_config_len -= (strlen(SIFIVE_U_PLIC_HART_CONFIG) + 1);
+> > +    }
+> > +
+>
+> This will create up to 4 MS PLIC devices. However on the Unleashed FU540 the PLICs are M,MS,MS,MS,MS because of the monitor hart #0.
+>
+> This means a different memory layout than the real hardware.
+>
+> For instance address 0x0C00_2080 will be hart #0 S-Mode interrupt enables in QEMU, instead of #1 M-Mode interrupt enables for the real hardware.
 
-https://packages.debian.org/experimental/linux-image-5.0.0-trunk-riscv64
+Thanks for the notes! I agree to better match the real hardware, it
+should be modeled like that. However I am not sure what the original
+intention was when creating the "sifive_u" machine. Both OpenSBI and
+U-Boot list sifive_u as a special target, instead of the real
+Unleashed board hence I assume this is a hypothetical target too, like
+the "virt", but was created to best match the real Unleashed board
+though.
 
-> This way Debain has done all the licence work for you as well :)
+>
+> To fix this I suggest to change this loop to:
+>
+>     for (i = 0; i < smp_cpus; i++) {
+>         if (i != 0) {
+>             strncat(plic_hart_config, "," SIFIVE_U_PLIC_HART_CONFIG,
+>                     plic_hart_config_len);
+>         } else {
+>             strncat(plic_hart_config, "M", plic_hart_config_len);
+>         }
+>         plic_hart_config_len -= (strlen(SIFIVE_U_PLIC_HART_CONFIG) + 1);
+>     }
+>
+> This will make hart #0 PLIC in M mode and the others in MS.
+>
+> What do you think?
 
-And all the building work ;)
 
-> 
-> Alistair
-> 
->>
->>> +        kernel_hash = 'c7f6cc7967975ad42dc61ee0535db01c9cbd0968'
->>> +        kernel_path_gz = self.fetch_asset(kernel_url, asset_hash=kernel_hash)
->>> +        kernel_path = self.workdir + "bbl_w_kernel"
->>> +
->>> +        with gzip.open(kernel_path_gz, 'rb') as f_in:
->>> +            with open(kernel_path, 'wb') as f_out:
->>> +                shutil.copyfileobj(f_in, f_out)
->>> +
->>> +        initrd_url = ('https://github.com/groeck/linux-build-test/raw/'
->>> +                      '8584a59ed9e5eb5ee7ca91f6d74bbb06619205b8/rootfs/'
->>> +                      'riscv64/rootfs.cpio.gz')
->>> +        initrd_hash = 'f4867d263754961b6f626cdcdc0cb334c47e3b49'
->>> +        initrd_path = self.fetch_asset(initrd_url, asset_hash=initrd_hash)
->>> +
->>> +        self.vm.set_machine('virt')
->>> +        self.vm.set_console()
->>> +        kernel_command_line = (self.KERNEL_COMMON_COMMAND_LINE
->>> +                               + 'console=ttyS0 noreboot')
->>> +        self.vm.add_args('-kernel', kernel_path,
->>> +                         '-initrd', initrd_path,
->>> +                         '-append', kernel_command_line)
->>
->> You might want to use '-no-reboot' here too.
->>
->>> +        self.vm.launch()
->>> +        self.wait_for_console_pattern('Boot successful.')
->>> +
->>> +        self.exec_command_and_wait_for_pattern('cat /proc/cpuinfo',
->>> +                                               'isa')
->>> +        self.exec_command_and_wait_for_pattern('uname -a',
->>> +                                               'sifive')
->>> +        self.exec_command_and_wait_for_pattern('reboot',
->>> +                                               'reboot: Restarting system')
->>
->> Regards,
->>
->> Phil.
->>
+Regards,
+Bin
 
