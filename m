@@ -1,66 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hn3ax-0003RC-Fd
-	for mharc-qemu-riscv@gnu.org; Mon, 15 Jul 2019 12:12:55 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:57619)
+	id 1hn3wO-0004GO-IU
+	for mharc-qemu-riscv@gnu.org; Mon, 15 Jul 2019 12:35:04 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:33839)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <cohuck@redhat.com>) id 1hn3au-0003Cg-3C
- for qemu-riscv@nongnu.org; Mon, 15 Jul 2019 12:12:53 -0400
+ (envelope-from <alistair23@gmail.com>) id 1hn3wL-0004Fz-K8
+ for qemu-riscv@nongnu.org; Mon, 15 Jul 2019 12:35:03 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <cohuck@redhat.com>) id 1hn3as-0002B5-Sp
- for qemu-riscv@nongnu.org; Mon, 15 Jul 2019 12:12:52 -0400
-Received: from mx1.redhat.com ([209.132.183.28]:7447)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <cohuck@redhat.com>)
- id 1hn3ak-00027d-Sv; Mon, 15 Jul 2019 12:12:43 -0400
-Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
- [10.5.11.22])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id B106030C31B8;
- Mon, 15 Jul 2019 16:12:41 +0000 (UTC)
-Received: from gondolin (dhcp-192-232.str.redhat.com [10.33.192.232])
- by smtp.corp.redhat.com (Postfix) with ESMTP id C05801001DD9;
- Mon, 15 Jul 2019 16:12:09 +0000 (UTC)
-Date: Mon, 15 Jul 2019 18:12:06 +0200
-From: Cornelia Huck <cohuck@redhat.com>
-To: Markus Armbruster <armbru@redhat.com>
-Cc: Philippe =?UTF-8?B?TWF0aGlldS1EYXVkw6k=?= <philmd@redhat.com>, Thomas
- Huth <thuth@redhat.com>, Peter Maydell <peter.maydell@linaro.org>, Collin
- Walling <walling@linux.ibm.com>, "open list\:RISC-V"
- <qemu-riscv@nongnu.org>, Eduardo Habkost <ehabkost@redhat.com>, Sagar
- Karandikar <sagark@eecs.berkeley.edu>, "Michael S. Tsirkin"
- <mst@redhat.com>, Helge Deller <deller@gmx.de>, Palmer Dabbelt
- <palmer@sifive.com>, Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>, QEMU
- Developers <qemu-devel@nongnu.org>, Aurelien Jarno <aurelien@aurel32.net>,
- "open list\:S390" <qemu-s390x@nongnu.org>, qemu-arm <qemu-arm@nongnu.org>,
- Alistair Francis <Alistair.Francis@wdc.com>, Gerd Hoffmann
- <kraxel@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>, qemu-ppc
- <qemu-ppc@nongnu.org>, Richard Henderson <rth@twiddle.net>, Artyom
- Tarasenko <atar4qemu@gmail.com>, David Gibson <david@gibson.dropbear.id.au>
-Message-ID: <20190715181206.3cb1db93.cohuck@redhat.com>
-In-Reply-To: <87a7dfth4i.fsf@dusky.pond.sub.org>
-References: <20190715095545.28545-1-philmd@redhat.com>
- <20190715095545.28545-2-philmd@redhat.com>
- <ca528cdc-6118-0b2f-c1b8-30b06875dde8@redhat.com>
- <CAFEAcA-wgTVfj0TUJ=piP0wEgLGiNpOYia5DK2GQAO4Q7gNaWg@mail.gmail.com>
- <6d69e8ad-d720-ce04-20f2-a03193903078@redhat.com>
- <20190715125653.6e65d575.cohuck@redhat.com>
- <c1c68faf-0424-6c7c-e39f-42159457c3ee@redhat.com>
- <20190715130955.4a117388.cohuck@redhat.com>
- <13fce62f-234c-1b13-595f-5910c066bc4f@redhat.com>
- <6c39a198-e951-c0bd-1ddc-5d227afe72ff@redhat.com>
- <87a7dfth4i.fsf@dusky.pond.sub.org>
-Organization: Red Hat GmbH
+ (envelope-from <alistair23@gmail.com>) id 1hn3wK-0004Qn-19
+ for qemu-riscv@nongnu.org; Mon, 15 Jul 2019 12:35:01 -0400
+Received: from mail-lj1-x242.google.com ([2a00:1450:4864:20::242]:46835)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <alistair23@gmail.com>)
+ id 1hn3wJ-0004PR-LV; Mon, 15 Jul 2019 12:34:59 -0400
+Received: by mail-lj1-x242.google.com with SMTP id v24so16931826ljg.13;
+ Mon, 15 Jul 2019 09:34:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=FNp5EeW7MIJJ+eoiuxjpM9J9iFx+9EiGho/GIMvQnpY=;
+ b=raZJwn9WbAgHY19rmZxEAgCo8b9bR7AKzM+DkhssnwA3yvczP17BSBeePx5agPAteB
+ wbtjgOPfQZ5gkzwxMkd/tXCh6voz0LJc0Opi+ODtbD13GWkHnbhcm57qQbPslTqYQzQd
+ kbvmclLsY6VVhFHU8Pu1+pzYsR0c9/6+QWUNTaliXQ6MynrPoTZ5D+PEZUYoWNzWuUlI
+ V46LDNvjNrD24izO5UGDBvdWleY24cWG7AO7u3Z3uev/1uc8urVpp41u0vJ+QU0zTZx+
+ HvvF4Za0/SvLxAs9WERIi0n9VWRsd3M0OeCvDIajD74CEyupciCqaq4B2zkKYLXqjlFt
+ ciZg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=FNp5EeW7MIJJ+eoiuxjpM9J9iFx+9EiGho/GIMvQnpY=;
+ b=owpOdg5JFRLk1QNauqGcEKO22EDT5Ci4F6wFXO94uuI+IKnzovYPoNFljDJU6JAWas
+ foDZdkhcy0DkmFgyWAzebO7fxCgQRGMdXKrpZDIKlyZwM+mhsx7DniN1lUKjfkx2XcG+
+ xJKavrllwlqCHm9DJvJBIjAYSVzSyYb+kROYrNLUYEFDzLE63Jo4abAHF2aXDkdttBkc
+ yGZ5mQDfMAUKK1DlCNWWf1titIm1ieVqIxStFJhUb0Zkci5qaeUqixiDrWeWok8ZvaPD
+ Ge9+5v5cYOOVatolcYNr7XdVqhjxyieE1f38UfNBC0gaJqwj/SBokUakrVHqVEPAvCOo
+ Zdow==
+X-Gm-Message-State: APjAAAU6nL+iY1yt3rnVxPOra1NpcNvCY2AdnnlsUynBDPsD1ZlMxpIb
+ 60Sl/Fd3xTCK0pGDmfQSkBL06WioZ8fc5I/cYOk=
+X-Google-Smtp-Source: APXvYqxF1XE0fVmpv4xKkYWQQ4PUQZYDYeJoZrfsLKVOGbK36daMtwFKZQBnDfYNuFg8NvBEZd0YLXN8Jyy6uYm6yu8=
+X-Received: by 2002:a2e:9158:: with SMTP id q24mr14787230ljg.119.1563208496964; 
+ Mon, 15 Jul 2019 09:34:56 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+References: <1563181721-5055-1-git-send-email-chihmin.chao@sifive.com>
+ <93b35a5e-c40a-535b-2a91-2c210b4a5928@redhat.com>
+ <CAEiOBXXxS-93rTAQuvY_Tkxi1pYc1YfJenpBC_8gG2ou9uUZMg@mail.gmail.com>
+ <7eb239bc-32aa-b5fc-ab2e-a741b005aad7@redhat.com>
+In-Reply-To: <7eb239bc-32aa-b5fc-ab2e-a741b005aad7@redhat.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Mon, 15 Jul 2019 09:31:38 -0700
+Message-ID: <CAKmqyKOZSz4f1-kLDhn=+imCvKHcZJVgqgqWbQ6qxD3K1n17GA@mail.gmail.com>
+To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>
+Cc: Chih-Min Chao <chihmin.chao@sifive.com>, Fam Zheng <fam@euphon.net>, 
+ Alistair Francis <alistair@alistair23.me>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Eduardo Habkost <ehabkost@redhat.com>, Cornelia Huck <cohuck@redhat.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Cleber Rosa <crosa@redhat.com>, 
+ =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.40]); Mon, 15 Jul 2019 16:12:42 +0000 (UTC)
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
-X-Received-From: 209.132.183.28
-Subject: Re: [Qemu-riscv] [Qemu-devel] [qemu-s390x] [RFC PATCH 1/3]
- hw/Kconfig: PCI bus implies PCI_DEVICES
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2a00:1450:4864:20::242
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v2] tests/boot_linux_console:
+ add a test for riscv64 + virt
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -72,110 +75,216 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Jul 2019 16:12:54 -0000
+X-List-Received-Date: Mon, 15 Jul 2019 16:35:03 -0000
 
-On Mon, 15 Jul 2019 18:08:45 +0200
-Markus Armbruster <armbru@redhat.com> wrote:
+On Mon, Jul 15, 2019 at 6:02 AM Philippe Mathieu-Daud=C3=A9
+<philmd@redhat.com> wrote:
+>
+> On 7/15/19 1:09 PM, Chih-Min Chao wrote:
+> > On Mon, Jul 15, 2019 at 5:15 PM Philippe Mathieu-Daud=C3=A9
+> > <philmd@redhat.com <mailto:philmd@redhat.com>> wrote:
+> >
+> >     On 7/15/19 11:08 AM, Chih-Min Chao wrote:
+> >     > Similar to the mips + malta test, it boots a Linux kernel on a vi=
+rt
+> >     > board and verify the serial is working.  Also, it relies on the s=
+erial
+> >     > device set by the machine itself.
+> >     >
+> >     > If riscv64 is a target being built, "make check-acceptance" will
+> >     > automatically include this test by the use of the "arch:riscv64" =
+tags.
+> >     >
+> >     > Alternatively, this test can be run using:
+> >     >
+> >     >   $ avocado run -t arch:riscv64 tests/acceptance
+> >     >
+> >     > packages
+> >     >   debian official
+> >     >     binutils-riscv64-linux-gnu_2.32-8
+> >     >     opensbi_0.4-1_all
+> >     >     linux-image-4.19.0-5-riscv64 4.19.37-4
+> >     >   third-party
+> >     >
+> >      https://github.com/groeck/linux-build-test/rootfs/riscv64/rootfs.c=
+pio.gz
+> >     >     (the repo is also used in mips target acceptance)
+> >     >
+> >     > Signed-off-by: Chih-Min Chao <chihmin.chao@sifive.com
+> >     <mailto:chihmin.chao@sifive.com>>
+> >     > ---
+> >     >  .travis.yml                            |  2 +-
+> >     >  tests/acceptance/boot_linux_console.py | 66
+> >     ++++++++++++++++++++++++++++++++++
+> >     >  2 files changed, 67 insertions(+), 1 deletion(-)
+> >     >
+> >     > diff --git a/.travis.yml b/.travis.yml
+> >     > index 5d3d6ee..21fcead 100644
+> >     > --- a/.travis.yml
+> >     > +++ b/.travis.yml
+> >     > @@ -232,7 +232,7 @@ matrix:
+> >     >
+> >     >      # Acceptance (Functional) tests
+> >     >      - env:
+> >     > -        - CONFIG=3D"--python=3D/usr/bin/python3
+> >     --target-list=3Dx86_64-softmmu,mips-softmmu,mips64el-softmmu,aarch6=
+4-softmmu,arm-softmmu,s390x-softmmu,alpha-softmmu"
+> >     > +        - CONFIG=3D"--python=3D/usr/bin/python3
+> >     --target-list=3Dx86_64-softmmu,mips-softmmu,mips64el-softmmu,aarch6=
+4-softmmu,arm-softmmu,s390x-softmmu,alpha-softmmu,riscv64-softmmu"
+> >     >          - TEST_CMD=3D"make check-acceptance"
+> >     >        after_failure:
+> >     >          - cat tests/results/latest/job.log
+> >     > diff --git a/tests/acceptance/boot_linux_console.py
+> >     b/tests/acceptance/boot_linux_console.py
+> >     > index 3215950..0f638bc 100644
+> >     > --- a/tests/acceptance/boot_linux_console.py
+> >     > +++ b/tests/acceptance/boot_linux_console.py
+> >     > @@ -354,3 +354,69 @@ class BootLinuxConsole(Test):
+> >     >          self.vm.launch()
+> >     >          console_pattern =3D 'Kernel command line: %s' %
+> >     kernel_command_line
+> >     >          self.wait_for_console_pattern(console_pattern)
+> >     > +
+> >     > +    def test_riscv64_virt(self):
+> >     > +        """
+> >     > +        :avocado: tags=3Darch:riscv64
+> >     > +        :avocado: tags=3Dmachine:virt
+> >     > +        """
+> >     > +        deb_url =3D ('https://snapshot.debian.org/archive/debian=
+/'
+> >     > +                         '20190424T171759Z/pool/main/b/binutils/=
+'
+> >     > +
+> >      'binutils-riscv64-linux-gnu_2.32-8_amd64.deb')
+> >     > +        deb_hash =3D ('7fe376fd4452696c03acd508d6d613ca553ea15e'=
+)
+> >     > +        deb_path =3D self.fetch_asset(deb_url, asset_hash=3Ddeb_=
+hash)
+> >     > +        objcopy_path =3D '/usr/bin/riscv64-linux-gnu-objcopy'
+> >     > +        objcopy_path =3D self.extract_from_deb(deb_path, objcopy=
+_path)
+> >     > +        libbfd_path =3D
+> >     '/usr/lib/x86_64-linux-gnu/libbfd-2.32-riscv64.so
+> >     <http://libbfd-2.32-riscv64.so>'
+> >     > +        libbfd_path =3D self.extract_from_deb(deb_path, libbfd_p=
+ath)
+> >     > +        process.run('ls -al %s' % (objcopy_path))
+> >     > +
+> >     > +        deb_url =3D ('https://snapshot.debian.org/archive/debian=
+/'
+> >     > +                   '20190708T032337Z/pool/main/o/opensbi/'
+> >     > +                   'opensbi_0.4-1_all.deb')
+> >     > +        deb_hash =3D ('2319dcd702958291d323acf5649fd98a11d90112'=
+)
+> >     > +        deb_path =3D self.fetch_asset(deb_url, asset_hash=3Ddeb_=
+hash)
+> >     > +        opensbi_path =3D ('/usr/lib/riscv64-linux-gnu/opensbi/'
+> >     > +                        'qemu/virt/fw_jump.elf')
+> >     > +        opensbi_path =3D self.extract_from_deb(deb_path, opensbi=
+_path)
+> >     > +
+> >     > +        deb_url =3D
+> >     ('https://snapshot.debian.org/archive/debian-ports/'
+> >     > +                   '20190620T095935Z/pool-riscv64/main/l/linux/'
+> >     > +
+> >      'linux-image-4.19.0-5-riscv64_4.19.37-4_riscv64.deb')
+> >     > +        deb_hash =3D ('bf5b5680c41d92134d22caef4fbd277c5217e1f0'=
+)
+> >     > +        deb_path =3D self.fetch_asset(deb_url, asset_hash=3Ddeb_=
+hash)
+> >     > +        kernel_path =3D '/boot/vmlinux-4.19.0-5-riscv64'
+> >     > +        kernel_path =3D self.extract_from_deb(deb_path, kernel_p=
+ath)
+> >     > +        kimage_path =3D self.workdir + "/Image"
+> >     > +        env =3D os.environ
+> >     > +        env['LD_LIBRARY_PATH'] =3D ('%s:' %
+> >     (os.path.dirname(libbfd_path)) +
+> >     > +                                 env.get('LD_LIBRARY_PATH', ''))
+> >     > +        process.run(('%s -O binary -O binary -R'
+> >     > +                     '.note -R .note.gnu.build-id -R .comment -S
+> >     %s %s') %
+> >     > +                     (objcopy_path, kernel_path, kimage_path))
+> >
+> >     Please explain why you need to do that...
+> >
+> >     Also note these tests are run on other host architecture than x86, =
+at
+> >     least ppc64/s390x (so this won't work there).
+> >
+> > it is because riscv64 vmlinux doesn't have physical loading address
+> > information and
+> > depends on certain stage bootloader to move kernel raw data to specific
+> > physical address (0x8020_0000)
+> >
+> > The vmlinux program headers are
+> >   Type             Offset       VirtAddr                  PhysAddr
+> >     FileSiz  MemSiz   Flg Align
+> >   LOAD           0x001000 0xffffffe000000000 0x0000000000000000 0x0303a=
+6
+> > 0x0303a6 R E 0x1000
+> >   LOAD           0x032000 0xffffffe000031000 0x0000000000031000 0x828f0=
+c
+> > 0x828f0c RWE 0x1000
+> >   NOTE           0x85aec0 0xffffffe000859ec0 0x0000000000859ec0 0x00004=
+c
+> > 0x00004c R   0x4
+> >
+> > For legacy bootloader, bbl, It can handle payload in ELF format.
+> > However, for the newer OpenSBI, it can only handle raw data and
+> > debian doesn't provide linux image in raw data format.
 
-> Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com> writes:
->=20
-> > On 7/15/19 3:19 PM, Thomas Huth wrote: =20
-> >> On 15/07/2019 13.09, Cornelia Huck wrote: =20
-> >>> On Mon, 15 Jul 2019 13:04:28 +0200
-> >>> Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com> wrote:
-> >>> =20
-> >>>> On 7/15/19 12:56 PM, Cornelia Huck wrote: =20
-> >>>>> On Mon, 15 Jul 2019 12:48:55 +0200
-> >>>>> Thomas Huth <thuth@redhat.com> wrote:
-> >>>>>    =20
-> >>>>>> On 15/07/2019 12.19, Peter Maydell wrote:   =20
-> >>>>>>> On Mon, 15 Jul 2019 at 11:15, Thomas Huth <thuth@redhat.com> wrot=
-e:     =20
-> >>>>>>>>
-> >>>>>>>> On 15/07/2019 11.55, Philippe Mathieu-Daud=C3=A9 wrote:     =20
-> >>>>>>>>> If a controller device provides a PCI bus, we can plug any PCI
-> >>>>>>>>> daughter card on it.
-> >>>>>>>>>
-> >>>>>>>>> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
-> >>>>>>>>> ---     =20
-> >>>>>>>      =20
-> >>>>>>>>> diff --git a/hw/pci/Kconfig b/hw/pci/Kconfig
-> >>>>>>>>> index 77f8b005ff..0f7267db35 100644
-> >>>>>>>>> --- a/hw/pci/Kconfig
-> >>>>>>>>> +++ b/hw/pci/Kconfig
-> >>>>>>>>> @@ -1,5 +1,6 @@
-> >>>>>>>>>  config PCI
-> >>>>>>>>>      bool
-> >>>>>>>>> +    imply PCI_DEVICES     =20
-> >>>>>>>>
-> >>>>>>>> No, please don't change this. This was done on purpose, since al=
-most all
-> >>>>>>>> PCI_DEVICES do not work on s390x (so s390x does *not* imply PCI_=
-DEVICES).     =20
-> >>>>>>>
-> >>>>>>> But that means that every board that provides PCI has to have an
-> >>>>>>> "imply PCI_DEVICES" line, which is pretty clunky just to work
-> >>>>>>> around an s390x limitation.
-> >>>>>>>
-> >>>>>>> Is there some way in the Kconfig syntax for s390x to say
-> >>>>>>> "no PCI_DEVICES" so we can have the corner-case be handled
-> >>>>>>> by the s390x Kconfig in one place rather than in 20 places
-> >>>>>>> affecting everywhere except s390x?     =20
-> >>>>>>
-> >>>>>> IIRC the problem on s390x are the legacy IRQs. s390x has only MSIs=
-. So I
-> >>>>>> guess the correct way to fix this would be to introduce some
-> >>>>>> PCI_LEGACY_IRQ switch and let all old devices that do not work wit=
-h MSI
-> >>>>>> depend on it.   =20
-> >>>>>
-> >>>>> s/MSI/MSI-X/, IIRC. Not sure how far 'legacy' would stretch.   =20
-> >>>>
-> >>>> Maybe we can have something like PCI_LEGACY_DEVICES and PCI_MSI_DEVI=
-CES?
-> >>>>
-> >>>> So if s390x only selects PCI_LEGACY (not PCI_MSI) bus, then it only =
-get
-> >>>> legacy devices? =20
-> >>>
-> >>> Wrong way around? We need MSI-X for s390x, not plain MSI or
-> >>> 'legacy' (whatever that is). =20
-> >>=20
-> >> With "legacy" I meant the old level-triggered interrupts from the early
-> >> PCI (non-express) days. Sorry for being imprecise here.
-> >>=20
-> >> So maybe we need two new switches, PCI_CLASSIC (or so) and PCI_MSIX, a=
-nd
-> >> then the PCI devices should be marked with "default y if PCI_CLASSIC" =
-if
-> >> they do not have MSIX support, and with "default y if PCI_MSIX" if they
-> >> have MSI-X support? =20
-> >
-> > Something like that :)
-> >
-> > Per Wikipedia:
-> >
-> >   Conventional PCI and PCI-X are sometimes called Parallel PCI
-> >   in order to distinguish them technologically from their more
-> >   recent successor PCI Express, which adopted a serial,
-> >   lane-based architecture.
-> >
-> >   The PCI-SIG introduced the serial PCI Express in c.=E2=80=892004. At
-> >   the same time, they renamed PCI as Conventional PCI.
-> >
-> >   PCI Express does not have physical interrupt lines at all.
-> >   It uses message-signaled interrupts exclusively.
-> >
-> > What about PCI_CONVENTIONAL then? =20
->=20
-> What kinds of PCI devices are we trying to name?
->=20
-> Is it INTx vs. MSI vs. MSI-X?
+This doesn't sound right. You should just be able to say -kernel
+<anything> and it should work. It has worked for me with vmlinux and
+Image files when using master (not the 4.0 release but master/4.1).
+Although all of my testing was with the 5.1 kernel, so maybe there is
+a difference there?
 
-I think for s390x we need (INTx || MSI) vs MSI-X...
+What isn't working for you? Can you include the errors and output of -d in_=
+asm?
 
->=20
-> Is it Conventional PCI vs. PCI Express?
 
-...while this is probably more INTx vs (MSI || MSI-X)?
+Alistair
+
+>
+> I think you should be able to use -device loader,file=3D... here, then no
+> need to use objcopy.
+>
+> Cc'ing Alistair who is an expert on this.
+>
+> >     > +
+> >     > +        initrd_url =3D
+> >     ('https://github.com/groeck/linux-build-test/raw/'
+> >     > +
+> >     '8584a59ed9e5eb5ee7ca91f6d74bbb06619205b8/rootfs/'
+> >     > +                      'riscv64/rootfs.cpio.gz')
+> >     > +        initrd_hash =3D 'f4867d263754961b6f626cdcdc0cb334c47e3b4=
+9'
+> >     > +        initrd_path =3D self.fetch_asset(initrd_url,
+> >     asset_hash=3Dinitrd_hash)
+> >     > +
+> >     > +        self.vm.set_machine('virt')
+> >     > +        self.vm.set_console()
+> >     > +        kernel_command_line =3D (self.KERNEL_COMMON_COMMAND_LINE
+> >     > +                               + 'console=3DttyS0 noreboot')
+> >     > +        self.vm.add_args('-bios', opensbi_path,
+> >     > +                         '-kernel', kimage_path,
+> >     > +                         '-initrd', initrd_path,
+> >     > +                         '-append', kernel_command_line,
+> >     > +                         '-no-reboot')
+> >     > +
+> >     > +        self.vm.launch()
+> >     > +        self.wait_for_console_pattern('Boot successful.')
+> >     > +
+> >     > +        self.exec_command_and_wait_for_pattern('cat /proc/cpuinf=
+o',
+> >     > +                                               'isa')
+> >     > +        self.exec_command_and_wait_for_pattern('uname -a',
+> >     > +                                               'SMP Debian')
+> >     > +        self.exec_command_and_wait_for_pattern('reboot',
+> >     > +                                               'reboot:
+> >     Restarting system')
+> >     >
+> >
+>
 
