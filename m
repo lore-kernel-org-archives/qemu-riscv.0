@@ -1,86 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hn5ce-0004d6-FU
-	for mharc-qemu-riscv@gnu.org; Mon, 15 Jul 2019 14:22:48 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:57712)
+	id 1hn8bE-0001DE-Fa
+	for mharc-qemu-riscv@gnu.org; Mon, 15 Jul 2019 17:33:32 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47327)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <pbonzini@redhat.com>) id 1hn5cc-0004U8-3I
- for qemu-riscv@nongnu.org; Mon, 15 Jul 2019 14:22:46 -0400
+ (envelope-from <alistair23@gmail.com>) id 1hn8bC-0001Bx-8f
+ for qemu-riscv@nongnu.org; Mon, 15 Jul 2019 17:33:31 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <pbonzini@redhat.com>) id 1hn5cb-0005j3-4O
- for qemu-riscv@nongnu.org; Mon, 15 Jul 2019 14:22:45 -0400
-Received: from mail-wr1-f67.google.com ([209.85.221.67]:39916)
+ (envelope-from <alistair23@gmail.com>) id 1hn8bB-0004i8-8G
+ for qemu-riscv@nongnu.org; Mon, 15 Jul 2019 17:33:30 -0400
+Received: from mail-lf1-x143.google.com ([2a00:1450:4864:20::143]:45777)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <pbonzini@redhat.com>) id 1hn5ca-0005iA-TO
- for qemu-riscv@nongnu.org; Mon, 15 Jul 2019 14:22:45 -0400
-Received: by mail-wr1-f67.google.com with SMTP id x4so18130370wrt.6
- for <qemu-riscv@nongnu.org>; Mon, 15 Jul 2019 11:22:44 -0700 (PDT)
+ (Exim 4.71) (envelope-from <alistair23@gmail.com>)
+ id 1hn8bA-0004hQ-Ua; Mon, 15 Jul 2019 17:33:29 -0400
+Received: by mail-lf1-x143.google.com with SMTP id u10so12052430lfm.12;
+ Mon, 15 Jul 2019 14:33:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=WrVS+nAb4G+m4rvJ9ZBDRm5D2QLrdybuhMzs4rxbkMg=;
+ b=oChMtOkfuya7ES1PZIC+KMd0bLyWe77kTEBIjFgCtlTXhbbYvZNDQcUmePsXtLxVMW
+ hM7voGQfab+1EJdrNg53rKFdQtneRvZV2I8dMwPOCgCb2p1LDMYxUWWDpmgsTtc4MNH/
+ PCC4fZ4CBvok6IdDeQ9ycT4DMDkMn+I2/lcbKkzEUzwU0kuNIfsFXUY689GGFfewVY1v
+ 1hkIp4OYjfDphLAyXmQ1JixQaG3xnCgsVOnRg6X81nAsldW+Mhdir71Y2hSGFE192MBu
+ CH5fxGZ1fkFAnwVbxbAF5vOAk/+sq1ik435R2IG/h8jDU5QjVhkP9WbWa1y2jfjE0hHM
+ qbUA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
- :date:user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=jh1EjcI3mccPq9EguW1nzi7NdEBTHvB+4+XINCI1nAQ=;
- b=ejAd41EHmcr88YlTB3zuYYVZDnk3FsruKO48qmiqXSatUIyCPQb014b/BkHHkN3AFH
- eb6d0BazQejCFfhnCvwYDCivK9t8ISVN8Dcat3rfVoijuH5HkfZKeyLoADxtoYFmpYlE
- iRi3uctkwQQX4sY7YO1bXgj5sOS4/MWFoF6fCNo9N5kUbuiI4ctHBHKtNKwzdwiD9A2y
- G0DDkjmH/KbmjQ7Df88q60Z5a46yR7ObTjQI9GZQMUod6BDB23uEe9KO/JUj2kgfio0B
- 8uLuo/MQrVPBUjWfuRE4kOfGqVhRf+Xz40Y6WR1jSORwpA0oZaQPy6fhnuNI3TjZ8vRG
- kpfg==
-X-Gm-Message-State: APjAAAUftkMCgoXNwrkA0kE2q2dae0wwG7l3wXQL5AEXhKuL+FtYmJtb
- AHFJJknQ5YGwQSLpHamvdumIjA==
-X-Google-Smtp-Source: APXvYqx1tWHVdEAiQSSJKmKdTfXojB12V9FcU8Q/G+9lC716NBkwgiUbht1ZBsYHFKID+z6CSqB3/A==
-X-Received: by 2002:adf:e444:: with SMTP id t4mr28841642wrm.262.1563214963421; 
- Mon, 15 Jul 2019 11:22:43 -0700 (PDT)
-Received: from ?IPv6:2001:b07:6468:f312:b159:8d52:3041:ae0d?
- ([2001:b07:6468:f312:b159:8d52:3041:ae0d])
- by smtp.gmail.com with ESMTPSA id c11sm30438514wrq.45.2019.07.15.11.22.41
- (version=TLS1_3 cipher=AEAD-AES128-GCM-SHA256 bits=128/128);
- Mon, 15 Jul 2019 11:22:42 -0700 (PDT)
-To: Cornelia Huck <cohuck@redhat.com>, Markus Armbruster <armbru@redhat.com>
-Cc: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>,
- Thomas Huth <thuth@redhat.com>, Peter Maydell <peter.maydell@linaro.org>,
- Collin Walling <walling@linux.ibm.com>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>,
- Eduardo Habkost <ehabkost@redhat.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- "Michael S. Tsirkin" <mst@redhat.com>, Helge Deller <deller@gmx.de>,
- Palmer Dabbelt <palmer@sifive.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- QEMU Developers <qemu-devel@nongnu.org>,
- Aurelien Jarno <aurelien@aurel32.net>, "open list:S390"
- <qemu-s390x@nongnu.org>, qemu-arm <qemu-arm@nongnu.org>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Gerd Hoffmann <kraxel@redhat.com>, qemu-ppc <qemu-ppc@nongnu.org>,
- Richard Henderson <rth@twiddle.net>, Artyom Tarasenko <atar4qemu@gmail.com>,
- David Gibson <david@gibson.dropbear.id.au>
-References: <20190715095545.28545-1-philmd@redhat.com>
- <20190715095545.28545-2-philmd@redhat.com>
- <ca528cdc-6118-0b2f-c1b8-30b06875dde8@redhat.com>
- <CAFEAcA-wgTVfj0TUJ=piP0wEgLGiNpOYia5DK2GQAO4Q7gNaWg@mail.gmail.com>
- <6d69e8ad-d720-ce04-20f2-a03193903078@redhat.com>
- <20190715125653.6e65d575.cohuck@redhat.com>
- <c1c68faf-0424-6c7c-e39f-42159457c3ee@redhat.com>
- <20190715130955.4a117388.cohuck@redhat.com>
- <13fce62f-234c-1b13-595f-5910c066bc4f@redhat.com>
- <6c39a198-e951-c0bd-1ddc-5d227afe72ff@redhat.com>
- <87a7dfth4i.fsf@dusky.pond.sub.org>
- <20190715181206.3cb1db93.cohuck@redhat.com>
-From: Paolo Bonzini <pbonzini@redhat.com>
-Openpgp: preference=signencrypt
-Message-ID: <799aa0f5-8850-5caa-5103-e1cf3cdb018f@redhat.com>
-Date: Mon, 15 Jul 2019 20:22:41 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.7.2
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=WrVS+nAb4G+m4rvJ9ZBDRm5D2QLrdybuhMzs4rxbkMg=;
+ b=IUYj9niqILPNiaT512aZbHSdJqEaZ4aNP4fD5gT5/NUEyrMJhQXfL3yQQJ7CSh17LM
+ gas5FUeoT2Kzfzarawl3u2HGYUHSCDd7HZY1vtPD/JwCPEywuYHjwSfnY2Y3POxUDyTP
+ JoIHDhAxdxkilVI5G4WtR3MIw+MkDryqcjw34Ff/uZ4gKhTAyDN0xn8aCfKDit8EYshp
+ oHSbmHZcuMXzS9+ZhldsZWWpiqZqwuzIJe1piuqKWCIGSZHPCcRMzxLp1D0HWnPGRDxp
+ /61rbg+64jifSCay8CLE8SPsPIxHAbyKHIyqhZXeHLKoFdlUOGrN7tD0s3zWJK++qpZd
+ eWdw==
+X-Gm-Message-State: APjAAAVvQWt3fK29gOktD4HvxkasM7YNGUyo16XagUYlDCcnFP3cDR/U
+ cXAvMtjHX+GYCVL78S9P0Li1w44K2O0CgWnozsM=
+X-Google-Smtp-Source: APXvYqyLAkfsaAm/GsktmcmTBO2mh0DCA6evA6AD0qwMYZzA18BF+2b3tRsKTdvMxMYcmssIQlqJ67JMLE/ce1GS7m0=
+X-Received: by 2002:a19:6a01:: with SMTP id u1mr12474675lfu.141.1563226407433; 
+ Mon, 15 Jul 2019 14:33:27 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20190715181206.3cb1db93.cohuck@redhat.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
- [fuzzy]
-X-Received-From: 209.85.221.67
-Subject: Re: [Qemu-riscv] [Qemu-devel] [qemu-s390x] [RFC PATCH 1/3]
- hw/Kconfig: PCI bus implies PCI_DEVICES
+References: <1558108285-19571-1-git-send-email-bmeng.cn@gmail.com>
+ <1558108285-19571-2-git-send-email-bmeng.cn@gmail.com>
+ <9338c7b4-6a05-2189-b93d-25cb2bd4dd54@adacore.com>
+ <CAEUhbmUtdvkYPm4DZL4MSeV5imaj82x2xtPkQ0yLKF599N=vXw@mail.gmail.com>
+In-Reply-To: <CAEUhbmUtdvkYPm4DZL4MSeV5imaj82x2xtPkQ0yLKF599N=vXw@mail.gmail.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Mon, 15 Jul 2019 14:30:08 -0700
+Message-ID: <CAKmqyKP1BcTOQJDJoFiEL4NhMwTHQHmSDn=ZPiq8eDMB_hVSkw@mail.gmail.com>
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Fabien Chouteau <chouteau@adacore.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ Palmer Dabbelt <palmer@sifive.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2a00:1450:4864:20::143
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH 2/2] riscv: sifive_u: Update
+ the plic hart config to support multicore
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -92,15 +70,76 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Jul 2019 18:22:47 -0000
+X-List-Received-Date: Mon, 15 Jul 2019 21:33:31 -0000
 
-On 15/07/19 18:12, Cornelia Huck wrote:
->> Is it INTx vs. MSI vs. MSI-X?
-> 
-> I think for s390x we need (INTx || MSI) vs MSI-X...
+On Sat, Jul 13, 2019 at 8:23 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+>
+> Hi Fabien,
+>
+> On Tue, Jul 9, 2019 at 12:31 AM Fabien Chouteau <chouteau@adacore.com> wrote:
+> >
+> > Hi Bin,
+> >
+> > Thanks for this patch.
+> >
+> > I know I am very late to the game but I have a comment here.
+> >
+> > On 17/05/2019 17:51, Bin Meng wrote:
+> > > +    /* create PLIC hart topology configuration string */
+> > > +    plic_hart_config_len = (strlen(SIFIVE_U_PLIC_HART_CONFIG) + 1) * smp_cpus;
+> > > +    plic_hart_config = g_malloc0(plic_hart_config_len);
+> > > +    for (i = 0; i < smp_cpus; i++) {
+> > > +        if (i != 0) {
+> > > +            strncat(plic_hart_config, ",", plic_hart_config_len);
+> > > +        }
+> > > +        strncat(plic_hart_config, SIFIVE_U_PLIC_HART_CONFIG,
+> > > +                plic_hart_config_len);
+> > > +        plic_hart_config_len -= (strlen(SIFIVE_U_PLIC_HART_CONFIG) + 1);
+> > > +    }
+> > > +
+> >
+> > This will create up to 4 MS PLIC devices. However on the Unleashed FU540 the PLICs are M,MS,MS,MS,MS because of the monitor hart #0.
+> >
+> > This means a different memory layout than the real hardware.
+> >
+> > For instance address 0x0C00_2080 will be hart #0 S-Mode interrupt enables in QEMU, instead of #1 M-Mode interrupt enables for the real hardware.
+>
+> Thanks for the notes! I agree to better match the real hardware, it
+> should be modeled like that. However I am not sure what the original
+> intention was when creating the "sifive_u" machine. Both OpenSBI and
+> U-Boot list sifive_u as a special target, instead of the real
+> Unleashed board hence I assume this is a hypothetical target too, like
+> the "virt", but was created to best match the real Unleashed board
+> though.
 
-I think MSI vs MSI-X is just how it's configured, not the actual
-behavior, so it should be irrelevant.
+I thought (Palmer correct me if I'm wrong) that the sifive_u machine
+*should* match the hardware. The problem is that QEMU doesn't support
+everything that the HW supports which is why U-Boot and OpenSBI have
+their own targets. The goal is to not require special QEMU targets, so
+this is a step in the right direction.
 
-Paolo
+Alistair
+
+>
+> >
+> > To fix this I suggest to change this loop to:
+> >
+> >     for (i = 0; i < smp_cpus; i++) {
+> >         if (i != 0) {
+> >             strncat(plic_hart_config, "," SIFIVE_U_PLIC_HART_CONFIG,
+> >                     plic_hart_config_len);
+> >         } else {
+> >             strncat(plic_hart_config, "M", plic_hart_config_len);
+> >         }
+> >         plic_hart_config_len -= (strlen(SIFIVE_U_PLIC_HART_CONFIG) + 1);
+> >     }
+> >
+> > This will make hart #0 PLIC in M mode and the others in MS.
+> >
+> > What do you think?
+>
+>
+> Regards,
+> Bin
+>
 
