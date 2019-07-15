@@ -1,44 +1,45 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hmyke-0002dZ-Th
-	for mharc-qemu-riscv@gnu.org; Mon, 15 Jul 2019 07:02:36 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44394)
+	id 1hmym8-0003rl-5J
+	for mharc-qemu-riscv@gnu.org; Mon, 15 Jul 2019 07:04:08 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44797)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <thuth@redhat.com>) id 1hmykb-0002TW-V1
- for qemu-riscv@nongnu.org; Mon, 15 Jul 2019 07:02:34 -0400
+ (envelope-from <thuth@redhat.com>) id 1hmym5-0003im-RW
+ for qemu-riscv@nongnu.org; Mon, 15 Jul 2019 07:04:06 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <thuth@redhat.com>) id 1hmyka-0002B3-Nh
- for qemu-riscv@nongnu.org; Mon, 15 Jul 2019 07:02:33 -0400
-Received: from mx1.redhat.com ([209.132.183.28]:49940)
+ (envelope-from <thuth@redhat.com>) id 1hmym4-00033o-Nq
+ for qemu-riscv@nongnu.org; Mon, 15 Jul 2019 07:04:05 -0400
+Received: from mx1.redhat.com ([209.132.183.28]:58848)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <thuth@redhat.com>)
- id 1hmykS-0001x9-Ph; Mon, 15 Jul 2019 07:02:24 -0400
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
- [10.5.11.14])
+ id 1hmylx-00030n-8f; Mon, 15 Jul 2019 07:03:57 -0400
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
+ [10.5.11.15])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id 7C6ADC04FFF1;
- Mon, 15 Jul 2019 11:02:09 +0000 (UTC)
+ by mx1.redhat.com (Postfix) with ESMTPS id 3D335368E6;
+ Mon, 15 Jul 2019 11:03:56 +0000 (UTC)
 Received: from thuth.remote.csb (reserved-198-198.str.redhat.com
  [10.33.198.198])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 1626C5D9D6;
- Mon, 15 Jul 2019 11:01:55 +0000 (UTC)
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>,
- qemu-devel@nongnu.org
-Cc: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Paolo Bonzini <pbonzini@redhat.com>, Gerd Hoffmann <kraxel@redhat.com>,
- Peter Maydell <peter.maydell@linaro.org>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, qemu-riscv@nongnu.org,
- Palmer Dabbelt <palmer@sifive.com>, Richard Henderson <rth@twiddle.net>,
- David Gibson <david@gibson.dropbear.id.au>,
- "Michael S. Tsirkin" <mst@redhat.com>, Aurelien Jarno
- <aurelien@aurel32.net>, Alistair Francis <Alistair.Francis@wdc.com>,
- qemu-ppc@nongnu.org, Artyom Tarasenko <atar4qemu@gmail.com>,
- qemu-arm@nongnu.org, Helge Deller <deller@gmx.de>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 898D95D772;
+ Mon, 15 Jul 2019 11:03:43 +0000 (UTC)
+To: BALATON Zoltan <balaton@eik.bme.hu>,
+ =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>
+Cc: qemu-devel@nongnu.org, Peter Maydell <peter.maydell@linaro.org>,
+ qemu-riscv@nongnu.org, Eduardo Habkost <ehabkost@redhat.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ "Michael S. Tsirkin" <mst@redhat.com>, qemu-ppc@nongnu.org,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Helge Deller <deller@gmx.de>, Palmer Dabbelt <palmer@sifive.com>,
+ Artyom Tarasenko <atar4qemu@gmail.com>, qemu-arm@nongnu.org,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Gerd Hoffmann <kraxel@redhat.com>,
  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Eduardo Habkost <ehabkost@redhat.com>
+ Paolo Bonzini <pbonzini@redhat.com>,
+ David Gibson <david@gibson.dropbear.id.au>,
+ Richard Henderson <rth@twiddle.net>
 References: <20190715095545.28545-1-philmd@redhat.com>
  <20190715095545.28545-3-philmd@redhat.com>
+ <alpine.BSF.2.21.9999.1907151251210.6546@zero.eik.bme.hu>
 From: Thomas Huth <thuth@redhat.com>
 Openpgp: preference=signencrypt
 Autocrypt: addr=thuth@redhat.com; keydata=
@@ -84,21 +85,21 @@ Autocrypt: addr=thuth@redhat.com; keydata=
  rCELuGwT9hsYkUPjVd4lfylN3mzEc6iAv/wwjsc0DRTSQCpXT3v2ymTAsRKrVaEZLibTXaf+
  WslxWek3xNYRiqwwWAJuL652eAlxUgQ5ZS+fXBRTiQpJ+F26I/2lccScRd9G5w==
 Organization: Red Hat
-Message-ID: <abe7f883-b08b-ee4a-1831-f473c10838f8@redhat.com>
-Date: Mon, 15 Jul 2019 13:01:54 +0200
+Message-ID: <64dd9cd5-8599-b157-3ba2-0ec565cee709@redhat.com>
+Date: Mon, 15 Jul 2019 13:03:42 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
  Thunderbird/60.7.2
 MIME-Version: 1.0
-In-Reply-To: <20190715095545.28545-3-philmd@redhat.com>
+In-Reply-To: <alpine.BSF.2.21.9999.1907151251210.6546@zero.eik.bme.hu>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
 X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.31]); Mon, 15 Jul 2019 11:02:09 +0000 (UTC)
+ (mx1.redhat.com [10.5.110.30]); Mon, 15 Jul 2019 11:03:56 +0000 (UTC)
 Content-Transfer-Encoding: quoted-printable
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
 X-Received-From: 209.132.183.28
-Subject: Re: [Qemu-riscv] [PATCH-for-4.2 2/3] hw/usb/Kconfig: Add
+Subject: Re: [Qemu-riscv] [Qemu-ppc] [PATCH-for-4.2 2/3] hw/usb/Kconfig: Add
  CONFIG_USB_EHCI_PCI
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -111,63 +112,51 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Jul 2019 11:02:36 -0000
+X-List-Received-Date: Mon, 15 Jul 2019 11:04:07 -0000
 
-On 15/07/2019 11.55, Philippe Mathieu-Daud=C3=A9 wrote:
-> The USB_EHCI entry currently include PCI code. Since the EHCI
-> implementation is already split in sysbus/PCI, add a new
-> USB_EHCI_PCI. There are no logical changes, but the Kconfig
-> dependencies tree is cleaner.
+On 15/07/2019 12.54, BALATON Zoltan wrote:
+> On Mon, 15 Jul 2019, Philippe Mathieu-Daud=C3=A9 wrote:
+>> The USB_EHCI entry currently include PCI code. Since the EHCI
+>> implementation is already split in sysbus/PCI, add a new
+>> USB_EHCI_PCI. There are no logical changes, but the Kconfig
+>> dependencies tree is cleaner.
+>>
+>> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
+>> ---
+>> hw/usb/Kconfig=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 | 9 ++++++---
+>> hw/usb/Makefile.objs | 5 +++--
+>> 2 files changed, 9 insertions(+), 5 deletions(-)
+>>
+>> diff --git a/hw/usb/Kconfig b/hw/usb/Kconfig
+>> index 564305e283..495c6f2d48 100644
+>> --- a/hw/usb/Kconfig
+>> +++ b/hw/usb/Kconfig
+>> @@ -19,13 +19,16 @@ config USB_OHCI_PCI
+>>
+>> config USB_EHCI
+>> =C2=A0=C2=A0=C2=A0 bool
+>> -=C2=A0=C2=A0=C2=A0 default y if PCI_DEVICES
+>> -=C2=A0=C2=A0=C2=A0 depends on PCI
+>> =C2=A0=C2=A0=C2=A0 select USB
+>>
+>> +config USB_EHCI_PCI
+>> +=C2=A0=C2=A0=C2=A0 bool
+>> +=C2=A0=C2=A0=C2=A0 default y if PCI_DEVICES
+>> +=C2=A0=C2=A0=C2=A0 select USB_EHCI
+>> +
+>> config USB_EHCI_SYSBUS
+>> =C2=A0=C2=A0=C2=A0 bool
+>> -=C2=A0=C2=A0=C2=A0 select USB
+>> +=C2=A0=C2=A0=C2=A0 select USB_EHCI
 >=20
-> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
-> ---
->  hw/usb/Kconfig       | 9 ++++++---
->  hw/usb/Makefile.objs | 5 +++--
->  2 files changed, 9 insertions(+), 5 deletions(-)
->=20
-> diff --git a/hw/usb/Kconfig b/hw/usb/Kconfig
-> index 564305e283..495c6f2d48 100644
-> --- a/hw/usb/Kconfig
-> +++ b/hw/usb/Kconfig
-> @@ -19,13 +19,16 @@ config USB_OHCI_PCI
-> =20
->  config USB_EHCI
->      bool
-> -    default y if PCI_DEVICES
-> -    depends on PCI
->      select USB
-> =20
-> +config USB_EHCI_PCI
-> +    bool
-> +    default y if PCI_DEVICES
-> +    select USB_EHCI
-> +
->  config USB_EHCI_SYSBUS
->      bool
-> -    select USB
-> +    select USB_EHCI
-> =20
->  config USB_XHCI
->      bool
-> diff --git a/hw/usb/Makefile.objs b/hw/usb/Makefile.objs
-> index 81688f6e70..303ac084a0 100644
-> --- a/hw/usb/Makefile.objs
-> +++ b/hw/usb/Makefile.objs
-> @@ -6,8 +6,9 @@ common-obj-$(CONFIG_USB) +=3D desc.o desc-msos.o
->  common-obj-$(CONFIG_USB_UHCI) +=3D hcd-uhci.o
->  common-obj-$(CONFIG_USB_OHCI) +=3D hcd-ohci.o
->  common-obj-$(CONFIG_USB_OHCI_PCI) +=3D hcd-ohci-pci.o
-> -common-obj-$(CONFIG_USB_EHCI) +=3D hcd-ehci.o hcd-ehci-pci.o
-> -common-obj-$(CONFIG_USB_EHCI_SYSBUS) +=3D hcd-ehci.o hcd-ehci-sysbus.o
-> +common-obj-$(CONFIG_USB_EHCI) +=3D hcd-ehci.o
-> +common-obj-$(CONFIG_USB_EHCI_PCI) +=3D hcd-ehci-pci.o
-> +common-obj-$(CONFIG_USB_EHCI_SYSBUS) +=3D hcd-ehci-sysbus.o
->  common-obj-$(CONFIG_USB_XHCI) +=3D hcd-xhci.o
->  common-obj-$(CONFIG_USB_XHCI_NEC) +=3D hcd-xhci-nec.o
->  common-obj-$(CONFIG_USB_MUSB) +=3D hcd-musb.o
->=20
+> Isn't this making USB_EHCI effectively the same as USB so maybe you
+> don't need to keep that around any more. Can you just add select USB to
+> USB_EHCI_PCI and USB_EHCI_SYSBUS and delete USB_EHCI?
 
-Looks cleaner this way, indeed.
+If you want to compile without USB_EHCI_PCI and without USB_EHCI_SYSBUS,
+but with USB (e.g. due to XHCI), I think we should not include
+hcd-ehci.o file in the build. So I think it's fine that we have a
+separate config switch for this file.
 
-Reviewed-by: Thomas Huth <thuth@redhat.com>
+ Thomas
 
