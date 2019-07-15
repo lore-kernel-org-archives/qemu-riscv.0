@@ -1,61 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hmVLA-00016K-Bs
-	for mharc-qemu-riscv@gnu.org; Sat, 13 Jul 2019 23:38:20 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:52091)
+	id 1hmwyh-0002qC-Dl
+	for mharc-qemu-riscv@gnu.org; Mon, 15 Jul 2019 05:08:59 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47108)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <bmeng.cn@gmail.com>) id 1hmVL8-00015y-D4
- for qemu-riscv@nongnu.org; Sat, 13 Jul 2019 23:38:19 -0400
+ (envelope-from <chihmin.chao@sifive.com>) id 1hmwye-0002po-M2
+ for qemu-riscv@nongnu.org; Mon, 15 Jul 2019 05:08:58 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <bmeng.cn@gmail.com>) id 1hmVL7-0003jO-AC
- for qemu-riscv@nongnu.org; Sat, 13 Jul 2019 23:38:18 -0400
-Received: from mail-ed1-x541.google.com ([2a00:1450:4864:20::541]:43031)
+ (envelope-from <chihmin.chao@sifive.com>) id 1hmwyd-0004iW-BE
+ for qemu-riscv@nongnu.org; Mon, 15 Jul 2019 05:08:56 -0400
+Received: from mail-pf1-x42e.google.com ([2607:f8b0:4864:20::42e]:34344)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
- id 1hmVL7-0003iz-3m; Sat, 13 Jul 2019 23:38:17 -0400
-Received: by mail-ed1-x541.google.com with SMTP id e3so12387349edr.10;
- Sat, 13 Jul 2019 20:38:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=epXt3tMCuaCZ+FBDgx3zrjs1rQeNPB0DcBSKGrdJiGc=;
- b=HZhRhDagqG4KEMuJlJS58veC1css7UA61acQQtMWWKHoRlfyDEa4nQ0jSBEszW37KL
- 45N+3Culs13+Ph25zcHRoiYDPT3H/6QudSmzHQN/au7PpuH9feqqOy0wFipyimINLRx5
- /Z1O1o7ueMdMwBD/IoEOkGZNWf2q2cuqrK90v/O54zdog2QCycMqXsNeBRw6sr2rtZvG
- tr2HNVISzHDBZXrg93nLCk+dvnTKTzecN4cYvFfiMF0rTEEfCGeS+slqn6HvLHKgybKH
- msd8o464u4AQt3Mc5177TZYi9lEjI9rmDVUsSjZ5SytXnlB4GQzuazGMkm0JF3H8DvHn
- r1Lg==
+ (Exim 4.71) (envelope-from <chihmin.chao@sifive.com>)
+ id 1hmwyd-0004eW-0K
+ for qemu-riscv@nongnu.org; Mon, 15 Jul 2019 05:08:55 -0400
+Received: by mail-pf1-x42e.google.com with SMTP id b13so7128592pfo.1
+ for <qemu-riscv@nongnu.org>; Mon, 15 Jul 2019 02:08:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+ h=from:to:cc:subject:date:message-id;
+ bh=N+oIfyziDuwnxLpKqhY/smwRwjf6Qx0rWIQdNNXocn0=;
+ b=Y0YaDWHJx/yD1Bz8WVXGtzxynTylq1nfqpuXhwSu+Vk+vluD0EAJ/p7AYYlKvmvPlg
+ Ga8CUtxEg291DI7LpZyjaIvAaC3Kzd1Reo/usLLe2UZ6ilTgG7TaCvDwfO+lEHMHltTG
+ xk9GfePJ1GPnrEhZhSfujl8rbGEQOqdO7P+m1EBB3VfuoNacPgjCpa64ZzSTnWf88Gwt
+ 9NeFaPS/c727F6F/UeU9JJ6RBSU6lZGzKSSSjwb+ucp9BQnIBkIWZqFxzaq3DCFmLxQX
+ sFuk0vFbg0a6jILMc4vd+tDKE3EiHO6huPrRd/URjjZdOpv9Ch9h1Z7rW7nalYKBDnYI
+ LPxQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=epXt3tMCuaCZ+FBDgx3zrjs1rQeNPB0DcBSKGrdJiGc=;
- b=GkxzJX8XHn+3c3nS4t/8x6nRWfKVkE+iXXGENrF2zAxwnN8TrW93HllWIXrttK1EvR
- Gzo/zZOxd73BC2/fK5zJauSZF9m0VNGQwaZX11Xrz39kuLdonQ9RB+NJ4l7ROFR3B87l
- d0g04obMX3je0sMhYi3eyxkd9fVhZ1tjohmP6Q2ca5z7NMDp9Wda6pfAsqvk5FMuBnWn
- WC3+Jrv/6tK+PCf+ttA8m3n7ZcJk+xB/afpdJhxttXVb6msgRboQTwD0MzP0xv6oIXjJ
- NDGnT3UHhOb+mEoDc49SaOgL/Vx9oDTmhseqJ8wnhw+LaMfrxpWGr7dJiOO7sa1fQ5jQ
- aTbw==
-X-Gm-Message-State: APjAAAUmrqIJScL3eBXhwS1CDYfoCzC0x/qGJ/C2Xv/aIABt2pnm5PD8
- mK3KOaD+LzNzpLqSM5ZuJ8Jit8hp9oPJfyYSWHo=
-X-Google-Smtp-Source: APXvYqx67bOgUgJAwgc5K46c9yvh/ujiQ/8/2T900p2FxpcV9sHWZxOOoQuhlgEp5Z131on/xOVNnhdCPlXX35Ksv4M=
-X-Received: by 2002:a17:906:fcb8:: with SMTP id
- qw24mr14784506ejb.239.1563075496133; 
- Sat, 13 Jul 2019 20:38:16 -0700 (PDT)
-MIME-Version: 1.0
-References: <1560525351-590-1-git-send-email-bmeng.cn@gmail.com>
- <mhng-4825dce4-e510-41cd-b97c-0e599d6a2369@palmer-si-x1e>
-In-Reply-To: <mhng-4825dce4-e510-41cd-b97c-0e599d6a2369@palmer-si-x1e>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Sun, 14 Jul 2019 11:38:05 +0800
-Message-ID: <CAEUhbmVH8cWcWn=s9J7VA40VCUoYpMkjXAMe=X1MLZfwghxP4A@mail.gmail.com>
-To: Palmer Dabbelt <palmer@sifive.com>
-Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Alistair Francis <Alistair.Francis@wdc.com>
-Content-Type: text/plain; charset="UTF-8"
+ h=x-gm-message-state:from:to:cc:subject:date:message-id;
+ bh=N+oIfyziDuwnxLpKqhY/smwRwjf6Qx0rWIQdNNXocn0=;
+ b=ZUgZclvwXm6n1Xu/P+1Q0WtbQGyaaa3c7QbbTs4apazSvWCCys2EdHUKymt2tmb0Oq
+ GKyRvr3aXEj6F3NHmNIg0exbp/rrt4uaIpggUSoNWzYBMpCEgue8FAN65+lgqhYoOR75
+ mtP6YWyPRMwstR1fQJtOGSMIO9kT/9pnt0zYg7tOkbJsk6AcFeJJej2sQZtXIy2D9Q/3
+ pYwx6AhFI1HtGjAL8nBwgsbiBxbvi66KWoReOKwn2mEcQVexzUZQqhWrLW64VEKR5x6H
+ LsIoiNVwuDI9KRmCmGk28qVy3Qj2Byo5LUDVkzF9SXzopVOcpFtZrE11yOv+d8oJK9IU
+ lpGw==
+X-Gm-Message-State: APjAAAWlLzcf+QYVax/Zn3RBLMtRkwbEYvNxKyvCR5fCpjIkMUoag/z7
+ eKS9uw0iILbW41q9ZsOH5k/UEA==
+X-Google-Smtp-Source: APXvYqwWBv4K7fkwNOaYu9rcWQr1X4BmonExcr/sRL371d3/Jha+Nn2vCx+YBQGw6u2YSG5LdkTR6w==
+X-Received: by 2002:a17:90a:c596:: with SMTP id
+ l22mr28413823pjt.46.1563181733089; 
+ Mon, 15 Jul 2019 02:08:53 -0700 (PDT)
+Received: from gamma06.internal.sifive.com ([64.62.193.194])
+ by smtp.gmail.com with ESMTPSA id w197sm23458159pfd.41.2019.07.15.02.08.51
+ (version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+ Mon, 15 Jul 2019 02:08:52 -0700 (PDT)
+From: Chih-Min Chao <chihmin.chao@sifive.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Chih-Min Chao <chihmin.chao@sifive.com>,
+ =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ Fam Zheng <fam@euphon.net>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>,
+ Eduardo Habkost <ehabkost@redhat.com>, Cleber Rosa <crosa@redhat.com>,
+ Cornelia Huck <cohuck@redhat.com>
+Date: Mon, 15 Jul 2019 02:08:36 -0700
+Message-Id: <1563181721-5055-1-git-send-email-chihmin.chao@sifive.com>
+X-Mailer: git-send-email 2.7.4
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::541
-Subject: Re: [Qemu-riscv] [PATCH] riscv: sifive_test: Add reset functionality
+X-Received-From: 2607:f8b0:4864:20::42e
+Subject: [Qemu-riscv] [PATCH v2] tests/boot_linux_console: add a test for
+ riscv64 + virt
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -67,76 +72,122 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 14 Jul 2019 03:38:19 -0000
+X-List-Received-Date: Mon, 15 Jul 2019 09:08:58 -0000
 
-On Tue, Jul 9, 2019 at 5:48 PM Palmer Dabbelt <palmer@sifive.com> wrote:
->
-> On Fri, 14 Jun 2019 08:15:51 PDT (-0700), bmeng.cn@gmail.com wrote:
-> > This adds a reset opcode for sifive_test device to trigger a system
-> > reset for testing purpose.
-> >
-> > Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
-> > ---
-> >
-> >  hw/riscv/sifive_test.c         | 4 ++++
-> >  include/hw/riscv/sifive_test.h | 3 ++-
-> >  2 files changed, 6 insertions(+), 1 deletion(-)
-> >
-> > diff --git a/hw/riscv/sifive_test.c b/hw/riscv/sifive_test.c
-> > index 24a04d7..cd86831 100644
-> > --- a/hw/riscv/sifive_test.c
-> > +++ b/hw/riscv/sifive_test.c
-> > @@ -21,6 +21,7 @@
-> >  #include "qemu/osdep.h"
-> >  #include "hw/sysbus.h"
-> >  #include "qemu/module.h"
-> > +#include "sysemu/sysemu.h"
-> >  #include "target/riscv/cpu.h"
-> >  #include "hw/riscv/sifive_test.h"
-> >
-> > @@ -40,6 +41,9 @@ static void sifive_test_write(void *opaque, hwaddr addr,
-> >              exit(code);
-> >          case FINISHER_PASS:
-> >              exit(0);
-> > +        case FINISHER_RESET:
-> > +            qemu_system_reset_request(SHUTDOWN_CAUSE_GUEST_RESET);
-> > +            return;
-> >          default:
-> >              break;
-> >          }
-> > diff --git a/include/hw/riscv/sifive_test.h b/include/hw/riscv/sifive_test.h
-> > index 71d4c9f..c186a31 100644
-> > --- a/include/hw/riscv/sifive_test.h
-> > +++ b/include/hw/riscv/sifive_test.h
-> > @@ -34,7 +34,8 @@ typedef struct SiFiveTestState {
-> >
-> >  enum {
-> >      FINISHER_FAIL = 0x3333,
-> > -    FINISHER_PASS = 0x5555
-> > +    FINISHER_PASS = 0x5555,
-> > +    FINISHER_RESET = 0x7777
-> >  };
-> >
-> >  DeviceState *sifive_test_create(hwaddr addr);
->
-> Poking around the hardware side, it looks like we're silently ignoring all
-> codes aside from 0x3333 and 0x5555.  As a result there's really no way to test
-> if this added reset is going to work, so this should be a "sifive,test1"
-> instead of a "sifive,test0".  It's backwards compatible, so the compat string
-> in the device trees should look something like
->
->     compatible = "sifive,test1", "sifive,test0";
->
-> With that it should be fine, pending the change to our hardware to reserve this
-> as an error code within "sifive,test0" devices.
->
-> Do you mind also submitting a device tree binding to Linux that describes this
-> device?  That way we can all stay on the same page about what the pair of
-> interfaces do.
+Similar to the mips + malta test, it boots a Linux kernel on a virt
+board and verify the serial is working.  Also, it relies on the serial
+device set by the machine itself.
 
-Thanks for the confirmation. I will try to create a device tree
-binding for Linux.
+If riscv64 is a target being built, "make check-acceptance" will
+automatically include this test by the use of the "arch:riscv64" tags.
 
-Regards,
-Bin
+Alternatively, this test can be run using:
+
+  $ avocado run -t arch:riscv64 tests/acceptance
+
+packages
+  debian official
+    binutils-riscv64-linux-gnu_2.32-8
+    opensbi_0.4-1_all
+    linux-image-4.19.0-5-riscv64 4.19.37-4
+  third-party
+    https://github.com/groeck/linux-build-test/rootfs/riscv64/rootfs.cpio.gz
+    (the repo is also used in mips target acceptance)
+
+Signed-off-by: Chih-Min Chao <chihmin.chao@sifive.com>
+---
+ .travis.yml                            |  2 +-
+ tests/acceptance/boot_linux_console.py | 66 ++++++++++++++++++++++++++++++++++
+ 2 files changed, 67 insertions(+), 1 deletion(-)
+
+diff --git a/.travis.yml b/.travis.yml
+index 5d3d6ee..21fcead 100644
+--- a/.travis.yml
++++ b/.travis.yml
+@@ -232,7 +232,7 @@ matrix:
+ 
+     # Acceptance (Functional) tests
+     - env:
+-        - CONFIG="--python=/usr/bin/python3 --target-list=x86_64-softmmu,mips-softmmu,mips64el-softmmu,aarch64-softmmu,arm-softmmu,s390x-softmmu,alpha-softmmu"
++        - CONFIG="--python=/usr/bin/python3 --target-list=x86_64-softmmu,mips-softmmu,mips64el-softmmu,aarch64-softmmu,arm-softmmu,s390x-softmmu,alpha-softmmu,riscv64-softmmu"
+         - TEST_CMD="make check-acceptance"
+       after_failure:
+         - cat tests/results/latest/job.log
+diff --git a/tests/acceptance/boot_linux_console.py b/tests/acceptance/boot_linux_console.py
+index 3215950..0f638bc 100644
+--- a/tests/acceptance/boot_linux_console.py
++++ b/tests/acceptance/boot_linux_console.py
+@@ -354,3 +354,69 @@ class BootLinuxConsole(Test):
+         self.vm.launch()
+         console_pattern = 'Kernel command line: %s' % kernel_command_line
+         self.wait_for_console_pattern(console_pattern)
++
++    def test_riscv64_virt(self):
++        """
++        :avocado: tags=arch:riscv64
++        :avocado: tags=machine:virt
++        """
++        deb_url = ('https://snapshot.debian.org/archive/debian/'
++                         '20190424T171759Z/pool/main/b/binutils/'
++                         'binutils-riscv64-linux-gnu_2.32-8_amd64.deb')
++        deb_hash = ('7fe376fd4452696c03acd508d6d613ca553ea15e')
++        deb_path = self.fetch_asset(deb_url, asset_hash=deb_hash)
++        objcopy_path = '/usr/bin/riscv64-linux-gnu-objcopy'
++        objcopy_path = self.extract_from_deb(deb_path, objcopy_path)
++        libbfd_path = '/usr/lib/x86_64-linux-gnu/libbfd-2.32-riscv64.so'
++        libbfd_path = self.extract_from_deb(deb_path, libbfd_path)
++        process.run('ls -al %s' % (objcopy_path))
++
++        deb_url = ('https://snapshot.debian.org/archive/debian/'
++                   '20190708T032337Z/pool/main/o/opensbi/'
++                   'opensbi_0.4-1_all.deb')
++        deb_hash = ('2319dcd702958291d323acf5649fd98a11d90112')
++        deb_path = self.fetch_asset(deb_url, asset_hash=deb_hash)
++        opensbi_path = ('/usr/lib/riscv64-linux-gnu/opensbi/'
++                        'qemu/virt/fw_jump.elf')
++        opensbi_path = self.extract_from_deb(deb_path, opensbi_path)
++
++        deb_url = ('https://snapshot.debian.org/archive/debian-ports/'
++                   '20190620T095935Z/pool-riscv64/main/l/linux/'
++                   'linux-image-4.19.0-5-riscv64_4.19.37-4_riscv64.deb')
++        deb_hash = ('bf5b5680c41d92134d22caef4fbd277c5217e1f0')
++        deb_path = self.fetch_asset(deb_url, asset_hash=deb_hash)
++        kernel_path = '/boot/vmlinux-4.19.0-5-riscv64'
++        kernel_path = self.extract_from_deb(deb_path, kernel_path)
++        kimage_path = self.workdir + "/Image"
++        env = os.environ
++        env['LD_LIBRARY_PATH'] = ('%s:' % (os.path.dirname(libbfd_path)) +
++                                 env.get('LD_LIBRARY_PATH', ''))
++        process.run(('%s -O binary -O binary -R'
++                     '.note -R .note.gnu.build-id -R .comment -S %s %s') %
++                     (objcopy_path, kernel_path, kimage_path))
++
++        initrd_url = ('https://github.com/groeck/linux-build-test/raw/'
++                      '8584a59ed9e5eb5ee7ca91f6d74bbb06619205b8/rootfs/'
++                      'riscv64/rootfs.cpio.gz')
++        initrd_hash = 'f4867d263754961b6f626cdcdc0cb334c47e3b49'
++        initrd_path = self.fetch_asset(initrd_url, asset_hash=initrd_hash)
++
++        self.vm.set_machine('virt')
++        self.vm.set_console()
++        kernel_command_line = (self.KERNEL_COMMON_COMMAND_LINE
++                               + 'console=ttyS0 noreboot')
++        self.vm.add_args('-bios', opensbi_path,
++                         '-kernel', kimage_path,
++                         '-initrd', initrd_path,
++                         '-append', kernel_command_line,
++                         '-no-reboot')
++
++        self.vm.launch()
++        self.wait_for_console_pattern('Boot successful.')
++
++        self.exec_command_and_wait_for_pattern('cat /proc/cpuinfo',
++                                               'isa')
++        self.exec_command_and_wait_for_pattern('uname -a',
++                                               'SMP Debian')
++        self.exec_command_and_wait_for_pattern('reboot',
++                                               'reboot: Restarting system')
+-- 
+2.7.4
+
 
