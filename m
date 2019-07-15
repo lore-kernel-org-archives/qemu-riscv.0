@@ -1,64 +1,54 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hmx4z-0005Fh-Ey
-	for mharc-qemu-riscv@gnu.org; Mon, 15 Jul 2019 05:15:29 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:48461)
+	id 1hmxia-0008IS-J5
+	for mharc-qemu-riscv@gnu.org; Mon, 15 Jul 2019 05:56:24 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:57819)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <philmd@redhat.com>) id 1hmx4t-0005EH-67
- for qemu-riscv@nongnu.org; Mon, 15 Jul 2019 05:15:24 -0400
+ (envelope-from <philmd@redhat.com>) id 1hmxiY-00087r-4T
+ for qemu-riscv@nongnu.org; Mon, 15 Jul 2019 05:56:23 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <philmd@redhat.com>) id 1hmx4r-0000cD-JF
- for qemu-riscv@nongnu.org; Mon, 15 Jul 2019 05:15:23 -0400
-Received: from mail-wm1-f65.google.com ([209.85.128.65]:35432)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <philmd@redhat.com>) id 1hmx4r-0000bR-AK
- for qemu-riscv@nongnu.org; Mon, 15 Jul 2019 05:15:21 -0400
-Received: by mail-wm1-f65.google.com with SMTP id l2so14379152wmg.0
- for <qemu-riscv@nongnu.org>; Mon, 15 Jul 2019 02:15:21 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
- :date:user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=vrPcRpraOgIW79MOuB2DZOLz61YiwR1xLBjO+mwQ/F4=;
- b=P2A+urfoQNgyLbtVWwwFWWtG+kfnGLpkH2IO+zNvGaGAl3SnAPEqFosoNsaEDr0+aL
- Pe22UKd+VRZisfgtzOLTdQ4dSVa0aMvWaMzdW6BaZTWmanNqQ/ixrX1qIXFzfjB38tgY
- QLl4K5fNJkiSVBQU2XlIdNNC3f2zACcaDRx2YYtsVMdTgP6jv3eIxDyQrm1RM41Vplko
- KDLK5fx1l5rLTx+9E+qhK3S5s5N8yct1zXW60HWJZskJvj02gwJgz2Qr8tWhvFz3FjU4
- SeQSgg14n9bFb3e8pHIjKayr58JSxbNMwOEN184xCEmoQfICZlZXTnaYI+NKY0uaaSow
- mIsQ==
-X-Gm-Message-State: APjAAAVGtSqDP9G2mZOVjtogpvc2XApbWY4hFJZU76IKgCrqebp7HQ3/
- tS/R5B6EOW5fmskYbBF5CHhLkg==
-X-Google-Smtp-Source: APXvYqwqNRvHgU3QBa+KmpxVROvKsYoxF2p4IiP0W47umHvdE+xfVWFV6YG7wf9aztKti2YHBT6dhg==
-X-Received: by 2002:a1c:2314:: with SMTP id j20mr23478660wmj.152.1563182120152; 
- Mon, 15 Jul 2019 02:15:20 -0700 (PDT)
-Received: from [192.168.1.37] (62.red-83-42-61.dynamicip.rima-tde.net.
- [83.42.61.62])
- by smtp.gmail.com with ESMTPSA id w7sm19620177wrn.11.2019.07.15.02.15.18
- (version=TLS1_3 cipher=AEAD-AES128-GCM-SHA256 bits=128/128);
- Mon, 15 Jul 2019 02:15:19 -0700 (PDT)
-To: Chih-Min Chao <chihmin.chao@sifive.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: =?UTF-8?Q?Alex_Benn=c3=a9e?= <alex.bennee@linaro.org>,
- Fam Zheng <fam@euphon.net>, Eduardo Habkost <ehabkost@redhat.com>,
- Cleber Rosa <crosa@redhat.com>, Cornelia Huck <cohuck@redhat.com>
-References: <1563181721-5055-1-git-send-email-chihmin.chao@sifive.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>
-Openpgp: id=89C1E78F601EE86C867495CBA2A3FD6EDEADC0DE;
- url=http://pgp.mit.edu/pks/lookup?op=get&search=0xA2A3FD6EDEADC0DE
-Message-ID: <93b35a5e-c40a-535b-2a91-2c210b4a5928@redhat.com>
-Date: Mon, 15 Jul 2019 11:15:18 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.7.0
+ (envelope-from <philmd@redhat.com>) id 1hmxiX-0001px-8L
+ for qemu-riscv@nongnu.org; Mon, 15 Jul 2019 05:56:22 -0400
+Received: from mx1.redhat.com ([209.132.183.28]:51846)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <philmd@redhat.com>)
+ id 1hmxiR-0001mL-R8; Mon, 15 Jul 2019 05:56:15 -0400
+Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
+ [10.5.11.11])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mx1.redhat.com (Postfix) with ESMTPS id BBBCC3DD47;
+ Mon, 15 Jul 2019 09:56:12 +0000 (UTC)
+Received: from x1w.redhat.com (unknown [10.40.205.87])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 8B00B6012C;
+ Mon, 15 Jul 2019 09:55:53 +0000 (UTC)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
+To: qemu-devel@nongnu.org
+Cc: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Paolo Bonzini <pbonzini@redhat.com>, Gerd Hoffmann <kraxel@redhat.com>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, qemu-riscv@nongnu.org,
+ Palmer Dabbelt <palmer@sifive.com>, Richard Henderson <rth@twiddle.net>,
+ David Gibson <david@gibson.dropbear.id.au>, Thomas Huth <thuth@redhat.com>,
+ "Michael S. Tsirkin" <mst@redhat.com>,
+ Aurelien Jarno <aurelien@aurel32.net>,
+ Alistair Francis <Alistair.Francis@wdc.com>, qemu-ppc@nongnu.org,
+ Artyom Tarasenko <atar4qemu@gmail.com>, qemu-arm@nongnu.org,
+ Helge Deller <deller@gmx.de>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Eduardo Habkost <ehabkost@redhat.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
+Date: Mon, 15 Jul 2019 11:55:42 +0200
+Message-Id: <20190715095545.28545-1-philmd@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <1563181721-5055-1-git-send-email-chihmin.chao@sifive.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=UTF-8
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+ (mx1.redhat.com [10.5.110.29]); Mon, 15 Jul 2019 09:56:13 +0000 (UTC)
+Content-Transfer-Encoding: quoted-printable
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
- [fuzzy]
-X-Received-From: 209.85.128.65
-Subject: Re: [Qemu-riscv] [PATCH v2] tests/boot_linux_console: add a test
- for riscv64 + virt
+X-Received-From: 209.132.183.28
+Subject: [Qemu-riscv] [PATCH 0/3] hw/Kconfig: PCI & USB fixes
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -70,127 +60,32 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Jul 2019 09:15:24 -0000
+X-List-Received-Date: Mon, 15 Jul 2019 09:56:23 -0000
 
-On 7/15/19 11:08 AM, Chih-Min Chao wrote:
-> Similar to the mips + malta test, it boots a Linux kernel on a virt
-> board and verify the serial is working.  Also, it relies on the serial
-> device set by the machine itself.
-> 
-> If riscv64 is a target being built, "make check-acceptance" will
-> automatically include this test by the use of the "arch:riscv64" tags.
-> 
-> Alternatively, this test can be run using:
-> 
->   $ avocado run -t arch:riscv64 tests/acceptance
-> 
-> packages
->   debian official
->     binutils-riscv64-linux-gnu_2.32-8
->     opensbi_0.4-1_all
->     linux-image-4.19.0-5-riscv64 4.19.37-4
->   third-party
->     https://github.com/groeck/linux-build-test/rootfs/riscv64/rootfs.cpio.gz
->     (the repo is also used in mips target acceptance)
-> 
-> Signed-off-by: Chih-Min Chao <chihmin.chao@sifive.com>
-> ---
->  .travis.yml                            |  2 +-
->  tests/acceptance/boot_linux_console.py | 66 ++++++++++++++++++++++++++++++++++
->  2 files changed, 67 insertions(+), 1 deletion(-)
-> 
-> diff --git a/.travis.yml b/.travis.yml
-> index 5d3d6ee..21fcead 100644
-> --- a/.travis.yml
-> +++ b/.travis.yml
-> @@ -232,7 +232,7 @@ matrix:
->  
->      # Acceptance (Functional) tests
->      - env:
-> -        - CONFIG="--python=/usr/bin/python3 --target-list=x86_64-softmmu,mips-softmmu,mips64el-softmmu,aarch64-softmmu,arm-softmmu,s390x-softmmu,alpha-softmmu"
-> +        - CONFIG="--python=/usr/bin/python3 --target-list=x86_64-softmmu,mips-softmmu,mips64el-softmmu,aarch64-softmmu,arm-softmmu,s390x-softmmu,alpha-softmmu,riscv64-softmmu"
->          - TEST_CMD="make check-acceptance"
->        after_failure:
->          - cat tests/results/latest/job.log
-> diff --git a/tests/acceptance/boot_linux_console.py b/tests/acceptance/boot_linux_console.py
-> index 3215950..0f638bc 100644
-> --- a/tests/acceptance/boot_linux_console.py
-> +++ b/tests/acceptance/boot_linux_console.py
-> @@ -354,3 +354,69 @@ class BootLinuxConsole(Test):
->          self.vm.launch()
->          console_pattern = 'Kernel command line: %s' % kernel_command_line
->          self.wait_for_console_pattern(console_pattern)
-> +
-> +    def test_riscv64_virt(self):
-> +        """
-> +        :avocado: tags=arch:riscv64
-> +        :avocado: tags=machine:virt
-> +        """
-> +        deb_url = ('https://snapshot.debian.org/archive/debian/'
-> +                         '20190424T171759Z/pool/main/b/binutils/'
-> +                         'binutils-riscv64-linux-gnu_2.32-8_amd64.deb')
-> +        deb_hash = ('7fe376fd4452696c03acd508d6d613ca553ea15e')
-> +        deb_path = self.fetch_asset(deb_url, asset_hash=deb_hash)
-> +        objcopy_path = '/usr/bin/riscv64-linux-gnu-objcopy'
-> +        objcopy_path = self.extract_from_deb(deb_path, objcopy_path)
-> +        libbfd_path = '/usr/lib/x86_64-linux-gnu/libbfd-2.32-riscv64.so'
-> +        libbfd_path = self.extract_from_deb(deb_path, libbfd_path)
-> +        process.run('ls -al %s' % (objcopy_path))
-> +
-> +        deb_url = ('https://snapshot.debian.org/archive/debian/'
-> +                   '20190708T032337Z/pool/main/o/opensbi/'
-> +                   'opensbi_0.4-1_all.deb')
-> +        deb_hash = ('2319dcd702958291d323acf5649fd98a11d90112')
-> +        deb_path = self.fetch_asset(deb_url, asset_hash=deb_hash)
-> +        opensbi_path = ('/usr/lib/riscv64-linux-gnu/opensbi/'
-> +                        'qemu/virt/fw_jump.elf')
-> +        opensbi_path = self.extract_from_deb(deb_path, opensbi_path)
-> +
-> +        deb_url = ('https://snapshot.debian.org/archive/debian-ports/'
-> +                   '20190620T095935Z/pool-riscv64/main/l/linux/'
-> +                   'linux-image-4.19.0-5-riscv64_4.19.37-4_riscv64.deb')
-> +        deb_hash = ('bf5b5680c41d92134d22caef4fbd277c5217e1f0')
-> +        deb_path = self.fetch_asset(deb_url, asset_hash=deb_hash)
-> +        kernel_path = '/boot/vmlinux-4.19.0-5-riscv64'
-> +        kernel_path = self.extract_from_deb(deb_path, kernel_path)
-> +        kimage_path = self.workdir + "/Image"
-> +        env = os.environ
-> +        env['LD_LIBRARY_PATH'] = ('%s:' % (os.path.dirname(libbfd_path)) +
-> +                                 env.get('LD_LIBRARY_PATH', ''))
-> +        process.run(('%s -O binary -O binary -R'
-> +                     '.note -R .note.gnu.build-id -R .comment -S %s %s') %
-> +                     (objcopy_path, kernel_path, kimage_path))
+I actually wanted to clean the USB devices (i.e. to not have
+USB3 devices appear on OHCI buses) but this is too late for
+the next release, so let's post the patches accumulated.
 
-Please explain why you need to do that...
+Philippe Mathieu-Daud=C3=A9 (3):
+  hw/Kconfig: PCI bus implies PCI_DEVICES
+  hw/usb/Kconfig: Add CONFIG_USB_EHCI_PCI
+  hw/usb/Kconfig: USB_XHCI_NEC requires USB_XHCI
 
-Also note these tests are run on other host architecture than x86, at
-least ppc64/s390x (so this won't work there).
+ docs/devel/kconfig.rst |  1 -
+ hw/alpha/Kconfig       |  1 -
+ hw/arm/Kconfig         |  4 ----
+ hw/hppa/Kconfig        |  1 -
+ hw/i386/Kconfig        |  1 -
+ hw/pci/Kconfig         |  1 +
+ hw/ppc/Kconfig         |  6 ------
+ hw/riscv/Kconfig       |  1 -
+ hw/sh4/Kconfig         |  1 -
+ hw/sparc64/Kconfig     |  1 -
+ hw/usb/Kconfig         | 11 +++++++----
+ hw/usb/Makefile.objs   |  5 +++--
+ 12 files changed, 11 insertions(+), 23 deletions(-)
 
-> +
-> +        initrd_url = ('https://github.com/groeck/linux-build-test/raw/'
-> +                      '8584a59ed9e5eb5ee7ca91f6d74bbb06619205b8/rootfs/'
-> +                      'riscv64/rootfs.cpio.gz')
-> +        initrd_hash = 'f4867d263754961b6f626cdcdc0cb334c47e3b49'
-> +        initrd_path = self.fetch_asset(initrd_url, asset_hash=initrd_hash)
-> +
-> +        self.vm.set_machine('virt')
-> +        self.vm.set_console()
-> +        kernel_command_line = (self.KERNEL_COMMON_COMMAND_LINE
-> +                               + 'console=ttyS0 noreboot')
-> +        self.vm.add_args('-bios', opensbi_path,
-> +                         '-kernel', kimage_path,
-> +                         '-initrd', initrd_path,
-> +                         '-append', kernel_command_line,
-> +                         '-no-reboot')
-> +
-> +        self.vm.launch()
-> +        self.wait_for_console_pattern('Boot successful.')
-> +
-> +        self.exec_command_and_wait_for_pattern('cat /proc/cpuinfo',
-> +                                               'isa')
-> +        self.exec_command_and_wait_for_pattern('uname -a',
-> +                                               'SMP Debian')
-> +        self.exec_command_and_wait_for_pattern('reboot',
-> +                                               'reboot: Restarting system')
-> 
+--=20
+2.20.1
+
 
