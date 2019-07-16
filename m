@@ -1,119 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hnP0f-0000v4-TE
-	for mharc-qemu-riscv@gnu.org; Tue, 16 Jul 2019 11:04:53 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53314)
+	id 1hnP2n-0003io-Ab
+	for mharc-qemu-riscv@gnu.org; Tue, 16 Jul 2019 11:07:05 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:60042)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <thuth@redhat.com>) id 1hnP0c-0000mJ-LG
- for qemu-riscv@nongnu.org; Tue, 16 Jul 2019 11:04:51 -0400
+ (envelope-from <stefanha@gmail.com>) id 1hnNwZ-0004WB-RV
+ for qemu-riscv@nongnu.org; Tue, 16 Jul 2019 09:56:36 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <thuth@redhat.com>) id 1hnP0a-0007K2-Gy
- for qemu-riscv@nongnu.org; Tue, 16 Jul 2019 11:04:50 -0400
-Received: from mx1.redhat.com ([209.132.183.28]:46808)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <thuth@redhat.com>)
- id 1hnP0U-0007Gm-0i; Tue, 16 Jul 2019 11:04:42 -0400
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
- [10.5.11.12])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id D784846674;
- Tue, 16 Jul 2019 15:04:40 +0000 (UTC)
-Received: from thuth.remote.csb (reserved-198-198.str.redhat.com
- [10.33.198.198])
- by smtp.corp.redhat.com (Postfix) with ESMTP id DF34360C44;
- Tue, 16 Jul 2019 15:04:25 +0000 (UTC)
-To: Markus Armbruster <armbru@redhat.com>, Paolo Bonzini
- <pbonzini@redhat.com>, Collin Walling <walling@linux.ibm.com>
-Cc: Cornelia Huck <cohuck@redhat.com>,
- Peter Maydell <peter.maydell@linaro.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>,
- Eduardo Habkost <ehabkost@redhat.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- "Michael S. Tsirkin" <mst@redhat.com>, Helge Deller <deller@gmx.de>,
- Palmer Dabbelt <palmer@sifive.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- QEMU Developers <qemu-devel@nongnu.org>,
- "open list:S390" <qemu-s390x@nongnu.org>, qemu-arm <qemu-arm@nongnu.org>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Gerd Hoffmann <kraxel@redhat.com>, Artyom Tarasenko <atar4qemu@gmail.com>,
- qemu-ppc <qemu-ppc@nongnu.org>, David Gibson <david@gibson.dropbear.id.au>,
- =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>,
- Aurelien Jarno <aurelien@aurel32.net>, Richard Henderson <rth@twiddle.net>
-References: <20190715095545.28545-1-philmd@redhat.com>
- <20190715095545.28545-2-philmd@redhat.com>
- <ca528cdc-6118-0b2f-c1b8-30b06875dde8@redhat.com>
- <CAFEAcA-wgTVfj0TUJ=piP0wEgLGiNpOYia5DK2GQAO4Q7gNaWg@mail.gmail.com>
- <6d69e8ad-d720-ce04-20f2-a03193903078@redhat.com>
- <20190715125653.6e65d575.cohuck@redhat.com>
- <c1c68faf-0424-6c7c-e39f-42159457c3ee@redhat.com>
- <20190715130955.4a117388.cohuck@redhat.com>
- <13fce62f-234c-1b13-595f-5910c066bc4f@redhat.com>
- <6c39a198-e951-c0bd-1ddc-5d227afe72ff@redhat.com>
- <87a7dfth4i.fsf@dusky.pond.sub.org>
- <20190715181206.3cb1db93.cohuck@redhat.com>
- <799aa0f5-8850-5caa-5103-e1cf3cdb018f@redhat.com>
- <87h87m2knh.fsf@dusky.pond.sub.org>
-From: Thomas Huth <thuth@redhat.com>
-Openpgp: preference=signencrypt
-Autocrypt: addr=thuth@redhat.com; keydata=
- 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
-Organization: Red Hat
-Message-ID: <beb5fe93-991d-ba2b-d2c1-51e01b912dbe@redhat.com>
-Date: Tue, 16 Jul 2019 17:04:24 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.7.2
+ (envelope-from <stefanha@gmail.com>) id 1hnNwY-0002zz-Ph
+ for qemu-riscv@nongnu.org; Tue, 16 Jul 2019 09:56:35 -0400
+Received: from mail-wr1-x444.google.com ([2a00:1450:4864:20::444]:40256)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <stefanha@gmail.com>)
+ id 1hnNwV-0002y0-GP; Tue, 16 Jul 2019 09:56:32 -0400
+Received: by mail-wr1-x444.google.com with SMTP id r1so21054667wrl.7;
+ Tue, 16 Jul 2019 06:56:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to:user-agent;
+ bh=Dipokld8iDHqbE49EQ+wVKN/86qV/Cdx+scrTGYVrEo=;
+ b=kvalVW+98y0a+a5LiR9PkT3rn0pZ2pTlPXLLyEJgmUcqkio05SZzT8KT7gdzzuZIaX
+ pPOtAS5fV1lvRLJy76OuYY3DGJ/pIUGKnREpyE39sY1aCp6EJ31Bbe8jr5KIe8/Hk93M
+ TpVhOvbvRopm6ovD6XP1W6KBUK8qU8NO2XJ6+Hc0wgQXgAXgVg8cCEoDVI1cY5Ee4MYS
+ tCYgqnpnKZq6rLwP/Msv/SPmyla23AZ2M1W+LyRmGltMiXrn5ucQSSHFGRYDLYJjuPOr
+ cjGH3tjx/Kg0B/QKlOcuks031YUV+rBbQMGPOUn6fnpwKe/TnmUVsYgPpX7BCTDodHde
+ 95ZQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to:user-agent;
+ bh=Dipokld8iDHqbE49EQ+wVKN/86qV/Cdx+scrTGYVrEo=;
+ b=QIu4gOrdABUROodPmQFd9ggTw1z9RAFAo/HliviUWu9Jj29Px/BT3cmq7h8qy0uvM3
+ DonKsnmCV56R2JhHjmA3hgZV98oSzkpp1rzHO7LhfUhMzk9vqe5U9aJS18yhkfCZ2/h4
+ muX8zYHIGD+QFd89A9wZ6ZZVobOMtfxKLytO+RX2MCVEtdYuEljZEbSsGvxJXJUZoxmC
+ wWgnXZQf+DF6FIdbZKJ3P80Ql02RUrPxjAUVZS/aM2hmoVOaCxigVjPBcC3c6tX0fJhU
+ 7cVTwjbrz8xm16EcpjeNhY+OyhleM9Wrhr6w6V8Kz8LDsp0DOmmH+HPqpaYtjojJbZCZ
+ cGCA==
+X-Gm-Message-State: APjAAAVCPIqi3WSyzn2HuQGsseOGdvjfeaxKNNNx2VIuJM4xakBmJPZe
+ ejqZyP8LiSpZPRFfcSFD1pI=
+X-Google-Smtp-Source: APXvYqy7+izjwfGQLn6ZtcazGUS6g8dXo3rNWuWdzrGBbDNB4c4oSFhh9pj0Tp6NKBC+F4dBhSMCng==
+X-Received: by 2002:adf:ed8a:: with SMTP id c10mr37544629wro.33.1563285389935; 
+ Tue, 16 Jul 2019 06:56:29 -0700 (PDT)
+Received: from localhost ([51.15.41.238])
+ by smtp.gmail.com with ESMTPSA id g11sm24604690wrq.92.2019.07.16.06.56.29
+ (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+ Tue, 16 Jul 2019 06:56:29 -0700 (PDT)
+Date: Tue, 16 Jul 2019 14:56:28 +0100
+From: Stefan Hajnoczi <stefanha@gmail.com>
+To: Alistair Francis <alistair.francis@wdc.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, peter.maydell@linaro.org,
+ codyprime@gmail.com, anup@brainfault.org, palmer@sifive.com,
+ stefanha@redhat.com, pbonzini@redhat.com, alistair23@gmail.com,
+ bmeng.cn@gmail.com, linux@roeck-us.net
+Message-ID: <20190716135628.GA18691@stefanha-x1.localdomain>
+References: <cover.1562803960.git.alistair.francis@wdc.com>
 MIME-Version: 1.0
-In-Reply-To: <87h87m2knh.fsf@dusky.pond.sub.org>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.30]); Tue, 16 Jul 2019 15:04:41 +0000 (UTC)
-Content-Transfer-Encoding: quoted-printable
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
-X-Received-From: 209.132.183.28
-Subject: Re: [Qemu-riscv] [Qemu-devel] [qemu-s390x] [RFC PATCH 1/3]
- hw/Kconfig: PCI bus implies PCI_DEVICES
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature"; boundary="u3/rZRmxL6MmkK24"
+Content-Disposition: inline
+In-Reply-To: <cover.1562803960.git.alistair.francis@wdc.com>
+User-Agent: Mutt/1.12.0 (2019-05-25)
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2a00:1450:4864:20::444
+X-Mailman-Approved-At: Tue, 16 Jul 2019 11:07:04 -0400
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v2 0/2] RISC-V: Add default
+ OpenSBI ROM
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -125,46 +76,44 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Jul 2019 15:04:52 -0000
+X-List-Received-Date: Tue, 16 Jul 2019 13:56:37 -0000
 
-On 16/07/2019 15.06, Markus Armbruster wrote:
-> Paolo Bonzini <pbonzini@redhat.com> writes:
->=20
->> On 15/07/19 18:12, Cornelia Huck wrote:
->>>> Is it INTx vs. MSI vs. MSI-X?
->>>
->>> I think for s390x we need (INTx || MSI) vs MSI-X...
->>
->> I think MSI vs MSI-X is just how it's configured, not the actual
->> behavior, so it should be irrelevant.
->=20
-> My best guesses from confusing information, please correct
-> misunderstandings:
->=20
-> 1. PCI devices need to support MSI or MSI-X to work with s390x.
 
-I think Cornelia mentioned that we might even require MSI-X there ...
-Collin (being listed as "S390 PCI" maintainer), can you confirm?
+--u3/rZRmxL6MmkK24
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-> 2. We want a way to Kconfig the PCI devices that work, i.e. only the
->    ones that support MSI or MSI-X.
->=20
-> I don't like calling devices without any MSI capability "classic" or
-> "conventional devices".  I'd rather call them "MSI-capable" or
-> "MSI/MSI-X devices".
+On Wed, Jul 10, 2019 at 05:14:02PM -0700, Alistair Francis wrote:
+> This series includes the OpenSBI firmware for QEMU RISC-V users.
 
-But you still need a config switch that you can set to enable the
-non-MSI devices ... what's so wrong with "conventional" if that's even
-the wording from the PCI SIG?
+A mirror of the OpenSBI repo has been created here:
+https://git.qemu.org/?p=opensbi.git;a=summary
 
-> Since PCI-E devices must implement MSI or MSI-X, we could perhaps
-> configure just the PCI-E devices for s390x.  No need to invent a new
-> name then.  Do we even have device models that can do MSI but not E?
+qemu.org hosts all software, including firmware, that goes into QEMU so
+that users can rebuild from source even if the original repository goes
+offline.
 
-I don't know if anybody ever tried a non-virtio PCIe device from QEMU on
-s390x ... I guess there will be quite a bit of other hurdles, too (e.g.
-the Linux driver also has to work without MMIO), so I'm not sure whether
-we really want to enable all PCIe devices there...
+Please use the URL https://git.qemu.org/git/opensbi.git if you resend
+the patch.  If this patch is merged unchanged I will send a follow-up
+commit to update the URL for you.
 
- Thomas
+Thanks,
+Stefan
+
+--u3/rZRmxL6MmkK24
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhpWov9P5fNqsNXdanKSrs4Grc8gFAl0t14wACgkQnKSrs4Gr
+c8jJuwgAnZ+VD878ZUW8ztYnRUV23Q6hxbaycZsCBadlU+4+RP6IeW7xQRPP/wLH
+uGGky8XKIP92xDzDRwxYn4HHKCuhlvZcfvMVwBMDszeq+2B3NgzUwfEXSj0xV2xr
+BYWDoh0UskdTYRErVYtXdtIBlSeNW8y3vRm7Z497bF6S0OuOXaBjLJvuleyISK3Z
+DMmlTc83G8oJv3bzwe2R4PyP+E+ZA6D6vKTskimB+/VAwLOVH2HFl9dBkl2ndSpx
+XGacVAya10mTYq+SfVUsWUUmm+qhUcL3AuuM9FsNaF954YDm3iGXGi4ZOY34Oa4e
+BZidWzQTHl+jYKOoxsqDLOlUvWXWXg==
+=qlul
+-----END PGP SIGNATURE-----
+
+--u3/rZRmxL6MmkK24--
 
