@@ -1,44 +1,53 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hnkMG-0003Lj-6K
-	for mharc-qemu-riscv@gnu.org; Wed, 17 Jul 2019 09:52:36 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:58315)
+	id 1hnlEf-0000DZ-VZ
+	for mharc-qemu-riscv@gnu.org; Wed, 17 Jul 2019 10:48:49 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:41612)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <pbonzini@redhat.com>) id 1hnkMC-00034M-A6
- for qemu-riscv@nongnu.org; Wed, 17 Jul 2019 09:52:33 -0400
+ (envelope-from <walling@linux.ibm.com>) id 1hnjX8-0005VL-NA
+ for qemu-riscv@nongnu.org; Wed, 17 Jul 2019 08:59:47 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <pbonzini@redhat.com>) id 1hnkMB-0002Me-65
- for qemu-riscv@nongnu.org; Wed, 17 Jul 2019 09:52:32 -0400
-Received: from mail-wm1-f65.google.com ([209.85.128.65]:53660)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <pbonzini@redhat.com>) id 1hnkMA-0002Le-VV
- for qemu-riscv@nongnu.org; Wed, 17 Jul 2019 09:52:31 -0400
-Received: by mail-wm1-f65.google.com with SMTP id x15so22262353wmj.3
- for <qemu-riscv@nongnu.org>; Wed, 17 Jul 2019 06:52:30 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
- :date:user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=lcPKlikHVw0UKOu5w7sujRIctLFD92nRZ7VhRKeyegM=;
- b=KVzDfOYNtz23U19GieBvadlP3YMAXeMSeE6oDAUUgDK8bkM5TbrVc+fyKD91hXDq3+
- dnyjN36uXfhtdSaDkWnOWDzSO+jwZr8KRkuadxpm+7i+z8sR/UryiWXFcaQ98lHQFAcT
- 2hSzQQo/A8+5ShoSjeim0B2izsl9XOUvoAIbMwGLv98VAuMhY/it0iY699daEATMDPrC
- 7PNerkDykzkBNjC+29IvgW8EFfV5QVt1HnFWs/3LxFB5AEbo7u0kFt71v2sCaCLjvBGj
- Jgp3Y8i6FhT6pe5/LTV+xp17G6PMHzRCm7Rtf89BH/E8XYTN1fQrcwP2/xKfe9sQYVVl
- oxNQ==
-X-Gm-Message-State: APjAAAUIdjpGtMkOGsdt0uR10k5AFnhnPBpuUyG8gXWJpbQHz7j/GcEJ
- W1FDV7kak7kpMe4+7zsIq1EkxvlTPsZboA==
-X-Google-Smtp-Source: APXvYqziNvMjIbDvojBWsg3svqTFETmwdKblqqmdyZ7n+h7uLvEKvMQxIpRMQJAodFwJVcZlcBVJWA==
-X-Received: by 2002:a05:600c:2388:: with SMTP id
- m8mr35524465wma.23.1563371549409; 
- Wed, 17 Jul 2019 06:52:29 -0700 (PDT)
-Received: from ?IPv6:2001:b07:6468:f312:e427:3beb:1110:dda2?
- ([2001:b07:6468:f312:e427:3beb:1110:dda2])
- by smtp.gmail.com with ESMTPSA id h133sm24905915wme.28.2019.07.17.06.52.28
- (version=TLS1_3 cipher=AEAD-AES128-GCM-SHA256 bits=128/128);
- Wed, 17 Jul 2019 06:52:28 -0700 (PDT)
-To: Collin Walling <walling@linux.ibm.com>, Thomas Huth <thuth@redhat.com>,
- Markus Armbruster <armbru@redhat.com>
+ (envelope-from <walling@linux.ibm.com>) id 1hnjX7-00087g-Jo
+ for qemu-riscv@nongnu.org; Wed, 17 Jul 2019 08:59:46 -0400
+Received: from mx0a-001b2d01.pphosted.com ([148.163.156.1]:62166)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <walling@linux.ibm.com>)
+ id 1hnjX7-00086U-9Q
+ for qemu-riscv@nongnu.org; Wed, 17 Jul 2019 08:59:45 -0400
+Received: from pps.filterd (m0098399.ppops.net [127.0.0.1])
+ by mx0a-001b2d01.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
+ x6HCwLnM135980
+ for <qemu-riscv@nongnu.org>; Wed, 17 Jul 2019 08:59:40 -0400
+Received: from e12.ny.us.ibm.com (e12.ny.us.ibm.com [129.33.205.202])
+ by mx0a-001b2d01.pphosted.com with ESMTP id 2tt2kavmda-1
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
+ for <qemu-riscv@nongnu.org>; Wed, 17 Jul 2019 08:59:40 -0400
+Received: from localhost
+ by e12.ny.us.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use Only!
+ Violators will be prosecuted
+ for <qemu-riscv@nongnu.org> from <walling@linux.ibm.com>;
+ Wed, 17 Jul 2019 13:59:39 +0100
+Received: from b01cxnp23033.gho.pok.ibm.com (9.57.198.28)
+ by e12.ny.us.ibm.com (146.89.104.199) with IBM ESMTP SMTP Gateway: Authorized
+ Use Only! Violators will be prosecuted; 
+ (version=TLSv1/SSLv3 cipher=AES256-GCM-SHA384 bits=256/256)
+ Wed, 17 Jul 2019 13:59:31 +0100
+Received: from b01ledav006.gho.pok.ibm.com (b01ledav006.gho.pok.ibm.com
+ [9.57.199.111])
+ by b01cxnp23033.gho.pok.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
+ x6HCxUmP33095998
+ (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Wed, 17 Jul 2019 12:59:31 GMT
+Received: from b01ledav006.gho.pok.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id E3DDFAC05E;
+ Wed, 17 Jul 2019 12:59:30 +0000 (GMT)
+Received: from b01ledav006.gho.pok.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 69B75AC05B;
+ Wed, 17 Jul 2019 12:59:30 +0000 (GMT)
+Received: from [9.60.89.78] (unknown [9.60.89.78])
+ by b01ledav006.gho.pok.ibm.com (Postfix) with ESMTP;
+ Wed, 17 Jul 2019 12:59:30 +0000 (GMT)
+To: Thomas Huth <thuth@redhat.com>, Markus Armbruster <armbru@redhat.com>,
+ Paolo Bonzini <pbonzini@redhat.com>
 Cc: Cornelia Huck <cohuck@redhat.com>,
  Peter Maydell <peter.maydell@linaro.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>,
@@ -50,8 +59,9 @@ Cc: Cornelia Huck <cohuck@redhat.com>,
  QEMU Developers <qemu-devel@nongnu.org>,
  "open list:S390" <qemu-s390x@nongnu.org>, qemu-arm <qemu-arm@nongnu.org>,
  Alistair Francis <Alistair.Francis@wdc.com>,
- Gerd Hoffmann <kraxel@redhat.com>, Artyom Tarasenko <atar4qemu@gmail.com>,
- qemu-ppc <qemu-ppc@nongnu.org>, David Gibson <david@gibson.dropbear.id.au>,
+ Gerd Hoffmann <kraxel@redhat.com>,
+ Artyom Tarasenko <atar4qemu@gmail.com>, qemu-ppc <qemu-ppc@nongnu.org>,
+ David Gibson <david@gibson.dropbear.id.au>,
  =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>,
  Aurelien Jarno <aurelien@aurel32.net>, Richard Henderson <rth@twiddle.net>
 References: <20190715095545.28545-1-philmd@redhat.com>
@@ -69,21 +79,35 @@ References: <20190715095545.28545-1-philmd@redhat.com>
  <799aa0f5-8850-5caa-5103-e1cf3cdb018f@redhat.com>
  <87h87m2knh.fsf@dusky.pond.sub.org>
  <beb5fe93-991d-ba2b-d2c1-51e01b912dbe@redhat.com>
- <50befb09-d381-4362-9cd1-6fb11c96a719@linux.ibm.com>
-From: Paolo Bonzini <pbonzini@redhat.com>
-Openpgp: preference=signencrypt
-Message-ID: <633cc3f7-eb20-1bfe-03d2-e481be188eb1@redhat.com>
-Date: Wed, 17 Jul 2019 15:52:27 +0200
+From: Collin Walling <walling@linux.ibm.com>
+Date: Wed, 17 Jul 2019 08:59:30 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.7.2
+ Thunderbird/60.7.0
 MIME-Version: 1.0
-In-Reply-To: <50befb09-d381-4362-9cd1-6fb11c96a719@linux.ibm.com>
-Content-Type: text/plain; charset=utf-8
+In-Reply-To: <beb5fe93-991d-ba2b-d2c1-51e01b912dbe@redhat.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
- [fuzzy]
-X-Received-From: 209.85.128.65
+X-TM-AS-GCONF: 00
+x-cbid: 19071712-0060-0000-0000-000003623FDE
+X-IBM-SpamModules-Scores: 
+X-IBM-SpamModules-Versions: BY=3.00011445; HX=3.00000242; KW=3.00000007;
+ PH=3.00000004; SC=3.00000286; SDB=6.01233452; UDB=6.00649931; IPR=6.01014777; 
+ MB=3.00027759; MTD=3.00000008; XFM=3.00000015; UTC=2019-07-17 12:59:37
+X-IBM-AV-DETECTION: SAVI=unused REMOTE=unused XFE=unused
+x-cbparentid: 19071712-0061-0000-0000-00004A2FD889
+Message-Id: <50befb09-d381-4362-9cd1-6fb11c96a719@linux.ibm.com>
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
+ definitions=2019-07-17_05:, , signatures=0
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501
+ malwarescore=0 suspectscore=0 phishscore=0 bulkscore=0 spamscore=0
+ clxscore=1011 lowpriorityscore=0 mlxscore=0 impostorscore=0
+ mlxlogscore=999 adultscore=0 classifier=spam adjust=0 reason=mlx
+ scancount=1 engine=8.0.1-1810050000 definitions=main-1907170158
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 3.x [generic]
+X-Received-From: 148.163.156.1
+X-Mailman-Approved-At: Wed, 17 Jul 2019 10:48:48 -0400
 Subject: Re: [Qemu-riscv] [Qemu-devel] [qemu-s390x] [RFC PATCH 1/3]
  hw/Kconfig: PCI bus implies PCI_DEVICES
 X-BeenThere: qemu-riscv@nongnu.org
@@ -97,32 +121,52 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Jul 2019 13:52:34 -0000
+X-List-Received-Date: Wed, 17 Jul 2019 12:59:48 -0000
 
-On 17/07/19 14:59, Collin Walling wrote:
-> On 7/16/19 11:04 AM, Thomas Huth wrote:
->> On 16/07/2019 15.06, Markus Armbruster wrote:
->>> Paolo Bonzini <pbonzini@redhat.com> writes:
->>>
->>>> On 15/07/19 18:12, Cornelia Huck wrote:
->>>>>> Is it INTx vs. MSI vs. MSI-X?
->>>>>
->>>>> I think for s390x we need (INTx || MSI) vs MSI-X...
->>>>
->>>> I think MSI vs MSI-X is just how it's configured, not the actual
->>>> behavior, so it should be irrelevant.
->>>
->>> My best guesses from confusing information, please correct
->>> misunderstandings:
->>>
->>> 1. PCI devices need to support MSI or MSI-X to work with s390x.
+On 7/16/19 11:04 AM, Thomas Huth wrote:
+> On 16/07/2019 15.06, Markus Armbruster wrote:
+>> Paolo Bonzini <pbonzini@redhat.com> writes:
 >>
->> I think Cornelia mentioned that we might even require MSI-X there ...
->> Collin (being listed as "S390 PCI" maintainer), can you confirm?
+>>> On 15/07/19 18:12, Cornelia Huck wrote:
+>>>>> Is it INTx vs. MSI vs. MSI-X?
+>>>>
+>>>> I think for s390x we need (INTx || MSI) vs MSI-X...
+>>>
+>>> I think MSI vs MSI-X is just how it's configured, not the actual
+>>> behavior, so it should be irrelevant.
+>>
+>> My best guesses from confusing information, please correct
+>> misunderstandings:
+>>
+>> 1. PCI devices need to support MSI or MSI-X to work with s390x.
 > 
-> MSI-X is mandatory for PCI devices in the s390 architecture.
+> I think Cornelia mentioned that we might even require MSI-X there ...
+> Collin (being listed as "S390 PCI" maintainer), can you confirm?
+> 
 
-How are MSI and MSI-X distinguished?
+MSI-X is mandatory for PCI devices in the s390 architecture.
 
-Paolo
+>> 2. We want a way to Kconfig the PCI devices that work, i.e. only the
+>>     ones that support MSI or MSI-X.
+>>
+>> I don't like calling devices without any MSI capability "classic" or
+>> "conventional devices".  I'd rather call them "MSI-capable" or
+>> "MSI/MSI-X devices".
+> 
+> But you still need a config switch that you can set to enable the
+> non-MSI devices ... what's so wrong with "conventional" if that's even
+> the wording from the PCI SIG?
+> 
+>> Since PCI-E devices must implement MSI or MSI-X, we could perhaps
+>> configure just the PCI-E devices for s390x.  No need to invent a new
+>> name then.  Do we even have device models that can do MSI but not E?
+> 
+> I don't know if anybody ever tried a non-virtio PCIe device from QEMU on
+> s390x ... I guess there will be quite a bit of other hurdles, too (e.g.
+> the Linux driver also has to work without MMIO), so I'm not sure whether
+> we really want to enable all PCIe devices there...
+> 
+>   Thomas
+> 
+
 
