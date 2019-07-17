@@ -1,73 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hnWPz-00079z-Et
-	for mharc-qemu-riscv@gnu.org; Tue, 16 Jul 2019 18:59:31 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:52922)
+	id 1hnXcr-0000xX-In
+	for mharc-qemu-riscv@gnu.org; Tue, 16 Jul 2019 20:16:53 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:45015)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <alistair23@gmail.com>) id 1hnWPw-000796-Jg
- for qemu-riscv@nongnu.org; Tue, 16 Jul 2019 18:59:30 -0400
+ (envelope-from <alistair23@gmail.com>) id 1hnXcp-0000n4-0P
+ for qemu-riscv@nongnu.org; Tue, 16 Jul 2019 20:16:52 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1hnWPu-0002Aj-Pz
- for qemu-riscv@nongnu.org; Tue, 16 Jul 2019 18:59:28 -0400
-Received: from mail-lf1-x144.google.com ([2a00:1450:4864:20::144]:41799)
+ (envelope-from <alistair23@gmail.com>) id 1hnXcn-0007pm-Bg
+ for qemu-riscv@nongnu.org; Tue, 16 Jul 2019 20:16:50 -0400
+Received: from mail-lf1-x142.google.com ([2a00:1450:4864:20::142]:44960)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1hnWPu-0002AQ-F6; Tue, 16 Jul 2019 18:59:26 -0400
-Received: by mail-lf1-x144.google.com with SMTP id 62so10045176lfa.8;
- Tue, 16 Jul 2019 15:59:26 -0700 (PDT)
+ id 1hnXcj-0007oV-VO; Tue, 16 Jul 2019 20:16:46 -0400
+Received: by mail-lf1-x142.google.com with SMTP id r15so10140208lfm.11;
+ Tue, 16 Jul 2019 17:16:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=oLRCcS6yQmrfafROPIEUF78XO64TzQL+wQ2zkcr5T7c=;
- b=TdxZjPe1AOfnfaejtZysNAevvjWz5RYpgeMxMg1SqwOpDqvBux4/jSx/ML30SS35T1
- PAhDjLUf6vSzN8rz5RQkN4ytUmPiaNfd8/QMj8hTimsr+kNqgVrXdt4Rr9PtuyuEkA2l
- CUv1nMBK2r4SzIVwgceHweS9Jvnc4sqjRwRqM9jy0KFDp7w6q0wOloUjW/eWFsz7c3LZ
- 2YQnHkgxPL5562S8yApSG5MBbxHMg/6OdLwjCTqV7FWQgVYotxT/+W4MjZXqK283Iy42
- VfRsnpkjar6oeo5VX3anN4HY4PEYwvJfEB3qqssggawmBPA4hF8ChMzASlnhdX+GaS9p
- oRmw==
+ :cc; bh=OgPVlsbrorWi18Tla4KQmw9FL8bnAGlRzO4TGzSi/EQ=;
+ b=bW22tHFWkMvxKEjj1f4yWkA+YVD08gk+KvRSbJ35V6wNxNTOGxKtFUaH0RW20gMhNt
+ f3yOS4odO4Hu4uZoybkpG57/58ukSYWbiZ5f9QWm57utUA+rQuQeCvExejVEWsmluTZp
+ 21iW7evz8hqYKjlEyE43B+/17YjYTphbUt05FmR7TtHts9AeMkcnOo6n0HM4jDhC+qxO
+ oZnN2VOGT1YTJPZLms+CF+TJ3w9WFPMuXk1WITWqaRi1xWiBM7RzV7tNBcHEz6mJ1IWZ
+ okLq+ZsR5ySLEG5Nm7riMFTLzCRwtgLv19aUq488E2A8oTa9VwaXFDneEPEZhduS6dIG
+ FPjQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=oLRCcS6yQmrfafROPIEUF78XO64TzQL+wQ2zkcr5T7c=;
- b=uKQAkN4ZlSC4G/OGdIhEXQ3ouFZg5XRRdIJiUWsjLxG1bF21RgUp22PnkrEO/bf9Ne
- LplBzVvA/seotX4w6TbyHCOlXEfw1b1j0FNH/sFy7+T5yFPFDzGNu33nfrpyGVQsrlt0
- 2WPMotuc3ERDku7ksq1HB3ZfSRQPpgpJpPJC1vd2ninK3uTxeEKpMZUVe7kAkmm8kFNT
- tAmRiSqtqMPxPIAMiBXgCjqjOzXWsGDG6PmgKuP1+Y98maWDuqjBGXYAVXKDNWLHWTkV
- HB7JIaSWWlHC542J6tODsK6pjEEnkV445UpEta2lKZiDjWqfZC/G++PKWzU7wVFN/9hm
- 7uCg==
-X-Gm-Message-State: APjAAAW9Lu4f6UGL2d/TDSB/Ad7UHds/b4y4FP6AuZeTtZ3nkJOpSP7u
- GMbQ+OptFwwfJFQTKZgONGOuIp4ho+OEVbsVAII=
-X-Google-Smtp-Source: APXvYqyPEb3Yqez6pL+C4l5ALKYl3Dgy6Pnc8j1S2R8Ilo+mCTlPpTUer1aPrmcy3lzl8wODHmhxRTGKUfs9DpVoGzo=
-X-Received: by 2002:ac2:563c:: with SMTP id b28mr3888415lff.93.1563317964850; 
- Tue, 16 Jul 2019 15:59:24 -0700 (PDT)
+ :message-id:subject:to:cc;
+ bh=OgPVlsbrorWi18Tla4KQmw9FL8bnAGlRzO4TGzSi/EQ=;
+ b=TEQwKZ6qbzp8fP8A1fg+s5CXRUsDTZzbePJJoNoWt7XjGRZjkeE1MdHlmITKF+XnsR
+ IzoElbVXSMiD8gsYSYr/Al9+AULfXT0blTiFYqoA/1jSNY/9VFKO7lto0Njy4o2+1AnV
+ DgfnMY2EbWcySB7KRts4YpgUukXBAVInt/cQTQ3pMqxWC8FWrfCyK1NgFqlaaLNz5Sn3
+ YpAiAB6yByS5Ixm/9yZ8Xw2MghktrNuNOzf4Ru8MWC5A/OUkO9+mtdej2PDySvKfzlR0
+ oFB9hJCYdeO42qqCnvuvJbyOWYoixU4ygDtJeLizj7g5sgg8CT/v01JigxWR+sMLkiF/
+ py4Q==
+X-Gm-Message-State: APjAAAUhtzxV9qAV/iOQWvD1Lyq//bNEeN3NoY5aoEg/Z7976NumrebM
+ ySUytjiICrbYtmewYxICq9Ee07VGldALJNscA+k=
+X-Google-Smtp-Source: APXvYqw7ajG+ZF8BnG3zQp0p0BgcoxEe1oaOudPeqCugkwm8hBRHZsf1RpW+2IxyCYLpKlvYmSKqx6OgdHX4Ff+nbd4=
+X-Received: by 2002:a19:7006:: with SMTP id h6mr15966240lfc.5.1563322603906;
+ Tue, 16 Jul 2019 17:16:43 -0700 (PDT)
 MIME-Version: 1.0
-References: <1563181721-5055-1-git-send-email-chihmin.chao@sifive.com>
- <93b35a5e-c40a-535b-2a91-2c210b4a5928@redhat.com>
- <CAEiOBXXxS-93rTAQuvY_Tkxi1pYc1YfJenpBC_8gG2ou9uUZMg@mail.gmail.com>
- <7eb239bc-32aa-b5fc-ab2e-a741b005aad7@redhat.com>
- <CAKmqyKOZSz4f1-kLDhn=+imCvKHcZJVgqgqWbQ6qxD3K1n17GA@mail.gmail.com>
- <CAEiOBXUBPFx5__wOLvLD0qQ7dzV2XVpHfiOoBZpXpu-SZsMiUg@mail.gmail.com>
- <CAKmqyKNOiRYqZgiWT+LUKkOv+Bew3djOqc9vHpmSqZ-1Gfjd8Q@mail.gmail.com>
- <d2c7e6c6-4d4a-d47e-e496-4f4cfe466fe1@redhat.com>
-In-Reply-To: <d2c7e6c6-4d4a-d47e-e496-4f4cfe466fe1@redhat.com>
+References: <cover.1559944445.git.alistair.francis@wdc.com>
+ <CAEiOBXWT=npMfc5kJ_kiRPk4LQe7Nfj13-sEYFtaJ_zHRdCxSQ@mail.gmail.com>
+In-Reply-To: <CAEiOBXWT=npMfc5kJ_kiRPk4LQe7Nfj13-sEYFtaJ_zHRdCxSQ@mail.gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 16 Jul 2019 15:56:06 -0700
-Message-ID: <CAKmqyKPiDHrPVuz2P1n9_j170k2bSm=7uDKrQg-fAUhL1FQm9g@mail.gmail.com>
-To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>
-Cc: Chih-Min Chao <chihmin.chao@sifive.com>, Fam Zheng <fam@euphon.net>, 
- Alistair Francis <alistair@alistair23.me>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Eduardo Habkost <ehabkost@redhat.com>, Cornelia Huck <cohuck@redhat.com>, 
+Date: Tue, 16 Jul 2019 17:13:25 -0700
+Message-ID: <CAKmqyKMVPUvkaXLZ7_3yjU-byHA9Ohhy=kWr+ExKW3e38=AkMw@mail.gmail.com>
+To: Chih-Min Chao <chihmin.chao@sifive.com>
+Cc: Alistair Francis <alistair.francis@wdc.com>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Cleber Rosa <crosa@redhat.com>, 
- =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Palmer Dabbelt <palmer@sifive.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::144
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v2] tests/boot_linux_console:
- add a test for riscv64 + virt
+X-Received-From: 2a00:1450:4864:20::142
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v1 00/27] Add RISC-V
+ Hypervisor Extension
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -79,243 +68,156 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Jul 2019 22:59:30 -0000
+X-List-Received-Date: Wed, 17 Jul 2019 00:16:52 -0000
 
-On Tue, Jul 16, 2019 at 2:50 PM Philippe Mathieu-Daud=C3=A9
-<philmd@redhat.com> wrote:
+On Mon, Jul 15, 2019 at 4:50 AM Chih-Min Chao <chihmin.chao@sifive.com> wrote:
 >
-> On 7/16/19 10:43 PM, Alistair Francis wrote:
-> > On Tue, Jul 16, 2019 at 6:56 AM Chih-Min Chao <chihmin.chao@sifive.com>=
- wrote:
-> >>
-> >>
-> >> On Tue, Jul 16, 2019 at 12:34 AM Alistair Francis <alistair23@gmail.co=
-m> wrote:
-> >>>
-> >>> On Mon, Jul 15, 2019 at 6:02 AM Philippe Mathieu-Daud=C3=A9
-> >>> <philmd@redhat.com> wrote:
-> >>>>
-> >>>> On 7/15/19 1:09 PM, Chih-Min Chao wrote:
-> >>>>> On Mon, Jul 15, 2019 at 5:15 PM Philippe Mathieu-Daud=C3=A9
-> >>>>> <philmd@redhat.com <mailto:philmd@redhat.com>> wrote:
-> >>>>>
-> >>>>>     On 7/15/19 11:08 AM, Chih-Min Chao wrote:
-> >>>>>     > Similar to the mips + malta test, it boots a Linux kernel on =
-a virt
-> >>>>>     > board and verify the serial is working.  Also, it relies on t=
-he serial
-> >>>>>     > device set by the machine itself.
-> >>>>>     >
-> >>>>>     > If riscv64 is a target being built, "make check-acceptance" w=
-ill
-> >>>>>     > automatically include this test by the use of the "arch:riscv=
-64" tags.
-> >>>>>     >
-> >>>>>     > Alternatively, this test can be run using:
-> >>>>>     >
-> >>>>>     >   $ avocado run -t arch:riscv64 tests/acceptance
-> >>>>>     >
-> >>>>>     > packages
-> >>>>>     >   debian official
-> >>>>>     >     binutils-riscv64-linux-gnu_2.32-8
-> >>>>>     >     opensbi_0.4-1_all
-> >>>>>     >     linux-image-4.19.0-5-riscv64 4.19.37-4
-> >>>>>     >   third-party
-> >>>>>     >
-> >>>>>      https://github.com/groeck/linux-build-test/rootfs/riscv64/root=
-fs.cpio.gz
-> >>>>>     >     (the repo is also used in mips target acceptance)
-> >>>>>     >
-> >>>>>     > Signed-off-by: Chih-Min Chao <chihmin.chao@sifive.com
-> >>>>>     <mailto:chihmin.chao@sifive.com>>
-> >>>>>     > ---
-> >>>>>     >  .travis.yml                            |  2 +-
-> >>>>>     >  tests/acceptance/boot_linux_console.py | 66
-> >>>>>     ++++++++++++++++++++++++++++++++++
-> >>>>>     >  2 files changed, 67 insertions(+), 1 deletion(-)
-> >>>>>     >
-> >>>>>     > diff --git a/.travis.yml b/.travis.yml
-> >>>>>     > index 5d3d6ee..21fcead 100644
-> >>>>>     > --- a/.travis.yml
-> >>>>>     > +++ b/.travis.yml
-> >>>>>     > @@ -232,7 +232,7 @@ matrix:
-> >>>>>     >
-> >>>>>     >      # Acceptance (Functional) tests
-> >>>>>     >      - env:
-> >>>>>     > -        - CONFIG=3D"--python=3D/usr/bin/python3
-> >>>>>     --target-list=3Dx86_64-softmmu,mips-softmmu,mips64el-softmmu,aa=
-rch64-softmmu,arm-softmmu,s390x-softmmu,alpha-softmmu"
-> >>>>>     > +        - CONFIG=3D"--python=3D/usr/bin/python3
-> >>>>>     --target-list=3Dx86_64-softmmu,mips-softmmu,mips64el-softmmu,aa=
-rch64-softmmu,arm-softmmu,s390x-softmmu,alpha-softmmu,riscv64-softmmu"
-> >>>>>     >          - TEST_CMD=3D"make check-acceptance"
-> >>>>>     >        after_failure:
-> >>>>>     >          - cat tests/results/latest/job.log
-> >>>>>     > diff --git a/tests/acceptance/boot_linux_console.py
-> >>>>>     b/tests/acceptance/boot_linux_console.py
-> >>>>>     > index 3215950..0f638bc 100644
-> >>>>>     > --- a/tests/acceptance/boot_linux_console.py
-> >>>>>     > +++ b/tests/acceptance/boot_linux_console.py
-> >>>>>     > @@ -354,3 +354,69 @@ class BootLinuxConsole(Test):
-> >>>>>     >          self.vm.launch()
-> >>>>>     >          console_pattern =3D 'Kernel command line: %s' %
-> >>>>>     kernel_command_line
-> >>>>>     >          self.wait_for_console_pattern(console_pattern)
-> >>>>>     > +
-> >>>>>     > +    def test_riscv64_virt(self):
-> >>>>>     > +        """
-> >>>>>     > +        :avocado: tags=3Darch:riscv64
-> >>>>>     > +        :avocado: tags=3Dmachine:virt
-> >>>>>     > +        """
-> >>>>>     > +        deb_url =3D ('https://snapshot.debian.org/archive/de=
-bian/'
-> >>>>>     > +                         '20190424T171759Z/pool/main/b/binut=
-ils/'
-> >>>>>     > +
-> >>>>>      'binutils-riscv64-linux-gnu_2.32-8_amd64.deb')
-> >>>>>     > +        deb_hash =3D ('7fe376fd4452696c03acd508d6d613ca553ea=
-15e')
-> >>>>>     > +        deb_path =3D self.fetch_asset(deb_url, asset_hash=3D=
-deb_hash)
-> >>>>>     > +        objcopy_path =3D '/usr/bin/riscv64-linux-gnu-objcopy=
-'
-> >>>>>     > +        objcopy_path =3D self.extract_from_deb(deb_path, obj=
-copy_path)
-> >>>>>     > +        libbfd_path =3D
-> >>>>>     '/usr/lib/x86_64-linux-gnu/libbfd-2.32-riscv64.so
-> >>>>>     <http://libbfd-2.32-riscv64.so>'
-> >>>>>     > +        libbfd_path =3D self.extract_from_deb(deb_path, libb=
-fd_path)
-> >>>>>     > +        process.run('ls -al %s' % (objcopy_path))
-> >>>>>     > +
-> >>>>>     > +        deb_url =3D ('https://snapshot.debian.org/archive/de=
-bian/'
-> >>>>>     > +                   '20190708T032337Z/pool/main/o/opensbi/'
-> >>>>>     > +                   'opensbi_0.4-1_all.deb')
-> >>>>>     > +        deb_hash =3D ('2319dcd702958291d323acf5649fd98a11d90=
-112')
-> >>>>>     > +        deb_path =3D self.fetch_asset(deb_url, asset_hash=3D=
-deb_hash)
-> >>>>>     > +        opensbi_path =3D ('/usr/lib/riscv64-linux-gnu/opensb=
-i/'
-> >>>>>     > +                        'qemu/virt/fw_jump.elf')
-> >>>>>     > +        opensbi_path =3D self.extract_from_deb(deb_path, ope=
-nsbi_path)
-> >>>>>     > +
-> >>>>>     > +        deb_url =3D
-> >>>>>     ('https://snapshot.debian.org/archive/debian-ports/'
-> >>>>>     > +                   '20190620T095935Z/pool-riscv64/main/l/lin=
-ux/'
-> >>>>>     > +
-> >>>>>      'linux-image-4.19.0-5-riscv64_4.19.37-4_riscv64.deb')
-> >>>>>     > +        deb_hash =3D ('bf5b5680c41d92134d22caef4fbd277c5217e=
-1f0')
-> >>>>>     > +        deb_path =3D self.fetch_asset(deb_url, asset_hash=3D=
-deb_hash)
-> >>>>>     > +        kernel_path =3D '/boot/vmlinux-4.19.0-5-riscv64'
-> >>>>>     > +        kernel_path =3D self.extract_from_deb(deb_path, kern=
-el_path)
-> >>>>>     > +        kimage_path =3D self.workdir + "/Image"
-> >>>>>     > +        env =3D os.environ
-> >>>>>     > +        env['LD_LIBRARY_PATH'] =3D ('%s:' %
-> >>>>>     (os.path.dirname(libbfd_path)) +
-> >>>>>     > +                                 env.get('LD_LIBRARY_PATH', =
-''))
-> >>>>>     > +        process.run(('%s -O binary -O binary -R'
-> >>>>>     > +                     '.note -R .note.gnu.build-id -R .commen=
-t -S
-> >>>>>     %s %s') %
-> >>>>>     > +                     (objcopy_path, kernel_path, kimage_path=
-))
-> >>>>>
-> >>>>>     Please explain why you need to do that...
-> >>>>>
-> >>>>>     Also note these tests are run on other host architecture than x=
-86, at
-> >>>>>     least ppc64/s390x (so this won't work there).
-> >>>>>
-> >>>>> it is because riscv64 vmlinux doesn't have physical loading address
-> >>>>> information and
-> >>>>> depends on certain stage bootloader to move kernel raw data to spec=
-ific
-> >>>>> physical address (0x8020_0000)
-> >>>>>
-> >>>>> The vmlinux program headers are
-> >>>>>   Type             Offset       VirtAddr                  PhysAddr
-> >>>>>     FileSiz  MemSiz   Flg Align
-> >>>>>   LOAD           0x001000 0xffffffe000000000 0x0000000000000000 0x0=
-303a6
-> >>>>> 0x0303a6 R E 0x1000
-> >>>>>   LOAD           0x032000 0xffffffe000031000 0x0000000000031000 0x8=
-28f0c
-> >>>>> 0x828f0c RWE 0x1000
-> >>>>>   NOTE           0x85aec0 0xffffffe000859ec0 0x0000000000859ec0 0x0=
-0004c
-> >>>>> 0x00004c R   0x4
-> >>>>>
-> >>>>> For legacy bootloader, bbl, It can handle payload in ELF format.
-> >>>>> However, for the newer OpenSBI, it can only handle raw data and
-> >>>>> debian doesn't provide linux image in raw data format.
-> >>>
-> >>> This doesn't sound right. You should just be able to say -kernel
-> >>> <anything> and it should work. It has worked for me with vmlinux and
-> >>> Image files when using master (not the 4.0 release but master/4.1).
-> >>> Although all of my testing was with the 5.1 kernel, so maybe there is
-> >>> a difference there?
-> >>>
-> >>> What isn't working for you? Can you include the errors and output of =
--d in_asm?
-> >>>
-> >>>
-> >>> Alistair
-> >>
-> >>
-> >> Hi Alistair,
-> >>    I have come across error before starting target simulation.  What I=
- means is to execute
-> >>             qemu-system-riscv64 -M virt -m 256M -nographic -bios ./ope=
-nsbi/build/platform/qemu/virt/firmware/fw_jump.elf -kernel vmlinux
-> >>    then get the error message
-> >>             rom: requested regions overlap (rom mrom.reset. free=3D0x0=
-00000000001eb7c, addr=3D0x0000000000001000)
-> >>             qemu-system-riscv64: rom check and register reset failed
-> >
-> > Hmmm.... I don't remember seeing this problem in my testing, but it
-> > does seem to make sense.
-> >
-> > We have two options here:
-> > 1. Use the Image file from Linux 5.0+ (my preferred option as 4.19 is
-> > getting old)
-> > 2. Use the device loader (documented here:
-> > https://github.com/riscv/opensbi/blob/master/docs/platform/qemu_virt.md=
-)
 >
-> Nice doc, this example is exactly what I had in mind:
 >
->   qemu-system-riscv64 -M virt -m 256M -nographic \
->         -kernel build/platform/qemu/virt/firmware/fw_jump.elf \
->         -device
-> loader,file=3D<linux_build_directory>/arch/riscv/boot/Image,addr=3D0x8020=
-0000 \
->         -drive file=3D<path_to_linux_rootfs>,format=3Draw,id=3Dhd0 \
->         -device virtio-blk-device,drive=3Dhd0 \
->         -append "root=3D/dev/vda rw console=3DttyS0"
+> On Sat, Jun 8, 2019 at 6:03 AM Alistair Francis <alistair.francis@wdc.com> wrote:
+>>
+>> This patch series adds the RISC-V Hypervisor extension 0.3. This is the
+>> latest draft spec of the Hypervisor extension.
+>>
+>> The Hypervisor extension is disabled by default, so this series should
+>> result in no changes to anyone using QEMU unless they enable the
+>> extension. The extention can be enabled with the -cpu property (see
+>> below).
+>>
+>> At the moment the spec does not include information about the mstatush
+>> register. As it is not in the spec I haven't added it to QEMU. This
+>> means the extension won't work correctly for 32-bit guests. This should
+>> be a small fix to add the CSR once the spec is updated.
+>>
+>> All testing of this implementation has been done by using the baremetal
+>> Xvisor Hypervisor. We are able to run two Linux guests (that's all I
+>> have tried) as guests.
+>>
+>> At the moment this spec is in a draft state and is subject to change. As
+>> QEMU is extreamly useful in early bring up I think it makes sense for
+>> QEMU to support non-frozen extensions. I would like to decide with this
+>> series how QEMU will handle all future non-frozen extensions. That is a
+>> standard way that QEMU users can test future RISC-V extensions while
+>> still understanding things will change. One idea is just to disable it by
+>> default, another option is to maybe use the Kconfig to make it a compile
+>> time option which developers can use. Should we also display a warning
+>> when running non-frozen extensions?
+>>
+>> Thanks to Anup for doing the initial port of Xvisor. The port is avaliable here:
+>> https://github.com/avpatel/xvisor-next and will run on QEMU.
+>>
+>> Also thanks to Atish for implementing the SBI call support in Xvisor and
+>> for lots of help debugging.
+>>
+>> To run this yourself:
+>>  1. Apply this patch series to QEMU. The latest branch can be found here:
+>>       https://github.com/alistair23/qemu/tree/mainline/alistair/riscv-hyp-work.next
+>>  2. Get the version of OpenSBI that supports the H extension. This can
+>>     be found here:
+>>       https://github.com/riscv/opensbi/tree/hyp_ext_changes_v1
+>>  3. Build the next release of Xvisor. It is available here:
+>>       https://github.com/avpatel/xvisor-next
+>>  4. Make sure you build the Xvisor tests, see here for details:
+>>       https://github.com/avpatel/xvisor-next/tree/master/tests/riscv/virt64/linux
+>>  5. Run QEMU:
+>>      ./riscv64-softmmu/qemu-system-riscv64 -nographic \
+>>        -machine virt -cpu rv64,h=true\
+>>        -serial mon:stdio -serial null -m 4G \
+>>        -device loader,file=vmm.bin,addr=0x80200000 \
+>>        -kernel fw_jump.elf \
+>>        -initrd vmm-disk-linux.img \
+>>        -append "vmm.console=uart@10000000 vmm.bootcmd=\"vfs mount initrd /;vfs run /boot.xscript;vfs cat /system/banner.txt\""
+>>
+>>    Once you get to the prompt you can start the geust by running:
+>>      guest kick guest0
+>>    You can then bind to the serial port using:
+>>      vserial bind guest0/uart0
+>>    Then you can start Linux using:
+>>      autoexec
+>>
+>>  This was all tested with the mainline 5.1 kernel. I don't know if it
+>>  will work on older kernels.
+>>
+>> So far all of the QEMU work has been tested on Xvisor.
+>>
+>> Known Issues/TODO:
+>>  - Add mstatush to support 32-bit Hypervisors
+>>  - Fix the random hang that sometimes appears when running a Hypervisor guest (~5%)
+>>
+>> There is also on going work from Anup to port KVM.
+>> We have code complete implementation of RISC-V KVM kernel module and
+>> RISC-V KVMTOOL. Currently, we are debugging KVM on QEMU and we will
+>> send-out RFC PATCHES for KVM in June/July 2019.
+>> The KVM RISC-V kernel module is available in riscv_kvm_v1
+>> branch at: https://github.com/avpatel/linux.git
+>> The KVMTOOL RISC-V port is available in riscv_v1 branch of
+>> https://github.com/avpatel/kvmtool.git
+>>
+>> There is very early work on a Xen port as well which is avaliable here:
+>> https://github.com/alistair23/xen/tree/alistair/riscv-port
+>>
+>> Changes from RFC:
+>>  - Rebase on latest master
+>>  - Add floating point changes from Hypervisor extension
+>>
+>> Alistair Francis (27):
+>>   target/riscv: Don't set write permissions on dirty PTEs
+>>   target/riscv: Add the Hypervisor extension
+>>   target/riscv: Add the virtulisation mode
+>>   target/riscv: Add the force HS exception mode
+>>   target/riscv: Add the Hypervisor CSRs to CPUState
+>>   target/riscv: Dump Hypervisor registers if enabled
+>>   target/riscv: Remove strict perm checking for CSR R/W
+>>   target/riscv: Create function to test if FP is enabled
+>>   target/riscv: Add support for background interrupt setting
+>>   target/riscv: Add Hypervisor CSR access functions
+>>   target/riscv: Add background CSRs accesses
+>>   target/riscv: Add background register swapping function
+>>   target/ricsv: Flush the TLB on virtulisation mode changes
+>>   target/riscv: Generate illegal instruction on WFI when V=1
+>>   riscv: plic: Remove unused interrupt functions
+>>   riscv: plic: Always set sip.SEIP bit for HS
+>>   target/riscv: Add hypvervisor trap support
+>>   target/riscv: Add Hypervisor trap return support
+>>   target/riscv: Add hfence instructions
+>>   target/riscv: Disable guest FP support based on backgrond status
+>>   target/riscv: Mark both sstatus and bsstatus as dirty
+>>   target/riscv: Respect MPRV and SPRV for floating point ops
+>>   target/riscv: Allow specifying MMU stage
+>>   target/riscv: Allow specifying number of MMU stages
+>>   target/riscv: Implement second stage MMU
+>>   target/riscv: Call the second stage MMU in virtualisation mode
+>>   target/riscv: Allow enabling the Hypervisor extension
+>>
+>>  hw/riscv/sifive_plic.c                        |  24 +-
+>>  include/hw/riscv/sifive_plic.h                |   3 -
+>>  target/riscv/cpu.c                            |  31 ++
+>>  target/riscv/cpu.h                            |  32 +-
+>>  target/riscv/cpu_bits.h                       |  32 +-
+>>  target/riscv/cpu_helper.c                     | 443 ++++++++++++++++--
+>>  target/riscv/csr.c                            | 216 ++++++++-
+>>  target/riscv/insn32.decode                    |  23 +-
+>>  .../riscv/insn_trans/trans_privileged.inc.c   |  40 ++
+>>  target/riscv/op_helper.c                      |  71 ++-
+>>  target/riscv/translate.c                      |  26 +
+>>  11 files changed, 839 insertions(+), 102 deletions(-)
+>>
+>> --
+>> 2.21.0
+>>
 >
-> If the Image is an ELF, I assume we don't need to specify the address,
-> because the device loader knows how to parse this format. Again,
-> Alistair is the expert ;)
+>   tested with Linux kernel v5.2 and related opensbi/xvisor branches described above.
+>
+>  Tested-by: Chih-Min Chao <chihmin.chao@sifive.com>
 
-Yep, an elf should just work.
+Thanks for testing!!!
 
->
-> If for some reason it only works with Linux 5.0+, let's use these!
-
-Only 5.0+ builds an elf.
+Unfortunately I don't think this is going to be merged. It is too late
+to have this in the 4.1 release and I'm about to start working on
+upgrading this to the v0.4 Hypervisor spec. So hopefully we can have
+that in 4.2.
 
 Alistair
 
 >
-> Regards,
->
-> Phil.
 
