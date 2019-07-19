@@ -1,59 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hoQgI-0005q5-FW
-	for mharc-qemu-riscv@gnu.org; Fri, 19 Jul 2019 07:04:06 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:33012)
+	id 1hoQnN-0001Fc-2N
+	for mharc-qemu-riscv@gnu.org; Fri, 19 Jul 2019 07:11:25 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:34415)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <peter.maydell@linaro.org>) id 1hoQgF-0005ka-Aa
- for qemu-riscv@nongnu.org; Fri, 19 Jul 2019 07:04:04 -0400
+ (envelope-from <peter.maydell@linaro.org>) id 1hoQnL-0001E9-75
+ for qemu-riscv@nongnu.org; Fri, 19 Jul 2019 07:11:24 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <peter.maydell@linaro.org>) id 1hoQgE-0006W3-4e
- for qemu-riscv@nongnu.org; Fri, 19 Jul 2019 07:04:03 -0400
-Received: from mail-ot1-x341.google.com ([2607:f8b0:4864:20::341]:37834)
+ (envelope-from <peter.maydell@linaro.org>) id 1hoQnK-0004ih-7x
+ for qemu-riscv@nongnu.org; Fri, 19 Jul 2019 07:11:23 -0400
+Received: from mail-ot1-x335.google.com ([2607:f8b0:4864:20::335]:34429)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <peter.maydell@linaro.org>)
- id 1hoQgD-0006V4-Uk
- for qemu-riscv@nongnu.org; Fri, 19 Jul 2019 07:04:02 -0400
-Received: by mail-ot1-x341.google.com with SMTP id s20so32323503otp.4
- for <qemu-riscv@nongnu.org>; Fri, 19 Jul 2019 04:04:00 -0700 (PDT)
+ id 1hoQnK-0004i5-24
+ for qemu-riscv@nongnu.org; Fri, 19 Jul 2019 07:11:22 -0400
+Received: by mail-ot1-x335.google.com with SMTP id n5so32382832otk.1
+ for <qemu-riscv@nongnu.org>; Fri, 19 Jul 2019 04:11:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=JYrtC1sSkkGJUCsJSw98vNNWQqy30ZKlBnj9ldQDtvE=;
- b=YsYUmOPjTbRloqTeYwyO6HietMOeOscuycmD2wkmEJMxlPry3kDa9VHQGgXNNDQyj1
- X0/A4jPDdFQwmMX4XDhZWyDFL7mxa1yg3A5/hBogZcWWYm9JtALkINhfYscANtTjfgUa
- QfbibwaMpyRBsAn8eSRCUURRYeWrxrkuJCsUapqTL3LUuufINy2EaubfdwGEFRnz+M0n
- MkCV0wOOsYgz4sWlTFG1hJ7myR4+e0t+vkENuoHJtMjcEANlONPniOoovGh41PSzgzuV
- /YPHHj6Z6YKCPkgeh4b7OJPJ+ZnCQUQtB/s7/FQvUo9Tz3QAPg2D4T5s5/gp0pNRkVWc
- v4ag==
+ :cc; bh=tY9kweh1a3zqDq9ZuVKK8f0DLTDET8dYAzpexDaploQ=;
+ b=GUhzQKLz1njaPHgothghIoDK6B5peCqFIgiKiRdBxVe8a4LuIJcbbA/ruP//VotN+q
+ 7N/ts7EZs+ei+/GIWulinIPIFV0AiELpInQQdIFHS11q19pj7qDWGpOFpG6MkauBMxGD
+ VIgxCdDa2hfkrFzM5KP9jVmJnEVGx2Lp0i3iM1Nv+rOw2jB0OXsJ/U2cbnV5wkZBp5RM
+ R4OAtYaKdSErnTamD7P+quzSqZes40AN0+8LmdAG7S4EnQntrRyI6LtR22a+OFTH3R1g
+ /Zz3DmSgXhAgnFco99XmpBmyTts3vbYcruT5Q3yJa62sukwooVMuUbs+tbi6o0aVmUzT
+ Y1SQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=JYrtC1sSkkGJUCsJSw98vNNWQqy30ZKlBnj9ldQDtvE=;
- b=Me8FInUrh3yDD3tUpBp1Q4lE6Li2cUBbrj3aN2gamyZgaBhT4TL2u1AEQQjH6i5sSj
- UEcCMfYPTVuAcTjqnrbn09g2I/eoMfKeOpUXd4NOO3xOSJORKg1OIH6QNPfc9/9fjW/B
- SbYytOkWVMzu4rxewg/yHYNj7m4NmFevV6y+b2lFOl45CuHzabf/lKKXS2nIs4DU2OX1
- 6YmegN+nM1YYdZK+YAMSiHQyc2sLDh1Cj2K5qk0IhLCJXksmgwd7NfViRcMDLT8so7Uv
- mMmrVSPFp/becaya4Amo+BhWhbSkAkeHOP+oUEoWXBRcuuDwnQEDuNlMDmK6G0GZh7+s
- lW1A==
-X-Gm-Message-State: APjAAAWv90/7Omwz52m/WFs8Shtn82rc6tmILhIGYuEk5Mwtlr5obEqB
- tnB2srq2ivbZFi72eRWbgb3Uc7zLo0ngET00QLPCsQ==
-X-Google-Smtp-Source: APXvYqwhPb9r98y+RxxkxVsLb3W9dnlyHMUTTxyQ/WsylE1BNlDEhjr6XcZKTERctSvrac9le/dgauJrKuErdkF5KH8=
-X-Received: by 2002:a05:6830:1653:: with SMTP id
- h19mr31506347otr.232.1563534239837; 
- Fri, 19 Jul 2019 04:03:59 -0700 (PDT)
+ bh=tY9kweh1a3zqDq9ZuVKK8f0DLTDET8dYAzpexDaploQ=;
+ b=K5WlDUVw2xZREW80PhVaSrhvG8Zsou2lG/BzDcM0S+yqXfR8BjBnon2fj/uz4V07qK
+ XfRaSKkD2lcuMskJGwYAOT+zJGoSHF0Y2v3vMzcTtW9SiFLnIePRopzXLIO241XliSLV
+ Dn6FY7ZDJCpt7HlnL8MfvRUsH2ExtKCzQGGxD7rJorKqkDGwB0TbkZ7CGSGckxn+vRIC
+ 7gamFptFcxMQgoFPHSoBpKKqFc7TwRNTnsTwqE5ONG1LRjdhW3mmbBmIt9BNWOZS954o
+ S1dzIioP2F+HN9+YUo80DyYdo6EaZ52l5C+InZKW7AP1q0qC88OV/5tOA/TW9pM/Zva2
+ DPQg==
+X-Gm-Message-State: APjAAAXYbrTqC+cI4YHx8JfaHHnw8T79Upsb04LhaFRuW9Y5kY0RdIug
+ mqJ9a1mwgGUpJqPz+jLUnlWKc0GXha5RQXbvcLoKww==
+X-Google-Smtp-Source: APXvYqyb1O4mXr76hgmuuobu8OgUflrOYqSmuD8pQIlG0FScmE6IrEaxNhoC7HvylEbLdtQcip4hkCkvvFPy+l6EW6A=
+X-Received: by 2002:a9d:711e:: with SMTP id n30mr36435938otj.97.1563534681206; 
+ Fri, 19 Jul 2019 04:11:21 -0700 (PDT)
 MIME-Version: 1.0
 References: <20190719015811.14776-1-palmer@sifive.com>
-In-Reply-To: <20190719015811.14776-1-palmer@sifive.com>
+ <CAFEAcA_MGz=EvH67twNoM-SMXZ8_pE6FhO+JuLN=0Z1H6sfRnw@mail.gmail.com>
+In-Reply-To: <CAFEAcA_MGz=EvH67twNoM-SMXZ8_pE6FhO+JuLN=0Z1H6sfRnw@mail.gmail.com>
 From: Peter Maydell <peter.maydell@linaro.org>
-Date: Fri, 19 Jul 2019 12:03:49 +0100
-Message-ID: <CAFEAcA_MGz=EvH67twNoM-SMXZ8_pE6FhO+JuLN=0Z1H6sfRnw@mail.gmail.com>
-To: Palmer Dabbelt <palmer@sifive.com>
+Date: Fri, 19 Jul 2019 12:11:10 +0100
+Message-ID: <CAFEAcA9mR5XxV9ghSzt4PbANKZJW1xKMGF1a9+ak+m6OyZ-YZQ@mail.gmail.com>
+To: Palmer Dabbelt <palmer@sifive.com>, Alistair Francis <alistair23@gmail.com>
 Cc: QEMU Developers <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::341
+X-Received-From: 2607:f8b0:4864:20::335
 Subject: Re: [Qemu-riscv] [PULL] RISC-V Patches for 4.2-rc2
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -66,62 +66,45 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Jul 2019 11:04:04 -0000
+X-List-Received-Date: Fri, 19 Jul 2019 11:11:24 -0000
 
-On Fri, 19 Jul 2019 at 02:58, Palmer Dabbelt <palmer@sifive.com> wrote:
+On Fri, 19 Jul 2019 at 12:03, Peter Maydell <peter.maydell@linaro.org> wrote:
+> This passes the 'make check' tests but it prints out a lot
+> of warnings as it does so:
 >
-> The following changes since commit 0b18cfb8f1828c905139b54c8644b0d8f4aad879:
+> qemu-system-riscv64: warning: No -bios option specified. Not loading a firmware.
+> qemu-system-riscv64: warning: This default will change in QEMU 4.3.
+> Please use the -bios option to aviod breakages when this happens.
+> qemu-system-riscv64: warning: See QEMU's deprecation documentation for details
 >
->   Update version for v4.1.0-rc1 release (2019-07-16 18:01:28 +0100)
+> (repeated 7 or 8 times during the course of a test run)
 >
-> are available in the Git repository at:
->
->   git://github.com/palmer-dabbelt/qemu.git tags/riscv-for-master-4.1-rc2
->
-> for you to fetch changes up to fdd1bda4b47cfbec61d0e63a516c614feea0b00b:
->
->   hw/riscv: Load OpenSBI as the default firmware (2019-07-18 14:18:45 -0700)
->
-> ----------------------------------------------------------------
-> RISC-V Patches for 4.2-rc2
->
-> This contains a pair of patches that add OpenSBI support to QEMU on
-> RISC-V targets.  The patches have been floating around for a bit, but
-> everything seems solid now.  These pass my standard test of booting
-> OpenEmbedded, and also works when I swap around the various command-line
-> arguments to use the new boot method.
->
-> ----------------------------------------------------------------
-> Alistair Francis (2):
->       roms: Add OpenSBI version 0.4
->       hw/riscv: Load OpenSBI as the default firmware
+> Can we make the tests not trigger warnings, please?
+> (I have a filter where I search through for strings like
+> "warning" because warnings that shouldn't happen often don't
+> actually cause the tests to fail.)
 
-This passes the 'make check' tests but it prints out a lot
-of warnings as it does so:
+Forgot to mention, but a common way to do this is to say
+"don't print the warnings about bios image loading if
+qtest_enabled(), because with qtest we never execute any
+guest code anyway". That will probably fix the warnings here.
 
-qemu-system-riscv64: warning: No -bios option specified. Not loading a firmware.
-qemu-system-riscv64: warning: This default will change in QEMU 4.3.
-Please use the -bios option to aviod breakages when this happens.
-qemu-system-riscv64: warning: See QEMU's deprecation documentation for details
+> Also, I notice that you have a typo: "aviod" should be "avoid".
 
-(repeated 7 or 8 times during the course of a test run)
+Also also, the warning message mentions "QEMU 4.3", but our
+versioning system bumps the major version every year, so
+the pending release is 4.1, the next one will be 4.2, and
+then the release after that will be 5.0 because it will be the
+first release in 2020.
 
-Can we make the tests not trigger warnings, please?
-(I have a filter where I search through for strings like
-"warning" because warnings that shouldn't happen often don't
-actually cause the tests to fail.)
+(Plus, your merge commit message says this pullreq is
+for 4.2-rc2, which is a typo for 4.1-rc2 I assume.)
 
-Also, I notice that you have a typo: "aviod" should be "avoid".
-
-PS: something in your pull-request creation process seems to
-add this junk at the bottom of the pullreq emails, though
-since it doesn't appear in the merge commit it's harmless:
-
-> From Palmer Dabbelt <palmer@sifive.com> # This line is ignored.
-> From: Palmer Dabbelt <palmer@sifive.com>
-> Reply-To:
-> Subject:
-> In-Reply-To:
+Since this pullreq does pass the tests, and rc2 is not far off
+now (Tuesday), I think my suggestion is that I'll apply this
+as-is, and we should fix up the issues with the warning messages
+as a followup patch. I think that's better than holding this
+out of master and making it risk missing rc2.
 
 thanks
 -- PMM
