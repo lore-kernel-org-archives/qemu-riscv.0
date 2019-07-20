@@ -1,54 +1,44 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hoeT3-0002CG-TW
-	for mharc-qemu-riscv@gnu.org; Fri, 19 Jul 2019 21:47:21 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:46258)
+	id 1hol4i-0005km-RA
+	for mharc-qemu-riscv@gnu.org; Sat, 20 Jul 2019 04:50:40 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:56498)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <palmer@dabbelt.com>) id 1hoeT1-00029Q-OM
- for qemu-riscv@nongnu.org; Fri, 19 Jul 2019 21:47:20 -0400
+ (envelope-from <frederic.konrad@adacore.com>) id 1hoihz-0006Vr-Gp
+ for qemu-riscv@nongnu.org; Sat, 20 Jul 2019 02:19:04 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmer@dabbelt.com>) id 1hoeT0-0006hk-RS
- for qemu-riscv@nongnu.org; Fri, 19 Jul 2019 21:47:19 -0400
-Received: from mail-pg1-f193.google.com ([209.85.215.193]:42888)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1hoeT0-0006hF-Mq
- for qemu-riscv@nongnu.org; Fri, 19 Jul 2019 21:47:18 -0400
-Received: by mail-pg1-f193.google.com with SMTP id t132so15176283pgb.9
- for <qemu-riscv@nongnu.org>; Fri, 19 Jul 2019 18:47:18 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
- :mime-version:content-transfer-encoding;
- bh=zZtBa+arMTE0TEHA3GMV/hzGd+rV+9tr0IORX7xpj6Y=;
- b=XkInY7yi+5gsn+YKTyIccKOpo6UxE2nztkvuZUwi+Wq5lK37eHC39t9jceYd0MDeqC
- xdi5gtz7UvZTPF26bCqh/BCc4F6EmC7elHMaNpfSvpsLWInVXYiC1uL9PqrUps+vD+ia
- CRVCYn0+epojhzMGlzSBiXxNUXsqL1ndLKp3+HXwLMob6UOyTIA7qOQtiZAOuSOo/vLQ
- IRZRvGKl66fsgRrhTPoTEHuxXWEaOdlCnEKrLSCuy5zY+J9on4WPxXzvoQUHFdF1WHqy
- wNkZdpPC0jntaN7HU7GeSNoW9K5RYLWpMaJxoIrWLHd0yCU44d7LNgCHwfuwjfrQD99f
- f7hA==
-X-Gm-Message-State: APjAAAWhoLPhGxOmkUrwxODtLEYjSiIsNN6qJK3TsD5kuj5TPL1B0GUh
- fUHkFSK/i6KFhNuTVDV41dLeQUmK
-X-Google-Smtp-Source: APXvYqzAwQmKXdNFMjFYVfg1AthKc9SBqmD2nW+Xv8KxLEeNNQlRnEfxexVNv3GAIpFnzobou/tdFQ==
-X-Received: by 2002:a63:360d:: with SMTP id d13mr57223466pga.80.1563587237040; 
- Fri, 19 Jul 2019 18:47:17 -0700 (PDT)
-Received: from localhost ([12.206.222.5])
- by smtp.gmail.com with ESMTPSA id j128sm18094726pfg.28.2019.07.19.18.47.16
- (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
- Fri, 19 Jul 2019 18:47:16 -0700 (PDT)
-Date: Fri, 19 Jul 2019 18:47:16 -0700 (PDT)
-X-Google-Original-Date: Fri, 19 Jul 2019 18:46:59 PDT (-0700)
-In-Reply-To: <1560525351-590-1-git-send-email-bmeng.cn@gmail.com>
-CC: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
- Alistair Francis <Alistair.Francis@wdc.com>
-From: Palmer Dabbelt <palmer@sifive.com>
-To: bmeng.cn@gmail.com
-Message-ID: <mhng-7207f9be-4aaa-4b0f-9832-ee6682eb5749@palmer-si-x1e>
-Mime-Version: 1.0 (MHng)
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
- [fuzzy]
-X-Received-From: 209.85.215.193
-Subject: Re: [Qemu-riscv] [PATCH] riscv: sifive_test: Add reset functionality
+ (envelope-from <frederic.konrad@adacore.com>) id 1hoihx-0004l3-9n
+ for qemu-riscv@nongnu.org; Sat, 20 Jul 2019 02:19:03 -0400
+Received: from mel.act-europe.fr ([2a02:2ab8:224:1::a0a:d2]:34535
+ helo=smtp.eu.adacore.com)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <frederic.konrad@adacore.com>)
+ id 1hoihs-0004iU-Ek; Sat, 20 Jul 2019 02:18:57 -0400
+Received: from localhost (localhost [127.0.0.1])
+ by filtered-smtp.eu.adacore.com (Postfix) with ESMTP id 0F17B813A1;
+ Sat, 20 Jul 2019 08:18:53 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at eu.adacore.com
+Received: from smtp.eu.adacore.com ([127.0.0.1])
+ by localhost (smtp.eu.adacore.com [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id mfMi38ftFdjn; Sat, 20 Jul 2019 08:18:53 +0200 (CEST)
+Received: from localhost.localdomain.localdomain
+ (lfbn-tou-1-447-75.w86-206.abo.wanadoo.fr [86.206.4.75])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by smtp.eu.adacore.com (Postfix) with ESMTPSA id 499B68139F;
+ Sat, 20 Jul 2019 08:18:52 +0200 (CEST)
+From: KONRAD Frederic <frederic.konrad@adacore.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: kbastian@mail.uni-paderborn.de, sagark@eecs.berkeley.edu,
+ Alistair.Francis@wdc.com, palmer@sifive.com, frederic.konrad@adacore.com
+Date: Sat, 20 Jul 2019 08:18:32 +0200
+Message-Id: <1563603512-5914-1-git-send-email-frederic.konrad@adacore.com>
+X-Mailer: git-send-email 1.8.3.1
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 3.x
+X-Received-From: 2a02:2ab8:224:1::a0a:d2
+X-Mailman-Approved-At: Sat, 20 Jul 2019 04:50:39 -0400
+Subject: [Qemu-riscv] [PATCH] riscv: htif: use qemu_log_mask instead of
+ qemu_log
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -60,60 +50,92 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 20 Jul 2019 01:47:21 -0000
+X-List-Received-Date: Sat, 20 Jul 2019 06:19:04 -0000
 
-On Fri, 14 Jun 2019 08:15:51 PDT (-0700), bmeng.cn@gmail.com wrote:
-> This adds a reset opcode for sifive_test device to trigger a system
-> reset for testing purpose.
->
-> Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
-> ---
->
->  hw/riscv/sifive_test.c         | 4 ++++
->  include/hw/riscv/sifive_test.h | 3 ++-
->  2 files changed, 6 insertions(+), 1 deletion(-)
->
-> diff --git a/hw/riscv/sifive_test.c b/hw/riscv/sifive_test.c
-> index 24a04d7..cd86831 100644
-> --- a/hw/riscv/sifive_test.c
-> +++ b/hw/riscv/sifive_test.c
-> @@ -21,6 +21,7 @@
->  #include "qemu/osdep.h"
->  #include "hw/sysbus.h"
->  #include "qemu/module.h"
-> +#include "sysemu/sysemu.h"
->  #include "target/riscv/cpu.h"
->  #include "hw/riscv/sifive_test.h"
->
-> @@ -40,6 +41,9 @@ static void sifive_test_write(void *opaque, hwaddr addr,
->              exit(code);
->          case FINISHER_PASS:
->              exit(0);
-> +        case FINISHER_RESET:
-> +            qemu_system_reset_request(SHUTDOWN_CAUSE_GUEST_RESET);
-> +            return;
->          default:
->              break;
->          }
-> diff --git a/include/hw/riscv/sifive_test.h b/include/hw/riscv/sifive_test.h
-> index 71d4c9f..c186a31 100644
-> --- a/include/hw/riscv/sifive_test.h
-> +++ b/include/hw/riscv/sifive_test.h
-> @@ -34,7 +34,8 @@ typedef struct SiFiveTestState {
->
->  enum {
->      FINISHER_FAIL = 0x3333,
-> -    FINISHER_PASS = 0x5555
-> +    FINISHER_PASS = 0x5555,
-> +    FINISHER_RESET = 0x7777
->  };
->
->  DeviceState *sifive_test_create(hwaddr addr);
+There are some debug trace appearing when using GDB with the HTIF mapped @0:
+ Invalid htif read: address 0000000000000002
+ Invalid htif read: address 0000000000000006
+ Invalid htif read: address 000000000000000a
+ Invalid htif read: address 000000000000000e
 
-Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
+So don't show them unconditionally.
 
-Sorry this took a while, but it's in the hardware now.  I'll merge this, but
-I'm considering it a new feature so it'll be held off a bit.
+Signed-off-by: KONRAD Frederic <frederic.konrad@adacore.com>
+---
+ hw/riscv/riscv_htif.c | 21 ++++++++++++---------
+ 1 file changed, 12 insertions(+), 9 deletions(-)
 
-Thanks!
+diff --git a/hw/riscv/riscv_htif.c b/hw/riscv/riscv_htif.c
+index 4f7b11d..6a8f0c2 100644
+--- a/hw/riscv/riscv_htif.c
++++ b/hw/riscv/riscv_htif.c
+@@ -119,7 +119,8 @@ static void htif_handle_tohost_write(HTIFState *htifstate, uint64_t val_written)
+     int resp = 0;
+ 
+     HTIF_DEBUG("mtohost write: device: %d cmd: %d what: %02" PRIx64
+-        " -payload: %016" PRIx64 "\n", device, cmd, payload & 0xFF, payload);
++               " -payload: %016" PRIx64 "\n", device, cmd, payload & 0xFF,
++               payload);
+ 
+     /*
+      * Currently, there is a fixed mapping of devices:
+@@ -137,7 +138,7 @@ static void htif_handle_tohost_write(HTIFState *htifstate, uint64_t val_written)
+                 qemu_log_mask(LOG_UNIMP, "pk syscall proxy not supported\n");
+             }
+         } else {
+-            qemu_log("HTIF device %d: unknown command\n", device);
++            HTIF_DEBUG("HTIF device %d: unknown command\n", device);
+         }
+     } else if (likely(device == 0x1)) {
+         /* HTIF Console */
+@@ -150,12 +151,13 @@ static void htif_handle_tohost_write(HTIFState *htifstate, uint64_t val_written)
+             qemu_chr_fe_write(&htifstate->chr, (uint8_t *)&payload, 1);
+             resp = 0x100 | (uint8_t)payload;
+         } else {
+-            qemu_log("HTIF device %d: unknown command\n", device);
++            HTIF_DEBUG("HTIF device %d: unknown command\n", device);
+         }
+     } else {
+-        qemu_log("HTIF unknown device or command\n");
++        HTIF_DEBUG("HTIF unknown device or command\n");
+         HTIF_DEBUG("device: %d cmd: %d what: %02" PRIx64
+-            " payload: %016" PRIx64, device, cmd, payload & 0xFF, payload);
++                   " payload: %016" PRIx64, device, cmd, payload & 0xFF,
++                   payload);
+     }
+     /*
+      * - latest bbl does not set fromhost to 0 if there is a value in tohost
+@@ -180,6 +182,7 @@ static void htif_handle_tohost_write(HTIFState *htifstate, uint64_t val_written)
+ static uint64_t htif_mm_read(void *opaque, hwaddr addr, unsigned size)
+ {
+     HTIFState *htifstate = opaque;
++
+     if (addr == TOHOST_OFFSET1) {
+         return htifstate->env->mtohost & 0xFFFFFFFF;
+     } else if (addr == TOHOST_OFFSET2) {
+@@ -189,8 +192,8 @@ static uint64_t htif_mm_read(void *opaque, hwaddr addr, unsigned size)
+     } else if (addr == FROMHOST_OFFSET2) {
+         return (htifstate->env->mfromhost >> 32) & 0xFFFFFFFF;
+     } else {
+-        qemu_log("Invalid htif read: address %016" PRIx64 "\n",
+-            (uint64_t)addr);
++        HTIF_DEBUG("Invalid htif read: address %016" PRIx64 "\n",
++                   (uint64_t)addr);
+         return 0;
+     }
+ }
+@@ -219,8 +222,8 @@ static void htif_mm_write(void *opaque, hwaddr addr,
+         htifstate->env->mfromhost |= value << 32;
+         htifstate->fromhost_inprogress = 0;
+     } else {
+-        qemu_log("Invalid htif write: address %016" PRIx64 "\n",
+-            (uint64_t)addr);
++        HTIF_DEBUG("Invalid htif write: address %016" PRIx64 "\n",
++                   (uint64_t)addr);
+     }
+ }
+ 
+-- 
+1.8.3.1
+
 
