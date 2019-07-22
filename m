@@ -1,28 +1,28 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hpaa0-0000wJ-Fs
-	for mharc-qemu-riscv@gnu.org; Mon, 22 Jul 2019 11:50:24 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:54324)
+	id 1hpaZt-0000XY-4y
+	for mharc-qemu-riscv@gnu.org; Mon, 22 Jul 2019 11:50:17 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:53496)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <tony.nguyen@bt.com>) id 1hpaZw-0000iC-9p
- for qemu-riscv@nongnu.org; Mon, 22 Jul 2019 11:50:21 -0400
+ (envelope-from <tony.nguyen@bt.com>) id 1hpaXm-0001m8-JJ
+ for qemu-riscv@nongnu.org; Mon, 22 Jul 2019 11:48:07 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <tony.nguyen@bt.com>) id 1hpaZt-0000ij-VD
- for qemu-riscv@nongnu.org; Mon, 22 Jul 2019 11:50:20 -0400
-Received: from smtpe1.intersmtp.com ([213.121.35.78]:11597)
+ (envelope-from <tony.nguyen@bt.com>) id 1hpaXi-0007Vp-L8
+ for qemu-riscv@nongnu.org; Mon, 22 Jul 2019 11:48:04 -0400
+Received: from smtpe1.intersmtp.com ([213.121.35.74]:26775)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <tony.nguyen@bt.com>)
- id 1hpaZe-0000QF-8y; Mon, 22 Jul 2019 11:50:02 -0400
-Received: from tpw09926dag18g.domain1.systemhost.net (10.9.212.34) by
- BWP09926083.bt.com (10.36.82.114) with Microsoft SMTP Server (version=TLS1_2, 
+ id 1hpaXQ-0007AZ-8o; Mon, 22 Jul 2019 11:47:44 -0400
+Received: from tpw09926dag18f.domain1.systemhost.net (10.9.212.26) by
+ BWP09926079.bt.com (10.36.82.110) with Microsoft SMTP Server (version=TLS1_2, 
  cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P256) id 15.1.1713.5; Mon, 22
- Jul 2019 16:50:00 +0100
+ Jul 2019 16:47:37 +0100
 Received: from tpw09926dag18e.domain1.systemhost.net (10.9.212.18) by
- tpw09926dag18g.domain1.systemhost.net (10.9.212.34) with Microsoft SMTP
- Server (TLS) id 15.0.1395.4; Mon, 22 Jul 2019 16:50:00 +0100
+ tpw09926dag18f.domain1.systemhost.net (10.9.212.26) with Microsoft SMTP
+ Server (TLS) id 15.0.1395.4; Mon, 22 Jul 2019 16:47:15 +0100
 Received: from tpw09926dag18e.domain1.systemhost.net
  ([fe80::a946:6348:ccf4:fa6c]) by tpw09926dag18e.domain1.systemhost.net
  ([fe80::a946:6348:ccf4:fa6c%12]) with mapi id 15.00.1395.000; Mon, 22 Jul
- 2019 16:50:00 +0100
+ 2019 16:47:15 +0100
 From: <tony.nguyen@bt.com>
 To: <qemu-devel@nongnu.org>
 CC: <peter.maydell@linaro.org>, <walling@linux.ibm.com>, <david@redhat.com>,
@@ -34,11 +34,11 @@ CC: <peter.maydell@linaro.org>, <walling@linux.ibm.com>, <david@redhat.com>,
  <david@gibson.dropbear.id.au>, <qemu-riscv@nongnu.org>, <cohuck@redhat.com>,
  <claudio.fontana@huawei.com>, <qemu-s390x@nongnu.org>, <qemu-ppc@nongnu.org>, 
  <amarkovic@wavecomp.com>, <pbonzini@redhat.com>, <aurelien@aurel32.net>
-Thread-Topic: [Qemu-devel] [PATCH v2 14/20] cputlb: Access MemoryRegion with
- MemOp
-Thread-Index: AQHVQKUeD/kggExhOkCZQT6SsUL58w==
-Date: Mon, 22 Jul 2019 15:50:00 +0000
-Message-ID: <1563810600056.6763@bt.com>
+Thread-Topic: [Qemu-devel] [PATCH v2 10/20] hw/intc/armv7m_nic: Access
+ MemoryRegion with MemOp
+Thread-Index: AQHVQKS8ru+KIa1tqke/bCiWCh2RRA==
+Date: Mon, 22 Jul 2019 15:47:15 +0000
+Message-ID: <1563810434810.27249@bt.com>
 References: <e9c6e5310b1a4863be45d45bf087fc3d@tpw09926dag18e.domain1.systemhost.net>
 In-Reply-To: <e9c6e5310b1a4863be45d45bf087fc3d@tpw09926dag18e.domain1.systemhost.net>
 Accept-Language: en-AU, en-GB, en-US
@@ -47,12 +47,13 @@ X-MS-Has-Attach:
 X-MS-TNEF-Correlator: 
 x-ms-exchange-transport-fromentityheader: Hosted
 x-originating-ip: [10.187.101.37]
-Content-Type: multipart/alternative; boundary="_000_15638106000566763btcom_"
+Content-Type: multipart/alternative; boundary="_000_156381043481027249btcom_"
 MIME-Version: 1.0
 X-detected-operating-system: by eggs.gnu.org: Windows 7 or 8 [fuzzy]
-X-Received-From: 213.121.35.78
-Subject: [Qemu-riscv] [Qemu-devel] [PATCH v2 14/20] cputlb: Access
- MemoryRegion with MemOp
+X-Received-From: 213.121.35.74
+X-Mailman-Approved-At: Mon, 22 Jul 2019 11:50:10 -0400
+Subject: [Qemu-riscv] [Qemu-devel] [PATCH v2 10/20] hw/intc/armv7m_nic:
+ Access MemoryRegion with MemOp
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -64,54 +65,86 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Jul 2019 15:50:23 -0000
+X-List-Received-Date: Mon, 22 Jul 2019 15:48:08 -0000
 
---_000_15638106000566763btcom_
+--_000_156381043481027249btcom_
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
 Signed-off-by: Tony Nguyen <tony.nguyen@bt.com>
 ---
- accel/tcg/cputlb.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ hw/intc/armv7m_nvic.c | 12 ++++++++----
+ 1 file changed, 8 insertions(+), 4 deletions(-)
 
-diff --git a/accel/tcg/cputlb.c b/accel/tcg/cputlb.c
-index 184fc54..97d7a64 100644
---- a/accel/tcg/cputlb.c
-+++ b/accel/tcg/cputlb.c
-@@ -906,8 +906,8 @@ static uint64_t io_readx(CPUArchState *env, CPUIOTLBEnt=
-ry *iotlbentry,
-         qemu_mutex_lock_iothread();
-         locked =3D true;
-     }
--    r =3D memory_region_dispatch_read(mr, mr_offset,
--                                    &val, size, iotlbentry->attrs);
-+    r =3D memory_region_dispatch_read(mr, mr_offset, &val, SIZE_MEMOP(size=
+diff --git a/hw/intc/armv7m_nvic.c b/hw/intc/armv7m_nvic.c
+index 9f8f0d3..25bb88a 100644
+--- a/hw/intc/armv7m_nvic.c
++++ b/hw/intc/armv7m_nvic.c
+@@ -18,6 +18,7 @@
+ #include "hw/intc/armv7m_nvic.h"
+ #include "target/arm/cpu.h"
+ #include "exec/exec-all.h"
++#include "exec/memop.h"
+ #include "qemu/log.h"
+ #include "qemu/module.h"
+ #include "trace.h"
+@@ -2345,7 +2346,8 @@ static MemTxResult nvic_sysreg_ns_write(void *opaque,=
+ hwaddr addr,
+     if (attrs.secure) {
+         /* S accesses to the alias act like NS accesses to the real region=
+ */
+         attrs.secure =3D 0;
+-        return memory_region_dispatch_write(mr, addr, value, size, attrs);
++        return memory_region_dispatch_write(mr, addr, value, SIZE_MEMOP(si=
+ze),
++                                            attrs);
+     } else {
+         /* NS attrs are RAZ/WI for privileged, and BusFault for user */
+         if (attrs.user) {
+@@ -2364,7 +2366,8 @@ static MemTxResult nvic_sysreg_ns_read(void *opaque, =
+hwaddr addr,
+     if (attrs.secure) {
+         /* S accesses to the alias act like NS accesses to the real region=
+ */
+         attrs.secure =3D 0;
+-        return memory_region_dispatch_read(mr, addr, data, size, attrs);
++        return memory_region_dispatch_read(mr, addr, data, SIZE_MEMOP(size=
 ),
-+                                    iotlbentry->attrs);
-     if (r !=3D MEMTX_OK) {
-         hwaddr physaddr =3D mr_offset +
-             section->offset_within_address_space -
-@@ -947,8 +947,8 @@ static void io_writex(CPUArchState *env, CPUIOTLBEntry =
-*iotlbentry,
-         qemu_mutex_lock_iothread();
-         locked =3D true;
-     }
--    r =3D memory_region_dispatch_write(mr, mr_offset,
--                                     val, size, iotlbentry->attrs);
-+    r =3D memory_region_dispatch_write(mr, mr_offset, val, SIZE_MEMOP(size=
-),
-+                                    iotlbentry->attrs);
-     if (r !=3D MEMTX_OK) {
-         hwaddr physaddr =3D mr_offset +
-             section->offset_within_address_space -
++                                           attrs);
+     } else {
+         /* NS attrs are RAZ/WI for privileged, and BusFault for user */
+         if (attrs.user) {
+@@ -2390,7 +2393,8 @@ static MemTxResult nvic_systick_write(void *opaque, h=
+waddr addr,
+
+     /* Direct the access to the correct systick */
+     mr =3D sysbus_mmio_get_region(SYS_BUS_DEVICE(&s->systick[attrs.secure]=
+), 0);
+-    return memory_region_dispatch_write(mr, addr, value, size, attrs);
++    return memory_region_dispatch_write(mr, addr, value, SIZE_MEMOP(size),
++                                        attrs);
+ }
+
+ static MemTxResult nvic_systick_read(void *opaque, hwaddr addr,
+@@ -2402,7 +2406,7 @@ static MemTxResult nvic_systick_read(void *opaque, hw=
+addr addr,
+
+     /* Direct the access to the correct systick */
+     mr =3D sysbus_mmio_get_region(SYS_BUS_DEVICE(&s->systick[attrs.secure]=
+), 0);
+-    return memory_region_dispatch_read(mr, addr, data, size, attrs);
++    return memory_region_dispatch_read(mr, addr, data, SIZE_MEMOP(size), a=
+ttrs);
+ }
+
+ static const MemoryRegionOps nvic_systick_ops =3D {
 --
 1.8.3.1
 
 
 
 
---_000_15638106000566763btcom_
+--_000_156381043481027249btcom_
 Content-Type: text/html; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
@@ -131,52 +164,89 @@ FFFFF;font-family:Calibri,Arial,Helvetica,sans-serif;">
 guyen@bt.com&gt;</span><br>
 </div>
 <div>---</div>
-<div>&nbsp;accel/tcg/cputlb.c | 8 &#43;&#43;&#43;&#43;----</div>
-<div>&nbsp;1 file changed, 4 insertions(&#43;), 4 deletions(-)</div>
+<div>&nbsp;hw/intc/armv7m_nvic.c | 12 &#43;&#43;&#43;&#43;&#43;&#43;&#43;&#=
+43;----</div>
+<div>&nbsp;1 file changed, 8 insertions(&#43;), 4 deletions(-)</div>
 <div><br>
 </div>
-<div>diff --git a/accel/tcg/cputlb.c b/accel/tcg/cputlb.c</div>
-<div>index 184fc54..97d7a64 100644</div>
-<div>--- a/accel/tcg/cputlb.c</div>
-<div>&#43;&#43;&#43; b/accel/tcg/cputlb.c</div>
-<div>@@ -906,8 &#43;906,8 @@ static uint64_t io_readx(CPUArchState *env, CP=
-UIOTLBEntry *iotlbentry,</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;qemu_mutex_lock_iothread();</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;locked =3D true;</div>
-<div>&nbsp; &nbsp; &nbsp;}</div>
-<div>- &nbsp; &nbsp;r =3D memory_region_dispatch_read(mr, mr_offset,</div>
-<div>- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&amp;val, size, io=
-tlbentry-&gt;attrs);</div>
-<div>&#43; &nbsp; &nbsp;r =3D memory_region_dispatch_read(mr, mr_offset, &a=
-mp;val, SIZE_MEMOP(size),</div>
+<div>diff --git a/hw/intc/armv7m_nvic.c b/hw/intc/armv7m_nvic.c</div>
+<div>index 9f8f0d3..25bb88a 100644</div>
+<div>--- a/hw/intc/armv7m_nvic.c</div>
+<div>&#43;&#43;&#43; b/hw/intc/armv7m_nvic.c</div>
+<div>@@ -18,6 &#43;18,7 @@</div>
+<div>&nbsp;#include &quot;hw/intc/armv7m_nvic.h&quot;</div>
+<div>&nbsp;#include &quot;target/arm/cpu.h&quot;</div>
+<div>&nbsp;#include &quot;exec/exec-all.h&quot;</div>
+<div>&#43;#include &quot;exec/memop.h&quot;</div>
+<div>&nbsp;#include &quot;qemu/log.h&quot;</div>
+<div>&nbsp;#include &quot;qemu/module.h&quot;</div>
+<div>&nbsp;#include &quot;trace.h&quot;</div>
+<div>@@ -2345,7 &#43;2346,8 @@ static MemTxResult nvic_sysreg_ns_write(void=
+ *opaque, hwaddr addr,</div>
+<div>&nbsp; &nbsp; &nbsp;if (attrs.secure) {</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* S accesses to the alias act like =
+NS accesses to the real region */</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;attrs.secure =3D 0;</div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp;return memory_region_dispatch_write(mr, a=
+ddr, value, size, attrs);</div>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp;return memory_region_dispatch_write(m=
+r, addr, value, SIZE_MEMOP(size),</div>
 <div>&#43; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
-nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;iotlbentry-&gt=
-;attrs);</div>
-<div>&nbsp; &nbsp; &nbsp;if (r !=3D MEMTX_OK) {</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;hwaddr physaddr =3D mr_offset &#43;<=
-/div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;section-&gt;offset_wit=
-hin_address_space -</div>
-<div>@@ -947,8 &#43;947,8 @@ static void io_writex(CPUArchState *env, CPUIO=
-TLBEntry *iotlbentry,</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;qemu_mutex_lock_iothread();</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;locked =3D true;</div>
-<div>&nbsp; &nbsp; &nbsp;}</div>
-<div>- &nbsp; &nbsp;r =3D memory_region_dispatch_write(mr, mr_offset,</div>
-<div>- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; val, size, iotlbe=
-ntry-&gt;attrs);</div>
-<div>&#43; &nbsp; &nbsp;r =3D memory_region_dispatch_write(mr, mr_offset, v=
-al, SIZE_MEMOP(size),</div>
+nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;=
+ &nbsp; &nbsp;attrs);</div>
+<div>&nbsp; &nbsp; &nbsp;} else {</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* NS attrs are RAZ/WI for privilege=
+d, and BusFault for user */</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if (attrs.user) {</div>
+<div>@@ -2364,7 &#43;2366,8 @@ static MemTxResult nvic_sysreg_ns_read(void =
+*opaque, hwaddr addr,</div>
+<div>&nbsp; &nbsp; &nbsp;if (attrs.secure) {</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* S accesses to the alias act like =
+NS accesses to the real region */</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;attrs.secure =3D 0;</div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp;return memory_region_dispatch_read(mr, ad=
+dr, data, size, attrs);</div>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp;return memory_region_dispatch_read(mr=
+, addr, data, SIZE_MEMOP(size),</div>
 <div>&#43; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
-nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;iotlbentry-&gt=
-;attrs);</div>
-<div>&nbsp; &nbsp; &nbsp;if (r !=3D MEMTX_OK) {</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;hwaddr physaddr =3D mr_offset &#43;<=
+nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;=
+ &nbsp; attrs);</div>
+<div>&nbsp; &nbsp; &nbsp;} else {</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* NS attrs are RAZ/WI for privilege=
+d, and BusFault for user */</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if (attrs.user) {</div>
+<div>@@ -2390,7 &#43;2393,8 @@ static MemTxResult nvic_systick_write(void *=
+opaque, hwaddr addr,</div>
+<div>&nbsp;</div>
+<div>&nbsp; &nbsp; &nbsp;/* Direct the access to the correct systick */</di=
+v>
+<div>&nbsp; &nbsp; &nbsp;mr =3D sysbus_mmio_get_region(SYS_BUS_DEVICE(&amp;=
+s-&gt;systick[attrs.secure]), 0);</div>
+<div>- &nbsp; &nbsp;return memory_region_dispatch_write(mr, addr, value, si=
+ze, attrs);</div>
+<div>&#43; &nbsp; &nbsp;return memory_region_dispatch_write(mr, addr, value=
+, SIZE_MEMOP(size),</div>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
+nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;=
+attrs);</div>
+<div>&nbsp;}</div>
+<div>&nbsp;</div>
+<div>&nbsp;static MemTxResult nvic_systick_read(void *opaque, hwaddr addr,<=
 /div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;section-&gt;offset_wit=
-hin_address_space -</div>
+<div>@@ -2402,7 &#43;2406,7 @@ static MemTxResult nvic_systick_read(void *o=
+paque, hwaddr addr,</div>
+<div>&nbsp;</div>
+<div>&nbsp; &nbsp; &nbsp;/* Direct the access to the correct systick */</di=
+v>
+<div>&nbsp; &nbsp; &nbsp;mr =3D sysbus_mmio_get_region(SYS_BUS_DEVICE(&amp;=
+s-&gt;systick[attrs.secure]), 0);</div>
+<div>- &nbsp; &nbsp;return memory_region_dispatch_read(mr, addr, data, size=
+, attrs);</div>
+<div>&#43; &nbsp; &nbsp;return memory_region_dispatch_read(mr, addr, data, =
+SIZE_MEMOP(size), attrs);</div>
+<div>&nbsp;}</div>
+<div>&nbsp;</div>
+<div>&nbsp;static const MemoryRegionOps nvic_systick_ops =3D {</div>
 <div>--&nbsp;</div>
 <div>1.8.3.1</div>
 <div><br>
@@ -187,5 +257,5 @@ hin_address_space -</div>
 </body>
 </html>
 
---_000_15638106000566763btcom_--
+--_000_156381043481027249btcom_--
 
