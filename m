@@ -1,58 +1,79 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hpadd-0000Vl-6V
-	for mharc-qemu-riscv@gnu.org; Mon, 22 Jul 2019 11:54:09 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:55555)
+	id 1hpajD-0003Ih-2O
+	for mharc-qemu-riscv@gnu.org; Mon, 22 Jul 2019 11:59:55 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:56710)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <tony.nguyen@bt.com>) id 1hpada-0000UN-VR
- for qemu-riscv@nongnu.org; Mon, 22 Jul 2019 11:54:08 -0400
+ (envelope-from <richard.henderson@linaro.org>) id 1hpajA-0003EL-SE
+ for qemu-riscv@nongnu.org; Mon, 22 Jul 2019 11:59:53 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <tony.nguyen@bt.com>) id 1hpadZ-0004Js-2U
- for qemu-riscv@nongnu.org; Mon, 22 Jul 2019 11:54:06 -0400
-Received: from smtpe1.intersmtp.com ([62.239.224.237]:21209)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <tony.nguyen@bt.com>)
- id 1hpadX-0004IC-6E; Mon, 22 Jul 2019 11:54:04 -0400
-Received: from tpw09926dag18g.domain1.systemhost.net (10.9.212.34) by
- RDW083A010ED66.bt.com (10.187.98.36) with Microsoft SMTP Server (TLS) id
- 14.3.439.0; Mon, 22 Jul 2019 16:53:08 +0100
-Received: from tpw09926dag18e.domain1.systemhost.net (10.9.212.18) by
- tpw09926dag18g.domain1.systemhost.net (10.9.212.34) with Microsoft SMTP
- Server (TLS) id 15.0.1395.4; Mon, 22 Jul 2019 16:54:00 +0100
-Received: from tpw09926dag18e.domain1.systemhost.net
- ([fe80::a946:6348:ccf4:fa6c]) by tpw09926dag18e.domain1.systemhost.net
- ([fe80::a946:6348:ccf4:fa6c%12]) with mapi id 15.00.1395.000; Mon, 22 Jul
- 2019 16:54:00 +0100
-From: <tony.nguyen@bt.com>
-To: <qemu-devel@nongnu.org>
-CC: <peter.maydell@linaro.org>, <walling@linux.ibm.com>, <david@redhat.com>,
- <palmer@sifive.com>, <mark.cave-ayland@ilande.co.uk>,
- <Alistair.Francis@wdc.com>, <arikalo@wavecomp.com>, <mst@redhat.com>,
- <pasic@linux.ibm.com>, <borntraeger@de.ibm.com>, <rth@twiddle.net>,
- <atar4qemu@gmail.com>, <ehabkost@redhat.com>, <sw@weilnetz.de>,
- <alex.williamson@redhat.com>, <qemu-arm@nongnu.org>,
- <david@gibson.dropbear.id.au>, <qemu-riscv@nongnu.org>, <cohuck@redhat.com>,
- <claudio.fontana@huawei.com>, <qemu-s390x@nongnu.org>, <qemu-ppc@nongnu.org>, 
- <amarkovic@wavecomp.com>, <pbonzini@redhat.com>, <aurelien@aurel32.net>
-Thread-Topic: [Qemu-devel] [PATCH v2 20/20] target/sparc: sun4u Invert Endian
- TTE bit
-Thread-Index: AQHVQKWtc7DbOsb7Y06HeJbM6CaVHA==
-Date: Mon, 22 Jul 2019 15:54:00 +0000
-Message-ID: <1563810840218.14603@bt.com>
+ (envelope-from <richard.henderson@linaro.org>) id 1hpaj9-0007lX-Kw
+ for qemu-riscv@nongnu.org; Mon, 22 Jul 2019 11:59:52 -0400
+Received: from mail-pl1-x633.google.com ([2607:f8b0:4864:20::633]:43317)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
+ id 1hpaj9-0007kQ-Bm
+ for qemu-riscv@nongnu.org; Mon, 22 Jul 2019 11:59:51 -0400
+Received: by mail-pl1-x633.google.com with SMTP id 4so12402484pld.10
+ for <qemu-riscv@nongnu.org>; Mon, 22 Jul 2019 08:59:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=subject:to:cc:references:from:openpgp:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=53qxnmFCQleCgbRBd+QvrrBbXVy7x90TNzmGsFo5nJU=;
+ b=iPbss/mK0jszMYof/8qtEi33fitz9HC8eD/BndxwmPj/LtJj21fdl1api2UB53TVJ3
+ LiO/y1lhicz2hfPj5jnw3buDx9l0NVfuG8XWs6sgxIxkgeh6ofJg+rI9vKUAUHFyi+c/
+ ug5ndyKNnPX6tDf11y2fxK3chMQvVwuXqhlhlvN351ntAyuvxP95hpiQUZdskVFXNm8S
+ /+JSbRug7VVg9zxK0h9re0oMGark5HNwNNigLHKEX2GcEoUZzHqsv1alZOVnM1IeNmYK
+ eUvzBNFoIl8UsEOqM62/C1mB7Mq4baSo8laFlWCeZ4XMs17DBlLRSW91MabPlGM68JxT
+ w6PQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
+ :date:user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=53qxnmFCQleCgbRBd+QvrrBbXVy7x90TNzmGsFo5nJU=;
+ b=fBuePVlfkTB0eWSXjG68MZmgV/nevsdME3Cf+rZqoL4Q8PGBxEOH60TMioYLlvX1P1
+ EbLEXGRRHx1MHk4vgHMpLhZRs5m51PwHdmmHwC8vFcSh0JEBUhvTmzwqye5xChe+WCRf
+ nTMZIHch1yWR/Wvif3wwe3LOknWQdqZyEPI2rS2r4cSCxucgSESOx1omlXAs/bd3ZSGN
+ zez3EeO/LKgP9E2M0tKyRh1tcvM3FyS3ssgtZlgt6uexQrMOSyh/U5msWdzZ4xD+h0Sh
+ UCaSk9++CccSs6AW7TYa/bajUTsKuPXxi71OPNqw5j3zMYC8PwMAY1PsRR1rKZsk+6ZO
+ q3gQ==
+X-Gm-Message-State: APjAAAVrnMZhAC0LAMiW4pYsjnNP/meoMGhPWd3AE+S2CMBd0uoN7oUH
+ 0f9RYd6MojUxoC0R3KAVlmLbgg==
+X-Google-Smtp-Source: APXvYqy/RcnjVKmOcjR9YkoxmsldkT0VMHLcPieshCXhxmcgxnYEhbB1VLUfu3mSkg1P/Zg2xZBPtw==
+X-Received: by 2002:a17:902:b582:: with SMTP id
+ a2mr77224778pls.128.1563811190327; 
+ Mon, 22 Jul 2019 08:59:50 -0700 (PDT)
+Received: from [192.168.1.11] (97-126-117-207.tukw.qwest.net. [97.126.117.207])
+ by smtp.gmail.com with ESMTPSA id y128sm58626865pgy.41.2019.07.22.08.59.48
+ (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+ Mon, 22 Jul 2019 08:59:49 -0700 (PDT)
+To: tony.nguyen@bt.com, qemu-devel@nongnu.org
+Cc: peter.maydell@linaro.org, walling@linux.ibm.com, david@redhat.com,
+ palmer@sifive.com, mark.cave-ayland@ilande.co.uk, Alistair.Francis@wdc.com,
+ arikalo@wavecomp.com, mst@redhat.com, pasic@linux.ibm.com,
+ borntraeger@de.ibm.com, rth@twiddle.net, atar4qemu@gmail.com,
+ ehabkost@redhat.com, sw@weilnetz.de, alex.williamson@redhat.com,
+ qemu-arm@nongnu.org, david@gibson.dropbear.id.au, qemu-riscv@nongnu.org,
+ cohuck@redhat.com, claudio.fontana@huawei.com, qemu-s390x@nongnu.org,
+ qemu-ppc@nongnu.org, amarkovic@wavecomp.com, pbonzini@redhat.com,
+ aurelien@aurel32.net
 References: <e9c6e5310b1a4863be45d45bf087fc3d@tpw09926dag18e.domain1.systemhost.net>
-In-Reply-To: <e9c6e5310b1a4863be45d45bf087fc3d@tpw09926dag18e.domain1.systemhost.net>
-Accept-Language: en-AU, en-GB, en-US
-Content-Language: en-AU
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.187.101.37]
-Content-Type: multipart/alternative; boundary="_000_156381084021814603btcom_"
+From: Richard Henderson <richard.henderson@linaro.org>
+Openpgp: preference=signencrypt
+Message-ID: <2b6eb033-4b6e-4d64-c57e-a3257088d0dd@linaro.org>
+Date: Mon, 22 Jul 2019 08:59:47 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.8.0
 MIME-Version: 1.0
+In-Reply-To: <e9c6e5310b1a4863be45d45bf087fc3d@tpw09926dag18e.domain1.systemhost.net>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 62.239.224.237
-Subject: [Qemu-riscv] [Qemu-devel] [PATCH v2 20/20] target/sparc: sun4u
- Invert Endian TTE bit
+X-Received-From: 2607:f8b0:4864:20::633
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v2 00/20] Invert Endian bit in
+ SPARCv9 MMU TTE
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -64,231 +85,19 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Jul 2019 15:54:08 -0000
+X-List-Received-Date: Mon, 22 Jul 2019 15:59:53 -0000
 
---_000_156381084021814603btcom_
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+On 7/22/19 8:34 AM, tony.nguyen@bt.com wrote:
+> Tony Nguyen (20):
+>   tcg: Replace MO_8 with MO_UB alias
+>   tcg: Replace MO_16 with MO_UW alias
+>   tcg: Replace MO_32 with MO_UL alias
+>   tcg: Replace MO_64 with MO_UQ alias
+>   tcg: Move size+sign+endian from TCGMemOp to MemOp
 
-This bit configures endianness of PCI MMIO devices. It is used by
-Solaris and OpenBSD sunhme drivers.
-
-Tested working on OpenBSD.
-
-Unfortunately Solaris 10 had a unrelated keyboard issue blocking
-testing... another inch towards Solaris 10 on SPARC64 =3D)
-
-Signed-off-by: Tony Nguyen <tony.nguyen@bt.com>
----
- target/sparc/cpu.h        | 2 ++
- target/sparc/mmu_helper.c | 8 +++++++-
- 2 files changed, 9 insertions(+), 1 deletion(-)
-
-diff --git a/target/sparc/cpu.h b/target/sparc/cpu.h
-index 8ed2250..77e8e07 100644
---- a/target/sparc/cpu.h
-+++ b/target/sparc/cpu.h
-@@ -277,6 +277,7 @@ enum {
-
- #define TTE_VALID_BIT       (1ULL << 63)
- #define TTE_NFO_BIT         (1ULL << 60)
-+#define TTE_IE_BIT          (1ULL << 59)
- #define TTE_USED_BIT        (1ULL << 41)
- #define TTE_LOCKED_BIT      (1ULL <<  6)
- #define TTE_SIDEEFFECT_BIT  (1ULL <<  3)
-@@ -293,6 +294,7 @@ enum {
-
- #define TTE_IS_VALID(tte)   ((tte) & TTE_VALID_BIT)
- #define TTE_IS_NFO(tte)     ((tte) & TTE_NFO_BIT)
-+#define TTE_IS_IE(tte)      ((tte) & TTE_IE_BIT)
- #define TTE_IS_USED(tte)    ((tte) & TTE_USED_BIT)
- #define TTE_IS_LOCKED(tte)  ((tte) & TTE_LOCKED_BIT)
- #define TTE_IS_SIDEEFFECT(tte) ((tte) & TTE_SIDEEFFECT_BIT)
-diff --git a/target/sparc/mmu_helper.c b/target/sparc/mmu_helper.c
-index 826e14b..77dc86a 100644
---- a/target/sparc/mmu_helper.c
-+++ b/target/sparc/mmu_helper.c
-@@ -537,6 +537,10 @@ static int get_physical_address_data(CPUSPARCState *en=
-v, hwaddr *physical,
-         if (ultrasparc_tag_match(&env->dtlb[i], address, context, physical=
-)) {
-             int do_fault =3D 0;
-
-+            if (TTE_IS_IE(env->dtlb[i].tte)) {
-+                attrs->byte_swap =3D true;
-+            }
-+
-             /* access ok? */
-             /* multiple bits in SFSR.FT may be set on TT_DFAULT */
-             if (TTE_IS_PRIV(env->dtlb[i].tte) && is_user) {
-@@ -792,7 +796,7 @@ void dump_mmu(CPUSPARCState *env)
-             }
-             if (TTE_IS_VALID(env->dtlb[i].tte)) {
-                 qemu_printf("[%02u] VA: %" PRIx64 ", PA: %llx"
--                            ", %s, %s, %s, %s, ctx %" PRId64 " %s\n",
-+                            ", %s, %s, %s, %s, ie %s, ctx %" PRId64 " %s\n=
-",
-                             i,
-                             env->dtlb[i].tag & (uint64_t)~0x1fffULL,
-                             TTE_PA(env->dtlb[i].tte),
-@@ -801,6 +805,8 @@ void dump_mmu(CPUSPARCState *env)
-                             TTE_IS_W_OK(env->dtlb[i].tte) ? "RW" : "RO",
-                             TTE_IS_LOCKED(env->dtlb[i].tte) ?
-                             "locked" : "unlocked",
-+                            TTE_IS_IE(env->dtlb[i].tte) ?
-+                            "yes" : "no",
-                             env->dtlb[i].tag & (uint64_t)0x1fffULL,
-                             TTE_IS_GLOBAL(env->dtlb[i].tte) ?
-                             "global" : "local");
---
-1.8.3.1
+I don't like any of these first 5 patches.
+I don't understand your motivation here.  Why?
 
 
-
-
---_000_156381084021814603btcom_
-Content-Type: text/html; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
-
-<html>
-<head>
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Diso-8859-=
-1">
-<style type=3D"text/css" style=3D"display:none"><!-- P { margin-top: 0px; m=
-argin-bottom: 0px; } .EmailQuote { margin-left: 1pt; padding-left: 4pt; bor=
-der-left-width: 2px; border-left-style: solid; border-left-color: rgb(128, =
-0, 0); }--></style>
-</head>
-<body dir=3D"ltr" style=3D"font-size:12pt;color:#000000;background-color:#F=
-FFFFF;font-family:Calibri,Arial,Helvetica,sans-serif;">
-<p></p>
-<div><span style=3D"font-size: 12pt;">This bit configures endianness of PCI=
- MMIO devices. It is used by</span><br>
-</div>
-<div>Solaris and OpenBSD sunhme drivers.</div>
-<div><br>
-</div>
-<div>Tested working on OpenBSD.</div>
-<div><br>
-</div>
-<div>Unfortunately Solaris 10 had a unrelated keyboard issue blocking</div>
-<div>testing... another inch towards Solaris 10 on SPARC64 =3D)</div>
-<div><br>
-</div>
-<div>Signed-off-by: Tony Nguyen &lt;tony.nguyen@bt.com&gt;</div>
-<div>---</div>
-<div>&nbsp;target/sparc/cpu.h &nbsp; &nbsp; &nbsp; &nbsp;| 2 &#43;&#43;</di=
-v>
-<div>&nbsp;target/sparc/mmu_helper.c | 8 &#43;&#43;&#43;&#43;&#43;&#43;&#43=
-;-</div>
-<div>&nbsp;2 files changed, 9 insertions(&#43;), 1 deletion(-)</div>
-<div><br>
-</div>
-<div>diff --git a/target/sparc/cpu.h b/target/sparc/cpu.h</div>
-<div>index 8ed2250..77e8e07 100644</div>
-<div>--- a/target/sparc/cpu.h</div>
-<div>&#43;&#43;&#43; b/target/sparc/cpu.h</div>
-<div>@@ -277,6 &#43;277,7 @@ enum {</div>
-<div>&nbsp;</div>
-<div>&nbsp;#define TTE_VALID_BIT &nbsp; &nbsp; &nbsp; (1ULL &lt;&lt; 63)</d=
-iv>
-<div>&nbsp;#define TTE_NFO_BIT &nbsp; &nbsp; &nbsp; &nbsp; (1ULL &lt;&lt; 6=
-0)</div>
-<div>&#43;#define TTE_IE_BIT &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;(1ULL &lt;&l=
-t; 59)</div>
-<div>&nbsp;#define TTE_USED_BIT &nbsp; &nbsp; &nbsp; &nbsp;(1ULL &lt;&lt; 4=
-1)</div>
-<div>&nbsp;#define TTE_LOCKED_BIT &nbsp; &nbsp; &nbsp;(1ULL &lt;&lt; &nbsp;=
-6)</div>
-<div>&nbsp;#define TTE_SIDEEFFECT_BIT &nbsp;(1ULL &lt;&lt; &nbsp;3)</div>
-<div>@@ -293,6 &#43;294,7 @@ enum {</div>
-<div>&nbsp;</div>
-<div>&nbsp;#define TTE_IS_VALID(tte) &nbsp; ((tte) &amp; TTE_VALID_BIT)</di=
-v>
-<div>&nbsp;#define TTE_IS_NFO(tte) &nbsp; &nbsp; ((tte) &amp; TTE_NFO_BIT)<=
-/div>
-<div>&#43;#define TTE_IS_IE(tte) &nbsp; &nbsp; &nbsp;((tte) &amp; TTE_IE_BI=
-T)</div>
-<div>&nbsp;#define TTE_IS_USED(tte) &nbsp; &nbsp;((tte) &amp; TTE_USED_BIT)=
-</div>
-<div>&nbsp;#define TTE_IS_LOCKED(tte) &nbsp;((tte) &amp; TTE_LOCKED_BIT)</d=
-iv>
-<div>&nbsp;#define TTE_IS_SIDEEFFECT(tte) ((tte) &amp; TTE_SIDEEFFECT_BIT)<=
-/div>
-<div>diff --git a/target/sparc/mmu_helper.c b/target/sparc/mmu_helper.c</di=
-v>
-<div>index 826e14b..77dc86a 100644</div>
-<div>--- a/target/sparc/mmu_helper.c</div>
-<div>&#43;&#43;&#43; b/target/sparc/mmu_helper.c</div>
-<div>@@ -537,6 &#43;537,10 @@ static int get_physical_address_data(CPUSPARC=
-State *env, hwaddr *physical,</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if (ultrasparc_tag_match(&amp;env-&g=
-t;dtlb[i], address, context, physical)) {</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;int do_fault =3D 0;</d=
-iv>
-<div>&nbsp;</div>
-<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if (TTE_IS_IE(env-&gt;d=
-tlb[i].tte)) {</div>
-<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;attrs-&gt=
-;byte_swap =3D true;</div>
-<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}</div>
-<div>&#43;</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* access ok? */</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* multiple bits in SF=
-SR.FT may be set on TT_DFAULT */</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if (TTE_IS_PRIV(env-&g=
-t;dtlb[i].tte) &amp;&amp; is_user) {</div>
-<div>@@ -792,7 &#43;796,7 @@ void dump_mmu(CPUSPARCState *env)</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if (TTE_IS_VALID(env-&=
-gt;dtlb[i].tte)) {</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;qemu_pri=
-ntf(&quot;[%02u] VA: %&quot; PRIx64 &quot;, PA: %llx&quot;</div>
-<div>- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; &nbsp; &nbsp;&quot;, %s, %s, %s, %s, ctx %&quot; PRId64 &qu=
-ot; %s\n&quot;,</div>
-<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
-nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&quot;, %s, %s, %s, %s, ie %s, ctx %&quot;=
- PRId64 &quot; %s\n&quot;,</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;i,</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;env-&gt;dtlb[i].tag &amp; (uint64_t)~0x1f=
-ffULL,</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;TTE_PA(env-&gt;dtlb[i].tte),</div>
-<div>@@ -801,6 &#43;805,8 @@ void dump_mmu(CPUSPARCState *env)</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;TTE_IS_W_OK(env-&gt;dtlb[i].tte) ? &quot;=
-RW&quot; : &quot;RO&quot;,</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;TTE_IS_LOCKED(env-&gt;dtlb[i].tte) ?</div=
->
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&quot;locked&quot; : &quot;unlocked&quot;=
-,</div>
-<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
-nbsp; &nbsp; &nbsp; &nbsp; &nbsp;TTE_IS_IE(env-&gt;dtlb[i].tte) ?</div>
-<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
-nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&quot;yes&quot; : &quot;no&quot;,</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;env-&gt;dtlb[i].tag &amp; (uint64_t)0x1ff=
-fULL,</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;TTE_IS_GLOBAL(env-&gt;dtlb[i].tte) ?</div=
->
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&quot;global&quot; : &quot;local&quot;);<=
-/div>
-<div>--&nbsp;</div>
-<div>1.8.3.1</div>
-<div><br>
-<br>
-</div>
-<p><br>
-</p>
-</body>
-</html>
-
---_000_156381084021814603btcom_--
+r~
 
