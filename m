@@ -1,27 +1,27 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hpabb-0004g2-PO
-	for mharc-qemu-riscv@gnu.org; Mon, 22 Jul 2019 11:52:03 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:54966)
+	id 1hpacF-0006cf-Cy
+	for mharc-qemu-riscv@gnu.org; Mon, 22 Jul 2019 11:52:43 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:55240)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <tony.nguyen@bt.com>) id 1hpabY-0004a2-NX
- for qemu-riscv@nongnu.org; Mon, 22 Jul 2019 11:52:02 -0400
+ (envelope-from <tony.nguyen@bt.com>) id 1hpacC-0006cZ-R7
+ for qemu-riscv@nongnu.org; Mon, 22 Jul 2019 11:52:41 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <tony.nguyen@bt.com>) id 1hpabX-0002IL-I4
- for qemu-riscv@nongnu.org; Mon, 22 Jul 2019 11:52:00 -0400
-Received: from smtpe1.intersmtp.com ([62.239.224.234]:8997)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+ (envelope-from <tony.nguyen@bt.com>) id 1hpacA-00034S-UL
+ for qemu-riscv@nongnu.org; Mon, 22 Jul 2019 11:52:40 -0400
+Received: from smtpe1.intersmtp.com ([62.239.224.236]:41601)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <tony.nguyen@bt.com>)
- id 1hpabX-0002Gw-9U; Mon, 22 Jul 2019 11:51:59 -0400
+ id 1hpacA-00032V-LW; Mon, 22 Jul 2019 11:52:38 -0400
+Received: from tpw09926dag18h.domain1.systemhost.net (10.9.212.42) by
+ RDW083A009ED65.bt.com (10.187.98.35) with Microsoft SMTP Server (TLS) id
+ 14.3.439.0; Mon, 22 Jul 2019 16:48:58 +0100
 Received: from tpw09926dag18e.domain1.systemhost.net (10.9.212.18) by
- RDW083A012ED68.bt.com (10.187.98.38) with Microsoft SMTP Server (TLS) id
- 14.3.439.0; Mon, 22 Jul 2019 16:51:42 +0100
-Received: from tpw09926dag18e.domain1.systemhost.net (10.9.212.18) by
- tpw09926dag18e.domain1.systemhost.net (10.9.212.18) with Microsoft SMTP
- Server (TLS) id 15.0.1395.4; Mon, 22 Jul 2019 16:51:56 +0100
+ tpw09926dag18h.domain1.systemhost.net (10.9.212.42) with Microsoft SMTP
+ Server (TLS) id 15.0.1395.4; Mon, 22 Jul 2019 16:52:35 +0100
 Received: from tpw09926dag18e.domain1.systemhost.net
  ([fe80::a946:6348:ccf4:fa6c]) by tpw09926dag18e.domain1.systemhost.net
  ([fe80::a946:6348:ccf4:fa6c%12]) with mapi id 15.00.1395.000; Mon, 22 Jul
- 2019 16:51:56 +0100
+ 2019 16:52:35 +0100
 From: <tony.nguyen@bt.com>
 To: <qemu-devel@nongnu.org>
 CC: <peter.maydell@linaro.org>, <walling@linux.ibm.com>, <david@redhat.com>,
@@ -33,11 +33,11 @@ CC: <peter.maydell@linaro.org>, <walling@linux.ibm.com>, <david@redhat.com>,
  <david@gibson.dropbear.id.au>, <qemu-riscv@nongnu.org>, <cohuck@redhat.com>,
  <claudio.fontana@huawei.com>, <qemu-s390x@nongnu.org>, <qemu-ppc@nongnu.org>, 
  <amarkovic@wavecomp.com>, <pbonzini@redhat.com>, <aurelien@aurel32.net>
-Thread-Topic: [Qemu-devel] [PATCH v2 17/20] cpu: TLB_FLAGS_MASK bit to force
- memory slow path
-Thread-Index: AQHVQKVjDC9KxC3sRk6QAmZwUx7EEw==
-Date: Mon, 22 Jul 2019 15:51:56 +0000
-Message-ID: <1563810716254.18886@bt.com>
+Thread-Topic: [Qemu-devel] [PATCH v2 18/20] cputlb: Byte swap memory
+ transaction attribute
+Thread-Index: AQHVQKV7c9bUDlL56U+J3UKnlx1+xw==
+Date: Mon, 22 Jul 2019 15:52:35 +0000
+Message-ID: <1563810755207.16357@bt.com>
 References: <e9c6e5310b1a4863be45d45bf087fc3d@tpw09926dag18e.domain1.systemhost.net>
 In-Reply-To: <e9c6e5310b1a4863be45d45bf087fc3d@tpw09926dag18e.domain1.systemhost.net>
 Accept-Language: en-AU, en-GB, en-US
@@ -46,13 +46,13 @@ X-MS-Has-Attach:
 X-MS-TNEF-Correlator: 
 x-ms-exchange-transport-fromentityheader: Hosted
 x-originating-ip: [10.187.101.37]
-Content-Type: multipart/alternative; boundary="_000_156381071625418886btcom_"
+Content-Type: multipart/alternative; boundary="_000_156381075520716357btcom_"
 MIME-Version: 1.0
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 62.239.224.234
-Subject: [Qemu-riscv] [Qemu-devel] [PATCH v2 17/20] cpu: TLB_FLAGS_MASK bit
- to force memory slow path
+X-Received-From: 62.239.224.236
+Subject: [Qemu-riscv] [Qemu-devel] [PATCH v2 18/20] cputlb: Byte swap memory
+ transaction attribute
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -64,54 +64,86 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Jul 2019 15:52:02 -0000
+X-List-Received-Date: Mon, 22 Jul 2019 15:52:42 -0000
 
---_000_156381071625418886btcom_
+--_000_156381075520716357btcom_
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
-The fast path is taken when TLB_FLAGS_MASK is all zero.
+Notice new attribute, byte swap, and force the transaction through the
+memory slow path.
 
-TLB_FORCE_SLOW is simply a TLB_FLAGS_MASK bit to force the slow path,
-there are no other side effects.
+Required by architectures that can invert endianness of memory
+transaction, e.g. SPARC64 has the Invert Endian TTE bit.
 
 Signed-off-by: Tony Nguyen <tony.nguyen@bt.com>
 ---
- include/exec/cpu-all.h | 10 ++++++++--
- 1 file changed, 8 insertions(+), 2 deletions(-)
+ accel/tcg/cputlb.c      | 11 +++++++++++
+ include/exec/memattrs.h |  2 ++
+ 2 files changed, 13 insertions(+)
 
-diff --git a/include/exec/cpu-all.h b/include/exec/cpu-all.h
-index 536ea58..e496f99 100644
---- a/include/exec/cpu-all.h
-+++ b/include/exec/cpu-all.h
-@@ -331,12 +331,18 @@ CPUArchState *cpu_copy(CPUArchState *env);
- #define TLB_MMIO            (1 << (TARGET_PAGE_BITS - 3))
- /* Set if TLB entry must have MMU lookup repeated for every access */
- #define TLB_RECHECK         (1 << (TARGET_PAGE_BITS - 4))
-+/* Set if TLB entry must take the slow path.  */
-+#define TLB_FORCE_SLOW      (1 << (TARGET_PAGE_BITS - 5))
+diff --git a/accel/tcg/cputlb.c b/accel/tcg/cputlb.c
+index 6f5262c..619787b 100644
+--- a/accel/tcg/cputlb.c
++++ b/accel/tcg/cputlb.c
+@@ -738,6 +738,9 @@ void tlb_set_page_with_attrs(CPUState *cpu, target_ulon=
+g vaddr,
+          */
+         address |=3D TLB_RECHECK;
+     }
++    if (attrs.byte_swap) {
++        address |=3D TLB_FORCE_SLOW;
++    }
+     if (!memory_region_is_ram(section->mr) &&
+         !memory_region_is_romd(section->mr)) {
+         /* IO memory case */
+@@ -891,6 +894,10 @@ static uint64_t io_readx(CPUArchState *env, CPUIOTLBEn=
+try *iotlbentry,
+     bool locked =3D false;
+     MemTxResult r;
 
- /* Use this mask to check interception with an alignment mask
-  * in a TCG backend.
-  */
--#define TLB_FLAGS_MASK  (TLB_INVALID_MASK | TLB_NOTDIRTY | TLB_MMIO \
--                         | TLB_RECHECK)
-+#define TLB_FLAGS_MASK \
-+    (TLB_INVALID_MASK  \
-+     | TLB_NOTDIRTY    \
-+     | TLB_MMIO        \
-+     | TLB_RECHECK     \
-+     | TLB_FORCE_SLOW)
++    if (iotlbentry->attrs.byte_swap) {
++        op ^=3D MO_BSWAP;
++    }
++
+     section =3D iotlb_to_section(cpu, iotlbentry->addr, iotlbentry->attrs)=
+;
+     mr =3D section->mr;
+     mr_offset =3D (iotlbentry->addr & TARGET_PAGE_MASK) + addr;
+@@ -933,6 +940,10 @@ static void io_writex(CPUArchState *env, CPUIOTLBEntry=
+ *iotlbentry,
+     bool locked =3D false;
+     MemTxResult r;
 
- /**
-  * tlb_hit_page: return true if page aligned @addr is a hit against the
++    if (iotlbentry->attrs.byte_swap) {
++        op ^=3D MO_BSWAP;
++    }
++
+     section =3D iotlb_to_section(cpu, iotlbentry->addr, iotlbentry->attrs)=
+;
+     mr =3D section->mr;
+     mr_offset =3D (iotlbentry->addr & TARGET_PAGE_MASK) + addr;
+diff --git a/include/exec/memattrs.h b/include/exec/memattrs.h
+index d4a3477..a0644eb 100644
+--- a/include/exec/memattrs.h
++++ b/include/exec/memattrs.h
+@@ -37,6 +37,8 @@ typedef struct MemTxAttrs {
+     unsigned int user:1;
+     /* Requester ID (for MSI for example) */
+     unsigned int requester_id:16;
++    /* SPARC64: TTE invert endianness */
++    unsigned int byte_swap:1;
+     /*
+      * The following are target-specific page-table bits.  These are not
+      * related to actual memory transactions at all.  However, this struct=
+ure
 --
 1.8.3.1
 
 
 
 
---_000_156381071625418886btcom_
+--_000_156381075520716357btcom_
 Content-Type: text/html; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
@@ -127,57 +159,84 @@ der-left-width: 2px; border-left-style: solid; border-left-color: rgb(128, =
 <body dir=3D"ltr" style=3D"font-size:12pt;color:#000000;background-color:#F=
 FFFFF;font-family:Calibri,Arial,Helvetica,sans-serif;">
 <p></p>
-<div><span style=3D"font-size: 12pt;">The fast path is taken when TLB_FLAGS=
-_MASK is all zero.</span><br>
+<div><span style=3D"font-size: 12pt;">Notice new attribute, byte swap, and =
+force the transaction through the</span><br>
 </div>
+<div>memory slow path.</div>
 <div><br>
 </div>
-<div>TLB_FORCE_SLOW is simply a TLB_FLAGS_MASK bit to force the slow path,<=
-/div>
-<div>there are no other side effects.</div>
+<div>Required by architectures that can invert endianness of memory</div>
+<div>transaction, e.g. SPARC64 has the Invert Endian TTE bit.</div>
 <div><br>
 </div>
 <div>Signed-off-by: Tony Nguyen &lt;tony.nguyen@bt.com&gt;</div>
 <div>---</div>
-<div>&nbsp;include/exec/cpu-all.h | 10 &#43;&#43;&#43;&#43;&#43;&#43;&#43;&=
-#43;--</div>
-<div>&nbsp;1 file changed, 8 insertions(&#43;), 2 deletions(-)</div>
+<div>&nbsp;accel/tcg/cputlb.c &nbsp; &nbsp; &nbsp;| 11 &#43;&#43;&#43;&#43;=
+&#43;&#43;&#43;&#43;&#43;&#43;&#43;</div>
+<div>&nbsp;include/exec/memattrs.h | &nbsp;2 &#43;&#43;</div>
+<div>&nbsp;2 files changed, 13 insertions(&#43;)</div>
 <div><br>
 </div>
-<div>diff --git a/include/exec/cpu-all.h b/include/exec/cpu-all.h</div>
-<div>index 536ea58..e496f99 100644</div>
-<div>--- a/include/exec/cpu-all.h</div>
-<div>&#43;&#43;&#43; b/include/exec/cpu-all.h</div>
-<div>@@ -331,12 &#43;331,18 @@ CPUArchState *cpu_copy(CPUArchState *env);</=
-div>
-<div>&nbsp;#define TLB_MMIO &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;(1 &lt=
-;&lt; (TARGET_PAGE_BITS - 3))</div>
-<div>&nbsp;/* Set if TLB entry must have MMU lookup repeated for every acce=
-ss */</div>
-<div>&nbsp;#define TLB_RECHECK &nbsp; &nbsp; &nbsp; &nbsp; (1 &lt;&lt; (TAR=
-GET_PAGE_BITS - 4))</div>
-<div>&#43;/* Set if TLB entry must take the slow path. &nbsp;*/</div>
-<div>&#43;#define TLB_FORCE_SLOW &nbsp; &nbsp; &nbsp;(1 &lt;&lt; (TARGET_PA=
-GE_BITS - 5))</div>
+<div>diff --git a/accel/tcg/cputlb.c b/accel/tcg/cputlb.c</div>
+<div>index 6f5262c..619787b 100644</div>
+<div>--- a/accel/tcg/cputlb.c</div>
+<div>&#43;&#43;&#43; b/accel/tcg/cputlb.c</div>
+<div>@@ -738,6 &#43;738,9 @@ void tlb_set_page_with_attrs(CPUState *cpu, ta=
+rget_ulong vaddr,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; */</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;address |=3D TLB_RECHECK;</div>
+<div>&nbsp; &nbsp; &nbsp;}</div>
+<div>&#43; &nbsp; &nbsp;if (attrs.byte_swap) {</div>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp;address |=3D TLB_FORCE_SLOW;</div>
+<div>&#43; &nbsp; &nbsp;}</div>
+<div>&nbsp; &nbsp; &nbsp;if (!memory_region_is_ram(section-&gt;mr) &amp;&am=
+p;</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;!memory_region_is_romd(section-&gt;m=
+r)) {</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* IO memory case */</div>
+<div>@@ -891,6 &#43;894,10 @@ static uint64_t io_readx(CPUArchState *env, C=
+PUIOTLBEntry *iotlbentry,</div>
+<div>&nbsp; &nbsp; &nbsp;bool locked =3D false;</div>
+<div>&nbsp; &nbsp; &nbsp;MemTxResult r;</div>
 <div>&nbsp;</div>
-<div>&nbsp;/* Use this mask to check interception with an alignment mask</d=
-iv>
-<div>&nbsp; * in a TCG backend.</div>
-<div>&nbsp; */</div>
-<div>-#define TLB_FLAGS_MASK &nbsp;(TLB_INVALID_MASK | TLB_NOTDIRTY | TLB_M=
-MIO \</div>
-<div>- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; | TLB_RECHECK)</div>
-<div>&#43;#define TLB_FLAGS_MASK \</div>
-<div>&#43; &nbsp; &nbsp;(TLB_INVALID_MASK &nbsp;\</div>
-<div>&#43; &nbsp; &nbsp; | TLB_NOTDIRTY &nbsp; &nbsp;\</div>
-<div>&#43; &nbsp; &nbsp; | TLB_MMIO &nbsp; &nbsp; &nbsp; &nbsp;\</div>
-<div>&#43; &nbsp; &nbsp; | TLB_RECHECK &nbsp; &nbsp; \</div>
-<div>&#43; &nbsp; &nbsp; | TLB_FORCE_SLOW)</div>
+<div>&#43; &nbsp; &nbsp;if (iotlbentry-&gt;attrs.byte_swap) {</div>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp;op ^=3D MO_BSWAP;</div>
+<div>&#43; &nbsp; &nbsp;}</div>
+<div>&#43;</div>
+<div>&nbsp; &nbsp; &nbsp;section =3D iotlb_to_section(cpu, iotlbentry-&gt;a=
+ddr, iotlbentry-&gt;attrs);</div>
+<div>&nbsp; &nbsp; &nbsp;mr =3D section-&gt;mr;</div>
+<div>&nbsp; &nbsp; &nbsp;mr_offset =3D (iotlbentry-&gt;addr &amp; TARGET_PA=
+GE_MASK) &#43; addr;</div>
+<div>@@ -933,6 &#43;940,10 @@ static void io_writex(CPUArchState *env, CPUI=
+OTLBEntry *iotlbentry,</div>
+<div>&nbsp; &nbsp; &nbsp;bool locked =3D false;</div>
+<div>&nbsp; &nbsp; &nbsp;MemTxResult r;</div>
 <div>&nbsp;</div>
-<div>&nbsp;/**</div>
-<div>&nbsp; * tlb_hit_page: return true if page aligned @addr is a hit agai=
-nst the</div>
+<div>&#43; &nbsp; &nbsp;if (iotlbentry-&gt;attrs.byte_swap) {</div>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp;op ^=3D MO_BSWAP;</div>
+<div>&#43; &nbsp; &nbsp;}</div>
+<div>&#43;</div>
+<div>&nbsp; &nbsp; &nbsp;section =3D iotlb_to_section(cpu, iotlbentry-&gt;a=
+ddr, iotlbentry-&gt;attrs);</div>
+<div>&nbsp; &nbsp; &nbsp;mr =3D section-&gt;mr;</div>
+<div>&nbsp; &nbsp; &nbsp;mr_offset =3D (iotlbentry-&gt;addr &amp; TARGET_PA=
+GE_MASK) &#43; addr;</div>
+<div>diff --git a/include/exec/memattrs.h b/include/exec/memattrs.h</div>
+<div>index d4a3477..a0644eb 100644</div>
+<div>--- a/include/exec/memattrs.h</div>
+<div>&#43;&#43;&#43; b/include/exec/memattrs.h</div>
+<div>@@ -37,6 &#43;37,8 @@ typedef struct MemTxAttrs {</div>
+<div>&nbsp; &nbsp; &nbsp;unsigned int user:1;</div>
+<div>&nbsp; &nbsp; &nbsp;/* Requester ID (for MSI for example) */</div>
+<div>&nbsp; &nbsp; &nbsp;unsigned int requester_id:16;</div>
+<div>&#43; &nbsp; &nbsp;/* SPARC64: TTE invert endianness */</div>
+<div>&#43; &nbsp; &nbsp;unsigned int byte_swap:1;</div>
+<div>&nbsp; &nbsp; &nbsp;/*</div>
+<div>&nbsp; &nbsp; &nbsp; * The following are target-specific page-table bi=
+ts. &nbsp;These are not</div>
+<div>&nbsp; &nbsp; &nbsp; * related to actual memory transactions at all. &=
+nbsp;However, this structure</div>
 <div>--&nbsp;</div>
 <div>1.8.3.1</div>
 <div><br>
@@ -188,5 +247,5 @@ nst the</div>
 </body>
 </html>
 
---_000_156381071625418886btcom_--
+--_000_156381075520716357btcom_--
 
