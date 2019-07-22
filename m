@@ -1,70 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hpd3Y-0003KS-1W
-	for mharc-qemu-riscv@gnu.org; Mon, 22 Jul 2019 14:29:04 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:41787)
+	id 1hpdgh-0001l0-Q8
+	for mharc-qemu-riscv@gnu.org; Mon, 22 Jul 2019 15:09:31 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:54044)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <alistair23@gmail.com>) id 1hpd3V-000384-5o
- for qemu-riscv@nongnu.org; Mon, 22 Jul 2019 14:29:03 -0400
+ (envelope-from <palmer@sifive.com>) id 1hpdgg-0001kj-3y
+ for qemu-riscv@nongnu.org; Mon, 22 Jul 2019 15:09:31 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1hpd3T-0003yt-Rz
- for qemu-riscv@nongnu.org; Mon, 22 Jul 2019 14:29:01 -0400
-Received: from mail-lj1-x243.google.com ([2a00:1450:4864:20::243]:34267)
+ (envelope-from <palmer@sifive.com>) id 1hpdge-000897-Tl
+ for qemu-riscv@nongnu.org; Mon, 22 Jul 2019 15:09:30 -0400
+Received: from mail-pf1-x444.google.com ([2607:f8b0:4864:20::444]:39835)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1hpd3R-0003vC-60; Mon, 22 Jul 2019 14:28:57 -0400
-Received: by mail-lj1-x243.google.com with SMTP id p17so38571086ljg.1;
- Mon, 22 Jul 2019 11:28:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=2LYN+HFAN3Zc26Yb2l/eqxmbblx0Wue9MrZcplQeh9M=;
- b=C943aWnDRMK/pMo1SSozct3k9NNFGbx1UeooojLj7Zv65PuVHG0piXmy3LFWoyBPXK
- xEoMtCZceAIUJfZ1lvR2oZxvrf3nhXuLv4CrJiDl/VN0Y3TuI6V7LcJihtrF2QrBNAFf
- i4zMrHdf3Wj5pz5k6SMNoLOuQXfD9cgwJo7+AsZim1fTteefU0hwHWHlAUgH1z5BWy+X
- 8WvpcTFs/ezKAbLZQuiN4yYRtiJBdcaBnZeD9PPKQXoI/470dOjqhWQ5+/bV5eQqG3QN
- vOQ+w3n9PJV0uik/BJDrgdJQaTO/gRnjHYuT61j4v+dE1Y/9LVNwD9pSIOsYz+l1VJ60
- KGRQ==
+ (Exim 4.71) (envelope-from <palmer@sifive.com>) id 1hpdgZ-0007vB-Hl
+ for qemu-riscv@nongnu.org; Mon, 22 Jul 2019 15:09:25 -0400
+Received: by mail-pf1-x444.google.com with SMTP id f17so13834687pfn.6
+ for <qemu-riscv@nongnu.org>; Mon, 22 Jul 2019 12:09:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+ h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
+ :content-transfer-encoding;
+ bh=FDcI6V051d29BD5Jk7agCDwaH6IXlxWsVS9Z7PYAjNo=;
+ b=f9RMG2oJk+409+qfpC/uu1tEHLeOYVVcp2qxXRpifc1YyyQaPOunkFyM2GgPDkkjvm
+ QPa01VhabJ8XX7cdcI7y/T1ufJb5slea5RiVH0/4zsAbiB/MVVBikZ+NgzJDx83dKYX5
+ ZXsTyw4pCwWbKP/j+x4ddDvU/gFHj+JtLFjd0puZgvOslf53tIWnZOlzIvyZj52jLO72
+ 5DhdQfeDvNW9MbGhqIF91CedGhA0U83p7RMvB4tqG85Bo1dwWzq2GtlbR8mF4/J+WNTI
+ ++9Drv/n1FJBv3urUrdf6+PSkc2T4n4PYk9DxxPyQ/yDY+9p79Pg40bb5rDMfvwrqNAp
+ acoQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=2LYN+HFAN3Zc26Yb2l/eqxmbblx0Wue9MrZcplQeh9M=;
- b=Dtml+TtQuPJqPklhBM33BbFUYl1S0HUBpqwo1upmnsJIlzJu7Eh5r8i1OqFVF2VWVr
- pK54jiSH92JMsT0FekaJoqM7Yer/57GtKPFjFW4oitWH2opkQAw0o964byqFgZS/32EN
- EVisB+ahIjWo96ur9sSAr1AouGdUGr/9aDzQDTf1fD0oLsk6gJsD+eylAJkKRv/mCz0I
- zpXyntKySk7XNNwncSAAnDmYL3N++AD6iFfIwSDwC/52rpth+9wXaKiTRKaZAv5UCVcV
- wANcAK0uUGkdWLD3ywWKuVa+PNaWrXVF18QZ94P95q45vsho/UKlIV+StdurOsQalLUp
- kf3Q==
-X-Gm-Message-State: APjAAAUfHI+1jbOGLBcPq7xsMJ4ZKejxAQ0baSb2wsEL5XOG6D60EFsm
- iEYgny9i1miSu20d3XbgeNCkekhZNe46lc0eIcA=
-X-Google-Smtp-Source: APXvYqwi7lJZ8qG4CPNKvyXxAlnY27eWY3r1CldSl9WtdA1dgowbssGjxw/U/xuiksQP0GsBIfcoOIagKvGz7oLm2Tc=
-X-Received: by 2002:a2e:9158:: with SMTP id q24mr37496552ljg.119.1563820134933; 
- Mon, 22 Jul 2019 11:28:54 -0700 (PDT)
-MIME-Version: 1.0
-References: <1563603512-5914-1-git-send-email-frederic.konrad@adacore.com>
- <70060fbc-b79f-6385-2b1e-0cebb45ca03e@redhat.com>
- <1f427dc9-deb9-f900-470a-84b79ab32a2a@redhat.com>
- <8d86172a-b37f-5445-928a-46ec7f225b18@adacore.com>
-In-Reply-To: <8d86172a-b37f-5445-928a-46ec7f225b18@adacore.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 22 Jul 2019 11:25:23 -0700
-Message-ID: <CAKmqyKMnrEcw5ED7YcKu2akmzmH0ydjx=U6Sx=dmX+vhD5m7-Q@mail.gmail.com>
-To: KONRAD Frederic <frederic.konrad@adacore.com>
-Cc: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Palmer Dabbelt <palmer@sifive.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>,
- Stefan Hajnoczi <stefanha@redhat.com>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
+ :mime-version:content-transfer-encoding;
+ bh=FDcI6V051d29BD5Jk7agCDwaH6IXlxWsVS9Z7PYAjNo=;
+ b=azPz5EU18pi9d+An4fOuVQ2kGvp12K+0SSuK2FnEgAodZiaMvlcSjxJJOHtlUowOl2
+ TZfaZ+rKL6G/btNOKQln4GuvmHiMBTh46dD4pBvQSvafp4Rg54mfH+kMhA+yoAfSqL2y
+ FjtYzYo67u79mi+UK2tq/p35ObUbmucb+JVWkqEOPWmGkv5hDhfp0oX3Si2uoiRWW7r6
+ HodFlKkUNnxFWXvjkp6dbFHQvskZ5VaoFvk8/5Ej+BsWnaNVPOqn6iuUTmUPkvnkpaoi
+ /H1sC2Pss/1t0oEYdmUu2Dz0PDqh0T+jTo9l9ws0wkUrtiHLvR3g3lDpzpajqQrD3jqc
+ dCCg==
+X-Gm-Message-State: APjAAAV3+WlW2iFM8ib6JyiFYyNGl/EDo4ZsXhEaM4ABgj05wPYlO4LI
+ uyHt0ATxVhrDwCEpZGq3tnPORg==
+X-Google-Smtp-Source: APXvYqwBnSzEAw6JraPmDVTlil3IIN0hTWSOo6DkVliA9ooIIOvpcYDn5bE/zBMkJM4H07vf3gRXkQ==
+X-Received: by 2002:a17:90a:5884:: with SMTP id
+ j4mr81367849pji.142.1563822557585; 
+ Mon, 22 Jul 2019 12:09:17 -0700 (PDT)
+Received: from localhost ([12.206.222.5])
+ by smtp.gmail.com with ESMTPSA id i7sm32183015pjk.24.2019.07.22.12.09.16
+ (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+ Mon, 22 Jul 2019 12:09:16 -0700 (PDT)
+Date: Mon, 22 Jul 2019 12:09:16 -0700 (PDT)
+X-Google-Original-Date: Mon, 22 Jul 2019 12:08:03 PDT (-0700)
+In-Reply-To: <CAKmqyKNnkToYf3Y025Hpv1e8jazMVjxhjAaOBtn0ajcHSFaTUA@mail.gmail.com>
+CC: philmd@redhat.com, Alistair Francis <Alistair.Francis@wdc.com>,
+ qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+From: Palmer Dabbelt <palmer@sifive.com>
+To: alistair23@gmail.com
+Message-ID: <mhng-d801380f-1010-4ee3-a3ee-d6f16159474e@palmer-si-x1c4>
+Mime-Version: 1.0 (MHng)
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::243
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH] riscv: htif: use
- qemu_log_mask instead of qemu_log
+X-Received-From: 2607:f8b0:4864:20::444
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v1 1/1] riscv/boot: Fixup the
+ RISC-V firmware warning
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -76,154 +72,67 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Jul 2019 18:29:03 -0000
+X-List-Received-Date: Mon, 22 Jul 2019 19:09:31 -0000
 
-On Mon, Jul 22, 2019 at 2:29 AM KONRAD Frederic
-<frederic.konrad@adacore.com> wrote:
+On Mon, 22 Jul 2019 11:22:43 PDT (-0700), alistair23@gmail.com wrote:
+> On Sat, Jul 20, 2019 at 2:30 AM Philippe Mathieu-Daudé
+> <philmd@redhat.com> wrote:
+>>
+>> On 7/19/19 8:05 PM, Alistair Francis wrote:
+>> > Fix a typo in the warning message displayed to users, don't print the
+>> > message when running inside qtest and don't mention a specific QEMU
+>> > version for the deprecation.
+>> >
+>> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+>> > ---
+>> >  hw/riscv/boot.c | 12 ++++++++----
+>> >  1 file changed, 8 insertions(+), 4 deletions(-)
+>> >
+>> > diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
+>> > index 5dee63011b..4b32ab1d26 100644
+>> > --- a/hw/riscv/boot.c
+>> > +++ b/hw/riscv/boot.c
+>> > @@ -26,6 +26,7 @@
+>> >  #include "hw/riscv/boot.h"
+>> >  #include "hw/boards.h"
+>> >  #include "elf.h"
+>> > +#include "sysemu/qtest.h"
+>> >
+>> >  #if defined(TARGET_RISCV32)
+>> >  # define KERNEL_BOOT_ADDRESS 0x80400000
+>> > @@ -46,10 +47,13 @@ void riscv_find_and_load_firmware(MachineState *machine,
+>> >           * In the future this defaul will change to loading the prebuilt
+>> >           * OpenSBI firmware. Let's warn the user and then continue.
+>> >          */
+>> > -        warn_report("No -bios option specified. Not loading a firmware.");
+>> > -        warn_report("This default will change in QEMU 4.3. Please use the " \
+>> > -                    "-bios option to aviod breakages when this happens.");
+>> > -        warn_report("See QEMU's deprecation documentation for details");
+>> > +        if (!qtest_enabled()) {
+>> > +            warn_report("No -bios option specified. Not loading a firmware.");
+>> > +            warn_report("This default will change in a future QEMU release. " \
+>> > +                        "Please use the -bios option to avoid breakages when "\
+>> > +                        "this happens.");
+>> > +            warn_report("See QEMU's deprecation documentation for details");
+>>
+>> Maybe a final '.' in the last warning to be consistent with the previous
+>> lines?
 >
-> Hi Philippe,
->
-> Le 7/20/19 =C3=A0 11:50 AM, Philippe Mathieu-Daud=C3=A9 a =C3=A9crit :
-> > Cc'ing Stefan
-> >
-> > On 7/20/19 11:44 AM, Philippe Mathieu-Daud=C3=A9 wrote:
-> >> Hi Frederic,
-> >>
-> >> On 7/20/19 8:18 AM, KONRAD Frederic wrote:
-> >>> There are some debug trace appearing when using GDB with the HTIF map=
-ped @0:
-> >>>   Invalid htif read: address 0000000000000002
-> >>>   Invalid htif read: address 0000000000000006
-> >>>   Invalid htif read: address 000000000000000a
-> >>>   Invalid htif read: address 000000000000000e
-> >>>
-> >>> So don't show them unconditionally.
-> >>>
-> >>> Signed-off-by: KONRAD Frederic <frederic.konrad@adacore.com>
-> >>> ---
-> >>>   hw/riscv/riscv_htif.c | 21 ++++++++++++---------
-> >>>   1 file changed, 12 insertions(+), 9 deletions(-)
-> >>>
-> >>> diff --git a/hw/riscv/riscv_htif.c b/hw/riscv/riscv_htif.c
-> >>> index 4f7b11d..6a8f0c2 100644
-> >>> --- a/hw/riscv/riscv_htif.c
-> >>> +++ b/hw/riscv/riscv_htif.c
-> >>> @@ -119,7 +119,8 @@ static void htif_handle_tohost_write(HTIFState *h=
-tifstate, uint64_t val_written)
-> >>>       int resp =3D 0;
-> >>>
-> >>>       HTIF_DEBUG("mtohost write: device: %d cmd: %d what: %02" PRIx64
-> >>> -        " -payload: %016" PRIx64 "\n", device, cmd, payload & 0xFF, =
-payload);
-> >>> +               " -payload: %016" PRIx64 "\n", device, cmd, payload &=
- 0xFF,
-> >>> +               payload);
-> >>>
-> >>>       /*
-> >>>        * Currently, there is a fixed mapping of devices:
-> >>> @@ -137,7 +138,7 @@ static void htif_handle_tohost_write(HTIFState *h=
-tifstate, uint64_t val_written)
-> >>>                   qemu_log_mask(LOG_UNIMP, "pk syscall proxy not supp=
-orted\n");
-> >>>               }
-> >>>           } else {
-> >>> -            qemu_log("HTIF device %d: unknown command\n", device);
-> >>> +            HTIF_DEBUG("HTIF device %d: unknown command\n", device);
-> >>
-> >> Generally, please don't go back to using DPRINTF() but use trace-event=
-s
-> >> instead.
-> >
-> > Oh, now I see that HTIF_DEBUG() is just an obscure way to report
-> > crippled log trace-events, not portable to all trace backends.
-> >
-> > It is only used in 2 files:
-> >
-> > - hw/riscv/riscv_htif.c
-> > - target/riscv/pmp.c as PMP_DEBUG()
-> >
-> > I'd rather remove these macros and use trace-events the same way the
-> > rest of the codebase use them, usable by all backends.
-> >
->
-> Ok why not.. If the RISC-V maintainers are happy with your suggestion I c=
-an do
-> a patch.
+> Done in v2.
 
-Yes please!
+I don't see a v2, did I miss it?
 
-Most of these look like qemu_log_mask(LOG_GUEST_ERROR) cases so that's
-probably the best bet. The others should probably be converted to
-traces.
-
-Alistair
-
+>> Regardless:
+>> Reviewed-by: Philippe Mathieu-Daudé <philmd@redhat.com>
 >
-> Cheers,
-> Fred
+> Thanks!
 >
-> >> However in this calls it seems using qemu_log_mask(LOG_UNIMP) or
-> >> qemu_log_mask(LOG_GUEST_ERROR) is appropriate.
-> >>
-> >>>           }
-> >>>       } else if (likely(device =3D=3D 0x1)) {
-> >>>           /* HTIF Console */
-> >>> @@ -150,12 +151,13 @@ static void htif_handle_tohost_write(HTIFState =
-*htifstate, uint64_t val_written)
-> >>>               qemu_chr_fe_write(&htifstate->chr, (uint8_t *)&payload,=
- 1);
-> >>>               resp =3D 0x100 | (uint8_t)payload;
-> >>>           } else {
-> >>> -            qemu_log("HTIF device %d: unknown command\n", device);
-> >>> +            HTIF_DEBUG("HTIF device %d: unknown command\n", device);
-> >>>           }
-> >>>       } else {
-> >>> -        qemu_log("HTIF unknown device or command\n");
-> >>> +        HTIF_DEBUG("HTIF unknown device or command\n");
-> >>>           HTIF_DEBUG("device: %d cmd: %d what: %02" PRIx64
-> >>> -            " payload: %016" PRIx64, device, cmd, payload & 0xFF, pa=
-yload);
-> >>> +                   " payload: %016" PRIx64, device, cmd, payload & 0=
-xFF,
-> >>> +                   payload);
-> >>>       }
-> >>>       /*
-> >>>        * - latest bbl does not set fromhost to 0 if there is a value =
-in tohost
-> >>> @@ -180,6 +182,7 @@ static void htif_handle_tohost_write(HTIFState *h=
-tifstate, uint64_t val_written)
-> >>>   static uint64_t htif_mm_read(void *opaque, hwaddr addr, unsigned si=
-ze)
-> >>>   {
-> >>>       HTIFState *htifstate =3D opaque;
-> >>> +
-> >>>       if (addr =3D=3D TOHOST_OFFSET1) {
-> >>>           return htifstate->env->mtohost & 0xFFFFFFFF;
-> >>>       } else if (addr =3D=3D TOHOST_OFFSET2) {
-> >>> @@ -189,8 +192,8 @@ static uint64_t htif_mm_read(void *opaque, hwaddr=
- addr, unsigned size)
-> >>>       } else if (addr =3D=3D FROMHOST_OFFSET2) {
-> >>>           return (htifstate->env->mfromhost >> 32) & 0xFFFFFFFF;
-> >>>       } else {
-> >>> -        qemu_log("Invalid htif read: address %016" PRIx64 "\n",
-> >>> -            (uint64_t)addr);
-> >>> +        HTIF_DEBUG("Invalid htif read: address %016" PRIx64 "\n",
-> >>> +                   (uint64_t)addr);
-> >>>           return 0;
-> >>>       }
-> >>>   }
-> >>> @@ -219,8 +222,8 @@ static void htif_mm_write(void *opaque, hwaddr ad=
-dr,
-> >>>           htifstate->env->mfromhost |=3D value << 32;
-> >>>           htifstate->fromhost_inprogress =3D 0;
-> >>>       } else {
-> >>> -        qemu_log("Invalid htif write: address %016" PRIx64 "\n",
-> >>> -            (uint64_t)addr);
-> >>> +        HTIF_DEBUG("Invalid htif write: address %016" PRIx64 "\n",
-> >>> +                   (uint64_t)addr);
-> >>>       }
-> >>>   }
-> >>>
-> >>>
+> Alistair
 >
+>>
+>> > +        }
+>> >          return;
+>> >      }
+>> >
+>> >
 
