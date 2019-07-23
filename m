@@ -1,100 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hpvJ3-0004Tj-OQ
-	for mharc-qemu-riscv@gnu.org; Tue, 23 Jul 2019 09:58:17 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:51803)
+	id 1hpzDH-00059k-MK
+	for mharc-qemu-riscv@gnu.org; Tue, 23 Jul 2019 14:08:35 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:34524)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <david@redhat.com>) id 1hppmo-0006pH-R1
- for qemu-riscv@nongnu.org; Tue, 23 Jul 2019 04:04:39 -0400
+ (envelope-from <alistair23@gmail.com>) id 1hpzDF-00050U-MJ
+ for qemu-riscv@nongnu.org; Tue, 23 Jul 2019 14:08:34 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <david@redhat.com>) id 1hppmn-0003du-O1
- for qemu-riscv@nongnu.org; Tue, 23 Jul 2019 04:04:38 -0400
-Received: from mx1.redhat.com ([209.132.183.28]:45155)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <david@redhat.com>)
- id 1hppmg-0003Ws-RD; Tue, 23 Jul 2019 04:04:31 -0400
-Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
- [10.5.11.13])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id 2F61D3083362;
- Tue, 23 Jul 2019 08:04:28 +0000 (UTC)
-Received: from [10.36.117.53] (ovpn-117-53.ams2.redhat.com [10.36.117.53])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 9443160605;
- Tue, 23 Jul 2019 08:04:16 +0000 (UTC)
-To: tony.nguyen@bt.com, qemu-devel@nongnu.org
-Cc: peter.maydell@linaro.org, walling@linux.ibm.com, mst@redhat.com,
- palmer@sifive.com, mark.cave-ayland@ilande.co.uk, Alistair.Francis@wdc.com,
- arikalo@wavecomp.com, pasic@linux.ibm.com, borntraeger@de.ibm.com,
- rth@twiddle.net, atar4qemu@gmail.com, ehabkost@redhat.com, sw@weilnetz.de,
- qemu-s390x@nongnu.org, qemu-arm@nongnu.org, david@gibson.dropbear.id.au,
- qemu-riscv@nongnu.org, cohuck@redhat.com, claudio.fontana@huawei.com,
- alex.williamson@redhat.com, qemu-ppc@nongnu.org, amarkovic@wavecomp.com,
- pbonzini@redhat.com, aurelien@aurel32.net
-References: <e9c6e5310b1a4863be45d45bf087fc3d@tpw09926dag18e.domain1.systemhost.net>
- <1563809888089.57547@bt.com>
-From: David Hildenbrand <david@redhat.com>
-Openpgp: preference=signencrypt
-Autocrypt: addr=david@redhat.com; prefer-encrypt=mutual; keydata=
- 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
- SE+xAvmumFBY
-Organization: Red Hat GmbH
-Message-ID: <79b11bbd-fa1c-1b6d-e49f-f61f2017fbbd@redhat.com>
-Date: Tue, 23 Jul 2019 10:04:15 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.7.2
+ (envelope-from <alistair23@gmail.com>) id 1hpzDE-0004Ux-OT
+ for qemu-riscv@nongnu.org; Tue, 23 Jul 2019 14:08:33 -0400
+Received: from mail-io1-xd42.google.com ([2607:f8b0:4864:20::d42]:40450)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <alistair23@gmail.com>)
+ id 1hpzDC-0004Sc-Oi; Tue, 23 Jul 2019 14:08:30 -0400
+Received: by mail-io1-xd42.google.com with SMTP id h6so83783443iom.7;
+ Tue, 23 Jul 2019 11:08:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=VBJh6Kh+3IVi7vzQ+fYq1sXUwYpPLUGzKDCNsMbyP10=;
+ b=rQ+smv+EyxvNKoJ9akS++YKhBVxeUUqk+JQLd6h4f7K6enNjMQTdub7j+1ARBniCdD
+ POin4Kw+NN1WaH2J01eI338kaVSFcTHZW+1zQ71zJOojfCOuHRppNjws4sdq1Hv/oUcA
+ D8ng4mho4lCtuL8OyhNlHUn4DiUvDE2kcCE4KAQXehc1J4uCotRC6YpggeLb2o5PlHGn
+ /bJdhR+sxN2/tHwV7ADrV1mexS38gU2YhXPhuZUtD+bcLsBf56rrP05j2fu8CCmWdQ8m
+ vYXaJmmTB/exSBJXp55U2EBQGN9aLIwbtpqJkIwxOdSK6ARG5+aE47v7nLU25sFsIjrT
+ 36DA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=VBJh6Kh+3IVi7vzQ+fYq1sXUwYpPLUGzKDCNsMbyP10=;
+ b=h4uMSEcvuVDoH9GIbGSk8RlCwiCKpx7mqMLPqF+3mzpOt/Q/UdKN/A3AkxZrTEF8Ul
+ VI7i3As095r2WOGY7AN1P8lMJBlvR54IAX67eaofbLNb9e1N+iKOMdOUFZ28S4hcw3Xx
+ ifadssbIDS17Py0WD6SBSLPMcNZdqBR/HAmH0dUKrjruR5fhuHGVwyVut2kQAHMdY1bD
+ sWzGkVXaF7RFFMkEIgudNRUH3E+X4lx8SPzrAJIgvQ4tCHm0WpXv3BiHrIc3Id6kzcgS
+ 9C8K9ip/dRBt3IT1PbBfUTdtL/UggIuW2j/ro2vlbj1pj6Y0fK+bVMFs75LaAtQEgdCN
+ vf4g==
+X-Gm-Message-State: APjAAAVsi6ETKcLXxtgnCAk1xDEQ0nyg80e6hCEPWze44kZTzpmJbL6+
+ ZhDwEBn4q2AKToqtPq2mdMcCrrPyQapZjl6erNU=
+X-Google-Smtp-Source: APXvYqzH+k6VQD4+cAvw4KtbQr7UIMDfLtK26oQn7+glfmzXSqjPf/ucD88QXugSv9A/gbc7i3pLKqYvncMJl/g7Aac=
+X-Received: by 2002:a5e:9b05:: with SMTP id j5mr9272902iok.75.1563905309986;
+ Tue, 23 Jul 2019 11:08:29 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <1563809888089.57547@bt.com>
-Content-Type: text/plain; charset=windows-1252
-Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.44]); Tue, 23 Jul 2019 08:04:28 +0000 (UTC)
+References: <20190723120816.1361-1-philmd@redhat.com>
+ <20190723120816.1361-2-philmd@redhat.com>
+In-Reply-To: <20190723120816.1361-2-philmd@redhat.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 23 Jul 2019 11:05:02 -0700
+Message-ID: <CAKmqyKP2ez1Sbv4Sr4hdFn8mQ7LjkNscPKEkDV7dTss+MTDb6w@mail.gmail.com>
+To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Palmer Dabbelt <palmer@sifive.com>, 
+ KONRAD Frederic <frederic.konrad@adacore.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
-X-Received-From: 209.132.183.28
-X-Mailman-Approved-At: Tue, 23 Jul 2019 09:58:17 -0400
-Subject: Re: [Qemu-riscv] [qemu-s390x] [Qemu-devel] [PATCH v2 01/20] tcg:
- Replace MO_8 with MO_UB alias
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2607:f8b0:4864:20::d42
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH-for-4.2 1/2] target/riscv/pmp:
+ Restrict priviledged PMP to system-mode emulation
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -106,65 +73,62 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Jul 2019 08:04:40 -0000
+X-List-Received-Date: Tue, 23 Jul 2019 18:08:34 -0000
 
-On 22.07.19 17:38, tony.nguyen@bt.com wrote:
-> Preparation for splitting MO_8 out from TCGMemOp into new accelerator
-> independent MemOp.
->=20
-> As MO_8 will be a value of MemOp, existing TCGMemOp comparisons and
-> coercions will trigger -Wenum-compare and -Wenum-conversion.
->=20
-> Signed-off-by: Tony Nguyen <tony.nguyen@bt.com>
+On Tue, Jul 23, 2019 at 5:08 AM Philippe Mathieu-Daud=C3=A9
+<philmd@redhat.com> wrote:
+>
+> The RISC-V Physical Memory Protection is restricted to privileged
+> modes. Restrict its compilation to QEMU system builds.
+>
+> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
+
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+
+Alistair
+
 > ---
-> =A0target/arm/sve_helper.c =A0 =A0 =A0 =A0 =A0 =A0 | =A04 +-
-> =A0target/arm/translate-a64.c =A0 =A0 =A0 =A0 =A0| 14 +++----
-> =A0target/arm/translate-sve.c =A0 =A0 =A0 =A0 =A0| =A04 +-
-> =A0target/arm/translate.c =A0 =A0 =A0 =A0 =A0 =A0 =A0| 38 +++++++++----=
-------
-> =A0target/i386/translate.c =A0 =A0 =A0 =A0 =A0 =A0 | 72
-> +++++++++++++++++------------------
-> =A0target/mips/translate.c =A0 =A0 =A0 =A0 =A0 =A0 | =A04 +-
-> =A0target/ppc/translate/vmx-impl.inc.c | 28 +++++++-------
-> =A0target/s390x/translate.c =A0 =A0 =A0 =A0 =A0 =A0| =A02 +-
-> =A0target/s390x/translate_vx.inc.c =A0 =A0 | =A04 +-
-> =A0target/s390x/vec.h =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0| =A04 +-
-> =A0tcg/aarch64/tcg-target.inc.c =A0 =A0 =A0 =A0| 16 ++++----
-> =A0tcg/arm/tcg-target.inc.c =A0 =A0 =A0 =A0 =A0 =A0| =A06 +--
-> =A0tcg/i386/tcg-target.inc.c =A0 =A0 =A0 =A0 =A0 | 54 +++++++++++++----=
----------
-> =A0tcg/mips/tcg-target.inc.c =A0 =A0 =A0 =A0 =A0 | =A04 +-
-> =A0tcg/riscv/tcg-target.inc.c =A0 =A0 =A0 =A0 =A0| =A04 +-
-> =A0tcg/sparc/tcg-target.inc.c =A0 =A0 =A0 =A0 =A0| =A02 +-
-> =A0tcg/tcg-op-gvec.c =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 | 76
-> ++++++++++++++++++-------------------
-> =A0tcg/tcg-op-vec.c =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0| 10 ++---
-> =A0tcg/tcg-op.c =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0| =A06 +=
---
-> =A0tcg/tcg.h =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 | =A02=
- +-
-> =A020 files changed, 177 insertions(+), 177 deletions(-)
->=20
-> diff --git a/target/arm/sve_helper.c b/target/arm/sve_helper.c
-> index fc0c175..4c7e11f 100644
-> --- a/target/arm/sve_helper.c
-> +++ b/target/arm/sve_helper.c
-> @@ -1531,7 +1531,7 @@ void HELPER(sve_cpy_m_b)(void *vd, void *vn, void=
- *vg,
-> =A0 =A0 =A0uint64_t *d =3D vd, *n =3D vn;
-> =A0 =A0 =A0uint8_t *pg =3D vg;
-> =A0
-> - =A0 =A0mm =3D dup_const(MO_8, mm);
-> + =A0 =A0mm =3D dup_const(MO_UB, mm);
-
-Sorry, but I don't like this. I never liked the use of
-byte/word/long/quad for 8/16/32/64. It is a constant source of
-confusion. Yes, we have it in the code, but at least I'd rather want to
-see this getting less than more.
-
---=20
-
-Thanks,
-
-David / dhildenb
+>  target/riscv/Makefile.objs | 3 ++-
+>  target/riscv/pmp.c         | 4 ----
+>  2 files changed, 2 insertions(+), 5 deletions(-)
+>
+> diff --git a/target/riscv/Makefile.objs b/target/riscv/Makefile.objs
+> index b1c79bc1d1..b754e4bf32 100644
+> --- a/target/riscv/Makefile.objs
+> +++ b/target/riscv/Makefile.objs
+> @@ -1,4 +1,5 @@
+> -obj-y +=3D translate.o op_helper.o cpu_helper.o cpu.o csr.o fpu_helper.o=
+ gdbstub.o pmp.o
+> +obj-y +=3D translate.o op_helper.o cpu_helper.o cpu.o csr.o fpu_helper.o=
+ gdbstub.o
+> +obj-$(CONFIG_SOFTMMU) +=3D pmp.o
+>
+>  DECODETREE =3D $(SRC_PATH)/scripts/decodetree.py
+>
+> diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
+> index 958c7502a0..d836288cb4 100644
+> --- a/target/riscv/pmp.c
+> +++ b/target/riscv/pmp.c
+> @@ -28,8 +28,6 @@
+>  #include "qapi/error.h"
+>  #include "cpu.h"
+>
+> -#ifndef CONFIG_USER_ONLY
+> -
+>  #define RISCV_DEBUG_PMP 0
+>  #define PMP_DEBUG(fmt, ...)                                             =
+       \
+>      do {                                                                =
+       \
+> @@ -382,5 +380,3 @@ target_ulong pmpaddr_csr_read(CPURISCVState *env, uin=
+t32_t addr_index)
+>          return 0;
+>      }
+>  }
+> -
+> -#endif
+> --
+> 2.20.1
+>
+>
 
