@@ -1,67 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hpzF4-0006ZY-8z
-	for mharc-qemu-riscv@gnu.org; Tue, 23 Jul 2019 14:10:26 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:34984)
+	id 1hqB2M-0004Yl-2c
+	for mharc-qemu-riscv@gnu.org; Wed, 24 Jul 2019 02:46:06 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:60847)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <alistair23@gmail.com>) id 1hpzF1-0006NY-AV
- for qemu-riscv@nongnu.org; Tue, 23 Jul 2019 14:10:24 -0400
+ (envelope-from <chihmin.chao@sifive.com>) id 1hqB2I-0004Sb-F5
+ for qemu-riscv@nongnu.org; Wed, 24 Jul 2019 02:46:04 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1hpzF0-0005TB-1N
- for qemu-riscv@nongnu.org; Tue, 23 Jul 2019 14:10:23 -0400
-Received: from mail-lj1-x242.google.com ([2a00:1450:4864:20::242]:42989)
+ (envelope-from <chihmin.chao@sifive.com>) id 1hqB2G-0006C4-N9
+ for qemu-riscv@nongnu.org; Wed, 24 Jul 2019 02:46:02 -0400
+Received: from mail-pg1-x531.google.com ([2607:f8b0:4864:20::531]:42416)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1hpzEx-0005Qi-BX; Tue, 23 Jul 2019 14:10:19 -0400
-Received: by mail-lj1-x242.google.com with SMTP id t28so41970332lje.9;
- Tue, 23 Jul 2019 11:10:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=bqbnS3M9b12YUiuylx0pw/kfv6nNA08Yis45IWgLi/g=;
- b=lBWRv/0RBLoUVBZvqLgSuiRgol242lR5aVGqI/OMAc71+rszkbhFxnEMgde+goXt3a
- EbCwjrBUspBFHrt0HXt2UvPT0LS4HDW+vDEIDWeri17EDwEZOQq8PU0wO87ZWtIOfkTV
- re9zQhJprqI67NwZQjJLC1MBV7MvTfEgc0Vl5nKikWxzC/dw/1xCJLeGzNduUod+FymK
- s8anRFXX8ws0ZSsqBAYm7mEYVEmRYjrtv2r0A2UI4OrV+04NUddZ3gfpSS53NYX931Pa
- v8RI9105DaLbpx/5ZGSocvBTsbGPD//Ww57rvR8KxziXGzdTBCXIbwiw/hibGK9d9LOj
- 2l/g==
+ (Exim 4.71) (envelope-from <chihmin.chao@sifive.com>)
+ id 1hqB2G-0006BG-8w
+ for qemu-riscv@nongnu.org; Wed, 24 Jul 2019 02:46:00 -0400
+Received: by mail-pg1-x531.google.com with SMTP id t132so20683767pgb.9
+ for <qemu-riscv@nongnu.org>; Tue, 23 Jul 2019 23:45:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+ h=from:to:cc:subject:date:message-id;
+ bh=mQHYqjl7zwiKo7RpLdyEPwUd7jBGOinHVQZgIaKHPfc=;
+ b=EU1yyHcR5in3AvCrtLXBP7w6O64LWByXenVYpe1x121krfg2ZDSdMDzIDWWGnLAGtn
+ XI/dFEQcMnDSCa5vODuc/46L1AJCdXI34sdvIWrqKsS3VABXf4KlVwISE5irpkQpHnor
+ ZXA9aUR77BJNgE3ZxN1zjTlIiSgeqD2KBknskGqVC6jMukSWnY3unV69JV/IJ+Iib8MI
+ xpAN4vIIwv5oqDm8nf4sL2FSSpG0U7oyOy9IpoMppPuHH+SvGaF4MEUAOgaBpFAesejb
+ 8XQLjFTtIOf4GmDmj7iKMajXQDYc71CI7kOwcg5I8SrINb0ULF+bOoKW4GQ4Jgq1qo8/
+ Rpiw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=bqbnS3M9b12YUiuylx0pw/kfv6nNA08Yis45IWgLi/g=;
- b=DfmbpLZLB80zfaxLBUMm6TJhJv5KRLp9ymBPZtK1FN/qlXT5lNbZh8iv7qIkCyaa3Z
- SFSlt5Gu+Dy70JWhIIQm5MmQp2G3qNu87eprKhTmZEPG+V5JoXVTbI64SsueCK5M4HQw
- m796VGKbKBNtTTFe+NY6QUqYcNVuXl7mFya5L0vJBv8kgMT68JjU6emO4TkKPkZBWFZ9
- 2Z0+JQ9itMZFuDEZx+ufpT/Hu3IKFKoH4arxTM/68KwRRDPvZCD+uHbcCNbJdSHgRddV
- SeX0elWqiilvVOM/aVhOGmFZumCTCxOU97b7+AoDtlqPLCC0iJpigWD7MYybLqQrFMtV
- Flsw==
-X-Gm-Message-State: APjAAAXKPd6TItTrDpvd0ZD05QybnE4Q+VaiT0yJ3B1MDIdKH+t+mGc4
- PUrkK8z2SJ5Z1a03vm84q4Iuoq5bORnSAOmXxYw=
-X-Google-Smtp-Source: APXvYqwQGLyMCuwinZgNIGRtq5Tz9dTptp/yqnHtmV2M6YjOlharOFTGfDZ/pYjDQW36kqElpFPR+SiKOAbFRDHyUjg=
-X-Received: by 2002:a2e:9158:: with SMTP id q24mr40809416ljg.119.1563905418045; 
- Tue, 23 Jul 2019 11:10:18 -0700 (PDT)
-MIME-Version: 1.0
-References: <20190723120816.1361-1-philmd@redhat.com>
- <20190723120816.1361-3-philmd@redhat.com>
-In-Reply-To: <20190723120816.1361-3-philmd@redhat.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 23 Jul 2019 11:06:49 -0700
-Message-ID: <CAKmqyKNrJgUBVB93dHvsoDcksj0r9ckwLpmSHMhZFdcdtYx_HQ@mail.gmail.com>
-To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Palmer Dabbelt <palmer@sifive.com>, 
- KONRAD Frederic <frederic.konrad@adacore.com>,
- Alistair Francis <Alistair.Francis@wdc.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ h=x-gm-message-state:from:to:cc:subject:date:message-id;
+ bh=mQHYqjl7zwiKo7RpLdyEPwUd7jBGOinHVQZgIaKHPfc=;
+ b=GaVNSC4Cec+JnfnFiV8WAOWdi0MnoyS+5UbfrSKfmEvaKv8yJ755+nYqGpDEK98Cu+
+ c0kOTX84euwRVgcqipEOhMEFPh+DSAd4hjxJnv6AH88pMuFExf0yV7B2JTZw3PvXFXmE
+ SKqHG8rNY1xPMlz+YMZjZojewRtQMwy+D6Zpf0Gaqx7xmvrsyipLtpWbu+jAodcwxcCe
+ 7A3ZvyVemxZ1zw/4eX9z1qskGSJnHgi8DdGYNvdvG4lvTliJ/+f2y27dR9jx41/Y0dAE
+ jDrFjEMmB87IB4ABGtHedtSoX4MXQqcGCpOUj886w1U8kXniRo6zki/Kpgr1abfUeN88
+ auVQ==
+X-Gm-Message-State: APjAAAWQO4bNYxpE99zpkS1lwF9JD2yHD3n0PAGzbAL/l4Zo0WSbNWib
+ F66QIQ3Iyq+nNZaL5NW1N5J0CA==
+X-Google-Smtp-Source: APXvYqyTreHgev5fWt6Qa4+cwtVd1P9HGzKX8PoyRjV26G8pifoHznknjvDb3SDih/6U42Gobcw1ew==
+X-Received: by 2002:a17:90a:1ae1:: with SMTP id
+ p88mr82664440pjp.26.1563950758640; 
+ Tue, 23 Jul 2019 23:45:58 -0700 (PDT)
+Received: from gamma06.internal.sifive.com ([64.62.193.194])
+ by smtp.gmail.com with ESMTPSA id f6sm47012449pga.50.2019.07.23.23.45.57
+ (version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+ Tue, 23 Jul 2019 23:45:57 -0700 (PDT)
+From: Chih-Min Chao <chihmin.chao@sifive.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Chih-Min Chao <chihmin.chao@sifive.com>,
+ =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ Fam Zheng <fam@euphon.net>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>,
+ Eduardo Habkost <ehabkost@redhat.com>, Cleber Rosa <crosa@redhat.com>,
+ Cornelia Huck <cohuck@redhat.com>
+Date: Tue, 23 Jul 2019 23:45:34 -0700
+Message-Id: <1563950742-22592-1-git-send-email-chihmin.chao@sifive.com>
+X-Mailer: git-send-email 2.7.4
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::242
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH-for-4.2 2/2] target/riscv/pmp:
- Convert qemu_log_mask(LOG_TRACE) to trace events
+X-Received-From: 2607:f8b0:4864:20::531
+Subject: [Qemu-riscv] [PATCH v3] tests/boot_linux_console: add a test for
+ riscv64 + virt
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -73,132 +72,123 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Jul 2019 18:10:25 -0000
+X-List-Received-Date: Wed, 24 Jul 2019 06:46:04 -0000
 
-On Tue, Jul 23, 2019 at 5:08 AM Philippe Mathieu-Daud=C3=A9
-<philmd@redhat.com> wrote:
->
-> Use the always-compiled trace events, remove the now unused
-> RISCV_DEBUG_PMP definition.
->
-> Note pmpaddr_csr_read() could previously do out-of-bound accesses
-> passing addr_index >=3D MAX_RISCV_PMPS.
->
-> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
+Similar to the mips + malta test, it boots a Linux kernel on a virt
+board and verify the serial is working.  Also, it relies on the serial
+device set by the machine itself.
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+If riscv64 is a target being built, "make check-acceptance" will
+automatically include this test by the use of the "arch:riscv64" tags.
 
-Alistair
+Alternatively, this test can be run using:
 
-> ---
->  target/riscv/pmp.c        | 31 ++++++++++---------------------
->  target/riscv/trace-events |  6 ++++++
->  2 files changed, 16 insertions(+), 21 deletions(-)
->
-> diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-> index d836288cb4..d4f1007109 100644
-> --- a/target/riscv/pmp.c
-> +++ b/target/riscv/pmp.c
-> @@ -27,14 +27,7 @@
->  #include "qemu/log.h"
->  #include "qapi/error.h"
->  #include "cpu.h"
-> -
-> -#define RISCV_DEBUG_PMP 0
-> -#define PMP_DEBUG(fmt, ...)                                             =
-       \
-> -    do {                                                                =
-       \
-> -        if (RISCV_DEBUG_PMP) {                                          =
-       \
-> -            qemu_log_mask(LOG_TRACE, "%s: " fmt "\n", __func__, ##__VA_A=
-RGS__);\
-> -        }                                                               =
-       \
-> -    } while (0)
-> +#include "trace.h"
->
->  static void pmp_write_cfg(CPURISCVState *env, uint32_t addr_index,
->      uint8_t val);
-> @@ -302,8 +295,7 @@ void pmpcfg_csr_write(CPURISCVState *env, uint32_t re=
-g_index,
->      int i;
->      uint8_t cfg_val;
->
-> -    PMP_DEBUG("hart " TARGET_FMT_ld ": reg%d, val: 0x" TARGET_FMT_lx,
-> -        env->mhartid, reg_index, val);
-> +    trace_pmpcfg_csr_write(env->mhartid, reg_index, val);
->
->      if ((reg_index & 1) && (sizeof(target_ulong) =3D=3D 8)) {
->          qemu_log_mask(LOG_GUEST_ERROR,
-> @@ -332,9 +324,7 @@ target_ulong pmpcfg_csr_read(CPURISCVState *env, uint=
-32_t reg_index)
->          val =3D pmp_read_cfg(env, (reg_index * sizeof(target_ulong)) + i=
-);
->          cfg_val |=3D (val << (i * 8));
->      }
-> -
-> -    PMP_DEBUG("hart " TARGET_FMT_ld ": reg%d, val: 0x" TARGET_FMT_lx,
-> -        env->mhartid, reg_index, cfg_val);
-> +    trace_pmpcfg_csr_read(env->mhartid, reg_index, cfg_val);
->
->      return cfg_val;
->  }
-> @@ -346,9 +336,7 @@ target_ulong pmpcfg_csr_read(CPURISCVState *env, uint=
-32_t reg_index)
->  void pmpaddr_csr_write(CPURISCVState *env, uint32_t addr_index,
->      target_ulong val)
->  {
-> -    PMP_DEBUG("hart " TARGET_FMT_ld ": addr%d, val: 0x" TARGET_FMT_lx,
-> -        env->mhartid, addr_index, val);
-> -
-> +    trace_pmpaddr_csr_write(env->mhartid, addr_index, val);
->      if (addr_index < MAX_RISCV_PMPS) {
->          if (!pmp_is_locked(env, addr_index)) {
->              env->pmp_state.pmp[addr_index].addr_reg =3D val;
-> @@ -369,14 +357,15 @@ void pmpaddr_csr_write(CPURISCVState *env, uint32_t=
- addr_index,
->   */
->  target_ulong pmpaddr_csr_read(CPURISCVState *env, uint32_t addr_index)
->  {
-> -    PMP_DEBUG("hart " TARGET_FMT_ld ": addr%d, val: 0x" TARGET_FMT_lx,
-> -        env->mhartid, addr_index,
-> -        env->pmp_state.pmp[addr_index].addr_reg);
-> +    target_ulong val =3D 0;
-> +
->      if (addr_index < MAX_RISCV_PMPS) {
-> -        return env->pmp_state.pmp[addr_index].addr_reg;
-> +        val =3D env->pmp_state.pmp[addr_index].addr_reg;
-> +        trace_pmpaddr_csr_read(env->mhartid, addr_index, val);
->      } else {
->          qemu_log_mask(LOG_GUEST_ERROR,
->                        "ignoring pmpaddr read - out of bounds\n");
-> -        return 0;
->      }
-> +
-> +    return val;
->  }
-> diff --git a/target/riscv/trace-events b/target/riscv/trace-events
-> index 48af0373df..4b6c652ae9 100644
-> --- a/target/riscv/trace-events
-> +++ b/target/riscv/trace-events
-> @@ -1,2 +1,8 @@
->  # target/riscv/cpu_helper.c
->  riscv_trap(uint64_t hartid, bool async, uint64_t cause, uint64_t epc, ui=
-nt64_t tval, const char *desc) "hart:%"PRId64", async:%d, cause:%"PRId64", =
-epc:0x%"PRIx64", tval:0x%"PRIx64", desc=3D%s"
-> +
-> +# pmp.c
-> +pmpcfg_csr_read(uint64_t mhartid, uint32_t reg_index, uint64_t val) "har=
-t %" PRIu64 ": read reg%" PRIu32", val: 0x%" PRIx64
-> +pmpcfg_csr_write(uint64_t mhartid, uint32_t reg_index, uint64_t val) "ha=
-rt %" PRIu64 ": write reg%" PRIu32", val: 0x%" PRIx64
-> +pmpaddr_csr_read(uint64_t mhartid, uint32_t addr_index, uint64_t val) "h=
-art %" PRIu64 ": read addr%" PRIu32", val: 0x%" PRIx64
-> +pmpaddr_csr_write(uint64_t mhartid, uint32_t addr_index, uint64_t val) "=
-hart %" PRIu64 ": write addr%" PRIu32", val: 0x%" PRIx64
-> --
-> 2.20.1
->
->
+  $ avocado run -t arch:riscv64 tests/acceptance
+
+packages
+  debian official
+    binutils-riscv64-linux-gnu_2.32-8
+    opensbi_0.4-1_all
+    linux-image-5.0.0-trunk-riscv64 5.0.2-1~exp1
+  third-party
+    https://github.com/groeck/linux-build-test/rootfs/riscv64/rootfs.cpio.gz
+    (the repo is also used in mips target acceptance)
+
+Signed-off-by: Chih-Min Chao <chihmin.chao@sifive.com>
+---
+ .travis.yml                            |  2 +-
+ tests/acceptance/boot_linux_console.py | 67 ++++++++++++++++++++++++++++++++++
+ 2 files changed, 68 insertions(+), 1 deletion(-)
+
+diff --git a/.travis.yml b/.travis.yml
+index caf0a1f..7ba9952 100644
+--- a/.travis.yml
++++ b/.travis.yml
+@@ -232,7 +232,7 @@ matrix:
+ 
+     # Acceptance (Functional) tests
+     - env:
+-        - CONFIG="--python=/usr/bin/python3 --target-list=x86_64-softmmu,mips-softmmu,mips64el-softmmu,aarch64-softmmu,arm-softmmu,s390x-softmmu,alpha-softmmu"
++        - CONFIG="--python=/usr/bin/python3 --target-list=x86_64-softmmu,mips-softmmu,mips64el-softmmu,aarch64-softmmu,arm-softmmu,s390x-softmmu,alpha-softmmu,riscv64-softmmu"
+         - TEST_CMD="make check-acceptance"
+       after_failure:
+         - cat tests/results/latest/job.log
+diff --git a/tests/acceptance/boot_linux_console.py b/tests/acceptance/boot_linux_console.py
+index 3215950..b0569b9 100644
+--- a/tests/acceptance/boot_linux_console.py
++++ b/tests/acceptance/boot_linux_console.py
+@@ -354,3 +354,70 @@ class BootLinuxConsole(Test):
+         self.vm.launch()
+         console_pattern = 'Kernel command line: %s' % kernel_command_line
+         self.wait_for_console_pattern(console_pattern)
++
++    def test_riscv64_virt(self):
++        """
++        :avocado: tags=arch:riscv64
++        :avocado: tags=machine:virt
++        """
++        deb_url = ('https://snapshot.debian.org/archive/debian/'
++                         '20190424T171759Z/pool/main/b/binutils/'
++                         'binutils-riscv64-linux-gnu_2.32-8_amd64.deb')
++        deb_hash = ('7fe376fd4452696c03acd508d6d613ca553ea15e')
++        deb_path = self.fetch_asset(deb_url, asset_hash=deb_hash)
++        objcopy_path = '/usr/bin/riscv64-linux-gnu-objcopy'
++        objcopy_path = self.extract_from_deb(deb_path, objcopy_path)
++        libbfd_path = '/usr/lib/x86_64-linux-gnu/libbfd-2.32-riscv64.so'
++        libbfd_path = self.extract_from_deb(deb_path, libbfd_path)
++        process.run('ls -al %s' % (objcopy_path))
++
++        deb_url = ('https://snapshot.debian.org/archive/debian/'
++                   '20190708T032337Z/pool/main/o/opensbi/'
++                   'opensbi_0.4-1_all.deb')
++        deb_hash = ('2319dcd702958291d323acf5649fd98a11d90112')
++        deb_path = self.fetch_asset(deb_url, asset_hash=deb_hash)
++        opensbi_path = ('/usr/lib/riscv64-linux-gnu/opensbi/'
++                        'qemu/virt/fw_jump.elf')
++        opensbi_path = self.extract_from_deb(deb_path, opensbi_path)
++
++        deb_url = ('https://snapshot.debian.org/archive/debian-ports/'
++                   '20190319T205124Z/pool-riscv64/main/l/linux/'
++                   'linux-image-5.0.0-trunk-riscv64_5.0.2-1~exp1_riscv64.deb')
++        deb_hash = ('90155ed4b36673cbf7746a37cf3159c8f0b2857a')
++        deb_path = self.fetch_asset(deb_url, asset_hash=deb_hash)
++        kernel_path = '/boot/vmlinux-5.0.0-trunk-riscv64'
++        kernel_path = self.extract_from_deb(deb_path, kernel_path)
++        kimage_path = self.workdir + "/Image"
++        env = os.environ
++        env['LD_LIBRARY_PATH'] = ('%s:' % (os.path.dirname(libbfd_path)) +
++                                 env.get('LD_LIBRARY_PATH', ''))
++        process.run(('%s -O binary -O binary -R'
++                     '.note -R .note.gnu.build-id -R .comment -S %s %s') %
++                     (objcopy_path, kernel_path, kimage_path))
++
++        initrd_url = ('https://github.com/groeck/linux-build-test/raw/'
++                      '8584a59ed9e5eb5ee7ca91f6d74bbb06619205b8/rootfs/'
++                      'riscv64/rootfs.cpio.gz')
++        initrd_hash = 'f4867d263754961b6f626cdcdc0cb334c47e3b49'
++        initrd_path = self.fetch_asset(initrd_url, asset_hash=initrd_hash)
++
++        self.vm.set_machine('virt')
++        self.vm.set_console()
++        kernel_command_line = (self.KERNEL_COMMON_COMMAND_LINE
++                               + 'console=ttyS0 noreboot')
++        self.vm.add_args('-bios', "none",
++                '-kernel', opensbi_path,
++                '-device', 'loader,file=%s,addr=0x80200000' % (kimage_path),
++                '-initrd', initrd_path,
++                '-append', kernel_command_line,
++                '-no-reboot')
++
++        self.vm.launch()
++        self.wait_for_console_pattern('Boot successful.')
++
++        self.exec_command_and_wait_for_pattern('cat /proc/cpuinfo',
++                                               'isa')
++        self.exec_command_and_wait_for_pattern('uname -a',
++                                               'SMP Debian')
++        self.exec_command_and_wait_for_pattern('reboot',
++                                               'reboot: Restarting system')
+-- 
+2.7.4
+
 
