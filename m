@@ -1,28 +1,28 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hqaTQ-0006CB-BP
-	for mharc-qemu-riscv@gnu.org; Thu, 25 Jul 2019 05:55:44 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:45514)
+	id 1hqaTv-0007T5-J8
+	for mharc-qemu-riscv@gnu.org; Thu, 25 Jul 2019 05:56:15 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:45709)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <tony.nguyen@bt.com>) id 1hqaTO-00064A-EQ
- for qemu-riscv@nongnu.org; Thu, 25 Jul 2019 05:55:43 -0400
+ (envelope-from <tony.nguyen@bt.com>) id 1hqaTt-0007RB-3L
+ for qemu-riscv@nongnu.org; Thu, 25 Jul 2019 05:56:14 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <tony.nguyen@bt.com>) id 1hqaTL-0001ES-BA
- for qemu-riscv@nongnu.org; Thu, 25 Jul 2019 05:55:42 -0400
-Received: from smtpe1.intersmtp.com ([213.121.35.80]:17188)
+ (envelope-from <tony.nguyen@bt.com>) id 1hqaTs-0001US-1E
+ for qemu-riscv@nongnu.org; Thu, 25 Jul 2019 05:56:13 -0400
+Received: from smtpe1.intersmtp.com ([213.121.35.79]:35214)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <tony.nguyen@bt.com>)
- id 1hqaTG-0001C6-RF; Thu, 25 Jul 2019 05:55:35 -0400
+ id 1hqaTl-0001Kt-H0; Thu, 25 Jul 2019 05:56:07 -0400
 Received: from tpw09926dag18h.domain1.systemhost.net (10.9.212.42) by
- BWP09926085.bt.com (10.36.82.116) with Microsoft SMTP Server (version=TLS1_2, 
+ BWP09926084.bt.com (10.36.82.115) with Microsoft SMTP Server (version=TLS1_2, 
  cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P256) id 15.1.1713.5; Thu, 25
- Jul 2019 10:55:31 +0100
+ Jul 2019 10:55:57 +0100
 Received: from tpw09926dag18e.domain1.systemhost.net (10.9.212.18) by
  tpw09926dag18h.domain1.systemhost.net (10.9.212.42) with Microsoft SMTP
- Server (TLS) id 15.0.1395.4; Thu, 25 Jul 2019 10:55:33 +0100
+ Server (TLS) id 15.0.1395.4; Thu, 25 Jul 2019 10:55:59 +0100
 Received: from tpw09926dag18e.domain1.systemhost.net
  ([fe80::a946:6348:ccf4:fa6c]) by tpw09926dag18e.domain1.systemhost.net
  ([fe80::a946:6348:ccf4:fa6c%12]) with mapi id 15.00.1395.000; Thu, 25 Jul
- 2019 10:55:33 +0100
+ 2019 10:55:59 +0100
 From: <tony.nguyen@bt.com>
 To: <qemu-devel@nongnu.org>
 CC: <peter.maydell@linaro.org>, <walling@linux.ibm.com>,
@@ -36,11 +36,11 @@ CC: <peter.maydell@linaro.org>, <walling@linux.ibm.com>,
  <kbastian@mail.uni-paderborn.de>, <cohuck@redhat.com>, <laurent@vivier.eu>,
  <qemu-ppc@nongnu.org>, <amarkovic@wavecomp.com>, <pbonzini@redhat.com>,
  <aurelien@aurel32.net>
-Thread-Topic: [Qemu-devel] [PATCH v4 09/15] cputlb: Access MemoryRegion with
- MemOp
-Thread-Index: AQHVQs8ZEx1YuCiQtUCasmYbQ06HSA==
-Date: Thu, 25 Jul 2019 09:55:32 +0000
-Message-ID: <1564048532722.5565@bt.com>
+Thread-Topic: [Qemu-devel] [PATCH v4 10/15] memory: Access MemoryRegion with
+ MemOp semantics
+Thread-Index: AQHVQs8px7kJYyCpkkqn1mCQ3wVnbg==
+Date: Thu, 25 Jul 2019 09:55:59 +0000
+Message-ID: <1564048559228.36766@bt.com>
 References: <45d1ebe4b2ed4c039c9da20a738652df@tpw09926dag18e.domain1.systemhost.net>
 In-Reply-To: <45d1ebe4b2ed4c039c9da20a738652df@tpw09926dag18e.domain1.systemhost.net>
 Accept-Language: en-AU, en-GB, en-US
@@ -49,12 +49,12 @@ X-MS-Has-Attach:
 X-MS-TNEF-Correlator: 
 x-ms-exchange-transport-fromentityheader: Hosted
 x-originating-ip: [10.187.101.42]
-Content-Type: multipart/alternative; boundary="_000_15640485327225565btcom_"
+Content-Type: multipart/alternative; boundary="_000_156404855922836766btcom_"
 MIME-Version: 1.0
 X-detected-operating-system: by eggs.gnu.org: Windows 7 or 8 [fuzzy]
-X-Received-From: 213.121.35.80
-Subject: [Qemu-riscv] [Qemu-devel] [PATCH v4 09/15] cputlb: Access
- MemoryRegion with MemOp
+X-Received-From: 213.121.35.79
+Subject: [Qemu-riscv] [Qemu-devel] [PATCH v4 10/15] memory: Access
+ MemoryRegion with MemOp semantics
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -66,54 +66,47 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Jul 2019 09:55:43 -0000
+X-List-Received-Date: Thu, 25 Jul 2019 09:56:14 -0000
 
---_000_15640485327225565btcom_
+--_000_156404855922836766btcom_
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
+To convert interfaces of MemoryRegion access, MEMOP_SIZE and
+SIZE_MEMOP no-op stubs were introduced to change syntax while keeping
+the existing semantics.
+
+Now with interfaces converted, we fill the stubs and use MemOp
+semantics.
+
 Signed-off-by: Tony Nguyen <tony.nguyen@bt.com>
 ---
- accel/tcg/cputlb.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ include/exec/memop.h | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
 
-diff --git a/accel/tcg/cputlb.c b/accel/tcg/cputlb.c
-index 523be4c..a4a0bf7 100644
---- a/accel/tcg/cputlb.c
-+++ b/accel/tcg/cputlb.c
-@@ -906,8 +906,8 @@ static uint64_t io_readx(CPUArchState *env, CPUIOTLBEnt=
-ry *iotlbentry,
-         qemu_mutex_lock_iothread();
-         locked =3D true;
-     }
--    r =3D memory_region_dispatch_read(mr, mr_offset,
--                                    &val, size, iotlbentry->attrs);
-+    r =3D memory_region_dispatch_read(mr, mr_offset, &val, SIZE_MEMOP(size=
-),
-+                                    iotlbentry->attrs);
-     if (r !=3D MEMTX_OK) {
-         hwaddr physaddr =3D mr_offset +
-             section->offset_within_address_space -
-@@ -947,8 +947,8 @@ static void io_writex(CPUArchState *env, CPUIOTLBEntry =
-*iotlbentry,
-         qemu_mutex_lock_iothread();
-         locked =3D true;
-     }
--    r =3D memory_region_dispatch_write(mr, mr_offset,
--                                     val, size, iotlbentry->attrs);
-+    r =3D memory_region_dispatch_write(mr, mr_offset, val, SIZE_MEMOP(size=
-),
-+                                    iotlbentry->attrs);
-     if (r !=3D MEMTX_OK) {
-         hwaddr physaddr =3D mr_offset +
-             section->offset_within_address_space -
+diff --git a/include/exec/memop.h b/include/exec/memop.h
+index 09c8d20..f2847e8 100644
+--- a/include/exec/memop.h
++++ b/include/exec/memop.h
+@@ -106,8 +106,7 @@ typedef enum MemOp {
+     MO_SSIZE =3D MO_SIZE | MO_SIGN,
+ } MemOp;
+
+-/* No-op while memory_region_dispatch_[read|write] is converted to MemOp *=
+/
+-#define MEMOP_SIZE(op)  (op)    /* MemOp to size.  */
+-#define SIZE_MEMOP(ul)  (ul)    /* Size to MemOp.  */
++#define MEMOP_SIZE(op)  (1 << ((op) & MO_SIZE)) /* MemOp to size.  */
++#define SIZE_MEMOP(ul)  (ctzl(ul))              /* Size to MemOp.  */
+
+ #endif
 --
 1.8.3.1
 
 
 
 
---_000_15640485327225565btcom_
+--_000_156404855922836766btcom_
 Content-Type: text/html; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
@@ -129,56 +122,44 @@ der-left-width: 2px; border-left-style: solid; border-left-color: rgb(128, =
 <body dir=3D"ltr" style=3D"font-size:12pt;color:#000000;background-color:#F=
 FFFFF;font-family:Calibri,Arial,Helvetica,sans-serif;">
 <p></p>
-<div><span style=3D"font-size: 12pt;">Signed-off-by: Tony Nguyen &lt;tony.n=
-guyen@bt.com&gt;</span><br>
+<div><span style=3D"font-size: 12pt;">To convert interfaces of MemoryRegion=
+ access, MEMOP_SIZE and</span><br>
 </div>
-<div>---</div>
-<div>&nbsp;accel/tcg/cputlb.c | 8 &#43;&#43;&#43;&#43;----</div>
-<div>&nbsp;1 file changed, 4 insertions(&#43;), 4 deletions(-)</div>
+<div>SIZE_MEMOP no-op stubs were introduced to change syntax while keeping<=
+/div>
+<div>the existing semantics.</div>
 <div><br>
 </div>
-<div>diff --git a/accel/tcg/cputlb.c b/accel/tcg/cputlb.c</div>
-<div>index 523be4c..a4a0bf7 100644</div>
-<div>--- a/accel/tcg/cputlb.c</div>
-<div>&#43;&#43;&#43; b/accel/tcg/cputlb.c</div>
-<div>@@ -906,8 &#43;906,8 @@ static uint64_t io_readx(CPUArchState *env, CP=
-UIOTLBEntry *iotlbentry,</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;qemu_mutex_lock_iothread();</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;locked =3D true;</div>
-<div>&nbsp; &nbsp; &nbsp;}</div>
-<div>- &nbsp; &nbsp;r =3D memory_region_dispatch_read(mr, mr_offset,</div>
-<div>- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&amp;val, size, io=
-tlbentry-&gt;attrs);</div>
-<div>&#43; &nbsp; &nbsp;r =3D memory_region_dispatch_read(mr, mr_offset, &a=
-mp;val, SIZE_MEMOP(size),</div>
-<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
-nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;iotlbentry-&gt=
-;attrs);</div>
-<div>&nbsp; &nbsp; &nbsp;if (r !=3D MEMTX_OK) {</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;hwaddr physaddr =3D mr_offset &#43;<=
-/div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;section-&gt;offset_wit=
-hin_address_space -</div>
-<div>@@ -947,8 &#43;947,8 @@ static void io_writex(CPUArchState *env, CPUIO=
-TLBEntry *iotlbentry,</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;qemu_mutex_lock_iothread();</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;locked =3D true;</div>
-<div>&nbsp; &nbsp; &nbsp;}</div>
-<div>- &nbsp; &nbsp;r =3D memory_region_dispatch_write(mr, mr_offset,</div>
-<div>- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; val, size, iotlbe=
-ntry-&gt;attrs);</div>
-<div>&#43; &nbsp; &nbsp;r =3D memory_region_dispatch_write(mr, mr_offset, v=
-al, SIZE_MEMOP(size),</div>
-<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
-nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;iotlbentry-&gt=
-;attrs);</div>
-<div>&nbsp; &nbsp; &nbsp;if (r !=3D MEMTX_OK) {</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;hwaddr physaddr =3D mr_offset &#43;<=
-/div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;section-&gt;offset_wit=
-hin_address_space -</div>
+<div>Now with interfaces converted, we fill the stubs and use MemOp</div>
+<div>semantics.</div>
+<div><br>
+</div>
+<div>Signed-off-by: Tony Nguyen &lt;tony.nguyen@bt.com&gt;</div>
+<div>---</div>
+<div>&nbsp;include/exec/memop.h | 5 &#43;&#43;---</div>
+<div>&nbsp;1 file changed, 2 insertions(&#43;), 3 deletions(-)</div>
+<div><br>
+</div>
+<div>diff --git a/include/exec/memop.h b/include/exec/memop.h</div>
+<div>index 09c8d20..f2847e8 100644</div>
+<div>--- a/include/exec/memop.h</div>
+<div>&#43;&#43;&#43; b/include/exec/memop.h</div>
+<div>@@ -106,8 &#43;106,7 @@ typedef enum MemOp {</div>
+<div>&nbsp; &nbsp; &nbsp;MO_SSIZE =3D MO_SIZE | MO_SIGN,</div>
+<div>&nbsp;} MemOp;</div>
+<div>&nbsp;</div>
+<div>-/* No-op while memory_region_dispatch_[read|write] is converted to Me=
+mOp */</div>
+<div>-#define MEMOP_SIZE(op) &nbsp;(op) &nbsp; &nbsp;/* MemOp to size. &nbs=
+p;*/</div>
+<div>-#define SIZE_MEMOP(ul) &nbsp;(ul) &nbsp; &nbsp;/* Size to MemOp. &nbs=
+p;*/</div>
+<div>&#43;#define MEMOP_SIZE(op) &nbsp;(1 &lt;&lt; ((op) &amp; MO_SIZE)) /*=
+ MemOp to size. &nbsp;*/</div>
+<div>&#43;#define SIZE_MEMOP(ul) &nbsp;(ctzl(ul)) &nbsp; &nbsp; &nbsp; &nbs=
+p; &nbsp; &nbsp; &nbsp;/* Size to MemOp. &nbsp;*/</div>
+<div>&nbsp;</div>
+<div>&nbsp;#endif</div>
 <div>--&nbsp;</div>
 <div>1.8.3.1</div>
 <div><br>
@@ -189,5 +170,5 @@ hin_address_space -</div>
 </body>
 </html>
 
---_000_15640485327225565btcom_--
+--_000_156404855922836766btcom_--
 
