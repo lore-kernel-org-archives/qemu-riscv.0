@@ -1,72 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hqitl-0006sY-Nl
-	for mharc-qemu-riscv@gnu.org; Thu, 25 Jul 2019 14:55:29 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53453)
+	id 1hqlav-0003on-Po
+	for mharc-qemu-riscv@gnu.org; Thu, 25 Jul 2019 17:48:13 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47581)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <prvs=10276a3d6=alistair.francis@wdc.com>)
- id 1hqitg-0006Vf-QY
- for qemu-riscv@nongnu.org; Thu, 25 Jul 2019 14:55:25 -0400
+ (envelope-from <fintelia@gmail.com>) id 1hqlat-0003bb-01
+ for qemu-riscv@nongnu.org; Thu, 25 Jul 2019 17:48:12 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <prvs=10276a3d6=alistair.francis@wdc.com>)
- id 1hqitf-0007yr-Ld
- for qemu-riscv@nongnu.org; Thu, 25 Jul 2019 14:55:24 -0400
-Received: from esa5.hgst.iphmx.com ([216.71.153.144]:43219)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <prvs=10276a3d6=alistair.francis@wdc.com>)
- id 1hqitc-0007rZ-SZ; Thu, 25 Jul 2019 14:55:21 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1564080921; x=1595616921;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=XNjBwmh1LFBChEJ+quD7Z2691WqYMlE30zxPXnx8bn8=;
- b=DSSBaOdp52zuqbgFbj7CRCV6RncG3SLz8lscsg0dkb4HGlTcsGKfFgcX
- SUTgDBmCMpe/SJ7902dicOTR7fuhtZdQ5ftzrIUYAskXpHtfYElPyHCRU
- uusnnZmyeUFUpIIXtsFKXWyLbFbsr/IRTDfDiU2JXZRXU7r+zEKBw0zl+
- ddqSQQw+lOxvRQPzW1M5jrobAvxY9FG4miqjrspo0/OlxW7DNsB8QtTtx
- HtbdtByMgzBtUah1WmNG3HoGAOLoq2AxI8W7UDAfEoEaWGO7MBkOIirTe
- XEKnDL79FAMbPNl5P+f8Af91syMS+UkoluC/vW2FxhYVvDnI0H7T84W9L A==;
-IronPort-SDR: 3U+L11vXi7BcPCiwhAK9ztxiKoMCv1n6Vzygnqiqj3Fkml5859yH39k6OI4yC9Uiq3MzuZWk5W
- VF0kn92SdVR+nRTi1zcO747qQvG9MfM+mTgdlpw7NHp+ciILVb9WnokNvh2AW7dGP1CCqiRx1L
- YMPC95ecQczW5Vj79o92BLcBVgbBYl0yrU+mIrG15YNfqp7KUwBuCBGniLqXQgSUgygLnuRUdv
- A5Enklz72dZaLfPCJvu9+1729eelrsNvNTgo30tvf6l/nTC1BodLP4QIkzHWWcLdSWSdEuMKUA
- olI=
-X-IronPort-AV: E=Sophos;i="5.64,307,1559491200"; d="scan'208";a="115109069"
-Received: from h199-255-45-14.hgst.com (HELO uls-op-cesaep01.wdc.com)
- ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 26 Jul 2019 02:55:19 +0800
-IronPort-SDR: lhXjGBIP1sEA8PwGoQ0oPABExk0ow3XaZdYB/pl1x1si3frnyg784YBQvec1AfMFtse4xovPx7
- +7dBgUVPMz6aG+M54S08NAS3yFrPOVpi1zb2pBz12hU4mQGqNfe6a6xIlMwAXd59xqfI6CqRfz
- Vl2m00mDKF76+/LHgvl+QkP/hM98LWh2vw0YnfivXEkA6lGbv6vHn/JK3Y/b/CPxgn2r5mN9VQ
- GBoBYcFl47NzUuX/yEyQFc66PEU5gF3wcVa6gbDYcM/sEsXh2S/Wnxd49oCvzs9utu9POtOCxi
- J2XrSw+5cuRaVgmLav0STxo7
-Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
- by uls-op-cesaep01.wdc.com with ESMTP; 25 Jul 2019 11:53:29 -0700
-IronPort-SDR: E8ifU7kZm71V8FGinzNexRn2uMalZnkYLqnTQY6H2JALVJURBjQqSuzdCwUYmpcEFfEcEVxIUy
- 0iR8bTLGyR7a6SbT4KE42K/ku16IrDt/v5lIzNOIUYX7YLj/odEJtkEvUHPh5McDHjWL7mY3qP
- mgV5MnP50DaJjFKYyaYnWSK7zNv+T9z7O1urTVogGV3OXdUenRXcEpwZs09DcGK77KRQ6uZjMr
- ZxDPMyyurwEtAMEPoavogZkeHJIIRPCOzWaqAaFCrUdNYbXdvHUICKQcaK4VAAa8omV1QScliu
- RUs=
-Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
- risc6-mainframe.int.fusionio.com) ([10.196.157.140])
- by uls-op-cesaip02.wdc.com with ESMTP; 25 Jul 2019 11:55:19 -0700
-From: Alistair Francis <alistair.francis@wdc.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: palmer@sifive.com,
-	alistair.francis@wdc.com,
-	alistair23@gmail.com
-Date: Thu, 25 Jul 2019 11:52:14 -0700
-Message-Id: <4116c27c037b5e7f4822cfd7199724450dc6b5da.1564080680.git.alistair.francis@wdc.com>
-X-Mailer: git-send-email 2.22.0
-In-Reply-To: <cover.1564080680.git.alistair.francis@wdc.com>
-References: <cover.1564080680.git.alistair.francis@wdc.com>
+ (envelope-from <fintelia@gmail.com>) id 1hqlar-00081F-Mb
+ for qemu-riscv@nongnu.org; Thu, 25 Jul 2019 17:48:10 -0400
+Received: from mail-lf1-x132.google.com ([2a00:1450:4864:20::132]:42057)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <fintelia@gmail.com>)
+ id 1hqlap-0007tI-1e; Thu, 25 Jul 2019 17:48:07 -0400
+Received: by mail-lf1-x132.google.com with SMTP id s19so35614004lfb.9;
+ Thu, 25 Jul 2019 14:48:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=KQ9NrAyyE67UHe5LvMVajFoTQKbRA85crMNldZTKBZs=;
+ b=t7PB8zxQGS6wSoa4fWtzhi8bg8pAcyhWhDQdyJkyWrohtwbMU5u1yfE6skVMn/J+Dm
+ CrXf2O6NXF4Wjm20ZJDH3DGywE0BLvWweTzku3mHito/mo6vcZSQmPZW9HGAMALQyjns
+ ZdJcLocJef/aLmd+BNbK7JnToNEB5GcuqIWaWwwPklWwlRpozgvWjXUu6K7PuDQldAz+
+ BkTcUiCQdbhmd6OIMv+nsJwLDkIfk4Y+7IboPKC4Hy4ZpJ4otK6eM0XRmd812ZeiLbQw
+ Wro1yYUxTfA2chEQraZoFp3k+okzB/bBbnsVPDDhyvJuSWOAwQaigBDrfv3LJCeF+gH0
+ hvkg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=KQ9NrAyyE67UHe5LvMVajFoTQKbRA85crMNldZTKBZs=;
+ b=hBW8aGHt8AClz+b+XwcDIrd8Lse2kadKop5idhGn4rIdociQ9Dnz7RzfkWa6BZaU/h
+ pd8A12BQ2V+jEVbrau/DMK51DIudCfLGd5nwliBpNBAalVCrgAs2kxgnnPyLSs6Q5aDt
+ P5vVmS4OON2VJBjujphgyk+Z02Hmy8BVZJ1FViQKSHRN11KY1BkU54oVKHO8fuiBYvUx
+ xAN0vzlOx1q6m1XJHFrFYs3g6wC0GZii42B8Rsd24zTYERdVeIjeM/XW5Nm/3OrVGkrY
+ flRLnuGbC9YE6hQaxACzb6BaAqB0yQvKnWOqm1lrzche/3BsrgdnVH2C5Seysebh4hsP
+ 2j3A==
+X-Gm-Message-State: APjAAAWM5Z10ct7rH4aBZnMVNh9+M8hsB5rJ+JUtbVIA0Ohq5pVNh4yQ
+ 6iXyhvIkwMxMiWOu0rwx4B9dvkjA+MBE2V88Mzs=
+X-Google-Smtp-Source: APXvYqxODWyKLClnp8PVPuxX8SxuRov3MhFN8gQaJl2QPMazaDhMVlWZladWksDXVFmyIuaE8tNliya5M2v2BSVqZA4=
+X-Received: by 2002:a19:7006:: with SMTP id h6mr41856589lfc.5.1564091285088;
+ Thu, 25 Jul 2019 14:48:05 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-detected-operating-system: by eggs.gnu.org: FreeBSD 9.x
-X-Received-From: 216.71.153.144
-Subject: [Qemu-riscv] [PATCH-4.2 v1 6/6] target/riscv: Fix Floating Point
- register names
+References: <cover.1564080680.git.alistair.francis@wdc.com>
+ <b415f5b51e09418760b95e5c73fad5e68b97f173.1564080680.git.alistair.francis@wdc.com>
+In-Reply-To: <b415f5b51e09418760b95e5c73fad5e68b97f173.1564080680.git.alistair.francis@wdc.com>
+From: Jonathan Behrens <fintelia@gmail.com>
+Date: Thu, 25 Jul 2019 17:47:22 -0400
+Message-ID: <CANnJOVEyy7wb74eEucj5t=xonOvUFTPWuty9R+-KP0DLc+L7zQ@mail.gmail.com>
+To: Alistair Francis <alistair.francis@wdc.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Alistair Francis <alistair23@gmail.com>, Palmer Dabbelt <palmer@sifive.com>
+Content-Type: multipart/alternative; boundary="00000000000071b005058e8861e9"
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2a00:1450:4864:20::132
+Subject: Re: [Qemu-riscv] [PATCH-4.2 v1 2/6] target/riscv: Remove strict
+ perm checking for CSR R/W
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -78,39 +67,96 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Jul 2019 18:55:28 -0000
+X-List-Received-Date: Thu, 25 Jul 2019 21:48:12 -0000
 
-From: Atish Patra <atish.patra@wdc.com>
+--00000000000071b005058e8861e9
+Content-Type: text/plain; charset="UTF-8"
 
-As per the RISC-V spec, Floating Point registers are named as f0..f31
-so lets fix the register names accordingly.
+Unless I'm missing something, this is the only place that QEMU checks the
+privilege level for read and writes to CSRs. The exact computation used
+here won't work with the hypervisor extension, but we also can't just get
+rid of privilege checking entirely...
 
-Signed-off-by: Atish Patra <atish.patra@wdc.com>
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
----
- target/riscv/cpu.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+Jonathan
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index f8d07bd20a..af1e9b7690 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -40,10 +40,10 @@ const char * const riscv_int_regnames[] = {
- };
- 
- const char * const riscv_fpr_regnames[] = {
--  "ft0", "ft1", "ft2",  "ft3",  "ft4", "ft5", "ft6",  "ft7",
--  "fs0", "fs1", "fa0",  "fa1",  "fa2", "fa3", "fa4",  "fa5",
--  "fa6", "fa7", "fs2",  "fs3",  "fs4", "fs5", "fs6",  "fs7",
--  "fs8", "fs9", "fs10", "fs11", "ft8", "ft9", "ft10", "ft11"
-+  "f0", "f1", "f2",  "f3",  "f4", "f5", "f6", "f7",
-+  "f8", "f9", "f10",  "f11",  "f12", "f13", "f14", "f15",
-+  "f16", "f17", "f18",  "f19",  "f20", "f21", "f22", "f23",
-+  "f24", "f25", "f26", "f27", "f28", "f29", "f30", "f31"
- };
- 
- const char * const riscv_excp_names[] = {
--- 
-2.22.0
+On Thu, Jul 25, 2019 at 2:56 PM Alistair Francis <alistair.francis@wdc.com>
+wrote:
 
+> The privledge check based on the CSR address mask 0x300 doesn't work
+> when using Hypervisor extensions so remove the check
+>
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> ---
+>  target/riscv/csr.c | 3 +--
+>  1 file changed, 1 insertion(+), 2 deletions(-)
+>
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index e0d4586760..af3b762c8b 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -797,9 +797,8 @@ int riscv_csrrw(CPURISCVState *env, int csrno,
+> target_ulong *ret_value,
+>
+>      /* check privileges and return -1 if check fails */
+>  #if !defined(CONFIG_USER_ONLY)
+> -    int csr_priv = get_field(csrno, 0x300);
+>      int read_only = get_field(csrno, 0xC00) == 3;
+> -    if ((write_mask && read_only) || (env->priv < csr_priv)) {
+> +    if (write_mask && read_only) {
+>          return -1;
+>      }
+>  #endif
+> --
+> 2.22.0
+>
+>
+>
+
+--00000000000071b005058e8861e9
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div>Unless I&#39;m missing something, this is the only pl=
+ace that QEMU checks the privilege level for read and writes to CSRs. The e=
+xact computation used here won&#39;t work with the hypervisor extension, bu=
+t we also can&#39;t just get rid of privilege checking entirely...</div><di=
+v><br></div><div>Jonathan<br></div></div><br><div class=3D"gmail_quote"><di=
+v dir=3D"ltr" class=3D"gmail_attr">On Thu, Jul 25, 2019 at 2:56 PM Alistair=
+ Francis &lt;<a href=3D"mailto:alistair.francis@wdc.com">alistair.francis@w=
+dc.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"m=
+argin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left=
+:1ex">The privledge check based on the CSR address mask 0x300 doesn&#39;t w=
+ork<br>
+when using Hypervisor extensions so remove the check<br>
+<br>
+Signed-off-by: Alistair Francis &lt;<a href=3D"mailto:alistair.francis@wdc.=
+com" target=3D"_blank">alistair.francis@wdc.com</a>&gt;<br>
+---<br>
+=C2=A0target/riscv/csr.c | 3 +--<br>
+=C2=A01 file changed, 1 insertion(+), 2 deletions(-)<br>
+<br>
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c<br>
+index e0d4586760..af3b762c8b 100644<br>
+--- a/target/riscv/csr.c<br>
++++ b/target/riscv/csr.c<br>
+@@ -797,9 +797,8 @@ int riscv_csrrw(CPURISCVState *env, int csrno, target_u=
+long *ret_value,<br>
+<br>
+=C2=A0 =C2=A0 =C2=A0/* check privileges and return -1 if check fails */<br>
+=C2=A0#if !defined(CONFIG_USER_ONLY)<br>
+-=C2=A0 =C2=A0 int csr_priv =3D get_field(csrno, 0x300);<br>
+=C2=A0 =C2=A0 =C2=A0int read_only =3D get_field(csrno, 0xC00) =3D=3D 3;<br>
+-=C2=A0 =C2=A0 if ((write_mask &amp;&amp; read_only) || (env-&gt;priv &lt; =
+csr_priv)) {<br>
++=C2=A0 =C2=A0 if (write_mask &amp;&amp; read_only) {<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return -1;<br>
+=C2=A0 =C2=A0 =C2=A0}<br>
+=C2=A0#endif<br>
+-- <br>
+2.22.0<br>
+<br>
+<br>
+</blockquote></div>
+
+--00000000000071b005058e8861e9--
 
