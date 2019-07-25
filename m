@@ -1,28 +1,28 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hqYeR-0001zu-0T
-	for mharc-qemu-riscv@gnu.org; Thu, 25 Jul 2019 03:58:59 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:36109)
+	id 1hqYgU-00041c-D6
+	for mharc-qemu-riscv@gnu.org; Thu, 25 Jul 2019 04:01:06 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:36671)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <tony.nguyen@bt.com>) id 1hqYeN-0001rv-8x
- for qemu-riscv@nongnu.org; Thu, 25 Jul 2019 03:58:57 -0400
+ (envelope-from <tony.nguyen@bt.com>) id 1hqYgR-0003z6-7d
+ for qemu-riscv@nongnu.org; Thu, 25 Jul 2019 04:01:04 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <tony.nguyen@bt.com>) id 1hqYeK-0007wA-Qd
- for qemu-riscv@nongnu.org; Thu, 25 Jul 2019 03:58:55 -0400
-Received: from smtpe1.intersmtp.com ([213.121.35.77]:5178)
+ (envelope-from <tony.nguyen@bt.com>) id 1hqYgL-0001OU-QA
+ for qemu-riscv@nongnu.org; Thu, 25 Jul 2019 04:01:03 -0400
+Received: from smtpe1.intersmtp.com ([213.121.35.79]:26914)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <tony.nguyen@bt.com>)
- id 1hqYeF-0007nv-O8; Thu, 25 Jul 2019 03:58:48 -0400
-Received: from tpw09926dag18e.domain1.systemhost.net (10.9.212.18) by
- BWP09926082.bt.com (10.36.82.113) with Microsoft SMTP Server (version=TLS1_2, 
+ id 1hqYgF-0001EN-07; Thu, 25 Jul 2019 04:00:51 -0400
+Received: from tpw09926dag18f.domain1.systemhost.net (10.9.212.26) by
+ BWP09926084.bt.com (10.36.82.115) with Microsoft SMTP Server (version=TLS1_2, 
  cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P256) id 15.1.1713.5; Thu, 25
- Jul 2019 08:58:44 +0100
+ Jul 2019 09:00:47 +0100
 Received: from tpw09926dag18e.domain1.systemhost.net (10.9.212.18) by
- tpw09926dag18e.domain1.systemhost.net (10.9.212.18) with Microsoft SMTP
- Server (TLS) id 15.0.1395.4; Thu, 25 Jul 2019 08:58:44 +0100
+ tpw09926dag18f.domain1.systemhost.net (10.9.212.26) with Microsoft SMTP
+ Server (TLS) id 15.0.1395.4; Thu, 25 Jul 2019 09:00:49 +0100
 Received: from tpw09926dag18e.domain1.systemhost.net
  ([fe80::a946:6348:ccf4:fa6c]) by tpw09926dag18e.domain1.systemhost.net
  ([fe80::a946:6348:ccf4:fa6c%12]) with mapi id 15.00.1395.000; Thu, 25 Jul
- 2019 08:58:44 +0100
+ 2019 09:00:49 +0100
 From: <tony.nguyen@bt.com>
 To: <qemu-devel@nongnu.org>
 CC: <peter.maydell@linaro.org>, <walling@linux.ibm.com>, <mst@redhat.com>,
@@ -30,30 +30,31 @@ CC: <peter.maydell@linaro.org>, <walling@linux.ibm.com>, <mst@redhat.com>,
  <Alistair.Francis@wdc.com>, <arikalo@wavecomp.com>, <david@redhat.com>,
  <pasic@linux.ibm.com>, <borntraeger@de.ibm.com>, <rth@twiddle.net>,
  <atar4qemu@gmail.com>, <ehabkost@redhat.com>, <sw@weilnetz.de>,
- <qemu-s390x@nongnu.org>, <qemu-arm@nongnu.org>,
+ <alex.williamson@redhat.com>, <qemu-arm@nongnu.org>,
  <david@gibson.dropbear.id.au>, <qemu-riscv@nongnu.org>, <cohuck@redhat.com>,
- <alex.williamson@redhat.com>, <qemu-ppc@nongnu.org>,
- <amarkovic@wavecomp.com>, <pbonzini@redhat.com>, <aurelien@aurel32.net>
-Thread-Topic: [Qemu-devel] [PATCH v4 00/15] Invert Endian bit in SPARCv9 MMU
- TTE
-Thread-Index: AQHVQr7IivTZaitMbk2NSP05VRPAXQ==
-Date: Thu, 25 Jul 2019 07:58:44 +0000
-Message-ID: <1564041524365.23360@bt.com>
+ <qemu-s390x@nongnu.org>, <qemu-ppc@nongnu.org>, <amarkovic@wavecomp.com>,
+ <pbonzini@redhat.com>, <aurelien@aurel32.net>
+Thread-Topic: [Qemu-devel] [PATCH v4 02/15] memory: Access MemoryRegion with
+ MemOp
+Thread-Index: AQHVQr8SLrJE4y8qW06Prb/pDI1pOQ==
+Date: Thu, 25 Jul 2019 08:00:49 +0000
+Message-ID: <1564041648740.85917@bt.com>
 References: <e9c6e5310b1a4863be45d45bf087fc3d@tpw09926dag18e.domain1.systemhost.net>, 
- <1563810716254.18886@bt.com>,<1564038073754.91133@bt.com>
-In-Reply-To: <1564038073754.91133@bt.com>
+ <1563810716254.18886@bt.com>, <1564038073754.91133@bt.com>,
+ <1564041524365.23360@bt.com>
+In-Reply-To: <1564041524365.23360@bt.com>
 Accept-Language: en-AU, en-GB, en-US
 Content-Language: en-AU
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
 x-ms-exchange-transport-fromentityheader: Hosted
 x-originating-ip: [10.187.101.42]
-Content-Type: multipart/alternative; boundary="_000_156404152436523360btcom_"
+Content-Type: multipart/alternative; boundary="_000_156404164874085917btcom_"
 MIME-Version: 1.0
 X-detected-operating-system: by eggs.gnu.org: Windows 7 or 8 [fuzzy]
-X-Received-From: 213.121.35.77
-Subject: [Qemu-riscv] [Qemu-devel] [PATCH v4 00/15] Invert Endian bit in
- SPARCv9 MMU TTE
+X-Received-From: 213.121.35.79
+Subject: [Qemu-riscv] [Qemu-devel] [PATCH v4 02/15] memory: Access
+ MemoryRegion with MemOp
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -65,243 +66,126 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Jul 2019 07:58:57 -0000
+X-List-Received-Date: Thu, 25 Jul 2019 08:01:05 -0000
 
---_000_156404152436523360btcom_
+--_000_156404164874085917btcom_
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
-This patchset implements the IE (Invert Endian) bit in SPARCv9 MMU TTE.
+Replacing size with size+sign+endianness (MemOp) will enable us to
+collapse the two byte swaps, adjust_endianness and handle_bswap, along
+the I/O path.
 
-It is an attempt of the instructions outlined by Richard Henderson to Mark
-Cave-Ayland.
+While interfaces are converted, callers will have existing unsigned
+size coerced into a MemOp, and the callee will use this MemOp as an
+unsigned size.
 
-Tested with OpenBSD on sun4u. Solaris 10 is my actual goal, but unfortunate=
-ly a
-separate keyboard issue remains in the way.
+Signed-off-by: Tony Nguyen <tony.nguyen@bt.com>
+---
+ include/exec/memop.h  | 4 ++++
+ include/exec/memory.h | 9 +++++----
+ memory.c              | 7 +++++--
+ 3 files changed, 14 insertions(+), 6 deletions(-)
 
-On 01/11/17 19:15, Mark Cave-Ayland wrote:
+diff --git a/include/exec/memop.h b/include/exec/memop.h
+index ac58066..09c8d20 100644
+--- a/include/exec/memop.h
++++ b/include/exec/memop.h
+@@ -106,4 +106,8 @@ typedef enum MemOp {
+     MO_SSIZE =3D MO_SIZE | MO_SIGN,
+ } MemOp;
 
->On 15/08/17 19:10, Richard Henderson wrote:
->
->> [CC Peter re MemTxAttrs below]
->>
->> On 08/15/2017 09:38 AM, Mark Cave-Ayland wrote:
->>> Working through an incorrect endian issue on qemu-system-sparc64, it ha=
-s
->>> become apparent that at least one OS makes use of the IE (Invert Endian=
-)
->>> bit in the SPARCv9 MMU TTE to map PCI memory space without the
->>> programmer having to manually endian-swap accesses.
->>>
->>> In other words, to quote the UltraSPARC specification: "if this bit is
->>> set, accesses to the associated page are processed with inverse
->>> endianness from what is specified by the instruction (big-for-little an=
-d
->>> little-for-big)".
-
-A good explanation by Mark why the IE bit is required.
-
->>>
->>> Looking through various bits of code, I'm trying to get a feel for the
->>> best way to implement this in an efficient manner. From what I can see
->>> this could be solved using an additional MMU index, however I'm not
->>> overly familiar with the memory and softmmu subsystems.
->>
->> No, it can't be solved with an MMU index.
->>
->>> Can anyone point me in the right direction as to what would be the best
->>> way to implement this feature within QEMU?
->>
->> It's definitely tricky.
->>
->> We definitely need some TLB_FLAGS_MASK bit set so that we're forced thro=
-ugh
->> the
->> memory slow path.  There is no other way to bypass the endianness that w=
-e've
->> already encoded from the target instruction.
->>
->> Given the tlb_set_page_with_attrs interface, I would think that we need =
-a new
->> bit in MemTxAttrs, so that the target/sparc tlb_fill (and subroutines) c=
-an
->> pass
->> along the TTE bit for the given page.
->>
->> We have an existing problem in softmmu_template.h,
->>
->>     /* ??? Note that the io helpers always read data in the target
->>        byte ordering.  We should push the LE/BE request down into io.  *=
++/* No-op while memory_region_dispatch_[read|write] is converted to MemOp *=
 /
->>     res =3D glue(io_read, SUFFIX)(env, mmu_idx, index, addr, retaddr);
->>     res =3D TGT_BE(res);
->>
->> We do not want to add a third(!) byte swap along the i/o path.  We need =
-to
->> collapse the two that we have already before considering this one.
->>
->> This probably takes the form of:
->>
->> (1) Replacing the "int size" argument with "TCGMemOp memop" for
->>       a) io_{read,write}x in accel/tcg/cputlb.c,
->>       b) memory_region_dispatch_{read,write} in memory.c,
->>       c) adjust_endianness in memory.c.
->>     This carries size+sign+endianness down to the next level.
->>
->> (2) In memory.c, adjust_endianness,
->>
->>      if (memory_region_wrong_endianness(mr)) {
->> -        switch (size) {
->> +        memop ^=3D MO_BSWAP;
->> +    }
->> +    if (memop & MO_BSWAP) {
->>
->>     For extra credit, re-arrange memory_region_wrong_endianness
->>     to something more explicit -- "wrong" isn't helpful.
->
->Finally I've had a bit of spare time to experiment with this approach,
->and from what I can see there are currently 2 issues:
->
->
->1) Using TCGMemOp in memory.c means it is no longer accelerator agnostic
->
->For the moment I've defined a separate MemOp in memory.h and provided a
->mapping function in io_{read,write}x to map from TCGMemOp to MemOp and
->then pass that into memory_region_dispatch_{read,write}.
->
->Other than not referencing TCGMemOp in the memory API, another reason
->for doing this was that I wasn't convinced that all the MO_ attributes
->were valid outside of TCG. I do, of course, strongly defer to other
->people's knowledge in this area though.
->
->
->2) The above changes to adjust_endianness() fail when
->memory_region_dispatch_{read,write} are called recursively
->
->Whilst booting qemu-system-sparc64 I see that
->memory_region_dispatch_{read,write} get called recursively - once via
->io_{read,write}x and then again via flatview_read_continue() in exec.c.
->
->The net effect of this is that we perform the bswap correctly at the
->tail of the recursion, but then as we travel back up the stack we hit
->memory_region_dispatch_{read,write} once again causing a second bswap
->which means the value is returned with the incorrect endian again.
->
->
->My understanding from your softmmu_template.h comment above is that the
->memory API should do the endian swapping internally allowing the removal
->of the final TGT_BE/TGT_LE applied to the result, or did I get this wrong?
->
->> (3) In tlb_set_page_with_attrs, notice attrs.byte_swap and set
->>     a new TLB_FORCE_SLOW bit within TLB_FLAGS_MASK.
->>
->> (4) In io_{read,write}x, if iotlbentry->attrs.byte_swap is set,
->>     then memop ^=3D MO_BSWAP.
++#define MEMOP_SIZE(op)  (op)    /* MemOp to size.  */
++#define SIZE_MEMOP(ul)  (ul)    /* Size to MemOp.  */
++
+ #endif
+diff --git a/include/exec/memory.h b/include/exec/memory.h
+index bb0961d..30b1c58 100644
+--- a/include/exec/memory.h
++++ b/include/exec/memory.h
+@@ -19,6 +19,7 @@
+ #include "exec/cpu-common.h"
+ #include "exec/hwaddr.h"
+ #include "exec/memattrs.h"
++#include "exec/memop.h"
+ #include "exec/ramlist.h"
+ #include "qemu/queue.h"
+ #include "qemu/int128.h"
+@@ -1731,13 +1732,13 @@ void mtree_info(bool flatview, bool dispatch_tree, =
+bool owner);
+  * @mr: #MemoryRegion to access
+  * @addr: address within that region
+  * @pval: pointer to uint64_t which the data is written to
+- * @size: size of the access in bytes
++ * @op: encodes size of the access in bytes
+  * @attrs: memory transaction attributes to use for the access
+  */
+ MemTxResult memory_region_dispatch_read(MemoryRegion *mr,
+                                         hwaddr addr,
+                                         uint64_t *pval,
+-                                        unsigned size,
++                                        MemOp op,
+                                         MemTxAttrs attrs);
+ /**
+  * memory_region_dispatch_write: perform a write directly to the specified
+@@ -1746,13 +1747,13 @@ MemTxResult memory_region_dispatch_read(MemoryRegio=
+n *mr,
+  * @mr: #MemoryRegion to access
+  * @addr: address within that region
+  * @data: data to write
+- * @size: size of the access in bytes
++ * @op: encodes size of the access in bytes
+  * @attrs: memory transaction attributes to use for the access
+  */
+ MemTxResult memory_region_dispatch_write(MemoryRegion *mr,
+                                          hwaddr addr,
+                                          uint64_t data,
+-                                         unsigned size,
++                                         MemOp op,
+                                          MemTxAttrs attrs);
 
-Thanks all for the feedback.
+ /**
+diff --git a/memory.c b/memory.c
+index 5d8c9a9..6982e19 100644
+--- a/memory.c
++++ b/memory.c
+@@ -1439,10 +1439,11 @@ static MemTxResult memory_region_dispatch_read1(Mem=
+oryRegion *mr,
+ MemTxResult memory_region_dispatch_read(MemoryRegion *mr,
+                                         hwaddr addr,
+                                         uint64_t *pval,
+-                                        unsigned size,
++                                        MemOp op,
+                                         MemTxAttrs attrs)
+ {
+     MemTxResult r;
++    unsigned size =3D MEMOP_SIZE(op);
 
-v2:
-- Moved size+sign+endianness attributes from TCGMemOp into MemOp.
-  In v1 TCGMemOp was re-purposed entirely into MemOp.
-- Replaced MemOp MO_{8|16|32|64} with TCGMemOp MO_{UB|UW|UL|UQ} alias.
-  This is to avoid warnings on comparing and coercing different enums.
-- Renamed get_memop to get_tcgmemop for clarity.
-- MEMOP is now SIZE_MEMOP, which is just ctzl(size).
-- Split patch 3/4 so one memory_region_dispatch_{read|write} interface
-  is converted per patch.
-- Do not reuse TLB_RECHECK, use new TLB_FORCE_SLOW instead.
-- Split patch 4/4 so adding the MemTxAddrs parameters and converting
-  tlb_set_page() to tlb_set_page_with_attrs() is separate from usage.
-- CC'd maintainers.
-
-v3:
-- Like v1, the entire TCGMemOp enum is now MemOp.
-- MemOp target dependant attributes are conditional upon NEED_CPU_H
-
-v4:
-- Added Paolo Bonzini as include/exec/memop.h maintainer
-
-Tony Nguyen (15):
-  tcg: TCGMemOp is now accelerator independent MemOp
-  memory: Access MemoryRegion with MemOp
-  target/mips: Access MemoryRegion with MemOp
-  hw/s390x: Access MemoryRegion with MemOp
-  hw/intc/armv7m_nic: Access MemoryRegion with MemOp
-  hw/virtio: Access MemoryRegion with MemOp
-  hw/vfio: Access MemoryRegion with MemOp
-  exec: Access MemoryRegion with MemOp
-  cputlb: Access MemoryRegion with MemOp
-  memory: Access MemoryRegion with MemOp semantics
-  memory: Single byte swap along the I/O path
-  cpu: TLB_FLAGS_MASK bit to force memory slow path
-  cputlb: Byte swap memory transaction attribute
-  target/sparc: Add TLB entry with attributes
-  target/sparc: sun4u Invert Endian TTE bit
-
- MAINTAINERS                             |   1 +
- accel/tcg/cputlb.c                      |  71 +++++++++--------
- exec.c                                  |   6 +-
- hw/intc/armv7m_nvic.c                   |  12 ++-
- hw/s390x/s390-pci-inst.c                |   8 +-
- hw/vfio/pci-quirks.c                    |   5 +-
- hw/virtio/virtio-pci.c                  |   7 +-
- include/exec/cpu-all.h                  |  10 ++-
- include/exec/memattrs.h                 |   2 +
- include/exec/memop.h                    | 112 +++++++++++++++++++++++++++
- include/exec/memory.h                   |   9 ++-
- memory.c                                |  37 +++++----
- memory_ldst.inc.c                       |  18 ++---
- target/alpha/translate.c                |   2 +-
- target/arm/translate-a64.c              |  48 ++++++------
- target/arm/translate-a64.h              |   2 +-
- target/arm/translate-sve.c              |   2 +-
- target/arm/translate.c                  |  32 ++++----
- target/arm/translate.h                  |   2 +-
- target/hppa/translate.c                 |  14 ++--
- target/i386/translate.c                 | 132 ++++++++++++++++------------=
-----
- target/m68k/translate.c                 |   2 +-
- target/microblaze/translate.c           |   4 +-
- target/mips/op_helper.c                 |   5 +-
- target/mips/translate.c                 |   8 +-
- target/openrisc/translate.c             |   4 +-
- target/ppc/translate.c                  |  12 +--
- target/riscv/insn_trans/trans_rva.inc.c |   8 +-
- target/riscv/insn_trans/trans_rvi.inc.c |   4 +-
- target/s390x/translate.c                |   6 +-
- target/s390x/translate_vx.inc.c         |  10 +--
- target/sparc/cpu.h                      |   2 +
- target/sparc/mmu_helper.c               |  40 ++++++----
- target/sparc/translate.c                |  14 ++--
- target/tilegx/translate.c               |  10 +--
- target/tricore/translate.c              |   8 +-
- tcg/README                              |   2 +-
- tcg/aarch64/tcg-target.inc.c            |  26 +++----
- tcg/arm/tcg-target.inc.c                |  26 +++----
- tcg/i386/tcg-target.inc.c               |  24 +++---
- tcg/mips/tcg-target.inc.c               |  16 ++--
- tcg/optimize.c                          |   2 +-
- tcg/ppc/tcg-target.inc.c                |  12 +--
- tcg/riscv/tcg-target.inc.c              |  20 ++---
- tcg/s390/tcg-target.inc.c               |  14 ++--
- tcg/sparc/tcg-target.inc.c              |   6 +-
- tcg/tcg-op.c                            |  38 ++++-----
- tcg/tcg-op.h                            |  86 ++++++++++-----------
- tcg/tcg.c                               |   2 +-
- tcg/tcg.h                               |  99 ++----------------------
- trace/mem-internal.h                    |   4 +-
- trace/mem.h                             |   4 +-
- 52 files changed, 562 insertions(+), 488 deletions(-)
- create mode 100644 include/exec/memop.h
-
+     if (!memory_region_access_valid(mr, addr, size, false, attrs)) {
+         *pval =3D unassigned_mem_read(mr, addr, size);
+@@ -1483,9 +1484,11 @@ static bool memory_region_dispatch_write_eventfds(Me=
+moryRegion *mr,
+ MemTxResult memory_region_dispatch_write(MemoryRegion *mr,
+                                          hwaddr addr,
+                                          uint64_t data,
+-                                         unsigned size,
++                                         MemOp op,
+                                          MemTxAttrs attrs)
+ {
++    unsigned size =3D MEMOP_SIZE(op);
++
+     if (!memory_region_access_valid(mr, addr, size, true, attrs)) {
+         unassigned_mem_write(mr, addr, data, size);
+         return MEMTX_DECODE_ERROR;
 --
 1.8.3.1
 
 
 
 
---_000_156404152436523360btcom_
+--_000_156404164874085917btcom_
 Content-Type: text/html; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
@@ -317,352 +201,171 @@ der-left-width: 2px; border-left-style: solid; border-left-color: rgb(128, =
 <body dir=3D"ltr" style=3D"font-size:12pt;color:#000000;background-color:#F=
 FFFFF;font-family:Calibri,Arial,Helvetica,sans-serif;">
 <p></p>
-<div><span style=3D"font-size: 12pt;">This patchset implements the IE (Inve=
-rt Endian) bit in SPARCv9 MMU TTE.</span><br>
+<div><span style=3D"font-size: 12pt;">Replacing size with size&#43;sign&#43=
+;endianness (MemOp) will enable us to</span><br>
 </div>
+<div>collapse the two byte swaps, adjust_endianness and handle_bswap, along=
+</div>
+<div>the I/O path.</div>
 <div><br>
 </div>
-<div>It is an attempt of the instructions outlined by Richard Henderson to =
-Mark<br>
-</div>
-<div>Cave-Ayland.</div>
-<div><br>
-</div>
-<div>Tested with OpenBSD on sun4u. Solaris 10 is my actual goal, but unfort=
-unately a</div>
-<div>separate keyboard issue remains in the way.</div>
-<div><br>
-</div>
-<div>On 01/11/17 19:15, Mark Cave-Ayland wrote:</div>
-<div><br>
-</div>
-<div>&gt;On 15/08/17 19:10, Richard Henderson wrote:</div>
-<div>&gt;</div>
-<div>&gt;&gt; [CC Peter re MemTxAttrs below]</div>
-<div>&gt;&gt;<br>
-</div>
-<div>&gt;&gt; On 08/15/2017 09:38 AM, Mark Cave-Ayland wrote:</div>
-<div>&gt;&gt;&gt; Working through an incorrect endian issue on qemu-system-=
-sparc64, it has</div>
-<div>&gt;&gt;&gt; become apparent that at least one OS makes use of the IE =
-(Invert Endian)</div>
-<div>&gt;&gt;&gt; bit in the SPARCv9 MMU TTE to map PCI memory space withou=
-t the</div>
-<div>&gt;&gt;&gt; programmer having to manually endian-swap accesses.<br>
-</div>
-<div>&gt;&gt;&gt;</div>
-<div>&gt;&gt;&gt; In other words, to quote the UltraSPARC specification: &q=
-uot;if this bit is</div>
-<div>&gt;&gt;&gt; set, accesses to the associated page are processed with i=
-nverse</div>
-<div>&gt;&gt;&gt; endianness from what is specified by the instruction (big=
--for-little and</div>
-<div>&gt;&gt;&gt; little-for-big)&quot;.</div>
-<div><br>
-</div>
-<div>A good explanation by Mark why the IE bit is required.</div>
-<div><br>
-</div>
-<div>&gt;&gt;&gt;</div>
-<div>&gt;&gt;&gt; Looking through various bits of code, I'm trying to get a=
- feel for the</div>
-<div>&gt;&gt;&gt; best way to implement this in an efficient manner. From w=
-hat I can see</div>
-<div>&gt;&gt;&gt; this could be solved using an additional MMU index, howev=
-er I'm not</div>
-<div>&gt;&gt;&gt; overly familiar with the memory and softmmu subsystems.</=
-div>
-<div>&gt;&gt;</div>
-<div>&gt;&gt; No, it can't be solved with an MMU index.</div>
-<div>&gt;&gt;</div>
-<div>&gt;&gt;&gt; Can anyone point me in the right direction as to what wou=
-ld be the best</div>
-<div>&gt;&gt;&gt; way to implement this feature within QEMU?</div>
-<div>&gt;&gt;</div>
-<div>&gt;&gt; It's definitely tricky.</div>
-<div>&gt;&gt;</div>
-<div>&gt;&gt; We definitely need some TLB_FLAGS_MASK bit set so that we're =
-forced through</div>
-<div>&gt;&gt; the</div>
-<div>&gt;&gt; memory slow path. &nbsp;There is no other way to bypass the e=
-ndianness that we've</div>
-<div>&gt;&gt; already encoded from the target instruction.</div>
-<div>&gt;&gt;</div>
-<div>&gt;&gt; Given the tlb_set_page_with_attrs interface, I would think th=
-at we need a new</div>
-<div>&gt;&gt; bit in MemTxAttrs, so that the target/sparc tlb_fill (and sub=
-routines) can</div>
-<div>&gt;&gt; pass</div>
-<div>&gt;&gt; along the TTE bit for the given page.</div>
-<div>&gt;&gt;</div>
-<div>&gt;&gt; We have an existing problem in softmmu_template.h,</div>
-<div>&gt;&gt;</div>
-<div>&gt;&gt; &nbsp; &nbsp; /* ??? Note that the io helpers always read dat=
-a in the target</div>
-<div>&gt;&gt; &nbsp; &nbsp; &nbsp; &nbsp;byte ordering. &nbsp;We should pus=
-h the LE/BE request down into io. &nbsp;*/</div>
-<div>&gt;&gt; &nbsp; &nbsp; res =3D glue(io_read, SUFFIX)(env, mmu_idx, ind=
-ex, addr, retaddr);</div>
-<div>&gt;&gt; &nbsp; &nbsp; res =3D TGT_BE(res);</div>
-<div>&gt;&gt;</div>
-<div>&gt;&gt; We do not want to add a third(!) byte swap along the i/o path=
-. &nbsp;We need to</div>
-<div>&gt;&gt; collapse the two that we have already before considering this=
- one.</div>
-<div>&gt;&gt;</div>
-<div>&gt;&gt; This probably takes the form of:</div>
-<div>&gt;&gt;</div>
-<div>&gt;&gt; (1) Replacing the &quot;int size&quot; argument with &quot;TC=
-GMemOp memop&quot; for</div>
-<div>&gt;&gt; &nbsp; &nbsp; &nbsp; a) io_{read,write}x in accel/tcg/cputlb.=
-c,</div>
-<div>&gt;&gt; &nbsp; &nbsp; &nbsp; b) memory_region_dispatch_{read,write} i=
-n memory.c,</div>
-<div>&gt;&gt; &nbsp; &nbsp; &nbsp; c) adjust_endianness in memory.c.</div>
-<div>&gt;&gt; &nbsp; &nbsp; This carries size&#43;sign&#43;endianness down =
-to the next level.</div>
-<div>&gt;&gt;</div>
-<div>&gt;&gt; (2) In memory.c, adjust_endianness,</div>
-<div>&gt;&gt;</div>
-<div>&gt;&gt; &nbsp; &nbsp; &nbsp;if (memory_region_wrong_endianness(mr)) {=
-</div>
-<div>&gt;&gt; - &nbsp; &nbsp; &nbsp; &nbsp;switch (size) {</div>
-<div>&gt;&gt; &#43; &nbsp; &nbsp; &nbsp; &nbsp;memop ^=3D MO_BSWAP;</div>
-<div>&gt;&gt; &#43; &nbsp; &nbsp;}</div>
-<div>&gt;&gt; &#43; &nbsp; &nbsp;if (memop &amp; MO_BSWAP) {</div>
-<div>&gt;&gt;</div>
-<div>&gt;&gt; &nbsp; &nbsp; For extra credit, re-arrange memory_region_wron=
-g_endianness</div>
-<div>&gt;&gt; &nbsp; &nbsp; to something more explicit -- &quot;wrong&quot;=
- isn't helpful.</div>
-<div>&gt;</div>
-<div>&gt;Finally I've had a bit of spare time to experiment with this appro=
-ach,</div>
-<div>&gt;and from what I can see there are currently 2 issues:</div>
-<div>&gt;</div>
-<div>&gt;</div>
-<div>&gt;1) Using TCGMemOp in memory.c means it is no longer accelerator ag=
-nostic</div>
-<div>&gt;</div>
-<div>&gt;For the moment I've defined a separate MemOp in memory.h and provi=
-ded a</div>
-<div>&gt;mapping function in io_{read,write}x to map from TCGMemOp to MemOp=
- and</div>
-<div>&gt;then pass that into memory_region_dispatch_{read,write}.</div>
-<div>&gt;</div>
-<div>&gt;Other than not referencing TCGMemOp in the memory API, another rea=
-son</div>
-<div>&gt;for doing this was that I wasn't convinced that all the MO_ attrib=
-utes</div>
-<div>&gt;were valid outside of TCG. I do, of course, strongly defer to othe=
-r</div>
-<div>&gt;people's knowledge in this area though.</div>
-<div>&gt;</div>
-<div>&gt;</div>
-<div>&gt;2) The above changes to adjust_endianness() fail when</div>
-<div>&gt;memory_region_dispatch_{read,write} are called recursively</div>
-<div>&gt;</div>
-<div>&gt;Whilst booting qemu-system-sparc64 I see that</div>
-<div>&gt;memory_region_dispatch_{read,write} get called recursively - once =
-via</div>
-<div>&gt;io_{read,write}x and then again via flatview_read_continue() in ex=
-ec.c.</div>
-<div>&gt;</div>
-<div>&gt;The net effect of this is that we perform the bswap correctly at t=
-he</div>
-<div>&gt;tail of the recursion, but then as we travel back up the stack we =
-hit</div>
-<div>&gt;memory_region_dispatch_{read,write} once again causing a second bs=
-wap</div>
-<div>&gt;which means the value is returned with the incorrect endian again.=
-</div>
-<div>&gt;</div>
-<div>&gt;</div>
-<div>&gt;My understanding from your softmmu_template.h comment above is tha=
-t the</div>
-<div>&gt;memory API should do the endian swapping internally allowing the r=
-emoval</div>
-<div>&gt;of the final TGT_BE/TGT_LE applied to the result, or did I get thi=
-s wrong?</div>
-<div>&gt;</div>
-<div>&gt;&gt; (3) In tlb_set_page_with_attrs, notice attrs.byte_swap and se=
-t</div>
-<div>&gt;&gt; &nbsp; &nbsp; a new TLB_FORCE_SLOW bit within TLB_FLAGS_MASK.=
-</div>
-<div>&gt;&gt;</div>
-<div>&gt;&gt; (4) In io_{read,write}x, if iotlbentry-&gt;attrs.byte_swap is=
- set,</div>
-<div>&gt;&gt; &nbsp; &nbsp; then memop ^=3D MO_BSWAP.</div>
-<div><br>
-</div>
-<div>Thanks all for the&nbsp;feedback.</div>
-<div><br>
-</div>
-<div>v2:</div>
-<div>- Moved size&#43;sign&#43;endianness attributes from TCGMemOp into Mem=
-Op.</div>
-<div>&nbsp; In v1 TCGMemOp was re-purposed entirely into MemOp.</div>
-<div>- Replaced MemOp MO_{8|16|32|64} with TCGMemOp MO_{UB|UW|UL|UQ} alias.=
-</div>
-<div>&nbsp; This is to avoid warnings on comparing and coercing different e=
-nums.</div>
-<div>- Renamed get_memop to get_tcgmemop for clarity.</div>
-<div>- MEMOP is now SIZE_MEMOP, which is just ctzl(size).</div>
-<div>- Split patch 3/4 so one memory_region_dispatch_{read|write} interface=
-</div>
-<div>&nbsp; is converted per patch.</div>
-<div>- Do not reuse TLB_RECHECK, use new TLB_FORCE_SLOW instead.</div>
-<div>- Split patch 4/4 so adding the MemTxAddrs parameters and converting</=
-div>
-<div>&nbsp; tlb_set_page() to tlb_set_page_with_attrs() is separate from us=
-age.</div>
-<div>- CC'd maintainers.</div>
-<div><br>
-</div>
-<div>v3:</div>
-<div>- Like v1, the entire TCGMemOp enum is now MemOp.</div>
-<div>- MemOp target dependant attributes are conditional upon NEED_CPU_H</d=
+<div>While interfaces are converted, callers will have existing unsigned</d=
 iv>
+<div>size coerced into a MemOp, and the callee will use this MemOp as an</d=
+iv>
+<div>unsigned size.</div>
 <div><br>
 </div>
-<div>v4:</div>
-<div>- Added Paolo Bonzini as include/exec/memop.h maintainer</div>
+<div>Signed-off-by: Tony Nguyen &lt;tony.nguyen@bt.com&gt;</div>
+<div>---</div>
+<div>&nbsp;include/exec/memop.h &nbsp;| 4 &#43;&#43;&#43;&#43;</div>
+<div>&nbsp;include/exec/memory.h | 9 &#43;&#43;&#43;&#43;&#43;----</div>
+<div>&nbsp;memory.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;| 7 &#4=
+3;&#43;&#43;&#43;&#43;--</div>
+<div>&nbsp;3 files changed, 14 insertions(&#43;), 6 deletions(-)</div>
 <div><br>
 </div>
-<div>Tony Nguyen (15):</div>
-<div>&nbsp; tcg: TCGMemOp is now accelerator independent MemOp</div>
-<div>&nbsp; memory: Access MemoryRegion with MemOp<br>
-</div>
-<div>&nbsp; target/mips: Access MemoryRegion with MemOp</div>
-<div>&nbsp; hw/s390x: Access MemoryRegion with MemOp</div>
-<div>&nbsp; hw/intc/armv7m_nic: Access MemoryRegion with MemOp</div>
-<div>&nbsp; hw/virtio: Access MemoryRegion with MemOp</div>
-<div>&nbsp; hw/vfio: Access MemoryRegion with MemOp</div>
-<div>&nbsp; exec: Access MemoryRegion with MemOp</div>
-<div>&nbsp; cputlb: Access MemoryRegion with MemOp</div>
-<div>&nbsp; memory: Access MemoryRegion with MemOp semantics</div>
-<div>&nbsp; memory: Single byte swap along the I/O path</div>
-<div>&nbsp; cpu: TLB_FLAGS_MASK bit to force memory slow path</div>
-<div>&nbsp; cputlb: Byte swap memory transaction attribute</div>
-<div>&nbsp; target/sparc: Add TLB entry with attributes</div>
-<div>&nbsp; target/sparc: sun4u Invert Endian TTE bit</div>
-<div><br>
-</div>
-<div>&nbsp;MAINTAINERS &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nb=
-sp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | &nbsp; 1 &#43;</div>
-<div>&nbsp;accel/tcg/cputlb.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nb=
-sp; &nbsp; &nbsp; &nbsp; &nbsp;| &nbsp;71 &#43;&#43;&#43;&#43;&#43;&#43;&#4=
-3;&#43;&#43;--------</div>
-<div>&nbsp;exec.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
-nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;| &nbsp; 6 &#4=
-3;-</div>
-<div>&nbsp;hw/intc/armv7m_nvic.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
-&nbsp; &nbsp; &nbsp; | &nbsp;12 &#43;&#43;-</div>
-<div>&nbsp;hw/s390x/s390-pci-inst.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbs=
-p; &nbsp; &nbsp;| &nbsp; 8 &#43;-</div>
-<div>&nbsp;hw/vfio/pci-quirks.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
-nbsp; &nbsp; &nbsp; &nbsp;| &nbsp; 5 &#43;-</div>
-<div>&nbsp;hw/virtio/virtio-pci.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;=
- &nbsp; &nbsp; &nbsp;| &nbsp; 7 &#43;-</div>
-<div>&nbsp;include/exec/cpu-all.h &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;=
- &nbsp; &nbsp; &nbsp;| &nbsp;10 &#43;&#43;-</div>
-<div>&nbsp;include/exec/memattrs.h &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; | &nbsp; 2 &#43;</div>
-<div>&nbsp;include/exec/memop.h &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
-nbsp; &nbsp; &nbsp; &nbsp;| 112 &#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#4=
-3;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#4=
-3;&#43;&#43;&#43;</div>
-<div>&nbsp;include/exec/memory.h &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
-&nbsp; &nbsp; &nbsp; | &nbsp; 9 &#43;&#43;-</div>
-<div>&nbsp;memory.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;=
- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;| &nbsp;37 &#43;&#4=
-3;&#43;&#43;&#43;----</div>
-<div>&nbsp;memory_ldst.inc.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbs=
-p; &nbsp; &nbsp; &nbsp; &nbsp; | &nbsp;18 &#43;&#43;---</div>
-<div>&nbsp;target/alpha/translate.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbs=
-p; &nbsp; &nbsp;| &nbsp; 2 &#43;-</div>
-<div>&nbsp;target/arm/translate-a64.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &n=
-bsp; &nbsp;| &nbsp;48 &#43;&#43;&#43;&#43;&#43;&#43;------</div>
-<div>&nbsp;target/arm/translate-a64.h &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &n=
-bsp; &nbsp;| &nbsp; 2 &#43;-</div>
-<div>&nbsp;target/arm/translate-sve.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &n=
-bsp; &nbsp;| &nbsp; 2 &#43;-</div>
-<div>&nbsp;target/arm/translate.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;=
- &nbsp; &nbsp; &nbsp;| &nbsp;32 &#43;&#43;&#43;&#43;----</div>
-<div>&nbsp;target/arm/translate.h &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;=
- &nbsp; &nbsp; &nbsp;| &nbsp; 2 &#43;-</div>
-<div>&nbsp;target/hppa/translate.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; | &nbsp;14 &#43;&#43;--</div>
-<div>&nbsp;target/i386/translate.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; | 132 &#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#4=
-3;&#43;&#43;&#43;&#43;&#43;----------------</div>
-<div>&nbsp;target/m68k/translate.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; | &nbsp; 2 &#43;-</div>
-<div>&nbsp;target/microblaze/translate.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;=
- | &nbsp; 4 &#43;-</div>
-<div>&nbsp;target/mips/op_helper.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; | &nbsp; 5 &#43;-</div>
-<div>&nbsp;target/mips/translate.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; | &nbsp; 8 &#43;-</div>
-<div>&nbsp;target/openrisc/translate.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
-nbsp; | &nbsp; 4 &#43;-</div>
-<div>&nbsp;target/ppc/translate.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;=
- &nbsp; &nbsp; &nbsp;| &nbsp;12 &#43;--</div>
-<div>&nbsp;target/riscv/insn_trans/trans_rva.inc.c | &nbsp; 8 &#43;-</div>
-<div>&nbsp;target/riscv/insn_trans/trans_rvi.inc.c | &nbsp; 4 &#43;-</div>
-<div>&nbsp;target/s390x/translate.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbs=
-p; &nbsp; &nbsp;| &nbsp; 6 &#43;-</div>
-<div>&nbsp;target/s390x/translate_vx.inc.c &nbsp; &nbsp; &nbsp; &nbsp; | &n=
-bsp;10 &#43;--</div>
-<div>&nbsp;target/sparc/cpu.h &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nb=
-sp; &nbsp; &nbsp; &nbsp; &nbsp;| &nbsp; 2 &#43;</div>
-<div>&nbsp;target/sparc/mmu_helper.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nb=
-sp; &nbsp; | &nbsp;40 &#43;&#43;&#43;&#43;&#43;&#43;----</div>
-<div>&nbsp;target/sparc/translate.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbs=
-p; &nbsp; &nbsp;| &nbsp;14 &#43;&#43;--</div>
-<div>&nbsp;target/tilegx/translate.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nb=
-sp; &nbsp; | &nbsp;10 &#43;--</div>
-<div>&nbsp;target/tricore/translate.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &n=
-bsp; &nbsp;| &nbsp; 8 &#43;-</div>
-<div>&nbsp;tcg/README &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbs=
-p; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;| &nbsp; 2 &#43;-</div>
-<div>&nbsp;tcg/aarch64/tcg-target.inc.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
-&nbsp;| &nbsp;26 &#43;&#43;&#43;----</div>
-<div>&nbsp;tcg/arm/tcg-target.inc.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbs=
-p; &nbsp; &nbsp;| &nbsp;26 &#43;&#43;&#43;----</div>
-<div>&nbsp;tcg/i386/tcg-target.inc.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nb=
-sp; &nbsp; | &nbsp;24 &#43;&#43;&#43;---</div>
-<div>&nbsp;tcg/mips/tcg-target.inc.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nb=
-sp; &nbsp; | &nbsp;16 &#43;&#43;--</div>
-<div>&nbsp;tcg/optimize.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;| &nbsp; 2 &#43;-</div>
-<div>&nbsp;tcg/ppc/tcg-target.inc.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbs=
-p; &nbsp; &nbsp;| &nbsp;12 &#43;--</div>
-<div>&nbsp;tcg/riscv/tcg-target.inc.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &n=
-bsp; &nbsp;| &nbsp;20 &#43;&#43;---</div>
-<div>&nbsp;tcg/s390/tcg-target.inc.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nb=
-sp; &nbsp; | &nbsp;14 &#43;&#43;--</div>
-<div>&nbsp;tcg/sparc/tcg-target.inc.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &n=
-bsp; &nbsp;| &nbsp; 6 &#43;-</div>
-<div>&nbsp;tcg/tcg-op.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &n=
-bsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;| &nbsp;38 &#43;&#43;&#43;&#4=
-3;-----</div>
-<div>&nbsp;tcg/tcg-op.h &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &n=
-bsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;| &nbsp;86 &#43;&#43;&#43;&#4=
-3;&#43;&#43;&#43;&#43;&#43;&#43;-----------</div>
-<div>&nbsp;tcg/tcg.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | &nbsp; 2 &#43;-</div>
-<div>&nbsp;tcg/tcg.h &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | &nbsp;99 &#43;&#43;---=
--------------------</div>
-<div>&nbsp;trace/mem-internal.h &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
-nbsp; &nbsp; &nbsp; &nbsp;| &nbsp; 4 &#43;-</div>
-<div>&nbsp;trace/mem.h &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nb=
-sp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | &nbsp; 4 &#43;-</div>
-<div>&nbsp;52 files changed, 562 insertions(&#43;), 488 deletions(-)</div>
-<div>&nbsp;create mode 100644 include/exec/memop.h</div>
-<div><br>
-</div>
+<div>diff --git a/include/exec/memop.h b/include/exec/memop.h</div>
+<div>index ac58066..09c8d20 100644</div>
+<div>--- a/include/exec/memop.h</div>
+<div>&#43;&#43;&#43; b/include/exec/memop.h</div>
+<div>@@ -106,4 &#43;106,8 @@ typedef enum MemOp {</div>
+<div>&nbsp; &nbsp; &nbsp;MO_SSIZE =3D MO_SIZE | MO_SIGN,</div>
+<div>&nbsp;} MemOp;</div>
+<div>&nbsp;</div>
+<div>&#43;/* No-op while memory_region_dispatch_[read|write] is converted t=
+o MemOp */</div>
+<div>&#43;#define MEMOP_SIZE(op) &nbsp;(op) &nbsp; &nbsp;/* MemOp to size. =
+&nbsp;*/</div>
+<div>&#43;#define SIZE_MEMOP(ul) &nbsp;(ul) &nbsp; &nbsp;/* Size to MemOp. =
+&nbsp;*/</div>
+<div>&#43;</div>
+<div>&nbsp;#endif</div>
+<div>diff --git a/include/exec/memory.h b/include/exec/memory.h</div>
+<div>index bb0961d..30b1c58 100644</div>
+<div>--- a/include/exec/memory.h</div>
+<div>&#43;&#43;&#43; b/include/exec/memory.h</div>
+<div>@@ -19,6 &#43;19,7 @@</div>
+<div>&nbsp;#include &quot;exec/cpu-common.h&quot;</div>
+<div>&nbsp;#include &quot;exec/hwaddr.h&quot;</div>
+<div>&nbsp;#include &quot;exec/memattrs.h&quot;</div>
+<div>&#43;#include &quot;exec/memop.h&quot;</div>
+<div>&nbsp;#include &quot;exec/ramlist.h&quot;</div>
+<div>&nbsp;#include &quot;qemu/queue.h&quot;</div>
+<div>&nbsp;#include &quot;qemu/int128.h&quot;</div>
+<div>@@ -1731,13 &#43;1732,13 @@ void mtree_info(bool flatview, bool dispat=
+ch_tree, bool owner);</div>
+<div>&nbsp; * @mr: #MemoryRegion to access</div>
+<div>&nbsp; * @addr: address within that region</div>
+<div>&nbsp; * @pval: pointer to uint64_t which the data is written to</div>
+<div>- * @size: size of the access in bytes</div>
+<div>&#43; * @op: encodes size of the access in bytes</div>
+<div>&nbsp; * @attrs: memory transaction attributes to use for the access</=
+div>
+<div>&nbsp; */</div>
+<div>&nbsp;MemTxResult memory_region_dispatch_read(MemoryRegion *mr,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
+;hwaddr addr,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
+;uint64_t *pval,</div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
+; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;unsi=
+gned size,</div>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
+nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;=
+MemOp op,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
+;MemTxAttrs attrs);</div>
+<div>&nbsp;/**</div>
+<div>&nbsp; * memory_region_dispatch_write: perform a write directly to the=
+ specified</div>
+<div>@@ -1746,13 &#43;1747,13 @@ MemTxResult memory_region_dispatch_read(Me=
+moryRegion *mr,</div>
+<div>&nbsp; * @mr: #MemoryRegion to access</div>
+<div>&nbsp; * @addr: address within that region</div>
+<div>&nbsp; * @data: data to write</div>
+<div>- * @size: size of the access in bytes</div>
+<div>&#43; * @op: encodes size of the access in bytes</div>
+<div>&nbsp; * @attrs: memory transaction attributes to use for the access</=
+div>
+<div>&nbsp; */</div>
+<div>&nbsp;MemTxResult memory_region_dispatch_write(MemoryRegion *mr,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
+; hwaddr addr,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
+; uint64_t data,</div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
+; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; uns=
+igned size,</div>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
+nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;=
+ MemOp op,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
+; MemTxAttrs attrs);</div>
+<div>&nbsp;</div>
+<div>&nbsp;/**</div>
+<div>diff --git a/memory.c b/memory.c</div>
+<div>index 5d8c9a9..6982e19 100644</div>
+<div>--- a/memory.c</div>
+<div>&#43;&#43;&#43; b/memory.c</div>
+<div>@@ -1439,10 &#43;1439,11 @@ static MemTxResult memory_region_dispatch_=
+read1(MemoryRegion *mr,</div>
+<div>&nbsp;MemTxResult memory_region_dispatch_read(MemoryRegion *mr,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
+;hwaddr addr,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
+;uint64_t *pval,</div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
+; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;unsi=
+gned size,</div>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
+nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;=
+MemOp op,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
+;MemTxAttrs attrs)</div>
+<div>&nbsp;{</div>
+<div>&nbsp; &nbsp; &nbsp;MemTxResult r;</div>
+<div>&#43; &nbsp; &nbsp;unsigned size =3D MEMOP_SIZE(op);</div>
+<div>&nbsp;</div>
+<div>&nbsp; &nbsp; &nbsp;if (!memory_region_access_valid(mr, addr, size, fa=
+lse, attrs)) {</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;*pval =3D unassigned_mem_read(mr, ad=
+dr, size);</div>
+<div>@@ -1483,9 &#43;1484,11 @@ static bool memory_region_dispatch_write_ev=
+entfds(MemoryRegion *mr,</div>
+<div>&nbsp;MemTxResult memory_region_dispatch_write(MemoryRegion *mr,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
+; hwaddr addr,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
+; uint64_t data,</div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
+; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; uns=
+igned size,</div>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
+nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;=
+ MemOp op,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
+; MemTxAttrs attrs)</div>
+<div>&nbsp;{</div>
+<div>&#43; &nbsp; &nbsp;unsigned size =3D MEMOP_SIZE(op);</div>
+<div>&#43;</div>
+<div>&nbsp; &nbsp; &nbsp;if (!memory_region_access_valid(mr, addr, size, tr=
+ue, attrs)) {</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;unassigned_mem_write(mr, addr, data,=
+ size);</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return MEMTX_DECODE_ERROR;</div>
 <div>--&nbsp;</div>
 <div>1.8.3.1</div>
 <div><br>
@@ -673,5 +376,5 @@ sp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | &nbsp; 4 &#43;-</div>
 </body>
 </html>
 
---_000_156404152436523360btcom_--
+--_000_156404164874085917btcom_--
 
