@@ -1,56 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hqY9x-0000Yb-9T
-	for mharc-qemu-riscv@gnu.org; Thu, 25 Jul 2019 03:27:29 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:57809)
+	id 1hqYeR-0001zu-0T
+	for mharc-qemu-riscv@gnu.org; Thu, 25 Jul 2019 03:58:59 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:36109)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <no-reply@patchew.org>) id 1hqY9t-0000Lu-SX
- for qemu-riscv@nongnu.org; Thu, 25 Jul 2019 03:27:27 -0400
+ (envelope-from <tony.nguyen@bt.com>) id 1hqYeN-0001rv-8x
+ for qemu-riscv@nongnu.org; Thu, 25 Jul 2019 03:58:57 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <no-reply@patchew.org>) id 1hqY9r-0007Nv-VD
- for qemu-riscv@nongnu.org; Thu, 25 Jul 2019 03:27:25 -0400
-Resent-Date: Thu, 25 Jul 2019 03:27:25 -0400
-Resent-Message-Id: <E1hqY9r-0007Nv-VD@eggs.gnu.org>
-Received: from sender4-of-o55.zoho.com ([136.143.188.55]:21585)
+ (envelope-from <tony.nguyen@bt.com>) id 1hqYeK-0007wA-Qd
+ for qemu-riscv@nongnu.org; Thu, 25 Jul 2019 03:58:55 -0400
+Received: from smtpe1.intersmtp.com ([213.121.35.77]:5178)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <no-reply@patchew.org>)
- id 1hqY9e-0007CP-Ar; Thu, 25 Jul 2019 03:27:10 -0400
-ARC-Seal: i=1; a=rsa-sha256; t=1564039552; cv=none; d=zoho.com; s=zohoarc; 
- b=VrQVGH72Dm0C7kBVcRDBugptKol8Oii5PA2g6JjaUrij9uGomvUO8gbeH9P/8ZCKnXKhLsg0TdtFmQv0XsFy4fghP/Qy9Wpus0QeSNTfcF0Y7AIRa15OOPPSdqc0qC4oTMNvOu1YxaHSYvgyH9d6L1Ce2QoHP4XJd1XFf6ZYN1s=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zoho.com;
- s=zohoarc; t=1564039552;
- h=Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:MIME-Version:Message-ID:Reply-To:Subject:To:ARC-Authentication-Results;
- bh=BMLpS5YZrjcjPSM+b0VxRDx72v66b+XWKkfzMYSU9mo=; 
- b=jAo+npRG/l1HdPbzGpjBXFXTAQF5x6K1jtqMq4B4JlMzSArCpvjFsXmHMPSPGp1vl3uZ+rtq0YXKhmW1TaxKhwl/IPTrPGq9f3ZcJkIUmmfn2KwZBGl61iCFfiRfBl2rso9M33q0yT6VAJDM5qVENKMWOAsdUry3jfbxCqxb9GQ=
-ARC-Authentication-Results: i=1; mx.zoho.com; dkim=pass  header.i=patchew.org;
- spf=pass  smtp.mailfrom=no-reply@patchew.org;
- dmarc=pass header.from=<no-reply@patchew.org>
- header.from=<no-reply@patchew.org>
-Received: from [172.17.0.3] (23.253.156.214 [23.253.156.214]) by
- mx.zohomail.com with SMTPS id 1564039551064710.3259573875707;
- Thu, 25 Jul 2019 00:25:51 -0700 (PDT)
-Message-ID: <156403954823.18867.515280191493586508@c4a48874b076>
+ (Exim 4.71) (envelope-from <tony.nguyen@bt.com>)
+ id 1hqYeF-0007nv-O8; Thu, 25 Jul 2019 03:58:48 -0400
+Received: from tpw09926dag18e.domain1.systemhost.net (10.9.212.18) by
+ BWP09926082.bt.com (10.36.82.113) with Microsoft SMTP Server (version=TLS1_2, 
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P256) id 15.1.1713.5; Thu, 25
+ Jul 2019 08:58:44 +0100
+Received: from tpw09926dag18e.domain1.systemhost.net (10.9.212.18) by
+ tpw09926dag18e.domain1.systemhost.net (10.9.212.18) with Microsoft SMTP
+ Server (TLS) id 15.0.1395.4; Thu, 25 Jul 2019 08:58:44 +0100
+Received: from tpw09926dag18e.domain1.systemhost.net
+ ([fe80::a946:6348:ccf4:fa6c]) by tpw09926dag18e.domain1.systemhost.net
+ ([fe80::a946:6348:ccf4:fa6c%12]) with mapi id 15.00.1395.000; Thu, 25 Jul
+ 2019 08:58:44 +0100
+From: <tony.nguyen@bt.com>
+To: <qemu-devel@nongnu.org>
+CC: <peter.maydell@linaro.org>, <walling@linux.ibm.com>, <mst@redhat.com>,
+ <palmer@sifive.com>, <mark.cave-ayland@ilande.co.uk>,
+ <Alistair.Francis@wdc.com>, <arikalo@wavecomp.com>, <david@redhat.com>,
+ <pasic@linux.ibm.com>, <borntraeger@de.ibm.com>, <rth@twiddle.net>,
+ <atar4qemu@gmail.com>, <ehabkost@redhat.com>, <sw@weilnetz.de>,
+ <qemu-s390x@nongnu.org>, <qemu-arm@nongnu.org>,
+ <david@gibson.dropbear.id.au>, <qemu-riscv@nongnu.org>, <cohuck@redhat.com>,
+ <alex.williamson@redhat.com>, <qemu-ppc@nongnu.org>,
+ <amarkovic@wavecomp.com>, <pbonzini@redhat.com>, <aurelien@aurel32.net>
+Thread-Topic: [Qemu-devel] [PATCH v4 00/15] Invert Endian bit in SPARCv9 MMU
+ TTE
+Thread-Index: AQHVQr7IivTZaitMbk2NSP05VRPAXQ==
+Date: Thu, 25 Jul 2019 07:58:44 +0000
+Message-ID: <1564041524365.23360@bt.com>
+References: <e9c6e5310b1a4863be45d45bf087fc3d@tpw09926dag18e.domain1.systemhost.net>, 
+ <1563810716254.18886@bt.com>,<1564038073754.91133@bt.com>
 In-Reply-To: <1564038073754.91133@bt.com>
-Reply-To: <qemu-devel@nongnu.org>
+Accept-Language: en-AU, en-GB, en-US
+Content-Language: en-AU
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.187.101.42]
+Content-Type: multipart/alternative; boundary="_000_156404152436523360btcom_"
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-Resent-From: 
-From: no-reply@patchew.org
-To: tony.nguyen@bt.com
-Cc: qemu-devel@nongnu.org, peter.maydell@linaro.org, walling@linux.ibm.com,
- mst@redhat.com, palmer@sifive.com, mark.cave-ayland@ilande.co.uk,
- Alistair.Francis@wdc.com, arikalo@wavecomp.com, david@redhat.com,
- pasic@linux.ibm.com, borntraeger@de.ibm.com, rth@twiddle.net,
- atar4qemu@gmail.com, ehabkost@redhat.com, sw@weilnetz.de,
- qemu-s390x@nongnu.org, qemu-arm@nongnu.org, david@gibson.dropbear.id.au,
- qemu-riscv@nongnu.org, cohuck@redhat.com, alex.williamson@redhat.com,
- qemu-ppc@nongnu.org, amarkovic@wavecomp.com, pbonzini@redhat.com,
- aurelien@aurel32.net
-Date: Thu, 25 Jul 2019 00:25:51 -0700 (PDT)
-X-ZohoMailClient: External
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
-X-Received-From: 136.143.188.55
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v3 00/15] Invert Endian bit in
+X-detected-operating-system: by eggs.gnu.org: Windows 7 or 8 [fuzzy]
+X-Received-From: 213.121.35.77
+Subject: [Qemu-riscv] [Qemu-devel] [PATCH v4 00/15] Invert Endian bit in
  SPARCv9 MMU TTE
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -63,180 +65,613 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Jul 2019 07:27:27 -0000
+X-List-Received-Date: Thu, 25 Jul 2019 07:58:57 -0000
 
-UGF0Y2hldyBVUkw6IGh0dHBzOi8vcGF0Y2hldy5vcmcvUUVNVS8xNTY0MDM4MDczNzU0LjkxMTMz
-QGJ0LmNvbS8KCgoKSGksCgpUaGlzIHNlcmllcyBzZWVtcyB0byBoYXZlIHNvbWUgY29kaW5nIHN0
-eWxlIHByb2JsZW1zLiBTZWUgb3V0cHV0IGJlbG93IGZvcgptb3JlIGluZm9ybWF0aW9uOgoKVHlw
-ZTogc2VyaWVzClN1YmplY3Q6IFtRZW11LWRldmVsXSBbUEFUQ0ggdjMgMDAvMTVdIEludmVydCBF
-bmRpYW4gYml0IGluIFNQQVJDdjkgTU1VIFRURQpNZXNzYWdlLWlkOiAxNTY0MDM4MDczNzU0Ljkx
-MTMzQGJ0LmNvbQoKPT09IFRFU1QgU0NSSVBUIEJFR0lOID09PQojIS9iaW4vYmFzaApnaXQgcmV2
-LXBhcnNlIGJhc2UgPiAvZGV2L251bGwgfHwgZXhpdCAwCmdpdCBjb25maWcgLS1sb2NhbCBkaWZm
-LnJlbmFtZWxpbWl0IDAKZ2l0IGNvbmZpZyAtLWxvY2FsIGRpZmYucmVuYW1lcyBUcnVlCmdpdCBj
-b25maWcgLS1sb2NhbCBkaWZmLmFsZ29yaXRobSBoaXN0b2dyYW0KLi9zY3JpcHRzL2NoZWNrcGF0
-Y2gucGwgLS1tYWlsYmFjayBiYXNlLi4KPT09IFRFU1QgU0NSSVBUIEVORCA9PT0KClVwZGF0aW5n
-IDNjOGNmNWE5YzIxZmY4NzgyMTY0ZDFkZWY3ZjQ0YmQ4ODg3MTMzODQKRnJvbSBodHRwczovL2dp
-dGh1Yi5jb20vcGF0Y2hldy1wcm9qZWN0L3FlbXUKICogW25ldyB0YWddICAgICAgICAgcGF0Y2hl
-dy8xNTY0MDM1MjU2LTExODI4LTEtZ2l0LXNlbmQtZW1haWwtamluZzIubGl1QGxpbnV4LmludGVs
-LmNvbSAtPiBwYXRjaGV3LzE1NjQwMzUyNTYtMTE4MjgtMS1naXQtc2VuZC1lbWFpbC1qaW5nMi5s
-aXVAbGludXguaW50ZWwuY29tCiAqIFtuZXcgdGFnXSAgICAgICAgIHBhdGNoZXcvMTU2NDAzODA3
-Mzc1NC45MTEzM0BidC5jb20gLT4gcGF0Y2hldy8xNTY0MDM4MDczNzU0LjkxMTMzQGJ0LmNvbQog
-LSBbdGFnIHVwZGF0ZV0gICAgICBwYXRjaGV3LzIwMTkwNzI0MDcwMzA3LjEyNTY4LTEtcmljaGFy
-ZHcueWFuZ0BsaW51eC5pbnRlbC5jb20gLT4gcGF0Y2hldy8yMDE5MDcyNDA3MDMwNy4xMjU2OC0x
-LXJpY2hhcmR3LnlhbmdAbGludXguaW50ZWwuY29tClN1Ym1vZHVsZSAnY2Fwc3RvbmUnIChodHRw
-czovL2dpdC5xZW11Lm9yZy9naXQvY2Fwc3RvbmUuZ2l0KSByZWdpc3RlcmVkIGZvciBwYXRoICdj
-YXBzdG9uZScKU3VibW9kdWxlICdkdGMnIChodHRwczovL2dpdC5xZW11Lm9yZy9naXQvZHRjLmdp
-dCkgcmVnaXN0ZXJlZCBmb3IgcGF0aCAnZHRjJwpTdWJtb2R1bGUgJ3JvbXMvUWVtdU1hY0RyaXZl
-cnMnIChodHRwczovL2dpdC5xZW11Lm9yZy9naXQvUWVtdU1hY0RyaXZlcnMuZ2l0KSByZWdpc3Rl
-cmVkIGZvciBwYXRoICdyb21zL1FlbXVNYWNEcml2ZXJzJwpTdWJtb2R1bGUgJ3JvbXMvU0xPRicg
-KGh0dHBzOi8vZ2l0LnFlbXUub3JnL2dpdC9TTE9GLmdpdCkgcmVnaXN0ZXJlZCBmb3IgcGF0aCAn
-cm9tcy9TTE9GJwpTdWJtb2R1bGUgJ3JvbXMvZWRrMicgKGh0dHBzOi8vZ2l0LnFlbXUub3JnL2dp
-dC9lZGsyLmdpdCkgcmVnaXN0ZXJlZCBmb3IgcGF0aCAncm9tcy9lZGsyJwpTdWJtb2R1bGUgJ3Jv
-bXMvaXB4ZScgKGh0dHBzOi8vZ2l0LnFlbXUub3JnL2dpdC9pcHhlLmdpdCkgcmVnaXN0ZXJlZCBm
-b3IgcGF0aCAncm9tcy9pcHhlJwpTdWJtb2R1bGUgJ3JvbXMvb3BlbmJpb3MnIChodHRwczovL2dp
-dC5xZW11Lm9yZy9naXQvb3BlbmJpb3MuZ2l0KSByZWdpc3RlcmVkIGZvciBwYXRoICdyb21zL29w
-ZW5iaW9zJwpTdWJtb2R1bGUgJ3JvbXMvb3BlbmhhY2t3YXJlJyAoaHR0cHM6Ly9naXQucWVtdS5v
-cmcvZ2l0L29wZW5oYWNrd2FyZS5naXQpIHJlZ2lzdGVyZWQgZm9yIHBhdGggJ3JvbXMvb3Blbmhh
-Y2t3YXJlJwpTdWJtb2R1bGUgJ3JvbXMvb3BlbnNiaScgKGh0dHBzOi8vZ2l0LnFlbXUub3JnL2dp
-dC9vcGVuc2JpLmdpdCkgcmVnaXN0ZXJlZCBmb3IgcGF0aCAncm9tcy9vcGVuc2JpJwpTdWJtb2R1
-bGUgJ3JvbXMvcWVtdS1wYWxjb2RlJyAoaHR0cHM6Ly9naXQucWVtdS5vcmcvZ2l0L3FlbXUtcGFs
-Y29kZS5naXQpIHJlZ2lzdGVyZWQgZm9yIHBhdGggJ3JvbXMvcWVtdS1wYWxjb2RlJwpTdWJtb2R1
-bGUgJ3JvbXMvc2VhYmlvcycgKGh0dHBzOi8vZ2l0LnFlbXUub3JnL2dpdC9zZWFiaW9zLmdpdC8p
-IHJlZ2lzdGVyZWQgZm9yIHBhdGggJ3JvbXMvc2VhYmlvcycKU3VibW9kdWxlICdyb21zL3NlYWJp
-b3MtaHBwYScgKGh0dHBzOi8vZ2l0LnFlbXUub3JnL2dpdC9zZWFiaW9zLWhwcGEuZ2l0KSByZWdp
-c3RlcmVkIGZvciBwYXRoICdyb21zL3NlYWJpb3MtaHBwYScKU3VibW9kdWxlICdyb21zL3NnYWJp
-b3MnIChodHRwczovL2dpdC5xZW11Lm9yZy9naXQvc2dhYmlvcy5naXQpIHJlZ2lzdGVyZWQgZm9y
-IHBhdGggJ3JvbXMvc2dhYmlvcycKU3VibW9kdWxlICdyb21zL3NraWJvb3QnIChodHRwczovL2dp
-dC5xZW11Lm9yZy9naXQvc2tpYm9vdC5naXQpIHJlZ2lzdGVyZWQgZm9yIHBhdGggJ3JvbXMvc2tp
-Ym9vdCcKU3VibW9kdWxlICdyb21zL3UtYm9vdCcgKGh0dHBzOi8vZ2l0LnFlbXUub3JnL2dpdC91
-LWJvb3QuZ2l0KSByZWdpc3RlcmVkIGZvciBwYXRoICdyb21zL3UtYm9vdCcKU3VibW9kdWxlICdy
-b21zL3UtYm9vdC1zYW00NjBleCcgKGh0dHBzOi8vZ2l0LnFlbXUub3JnL2dpdC91LWJvb3Qtc2Ft
-NDYwZXguZ2l0KSByZWdpc3RlcmVkIGZvciBwYXRoICdyb21zL3UtYm9vdC1zYW00NjBleCcKU3Vi
-bW9kdWxlICdzbGlycCcgKGh0dHBzOi8vZ2l0LnFlbXUub3JnL2dpdC9saWJzbGlycC5naXQpIHJl
-Z2lzdGVyZWQgZm9yIHBhdGggJ3NsaXJwJwpTdWJtb2R1bGUgJ3Rlc3RzL2ZwL2JlcmtlbGV5LXNv
-ZnRmbG9hdC0zJyAoaHR0cHM6Ly9naXQucWVtdS5vcmcvZ2l0L2JlcmtlbGV5LXNvZnRmbG9hdC0z
-LmdpdCkgcmVnaXN0ZXJlZCBmb3IgcGF0aCAndGVzdHMvZnAvYmVya2VsZXktc29mdGZsb2F0LTMn
-ClN1Ym1vZHVsZSAndGVzdHMvZnAvYmVya2VsZXktdGVzdGZsb2F0LTMnIChodHRwczovL2dpdC5x
-ZW11Lm9yZy9naXQvYmVya2VsZXktdGVzdGZsb2F0LTMuZ2l0KSByZWdpc3RlcmVkIGZvciBwYXRo
-ICd0ZXN0cy9mcC9iZXJrZWxleS10ZXN0ZmxvYXQtMycKU3VibW9kdWxlICd1aS9rZXljb2RlbWFw
-ZGInIChodHRwczovL2dpdC5xZW11Lm9yZy9naXQva2V5Y29kZW1hcGRiLmdpdCkgcmVnaXN0ZXJl
-ZCBmb3IgcGF0aCAndWkva2V5Y29kZW1hcGRiJwpDbG9uaW5nIGludG8gJ2NhcHN0b25lJy4uLgpT
-dWJtb2R1bGUgcGF0aCAnY2Fwc3RvbmUnOiBjaGVja2VkIG91dCAnMjJlYWQzZTBiZmRiODc1MTY2
-NTY0NTMzMzYxNjBlMGEzN2IwNjZiZicKQ2xvbmluZyBpbnRvICdkdGMnLi4uClN1Ym1vZHVsZSBw
-YXRoICdkdGMnOiBjaGVja2VkIG91dCAnODhmMTg5MDlkYjczMWE2Mjc0NTZmMjZkNzc5NDQ1Zjg0
-ZTQ0OTUzNicKQ2xvbmluZyBpbnRvICdyb21zL1FlbXVNYWNEcml2ZXJzJy4uLgpTdWJtb2R1bGUg
-cGF0aCAncm9tcy9RZW11TWFjRHJpdmVycyc6IGNoZWNrZWQgb3V0ICc5MGM0ODhkNWY0YTQwNzM0
-MjI0N2I5ZWE4NjlkZjFjMmQ5YzhlMjY2JwpDbG9uaW5nIGludG8gJ3JvbXMvU0xPRicuLi4KU3Vi
-bW9kdWxlIHBhdGggJ3JvbXMvU0xPRic6IGNoZWNrZWQgb3V0ICdiYTFhYjM2MGVlYmU2MzM4YmI4
-ZDdkODNhOTIyMGNjZjdlMjEzYWYzJwpDbG9uaW5nIGludG8gJ3JvbXMvZWRrMicuLi4KU3VibW9k
-dWxlIHBhdGggJ3JvbXMvZWRrMic6IGNoZWNrZWQgb3V0ICcyMGQyZTVhMTI1ZTM0ZmM4NTAxMDI2
-NjEzYTcxNTQ5YjJhMWEzZTU0JwpTdWJtb2R1bGUgJ1NvZnRGbG9hdCcgKGh0dHBzOi8vZ2l0aHVi
-LmNvbS91Y2ItYmFyL2JlcmtlbGV5LXNvZnRmbG9hdC0zLmdpdCkgcmVnaXN0ZXJlZCBmb3IgcGF0
-aCAnQXJtUGtnL0xpYnJhcnkvQXJtU29mdEZsb2F0TGliL2JlcmtlbGV5LXNvZnRmbG9hdC0zJwpT
-dWJtb2R1bGUgJ0NyeXB0b1BrZy9MaWJyYXJ5L09wZW5zc2xMaWIvb3BlbnNzbCcgKGh0dHBzOi8v
-Z2l0aHViLmNvbS9vcGVuc3NsL29wZW5zc2wpIHJlZ2lzdGVyZWQgZm9yIHBhdGggJ0NyeXB0b1Br
-Zy9MaWJyYXJ5L09wZW5zc2xMaWIvb3BlbnNzbCcKQ2xvbmluZyBpbnRvICdBcm1Qa2cvTGlicmFy
-eS9Bcm1Tb2Z0RmxvYXRMaWIvYmVya2VsZXktc29mdGZsb2F0LTMnLi4uClN1Ym1vZHVsZSBwYXRo
-ICdyb21zL2VkazIvQXJtUGtnL0xpYnJhcnkvQXJtU29mdEZsb2F0TGliL2JlcmtlbGV5LXNvZnRm
-bG9hdC0zJzogY2hlY2tlZCBvdXQgJ2I2NGFmNDFjMzI3NmY5N2YwZTE4MTkyMDQwMGVlMDU2Yjlj
-ODgwMzcnCkNsb25pbmcgaW50byAnQ3J5cHRvUGtnL0xpYnJhcnkvT3BlbnNzbExpYi9vcGVuc3Ns
-Jy4uLgpTdWJtb2R1bGUgcGF0aCAncm9tcy9lZGsyL0NyeXB0b1BrZy9MaWJyYXJ5L09wZW5zc2xM
-aWIvb3BlbnNzbCc6IGNoZWNrZWQgb3V0ICc1MGVhYWM5ZjMzMzc2NjcyNTlkZTcyNTQ1MWYyMDFl
-Nzg0NTk5Njg3JwpTdWJtb2R1bGUgJ2JvcmluZ3NzbCcgKGh0dHBzOi8vYm9yaW5nc3NsLmdvb2ds
-ZXNvdXJjZS5jb20vYm9yaW5nc3NsKSByZWdpc3RlcmVkIGZvciBwYXRoICdib3Jpbmdzc2wnClN1
-Ym1vZHVsZSAna3JiNScgKGh0dHBzOi8vZ2l0aHViLmNvbS9rcmI1L2tyYjUpIHJlZ2lzdGVyZWQg
-Zm9yIHBhdGggJ2tyYjUnClN1Ym1vZHVsZSAncHljYS5jcnlwdG9ncmFwaHknIChodHRwczovL2dp
-dGh1Yi5jb20vcHljYS9jcnlwdG9ncmFwaHkuZ2l0KSByZWdpc3RlcmVkIGZvciBwYXRoICdweWNh
-LWNyeXB0b2dyYXBoeScKQ2xvbmluZyBpbnRvICdib3Jpbmdzc2wnLi4uClN1Ym1vZHVsZSBwYXRo
-ICdyb21zL2VkazIvQ3J5cHRvUGtnL0xpYnJhcnkvT3BlbnNzbExpYi9vcGVuc3NsL2JvcmluZ3Nz
-bCc6IGNoZWNrZWQgb3V0ICcyMDcwZjhhZDkxNTFkYzhmM2E3M2JmZmFhMTQ2YjVlNjkzN2E1ODNm
-JwpDbG9uaW5nIGludG8gJ2tyYjUnLi4uClN1Ym1vZHVsZSBwYXRoICdyb21zL2VkazIvQ3J5cHRv
-UGtnL0xpYnJhcnkvT3BlbnNzbExpYi9vcGVuc3NsL2tyYjUnOiBjaGVja2VkIG91dCAnYjlhZDZj
-NDk1MDVjOTZhMDg4MzI2YjYyYTUyNTY4ZTM0ODRmMjE2OCcKQ2xvbmluZyBpbnRvICdweWNhLWNy
-eXB0b2dyYXBoeScuLi4KU3VibW9kdWxlIHBhdGggJ3JvbXMvZWRrMi9DcnlwdG9Qa2cvTGlicmFy
-eS9PcGVuc3NsTGliL29wZW5zc2wvcHljYS1jcnlwdG9ncmFwaHknOiBjaGVja2VkIG91dCAnMDk0
-MDMxMDBkZTJmNmYxY2RkMGQ0ODRkY2I4ZTYyMGYxYzMzNWM4ZicKQ2xvbmluZyBpbnRvICdyb21z
-L2lweGUnLi4uClN1Ym1vZHVsZSBwYXRoICdyb21zL2lweGUnOiBjaGVja2VkIG91dCAnZGU0NTY1
-Y2JlNzZlYTlmNzkxM2EwMWYzMzFiZTNlZTkwMWJiNmUxNycKQ2xvbmluZyBpbnRvICdyb21zL29w
-ZW5iaW9zJy4uLgpTdWJtb2R1bGUgcGF0aCAncm9tcy9vcGVuYmlvcyc6IGNoZWNrZWQgb3V0ICdj
-NzllMGVjYjg0ZjRmMWVlM2Y3M2Y1MjE2MjJlMjY0ZWRkMWJmMTc0JwpDbG9uaW5nIGludG8gJ3Jv
-bXMvb3BlbmhhY2t3YXJlJy4uLgpTdWJtb2R1bGUgcGF0aCAncm9tcy9vcGVuaGFja3dhcmUnOiBj
-aGVja2VkIG91dCAnYzU1OWRhN2M4ZWVjNWU0NWVmMWY2Nzk3ODgyN2FmNmYwYjk1NDZmNScKQ2xv
-bmluZyBpbnRvICdyb21zL29wZW5zYmknLi4uClN1Ym1vZHVsZSBwYXRoICdyb21zL29wZW5zYmkn
-OiBjaGVja2VkIG91dCAnY2UyMjhlZTA5MTlkZWI5OTU3MTkyZDcyM2VlY2M4YWFhZTI2OTdjNicK
-Q2xvbmluZyBpbnRvICdyb21zL3FlbXUtcGFsY29kZScuLi4KU3VibW9kdWxlIHBhdGggJ3JvbXMv
-cWVtdS1wYWxjb2RlJzogY2hlY2tlZCBvdXQgJ2JmMGUxMzY5ODg3MjQ1MDE2NGZhNzA0MGRhMzZh
-OTVkMmQ0YjMyNmYnCkNsb25pbmcgaW50byAncm9tcy9zZWFiaW9zJy4uLgpTdWJtb2R1bGUgcGF0
-aCAncm9tcy9zZWFiaW9zJzogY2hlY2tlZCBvdXQgJ2E1Y2FiNThlOWEzZmI2ZTE2OGFiYTkxOWM1
-NjY5YmVhNDA2NTczYjQnCkNsb25pbmcgaW50byAncm9tcy9zZWFiaW9zLWhwcGEnLi4uClN1Ym1v
-ZHVsZSBwYXRoICdyb21zL3NlYWJpb3MtaHBwYSc6IGNoZWNrZWQgb3V0ICcwZjRmZTg0NjU4MTY1
-ZTk2Y2UzNTg3MGZkMTlmYzYzNGUxODJlNzdiJwpDbG9uaW5nIGludG8gJ3JvbXMvc2dhYmlvcycu
-Li4KU3VibW9kdWxlIHBhdGggJ3JvbXMvc2dhYmlvcyc6IGNoZWNrZWQgb3V0ICdjYmFlZTUyMjg3
-ZTVmMzIzNzMxODFjZmY1MGEwMGI2YzRhYzkwMTVhJwpDbG9uaW5nIGludG8gJ3JvbXMvc2tpYm9v
-dCcuLi4KU3VibW9kdWxlIHBhdGggJ3JvbXMvc2tpYm9vdCc6IGNoZWNrZWQgb3V0ICcyNjFjYThl
-Nzc5ZTUxMzg4NjlhNDVmMTc0Y2FhNDliZTZhMjc0NTAxJwpDbG9uaW5nIGludG8gJ3JvbXMvdS1i
-b290Jy4uLgpTdWJtb2R1bGUgcGF0aCAncm9tcy91LWJvb3QnOiBjaGVja2VkIG91dCAnZDM2ODky
-NjdmOTJjNTk1NmUwOWNjN2QxYmFhNDcwMDE0MTY2MmJmZicKQ2xvbmluZyBpbnRvICdyb21zL3Ut
-Ym9vdC1zYW00NjBleCcuLi4KU3VibW9kdWxlIHBhdGggJ3JvbXMvdS1ib290LXNhbTQ2MGV4Jzog
-Y2hlY2tlZCBvdXQgJzYwYjM5MTZmMzNlNjE3YTgxNTk3M2M1YTZkZjc3MDU1YjJlM2E1ODgnCkNs
-b25pbmcgaW50byAnc2xpcnAnLi4uClN1Ym1vZHVsZSBwYXRoICdzbGlycCc6IGNoZWNrZWQgb3V0
-ICdmMGRhNjcyNjIwN2I3NDBmNjEwMTAyOGIyOTkyZjkxODQ3N2E0YjA4JwpDbG9uaW5nIGludG8g
-J3Rlc3RzL2ZwL2JlcmtlbGV5LXNvZnRmbG9hdC0zJy4uLgpTdWJtb2R1bGUgcGF0aCAndGVzdHMv
-ZnAvYmVya2VsZXktc29mdGZsb2F0LTMnOiBjaGVja2VkIG91dCAnYjY0YWY0MWMzMjc2Zjk3ZjBl
-MTgxOTIwNDAwZWUwNTZiOWM4ODAzNycKQ2xvbmluZyBpbnRvICd0ZXN0cy9mcC9iZXJrZWxleS10
-ZXN0ZmxvYXQtMycuLi4KU3VibW9kdWxlIHBhdGggJ3Rlc3RzL2ZwL2JlcmtlbGV5LXRlc3RmbG9h
-dC0zJzogY2hlY2tlZCBvdXQgJzVhNTlkY2VjMTkzMjczOTZhMDExYTE3ZmQ5MjRhZWQ0ZmVjNDE2
-YjMnCkNsb25pbmcgaW50byAndWkva2V5Y29kZW1hcGRiJy4uLgpTdWJtb2R1bGUgcGF0aCAndWkv
-a2V5Y29kZW1hcGRiJzogY2hlY2tlZCBvdXQgJzZiM2Q3MTZlMmI2NDcyZWI3MTg5ZDMyMjA1NTIy
-ODBlZjNkODMyY2UnClN3aXRjaGVkIHRvIGEgbmV3IGJyYW5jaCAndGVzdCcKMTM3YjZmYSB0YXJn
-ZXQvc3BhcmM6IHN1bjR1IEludmVydCBFbmRpYW4gVFRFIGJpdAowZWUzYzdmIHRhcmdldC9zcGFy
-YzogQWRkIFRMQiBlbnRyeSB3aXRoIGF0dHJpYnV0ZXMKN2VmYWQzMSBjcHV0bGI6IEJ5dGUgc3dh
-cCBtZW1vcnkgdHJhbnNhY3Rpb24gYXR0cmlidXRlCjU5NmJkZGQgY3B1OiBUTEJfRkxBR1NfTUFT
-SyBiaXQgdG8gZm9yY2UgbWVtb3J5IHNsb3cgcGF0aApiOTQwYTA3IG1lbW9yeTogU2luZ2xlIGJ5
-dGUgc3dhcCBhbG9uZyB0aGUgSS9PIHBhdGgKOWExNzVmMSBtZW1vcnk6IEFjY2VzcyBNZW1vcnlS
-ZWdpb24gd2l0aCBNZW1PcCBzZW1hbnRpY3MKMWE3NWI3MSBjcHV0bGI6IEFjY2VzcyBNZW1vcnlS
-ZWdpb24gd2l0aCBNZW1PcAozNTk0YTk1IGV4ZWM6IEFjY2VzcyBNZW1vcnlSZWdpb24gd2l0aCBN
-ZW1PcAoyODNkNGNkIGh3L3ZmaW86IEFjY2VzcyBNZW1vcnlSZWdpb24gd2l0aCBNZW1PcAo5YTk5
-ODQ4IGh3L3ZpcnRpbzogQWNjZXNzIE1lbW9yeVJlZ2lvbiB3aXRoIE1lbU9wCjkzNjJhMmYgaHcv
-aW50Yy9hcm12N21fbmljOiBBY2Nlc3MgTWVtb3J5UmVnaW9uIHdpdGggTWVtT3AKMDViZGM1YSBo
-dy9zMzkweDogQWNjZXNzIE1lbW9yeVJlZ2lvbiB3aXRoIE1lbU9wCmRjNDJmMTMgdGFyZ2V0L21p
-cHM6IEFjY2VzcyBNZW1vcnlSZWdpb24gd2l0aCBNZW1PcAo3MjNjNDE4IG1lbW9yeTogQWNjZXNz
-IE1lbW9yeVJlZ2lvbiB3aXRoIE1lbU9wCmYxODM2ZTYgdGNnOiBUQ0dNZW1PcCBpcyBub3cgYWNj
-ZWxlcmF0b3IgaW5kZXBlbmRlbnQgTWVtT3AKCj09PSBPVVRQVVQgQkVHSU4gPT09CjEvMTUgQ2hl
-Y2tpbmcgY29tbWl0IGYxODM2ZTY0MjQ0MiAodGNnOiBUQ0dNZW1PcCBpcyBub3cgYWNjZWxlcmF0
-b3IgaW5kZXBlbmRlbnQgTWVtT3ApCldBUk5JTkc6IGFkZGVkLCBtb3ZlZCBvciBkZWxldGVkIGZp
-bGUocyksIGRvZXMgTUFJTlRBSU5FUlMgbmVlZCB1cGRhdGluZz8KIzI5OiAKbmV3IGZpbGUgbW9k
-ZSAxMDA2NDQKCkVSUk9SOiAiZm9vKiBiYXIiIHNob3VsZCBiZSAiZm9vICpiYXIiCiMyMTMyOiBG
-SUxFOiB0Y2cvczM5MC90Y2ctdGFyZ2V0LmluYy5jOjE1NDc6CitzdGF0aWMgVENHUmVnIHRjZ19v
-dXRfdGxiX3JlYWQoVENHQ29udGV4dCogcywgVENHUmVnIGFkZHJfcmVnLCBNZW1PcCBvcGMsCgp0
-b3RhbDogMSBlcnJvcnMsIDEgd2FybmluZ3MsIDIyNzAgbGluZXMgY2hlY2tlZAoKUGF0Y2ggMS8x
-NSBoYXMgc3R5bGUgcHJvYmxlbXMsIHBsZWFzZSByZXZpZXcuICBJZiBhbnkgb2YgdGhlc2UgZXJy
-b3JzCmFyZSBmYWxzZSBwb3NpdGl2ZXMgcmVwb3J0IHRoZW0gdG8gdGhlIG1haW50YWluZXIsIHNl
-ZQpDSEVDS1BBVENIIGluIE1BSU5UQUlORVJTLgoKMi8xNSBDaGVja2luZyBjb21taXQgNzIzYzQx
-ODYyZDVjIChtZW1vcnk6IEFjY2VzcyBNZW1vcnlSZWdpb24gd2l0aCBNZW1PcCkKMy8xNSBDaGVj
-a2luZyBjb21taXQgZGM0MmYxMzY1MDAzICh0YXJnZXQvbWlwczogQWNjZXNzIE1lbW9yeVJlZ2lv
-biB3aXRoIE1lbU9wKQo0LzE1IENoZWNraW5nIGNvbW1pdCAwNWJkYzVhNmZmMTYgKGh3L3MzOTB4
-OiBBY2Nlc3MgTWVtb3J5UmVnaW9uIHdpdGggTWVtT3ApCjUvMTUgQ2hlY2tpbmcgY29tbWl0IDkz
-NjJhMmY5YWQ4YSAoaHcvaW50Yy9hcm12N21fbmljOiBBY2Nlc3MgTWVtb3J5UmVnaW9uIHdpdGgg
-TWVtT3ApCjYvMTUgQ2hlY2tpbmcgY29tbWl0IDlhOTk4NDg0MDBmNCAoaHcvdmlydGlvOiBBY2Nl
-c3MgTWVtb3J5UmVnaW9uIHdpdGggTWVtT3ApCjcvMTUgQ2hlY2tpbmcgY29tbWl0IDI4M2Q0Y2Q2
-ZDc4MCAoaHcvdmZpbzogQWNjZXNzIE1lbW9yeVJlZ2lvbiB3aXRoIE1lbU9wKQo4LzE1IENoZWNr
-aW5nIGNvbW1pdCAzNTk0YTk1YTQ2NzggKGV4ZWM6IEFjY2VzcyBNZW1vcnlSZWdpb24gd2l0aCBN
-ZW1PcCkKOS8xNSBDaGVja2luZyBjb21taXQgMWE3NWI3MWQ1ZmUxIChjcHV0bGI6IEFjY2VzcyBN
-ZW1vcnlSZWdpb24gd2l0aCBNZW1PcCkKMTAvMTUgQ2hlY2tpbmcgY29tbWl0IDlhMTc1ZjFjNDUx
-YyAobWVtb3J5OiBBY2Nlc3MgTWVtb3J5UmVnaW9uIHdpdGggTWVtT3Agc2VtYW50aWNzKQoxMS8x
-NSBDaGVja2luZyBjb21taXQgYjk0MGEwN2I5MzI3IChtZW1vcnk6IFNpbmdsZSBieXRlIHN3YXAg
-YWxvbmcgdGhlIEkvTyBwYXRoKQoxMi8xNSBDaGVja2luZyBjb21taXQgNTk2YmRkZDgxNGU3IChj
-cHU6IFRMQl9GTEFHU19NQVNLIGJpdCB0byBmb3JjZSBtZW1vcnkgc2xvdyBwYXRoKQoxMy8xNSBD
-aGVja2luZyBjb21taXQgN2VmYWQzMTEwNzhjIChjcHV0bGI6IEJ5dGUgc3dhcCBtZW1vcnkgdHJh
-bnNhY3Rpb24gYXR0cmlidXRlKQoxNC8xNSBDaGVja2luZyBjb21taXQgMGVlM2M3ZjFjNzZhICh0
-YXJnZXQvc3BhcmM6IEFkZCBUTEIgZW50cnkgd2l0aCBhdHRyaWJ1dGVzKQoxNS8xNSBDaGVja2lu
-ZyBjb21taXQgMTM3YjZmYThlZGZmICh0YXJnZXQvc3BhcmM6IHN1bjR1IEludmVydCBFbmRpYW4g
-VFRFIGJpdCkKPT09IE9VVFBVVCBFTkQgPT09CgpUZXN0IGNvbW1hbmQgZXhpdGVkIHdpdGggY29k
-ZTogMQoKClRoZSBmdWxsIGxvZyBpcyBhdmFpbGFibGUgYXQKaHR0cDovL3BhdGNoZXcub3JnL2xv
-Z3MvMTU2NDAzODA3Mzc1NC45MTEzM0BidC5jb20vdGVzdGluZy5jaGVja3BhdGNoLz90eXBlPW1l
-c3NhZ2UuCi0tLQpFbWFpbCBnZW5lcmF0ZWQgYXV0b21hdGljYWxseSBieSBQYXRjaGV3IFtodHRw
-czovL3BhdGNoZXcub3JnL10uClBsZWFzZSBzZW5kIHlvdXIgZmVlZGJhY2sgdG8gcGF0Y2hldy1k
-ZXZlbEByZWRoYXQuY29t
+--_000_156404152436523360btcom_
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
+This patchset implements the IE (Invert Endian) bit in SPARCv9 MMU TTE.
+
+It is an attempt of the instructions outlined by Richard Henderson to Mark
+Cave-Ayland.
+
+Tested with OpenBSD on sun4u. Solaris 10 is my actual goal, but unfortunate=
+ly a
+separate keyboard issue remains in the way.
+
+On 01/11/17 19:15, Mark Cave-Ayland wrote:
+
+>On 15/08/17 19:10, Richard Henderson wrote:
+>
+>> [CC Peter re MemTxAttrs below]
+>>
+>> On 08/15/2017 09:38 AM, Mark Cave-Ayland wrote:
+>>> Working through an incorrect endian issue on qemu-system-sparc64, it ha=
+s
+>>> become apparent that at least one OS makes use of the IE (Invert Endian=
+)
+>>> bit in the SPARCv9 MMU TTE to map PCI memory space without the
+>>> programmer having to manually endian-swap accesses.
+>>>
+>>> In other words, to quote the UltraSPARC specification: "if this bit is
+>>> set, accesses to the associated page are processed with inverse
+>>> endianness from what is specified by the instruction (big-for-little an=
+d
+>>> little-for-big)".
+
+A good explanation by Mark why the IE bit is required.
+
+>>>
+>>> Looking through various bits of code, I'm trying to get a feel for the
+>>> best way to implement this in an efficient manner. From what I can see
+>>> this could be solved using an additional MMU index, however I'm not
+>>> overly familiar with the memory and softmmu subsystems.
+>>
+>> No, it can't be solved with an MMU index.
+>>
+>>> Can anyone point me in the right direction as to what would be the best
+>>> way to implement this feature within QEMU?
+>>
+>> It's definitely tricky.
+>>
+>> We definitely need some TLB_FLAGS_MASK bit set so that we're forced thro=
+ugh
+>> the
+>> memory slow path.  There is no other way to bypass the endianness that w=
+e've
+>> already encoded from the target instruction.
+>>
+>> Given the tlb_set_page_with_attrs interface, I would think that we need =
+a new
+>> bit in MemTxAttrs, so that the target/sparc tlb_fill (and subroutines) c=
+an
+>> pass
+>> along the TTE bit for the given page.
+>>
+>> We have an existing problem in softmmu_template.h,
+>>
+>>     /* ??? Note that the io helpers always read data in the target
+>>        byte ordering.  We should push the LE/BE request down into io.  *=
+/
+>>     res =3D glue(io_read, SUFFIX)(env, mmu_idx, index, addr, retaddr);
+>>     res =3D TGT_BE(res);
+>>
+>> We do not want to add a third(!) byte swap along the i/o path.  We need =
+to
+>> collapse the two that we have already before considering this one.
+>>
+>> This probably takes the form of:
+>>
+>> (1) Replacing the "int size" argument with "TCGMemOp memop" for
+>>       a) io_{read,write}x in accel/tcg/cputlb.c,
+>>       b) memory_region_dispatch_{read,write} in memory.c,
+>>       c) adjust_endianness in memory.c.
+>>     This carries size+sign+endianness down to the next level.
+>>
+>> (2) In memory.c, adjust_endianness,
+>>
+>>      if (memory_region_wrong_endianness(mr)) {
+>> -        switch (size) {
+>> +        memop ^=3D MO_BSWAP;
+>> +    }
+>> +    if (memop & MO_BSWAP) {
+>>
+>>     For extra credit, re-arrange memory_region_wrong_endianness
+>>     to something more explicit -- "wrong" isn't helpful.
+>
+>Finally I've had a bit of spare time to experiment with this approach,
+>and from what I can see there are currently 2 issues:
+>
+>
+>1) Using TCGMemOp in memory.c means it is no longer accelerator agnostic
+>
+>For the moment I've defined a separate MemOp in memory.h and provided a
+>mapping function in io_{read,write}x to map from TCGMemOp to MemOp and
+>then pass that into memory_region_dispatch_{read,write}.
+>
+>Other than not referencing TCGMemOp in the memory API, another reason
+>for doing this was that I wasn't convinced that all the MO_ attributes
+>were valid outside of TCG. I do, of course, strongly defer to other
+>people's knowledge in this area though.
+>
+>
+>2) The above changes to adjust_endianness() fail when
+>memory_region_dispatch_{read,write} are called recursively
+>
+>Whilst booting qemu-system-sparc64 I see that
+>memory_region_dispatch_{read,write} get called recursively - once via
+>io_{read,write}x and then again via flatview_read_continue() in exec.c.
+>
+>The net effect of this is that we perform the bswap correctly at the
+>tail of the recursion, but then as we travel back up the stack we hit
+>memory_region_dispatch_{read,write} once again causing a second bswap
+>which means the value is returned with the incorrect endian again.
+>
+>
+>My understanding from your softmmu_template.h comment above is that the
+>memory API should do the endian swapping internally allowing the removal
+>of the final TGT_BE/TGT_LE applied to the result, or did I get this wrong?
+>
+>> (3) In tlb_set_page_with_attrs, notice attrs.byte_swap and set
+>>     a new TLB_FORCE_SLOW bit within TLB_FLAGS_MASK.
+>>
+>> (4) In io_{read,write}x, if iotlbentry->attrs.byte_swap is set,
+>>     then memop ^=3D MO_BSWAP.
+
+Thanks all for the feedback.
+
+v2:
+- Moved size+sign+endianness attributes from TCGMemOp into MemOp.
+  In v1 TCGMemOp was re-purposed entirely into MemOp.
+- Replaced MemOp MO_{8|16|32|64} with TCGMemOp MO_{UB|UW|UL|UQ} alias.
+  This is to avoid warnings on comparing and coercing different enums.
+- Renamed get_memop to get_tcgmemop for clarity.
+- MEMOP is now SIZE_MEMOP, which is just ctzl(size).
+- Split patch 3/4 so one memory_region_dispatch_{read|write} interface
+  is converted per patch.
+- Do not reuse TLB_RECHECK, use new TLB_FORCE_SLOW instead.
+- Split patch 4/4 so adding the MemTxAddrs parameters and converting
+  tlb_set_page() to tlb_set_page_with_attrs() is separate from usage.
+- CC'd maintainers.
+
+v3:
+- Like v1, the entire TCGMemOp enum is now MemOp.
+- MemOp target dependant attributes are conditional upon NEED_CPU_H
+
+v4:
+- Added Paolo Bonzini as include/exec/memop.h maintainer
+
+Tony Nguyen (15):
+  tcg: TCGMemOp is now accelerator independent MemOp
+  memory: Access MemoryRegion with MemOp
+  target/mips: Access MemoryRegion with MemOp
+  hw/s390x: Access MemoryRegion with MemOp
+  hw/intc/armv7m_nic: Access MemoryRegion with MemOp
+  hw/virtio: Access MemoryRegion with MemOp
+  hw/vfio: Access MemoryRegion with MemOp
+  exec: Access MemoryRegion with MemOp
+  cputlb: Access MemoryRegion with MemOp
+  memory: Access MemoryRegion with MemOp semantics
+  memory: Single byte swap along the I/O path
+  cpu: TLB_FLAGS_MASK bit to force memory slow path
+  cputlb: Byte swap memory transaction attribute
+  target/sparc: Add TLB entry with attributes
+  target/sparc: sun4u Invert Endian TTE bit
+
+ MAINTAINERS                             |   1 +
+ accel/tcg/cputlb.c                      |  71 +++++++++--------
+ exec.c                                  |   6 +-
+ hw/intc/armv7m_nvic.c                   |  12 ++-
+ hw/s390x/s390-pci-inst.c                |   8 +-
+ hw/vfio/pci-quirks.c                    |   5 +-
+ hw/virtio/virtio-pci.c                  |   7 +-
+ include/exec/cpu-all.h                  |  10 ++-
+ include/exec/memattrs.h                 |   2 +
+ include/exec/memop.h                    | 112 +++++++++++++++++++++++++++
+ include/exec/memory.h                   |   9 ++-
+ memory.c                                |  37 +++++----
+ memory_ldst.inc.c                       |  18 ++---
+ target/alpha/translate.c                |   2 +-
+ target/arm/translate-a64.c              |  48 ++++++------
+ target/arm/translate-a64.h              |   2 +-
+ target/arm/translate-sve.c              |   2 +-
+ target/arm/translate.c                  |  32 ++++----
+ target/arm/translate.h                  |   2 +-
+ target/hppa/translate.c                 |  14 ++--
+ target/i386/translate.c                 | 132 ++++++++++++++++------------=
+----
+ target/m68k/translate.c                 |   2 +-
+ target/microblaze/translate.c           |   4 +-
+ target/mips/op_helper.c                 |   5 +-
+ target/mips/translate.c                 |   8 +-
+ target/openrisc/translate.c             |   4 +-
+ target/ppc/translate.c                  |  12 +--
+ target/riscv/insn_trans/trans_rva.inc.c |   8 +-
+ target/riscv/insn_trans/trans_rvi.inc.c |   4 +-
+ target/s390x/translate.c                |   6 +-
+ target/s390x/translate_vx.inc.c         |  10 +--
+ target/sparc/cpu.h                      |   2 +
+ target/sparc/mmu_helper.c               |  40 ++++++----
+ target/sparc/translate.c                |  14 ++--
+ target/tilegx/translate.c               |  10 +--
+ target/tricore/translate.c              |   8 +-
+ tcg/README                              |   2 +-
+ tcg/aarch64/tcg-target.inc.c            |  26 +++----
+ tcg/arm/tcg-target.inc.c                |  26 +++----
+ tcg/i386/tcg-target.inc.c               |  24 +++---
+ tcg/mips/tcg-target.inc.c               |  16 ++--
+ tcg/optimize.c                          |   2 +-
+ tcg/ppc/tcg-target.inc.c                |  12 +--
+ tcg/riscv/tcg-target.inc.c              |  20 ++---
+ tcg/s390/tcg-target.inc.c               |  14 ++--
+ tcg/sparc/tcg-target.inc.c              |   6 +-
+ tcg/tcg-op.c                            |  38 ++++-----
+ tcg/tcg-op.h                            |  86 ++++++++++-----------
+ tcg/tcg.c                               |   2 +-
+ tcg/tcg.h                               |  99 ++----------------------
+ trace/mem-internal.h                    |   4 +-
+ trace/mem.h                             |   4 +-
+ 52 files changed, 562 insertions(+), 488 deletions(-)
+ create mode 100644 include/exec/memop.h
+
+--
+1.8.3.1
+
+
+
+
+--_000_156404152436523360btcom_
+Content-Type: text/html; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<html>
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Diso-8859-=
+1">
+<style type=3D"text/css" style=3D"display:none"><!-- P { margin-top: 0px; m=
+argin-bottom: 0px; } .EmailQuote { margin-left: 1pt; padding-left: 4pt; bor=
+der-left-width: 2px; border-left-style: solid; border-left-color: rgb(128, =
+0, 0); }--></style>
+</head>
+<body dir=3D"ltr" style=3D"font-size:12pt;color:#000000;background-color:#F=
+FFFFF;font-family:Calibri,Arial,Helvetica,sans-serif;">
+<p></p>
+<div><span style=3D"font-size: 12pt;">This patchset implements the IE (Inve=
+rt Endian) bit in SPARCv9 MMU TTE.</span><br>
+</div>
+<div><br>
+</div>
+<div>It is an attempt of the instructions outlined by Richard Henderson to =
+Mark<br>
+</div>
+<div>Cave-Ayland.</div>
+<div><br>
+</div>
+<div>Tested with OpenBSD on sun4u. Solaris 10 is my actual goal, but unfort=
+unately a</div>
+<div>separate keyboard issue remains in the way.</div>
+<div><br>
+</div>
+<div>On 01/11/17 19:15, Mark Cave-Ayland wrote:</div>
+<div><br>
+</div>
+<div>&gt;On 15/08/17 19:10, Richard Henderson wrote:</div>
+<div>&gt;</div>
+<div>&gt;&gt; [CC Peter re MemTxAttrs below]</div>
+<div>&gt;&gt;<br>
+</div>
+<div>&gt;&gt; On 08/15/2017 09:38 AM, Mark Cave-Ayland wrote:</div>
+<div>&gt;&gt;&gt; Working through an incorrect endian issue on qemu-system-=
+sparc64, it has</div>
+<div>&gt;&gt;&gt; become apparent that at least one OS makes use of the IE =
+(Invert Endian)</div>
+<div>&gt;&gt;&gt; bit in the SPARCv9 MMU TTE to map PCI memory space withou=
+t the</div>
+<div>&gt;&gt;&gt; programmer having to manually endian-swap accesses.<br>
+</div>
+<div>&gt;&gt;&gt;</div>
+<div>&gt;&gt;&gt; In other words, to quote the UltraSPARC specification: &q=
+uot;if this bit is</div>
+<div>&gt;&gt;&gt; set, accesses to the associated page are processed with i=
+nverse</div>
+<div>&gt;&gt;&gt; endianness from what is specified by the instruction (big=
+-for-little and</div>
+<div>&gt;&gt;&gt; little-for-big)&quot;.</div>
+<div><br>
+</div>
+<div>A good explanation by Mark why the IE bit is required.</div>
+<div><br>
+</div>
+<div>&gt;&gt;&gt;</div>
+<div>&gt;&gt;&gt; Looking through various bits of code, I'm trying to get a=
+ feel for the</div>
+<div>&gt;&gt;&gt; best way to implement this in an efficient manner. From w=
+hat I can see</div>
+<div>&gt;&gt;&gt; this could be solved using an additional MMU index, howev=
+er I'm not</div>
+<div>&gt;&gt;&gt; overly familiar with the memory and softmmu subsystems.</=
+div>
+<div>&gt;&gt;</div>
+<div>&gt;&gt; No, it can't be solved with an MMU index.</div>
+<div>&gt;&gt;</div>
+<div>&gt;&gt;&gt; Can anyone point me in the right direction as to what wou=
+ld be the best</div>
+<div>&gt;&gt;&gt; way to implement this feature within QEMU?</div>
+<div>&gt;&gt;</div>
+<div>&gt;&gt; It's definitely tricky.</div>
+<div>&gt;&gt;</div>
+<div>&gt;&gt; We definitely need some TLB_FLAGS_MASK bit set so that we're =
+forced through</div>
+<div>&gt;&gt; the</div>
+<div>&gt;&gt; memory slow path. &nbsp;There is no other way to bypass the e=
+ndianness that we've</div>
+<div>&gt;&gt; already encoded from the target instruction.</div>
+<div>&gt;&gt;</div>
+<div>&gt;&gt; Given the tlb_set_page_with_attrs interface, I would think th=
+at we need a new</div>
+<div>&gt;&gt; bit in MemTxAttrs, so that the target/sparc tlb_fill (and sub=
+routines) can</div>
+<div>&gt;&gt; pass</div>
+<div>&gt;&gt; along the TTE bit for the given page.</div>
+<div>&gt;&gt;</div>
+<div>&gt;&gt; We have an existing problem in softmmu_template.h,</div>
+<div>&gt;&gt;</div>
+<div>&gt;&gt; &nbsp; &nbsp; /* ??? Note that the io helpers always read dat=
+a in the target</div>
+<div>&gt;&gt; &nbsp; &nbsp; &nbsp; &nbsp;byte ordering. &nbsp;We should pus=
+h the LE/BE request down into io. &nbsp;*/</div>
+<div>&gt;&gt; &nbsp; &nbsp; res =3D glue(io_read, SUFFIX)(env, mmu_idx, ind=
+ex, addr, retaddr);</div>
+<div>&gt;&gt; &nbsp; &nbsp; res =3D TGT_BE(res);</div>
+<div>&gt;&gt;</div>
+<div>&gt;&gt; We do not want to add a third(!) byte swap along the i/o path=
+. &nbsp;We need to</div>
+<div>&gt;&gt; collapse the two that we have already before considering this=
+ one.</div>
+<div>&gt;&gt;</div>
+<div>&gt;&gt; This probably takes the form of:</div>
+<div>&gt;&gt;</div>
+<div>&gt;&gt; (1) Replacing the &quot;int size&quot; argument with &quot;TC=
+GMemOp memop&quot; for</div>
+<div>&gt;&gt; &nbsp; &nbsp; &nbsp; a) io_{read,write}x in accel/tcg/cputlb.=
+c,</div>
+<div>&gt;&gt; &nbsp; &nbsp; &nbsp; b) memory_region_dispatch_{read,write} i=
+n memory.c,</div>
+<div>&gt;&gt; &nbsp; &nbsp; &nbsp; c) adjust_endianness in memory.c.</div>
+<div>&gt;&gt; &nbsp; &nbsp; This carries size&#43;sign&#43;endianness down =
+to the next level.</div>
+<div>&gt;&gt;</div>
+<div>&gt;&gt; (2) In memory.c, adjust_endianness,</div>
+<div>&gt;&gt;</div>
+<div>&gt;&gt; &nbsp; &nbsp; &nbsp;if (memory_region_wrong_endianness(mr)) {=
+</div>
+<div>&gt;&gt; - &nbsp; &nbsp; &nbsp; &nbsp;switch (size) {</div>
+<div>&gt;&gt; &#43; &nbsp; &nbsp; &nbsp; &nbsp;memop ^=3D MO_BSWAP;</div>
+<div>&gt;&gt; &#43; &nbsp; &nbsp;}</div>
+<div>&gt;&gt; &#43; &nbsp; &nbsp;if (memop &amp; MO_BSWAP) {</div>
+<div>&gt;&gt;</div>
+<div>&gt;&gt; &nbsp; &nbsp; For extra credit, re-arrange memory_region_wron=
+g_endianness</div>
+<div>&gt;&gt; &nbsp; &nbsp; to something more explicit -- &quot;wrong&quot;=
+ isn't helpful.</div>
+<div>&gt;</div>
+<div>&gt;Finally I've had a bit of spare time to experiment with this appro=
+ach,</div>
+<div>&gt;and from what I can see there are currently 2 issues:</div>
+<div>&gt;</div>
+<div>&gt;</div>
+<div>&gt;1) Using TCGMemOp in memory.c means it is no longer accelerator ag=
+nostic</div>
+<div>&gt;</div>
+<div>&gt;For the moment I've defined a separate MemOp in memory.h and provi=
+ded a</div>
+<div>&gt;mapping function in io_{read,write}x to map from TCGMemOp to MemOp=
+ and</div>
+<div>&gt;then pass that into memory_region_dispatch_{read,write}.</div>
+<div>&gt;</div>
+<div>&gt;Other than not referencing TCGMemOp in the memory API, another rea=
+son</div>
+<div>&gt;for doing this was that I wasn't convinced that all the MO_ attrib=
+utes</div>
+<div>&gt;were valid outside of TCG. I do, of course, strongly defer to othe=
+r</div>
+<div>&gt;people's knowledge in this area though.</div>
+<div>&gt;</div>
+<div>&gt;</div>
+<div>&gt;2) The above changes to adjust_endianness() fail when</div>
+<div>&gt;memory_region_dispatch_{read,write} are called recursively</div>
+<div>&gt;</div>
+<div>&gt;Whilst booting qemu-system-sparc64 I see that</div>
+<div>&gt;memory_region_dispatch_{read,write} get called recursively - once =
+via</div>
+<div>&gt;io_{read,write}x and then again via flatview_read_continue() in ex=
+ec.c.</div>
+<div>&gt;</div>
+<div>&gt;The net effect of this is that we perform the bswap correctly at t=
+he</div>
+<div>&gt;tail of the recursion, but then as we travel back up the stack we =
+hit</div>
+<div>&gt;memory_region_dispatch_{read,write} once again causing a second bs=
+wap</div>
+<div>&gt;which means the value is returned with the incorrect endian again.=
+</div>
+<div>&gt;</div>
+<div>&gt;</div>
+<div>&gt;My understanding from your softmmu_template.h comment above is tha=
+t the</div>
+<div>&gt;memory API should do the endian swapping internally allowing the r=
+emoval</div>
+<div>&gt;of the final TGT_BE/TGT_LE applied to the result, or did I get thi=
+s wrong?</div>
+<div>&gt;</div>
+<div>&gt;&gt; (3) In tlb_set_page_with_attrs, notice attrs.byte_swap and se=
+t</div>
+<div>&gt;&gt; &nbsp; &nbsp; a new TLB_FORCE_SLOW bit within TLB_FLAGS_MASK.=
+</div>
+<div>&gt;&gt;</div>
+<div>&gt;&gt; (4) In io_{read,write}x, if iotlbentry-&gt;attrs.byte_swap is=
+ set,</div>
+<div>&gt;&gt; &nbsp; &nbsp; then memop ^=3D MO_BSWAP.</div>
+<div><br>
+</div>
+<div>Thanks all for the&nbsp;feedback.</div>
+<div><br>
+</div>
+<div>v2:</div>
+<div>- Moved size&#43;sign&#43;endianness attributes from TCGMemOp into Mem=
+Op.</div>
+<div>&nbsp; In v1 TCGMemOp was re-purposed entirely into MemOp.</div>
+<div>- Replaced MemOp MO_{8|16|32|64} with TCGMemOp MO_{UB|UW|UL|UQ} alias.=
+</div>
+<div>&nbsp; This is to avoid warnings on comparing and coercing different e=
+nums.</div>
+<div>- Renamed get_memop to get_tcgmemop for clarity.</div>
+<div>- MEMOP is now SIZE_MEMOP, which is just ctzl(size).</div>
+<div>- Split patch 3/4 so one memory_region_dispatch_{read|write} interface=
+</div>
+<div>&nbsp; is converted per patch.</div>
+<div>- Do not reuse TLB_RECHECK, use new TLB_FORCE_SLOW instead.</div>
+<div>- Split patch 4/4 so adding the MemTxAddrs parameters and converting</=
+div>
+<div>&nbsp; tlb_set_page() to tlb_set_page_with_attrs() is separate from us=
+age.</div>
+<div>- CC'd maintainers.</div>
+<div><br>
+</div>
+<div>v3:</div>
+<div>- Like v1, the entire TCGMemOp enum is now MemOp.</div>
+<div>- MemOp target dependant attributes are conditional upon NEED_CPU_H</d=
+iv>
+<div><br>
+</div>
+<div>v4:</div>
+<div>- Added Paolo Bonzini as include/exec/memop.h maintainer</div>
+<div><br>
+</div>
+<div>Tony Nguyen (15):</div>
+<div>&nbsp; tcg: TCGMemOp is now accelerator independent MemOp</div>
+<div>&nbsp; memory: Access MemoryRegion with MemOp<br>
+</div>
+<div>&nbsp; target/mips: Access MemoryRegion with MemOp</div>
+<div>&nbsp; hw/s390x: Access MemoryRegion with MemOp</div>
+<div>&nbsp; hw/intc/armv7m_nic: Access MemoryRegion with MemOp</div>
+<div>&nbsp; hw/virtio: Access MemoryRegion with MemOp</div>
+<div>&nbsp; hw/vfio: Access MemoryRegion with MemOp</div>
+<div>&nbsp; exec: Access MemoryRegion with MemOp</div>
+<div>&nbsp; cputlb: Access MemoryRegion with MemOp</div>
+<div>&nbsp; memory: Access MemoryRegion with MemOp semantics</div>
+<div>&nbsp; memory: Single byte swap along the I/O path</div>
+<div>&nbsp; cpu: TLB_FLAGS_MASK bit to force memory slow path</div>
+<div>&nbsp; cputlb: Byte swap memory transaction attribute</div>
+<div>&nbsp; target/sparc: Add TLB entry with attributes</div>
+<div>&nbsp; target/sparc: sun4u Invert Endian TTE bit</div>
+<div><br>
+</div>
+<div>&nbsp;MAINTAINERS &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nb=
+sp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | &nbsp; 1 &#43;</div>
+<div>&nbsp;accel/tcg/cputlb.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nb=
+sp; &nbsp; &nbsp; &nbsp; &nbsp;| &nbsp;71 &#43;&#43;&#43;&#43;&#43;&#43;&#4=
+3;&#43;&#43;--------</div>
+<div>&nbsp;exec.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
+nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;| &nbsp; 6 &#4=
+3;-</div>
+<div>&nbsp;hw/intc/armv7m_nvic.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; &nbsp; | &nbsp;12 &#43;&#43;-</div>
+<div>&nbsp;hw/s390x/s390-pci-inst.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbs=
+p; &nbsp; &nbsp;| &nbsp; 8 &#43;-</div>
+<div>&nbsp;hw/vfio/pci-quirks.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
+nbsp; &nbsp; &nbsp; &nbsp;| &nbsp; 5 &#43;-</div>
+<div>&nbsp;hw/virtio/virtio-pci.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;=
+ &nbsp; &nbsp; &nbsp;| &nbsp; 7 &#43;-</div>
+<div>&nbsp;include/exec/cpu-all.h &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;=
+ &nbsp; &nbsp; &nbsp;| &nbsp;10 &#43;&#43;-</div>
+<div>&nbsp;include/exec/memattrs.h &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
+; &nbsp; &nbsp; | &nbsp; 2 &#43;</div>
+<div>&nbsp;include/exec/memop.h &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
+nbsp; &nbsp; &nbsp; &nbsp;| 112 &#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#4=
+3;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#4=
+3;&#43;&#43;&#43;</div>
+<div>&nbsp;include/exec/memory.h &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; &nbsp; | &nbsp; 9 &#43;&#43;-</div>
+<div>&nbsp;memory.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;=
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;| &nbsp;37 &#43;&#4=
+3;&#43;&#43;&#43;----</div>
+<div>&nbsp;memory_ldst.inc.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbs=
+p; &nbsp; &nbsp; &nbsp; &nbsp; | &nbsp;18 &#43;&#43;---</div>
+<div>&nbsp;target/alpha/translate.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbs=
+p; &nbsp; &nbsp;| &nbsp; 2 &#43;-</div>
+<div>&nbsp;target/arm/translate-a64.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &n=
+bsp; &nbsp;| &nbsp;48 &#43;&#43;&#43;&#43;&#43;&#43;------</div>
+<div>&nbsp;target/arm/translate-a64.h &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &n=
+bsp; &nbsp;| &nbsp; 2 &#43;-</div>
+<div>&nbsp;target/arm/translate-sve.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &n=
+bsp; &nbsp;| &nbsp; 2 &#43;-</div>
+<div>&nbsp;target/arm/translate.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;=
+ &nbsp; &nbsp; &nbsp;| &nbsp;32 &#43;&#43;&#43;&#43;----</div>
+<div>&nbsp;target/arm/translate.h &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;=
+ &nbsp; &nbsp; &nbsp;| &nbsp; 2 &#43;-</div>
+<div>&nbsp;target/hppa/translate.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
+; &nbsp; &nbsp; | &nbsp;14 &#43;&#43;--</div>
+<div>&nbsp;target/i386/translate.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
+; &nbsp; &nbsp; | 132 &#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#4=
+3;&#43;&#43;&#43;&#43;&#43;----------------</div>
+<div>&nbsp;target/m68k/translate.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
+; &nbsp; &nbsp; | &nbsp; 2 &#43;-</div>
+<div>&nbsp;target/microblaze/translate.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;=
+ | &nbsp; 4 &#43;-</div>
+<div>&nbsp;target/mips/op_helper.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
+; &nbsp; &nbsp; | &nbsp; 5 &#43;-</div>
+<div>&nbsp;target/mips/translate.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
+; &nbsp; &nbsp; | &nbsp; 8 &#43;-</div>
+<div>&nbsp;target/openrisc/translate.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
+nbsp; | &nbsp; 4 &#43;-</div>
+<div>&nbsp;target/ppc/translate.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;=
+ &nbsp; &nbsp; &nbsp;| &nbsp;12 &#43;--</div>
+<div>&nbsp;target/riscv/insn_trans/trans_rva.inc.c | &nbsp; 8 &#43;-</div>
+<div>&nbsp;target/riscv/insn_trans/trans_rvi.inc.c | &nbsp; 4 &#43;-</div>
+<div>&nbsp;target/s390x/translate.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbs=
+p; &nbsp; &nbsp;| &nbsp; 6 &#43;-</div>
+<div>&nbsp;target/s390x/translate_vx.inc.c &nbsp; &nbsp; &nbsp; &nbsp; | &n=
+bsp;10 &#43;--</div>
+<div>&nbsp;target/sparc/cpu.h &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nb=
+sp; &nbsp; &nbsp; &nbsp; &nbsp;| &nbsp; 2 &#43;</div>
+<div>&nbsp;target/sparc/mmu_helper.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nb=
+sp; &nbsp; | &nbsp;40 &#43;&#43;&#43;&#43;&#43;&#43;----</div>
+<div>&nbsp;target/sparc/translate.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbs=
+p; &nbsp; &nbsp;| &nbsp;14 &#43;&#43;--</div>
+<div>&nbsp;target/tilegx/translate.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nb=
+sp; &nbsp; | &nbsp;10 &#43;--</div>
+<div>&nbsp;target/tricore/translate.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &n=
+bsp; &nbsp;| &nbsp; 8 &#43;-</div>
+<div>&nbsp;tcg/README &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbs=
+p; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;| &nbsp; 2 &#43;-</div>
+<div>&nbsp;tcg/aarch64/tcg-target.inc.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp;| &nbsp;26 &#43;&#43;&#43;----</div>
+<div>&nbsp;tcg/arm/tcg-target.inc.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbs=
+p; &nbsp; &nbsp;| &nbsp;26 &#43;&#43;&#43;----</div>
+<div>&nbsp;tcg/i386/tcg-target.inc.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nb=
+sp; &nbsp; | &nbsp;24 &#43;&#43;&#43;---</div>
+<div>&nbsp;tcg/mips/tcg-target.inc.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nb=
+sp; &nbsp; | &nbsp;16 &#43;&#43;--</div>
+<div>&nbsp;tcg/optimize.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;| &nbsp; 2 &#43;-</div>
+<div>&nbsp;tcg/ppc/tcg-target.inc.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbs=
+p; &nbsp; &nbsp;| &nbsp;12 &#43;--</div>
+<div>&nbsp;tcg/riscv/tcg-target.inc.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &n=
+bsp; &nbsp;| &nbsp;20 &#43;&#43;---</div>
+<div>&nbsp;tcg/s390/tcg-target.inc.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nb=
+sp; &nbsp; | &nbsp;14 &#43;&#43;--</div>
+<div>&nbsp;tcg/sparc/tcg-target.inc.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &n=
+bsp; &nbsp;| &nbsp; 6 &#43;-</div>
+<div>&nbsp;tcg/tcg-op.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &n=
+bsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;| &nbsp;38 &#43;&#43;&#43;&#4=
+3;-----</div>
+<div>&nbsp;tcg/tcg-op.h &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &n=
+bsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;| &nbsp;86 &#43;&#43;&#43;&#4=
+3;&#43;&#43;&#43;&#43;&#43;&#43;-----------</div>
+<div>&nbsp;tcg/tcg.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
+; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | &nbsp; 2 &#43;-</div>
+<div>&nbsp;tcg/tcg.h &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
+; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | &nbsp;99 &#43;&#43;---=
+-------------------</div>
+<div>&nbsp;trace/mem-internal.h &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
+nbsp; &nbsp; &nbsp; &nbsp;| &nbsp; 4 &#43;-</div>
+<div>&nbsp;trace/mem.h &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nb=
+sp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | &nbsp; 4 &#43;-</div>
+<div>&nbsp;52 files changed, 562 insertions(&#43;), 488 deletions(-)</div>
+<div>&nbsp;create mode 100644 include/exec/memop.h</div>
+<div><br>
+</div>
+<div>--&nbsp;</div>
+<div>1.8.3.1</div>
+<div><br>
+<br>
+</div>
+<p><br>
+</p>
+</body>
+</html>
+
+--_000_156404152436523360btcom_--
 
