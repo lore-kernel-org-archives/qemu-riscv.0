@@ -1,60 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hqYm3-00057O-Qd
-	for mharc-qemu-riscv@gnu.org; Thu, 25 Jul 2019 04:06:51 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:38874)
+	id 1hqaPR-0003sO-Le
+	for mharc-qemu-riscv@gnu.org; Thu, 25 Jul 2019 05:51:37 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43958)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <tony.nguyen@bt.com>) id 1hqYm1-00051h-9E
- for qemu-riscv@nongnu.org; Thu, 25 Jul 2019 04:06:50 -0400
+ (envelope-from <tony.nguyen@bt.com>) id 1hqaPO-0003dS-3v
+ for qemu-riscv@nongnu.org; Thu, 25 Jul 2019 05:51:35 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <tony.nguyen@bt.com>) id 1hqYlx-00048I-QN
- for qemu-riscv@nongnu.org; Thu, 25 Jul 2019 04:06:47 -0400
-Received: from smtpe1.intersmtp.com ([62.239.224.235]:50374)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+ (envelope-from <tony.nguyen@bt.com>) id 1hqaPM-0007xk-DD
+ for qemu-riscv@nongnu.org; Thu, 25 Jul 2019 05:51:34 -0400
+Received: from smtpe1.intersmtp.com ([213.121.35.80]:18602)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <tony.nguyen@bt.com>)
- id 1hqYlw-000476-Ul; Thu, 25 Jul 2019 04:06:45 -0400
+ id 1hqaP7-0007ro-4x; Thu, 25 Jul 2019 05:51:17 -0400
+Received: from tpw09926dag18h.domain1.systemhost.net (10.9.212.42) by
+ BWP09926085.bt.com (10.36.82.116) with Microsoft SMTP Server (version=TLS1_2, 
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P256) id 15.1.1713.5; Thu, 25
+ Jul 2019 10:51:12 +0100
 Received: from tpw09926dag18e.domain1.systemhost.net (10.9.212.18) by
- RDW083A011ED67.bt.com (10.187.98.37) with Microsoft SMTP Server (TLS) id
- 14.3.439.0; Thu, 25 Jul 2019 09:11:48 +0100
-Received: from tpw09926dag18e.domain1.systemhost.net (10.9.212.18) by
- tpw09926dag18e.domain1.systemhost.net (10.9.212.18) with Microsoft SMTP
- Server (TLS) id 15.0.1395.4; Thu, 25 Jul 2019 09:06:39 +0100
+ tpw09926dag18h.domain1.systemhost.net (10.9.212.42) with Microsoft SMTP
+ Server (TLS) id 15.0.1395.4; Thu, 25 Jul 2019 10:51:14 +0100
 Received: from tpw09926dag18e.domain1.systemhost.net
  ([fe80::a946:6348:ccf4:fa6c]) by tpw09926dag18e.domain1.systemhost.net
  ([fe80::a946:6348:ccf4:fa6c%12]) with mapi id 15.00.1395.000; Thu, 25 Jul
- 2019 09:06:39 +0100
+ 2019 10:51:14 +0100
 From: <tony.nguyen@bt.com>
 To: <qemu-devel@nongnu.org>
-CC: <peter.maydell@linaro.org>, <walling@linux.ibm.com>, <mst@redhat.com>,
- <palmer@sifive.com>, <mark.cave-ayland@ilande.co.uk>,
- <Alistair.Francis@wdc.com>, <arikalo@wavecomp.com>, <david@redhat.com>,
- <pasic@linux.ibm.com>, <borntraeger@de.ibm.com>, <rth@twiddle.net>,
- <atar4qemu@gmail.com>, <ehabkost@redhat.com>, <sw@weilnetz.de>,
- <alex.williamson@redhat.com>, <qemu-arm@nongnu.org>,
- <david@gibson.dropbear.id.au>, <qemu-riscv@nongnu.org>, <cohuck@redhat.com>,
- <qemu-s390x@nongnu.org>, <qemu-ppc@nongnu.org>, <amarkovic@wavecomp.com>,
- <pbonzini@redhat.com>, <aurelien@aurel32.net>
-Thread-Topic: [Qemu-devel] [PATCH v4 15/15] target/sparc: sun4u Invert Endian
- TTE bit
-Thread-Index: AQHVQr/jO7xRepGO106zKmk+g9KU3A==
-Date: Thu, 25 Jul 2019 08:06:39 +0000
-Message-ID: <1564041999359.53189@bt.com>
-References: <e9c6e5310b1a4863be45d45bf087fc3d@tpw09926dag18e.domain1.systemhost.net>, 
- <1563810716254.18886@bt.com>, <1564038073754.91133@bt.com>,
- <1564041524365.23360@bt.com>
-In-Reply-To: <1564041524365.23360@bt.com>
+CC: <rth@twiddle.net>, <pbonzini@redhat.com>, <peter.maydell@linaro.org>,
+ <walling@linux.ibm.com>, <cohuck@redhat.com>, <pasic@linux.ibm.com>,
+ <borntraeger@de.ibm.com>, <david@redhat.com>, <david@redhat.com>,
+ <alex.williamson@redhat.com>, <alex.williamson@redhat.com>,
+ <ehabkost@redhat.com>, <laurent@vivier.eu>, <edgar.iglesias@gmail.com>,
+ <aurelien@aurel32.net>, <amarkovic@wavecomp.com>, <arikalo@wavecomp.com>,
+ <shorne@gmail.com>, <david@gibson.dropbear.id.au>, <palmer@sifive.com>,
+ <Alistair.Francis@wdc.com>, <sagark@eecs.berkeley.edu>,
+ <kbastian@mail.uni-paderborn.de>, <mark.cave-ayland@ilande.co.uk>,
+ <atar4qemu@gmail.com>, <balrogg@gmail.com>, <stefanha@redhat.com>,
+ <qemu-arm@nongnu.org>, <qemu-s390x@nongnu.org>, <qemu-ppc@nongnu.org>,
+ <qemu-riscv@nongnu.org>
+Thread-Topic: [Qemu-devel] [PATCH v4 00/15] Invert Endian bit in SPARCv9 MMU
+ TTE
+Thread-Index: AQHVQs5/0GZI33VvdEK7f5C9/L2VTg==
+Date: Thu, 25 Jul 2019 09:51:14 +0000
+Message-ID: <45d1ebe4b2ed4c039c9da20a738652df@tpw09926dag18e.domain1.systemhost.net>
 Accept-Language: en-AU, en-GB, en-US
 Content-Language: en-AU
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
 x-ms-exchange-transport-fromentityheader: Hosted
 x-originating-ip: [10.187.101.42]
-Content-Type: multipart/alternative; boundary="_000_156404199935953189btcom_"
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 62.239.224.235
-Subject: [Qemu-riscv] [Qemu-devel] [PATCH v4 15/15] target/sparc: sun4u
- Invert Endian TTE bit
+X-detected-operating-system: by eggs.gnu.org: Windows 7 or 8 [fuzzy]
+X-Received-From: 213.121.35.80
+Subject: [Qemu-riscv] [Qemu-devel] [PATCH v4 00/15] Invert Endian bit in
+ SPARCv9 MMU TTE
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -66,231 +66,242 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Jul 2019 08:06:50 -0000
+X-List-Received-Date: Thu, 25 Jul 2019 09:51:36 -0000
 
---_000_156404199935953189btcom_
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
-
-This bit configures endianness of PCI MMIO devices. It is used by
-Solaris and OpenBSD sunhme drivers.
-
-Tested working on OpenBSD.
-
-Unfortunately Solaris 10 had a unrelated keyboard issue blocking
-testing... another inch towards Solaris 10 on SPARC64 =3D)
-
-Signed-off-by: Tony Nguyen <tony.nguyen@bt.com>
----
- target/sparc/cpu.h        | 2 ++
- target/sparc/mmu_helper.c | 8 +++++++-
- 2 files changed, 9 insertions(+), 1 deletion(-)
-
-diff --git a/target/sparc/cpu.h b/target/sparc/cpu.h
-index 8ed2250..77e8e07 100644
---- a/target/sparc/cpu.h
-+++ b/target/sparc/cpu.h
-@@ -277,6 +277,7 @@ enum {
-
- #define TTE_VALID_BIT       (1ULL << 63)
- #define TTE_NFO_BIT         (1ULL << 60)
-+#define TTE_IE_BIT          (1ULL << 59)
- #define TTE_USED_BIT        (1ULL << 41)
- #define TTE_LOCKED_BIT      (1ULL <<  6)
- #define TTE_SIDEEFFECT_BIT  (1ULL <<  3)
-@@ -293,6 +294,7 @@ enum {
-
- #define TTE_IS_VALID(tte)   ((tte) & TTE_VALID_BIT)
- #define TTE_IS_NFO(tte)     ((tte) & TTE_NFO_BIT)
-+#define TTE_IS_IE(tte)      ((tte) & TTE_IE_BIT)
- #define TTE_IS_USED(tte)    ((tte) & TTE_USED_BIT)
- #define TTE_IS_LOCKED(tte)  ((tte) & TTE_LOCKED_BIT)
- #define TTE_IS_SIDEEFFECT(tte) ((tte) & TTE_SIDEEFFECT_BIT)
-diff --git a/target/sparc/mmu_helper.c b/target/sparc/mmu_helper.c
-index 826e14b..77dc86a 100644
---- a/target/sparc/mmu_helper.c
-+++ b/target/sparc/mmu_helper.c
-@@ -537,6 +537,10 @@ static int get_physical_address_data(CPUSPARCState *en=
-v, hwaddr *physical,
-         if (ultrasparc_tag_match(&env->dtlb[i], address, context, physical=
-)) {
-             int do_fault =3D 0;
-
-+            if (TTE_IS_IE(env->dtlb[i].tte)) {
-+                attrs->byte_swap =3D true;
-+            }
-+
-             /* access ok? */
-             /* multiple bits in SFSR.FT may be set on TT_DFAULT */
-             if (TTE_IS_PRIV(env->dtlb[i].tte) && is_user) {
-@@ -792,7 +796,7 @@ void dump_mmu(CPUSPARCState *env)
-             }
-             if (TTE_IS_VALID(env->dtlb[i].tte)) {
-                 qemu_printf("[%02u] VA: %" PRIx64 ", PA: %llx"
--                            ", %s, %s, %s, %s, ctx %" PRId64 " %s\n",
-+                            ", %s, %s, %s, %s, ie %s, ctx %" PRId64 " %s\n=
-",
-                             i,
-                             env->dtlb[i].tag & (uint64_t)~0x1fffULL,
-                             TTE_PA(env->dtlb[i].tte),
-@@ -801,6 +805,8 @@ void dump_mmu(CPUSPARCState *env)
-                             TTE_IS_W_OK(env->dtlb[i].tte) ? "RW" : "RO",
-                             TTE_IS_LOCKED(env->dtlb[i].tte) ?
-                             "locked" : "unlocked",
-+                            TTE_IS_IE(env->dtlb[i].tte) ?
-+                            "yes" : "no",
-                             env->dtlb[i].tag & (uint64_t)0x1fffULL,
-                             TTE_IS_GLOBAL(env->dtlb[i].tte) ?
-                             "global" : "local");
---
-1.8.3.1
-
-
-
-
---_000_156404199935953189btcom_
-Content-Type: text/html; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
-
-<html>
-<head>
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Diso-8859-=
-1">
-<style type=3D"text/css" style=3D"display:none"><!-- P { margin-top: 0px; m=
-argin-bottom: 0px; } .EmailQuote { margin-left: 1pt; padding-left: 4pt; bor=
-der-left-width: 2px; border-left-style: solid; border-left-color: rgb(128, =
-0, 0); }--></style>
-</head>
-<body dir=3D"ltr" style=3D"font-size:12pt;color:#000000;background-color:#F=
-FFFFF;font-family:Calibri,Arial,Helvetica,sans-serif;">
-<p></p>
-<div><span style=3D"font-size: 12pt;">This bit configures endianness of PCI=
- MMIO devices. It is used by</span><br>
-</div>
-<div>Solaris and OpenBSD sunhme drivers.</div>
-<div><br>
-</div>
-<div>Tested working on OpenBSD.</div>
-<div><br>
-</div>
-<div>Unfortunately Solaris 10 had a unrelated keyboard issue blocking</div>
-<div>testing... another inch towards Solaris 10 on SPARC64 =3D)</div>
-<div><br>
-</div>
-<div>Signed-off-by: Tony Nguyen &lt;tony.nguyen@bt.com&gt;</div>
-<div>---</div>
-<div>&nbsp;target/sparc/cpu.h &nbsp; &nbsp; &nbsp; &nbsp;| 2 &#43;&#43;</di=
-v>
-<div>&nbsp;target/sparc/mmu_helper.c | 8 &#43;&#43;&#43;&#43;&#43;&#43;&#43=
-;-</div>
-<div>&nbsp;2 files changed, 9 insertions(&#43;), 1 deletion(-)</div>
-<div><br>
-</div>
-<div>diff --git a/target/sparc/cpu.h b/target/sparc/cpu.h</div>
-<div>index 8ed2250..77e8e07 100644</div>
-<div>--- a/target/sparc/cpu.h</div>
-<div>&#43;&#43;&#43; b/target/sparc/cpu.h</div>
-<div>@@ -277,6 &#43;277,7 @@ enum {</div>
-<div>&nbsp;</div>
-<div>&nbsp;#define TTE_VALID_BIT &nbsp; &nbsp; &nbsp; (1ULL &lt;&lt; 63)</d=
-iv>
-<div>&nbsp;#define TTE_NFO_BIT &nbsp; &nbsp; &nbsp; &nbsp; (1ULL &lt;&lt; 6=
-0)</div>
-<div>&#43;#define TTE_IE_BIT &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;(1ULL &lt;&l=
-t; 59)</div>
-<div>&nbsp;#define TTE_USED_BIT &nbsp; &nbsp; &nbsp; &nbsp;(1ULL &lt;&lt; 4=
-1)</div>
-<div>&nbsp;#define TTE_LOCKED_BIT &nbsp; &nbsp; &nbsp;(1ULL &lt;&lt; &nbsp;=
-6)</div>
-<div>&nbsp;#define TTE_SIDEEFFECT_BIT &nbsp;(1ULL &lt;&lt; &nbsp;3)</div>
-<div>@@ -293,6 &#43;294,7 @@ enum {</div>
-<div>&nbsp;</div>
-<div>&nbsp;#define TTE_IS_VALID(tte) &nbsp; ((tte) &amp; TTE_VALID_BIT)</di=
-v>
-<div>&nbsp;#define TTE_IS_NFO(tte) &nbsp; &nbsp; ((tte) &amp; TTE_NFO_BIT)<=
-/div>
-<div>&#43;#define TTE_IS_IE(tte) &nbsp; &nbsp; &nbsp;((tte) &amp; TTE_IE_BI=
-T)</div>
-<div>&nbsp;#define TTE_IS_USED(tte) &nbsp; &nbsp;((tte) &amp; TTE_USED_BIT)=
-</div>
-<div>&nbsp;#define TTE_IS_LOCKED(tte) &nbsp;((tte) &amp; TTE_LOCKED_BIT)</d=
-iv>
-<div>&nbsp;#define TTE_IS_SIDEEFFECT(tte) ((tte) &amp; TTE_SIDEEFFECT_BIT)<=
-/div>
-<div>diff --git a/target/sparc/mmu_helper.c b/target/sparc/mmu_helper.c</di=
-v>
-<div>index 826e14b..77dc86a 100644</div>
-<div>--- a/target/sparc/mmu_helper.c</div>
-<div>&#43;&#43;&#43; b/target/sparc/mmu_helper.c</div>
-<div>@@ -537,6 &#43;537,10 @@ static int get_physical_address_data(CPUSPARC=
-State *env, hwaddr *physical,</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if (ultrasparc_tag_match(&amp;env-&g=
-t;dtlb[i], address, context, physical)) {</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;int do_fault =3D 0;</d=
-iv>
-<div>&nbsp;</div>
-<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if (TTE_IS_IE(env-&gt;d=
-tlb[i].tte)) {</div>
-<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;attrs-&gt=
-;byte_swap =3D true;</div>
-<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}</div>
-<div>&#43;</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* access ok? */</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* multiple bits in SF=
-SR.FT may be set on TT_DFAULT */</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if (TTE_IS_PRIV(env-&g=
-t;dtlb[i].tte) &amp;&amp; is_user) {</div>
-<div>@@ -792,7 &#43;796,7 @@ void dump_mmu(CPUSPARCState *env)</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if (TTE_IS_VALID(env-&=
-gt;dtlb[i].tte)) {</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;qemu_pri=
-ntf(&quot;[%02u] VA: %&quot; PRIx64 &quot;, PA: %llx&quot;</div>
-<div>- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; &nbsp; &nbsp;&quot;, %s, %s, %s, %s, ctx %&quot; PRId64 &qu=
-ot; %s\n&quot;,</div>
-<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
-nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&quot;, %s, %s, %s, %s, ie %s, ctx %&quot;=
- PRId64 &quot; %s\n&quot;,</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;i,</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;env-&gt;dtlb[i].tag &amp; (uint64_t)~0x1f=
-ffULL,</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;TTE_PA(env-&gt;dtlb[i].tte),</div>
-<div>@@ -801,6 &#43;805,8 @@ void dump_mmu(CPUSPARCState *env)</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;TTE_IS_W_OK(env-&gt;dtlb[i].tte) ? &quot;=
-RW&quot; : &quot;RO&quot;,</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;TTE_IS_LOCKED(env-&gt;dtlb[i].tte) ?</div=
->
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&quot;locked&quot; : &quot;unlocked&quot;=
-,</div>
-<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
-nbsp; &nbsp; &nbsp; &nbsp; &nbsp;TTE_IS_IE(env-&gt;dtlb[i].tte) ?</div>
-<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
-nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&quot;yes&quot; : &quot;no&quot;,</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;env-&gt;dtlb[i].tag &amp; (uint64_t)0x1ff=
-fULL,</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;TTE_IS_GLOBAL(env-&gt;dtlb[i].tte) ?</div=
->
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&quot;global&quot; : &quot;local&quot;);<=
-/div>
-<div>--&nbsp;</div>
-<div>1.8.3.1</div>
-<div><br>
-<br>
-</div>
-<p><br>
-</p>
-</body>
-</html>
-
---_000_156404199935953189btcom_--
+This patchset implements the IE (Invert Endian) bit in SPARCv9 MMU TTE.=0A=
+=0A=
+It is an attempt of the instructions outlined by Richard Henderson to Mark=
+=0A=
+Cave-Ayland.=0A=
+=0A=
+Tested with OpenBSD on sun4u. Solaris 10 is my actual goal, but unfortunate=
+ly a=0A=
+separate keyboard issue remains in the way.=0A=
+=0A=
+On 01/11/17 19:15, Mark Cave-Ayland wrote:=0A=
+=0A=
+>On 15/08/17 19:10, Richard Henderson wrote:=0A=
+>=0A=
+>> [CC Peter re MemTxAttrs below]=0A=
+>>=0A=
+>> On 08/15/2017 09:38 AM, Mark Cave-Ayland wrote:=0A=
+>>> Working through an incorrect endian issue on qemu-system-sparc64, it ha=
+s=0A=
+>>> become apparent that at least one OS makes use of the IE (Invert Endian=
+)=0A=
+>>> bit in the SPARCv9 MMU TTE to map PCI memory space without the=0A=
+>>> programmer having to manually endian-swap accesses.=0A=
+>>>=0A=
+>>> In other words, to quote the UltraSPARC specification: "if this bit is=
+=0A=
+>>> set, accesses to the associated page are processed with inverse=0A=
+>>> endianness from what is specified by the instruction (big-for-little an=
+d=0A=
+>>> little-for-big)".=0A=
+=0A=
+A good explanation by Mark why the IE bit is required.=0A=
+=0A=
+>>>=0A=
+>>> Looking through various bits of code, I'm trying to get a feel for the=
+=0A=
+>>> best way to implement this in an efficient manner. From what I can see=
+=0A=
+>>> this could be solved using an additional MMU index, however I'm not=0A=
+>>> overly familiar with the memory and softmmu subsystems.=0A=
+>>=0A=
+>> No, it can't be solved with an MMU index.=0A=
+>>=0A=
+>>> Can anyone point me in the right direction as to what would be the best=
+=0A=
+>>> way to implement this feature within QEMU?=0A=
+>>=0A=
+>> It's definitely tricky.=0A=
+>>=0A=
+>> We definitely need some TLB_FLAGS_MASK bit set so that we're forced thro=
+ugh=0A=
+>> the=0A=
+>> memory slow path.  There is no other way to bypass the endianness that w=
+e've=0A=
+>> already encoded from the target instruction.=0A=
+>>=0A=
+>> Given the tlb_set_page_with_attrs interface, I would think that we need =
+a new=0A=
+>> bit in MemTxAttrs, so that the target/sparc tlb_fill (and subroutines) c=
+an=0A=
+>> pass=0A=
+>> along the TTE bit for the given page.=0A=
+>>=0A=
+>> We have an existing problem in softmmu_template.h,=0A=
+>>=0A=
+>>     /* ??? Note that the io helpers always read data in the target=0A=
+>>        byte ordering.  We should push the LE/BE request down into io.  *=
+/=0A=
+>>     res =3D glue(io_read, SUFFIX)(env, mmu_idx, index, addr, retaddr);=
+=0A=
+>>     res =3D TGT_BE(res);=0A=
+>>=0A=
+>> We do not want to add a third(!) byte swap along the i/o path.  We need =
+to=0A=
+>> collapse the two that we have already before considering this one.=0A=
+>>=0A=
+>> This probably takes the form of:=0A=
+>>=0A=
+>> (1) Replacing the "int size" argument with "TCGMemOp memop" for=0A=
+>>       a) io_{read,write}x in accel/tcg/cputlb.c,=0A=
+>>       b) memory_region_dispatch_{read,write} in memory.c,=0A=
+>>       c) adjust_endianness in memory.c.=0A=
+>>     This carries size+sign+endianness down to the next level.=0A=
+>>=0A=
+>> (2) In memory.c, adjust_endianness,=0A=
+>>=0A=
+>>      if (memory_region_wrong_endianness(mr)) {=0A=
+>> -        switch (size) {=0A=
+>> +        memop ^=3D MO_BSWAP;=0A=
+>> +    }=0A=
+>> +    if (memop & MO_BSWAP) {=0A=
+>>=0A=
+>>     For extra credit, re-arrange memory_region_wrong_endianness=0A=
+>>     to something more explicit -- "wrong" isn't helpful.=0A=
+>=0A=
+>Finally I've had a bit of spare time to experiment with this approach,=0A=
+>and from what I can see there are currently 2 issues:=0A=
+>=0A=
+>=0A=
+>1) Using TCGMemOp in memory.c means it is no longer accelerator agnostic=
+=0A=
+>=0A=
+>For the moment I've defined a separate MemOp in memory.h and provided a=0A=
+>mapping function in io_{read,write}x to map from TCGMemOp to MemOp and=0A=
+>then pass that into memory_region_dispatch_{read,write}.=0A=
+>=0A=
+>Other than not referencing TCGMemOp in the memory API, another reason=0A=
+>for doing this was that I wasn't convinced that all the MO_ attributes=0A=
+>were valid outside of TCG. I do, of course, strongly defer to other=0A=
+>people's knowledge in this area though.=0A=
+>=0A=
+>=0A=
+>2) The above changes to adjust_endianness() fail when=0A=
+>memory_region_dispatch_{read,write} are called recursively=0A=
+>=0A=
+>Whilst booting qemu-system-sparc64 I see that=0A=
+>memory_region_dispatch_{read,write} get called recursively - once via=0A=
+>io_{read,write}x and then again via flatview_read_continue() in exec.c.=0A=
+>=0A=
+>The net effect of this is that we perform the bswap correctly at the=0A=
+>tail of the recursion, but then as we travel back up the stack we hit=0A=
+>memory_region_dispatch_{read,write} once again causing a second bswap=0A=
+>which means the value is returned with the incorrect endian again.=0A=
+>=0A=
+>=0A=
+>My understanding from your softmmu_template.h comment above is that the=0A=
+>memory API should do the endian swapping internally allowing the removal=
+=0A=
+>of the final TGT_BE/TGT_LE applied to the result, or did I get this wrong?=
+=0A=
+>=0A=
+>> (3) In tlb_set_page_with_attrs, notice attrs.byte_swap and set=0A=
+>>     a new TLB_FORCE_SLOW bit within TLB_FLAGS_MASK.=0A=
+>>=0A=
+>> (4) In io_{read,write}x, if iotlbentry->attrs.byte_swap is set,=0A=
+>>     then memop ^=3D MO_BSWAP.=0A=
+=0A=
+Thanks all for the v1 and v2 feedback.=0A=
+=0A=
+v2:=0A=
+- Moved size+sign+endianness attributes from TCGMemOp into MemOp.=0A=
+  In v1 TCGMemOp was re-purposed entirely into MemOp.=0A=
+- Replaced MemOp MO_{8|16|32|64} with TCGMemOp MO_{UB|UW|UL|UQ} alias.=0A=
+  This is to avoid warnings on comparing and coercing different enums.=0A=
+- Renamed get_memop to get_tcgmemop for clarity.=0A=
+- MEMOP is now SIZE_MEMOP, which is just ctzl(size).=0A=
+- Split patch 3/4 so one memory_region_dispatch_{read|write} interface=0A=
+  is converted per patch.=0A=
+- Do not reuse TLB_RECHECK, use new TLB_FORCE_SLOW instead.=0A=
+- Split patch 4/4 so adding the MemTxAddrs parameters and converting=0A=
+  tlb_set_page() to tlb_set_page_with_attrs() is separate from usage.=0A=
+- CC'd maintainers.=0A=
+=0A=
+v3:=0A=
+- Like v1, the entire TCGMemOp enum is now MemOp.=0A=
+- MemOp target dependant attributes are conditional upon NEED_CPU_H=0A=
+=0A=
+v4:=0A=
+- Added Paolo Bonzini as include/exec/memop.h maintainer=0A=
+=0A=
+Tony Nguyen (15):=0A=
+  tcg: TCGMemOp is now accelerator independent MemOp=0A=
+  memory: Access MemoryRegion with MemOp=0A=
+  target/mips: Access MemoryRegion with MemOp=0A=
+  hw/s390x: Access MemoryRegion with MemOp=0A=
+  hw/intc/armv7m_nic: Access MemoryRegion with MemOp=0A=
+  hw/virtio: Access MemoryRegion with MemOp=0A=
+  hw/vfio: Access MemoryRegion with MemOp=0A=
+  exec: Access MemoryRegion with MemOp=0A=
+  cputlb: Access MemoryRegion with MemOp=0A=
+  memory: Access MemoryRegion with MemOp semantics=0A=
+  memory: Single byte swap along the I/O path=0A=
+  cpu: TLB_FLAGS_MASK bit to force memory slow path=0A=
+  cputlb: Byte swap memory transaction attribute=0A=
+  target/sparc: Add TLB entry with attributes=0A=
+  target/sparc: sun4u Invert Endian TTE bit=0A=
+=0A=
+ MAINTAINERS                             |   1 +=0A=
+ accel/tcg/cputlb.c                      |  71 +++++++++--------=0A=
+ exec.c                                  |   6 +-=0A=
+ hw/intc/armv7m_nvic.c                   |  12 ++-=0A=
+ hw/s390x/s390-pci-inst.c                |   8 +-=0A=
+ hw/vfio/pci-quirks.c                    |   5 +-=0A=
+ hw/virtio/virtio-pci.c                  |   7 +-=0A=
+ include/exec/cpu-all.h                  |  10 ++-=0A=
+ include/exec/memattrs.h                 |   2 +=0A=
+ include/exec/memop.h                    | 112 +++++++++++++++++++++++++++=
+=0A=
+ include/exec/memory.h                   |   9 ++-=0A=
+ memory.c                                |  37 +++++----=0A=
+ memory_ldst.inc.c                       |  18 ++---=0A=
+ target/alpha/translate.c                |   2 +-=0A=
+ target/arm/translate-a64.c              |  48 ++++++------=0A=
+ target/arm/translate-a64.h              |   2 +-=0A=
+ target/arm/translate-sve.c              |   2 +-=0A=
+ target/arm/translate.c                  |  32 ++++----=0A=
+ target/arm/translate.h                  |   2 +-=0A=
+ target/hppa/translate.c                 |  14 ++--=0A=
+ target/i386/translate.c                 | 132 ++++++++++++++++------------=
+----=0A=
+ target/m68k/translate.c                 |   2 +-=0A=
+ target/microblaze/translate.c           |   4 +-=0A=
+ target/mips/op_helper.c                 |   5 +-=0A=
+ target/mips/translate.c                 |   8 +-=0A=
+ target/openrisc/translate.c             |   4 +-=0A=
+ target/ppc/translate.c                  |  12 +--=0A=
+ target/riscv/insn_trans/trans_rva.inc.c |   8 +-=0A=
+ target/riscv/insn_trans/trans_rvi.inc.c |   4 +-=0A=
+ target/s390x/translate.c                |   6 +-=0A=
+ target/s390x/translate_vx.inc.c         |  10 +--=0A=
+ target/sparc/cpu.h                      |   2 +=0A=
+ target/sparc/mmu_helper.c               |  40 ++++++----=0A=
+ target/sparc/translate.c                |  14 ++--=0A=
+ target/tilegx/translate.c               |  10 +--=0A=
+ target/tricore/translate.c              |   8 +-=0A=
+ tcg/README                              |   2 +-=0A=
+ tcg/aarch64/tcg-target.inc.c            |  26 +++----=0A=
+ tcg/arm/tcg-target.inc.c                |  26 +++----=0A=
+ tcg/i386/tcg-target.inc.c               |  24 +++---=0A=
+ tcg/mips/tcg-target.inc.c               |  16 ++--=0A=
+ tcg/optimize.c                          |   2 +-=0A=
+ tcg/ppc/tcg-target.inc.c                |  12 +--=0A=
+ tcg/riscv/tcg-target.inc.c              |  20 ++---=0A=
+ tcg/s390/tcg-target.inc.c               |  14 ++--=0A=
+ tcg/sparc/tcg-target.inc.c              |   6 +-=0A=
+ tcg/tcg-op.c                            |  38 ++++-----=0A=
+ tcg/tcg-op.h                            |  86 ++++++++++-----------=0A=
+ tcg/tcg.c                               |   2 +-=0A=
+ tcg/tcg.h                               |  99 ++----------------------=0A=
+ trace/mem-internal.h                    |   4 +-=0A=
+ trace/mem.h                             |   4 +-=0A=
+ 52 files changed, 562 insertions(+), 488 deletions(-)=0A=
+ create mode 100644 include/exec/memop.h=0A=
+=0A=
+-- =0A=
+1.8.3.1=0A=
 
