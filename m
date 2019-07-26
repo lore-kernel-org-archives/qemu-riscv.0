@@ -1,52 +1,54 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hr19T-0006AC-Ji
-	for mharc-qemu-riscv@gnu.org; Fri, 26 Jul 2019 10:24:55 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:35871)
+	id 1hr1Dn-0000jw-0V
+	for mharc-qemu-riscv@gnu.org; Fri, 26 Jul 2019 10:29:23 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43805)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <richard.henderson@linaro.org>) id 1hr19Q-0005w6-1p
- for qemu-riscv@nongnu.org; Fri, 26 Jul 2019 10:24:53 -0400
+ (envelope-from <richard.henderson@linaro.org>) id 1hr1Dk-0000fO-Pw
+ for qemu-riscv@nongnu.org; Fri, 26 Jul 2019 10:29:21 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <richard.henderson@linaro.org>) id 1hr19O-00041i-R7
- for qemu-riscv@nongnu.org; Fri, 26 Jul 2019 10:24:51 -0400
-Received: from mail-pg1-x544.google.com ([2607:f8b0:4864:20::544]:44564)
+ (envelope-from <richard.henderson@linaro.org>) id 1hr1Dj-00084k-Lt
+ for qemu-riscv@nongnu.org; Fri, 26 Jul 2019 10:29:20 -0400
+Received: from mail-pl1-x642.google.com ([2607:f8b0:4864:20::642]:33653)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
- id 1hr19O-0003zs-I4
- for qemu-riscv@nongnu.org; Fri, 26 Jul 2019 10:24:50 -0400
-Received: by mail-pg1-x544.google.com with SMTP id i18so24871436pgl.11
- for <qemu-riscv@nongnu.org>; Fri, 26 Jul 2019 07:24:49 -0700 (PDT)
+ id 1hr1Dj-00083Z-BV
+ for qemu-riscv@nongnu.org; Fri, 26 Jul 2019 10:29:19 -0400
+Received: by mail-pl1-x642.google.com with SMTP id c14so24778856plo.0
+ for <qemu-riscv@nongnu.org>; Fri, 26 Jul 2019 07:29:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=subject:to:cc:references:from:openpgp:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=ch7GhX8r4Ua0ued6sWDZ5gUIVhUso0uIeEsP69b2pZY=;
- b=MN835LS0CPkIR+fLKbEAD32Q6aOiotryzACHWZFmTtEGv3TTD+xkck5wPvj0KshTkE
- j0ZUJC0KtpnAzkMiLulHHUnfbr+Ul3br6lb/amGB4hTvnF1h0h6anllyp40/ZogTH5JC
- +Hcc1egomrLtt2+xz5gJMVV3QHBWdDW6wkswEYEQCRDbUMqESEf1BI7L9+OKeRZjJM51
- pgyP7+CUALIsQqEoEU0feN5VVs3TMfL9T9eGc3Bf5ng8wDozqPhKmoVp9XdXztSVJXrB
- O3x3y1h8sqtAwsH02jJ9FpEGvx6rpOBr01Rn3AxVqS9wsi+KKHn6W5NX2/UriM6sWjde
- gbBA==
+ bh=HYkm/+YuRwdgQlTX7h7Sc0MGkhzdaPPqGlIAQEZn/Mg=;
+ b=X6hNyy43iImL1gGlKELMROj/8QrOqZyK1sMdpynJjRT38vf77tB43nVRDOoAERpjZL
+ iS98ML3FmCC+DGPOH/Z1jm2CBBwH2b134trIacB8iTyad+B4th2ziW6epN/yrt6S+oSr
+ Yt6yXv6wWqwocQPlbfrRIFaDsO6qOZtbkze73y4bl8P+EFZx0u4BXaqZN/z55qMiLy2l
+ vqHibOP/tB0+OxDG0o/7zSqjeegtFe0gnGswJNo6wFMBRaOzYWOHAwaxTP797wwIg/RB
+ zitQBxa6aT7OYxmwCIbTvNy+JGxUSv54bTlrduPiz5EnJRd70TxnfxoftAhNC/GDgs0C
+ xlGQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
  :date:user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=ch7GhX8r4Ua0ued6sWDZ5gUIVhUso0uIeEsP69b2pZY=;
- b=GkWl5Xm6lrdYo+MMiSFUnSJIJR914iZsZN2fG1jjn1ucRsS06v6Cg8E18mgLZFn6p3
- nfCHT6aFh5SdqtpTlkbXIvPojO7Jwcy/fNi7snpSQMFi8iwXn5sD1b5gQcghkAAxFUMV
- 3ZsE/3+u4BPDB5KMdIxpvJQYEgrcebxlRBglRnqwiTVy8jkpf0wBNA/kuqOL1npAsI+6
- RgksLxAlyOdvtZdCs7n1fZC1CIbpvLYMnyfcfM7/x3twRcpkuqREby8l/Jo5YC7PDsc4
- UKeTc+lVMmAq/JwYnTQ0NG+Fwl8LTU2myDlV2EtUH1Dzt+NzFvREpVhl+Umn5b4G/Eij
- /mdQ==
-X-Gm-Message-State: APjAAAV3t13PPxNzvwOQ68/9bnumc+y0hSuNT+iYne+H6tZrvsKv8AR4
- hHleqskZLl2iMG6DnkaDGSWo8g==
-X-Google-Smtp-Source: APXvYqxYVOIHTr2gCt+HQcM1RO77K5A274NtPVrH3K42rvV0YtePwhEPd5oYYyyy984/qZnj0t1yWg==
-X-Received: by 2002:a62:b60e:: with SMTP id j14mr22759183pff.54.1564151088872; 
- Fri, 26 Jul 2019 07:24:48 -0700 (PDT)
+ bh=HYkm/+YuRwdgQlTX7h7Sc0MGkhzdaPPqGlIAQEZn/Mg=;
+ b=DBGmVpaw/DtP/NXnEB+xbd+OZD3AhHeRDprgmRG2w2vCiHs+QZrzCWUnfo0FBvl9D3
+ R3N0r8TGivqG115iZcjZf7jjYmTOgk4Y4nFgtZkAGntIVAGQ8YPjovdyimSoItLhqncS
+ jz3KNF8pgeOtSsjzx77fgzI5qimWz7AbwHMv/VJchatXZ4gD8yBrp2Y0JhEN05JfMUXF
+ hr64QNPTbky2DqRHMjYZlnRWJZ+jh2P63oT5NhMt13yhnMXNXWDqFdvtML/z4pLw4AZE
+ xNBxwYpJ/6L1A2ImWd3qurQQp9RkUT9UTmp3Nh7h2xRVef27ftLr4oM2OZYs9toCshWq
+ l4Vw==
+X-Gm-Message-State: APjAAAVpRzL7RhiZlfXpECQL3zY7Yh2GlOpefRhvu990qRAbE3LuyGJO
+ y3VbrDaQ4yVZVUELGVCD/iixyQ==
+X-Google-Smtp-Source: APXvYqwfJHX0llJYhPthp+Vyof6h6XXQb6bjuc/14DrJXGVipkBHNgOla6wimefmoyBX+weNmI8ViQ==
+X-Received: by 2002:a17:902:aa5:: with SMTP id
+ 34mr100001631plp.166.1564151358166; 
+ Fri, 26 Jul 2019 07:29:18 -0700 (PDT)
 Received: from [192.168.1.11] (97-126-117-207.tukw.qwest.net. [97.126.117.207])
- by smtp.gmail.com with ESMTPSA id x26sm68965119pfq.69.2019.07.26.07.24.46
+ by smtp.gmail.com with ESMTPSA id 196sm57357139pfy.167.2019.07.26.07.29.16
  (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
- Fri, 26 Jul 2019 07:24:47 -0700 (PDT)
-To: tony.nguyen@bt.com, qemu-devel@nongnu.org
+ Fri, 26 Jul 2019 07:29:17 -0700 (PDT)
+To: Paolo Bonzini <pbonzini@redhat.com>, tony.nguyen@bt.com,
+ qemu-devel@nongnu.org
 Cc: peter.maydell@linaro.org, walling@linux.ibm.com,
  sagark@eecs.berkeley.edu, mst@redhat.com, palmer@sifive.com,
  mark.cave-ayland@ilande.co.uk, laurent@vivier.eu, Alistair.Francis@wdc.com,
@@ -57,25 +59,26 @@ Cc: peter.maydell@linaro.org, walling@linux.ibm.com,
  david@gibson.dropbear.id.au, qemu-riscv@nongnu.org,
  kbastian@mail.uni-paderborn.de, cohuck@redhat.com,
  alex.williamson@redhat.com, qemu-ppc@nongnu.org, amarkovic@wavecomp.com,
- pbonzini@redhat.com, aurelien@aurel32.net
+ aurelien@aurel32.net
 References: <3106a3c959c4498fad13a5799c89ba7b@tpw09926dag18e.domain1.systemhost.net>
- <1564123643791.27023@bt.com>
+ <1564123667210.66446@bt.com>
+ <3a893408-e864-cb3b-d86c-b6cf7b50cc39@redhat.com>
 From: Richard Henderson <richard.henderson@linaro.org>
 Openpgp: preference=signencrypt
-Message-ID: <182cfe57-bd92-77e4-2b8f-9c4f543c6661@linaro.org>
-Date: Fri, 26 Jul 2019 07:24:45 -0700
+Message-ID: <51237717-fcfa-0f3d-f635-7d12481a7625@linaro.org>
+Date: Fri, 26 Jul 2019 07:29:15 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
  Thunderbird/60.8.0
 MIME-Version: 1.0
-In-Reply-To: <1564123643791.27023@bt.com>
+In-Reply-To: <3a893408-e864-cb3b-d86c-b6cf7b50cc39@redhat.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::544
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v5 10/15] memory: Access
- MemoryRegion with MemOp semantics
+X-Received-From: 2607:f8b0:4864:20::642
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v5 11/15] memory: Single byte
+ swap along the I/O path
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -87,75 +90,27 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Jul 2019 14:24:53 -0000
+X-List-Received-Date: Fri, 26 Jul 2019 14:29:21 -0000
 
-On 7/25/19 11:47 PM, tony.nguyen@bt.com wrote:
-> To convert interfaces of MemoryRegion access, MEMOP_SIZE and
-> SIZE_MEMOP no-op stubs were introduced to change syntax while keeping
-> the existing semantics.
+On 7/26/19 2:26 AM, Paolo Bonzini wrote:
+> On 26/07/19 08:47, tony.nguyen@bt.com wrote:
+>> +        op = SIZE_MEMOP(size);
+>> +        if (need_bswap(big_endian)) {
+>> +            op ^= MO_BSWAP;
+>> +        }
 > 
-> Now with interfaces converted, we fill the stubs and use MemOp
-> semantics.
+> And this has the same issue as the first version.  It should be
 > 
-> Signed-off-by: Tony Nguyen <tony.nguyen@bt.com>
-> ---
->  include/exec/memop.h  | 5 ++---
->  include/exec/memory.h | 4 ++--
->  2 files changed, 4 insertions(+), 5 deletions(-)
+> 	op = SIZE_MEMOP(size) | (big_endian ? MO_BE : MO_LE);
 > 
-> diff --git a/include/exec/memop.h b/include/exec/memop.h
-> index 09c8d20..f2847e8 100644
-> --- a/include/exec/memop.h
-> +++ b/include/exec/memop.h
-> @@ -106,8 +106,7 @@ typedef enum MemOp {
->      MO_SSIZE = MO_SIZE | MO_SIGN,
->  } MemOp;
-> 
-> -/* No-op while memory_region_dispatch_[read|write] is converted to MemOp */
-> -#define MEMOP_SIZE(op)  (op)    /* MemOp to size.  */
-> -#define SIZE_MEMOP(ul)  (ul)    /* Size to MemOp.  */
-> +#define MEMOP_SIZE(op)  (1 << ((op) & MO_SIZE)) /* MemOp to size.  */
-> +#define SIZE_MEMOP(ul)  (ctzl(ul))              /* Size to MemOp.  */
+> and everything should work.  If it doesn't (and indeed it doesn't :)) it
+> means you have bugs somewhere else.
 
-As mentioned, I'd prefer inline functions.
+As I mentioned against patch 9, which also touches this area, it should be
+using the MemOp that is already passed in to this function instead of building
+a new one from scratch.
 
-I think it wouldn't go amiss to do
-
-static inline MemOp size_memop(unsigned size)
-{
-#ifdef CONFIG_DEBUG_TCG
-    /* power of 2 up to 8 */
-    assert((size & (size - 1)) == 0 && size >= 1 && size <= 8);
-#endif
-    return ctz32(size);
-}
-
-
-> diff --git a/include/exec/memory.h b/include/exec/memory.h
-> index 0ea4843..975b86a 100644
-> --- a/include/exec/memory.h
-> +++ b/include/exec/memory.h
-> @@ -1732,7 +1732,7 @@ void mtree_info(bool flatview, bool dispatch_tree, bool owner);
->   * @mr: #MemoryRegion to access
->   * @addr: address within that region
->   * @pval: pointer to uint64_t which the data is written to
-> - * @op: size of the access in bytes
-> + * @op: size, sign, and endianness of the memory operation
->   * @attrs: memory transaction attributes to use for the access
->   */
->  MemTxResult memory_region_dispatch_read(MemoryRegion *mr,
-> @@ -1747,7 +1747,7 @@ MemTxResult memory_region_dispatch_read(MemoryRegion *mr,
->   * @mr: #MemoryRegion to access
->   * @addr: address within that region
->   * @data: data to write
-> - * @op: size of the access in bytes
-> + * @op: size, sign, and endianness of the memory operation
->   * @attrs: memory transaction attributes to use for the access
->   */
->  MemTxResult memory_region_dispatch_write(MemoryRegion *mr,
-
-As I mentioned, now is when the actual interface change to these functions
-should occur.
+But, yes, any failure in that would mean bugs somewhere else.  ;-)
 
 
 r~
