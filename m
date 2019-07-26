@@ -1,67 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hr8lf-0000dU-Ar
-	for mharc-qemu-riscv@gnu.org; Fri, 26 Jul 2019 18:32:51 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43942)
+	id 1hr9fK-00031U-L2
+	for mharc-qemu-riscv@gnu.org; Fri, 26 Jul 2019 19:30:22 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:45506)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <alistair23@gmail.com>) id 1hr8lc-0000dM-Oo
- for qemu-riscv@nongnu.org; Fri, 26 Jul 2019 18:32:49 -0400
+ (envelope-from <palmer@dabbelt.com>) id 1hr9fI-0002xM-JK
+ for qemu-riscv@nongnu.org; Fri, 26 Jul 2019 19:30:21 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1hr8lR-00014x-JE
- for qemu-riscv@nongnu.org; Fri, 26 Jul 2019 18:32:39 -0400
-Received: from mail-lj1-x241.google.com ([2a00:1450:4864:20::241]:35559)
+ (envelope-from <palmer@dabbelt.com>) id 1hr9f6-0007Dv-8a
+ for qemu-riscv@nongnu.org; Fri, 26 Jul 2019 19:30:10 -0400
+Received: from mail-pl1-f177.google.com ([209.85.214.177]:40310)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1hr8lH-0000xW-VS; Fri, 26 Jul 2019 18:32:28 -0400
-Received: by mail-lj1-x241.google.com with SMTP id x25so52976368ljh.2;
- Fri, 26 Jul 2019 15:32:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=wo+Ql4m4lEudmpRZuro5gQRC3J7TbqqczKCoWAJ4VBY=;
- b=otnVqLyzFixS/QzPrgxHQPDAGkcg5Eu3bT0H3DCJlgkptUQYcg6NWIV0G3P2u4dlqM
- GHiGAfIfDlcU15C3oRt+xy8Vlel/4dAOWfYjdmzQT5fDR3YrgYAcdLz7Q0Qo+zZblXfx
- XoXSl18gEE1nQsiIe93gyCQFJ9yl6VCoccs3ikrbfSk9C4dnCgWtfwrApBsnwSW4MXBi
- OKb1bu6HabgsCF+rqG4VO9bHNDXCaqRceEPUuUSkkdYZ5MzDWM6FsJf8VZkUtR/37/rP
- AgzKsvEj5bFfK3Q0IvsGsQ+uktLku30nrFx8eoXCw5tbxCwH0KHI7AMmzgVZppoK6O9i
- rjKA==
+ (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1hr9es-0006OK-1a
+ for qemu-riscv@nongnu.org; Fri, 26 Jul 2019 19:29:57 -0400
+Received: by mail-pl1-f177.google.com with SMTP id a93so25238553pla.7
+ for <qemu-riscv@nongnu.org>; Fri, 26 Jul 2019 16:27:53 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=wo+Ql4m4lEudmpRZuro5gQRC3J7TbqqczKCoWAJ4VBY=;
- b=NzWnrSJrbcC2f+Nv0u2DchY3aWaYUDUPBI8iHuVpgXWGPfJ4tzcGu/d9fIn9Hwa7wb
- ZrAc/+6aGBEmIyYODcTxODoh/5iRa6o0xJsik42BC8i8U0kSzk3nrf2NxCgO1Knv/h2e
- ZNiakkIn8rhXzd3SIhbji+ouHZ46d1A4MVW4tJOEp3Qe3F9DlmWZq00bh3SbPWs3LHFZ
- 0vzCWceLbWFandgiQX4hB+RlsgTIxOnLFjnpwaRzr7H9CORijWQEzA1iJ4VD4z8t6vuo
- G8ib0KPL8ltOKgMRk2ryRkbBSUpRyAuyiBzEVghN4WxxJ8rx1aGl6+DezGBkxvWCcN5y
- we8Q==
-X-Gm-Message-State: APjAAAWkEGqMQ9WaXTVuno91S/0wNkhNtYhqb4Zge27ptiIneQCU3Oqy
- ORJ3KCYJWkU0w6xCK2iuOC6lfg1+e9s/+2EgVfo=
-X-Google-Smtp-Source: APXvYqw0Ap0GZalTR057QO+jnLhNk6VHkoD58npr9VNOTvJ1jQc7WjHEyZAf6XT4Vcb4KLHCNaQ1kAkxhlhpMqJM3Fc=
-X-Received: by 2002:a2e:480a:: with SMTP id v10mr48764801lja.94.1564180346145; 
- Fri, 26 Jul 2019 15:32:26 -0700 (PDT)
+ h=x-gm-message-state:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding:cc:from:to;
+ bh=Bj2QPnrhDA3XafxqIn5N019+xRgqy1t8vZrKKYPqIyI=;
+ b=W8B2+/3gZKglCjK1ZtPpI5T+hca47HM/qKW1PH1aYH1jlfg8YMxbEHpz1TNnTxnWS2
+ VoOPK+Rut1EyxYvgH8KYWRZ+MAZT1JbXWPGItG4GmOcTnl1ZSE1AIjfSpGjXCP+iiHR1
+ XU8WGrYI5piCMfvTLzpcGhtTTvtxz2iJflYp0QhbnbZDHk9t17GmGBXveKiCV07EjJ88
+ nswfGsd+Rt4BDR4mYkVUfJ4jqU+H+OUKp2zt+OwIe/h5ZiS4WqiawaXUhtR+GADzxRVd
+ L322K2W99PWA1t8OOFfG+Pae0XxzhzkOxES0p5hTc70q24kithrJlgE8NzSKNgzdh6Lx
+ Q/fQ==
+X-Gm-Message-State: APjAAAXwBW4ZIwAsKSKdz5eBeSBDsoAvJND+uYirPSbkkilGeuyu+BZs
+ dDE2ajOBTgVaYVfS0mZ4lmc=
+X-Google-Smtp-Source: APXvYqxIf8DGhXVzt/0mIIZj9L42Ax12usiAMz+/tFFxgJd4OH5WrBQn4RaiNHASXfzben4bBlBRiw==
+X-Received: by 2002:a17:902:2f84:: with SMTP id
+ t4mr94764328plb.57.1564183672426; 
+ Fri, 26 Jul 2019 16:27:52 -0700 (PDT)
+Received: from localhost ([12.206.222.5])
+ by smtp.gmail.com with ESMTPSA id w4sm72048848pfn.144.2019.07.26.16.27.51
+ (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+ Fri, 26 Jul 2019 16:27:51 -0700 (PDT)
+Date: Fri, 26 Jul 2019 16:27:31 -0700
+Message-Id: <20190726232731.28572-2-palmer@sifive.com>
+X-Mailer: git-send-email 2.21.0
+In-Reply-To: <20190726232731.28572-1-palmer@sifive.com>
+References: <20190726232731.28572-1-palmer@sifive.com>
 MIME-Version: 1.0
-References: <cover.1564080680.git.alistair.francis@wdc.com>
- <b415f5b51e09418760b95e5c73fad5e68b97f173.1564080680.git.alistair.francis@wdc.com>
- <CANnJOVEyy7wb74eEucj5t=xonOvUFTPWuty9R+-KP0DLc+L7zQ@mail.gmail.com>
- <CAKmqyKOh-7LE5ry_RG56-TM0bqj_kckcK74W8kFLiPHrjjx7hw@mail.gmail.com>
- <CANnJOVHWmA_KcdOC4o_4Uq9vZmNR_Sdy0L0foqqr_FwJY7ULqQ@mail.gmail.com>
-In-Reply-To: <CANnJOVHWmA_KcdOC4o_4Uq9vZmNR_Sdy0L0foqqr_FwJY7ULqQ@mail.gmail.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 26 Jul 2019 15:28:52 -0700
-Message-ID: <CAKmqyKNKLy5+q78wB-jSEcGkjrwvpS=VL_BQEGdgq-X_ZeC+eA@mail.gmail.com>
-To: Jonathan Behrens <fintelia@gmail.com>
-Cc: Alistair Francis <alistair.francis@wdc.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Cc: qemu-devel@nongnu.org,       qemu-riscv@nongnu.org,
+ Alistair Francis <alistair.francis@wdc.com>,
+ ilippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>, 
  Palmer Dabbelt <palmer@sifive.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2a00:1450:4864:20::241
-Subject: Re: [Qemu-riscv] [PATCH-4.2 v1 2/6] target/riscv: Remove strict
- perm checking for CSR R/W
+From: Palmer Dabbelt <palmer@sifive.com>
+To: Peter Maydell <peter.maydell@linaro.org>
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+ [fuzzy]
+X-Received-From: 209.85.214.177
+Subject: [Qemu-riscv] [PULL] riscv/boot: Fixup the RISC-V firmware warning
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -73,84 +64,52 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Jul 2019 22:32:49 -0000
+X-List-Received-Date: Fri, 26 Jul 2019 23:30:21 -0000
 
-On Fri, Jul 26, 2019 at 2:00 PM Jonathan Behrens <fintelia@gmail.com> wrote=
-:
->
-> The remaining checks are not sufficient. If you look at the bottom of csr=
-.c, you'll see that for most of the M-mode CSRs the predicate is set to "an=
-y" which unconditionally allows access regardless of privilege mode. The S-=
-mode CSR predicates similarly only check that supervisor mode exists, but n=
-ot that the processor is current running in that mode. I do agree with you =
-that using the register address to determine the required privilege mode is=
- a little strange, but RISC-V is designed so that bits 8 and 9 of the CSR a=
-ddress encode that information: 0=3DU-mode, 1=3DS-mode, 2=3DHS-mode, 3=3DM-=
-mode.
+From: Alistair Francis <alistair.francis@wdc.com>
 
-Ah, I didn't realise that was guaranteed. I will drop this patch from
-this series and update it in my Hypervisor series.
+Fix a typo in the warning message displayed to users, don't print the
+message when running inside qtest and don't mention a specific QEMU
+version for the deprecation.
 
-Alistair
+Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Philippe Mathieu-Daudé <philmd@redhat.com>
+Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
+---
+ hw/riscv/boot.c | 12 ++++++++----
+ 1 file changed, 8 insertions(+), 4 deletions(-)
 
->
-> I also tested by booting RVirt with a Linux guest and found that this pat=
-ch caused it to instantly crash because guest CSR accesses weren't intercep=
-ted.
->
-> Jonathan
->
-> On Fri, Jul 26, 2019 at 4:28 PM Alistair Francis <alistair23@gmail.com> w=
-rote:
->>
->> On Thu, Jul 25, 2019 at 2:48 PM Jonathan Behrens <fintelia@gmail.com> wr=
-ote:
->> >
->> > Unless I'm missing something, this is the only place that QEMU checks =
-the privilege level for read and writes to CSRs. The exact computation used=
- here won't work with the hypervisor extension, but we also can't just get =
-rid of privilege checking entirely...
->>
->> The csr_ops struct contains a checker function, so there are still
->> some checks occurring. I haven't done negative testing on this patch,
->> but the current check doesn't seem to make any sense so it should be
->> removed. We can separately discuss adding more checks but this current
->> way base don CSR address just seems strange.
->>
->> Alistair
->>
->> >
->> > Jonathan
->> >
->> > On Thu, Jul 25, 2019 at 2:56 PM Alistair Francis <alistair.francis@wdc=
-.com> wrote:
->> >>
->> >> The privledge check based on the CSR address mask 0x300 doesn't work
->> >> when using Hypervisor extensions so remove the check
->> >>
->> >> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
->> >> ---
->> >>  target/riscv/csr.c | 3 +--
->> >>  1 file changed, 1 insertion(+), 2 deletions(-)
->> >>
->> >> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
->> >> index e0d4586760..af3b762c8b 100644
->> >> --- a/target/riscv/csr.c
->> >> +++ b/target/riscv/csr.c
->> >> @@ -797,9 +797,8 @@ int riscv_csrrw(CPURISCVState *env, int csrno, ta=
-rget_ulong *ret_value,
->> >>
->> >>      /* check privileges and return -1 if check fails */
->> >>  #if !defined(CONFIG_USER_ONLY)
->> >> -    int csr_priv =3D get_field(csrno, 0x300);
->> >>      int read_only =3D get_field(csrno, 0xC00) =3D=3D 3;
->> >> -    if ((write_mask && read_only) || (env->priv < csr_priv)) {
->> >> +    if (write_mask && read_only) {
->> >>          return -1;
->> >>      }
->> >>  #endif
->> >> --
->> >> 2.22.0
->> >>
->> >>
+diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
+index 5dee63011b43..6b7d322e857c 100644
+--- a/hw/riscv/boot.c
++++ b/hw/riscv/boot.c
+@@ -26,6 +26,7 @@
+ #include "hw/riscv/boot.h"
+ #include "hw/boards.h"
+ #include "elf.h"
++#include "sysemu/qtest.h"
+ 
+ #if defined(TARGET_RISCV32)
+ # define KERNEL_BOOT_ADDRESS 0x80400000
+@@ -46,10 +47,13 @@ void riscv_find_and_load_firmware(MachineState *machine,
+          * In the future this defaul will change to loading the prebuilt
+          * OpenSBI firmware. Let's warn the user and then continue.
+         */
+-        warn_report("No -bios option specified. Not loading a firmware.");
+-        warn_report("This default will change in QEMU 4.3. Please use the " \
+-                    "-bios option to aviod breakages when this happens.");
+-        warn_report("See QEMU's deprecation documentation for details");
++        if (!qtest_enabled()) {
++            warn_report("No -bios option specified. Not loading a firmware.");
++            warn_report("This default will change in a future QEMU release. " \
++                        "Please use the -bios option to avoid breakages when "\
++                        "this happens.");
++            warn_report("See QEMU's deprecation documentation for details.");
++        }
+         return;
+     }
+ 
+-- 
+2.21.0
+
 
