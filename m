@@ -1,53 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hr0pz-0000cM-4n
-	for mharc-qemu-riscv@gnu.org; Fri, 26 Jul 2019 10:04:47 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:55051)
+	id 1hr0zW-0000jR-Ie
+	for mharc-qemu-riscv@gnu.org; Fri, 26 Jul 2019 10:14:38 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:46188)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <richard.henderson@linaro.org>) id 1hr0pv-0000YX-FJ
- for qemu-riscv@nongnu.org; Fri, 26 Jul 2019 10:04:44 -0400
+ (envelope-from <richard.henderson@linaro.org>) id 1hr0zT-0000en-S1
+ for qemu-riscv@nongnu.org; Fri, 26 Jul 2019 10:14:36 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <richard.henderson@linaro.org>) id 1hr0pu-00036C-8Z
- for qemu-riscv@nongnu.org; Fri, 26 Jul 2019 10:04:43 -0400
-Received: from mail-pf1-x441.google.com ([2607:f8b0:4864:20::441]:40642)
+ (envelope-from <richard.henderson@linaro.org>) id 1hr0zS-0003v5-Pn
+ for qemu-riscv@nongnu.org; Fri, 26 Jul 2019 10:14:35 -0400
+Received: from mail-pf1-x443.google.com ([2607:f8b0:4864:20::443]:42354)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
- id 1hr0pt-00034k-WC
- for qemu-riscv@nongnu.org; Fri, 26 Jul 2019 10:04:42 -0400
-Received: by mail-pf1-x441.google.com with SMTP id p184so24575080pfp.7
- for <qemu-riscv@nongnu.org>; Fri, 26 Jul 2019 07:04:41 -0700 (PDT)
+ id 1hr0zS-0003tx-G7
+ for qemu-riscv@nongnu.org; Fri, 26 Jul 2019 10:14:34 -0400
+Received: by mail-pf1-x443.google.com with SMTP id q10so24583724pff.9
+ for <qemu-riscv@nongnu.org>; Fri, 26 Jul 2019 07:14:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=subject:from:to:cc:references:openpgp:message-id:date:user-agent
+ h=subject:to:cc:references:from:openpgp:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=nKa24evqf5xPcn+k8W5NyW7GQh08fTUnIlUWImNcE4I=;
- b=pUrqwjbOtgCRBOtjOlCCyA53HeLU6Ec+IvNjrDsAxgBKPBUVDAU3zOnsMV6RSqCQU/
- 9/NY0FmP3h9Ae4tJE8BkzNfl2y/BoBmi0LPBUTGzop95vVWDGQ0/5GdGr4CQkrzCYPaD
- vmvAN88SUcyPxZ5MeYUDFU3/HXZe4vlYk/9qowCId4Mr/KnmHD6AALACo0A023viVJzV
- NJPul29FbkgGnwwEwpPGN6Lp3NveIYyICrVUj5pIbmmxk+N8kSq4HJZvZrGg0/7q+GWt
- CT7cO6nBJ8x4ar4E7gY9xwiGPFQiUqPAbr/pwWBT9XWLySUnd2b5rtn3pF+MAoHK+VC8
- lADA==
+ bh=i/DvQrYQ97Yl8oYvdth1hdR4PNbJOpdRc88CoWxTHyU=;
+ b=Wq22dtUwz1A7TMF5HCdO/SyYzbc29Tl0JYbsG/psMJbG9xEKYBFeLPKMIV6q86OU5t
+ tnnkgjrqp6V5WXxcDNm8hlWK79RJI8H362lbhAxUcf2e9cVioZlWmTXNCSkuqF3Eqlof
+ 7rml1TW1VevDsAG7SAhxu6bUmTXy17ytYaZbn8EAvg0+RGAjvY6qSrzraIhoOxpk6ZJw
+ 5BTMQnN1NrqYKsjx1bl2CNOaoQUXVHc/9mZJ3wzWl3nRy6qFIkXwB+J3f1MohgJTRt9x
+ i9abbHwK4PAfvzcXmuWi/JhDV+T3MmebY5cjX10tLUk5y7WhO7+fQn07xtvBKnnyEBIB
+ X45A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:from:to:cc:references:openpgp:message-id
+ h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
  :date:user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=nKa24evqf5xPcn+k8W5NyW7GQh08fTUnIlUWImNcE4I=;
- b=MjeeSj6Qz5YDSQ3t+vMW+HfmfiW96A03rX3+0wpRTY3if4Q2y37iHiXU2Iq3bXqIbl
- MyIL6QvxTKJ63oTOgoN2yqYpiFy6w1K2vQs21H3VWbWchVVYoHihQrarIYE53orYMT3V
- zIrWNPTyEoXdh912bW1E+C2fjKG4jN1hAfe7df+j24TdbLX38fwSMzSPDrqVTwDkM7k3
- BjpQDdw6OUbrf5rR3Hm7nvuFydw2mF9F0lx1Yb9mPyPM5f8SjjkgmT+svM2ZB1e3CKVw
- TFBvgzzTtEm+b3feifmKW+kiKfFdSbZLysTXMMU+IR10sUuw2do4A5aFalTpZ2C87i9p
- m7jw==
-X-Gm-Message-State: APjAAAVA8fg4THMPUfmu6EuT0ppumfj93sBKfVkRl36fMsmAh2Eyofsy
- eVUhwcqaiCmrgPnQc+71m3LMDg==
-X-Google-Smtp-Source: APXvYqxwGxrwjdRcxVad4EFkN1249leocRBb+DvD1AgR/Ayl+/s8z+MNpVLn4sEBCAV377KEkOb3xQ==
-X-Received: by 2002:a17:90a:9f4a:: with SMTP id
- q10mr97990476pjv.95.1564149880644; 
- Fri, 26 Jul 2019 07:04:40 -0700 (PDT)
+ bh=i/DvQrYQ97Yl8oYvdth1hdR4PNbJOpdRc88CoWxTHyU=;
+ b=EMrwXdeib6EOaQCBxm7aVPwogAAE+8Yb7BKIkdh3BUh9JGPFNKDVrN1U5Rd+4QTmP5
+ Pnw2KRFERxjLYlF/ZJrPtnsWvfVF49zem38xrfxujnTABuW7WP28Qks0Fgm1mrThA2HP
+ r8WepLp7Hq7NTpSv9rfkIs4fK93daNLq2w1cpRcOzaTh9Pw21LjCfACWHBMlPo8RVFlt
+ axf99Xr5nU3j2Zr7RgLPJImhSbcPQ+/PrqzbjUk+soBc2qXAUbQPFDzWi8bgryWmbkZ8
+ hgYtGjr/IT6bxxmUXDdJh+zTb9DRz5aLBPQKvedOTjQOqbRNwz4UZnH1rodt7D7NmasW
+ 5Syw==
+X-Gm-Message-State: APjAAAWtdMtzroDyfyx5DOorlWXCSfBXk88noxv4cSlX4m2q4NxOrMKr
+ 8J/2/n0kIDhjChpPL4TxI1VZ1w==
+X-Google-Smtp-Source: APXvYqxDQAwXwyxw7nkYt1JtGRrNBEaknYYcz3WpCna5A0OARV6Nwpwuz1lnUaab5n4jyZR8B8TXGQ==
+X-Received: by 2002:a62:1597:: with SMTP id 145mr21675793pfv.180.1564150473241; 
+ Fri, 26 Jul 2019 07:14:33 -0700 (PDT)
 Received: from [192.168.1.11] (97-126-117-207.tukw.qwest.net. [97.126.117.207])
- by smtp.gmail.com with ESMTPSA id o24sm103707061pfp.135.2019.07.26.07.04.38
+ by smtp.gmail.com with ESMTPSA id x13sm56422483pfn.6.2019.07.26.07.14.31
  (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
- Fri, 26 Jul 2019 07:04:39 -0700 (PDT)
-From: Richard Henderson <richard.henderson@linaro.org>
+ Fri, 26 Jul 2019 07:14:32 -0700 (PDT)
 To: tony.nguyen@bt.com, qemu-devel@nongnu.org
 Cc: peter.maydell@linaro.org, walling@linux.ibm.com,
  sagark@eecs.berkeley.edu, mst@redhat.com, palmer@sifive.com,
@@ -61,22 +59,22 @@ Cc: peter.maydell@linaro.org, walling@linux.ibm.com,
  alex.williamson@redhat.com, qemu-ppc@nongnu.org, amarkovic@wavecomp.com,
  pbonzini@redhat.com, aurelien@aurel32.net
 References: <3106a3c959c4498fad13a5799c89ba7b@tpw09926dag18e.domain1.systemhost.net>
- <1564123434793.89101@bt.com>
- <2e89740b-58e7-ed7b-834a-f94fa76f3cd3@linaro.org>
+ <1564123618147.19868@bt.com>
+From: Richard Henderson <richard.henderson@linaro.org>
 Openpgp: preference=signencrypt
-Message-ID: <1335cf86-c27b-6aa6-cc47-6e986d270518@linaro.org>
-Date: Fri, 26 Jul 2019 07:04:37 -0700
+Message-ID: <b5309b86-edbb-2b23-78e4-7657f6b05da5@linaro.org>
+Date: Fri, 26 Jul 2019 07:14:30 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
  Thunderbird/60.8.0
 MIME-Version: 1.0
-In-Reply-To: <2e89740b-58e7-ed7b-834a-f94fa76f3cd3@linaro.org>
+In-Reply-To: <1564123618147.19868@bt.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::441
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v5 02/15] memory: Access
+X-Received-From: 2607:f8b0:4864:20::443
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v5 09/15] cputlb: Access
  MemoryRegion with MemOp
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -89,53 +87,65 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Jul 2019 14:04:44 -0000
+X-List-Received-Date: Fri, 26 Jul 2019 14:14:37 -0000
 
-On 7/26/19 6:36 AM, Richard Henderson wrote:
-> On 7/25/19 11:43 PM, tony.nguyen@bt.com wrote:
->>  } MemOp;
->>
->> +/* No-op while memory_region_dispatch_[read|write] is converted to MemOp */
->> +#define MEMOP_SIZE(op)  (op)    /* MemOp to size.  */
->> +#define SIZE_MEMOP(ul)  (ul)    /* Size to MemOp.  */
->> +
+On 7/25/19 11:46 PM, tony.nguyen@bt.com wrote:
+> No-op MEMOP_SIZE and SIZE_MEMOP macros allows us to later easily
+> convert memory_region_dispatch_{read|write} paramter "unsigned size"
+> into a size+sign+endianness encoded "MemOp op".
 > 
-> This doesn't thrill me, because for 9 patches these macros don't do what they
-> say on the tin, but I'll accept it.
+> Being a no-op macro, this patch does not introduce any logical change.
 > 
-> I would prefer lower-case and that the real implementation in patch 10 be
-> inline functions with proper types instead of typeless macros.  In particular,
-> "unsigned" not "unsigned long" as you imply from "ul" here, since that's what
-> was used ...
+> Signed-off-by: Tony Nguyen <tony.nguyen@bt.com>
+> ---
+>  accel/tcg/cputlb.c | 21 ++++++++++-----------
+>  1 file changed, 10 insertions(+), 11 deletions(-)
 > 
->>  MemTxResult memory_region_dispatch_read(MemoryRegion *mr,
->>                                          hwaddr addr,
->>                                          uint64_t *pval,
->> -                                        unsigned size,
->> +                                        MemOp op,
->>                                          MemTxAttrs attrs);
+> diff --git a/accel/tcg/cputlb.c b/accel/tcg/cputlb.c
+> index 523be4c..5d88cec 100644
+> --- a/accel/tcg/cputlb.c
+> +++ b/accel/tcg/cputlb.c
+> @@ -881,7 +881,7 @@ static void tlb_fill(CPUState *cpu, target_ulong addr, int size,
+> 
+>  static uint64_t io_readx(CPUArchState *env, CPUIOTLBEntry *iotlbentry,
+>                           int mmu_idx, target_ulong addr, uintptr_t retaddr,
+> -                         MMUAccessType access_type, int size)
+> +                         MMUAccessType access_type, MemOp op)
 
-Actually, I thought of something that would make me happier:
+As I mentioned for patch 2, don't change this now, wait until after patch 10.
 
-Do not make any change to memory_region_dispatch_{read,write} now.  Let the
-operand continue to be "unsigned size", because it still is, because of the
-no-op macros.
+> -    r = memory_region_dispatch_read(mr, mr_offset,
+> -                                    &val, size, iotlbentry->attrs);
+> +    r = memory_region_dispatch_read(mr, mr_offset, &val, op, iotlbentry->attrs);
 
-Make the change to to the proper type at the same time that you flip the switch
-to use the proper conversion function.  This will make patch 10 about 5 lines
-longer, but we'll have proper typing at all points in between.
+So size_memop here,
+
+> -        cpu_transaction_failed(cpu, physaddr, addr, size, access_type,
+> +        cpu_transaction_failed(cpu, physaddr, addr, MEMOP_SIZE(op), access_type,
+>                                 mmu_idx, iotlbentry->attrs, r, retaddr);
+
+but no memop_size here.
+
+>  static void io_writex(CPUArchState *env, CPUIOTLBEntry *iotlbentry,
+>                        int mmu_idx, uint64_t val, target_ulong addr,
+> -                      uintptr_t retaddr, int size)
+> +                      uintptr_t retaddr, MemOp op)
+
+Likewise.
+
+>          res = io_readx(env, &env_tlb(env)->d[mmu_idx].iotlb[index],
+> -                       mmu_idx, addr, retaddr, access_type, size);
+> +                       mmu_idx, addr, retaddr, access_type, SIZE_MEMOP(size));
+
+And when you do come back to change the types after patch 10, at the top of the
+function:
+
+-    unsigned a_bits = get_alignment_bits(get_memop(oi));
++    MemOp op = get_memop(oi);
++    unsigned a_bits = get_alignment_bits(op);
+
+and then pass along op directly.  Which will fix some of the weirdness in patch 11.
 
 
 r~
-
-> 
-> ... here.
-> 
-> With the name case change,
-> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-> 
-> 
-> r~
-> 
-
 
