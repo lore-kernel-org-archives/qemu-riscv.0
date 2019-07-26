@@ -1,65 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hr6rB-000885-Bl
-	for mharc-qemu-riscv@gnu.org; Fri, 26 Jul 2019 16:30:25 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:45186)
+	id 1hr8Nc-0007RL-85
+	for mharc-qemu-riscv@gnu.org; Fri, 26 Jul 2019 18:08:00 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:60476)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <alistair23@gmail.com>) id 1hr6r8-0007wn-2q
- for qemu-riscv@nongnu.org; Fri, 26 Jul 2019 16:30:23 -0400
+ (envelope-from <fintelia@gmail.com>) id 1hr8NY-0007Oy-Pw
+ for qemu-riscv@nongnu.org; Fri, 26 Jul 2019 18:07:58 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1hr6r6-0004eI-HD
- for qemu-riscv@nongnu.org; Fri, 26 Jul 2019 16:30:22 -0400
-Received: from mail-lj1-x242.google.com ([2a00:1450:4864:20::242]:38781)
+ (envelope-from <fintelia@gmail.com>) id 1hr8NC-0003mG-HB
+ for qemu-riscv@nongnu.org; Fri, 26 Jul 2019 18:07:41 -0400
+Received: from mail-lf1-x141.google.com ([2a00:1450:4864:20::141]:36036)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1hr6r1-0004Nl-AW; Fri, 26 Jul 2019 16:30:16 -0400
-Received: by mail-lj1-x242.google.com with SMTP id r9so52667524ljg.5;
- Fri, 26 Jul 2019 13:30:13 -0700 (PDT)
+ (Exim 4.71) (envelope-from <fintelia@gmail.com>)
+ id 1hr8Mu-0003EF-I6; Fri, 26 Jul 2019 18:07:16 -0400
+Received: by mail-lf1-x141.google.com with SMTP id q26so38102385lfc.3;
+ Fri, 26 Jul 2019 15:06:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=+hVrgHXtVjveEqE+x9eXFRy8gT0mFoAWFgoVy+YUdbw=;
- b=KDIAi8ODgnrRC9j3IUDQ9HxuYtAX+DVUwoCnIiEeSzs+fnzg4v0elZM4h0M8SU60Du
- ehoowTVR+V1oy0PJuAYsKqHICaxyHkA/qRyZ/uebMPHbkH3pIhfgkhhH1oJJtu2mlilH
- wE3VuLkhtK8ebIJBUOZYvzgIvMdN/V2KZ2+Fb54TD1tfL33fes9jQsUTemtC2Kw1ZE/u
- AZSU/bce5MA2uNYsbfr9+xNf5zGbvevOgEQ/lZ8QvGRpcGA2COinJaBp8xt0Bh7Tq41a
- ntDeP6OWcvLrDM1jj9dOvq0IiOiTe3R3+kAiWPXzOMUWpX+iRyy7RDf8rLPPiyOFdPWH
- 6CNA==
+ :cc; bh=fCK+X2tcIS92/EKkLAEH9dGaJcfqMKXYLhoNNJJVB0E=;
+ b=O0nt8Ejl+oPRGkmrZfNBwxsKHxdZzv+QdxkPU/NX4H7WbN7vdAPmmgJjM8yOre3ByD
+ gwQCHluVRVan4jubv+QqI9K96vd70T20iz27uVqNhsLFopYiiP1+/x4s0xOnyZ6Mu79v
+ CjFyGmaCZ9vS0BXAy0h+r8dQiEkuDGyddJH0GvBDpzzuj4TzeC2duH+YTkhsOZeofz6j
+ 1rQpkmG1BCyMpLa4U9+XS84sXVEKS5VrNkL8lu9Sq+zHozOOWlzZkot5A3W52SWOgXQ7
+ l0g3pLtcffrABCIiCSkrunb38lQ5W8S9ruI3l4zO2xzQVsV99O812FD/XBgzuQxJ1ub2
+ X8Dw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=+hVrgHXtVjveEqE+x9eXFRy8gT0mFoAWFgoVy+YUdbw=;
- b=becJX8CtB4YgxbKbq74Gf1sS2nmA1n2SKV3CFUYB4wNHDgngmVks+kWRADVf3pNldq
- Nopizjp9hYcrupD/b2K14fcbtNpZRcttGuM9H2I84mQ1yplUuUdNtl/Y1RpA05aQObN9
- Z6Hr5whhFBVg4H90nCVNejpX3qQEYCigesXFlzpxJ9n+HskN7nnIU6GwLvVRsFACLpjz
- rzwiv4TzyADrlWMJzcNc28bJpAZBJIKoMb9lEjg0Ma0yfb0rmN3ymd0Eprf1MA1Zf+72
- lARaDFyqHW5jprf9/PsJGe1dVeMVs+wpBYHOwPUlgxRrTmVNMQROTsRvqXvr1Duo5H+S
- fS4A==
-X-Gm-Message-State: APjAAAXZPnC+VBIqqAu3Ul97/Y/vNBv1SeLFtT0zUhFEzWj867H47amG
- MWqELgtNWp97CmmT1U/1ssIw94Zz5o0wKTJpzOE=
-X-Google-Smtp-Source: APXvYqxa1BPgYjRmcVJobmB5xYAkpCoHDVA/fMLViQd8HINwKlZWRLeI73a8g4TCUdvwLUvs1dWH4Niu0NAtpwV4cEQ=
-X-Received: by 2002:a2e:9758:: with SMTP id f24mr51106503ljj.58.1564173012146; 
- Fri, 26 Jul 2019 13:30:12 -0700 (PDT)
+ bh=fCK+X2tcIS92/EKkLAEH9dGaJcfqMKXYLhoNNJJVB0E=;
+ b=jC2zPCkPxrufgIrLFzMV1WnR4yzs0jGjkx0ruL22I/eEfj0DyUtY3eqLNpBiLtdU/O
+ P2jyHEOtTsuY/89G+LlwQxKbtymvpUZbdBt4NVphN3HXjnnSr4v+aZg5GD5RvflOSQsj
+ rSETbOZekCxXk9DWw1GFgJ3iqBkr293suHyQSjrrrXsDL/9s2+LM8bZUlJUxf7F7NxCe
+ A1TVTtptr6LPanT+lZaIkRxNG+RjTm2KSM4QN2JMYtTNlmURVyJC8AsUDPbVXvV2zp5X
+ Vb/b8VlpY1JSzw+j4WGt8WyBgLHVTQ0pAFmSizCBVF/X9MU7/0FxUGZJLhlMJ0gvU81r
+ 2GJg==
+X-Gm-Message-State: APjAAAW19ttx/bOP8sqsACOgyiZH3CYnblDs8MmEq2IcHazcilXGlgep
+ qcteDlcg6XfIuoSNhB6oGHd7psTwPhWmV/qgi0Qm8KDg
+X-Google-Smtp-Source: APXvYqwISxTqTXIUht4oVDWEipcjsRU9WorxiK6vadDCUb2C91FzAvg3Vc6HWd849PSWt9PH1e6BQykS+IdePdqbdb4=
+X-Received: by 2002:a19:7006:: with SMTP id h6mr44830456lfc.5.1564174850508;
+ Fri, 26 Jul 2019 14:00:50 -0700 (PDT)
 MIME-Version: 1.0
-References: <1563950742-22592-1-git-send-email-chihmin.chao@sifive.com>
- <CAKmqyKM2-60bn1v+bNsX6H+jZ-gTrsUwqah9yPtAn9VhZ2d1jw@mail.gmail.com>
- <CAEiOBXXqF4qkOsQX=wdt92ice5UUZGsubVEc-5qryLdFSesUjg@mail.gmail.com>
-In-Reply-To: <CAEiOBXXqF4qkOsQX=wdt92ice5UUZGsubVEc-5qryLdFSesUjg@mail.gmail.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 26 Jul 2019 13:26:39 -0700
-Message-ID: <CAKmqyKNnFOuSgy=cJsET2pqi2gCk8G7eWJ3HnQdrKUcsFL4SuA@mail.gmail.com>
-To: Chih-Min Chao <chihmin.chao@sifive.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+References: <cover.1564080680.git.alistair.francis@wdc.com>
+ <b415f5b51e09418760b95e5c73fad5e68b97f173.1564080680.git.alistair.francis@wdc.com>
+ <CANnJOVEyy7wb74eEucj5t=xonOvUFTPWuty9R+-KP0DLc+L7zQ@mail.gmail.com>
+ <CAKmqyKOh-7LE5ry_RG56-TM0bqj_kckcK74W8kFLiPHrjjx7hw@mail.gmail.com>
+In-Reply-To: <CAKmqyKOh-7LE5ry_RG56-TM0bqj_kckcK74W8kFLiPHrjjx7hw@mail.gmail.com>
+From: Jonathan Behrens <fintelia@gmail.com>
+Date: Fri, 26 Jul 2019 17:00:07 -0400
+Message-ID: <CANnJOVHWmA_KcdOC4o_4Uq9vZmNR_Sdy0L0foqqr_FwJY7ULqQ@mail.gmail.com>
+To: Alistair Francis <alistair23@gmail.com>
+Cc: Alistair Francis <alistair.francis@wdc.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Fam Zheng <fam@euphon.net>, Eduardo Habkost <ehabkost@redhat.com>, 
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>, 
- Cornelia Huck <cohuck@redhat.com>, Cleber Rosa <crosa@redhat.com>, 
- =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
+ Palmer Dabbelt <palmer@sifive.com>
+Content-Type: multipart/alternative; boundary="00000000000054d069058e9bd69e"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::242
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v3] tests/boot_linux_console:
- add a test for riscv64 + virt
+X-Received-From: 2a00:1450:4864:20::141
+Subject: Re: [Qemu-riscv] [PATCH-4.2 v1 2/6] target/riscv: Remove strict
+ perm checking for CSR R/W
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -71,163 +70,161 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Jul 2019 20:30:24 -0000
+X-List-Received-Date: Fri, 26 Jul 2019 22:07:58 -0000
 
-On Fri, Jul 26, 2019 at 10:12 AM Chih-Min Chao <chihmin.chao@sifive.com> wrote:
->
->
->
-> On Thu, Jul 25, 2019 at 8:12 AM Alistair Francis <alistair23@gmail.com> wrote:
->>
->> On Tue, Jul 23, 2019 at 11:46 PM Chih-Min Chao <chihmin.chao@sifive.com> wrote:
->> >
->> > Similar to the mips + malta test, it boots a Linux kernel on a virt
->> > board and verify the serial is working.  Also, it relies on the serial
->> > device set by the machine itself.
->> >
->> > If riscv64 is a target being built, "make check-acceptance" will
->> > automatically include this test by the use of the "arch:riscv64" tags.
->> >
->> > Alternatively, this test can be run using:
->> >
->> >   $ avocado run -t arch:riscv64 tests/acceptance
->> >
->> > packages
->> >   debian official
->> >     binutils-riscv64-linux-gnu_2.32-8
->> >     opensbi_0.4-1_all
->> >     linux-image-5.0.0-trunk-riscv64 5.0.2-1~exp1
->> >   third-party
->> >     https://github.com/groeck/linux-build-test/rootfs/riscv64/rootfs.cpio.gz
->> >     (the repo is also used in mips target acceptance)
->> >
->> > Signed-off-by: Chih-Min Chao <chihmin.chao@sifive.com>
->> > ---
->> >  .travis.yml                            |  2 +-
->> >  tests/acceptance/boot_linux_console.py | 67 ++++++++++++++++++++++++++++++++++
->> >  2 files changed, 68 insertions(+), 1 deletion(-)
->> >
->> > diff --git a/.travis.yml b/.travis.yml
->> > index caf0a1f..7ba9952 100644
->> > --- a/.travis.yml
->> > +++ b/.travis.yml
->> > @@ -232,7 +232,7 @@ matrix:
->> >
->> >      # Acceptance (Functional) tests
->> >      - env:
->> > -        - CONFIG="--python=/usr/bin/python3 --target-list=x86_64-softmmu,mips-softmmu,mips64el-softmmu,aarch64-softmmu,arm-softmmu,s390x-softmmu,alpha-softmmu"
->> > +        - CONFIG="--python=/usr/bin/python3 --target-list=x86_64-softmmu,mips-softmmu,mips64el-softmmu,aarch64-softmmu,arm-softmmu,s390x-softmmu,alpha-softmmu,riscv64-softmmu"
->> >          - TEST_CMD="make check-acceptance"
->> >        after_failure:
->> >          - cat tests/results/latest/job.log
->> > diff --git a/tests/acceptance/boot_linux_console.py b/tests/acceptance/boot_linux_console.py
->> > index 3215950..b0569b9 100644
->> > --- a/tests/acceptance/boot_linux_console.py
->> > +++ b/tests/acceptance/boot_linux_console.py
->> > @@ -354,3 +354,70 @@ class BootLinuxConsole(Test):
->> >          self.vm.launch()
->> >          console_pattern = 'Kernel command line: %s' % kernel_command_line
->> >          self.wait_for_console_pattern(console_pattern)
->> > +
->> > +    def test_riscv64_virt(self):
->> > +        """
->> > +        :avocado: tags=arch:riscv64
->> > +        :avocado: tags=machine:virt
->> > +        """
->> > +        deb_url = ('https://snapshot.debian.org/archive/debian/'
->> > +                         '20190424T171759Z/pool/main/b/binutils/'
->> > +                         'binutils-riscv64-linux-gnu_2.32-8_amd64.deb')
->> > +        deb_hash = ('7fe376fd4452696c03acd508d6d613ca553ea15e')
->> > +        deb_path = self.fetch_asset(deb_url, asset_hash=deb_hash)
->> > +        objcopy_path = '/usr/bin/riscv64-linux-gnu-objcopy'
->> > +        objcopy_path = self.extract_from_deb(deb_path, objcopy_path)
->> > +        libbfd_path = '/usr/lib/x86_64-linux-gnu/libbfd-2.32-riscv64.so'
->> > +        libbfd_path = self.extract_from_deb(deb_path, libbfd_path)
->> > +        process.run('ls -al %s' % (objcopy_path))
->>
->> Why do we need objcopy? Won't this not work on non x86 architectures?
->>
->> > +
->> > +        deb_url = ('https://snapshot.debian.org/archive/debian/'
->> > +                   '20190708T032337Z/pool/main/o/opensbi/'
->> > +                   'opensbi_0.4-1_all.deb')
->> > +        deb_hash = ('2319dcd702958291d323acf5649fd98a11d90112')
->> > +        deb_path = self.fetch_asset(deb_url, asset_hash=deb_hash)
->> > +        opensbi_path = ('/usr/lib/riscv64-linux-gnu/opensbi/'
->> > +                        'qemu/virt/fw_jump.elf')
->> > +        opensbi_path = self.extract_from_deb(deb_path, opensbi_path)
->> > +
->> > +        deb_url = ('https://snapshot.debian.org/archive/debian-ports/'
->> > +                   '20190319T205124Z/pool-riscv64/main/l/linux/'
->> > +                   'linux-image-5.0.0-trunk-riscv64_5.0.2-1~exp1_riscv64.deb')
->> > +        deb_hash = ('90155ed4b36673cbf7746a37cf3159c8f0b2857a')
->> > +        deb_path = self.fetch_asset(deb_url, asset_hash=deb_hash)
->> > +        kernel_path = '/boot/vmlinux-5.0.0-trunk-riscv64'
->>
->> I thought we were swapping to using an Image file?
->>
->> Alistair
->>
->
->   For objcopy,
->          Philippe had the same question in PATCH v2 thread.  Debian linux-kernel package only has vmlinux and riscv vmlinux  ELF header doesn't contain the correct physical loading address 0x8020_0000.
->           What I think is to extract the Image from vmlinux by objcopy.  This is what kernel do when generating  arch/riscv/boot/Image.
+--00000000000054d069058e9bd69e
+Content-Type: text/plain; charset="UTF-8"
 
-That is a real pain. I've never used Debian on RISC-V but that seems
-strange that they don't build Image files. I think you should use a
-Fedora kernel instead then.
+The remaining checks are not sufficient. If you look at the bottom of
+csr.c, you'll see that for most of the M-mode CSRs the predicate is set to
+"any" which unconditionally allows access regardless of privilege mode. The
+S-mode CSR predicates similarly only check that supervisor mode exists, but
+not that the processor is current running in that mode. I do agree with you
+that using the register address to determine the required privilege mode is
+a little strange, but RISC-V is designed so that bits 8 and 9 of the CSR
+address encode that information: 0=U-mode, 1=S-mode, 2=HS-mode, 3=M-mode.
 
+I also tested by booting RVirt <https://github.com/mit-pdos/RVirt> with a
+Linux guest and found that this patch caused it to instantly crash because
+guest CSR accesses weren't intercepted.
+
+Jonathan
+
+On Fri, Jul 26, 2019 at 4:28 PM Alistair Francis <alistair23@gmail.com>
+wrote:
+
+> On Thu, Jul 25, 2019 at 2:48 PM Jonathan Behrens <fintelia@gmail.com>
+> wrote:
+> >
+> > Unless I'm missing something, this is the only place that QEMU checks
+> the privilege level for read and writes to CSRs. The exact computation used
+> here won't work with the hypervisor extension, but we also can't just get
+> rid of privilege checking entirely...
 >
->   For swapping to using an image file,
->          I think what you talk about is we have included opensbi.bin into qemu master ?
-
-That has already happened, but you don't need it included.
-
-Alistair
-
->          The reason is the test use -initrd and -append to pass rootfs and kernel command line option and the two options requires using of -kernel option.
->          But -kernel option can't load the opensbi.bin to expected address.
+> The csr_ops struct contains a checker function, so there are still
+> some checks occurring. I haven't done negative testing on this patch,
+> but the current check doesn't seem to make any sense so it should be
+> removed. We can separately discuss adding more checks but this current
+> way base don CSR address just seems strange.
 >
-> chihmin
+> Alistair
 >
->>
->> > +        kernel_path = self.extract_from_deb(deb_path, kernel_path)
->> > +        kimage_path = self.workdir + "/Image"
->> > +        env = os.environ
->> > +        env['LD_LIBRARY_PATH'] = ('%s:' % (os.path.dirname(libbfd_path)) +
->> > +                                 env.get('LD_LIBRARY_PATH', ''))
->> > +        process.run(('%s -O binary -O binary -R'
->> > +                     '.note -R .note.gnu.build-id -R .comment -S %s %s') %
->> > +                     (objcopy_path, kernel_path, kimage_path))
->> > +
->> > +        initrd_url = ('https://github.com/groeck/linux-build-test/raw/'
->> > +                      '8584a59ed9e5eb5ee7ca91f6d74bbb06619205b8/rootfs/'
->> > +                      'riscv64/rootfs.cpio.gz')
->> > +        initrd_hash = 'f4867d263754961b6f626cdcdc0cb334c47e3b49'
->> > +        initrd_path = self.fetch_asset(initrd_url, asset_hash=initrd_hash)
->> > +
->> > +        self.vm.set_machine('virt')
->> > +        self.vm.set_console()
->> > +        kernel_command_line = (self.KERNEL_COMMON_COMMAND_LINE
->> > +                               + 'console=ttyS0 noreboot')
->> > +        self.vm.add_args('-bios', "none",
->> > +                '-kernel', opensbi_path,
->> > +                '-device', 'loader,file=%s,addr=0x80200000' % (kimage_path),
->> > +                '-initrd', initrd_path,
->> > +                '-append', kernel_command_line,
->> > +                '-no-reboot')
->> > +
->> > +        self.vm.launch()
->> > +        self.wait_for_console_pattern('Boot successful.')
->> > +
->> > +        self.exec_command_and_wait_for_pattern('cat /proc/cpuinfo',
->> > +                                               'isa')
->> > +        self.exec_command_and_wait_for_pattern('uname -a',
->> > +                                               'SMP Debian')
->> > +        self.exec_command_and_wait_for_pattern('reboot',
->> > +                                               'reboot: Restarting system')
->> > --
->> > 2.7.4
->> >
->> >
+> >
+> > Jonathan
+> >
+> > On Thu, Jul 25, 2019 at 2:56 PM Alistair Francis <
+> alistair.francis@wdc.com> wrote:
+> >>
+> >> The privledge check based on the CSR address mask 0x300 doesn't work
+> >> when using Hypervisor extensions so remove the check
+> >>
+> >> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> >> ---
+> >>  target/riscv/csr.c | 3 +--
+> >>  1 file changed, 1 insertion(+), 2 deletions(-)
+> >>
+> >> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> >> index e0d4586760..af3b762c8b 100644
+> >> --- a/target/riscv/csr.c
+> >> +++ b/target/riscv/csr.c
+> >> @@ -797,9 +797,8 @@ int riscv_csrrw(CPURISCVState *env, int csrno,
+> target_ulong *ret_value,
+> >>
+> >>      /* check privileges and return -1 if check fails */
+> >>  #if !defined(CONFIG_USER_ONLY)
+> >> -    int csr_priv = get_field(csrno, 0x300);
+> >>      int read_only = get_field(csrno, 0xC00) == 3;
+> >> -    if ((write_mask && read_only) || (env->priv < csr_priv)) {
+> >> +    if (write_mask && read_only) {
+> >>          return -1;
+> >>      }
+> >>  #endif
+> >> --
+> >> 2.22.0
+> >>
+> >>
+>
+
+--00000000000054d069058e9bd69e
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div>The remaining checks are not sufficient. If you look =
+at the bottom of csr.c, you&#39;ll see that for most of the M-mode CSRs the=
+ predicate is set to &quot;any&quot; which unconditionally allows access re=
+gardless of privilege mode. The S-mode CSR predicates similarly only check =
+that supervisor mode exists, but not that the processor is current running =
+in that mode. I do agree with you that using the register address to determ=
+ine the required privilege mode is a little strange, but RISC-V is designed=
+ so that bits 8 and 9 of the CSR address encode that information: 0=3DU-mod=
+e, 1=3DS-mode, 2=3DHS-mode, 3=3DM-mode.<br></div><div><br></div><div>I also=
+ tested by booting <a href=3D"https://github.com/mit-pdos/RVirt">RVirt</a> =
+ with a Linux guest and found that this patch caused it to instantly crash =
+because guest CSR accesses weren&#39;t intercepted.</div><div><br></div><di=
+v>Jonathan<br></div></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" c=
+lass=3D"gmail_attr">On Fri, Jul 26, 2019 at 4:28 PM Alistair Francis &lt;<a=
+ href=3D"mailto:alistair23@gmail.com">alistair23@gmail.com</a>&gt; wrote:<b=
+r></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex=
+;border-left:1px solid rgb(204,204,204);padding-left:1ex">On Thu, Jul 25, 2=
+019 at 2:48 PM Jonathan Behrens &lt;<a href=3D"mailto:fintelia@gmail.com" t=
+arget=3D"_blank">fintelia@gmail.com</a>&gt; wrote:<br>
+&gt;<br>
+&gt; Unless I&#39;m missing something, this is the only place that QEMU che=
+cks the privilege level for read and writes to CSRs. The exact computation =
+used here won&#39;t work with the hypervisor extension, but we also can&#39=
+;t just get rid of privilege checking entirely...<br>
+<br>
+The csr_ops struct contains a checker function, so there are still<br>
+some checks occurring. I haven&#39;t done negative testing on this patch,<b=
+r>
+but the current check doesn&#39;t seem to make any sense so it should be<br=
+>
+removed. We can separately discuss adding more checks but this current<br>
+way base don CSR address just seems strange.<br>
+<br>
+Alistair<br>
+<br>
+&gt;<br>
+&gt; Jonathan<br>
+&gt;<br>
+&gt; On Thu, Jul 25, 2019 at 2:56 PM Alistair Francis &lt;<a href=3D"mailto=
+:alistair.francis@wdc.com" target=3D"_blank">alistair.francis@wdc.com</a>&g=
+t; wrote:<br>
+&gt;&gt;<br>
+&gt;&gt; The privledge check based on the CSR address mask 0x300 doesn&#39;=
+t work<br>
+&gt;&gt; when using Hypervisor extensions so remove the check<br>
+&gt;&gt;<br>
+&gt;&gt; Signed-off-by: Alistair Francis &lt;<a href=3D"mailto:alistair.fra=
+ncis@wdc.com" target=3D"_blank">alistair.francis@wdc.com</a>&gt;<br>
+&gt;&gt; ---<br>
+&gt;&gt;=C2=A0 target/riscv/csr.c | 3 +--<br>
+&gt;&gt;=C2=A0 1 file changed, 1 insertion(+), 2 deletions(-)<br>
+&gt;&gt;<br>
+&gt;&gt; diff --git a/target/riscv/csr.c b/target/riscv/csr.c<br>
+&gt;&gt; index e0d4586760..af3b762c8b 100644<br>
+&gt;&gt; --- a/target/riscv/csr.c<br>
+&gt;&gt; +++ b/target/riscv/csr.c<br>
+&gt;&gt; @@ -797,9 +797,8 @@ int riscv_csrrw(CPURISCVState *env, int csrno,=
+ target_ulong *ret_value,<br>
+&gt;&gt;<br>
+&gt;&gt;=C2=A0 =C2=A0 =C2=A0 /* check privileges and return -1 if check fai=
+ls */<br>
+&gt;&gt;=C2=A0 #if !defined(CONFIG_USER_ONLY)<br>
+&gt;&gt; -=C2=A0 =C2=A0 int csr_priv =3D get_field(csrno, 0x300);<br>
+&gt;&gt;=C2=A0 =C2=A0 =C2=A0 int read_only =3D get_field(csrno, 0xC00) =3D=
+=3D 3;<br>
+&gt;&gt; -=C2=A0 =C2=A0 if ((write_mask &amp;&amp; read_only) || (env-&gt;p=
+riv &lt; csr_priv)) {<br>
+&gt;&gt; +=C2=A0 =C2=A0 if (write_mask &amp;&amp; read_only) {<br>
+&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return -1;<br>
+&gt;&gt;=C2=A0 =C2=A0 =C2=A0 }<br>
+&gt;&gt;=C2=A0 #endif<br>
+&gt;&gt; --<br>
+&gt;&gt; 2.22.0<br>
+&gt;&gt;<br>
+&gt;&gt;<br>
+</blockquote></div>
+
+--00000000000054d069058e9bd69e--
 
