@@ -1,51 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hr9fK-00031m-PD
-	for mharc-qemu-riscv@gnu.org; Fri, 26 Jul 2019 19:30:22 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:45500)
+	id 1hs2z2-000606-T8
+	for mharc-qemu-riscv@gnu.org; Mon, 29 Jul 2019 06:34:24 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:40828)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <palmer@dabbelt.com>) id 1hr9fI-0002xI-J8
- for qemu-riscv@nongnu.org; Fri, 26 Jul 2019 19:30:21 -0400
+ (envelope-from <peter.maydell@linaro.org>) id 1hs2z0-0005zE-B2
+ for qemu-riscv@nongnu.org; Mon, 29 Jul 2019 06:34:23 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmer@dabbelt.com>) id 1hr9f6-0007E5-8j
- for qemu-riscv@nongnu.org; Fri, 26 Jul 2019 19:30:10 -0400
-Received: from mail-pf1-f176.google.com ([209.85.210.176]:33592)
+ (envelope-from <peter.maydell@linaro.org>) id 1hs2yz-0001Y2-E2
+ for qemu-riscv@nongnu.org; Mon, 29 Jul 2019 06:34:22 -0400
+Received: from mail-ot1-x334.google.com ([2607:f8b0:4864:20::334]:45510)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1hr9eu-0006N7-5K
- for qemu-riscv@nongnu.org; Fri, 26 Jul 2019 19:29:58 -0400
-Received: by mail-pf1-f176.google.com with SMTP id g2so25196421pfq.0
- for <qemu-riscv@nongnu.org>; Fri, 26 Jul 2019 16:27:52 -0700 (PDT)
+ (Exim 4.71) (envelope-from <peter.maydell@linaro.org>)
+ id 1hs2yz-0001VF-7N
+ for qemu-riscv@nongnu.org; Mon, 29 Jul 2019 06:34:21 -0400
+Received: by mail-ot1-x334.google.com with SMTP id x21so23569647otq.12
+ for <qemu-riscv@nongnu.org>; Mon, 29 Jul 2019 03:34:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=28wKYrw+PB2qf7MYtlXfMbxVM/QPzyO1QbIheEBhZzs=;
+ b=EhM8NlQGYdi2t/zh0AIkdqn9ihJy51NTBDO6ajqlamoERM+F+eFHW1bXjydy/sACgi
+ Jq5JlJzipWNm+1DHBii/wLbSmHHzJada4HjNWeOcuI+C/SmSOA7k+Z255OUNqwHWQIH9
+ q+fIMmiFrcrV5mmYeOLVvyiuQlGA1gp0QggfyO6gIVcgCFxjl1UOFcuGL1/UcJHIzKxC
+ 3ldLGTPX6BLorJZt6WxIPEsc73io4VQWCkEc/cOU8RX7hwzlsygy6LZYNgVsJZV9Myay
+ 5PnMjxG7YzwNWDfxS8DIu6g8JlqX75v+k36YKGlUpPdeyW/ZbcijsRdjRq3r8A1ILqhH
+ Fi4Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:date:message-id:mime-version
- :content-transfer-encoding:cc:from:to;
- bh=Axm7ivFjIrAfDYo1sQiW0wWkU7rzfGqUzIpwsnxrpE0=;
- b=ezFQAU2XE2BkgUF8HyahAFHOKN9gBQBaWlElF6uM7eAnIGdV5PHz9iQFfza1w23Pia
- bPWheqakqqkem1CliCJl4G8nX3k/1VoFGMompN/pQTmXA8jEjuMc//x7D83r6ZJ6vzUi
- GLarSlP1NKiTzSsJq9MIk1BSRRrhwnnoxKRmKVBRG0l0bE8Mw4PBIDsKtZ+ReyG0Aj5z
- waRwXPqVTBo/XyR3us0QFBNqps0kbrOUxgaXF1x4ntf2vZOOTaANFc8WZao0pslDPjbe
- rE9R+mVXxHKUP4pk65Gy81l+iymcvbwqgyTgqHn/keRlsIFEk7yL7lpJXRimbsnje1hu
- Nt/w==
-X-Gm-Message-State: APjAAAXkfzH0IbDxaxiwVKdxlNrxl5x1BCPrNAjjkHHRWL0YF3dXgYqx
- GU04L6mLSu3R/U0TFAbUeRY=
-X-Google-Smtp-Source: APXvYqxr9EYC/coCqPGVVRoacy8HSgNwV5h/e0RjZcQFfAcqhm2aNvKfekerW+sp2OA0LtASrw6w5Q==
-X-Received: by 2002:a65:4b89:: with SMTP id t9mr24433808pgq.55.1564183671227; 
- Fri, 26 Jul 2019 16:27:51 -0700 (PDT)
-Received: from localhost ([12.206.222.5])
- by smtp.gmail.com with ESMTPSA id w3sm46899489pgl.31.2019.07.26.16.27.50
- (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
- Fri, 26 Jul 2019 16:27:50 -0700 (PDT)
-Date: Fri, 26 Jul 2019 16:27:30 -0700
-Message-Id: <20190726232731.28572-1-palmer@sifive.com>
-X-Mailer: git-send-email 2.21.0
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=28wKYrw+PB2qf7MYtlXfMbxVM/QPzyO1QbIheEBhZzs=;
+ b=VVQhEeEigXneEbfSli6/tV7ZyXvqKnFd30rjk8sg/ncQIvJHAwHrNZZVSSzdpzPUNm
+ evHZuhztVEnbc6pY8vs4CHQUuQ7z4JxFITn8WJ3h0cXAOp6jHVVvO032i3DmrJRwAJY/
+ E+Di7IO5gplZDeRFuXgNoIxy2e68KUnvy2DO4pEmElYHP94yjpVRnOiPFS8wSgury9Iv
+ 6dz4QOuOsSJ/Ftxc5pA6fUhTUr3g59kf8RKLmKAwjs92s70bvVNvf47jlHISIQhBsoJB
+ JlFl4KDgVRyTNsj8/GCgNsZzzzORY3M2ZEcVPPAc4AqGdDkQc8LkVo2xKI1KPHdpgbOR
+ vS8w==
+X-Gm-Message-State: APjAAAWeCL0liFAZU0SpziVMo3c4TuAgtq/W8naryMK83J0nFA2INJ1B
+ lkg4rn6gqH0BQOenIFLqTMeXwnDPuhCF58BS7z9ZYA==
+X-Google-Smtp-Source: APXvYqwQLByyjD12AT6+xad0gBxGmCu5xe4pZMlr+WB2NfoqGotwRpEM6RL0fshKLBz/E4nwHa5eab/UsLWXbXpG628=
+X-Received: by 2002:a05:6830:1653:: with SMTP id
+ h19mr26137056otr.232.1564396460365; 
+ Mon, 29 Jul 2019 03:34:20 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Cc: qemu-devel@nongnu.org,       qemu-riscv@nongnu.org
-From: Palmer Dabbelt <palmer@sifive.com>
-To: Peter Maydell <peter.maydell@linaro.org>
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
- [fuzzy]
-X-Received-From: 209.85.210.176
-Subject: [Qemu-riscv] [PULL] RISC-V Patch for 4.1-rc3
+References: <20190726232731.28572-1-palmer@sifive.com>
+In-Reply-To: <20190726232731.28572-1-palmer@sifive.com>
+From: Peter Maydell <peter.maydell@linaro.org>
+Date: Mon, 29 Jul 2019 11:34:09 +0100
+Message-ID: <CAFEAcA_S8+D4iaPRTo1Z2aUt8xpg=W-3bte5vBg78R4AgfxW1w@mail.gmail.com>
+To: Palmer Dabbelt <palmer@sifive.com>
+Cc: QEMU Developers <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2607:f8b0:4864:20::334
+Subject: Re: [Qemu-riscv] [PULL] RISC-V Patch for 4.1-rc3
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -57,31 +66,38 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Jul 2019 23:30:21 -0000
+X-List-Received-Date: Mon, 29 Jul 2019 10:34:23 -0000
 
-The following changes since commit bf8b024372bf8abf5a9f40bfa65eeefad23ff988:
+On Sat, 27 Jul 2019 at 00:27, Palmer Dabbelt <palmer@sifive.com> wrote:
+>
+> The following changes since commit bf8b024372bf8abf5a9f40bfa65eeefad23ff988:
+>
+>   Update version for v4.1.0-rc2 release (2019-07-23 18:28:08 +0100)
+>
+> are available in the Git repository at:
+>
+>   git://github.com/palmer-dabbelt/qemu.git tags/riscv-for-master-4.1-rc3
+>
+> for you to fetch changes up to 75ea2529cf09aa4630c5357f9814f04b6697e8b7:
+>
+>   riscv/boot: Fixup the RISC-V firmware warning (2019-07-26 16:03:48 -0700)
+>
+> ----------------------------------------------------------------
+> RISC-V Patch for 4.1-rc3
+>
+> This contains a single patch that fixes the warning introduced as part
+> of the OpenSBI integration.
+>
+> ----------------------------------------------------------------
+> Alistair Francis (1):
+>       riscv/boot: Fixup the RISC-V firmware warning
+>
 
-  Update version for v4.1.0-rc2 release (2019-07-23 18:28:08 +0100)
 
-are available in the Git repository at:
+Applied, thanks.
 
-  git://github.com/palmer-dabbelt/qemu.git tags/riscv-for-master-4.1-rc3
+Please update the changelog at https://wiki.qemu.org/ChangeLog/4.1
+for any user-visible changes.
 
-for you to fetch changes up to 75ea2529cf09aa4630c5357f9814f04b6697e8b7:
-
-  riscv/boot: Fixup the RISC-V firmware warning (2019-07-26 16:03:48 -0700)
-
-----------------------------------------------------------------
-RISC-V Patch for 4.1-rc3
-
-This contains a single patch that fixes the warning introduced as part
-of the OpenSBI integration.
-
-----------------------------------------------------------------
-Alistair Francis (1):
-      riscv/boot: Fixup the RISC-V firmware warning
-
- hw/riscv/boot.c | 12 ++++++++----
- 1 file changed, 8 insertions(+), 4 deletions(-)
-
+-- PMM
 
