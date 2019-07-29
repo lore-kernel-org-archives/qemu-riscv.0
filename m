@@ -1,62 +1,55 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hs9VW-0007ts-E4
-	for mharc-qemu-riscv@gnu.org; Mon, 29 Jul 2019 13:32:22 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42568)
+	id 1hsBc8-0004nq-UF
+	for mharc-qemu-riscv@gnu.org; Mon, 29 Jul 2019 15:47:20 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:38874)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <chihmin.chao@sifive.com>) id 1hs9VU-0007te-2K
- for qemu-riscv@nongnu.org; Mon, 29 Jul 2019 13:32:21 -0400
+ (envelope-from <palmer@dabbelt.com>) id 1hsBc4-0004nK-RE
+ for qemu-riscv@nongnu.org; Mon, 29 Jul 2019 15:47:18 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <chihmin.chao@sifive.com>) id 1hs9VS-00085w-U9
- for qemu-riscv@nongnu.org; Mon, 29 Jul 2019 13:32:20 -0400
-Received: from mail-io1-xd36.google.com ([2607:f8b0:4864:20::d36]:35472)
+ (envelope-from <palmer@dabbelt.com>) id 1hsBc1-000317-Pe
+ for qemu-riscv@nongnu.org; Mon, 29 Jul 2019 15:47:15 -0400
+Received: from mail-pl1-f195.google.com ([209.85.214.195]:43031)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <chihmin.chao@sifive.com>)
- id 1hs9VS-00083P-ND
- for qemu-riscv@nongnu.org; Mon, 29 Jul 2019 13:32:18 -0400
-Received: by mail-io1-xd36.google.com with SMTP id m24so121875236ioo.2
- for <qemu-riscv@nongnu.org>; Mon, 29 Jul 2019 10:32:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=O2HTUKYvHlRqmkm0dGzs7uXFFIWYFCO+j7nCy0iZr+Y=;
- b=Jt8bmjjDBUyPEIQDTjb3JJUwMG4vN3vCLFDnLSQXlygo6NIfinEp3cLjInQU7r9g2u
- CZJkWjKNbSYPov8R/Es667P/7DWMJVKwN45nRnWYKa0u992sQ4lAA2uQHa/ZW5wu6cgr
- l/ooypM/dGlhGqv8YeneBCHCQJtP+5XdTYnajGfyYq8EPwiRVFofO5eEN6ub3W1SvG4j
- ctcJnP2K0oLsrY1LqB9G5/TrenahRHec4seVp5QA8syh59JCzmFcFykFbBOg9jYp9iSW
- t98w2ZQjd2eXsYNkXbP+qXfUgp1Xi3NpNOpArMapoTCV7lluA8OMI/CEI/sY/8AK5h3z
- /rag==
+ (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1hsBby-0002zo-7C
+ for qemu-riscv@nongnu.org; Mon, 29 Jul 2019 15:47:11 -0400
+Received: by mail-pl1-f195.google.com with SMTP id 4so20912214pld.10
+ for <qemu-riscv@nongnu.org>; Mon, 29 Jul 2019 12:47:09 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=O2HTUKYvHlRqmkm0dGzs7uXFFIWYFCO+j7nCy0iZr+Y=;
- b=m6Tg/5DRgFqItAHBqOuK8GbwAlKiWuGkkPd7LZx6j3Adv7RMCDb3ySz/snzWAdu4uL
- PGMV0NPOOEWcacyc346Tto5JZ5vh5fzK6NZUmuYH7NrEIA4YGA0fGiK1H+/81ZMteUVs
- DGfgOWSj2iMKxGC/QFztlvPIgEC2lMB/0vxetFV2a6U074WgdJ1z5oeZfBM6Pknc2+cC
- mGuMJg/E/UKhVkCkm+vVhHHNwdy9RTLhxG4ylfTbeOY71c4207fA3D/x3BADCoKKzeoO
- XPqOsyTBMaK3LOKIax1hupj6nrGRSAQ9ef9Cc8UbA9gCiygR/OoHJRVKXiNsNKJrY13K
- QO1g==
-X-Gm-Message-State: APjAAAUTs0rQfWe7+HeV2WoPLXxc/JtsTGQbMp4mTajCz9eHUNrSRrtH
- Tf2weWnjPSdzvGXtRJ8cNXzdcQlfQPUddJr3l72pAw==
-X-Google-Smtp-Source: APXvYqx7vQww1lnLSXxVrSaztwX3rwhtlgRsyRFAHjX26zQblXRZh4Wo/Bbm/m2yUPiZC8yClhN3qURtTla4uIFgYcY=
-X-Received: by 2002:a05:6638:5:: with SMTP id z5mr43147299jao.58.1564421537790; 
- Mon, 29 Jul 2019 10:32:17 -0700 (PDT)
-MIME-Version: 1.0
-References: <cover.1564080680.git.alistair.francis@wdc.com>
- <50c1c6a3ace8b40f7b9d5395a2c3457cf1852721.1564080680.git.alistair.francis@wdc.com>
-In-Reply-To: <50c1c6a3ace8b40f7b9d5395a2c3457cf1852721.1564080680.git.alistair.francis@wdc.com>
-From: Chih-Min Chao <chihmin.chao@sifive.com>
-Date: Tue, 30 Jul 2019 01:32:06 +0800
-Message-ID: <CAEiOBXVO1W1p_K_ETC_x==9t0pZ2sctvp820M8FYwpXsXGuFgQ@mail.gmail.com>
-To: Alistair Francis <alistair.francis@wdc.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Alistair Francis <alistair23@gmail.com>, Palmer Dabbelt <palmer@sifive.com>
-Content-Type: multipart/alternative; boundary="0000000000000a1089058ed54661"
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2607:f8b0:4864:20::d36
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH-4.2 v1 3/6] riscv: plic:
- Remove unused interrupt functions
+ h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
+ :mime-version:content-transfer-encoding;
+ bh=W/z83AzHFaw3DGAxqhEjaZdGLVFWMoRJnIy84bro/BA=;
+ b=DSHNouoP8h+knWNd85SLC/DQOoOzBdmcwB2l0seme0mqKwDQDFok3QzZ8HMfpP9vYs
+ NxpQZ9dAk0IcncC2qVKyMNL21UFITswch+OLTnKCvHu0k5rZbq+B6KTp8PkEvchBNCKZ
+ 5G3cdQV52DGsYOPeqjsUxVyVyj/bPn6yrMTeMhC55MUao2OtzmpRUtiCtZRyBQ4fJopt
+ fzyAHCOKB0Sh3dHQ6neQIZ/uKrDIiaZ54N9Rs8OUSaUxYbNuYdDIoUodc1/1EJgNnpes
+ BSwL4XRtXQAXMi0SQbwrydPvHKtNG1Mc841sheORtvDYLvvOTibqkPjiPwjsoHbvidl4
+ MINA==
+X-Gm-Message-State: APjAAAUR1czOfQJnnKlz5N9tqcYQ5O9Uu9sK+VF3pCzDQjni8nz5DypV
+ ICcozIkoJgk4W/uKZcaT4s46gSbd
+X-Google-Smtp-Source: APXvYqzut3i/aGaWphpOb2tpNZduIsZZe2FObezlR1A5+vg9ZVe9PdQwlpGjnhYnqOB8LpU1+Wd6cA==
+X-Received: by 2002:a17:902:2983:: with SMTP id
+ h3mr112554620plb.45.1564429628364; 
+ Mon, 29 Jul 2019 12:47:08 -0700 (PDT)
+Received: from localhost ([12.206.222.5])
+ by smtp.gmail.com with ESMTPSA id x26sm80575076pfq.69.2019.07.29.12.47.07
+ (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+ Mon, 29 Jul 2019 12:47:07 -0700 (PDT)
+Date: Mon, 29 Jul 2019 12:47:07 -0700 (PDT)
+X-Google-Original-Date: Mon, 29 Jul 2019 12:46:56 PDT (-0700)
+In-Reply-To: <CAEUhbmWfS8TPTRa-Ovc1gnPUC-3ofA4G+sR7PaSNzfWT-fPNfQ@mail.gmail.com>
+CC: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
+ Alistair Francis <Alistair.Francis@wdc.com>
+From: Palmer Dabbelt <palmer@sifive.com>
+To: bmeng.cn@gmail.com
+Message-ID: <mhng-2dc6a880-670f-449e-9361-9cf2ae4af4ee@palmer-si-x1e>
+Mime-Version: 1.0 (MHng)
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+ [fuzzy]
+X-Received-From: 209.85.214.195
+Subject: Re: [Qemu-riscv] [PATCH] riscv: sifive_test: Add reset functionality
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -68,125 +61,74 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Jul 2019 17:32:21 -0000
+X-List-Received-Date: Mon, 29 Jul 2019 19:47:18 -0000
 
---0000000000000a1089058ed54661
-Content-Type: text/plain; charset="UTF-8"
-
-On Fri, Jul 26, 2019 at 2:55 AM Alistair Francis <alistair.francis@wdc.com>
-wrote:
-
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> ---
->  hw/riscv/sifive_plic.c         | 12 ------------
->  include/hw/riscv/sifive_plic.h |  3 ---
->  2 files changed, 15 deletions(-)
+On Mon, 22 Jul 2019 22:30:15 PDT (-0700), bmeng.cn@gmail.com wrote:
+> Hi Palmer,
 >
-> diff --git a/hw/riscv/sifive_plic.c b/hw/riscv/sifive_plic.c
-> index 0950e89e15..864a1bed42 100644
-> --- a/hw/riscv/sifive_plic.c
-> +++ b/hw/riscv/sifive_plic.c
-> @@ -161,18 +161,6 @@ static void sifive_plic_update(SiFivePLICState *plic)
->      }
->  }
+> On Sat, Jul 20, 2019 at 9:47 AM Palmer Dabbelt <palmer@sifive.com> wrote:
+>>
+>> On Fri, 14 Jun 2019 08:15:51 PDT (-0700), bmeng.cn@gmail.com wrote:
+>> > This adds a reset opcode for sifive_test device to trigger a system
+>> > reset for testing purpose.
+>> >
+>> > Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
+>> > ---
+>> >
+>> >  hw/riscv/sifive_test.c         | 4 ++++
+>> >  include/hw/riscv/sifive_test.h | 3 ++-
+>> >  2 files changed, 6 insertions(+), 1 deletion(-)
+>> >
+>> > diff --git a/hw/riscv/sifive_test.c b/hw/riscv/sifive_test.c
+>> > index 24a04d7..cd86831 100644
+>> > --- a/hw/riscv/sifive_test.c
+>> > +++ b/hw/riscv/sifive_test.c
+>> > @@ -21,6 +21,7 @@
+>> >  #include "qemu/osdep.h"
+>> >  #include "hw/sysbus.h"
+>> >  #include "qemu/module.h"
+>> > +#include "sysemu/sysemu.h"
+>> >  #include "target/riscv/cpu.h"
+>> >  #include "hw/riscv/sifive_test.h"
+>> >
+>> > @@ -40,6 +41,9 @@ static void sifive_test_write(void *opaque, hwaddr addr,
+>> >              exit(code);
+>> >          case FINISHER_PASS:
+>> >              exit(0);
+>> > +        case FINISHER_RESET:
+>> > +            qemu_system_reset_request(SHUTDOWN_CAUSE_GUEST_RESET);
+>> > +            return;
+>> >          default:
+>> >              break;
+>> >          }
+>> > diff --git a/include/hw/riscv/sifive_test.h b/include/hw/riscv/sifive_test.h
+>> > index 71d4c9f..c186a31 100644
+>> > --- a/include/hw/riscv/sifive_test.h
+>> > +++ b/include/hw/riscv/sifive_test.h
+>> > @@ -34,7 +34,8 @@ typedef struct SiFiveTestState {
+>> >
+>> >  enum {
+>> >      FINISHER_FAIL = 0x3333,
+>> > -    FINISHER_PASS = 0x5555
+>> > +    FINISHER_PASS = 0x5555,
+>> > +    FINISHER_RESET = 0x7777
+>> >  };
+>> >
+>> >  DeviceState *sifive_test_create(hwaddr addr);
+>>
+>> Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
 >
-> -void sifive_plic_raise_irq(SiFivePLICState *plic, uint32_t irq)
-> -{
-> -    sifive_plic_set_pending(plic, irq, true);
-> -    sifive_plic_update(plic);
-> -}
-> -
-> -void sifive_plic_lower_irq(SiFivePLICState *plic, uint32_t irq)
-> -{
-> -    sifive_plic_set_pending(plic, irq, false);
-> -    sifive_plic_update(plic);
-> -}
-> -
->  static uint32_t sifive_plic_claim(SiFivePLICState *plic, uint32_t addrid)
->  {
->      int i, j;
-> diff --git a/include/hw/riscv/sifive_plic.h
-> b/include/hw/riscv/sifive_plic.h
-> index ce8907f6aa..3b8a623919 100644
-> --- a/include/hw/riscv/sifive_plic.h
-> +++ b/include/hw/riscv/sifive_plic.h
-> @@ -69,9 +69,6 @@ typedef struct SiFivePLICState {
->      uint32_t aperture_size;
->  } SiFivePLICState;
+> Thanks a lot!
 >
-> -void sifive_plic_raise_irq(SiFivePLICState *plic, uint32_t irq);
-> -void sifive_plic_lower_irq(SiFivePLICState *plic, uint32_t irq);
-> -
->  DeviceState *sifive_plic_create(hwaddr addr, char *hart_config,
->      uint32_t num_sources, uint32_t num_priorities,
->      uint32_t priority_base, uint32_t pending_base,
-> --
-> 2.22.0
+>> Sorry this took a while, but it's in the hardware now.  I'll merge this, but
+>> I'm considering it a new feature so it'll be held off a bit.
 >
->
-Reviewed-by: Chih-Min Chao <chihmin.chao@sifive.com>
+> "but it's in the hardware now", do you mean the code I added (0x7777)
+> is now supported by a newer version SiFive test device with compatible
+> string "sifive,test1", and can actually do the system wide reset?
 
---0000000000000a1089058ed54661
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
-<div dir=3D"ltr" class=3D"gmail_attr">On Fri, Jul 26, 2019 at 2:55 AM Alist=
-air Francis &lt;<a href=3D"mailto:alistair.francis@wdc.com">alistair.franci=
-s@wdc.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=
-=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding=
--left:1ex">Signed-off-by: Alistair Francis &lt;<a href=3D"mailto:alistair.f=
-rancis@wdc.com" target=3D"_blank">alistair.francis@wdc.com</a>&gt;<br>
----<br>
-=C2=A0hw/riscv/sifive_plic.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 12 --------=
-----<br>
-=C2=A0include/hw/riscv/sifive_plic.h |=C2=A0 3 ---<br>
-=C2=A02 files changed, 15 deletions(-)<br>
-<br>
-diff --git a/hw/riscv/sifive_plic.c b/hw/riscv/sifive_plic.c<br>
-index 0950e89e15..864a1bed42 100644<br>
---- a/hw/riscv/sifive_plic.c<br>
-+++ b/hw/riscv/sifive_plic.c<br>
-@@ -161,18 +161,6 @@ static void sifive_plic_update(SiFivePLICState *plic)<=
-br>
-=C2=A0 =C2=A0 =C2=A0}<br>
-=C2=A0}<br>
-<br>
--void sifive_plic_raise_irq(SiFivePLICState *plic, uint32_t irq)<br>
--{<br>
--=C2=A0 =C2=A0 sifive_plic_set_pending(plic, irq, true);<br>
--=C2=A0 =C2=A0 sifive_plic_update(plic);<br>
--}<br>
--<br>
--void sifive_plic_lower_irq(SiFivePLICState *plic, uint32_t irq)<br>
--{<br>
--=C2=A0 =C2=A0 sifive_plic_set_pending(plic, irq, false);<br>
--=C2=A0 =C2=A0 sifive_plic_update(plic);<br>
--}<br>
--<br>
-=C2=A0static uint32_t sifive_plic_claim(SiFivePLICState *plic, uint32_t add=
-rid)<br>
-=C2=A0{<br>
-=C2=A0 =C2=A0 =C2=A0int i, j;<br>
-diff --git a/include/hw/riscv/sifive_plic.h b/include/hw/riscv/sifive_plic.=
-h<br>
-index ce8907f6aa..3b8a623919 100644<br>
---- a/include/hw/riscv/sifive_plic.h<br>
-+++ b/include/hw/riscv/sifive_plic.h<br>
-@@ -69,9 +69,6 @@ typedef struct SiFivePLICState {<br>
-=C2=A0 =C2=A0 =C2=A0uint32_t aperture_size;<br>
-=C2=A0} SiFivePLICState;<br>
-<br>
--void sifive_plic_raise_irq(SiFivePLICState *plic, uint32_t irq);<br>
--void sifive_plic_lower_irq(SiFivePLICState *plic, uint32_t irq);<br>
--<br>
-=C2=A0DeviceState *sifive_plic_create(hwaddr addr, char *hart_config,<br>
-=C2=A0 =C2=A0 =C2=A0uint32_t num_sources, uint32_t num_priorities,<br>
-=C2=A0 =C2=A0 =C2=A0uint32_t priority_base, uint32_t pending_base,<br>
--- <br>
-2.22.0<br><br></blockquote><div><br></div><div>Reviewed-by: Chih-Min Chao &=
-lt;<a href=3D"mailto:chihmin.chao@sifive.com">chihmin.chao@sifive.com</a>&g=
-t;=C2=A0</div></div></div>
-
---0000000000000a1089058ed54661--
+No, the hardware is still a "sifive,test0" as plumbing through the reset is
+trickier than I wanted to take on.  I just reserved the 0x7777 code and
+implemented it by triggering an unsupported function error, so we don't
+accidentally use it for something else later.
 
