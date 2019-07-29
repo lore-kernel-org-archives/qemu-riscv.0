@@ -1,63 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hs6gK-0004Zx-Ht
-	for mharc-qemu-riscv@gnu.org; Mon, 29 Jul 2019 10:31:20 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:59677)
+	id 1hs6ig-0006Tf-1B
+	for mharc-qemu-riscv@gnu.org; Mon, 29 Jul 2019 10:33:46 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:60158)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <philmd@redhat.com>) id 1hs6gH-0004XX-3R
- for qemu-riscv@nongnu.org; Mon, 29 Jul 2019 10:31:18 -0400
+ (envelope-from <philmd@redhat.com>) id 1hs6ie-0006TL-6e
+ for qemu-riscv@nongnu.org; Mon, 29 Jul 2019 10:33:45 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <philmd@redhat.com>) id 1hs6gB-0001rC-Uz
- for qemu-riscv@nongnu.org; Mon, 29 Jul 2019 10:31:17 -0400
-Received: from mail-wr1-f67.google.com ([209.85.221.67]:39823)
+ (envelope-from <philmd@redhat.com>) id 1hs6id-0003XW-61
+ for qemu-riscv@nongnu.org; Mon, 29 Jul 2019 10:33:44 -0400
+Received: from mail-wr1-f67.google.com ([209.85.221.67]:34802)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <philmd@redhat.com>) id 1hs6gB-0001qo-Nl
- for qemu-riscv@nongnu.org; Mon, 29 Jul 2019 10:31:11 -0400
-Received: by mail-wr1-f67.google.com with SMTP id x4so8944119wrt.6
- for <qemu-riscv@nongnu.org>; Mon, 29 Jul 2019 07:31:11 -0700 (PDT)
+ (Exim 4.71) (envelope-from <philmd@redhat.com>) id 1hs6ic-0003XC-W8
+ for qemu-riscv@nongnu.org; Mon, 29 Jul 2019 10:33:43 -0400
+Received: by mail-wr1-f67.google.com with SMTP id 31so62156870wrm.1
+ for <qemu-riscv@nongnu.org>; Mon, 29 Jul 2019 07:33:42 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
  :date:user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=NuWnszGpoifyzdQlegGiqLEiuwq3F2L9p9cqt9lz5a0=;
- b=nDddMYQbRYhXBWQ3FzvSSzr2BL+pxb/7tEP/p4dryy//bn+voLKBjcD/T79m1dFl5e
- 7c265GfEKrCZwLopTxn7xuzEQ5SL+J/2Sf3sRu1b67/bi5/IGntV/uCdLWs0rdaBZ4Xm
- bv3ajABcv2zeSLAnL4um5ySvk9ugd5x/DQo6sB50yj8HvpP05HRoLyVtZ18SXVn9islx
- pGArfoUPhsLMduoN3P0VbPpnipVIRT6bRuUEhVvIOj9Sd+5/9bPRW81pckcTrG2AwQ5I
- g1E9axGYDzJ8flZ4DaVOVbBNCUgVERNKe9RjPmTHQmXa35jlXYlnlEeT6P8CZED1qOag
- WzKA==
-X-Gm-Message-State: APjAAAV7ujchOcBkDrPkI3GWsyMBlOvyVMiUIJBv6ys24gU1Z7iSRfgl
- UMvMMgR4TvxXRAoyOQBYtG58yA==
-X-Google-Smtp-Source: APXvYqw+DTrW6We/by7UIR+klWkDNVEYfHd5cyba2N/fEDXSKMtLawzp31vxyjSaYIshZ/XH7J6vaw==
-X-Received: by 2002:adf:e84a:: with SMTP id d10mr31846073wrn.316.1564410670782; 
- Mon, 29 Jul 2019 07:31:10 -0700 (PDT)
+ bh=lGRv+t0quDP+Ze/c8kxZ+GqzrVcwVVvrd4yX5h+DcfQ=;
+ b=c81GdvMP920SGICQcII41biF4WH3i7eBxcKLs7cEFlIdnG6hnDw0XZl6gNz+jjpfxV
+ CNsQkrwtiJSz7T2rbFywajLLI03rTAd1LvaOKRTL/eTjkn8LYhEpZK3Un4U1un4FxcMj
+ /g7NKys9JUFrgARVvEnuxTPlDip8tVB06QbvUkmtqF2NxCbvflnt7BUwQiyGOdtGxoou
+ I+7mNwrf0d0ptHB5wUkH/6jwX/F8vERSIpSBxdXG5wCs6cvc0fliIR+oP9YvsBg74gYP
+ 9YwBY60DgdCS2z/Me39u1zWLTzUIB8Euk3G0x/P6mmKgO193JIU1p6jvVT+d7SXN6Mkc
+ jTOg==
+X-Gm-Message-State: APjAAAWfg1lDrokN00flt4ilFkm+HNk4Kw38O65Afh/InO4sz0/kJtv2
+ KpQqn71dVStmqF1nEMU87LAIRA==
+X-Google-Smtp-Source: APXvYqxNT2pvoSS/8bSOmvUpkXE5nY8VsCI1CH0O7fNPgGMqBXtzegOU5pezqyLNlPtYNzCPXfgqXA==
+X-Received: by 2002:adf:fdcc:: with SMTP id i12mr41937968wrs.88.1564410822102; 
+ Mon, 29 Jul 2019 07:33:42 -0700 (PDT)
 Received: from [192.168.1.38] (190.red-81-40-121.staticip.rima-tde.net.
  [81.40.121.190])
- by smtp.gmail.com with ESMTPSA id w7sm70997396wrn.11.2019.07.29.07.31.10
+ by smtp.gmail.com with ESMTPSA id z6sm55428718wrw.2.2019.07.29.07.33.41
  (version=TLS1_3 cipher=AEAD-AES128-GCM-SHA256 bits=128/128);
- Mon, 29 Jul 2019 07:31:10 -0700 (PDT)
+ Mon, 29 Jul 2019 07:33:41 -0700 (PDT)
 To: Alistair Francis <alistair.francis@wdc.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
 Cc: alistair23@gmail.com, palmer@sifive.com
 References: <cover.1564080680.git.alistair.francis@wdc.com>
- <edea77ff4aa6900d01ab7146d5b52c2dae4a856e.1564080680.git.alistair.francis@wdc.com>
+ <6a7d3b524e7c0a41ef232d9dc21d7c337b05b97d.1564080680.git.alistair.francis@wdc.com>
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>
 Openpgp: id=89C1E78F601EE86C867495CBA2A3FD6EDEADC0DE;
  url=http://pgp.mit.edu/pks/lookup?op=get&search=0xA2A3FD6EDEADC0DE
-Message-ID: <5c724ba5-b370-6ed7-a387-50080d434a59@redhat.com>
-Date: Mon, 29 Jul 2019 16:31:09 +0200
+Message-ID: <3d45d806-3cc2-a13f-a431-c5a4d6fe42b8@redhat.com>
+Date: Mon, 29 Jul 2019 16:33:40 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
  Thunderbird/60.7.0
 MIME-Version: 1.0
-In-Reply-To: <edea77ff4aa6900d01ab7146d5b52c2dae4a856e.1564080680.git.alistair.francis@wdc.com>
+In-Reply-To: <6a7d3b524e7c0a41ef232d9dc21d7c337b05b97d.1564080680.git.alistair.francis@wdc.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
  [fuzzy]
 X-Received-From: 209.85.221.67
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH-4.2 v1 4/6] target/riscv:
- Create function to test if FP is enabled
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH-4.2 v1 1/6] target/riscv:
+ Don't set write permissions on dirty PTEs
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -69,159 +69,38 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Jul 2019 14:31:18 -0000
+X-List-Received-Date: Mon, 29 Jul 2019 14:33:45 -0000
 
 On 7/25/19 8:52 PM, Alistair Francis wrote:
-> Let's creaate a function that tests if floating point support is
+> Setting write permission on dirty PTEs results in userspace inside a
+> Hypervisor guest (VU) becoming corrupted. This appears to be becuase it
 
-"create"
+"because"
 
-> enabled. We can then protect all floating point operations based on if
-> they are enabled.
-> 
-> This patch so far doesn't change anything, it's just preparing for the
-> Hypervisor support for floating point operations.
+> ends up with write permission in the second stage translation in cases
+> where we aren't doing a store.
 > 
 > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-
-Reviewed-by: Philippe Mathieu-Daudé <philmd@redhat.com>
-
 > ---
->  target/riscv/cpu.h        |  6 +++++-
->  target/riscv/cpu_helper.c | 10 ++++++++++
->  target/riscv/csr.c        | 19 ++++++++++---------
->  3 files changed, 25 insertions(+), 10 deletions(-)
+>  target/riscv/cpu_helper.c | 6 ++----
+>  1 file changed, 2 insertions(+), 4 deletions(-)
 > 
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 0adb307f32..2dc9b17678 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -255,6 +255,7 @@ void riscv_cpu_do_interrupt(CPUState *cpu);
->  int riscv_cpu_gdb_read_register(CPUState *cpu, uint8_t *buf, int reg);
->  int riscv_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
->  bool riscv_cpu_exec_interrupt(CPUState *cs, int interrupt_request);
-> +bool riscv_cpu_fp_enabled(CPURISCVState *env);
->  int riscv_cpu_mmu_index(CPURISCVState *env, bool ifetch);
->  hwaddr riscv_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
->  void  riscv_cpu_do_unaligned_access(CPUState *cs, vaddr addr,
-> @@ -298,7 +299,10 @@ static inline void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
->  #ifdef CONFIG_USER_ONLY
->      *flags = TB_FLAGS_MSTATUS_FS;
->  #else
-> -    *flags = cpu_mmu_index(env, 0) | (env->mstatus & MSTATUS_FS);
-> +    *flags = cpu_mmu_index(env, 0);
-> +    if (riscv_cpu_fp_enabled(env)) {
-> +        *flags |= env->mstatus & MSTATUS_FS;
-> +    }
->  #endif
->  }
->  
 > diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index f027be7f16..225e407cff 100644
+> index e32b6126af..f027be7f16 100644
 > --- a/target/riscv/cpu_helper.c
 > +++ b/target/riscv/cpu_helper.c
-> @@ -71,6 +71,16 @@ bool riscv_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
->  
->  #if !defined(CONFIG_USER_ONLY)
->  
-> +/* Return true is floating point support is currently enabled */
-> +bool riscv_cpu_fp_enabled(CPURISCVState *env)
-> +{
-> +    if (env->mstatus & MSTATUS_FS) {
-> +        return true;
-> +    }
-> +
-> +    return false;
-> +}
-> +
->  int riscv_cpu_claim_interrupts(RISCVCPU *cpu, uint32_t interrupts)
->  {
->      CPURISCVState *env = &cpu->env;
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index af3b762c8b..7b73b73cf7 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -46,7 +46,7 @@ void riscv_set_csr_ops(int csrno, riscv_csr_operations *ops)
->  static int fs(CPURISCVState *env, int csrno)
->  {
->  #if !defined(CONFIG_USER_ONLY)
-> -    if (!env->debugger && !(env->mstatus & MSTATUS_FS)) {
-> +    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
->          return -1;
->      }
->  #endif
-> @@ -108,7 +108,7 @@ static int pmp(CPURISCVState *env, int csrno)
->  static int read_fflags(CPURISCVState *env, int csrno, target_ulong *val)
->  {
->  #if !defined(CONFIG_USER_ONLY)
-> -    if (!env->debugger && !(env->mstatus & MSTATUS_FS)) {
-> +    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
->          return -1;
->      }
->  #endif
-> @@ -119,7 +119,7 @@ static int read_fflags(CPURISCVState *env, int csrno, target_ulong *val)
->  static int write_fflags(CPURISCVState *env, int csrno, target_ulong val)
->  {
->  #if !defined(CONFIG_USER_ONLY)
-> -    if (!env->debugger && !(env->mstatus & MSTATUS_FS)) {
-> +    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
->          return -1;
->      }
->      env->mstatus |= MSTATUS_FS;
-> @@ -131,7 +131,7 @@ static int write_fflags(CPURISCVState *env, int csrno, target_ulong val)
->  static int read_frm(CPURISCVState *env, int csrno, target_ulong *val)
->  {
->  #if !defined(CONFIG_USER_ONLY)
-> -    if (!env->debugger && !(env->mstatus & MSTATUS_FS)) {
-> +    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
->          return -1;
->      }
->  #endif
-> @@ -142,7 +142,7 @@ static int read_frm(CPURISCVState *env, int csrno, target_ulong *val)
->  static int write_frm(CPURISCVState *env, int csrno, target_ulong val)
->  {
->  #if !defined(CONFIG_USER_ONLY)
-> -    if (!env->debugger && !(env->mstatus & MSTATUS_FS)) {
-> +    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
->          return -1;
->      }
->      env->mstatus |= MSTATUS_FS;
-> @@ -154,7 +154,7 @@ static int write_frm(CPURISCVState *env, int csrno, target_ulong val)
->  static int read_fcsr(CPURISCVState *env, int csrno, target_ulong *val)
->  {
->  #if !defined(CONFIG_USER_ONLY)
-> -    if (!env->debugger && !(env->mstatus & MSTATUS_FS)) {
-> +    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
->          return -1;
->      }
->  #endif
-> @@ -166,7 +166,7 @@ static int read_fcsr(CPURISCVState *env, int csrno, target_ulong *val)
->  static int write_fcsr(CPURISCVState *env, int csrno, target_ulong val)
->  {
->  #if !defined(CONFIG_USER_ONLY)
-> -    if (!env->debugger && !(env->mstatus & MSTATUS_FS)) {
-> +    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
->          return -1;
->      }
->      env->mstatus |= MSTATUS_FS;
-> @@ -307,6 +307,7 @@ static int write_mstatus(CPURISCVState *env, int csrno, target_ulong val)
->  {
->      target_ulong mstatus = env->mstatus;
->      target_ulong mask = 0;
-> +    int dirty;
->  
->      /* flush tlb on mstatus fields that affect VM */
->      if (env->priv_ver <= PRIV_VERSION_1_09_1) {
-> @@ -340,8 +341,8 @@ static int write_mstatus(CPURISCVState *env, int csrno, target_ulong val)
->  
->      mstatus = (mstatus & ~mask) | (val & mask);
->  
-> -    int dirty = ((mstatus & MSTATUS_FS) == MSTATUS_FS) |
-> -                ((mstatus & MSTATUS_XS) == MSTATUS_XS);
-> +    dirty = riscv_cpu_fp_enabled(env) |
-> +            ((mstatus & MSTATUS_XS) == MSTATUS_XS);
->      mstatus = set_field(mstatus, MSTATUS_SD, dirty);
->      env->mstatus = mstatus;
->  
+> @@ -340,10 +340,8 @@ restart:
+>              if ((pte & PTE_X)) {
+>                  *prot |= PAGE_EXEC;
+>              }
+> -            /* add write permission on stores or if the page is already dirty,
+> -               so that we TLB miss on later writes to update the dirty bit */
+> -            if ((pte & PTE_W) &&
+> -                    (access_type == MMU_DATA_STORE || (pte & PTE_D))) {
+> +            /* add write permission on stores */
+> +            if ((pte & PTE_W) && (access_type == MMU_DATA_STORE)) {
+>                  *prot |= PAGE_WRITE;
+>              }
+>              return TRANSLATE_SUCCESS;
 > 
 
