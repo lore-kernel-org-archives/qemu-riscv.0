@@ -1,62 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hs8wq-00062R-6o
-	for mharc-qemu-riscv@gnu.org; Mon, 29 Jul 2019 12:56:32 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:36127)
+	id 1hs9VW-0007ts-E4
+	for mharc-qemu-riscv@gnu.org; Mon, 29 Jul 2019 13:32:22 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:42568)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <chihmin.chao@sifive.com>) id 1hs8wm-0005vd-4t
- for qemu-riscv@nongnu.org; Mon, 29 Jul 2019 12:56:29 -0400
+ (envelope-from <chihmin.chao@sifive.com>) id 1hs9VU-0007te-2K
+ for qemu-riscv@nongnu.org; Mon, 29 Jul 2019 13:32:21 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <chihmin.chao@sifive.com>) id 1hs8wk-0006Qa-6t
- for qemu-riscv@nongnu.org; Mon, 29 Jul 2019 12:56:28 -0400
-Received: from mail-io1-xd32.google.com ([2607:f8b0:4864:20::d32]:46110)
+ (envelope-from <chihmin.chao@sifive.com>) id 1hs9VS-00085w-U9
+ for qemu-riscv@nongnu.org; Mon, 29 Jul 2019 13:32:20 -0400
+Received: from mail-io1-xd36.google.com ([2607:f8b0:4864:20::d36]:35472)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <chihmin.chao@sifive.com>)
- id 1hs8wi-0006P9-Sb
- for qemu-riscv@nongnu.org; Mon, 29 Jul 2019 12:56:25 -0400
-Received: by mail-io1-xd32.google.com with SMTP id i10so8214448iol.13
- for <qemu-riscv@nongnu.org>; Mon, 29 Jul 2019 09:56:24 -0700 (PDT)
+ id 1hs9VS-00083P-ND
+ for qemu-riscv@nongnu.org; Mon, 29 Jul 2019 13:32:18 -0400
+Received: by mail-io1-xd36.google.com with SMTP id m24so121875236ioo.2
+ for <qemu-riscv@nongnu.org>; Mon, 29 Jul 2019 10:32:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=yFkCbBnxncmMkqatptlnFARvoc8e9243qWK43wD8hm8=;
- b=kQFNCJFFFXNqNZpCXI6KysjCP+hShuchdRr2Yvawa9iPfk0AAqqacsRniKU4B1oe71
- wbOjSQkdWyFnbcjOAoIZiftEEaO7PnLYaryJVLgIpr9/QDkBaq5E4Uhujlea+6sm6Qzx
- WaRgUu8vss7+5OeqWiKMaMqNegkEBJOZ3G0+ARicoEo+j9KZuNJHsS80lhmaj0k2SkTT
- LFsf3JoCIedQOSFxq0B+Yoq82owY54trV1F3w7tNSiWyN0M3I9ZW6pFwfvbtSVYjAI34
- p3G/YoxkzGM07zvi75G7KL5b4x4t+42XTpDUExfduRi/CkYdxYk/VplymhlZHEvZGCFE
- vg+Q==
+ :cc; bh=O2HTUKYvHlRqmkm0dGzs7uXFFIWYFCO+j7nCy0iZr+Y=;
+ b=Jt8bmjjDBUyPEIQDTjb3JJUwMG4vN3vCLFDnLSQXlygo6NIfinEp3cLjInQU7r9g2u
+ CZJkWjKNbSYPov8R/Es667P/7DWMJVKwN45nRnWYKa0u992sQ4lAA2uQHa/ZW5wu6cgr
+ l/ooypM/dGlhGqv8YeneBCHCQJtP+5XdTYnajGfyYq8EPwiRVFofO5eEN6ub3W1SvG4j
+ ctcJnP2K0oLsrY1LqB9G5/TrenahRHec4seVp5QA8syh59JCzmFcFykFbBOg9jYp9iSW
+ t98w2ZQjd2eXsYNkXbP+qXfUgp1Xi3NpNOpArMapoTCV7lluA8OMI/CEI/sY/8AK5h3z
+ /rag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=yFkCbBnxncmMkqatptlnFARvoc8e9243qWK43wD8hm8=;
- b=qRGK5A3GNM8LUwzv4hSreUEh+2cbYr9an1ccp0xBK2ARmskz6JfRLiXrWURd7NyGhm
- i+hoBn4LYAlU3Ls6dBwwGcmHhMEe19DynTLLE58QeEADaDNgU6jmMgLD5+ORLydg5vlX
- 1UUnVDjrD87bVWDXkWr8KBQZDaGDRuVpkr+DzsIQmJ1gu4OUxbioA7fxzeIpqy0JvSH1
- IuSNqQKBsg4HVE0+EYtJkg0teyEevA7Re4m2xO4n08beA+sjoOSqqHt7i5ATluvci66j
- j69qXE5gg421YCTxw64o09k5CC92sh/jXVF7PUMPbVRG0xCMDO6Fw7Abm+G9UybRaZs3
- Uvpw==
-X-Gm-Message-State: APjAAAX4TJn5g0IipWeraX0soenRVpP/fWTThZ6sezYtB0GJLCutZQea
- vCSudAY4MV269vT+1WvkYh2WpYOk6Egz4R+yAFFFEw==
-X-Google-Smtp-Source: APXvYqyuv/wf4iyZ+Z8B0vQKbG/OCgbE78Gso+8kkePebiSZnkNSXtgyRrBLeUqAURA/wKcsr0mCHO1N94TCkn9ZB3M=
-X-Received: by 2002:a02:b395:: with SMTP id p21mr116521330jan.31.1564419383546; 
- Mon, 29 Jul 2019 09:56:23 -0700 (PDT)
+ bh=O2HTUKYvHlRqmkm0dGzs7uXFFIWYFCO+j7nCy0iZr+Y=;
+ b=m6Tg/5DRgFqItAHBqOuK8GbwAlKiWuGkkPd7LZx6j3Adv7RMCDb3ySz/snzWAdu4uL
+ PGMV0NPOOEWcacyc346Tto5JZ5vh5fzK6NZUmuYH7NrEIA4YGA0fGiK1H+/81ZMteUVs
+ DGfgOWSj2iMKxGC/QFztlvPIgEC2lMB/0vxetFV2a6U074WgdJ1z5oeZfBM6Pknc2+cC
+ mGuMJg/E/UKhVkCkm+vVhHHNwdy9RTLhxG4ylfTbeOY71c4207fA3D/x3BADCoKKzeoO
+ XPqOsyTBMaK3LOKIax1hupj6nrGRSAQ9ef9Cc8UbA9gCiygR/OoHJRVKXiNsNKJrY13K
+ QO1g==
+X-Gm-Message-State: APjAAAUTs0rQfWe7+HeV2WoPLXxc/JtsTGQbMp4mTajCz9eHUNrSRrtH
+ Tf2weWnjPSdzvGXtRJ8cNXzdcQlfQPUddJr3l72pAw==
+X-Google-Smtp-Source: APXvYqx7vQww1lnLSXxVrSaztwX3rwhtlgRsyRFAHjX26zQblXRZh4Wo/Bbm/m2yUPiZC8yClhN3qURtTla4uIFgYcY=
+X-Received: by 2002:a05:6638:5:: with SMTP id z5mr43147299jao.58.1564421537790; 
+ Mon, 29 Jul 2019 10:32:17 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1564080680.git.alistair.francis@wdc.com>
- <edea77ff4aa6900d01ab7146d5b52c2dae4a856e.1564080680.git.alistair.francis@wdc.com>
-In-Reply-To: <edea77ff4aa6900d01ab7146d5b52c2dae4a856e.1564080680.git.alistair.francis@wdc.com>
+ <50c1c6a3ace8b40f7b9d5395a2c3457cf1852721.1564080680.git.alistair.francis@wdc.com>
+In-Reply-To: <50c1c6a3ace8b40f7b9d5395a2c3457cf1852721.1564080680.git.alistair.francis@wdc.com>
 From: Chih-Min Chao <chihmin.chao@sifive.com>
-Date: Tue, 30 Jul 2019 00:56:12 +0800
-Message-ID: <CAEiOBXU-4KLv64pZJ__gszG8RyC6cE_GxwTt+przwbDkmS9vgQ@mail.gmail.com>
+Date: Tue, 30 Jul 2019 01:32:06 +0800
+Message-ID: <CAEiOBXVO1W1p_K_ETC_x==9t0pZ2sctvp820M8FYwpXsXGuFgQ@mail.gmail.com>
 To: Alistair Francis <alistair.francis@wdc.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  Alistair Francis <alistair23@gmail.com>, Palmer Dabbelt <palmer@sifive.com>
-Content-Type: multipart/alternative; boundary="000000000000a2f339058ed4c569"
+Content-Type: multipart/alternative; boundary="0000000000000a1089058ed54661"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::d32
-Subject: Re: [Qemu-riscv] [PATCH-4.2 v1 4/6] target/riscv: Create function
- to test if FP is enabled
+X-Received-From: 2607:f8b0:4864:20::d36
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH-4.2 v1 3/6] riscv: plic:
+ Remove unused interrupt functions
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -68,188 +68,65 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Jul 2019 16:56:30 -0000
+X-List-Received-Date: Mon, 29 Jul 2019 17:32:21 -0000
 
---000000000000a2f339058ed4c569
+--0000000000000a1089058ed54661
 Content-Type: text/plain; charset="UTF-8"
 
 On Fri, Jul 26, 2019 at 2:55 AM Alistair Francis <alistair.francis@wdc.com>
 wrote:
 
-> Let's creaate a function that tests if floating point support is
-> enabled. We can then protect all floating point operations based on if
-> they are enabled.
->
-> This patch so far doesn't change anything, it's just preparing for the
-> Hypervisor support for floating point operations.
->
 > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 > ---
->  target/riscv/cpu.h        |  6 +++++-
->  target/riscv/cpu_helper.c | 10 ++++++++++
->  target/riscv/csr.c        | 19 ++++++++++---------
->  3 files changed, 25 insertions(+), 10 deletions(-)
+>  hw/riscv/sifive_plic.c         | 12 ------------
+>  include/hw/riscv/sifive_plic.h |  3 ---
+>  2 files changed, 15 deletions(-)
 >
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 0adb307f32..2dc9b17678 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -255,6 +255,7 @@ void riscv_cpu_do_interrupt(CPUState *cpu);
->  int riscv_cpu_gdb_read_register(CPUState *cpu, uint8_t *buf, int reg);
->  int riscv_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
->  bool riscv_cpu_exec_interrupt(CPUState *cs, int interrupt_request);
-> +bool riscv_cpu_fp_enabled(CPURISCVState *env);
->  int riscv_cpu_mmu_index(CPURISCVState *env, bool ifetch);
->  hwaddr riscv_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
->  void  riscv_cpu_do_unaligned_access(CPUState *cs, vaddr addr,
-> @@ -298,7 +299,10 @@ static inline void cpu_get_tb_cpu_state(CPURISCVState
-> *env, target_ulong *pc,
->  #ifdef CONFIG_USER_ONLY
->      *flags = TB_FLAGS_MSTATUS_FS;
->  #else
-> -    *flags = cpu_mmu_index(env, 0) | (env->mstatus & MSTATUS_FS);
-> +    *flags = cpu_mmu_index(env, 0);
-> +    if (riscv_cpu_fp_enabled(env)) {
-> +        *flags |= env->mstatus & MSTATUS_FS;
-> +    }
->  #endif
+> diff --git a/hw/riscv/sifive_plic.c b/hw/riscv/sifive_plic.c
+> index 0950e89e15..864a1bed42 100644
+> --- a/hw/riscv/sifive_plic.c
+> +++ b/hw/riscv/sifive_plic.c
+> @@ -161,18 +161,6 @@ static void sifive_plic_update(SiFivePLICState *plic)
+>      }
 >  }
 >
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index f027be7f16..225e407cff 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -71,6 +71,16 @@ bool riscv_cpu_exec_interrupt(CPUState *cs, int
-> interrupt_request)
+> -void sifive_plic_raise_irq(SiFivePLICState *plic, uint32_t irq)
+> -{
+> -    sifive_plic_set_pending(plic, irq, true);
+> -    sifive_plic_update(plic);
+> -}
+> -
+> -void sifive_plic_lower_irq(SiFivePLICState *plic, uint32_t irq)
+> -{
+> -    sifive_plic_set_pending(plic, irq, false);
+> -    sifive_plic_update(plic);
+> -}
+> -
+>  static uint32_t sifive_plic_claim(SiFivePLICState *plic, uint32_t addrid)
+>  {
+>      int i, j;
+> diff --git a/include/hw/riscv/sifive_plic.h
+> b/include/hw/riscv/sifive_plic.h
+> index ce8907f6aa..3b8a623919 100644
+> --- a/include/hw/riscv/sifive_plic.h
+> +++ b/include/hw/riscv/sifive_plic.h
+> @@ -69,9 +69,6 @@ typedef struct SiFivePLICState {
+>      uint32_t aperture_size;
+>  } SiFivePLICState;
 >
->  #if !defined(CONFIG_USER_ONLY)
->
-> +/* Return true is floating point support is currently enabled */
-> +bool riscv_cpu_fp_enabled(CPURISCVState *env)
-> +{
-> +    if (env->mstatus & MSTATUS_FS) {
-> +        return true;
-> +    }
-> +
-> +    return false;
-> +}
-> +
->  int riscv_cpu_claim_interrupts(RISCVCPU *cpu, uint32_t interrupts)
->  {
->      CPURISCVState *env = &cpu->env;
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index af3b762c8b..7b73b73cf7 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -46,7 +46,7 @@ void riscv_set_csr_ops(int csrno, riscv_csr_operations
-> *ops)
->  static int fs(CPURISCVState *env, int csrno)
->  {
->  #if !defined(CONFIG_USER_ONLY)
-> -    if (!env->debugger && !(env->mstatus & MSTATUS_FS)) {
-> +    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
->          return -1;
->      }
->  #endif
-> @@ -108,7 +108,7 @@ static int pmp(CPURISCVState *env, int csrno)
->  static int read_fflags(CPURISCVState *env, int csrno, target_ulong *val)
->  {
->  #if !defined(CONFIG_USER_ONLY)
-> -    if (!env->debugger && !(env->mstatus & MSTATUS_FS)) {
-> +    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
->          return -1;
->      }
->  #endif
-> @@ -119,7 +119,7 @@ static int read_fflags(CPURISCVState *env, int csrno,
-> target_ulong *val)
->  static int write_fflags(CPURISCVState *env, int csrno, target_ulong val)
->  {
->  #if !defined(CONFIG_USER_ONLY)
-> -    if (!env->debugger && !(env->mstatus & MSTATUS_FS)) {
-> +    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
->          return -1;
->      }
->      env->mstatus |= MSTATUS_FS;
-> @@ -131,7 +131,7 @@ static int write_fflags(CPURISCVState *env, int csrno,
-> target_ulong val)
->  static int read_frm(CPURISCVState *env, int csrno, target_ulong *val)
->  {
->  #if !defined(CONFIG_USER_ONLY)
-> -    if (!env->debugger && !(env->mstatus & MSTATUS_FS)) {
-> +    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
->          return -1;
->      }
->  #endif
-> @@ -142,7 +142,7 @@ static int read_frm(CPURISCVState *env, int csrno,
-> target_ulong *val)
->  static int write_frm(CPURISCVState *env, int csrno, target_ulong val)
->  {
->  #if !defined(CONFIG_USER_ONLY)
-> -    if (!env->debugger && !(env->mstatus & MSTATUS_FS)) {
-> +    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
->          return -1;
->      }
->      env->mstatus |= MSTATUS_FS;
-> @@ -154,7 +154,7 @@ static int write_frm(CPURISCVState *env, int csrno,
-> target_ulong val)
->  static int read_fcsr(CPURISCVState *env, int csrno, target_ulong *val)
->  {
->  #if !defined(CONFIG_USER_ONLY)
-> -    if (!env->debugger && !(env->mstatus & MSTATUS_FS)) {
-> +    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
->          return -1;
->      }
->  #endif
-> @@ -166,7 +166,7 @@ static int read_fcsr(CPURISCVState *env, int csrno,
-> target_ulong *val)
->  static int write_fcsr(CPURISCVState *env, int csrno, target_ulong val)
->  {
->  #if !defined(CONFIG_USER_ONLY)
-> -    if (!env->debugger && !(env->mstatus & MSTATUS_FS)) {
-> +    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
->          return -1;
->      }
->      env->mstatus |= MSTATUS_FS;
-> @@ -307,6 +307,7 @@ static int write_mstatus(CPURISCVState *env, int
-> csrno, target_ulong val)
->  {
->      target_ulong mstatus = env->mstatus;
->      target_ulong mask = 0;
-> +    int dirty;
->
->      /* flush tlb on mstatus fields that affect VM */
->      if (env->priv_ver <= PRIV_VERSION_1_09_1) {
-> @@ -340,8 +341,8 @@ static int write_mstatus(CPURISCVState *env, int
-> csrno, target_ulong val)
->
->      mstatus = (mstatus & ~mask) | (val & mask);
->
-> -    int dirty = ((mstatus & MSTATUS_FS) == MSTATUS_FS) |
-> -                ((mstatus & MSTATUS_XS) == MSTATUS_XS);
-> +    dirty = riscv_cpu_fp_enabled(env) |
-> +            ((mstatus & MSTATUS_XS) == MSTATUS_XS);
->
-
-  FS are 2bits
-  original:
-        only 3 is true
-  new
-       1, 2, 3 all make dirty true
-
-  Since only 3 means dirty, keeps this part unchanged should be reasonable.
-
-chihmin
-
-     mstatus = set_field(mstatus, MSTATUS_SD, dirty);
->      env->mstatus = mstatus;
->
+> -void sifive_plic_raise_irq(SiFivePLICState *plic, uint32_t irq);
+> -void sifive_plic_lower_irq(SiFivePLICState *plic, uint32_t irq);
+> -
+>  DeviceState *sifive_plic_create(hwaddr addr, char *hart_config,
+>      uint32_t num_sources, uint32_t num_priorities,
+>      uint32_t priority_base, uint32_t pending_base,
 > --
 > 2.22.0
 >
 >
->
+Reviewed-by: Chih-Min Chao <chihmin.chao@sifive.com>
 
---000000000000a2f339058ed4c569
+--0000000000000a1089058ed54661
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
@@ -258,208 +135,58 @@ Content-Transfer-Encoding: quoted-printable
 air Francis &lt;<a href=3D"mailto:alistair.francis@wdc.com">alistair.franci=
 s@wdc.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=
 =3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding=
--left:1ex">Let&#39;s creaate a function that tests if floating point suppor=
-t is<br>
-enabled. We can then protect all floating point operations based on if<br>
-they are enabled.<br>
-<br>
-This patch so far doesn&#39;t change anything, it&#39;s just preparing for =
-the<br>
-Hypervisor support for floating point operations.<br>
-<br>
-Signed-off-by: Alistair Francis &lt;<a href=3D"mailto:alistair.francis@wdc.=
-com" target=3D"_blank">alistair.francis@wdc.com</a>&gt;<br>
+-left:1ex">Signed-off-by: Alistair Francis &lt;<a href=3D"mailto:alistair.f=
+rancis@wdc.com" target=3D"_blank">alistair.francis@wdc.com</a>&gt;<br>
 ---<br>
-=C2=A0target/riscv/cpu.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 6 +++++-<br>
-=C2=A0target/riscv/cpu_helper.c | 10 ++++++++++<br>
-=C2=A0target/riscv/csr.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 | 19 ++++++++++--------=
--<br>
-=C2=A03 files changed, 25 insertions(+), 10 deletions(-)<br>
+=C2=A0hw/riscv/sifive_plic.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 12 --------=
+----<br>
+=C2=A0include/hw/riscv/sifive_plic.h |=C2=A0 3 ---<br>
+=C2=A02 files changed, 15 deletions(-)<br>
 <br>
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h<br>
-index 0adb307f32..2dc9b17678 100644<br>
---- a/target/riscv/cpu.h<br>
-+++ b/target/riscv/cpu.h<br>
-@@ -255,6 +255,7 @@ void riscv_cpu_do_interrupt(CPUState *cpu);<br>
-=C2=A0int riscv_cpu_gdb_read_register(CPUState *cpu, uint8_t *buf, int reg)=
-;<br>
-=C2=A0int riscv_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg=
-);<br>
-=C2=A0bool riscv_cpu_exec_interrupt(CPUState *cs, int interrupt_request);<b=
-r>
-+bool riscv_cpu_fp_enabled(CPURISCVState *env);<br>
-=C2=A0int riscv_cpu_mmu_index(CPURISCVState *env, bool ifetch);<br>
-=C2=A0hwaddr riscv_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);<br>
-=C2=A0void=C2=A0 riscv_cpu_do_unaligned_access(CPUState *cs, vaddr addr,<br=
->
-@@ -298,7 +299,10 @@ static inline void cpu_get_tb_cpu_state(CPURISCVState =
-*env, target_ulong *pc,<br>
-=C2=A0#ifdef CONFIG_USER_ONLY<br>
-=C2=A0 =C2=A0 =C2=A0*flags =3D TB_FLAGS_MSTATUS_FS;<br>
-=C2=A0#else<br>
--=C2=A0 =C2=A0 *flags =3D cpu_mmu_index(env, 0) | (env-&gt;mstatus &amp; MS=
-TATUS_FS);<br>
-+=C2=A0 =C2=A0 *flags =3D cpu_mmu_index(env, 0);<br>
-+=C2=A0 =C2=A0 if (riscv_cpu_fp_enabled(env)) {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 *flags |=3D env-&gt;mstatus &amp; MSTATUS_FS;<=
+diff --git a/hw/riscv/sifive_plic.c b/hw/riscv/sifive_plic.c<br>
+index 0950e89e15..864a1bed42 100644<br>
+--- a/hw/riscv/sifive_plic.c<br>
++++ b/hw/riscv/sifive_plic.c<br>
+@@ -161,18 +161,6 @@ static void sifive_plic_update(SiFivePLICState *plic)<=
 br>
-+=C2=A0 =C2=A0 }<br>
-=C2=A0#endif<br>
+=C2=A0 =C2=A0 =C2=A0}<br>
 =C2=A0}<br>
 <br>
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c<br>
-index f027be7f16..225e407cff 100644<br>
---- a/target/riscv/cpu_helper.c<br>
-+++ b/target/riscv/cpu_helper.c<br>
-@@ -71,6 +71,16 @@ bool riscv_cpu_exec_interrupt(CPUState *cs, int interrup=
-t_request)<br>
+-void sifive_plic_raise_irq(SiFivePLICState *plic, uint32_t irq)<br>
+-{<br>
+-=C2=A0 =C2=A0 sifive_plic_set_pending(plic, irq, true);<br>
+-=C2=A0 =C2=A0 sifive_plic_update(plic);<br>
+-}<br>
+-<br>
+-void sifive_plic_lower_irq(SiFivePLICState *plic, uint32_t irq)<br>
+-{<br>
+-=C2=A0 =C2=A0 sifive_plic_set_pending(plic, irq, false);<br>
+-=C2=A0 =C2=A0 sifive_plic_update(plic);<br>
+-}<br>
+-<br>
+=C2=A0static uint32_t sifive_plic_claim(SiFivePLICState *plic, uint32_t add=
+rid)<br>
+=C2=A0{<br>
+=C2=A0 =C2=A0 =C2=A0int i, j;<br>
+diff --git a/include/hw/riscv/sifive_plic.h b/include/hw/riscv/sifive_plic.=
+h<br>
+index ce8907f6aa..3b8a623919 100644<br>
+--- a/include/hw/riscv/sifive_plic.h<br>
++++ b/include/hw/riscv/sifive_plic.h<br>
+@@ -69,9 +69,6 @@ typedef struct SiFivePLICState {<br>
+=C2=A0 =C2=A0 =C2=A0uint32_t aperture_size;<br>
+=C2=A0} SiFivePLICState;<br>
 <br>
-=C2=A0#if !defined(CONFIG_USER_ONLY)<br>
-<br>
-+/* Return true is floating point support is currently enabled */<br>
-+bool riscv_cpu_fp_enabled(CPURISCVState *env)<br>
-+{<br>
-+=C2=A0 =C2=A0 if (env-&gt;mstatus &amp; MSTATUS_FS) {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 return true;<br>
-+=C2=A0 =C2=A0 }<br>
-+<br>
-+=C2=A0 =C2=A0 return false;<br>
-+}<br>
-+<br>
-=C2=A0int riscv_cpu_claim_interrupts(RISCVCPU *cpu, uint32_t interrupts)<br=
->
-=C2=A0{<br>
-=C2=A0 =C2=A0 =C2=A0CPURISCVState *env =3D &amp;cpu-&gt;env;<br>
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c<br>
-index af3b762c8b..7b73b73cf7 100644<br>
---- a/target/riscv/csr.c<br>
-+++ b/target/riscv/csr.c<br>
-@@ -46,7 +46,7 @@ void riscv_set_csr_ops(int csrno, riscv_csr_operations *o=
-ps)<br>
-=C2=A0static int fs(CPURISCVState *env, int csrno)<br>
-=C2=A0{<br>
-=C2=A0#if !defined(CONFIG_USER_ONLY)<br>
--=C2=A0 =C2=A0 if (!env-&gt;debugger &amp;&amp; !(env-&gt;mstatus &amp; MST=
-ATUS_FS)) {<br>
-+=C2=A0 =C2=A0 if (!env-&gt;debugger &amp;&amp; !riscv_cpu_fp_enabled(env))=
- {<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return -1;<br>
-=C2=A0 =C2=A0 =C2=A0}<br>
-=C2=A0#endif<br>
-@@ -108,7 +108,7 @@ static int pmp(CPURISCVState *env, int csrno)<br>
-=C2=A0static int read_fflags(CPURISCVState *env, int csrno, target_ulong *v=
-al)<br>
-=C2=A0{<br>
-=C2=A0#if !defined(CONFIG_USER_ONLY)<br>
--=C2=A0 =C2=A0 if (!env-&gt;debugger &amp;&amp; !(env-&gt;mstatus &amp; MST=
-ATUS_FS)) {<br>
-+=C2=A0 =C2=A0 if (!env-&gt;debugger &amp;&amp; !riscv_cpu_fp_enabled(env))=
- {<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return -1;<br>
-=C2=A0 =C2=A0 =C2=A0}<br>
-=C2=A0#endif<br>
-@@ -119,7 +119,7 @@ static int read_fflags(CPURISCVState *env, int csrno, t=
-arget_ulong *val)<br>
-=C2=A0static int write_fflags(CPURISCVState *env, int csrno, target_ulong v=
-al)<br>
-=C2=A0{<br>
-=C2=A0#if !defined(CONFIG_USER_ONLY)<br>
--=C2=A0 =C2=A0 if (!env-&gt;debugger &amp;&amp; !(env-&gt;mstatus &amp; MST=
-ATUS_FS)) {<br>
-+=C2=A0 =C2=A0 if (!env-&gt;debugger &amp;&amp; !riscv_cpu_fp_enabled(env))=
- {<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return -1;<br>
-=C2=A0 =C2=A0 =C2=A0}<br>
-=C2=A0 =C2=A0 =C2=A0env-&gt;mstatus |=3D MSTATUS_FS;<br>
-@@ -131,7 +131,7 @@ static int write_fflags(CPURISCVState *env, int csrno, =
-target_ulong val)<br>
-=C2=A0static int read_frm(CPURISCVState *env, int csrno, target_ulong *val)=
-<br>
-=C2=A0{<br>
-=C2=A0#if !defined(CONFIG_USER_ONLY)<br>
--=C2=A0 =C2=A0 if (!env-&gt;debugger &amp;&amp; !(env-&gt;mstatus &amp; MST=
-ATUS_FS)) {<br>
-+=C2=A0 =C2=A0 if (!env-&gt;debugger &amp;&amp; !riscv_cpu_fp_enabled(env))=
- {<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return -1;<br>
-=C2=A0 =C2=A0 =C2=A0}<br>
-=C2=A0#endif<br>
-@@ -142,7 +142,7 @@ static int read_frm(CPURISCVState *env, int csrno, targ=
-et_ulong *val)<br>
-=C2=A0static int write_frm(CPURISCVState *env, int csrno, target_ulong val)=
-<br>
-=C2=A0{<br>
-=C2=A0#if !defined(CONFIG_USER_ONLY)<br>
--=C2=A0 =C2=A0 if (!env-&gt;debugger &amp;&amp; !(env-&gt;mstatus &amp; MST=
-ATUS_FS)) {<br>
-+=C2=A0 =C2=A0 if (!env-&gt;debugger &amp;&amp; !riscv_cpu_fp_enabled(env))=
- {<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return -1;<br>
-=C2=A0 =C2=A0 =C2=A0}<br>
-=C2=A0 =C2=A0 =C2=A0env-&gt;mstatus |=3D MSTATUS_FS;<br>
-@@ -154,7 +154,7 @@ static int write_frm(CPURISCVState *env, int csrno, tar=
-get_ulong val)<br>
-=C2=A0static int read_fcsr(CPURISCVState *env, int csrno, target_ulong *val=
-)<br>
-=C2=A0{<br>
-=C2=A0#if !defined(CONFIG_USER_ONLY)<br>
--=C2=A0 =C2=A0 if (!env-&gt;debugger &amp;&amp; !(env-&gt;mstatus &amp; MST=
-ATUS_FS)) {<br>
-+=C2=A0 =C2=A0 if (!env-&gt;debugger &amp;&amp; !riscv_cpu_fp_enabled(env))=
- {<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return -1;<br>
-=C2=A0 =C2=A0 =C2=A0}<br>
-=C2=A0#endif<br>
-@@ -166,7 +166,7 @@ static int read_fcsr(CPURISCVState *env, int csrno, tar=
-get_ulong *val)<br>
-=C2=A0static int write_fcsr(CPURISCVState *env, int csrno, target_ulong val=
-)<br>
-=C2=A0{<br>
-=C2=A0#if !defined(CONFIG_USER_ONLY)<br>
--=C2=A0 =C2=A0 if (!env-&gt;debugger &amp;&amp; !(env-&gt;mstatus &amp; MST=
-ATUS_FS)) {<br>
-+=C2=A0 =C2=A0 if (!env-&gt;debugger &amp;&amp; !riscv_cpu_fp_enabled(env))=
- {<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return -1;<br>
-=C2=A0 =C2=A0 =C2=A0}<br>
-=C2=A0 =C2=A0 =C2=A0env-&gt;mstatus |=3D MSTATUS_FS;<br>
-@@ -307,6 +307,7 @@ static int write_mstatus(CPURISCVState *env, int csrno,=
- target_ulong val)<br>
-=C2=A0{<br>
-=C2=A0 =C2=A0 =C2=A0target_ulong mstatus =3D env-&gt;mstatus;<br>
-=C2=A0 =C2=A0 =C2=A0target_ulong mask =3D 0;<br>
-+=C2=A0 =C2=A0 int dirty;<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0/* flush tlb on mstatus fields that affect VM */<br>
-=C2=A0 =C2=A0 =C2=A0if (env-&gt;priv_ver &lt;=3D PRIV_VERSION_1_09_1) {<br>
-@@ -340,8 +341,8 @@ static int write_mstatus(CPURISCVState *env, int csrno,=
- target_ulong val)<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0mstatus =3D (mstatus &amp; ~mask) | (val &amp; mask);<b=
-r>
-<br>
--=C2=A0 =C2=A0 int dirty =3D ((mstatus &amp; MSTATUS_FS) =3D=3D MSTATUS_FS)=
- |<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ((mstatus &amp; MS=
-TATUS_XS) =3D=3D MSTATUS_XS);<br>
-+=C2=A0 =C2=A0 dirty =3D riscv_cpu_fp_enabled(env) |<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ((mstatus &amp; MSTATUS_XS) =3D=
-=3D MSTATUS_XS);<br></blockquote><div><br></div><div>=C2=A0 FS are 2bits</d=
-iv><div>=C2=A0 original:</div><div>=C2=A0 =C2=A0 =C2=A0 =C2=A0 only 3 is tr=
-ue=C2=A0</div><div>=C2=A0 new</div><div>=C2=A0 =C2=A0 =C2=A0 =C2=A01, 2, 3 =
-all make dirty true<br></div><div><br></div><div>=C2=A0 Since only 3 means =
-dirty, keeps this part unchanged should be reasonable.</div><div><br></div>=
-<div>chihmin</div><div><br></div><blockquote class=3D"gmail_quote" style=3D=
-"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-le=
-ft:1ex">
-=C2=A0 =C2=A0 =C2=A0mstatus =3D set_field(mstatus, MSTATUS_SD, dirty);<br>
-=C2=A0 =C2=A0 =C2=A0env-&gt;mstatus =3D mstatus;<br>
-<br>
+-void sifive_plic_raise_irq(SiFivePLICState *plic, uint32_t irq);<br>
+-void sifive_plic_lower_irq(SiFivePLICState *plic, uint32_t irq);<br>
+-<br>
+=C2=A0DeviceState *sifive_plic_create(hwaddr addr, char *hart_config,<br>
+=C2=A0 =C2=A0 =C2=A0uint32_t num_sources, uint32_t num_priorities,<br>
+=C2=A0 =C2=A0 =C2=A0uint32_t priority_base, uint32_t pending_base,<br>
 -- <br>
-2.22.0<br>
-<br>
-<br>
-</blockquote></div></div>
+2.22.0<br><br></blockquote><div><br></div><div>Reviewed-by: Chih-Min Chao &=
+lt;<a href=3D"mailto:chihmin.chao@sifive.com">chihmin.chao@sifive.com</a>&g=
+t;=C2=A0</div></div></div>
 
---000000000000a2f339058ed4c569--
+--0000000000000a1089058ed54661--
 
