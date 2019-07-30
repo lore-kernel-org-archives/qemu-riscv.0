@@ -1,55 +1,46 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hsBc8-0004nq-UF
-	for mharc-qemu-riscv@gnu.org; Mon, 29 Jul 2019 15:47:20 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:38874)
+	id 1hsOZ6-00026d-Oz
+	for mharc-qemu-riscv@gnu.org; Tue, 30 Jul 2019 05:37:04 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:54918)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <palmer@dabbelt.com>) id 1hsBc4-0004nK-RE
- for qemu-riscv@nongnu.org; Mon, 29 Jul 2019 15:47:18 -0400
+ (envelope-from <dinechin@redhat.com>) id 1hsNpI-0006G6-Ib
+ for qemu-riscv@nongnu.org; Tue, 30 Jul 2019 04:49:45 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmer@dabbelt.com>) id 1hsBc1-000317-Pe
- for qemu-riscv@nongnu.org; Mon, 29 Jul 2019 15:47:15 -0400
-Received: from mail-pl1-f195.google.com ([209.85.214.195]:43031)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1hsBby-0002zo-7C
- for qemu-riscv@nongnu.org; Mon, 29 Jul 2019 15:47:11 -0400
-Received: by mail-pl1-f195.google.com with SMTP id 4so20912214pld.10
- for <qemu-riscv@nongnu.org>; Mon, 29 Jul 2019 12:47:09 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
- :mime-version:content-transfer-encoding;
- bh=W/z83AzHFaw3DGAxqhEjaZdGLVFWMoRJnIy84bro/BA=;
- b=DSHNouoP8h+knWNd85SLC/DQOoOzBdmcwB2l0seme0mqKwDQDFok3QzZ8HMfpP9vYs
- NxpQZ9dAk0IcncC2qVKyMNL21UFITswch+OLTnKCvHu0k5rZbq+B6KTp8PkEvchBNCKZ
- 5G3cdQV52DGsYOPeqjsUxVyVyj/bPn6yrMTeMhC55MUao2OtzmpRUtiCtZRyBQ4fJopt
- fzyAHCOKB0Sh3dHQ6neQIZ/uKrDIiaZ54N9Rs8OUSaUxYbNuYdDIoUodc1/1EJgNnpes
- BSwL4XRtXQAXMi0SQbwrydPvHKtNG1Mc841sheORtvDYLvvOTibqkPjiPwjsoHbvidl4
- MINA==
-X-Gm-Message-State: APjAAAUR1czOfQJnnKlz5N9tqcYQ5O9Uu9sK+VF3pCzDQjni8nz5DypV
- ICcozIkoJgk4W/uKZcaT4s46gSbd
-X-Google-Smtp-Source: APXvYqzut3i/aGaWphpOb2tpNZduIsZZe2FObezlR1A5+vg9ZVe9PdQwlpGjnhYnqOB8LpU1+Wd6cA==
-X-Received: by 2002:a17:902:2983:: with SMTP id
- h3mr112554620plb.45.1564429628364; 
- Mon, 29 Jul 2019 12:47:08 -0700 (PDT)
-Received: from localhost ([12.206.222.5])
- by smtp.gmail.com with ESMTPSA id x26sm80575076pfq.69.2019.07.29.12.47.07
- (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
- Mon, 29 Jul 2019 12:47:07 -0700 (PDT)
-Date: Mon, 29 Jul 2019 12:47:07 -0700 (PDT)
-X-Google-Original-Date: Mon, 29 Jul 2019 12:46:56 PDT (-0700)
-In-Reply-To: <CAEUhbmWfS8TPTRa-Ovc1gnPUC-3ofA4G+sR7PaSNzfWT-fPNfQ@mail.gmail.com>
-CC: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
- Alistair Francis <Alistair.Francis@wdc.com>
-From: Palmer Dabbelt <palmer@sifive.com>
-To: bmeng.cn@gmail.com
-Message-ID: <mhng-2dc6a880-670f-449e-9361-9cf2ae4af4ee@palmer-si-x1e>
-Mime-Version: 1.0 (MHng)
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
+ (envelope-from <dinechin@redhat.com>) id 1hsNpH-0002iF-7p
+ for qemu-riscv@nongnu.org; Tue, 30 Jul 2019 04:49:44 -0400
+Received: from mx1.redhat.com ([209.132.183.28]:34004)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <dinechin@redhat.com>)
+ id 1hsNpB-0002Yr-SN; Tue, 30 Jul 2019 04:49:39 -0400
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
+ [10.5.11.15])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mx1.redhat.com (Postfix) with ESMTPS id 5441D30ADC7F;
+ Tue, 30 Jul 2019 08:49:33 +0000 (UTC)
+Received: from ptitpuce (ovpn-116-130.ams2.redhat.com [10.36.116.130])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 6D41B5D6B0;
+ Tue, 30 Jul 2019 08:49:30 +0000 (UTC)
+References: <cover.1564080680.git.alistair.francis@wdc.com>
+ <edea77ff4aa6900d01ab7146d5b52c2dae4a856e.1564080680.git.alistair.francis@wdc.com>
+User-agent: mu4e 1.3.2; emacs 26.2
+From: Christophe de Dinechin <dinechin@redhat.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair23@gmail.com, palmer@sifive.com,
+ alistair.francis@wdc.com
+In-reply-to: <edea77ff4aa6900d01ab7146d5b52c2dae4a856e.1564080680.git.alistair.francis@wdc.com>
+Date: Tue, 30 Jul 2019 10:49:26 +0200
+Message-ID: <m1zhkvoqjt.fsf@redhat.com>
+MIME-Version: 1.0
+Content-Type: text/plain
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+ (mx1.redhat.com [10.5.110.47]); Tue, 30 Jul 2019 08:49:33 +0000 (UTC)
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
- [fuzzy]
-X-Received-From: 209.85.214.195
-Subject: Re: [Qemu-riscv] [PATCH] riscv: sifive_test: Add reset functionality
+X-Received-From: 209.132.183.28
+X-Mailman-Approved-At: Tue, 30 Jul 2019 05:37:04 -0400
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH-4.2 v1 4/6] target/riscv:
+ Create function to test if FP is enabled
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -61,74 +52,177 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Jul 2019 19:47:18 -0000
+X-List-Received-Date: Tue, 30 Jul 2019 08:49:46 -0000
 
-On Mon, 22 Jul 2019 22:30:15 PDT (-0700), bmeng.cn@gmail.com wrote:
-> Hi Palmer,
->
-> On Sat, Jul 20, 2019 at 9:47 AM Palmer Dabbelt <palmer@sifive.com> wrote:
->>
->> On Fri, 14 Jun 2019 08:15:51 PDT (-0700), bmeng.cn@gmail.com wrote:
->> > This adds a reset opcode for sifive_test device to trigger a system
->> > reset for testing purpose.
->> >
->> > Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
->> > ---
->> >
->> >  hw/riscv/sifive_test.c         | 4 ++++
->> >  include/hw/riscv/sifive_test.h | 3 ++-
->> >  2 files changed, 6 insertions(+), 1 deletion(-)
->> >
->> > diff --git a/hw/riscv/sifive_test.c b/hw/riscv/sifive_test.c
->> > index 24a04d7..cd86831 100644
->> > --- a/hw/riscv/sifive_test.c
->> > +++ b/hw/riscv/sifive_test.c
->> > @@ -21,6 +21,7 @@
->> >  #include "qemu/osdep.h"
->> >  #include "hw/sysbus.h"
->> >  #include "qemu/module.h"
->> > +#include "sysemu/sysemu.h"
->> >  #include "target/riscv/cpu.h"
->> >  #include "hw/riscv/sifive_test.h"
->> >
->> > @@ -40,6 +41,9 @@ static void sifive_test_write(void *opaque, hwaddr addr,
->> >              exit(code);
->> >          case FINISHER_PASS:
->> >              exit(0);
->> > +        case FINISHER_RESET:
->> > +            qemu_system_reset_request(SHUTDOWN_CAUSE_GUEST_RESET);
->> > +            return;
->> >          default:
->> >              break;
->> >          }
->> > diff --git a/include/hw/riscv/sifive_test.h b/include/hw/riscv/sifive_test.h
->> > index 71d4c9f..c186a31 100644
->> > --- a/include/hw/riscv/sifive_test.h
->> > +++ b/include/hw/riscv/sifive_test.h
->> > @@ -34,7 +34,8 @@ typedef struct SiFiveTestState {
->> >
->> >  enum {
->> >      FINISHER_FAIL = 0x3333,
->> > -    FINISHER_PASS = 0x5555
->> > +    FINISHER_PASS = 0x5555,
->> > +    FINISHER_RESET = 0x7777
->> >  };
->> >
->> >  DeviceState *sifive_test_create(hwaddr addr);
->>
->> Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
->
-> Thanks a lot!
->
->> Sorry this took a while, but it's in the hardware now.  I'll merge this, but
->> I'm considering it a new feature so it'll be held off a bit.
->
-> "but it's in the hardware now", do you mean the code I added (0x7777)
-> is now supported by a newer version SiFive test device with compatible
-> string "sifive,test1", and can actually do the system wide reset?
 
-No, the hardware is still a "sifive,test0" as plumbing through the reset is
-trickier than I wanted to take on.  I just reserved the 0x7777 code and
-implemented it by triggering an unsupported function error, so we don't
-accidentally use it for something else later.
+Alistair Francis writes:
+
+> Let's creaate a function that tests if floating point support is
+
+Typo: create
+
+> enabled. We can then protect all floating point operations based on if
+> they are enabled.
+>
+> This patch so far doesn't change anything, it's just preparing for the
+> Hypervisor support for floating point operations.
+>
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> ---
+>  target/riscv/cpu.h        |  6 +++++-
+>  target/riscv/cpu_helper.c | 10 ++++++++++
+>  target/riscv/csr.c        | 19 ++++++++++---------
+>  3 files changed, 25 insertions(+), 10 deletions(-)
+>
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 0adb307f32..2dc9b17678 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -255,6 +255,7 @@ void riscv_cpu_do_interrupt(CPUState *cpu);
+>  int riscv_cpu_gdb_read_register(CPUState *cpu, uint8_t *buf, int reg);
+>  int riscv_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
+>  bool riscv_cpu_exec_interrupt(CPUState *cs, int interrupt_request);
+> +bool riscv_cpu_fp_enabled(CPURISCVState *env);
+>  int riscv_cpu_mmu_index(CPURISCVState *env, bool ifetch);
+>  hwaddr riscv_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
+>  void  riscv_cpu_do_unaligned_access(CPUState *cs, vaddr addr,
+> @@ -298,7 +299,10 @@ static inline void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
+>  #ifdef CONFIG_USER_ONLY
+>      *flags = TB_FLAGS_MSTATUS_FS;
+>  #else
+> -    *flags = cpu_mmu_index(env, 0) | (env->mstatus & MSTATUS_FS);
+> +    *flags = cpu_mmu_index(env, 0);
+> +    if (riscv_cpu_fp_enabled(env)) {
+> +        *flags |= env->mstatus & MSTATUS_FS;
+> +    }
+>  #endif
+>  }
+>
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index f027be7f16..225e407cff 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -71,6 +71,16 @@ bool riscv_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
+>
+>  #if !defined(CONFIG_USER_ONLY)
+>
+> +/* Return true is floating point support is currently enabled */
+> +bool riscv_cpu_fp_enabled(CPURISCVState *env)
+> +{
+> +    if (env->mstatus & MSTATUS_FS) {
+> +        return true;
+> +    }
+> +
+> +    return false;
+
+Will there be more conditions that lead to the "true" case?
+If not, please consider making it a one-liner for readability, e.g.
+
+   return env->mstatus & MSTATUS_FS;
+
+(just a personal preference, feel free to ignore)
+
+> +}
+> +
+>  int riscv_cpu_claim_interrupts(RISCVCPU *cpu, uint32_t interrupts)
+>  {
+>      CPURISCVState *env = &cpu->env;
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index af3b762c8b..7b73b73cf7 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -46,7 +46,7 @@ void riscv_set_csr_ops(int csrno, riscv_csr_operations *ops)
+>  static int fs(CPURISCVState *env, int csrno)
+>  {
+>  #if !defined(CONFIG_USER_ONLY)
+> -    if (!env->debugger && !(env->mstatus & MSTATUS_FS)) {
+> +    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
+
+This was existing behavior, but I'm curious why all these
+tests are disabled when env->debugger is set. This was introduced
+in 753e3fe20, but I see no rationale in the commit message.
+I find it odd, maybe even suspicious, that activating the debugger
+would change the behavior :-)
+
+>          return -1;
+>      }
+>  #endif
+> @@ -108,7 +108,7 @@ static int pmp(CPURISCVState *env, int csrno)
+>  static int read_fflags(CPURISCVState *env, int csrno, target_ulong *val)
+>  {
+>  #if !defined(CONFIG_USER_ONLY)
+> -    if (!env->debugger && !(env->mstatus & MSTATUS_FS)) {
+> +    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
+>          return -1;
+>      }
+>  #endif
+> @@ -119,7 +119,7 @@ static int read_fflags(CPURISCVState *env, int csrno, target_ulong *val)
+>  static int write_fflags(CPURISCVState *env, int csrno, target_ulong val)
+>  {
+>  #if !defined(CONFIG_USER_ONLY)
+> -    if (!env->debugger && !(env->mstatus & MSTATUS_FS)) {
+> +    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
+>          return -1;
+>      }
+>      env->mstatus |= MSTATUS_FS;
+> @@ -131,7 +131,7 @@ static int write_fflags(CPURISCVState *env, int csrno, target_ulong val)
+>  static int read_frm(CPURISCVState *env, int csrno, target_ulong *val)
+>  {
+>  #if !defined(CONFIG_USER_ONLY)
+> -    if (!env->debugger && !(env->mstatus & MSTATUS_FS)) {
+> +    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
+>          return -1;
+>      }
+>  #endif
+> @@ -142,7 +142,7 @@ static int read_frm(CPURISCVState *env, int csrno, target_ulong *val)
+>  static int write_frm(CPURISCVState *env, int csrno, target_ulong val)
+>  {
+>  #if !defined(CONFIG_USER_ONLY)
+> -    if (!env->debugger && !(env->mstatus & MSTATUS_FS)) {
+> +    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
+>          return -1;
+>      }
+>      env->mstatus |= MSTATUS_FS;
+> @@ -154,7 +154,7 @@ static int write_frm(CPURISCVState *env, int csrno, target_ulong val)
+>  static int read_fcsr(CPURISCVState *env, int csrno, target_ulong *val)
+>  {
+>  #if !defined(CONFIG_USER_ONLY)
+> -    if (!env->debugger && !(env->mstatus & MSTATUS_FS)) {
+> +    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
+>          return -1;
+>      }
+>  #endif
+> @@ -166,7 +166,7 @@ static int read_fcsr(CPURISCVState *env, int csrno, target_ulong *val)
+>  static int write_fcsr(CPURISCVState *env, int csrno, target_ulong val)
+>  {
+>  #if !defined(CONFIG_USER_ONLY)
+> -    if (!env->debugger && !(env->mstatus & MSTATUS_FS)) {
+> +    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
+>          return -1;
+>      }
+>      env->mstatus |= MSTATUS_FS;
+> @@ -307,6 +307,7 @@ static int write_mstatus(CPURISCVState *env, int csrno, target_ulong val)
+>  {
+>      target_ulong mstatus = env->mstatus;
+>      target_ulong mask = 0;
+> +    int dirty;
+>
+>      /* flush tlb on mstatus fields that affect VM */
+>      if (env->priv_ver <= PRIV_VERSION_1_09_1) {
+> @@ -340,8 +341,8 @@ static int write_mstatus(CPURISCVState *env, int csrno, target_ulong val)
+>
+>      mstatus = (mstatus & ~mask) | (val & mask);
+>
+> -    int dirty = ((mstatus & MSTATUS_FS) == MSTATUS_FS) |
+> -                ((mstatus & MSTATUS_XS) == MSTATUS_XS);
+> +    dirty = riscv_cpu_fp_enabled(env) |
+> +            ((mstatus & MSTATUS_XS) == MSTATUS_XS);
+>      mstatus = set_field(mstatus, MSTATUS_SD, dirty);
+>      env->mstatus = mstatus;
+
+Reviewed-by: Christophe de Dinechin <dinechin@redhat.com>
+
+--
+Cheers,
+Christophe de Dinechin (IRC c3d)
 
