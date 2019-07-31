@@ -1,76 +1,73 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hsrPn-000528-OI
-	for mharc-qemu-riscv@gnu.org; Wed, 31 Jul 2019 12:25:24 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:45040)
+	id 1hssW5-0003Ew-TV
+	for mharc-qemu-riscv@gnu.org; Wed, 31 Jul 2019 13:35:57 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:36971)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <alex.bennee@linaro.org>) id 1hsrPh-0004kC-48
- for qemu-riscv@nongnu.org; Wed, 31 Jul 2019 12:25:21 -0400
+ (envelope-from <richard.henderson@linaro.org>) id 1hssW3-0003EY-Qy
+ for qemu-riscv@nongnu.org; Wed, 31 Jul 2019 13:35:56 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alex.bennee@linaro.org>) id 1hsrPf-0000Fb-5K
- for qemu-riscv@nongnu.org; Wed, 31 Jul 2019 12:25:17 -0400
-Received: from mail-wr1-x443.google.com ([2a00:1450:4864:20::443]:42668)
+ (envelope-from <richard.henderson@linaro.org>) id 1hssW2-00079K-Sg
+ for qemu-riscv@nongnu.org; Wed, 31 Jul 2019 13:35:55 -0400
+Received: from mail-pf1-x444.google.com ([2607:f8b0:4864:20::444]:35980)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <alex.bennee@linaro.org>)
- id 1hsrPe-0000Ea-VQ
- for qemu-riscv@nongnu.org; Wed, 31 Jul 2019 12:25:15 -0400
-Received: by mail-wr1-x443.google.com with SMTP id x1so20467772wrr.9
- for <qemu-riscv@nongnu.org>; Wed, 31 Jul 2019 09:25:14 -0700 (PDT)
+ (Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
+ id 1hssW2-00078j-LO
+ for qemu-riscv@nongnu.org; Wed, 31 Jul 2019 13:35:54 -0400
+Received: by mail-pf1-x444.google.com with SMTP id r7so32266632pfl.3
+ for <qemu-riscv@nongnu.org>; Wed, 31 Jul 2019 10:35:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=3KilUfW5qE8/qCyjKP1J8YJaC2amH5E2ZqjPJpVHgBQ=;
- b=tj7Eo6sqm2GcI0DJtEVG85i84SqjoykzrrEnT52+0xcOKzYKLkz+AB0JBDVKDoMI9v
- TGxYf1c25rKALLef4Tn3KF6jLEI9vEd1gZCdMP60aWR22I6M2yTES8+6AfVXOyHUAhpx
- bNJ5eCJoTUpEr7lzQ6Yc2n9VBC++ROgAjaDC+NE6Oy1GwhsA+4EMX9rQbqa0VbWh+Koz
- 2ot0fA2FwuAg+07dlc56oOsW4jr9UeOc+rHMcBuMnvLcEWBFzW2lnt+82p2pGdQ01D12
- q4N8HdEL+zYdAlGmcrmDj3oi2S5oxaskz5E6x1svlmeLpL0XvwYu8lMpH5kfylQm1nt9
- n2ew==
+ h=subject:to:references:from:openpgp:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=JprkFZG+B7lsQyizGQWAjBZCNRt08yRpbp4jzY2Xmw8=;
+ b=A+OiYnMyEJiJgxJajenHptTJyg9iXXiPXxKNnKx1J1qXjv8RBwpV2MSJHNwvdux6Er
+ 3swA6XW+h1AJIGEH5KrBeifG3XGCt4gIpzku+dSCKTIjIlo3s6rV1dIg0hF2ZsdceNAn
+ VCDZmVm/GmxyA2bUnhsU+nWLSZPLfBY/YAFQWB2m9p6iYgOu/3j96LdYnLLUyTQU89OP
+ ME1GFFG2ITks3MqXa6zRlK6rkVEmiH2kvC+KmTAO6cmjQHSWX3c1vpgXPdho3wc2X96b
+ gq67UWKXq0fFEx+oMtT+1msReMOAmyAChwHE4ZfXLpXhAlAvCGK99FHtajRXQ1glwzf4
+ q64g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=3KilUfW5qE8/qCyjKP1J8YJaC2amH5E2ZqjPJpVHgBQ=;
- b=txEsVYkV779Srock/6UsWiM8St3D4F7Awfbah7guMSsPkIKhbnjXEVj9Q1M9kldk19
- XpuJ7U95o6wXNbkOvhoRNo5VV+wgn47Xo3nUXg8Qhk/k1tv7ILfflyNhIYCi5rqZ2Bpw
- 7YZ/gxc99HKqPd06hjS3J5bO850z+yID9phMf5Nfxcz874rMTPvvPX1OBblV1pcX/0GD
- xiXdOnkHi8uu9gUsMYyg/nukHXFhk+NK2zFkTBMs4ohfahYRwVYgT+xXU6L4ryspTw2C
- bdAtMh+aYtiHCs+yEKY5kiWuCqaHhWBR4K8XdsAu1XdUOUS62x18rSZmTY/B0MNqDCFL
- bDDw==
-X-Gm-Message-State: APjAAAVMaPAR1E5bITgEa7QSCrS4K8+AI09XRZAi3M+zyDLrmCBmX7UY
- uq1xKduAJpben5owMys7DMuJ+Q==
-X-Google-Smtp-Source: APXvYqyJIUlDhKfWYo4qh3ESjQp2QpEacFk9TGgyRsVeGYmH/zJEx7DsSB3+mNkFcdRbLOWfi59z4w==
-X-Received: by 2002:a5d:4e06:: with SMTP id p6mr54233807wrt.336.1564590313436; 
- Wed, 31 Jul 2019 09:25:13 -0700 (PDT)
-Received: from zen.linaroharston ([81.128.185.34])
- by smtp.gmail.com with ESMTPSA id w67sm89785102wma.24.2019.07.31.09.25.12
- (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
- Wed, 31 Jul 2019 09:25:12 -0700 (PDT)
-Received: from zen.linaroharston. (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id 0A82C1FF91;
- Wed, 31 Jul 2019 17:07:23 +0100 (BST)
-From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: qemu-devel@nongnu.org
-Cc: cota@braap.org, bobby.prani@gmail.com, aaron@os.amperecomputing.com,
- Richard Henderson <richard.henderson@linaro.org>,
- =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Palmer Dabbelt <palmer@sifive.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ h=x-gm-message-state:subject:to:references:from:openpgp:message-id
+ :date:user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=JprkFZG+B7lsQyizGQWAjBZCNRt08yRpbp4jzY2Xmw8=;
+ b=GiJFdbxwy9EqgFhBqSkAC0AVc9Myp2l/J9lb6ZlezE2xZ6T58MGcIAdXuVymCZLz2G
+ yt/UuqG7cKnerWJo7H6AYDjO/9/DcrcfvVIIJZt1qgDmn52Am+w+Uzqv0tCMMQnmHQSP
+ qE6HZ+kBnHRTvKSG36qXXs9WPOGaiDo7PauwrsUY2TEsTpv7US7H5Y+bKGek1iWNUWTG
+ JGDHPzRyzd2pJmdXZlyF7ajyd5f2tZLs7WxFG/PJOj1y6lb6CDMsBJX06Vs6P5JMvXMx
+ mJnowLe2tAY5NfCABgL+bHRrj6CYxyRlMgcEdCGHv16PO0kjVucKyClldEThyUWtMLqj
+ MD9A==
+X-Gm-Message-State: APjAAAX2bzoXs1zZw/ugUiWpppUxQhGwno05FHnLiLQLEBE6oeqzUNUy
+ dectv7SLXbpWeMce770rW6+dZ/giinU=
+X-Google-Smtp-Source: APXvYqxYERyQfQCpRFNnk7YcRP24HtAq0RkMTNUCFiGZ/xjUV1rhsm0cKWFyoIf9EasFiz2BtZNjyg==
+X-Received: by 2002:a63:d23:: with SMTP id c35mr114266663pgl.376.1564594552770; 
+ Wed, 31 Jul 2019 10:35:52 -0700 (PDT)
+Received: from [192.168.1.11] (97-113-7-119.tukw.qwest.net. [97.113.7.119])
+ by smtp.gmail.com with ESMTPSA id j5sm60150622pgp.59.2019.07.31.10.35.51
+ (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+ Wed, 31 Jul 2019 10:35:51 -0700 (PDT)
+To: Bin Meng <bmeng.cn@gmail.com>, Alistair Francis
+ <Alistair.Francis@wdc.com>, Palmer Dabbelt <palmer@sifive.com>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
-Date: Wed, 31 Jul 2019 17:07:03 +0100
-Message-Id: <20190731160719.11396-39-alex.bennee@linaro.org>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20190731160719.11396-1-alex.bennee@linaro.org>
-References: <20190731160719.11396-1-alex.bennee@linaro.org>
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ QEMU devel <qemu-devel@nongnu.org>, QEMU riscv <qemu-riscv@nongnu.org>
+References: <1564577101-29020-1-git-send-email-bmeng.cn@gmail.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+Openpgp: preference=signencrypt
+Message-ID: <581a0284-c658-265f-1b0f-6f4be5406cee@linaro.org>
+Date: Wed, 31 Jul 2019 10:35:49 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.8.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <1564577101-29020-1-git-send-email-bmeng.cn@gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::443
-Subject: [Qemu-riscv] [PATCH v4 38/54] target/riscv: fetch code with
- translator_ld
+X-Received-From: 2607:f8b0:4864:20::444
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH] riscv: rv32: Root page table
+ address can be larger than 32-bit
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -82,31 +79,23 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Jul 2019 16:25:21 -0000
+X-List-Received-Date: Wed, 31 Jul 2019 17:35:56 -0000
 
-From: "Emilio G. Cota" <cota@braap.org>
+On 7/31/19 5:45 AM, Bin Meng wrote:
+> -    target_ulong base;
+> +    hwaddr base;
+...
+> -        target_ulong pte_addr = base + idx * ptesize;
+> +        hwaddr pte_addr = base + idx * ptesize;
 
-Signed-off-by: Emilio G. Cota <cota@braap.org>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
----
- target/riscv/translate.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+I believe that you either need
 
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 8d6ab732588..73cea63e4a2 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -796,7 +796,7 @@ static void riscv_tr_translate_insn(DisasContextBase *dcbase, CPUState *cpu)
-     DisasContext *ctx = container_of(dcbase, DisasContext, base);
-     CPURISCVState *env = cpu->env_ptr;
- 
--    ctx->opcode = cpu_ldl_code(env, ctx->base.pc_next);
-+    ctx->opcode = translator_ldl(env, ctx->base.pc_next);
-     decode_opc(ctx);
-     ctx->base.pc_next = ctx->pc_succ_insn;
- 
--- 
-2.20.1
+    base + (hwaddr)idx * ptesize
 
+or change the type of idx to hwaddr above.
+
+Otherwise the multiply overflows before it gets promoted with the add.
+
+
+r~
 
