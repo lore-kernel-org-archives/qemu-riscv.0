@@ -1,71 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hssW5-0003Ew-TV
-	for mharc-qemu-riscv@gnu.org; Wed, 31 Jul 2019 13:35:57 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:36971)
+	id 1ht0HQ-0005cD-SG
+	for mharc-qemu-riscv@gnu.org; Wed, 31 Jul 2019 21:53:20 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:39986)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <richard.henderson@linaro.org>) id 1hssW3-0003EY-Qy
- for qemu-riscv@nongnu.org; Wed, 31 Jul 2019 13:35:56 -0400
+ (envelope-from <bmeng.cn@gmail.com>) id 1ht0HO-0005YE-D0
+ for qemu-riscv@nongnu.org; Wed, 31 Jul 2019 21:53:19 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <richard.henderson@linaro.org>) id 1hssW2-00079K-Sg
- for qemu-riscv@nongnu.org; Wed, 31 Jul 2019 13:35:55 -0400
-Received: from mail-pf1-x444.google.com ([2607:f8b0:4864:20::444]:35980)
+ (envelope-from <bmeng.cn@gmail.com>) id 1ht0HN-0001ge-HT
+ for qemu-riscv@nongnu.org; Wed, 31 Jul 2019 21:53:18 -0400
+Received: from mail-ed1-x542.google.com ([2a00:1450:4864:20::542]:44416)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
- id 1hssW2-00078j-LO
- for qemu-riscv@nongnu.org; Wed, 31 Jul 2019 13:35:54 -0400
-Received: by mail-pf1-x444.google.com with SMTP id r7so32266632pfl.3
- for <qemu-riscv@nongnu.org>; Wed, 31 Jul 2019 10:35:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=subject:to:references:from:openpgp:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=JprkFZG+B7lsQyizGQWAjBZCNRt08yRpbp4jzY2Xmw8=;
- b=A+OiYnMyEJiJgxJajenHptTJyg9iXXiPXxKNnKx1J1qXjv8RBwpV2MSJHNwvdux6Er
- 3swA6XW+h1AJIGEH5KrBeifG3XGCt4gIpzku+dSCKTIjIlo3s6rV1dIg0hF2ZsdceNAn
- VCDZmVm/GmxyA2bUnhsU+nWLSZPLfBY/YAFQWB2m9p6iYgOu/3j96LdYnLLUyTQU89OP
- ME1GFFG2ITks3MqXa6zRlK6rkVEmiH2kvC+KmTAO6cmjQHSWX3c1vpgXPdho3wc2X96b
- gq67UWKXq0fFEx+oMtT+1msReMOAmyAChwHE4ZfXLpXhAlAvCGK99FHtajRXQ1glwzf4
- q64g==
+ (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
+ id 1ht0HL-0001fB-Lq; Wed, 31 Jul 2019 21:53:15 -0400
+Received: by mail-ed1-x542.google.com with SMTP id k8so67518274edr.11;
+ Wed, 31 Jul 2019 18:53:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=kAuUUSgahp5qR1FSK0QzNmg9PlAhnc6gE73hIu7pHXA=;
+ b=EnONfDgrNTVdzp/CqZoabbyf35bTj+OeL0Uwm7kt0jweBhmhTiett+vgp2/kqbNZtn
+ sU5h6889N5WUiScphFcErXvAaw7LqeUKY4R9yUQfnPX3Wzw4K8bsGheI4V3WC00+Lpf8
+ 6aHSBBFH7kgAXRda26XludXce2FnQI1/wpfMolH5Y7YgN0o7TLR/gSDpm1AWQXG37o2Z
+ wCJ1vcHj3RWIfkqVGS0jtpau5d0/PSYHjLEOy/sf5fO5DFbeCEAsQrWo6jcPQqrzoUHF
+ wCVZw4ysGy6zOWwZ4umw6fq9H5Ooovb9ecHVXTCUG/Zz+/rWpw946jS+3bUZujERTS45
+ uN6w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:references:from:openpgp:message-id
- :date:user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=JprkFZG+B7lsQyizGQWAjBZCNRt08yRpbp4jzY2Xmw8=;
- b=GiJFdbxwy9EqgFhBqSkAC0AVc9Myp2l/J9lb6ZlezE2xZ6T58MGcIAdXuVymCZLz2G
- yt/UuqG7cKnerWJo7H6AYDjO/9/DcrcfvVIIJZt1qgDmn52Am+w+Uzqv0tCMMQnmHQSP
- qE6HZ+kBnHRTvKSG36qXXs9WPOGaiDo7PauwrsUY2TEsTpv7US7H5Y+bKGek1iWNUWTG
- JGDHPzRyzd2pJmdXZlyF7ajyd5f2tZLs7WxFG/PJOj1y6lb6CDMsBJX06Vs6P5JMvXMx
- mJnowLe2tAY5NfCABgL+bHRrj6CYxyRlMgcEdCGHv16PO0kjVucKyClldEThyUWtMLqj
- MD9A==
-X-Gm-Message-State: APjAAAX2bzoXs1zZw/ugUiWpppUxQhGwno05FHnLiLQLEBE6oeqzUNUy
- dectv7SLXbpWeMce770rW6+dZ/giinU=
-X-Google-Smtp-Source: APXvYqxYERyQfQCpRFNnk7YcRP24HtAq0RkMTNUCFiGZ/xjUV1rhsm0cKWFyoIf9EasFiz2BtZNjyg==
-X-Received: by 2002:a63:d23:: with SMTP id c35mr114266663pgl.376.1564594552770; 
- Wed, 31 Jul 2019 10:35:52 -0700 (PDT)
-Received: from [192.168.1.11] (97-113-7-119.tukw.qwest.net. [97.113.7.119])
- by smtp.gmail.com with ESMTPSA id j5sm60150622pgp.59.2019.07.31.10.35.51
- (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
- Wed, 31 Jul 2019 10:35:51 -0700 (PDT)
-To: Bin Meng <bmeng.cn@gmail.com>, Alistair Francis
- <Alistair.Francis@wdc.com>, Palmer Dabbelt <palmer@sifive.com>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- QEMU devel <qemu-devel@nongnu.org>, QEMU riscv <qemu-riscv@nongnu.org>
-References: <1564577101-29020-1-git-send-email-bmeng.cn@gmail.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-Openpgp: preference=signencrypt
-Message-ID: <581a0284-c658-265f-1b0f-6f4be5406cee@linaro.org>
-Date: Wed, 31 Jul 2019 10:35:49 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.8.0
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=kAuUUSgahp5qR1FSK0QzNmg9PlAhnc6gE73hIu7pHXA=;
+ b=cCjiLmP4wyhjnkMOIwNNtR3REI2yyEZ0khxGJJ/keU2pWaOX8tQBTdtk1vb8Sw6Kpt
+ FAALVyADbaMfY63WUHT/4smMs92PNiyXg5mCN0cDbjXemFQn2Orlg2vf4HzkG7N8wfr5
+ 9Sc8a28JTn1zguI5r/smWmc0aIBuoSkrxkbDetY2gCiyAI3bZn1yOdNd7PVIWYLjXY19
+ cKjljYqbt3F1rKKvVUDtWc49uH8FYIsTMJ7liG0Q+kg0Suvd5FiJfQbjfUzUxEJuTpXj
+ 3q55qHL9EI5Qx3yvRH17+BBS1v5JCfl+rGKVygN0Zseb+XbXcqhjCJxqCLxr8mjFOPXx
+ 7Reg==
+X-Gm-Message-State: APjAAAUfwnPmFxhAGKRB7Ugg5rFmaf+gPAoynxsARqd9P1NFaDtoFJaZ
+ jsHveHAlId/jDKbckMkaL5TfBotOsZZ3QcQPerM=
+X-Google-Smtp-Source: APXvYqzGZqCraUn3bSmXvl68EZNyVsacvzTt7i2LBYyEnkd7PPhYlBvS0n0qCq/Mjl7T4ngeM7I0hdU91wAOJ111ClU=
+X-Received: by 2002:a50:ad0c:: with SMTP id y12mr108423584edc.25.1564624394111; 
+ Wed, 31 Jul 2019 18:53:14 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <1564577101-29020-1-git-send-email-bmeng.cn@gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+References: <1564577101-29020-1-git-send-email-bmeng.cn@gmail.com>
+ <581a0284-c658-265f-1b0f-6f4be5406cee@linaro.org>
+In-Reply-To: <581a0284-c658-265f-1b0f-6f4be5406cee@linaro.org>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Thu, 1 Aug 2019 09:53:03 +0800
+Message-ID: <CAEUhbmVXC6GeHYFST514cLRJHQOo5ki=ZPG=OsLzV2YA0ChQgA@mail.gmail.com>
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>,
+ Palmer Dabbelt <palmer@sifive.com>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, QEMU devel <qemu-devel@nongnu.org>,
+ QEMU riscv <qemu-riscv@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::444
+X-Received-From: 2a00:1450:4864:20::542
 Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH] riscv: rv32: Root page table
  address can be larger than 32-bit
 X-BeenThere: qemu-riscv@nongnu.org
@@ -79,23 +69,32 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Jul 2019 17:35:56 -0000
+X-List-Received-Date: Thu, 01 Aug 2019 01:53:19 -0000
 
-On 7/31/19 5:45 AM, Bin Meng wrote:
-> -    target_ulong base;
-> +    hwaddr base;
-...
-> -        target_ulong pte_addr = base + idx * ptesize;
-> +        hwaddr pte_addr = base + idx * ptesize;
+Hi Richard,
 
-I believe that you either need
+On Thu, Aug 1, 2019 at 1:35 AM Richard Henderson
+<richard.henderson@linaro.org> wrote:
+>
+> On 7/31/19 5:45 AM, Bin Meng wrote:
+> > -    target_ulong base;
+> > +    hwaddr base;
+> ...
+> > -        target_ulong pte_addr = base + idx * ptesize;
+> > +        hwaddr pte_addr = base + idx * ptesize;
+>
+> I believe that you either need
+>
+>     base + (hwaddr)idx * ptesize
+>
+> or change the type of idx to hwaddr above.
+>
+> Otherwise the multiply overflows before it gets promoted with the add.
+>
 
-    base + (hwaddr)idx * ptesize
+I am not sure how (idx * ptesize) could overflow. It represents the
+offset by a page table which is [0, 4096).
 
-or change the type of idx to hwaddr above.
-
-Otherwise the multiply overflows before it gets promoted with the add.
-
-
-r~
+Regards,
+Bin
 
