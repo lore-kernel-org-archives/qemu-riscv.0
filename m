@@ -1,66 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1htCX4-0005Qf-GS
-	for mharc-qemu-riscv@gnu.org; Thu, 01 Aug 2019 10:58:18 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:60655)
+	id 1htDBQ-0003t9-GF
+	for mharc-qemu-riscv@gnu.org; Thu, 01 Aug 2019 11:40:00 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:40796)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <bmeng.cn@gmail.com>) id 1htCWv-0005Px-Lc
- for qemu-riscv@nongnu.org; Thu, 01 Aug 2019 10:58:11 -0400
+ (envelope-from <peter.maydell@linaro.org>) id 1htDBM-0003qD-EF
+ for qemu-riscv@nongnu.org; Thu, 01 Aug 2019 11:39:58 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <bmeng.cn@gmail.com>) id 1htCWu-0004bI-QS
- for qemu-riscv@nongnu.org; Thu, 01 Aug 2019 10:58:09 -0400
-Received: from mail-ed1-x541.google.com ([2a00:1450:4864:20::541]:36930)
+ (envelope-from <peter.maydell@linaro.org>) id 1htDBF-0005mV-U3
+ for qemu-riscv@nongnu.org; Thu, 01 Aug 2019 11:39:51 -0400
+Received: from mail-oi1-x231.google.com ([2607:f8b0:4864:20::231]:44521)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
- id 1htCWq-0004Wd-NR; Thu, 01 Aug 2019 10:58:04 -0400
-Received: by mail-ed1-x541.google.com with SMTP id w13so69506975eds.4;
- Thu, 01 Aug 2019 07:58:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ (Exim 4.71) (envelope-from <peter.maydell@linaro.org>)
+ id 1htDB9-0005gE-IN
+ for qemu-riscv@nongnu.org; Thu, 01 Aug 2019 11:39:44 -0400
+Received: by mail-oi1-x231.google.com with SMTP id e189so54151575oib.11
+ for <qemu-riscv@nongnu.org>; Thu, 01 Aug 2019 08:39:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=t+5VxFNDxAoeMM6TcmSoJp4VphqXgcASmhy++210tFM=;
- b=tBw7uFVIxlKFQLAgt42qNNVYyAGf/dNT1qr0GCILp5ZUYEbY14k6pFUnC1k5i4lnCC
- gQpZTDARA1McFSTGorCqXNIRmIVKQrWSkJz2C+DHF7wuetLCfKmaSrjrs/srda/6jZ5V
- vmKexsM3dKbT0pp2RSakt20lQl3RBzIAWmNv06XnY/B6kx/MIomUreETUZmlugVOgBVv
- QPAnyy021tJo2bYdd9JjHDSIhva2q+63OrXqRavXNWlNu9w5U75o8nQWNQIpM5plBIhP
- 65bXeOyN+0Tg2GqEfVu8+ZHxR2Yt0RuF/C4jH4otUooqV8/iO2sFC1eISQLOyhvAp4MN
- soWg==
+ :cc; bh=4e92+S/B1j008AYg6mI/HQ2hIjEp+EJaePOmjvO0ygI=;
+ b=JQnlrBfoC0vidb3wwBJKAP8vhzA4Znb0WCNk21yFSEqHHs+rBRBHi4oda4wzGIEmAH
+ rnh1Gx7eGg15D1VQf3M3v/FzaFL78Q9/BFq6lqlwPJscuGoq24dVs9mNCDnEEq+Ooxg4
+ 9fy5mmLcecZjll06JkpsIJKDg5N9xN801w7J+rWqamh7pKoY6A7CjU5cb9ICRbP929sT
+ Nqkfh6IqYd4k1UbNgi9pLUffiN1hB9pS+1bx7RQnvHG1Z0fP4YKAA5bdy8FEl/M7WgxY
+ 7AToknVJ6cOYgXIjAEm1Ic1JE4rNipSqK2wsmUFZz6hHizoG1JgqJH1KvW86+mm1QqB+
+ Y+3w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=t+5VxFNDxAoeMM6TcmSoJp4VphqXgcASmhy++210tFM=;
- b=Nhlx/tIKHzxKV3CvpCNyHRG7tJ57EuxDDix9ooT6qfCoZE0OBXIFpTzZ+asnRP7gUk
- C285sAvCbWB+7QV2xbQJPZp71loII50B/A4O1mIr0/atsETJHSIfAClq93oHAclQrKXY
- VrDMprZDm2hE0xw68Dfdg5JTXv47GHt6FSC3JftX2fZNjYPCFw9eUro9kGyYQZxFKJeu
- Hy6gAy4x2bBucu0/xlS1SlKgDTfk55rdaNpf7ruf14xVTHouDJBZ5Jr5rygTwgL1U35q
- XHazGUWOSF2MfpO4J42FyrC9es/Y3EYc6eUqq/FnVlLAdg6yr5YnSQ7jaAiiheqM/FOO
- EopQ==
-X-Gm-Message-State: APjAAAUc9lWJ7F2OYvDI2ldMPvkx//zrGw+VE6PitptoJKsC+Va14tdr
- ZBhRV52fq2DnlOUSTI9NSIvjJ64hgibDBjdRpXw=
-X-Google-Smtp-Source: APXvYqz8uXBCThljYAbr7mltM25xP6DHf60CWgYMptOEb5L2UDGnIyZN4cYDpDL7Iu8T3lt3ytScEBbG2U23QrYmNHQ=
-X-Received: by 2002:a17:906:340e:: with SMTP id
- c14mr102538823ejb.170.1564671483146; 
- Thu, 01 Aug 2019 07:58:03 -0700 (PDT)
+ bh=4e92+S/B1j008AYg6mI/HQ2hIjEp+EJaePOmjvO0ygI=;
+ b=bI2Nsz4DDrYbdhtg9wliQL3dS9qT6k4HvicYr/6BTMqD02/MNl+/fAPGsvh5a79LmP
+ JoVyx9wPINcRiSB+Umq5QXnoIc5PpgAOUdIGiN4LhMiC6Hmp+26Iy6T0y8EcsmSxmiYd
+ ZwTCWg0nHVVD36PGLAO2+luHni4Q5iI6jpTsKMAR5Y+l5BTlnig8qHd/UStuHKUqDWjY
+ qVZROU/vN5pfOZrTHphVQdWOfYEkW+Q87JQ3UxXPNAoTkKPNuvsrSIW3mSPMb8j7Q8CX
+ TqF+mgZfv6e49Oe5B3qe29uFMoh4yiLTx8aTh/t5LigACWaKcssMukI1NgSObYN1xseq
+ 2ehg==
+X-Gm-Message-State: APjAAAVROjztLZKznpr51WAUjen8SFAr2HZ6kWSgD9ESss35plVXHkLQ
+ nEqgFhW/+Zc40mOc3d+RlRByICtAVUtKSKtiqIvHtQ==
+X-Google-Smtp-Source: APXvYqxRSBRR+oOcxXUI3ErxDs+l88nbF78pdtmR103Dgp+Hcv0EEH/vV+afnRc4MhWNP91xtq3HaulBmfEL9LczTw0=
+X-Received: by 2002:a05:6808:8c2:: with SMTP id
+ k2mr62008514oij.98.1564673967959; 
+ Thu, 01 Aug 2019 08:39:27 -0700 (PDT)
 MIME-Version: 1.0
-References: <1564577101-29020-1-git-send-email-bmeng.cn@gmail.com>
- <581a0284-c658-265f-1b0f-6f4be5406cee@linaro.org>
- <CAEUhbmVXC6GeHYFST514cLRJHQOo5ki=ZPG=OsLzV2YA0ChQgA@mail.gmail.com>
- <ac4453de-81cd-c32a-17f8-283fa3569ed0@linaro.org>
-In-Reply-To: <ac4453de-81cd-c32a-17f8-283fa3569ed0@linaro.org>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Thu, 1 Aug 2019 22:57:52 +0800
-Message-ID: <CAEUhbmX2C_FbW_m=Mri19hpz0c74SQTt3ogsatGgveH09t3_4g@mail.gmail.com>
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>,
- Palmer Dabbelt <palmer@sifive.com>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, QEMU devel <qemu-devel@nongnu.org>,
- QEMU riscv <qemu-riscv@nongnu.org>
+References: <20190703084048.6980-1-palmer@sifive.com>
+ <20190703084048.6980-5-palmer@sifive.com>
+In-Reply-To: <20190703084048.6980-5-palmer@sifive.com>
+From: Peter Maydell <peter.maydell@linaro.org>
+Date: Thu, 1 Aug 2019 16:39:17 +0100
+Message-ID: <CAFEAcA-A5P+2XE49dg582CRtDPH0CXevyYfkGkaDH3HN=NFYcg@mail.gmail.com>
+To: Palmer Dabbelt <palmer@sifive.com>
+Cc: QEMU Developers <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Alistair Francis <alistair.francis@wdc.com>
 Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::541
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH] riscv: rv32: Root page table
- address can be larger than 32-bit
+X-Received-From: 2607:f8b0:4864:20::231
+Subject: Re: [Qemu-riscv] [PULL 04/32] target/riscv: Implement
+ riscv_cpu_unassigned_access
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -72,28 +69,43 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Aug 2019 14:58:11 -0000
+X-List-Received-Date: Thu, 01 Aug 2019 15:39:58 -0000
 
-On Thu, Aug 1, 2019 at 10:16 PM Richard Henderson
-<richard.henderson@linaro.org> wrote:
+On Wed, 3 Jul 2019 at 09:41, Palmer Dabbelt <palmer@sifive.com> wrote:
 >
-> On 7/31/19 6:53 PM, Bin Meng wrote:
-> > I am not sure how (idx * ptesize) could overflow. It represents the
-> > offset by a page table which is [0, 4096).
+> From: Michael Clark <mjc@sifive.com>
 >
-> You're right, I mis-read what was going on there.
+> This patch adds support for the riscv_cpu_unassigned_access call
+> and will raise a load or store access fault.
 >
-> However, lower down, "target_ulong ppn" needs to be promoted to hwaddr, so that
->
->     ppn = pte >> PTE_PPN_SHIFT;
->     ...
->     base = ppn << PGSHIFT;
->
-> does not overflow.  (Which is the part of the page table walk that I thought I
-> had gleaned from the patch without actually reading the entire function.)
+> Signed-off-by: Michael Clark <mjc@sifive.com>
+> [Changes by AF:
+>  - Squash two patches and rewrite commit message
+>  - Set baddr to the access address
+> ]
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
+> Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
 
-Ah, yes. ppn should be promoted. Thanks for the review!
+Oops, I missed seeing this go by. The do_unassigned_access
+hook is deprecated and you should drop this and use
+the do_transaction_failed hook instead.
 
-Regards,
-Bin
+The distinction between the two is that do_unassigned_access
+will end up being called for any failing access, including
+not just "normal" guest accesses but also for bad accesses
+that happen during page table walks (which often want to
+be reported to the guest differently) and also accesses
+by random devices like DMA controllers (where throwing a
+cpu exception is always a bug).
+
+Changing the hook implementation itself should be straightforward;
+commit 6ad4d7eed05a1e23537f is an example of doing that on Alpha.
+You also want to check all the places in your target code that
+do physical memory accesses, determine what the right behaviour
+if they get a bus fault is, and implement that (or at least put
+in TODO comments).
+
+thanks
+-- PMM
 
