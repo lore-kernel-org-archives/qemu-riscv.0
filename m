@@ -1,74 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1htBsr-0006Mw-Kb
-	for mharc-qemu-riscv@gnu.org; Thu, 01 Aug 2019 10:16:45 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:52476)
+	id 1htCX4-0005Qf-GS
+	for mharc-qemu-riscv@gnu.org; Thu, 01 Aug 2019 10:58:18 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:60655)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <richard.henderson@linaro.org>) id 1htBsp-0006Jy-Mj
- for qemu-riscv@nongnu.org; Thu, 01 Aug 2019 10:16:44 -0400
+ (envelope-from <bmeng.cn@gmail.com>) id 1htCWv-0005Px-Lc
+ for qemu-riscv@nongnu.org; Thu, 01 Aug 2019 10:58:11 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <richard.henderson@linaro.org>) id 1htBso-0005bt-MO
- for qemu-riscv@nongnu.org; Thu, 01 Aug 2019 10:16:43 -0400
-Received: from mail-pg1-x541.google.com ([2607:f8b0:4864:20::541]:33631)
+ (envelope-from <bmeng.cn@gmail.com>) id 1htCWu-0004bI-QS
+ for qemu-riscv@nongnu.org; Thu, 01 Aug 2019 10:58:09 -0400
+Received: from mail-ed1-x541.google.com ([2a00:1450:4864:20::541]:36930)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
- id 1htBso-0005bX-Dz
- for qemu-riscv@nongnu.org; Thu, 01 Aug 2019 10:16:42 -0400
-Received: by mail-pg1-x541.google.com with SMTP id n190so2854700pgn.0
- for <qemu-riscv@nongnu.org>; Thu, 01 Aug 2019 07:16:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=subject:to:cc:references:from:openpgp:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=nvgx3691qemUajFHkiros1xQZE99DVaku3/9F7Mq1Eg=;
- b=hcDtWsy+JB25ZfK6dakt2CQy2GNILkBDz4fmKP4LltxsEyW9pQ5a9hNrQ5PtBcGDIO
- 2wUROVHkmcmtbhYedipZmcm/gbWeBLUKNQ28L5sfvT85IG6Sv65gdsQedVYYmQrbSGO3
- YyN8QSExx8a92X1XjYklzmOPaMLobwh53l+BzD+nRDZFQ9zB3UaYMic2xAe8szkBy0r+
- ROsYu2ubXm/7ASwVVCg4qAjsVTMiE7DZL91QQpLfamkjMMSV/dJUP2a0jAbpvkbE/qMV
- 99Qr2iVOM48ajS9Cg+omlXcRAlBNp9F55SyIHEsdj8S2xx++sVDOQxqmLtPkfxuwXIPj
- EXUg==
+ (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
+ id 1htCWq-0004Wd-NR; Thu, 01 Aug 2019 10:58:04 -0400
+Received: by mail-ed1-x541.google.com with SMTP id w13so69506975eds.4;
+ Thu, 01 Aug 2019 07:58:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=t+5VxFNDxAoeMM6TcmSoJp4VphqXgcASmhy++210tFM=;
+ b=tBw7uFVIxlKFQLAgt42qNNVYyAGf/dNT1qr0GCILp5ZUYEbY14k6pFUnC1k5i4lnCC
+ gQpZTDARA1McFSTGorCqXNIRmIVKQrWSkJz2C+DHF7wuetLCfKmaSrjrs/srda/6jZ5V
+ vmKexsM3dKbT0pp2RSakt20lQl3RBzIAWmNv06XnY/B6kx/MIomUreETUZmlugVOgBVv
+ QPAnyy021tJo2bYdd9JjHDSIhva2q+63OrXqRavXNWlNu9w5U75o8nQWNQIpM5plBIhP
+ 65bXeOyN+0Tg2GqEfVu8+ZHxR2Yt0RuF/C4jH4otUooqV8/iO2sFC1eISQLOyhvAp4MN
+ soWg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
- :date:user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=nvgx3691qemUajFHkiros1xQZE99DVaku3/9F7Mq1Eg=;
- b=KBDNlHMacN9yPOaTrBS4+u1mGE8d6aXjPe7Jh9za04clb4oSqpBZYgNp80XGMtbtcf
- Zf1s15JIOJNKKt2OnQrBNOOH5fOKM4Qp3tYdbNQLcrKUAXSpkXO7oTknE1kTz8WKJhX4
- WWuKmSqr1NoWZBkvD5lPjKvPoZTlopwywmgKeJieyZmuR1ef2BbdD2XvVVxxRck7/qwP
- Sg7uZOBTC8Zd1O6129LvdLbBv1IooNWrAcOiOr8ItJ8gwUEaJguyGgtDQ+5EqFqA2Mmq
- 1rrYfJquz8gPMWVPGnKZSwAbwsIB1ZAt0GClsAdNDqFYmKse2CeJCMxU6yRcfIJlpTCa
- 9YOQ==
-X-Gm-Message-State: APjAAAWsDNXzl+5cjaRUTfAyk1LH+ulSv43nvSQMxSwIGzflWuyLJdaV
- s9UQGV4/tQ4k/+bkf0uK140DZNDWgZw=
-X-Google-Smtp-Source: APXvYqxhZ2RDS8KaLywMCOz70goBxxWXc7usIn9leMztRuMga/Pw/j96VKF3/lXK/FqVM4plJ3YyRw==
-X-Received: by 2002:a63:4c46:: with SMTP id m6mr122823401pgl.59.1564669000973; 
- Thu, 01 Aug 2019 07:16:40 -0700 (PDT)
-Received: from [192.168.1.11] (97-113-7-119.tukw.qwest.net. [97.113.7.119])
- by smtp.gmail.com with ESMTPSA id u128sm81246813pfu.48.2019.08.01.07.16.39
- (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
- Thu, 01 Aug 2019 07:16:40 -0700 (PDT)
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>,
- Palmer Dabbelt <palmer@sifive.com>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- QEMU devel <qemu-devel@nongnu.org>, QEMU riscv <qemu-riscv@nongnu.org>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=t+5VxFNDxAoeMM6TcmSoJp4VphqXgcASmhy++210tFM=;
+ b=Nhlx/tIKHzxKV3CvpCNyHRG7tJ57EuxDDix9ooT6qfCoZE0OBXIFpTzZ+asnRP7gUk
+ C285sAvCbWB+7QV2xbQJPZp71loII50B/A4O1mIr0/atsETJHSIfAClq93oHAclQrKXY
+ VrDMprZDm2hE0xw68Dfdg5JTXv47GHt6FSC3JftX2fZNjYPCFw9eUro9kGyYQZxFKJeu
+ Hy6gAy4x2bBucu0/xlS1SlKgDTfk55rdaNpf7ruf14xVTHouDJBZ5Jr5rygTwgL1U35q
+ XHazGUWOSF2MfpO4J42FyrC9es/Y3EYc6eUqq/FnVlLAdg6yr5YnSQ7jaAiiheqM/FOO
+ EopQ==
+X-Gm-Message-State: APjAAAUc9lWJ7F2OYvDI2ldMPvkx//zrGw+VE6PitptoJKsC+Va14tdr
+ ZBhRV52fq2DnlOUSTI9NSIvjJ64hgibDBjdRpXw=
+X-Google-Smtp-Source: APXvYqz8uXBCThljYAbr7mltM25xP6DHf60CWgYMptOEb5L2UDGnIyZN4cYDpDL7Iu8T3lt3ytScEBbG2U23QrYmNHQ=
+X-Received: by 2002:a17:906:340e:: with SMTP id
+ c14mr102538823ejb.170.1564671483146; 
+ Thu, 01 Aug 2019 07:58:03 -0700 (PDT)
+MIME-Version: 1.0
 References: <1564577101-29020-1-git-send-email-bmeng.cn@gmail.com>
  <581a0284-c658-265f-1b0f-6f4be5406cee@linaro.org>
  <CAEUhbmVXC6GeHYFST514cLRJHQOo5ki=ZPG=OsLzV2YA0ChQgA@mail.gmail.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-Openpgp: preference=signencrypt
-Message-ID: <ac4453de-81cd-c32a-17f8-283fa3569ed0@linaro.org>
-Date: Thu, 1 Aug 2019 07:16:38 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.8.0
-MIME-Version: 1.0
-In-Reply-To: <CAEUhbmVXC6GeHYFST514cLRJHQOo5ki=ZPG=OsLzV2YA0ChQgA@mail.gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+ <ac4453de-81cd-c32a-17f8-283fa3569ed0@linaro.org>
+In-Reply-To: <ac4453de-81cd-c32a-17f8-283fa3569ed0@linaro.org>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Thu, 1 Aug 2019 22:57:52 +0800
+Message-ID: <CAEUhbmX2C_FbW_m=Mri19hpz0c74SQTt3ogsatGgveH09t3_4g@mail.gmail.com>
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>,
+ Palmer Dabbelt <palmer@sifive.com>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, QEMU devel <qemu-devel@nongnu.org>,
+ QEMU riscv <qemu-riscv@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::541
+X-Received-From: 2a00:1450:4864:20::541
 Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH] riscv: rv32: Root page table
  address can be larger than 32-bit
 X-BeenThere: qemu-riscv@nongnu.org
@@ -82,23 +72,28 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Aug 2019 14:16:44 -0000
+X-List-Received-Date: Thu, 01 Aug 2019 14:58:11 -0000
 
-On 7/31/19 6:53 PM, Bin Meng wrote:
-> I am not sure how (idx * ptesize) could overflow. It represents the
-> offset by a page table which is [0, 4096).
+On Thu, Aug 1, 2019 at 10:16 PM Richard Henderson
+<richard.henderson@linaro.org> wrote:
+>
+> On 7/31/19 6:53 PM, Bin Meng wrote:
+> > I am not sure how (idx * ptesize) could overflow. It represents the
+> > offset by a page table which is [0, 4096).
+>
+> You're right, I mis-read what was going on there.
+>
+> However, lower down, "target_ulong ppn" needs to be promoted to hwaddr, so that
+>
+>     ppn = pte >> PTE_PPN_SHIFT;
+>     ...
+>     base = ppn << PGSHIFT;
+>
+> does not overflow.  (Which is the part of the page table walk that I thought I
+> had gleaned from the patch without actually reading the entire function.)
 
-You're right, I mis-read what was going on there.
+Ah, yes. ppn should be promoted. Thanks for the review!
 
-However, lower down, "target_ulong ppn" needs to be promoted to hwaddr, so that
-
-    ppn = pte >> PTE_PPN_SHIFT;
-    ...
-    base = ppn << PGSHIFT;
-
-does not overflow.  (Which is the part of the page table walk that I thought I
-had gleaned from the patch without actually reading the entire function.)
-
-
-r~
+Regards,
+Bin
 
