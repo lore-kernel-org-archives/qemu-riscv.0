@@ -1,51 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hug6U-0006E9-Ld
-	for mharc-qemu-riscv@gnu.org; Mon, 05 Aug 2019 12:44:58 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:39100)
+	id 1hugMm-00059u-UF
+	for mharc-qemu-riscv@gnu.org; Mon, 05 Aug 2019 13:01:49 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:41644)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <fintelia@gmail.com>) id 1hug6S-0006BU-NP
- for qemu-riscv@nongnu.org; Mon, 05 Aug 2019 12:44:57 -0400
+ (envelope-from <fintelia@gmail.com>) id 1hugMj-00055m-RV
+ for qemu-riscv@nongnu.org; Mon, 05 Aug 2019 13:01:47 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <fintelia@gmail.com>) id 1hug6R-00025p-Gk
- for qemu-riscv@nongnu.org; Mon, 05 Aug 2019 12:44:56 -0400
-Received: from mail-lj1-x241.google.com ([2a00:1450:4864:20::241]:40566)
+ (envelope-from <fintelia@gmail.com>) id 1hugMi-0000Bh-31
+ for qemu-riscv@nongnu.org; Mon, 05 Aug 2019 13:01:45 -0400
+Received: from mail-lf1-x141.google.com ([2a00:1450:4864:20::141]:39067)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <fintelia@gmail.com>)
- id 1hug6P-00023T-AH; Mon, 05 Aug 2019 12:44:53 -0400
-Received: by mail-lj1-x241.google.com with SMTP id m8so46252098lji.7;
- Mon, 05 Aug 2019 09:44:52 -0700 (PDT)
+ id 1hugMe-0000A0-J3; Mon, 05 Aug 2019 13:01:40 -0400
+Received: by mail-lf1-x141.google.com with SMTP id x3so4808099lfn.6;
+ Mon, 05 Aug 2019 10:01:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=9FruRi6Xu7OT2SB3a0nBpyGnFSd5DR+quxKjBlWmUO0=;
- b=SqBySKDtvDhA5TRsCeHaCgrsqU6MQfn0EpNush9xmeNRQo701+ccRDZB2TqVpddpqC
- wLf2ZoOeIRaQrJjI7ImTCKbB4yKtSxl7BiV34WZd08vRjfVfXpAy/pQOEM7sgR1e6ZvF
- nV+t2rQTkAyr7S7q+SZzaEJw4O3ddLkPWuUhvt2CnVsxEjRTYMzjrhDkKLeEYrjzwsDq
- 6GK5AYABOWGj/Ib7ifRVQCh2m7JrU5oFM18MbTBtez7IbmhfZJReF620QroHHJEkahXy
- stvh/BKc5CynjtTsZQQ2qWBeL37NpR1qoDDBlVDZPbuMhRrKY27tnZcfDtCJkK4g+MfX
- 3Oyg==
+ :cc; bh=O4vED/Px4TsmV1kmjJ6cY1xYEE+NYEHIDRkGEtFxaf4=;
+ b=s8McU0JIy003O4Dbdm8gf9tGdInrB/wF83mVmlFcvP7uUuOH70aVvJBvqToRCyeZ27
+ pZqM7eoSyiNOnLmNHKUNOoNjew5eEa4PcnaF+nMpMVslYmkx7BpvrEk2HRoqkkzHDHR8
+ PuwIhoAktIJhcNihtXa+5FYZu4IBBDC3iLVf4c2DOkZFbzZ+K2gs73d1UxWLnpCulZ6I
+ +3KoX4SNGc+f7u+HNLUoBKJU9dApJJ4J8QYtUpDJ2JK7X56ag2A2AO5zW4olcxeb/kWu
+ 8ubC95s47RyaGG6gso+KJ77xWoYbYu/Ar9UQwvwvpwk3ps3LRu42FAh3tFK00903iNqS
+ pv5g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=9FruRi6Xu7OT2SB3a0nBpyGnFSd5DR+quxKjBlWmUO0=;
- b=esKsLdf0WNLSGQuEd2Kavb0kuGbcFgaNne2N2WWpqp8CgpnFzHZcf9n6XJ+lZYH3R9
- L/g51x3VuwUFuPvBX3AwV4m/M1rw2Ezuz1yWhlJ0hvu6tXnHP2fQicWZAt951iRDT2FR
- nVfJw3suq7ftCdbNG6Vv5NCLbPbqvfJpUfUuLB8efSjswQHn7hjhb+B6zf/KNO89OR6u
- wA6ARRAsYeNMRh8SRtMYUwo0z6q2owUg2ef2lTD9OLcNlWM6u1hXdrn2HBartqaaNuwW
- CLI4736htpWO8jA3F+mo4i6lu5LeiZDo6MIMKQZzoYlM2HaeGJTitni5xDonRc2pi0MQ
- 8Z/w==
-X-Gm-Message-State: APjAAAUwiADyc+FCtaYrUtsn6Ub8+cDKizajLf+zXrL9nAxcbD6mSNt3
- DtyMCOdFGePIx+svCXRxS61AWW0CGbEE6YIx6a8=
-X-Google-Smtp-Source: APXvYqzeZgZOP1DZbznXLublw5CLWW/xmO+ZTeR/jqJsBR6ppyxkM2qMAM+soqtJ6soaGzygDfQKUzf+UuYTuVvzb5I=
-X-Received: by 2002:a2e:9d8a:: with SMTP id c10mr54537104ljj.147.1565023491117; 
- Mon, 05 Aug 2019 09:44:51 -0700 (PDT)
+ bh=O4vED/Px4TsmV1kmjJ6cY1xYEE+NYEHIDRkGEtFxaf4=;
+ b=pq03msv/Phaj4vs6e55A6qZlKzicCJEL/WiI3dmwN1SmROchLcAQl0CUOtbDt/wrB2
+ nx/C+KEozvEKTdND8PxgDy8jz+IXrQR4k6Wr6QxtDlaEr3P3A0ho3BTF3VEAPRAjVhHM
+ TfJzVzFDZZ2gbTisZDkH+1E0zKyeOIp02h9QXOJNGlttwWv7gmF/FPlonDi/gX9GBgBv
+ Xveg6+vrAG8r54udWaMBUeCy9yvXgpBZIyAu8cJPeN/u3mgGopM+NFAfoHT4C+uhgWMZ
+ ON0TSxWjkpnlX15DW7NbLczJePkDyVCeb0qo4LvbxR+92R4wcTFdJni7rBcvm/i3fupX
+ 40iA==
+X-Gm-Message-State: APjAAAUw1z/U+N4Hu8uPpoXu3+lBTPcZHJnzIVhxYaHIfshl2OLPAPc2
+ cE8OV88na5FSOlp29ee8yKSGsy1xbMmTND8EqJk=
+X-Google-Smtp-Source: APXvYqwWgNT4x4TGgPTgW6WGzbnsOqNWaQl+In8vbraZWD40tWfrKK2LMDuhm3XnNJmSDcudnexoOCYXyo3tHYQVcd0=
+X-Received: by 2002:a19:7006:: with SMTP id h6mr71058166lfc.5.1565024498346;
+ Mon, 05 Aug 2019 10:01:38 -0700 (PDT)
 MIME-Version: 1.0
 References: <1565020823-24223-1-git-send-email-bmeng.cn@gmail.com>
- <1565020823-24223-10-git-send-email-bmeng.cn@gmail.com>
-In-Reply-To: <1565020823-24223-10-git-send-email-bmeng.cn@gmail.com>
+ <1565020823-24223-27-git-send-email-bmeng.cn@gmail.com>
+In-Reply-To: <1565020823-24223-27-git-send-email-bmeng.cn@gmail.com>
 From: Jonathan Behrens <fintelia@gmail.com>
-Date: Mon, 5 Aug 2019 12:44:05 -0400
-Message-ID: <CANnJOVEg6J=ZiZ7cO+s6x2UBwBZ5fteJeKDhn38RcFCPiuTn7g@mail.gmail.com>
+Date: Mon, 5 Aug 2019 13:00:52 -0400
+Message-ID: <CANnJOVHi4sZr5PQzhbOCBPs3-pvH-8Nk=j-g+Y4841dNOs63RQ@mail.gmail.com>
 To: Bin Meng <bmeng.cn@gmail.com>
 Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
@@ -53,12 +53,11 @@ Cc: Alistair Francis <Alistair.Francis@wdc.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>
-Content-Type: multipart/alternative; boundary="00000000000040d94a058f616df4"
+Content-Type: multipart/alternative; boundary="00000000000049f10b058f61a913"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::241
-Subject: Re: [Qemu-riscv] [PATCH 09/28] riscv: sifive_u: Update UART base
- addresses
+X-Received-From: 2a00:1450:4864:20::141
+Subject: Re: [Qemu-riscv] [PATCH 26/28] riscv: hw: Update PLIC device tree
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -70,94 +69,189 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Aug 2019 16:44:57 -0000
+X-List-Received-Date: Mon, 05 Aug 2019 17:01:47 -0000
 
---00000000000040d94a058f616df4
+--00000000000049f10b058f61a913
 Content-Type: text/plain; charset="UTF-8"
 
-Reviewed-by: Jonathan Behrens <fintelia@gmail.com> <chihmin.chao@sifive.com>
+I was a little surprised to see the "riscv,max-priority" element removed,
+but there is no mention of it in the kernel documentation
+<https://github.com/torvalds/linux/blob/master/Documentation/devicetree/bindings/interrupt-controller/sifive%2Cplic-1.0.0.txt>
+so I guess that max-priority=7 is now assumed.
 
-On Mon, Aug 5, 2019 at 12:07 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+Reviewed-by: Jonathan Behrens <fintelia@gmail.com>
 
-> This updates the UART base address to match the hardware.
+On Mon, Aug 5, 2019 at 12:10 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+
+> This removes "reg-names" and "riscv,max-priority" properties of the
+> PLIC node from device tree, and updates its compatible string, to
+> keep in sync with the Linux kernel device tree.
 >
 > Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
 > ---
 >
->  hw/riscv/sifive_u.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
+>  hw/riscv/sifive_u.c | 4 +---
+>  hw/riscv/virt.c     | 4 +---
+>  2 files changed, 2 insertions(+), 6 deletions(-)
 >
 > diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-> index b235f29..9f05e09 100644
+> index d77b3c3..5ded3a0 100644
 > --- a/hw/riscv/sifive_u.c
 > +++ b/hw/riscv/sifive_u.c
-> @@ -60,8 +60,8 @@ static const struct MemmapEntry {
->      [SIFIVE_U_MROM] =     {     0x1000,    0x11000 },
->      [SIFIVE_U_CLINT] =    {  0x2000000,    0x10000 },
->      [SIFIVE_U_PLIC] =     {  0xc000000,  0x4000000 },
-> -    [SIFIVE_U_UART0] =    { 0x10013000,     0x1000 },
-> -    [SIFIVE_U_UART1] =    { 0x10023000,     0x1000 },
-> +    [SIFIVE_U_UART0] =    { 0x10010000,     0x1000 },
-> +    [SIFIVE_U_UART1] =    { 0x10011000,     0x1000 },
->      [SIFIVE_U_DRAM] =     { 0x80000000,        0x0 },
->      [SIFIVE_U_GEM] =      { 0x100900FC,     0x2000 },
->  };
+> @@ -229,15 +229,13 @@ static void create_fdt(SiFiveUState *s, const struct
+> MemmapEntry *memmap,
+>          (long)memmap[SIFIVE_U_PLIC].base);
+>      qemu_fdt_add_subnode(fdt, nodename);
+>      qemu_fdt_setprop_cell(fdt, nodename, "#interrupt-cells", 1);
+> -    qemu_fdt_setprop_string(fdt, nodename, "compatible", "riscv,plic0");
+> +    qemu_fdt_setprop_string(fdt, nodename, "compatible",
+> "sifive,plic-1.0.0");
+>      qemu_fdt_setprop(fdt, nodename, "interrupt-controller", NULL, 0);
+>      qemu_fdt_setprop(fdt, nodename, "interrupts-extended",
+>          cells, s->soc.cpus.num_harts * sizeof(uint32_t) * 4);
+>      qemu_fdt_setprop_cells(fdt, nodename, "reg",
+>          0x0, memmap[SIFIVE_U_PLIC].base,
+>          0x0, memmap[SIFIVE_U_PLIC].size);
+> -    qemu_fdt_setprop_string(fdt, nodename, "reg-names", "control");
+> -    qemu_fdt_setprop_cell(fdt, nodename, "riscv,max-priority", 7);
+>      qemu_fdt_setprop_cell(fdt, nodename, "riscv,ndev", 0x35);
+>      qemu_fdt_setprop_cell(fdt, nodename, "phandle", plic_phandle);
+>      plic_phandle = qemu_fdt_get_phandle(fdt, nodename);
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index 127f005..f662100 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -237,15 +237,13 @@ static void *create_fdt(RISCVVirtState *s, const
+> struct MemmapEntry *memmap,
+>                            FDT_PLIC_ADDR_CELLS);
+>      qemu_fdt_setprop_cell(fdt, nodename, "#interrupt-cells",
+>                            FDT_PLIC_INT_CELLS);
+> -    qemu_fdt_setprop_string(fdt, nodename, "compatible", "riscv,plic0");
+> +    qemu_fdt_setprop_string(fdt, nodename, "compatible",
+> "sifive,plic-1.0.0");
+>      qemu_fdt_setprop(fdt, nodename, "interrupt-controller", NULL, 0);
+>      qemu_fdt_setprop(fdt, nodename, "interrupts-extended",
+>          cells, s->soc.num_harts * sizeof(uint32_t) * 4);
+>      qemu_fdt_setprop_cells(fdt, nodename, "reg",
+>          0x0, memmap[VIRT_PLIC].base,
+>          0x0, memmap[VIRT_PLIC].size);
+> -    qemu_fdt_setprop_string(fdt, nodename, "reg-names", "control");
+> -    qemu_fdt_setprop_cell(fdt, nodename, "riscv,max-priority", 7);
+>      qemu_fdt_setprop_cell(fdt, nodename, "riscv,ndev", VIRTIO_NDEV);
+>      qemu_fdt_setprop_cell(fdt, nodename, "phandle", plic_phandle);
+>      plic_phandle = qemu_fdt_get_phandle(fdt, nodename);
 > --
 > 2.7.4
 >
 >
 >
 
---00000000000040d94a058f616df4
+--00000000000049f10b058f61a913
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr"><span class=3D"gmail-il">Reviewed</span>-<span class=3D"gm=
-ail-il">by</span>: Jonathan Behrens &lt;<a href=3D"mailto:fintelia@gmail.co=
-m">fintelia@gmail.com</a>&gt;<a href=3D"mailto:chihmin.chao@sifive.com" tar=
-get=3D"_blank"></a><br></div><br><div class=3D"gmail_quote"><div dir=3D"ltr=
-" class=3D"gmail_attr">On Mon, Aug 5, 2019 at 12:07 PM Bin Meng &lt;<a href=
-=3D"mailto:bmeng.cn@gmail.com">bmeng.cn@gmail.com</a>&gt; wrote:<br></div><=
-blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-l=
-eft:1px solid rgb(204,204,204);padding-left:1ex">This updates the UART base=
- address to match the hardware.<br>
+<div dir=3D"ltr"><div><span class=3D"gmail-m_6422917696302743291gmail-il">I=
+ was a little surprised to see the &quot;riscv,max-priority&quot; element r=
+emoved, but there is no mention of it in the <a href=3D"https://github.com/=
+torvalds/linux/blob/master/Documentation/devicetree/bindings/interrupt-cont=
+roller/sifive%2Cplic-1.0.0.txt">kernel documentation</a> so I guess that ma=
+x-priority=3D7 is now assumed.<br></span></div><div><span class=3D"gmail-m_=
+6422917696302743291gmail-il"><br></span></div><div><span class=3D"gmail-m_6=
+422917696302743291gmail-il">Reviewed</span>-<span class=3D"gmail-m_64229176=
+96302743291gmail-il">by</span>: Jonathan Behrens &lt;<a href=3D"mailto:fint=
+elia@gmail.com" target=3D"_blank">fintelia@gmail.com</a>&gt;</div></div><br=
+><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Mon, A=
+ug 5, 2019 at 12:10 PM Bin Meng &lt;<a href=3D"mailto:bmeng.cn@gmail.com">b=
+meng.cn@gmail.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote"=
+ style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);p=
+adding-left:1ex">This removes &quot;reg-names&quot; and &quot;riscv,max-pri=
+ority&quot; properties of the<br>
+PLIC node from device tree, and updates its compatible string, to<br>
+keep in sync with the Linux kernel device tree.<br>
 <br>
 Signed-off-by: Bin Meng &lt;<a href=3D"mailto:bmeng.cn@gmail.com" target=3D=
 "_blank">bmeng.cn@gmail.com</a>&gt;<br>
 ---<br>
 <br>
-=C2=A0hw/riscv/sifive_u.c | 4 ++--<br>
-=C2=A01 file changed, 2 insertions(+), 2 deletions(-)<br>
+=C2=A0hw/riscv/sifive_u.c | 4 +---<br>
+=C2=A0hw/riscv/virt.c=C2=A0 =C2=A0 =C2=A0| 4 +---<br>
+=C2=A02 files changed, 2 insertions(+), 6 deletions(-)<br>
 <br>
 diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c<br>
-index b235f29..9f05e09 100644<br>
+index d77b3c3..5ded3a0 100644<br>
 --- a/hw/riscv/sifive_u.c<br>
 +++ b/hw/riscv/sifive_u.c<br>
-@@ -60,8 +60,8 @@ static const struct MemmapEntry {<br>
-=C2=A0 =C2=A0 =C2=A0[SIFIVE_U_MROM] =3D=C2=A0 =C2=A0 =C2=A0{=C2=A0 =C2=A0 =
-=C2=A00x1000,=C2=A0 =C2=A0 0x11000 },<br>
-=C2=A0 =C2=A0 =C2=A0[SIFIVE_U_CLINT] =3D=C2=A0 =C2=A0 {=C2=A0 0x2000000,=C2=
-=A0 =C2=A0 0x10000 },<br>
-=C2=A0 =C2=A0 =C2=A0[SIFIVE_U_PLIC] =3D=C2=A0 =C2=A0 =C2=A0{=C2=A0 0xc00000=
-0,=C2=A0 0x4000000 },<br>
--=C2=A0 =C2=A0 [SIFIVE_U_UART0] =3D=C2=A0 =C2=A0 { 0x10013000,=C2=A0 =C2=A0=
- =C2=A00x1000 },<br>
--=C2=A0 =C2=A0 [SIFIVE_U_UART1] =3D=C2=A0 =C2=A0 { 0x10023000,=C2=A0 =C2=A0=
- =C2=A00x1000 },<br>
-+=C2=A0 =C2=A0 [SIFIVE_U_UART0] =3D=C2=A0 =C2=A0 { 0x10010000,=C2=A0 =C2=A0=
- =C2=A00x1000 },<br>
-+=C2=A0 =C2=A0 [SIFIVE_U_UART1] =3D=C2=A0 =C2=A0 { 0x10011000,=C2=A0 =C2=A0=
- =C2=A00x1000 },<br>
-=C2=A0 =C2=A0 =C2=A0[SIFIVE_U_DRAM] =3D=C2=A0 =C2=A0 =C2=A0{ 0x80000000,=C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 0x0 },<br>
-=C2=A0 =C2=A0 =C2=A0[SIFIVE_U_GEM] =3D=C2=A0 =C2=A0 =C2=A0 { 0x100900FC,=C2=
-=A0 =C2=A0 =C2=A00x2000 },<br>
-=C2=A0};<br>
+@@ -229,15 +229,13 @@ static void create_fdt(SiFiveUState *s, const struct =
+MemmapEntry *memmap,<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0(long)memmap[SIFIVE_U_PLIC].base);<br>
+=C2=A0 =C2=A0 =C2=A0qemu_fdt_add_subnode(fdt, nodename);<br>
+=C2=A0 =C2=A0 =C2=A0qemu_fdt_setprop_cell(fdt, nodename, &quot;#interrupt-c=
+ells&quot;, 1);<br>
+-=C2=A0 =C2=A0 qemu_fdt_setprop_string(fdt, nodename, &quot;compatible&quot=
+;, &quot;riscv,plic0&quot;);<br>
++=C2=A0 =C2=A0 qemu_fdt_setprop_string(fdt, nodename, &quot;compatible&quot=
+;, &quot;sifive,plic-1.0.0&quot;);<br>
+=C2=A0 =C2=A0 =C2=A0qemu_fdt_setprop(fdt, nodename, &quot;interrupt-control=
+ler&quot;, NULL, 0);<br>
+=C2=A0 =C2=A0 =C2=A0qemu_fdt_setprop(fdt, nodename, &quot;interrupts-extend=
+ed&quot;,<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0cells, s-&gt;soc.cpus.num_harts * sizeof(=
+uint32_t) * 4);<br>
+=C2=A0 =C2=A0 =C2=A0qemu_fdt_setprop_cells(fdt, nodename, &quot;reg&quot;,<=
+br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A00x0, memmap[SIFIVE_U_PLIC].base,<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A00x0, memmap[SIFIVE_U_PLIC].size);<br>
+-=C2=A0 =C2=A0 qemu_fdt_setprop_string(fdt, nodename, &quot;reg-names&quot;=
+, &quot;control&quot;);<br>
+-=C2=A0 =C2=A0 qemu_fdt_setprop_cell(fdt, nodename, &quot;riscv,max-priorit=
+y&quot;, 7);<br>
+=C2=A0 =C2=A0 =C2=A0qemu_fdt_setprop_cell(fdt, nodename, &quot;riscv,ndev&q=
+uot;, 0x35);<br>
+=C2=A0 =C2=A0 =C2=A0qemu_fdt_setprop_cell(fdt, nodename, &quot;phandle&quot=
+;, plic_phandle);<br>
+=C2=A0 =C2=A0 =C2=A0plic_phandle =3D qemu_fdt_get_phandle(fdt, nodename);<b=
+r>
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c<br>
+index 127f005..f662100 100644<br>
+--- a/hw/riscv/virt.c<br>
++++ b/hw/riscv/virt.c<br>
+@@ -237,15 +237,13 @@ static void *create_fdt(RISCVVirtState *s, const stru=
+ct MemmapEntry *memmap,<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0FDT_PLIC_ADDR_CELLS);<br>
+=C2=A0 =C2=A0 =C2=A0qemu_fdt_setprop_cell(fdt, nodename, &quot;#interrupt-c=
+ells&quot;,<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0FDT_PLIC_INT_CELLS);<br>
+-=C2=A0 =C2=A0 qemu_fdt_setprop_string(fdt, nodename, &quot;compatible&quot=
+;, &quot;riscv,plic0&quot;);<br>
++=C2=A0 =C2=A0 qemu_fdt_setprop_string(fdt, nodename, &quot;compatible&quot=
+;, &quot;sifive,plic-1.0.0&quot;);<br>
+=C2=A0 =C2=A0 =C2=A0qemu_fdt_setprop(fdt, nodename, &quot;interrupt-control=
+ler&quot;, NULL, 0);<br>
+=C2=A0 =C2=A0 =C2=A0qemu_fdt_setprop(fdt, nodename, &quot;interrupts-extend=
+ed&quot;,<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0cells, s-&gt;soc.num_harts * sizeof(uint3=
+2_t) * 4);<br>
+=C2=A0 =C2=A0 =C2=A0qemu_fdt_setprop_cells(fdt, nodename, &quot;reg&quot;,<=
+br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A00x0, memmap[VIRT_PLIC].base,<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A00x0, memmap[VIRT_PLIC].size);<br>
+-=C2=A0 =C2=A0 qemu_fdt_setprop_string(fdt, nodename, &quot;reg-names&quot;=
+, &quot;control&quot;);<br>
+-=C2=A0 =C2=A0 qemu_fdt_setprop_cell(fdt, nodename, &quot;riscv,max-priorit=
+y&quot;, 7);<br>
+=C2=A0 =C2=A0 =C2=A0qemu_fdt_setprop_cell(fdt, nodename, &quot;riscv,ndev&q=
+uot;, VIRTIO_NDEV);<br>
+=C2=A0 =C2=A0 =C2=A0qemu_fdt_setprop_cell(fdt, nodename, &quot;phandle&quot=
+;, plic_phandle);<br>
+=C2=A0 =C2=A0 =C2=A0plic_phandle =3D qemu_fdt_get_phandle(fdt, nodename);<b=
+r>
 -- <br>
 2.7.4<br>
 <br>
 <br>
 </blockquote></div>
 
---00000000000040d94a058f616df4--
+--00000000000049f10b058f61a913--
 
