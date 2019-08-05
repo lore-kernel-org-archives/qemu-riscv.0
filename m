@@ -1,65 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hufQW-00013u-1C
+	id 1hufQW-00016h-Qo
 	for mharc-qemu-riscv@gnu.org; Mon, 05 Aug 2019 12:01:36 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:58596)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58650)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <bmeng.cn@gmail.com>) id 1hufPu-0000mu-4G
- for qemu-riscv@nongnu.org; Mon, 05 Aug 2019 12:01:00 -0400
+ (envelope-from <bmeng.cn@gmail.com>) id 1hufPv-0000nc-LR
+ for qemu-riscv@nongnu.org; Mon, 05 Aug 2019 12:01:07 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <bmeng.cn@gmail.com>) id 1hufPr-00032z-7p
- for qemu-riscv@nongnu.org; Mon, 05 Aug 2019 12:00:57 -0400
-Received: from mail-pf1-x442.google.com ([2607:f8b0:4864:20::442]:43800)
+ (envelope-from <bmeng.cn@gmail.com>) id 1hufPu-00037P-3M
+ for qemu-riscv@nongnu.org; Mon, 05 Aug 2019 12:00:59 -0400
+Received: from mail-pg1-x541.google.com ([2607:f8b0:4864:20::541]:44876)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
- id 1hufPi-0002xI-64; Mon, 05 Aug 2019 12:00:46 -0400
-Received: by mail-pf1-x442.google.com with SMTP id i189so39874815pfg.10;
- Mon, 05 Aug 2019 09:00:45 -0700 (PDT)
+ id 1hufPj-0002xt-7P; Mon, 05 Aug 2019 12:00:47 -0400
+Received: by mail-pg1-x541.google.com with SMTP id i18so39971316pgl.11;
+ Mon, 05 Aug 2019 09:00:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:to:subject:date:message-id:in-reply-to:references;
- bh=UOGQihbkCSuXF1N9Rsgla60y4gUdIYOL+L4Hkd4525A=;
- b=t1OFREqXq/VKpM0rN0lmTexaUcgdDcKmhEfFVoksZ11zyc4yIV4avHFJa1O7HbWP1F
- oyvB95z+McuzWC2+yzY4tgLQxir2RBUAjAYz35qj/S8fOAHs5ddj9JVutRzNnO019GqJ
- CuY7OGQV8bSCj2AhiJmYy9ybSw2UCL9L7VdZcrh0YjjMthwX2XN87mXYZGJJOKNV0VuB
- iJ5B4aE1xcTZ73Ba1HKmpOafFTU98oIB2YPxsp+dEgcNPGSjtHHSn+3/PV+W7zFg4O8q
- wjNtC5j4G1apU35V9o+U9IkjHXLjuqkSyPBVjrSau7iMDt59eQa7J8mwcpI5FlVcRFuB
- 4TlA==
+ bh=X/eLFOPc89c7dqd+0xx5xUwkAX1UJ8O2PebiV5h7esI=;
+ b=iSLB/xhjJMqoaSZ8xZ2pMAqlCvxEG3YyBzbEMQeZyDgmxliU4vISC+gOINgr2ifYNO
+ SSxhRDBF8K+KtAfkyWt76Z9zv6MY8o6kh1yaLnP032ZYmFgJeXY7ACvVwFIFdnaDUzvW
+ z3rGQQfaMf8AEpYYTjHsZVXfe+qbuHvSShIr3a2r/rNCkEbn9KjuHoHBR6Z9cnTQFX2N
+ Gqf1IyeyXot6cO77gUXxLIpRuvZ9iqtxPcJufHVLUUsc6SG90+Sg3aNfXBXanr1WN5N+
+ kpib/kUTi5arVgE+Z8JlTB8M6wPdNsRHQM2v6B+gR4yd/Y9Su/fustVkuWZe7DBHqpVG
+ 9v3w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
  :references;
- bh=UOGQihbkCSuXF1N9Rsgla60y4gUdIYOL+L4Hkd4525A=;
- b=Is/n59i2O7au0l99kT38Zwf4k3C9gwYERmzhXPppsv/1eHTmyg+5P5cSPt6qSoftmM
- nr67EAK1FE4DCRKxt/ocmIUliG9WJFbqnYk8ScZ35JFTXkHwkT1XDNxHzryt9cWTMUP2
- m+aWIkjS1TVI1pyYT/CAkLdIG91QvK9ea5pLDvL2Cy7pH6qmYSWod//JLptChjmLdKgo
- jQmOep5hXlEbty9ViEKXXdL/ICs7aX4kwGVf/uB+6uDq6TfQvHXcyN8xThA9OqGr/0tF
- oh4wNh7DBZq7cxo7CdtoADD24iZUUKx42f6HpErcV66jQsFKnnaxorAnubs7yvvPCpVI
- nFYg==
-X-Gm-Message-State: APjAAAU71381s30H5twGY549kn0E4pXmqOdap2I5Fh+5HRr6qaYPNnLg
- uspSEQBMBBA9s0PvPHGARIM=
-X-Google-Smtp-Source: APXvYqxCQnRQ3yYE1MnKN+MOHVP8iEEiVTbmX61ZwgMMhOLPGxUBdg6mgRD193NUbiXuBNnXAlhxAw==
-X-Received: by 2002:a63:4a0d:: with SMTP id x13mr10229312pga.75.1565020845215; 
- Mon, 05 Aug 2019 09:00:45 -0700 (PDT)
+ bh=X/eLFOPc89c7dqd+0xx5xUwkAX1UJ8O2PebiV5h7esI=;
+ b=dp54zKqxRuuWEKu8d/BRDUtqW2/vYSjo17gKiuwdWhXfkjsJiZ5qtphFEfKClCbpf+
+ g9eLj50uWVej3tf6cGBX4J5hXdT2AzDtiJFug8UVPmxox57tpJakLd4hhix/zDFHW3XO
+ OgSJwXeDfc5cMr0F9SdZZFL+zVyJ1qmVcGdGAfKISPLh/ptFIBoNNGNeitcuoKpbZKVc
+ 9aNMBm7sjC8zMaQkMSj694d/CierRCiSP+IWI5YI6am6I7gIr+NQdH1XrkLsalynGiIx
+ 286WMT2oCLJR8P9l6M4np3HJwBdm18lxco56YluPD0JBzvDP41msRV+BDVq33UVzmQt0
+ t7Og==
+X-Gm-Message-State: APjAAAVW9PDOzkDHKSkkTGoZCfjk0DhPFAVQLjGlOSa9ikpLFeRDQEa8
+ By0Yv6Q4y6JMKjapptjoSLo=
+X-Google-Smtp-Source: APXvYqxMrx/NNF89vqQ8+MjOqYv59P2oP0mgljwBnCX/CzJ37ipSdRv6zRA8nv5QnA1187gayLgtzg==
+X-Received: by 2002:a63:89c7:: with SMTP id
+ v190mr132242628pgd.299.1565020846325; 
+ Mon, 05 Aug 2019 09:00:46 -0700 (PDT)
 Received: from localhost.localdomain (unknown-224-80.windriver.com.
  [147.11.224.80])
- by smtp.gmail.com with ESMTPSA id d18sm47728793pgi.40.2019.08.05.09.00.44
+ by smtp.gmail.com with ESMTPSA id d18sm47728793pgi.40.2019.08.05.09.00.45
  (version=TLS1 cipher=AES128-SHA bits=128/128);
- Mon, 05 Aug 2019 09:00:44 -0700 (PDT)
+ Mon, 05 Aug 2019 09:00:45 -0700 (PDT)
 From: Bin Meng <bmeng.cn@gmail.com>
 To: Alistair Francis <Alistair.Francis@wdc.com>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
  Palmer Dabbelt <palmer@sifive.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
-Date: Mon,  5 Aug 2019 09:00:11 -0700
-Message-Id: <1565020823-24223-17-git-send-email-bmeng.cn@gmail.com>
+Date: Mon,  5 Aug 2019 09:00:12 -0700
+Message-Id: <1565020823-24223-18-git-send-email-bmeng.cn@gmail.com>
 X-Mailer: git-send-email 1.7.1
 In-Reply-To: <1565020823-24223-1-git-send-email-bmeng.cn@gmail.com>
 References: <1565020823-24223-1-git-send-email-bmeng.cn@gmail.com>
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::442
-Subject: [Qemu-riscv] [PATCH 16/28] riscv: sifive_u: Add PRCI block to the
- SoC
+X-Received-From: 2607:f8b0:4864:20::541
+Subject: [Qemu-riscv] [PATCH 17/28] riscv: sifive_u: Change UART node name
+ in device tree
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -73,95 +74,31 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Mon, 05 Aug 2019 16:01:08 -0000
 
-Add PRCI mmio base address and size mappings to sifive_u machine,
-and generate the corresponding device tree node.
+OpenSBI for fu540 does DT fix up (see fu540_modify_dt()) by updating
+chosen "stdout-path" to point to "/soc/serial@...", and U-Boot will
+use this information to locate the serial node and probe its driver.
+However currently we generate the UART node name as "/soc/uart@...",
+causing U-Boot fail to find the serial node in DT.
 
 Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
 ---
 
- hw/riscv/sifive_u.c         | 21 ++++++++++++++++++++-
- include/hw/riscv/sifive_u.h |  1 +
- 2 files changed, 21 insertions(+), 1 deletion(-)
+ hw/riscv/sifive_u.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-index f619ca6..20dee52 100644
+index 20dee52..8044166 100644
 --- a/hw/riscv/sifive_u.c
 +++ b/hw/riscv/sifive_u.c
-@@ -9,6 +9,7 @@
-  * 0) UART
-  * 1) CLINT (Core Level Interruptor)
-  * 2) PLIC (Platform Level Interrupt Controller)
-+ * 3) PRCI (Power, Reset, Clock, Interrupt)
-  *
-  * This board currently uses a hardcoded devicetree that indicates five harts.
-  *
-@@ -41,6 +42,7 @@
- #include "hw/riscv/sifive_clint.h"
- #include "hw/riscv/sifive_uart.h"
- #include "hw/riscv/sifive_u.h"
-+#include "hw/riscv/sifive_u_prci.h"
- #include "hw/riscv/boot.h"
- #include "chardev/char.h"
- #include "sysemu/arch_init.h"
-@@ -59,6 +61,7 @@ static const struct MemmapEntry {
-     [SIFIVE_U_MROM] =     {     0x1000,    0x11000 },
-     [SIFIVE_U_CLINT] =    {  0x2000000,    0x10000 },
-     [SIFIVE_U_PLIC] =     {  0xc000000,  0x4000000 },
-+    [SIFIVE_U_PRCI] =     { 0x10000000,     0x1000 },
-     [SIFIVE_U_UART0] =    { 0x10010000,     0x1000 },
-     [SIFIVE_U_UART1] =    { 0x10011000,     0x1000 },
-     [SIFIVE_U_DRAM] =     { 0x80000000,        0x0 },
-@@ -75,7 +78,7 @@ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
-     uint32_t *cells;
-     char *nodename;
-     char ethclk_names[] = "pclk\0hclk\0tx_clk";
--    uint32_t plic_phandle, ethclk_phandle, phandle = 1;
-+    uint32_t plic_phandle, prci_phandle, ethclk_phandle, phandle = 1;
-     uint32_t hfclk_phandle, rtcclk_phandle;
- 
-     fdt = s->fdt = create_device_tree(&s->fdt_size);
-@@ -182,6 +185,21 @@ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
-     g_free(cells);
+@@ -273,7 +273,7 @@ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
+     qemu_fdt_setprop_cell(fdt, nodename, "reg", 0x0);
      g_free(nodename);
  
-+    prci_phandle = phandle++;
-+    nodename = g_strdup_printf("/soc/clock-controller@%lx",
-+        (long)memmap[SIFIVE_U_PRCI].base);
-+    qemu_fdt_add_subnode(fdt, nodename);
-+    qemu_fdt_setprop_cell(fdt, nodename, "phandle", prci_phandle);
-+    qemu_fdt_setprop_cell(fdt, nodename, "#clock-cells", 0x1);
-+    qemu_fdt_setprop_cells(fdt, nodename, "clocks",
-+        hfclk_phandle, rtcclk_phandle);
-+    qemu_fdt_setprop_cells(fdt, nodename, "reg",
-+        0x0, memmap[SIFIVE_U_PRCI].base,
-+        0x0, memmap[SIFIVE_U_PRCI].size);
-+    qemu_fdt_setprop_string(fdt, nodename, "compatible",
-+        "sifive,fu540-c000-prci");
-+    g_free(nodename);
-+
-     plic_phandle = phandle++;
-     cells =  g_new0(uint32_t, s->soc.cpus.num_harts * 4 - 2);
-     for (cpu = 0; cpu < s->soc.cpus.num_harts; cpu++) {
-@@ -421,6 +439,7 @@ static void riscv_sifive_u_soc_realize(DeviceState *dev, Error **errp)
-     sifive_clint_create(memmap[SIFIVE_U_CLINT].base,
-         memmap[SIFIVE_U_CLINT].size, ms->smp.cpus,
-         SIFIVE_SIP_BASE, SIFIVE_TIMECMP_BASE, SIFIVE_TIME_BASE);
-+    sifive_u_prci_create(memmap[SIFIVE_U_PRCI].base);
- 
-     for (i = 0; i < SIFIVE_U_PLIC_NUM_SOURCES; i++) {
-         plic_gpios[i] = qdev_get_gpio_in(DEVICE(s->plic), i);
-diff --git a/include/hw/riscv/sifive_u.h b/include/hw/riscv/sifive_u.h
-index bacd60f..19d5a6f 100644
---- a/include/hw/riscv/sifive_u.h
-+++ b/include/hw/riscv/sifive_u.h
-@@ -51,6 +51,7 @@ enum {
-     SIFIVE_U_MROM,
-     SIFIVE_U_CLINT,
-     SIFIVE_U_PLIC,
-+    SIFIVE_U_PRCI,
-     SIFIVE_U_UART0,
-     SIFIVE_U_UART1,
-     SIFIVE_U_DRAM,
+-    nodename = g_strdup_printf("/soc/uart@%lx",
++    nodename = g_strdup_printf("/soc/serial@%lx",
+         (long)memmap[SIFIVE_U_UART0].base);
+     qemu_fdt_add_subnode(fdt, nodename);
+     qemu_fdt_setprop_string(fdt, nodename, "compatible", "sifive,uart0");
 -- 
 2.7.4
 
