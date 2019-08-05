@@ -1,65 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hufPh-0000af-6D
-	for mharc-qemu-riscv@gnu.org; Mon, 05 Aug 2019 12:00:45 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:58420)
+	id 1hufPr-0000kf-ML
+	for mharc-qemu-riscv@gnu.org; Mon, 05 Aug 2019 12:00:55 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58511)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <bmeng.cn@gmail.com>) id 1hufPd-0000QK-R3
- for qemu-riscv@nongnu.org; Mon, 05 Aug 2019 12:00:42 -0400
+ (envelope-from <bmeng.cn@gmail.com>) id 1hufPi-0000e5-S9
+ for qemu-riscv@nongnu.org; Mon, 05 Aug 2019 12:00:50 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <bmeng.cn@gmail.com>) id 1hufPc-0002tq-Py
- for qemu-riscv@nongnu.org; Mon, 05 Aug 2019 12:00:41 -0400
-Received: from mail-pf1-x441.google.com ([2607:f8b0:4864:20::441]:41882)
+ (envelope-from <bmeng.cn@gmail.com>) id 1hufPh-0002xC-97
+ for qemu-riscv@nongnu.org; Mon, 05 Aug 2019 12:00:46 -0400
+Received: from mail-pf1-x442.google.com ([2607:f8b0:4864:20::442]:42400)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
- id 1hufPa-0002qe-L7; Mon, 05 Aug 2019 12:00:38 -0400
-Received: by mail-pf1-x441.google.com with SMTP id m30so39884295pff.8;
- Mon, 05 Aug 2019 09:00:38 -0700 (PDT)
+ id 1hufPe-0002vN-R7; Mon, 05 Aug 2019 12:00:42 -0400
+Received: by mail-pf1-x442.google.com with SMTP id q10so39857884pff.9;
+ Mon, 05 Aug 2019 09:00:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:to:subject:date:message-id:in-reply-to:references;
- bh=4njfrOWQQMyLEX/rfHOtnIEzjwmjoWXLAc2Ndz0IW6c=;
- b=bkSpI3/5lKu6DEO+/4bYFMyPoc/GWN6bwf2h7On0Tpvl/beL252Tglz+hZtX/FHj5n
- OWfIHvPHALcGGaGmFSDSRQlKI6kCB7J7eyKz9mMLUjk4EbLfpnrneFtsUGoqLU0Hv1gm
- 7O9sbjgF8rO22e4+D7aL+qh8c108Bcz8aagxGAiyf+rPiyqudQrKgBP/xuaBnDTL/uTz
- mMAdoKUCUfyUfnGsMKU6JIq354IyA/RLm4U8k/7PWroBSPjnbL86f3/K22Ha3MGO3Get
- U+qXZf35wOeE3HAauh3Ro9DcyaJsyMU3/KXZI3lCAi5EFV0Wm1coegIgZnB3ITMiWooO
- lleg==
+ bh=2MH7twmDJfeZRj3jUDtzUjwhHh0CGkZ/MkdqWVYWSCk=;
+ b=YkT290T2q3RvuBJ0Z7qI2GlKYk5/YpRjrDAZJh6xeEbrIktmwrwvR4Bw1tLeXXfhnQ
+ SWmJ4I1pgxElDSBQqI90YBeuN3mGAwE2TFJh1X1Mc7/1ZPT8YtdD6h6Ej1KehgD+AkGe
+ kKSQ5jlDOKh5Mr1Ft3b8RXwnYXYzkr5UUrlgRPXih22WFrEE3FAbxC7EPQcYaeuoLQnY
+ gZHZ/qTiTeMB/VrMZ7gZqoqEU45lmTie6npo8+MOFn3TP2D+mDQyrXbb2o/R6Fyy7KZ/
+ IOD59y3lXH9JxU3gM0viOhbSaD62yO2eXFFsvv4Lmt0vEgcxIi8FVEBllkmdkLii8pqy
+ uwTw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
  :references;
- bh=4njfrOWQQMyLEX/rfHOtnIEzjwmjoWXLAc2Ndz0IW6c=;
- b=j3XmeHigaZR6w4ve0/XkBThfuvnEg2NEy0221VvxM71sgZ4QxFciPre0/TRkwD+JSg
- nQfVc3+0YBVTtuC59mWj3Kff7B+pvytBiexpKATZpqj5+rcr3hy/SAHuJanGhN4QUx/O
- FOhZzq7etfVokXB2r83dTTplcOcTiEC3Jfe53p1aAj5+aSSt75FZ+7keqkJJxTGw+Em3
- +3qtKz+hfgP2XBPTaey7Rd4ICUgOucAgqd5JMlnrIKpdxcwNlI/sfS7sN7W8mi/I0W9f
- 2OrVIwVsKqwJJ6Xz9CIxCdc+7wo9GGlMoRxcDOUhEdtaH62YU6Xp1YMJNaVapzC+Q/kj
- aBTw==
-X-Gm-Message-State: APjAAAV1BR5dvG6pxI5Ug0zi0DRyd9CqqRSqvsbeoRQbE2My3R3Qv4ic
- DWLW+8u2NhrWnk/Ci33P4c4=
-X-Google-Smtp-Source: APXvYqzKpcUeJFDxc35XZPwJ9AmRY4g0sH7xbrazO60YoJYAFLsrq39tnRsk97uzg0ZwXX+ctoeOOA==
-X-Received: by 2002:aa7:97aa:: with SMTP id d10mr55989869pfq.176.1565020837917; 
- Mon, 05 Aug 2019 09:00:37 -0700 (PDT)
+ bh=2MH7twmDJfeZRj3jUDtzUjwhHh0CGkZ/MkdqWVYWSCk=;
+ b=mJEaoE/v1QGNEPAz/aw0UPA0ZB4MVqADIkGQDUJrTpaShjtKUHqXaEGlE27lptH95K
+ SwFbD/eVEBjTJ+7nmg2dV8htlDLRhRM1edsws30DlUbOXDz9Fhc+Bjv2nJv/3vR3fZTy
+ zlytWWo+ov0sUZM23ZoPk9yGsum2mKRbuEDqMhV4fryMG5Jz7RgBgAZJbxx86Afx2uSK
+ GVPBHN7nH8j0ilqPTLnmOZe6i724B7m9/sl7LyP/B7PN1NZYwtZEtpsS83QIE53D7AgI
+ xD0eJWvekh9DKc42a76vH+AZBuEuG8FcA+YGoGY3fNQV4N7KI82o0aTXYVycz5CjDjTl
+ ykJQ==
+X-Gm-Message-State: APjAAAW5J4Q0Uw/BWgtHqkgecTIVxYUINtYlhm/43wUmM2GBVNCMw707
+ bBLCyk/YsjfJVAQ6Zjv8re4=
+X-Google-Smtp-Source: APXvYqzLAlbXmRq6+RKapxCcfKnpTpATB3orDKl8rPmPdXLfzjaBEGJRkfmpQYft+L7BQKbqsX83jg==
+X-Received: by 2002:a62:79c2:: with SMTP id
+ u185mr74960737pfc.237.1565020841964; 
+ Mon, 05 Aug 2019 09:00:41 -0700 (PDT)
 Received: from localhost.localdomain (unknown-224-80.windriver.com.
  [147.11.224.80])
- by smtp.gmail.com with ESMTPSA id d18sm47728793pgi.40.2019.08.05.09.00.36
+ by smtp.gmail.com with ESMTPSA id d18sm47728793pgi.40.2019.08.05.09.00.41
  (version=TLS1 cipher=AES128-SHA bits=128/128);
- Mon, 05 Aug 2019 09:00:37 -0700 (PDT)
+ Mon, 05 Aug 2019 09:00:41 -0700 (PDT)
 From: Bin Meng <bmeng.cn@gmail.com>
 To: Alistair Francis <Alistair.Francis@wdc.com>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
  Palmer Dabbelt <palmer@sifive.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
-Date: Mon,  5 Aug 2019 09:00:04 -0700
-Message-Id: <1565020823-24223-10-git-send-email-bmeng.cn@gmail.com>
+Date: Mon,  5 Aug 2019 09:00:08 -0700
+Message-Id: <1565020823-24223-14-git-send-email-bmeng.cn@gmail.com>
 X-Mailer: git-send-email 1.7.1
 In-Reply-To: <1565020823-24223-1-git-send-email-bmeng.cn@gmail.com>
 References: <1565020823-24223-1-git-send-email-bmeng.cn@gmail.com>
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::441
-Subject: [Qemu-riscv] [PATCH 09/28] riscv: sifive_u: Update UART base
- addresses
+X-Received-From: 2607:f8b0:4864:20::442
+Subject: [Qemu-riscv] [PATCH 13/28] riscv: sifive_e: prci: Update the PRCI
+ register block size
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -71,31 +72,44 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Aug 2019 16:00:43 -0000
+X-List-Received-Date: Mon, 05 Aug 2019 16:00:54 -0000
 
-This updates the UART base address to match the hardware.
+Currently the PRCI register block size is set to 0x8000, but in fact
+0x1000 is enough, which is also what the manual says.
 
 Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
 ---
 
- hw/riscv/sifive_u.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ hw/riscv/sifive_e_prci.c         | 2 +-
+ include/hw/riscv/sifive_e_prci.h | 2 ++
+ 2 files changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-index b235f29..9f05e09 100644
---- a/hw/riscv/sifive_u.c
-+++ b/hw/riscv/sifive_u.c
-@@ -60,8 +60,8 @@ static const struct MemmapEntry {
-     [SIFIVE_U_MROM] =     {     0x1000,    0x11000 },
-     [SIFIVE_U_CLINT] =    {  0x2000000,    0x10000 },
-     [SIFIVE_U_PLIC] =     {  0xc000000,  0x4000000 },
--    [SIFIVE_U_UART0] =    { 0x10013000,     0x1000 },
--    [SIFIVE_U_UART1] =    { 0x10023000,     0x1000 },
-+    [SIFIVE_U_UART0] =    { 0x10010000,     0x1000 },
-+    [SIFIVE_U_UART1] =    { 0x10011000,     0x1000 },
-     [SIFIVE_U_DRAM] =     { 0x80000000,        0x0 },
-     [SIFIVE_U_GEM] =      { 0x100900FC,     0x2000 },
+diff --git a/hw/riscv/sifive_e_prci.c b/hw/riscv/sifive_e_prci.c
+index c906f11..4cbce48 100644
+--- a/hw/riscv/sifive_e_prci.c
++++ b/hw/riscv/sifive_e_prci.c
+@@ -85,7 +85,7 @@ static void sifive_prci_init(Object *obj)
+     SiFivePRCIState *s = SIFIVE_E_PRCI(obj);
+ 
+     memory_region_init_io(&s->mmio, obj, &sifive_prci_ops, s,
+-                          TYPE_SIFIVE_E_PRCI, 0x8000);
++                          TYPE_SIFIVE_E_PRCI, SIFIVE_E_PRCI_REG_SIZE);
+     sysbus_init_mmio(SYS_BUS_DEVICE(obj), &s->mmio);
+ 
+     s->hfrosccfg = (SIFIVE_PRCI_HFROSCCFG_RDY | SIFIVE_PRCI_HFROSCCFG_EN);
+diff --git a/include/hw/riscv/sifive_e_prci.h b/include/hw/riscv/sifive_e_prci.h
+index 7932fe7..81e506b 100644
+--- a/include/hw/riscv/sifive_e_prci.h
++++ b/include/hw/riscv/sifive_e_prci.h
+@@ -47,6 +47,8 @@ enum {
+     SIFIVE_PRCI_PLLOUTDIV_DIV1  = (1 << 8)
  };
+ 
++#define SIFIVE_E_PRCI_REG_SIZE  0x1000
++
+ #define TYPE_SIFIVE_E_PRCI      "riscv.sifive.e.prci"
+ 
+ #define SIFIVE_E_PRCI(obj) \
 -- 
 2.7.4
 
