@@ -1,64 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1huWj6-00069w-EQ
-	for mharc-qemu-riscv@gnu.org; Mon, 05 Aug 2019 02:44:12 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:32789)
+	id 1huWyL-0001GL-1f
+	for mharc-qemu-riscv@gnu.org; Mon, 05 Aug 2019 02:59:57 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:35524)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <bmeng.cn@gmail.com>) id 1huWj4-00066v-A5
- for qemu-riscv@nongnu.org; Mon, 05 Aug 2019 02:44:11 -0400
+ (envelope-from <chihmin.chao@sifive.com>) id 1huWyH-0001EY-S5
+ for qemu-riscv@nongnu.org; Mon, 05 Aug 2019 02:59:55 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <bmeng.cn@gmail.com>) id 1huWj3-0003LG-9I
- for qemu-riscv@nongnu.org; Mon, 05 Aug 2019 02:44:10 -0400
-Received: from mail-ed1-x544.google.com ([2a00:1450:4864:20::544]:46147)
+ (envelope-from <chihmin.chao@sifive.com>) id 1huWyG-0004m3-3A
+ for qemu-riscv@nongnu.org; Mon, 05 Aug 2019 02:59:53 -0400
+Received: from mail-io1-xd2c.google.com ([2607:f8b0:4864:20::d2c]:46053)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
- id 1huWj1-0003Ia-5C; Mon, 05 Aug 2019 02:44:07 -0400
-Received: by mail-ed1-x544.google.com with SMTP id d4so77654768edr.13;
- Sun, 04 Aug 2019 23:44:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ (Exim 4.71) (envelope-from <chihmin.chao@sifive.com>)
+ id 1huWyF-0004ld-QF
+ for qemu-riscv@nongnu.org; Mon, 05 Aug 2019 02:59:52 -0400
+Received: by mail-io1-xd2c.google.com with SMTP id g20so165125527ioc.12
+ for <qemu-riscv@nongnu.org>; Sun, 04 Aug 2019 23:59:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=4KyS6xKm/sjfbPt3VI4totXhOCWYjVSZ+Sav2FQdi+I=;
- b=jaQa5WF/LOZ2Icn6G+p8jrCgsDJThuBd+UdWCE2D21HJ+TR8QBPlfSFBQiqenpYBBv
- UxXEJHUbiYKU2QZaeqSxeAGGBnhXNb/Df5mJJit8S2FC04N9HrWnnhgkMuKG2OWbcW9Z
- VSFaWZR5SHTyMvmTrbC2F8pCqCOSUwmQFC5WxsJAKb+BmksD1OuecfBqEGCxZt6s4zgt
- YjA5WOQBCNjsqj3GaV3TwXx5x9ei02XQX9YA8IS/MvoSliLaOhAo76M49LgajrDAwS42
- 6+4918lm7Su+/qkF/yNsZSHvguC3rVSHO/AOOimqU1mRloEY6ObnPCw8g224VqUN2Ono
- UAqA==
+ :cc; bh=i5Ww0ywp7+DtPeRbx/mmf4OPOEmvyp7sQtuYzya10vc=;
+ b=BKQJFdJztHiOwhmWt0bg8OtyYDLAPFZBtSa1M9jtksEr7TEpQFqSafbtUdtPQTMSR7
+ 2B4p3IhzfEUfiltoMdzvJGUN3JxDSp2wyY7u8NMoqKDcqhDEbuPpXsLJ/LkF8XWaNpwB
+ 0vBFia6FCwaQwQkgJUFhVhDOn2HYsWS3LyPfu0jzBNHDaYjHwg962r+b+QMtDj1DGuJC
+ 5Nvyj1Cha86WHhdAVKc2w0rhN8QX548zEp+wfAzj7EAlvszpYjXnIR5S32g+X7fT58on
+ i2EijpibF0NAqzUGAbaXBotu3UbnbiPieh2uIMYpYMJ2CLIgaZzYVnf1vfcOtWWsqQZP
+ 5D9w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=4KyS6xKm/sjfbPt3VI4totXhOCWYjVSZ+Sav2FQdi+I=;
- b=bRf4Ls5Yu/mJSrfYQ+jFJ8su1iYsErxMOWre6gBOi+UBaeMB7Qz7KuYq4gr+uCqcgC
- Znas0oHU0bg/FtpiiqQDmjms9mXQG108u2oL7MMDA6RBHT7io3K0S9wl194agpZj3ex9
- Gq5rSYtXGRuBz+f/PvgUaiSOfjlpA4pXjC9+3iAaJnCib94hXYR5NaUa/uUsfF1JsGyy
- 6detR+YbLZSqhxaiTQo/RQBZ5xwEcze2l8a0nv7x5eFd2HFB/YWtDjC5kBnyAW/e+0VS
- H0PV6uJ528rAnO7bq6DXvyYjt+0Y/zGgtDgj945+QL0w3Qi3mY9lEzLSKdwrjs0HxH2O
- /a/g==
-X-Gm-Message-State: APjAAAUuZJoOwL5IPZlZDIm4jt1/5Bsm5khn5gcizBfwnFC/2sCqkHPr
- TVFxAsMy4e5dBeuYzz7+W5xRE5HCiY3Bz3rxjeA=
-X-Google-Smtp-Source: APXvYqzhbjwocTpSUbzHPT3VLtQN8yxkg0B6BjzO5VdJV3giIBEKhVlsGFCPsWIErVWEFUvocJ8bsU8Z5f7QPr+VdXQ=
-X-Received: by 2002:a50:b388:: with SMTP id s8mr129938428edd.15.1564987446019; 
- Sun, 04 Aug 2019 23:44:06 -0700 (PDT)
+ bh=i5Ww0ywp7+DtPeRbx/mmf4OPOEmvyp7sQtuYzya10vc=;
+ b=QTM1sodnvJRl9i+UFHZ2HpOfND2vYBXd+6mLXgO38Du+Qma8PXRht/WJYqYf4n+uiH
+ xcAcOsVFCIWWDoy7OuJUSwCpIx2ViSwfN636C0AblXVmVbg5t1mDhkfzGQUS0EOOUZ3y
+ rQzKn6Gi/766ECjyVcgS64fWTY42Ks2tX1r4+EkElajDD7pBQy/r7MDm2EXMjhH/eS5p
+ vlrS+C4zB7UaMXDg1upl3NjnyQn/iBSdrdSXGIeMbANwMjEFJQMEiBbJ7ymD72nPMStw
+ irDNLVXDj8a0EEB0KqROgPpR+tEc8NYnmwMW+F832v7mYSoT42aeUUkZ0Esln10T8iNq
+ +9JQ==
+X-Gm-Message-State: APjAAAWN4WBPv/gmGFF9/pvWrUs/DjiVXv56MPK0FXnpq8FMIEFM/rGM
+ 95xUcSfjhmTbaNeGIfbD2yKLQnFZVyuiBluw8tF4LQ==
+X-Google-Smtp-Source: APXvYqyIMTFxKGc6D1YXU0ndNirRhteuuYYCoUF36mBm/h8IlIwZCOCTMDZ/ArB6A6353FJn5yq83+oRs7iRVJJ6rks=
+X-Received: by 2002:a5d:8ad0:: with SMTP id e16mr22566875iot.262.1564988390818; 
+ Sun, 04 Aug 2019 23:59:50 -0700 (PDT)
 MIME-Version: 1.0
-References: <1564792052-6469-1-git-send-email-bmeng.cn@gmail.com>
- <CAEiOBXWQ02uRQQOpP=Rauq8WZnYtoxNqjM--Rpi5tHX2W0bGsw@mail.gmail.com>
-In-Reply-To: <CAEiOBXWQ02uRQQOpP=Rauq8WZnYtoxNqjM--Rpi5tHX2W0bGsw@mail.gmail.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Mon, 5 Aug 2019 14:43:53 +0800
-Message-ID: <CAEUhbmU-TdVocONETkSV-+DtX_66+8J8m3yYeph3P1i_3C9LzQ@mail.gmail.com>
-To: Chih-Min Chao <chihmin.chao@sifive.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Palmer Dabbelt <palmer@sifive.com>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
+References: <cover.1564529681.git.alistair.francis@wdc.com>
+ <d35fb37b43115418a497bcb0bfea187a0c1c46bf.1564529681.git.alistair.francis@wdc.com>
+In-Reply-To: <d35fb37b43115418a497bcb0bfea187a0c1c46bf.1564529681.git.alistair.francis@wdc.com>
+From: Chih-Min Chao <chihmin.chao@sifive.com>
+Date: Mon, 5 Aug 2019 14:59:38 +0800
+Message-ID: <CAEiOBXW4cHBfZY7w_RQJi57ranQ+FZ9r+E91HOYdUkk8X1iggw@mail.gmail.com>
+To: Alistair Francis <alistair.francis@wdc.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Alistair Francis <alistair23@gmail.com>, Palmer Dabbelt <palmer@sifive.com>
+Content-Type: multipart/alternative; boundary="0000000000001cdfad058f59417d"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::544
-Subject: Re: [Qemu-riscv] [PATCH] riscv: sifive_e: Correct various SoC IP
- block sizes
+X-Received-From: 2607:f8b0:4864:20::d2c
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH-4.2 v2 3/5] target/riscv:
+ Create function to test if FP is enabled
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -70,56 +68,400 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Aug 2019 06:44:11 -0000
+X-List-Received-Date: Mon, 05 Aug 2019 06:59:55 -0000
 
-On Mon, Aug 5, 2019 at 2:14 PM Chih-Min Chao <chihmin.chao@sifive.com> wrote:
->
->
->
-> On Sat, Aug 3, 2019 at 8:27 AM Bin Meng <bmeng.cn@gmail.com> wrote:
->>
->> Some of the SoC IP block sizes are wrong. Correct them according
->> to the FE310 manual.
->>
->> Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
->> ---
->>
->>  hw/riscv/sifive_e.c | 6 +++---
->>  1 file changed, 3 insertions(+), 3 deletions(-)
->>
->> diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
->> index 2a499d8..9655847 100644
->> --- a/hw/riscv/sifive_e.c
->> +++ b/hw/riscv/sifive_e.c
->> @@ -53,13 +53,13 @@ static const struct MemmapEntry {
->>      hwaddr base;
->>      hwaddr size;
->>  } sifive_e_memmap[] = {
->> -    [SIFIVE_E_DEBUG] =    {        0x0,      0x100 },
->> +    [SIFIVE_E_DEBUG] =    {        0x0,     0x1000 },
->>      [SIFIVE_E_MROM] =     {     0x1000,     0x2000 },
->>      [SIFIVE_E_OTP] =      {    0x20000,     0x2000 },
->>      [SIFIVE_E_CLINT] =    {  0x2000000,    0x10000 },
->>      [SIFIVE_E_PLIC] =     {  0xc000000,  0x4000000 },
->> -    [SIFIVE_E_AON] =      { 0x10000000,     0x8000 },
->> -    [SIFIVE_E_PRCI] =     { 0x10008000,     0x8000 },
->> +    [SIFIVE_E_AON] =      { 0x10000000,     0x1000 },
->> +    [SIFIVE_E_PRCI] =     { 0x10008000,     0x1000 },
->>      [SIFIVE_E_OTP_CTRL] = { 0x10010000,     0x1000 },
->>      [SIFIVE_E_GPIO0] =    { 0x10012000,     0x1000 },
->>      [SIFIVE_E_UART0] =    { 0x10013000,     0x1000 },
->> --
->> 2.7.4
->>
->
-> It seems the modification follows  E310-G002(Hifive1 Rev B) spec and the origin is for E310-G000(Hifive1) spec.
-> There should be some way to specify different board version with different memory map or we have policy, always support the latest spec.
->
+--0000000000001cdfad058f59417d
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Yes, I checked both specs. The older spec says these bigger sizes,
-however their register sizes fit well in the smaller range as well. So
-I think the modification works well for both.
+On Wed, Jul 31, 2019 at 7:39 AM Alistair Francis <alistair.francis@wdc.com>
+wrote:
 
-Regards,
-Bin
+> Let's create a function that tests if floating point support is
+> enabled. We can then protect all floating point operations based on if
+> they are enabled.
+>
+> This patch so far doesn't change anything, it's just preparing for the
+> Hypervisor support for floating point operations.
+>
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> Reviewed-by: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
+> Reviewed-by: Christophe de Dinechin <dinechin@redhat.com>
+> ---
+>  target/riscv/cpu.h        |  6 +++++-
+>  target/riscv/cpu_helper.c | 10 ++++++++++
+>  target/riscv/csr.c        | 20 +++++++++++---------
+>  3 files changed, 26 insertions(+), 10 deletions(-)
+>
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 0adb307f32..2dc9b17678 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -255,6 +255,7 @@ void riscv_cpu_do_interrupt(CPUState *cpu);
+>  int riscv_cpu_gdb_read_register(CPUState *cpu, uint8_t *buf, int reg);
+>  int riscv_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
+>  bool riscv_cpu_exec_interrupt(CPUState *cs, int interrupt_request);
+> +bool riscv_cpu_fp_enabled(CPURISCVState *env);
+>  int riscv_cpu_mmu_index(CPURISCVState *env, bool ifetch);
+>  hwaddr riscv_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
+>  void  riscv_cpu_do_unaligned_access(CPUState *cs, vaddr addr,
+> @@ -298,7 +299,10 @@ static inline void cpu_get_tb_cpu_state(CPURISCVStat=
+e
+> *env, target_ulong *pc,
+>  #ifdef CONFIG_USER_ONLY
+>      *flags =3D TB_FLAGS_MSTATUS_FS;
+>  #else
+> -    *flags =3D cpu_mmu_index(env, 0) | (env->mstatus & MSTATUS_FS);
+> +    *flags =3D cpu_mmu_index(env, 0);
+> +    if (riscv_cpu_fp_enabled(env)) {
+> +        *flags |=3D env->mstatus & MSTATUS_FS;
+> +    }
+>  #endif
+>  }
+>
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index f027be7f16..225e407cff 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -71,6 +71,16 @@ bool riscv_cpu_exec_interrupt(CPUState *cs, int
+> interrupt_request)
+>
+>  #if !defined(CONFIG_USER_ONLY)
+>
+> +/* Return true is floating point support is currently enabled */
+> +bool riscv_cpu_fp_enabled(CPURISCVState *env)
+> +{
+> +    if (env->mstatus & MSTATUS_FS) {
+> +        return true;
+> +    }
+> +
+> +    return false;
+> +}
+> +
+>  int riscv_cpu_claim_interrupts(RISCVCPU *cpu, uint32_t interrupts)
+>  {
+>      CPURISCVState *env =3D &cpu->env;
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index e0d4586760..2789215b5e 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -46,7 +46,7 @@ void riscv_set_csr_ops(int csrno, riscv_csr_operations
+> *ops)
+>  static int fs(CPURISCVState *env, int csrno)
+>  {
+>  #if !defined(CONFIG_USER_ONLY)
+> -    if (!env->debugger && !(env->mstatus & MSTATUS_FS)) {
+> +    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
+>          return -1;
+>      }
+>  #endif
+> @@ -108,7 +108,7 @@ static int pmp(CPURISCVState *env, int csrno)
+>  static int read_fflags(CPURISCVState *env, int csrno, target_ulong *val)
+>  {
+>  #if !defined(CONFIG_USER_ONLY)
+> -    if (!env->debugger && !(env->mstatus & MSTATUS_FS)) {
+> +    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
+>          return -1;
+>      }
+>  #endif
+> @@ -119,7 +119,7 @@ static int read_fflags(CPURISCVState *env, int csrno,
+> target_ulong *val)
+>  static int write_fflags(CPURISCVState *env, int csrno, target_ulong val)
+>  {
+>  #if !defined(CONFIG_USER_ONLY)
+> -    if (!env->debugger && !(env->mstatus & MSTATUS_FS)) {
+> +    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
+>          return -1;
+>      }
+>      env->mstatus |=3D MSTATUS_FS;
+> @@ -131,7 +131,7 @@ static int write_fflags(CPURISCVState *env, int csrno=
+,
+> target_ulong val)
+>  static int read_frm(CPURISCVState *env, int csrno, target_ulong *val)
+>  {
+>  #if !defined(CONFIG_USER_ONLY)
+> -    if (!env->debugger && !(env->mstatus & MSTATUS_FS)) {
+> +    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
+>          return -1;
+>      }
+>  #endif
+> @@ -142,7 +142,7 @@ static int read_frm(CPURISCVState *env, int csrno,
+> target_ulong *val)
+>  static int write_frm(CPURISCVState *env, int csrno, target_ulong val)
+>  {
+>  #if !defined(CONFIG_USER_ONLY)
+> -    if (!env->debugger && !(env->mstatus & MSTATUS_FS)) {
+> +    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
+>          return -1;
+>      }
+>      env->mstatus |=3D MSTATUS_FS;
+> @@ -154,7 +154,7 @@ static int write_frm(CPURISCVState *env, int csrno,
+> target_ulong val)
+>  static int read_fcsr(CPURISCVState *env, int csrno, target_ulong *val)
+>  {
+>  #if !defined(CONFIG_USER_ONLY)
+> -    if (!env->debugger && !(env->mstatus & MSTATUS_FS)) {
+> +    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
+>          return -1;
+>      }
+>  #endif
+> @@ -166,7 +166,7 @@ static int read_fcsr(CPURISCVState *env, int csrno,
+> target_ulong *val)
+>  static int write_fcsr(CPURISCVState *env, int csrno, target_ulong val)
+>  {
+>  #if !defined(CONFIG_USER_ONLY)
+> -    if (!env->debugger && !(env->mstatus & MSTATUS_FS)) {
+> +    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
+>          return -1;
+>      }
+>      env->mstatus |=3D MSTATUS_FS;
+> @@ -307,6 +307,7 @@ static int write_mstatus(CPURISCVState *env, int
+> csrno, target_ulong val)
+>  {
+>      target_ulong mstatus =3D env->mstatus;
+>      target_ulong mask =3D 0;
+> +    int dirty;
+>
+>      /* flush tlb on mstatus fields that affect VM */
+>      if (env->priv_ver <=3D PRIV_VERSION_1_09_1) {
+> @@ -340,8 +341,9 @@ static int write_mstatus(CPURISCVState *env, int
+> csrno, target_ulong val)
+>
+>      mstatus =3D (mstatus & ~mask) | (val & mask);
+>
+> -    int dirty =3D ((mstatus & MSTATUS_FS) =3D=3D MSTATUS_FS) |
+> -                ((mstatus & MSTATUS_XS) =3D=3D MSTATUS_XS);
+> +    dirty =3D (riscv_cpu_fp_enabled(env) &&
+> +             ((mstatus & MSTATUS_FS) =3D=3D MSTATUS_FS)) |
+> +            ((mstatus & MSTATUS_XS) =3D=3D MSTATUS_XS);
+>      mstatus =3D set_field(mstatus, MSTATUS_SD, dirty);
+>      env->mstatus =3D mstatus;
+>
+> --
+> 2.22.0
+>
+>
+> Reviewed-by: Chih-Min Chao <chihmin.chao@sifive.com>
+
+--0000000000001cdfad058f59417d
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
+<div dir=3D"ltr" class=3D"gmail_attr">On Wed, Jul 31, 2019 at 7:39 AM Alist=
+air Francis &lt;<a href=3D"mailto:alistair.francis@wdc.com">alistair.franci=
+s@wdc.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=
+=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding=
+-left:1ex">Let&#39;s create a function that tests if floating point support=
+ is<br>
+enabled. We can then protect all floating point operations based on if<br>
+they are enabled.<br>
+<br>
+This patch so far doesn&#39;t change anything, it&#39;s just preparing for =
+the<br>
+Hypervisor support for floating point operations.<br>
+<br>
+Signed-off-by: Alistair Francis &lt;<a href=3D"mailto:alistair.francis@wdc.=
+com" target=3D"_blank">alistair.francis@wdc.com</a>&gt;<br>
+Reviewed-by: Philippe Mathieu-Daud=C3=A9 &lt;<a href=3D"mailto:philmd@redha=
+t.com" target=3D"_blank">philmd@redhat.com</a>&gt;<br>
+Reviewed-by: Christophe de Dinechin &lt;<a href=3D"mailto:dinechin@redhat.c=
+om" target=3D"_blank">dinechin@redhat.com</a>&gt;<br>
+---<br>
+=C2=A0target/riscv/cpu.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 6 +++++-<br>
+=C2=A0target/riscv/cpu_helper.c | 10 ++++++++++<br>
+=C2=A0target/riscv/csr.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 | 20 +++++++++++-------=
+--<br>
+=C2=A03 files changed, 26 insertions(+), 10 deletions(-)<br>
+<br>
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h<br>
+index 0adb307f32..2dc9b17678 100644<br>
+--- a/target/riscv/cpu.h<br>
++++ b/target/riscv/cpu.h<br>
+@@ -255,6 +255,7 @@ void riscv_cpu_do_interrupt(CPUState *cpu);<br>
+=C2=A0int riscv_cpu_gdb_read_register(CPUState *cpu, uint8_t *buf, int reg)=
+;<br>
+=C2=A0int riscv_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg=
+);<br>
+=C2=A0bool riscv_cpu_exec_interrupt(CPUState *cs, int interrupt_request);<b=
+r>
++bool riscv_cpu_fp_enabled(CPURISCVState *env);<br>
+=C2=A0int riscv_cpu_mmu_index(CPURISCVState *env, bool ifetch);<br>
+=C2=A0hwaddr riscv_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);<br>
+=C2=A0void=C2=A0 riscv_cpu_do_unaligned_access(CPUState *cs, vaddr addr,<br=
+>
+@@ -298,7 +299,10 @@ static inline void cpu_get_tb_cpu_state(CPURISCVState =
+*env, target_ulong *pc,<br>
+=C2=A0#ifdef CONFIG_USER_ONLY<br>
+=C2=A0 =C2=A0 =C2=A0*flags =3D TB_FLAGS_MSTATUS_FS;<br>
+=C2=A0#else<br>
+-=C2=A0 =C2=A0 *flags =3D cpu_mmu_index(env, 0) | (env-&gt;mstatus &amp; MS=
+TATUS_FS);<br>
++=C2=A0 =C2=A0 *flags =3D cpu_mmu_index(env, 0);<br>
++=C2=A0 =C2=A0 if (riscv_cpu_fp_enabled(env)) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 *flags |=3D env-&gt;mstatus &amp; MSTATUS_FS;<=
+br>
++=C2=A0 =C2=A0 }<br>
+=C2=A0#endif<br>
+=C2=A0}<br>
+<br>
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c<br>
+index f027be7f16..225e407cff 100644<br>
+--- a/target/riscv/cpu_helper.c<br>
++++ b/target/riscv/cpu_helper.c<br>
+@@ -71,6 +71,16 @@ bool riscv_cpu_exec_interrupt(CPUState *cs, int interrup=
+t_request)<br>
+<br>
+=C2=A0#if !defined(CONFIG_USER_ONLY)<br>
+<br>
++/* Return true is floating point support is currently enabled */<br>
++bool riscv_cpu_fp_enabled(CPURISCVState *env)<br>
++{<br>
++=C2=A0 =C2=A0 if (env-&gt;mstatus &amp; MSTATUS_FS) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 return true;<br>
++=C2=A0 =C2=A0 }<br>
++<br>
++=C2=A0 =C2=A0 return false;<br>
++}<br>
++<br>
+=C2=A0int riscv_cpu_claim_interrupts(RISCVCPU *cpu, uint32_t interrupts)<br=
+>
+=C2=A0{<br>
+=C2=A0 =C2=A0 =C2=A0CPURISCVState *env =3D &amp;cpu-&gt;env;<br>
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c<br>
+index e0d4586760..2789215b5e 100644<br>
+--- a/target/riscv/csr.c<br>
++++ b/target/riscv/csr.c<br>
+@@ -46,7 +46,7 @@ void riscv_set_csr_ops(int csrno, riscv_csr_operations *o=
+ps)<br>
+=C2=A0static int fs(CPURISCVState *env, int csrno)<br>
+=C2=A0{<br>
+=C2=A0#if !defined(CONFIG_USER_ONLY)<br>
+-=C2=A0 =C2=A0 if (!env-&gt;debugger &amp;&amp; !(env-&gt;mstatus &amp; MST=
+ATUS_FS)) {<br>
++=C2=A0 =C2=A0 if (!env-&gt;debugger &amp;&amp; !riscv_cpu_fp_enabled(env))=
+ {<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return -1;<br>
+=C2=A0 =C2=A0 =C2=A0}<br>
+=C2=A0#endif<br>
+@@ -108,7 +108,7 @@ static int pmp(CPURISCVState *env, int csrno)<br>
+=C2=A0static int read_fflags(CPURISCVState *env, int csrno, target_ulong *v=
+al)<br>
+=C2=A0{<br>
+=C2=A0#if !defined(CONFIG_USER_ONLY)<br>
+-=C2=A0 =C2=A0 if (!env-&gt;debugger &amp;&amp; !(env-&gt;mstatus &amp; MST=
+ATUS_FS)) {<br>
++=C2=A0 =C2=A0 if (!env-&gt;debugger &amp;&amp; !riscv_cpu_fp_enabled(env))=
+ {<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return -1;<br>
+=C2=A0 =C2=A0 =C2=A0}<br>
+=C2=A0#endif<br>
+@@ -119,7 +119,7 @@ static int read_fflags(CPURISCVState *env, int csrno, t=
+arget_ulong *val)<br>
+=C2=A0static int write_fflags(CPURISCVState *env, int csrno, target_ulong v=
+al)<br>
+=C2=A0{<br>
+=C2=A0#if !defined(CONFIG_USER_ONLY)<br>
+-=C2=A0 =C2=A0 if (!env-&gt;debugger &amp;&amp; !(env-&gt;mstatus &amp; MST=
+ATUS_FS)) {<br>
++=C2=A0 =C2=A0 if (!env-&gt;debugger &amp;&amp; !riscv_cpu_fp_enabled(env))=
+ {<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return -1;<br>
+=C2=A0 =C2=A0 =C2=A0}<br>
+=C2=A0 =C2=A0 =C2=A0env-&gt;mstatus |=3D MSTATUS_FS;<br>
+@@ -131,7 +131,7 @@ static int write_fflags(CPURISCVState *env, int csrno, =
+target_ulong val)<br>
+=C2=A0static int read_frm(CPURISCVState *env, int csrno, target_ulong *val)=
+<br>
+=C2=A0{<br>
+=C2=A0#if !defined(CONFIG_USER_ONLY)<br>
+-=C2=A0 =C2=A0 if (!env-&gt;debugger &amp;&amp; !(env-&gt;mstatus &amp; MST=
+ATUS_FS)) {<br>
++=C2=A0 =C2=A0 if (!env-&gt;debugger &amp;&amp; !riscv_cpu_fp_enabled(env))=
+ {<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return -1;<br>
+=C2=A0 =C2=A0 =C2=A0}<br>
+=C2=A0#endif<br>
+@@ -142,7 +142,7 @@ static int read_frm(CPURISCVState *env, int csrno, targ=
+et_ulong *val)<br>
+=C2=A0static int write_frm(CPURISCVState *env, int csrno, target_ulong val)=
+<br>
+=C2=A0{<br>
+=C2=A0#if !defined(CONFIG_USER_ONLY)<br>
+-=C2=A0 =C2=A0 if (!env-&gt;debugger &amp;&amp; !(env-&gt;mstatus &amp; MST=
+ATUS_FS)) {<br>
++=C2=A0 =C2=A0 if (!env-&gt;debugger &amp;&amp; !riscv_cpu_fp_enabled(env))=
+ {<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return -1;<br>
+=C2=A0 =C2=A0 =C2=A0}<br>
+=C2=A0 =C2=A0 =C2=A0env-&gt;mstatus |=3D MSTATUS_FS;<br>
+@@ -154,7 +154,7 @@ static int write_frm(CPURISCVState *env, int csrno, tar=
+get_ulong val)<br>
+=C2=A0static int read_fcsr(CPURISCVState *env, int csrno, target_ulong *val=
+)<br>
+=C2=A0{<br>
+=C2=A0#if !defined(CONFIG_USER_ONLY)<br>
+-=C2=A0 =C2=A0 if (!env-&gt;debugger &amp;&amp; !(env-&gt;mstatus &amp; MST=
+ATUS_FS)) {<br>
++=C2=A0 =C2=A0 if (!env-&gt;debugger &amp;&amp; !riscv_cpu_fp_enabled(env))=
+ {<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return -1;<br>
+=C2=A0 =C2=A0 =C2=A0}<br>
+=C2=A0#endif<br>
+@@ -166,7 +166,7 @@ static int read_fcsr(CPURISCVState *env, int csrno, tar=
+get_ulong *val)<br>
+=C2=A0static int write_fcsr(CPURISCVState *env, int csrno, target_ulong val=
+)<br>
+=C2=A0{<br>
+=C2=A0#if !defined(CONFIG_USER_ONLY)<br>
+-=C2=A0 =C2=A0 if (!env-&gt;debugger &amp;&amp; !(env-&gt;mstatus &amp; MST=
+ATUS_FS)) {<br>
++=C2=A0 =C2=A0 if (!env-&gt;debugger &amp;&amp; !riscv_cpu_fp_enabled(env))=
+ {<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return -1;<br>
+=C2=A0 =C2=A0 =C2=A0}<br>
+=C2=A0 =C2=A0 =C2=A0env-&gt;mstatus |=3D MSTATUS_FS;<br>
+@@ -307,6 +307,7 @@ static int write_mstatus(CPURISCVState *env, int csrno,=
+ target_ulong val)<br>
+=C2=A0{<br>
+=C2=A0 =C2=A0 =C2=A0target_ulong mstatus =3D env-&gt;mstatus;<br>
+=C2=A0 =C2=A0 =C2=A0target_ulong mask =3D 0;<br>
++=C2=A0 =C2=A0 int dirty;<br>
+<br>
+=C2=A0 =C2=A0 =C2=A0/* flush tlb on mstatus fields that affect VM */<br>
+=C2=A0 =C2=A0 =C2=A0if (env-&gt;priv_ver &lt;=3D PRIV_VERSION_1_09_1) {<br>
+@@ -340,8 +341,9 @@ static int write_mstatus(CPURISCVState *env, int csrno,=
+ target_ulong val)<br>
+<br>
+=C2=A0 =C2=A0 =C2=A0mstatus =3D (mstatus &amp; ~mask) | (val &amp; mask);<b=
+r>
+<br>
+-=C2=A0 =C2=A0 int dirty =3D ((mstatus &amp; MSTATUS_FS) =3D=3D MSTATUS_FS)=
+ |<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ((mstatus &amp; MS=
+TATUS_XS) =3D=3D MSTATUS_XS);<br>
++=C2=A0 =C2=A0 dirty =3D (riscv_cpu_fp_enabled(env) &amp;&amp;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0((mstatus &amp; MSTATUS_FS=
+) =3D=3D MSTATUS_FS)) |<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ((mstatus &amp; MSTATUS_XS) =3D=
+=3D MSTATUS_XS);<br>
+=C2=A0 =C2=A0 =C2=A0mstatus =3D set_field(mstatus, MSTATUS_SD, dirty);<br>
+=C2=A0 =C2=A0 =C2=A0env-&gt;mstatus =3D mstatus;<br>
+<br>
+-- <br>
+2.22.0<br>
+<br>
+<br></blockquote><div class=3D"gmail-gs" style=3D"margin:0px;padding:0px 0p=
+x 20px;width:1717.59px;font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-=
+serif;font-size:medium"><div class=3D"gmail-"><div id=3D"gmail-:1gx" class=
+=3D"gmail-ii gmail-gt gmail-adP" style=3D"font-size:0.875rem;direction:ltr;=
+margin:8px 0px 0px;padding:0px"><div id=3D"gmail-:1f3" class=3D"gmail-a3s g=
+mail-aXjCH" style=3D"overflow:hidden;font-variant-numeric:normal;font-varia=
+nt-east-asian:normal;font-stretch:normal;font-size:small;line-height:1.5;fo=
+nt-family:Arial,Helvetica,sans-serif"><div dir=3D"ltr"><div class=3D"gmail_=
+quote"><div>Reviewed-by: Chih-Min Chao &lt;<a href=3D"mailto:chihmin.chao@s=
+ifive.com" target=3D"_blank">chihmin.chao@sifive.com</a>&gt;=C2=A0 =C2=A0</=
+div></div></div></div></div></div></div></div></div>
+
+--0000000000001cdfad058f59417d--
 
