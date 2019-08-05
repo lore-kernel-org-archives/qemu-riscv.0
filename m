@@ -1,65 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hufQN-0000yu-0E
-	for mharc-qemu-riscv@gnu.org; Mon, 05 Aug 2019 12:01:27 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:58597)
+	id 1hufQO-00010w-Ss
+	for mharc-qemu-riscv@gnu.org; Mon, 05 Aug 2019 12:01:29 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58798)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <bmeng.cn@gmail.com>) id 1hufPu-0000mv-41
- for qemu-riscv@nongnu.org; Mon, 05 Aug 2019 12:01:02 -0400
+ (envelope-from <bmeng.cn@gmail.com>) id 1hufQ7-0000qY-1f
+ for qemu-riscv@nongnu.org; Mon, 05 Aug 2019 12:01:13 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <bmeng.cn@gmail.com>) id 1hufPr-00032v-7T
- for qemu-riscv@nongnu.org; Mon, 05 Aug 2019 12:00:57 -0400
-Received: from mail-pg1-x543.google.com ([2607:f8b0:4864:20::543]:37449)
+ (envelope-from <bmeng.cn@gmail.com>) id 1hufQ3-0003E9-TA
+ for qemu-riscv@nongnu.org; Mon, 05 Aug 2019 12:01:10 -0400
+Received: from mail-pf1-x444.google.com ([2607:f8b0:4864:20::444]:45309)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
- id 1hufPg-0002w9-0c; Mon, 05 Aug 2019 12:00:44 -0400
-Received: by mail-pg1-x543.google.com with SMTP id d1so7152278pgp.4;
- Mon, 05 Aug 2019 09:00:43 -0700 (PDT)
+ id 1hufPn-0002yc-6g; Mon, 05 Aug 2019 12:00:52 -0400
+Received: by mail-pf1-x444.google.com with SMTP id r1so39861385pfq.12;
+ Mon, 05 Aug 2019 09:00:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:to:subject:date:message-id:in-reply-to:references;
- bh=LXiUaj0rKNY+QE8v0jzf1Ot10uVD5oH+gvpbKkbiZso=;
- b=bwiLiozb+mQYv1KY7A/EuyBveZFWNOvUEwl3EmAEYFylQhdZ8akVYdP4G4Bku3XXT9
- MN8NiMb9muXAow96cAsgAuzWgBOzrl+iHuf+lEK1n4oJ/I5hJVkjFTNIViDIKxKM56Kd
- W+naZLaqTFF0wkRYMKiqThJ1sTNbMCjURIOr/+PTQf0GGr+f8NlZywG3ROxC5FxhJEqa
- bIV9MHegGS8kxOOjkxruIi/O2pZ07t1Z48oMikAjxq/QdS4LuPhREm+PjlWUn0abzeTI
- /KtLYfUtmcaJR5YYllcQ8CrbxixWwjxyWnPDeFJ1k4pRWS7NMsj4CKPXZasH3adrNDjf
- XfUg==
+ bh=2ms6qzywynSYGndXaBF2HCSrVQr5HrR87UomFY43oOo=;
+ b=QvC4bLRX7/Un2bwF6t1LcfjWRSrTf1kSbJlIKjKtm2omg+/8uoItJiDxknXwcda7Ns
+ xBKevTlUYkiMm4IDCLEwr6JWz1gIiEKiTdE+G3Dl9Cpt+k5jSOm8jK+y0JuY4LEozooU
+ EcQcHVNjPtfdt2ZYza30z0a8iIj3Gm4SkmJpDU+Fwr0ui79Va06Q1q9v42Ws2KClIg+e
+ KiwxhszK+j82YIO+5pvdHGk7r7HsLozKgQq3SaKLN4bDy/SljiB+iCUwtrsJp5N87Kcz
+ 5FGCDWZFVYBC0uGWMtVyYKJKhDDwAlO2kb7tyHTqHXINab4d+GmLbCc1vI7svvLYvBNQ
+ pRtw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
  :references;
- bh=LXiUaj0rKNY+QE8v0jzf1Ot10uVD5oH+gvpbKkbiZso=;
- b=orzsQLualGYsp3WGd2Ye/+/XsEmxw9w3WkZGrcYndf/yqWX6OCk29+MvxQ0KmSdL6t
- ktzDMGXy4zBxu5x3cZjqsIAl9Bu+vYXj9+cAH4QoSguA9fa6cAbvDETuzEVghWMD5ZxE
- 7MuoDWhzz2wgdVkFIB0tMrXxNRb0e80/Pe1LVgiIrrUg9T50Ed9A63nRkVgfqOhgWdTR
- EzrrNSIFAdMXw8kn42m8RjeDuKBPONxc06OhDHVQGVOO1NfZ2Xrm+Ho0f8gOwY6nfCtv
- tRHUdqFp3PxAgNJi0eGJ1t0Le9Mfvl5WPiYcs96z5v3tkzNSkxvfc7hYy1rB0khd+lLX
- lZWA==
-X-Gm-Message-State: APjAAAVTau1J/cPkO+jtYb6DCYBtBEzOzcqVZLjPkCxgkba8GmoViHHi
- df57TyO5RtxtGIIJu6FfFUc=
-X-Google-Smtp-Source: APXvYqz+Snvo3aVCyaLAAi69xeyRkqcPg9Y1p+40nyyCYN7cB+BxH2M6GyYfwDYFjwHbzr5opST3Kg==
-X-Received: by 2002:a65:64c6:: with SMTP id t6mr139994810pgv.323.1565020843084; 
- Mon, 05 Aug 2019 09:00:43 -0700 (PDT)
+ bh=2ms6qzywynSYGndXaBF2HCSrVQr5HrR87UomFY43oOo=;
+ b=HLx9jmYL9YaTZnW4HOUyKPkLCxpl6dAuCD0FirLh5LdBqIdJ4XFKKSaoxHsK/zWWI1
+ uwoxXvv7QYwqh8GEO6x+ILpit0nhZWcecLrPZZZmAPafx0VbxSi75vNpeeUCDCjSBBNa
+ 8OL96TV1SaEMZtv14ISP7SEm2cFp9bLpnuaYrespW6prIoePpPEj09V4JrlO5B/5lcxx
+ pYSLm9lTv2RCFosNK/3h5B2AcsQWTj5mpuwZ/Zm+WH2ZDBZUfLH3fF8G6nAxQfayn+RD
+ X+izXAwZiwTaRbGc/zre1HLVj4mSiCUpthkLGIA0PexsRNW5/XG5irkVACgWzPmLmUZk
+ fkMg==
+X-Gm-Message-State: APjAAAWjnghmXl7Gqs4H8PxcMoNvWJpKUx9scKgXjN+IsXI/AAy/iDyk
+ Cs4Ae4qXa+B2dOPjgOlAH/FGY1Y7
+X-Google-Smtp-Source: APXvYqxfva+PWi8e3QiT9G1GxXpJrXe+H8jP672rmwkV9AxzNlxs1PdT9YzSNNTYq6o4G1TM/+VSeg==
+X-Received: by 2002:aa7:96a4:: with SMTP id g4mr76499241pfk.193.1565020847412; 
+ Mon, 05 Aug 2019 09:00:47 -0700 (PDT)
 Received: from localhost.localdomain (unknown-224-80.windriver.com.
  [147.11.224.80])
- by smtp.gmail.com with ESMTPSA id d18sm47728793pgi.40.2019.08.05.09.00.41
+ by smtp.gmail.com with ESMTPSA id d18sm47728793pgi.40.2019.08.05.09.00.46
  (version=TLS1 cipher=AES128-SHA bits=128/128);
- Mon, 05 Aug 2019 09:00:42 -0700 (PDT)
+ Mon, 05 Aug 2019 09:00:46 -0700 (PDT)
 From: Bin Meng <bmeng.cn@gmail.com>
 To: Alistair Francis <Alistair.Francis@wdc.com>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
  Palmer Dabbelt <palmer@sifive.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
-Date: Mon,  5 Aug 2019 09:00:09 -0700
-Message-Id: <1565020823-24223-15-git-send-email-bmeng.cn@gmail.com>
+Date: Mon,  5 Aug 2019 09:00:13 -0700
+Message-Id: <1565020823-24223-19-git-send-email-bmeng.cn@gmail.com>
 X-Mailer: git-send-email 1.7.1
 In-Reply-To: <1565020823-24223-1-git-send-email-bmeng.cn@gmail.com>
 References: <1565020823-24223-1-git-send-email-bmeng.cn@gmail.com>
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::543
-Subject: [Qemu-riscv] [PATCH 14/28] riscv: sifive: Implement PRCI model for
- FU540
+X-Received-From: 2607:f8b0:4864:20::444
+Subject: [Qemu-riscv] [PATCH 18/28] riscv: hw: Implement a model for SiFive
+ FU540 OTP
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -71,45 +71,47 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Aug 2019 16:01:08 -0000
+X-List-Received-Date: Mon, 05 Aug 2019 16:01:13 -0000
 
-This adds a simple PRCI model for FU540 (sifive_u). It has different
-register layout from the existing PRCI model for FE310 (sifive_e).
+This implements a simple model for SiFive FU540 OTP (One-Time
+Programmable) Memory interface, primarily for reading out the
+stored serial number from the first 1 KiB of the 16 KiB OTP
+memory reserved by SiFive for internal use.
 
 Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
 ---
 
- hw/riscv/Makefile.objs           |   1 +
- hw/riscv/sifive_u_prci.c         | 163 +++++++++++++++++++++++++++++++++++++++
- include/hw/riscv/sifive_u_prci.h |  90 +++++++++++++++++++++
- 3 files changed, 254 insertions(+)
- create mode 100644 hw/riscv/sifive_u_prci.c
- create mode 100644 include/hw/riscv/sifive_u_prci.h
+ hw/riscv/Makefile.objs          |   1 +
+ hw/riscv/sifive_u_otp.c         | 194 ++++++++++++++++++++++++++++++++++++++++
+ include/hw/riscv/sifive_u_otp.h |  90 +++++++++++++++++++
+ 3 files changed, 285 insertions(+)
+ create mode 100644 hw/riscv/sifive_u_otp.c
+ create mode 100644 include/hw/riscv/sifive_u_otp.h
 
 diff --git a/hw/riscv/Makefile.objs b/hw/riscv/Makefile.objs
-index c859697..b95bbd5 100644
+index b95bbd5..fc3c6dd 100644
 --- a/hw/riscv/Makefile.objs
 +++ b/hw/riscv/Makefile.objs
 @@ -8,6 +8,7 @@ obj-$(CONFIG_SIFIVE) += sifive_gpio.o
  obj-$(CONFIG_SIFIVE) += sifive_plic.o
  obj-$(CONFIG_SIFIVE) += sifive_test.o
  obj-$(CONFIG_SIFIVE_U) += sifive_u.o
-+obj-$(CONFIG_SIFIVE_U) += sifive_u_prci.o
++obj-$(CONFIG_SIFIVE_U) += sifive_u_otp.o
+ obj-$(CONFIG_SIFIVE_U) += sifive_u_prci.o
  obj-$(CONFIG_SIFIVE) += sifive_uart.o
  obj-$(CONFIG_SPIKE) += spike.o
- obj-$(CONFIG_RISCV_VIRT) += virt.o
-diff --git a/hw/riscv/sifive_u_prci.c b/hw/riscv/sifive_u_prci.c
+diff --git a/hw/riscv/sifive_u_otp.c b/hw/riscv/sifive_u_otp.c
 new file mode 100644
-index 0000000..35e5962
+index 0000000..f21d9f4
 --- /dev/null
-+++ b/hw/riscv/sifive_u_prci.c
-@@ -0,0 +1,163 @@
++++ b/hw/riscv/sifive_u_otp.c
+@@ -0,0 +1,194 @@
 +/*
-+ * QEMU SiFive U PRCI (Power, Reset, Clock, Interrupt)
++ * QEMU SiFive U OTP (One-Time Programmable) Memory interface
 + *
 + * Copyright (c) 2019 Bin Meng <bmeng.cn@gmail.com>
 + *
-+ * Simple model of the PRCI to emulate register reads made by the SDK BSP
++ * Simple model of the OTP to emulate register reads made by the SDK BSP
 + *
 + * This program is free software; you can redistribute it and/or modify it
 + * under the terms and conditions of the GNU General Public License,
@@ -128,83 +130,105 @@ index 0000000..35e5962
 +#include "hw/sysbus.h"
 +#include "qemu/module.h"
 +#include "target/riscv/cpu.h"
-+#include "hw/riscv/sifive_u_prci.h"
++#include "hw/riscv/sifive_u_otp.h"
 +
-+static uint64_t sifive_prci_read(void *opaque, hwaddr addr, unsigned int size)
++static uint64_t sifive_otp_read(void *opaque, hwaddr addr, unsigned int size)
 +{
-+    SiFivePRCIState *s = opaque;
++    SiFiveOTPState *s = opaque;
 +
 +    switch (addr) {
-+    case SIFIVE_PRCI_HFXOSCCFG:
-+        return s->hfxosccfg;
-+    case SIFIVE_PRCI_COREPLLCFG0:
-+        return s->corepllcfg0;
-+    case SIFIVE_PRCI_DDRPLLCFG0:
-+        return s->ddrpllcfg0;
-+    case SIFIVE_PRCI_DDRPLLCFG1:
-+        return s->ddrpllcfg1;
-+    case SIFIVE_PRCI_GEMGXLPLLCFG0:
-+        return s->gemgxlpllcfg0;
-+    case SIFIVE_PRCI_GEMGXLPLLCFG1:
-+        return s->gemgxlpllcfg1;
-+    case SIFIVE_PRCI_CORECLKSEL:
-+        return s->coreclksel;
-+    case SIFIVE_PRCI_DEVICESRESET:
-+        return s->devicesreset;
-+    case SIFIVE_PRCI_CLKMUXSTATUS:
-+        return s->clkmuxstatus;
++    case SIFIVE_OTP_PA:
++        return s->pa;
++    case SIFIVE_OTP_PAIO:
++        return s->paio;
++    case SIFIVE_OTP_PAS:
++        return s->pas;
++    case SIFIVE_OTP_PCE:
++        return s->pce;
++    case SIFIVE_OTP_PCLK:
++        return s->pclk;
++    case SIFIVE_OTP_PDIN:
++        return s->pdin;
++    case SIFIVE_OTP_PDOUT:
++        if ((s->pce & SIFIVE_OTP_PCE_EN) &&
++            (s->pdstb & SIFIVE_OTP_PDSTB_EN) &&
++            (s->ptrim & SIFIVE_OTP_PTRIM_EN)) {
++            return s->fuse[s->pa & SIFIVE_OTP_PA_MASK];
++        } else {
++            return 0xff;
++        }
++    case SIFIVE_OTP_PDSTB:
++        return s->pdstb;
++    case SIFIVE_OTP_PPROG:
++        return s->pprog;
++    case SIFIVE_OTP_PTC:
++        return s->ptc;
++    case SIFIVE_OTP_PTM:
++        return s->ptm;
++    case SIFIVE_OTP_PTM_REP:
++        return s->ptm_rep;
++    case SIFIVE_OTP_PTR:
++        return s->ptr;
++    case SIFIVE_OTP_PTRIM:
++        return s->ptrim;
++    case SIFIVE_OTP_PWE:
++        return s->pwe;
 +    }
 +
 +    hw_error("%s: read: addr=0x%x\n", __func__, (int)addr);
 +    return 0;
 +}
 +
-+static void sifive_prci_write(void *opaque, hwaddr addr,
-+                              uint64_t val64, unsigned int size)
++static void sifive_otp_write(void *opaque, hwaddr addr,
++                             uint64_t val64, unsigned int size)
 +{
-+    SiFivePRCIState *s = opaque;
++    SiFiveOTPState *s = opaque;
 +
 +    switch (addr) {
-+    case SIFIVE_PRCI_HFXOSCCFG:
-+        s->hfxosccfg = (uint32_t) val64;
-+        /* OSC stays ready */
-+        s->hfxosccfg |= SIFIVE_PRCI_HFXOSCCFG_RDY;
++    case SIFIVE_OTP_PA:
++        s->pa = (uint32_t) val64 & SIFIVE_OTP_PA_MASK;
 +        break;
-+    case SIFIVE_PRCI_COREPLLCFG0:
-+        s->corepllcfg0 = (uint32_t) val64;
-+        /* internal feedback */
-+        s->corepllcfg0 |= SIFIVE_PRCI_PLLCFG0_FSE;
-+        /* PLL stays locked */
-+        s->corepllcfg0 |= SIFIVE_PRCI_PLLCFG0_LOCK;
++    case SIFIVE_OTP_PAIO:
++        s->paio = (uint32_t) val64;
 +        break;
-+    case SIFIVE_PRCI_DDRPLLCFG0:
-+        s->ddrpllcfg0 = (uint32_t) val64;
-+        /* internal feedback */
-+        s->ddrpllcfg0 |= SIFIVE_PRCI_PLLCFG0_FSE;
-+        /* PLL stays locked */
-+        s->ddrpllcfg0 |= SIFIVE_PRCI_PLLCFG0_LOCK;
++    case SIFIVE_OTP_PAS:
++        s->pas = (uint32_t) val64;
 +        break;
-+    case SIFIVE_PRCI_DDRPLLCFG1:
-+        s->ddrpllcfg1 = (uint32_t) val64;
++    case SIFIVE_OTP_PCE:
++        s->pce = (uint32_t) val64;
 +        break;
-+    case SIFIVE_PRCI_GEMGXLPLLCFG0:
-+        s->gemgxlpllcfg0 = (uint32_t) val64;
-+         /* internal feedback */
-+        s->gemgxlpllcfg0 |= SIFIVE_PRCI_PLLCFG0_FSE;
-+       /* PLL stays locked */
-+        s->gemgxlpllcfg0 |= SIFIVE_PRCI_PLLCFG0_LOCK;
++    case SIFIVE_OTP_PCLK:
++        s->pclk = (uint32_t) val64;
 +        break;
-+    case SIFIVE_PRCI_GEMGXLPLLCFG1:
-+        s->gemgxlpllcfg1 = (uint32_t) val64;
++    case SIFIVE_OTP_PDIN:
++        s->pdin = (uint32_t) val64;
 +        break;
-+    case SIFIVE_PRCI_CORECLKSEL:
-+        s->coreclksel = (uint32_t) val64;
++    case SIFIVE_OTP_PDOUT:
++        /* read-only */
 +        break;
-+    case SIFIVE_PRCI_DEVICESRESET:
-+        s->devicesreset = (uint32_t) val64;
++    case SIFIVE_OTP_PDSTB:
++        s->pdstb = (uint32_t) val64;
 +        break;
-+    case SIFIVE_PRCI_CLKMUXSTATUS:
-+        s->clkmuxstatus = (uint32_t) val64;
++    case SIFIVE_OTP_PPROG:
++        s->pprog = (uint32_t) val64;
++        break;
++    case SIFIVE_OTP_PTC:
++        s->ptc = (uint32_t) val64;
++        break;
++    case SIFIVE_OTP_PTM:
++        s->ptm = (uint32_t) val64;
++        break;
++    case SIFIVE_OTP_PTM_REP:
++        s->ptm_rep = (uint32_t) val64;
++        break;
++    case SIFIVE_OTP_PTR:
++        s->ptr = (uint32_t) val64;
++        break;
++    case SIFIVE_OTP_PTRIM:
++        s->ptrim = (uint32_t) val64;
++        break;
++    case SIFIVE_OTP_PWE:
++        s->pwe = (uint32_t) val64;
 +        break;
 +    default:
 +        hw_error("%s: bad write: addr=0x%x v=0x%x\n",
@@ -212,9 +236,9 @@ index 0000000..35e5962
 +    }
 +}
 +
-+static const MemoryRegionOps sifive_prci_ops = {
-+    .read = sifive_prci_read,
-+    .write = sifive_prci_write,
++static const MemoryRegionOps sifive_otp_ops = {
++    .read = sifive_otp_read,
++    .write = sifive_otp_write,
 +    .endianness = DEVICE_NATIVE_ENDIAN,
 +    .valid = {
 +        .min_access_size = 4,
@@ -222,59 +246,68 @@ index 0000000..35e5962
 +    }
 +};
 +
-+static void sifive_prci_init(Object *obj)
-+{
-+    SiFivePRCIState *s = SIFIVE_U_PRCI(obj);
-+
-+    memory_region_init_io(&s->mmio, obj, &sifive_prci_ops, s,
-+                          TYPE_SIFIVE_U_PRCI, SIFIVE_U_PRCI_REG_SIZE);
-+    sysbus_init_mmio(SYS_BUS_DEVICE(obj), &s->mmio);
-+
-+    /* Initialize register to power-on-reset values */
-+    s->hfxosccfg = (SIFIVE_PRCI_HFXOSCCFG_RDY | SIFIVE_PRCI_HFXOSCCFG_EN);
-+    s->corepllcfg0 = (SIFIVE_PRCI_PLLCFG0_DIVR | SIFIVE_PRCI_PLLCFG0_DIVF |
-+                      SIFIVE_PRCI_PLLCFG0_DIVQ | SIFIVE_PRCI_PLLCFG0_FSE |
-+                      SIFIVE_PRCI_PLLCFG0_LOCK);
-+    s->ddrpllcfg0 = (SIFIVE_PRCI_PLLCFG0_DIVR | SIFIVE_PRCI_PLLCFG0_DIVF |
-+                     SIFIVE_PRCI_PLLCFG0_DIVQ | SIFIVE_PRCI_PLLCFG0_FSE |
-+                     SIFIVE_PRCI_PLLCFG0_LOCK);
-+    s->gemgxlpllcfg0 = (SIFIVE_PRCI_PLLCFG0_DIVR | SIFIVE_PRCI_PLLCFG0_DIVF |
-+                        SIFIVE_PRCI_PLLCFG0_DIVQ | SIFIVE_PRCI_PLLCFG0_FSE |
-+                        SIFIVE_PRCI_PLLCFG0_LOCK);
-+    s->coreclksel = SIFIVE_PRCI_CORECLKSEL_HFCLK;
-+}
-+
-+static const TypeInfo sifive_prci_info = {
-+    .name          = TYPE_SIFIVE_U_PRCI,
-+    .parent        = TYPE_SYS_BUS_DEVICE,
-+    .instance_size = sizeof(SiFivePRCIState),
-+    .instance_init = sifive_prci_init,
++static Property sifive_otp_properties[] = {
++    DEFINE_PROP_UINT32("serial", SiFiveOTPState, serial, 0),
++    DEFINE_PROP_END_OF_LIST(),
 +};
 +
-+static void sifive_prci_register_types(void)
++static void sifive_otp_realize(DeviceState *dev, Error **errp)
 +{
-+    type_register_static(&sifive_prci_info);
++    SiFiveOTPState *s = SIFIVE_U_OTP(dev);
++
++    memory_region_init_io(&s->mmio, OBJECT(dev), &sifive_otp_ops, s,
++                          TYPE_SIFIVE_U_OTP, SIFIVE_U_OTP_REG_SIZE);
++    sysbus_init_mmio(SYS_BUS_DEVICE(dev), &s->mmio);
++
++    /* Initialize all fuses' initial value to 0xFFs */
++    memset(s->fuse, 0xff, sizeof(s->fuse));
++
++    /* Make a valid content of serial number */
++    s->fuse[SIFIVE_OTP_SERIAL_ADDR] = s->serial;
++    s->fuse[SIFIVE_OTP_SERIAL_ADDR + 1] = ~(s->serial);
 +}
 +
-+type_init(sifive_prci_register_types)
-+
-+
-+/* Create PRCI device */
-+DeviceState *sifive_u_prci_create(hwaddr addr)
++static void sifive_otp_class_init(ObjectClass *klass, void *data)
 +{
-+    DeviceState *dev = qdev_create(NULL, TYPE_SIFIVE_U_PRCI);
++    DeviceClass *dc = DEVICE_CLASS(klass);
++
++    dc->props = sifive_otp_properties;
++    dc->realize = sifive_otp_realize;
++}
++
++static const TypeInfo sifive_otp_info = {
++    .name          = TYPE_SIFIVE_U_OTP,
++    .parent        = TYPE_SYS_BUS_DEVICE,
++    .instance_size = sizeof(SiFiveOTPState),
++    .class_init    = sifive_otp_class_init,
++};
++
++static void sifive_otp_register_types(void)
++{
++    type_register_static(&sifive_otp_info);
++}
++
++type_init(sifive_otp_register_types)
++
++
++/* Create OTP device */
++DeviceState *sifive_u_otp_create(hwaddr addr, uint32_t serial)
++{
++    DeviceState *dev = qdev_create(NULL, TYPE_SIFIVE_U_OTP);
++    qdev_prop_set_uint32(dev, "serial", serial);
 +    qdev_init_nofail(dev);
 +    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, addr);
++
 +    return dev;
 +}
-diff --git a/include/hw/riscv/sifive_u_prci.h b/include/hw/riscv/sifive_u_prci.h
+diff --git a/include/hw/riscv/sifive_u_otp.h b/include/hw/riscv/sifive_u_otp.h
 new file mode 100644
-index 0000000..f3a4656
+index 0000000..16095b0
 --- /dev/null
-+++ b/include/hw/riscv/sifive_u_prci.h
++++ b/include/hw/riscv/sifive_u_otp.h
 @@ -0,0 +1,90 @@
 +/*
-+ * QEMU SiFive U PRCI (Power, Reset, Clock, Interrupt) interface
++ * QEMU SiFive U OTP (One-Time Programmable) Memory interface
 + *
 + * Copyright (c) 2019 Bin Meng <bmeng.cn@gmail.com>
 + *
@@ -291,78 +324,78 @@ index 0000000..f3a4656
 + * this program.  If not, see <http://www.gnu.org/licenses/>.
 + */
 +
-+#ifndef HW_SIFIVE_U_PRCI_H
-+#define HW_SIFIVE_U_PRCI_H
++#ifndef HW_SIFIVE_U_OTP_H
++#define HW_SIFIVE_U_OTP_H
 +
 +enum {
-+    SIFIVE_PRCI_HFXOSCCFG       = 0x00,
-+    SIFIVE_PRCI_COREPLLCFG0     = 0x04,
-+    SIFIVE_PRCI_DDRPLLCFG0      = 0x0C,
-+    SIFIVE_PRCI_DDRPLLCFG1      = 0x10,
-+    SIFIVE_PRCI_GEMGXLPLLCFG0   = 0x1C,
-+    SIFIVE_PRCI_GEMGXLPLLCFG1   = 0x20,
-+    SIFIVE_PRCI_CORECLKSEL      = 0x24,
-+    SIFIVE_PRCI_DEVICESRESET    = 0x28,
-+    SIFIVE_PRCI_CLKMUXSTATUS    = 0x2C
-+};
-+
-+/*
-+ * Current FU540-C000 manual says ready bit is at bit 29, but
-+ * freedom-u540-c000-bootloader codes (ux00prci.h) says it is at bit 31.
-+ * We have to trust the actual codes that worked.
-+ *
-+ * see https://github.com/sifive/freedom-u540-c000-bootloader
-+ */
-+enum {
-+    SIFIVE_PRCI_HFXOSCCFG_EN    = (1 << 30),
-+    SIFIVE_PRCI_HFXOSCCFG_RDY   = (1 << 31),
-+};
-+
-+/* xxxPLLCFG0 register bits */
-+enum {
-+    SIFIVE_PRCI_PLLCFG0_DIVR    = (1 << 0),
-+    SIFIVE_PRCI_PLLCFG0_DIVF    = (31 << 6),
-+    SIFIVE_PRCI_PLLCFG0_DIVQ    = (3 << 15),
-+    SIFIVE_PRCI_PLLCFG0_FSE     = (1 << 25),
-+    SIFIVE_PRCI_PLLCFG0_LOCK    = (1 << 31)
-+};
-+
-+/* xxxPLLCFG1 register bits */
-+enum {
-+    SIFIVE_PRCI_PLLCFG1_CKE     = (1 << 24)
++    SIFIVE_OTP_PA       = 0x00,
++    SIFIVE_OTP_PAIO     = 0x04,
++    SIFIVE_OTP_PAS      = 0x08,
++    SIFIVE_OTP_PCE      = 0x0C,
++    SIFIVE_OTP_PCLK     = 0x10,
++    SIFIVE_OTP_PDIN     = 0x14,
++    SIFIVE_OTP_PDOUT    = 0x18,
++    SIFIVE_OTP_PDSTB    = 0x1C,
++    SIFIVE_OTP_PPROG    = 0x20,
++    SIFIVE_OTP_PTC      = 0x24,
++    SIFIVE_OTP_PTM      = 0x28,
++    SIFIVE_OTP_PTM_REP  = 0x2C,
++    SIFIVE_OTP_PTR      = 0x30,
++    SIFIVE_OTP_PTRIM    = 0x34,
++    SIFIVE_OTP_PWE      = 0x38
 +};
 +
 +enum {
-+    SIFIVE_PRCI_CORECLKSEL_HFCLK = (1 << 0)
++    SIFIVE_OTP_PCE_EN   = (1 << 0)
 +};
 +
-+#define SIFIVE_U_PRCI_REG_SIZE  0x1000
++enum {
++    SIFIVE_OTP_PDSTB_EN = (1 << 0)
++};
 +
-+#define TYPE_SIFIVE_U_PRCI      "riscv.sifive.u.prci"
++enum {
++    SIFIVE_OTP_PTRIM_EN = (1 << 0)
++};
 +
-+#define SIFIVE_U_PRCI(obj) \
-+    OBJECT_CHECK(SiFivePRCIState, (obj), TYPE_SIFIVE_U_PRCI)
++#define SIFIVE_OTP_PA_MASK      0xfff
++#define SIFIVE_OTP_NUM_FUSES    0x1000
++#define SIFIVE_OTP_SERIAL_ADDR  0xfc
 +
-+typedef struct SiFivePRCIState {
++#define SIFIVE_U_OTP_REG_SIZE   0x1000
++
++#define TYPE_SIFIVE_U_OTP       "riscv.sifive.u.otp"
++
++#define SIFIVE_U_OTP(obj) \
++    OBJECT_CHECK(SiFiveOTPState, (obj), TYPE_SIFIVE_U_OTP)
++
++typedef struct SiFiveOTPState {
 +    /*< private >*/
 +    SysBusDevice parent_obj;
 +
 +    /*< public >*/
 +    MemoryRegion mmio;
-+    uint32_t hfxosccfg;
-+    uint32_t corepllcfg0;
-+    uint32_t ddrpllcfg0;
-+    uint32_t ddrpllcfg1;
-+    uint32_t gemgxlpllcfg0;
-+    uint32_t gemgxlpllcfg1;
-+    uint32_t coreclksel;
-+    uint32_t devicesreset;
-+    uint32_t clkmuxstatus;
-+} SiFivePRCIState;
++    uint32_t pa;
++    uint32_t paio;
++    uint32_t pas;
++    uint32_t pce;
++    uint32_t pclk;
++    uint32_t pdin;
++    uint32_t pdstb;
++    uint32_t pprog;
++    uint32_t ptc;
++    uint32_t ptm;
++    uint32_t ptm_rep;
++    uint32_t ptr;
++    uint32_t ptrim;
++    uint32_t pwe;
++    uint32_t fuse[SIFIVE_OTP_NUM_FUSES];
++    /* config */
++    uint32_t serial;
++} SiFiveOTPState;
 +
-+DeviceState *sifive_u_prci_create(hwaddr addr);
++DeviceState *sifive_u_otp_create(hwaddr addr, uint32_t serial);
 +
-+#endif /* HW_SIFIVE_U_PRCI_H */
++#endif /* HW_SIFIVE_U_OTP_H */
 -- 
 2.7.4
 
