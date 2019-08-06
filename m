@@ -1,64 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hunMF-0003uf-Hm
-	for mharc-qemu-riscv@gnu.org; Mon, 05 Aug 2019 20:29:43 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37009)
+	id 1huytm-0002EH-5d
+	for mharc-qemu-riscv@gnu.org; Tue, 06 Aug 2019 08:49:06 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:50352)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <alistair23@gmail.com>) id 1hunMC-0003r1-Tl
- for qemu-riscv@nongnu.org; Mon, 05 Aug 2019 20:29:41 -0400
+ (envelope-from <maxim.blinov@embecosm.com>) id 1huytj-0002CP-I8
+ for qemu-riscv@nongnu.org; Tue, 06 Aug 2019 08:49:04 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1hunMC-0007ns-0b
- for qemu-riscv@nongnu.org; Mon, 05 Aug 2019 20:29:40 -0400
-Received: from mail-lj1-x241.google.com ([2a00:1450:4864:20::241]:41684)
+ (envelope-from <maxim.blinov@embecosm.com>) id 1huyti-0003Rw-DE
+ for qemu-riscv@nongnu.org; Tue, 06 Aug 2019 08:49:03 -0400
+Received: from mail-wr1-x42c.google.com ([2a00:1450:4864:20::42c]:43289)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1hunM9-0007mM-Qj; Mon, 05 Aug 2019 20:29:37 -0400
-Received: by mail-lj1-x241.google.com with SMTP id d24so80737171ljg.8;
- Mon, 05 Aug 2019 17:29:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=X7k5HPEhC+tqeqA3jeiuHdAzU9KLZWJrT3lUZzgOOyI=;
- b=brnDH+eagOcy+pKW112BWM2ytGGIr5Vr+vMLwz5FEyeWabvKJeJHhUMfthERayJzVH
- CUMNCcn0dMoyRfp4pbctJZcRIzS+qf71a9eDoOIrrlF8VuGAlOT/yyCSlbUZrsO83XNZ
- +bonOiB+UPbHQTIpjr4vyF1rMrvyBiuT2CUr2oqtbnXKkA/d0luQOvTKLduu5VKB/gmE
- vcjg3W9hnm6g5AioVHQ7ofIzIWrWGG6cudyH+TNOx81oYKBtUya127Xl0TnExYmJlsHI
- AngrjqRLnKZhPSoUwDRx6CGC00I+KxPmMW4W0Rx+QvTh4PjZykfpsqjIfvWpPC5VVXW5
- BgkQ==
+ (Exim 4.71) (envelope-from <maxim.blinov@embecosm.com>)
+ id 1huyti-0003QG-5Z
+ for qemu-riscv@nongnu.org; Tue, 06 Aug 2019 08:49:02 -0400
+Received: by mail-wr1-x42c.google.com with SMTP id p13so13207276wru.10
+ for <qemu-riscv@nongnu.org>; Tue, 06 Aug 2019 05:49:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=embecosm.com; s=google;
+ h=date:from:to:cc:subject:message-id:mime-version:content-disposition
+ :user-agent; bh=SjcvDrrRWX9wfxIyquvZZsNHEQr86Hgl1KBjtw/uLpM=;
+ b=FlGacSUuasGsY1k5bNXrYI7mafzaVhZLHGWhwCmKhYSGorxi4o/3ZzIUGUCcoyYUk5
+ EtBHoiHDiHOOmUOnQ00xHxKiJH62BLk2hRLWr5beHEXsNU7RNogIgdtHrRh13nM4VCPP
+ ouspEwtjHPwhYX7ZPufKGDsTQXToMtkTJrzEcf1d/KO0/JmgnyJsTmbGqDVOMm+CC1Fo
+ oF1wrSn8UR+4PWZHF5DYEdpKYRvMwIIheDmoPGN+TUHrSlD9HzmskFr0qW709fxfm6dd
+ BoeWZ9bp69wXYDz06gHG2T51Cy3zZJDIdDjX4lRu5NShEZnwPn5bRjds9doCrY+NUuNg
+ Gw7g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=X7k5HPEhC+tqeqA3jeiuHdAzU9KLZWJrT3lUZzgOOyI=;
- b=BzgDTj0kD8zpWMFKN4W2MC0CBYQX7W3HRlDNw5xQ9wufDWi1qeABNg/qKWvEJ2vMv8
- eFmr5d0zlv1kKJn8qUhBe/mx0iE7WoK3Rts7e2a3MNAfSFhTpa8b0iW+zJ9oEULKzCoh
- /r1PiC6wRiRzdeVVJa9+oQRLjJ6OIJwacXRlbGckCfClqfzWp4pnobrdqBQeugiokgKb
- u+H2MaEIWWSISgLyMXgTdKi8B7Rg1BiHC9X9Up/Mz48U+5HdRNUKTAjO0bkPzMJBF69S
- C4oe0iPemWFvWOQ22ygzOyPMU0XXzMXDVomscd6sjXHehH92yT/RTRjJNyG/buFEZqe1
- MrsA==
-X-Gm-Message-State: APjAAAUXqEUGndgUtWYW2KY92pCWJbT4zvk17dv7qeavi5TJQQTegfJQ
- dZhOV8bQi6Mn/SNj0/jAX2BJzgMLYIEtJM7VrVE=
-X-Google-Smtp-Source: APXvYqyW3JmjMuYs6AR7DsUEOa/SH0Q0NikVFRYtR/+QChpW7WyxwuV9GpRxI+wkKApZGXnmThZrk+1iyFBsYkp+YLg=
-X-Received: by 2002:a2e:480a:: with SMTP id v10mr225910lja.94.1565051376564;
- Mon, 05 Aug 2019 17:29:36 -0700 (PDT)
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:mime-version
+ :content-disposition:user-agent;
+ bh=SjcvDrrRWX9wfxIyquvZZsNHEQr86Hgl1KBjtw/uLpM=;
+ b=oOVE2vxGASxRnSUx5mDI8Q1rE8dGeW0ecrSjaZZZqPVbtkO1rVrUAaQhONVX8Yfqjv
+ wn1jrTYZ3n0/3c/j7vF7XMk2ZRD2FahsfRYD6tCRDT46sC8lzE6kBq3ExMcnKDO60IvW
+ PDMFzGzyyM6ozhHIhJvAN7PXw7H80D35Vb91SnFGciNJkBDTUuL0NKxOJ8E9NoXR7pW4
+ YIPNU26VzYA9NOx/sSk7oPuGwM0PvnfJjrOl/uIfQ5x4f4t4/OwQYLQyLJvJXCBUs51V
+ ks5eK5bxFI1f7WD0q7Dut7wc4NgR/ul5FKZit4khGGLGDZPDNDLKoeHfOUw2WIpc3y14
+ aZyA==
+X-Gm-Message-State: APjAAAUdxD3om6xNIwd/e2uxes9iPXaRVNC5i3IDTdKrRtfjorfcg5PG
+ G13tc/XgtNEf6cy+dJW83ei+lKgfG8g=
+X-Google-Smtp-Source: APXvYqw25b88YRzFd+/x98ubmFIaFTHqhvAR6qbmK79kvJL9yOj1G2Nz0JRobvFXiSdiv06QPqX7AQ==
+X-Received: by 2002:adf:f050:: with SMTP id t16mr4541094wro.99.1565095740412; 
+ Tue, 06 Aug 2019 05:49:00 -0700 (PDT)
+Received: from maxim-ThinkPad-T490 (cust64-dsl91-135-5.idnet.net.
+ [91.135.5.64])
+ by smtp.gmail.com with ESMTPSA id a8sm76175317wma.31.2019.08.06.05.48.59
+ (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+ Tue, 06 Aug 2019 05:48:59 -0700 (PDT)
+Date: Tue, 6 Aug 2019 13:48:57 +0100
+From: Maxim Blinov <maxim.blinov@embecosm.com>
+To: qemu-riscv@nongnu.org
+Cc: qemu-devel@nongnu.org
+Message-ID: <20190806124857.GA18832@maxim-ThinkPad-T490>
 MIME-Version: 1.0
-References: <1565020823-24223-1-git-send-email-bmeng.cn@gmail.com>
- <1565020823-24223-24-git-send-email-bmeng.cn@gmail.com>
-In-Reply-To: <1565020823-24223-24-git-send-email-bmeng.cn@gmail.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 5 Aug 2019 17:25:27 -0700
-Message-ID: <CAKmqyKPa=Osu5jNcWNzt_jGbdf52KMkDjrJWdXFeDaAtU0Aw6Q@mail.gmail.com>
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Palmer Dabbelt <palmer@sifive.com>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+User-Agent: Mutt/1.10.1 (2018-07-13)
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::241
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH 23/28] riscv: sifive: Move
- sifive_mmio_emulate() to a common place
+X-Received-From: 2a00:1450:4864:20::42c
+Subject: [Qemu-riscv] RISC-V: insn32.decode: Confusing encodings
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -70,74 +69,71 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Aug 2019 00:29:42 -0000
+X-List-Received-Date: Tue, 06 Aug 2019 12:49:04 -0000
 
-On Mon, Aug 5, 2019 at 9:08 AM Bin Meng <bmeng.cn@gmail.com> wrote:
->
-> sifive_mmio_emulate() is currently only used in the sifive_e machine
-> codes. It can be helpful for other machines as well.
->
-> Change it to an inline routine and move it to sifive_cpu.h, so that
-> other machines like sifive_u can use it.
->
-> Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
+Hi all,
 
-I don't like this. I don't think we should use this function. This
-seems like we can use create_unimplemented_device() instead.
+I've been going through the insn32.decode file, and found some
+confusing inconsistencies with the ISA spec that I don't understand. I
+hope some of you can clarify.
 
-Alistair
+There is a field defined called "%sh10" as follows:
+%sh10    20:10
 
-> ---
->
->  hw/riscv/sifive_e.c           |  8 --------
->  include/hw/riscv/sifive_cpu.h | 10 +++++++++-
->  2 files changed, 9 insertions(+), 9 deletions(-)
->
-> diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
-> index 2d67670..7e0fe7b 100644
-> --- a/hw/riscv/sifive_e.c
-> +++ b/hw/riscv/sifive_e.c
-> @@ -74,14 +74,6 @@ static const struct MemmapEntry {
->      [SIFIVE_E_DTIM] =     { 0x80000000,     0x4000 }
->  };
->
-> -static void sifive_mmio_emulate(MemoryRegion *parent, const char *name,
-> -                             uintptr_t offset, uintptr_t length)
-> -{
-> -    MemoryRegion *mock_mmio = g_new(MemoryRegion, 1);
-> -    memory_region_init_ram(mock_mmio, NULL, name, length, &error_fatal);
-> -    memory_region_add_subregion(parent, offset, mock_mmio);
-> -}
-> -
->  static void riscv_sifive_e_init(MachineState *machine)
->  {
->      const struct MemmapEntry *memmap = sifive_e_memmap;
-> diff --git a/include/hw/riscv/sifive_cpu.h b/include/hw/riscv/sifive_cpu.h
-> index 1367996..897b8f8 100644
-> --- a/include/hw/riscv/sifive_cpu.h
-> +++ b/include/hw/riscv/sifive_cpu.h
-> @@ -1,5 +1,5 @@
->  /*
-> - * SiFive CPU types
-> + * SiFive CPU types and common utilities
->   *
->   * Copyright (c) 2017 SiFive, Inc.
->   * Copyright (c) 2019 Bin Meng <bmeng.cn@gmail.com>
-> @@ -28,4 +28,12 @@
->  #define SIFIVE_U_CPU TYPE_RISCV_CPU_SIFIVE_U54
->  #endif
->
-> +static inline void sifive_mmio_emulate(MemoryRegion *parent, const char *name,
-> +                                       uintptr_t offset, uintptr_t length)
-> +{
-> +    MemoryRegion *mock_mmio = g_new(MemoryRegion, 1);
-> +    memory_region_init_ram(mock_mmio, NULL, name, length, &error_fatal);
-> +    memory_region_add_subregion(parent, offset, mock_mmio);
-> +}
-> +
->  #endif /* HW_SIFIVE_CPU_H */
-> --
-> 2.7.4
->
->
+Which is used in the "@sh" format as follows:
+@sh ...... ...... .....  ... ..... ....... &shift  shamt=%sh10     %rs1 %rd
+
+And the "@sh" format specifier is used for the following rv32i
+instruction defs:
+
+slli     00.... ......    ..... 001 ..... 0010011 @sh
+srli     00.... ......    ..... 101 ..... 0010011 @sh
+srai     01.... ......    ..... 101 ..... 0010011 @sh
+
+First question: Why does the %sh10 field exist? There are no 10-bit
+shamt fields anywhere in the spec.
+
+Second question: For rv32i, "SLLI" is defined as follows in the spec:
+
+0000000 shamt[4:0] rs1[4:0] 001 rd[4:0] 0010011  |  SLLI
+
+That is, the first 7 bits *must* be zero. So why does the QEMU
+definition above only specify the first 2 bits, and treat the next 10
+bits as a so-called "sh10" field? Surely that shouldn't work and will
+catch false instructions right? And even if it does work, surely we
+would want an explicit definition, something more like
+
+%sh5    20:5
+@sh ...... ...... .....  ... ..... ....... &shift  shamt=%sh5     %rs1 %rd
+
+slli     0000000 .....    ..... 001 ..... 0010011 @sh
+srli     0000000 .....    ..... 101 ..... 0010011 @sh
+srai     0100000 .....    ..... 101 ..... 0010011 @sh
+
+Another thing I noticed is that the rv64i ISA redefines the slli, srli
+and srai encodings by stealing a bit from the immediate field, like
+so:
+
+000000 shamt[5:0] rs1[4:0] 001 rd[4:0] 0010011  |  SLLI
+
+Consider the case that we have a 32 bit cpu and we wanted to have a
+custom instruction encoded like so:
+
+      |This bit set
+      v
+0000001 shamt[4:0] rs1[4:0] 001 rd[4:0] 0010011  |  MY_INSN
+
+In 64 bit risc-v, we can't have that instruction because that bit is
+used in the shift field for the SLLI instruction.  But it should be
+fine to use in 32-bit risc-v.
+
+There are two files currently: insn32.decode, and insn32-64.decode.
+The insn32-64.decode file is additive, but some instructions as simply
+encoded differently in 64 bit mode.
+
+Why not have two separate insn32.decode and insn64.decode files?
+
+I hope I'm understanding the ISA correctly...
+
+Maxim
 
