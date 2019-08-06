@@ -1,64 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hunBM-0003Tz-Dj
-	for mharc-qemu-riscv@gnu.org; Mon, 05 Aug 2019 20:18:28 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:35023)
+	id 1hunCq-0005N6-1c
+	for mharc-qemu-riscv@gnu.org; Mon, 05 Aug 2019 20:20:00 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:35401)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <alistair23@gmail.com>) id 1hunBI-0003QO-Te
- for qemu-riscv@nongnu.org; Mon, 05 Aug 2019 20:18:26 -0400
+ (envelope-from <alistair23@gmail.com>) id 1hunCo-0005Mz-6G
+ for qemu-riscv@nongnu.org; Mon, 05 Aug 2019 20:19:58 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1hunBG-0002wk-Vd
- for qemu-riscv@nongnu.org; Mon, 05 Aug 2019 20:18:24 -0400
-Received: from mail-lf1-x144.google.com ([2a00:1450:4864:20::144]:34024)
+ (envelope-from <alistair23@gmail.com>) id 1hunCn-000417-AY
+ for qemu-riscv@nongnu.org; Mon, 05 Aug 2019 20:19:58 -0400
+Received: from mail-lf1-x142.google.com ([2a00:1450:4864:20::142]:40816)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1hunBB-0002uX-9U; Mon, 05 Aug 2019 20:18:17 -0400
-Received: by mail-lf1-x144.google.com with SMTP id b29so52226303lfq.1;
- Mon, 05 Aug 2019 17:18:17 -0700 (PDT)
+ id 1hunCn-000411-3g; Mon, 05 Aug 2019 20:19:57 -0400
+Received: by mail-lf1-x142.google.com with SMTP id b17so59478033lff.7;
+ Mon, 05 Aug 2019 17:19:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=Vc5snXniZkcoJWtJS8yGC0bGxrsO2LrNW352hKJbD+8=;
- b=hcxUkKMYR2GnV7b6D53u7LnFxLqMtEhUD6YWVIE9x+pXZL3fii2CZ2BAhADuNi54pQ
- iZpjedM6SiONx+6AO3DQeOIXdbq9V8D7Hn3B8BYCoa+E7SmPyTvupwbiX55zjjkDpCRC
- qvz4WkYEDO1xPeRQRI8XYeB7t1FCfKLsIFExWlH1iZBaSRJ5Ck2+7eatFszauJp96FNP
- Z4F8pggfEnQ4vyGLAHYI4YE+g3O6qv4DRpN68CO1k5FPf7eBHyekYrF8090VHeW7uIDr
- hWyqhxLaGgEne7MMnJBX+8l3sWdxyb5k9SWO/m96m5I5rHY6LlVf9rl+BCLMdNyfkXtc
- DlJA==
+ :cc; bh=G1ADZ7xZeqdDgNsll+f9xpstmMYBMPgBsF27016AAVY=;
+ b=aKXY2s9Cx/xE7vxetSztNDy+hYE9uFpb/hEot/TRsIxtkT/E8zJfR2z+oaqKZYt7wH
+ OJ6cj77tVtCHaVySBReRcoNr4WzKvbXCnvGFoBHLdL5Pvwc8LKKONkEXSD2P54WTUY8Q
+ 4L8u0lpSrriAwA+vHSz4D46UOYASxjmsjMoYRe3xRwpQA3wCMMrDVcgtqnpHpxgWQit0
+ 92vYA/6resrYUI5bus3SbaWrYq1d/EpKzVgZJnRcbpwY7Sw4exWDQoT+cRSziNCq3bdW
+ jdBhr81MFv8tmf2n4TbGldVgyxzcnf3UrTGdfC5kIq96geOJJQO/YSl6PNFkyUnZJweR
+ 8W0Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=Vc5snXniZkcoJWtJS8yGC0bGxrsO2LrNW352hKJbD+8=;
- b=G6Hk2/xfx7IwtcVDw9IaxkvVbJXkehphhNoEk7AN18Ii3iDxyncIcriLq2TWTMNd3g
- Aqecn5c4vvdhtBieB0gq5f7nsa/No5EGmiP8pIRG209PUPw1IESWPWLoA1YD9UYGamIf
- U1eAOXW3KefhRm4Pg5nDAgg8T6QpAQbn3ZqCWtF3728ZhQM58lvvr7jE57azM40OYaDy
- gXmOpUruSOieOngai7bjtvKyzlo+VjryB735vnzQxpf3tli8j7grEms2KNNF7QbVjJip
- 5G/YBTyjT3EnTmrKZaibpIUjcjeeuhq9udDaE/nNPdCq42AOBa3YKpYDvX5R1gRNHm1P
- un8g==
-X-Gm-Message-State: APjAAAVsSbAgjAFasexNMEjUu03u7S7F/2bjE6azKd2Qx/4EEsJ3JvzZ
- ycbxfcj+TxrHPb0+OopV6LROL88SKRortN3OQuanrFRO
-X-Google-Smtp-Source: APXvYqzqtjPY3C0Mj99YMdIjTkZuJktLAVgH/8c37fX3GyukU6iCWnB7GvVebPmpy24z1GSobzB7WO4x7CF2l936hIE=
-X-Received: by 2002:a19:c6d4:: with SMTP id w203mr227736lff.135.1565050696110; 
- Mon, 05 Aug 2019 17:18:16 -0700 (PDT)
+ bh=G1ADZ7xZeqdDgNsll+f9xpstmMYBMPgBsF27016AAVY=;
+ b=kbbAkodLpZ0Qk82lKuwKC8QE18gn7wXWTtW6drbnmNen60t6+9ZGS2duA6SUQQY8Qs
+ CONd8O+prUfi2R5rBpYpiX7NdtljaFiSS5zVW4amKc6rDUcYrMcIiTHJxV8GPgHLsrbi
+ i+rEUrTLHmVUGoe+A926qKzwHs8AVc4OPpsZH5EiPx68Fhs1uB2G3XPco3K3SD6OdMch
+ xD1c1VkG3dvGQUOO/cu8wP/VeSj9hVnEPqRM79B8QxxNlszT53eNGWgaYckYX35dtHNi
+ ruEV0Xw6FKhBzVhGSuwfKUBi0oDTXBRxq9ScLbkt4CxBUZ4PN5Ez2/p4zCDF2F7FvjM3
+ pP6w==
+X-Gm-Message-State: APjAAAW47rOUg3J7GGRL3MTMOUzz4ezVr+fml/vXnjebqSdWHvyGFWWV
+ 0jtMlb9qth5a/VWSQS1XpcQi9uYkyNKfxsOoUS+zFMZt
+X-Google-Smtp-Source: APXvYqz1ovigNOHOuoFZzp1uLMVz0x1gvQM+0fOeDcbBZezEkzjBw3ymfHFsiRjBo8uYCl3RJQS4uR2YWesUyQc7NpE=
+X-Received: by 2002:a19:7006:: with SMTP id h6mr241577lfc.5.1565050795819;
+ Mon, 05 Aug 2019 17:19:55 -0700 (PDT)
 MIME-Version: 1.0
 References: <1565020823-24223-1-git-send-email-bmeng.cn@gmail.com>
- <1565020823-24223-4-git-send-email-bmeng.cn@gmail.com>
-In-Reply-To: <1565020823-24223-4-git-send-email-bmeng.cn@gmail.com>
+ <1565020823-24223-8-git-send-email-bmeng.cn@gmail.com>
+ <CANnJOVHeoqJ9pxVur3tTzEHf2kPBw4zHaiEzaUxgOvnTQJEVjQ@mail.gmail.com>
+In-Reply-To: <CANnJOVHeoqJ9pxVur3tTzEHf2kPBw4zHaiEzaUxgOvnTQJEVjQ@mail.gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 5 Aug 2019 17:14:36 -0700
-Message-ID: <CAKmqyKO1r=wmT4vzw_8i41BPS3U5-Ei4JV7APqOCD7en1z4qig@mail.gmail.com>
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
+Date: Mon, 5 Aug 2019 17:16:14 -0700
+Message-ID: <CAKmqyKOeY0h6t6i-OvXgoPTWNK7xRRky+SLJaj56Otmrb6c0PQ@mail.gmail.com>
+To: Jonathan Behrens <fintelia@gmail.com>
+Cc: Bin Meng <bmeng.cn@gmail.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
  Palmer Dabbelt <palmer@sifive.com>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>
+ Alistair Francis <Alistair.Francis@wdc.com>
 Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::144
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH 03/28] riscv: Add a
- sifive_cpu.h to include both E and U cpu type defines
+X-Received-From: 2a00:1450:4864:20::142
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH 07/28] riscv: sifive_u: Set
+ the minimum number of cpus to 2
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -70,111 +71,49 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Aug 2019 00:18:26 -0000
+X-List-Received-Date: Tue, 06 Aug 2019 00:19:59 -0000
 
-On Mon, Aug 5, 2019 at 9:07 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+On Mon, Aug 5, 2019 at 9:42 AM Jonathan Behrens <fintelia@gmail.com> wrote:
 >
-> Group SiFive E and U cpu type defines into one header file.
->
-> Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
+> I'm not familiar with QEMU conventions on this, but would it make sense to
+> require having exactly 5 CPUs to match the real board?
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+SMP can sometimes cause failures, so I think it makes some sense to
+keep the default low.
 
 Alistair
 
-> ---
 >
->  include/hw/riscv/sifive_cpu.h | 31 +++++++++++++++++++++++++++++++
->  include/hw/riscv/sifive_e.h   |  7 +------
->  include/hw/riscv/sifive_u.h   |  7 +------
->  3 files changed, 33 insertions(+), 12 deletions(-)
->  create mode 100644 include/hw/riscv/sifive_cpu.h
->
-> diff --git a/include/hw/riscv/sifive_cpu.h b/include/hw/riscv/sifive_cpu.h
-> new file mode 100644
-> index 0000000..1367996
-> --- /dev/null
-> +++ b/include/hw/riscv/sifive_cpu.h
-> @@ -0,0 +1,31 @@
-> +/*
-> + * SiFive CPU types
-> + *
-> + * Copyright (c) 2017 SiFive, Inc.
-> + * Copyright (c) 2019 Bin Meng <bmeng.cn@gmail.com>
-> + *
-> + * This program is free software; you can redistribute it and/or modify it
-> + * under the terms and conditions of the GNU General Public License,
-> + * version 2 or later, as published by the Free Software Foundation.
-> + *
-> + * This program is distributed in the hope it will be useful, but WITHOUT
-> + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-> + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-> + * more details.
-> + *
-> + * You should have received a copy of the GNU General Public License along with
-> + * this program.  If not, see <http://www.gnu.org/licenses/>.
-> + */
-> +
-> +#ifndef HW_SIFIVE_CPU_H
-> +#define HW_SIFIVE_CPU_H
-> +
-> +#if defined(TARGET_RISCV32)
-> +#define SIFIVE_E_CPU TYPE_RISCV_CPU_SIFIVE_E31
-> +#define SIFIVE_U_CPU TYPE_RISCV_CPU_SIFIVE_U34
-> +#elif defined(TARGET_RISCV64)
-> +#define SIFIVE_E_CPU TYPE_RISCV_CPU_SIFIVE_E51
-> +#define SIFIVE_U_CPU TYPE_RISCV_CPU_SIFIVE_U54
-> +#endif
-> +
-> +#endif /* HW_SIFIVE_CPU_H */
-> diff --git a/include/hw/riscv/sifive_e.h b/include/hw/riscv/sifive_e.h
-> index d175b24..e17cdfd 100644
-> --- a/include/hw/riscv/sifive_e.h
-> +++ b/include/hw/riscv/sifive_e.h
-> @@ -19,6 +19,7 @@
->  #ifndef HW_SIFIVE_E_H
->  #define HW_SIFIVE_E_H
->
-> +#include "hw/riscv/sifive_cpu.h"
->  #include "hw/riscv/sifive_gpio.h"
->
->  #define TYPE_RISCV_E_SOC "riscv.sifive.e.soc"
-> @@ -83,10 +84,4 @@ enum {
->  #define SIFIVE_E_PLIC_CONTEXT_BASE 0x200000
->  #define SIFIVE_E_PLIC_CONTEXT_STRIDE 0x1000
->
-> -#if defined(TARGET_RISCV32)
-> -#define SIFIVE_E_CPU TYPE_RISCV_CPU_SIFIVE_E31
-> -#elif defined(TARGET_RISCV64)
-> -#define SIFIVE_E_CPU TYPE_RISCV_CPU_SIFIVE_E51
-> -#endif
-> -
->  #endif
-> diff --git a/include/hw/riscv/sifive_u.h b/include/hw/riscv/sifive_u.h
-> index 892f0ee..4abc621 100644
-> --- a/include/hw/riscv/sifive_u.h
-> +++ b/include/hw/riscv/sifive_u.h
-> @@ -20,6 +20,7 @@
->  #define HW_SIFIVE_U_H
->
->  #include "hw/net/cadence_gem.h"
-> +#include "hw/riscv/sifive_cpu.h"
->
->  #define TYPE_RISCV_U_SOC "riscv.sifive.u.soc"
->  #define RISCV_U_SOC(obj) \
-> @@ -77,10 +78,4 @@ enum {
->  #define SIFIVE_U_PLIC_CONTEXT_BASE 0x200000
->  #define SIFIVE_U_PLIC_CONTEXT_STRIDE 0x1000
->
-> -#if defined(TARGET_RISCV32)
-> -#define SIFIVE_U_CPU TYPE_RISCV_CPU_SIFIVE_U34
-> -#elif defined(TARGET_RISCV64)
-> -#define SIFIVE_U_CPU TYPE_RISCV_CPU_SIFIVE_U54
-> -#endif
-> -
->  #endif
-> --
-> 2.7.4
+> Jonathan
 >
 >
+> On Mon, Aug 5, 2019 at 12:05 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+>
+> > It is not useful if we only have one management CPU.
+> >
+> > Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
+> > ---
+> >
+> >  hw/riscv/sifive_u.c | 2 ++
+> >  1 file changed, 2 insertions(+)
+> >
+> > diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+> > index 08d406f..206eccc 100644
+> > --- a/hw/riscv/sifive_u.c
+> > +++ b/hw/riscv/sifive_u.c
+> > @@ -428,6 +428,8 @@ static void riscv_sifive_u_machine_init(MachineClass
+> > *mc)
+> >       * management CPU.
+> >       */
+> >      mc->max_cpus = 5;
+> > +    /* It is not useful if we only have one management CPU */
+> > +    mc->min_cpus = 2;
+> >  }
+> >
+> >  DEFINE_MACHINE("sifive_u", riscv_sifive_u_machine_init)
+> > --
+> > 2.7.4
+> >
+> >
+> >
 
