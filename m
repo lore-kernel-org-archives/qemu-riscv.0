@@ -1,97 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hvOjO-0000pn-Ls
-	for mharc-qemu-riscv@gnu.org; Wed, 07 Aug 2019 12:24:06 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:41544)
+	id 1hvP0H-0002hD-Ep
+	for mharc-qemu-riscv@gnu.org; Wed, 07 Aug 2019 12:41:33 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:45092)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <richard.henderson@linaro.org>) id 1hvOjM-0000ko-Bv
- for qemu-riscv@nongnu.org; Wed, 07 Aug 2019 12:24:05 -0400
+ (envelope-from <peter.maydell@linaro.org>) id 1hvP0E-0002gG-BK
+ for qemu-riscv@nongnu.org; Wed, 07 Aug 2019 12:41:31 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <richard.henderson@linaro.org>) id 1hvOjL-0005bg-Ac
- for qemu-riscv@nongnu.org; Wed, 07 Aug 2019 12:24:04 -0400
-Received: from mail-pl1-x641.google.com ([2607:f8b0:4864:20::641]:40252)
+ (envelope-from <peter.maydell@linaro.org>) id 1hvP0D-0002nh-Ar
+ for qemu-riscv@nongnu.org; Wed, 07 Aug 2019 12:41:30 -0400
+Received: from mail-ot1-x344.google.com ([2607:f8b0:4864:20::344]:33777)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
- id 1hvOjL-0005aj-31
- for qemu-riscv@nongnu.org; Wed, 07 Aug 2019 12:24:03 -0400
-Received: by mail-pl1-x641.google.com with SMTP id a93so41495706pla.7
- for <qemu-riscv@nongnu.org>; Wed, 07 Aug 2019 09:24:03 -0700 (PDT)
+ (Exim 4.71) (envelope-from <peter.maydell@linaro.org>)
+ id 1hvP0D-0002me-5p
+ for qemu-riscv@nongnu.org; Wed, 07 Aug 2019 12:41:29 -0400
+Received: by mail-ot1-x344.google.com with SMTP id q20so106742144otl.0
+ for <qemu-riscv@nongnu.org>; Wed, 07 Aug 2019 09:41:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=subject:to:cc:references:from:openpgp:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=aYYfm+vIRRwS8+uBU3AWzg+SbxWwC9WZ5LnrTr11tTs=;
- b=y0bRoBWsit3vYVWoy2IIyQk2NlSE9Whdckg2ww8rJWfzkOyqG34pue44La9x5ZZXWM
- qrQe/8ZUXeINHn01gTY+5T2q4i8qP8tGe/+c7uVc1nZntD7ApW8gWrsaOHVqaigbYFXq
- zz7aLv6I2zYmeG5Jv/EtpA7A2X1U5ftBtkok6NKqk/4GZgVsklw8N6uD0f3eETNB86xK
- Slx0/+AvvMaK9/r3UPLrfytNDzazCOsPMzugsLRpTNma7avbpR0/5ZnWL0IPFj1rAD9i
- uSTrIk9RTgXOESR9qRVIFIsh1YOgv9PGBfO3EBPtzIVvFbU87YFURq+XJmUikprQhf70
- axPA==
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=seT5bS1XVLLNb234RRSJDRVSlZw3nYUA98fmigb9IeA=;
+ b=X5aRxbpOI1CEgnp9V7XoYAyrqmlXGLr9qvqvG6zIwSxqKFngaL5UGpDW0YRSXx8/Qg
+ bkC/oimF+AwUpmyIw5BfAnDpIYtGJ7y9DlhBRMwfh6ZSjXZE3AZjrme3hgHcrpDUpEnt
+ pWuYmLkqjKKF8OOq3kX7DvgYhrOZub+qqyUnw4RLTqYy4nWSEzyZbMNXQkt9NXanAmlz
+ kb2Oh7YnKPBEOxtxFCToY9ryvhTdutZC8XaSbyH6rTW0Z6Vr6eE0vDXjPQGTbpp7qtj1
+ 43yuQTIk/+6KZjWvLcUYyF2B3hTek5QVBkIjzgXTetQ81Rb4qaQsnqGlP6aZ8gHDRXxD
+ ZBdQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
- :date:user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=aYYfm+vIRRwS8+uBU3AWzg+SbxWwC9WZ5LnrTr11tTs=;
- b=IIK8Zh1XomMq2435VmpufDpu5INYIc6WxI/1z+HAySMW9HBJePwf4VZoc4eZBid2Zt
- qI4fbI56OUYSfP1KVM+GKMmVc/tIU/JU5gqbnyh7QJ/fmkPTop3NVchyZoau9IWjkN3t
- jRukeFWAciyDMIt6Bvbs4Ej4isZjOdNWN8ZuMiDdrnlL/5EyCJuHKLFOmCNs4iq4zaAq
- aydP3VtbDq2Gx8wnwKD4d18ZE/s2CvuYUbXJKHYWyrQLU4UpG7NDYX3Kwsef8adULauP
- G55TwWz6dq0yFvYN1PEQwLKv5/wJaitnt64BTr2bu6ZqKAfQL+aNGa3pxxSVxFKHw0bh
- 3sRQ==
-X-Gm-Message-State: APjAAAUJZxfymYMEZgv0tAK+epGh9chTlEqagYIChxUeL6QAjizHRYfZ
- wYyCpzd4tOk4o7NkMEnTvWC98g==
-X-Google-Smtp-Source: APXvYqzGXsQ8gfFJWMfJ6Wvw945mfh1EAHw+jqqHuUYS5VC5Evf2TyBzsxToaNuHhVuyolzFfmcvtA==
-X-Received: by 2002:a63:e901:: with SMTP id i1mr8256677pgh.451.1565195042061; 
- Wed, 07 Aug 2019 09:24:02 -0700 (PDT)
-Received: from [192.168.1.11] (97-113-7-119.tukw.qwest.net. [97.113.7.119])
- by smtp.gmail.com with ESMTPSA id j5sm107874000pfi.104.2019.08.07.09.23.59
- (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
- Wed, 07 Aug 2019 09:24:01 -0700 (PDT)
-To: tony.nguyen@bt.com, qemu-devel@nongnu.org
-Cc: fam@euphon.net, peter.maydell@linaro.org, walling@linux.ibm.com,
- cohuck@redhat.com, sagark@eecs.berkeley.edu, david@redhat.com,
- jasowang@redhat.com, palmer@sifive.com, mark.cave-ayland@ilande.co.uk,
- i.mitsyanko@gmail.com, keith.busch@intel.com, jcmvbkbc@gmail.com,
- frederic.konrad@adacore.com, dmitry.fleytman@gmail.com, kraxel@redhat.com,
- edgar.iglesias@gmail.com, gxt@mprc.pku.edu.cn, pburton@wavecomp.com,
- xiaoguangrong.eric@gmail.com, peter.chubb@nicta.com.au, philmd@redhat.com,
- robh@kernel.org, hare@suse.com, sstabellini@kernel.org, berto@igalia.com,
- chouteau@adacore.com, qemu-block@nongnu.org, arikalo@wavecomp.com,
- jslaby@suse.cz, deller@gmx.de, mst@redhat.com, magnus.damm@gmail.com,
- jcd@tribudubois.net, pasic@linux.ibm.com, borntraeger@de.ibm.com,
- mreitz@redhat.com, hpoussin@reactos.org, joel@jms.id.au,
- anthony.perard@citrix.com, xen-devel@lists.xenproject.org,
- david@gibson.dropbear.id.au, lersek@redhat.com, green@moxielogic.com,
- atar4qemu@gmail.com, antonynpavlov@gmail.com, marex@denx.de,
- jiri@resnulli.us, ehabkost@redhat.com, minyard@acm.org,
- qemu-s390x@nongnu.org, sw@weilnetz.de, alistair@alistair23.me,
- yuval.shaia@oracle.com, b.galvani@gmail.com, eric.auger@redhat.com,
- alex.williamson@redhat.com, qemu-arm@nongnu.org, jan.kiszka@web.de,
- clg@kaod.org, stefanha@redhat.com, marcandre.lureau@redhat.com,
- shorne@gmail.com, jsnow@redhat.com, rth@twiddle.net, kwolf@redhat.com,
- qemu-riscv@nongnu.org, proljc@gmail.com, pbonzini@redhat.com,
- andrew@aj.id.au, kbastian@mail.uni-paderborn.de, crwulff@gmail.com,
- laurent@vivier.eu, Andrew.Baumann@microsoft.com, sundeep.lkml@gmail.com,
- andrew.smirnov@gmail.com, michael@walle.cc, paul.durrant@citrix.com,
- qemu-ppc@nongnu.org, huth@tuxfamily.org, amarkovic@wavecomp.com,
- imammedo@redhat.com, aurelien@aurel32.net, stefanb@linux.ibm.com
-References: <45ec4924e0b34a3d9124e2db06af75b4@tpw09926dag18e.domain1.systemhost.net>
- <1565166747494.26346@bt.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-Openpgp: preference=signencrypt
-Message-ID: <5afaa158-e9a4-96c5-841a-e4ffc041b35d@linaro.org>
-Date: Wed, 7 Aug 2019 09:23:58 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.8.0
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=seT5bS1XVLLNb234RRSJDRVSlZw3nYUA98fmigb9IeA=;
+ b=qNn6AT/w29sUjaXOCE9V+z53tX0Ukkn0XuRJqQ4oCbS2BTUZzF75aOGZJgqeKYkSPp
+ piZxBFDftRkWMd0li847EF7ywfop6TDq6j1gld6tl5QrCAU3+YpExjlX9e5frRyT/prs
+ RWjcI5FrhXUGThi1smRISA9+IbG9CCaTElBHOnMqrlTOJ1xf9e4aX9+L9/yQqzHkRw37
+ 3avpb/6QKBYOQTEvLiEZWECWs93gbjo1ekWM8V0ykIOSUtwYoPfmkxzyeqLKCMLzmgZr
+ NxOwWPVA7amfJKcp3bpUt9S6j3H883AUMk2rwMiXnZBPCfvSy/3m3wQ8zpC3F2d49xo/
+ UIhQ==
+X-Gm-Message-State: APjAAAXBSeza5xm39RGqwk6G4ivTj8Qvgvh+ZNJB0E23NliEutmq9nyJ
+ 9ye1EkYHcgf4g7GMYS5gVRw5bU/C2KMLz91riOvpuA==
+X-Google-Smtp-Source: APXvYqz4LKkOHxUDFoAR1p3J08VwHbg6lRm5W27B5Qoy4cqWxWr3fMx4cFyddNkEEJ6sok/ke2h1vQEE5yXzWTp61w0=
+X-Received: by 2002:a9d:5f1a:: with SMTP id f26mr9084343oti.91.1565196088343; 
+ Wed, 07 Aug 2019 09:41:28 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <1565166747494.26346@bt.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+References: <20190807145939.1281-1-palmer@sifive.com>
+In-Reply-To: <20190807145939.1281-1-palmer@sifive.com>
+From: Peter Maydell <peter.maydell@linaro.org>
+Date: Wed, 7 Aug 2019 17:41:17 +0100
+Message-ID: <CAFEAcA9YeuvQPnvG1+Cdb+-JbsbKaRpa0Frv5zz+Vb3q0prAeQ@mail.gmail.com>
+To: Palmer Dabbelt <palmer@sifive.com>
+Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ Atish Patra <Atish.Patra@wdc.com>, QEMU Developers <qemu-devel@nongnu.org>, 
+ Paul Walmsley <paul.walmsley@sifive.com>
+Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::641
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v6 18/26] exec: Delete
- device_endian
+X-Received-From: 2607:f8b0:4864:20::344
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH for 4.1] RISC-V: Ignore the S
+ and U extensions when formatting ISA strings
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -103,19 +68,55 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Aug 2019 16:24:05 -0000
+X-List-Received-Date: Wed, 07 Aug 2019 16:41:31 -0000
 
-On 8/7/19 1:32 AM, tony.nguyen@bt.com wrote:
-> device_endian has been made redundant by MemOp.
-> 
-> Signed-off-by: Tony Nguyen <tony.nguyen@bt.com>
+On Wed, 7 Aug 2019 at 16:02, Palmer Dabbelt <palmer@sifive.com> wrote:
+>
+> The ISA strings we're providing from QEMU aren't actually legal RISC-V
+> ISA strings, as both the S and U extensions cannot exist as
+> single-letter extensions and must instead be multi-letter strings.
+> We're still using the ISA strings inside QEMU to track the availiable
+> extensions, so this patch just strips out the S and U extensions when
+> formatting ISA strings.
+>
+> This boots Linux on top of 4.1-rc3, which no longer has the U extension
+> in /proc/cpuinfo.
+>
+> Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
 > ---
->  include/exec/cpu-common.h | 8 --------
->  1 file changed, 8 deletions(-)
+> This is another late one, but I'd like to target it for 4.1 as we're
+> providing illegal ISA strings and I don't want to bake that into a bunch
+> of other code.
+> ---
+>  target/riscv/cpu.c | 17 ++++++++++++++++-
+>  1 file changed, 16 insertions(+), 1 deletion(-)
+>
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index f8d07bd20ad7..4df14433d789 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -501,7 +501,22 @@ char *riscv_isa_string(RISCVCPU *cpu)
+>      char *p = isa_str + snprintf(isa_str, maxlen, "rv%d", TARGET_LONG_BITS);
+>      for (i = 0; i < sizeof(riscv_exts); i++) {
+>          if (cpu->env.misa & RV(riscv_exts[i])) {
+> -            *p++ = qemu_tolower(riscv_exts[i]);
+> +            char lower = qemu_tolower(riscv_exts[i]);
+> +            switch (lower) {
+> +            case 's':
+> +            case 'u':
+> +                /*
+> +                 * The 's' and 'u' extensions shouldn't be passed in the device
+> +                 * tree, but we still use them internally to track extension
+> +                 * sets.  Here we just explicitly remove them when formatting
+> +                 * an ISA string.
+> +                 */
+> +                break;
+> +
+> +            default:
+> +                *p++ = qemu_tolower(riscv_exts[i]);
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+ *p++ = lower;  ?
 
-
-r~
-
+thanks
+-- PMM
 
