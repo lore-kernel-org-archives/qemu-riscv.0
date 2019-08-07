@@ -1,28 +1,28 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hvLdc-0006Lf-6M
+	id 1hvLdc-0006NC-Kj
 	for mharc-qemu-riscv@gnu.org; Wed, 07 Aug 2019 09:05:56 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:45478)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:46141)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <tony.nguyen@bt.com>) id 1hvHNv-0002tf-Qi
- for qemu-riscv@nongnu.org; Wed, 07 Aug 2019 04:33:33 -0400
+ (envelope-from <tony.nguyen@bt.com>) id 1hvHQB-0007VT-8M
+ for qemu-riscv@nongnu.org; Wed, 07 Aug 2019 04:35:51 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <tony.nguyen@bt.com>) id 1hvHNq-0002x0-K3
- for qemu-riscv@nongnu.org; Wed, 07 Aug 2019 04:33:27 -0400
-Received: from smtpe1.intersmtp.com ([213.121.35.72]:22696)
+ (envelope-from <tony.nguyen@bt.com>) id 1hvHQ8-0004LA-IL
+ for qemu-riscv@nongnu.org; Wed, 07 Aug 2019 04:35:47 -0400
+Received: from smtpe1.intersmtp.com ([213.121.35.78]:48605)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <tony.nguyen@bt.com>)
- id 1hvHNo-0002tF-T3; Wed, 07 Aug 2019 04:33:22 -0400
-Received: from tpw09926dag18f.domain1.systemhost.net (10.9.212.26) by
- BWP09926077.bt.com (10.36.82.108) with Microsoft SMTP Server (version=TLS1_2, 
- cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P256) id 15.1.1713.5; Wed, 7 Aug
- 2019 09:32:54 +0100
+ id 1hvHQ8-0004KN-7j; Wed, 07 Aug 2019 04:35:44 -0400
 Received: from tpw09926dag18e.domain1.systemhost.net (10.9.212.18) by
- tpw09926dag18f.domain1.systemhost.net (10.9.212.26) with Microsoft SMTP
- Server (TLS) id 15.0.1395.4; Wed, 7 Aug 2019 09:33:15 +0100
+ BWP09926083.bt.com (10.36.82.114) with Microsoft SMTP Server (version=TLS1_2, 
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P256) id 15.1.1713.5; Wed, 7 Aug
+ 2019 09:35:32 +0100
+Received: from tpw09926dag18e.domain1.systemhost.net (10.9.212.18) by
+ tpw09926dag18e.domain1.systemhost.net (10.9.212.18) with Microsoft SMTP
+ Server (TLS) id 15.0.1395.4; Wed, 7 Aug 2019 09:35:41 +0100
 Received: from tpw09926dag18e.domain1.systemhost.net
  ([fe80::a946:6348:ccf4:fa6c]) by tpw09926dag18e.domain1.systemhost.net
  ([fe80::a946:6348:ccf4:fa6c%12]) with mapi id 15.00.1395.000; Wed, 7 Aug 2019
- 09:33:15 +0100
+ 09:35:41 +0100
 From: <tony.nguyen@bt.com>
 To: <qemu-devel@nongnu.org>
 CC: <frederic.konrad@adacore.com>, <berto@igalia.com>,
@@ -54,11 +54,11 @@ CC: <frederic.konrad@adacore.com>, <berto@igalia.com>,
  <paul.durrant@citrix.com>, <david@gibson.dropbear.id.au>,
  <xiaoguangrong.eric@gmail.com>, <huth@tuxfamily.org>, <jcd@tribudubois.net>,
  <pbonzini@redhat.com>, <stefanb@linux.ibm.com>
-Thread-Topic: [Qemu-devel] [PATCH v6 20/26] memory: Access MemoryRegion with
- endianness
-Thread-Index: AQHVTPrBMLYYco2250O7I7O3jldIgg==
-Date: Wed, 7 Aug 2019 08:33:15 +0000
-Message-ID: <1565166794966.57397@bt.com>
+Thread-Topic: [Qemu-devel] [PATCH v6 26/26] target/sparc: sun4u Invert Endian
+ TTE bit
+Thread-Index: AQHVTPsYByi6svInOEeTzdAlz34bIw==
+Date: Wed, 7 Aug 2019 08:35:41 +0000
+Message-ID: <1565166941186.41868@bt.com>
 References: <45ec4924e0b34a3d9124e2db06af75b4@tpw09926dag18e.domain1.systemhost.net>
 In-Reply-To: <45ec4924e0b34a3d9124e2db06af75b4@tpw09926dag18e.domain1.systemhost.net>
 Accept-Language: en-AU, en-GB, en-US
@@ -67,13 +67,13 @@ X-MS-Has-Attach:
 X-MS-TNEF-Correlator: 
 x-ms-exchange-transport-fromentityheader: Hosted
 x-originating-ip: [10.187.101.44]
-Content-Type: multipart/alternative; boundary="_000_156516679496657397btcom_"
+Content-Type: multipart/alternative; boundary="_000_156516694118641868btcom_"
 MIME-Version: 1.0
 X-detected-operating-system: by eggs.gnu.org: Windows 7 or 8 [fuzzy]
-X-Received-From: 213.121.35.72
+X-Received-From: 213.121.35.78
 X-Mailman-Approved-At: Wed, 07 Aug 2019 09:05:48 -0400
-Subject: [Qemu-riscv] [Qemu-devel] [PATCH v6 20/26] memory: Access
- MemoryRegion with endianness
+Subject: [Qemu-riscv] [Qemu-devel] [PATCH v6 26/26] target/sparc: sun4u
+ Invert Endian TTE bit
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -85,202 +85,90 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Aug 2019 08:33:33 -0000
+X-List-Received-Date: Wed, 07 Aug 2019 08:35:51 -0000
 
---_000_156516679496657397btcom_
+--_000_156516694118641868btcom_
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
-Preparation for collapsing the two byte swaps adjust_endianness and
-handle_bswap into the former.
+This bit configures endianness of PCI MMIO devices. It is used by
+Solaris and OpenBSD sunhme drivers.
 
-Call memory_region_dispatch_{read|write} with endianness encoded into
-the "MemOp op" operand.
+Tested working on OpenBSD.
 
-This patch does not change any behaviour as
-memory_region_dispatch_{read|write} is yet to handle the endianness.
-
-Once it does handle endianness, callers with byte swaps need to
-collapse them into adjust_endianness.
+Unfortunately Solaris 10 had a unrelated keyboard issue blocking
+testing... another inch towards Solaris 10 on SPARC64 =3D)
 
 Signed-off-by: Tony Nguyen <tony.nguyen@bt.com>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- hw/s390x/s390-pci-inst.c |  3 ++-
- hw/virtio/virtio-pci.c   |  2 ++
- include/exec/memop.h     |  4 ++++
- memory_ldst.inc.c        | 20 +++++++++++++-------
- target/mips/op_helper.c  |  4 ++--
- 5 files changed, 23 insertions(+), 10 deletions(-)
+ target/sparc/cpu.h        | 2 ++
+ target/sparc/mmu_helper.c | 8 +++++++-
+ 2 files changed, 9 insertions(+), 1 deletion(-)
 
-diff --git a/hw/s390x/s390-pci-inst.c b/hw/s390x/s390-pci-inst.c
-index 0e92a37..d322b86 100644
---- a/hw/s390x/s390-pci-inst.c
-+++ b/hw/s390x/s390-pci-inst.c
-@@ -782,7 +782,8 @@ int pcistb_service_call(S390CPU *cpu, uint8_t r1, uint8=
-_t r3, uint64_t gaddr,
-     for (i =3D 0; i < len / 8; i++) {
-         result =3D memory_region_dispatch_write(mr, offset + i * 8,
-                                               ldq_p(buffer + i * 8),
--                                              MO_64, MEMTXATTRS_UNSPECIFIE=
-D);
-+                                              MO_64 | MO_TE,
-+                                              MEMTXATTRS_UNSPECIFIED);
-         if (result !=3D MEMTX_OK) {
-             s390_program_interrupt(env, PGM_OPERAND, 6, ra);
-             return 0;
-diff --git a/hw/virtio/virtio-pci.c b/hw/virtio/virtio-pci.c
-index b929e44..70eb161 100644
---- a/hw/virtio/virtio-pci.c
-+++ b/hw/virtio/virtio-pci.c
-@@ -551,6 +551,7 @@ void virtio_address_space_write(VirtIOPCIProxy *proxy, =
-hwaddr addr,
-         /* As length is under guest control, handle illegal values. */
-         return;
-     }
-+    /* FIXME: memory_region_dispatch_write ignores MO_BSWAP.  */
-     memory_region_dispatch_write(mr, addr, val, size_memop(len),
-                                  MEMTXATTRS_UNSPECIFIED);
- }
-@@ -575,6 +576,7 @@ virtio_address_space_read(VirtIOPCIProxy *proxy, hwaddr=
- addr,
-     /* Make sure caller aligned buf properly */
-     assert(!(((uintptr_t)buf) & (len - 1)));
+diff --git a/target/sparc/cpu.h b/target/sparc/cpu.h
+index 1406f0b..c6bafa8 100644
+--- a/target/sparc/cpu.h
++++ b/target/sparc/cpu.h
+@@ -275,6 +275,7 @@ enum {
 
-+    /* FIXME: memory_region_dispatch_read ignores MO_BSWAP.  */
-     memory_region_dispatch_read(mr, addr, &val, size_memop(len),
-                                 MEMTXATTRS_UNSPECIFIED);
-     switch (len) {
-diff --git a/include/exec/memop.h b/include/exec/memop.h
-index 4a4212d..47a5500 100644
---- a/include/exec/memop.h
-+++ b/include/exec/memop.h
-@@ -122,7 +122,11 @@ static inline MemOp size_memop(unsigned size)
-     /* Power of 2 up to 8.  */
-     assert((size & (size - 1)) =3D=3D 0 && size >=3D 1 && size <=3D 8);
- #endif
-+#ifdef NEED_CPU_H
-+    return ctz32(size) | MO_TE;
-+#else
-     return ctz32(size);
-+#endif
- }
+ #define TTE_VALID_BIT       (1ULL << 63)
+ #define TTE_NFO_BIT         (1ULL << 60)
++#define TTE_IE_BIT          (1ULL << 59)
+ #define TTE_USED_BIT        (1ULL << 41)
+ #define TTE_LOCKED_BIT      (1ULL <<  6)
+ #define TTE_SIDEEFFECT_BIT  (1ULL <<  3)
+@@ -291,6 +292,7 @@ enum {
 
- #endif
-diff --git a/memory_ldst.inc.c b/memory_ldst.inc.c
-index d7e28d0..ff28b30 100644
---- a/memory_ldst.inc.c
-+++ b/memory_ldst.inc.c
-@@ -37,7 +37,8 @@ static inline uint32_t glue(address_space_ldl_internal, S=
-UFFIX)(ARG1_DECL,
-         release_lock |=3D prepare_mmio_access(mr);
+ #define TTE_IS_VALID(tte)   ((tte) & TTE_VALID_BIT)
+ #define TTE_IS_NFO(tte)     ((tte) & TTE_NFO_BIT)
++#define TTE_IS_IE(tte)      ((tte) & TTE_IE_BIT)
+ #define TTE_IS_USED(tte)    ((tte) & TTE_USED_BIT)
+ #define TTE_IS_LOCKED(tte)  ((tte) & TTE_LOCKED_BIT)
+ #define TTE_IS_SIDEEFFECT(tte) ((tte) & TTE_SIDEEFFECT_BIT)
+diff --git a/target/sparc/mmu_helper.c b/target/sparc/mmu_helper.c
+index 826e14b..77dc86a 100644
+--- a/target/sparc/mmu_helper.c
++++ b/target/sparc/mmu_helper.c
+@@ -537,6 +537,10 @@ static int get_physical_address_data(CPUSPARCState *en=
+v, hwaddr *physical,
+         if (ultrasparc_tag_match(&env->dtlb[i], address, context, physical=
+)) {
+             int do_fault =3D 0;
 
-         /* I/O case */
--        r =3D memory_region_dispatch_read(mr, addr1, &val, MO_32, attrs);
-+        /* FIXME: memory_region_dispatch_read ignores MO_BSWAP.  */
-+        r =3D memory_region_dispatch_read(mr, addr1, &val, MO_32 | endian,=
- attrs);
- #if defined(TARGET_WORDS_BIGENDIAN)
-         if (endian =3D=3D MO_LE) {
-             val =3D bswap32(val);
-@@ -112,7 +113,8 @@ static inline uint64_t glue(address_space_ldq_internal,=
- SUFFIX)(ARG1_DECL,
-         release_lock |=3D prepare_mmio_access(mr);
-
-         /* I/O case */
--        r =3D memory_region_dispatch_read(mr, addr1, &val, MO_64, attrs);
-+        /* FIXME: memory_region_dispatch_read ignores MO_BSWAP.  */
-+        r =3D memory_region_dispatch_read(mr, addr1, &val, MO_64 | endian,=
- attrs);
- #if defined(TARGET_WORDS_BIGENDIAN)
-         if (endian =3D=3D MO_LE) {
-             val =3D bswap64(val);
-@@ -221,7 +223,8 @@ static inline uint32_t glue(address_space_lduw_internal=
-, SUFFIX)(ARG1_DECL,
-         release_lock |=3D prepare_mmio_access(mr);
-
-         /* I/O case */
--        r =3D memory_region_dispatch_read(mr, addr1, &val, MO_16, attrs);
-+        /* FIXME: memory_region_dispatch_read ignores MO_BSWAP.  */
-+        r =3D memory_region_dispatch_read(mr, addr1, &val, MO_16 | endian,=
- attrs);
- #if defined(TARGET_WORDS_BIGENDIAN)
-         if (endian =3D=3D MO_LE) {
-             val =3D bswap16(val);
-@@ -297,7 +300,7 @@ void glue(address_space_stl_notdirty, SUFFIX)(ARG1_DECL=
-,
-     if (l < 4 || !memory_access_is_direct(mr, true)) {
-         release_lock |=3D prepare_mmio_access(mr);
-
--        r =3D memory_region_dispatch_write(mr, addr1, val, MO_32, attrs);
-+        r =3D memory_region_dispatch_write(mr, addr1, val, MO_32 | MO_TE, =
-attrs);
-     } else {
-         ptr =3D qemu_map_ram_ptr(mr->ram_block, addr1);
-         stl_p(ptr, val);
-@@ -343,7 +346,8 @@ static inline void glue(address_space_stl_internal, SUF=
-FIX)(ARG1_DECL,
-             val =3D bswap32(val);
-         }
- #endif
--        r =3D memory_region_dispatch_write(mr, addr1, val, MO_32, attrs);
-+        /* FIXME: memory_region_dispatch_write ignores MO_BSWAP.  */
-+        r =3D memory_region_dispatch_write(mr, addr1, val, MO_32 | endian,=
- attrs);
-     } else {
-         /* RAM case */
-         ptr =3D qemu_map_ram_ptr(mr->ram_block, addr1);
-@@ -448,7 +452,8 @@ static inline void glue(address_space_stw_internal, SUF=
-FIX)(ARG1_DECL,
-             val =3D bswap16(val);
-         }
- #endif
--        r =3D memory_region_dispatch_write(mr, addr1, val, MO_16, attrs);
-+        /* FIXME: memory_region_dispatch_write ignores MO_BSWAP.  */
-+        r =3D memory_region_dispatch_write(mr, addr1, val, MO_16 | endian,=
- attrs);
-     } else {
-         /* RAM case */
-         ptr =3D qemu_map_ram_ptr(mr->ram_block, addr1);
-@@ -521,7 +526,8 @@ static void glue(address_space_stq_internal, SUFFIX)(AR=
-G1_DECL,
-             val =3D bswap64(val);
-         }
- #endif
--        r =3D memory_region_dispatch_write(mr, addr1, val, MO_64, attrs);
-+        /* FIXME: memory_region_dispatch_write ignores MO_BSWAP.  */
-+        r =3D memory_region_dispatch_write(mr, addr1, val, MO_64 | endian,=
- attrs);
-     } else {
-         /* RAM case */
-         ptr =3D qemu_map_ram_ptr(mr->ram_block, addr1);
-diff --git a/target/mips/op_helper.c b/target/mips/op_helper.c
-index e79f99d..1b475f3 100644
---- a/target/mips/op_helper.c
-+++ b/target/mips/op_helper.c
-@@ -4741,11 +4741,11 @@ void helper_cache(CPUMIPSState *env, target_ulong a=
-ddr, uint32_t op)
-     if (op =3D=3D 9) {
-         /* Index Store Tag */
-         memory_region_dispatch_write(env->itc_tag, index, env->CP0_TagLo,
--                                     MO_64, MEMTXATTRS_UNSPECIFIED);
-+                                     MO_64 | MO_TE, MEMTXATTRS_UNSPECIFIED=
-);
-     } else if (op =3D=3D 5) {
-         /* Index Load Tag */
-         memory_region_dispatch_read(env->itc_tag, index, &env->CP0_TagLo,
--                                    MO_64, MEMTXATTRS_UNSPECIFIED);
-+                                    MO_64 | MO_TE, MEMTXATTRS_UNSPECIFIED)=
-;
-     }
- #endif
- }
++            if (TTE_IS_IE(env->dtlb[i].tte)) {
++                attrs->byte_swap =3D true;
++            }
++
+             /* access ok? */
+             /* multiple bits in SFSR.FT may be set on TT_DFAULT */
+             if (TTE_IS_PRIV(env->dtlb[i].tte) && is_user) {
+@@ -792,7 +796,7 @@ void dump_mmu(CPUSPARCState *env)
+             }
+             if (TTE_IS_VALID(env->dtlb[i].tte)) {
+                 qemu_printf("[%02u] VA: %" PRIx64 ", PA: %llx"
+-                            ", %s, %s, %s, %s, ctx %" PRId64 " %s\n",
++                            ", %s, %s, %s, %s, ie %s, ctx %" PRId64 " %s\n=
+",
+                             i,
+                             env->dtlb[i].tag & (uint64_t)~0x1fffULL,
+                             TTE_PA(env->dtlb[i].tte),
+@@ -801,6 +805,8 @@ void dump_mmu(CPUSPARCState *env)
+                             TTE_IS_W_OK(env->dtlb[i].tte) ? "RW" : "RO",
+                             TTE_IS_LOCKED(env->dtlb[i].tte) ?
+                             "locked" : "unlocked",
++                            TTE_IS_IE(env->dtlb[i].tte) ?
++                            "yes" : "no",
+                             env->dtlb[i].tag & (uint64_t)0x1fffULL,
+                             TTE_IS_GLOBAL(env->dtlb[i].tte) ?
+                             "global" : "local");
 --
 1.8.3.1
 
 ?
 
 
---_000_156516679496657397btcom_
+--_000_156516694118641868btcom_
 Content-Type: text/html; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
@@ -296,256 +184,126 @@ der-left-width: 2px; border-left-style: solid; border-left-color: rgb(128, =
 <body dir=3D"ltr" style=3D"font-size:12pt;color:#000000;background-color:#F=
 FFFFF;font-family:Calibri,Arial,Helvetica,sans-serif;">
 <p></p>
-<div><span style=3D"font-size: 12pt;">Preparation for collapsing the two by=
-te swaps adjust_endianness and</span><br>
+<div><span style=3D"font-size: 12pt;">This bit configures endianness of PCI=
+ MMIO devices. It is used by</span><br>
 </div>
-<div>handle_bswap into the former.</div>
+<div>Solaris and OpenBSD sunhme drivers.</div>
 <div><br>
 </div>
-<div>Call memory_region_dispatch_{read|write} with endianness encoded into<=
-/div>
-<div>the &quot;MemOp op&quot; operand.</div>
+<div>Tested working on OpenBSD.</div>
 <div><br>
 </div>
-<div>This patch does not change any behaviour as</div>
-<div>memory_region_dispatch_{read|write} is yet to handle the endianness.</=
-div>
-<div><br>
-</div>
-<div>Once it does handle endianness, callers with byte swaps need to</div>
-<div>collapse them into adjust_endianness.</div>
+<div>Unfortunately Solaris 10 had a unrelated keyboard issue blocking</div>
+<div>testing... another inch towards Solaris 10 on SPARC64 =3D)</div>
 <div><br>
 </div>
 <div>Signed-off-by: Tony Nguyen &lt;tony.nguyen@bt.com&gt;</div>
+<div>Reviewed-by: Richard Henderson &lt;richard.henderson@linaro.org&gt;</d=
+iv>
 <div>---</div>
-<div>&nbsp;hw/s390x/s390-pci-inst.c | &nbsp;3 &#43;&#43;-</div>
-<div>&nbsp;hw/virtio/virtio-pci.c &nbsp; | &nbsp;2 &#43;&#43;</div>
-<div>&nbsp;include/exec/memop.h &nbsp; &nbsp; | &nbsp;4 &#43;&#43;&#43;&#43=
-;</div>
-<div>&nbsp;memory_ldst.inc.c &nbsp; &nbsp; &nbsp; &nbsp;| 20 &#43;&#43;&#43=
-;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;-------</div>
-<div>&nbsp;target/mips/op_helper.c &nbsp;| &nbsp;4 &#43;&#43;--</div>
-<div>&nbsp;5 files changed, 23 insertions(&#43;), 10 deletions(-)</div>
+<div>&nbsp;target/sparc/cpu.h &nbsp; &nbsp; &nbsp; &nbsp;| 2 &#43;&#43;</di=
+v>
+<div>&nbsp;target/sparc/mmu_helper.c | 8 &#43;&#43;&#43;&#43;&#43;&#43;&#43=
+;-</div>
+<div>&nbsp;2 files changed, 9 insertions(&#43;), 1 deletion(-)</div>
 <div><br>
 </div>
-<div>diff --git a/hw/s390x/s390-pci-inst.c b/hw/s390x/s390-pci-inst.c</div>
-<div>index 0e92a37..d322b86 100644</div>
-<div>--- a/hw/s390x/s390-pci-inst.c</div>
-<div>&#43;&#43;&#43; b/hw/s390x/s390-pci-inst.c</div>
-<div>@@ -782,7 &#43;782,8 @@ int pcistb_service_call(S390CPU *cpu, uint8_t =
-r1, uint8_t r3, uint64_t gaddr,</div>
-<div>&nbsp; &nbsp; &nbsp;for (i =3D 0; i &lt; len / 8; i&#43;&#43;) {</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;result =3D memory_region_dispatch_wr=
-ite(mr, offset &#43; i * 8,</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; &nbsp;ldq_p(buffer &#43; i * 8),</div>
-<div>- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nb=
-sp; &nbsp; &nbsp;MO_64, MEMTXATTRS_UNSPECIFIED);</div>
-<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
-nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;=
- &nbsp; &nbsp; &nbsp;MO_64 | MO_TE,</div>
-<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
-nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;=
- &nbsp; &nbsp; &nbsp;MEMTXATTRS_UNSPECIFIED);</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if (result !=3D MEMTX_OK) {</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;s390_program_interrupt=
-(env, PGM_OPERAND, 6, ra);</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return 0;</div>
-<div>diff --git a/hw/virtio/virtio-pci.c b/hw/virtio/virtio-pci.c</div>
-<div>index b929e44..70eb161 100644</div>
-<div>--- a/hw/virtio/virtio-pci.c</div>
-<div>&#43;&#43;&#43; b/hw/virtio/virtio-pci.c</div>
-<div>@@ -551,6 &#43;551,7 @@ void virtio_address_space_write(VirtIOPCIProxy=
- *proxy, hwaddr addr,</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* As length is under guest control,=
- handle illegal values. */</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return;</div>
-<div>&nbsp; &nbsp; &nbsp;}</div>
-<div>&#43; &nbsp; &nbsp;/* FIXME: memory_region_dispatch_write ignores MO_B=
-SWAP. &nbsp;*/</div>
-<div>&nbsp; &nbsp; &nbsp;memory_region_dispatch_write(mr, addr, val, size_m=
-emop(len),</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; MEMTXATTRS_UNSPECIFIED);</=
-div>
-<div>&nbsp;}</div>
-<div>@@ -575,6 &#43;576,7 @@ virtio_address_space_read(VirtIOPCIProxy *prox=
-y, hwaddr addr,</div>
-<div>&nbsp; &nbsp; &nbsp;/* Make sure caller aligned buf properly */</div>
-<div>&nbsp; &nbsp; &nbsp;assert(!(((uintptr_t)buf) &amp; (len - 1)));</div>
+<div>diff --git a/target/sparc/cpu.h b/target/sparc/cpu.h</div>
+<div>index 1406f0b..c6bafa8 100644</div>
+<div>--- a/target/sparc/cpu.h</div>
+<div>&#43;&#43;&#43; b/target/sparc/cpu.h</div>
+<div>@@ -275,6 &#43;275,7 @@ enum {</div>
 <div>&nbsp;</div>
-<div>&#43; &nbsp; &nbsp;/* FIXME: memory_region_dispatch_read ignores MO_BS=
-WAP. &nbsp;*/</div>
-<div>&nbsp; &nbsp; &nbsp;memory_region_dispatch_read(mr, addr, &amp;val, si=
-ze_memop(len),</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;MEMTXATTRS_UNSPECIFIED);</d=
+<div>&nbsp;#define TTE_VALID_BIT &nbsp; &nbsp; &nbsp; (1ULL &lt;&lt; 63)</d=
 iv>
-<div>&nbsp; &nbsp; &nbsp;switch (len) {</div>
-<div>diff --git a/include/exec/memop.h b/include/exec/memop.h</div>
-<div>index 4a4212d..47a5500 100644</div>
-<div>--- a/include/exec/memop.h</div>
-<div>&#43;&#43;&#43; b/include/exec/memop.h</div>
-<div>@@ -122,7 &#43;122,11 @@ static inline MemOp size_memop(unsigned size)=
+<div>&nbsp;#define TTE_NFO_BIT &nbsp; &nbsp; &nbsp; &nbsp; (1ULL &lt;&lt; 6=
+0)</div>
+<div>&#43;#define TTE_IE_BIT &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;(1ULL &lt;&l=
+t; 59)</div>
+<div>&nbsp;#define TTE_USED_BIT &nbsp; &nbsp; &nbsp; &nbsp;(1ULL &lt;&lt; 4=
+1)</div>
+<div>&nbsp;#define TTE_LOCKED_BIT &nbsp; &nbsp; &nbsp;(1ULL &lt;&lt; &nbsp;=
+6)</div>
+<div>&nbsp;#define TTE_SIDEEFFECT_BIT &nbsp;(1ULL &lt;&lt; &nbsp;3)</div>
+<div>@@ -291,6 &#43;292,7 @@ enum {</div>
+<div>&nbsp;</div>
+<div>&nbsp;#define TTE_IS_VALID(tte) &nbsp; ((tte) &amp; TTE_VALID_BIT)</di=
+v>
+<div>&nbsp;#define TTE_IS_NFO(tte) &nbsp; &nbsp; ((tte) &amp; TTE_NFO_BIT)<=
+/div>
+<div>&#43;#define TTE_IS_IE(tte) &nbsp; &nbsp; &nbsp;((tte) &amp; TTE_IE_BI=
+T)</div>
+<div>&nbsp;#define TTE_IS_USED(tte) &nbsp; &nbsp;((tte) &amp; TTE_USED_BIT)=
 </div>
-<div>&nbsp; &nbsp; &nbsp;/* Power of 2 up to 8. &nbsp;*/</div>
-<div>&nbsp; &nbsp; &nbsp;assert((size &amp; (size - 1)) =3D=3D 0 &amp;&amp;=
- size &gt;=3D 1 &amp;&amp; size &lt;=3D 8);</div>
-<div>&nbsp;#endif</div>
-<div>&#43;#ifdef NEED_CPU_H</div>
-<div>&#43; &nbsp; &nbsp;return ctz32(size) | MO_TE;</div>
-<div>&#43;#else</div>
-<div>&nbsp; &nbsp; &nbsp;return ctz32(size);</div>
-<div>&#43;#endif</div>
-<div>&nbsp;}</div>
+<div>&nbsp;#define TTE_IS_LOCKED(tte) &nbsp;((tte) &amp; TTE_LOCKED_BIT)</d=
+iv>
+<div>&nbsp;#define TTE_IS_SIDEEFFECT(tte) ((tte) &amp; TTE_SIDEEFFECT_BIT)<=
+/div>
+<div>diff --git a/target/sparc/mmu_helper.c b/target/sparc/mmu_helper.c</di=
+v>
+<div>index 826e14b..77dc86a 100644</div>
+<div>--- a/target/sparc/mmu_helper.c</div>
+<div>&#43;&#43;&#43; b/target/sparc/mmu_helper.c</div>
+<div>@@ -537,6 &#43;537,10 @@ static int get_physical_address_data(CPUSPARC=
+State *env, hwaddr *physical,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if (ultrasparc_tag_match(&amp;env-&g=
+t;dtlb[i], address, context, physical)) {</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;int do_fault =3D 0;</d=
+iv>
 <div>&nbsp;</div>
-<div>&nbsp;#endif</div>
-<div>diff --git a/memory_ldst.inc.c b/memory_ldst.inc.c</div>
-<div>index d7e28d0..ff28b30 100644</div>
-<div>--- a/memory_ldst.inc.c</div>
-<div>&#43;&#43;&#43; b/memory_ldst.inc.c</div>
-<div>@@ -37,7 &#43;37,8 @@ static inline uint32_t glue(address_space_ldl_in=
-ternal, SUFFIX)(ARG1_DECL,</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;release_lock |=3D prepare_mmio_acces=
-s(mr);</div>
-<div>&nbsp;</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* I/O case */</div>
-<div>- &nbsp; &nbsp; &nbsp; &nbsp;r =3D memory_region_dispatch_read(mr, add=
-r1, &amp;val, MO_32, attrs);</div>
-<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp;/* FIXME: memory_region_dispatch_read=
- ignores MO_BSWAP. &nbsp;*/</div>
-<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp;r =3D memory_region_dispatch_read(mr,=
- addr1, &amp;val, MO_32 | endian, attrs);</div>
-<div>&nbsp;#if defined(TARGET_WORDS_BIGENDIAN)</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if (endian =3D=3D MO_LE) {</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;val =3D bswap32(val);<=
-/div>
-<div>@@ -112,7 &#43;113,8 @@ static inline uint64_t glue(address_space_ldq_=
-internal, SUFFIX)(ARG1_DECL,</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;release_lock |=3D prepare_mmio_acces=
-s(mr);</div>
-<div>&nbsp;</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* I/O case */</div>
-<div>- &nbsp; &nbsp; &nbsp; &nbsp;r =3D memory_region_dispatch_read(mr, add=
-r1, &amp;val, MO_64, attrs);</div>
-<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp;/* FIXME: memory_region_dispatch_read=
- ignores MO_BSWAP. &nbsp;*/</div>
-<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp;r =3D memory_region_dispatch_read(mr,=
- addr1, &amp;val, MO_64 | endian, attrs);</div>
-<div>&nbsp;#if defined(TARGET_WORDS_BIGENDIAN)</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if (endian =3D=3D MO_LE) {</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;val =3D bswap64(val);<=
-/div>
-<div>@@ -221,7 &#43;223,8 @@ static inline uint32_t glue(address_space_lduw=
-_internal, SUFFIX)(ARG1_DECL,</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;release_lock |=3D prepare_mmio_acces=
-s(mr);</div>
-<div>&nbsp;</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* I/O case */</div>
-<div>- &nbsp; &nbsp; &nbsp; &nbsp;r =3D memory_region_dispatch_read(mr, add=
-r1, &amp;val, MO_16, attrs);</div>
-<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp;/* FIXME: memory_region_dispatch_read=
- ignores MO_BSWAP. &nbsp;*/</div>
-<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp;r =3D memory_region_dispatch_read(mr,=
- addr1, &amp;val, MO_16 | endian, attrs);</div>
-<div>&nbsp;#if defined(TARGET_WORDS_BIGENDIAN)</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if (endian =3D=3D MO_LE) {</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;val =3D bswap16(val);<=
-/div>
-<div>@@ -297,7 &#43;300,7 @@ void glue(address_space_stl_notdirty, SUFFIX)(=
-ARG1_DECL,</div>
-<div>&nbsp; &nbsp; &nbsp;if (l &lt; 4 || !memory_access_is_direct(mr, true)=
-) {</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;release_lock |=3D prepare_mmio_acces=
-s(mr);</div>
-<div>&nbsp;</div>
-<div>- &nbsp; &nbsp; &nbsp; &nbsp;r =3D memory_region_dispatch_write(mr, ad=
-dr1, val, MO_32, attrs);</div>
-<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp;r =3D memory_region_dispatch_write(mr=
-, addr1, val, MO_32 | MO_TE, attrs);</div>
-<div>&nbsp; &nbsp; &nbsp;} else {</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ptr =3D qemu_map_ram_ptr(mr-&gt;ram_=
-block, addr1);</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;stl_p(ptr, val);</div>
-<div>@@ -343,7 &#43;346,8 @@ static inline void glue(address_space_stl_inte=
-rnal, SUFFIX)(ARG1_DECL,</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;val =3D bswap32(val);<=
-/div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}</div>
-<div>&nbsp;#endif</div>
-<div>- &nbsp; &nbsp; &nbsp; &nbsp;r =3D memory_region_dispatch_write(mr, ad=
-dr1, val, MO_32, attrs);</div>
-<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp;/* FIXME: memory_region_dispatch_writ=
-e ignores MO_BSWAP. &nbsp;*/</div>
-<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp;r =3D memory_region_dispatch_write(mr=
-, addr1, val, MO_32 | endian, attrs);</div>
-<div>&nbsp; &nbsp; &nbsp;} else {</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* RAM case */</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ptr =3D qemu_map_ram_ptr(mr-&gt;ram_=
-block, addr1);</div>
-<div>@@ -448,7 &#43;452,8 @@ static inline void glue(address_space_stw_inte=
-rnal, SUFFIX)(ARG1_DECL,</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;val =3D bswap16(val);<=
-/div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}</div>
-<div>&nbsp;#endif</div>
-<div>- &nbsp; &nbsp; &nbsp; &nbsp;r =3D memory_region_dispatch_write(mr, ad=
-dr1, val, MO_16, attrs);</div>
-<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp;/* FIXME: memory_region_dispatch_writ=
-e ignores MO_BSWAP. &nbsp;*/</div>
-<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp;r =3D memory_region_dispatch_write(mr=
-, addr1, val, MO_16 | endian, attrs);</div>
-<div>&nbsp; &nbsp; &nbsp;} else {</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* RAM case */</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ptr =3D qemu_map_ram_ptr(mr-&gt;ram_=
-block, addr1);</div>
-<div>@@ -521,7 &#43;526,8 @@ static void glue(address_space_stq_internal, S=
-UFFIX)(ARG1_DECL,</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;val =3D bswap64(val);<=
-/div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}</div>
-<div>&nbsp;#endif</div>
-<div>- &nbsp; &nbsp; &nbsp; &nbsp;r =3D memory_region_dispatch_write(mr, ad=
-dr1, val, MO_64, attrs);</div>
-<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp;/* FIXME: memory_region_dispatch_writ=
-e ignores MO_BSWAP. &nbsp;*/</div>
-<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp;r =3D memory_region_dispatch_write(mr=
-, addr1, val, MO_64 | endian, attrs);</div>
-<div>&nbsp; &nbsp; &nbsp;} else {</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* RAM case */</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ptr =3D qemu_map_ram_ptr(mr-&gt;ram_=
-block, addr1);</div>
-<div>diff --git a/target/mips/op_helper.c b/target/mips/op_helper.c</div>
-<div>index e79f99d..1b475f3 100644</div>
-<div>--- a/target/mips/op_helper.c</div>
-<div>&#43;&#43;&#43; b/target/mips/op_helper.c</div>
-<div>@@ -4741,11 &#43;4741,11 @@ void helper_cache(CPUMIPSState *env, targe=
-t_ulong addr, uint32_t op)</div>
-<div>&nbsp; &nbsp; &nbsp;if (op =3D=3D 9) {</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* Index Store Tag */</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;memory_region_dispatch_write(env-&gt=
-;itc_tag, index, env-&gt;CP0_TagLo,</div>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if (TTE_IS_IE(env-&gt;d=
+tlb[i].tte)) {</div>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;attrs-&gt=
+;byte_swap =3D true;</div>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}</div>
+<div>&#43;</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* access ok? */</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* multiple bits in SF=
+SR.FT may be set on TT_DFAULT */</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if (TTE_IS_PRIV(env-&g=
+t;dtlb[i].tte) &amp;&amp; is_user) {</div>
+<div>@@ -792,7 &#43;796,7 @@ void dump_mmu(CPUSPARCState *env)</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if (TTE_IS_VALID(env-&=
+gt;dtlb[i].tte)) {</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;qemu_pri=
+ntf(&quot;[%02u] VA: %&quot; PRIx64 &quot;, PA: %llx&quot;</div>
 <div>- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; MO_64, MEMTXATTRS=
-_UNSPECIFIED);</div>
+; &nbsp; &nbsp; &nbsp; &nbsp;&quot;, %s, %s, %s, %s, ctx %&quot; PRId64 &qu=
+ot; %s\n&quot;,</div>
 <div>&#43; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
-nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; MO_64 | MO_TE=
-, MEMTXATTRS_UNSPECIFIED);</div>
-<div>&nbsp; &nbsp; &nbsp;} else if (op =3D=3D 5) {</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* Index Load Tag */</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;memory_region_dispatch_read(env-&gt;=
-itc_tag, index, &amp;env-&gt;CP0_TagLo,</div>
-<div>- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;MO_64, MEMTXATTRS_=
-UNSPECIFIED);</div>
+nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&quot;, %s, %s, %s, %s, ie %s, ctx %&quot;=
+ PRId64 &quot; %s\n&quot;,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;i,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;env-&gt;dtlb[i].tag &amp; (uint64_t)~0x1f=
+ffULL,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;TTE_PA(env-&gt;dtlb[i].tte),</div>
+<div>@@ -801,6 &#43;805,8 @@ void dump_mmu(CPUSPARCState *env)</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;TTE_IS_W_OK(env-&gt;dtlb[i].tte) ? &quot;=
+RW&quot; : &quot;RO&quot;,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;TTE_IS_LOCKED(env-&gt;dtlb[i].tte) ?</div=
+>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&quot;locked&quot; : &quot;unlocked&quot;=
+,</div>
 <div>&#43; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
-nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;MO_64 | MO_TE,=
- MEMTXATTRS_UNSPECIFIED);</div>
-<div>&nbsp; &nbsp; &nbsp;}</div>
-<div>&nbsp;#endif</div>
-<div>&nbsp;}</div>
+nbsp; &nbsp; &nbsp; &nbsp; &nbsp;TTE_IS_IE(env-&gt;dtlb[i].tte) ?</div>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
+nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&quot;yes&quot; : &quot;no&quot;,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;env-&gt;dtlb[i].tag &amp; (uint64_t)0x1ff=
+fULL,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;TTE_IS_GLOBAL(env-&gt;dtlb[i].tte) ?</div=
+>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&quot;global&quot; : &quot;local&quot;);<=
+/div>
 <div>--&nbsp;</div>
 <div>1.8.3.1</div>
 <div><br>
@@ -556,5 +314,5 @@ nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;MO_64 | MO_TE,=
 </body>
 </html>
 
---_000_156516679496657397btcom_--
+--_000_156516694118641868btcom_--
 
