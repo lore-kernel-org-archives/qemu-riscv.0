@@ -1,28 +1,28 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hvLdZ-0006Dm-09
+	id 1hvLdZ-0006EB-3i
 	for mharc-qemu-riscv@gnu.org; Wed, 07 Aug 2019 09:05:53 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44831)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:45586)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <tony.nguyen@bt.com>) id 1hvHM0-0006s6-CG
- for qemu-riscv@nongnu.org; Wed, 07 Aug 2019 04:31:39 -0400
+ (envelope-from <tony.nguyen@bt.com>) id 1hvHOL-00043A-Tl
+ for qemu-riscv@nongnu.org; Wed, 07 Aug 2019 04:34:04 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <tony.nguyen@bt.com>) id 1hvHLn-0001xc-8q
- for qemu-riscv@nongnu.org; Wed, 07 Aug 2019 04:31:28 -0400
-Received: from smtpe1.intersmtp.com ([213.121.35.72]:24368)
+ (envelope-from <tony.nguyen@bt.com>) id 1hvHOB-0003BU-AH
+ for qemu-riscv@nongnu.org; Wed, 07 Aug 2019 04:33:53 -0400
+Received: from smtpe1.intersmtp.com ([213.121.35.79]:53897)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <tony.nguyen@bt.com>)
- id 1hvHLm-0001wz-Pu; Wed, 07 Aug 2019 04:31:15 -0400
-Received: from tpw09926dag18e.domain1.systemhost.net (10.9.212.18) by
- BWP09926077.bt.com (10.36.82.108) with Microsoft SMTP Server (version=TLS1_2, 
+ id 1hvHOA-00038U-PI; Wed, 07 Aug 2019 04:33:43 -0400
+Received: from tpw09926dag18g.domain1.systemhost.net (10.9.212.34) by
+ BWP09926084.bt.com (10.36.82.115) with Microsoft SMTP Server (version=TLS1_2, 
  cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P256) id 15.1.1713.5; Wed, 7 Aug
- 2019 09:30:51 +0100
+ 2019 09:33:33 +0100
 Received: from tpw09926dag18e.domain1.systemhost.net (10.9.212.18) by
- tpw09926dag18e.domain1.systemhost.net (10.9.212.18) with Microsoft SMTP
- Server (TLS) id 15.0.1395.4; Wed, 7 Aug 2019 09:31:09 +0100
+ tpw09926dag18g.domain1.systemhost.net (10.9.212.34) with Microsoft SMTP
+ Server (TLS) id 15.0.1395.4; Wed, 7 Aug 2019 09:33:40 +0100
 Received: from tpw09926dag18e.domain1.systemhost.net
  ([fe80::a946:6348:ccf4:fa6c]) by tpw09926dag18e.domain1.systemhost.net
  ([fe80::a946:6348:ccf4:fa6c%12]) with mapi id 15.00.1395.000; Wed, 7 Aug 2019
- 09:31:09 +0100
+ 09:33:39 +0100
 From: <tony.nguyen@bt.com>
 To: <qemu-devel@nongnu.org>
 CC: <frederic.konrad@adacore.com>, <berto@igalia.com>,
@@ -54,11 +54,11 @@ CC: <frederic.konrad@adacore.com>, <berto@igalia.com>,
  <paul.durrant@citrix.com>, <david@gibson.dropbear.id.au>,
  <xiaoguangrong.eric@gmail.com>, <huth@tuxfamily.org>, <jcd@tribudubois.net>,
  <pbonzini@redhat.com>, <stefanb@linux.ibm.com>
-Thread-Topic: [Qemu-devel] [PATCH v6 15/26] build: Correct non-common
- common-obj-* to obj-*
-Thread-Index: AQHVTPp2fql1698oXk26QyWmjOBfjA==
-Date: Wed, 7 Aug 2019 08:31:09 +0000
-Message-ID: <1565166668830.25608@bt.com>
+Thread-Topic: [Qemu-devel] [PATCH v6 21/26] cputlb: Replace size and endian
+ operands for MemOp
+Thread-Index: AQHVTPrQs9TU2DS1Dka5k39fGdVfMw==
+Date: Wed, 7 Aug 2019 08:33:39 +0000
+Message-ID: <1565166819111.14515@bt.com>
 References: <45ec4924e0b34a3d9124e2db06af75b4@tpw09926dag18e.domain1.systemhost.net>
 In-Reply-To: <45ec4924e0b34a3d9124e2db06af75b4@tpw09926dag18e.domain1.systemhost.net>
 Accept-Language: en-AU, en-GB, en-US
@@ -67,13 +67,13 @@ X-MS-Has-Attach:
 X-MS-TNEF-Correlator: 
 x-ms-exchange-transport-fromentityheader: Hosted
 x-originating-ip: [10.187.101.44]
-Content-Type: multipart/alternative; boundary="_000_156516666883025608btcom_"
+Content-Type: multipart/alternative; boundary="_000_156516681911114515btcom_"
 MIME-Version: 1.0
 X-detected-operating-system: by eggs.gnu.org: Windows 7 or 8 [fuzzy]
-X-Received-From: 213.121.35.72
-X-Mailman-Approved-At: Wed, 07 Aug 2019 09:05:47 -0400
-Subject: [Qemu-riscv] [Qemu-devel] [PATCH v6 15/26] build: Correct
- non-common common-obj-* to obj-*
+X-Received-From: 213.121.35.79
+X-Mailman-Approved-At: Wed, 07 Aug 2019 09:05:48 -0400
+Subject: [Qemu-riscv] [Qemu-devel] [PATCH v6 21/26] cputlb: Replace size and
+ endian operands for MemOp
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -85,554 +85,547 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Aug 2019 08:31:39 -0000
+X-List-Received-Date: Wed, 07 Aug 2019 08:34:04 -0000
 
---_000_156516666883025608btcom_
+--_000_156516681911114515btcom_
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
-Preparation for replacing device_endian with MemOp.
-
-Device realizing code with MemorRegionOps endianness as
-DEVICE_NATIVE_ENDIAN is not common code.
-
-Corrected devices were identified by making the declaration of
-DEVICE_NATIVE_ENDIAN conditional upon NEED_CPU_H and then listing
-what failed to compile.
+Preparation for collapsing the two byte swaps adjust_endianness and
+handle_bswap into the former.
 
 Signed-off-by: Tony Nguyen <tony.nguyen@bt.com>
 ---
- hw/audio/Makefile.objs    | 11 ++++++-----
- hw/block/Makefile.objs    |  8 ++++----
- hw/char/Makefile.objs     | 22 +++++++++++-----------
- hw/core/Makefile.objs     |  2 +-
- hw/display/Makefile.objs  | 10 +++++-----
- hw/dma/Makefile.objs      | 18 +++++++++---------
- hw/gpio/Makefile.objs     |  6 +++---
- hw/i2c/Makefile.objs      |  8 ++++----
- hw/input/Makefile.objs    |  4 ++--
- hw/intc/Makefile.objs     | 19 ++++++++++---------
- hw/ipack/Makefile.objs    |  2 +-
- hw/isa/Makefile.objs      |  2 +-
- hw/misc/Makefile.objs     | 18 +++++++++---------
- hw/net/Makefile.objs      | 14 +++++++-------
- hw/pci-host/Makefile.objs |  6 +++---
- hw/scsi/Makefile.objs     |  2 +-
- hw/sd/Makefile.objs       |  2 +-
- hw/ssi/Makefile.objs      | 10 +++++-----
- hw/timer/Makefile.objs    | 39 ++++++++++++++++++++-------------------
- hw/virtio/Makefile.objs   |  2 +-
- 20 files changed, 104 insertions(+), 101 deletions(-)
+ accel/tcg/cputlb.c   | 170 +++++++++++++++++++++++++----------------------=
+----
+ include/exec/memop.h |   6 ++
+ memory.c             |  11 +---
+ 3 files changed, 90 insertions(+), 97 deletions(-)
 
-diff --git a/hw/audio/Makefile.objs b/hw/audio/Makefile.objs
-index 63db383..40b26c6 100644
---- a/hw/audio/Makefile.objs
-+++ b/hw/audio/Makefile.objs
-@@ -5,14 +5,15 @@ common-obj-$(CONFIG_AC97) +=3D ac97.o
- common-obj-$(CONFIG_ADLIB) +=3D fmopl.o adlib.o
- common-obj-$(CONFIG_GUS) +=3D gus.o gusemu_hal.o gusemu_mixer.o
- common-obj-$(CONFIG_CS4231A) +=3D cs4231a.o
--common-obj-$(CONFIG_HDA) +=3D intel-hda.o hda-codec.o
-+common-obj-$(CONFIG_HDA) +=3D hda-codec.o
-+obj-$(CONFIG_HDA) +=3D intel-hda.o
+diff --git a/accel/tcg/cputlb.c b/accel/tcg/cputlb.c
+index 6c83878..86d85cc 100644
+--- a/accel/tcg/cputlb.c
++++ b/accel/tcg/cputlb.c
+@@ -881,7 +881,7 @@ static void tlb_fill(CPUState *cpu, target_ulong addr, =
+int size,
 
- common-obj-$(CONFIG_PCSPK) +=3D pcspk.o
- common-obj-$(CONFIG_WM8750) +=3D wm8750.o
--common-obj-$(CONFIG_PL041) +=3D pl041.o lm4549.o
-+obj-$(CONFIG_PL041) +=3D pl041.o lm4549.o
+ static uint64_t io_readx(CPUArchState *env, CPUIOTLBEntry *iotlbentry,
+                          int mmu_idx, target_ulong addr, uintptr_t retaddr=
+,
+-                         MMUAccessType access_type, int size)
++                         MMUAccessType access_type, MemOp op)
+ {
+     CPUState *cpu =3D env_cpu(env);
+     hwaddr mr_offset;
+@@ -906,14 +906,13 @@ static uint64_t io_readx(CPUArchState *env, CPUIOTLBE=
+ntry *iotlbentry,
+         qemu_mutex_lock_iothread();
+         locked =3D true;
+     }
+-    r =3D memory_region_dispatch_read(mr, mr_offset, &val, size_memop(size=
+),
+-                                    iotlbentry->attrs);
++    r =3D memory_region_dispatch_read(mr, mr_offset, &val, op, iotlbentry-=
+>attrs);
+     if (r !=3D MEMTX_OK) {
+         hwaddr physaddr =3D mr_offset +
+             section->offset_within_address_space -
+             section->offset_within_region;
 
--common-obj-$(CONFIG_CS4231) +=3D cs4231.o
--common-obj-$(CONFIG_MARVELL_88W8618) +=3D marvell_88w8618.o
--common-obj-$(CONFIG_MILKYMIST) +=3D milkymist-ac97.o
-+obj-$(CONFIG_CS4231) +=3D cs4231.o
-+obj-$(CONFIG_MARVELL_88W8618) +=3D marvell_88w8618.o
-+obj-$(CONFIG_MILKYMIST) +=3D milkymist-ac97.o
+-        cpu_transaction_failed(cpu, physaddr, addr, size, access_type,
++        cpu_transaction_failed(cpu, physaddr, addr, memop_size(op), access=
+_type,
+                                mmu_idx, iotlbentry->attrs, r, retaddr);
+     }
+     if (locked) {
+@@ -925,7 +924,7 @@ static uint64_t io_readx(CPUArchState *env, CPUIOTLBEnt=
+ry *iotlbentry,
 
- common-obj-y +=3D soundhw.o
-diff --git a/hw/block/Makefile.objs b/hw/block/Makefile.objs
-index f5f643f..9098cda 100644
---- a/hw/block/Makefile.objs
-+++ b/hw/block/Makefile.objs
-@@ -1,12 +1,12 @@
- common-obj-y +=3D block.o cdrom.o hd-geometry.o
--common-obj-$(CONFIG_FDC) +=3D fdc.o
-+obj-$(CONFIG_FDC) +=3D fdc.o
- common-obj-$(CONFIG_SSI_M25P80) +=3D m25p80.o
- common-obj-$(CONFIG_NAND) +=3D nand.o
--common-obj-$(CONFIG_PFLASH_CFI01) +=3D pflash_cfi01.o
--common-obj-$(CONFIG_PFLASH_CFI02) +=3D pflash_cfi02.o
-+obj-$(CONFIG_PFLASH_CFI01) +=3D pflash_cfi01.o
-+obj-$(CONFIG_PFLASH_CFI02) +=3D pflash_cfi02.o
- common-obj-$(CONFIG_XEN) +=3D xen-block.o
- common-obj-$(CONFIG_ECC) +=3D ecc.o
--common-obj-$(CONFIG_ONENAND) +=3D onenand.o
-+obj-$(CONFIG_ONENAND) +=3D onenand.o
- common-obj-$(CONFIG_NVME_PCI) +=3D nvme.o
+ static void io_writex(CPUArchState *env, CPUIOTLBEntry *iotlbentry,
+                       int mmu_idx, uint64_t val, target_ulong addr,
+-                      uintptr_t retaddr, int size)
++                      uintptr_t retaddr, MemOp op)
+ {
+     CPUState *cpu =3D env_cpu(env);
+     hwaddr mr_offset;
+@@ -947,15 +946,15 @@ static void io_writex(CPUArchState *env, CPUIOTLBEntr=
+y *iotlbentry,
+         qemu_mutex_lock_iothread();
+         locked =3D true;
+     }
+-    r =3D memory_region_dispatch_write(mr, mr_offset, val, size_memop(size=
+),
+-                                     iotlbentry->attrs);
++    r =3D memory_region_dispatch_write(mr, mr_offset, val, op, iotlbentry-=
+>attrs);
+     if (r !=3D MEMTX_OK) {
+         hwaddr physaddr =3D mr_offset +
+             section->offset_within_address_space -
+             section->offset_within_region;
 
- obj-$(CONFIG_SH4) +=3D tc58128.o
-diff --git a/hw/char/Makefile.objs b/hw/char/Makefile.objs
-index 02d8a66..af3e76a 100644
---- a/hw/char/Makefile.objs
-+++ b/hw/char/Makefile.objs
-@@ -1,17 +1,17 @@
- common-obj-$(CONFIG_IPACK) +=3D ipoctal232.o
--common-obj-$(CONFIG_ESCC) +=3D escc.o
-+obj-$(CONFIG_ESCC) +=3D escc.o
- common-obj-$(CONFIG_NRF51_SOC) +=3D nrf51_uart.o
--common-obj-$(CONFIG_PARALLEL) +=3D parallel.o
-+obj-$(CONFIG_PARALLEL) +=3D parallel.o
- common-obj-$(CONFIG_ISA_BUS) +=3D parallel-isa.o
--common-obj-$(CONFIG_PL011) +=3D pl011.o
--common-obj-$(CONFIG_SERIAL) +=3D serial.o
-+obj-$(CONFIG_PL011) +=3D pl011.o
-+obj-$(CONFIG_SERIAL) +=3D serial.o
- common-obj-$(CONFIG_SERIAL_ISA) +=3D serial-isa.o
- common-obj-$(CONFIG_SERIAL_PCI) +=3D serial-pci.o
- common-obj-$(CONFIG_SERIAL_PCI_MULTI) +=3D serial-pci-multi.o
- common-obj-$(CONFIG_VIRTIO_SERIAL) +=3D virtio-console.o
--common-obj-$(CONFIG_XILINX) +=3D xilinx_uartlite.o
-+obj-$(CONFIG_XILINX) +=3D xilinx_uartlite.o
- common-obj-$(CONFIG_XEN) +=3D xen_console.o
--common-obj-$(CONFIG_CADENCE) +=3D cadence_uart.o
-+obj-$(CONFIG_CADENCE) +=3D cadence_uart.o
+-        cpu_transaction_failed(cpu, physaddr, addr, size, MMU_DATA_STORE,
+-                               mmu_idx, iotlbentry->attrs, r, retaddr);
++        cpu_transaction_failed(cpu, physaddr, addr, memop_size(op),
++                               MMU_DATA_STORE, mmu_idx, iotlbentry->attrs,=
+ r,
++                               retaddr);
+     }
+     if (locked) {
+         qemu_mutex_unlock_iothread();
+@@ -1216,14 +1215,15 @@ static void *atomic_mmu_lookup(CPUArchState *env, t=
+arget_ulong addr,
+  * access type.
+  */
 
- obj-$(CONFIG_EXYNOS4) +=3D exynos4210_uart.o
- obj-$(CONFIG_COLDFIRE) +=3D mcf_uart.o
-@@ -23,13 +23,13 @@ obj-$(CONFIG_STM32F2XX_USART) +=3D stm32f2xx_usart.o
- obj-$(CONFIG_RASPI) +=3D bcm2835_aux.o
+-static inline uint64_t handle_bswap(uint64_t val, int size, bool big_endia=
+n)
++static inline uint64_t handle_bswap(uint64_t val, MemOp op)
+ {
+-    if ((big_endian && NEED_BE_BSWAP) || (!big_endian && NEED_LE_BSWAP)) {
+-        switch (size) {
+-        case 1: return val;
+-        case 2: return bswap16(val);
+-        case 4: return bswap32(val);
+-        case 8: return bswap64(val);
++    if ((memop_big_endian(op) && NEED_BE_BSWAP) ||
++        (!memop_big_endian(op) && NEED_LE_BSWAP)) {
++        switch (op & MO_SIZE) {
++        case MO_8: return val;
++        case MO_16: return bswap16(val);
++        case MO_32: return bswap32(val);
++        case MO_64: return bswap64(val);
+         default:
+             g_assert_not_reached();
+         }
+@@ -1246,7 +1246,7 @@ typedef uint64_t FullLoadHelper(CPUArchState *env, ta=
+rget_ulong addr,
 
- common-obj-$(CONFIG_CMSDK_APB_UART) +=3D cmsdk-apb-uart.o
--common-obj-$(CONFIG_ETRAXFS) +=3D etraxfs_ser.o
-+obj-$(CONFIG_ETRAXFS) +=3D etraxfs_ser.o
- common-obj-$(CONFIG_ISA_DEBUG) +=3D debugcon.o
--common-obj-$(CONFIG_GRLIB) +=3D grlib_apbuart.o
--common-obj-$(CONFIG_IMX) +=3D imx_serial.o
-+obj-$(CONFIG_GRLIB) +=3D grlib_apbuart.o
-+obj-$(CONFIG_IMX) +=3D imx_serial.o
- common-obj-$(CONFIG_LM32) +=3D lm32_juart.o
--common-obj-$(CONFIG_LM32) +=3D lm32_uart.o
--common-obj-$(CONFIG_MILKYMIST) +=3D milkymist-uart.o
-+obj-$(CONFIG_LM32) +=3D lm32_uart.o
-+obj-$(CONFIG_MILKYMIST) +=3D milkymist-uart.o
- common-obj-$(CONFIG_SCLPCONSOLE) +=3D sclpconsole.o sclpconsole-lm.o
+ static inline uint64_t __attribute__((always_inline))
+ load_helper(CPUArchState *env, target_ulong addr, TCGMemOpIdx oi,
+-            uintptr_t retaddr, size_t size, bool big_endian, bool code_rea=
+d,
++            uintptr_t retaddr, MemOp op, bool code_read,
+             FullLoadHelper *full_load)
+ {
+     uintptr_t mmu_idx =3D get_mmuidx(oi);
+@@ -1260,6 +1260,7 @@ load_helper(CPUArchState *env, target_ulong addr, TCG=
+MemOpIdx oi,
+     unsigned a_bits =3D get_alignment_bits(get_memop(oi));
+     void *haddr;
+     uint64_t res;
++    size_t size =3D memop_size(op);
 
- obj-$(CONFIG_VIRTIO) +=3D virtio-serial-bus.o
-diff --git a/hw/core/Makefile.objs b/hw/core/Makefile.objs
-index f8481d9..1b336c6 100644
---- a/hw/core/Makefile.objs
-+++ b/hw/core/Makefile.objs
-@@ -9,7 +9,7 @@ common-obj-y +=3D hotplug.o
- common-obj-$(CONFIG_SOFTMMU) +=3D nmi.o
- common-obj-$(CONFIG_SOFTMMU) +=3D vm-change-state-handler.o
+     /* Handle CPU specific unaligned behaviour */
+     if (addr & ((1 << a_bits) - 1)) {
+@@ -1305,9 +1306,10 @@ load_helper(CPUArchState *env, target_ulong addr, TC=
+GMemOpIdx oi,
+             }
+         }
 
--common-obj-$(CONFIG_EMPTY_SLOT) +=3D empty_slot.o
-+obj-$(CONFIG_EMPTY_SLOT) +=3D empty_slot.o
- common-obj-$(CONFIG_XILINX_AXI) +=3D stream.o
- common-obj-$(CONFIG_PTIMER) +=3D ptimer.o
- common-obj-$(CONFIG_SOFTMMU) +=3D sysbus.o
-diff --git a/hw/display/Makefile.objs b/hw/display/Makefile.objs
-index a64998f..53c3efb 100644
---- a/hw/display/Makefile.objs
-+++ b/hw/display/Makefile.objs
-@@ -8,8 +8,8 @@ common-obj-$(CONFIG_ADS7846) +=3D ads7846.o
- common-obj-$(CONFIG_VGA_CIRRUS) +=3D cirrus_vga.o
- common-obj-$(call land,$(CONFIG_VGA_CIRRUS),$(CONFIG_VGA_ISA))+=3Dcirrus_v=
-ga_isa.o
- common-obj-$(CONFIG_G364FB) +=3D g364fb.o
--common-obj-$(CONFIG_JAZZ_LED) +=3D jazz_led.o
--common-obj-$(CONFIG_PL110) +=3D pl110.o
-+obj-$(CONFIG_JAZZ_LED) +=3D jazz_led.o
-+obj-$(CONFIG_PL110) +=3D pl110.o
- common-obj-$(CONFIG_SII9022) +=3D sii9022.o
- common-obj-$(CONFIG_SSD0303) +=3D ssd0303.o
- common-obj-$(CONFIG_SSD0323) +=3D ssd0323.o
-@@ -17,15 +17,15 @@ common-obj-$(CONFIG_XEN) +=3D xenfb.o
++        /* FIXME: io_readx ignores MO_BSWAP.  */
+         res =3D io_readx(env, &env_tlb(env)->d[mmu_idx].iotlb[index],
+-                       mmu_idx, addr, retaddr, access_type, size);
+-        return handle_bswap(res, size, big_endian);
++                       mmu_idx, addr, retaddr, access_type, op);
++        return handle_bswap(res, op);
+     }
 
- common-obj-$(CONFIG_VGA_PCI) +=3D vga-pci.o
- common-obj-$(CONFIG_VGA_ISA) +=3D vga-isa.o
--common-obj-$(CONFIG_VGA_ISA_MM) +=3D vga-isa-mm.o
-+obj-$(CONFIG_VGA_ISA_MM) +=3D vga-isa-mm.o
- common-obj-$(CONFIG_VMWARE_VGA) +=3D vmware_vga.o
- common-obj-$(CONFIG_BOCHS_DISPLAY) +=3D bochs-display.o
+     /* Handle slow unaligned access (it spans two pages or IO).  */
+@@ -1324,7 +1326,7 @@ load_helper(CPUArchState *env, target_ulong addr, TCG=
+MemOpIdx oi,
+         r2 =3D full_load(env, addr2, oi, retaddr);
+         shift =3D (addr & (size - 1)) * 8;
 
- common-obj-$(CONFIG_BLIZZARD) +=3D blizzard.o
--common-obj-$(CONFIG_EXYNOS4) +=3D exynos4210_fimd.o
-+obj-$(CONFIG_EXYNOS4) +=3D exynos4210_fimd.o
- common-obj-$(CONFIG_FRAMEBUFFER) +=3D framebuffer.o
- obj-$(CONFIG_MILKYMIST) +=3D milkymist-vgafb.o
--common-obj-$(CONFIG_ZAURUS) +=3D tc6393xb.o
-+obj-$(CONFIG_ZAURUS) +=3D tc6393xb.o
+-        if (big_endian) {
++        if (memop_big_endian(op)) {
+             /* Big-endian combine.  */
+             res =3D (r1 << shift) | (r2 >> ((size * 8) - shift));
+         } else {
+@@ -1336,30 +1338,27 @@ load_helper(CPUArchState *env, target_ulong addr, T=
+CGMemOpIdx oi,
 
- obj-$(CONFIG_MILKYMIST_TMU2) +=3D milkymist-tmu2.o
- milkymist-tmu2.o-cflags :=3D $(X11_CFLAGS) $(OPENGL_CFLAGS)
-diff --git a/hw/dma/Makefile.objs b/hw/dma/Makefile.objs
-index 8b39f9c..7e17776 100644
---- a/hw/dma/Makefile.objs
-+++ b/hw/dma/Makefile.objs
-@@ -1,17 +1,17 @@
--common-obj-$(CONFIG_PUV3) +=3D puv3_dma.o
--common-obj-$(CONFIG_RC4030) +=3D rc4030.o
--common-obj-$(CONFIG_PL080) +=3D pl080.o
--common-obj-$(CONFIG_PL330) +=3D pl330.o
-+obj-$(CONFIG_PUV3) +=3D puv3_dma.o
-+obj-$(CONFIG_RC4030) +=3D rc4030.o
-+obj-$(CONFIG_PL080) +=3D pl080.o
-+obj-$(CONFIG_PL330) +=3D pl330.o
- common-obj-$(CONFIG_I82374) +=3D i82374.o
--common-obj-$(CONFIG_I8257) +=3D i8257.o
--common-obj-$(CONFIG_XILINX_AXI) +=3D xilinx_axidma.o
-+obj-$(CONFIG_I8257) +=3D i8257.o
-+obj-$(CONFIG_XILINX_AXI) +=3D xilinx_axidma.o
- common-obj-$(CONFIG_ZYNQ_DEVCFG) +=3D xlnx-zynq-devcfg.o
--common-obj-$(CONFIG_ETRAXFS) +=3D etraxfs_dma.o
--common-obj-$(CONFIG_STP2000) +=3D sparc32_dma.o
-+obj-$(CONFIG_ETRAXFS) +=3D etraxfs_dma.o
-+obj-$(CONFIG_STP2000) +=3D sparc32_dma.o
- obj-$(CONFIG_XLNX_ZYNQMP) +=3D xlnx_dpdma.o
- obj-$(CONFIG_XLNX_ZYNQMP_ARM) +=3D xlnx_dpdma.o
- common-obj-$(CONFIG_XLNX_ZYNQMP_ARM) +=3D xlnx-zdma.o
+  do_aligned_access:
+     haddr =3D (void *)((uintptr_t)addr + entry->addend);
+-    switch (size) {
+-    case 1:
++    switch (op) {
++    case MO_8:
+         res =3D ldub_p(haddr);
+         break;
+-    case 2:
+-        if (big_endian) {
+-            res =3D lduw_be_p(haddr);
+-        } else {
+-            res =3D lduw_le_p(haddr);
+-        }
++    case MO_BEUW:
++        res =3D lduw_be_p(haddr);
+         break;
+-    case 4:
+-        if (big_endian) {
+-            res =3D (uint32_t)ldl_be_p(haddr);
+-        } else {
+-            res =3D (uint32_t)ldl_le_p(haddr);
+-        }
++    case MO_LEUW:
++        res =3D lduw_le_p(haddr);
+         break;
+-    case 8:
+-        if (big_endian) {
+-            res =3D ldq_be_p(haddr);
+-        } else {
+-            res =3D ldq_le_p(haddr);
+-        }
++    case MO_BEUL:
++        res =3D (uint32_t)ldl_be_p(haddr);
++        break;
++    case MO_LEUL:
++        res =3D (uint32_t)ldl_le_p(haddr);
++        break;
++    case MO_BEQ:
++        res =3D ldq_be_p(haddr);
++        break;
++    case MO_LEQ:
++        res =3D ldq_le_p(haddr);
+         break;
+     default:
+         g_assert_not_reached();
+@@ -1381,8 +1380,7 @@ load_helper(CPUArchState *env, target_ulong addr, TCG=
+MemOpIdx oi,
+ static uint64_t full_ldub_mmu(CPUArchState *env, target_ulong addr,
+                               TCGMemOpIdx oi, uintptr_t retaddr)
+ {
+-    return load_helper(env, addr, oi, retaddr, 1, false, false,
+-                       full_ldub_mmu);
++    return load_helper(env, addr, oi, retaddr, MO_8, false, full_ldub_mmu)=
+;
+ }
 
- obj-$(CONFIG_OMAP) +=3D omap_dma.o soc_dma.o
- obj-$(CONFIG_PXA2XX) +=3D pxa2xx_dma.o
--common-obj-$(CONFIG_RASPI) +=3D bcm2835_dma.o
-+obj-$(CONFIG_RASPI) +=3D bcm2835_dma.o
-diff --git a/hw/gpio/Makefile.objs b/hw/gpio/Makefile.objs
-index e5da0cb..9d297fd 100644
---- a/hw/gpio/Makefile.objs
-+++ b/hw/gpio/Makefile.objs
-@@ -1,7 +1,7 @@
- common-obj-$(CONFIG_MAX7310) +=3D max7310.o
--common-obj-$(CONFIG_PL061) +=3D pl061.o
--common-obj-$(CONFIG_PUV3) +=3D puv3_gpio.o
--common-obj-$(CONFIG_ZAURUS) +=3D zaurus.o
-+obj-$(CONFIG_PL061) +=3D pl061.o
-+obj-$(CONFIG_PUV3) +=3D puv3_gpio.o
-+obj-$(CONFIG_ZAURUS) +=3D zaurus.o
- common-obj-$(CONFIG_E500) +=3D mpc8xxx.o
- common-obj-$(CONFIG_GPIO_KEY) +=3D gpio_key.o
+ tcg_target_ulong helper_ret_ldub_mmu(CPUArchState *env, target_ulong addr,
+@@ -1394,7 +1392,7 @@ tcg_target_ulong helper_ret_ldub_mmu(CPUArchState *en=
+v, target_ulong addr,
+ static uint64_t full_le_lduw_mmu(CPUArchState *env, target_ulong addr,
+                                  TCGMemOpIdx oi, uintptr_t retaddr)
+ {
+-    return load_helper(env, addr, oi, retaddr, 2, false, false,
++    return load_helper(env, addr, oi, retaddr, MO_LEUW, false,
+                        full_le_lduw_mmu);
+ }
 
-diff --git a/hw/i2c/Makefile.objs b/hw/i2c/Makefile.objs
-index d7073a4..9c8839c 100644
---- a/hw/i2c/Makefile.objs
-+++ b/hw/i2c/Makefile.objs
-@@ -1,13 +1,13 @@
- common-obj-$(CONFIG_I2C) +=3D core.o smbus_slave.o smbus_master.o
- common-obj-$(CONFIG_SMBUS_EEPROM) +=3D smbus_eeprom.o
--common-obj-$(CONFIG_VERSATILE_I2C) +=3D versatile_i2c.o
-+obj-$(CONFIG_VERSATILE_I2C) +=3D versatile_i2c.o
- common-obj-$(CONFIG_ACPI_X86_ICH) +=3D smbus_ich9.o
- common-obj-$(CONFIG_ACPI_SMBUS) +=3D pm_smbus.o
- common-obj-$(CONFIG_BITBANG_I2C) +=3D bitbang_i2c.o
--common-obj-$(CONFIG_EXYNOS4) +=3D exynos4210_i2c.o
--common-obj-$(CONFIG_IMX_I2C) +=3D imx_i2c.o
-+obj-$(CONFIG_EXYNOS4) +=3D exynos4210_i2c.o
-+obj-$(CONFIG_IMX_I2C) +=3D imx_i2c.o
- common-obj-$(CONFIG_ASPEED_SOC) +=3D aspeed_i2c.o
- common-obj-$(CONFIG_NRF51_SOC) +=3D microbit_i2c.o
--common-obj-$(CONFIG_MPC_I2C) +=3D mpc_i2c.o
-+obj-$(CONFIG_MPC_I2C) +=3D mpc_i2c.o
- obj-$(CONFIG_OMAP) +=3D omap_i2c.o
- obj-$(CONFIG_PPC4XX) +=3D ppc4xx_i2c.o
-diff --git a/hw/input/Makefile.objs b/hw/input/Makefile.objs
-index a1bc502..e096cc5 100644
---- a/hw/input/Makefile.objs
-+++ b/hw/input/Makefile.objs
-@@ -1,8 +1,8 @@
- common-obj-$(CONFIG_ADB) +=3D adb.o adb-mouse.o adb-kbd.o
- common-obj-y +=3D hid.o
- common-obj-$(CONFIG_LM832X) +=3D lm832x.o
--common-obj-$(CONFIG_PCKBD) +=3D pckbd.o
--common-obj-$(CONFIG_PL050) +=3D pl050.o
-+obj-$(CONFIG_PCKBD) +=3D pckbd.o
-+obj-$(CONFIG_PL050) +=3D pl050.o
- common-obj-$(CONFIG_PS2) +=3D ps2.o
- common-obj-$(CONFIG_STELLARIS_INPUT) +=3D stellaris_input.o
- common-obj-$(CONFIG_TSC2005) +=3D tsc2005.o
-diff --git a/hw/intc/Makefile.objs b/hw/intc/Makefile.objs
-index 03019b9..6d7ba84 100644
---- a/hw/intc/Makefile.objs
-+++ b/hw/intc/Makefile.objs
-@@ -1,24 +1,25 @@
- common-obj-$(CONFIG_HEATHROW_PIC) +=3D heathrow_pic.o
- common-obj-$(CONFIG_I8259) +=3D i8259_common.o i8259.o
--common-obj-$(CONFIG_PL190) +=3D pl190.o
--common-obj-$(CONFIG_PUV3) +=3D puv3_intc.o
--common-obj-$(CONFIG_XILINX) +=3D xilinx_intc.o
-+obj-$(CONFIG_PL190) +=3D pl190.o
-+obj-$(CONFIG_PUV3) +=3D puv3_intc.o
-+obj-$(CONFIG_XILINX) +=3D xilinx_intc.o
- common-obj-$(CONFIG_XLNX_ZYNQMP) +=3D xlnx-pmu-iomod-intc.o
- common-obj-$(CONFIG_XLNX_ZYNQMP) +=3D xlnx-zynqmp-ipi.o
--common-obj-$(CONFIG_ETRAXFS) +=3D etraxfs_pic.o
--common-obj-$(CONFIG_IMX) +=3D imx_avic.o imx_gpcv2.o
-+obj-$(CONFIG_ETRAXFS) +=3D etraxfs_pic.o
-+obj-$(CONFIG_IMX) +=3D imx_avic.o
-+obj-$(CONFIG_IMX) +=3D imx_gpcv2.o
- common-obj-$(CONFIG_LM32) +=3D lm32_pic.o
- common-obj-$(CONFIG_REALVIEW) +=3D realview_gic.o
--common-obj-$(CONFIG_SLAVIO) +=3D slavio_intctl.o
-+obj-$(CONFIG_SLAVIO) +=3D slavio_intctl.o
- common-obj-$(CONFIG_IOAPIC) +=3D ioapic_common.o
- common-obj-$(CONFIG_ARM_GIC) +=3D arm_gic_common.o
--common-obj-$(CONFIG_ARM_GIC) +=3D arm_gic.o
-+obj-$(CONFIG_ARM_GIC) +=3D arm_gic.o
- common-obj-$(CONFIG_ARM_GIC) +=3D arm_gicv2m.o
- common-obj-$(CONFIG_ARM_GIC) +=3D arm_gicv3_common.o
--common-obj-$(CONFIG_ARM_GIC) +=3D arm_gicv3.o
-+obj-$(CONFIG_ARM_GIC) +=3D arm_gicv3.o
- common-obj-$(CONFIG_ARM_GIC) +=3D arm_gicv3_dist.o
- common-obj-$(CONFIG_ARM_GIC) +=3D arm_gicv3_redist.o
--common-obj-$(CONFIG_ARM_GIC) +=3D arm_gicv3_its_common.o
-+obj-$(CONFIG_ARM_GIC) +=3D arm_gicv3_its_common.o
- common-obj-$(CONFIG_OPENPIC) +=3D openpic.o
- common-obj-y +=3D intc.o
+@@ -1407,7 +1405,7 @@ tcg_target_ulong helper_le_lduw_mmu(CPUArchState *env=
+, target_ulong addr,
+ static uint64_t full_be_lduw_mmu(CPUArchState *env, target_ulong addr,
+                                  TCGMemOpIdx oi, uintptr_t retaddr)
+ {
+-    return load_helper(env, addr, oi, retaddr, 2, true, false,
++    return load_helper(env, addr, oi, retaddr, MO_BEUW, false,
+                        full_be_lduw_mmu);
+ }
 
-diff --git a/hw/ipack/Makefile.objs b/hw/ipack/Makefile.objs
-index 8b9bdcb..a7c5485 100644
---- a/hw/ipack/Makefile.objs
-+++ b/hw/ipack/Makefile.objs
-@@ -1,2 +1,2 @@
- common-obj-$(CONFIG_IPACK) +=3D ipack.o
--common-obj-$(CONFIG_IPACK) +=3D tpci200.o
-+obj-$(CONFIG_IPACK) +=3D tpci200.o
-diff --git a/hw/isa/Makefile.objs b/hw/isa/Makefile.objs
-index 9e106df..898b504 100644
---- a/hw/isa/Makefile.objs
-+++ b/hw/isa/Makefile.objs
-@@ -4,7 +4,7 @@ common-obj-$(CONFIG_APM) +=3D apm.o
- common-obj-$(CONFIG_I82378) +=3D i82378.o
- common-obj-$(CONFIG_PC87312) +=3D pc87312.o
- common-obj-$(CONFIG_PIIX4) +=3D piix4.o
--common-obj-$(CONFIG_VT82C686) +=3D vt82c686.o
-+obj-$(CONFIG_VT82C686) +=3D vt82c686.o
- common-obj-$(CONFIG_SMC37C669) +=3D smc37c669-superio.o
+@@ -1420,7 +1418,7 @@ tcg_target_ulong helper_be_lduw_mmu(CPUArchState *env=
+, target_ulong addr,
+ static uint64_t full_le_ldul_mmu(CPUArchState *env, target_ulong addr,
+                                  TCGMemOpIdx oi, uintptr_t retaddr)
+ {
+-    return load_helper(env, addr, oi, retaddr, 4, false, false,
++    return load_helper(env, addr, oi, retaddr, MO_LEUL, false,
+                        full_le_ldul_mmu);
+ }
 
- obj-$(CONFIG_LPC_ICH9) +=3D lpc_ich9.o
-diff --git a/hw/misc/Makefile.objs b/hw/misc/Makefile.objs
-index e9aab51..6ee5a8a 100644
---- a/hw/misc/Makefile.objs
-+++ b/hw/misc/Makefile.objs
-@@ -1,4 +1,4 @@
--common-obj-$(CONFIG_APPLESMC) +=3D applesmc.o
-+obj-$(CONFIG_APPLESMC) +=3D applesmc.o
- common-obj-$(CONFIG_MAX111X) +=3D max111x.o
- common-obj-$(CONFIG_TMP105) +=3D tmp105.o
- common-obj-$(CONFIG_TMP421) +=3D tmp421.o
-@@ -6,23 +6,23 @@ common-obj-$(CONFIG_ISA_DEBUG) +=3D debugexit.o
- common-obj-$(CONFIG_SGA) +=3D sga.o
- common-obj-$(CONFIG_ISA_TESTDEV) +=3D pc-testdev.o
- common-obj-$(CONFIG_PCI_TESTDEV) +=3D pci-testdev.o
--common-obj-$(CONFIG_EDU) +=3D edu.o
-+obj-$(CONFIG_EDU) +=3D edu.o
- common-obj-$(CONFIG_PCA9552) +=3D pca9552.o
+@@ -1433,7 +1431,7 @@ tcg_target_ulong helper_le_ldul_mmu(CPUArchState *env=
+, target_ulong addr,
+ static uint64_t full_be_ldul_mmu(CPUArchState *env, target_ulong addr,
+                                  TCGMemOpIdx oi, uintptr_t retaddr)
+ {
+-    return load_helper(env, addr, oi, retaddr, 4, true, false,
++    return load_helper(env, addr, oi, retaddr, MO_BEUL, false,
+                        full_be_ldul_mmu);
+ }
 
--common-obj-y +=3D unimp.o
-+obj-y +=3D unimp.o
- common-obj-$(CONFIG_FW_CFG_DMA) +=3D vmcoreinfo.o
+@@ -1446,14 +1444,14 @@ tcg_target_ulong helper_be_ldul_mmu(CPUArchState *e=
+nv, target_ulong addr,
+ uint64_t helper_le_ldq_mmu(CPUArchState *env, target_ulong addr,
+                            TCGMemOpIdx oi, uintptr_t retaddr)
+ {
+-    return load_helper(env, addr, oi, retaddr, 8, false, false,
++    return load_helper(env, addr, oi, retaddr, MO_LEQ, false,
+                        helper_le_ldq_mmu);
+ }
 
- # ARM devices
--common-obj-$(CONFIG_PL310) +=3D arm_l2x0.o
--common-obj-$(CONFIG_INTEGRATOR_DEBUG) +=3D arm_integrator_debug.o
--common-obj-$(CONFIG_A9SCU) +=3D a9scu.o
--common-obj-$(CONFIG_ARM11SCU) +=3D arm11scu.o
-+obj-$(CONFIG_PL310) +=3D arm_l2x0.o
-+obj-$(CONFIG_INTEGRATOR_DEBUG) +=3D arm_integrator_debug.o
-+obj-$(CONFIG_A9SCU) +=3D a9scu.o
-+obj-$(CONFIG_ARM11SCU) +=3D arm11scu.o
+ uint64_t helper_be_ldq_mmu(CPUArchState *env, target_ulong addr,
+                            TCGMemOpIdx oi, uintptr_t retaddr)
+ {
+-    return load_helper(env, addr, oi, retaddr, 8, true, false,
++    return load_helper(env, addr, oi, retaddr, MO_BEQ, false,
+                        helper_be_ldq_mmu);
+ }
 
- # Mac devices
--common-obj-$(CONFIG_MOS6522) +=3D mos6522.o
-+obj-$(CONFIG_MOS6522) +=3D mos6522.o
+@@ -1499,7 +1497,7 @@ tcg_target_ulong helper_be_ldsl_mmu(CPUArchState *env=
+, target_ulong addr,
 
- # PKUnity SoC devices
--common-obj-$(CONFIG_PUV3) +=3D puv3_pm.o
-+obj-$(CONFIG_PUV3) +=3D puv3_pm.o
+ static inline void __attribute__((always_inline))
+ store_helper(CPUArchState *env, target_ulong addr, uint64_t val,
+-             TCGMemOpIdx oi, uintptr_t retaddr, size_t size, bool big_endi=
+an)
++             TCGMemOpIdx oi, uintptr_t retaddr, MemOp op)
+ {
+     uintptr_t mmu_idx =3D get_mmuidx(oi);
+     uintptr_t index =3D tlb_index(env, mmu_idx, addr);
+@@ -1508,6 +1506,7 @@ store_helper(CPUArchState *env, target_ulong addr, ui=
+nt64_t val,
+     const size_t tlb_off =3D offsetof(CPUTLBEntry, addr_write);
+     unsigned a_bits =3D get_alignment_bits(get_memop(oi));
+     void *haddr;
++    size_t size =3D memop_size(op);
 
- common-obj-$(CONFIG_MACIO) +=3D macio/
+     /* Handle CPU specific unaligned behaviour */
+     if (addr & ((1 << a_bits) - 1)) {
+@@ -1553,9 +1552,10 @@ store_helper(CPUArchState *env, target_ulong addr, u=
+int64_t val,
+             }
+         }
 
-diff --git a/hw/net/Makefile.objs b/hw/net/Makefile.objs
-index 9904273..1ff7b59 100644
---- a/hw/net/Makefile.objs
-+++ b/hw/net/Makefile.objs
-@@ -1,4 +1,4 @@
--common-obj-$(CONFIG_DP8393X) +=3D dp8393x.o
-+obj-$(CONFIG_DP8393X) +=3D dp8393x.o
- common-obj-$(CONFIG_XEN) +=3D xen_nic.o
- common-obj-$(CONFIG_NE2000_COMMON) +=3D ne2000.o
++        /* FIXME: io_writex ignores MO_BSWAP.  */
+         io_writex(env, &env_tlb(env)->d[mmu_idx].iotlb[index], mmu_idx,
+-                  handle_bswap(val, size, big_endian),
+-                  addr, retaddr, size);
++                  handle_bswap(val, op),
++                  addr, retaddr, op);
+         return;
+     }
 
-@@ -14,19 +14,19 @@ common-obj-$(CONFIG_RTL8139_PCI) +=3D rtl8139.o
- common-obj-$(CONFIG_VMXNET3_PCI) +=3D net_tx_pkt.o net_rx_pkt.o
- common-obj-$(CONFIG_VMXNET3_PCI) +=3D vmxnet3.o
+@@ -1591,7 +1591,7 @@ store_helper(CPUArchState *env, target_ulong addr, ui=
+nt64_t val,
+          */
+         for (i =3D 0; i < size; ++i) {
+             uint8_t val8;
+-            if (big_endian) {
++            if (memop_big_endian(op)) {
+                 /* Big-endian extract.  */
+                 val8 =3D val >> (((size - 1) * 8) - (i * 8));
+             } else {
+@@ -1605,30 +1605,27 @@ store_helper(CPUArchState *env, target_ulong addr, =
+uint64_t val,
 
--common-obj-$(CONFIG_SMC91C111) +=3D smc91c111.o
--common-obj-$(CONFIG_LAN9118) +=3D lan9118.o
-+obj-$(CONFIG_SMC91C111) +=3D smc91c111.o
-+obj-$(CONFIG_LAN9118) +=3D lan9118.o
- common-obj-$(CONFIG_NE2000_ISA) +=3D ne2000-isa.o
- common-obj-$(CONFIG_OPENCORES_ETH) +=3D opencores_eth.o
- common-obj-$(CONFIG_XGMAC) +=3D xgmac.o
- common-obj-$(CONFIG_MIPSNET) +=3D mipsnet.o
- common-obj-$(CONFIG_XILINX_AXI) +=3D xilinx_axienet.o
--common-obj-$(CONFIG_ALLWINNER_EMAC) +=3D allwinner_emac.o
--common-obj-$(CONFIG_IMX_FEC) +=3D imx_fec.o
-+obj-$(CONFIG_ALLWINNER_EMAC) +=3D allwinner_emac.o
-+obj-$(CONFIG_IMX_FEC) +=3D imx_fec.o
+  do_aligned_access:
+     haddr =3D (void *)((uintptr_t)addr + entry->addend);
+-    switch (size) {
+-    case 1:
++    switch (op) {
++    case MO_8:
+         stb_p(haddr, val);
+         break;
+-    case 2:
+-        if (big_endian) {
+-            stw_be_p(haddr, val);
+-        } else {
+-            stw_le_p(haddr, val);
+-        }
++    case MO_BEUW:
++        stw_be_p(haddr, val);
+         break;
+-    case 4:
+-        if (big_endian) {
+-            stl_be_p(haddr, val);
+-        } else {
+-            stl_le_p(haddr, val);
+-        }
++    case MO_LEUW:
++        stw_le_p(haddr, val);
+         break;
+-    case 8:
+-        if (big_endian) {
+-            stq_be_p(haddr, val);
+-        } else {
+-            stq_le_p(haddr, val);
+-        }
++    case MO_BEUL:
++        stl_be_p(haddr, val);
++        break;
++    case MO_LEUL:
++        stl_le_p(haddr, val);
++        break;
++    case MO_BEQ:
++        stq_be_p(haddr, val);
++        break;
++    case MO_LEQ:
++        stq_le_p(haddr, val);
+         break;
+     default:
+         g_assert_not_reached();
+@@ -1639,43 +1636,43 @@ store_helper(CPUArchState *env, target_ulong addr, =
+uint64_t val,
+ void helper_ret_stb_mmu(CPUArchState *env, target_ulong addr, uint8_t val,
+                         TCGMemOpIdx oi, uintptr_t retaddr)
+ {
+-    store_helper(env, addr, val, oi, retaddr, 1, false);
++    store_helper(env, addr, val, oi, retaddr, MO_8);
+ }
 
- common-obj-$(CONFIG_CADENCE) +=3D cadence_gem.o
--common-obj-$(CONFIG_STELLARIS_ENET) +=3D stellaris_enet.o
--common-obj-$(CONFIG_LANCE) +=3D lance.o
-+obj-$(CONFIG_STELLARIS_ENET) +=3D stellaris_enet.o
-+obj-$(CONFIG_LANCE) +=3D lance.o
- common-obj-$(CONFIG_SUNHME) +=3D sunhme.o
- common-obj-$(CONFIG_FTGMAC100) +=3D ftgmac100.o
- common-obj-$(CONFIG_SUNGEM) +=3D sungem.o
-diff --git a/hw/pci-host/Makefile.objs b/hw/pci-host/Makefile.objs
-index a9cd3e0..0970e8e 100644
---- a/hw/pci-host/Makefile.objs
-+++ b/hw/pci-host/Makefile.objs
-@@ -9,12 +9,12 @@ common-obj-$(CONFIG_UNIN_PCI) +=3D uninorth.o
- common-obj-$(CONFIG_PPCE500_PCI) +=3D ppce500.o
+ void helper_le_stw_mmu(CPUArchState *env, target_ulong addr, uint16_t val,
+                        TCGMemOpIdx oi, uintptr_t retaddr)
+ {
+-    store_helper(env, addr, val, oi, retaddr, 2, false);
++    store_helper(env, addr, val, oi, retaddr, MO_LEUW);
+ }
 
- # ARM devices
--common-obj-$(CONFIG_VERSATILE_PCI) +=3D versatile.o
-+obj-$(CONFIG_VERSATILE_PCI) +=3D versatile.o
+ void helper_be_stw_mmu(CPUArchState *env, target_ulong addr, uint16_t val,
+                        TCGMemOpIdx oi, uintptr_t retaddr)
+ {
+-    store_helper(env, addr, val, oi, retaddr, 2, true);
++    store_helper(env, addr, val, oi, retaddr, MO_BEUW);
+ }
 
- common-obj-$(CONFIG_PCI_SABRE) +=3D sabre.o
--common-obj-$(CONFIG_FULONG) +=3D bonito.o
-+obj-$(CONFIG_FULONG) +=3D bonito.o
- common-obj-$(CONFIG_PCI_PIIX) +=3D piix.o
--common-obj-$(CONFIG_PCI_EXPRESS_Q35) +=3D q35.o
-+obj-$(CONFIG_PCI_EXPRESS_Q35) +=3D q35.o
- common-obj-$(CONFIG_PCI_EXPRESS_GENERIC_BRIDGE) +=3D gpex.o
- common-obj-$(CONFIG_PCI_EXPRESS_XILINX) +=3D xilinx-pcie.o
+ void helper_le_stl_mmu(CPUArchState *env, target_ulong addr, uint32_t val,
+                        TCGMemOpIdx oi, uintptr_t retaddr)
+ {
+-    store_helper(env, addr, val, oi, retaddr, 4, false);
++    store_helper(env, addr, val, oi, retaddr, MO_LEUL);
+ }
 
-diff --git a/hw/scsi/Makefile.objs b/hw/scsi/Makefile.objs
-index 54b36ed..418af9a 100644
---- a/hw/scsi/Makefile.objs
-+++ b/hw/scsi/Makefile.objs
-@@ -4,7 +4,7 @@ common-obj-$(CONFIG_LSI_SCSI_PCI) +=3D lsi53c895a.o
- common-obj-$(CONFIG_MPTSAS_SCSI_PCI) +=3D mptsas.o mptconfig.o mptendian.o
- common-obj-$(CONFIG_MEGASAS_SCSI_PCI) +=3D megasas.o
- common-obj-$(CONFIG_VMW_PVSCSI_SCSI_PCI) +=3D vmw_pvscsi.o
--common-obj-$(CONFIG_ESP) +=3D esp.o
-+obj-$(CONFIG_ESP) +=3D esp.o
- common-obj-$(CONFIG_ESP_PCI) +=3D esp-pci.o
- obj-$(CONFIG_SPAPR_VSCSI) +=3D spapr_vscsi.o
+ void helper_be_stl_mmu(CPUArchState *env, target_ulong addr, uint32_t val,
+                        TCGMemOpIdx oi, uintptr_t retaddr)
+ {
+-    store_helper(env, addr, val, oi, retaddr, 4, true);
++    store_helper(env, addr, val, oi, retaddr, MO_BEUL);
+ }
 
-diff --git a/hw/sd/Makefile.objs b/hw/sd/Makefile.objs
-index 0665727..a8cd6bf 100644
---- a/hw/sd/Makefile.objs
-+++ b/hw/sd/Makefile.objs
-@@ -1,4 +1,4 @@
--common-obj-$(CONFIG_PL181) +=3D pl181.o
-+obj-$(CONFIG_PL181) +=3D pl181.o
- common-obj-$(CONFIG_SSI_SD) +=3D ssi-sd.o
- common-obj-$(CONFIG_SD) +=3D sd.o core.o sdmmc-internal.o
- common-obj-$(CONFIG_SDHCI) +=3D sdhci.o
-diff --git a/hw/ssi/Makefile.objs b/hw/ssi/Makefile.objs
-index f5bcc65..b084802 100644
---- a/hw/ssi/Makefile.objs
-+++ b/hw/ssi/Makefile.objs
-@@ -1,10 +1,10 @@
--common-obj-$(CONFIG_PL022) +=3D pl022.o
-+obj-$(CONFIG_PL022) +=3D pl022.o
- common-obj-$(CONFIG_SSI) +=3D ssi.o
--common-obj-$(CONFIG_XILINX_SPI) +=3D xilinx_spi.o
--common-obj-$(CONFIG_XILINX_SPIPS) +=3D xilinx_spips.o
-+obj-$(CONFIG_XILINX_SPI) +=3D xilinx_spi.o
-+obj-$(CONFIG_XILINX_SPIPS) +=3D xilinx_spips.o
- common-obj-$(CONFIG_ASPEED_SOC) +=3D aspeed_smc.o
--common-obj-$(CONFIG_STM32F2XX_SPI) +=3D stm32f2xx_spi.o
--common-obj-$(CONFIG_MSF2) +=3D mss-spi.o
-+obj-$(CONFIG_STM32F2XX_SPI) +=3D stm32f2xx_spi.o
-+obj-$(CONFIG_MSF2) +=3D mss-spi.o
+ void helper_le_stq_mmu(CPUArchState *env, target_ulong addr, uint64_t val,
+                        TCGMemOpIdx oi, uintptr_t retaddr)
+ {
+-    store_helper(env, addr, val, oi, retaddr, 8, false);
++    store_helper(env, addr, val, oi, retaddr, MO_LEQ);
+ }
 
- obj-$(CONFIG_OMAP) +=3D omap_spi.o
- obj-$(CONFIG_IMX) +=3D imx_spi.o
-diff --git a/hw/timer/Makefile.objs b/hw/timer/Makefile.objs
-index 123d92c..0a8f651 100644
---- a/hw/timer/Makefile.objs
-+++ b/hw/timer/Makefile.objs
-@@ -1,27 +1,27 @@
--common-obj-$(CONFIG_ARM_TIMER) +=3D arm_timer.o
--common-obj-$(CONFIG_ARM_MPTIMER) +=3D arm_mptimer.o
--common-obj-$(CONFIG_ARM_V7M) +=3D armv7m_systick.o
--common-obj-$(CONFIG_A9_GTIMER) +=3D a9gtimer.o
--common-obj-$(CONFIG_CADENCE) +=3D cadence_ttc.o
-+obj-$(CONFIG_ARM_TIMER) +=3D arm_timer.o
-+obj-$(CONFIG_ARM_MPTIMER) +=3D arm_mptimer.o
-+obj-$(CONFIG_ARM_V7M) +=3D armv7m_systick.o
-+obj-$(CONFIG_A9_GTIMER) +=3D a9gtimer.o
-+obj-$(CONFIG_CADENCE) +=3D cadence_ttc.o
- common-obj-$(CONFIG_DS1338) +=3D ds1338.o
--common-obj-$(CONFIG_HPET) +=3D hpet.o
-+obj-$(CONFIG_HPET) +=3D hpet.o
- common-obj-$(CONFIG_I8254) +=3D i8254_common.o i8254.o
- common-obj-$(CONFIG_M41T80) +=3D m41t80.o
- common-obj-$(CONFIG_M48T59) +=3D m48t59.o
- ifeq ($(CONFIG_ISA_BUS),y)
- common-obj-$(CONFIG_M48T59) +=3D m48t59-isa.o
- endif
--common-obj-$(CONFIG_PL031) +=3D pl031.o
--common-obj-$(CONFIG_PUV3) +=3D puv3_ost.o
-+obj-$(CONFIG_PL031) +=3D pl031.o
-+obj-$(CONFIG_PUV3) +=3D puv3_ost.o
- common-obj-$(CONFIG_TWL92230) +=3D twl92230.o
--common-obj-$(CONFIG_XILINX) +=3D xilinx_timer.o
--common-obj-$(CONFIG_SLAVIO) +=3D slavio_timer.o
-+obj-$(CONFIG_XILINX) +=3D xilinx_timer.o
-+obj-$(CONFIG_SLAVIO) +=3D slavio_timer.o
- common-obj-$(CONFIG_ETRAXFS) +=3D etraxfs_timer.o
--common-obj-$(CONFIG_GRLIB) +=3D grlib_gptimer.o
--common-obj-$(CONFIG_IMX) +=3D imx_epit.o
--common-obj-$(CONFIG_IMX) +=3D imx_gpt.o
--common-obj-$(CONFIG_LM32) +=3D lm32_timer.o
--common-obj-$(CONFIG_MILKYMIST) +=3D milkymist-sysctl.o
-+obj-$(CONFIG_GRLIB) +=3D grlib_gptimer.o
-+obj-$(CONFIG_IMX) +=3D imx_epit.o
-+obj-$(CONFIG_IMX) +=3D imx_gpt.o
-+obj-$(CONFIG_LM32) +=3D lm32_timer.o
-+obj-$(CONFIG_MILKYMIST) +=3D milkymist-sysctl.o
- common-obj-$(CONFIG_XLNX_ZYNQMP) +=3D xlnx-zynqmp-rtc.o
- common-obj-$(CONFIG_NRF51_SOC) +=3D nrf51_timer.o
+ void helper_be_stq_mmu(CPUArchState *env, target_ulong addr, uint64_t val,
+                        TCGMemOpIdx oi, uintptr_t retaddr)
+ {
+-    store_helper(env, addr, val, oi, retaddr, 8, true);
++    store_helper(env, addr, val, oi, retaddr, MO_BEQ);
+ }
 
-@@ -40,10 +40,11 @@ obj-$(CONFIG_MC146818RTC) +=3D mc146818rtc.o
+ /* First set of helpers allows passing in of OI and RETADDR.  This makes
+@@ -1740,8 +1737,7 @@ void helper_be_stq_mmu(CPUArchState *env, target_ulon=
+g addr, uint64_t val,
+ static uint64_t full_ldub_cmmu(CPUArchState *env, target_ulong addr,
+                                TCGMemOpIdx oi, uintptr_t retaddr)
+ {
+-    return load_helper(env, addr, oi, retaddr, 1, false, true,
+-                       full_ldub_cmmu);
++    return load_helper(env, addr, oi, retaddr, MO_8, true, full_ldub_cmmu)=
+;
+ }
 
- obj-$(CONFIG_ALLWINNER_A10_PIT) +=3D allwinner-a10-pit.o
+ uint8_t helper_ret_ldb_cmmu(CPUArchState *env, target_ulong addr,
+@@ -1753,7 +1749,7 @@ uint8_t helper_ret_ldb_cmmu(CPUArchState *env, target=
+_ulong addr,
+ static uint64_t full_le_lduw_cmmu(CPUArchState *env, target_ulong addr,
+                                   TCGMemOpIdx oi, uintptr_t retaddr)
+ {
+-    return load_helper(env, addr, oi, retaddr, 2, false, true,
++    return load_helper(env, addr, oi, retaddr, MO_LEUW, true,
+                        full_le_lduw_cmmu);
+ }
 
--common-obj-$(CONFIG_STM32F2XX_TIMER) +=3D stm32f2xx_timer.o
--common-obj-$(CONFIG_ASPEED_SOC) +=3D aspeed_timer.o aspeed_rtc.o
-+obj-$(CONFIG_STM32F2XX_TIMER) +=3D stm32f2xx_timer.o
-+common-obj-$(CONFIG_ASPEED_SOC) +=3D aspeed_timer.o
-+obj-$(CONFIG_ASPEED_SOC) +=3D aspeed_rtc.o
+@@ -1766,7 +1762,7 @@ uint16_t helper_le_ldw_cmmu(CPUArchState *env, target=
+_ulong addr,
+ static uint64_t full_be_lduw_cmmu(CPUArchState *env, target_ulong addr,
+                                   TCGMemOpIdx oi, uintptr_t retaddr)
+ {
+-    return load_helper(env, addr, oi, retaddr, 2, true, true,
++    return load_helper(env, addr, oi, retaddr, MO_BEUW, true,
+                        full_be_lduw_cmmu);
+ }
 
--common-obj-$(CONFIG_SUN4V_RTC) +=3D sun4v-rtc.o
-+obj-$(CONFIG_SUN4V_RTC) +=3D sun4v-rtc.o
- common-obj-$(CONFIG_CMSDK_APB_TIMER) +=3D cmsdk-apb-timer.o
- common-obj-$(CONFIG_CMSDK_APB_DUALTIMER) +=3D cmsdk-apb-dualtimer.o
--common-obj-$(CONFIG_MSF2) +=3D mss-timer.o
-+obj-$(CONFIG_MSF2) +=3D mss-timer.o
-diff --git a/hw/virtio/Makefile.objs b/hw/virtio/Makefile.objs
-index 964ce78..573b1a9 100644
---- a/hw/virtio/Makefile.objs
-+++ b/hw/virtio/Makefile.objs
-@@ -8,7 +8,7 @@ obj-$(CONFIG_VHOST_USER) +=3D vhost-user.o
+@@ -1779,7 +1775,7 @@ uint16_t helper_be_ldw_cmmu(CPUArchState *env, target=
+_ulong addr,
+ static uint64_t full_le_ldul_cmmu(CPUArchState *env, target_ulong addr,
+                                   TCGMemOpIdx oi, uintptr_t retaddr)
+ {
+-    return load_helper(env, addr, oi, retaddr, 4, false, true,
++    return load_helper(env, addr, oi, retaddr, MO_LEUL, true,
+                        full_le_ldul_cmmu);
+ }
 
- common-obj-$(CONFIG_VIRTIO_RNG) +=3D virtio-rng.o
- common-obj-$(CONFIG_VIRTIO_PCI) +=3D virtio-pci.o
--common-obj-$(CONFIG_VIRTIO_MMIO) +=3D virtio-mmio.o
-+obj-$(CONFIG_VIRTIO_MMIO) +=3D virtio-mmio.o
- obj-$(CONFIG_VIRTIO_BALLOON) +=3D virtio-balloon.o
- obj-$(CONFIG_VIRTIO_CRYPTO) +=3D virtio-crypto.o
- obj-$(call land,$(CONFIG_VIRTIO_CRYPTO),$(CONFIG_VIRTIO_PCI)) +=3D virtio-=
-crypto-pci.o
+@@ -1792,7 +1788,7 @@ uint32_t helper_le_ldl_cmmu(CPUArchState *env, target=
+_ulong addr,
+ static uint64_t full_be_ldul_cmmu(CPUArchState *env, target_ulong addr,
+                                   TCGMemOpIdx oi, uintptr_t retaddr)
+ {
+-    return load_helper(env, addr, oi, retaddr, 4, true, true,
++    return load_helper(env, addr, oi, retaddr, MO_BEUL, true,
+                        full_be_ldul_cmmu);
+ }
+
+@@ -1805,13 +1801,13 @@ uint32_t helper_be_ldl_cmmu(CPUArchState *env, targ=
+et_ulong addr,
+ uint64_t helper_le_ldq_cmmu(CPUArchState *env, target_ulong addr,
+                             TCGMemOpIdx oi, uintptr_t retaddr)
+ {
+-    return load_helper(env, addr, oi, retaddr, 8, false, true,
++    return load_helper(env, addr, oi, retaddr, MO_LEQ, true,
+                        helper_le_ldq_cmmu);
+ }
+
+ uint64_t helper_be_ldq_cmmu(CPUArchState *env, target_ulong addr,
+                             TCGMemOpIdx oi, uintptr_t retaddr)
+ {
+-    return load_helper(env, addr, oi, retaddr, 8, true, true,
++    return load_helper(env, addr, oi, retaddr, MO_BEQ, true,
+                        helper_be_ldq_cmmu);
+ }
+diff --git a/include/exec/memop.h b/include/exec/memop.h
+index 47a5500..e6e03d9 100644
+--- a/include/exec/memop.h
++++ b/include/exec/memop.h
+@@ -129,4 +129,10 @@ static inline MemOp size_memop(unsigned size)
+ #endif
+ }
+
++/* Big endianness from MemOp.  */
++static inline bool memop_big_endian(MemOp op)
++{
++    return (op & MO_BSWAP) =3D=3D MO_BE;
++}
++
+ #endif
+diff --git a/memory.c b/memory.c
+index 11db6ec..264c624 100644
+--- a/memory.c
++++ b/memory.c
+@@ -343,15 +343,6 @@ static void flatview_simplify(FlatView *view)
+     }
+ }
+
+-static bool memory_region_big_endian(MemoryRegion *mr)
+-{
+-#ifdef TARGET_WORDS_BIGENDIAN
+-    return mr->ops->endianness !=3D MO_LE;
+-#else
+-    return mr->ops->endianness =3D=3D MO_BE;
+-#endif
+-}
+-
+ static bool memory_region_wrong_endianness(MemoryRegion *mr)
+ {
+ #ifdef TARGET_WORDS_BIGENDIAN
+@@ -564,7 +555,7 @@ static MemTxResult access_with_adjusted_size(hwaddr add=
+r,
+     /* FIXME: support unaligned access? */
+     access_size =3D MAX(MIN(size, access_size_max), access_size_min);
+     access_mask =3D MAKE_64BIT_MASK(0, access_size * 8);
+-    if (memory_region_big_endian(mr)) {
++    if (memop_big_endian(mr->ops->endianness)) {
+         for (i =3D 0; i < size; i +=3D access_size) {
+             r |=3D access_fn(mr, addr + i, value, access_size,
+                         (size - access_size - i) * 8, access_mask, attrs);
 --
 1.8.3.1
 
 ?
 
 
---_000_156516666883025608btcom_
+--_000_156516681911114515btcom_
 Content-Type: text/html; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
@@ -648,613 +641,743 @@ der-left-width: 2px; border-left-style: solid; border-left-color: rgb(128, =
 <body dir=3D"ltr" style=3D"font-size:12pt;color:#000000;background-color:#F=
 FFFFF;font-family:Calibri,Arial,Helvetica,sans-serif;">
 <p></p>
-<div style=3D"color: rgb(33, 33, 33);"><font size=3D"2"><span style=3D"font=
--size:10pt;">
-<div class=3D"PlainText">
-<div><span style=3D"font-size: 10pt;">Preparation for replacing device_endi=
-an with MemOp.</span><br>
+<div><span style=3D"font-size: 12pt;">Preparation for collapsing the two by=
+te swaps adjust_endianness and</span><br>
 </div>
-<div><br>
-</div>
-<div>Device realizing code with MemorRegionOps endianness as</div>
-<div>DEVICE_NATIVE_ENDIAN is not common code.</div>
-<div><br>
-</div>
-<div>Corrected devices were identified by making the declaration of</div>
-<div>DEVICE_NATIVE_ENDIAN conditional upon NEED_CPU_H and then listing</div=
->
-<div>what failed to compile.</div>
+<div>handle_bswap into the former.</div>
 <div><br>
 </div>
 <div>Signed-off-by: Tony Nguyen &lt;tony.nguyen@bt.com&gt;</div>
 <div>---</div>
-<div>&nbsp;hw/audio/Makefile.objs &nbsp; &nbsp;| 11 &#43;&#43;&#43;&#43;&#4=
-3;&#43;-----</div>
-<div>&nbsp;hw/block/Makefile.objs &nbsp; &nbsp;| &nbsp;8 &#43;&#43;&#43;&#4=
-3;----</div>
-<div>&nbsp;hw/char/Makefile.objs &nbsp; &nbsp; | 22 &#43;&#43;&#43;&#43;&#4=
-3;&#43;&#43;&#43;&#43;&#43;&#43;-----------</div>
-<div>&nbsp;hw/core/Makefile.objs &nbsp; &nbsp; | &nbsp;2 &#43;-</div>
-<div>&nbsp;hw/display/Makefile.objs &nbsp;| 10 &#43;&#43;&#43;&#43;&#43;---=
---</div>
-<div>&nbsp;hw/dma/Makefile.objs &nbsp; &nbsp; &nbsp;| 18 &#43;&#43;&#43;&#4=
-3;&#43;&#43;&#43;&#43;&#43;---------</div>
-<div>&nbsp;hw/gpio/Makefile.objs &nbsp; &nbsp; | &nbsp;6 &#43;&#43;&#43;---=
-</div>
-<div>&nbsp;hw/i2c/Makefile.objs &nbsp; &nbsp; &nbsp;| &nbsp;8 &#43;&#43;&#4=
-3;&#43;----</div>
-<div>&nbsp;hw/input/Makefile.objs &nbsp; &nbsp;| &nbsp;4 &#43;&#43;--</div>
-<div>&nbsp;hw/intc/Makefile.objs &nbsp; &nbsp; | 19 &#43;&#43;&#43;&#43;&#4=
-3;&#43;&#43;&#43;&#43;&#43;---------</div>
-<div>&nbsp;hw/ipack/Makefile.objs &nbsp; &nbsp;| &nbsp;2 &#43;-</div>
-<div>&nbsp;hw/isa/Makefile.objs &nbsp; &nbsp; &nbsp;| &nbsp;2 &#43;-</div>
-<div>&nbsp;hw/misc/Makefile.objs &nbsp; &nbsp; | 18 &#43;&#43;&#43;&#43;&#4=
-3;&#43;&#43;&#43;&#43;---------</div>
-<div>&nbsp;hw/net/Makefile.objs &nbsp; &nbsp; &nbsp;| 14 &#43;&#43;&#43;&#4=
-3;&#43;&#43;&#43;-------</div>
-<div>&nbsp;hw/pci-host/Makefile.objs | &nbsp;6 &#43;&#43;&#43;---</div>
-<div>&nbsp;hw/scsi/Makefile.objs &nbsp; &nbsp; | &nbsp;2 &#43;-</div>
-<div>&nbsp;hw/sd/Makefile.objs &nbsp; &nbsp; &nbsp; | &nbsp;2 &#43;-</div>
-<div>&nbsp;hw/ssi/Makefile.objs &nbsp; &nbsp; &nbsp;| 10 &#43;&#43;&#43;&#4=
-3;&#43;-----</div>
-<div>&nbsp;hw/timer/Makefile.objs &nbsp; &nbsp;| 39 &#43;&#43;&#43;&#43;&#4=
-3;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#4=
-3;-------------------</div>
-<div>&nbsp;hw/virtio/Makefile.objs &nbsp; | &nbsp;2 &#43;-</div>
-<div>&nbsp;20 files changed, 104 insertions(&#43;), 101 deletions(-)</div>
+<div>&nbsp;accel/tcg/cputlb.c &nbsp; | 170 &#43;&#43;&#43;&#43;&#43;&#43;&#=
+43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#=
+43;&#43;&#43;&#43;--------------------------</div>
+<div>&nbsp;include/exec/memop.h | &nbsp; 6 &#43;&#43;</div>
+<div>&nbsp;memory.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | &nbsp;11 &#=
+43;---</div>
+<div>&nbsp;3 files changed, 90 insertions(&#43;), 97 deletions(-)</div>
 <div><br>
 </div>
-<div>diff --git a/hw/audio/Makefile.objs b/hw/audio/Makefile.objs</div>
-<div>index 63db383..40b26c6 100644</div>
-<div>--- a/hw/audio/Makefile.objs</div>
-<div>&#43;&#43;&#43; b/hw/audio/Makefile.objs</div>
-<div>@@ -5,14 &#43;5,15 @@ common-obj-$(CONFIG_AC97) &#43;=3D ac97.o</div>
-<div>&nbsp;common-obj-$(CONFIG_ADLIB) &#43;=3D fmopl.o adlib.o</div>
-<div>&nbsp;common-obj-$(CONFIG_GUS) &#43;=3D gus.o gusemu_hal.o gusemu_mixe=
-r.o</div>
-<div>&nbsp;common-obj-$(CONFIG_CS4231A) &#43;=3D cs4231a.o</div>
-<div>-common-obj-$(CONFIG_HDA) &#43;=3D intel-hda.o hda-codec.o</div>
-<div>&#43;common-obj-$(CONFIG_HDA) &#43;=3D hda-codec.o</div>
-<div>&#43;obj-$(CONFIG_HDA) &#43;=3D intel-hda.o</div>
+<div>diff --git a/accel/tcg/cputlb.c b/accel/tcg/cputlb.c</div>
+<div>index 6c83878..86d85cc 100644</div>
+<div>--- a/accel/tcg/cputlb.c</div>
+<div>&#43;&#43;&#43; b/accel/tcg/cputlb.c</div>
+<div>@@ -881,7 &#43;881,7 @@ static void tlb_fill(CPUState *cpu, target_ulo=
+ng addr, int size,</div>
 <div>&nbsp;</div>
-<div>&nbsp;common-obj-$(CONFIG_PCSPK) &#43;=3D pcspk.o</div>
-<div>&nbsp;common-obj-$(CONFIG_WM8750) &#43;=3D wm8750.o</div>
-<div>-common-obj-$(CONFIG_PL041) &#43;=3D pl041.o lm4549.o</div>
-<div>&#43;obj-$(CONFIG_PL041) &#43;=3D pl041.o lm4549.o</div>
-<div>&nbsp;</div>
-<div>-common-obj-$(CONFIG_CS4231) &#43;=3D cs4231.o</div>
-<div>-common-obj-$(CONFIG_MARVELL_88W8618) &#43;=3D marvell_88w8618.o</div>
-<div>-common-obj-$(CONFIG_MILKYMIST) &#43;=3D milkymist-ac97.o</div>
-<div>&#43;obj-$(CONFIG_CS4231) &#43;=3D cs4231.o</div>
-<div>&#43;obj-$(CONFIG_MARVELL_88W8618) &#43;=3D marvell_88w8618.o</div>
-<div>&#43;obj-$(CONFIG_MILKYMIST) &#43;=3D milkymist-ac97.o</div>
-<div>&nbsp;</div>
-<div>&nbsp;common-obj-y &#43;=3D soundhw.o</div>
-<div>diff --git a/hw/block/Makefile.objs b/hw/block/Makefile.objs</div>
-<div>index f5f643f..9098cda 100644</div>
-<div>--- a/hw/block/Makefile.objs</div>
-<div>&#43;&#43;&#43; b/hw/block/Makefile.objs</div>
-<div>@@ -1,12 &#43;1,12 @@</div>
-<div>&nbsp;common-obj-y &#43;=3D block.o cdrom.o hd-geometry.o</div>
-<div>-common-obj-$(CONFIG_FDC) &#43;=3D fdc.o</div>
-<div>&#43;obj-$(CONFIG_FDC) &#43;=3D fdc.o</div>
-<div>&nbsp;common-obj-$(CONFIG_SSI_M25P80) &#43;=3D m25p80.o</div>
-<div>&nbsp;common-obj-$(CONFIG_NAND) &#43;=3D nand.o</div>
-<div>-common-obj-$(CONFIG_PFLASH_CFI01) &#43;=3D pflash_cfi01.o</div>
-<div>-common-obj-$(CONFIG_PFLASH_CFI02) &#43;=3D pflash_cfi02.o</div>
-<div>&#43;obj-$(CONFIG_PFLASH_CFI01) &#43;=3D pflash_cfi01.o</div>
-<div>&#43;obj-$(CONFIG_PFLASH_CFI02) &#43;=3D pflash_cfi02.o</div>
-<div>&nbsp;common-obj-$(CONFIG_XEN) &#43;=3D xen-block.o</div>
-<div>&nbsp;common-obj-$(CONFIG_ECC) &#43;=3D ecc.o</div>
-<div>-common-obj-$(CONFIG_ONENAND) &#43;=3D onenand.o</div>
-<div>&#43;obj-$(CONFIG_ONENAND) &#43;=3D onenand.o</div>
-<div>&nbsp;common-obj-$(CONFIG_NVME_PCI) &#43;=3D nvme.o</div>
-<div>&nbsp;</div>
-<div>&nbsp;obj-$(CONFIG_SH4) &#43;=3D tc58128.o</div>
-<div>diff --git a/hw/char/Makefile.objs b/hw/char/Makefile.objs</div>
-<div>index 02d8a66..af3e76a 100644</div>
-<div>--- a/hw/char/Makefile.objs</div>
-<div>&#43;&#43;&#43; b/hw/char/Makefile.objs</div>
-<div>@@ -1,17 &#43;1,17 @@</div>
-<div>&nbsp;common-obj-$(CONFIG_IPACK) &#43;=3D ipoctal232.o</div>
-<div>-common-obj-$(CONFIG_ESCC) &#43;=3D escc.o</div>
-<div>&#43;obj-$(CONFIG_ESCC) &#43;=3D escc.o</div>
-<div>&nbsp;common-obj-$(CONFIG_NRF51_SOC) &#43;=3D nrf51_uart.o</div>
-<div>-common-obj-$(CONFIG_PARALLEL) &#43;=3D parallel.o</div>
-<div>&#43;obj-$(CONFIG_PARALLEL) &#43;=3D parallel.o</div>
-<div>&nbsp;common-obj-$(CONFIG_ISA_BUS) &#43;=3D parallel-isa.o</div>
-<div>-common-obj-$(CONFIG_PL011) &#43;=3D pl011.o</div>
-<div>-common-obj-$(CONFIG_SERIAL) &#43;=3D serial.o</div>
-<div>&#43;obj-$(CONFIG_PL011) &#43;=3D pl011.o</div>
-<div>&#43;obj-$(CONFIG_SERIAL) &#43;=3D serial.o</div>
-<div>&nbsp;common-obj-$(CONFIG_SERIAL_ISA) &#43;=3D serial-isa.o</div>
-<div>&nbsp;common-obj-$(CONFIG_SERIAL_PCI) &#43;=3D serial-pci.o</div>
-<div>&nbsp;common-obj-$(CONFIG_SERIAL_PCI_MULTI) &#43;=3D serial-pci-multi.=
-o</div>
-<div>&nbsp;common-obj-$(CONFIG_VIRTIO_SERIAL) &#43;=3D virtio-console.o</di=
+<div>&nbsp;static uint64_t io_readx(CPUArchState *env, CPUIOTLBEntry *iotlb=
+entry,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; &nbsp; int mmu_idx, target_ulong addr, uintptr_t retaddr,</di=
 v>
-<div>-common-obj-$(CONFIG_XILINX) &#43;=3D xilinx_uartlite.o</div>
-<div>&#43;obj-$(CONFIG_XILINX) &#43;=3D xilinx_uartlite.o</div>
-<div>&nbsp;common-obj-$(CONFIG_XEN) &#43;=3D xen_console.o</div>
-<div>-common-obj-$(CONFIG_CADENCE) &#43;=3D cadence_uart.o</div>
-<div>&#43;obj-$(CONFIG_CADENCE) &#43;=3D cadence_uart.o</div>
-<div>&nbsp;</div>
-<div>&nbsp;obj-$(CONFIG_EXYNOS4) &#43;=3D exynos4210_uart.o</div>
-<div>&nbsp;obj-$(CONFIG_COLDFIRE) &#43;=3D mcf_uart.o</div>
-<div>@@ -23,13 &#43;23,13 @@ obj-$(CONFIG_STM32F2XX_USART) &#43;=3D stm32f2=
-xx_usart.o</div>
-<div>&nbsp;obj-$(CONFIG_RASPI) &#43;=3D bcm2835_aux.o</div>
-<div>&nbsp;</div>
-<div>&nbsp;common-obj-$(CONFIG_CMSDK_APB_UART) &#43;=3D cmsdk-apb-uart.o</d=
-iv>
-<div>-common-obj-$(CONFIG_ETRAXFS) &#43;=3D etraxfs_ser.o</div>
-<div>&#43;obj-$(CONFIG_ETRAXFS) &#43;=3D etraxfs_ser.o</div>
-<div>&nbsp;common-obj-$(CONFIG_ISA_DEBUG) &#43;=3D debugcon.o</div>
-<div>-common-obj-$(CONFIG_GRLIB) &#43;=3D grlib_apbuart.o</div>
-<div>-common-obj-$(CONFIG_IMX) &#43;=3D imx_serial.o</div>
-<div>&#43;obj-$(CONFIG_GRLIB) &#43;=3D grlib_apbuart.o</div>
-<div>&#43;obj-$(CONFIG_IMX) &#43;=3D imx_serial.o</div>
-<div>&nbsp;common-obj-$(CONFIG_LM32) &#43;=3D lm32_juart.o</div>
-<div>-common-obj-$(CONFIG_LM32) &#43;=3D lm32_uart.o</div>
-<div>-common-obj-$(CONFIG_MILKYMIST) &#43;=3D milkymist-uart.o</div>
-<div>&#43;obj-$(CONFIG_LM32) &#43;=3D lm32_uart.o</div>
-<div>&#43;obj-$(CONFIG_MILKYMIST) &#43;=3D milkymist-uart.o</div>
-<div>&nbsp;common-obj-$(CONFIG_SCLPCONSOLE) &#43;=3D sclpconsole.o sclpcons=
-ole-lm.o</div>
-<div>&nbsp;</div>
-<div>&nbsp;obj-$(CONFIG_VIRTIO) &#43;=3D virtio-serial-bus.o</div>
-<div>diff --git a/hw/core/Makefile.objs b/hw/core/Makefile.objs</div>
-<div>index f8481d9..1b336c6 100644</div>
-<div>--- a/hw/core/Makefile.objs</div>
-<div>&#43;&#43;&#43; b/hw/core/Makefile.objs</div>
-<div>@@ -9,7 &#43;9,7 @@ common-obj-y &#43;=3D hotplug.o</div>
-<div>&nbsp;common-obj-$(CONFIG_SOFTMMU) &#43;=3D nmi.o</div>
-<div>&nbsp;common-obj-$(CONFIG_SOFTMMU) &#43;=3D vm-change-state-handler.o<=
+<div>- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
+; &nbsp; &nbsp; MMUAccessType access_type, int size)</div>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
+nbsp; &nbsp; &nbsp; MMUAccessType access_type, MemOp op)</div>
+<div>&nbsp;{</div>
+<div>&nbsp; &nbsp; &nbsp;CPUState *cpu =3D env_cpu(env);</div>
+<div>&nbsp; &nbsp; &nbsp;hwaddr mr_offset;</div>
+<div>@@ -906,14 &#43;906,13 @@ static uint64_t io_readx(CPUArchState *env, =
+CPUIOTLBEntry *iotlbentry,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;qemu_mutex_lock_iothread();</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;locked =3D true;</div>
+<div>&nbsp; &nbsp; &nbsp;}</div>
+<div>- &nbsp; &nbsp;r =3D memory_region_dispatch_read(mr, mr_offset, &amp;v=
+al, size_memop(size),</div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
+; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;iotlbentry-&gt;att=
+rs);</div>
+<div>&#43; &nbsp; &nbsp;r =3D memory_region_dispatch_read(mr, mr_offset, &a=
+mp;val, op, iotlbentry-&gt;attrs);</div>
+<div>&nbsp; &nbsp; &nbsp;if (r !=3D MEMTX_OK) {</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;hwaddr physaddr =3D mr_offset &#43;<=
 /div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;section-&gt;offset_wit=
+hin_address_space -</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;section-&gt;offset_wit=
+hin_region;</div>
 <div>&nbsp;</div>
-<div>-common-obj-$(CONFIG_EMPTY_SLOT) &#43;=3D empty_slot.o</div>
-<div>&#43;obj-$(CONFIG_EMPTY_SLOT) &#43;=3D empty_slot.o</div>
-<div>&nbsp;common-obj-$(CONFIG_XILINX_AXI) &#43;=3D stream.o</div>
-<div>&nbsp;common-obj-$(CONFIG_PTIMER) &#43;=3D ptimer.o</div>
-<div>&nbsp;common-obj-$(CONFIG_SOFTMMU) &#43;=3D sysbus.o</div>
-<div>diff --git a/hw/display/Makefile.objs b/hw/display/Makefile.objs</div>
-<div>index a64998f..53c3efb 100644</div>
-<div>--- a/hw/display/Makefile.objs</div>
-<div>&#43;&#43;&#43; b/hw/display/Makefile.objs</div>
-<div>@@ -8,8 &#43;8,8 @@ common-obj-$(CONFIG_ADS7846) &#43;=3D ads7846.o</d=
-iv>
-<div>&nbsp;common-obj-$(CONFIG_VGA_CIRRUS) &#43;=3D cirrus_vga.o</div>
-<div>&nbsp;common-obj-$(call land,$(CONFIG_VGA_CIRRUS),$(CONFIG_VGA_ISA))&#=
-43;=3Dcirrus_vga_isa.o</div>
-<div>&nbsp;common-obj-$(CONFIG_G364FB) &#43;=3D g364fb.o</div>
-<div>-common-obj-$(CONFIG_JAZZ_LED) &#43;=3D jazz_led.o</div>
-<div>-common-obj-$(CONFIG_PL110) &#43;=3D pl110.o</div>
-<div>&#43;obj-$(CONFIG_JAZZ_LED) &#43;=3D jazz_led.o</div>
-<div>&#43;obj-$(CONFIG_PL110) &#43;=3D pl110.o</div>
-<div>&nbsp;common-obj-$(CONFIG_SII9022) &#43;=3D sii9022.o</div>
-<div>&nbsp;common-obj-$(CONFIG_SSD0303) &#43;=3D ssd0303.o</div>
-<div>&nbsp;common-obj-$(CONFIG_SSD0323) &#43;=3D ssd0323.o</div>
-<div>@@ -17,15 &#43;17,15 @@ common-obj-$(CONFIG_XEN) &#43;=3D xenfb.o</div=
->
+<div>- &nbsp; &nbsp; &nbsp; &nbsp;cpu_transaction_failed(cpu, physaddr, add=
+r, size, access_type,</div>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp;cpu_transaction_failed(cpu, physaddr,=
+ addr, memop_size(op), access_type,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; mmu_idx, iotlbentry-&gt;attrs, r,=
+ retaddr);</div>
+<div>&nbsp; &nbsp; &nbsp;}</div>
+<div>&nbsp; &nbsp; &nbsp;if (locked) {</div>
+<div>@@ -925,7 &#43;924,7 @@ static uint64_t io_readx(CPUArchState *env, CP=
+UIOTLBEntry *iotlbentry,</div>
 <div>&nbsp;</div>
-<div>&nbsp;common-obj-$(CONFIG_VGA_PCI) &#43;=3D vga-pci.o</div>
-<div>&nbsp;common-obj-$(CONFIG_VGA_ISA) &#43;=3D vga-isa.o</div>
-<div>-common-obj-$(CONFIG_VGA_ISA_MM) &#43;=3D vga-isa-mm.o</div>
-<div>&#43;obj-$(CONFIG_VGA_ISA_MM) &#43;=3D vga-isa-mm.o</div>
-<div>&nbsp;common-obj-$(CONFIG_VMWARE_VGA) &#43;=3D vmware_vga.o</div>
-<div>&nbsp;common-obj-$(CONFIG_BOCHS_DISPLAY) &#43;=3D bochs-display.o</div=
->
-<div>&nbsp;</div>
-<div>&nbsp;common-obj-$(CONFIG_BLIZZARD) &#43;=3D blizzard.o</div>
-<div>-common-obj-$(CONFIG_EXYNOS4) &#43;=3D exynos4210_fimd.o</div>
-<div>&#43;obj-$(CONFIG_EXYNOS4) &#43;=3D exynos4210_fimd.o</div>
-<div>&nbsp;common-obj-$(CONFIG_FRAMEBUFFER) &#43;=3D framebuffer.o</div>
-<div>&nbsp;obj-$(CONFIG_MILKYMIST) &#43;=3D milkymist-vgafb.o</div>
-<div>-common-obj-$(CONFIG_ZAURUS) &#43;=3D tc6393xb.o</div>
-<div>&#43;obj-$(CONFIG_ZAURUS) &#43;=3D tc6393xb.o</div>
-<div>&nbsp;</div>
-<div>&nbsp;obj-$(CONFIG_MILKYMIST_TMU2) &#43;=3D milkymist-tmu2.o</div>
-<div>&nbsp;milkymist-tmu2.o-cflags :=3D $(X11_CFLAGS) $(OPENGL_CFLAGS)</div=
->
-<div>diff --git a/hw/dma/Makefile.objs b/hw/dma/Makefile.objs</div>
-<div>index 8b39f9c..7e17776 100644</div>
-<div>--- a/hw/dma/Makefile.objs</div>
-<div>&#43;&#43;&#43; b/hw/dma/Makefile.objs</div>
-<div>@@ -1,17 &#43;1,17 @@</div>
-<div>-common-obj-$(CONFIG_PUV3) &#43;=3D puv3_dma.o</div>
-<div>-common-obj-$(CONFIG_RC4030) &#43;=3D rc4030.o</div>
-<div>-common-obj-$(CONFIG_PL080) &#43;=3D pl080.o</div>
-<div>-common-obj-$(CONFIG_PL330) &#43;=3D pl330.o</div>
-<div>&#43;obj-$(CONFIG_PUV3) &#43;=3D puv3_dma.o</div>
-<div>&#43;obj-$(CONFIG_RC4030) &#43;=3D rc4030.o</div>
-<div>&#43;obj-$(CONFIG_PL080) &#43;=3D pl080.o</div>
-<div>&#43;obj-$(CONFIG_PL330) &#43;=3D pl330.o</div>
-<div>&nbsp;common-obj-$(CONFIG_I82374) &#43;=3D i82374.o</div>
-<div>-common-obj-$(CONFIG_I8257) &#43;=3D i8257.o</div>
-<div>-common-obj-$(CONFIG_XILINX_AXI) &#43;=3D xilinx_axidma.o</div>
-<div>&#43;obj-$(CONFIG_I8257) &#43;=3D i8257.o</div>
-<div>&#43;obj-$(CONFIG_XILINX_AXI) &#43;=3D xilinx_axidma.o</div>
-<div>&nbsp;common-obj-$(CONFIG_ZYNQ_DEVCFG) &#43;=3D xlnx-zynq-devcfg.o</di=
-v>
-<div>-common-obj-$(CONFIG_ETRAXFS) &#43;=3D etraxfs_dma.o</div>
-<div>-common-obj-$(CONFIG_STP2000) &#43;=3D sparc32_dma.o</div>
-<div>&#43;obj-$(CONFIG_ETRAXFS) &#43;=3D etraxfs_dma.o</div>
-<div>&#43;obj-$(CONFIG_STP2000) &#43;=3D sparc32_dma.o</div>
-<div>&nbsp;obj-$(CONFIG_XLNX_ZYNQMP) &#43;=3D xlnx_dpdma.o</div>
-<div>&nbsp;obj-$(CONFIG_XLNX_ZYNQMP_ARM) &#43;=3D xlnx_dpdma.o</div>
-<div>&nbsp;common-obj-$(CONFIG_XLNX_ZYNQMP_ARM) &#43;=3D xlnx-zdma.o</div>
-<div>&nbsp;</div>
-<div>&nbsp;obj-$(CONFIG_OMAP) &#43;=3D omap_dma.o soc_dma.o</div>
-<div>&nbsp;obj-$(CONFIG_PXA2XX) &#43;=3D pxa2xx_dma.o</div>
-<div>-common-obj-$(CONFIG_RASPI) &#43;=3D bcm2835_dma.o</div>
-<div>&#43;obj-$(CONFIG_RASPI) &#43;=3D bcm2835_dma.o</div>
-<div>diff --git a/hw/gpio/Makefile.objs b/hw/gpio/Makefile.objs</div>
-<div>index e5da0cb..9d297fd 100644</div>
-<div>--- a/hw/gpio/Makefile.objs</div>
-<div>&#43;&#43;&#43; b/hw/gpio/Makefile.objs</div>
-<div>@@ -1,7 &#43;1,7 @@</div>
-<div>&nbsp;common-obj-$(CONFIG_MAX7310) &#43;=3D max7310.o</div>
-<div>-common-obj-$(CONFIG_PL061) &#43;=3D pl061.o</div>
-<div>-common-obj-$(CONFIG_PUV3) &#43;=3D puv3_gpio.o</div>
-<div>-common-obj-$(CONFIG_ZAURUS) &#43;=3D zaurus.o</div>
-<div>&#43;obj-$(CONFIG_PL061) &#43;=3D pl061.o</div>
-<div>&#43;obj-$(CONFIG_PUV3) &#43;=3D puv3_gpio.o</div>
-<div>&#43;obj-$(CONFIG_ZAURUS) &#43;=3D zaurus.o</div>
-<div>&nbsp;common-obj-$(CONFIG_E500) &#43;=3D mpc8xxx.o</div>
-<div>&nbsp;common-obj-$(CONFIG_GPIO_KEY) &#43;=3D gpio_key.o</div>
-<div>&nbsp;</div>
-<div>diff --git a/hw/i2c/Makefile.objs b/hw/i2c/Makefile.objs</div>
-<div>index d7073a4..9c8839c 100644</div>
-<div>--- a/hw/i2c/Makefile.objs</div>
-<div>&#43;&#43;&#43; b/hw/i2c/Makefile.objs</div>
-<div>@@ -1,13 &#43;1,13 @@</div>
-<div>&nbsp;common-obj-$(CONFIG_I2C) &#43;=3D core.o smbus_slave.o smbus_mas=
-ter.o</div>
-<div>&nbsp;common-obj-$(CONFIG_SMBUS_EEPROM) &#43;=3D smbus_eeprom.o</div>
-<div>-common-obj-$(CONFIG_VERSATILE_I2C) &#43;=3D versatile_i2c.o</div>
-<div>&#43;obj-$(CONFIG_VERSATILE_I2C) &#43;=3D versatile_i2c.o</div>
-<div>&nbsp;common-obj-$(CONFIG_ACPI_X86_ICH) &#43;=3D smbus_ich9.o</div>
-<div>&nbsp;common-obj-$(CONFIG_ACPI_SMBUS) &#43;=3D pm_smbus.o</div>
-<div>&nbsp;common-obj-$(CONFIG_BITBANG_I2C) &#43;=3D bitbang_i2c.o</div>
-<div>-common-obj-$(CONFIG_EXYNOS4) &#43;=3D exynos4210_i2c.o</div>
-<div>-common-obj-$(CONFIG_IMX_I2C) &#43;=3D imx_i2c.o</div>
-<div>&#43;obj-$(CONFIG_EXYNOS4) &#43;=3D exynos4210_i2c.o</div>
-<div>&#43;obj-$(CONFIG_IMX_I2C) &#43;=3D imx_i2c.o</div>
-<div>&nbsp;common-obj-$(CONFIG_ASPEED_SOC) &#43;=3D aspeed_i2c.o</div>
-<div>&nbsp;common-obj-$(CONFIG_NRF51_SOC) &#43;=3D microbit_i2c.o</div>
-<div>-common-obj-$(CONFIG_MPC_I2C) &#43;=3D mpc_i2c.o</div>
-<div>&#43;obj-$(CONFIG_MPC_I2C) &#43;=3D mpc_i2c.o</div>
-<div>&nbsp;obj-$(CONFIG_OMAP) &#43;=3D omap_i2c.o</div>
-<div>&nbsp;obj-$(CONFIG_PPC4XX) &#43;=3D ppc4xx_i2c.o</div>
-<div>diff --git a/hw/input/Makefile.objs b/hw/input/Makefile.objs</div>
-<div>index a1bc502..e096cc5 100644</div>
-<div>--- a/hw/input/Makefile.objs</div>
-<div>&#43;&#43;&#43; b/hw/input/Makefile.objs</div>
-<div>@@ -1,8 &#43;1,8 @@</div>
-<div>&nbsp;common-obj-$(CONFIG_ADB) &#43;=3D adb.o adb-mouse.o adb-kbd.o</d=
-iv>
-<div>&nbsp;common-obj-y &#43;=3D hid.o</div>
-<div>&nbsp;common-obj-$(CONFIG_LM832X) &#43;=3D lm832x.o</div>
-<div>-common-obj-$(CONFIG_PCKBD) &#43;=3D pckbd.o</div>
-<div>-common-obj-$(CONFIG_PL050) &#43;=3D pl050.o</div>
-<div>&#43;obj-$(CONFIG_PCKBD) &#43;=3D pckbd.o</div>
-<div>&#43;obj-$(CONFIG_PL050) &#43;=3D pl050.o</div>
-<div>&nbsp;common-obj-$(CONFIG_PS2) &#43;=3D ps2.o</div>
-<div>&nbsp;common-obj-$(CONFIG_STELLARIS_INPUT) &#43;=3D stellaris_input.o<=
+<div>&nbsp;static void io_writex(CPUArchState *env, CPUIOTLBEntry *iotlbent=
+ry,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp;int mmu_idx, uint64_t val, target_ulong addr,</div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
+; &nbsp;uintptr_t retaddr, int size)</div>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
+nbsp; &nbsp;uintptr_t retaddr, MemOp op)</div>
+<div>&nbsp;{</div>
+<div>&nbsp; &nbsp; &nbsp;CPUState *cpu =3D env_cpu(env);</div>
+<div>&nbsp; &nbsp; &nbsp;hwaddr mr_offset;</div>
+<div>@@ -947,15 &#43;946,15 @@ static void io_writex(CPUArchState *env, CPU=
+IOTLBEntry *iotlbentry,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;qemu_mutex_lock_iothread();</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;locked =3D true;</div>
+<div>&nbsp; &nbsp; &nbsp;}</div>
+<div>- &nbsp; &nbsp;r =3D memory_region_dispatch_write(mr, mr_offset, val, =
+size_memop(size),</div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
+; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; iotlbentry-&gt;at=
+trs);</div>
+<div>&#43; &nbsp; &nbsp;r =3D memory_region_dispatch_write(mr, mr_offset, v=
+al, op, iotlbentry-&gt;attrs);</div>
+<div>&nbsp; &nbsp; &nbsp;if (r !=3D MEMTX_OK) {</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;hwaddr physaddr =3D mr_offset &#43;<=
 /div>
-<div>&nbsp;common-obj-$(CONFIG_TSC2005) &#43;=3D tsc2005.o</div>
-<div>diff --git a/hw/intc/Makefile.objs b/hw/intc/Makefile.objs</div>
-<div>index 03019b9..6d7ba84 100644</div>
-<div>--- a/hw/intc/Makefile.objs</div>
-<div>&#43;&#43;&#43; b/hw/intc/Makefile.objs</div>
-<div>@@ -1,24 &#43;1,25 @@</div>
-<div>&nbsp;common-obj-$(CONFIG_HEATHROW_PIC) &#43;=3D heathrow_pic.o</div>
-<div>&nbsp;common-obj-$(CONFIG_I8259) &#43;=3D i8259_common.o i8259.o</div>
-<div>-common-obj-$(CONFIG_PL190) &#43;=3D pl190.o</div>
-<div>-common-obj-$(CONFIG_PUV3) &#43;=3D puv3_intc.o</div>
-<div>-common-obj-$(CONFIG_XILINX) &#43;=3D xilinx_intc.o</div>
-<div>&#43;obj-$(CONFIG_PL190) &#43;=3D pl190.o</div>
-<div>&#43;obj-$(CONFIG_PUV3) &#43;=3D puv3_intc.o</div>
-<div>&#43;obj-$(CONFIG_XILINX) &#43;=3D xilinx_intc.o</div>
-<div>&nbsp;common-obj-$(CONFIG_XLNX_ZYNQMP) &#43;=3D xlnx-pmu-iomod-intc.o<=
-/div>
-<div>&nbsp;common-obj-$(CONFIG_XLNX_ZYNQMP) &#43;=3D xlnx-zynqmp-ipi.o</div=
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;section-&gt;offset_wit=
+hin_address_space -</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;section-&gt;offset_wit=
+hin_region;</div>
+<div>&nbsp;</div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp;cpu_transaction_failed(cpu, physaddr, add=
+r, size, MMU_DATA_STORE,</div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
+; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; mmu_idx, iotlbentry-&gt;attrs, r, reta=
+ddr);</div>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp;cpu_transaction_failed(cpu, physaddr,=
+ addr, memop_size(op),</div>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
+nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; MMU_DATA_STORE, mmu_idx, iotlbentr=
+y-&gt;attrs, r,</div>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
+nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; retaddr);</div>
+<div>&nbsp; &nbsp; &nbsp;}</div>
+<div>&nbsp; &nbsp; &nbsp;if (locked) {</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;qemu_mutex_unlock_iothread();</div>
+<div>@@ -1216,14 &#43;1215,15 @@ static void *atomic_mmu_lookup(CPUArchStat=
+e *env, target_ulong addr,</div>
+<div>&nbsp; * access type.</div>
+<div>&nbsp; */</div>
+<div>&nbsp;</div>
+<div>-static inline uint64_t handle_bswap(uint64_t val, int size, bool big_=
+endian)</div>
+<div>&#43;static inline uint64_t handle_bswap(uint64_t val, MemOp op)</div>
+<div>&nbsp;{</div>
+<div>- &nbsp; &nbsp;if ((big_endian &amp;&amp; NEED_BE_BSWAP) || (!big_endi=
+an &amp;&amp; NEED_LE_BSWAP)) {</div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp;switch (size) {</div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp;case 1: return val;</div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp;case 2: return bswap16(val);</div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp;case 4: return bswap32(val);</div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp;case 8: return bswap64(val);</div>
+<div>&#43; &nbsp; &nbsp;if ((memop_big_endian(op) &amp;&amp; NEED_BE_BSWAP)=
+ ||</div>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp;(!memop_big_endian(op) &amp;&amp; NEE=
+D_LE_BSWAP)) {</div>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp;switch (op &amp; MO_SIZE) {</div>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp;case MO_8: return val;</div>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp;case MO_16: return bswap16(val);</div=
 >
-<div>-common-obj-$(CONFIG_ETRAXFS) &#43;=3D etraxfs_pic.o</div>
-<div>-common-obj-$(CONFIG_IMX) &#43;=3D imx_avic.o imx_gpcv2.o</div>
-<div>&#43;obj-$(CONFIG_ETRAXFS) &#43;=3D etraxfs_pic.o</div>
-<div>&#43;obj-$(CONFIG_IMX) &#43;=3D imx_avic.o</div>
-<div>&#43;obj-$(CONFIG_IMX) &#43;=3D imx_gpcv2.o</div>
-<div>&nbsp;common-obj-$(CONFIG_LM32) &#43;=3D lm32_pic.o</div>
-<div>&nbsp;common-obj-$(CONFIG_REALVIEW) &#43;=3D realview_gic.o</div>
-<div>-common-obj-$(CONFIG_SLAVIO) &#43;=3D slavio_intctl.o</div>
-<div>&#43;obj-$(CONFIG_SLAVIO) &#43;=3D slavio_intctl.o</div>
-<div>&nbsp;common-obj-$(CONFIG_IOAPIC) &#43;=3D ioapic_common.o</div>
-<div>&nbsp;common-obj-$(CONFIG_ARM_GIC) &#43;=3D arm_gic_common.o</div>
-<div>-common-obj-$(CONFIG_ARM_GIC) &#43;=3D arm_gic.o</div>
-<div>&#43;obj-$(CONFIG_ARM_GIC) &#43;=3D arm_gic.o</div>
-<div>&nbsp;common-obj-$(CONFIG_ARM_GIC) &#43;=3D arm_gicv2m.o</div>
-<div>&nbsp;common-obj-$(CONFIG_ARM_GIC) &#43;=3D arm_gicv3_common.o</div>
-<div>-common-obj-$(CONFIG_ARM_GIC) &#43;=3D arm_gicv3.o</div>
-<div>&#43;obj-$(CONFIG_ARM_GIC) &#43;=3D arm_gicv3.o</div>
-<div>&nbsp;common-obj-$(CONFIG_ARM_GIC) &#43;=3D arm_gicv3_dist.o</div>
-<div>&nbsp;common-obj-$(CONFIG_ARM_GIC) &#43;=3D arm_gicv3_redist.o</div>
-<div>-common-obj-$(CONFIG_ARM_GIC) &#43;=3D arm_gicv3_its_common.o</div>
-<div>&#43;obj-$(CONFIG_ARM_GIC) &#43;=3D arm_gicv3_its_common.o</div>
-<div>&nbsp;common-obj-$(CONFIG_OPENPIC) &#43;=3D openpic.o</div>
-<div>&nbsp;common-obj-y &#43;=3D intc.o</div>
-<div>&nbsp;</div>
-<div>diff --git a/hw/ipack/Makefile.objs b/hw/ipack/Makefile.objs</div>
-<div>index 8b9bdcb..a7c5485 100644</div>
-<div>--- a/hw/ipack/Makefile.objs</div>
-<div>&#43;&#43;&#43; b/hw/ipack/Makefile.objs</div>
-<div>@@ -1,2 &#43;1,2 @@</div>
-<div>&nbsp;common-obj-$(CONFIG_IPACK) &#43;=3D ipack.o</div>
-<div>-common-obj-$(CONFIG_IPACK) &#43;=3D tpci200.o</div>
-<div>&#43;obj-$(CONFIG_IPACK) &#43;=3D tpci200.o</div>
-<div>diff --git a/hw/isa/Makefile.objs b/hw/isa/Makefile.objs</div>
-<div>index 9e106df..898b504 100644</div>
-<div>--- a/hw/isa/Makefile.objs</div>
-<div>&#43;&#43;&#43; b/hw/isa/Makefile.objs</div>
-<div>@@ -4,7 &#43;4,7 @@ common-obj-$(CONFIG_APM) &#43;=3D apm.o</div>
-<div>&nbsp;common-obj-$(CONFIG_I82378) &#43;=3D i82378.o</div>
-<div>&nbsp;common-obj-$(CONFIG_PC87312) &#43;=3D pc87312.o</div>
-<div>&nbsp;common-obj-$(CONFIG_PIIX4) &#43;=3D piix4.o</div>
-<div>-common-obj-$(CONFIG_VT82C686) &#43;=3D vt82c686.o</div>
-<div>&#43;obj-$(CONFIG_VT82C686) &#43;=3D vt82c686.o</div>
-<div>&nbsp;common-obj-$(CONFIG_SMC37C669) &#43;=3D smc37c669-superio.o</div=
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp;case MO_32: return bswap32(val);</div=
 >
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp;case MO_64: return bswap64(val);</div=
+>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;default:</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;g_assert_not_reached()=
+;</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}</div>
+<div>@@ -1246,7 &#43;1246,7 @@ typedef uint64_t FullLoadHelper(CPUArchState=
+ *env, target_ulong addr,</div>
 <div>&nbsp;</div>
-<div>&nbsp;obj-$(CONFIG_LPC_ICH9) &#43;=3D lpc_ich9.o</div>
-<div>diff --git a/hw/misc/Makefile.objs b/hw/misc/Makefile.objs</div>
-<div>index e9aab51..6ee5a8a 100644</div>
-<div>--- a/hw/misc/Makefile.objs</div>
-<div>&#43;&#43;&#43; b/hw/misc/Makefile.objs</div>
-<div>@@ -1,4 &#43;1,4 @@</div>
-<div>-common-obj-$(CONFIG_APPLESMC) &#43;=3D applesmc.o</div>
-<div>&#43;obj-$(CONFIG_APPLESMC) &#43;=3D applesmc.o</div>
-<div>&nbsp;common-obj-$(CONFIG_MAX111X) &#43;=3D max111x.o</div>
-<div>&nbsp;common-obj-$(CONFIG_TMP105) &#43;=3D tmp105.o</div>
-<div>&nbsp;common-obj-$(CONFIG_TMP421) &#43;=3D tmp421.o</div>
-<div>@@ -6,23 &#43;6,23 @@ common-obj-$(CONFIG_ISA_DEBUG) &#43;=3D debugexi=
-t.o</div>
-<div>&nbsp;common-obj-$(CONFIG_SGA) &#43;=3D sga.o</div>
-<div>&nbsp;common-obj-$(CONFIG_ISA_TESTDEV) &#43;=3D pc-testdev.o</div>
-<div>&nbsp;common-obj-$(CONFIG_PCI_TESTDEV) &#43;=3D pci-testdev.o</div>
-<div>-common-obj-$(CONFIG_EDU) &#43;=3D edu.o</div>
-<div>&#43;obj-$(CONFIG_EDU) &#43;=3D edu.o</div>
-<div>&nbsp;common-obj-$(CONFIG_PCA9552) &#43;=3D pca9552.o</div>
+<div>&nbsp;static inline uint64_t __attribute__((always_inline))</div>
+<div>&nbsp;load_helper(CPUArchState *env, target_ulong addr, TCGMemOpIdx oi=
+,</div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;uintptr_t retaddr, size_t s=
+ize, bool big_endian, bool code_read,</div>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;uintptr_t retaddr, MemO=
+p op, bool code_read,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;FullLoadHelper *full_l=
+oad)</div>
+<div>&nbsp;{</div>
+<div>&nbsp; &nbsp; &nbsp;uintptr_t mmu_idx =3D get_mmuidx(oi);</div>
+<div>@@ -1260,6 &#43;1260,7 @@ load_helper(CPUArchState *env, target_ulong =
+addr, TCGMemOpIdx oi,</div>
+<div>&nbsp; &nbsp; &nbsp;unsigned a_bits =3D get_alignment_bits(get_memop(o=
+i));</div>
+<div>&nbsp; &nbsp; &nbsp;void *haddr;</div>
+<div>&nbsp; &nbsp; &nbsp;uint64_t res;</div>
+<div>&#43; &nbsp; &nbsp;size_t size =3D memop_size(op);</div>
 <div>&nbsp;</div>
-<div>-common-obj-y &#43;=3D unimp.o</div>
-<div>&#43;obj-y &#43;=3D unimp.o</div>
-<div>&nbsp;common-obj-$(CONFIG_FW_CFG_DMA) &#43;=3D vmcoreinfo.o</div>
+<div>&nbsp; &nbsp; &nbsp;/* Handle CPU specific unaligned behaviour */</div=
+>
+<div>&nbsp; &nbsp; &nbsp;if (addr &amp; ((1 &lt;&lt; a_bits) - 1)) {</div>
+<div>@@ -1305,9 &#43;1306,10 @@ load_helper(CPUArchState *env, target_ulong=
+ addr, TCGMemOpIdx oi,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}</div>
 <div>&nbsp;</div>
-<div>&nbsp;# ARM devices</div>
-<div>-common-obj-$(CONFIG_PL310) &#43;=3D arm_l2x0.o</div>
-<div>-common-obj-$(CONFIG_INTEGRATOR_DEBUG) &#43;=3D arm_integrator_debug.o=
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp;/* FIXME: io_readx ignores MO_BSWAP. =
+&nbsp;*/</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;res =3D io_readx(env, &amp;env_tlb(e=
+nv)-&gt;d[mmu_idx].iotlb[index],</div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
+; &nbsp; mmu_idx, addr, retaddr, access_type, size);</div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp;return handle_bswap(res, size, big_endian=
+);</div>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
+nbsp; &nbsp; mmu_idx, addr, retaddr, access_type, op);</div>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp;return handle_bswap(res, op);</div>
+<div>&nbsp; &nbsp; &nbsp;}</div>
+<div>&nbsp;</div>
+<div>&nbsp; &nbsp; &nbsp;/* Handle slow unaligned access (it spans two page=
+s or IO). &nbsp;*/</div>
+<div>@@ -1324,7 &#43;1326,7 @@ load_helper(CPUArchState *env, target_ulong =
+addr, TCGMemOpIdx oi,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;r2 =3D full_load(env, addr2, oi, ret=
+addr);</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;shift =3D (addr &amp; (size - 1)) * =
+8;</div>
+<div>&nbsp;</div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp;if (big_endian) {</div>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp;if (memop_big_endian(op)) {</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* Big-endian combine.=
+ &nbsp;*/</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;res =3D (r1 &lt;&lt; s=
+hift) | (r2 &gt;&gt; ((size * 8) - shift));</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;} else {</div>
+<div>@@ -1336,30 &#43;1338,27 @@ load_helper(CPUArchState *env, target_ulon=
+g addr, TCGMemOpIdx oi,</div>
+<div>&nbsp;</div>
+<div>&nbsp; do_aligned_access:</div>
+<div>&nbsp; &nbsp; &nbsp;haddr =3D (void *)((uintptr_t)addr &#43; entry-&gt=
+;addend);</div>
+<div>- &nbsp; &nbsp;switch (size) {</div>
+<div>- &nbsp; &nbsp;case 1:</div>
+<div>&#43; &nbsp; &nbsp;switch (op) {</div>
+<div>&#43; &nbsp; &nbsp;case MO_8:</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;res =3D ldub_p(haddr);</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;break;</div>
+<div>- &nbsp; &nbsp;case 2:</div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp;if (big_endian) {</div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;res =3D lduw_be_p(haddr);</=
+div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp;} else {</div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;res =3D lduw_le_p(haddr);</=
+div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp;}</div>
+<div>&#43; &nbsp; &nbsp;case MO_BEUW:</div>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp;res =3D lduw_be_p(haddr);</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;break;</div>
+<div>- &nbsp; &nbsp;case 4:</div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp;if (big_endian) {</div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;res =3D (uint32_t)ldl_be_p(=
+haddr);</div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp;} else {</div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;res =3D (uint32_t)ldl_le_p(=
+haddr);</div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp;}</div>
+<div>&#43; &nbsp; &nbsp;case MO_LEUW:</div>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp;res =3D lduw_le_p(haddr);</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;break;</div>
+<div>- &nbsp; &nbsp;case 8:</div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp;if (big_endian) {</div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;res =3D ldq_be_p(haddr);</d=
+iv>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp;} else {</div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;res =3D ldq_le_p(haddr);</d=
+iv>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp;}</div>
+<div>&#43; &nbsp; &nbsp;case MO_BEUL:</div>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp;res =3D (uint32_t)ldl_be_p(haddr);</d=
+iv>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp;break;</div>
+<div>&#43; &nbsp; &nbsp;case MO_LEUL:</div>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp;res =3D (uint32_t)ldl_le_p(haddr);</d=
+iv>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp;break;</div>
+<div>&#43; &nbsp; &nbsp;case MO_BEQ:</div>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp;res =3D ldq_be_p(haddr);</div>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp;break;</div>
+<div>&#43; &nbsp; &nbsp;case MO_LEQ:</div>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp;res =3D ldq_le_p(haddr);</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;break;</div>
+<div>&nbsp; &nbsp; &nbsp;default:</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;g_assert_not_reached();</div>
+<div>@@ -1381,8 &#43;1380,7 @@ load_helper(CPUArchState *env, target_ulong =
+addr, TCGMemOpIdx oi,</div>
+<div>&nbsp;static uint64_t full_ldub_mmu(CPUArchState *env, target_ulong ad=
+dr,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;TCGMemOpIdx oi, uintptr_t retaddr)=
 </div>
-<div>-common-obj-$(CONFIG_A9SCU) &#43;=3D a9scu.o</div>
-<div>-common-obj-$(CONFIG_ARM11SCU) &#43;=3D arm11scu.o</div>
-<div>&#43;obj-$(CONFIG_PL310) &#43;=3D arm_l2x0.o</div>
-<div>&#43;obj-$(CONFIG_INTEGRATOR_DEBUG) &#43;=3D arm_integrator_debug.o</d=
-iv>
-<div>&#43;obj-$(CONFIG_A9SCU) &#43;=3D a9scu.o</div>
-<div>&#43;obj-$(CONFIG_ARM11SCU) &#43;=3D arm11scu.o</div>
+<div>&nbsp;{</div>
+<div>- &nbsp; &nbsp;return load_helper(env, addr, oi, retaddr, 1, false, fa=
+lse,</div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
+; &nbsp; full_ldub_mmu);</div>
+<div>&#43; &nbsp; &nbsp;return load_helper(env, addr, oi, retaddr, MO_8, fa=
+lse, full_ldub_mmu);</div>
+<div>&nbsp;}</div>
 <div>&nbsp;</div>
-<div>&nbsp;# Mac devices</div>
-<div>-common-obj-$(CONFIG_MOS6522) &#43;=3D mos6522.o</div>
-<div>&#43;obj-$(CONFIG_MOS6522) &#43;=3D mos6522.o</div>
+<div>&nbsp;tcg_target_ulong helper_ret_ldub_mmu(CPUArchState *env, target_u=
+long addr,</div>
+<div>@@ -1394,7 &#43;1392,7 @@ tcg_target_ulong helper_ret_ldub_mmu(CPUArch=
+State *env, target_ulong addr,</div>
+<div>&nbsp;static uint64_t full_le_lduw_mmu(CPUArchState *env, target_ulong=
+ addr,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; TCGMemOpIdx oi, uintptr_t =
+retaddr)</div>
+<div>&nbsp;{</div>
+<div>- &nbsp; &nbsp;return load_helper(env, addr, oi, retaddr, 2, false, fa=
+lse,</div>
+<div>&#43; &nbsp; &nbsp;return load_helper(env, addr, oi, retaddr, MO_LEUW,=
+ false,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; full_le_lduw_mmu);</div>
+<div>&nbsp;}</div>
 <div>&nbsp;</div>
-<div>&nbsp;# PKUnity SoC devices</div>
-<div>-common-obj-$(CONFIG_PUV3) &#43;=3D puv3_pm.o</div>
-<div>&#43;obj-$(CONFIG_PUV3) &#43;=3D puv3_pm.o</div>
+<div>@@ -1407,7 &#43;1405,7 @@ tcg_target_ulong helper_le_lduw_mmu(CPUArchS=
+tate *env, target_ulong addr,</div>
+<div>&nbsp;static uint64_t full_be_lduw_mmu(CPUArchState *env, target_ulong=
+ addr,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; TCGMemOpIdx oi, uintptr_t =
+retaddr)</div>
+<div>&nbsp;{</div>
+<div>- &nbsp; &nbsp;return load_helper(env, addr, oi, retaddr, 2, true, fal=
+se,</div>
+<div>&#43; &nbsp; &nbsp;return load_helper(env, addr, oi, retaddr, MO_BEUW,=
+ false,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; full_be_lduw_mmu);</div>
+<div>&nbsp;}</div>
 <div>&nbsp;</div>
-<div>&nbsp;common-obj-$(CONFIG_MACIO) &#43;=3D macio/</div>
+<div>@@ -1420,7 &#43;1418,7 @@ tcg_target_ulong helper_be_lduw_mmu(CPUArchS=
+tate *env, target_ulong addr,</div>
+<div>&nbsp;static uint64_t full_le_ldul_mmu(CPUArchState *env, target_ulong=
+ addr,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; TCGMemOpIdx oi, uintptr_t =
+retaddr)</div>
+<div>&nbsp;{</div>
+<div>- &nbsp; &nbsp;return load_helper(env, addr, oi, retaddr, 4, false, fa=
+lse,</div>
+<div>&#43; &nbsp; &nbsp;return load_helper(env, addr, oi, retaddr, MO_LEUL,=
+ false,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; full_le_ldul_mmu);</div>
+<div>&nbsp;}</div>
 <div>&nbsp;</div>
-<div>diff --git a/hw/net/Makefile.objs b/hw/net/Makefile.objs</div>
-<div>index 9904273..1ff7b59 100644</div>
-<div>--- a/hw/net/Makefile.objs</div>
-<div>&#43;&#43;&#43; b/hw/net/Makefile.objs</div>
-<div>@@ -1,4 &#43;1,4 @@</div>
-<div>-common-obj-$(CONFIG_DP8393X) &#43;=3D dp8393x.o</div>
-<div>&#43;obj-$(CONFIG_DP8393X) &#43;=3D dp8393x.o</div>
-<div>&nbsp;common-obj-$(CONFIG_XEN) &#43;=3D xen_nic.o</div>
-<div>&nbsp;common-obj-$(CONFIG_NE2000_COMMON) &#43;=3D ne2000.o</div>
+<div>@@ -1433,7 &#43;1431,7 @@ tcg_target_ulong helper_le_ldul_mmu(CPUArchS=
+tate *env, target_ulong addr,</div>
+<div>&nbsp;static uint64_t full_be_ldul_mmu(CPUArchState *env, target_ulong=
+ addr,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; TCGMemOpIdx oi, uintptr_t =
+retaddr)</div>
+<div>&nbsp;{</div>
+<div>- &nbsp; &nbsp;return load_helper(env, addr, oi, retaddr, 4, true, fal=
+se,</div>
+<div>&#43; &nbsp; &nbsp;return load_helper(env, addr, oi, retaddr, MO_BEUL,=
+ false,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; full_be_ldul_mmu);</div>
+<div>&nbsp;}</div>
 <div>&nbsp;</div>
-<div>@@ -14,19 &#43;14,19 @@ common-obj-$(CONFIG_RTL8139_PCI) &#43;=3D rtl8=
-139.o</div>
-<div>&nbsp;common-obj-$(CONFIG_VMXNET3_PCI) &#43;=3D net_tx_pkt.o net_rx_pk=
-t.o</div>
-<div>&nbsp;common-obj-$(CONFIG_VMXNET3_PCI) &#43;=3D vmxnet3.o</div>
+<div>@@ -1446,14 &#43;1444,14 @@ tcg_target_ulong helper_be_ldul_mmu(CPUArc=
+hState *env, target_ulong addr,</div>
+<div>&nbsp;uint64_t helper_le_ldq_mmu(CPUArchState *env, target_ulong addr,=
+</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; &nbsp; &nbsp; TCGMemOpIdx oi, uintptr_t retaddr)</div>
+<div>&nbsp;{</div>
+<div>- &nbsp; &nbsp;return load_helper(env, addr, oi, retaddr, 8, false, fa=
+lse,</div>
+<div>&#43; &nbsp; &nbsp;return load_helper(env, addr, oi, retaddr, MO_LEQ, =
+false,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; helper_le_ldq_mmu);</div>
+<div>&nbsp;}</div>
 <div>&nbsp;</div>
-<div>-common-obj-$(CONFIG_SMC91C111) &#43;=3D smc91c111.o</div>
-<div>-common-obj-$(CONFIG_LAN9118) &#43;=3D lan9118.o</div>
-<div>&#43;obj-$(CONFIG_SMC91C111) &#43;=3D smc91c111.o</div>
-<div>&#43;obj-$(CONFIG_LAN9118) &#43;=3D lan9118.o</div>
-<div>&nbsp;common-obj-$(CONFIG_NE2000_ISA) &#43;=3D ne2000-isa.o</div>
-<div>&nbsp;common-obj-$(CONFIG_OPENCORES_ETH) &#43;=3D opencores_eth.o</div=
+<div>&nbsp;uint64_t helper_be_ldq_mmu(CPUArchState *env, target_ulong addr,=
+</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; &nbsp; &nbsp; TCGMemOpIdx oi, uintptr_t retaddr)</div>
+<div>&nbsp;{</div>
+<div>- &nbsp; &nbsp;return load_helper(env, addr, oi, retaddr, 8, true, fal=
+se,</div>
+<div>&#43; &nbsp; &nbsp;return load_helper(env, addr, oi, retaddr, MO_BEQ, =
+false,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; helper_be_ldq_mmu);</div>
+<div>&nbsp;}</div>
+<div>&nbsp;</div>
+<div>@@ -1499,7 &#43;1497,7 @@ tcg_target_ulong helper_be_ldsl_mmu(CPUArchS=
+tate *env, target_ulong addr,</div>
+<div>&nbsp;</div>
+<div>&nbsp;static inline void __attribute__((always_inline))</div>
+<div>&nbsp;store_helper(CPUArchState *env, target_ulong addr, uint64_t val,=
+</div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; TCGMemOpIdx oi, uintptr_t =
+retaddr, size_t size, bool big_endian)</div>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; TCGMemOpIdx oi, uintpt=
+r_t retaddr, MemOp op)</div>
+<div>&nbsp;{</div>
+<div>&nbsp; &nbsp; &nbsp;uintptr_t mmu_idx =3D get_mmuidx(oi);</div>
+<div>&nbsp; &nbsp; &nbsp;uintptr_t index =3D tlb_index(env, mmu_idx, addr);=
+</div>
+<div>@@ -1508,6 &#43;1506,7 @@ store_helper(CPUArchState *env, target_ulong=
+ addr, uint64_t val,</div>
+<div>&nbsp; &nbsp; &nbsp;const size_t tlb_off =3D offsetof(CPUTLBEntry, add=
+r_write);</div>
+<div>&nbsp; &nbsp; &nbsp;unsigned a_bits =3D get_alignment_bits(get_memop(o=
+i));</div>
+<div>&nbsp; &nbsp; &nbsp;void *haddr;</div>
+<div>&#43; &nbsp; &nbsp;size_t size =3D memop_size(op);</div>
+<div>&nbsp;</div>
+<div>&nbsp; &nbsp; &nbsp;/* Handle CPU specific unaligned behaviour */</div=
 >
-<div>&nbsp;common-obj-$(CONFIG_XGMAC) &#43;=3D xgmac.o</div>
-<div>&nbsp;common-obj-$(CONFIG_MIPSNET) &#43;=3D mipsnet.o</div>
-<div>&nbsp;common-obj-$(CONFIG_XILINX_AXI) &#43;=3D xilinx_axienet.o</div>
-<div>-common-obj-$(CONFIG_ALLWINNER_EMAC) &#43;=3D allwinner_emac.o</div>
-<div>-common-obj-$(CONFIG_IMX_FEC) &#43;=3D imx_fec.o</div>
-<div>&#43;obj-$(CONFIG_ALLWINNER_EMAC) &#43;=3D allwinner_emac.o</div>
-<div>&#43;obj-$(CONFIG_IMX_FEC) &#43;=3D imx_fec.o</div>
+<div>&nbsp; &nbsp; &nbsp;if (addr &amp; ((1 &lt;&lt; a_bits) - 1)) {</div>
+<div>@@ -1553,9 &#43;1552,10 @@ store_helper(CPUArchState *env, target_ulon=
+g addr, uint64_t val,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}</div>
 <div>&nbsp;</div>
-<div>&nbsp;common-obj-$(CONFIG_CADENCE) &#43;=3D cadence_gem.o</div>
-<div>-common-obj-$(CONFIG_STELLARIS_ENET) &#43;=3D stellaris_enet.o</div>
-<div>-common-obj-$(CONFIG_LANCE) &#43;=3D lance.o</div>
-<div>&#43;obj-$(CONFIG_STELLARIS_ENET) &#43;=3D stellaris_enet.o</div>
-<div>&#43;obj-$(CONFIG_LANCE) &#43;=3D lance.o</div>
-<div>&nbsp;common-obj-$(CONFIG_SUNHME) &#43;=3D sunhme.o</div>
-<div>&nbsp;common-obj-$(CONFIG_FTGMAC100) &#43;=3D ftgmac100.o</div>
-<div>&nbsp;common-obj-$(CONFIG_SUNGEM) &#43;=3D sungem.o</div>
-<div>diff --git a/hw/pci-host/Makefile.objs b/hw/pci-host/Makefile.objs</di=
-v>
-<div>index a9cd3e0..0970e8e 100644</div>
-<div>--- a/hw/pci-host/Makefile.objs</div>
-<div>&#43;&#43;&#43; b/hw/pci-host/Makefile.objs</div>
-<div>@@ -9,12 &#43;9,12 @@ common-obj-$(CONFIG_UNIN_PCI) &#43;=3D uninorth.=
-o</div>
-<div>&nbsp;common-obj-$(CONFIG_PPCE500_PCI) &#43;=3D ppce500.o</div>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp;/* FIXME: io_writex ignores MO_BSWAP.=
+ &nbsp;*/</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;io_writex(env, &amp;env_tlb(env)-&gt=
+;d[mmu_idx].iotlb[index], mmu_idx,</div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;handle=
+_bswap(val, size, big_endian),</div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;addr, =
+retaddr, size);</div>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ha=
+ndle_bswap(val, op),</div>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ad=
+dr, retaddr, op);</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return;</div>
+<div>&nbsp; &nbsp; &nbsp;}</div>
 <div>&nbsp;</div>
-<div>&nbsp;# ARM devices</div>
-<div>-common-obj-$(CONFIG_VERSATILE_PCI) &#43;=3D versatile.o</div>
-<div>&#43;obj-$(CONFIG_VERSATILE_PCI) &#43;=3D versatile.o</div>
+<div>@@ -1591,7 &#43;1591,7 @@ store_helper(CPUArchState *env, target_ulong=
+ addr, uint64_t val,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; */</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;for (i =3D 0; i &lt; size; &#43;&#43=
+;i) {</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;uint8_t val8;</div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if (big_endian) {</div>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if (memop_big_endian(op=
+)) {</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* Big-e=
+ndian extract. &nbsp;*/</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;val8 =3D=
+ val &gt;&gt; (((size - 1) * 8) - (i * 8));</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;} else {</div>
+<div>@@ -1605,30 &#43;1605,27 @@ store_helper(CPUArchState *env, target_ulo=
+ng addr, uint64_t val,</div>
 <div>&nbsp;</div>
-<div>&nbsp;common-obj-$(CONFIG_PCI_SABRE) &#43;=3D sabre.o</div>
-<div>-common-obj-$(CONFIG_FULONG) &#43;=3D bonito.o</div>
-<div>&#43;obj-$(CONFIG_FULONG) &#43;=3D bonito.o</div>
-<div>&nbsp;common-obj-$(CONFIG_PCI_PIIX) &#43;=3D piix.o</div>
-<div>-common-obj-$(CONFIG_PCI_EXPRESS_Q35) &#43;=3D q35.o</div>
-<div>&#43;obj-$(CONFIG_PCI_EXPRESS_Q35) &#43;=3D q35.o</div>
-<div>&nbsp;common-obj-$(CONFIG_PCI_EXPRESS_GENERIC_BRIDGE) &#43;=3D gpex.o<=
-/div>
-<div>&nbsp;common-obj-$(CONFIG_PCI_EXPRESS_XILINX) &#43;=3D xilinx-pcie.o</=
-div>
-<div>&nbsp;</div>
-<div>diff --git a/hw/scsi/Makefile.objs b/hw/scsi/Makefile.objs</div>
-<div>index 54b36ed..418af9a 100644</div>
-<div>--- a/hw/scsi/Makefile.objs</div>
-<div>&#43;&#43;&#43; b/hw/scsi/Makefile.objs</div>
-<div>@@ -4,7 &#43;4,7 @@ common-obj-$(CONFIG_LSI_SCSI_PCI) &#43;=3D lsi53c8=
-95a.o</div>
-<div>&nbsp;common-obj-$(CONFIG_MPTSAS_SCSI_PCI) &#43;=3D mptsas.o mptconfig=
-.o mptendian.o</div>
-<div>&nbsp;common-obj-$(CONFIG_MEGASAS_SCSI_PCI) &#43;=3D megasas.o</div>
-<div>&nbsp;common-obj-$(CONFIG_VMW_PVSCSI_SCSI_PCI) &#43;=3D vmw_pvscsi.o</=
-div>
-<div>-common-obj-$(CONFIG_ESP) &#43;=3D esp.o</div>
-<div>&#43;obj-$(CONFIG_ESP) &#43;=3D esp.o</div>
-<div>&nbsp;common-obj-$(CONFIG_ESP_PCI) &#43;=3D esp-pci.o</div>
-<div>&nbsp;obj-$(CONFIG_SPAPR_VSCSI) &#43;=3D spapr_vscsi.o</div>
-<div>&nbsp;</div>
-<div>diff --git a/hw/sd/Makefile.objs b/hw/sd/Makefile.objs</div>
-<div>index 0665727..a8cd6bf 100644</div>
-<div>--- a/hw/sd/Makefile.objs</div>
-<div>&#43;&#43;&#43; b/hw/sd/Makefile.objs</div>
-<div>@@ -1,4 &#43;1,4 @@</div>
-<div>-common-obj-$(CONFIG_PL181) &#43;=3D pl181.o</div>
-<div>&#43;obj-$(CONFIG_PL181) &#43;=3D pl181.o</div>
-<div>&nbsp;common-obj-$(CONFIG_SSI_SD) &#43;=3D ssi-sd.o</div>
-<div>&nbsp;common-obj-$(CONFIG_SD) &#43;=3D sd.o core.o sdmmc-internal.o</d=
+<div>&nbsp; do_aligned_access:</div>
+<div>&nbsp; &nbsp; &nbsp;haddr =3D (void *)((uintptr_t)addr &#43; entry-&gt=
+;addend);</div>
+<div>- &nbsp; &nbsp;switch (size) {</div>
+<div>- &nbsp; &nbsp;case 1:</div>
+<div>&#43; &nbsp; &nbsp;switch (op) {</div>
+<div>&#43; &nbsp; &nbsp;case MO_8:</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;stb_p(haddr, val);</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;break;</div>
+<div>- &nbsp; &nbsp;case 2:</div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp;if (big_endian) {</div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;stw_be_p(haddr, val);</div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp;} else {</div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;stw_le_p(haddr, val);</div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp;}</div>
+<div>&#43; &nbsp; &nbsp;case MO_BEUW:</div>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp;stw_be_p(haddr, val);</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;break;</div>
+<div>- &nbsp; &nbsp;case 4:</div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp;if (big_endian) {</div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;stl_be_p(haddr, val);</div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp;} else {</div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;stl_le_p(haddr, val);</div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp;}</div>
+<div>&#43; &nbsp; &nbsp;case MO_LEUW:</div>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp;stw_le_p(haddr, val);</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;break;</div>
+<div>- &nbsp; &nbsp;case 8:</div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp;if (big_endian) {</div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;stq_be_p(haddr, val);</div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp;} else {</div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;stq_le_p(haddr, val);</div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp;}</div>
+<div>&#43; &nbsp; &nbsp;case MO_BEUL:</div>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp;stl_be_p(haddr, val);</div>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp;break;</div>
+<div>&#43; &nbsp; &nbsp;case MO_LEUL:</div>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp;stl_le_p(haddr, val);</div>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp;break;</div>
+<div>&#43; &nbsp; &nbsp;case MO_BEQ:</div>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp;stq_be_p(haddr, val);</div>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp;break;</div>
+<div>&#43; &nbsp; &nbsp;case MO_LEQ:</div>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp;stq_le_p(haddr, val);</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;break;</div>
+<div>&nbsp; &nbsp; &nbsp;default:</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;g_assert_not_reached();</div>
+<div>@@ -1639,43 &#43;1636,43 @@ store_helper(CPUArchState *env, target_ulo=
+ng addr, uint64_t val,</div>
+<div>&nbsp;void helper_ret_stb_mmu(CPUArchState *env, target_ulong addr, ui=
+nt8_t val,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; &nbsp;TCGMemOpIdx oi, uintptr_t retaddr)</div>
+<div>&nbsp;{</div>
+<div>- &nbsp; &nbsp;store_helper(env, addr, val, oi, retaddr, 1, false);</d=
 iv>
-<div>&nbsp;common-obj-$(CONFIG_SDHCI) &#43;=3D sdhci.o</div>
-<div>diff --git a/hw/ssi/Makefile.objs b/hw/ssi/Makefile.objs</div>
-<div>index f5bcc65..b084802 100644</div>
-<div>--- a/hw/ssi/Makefile.objs</div>
-<div>&#43;&#43;&#43; b/hw/ssi/Makefile.objs</div>
-<div>@@ -1,10 &#43;1,10 @@</div>
-<div>-common-obj-$(CONFIG_PL022) &#43;=3D pl022.o</div>
-<div>&#43;obj-$(CONFIG_PL022) &#43;=3D pl022.o</div>
-<div>&nbsp;common-obj-$(CONFIG_SSI) &#43;=3D ssi.o</div>
-<div>-common-obj-$(CONFIG_XILINX_SPI) &#43;=3D xilinx_spi.o</div>
-<div>-common-obj-$(CONFIG_XILINX_SPIPS) &#43;=3D xilinx_spips.o</div>
-<div>&#43;obj-$(CONFIG_XILINX_SPI) &#43;=3D xilinx_spi.o</div>
-<div>&#43;obj-$(CONFIG_XILINX_SPIPS) &#43;=3D xilinx_spips.o</div>
-<div>&nbsp;common-obj-$(CONFIG_ASPEED_SOC) &#43;=3D aspeed_smc.o</div>
-<div>-common-obj-$(CONFIG_STM32F2XX_SPI) &#43;=3D stm32f2xx_spi.o</div>
-<div>-common-obj-$(CONFIG_MSF2) &#43;=3D mss-spi.o</div>
-<div>&#43;obj-$(CONFIG_STM32F2XX_SPI) &#43;=3D stm32f2xx_spi.o</div>
-<div>&#43;obj-$(CONFIG_MSF2) &#43;=3D mss-spi.o</div>
+<div>&#43; &nbsp; &nbsp;store_helper(env, addr, val, oi, retaddr, MO_8);</d=
+iv>
+<div>&nbsp;}</div>
 <div>&nbsp;</div>
-<div>&nbsp;obj-$(CONFIG_OMAP) &#43;=3D omap_spi.o</div>
-<div>&nbsp;obj-$(CONFIG_IMX) &#43;=3D imx_spi.o</div>
-<div>diff --git a/hw/timer/Makefile.objs b/hw/timer/Makefile.objs</div>
-<div>index 123d92c..0a8f651 100644</div>
-<div>--- a/hw/timer/Makefile.objs</div>
-<div>&#43;&#43;&#43; b/hw/timer/Makefile.objs</div>
-<div>@@ -1,27 &#43;1,27 @@</div>
-<div>-common-obj-$(CONFIG_ARM_TIMER) &#43;=3D arm_timer.o</div>
-<div>-common-obj-$(CONFIG_ARM_MPTIMER) &#43;=3D arm_mptimer.o</div>
-<div>-common-obj-$(CONFIG_ARM_V7M) &#43;=3D armv7m_systick.o</div>
-<div>-common-obj-$(CONFIG_A9_GTIMER) &#43;=3D a9gtimer.o</div>
-<div>-common-obj-$(CONFIG_CADENCE) &#43;=3D cadence_ttc.o</div>
-<div>&#43;obj-$(CONFIG_ARM_TIMER) &#43;=3D arm_timer.o</div>
-<div>&#43;obj-$(CONFIG_ARM_MPTIMER) &#43;=3D arm_mptimer.o</div>
-<div>&#43;obj-$(CONFIG_ARM_V7M) &#43;=3D armv7m_systick.o</div>
-<div>&#43;obj-$(CONFIG_A9_GTIMER) &#43;=3D a9gtimer.o</div>
-<div>&#43;obj-$(CONFIG_CADENCE) &#43;=3D cadence_ttc.o</div>
-<div>&nbsp;common-obj-$(CONFIG_DS1338) &#43;=3D ds1338.o</div>
-<div>-common-obj-$(CONFIG_HPET) &#43;=3D hpet.o</div>
-<div>&#43;obj-$(CONFIG_HPET) &#43;=3D hpet.o</div>
-<div>&nbsp;common-obj-$(CONFIG_I8254) &#43;=3D i8254_common.o i8254.o</div>
-<div>&nbsp;common-obj-$(CONFIG_M41T80) &#43;=3D m41t80.o</div>
-<div>&nbsp;common-obj-$(CONFIG_M48T59) &#43;=3D m48t59.o</div>
-<div>&nbsp;ifeq ($(CONFIG_ISA_BUS),y)</div>
-<div>&nbsp;common-obj-$(CONFIG_M48T59) &#43;=3D m48t59-isa.o</div>
-<div>&nbsp;endif</div>
-<div>-common-obj-$(CONFIG_PL031) &#43;=3D pl031.o</div>
-<div>-common-obj-$(CONFIG_PUV3) &#43;=3D puv3_ost.o</div>
-<div>&#43;obj-$(CONFIG_PL031) &#43;=3D pl031.o</div>
-<div>&#43;obj-$(CONFIG_PUV3) &#43;=3D puv3_ost.o</div>
-<div>&nbsp;common-obj-$(CONFIG_TWL92230) &#43;=3D twl92230.o</div>
-<div>-common-obj-$(CONFIG_XILINX) &#43;=3D xilinx_timer.o</div>
-<div>-common-obj-$(CONFIG_SLAVIO) &#43;=3D slavio_timer.o</div>
-<div>&#43;obj-$(CONFIG_XILINX) &#43;=3D xilinx_timer.o</div>
-<div>&#43;obj-$(CONFIG_SLAVIO) &#43;=3D slavio_timer.o</div>
-<div>&nbsp;common-obj-$(CONFIG_ETRAXFS) &#43;=3D etraxfs_timer.o</div>
-<div>-common-obj-$(CONFIG_GRLIB) &#43;=3D grlib_gptimer.o</div>
-<div>-common-obj-$(CONFIG_IMX) &#43;=3D imx_epit.o</div>
-<div>-common-obj-$(CONFIG_IMX) &#43;=3D imx_gpt.o</div>
-<div>-common-obj-$(CONFIG_LM32) &#43;=3D lm32_timer.o</div>
-<div>-common-obj-$(CONFIG_MILKYMIST) &#43;=3D milkymist-sysctl.o</div>
-<div>&#43;obj-$(CONFIG_GRLIB) &#43;=3D grlib_gptimer.o</div>
-<div>&#43;obj-$(CONFIG_IMX) &#43;=3D imx_epit.o</div>
-<div>&#43;obj-$(CONFIG_IMX) &#43;=3D imx_gpt.o</div>
-<div>&#43;obj-$(CONFIG_LM32) &#43;=3D lm32_timer.o</div>
-<div>&#43;obj-$(CONFIG_MILKYMIST) &#43;=3D milkymist-sysctl.o</div>
-<div>&nbsp;common-obj-$(CONFIG_XLNX_ZYNQMP) &#43;=3D xlnx-zynqmp-rtc.o</div=
+<div>&nbsp;void helper_le_stw_mmu(CPUArchState *env, target_ulong addr, uin=
+t16_t val,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; TCGMemOpIdx oi, uintptr_t retaddr)</div>
+<div>&nbsp;{</div>
+<div>- &nbsp; &nbsp;store_helper(env, addr, val, oi, retaddr, 2, false);</d=
+iv>
+<div>&#43; &nbsp; &nbsp;store_helper(env, addr, val, oi, retaddr, MO_LEUW);=
+</div>
+<div>&nbsp;}</div>
+<div>&nbsp;</div>
+<div>&nbsp;void helper_be_stw_mmu(CPUArchState *env, target_ulong addr, uin=
+t16_t val,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; TCGMemOpIdx oi, uintptr_t retaddr)</div>
+<div>&nbsp;{</div>
+<div>- &nbsp; &nbsp;store_helper(env, addr, val, oi, retaddr, 2, true);</di=
+v>
+<div>&#43; &nbsp; &nbsp;store_helper(env, addr, val, oi, retaddr, MO_BEUW);=
+</div>
+<div>&nbsp;}</div>
+<div>&nbsp;</div>
+<div>&nbsp;void helper_le_stl_mmu(CPUArchState *env, target_ulong addr, uin=
+t32_t val,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; TCGMemOpIdx oi, uintptr_t retaddr)</div>
+<div>&nbsp;{</div>
+<div>- &nbsp; &nbsp;store_helper(env, addr, val, oi, retaddr, 4, false);</d=
+iv>
+<div>&#43; &nbsp; &nbsp;store_helper(env, addr, val, oi, retaddr, MO_LEUL);=
+</div>
+<div>&nbsp;}</div>
+<div>&nbsp;</div>
+<div>&nbsp;void helper_be_stl_mmu(CPUArchState *env, target_ulong addr, uin=
+t32_t val,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; TCGMemOpIdx oi, uintptr_t retaddr)</div>
+<div>&nbsp;{</div>
+<div>- &nbsp; &nbsp;store_helper(env, addr, val, oi, retaddr, 4, true);</di=
+v>
+<div>&#43; &nbsp; &nbsp;store_helper(env, addr, val, oi, retaddr, MO_BEUL);=
+</div>
+<div>&nbsp;}</div>
+<div>&nbsp;</div>
+<div>&nbsp;void helper_le_stq_mmu(CPUArchState *env, target_ulong addr, uin=
+t64_t val,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; TCGMemOpIdx oi, uintptr_t retaddr)</div>
+<div>&nbsp;{</div>
+<div>- &nbsp; &nbsp;store_helper(env, addr, val, oi, retaddr, 8, false);</d=
+iv>
+<div>&#43; &nbsp; &nbsp;store_helper(env, addr, val, oi, retaddr, MO_LEQ);<=
+/div>
+<div>&nbsp;}</div>
+<div>&nbsp;</div>
+<div>&nbsp;void helper_be_stq_mmu(CPUArchState *env, target_ulong addr, uin=
+t64_t val,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; TCGMemOpIdx oi, uintptr_t retaddr)</div>
+<div>&nbsp;{</div>
+<div>- &nbsp; &nbsp;store_helper(env, addr, val, oi, retaddr, 8, true);</di=
+v>
+<div>&#43; &nbsp; &nbsp;store_helper(env, addr, val, oi, retaddr, MO_BEQ);<=
+/div>
+<div>&nbsp;}</div>
+<div>&nbsp;</div>
+<div>&nbsp;/* First set of helpers allows passing in of OI and RETADDR. &nb=
+sp;This makes</div>
+<div>@@ -1740,8 &#43;1737,7 @@ void helper_be_stq_mmu(CPUArchState *env, ta=
+rget_ulong addr, uint64_t val,</div>
+<div>&nbsp;static uint64_t full_ldub_cmmu(CPUArchState *env, target_ulong a=
+ddr,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; TCGMemOpIdx oi, uintptr_t retaddr=
+)</div>
+<div>&nbsp;{</div>
+<div>- &nbsp; &nbsp;return load_helper(env, addr, oi, retaddr, 1, false, tr=
+ue,</div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
+; &nbsp; full_ldub_cmmu);</div>
+<div>&#43; &nbsp; &nbsp;return load_helper(env, addr, oi, retaddr, MO_8, tr=
+ue, full_ldub_cmmu);</div>
+<div>&nbsp;}</div>
+<div>&nbsp;</div>
+<div>&nbsp;uint8_t helper_ret_ldb_cmmu(CPUArchState *env, target_ulong addr=
+,</div>
+<div>@@ -1753,7 &#43;1749,7 @@ uint8_t helper_ret_ldb_cmmu(CPUArchState *en=
+v, target_ulong addr,</div>
+<div>&nbsp;static uint64_t full_le_lduw_cmmu(CPUArchState *env, target_ulon=
+g addr,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;TCGMemOpIdx oi, uint=
+ptr_t retaddr)</div>
+<div>&nbsp;{</div>
+<div>- &nbsp; &nbsp;return load_helper(env, addr, oi, retaddr, 2, false, tr=
+ue,</div>
+<div>&#43; &nbsp; &nbsp;return load_helper(env, addr, oi, retaddr, MO_LEUW,=
+ true,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; full_le_lduw_cmmu);</div>
+<div>&nbsp;}</div>
+<div>&nbsp;</div>
+<div>@@ -1766,7 &#43;1762,7 @@ uint16_t helper_le_ldw_cmmu(CPUArchState *en=
+v, target_ulong addr,</div>
+<div>&nbsp;static uint64_t full_be_lduw_cmmu(CPUArchState *env, target_ulon=
+g addr,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;TCGMemOpIdx oi, uint=
+ptr_t retaddr)</div>
+<div>&nbsp;{</div>
+<div>- &nbsp; &nbsp;return load_helper(env, addr, oi, retaddr, 2, true, tru=
+e,</div>
+<div>&#43; &nbsp; &nbsp;return load_helper(env, addr, oi, retaddr, MO_BEUW,=
+ true,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; full_be_lduw_cmmu);</div>
+<div>&nbsp;}</div>
+<div>&nbsp;</div>
+<div>@@ -1779,7 &#43;1775,7 @@ uint16_t helper_be_ldw_cmmu(CPUArchState *en=
+v, target_ulong addr,</div>
+<div>&nbsp;static uint64_t full_le_ldul_cmmu(CPUArchState *env, target_ulon=
+g addr,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;TCGMemOpIdx oi, uint=
+ptr_t retaddr)</div>
+<div>&nbsp;{</div>
+<div>- &nbsp; &nbsp;return load_helper(env, addr, oi, retaddr, 4, false, tr=
+ue,</div>
+<div>&#43; &nbsp; &nbsp;return load_helper(env, addr, oi, retaddr, MO_LEUL,=
+ true,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; full_le_ldul_cmmu);</div>
+<div>&nbsp;}</div>
+<div>&nbsp;</div>
+<div>@@ -1792,7 &#43;1788,7 @@ uint32_t helper_le_ldl_cmmu(CPUArchState *en=
+v, target_ulong addr,</div>
+<div>&nbsp;static uint64_t full_be_ldul_cmmu(CPUArchState *env, target_ulon=
+g addr,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;TCGMemOpIdx oi, uint=
+ptr_t retaddr)</div>
+<div>&nbsp;{</div>
+<div>- &nbsp; &nbsp;return load_helper(env, addr, oi, retaddr, 4, true, tru=
+e,</div>
+<div>&#43; &nbsp; &nbsp;return load_helper(env, addr, oi, retaddr, MO_BEUL,=
+ true,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; full_be_ldul_cmmu);</div>
+<div>&nbsp;}</div>
+<div>&nbsp;</div>
+<div>@@ -1805,13 &#43;1801,13 @@ uint32_t helper_be_ldl_cmmu(CPUArchState *=
+env, target_ulong addr,</div>
+<div>&nbsp;uint64_t helper_le_ldq_cmmu(CPUArchState *env, target_ulong addr=
+,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;TCGMemOpIdx oi, uintptr_t retaddr)</div>
+<div>&nbsp;{</div>
+<div>- &nbsp; &nbsp;return load_helper(env, addr, oi, retaddr, 8, false, tr=
+ue,</div>
+<div>&#43; &nbsp; &nbsp;return load_helper(env, addr, oi, retaddr, MO_LEQ, =
+true,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; helper_le_ldq_cmmu);</div>
+<div>&nbsp;}</div>
+<div>&nbsp;</div>
+<div>&nbsp;uint64_t helper_be_ldq_cmmu(CPUArchState *env, target_ulong addr=
+,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;TCGMemOpIdx oi, uintptr_t retaddr)</div>
+<div>&nbsp;{</div>
+<div>- &nbsp; &nbsp;return load_helper(env, addr, oi, retaddr, 8, true, tru=
+e,</div>
+<div>&#43; &nbsp; &nbsp;return load_helper(env, addr, oi, retaddr, MO_BEQ, =
+true,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; helper_be_ldq_cmmu);</div>
+<div>&nbsp;}</div>
+<div>diff --git a/include/exec/memop.h b/include/exec/memop.h</div>
+<div>index 47a5500..e6e03d9 100644</div>
+<div>--- a/include/exec/memop.h</div>
+<div>&#43;&#43;&#43; b/include/exec/memop.h</div>
+<div>@@ -129,4 &#43;129,10 @@ static inline MemOp size_memop(unsigned size)=
+</div>
+<div>&nbsp;#endif</div>
+<div>&nbsp;}</div>
+<div>&nbsp;</div>
+<div>&#43;/* Big endianness from MemOp. &nbsp;*/</div>
+<div>&#43;static inline bool memop_big_endian(MemOp op)</div>
+<div>&#43;{</div>
+<div>&#43; &nbsp; &nbsp;return (op &amp; MO_BSWAP) =3D=3D MO_BE;</div>
+<div>&#43;}</div>
+<div>&#43;</div>
+<div>&nbsp;#endif</div>
+<div>diff --git a/memory.c b/memory.c</div>
+<div>index 11db6ec..264c624 100644</div>
+<div>--- a/memory.c</div>
+<div>&#43;&#43;&#43; b/memory.c</div>
+<div>@@ -343,15 &#43;343,6 @@ static void flatview_simplify(FlatView *view)=
+</div>
+<div>&nbsp; &nbsp; &nbsp;}</div>
+<div>&nbsp;}</div>
+<div>&nbsp;</div>
+<div>-static bool memory_region_big_endian(MemoryRegion *mr)</div>
+<div>-{</div>
+<div>-#ifdef TARGET_WORDS_BIGENDIAN</div>
+<div>- &nbsp; &nbsp;return mr-&gt;ops-&gt;endianness !=3D MO_LE;</div>
+<div>-#else</div>
+<div>- &nbsp; &nbsp;return mr-&gt;ops-&gt;endianness =3D=3D MO_BE;</div>
+<div>-#endif</div>
+<div>-}</div>
+<div>-</div>
+<div>&nbsp;static bool memory_region_wrong_endianness(MemoryRegion *mr)</di=
+v>
+<div>&nbsp;{</div>
+<div>&nbsp;#ifdef TARGET_WORDS_BIGENDIAN</div>
+<div>@@ -564,7 &#43;555,7 @@ static MemTxResult access_with_adjusted_size(h=
+waddr addr,</div>
+<div>&nbsp; &nbsp; &nbsp;/* FIXME: support unaligned access? */</div>
+<div>&nbsp; &nbsp; &nbsp;access_size =3D MAX(MIN(size, access_size_max), ac=
+cess_size_min);</div>
+<div>&nbsp; &nbsp; &nbsp;access_mask =3D MAKE_64BIT_MASK(0, access_size * 8=
+);</div>
+<div>- &nbsp; &nbsp;if (memory_region_big_endian(mr)) {</div>
+<div>&#43; &nbsp; &nbsp;if (memop_big_endian(mr-&gt;ops-&gt;endianness)) {<=
+/div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;for (i =3D 0; i &lt; size; i &#43;=
+=3D access_size) {</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;r |=3D access_fn(mr, a=
+ddr &#43; i, value, access_size,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; &nbsp;(size - access_size - i) * 8, access_mask, attrs);</div=
 >
-<div>&nbsp;common-obj-$(CONFIG_NRF51_SOC) &#43;=3D nrf51_timer.o</div>
-<div>&nbsp;</div>
-<div>@@ -40,10 &#43;40,11 @@ obj-$(CONFIG_MC146818RTC) &#43;=3D mc146818rtc=
-.o</div>
-<div>&nbsp;</div>
-<div>&nbsp;obj-$(CONFIG_ALLWINNER_A10_PIT) &#43;=3D allwinner-a10-pit.o</di=
-v>
-<div>&nbsp;</div>
-<div>-common-obj-$(CONFIG_STM32F2XX_TIMER) &#43;=3D stm32f2xx_timer.o</div>
-<div>-common-obj-$(CONFIG_ASPEED_SOC) &#43;=3D aspeed_timer.o aspeed_rtc.o<=
-/div>
-<div>&#43;obj-$(CONFIG_STM32F2XX_TIMER) &#43;=3D stm32f2xx_timer.o</div>
-<div>&#43;common-obj-$(CONFIG_ASPEED_SOC) &#43;=3D aspeed_timer.o</div>
-<div>&#43;obj-$(CONFIG_ASPEED_SOC) &#43;=3D aspeed_rtc.o</div>
-<div>&nbsp;</div>
-<div>-common-obj-$(CONFIG_SUN4V_RTC) &#43;=3D sun4v-rtc.o</div>
-<div>&#43;obj-$(CONFIG_SUN4V_RTC) &#43;=3D sun4v-rtc.o</div>
-<div>&nbsp;common-obj-$(CONFIG_CMSDK_APB_TIMER) &#43;=3D cmsdk-apb-timer.o<=
-/div>
-<div>&nbsp;common-obj-$(CONFIG_CMSDK_APB_DUALTIMER) &#43;=3D cmsdk-apb-dual=
-timer.o</div>
-<div>-common-obj-$(CONFIG_MSF2) &#43;=3D mss-timer.o</div>
-<div>&#43;obj-$(CONFIG_MSF2) &#43;=3D mss-timer.o</div>
-<div>diff --git a/hw/virtio/Makefile.objs b/hw/virtio/Makefile.objs</div>
-<div>index 964ce78..573b1a9 100644</div>
-<div>--- a/hw/virtio/Makefile.objs</div>
-<div>&#43;&#43;&#43; b/hw/virtio/Makefile.objs</div>
-<div>@@ -8,7 &#43;8,7 @@ obj-$(CONFIG_VHOST_USER) &#43;=3D vhost-user.o</di=
-v>
-<div>&nbsp;</div>
-<div>&nbsp;common-obj-$(CONFIG_VIRTIO_RNG) &#43;=3D virtio-rng.o</div>
-<div>&nbsp;common-obj-$(CONFIG_VIRTIO_PCI) &#43;=3D virtio-pci.o</div>
-<div>-common-obj-$(CONFIG_VIRTIO_MMIO) &#43;=3D virtio-mmio.o</div>
-<div>&#43;obj-$(CONFIG_VIRTIO_MMIO) &#43;=3D virtio-mmio.o</div>
-<div>&nbsp;obj-$(CONFIG_VIRTIO_BALLOON) &#43;=3D virtio-balloon.o</div>
-<div>&nbsp;obj-$(CONFIG_VIRTIO_CRYPTO) &#43;=3D virtio-crypto.o</div>
-<div>&nbsp;obj-$(call land,$(CONFIG_VIRTIO_CRYPTO),$(CONFIG_VIRTIO_PCI)) &#=
-43;=3D virtio-crypto-pci.o</div>
 <div>--&nbsp;</div>
 <div>1.8.3.1</div>
 <div><br>
 &#8203;<br>
 </div>
-<br>
-</div>
-</span></font></div>
+<p><br>
+</p>
 </body>
 </html>
 
---_000_156516666883025608btcom_--
+--_000_156516681911114515btcom_--
 
