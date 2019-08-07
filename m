@@ -1,71 +1,54 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hvQry-0001Hb-0Q
-	for mharc-qemu-riscv@gnu.org; Wed, 07 Aug 2019 14:41:06 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42261)
+	id 1hvSf5-0002si-Ke
+	for mharc-qemu-riscv@gnu.org; Wed, 07 Aug 2019 16:35:55 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:34005)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <richard.henderson@linaro.org>) id 1hvQrw-0001FN-45
- for qemu-riscv@nongnu.org; Wed, 07 Aug 2019 14:41:05 -0400
+ (envelope-from <palmer@dabbelt.com>) id 1hvSf3-0002lt-7W
+ for qemu-riscv@nongnu.org; Wed, 07 Aug 2019 16:35:54 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <richard.henderson@linaro.org>) id 1hvQrv-0004Rt-3f
- for qemu-riscv@nongnu.org; Wed, 07 Aug 2019 14:41:04 -0400
-Received: from mail-pl1-x631.google.com ([2607:f8b0:4864:20::631]:42971)
+ (envelope-from <palmer@dabbelt.com>) id 1hvSf2-00076I-9e
+ for qemu-riscv@nongnu.org; Wed, 07 Aug 2019 16:35:53 -0400
+Received: from mail-pl1-f194.google.com ([209.85.214.194]:32916)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
- id 1hvQru-0004Ob-Q7
- for qemu-riscv@nongnu.org; Wed, 07 Aug 2019 14:41:03 -0400
-Received: by mail-pl1-x631.google.com with SMTP id ay6so42130587plb.9
- for <qemu-riscv@nongnu.org>; Wed, 07 Aug 2019 11:41:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=subject:to:cc:references:from:openpgp:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=qjI5AngRJ3zTaI4Biz6QiZbcNsTnnUQNauTz9Amv9eQ=;
- b=Gdy3RGUqpiD5yKGxS3PnsmKAXu7lTRYGrZwheawhOofTg8mxa7ndyHELLjHt/IPsAD
- wA/ceJrWwBdpXTpV1EoTwTQhDa1iyXBZvS5gsjvj/Yd4LbT/OGojhDmmfY5pL2ZDpDXm
- 4SHRzyDlI043d1rAxWDSt5w67Joc+cnODpN8Bad9YoxdlXkx4n37xGvyVI4GlKbjed25
- T3tWvJvY3QOE3S7FRMsWfKE9T+eiiA7DcoyGqA1YFv7fV6yv4JxzpJmBpKvxxXTUIpFC
- eL/jQGvOXCFrRvIeTHjpIzD+NRfa+zb43a3w09eF1rxTS46hZVcNjqv4N0g3JBNf3T5W
- DRxw==
+ (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1hvSf2-00074r-4H
+ for qemu-riscv@nongnu.org; Wed, 07 Aug 2019 16:35:52 -0400
+Received: by mail-pl1-f194.google.com with SMTP id c14so42402890plo.0
+ for <qemu-riscv@nongnu.org>; Wed, 07 Aug 2019 13:35:52 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
- :date:user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=qjI5AngRJ3zTaI4Biz6QiZbcNsTnnUQNauTz9Amv9eQ=;
- b=nKxwrSLS6v0Jsm2Qliy2E8BczklvCg0E6ruRTaMuBiXOYCdLyhc72XfPdD6C8knjQC
- Fm+czWoF7wjl9m6CdnqMBvvozI5TkNrOXkqaKmmXyzfrR7KEWiUtY2N6SHbAg5QanYwV
- 9I+5Fu2rc5qNRb7xP5+cVMA70MxHsnEantFh5zG6yihO4gxzIw7Ohk6TdlKQxSu8iJ00
- M9hUrCk8NixZjmI9PFLkf0maGHHMl/GXGP/6XhlqyHsg/7i0z21ppbJaZbEcfCrG3B/v
- Yvpp/jAuO/O/fSaMYb8D0W5q1Fo/MOFFhpeXG+IyjEMZtvTFzT1ClzA8cBxIfqD/tPPS
- q4MQ==
-X-Gm-Message-State: APjAAAWiX28+xjjFzExYmdEzKEDbEHbQL9EyLbxzx7mvpe3R72gtYUal
- pTWyxo86rckUlXbNaB+k/e+QEw==
-X-Google-Smtp-Source: APXvYqw3Anlk3MPCpHHZ5upkpLeF9JmukAd8WjYgs5e6uRWRMSbnWrVEDFBqcNspmIkJLEMBCbufUQ==
-X-Received: by 2002:a17:902:8d97:: with SMTP id
- v23mr9256604plo.157.1565203261548; 
- Wed, 07 Aug 2019 11:41:01 -0700 (PDT)
-Received: from [192.168.1.11] (97-113-7-119.tukw.qwest.net. [97.113.7.119])
- by smtp.gmail.com with ESMTPSA id f197sm90534932pfa.161.2019.08.07.11.41.00
- (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
- Wed, 07 Aug 2019 11:41:00 -0700 (PDT)
-To: Maxim Blinov <maxim.blinov@embecosm.com>, qemu-riscv@nongnu.org
-Cc: qemu-devel@nongnu.org
-References: <20190806124857.GA18832@maxim-ThinkPad-T490>
-From: Richard Henderson <richard.henderson@linaro.org>
-Openpgp: preference=signencrypt
-Message-ID: <a8a896b6-09ff-8018-4ace-7b951826f6b7@linaro.org>
-Date: Wed, 7 Aug 2019 11:40:58 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.8.0
+ h=x-gm-message-state:subject:date:message-id:mime-version
+ :content-transfer-encoding:cc:from:to;
+ bh=R8xWP9Mxshej5PA8tCd2n8Cul5yLRtIaS9eOBFzo/ZQ=;
+ b=HokyvfXn7TMQk6rWBoYDCaRJcyFZmGoNl+UcIycc3oEQr3GNzOOnf3BcbeNPVb4AWB
+ Jf+n+/P1v1aHgtGK++/kcegc7ESgiisVSPldRh8595Vv4ihzqsPjuZF2XJshlUxRKmz1
+ ZKXZAsl1wd9+VG35s7POqZsz+uM17aUyQjWZVvi5wPzioc2+mHyUrFDWPoFFtetYoOGC
+ pfybKrhJJkZLErM+XBmr4zzhwp19qCpEXojz/EtrHTsZxXMpHk2anfVRmyDnR1ZICCuj
+ EetdNtClUlM3V0N2bfKs5nhy3sNbmgZAw52jMjhs5x+N9UFXrADM1xE0qdCtXNH7wunV
+ U3eQ==
+X-Gm-Message-State: APjAAAUZ2DsrDtuDbXHNqwT9St5iOJVNrSW9f2MMLtHw3s3Nb6bjF1yV
+ fxQV7HHT9X1GnlTi3kmtlLbtaQ==
+X-Google-Smtp-Source: APXvYqxX5SLoJ8LCMG8hrdBU22+vVLN9GHqDo4HQr/WML2TFEw4hEbgiIF2ZxIqOC6C5Ikf2EfVGaQ==
+X-Received: by 2002:a17:902:82c4:: with SMTP id
+ u4mr9960400plz.196.1565210150735; 
+ Wed, 07 Aug 2019 13:35:50 -0700 (PDT)
+Received: from localhost ([12.206.222.5])
+ by smtp.gmail.com with ESMTPSA id q22sm85567918pgh.49.2019.08.07.13.35.49
+ (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+ Wed, 07 Aug 2019 13:35:50 -0700 (PDT)
+Date: Wed,  7 Aug 2019 10:49:44 -0700
+Message-Id: <20190807174944.17944-1-palmer@sifive.com>
+X-Mailer: git-send-email 2.21.0
 MIME-Version: 1.0
-In-Reply-To: <20190806124857.GA18832@maxim-ThinkPad-T490>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2607:f8b0:4864:20::631
-Subject: Re: [Qemu-riscv] [Qemu-devel] RISC-V: insn32.decode: Confusing
- encodings
+Content-Transfer-Encoding: 8bit
+Cc: Paul Walmsley <paul.walmsley@sifive.com>, Atish Patra <Atish.Patra@wdc.com>,
+ qemu-devel@nongnu.org, Palmer Dabbelt <palmer@sifive.com>
+From: Palmer Dabbelt <palmer@sifive.com>
+To: qemu-riscv@nongnu.org, Alistair Francis <Alistair.Francis@wdc.com>
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+ [fuzzy]
+X-Received-From: 209.85.214.194
+Subject: [Qemu-riscv] [PATCH v2] RISC-V: Ignore the S and U extensions when
+ formatting ISA strings
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -77,51 +60,52 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Aug 2019 18:41:05 -0000
+X-List-Received-Date: Wed, 07 Aug 2019 20:35:54 -0000
 
-On 8/6/19 5:48 AM, Maxim Blinov wrote:
-> slli     00.... ......    ..... 001 ..... 0010011 @sh
-> srli     00.... ......    ..... 101 ..... 0010011 @sh
-> srai     01.... ......    ..... 101 ..... 0010011 @sh
-> 
-> First question: Why does the %sh10 field exist? There are no 10-bit
-> shamt fields anywhere in the spec.
-> 
-> Second question: For rv32i, "SLLI" is defined as follows in the spec:
-> 
-> 0000000 shamt[4:0] rs1[4:0] 001 rd[4:0] 0010011  |  SLLI
+The ISA strings we're providing from QEMU aren't actually legal RISC-V
+ISA strings, as both the S and U extensions cannot exist as
+single-letter extensions and must instead be multi-letter strings.
+We're still using the ISA strings inside QEMU to track the availiable
+extensions, so this patch just strips out the S and U extensions when
+formatting ISA strings.
 
-Bits [9:5] of the field are checked against zero later, with
+This boots Linux on top of 4.1-rc3, which no longer has the U extension
+in /proc/cpuinfo.
 
-    if (a->shamt >= TARGET_LONG_BITS) {
-        return false;
-    }
+Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
+---
+ target/riscv/cpu.c | 17 ++++++++++++++++-
+ 1 file changed, 16 insertions(+), 1 deletion(-)
 
-It was done this way to be compatible between rv32, rv64, and a future rv128.
-Which I admit would only need 7 bits not 10, but it didn't seem to matter
-either way.
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index f8d07bd20ad7..74f3449c4918 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -501,7 +501,22 @@ char *riscv_isa_string(RISCVCPU *cpu)
+     char *p = isa_str + snprintf(isa_str, maxlen, "rv%d", TARGET_LONG_BITS);
+     for (i = 0; i < sizeof(riscv_exts); i++) {
+         if (cpu->env.misa & RV(riscv_exts[i])) {
+-            *p++ = qemu_tolower(riscv_exts[i]);
++            char lower = qemu_tolower(riscv_exts[i]);
++            switch (lower) {
++            case 's':
++            case 'u':
++                /*
++                 * The 's' and 'u' extensions shouldn't be passed in the device
++                 * tree, but we still use them internally to track extension
++                 * sets.  Here we just explicitly remove them when formatting
++                 * an ISA string.
++                 */
++                break;
++
++            default:
++                *p++ = lower;
++                break;
++            }
+         }
+     }
+     *p = '\0';
+-- 
+2.21.0
 
-> Consider the case that we have a 32 bit cpu and we wanted to have a
-> custom instruction encoded like so:
-> 
->       |This bit set
->       v
-> 0000001 shamt[4:0] rs1[4:0] 001 rd[4:0] 0010011  |  MY_INSN
-> 
-> In 64 bit risc-v, we can't have that instruction because that bit is
-> used in the shift field for the SLLI instruction.  But it should be
-> fine to use in 32-bit risc-v.
-
-Ah, well, for that you would in fact need to adjust the decode files.
-
-I do question why you'd want to define MY_INSN in such a way as to be
-incompatible with an rv64 implementation.  Why not place your new bit higher in
-the field?
-
-> Why not have two separate insn32.decode and insn64.decode files?
-
-To avoid unnecessary duplication, of course.
-
-
-r~
 
