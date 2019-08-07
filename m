@@ -1,65 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hvGdw-0001C5-5X
+	id 1hvGdw-0001CS-9l
 	for mharc-qemu-riscv@gnu.org; Wed, 07 Aug 2019 03:45:56 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:36589)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:36657)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <bmeng.cn@gmail.com>) id 1hvGdq-0000zF-Nc
- for qemu-riscv@nongnu.org; Wed, 07 Aug 2019 03:45:52 -0400
+ (envelope-from <bmeng.cn@gmail.com>) id 1hvGds-00011A-Ts
+ for qemu-riscv@nongnu.org; Wed, 07 Aug 2019 03:45:53 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <bmeng.cn@gmail.com>) id 1hvGdo-00085s-NG
- for qemu-riscv@nongnu.org; Wed, 07 Aug 2019 03:45:50 -0400
-Received: from mail-pl1-x642.google.com ([2607:f8b0:4864:20::642]:43738)
+ (envelope-from <bmeng.cn@gmail.com>) id 1hvGdq-00087Y-Mv
+ for qemu-riscv@nongnu.org; Wed, 07 Aug 2019 03:45:52 -0400
+Received: from mail-pl1-x644.google.com ([2607:f8b0:4864:20::644]:37592)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
- id 1hvGdg-000801-Kc; Wed, 07 Aug 2019 03:45:41 -0400
-Received: by mail-pl1-x642.google.com with SMTP id 4so32482411pld.10;
- Wed, 07 Aug 2019 00:45:35 -0700 (PDT)
+ id 1hvGdh-000810-K5; Wed, 07 Aug 2019 03:45:44 -0400
+Received: by mail-pl1-x644.google.com with SMTP id b3so39516904plr.4;
+ Wed, 07 Aug 2019 00:45:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:to:subject:date:message-id:in-reply-to:references;
- bh=wTN0AJDzcERVkn+yvVdNI7HBH2sovcZsKQNHe872tF4=;
- b=XMH7W6qwjpSSKOl150eRcDqd4aHYQw+VdTaQhelobpvqSoBc76DzJ57nS+xY29n7bv
- pwFAmg6uGVT6WGkLBHCmYoWVUjiNOOVE8Fe6tnodjmdJToUzeTqB7oAMJez1Ia0Nx2Su
- G5kvoSqcNeXyTWXNNlGNoyGTijHxcy4LZI5EHzyUgcQEG3HlHpphoFKIFchvcg0cujqn
- yfRldpZ1iV/mc0BLgxsq7Kcb+kMjS46KTBB/TuwQp9zeb7YhdGwNtEVit0rJUv0Tktst
- q3MTyyoS0/r3mQGIY+OWD2vOPOhnj6+5W4ktzgX5mewNYFN045RW5xY3WkRZXIdr4mR8
- eVcg==
+ bh=cG6I8erel++wAP2MikuwJespmoehSIDTEb7AfduoiHo=;
+ b=W0iEAelgPtLvE+1e+xm1vXYD0S2mx4In7xWnT2ZV+Q+ae63GVMWgLo8lTzIA5vfWEG
+ ANUUxiet8nfJHcBBJ23bXgx1Osvs3wDFuE6V2uAb3rgAzUTdcAwF1dlztZhqextMFeUx
+ zdfG32I8wBLbjTvaM3z2088rW4hnAtANUjLUHXzh2G93bEOzXFp5yW7if1W6HQQ63DzY
+ EMAxfmtmUeCML083UYMlqKswaItq7hx5cBQoDj093FwuN20zvgZnKvWqCkdR4i/UqaoC
+ 6l19UIHhoM4tPYy+pekfLlxPjQYrMKVvFGwLdLcMAd7Bcj3OaMWmA1dc3oB2FJk8cFCp
+ 6KVw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
  :references;
- bh=wTN0AJDzcERVkn+yvVdNI7HBH2sovcZsKQNHe872tF4=;
- b=oEhfzJvJa0bT+p9NfAJhJZvrYRXafnJFcC3RfpG/94YCDGks8CXVWa/8CJqnP4/pQO
- tZLjWyOt6lEP9KwQpP7PeaT2uOuYgFAchU0MRcF0l0nsRxKn0ZIYQHXx9cwVYJeCPF6b
- lePmOo7Z5k2Ya98cyaQ2vJnoNdw+N7XNi3kZLaGpsyXnoFYF10FbsnnwZ8oTKBFn5KOe
- CWw9wk5BCSJyBjr5cq4htFy713Z8RR3uGqQ+yYm3vDAFrD17slGxpHy3ReuKjHPySHTU
- SbPwNRj3nsrVUYE/g1xz7GAldgy4BeM482UaJdg8gQhhM3lQWWhKt9GNLrZt1dBhHPTR
- MQMA==
-X-Gm-Message-State: APjAAAVhlPcDTxVvTB6iD6Ot/DytLeNPqsZ5OJMOZz1Z0lf1MqLaNDfh
- FBBHribNqTCuFOQPt6VgOOI=
-X-Google-Smtp-Source: APXvYqxxt2NFe5K+T0zQPxKtv3EyjhEN8m5SdIDCdU0hwNCX15mXWinwA8Umm3MBuizWCHlQtxCcjw==
-X-Received: by 2002:a65:49cc:: with SMTP id t12mr6113507pgs.83.1565163934781; 
- Wed, 07 Aug 2019 00:45:34 -0700 (PDT)
+ bh=cG6I8erel++wAP2MikuwJespmoehSIDTEb7AfduoiHo=;
+ b=tfsOcVng9bwh5osakulE0PPHeBXd3v/UHiz6eOlEe7uzisJqArvMp8bgaviRsaLW2d
+ 7Y4759muZ9Ig21lX+pB41Vz1LioY3ukZLLTKYfO8JtQRP26xu/omTQssIdUhfF+ScX0h
+ +WuLk24D44QrxFYyCbLtGRNYnn9qzDV3qk2Hwo46ISbQ1dCqWSvlhM3tvzlgICMP9Utu
+ E/rkhlNmM3U9svOE3s4dnIGyoFTItsx/sxGN2Pth7x/6FPZczdbcoD1BMfbAbMmScsw4
+ uRFp/ZjPGg/I4tVqEq9hl+/fIRTs8aeb4iFrjN9uedq4fLlwfO2bTqfDLpaCmDJ/4FKR
+ vSgw==
+X-Gm-Message-State: APjAAAXul2mtD1QGgQxMmounVLLBsyNXG8KNxl+BpaKUYTzi2JtGLRH9
+ TIOtEM2W+fbysLbLa1iLX+c=
+X-Google-Smtp-Source: APXvYqzAoEpwLOWps4JiF+uxJZ6czs+3dl8TQ1usqseWmTpOZRcJ3WzKtx1KbC3WNnLeiddBioKTaQ==
+X-Received: by 2002:a17:90a:3651:: with SMTP id
+ s75mr6936754pjb.13.1565163938079; 
+ Wed, 07 Aug 2019 00:45:38 -0700 (PDT)
 Received: from localhost.localdomain (unknown-224-80.windriver.com.
  [147.11.224.80])
- by smtp.gmail.com with ESMTPSA id l44sm20154449pje.29.2019.08.07.00.45.33
+ by smtp.gmail.com with ESMTPSA id l44sm20154449pje.29.2019.08.07.00.45.37
  (version=TLS1 cipher=AES128-SHA bits=128/128);
- Wed, 07 Aug 2019 00:45:34 -0700 (PDT)
+ Wed, 07 Aug 2019 00:45:37 -0700 (PDT)
 From: Bin Meng <bmeng.cn@gmail.com>
 To: Alistair Francis <Alistair.Francis@wdc.com>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
  Palmer Dabbelt <palmer@sifive.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
-Date: Wed,  7 Aug 2019 00:45:00 -0700
-Message-Id: <1565163924-18621-5-git-send-email-bmeng.cn@gmail.com>
+Date: Wed,  7 Aug 2019 00:45:03 -0700
+Message-Id: <1565163924-18621-8-git-send-email-bmeng.cn@gmail.com>
 X-Mailer: git-send-email 1.7.1
 In-Reply-To: <1565163924-18621-1-git-send-email-bmeng.cn@gmail.com>
 References: <1565163924-18621-1-git-send-email-bmeng.cn@gmail.com>
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::642
-Subject: [Qemu-riscv] [PATCH v2 04/28] riscv: hart: Extract hart realize to
- a separate routine
+X-Received-From: 2607:f8b0:4864:20::644
+Subject: [Qemu-riscv] [PATCH v2 07/28] riscv: sifive_u: Set the minimum
+ number of cpus to 2
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -71,72 +72,44 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Aug 2019 07:45:53 -0000
+X-List-Received-Date: Wed, 07 Aug 2019 07:45:54 -0000
 
-Currently riscv_harts_realize() creates all harts based on the
-same cpu type given in the hart array property. With current
-implementation it can only create symmetric harts. Exact the
-hart realize to a separate routine in preparation for supporting
-heterogeneous hart arrays.
+It is not useful if we only have one management CPU.
 
 Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
+
 ---
 
-Changes in v2: None
+Changes in v2:
+- update the file header to indicate at least 2 harts are created
 
- hw/riscv/riscv_hart.c | 31 +++++++++++++++++++------------
- 1 file changed, 19 insertions(+), 12 deletions(-)
+ hw/riscv/sifive_u.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/hw/riscv/riscv_hart.c b/hw/riscv/riscv_hart.c
-index ca69a1b..3dd1c6a 100644
---- a/hw/riscv/riscv_hart.c
-+++ b/hw/riscv/riscv_hart.c
-@@ -37,26 +37,33 @@ static void riscv_harts_cpu_reset(void *opaque)
-     cpu_reset(CPU(cpu));
+diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+index 821f1d5..91f3c76 100644
+--- a/hw/riscv/sifive_u.c
++++ b/hw/riscv/sifive_u.c
+@@ -10,8 +10,8 @@
+  * 1) CLINT (Core Level Interruptor)
+  * 2) PLIC (Platform Level Interrupt Controller)
+  *
+- * This board currently generates devicetree dynamically that indicates at most
+- * five harts.
++ * This board currently generates devicetree dynamically that indicates at least
++ * two harts and up to five harts.
+  *
+  * This program is free software; you can redistribute it and/or modify it
+  * under the terms and conditions of the GNU General Public License,
+@@ -429,6 +429,8 @@ static void riscv_sifive_u_machine_init(MachineClass *mc)
+      * management CPU.
+      */
+     mc->max_cpus = 5;
++    /* It is not useful if we only have one management CPU */
++    mc->min_cpus = 2;
  }
  
-+static void riscv_hart_realize(RISCVHartArrayState *s, int hart,
-+                               char *cpu_type, Error **errp)
-+{
-+    Error *err = NULL;
-+
-+    object_initialize_child(OBJECT(s), "harts[*]", &s->harts[hart],
-+                            sizeof(RISCVCPU), cpu_type,
-+                            &error_abort, NULL);
-+    s->harts[hart].env.mhartid = hart;
-+    qemu_register_reset(riscv_harts_cpu_reset, &s->harts[hart]);
-+    object_property_set_bool(OBJECT(&s->harts[hart]), true,
-+                             "realized", &err);
-+    if (err) {
-+        error_propagate(errp, err);
-+        return;
-+    }
-+}
-+
- static void riscv_harts_realize(DeviceState *dev, Error **errp)
- {
-     RISCVHartArrayState *s = RISCV_HART_ARRAY(dev);
--    Error *err = NULL;
-     int n;
- 
-     s->harts = g_new0(RISCVCPU, s->num_harts);
- 
-     for (n = 0; n < s->num_harts; n++) {
--        object_initialize_child(OBJECT(s), "harts[*]", &s->harts[n],
--                                sizeof(RISCVCPU), s->cpu_type,
--                                &error_abort, NULL);
--        s->harts[n].env.mhartid = n;
--        qemu_register_reset(riscv_harts_cpu_reset, &s->harts[n]);
--        object_property_set_bool(OBJECT(&s->harts[n]), true,
--                                 "realized", &err);
--        if (err) {
--            error_propagate(errp, err);
--            return;
--        }
-+        riscv_hart_realize(s, n, s->cpu_type, errp);
-     }
- }
- 
+ DEFINE_MACHINE("sifive_u", riscv_sifive_u_machine_init)
 -- 
 2.7.4
 
