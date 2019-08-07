@@ -1,52 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hvHoH-0001wl-C9
-	for mharc-qemu-riscv@gnu.org; Wed, 07 Aug 2019 05:00:41 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49560)
+	id 1hvHrx-0003Lw-7A
+	for mharc-qemu-riscv@gnu.org; Wed, 07 Aug 2019 05:04:29 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:50349)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <chihmin.chao@sifive.com>) id 1hvHoE-0001uP-A9
- for qemu-riscv@nongnu.org; Wed, 07 Aug 2019 05:00:39 -0400
+ (envelope-from <chihmin.chao@sifive.com>) id 1hvHru-0003KG-Lh
+ for qemu-riscv@nongnu.org; Wed, 07 Aug 2019 05:04:27 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <chihmin.chao@sifive.com>) id 1hvHoD-0001ta-4L
- for qemu-riscv@nongnu.org; Wed, 07 Aug 2019 05:00:38 -0400
-Received: from mail-ot1-x343.google.com ([2607:f8b0:4864:20::343]:39230)
+ (envelope-from <chihmin.chao@sifive.com>) id 1hvHrt-00051I-9N
+ for qemu-riscv@nongnu.org; Wed, 07 Aug 2019 05:04:26 -0400
+Received: from mail-ot1-x341.google.com ([2607:f8b0:4864:20::341]:43511)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <chihmin.chao@sifive.com>)
- id 1hvHoC-0001tJ-V3
- for qemu-riscv@nongnu.org; Wed, 07 Aug 2019 05:00:37 -0400
-Received: by mail-ot1-x343.google.com with SMTP id r21so95386214otq.6
- for <qemu-riscv@nongnu.org>; Wed, 07 Aug 2019 02:00:36 -0700 (PDT)
+ id 1hvHrs-00050n-MY
+ for qemu-riscv@nongnu.org; Wed, 07 Aug 2019 05:04:25 -0400
+Received: by mail-ot1-x341.google.com with SMTP id j11so1019113otp.10
+ for <qemu-riscv@nongnu.org>; Wed, 07 Aug 2019 02:04:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=/CCm4A5Olufvollna31VV9arJaJ3pA9JKUKma77ctzM=;
- b=YSdPLmLfT4fThFHNds2eNrcZ1LOfcAfLqvpBAodR3yylq9/JcDUr+oOVzgKXilJobH
- 4ACC2ZM3ikM9qNsqvPU0J446etVN6kjrG6xlwuxZe5fRppJPmgBUm1VFcct7dVuYZJYb
- GCbZfFn7K6oASCPc5or3GSSYrdaw5br7m0CMyjy9svCF9cLjBLVs6ITenhOzcunw94kW
- sWFEn4FU4Se1COZjb4zDjwouLFp+EP5M857N3QI94aFxVnaoFlI6VAO2cgaPtGXI3/di
- +Mn/ce/Hv+Gqv1WJfELRK1+OrQ+JZZTr0lwLeU6uGN6NqfXPyfEYCzjvzvS0enMkoH6T
- KaoA==
+ :cc; bh=JSywJq/uk7DlIuNSp1YJQO69w6sCtKmOtpr9rDm7AC0=;
+ b=nZ2GP2LY/qLcc5Z2Hf7UEM1NBnaEhweuBZxae8J3l6IverIp17mJCm0i+NNc/9N1P0
+ 0GhvkEiiFW2xKxqwBIYmgfb6jT1od5h2sYGBZt/PNaUlW6PN7QlE4e92KrasvCeHL69R
+ neO6IAhZTL2XQOVEShHkRbPSf/ykI72fuDC/jRq3HJaRhbpELI1bFtfxfVmY1cEjzplO
+ jrHBzxKR4BEuVyiaj/DIyaS/3lyBIaIU8BKbw7OmWIKkey+rDDZ/VFFyptvlZ/M+fsCX
+ uk5LGqxWdwFHmbw1iqE990O89CBgL89XeuG2T59GpUEr6IYhq/8su6/LKj6OSSLzVT2K
+ UrxA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=/CCm4A5Olufvollna31VV9arJaJ3pA9JKUKma77ctzM=;
- b=bdsXChWJb+SQmEwZEMicq7kh9nwTPSUZCH/3onLSKZE97zgkhtqX44YuwNx/oqKSRD
- yIFstRB/sJm18YVWH6/gdJgnzFic2aKY5VqEKX5Aiqkx1GFbekh+kLDVxe1Ee/Q5gemG
- Wy/5rWB5Vp5beL7syPhjwgjdg8sm4eLb6ZBx7aogz7XeTDz+fbBvqZxGEgFsgfZXDI+F
- YmD/FF9ZoJqtbcf1xmlvKeyZeuT3e0VsCpuH9qiCjo5SLC3cOzTjNxlXqpREF5oQoM9E
- uiw0OoDEwDtssvFqdBqrB3Euk4+lPW1LNFixx/Amloa4uyIwUR41Gx6hcimQqJPDPBze
- 53cA==
-X-Gm-Message-State: APjAAAUfGX07+oLOm9SPtqm7KInP4LEKDQl5suQTRspNaomEDgqBj0gO
- vF69ce1HN+FwPAmGlDvWJXyVxv3jgPQF+Z8Y41PgPw==
-X-Google-Smtp-Source: APXvYqzkE3gQZZK7bSSpv7qx9tFtv3olJqCAgyhFjIlkUz7l3m6Rt6XIWRVxLG0FSM0l7q8RPsEhd2Hy+a/AOZCxqBE=
-X-Received: by 2002:a5e:881a:: with SMTP id l26mr8086636ioj.185.1565168436343; 
- Wed, 07 Aug 2019 02:00:36 -0700 (PDT)
+ bh=JSywJq/uk7DlIuNSp1YJQO69w6sCtKmOtpr9rDm7AC0=;
+ b=RLy8yfLOhTlnGwao86hcYuog9D3lv/sRQChKNyO3Yvx05X3bxXNt2Pe4qa5FcPviW9
+ OxbhaG/Kw2kX0hgTdmlXG1WFf3l+pJODG8aC0t4wXh4x6RzcwF5OMWXGr/saRHx5VBtP
+ LkN8n4IQ9WjRK5wKuC3e21nXCO7gzV3Z0CXP06C37zdo3bf2yxsV9lWQSxZWju7O3a5L
+ +IFoYZHezV6T+8+D2xtiRXHBKxUACclY0mSJJLZRwLrtXEh0cBZ80Q1UfZ1/nQRFsjqN
+ AfRS4gYexEWJT4x2ln5/NmiPN3LXchHjLWp2Rdu5xbY294bRjmskX44xhv14HCskSU1S
+ 2APA==
+X-Gm-Message-State: APjAAAWESuN0rD21LlNmn2BiMtCwUGms5g/WcN/tB5vsnirfjhePC5NE
+ BZlXl+7xvq46e5nXKMSuoUyCtcZTlqzJEv1E/QBspw==
+X-Google-Smtp-Source: APXvYqwNpwUQ+BrgxmmnHHP+/T46SS3huN19+qpIMEGzPi703fSKP87jd4qgzOn419nqxckuVtkGsqnQwCopi+f2s64=
+X-Received: by 2002:a6b:d008:: with SMTP id x8mr7735405ioa.129.1565168663924; 
+ Wed, 07 Aug 2019 02:04:23 -0700 (PDT)
 MIME-Version: 1.0
 References: <1565163924-18621-1-git-send-email-bmeng.cn@gmail.com>
- <1565163924-18621-14-git-send-email-bmeng.cn@gmail.com>
-In-Reply-To: <1565163924-18621-14-git-send-email-bmeng.cn@gmail.com>
+ <1565163924-18621-25-git-send-email-bmeng.cn@gmail.com>
+In-Reply-To: <1565163924-18621-25-git-send-email-bmeng.cn@gmail.com>
 From: Chih-Min Chao <chihmin.chao@sifive.com>
-Date: Wed, 7 Aug 2019 17:00:25 +0800
-Message-ID: <CAEiOBXWAvHyrxTFQryH2ChSCTk_iZU9mQstcmh+DT2bmS3pp+Q@mail.gmail.com>
+Date: Wed, 7 Aug 2019 17:04:12 +0800
+Message-ID: <CAEiOBXU5La=+Q6ZQ+BQZEjVkE1Ga=-m3_B0EJbRVwCrgSobRBw@mail.gmail.com>
 To: Bin Meng <bmeng.cn@gmail.com>
 Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
@@ -54,12 +54,12 @@ Cc: Alistair Francis <Alistair.Francis@wdc.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>
-Content-Type: multipart/alternative; boundary="000000000000a98c3e058f832c30"
+Content-Type: multipart/alternative; boundary="0000000000003a3620058f833a14"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::343
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v2 13/28] riscv: sifive_e:
- prci: Update the PRCI register block size
+X-Received-From: 2607:f8b0:4864:20::341
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v2 24/28] riscv: sifive_u:
+ Support loading initramfs
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -71,69 +71,71 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Aug 2019 09:00:39 -0000
+X-List-Received-Date: Wed, 07 Aug 2019 09:04:27 -0000
 
---000000000000a98c3e058f832c30
+--0000000000003a3620058f833a14
 Content-Type: text/plain; charset="UTF-8"
 
-On Wed, Aug 7, 2019 at 3:49 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+On Wed, Aug 7, 2019 at 3:56 PM Bin Meng <bmeng.cn@gmail.com> wrote:
 
-> Currently the PRCI register block size is set to 0x8000, but in fact
-> 0x1000 is enough, which is also what the manual says.
+> The loading of initramfs is currently not supported on 'sifive_u'.
+> Add the support to make '-initrd' command line parameter useful.
 >
 > Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
 > ---
 >
 > Changes in v2: None
 >
->  hw/riscv/sifive_e_prci.c         | 2 +-
->  include/hw/riscv/sifive_e_prci.h | 2 ++
->  2 files changed, 3 insertions(+), 1 deletion(-)
+>  hw/riscv/sifive_u.c | 13 ++++++++++++-
+>  1 file changed, 12 insertions(+), 1 deletion(-)
 >
-> diff --git a/hw/riscv/sifive_e_prci.c b/hw/riscv/sifive_e_prci.c
-> index c906f11..4cbce48 100644
-> --- a/hw/riscv/sifive_e_prci.c
-> +++ b/hw/riscv/sifive_e_prci.c
-> @@ -85,7 +85,7 @@ static void sifive_prci_init(Object *obj)
->      SiFivePRCIState *s = SIFIVE_E_PRCI(obj);
+> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+> index ce6eba5..30e6c43 100644
+> --- a/hw/riscv/sifive_u.c
+> +++ b/hw/riscv/sifive_u.c
+> @@ -328,7 +328,18 @@ static void riscv_sifive_u_init(MachineState *machine)
+>                                   memmap[SIFIVE_U_DRAM].base);
 >
->      memory_region_init_io(&s->mmio, obj, &sifive_prci_ops, s,
-> -                          TYPE_SIFIVE_E_PRCI, 0x8000);
-> +                          TYPE_SIFIVE_E_PRCI, SIFIVE_E_PRCI_REG_SIZE);
->      sysbus_init_mmio(SYS_BUS_DEVICE(obj), &s->mmio);
->
->      s->hfrosccfg = (SIFIVE_PRCI_HFROSCCFG_RDY | SIFIVE_PRCI_HFROSCCFG_EN);
-> diff --git a/include/hw/riscv/sifive_e_prci.h
-> b/include/hw/riscv/sifive_e_prci.h
-> index 7932fe7..81e506b 100644
-> --- a/include/hw/riscv/sifive_e_prci.h
-> +++ b/include/hw/riscv/sifive_e_prci.h
-> @@ -47,6 +47,8 @@ enum {
->      SIFIVE_PRCI_PLLOUTDIV_DIV1  = (1 << 8)
->  };
->
-> +#define SIFIVE_E_PRCI_REG_SIZE  0x1000
+>      if (machine->kernel_filename) {
+> -        riscv_load_kernel(machine->kernel_filename);
+> +        uint64_t kernel_entry =
+> riscv_load_kernel(machine->kernel_filename);
 > +
->  #define TYPE_SIFIVE_E_PRCI      "riscv.sifive.e.prci"
+> +        if (machine->initrd_filename) {
+> +            hwaddr start;
+> +            hwaddr end = riscv_load_initrd(machine->initrd_filename,
+> +                                           machine->ram_size,
+> kernel_entry,
+> +                                           &start);
+> +            qemu_fdt_setprop_cell(s->fdt, "/chosen",
+> +                                  "linux,initrd-start", start);
+> +            qemu_fdt_setprop_cell(s->fdt, "/chosen", "linux,initrd-end",
+> +                                  end);
+> +        }
+>      }
 >
->  #define SIFIVE_E_PRCI(obj) \
+>      /* reset vector */
 > --
 > 2.7.4
 >
 >
-> Reviewed-by: Chih-Min Chao <chihmin.chao@sifive.com>
+>
+virt also does the same thing.
 
---000000000000a98c3e058f832c30
+Reviewed-by: Chih-Min Chao <chihmin.chao@sifive.com>
+
+--0000000000003a3620058f833a14
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
 <div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
-<div dir=3D"ltr" class=3D"gmail_attr">On Wed, Aug 7, 2019 at 3:49 PM Bin Me=
+<div dir=3D"ltr" class=3D"gmail_attr">On Wed, Aug 7, 2019 at 3:56 PM Bin Me=
 ng &lt;<a href=3D"mailto:bmeng.cn@gmail.com">bmeng.cn@gmail.com</a>&gt; wro=
 te:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px =
-0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">Currently th=
-e PRCI register block size is set to 0x8000, but in fact<br>
-0x1000 is enough, which is also what the manual says.<br>
+0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">The loading =
+of initramfs is currently not supported on &#39;sifive_u&#39;.<br>
+Add the support to make &#39;-initrd&#39; command line parameter useful.<br=
+>
 <br>
 Signed-off-by: Bin Meng &lt;<a href=3D"mailto:bmeng.cn@gmail.com" target=3D=
 "_blank">bmeng.cn@gmail.com</a>&gt;<br>
@@ -141,49 +143,55 @@ Signed-off-by: Bin Meng &lt;<a href=3D"mailto:bmeng.cn@gmail.com" target=3D=
 <br>
 Changes in v2: None<br>
 <br>
-=C2=A0hw/riscv/sifive_e_prci.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 2 +-<br>
-=C2=A0include/hw/riscv/sifive_e_prci.h | 2 ++<br>
-=C2=A02 files changed, 3 insertions(+), 1 deletion(-)<br>
+=C2=A0hw/riscv/sifive_u.c | 13 ++++++++++++-<br>
+=C2=A01 file changed, 12 insertions(+), 1 deletion(-)<br>
 <br>
-diff --git a/hw/riscv/sifive_e_prci.c b/hw/riscv/sifive_e_prci.c<br>
-index c906f11..4cbce48 100644<br>
---- a/hw/riscv/sifive_e_prci.c<br>
-+++ b/hw/riscv/sifive_e_prci.c<br>
-@@ -85,7 +85,7 @@ static void sifive_prci_init(Object *obj)<br>
-=C2=A0 =C2=A0 =C2=A0SiFivePRCIState *s =3D SIFIVE_E_PRCI(obj);<br>
+diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c<br>
+index ce6eba5..30e6c43 100644<br>
+--- a/hw/riscv/sifive_u.c<br>
++++ b/hw/riscv/sifive_u.c<br>
+@@ -328,7 +328,18 @@ static void riscv_sifive_u_init(MachineState *machine)=
 <br>
-=C2=A0 =C2=A0 =C2=A0memory_region_init_io(&amp;s-&gt;mmio, obj, &amp;sifive=
-_prci_ops, s,<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 TYPE_SIFIVE_E_PRCI, 0x8000);<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 TYPE_SIFIVE_E_PRCI, SIFIVE_E_PRCI_REG_SIZE);<br>
-=C2=A0 =C2=A0 =C2=A0sysbus_init_mmio(SYS_BUS_DEVICE(obj), &amp;s-&gt;mmio);=
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 memmap[SIFIVE_U_DRAM].base);<=
+br>
 <br>
-<br>
-=C2=A0 =C2=A0 =C2=A0s-&gt;hfrosccfg =3D (SIFIVE_PRCI_HFROSCCFG_RDY | SIFIVE=
-_PRCI_HFROSCCFG_EN);<br>
-diff --git a/include/hw/riscv/sifive_e_prci.h b/include/hw/riscv/sifive_e_p=
-rci.h<br>
-index 7932fe7..81e506b 100644<br>
---- a/include/hw/riscv/sifive_e_prci.h<br>
-+++ b/include/hw/riscv/sifive_e_prci.h<br>
-@@ -47,6 +47,8 @@ enum {<br>
-=C2=A0 =C2=A0 =C2=A0SIFIVE_PRCI_PLLOUTDIV_DIV1=C2=A0 =3D (1 &lt;&lt; 8)<br>
-=C2=A0};<br>
-<br>
-+#define SIFIVE_E_PRCI_REG_SIZE=C2=A0 0x1000<br>
+=C2=A0 =C2=A0 =C2=A0if (machine-&gt;kernel_filename) {<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 riscv_load_kernel(machine-&gt;kernel_filename)=
+;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 uint64_t kernel_entry =3D riscv_load_kernel(ma=
+chine-&gt;kernel_filename);<br>
 +<br>
-=C2=A0#define TYPE_SIFIVE_E_PRCI=C2=A0 =C2=A0 =C2=A0 &quot;riscv.sifive.e.p=
-rci&quot;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (machine-&gt;initrd_filename) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 hwaddr start;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 hwaddr end =3D riscv_load_initrd=
+(machine-&gt;initrd_filename,<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0machine-&gt;ram_size, kernel_entry,<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0&amp;start);<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 qemu_fdt_setprop_cell(s-&gt;fdt,=
+ &quot;/chosen&quot;,<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;linux,initrd-start&quot=
+;, start);<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 qemu_fdt_setprop_cell(s-&gt;fdt,=
+ &quot;/chosen&quot;, &quot;linux,initrd-end&quot;,<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 end);<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
+=C2=A0 =C2=A0 =C2=A0}<br>
 <br>
-=C2=A0#define SIFIVE_E_PRCI(obj) \<br>
+=C2=A0 =C2=A0 =C2=A0/* reset vector */<br>
 -- <br>
 2.7.4<br>
 <br>
-<br></blockquote><div>Reviewed-by: Chih-Min Chao &lt;<a href=3D"mailto:chih=
-min.chao@sifive.com" target=3D"_blank">chihmin.chao@sifive.com</a>&gt;=C2=
-=A0=C2=A0=C2=A0</div></div></div>
+<br></blockquote><div><br></div><div>virt also does the same thing.</div><d=
+iv><br></div><div>Reviewed-by: Chih-Min Chao &lt;<a href=3D"mailto:chihmin.=
+chao@sifive.com" target=3D"_blank">chihmin.chao@sifive.com</a>&gt;=C2=A0=C2=
+=A0=C2=A0</div></div></div>
 
---000000000000a98c3e058f832c30--
+--0000000000003a3620058f833a14--
 
