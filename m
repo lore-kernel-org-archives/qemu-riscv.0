@@ -1,78 +1,53 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hvLdg-0006WF-BT
-	for mharc-qemu-riscv@gnu.org; Wed, 07 Aug 2019 09:06:00 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:45227)
+	id 1hvNQI-00019u-DG
+	for mharc-qemu-riscv@gnu.org; Wed, 07 Aug 2019 11:00:18 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47285)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <tony.nguyen@bt.com>) id 1hvHN2-0001FI-9J
- for qemu-riscv@nongnu.org; Wed, 07 Aug 2019 04:32:33 -0400
+ (envelope-from <palmer@dabbelt.com>) id 1hvNQF-00013i-Km
+ for qemu-riscv@nongnu.org; Wed, 07 Aug 2019 11:00:17 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <tony.nguyen@bt.com>) id 1hvHN0-0002Vg-Fp
- for qemu-riscv@nongnu.org; Wed, 07 Aug 2019 04:32:31 -0400
-Received: from smtpe1.intersmtp.com ([213.121.35.77]:9795)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <tony.nguyen@bt.com>)
- id 1hvHN0-0002VN-8U; Wed, 07 Aug 2019 04:32:30 -0400
-Received: from tpw09926dag18e.domain1.systemhost.net (10.9.212.18) by
- BWP09926082.bt.com (10.36.82.113) with Microsoft SMTP Server (version=TLS1_2, 
- cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P256) id 15.1.1713.5; Wed, 7 Aug
- 2019 09:32:14 +0100
-Received: from tpw09926dag18e.domain1.systemhost.net (10.9.212.18) by
- tpw09926dag18e.domain1.systemhost.net (10.9.212.18) with Microsoft SMTP
- Server (TLS) id 15.0.1395.4; Wed, 7 Aug 2019 09:32:27 +0100
-Received: from tpw09926dag18e.domain1.systemhost.net
- ([fe80::a946:6348:ccf4:fa6c]) by tpw09926dag18e.domain1.systemhost.net
- ([fe80::a946:6348:ccf4:fa6c%12]) with mapi id 15.00.1395.000; Wed, 7 Aug 2019
- 09:32:27 +0100
-From: <tony.nguyen@bt.com>
-To: <qemu-devel@nongnu.org>
-CC: <frederic.konrad@adacore.com>, <berto@igalia.com>,
- <qemu-block@nongnu.org>, <arikalo@wavecomp.com>, <pasic@linux.ibm.com>,
- <hpoussin@reactos.org>, <anthony.perard@citrix.com>,
- <xen-devel@lists.xenproject.org>, <lersek@redhat.com>, <jasowang@redhat.com>, 
- <jiri@resnulli.us>, <ehabkost@redhat.com>, <b.galvani@gmail.com>,
- <eric.auger@redhat.com>, <alex.williamson@redhat.com>, <stefanha@redhat.com>, 
- <jsnow@redhat.com>, <rth@twiddle.net>, <kwolf@redhat.com>, <andrew@aj.id.au>, 
- <crwulff@gmail.com>, <laurent@vivier.eu>, <sundeep.lkml@gmail.com>,
- <michael@walle.cc>, <qemu-ppc@nongnu.org>, <kbastian@mail.uni-paderborn.de>,
- <imammedo@redhat.com>, <fam@euphon.net>, <peter.maydell@linaro.org>,
- <david@redhat.com>, <palmer@sifive.com>, <keith.busch@intel.com>,
- <jcmvbkbc@gmail.com>, <hare@suse.com>, <sstabellini@kernel.org>,
- <andrew.smirnov@gmail.com>, <deller@gmx.de>, <magnus.damm@gmail.com>,
- <atar4qemu@gmail.com>, <minyard@acm.org>, <sw@weilnetz.de>,
- <yuval.shaia@oracle.com>, <qemu-s390x@nongnu.org>, <qemu-arm@nongnu.org>,
- <jan.kiszka@web.de>, <clg@kaod.org>, <shorne@gmail.com>,
- <qemu-riscv@nongnu.org>, <i.mitsyanko@gmail.com>, <cohuck@redhat.com>,
- <philmd@redhat.com>, <amarkovic@wavecomp.com>, <peter.chubb@nicta.com.au>,
- <aurelien@aurel32.net>, <pburton@wavecomp.com>, <sagark@eecs.berkeley.edu>,
- <green@moxielogic.com>, <kraxel@redhat.com>, <edgar.iglesias@gmail.com>,
- <gxt@mprc.pku.edu.cn>, <robh@kernel.org>, <borntraeger@de.ibm.com>,
- <joel@jms.id.au>, <antonynpavlov@gmail.com>, <chouteau@adacore.com>,
- <Andrew.Baumann@microsoft.com>, <mreitz@redhat.com>, <walling@linux.ibm.com>, 
- <dmitry.fleytman@gmail.com>, <mst@redhat.com>,
- <mark.cave-ayland@ilande.co.uk>, <jslaby@suse.cz>, <marex@denx.de>,
- <proljc@gmail.com>, <marcandre.lureau@redhat.com>, <alistair@alistair23.me>,
- <paul.durrant@citrix.com>, <david@gibson.dropbear.id.au>,
- <xiaoguangrong.eric@gmail.com>, <huth@tuxfamily.org>, <jcd@tribudubois.net>,
- <pbonzini@redhat.com>, <stefanb@linux.ibm.com>
-Thread-Topic: [Qemu-devel] [PATCH v6 18/26] exec: Delete device_endian
-Thread-Index: AQHVTPqlw4QCqX/rC0CPqHm682cCsg==
-Date: Wed, 7 Aug 2019 08:32:27 +0000
-Message-ID: <1565166747494.26346@bt.com>
-References: <45ec4924e0b34a3d9124e2db06af75b4@tpw09926dag18e.domain1.systemhost.net>
-In-Reply-To: <45ec4924e0b34a3d9124e2db06af75b4@tpw09926dag18e.domain1.systemhost.net>
-Accept-Language: en-AU, en-GB, en-US
-Content-Language: en-AU
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.187.101.44]
-Content-Type: multipart/alternative; boundary="_000_156516674749426346btcom_"
+ (envelope-from <palmer@dabbelt.com>) id 1hvNQD-0005kt-Dt
+ for qemu-riscv@nongnu.org; Wed, 07 Aug 2019 11:00:15 -0400
+Received: from mail-pl1-f193.google.com ([209.85.214.193]:37728)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1hvNQB-0005j7-FU
+ for qemu-riscv@nongnu.org; Wed, 07 Aug 2019 11:00:13 -0400
+Received: by mail-pl1-f193.google.com with SMTP id b3so41262732plr.4
+ for <qemu-riscv@nongnu.org>; Wed, 07 Aug 2019 08:00:09 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:subject:date:message-id:mime-version
+ :content-transfer-encoding:cc:from:to;
+ bh=/z3SaXELBbM1r0WgxX2Aa0ZqhKzjlwWQ5XV4JiXHSQc=;
+ b=h8FKRrRr4arJfgUFFd3m+B2hd3lHy9x01T1/S1InMUOH5H6qcKa0M445iicIl4TFxr
+ HTmdLDaz31gjbrZs/JPAEHWd1jbknnD0OH15dRyaYuMJBLUf0H1xt8kyUd82dMFIiWE2
+ Pqiv94u6+7kfm254VAwa0bC4sdQR6siWMXF1ZTMAfHprVWeJUBlN4hmryWVH2aYyQ86M
+ 3WKv1qqFWZS0PcyL7bCagCiXmMzBETuHqCeuuVFxd8bhAkcQXKqS6x6VDTruWL6YsSbO
+ UB8OoAux9rVjL3Yj22PWxzCrLT5s+16VdMKqJDAyWmzkOQgMDEQBOVpFhuDKCDzrKc41
+ JDeg==
+X-Gm-Message-State: APjAAAVRzDWRiNwPLlVbvkizx2BNpDVM+vEb1bgqAr7UzQhpto3c4qEh
+ tKGPUGZcdot+CjUp4C+KGHqa3g==
+X-Google-Smtp-Source: APXvYqxpvrcPP1rXQEzW5s408YNpQQayr5I9ZkLIuETds3ak6LOeEHY0CdB/jHuNnjkwjNRqXoe3VA==
+X-Received: by 2002:a62:e815:: with SMTP id c21mr10089381pfi.244.1565190008346; 
+ Wed, 07 Aug 2019 08:00:08 -0700 (PDT)
+Received: from localhost ([12.206.222.5])
+ by smtp.gmail.com with ESMTPSA id 64sm93539840pfe.128.2019.08.07.08.00.07
+ (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+ Wed, 07 Aug 2019 08:00:07 -0700 (PDT)
+Date: Wed,  7 Aug 2019 07:59:39 -0700
+Message-Id: <20190807145939.1281-1-palmer@sifive.com>
+X-Mailer: git-send-email 2.21.0
 MIME-Version: 1.0
-X-detected-operating-system: by eggs.gnu.org: Windows 7 or 8 [fuzzy]
-X-Received-From: 213.121.35.77
-X-Mailman-Approved-At: Wed, 07 Aug 2019 09:05:48 -0400
-Subject: [Qemu-riscv] [Qemu-devel] [PATCH v6 18/26] exec: Delete
- device_endian
+Content-Transfer-Encoding: 8bit
+Cc: Paul Walmsley <paul.walmsley@sifive.com>, Atish Patra <Atish.Patra@wdc.com>,
+ qemu-devel@nongnu.org, Palmer Dabbelt <palmer@sifive.com>
+From: Palmer Dabbelt <palmer@sifive.com>
+To: qemu-riscv@nongnu.org, Alistair Francis <Alistair.Francis@wdc.com>
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+ [fuzzy]
+X-Received-From: 209.85.214.193
+Subject: [Qemu-riscv] [PATCH for 4.1] RISC-V: Ignore the S and U extensions
+ when formatting ISA strings
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -84,104 +59,56 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Aug 2019 08:32:33 -0000
+X-List-Received-Date: Wed, 07 Aug 2019 15:00:17 -0000
 
---_000_156516674749426346btcom_
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+The ISA strings we're providing from QEMU aren't actually legal RISC-V
+ISA strings, as both the S and U extensions cannot exist as
+single-letter extensions and must instead be multi-letter strings.
+We're still using the ISA strings inside QEMU to track the availiable
+extensions, so this patch just strips out the S and U extensions when
+formatting ISA strings.
 
-device_endian has been made redundant by MemOp.
+This boots Linux on top of 4.1-rc3, which no longer has the U extension
+in /proc/cpuinfo.
 
-Signed-off-by: Tony Nguyen <tony.nguyen@bt.com>
+Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
 ---
- include/exec/cpu-common.h | 8 --------
- 1 file changed, 8 deletions(-)
+This is another late one, but I'd like to target it for 4.1 as we're
+providing illegal ISA strings and I don't want to bake that into a bunch
+of other code.
+---
+ target/riscv/cpu.c | 17 ++++++++++++++++-
+ 1 file changed, 16 insertions(+), 1 deletion(-)
 
-diff --git a/include/exec/cpu-common.h b/include/exec/cpu-common.h
-index 01a29ba..7eeb78c 100644
---- a/include/exec/cpu-common.h
-+++ b/include/exec/cpu-common.h
-@@ -18,14 +18,6 @@ void tcg_flush_softmmu_tlb(CPUState *cs);
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index f8d07bd20ad7..4df14433d789 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -501,7 +501,22 @@ char *riscv_isa_string(RISCVCPU *cpu)
+     char *p = isa_str + snprintf(isa_str, maxlen, "rv%d", TARGET_LONG_BITS);
+     for (i = 0; i < sizeof(riscv_exts); i++) {
+         if (cpu->env.misa & RV(riscv_exts[i])) {
+-            *p++ = qemu_tolower(riscv_exts[i]);
++            char lower = qemu_tolower(riscv_exts[i]);
++            switch (lower) {
++            case 's':
++            case 'u':
++                /*
++                 * The 's' and 'u' extensions shouldn't be passed in the device
++                 * tree, but we still use them internally to track extension
++                 * sets.  Here we just explicitly remove them when formatting
++                 * an ISA string.
++                 */
++                break;
++
++            default:
++                *p++ = qemu_tolower(riscv_exts[i]);
++                break;
++            }
+         }
+     }
+     *p = '\0';
+-- 
+2.21.0
 
- #include "exec/memop.h"
-
--enum device_endian {
--#ifdef NEED_CPU_H
--    DEVICE_NATIVE_ENDIAN =3D MO_TE,
--#endif
--    DEVICE_BIG_ENDIAN =3D MO_BE,
--    DEVICE_LITTLE_ENDIAN =3D MO_LE,
--};
--
- #if defined(HOST_WORDS_BIGENDIAN)
- #define DEVICE_HOST_ENDIAN MO_BE
- #else
---
-1.8.3.1
-
-?
-
-
---_000_156516674749426346btcom_
-Content-Type: text/html; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
-
-<html>
-<head>
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Diso-8859-=
-1">
-<style type=3D"text/css" style=3D"display:none"><!-- P { margin-top: 0px; m=
-argin-bottom: 0px; } .EmailQuote { margin-left: 1pt; padding-left: 4pt; bor=
-der-left-width: 2px; border-left-style: solid; border-left-color: rgb(128, =
-0, 0); }--></style>
-</head>
-<body dir=3D"ltr" style=3D"font-size:12pt;color:#000000;background-color:#F=
-FFFFF;font-family:Calibri,Arial,Helvetica,sans-serif;">
-<p></p>
-<div style=3D"color: rgb(33, 33, 33);"><font size=3D"2"><span style=3D"font=
--size:10pt;">
-<div class=3D"PlainText">
-<div><span style=3D"font-size: 10pt;">device_endian has been made redundant=
- by MemOp.</span><br>
-</div>
-<div><br>
-</div>
-<div>Signed-off-by: Tony Nguyen &lt;tony.nguyen@bt.com&gt;</div>
-<div>---</div>
-<div>&nbsp;include/exec/cpu-common.h | 8 --------</div>
-<div>&nbsp;1 file changed, 8 deletions(-)</div>
-<div><br>
-</div>
-<div>diff --git a/include/exec/cpu-common.h b/include/exec/cpu-common.h</di=
-v>
-<div>index 01a29ba..7eeb78c 100644</div>
-<div>--- a/include/exec/cpu-common.h</div>
-<div>&#43;&#43;&#43; b/include/exec/cpu-common.h</div>
-<div>@@ -18,14 &#43;18,6 @@ void tcg_flush_softmmu_tlb(CPUState *cs);</div>
-<div>&nbsp;</div>
-<div>&nbsp;#include &quot;exec/memop.h&quot;</div>
-<div>&nbsp;</div>
-<div>-enum device_endian {</div>
-<div>-#ifdef NEED_CPU_H</div>
-<div>- &nbsp; &nbsp;DEVICE_NATIVE_ENDIAN =3D MO_TE,</div>
-<div>-#endif</div>
-<div>- &nbsp; &nbsp;DEVICE_BIG_ENDIAN =3D MO_BE,</div>
-<div>- &nbsp; &nbsp;DEVICE_LITTLE_ENDIAN =3D MO_LE,</div>
-<div>-};</div>
-<div>-</div>
-<div>&nbsp;#if defined(HOST_WORDS_BIGENDIAN)</div>
-<div>&nbsp;#define DEVICE_HOST_ENDIAN MO_BE</div>
-<div>&nbsp;#else</div>
-<div>--&nbsp;</div>
-<div>1.8.3.1</div>
-<div><br>
-&#8203;<br>
-</div>
-<br>
-</div>
-</span></font></div>
-</body>
-</html>
-
---_000_156516674749426346btcom_--
 
