@@ -1,65 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hvIOs-00051E-7I
-	for mharc-qemu-riscv@gnu.org; Wed, 07 Aug 2019 05:38:30 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:59037)
+	id 1hvIWs-0000Ma-Fu
+	for mharc-qemu-riscv@gnu.org; Wed, 07 Aug 2019 05:46:46 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:60709)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <bmeng.cn@gmail.com>) id 1hvIOp-0004w2-V4
- for qemu-riscv@nongnu.org; Wed, 07 Aug 2019 05:38:28 -0400
+ (envelope-from <philmd@redhat.com>) id 1hvIWq-0000MC-LJ
+ for qemu-riscv@nongnu.org; Wed, 07 Aug 2019 05:46:45 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <bmeng.cn@gmail.com>) id 1hvIOo-0004GB-WF
- for qemu-riscv@nongnu.org; Wed, 07 Aug 2019 05:38:27 -0400
-Received: from mail-ed1-x542.google.com ([2a00:1450:4864:20::542]:34394)
+ (envelope-from <philmd@redhat.com>) id 1hvIWp-00026i-IH
+ for qemu-riscv@nongnu.org; Wed, 07 Aug 2019 05:46:44 -0400
+Received: from mail-wm1-f66.google.com ([209.85.128.66]:53432)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
- id 1hvIOm-0004Eg-Se; Wed, 07 Aug 2019 05:38:25 -0400
-Received: by mail-ed1-x542.google.com with SMTP id s49so50782367edb.1;
- Wed, 07 Aug 2019 02:38:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=E7OPrDfKUCQOtGnRnv49nywDmsT5mWNpTufr6o0c+Uc=;
- b=F7LDUm3jrZ1u24V4zfdOYm31iT1E3CnHAcCGDnChza97x8lf+2gHZl40aS8bdDKePs
- 67YJtPpyhArgmjQ/ltz95O6q3Zdid1T60bDTqtQT0jx+FJmI+WWPB3DkfowqUM9WXALk
- 1JzTc5TWOuFTnct1lCEahBT3tXuUnICLt1PoW34SG7YJ5OsYrVLaRBXFd77HeWjlJJW0
- TeRy64s862Ttss/CZmvqBjrBVonTfbMbIBu5FzG724eTC+Njeb/Etj+4yk1NjzpC1pI7
- X+JFryIewNPRAWf9vtSC0vxt+dzB6cMXyFU559iT5SsWNh+oBdfHyB/HIPT57ekoGeQq
- Eh7w==
+ (Exim 4.71) (envelope-from <philmd@redhat.com>) id 1hvIWp-00026A-Cv
+ for qemu-riscv@nongnu.org; Wed, 07 Aug 2019 05:46:43 -0400
+Received: by mail-wm1-f66.google.com with SMTP id 10so2021846wmp.3
+ for <qemu-riscv@nongnu.org>; Wed, 07 Aug 2019 02:46:43 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=E7OPrDfKUCQOtGnRnv49nywDmsT5mWNpTufr6o0c+Uc=;
- b=M5vw0AOU5hIIP49k9pPV15naQ99VD0mMU/bfx9N2piE9bPM3c4h2BQ/BLlBcUsHahM
- ufqaN69zQn8aT6jwv9zhCaiEn6NlCFimknP68Tbbs79Y9yVyF97lmXT6KqpLpKJuaKJV
- 6Rb+ViAAZ31eWSAhti6Zk0kpFScKMpxxO8H3pZMU0g14iR2jyvu0LusQgjgCwV2faGEs
- jupVmpw/vQ7BySF+m5IVn6STRqmFT4Mm36NRhYJrnwpUdXwyWBXluhLxCL6IV7nD6uWq
- EMWEoOrTZnXp86JF6ajocJ1qkuSDbRiypHnD07YwwoCVRBVLacZ4iLpSW2O8aW1gZeb5
- N7OA==
-X-Gm-Message-State: APjAAAWH/b1QUluu36H2DaVXmZ9ftN0EN0kFRDt8z8FTs5Ov+GDjNlX1
- gc0faFxTGY4DnQV9xiYCom4aapLMG7JosWDX334=
-X-Google-Smtp-Source: APXvYqzPQphNRPiyKdT0hmeXg+4QNhMLuSTapfpCIUBgHUyCkzabAbOp8gKahJOjPjLU463YazPl1u6wdGP58fmgKD4=
-X-Received: by 2002:a50:886a:: with SMTP id c39mr8591811edc.214.1565170703816; 
- Wed, 07 Aug 2019 02:38:23 -0700 (PDT)
-MIME-Version: 1.0
-References: <1565163924-18621-1-git-send-email-bmeng.cn@gmail.com>
- <1565163924-18621-10-git-send-email-bmeng.cn@gmail.com>
- <CAEiOBXV1S_hOesF65YTi6EqKeYHjW+rByPgfcEg1yeET696KRw@mail.gmail.com>
-In-Reply-To: <CAEiOBXV1S_hOesF65YTi6EqKeYHjW+rByPgfcEg1yeET696KRw@mail.gmail.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Wed, 7 Aug 2019 17:38:12 +0800
-Message-ID: <CAEUhbmWrcbmpvD_7Y=To-R4NU58ri6fyPP9aUWSTGx_7byxeYg@mail.gmail.com>
-To: Chih-Min Chao <chihmin.chao@sifive.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
+ h=x-gm-message-state:subject:to:references:from:openpgp:message-id
+ :date:user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=FjEitvLQH4IYhQizIH+kqPj2lpDQjk0LVHd1jpjqFE0=;
+ b=qSliP8yv5F1JKsWN7hWw0/vHaiounkYKKL/xG4lApV8OQZ83WC6lDXnnmzX06w2/g0
+ a78wokrj1pkjb20y784hG3u+QtSVL2I5udPFXXmAaxVhBYutwmPXa2zihx1GBceNEkNj
+ Ssat5NlWi3InUyT0Vcv4+PYof/iyyIhjuGxUTZQcGkKTRqzT/MCmBM8bZna9yWgRmnjP
+ /FUZ69GIHf1aljtR7UKykP6THLyD0uFZSCnkMCZyZGud3+TTODdrqYiI03w4uMMkJFm+
+ mACvoHECq+PW26BHQAgP3ZBm94OFTbqAV58CbtIpljrgGk5PCFH+5PKvnAiBXVIPgpWW
+ UY3A==
+X-Gm-Message-State: APjAAAXyQeoePUIPpc1RLLyg4B7sP6i1OX0kdtEHi0f1be4pBGC/ERUd
+ kBObSNQc8U7aMWHH77Awd0pat07izWU=
+X-Google-Smtp-Source: APXvYqyyFuuMPjycs07mZVi3BSBuwl2NZ+m4bgeUPT80+3QrzYG7R+GobeFmS1JXrY54N2D22jbutQ==
+X-Received: by 2002:a7b:cc0c:: with SMTP id f12mr9608774wmh.100.1565171202027; 
+ Wed, 07 Aug 2019 02:46:42 -0700 (PDT)
+Received: from [192.168.1.39] (214.red-83-51-160.dynamicip.rima-tde.net.
+ [83.51.160.214])
+ by smtp.gmail.com with ESMTPSA id i6sm90316882wrv.47.2019.08.07.02.46.40
+ (version=TLS1_3 cipher=AEAD-AES128-GCM-SHA256 bits=128/128);
+ Wed, 07 Aug 2019 02:46:41 -0700 (PDT)
+To: Bin Meng <bmeng.cn@gmail.com>, Alistair Francis <Alistair.Francis@wdc.com>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Palmer Dabbelt <palmer@sifive.com>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2a00:1450:4864:20::542
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v2 09/28] riscv: sifive_u:
- Update UART base addresses
+ Palmer Dabbelt <palmer@sifive.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+References: <1565163924-18621-1-git-send-email-bmeng.cn@gmail.com>
+ <1565163924-18621-8-git-send-email-bmeng.cn@gmail.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>
+Openpgp: id=89C1E78F601EE86C867495CBA2A3FD6EDEADC0DE;
+ url=http://pgp.mit.edu/pks/lookup?op=get&search=0xA2A3FD6EDEADC0DE
+Message-ID: <9ed12581-f73e-af09-0a0e-7bce3b69d998@redhat.com>
+Date: Wed, 7 Aug 2019 11:46:39 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.7.0
+MIME-Version: 1.0
+In-Reply-To: <1565163924-18621-8-git-send-email-bmeng.cn@gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+ [fuzzy]
+X-Received-From: 209.85.128.66
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v2 07/28] riscv: sifive_u: Set
+ the minimum number of cpus to 2
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -71,57 +71,60 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Aug 2019 09:38:29 -0000
+X-List-Received-Date: Wed, 07 Aug 2019 09:46:45 -0000
 
-On Wed, Aug 7, 2019 at 5:25 PM Chih-Min Chao <chihmin.chao@sifive.com> wrote:
->
->
->
-> On Wed, Aug 7, 2019 at 3:48 PM Bin Meng <bmeng.cn@gmail.com> wrote:
->>
->> This updates the UART base address to match the hardware.
->>
->> Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
->> Reviewed-by: Jonathan Behrens <fintelia@gmail.com>
->> Acked-by: Alistair Francis <alistair.francis@wdc.com>
->> ---
->>
->> Changes in v2: None
->>
->>  hw/riscv/sifive_u.c | 4 ++--
->>  1 file changed, 2 insertions(+), 2 deletions(-)
->>
->> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
->> index fe8dd3e..ea45e77 100644
->> --- a/hw/riscv/sifive_u.c
->> +++ b/hw/riscv/sifive_u.c
->> @@ -61,8 +61,8 @@ static const struct MemmapEntry {
->>      [SIFIVE_U_MROM] =     {     0x1000,    0x11000 },
->>      [SIFIVE_U_CLINT] =    {  0x2000000,    0x10000 },
->>      [SIFIVE_U_PLIC] =     {  0xc000000,  0x4000000 },
->> -    [SIFIVE_U_UART0] =    { 0x10013000,     0x1000 },
->> -    [SIFIVE_U_UART1] =    { 0x10023000,     0x1000 },
->> +    [SIFIVE_U_UART0] =    { 0x10010000,     0x1000 },
->> +    [SIFIVE_U_UART1] =    { 0x10011000,     0x1000 },
->>      [SIFIVE_U_DRAM] =     { 0x80000000,        0x0 },
->>      [SIFIVE_U_GEM] =      { 0x100900FC,     0x2000 },
->>  };
->> --
->> 2.7.4
->>
->>
->
-> By the way,  OpenSBI also needs a patch to fix the same problem.
->
+On 8/7/19 9:45 AM, Bin Meng wrote:
+> It is not useful if we only have one management CPU.
+> 
+> Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
+> 
+> ---
+> 
+> Changes in v2:
+> - update the file header to indicate at least 2 harts are created
+> 
+>  hw/riscv/sifive_u.c | 6 ++++--
+>  1 file changed, 4 insertions(+), 2 deletions(-)
+> 
+> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+> index 821f1d5..91f3c76 100644
+> --- a/hw/riscv/sifive_u.c
+> +++ b/hw/riscv/sifive_u.c
+> @@ -10,8 +10,8 @@
+>   * 1) CLINT (Core Level Interruptor)
+>   * 2) PLIC (Platform Level Interrupt Controller)
+>   *
+> - * This board currently generates devicetree dynamically that indicates at most
+> - * five harts.
+> + * This board currently generates devicetree dynamically that indicates at least
+> + * two harts and up to five harts.
+>   *
+>   * This program is free software; you can redistribute it and/or modify it
+>   * under the terms and conditions of the GNU General Public License,
+> @@ -429,6 +429,8 @@ static void riscv_sifive_u_machine_init(MachineClass *mc)
+>       * management CPU.
+>       */
+>      mc->max_cpus = 5;
 
-No, with this series, sifive_u is not a special target any more and
-sifive/fu540 should be set to PLATFORM in the OpenSBI build for the
-'sifive_u' machine.
+I'm confuse this patch does not apply on top of v4.1.0-rc4.
 
-I will send a patch to OpenSBI to drop the 'sifive_u' support.
+Using #define makes these comments redundant, something like:
 
-> Reviewed-by: Chih-Min Chao <chihmin.chao@sifive.com>
+#define MANAGEMENT_CPU_COUNT 1
+#define COMPUTE_CPU_COUNT 4
 
-Regards,
-Bin
+then you could use
+
+  max_cpus = MANAGEMENT_CPU_COUNT + COMPUTE_CPU_COUNT
+
+and
+
+  min_cpus = MANAGEMENT_CPU_COUNT + 1.
+
+> +    /* It is not useful if we only have one management CPU */
+> +    mc->min_cpus = 2;
+>  }
+>  
+>  DEFINE_MACHINE("sifive_u", riscv_sifive_u_machine_init)
+> 
 
