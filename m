@@ -1,52 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hvNu7-0004mu-Hj
-	for mharc-qemu-riscv@gnu.org; Wed, 07 Aug 2019 11:31:07 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:54688)
+	id 1hvNw8-0007V5-Eo
+	for mharc-qemu-riscv@gnu.org; Wed, 07 Aug 2019 11:33:12 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:55315)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <richard.henderson@linaro.org>) id 1hvNu0-0004lR-JV
- for qemu-riscv@nongnu.org; Wed, 07 Aug 2019 11:31:02 -0400
+ (envelope-from <richard.henderson@linaro.org>) id 1hvNw1-0007Ja-5L
+ for qemu-riscv@nongnu.org; Wed, 07 Aug 2019 11:33:07 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <richard.henderson@linaro.org>) id 1hvNtv-0004ox-GS
- for qemu-riscv@nongnu.org; Wed, 07 Aug 2019 11:31:00 -0400
-Received: from mail-pl1-x636.google.com ([2607:f8b0:4864:20::636]:38284)
+ (envelope-from <richard.henderson@linaro.org>) id 1hvNvy-00060Y-Ua
+ for qemu-riscv@nongnu.org; Wed, 07 Aug 2019 11:33:04 -0400
+Received: from mail-pl1-x641.google.com ([2607:f8b0:4864:20::641]:44039)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
- id 1hvNts-0004l7-9B
- for qemu-riscv@nongnu.org; Wed, 07 Aug 2019 11:30:53 -0400
-Received: by mail-pl1-x636.google.com with SMTP id m12so2740880plt.5
- for <qemu-riscv@nongnu.org>; Wed, 07 Aug 2019 08:30:51 -0700 (PDT)
+ id 1hvNvv-0005yg-VZ
+ for qemu-riscv@nongnu.org; Wed, 07 Aug 2019 11:33:00 -0400
+Received: by mail-pl1-x641.google.com with SMTP id t14so41331642plr.11
+ for <qemu-riscv@nongnu.org>; Wed, 07 Aug 2019 08:32:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=subject:to:cc:references:from:openpgp:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=pCpCz+CvOCQ4pr1rksowSTze+rOo02yQPlaBVcHqATE=;
- b=XZ+7YslttNOCrt7toERtmFJPyciz+nlLvKU+YMjuaKFeRqjyiTNJhpHnxCBA656sv5
- bXm9lc6HoVEsiYbeBFc5D1YUYCZ1DL3Mz54Mu7QB1zOf3pQm/CErkxyPK4hFFd/E2VOf
- l3ASNiZQFQVF6qKGV/KonB+hx+5hF+qoIAOsTVl52DCvyeKxpAb/6ha/4FQd5+UTR1r1
- l+Sw1Q+wryV/0jsnRdS19fFEnG9eY5PNMZ3PJb1Noi/QFkqdr1GDxJuPR9JZegDVV1ZA
- ZxOsjL58c+r99JCaLAs0+ab+rWmV7PC/7XE3JCbCWv9G1sRw30q1h4eGIFHWlliDZtIW
- Mc8g==
+ bh=YOHdOx7/Stz8Tdbo6EdPl4datS5Q3j4t5VdIxcMP+xM=;
+ b=Pm0ASyo6gkiTF1odBo/wLrQ9b3UHH+oZYk7XYC9NpzMYsKNFRl52Mu4JBUmbB+BDUC
+ kugOta70MyufphqLT2e2rAFQlAMXXx/T62QwK4Lw14rDNpI1qgpWJDlfCh16Bp6y9Xel
+ mJXUOrkRGAipCUzXVV/qLiOQXqU0vb99giE+3bio6CSDCZhWKUAVmaCeI0UxJJKXjC+4
+ vzIDp/gid/yWVx5jKdm6f4cv+zKGh7V2mpFEm3RFp89koj4WSK+bjzIPfZPscO8D7spO
+ Im60t3LUpqFn9Bs+C2BATyFHuRB00RprI8qgwMoyfcTuEdki6RVRyD9HwdrAJ5I1yEZ+
+ ZO4A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
  :date:user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=pCpCz+CvOCQ4pr1rksowSTze+rOo02yQPlaBVcHqATE=;
- b=ON+7J44pZv2arpZJjrVw1/sl5iu9xKkCttAdpVqfqHv1EiSP83XuMrOOFzg1YmrO56
- R6lAd1DceD4EFJibhlUEOoCPy7U1dHIzANvtBSDwK02yRQjd1JK9fhPQU8GtSOWt5Hc3
- DqitUvpjOb5zRMzxICS27mJLcrsGojBg0BQsAaWl9nN122ZUKQLo7uOBty4jEbr75ecK
- jAWbdHDFbSkEp+DvGvBd79N0xb9cryzafsJCLu8Y7IlvHeGkAEppSzBo3mRd3eXsmLku
- +Gwgz0vqAZyaUbMRJx2Bb5106KACTeB11fAnGJUq3SHSw53jil/fWu0nQeWcoeTVTYId
- tN3A==
-X-Gm-Message-State: APjAAAVesLq6ud/S4EExCNaarkygLOUPH2YQQvDIrppevsgmkCOBdp6y
- Ek+/tEVjKdWvXkZvsFO+iedRJQ==
-X-Google-Smtp-Source: APXvYqyzEKXZhyWbZHS9mUCJhdYcCK08eh017J9JqBLo284jw3umKEd2sQYd69ZxwNR55VZOhXHr6A==
-X-Received: by 2002:a17:90a:d3d4:: with SMTP id
- d20mr533420pjw.28.1565191850899; 
- Wed, 07 Aug 2019 08:30:50 -0700 (PDT)
+ bh=YOHdOx7/Stz8Tdbo6EdPl4datS5Q3j4t5VdIxcMP+xM=;
+ b=mkkPvNJk10mXa33WGeuE2AITg55wCMb+aE03pbBh/fbTG7Mu0Zka1LTG3uLD3qXVrI
+ SJOzaMNld02cHYvIkbdxZ96sGabNaX/6b3zWLt9sO56GDmfQp/wi6GA8lpvdsn/munR9
+ 5tWIxw1PmDOXN60cDSbzkG0UW31tV6Dq/2d5rxIMqNLw+tHebx+4QElYwMMj2yq/+mIp
+ EYI4Ofrib8wwEFk113Zab25l5zRvZwk5igMuaTslGvuCBLMoyyUfPRKxxm+2DBvac1+w
+ nDl4ncyMFf/Rc+j2yyXJiQxnyxwAtXCqZ1Aue7euEBMi8bd1sRRPIJgi1oWsCaC4MCy3
+ rmtg==
+X-Gm-Message-State: APjAAAXZalJ304BXYX07AJdUZ3nAcB6r0loZDpOLTjbYMb4gQFMrr6kr
+ Vz8RFfrg4bVHc3u7o0c39kwEwA==
+X-Google-Smtp-Source: APXvYqxZDmuQ1/uBp64/WjLXtTgxvrI6W4xVriZ8CSJVCoy0a/msLNTPxIMU/toN0D9wtJfEhe90IA==
+X-Received: by 2002:a62:64d4:: with SMTP id y203mr9807270pfb.91.1565191977649; 
+ Wed, 07 Aug 2019 08:32:57 -0700 (PDT)
 Received: from [192.168.1.11] (97-113-7-119.tukw.qwest.net. [97.113.7.119])
- by smtp.gmail.com with ESMTPSA id r12sm75560234pgb.73.2019.08.07.08.30.46
+ by smtp.gmail.com with ESMTPSA id 131sm112852110pfx.57.2019.08.07.08.32.55
  (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
- Wed, 07 Aug 2019 08:30:50 -0700 (PDT)
+ Wed, 07 Aug 2019 08:32:56 -0700 (PDT)
 To: tony.nguyen@bt.com, qemu-devel@nongnu.org
 Cc: fam@euphon.net, peter.maydell@linaro.org, walling@linux.ibm.com,
  cohuck@redhat.com, sagark@eecs.berkeley.edu, david@redhat.com,
@@ -76,23 +75,23 @@ Cc: fam@euphon.net, peter.maydell@linaro.org, walling@linux.ibm.com,
  qemu-ppc@nongnu.org, huth@tuxfamily.org, amarkovic@wavecomp.com,
  imammedo@redhat.com, aurelien@aurel32.net, stefanb@linux.ibm.com
 References: <45ec4924e0b34a3d9124e2db06af75b4@tpw09926dag18e.domain1.systemhost.net>
- <1565166407497.21726@bt.com>
+ <1565166562774.65589@bt.com>
 From: Richard Henderson <richard.henderson@linaro.org>
 Openpgp: preference=signencrypt
-Message-ID: <ebba4aef-c264-53c2-a503-e82219a2df35@linaro.org>
-Date: Wed, 7 Aug 2019 08:30:43 -0700
+Message-ID: <b1ac6757-94aa-2358-2802-4cb3a3aef1d2@linaro.org>
+Date: Wed, 7 Aug 2019 08:32:49 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
  Thunderbird/60.8.0
 MIME-Version: 1.0
-In-Reply-To: <1565166407497.21726@bt.com>
+In-Reply-To: <1565166562774.65589@bt.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::636
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v6 03/26] memory: Introduce
- size_memop
+X-Received-From: 2607:f8b0:4864:20::641
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v6 10/26] cputlb: Access
+ MemoryRegion with MemOp
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -104,22 +103,25 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Aug 2019 15:31:04 -0000
+X-List-Received-Date: Wed, 07 Aug 2019 15:33:07 -0000
 
-On 8/7/19 1:26 AM, tony.nguyen@bt.com wrote:
-> +/* Size in bytes to MemOp.  */
-> +static inline MemOp size_memop(unsigned size)
-> +{
-> +    /*
-> +     * FIXME: No-op to aid conversion of memory_region_dispatch_{read|write}
-> +     * "unsigned size" operand into a "MemOp op".
-> +     */
-> +    return size;
-> +}
-> +
+On 8/7/19 1:29 AM, tony.nguyen@bt.com wrote:
+> The memory_region_dispatch_{read|write} operand "unsigned size" is
+> being converted into a "MemOp op".
+> 
+> Convert interfaces by using no-op size_memop.
+> 
+> After all interfaces are converted, size_memop will be implemented
+> and the memory_region_dispatch_{read|write} operand "unsigned size"
+> will be converted into a "MemOp op".
+> 
+> As size_memop is a no-op, this patch does not change any behaviour.
+> 
+> Signed-off-by: Tony Nguyen <tony.nguyen@bt.com>
+> ---
+>  accel/tcg/cputlb.c | 8 ++++----
+>  1 file changed, 4 insertions(+), 4 deletions(-)
 
-Return type should remain unsigned until patch 11.
-Otherwise,
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
 
