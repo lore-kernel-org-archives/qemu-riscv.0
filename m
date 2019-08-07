@@ -1,66 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hvGe1-0001S4-Td
-	for mharc-qemu-riscv@gnu.org; Wed, 07 Aug 2019 03:46:01 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:36861)
+	id 1hvGe2-0001V4-SJ
+	for mharc-qemu-riscv@gnu.org; Wed, 07 Aug 2019 03:46:02 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:36588)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <bmeng.cn@gmail.com>) id 1hvGdy-0001GT-8G
- for qemu-riscv@nongnu.org; Wed, 07 Aug 2019 03:45:59 -0400
+ (envelope-from <bmeng.cn@gmail.com>) id 1hvGdq-0000zE-Mi
+ for qemu-riscv@nongnu.org; Wed, 07 Aug 2019 03:45:52 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <bmeng.cn@gmail.com>) id 1hvGdw-0008E9-LP
- for qemu-riscv@nongnu.org; Wed, 07 Aug 2019 03:45:58 -0400
-Received: from mail-pl1-x642.google.com ([2607:f8b0:4864:20::642]:40794)
+ (envelope-from <bmeng.cn@gmail.com>) id 1hvGdo-00085t-MJ
+ for qemu-riscv@nongnu.org; Wed, 07 Aug 2019 03:45:50 -0400
+Received: from mail-pl1-x642.google.com ([2607:f8b0:4864:20::642]:45768)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
- id 1hvGds-00088p-S7; Wed, 07 Aug 2019 03:45:53 -0400
-Received: by mail-pl1-x642.google.com with SMTP id a93so39421442pla.7;
- Wed, 07 Aug 2019 00:45:52 -0700 (PDT)
+ id 1hvGdg-00080J-Kk; Wed, 07 Aug 2019 03:45:41 -0400
+Received: by mail-pl1-x642.google.com with SMTP id y8so39496546plr.12;
+ Wed, 07 Aug 2019 00:45:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:to:subject:date:message-id:in-reply-to:references;
- bh=irnIasjoPryyn6PeGNluzSnHr2iiYTUs2FFgMVWmq5s=;
- b=CKeDV0BM0hnPzmC2G4IQT5a96E5acqVLco5LqgrD4xmbRfezZEMyQppx9Uj0b3fqZV
- OqnsChTxnE3HT+zDvIsib8h7KR+PRnJL5rjOfmJKgB7J9Xe8dBaF2l2nYFPnQ4LLLx7D
- zpTzeHDomjgBL45jaq6lN+KLIATDeQ10QT8gviFLfoWuKr6jlq6hi1BixvM5mh+8h+Pz
- mnZmFDitxxN3DAzowF1HjuTKptX571BMsSl0BY/8Lhwv88p6cXiZcPAfj51xcA22+RYo
- WAFOyfsiflz7NFQlmCiI2KaTYsZ+smxgVK/AJpCifzc5qTJkSbgQb5S//1d2bAoUCmEY
- 1JOw==
+ bh=w8z+Z4JIG+PWumqx562TA113JQMp/d8qY1uXo2FuR58=;
+ b=Qp6ocBe+A0yFSeaPRyk8LBxHpK8z53/LlVBWJlWy3hNSHNDKoaVIPqwF4XH+tZV8wW
+ OPv3wqCgD8QOHddsQuhFkB4LAf20XRogfWQBW8OW/CrTiOKd6whax4M2wMZw6phNVLQL
+ LzQqu9XwWZWoVvv5HKGqa1RdMk5Yl9BTvVkPErTzKNU638BtovYeEnpD9nmw3rAL9+Qf
+ MJGkqTUJWQGe5SEZ674Fj50Q9F3XvdG0FIqW1Rua3nBQlVreBOEvtbBIm2N3oIIiUTuB
+ 7Tawy1ospEW1GgIGg8Yks/WQY5bMmrA5ry+nbJLWOl0nTVWXv+wqIOdunmy4UGofokpY
+ pwxQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
  :references;
- bh=irnIasjoPryyn6PeGNluzSnHr2iiYTUs2FFgMVWmq5s=;
- b=Vu6bi1+r1Ao/9sUDD9OrnGqVI5upvn5PHLoQ150PWY0P545CkhjyV1kd3Ky9enJrKv
- k0uvegC0Xus6t3nN3/+is+HEfMjVFSkrTg2vvszUVwQB4bEtLIWaXpk2q4CtSl8FDbKD
- D92bUzOaDpV9nUuEjsZvGVcwp1oO92aH82wPOIfJfM2BRjLkFiFxdEdscEQoLsHRO0Gi
- j587v9FIMnnkz1Fmp9Wb+GEPicrTA0Nqj2S01ov+jVv5K3PgKNMX9b2vhB+UOCCeCRBH
- 1/uqfDA8NoqgDYWfooaFeA28hCqg4NGwOSHz2LjyTY5VlwHQ5Ofvtm42f/oDEMYa0YoU
- 5yuA==
-X-Gm-Message-State: APjAAAXhKvgtE7XH+G8yJAm1zlkWFNtenXND/VCos4nWa8QR/d/jIAgD
- rqbzHvp1d4JFkS3OlkiiCYs=
-X-Google-Smtp-Source: APXvYqztIJcN+D79X0pPGqjRS+hYzRRiNh9s11NMB0L9Pma6DCrQZ/u4zzcky3xVdGax3n7JPrTe1g==
-X-Received: by 2002:a17:902:2987:: with SMTP id
- h7mr6874236plb.37.1565163951985; 
- Wed, 07 Aug 2019 00:45:51 -0700 (PDT)
+ bh=w8z+Z4JIG+PWumqx562TA113JQMp/d8qY1uXo2FuR58=;
+ b=lWquDoj9T7NFYkQq9C3bu3Vxk/bhmAP0qTJUxheLybt6iVIcwofaEiP7zdAvjKS8ZV
+ 72gSK/d0l30usWOSCTwgpYV8/QGkw0OjCjyuwc6U8A3GQyy/wIFNBN/dFp3b0KKwemqC
+ OZyKCLxpIHRSoi4d3jfx/u8ZdfQLSwckw2DXeS/uZ36qR8zlJ1usndRf1zCHhoghuLSE
+ 38y/4FcNIElZ0WmzpvM+GjYKJH9ngb3jvOMd9NK0oo2vXfgXOuOIhh0NB4Jo2C7uv5Dy
+ MNlD9f0BnZ8zz5pLAToUd598wyXwPhmYpkL0Ndxs+/Y1puhbjRV2NPDHCNXfJprMPbKu
+ RyBQ==
+X-Gm-Message-State: APjAAAXa2ovA1ZFcxuD2A0ug4Z2b5DpRuk6+sc1zNgFq+1BVyoV0F2DO
+ 2swaO/vgn9ltgppopG64UVk=
+X-Google-Smtp-Source: APXvYqyI7/yTkpFbY00iRzjYj7OM5NbhxAL2qed5+OVOQA4LT2SCRmsJ0iSqvVINH00Uxx8Okg7cbQ==
+X-Received: by 2002:a17:902:8649:: with SMTP id
+ y9mr6869661plt.289.1565163935911; 
+ Wed, 07 Aug 2019 00:45:35 -0700 (PDT)
 Received: from localhost.localdomain (unknown-224-80.windriver.com.
  [147.11.224.80])
- by smtp.gmail.com with ESMTPSA id l44sm20154449pje.29.2019.08.07.00.45.50
+ by smtp.gmail.com with ESMTPSA id l44sm20154449pje.29.2019.08.07.00.45.34
  (version=TLS1 cipher=AES128-SHA bits=128/128);
- Wed, 07 Aug 2019 00:45:51 -0700 (PDT)
+ Wed, 07 Aug 2019 00:45:35 -0700 (PDT)
 From: Bin Meng <bmeng.cn@gmail.com>
 To: Alistair Francis <Alistair.Francis@wdc.com>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
  Palmer Dabbelt <palmer@sifive.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
-Date: Wed,  7 Aug 2019 00:45:15 -0700
-Message-Id: <1565163924-18621-20-git-send-email-bmeng.cn@gmail.com>
+Date: Wed,  7 Aug 2019 00:45:01 -0700
+Message-Id: <1565163924-18621-6-git-send-email-bmeng.cn@gmail.com>
 X-Mailer: git-send-email 1.7.1
 In-Reply-To: <1565163924-18621-1-git-send-email-bmeng.cn@gmail.com>
 References: <1565163924-18621-1-git-send-email-bmeng.cn@gmail.com>
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
 X-Received-From: 2607:f8b0:4864:20::642
-Subject: [Qemu-riscv] [PATCH v2 19/28] riscv: sifive_u: Instantiate OTP
- memory with a serial number
+Subject: [Qemu-riscv] [PATCH v2 05/28] riscv: hart: Support heterogeneous
+ harts population
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -72,74 +72,90 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Aug 2019 07:46:00 -0000
+X-List-Received-Date: Wed, 07 Aug 2019 07:45:53 -0000
 
-This adds an OTP memory with a given serial number to the sifive_u
-machine. With such support, the upstream U-Boot for sifive_fu540
-boots out of the box on the sifive_u machine.
+At present we only allow symmetric harts to be created. In order to
+support heterogeneous harts like SiFive FU540, update hart array's
+"cpu-type" property to allow cpu type to be set per hart, separated
+by delimiter ",". The frist cpu type before the delimiter is assigned
+to hart 0, and the second cpu type before delimiter is assigned to
+hart 1, and so on.
+
+If the total number of cpu types supplied in "cpu-type" property is
+less than number of maximum harts, the last cpu type in the property
+will be used to populate remaining harts.
 
 Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
 ---
 
 Changes in v2: None
 
- hw/riscv/sifive_u.c         | 5 +++++
- include/hw/riscv/sifive_u.h | 1 +
- 2 files changed, 6 insertions(+)
+ hw/riscv/riscv_hart.c | 48 +++++++++++++++++++++++++++++++++++++++++++++---
+ 1 file changed, 45 insertions(+), 3 deletions(-)
 
-diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-index bddf892..7b4a684 100644
---- a/hw/riscv/sifive_u.c
-+++ b/hw/riscv/sifive_u.c
-@@ -10,6 +10,7 @@
-  * 1) CLINT (Core Level Interruptor)
-  * 2) PLIC (Platform Level Interrupt Controller)
-  * 3) PRCI (Power, Reset, Clock, Interrupt)
-+ * 4) OTP (One-Time Programmable) memory with stored serial number
-  *
-  * This board currently generates devicetree dynamically that indicates at least
-  * two harts and up to five harts.
-@@ -43,6 +44,7 @@
- #include "hw/riscv/sifive_clint.h"
- #include "hw/riscv/sifive_uart.h"
- #include "hw/riscv/sifive_u.h"
-+#include "hw/riscv/sifive_u_otp.h"
- #include "hw/riscv/sifive_u_prci.h"
- #include "hw/riscv/boot.h"
- #include "chardev/char.h"
-@@ -65,10 +67,12 @@ static const struct MemmapEntry {
-     [SIFIVE_U_PRCI] =     { 0x10000000,     0x1000 },
-     [SIFIVE_U_UART0] =    { 0x10010000,     0x1000 },
-     [SIFIVE_U_UART1] =    { 0x10011000,     0x1000 },
-+    [SIFIVE_U_OTP] =      { 0x10070000,     0x1000 },
-     [SIFIVE_U_DRAM] =     { 0x80000000,        0x0 },
-     [SIFIVE_U_GEM] =      { 0x100900FC,     0x2000 },
- };
+diff --git a/hw/riscv/riscv_hart.c b/hw/riscv/riscv_hart.c
+index 3dd1c6a..27093e0 100644
+--- a/hw/riscv/riscv_hart.c
++++ b/hw/riscv/riscv_hart.c
+@@ -58,13 +58,55 @@ static void riscv_hart_realize(RISCVHartArrayState *s, int hart,
+ static void riscv_harts_realize(DeviceState *dev, Error **errp)
+ {
+     RISCVHartArrayState *s = RISCV_HART_ARRAY(dev);
+-    int n;
++    char *cpu_types;
++    char *first_type, *last_type, *tmp_type;
++    int n = 0;
  
-+#define SIFIVE_OTP_SERIAL   1
- #define GEM_REVISION        0x10070109
+     s->harts = g_new0(RISCVCPU, s->num_harts);
  
- static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
-@@ -441,6 +445,7 @@ static void riscv_sifive_u_soc_realize(DeviceState *dev, Error **errp)
-         memmap[SIFIVE_U_CLINT].size, ms->smp.cpus,
-         SIFIVE_SIP_BASE, SIFIVE_TIMECMP_BASE, SIFIVE_TIME_BASE);
-     sifive_u_prci_create(memmap[SIFIVE_U_PRCI].base);
-+    sifive_u_otp_create(memmap[SIFIVE_U_OTP].base, SIFIVE_OTP_SERIAL);
+-    for (n = 0; n < s->num_harts; n++) {
+-        riscv_hart_realize(s, n, s->cpu_type, errp);
++    /* we should not touch the original s->cpu_type */
++    cpu_types = g_strdup(s->cpu_type);
++
++    /*
++     * Expect s->cpu_type property was initialized this way:
++     *
++     * "cpu-type-a": symmetric harts
++     * "cpu-type-a,cpu-type-b,cpu-type-c": heterogeneous harts
++     *
++     * For heterogeneous harts, hart cpu types are separated by delimiter ",".
++     * The frist cpu type before the delimiter is assigned to hart 0, and the
++     * second cpu type before delimiter is assigned to hart 1, and so on.
++     *
++     * If the total number of cpu types is less than s->num_harts, the last
++     * cpu type in s->cpu_type will be used to populate remaining harts.
++     */
++
++    first_type = strtok(cpu_types, ",");
++    riscv_hart_realize(s, n++, first_type, errp);
++    tmp_type = strtok(NULL, ",");
++    if (!tmp_type) {
++        /* symmetric harts */
++        for (; n < s->num_harts; n++) {
++            riscv_hart_realize(s, n, first_type, errp);
++       }
++    } else {
++        /* heterogeneous harts */
++        while (tmp_type) {
++            if (n >= s->num_harts) {
++                break;
++            }
++            riscv_hart_realize(s, n++, tmp_type, errp);
++            last_type = tmp_type;
++            tmp_type = strtok(NULL, ",");
++        }
++
++        /* populate remaining harts using the last cpu type in s->cpu_type */
++        for (; n < s->num_harts; n++) {
++            riscv_hart_realize(s, n, last_type, errp);
++        }
+     }
++
++    g_free(cpu_types);
+ }
  
-     for (i = 0; i < SIFIVE_U_PLIC_NUM_SOURCES; i++) {
-         plic_gpios[i] = qdev_get_gpio_in(DEVICE(s->plic), i);
-diff --git a/include/hw/riscv/sifive_u.h b/include/hw/riscv/sifive_u.h
-index 19d5a6f..2f475c5 100644
---- a/include/hw/riscv/sifive_u.h
-+++ b/include/hw/riscv/sifive_u.h
-@@ -54,6 +54,7 @@ enum {
-     SIFIVE_U_PRCI,
-     SIFIVE_U_UART0,
-     SIFIVE_U_UART1,
-+    SIFIVE_U_OTP,
-     SIFIVE_U_DRAM,
-     SIFIVE_U_GEM
- };
+ static void riscv_harts_class_init(ObjectClass *klass, void *data)
 -- 
 2.7.4
 
