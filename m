@@ -1,92 +1,78 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hvLdb-0006Jm-4j
+	id 1hvLdb-0006K6-7z
 	for mharc-qemu-riscv@gnu.org; Wed, 07 Aug 2019 09:05:55 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:50992)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43288)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <philmd@redhat.com>) id 1hvLSq-0007gh-Lb
- for qemu-riscv@nongnu.org; Wed, 07 Aug 2019 08:54:49 -0400
+ (envelope-from <tony.nguyen@bt.com>) id 1hvHHY-0006nn-CP
+ for qemu-riscv@nongnu.org; Wed, 07 Aug 2019 04:26:53 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <philmd@redhat.com>) id 1hvLSp-0001ll-A0
- for qemu-riscv@nongnu.org; Wed, 07 Aug 2019 08:54:48 -0400
-Received: from mail-wm1-f67.google.com ([209.85.128.67]:37262)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <philmd@redhat.com>) id 1hvLSo-0001kf-VW
- for qemu-riscv@nongnu.org; Wed, 07 Aug 2019 08:54:47 -0400
-Received: by mail-wm1-f67.google.com with SMTP id f17so79890552wme.2
- for <qemu-riscv@nongnu.org>; Wed, 07 Aug 2019 05:54:46 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
- :date:user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=qxz+qOxxiF4zyH6SFPksO+z9p6DoRe1NfIyM1b8xgLo=;
- b=bQtVqxxRVcexb3bCW/umxBdl5O8NtMoXeCb4JZHU08liOqm14ViyQ8HFdY5FHOzZ5G
- SO/E84kqLkE1rCGWlXNQGA5Uw+rAYejfgcaLYs4DQi4GdMYcNtd3mjnRA0wRUdEbZgtF
- yukFxLM1DXcyz7ahKT2Row87i6s4zja3+xv3IK3AE0q8RKqXWZYSBQbYvAPOmdR0lzH9
- cKE5XxV9tw8yuXfcLkp4EPjb5s+nOS0iSQoF6aXtDDKZtUteRCRTLr4vTUPYCyD9fiAA
- QRJ96dVadXit7Ow/Mu//M9FcqyQp0Cqb4nsJtT6++RsfCqtrilIiMxg7fM5U1CLQtO7W
- kBzg==
-X-Gm-Message-State: APjAAAXu720usL9dTjJigB0ahgcrKP2kO3bjdR/G4JIKXccc2L6aMrPW
- afYwznssslQD2HwO4CHQIAuFBg==
-X-Google-Smtp-Source: APXvYqx61lLaCyYesDNdvwewasVUT/A65a9cVj8wjHg2wQ+UynM0qhk2bBNGpqeZ28ZkTv8fSSNq8A==
-X-Received: by 2002:a1c:6641:: with SMTP id a62mr10411525wmc.175.1565182485721; 
- Wed, 07 Aug 2019 05:54:45 -0700 (PDT)
-Received: from [192.168.1.39] (214.red-83-51-160.dynamicip.rima-tde.net.
- [83.51.160.214])
- by smtp.gmail.com with ESMTPSA id q18sm113799140wrw.36.2019.08.07.05.54.41
- (version=TLS1_3 cipher=AEAD-AES128-GCM-SHA256 bits=128/128);
- Wed, 07 Aug 2019 05:54:45 -0700 (PDT)
-To: tony.nguyen@bt.com, qemu-devel@nongnu.org
-Cc: rth@twiddle.net, pbonzini@redhat.com, mst@redhat.com,
- imammedo@redhat.com, marcel.apfelbaum@gmail.com,
- xiaoguangrong.eric@gmail.com, alistair@alistair23.me,
- peter.maydell@linaro.org, b.galvani@gmail.com, clg@kaod.org,
- andrew@aj.id.au, joel@jms.id.au, i.mitsyanko@gmail.com, robh@kernel.org,
- peter.chubb@nicta.com.au, sundeep.lkml@gmail.com, jan.kiszka@web.de,
- balrogg@gmail.com, eric.auger@redhat.com, kraxel@redhat.com,
- michael@walle.cc, kwolf@redhat.com, mreitz@redhat.com, jsnow@redhat.com,
- keith.busch@intel.com, marcandre.lureau@redhat.com,
- Andrew.Baumann@microsoft.com, edgar.iglesias@gmail.com,
- antonynpavlov@gmail.com, chouteau@adacore.com, frederic.konrad@adacore.com,
- huth@tuxfamily.org, mark.cave-ayland@ilande.co.uk, hpoussin@reactos.org,
- arikalo@wavecomp.com, balaton@eik.bme.hu, gxt@mprc.pku.edu.cn,
- david@gibson.dropbear.id.au, deller@gmx.de, ehabkost@redhat.com,
- sstabellini@kernel.org, anthony.perard@citrix.com, paul.durrant@citrix.com,
- aurelien@aurel32.net, amarkovic@wavecomp.com, berto@igalia.com,
- magnus.damm@gmail.com, minyard@acm.org, pburton@wavecomp.com,
- jslaby@suse.cz, jcd@tribudubois.net, andrew.smirnov@gmail.com,
- green@moxielogic.com, jasowang@redhat.com, dmitry.fleytman@gmail.com,
- sw@weilnetz.de, jiri@resnulli.us, crwulff@gmail.com, marex@denx.de,
- lersek@redhat.com, proljc@gmail.com, shorne@gmail.com,
- yuval.shaia@oracle.com, palmer@sifive.com, sagark@eecs.berkeley.edu,
- kbastian@mail.uni-paderborn.de, walling@linux.ibm.com, cohuck@redhat.com,
- pasic@linux.ibm.com, borntraeger@de.ibm.com, david@redhat.com,
- fam@euphon.net, hare@suse.com, atar4qemu@gmail.com, stefanb@linux.ibm.com,
- alex.williamson@redhat.com, jcmvbkbc@gmail.com, laurent@vivier.eu,
- stefanha@redhat.com, qemu-arm@nongnu.org, qemu-block@nongnu.org,
- qemu-ppc@nongnu.org, xen-devel@lists.xenproject.org, qemu-riscv@nongnu.org,
- qemu-s390x@nongnu.org
+ (envelope-from <tony.nguyen@bt.com>) id 1hvHHW-0007uV-Rm
+ for qemu-riscv@nongnu.org; Wed, 07 Aug 2019 04:26:52 -0400
+Received: from smtpe1.intersmtp.com ([62.239.224.235]:44246)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <tony.nguyen@bt.com>)
+ id 1hvHHW-0007tw-JZ; Wed, 07 Aug 2019 04:26:50 -0400
+Received: from tpw09926dag18h.domain1.systemhost.net (10.9.212.42) by
+ RDW083A011ED67.bt.com (10.187.98.37) with Microsoft SMTP Server (TLS) id
+ 14.3.439.0; Wed, 7 Aug 2019 09:32:25 +0100
+Received: from tpw09926dag18e.domain1.systemhost.net (10.9.212.18) by
+ tpw09926dag18h.domain1.systemhost.net (10.9.212.42) with Microsoft SMTP
+ Server (TLS) id 15.0.1395.4; Wed, 7 Aug 2019 09:26:48 +0100
+Received: from tpw09926dag18e.domain1.systemhost.net
+ ([fe80::a946:6348:ccf4:fa6c]) by tpw09926dag18e.domain1.systemhost.net
+ ([fe80::a946:6348:ccf4:fa6c%12]) with mapi id 15.00.1395.000; Wed, 7 Aug 2019
+ 09:26:47 +0100
+From: <tony.nguyen@bt.com>
+To: <qemu-devel@nongnu.org>
+CC: <frederic.konrad@adacore.com>, <berto@igalia.com>,
+ <qemu-block@nongnu.org>, <arikalo@wavecomp.com>, <pasic@linux.ibm.com>,
+ <hpoussin@reactos.org>, <anthony.perard@citrix.com>,
+ <xen-devel@lists.xenproject.org>, <lersek@redhat.com>, <jasowang@redhat.com>, 
+ <jiri@resnulli.us>, <ehabkost@redhat.com>, <b.galvani@gmail.com>,
+ <eric.auger@redhat.com>, <alex.williamson@redhat.com>, <stefanha@redhat.com>, 
+ <jsnow@redhat.com>, <rth@twiddle.net>, <kwolf@redhat.com>, <andrew@aj.id.au>, 
+ <crwulff@gmail.com>, <laurent@vivier.eu>, <sundeep.lkml@gmail.com>,
+ <michael@walle.cc>, <qemu-ppc@nongnu.org>, <kbastian@mail.uni-paderborn.de>,
+ <imammedo@redhat.com>, <fam@euphon.net>, <peter.maydell@linaro.org>,
+ <david@redhat.com>, <palmer@sifive.com>, <keith.busch@intel.com>,
+ <jcmvbkbc@gmail.com>, <hare@suse.com>, <sstabellini@kernel.org>,
+ <andrew.smirnov@gmail.com>, <deller@gmx.de>, <magnus.damm@gmail.com>,
+ <atar4qemu@gmail.com>, <minyard@acm.org>, <sw@weilnetz.de>,
+ <yuval.shaia@oracle.com>, <qemu-s390x@nongnu.org>, <qemu-arm@nongnu.org>,
+ <jan.kiszka@web.de>, <clg@kaod.org>, <shorne@gmail.com>,
+ <qemu-riscv@nongnu.org>, <i.mitsyanko@gmail.com>, <cohuck@redhat.com>,
+ <philmd@redhat.com>, <amarkovic@wavecomp.com>, <peter.chubb@nicta.com.au>,
+ <aurelien@aurel32.net>, <pburton@wavecomp.com>, <sagark@eecs.berkeley.edu>,
+ <green@moxielogic.com>, <kraxel@redhat.com>, <edgar.iglesias@gmail.com>,
+ <gxt@mprc.pku.edu.cn>, <robh@kernel.org>, <borntraeger@de.ibm.com>,
+ <joel@jms.id.au>, <antonynpavlov@gmail.com>, <chouteau@adacore.com>,
+ <Andrew.Baumann@microsoft.com>, <mreitz@redhat.com>, <walling@linux.ibm.com>, 
+ <dmitry.fleytman@gmail.com>, <mst@redhat.com>,
+ <mark.cave-ayland@ilande.co.uk>, <jslaby@suse.cz>, <marex@denx.de>,
+ <proljc@gmail.com>, <marcandre.lureau@redhat.com>, <alistair@alistair23.me>,
+ <paul.durrant@citrix.com>, <david@gibson.dropbear.id.au>,
+ <xiaoguangrong.eric@gmail.com>, <huth@tuxfamily.org>, <jcd@tribudubois.net>,
+ <pbonzini@redhat.com>, <stefanb@linux.ibm.com>
+Thread-Topic: [Qemu-devel] [PATCH v6 03/26] memory: Introduce size_memop
+Thread-Index: AQHVTPnaWz9ZrvhuI0myNkwQ3w2mGQ==
+Date: Wed, 7 Aug 2019 08:26:47 +0000
+Message-ID: <1565166407497.21726@bt.com>
 References: <45ec4924e0b34a3d9124e2db06af75b4@tpw09926dag18e.domain1.systemhost.net>
- <2397186a-a28e-85dd-131c-900e777a60ad@redhat.com>
- <1565181666201.26324@bt.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>
-Openpgp: id=89C1E78F601EE86C867495CBA2A3FD6EDEADC0DE;
- url=http://pgp.mit.edu/pks/lookup?op=get&search=0xA2A3FD6EDEADC0DE
-Message-ID: <0523c403-bdae-bb5d-8996-20b57cd5d7cf@redhat.com>
-Date: Wed, 7 Aug 2019 14:54:40 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.7.0
+In-Reply-To: <45ec4924e0b34a3d9124e2db06af75b4@tpw09926dag18e.domain1.systemhost.net>
+Accept-Language: en-AU, en-GB, en-US
+Content-Language: en-AU
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.187.101.44]
+Content-Type: multipart/alternative; boundary="_000_156516640749721726btcom_"
 MIME-Version: 1.0
-In-Reply-To: <1565181666201.26324@bt.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
- [fuzzy]
-X-Received-From: 209.85.128.67
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 62.239.224.235
 X-Mailman-Approved-At: Wed, 07 Aug 2019 09:05:47 -0400
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v6 00/26] Invert Endian bit in
- SPARCv9 MMU TTE
+Subject: [Qemu-riscv] [Qemu-devel] [PATCH v6 03/26] memory: Introduce
+ size_memop
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -98,42 +84,119 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Aug 2019 12:54:49 -0000
+X-List-Received-Date: Wed, 07 Aug 2019 08:26:53 -0000
 
-On 8/7/19 2:41 PM, tony.nguyen@bt.com wrote:
-> On 8/7/19 8:37 PM, Philippe Mathieu-Daudé wrote:
-> 
->> I'm confused I think I already reviewed various patches of your previous
-> ​> series but don't see my Reviewed-by tags.​>
-> Apologies Philippe! I am the confused one here =/
-> 
-> Will append.
-> 
-> Thank you very much for the reviews and qemu-devel newbie tips so far. I
-> have felt very welcome.
+--_000_156516640749721726btcom_
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-Well for a newbie you did an impressive series!
+The memory_region_dispatch_{read|write} operand "unsigned size" is
+being converted into a "MemOp op".
 
-The 'Reviewed-by' or 'Tested-by' tags help the maintainers to process
-patches.
+Introduce no-op size_memop to aid preparatory conversion of
+interfaces.
 
-Since reviewing a series is time-consuming, if you iterate over a series
-without changing some patchs, you should collect and amend the tags the
-reviewers gave you, this way it helps them keep track of patches
-reviewed and patches waiting for review.
+Once interfaces are converted, size_memop will be implemented to
+return a MemOp from size in bytes.
 
-In my case I find it very confuse when I look at a patch I already gave
-my R-b tag and the tag is not here, I re-review the patch looking for
-differences.
+Signed-off-by: Tony Nguyen <tony.nguyen@bt.com>
+---
+ include/exec/memop.h | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
-Often a reviewer asks for easy changes, and uses "with this changes:
-R-b". If you addresses his comments you can then add his tag in the next
-version.
+diff --git a/include/exec/memop.h b/include/exec/memop.h
+index 7262ca3..5c5769e 100644
+--- a/include/exec/memop.h
++++ b/include/exec/memop.h
+@@ -107,4 +107,14 @@ typedef enum MemOp {
+     MO_SSIZE =3D MO_SIZE | MO_SIGN,
+ } MemOp;
 
-If you split a reviewed patch in various, it is also OK to keep the tags
-in all the splitted patches.
++/* Size in bytes to MemOp.  */
++static inline MemOp size_memop(unsigned size)
++{
++    /*
++     * FIXME: No-op to aid conversion of memory_region_dispatch_{read|writ=
+e}
++     * "unsigned size" operand into a "MemOp op".
++     */
++    return size;
++}
++
+ #endif
+--
+1.8.3.1
 
-Regards,
+?
 
-Phil.
+
+--_000_156516640749721726btcom_
+Content-Type: text/html; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<html>
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Diso-8859-=
+1">
+<style type=3D"text/css" style=3D"display:none"><!-- P { margin-top: 0px; m=
+argin-bottom: 0px; } .EmailQuote { margin-left: 1pt; padding-left: 4pt; bor=
+der-left-width: 2px; border-left-style: solid; border-left-color: rgb(128, =
+0, 0); }--></style>
+</head>
+<body dir=3D"ltr" style=3D"font-size:12pt;color:#000000;background-color:#F=
+FFFFF;font-family:Calibri,Arial,Helvetica,sans-serif;">
+<p></p>
+<div><span style=3D"font-size: 12pt;">The memory_region_dispatch_{read|writ=
+e} operand &quot;unsigned size&quot; is</span><br>
+</div>
+<div>being converted into a &quot;MemOp op&quot;.</div>
+<div><br>
+</div>
+<div>Introduce no-op size_memop to aid preparatory conversion of</div>
+<div>interfaces.</div>
+<div><br>
+</div>
+<div>Once interfaces are converted, size_memop will be implemented to</div>
+<div>return a MemOp from size in bytes.</div>
+<div><br>
+</div>
+<div>Signed-off-by: Tony Nguyen &lt;tony.nguyen@bt.com&gt;</div>
+<div>---</div>
+<div>&nbsp;include/exec/memop.h | 10 &#43;&#43;&#43;&#43;&#43;&#43;&#43;&#4=
+3;&#43;&#43;</div>
+<div>&nbsp;1 file changed, 10 insertions(&#43;)</div>
+<div><br>
+</div>
+<div>diff --git a/include/exec/memop.h b/include/exec/memop.h</div>
+<div>index 7262ca3..5c5769e 100644</div>
+<div>--- a/include/exec/memop.h</div>
+<div>&#43;&#43;&#43; b/include/exec/memop.h</div>
+<div>@@ -107,4 &#43;107,14 @@ typedef enum MemOp {</div>
+<div>&nbsp; &nbsp; &nbsp;MO_SSIZE =3D MO_SIZE | MO_SIGN,</div>
+<div>&nbsp;} MemOp;</div>
+<div>&nbsp;</div>
+<div>&#43;/* Size in bytes to MemOp. &nbsp;*/</div>
+<div>&#43;static inline MemOp size_memop(unsigned size)</div>
+<div>&#43;{</div>
+<div>&#43; &nbsp; &nbsp;/*</div>
+<div>&#43; &nbsp; &nbsp; * FIXME: No-op to aid conversion of memory_region_=
+dispatch_{read|write}</div>
+<div>&#43; &nbsp; &nbsp; * &quot;unsigned size&quot; operand into a &quot;M=
+emOp op&quot;.</div>
+<div>&#43; &nbsp; &nbsp; */</div>
+<div>&#43; &nbsp; &nbsp;return size;</div>
+<div>&#43;}</div>
+<div>&#43;</div>
+<div>&nbsp;#endif</div>
+<div>--&nbsp;</div>
+<div>1.8.3.1</div>
+<div><br>
+&#8203;<br>
+</div>
+<p><br>
+</p>
+</body>
+</html>
+
+--_000_156516640749721726btcom_--
 
