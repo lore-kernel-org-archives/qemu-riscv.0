@@ -1,74 +1,76 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hvlTk-0004Vx-Uo
-	for mharc-qemu-riscv@gnu.org; Thu, 08 Aug 2019 12:41:28 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:55131)
+	id 1hvmf1-0007hk-4L
+	for mharc-qemu-riscv@gnu.org; Thu, 08 Aug 2019 13:57:11 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:38661)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <alex.bennee@linaro.org>) id 1hvlTh-0004T1-JB
- for qemu-riscv@nongnu.org; Thu, 08 Aug 2019 12:41:28 -0400
+ (envelope-from <richard.henderson@linaro.org>) id 1hvmey-0007dV-QJ
+ for qemu-riscv@nongnu.org; Thu, 08 Aug 2019 13:57:09 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alex.bennee@linaro.org>) id 1hvlTg-0007aw-IE
- for qemu-riscv@nongnu.org; Thu, 08 Aug 2019 12:41:25 -0400
-Received: from mail-wr1-x444.google.com ([2a00:1450:4864:20::444]:43364)
+ (envelope-from <richard.henderson@linaro.org>) id 1hvmex-0006pd-QO
+ for qemu-riscv@nongnu.org; Thu, 08 Aug 2019 13:57:08 -0400
+Received: from mail-pf1-x441.google.com ([2607:f8b0:4864:20::441]:39609)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <alex.bennee@linaro.org>)
- id 1hvlTg-0007Y1-Bj
- for qemu-riscv@nongnu.org; Thu, 08 Aug 2019 12:41:24 -0400
-Received: by mail-wr1-x444.google.com with SMTP id p13so20997200wru.10
- for <qemu-riscv@nongnu.org>; Thu, 08 Aug 2019 09:41:24 -0700 (PDT)
+ (Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
+ id 1hvmex-0006on-KN
+ for qemu-riscv@nongnu.org; Thu, 08 Aug 2019 13:57:07 -0400
+Received: by mail-pf1-x441.google.com with SMTP id f17so40525309pfn.6
+ for <qemu-riscv@nongnu.org>; Thu, 08 Aug 2019 10:57:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=rHaCdXGh8EVx3YP7Nogh/BDIDsukD0V5+eFPdAJezxc=;
- b=UMFGPkoU2A4+TW8JBjGnCbCQ1uvS4Eh3Mmhb7j8A30QiJ7KeZJ7XUmGP5N6jzwM5kA
- YePjMDh6mdXz7e5FE2SRpix2BlNJ30f6SbSCuIKLo4fiN6SQ05/PlvrtmX7UPRAb1MkP
- JfJ36xm2fy3iUddb6j64Xk3nLhEuOt9DsUs3ZgLKRtG4jc4f1e7yM1KBhiCJP01x5v+W
- lL2qDqDynhlrdgh8KKmytOfnduKPsXZf87YHyWY4hgGgVR+8WsteTLWXNut/WkyMlked
- H/ewRrIDNo8tJ0bPUQG0jShypTe95nV2Pd484MjpUib2r/xvImog9fNuH3gNiXmqberP
- c6sg==
+ h=subject:to:cc:references:from:openpgp:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=jvCeSkCzmSCCppv30RCxwrup3ZK4y8htfnGE/hCcbH0=;
+ b=ow9w8MdsTGwlly57Y4YzVI0gTejLDQuBUSX4EA1Vg0EWDcUlkskXZsYtAAWYDGQJAo
+ dEGGs8+2jMwjvsfOVVKnZPaRBsKHG5RLSX5UuW7HW0195ui5AiTqdhwfxB8Es+GUHzDb
+ EClC7HHo9ZW4pb3Uo22nIMD86I4WbPubfQcPr1ym0pOnJZr9mM39rAr56m6/m/9l+HV+
+ os3VaiXLv+18zXSDweDv4x0dIr7I6Q3t5lOQJALh2CVQ48xFQa3GAEoBk6y0wvmILypu
+ m4TmeHR0Rp84qSC7JDs72qf/DakqZj/VbU2cfb3iWq2Ms2toII+F/C4fQGykZ/0QGNOQ
+ HL0g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=rHaCdXGh8EVx3YP7Nogh/BDIDsukD0V5+eFPdAJezxc=;
- b=l+QfzwHNNmpTGWCoc39X459JyHKBV9TRPgor8CbVK2d5p6fk24TK6YwT89MUeYbDcd
- SzjQqy85Ig/W1RJUK1RukCMmBRFmGEzN0oyX7jH6wtftihHI4XdzBCsSztqnXZH4N5s3
- 8ypg7BU9Gr80Nnd3ORMaQmIXhvSjts8+cpyUZt6NvY64K9LI6Z1g4jVnFcpY7jtRnDMv
- mFhNTNPfxEIyPHUJ1E7RpTyBkZrkOMWk3hiLzgMsEWdPi3loHYuwvNZyEYstMeF7gCO/
- s52pOVfWke2+88Z4ncVgZmEAlTAHEa1gwLXL02Kir+ncMpbB/UGYBDS6dUu+/77+ZClI
- /BeA==
-X-Gm-Message-State: APjAAAVthHpkK7Wdryc78C2+4kZ8Z3iTUDYVSv32xA34Dcj3nFf68ZD0
- WUSzZzmsDCDnEobg5zjtOJe4Td9YH6I=
-X-Google-Smtp-Source: APXvYqxq1DKzJ+i4SvL+xtkeP4oNgxjKqitw7robVC0J6Lv/hoxrq56fIjVWcWln5cbjEemguC0pDQ==
-X-Received: by 2002:a5d:4950:: with SMTP id r16mr2135215wrs.347.1565282483044; 
- Thu, 08 Aug 2019 09:41:23 -0700 (PDT)
-Received: from zen.linaroharston ([81.128.185.34])
- by smtp.gmail.com with ESMTPSA id u130sm4469137wmg.28.2019.08.08.09.41.19
- (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
- Thu, 08 Aug 2019 09:41:21 -0700 (PDT)
-Received: from zen.linaroharston. (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id 188D11FF93;
- Thu,  8 Aug 2019 17:41:19 +0100 (BST)
-From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: qemu-devel@nongnu.org
-Cc: armbru@redhat.com, =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Palmer Dabbelt <palmer@sifive.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
+ h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
+ :date:user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=jvCeSkCzmSCCppv30RCxwrup3ZK4y8htfnGE/hCcbH0=;
+ b=D+fY0RLqXUs0FqINTQ3uOzCFzL1twPBB3WlZf0hTQtDnxDbWpHJtxpO9jnYPY1cAk9
+ +qwsIFoYJ3mj+k/Nz/ysOcT1XezrOFD+lSBnXvmSq33zTXc4060PWdj0LSscqgSkJZ07
+ fZdjgtIxibaJ3H5FlZSXObXzkcSLQAfxbWQXXFdati8wOeEhN6WF+6zd4yvkc0ck2ddG
+ 6E2/ZFxbLkhb3mSwZ9YfIS/v+65grJbM64TIb6mEhCdmDjoPeypniSTIcaZTuHh6QoFb
+ VhDHet7v2blPTWDRGZwnetEADlfPYCFpXyi3cn09z6MlWBa7LNh8q7pNlK4mIG0lFoIL
+ kTlg==
+X-Gm-Message-State: APjAAAUVaEKRuFOIT6yfMtrYmzj78o8bKNjdxDO131rydubwMErGIi23
+ vtrxYWuLF3eUP8NREP+KojsfI1KY3Ck=
+X-Google-Smtp-Source: APXvYqxDm/t4xx9DyCTDlW5PdjtW+l2iGs9329brp+KXKQlybeRWdVcDkpn6nvIN6J0TjwOrG59OBA==
+X-Received: by 2002:a62:2582:: with SMTP id l124mr16691352pfl.43.1565287026577; 
+ Thu, 08 Aug 2019 10:57:06 -0700 (PDT)
+Received: from [192.168.1.11] (97-113-7-119.tukw.qwest.net. [97.113.7.119])
+ by smtp.gmail.com with ESMTPSA id a3sm97157021pfc.70.2019.08.08.10.57.05
+ (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+ Thu, 08 Aug 2019 10:57:05 -0700 (PDT)
+To: =?UTF-8?Q?Alex_Benn=c3=a9e?= <alex.bennee@linaro.org>,
+ qemu-devel@nongnu.org
+Cc: "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
-Date: Thu,  8 Aug 2019 17:41:16 +0100
-Message-Id: <20190808164117.23348-7-alex.bennee@linaro.org>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20190808164117.23348-1-alex.bennee@linaro.org>
+ Palmer Dabbelt <palmer@sifive.com>, armbru@redhat.com,
+ Alistair Francis <Alistair.Francis@wdc.com>
 References: <20190808164117.23348-1-alex.bennee@linaro.org>
+ <20190808164117.23348-7-alex.bennee@linaro.org>
+From: Richard Henderson <richard.henderson@linaro.org>
+Openpgp: preference=signencrypt
+Message-ID: <84c3374c-a309-6998-c61a-7c65b7c09d20@linaro.org>
+Date: Thu, 8 Aug 2019 10:57:03 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.8.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+In-Reply-To: <20190808164117.23348-7-alex.bennee@linaro.org>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
 Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::444
-Subject: [Qemu-riscv] [PATCH v1 6/7] target/riscv: rationalise softfloat
- includes
+X-Received-From: 2607:f8b0:4864:20::441
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v1 6/7] target/riscv:
+ rationalise softfloat includes
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -80,58 +82,24 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Aug 2019 16:41:28 -0000
+X-List-Received-Date: Thu, 08 Aug 2019 17:57:09 -0000
 
-We should avoid including the whole of softfloat headers in cpu.h and
-explicitly include it only where we will be calling softfloat
-functions. We can use the -types.h and -helpers.h in cpu.h for the few
-bits that are global.
+On 8/8/19 9:41 AM, Alex Bennée wrote:
+> We should avoid including the whole of softfloat headers in cpu.h and
+> explicitly include it only where we will be calling softfloat
+> functions. We can use the -types.h and -helpers.h in cpu.h for the few
+> bits that are global.
+> 
+> Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+> ---
+>  target/riscv/cpu.c        | 1 +
+>  target/riscv/cpu.h        | 2 +-
+>  target/riscv/fpu_helper.c | 1 +
+>  3 files changed, 3 insertions(+), 1 deletion(-)
 
-Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
----
- target/riscv/cpu.c        | 1 +
- target/riscv/cpu.h        | 2 +-
- target/riscv/fpu_helper.c | 1 +
- 3 files changed, 3 insertions(+), 1 deletion(-)
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index f8d07bd20ad..6d52f97d7c3 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -27,6 +27,7 @@
- #include "qemu/error-report.h"
- #include "hw/qdev-properties.h"
- #include "migration/vmstate.h"
-+#include "fpu/softfloat-helpers.h"
- 
- /* RISC-V CPU definitions */
- 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 0adb307f329..240b31e2ebb 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -22,7 +22,7 @@
- 
- #include "qom/cpu.h"
- #include "exec/cpu-defs.h"
--#include "fpu/softfloat.h"
-+#include "fpu/softfloat-types.h"
- 
- #define TCG_GUEST_DEFAULT_MO 0
- 
-diff --git a/target/riscv/fpu_helper.c b/target/riscv/fpu_helper.c
-index b4f818a6465..0b79562a690 100644
---- a/target/riscv/fpu_helper.c
-+++ b/target/riscv/fpu_helper.c
-@@ -21,6 +21,7 @@
- #include "qemu/host-utils.h"
- #include "exec/exec-all.h"
- #include "exec/helper-proto.h"
-+#include "fpu/softfloat.h"
- 
- target_ulong riscv_cpu_get_fflags(CPURISCVState *env)
- {
--- 
-2.20.1
+
+r~
 
 
