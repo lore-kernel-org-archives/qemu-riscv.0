@@ -1,68 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hvXYt-0006aD-IP
-	for mharc-qemu-riscv@gnu.org; Wed, 07 Aug 2019 21:49:51 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:51128)
+	id 1hvYW1-0000Lt-Ma
+	for mharc-qemu-riscv@gnu.org; Wed, 07 Aug 2019 22:50:57 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:33443)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <bmeng.cn@gmail.com>) id 1hvXYr-0006X1-HA
- for qemu-riscv@nongnu.org; Wed, 07 Aug 2019 21:49:50 -0400
+ (envelope-from <bmeng.cn@gmail.com>) id 1hvYVz-0000IC-4L
+ for qemu-riscv@nongnu.org; Wed, 07 Aug 2019 22:50:56 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <bmeng.cn@gmail.com>) id 1hvXYq-0006H3-JO
- for qemu-riscv@nongnu.org; Wed, 07 Aug 2019 21:49:49 -0400
-Received: from mail-ed1-x544.google.com ([2a00:1450:4864:20::544]:37563)
+ (envelope-from <bmeng.cn@gmail.com>) id 1hvYVx-0007RO-V2
+ for qemu-riscv@nongnu.org; Wed, 07 Aug 2019 22:50:55 -0400
+Received: from mail-pf1-x443.google.com ([2607:f8b0:4864:20::443]:39709)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
- id 1hvXYo-0006GB-IU; Wed, 07 Aug 2019 21:49:46 -0400
-Received: by mail-ed1-x544.google.com with SMTP id w13so88544763eds.4;
- Wed, 07 Aug 2019 18:49:46 -0700 (PDT)
+ id 1hvYVt-0007P1-R7; Wed, 07 Aug 2019 22:50:50 -0400
+Received: by mail-pf1-x443.google.com with SMTP id f17so39213883pfn.6;
+ Wed, 07 Aug 2019 19:50:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=J7ISMZ0v61lDO7u7LIiTD5traq8L9JDwd8ZcKfq0ZvA=;
- b=WwBaaAGipJN9VaDjvJxucrLCnBzAftGJCKvhiYKULE7CK8UA9c28ovIDWkw9OWkgME
- rmAOtPMR3SuhN1DXUNP30rar+ue/tvHerxUTvcw1QJjDq3mxrebg9IO5QXfDLYhp9BWQ
- BuIFFs1Tak6b1SvEFJErx/ep+kvUPxwat8j6EaVb1UvD6QhtOrxgTj4kBERkx7PmVZsq
- PB+Rg+FA4Tpn9SJCr8x2ia0xrkD4+SfVMH1Mtrw47pYPfH6e50g4w6FNnhrj2PZxmNo6
- g84AhNQHAqDZcdBPIpHgnz1Wt9f03a8l1KyntNcczMh3CrIhYcXzyYDuKk4fPd5SQTtY
- dqYw==
+ h=from:to:subject:date:message-id:in-reply-to:references;
+ bh=MEY23tj3FXe9ybdCBXoqAcmhF9Bqo5UZJscRu4cbUuc=;
+ b=B6d0rf5hd9CYP9oe3XObusydn4RUrl/T4kVgi0oG0UCUhbmox7UVON8c9g4FufI+WR
+ 1BIfl7Mkyk4x0+oh4JsQSWxjw6PS2NHnCKu1WEPkkMFqOYAvmm3l3SfNGof5XcsUSe2d
+ JTQ5yACLAeB/G0hawNn7cGgkTZCjiWl001Pa8taDY9D5b9kLWbZXbqNvIbuDKXUdogdQ
+ 0yGXNfvlTP63NyvH2h1QZX3XbUowsNNobghSsYD3NIaE99YBNm6LyHJ7nYHXzwggiTNT
+ dS3/DPa/Ujf7JkKKgiBIjyWZVE9tcWEy5XsYEqXLFkbh7YBxu3e3B9oh6LcXygjdtIID
+ CKww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=J7ISMZ0v61lDO7u7LIiTD5traq8L9JDwd8ZcKfq0ZvA=;
- b=j+RBgd1qSUv4feY2i5dsZ1hM0cKlTtger3yRgZRMM+YQk/764OrWV7AqHsRbfwTkFf
- wUO8FH6O5w5HjThd0ouXAFpuOAvnxm18fTMN0d+WORJ7FmVjqkgeKHoPwQGFW6NUgKoa
- YpQ3TXjaa1s9Y2UjQDPaHkPjmh+kmfAfrLedkAzLod9A+2urEOIIeaW2nu+Xwgy0nSYI
- Wdb8Q9PKC3cbERkGwruibN1WgfmS61yqp9f1b65Fo/wA7DkL2XKNZ9ETfjqVUF0UljBt
- rAKU1iXIzB/DilM9+TPGZRwg36pUvNbiu+ZF4/IF0pmWfRNNX1JPDP1EM2HmlQ058nPi
- 01jQ==
-X-Gm-Message-State: APjAAAUxo3SiMl4M6wGsxgsjixJ09Lem498GnAgkGgqadq0CO8Wp7NlZ
- eRnELRuM3+5YFUx/YtlhoASpnuOUXqe0mu1tcPE=
-X-Google-Smtp-Source: APXvYqwccFEwgrTaLcPG9Yk7YYyyeoxlavRQE6Iiq0Efoysosu+YfhI44WubRhYxmQyVX/VIL4qPRSQQQS5j+BdLQSc=
-X-Received: by 2002:a17:906:340e:: with SMTP id
- c14mr11306605ejb.170.1565228985039; 
- Wed, 07 Aug 2019 18:49:45 -0700 (PDT)
-MIME-Version: 1.0
-References: <1564577101-29020-1-git-send-email-bmeng.cn@gmail.com>
- <581a0284-c658-265f-1b0f-6f4be5406cee@linaro.org>
- <CAEUhbmVXC6GeHYFST514cLRJHQOo5ki=ZPG=OsLzV2YA0ChQgA@mail.gmail.com>
- <ac4453de-81cd-c32a-17f8-283fa3569ed0@linaro.org>
- <CAEUhbmX2C_FbW_m=Mri19hpz0c74SQTt3ogsatGgveH09t3_4g@mail.gmail.com>
- <CANs6eMkRQ1-Gb42DhHGz++4Q79JbH4S3MnccwmwKKEB-sdozag@mail.gmail.com>
-In-Reply-To: <CANs6eMkRQ1-Gb42DhHGz++4Q79JbH4S3MnccwmwKKEB-sdozag@mail.gmail.com>
+ h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+ :references;
+ bh=MEY23tj3FXe9ybdCBXoqAcmhF9Bqo5UZJscRu4cbUuc=;
+ b=k0ekJNW67OgkeThlC0GinS2cDUVKf8uvIV8lR1u5j/+sqVAOB0DBxT6TqtxHV3Kv3Y
+ tYo2HCYFeI19KohZ4sbuZ89fHL1Id5ynJdjnT8kq6SXaDVD1v+fNejb8fghL+Vjt5m8n
+ 9Kegnw4hYhHJVDtfg5uehJB0ZF5H4Vpg4kjA3CWqd0z8noDYS1D9D/pHhijJunA0IZc2
+ /IrFg7INoD+k+HhvuAre5h0MS7a5jSVvpazMFSmBuTXGq15jAnlPRd3LZNcPWcB5tk+J
+ pXzzebYgoCahlePcVFcMWy5iaUuEvryfCLpOrOqICOEHUiRg2VfaVStCyHpY3q7EbyKF
+ PGwQ==
+X-Gm-Message-State: APjAAAUqm5hTsnIvPGpeR9MMFevivvfPYEJ2ywP6VEVf2Jiwdx3LMf5k
+ 8JuUI0SPz1VNPagmtWq5dU0=
+X-Google-Smtp-Source: APXvYqxYNyHTsewdBL4VTaw7ocNWXUjHB70ACk4DdXh2PBxabWqFTGOK37KsYIJdT7IvcEUJPU1rnA==
+X-Received: by 2002:a62:e403:: with SMTP id r3mr12258743pfh.37.1565232645639; 
+ Wed, 07 Aug 2019 19:50:45 -0700 (PDT)
+Received: from localhost.localdomain (unknown-224-80.windriver.com.
+ [147.11.224.80])
+ by smtp.gmail.com with ESMTPSA id a1sm63456777pgh.61.2019.08.07.19.50.44
+ (version=TLS1 cipher=AES128-SHA bits=128/128);
+ Wed, 07 Aug 2019 19:50:45 -0700 (PDT)
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Thu, 8 Aug 2019 09:49:34 +0800
-Message-ID: <CAEUhbmVe=wRZfJmXx2XP4a-OpEgB0uAHP=x6NrdfCq_y7DSr8w@mail.gmail.com>
-To: Palmer Dabbelt <palmer@sifive.com>
-Cc: Richard Henderson <richard.henderson@linaro.org>, 
- Alistair Francis <Alistair.Francis@wdc.com>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, QEMU devel <qemu-devel@nongnu.org>,
- QEMU riscv <qemu-riscv@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
+To: Alistair Francis <Alistair.Francis@wdc.com>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Palmer Dabbelt <palmer@sifive.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Date: Wed,  7 Aug 2019 19:49:30 -0700
+Message-Id: <1565232570-29296-1-git-send-email-bmeng.cn@gmail.com>
+X-Mailer: git-send-email 1.7.1
+In-Reply-To: <1564577101-29020-1-git-send-email-bmeng.cn@gmail.com>
+References: <1564577101-29020-1-git-send-email-bmeng.cn@gmail.com>
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::544
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH] riscv: rv32: Root page table
- address can be larger than 32-bit
+X-Received-From: 2607:f8b0:4864:20::443
+Subject: [Qemu-riscv] [PATCH v2] riscv: rv32: Root page table address can be
+ larger than 32-bit
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -74,39 +72,70 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Aug 2019 01:49:50 -0000
+X-List-Received-Date: Thu, 08 Aug 2019 02:50:56 -0000
 
-Hi Palmer,
+For RV32, the root page table's PPN has 22 bits hence its address
+bits could be larger than the maximum bits that target_ulong is
+able to represent. Use hwaddr instead.
 
-On Thu, Aug 8, 2019 at 4:55 AM Palmer Dabbelt <palmer@sifive.com> wrote:
->
-> On Thu, Aug 1, 2019 at 7:58 AM Bin Meng <bmeng.cn@gmail.com> wrote:
->>
->> On Thu, Aug 1, 2019 at 10:16 PM Richard Henderson
->> <richard.henderson@linaro.org> wrote:
->> >
->> > On 7/31/19 6:53 PM, Bin Meng wrote:
->> > > I am not sure how (idx * ptesize) could overflow. It represents the
->> > > offset by a page table which is [0, 4096).
->> >
->> > You're right, I mis-read what was going on there.
->> >
->> > However, lower down, "target_ulong ppn" needs to be promoted to hwaddr, so that
->> >
->> >     ppn = pte >> PTE_PPN_SHIFT;
->> >     ...
->> >     base = ppn << PGSHIFT;
->> >
->> > does not overflow.  (Which is the part of the page table walk that I thought I
->> > had gleaned from the patch without actually reading the entire function.)
->>
->> Ah, yes. ppn should be promoted. Thanks for the review!
->
->
-> Did I miss a v2?
+Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
 
-No, I will send a v2 soon.
+---
 
-Regards,
-Bin
+Changes in v2:
+- promote ppn, env->satp/env->sptbl to hwaddr otherwise the page
+  table base will not be correctly calculated
+
+ target/riscv/cpu_helper.c | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index e32b612..b2b4f3a 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -176,12 +176,12 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
+ 
+     *prot = 0;
+ 
+-    target_ulong base;
++    hwaddr base;
+     int levels, ptidxbits, ptesize, vm, sum;
+     int mxr = get_field(env->mstatus, MSTATUS_MXR);
+ 
+     if (env->priv_ver >= PRIV_VERSION_1_10_0) {
+-        base = get_field(env->satp, SATP_PPN) << PGSHIFT;
++        base = (hwaddr)get_field(env->satp, SATP_PPN) << PGSHIFT;
+         sum = get_field(env->mstatus, MSTATUS_SUM);
+         vm = get_field(env->satp, SATP_MODE);
+         switch (vm) {
+@@ -201,7 +201,7 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
+           g_assert_not_reached();
+         }
+     } else {
+-        base = env->sptbr << PGSHIFT;
++        base = (hwaddr)(env->sptbr) << PGSHIFT;
+         sum = !get_field(env->mstatus, MSTATUS_PUM);
+         vm = get_field(env->mstatus, MSTATUS_VM);
+         switch (vm) {
+@@ -239,7 +239,7 @@ restart:
+                            ((1 << ptidxbits) - 1);
+ 
+         /* check that physical address of PTE is legal */
+-        target_ulong pte_addr = base + idx * ptesize;
++        hwaddr pte_addr = base + idx * ptesize;
+ 
+         if (riscv_feature(env, RISCV_FEATURE_PMP) &&
+             !pmp_hart_has_privs(env, pte_addr, sizeof(target_ulong),
+@@ -251,7 +251,7 @@ restart:
+ #elif defined(TARGET_RISCV64)
+         target_ulong pte = ldq_phys(cs->as, pte_addr);
+ #endif
+-        target_ulong ppn = pte >> PTE_PPN_SHIFT;
++        hwaddr ppn = pte >> PTE_PPN_SHIFT;
+ 
+         if (!(pte & PTE_V)) {
+             /* Invalid PTE */
+-- 
+2.7.4
+
 
