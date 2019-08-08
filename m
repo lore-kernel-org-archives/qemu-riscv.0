@@ -1,27 +1,27 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hvjX7-0001wl-TA
-	for mharc-qemu-riscv@gnu.org; Thu, 08 Aug 2019 10:36:49 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:57084)
+	id 1hvjfO-0002KP-KF
+	for mharc-qemu-riscv@gnu.org; Thu, 08 Aug 2019 10:45:22 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58513)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <cohuck@redhat.com>) id 1hvjX1-0001re-Op
- for qemu-riscv@nongnu.org; Thu, 08 Aug 2019 10:36:45 -0400
+ (envelope-from <cohuck@redhat.com>) id 1hvjfN-0002KI-2m
+ for qemu-riscv@nongnu.org; Thu, 08 Aug 2019 10:45:21 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <cohuck@redhat.com>) id 1hvjX0-0005zx-LJ
- for qemu-riscv@nongnu.org; Thu, 08 Aug 2019 10:36:43 -0400
-Received: from mx1.redhat.com ([209.132.183.28]:46398)
+ (envelope-from <cohuck@redhat.com>) id 1hvjfM-0002tb-3X
+ for qemu-riscv@nongnu.org; Thu, 08 Aug 2019 10:45:21 -0400
+Received: from mx1.redhat.com ([209.132.183.28]:54162)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <cohuck@redhat.com>)
- id 1hvjX0-0005zg-Eb; Thu, 08 Aug 2019 10:36:42 -0400
-Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
- [10.5.11.22])
+ id 1hvjfL-0002sj-Tp; Thu, 08 Aug 2019 10:45:20 -0400
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
+ [10.5.11.23])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id 7789FC00F5C0;
- Thu,  8 Aug 2019 14:36:41 +0000 (UTC)
+ by mx1.redhat.com (Postfix) with ESMTPS id C740A3024562;
+ Thu,  8 Aug 2019 14:45:18 +0000 (UTC)
 Received: from gondolin (dhcp-192-181.str.redhat.com [10.33.192.181])
- by smtp.corp.redhat.com (Postfix) with ESMTP id DF1451054FF1;
- Thu,  8 Aug 2019 14:35:29 +0000 (UTC)
-Date: Thu, 8 Aug 2019 16:34:46 +0200
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 1F11FF6EA;
+ Thu,  8 Aug 2019 14:44:40 +0000 (UTC)
+Date: Thu, 8 Aug 2019 16:44:38 +0200
 From: Cornelia Huck <cohuck@redhat.com>
 To: <tony.nguyen@bt.com>
 Cc: <qemu-devel@nongnu.org>, <frederic.konrad@adacore.com>,
@@ -55,21 +55,21 @@ Cc: <qemu-devel@nongnu.org>, <frederic.konrad@adacore.com>,
  <david@gibson.dropbear.id.au>, <xiaoguangrong.eric@gmail.com>,
  <huth@tuxfamily.org>, <jcd@tribudubois.net>, <pbonzini@redhat.com>,
  <stefanb@linux.ibm.com>
-Message-ID: <20190808163446.41e4398e.cohuck@redhat.com>
-In-Reply-To: <1565166520130.61317@bt.com>
+Message-ID: <20190808164438.7045c4cc.cohuck@redhat.com>
+In-Reply-To: <1565166604452.72353@bt.com>
 References: <45ec4924e0b34a3d9124e2db06af75b4@tpw09926dag18e.domain1.systemhost.net>
- <1565166520130.61317@bt.com>
+ <1565166604452.72353@bt.com>
 Organization: Red Hat GmbH
 MIME-Version: 1.0
 Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
 X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.32]); Thu, 08 Aug 2019 14:36:41 +0000 (UTC)
+ (mx1.redhat.com [10.5.110.49]); Thu, 08 Aug 2019 14:45:19 +0000 (UTC)
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
 X-Received-From: 209.132.183.28
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v6 08/26] hw/vfio: Access
- MemoryRegion with MemOp
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v6 12/26] hw/s390x: Hard code
+ size with MO_{8|16|32|64}
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -81,27 +81,29 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Aug 2019 14:36:45 -0000
+X-List-Received-Date: Thu, 08 Aug 2019 14:45:22 -0000
 
-On Wed, 7 Aug 2019 08:28:40 +0000
+On Wed, 7 Aug 2019 08:30:04 +0000
 <tony.nguyen@bt.com> wrote:
 
-> The memory_region_dispatch_{read|write} operand "unsigned size" is
-> being converted into a "MemOp op".
+> Temporarily no-op size_memop was introduced to aid the conversion of
+> memory_region_dispatch_{read|write} operand "unsigned size" into
+> "MemOp op".
 > 
-> Convert interfaces by using no-op size_memop.
-> 
-> After all interfaces are converted, size_memop will be implemented
-> and the memory_region_dispatch_{read|write} operand "unsigned size"
-> will be converted into a "MemOp op".
-> 
-> As size_memop is a no-op, this patch does not change any behaviour.
+> Now size_memop is implemented, again hard coded size but with
+
+"Now that size_memop has been implemented properly, again hard code the
+size but with..."
+
+> MO_{8|16|32|64}. This is more expressive and avoid size_memop calls.
+
+s/avoid/avoids/
+
 > 
 > Signed-off-by: Tony Nguyen <tony.nguyen@bt.com>
-> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 > ---
->  hw/vfio/pci-quirks.c | 6 ++++--
->  1 file changed, 4 insertions(+), 2 deletions(-)
+>  hw/s390x/s390-pci-inst.c | 3 +--
+>  1 file changed, 1 insertion(+), 2 deletions(-)
 
 Reviewed-by: Cornelia Huck <cohuck@redhat.com>
 
