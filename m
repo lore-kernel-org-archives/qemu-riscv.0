@@ -1,27 +1,27 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hvjSK-0004XP-8X
-	for mharc-qemu-riscv@gnu.org; Thu, 08 Aug 2019 10:31:52 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:56073)
+	id 1hvjUC-0006jy-J4
+	for mharc-qemu-riscv@gnu.org; Thu, 08 Aug 2019 10:33:48 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:56473)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <cohuck@redhat.com>) id 1hvjSD-0004Vf-T8
- for qemu-riscv@nongnu.org; Thu, 08 Aug 2019 10:31:48 -0400
+ (envelope-from <cohuck@redhat.com>) id 1hvjU8-0006ek-Ud
+ for qemu-riscv@nongnu.org; Thu, 08 Aug 2019 10:33:46 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <cohuck@redhat.com>) id 1hvjSC-0002E1-0M
- for qemu-riscv@nongnu.org; Thu, 08 Aug 2019 10:31:45 -0400
-Received: from mx1.redhat.com ([209.132.183.28]:41424)
+ (envelope-from <cohuck@redhat.com>) id 1hvjU6-0003SB-LX
+ for qemu-riscv@nongnu.org; Thu, 08 Aug 2019 10:33:44 -0400
+Received: from mx1.redhat.com ([209.132.183.28]:44746)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <cohuck@redhat.com>)
- id 1hvjSB-0002D7-Qg; Thu, 08 Aug 2019 10:31:43 -0400
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
- [10.5.11.23])
+ id 1hvjU6-0003RZ-Ey; Thu, 08 Aug 2019 10:33:42 -0400
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
+ [10.5.11.12])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id 5F3FD30C242A;
- Thu,  8 Aug 2019 14:31:41 +0000 (UTC)
+ by mx1.redhat.com (Postfix) with ESMTPS id 62CEB6128F;
+ Thu,  8 Aug 2019 14:33:41 +0000 (UTC)
 Received: from gondolin (dhcp-192-181.str.redhat.com [10.33.192.181])
- by smtp.corp.redhat.com (Postfix) with ESMTP id B8EFA194B9;
- Thu,  8 Aug 2019 14:31:04 +0000 (UTC)
-Date: Thu, 8 Aug 2019 16:31:02 +0200
+ by smtp.corp.redhat.com (Postfix) with ESMTP id A11C260BE1;
+ Thu,  8 Aug 2019 14:32:54 +0000 (UTC)
+Date: Thu, 8 Aug 2019 16:32:52 +0200
 From: Cornelia Huck <cohuck@redhat.com>
 To: <tony.nguyen@bt.com>
 Cc: <qemu-devel@nongnu.org>, <frederic.konrad@adacore.com>,
@@ -55,20 +55,20 @@ Cc: <qemu-devel@nongnu.org>, <frederic.konrad@adacore.com>,
  <david@gibson.dropbear.id.au>, <xiaoguangrong.eric@gmail.com>,
  <huth@tuxfamily.org>, <jcd@tribudubois.net>, <pbonzini@redhat.com>,
  <stefanb@linux.ibm.com>
-Message-ID: <20190808163102.47c8f056.cohuck@redhat.com>
-In-Reply-To: <1565166454836.5266@bt.com>
+Message-ID: <20190808163252.2909e8c9.cohuck@redhat.com>
+In-Reply-To: <1565166496048.47265@bt.com>
 References: <45ec4924e0b34a3d9124e2db06af75b4@tpw09926dag18e.domain1.systemhost.net>
- <1565166454836.5266@bt.com>
+ <1565166496048.47265@bt.com>
 Organization: Red Hat GmbH
 MIME-Version: 1.0
 Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
 X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.49]); Thu, 08 Aug 2019 14:31:41 +0000 (UTC)
+ (mx1.redhat.com [10.5.110.30]); Thu, 08 Aug 2019 14:33:41 +0000 (UTC)
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
 X-Received-From: 209.132.183.28
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v6 05/26] hw/s390x: Access
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v6 07/26] hw/virtio: Access
  MemoryRegion with MemOp
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -81,9 +81,9 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Aug 2019 14:31:48 -0000
+X-List-Received-Date: Thu, 08 Aug 2019 14:33:46 -0000
 
-On Wed, 7 Aug 2019 08:27:35 +0000
+On Wed, 7 Aug 2019 08:28:16 +0000
 <tony.nguyen@bt.com> wrote:
 
 > The memory_region_dispatch_{read|write} operand "unsigned size" is
@@ -100,8 +100,8 @@ On Wed, 7 Aug 2019 08:27:35 +0000
 > Signed-off-by: Tony Nguyen <tony.nguyen@bt.com>
 > Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 > ---
->  hw/s390x/s390-pci-inst.c | 8 +++++---
->  1 file changed, 5 insertions(+), 3 deletions(-)
+>  hw/virtio/virtio-pci.c | 7 +++++--
+>  1 file changed, 5 insertions(+), 2 deletions(-)
 
 Reviewed-by: Cornelia Huck <cohuck@redhat.com>
 
