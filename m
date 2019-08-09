@@ -1,63 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hw78T-0007Yn-26
-	for mharc-qemu-riscv@gnu.org; Fri, 09 Aug 2019 11:48:57 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:52288)
+	id 1hw7Bp-0004OL-5C
+	for mharc-qemu-riscv@gnu.org; Fri, 09 Aug 2019 11:52:25 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:52601)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <philmd@redhat.com>) id 1hw78R-0007WK-Hb
- for qemu-riscv@nongnu.org; Fri, 09 Aug 2019 11:48:56 -0400
+ (envelope-from <peter.maydell@linaro.org>) id 1hw7Bm-0004Lc-3w
+ for qemu-riscv@nongnu.org; Fri, 09 Aug 2019 11:52:23 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <philmd@redhat.com>) id 1hw78Q-00051k-IH
- for qemu-riscv@nongnu.org; Fri, 09 Aug 2019 11:48:55 -0400
-Received: from mail-wr1-f66.google.com ([209.85.221.66]:43533)
+ (envelope-from <peter.maydell@linaro.org>) id 1hw7Bk-0006kE-Vo
+ for qemu-riscv@nongnu.org; Fri, 09 Aug 2019 11:52:22 -0400
+Received: from mail-ot1-x341.google.com ([2607:f8b0:4864:20::341]:34584)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <philmd@redhat.com>) id 1hw78Q-00050s-BG
- for qemu-riscv@nongnu.org; Fri, 09 Aug 2019 11:48:54 -0400
-Received: by mail-wr1-f66.google.com with SMTP id p13so24098408wru.10
- for <qemu-riscv@nongnu.org>; Fri, 09 Aug 2019 08:48:54 -0700 (PDT)
+ (Exim 4.71) (envelope-from <peter.maydell@linaro.org>)
+ id 1hw7Bk-0006jY-Or
+ for qemu-riscv@nongnu.org; Fri, 09 Aug 2019 11:52:20 -0400
+Received: by mail-ot1-x341.google.com with SMTP id n5so134436289otk.1
+ for <qemu-riscv@nongnu.org>; Fri, 09 Aug 2019 08:52:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=z/M3Z95ldVTYoS2h4aUFqxhH4IZo7mkV0bnMYYG8lnY=;
+ b=m0uVEGHVZNSQrrj6Qp8oBm8eUbyWcDMldorCdJPFHGtWDmzO2N8NRkWIHEt7ZnobCq
+ rfVwzZlN+Uy6hbfgs3oneYlMNghASSs9JfWbssRlW0et8xuYCq29/mwShDwIFbYNUIQI
+ 8epP9lqgxMDJ5xu8XaCPBryVy2YEB3e/mOub8vWVVAQPUFohPgabKl1b6NsrRc0eKsIi
+ P/YahcGrN5bhAfVcrgaOEj28emQ9Qy5GjSs5AkIfd+onOXoSPhey+tB2DYKHOCC7vG6g
+ DZz+bjEHZoND0I7cR75kxxoYAsI0UXp+h8xleReDZZR0tMIOGJD//JDMJBqQNJKnV2Or
+ ttuw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
- :date:user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=5Oi13/rZPM+SHevM7m+/KQw8/CzWh3xVBc3OgoZVhB0=;
- b=dgUK/PBCCZDj4/qcMgMjIVS5ZXhHtG46D2OTjxh9/u9xVSIdxjKqDc3Uks1KaK32wU
- 5jZWVIbUsODnUk3PxD7zwbctpVsbdlZOianoxfikCnWud3O7e/VIkuifr2SwNYh0+SLg
- 9dndR9wbcEWaspy6AUUxwBE7ZL83SuxO9B6/zoz9UCF7JJh8UW55mVkNiuYYRZGEoypi
- 3/cNLA3pm1mZRaOrG0iT/vb4o5fgUZ6PfQXsJWeRf8Nj1TihlGChyPHSXZ8SzP9JaUSp
- V4XXSHS09hdNhT/HkkZik8JJQIR1j3WSdoMVZZFr1t0bY7ux1Eg77dsZgCS0REGWAc/d
- 6nLQ==
-X-Gm-Message-State: APjAAAVwJNk+vTPvDOQfmP4k/jpWoIs/xRnJkSK2o5q+YCDUTuoAAj5K
- pElFsUPsXDKBBN4cKnAnkCCtSA==
-X-Google-Smtp-Source: APXvYqwCcDTTAl7KKKTZ2SQ4Kmsj6ojDyUOHUQZIqhLfXF30x/5dD2G+BDbItWZr5sM9D/yV5m12hw==
-X-Received: by 2002:a5d:668e:: with SMTP id l14mr24111168wru.156.1565365733268; 
- Fri, 09 Aug 2019 08:48:53 -0700 (PDT)
-Received: from [192.168.1.39] (214.red-83-51-160.dynamicip.rima-tde.net.
- [83.51.160.214])
- by smtp.gmail.com with ESMTPSA id p3sm5238896wmg.15.2019.08.09.08.48.52
- (version=TLS1_3 cipher=AEAD-AES128-GCM-SHA256 bits=128/128);
- Fri, 09 Aug 2019 08:48:52 -0700 (PDT)
-To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
-Cc: qemu-arm@nongnu.org, qemu-riscv@nongnu.org, peter.maydell@linaro.org,
- Alistair.Francis@wdc.com
-References: <20190809154153.31763-1-richard.henderson@linaro.org>
- <20190809154153.31763-4-richard.henderson@linaro.org>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>
-Openpgp: id=89C1E78F601EE86C867495CBA2A3FD6EDEADC0DE;
- url=http://pgp.mit.edu/pks/lookup?op=get&search=0xA2A3FD6EDEADC0DE
-Message-ID: <2ca2d3fc-36cf-b3ef-8220-4bce3898b633@redhat.com>
-Date: Fri, 9 Aug 2019 17:48:52 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.7.0
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=z/M3Z95ldVTYoS2h4aUFqxhH4IZo7mkV0bnMYYG8lnY=;
+ b=gSDlNBktqXZYdNjr6oeYiAqSrBJOQiucsW24r9f7g2SuOen8K8uAnYW6/CWhYgwZGX
+ ii0k+liXKn6TGfyftNWgBHutHx80TCjkoCpuMFwRwVotMiJb3fUEN7kuBm+aDBo88xQf
+ cOwc2bqE9iiKFKubhZXyA+zkh4VqOMlYNiPdjYOt5plF9CJOL9GeIWU4TSdyo0/epRHo
+ tAXJ8zPAnegHeClzTotPg2a7pWL/qx0piM95q3sqCnMpSJnMIu91katqqeFGnHNAeXKF
+ rAHMAtfsfTw5tcUm6CdibSde53WfpOVA3Lli4ZF3lZNLDGRKgZEsC2epURihTal5V3Es
+ Vv9g==
+X-Gm-Message-State: APjAAAXIDuS3X5epKfXRUPtGeeqUsHsgDofJq3GiaI3aQ5ZAI5wDbT2a
+ HbzvNcgjFU4UVmEidRWoK/ElSdeuGl5KGwRYeWjwcw==
+X-Google-Smtp-Source: APXvYqxCVTN4iVXP5PMxRXwxdJVw/waQLLoJW4krZp0S1LK8PRN11mTsTSpE+U65SMr7+oW5O1iKFDwQBbam3TRsjg8=
+X-Received: by 2002:a9d:6a0f:: with SMTP id g15mr19047916otn.135.1565365938986; 
+ Fri, 09 Aug 2019 08:52:18 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20190809154153.31763-4-richard.henderson@linaro.org>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
- [fuzzy]
-X-Received-From: 209.85.221.66
-Subject: Re: [Qemu-riscv] [PATCH 3/3] target/riscv: Remove redundant
- declaration pragmas
+References: <20190809154153.31763-1-richard.henderson@linaro.org>
+ <20190809154153.31763-2-richard.henderson@linaro.org>
+In-Reply-To: <20190809154153.31763-2-richard.henderson@linaro.org>
+From: Peter Maydell <peter.maydell@linaro.org>
+Date: Fri, 9 Aug 2019 16:52:08 +0100
+Message-ID: <CAFEAcA_4jCdh94MUbmA9wAxQ7UajC_8TxEeD0tLpZRfn7jMiiw@mail.gmail.com>
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: QEMU Developers <qemu-devel@nongnu.org>, qemu-arm <qemu-arm@nongnu.org>, 
+ "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>, 
+ Alistair Francis <Alistair.Francis@wdc.com>
+Content-Type: text/plain; charset="UTF-8"
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2607:f8b0:4864:20::341
+Subject: Re: [Qemu-riscv] [PATCH 1/3] decodetree: Allow !function with no
+ input bits
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -69,51 +69,109 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Aug 2019 15:48:56 -0000
+X-List-Received-Date: Fri, 09 Aug 2019 15:52:23 -0000
 
-On 8/9/19 5:41 PM, Richard Henderson wrote:
-> These are now generated by decodetree itself.
-> 
+On Fri, 9 Aug 2019 at 16:41, Richard Henderson
+<richard.henderson@linaro.org> wrote:
+>
+> Call this form a "parameter", returning a value extracted
+> from the DisasContext.
+>
 > Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
-
-Reviewed-by: Philippe Mathieu-Daudé <philmd@redhat.com>
-Tested-by: Philippe Mathieu-Daudé <philmd@redhat.com>
-
 > ---
->  target/riscv/translate.c | 19 +------------------
->  1 file changed, 1 insertion(+), 18 deletions(-)
-> 
-> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index 8d6ab73258..adeddb85f6 100644
-> --- a/target/riscv/translate.c
-> +++ b/target/riscv/translate.c
-> @@ -708,26 +708,9 @@ static bool gen_shift(DisasContext *ctx, arg_r *a,
->  #include "insn_trans/trans_rvd.inc.c"
->  #include "insn_trans/trans_privileged.inc.c"
->  
-> -/*
-> - * Auto-generated decoder.
-> - * Note that the 16-bit decoder reuses some of the trans_* functions
-> - * initially declared by the 32-bit decoder, which results in duplicate
-> - * declaration warnings.  Suppress them.
-> - */
-> -#ifdef CONFIG_PRAGMA_DIAGNOSTIC_AVAILABLE
-> -# pragma GCC diagnostic push
-> -# pragma GCC diagnostic ignored "-Wredundant-decls"
-> -# ifdef __clang__
-> -#  pragma GCC diagnostic ignored "-Wtypedef-redefinition"
-> -# endif
-> -#endif
-> -
-> +/* Include the auto-generated decoder for 16 bit insn */
->  #include "decode_insn16.inc.c"
->  
-> -#ifdef CONFIG_PRAGMA_DIAGNOSTIC_AVAILABLE
-> -# pragma GCC diagnostic pop
-> -#endif
-> -
->  static void decode_opc(DisasContext *ctx)
->  {
->      /* check for compressed insn */
-> 
+>  docs/devel/decodetree.rst         |  8 ++++-
+>  scripts/decodetree.py             | 54 ++++++++++++++++++++++++-------
+>  tests/decode/err_field6.decode    |  5 +++
+>  tests/decode/succ_function.decode |  6 ++++
+>  4 files changed, 60 insertions(+), 13 deletions(-)
+>  create mode 100644 tests/decode/err_field6.decode
+>  create mode 100644 tests/decode/succ_function.decode
+>
+> diff --git a/docs/devel/decodetree.rst b/docs/devel/decodetree.rst
+> index 44ac621ea8..ce7f52308f 100644
+> --- a/docs/devel/decodetree.rst
+> +++ b/docs/devel/decodetree.rst
+> @@ -23,7 +23,7 @@ Fields
+>
+>  Syntax::
+>
+> -  field_def     := '%' identifier ( unnamed_field )+ ( !function=identifier )?
+> +  field_def     := '%' identifier ( unnamed_field )* ( !function=identifier )?
+>    unnamed_field := number ':' ( 's' ) number
+>
+>  For *unnamed_field*, the first number is the least-significant bit position
+> @@ -34,6 +34,12 @@ present, they are concatenated.  In this way one can define disjoint fields.
+>  If ``!function`` is specified, the concatenated result is passed through the
+>  named function, taking and returning an integral value.
+>
+> +One may use ``!function`` with zero ``unnamed_fields``.  This case is called
+> +a *parameter*, and the named function is only passed the ``DisasContext``
+> +and returns an integral value extracted from there.
+> +
+> +A field with no ``unnamed_fields`` and no ``!function`` is in error.
+> +
+>  FIXME: the fields of the structure into which this result will be stored
+>  is restricted to ``int``.  Which means that we cannot expand 64-bit items.
+>
+> diff --git a/scripts/decodetree.py b/scripts/decodetree.py
+> index d7a59d63ac..a2490aeb74 100755
+> --- a/scripts/decodetree.py
+> +++ b/scripts/decodetree.py
+> @@ -195,7 +195,10 @@ class MultiField:
+>      """Class representing a compound instruction field"""
+>      def __init__(self, subs, mask):
+>          self.subs = subs
+> -        self.sign = subs[0].sign
+> +        if len(subs):
+> +            self.sign = subs[0].sign
+> +        else:
+> +            self.sign = 0
+>          self.mask = mask
+>
+>      def __str__(self):
+
+Is this change to MultiField left over from the previous
+implementation ? I was expecting a zero-length MultiField
+to now be a bug in this python script (ie we should never
+try to create one).
+
+> @@ -245,7 +248,7 @@ class ConstField:
+>
+>
+>  class FunctionField:
+> -    """Class representing a field passed through an expander"""
+> +    """Class representing a field passed through a function"""
+>      def __init__(self, func, base):
+>          self.mask = base.mask
+>          self.sign = base.sign
+> @@ -266,6 +269,27 @@ class FunctionField:
+>  # end FunctionField
+>
+>
+> +class ParameterField:
+> +    """Class representing a psuedo-field read from a function"""
+
+"pseudo"
+
+> +    def __init__(self, func):
+> +        self.mask = 0
+> +        self.sign = 0
+> +        self.func = func
+> +
+> +    def __str__(self):
+> +        return self.func
+> +
+> +    def str_extract(self):
+> +        return self.func + '(ctx)'
+> +
+> +    def __eq__(self, other):
+> +        return self.func == other.func
+> +
+> +    def __ne__(self, other):
+> +        return not self.__eq__(other)
+> +# end FunctionField
+>
+
+thanks
+-- PMM
 
