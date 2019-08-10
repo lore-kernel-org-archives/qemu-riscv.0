@@ -1,63 +1,48 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hwGjN-0005pn-A3
-	for mharc-qemu-riscv@gnu.org; Fri, 09 Aug 2019 22:03:43 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49654)
+	id 1hwRXb-0006DZ-E8
+	for mharc-qemu-riscv@gnu.org; Sat, 10 Aug 2019 09:36:15 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:60954)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <alistair23@gmail.com>) id 1hwGjL-0005mB-6B
- for qemu-riscv@nongnu.org; Fri, 09 Aug 2019 22:03:40 -0400
+ (envelope-from <zhiwei_liu@c-sky.com>) id 1hwRXY-00065x-2P
+ for qemu-riscv@nongnu.org; Sat, 10 Aug 2019 09:36:13 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1hwGjK-0005Wf-7l
- for qemu-riscv@nongnu.org; Fri, 09 Aug 2019 22:03:39 -0400
-Received: from mail-lf1-x142.google.com ([2a00:1450:4864:20::142]:43533)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1hwGjF-0005UM-E9; Fri, 09 Aug 2019 22:03:33 -0400
-Received: by mail-lf1-x142.google.com with SMTP id c19so70820110lfm.10;
- Fri, 09 Aug 2019 19:03:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=G+duk7zj6MtgC/aAwGWmgTHU09nMOBNrTdfA+ShMYzQ=;
- b=ivjwWNzk8ipDxC3VQYTvmMt+zfdmN0iS+KPv8c9iEJ2HTt6ck7wYgnFelZwwqH+u/e
- TbFLrONgrU+pKmcTgT+ipVp6Oq8sXKZIRAs7n4N2HXi7yABvBcoZApzvHE4LXBQ3mkp8
- TuhJoczaH5cxEyFMavgSr4MEl3bxpEG0dKk9KZ5Gw77lmjTevD+ts8XODOlhgxbuZVea
- 04R2AlZkU2a0RPfiz3e9KGo1MLQXE2SdxrRlrGhV5LpsgLMEwGxIz5jkw0/v/rrR+ZNO
- Rr11DEAGuW0kbnMY5ydq/lb6xN103BncbyeL2OObkJukycpmWf8fNEjYs4J3Y8kQ+OYv
- sERQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=G+duk7zj6MtgC/aAwGWmgTHU09nMOBNrTdfA+ShMYzQ=;
- b=lJ+EiJPq955CBnzX0pq/0JkmGCoOx/sFSOa0+D2QD9X6pVOxBvmzE236CxHu8hLYCk
- zZm2Zqh3EUBv1XhHskCkaSz0ydvhgDpb7CrGFCmbCOQk+XOVLd13D8BqyUlP7qTrDEf9
- i1HJhmTAKS7++8dTXosJG/mQzbYL0BTpixoQO9e0srxxobut/W14I7Yq9ziqYnLQbBcp
- aI1QdTPoL/oGBq+dinA3s2Y1nN3n1HjQuCbwl3nQ1uhx1f8fguJScYwBFZRtjTPl9llI
- hVz9hYSw6T7brfL/hkSmFtT7MKsc8ppuWFaKJcdOfSWREsQRA+WW0z9hp6NBpWN+nRqL
- qXmg==
-X-Gm-Message-State: APjAAAVddYoYPgh92dO5+e5EH3fHchtF/rHF3yNv7LxomRhkYO14GnIM
- QJi/Ap83uD9XwOJlSoBMCRxxuz1k0CwLm3Qbad4=
-X-Google-Smtp-Source: APXvYqwUwkCFR7rn2MrJep/jDgUee/9YvPQqqzQgkbdFaaeP5JVwoTRUKv0+kLcjHhh6FRD9z+i9luwfLC5lOslNbNQ=
-X-Received: by 2002:a19:ed11:: with SMTP id y17mr14331811lfy.141.1565402612044; 
- Fri, 09 Aug 2019 19:03:32 -0700 (PDT)
-MIME-Version: 1.0
-References: <20190809154153.31763-1-richard.henderson@linaro.org>
- <20190809154153.31763-4-richard.henderson@linaro.org>
-In-Reply-To: <20190809154153.31763-4-richard.henderson@linaro.org>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 9 Aug 2019 19:03:05 -0700
-Message-ID: <CAKmqyKP7DU0ZAB9ruOxVQxCLevw0XO8378oZc+diQAxpmqifWg@mail.gmail.com>
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Peter Maydell <peter.maydell@linaro.org>, 
- Alistair Francis <Alistair.Francis@wdc.com>, qemu-arm <qemu-arm@nongnu.org>, 
+ (envelope-from <zhiwei_liu@c-sky.com>) id 1hwRXW-0004a2-BO
+ for qemu-riscv@nongnu.org; Sat, 10 Aug 2019 09:36:12 -0400
+Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:42235)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <zhiwei_liu@c-sky.com>)
+ id 1hwRXR-0004QB-Vb; Sat, 10 Aug 2019 09:36:06 -0400
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.06184501|-1; CH=green;
+ DM=CONTINUE|CONTINUE|true|0.362003-0.0192363-0.61876; FP=0|0|0|0|0|-1|-1|-1;
+ HT=e01l10434; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS; RN=8; RT=8; SR=0;
+ TI=SMTPD_---.F9is1lq_1565444133; 
+Received: from 192.168.79.129(mailfrom:zhiwei_liu@c-sky.com
+ fp:SMTPD_---.F9is1lq_1565444133)
+ by smtp.aliyun-inc.com(10.147.43.230);
+ Sat, 10 Aug 2019 21:35:55 +0800
+To: Chih-Min Chao <chihmin.chao@sifive.com>
+Cc: Aleksandar Markovic <aleksandar.m.mail@gmail.com>,
+ Peter Maydell <peter.maydell@linaro.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>,
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>
-Content-Type: text/plain; charset="UTF-8"
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2a00:1450:4864:20::142
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH 3/3] target/riscv: Remove
- redundant declaration pragmas
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ Palmer Dabbelt <palmer@sifive.com>, QEMU Developers <qemu-devel@nongnu.org>,
+ Alistair Francis <Alistair.Francis@wdc.com>
+References: <97a6ae9f-2845-4a3c-2a31-367787622268@c-sky.com>
+ <CAL1e-=jceerbvam57mmXoKWHzepB-qUFL08gBEnSws_ohewLzw@mail.gmail.com>
+ <CAEiOBXVDg-oaqWDpzFrsPjzt8jdmLt7DskG4=zXwYVUb+5=tfg@mail.gmail.com>
+From: LIU ZhiWei <zhiwei_liu@c-sky.com>
+Message-ID: <29508a4a-ac24-c8d2-d703-cb971c33166b@c-sky.com>
+Date: Sat, 10 Aug 2019 06:35:32 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.8.0
+MIME-Version: 1.0
+In-Reply-To: <CAEiOBXVDg-oaqWDpzFrsPjzt8jdmLt7DskG4=zXwYVUb+5=tfg@mail.gmail.com>
+Content-Type: multipart/alternative;
+ boundary="------------E227AC5CEC5A9AC6C6B3A987"
+Content-Language: en-US
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 3.x [generic]
+X-Received-From: 121.197.200.217
+Subject: Re: [Qemu-riscv] [Qemu-devel] RISC-V: Vector && DSP Extension
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -69,57 +54,335 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 10 Aug 2019 02:03:40 -0000
+X-List-Received-Date: Sat, 10 Aug 2019 13:36:14 -0000
 
-On Fri, Aug 9, 2019 at 8:43 AM Richard Henderson
-<richard.henderson@linaro.org> wrote:
->
-> These are now generated by decodetree itself.
->
-> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+This is a multi-part message in MIME format.
+--------------E227AC5CEC5A9AC6C6B3A987
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-Alistair
+On 8/8/19 6:48 AM, Chih-Min Chao wrote:
+>
+>
+> On Thu, Aug 8, 2019 at 7:29 PM Aleksandar Markovic 
+> <aleksandar.m.mail@gmail.com <mailto:aleksandar.m.mail@gmail.com>> wrote:
+>
+>     On Thu, Aug 8, 2019 at 11:52 AM liuzhiwei <zhiwei_liu@c-sky.com
+>     <mailto:zhiwei_liu@c-sky.com>> wrote:
+>
+>     > Hi all,
+>     >
+>     >     My workmate  and I have been working on Vector & Dsp
+>     extension, and
+>     > I'd like to share develop status  with folks.
+>     >
+>     >     The spec references for  Vector extension is
+>     riscv-v-spec-0.7.1, and
+>     > riscv-p-spec-0.5 for DSP extension.
+>
+>
+>     Hello, Liu.
+>
+>     I will not answer your questions directly, however I want to bring
+>     to you
+>     and others another perspective on this situation.
+>
+>     First, please provide the link to the specifications. Via Google,
+>     I found
+>     that "riscv-v-spec-0.7.1" is titled "Working draft of the proposed
+>     RISC-V V
+>     vector extension". I could not find "riscv-p-spec-0.5".
+>
+>     I am not sure what the QEMU policy towards "working draft
+>     proposal" type of
+>     specification is. Peter, can you perhaps clarify that or any other
+>     related
+>     issue?
+>
+>
+> Hi Aleksandar,
+>
+> As for riscv-v-spec 0.7.1, it is first stable spec for target software 
+> development
+> though the name is working draft.  The architecture skeleton is fix 
+> and most of
+> work are focusing the issues related to micro-architecture 
+> implementation complexity.
+> Sifive has released an open source implementation on spike simulation 
+> and Imperas also
+> provides another implementation with its binary simulator.  I think it 
+> is worth to include the extension
+> in Qemu at this moment.
+>
+> As for riscv-p-spec-0.5, I think Andes has fully supported this 
+> extension and should release more
+> detailed spec in the near future (described Riscv Technical Update 
+> 2019/06).
+> They have implement lots of DSP kernel based on this extension and 
+> also provided impressed
+> performance result.  It is also worth to be reviewed (at least [RFC]) 
+> if the detailed  spec is public.
+>
+>
+> ref:
+>      1. 
+> https://content.riscv.org/wp-content/uploads/2019/06/17.40-Vector_RISCV-20190611-Vectors.pdf
+>      2. 
+> https://content.riscv.org/wp-content/uploads/2019/06/17.20-P-ext-RVW-Zurich-20190611.pdf
+>      3. 
+> https://content.riscv.org/wp-content/uploads/2019/06/10.05-TechCommitteeUpdate-June-2019-Copy.pdf
+>
+>
+> chihmin
+>
+Hi chihmin,
 
-> ---
->  target/riscv/translate.c | 19 +------------------
->  1 file changed, 1 insertion(+), 18 deletions(-)
+Thank you for the detailed and informative response. You have a very 
+good understanding of the specifications.
+
+I will modify the code according to the latest spec(currently 
+riscv-v-spec 0.7.2) from the ISA spec git repo as Alistair advised.
+
+Yours,
+
+Zhiwei
+
 >
-> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index 8d6ab73258..adeddb85f6 100644
-> --- a/target/riscv/translate.c
-> +++ b/target/riscv/translate.c
-> @@ -708,26 +708,9 @@ static bool gen_shift(DisasContext *ctx, arg_r *a,
->  #include "insn_trans/trans_rvd.inc.c"
->  #include "insn_trans/trans_privileged.inc.c"
+>     I would advice some caution in these cases. The major issue is
+>     backward
+>     compatibility, but there are other issues too. Let's say,
+>     fairness. If we
+>     let emulation of a component based on a "working draft proposal" be
+>     integrated into QEMU, this will set a precedent, and many other
+>     developer
+>     would rightfully ask for their contributions based on drafts to be
+>     integrated into QEMU. Our policy should be as equal as possible to all
+>     contribution, large or small, riscv or alpha, cpu or device, tcg
+>     or kvm -
+>     in my honest opinion. QEMU upstream should not be a collecting
+>     place for
+>     all imaginable experimentations, certain criteria on what is
+>     appropriate
+>     for upstreaming exist and must continue to exist.
 >
-> -/*
-> - * Auto-generated decoder.
-> - * Note that the 16-bit decoder reuses some of the trans_* functions
-> - * initially declared by the 32-bit decoder, which results in duplicate
-> - * declaration warnings.  Suppress them.
-> - */
-> -#ifdef CONFIG_PRAGMA_DIAGNOSTIC_AVAILABLE
-> -# pragma GCC diagnostic push
-> -# pragma GCC diagnostic ignored "-Wredundant-decls"
-> -# ifdef __clang__
-> -#  pragma GCC diagnostic ignored "-Wtypedef-redefinition"
-> -# endif
-> -#endif
-> -
-> +/* Include the auto-generated decoder for 16 bit insn */
->  #include "decode_insn16.inc.c"
->
-> -#ifdef CONFIG_PRAGMA_DIAGNOSTIC_AVAILABLE
-> -# pragma GCC diagnostic pop
-> -#endif
-> -
->  static void decode_opc(DisasContext *ctx)
->  {
->      /* check for compressed insn */
-> --
-> 2.17.1
+>     Yours,
+>     Aleksandar
 >
 >
+>
+>
+>     > The code of vector extension is
+>     > ready and under testing,  the first patch will be sent about two
+>     weeks
+>     > later. After that we will forward working on DSP extension, and
+>     send the
+>     > first patch in middle  October.
+>     >
+>     >      Could the maintainers  tell me whether the specs referenced are
+>     > appropriate? Is anyone working on these extensions? I'd like to get
+>     > your status, and maybe discuss questions and work togather.
+>     >
+>     > Best Regards
+>     >
+>     > LIU Zhiwei
+>     >
+>     >
+>     >
+>     >
+>
+
+--------------E227AC5CEC5A9AC6C6B3A987
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: 8bit
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body text="#000000" bgcolor="#FFFFFF">
+    <p><br>
+    </p>
+    <div class="moz-cite-prefix">On 8/8/19 6:48 AM, Chih-Min Chao wrote:<br>
+    </div>
+    <blockquote type="cite"
+cite="mid:CAEiOBXVDg-oaqWDpzFrsPjzt8jdmLt7DskG4=zXwYVUb+5=tfg@mail.gmail.com">
+      <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+      <div dir="ltr">
+        <div dir="ltr"><br>
+        </div>
+        <br>
+        <div class="gmail_quote">
+          <div dir="ltr" class="gmail_attr">On Thu, Aug 8, 2019 at 7:29
+            PM Aleksandar Markovic &lt;<a
+              href="mailto:aleksandar.m.mail@gmail.com"
+              moz-do-not-send="true">aleksandar.m.mail@gmail.com</a>&gt;
+            wrote:<br>
+          </div>
+          <blockquote class="gmail_quote" style="margin:0px 0px 0px
+            0.8ex;border-left:1px solid
+            rgb(204,204,204);padding-left:1ex">On Thu, Aug 8, 2019 at
+            11:52 AM liuzhiwei &lt;<a href="mailto:zhiwei_liu@c-sky.com"
+              target="_blank" moz-do-not-send="true">zhiwei_liu@c-sky.com</a>&gt;
+            wrote:<br>
+            <br>
+            &gt; Hi all,<br>
+            &gt;<br>
+            &gt;     My workmate  and I have been working on Vector
+            &amp; Dsp extension, and<br>
+            &gt; I'd like to share develop status  with folks.<br>
+            &gt;<br>
+            &gt;     The spec references for  Vector extension is
+            riscv-v-spec-0.7.1, and<br>
+            &gt; riscv-p-spec-0.5 for DSP extension.<br>
+            <br>
+            <br>
+            Hello, Liu.<br>
+            <br>
+            I will not answer your questions directly, however I want to
+            bring to you<br>
+            and others another perspective on this situation.<br>
+            <br>
+            First, please provide the link to the specifications. Via
+            Google, I found<br>
+            that "riscv-v-spec-0.7.1" is titled "Working draft of the
+            proposed RISC-V V<br>
+            vector extension". I could not find "riscv-p-spec-0.5".<br>
+            <br>
+            I am not sure what the QEMU policy towards "working draft
+            proposal" type of<br>
+            specification is. Peter, can you perhaps clarify that or any
+            other related<br>
+            issue?<br>
+          </blockquote>
+          <div><br>
+          </div>
+          Hi Aleksandar, 
+          <div><br>
+          </div>
+          <div>As for riscv-v-spec 0.7.1, it is first stable spec for
+            target software development </div>
+          <div>though the name is working draft.  The architecture
+            skeleton is fix and most of </div>
+          <div>work are focusing the issues related to
+            micro-architecture implementation complexity.</div>
+          <div>Sifive has released an open source implementation on
+            spike simulation and Imperas also </div>
+          <div>provides another implementation with its binary
+            simulator.  I think it is worth to include the extension</div>
+          <div>in Qemu at this moment. </div>
+          <div><br>
+          </div>
+          <div>As for riscv-p-spec-0.5, I think Andes has fully
+            supported this extension and should release more</div>
+          <div>detailed spec in the near future (described Riscv
+            Technical Update 2019/06). </div>
+          <div>They have implement lots of DSP kernel based on this
+            extension and also provided impressed</div>
+          <div>performance result.  It is also worth to be reviewed (at
+            least [RFC]) if the detailed  spec is public.</div>
+          <div><br>
+          </div>
+        </div>
+      </div>
+    </blockquote>
+    <blockquote type="cite"
+cite="mid:CAEiOBXVDg-oaqWDpzFrsPjzt8jdmLt7DskG4=zXwYVUb+5=tfg@mail.gmail.com">
+      <div dir="ltr">
+        <div class="gmail_quote">
+          <div><br>
+          </div>
+          <div>ref:</div>
+          <div>     1. <a
+href="https://content.riscv.org/wp-content/uploads/2019/06/17.40-Vector_RISCV-20190611-Vectors.pdf"
+              moz-do-not-send="true">https://content.riscv.org/wp-content/uploads/2019/06/17.40-Vector_RISCV-20190611-Vectors.pdf</a><br>
+                 2. <a
+href="https://content.riscv.org/wp-content/uploads/2019/06/17.20-P-ext-RVW-Zurich-20190611.pdf"
+              moz-do-not-send="true">https://content.riscv.org/wp-content/uploads/2019/06/17.20-P-ext-RVW-Zurich-20190611.pdf</a><br>
+                 3. <a
+href="https://content.riscv.org/wp-content/uploads/2019/06/10.05-TechCommitteeUpdate-June-2019-Copy.pdf"
+              moz-do-not-send="true">https://content.riscv.org/wp-content/uploads/2019/06/10.05-TechCommitteeUpdate-June-2019-Copy.pdf</a></div>
+          <div><br>
+          </div>
+          <div><br>
+          </div>
+          <div>chihmin</div>
+          <div><br>
+          </div>
+        </div>
+      </div>
+    </blockquote>
+    <p>Hi chihmin,</p>
+    <p>Thank you for the detailed and informative response. You have a
+      very good understanding of the specifications.</p>
+    <p>I will modify the code according to the latest spec(currently
+      riscv-v-spec 0.7.2) from the ISA spec git repo as Alistair
+      advised.</p>
+    <p>Yours,</p>
+    <p>Zhiwei<br>
+    </p>
+    <blockquote type="cite"
+cite="mid:CAEiOBXVDg-oaqWDpzFrsPjzt8jdmLt7DskG4=zXwYVUb+5=tfg@mail.gmail.com">
+      <div dir="ltr">
+        <div class="gmail_quote">
+          <div><br>
+          </div>
+          <blockquote class="gmail_quote" style="margin:0px 0px 0px
+            0.8ex;border-left:1px solid
+            rgb(204,204,204);padding-left:1ex">
+            I would advice some caution in these cases. The major issue
+            is backward<br>
+            compatibility, but there are other issues too. Let's say,
+            fairness. If we<br>
+            let emulation of a component based on a "working draft
+            proposal" be<br>
+            integrated into QEMU, this will set a precedent, and many
+            other developer<br>
+            would rightfully ask for their contributions based on drafts
+            to be<br>
+            integrated into QEMU. Our policy should be as equal as
+            possible to all<br>
+            contribution, large or small, riscv or alpha, cpu or device,
+            tcg or kvm -<br>
+            in my honest opinion. QEMU upstream should not be a
+            collecting place for<br>
+            all imaginable experimentations, certain criteria on what is
+            appropriate<br>
+            for upstreaming exist and must continue to exist.<br>
+            <br>
+            Yours,<br>
+            Aleksandar<br>
+            <br>
+            <br>
+            <br>
+            <br>
+            &gt; The code of vector extension is<br>
+            &gt; ready and under testing,  the first patch will be sent
+            about two weeks<br>
+            &gt; later. After that we will forward working on DSP
+            extension, and send the<br>
+            &gt; first patch in middle  October.<br>
+            &gt;<br>
+            &gt;      Could the maintainers  tell me whether the specs
+            referenced are<br>
+            &gt; appropriate? Is anyone working on these extensions? 
+            I'd like to get<br>
+            &gt; your status, and maybe discuss questions and work
+            togather.<br>
+            &gt;<br>
+            &gt; Best Regards<br>
+            &gt;<br>
+            &gt; LIU Zhiwei<br>
+            &gt;<br>
+            &gt;<br>
+            &gt;<br>
+            &gt;<br>
+          </blockquote>
+        </div>
+      </div>
+    </blockquote>
+  </body>
+</html>
+
+--------------E227AC5CEC5A9AC6C6B3A987--
 
