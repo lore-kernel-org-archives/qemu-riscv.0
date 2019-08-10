@@ -1,54 +1,71 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hw8vB-0006IT-0I
-	for mharc-qemu-riscv@gnu.org; Fri, 09 Aug 2019 13:43:21 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42594)
+	id 1hwEtE-0001tg-KC
+	for mharc-qemu-riscv@gnu.org; Fri, 09 Aug 2019 20:05:44 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:37503)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <palmer@dabbelt.com>) id 1hw8v8-0006HM-Kl
- for qemu-riscv@nongnu.org; Fri, 09 Aug 2019 13:43:19 -0400
+ (envelope-from <richard.henderson@linaro.org>) id 1hwEtB-0001s1-Ua
+ for qemu-riscv@nongnu.org; Fri, 09 Aug 2019 20:05:42 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmer@dabbelt.com>) id 1hw8v7-0001ZU-KY
- for qemu-riscv@nongnu.org; Fri, 09 Aug 2019 13:43:18 -0400
-Received: from mail-pf1-f195.google.com ([209.85.210.195]:46909)
+ (envelope-from <richard.henderson@linaro.org>) id 1hwEtB-0003oM-0C
+ for qemu-riscv@nongnu.org; Fri, 09 Aug 2019 20:05:41 -0400
+Received: from mail-pg1-x543.google.com ([2607:f8b0:4864:20::543]:45086)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1hw8v7-0001Yc-Fe
- for qemu-riscv@nongnu.org; Fri, 09 Aug 2019 13:43:17 -0400
-Received: by mail-pf1-f195.google.com with SMTP id c3so23288033pfa.13
- for <qemu-riscv@nongnu.org>; Fri, 09 Aug 2019 10:43:16 -0700 (PDT)
+ (Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
+ id 1hwEtA-0003o5-PW
+ for qemu-riscv@nongnu.org; Fri, 09 Aug 2019 20:05:40 -0400
+Received: by mail-pg1-x543.google.com with SMTP id o13so46588476pgp.12
+ for <qemu-riscv@nongnu.org>; Fri, 09 Aug 2019 17:05:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=subject:to:cc:references:from:openpgp:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=KuOmabyGayKaxdTh8IaiojNUoRqfmhsr1PHH3EYV+d4=;
+ b=r5q7+dYYLIX0Vdl7lbg1ZZNbRhMdSgWp/GmIN/nGQ8Qpper3WuLjuOc1xAExaynogb
+ jHvSt/0clHXfNF/gIbcTUzfM2CU+UM+A+HOnc29TjA/zt0BtWWecax/gCvnvCsEeietZ
+ 9Doc26lyU1INTiGO1vR63IUTudB0KqjfwpAVmdIZXcxGfuILuKPxy4fgk0jfaJc2QGTe
+ j4Sgso+E20rwBthwR+Ezv7DuAI60aN6IrGP+EoTYlsoyFQrng37KvuN98msJAszdB3jd
+ fZbBDIXbpdbMvsL1OdFrGw1aNGoAsVhBZ5sCY7LX31mY/L5iYeMBN6J+QnACDXnU1pHW
+ jMnA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
- :mime-version:content-transfer-encoding;
- bh=07JExv6ZKm/0/r6jVytCO72hcMEV9YwwdZoI/h2qYCI=;
- b=WfqgYuyqv1rqc5KO6i5ov8w4q6b13/rXhBARLRRDueyBT9w0z9JTQ5gpSZBdH0EM8Q
- os9kD76HzoZ7mUHl/AUBeDEoCMqw4anFxJWVZ+sWOg+c+K+ZgIJmkFUD3Q5gr3jcExvV
- GewOzNWHdCTKkhpDewo+VCLdwkYdd8vaThfwaFzNpnqoAK/sy3t5+Y730rnwBs1ArFNA
- ET4CH+F4+khT+jThUKUSeuaddmqz8oLhPeZWakHU+Dd7J1nC1cebxq8c/YbEVoFjDjAk
- hHg+kGjnDRD9yyeIjD/QroeK7ZFo1Ui1VJTZE578Ab1Rt5R7U67nvebxD94hz2ywY7No
- su/A==
-X-Gm-Message-State: APjAAAUSB7SoJA7Q5d51itVCCCtHMHanYMNA70LDxrjBaafMa1nKrDlN
- usQ5NlLk/2buTTglbNdMSwe1+A==
-X-Google-Smtp-Source: APXvYqxyW7gmpTc+kz3bGS0zJ2upvXtQDdnp+DvqiRbPeyd7JBMssMjNmF/2ZQmgtXgSdrQ6Y3XbtA==
-X-Received: by 2002:a63:188:: with SMTP id 130mr18316043pgb.231.1565372595244; 
- Fri, 09 Aug 2019 10:43:15 -0700 (PDT)
-Received: from localhost ([12.206.222.5])
- by smtp.gmail.com with ESMTPSA id l1sm142793234pfl.9.2019.08.09.10.43.14
- (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
- Fri, 09 Aug 2019 10:43:14 -0700 (PDT)
-Date: Fri, 09 Aug 2019 10:43:14 -0700 (PDT)
-X-Google-Original-Date: Fri, 09 Aug 2019 10:42:25 PDT (-0700)
-In-Reply-To: <20190809154153.31763-4-richard.henderson@linaro.org>
-CC: qemu-devel@nongnu.org, Peter Maydell <peter.maydell@linaro.org>,
+ h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
+ :date:user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=KuOmabyGayKaxdTh8IaiojNUoRqfmhsr1PHH3EYV+d4=;
+ b=Xr1ZTF9xX0SZ5/PZvuj4D8gNAYcljEfwA8x6wHEtee29UJzPnq7F4+Mqd3Wx8fL7Gc
+ FRKBrKIA6BM6PU0IApBsdy+En9WlkVkidaqwl5KoTEKa3nsVezGQ4oFTTdr/1JoQKXJp
+ 9d2KkvfzN34Phvl+uU7WV4RXyECYugyDa4CPrsNS1PeGHTdKxFT7MOlyxPzZMx/Xh3yX
+ F3ZXrKv8+PFj+fbOj72W/4x+dzsBJDGqxAe2rXW8WZfS5utrHVpusXozHmsAMG+4qG/t
+ CXdLNwj77d76FIbZzzatQ121Z438xg0yRUguv6w6nosdt+AlyubDV7x/8VjN1QwdhuUy
+ j4Sw==
+X-Gm-Message-State: APjAAAU0KmfPu9kdSNRawD+HcWVeU1NeRN3CxeEyFoksAEUEOVdncvSy
+ 9xKTf8BI0amRSiw3tGZrMIMhYA==
+X-Google-Smtp-Source: APXvYqxc3l/K/l8KKQ7p7Rd3uqPpaor2OSBV0MARctmVeN5tTArpuv75M+sAdXAgOVTSIVawcfUDVQ==
+X-Received: by 2002:a17:90a:9f46:: with SMTP id
+ q6mr6749833pjv.110.1565395539309; 
+ Fri, 09 Aug 2019 17:05:39 -0700 (PDT)
+Received: from [192.168.1.11] (97-113-7-119.tukw.qwest.net. [97.113.7.119])
+ by smtp.gmail.com with ESMTPSA id y11sm107505702pfb.119.2019.08.09.17.05.37
+ (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+ Fri, 09 Aug 2019 17:05:38 -0700 (PDT)
+To: Palmer Dabbelt <palmer@sifive.com>
+Cc: qemu-devel@nongnu.org, Peter Maydell <peter.maydell@linaro.org>,
  Alistair Francis <Alistair.Francis@wdc.com>, qemu-arm@nongnu.org,
  qemu-riscv@nongnu.org, philmd@redhat.com
-From: Palmer Dabbelt <palmer@sifive.com>
-To: richard.henderson@linaro.org
-Message-ID: <mhng-b7c59cf4-b345-4805-897a-bf6a1c2c7c99@palmer-si-x1e>
-Mime-Version: 1.0 (MHng)
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
- [fuzzy]
-X-Received-From: 209.85.210.195
+References: <mhng-b7c59cf4-b345-4805-897a-bf6a1c2c7c99@palmer-si-x1e>
+From: Richard Henderson <richard.henderson@linaro.org>
+Openpgp: preference=signencrypt
+Message-ID: <b45b234d-d367-941e-cb61-1d2dc76725e1@linaro.org>
+Date: Fri, 9 Aug 2019 17:05:35 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.8.0
+MIME-Version: 1.0
+In-Reply-To: <mhng-b7c59cf4-b345-4805-897a-bf6a1c2c7c99@palmer-si-x1e>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2607:f8b0:4864:20::543
 Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH 3/3] target/riscv: Remove
  redundant declaration pragmas
 X-BeenThere: qemu-riscv@nongnu.org
@@ -62,50 +79,15 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Aug 2019 17:43:19 -0000
+X-List-Received-Date: Sat, 10 Aug 2019 00:05:42 -0000
 
-On Fri, 09 Aug 2019 08:41:53 PDT (-0700), richard.henderson@linaro.org wrote:
-> These are now generated by decodetree itself.
->
-> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
-> ---
->  target/riscv/translate.c | 19 +------------------
->  1 file changed, 1 insertion(+), 18 deletions(-)
->
-> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index 8d6ab73258..adeddb85f6 100644
-> --- a/target/riscv/translate.c
-> +++ b/target/riscv/translate.c
-> @@ -708,26 +708,9 @@ static bool gen_shift(DisasContext *ctx, arg_r *a,
->  #include "insn_trans/trans_rvd.inc.c"
->  #include "insn_trans/trans_privileged.inc.c"
->
-> -/*
-> - * Auto-generated decoder.
-> - * Note that the 16-bit decoder reuses some of the trans_* functions
-> - * initially declared by the 32-bit decoder, which results in duplicate
-> - * declaration warnings.  Suppress them.
-> - */
-> -#ifdef CONFIG_PRAGMA_DIAGNOSTIC_AVAILABLE
-> -# pragma GCC diagnostic push
-> -# pragma GCC diagnostic ignored "-Wredundant-decls"
-> -# ifdef __clang__
-> -#  pragma GCC diagnostic ignored "-Wtypedef-redefinition"
-> -# endif
-> -#endif
-> -
-> +/* Include the auto-generated decoder for 16 bit insn */
->  #include "decode_insn16.inc.c"
->
-> -#ifdef CONFIG_PRAGMA_DIAGNOSTIC_AVAILABLE
-> -# pragma GCC diagnostic pop
-> -#endif
-> -
->  static void decode_opc(DisasContext *ctx)
->  {
->      /* check for compressed insn */
+On 8/9/19 10:43 AM, Palmer Dabbelt wrote:
+> Acked-by: Palmer Dabbelt <palmer@sifive.com>
+> 
+> I assume you're taking this along with the rest though your tree.
 
-Acked-by: Palmer Dabbelt <palmer@sifive.com>
+Yes, that was my plan.
 
-I assume you're taking this along with the rest though your tree.
+
+r~
 
