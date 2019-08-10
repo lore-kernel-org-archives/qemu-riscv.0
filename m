@@ -1,68 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hwGcE-0002jd-Mh
-	for mharc-qemu-riscv@gnu.org; Fri, 09 Aug 2019 21:56:18 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:48971)
+	id 1hwGjC-0005Y1-0V
+	for mharc-qemu-riscv@gnu.org; Fri, 09 Aug 2019 22:03:30 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49593)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <alistair23@gmail.com>) id 1hwGcC-0002g7-LZ
- for qemu-riscv@nongnu.org; Fri, 09 Aug 2019 21:56:17 -0400
+ (envelope-from <alistair23@gmail.com>) id 1hwGiz-0005Qm-PW
+ for qemu-riscv@nongnu.org; Fri, 09 Aug 2019 22:03:19 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1hwGcB-0002mX-LD
- for qemu-riscv@nongnu.org; Fri, 09 Aug 2019 21:56:16 -0400
-Received: from mail-lf1-x141.google.com ([2a00:1450:4864:20::141]:34292)
+ (envelope-from <alistair23@gmail.com>) id 1hwGiy-0005Mv-MP
+ for qemu-riscv@nongnu.org; Fri, 09 Aug 2019 22:03:17 -0400
+Received: from mail-lf1-x141.google.com ([2a00:1450:4864:20::141]:33473)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1hwGc7-0002kJ-55; Fri, 09 Aug 2019 21:56:11 -0400
-Received: by mail-lf1-x141.google.com with SMTP id b29so63558176lfq.1;
- Fri, 09 Aug 2019 18:56:09 -0700 (PDT)
+ id 1hwGiu-0005Ks-3j; Fri, 09 Aug 2019 22:03:12 -0400
+Received: by mail-lf1-x141.google.com with SMTP id x3so70919784lfc.0;
+ Fri, 09 Aug 2019 19:03:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=KhestzNF3jl4BE+FK0L15HSsCgusxLq1SQq8c966BzI=;
- b=fTtdXK2CLQn8/o426mTdx1agdncusTwEBCGpnavQQfDDV4wRfU1RJt8zBfDh43zsq6
- 7UT+ZTdUwmHWxY/d4oNV/ioKH04acZle6Xn7ADy3kdTGcwCGANQS4byC5ZXrZ6iilZmK
- wsvlKaOPliWhbHqWUj8zxKD9FK5H/Aa4P3J5I8JSYphWkEq15CVRVKw0pJyIp0W9P27a
- NWCm1sKKtP5P3pVwv76UsNfUKwvKDosOpO8ZJExb1HPHCMnC4uMXVtb+Oa8qMjahLVWq
- KMq7uQ946Fbuf+6mLxJMkdMUoyGsCVuqhfR9cmeoX61b7KOyCD8my/7PJ1BliO3vKN1p
- wu/w==
+ :cc; bh=0uGOqsC09PGm0u2CPB6HrpWd0czBaYOd8WUOgplK2BE=;
+ b=LeJ58aQuYAkyGGKKxW3xxNWS2CJkEdySx6+Rtw20jgAEcgKeyTHGWokf0cBpVeLaoV
+ yj6TSf3TXVSBJlAMnQ4q+RPo7shhKC+tuU6GSClhM508bulsO2CoUaYHXOZpRYsOsIjT
+ ZlbmEIWGjPNatT0rmpYCR5qSeN+kP4qxp0/3FSVUjNbeT/lf3Vx+OpHc7ybqlvYFue0P
+ v9qvpYm3qoKvEpwkxhMitcdtWdOV+4PZY7C7E5mSVhSw/3PenZhG1fQi/jDEWhmiMBq+
+ FPrhkc5WgprLqhEZr6LkhgE3VFKsWnzsBC6KgY8I83ONpQ94k3IZhg53+SPs8YLv+/JZ
+ tkSQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=KhestzNF3jl4BE+FK0L15HSsCgusxLq1SQq8c966BzI=;
- b=Ygu962dl0NT9Q1YD7SuH0NWGgPK5XAjjbUpqFZLykx6j1o1Y6tKwXPAqr3uTAc/DvO
- MxsVtAG+bokAygmAXGrDmuZs3CCukwcc4zmsEnBGXyiNeMR4XRvVv7D9ZXDviZU4PclM
- QE8/PAv9w9NosArYFklmLBVk7wyY/OkfETqroqg+ru096C5KQ3FGBpjztLaQdU8u1kCU
- Wu38j/6xx5XKNVPH/06vPxefD5f9ZSpJ3P+uoeC8oWpT08O7AlMjeoRmworz4IMHVVse
- lOnga38Uxm8pxBoGeKesvSPPskWaMk0OlxBKjXpsBlqO3irhC2kQVoqEH7ET9m3LFW5y
- kkaw==
-X-Gm-Message-State: APjAAAUyoai+BsP54TOp4feuplCk7bL+zEaeo3L5I68UvjYbLT44TiYG
- TnQh0Li8DOFz+JQGa0vwxjL2nw1N8LRBKecS7mA=
-X-Google-Smtp-Source: APXvYqwl/WKsRXczy15NeYJ2d2IA6WNoQyMza0uMg/Fj4dFFAEVahh4VJ4kNirIqSnI+/TdlWgASmTrB6HbvX5j5hyc=
-X-Received: by 2002:a19:6904:: with SMTP id e4mr14603305lfc.156.1565402168608; 
- Fri, 09 Aug 2019 18:56:08 -0700 (PDT)
+ :message-id:subject:to:cc;
+ bh=0uGOqsC09PGm0u2CPB6HrpWd0czBaYOd8WUOgplK2BE=;
+ b=hKs5xhnD8h14iprDiRwJ5SZMZ+6wB9kqVrKKKXk2s/H57u6XvYpZjSqZc0Br+kJUc7
+ L1KRR0SL7Zt24+Slt+1JOKpdl0yPIW/wvZmbpSmPc5WpCm7IG3U65iynT/IdGZ/ndQtb
+ KudRQqdnCm1s5GGqoUkge5O1pAbKcnxN88/L3baSPNqI8rJQQQt32w6QNEUOwBzhqM2o
+ G2ZgBDSh64Ko/vv/N52TMfhFyaSa7wBxyG9/KP8Q0ZUGvWvffdRkLYMp4doFAlyKHsVJ
+ t2ukjbF8n2mD8Suvp6wK+H/1r3P1iDt25s97pbuZsr3NoMmh4O6R/kf6uKzW2L7n6b5b
+ /2VQ==
+X-Gm-Message-State: APjAAAWYetZBe1fG9GT/E1drwgb8V0L4FisdQDhzn7rhJmUWtitnwPt4
+ H3DMyWS4VjHXgroAKQHAREx3wa2O2vWgYLsTtYY=
+X-Google-Smtp-Source: APXvYqwa9v5kpc4vT2rt1kYAXt2d3vJ9s75CAkrkJqDTFbpDMJeuaFAuE5oOktvG9wIVa74NbSXmmcEntUipEfKolDY=
+X-Received: by 2002:ac2:563c:: with SMTP id b28mr14029137lff.93.1565402590686; 
+ Fri, 09 Aug 2019 19:03:10 -0700 (PDT)
 MIME-Version: 1.0
-References: <20190809091940.1223-1-alex.bennee@linaro.org>
- <20190809091940.1223-7-alex.bennee@linaro.org>
-In-Reply-To: <20190809091940.1223-7-alex.bennee@linaro.org>
+References: <20190809154153.31763-1-richard.henderson@linaro.org>
+ <20190809154153.31763-3-richard.henderson@linaro.org>
+In-Reply-To: <20190809154153.31763-3-richard.henderson@linaro.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 9 Aug 2019 18:55:42 -0700
-Message-ID: <CAKmqyKNPW=Jtp3PUdwuSzjNE7g58WdureNxAWUnK_KZ-Z17HnQ@mail.gmail.com>
-To: =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>, 
- "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Palmer Dabbelt <palmer@sifive.com>, 
- Richard Henderson <richard.henderson@linaro.org>,
- Markus Armbruster <armbru@redhat.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>
+Date: Fri, 9 Aug 2019 19:02:44 -0700
+Message-ID: <CAKmqyKNU0UV_-wEqFgQLFqAUXBxHZyiu1dBX4bPachkYKTB=Mw@mail.gmail.com>
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Peter Maydell <peter.maydell@linaro.org>, 
+ Alistair Francis <Alistair.Francis@wdc.com>, qemu-arm <qemu-arm@nongnu.org>, 
+ "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
 X-Received-From: 2a00:1450:4864:20::141
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v2 6/7] target/riscv:
- rationalise softfloat includes
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH 2/3] decodetree: Suppress
+ redundant declaration warnings
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -74,70 +69,98 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 10 Aug 2019 01:56:17 -0000
+X-List-Received-Date: Sat, 10 Aug 2019 02:03:28 -0000
 
-On Fri, Aug 9, 2019 at 2:22 AM Alex Benn=C3=A9e <alex.bennee@linaro.org> wr=
-ote:
+On Fri, Aug 9, 2019 at 8:42 AM Richard Henderson
+<richard.henderson@linaro.org> wrote:
 >
-> We should avoid including the whole of softfloat headers in cpu.h and
-> explicitly include it only where we will be calling softfloat
-> functions. We can use the -types.h and -helpers.h in cpu.h for the few
-> bits that are global.
+> We can tell that a decodetree input file is "secondary" when it
+> uses an argument set marked "!extern".  This indicates that at
+> least one of the insn translation functions will have already
+> been declared by the "primary" input file, but given only the
+> secondary we cannot tell which.
 >
-> Signed-off-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
-> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-
-I just reviewed v1, but this also applies to v2:
+> Avoid redundant declaration warnings by suppressing them with pragmas.
+>
+> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  target/riscv/cpu.c        | 1 +
->  target/riscv/cpu.h        | 2 +-
->  target/riscv/fpu_helper.c | 1 +
->  3 files changed, 3 insertions(+), 1 deletion(-)
+>  scripts/decodetree.py | 22 ++++++++++++++++++++++
+>  1 file changed, 22 insertions(+)
 >
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index f8d07bd20ad..6d52f97d7c3 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -27,6 +27,7 @@
->  #include "qemu/error-report.h"
->  #include "hw/qdev-properties.h"
->  #include "migration/vmstate.h"
-> +#include "fpu/softfloat-helpers.h"
+> diff --git a/scripts/decodetree.py b/scripts/decodetree.py
+> index a2490aeb74..f02c8acca1 100755
+> --- a/scripts/decodetree.py
+> +++ b/scripts/decodetree.py
+> @@ -33,6 +33,7 @@ arguments = {}
+>  formats = {}
+>  patterns = []
+>  allpatterns = []
+> +anyextern = False
 >
->  /* RISC-V CPU definitions */
+>  translate_prefix = 'trans'
+>  translate_scope = 'static '
+> @@ -485,12 +486,14 @@ def parse_arguments(lineno, name, toks):
+>      """Parse one argument set from TOKS at LINENO"""
+>      global arguments
+>      global re_ident
+> +    global anyextern
 >
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 0adb307f329..240b31e2ebb 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -22,7 +22,7 @@
+>      flds = []
+>      extern = False
+>      for t in toks:
+>          if re_fullmatch('!extern', t):
+>              extern = True
+> +            anyextern = True
+>              continue
+>          if not re_fullmatch(re_ident, t):
+>              error(lineno, 'invalid argument set token "{0}"'.format(t))
+> @@ -1191,6 +1194,7 @@ def main():
+>      global insnmask
+>      global decode_function
+>      global variablewidth
+> +    global anyextern
 >
->  #include "qom/cpu.h"
->  #include "exec/cpu-defs.h"
-> -#include "fpu/softfloat.h"
-> +#include "fpu/softfloat-types.h"
+>      decode_scope = 'static '
 >
->  #define TCG_GUEST_DEFAULT_MO 0
+> @@ -1251,6 +1255,19 @@ def main():
+>      # A single translate function can be invoked for different patterns.
+>      # Make sure that the argument sets are the same, and declare the
+>      # function only once.
+> +    #
+> +    # If we're sharing formats, we're likely also sharing trans_* functions,
+> +    # but we can't tell which ones.  Prevent issues from the compiler by
+> +    # suppressing redundant declaration warnings.
+> +    if anyextern:
+> +        output("#ifdef CONFIG_PRAGMA_DIAGNOSTIC_AVAILABLE\n",
+> +               "# pragma GCC diagnostic push\n",
+> +               "# pragma GCC diagnostic ignored \"-Wredundant-decls\"\n",
+> +               "# ifdef __clang__\n"
+> +               "#  pragma GCC diagnostic ignored \"-Wtypedef-redefinition\"\n",
+> +               "# endif\n",
+> +               "#endif\n\n")
+> +
+>      out_pats = {}
+>      for i in allpatterns:
+>          if i.name in out_pats:
+> @@ -1262,6 +1279,11 @@ def main():
+>              out_pats[i.name] = i
+>      output('\n')
 >
-> diff --git a/target/riscv/fpu_helper.c b/target/riscv/fpu_helper.c
-> index b4f818a6465..0b79562a690 100644
-> --- a/target/riscv/fpu_helper.c
-> +++ b/target/riscv/fpu_helper.c
-> @@ -21,6 +21,7 @@
->  #include "qemu/host-utils.h"
->  #include "exec/exec-all.h"
->  #include "exec/helper-proto.h"
-> +#include "fpu/softfloat.h"
->
->  target_ulong riscv_cpu_get_fflags(CPURISCVState *env)
->  {
+> +    if anyextern:
+> +        output("#ifdef CONFIG_PRAGMA_DIAGNOSTIC_AVAILABLE\n",
+> +               "# pragma GCC diagnostic pop\n",
+> +               "#endif\n\n")
+> +
+>      for n in sorted(formats.keys()):
+>          f = formats[n]
+>          f.output_extract()
 > --
-> 2.20.1
+> 2.17.1
 >
 >
 
