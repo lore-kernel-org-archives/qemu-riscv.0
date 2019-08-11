@@ -1,51 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hwrLY-0006dL-TF
-	for mharc-qemu-riscv@gnu.org; Sun, 11 Aug 2019 13:09:32 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:58410)
+	id 1hwrPe-0007wt-9g
+	for mharc-qemu-riscv@gnu.org; Sun, 11 Aug 2019 13:13:46 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59026)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <alistair23@gmail.com>) id 1hwrLW-0006Y4-5a
- for qemu-riscv@nongnu.org; Sun, 11 Aug 2019 13:09:31 -0400
+ (envelope-from <alistair23@gmail.com>) id 1hwrPb-0007tF-LT
+ for qemu-riscv@nongnu.org; Sun, 11 Aug 2019 13:13:44 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1hwrLU-0007TY-De
- for qemu-riscv@nongnu.org; Sun, 11 Aug 2019 13:09:30 -0400
-Received: from mail-lj1-x244.google.com ([2a00:1450:4864:20::244]:41259)
+ (envelope-from <alistair23@gmail.com>) id 1hwrPa-0003uk-NT
+ for qemu-riscv@nongnu.org; Sun, 11 Aug 2019 13:13:43 -0400
+Received: from mail-lj1-x242.google.com ([2a00:1450:4864:20::242]:39266)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1hwrLQ-0007K5-Gv; Sun, 11 Aug 2019 13:09:24 -0400
-Received: by mail-lj1-x244.google.com with SMTP id d24so96309369ljg.8;
- Sun, 11 Aug 2019 10:09:24 -0700 (PDT)
+ id 1hwrPY-0003qe-9D; Sun, 11 Aug 2019 13:13:40 -0400
+Received: by mail-lj1-x242.google.com with SMTP id x4so4208725ljj.6;
+ Sun, 11 Aug 2019 10:13:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=blOqPJIVWzlC+wx2/kpOjFsDJSPSUPWd4ycK7C+sHA4=;
- b=hdBIHIW+tfqsGgyWIpnZCG6d8HB8bQxsprp6OI5BHPBsFjJYVWmS5Q7A09F6Q5bjNG
- 1Z8xl7Uw99EVGYFi7eab/03GkpuZPgnZJ05lquXWnDS3PrxwXKSlJbj8vFFK+ZHikWiO
- MIyXnWcv0hhkf1eGaM37uN470lzWzq+Zywx+4g8qGnt74jn7hPmZJM1D6wz6z1tFYPwn
- onS1HD/tMa7sJlG4QZGL36CN2aj4rX8REmOV1Ix0DFF+G3P5wrKT2nDDeH4z/ZrD5d5t
- qJHB2KthrE300uZ8mQ4Vz5AB9jKTEimzx+JMk+tnbfPcCLc3K0uhUep7yG82bDVb4mPI
- lojg==
+ :cc; bh=NBWtrYup+MYCddVF+3Z2NF1pqPKvat8HtGwCmsCKt8Y=;
+ b=PSBt7pfD5Afyqz6udPMOj3/6VuXS0AL6Ab4nu1s/M6Zd31DdvQyVVVttJz/DxatVPx
+ b4XN8zzNkuls0hObvtdvKCu2mV4kru/KNewY47/8pkgKopyR/6waWbUn0iH3uUINX/Rw
+ hz7UIbYX8V9/2erA00fS56n0wuYEOvo4P8b4inCw8+19eGg4Hb9G2yBd9kknbuQS0UA5
+ FRGBX/dXyJilqzEupHSEbKz7B10pYPoIiF+m0mrGHu4sQwrHIhzT0n9U8K4wYiG2GQ7h
+ qPvoRNCd2ojfVIe4KTsn66lGhmRVWZX7dN+ZAa9/i0N4cZVdRoLdJnFvvP4LxMkm0DMB
+ KXyQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=blOqPJIVWzlC+wx2/kpOjFsDJSPSUPWd4ycK7C+sHA4=;
- b=aQwFPbXk3Wd5cBVs380reLVlfKnvSoe1Qw0BjBgToEaC+Y7UKHzHH86/i3WXmk24CS
- +fo2gY3unvP88//Lu4CRisJLt6VI5mVT0e7vdXBLKQfZ5Vqv3V8w9c8sKb6DRZubQkei
- ZqD5HtdkRoylk7DwioLtFNrgvol70VOC6O6s9fw7ogbVXykDJp7a12cB0XuoELVxOFwC
- R6IjDmlJNMBcCEYyIiNXyCINM0FjVCJxa0jpIjmN2MBxWbDvdpduhJh8MgDC2khDF2Ii
- FknRuISWekmXC/CtZ4xvAi1CtDA+zdnQivcbwaDMNrqj0lzqqXnC9C3XJOPeLJxCJhKI
- Ypug==
-X-Gm-Message-State: APjAAAXsNkjB5G3DYBzQNRKLHmOPbJxo8tuQnVvTACqPGUJycwjj/2I4
- augHcREav1h9zMLngof5SP+FQFxZKt0NCATmjVc=
-X-Google-Smtp-Source: APXvYqxbewJ37P1LU4+FUaY6pAXgmYTQ3XAYysHMRBYrpbnE/u3cMyQdbGuDtr7/7fG3LJXyP1u02kt7r4Tjv6darEE=
-X-Received: by 2002:a2e:480a:: with SMTP id v10mr16218045lja.94.1565543362851; 
- Sun, 11 Aug 2019 10:09:22 -0700 (PDT)
+ bh=NBWtrYup+MYCddVF+3Z2NF1pqPKvat8HtGwCmsCKt8Y=;
+ b=hDnfuiPPB30H1zY/J/i7AkJiwbDuMrHQk3yoVA3jrMbJVMkGCa32ihP37lF8Al42IR
+ eoR3NL90mzP0kehyd+7d8ZTADZ0SF00F6f/9j4F/Kynl6w+SiPFVaFgjhxDLR5nmIHIP
+ MrIpgcMWIj/vkUrJrFb4ZMzYndlJfZUQkECi7ozIISW5Mr8Ifo2Zc0wR3g/E2fNixpgP
+ rkYtUY7JYJ4thSijXs89x4/jA0AkPKNMiCVhQeFFItRDdWYAsCn/kXIc7meLi7Lidrf6
+ 8m/7mvZ58u0IH/3uy9Oz3hObvh01jbkdcC5Y0R4njGRpnhR18rgWve2BwvzyAVJ2idDj
+ eQWA==
+X-Gm-Message-State: APjAAAUrn7JeVt+SeEOo7qZ2MKSOxz+cE37F89U5s7811A1IqvA5aPNS
+ Mqi4nVNNAoFFQ+jgPDRteREn/qqHwi05THg3ync=
+X-Google-Smtp-Source: APXvYqx11GTb9OnY5GLeCq2aNO5Uaku9c+56Oryc9mudrS9EcVL3JkOQTETqvsX7grxvI8bKYVEoEP9vetNx2ymB26g=
+X-Received: by 2002:a2e:86cc:: with SMTP id n12mr16650792ljj.146.1565543619027; 
+ Sun, 11 Aug 2019 10:13:39 -0700 (PDT)
 MIME-Version: 1.0
 References: <1565510821-3927-1-git-send-email-bmeng.cn@gmail.com>
- <1565510821-3927-15-git-send-email-bmeng.cn@gmail.com>
-In-Reply-To: <1565510821-3927-15-git-send-email-bmeng.cn@gmail.com>
+ <1565510821-3927-20-git-send-email-bmeng.cn@gmail.com>
+In-Reply-To: <1565510821-3927-20-git-send-email-bmeng.cn@gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Sun, 11 Aug 2019 10:08:54 -0700
-Message-ID: <CAKmqyKNeXc+5vmD6TftWqK+Y0=ZEKacQma4Z17cDbK_s6O237Q@mail.gmail.com>
+Date: Sun, 11 Aug 2019 10:13:11 -0700
+Message-ID: <CAKmqyKOi1HfQKVN1KyWf2j5kVurvMutikguwww2+ZFJd97HLNg@mail.gmail.com>
 To: Bin Meng <bmeng.cn@gmail.com>
 Cc: Alistair Francis <Alistair.Francis@wdc.com>,
  Palmer Dabbelt <palmer@sifive.com>, 
@@ -54,9 +54,9 @@ Cc: Alistair Francis <Alistair.Francis@wdc.com>,
 Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::244
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v3 14/28] riscv: sifive:
- Implement PRCI model for FU540
+X-Received-From: 2a00:1450:4864:20::242
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v3 19/28] riscv: sifive_u:
+ Instantiate OTP memory with a serial number
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -68,308 +68,82 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 11 Aug 2019 17:09:32 -0000
+X-List-Received-Date: Sun, 11 Aug 2019 17:13:44 -0000
 
-On Sun, Aug 11, 2019 at 1:12 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+On Sun, Aug 11, 2019 at 1:13 AM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
-> This adds a simple PRCI model for FU540 (sifive_u). It has different
-> register layout from the existing PRCI model for FE310 (sifive_e).
+> This adds an OTP memory with a given serial number to the sifive_u
+> machine. With such support, the upstream U-Boot for sifive_fu540
+> boots out of the box on the sifive_u machine.
 >
 > Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
+
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+
+Alistair
+
 > ---
 >
 > Changes in v3: None
 > Changes in v2: None
 >
->  hw/riscv/Makefile.objs           |   1 +
->  hw/riscv/sifive_u_prci.c         | 163 +++++++++++++++++++++++++++++++++++++++
->  include/hw/riscv/sifive_u_prci.h |  90 +++++++++++++++++++++
->  3 files changed, 254 insertions(+)
->  create mode 100644 hw/riscv/sifive_u_prci.c
->  create mode 100644 include/hw/riscv/sifive_u_prci.h
+>  hw/riscv/sifive_u.c         | 5 +++++
+>  include/hw/riscv/sifive_u.h | 1 +
+>  2 files changed, 6 insertions(+)
 >
-> diff --git a/hw/riscv/Makefile.objs b/hw/riscv/Makefile.objs
-> index c859697..b95bbd5 100644
-> --- a/hw/riscv/Makefile.objs
-> +++ b/hw/riscv/Makefile.objs
-> @@ -8,6 +8,7 @@ obj-$(CONFIG_SIFIVE) += sifive_gpio.o
->  obj-$(CONFIG_SIFIVE) += sifive_plic.o
->  obj-$(CONFIG_SIFIVE) += sifive_test.o
->  obj-$(CONFIG_SIFIVE_U) += sifive_u.o
-> +obj-$(CONFIG_SIFIVE_U) += sifive_u_prci.o
->  obj-$(CONFIG_SIFIVE) += sifive_uart.o
->  obj-$(CONFIG_SPIKE) += spike.o
->  obj-$(CONFIG_RISCV_VIRT) += virt.o
-> diff --git a/hw/riscv/sifive_u_prci.c b/hw/riscv/sifive_u_prci.c
-> new file mode 100644
-> index 0000000..35e5962
-> --- /dev/null
-> +++ b/hw/riscv/sifive_u_prci.c
-> @@ -0,0 +1,163 @@
-> +/*
-> + * QEMU SiFive U PRCI (Power, Reset, Clock, Interrupt)
-> + *
-> + * Copyright (c) 2019 Bin Meng <bmeng.cn@gmail.com>
-> + *
-> + * Simple model of the PRCI to emulate register reads made by the SDK BSP
-> + *
-> + * This program is free software; you can redistribute it and/or modify it
-> + * under the terms and conditions of the GNU General Public License,
-> + * version 2 or later, as published by the Free Software Foundation.
-> + *
-> + * This program is distributed in the hope it will be useful, but WITHOUT
-> + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-> + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-> + * more details.
-> + *
-> + * You should have received a copy of the GNU General Public License along with
-> + * this program.  If not, see <http://www.gnu.org/licenses/>.
-> + */
-> +
-> +#include "qemu/osdep.h"
-> +#include "hw/sysbus.h"
-> +#include "qemu/module.h"
-> +#include "target/riscv/cpu.h"
-> +#include "hw/riscv/sifive_u_prci.h"
-> +
-> +static uint64_t sifive_prci_read(void *opaque, hwaddr addr, unsigned int size)
-> +{
-> +    SiFivePRCIState *s = opaque;
-> +
-> +    switch (addr) {
-> +    case SIFIVE_PRCI_HFXOSCCFG:
-> +        return s->hfxosccfg;
-> +    case SIFIVE_PRCI_COREPLLCFG0:
-> +        return s->corepllcfg0;
-> +    case SIFIVE_PRCI_DDRPLLCFG0:
-> +        return s->ddrpllcfg0;
-> +    case SIFIVE_PRCI_DDRPLLCFG1:
-> +        return s->ddrpllcfg1;
-> +    case SIFIVE_PRCI_GEMGXLPLLCFG0:
-> +        return s->gemgxlpllcfg0;
-> +    case SIFIVE_PRCI_GEMGXLPLLCFG1:
-> +        return s->gemgxlpllcfg1;
-> +    case SIFIVE_PRCI_CORECLKSEL:
-> +        return s->coreclksel;
-> +    case SIFIVE_PRCI_DEVICESRESET:
-> +        return s->devicesreset;
-> +    case SIFIVE_PRCI_CLKMUXSTATUS:
-> +        return s->clkmuxstatus;
-> +    }
-> +
-> +    hw_error("%s: read: addr=0x%x\n", __func__, (int)addr);
-> +    return 0;
-> +}
-> +
-> +static void sifive_prci_write(void *opaque, hwaddr addr,
-> +                              uint64_t val64, unsigned int size)
-> +{
-> +    SiFivePRCIState *s = opaque;
-> +
-> +    switch (addr) {
-> +    case SIFIVE_PRCI_HFXOSCCFG:
-> +        s->hfxosccfg = (uint32_t) val64;
-> +        /* OSC stays ready */
-> +        s->hfxosccfg |= SIFIVE_PRCI_HFXOSCCFG_RDY;
-> +        break;
-> +    case SIFIVE_PRCI_COREPLLCFG0:
-> +        s->corepllcfg0 = (uint32_t) val64;
-> +        /* internal feedback */
-> +        s->corepllcfg0 |= SIFIVE_PRCI_PLLCFG0_FSE;
-> +        /* PLL stays locked */
-> +        s->corepllcfg0 |= SIFIVE_PRCI_PLLCFG0_LOCK;
-> +        break;
-> +    case SIFIVE_PRCI_DDRPLLCFG0:
-> +        s->ddrpllcfg0 = (uint32_t) val64;
-> +        /* internal feedback */
-> +        s->ddrpllcfg0 |= SIFIVE_PRCI_PLLCFG0_FSE;
-> +        /* PLL stays locked */
-> +        s->ddrpllcfg0 |= SIFIVE_PRCI_PLLCFG0_LOCK;
-> +        break;
-> +    case SIFIVE_PRCI_DDRPLLCFG1:
-> +        s->ddrpllcfg1 = (uint32_t) val64;
-> +        break;
-> +    case SIFIVE_PRCI_GEMGXLPLLCFG0:
-> +        s->gemgxlpllcfg0 = (uint32_t) val64;
-> +         /* internal feedback */
-> +        s->gemgxlpllcfg0 |= SIFIVE_PRCI_PLLCFG0_FSE;
-> +       /* PLL stays locked */
-> +        s->gemgxlpllcfg0 |= SIFIVE_PRCI_PLLCFG0_LOCK;
-> +        break;
-> +    case SIFIVE_PRCI_GEMGXLPLLCFG1:
-> +        s->gemgxlpllcfg1 = (uint32_t) val64;
-> +        break;
-> +    case SIFIVE_PRCI_CORECLKSEL:
-> +        s->coreclksel = (uint32_t) val64;
-> +        break;
-> +    case SIFIVE_PRCI_DEVICESRESET:
-> +        s->devicesreset = (uint32_t) val64;
-> +        break;
-> +    case SIFIVE_PRCI_CLKMUXSTATUS:
-> +        s->clkmuxstatus = (uint32_t) val64;
-> +        break;
-> +    default:
-> +        hw_error("%s: bad write: addr=0x%x v=0x%x\n",
-> +                 __func__, (int)addr, (int)val64);
-> +    }
-> +}
-> +
-> +static const MemoryRegionOps sifive_prci_ops = {
-> +    .read = sifive_prci_read,
-> +    .write = sifive_prci_write,
-> +    .endianness = DEVICE_NATIVE_ENDIAN,
-> +    .valid = {
-> +        .min_access_size = 4,
-> +        .max_access_size = 4
-> +    }
-> +};
-> +
-> +static void sifive_prci_init(Object *obj)
-> +{
-> +    SiFivePRCIState *s = SIFIVE_U_PRCI(obj);
-> +
-> +    memory_region_init_io(&s->mmio, obj, &sifive_prci_ops, s,
-> +                          TYPE_SIFIVE_U_PRCI, SIFIVE_U_PRCI_REG_SIZE);
-> +    sysbus_init_mmio(SYS_BUS_DEVICE(obj), &s->mmio);
-> +
-> +    /* Initialize register to power-on-reset values */
-> +    s->hfxosccfg = (SIFIVE_PRCI_HFXOSCCFG_RDY | SIFIVE_PRCI_HFXOSCCFG_EN);
-> +    s->corepllcfg0 = (SIFIVE_PRCI_PLLCFG0_DIVR | SIFIVE_PRCI_PLLCFG0_DIVF |
-> +                      SIFIVE_PRCI_PLLCFG0_DIVQ | SIFIVE_PRCI_PLLCFG0_FSE |
-> +                      SIFIVE_PRCI_PLLCFG0_LOCK);
-> +    s->ddrpllcfg0 = (SIFIVE_PRCI_PLLCFG0_DIVR | SIFIVE_PRCI_PLLCFG0_DIVF |
-> +                     SIFIVE_PRCI_PLLCFG0_DIVQ | SIFIVE_PRCI_PLLCFG0_FSE |
-> +                     SIFIVE_PRCI_PLLCFG0_LOCK);
-> +    s->gemgxlpllcfg0 = (SIFIVE_PRCI_PLLCFG0_DIVR | SIFIVE_PRCI_PLLCFG0_DIVF |
-> +                        SIFIVE_PRCI_PLLCFG0_DIVQ | SIFIVE_PRCI_PLLCFG0_FSE |
-> +                        SIFIVE_PRCI_PLLCFG0_LOCK);
-> +    s->coreclksel = SIFIVE_PRCI_CORECLKSEL_HFCLK;
-> +}
-> +
-> +static const TypeInfo sifive_prci_info = {
-> +    .name          = TYPE_SIFIVE_U_PRCI,
-> +    .parent        = TYPE_SYS_BUS_DEVICE,
-> +    .instance_size = sizeof(SiFivePRCIState),
-> +    .instance_init = sifive_prci_init,
-> +};
-> +
-> +static void sifive_prci_register_types(void)
-> +{
-> +    type_register_static(&sifive_prci_info);
-> +}
-> +
-> +type_init(sifive_prci_register_types)
-> +
-> +
-> +/* Create PRCI device */
-> +DeviceState *sifive_u_prci_create(hwaddr addr)
-> +{
-> +    DeviceState *dev = qdev_create(NULL, TYPE_SIFIVE_U_PRCI);
-> +    qdev_init_nofail(dev);
-> +    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, addr);
-> +    return dev;
-> +}
-> diff --git a/include/hw/riscv/sifive_u_prci.h b/include/hw/riscv/sifive_u_prci.h
-> new file mode 100644
-> index 0000000..f3a4656
-> --- /dev/null
-> +++ b/include/hw/riscv/sifive_u_prci.h
-> @@ -0,0 +1,90 @@
-> +/*
-> + * QEMU SiFive U PRCI (Power, Reset, Clock, Interrupt) interface
-> + *
-> + * Copyright (c) 2019 Bin Meng <bmeng.cn@gmail.com>
-> + *
-> + * This program is free software; you can redistribute it and/or modify it
-> + * under the terms and conditions of the GNU General Public License,
-> + * version 2 or later, as published by the Free Software Foundation.
-> + *
-> + * This program is distributed in the hope it will be useful, but WITHOUT
-> + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-> + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-> + * more details.
-> + *
-> + * You should have received a copy of the GNU General Public License along with
-> + * this program.  If not, see <http://www.gnu.org/licenses/>.
-> + */
-> +
-> +#ifndef HW_SIFIVE_U_PRCI_H
-> +#define HW_SIFIVE_U_PRCI_H
-> +
-> +enum {
-> +    SIFIVE_PRCI_HFXOSCCFG       = 0x00,
-> +    SIFIVE_PRCI_COREPLLCFG0     = 0x04,
-> +    SIFIVE_PRCI_DDRPLLCFG0      = 0x0C,
-> +    SIFIVE_PRCI_DDRPLLCFG1      = 0x10,
-> +    SIFIVE_PRCI_GEMGXLPLLCFG0   = 0x1C,
-> +    SIFIVE_PRCI_GEMGXLPLLCFG1   = 0x20,
-> +    SIFIVE_PRCI_CORECLKSEL      = 0x24,
-> +    SIFIVE_PRCI_DEVICESRESET    = 0x28,
-> +    SIFIVE_PRCI_CLKMUXSTATUS    = 0x2C
-> +};
-> +
-> +/*
-> + * Current FU540-C000 manual says ready bit is at bit 29, but
-> + * freedom-u540-c000-bootloader codes (ux00prci.h) says it is at bit 31.
-> + * We have to trust the actual codes that worked.
-> + *
-> + * see https://github.com/sifive/freedom-u540-c000-bootloader
-> + */
-> +enum {
-> +    SIFIVE_PRCI_HFXOSCCFG_EN    = (1 << 30),
-> +    SIFIVE_PRCI_HFXOSCCFG_RDY   = (1 << 31),
-> +};
-> +
-> +/* xxxPLLCFG0 register bits */
-> +enum {
-> +    SIFIVE_PRCI_PLLCFG0_DIVR    = (1 << 0),
-> +    SIFIVE_PRCI_PLLCFG0_DIVF    = (31 << 6),
-> +    SIFIVE_PRCI_PLLCFG0_DIVQ    = (3 << 15),
-> +    SIFIVE_PRCI_PLLCFG0_FSE     = (1 << 25),
-> +    SIFIVE_PRCI_PLLCFG0_LOCK    = (1 << 31)
-> +};
-> +
-> +/* xxxPLLCFG1 register bits */
-> +enum {
-> +    SIFIVE_PRCI_PLLCFG1_CKE     = (1 << 24)
-> +};
-> +
-> +enum {
-> +    SIFIVE_PRCI_CORECLKSEL_HFCLK = (1 << 0)
-> +};
-> +
-> +#define SIFIVE_U_PRCI_REG_SIZE  0x1000
-> +
-> +#define TYPE_SIFIVE_U_PRCI      "riscv.sifive.u.prci"
-> +
-> +#define SIFIVE_U_PRCI(obj) \
-> +    OBJECT_CHECK(SiFivePRCIState, (obj), TYPE_SIFIVE_U_PRCI)
-> +
-> +typedef struct SiFivePRCIState {
-
-This is a public struct and should be SiFive U.
-
-Alistair
-
-> +    /*< private >*/
-> +    SysBusDevice parent_obj;
-> +
-> +    /*< public >*/
-> +    MemoryRegion mmio;
-> +    uint32_t hfxosccfg;
-> +    uint32_t corepllcfg0;
-> +    uint32_t ddrpllcfg0;
-> +    uint32_t ddrpllcfg1;
-> +    uint32_t gemgxlpllcfg0;
-> +    uint32_t gemgxlpllcfg1;
-> +    uint32_t coreclksel;
-> +    uint32_t devicesreset;
-> +    uint32_t clkmuxstatus;
-> +} SiFivePRCIState;
-> +
-> +DeviceState *sifive_u_prci_create(hwaddr addr);
-> +
-> +#endif /* HW_SIFIVE_U_PRCI_H */
+> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+> index 5022b8f..486b247 100644
+> --- a/hw/riscv/sifive_u.c
+> +++ b/hw/riscv/sifive_u.c
+> @@ -10,6 +10,7 @@
+>   * 1) CLINT (Core Level Interruptor)
+>   * 2) PLIC (Platform Level Interrupt Controller)
+>   * 3) PRCI (Power, Reset, Clock, Interrupt)
+> + * 4) OTP (One-Time Programmable) memory with stored serial number
+>   *
+>   * This board currently generates devicetree dynamically that indicates at least
+>   * two harts and up to five harts.
+> @@ -43,6 +44,7 @@
+>  #include "hw/riscv/sifive_clint.h"
+>  #include "hw/riscv/sifive_uart.h"
+>  #include "hw/riscv/sifive_u.h"
+> +#include "hw/riscv/sifive_u_otp.h"
+>  #include "hw/riscv/sifive_u_prci.h"
+>  #include "hw/riscv/boot.h"
+>  #include "chardev/char.h"
+> @@ -65,10 +67,12 @@ static const struct MemmapEntry {
+>      [SIFIVE_U_PRCI] =     { 0x10000000,     0x1000 },
+>      [SIFIVE_U_UART0] =    { 0x10010000,     0x1000 },
+>      [SIFIVE_U_UART1] =    { 0x10011000,     0x1000 },
+> +    [SIFIVE_U_OTP] =      { 0x10070000,     0x1000 },
+>      [SIFIVE_U_DRAM] =     { 0x80000000,        0x0 },
+>      [SIFIVE_U_GEM] =      { 0x100900FC,     0x2000 },
+>  };
+>
+> +#define SIFIVE_OTP_SERIAL   1
+>  #define GEM_REVISION        0x10070109
+>
+>  static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
+> @@ -441,6 +445,7 @@ static void riscv_sifive_u_soc_realize(DeviceState *dev, Error **errp)
+>          memmap[SIFIVE_U_CLINT].size, ms->smp.cpus,
+>          SIFIVE_SIP_BASE, SIFIVE_TIMECMP_BASE, SIFIVE_TIME_BASE);
+>      sifive_u_prci_create(memmap[SIFIVE_U_PRCI].base);
+> +    sifive_u_otp_create(memmap[SIFIVE_U_OTP].base, SIFIVE_OTP_SERIAL);
+>
+>      for (i = 0; i < SIFIVE_U_PLIC_NUM_SOURCES; i++) {
+>          plic_gpios[i] = qdev_get_gpio_in(DEVICE(s->plic), i);
+> diff --git a/include/hw/riscv/sifive_u.h b/include/hw/riscv/sifive_u.h
+> index e318ecb..3ae75b5 100644
+> --- a/include/hw/riscv/sifive_u.h
+> +++ b/include/hw/riscv/sifive_u.h
+> @@ -54,6 +54,7 @@ enum {
+>      SIFIVE_U_PRCI,
+>      SIFIVE_U_UART0,
+>      SIFIVE_U_UART1,
+> +    SIFIVE_U_OTP,
+>      SIFIVE_U_DRAM,
+>      SIFIVE_U_GEM
+>  };
 > --
 > 2.7.4
 >
