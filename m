@@ -1,64 +1,68 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hwitB-00073B-UV
-	for mharc-qemu-riscv@gnu.org; Sun, 11 Aug 2019 04:07:41 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:60585)
+	id 1hwitD-0007BM-S0
+	for mharc-qemu-riscv@gnu.org; Sun, 11 Aug 2019 04:07:43 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:60631)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <bmeng.cn@gmail.com>) id 1hwit9-0006tc-0V
- for qemu-riscv@nongnu.org; Sun, 11 Aug 2019 04:07:39 -0400
+ (envelope-from <bmeng.cn@gmail.com>) id 1hwitB-00071T-9q
+ for qemu-riscv@nongnu.org; Sun, 11 Aug 2019 04:07:42 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <bmeng.cn@gmail.com>) id 1hwit8-0004AO-1U
- for qemu-riscv@nongnu.org; Sun, 11 Aug 2019 04:07:38 -0400
-Received: from mail-pg1-x541.google.com ([2607:f8b0:4864:20::541]:34986)
+ (envelope-from <bmeng.cn@gmail.com>) id 1hwitA-0004Bo-6x
+ for qemu-riscv@nongnu.org; Sun, 11 Aug 2019 04:07:41 -0400
+Received: from mail-pg1-x544.google.com ([2607:f8b0:4864:20::544]:37369)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
- id 1hwit5-00047w-NM; Sun, 11 Aug 2019 04:07:35 -0400
-Received: by mail-pg1-x541.google.com with SMTP id n4so6248893pgv.2;
- Sun, 11 Aug 2019 01:07:35 -0700 (PDT)
+ id 1hwit7-00049s-Qg; Sun, 11 Aug 2019 04:07:37 -0400
+Received: by mail-pg1-x544.google.com with SMTP id d1so15163809pgp.4;
+ Sun, 11 Aug 2019 01:07:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:subject:date:message-id:in-reply-to:references;
- bh=QT2ESK7fCnpMmH4ZapU9n1gxphlyVmLj0S6WAA5M8Cs=;
- b=NphMvKVb0V94733aGvUzd2uZRNFJJfK+rPsEt9eQ9OVo/SMnVc64gqLrOres3DD3yi
- LbJQ0W7kSXBKlFilI2fOpR+WycozsaAlRx9mGOMuQX3TyCuAHZVU64glhj5SEjv/9ask
- 4Vw6qOBHlEMdBmxkHbffVl6MAuMrazdaQc1kut9gsWlZfvKYcN2Gkc644cmJjKV/57Co
- NtpB6S2SHnefdjiuH6pkrR7YrfrNLga7ZWnlHT2fDLaP9Lc5gF6dfCoZGCGwEvet3tMG
- YPim5QfGQmb3SW4swf9cKdTBuXGHZ6PeiLUbiqFBqDpFUnHtfR1WDGcVSzT85L61CRSa
- LjJg==
+ h=from:to:subject:date:message-id:in-reply-to:references:mime-version
+ :content-transfer-encoding;
+ bh=s3XSOP19dlyZdHR2UrG21lR0KuQ3VaB6arS5LfITWyM=;
+ b=G/2JOvbC5kxT4S2R1IERMdATVP/8VsIBjipVr0k1rBZKrfIpOyCxptt4RuaFzzJMLj
+ rJMBwIxwTeR/3skbtrTJP2rKviWEcNw2VYI3Yi8zs/8lk033KBx0rYY6DFhMW8MXdcdV
+ 0CZpOw4Wuw0xK5GEYZj8qW8lU2r1z8WFpM5IOIkSxm+ZQRpfvOkJCul7UutQ2MhNzAGR
+ W4LnU2OMmgVhE6jRCS7zD6zyti6MxI2A95YBus36qpEZdJKsLZjwjuT35JLo27JTla1+
+ uqyB7R5x/9oTk0M6eNdUYDYtFoGYqWeRvjSi1cn6QMQ3V1+1HxIVJkN/yDi457fReZOc
+ z8Ng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
- :references;
- bh=QT2ESK7fCnpMmH4ZapU9n1gxphlyVmLj0S6WAA5M8Cs=;
- b=dOyNxejjtkdhUpneTBlRov7Yr9DTj6CzmbPR5ETV9zj+g2ElKs1/cqPdxkUwSnROae
- FrNBZ4dxiIX50rqek4B065uWWceijkWfh7B3My9hdWEgPYpWD8j3H8TEJLXwiIsEbxxT
- bLhWEMraC2mHHC+gz9oR7ONbYbRXkVzDPUALAf6e/9RJA+kGXLPNX+uOFd40qL2V+ANW
- ZDMLAkdvAKC3eeLSAr/IiteOxv9OdDQ6KdPUfVJHoX/ULs0VhDb1j545EE5XEDVhciYW
- wJkaxmQVpCqgiqnGErfdQemYor3K8XSwdpioSz0GceXcQ8d4ZXn38LK9xLe8VjzUoTzt
- r25A==
-X-Gm-Message-State: APjAAAXVcshofoDSlVDcePsl1HbGf2UlPqueYM/mqaM5gmgbTbSqDmVi
- LRfpZ9eAuWzxCpy/x3mjUWg=
-X-Google-Smtp-Source: APXvYqxAK4saH8tv5oP1KfNctoudWgExU7VUQd1Ar6o7ezAeAXU6y9+TDxmp+wlAORDonJ96/5pzNw==
-X-Received: by 2002:a62:6d84:: with SMTP id
- i126mr29701055pfc.129.1565510855043; 
- Sun, 11 Aug 2019 01:07:35 -0700 (PDT)
+ :references:mime-version:content-transfer-encoding;
+ bh=s3XSOP19dlyZdHR2UrG21lR0KuQ3VaB6arS5LfITWyM=;
+ b=jUR0KwB9nDy5tT4Xsv1vA81si21OF3qWN2ADOYFUd/hCyAwKMrIvIOvbP8Q6nyJy/P
+ 1IQihgashVCY7L1W0seHDKNxUekzwPo9zc2+rtCvJg87CXWJ24ITpk6wvMxhWv1q6PRx
+ CmtQa/IGZS3nrooy5p1ibTNVL9fVU0ElzESGfjfX44F5W0TGEvQh7nCWP1BabdEnRWA7
+ vS4xOkRoHyrXKB3EY3Zdvk0LTzXPXHXJNHD8QftOD8fpN+Eh1ILuGJu8535Ch16eL84/
+ MZUVwgKGN/sqAxEBcRbQsyxjNh749Ee2/TkZP/unU0whK8N2W9dERhRiGauRIqbXB/95
+ OBLQ==
+X-Gm-Message-State: APjAAAXSC/oDxOeQpuvD8KYzrXstcLPG7NRxy3r6N35CUB10Wa2n1Uu0
+ K8qIsyDJ80Q67zPX5GxOppUo7jUB
+X-Google-Smtp-Source: APXvYqxzKK6ONycfFURgtvlMT+M765HJvzvTg2HnFcNubByRSNaQaDjYlXpqTnZI7ZTP6uhnkKFwbQ==
+X-Received: by 2002:a17:90a:2486:: with SMTP id
+ i6mr17774011pje.125.1565510857084; 
+ Sun, 11 Aug 2019 01:07:37 -0700 (PDT)
 Received: from localhost.localdomain (unknown-224-80.windriver.com.
  [147.11.224.80])
- by smtp.gmail.com with ESMTPSA id v8sm87339107pgs.82.2019.08.11.01.07.34
+ by smtp.gmail.com with ESMTPSA id v8sm87339107pgs.82.2019.08.11.01.07.36
  (version=TLS1 cipher=AES128-SHA bits=128/128);
- Sun, 11 Aug 2019 01:07:34 -0700 (PDT)
+ Sun, 11 Aug 2019 01:07:36 -0700 (PDT)
 From: Bin Meng <bmeng.cn@gmail.com>
 To: Alistair Francis <Alistair.Francis@wdc.com>,
  Palmer Dabbelt <palmer@sifive.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
-Date: Sun, 11 Aug 2019 01:06:58 -0700
-Message-Id: <1565510821-3927-26-git-send-email-bmeng.cn@gmail.com>
+Date: Sun, 11 Aug 2019 01:07:00 -0700
+Message-Id: <1565510821-3927-28-git-send-email-bmeng.cn@gmail.com>
 X-Mailer: git-send-email 1.7.1
 In-Reply-To: <1565510821-3927-1-git-send-email-bmeng.cn@gmail.com>
 References: <1565510821-3927-1-git-send-email-bmeng.cn@gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::541
-Subject: [Qemu-riscv] [PATCH v3 25/28] riscv: hw: Remove not needed PLIC
- properties in device tree
+X-Received-From: 2607:f8b0:4864:20::544
+Subject: [Qemu-riscv] [PATCH v3 27/28] riscv: virt: Change create_fdt() to
+ return void
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -70,51 +74,74 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 11 Aug 2019 08:07:40 -0000
+X-List-Received-Date: Sun, 11 Aug 2019 08:07:42 -0000
 
-This removes "reg-names" and "riscv,max-priority" properties of the
-PLIC node from device tree.
+There is no need to return fdt at the end of create_fdt() because
+it's already saved in s->fdt. Other machines (sifive_u, spike)
+don't do it neither.
 
 Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
-Reviewed-by: Jonathan Behrens <fintelia@gmail.com>
-
+Reviewed-by: Chih-Min Chao <chihmin.chao@sifive.com>
+Reviewed-by: Philippe Mathieu-Daudé <philmd@redhat.com>
 ---
 
 Changes in v3: None
-Changes in v2:
-- keep the PLIC compatible string unchanged as OpenSBI uses that
-  for DT fix up
+Changes in v2: None
 
- hw/riscv/sifive_u.c | 2 --
- hw/riscv/virt.c     | 2 --
- 2 files changed, 4 deletions(-)
+ hw/riscv/virt.c | 11 ++++-------
+ 1 file changed, 4 insertions(+), 7 deletions(-)
 
-diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-index b0026aa..8801ee2 100644
---- a/hw/riscv/sifive_u.c
-+++ b/hw/riscv/sifive_u.c
-@@ -238,8 +238,6 @@ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
-     qemu_fdt_setprop_cells(fdt, nodename, "reg",
-         0x0, memmap[SIFIVE_U_PLIC].base,
-         0x0, memmap[SIFIVE_U_PLIC].size);
--    qemu_fdt_setprop_string(fdt, nodename, "reg-names", "control");
--    qemu_fdt_setprop_cell(fdt, nodename, "riscv,max-priority", 7);
-     qemu_fdt_setprop_cell(fdt, nodename, "riscv,ndev", 0x35);
-     qemu_fdt_setprop_cell(fdt, nodename, "phandle", plic_phandle);
-     plic_phandle = qemu_fdt_get_phandle(fdt, nodename);
 diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index 127f005..2f75195 100644
+index 2f75195..6bfa721 100644
 --- a/hw/riscv/virt.c
 +++ b/hw/riscv/virt.c
-@@ -244,8 +244,6 @@ static void *create_fdt(RISCVVirtState *s, const struct MemmapEntry *memmap,
-     qemu_fdt_setprop_cells(fdt, nodename, "reg",
-         0x0, memmap[VIRT_PLIC].base,
-         0x0, memmap[VIRT_PLIC].size);
--    qemu_fdt_setprop_string(fdt, nodename, "reg-names", "control");
--    qemu_fdt_setprop_cell(fdt, nodename, "riscv,max-priority", 7);
-     qemu_fdt_setprop_cell(fdt, nodename, "riscv,ndev", VIRTIO_NDEV);
-     qemu_fdt_setprop_cell(fdt, nodename, "phandle", plic_phandle);
-     plic_phandle = qemu_fdt_get_phandle(fdt, nodename);
+@@ -112,7 +112,7 @@ static void create_pcie_irq_map(void *fdt, char *nodename,
+                            0x1800, 0, 0, 0x7);
+ }
+ 
+-static void *create_fdt(RISCVVirtState *s, const struct MemmapEntry *memmap,
++static void create_fdt(RISCVVirtState *s, const struct MemmapEntry *memmap,
+     uint64_t mem_size, const char *cmdline)
+ {
+     void *fdt;
+@@ -316,8 +316,6 @@ static void *create_fdt(RISCVVirtState *s, const struct MemmapEntry *memmap,
+         qemu_fdt_setprop_string(fdt, "/chosen", "bootargs", cmdline);
+     }
+     g_free(nodename);
+-
+-    return fdt;
+ }
+ 
+ 
+@@ -373,7 +371,6 @@ static void riscv_virt_board_init(MachineState *machine)
+     size_t plic_hart_config_len;
+     int i;
+     unsigned int smp_cpus = machine->smp.cpus;
+-    void *fdt;
+ 
+     /* Initialize SOC */
+     object_initialize_child(OBJECT(machine), "soc", &s->soc, sizeof(s->soc),
+@@ -392,7 +389,7 @@ static void riscv_virt_board_init(MachineState *machine)
+         main_mem);
+ 
+     /* create device tree */
+-    fdt = create_fdt(s, memmap, machine->ram_size, machine->kernel_cmdline);
++    create_fdt(s, memmap, machine->ram_size, machine->kernel_cmdline);
+ 
+     /* boot rom */
+     memory_region_init_rom(mask_rom, NULL, "riscv_virt_board.mrom",
+@@ -411,9 +408,9 @@ static void riscv_virt_board_init(MachineState *machine)
+             hwaddr end = riscv_load_initrd(machine->initrd_filename,
+                                            machine->ram_size, kernel_entry,
+                                            &start);
+-            qemu_fdt_setprop_cell(fdt, "/chosen",
++            qemu_fdt_setprop_cell(s->fdt, "/chosen",
+                                   "linux,initrd-start", start);
+-            qemu_fdt_setprop_cell(fdt, "/chosen", "linux,initrd-end",
++            qemu_fdt_setprop_cell(s->fdt, "/chosen", "linux,initrd-end",
+                                   end);
+         }
+     }
 -- 
 2.7.4
 
