@@ -1,46 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hwRqS-0005Ti-26
-	for mharc-qemu-riscv@gnu.org; Sat, 10 Aug 2019 09:55:44 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:34811)
+	id 1hwi5z-0004VE-Pe
+	for mharc-qemu-riscv@gnu.org; Sun, 11 Aug 2019 03:16:51 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:56004)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <zhiwei_liu@c-sky.com>) id 1hwRqQ-0005QH-6h
- for qemu-riscv@nongnu.org; Sat, 10 Aug 2019 09:55:43 -0400
+ (envelope-from <bmeng.cn@gmail.com>) id 1hwi5x-0004SW-Jm
+ for qemu-riscv@nongnu.org; Sun, 11 Aug 2019 03:16:50 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <zhiwei_liu@c-sky.com>) id 1hwRqP-0002wV-2j
- for qemu-riscv@nongnu.org; Sat, 10 Aug 2019 09:55:42 -0400
-Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:46944)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1hwRqJ-0002go-9w; Sat, 10 Aug 2019 09:55:35 -0400
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.06809141|-1; CH=green;
- DM=CONTINUE|CONTINUE|true|0.21291-0.0138966-0.773193; FP=0|0|0|0|0|-1|-1|-1;
- HT=e02c03312; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS; RN=7; RT=7; SR=0;
- TI=SMTPD_---.F9j9.MS_1565445321; 
-Received: from 192.168.79.129(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.F9j9.MS_1565445321)
- by smtp.aliyun-inc.com(10.147.43.230);
- Sat, 10 Aug 2019 21:55:23 +0800
-To: Alistair Francis <alistair23@gmail.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>,
- Palmer Dabbelt <palmer@sifive.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, bastian@mail.uni-paderborn.de
-References: <97a6ae9f-2845-4a3c-2a31-367787622268@c-sky.com>
- <CAKmqyKMqCKS_-rxZ2WYEn+m2gDom27rd2f2FCe0LmVs9brPcAQ@mail.gmail.com>
-From: LIU ZhiWei <zhiwei_liu@c-sky.com>
-Message-ID: <c502163b-ed8a-89d1-6437-9b0f49e88a84@c-sky.com>
-Date: Sat, 10 Aug 2019 06:55:20 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.8.0
+ (envelope-from <bmeng.cn@gmail.com>) id 1hwi5w-0006mK-Aq
+ for qemu-riscv@nongnu.org; Sun, 11 Aug 2019 03:16:49 -0400
+Received: from mail-ed1-x541.google.com ([2a00:1450:4864:20::541]:35924)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
+ id 1hwi5u-0006kL-IZ; Sun, 11 Aug 2019 03:16:46 -0400
+Received: by mail-ed1-x541.google.com with SMTP id k21so100654032edq.3;
+ Sun, 11 Aug 2019 00:16:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=ld6PszFT0O+amH3KJepQ+12+Fy35W2GOiLV4MJr6xq4=;
+ b=P6BBuV8opZVwY+/XHBVwoDyt9A3PpNaKSXBjvq1HmrR4bkwcxei3OtArE3P0e6FjSs
+ K8m04RkxsCNDn3EttB9iGiTdm6jH6PDD/blFVKYrJ2cQgr8zSBKwD6ttfY2y0vYEPVo1
+ WqIgRpzPATHHSlLQOz6yXcYpOf2Uky2EZE8k6SSK+stjOIU4TVwZslG0lq2MnUGhlvo9
+ oMPzZP+/absdaSWgSKHRrHWf3ABDKkogy8ruiOOle4gsrXnT+wW/8Ex+Y+EgcAqnxoT+
+ ttJ9RtjQ/N2oLLrnUESeP4A3hPWNBBd45/903RXENZP8bB+ZQ6cae5kKT9KDGrAFAEFY
+ UFmw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=ld6PszFT0O+amH3KJepQ+12+Fy35W2GOiLV4MJr6xq4=;
+ b=GLTD9Wlh1pwSzFwTaF6JmvxldoC3HME0eq+inTs8q9W5bF1idbfzKbV8i2jClzAlT1
+ 80axZ/WQsdWdk0QCzMko0BZa4rFo3zMFyFmZmpq2INDt3zP5UOdrP4LFBOy2FwCboLqY
+ 3J/+oRdEU9pFNeaQRYALQxIQMpzyUNDCYrbOc8maW367ePsllJZlVYJm4jk5XzL3DrVn
+ 2Il/xelTLnTiN7lAfwXMNxqXOp4Wx7vt+R0BPMrBAXrex0Nm0VWeyIZNdideJfekcT4N
+ fC79tLkD9/eC9HlenfinTnFlILRv/7WdsptekaHljfE1zYljfH7rnaEVN2V9kMnc/Tot
+ uAHQ==
+X-Gm-Message-State: APjAAAU4UqXn1jjK8Cqwp/FTj2WvSXflX9UCk+gfDbUqDJGUNCujh5fe
+ /7xlM6veJ/9nS3zCJBP1k1WBQjznzpo2O+lDsdw=
+X-Google-Smtp-Source: APXvYqwBQlmho+CctWi5TatiUYAYTBmydD2XsHefh20Y1LfZ9KpP0zgirUfmCgcwvR+Hcy2ayDSgz1MSeJokBFiOjvU=
+X-Received: by 2002:a05:6402:14d6:: with SMTP id
+ f22mr10992812edx.180.1565507805037; 
+ Sun, 11 Aug 2019 00:16:45 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <CAKmqyKMqCKS_-rxZ2WYEn+m2gDom27rd2f2FCe0LmVs9brPcAQ@mail.gmail.com>
-Content-Type: multipart/alternative;
- boundary="------------0D1310E34583DB98C0DB2255"
-Content-Language: en-US
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 3.x [generic]
-X-Received-From: 121.197.200.217
-Subject: Re: [Qemu-riscv] [Qemu-devel] RISC-V: Vector && DSP Extension
+References: <1564812484-20385-1-git-send-email-bmeng.cn@gmail.com>
+ <CAKmqyKPW-nMc2zV-VwG_sY9ca7uSenUJW+mEcV2qaKT5dELmgA@mail.gmail.com>
+In-Reply-To: <CAKmqyKPW-nMc2zV-VwG_sY9ca7uSenUJW+mEcV2qaKT5dELmgA@mail.gmail.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Sun, 11 Aug 2019 15:16:33 +0800
+Message-ID: <CAEUhbmWwkMR4xKu9v=10ePj=feJ7b7e5Ko75zv1xMBf+JrVwwA@mail.gmail.com>
+To: Alistair Francis <alistair23@gmail.com>
+Cc: Gerd Hoffmann <kraxel@redhat.com>, Igor Mammedov <imammedo@redhat.com>, 
+ Laszlo Ersek <lersek@redhat.com>, "Michael S. Tsirkin" <mst@redhat.com>, 
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>, 
+ Alistair Francis <Alistair.Francis@wdc.com>, Palmer Dabbelt <palmer@sifive.com>,
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2a00:1450:4864:20::541
+Subject: Re: [Qemu-riscv] [Qemu-devel] [FOR 4.1 PATCH] riscv: roms: Fix make
+ rules for building sifive_u bios
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -52,152 +71,29 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 10 Aug 2019 13:55:43 -0000
+X-List-Received-Date: Sun, 11 Aug 2019 07:16:50 -0000
 
-This is a multi-part message in MIME format.
---------------0D1310E34583DB98C0DB2255
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Hi Palmer,
 
-
-On 8/9/19 6:54 PM, Alistair Francis wrote:
-> On Thu, Aug 8, 2019 at 2:52 AM liuzhiwei <zhiwei_liu@c-sky.com> wrote:
->> Hi all,
->>
->>      My workmate  and I have been working on Vector & Dsp extension, and
->> I'd like to share develop status  with folks.
-> Cool!
+On Tue, Aug 6, 2019 at 1:04 AM Alistair Francis <alistair23@gmail.com> wrote:
 >
->>      The spec references for  Vector extension is riscv-v-spec-0.7.1, and
->> riscv-p-spec-0.5 for DSP extension. The code of vector extension is
->> ready and under testing,  the first patch will be sent about two weeks
->> later. After that we will forward working on DSP extension, and send the
->> first patch in middle  October.
-> What code are you talking about? Is this QEMU code?
-
-Hi Alistair,
-
-It's the QEMU code I have been working on these days, which implements Vector extension. It is under testing,
-and will be sent later.
-
->>       Could the maintainers  tell me whether the specs referenced are
->> appropriate? Is anyone working on these extensions?  I'd like to get
->> your status, and maybe discuss questions and work togather.
-> Just use the latest (master) from the ISA spec git repo.
-
-I will follow your advice.Thanks for your attention to this matter.
-
-Best Regards,
-
-Zhiwei
-
+> On Fri, Aug 2, 2019 at 11:08 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+> >
+> > Currently the make rules are wrongly using qemu/virt opensbi image
+> > for sifive_u machine. Correct it.
+> >
+> > Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
 >
-> I don't know anyone doing vector work for QEMU. It would be very
-> useful, but everyone is busy with something at the moment
-> unfortunately.
+> Good catch.
 >
-> Alistair
+> @Palmer Dabbelt can you take this for 4.1?
 >
->> Best Regards
->>
->> LIU Zhiwei
->>
->>
->>
 
---------------0D1310E34583DB98C0DB2255
-Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: 7bit
+Is this patch merged for 4.1? Thanks!
 
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  </head>
-  <body text="#000000" bgcolor="#FFFFFF">
-    <p><br>
-    </p>
-    <div class="moz-cite-prefix">On 8/9/19 6:54 PM, Alistair Francis
-      wrote:<br>
-    </div>
-    <blockquote type="cite"
-cite="mid:CAKmqyKMqCKS_-rxZ2WYEn+m2gDom27rd2f2FCe0LmVs9brPcAQ@mail.gmail.com">
-      <pre class="moz-quote-pre" wrap="">On Thu, Aug 8, 2019 at 2:52 AM liuzhiwei <a class="moz-txt-link-rfc2396E" href="mailto:zhiwei_liu@c-sky.com">&lt;zhiwei_liu@c-sky.com&gt;</a> wrote:
-</pre>
-      <blockquote type="cite">
-        <pre class="moz-quote-pre" wrap="">
-Hi all,
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+>
 
-    My workmate  and I have been working on Vector &amp; Dsp extension, and
-I'd like to share develop status  with folks.
-</pre>
-      </blockquote>
-      <pre class="moz-quote-pre" wrap="">
-Cool!
-
-</pre>
-      <blockquote type="cite">
-        <pre class="moz-quote-pre" wrap="">
-    The spec references for  Vector extension is riscv-v-spec-0.7.1, and
-riscv-p-spec-0.5 for DSP extension. The code of vector extension is
-ready and under testing,  the first patch will be sent about two weeks
-later. After that we will forward working on DSP extension, and send the
-first patch in middle  October.
-</pre>
-      </blockquote>
-      <pre class="moz-quote-pre" wrap="">
-What code are you talking about? Is this QEMU code?
-</pre>
-    </blockquote>
-    <pre>Hi Alistair,
-
-It's the QEMU code I have been working on these days, which implements Vector extension. It is under testing,
-and will be sent later.
-</pre>
-    <blockquote type="cite"
-cite="mid:CAKmqyKMqCKS_-rxZ2WYEn+m2gDom27rd2f2FCe0LmVs9brPcAQ@mail.gmail.com">
-      <pre class="moz-quote-pre" wrap="">
-</pre>
-      <blockquote type="cite">
-        <pre class="moz-quote-pre" wrap="">
-     Could the maintainers  tell me whether the specs referenced are
-appropriate? Is anyone working on these extensions?  I'd like to get
-your status, and maybe discuss questions and work togather.
-</pre>
-      </blockquote>
-      <pre class="moz-quote-pre" wrap="">
-Just use the latest (master) from the ISA spec git repo.</pre>
-    </blockquote>
-    <pre>I will follow your advice.Thanks for your attention to this matter.
-
-Best Regards,
-
-Zhiwei</pre>
-    <blockquote type="cite"
-cite="mid:CAKmqyKMqCKS_-rxZ2WYEn+m2gDom27rd2f2FCe0LmVs9brPcAQ@mail.gmail.com">
-      <pre class="moz-quote-pre" wrap="">
-
-I don't know anyone doing vector work for QEMU. It would be very
-useful, but everyone is busy with something at the moment
-unfortunately.
-
-Alistair
-
-</pre>
-      <blockquote type="cite">
-        <pre class="moz-quote-pre" wrap="">
-Best Regards
-
-LIU Zhiwei
-
-
-
-</pre>
-      </blockquote>
-      <pre class="moz-quote-pre" wrap="">
-</pre>
-    </blockquote>
-  </body>
-</html>
-
---------------0D1310E34583DB98C0DB2255--
+Regards,
+Bin
 
