@@ -1,67 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hwiso-0005iC-7K
-	for mharc-qemu-riscv@gnu.org; Sun, 11 Aug 2019 04:07:18 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:60086)
+	id 1hwisq-0005qZ-GB
+	for mharc-qemu-riscv@gnu.org; Sun, 11 Aug 2019 04:07:20 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:60122)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <bmeng.cn@gmail.com>) id 1hwisl-0005Yt-Hb
- for qemu-riscv@nongnu.org; Sun, 11 Aug 2019 04:07:16 -0400
+ (envelope-from <bmeng.cn@gmail.com>) id 1hwisn-0005dZ-0Z
+ for qemu-riscv@nongnu.org; Sun, 11 Aug 2019 04:07:18 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <bmeng.cn@gmail.com>) id 1hwisk-0003rv-A7
- for qemu-riscv@nongnu.org; Sun, 11 Aug 2019 04:07:15 -0400
-Received: from mail-pg1-x543.google.com ([2607:f8b0:4864:20::543]:42134)
+ (envelope-from <bmeng.cn@gmail.com>) id 1hwisl-0003t9-Uh
+ for qemu-riscv@nongnu.org; Sun, 11 Aug 2019 04:07:16 -0400
+Received: from mail-pf1-x441.google.com ([2607:f8b0:4864:20::441]:38672)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
- id 1hwish-0003pV-8w; Sun, 11 Aug 2019 04:07:11 -0400
-Received: by mail-pg1-x543.google.com with SMTP id t132so47976275pgb.9;
- Sun, 11 Aug 2019 01:07:11 -0700 (PDT)
+ id 1hwisj-0003qs-Ho; Sun, 11 Aug 2019 04:07:13 -0400
+Received: by mail-pf1-x441.google.com with SMTP id o70so2898769pfg.5;
+ Sun, 11 Aug 2019 01:07:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:subject:date:message-id:in-reply-to:references:mime-version
- :content-transfer-encoding;
- bh=l7CKiSlXuEdauID4CyC/VWGhUA8EAksPM7wH/OCK8/M=;
- b=u7IlNh5CwOPOAVYqMxcMUzi6npwOErzMgT3+lq/QaDdOD0Z9DmTEHqNbpw5hwIB40V
- k5qKXbrRlbubSuwMcNCsBC4FSCiTAnssK7MDp8la1VsNQhBsQuQLYyOc/L2NPxr700Na
- eOI0XNOW4qYNyOowGID5YNL2aemy1dosxUSDpd2CUOUhvsqU8OLbNA5hGGtgUJn4hhzk
- 5kmlxsSlh5LSGS0Jh0pTKM2miua4srGWn40TVn1keCKzRKfFYy/rwcNa4oJ5zRX+nDxW
- oDplXnz1zW53R+s5abSICX+evlYxMo4o69cxHW2hlXT9Zc8x4Z8YOTbTABbCgcVE2xLY
- /aIQ==
+ h=from:to:subject:date:message-id:in-reply-to:references;
+ bh=kXQ9PXHrDRgGhMpr4k9BgBl1iRn6bwnVpBb0I6FgVfY=;
+ b=H0O2qMBwfIGgcUtyM2Yw0yXzQAwNgMGxXWxN1JcX4vNbWeM+r77CKHFOG+x0DSn6Ja
+ JhK+dPxg3FU+Wx0aKYjysdTM5zIu10KxoXbFyl36qw9I6WQklhtjDvzv2b0GwZ/jfRMb
+ tnkthZMuYQKUW0/UP688B/XRKwXFr393dNq/hriY7DUGan99Ir+689V3QjQhsZcO3Icm
+ RLWcqh/4+bCitJIZyMaKxEJP8XHLT7vYkHIdN71Fh80VYEJP7sj8Ux4XTUOL2QI0Ayqu
+ 7PRg2114MX1shD9zUKal2/reWQorhutAGpi8KWrzgOtdQhQiat8HWGzGhL9jO0m+Pj/+
+ NMsg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=l7CKiSlXuEdauID4CyC/VWGhUA8EAksPM7wH/OCK8/M=;
- b=FkJyqblEPXKtCT13BngdEDyWnxHpf5dkjj3TTfwUfbV1ZgOgfVuJ1hEMsARIZw1TbM
- TpjOywH2MlPIMgv3JkkOygRMvx/1fVy49XenAHDKf6HkDNG1fj+0Aq/Q4UgiTaF581II
- ZrY3COIj86tyWspSHWSDZr43r8ICE/p6A8AsJ8gTHK8zviO7TDUCK6t72aNPOfR3z5Iz
- 3uK3QQBUpT4uO+z+8UPjEaP7L7swmBORMGagGgJ0/oCf+9PidUt1L4UiYijdJ2z/pLUQ
- BkpK7hPC2c4HVI8DVhjCGWA/RL3bwoo0VWgARoqHeQ8c5s15Zj8NEStcUP3kRzVgzt2H
- LzQg==
-X-Gm-Message-State: APjAAAUsgi/v0kHA9bokOnFuWE8uTi/bWBQAoEZcuGpJsF2WGvV5UftY
- 0NqPGNjIWosvV8dJ4DpIpLk=
-X-Google-Smtp-Source: APXvYqy9dRGJk+/7/pfHKykEDIYDCe/DoAXMb3g1YiLdE+IV2kRZB+Ct0A6Z+dCuI+0STKHGip/nQQ==
-X-Received: by 2002:a63:6f81:: with SMTP id k123mr25735304pgc.12.1565510830340; 
- Sun, 11 Aug 2019 01:07:10 -0700 (PDT)
+ :references;
+ bh=kXQ9PXHrDRgGhMpr4k9BgBl1iRn6bwnVpBb0I6FgVfY=;
+ b=o6FdY2FCUPH91GSa1kO9UfvQQPAS9xPO62XMWvkuknPf76OdS0pLesMJrK4CO1F+On
+ rtMp8+ix8lwCwCAKcoVkJ4qyJAOHVuwQvuxIFPQO5+iPaeVtXMPZkmZf0ZOdoyZi8Tqd
+ LhwJipC6dswOvfPnzzEMQLaaw5MROlY72M0be+2EK9BEc4TSYlXkIUEKnfRWny/HdM7y
+ AuWMH7JrHOElvR41o4zEqjsiwofgd2/mCyqMHd+h/xWjrtsEJMffv7heovZkCsYxSoYW
+ gnQbHKM0MKMIDe/V4dtWMrC3tqq1Gp3cia18gOBPKOTqmlMmJpL5R1yqTxC/1+pogikl
+ SZ7g==
+X-Gm-Message-State: APjAAAUCkwhqgX4Ipr6fDT5k+Kciuwuj3TZ/9pCBacjLeyQjp+1jPK35
+ /u1+NQdMcOo//7tdR1rXKmg=
+X-Google-Smtp-Source: APXvYqzg3C5MAgZxX0tvMQZYbL2m9J+NyeGB2/CQ28svf2O2B7yJ0ROCTmT55PPYnKIX/wX02g64BQ==
+X-Received: by 2002:a17:90a:981:: with SMTP id 1mr5530323pjo.37.1565510832727; 
+ Sun, 11 Aug 2019 01:07:12 -0700 (PDT)
 Received: from localhost.localdomain (unknown-224-80.windriver.com.
  [147.11.224.80])
- by smtp.gmail.com with ESMTPSA id v8sm87339107pgs.82.2019.08.11.01.07.09
+ by smtp.gmail.com with ESMTPSA id v8sm87339107pgs.82.2019.08.11.01.07.11
  (version=TLS1 cipher=AES128-SHA bits=128/128);
- Sun, 11 Aug 2019 01:07:09 -0700 (PDT)
+ Sun, 11 Aug 2019 01:07:12 -0700 (PDT)
 From: Bin Meng <bmeng.cn@gmail.com>
 To: Alistair Francis <Alistair.Francis@wdc.com>,
  Palmer Dabbelt <palmer@sifive.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
-Date: Sun, 11 Aug 2019 01:06:36 -0700
-Message-Id: <1565510821-3927-4-git-send-email-bmeng.cn@gmail.com>
+Date: Sun, 11 Aug 2019 01:06:38 -0700
+Message-Id: <1565510821-3927-6-git-send-email-bmeng.cn@gmail.com>
 X-Mailer: git-send-email 1.7.1
 In-Reply-To: <1565510821-3927-1-git-send-email-bmeng.cn@gmail.com>
 References: <1565510821-3927-1-git-send-email-bmeng.cn@gmail.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::543
-Subject: [Qemu-riscv] [PATCH v3 03/28] riscv: Add a sifive_cpu.h to include
- both E and U cpu type defines
+X-Received-From: 2607:f8b0:4864:20::441
+Subject: [Qemu-riscv] [PATCH v3 05/28] riscv: hart: Support heterogeneous
+ harts population
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -73,107 +69,91 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 11 Aug 2019 08:07:17 -0000
+X-List-Received-Date: Sun, 11 Aug 2019 08:07:18 -0000
 
-Group SiFive E and U cpu type defines into one header file.
+At present we only allow symmetric harts to be created. In order to
+support heterogeneous harts like SiFive FU540, update hart array's
+"cpu-type" property to allow cpu type to be set per hart, separated
+by delimiter ",". The frist cpu type before the delimiter is assigned
+to hart 0, and the second cpu type before delimiter is assigned to
+hart 1, and so on.
+
+If the total number of cpu types supplied in "cpu-type" property is
+less than number of maximum harts, the last cpu type in the property
+will be used to populate remaining harts.
 
 Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@redhat.com>
 ---
 
 Changes in v3: None
 Changes in v2: None
 
- include/hw/riscv/sifive_cpu.h | 31 +++++++++++++++++++++++++++++++
- include/hw/riscv/sifive_e.h   |  7 +------
- include/hw/riscv/sifive_u.h   |  7 +------
- 3 files changed, 33 insertions(+), 12 deletions(-)
- create mode 100644 include/hw/riscv/sifive_cpu.h
+ hw/riscv/riscv_hart.c | 48 +++++++++++++++++++++++++++++++++++++++++++++---
+ 1 file changed, 45 insertions(+), 3 deletions(-)
 
-diff --git a/include/hw/riscv/sifive_cpu.h b/include/hw/riscv/sifive_cpu.h
-new file mode 100644
-index 0000000..1367996
---- /dev/null
-+++ b/include/hw/riscv/sifive_cpu.h
-@@ -0,0 +1,31 @@
-+/*
-+ * SiFive CPU types
-+ *
-+ * Copyright (c) 2017 SiFive, Inc.
-+ * Copyright (c) 2019 Bin Meng <bmeng.cn@gmail.com>
-+ *
-+ * This program is free software; you can redistribute it and/or modify it
-+ * under the terms and conditions of the GNU General Public License,
-+ * version 2 or later, as published by the Free Software Foundation.
-+ *
-+ * This program is distributed in the hope it will be useful, but WITHOUT
-+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-+ * more details.
-+ *
-+ * You should have received a copy of the GNU General Public License along with
-+ * this program.  If not, see <http://www.gnu.org/licenses/>.
-+ */
+diff --git a/hw/riscv/riscv_hart.c b/hw/riscv/riscv_hart.c
+index 3dd1c6a..27093e0 100644
+--- a/hw/riscv/riscv_hart.c
++++ b/hw/riscv/riscv_hart.c
+@@ -58,13 +58,55 @@ static void riscv_hart_realize(RISCVHartArrayState *s, int hart,
+ static void riscv_harts_realize(DeviceState *dev, Error **errp)
+ {
+     RISCVHartArrayState *s = RISCV_HART_ARRAY(dev);
+-    int n;
++    char *cpu_types;
++    char *first_type, *last_type, *tmp_type;
++    int n = 0;
+ 
+     s->harts = g_new0(RISCVCPU, s->num_harts);
+ 
+-    for (n = 0; n < s->num_harts; n++) {
+-        riscv_hart_realize(s, n, s->cpu_type, errp);
++    /* we should not touch the original s->cpu_type */
++    cpu_types = g_strdup(s->cpu_type);
 +
-+#ifndef HW_SIFIVE_CPU_H
-+#define HW_SIFIVE_CPU_H
++    /*
++     * Expect s->cpu_type property was initialized this way:
++     *
++     * "cpu-type-a": symmetric harts
++     * "cpu-type-a,cpu-type-b,cpu-type-c": heterogeneous harts
++     *
++     * For heterogeneous harts, hart cpu types are separated by delimiter ",".
++     * The frist cpu type before the delimiter is assigned to hart 0, and the
++     * second cpu type before delimiter is assigned to hart 1, and so on.
++     *
++     * If the total number of cpu types is less than s->num_harts, the last
++     * cpu type in s->cpu_type will be used to populate remaining harts.
++     */
 +
-+#if defined(TARGET_RISCV32)
-+#define SIFIVE_E_CPU TYPE_RISCV_CPU_SIFIVE_E31
-+#define SIFIVE_U_CPU TYPE_RISCV_CPU_SIFIVE_U34
-+#elif defined(TARGET_RISCV64)
-+#define SIFIVE_E_CPU TYPE_RISCV_CPU_SIFIVE_E51
-+#define SIFIVE_U_CPU TYPE_RISCV_CPU_SIFIVE_U54
-+#endif
++    first_type = strtok(cpu_types, ",");
++    riscv_hart_realize(s, n++, first_type, errp);
++    tmp_type = strtok(NULL, ",");
++    if (!tmp_type) {
++        /* symmetric harts */
++        for (; n < s->num_harts; n++) {
++            riscv_hart_realize(s, n, first_type, errp);
++       }
++    } else {
++        /* heterogeneous harts */
++        while (tmp_type) {
++            if (n >= s->num_harts) {
++                break;
++            }
++            riscv_hart_realize(s, n++, tmp_type, errp);
++            last_type = tmp_type;
++            tmp_type = strtok(NULL, ",");
++        }
 +
-+#endif /* HW_SIFIVE_CPU_H */
-diff --git a/include/hw/riscv/sifive_e.h b/include/hw/riscv/sifive_e.h
-index d175b24..e17cdfd 100644
---- a/include/hw/riscv/sifive_e.h
-+++ b/include/hw/riscv/sifive_e.h
-@@ -19,6 +19,7 @@
- #ifndef HW_SIFIVE_E_H
- #define HW_SIFIVE_E_H
++        /* populate remaining harts using the last cpu type in s->cpu_type */
++        for (; n < s->num_harts; n++) {
++            riscv_hart_realize(s, n, last_type, errp);
++        }
+     }
++
++    g_free(cpu_types);
+ }
  
-+#include "hw/riscv/sifive_cpu.h"
- #include "hw/riscv/sifive_gpio.h"
- 
- #define TYPE_RISCV_E_SOC "riscv.sifive.e.soc"
-@@ -83,10 +84,4 @@ enum {
- #define SIFIVE_E_PLIC_CONTEXT_BASE 0x200000
- #define SIFIVE_E_PLIC_CONTEXT_STRIDE 0x1000
- 
--#if defined(TARGET_RISCV32)
--#define SIFIVE_E_CPU TYPE_RISCV_CPU_SIFIVE_E31
--#elif defined(TARGET_RISCV64)
--#define SIFIVE_E_CPU TYPE_RISCV_CPU_SIFIVE_E51
--#endif
--
- #endif
-diff --git a/include/hw/riscv/sifive_u.h b/include/hw/riscv/sifive_u.h
-index 892f0ee..4abc621 100644
---- a/include/hw/riscv/sifive_u.h
-+++ b/include/hw/riscv/sifive_u.h
-@@ -20,6 +20,7 @@
- #define HW_SIFIVE_U_H
- 
- #include "hw/net/cadence_gem.h"
-+#include "hw/riscv/sifive_cpu.h"
- 
- #define TYPE_RISCV_U_SOC "riscv.sifive.u.soc"
- #define RISCV_U_SOC(obj) \
-@@ -77,10 +78,4 @@ enum {
- #define SIFIVE_U_PLIC_CONTEXT_BASE 0x200000
- #define SIFIVE_U_PLIC_CONTEXT_STRIDE 0x1000
- 
--#if defined(TARGET_RISCV32)
--#define SIFIVE_U_CPU TYPE_RISCV_CPU_SIFIVE_U34
--#elif defined(TARGET_RISCV64)
--#define SIFIVE_U_CPU TYPE_RISCV_CPU_SIFIVE_U54
--#endif
--
- #endif
+ static void riscv_harts_class_init(ObjectClass *klass, void *data)
 -- 
 2.7.4
 
