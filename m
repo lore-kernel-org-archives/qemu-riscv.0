@@ -1,51 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hwrGb-00033r-Rm
-	for mharc-qemu-riscv@gnu.org; Sun, 11 Aug 2019 13:04:26 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:57876)
+	id 1hwrKS-0005Tu-IQ
+	for mharc-qemu-riscv@gnu.org; Sun, 11 Aug 2019 13:08:24 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58270)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <alistair23@gmail.com>) id 1hwrGY-00031y-Ay
- for qemu-riscv@nongnu.org; Sun, 11 Aug 2019 13:04:23 -0400
+ (envelope-from <alistair23@gmail.com>) id 1hwrKQ-0005Rt-Se
+ for qemu-riscv@nongnu.org; Sun, 11 Aug 2019 13:08:23 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1hwrGV-0000Yy-Rl
- for qemu-riscv@nongnu.org; Sun, 11 Aug 2019 13:04:22 -0400
-Received: from mail-ot1-x341.google.com ([2607:f8b0:4864:20::341]:36380)
+ (envelope-from <alistair23@gmail.com>) id 1hwrKP-0005mD-Vz
+ for qemu-riscv@nongnu.org; Sun, 11 Aug 2019 13:08:22 -0400
+Received: from mail-lf1-x142.google.com ([2a00:1450:4864:20::142]:40759)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1hwrGN-0000N0-HJ; Sun, 11 Aug 2019 13:04:11 -0400
-Received: by mail-ot1-x341.google.com with SMTP id k18so18848766otr.3;
- Sun, 11 Aug 2019 10:04:11 -0700 (PDT)
+ id 1hwrKN-0005iV-RT; Sun, 11 Aug 2019 13:08:20 -0400
+Received: by mail-lf1-x142.google.com with SMTP id b17so72773867lff.7;
+ Sun, 11 Aug 2019 10:08:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=zzHT6qv1dYLP1m5ri+3nIqCxqiuteq20GShCXqtxsOc=;
- b=glaipJGjBCy7bezDw3+WQa8Nx45PAI5tnJQmXwTbJR9NygSoTYYsa8PB37+NpXazrr
- /E7mPbv52EXEi2Ft/1DTqEpHsbjSu4r14zzHqN4i3zt9TZS2jtsDE3LlTjcw/7cIDfAP
- pfH83d5lAJWVpgBA1MV3efslPqKpe8yWLMsF9+PlO83iA6bzp+n+DO/zJoaUsfo0OkR2
- jlEBl8gLdWgimVphcUx+6d12vBz6E0brmR3fF/1/WnYFTkBQgKNT73+Lje1h2PJZIfDV
- Ero1X7VpHyJvveATyS2Yh+/ki6pEYhWzbbtMEtrqyrf0i5diZ/lrn+SA2GXS6+7x5n5H
- 5smQ==
+ :cc; bh=brBf7CwPavz+UTj6xgQHLByXzGEee1PGsqzsLyfKuF8=;
+ b=MJR6tagrle5yufZCLqS9mM+LA53Qv5OcX0B+vBMKU1HyFnRUwUi9EB3CZfJesxgX5u
+ MyTKMPyW78oGigJEZ3pZm5r5E2uTBNKGV7Z6uIuvKE6gJN/rKAak5lYpU3otbMGfHTyX
+ 6x106VZBsI3jymwwCfYrFHNzEI5wCFAWE7yLZ19+cBg7FXZHAm6M4VNSJgR/DELXcriQ
+ kXhcbpDAEq2JdIUPiswEzbNYcRMtHe7mLZ+k3Yaz3joPWnjpG4I5UQAk/t2Qnl0288Yl
+ NdYYWYEQySzq7pUVvICmlTeGLoIUd7ZgRgMzcB+ysQu3DikKR2uigZYOH1yk/BMZshFi
+ t2SQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=zzHT6qv1dYLP1m5ri+3nIqCxqiuteq20GShCXqtxsOc=;
- b=Jz/ndfY4BHXApDWUUp35WEO2hw64Aij42i+FASgmxNF4ZwLCxXDtXUSL5zaw8+B/Bx
- vti6rBg5FgTp1ANP6ClwqM5Fhwps/Ikgz/nEf8lmo37krHnGNvN0I2BCkw80mXwcBpLQ
- pqZgmgd8A0+U4xm0AVstJmqLZdLiSa46BqyZnA6zH58P80qqZzagaulcJ4Iu0XQLPAPE
- vFBSOp0BTEEMNXTBHrvA+1Bt3Jm4bcgKvy983tH8BK6YWN4HZAePjJk1l6eihsB511xM
- 8/xoKp4jJSLHA0o8dOToxQ9wpLHFLFuxxiK+tpteHwaECFmXy0FWW5lbdPEMRgaeo4ip
- iJBw==
-X-Gm-Message-State: APjAAAVs81PiAt7G+RlPVANjtuQDqVM/l2zTXprDLYdKZ/HQQ7TmmID+
- 2iZU527UNdP//1y/Vxqzd6P/L8BEzsfYLYNQYPY=
-X-Google-Smtp-Source: APXvYqy2zO4pvaxGtODELd6+wgJYFFgWmhhZsmYd5hErHsyiBGWsNVo0ukhDgUhBgZV2ZBxW4JYyrQuTudqK0beT2vM=
-X-Received: by 2002:a02:942c:: with SMTP id a41mr16452029jai.92.1565543050896; 
- Sun, 11 Aug 2019 10:04:10 -0700 (PDT)
+ bh=brBf7CwPavz+UTj6xgQHLByXzGEee1PGsqzsLyfKuF8=;
+ b=QWiWfzusnCIKqLbP5dcp6vS1RcQfq8wplv3s1aoMDDyPUGeARlf7LIUlYjP46r96Mt
+ QazAww1u+I6vNYupQ5U/Puf2dzaJX2msJp8OnLsJZ1qbeMLD0nkMiN3nDXt6v8oBmq/u
+ P+HWkI9tOEDHxVBk50F0QucJcf8cXx8R/u9sowWe/nl0DwlPfqlUzRLrztEwE4LR3Hwk
+ gy0w26Rt1z+Q4TRX3rYtv5RUxPQItOVZz41xjMRmNAKYTydjH8iUOdD+V0C5cj5YmsPm
+ DioFk+YH56T0WurPC/OhMC4GzTbrGUYg+W3enQHaNR7YnV1Z/KtjIRfWT9pmO6/E2tvZ
+ de2g==
+X-Gm-Message-State: APjAAAUjMB+71y416Uz7VkemFIL2E1BobsYQukhVDnzcfPTbMEhrCOqp
+ HwpY0IrCpGwZ5M0y2A5MMh2+iXt2evwPO4pp/ug=
+X-Google-Smtp-Source: APXvYqyK0fNXCaepeybt+n0cfnM0/NFtEe3y/NEr82aH0VWRFCou62HVCI632M+ONwPEDHutFAQ1OeY1MYkf4wQ3iuI=
+X-Received: by 2002:ac2:5ec3:: with SMTP id d3mr17542449lfq.44.1565543298558; 
+ Sun, 11 Aug 2019 10:08:18 -0700 (PDT)
 MIME-Version: 1.0
 References: <1565510821-3927-1-git-send-email-bmeng.cn@gmail.com>
- <1565510821-3927-8-git-send-email-bmeng.cn@gmail.com>
-In-Reply-To: <1565510821-3927-8-git-send-email-bmeng.cn@gmail.com>
+ <1565510821-3927-14-git-send-email-bmeng.cn@gmail.com>
+In-Reply-To: <1565510821-3927-14-git-send-email-bmeng.cn@gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Sun, 11 Aug 2019 10:03:43 -0700
-Message-ID: <CAKmqyKO3=wOjrGzY-bXJ+Lkx9Hg6X063Fb6HPyp8NDJ=nOQ8Wg@mail.gmail.com>
+Date: Sun, 11 Aug 2019 10:07:50 -0700
+Message-ID: <CAKmqyKMNzQDZ_MU17FW1OFHOGKzFq6TdEaQ6rDyn5swQR+UBpw@mail.gmail.com>
 To: Bin Meng <bmeng.cn@gmail.com>
 Cc: Alistair Francis <Alistair.Francis@wdc.com>,
  Palmer Dabbelt <palmer@sifive.com>, 
@@ -54,9 +54,9 @@ Cc: Alistair Francis <Alistair.Francis@wdc.com>,
 Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::341
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v3 07/28] riscv: sifive_u: Set
- the minimum number of cpus to 2
+X-Received-From: 2a00:1450:4864:20::142
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v3 13/28] riscv: sifive_e:
+ prci: Update the PRCI register block size
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -68,53 +68,55 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 11 Aug 2019 17:04:23 -0000
+X-List-Received-Date: Sun, 11 Aug 2019 17:08:23 -0000
 
-On Sun, Aug 11, 2019 at 1:08 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+On Sun, Aug 11, 2019 at 1:11 AM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
-> It is not useful if we only have one management CPU.
+> Currently the PRCI register block size is set to 0x8000, but in fact
+> 0x1000 is enough, which is also what the manual says.
 >
 > Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
+> Reviewed-by: Chih-Min Chao <chihmin.chao@sifive.com>
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
->
 > ---
 >
-> Changes in v3:
-> - use management cpu count + 1 for the min_cpus
+> Changes in v3: None
+> Changes in v2: None
 >
-> Changes in v2:
-> - update the file header to indicate at least 2 harts are created
+>  hw/riscv/sifive_e_prci.c         | 2 +-
+>  include/hw/riscv/sifive_e_prci.h | 2 ++
+>  2 files changed, 3 insertions(+), 1 deletion(-)
 >
->  hw/riscv/sifive_u.c | 5 +++--
->  1 file changed, 3 insertions(+), 2 deletions(-)
+> diff --git a/hw/riscv/sifive_e_prci.c b/hw/riscv/sifive_e_prci.c
+> index c906f11..4cbce48 100644
+> --- a/hw/riscv/sifive_e_prci.c
+> +++ b/hw/riscv/sifive_e_prci.c
+> @@ -85,7 +85,7 @@ static void sifive_prci_init(Object *obj)
+>      SiFivePRCIState *s = SIFIVE_E_PRCI(obj);
 >
-> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-> index 295ca77..f8ffc0b 100644
-> --- a/hw/riscv/sifive_u.c
-> +++ b/hw/riscv/sifive_u.c
-> @@ -10,8 +10,8 @@
->   * 1) CLINT (Core Level Interruptor)
->   * 2) PLIC (Platform Level Interrupt Controller)
->   *
-> - * This board currently generates devicetree dynamically that indicates at most
-> - * five harts.
-> + * This board currently generates devicetree dynamically that indicates at least
-> + * two harts and up to five harts.
->   *
->   * This program is free software; you can redistribute it and/or modify it
->   * under the terms and conditions of the GNU General Public License,
-> @@ -425,6 +425,7 @@ static void riscv_sifive_u_machine_init(MachineClass *mc)
->      mc->desc = "RISC-V Board compatible with SiFive U SDK";
->      mc->init = riscv_sifive_u_init;
->      mc->max_cpus = SIFIVE_U_MANAGEMENT_CPU_COUNT + SIFIVE_U_COMPUTE_CPU_COUNT;
-> +    mc->min_cpus = SIFIVE_U_MANAGEMENT_CPU_COUNT + 1;
->  }
+>      memory_region_init_io(&s->mmio, obj, &sifive_prci_ops, s,
+> -                          TYPE_SIFIVE_E_PRCI, 0x8000);
+> +                          TYPE_SIFIVE_E_PRCI, SIFIVE_E_PRCI_REG_SIZE);
+>      sysbus_init_mmio(SYS_BUS_DEVICE(obj), &s->mmio);
 >
->  DEFINE_MACHINE("sifive_u", riscv_sifive_u_machine_init)
+>      s->hfrosccfg = (SIFIVE_PRCI_HFROSCCFG_RDY | SIFIVE_PRCI_HFROSCCFG_EN);
+> diff --git a/include/hw/riscv/sifive_e_prci.h b/include/hw/riscv/sifive_e_prci.h
+> index 7932fe7..81e506b 100644
+> --- a/include/hw/riscv/sifive_e_prci.h
+> +++ b/include/hw/riscv/sifive_e_prci.h
+> @@ -47,6 +47,8 @@ enum {
+>      SIFIVE_PRCI_PLLOUTDIV_DIV1  = (1 << 8)
+>  };
+>
+> +#define SIFIVE_E_PRCI_REG_SIZE  0x1000
+> +
+>  #define TYPE_SIFIVE_E_PRCI      "riscv.sifive.e.prci"
+>
+>  #define SIFIVE_E_PRCI(obj) \
 > --
 > 2.7.4
 >
