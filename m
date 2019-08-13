@@ -1,56 +1,77 @@
 Received: from list by lists.gnu.org with archive (Exim 4.86_2)
-	id 1hxJQE-0003oX-58
-	for mharc-qemu-riscv@gnu.org; Mon, 12 Aug 2019 19:08:14 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:57720)
+	id 1hxWMQ-0005dx-Qi
+	for mharc-qemu-riscv@gnu.org; Tue, 13 Aug 2019 08:57:13 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:54994)
  by lists.gnu.org with esmtp (Exim 4.86_2)
- (envelope-from <palmer@dabbelt.com>) id 1hxJQC-0003mT-08
- for qemu-riscv@nongnu.org; Mon, 12 Aug 2019 19:08:12 -0400
+ (envelope-from <alex.bennee@linaro.org>) id 1hxWMK-0005bb-Fg
+ for qemu-riscv@nongnu.org; Tue, 13 Aug 2019 08:57:06 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmer@dabbelt.com>) id 1hxJQB-0006n4-2T
- for qemu-riscv@nongnu.org; Mon, 12 Aug 2019 19:08:11 -0400
-Received: from mail-pg1-f195.google.com ([209.85.215.195]:42964)
+ (envelope-from <alex.bennee@linaro.org>) id 1hxWMI-0006NF-Ha
+ for qemu-riscv@nongnu.org; Tue, 13 Aug 2019 08:57:04 -0400
+Received: from mail-wm1-x343.google.com ([2a00:1450:4864:20::343]:35094)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1hxJQA-0006md-TG
- for qemu-riscv@nongnu.org; Mon, 12 Aug 2019 19:08:11 -0400
-Received: by mail-pg1-f195.google.com with SMTP id t132so50224268pgb.9
- for <qemu-riscv@nongnu.org>; Mon, 12 Aug 2019 16:08:10 -0700 (PDT)
+ (Exim 4.71) (envelope-from <alex.bennee@linaro.org>)
+ id 1hxWMH-0006Ll-Rk
+ for qemu-riscv@nongnu.org; Tue, 13 Aug 2019 08:57:02 -0400
+Received: by mail-wm1-x343.google.com with SMTP id l2so1367115wmg.0
+ for <qemu-riscv@nongnu.org>; Tue, 13 Aug 2019 05:57:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding;
+ bh=NhU5Jn6aRhUkVeAxdLRNRjvBS88J8AMxyLyTZHIDgUs=;
+ b=y34tfAgMEXrAcjHKNjsPdgKQTfH4+EMkXrl+0P4gcDAmKfiXmOEcpIcehyAwQiPxp/
+ WuWKU7QdLHUMGPAPruPWDyjNcmkDFubxKNhV3Tfug6SccpAEgZ2Cub3lCkKagPkTkBDE
+ Oak67/25MeG626YoiU5eV93gat2u6JVg6RsyShIAHxSTQYIs72BRdRQ5zMH59SQyFVKA
+ Y2U1gLfUW1KAhZYFBxrVR+l3EFUSk9mKGRBuNP5YV8K7i4wD8Xs185hCQ3lpgNwfQ48C
+ D7js1P9qjLGmwyEUD3h/t/TAdPlRuVnfIcM4szBqjCBC/wwe1+B/QAbfnF6N5991mxER
+ 2g9g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
- :mime-version:content-transfer-encoding;
- bh=CEVg8P/y/l75HYO+60lvfORIzDf3u4MzaH+NYW8MspE=;
- b=YhbBOYX48VhljGbkhkWnrn/S3QHlS07odSJPdWxJDc0GDJ5A1ZoBpzTNnUvYB6ANcM
- eta/g/JYVKM8kwErmGWwaHiKyy7xxDeyIsh302lLIG1VKjkevMHfKnx/d1plwzSbD9S/
- d5nAIYO6gtx3ZngqPoCXMbGqDbM1qoeEwCAyblJ76dIkgWKQkhVvOA0I1DtiuVqnCOX9
- MHSyy0XWTgjFSe2Hwwc9FqTSpw1RoKaS3IIxgGKxLmfoArAykaaiDj2X/kHv0XA/DkZJ
- CzmAdv/o56k59Py7+5ox5beIZCCvCqNc2swVx0/2cWl+NHu0ZFnnRfMbNBJVlrUS5S2w
- aWig==
-X-Gm-Message-State: APjAAAUv4qJxLH0mQIAq7uWRPCN5idAtQ2Ml3uCEwFvuBZfNQWKLP9gR
- YifqNgv941NgJ1iCYXTLyOor7Q==
-X-Google-Smtp-Source: APXvYqxz2C4HuF7ebCtXTTfXmwP3ut48yCC011DyS/9wDVjSdRpL6zbi27G4aENOHUZnaM7KRwcEiA==
-X-Received: by 2002:a63:66c5:: with SMTP id
- a188mr31986453pgc.127.1565651289390; 
- Mon, 12 Aug 2019 16:08:09 -0700 (PDT)
-Received: from localhost ([12.206.222.5])
- by smtp.gmail.com with ESMTPSA id q126sm68632894pfb.56.2019.08.12.16.08.07
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=NhU5Jn6aRhUkVeAxdLRNRjvBS88J8AMxyLyTZHIDgUs=;
+ b=sopPs0wO9XPpbd+HnZN48cRwfhQKt4p4l2pAWac5wOpqj2Y5jh/zjHABtpLMgJIc2a
+ MsBbbolsH3IrO8Xr+wOz9qTzVke30k/k/9N6N051f3CvmDvRp/fVvqG4ACcUAwilhEaq
+ kB9tHyhlo9QfXhzOOhYxXJj49mzheXAmTzaXtPa6LWH/n82QNdpYuCsA5/nqPCA0CElS
+ pUN+wgMpqFgfCRvSmjrziCiknMDeIFzozO6qXHqMYdX5Km0sh/B7TuNOHP8rz1pbcYlR
+ Kl22XVYcWoKL/ABMzv5UTa4ea6FNvQxa2q6NIlRcH4ZTe8fyPGWaZVPzrVbO8JTL73EZ
+ ZHew==
+X-Gm-Message-State: APjAAAW55JgIUgkMWilavYrt8tBzcGVsHfAKUGH3mcHPN3JZixIV1ESv
+ sfSKtl754Eqc8RBqvJD6TVFDhQ==
+X-Google-Smtp-Source: APXvYqwmAf6c6Jqe1j2TM6xrZp3G0tCkAl3u7jBxvAlDJcddN0VIeRSucCSg7gcV+RhflhVmEgLOiw==
+X-Received: by 2002:a05:600c:207:: with SMTP id
+ 7mr2950991wmi.146.1565701019569; 
+ Tue, 13 Aug 2019 05:56:59 -0700 (PDT)
+Received: from zen.linaroharston ([81.128.185.34])
+ by smtp.gmail.com with ESMTPSA id j15sm8296188wrn.70.2019.08.13.05.56.58
  (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
- Mon, 12 Aug 2019 16:08:08 -0700 (PDT)
-Date: Mon, 12 Aug 2019 16:08:08 -0700 (PDT)
-X-Google-Original-Date: Mon, 12 Aug 2019 16:07:47 PDT (-0700)
-In-Reply-To: <4dad98dcc3b6a3f3a5097922494b0521c60570c7.1564529681.git.alistair.francis@wdc.com>
-CC: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- Alistair Francis <Alistair.Francis@wdc.com>, alistair23@gmail.com
-From: Palmer Dabbelt <palmer@sifive.com>
-To: Alistair Francis <Alistair.Francis@wdc.com>
-Message-ID: <mhng-41c1b372-8997-4180-b5d1-61625070690b@palmer-si-x1e>
-Mime-Version: 1.0 (MHng)
-Content-Type: text/plain; charset=utf-8; format=flowed
+ Tue, 13 Aug 2019 05:56:59 -0700 (PDT)
+Received: from zen.linaroharston. (localhost [127.0.0.1])
+ by zen.linaroharston (Postfix) with ESMTP id 067901FF9B;
+ Tue, 13 Aug 2019 13:49:48 +0100 (BST)
+From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: armbru@redhat.com, =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Palmer Dabbelt <palmer@sifive.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
+Date: Tue, 13 Aug 2019 13:49:45 +0100
+Message-Id: <20190813124946.25322-13-alex.bennee@linaro.org>
+X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20190813124946.25322-1-alex.bennee@linaro.org>
+References: <20190813124946.25322-1-alex.bennee@linaro.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
- [fuzzy]
-X-Received-From: 209.85.215.195
-Subject: Re: [Qemu-riscv] [PATCH-4.2 v2 5/5] target/riscv: Fix Floating
- Point register names
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2a00:1450:4864:20::343
+Subject: [Qemu-riscv] [PATCH v3 12/13] target/riscv: rationalise softfloat
+ includes
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -62,43 +83,60 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Aug 2019 23:08:13 -0000
+X-List-Received-Date: Tue, 13 Aug 2019 12:57:06 -0000
 
-On Tue, 30 Jul 2019 16:35:34 PDT (-0700), Alistair Francis wrote:
-> From: Atish Patra <atish.patra@wdc.com>
->
-> As per the RISC-V spec, Floating Point registers are named as f0..f31
-> so lets fix the register names accordingly.
->
-> Signed-off-by: Atish Patra <atish.patra@wdc.com>
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> ---
->  target/riscv/cpu.c | 8 ++++----
->  1 file changed, 4 insertions(+), 4 deletions(-)
->
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index f8d07bd20a..af1e9b7690 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -40,10 +40,10 @@ const char * const riscv_int_regnames[] = {
->  };
->
->  const char * const riscv_fpr_regnames[] = {
-> -  "ft0", "ft1", "ft2",  "ft3",  "ft4", "ft5", "ft6",  "ft7",
-> -  "fs0", "fs1", "fa0",  "fa1",  "fa2", "fa3", "fa4",  "fa5",
-> -  "fa6", "fa7", "fs2",  "fs3",  "fs4", "fs5", "fs6",  "fs7",
-> -  "fs8", "fs9", "fs10", "fs11", "ft8", "ft9", "ft10", "ft11"
-> +  "f0", "f1", "f2",  "f3",  "f4", "f5", "f6", "f7",
-> +  "f8", "f9", "f10",  "f11",  "f12", "f13", "f14", "f15",
-> +  "f16", "f17", "f18",  "f19",  "f20", "f21", "f22", "f23",
-> +  "f24", "f25", "f26", "f27", "f28", "f29", "f30", "f31"
->  };
->
->  const char * const riscv_excp_names[] = {
+We should avoid including the whole of softfloat headers in cpu.h and
+explicitly include it only where we will be calling softfloat
+functions. We can use the -types.h and -helpers.h in cpu.h for the few
+bits that are global.
 
-I actually don't think this one is right: riscv_int_regnames uses the ABI 
-names, so this should match.  I'd be OK switching both of them, but not just 
-one.
+Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+---
+ target/riscv/cpu.c        | 1 +
+ target/riscv/cpu.h        | 2 +-
+ target/riscv/fpu_helper.c | 1 +
+ 3 files changed, 3 insertions(+), 1 deletion(-)
 
-I've queued the other four patches.
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index f8d07bd20ad..6d52f97d7c3 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -27,6 +27,7 @@
+ #include "qemu/error-report.h"
+ #include "hw/qdev-properties.h"
+ #include "migration/vmstate.h"
++#include "fpu/softfloat-helpers.h"
+ 
+ /* RISC-V CPU definitions */
+ 
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 0adb307f329..240b31e2ebb 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -22,7 +22,7 @@
+ 
+ #include "qom/cpu.h"
+ #include "exec/cpu-defs.h"
+-#include "fpu/softfloat.h"
++#include "fpu/softfloat-types.h"
+ 
+ #define TCG_GUEST_DEFAULT_MO 0
+ 
+diff --git a/target/riscv/fpu_helper.c b/target/riscv/fpu_helper.c
+index b4f818a6465..0b79562a690 100644
+--- a/target/riscv/fpu_helper.c
++++ b/target/riscv/fpu_helper.c
+@@ -21,6 +21,7 @@
+ #include "qemu/host-utils.h"
+ #include "exec/exec-all.h"
+ #include "exec/helper-proto.h"
++#include "fpu/softfloat.h"
+ 
+ target_ulong riscv_cpu_get_fflags(CPURISCVState *env)
+ {
+-- 
+2.20.1
+
 
