@@ -1,61 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1hxvJg-0000p5-IA
-	for mharc-qemu-riscv@gnu.org; Wed, 14 Aug 2019 11:36:00 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42151)
+	id 1hxwjY-000686-H9
+	for mharc-qemu-riscv@gnu.org; Wed, 14 Aug 2019 13:06:48 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59334)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <bmeng.cn@gmail.com>) id 1hxvJc-0000lp-W6
- for qemu-riscv@nongnu.org; Wed, 14 Aug 2019 11:35:58 -0400
+ (envelope-from <palmer@sifive.com>) id 1hxwjV-00065G-KF
+ for qemu-riscv@nongnu.org; Wed, 14 Aug 2019 13:06:46 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <bmeng.cn@gmail.com>) id 1hxvJb-0006WA-8f
- for qemu-riscv@nongnu.org; Wed, 14 Aug 2019 11:35:56 -0400
-Received: from mail-ed1-x543.google.com ([2a00:1450:4864:20::543]:39643)
+ (envelope-from <palmer@sifive.com>) id 1hxwjS-0007cm-3i
+ for qemu-riscv@nongnu.org; Wed, 14 Aug 2019 13:06:45 -0400
+Received: from mail-pg1-x544.google.com ([2607:f8b0:4864:20::544]:39271)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
- id 1hxvJX-0006Uj-7P; Wed, 14 Aug 2019 11:35:51 -0400
-Received: by mail-ed1-x543.google.com with SMTP id g8so1235170edm.6;
- Wed, 14 Aug 2019 08:35:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=pS8sAqo4CXEt+MPxi+ManSNHUD69rQ7BWAECXMGINd8=;
- b=nT5agxux3zn3SlZPEzj4NbkDd9tG2emvd1ch+tsWgW55qB2L6hG2tFAF2Kk5lfZ1Mr
- LDjIzFAWrJnpcfnq/OLwU/iF2aNazfoCeDmZGMtq8HUb1cG9sxnx5aoJ+pMTzMq9NNsf
- YbXBm8YD3Tm/1kQZG9E9ruxm12rcgSs0L68er5Pl9Xo3z7IITunLS4+p6HlTI5UixKL7
- P0EVHMAYVklqP74mh9+f6V4wmPXgx3YNF77VXctjv88Xd+b/gxaJb5w0ObKE9bZUQV66
- w9fv8qchU9SBcYPSJGSP6X01HBNR0CUNzRUirVJuNEfd5Hqsitm1OM1FyTTS6PUdZ+yU
- nhhg==
+ (Exim 4.71) (envelope-from <palmer@sifive.com>) id 1hxwjR-0007bp-TP
+ for qemu-riscv@nongnu.org; Wed, 14 Aug 2019 13:06:42 -0400
+Received: by mail-pg1-x544.google.com with SMTP id u17so53387296pgi.6
+ for <qemu-riscv@nongnu.org>; Wed, 14 Aug 2019 10:06:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+ h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
+ :content-transfer-encoding;
+ bh=PEBEqNJnBX2a01paAgfoN/R9hhRL6hRf2pblNogkX80=;
+ b=G2RaldHSi07fZ6oNUvM9xz9oDne6epapEe/8e0c5+qUFO9SXuHJtchzJ/U5P2adS+G
+ U/Hwk9Rx4vHuKs/MToTuTj7KV/10938JYtbQ3RZSQQhO3gq+CNIxtIWjejzYG/6D8/xs
+ T0iXRQojwaoUhfs4KCVei53A0j+GDKsGL/34btA1aj7ZOnqB90rT+mYefNvX0HegJSNh
+ CLi7DmDrli7a7y886NfNWj3RBUgwSb9C3uV3NUtbIMfHrKpywJO9dyYWAMDpKD79Qkuc
+ 0DGx0961RM1tYqU6nzqfTtRyJNyXVaQlbySwKgk+wa2+K7ddoRih7eiUPqvlluje3sJX
+ 05IA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=pS8sAqo4CXEt+MPxi+ManSNHUD69rQ7BWAECXMGINd8=;
- b=mGbtnGsBUQ2P5YwcJio/f/O6894krIZ24hHmRqb/RfUEmfUKMaI4XfrpGtHTOpc+EP
- +lgEk/X23a89RuoANte1UjItxs+YRGzgYr/eYFCiHNJ7twv3efnHlLtAE+WXiJptsOT+
- P4m5C9Y0QE+x8/AF6VK1DZuG/ltAJUSgZmPYjC95EA29QZGzHbUPmidxCrtYAfzbMM7k
- WputvHf94zpxHbhSfkV2QwdN6zKPgD4+kUlSFVMo9dHn4ri5SNd3gO0ejSRsIwW37/rz
- dlXxytVx3d8+4RCsHFSDVp2yrE4fLLv6kBUv7IDCU7wkCq7cWXMKlYRairzYrAFFJw6Y
- 2dkg==
-X-Gm-Message-State: APjAAAV6tBaOhdV048n1lMEjfashPTJ4LRAgob4kQ0MJBqB1rEq4KbiG
- G7Ek+YaMSO9m9r7F84MqnnceDDgWd0aUMBMDNbySw+fv
-X-Google-Smtp-Source: APXvYqyl2EmcgvULCbkOFcxUpfL5py3UNJDIkW28Rat4p+d1dSDeqzMiwjFRW9fHsbHbfC18rpZhg2GsVsl785Nd1o8=
-X-Received: by 2002:a50:fb82:: with SMTP id e2mr192665edq.15.1565796950022;
- Wed, 14 Aug 2019 08:35:50 -0700 (PDT)
-MIME-Version: 1.0
-References: <1564577355-29273-1-git-send-email-bmeng.cn@gmail.com>
- <mhng-b5a2e14d-7a56-46ab-aaa2-96123b44c56b@palmer-si-x1e>
- <CAEUhbmXX1CzF7dWiSye7Qh+H=Zbp4uk3UKEx0iyjHEyDEoYfQQ@mail.gmail.com>
-In-Reply-To: <CAEUhbmXX1CzF7dWiSye7Qh+H=Zbp4uk3UKEx0iyjHEyDEoYfQQ@mail.gmail.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Wed, 14 Aug 2019 23:35:38 +0800
-Message-ID: <CAEUhbmXWm9+yRk_2rLJDL1G93dLwVr-DnE8o27GQn9VPknYOCw@mail.gmail.com>
-To: Palmer Dabbelt <palmer@sifive.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
+ h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
+ :mime-version:content-transfer-encoding;
+ bh=PEBEqNJnBX2a01paAgfoN/R9hhRL6hRf2pblNogkX80=;
+ b=BY2pzTqtB8MmH8l0iiEdlLVTfTM6TmWQpGwbTMXEkI9/HQBjfUgg+3XiWjzB8BLGzE
+ 3kpspUnYYNS6EaVAcpKPsJ2IeIxcvWCzIftCBqvHRvVaxM9+huD1FqtOsJZmDwZgMOop
+ MGs9ytghWqn9unSl0V/BwKpypfLns5E222PqF5ufeGCEjV3HGsK62QKy4CYr+swdmFVq
+ T9gW3kzBY9uRn/U+m0/k1khDtKMhx7mqFS+71qNDlQjD1+7YKIScFJzWbmlmF9qdy+HF
+ 0xgUTlPcoiarrfeGFwYHqtl6pMrpxvQrXDtz10BN7NT7Z4jKZtWuRLfiIomyaSXmRy5e
+ c3ZQ==
+X-Gm-Message-State: APjAAAUt0Aqo717MKF2STs7vPRBvwUA9Ql74Bo9lLNpLwTo2V1JFn2ef
+ Couj5cCaEfgcvUlIJ7hnEfMpvA==
+X-Google-Smtp-Source: APXvYqwX+4db6GbAZ3+iCPsjC3ixInEzut7LemFdJVBE8vQ+AxfUh/qU0eRqfQxV6SQpUZ68lVimTw==
+X-Received: by 2002:a65:6108:: with SMTP id z8mr151734pgu.289.1565802399873;
+ Wed, 14 Aug 2019 10:06:39 -0700 (PDT)
+Received: from localhost ([12.206.222.5])
+ by smtp.gmail.com with ESMTPSA id n7sm353495pff.59.2019.08.14.10.06.38
+ (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+ Wed, 14 Aug 2019 10:06:39 -0700 (PDT)
+Date: Wed, 14 Aug 2019 10:06:39 -0700 (PDT)
+X-Google-Original-Date: Wed, 14 Aug 2019 10:03:21 PDT (-0700)
+In-Reply-To: <CAEUhbmU8s5cEt4J-ae0wqfgFHEWe=YWQaDn_Au_MhtK1J7OntA@mail.gmail.com>
+CC: linux@roeck-us.net, qemu-riscv@nongnu.org, sagark@eecs.berkeley.edu,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, qemu-devel@nongnu.org,
+ Alistair Francis <Alistair.Francis@wdc.com>
+From: Palmer Dabbelt <palmer@sifive.com>
+To: bmeng.cn@gmail.com
+Message-ID: <mhng-b7d8bc3c-3d03-4b2a-910f-8a9ceb18a046@palmer-si-x1c4>
+Mime-Version: 1.0 (MHng)
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::543
-Subject: Re: [Qemu-riscv] [PATCH] riscv: hmp: Add a command to show virtual
- memory mappings
+X-Received-From: 2607:f8b0:4864:20::544
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH 1/3] riscv: sifive_u: Add
+ support for loading initrd
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -67,306 +72,86 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Aug 2019 15:35:59 -0000
+X-List-Received-Date: Wed, 14 Aug 2019 17:06:47 -0000
 
-Hi Palmer,
-
-On Wed, Aug 14, 2019 at 9:35 AM Bin Meng <bmeng.cn@gmail.com> wrote:
->
+On Mon, 12 Aug 2019 16:48:00 PDT (-0700), bmeng.cn@gmail.com wrote:
 > Hi Palmer,
 >
-> On Tue, Aug 13, 2019 at 11:18 PM Palmer Dabbelt <palmer@sifive.com> wrote:
-> >
-> > On Wed, 31 Jul 2019 05:49:15 PDT (-0700), bmeng.cn@gmail.com wrote:
-> > > This adds 'info mem' command for RISC-V, to show virtual memory
-> > > mappings that aids debugging.
-> > >
-> > > Rather than showing every valid PTE, the command compacts the
-> > > output by merging all contiguous physical address mappings into
-> > > one block and only shows the merged block mapping details.
-> > >
-> > > Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
-> > > ---
-> > >
-> > >  hmp-commands-info.hx       |   2 +-
-> > >  target/riscv/Makefile.objs |   4 +
-> > >  target/riscv/monitor.c     | 227 +++++++++++++++++++++++++++++++++++++++++++++
-> > >  3 files changed, 232 insertions(+), 1 deletion(-)
-> > >  create mode 100644 target/riscv/monitor.c
-> > >
-> > > diff --git a/hmp-commands-info.hx b/hmp-commands-info.hx
-> > > index c59444c..257ee7d 100644
-> > > --- a/hmp-commands-info.hx
-> > > +++ b/hmp-commands-info.hx
-> > > @@ -249,7 +249,7 @@ STEXI
-> > >  Show virtual to physical memory mappings.
-> > >  ETEXI
-> > >
-> > > -#if defined(TARGET_I386)
-> > > +#if defined(TARGET_I386) || defined(TARGET_RISCV)
-> > >      {
-> > >          .name       = "mem",
-> > >          .args_type  = "",
-> > > diff --git a/target/riscv/Makefile.objs b/target/riscv/Makefile.objs
-> > > index b1c79bc..a8ceccd 100644
-> > > --- a/target/riscv/Makefile.objs
-> > > +++ b/target/riscv/Makefile.objs
-> > > @@ -1,5 +1,9 @@
-> > >  obj-y += translate.o op_helper.o cpu_helper.o cpu.o csr.o fpu_helper.o gdbstub.o pmp.o
-> > >
-> > > +ifeq ($(CONFIG_SOFTMMU),y)
-> > > +obj-y += monitor.o
-> > > +endif
-> > > +
-> > >  DECODETREE = $(SRC_PATH)/scripts/decodetree.py
-> > >
-> > >  decode32-y = $(SRC_PATH)/target/riscv/insn32.decode
-> > > diff --git a/target/riscv/monitor.c b/target/riscv/monitor.c
-> > > new file mode 100644
-> > > index 0000000..30560ff
-> > > --- /dev/null
-> > > +++ b/target/riscv/monitor.c
-> > > @@ -0,0 +1,227 @@
-> > > +/*
-> > > + * QEMU monitor for RISC-V
-> > > + *
-> > > + * Copyright (c) 2019 Bin Meng <bmeng.cn@gmail.com>
-> > > + *
-> > > + * RISC-V specific monitor commands implementation
-> > > + *
-> > > + * This program is free software; you can redistribute it and/or modify it
-> > > + * under the terms and conditions of the GNU General Public License,
-> > > + * version 2 or later, as published by the Free Software Foundation.
-> > > + *
-> > > + * This program is distributed in the hope it will be useful, but WITHOUT
-> > > + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-> > > + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-> > > + * more details.
-> > > + *
-> > > + * You should have received a copy of the GNU General Public License along with
-> > > + * this program.  If not, see <http://www.gnu.org/licenses/>.
-> > > + */
-> > > +
-> > > +#include "qemu/osdep.h"
-> > > +#include "cpu.h"
-> > > +#include "cpu_bits.h"
-> > > +#include "monitor/monitor.h"
-> > > +#include "monitor/hmp-target.h"
-> > > +
-> > > +#ifdef TARGET_RISCV64
-> > > +#define PTE_HEADER_FIELDS       "vaddr            paddr            "\
-> > > +                                "size             attr\n"
-> > > +#define PTE_HEADER_DELIMITER    "---------------- ---------------- "\
-> > > +                                "---------------- -------\n"
-> > > +#else
-> > > +#define PTE_HEADER_FIELDS       "vaddr    paddr            size     attr\n"
-> > > +#define PTE_HEADER_DELIMITER    "-------- ---------------- -------- -------\n"
-> > > +#endif
-> > > +
-> > > +/* Perform linear address sign extension */
-> > > +static target_ulong addr_canonical(int va_bits, target_ulong addr)
-> > > +{
-> > > +#ifdef TARGET_RISCV64
-> > > +    if (addr & (1UL << (va_bits - 1))) {
-> > > +        addr |= (hwaddr)-(1L << va_bits);
-> > > +    }
-> > > +#endif
-> > > +
-> > > +    return addr;
-> > > +}
-> > > +
-> > > +static void print_pte_header(Monitor *mon)
-> > > +{
-> > > +    monitor_printf(mon, PTE_HEADER_FIELDS);
-> > > +    monitor_printf(mon, PTE_HEADER_DELIMITER);
-> > > +}
-> > > +
-> > > +static void print_pte(Monitor *mon, int va_bits, target_ulong vaddr,
-> > > +                      hwaddr paddr, target_ulong size, int attr)
-> > > +{
-> > > +    /* santity check on vaddr */
-> > > +    if (vaddr >= (1UL << va_bits)) {
-> > > +        return;
-> > > +    }
-> > > +
-> > > +    if (!size) {
-> > > +        return;
-> > > +    }
-> > > +
-> > > +    monitor_printf(mon, TARGET_FMT_lx " " TARGET_FMT_plx " " TARGET_FMT_lx
-> > > +                   " %c%c%c%c%c%c%c\n",
-> > > +                   addr_canonical(va_bits, vaddr),
-> > > +                   paddr, size,
-> > > +                   attr & PTE_R ? 'r' : '-',
-> > > +                   attr & PTE_W ? 'w' : '-',
-> > > +                   attr & PTE_X ? 'x' : '-',
-> > > +                   attr & PTE_U ? 'u' : '-',
-> > > +                   attr & PTE_G ? 'g' : '-',
-> > > +                   attr & PTE_A ? 'a' : '-',
-> > > +                   attr & PTE_D ? 'd' : '-');
-> > > +}
-> > > +
-> > > +static void walk_pte(Monitor *mon, hwaddr base, target_ulong start,
-> > > +                     int level, int ptidxbits, int ptesize, int va_bits,
-> > > +                     hwaddr *vbase, hwaddr *pbase, hwaddr *last_paddr,
-> > > +                     target_ulong *last_size, int *last_attr)
-> > > +{
-> > > +    hwaddr pte_addr;
-> > > +    hwaddr paddr;
-> > > +    target_ulong pgsize;
-> > > +    target_ulong pte;
-> > > +    int ptshift;
-> > > +    int attr;
-> > > +    int idx;
-> > > +
-> > > +    if (level < 0) {
-> > > +        return;
-> > > +    }
-> > > +
-> > > +    ptshift = level * ptidxbits;
-> > > +    pgsize = 1UL << (PGSHIFT + ptshift);
-> > > +
-> > > +    for (idx = 0; idx < (1UL << ptidxbits); idx++) {
-> > > +        pte_addr = base + idx * ptesize;
-> > > +        cpu_physical_memory_read(pte_addr, &pte, ptesize);
-> > > +
-> > > +        paddr = (pte >> PTE_PPN_SHIFT) << PGSHIFT;
-> > > +        attr = pte & 0xff;
-> > > +
-> > > +        /* PTE has to be valid */
-> > > +        if (attr & PTE_V) {
-> > > +            if (attr & (PTE_R | PTE_W | PTE_X)) {
-> > > +                /*
-> > > +                 * A leaf PTE has been found
-> > > +                 *
-> > > +                 * If current PTE's permission bits differ from the last one,
-> > > +                 * or current PTE's ppn does not make a contiguous physical
-> > > +                 * address block together with the last one, print out the last
-> > > +                 * contiguous mapped block details.
-> > > +                 */
-> > > +                if ((*last_attr != attr) ||
-> > > +                    (*last_paddr + *last_size != paddr)) {
-> > > +                    print_pte(mon, va_bits, *vbase, *pbase,
-> > > +                              *last_paddr + *last_size - *pbase, *last_attr);
-> > > +
-> > > +                    *vbase = start;
-> > > +                    *pbase = paddr;
-> > > +                    *last_attr = attr;
-> > > +                }
-> > > +
-> > > +                *last_paddr = paddr;
-> > > +                *last_size = pgsize;
-> > > +            } else {
-> > > +                /* pointer to the next level of the page table */
-> > > +                walk_pte(mon, paddr, start, level - 1, ptidxbits, ptesize,
-> > > +                         va_bits, vbase, pbase, last_paddr,
-> > > +                         last_size, last_attr);
-> > > +            }
-> > > +        }
-> > > +
-> > > +        start += pgsize;
-> > > +    }
-> > > +
-> > > +}
-> > > +
-> > > +static void mem_info_svxx(Monitor *mon, CPUArchState *env)
-> > > +{
-> > > +    hwaddr base;
-> > > +    int levels, ptidxbits, ptesize, vm, va_bits;
-> > > +    hwaddr vbase, pbase, last_paddr;
-> > > +    target_ulong last_size;
-> > > +    int last_attr;
-> > > +
-> > > +    base = get_field(env->satp, SATP_PPN) << PGSHIFT;
-> > > +
-> > > +    vm = get_field(env->satp, SATP_MODE);
-> > > +    switch (vm) {
-> > > +    case VM_1_10_SV32:
-> > > +        levels = 2;
-> > > +        ptidxbits = 10;
-> > > +        ptesize = 4;
-> > > +        break;
-> > > +    case VM_1_10_SV39:
-> > > +        levels = 3;
-> > > +        ptidxbits = 9;
-> > > +        ptesize = 8;
-> > > +        break;
-> > > +    case VM_1_10_SV48:
-> > > +        levels = 4;
-> > > +        ptidxbits = 9;
-> > > +        ptesize = 8;
-> > > +        break;
-> > > +    case VM_1_10_SV57:
-> > > +        levels = 5;
-> > > +        ptidxbits = 9;
-> > > +        ptesize = 8;
-> > > +        break;
-> > > +    default:
-> > > +        g_assert_not_reached();
-> > > +        break;
-> > > +    }
-> > > +
-> > > +    /* calculate virtual address bits */
-> > > +    va_bits = PGSHIFT + levels * ptidxbits;
-> > > +
-> > > +    /* print header */
-> > > +    print_pte_header(mon);
-> > > +
-> > > +    vbase = -1;
-> > > +    pbase = -1;
-> > > +    last_paddr = -1;
-> > > +    last_size = 0;
-> > > +    last_attr = 0;
-> > > +
-> > > +    /* walk page tables, starting from address 0 */
-> > > +    walk_pte(mon, base, 0, levels - 1, ptidxbits, ptesize, va_bits,
-> > > +             &vbase, &pbase, &last_paddr, &last_size, &last_attr);
-> > > +
-> > > +    /* don't forget the last one */
-> > > +    print_pte(mon, va_bits, vbase, pbase,
-> > > +              last_paddr + last_size - pbase, last_attr);
-> > > +}
-> > > +
-> > > +void hmp_info_mem(Monitor *mon, const QDict *qdict)
-> > > +{
-> > > +    CPUArchState *env;
-> > > +
-> > > +    env = mon_get_cpu_env();
-> > > +    if (!env) {
-> > > +        monitor_printf(mon, "No CPU available\n");
-> > > +        return;
-> > > +    }
-> > > +
-> > > +    if (!riscv_feature(env, RISCV_FEATURE_MMU)) {
-> > > +        monitor_printf(mon, "S-mode MMU unavailable\n");
-> > > +        return;
-> > > +    }
-> > > +
-> > > +    if (env->priv_ver < PRIV_VERSION_1_10_0) {
-> > > +        monitor_printf(mon, "Privileged mode < 1.10 unsupported\n");
-> > > +        return;
-> > > +    }
-> > > +
-> > > +    if (!(env->satp & SATP_MODE)) {
-> > > +        monitor_printf(mon, "No translation or protection\n");
-> > > +        return;
-> > > +    }
-> > > +
-> > > +    mem_info_svxx(mon, env);
-> > > +}
-> >
-> > Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
-> >
-> > I'm putting this in the RISC-V tree with David's Acked-by, LMK if you want me
-> > to do something else.
+> On Tue, Aug 13, 2019 at 6:45 AM Palmer Dabbelt <palmer@sifive.com> wrote:
+>>
+>> On Fri, 19 Jul 2019 06:40:43 PDT (-0700), linux@roeck-us.net wrote:
+>> > Add support for loading initrd with "-initrd <filename>"
+>> > to the sifive_u machine. This lets us boot into Linux without
+>> > disk drive.
+>> >
+>> > Signed-off-by: Guenter Roeck <linux@roeck-us.net>
+>> > ---
+>> >  hw/riscv/sifive_u.c | 20 +++++++++++++++++---
+>> >  1 file changed, 17 insertions(+), 3 deletions(-)
+>> >
+>> > diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+>> > index 71b8083..0657046 100644
+>> > --- a/hw/riscv/sifive_u.c
+>> > +++ b/hw/riscv/sifive_u.c
+>> > @@ -67,7 +67,7 @@ static const struct MemmapEntry {
+>> >
+>> >  #define GEM_REVISION        0x10070109
+>> >
+>> > -static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
+>> > +static void *create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
+>> >      uint64_t mem_size, const char *cmdline)
+>> >  {
+>> >      void *fdt;
+>> > @@ -244,11 +244,14 @@ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
+>> >          qemu_fdt_setprop_string(fdt, "/chosen", "bootargs", cmdline);
+>> >      }
+>> >      g_free(nodename);
+>> > +
+>> > +    return fdt;
+>> >  }
+>> >
+>> >  static void riscv_sifive_u_init(MachineState *machine)
+>> >  {
+>> >      const struct MemmapEntry *memmap = sifive_u_memmap;
+>> > +    void *fdt;
+>> >
+>> >      SiFiveUState *s = g_new0(SiFiveUState, 1);
+>> >      MemoryRegion *system_memory = get_system_memory();
+>> > @@ -269,13 +272,24 @@ static void riscv_sifive_u_init(MachineState *machine)
+>> >                                  main_mem);
+>> >
+>> >      /* create device tree */
+>> > -    create_fdt(s, memmap, machine->ram_size, machine->kernel_cmdline);
+>> > +    fdt = create_fdt(s, memmap, machine->ram_size, machine->kernel_cmdline);
+>> >
+>> >      riscv_find_and_load_firmware(machine, BIOS_FILENAME,
+>> >                                   memmap[SIFIVE_U_DRAM].base);
+>> >
+>> >      if (machine->kernel_filename) {
+>> > -        riscv_load_kernel(machine->kernel_filename);
+>> > +        uint64_t kernel_entry = riscv_load_kernel(machine->kernel_filename);
+>> > +
+>> > +        if (machine->initrd_filename) {
+>> > +            hwaddr start;
+>> > +            hwaddr end = riscv_load_initrd(machine->initrd_filename,
+>> > +                                           machine->ram_size, kernel_entry,
+>> > +                                           &start);
+>> > +            qemu_fdt_setprop_cell(fdt, "/chosen",
+>> > +                                  "linux,initrd-start", start);
+>> > +            qemu_fdt_setprop_cell(fdt, "/chosen", "linux,initrd-end",
+>> > +                                  end);
+>> > +        }
+>> >      }
+>> >
+>> >      /* reset vector */
+>>
+>> Thanks.  I've queued all three of these.
+>>
 >
-> Thanks, but please apply the v3 patch:
-> http://patchwork.ozlabs.org/patch/1145744/
+> Ah, looks I did a duplicate.
+> http://patchwork.ozlabs.org/patch/1145247/
+>
+> Which git repo/branch should I rebase my series on?
 
-Sorry, please apply the v4 patch below which is essentially v2, as I
-figured out that v3 is not necessary.
-http://patchwork.ozlabs.org/patch/1147104/
-
-Regards,
-Bin
+github.com/palmer-dabbelt/riscv-qemu -b for-master
 
