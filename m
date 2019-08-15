@@ -1,60 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1hxy3B-0002yr-4h
-	for mharc-qemu-riscv@gnu.org; Wed, 14 Aug 2019 14:31:09 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43425)
+	id 1hy4bl-00060e-MJ
+	for mharc-qemu-riscv@gnu.org; Wed, 14 Aug 2019 21:31:17 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:41845)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <alistair23@gmail.com>) id 1hxy37-0002yZ-L4
- for qemu-riscv@nongnu.org; Wed, 14 Aug 2019 14:31:07 -0400
+ (envelope-from <bmeng.cn@gmail.com>) id 1hy4bi-00060A-FG
+ for qemu-riscv@nongnu.org; Wed, 14 Aug 2019 21:31:15 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1hxy36-0004WE-D5
- for qemu-riscv@nongnu.org; Wed, 14 Aug 2019 14:31:05 -0400
-Received: from mail-lf1-x141.google.com ([2a00:1450:4864:20::141]:33994)
+ (envelope-from <bmeng.cn@gmail.com>) id 1hy4bh-0005mz-84
+ for qemu-riscv@nongnu.org; Wed, 14 Aug 2019 21:31:14 -0400
+Received: from mail-ed1-x544.google.com ([2a00:1450:4864:20::544]:39176)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1hxy36-0004Ux-3U; Wed, 14 Aug 2019 14:31:04 -0400
-Received: by mail-lf1-x141.google.com with SMTP id b29so72797485lfq.1;
- Wed, 14 Aug 2019 11:31:02 -0700 (PDT)
+ (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
+ id 1hy4bg-0005lo-Vv; Wed, 14 Aug 2019 21:31:13 -0400
+Received: by mail-ed1-x544.google.com with SMTP id g8so860151edm.6;
+ Wed, 14 Aug 2019 18:31:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=DFkgjpmN5cP3DrRJr9ukZaWTXCSxmvw+EK1ldDL4oxU=;
- b=bSzAcByGuhP+Ft0+LgjpT/+QJ5GS6QKg72SsYmaOI+rGGCjav2JL2ixuI2BMFbpFBS
- bvEkmBjBGEimMJCMlb5Gyyg8QOj+9ZFRNzybPpkfJdXoEbi0hv4m5AGo2h0WdDUJ/di+
- UAQUI3b7Wh3LMZMY/rPy4Heml+yY2kucTVI0uujQJJkbvWKjS13o2c+zO5L5b8vAG/oe
- GoPjvs63rn0ROhQqUn1rDQOxwXJj8kbQRHGtonz6P31g5Q6LeFe6tTW/8AHNVswHVfxI
- 4d+A9qwu9RTni1e+n9jAKoBRrLwfqd0EeRFd3j8NizmEc6uKWecrfYQohQePBKj91UYO
- TMpw==
+ :cc; bh=6vvz9ApcA9pgDfQfHSMw5AtqukPjtkRFYVFa7YGh+E4=;
+ b=ReiGh+XtIJHOY9tTl6Mt36nH306a5XVCJHOsPOxSgPuMWxd3bCQYCaiY7X2jRuDpTa
+ eFvxR+xv6PnTnslHsP5GzYzwll8nwgcEwoOM/oueQ0buDO6j3RksAt5K/phZh4nP1sV0
+ CktNKFRpoepHr/0UQtlrZ+kWhkOR92XhGHjULiCm53IKYgJXLL1UEklg8/lfgzAWCBOD
+ J77KzDiwzapWLzbbE/iBNYnu/Nb4XwOpSxy2/NFG7NwdqeVb9enUfzsdwQrh026a9CLW
+ lUSOCjqp6FzMIXwVZCgZix8aMycQg1EzWwnmsdm8qQ3qvgLbeRNJlb3naGodsUcmFcVV
+ 6sBQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=DFkgjpmN5cP3DrRJr9ukZaWTXCSxmvw+EK1ldDL4oxU=;
- b=Vh3TJDzG0l8ap797hlcL8hdTiaGC18olgdFRZLR+9fJwLPCy9UXsIsy6qlXBXCZazu
- jtWLzRXq915OC7vTKjtympbyo4U73Rad957hniPCxkGwCgmmLuvpfyefh2AbKFdX46fA
- zH4CDOX7k0rtnFjWTUlL5JHDKHtAuOfoQOnwkD3q1tYkYitLKVlULnfHCDRX79hFS3tE
- qYKQOD7kFN1cCeWSjbmBlJPy3BnGsSGM0iMfERWtyrE57WQVDEyfWDc3/SLngaZicBR7
- WcVRJEvHaHRcqYKko9PNR52KllXwciswho3THQcBr4Amwn6vQx+AEWQZjh71CpXQCEnn
- kPZQ==
-X-Gm-Message-State: APjAAAWdARFz/ybDe97uexr9W0LMClMCyCxLpibLi/Sm4ETOwQZqrM3s
- oaHVEN3o8XheRIW6TUAFCjuEUk5HON7kn5xxUFE=
-X-Google-Smtp-Source: APXvYqxELyLM/QN0bktsKyz/1sGpNWW2A8d2ZXCEr8l6KU6n748nQKdZELghBnrDx3ERqgdkXfFXEtKHLt1roHGuNVs=
-X-Received: by 2002:a19:c6d4:: with SMTP id w203mr388233lff.135.1565807460662; 
- Wed, 14 Aug 2019 11:31:00 -0700 (PDT)
+ bh=6vvz9ApcA9pgDfQfHSMw5AtqukPjtkRFYVFa7YGh+E4=;
+ b=cCYC5SDpOfVzmcUj7CtwYuxxxymk9ZluoaUfPl8K6v0H6+THVuGrsTt6NZNDqglbID
+ NuxvErAqpC9dUCRiwflxUWnawlBvOVZhFvjiZzIdiKt/oGMKr6hk7xyK13P912VuW5NY
+ IaRo9JInWlSPEOVgHI86RIkM+6R1fDEtblH3+YuMhS3z5FBVOFvd7zcpQ+2j6BTYsv5v
+ 1lRsZCHi41m85LXHmjHpsbS5yFBYtq9u/ibV/Xufz+HB9sBsLsWiXCp1pLYBvcRROIj7
+ xFpDfkBEvKqSq9JpfmiAuiCLhCs91bxS8oemLKw4zOFrM/b/Z0SqAEryBzYMuob8X5OC
+ odUQ==
+X-Gm-Message-State: APjAAAU84ozdlw2fANJQMOEKQ7LCD4DDi+JHGc3OObSS3JMLeQWMbYtn
+ zKvXBFMWvix27y4TgOrkhpS5PlGWLScv9Ah4je4=
+X-Google-Smtp-Source: APXvYqyGpKnkGnxO1CQJO98zacq6OO+CdwT2fRBumi7qeTfT7UfIGWVOux3zjQ0JRqvNaP77mW1qi4qSsm+PeahRdos=
+X-Received: by 2002:a17:906:f742:: with SMTP id
+ jp2mr2107926ejb.87.1565832671261; 
+ Wed, 14 Aug 2019 18:31:11 -0700 (PDT)
 MIME-Version: 1.0
-References: <20190813225307.5792-1-palmer@sifive.com>
-In-Reply-To: <20190813225307.5792-1-palmer@sifive.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 14 Aug 2019 11:27:08 -0700
-Message-ID: <CAKmqyKMJr=4-2VKKd9cE6LLts_y0OnDjm3v0sosgaZ+achxpGQ@mail.gmail.com>
+References: <CAEUhbmU8s5cEt4J-ae0wqfgFHEWe=YWQaDn_Au_MhtK1J7OntA@mail.gmail.com>
+ <mhng-b7d8bc3c-3d03-4b2a-910f-8a9ceb18a046@palmer-si-x1c4>
+In-Reply-To: <mhng-b7d8bc3c-3d03-4b2a-910f-8a9ceb18a046@palmer-si-x1c4>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Thu, 15 Aug 2019 09:30:59 +0800
+Message-ID: <CAEUhbmVb-rfZ74mY_2QHTNw8R-FYTwxggHAPCCWviYpZZXNtAg@mail.gmail.com>
 To: Palmer Dabbelt <palmer@sifive.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
+Cc: linux@roeck-us.net, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Alistair Francis <Alistair.Francis@wdc.com>
 Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::141
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v2] RISC-V: Ignore the S and U
- letters when formatting ISA strings
+X-Received-From: 2a00:1450:4864:20::544
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH 1/3] riscv: sifive_u: Add
+ support for loading initrd
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -66,62 +70,98 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Aug 2019 18:31:08 -0000
+X-List-Received-Date: Thu, 15 Aug 2019 01:31:15 -0000
 
-On Tue, Aug 13, 2019 at 3:54 PM Palmer Dabbelt <palmer@sifive.com> wrote:
->
-> The ISA strings we're providing from QEMU aren't actually legal RISC-V
-> ISA strings, as both S and U cannot exist as single-letter extensions
-> and must instead be multi-letter strings.  We're still using the ISA
-> strings inside QEMU to track the availiable extensions, so this patch
-> just strips out the S and U extensions when formatting ISA strings.
->
-> This boots Linux on top of 4.1-rc3, which no longer has the U extension
-> in /proc/cpuinfo.
->
-> Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
+Hi Palmer,
 
-It looks like you are using tabs in here, once they are removed:
-
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-
-Alistair
-
-> ---
->  target/riscv/cpu.c | 18 +++++++++++++++++-
->  1 file changed, 17 insertions(+), 1 deletion(-)
+On Thu, Aug 15, 2019 at 1:06 AM Palmer Dabbelt <palmer@sifive.com> wrote:
 >
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index f8d07bd20ad7..a67c54c738ba 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -501,7 +501,23 @@ char *riscv_isa_string(RISCVCPU *cpu)
->      char *p = isa_str + snprintf(isa_str, maxlen, "rv%d", TARGET_LONG_BITS);
->      for (i = 0; i < sizeof(riscv_exts); i++) {
->          if (cpu->env.misa & RV(riscv_exts[i])) {
-> -            *p++ = qemu_tolower(riscv_exts[i]);
-> +            char lower = qemu_tolower(riscv_exts[i]);
-> +            switch (lower) {
-> +            case 's':
-> +            case 'u':
-> +                /*
-> +                * The 's' and 'u' letters shouldn't show up in ISA strings as
-> +                * they're not extensions, but they should show up in MISA.
-> +                * Since we use these letters interally as a pseudo ISA string
-> +                * to set MISA it's easier to just strip them out when
-> +                * formatting the ISA string.
-> +                */
-> +                break;
-> +
-> +            default:
-> +                *p++ = lower;
-> +                break;
-> +            }
->          }
->      }
->      *p = '\0';
-> --
-> 2.21.0
+> On Mon, 12 Aug 2019 16:48:00 PDT (-0700), bmeng.cn@gmail.com wrote:
+> > Hi Palmer,
+> >
+> > On Tue, Aug 13, 2019 at 6:45 AM Palmer Dabbelt <palmer@sifive.com> wrote:
+> >>
+> >> On Fri, 19 Jul 2019 06:40:43 PDT (-0700), linux@roeck-us.net wrote:
+> >> > Add support for loading initrd with "-initrd <filename>"
+> >> > to the sifive_u machine. This lets us boot into Linux without
+> >> > disk drive.
+> >> >
+> >> > Signed-off-by: Guenter Roeck <linux@roeck-us.net>
+> >> > ---
+> >> >  hw/riscv/sifive_u.c | 20 +++++++++++++++++---
+> >> >  1 file changed, 17 insertions(+), 3 deletions(-)
+> >> >
+> >> > diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+> >> > index 71b8083..0657046 100644
+> >> > --- a/hw/riscv/sifive_u.c
+> >> > +++ b/hw/riscv/sifive_u.c
+> >> > @@ -67,7 +67,7 @@ static const struct MemmapEntry {
+> >> >
+> >> >  #define GEM_REVISION        0x10070109
+> >> >
+> >> > -static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
+> >> > +static void *create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
+> >> >      uint64_t mem_size, const char *cmdline)
+> >> >  {
+> >> >      void *fdt;
+> >> > @@ -244,11 +244,14 @@ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
+> >> >          qemu_fdt_setprop_string(fdt, "/chosen", "bootargs", cmdline);
+> >> >      }
+> >> >      g_free(nodename);
+> >> > +
+> >> > +    return fdt;
+> >> >  }
+> >> >
+> >> >  static void riscv_sifive_u_init(MachineState *machine)
+> >> >  {
+> >> >      const struct MemmapEntry *memmap = sifive_u_memmap;
+> >> > +    void *fdt;
+> >> >
+> >> >      SiFiveUState *s = g_new0(SiFiveUState, 1);
+> >> >      MemoryRegion *system_memory = get_system_memory();
+> >> > @@ -269,13 +272,24 @@ static void riscv_sifive_u_init(MachineState *machine)
+> >> >                                  main_mem);
+> >> >
+> >> >      /* create device tree */
+> >> > -    create_fdt(s, memmap, machine->ram_size, machine->kernel_cmdline);
+> >> > +    fdt = create_fdt(s, memmap, machine->ram_size, machine->kernel_cmdline);
+> >> >
+> >> >      riscv_find_and_load_firmware(machine, BIOS_FILENAME,
+> >> >                                   memmap[SIFIVE_U_DRAM].base);
+> >> >
+> >> >      if (machine->kernel_filename) {
+> >> > -        riscv_load_kernel(machine->kernel_filename);
+> >> > +        uint64_t kernel_entry = riscv_load_kernel(machine->kernel_filename);
+> >> > +
+> >> > +        if (machine->initrd_filename) {
+> >> > +            hwaddr start;
+> >> > +            hwaddr end = riscv_load_initrd(machine->initrd_filename,
+> >> > +                                           machine->ram_size, kernel_entry,
+> >> > +                                           &start);
+> >> > +            qemu_fdt_setprop_cell(fdt, "/chosen",
+> >> > +                                  "linux,initrd-start", start);
+> >> > +            qemu_fdt_setprop_cell(fdt, "/chosen", "linux,initrd-end",
+> >> > +                                  end);
+> >> > +        }
+> >> >      }
+> >> >
+> >> >      /* reset vector */
+> >>
+> >> Thanks.  I've queued all three of these.
+> >>
+> >
+> > Ah, looks I did a duplicate.
+> > http://patchwork.ozlabs.org/patch/1145247/
+> >
+> > Which git repo/branch should I rebase my series on?
 >
->
+> github.com/palmer-dabbelt/riscv-qemu -b for-master
+
+I did not see branch "for-master" in the riscv-qemu repo. However I
+did find the branch in the github.com/palmer-dabbelt/qemu repo.
+
+I assume that's the correct one I should rebase my patch series on.
+
+Regards,
+Bin
 
