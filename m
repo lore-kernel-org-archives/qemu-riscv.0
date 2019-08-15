@@ -1,73 +1,68 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1hyNSS-00037h-Li
-	for mharc-qemu-riscv@gnu.org; Thu, 15 Aug 2019 17:38:56 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:60440)
+	id 1hyNVL-0006dA-PW
+	for mharc-qemu-riscv@gnu.org; Thu, 15 Aug 2019 17:41:55 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:60869)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <prvs=1236ab962=alistair.francis@wdc.com>)
- id 1hyNSL-00031i-5j
- for qemu-riscv@nongnu.org; Thu, 15 Aug 2019 17:38:51 -0400
+ (envelope-from <alistair23@gmail.com>) id 1hyNVH-0006Z8-Jd
+ for qemu-riscv@nongnu.org; Thu, 15 Aug 2019 17:41:53 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <prvs=1236ab962=alistair.francis@wdc.com>)
- id 1hyNSF-0006MV-II
- for qemu-riscv@nongnu.org; Thu, 15 Aug 2019 17:38:46 -0400
-Received: from esa5.hgst.iphmx.com ([216.71.153.144]:54904)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <prvs=1236ab962=alistair.francis@wdc.com>)
- id 1hyNS5-0006Cd-UN; Thu, 15 Aug 2019 17:38:34 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1565905115; x=1597441115;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=mtN8VsVTJ5yGXOOOwZJu4dyH/vwKNXbGitRWezTpJus=;
- b=Fs4LNCNn3H4DmdJZ8d/S/18qm3EZyK4KAQFm7NM/apzW3Ag8pAz1R14W
- 8bMJ5/tGQ87mTPNPbJV5+HNV+D8/VzYfkarFiHYRbgSGElVVZJxsuNyob
- 7rPs+Yslu15QEg8heutpdz+Pru/IfiWTd25ZP/m+6aCddWlWvqE1j59Xm
- ihU1om60rYwT8W7BHwVT60BMKOIFGY+rorPZknm7koZlSHbAvu49NdquB
- VKjXYG9A4rq1WUahU/Q3p59gt1V5SfazvwPoVnOscxE90QegL1lDZtDJ+
- xvxynoZM4RTW7exvxc/ZwSpVrz3fqU1F08vEFEWHkMObEnfKKwG0GSrgG w==;
-IronPort-SDR: 6SGXrum4XXWW1BZQM4+hL4hkOK7SpDdZ5qIajjKoPtdsFgZbjg08CzIuRxO848KxUdYKuZAZkt
- 0/Cd+OAB/Xz5LmtWcNRabpbOCNqHLu8iTOqwueV6C0E/4tbAkbwDxI4iBRuBpuF09fLLqBImYf
- IQd9WiYfiPUeVQht3SELEEsFuZyqAIHWNWerX+4QNXjw9lHk1qbSLhExkSIsE6cZXglumfI/pV
- 2XjnsDVYprIDWNKUuQCXfRpq7a5VlFaTsa9E0ZG4zjFikB0zxirIi6gRsBG5u0yzzgL1c+nVxM
- 0pY=
-X-IronPort-AV: E=Sophos;i="5.64,389,1559491200"; d="scan'208";a="116881542"
-Received: from h199-255-45-14.hgst.com (HELO uls-op-cesaep01.wdc.com)
- ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 16 Aug 2019 05:38:33 +0800
-IronPort-SDR: m0A5vs/dSkhZpwa1MJBenFoZaUmjcunxwJyvHwUoWaTI1jxnREBj+RWdbS95g+KLs4u3U35xF1
- ZGh/XlIbZsr8ehhJmcv8hNc04FOG5ebIakFHlNLGU7Of5IjqJLBX+/OE3r0WjLyRmwWoXP20Tg
- TD+Y3agbgFGLwtDJVqj4Kjh22OaZzdjzfOky88K4CVe1CE+bDJn3Z/fQ/srtUEvBDX2eK+H/B5
- c+41YMPccrDIGUiEz8uBNcjEZVomiHIZutDVcf+4Hco3uS2ph+U+78NDf9pCnmHZNf/O/AFUN9
- L/DsW85NF9fl8X7/Q6J6rGTH
-Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
- by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 15 Aug 2019 14:36:03 -0700
-IronPort-SDR: 4HPxB2ojzz9R0wPEaoxKVEftqx7w39CUOQ78zDob1dWCJzsUuoBXmShxQ5bz1UzqoOP5mHBIQO
- bTnqN5TSyIVZncSRUZLnQ6TIirNfqOahvqJc0VdtbcHCpaVMe9f9fYR7mjzsZurWmvzp5Yojfg
- SOoao3SU9zQbydYU7WFxf8dRqeCHb5kMqikPyD96tTfL0v3WbDHDOm8wklccTzGgKRaeFZRlxj
- TsYBLrHNrjvss5qYFz4cG1LXqaQF8gGOAVBfiUW6dZrW9kQKhcZqa2d7wYouYhKv6sW5Y5VADh
- oC4=
-Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
- risc6-mainframe.int.fusionio.com) ([10.196.157.58])
- by uls-op-cesaip01.wdc.com with ESMTP; 15 Aug 2019 14:38:33 -0700
-From: Alistair Francis <alistair.francis@wdc.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: palmer@sifive.com,
-	alistair.francis@wdc.com,
-	alistair23@gmail.com
-Date: Thu, 15 Aug 2019 14:35:04 -0700
-Message-Id: <7e476df36a8c2ba53162e9a5f62e9fa171da00ad.1565904855.git.alistair.francis@wdc.com>
-X-Mailer: git-send-email 2.22.0
-In-Reply-To: <cover.1565904855.git.alistair.francis@wdc.com>
-References: <cover.1565904855.git.alistair.francis@wdc.com>
+ (envelope-from <alistair23@gmail.com>) id 1hyNVF-0008ST-O0
+ for qemu-riscv@nongnu.org; Thu, 15 Aug 2019 17:41:50 -0400
+Received: from mail-lj1-x243.google.com ([2a00:1450:4864:20::243]:39521)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <alistair23@gmail.com>)
+ id 1hyNVF-0008Rt-Ce; Thu, 15 Aug 2019 17:41:49 -0400
+Received: by mail-lj1-x243.google.com with SMTP id x4so3506849ljj.6;
+ Thu, 15 Aug 2019 14:41:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=mpzB4QzWmrsVeeBHmrRO/WNE0c5CLLv1hTvhcVikB4s=;
+ b=A/3zwQidzMhR7Tr5pZegryyE38yRZiJNfTRGbEb7vEfLg6KJ0LOnhYEX7tT4UeANQn
+ VOQn3KKYg2SnBsDbr12qrpBzAx7/c42/EA3TAVEidYcxo8et8PzLDdrn06ZT7U8dwrbg
+ lxxDdxBlt0vWs8/8hpbs7izx9eJzuuqPeqXnzbSdKwutTXJEVuamOVw317p38sf1JfM7
+ KtnH7NqCKi30NttCfMDYvKrTcKeJTJbudY6TSRpY/3/x9ZApVsLB4x6mtQBQIKuWy8HB
+ ZKery89ulACNoBPR0zP/IdbfiRRV/QzHzUQtJfu7Al6I6+uEPI9p2gp3fUU+Cfk0Gk5t
+ SesA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=mpzB4QzWmrsVeeBHmrRO/WNE0c5CLLv1hTvhcVikB4s=;
+ b=tXA/drSwbqD5oS5hpmbhkv3DhXgmfZpDQWipFJqqUsd0axX4sfOmsjGJu48tvfUzxH
+ QXrkfSvw7tlmtKCvJASClf+/PuMItZwTZZDsSgNzeKHPtL96rmMffiXYQ8WTG5emCGZM
+ WnV5DJkOeEIR7yLS6MVBuSiR8unUrPbzsDN5m7ffIG+6zDNXqrgD/N/yQRblZmT2Shae
+ doI9DH2oq5Ztw/+qlmQRaYoBG2QdIvzLI+F6Oghm584RyEo+MSMPvUad4MH0hd5pgO4C
+ 6KRD4u14k0i7+vGynMEjkgzaKWA0tJLXYLOhqLLDw+vbmSJSgAPZ90OL9ALzCxLfl2/O
+ K9fw==
+X-Gm-Message-State: APjAAAXpTNUXEI/93oRn7pP1bkrrFn+Xvu80VOX5a+J0HDr6WvxIw5Q2
+ XIpLjbwcehizIe7qKHv0jAyqTI7jCRmFt4qM720=
+X-Google-Smtp-Source: APXvYqyp2xcTt+mGhvjKglsdioB01Mv74JsBI8e1onvbpxCOSvvDU841enpFwUqjdHDQBeRThNDFVge5AppgknhD4SU=
+X-Received: by 2002:a2e:a202:: with SMTP id h2mr3723716ljm.146.1565905307701; 
+ Thu, 15 Aug 2019 14:41:47 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-detected-operating-system: by eggs.gnu.org: FreeBSD 9.x
-X-Received-From: 216.71.153.144
-Subject: [Qemu-riscv] [PATCH v3 7/7] target/riscv: Convert mip to
- target_ulong
+References: <97a6ae9f-2845-4a3c-2a31-367787622268@c-sky.com>
+ <CAKmqyKMqCKS_-rxZ2WYEn+m2gDom27rd2f2FCe0LmVs9brPcAQ@mail.gmail.com>
+ <c502163b-ed8a-89d1-6437-9b0f49e88a84@c-sky.com>
+ <CAKmqyKM5zneojhPe57h1+h3pav5kQxFaMnhNiwWRUa=nbzS3Ag@mail.gmail.com>
+ <CAL1e-=hVLQWThYSm78bTCbQPfAABjx_rG9nEa9gV6PvSN8ge2w@mail.gmail.com>
+ <CAFEAcA9bDU4AWetkR4w4WLUzMW_MMy0CsVa5SibWqf85RyaX5g@mail.gmail.com>
+In-Reply-To: <CAFEAcA9bDU4AWetkR4w4WLUzMW_MMy0CsVa5SibWqf85RyaX5g@mail.gmail.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Thu, 15 Aug 2019 14:37:52 -0700
+Message-ID: <CAKmqyKM44ZAHgc5cYAiAXXtVG=dMcX1i7FLn+2mMwM1Av4Gqzg@mail.gmail.com>
+To: Peter Maydell <peter.maydell@linaro.org>
+Cc: Aleksandar Markovic <aleksandar.m.mail@gmail.com>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, bastian@mail.uni-paderborn.de, 
+ Palmer Dabbelt <palmer@sifive.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ LIU ZhiWei <zhiwei_liu@c-sky.com>
+Content-Type: text/plain; charset="UTF-8"
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2a00:1450:4864:20::243
+Subject: Re: [Qemu-riscv] [Qemu-devel] RISC-V: Vector && DSP Extension
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -79,30 +74,56 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Aug 2019 21:38:52 -0000
+X-List-Received-Date: Thu, 15 Aug 2019 21:41:54 -0000
 
-The mip register is an MXLEN-bit long register. Convert it to a
-target_ulong type instead of uint32_t.
+On Thu, Aug 15, 2019 at 2:07 AM Peter Maydell <peter.maydell@linaro.org> wrote:
+>
+> On Thu, 15 Aug 2019 at 09:53, Aleksandar Markovic
+> <aleksandar.m.mail@gmail.com> wrote:
+> >
+> > > We can accept draft
+> > > extensions in QEMU as long as they are disabled by default.
+>
+> > Hi, Alistair, Palmer,
+> >
+> > Is this an official stance of QEMU community, or perhaps Alistair's
+> > personal judgement, or maybe a rule within risv subcomunity?
+>
+> Alistair asked on a previous thread; my view was:
+> https://lists.gnu.org/archive/html/qemu-devel/2019-07/msg03364.html
+> and nobody else spoke up disagreeing (summary: should at least be
+> disabled-by-default and only enabled by setting an explicit
+> property whose name should start with the 'x-' prefix).
 
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
----
- target/riscv/cpu.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Agreed!
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 2dc9b17678..0a7985c3f7 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -130,7 +130,7 @@ struct CPURISCVState {
-      * wuth the invariant that CPU_INTERRUPT_HARD is set iff mip is non-zero.
-      * mip is 32-bits to allow atomic_read on 32-bit hosts.
-      */
--    uint32_t mip;
-+    target_ulong mip;
-     uint32_t miclaim;
- 
-     target_ulong mie;
--- 
-2.22.0
+>
+> In general QEMU does sometimes introduce experimental extensions
+> (we've had them in the block layer, for example) and so the 'x-'
+> property to enable them is a reasonably established convention.
+> I think it's a reasonable compromise to allow this sort of work
+> to start and not have to live out-of-tree for a long time, without
+> confusing users or getting into a situation where some QEMU
+> versions behave differently or to obsolete drafts of a spec
+> without it being clear from the command line that experimental
+> extensions are being enabled.
+>
+> There is also an element of "submaintainer judgement" to be applied
+> here -- upstream is probably not the place for a draft extension
+> to be implemented if it is:
+>  * still fast moving or subject to major changes of design direction
+>  * major changes to the codebase (especially if it requires
+>    changes to core code) that might later need to be redone
+>    entirely differently
+>  * still experimental
 
+Yep, agreed. For RISC-V I think this would extend to only allowing
+extensions that have backing from the foundation and are under active
+discussion.
+
+Alistair
+
+>
+> thanks
+> -- PMM
 
