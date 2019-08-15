@@ -1,68 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1hyNVL-0006dA-PW
-	for mharc-qemu-riscv@gnu.org; Thu, 15 Aug 2019 17:41:55 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:60869)
+	id 1hyNWi-0007wv-2v
+	for mharc-qemu-riscv@gnu.org; Thu, 15 Aug 2019 17:43:20 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:32995)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <alistair23@gmail.com>) id 1hyNVH-0006Z8-Jd
- for qemu-riscv@nongnu.org; Thu, 15 Aug 2019 17:41:53 -0400
+ (envelope-from <alistair23@gmail.com>) id 1hyNWe-0007so-Ev
+ for qemu-riscv@nongnu.org; Thu, 15 Aug 2019 17:43:18 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1hyNVF-0008ST-O0
- for qemu-riscv@nongnu.org; Thu, 15 Aug 2019 17:41:50 -0400
-Received: from mail-lj1-x243.google.com ([2a00:1450:4864:20::243]:39521)
+ (envelope-from <alistair23@gmail.com>) id 1hyNWc-0000sW-Mp
+ for qemu-riscv@nongnu.org; Thu, 15 Aug 2019 17:43:16 -0400
+Received: from mail-lf1-x141.google.com ([2a00:1450:4864:20::141]:44882)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1hyNVF-0008Rt-Ce; Thu, 15 Aug 2019 17:41:49 -0400
-Received: by mail-lj1-x243.google.com with SMTP id x4so3506849ljj.6;
- Thu, 15 Aug 2019 14:41:49 -0700 (PDT)
+ id 1hyNWc-0000qp-Fp; Thu, 15 Aug 2019 17:43:14 -0400
+Received: by mail-lf1-x141.google.com with SMTP id v16so691782lfg.11;
+ Thu, 15 Aug 2019 14:43:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=mpzB4QzWmrsVeeBHmrRO/WNE0c5CLLv1hTvhcVikB4s=;
- b=A/3zwQidzMhR7Tr5pZegryyE38yRZiJNfTRGbEb7vEfLg6KJ0LOnhYEX7tT4UeANQn
- VOQn3KKYg2SnBsDbr12qrpBzAx7/c42/EA3TAVEidYcxo8et8PzLDdrn06ZT7U8dwrbg
- lxxDdxBlt0vWs8/8hpbs7izx9eJzuuqPeqXnzbSdKwutTXJEVuamOVw317p38sf1JfM7
- KtnH7NqCKi30NttCfMDYvKrTcKeJTJbudY6TSRpY/3/x9ZApVsLB4x6mtQBQIKuWy8HB
- ZKery89ulACNoBPR0zP/IdbfiRRV/QzHzUQtJfu7Al6I6+uEPI9p2gp3fUU+Cfk0Gk5t
- SesA==
+ :cc; bh=/+c8Nbw+bFOYPr5aQg/CMUm/D+sQebTcSx7yxtjjGYI=;
+ b=MvM7FbZuMBpuwXlbAlZjCkg08xH7JF8uRsMQZpl9CIjJtU1cMpphplWPKlmPVN5CwA
+ YTiJqmQKPp9fKDSFEmlodEhMmArhihyN/Ga0YQAlRZa25WUGaiufNybckiJLlB4xfWI9
+ haOsga1qoSpZGW6H5YCsScFDIOXl18MNedUlSwjLxQMqw/cUYdqjRreHLfAwJynkXo5G
+ XNmD/ChMoZ7DOmAexyg4ry4oTMAooEO3t4mRDz9+IF/ZjHKHvc0gNy5Qh8gSsIVLK84w
+ Jq2ytq1kGydepoxf5hsmJCNPR3PQIyccwOXGzSvFhXiMYE4aGW+gSGM10vgLTmDaz8G3
+ NARQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=mpzB4QzWmrsVeeBHmrRO/WNE0c5CLLv1hTvhcVikB4s=;
- b=tXA/drSwbqD5oS5hpmbhkv3DhXgmfZpDQWipFJqqUsd0axX4sfOmsjGJu48tvfUzxH
- QXrkfSvw7tlmtKCvJASClf+/PuMItZwTZZDsSgNzeKHPtL96rmMffiXYQ8WTG5emCGZM
- WnV5DJkOeEIR7yLS6MVBuSiR8unUrPbzsDN5m7ffIG+6zDNXqrgD/N/yQRblZmT2Shae
- doI9DH2oq5Ztw/+qlmQRaYoBG2QdIvzLI+F6Oghm584RyEo+MSMPvUad4MH0hd5pgO4C
- 6KRD4u14k0i7+vGynMEjkgzaKWA0tJLXYLOhqLLDw+vbmSJSgAPZ90OL9ALzCxLfl2/O
- K9fw==
-X-Gm-Message-State: APjAAAXpTNUXEI/93oRn7pP1bkrrFn+Xvu80VOX5a+J0HDr6WvxIw5Q2
- XIpLjbwcehizIe7qKHv0jAyqTI7jCRmFt4qM720=
-X-Google-Smtp-Source: APXvYqyp2xcTt+mGhvjKglsdioB01Mv74JsBI8e1onvbpxCOSvvDU841enpFwUqjdHDQBeRThNDFVge5AppgknhD4SU=
-X-Received: by 2002:a2e:a202:: with SMTP id h2mr3723716ljm.146.1565905307701; 
- Thu, 15 Aug 2019 14:41:47 -0700 (PDT)
+ bh=/+c8Nbw+bFOYPr5aQg/CMUm/D+sQebTcSx7yxtjjGYI=;
+ b=Kwr9iucq/pm+D93BdGU/h2hFn3/spkumUJiaiG2Sdfe37R66UwFTG8Y1HkulnxnUAp
+ pRt7u9LTOxh6yQo3DYaeHceNTcmH9+++eTr9el40s2Z91Ay4KWhBn0jNbglaGlbkpwfU
+ Ir/6UYqHFD23NdGw6bCs1f/wdYOeCTlZEjReKVsbkyBVfAWQtZQUezxjNUta/Z7ynJjq
+ qvZ3yc044mJPhzS/OybgqaAtlgWCZTj+MeUns5NgrqeNJcLxT8YoNdpNSG0h6kUBU1DV
+ zkXU5pj5BCSdlV/U9Z6Lwg5S4w5CGdAKLjxuHRu3ZMSFvQuyLSO+VhXXgL1Uo4cOJ2vG
+ TU5A==
+X-Gm-Message-State: APjAAAUICTbj0XrJh+lMkiwAi9zXikBu3r4spwQqyu7xIQppb/1KcK0D
+ wCeRNOV0wp+sCpcHpBQc1MBMKSeWHA6uHoz7vSM=
+X-Google-Smtp-Source: APXvYqyHJoi37ZbXpVAo+5uKlDTXhllZArPZCc6oAHwSRkW1OtPWsFIWPEGHX4XWofzpYjdkwv8Bdiu2RmMWpcgDcWA=
+X-Received: by 2002:a19:ed11:: with SMTP id y17mr3420355lfy.141.1565905392888; 
+ Thu, 15 Aug 2019 14:43:12 -0700 (PDT)
 MIME-Version: 1.0
-References: <97a6ae9f-2845-4a3c-2a31-367787622268@c-sky.com>
- <CAKmqyKMqCKS_-rxZ2WYEn+m2gDom27rd2f2FCe0LmVs9brPcAQ@mail.gmail.com>
- <c502163b-ed8a-89d1-6437-9b0f49e88a84@c-sky.com>
- <CAKmqyKM5zneojhPe57h1+h3pav5kQxFaMnhNiwWRUa=nbzS3Ag@mail.gmail.com>
- <CAL1e-=hVLQWThYSm78bTCbQPfAABjx_rG9nEa9gV6PvSN8ge2w@mail.gmail.com>
- <CAFEAcA9bDU4AWetkR4w4WLUzMW_MMy0CsVa5SibWqf85RyaX5g@mail.gmail.com>
-In-Reply-To: <CAFEAcA9bDU4AWetkR4w4WLUzMW_MMy0CsVa5SibWqf85RyaX5g@mail.gmail.com>
+References: <CAFEAcA-A5P+2XE49dg582CRtDPH0CXevyYfkGkaDH3HN=NFYcg@mail.gmail.com>
+ <mhng-19b0dd58-7f8d-45a6-ac6b-049be291d2a7@palmer-si-x1e>
+In-Reply-To: <mhng-19b0dd58-7f8d-45a6-ac6b-049be291d2a7@palmer-si-x1e>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 15 Aug 2019 14:37:52 -0700
-Message-ID: <CAKmqyKM44ZAHgc5cYAiAXXtVG=dMcX1i7FLn+2mMwM1Av4Gqzg@mail.gmail.com>
-To: Peter Maydell <peter.maydell@linaro.org>
-Cc: Aleksandar Markovic <aleksandar.m.mail@gmail.com>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, bastian@mail.uni-paderborn.de, 
- Palmer Dabbelt <palmer@sifive.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+Date: Thu, 15 Aug 2019 14:39:18 -0700
+Message-ID: <CAKmqyKMyv8gt8Gb6y0DMktnWnSKBw4ePwOXBzWkEpw5GVmyG0A@mail.gmail.com>
+To: Palmer Dabbelt <palmer@sifive.com>
+Cc: Peter Maydell <peter.maydell@linaro.org>,
  Alistair Francis <Alistair.Francis@wdc.com>, 
- LIU ZhiWei <zhiwei_liu@c-sky.com>
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::243
-Subject: Re: [Qemu-riscv] [Qemu-devel] RISC-V: Vector && DSP Extension
+X-Received-From: 2a00:1450:4864:20::141
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PULL 04/32] target/riscv: Implement
+ riscv_cpu_unassigned_access
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -74,56 +68,59 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Aug 2019 21:41:54 -0000
+X-List-Received-Date: Thu, 15 Aug 2019 21:43:18 -0000
 
-On Thu, Aug 15, 2019 at 2:07 AM Peter Maydell <peter.maydell@linaro.org> wrote:
+On Tue, Aug 13, 2019 at 3:44 PM Palmer Dabbelt <palmer@sifive.com> wrote:
 >
-> On Thu, 15 Aug 2019 at 09:53, Aleksandar Markovic
-> <aleksandar.m.mail@gmail.com> wrote:
+> On Thu, 01 Aug 2019 08:39:17 PDT (-0700), Peter Maydell wrote:
+> > On Wed, 3 Jul 2019 at 09:41, Palmer Dabbelt <palmer@sifive.com> wrote:
+> >>
+> >> From: Michael Clark <mjc@sifive.com>
+> >>
+> >> This patch adds support for the riscv_cpu_unassigned_access call
+> >> and will raise a load or store access fault.
+> >>
+> >> Signed-off-by: Michael Clark <mjc@sifive.com>
+> >> [Changes by AF:
+> >>  - Squash two patches and rewrite commit message
+> >>  - Set baddr to the access address
+> >> ]
+> >> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> >> Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
+> >> Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
 > >
-> > > We can accept draft
-> > > extensions in QEMU as long as they are disabled by default.
->
-> > Hi, Alistair, Palmer,
+> > Oops, I missed seeing this go by. The do_unassigned_access
+> > hook is deprecated and you should drop this and use
+> > the do_transaction_failed hook instead.
+
+Argh!
+
 > >
-> > Is this an official stance of QEMU community, or perhaps Alistair's
-> > personal judgement, or maybe a rule within risv subcomunity?
+> > The distinction between the two is that do_unassigned_access
+> > will end up being called for any failing access, including
+> > not just "normal" guest accesses but also for bad accesses
+> > that happen during page table walks (which often want to
+> > be reported to the guest differently) and also accesses
+> > by random devices like DMA controllers (where throwing a
+> > cpu exception is always a bug).
+> >
+> > Changing the hook implementation itself should be straightforward;
+> > commit 6ad4d7eed05a1e23537f is an example of doing that on Alpha.
+> > You also want to check all the places in your target code that
+> > do physical memory accesses, determine what the right behaviour
+> > if they get a bus fault is, and implement that (or at least put
+> > in TODO comments).
 >
-> Alistair asked on a previous thread; my view was:
-> https://lists.gnu.org/archive/html/qemu-devel/2019-07/msg03364.html
-> and nobody else spoke up disagreeing (summary: should at least be
-> disabled-by-default and only enabled by setting an explicit
-> property whose name should start with the 'x-' prefix).
+> Sorry, updating that has been on my TODO list for a while now.  I figured it
+> was better to have the deprecated version in there than nothing at all.  I've
+> written some patches to fix this, but I want to give them another look before
+> sending them out.
 
-Agreed!
-
->
-> In general QEMU does sometimes introduce experimental extensions
-> (we've had them in the block layer, for example) and so the 'x-'
-> property to enable them is a reasonably established convention.
-> I think it's a reasonable compromise to allow this sort of work
-> to start and not have to live out-of-tree for a long time, without
-> confusing users or getting into a situation where some QEMU
-> versions behave differently or to obsolete drafts of a spec
-> without it being clear from the command line that experimental
-> extensions are being enabled.
->
-> There is also an element of "submaintainer judgement" to be applied
-> here -- upstream is probably not the place for a draft extension
-> to be implemented if it is:
->  * still fast moving or subject to major changes of design direction
->  * major changes to the codebase (especially if it requires
->    changes to core code) that might later need to be redone
->    entirely differently
->  * still experimental
-
-Yep, agreed. For RISC-V I think this would extend to only allowing
-extensions that have backing from the foundation and are under active
-discussion.
+I was going to start looking into this, but if you already have
+patches I won't bother. Let me know if you want a hand with the
+conversion.
 
 Alistair
 
 >
-> thanks
-> -- PMM
 
