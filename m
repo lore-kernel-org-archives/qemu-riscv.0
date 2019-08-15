@@ -1,62 +1,50 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1hyNWi-0007wv-2v
-	for mharc-qemu-riscv@gnu.org; Thu, 15 Aug 2019 17:43:20 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:32995)
+	id 1hyNzy-0005OQ-7u
+	for mharc-qemu-riscv@gnu.org; Thu, 15 Aug 2019 18:13:34 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:36360)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <alistair23@gmail.com>) id 1hyNWe-0007so-Ev
- for qemu-riscv@nongnu.org; Thu, 15 Aug 2019 17:43:18 -0400
+ (envelope-from <no-reply@patchew.org>) id 1hyNzv-0005MT-7Z
+ for qemu-riscv@nongnu.org; Thu, 15 Aug 2019 18:13:32 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1hyNWc-0000sW-Mp
- for qemu-riscv@nongnu.org; Thu, 15 Aug 2019 17:43:16 -0400
-Received: from mail-lf1-x141.google.com ([2a00:1450:4864:20::141]:44882)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1hyNWc-0000qp-Fp; Thu, 15 Aug 2019 17:43:14 -0400
-Received: by mail-lf1-x141.google.com with SMTP id v16so691782lfg.11;
- Thu, 15 Aug 2019 14:43:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=/+c8Nbw+bFOYPr5aQg/CMUm/D+sQebTcSx7yxtjjGYI=;
- b=MvM7FbZuMBpuwXlbAlZjCkg08xH7JF8uRsMQZpl9CIjJtU1cMpphplWPKlmPVN5CwA
- YTiJqmQKPp9fKDSFEmlodEhMmArhihyN/Ga0YQAlRZa25WUGaiufNybckiJLlB4xfWI9
- haOsga1qoSpZGW6H5YCsScFDIOXl18MNedUlSwjLxQMqw/cUYdqjRreHLfAwJynkXo5G
- XNmD/ChMoZ7DOmAexyg4ry4oTMAooEO3t4mRDz9+IF/ZjHKHvc0gNy5Qh8gSsIVLK84w
- Jq2ytq1kGydepoxf5hsmJCNPR3PQIyccwOXGzSvFhXiMYE4aGW+gSGM10vgLTmDaz8G3
- NARQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=/+c8Nbw+bFOYPr5aQg/CMUm/D+sQebTcSx7yxtjjGYI=;
- b=Kwr9iucq/pm+D93BdGU/h2hFn3/spkumUJiaiG2Sdfe37R66UwFTG8Y1HkulnxnUAp
- pRt7u9LTOxh6yQo3DYaeHceNTcmH9+++eTr9el40s2Z91Ay4KWhBn0jNbglaGlbkpwfU
- Ir/6UYqHFD23NdGw6bCs1f/wdYOeCTlZEjReKVsbkyBVfAWQtZQUezxjNUta/Z7ynJjq
- qvZ3yc044mJPhzS/OybgqaAtlgWCZTj+MeUns5NgrqeNJcLxT8YoNdpNSG0h6kUBU1DV
- zkXU5pj5BCSdlV/U9Z6Lwg5S4w5CGdAKLjxuHRu3ZMSFvQuyLSO+VhXXgL1Uo4cOJ2vG
- TU5A==
-X-Gm-Message-State: APjAAAUICTbj0XrJh+lMkiwAi9zXikBu3r4spwQqyu7xIQppb/1KcK0D
- wCeRNOV0wp+sCpcHpBQc1MBMKSeWHA6uHoz7vSM=
-X-Google-Smtp-Source: APXvYqyHJoi37ZbXpVAo+5uKlDTXhllZArPZCc6oAHwSRkW1OtPWsFIWPEGHX4XWofzpYjdkwv8Bdiu2RmMWpcgDcWA=
-X-Received: by 2002:a19:ed11:: with SMTP id y17mr3420355lfy.141.1565905392888; 
- Thu, 15 Aug 2019 14:43:12 -0700 (PDT)
+ (envelope-from <no-reply@patchew.org>) id 1hyNzt-0006cR-Up
+ for qemu-riscv@nongnu.org; Thu, 15 Aug 2019 18:13:31 -0400
+Resent-Date: Thu, 15 Aug 2019 18:13:31 -0400
+Resent-Message-Id: <E1hyNzt-0006cR-Up@eggs.gnu.org>
+Received: from sender-of-o53.zoho.com ([135.84.80.218]:21890)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <no-reply@patchew.org>)
+ id 1hyNzq-0006b4-Uz; Thu, 15 Aug 2019 18:13:27 -0400
+ARC-Seal: i=1; a=rsa-sha256; t=1565907194; cv=none; d=zoho.com; s=zohoarc; 
+ b=RVGTeKNxRgXZLOrPkW5DasA63RDKN2yc3eQ9fvk4yssWA3vfOBQH2ZtJX2cb+vwugl9cch/wgDafQwVXoImGCdXTFogWh2rKIOS/ofFybB0jU5GgBbdKMJ1Tsq+ztXgZ5Fioacn/BJer8ioZvQUnMOW84//retQvZqzEnsmbqwo=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zoho.com;
+ s=zohoarc; t=1565907194;
+ h=Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:MIME-Version:Message-ID:Reply-To:Subject:To:ARC-Authentication-Results;
+ bh=Dx+2a9Zbil5ET+qllYNyFSRzUUtN98tObSiZFW3mz3M=; 
+ b=AUc2wUpjlk+5BVNSgGb71CzWW2gcpEnN5YhlXIEK/G9bPDdgbteTFxx1ywmDC/vYiR1mhYfn6nOxhwi3UWAnWgDTlLsP+rmBvLWjX/TDLg4npq9g8dmb4ywwBt25AoBMrcoqcUGLJJZCo3TwcaMYy+skHGm2QwhvRuvgergbOsc=
+ARC-Authentication-Results: i=1; mx.zoho.com; dkim=pass  header.i=patchew.org;
+ spf=pass  smtp.mailfrom=no-reply@patchew.org;
+ dmarc=pass header.from=<no-reply@patchew.org>
+ header.from=<no-reply@patchew.org>
+Received: from [172.17.0.3] (23.253.156.214 [23.253.156.214]) by
+ mx.zohomail.com with SMTPS id 1565907189662921.7316424924544;
+ Thu, 15 Aug 2019 15:13:09 -0700 (PDT)
+Reply-To: <qemu-devel@nongnu.org>
+In-Reply-To: <cover.1565904855.git.alistair.francis@wdc.com>
+Message-ID: <156590718846.17677.8197101794228197057@5dec9699b7de>
 MIME-Version: 1.0
-References: <CAFEAcA-A5P+2XE49dg582CRtDPH0CXevyYfkGkaDH3HN=NFYcg@mail.gmail.com>
- <mhng-19b0dd58-7f8d-45a6-ac6b-049be291d2a7@palmer-si-x1e>
-In-Reply-To: <mhng-19b0dd58-7f8d-45a6-ac6b-049be291d2a7@palmer-si-x1e>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 15 Aug 2019 14:39:18 -0700
-Message-ID: <CAKmqyKMyv8gt8Gb6y0DMktnWnSKBw4ePwOXBzWkEpw5GVmyG0A@mail.gmail.com>
-To: Palmer Dabbelt <palmer@sifive.com>
-Cc: Peter Maydell <peter.maydell@linaro.org>,
- Alistair Francis <Alistair.Francis@wdc.com>, 
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2a00:1450:4864:20::141
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PULL 04/32] target/riscv: Implement
- riscv_cpu_unassigned_access
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+Resent-From: 
+From: no-reply@patchew.org
+To: alistair.francis@wdc.com
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair23@gmail.com,
+ palmer@sifive.com, alistair.francis@wdc.com
+Date: Thu, 15 Aug 2019 15:13:09 -0700 (PDT)
+X-ZohoMailClient: External
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+X-Received-From: 135.84.80.218
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v3 0/7] RISC-V: Hypervisor
+ prep work part 2
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -68,59 +56,42 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Aug 2019 21:43:18 -0000
+X-List-Received-Date: Thu, 15 Aug 2019 22:13:32 -0000
 
-On Tue, Aug 13, 2019 at 3:44 PM Palmer Dabbelt <palmer@sifive.com> wrote:
->
-> On Thu, 01 Aug 2019 08:39:17 PDT (-0700), Peter Maydell wrote:
-> > On Wed, 3 Jul 2019 at 09:41, Palmer Dabbelt <palmer@sifive.com> wrote:
-> >>
-> >> From: Michael Clark <mjc@sifive.com>
-> >>
-> >> This patch adds support for the riscv_cpu_unassigned_access call
-> >> and will raise a load or store access fault.
-> >>
-> >> Signed-off-by: Michael Clark <mjc@sifive.com>
-> >> [Changes by AF:
-> >>  - Squash two patches and rewrite commit message
-> >>  - Set baddr to the access address
-> >> ]
-> >> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> >> Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
-> >> Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
-> >
-> > Oops, I missed seeing this go by. The do_unassigned_access
-> > hook is deprecated and you should drop this and use
-> > the do_transaction_failed hook instead.
+UGF0Y2hldyBVUkw6IGh0dHBzOi8vcGF0Y2hldy5vcmcvUUVNVS9jb3Zlci4xNTY1OTA0ODU1Lmdp
+dC5hbGlzdGFpci5mcmFuY2lzQHdkYy5jb20vCgoKCkhpLAoKVGhpcyBzZXJpZXMgZmFpbGVkIGJ1
+aWxkIHRlc3Qgb24gczM5MHggaG9zdC4gUGxlYXNlIGZpbmQgdGhlIGRldGFpbHMgYmVsb3cuCgo9
+PT0gVEVTVCBTQ1JJUFQgQkVHSU4gPT09CiMhL2Jpbi9iYXNoCiMgVGVzdGluZyBzY3JpcHQgd2ls
+bCBiZSBpbnZva2VkIHVuZGVyIHRoZSBnaXQgY2hlY2tvdXQgd2l0aAojIEhFQUQgcG9pbnRpbmcg
+dG8gYSBjb21taXQgdGhhdCBoYXMgdGhlIHBhdGNoZXMgYXBwbGllZCBvbiB0b3Agb2YgImJhc2Ui
+CiMgYnJhbmNoCnNldCAtZQoKZWNobwplY2hvICI9PT0gRU5WID09PSIKZW52CgplY2hvCmVjaG8g
+Ij09PSBQQUNLQUdFUyA9PT0iCnJwbSAtcWEKCmVjaG8KZWNobyAiPT09IFVOQU1FID09PSIKdW5h
+bWUgLWEKCkNDPSRIT01FL2Jpbi9jYwpJTlNUQUxMPSRQV0QvaW5zdGFsbApCVUlMRD0kUFdEL2J1
+aWxkCm1rZGlyIC1wICRCVUlMRCAkSU5TVEFMTApTUkM9JFBXRApjZCAkQlVJTEQKJFNSQy9jb25m
+aWd1cmUgLS1jYz0kQ0MgLS1wcmVmaXg9JElOU1RBTEwKbWFrZSAtajQKIyBYWFg6IHdlIG5lZWQg
+cmVsaWFibGUgY2xlYW4gdXAKIyBtYWtlIGNoZWNrIC1qNCBWPTEKbWFrZSBpbnN0YWxsCj09PSBU
+RVNUIFNDUklQVCBFTkQgPT09CgogIENDICAgICAgbWlwcy1zb2Z0bW11L2h3L3ZmaW8vZGlzcGxh
+eS5vCiAgQ0MgICAgICBtaXBzLXNvZnRtbXUvaHcvdmlydGlvL3ZpcnRpby5vCiAgR0VOICAgICBu
+aW9zMi1zb2Z0bW11L2htcC1jb21tYW5kcy5oCmNvbGxlY3QyOiBlcnJvcjogbGQgcmV0dXJuZWQg
+MSBleGl0IHN0YXR1cwogIEdFTiAgICAgbmlvczItc29mdG1tdS9obXAtY29tbWFuZHMtaW5mby5o
+CiAgR0VOICAgICBuaW9zMi1zb2Z0bW11L2NvbmZpZy1kZXZpY2VzLmgKICBHRU4gICAgIG5pb3My
+LXNvZnRtbXUvY29uZmlnLXRhcmdldC5oCi0tLQogIENDICAgICAgYWFyY2g2NC1zb2Z0bW11L2h3
+L21pc2MvbnJmNTFfcm5nLm8KICBDQyAgICAgIGFhcmNoNjQtc29mdG1tdS9ody9uZXQvdmlydGlv
+LW5ldC5vCiAgQ0MgICAgICBhYXJjaDY0LXNvZnRtbXUvaHcvbnZyYW0vbnJmNTFfbnZtLm8KY29s
+bGVjdDI6IGVycm9yOiBsZCByZXR1cm5lZCAxIGV4aXQgc3RhdHVzCm1ha2VbMV06ICoqKiBbTWFr
+ZWZpbGU6MjA5OiBxZW11LXN5c3RlbS1uaW9zMl0gRXJyb3IgMQptYWtlOiAqKiogW01ha2VmaWxl
+OjQ3MjogbmlvczItc29mdG1tdS9hbGxdIEVycm9yIDIKICBDQyAgICAgIGFhcmNoNjQtc29mdG1t
+dS9ody9wY21jaWEvcHhhMnh4Lm8KLS0tCm1ha2VbMV06ICoqKiBbL3Zhci90bXAvcGF0Y2hldy10
+ZXN0ZXItdG1wLW1hOGpxdjB1L3NyYy9ydWxlcy5tYWs6Njk6IGh3L3ZmaW8vcGNpLm9dIEVycm9y
+IDEKbWFrZVsxXTogKioqIFdhaXRpbmcgZm9yIHVuZmluaXNoZWQgam9icy4uLi4KbWFrZTogKioq
+IFtNYWtlZmlsZTo0NzI6IGFhcmNoNjQtc29mdG1tdS9hbGxdIEVycm9yIDIKY29sbGVjdDI6IGVy
+cm9yOiBsZCByZXR1cm5lZCAxIGV4aXQgc3RhdHVzCm1ha2VbMV06ICoqKiBbTWFrZWZpbGU6MjA5
+OiBxZW11LXN5c3RlbS1taXBzXSBFcnJvciAxCm1ha2U6ICoqKiBbTWFrZWZpbGU6NDcyOiBtaXBz
+LXNvZnRtbXUvYWxsXSBFcnJvciAyCj09PSBPVVRQVVQgRU5EID09PQoKClRoZSBmdWxsIGxvZyBp
+cyBhdmFpbGFibGUgYXQKaHR0cDovL3BhdGNoZXcub3JnL2xvZ3MvY292ZXIuMTU2NTkwNDg1NS5n
+aXQuYWxpc3RhaXIuZnJhbmNpc0B3ZGMuY29tL3Rlc3RpbmcuczM5MHgvP3R5cGU9bWVzc2FnZS4K
+LS0tCkVtYWlsIGdlbmVyYXRlZCBhdXRvbWF0aWNhbGx5IGJ5IFBhdGNoZXcgW2h0dHBzOi8vcGF0
+Y2hldy5vcmcvXS4KUGxlYXNlIHNlbmQgeW91ciBmZWVkYmFjayB0byBwYXRjaGV3LWRldmVsQHJl
+ZGhhdC5jb20=
 
-Argh!
-
-> >
-> > The distinction between the two is that do_unassigned_access
-> > will end up being called for any failing access, including
-> > not just "normal" guest accesses but also for bad accesses
-> > that happen during page table walks (which often want to
-> > be reported to the guest differently) and also accesses
-> > by random devices like DMA controllers (where throwing a
-> > cpu exception is always a bug).
-> >
-> > Changing the hook implementation itself should be straightforward;
-> > commit 6ad4d7eed05a1e23537f is an example of doing that on Alpha.
-> > You also want to check all the places in your target code that
-> > do physical memory accesses, determine what the right behaviour
-> > if they get a bus fault is, and implement that (or at least put
-> > in TODO comments).
->
-> Sorry, updating that has been on my TODO list for a while now.  I figured it
-> was better to have the deprecated version in there than nothing at all.  I've
-> written some patches to fix this, but I want to give them another look before
-> sending them out.
-
-I was going to start looking into this, but if you already have
-patches I won't bother. Let me know if you want a hand with the
-conversion.
-
-Alistair
-
->
 
