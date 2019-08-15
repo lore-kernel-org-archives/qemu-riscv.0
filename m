@@ -1,74 +1,73 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1hyNSO-00032h-Pe
-	for mharc-qemu-riscv@gnu.org; Thu, 15 Aug 2019 17:38:52 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:60314)
+	id 1hyNSP-00032r-4g
+	for mharc-qemu-riscv@gnu.org; Thu, 15 Aug 2019 17:38:54 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:60398)
  by lists.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <prvs=1236ab962=alistair.francis@wdc.com>)
- id 1hyNRx-0002w1-FF
- for qemu-riscv@nongnu.org; Thu, 15 Aug 2019 17:38:26 -0400
+ id 1hyNS7-0002z9-OX
+ for qemu-riscv@nongnu.org; Thu, 15 Aug 2019 17:38:37 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
  (envelope-from <prvs=1236ab962=alistair.francis@wdc.com>)
- id 1hyNRw-0006Ct-9z
- for qemu-riscv@nongnu.org; Thu, 15 Aug 2019 17:38:25 -0400
-Received: from esa1.hgst.iphmx.com ([68.232.141.245]:19195)
+ id 1hyNS6-0006IT-Jg
+ for qemu-riscv@nongnu.org; Thu, 15 Aug 2019 17:38:35 -0400
+Received: from esa5.hgst.iphmx.com ([216.71.153.144]:54904)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <prvs=1236ab962=alistair.francis@wdc.com>)
- id 1hyNRt-0006Ao-Gr; Thu, 15 Aug 2019 17:38:21 -0400
+ id 1hyNRy-0006Cd-9k; Thu, 15 Aug 2019 17:38:26 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1565905101; x=1597441101;
+ t=1565905107; x=1597441107;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=4KhMKveagWI7BDqokS3HdF3E2uSk0r+2CqujjD2dHoA=;
- b=IiKpLwq/NafzjEOTt6Ksfc4vSfrzVBxz3MyEWz6+qUlPdw1aZSePCq5U
- yHfI0AL67kMeBijl2/98RiGbuKdjHhJovlsKQX2YRiOGE9N5tNz11D2gY
- /sZ7wktMFQJ+yCT+9IungpTC+nSXrqgo7nr/mDBA7AZErS5E+wBV5rTSy
- zPP2ksqz2xnoVK1BRbnZIW4j2Ka1k5zJRWFnQvp1I8a2MtFlKOwV2z777
- YMXmWzNcFDvVfxJkOTYDHKTGXkrbS5uhmRVkSPXSqsbHGYCCJN6bh2s90
- 6i5kV/Je3jioqe4hR8MdOohAGJ5vfCwsF5qRgpRk+cjYv0+H7aCpxp1VS g==;
-IronPort-SDR: OhdisHQWVWBUUKxyLyFnEqlyLtA3ctJaQTugrVM9vvX3mGOLh/2hfqp7M3YF9Qkryh8FPMjEDV
- N7OyoZI41yoBEXHqPwek9RbVwpd+kZebCgoLxglSToxBuht4afDE6evpG/5iDD3JFMkaWwK/6y
- LURQq9wf5NwXBMWTxIxSCbCfWO3/K1rzD7sh2jKZ+Hbh6TQ2SuyVIIqxuiBHtdrMLhdSfiaua2
- NBAi67cb+2yjTKfUucGIJi1jFcrka4cuPB60FGhvjCJEt4e2iYXpkd0y1zO54kqpKwrXWsbp6F
- 24w=
-X-IronPort-AV: E=Sophos;i="5.64,389,1559491200"; d="scan'208";a="222470292"
-Received: from h199-255-45-15.hgst.com (HELO uls-op-cesaep02.wdc.com)
- ([199.255.45.15])
- by ob1.hgst.iphmx.com with ESMTP; 16 Aug 2019 05:38:18 +0800
-IronPort-SDR: pFBbhC0FlRyQynaQ8smczfLEjrxUuUOXcMPcMG4XdAC+BZNyg9xXEmwVEQwamKx+h/9+CK4IYu
- 94Dg9/iRE9Et1wfh1TfAz7hzo4F1gyfMPyXG4l4xq6IaEuMHeCw4Jpf/wRvaTJ2INCqEwKdBeP
- ipHqDHxITTHvsxMnM5aCgUz+l2ua/KiEAYGZRd+SyoxnXVVGwlfY7eiEc/dZkHeJtqQyCgb+Ub
- ciJbpWjC/3qrxZVgWnfnMXiTOZ/hkWPmpW9TE8JMDMQzXWDORtA0aBeRi1t4C/De+b5KMrBixr
- O3T3yVEFb8zD2nfVWiElflIA
-Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
- by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 15 Aug 2019 14:35:49 -0700
-IronPort-SDR: Tx0/+WbOlFBDxAWZ6PZ7RpNKImU/jHuMnUqKpXePeIcE+uHqAKXsHWvZ+MhW+j7DPHEs175W9X
- 4qhqXqQqni+xfITrxwwCdW92gepQs+oYzgXnR47yKDF7M8GEaD9AJl5K506GLFeakSw2jCWcoS
- Mv0O1nZQGwl9almFlWz8rFIO99AnW666xIVSok05lXVqhRHyX+hdplcCybFJ9HMMgE/+lAYjVf
- 3JxookV1rdUlRSJg09DfDExR+u0oGIMZA7epwbK4VBd3BMKhS/pX+y1dHonNp+f8ivkgkaPQas
- i6M=
+ bh=B5+pkTekbS4sZgZb2fbvUF9PuHTWwgChjNdnoZ8/yKY=;
+ b=N7GD0piIFihWr2C/RLSeyDYMMh1txf0jEx6k5mTYSKwvPKt6RCFrdw/4
+ JXaXrRyWciAK5juOyE812bXjyzXzYbiovaNzkUr/dPSLkaOkv8tO7USCD
+ BrZbyysL9MqWw0z8xZM/fHRHZ4N0oiWrhuOQijpLcRVSa2KOR8711QkNz
+ TKJyWqvxKi7fj9UVEXLc0pwGvyRCiEbJDP6wOvn9ihKWzTUHRrkWaV/Bc
+ SApvjEpzEMXqOEJGNCfQeHns9i48cnS5CALMmRDTGvhiiPu9R4T2QIJGD
+ JafDUpAD0oOlm6IMiSPrDRAzRaEUIW4G8so2G/2fyKYg0i0z8uqXne4EV A==;
+IronPort-SDR: s8SXx819O2wsaTWvVyi4rBucUvpOqwxx1imihL+o0sWXinRbcG2wfOjXTXe1XWKwdKd0mlYrFZ
+ wyKX79EZBMeHBL7nN07ilrja5kY3U80qLwuBFGeBnz04KANIDfxJQFCL27RdnwALxEep2ruD3f
+ N3Ie7aUqVlkc8I4tZHPOeqCvoAyCTmZhYbysV/FVn7KfnZep2V3epzeNFxJy6QTpvqZeOiZSDO
+ kRR9csTnnmwLIOeaK8egwPy7y6wF+kq0ki3kme8UJXOmxzt3nYgoC2zU4mZQ/v8V+g0nUsFBCY
+ 6xg=
+X-IronPort-AV: E=Sophos;i="5.64,389,1559491200"; d="scan'208";a="116881532"
+Received: from h199-255-45-14.hgst.com (HELO uls-op-cesaep01.wdc.com)
+ ([199.255.45.14])
+ by ob1.hgst.iphmx.com with ESMTP; 16 Aug 2019 05:38:24 +0800
+IronPort-SDR: g1C7n/ZUIzoifQyFfrqgNy4/AP9uPfwMxq8mpZ3udurxoIdm8mo1Mgdbp2uD4pOcXJUkk+sf6E
+ MWP4lihurj/tXYq5ZsN7Toqjq7+GVPL6b5Io69KHJYOzCOcrBu5iC+M6Jm0IR/uvrtunmLJ9E7
+ 4QBZ8QICq1hbR9x9w5MP0Zpkh0XKlFHkkiz6gOV4TcsIfhsLnopSX6HulGOR9GZu7C2MTBjB5W
+ 3j524YEYCAquo2c8UTA8PHrXeYKszXzEtlOuedZkNxZ9OKgSPrt8XqVETYyPtPUWTmdQdrVK2Y
+ exoce7dkf3N6Noq6ILb7n/HM
+Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
+ by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 15 Aug 2019 14:35:55 -0700
+IronPort-SDR: O6zMu+gEITSx3YQ4MqSfRVaio/mRWu///LIrcCA1oxofnH9bvaKBUI/tIJFertnAw7Fwq8ogkt
+ UmX5yYhKacAhiBb2pJche9rYgN9ztw0oHPM/qIV94pZ7tpDtu5Gt8ltYbW0KRQR0aqhhgysR+i
+ 96jW2TYI8zXT4NDOgYT2kXRGD5e99XIW+pc9TPDwafZwIOOHk/lGPh0W2yoM+U963CVjuhDOz4
+ eKtDB7CzRRC8fqOydfY1lt1mhPrIF3HDi5UKuKtvNS1mPenXZP8o5VkzhAZQcHUCrWBvzp8lEH
+ +LM=
 Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
  risc6-mainframe.int.fusionio.com) ([10.196.157.58])
- by uls-op-cesaip02.wdc.com with ESMTP; 15 Aug 2019 14:38:19 -0700
+ by uls-op-cesaip01.wdc.com with ESMTP; 15 Aug 2019 14:38:24 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: palmer@sifive.com,
 	alistair.francis@wdc.com,
 	alistair23@gmail.com
-Date: Thu, 15 Aug 2019 14:34:50 -0700
-Message-Id: <9ecf08f99b17a0547cc5cc7a427453ce20389b4b.1565904855.git.alistair.francis@wdc.com>
+Date: Thu, 15 Aug 2019 14:34:55 -0700
+Message-Id: <59bed3d7342ef7513a60285e2711c162be5559fc.1565904855.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.22.0
 In-Reply-To: <cover.1565904855.git.alistair.francis@wdc.com>
 References: <cover.1565904855.git.alistair.francis@wdc.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: FreeBSD 9.x
-X-Received-From: 68.232.141.245
-Subject: [Qemu-riscv] [PATCH v3 2/7] riscv: plic: Remove unused interrupt
- functions
+X-Received-From: 216.71.153.144
+Subject: [Qemu-riscv] [PATCH v3 4/7] target/riscv: Update the Hypervisor
+ CSRs to v0.4
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -80,55 +79,69 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Aug 2019 21:38:26 -0000
-X-List-Received-Date: Thu, 15 Aug 2019 21:38:26 -0000
+X-List-Received-Date: Thu, 15 Aug 2019 21:38:38 -0000
+
+Update the Hypervisor CSR addresses to match the v0.4 spec.
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Jonathan Behrens <fintelia@gmail.com>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@redhat.com>
 Reviewed-by: Chih-Min Chao <chihmin.chao@sifive.com>
 ---
- hw/riscv/sifive_plic.c         | 12 ------------
- include/hw/riscv/sifive_plic.h |  3 ---
- 2 files changed, 15 deletions(-)
+ target/riscv/cpu_bits.h | 35 ++++++++++++++++++-----------------
+ 1 file changed, 18 insertions(+), 17 deletions(-)
 
-diff --git a/hw/riscv/sifive_plic.c b/hw/riscv/sifive_plic.c
-index 0950e89e15..864a1bed42 100644
---- a/hw/riscv/sifive_plic.c
-+++ b/hw/riscv/sifive_plic.c
-@@ -161,18 +161,6 @@ static void sifive_plic_update(SiFivePLICState *plic)
-     }
- }
+diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+index 11f971ad5d..e99834856c 100644
+--- a/target/riscv/cpu_bits.h
++++ b/target/riscv/cpu_bits.h
+@@ -173,6 +173,24 @@
+ #define CSR_SPTBR           0x180
+ #define CSR_SATP            0x180
  
--void sifive_plic_raise_irq(SiFivePLICState *plic, uint32_t irq)
--{
--    sifive_plic_set_pending(plic, irq, true);
--    sifive_plic_update(plic);
--}
--
--void sifive_plic_lower_irq(SiFivePLICState *plic, uint32_t irq)
--{
--    sifive_plic_set_pending(plic, irq, false);
--    sifive_plic_update(plic);
--}
--
- static uint32_t sifive_plic_claim(SiFivePLICState *plic, uint32_t addrid)
- {
-     int i, j;
-diff --git a/include/hw/riscv/sifive_plic.h b/include/hw/riscv/sifive_plic.h
-index ce8907f6aa..3b8a623919 100644
---- a/include/hw/riscv/sifive_plic.h
-+++ b/include/hw/riscv/sifive_plic.h
-@@ -69,9 +69,6 @@ typedef struct SiFivePLICState {
-     uint32_t aperture_size;
- } SiFivePLICState;
++/* Hpervisor CSRs */
++#define CSR_HSTATUS         0x600
++#define CSR_HEDELEG         0x602
++#define CSR_HIDELEG         0x603
++#define CSR_HCOUNTERNEN     0x606
++#define CSR_HGATP           0x680
++
++#if defined(TARGET_RISCV32)
++#define HGATP_MODE           SATP32_MODE
++#define HGATP_VMID           SATP32_ASID
++#define HGATP_PPN            SATP32_PPN
++#endif
++#if defined(TARGET_RISCV64)
++#define HGATP_MODE           SATP64_MODE
++#define HGATP_VMID           SATP64_ASID
++#define HGATP_PPN            SATP64_PPN
++#endif
++
+ /* Physical Memory Protection */
+ #define CSR_PMPCFG0         0x3a0
+ #define CSR_PMPCFG1         0x3a1
+@@ -206,23 +224,6 @@
+ #define CSR_DPC             0x7b1
+ #define CSR_DSCRATCH        0x7b2
  
--void sifive_plic_raise_irq(SiFivePLICState *plic, uint32_t irq);
--void sifive_plic_lower_irq(SiFivePLICState *plic, uint32_t irq);
+-/* Hpervisor CSRs */
+-#define CSR_HSTATUS         0xa00
+-#define CSR_HEDELEG         0xa02
+-#define CSR_HIDELEG         0xa03
+-#define CSR_HGATP           0xa80
 -
- DeviceState *sifive_plic_create(hwaddr addr, char *hart_config,
-     uint32_t num_sources, uint32_t num_priorities,
-     uint32_t priority_base, uint32_t pending_base,
+-#if defined(TARGET_RISCV32)
+-#define HGATP_MODE           SATP32_MODE
+-#define HGATP_ASID           SATP32_ASID
+-#define HGATP_PPN            SATP32_PPN
+-#endif
+-#if defined(TARGET_RISCV64)
+-#define HGATP_MODE           SATP64_MODE
+-#define HGATP_ASID           SATP64_ASID
+-#define HGATP_PPN            SATP64_PPN
+-#endif
+-
+ /* Performance Counters */
+ #define CSR_MHPMCOUNTER3    0xb03
+ #define CSR_MHPMCOUNTER4    0xb04
 -- 
 2.22.0
 
