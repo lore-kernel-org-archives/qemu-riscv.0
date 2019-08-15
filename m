@@ -1,64 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1hyNSP-00032r-4g
+	id 1hyNSQ-00034G-LI
 	for mharc-qemu-riscv@gnu.org; Thu, 15 Aug 2019 17:38:54 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:60398)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:60433)
  by lists.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <prvs=1236ab962=alistair.francis@wdc.com>)
- id 1hyNS7-0002z9-OX
- for qemu-riscv@nongnu.org; Thu, 15 Aug 2019 17:38:37 -0400
+ id 1hyNSH-00031D-Lt
+ for qemu-riscv@nongnu.org; Thu, 15 Aug 2019 17:38:49 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
  (envelope-from <prvs=1236ab962=alistair.francis@wdc.com>)
- id 1hyNS6-0006IT-Jg
- for qemu-riscv@nongnu.org; Thu, 15 Aug 2019 17:38:35 -0400
+ id 1hyNS9-0006Jx-BZ
+ for qemu-riscv@nongnu.org; Thu, 15 Aug 2019 17:38:40 -0400
 Received: from esa5.hgst.iphmx.com ([216.71.153.144]:54904)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <prvs=1236ab962=alistair.francis@wdc.com>)
- id 1hyNRy-0006Cd-9k; Thu, 15 Aug 2019 17:38:26 -0400
+ id 1hyNRz-0006Cd-37; Thu, 15 Aug 2019 17:38:33 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1565905107; x=1597441107;
+ t=1565905108; x=1597441108;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=B5+pkTekbS4sZgZb2fbvUF9PuHTWwgChjNdnoZ8/yKY=;
- b=N7GD0piIFihWr2C/RLSeyDYMMh1txf0jEx6k5mTYSKwvPKt6RCFrdw/4
- JXaXrRyWciAK5juOyE812bXjyzXzYbiovaNzkUr/dPSLkaOkv8tO7USCD
- BrZbyysL9MqWw0z8xZM/fHRHZ4N0oiWrhuOQijpLcRVSa2KOR8711QkNz
- TKJyWqvxKi7fj9UVEXLc0pwGvyRCiEbJDP6wOvn9ihKWzTUHRrkWaV/Bc
- SApvjEpzEMXqOEJGNCfQeHns9i48cnS5CALMmRDTGvhiiPu9R4T2QIJGD
- JafDUpAD0oOlm6IMiSPrDRAzRaEUIW4G8so2G/2fyKYg0i0z8uqXne4EV A==;
-IronPort-SDR: s8SXx819O2wsaTWvVyi4rBucUvpOqwxx1imihL+o0sWXinRbcG2wfOjXTXe1XWKwdKd0mlYrFZ
- wyKX79EZBMeHBL7nN07ilrja5kY3U80qLwuBFGeBnz04KANIDfxJQFCL27RdnwALxEep2ruD3f
- N3Ie7aUqVlkc8I4tZHPOeqCvoAyCTmZhYbysV/FVn7KfnZep2V3epzeNFxJy6QTpvqZeOiZSDO
- kRR9csTnnmwLIOeaK8egwPy7y6wF+kq0ki3kme8UJXOmxzt3nYgoC2zU4mZQ/v8V+g0nUsFBCY
- 6xg=
-X-IronPort-AV: E=Sophos;i="5.64,389,1559491200"; d="scan'208";a="116881532"
+ bh=QWsHDUppx5IItDm6bE2SCzfDZdT1jACkzVRJ5S9OHW4=;
+ b=L0MaxXHQThxGEYlkMhoXLxxvJbKZ9aN7EsOKPPKJX7xvLF64unjzKZuZ
+ iKkZ9dOl6yzChV4WUjUjHWnZG5CKwAezGlDG9co6+vb7Tk//DsjJHkqPt
+ FtROxtTdltMWZcLNNWo7X0Tct5FlbTWvCAxrJhhm/WNZkvxqPdE7GyvlB
+ iEosvJhPevPEds2RM9W0skINzBhWLEY4QjktKxOW0ThUuNPCHtxBL1G7D
+ kQYj/2FWNfqpiekNFh8nNKJpDfnl923lDiFD8nNwJDUdWSX3gHUv1JNLu
+ a3OeGGZwkq7Qr7JipulaJcXx0Oyo7MAaO58f73ZZbxadeSZTkfxwfzSKw w==;
+IronPort-SDR: 6b202trFfzjs9jZURU5lwymA2ZvutzcjLCrKvqipKjr3W6ZIRj9WyVS9a/Rn8LH4bVawQhhSzN
+ q/YjWKPA+0tf41RnZ+Hbe7q4yYfTYj0Oe9/b5+gPvo5HVcT+8J33RDDUaHG7PFZEAsWYkqFMbi
+ tGPf2RYDqVRGL9BAbBDaNaPkuTiW0Ui3+uMuJ/F7Sl15NCN9JVLQu1SVNbegJYwb3FbjT7u2in
+ 9EnUFFDiFRckeukPtXrOywDNMcPc2bKOgNakRxvyBRuwcuC0qU7cupw/Ccm2UlhcS6mBDAqarw
+ Wq8=
+X-IronPort-AV: E=Sophos;i="5.64,389,1559491200"; d="scan'208";a="116881534"
 Received: from h199-255-45-14.hgst.com (HELO uls-op-cesaep01.wdc.com)
  ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 16 Aug 2019 05:38:24 +0800
-IronPort-SDR: g1C7n/ZUIzoifQyFfrqgNy4/AP9uPfwMxq8mpZ3udurxoIdm8mo1Mgdbp2uD4pOcXJUkk+sf6E
- MWP4lihurj/tXYq5ZsN7Toqjq7+GVPL6b5Io69KHJYOzCOcrBu5iC+M6Jm0IR/uvrtunmLJ9E7
- 4QBZ8QICq1hbR9x9w5MP0Zpkh0XKlFHkkiz6gOV4TcsIfhsLnopSX6HulGOR9GZu7C2MTBjB5W
- 3j524YEYCAquo2c8UTA8PHrXeYKszXzEtlOuedZkNxZ9OKgSPrt8XqVETYyPtPUWTmdQdrVK2Y
- exoce7dkf3N6Noq6ILb7n/HM
+ by ob1.hgst.iphmx.com with ESMTP; 16 Aug 2019 05:38:27 +0800
+IronPort-SDR: yJR1Pa9MBr/wJFMlUOUIJuhGb0BvCvetNhgU+i9FpYMmBr+wsF0PC5P3Y73CYJMRQyI9koXg6A
+ er/vxE+yAnfeG0JiT8ZaEHgb+5lBgwOU1x1Ua5zSQlBvjKrTcm3/C+I+1dR/Wm7aivJFXp6SPW
+ N0c5jlreHM+0SFczFNbH+jZW2jl1RgsZTIEgyj8pimmLL0WSh20zITd7aStQ/2lmL0MC7npdui
+ IPqi3nrYxP4llG+vgtdnW66p4LfhdrEb4zO4Q9PlB8LQDG9PCI7oN+/vkl4M+Z3rDwOklbekcB
+ Flm0xAuCnO9QIHn14OeYVFfK
 Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
  by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 15 Aug 2019 14:35:55 -0700
-IronPort-SDR: O6zMu+gEITSx3YQ4MqSfRVaio/mRWu///LIrcCA1oxofnH9bvaKBUI/tIJFertnAw7Fwq8ogkt
- UmX5yYhKacAhiBb2pJche9rYgN9ztw0oHPM/qIV94pZ7tpDtu5Gt8ltYbW0KRQR0aqhhgysR+i
- 96jW2TYI8zXT4NDOgYT2kXRGD5e99XIW+pc9TPDwafZwIOOHk/lGPh0W2yoM+U963CVjuhDOz4
- eKtDB7CzRRC8fqOydfY1lt1mhPrIF3HDi5UKuKtvNS1mPenXZP8o5VkzhAZQcHUCrWBvzp8lEH
- +LM=
+ 15 Aug 2019 14:35:57 -0700
+IronPort-SDR: V2vvTOk6ru8JxSH+sR112EuuW5S8h9s/4YFK6581kaJxrPM67zspPCDzyVgfR6Auy02rEcBbgi
+ ei6O7O3I8DvZHtJQHSuNlaUp6Q5GpjrTl2b//TYr6iPHksEffQ5Do3XzW4k1u1ec5p3pGhQJhs
+ 1MTZbXpqvb33XcVfUR+E7az+VFTFOYNUgNjF/e6Kb5ZJwOdpXNHzrfEFb+3u85nRJSVrtbNtDT
+ fTn5sGvkLZ59BjgI5tUzgAkQny160yCpgHCSDPhCIhTcuP/EZnzLTM0ZjV9Df54fo+FiYVoK/A
+ aZY=
 Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
  risc6-mainframe.int.fusionio.com) ([10.196.157.58])
- by uls-op-cesaip01.wdc.com with ESMTP; 15 Aug 2019 14:38:24 -0700
+ by uls-op-cesaip01.wdc.com with ESMTP; 15 Aug 2019 14:38:26 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: palmer@sifive.com,
 	alistair.francis@wdc.com,
 	alistair23@gmail.com
-Date: Thu, 15 Aug 2019 14:34:55 -0700
-Message-Id: <59bed3d7342ef7513a60285e2711c162be5559fc.1565904855.git.alistair.francis@wdc.com>
+Date: Thu, 15 Aug 2019 14:34:58 -0700
+Message-Id: <4c3b0d0df95674ab0c049b75506f3ee3237ea14b.1565904855.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.22.0
 In-Reply-To: <cover.1565904855.git.alistair.francis@wdc.com>
 References: <cover.1565904855.git.alistair.francis@wdc.com>
@@ -66,8 +66,8 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: FreeBSD 9.x
 X-Received-From: 216.71.153.144
-Subject: [Qemu-riscv] [PATCH v3 4/7] target/riscv: Update the Hypervisor
- CSRs to v0.4
+Subject: [Qemu-riscv] [PATCH v3 5/7] target/riscv: Use both register name
+ and ABI name
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -79,69 +79,52 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Aug 2019 21:38:38 -0000
+X-List-Received-Date: Thu, 15 Aug 2019 21:38:51 -0000
 
-Update the Hypervisor CSR addresses to match the v0.4 spec.
+From: Atish Patra <atish.patra@wdc.com>
 
+Use both the generic register name and ABI name for the general purpose
+registers and floating point registers.
+
+Signed-off-by: Atish Patra <atish.patra@wdc.com>
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Chih-Min Chao <chihmin.chao@sifive.com>
 ---
- target/riscv/cpu_bits.h | 35 ++++++++++++++++++-----------------
- 1 file changed, 18 insertions(+), 17 deletions(-)
+ target/riscv/cpu.c | 19 +++++++++++--------
+ 1 file changed, 11 insertions(+), 8 deletions(-)
 
-diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-index 11f971ad5d..e99834856c 100644
---- a/target/riscv/cpu_bits.h
-+++ b/target/riscv/cpu_bits.h
-@@ -173,6 +173,24 @@
- #define CSR_SPTBR           0x180
- #define CSR_SATP            0x180
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index f8d07bd20a..60b95daf60 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -33,17 +33,20 @@
+ static const char riscv_exts[26] = "IEMAFDQCLBJTPVNSUHKORWXYZG";
  
-+/* Hpervisor CSRs */
-+#define CSR_HSTATUS         0x600
-+#define CSR_HEDELEG         0x602
-+#define CSR_HIDELEG         0x603
-+#define CSR_HCOUNTERNEN     0x606
-+#define CSR_HGATP           0x680
-+
-+#if defined(TARGET_RISCV32)
-+#define HGATP_MODE           SATP32_MODE
-+#define HGATP_VMID           SATP32_ASID
-+#define HGATP_PPN            SATP32_PPN
-+#endif
-+#if defined(TARGET_RISCV64)
-+#define HGATP_MODE           SATP64_MODE
-+#define HGATP_VMID           SATP64_ASID
-+#define HGATP_PPN            SATP64_PPN
-+#endif
-+
- /* Physical Memory Protection */
- #define CSR_PMPCFG0         0x3a0
- #define CSR_PMPCFG1         0x3a1
-@@ -206,23 +224,6 @@
- #define CSR_DPC             0x7b1
- #define CSR_DSCRATCH        0x7b2
+ const char * const riscv_int_regnames[] = {
+-  "zero", "ra", "sp",  "gp",  "tp", "t0", "t1", "t2",
+-  "s0",   "s1", "a0",  "a1",  "a2", "a3", "a4", "a5",
+-  "a6",   "a7", "s2",  "s3",  "s4", "s5", "s6", "s7",
+-  "s8",   "s9", "s10", "s11", "t3", "t4", "t5", "t6"
++  "x0/zero", "x1/ra",  "x2/sp",  "x3/gp",  "x4/tp",  "x5/t0",   "x6/t1",
++  "x7/t2",   "x8/s0",  "x9/s1",  "x10/a0", "x11/a1", "x12/a2",  "x13/a3",
++  "x14/a4",  "x15/a5", "x16/a6", "x17/a7", "x18/s2", "x19/s3",  "x20/s4",
++  "x21/s5",  "x22/s6", "x23/s7", "x24/s8", "x25/s9", "x26/s10", "x27/s11",
++  "x28/t3",  "x29/t4", "x30/t5", "x31/t6"
+ };
  
--/* Hpervisor CSRs */
--#define CSR_HSTATUS         0xa00
--#define CSR_HEDELEG         0xa02
--#define CSR_HIDELEG         0xa03
--#define CSR_HGATP           0xa80
--
--#if defined(TARGET_RISCV32)
--#define HGATP_MODE           SATP32_MODE
--#define HGATP_ASID           SATP32_ASID
--#define HGATP_PPN            SATP32_PPN
--#endif
--#if defined(TARGET_RISCV64)
--#define HGATP_MODE           SATP64_MODE
--#define HGATP_ASID           SATP64_ASID
--#define HGATP_PPN            SATP64_PPN
--#endif
--
- /* Performance Counters */
- #define CSR_MHPMCOUNTER3    0xb03
- #define CSR_MHPMCOUNTER4    0xb04
+ const char * const riscv_fpr_regnames[] = {
+-  "ft0", "ft1", "ft2",  "ft3",  "ft4", "ft5", "ft6",  "ft7",
+-  "fs0", "fs1", "fa0",  "fa1",  "fa2", "fa3", "fa4",  "fa5",
+-  "fa6", "fa7", "fs2",  "fs3",  "fs4", "fs5", "fs6",  "fs7",
+-  "fs8", "fs9", "fs10", "fs11", "ft8", "ft9", "ft10", "ft11"
++  "f0/ft0",   "f1/ft1",  "f2/ft2",   "f3/ft3",   "f4/ft4",  "f5/ft5",
++  "f6/ft6",   "f7/ft7",  "f8/fs0",   "f9/fs1",   "f10/fa0", "f11/fa1",
++  "f12/fa2",  "f13/fa3", "f14/fa4",  "f15/fa5",  "f16/fa6", "f17/fa7",
++  "f18/fs2",  "f19/fs3", "f20/fs4",  "f21/fs5",  "f22/fs6", "f23/fs7",
++  "f24/fs8",  "f25/fs9", "f26/fs10", "f27/fs11", "f28/ft8", "f29/ft9",
++  "f30/ft10", "f31/ft11"
+ };
+ 
+ const char * const riscv_excp_names[] = {
 -- 
 2.22.0
 
