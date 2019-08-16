@@ -1,51 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1hyclY-0003nD-RG
-	for mharc-qemu-riscv@gnu.org; Fri, 16 Aug 2019 09:59:40 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:41847)
+	id 1hyclc-0003sK-BC
+	for mharc-qemu-riscv@gnu.org; Fri, 16 Aug 2019 09:59:44 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:41873)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <bmeng.cn@gmail.com>) id 1hyclV-0003i3-2e
- for qemu-riscv@nongnu.org; Fri, 16 Aug 2019 09:59:37 -0400
+ (envelope-from <bmeng.cn@gmail.com>) id 1hyclZ-0003oz-Hm
+ for qemu-riscv@nongnu.org; Fri, 16 Aug 2019 09:59:42 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <bmeng.cn@gmail.com>) id 1hyclU-0003rZ-1b
- for qemu-riscv@nongnu.org; Fri, 16 Aug 2019 09:59:36 -0400
-Received: from mail-ed1-x543.google.com ([2a00:1450:4864:20::543]:34851)
+ (envelope-from <bmeng.cn@gmail.com>) id 1hyclY-0003v3-Kf
+ for qemu-riscv@nongnu.org; Fri, 16 Aug 2019 09:59:41 -0400
+Received: from mail-ed1-x542.google.com ([2a00:1450:4864:20::542]:46869)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
- id 1hyclR-0003nR-Sr; Fri, 16 Aug 2019 09:59:34 -0400
-Received: by mail-ed1-x543.google.com with SMTP id w20so5216222edd.2;
- Fri, 16 Aug 2019 06:59:33 -0700 (PDT)
+ id 1hyclW-0003tJ-KT; Fri, 16 Aug 2019 09:59:38 -0400
+Received: by mail-ed1-x542.google.com with SMTP id z51so5175100edz.13;
+ Fri, 16 Aug 2019 06:59:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=oGCfzZeHGWIUbTwKpxV1Bv6Y1t8I17TWnHFwqZIwhtA=;
- b=AQWACyH3QHfMlIuQM9XXcTAwqP5Z6a0cSfxWv6cFtjI/I4WudGQCvnz57LsQVHZKJU
- sGrhWwrDYLdN5HEUinbgJc/o7Ll81stmSSXzb8XwawcrZcGB5iMUcua+123T+Qri6L6x
- 7fS17Q8easraYkB4Os/LE96p6JbrwXUV2/rUlRCIGiU/xKbzEnYuXtq/Er5FFmbG+mGH
- o+/XucHCfodeF9hcCxb1xCjA91EC6gGSo0/CKqpe/H9spAt3Fzt8/2pfzTNleWp550cc
- ocFBAi2fbQ2aqilvYBp9dQ/wnHewH9rKDi3Dg9D/038oxCCtT2/nuGu1eJVXXiqfAA/I
- C06Q==
+ :cc; bh=AZjf4PlAGOeVzKxNgv+ofsLzu+5Szi8gd8NA52sIoZQ=;
+ b=dZQzQXpwu3uhDQzNHk2vyUrdhv8Nf+PvIUBLY7tMdor+k5LORnh4Kregwe5xrWobLQ
+ RHJzbETpIyh9qh+tgBeWid17qoeUu+D3fEWwVLggL19UCyYoEORkFnTTp8GZ1t2G3XYl
+ ikqcNu68ly8Lz2F5U6IJD7bDmfWz543UiRdqH3u0UzoDwU+q/sQpHMolZ1qvlaMGAoAP
+ 0XiWR536PyuADrF/4FUJZilDhOdbwSD4Y0+eZ3fH6sVpsi1T7mP7O2bo82eiZVLAmnk3
+ 1NVFNT1SMYCjq6JGwdRT+rRUq//UAI9yBVBX9EDJbRxp6vCQzH6yNTMC/EUIMHr+cyY0
+ 7gpA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=oGCfzZeHGWIUbTwKpxV1Bv6Y1t8I17TWnHFwqZIwhtA=;
- b=bs7D+EanLHxmQRENej3njdcrRWdL7Qy8uq2idySdn2xNnTqS6DiByCtZqo0OPQHm8h
- cWYy4+LZFL+afovlY9cuSHZAdQh3QcQLJykjb+JYBdRHnv5GMCDXHFDloGjngA3G4wqJ
- yFtMxvQxwnpPJFQGYdLeG1Kgp0a2yHMlrv+2MWR7kRpFf0tPw7BhJx6/fTBa2eADcIhH
- lgWFeknASNU7we6QSyVTBtvBurlK0eIebKnZ47atXFRnOWxrrCLT1ZWUNL8GwE0nBTEQ
- yR/EkzWZg0Yel1p5sAf9XxvHDbXpysY4r/REdGUm9RxQ6GjqWT7NwSriU3KjIg05lu91
- wahw==
-X-Gm-Message-State: APjAAAUz7cY5TGSwpVvpV3FquYzOz5FbZB072kCeH4/XDWe0siBL/MGq
- rdGF5PrYikUpzq0GNV3SWHaD/NF+Q2T1K7LkkJs=
-X-Google-Smtp-Source: APXvYqyp1tOIzSzFMRvN/wJR3ocnKlIwSqIn90sjN+IvT8x5KJVovMjxTrdISD3yLIRkAm76U3E64fs2f8ZGWdbgvys=
-X-Received: by 2002:a50:8687:: with SMTP id r7mr11015604eda.137.1565963973118; 
- Fri, 16 Aug 2019 06:59:33 -0700 (PDT)
+ bh=AZjf4PlAGOeVzKxNgv+ofsLzu+5Szi8gd8NA52sIoZQ=;
+ b=dxTP9fG6akjYUXHN0PZ7FNZOjHGTDrt+wXHGLdsm///+UscnRdhQS3ocgGUZVKvDoE
+ dH1aAUjqv1WkRhfd4q+PPcWcMwxoEok6lGt4FPhmflV4GWXbet1qo6hoKy8U5JZdF884
+ Z51ze5ipRZ3Zu0CUUxnvEzOwLI9HvUrU28eAeyRJtjaSXW7rYsRAmebUskJe4FXLdiWj
+ zTRLOMwNJtuZ5T/tzrXHTs9T7QDjxAdj3XGIUJG0iGhS9BQ1J4iegpLffanfh3ha+/9r
+ vI8bV4QNbYQBT8F1O87vs8Dfd0DMjiLde11Ma/jh20yykbNsQbjW520bmGiLPEtt4E4L
+ 5aaw==
+X-Gm-Message-State: APjAAAV1vWbXAfdMNIpDdEQF9lSouLXBotEy4306ob7mAOhi5DX93gpY
+ ixACzdj1YAfU5+ogf+7Az/JPyr3il9dzIBQSx4E=
+X-Google-Smtp-Source: APXvYqxEhakauWrOuWbK1qlQekaya7JkdX+W1jZHntUTn2f4Nhz9ZbeswTVtOr0Wm0FUP7bGIJi23auP1gN+R9EgIw4=
+X-Received: by 2002:a05:6402:14d6:: with SMTP id
+ f22mr10785077edx.180.1565963977843; 
+ Fri, 16 Aug 2019 06:59:37 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1565904855.git.alistair.francis@wdc.com>
- <083ae70e31e202880ed8babf4de1a3c1ea27100b.1565904855.git.alistair.francis@wdc.com>
-In-Reply-To: <083ae70e31e202880ed8babf4de1a3c1ea27100b.1565904855.git.alistair.francis@wdc.com>
+ <7e476df36a8c2ba53162e9a5f62e9fa171da00ad.1565904855.git.alistair.francis@wdc.com>
+In-Reply-To: <7e476df36a8c2ba53162e9a5f62e9fa171da00ad.1565904855.git.alistair.francis@wdc.com>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Fri, 16 Aug 2019 21:59:21 +0800
-Message-ID: <CAEUhbmUcqe-1PjctdPA9R5jSRaJxZuPb3swKbn34fGU1DhhGQA@mail.gmail.com>
+Date: Fri, 16 Aug 2019 21:59:25 +0800
+Message-ID: <CAEUhbmVfgZPGgimuke=2S2TOyUN2FXsrKc4AwJ-nd0VhNu-vvg@mail.gmail.com>
 To: Alistair Francis <alistair.francis@wdc.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
@@ -53,9 +54,9 @@ Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
 Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::543
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v3 6/7] target/riscv: Fix
- mstatus dirty mask
+X-Received-From: 2a00:1450:4864:20::542
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v3 7/7] target/riscv: Convert
+ mip to target_ulong
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -67,14 +68,17 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Aug 2019 13:59:38 -0000
+X-List-Received-Date: Fri, 16 Aug 2019 13:59:42 -0000
 
-On Fri, Aug 16, 2019 at 5:38 AM Alistair Francis
+On Fri, Aug 16, 2019 at 5:44 AM Alistair Francis
 <alistair.francis@wdc.com> wrote:
+>
+> The mip register is an MXLEN-bit long register. Convert it to a
+> target_ulong type instead of uint32_t.
 >
 > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 > ---
->  target/riscv/csr.c | 2 +-
+>  target/riscv/cpu.h | 2 +-
 >  1 file changed, 1 insertion(+), 1 deletion(-)
 >
 
