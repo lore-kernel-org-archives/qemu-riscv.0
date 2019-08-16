@@ -1,28 +1,27 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1hyWjv-0006u4-W9
-	for mharc-qemu-riscv@gnu.org; Fri, 16 Aug 2019 03:33:36 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:39030)
+	id 1hyWjz-0006yp-I9
+	for mharc-qemu-riscv@gnu.org; Fri, 16 Aug 2019 03:33:39 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:39035)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <tony.nguyen@bt.com>) id 1hyWjr-0006nm-3Y
- for qemu-riscv@nongnu.org; Fri, 16 Aug 2019 03:33:33 -0400
+ (envelope-from <tony.nguyen@bt.com>) id 1hyWjr-0006o3-EK
+ for qemu-riscv@nongnu.org; Fri, 16 Aug 2019 03:33:35 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <tony.nguyen@bt.com>) id 1hyWjo-0000MK-Ox
- for qemu-riscv@nongnu.org; Fri, 16 Aug 2019 03:33:30 -0400
-Received: from smtpe1.intersmtp.com ([213.121.35.77]:32339)
+ (envelope-from <tony.nguyen@bt.com>) id 1hyWjn-0000LP-8B
+ for qemu-riscv@nongnu.org; Fri, 16 Aug 2019 03:33:31 -0400
+Received: from smtpe1.intersmtp.com ([62.239.224.236]:40679)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <tony.nguyen@bt.com>)
- id 1hyWjo-0000Ld-FN; Fri, 16 Aug 2019 03:33:28 -0400
-Received: from tpw09926dag18g.domain1.systemhost.net (10.9.212.34) by
- BWP09926082.bt.com (10.36.82.113) with Microsoft SMTP Server (version=TLS1_2, 
- cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P256) id 15.1.1713.5; Fri, 16
- Aug 2019 08:33:03 +0100
+ id 1hyWio-0008Is-Ny; Fri, 16 Aug 2019 03:32:27 -0400
+Received: from tpw09926dag18f.domain1.systemhost.net (10.9.212.26) by
+ RDW083A009ED65.bt.com (10.187.98.35) with Microsoft SMTP Server (TLS) id
+ 14.3.439.0; Fri, 16 Aug 2019 08:28:31 +0100
 Received: from tpw09926dag18e.domain1.systemhost.net (10.9.212.18) by
- tpw09926dag18g.domain1.systemhost.net (10.9.212.34) with Microsoft SMTP
- Server (TLS) id 15.0.1395.4; Fri, 16 Aug 2019 08:33:26 +0100
+ tpw09926dag18f.domain1.systemhost.net (10.9.212.26) with Microsoft SMTP
+ Server (TLS) id 15.0.1395.4; Fri, 16 Aug 2019 08:32:24 +0100
 Received: from tpw09926dag18e.domain1.systemhost.net
  ([fe80::a946:6348:ccf4:fa6c]) by tpw09926dag18e.domain1.systemhost.net
  ([fe80::a946:6348:ccf4:fa6c%12]) with mapi id 15.00.1395.000; Fri, 16 Aug
- 2019 08:33:26 +0100
+ 2019 08:32:24 +0100
 From: <tony.nguyen@bt.com>
 To: <qemu-devel@nongnu.org>
 CC: <rth@twiddle.net>, <pbonzini@redhat.com>, <mst@redhat.com>,
@@ -58,11 +57,11 @@ CC: <rth@twiddle.net>, <pbonzini@redhat.com>, <mst@redhat.com>,
  <stefanha@redhat.com>, <qemu-arm@nongnu.org>, <qemu-block@nongnu.org>,
  <qemu-ppc@nongnu.org>, <xen-devel@lists.xenproject.org>,
  <qemu-riscv@nongnu.org>, <qemu-s390x@nongnu.org>
-Thread-Topic: [Qemu-devel] [PATCH v7 20/42] hw/gpio: Declare device little or
+Thread-Topic: [Qemu-devel] [PATCH v7 17/42] hw/char: Declare device little or
  big endian
-Thread-Index: AQHVVATkESyOX2J9ZE+VGJcdShqFzA==
-Date: Fri, 16 Aug 2019 07:33:26 +0000
-Message-ID: <1565940805795.99783@bt.com>
+Thread-Index: AQHVVAS/MEVTyvOxxkaaWGWKyfz7nA==
+Date: Fri, 16 Aug 2019 07:32:24 +0000
+Message-ID: <1565940743566.34044@bt.com>
 References: <43bc5e07ac614d0e8e740bf6007ff77b@tpw09926dag18e.domain1.systemhost.net>
 In-Reply-To: <43bc5e07ac614d0e8e740bf6007ff77b@tpw09926dag18e.domain1.systemhost.net>
 Accept-Language: en-AU, en-GB, en-US
@@ -72,11 +71,12 @@ X-MS-TNEF-Correlator:
 x-ms-exchange-messagesentrepresentingtype: 1
 x-ms-exchange-transport-fromentityheader: Hosted
 x-originating-ip: [10.187.101.40]
-Content-Type: multipart/alternative; boundary="_000_156594080579599783btcom_"
+Content-Type: multipart/alternative; boundary="_000_156594074356634044btcom_"
 MIME-Version: 1.0
-X-detected-operating-system: by eggs.gnu.org: Windows 7 or 8 [fuzzy]
-X-Received-From: 213.121.35.77
-Subject: [Qemu-riscv] [Qemu-devel] [PATCH v7 20/42] hw/gpio: Declare device
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 62.239.224.236
+Subject: [Qemu-riscv] [Qemu-devel] [PATCH v7 17/42] hw/char: Declare device
  little or big endian
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -89,9 +89,9 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Aug 2019 07:33:34 -0000
+X-List-Received-Date: Fri, 16 Aug 2019 07:33:37 -0000
 
---_000_156594080579599783btcom_
+--_000_156594074356634044btcom_
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
@@ -112,44 +112,129 @@ better =3D)
 
 Signed-off-by: Tony Nguyen <tony.nguyen@bt.com>
 ---
- hw/gpio/pl061.c  | 2 +-
- hw/gpio/zaurus.c | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ hw/char/cadence_uart.c   | 2 +-
+ hw/char/escc.c           | 2 +-
+ hw/char/etraxfs_ser.c    | 2 +-
+ hw/char/grlib_apbuart.c  | 2 +-
+ hw/char/imx_serial.c     | 2 +-
+ hw/char/lm32_uart.c      | 2 +-
+ hw/char/milkymist-uart.c | 2 +-
+ hw/char/pl011.c          | 2 +-
+ 8 files changed, 8 insertions(+), 8 deletions(-)
 
-diff --git a/hw/gpio/pl061.c b/hw/gpio/pl061.c
-index 02c01fd..da6ff6a 100644
---- a/hw/gpio/pl061.c
-+++ b/hw/gpio/pl061.c
-@@ -339,7 +339,7 @@ static void pl061_set_irq(void * opaque, int irq, int l=
-evel)
- static const MemoryRegionOps pl061_ops =3D {
-     .read =3D pl061_read,
-     .write =3D pl061_write,
+diff --git a/hw/char/cadence_uart.c b/hw/char/cadence_uart.c
+index fa25fe2..6c7b904 100644
+--- a/hw/char/cadence_uart.c
++++ b/hw/char/cadence_uart.c
+@@ -457,7 +457,7 @@ static uint64_t uart_read(void *opaque, hwaddr offset,
+ static const MemoryRegionOps uart_ops =3D {
+     .read =3D uart_read,
+     .write =3D uart_write,
 -    .endianness =3D DEVICE_NATIVE_ENDIAN,
 +    .endianness =3D DEVICE_LITTLE_ENDIAN,
  };
 
- static void pl061_luminary_init(Object *obj)
-diff --git a/hw/gpio/zaurus.c b/hw/gpio/zaurus.c
-index f2f1f67..599d862 100644
---- a/hw/gpio/zaurus.c
-+++ b/hw/gpio/zaurus.c
-@@ -156,7 +156,7 @@ static void scoop_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps scoop_ops =3D {
-     .read =3D scoop_read,
-     .write =3D scoop_write,
+ static void cadence_uart_reset(DeviceState *dev)
+diff --git a/hw/char/escc.c b/hw/char/escc.c
+index 8ddbb4b..36182d9 100644
+--- a/hw/char/escc.c
++++ b/hw/char/escc.c
+@@ -574,7 +574,7 @@ static uint64_t escc_mem_read(void *opaque, hwaddr addr=
+,
+ static const MemoryRegionOps escc_mem_ops =3D {
+     .read =3D escc_mem_read,
+     .write =3D escc_mem_write,
+-    .endianness =3D DEVICE_NATIVE_ENDIAN,
++    .endianness =3D DEVICE_BIG_ENDIAN,
+     .valid =3D {
+         .min_access_size =3D 1,
+         .max_access_size =3D 1,
+diff --git a/hw/char/etraxfs_ser.c b/hw/char/etraxfs_ser.c
+index 9745bca..cda687b 100644
+--- a/hw/char/etraxfs_ser.c
++++ b/hw/char/etraxfs_ser.c
+@@ -155,7 +155,7 @@ ser_write(void *opaque, hwaddr addr,
+ static const MemoryRegionOps ser_ops =3D {
+     .read =3D ser_read,
+     .write =3D ser_write,
+-    .endianness =3D DEVICE_NATIVE_ENDIAN,
++    .endianness =3D DEVICE_LITTLE_ENDIAN,
+     .valid =3D {
+         .min_access_size =3D 4,
+         .max_access_size =3D 4
+diff --git a/hw/char/grlib_apbuart.c b/hw/char/grlib_apbuart.c
+index c2bb3ac..119fc84 100644
+--- a/hw/char/grlib_apbuart.c
++++ b/hw/char/grlib_apbuart.c
+@@ -237,7 +237,7 @@ static void grlib_apbuart_write(void *opaque, hwaddr ad=
+dr,
+ static const MemoryRegionOps grlib_apbuart_ops =3D {
+     .write      =3D grlib_apbuart_write,
+     .read       =3D grlib_apbuart_read,
+-    .endianness =3D DEVICE_NATIVE_ENDIAN,
++    .endianness =3D DEVICE_BIG_ENDIAN,
+ };
+
+ static void grlib_apbuart_realize(DeviceState *dev, Error **errp)
+diff --git a/hw/char/imx_serial.c b/hw/char/imx_serial.c
+index 0655a95..7c66551 100644
+--- a/hw/char/imx_serial.c
++++ b/hw/char/imx_serial.c
+@@ -332,7 +332,7 @@ static void imx_event(void *opaque, int event)
+ static const struct MemoryRegionOps imx_serial_ops =3D {
+     .read =3D imx_serial_read,
+     .write =3D imx_serial_write,
 -    .endianness =3D DEVICE_NATIVE_ENDIAN,
 +    .endianness =3D DEVICE_LITTLE_ENDIAN,
  };
 
- static void scoop_gpio_set(void *opaque, int line, int level)
+ static void imx_serial_realize(DeviceState *dev, Error **errp)
+diff --git a/hw/char/lm32_uart.c b/hw/char/lm32_uart.c
+index d047a44..2fe5f60 100644
+--- a/hw/char/lm32_uart.c
++++ b/hw/char/lm32_uart.c
+@@ -205,7 +205,7 @@ static void uart_write(void *opaque, hwaddr addr,
+ static const MemoryRegionOps uart_ops =3D {
+     .read =3D uart_read,
+     .write =3D uart_write,
+-    .endianness =3D DEVICE_NATIVE_ENDIAN,
++    .endianness =3D DEVICE_BIG_ENDIAN,
+     .valid =3D {
+         .min_access_size =3D 4,
+         .max_access_size =3D 4,
+diff --git a/hw/char/milkymist-uart.c b/hw/char/milkymist-uart.c
+index 8a78fcc..bdb8282 100644
+--- a/hw/char/milkymist-uart.c
++++ b/hw/char/milkymist-uart.c
+@@ -156,7 +156,7 @@ static const MemoryRegionOps uart_mmio_ops =3D {
+         .min_access_size =3D 4,
+         .max_access_size =3D 4,
+     },
+-    .endianness =3D DEVICE_NATIVE_ENDIAN,
++    .endianness =3D DEVICE_BIG_ENDIAN,
+ };
+
+ static void uart_rx(void *opaque, const uint8_t *buf, int size)
+diff --git a/hw/char/pl011.c b/hw/char/pl011.c
+index c1ae2f3..5fb95d2 100644
+--- a/hw/char/pl011.c
++++ b/hw/char/pl011.c
+@@ -287,7 +287,7 @@ static void pl011_event(void *opaque, int event)
+ static const MemoryRegionOps pl011_ops =3D {
+     .read =3D pl011_read,
+     .write =3D pl011_write,
+-    .endianness =3D DEVICE_NATIVE_ENDIAN,
++    .endianness =3D DEVICE_LITTLE_ENDIAN,
+ };
+
+ static const VMStateDescription vmstate_pl011 =3D {
 --
 1.8.3.1
 
 ?
 
 
---_000_156594080579599783btcom_
+--_000_156594074356634044btcom_
 Content-Type: text/html; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
@@ -197,40 +282,135 @@ div>
 </div>
 <div>Signed-off-by: Tony Nguyen &lt;tony.nguyen@bt.com&gt;</div>
 <div>---</div>
-<div>&nbsp;hw/gpio/pl061.c &nbsp;| 2 &#43;-</div>
-<div>&nbsp;hw/gpio/zaurus.c | 2 &#43;-</div>
-<div>&nbsp;2 files changed, 2 insertions(&#43;), 2 deletions(-)</div>
+<div>&nbsp;hw/char/cadence_uart.c &nbsp; | 2 &#43;-</div>
+<div>&nbsp;hw/char/escc.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | 2 &#43;-</di=
+v>
+<div>&nbsp;hw/char/etraxfs_ser.c &nbsp; &nbsp;| 2 &#43;-</div>
+<div>&nbsp;hw/char/grlib_apbuart.c &nbsp;| 2 &#43;-</div>
+<div>&nbsp;hw/char/imx_serial.c &nbsp; &nbsp; | 2 &#43;-</div>
+<div>&nbsp;hw/char/lm32_uart.c &nbsp; &nbsp; &nbsp;| 2 &#43;-</div>
+<div>&nbsp;hw/char/milkymist-uart.c | 2 &#43;-</div>
+<div>&nbsp;hw/char/pl011.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;| 2 &#43;-</di=
+v>
+<div>&nbsp;8 files changed, 8 insertions(&#43;), 8 deletions(-)</div>
 <div><br>
 </div>
-<div>diff --git a/hw/gpio/pl061.c b/hw/gpio/pl061.c</div>
-<div>index 02c01fd..da6ff6a 100644</div>
-<div>--- a/hw/gpio/pl061.c</div>
-<div>&#43;&#43;&#43; b/hw/gpio/pl061.c</div>
-<div>@@ -339,7 &#43;339,7 @@ static void pl061_set_irq(void * opaque, int i=
-rq, int level)</div>
-<div>&nbsp;static const MemoryRegionOps pl061_ops =3D {</div>
-<div>&nbsp; &nbsp; &nbsp;.read =3D pl061_read,</div>
-<div>&nbsp; &nbsp; &nbsp;.write =3D pl061_write,</div>
+<div>diff --git a/hw/char/cadence_uart.c b/hw/char/cadence_uart.c</div>
+<div>index fa25fe2..6c7b904 100644</div>
+<div>--- a/hw/char/cadence_uart.c</div>
+<div>&#43;&#43;&#43; b/hw/char/cadence_uart.c</div>
+<div>@@ -457,7 &#43;457,7 @@ static uint64_t uart_read(void *opaque, hwaddr=
+ offset,</div>
+<div>&nbsp;static const MemoryRegionOps uart_ops =3D {</div>
+<div>&nbsp; &nbsp; &nbsp;.read =3D uart_read,</div>
+<div>&nbsp; &nbsp; &nbsp;.write =3D uart_write,</div>
 <div>- &nbsp; &nbsp;.endianness =3D DEVICE_NATIVE_ENDIAN,</div>
 <div>&#43; &nbsp; &nbsp;.endianness =3D DEVICE_LITTLE_ENDIAN,</div>
 <div>&nbsp;};</div>
 <div>&nbsp;</div>
-<div>&nbsp;static void pl061_luminary_init(Object *obj)</div>
-<div>diff --git a/hw/gpio/zaurus.c b/hw/gpio/zaurus.c</div>
-<div>index f2f1f67..599d862 100644</div>
-<div>--- a/hw/gpio/zaurus.c</div>
-<div>&#43;&#43;&#43; b/hw/gpio/zaurus.c</div>
-<div>@@ -156,7 &#43;156,7 @@ static void scoop_write(void *opaque, hwaddr a=
-ddr,</div>
-<div>&nbsp;static const MemoryRegionOps scoop_ops =3D {</div>
-<div>&nbsp; &nbsp; &nbsp;.read =3D scoop_read,</div>
-<div>&nbsp; &nbsp; &nbsp;.write =3D scoop_write,</div>
+<div>&nbsp;static void cadence_uart_reset(DeviceState *dev)</div>
+<div>diff --git a/hw/char/escc.c b/hw/char/escc.c</div>
+<div>index 8ddbb4b..36182d9 100644</div>
+<div>--- a/hw/char/escc.c</div>
+<div>&#43;&#43;&#43; b/hw/char/escc.c</div>
+<div>@@ -574,7 &#43;574,7 @@ static uint64_t escc_mem_read(void *opaque, hw=
+addr addr,</div>
+<div>&nbsp;static const MemoryRegionOps escc_mem_ops =3D {</div>
+<div>&nbsp; &nbsp; &nbsp;.read =3D escc_mem_read,</div>
+<div>&nbsp; &nbsp; &nbsp;.write =3D escc_mem_write,</div>
+<div>- &nbsp; &nbsp;.endianness =3D DEVICE_NATIVE_ENDIAN,</div>
+<div>&#43; &nbsp; &nbsp;.endianness =3D DEVICE_BIG_ENDIAN,</div>
+<div>&nbsp; &nbsp; &nbsp;.valid =3D {</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;.min_access_size =3D 1,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;.max_access_size =3D 1,</div>
+<div>diff --git a/hw/char/etraxfs_ser.c b/hw/char/etraxfs_ser.c</div>
+<div>index 9745bca..cda687b 100644</div>
+<div>--- a/hw/char/etraxfs_ser.c</div>
+<div>&#43;&#43;&#43; b/hw/char/etraxfs_ser.c</div>
+<div>@@ -155,7 &#43;155,7 @@ ser_write(void *opaque, hwaddr addr,</div>
+<div>&nbsp;static const MemoryRegionOps ser_ops =3D {</div>
+<div>&nbsp; &nbsp; &nbsp;.read =3D ser_read,</div>
+<div>&nbsp; &nbsp; &nbsp;.write =3D ser_write,</div>
+<div>- &nbsp; &nbsp;.endianness =3D DEVICE_NATIVE_ENDIAN,</div>
+<div>&#43; &nbsp; &nbsp;.endianness =3D DEVICE_LITTLE_ENDIAN,</div>
+<div>&nbsp; &nbsp; &nbsp;.valid =3D {</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;.min_access_size =3D 4,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;.max_access_size =3D 4</div>
+<div>diff --git a/hw/char/grlib_apbuart.c b/hw/char/grlib_apbuart.c</div>
+<div>index c2bb3ac..119fc84 100644</div>
+<div>--- a/hw/char/grlib_apbuart.c</div>
+<div>&#43;&#43;&#43; b/hw/char/grlib_apbuart.c</div>
+<div>@@ -237,7 &#43;237,7 @@ static void grlib_apbuart_write(void *opaque, =
+hwaddr addr,</div>
+<div>&nbsp;static const MemoryRegionOps grlib_apbuart_ops =3D {</div>
+<div>&nbsp; &nbsp; &nbsp;.write &nbsp; &nbsp; &nbsp;=3D grlib_apbuart_write=
+,</div>
+<div>&nbsp; &nbsp; &nbsp;.read &nbsp; &nbsp; &nbsp; =3D grlib_apbuart_read,=
+</div>
+<div>- &nbsp; &nbsp;.endianness =3D DEVICE_NATIVE_ENDIAN,</div>
+<div>&#43; &nbsp; &nbsp;.endianness =3D DEVICE_BIG_ENDIAN,</div>
+<div>&nbsp;};</div>
+<div>&nbsp;</div>
+<div>&nbsp;static void grlib_apbuart_realize(DeviceState *dev, Error **errp=
+)</div>
+<div>diff --git a/hw/char/imx_serial.c b/hw/char/imx_serial.c</div>
+<div>index 0655a95..7c66551 100644</div>
+<div>--- a/hw/char/imx_serial.c</div>
+<div>&#43;&#43;&#43; b/hw/char/imx_serial.c</div>
+<div>@@ -332,7 &#43;332,7 @@ static void imx_event(void *opaque, int event)=
+</div>
+<div>&nbsp;static const struct MemoryRegionOps imx_serial_ops =3D {</div>
+<div>&nbsp; &nbsp; &nbsp;.read =3D imx_serial_read,</div>
+<div>&nbsp; &nbsp; &nbsp;.write =3D imx_serial_write,</div>
 <div>- &nbsp; &nbsp;.endianness =3D DEVICE_NATIVE_ENDIAN,</div>
 <div>&#43; &nbsp; &nbsp;.endianness =3D DEVICE_LITTLE_ENDIAN,</div>
 <div>&nbsp;};</div>
 <div>&nbsp;</div>
-<div>&nbsp;static void scoop_gpio_set(void *opaque, int line, int level)</d=
-iv>
+<div>&nbsp;static void imx_serial_realize(DeviceState *dev, Error **errp)</=
+div>
+<div>diff --git a/hw/char/lm32_uart.c b/hw/char/lm32_uart.c</div>
+<div>index d047a44..2fe5f60 100644</div>
+<div>--- a/hw/char/lm32_uart.c</div>
+<div>&#43;&#43;&#43; b/hw/char/lm32_uart.c</div>
+<div>@@ -205,7 &#43;205,7 @@ static void uart_write(void *opaque, hwaddr ad=
+dr,</div>
+<div>&nbsp;static const MemoryRegionOps uart_ops =3D {</div>
+<div>&nbsp; &nbsp; &nbsp;.read =3D uart_read,</div>
+<div>&nbsp; &nbsp; &nbsp;.write =3D uart_write,</div>
+<div>- &nbsp; &nbsp;.endianness =3D DEVICE_NATIVE_ENDIAN,</div>
+<div>&#43; &nbsp; &nbsp;.endianness =3D DEVICE_BIG_ENDIAN,</div>
+<div>&nbsp; &nbsp; &nbsp;.valid =3D {</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;.min_access_size =3D 4,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;.max_access_size =3D 4,</div>
+<div>diff --git a/hw/char/milkymist-uart.c b/hw/char/milkymist-uart.c</div>
+<div>index 8a78fcc..bdb8282 100644</div>
+<div>--- a/hw/char/milkymist-uart.c</div>
+<div>&#43;&#43;&#43; b/hw/char/milkymist-uart.c</div>
+<div>@@ -156,7 &#43;156,7 @@ static const MemoryRegionOps uart_mmio_ops =3D=
+ {</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;.min_access_size =3D 4,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;.max_access_size =3D 4,</div>
+<div>&nbsp; &nbsp; &nbsp;},</div>
+<div>- &nbsp; &nbsp;.endianness =3D DEVICE_NATIVE_ENDIAN,</div>
+<div>&#43; &nbsp; &nbsp;.endianness =3D DEVICE_BIG_ENDIAN,</div>
+<div>&nbsp;};</div>
+<div>&nbsp;</div>
+<div>&nbsp;static void uart_rx(void *opaque, const uint8_t *buf, int size)<=
+/div>
+<div>diff --git a/hw/char/pl011.c b/hw/char/pl011.c</div>
+<div>index c1ae2f3..5fb95d2 100644</div>
+<div>--- a/hw/char/pl011.c</div>
+<div>&#43;&#43;&#43; b/hw/char/pl011.c</div>
+<div>@@ -287,7 &#43;287,7 @@ static void pl011_event(void *opaque, int even=
+t)</div>
+<div>&nbsp;static const MemoryRegionOps pl011_ops =3D {</div>
+<div>&nbsp; &nbsp; &nbsp;.read =3D pl011_read,</div>
+<div>&nbsp; &nbsp; &nbsp;.write =3D pl011_write,</div>
+<div>- &nbsp; &nbsp;.endianness =3D DEVICE_NATIVE_ENDIAN,</div>
+<div>&#43; &nbsp; &nbsp;.endianness =3D DEVICE_LITTLE_ENDIAN,</div>
+<div>&nbsp;};</div>
+<div>&nbsp;</div>
+<div>&nbsp;static const VMStateDescription vmstate_pl011 =3D {</div>
 <div>--&nbsp;</div>
 <div>1.8.3.1</div>
 <div><br>
@@ -242,5 +422,5 @@ iv>
 </body>
 </html>
 
---_000_156594080579599783btcom_--
+--_000_156594074356634044btcom_--
 
