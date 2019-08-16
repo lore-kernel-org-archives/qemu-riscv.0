@@ -1,28 +1,28 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1hyWps-0005Eq-8V
-	for mharc-qemu-riscv@gnu.org; Fri, 16 Aug 2019 03:39:44 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:41215)
+	id 1hyWpz-0005M3-Tl
+	for mharc-qemu-riscv@gnu.org; Fri, 16 Aug 2019 03:39:51 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:41270)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <tony.nguyen@bt.com>) id 1hyWpn-000570-8e
- for qemu-riscv@nongnu.org; Fri, 16 Aug 2019 03:39:41 -0400
+ (envelope-from <tony.nguyen@bt.com>) id 1hyWps-0005Fy-Sl
+ for qemu-riscv@nongnu.org; Fri, 16 Aug 2019 03:39:48 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <tony.nguyen@bt.com>) id 1hyWpj-0003v3-1q
- for qemu-riscv@nongnu.org; Fri, 16 Aug 2019 03:39:39 -0400
-Received: from smtpe1.intersmtp.com ([213.121.35.79]:36421)
+ (envelope-from <tony.nguyen@bt.com>) id 1hyWpo-0003xz-RE
+ for qemu-riscv@nongnu.org; Fri, 16 Aug 2019 03:39:44 -0400
+Received: from smtpe1.intersmtp.com ([213.121.35.79]:36484)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <tony.nguyen@bt.com>)
- id 1hyWph-0003qH-3W; Fri, 16 Aug 2019 03:39:34 -0400
-Received: from tpw09926dag18h.domain1.systemhost.net (10.9.212.42) by
+ id 1hyWpo-0003xR-FG; Fri, 16 Aug 2019 03:39:40 -0400
+Received: from tpw09926dag18f.domain1.systemhost.net (10.9.212.26) by
  BWP09926084.bt.com (10.36.82.115) with Microsoft SMTP Server (version=TLS1_2, 
  cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P256) id 15.1.1713.5; Fri, 16
- Aug 2019 08:39:02 +0100
+ Aug 2019 08:39:17 +0100
 Received: from tpw09926dag18e.domain1.systemhost.net (10.9.212.18) by
- tpw09926dag18h.domain1.systemhost.net (10.9.212.42) with Microsoft SMTP
- Server (TLS) id 15.0.1395.4; Fri, 16 Aug 2019 08:39:23 +0100
+ tpw09926dag18f.domain1.systemhost.net (10.9.212.26) with Microsoft SMTP
+ Server (TLS) id 15.0.1395.4; Fri, 16 Aug 2019 08:39:38 +0100
 Received: from tpw09926dag18e.domain1.systemhost.net
  ([fe80::a946:6348:ccf4:fa6c]) by tpw09926dag18e.domain1.systemhost.net
  ([fe80::a946:6348:ccf4:fa6c%12]) with mapi id 15.00.1395.000; Fri, 16 Aug
- 2019 08:39:23 +0100
+ 2019 08:39:38 +0100
 From: <tony.nguyen@bt.com>
 To: <qemu-devel@nongnu.org>
 CC: <rth@twiddle.net>, <pbonzini@redhat.com>, <mst@redhat.com>,
@@ -58,11 +58,11 @@ CC: <rth@twiddle.net>, <pbonzini@redhat.com>, <mst@redhat.com>,
  <stefanha@redhat.com>, <qemu-arm@nongnu.org>, <qemu-block@nongnu.org>,
  <qemu-ppc@nongnu.org>, <xen-devel@lists.xenproject.org>,
  <qemu-riscv@nongnu.org>, <qemu-s390x@nongnu.org>
-Thread-Topic: [Qemu-devel] [PATCH v7 40/42] cputlb: Byte swap memory
- transaction attribute
-Thread-Index: AQHVVAW5pu5EejPFoUWEW5e4cLePWw==
-Date: Fri, 16 Aug 2019 07:39:23 +0000
-Message-ID: <1565941162664.30993@bt.com>
+Thread-Topic: [Qemu-devel] [PATCH v7 41/42] target/sparc: Add TLB entry with
+ attributes
+Thread-Index: AQHVVAXCWvmw8IlXtEyhXVZLY/cOBA==
+Date: Fri, 16 Aug 2019 07:39:38 +0000
+Message-ID: <1565941177600.7672@bt.com>
 References: <43bc5e07ac614d0e8e740bf6007ff77b@tpw09926dag18e.domain1.systemhost.net>
 In-Reply-To: <43bc5e07ac614d0e8e740bf6007ff77b@tpw09926dag18e.domain1.systemhost.net>
 Accept-Language: en-AU, en-GB, en-US
@@ -72,12 +72,12 @@ X-MS-TNEF-Correlator:
 x-ms-exchange-messagesentrepresentingtype: 1
 x-ms-exchange-transport-fromentityheader: Hosted
 x-originating-ip: [10.187.101.40]
-Content-Type: multipart/alternative; boundary="_000_156594116266430993btcom_"
+Content-Type: multipart/alternative; boundary="_000_15659411776007672btcom_"
 MIME-Version: 1.0
 X-detected-operating-system: by eggs.gnu.org: Windows 7 or 8 [fuzzy]
 X-Received-From: 213.121.35.79
-Subject: [Qemu-riscv] [Qemu-devel] [PATCH v7 40/42] cputlb: Byte swap memory
- transaction attribute
+Subject: [Qemu-riscv] [Qemu-devel] [PATCH v7 41/42] target/sparc: Add TLB
+ entry with attributes
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -89,88 +89,157 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Aug 2019 07:39:42 -0000
+X-List-Received-Date: Fri, 16 Aug 2019 07:39:49 -0000
 
---_000_156594116266430993btcom_
+--_000_15659411776007672btcom_
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
-Notice new attribute, byte swap, and force the transaction through the
-memory slow path.
+Append MemTxAttrs to interfaces so we can pass along up coming Invert
+Endian TTE bit on SPARC64.
 
-Required by architectures that can invert endianness of memory
-transaction, e.g. SPARC64 has the Invert Endian TTE bit.
-
-Suggested-by: Richard Henderson <richard.henderson@linaro.org>
 Signed-off-by: Tony Nguyen <tony.nguyen@bt.com>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- accel/tcg/cputlb.c      | 11 +++++++++++
- include/exec/memattrs.h |  2 ++
- 2 files changed, 13 insertions(+)
+ target/sparc/mmu_helper.c | 32 ++++++++++++++++++--------------
+ 1 file changed, 18 insertions(+), 14 deletions(-)
 
-diff --git a/accel/tcg/cputlb.c b/accel/tcg/cputlb.c
-index bb2f55d..adfa4f2 100644
---- a/accel/tcg/cputlb.c
-+++ b/accel/tcg/cputlb.c
-@@ -738,6 +738,9 @@ void tlb_set_page_with_attrs(CPUState *cpu, target_ulon=
-g vaddr,
-          */
-         address |=3D TLB_RECHECK;
-     }
-+    if (attrs.byte_swap) {
-+        address |=3D TLB_FORCE_SLOW;
-+    }
-     if (!memory_region_is_ram(section->mr) &&
-         !memory_region_is_romd(section->mr)) {
-         /* IO memory case */
-@@ -891,6 +894,10 @@ static uint64_t io_readx(CPUArchState *env, CPUIOTLBEn=
-try *iotlbentry,
-     bool locked =3D false;
-     MemTxResult r;
+diff --git a/target/sparc/mmu_helper.c b/target/sparc/mmu_helper.c
+index cbd1e91..826e14b 100644
+--- a/target/sparc/mmu_helper.c
++++ b/target/sparc/mmu_helper.c
+@@ -88,7 +88,7 @@ static const int perm_table[2][8] =3D {
+ };
 
-+    if (iotlbentry->attrs.byte_swap) {
-+        op ^=3D MO_BSWAP;
-+    }
-+
-     section =3D iotlb_to_section(cpu, iotlbentry->addr, iotlbentry->attrs)=
-;
-     mr =3D section->mr;
-     mr_offset =3D (iotlbentry->addr & TARGET_PAGE_MASK) + addr;
-@@ -933,6 +940,10 @@ static void io_writex(CPUArchState *env, CPUIOTLBEntry=
- *iotlbentry,
-     bool locked =3D false;
-     MemTxResult r;
+ static int get_physical_address(CPUSPARCState *env, hwaddr *physical,
+-                                int *prot, int *access_index,
++                                int *prot, int *access_index, MemTxAttrs *=
+attrs,
+                                 target_ulong address, int rw, int mmu_idx,
+                                 target_ulong *page_size)
+ {
+@@ -219,6 +219,7 @@ bool sparc_cpu_tlb_fill(CPUState *cs, vaddr address, in=
+t size,
+     target_ulong vaddr;
+     target_ulong page_size;
+     int error_code =3D 0, prot, access_index;
++    MemTxAttrs attrs =3D {};
 
-+    if (iotlbentry->attrs.byte_swap) {
-+        op ^=3D MO_BSWAP;
-+    }
-+
-     section =3D iotlb_to_section(cpu, iotlbentry->addr, iotlbentry->attrs)=
-;
-     mr =3D section->mr;
-     mr_offset =3D (iotlbentry->addr & TARGET_PAGE_MASK) + addr;
-diff --git a/include/exec/memattrs.h b/include/exec/memattrs.h
-index d4a3477..95f2d20 100644
---- a/include/exec/memattrs.h
-+++ b/include/exec/memattrs.h
-@@ -37,6 +37,8 @@ typedef struct MemTxAttrs {
-     unsigned int user:1;
-     /* Requester ID (for MSI for example) */
-     unsigned int requester_id:16;
-+    /* Invert endianness for this page */
-+    unsigned int byte_swap:1;
      /*
-      * The following are target-specific page-table bits.  These are not
-      * related to actual memory transactions at all.  However, this struct=
-ure
+      * TODO: If we ever need tlb_vaddr_to_host for this target,
+@@ -229,7 +230,7 @@ bool sparc_cpu_tlb_fill(CPUState *cs, vaddr address, in=
+t size,
+     assert(!probe);
+
+     address &=3D TARGET_PAGE_MASK;
+-    error_code =3D get_physical_address(env, &paddr, &prot, &access_index,
++    error_code =3D get_physical_address(env, &paddr, &prot, &access_index,=
+ &attrs,
+                                       address, access_type,
+                                       mmu_idx, &page_size);
+     vaddr =3D address;
+@@ -490,8 +491,8 @@ static inline int ultrasparc_tag_match(SparcTLBEntry *t=
+lb,
+     return 0;
+ }
+
+-static int get_physical_address_data(CPUSPARCState *env,
+-                                     hwaddr *physical, int *prot,
++static int get_physical_address_data(CPUSPARCState *env, hwaddr *physical,
++                                     int *prot, MemTxAttrs *attrs,
+                                      target_ulong address, int rw, int mmu=
+_idx)
+ {
+     CPUState *cs =3D env_cpu(env);
+@@ -608,8 +609,8 @@ static int get_physical_address_data(CPUSPARCState *env=
+,
+     return 1;
+ }
+
+-static int get_physical_address_code(CPUSPARCState *env,
+-                                     hwaddr *physical, int *prot,
++static int get_physical_address_code(CPUSPARCState *env, hwaddr *physical,
++                                     int *prot, MemTxAttrs *attrs,
+                                      target_ulong address, int mmu_idx)
+ {
+     CPUState *cs =3D env_cpu(env);
+@@ -686,7 +687,7 @@ static int get_physical_address_code(CPUSPARCState *env=
+,
+ }
+
+ static int get_physical_address(CPUSPARCState *env, hwaddr *physical,
+-                                int *prot, int *access_index,
++                                int *prot, int *access_index, MemTxAttrs *=
+attrs,
+                                 target_ulong address, int rw, int mmu_idx,
+                                 target_ulong *page_size)
+ {
+@@ -716,11 +717,11 @@ static int get_physical_address(CPUSPARCState *env, h=
+waddr *physical,
+     }
+
+     if (rw =3D=3D 2) {
+-        return get_physical_address_code(env, physical, prot, address,
++        return get_physical_address_code(env, physical, prot, attrs, addre=
+ss,
+                                          mmu_idx);
+     } else {
+-        return get_physical_address_data(env, physical, prot, address, rw,
+-                                         mmu_idx);
++        return get_physical_address_data(env, physical, prot, attrs, addre=
+ss,
++                                         rw, mmu_idx);
+     }
+ }
+
+@@ -734,10 +735,11 @@ bool sparc_cpu_tlb_fill(CPUState *cs, vaddr address, =
+int size,
+     target_ulong vaddr;
+     hwaddr paddr;
+     target_ulong page_size;
++    MemTxAttrs attrs =3D {};
+     int error_code =3D 0, prot, access_index;
+
+     address &=3D TARGET_PAGE_MASK;
+-    error_code =3D get_physical_address(env, &paddr, &prot, &access_index,
++    error_code =3D get_physical_address(env, &paddr, &prot, &access_index,=
+ &attrs,
+                                       address, access_type,
+                                       mmu_idx, &page_size);
+     if (likely(error_code =3D=3D 0)) {
+@@ -747,7 +749,8 @@ bool sparc_cpu_tlb_fill(CPUState *cs, vaddr address, in=
+t size,
+                                    env->dmmu.mmu_primary_context,
+                                    env->dmmu.mmu_secondary_context);
+
+-        tlb_set_page(cs, vaddr, paddr, prot, mmu_idx, page_size);
++        tlb_set_page_with_attrs(cs, vaddr, paddr, attrs, prot, mmu_idx,
++                                page_size);
+         return true;
+     }
+     if (probe) {
+@@ -849,9 +852,10 @@ static int cpu_sparc_get_phys_page(CPUSPARCState *env,=
+ hwaddr *phys,
+ {
+     target_ulong page_size;
+     int prot, access_index;
++    MemTxAttrs attrs =3D {};
+
+-    return get_physical_address(env, phys, &prot, &access_index, addr, rw,
+-                                mmu_idx, &page_size);
++    return get_physical_address(env, phys, &prot, &access_index, &attrs, a=
+ddr,
++                                rw, mmu_idx, &page_size);
+ }
+
+ #if defined(TARGET_SPARC64)
 --
 1.8.3.1
 
 ?
 
 
---_000_156594116266430993btcom_
+--_000_15659411776007672btcom_
 Content-Type: text/html; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
@@ -186,97 +255,224 @@ der-left-width: 2px; border-left-style: solid; border-left-color: rgb(128, =
 <body dir=3D"ltr" style=3D"font-size:12pt;color:#000000;background-color:#F=
 FFFFF;font-family:Calibri,Arial,Helvetica,sans-serif;">
 <p></p>
-<div><span style=3D"font-size: 12pt;">Notice new attribute, byte swap, and =
-force the transaction through the</span><br>
+<div style=3D"color: rgb(33, 33, 33);"><font size=3D"2"><span style=3D"font=
+-size:10pt;">
+<div class=3D"PlainText">
+<div><span style=3D"font-size: 10pt;">Append MemTxAttrs to interfaces so we=
+ can pass along up coming Invert</span><br>
 </div>
-<div>memory slow path.</div>
+<div>Endian TTE bit on SPARC64.</div>
 <div><br>
 </div>
-<div>Required by architectures that can invert endianness of memory</div>
-<div>transaction, e.g. SPARC64 has the Invert Endian TTE bit.</div>
-<div><br>
-</div>
-<div>Suggested-by: Richard Henderson &lt;richard.henderson@linaro.org&gt;</=
-div>
 <div>Signed-off-by: Tony Nguyen &lt;tony.nguyen@bt.com&gt;</div>
 <div>Reviewed-by: Richard Henderson &lt;richard.henderson@linaro.org&gt;</d=
 iv>
 <div>---</div>
-<div>&nbsp;accel/tcg/cputlb.c &nbsp; &nbsp; &nbsp;| 11 &#43;&#43;&#43;&#43;=
-&#43;&#43;&#43;&#43;&#43;&#43;&#43;</div>
-<div>&nbsp;include/exec/memattrs.h | &nbsp;2 &#43;&#43;</div>
-<div>&nbsp;2 files changed, 13 insertions(&#43;)</div>
+<div>&nbsp;target/sparc/mmu_helper.c | 32 &#43;&#43;&#43;&#43;&#43;&#43;&#4=
+3;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;--------------</di=
+v>
+<div>&nbsp;1 file changed, 18 insertions(&#43;), 14 deletions(-)</div>
 <div><br>
 </div>
-<div>diff --git a/accel/tcg/cputlb.c b/accel/tcg/cputlb.c</div>
-<div>index bb2f55d..adfa4f2 100644</div>
-<div>--- a/accel/tcg/cputlb.c</div>
-<div>&#43;&#43;&#43; b/accel/tcg/cputlb.c</div>
-<div>@@ -738,6 &#43;738,9 @@ void tlb_set_page_with_attrs(CPUState *cpu, ta=
-rget_ulong vaddr,</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; */</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;address |=3D TLB_RECHECK;</div>
-<div>&nbsp; &nbsp; &nbsp;}</div>
-<div>&#43; &nbsp; &nbsp;if (attrs.byte_swap) {</div>
-<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp;address |=3D TLB_FORCE_SLOW;</div>
-<div>&#43; &nbsp; &nbsp;}</div>
-<div>&nbsp; &nbsp; &nbsp;if (!memory_region_is_ram(section-&gt;mr) &amp;&am=
-p;</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;!memory_region_is_romd(section-&gt;m=
-r)) {</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* IO memory case */</div>
-<div>@@ -891,6 &#43;894,10 @@ static uint64_t io_readx(CPUArchState *env, C=
-PUIOTLBEntry *iotlbentry,</div>
-<div>&nbsp; &nbsp; &nbsp;bool locked =3D false;</div>
-<div>&nbsp; &nbsp; &nbsp;MemTxResult r;</div>
+<div>diff --git a/target/sparc/mmu_helper.c b/target/sparc/mmu_helper.c</di=
+v>
+<div>index cbd1e91..826e14b 100644</div>
+<div>--- a/target/sparc/mmu_helper.c</div>
+<div>&#43;&#43;&#43; b/target/sparc/mmu_helper.c</div>
+<div>@@ -88,7 &#43;88,7 @@ static const int perm_table[2][8] =3D {</div>
+<div>&nbsp;};</div>
 <div>&nbsp;</div>
-<div>&#43; &nbsp; &nbsp;if (iotlbentry-&gt;attrs.byte_swap) {</div>
-<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp;op ^=3D MO_BSWAP;</div>
-<div>&#43; &nbsp; &nbsp;}</div>
-<div>&#43;</div>
-<div>&nbsp; &nbsp; &nbsp;section =3D iotlb_to_section(cpu, iotlbentry-&gt;a=
-ddr, iotlbentry-&gt;attrs);</div>
-<div>&nbsp; &nbsp; &nbsp;mr =3D section-&gt;mr;</div>
-<div>&nbsp; &nbsp; &nbsp;mr_offset =3D (iotlbentry-&gt;addr &amp; TARGET_PA=
-GE_MASK) &#43; addr;</div>
-<div>@@ -933,6 &#43;940,10 @@ static void io_writex(CPUArchState *env, CPUI=
-OTLBEntry *iotlbentry,</div>
-<div>&nbsp; &nbsp; &nbsp;bool locked =3D false;</div>
-<div>&nbsp; &nbsp; &nbsp;MemTxResult r;</div>
+<div>&nbsp;static int get_physical_address(CPUSPARCState *env, hwaddr *phys=
+ical,</div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
+; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;int *prot, int *access_index,</d=
+iv>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
+nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;int *prot, int *access_index=
+, MemTxAttrs *attrs,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;target_ulong address, int r=
+w, int mmu_idx,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;target_ulong *page_size)</d=
+iv>
+<div>&nbsp;{</div>
+<div>@@ -219,6 &#43;219,7 @@ bool sparc_cpu_tlb_fill(CPUState *cs, vaddr ad=
+dress, int size,</div>
+<div>&nbsp; &nbsp; &nbsp;target_ulong vaddr;</div>
+<div>&nbsp; &nbsp; &nbsp;target_ulong page_size;</div>
+<div>&nbsp; &nbsp; &nbsp;int error_code =3D 0, prot, access_index;</div>
+<div>&#43; &nbsp; &nbsp;MemTxAttrs attrs =3D {};</div>
 <div>&nbsp;</div>
-<div>&#43; &nbsp; &nbsp;if (iotlbentry-&gt;attrs.byte_swap) {</div>
-<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp;op ^=3D MO_BSWAP;</div>
-<div>&#43; &nbsp; &nbsp;}</div>
-<div>&#43;</div>
-<div>&nbsp; &nbsp; &nbsp;section =3D iotlb_to_section(cpu, iotlbentry-&gt;a=
-ddr, iotlbentry-&gt;attrs);</div>
-<div>&nbsp; &nbsp; &nbsp;mr =3D section-&gt;mr;</div>
-<div>&nbsp; &nbsp; &nbsp;mr_offset =3D (iotlbentry-&gt;addr &amp; TARGET_PA=
-GE_MASK) &#43; addr;</div>
-<div>diff --git a/include/exec/memattrs.h b/include/exec/memattrs.h</div>
-<div>index d4a3477..95f2d20 100644</div>
-<div>--- a/include/exec/memattrs.h</div>
-<div>&#43;&#43;&#43; b/include/exec/memattrs.h</div>
-<div>@@ -37,6 &#43;37,8 @@ typedef struct MemTxAttrs {</div>
-<div>&nbsp; &nbsp; &nbsp;unsigned int user:1;</div>
-<div>&nbsp; &nbsp; &nbsp;/* Requester ID (for MSI for example) */</div>
-<div>&nbsp; &nbsp; &nbsp;unsigned int requester_id:16;</div>
-<div>&#43; &nbsp; &nbsp;/* Invert endianness for this page */</div>
-<div>&#43; &nbsp; &nbsp;unsigned int byte_swap:1;</div>
 <div>&nbsp; &nbsp; &nbsp;/*</div>
-<div>&nbsp; &nbsp; &nbsp; * The following are target-specific page-table bi=
-ts. &nbsp;These are not</div>
-<div>&nbsp; &nbsp; &nbsp; * related to actual memory transactions at all. &=
-nbsp;However, this structure</div>
+<div>&nbsp; &nbsp; &nbsp; * TODO: If we ever need tlb_vaddr_to_host for thi=
+s target,</div>
+<div>@@ -229,7 &#43;230,7 @@ bool sparc_cpu_tlb_fill(CPUState *cs, vaddr ad=
+dress, int size,</div>
+<div>&nbsp; &nbsp; &nbsp;assert(!probe);</div>
+<div>&nbsp;</div>
+<div>&nbsp; &nbsp; &nbsp;address &amp;=3D TARGET_PAGE_MASK;</div>
+<div>- &nbsp; &nbsp;error_code =3D get_physical_address(env, &amp;paddr, &a=
+mp;prot, &amp;access_index,</div>
+<div>&#43; &nbsp; &nbsp;error_code =3D get_physical_address(env, &amp;paddr=
+, &amp;prot, &amp;access_index, &amp;attrs,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;addres=
+s, access_type,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;mmu_id=
+x, &amp;page_size);</div>
+<div>&nbsp; &nbsp; &nbsp;vaddr =3D address;</div>
+<div>@@ -490,8 &#43;491,8 @@ static inline int ultrasparc_tag_match(SparcTL=
+BEntry *tlb,</div>
+<div>&nbsp; &nbsp; &nbsp;return 0;</div>
+<div>&nbsp;}</div>
+<div>&nbsp;</div>
+<div>-static int get_physical_address_data(CPUSPARCState *env,</div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
+; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; hwaddr *physical,=
+ int *prot,</div>
+<div>&#43;static int get_physical_address_data(CPUSPARCState *env, hwaddr *=
+physical,</div>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
+nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; int *prot, Me=
+mTxAttrs *attrs,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; target_ulong=
+ address, int rw, int mmu_idx)</div>
+<div>&nbsp;{</div>
+<div>&nbsp; &nbsp; &nbsp;CPUState *cs =3D env_cpu(env);</div>
+<div>@@ -608,8 &#43;609,8 @@ static int get_physical_address_data(CPUSPARCS=
+tate *env,</div>
+<div>&nbsp; &nbsp; &nbsp;return 1;</div>
+<div>&nbsp;}</div>
+<div>&nbsp;</div>
+<div>-static int get_physical_address_code(CPUSPARCState *env,</div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
+; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; hwaddr *physical,=
+ int *prot,</div>
+<div>&#43;static int get_physical_address_code(CPUSPARCState *env, hwaddr *=
+physical,</div>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
+nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; int *prot, Me=
+mTxAttrs *attrs,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; target_ulong=
+ address, int mmu_idx)</div>
+<div>&nbsp;{</div>
+<div>&nbsp; &nbsp; &nbsp;CPUState *cs =3D env_cpu(env);</div>
+<div>@@ -686,7 &#43;687,7 @@ static int get_physical_address_code(CPUSPARCS=
+tate *env,</div>
+<div>&nbsp;}</div>
+<div>&nbsp;</div>
+<div>&nbsp;static int get_physical_address(CPUSPARCState *env, hwaddr *phys=
+ical,</div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
+; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;int *prot, int *access_index,</d=
+iv>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
+nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;int *prot, int *access_index=
+, MemTxAttrs *attrs,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;target_ulong address, int r=
+w, int mmu_idx,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;target_ulong *page_size)</d=
+iv>
+<div>&nbsp;{</div>
+<div>@@ -716,11 &#43;717,11 @@ static int get_physical_address(CPUSPARCStat=
+e *env, hwaddr *physical,</div>
+<div>&nbsp; &nbsp; &nbsp;}</div>
+<div>&nbsp;</div>
+<div>&nbsp; &nbsp; &nbsp;if (rw =3D=3D 2) {</div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp;return get_physical_address_code(env, phy=
+sical, prot, address,</div>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp;return get_physical_address_code(env,=
+ physical, prot, attrs, address,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
+; mmu_idx);</div>
+<div>&nbsp; &nbsp; &nbsp;} else {</div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp;return get_physical_address_data(env, phy=
+sical, prot, address, rw,</div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
+; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; mmu=
+_idx);</div>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp;return get_physical_address_data(env,=
+ physical, prot, attrs, address,</div>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
+nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;=
+ rw, mmu_idx);</div>
+<div>&nbsp; &nbsp; &nbsp;}</div>
+<div>&nbsp;}</div>
+<div>&nbsp;</div>
+<div>@@ -734,10 &#43;735,11 @@ bool sparc_cpu_tlb_fill(CPUState *cs, vaddr =
+address, int size,</div>
+<div>&nbsp; &nbsp; &nbsp;target_ulong vaddr;</div>
+<div>&nbsp; &nbsp; &nbsp;hwaddr paddr;</div>
+<div>&nbsp; &nbsp; &nbsp;target_ulong page_size;</div>
+<div>&#43; &nbsp; &nbsp;MemTxAttrs attrs =3D {};</div>
+<div>&nbsp; &nbsp; &nbsp;int error_code =3D 0, prot, access_index;</div>
+<div>&nbsp;</div>
+<div>&nbsp; &nbsp; &nbsp;address &amp;=3D TARGET_PAGE_MASK;</div>
+<div>- &nbsp; &nbsp;error_code =3D get_physical_address(env, &amp;paddr, &a=
+mp;prot, &amp;access_index,</div>
+<div>&#43; &nbsp; &nbsp;error_code =3D get_physical_address(env, &amp;paddr=
+, &amp;prot, &amp;access_index, &amp;attrs,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;addres=
+s, access_type,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;mmu_id=
+x, &amp;page_size);</div>
+<div>&nbsp; &nbsp; &nbsp;if (likely(error_code =3D=3D 0)) {</div>
+<div>@@ -747,7 &#43;749,8 @@ bool sparc_cpu_tlb_fill(CPUState *cs, vaddr ad=
+dress, int size,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; env-&gt;dmmu.mmu_pr=
+imary_context,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; env-&gt;dmmu.mmu_se=
+condary_context);</div>
+<div>&nbsp;</div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp;tlb_set_page(cs, vaddr, paddr, prot, mmu_=
+idx, page_size);</div>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp;tlb_set_page_with_attrs(cs, vaddr, pa=
+ddr, attrs, prot, mmu_idx,</div>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
+nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;page_size);</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return true;</div>
+<div>&nbsp; &nbsp; &nbsp;}</div>
+<div>&nbsp; &nbsp; &nbsp;if (probe) {</div>
+<div>@@ -849,9 &#43;852,10 @@ static int cpu_sparc_get_phys_page(CPUSPARCSt=
+ate *env, hwaddr *phys,</div>
+<div>&nbsp;{</div>
+<div>&nbsp; &nbsp; &nbsp;target_ulong page_size;</div>
+<div>&nbsp; &nbsp; &nbsp;int prot, access_index;</div>
+<div>&#43; &nbsp; &nbsp;MemTxAttrs attrs =3D {};</div>
+<div>&nbsp;</div>
+<div>- &nbsp; &nbsp;return get_physical_address(env, phys, &amp;prot, &amp;=
+access_index, addr, rw,</div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
+; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;mmu_idx, &amp;page_size);</div>
+<div>&#43; &nbsp; &nbsp;return get_physical_address(env, phys, &amp;prot, &=
+amp;access_index, &amp;attrs, addr,</div>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
+nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;rw, mmu_idx, &amp;page_size)=
+;</div>
+<div>&nbsp;}</div>
+<div>&nbsp;</div>
+<div>&nbsp;#if defined(TARGET_SPARC64)</div>
 <div>--&nbsp;</div>
 <div>1.8.3.1</div>
 <div><br>
 &#8203;<br>
 </div>
-<p><br>
-</p>
+<br>
+</div>
+</span></font></div>
 </body>
 </html>
 
---_000_156594116266430993btcom_--
+--_000_15659411776007672btcom_--
 
