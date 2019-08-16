@@ -1,81 +1,120 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1hyaY5-0004OH-4c
-	for mharc-qemu-riscv@gnu.org; Fri, 16 Aug 2019 07:37:37 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:50335)
+	id 1hyaw0-0002fu-0Z
+	for mharc-qemu-riscv@gnu.org; Fri, 16 Aug 2019 08:02:20 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:53660)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <tony.nguyen@bt.com>) id 1hyaY2-0004Mx-B9
- for qemu-riscv@nongnu.org; Fri, 16 Aug 2019 07:37:35 -0400
+ (envelope-from <peter.maydell@linaro.org>) id 1hyavx-0002f2-3S
+ for qemu-riscv@nongnu.org; Fri, 16 Aug 2019 08:02:18 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <tony.nguyen@bt.com>) id 1hyaY0-0003YW-OG
- for qemu-riscv@nongnu.org; Fri, 16 Aug 2019 07:37:34 -0400
-Received: from smtpe1.intersmtp.com ([213.121.35.79]:23919)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <tony.nguyen@bt.com>)
- id 1hyaXx-0003IB-Ir; Fri, 16 Aug 2019 07:37:29 -0400
-Received: from tpw09926dag18e.domain1.systemhost.net (10.9.212.18) by
- BWP09926084.bt.com (10.36.82.115) with Microsoft SMTP Server (version=TLS1_2, 
- cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P256) id 15.1.1713.5; Fri, 16
- Aug 2019 12:37:05 +0100
-Received: from tpw09926dag18e.domain1.systemhost.net (10.9.212.18) by
- tpw09926dag18e.domain1.systemhost.net (10.9.212.18) with Microsoft SMTP
- Server (TLS) id 15.0.1395.4; Fri, 16 Aug 2019 12:37:26 +0100
-Received: from tpw09926dag18e.domain1.systemhost.net
- ([fe80::a946:6348:ccf4:fa6c]) by tpw09926dag18e.domain1.systemhost.net
- ([fe80::a946:6348:ccf4:fa6c%12]) with mapi id 15.00.1395.000; Fri, 16 Aug
- 2019 12:37:26 +0100
-From: <tony.nguyen@bt.com>
-To: <philmd@redhat.com>, <qemu-devel@nongnu.org>
-CC: <rth@twiddle.net>, <pbonzini@redhat.com>, <mst@redhat.com>,
- <imammedo@redhat.com>, <marcel.apfelbaum@gmail.com>,
- <xiaoguangrong.eric@gmail.com>, <alistair@alistair23.me>,
- <peter.maydell@linaro.org>, <b.galvani@gmail.com>, <clg@kaod.org>,
- <andrew@aj.id.au>, <joel@jms.id.au>, <i.mitsyanko@gmail.com>,
- <robh@kernel.org>, <peter.chubb@nicta.com.au>, <sundeep.lkml@gmail.com>,
- <jan.kiszka@web.de>, <balrogg@gmail.com>, <eric.auger@redhat.com>,
- <kraxel@redhat.com>, <michael@walle.cc>, <kwolf@redhat.com>,
- <mreitz@redhat.com>, <jsnow@redhat.com>, <keith.busch@intel.com>,
- <marcandre.lureau@redhat.com>, <Andrew.Baumann@microsoft.com>,
- <edgar.iglesias@gmail.com>, <antonynpavlov@gmail.com>,
- <chouteau@adacore.com>, <frederic.konrad@adacore.com>, <huth@tuxfamily.org>,
- <mark.cave-ayland@ilande.co.uk>, <hpoussin@reactos.org>,
- <arikalo@wavecomp.com>, <balaton@eik.bme.hu>, <gxt@mprc.pku.edu.cn>,
- <david@gibson.dropbear.id.au>, <deller@gmx.de>, <ehabkost@redhat.com>,
- <sstabellini@kernel.org>, <anthony.perard@citrix.com>,
- <paul.durrant@citrix.com>, <aurelien@aurel32.net>, <amarkovic@wavecomp.com>,
- <magnus.damm@gmail.com>, <berto@igalia.com>, <minyard@acm.org>,
- <pburton@wavecomp.com>, <jslaby@suse.cz>, <jcd@tribudubois.net>,
- <andrew.smirnov@gmail.com>, <green@moxielogic.com>, <jasowang@redhat.com>,
- <dmitry.fleytman@gmail.com>, <sw@weilnetz.de>, <jiri@resnulli.us>,
- <crwulff@gmail.com>, <marex@denx.de>, <lersek@redhat.com>,
- <proljc@gmail.com>, <shorne@gmail.com>, <yuval.shaia@oracle.com>,
- <palmer@sifive.com>, <sagark@eecs.berkeley.edu>,
- <kbastian@mail.uni-paderborn.de>, <walling@linux.ibm.com>,
- <cohuck@redhat.com>, <david@redhat.com>, <pasic@linux.ibm.com>,
- <borntraeger@de.ibm.com>, <fam@euphon.net>, <hare@suse.com>,
- <atar4qemu@gmail.com>, <stefanb@linux.ibm.com>, <alex.williamson@redhat.com>, 
- <jcmvbkbc@gmail.com>, <laurent@vivier.eu>, <claudio.fontana@suse.com>,
- <stefanha@redhat.com>, <qemu-arm@nongnu.org>, <qemu-block@nongnu.org>,
- <qemu-ppc@nongnu.org>, <xen-devel@lists.xenproject.org>,
- <qemu-riscv@nongnu.org>, <qemu-s390x@nongnu.org>
-Thread-Topic: [Qemu-devel] [PATCH v7 00/42] Invert Endian bit in SPARCv9 MMU
- TTE
-Thread-Index: AQHVU/vc8DdfhK3ulkmWv148s0Uozqb9eXeAgAAr/BQ=
-Date: Fri, 16 Aug 2019 11:37:26 +0000
-Message-ID: <1565955445398.83897@bt.com>
-References: <43bc5e07ac614d0e8e740bf6007ff77b@tpw09926dag18e.domain1.systemhost.net>,
- <a7d6eede-b152-4c06-8945-9607c663b99c@redhat.com>
-In-Reply-To: <a7d6eede-b152-4c06-8945-9607c663b99c@redhat.com>
-Accept-Language: en-AU, en-GB, en-US
-Content-Language: en-AU
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-messagesentrepresentingtype: 1
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.187.101.40]
-Content-Type: multipart/alternative; boundary="_000_156595544539883897btcom_"
+ (envelope-from <peter.maydell@linaro.org>) id 1hyavv-0003Ft-Hw
+ for qemu-riscv@nongnu.org; Fri, 16 Aug 2019 08:02:16 -0400
+Received: from mail-oi1-x244.google.com ([2607:f8b0:4864:20::244]:35237)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <peter.maydell@linaro.org>)
+ id 1hyavv-0003F4-Aa
+ for qemu-riscv@nongnu.org; Fri, 16 Aug 2019 08:02:15 -0400
+Received: by mail-oi1-x244.google.com with SMTP id a127so4628662oii.2
+ for <qemu-riscv@nongnu.org>; Fri, 16 Aug 2019 05:02:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=mTlvEQlwQxD+m3KCNTaQoPeyNkMz5awwGRbjpwvjjP4=;
+ b=clEWcOMwE8ig/swEBxhVv+eYRtLzVRYzOdNAT4xBz1bX72Ll6PNcMUKCk6v0uVvLrx
+ gbPx/m8UOIXYiXCZbrLpf9UIGtcyFWe7DpeZw9T7/T8Ukh1ODM3ao3EOPf2kOk0uuVjQ
+ bUZeznpOmQhe1FUF+okF/+PPmA8KUpDPhIhiJ7wBKTtPULvEjTz4+xf/Fli6y5ADfXjz
+ wAtUkjimkuWh5hiC4Rnby+nHeZvZAls0ZUvR8nPjlmWmUtVuBOh2dpRg3fJCFwuHmrRL
+ UX+oNlk9YxiwIXoNhIrGB+3JVYzEm4z+G8k4kxE8nzAserwn7lO+4r8E+ID6L6GcAsSq
+ 0SZA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=mTlvEQlwQxD+m3KCNTaQoPeyNkMz5awwGRbjpwvjjP4=;
+ b=G9AV2LJ2x1tigcvf043peNpM13JOkxx0uSFI9u33u7Hzvew2lvG+nsC0xzimOKV/mn
+ 4ORFr/5pM0V5FaAg29TLJf8MASK98JTxQ0cDWGVYk6XRymLFej62v+QhxY5hsOhtsGST
+ DvUmCyIhjIs+flWaFxq+vnUMTjh1sc7SO0qFIvapsPdSqvMBUIfWw811fmOLZplihZZe
+ eKJ2rhQdh53DdN12ZPK0g9dDSROSJUIN+JZQj28bqhTDVnWtIjjHQmdKpYPETeCR3oir
+ 2utQ3Mx+5o06NlGQh8byiAW+H8yk2DkQ2g/0+CXPTevOUtiu21UA++Ii2GvxXN/l+QtY
+ jXiw==
+X-Gm-Message-State: APjAAAV2E8I5FgUwtZXG96YL2P3o3LWKlhpH0NlwNnWDbqz+hmYDxaBi
+ gKcT/jni7cYmUMQaNw5haSwIjGZ0zXvtFAt0WM/SaA==
+X-Google-Smtp-Source: APXvYqzT39k/DlDCfREc8tggE6tDp2LZAzaRwF8MATMyYj9oD8OFY8BqjW5qOATbiqowbjnwyMf+8eWQlW3FZMdwwIU=
+X-Received: by 2002:aca:6185:: with SMTP id v127mr4861732oib.163.1565956934256; 
+ Fri, 16 Aug 2019 05:02:14 -0700 (PDT)
 MIME-Version: 1.0
-X-detected-operating-system: by eggs.gnu.org: Windows 7 or 8 [fuzzy]
-X-Received-From: 213.121.35.79
+References: <43bc5e07ac614d0e8e740bf6007ff77b@tpw09926dag18e.domain1.systemhost.net>
+ <a7d6eede-b152-4c06-8945-9607c663b99c@redhat.com> <1565955445398.83897@bt.com>
+In-Reply-To: <1565955445398.83897@bt.com>
+From: Peter Maydell <peter.maydell@linaro.org>
+Date: Fri, 16 Aug 2019 13:02:03 +0100
+Message-ID: <CAFEAcA-nihW1nuMOL-XCR_QxUXSXji=noe4eDNPHxkib4-_a6A@mail.gmail.com>
+To: tony.nguyen@bt.com
+Cc: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>, 
+ QEMU Developers <qemu-devel@nongnu.org>, Richard Henderson <rth@twiddle.net>, 
+ Paolo Bonzini <pbonzini@redhat.com>, "Michael S. Tsirkin" <mst@redhat.com>, 
+ Igor Mammedov <imammedo@redhat.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, 
+ Xiao Guangrong <xiaoguangrong.eric@gmail.com>,
+ Alistair Francis <alistair@alistair23.me>, 
+ Beniamino Galvani <b.galvani@gmail.com>,
+ =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>, 
+ Andrew Jeffery <andrew@aj.id.au>, Joel Stanley <joel@jms.id.au>,
+ Igor Mitsyanko <i.mitsyanko@gmail.com>, 
+ Rob Herring <robh@kernel.org>, Peter Chubb <peter.chubb@nicta.com.au>, 
+ sundeep subbaraya <sundeep.lkml@gmail.com>, Jan Kiszka <jan.kiszka@web.de>, 
+ andrzej zaborowski <balrogg@gmail.com>, Eric Auger <eric.auger@redhat.com>, 
+ Gerd Hoffmann <kraxel@redhat.com>, Michael Walle <michael@walle.cc>,
+ Kevin Wolf <kwolf@redhat.com>, 
+ Max Reitz <mreitz@redhat.com>, John Snow <jsnow@redhat.com>, 
+ Keith Busch <keith.busch@intel.com>,
+ =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>, 
+ Andrew Baumann <Andrew.Baumann@microsoft.com>, 
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Antony Pavlov <antonynpavlov@gmail.com>, 
+ Fabien Chouteau <chouteau@adacore.com>,
+ KONRAD Frederic <frederic.konrad@adacore.com>, 
+ Thomas Huth <huth@tuxfamily.org>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>, 
+ =?UTF-8?Q?Herv=C3=A9_Poussineau?= <hpoussin@reactos.org>, 
+ Aleksandar Rikalo <arikalo@wavecomp.com>, BALATON Zoltan <balaton@eik.bme.hu>, 
+ Guan Xuetao <gxt@mprc.pku.edu.cn>, David Gibson <david@gibson.dropbear.id.au>, 
+ Helge Deller <deller@gmx.de>, Eduardo Habkost <ehabkost@redhat.com>, 
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Anthony PERARD <anthony.perard@citrix.com>, 
+ Paul Durrant <paul.durrant@citrix.com>, Aurelien Jarno <aurelien@aurel32.net>, 
+ Aleksandar Markovic <amarkovic@wavecomp.com>,
+ Magnus Damm <magnus.damm@gmail.com>, 
+ Alberto Garcia <berto@igalia.com>, Corey Minyard <minyard@acm.org>,
+ Paul Burton <pburton@wavecomp.com>, 
+ Jiri Slaby <jslaby@suse.cz>, Jean-Christophe DUBOIS <jcd@tribudubois.net>, 
+ Andrey Smirnov <andrew.smirnov@gmail.com>, Anthony Green <green@moxielogic.com>,
+ Jason Wang <jasowang@redhat.com>, Dmitry Fleytman <dmitry.fleytman@gmail.com>, 
+ Stefan Weil <sw@weilnetz.de>,
+ =?UTF-8?B?SmnFmcOtIFDDrXJrbw==?= <jiri@resnulli.us>, 
+ Chris Wulff <crwulff@gmail.com>, Marek Vasut <marex@denx.de>,
+ Laszlo Ersek <lersek@redhat.com>, 
+ Jia Liu <proljc@gmail.com>, Stafford Horne <shorne@gmail.com>, 
+ Yuval Shaia <yuval.shaia@oracle.com>, Palmer Dabbelt <palmer@sifive.com>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Collin Walling <walling@linux.ibm.com>, 
+ Cornelia Huck <cohuck@redhat.com>, David Hildenbrand <david@redhat.com>,
+ Halil Pasic <pasic@linux.ibm.com>, 
+ Christian Borntraeger <borntraeger@de.ibm.com>, Fam Zheng <fam@euphon.net>,
+ Hannes Reinecke <hare@suse.com>, 
+ Artyom Tarasenko <atar4qemu@gmail.com>, Stefan Berger <stefanb@linux.ibm.com>, 
+ Alex Williamson <alex.williamson@redhat.com>, Max Filippov <jcmvbkbc@gmail.com>,
+ Laurent Vivier <laurent@vivier.eu>, claudio.fontana@suse.com, 
+ Stefan Hajnoczi <stefanha@redhat.com>, qemu-arm <qemu-arm@nongnu.org>, 
+ Qemu-block <qemu-block@nongnu.org>, qemu-ppc <qemu-ppc@nongnu.org>, 
+ "open list:X86" <xen-devel@lists.xenproject.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ qemu-s390x <qemu-s390x@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2607:f8b0:4864:20::244
 Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v7 00/42] Invert Endian bit in
  SPARCv9 MMU TTE
 X-BeenThere: qemu-riscv@nongnu.org
@@ -89,183 +128,41 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Aug 2019 11:37:35 -0000
+X-List-Received-Date: Fri, 16 Aug 2019 12:02:18 -0000
 
---_000_156595544539883897btcom_
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
-
-Hi Phillippe,
-
-On 8/16/19 7:58 PM, Philippe Mathieu-Daud=E9 wrote:
->On 8/16/19 8:28 AM, tony.nguyen@bt.com wrote:
->> This patchset implements the IE (Invert Endian) bit in SPARCv9 MMU TTE.
->>
->> v7:
->[...]
->> - Re-declared many native endian devices as little or big endian. This i=
-s why
->>   v7 has +16 patches.
+On Fri, 16 Aug 2019 at 12:37, <tony.nguyen@bt.com> wrote:
 >
->Why are you doing that? What is the rational?
-
-While collapsing the byte swaps, it was suggested in patch #11 of v5 that
-consistent use of MemOp simplified endian comparisons. This lead to the
-deprecation of enum device_endian by MemOp.
-
-As MO_TE is conditional upon NEED_CPU_H, the s/DEVICE_NATIVE_ENDIAN/MO_TE/
-required changing some device object files from common-obj-* to obj-*. In p=
-atch
-#15 of v6 Paolo noted that most devices should not of been DEVICE_NATIVE_EN=
-DIAN
-and hinted at a clean up.
-
-The +16 patches in v7 is the clean up effort.
-
->Anyhow if this not required by your series, you should split it out of
->it, and send it on your principal changes are merged.
->I'm worried because this these new patches involve many subsystems (thus
->maintainers) and reviewing them will now take a fair amount of time.
-
-Yes, lets split these patches out. They are very much a tangent to the seri=
-es
-purpose.
-
->> For each device declared with DEVICE_NATIVE_ENDIAN, find the set of
->> targets from the set of target/hw/*/device.o.
->>
->> If the set of targets are all little or all big endian, re-declare
->> the device endianness as DEVICE_LITTLE_ENDIAN or DEVICE_BIG_ENDIAN
->> respectively.
+> Hi Phillippe,
 >
->If only little endian targets use a device, that doesn't mean the device
->is designed in little endian...
+> On 8/16/19 7:58 PM, Philippe Mathieu-Daud=C3=A9 wrote:
+> >On 8/16/19 8:28 AM, tony.nguyen@bt.com wrote:
+> >> For each device declared with DEVICE_NATIVE_ENDIAN, find the set of
+> >> targets from the set of target/hw/*/device.o.
+> >>
+> >> If the set of targets are all little or all big endian, re-declare
+> >> the device endianness as DEVICE_LITTLE_ENDIAN or DEVICE_BIG_ENDIAN
+> >> respectively.
+> >
+> >If only little endian targets use a device, that doesn't mean the device
+> >is designed in little endian...
+> >
+> >Then if a big endian target plan to use this device, it will require
+> >more work and you might have introduced regressions...
+> >
+> >I'm not sure this is a safe move.
+> >
+> >> This *naive* deduction may result in genuinely native endian devices
+> >> being incorrectly declared as little or big endian, but should not
+> >> introduce regressions for current targets.
+> >
 >
->Then if a big endian target plan to use this device, it will require
->more work and you might have introduced regressions...
->
->I'm not sure this is a safe move.
->
->> This *naive* deduction may result in genuinely native endian devices
->> being incorrectly declared as little or big endian, but should not
->> introduce regressions for current targets.
->
+> Roger. Evidently too naive. TBH, most devices I've never heard of...
 
-Roger. Evidently too naive. TBH, most devices I've never heard of...
+OTOH it's worth noting that it's quite likely that most of
+the implementations of these DEVICE_NATIVE_ENDIAN devices
+picked it in an equally naive way, by just copying some other
+device's code...
 
-Regards,
-Tony
-
---_000_156595544539883897btcom_
-Content-Type: text/html; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
-
-<html>
-<head>
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Diso-8859-=
-1">
-<style type=3D"text/css" style=3D"display:none"><!-- P { margin-top: 0px; m=
-argin-bottom: 0px; } .EmailQuote { margin-left: 1pt; padding-left: 4pt; bor=
-der-left-width: 2px; border-left-style: solid; border-left-color: rgb(128, =
-0, 0); }--></style>
-</head>
-<body dir=3D"ltr" style=3D"font-size:12pt;color:#000000;background-color:#F=
-FFFFF;font-family:Calibri,Arial,Helvetica,sans-serif;">
-<p></p>
-<div>Hi Phillippe,<br>
-</div>
-<div><br>
-</div>
-<div>On 8/16/19 7:58 PM, Philippe Mathieu-Daud=E9 wrote:</div>
-<div>&gt;On 8/16/19 8:28 AM, tony.nguyen@bt.com wrote:</div>
-<div>&gt;&gt; This patchset implements the IE (Invert Endian) bit in SPARCv=
-9 MMU TTE.</div>
-<div>&gt;&gt;&nbsp;</div>
-<div>&gt;&gt; v7:</div>
-<div>&gt;[...]</div>
-<div>&gt;&gt; - Re-declared many native endian devices as little or big end=
-ian. This is why</div>
-<div>&gt;&gt; &nbsp; v7 has &#43;16 patches.<br>
-</div>
-<div>&gt;</div>
-<div>&gt;Why are you doing that? What is the rational?</div>
-<div><br>
-</div>
-<div>While collapsing the byte swaps, it was suggested in patch #11 of v5 t=
-hat</div>
-<div>consistent use of MemOp simplified endian comparisons. This lead to th=
-e</div>
-<div>deprecation of enum device_endian by MemOp.</div>
-<div><br>
-</div>
-<div>As MO_TE is conditional upon NEED_CPU_H, the s/DEVICE_NATIVE_ENDIAN/MO=
-_TE/</div>
-<div>required changing some device object files from common-obj-* to obj-*.=
- In patch</div>
-<div>#15 of v6 Paolo noted that most devices should not of been DEVICE_NATI=
-VE_ENDIAN</div>
-<div>and hinted at a clean up.</div>
-<div><br>
-</div>
-<div>The &#43;16 patches in v7 is the clean up effort.<br>
-</div>
-<div><br>
-</div>
-<div>&gt;Anyhow if this not required by your series, you should split it ou=
-t of</div>
-<div>&gt;it, and send it on your principal changes are merged.</div>
-<div>&gt;I'm worried because this these new patches involve many subsystems=
- (thus</div>
-<div>&gt;maintainers) and reviewing them will now take a fair amount of tim=
-e.</div>
-<div><br>
-</div>
-<div>Yes, lets split these patches out. They are very much a tangent to the=
- series<br>
-</div>
-<div>purpose.<br>
-</div>
-<div><br>
-</div>
-<div>&gt;&gt; For each device declared with DEVICE_NATIVE_ENDIAN, find the =
-set of</div>
-<div>&gt;&gt; targets from the set of target/hw/*/device.o.</div>
-<div>&gt;&gt;</div>
-<div>&gt;&gt; If the set of targets are all little or all big endian, re-de=
-clare</div>
-<div>&gt;&gt; the device endianness as DEVICE_LITTLE_ENDIAN or DEVICE_BIG_E=
-NDIAN</div>
-<div>&gt;&gt; respectively.</div>
-<div>&gt;</div>
-<div>&gt;If only little endian targets use a device, that doesn't mean the =
-device</div>
-<div>&gt;is designed in little endian...</div>
-<div>&gt;</div>
-<div>&gt;Then if a big endian target plan to use this device, it will requi=
-re</div>
-<div>&gt;more work and you might have introduced regressions...</div>
-<div>&gt;</div>
-<div>&gt;I'm not sure this is a safe move.</div>
-<div>&gt;</div>
-<div>&gt;&gt; This *naive* deduction may result in genuinely native endian =
-devices<br>
-</div>
-<div>&gt;&gt; being incorrectly declared as little or big endian, but shoul=
-d not</div>
-<div>&gt;&gt; introduce regressions for current targets.</div>
-<div>&gt;<br>
-</div>
-<div><br>
-</div>
-<div>Roger. Evidently too naive. TBH, most devices I've never heard of...</=
-div>
-<div><br>
-Regards,<br>
-</div>
-<div>Tony<br>
-</div>
-</body>
-</html>
-
---_000_156595544539883897btcom_--
+thanks
+-- PMM
 
