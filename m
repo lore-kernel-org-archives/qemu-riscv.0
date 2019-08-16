@@ -1,62 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1hyclc-0003sK-BC
-	for mharc-qemu-riscv@gnu.org; Fri, 16 Aug 2019 09:59:44 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:41873)
+	id 1hyg6P-0003Da-2J
+	for mharc-qemu-riscv@gnu.org; Fri, 16 Aug 2019 13:33:25 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:56560)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <bmeng.cn@gmail.com>) id 1hyclZ-0003oz-Hm
- for qemu-riscv@nongnu.org; Fri, 16 Aug 2019 09:59:42 -0400
+ (envelope-from <alistair23@gmail.com>) id 1hyg6M-0003BJ-Ix
+ for qemu-riscv@nongnu.org; Fri, 16 Aug 2019 13:33:23 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <bmeng.cn@gmail.com>) id 1hyclY-0003v3-Kf
- for qemu-riscv@nongnu.org; Fri, 16 Aug 2019 09:59:41 -0400
-Received: from mail-ed1-x542.google.com ([2a00:1450:4864:20::542]:46869)
+ (envelope-from <alistair23@gmail.com>) id 1hyg6L-0008TE-Is
+ for qemu-riscv@nongnu.org; Fri, 16 Aug 2019 13:33:22 -0400
+Received: from mail-lf1-x143.google.com ([2a00:1450:4864:20::143]:37608)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
- id 1hyclW-0003tJ-KT; Fri, 16 Aug 2019 09:59:38 -0400
-Received: by mail-ed1-x542.google.com with SMTP id z51so5175100edz.13;
- Fri, 16 Aug 2019 06:59:38 -0700 (PDT)
+ (Exim 4.71) (envelope-from <alistair23@gmail.com>)
+ id 1hyg6I-0008RC-Nh; Fri, 16 Aug 2019 13:33:18 -0400
+Received: by mail-lf1-x143.google.com with SMTP id c9so4589640lfh.4;
+ Fri, 16 Aug 2019 10:33:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=AZjf4PlAGOeVzKxNgv+ofsLzu+5Szi8gd8NA52sIoZQ=;
- b=dZQzQXpwu3uhDQzNHk2vyUrdhv8Nf+PvIUBLY7tMdor+k5LORnh4Kregwe5xrWobLQ
- RHJzbETpIyh9qh+tgBeWid17qoeUu+D3fEWwVLggL19UCyYoEORkFnTTp8GZ1t2G3XYl
- ikqcNu68ly8Lz2F5U6IJD7bDmfWz543UiRdqH3u0UzoDwU+q/sQpHMolZ1qvlaMGAoAP
- 0XiWR536PyuADrF/4FUJZilDhOdbwSD4Y0+eZ3fH6sVpsi1T7mP7O2bo82eiZVLAmnk3
- 1NVFNT1SMYCjq6JGwdRT+rRUq//UAI9yBVBX9EDJbRxp6vCQzH6yNTMC/EUIMHr+cyY0
- 7gpA==
+ :cc; bh=Sg4DchbEuir7TA0M1GFZRMxqEoBHsIS0Huq+Eu6XP0k=;
+ b=tq2L41f0IXTzezULoWr4I2QKNjUexaVTTQg4co5CBG2JxMdyIf2laO9gqvrufs5moQ
+ PjU+gA/jUC3iTLwWxjz4hAb0kmd4eMJqHyUktCt2RuVgFMRxSkkxDy6m5v4kNSmaIFdX
+ tPTNh9YzyFq4Y+CnyofyEDxabRQ6Agv8oUa56mfDI4UodYe/qUPw/aIv/BdKGaLOt+3t
+ zq4hmXnfXDqMUpZxJ99liHNlRfdXaC+v2AB3xVd6ePVcKssQxra0UJdQe4QWxr/V6ngk
+ v8xgvKuiZSCHUoP9/7A7hgkfdhLn1Z+hP91QXRPjFL9CzASrN3hXk1TgMQAgN9A9PYX3
+ Sp2w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=AZjf4PlAGOeVzKxNgv+ofsLzu+5Szi8gd8NA52sIoZQ=;
- b=dxTP9fG6akjYUXHN0PZ7FNZOjHGTDrt+wXHGLdsm///+UscnRdhQS3ocgGUZVKvDoE
- dH1aAUjqv1WkRhfd4q+PPcWcMwxoEok6lGt4FPhmflV4GWXbet1qo6hoKy8U5JZdF884
- Z51ze5ipRZ3Zu0CUUxnvEzOwLI9HvUrU28eAeyRJtjaSXW7rYsRAmebUskJe4FXLdiWj
- zTRLOMwNJtuZ5T/tzrXHTs9T7QDjxAdj3XGIUJG0iGhS9BQ1J4iegpLffanfh3ha+/9r
- vI8bV4QNbYQBT8F1O87vs8Dfd0DMjiLde11Ma/jh20yykbNsQbjW520bmGiLPEtt4E4L
- 5aaw==
-X-Gm-Message-State: APjAAAV1vWbXAfdMNIpDdEQF9lSouLXBotEy4306ob7mAOhi5DX93gpY
- ixACzdj1YAfU5+ogf+7Az/JPyr3il9dzIBQSx4E=
-X-Google-Smtp-Source: APXvYqxEhakauWrOuWbK1qlQekaya7JkdX+W1jZHntUTn2f4Nhz9ZbeswTVtOr0Wm0FUP7bGIJi23auP1gN+R9EgIw4=
-X-Received: by 2002:a05:6402:14d6:: with SMTP id
- f22mr10785077edx.180.1565963977843; 
- Fri, 16 Aug 2019 06:59:37 -0700 (PDT)
+ bh=Sg4DchbEuir7TA0M1GFZRMxqEoBHsIS0Huq+Eu6XP0k=;
+ b=kcSZ4dLW1po37NxGDVZOBuW8CJ1cYwZXEBLi49ra1JsWNrZmaS8b+6d1/cuDvuvGog
+ nkWQYcqKHHysh85Id71XSE3JMVoQLk+IyXqdDD8fnkGy1MOwa6cfnNxUscDRXoYcMZF0
+ 8jEbq8fa156Il58D8xioSKkCFCL22Hy8GLToJqJ3DSSF4O5QBO3ppnDlTQE/bwgevVzP
+ ZSS+1n5PyWZ/g7QxcGiHugBUgt/csuaMFcc/z3vVm0uo98feWlgo++JsBAm1Re5B/7Bn
+ jBn/d1B4vUzd8j3Bv5hktXhyN2mnOmEeVFWZPYbkaDnzmA/0JPE1D745t7vj+bpwiqxG
+ hdkQ==
+X-Gm-Message-State: APjAAAXHYnZkePTZoak7Z7gB5XP1qKp23NOdBqkzRXmWDVAkiUwRTXjA
+ QvzCuZ/IdtTnDzTSCE0+SXSKiOIqtcoEJL2Ms7c=
+X-Google-Smtp-Source: APXvYqxSO9/6CRejVavGlJcQRfBJgqfkdm4/NF7DbI9ZQxD3Ma/RlKEvHre92ZB0++pU76jshZJdvMxmYkuJOzrLPMQ=
+X-Received: by 2002:a19:7006:: with SMTP id h6mr5784362lfc.5.1565976797286;
+ Fri, 16 Aug 2019 10:33:17 -0700 (PDT)
 MIME-Version: 1.0
-References: <cover.1565904855.git.alistair.francis@wdc.com>
- <7e476df36a8c2ba53162e9a5f62e9fa171da00ad.1565904855.git.alistair.francis@wdc.com>
-In-Reply-To: <7e476df36a8c2ba53162e9a5f62e9fa171da00ad.1565904855.git.alistair.francis@wdc.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Fri, 16 Aug 2019 21:59:25 +0800
-Message-ID: <CAEUhbmVfgZPGgimuke=2S2TOyUN2FXsrKc4AwJ-nd0VhNu-vvg@mail.gmail.com>
-To: Alistair Francis <alistair.francis@wdc.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Alistair Francis <alistair23@gmail.com>, Palmer Dabbelt <palmer@sifive.com>
+References: <0141541d-43ff-98d8-e9d4-4a2fdcfdcf36@c-sky.com>
+In-Reply-To: <0141541d-43ff-98d8-e9d4-4a2fdcfdcf36@c-sky.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Fri, 16 Aug 2019 10:29:21 -0700
+Message-ID: <CAKmqyKPr0V6acB2-Y+N1-aoj-5LSofwi=Jz=u6KFJN1fPUWjzA@mail.gmail.com>
+To: liuzhiwei <zhiwei_liu@c-sky.com>
+Cc: Palmer Dabbelt <palmer@sifive.com>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::542
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v3 7/7] target/riscv: Convert
- mip to target_ulong
+X-Received-From: 2a00:1450:4864:20::143
+Subject: Re: [Qemu-riscv] [Qemu-devel] RISCV: when will the CLIC be ready?
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -68,19 +68,37 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Aug 2019 13:59:42 -0000
+X-List-Received-Date: Fri, 16 Aug 2019 17:33:24 -0000
 
-On Fri, Aug 16, 2019 at 5:44 AM Alistair Francis
-<alistair.francis@wdc.com> wrote:
+On Thu, Aug 15, 2019 at 8:39 PM liuzhiwei <zhiwei_liu@c-sky.com> wrote:
 >
-> The mip register is an MXLEN-bit long register. Convert it to a
-> target_ulong type instead of uint32_t.
+> Hi, Palmer
 >
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> ---
->  target/riscv/cpu.h | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
+> When Michael Clark still was the maintainer of RISCV QEMU, he wrote in the mail list, "the CLIC interrupt controller is under testing,
+> and will be included in QEMU 3.1 or 3.2". It is pity that the CLIC is not in
+> included even in QEMU 4.1.0.
 
-Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+I see that there is a CLIC branch available here:
+https://github.com/riscv/riscv-qemu/pull/157
+
+It looks like all of the work is in a single commit
+(https://github.com/riscv/riscv-qemu/pull/157/commits/206d9ac339feb9ef2c325402a00f0f45f453d019)
+and that most of the other commits in the PR have already made it into
+master.
+
+Although the CLIC commit is very large it doesn't seem impossible to
+manually pull out the CLIC bits and apply it onto master.
+
+Do you know the state of the CLIC model? If it's working it shouldn't
+be too hard to rebase the work and get the code into mainline.
+
+Alistair
+
+>
+> As we have cpus using CLIC, I have to use the out of tree qemu code in SIFIVE
+> a long time. Could you tell me when it will be upstreamed?
+>
+> Best Regards
+> Zhiwei
+>
 
