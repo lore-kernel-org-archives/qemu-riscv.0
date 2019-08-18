@@ -1,51 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1hzKRw-0007DF-SV
-	for mharc-qemu-riscv@gnu.org; Sun, 18 Aug 2019 08:38:20 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:45789)
+	id 1hzKa7-0000oI-A1
+	for mharc-qemu-riscv@gnu.org; Sun, 18 Aug 2019 08:46:47 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:46525)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <richard.henderson@linaro.org>) id 1hzKRq-0007AC-RD
- for qemu-riscv@nongnu.org; Sun, 18 Aug 2019 08:38:16 -0400
+ (envelope-from <richard.henderson@linaro.org>) id 1hzKa5-0000nb-Ek
+ for qemu-riscv@nongnu.org; Sun, 18 Aug 2019 08:46:46 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <richard.henderson@linaro.org>) id 1hzKRp-0007BO-Jb
- for qemu-riscv@nongnu.org; Sun, 18 Aug 2019 08:38:14 -0400
-Received: from mail-wr1-x443.google.com ([2a00:1450:4864:20::443]:38502)
+ (envelope-from <richard.henderson@linaro.org>) id 1hzKa4-0003Rt-Bz
+ for qemu-riscv@nongnu.org; Sun, 18 Aug 2019 08:46:45 -0400
+Received: from mail-wr1-x431.google.com ([2a00:1450:4864:20::431]:36585)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
- id 1hzKRm-00078c-9w
- for qemu-riscv@nongnu.org; Sun, 18 Aug 2019 08:38:11 -0400
-Received: by mail-wr1-x443.google.com with SMTP id g17so5898099wrr.5
- for <qemu-riscv@nongnu.org>; Sun, 18 Aug 2019 05:38:06 -0700 (PDT)
+ id 1hzKa4-0003QR-0m
+ for qemu-riscv@nongnu.org; Sun, 18 Aug 2019 08:46:44 -0400
+Received: by mail-wr1-x431.google.com with SMTP id r3so5911429wrt.3
+ for <qemu-riscv@nongnu.org>; Sun, 18 Aug 2019 05:46:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=subject:to:cc:references:from:openpgp:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=Q2CECf3Z0VZS2vsykoHMilxYJWnJFnixOycIv/0VdAc=;
- b=vH3nKXklQ3D6J2/DUV/Muhm5EQqjnOi1dOFDnoYkoWbFdHGdCTt0Q8H/PEx3US8HVr
- BvUvT45unuUHziXG9CABuehFsnGiy92O9yPs6EM1DOjtOQOUOf5aNmusmYAtenEpKhZU
- Pu6WIhMrgQs6oTjcv5/b9mcugffLmrQy+Ga3LvHGe4Cbic6u7Zp2AlmUwB1zher+kYK6
- 3yBCSezj6lVnUja0g2Vxd3RILIf1CcZ6VnwhbaSkueQsZrX7Limpesb3ZKhlOXNae2KW
- 7sCJeCoUVb6HYQGT38JuljsiR4FUcloY4PuupNMx8KAHk526GfDKtMT4X6DaoSdbTrHc
- yG3w==
+ bh=1pPjYBqSfFQg89Ld6dVuKQx+pLvJBdztHR4jr4QNGzI=;
+ b=NFdyZjYeAZNqNaLC48b0zxqT4ew0cYYqgiA7yrp97QLfmtvO+ZgMF10JEnSzxPt27n
+ 2gTEmdztH2Z2nIfQrAkbPMNuVh1fIWw9RCjeFBkdCdquJik5n8PLsyHocdtWCV27JyVQ
+ QX9hzgFLel3K5xlO29rrs0/AnLhkf1tkhEiNMcC6IJ+uHdc1AHkK4VAfGxoH270aoFiW
+ jhPmktd1panEyPf1lhzi30D5LtUGZkTzN5K9ND0UGMARBYZKgYMda93vbqZyFk62bHGC
+ 6VyaP9AJ0HTezxkZgWUZ8C1eitZedl/FAJbdS4/uRxX4kDPgbeWwcccZjtnmQKty3WVJ
+ PLmQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
  :date:user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=Q2CECf3Z0VZS2vsykoHMilxYJWnJFnixOycIv/0VdAc=;
- b=NZ03UWQvzjRgr3h7IWmHlfq9q+uQw08SATEAYVzGaQE1HmIGdtX4khxL1xiJ7KakQ9
- 4XPfzZxEYi+9H2fSGy93RNqtFqd1NGzW72kXOO0QIj+tplQK6EGWuWLKuMMGl2HiTUH6
- NAy8hLWkNXQ0OXycLjJdmgVHW0Vcat4NbYdkVlflVHDU8Lp2FsTVTQV+xaxaDK/E2eln
- hT3jQee9c94tl4jI4kgTAaTz/oodwQOjkEGYlYjos3/gCJV9YK6Vd10F/5EurIznWZDz
- JewR3DTr6xuE9e3mScIZON9mK99O2ZVrwm7xidqxGpDBBeAvKCROkxLtQESe++H3lN1r
- 6qwQ==
-X-Gm-Message-State: APjAAAU8kbnYnVGyHk8fPwmrmtYaHxsvg+yJ3w4vsfwv1jlZiDJDsa0R
- Mp2pIR6Tq0mp3hwX6NEjV2F2RA==
-X-Google-Smtp-Source: APXvYqy8+V4wmFtUbhYj8pIGMMLehGXowLZiVAQJJkcV7DuCTxUQaFYSL+0IQlwYdqSdVJrbjHii/Q==
-X-Received: by 2002:adf:f710:: with SMTP id r16mr22248357wrp.81.1566131885195; 
- Sun, 18 Aug 2019 05:38:05 -0700 (PDT)
+ bh=1pPjYBqSfFQg89Ld6dVuKQx+pLvJBdztHR4jr4QNGzI=;
+ b=TbUonYJ0R4VpVZjV8Yni10b8RlZwCEVtmY4JFRyDPiuJomiQpeMhjb/gtpo55HWaPk
+ j2yrpE5wrRUAb4PLipG7TaCJDVWxBb3FVjzGvSTBdwp7dcXQLazFJcELzx1lr3HwzCdE
+ KSB9ENvQDPKtyNsB3NGgIXhBQBmpaBL8dNPRaAJQPd4fR7QxphUKzYnYR393vmGdn6gH
+ MHnGeTYtb4wRO/6vroWDA5g/e1LUWqlwcJEIAb5HcqL0/y9graUm933sg3hUF6mUZ4/i
+ XANzAaXtg0gpAPCHVzQC9q2F9K1yBhvGITcOo9KpfUu9Yd0HU+8mCbF9WcOpziAgpD/Z
+ Vu3w==
+X-Gm-Message-State: APjAAAUnwixS1/Eh2/AyAHW/kWOUKU9d1Iw1Hy8gNh1SW83sPLyivjIr
+ uFBKeo9a03J2/h11L6VLmxn8yA==
+X-Google-Smtp-Source: APXvYqxRKFMqLQ6mapF4AYE2P66DlsLoG3YnAiriMHGTZEIR3kbgRt+Iz9YK8++iYKEOelm0ymJakA==
+X-Received: by 2002:adf:ce05:: with SMTP id p5mr21186547wrn.197.1566132402599; 
+ Sun, 18 Aug 2019 05:46:42 -0700 (PDT)
 Received: from [172.16.53.135] ([82.3.55.76])
- by smtp.gmail.com with ESMTPSA id r190sm12495818wmf.0.2019.08.18.05.37.54
+ by smtp.gmail.com with ESMTPSA id o16sm13231720wrp.23.2019.08.18.05.46.25
  (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
- Sun, 18 Aug 2019 05:38:04 -0700 (PDT)
+ Sun, 18 Aug 2019 05:46:41 -0700 (PDT)
 To: tony.nguyen@bt.com, qemu-devel@nongnu.org
 Cc: frederic.konrad@adacore.com, berto@igalia.com, qemu-block@nongnu.org,
  arikalo@wavecomp.com, pasic@linux.ibm.com, hpoussin@reactos.org,
@@ -77,23 +77,23 @@ Cc: frederic.konrad@adacore.com, berto@igalia.com, qemu-block@nongnu.org,
  huth@tuxfamily.org, jcd@tribudubois.net, pbonzini@redhat.com,
  stefanb@linux.ibm.com
 References: <43bc5e07ac614d0e8e740bf6007ff77b@tpw09926dag18e.domain1.systemhost.net>
- <1565941103483.3364@bt.com>
+ <1565941122698.46462@bt.com>
 From: Richard Henderson <richard.henderson@linaro.org>
 Openpgp: preference=signencrypt
-Message-ID: <078b4e19-2b1e-bc21-f419-1064e45e5173@linaro.org>
-Date: Sun, 18 Aug 2019 13:37:49 +0100
+Message-ID: <0a8ecb15-e03d-c6fd-e9bd-38b4abc7b316@linaro.org>
+Date: Sun, 18 Aug 2019 13:46:16 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
  Thunderbird/60.8.0
 MIME-Version: 1.0
-In-Reply-To: <1565941103483.3364@bt.com>
+In-Reply-To: <1565941122698.46462@bt.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::443
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v7 37/42] cputlb: Replace size
- and endian operands for MemOp
+X-Received-From: 2a00:1450:4864:20::431
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v7 38/42] memory: Single byte
+ swap along the I/O path
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -105,27 +105,36 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 18 Aug 2019 12:38:17 -0000
+X-List-Received-Date: Sun, 18 Aug 2019 12:46:46 -0000
 
 On 8/16/19 8:38 AM, tony.nguyen@bt.com wrote:
->  static uint64_t full_ldub_mmu(CPUArchState *env, target_ulong addr,
->                                TCGMemOpIdx oi, uintptr_t retaddr)
+> +static void adjust_endianness(MemoryRegion *mr, uint64_t *data, MemOp op)
 >  {
-> -    return load_helper(env, addr, oi, retaddr, 1, false, false,
-> -                       full_ldub_mmu);
-> +    return load_helper(env, addr, oi, retaddr, MO_8, false, full_ldub_mmu);
-...
->  void helper_ret_stb_mmu(CPUArchState *env, target_ulong addr, uint8_t val,
->                          TCGMemOpIdx oi, uintptr_t retaddr)
->  {
-> -    store_helper(env, addr, val, oi, retaddr, 1, false);
-> +    store_helper(env, addr, val, oi, retaddr, MO_8);
->  }
+> +    if ((op & MO_BSWAP) != mr->ops->endianness) {
+> +        switch (op & MO_SIZE) {
 
-MO_UB.
+You'll want to use devend_memop() here, as previously discussed.
 
-Otherwise,
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+> @@ -2331,7 +2322,7 @@ void memory_region_add_eventfd(MemoryRegion *mr,
+>      }
+> 
+>      if (size) {
+> -        adjust_endianness(mr, &mrfd.data, size);
+> +        adjust_endianness(mr, &mrfd.data, size_memop(size));
+>      }
+>      memory_region_transaction_begin();
+>      for (i = 0; i < mr->ioeventfd_nb; ++i) {
+> @@ -2366,7 +2357,7 @@ void memory_region_del_eventfd(MemoryRegion *mr,
+>      unsigned i;
+> 
+>      if (size) {
+> -        adjust_endianness(mr, &mrfd.data, size);
+> +        adjust_endianness(mr, &mrfd.data, size_memop(size));
+>      }
+>      memory_region_transaction_begin();
+>      for (i = 0; i < mr->ioeventfd_nb; ++i) {
+
+To preserve behaviour it would appear that these need MO_TE.
 
 
 r~
