@@ -1,99 +1,98 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1hzKa7-0000oI-A1
-	for mharc-qemu-riscv@gnu.org; Sun, 18 Aug 2019 08:46:47 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:46525)
+	id 1hzSya-0004Hf-8H
+	for mharc-qemu-riscv@gnu.org; Sun, 18 Aug 2019 17:44:36 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:40761)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <richard.henderson@linaro.org>) id 1hzKa5-0000nb-Ek
- for qemu-riscv@nongnu.org; Sun, 18 Aug 2019 08:46:46 -0400
+ (envelope-from <philmd@redhat.com>) id 1hzSyY-0004Gc-19
+ for qemu-riscv@nongnu.org; Sun, 18 Aug 2019 17:44:35 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <richard.henderson@linaro.org>) id 1hzKa4-0003Rt-Bz
- for qemu-riscv@nongnu.org; Sun, 18 Aug 2019 08:46:45 -0400
-Received: from mail-wr1-x431.google.com ([2a00:1450:4864:20::431]:36585)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
- id 1hzKa4-0003QR-0m
- for qemu-riscv@nongnu.org; Sun, 18 Aug 2019 08:46:44 -0400
-Received: by mail-wr1-x431.google.com with SMTP id r3so5911429wrt.3
- for <qemu-riscv@nongnu.org>; Sun, 18 Aug 2019 05:46:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=subject:to:cc:references:from:openpgp:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=1pPjYBqSfFQg89Ld6dVuKQx+pLvJBdztHR4jr4QNGzI=;
- b=NFdyZjYeAZNqNaLC48b0zxqT4ew0cYYqgiA7yrp97QLfmtvO+ZgMF10JEnSzxPt27n
- 2gTEmdztH2Z2nIfQrAkbPMNuVh1fIWw9RCjeFBkdCdquJik5n8PLsyHocdtWCV27JyVQ
- QX9hzgFLel3K5xlO29rrs0/AnLhkf1tkhEiNMcC6IJ+uHdc1AHkK4VAfGxoH270aoFiW
- jhPmktd1panEyPf1lhzi30D5LtUGZkTzN5K9ND0UGMARBYZKgYMda93vbqZyFk62bHGC
- 6VyaP9AJ0HTezxkZgWUZ8C1eitZedl/FAJbdS4/uRxX4kDPgbeWwcccZjtnmQKty3WVJ
- PLmQ==
+ (envelope-from <philmd@redhat.com>) id 1hzSyW-0008G5-EM
+ for qemu-riscv@nongnu.org; Sun, 18 Aug 2019 17:44:33 -0400
+Received: from mx1.redhat.com ([209.132.183.28]:45098)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <philmd@redhat.com>) id 1hzSyW-0008F1-6y
+ for qemu-riscv@nongnu.org; Sun, 18 Aug 2019 17:44:32 -0400
+Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
+ [209.85.221.69])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (No client certificate requested)
+ by mx1.redhat.com (Postfix) with ESMTPS id 492683DE31
+ for <qemu-riscv@nongnu.org>; Sun, 18 Aug 2019 21:44:31 +0000 (UTC)
+Received: by mail-wr1-f69.google.com with SMTP id a2so4197186wrs.8
+ for <qemu-riscv@nongnu.org>; Sun, 18 Aug 2019 14:44:31 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
  :date:user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=1pPjYBqSfFQg89Ld6dVuKQx+pLvJBdztHR4jr4QNGzI=;
- b=TbUonYJ0R4VpVZjV8Yni10b8RlZwCEVtmY4JFRyDPiuJomiQpeMhjb/gtpo55HWaPk
- j2yrpE5wrRUAb4PLipG7TaCJDVWxBb3FVjzGvSTBdwp7dcXQLazFJcELzx1lr3HwzCdE
- KSB9ENvQDPKtyNsB3NGgIXhBQBmpaBL8dNPRaAJQPd4fR7QxphUKzYnYR393vmGdn6gH
- MHnGeTYtb4wRO/6vroWDA5g/e1LUWqlwcJEIAb5HcqL0/y9graUm933sg3hUF6mUZ4/i
- XANzAaXtg0gpAPCHVzQC9q2F9K1yBhvGITcOo9KpfUu9Yd0HU+8mCbF9WcOpziAgpD/Z
- Vu3w==
-X-Gm-Message-State: APjAAAUnwixS1/Eh2/AyAHW/kWOUKU9d1Iw1Hy8gNh1SW83sPLyivjIr
- uFBKeo9a03J2/h11L6VLmxn8yA==
-X-Google-Smtp-Source: APXvYqxRKFMqLQ6mapF4AYE2P66DlsLoG3YnAiriMHGTZEIR3kbgRt+Iz9YK8++iYKEOelm0ymJakA==
-X-Received: by 2002:adf:ce05:: with SMTP id p5mr21186547wrn.197.1566132402599; 
- Sun, 18 Aug 2019 05:46:42 -0700 (PDT)
-Received: from [172.16.53.135] ([82.3.55.76])
- by smtp.gmail.com with ESMTPSA id o16sm13231720wrp.23.2019.08.18.05.46.25
- (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
- Sun, 18 Aug 2019 05:46:41 -0700 (PDT)
+ bh=h2xzjSFZNTWlCffgvGmqesSJuEHPH52iwk5nP49KPQY=;
+ b=o/O+j2ozUFpHHzY5u9jfXZUNm9IFMUwXAVSagOinuRo9UbT1AOWfYOyUZodYijJ63u
+ +PHonlR8fj4xSdE8l6EpJW5xDxeNbk5hhnj5QVKJXgzettNmlhF/ZjUZCxEDhZSs1We8
+ kTSmgpcQsR9+d/9ZLL4MCnv2JsqGnFlV7SCk9m4Hh6AGBm93RGSJJ1jJMiySqsjOm0ro
+ P6JCu849lFTWRYwdq9E/B5Qa+/XXwOU18JMnz55X4WrAyv79dmZy3fFKP0ol+4VyAqFb
+ eLTxcZLa3tdzhRTXi+eN8sBF/zsDZBkASgcldJw0N9SCdLChh4zJqZB35PrV6wV1djVq
+ QOqQ==
+X-Gm-Message-State: APjAAAUiu+IFB9Uppq9+4796GGEYowiDCXO7AncOdl2IszZFPImCplpQ
+ 1+Veci9O0xsqk3TPdvWx34hp9IqOzV3i07SxrNjGtCfqvZlLWurqiXDXNj0fGLkTSUIpFMQNzJ6
+ 4YQy2oftxonsdK6s=
+X-Received: by 2002:adf:edc9:: with SMTP id v9mr22550681wro.125.1566164669527; 
+ Sun, 18 Aug 2019 14:44:29 -0700 (PDT)
+X-Google-Smtp-Source: APXvYqyq1v4DfCMJNoAeYMrQK7nrdjPPaAOfkuNduzjgjCwxae6Z6aJ5i74L3JJILhmb7zElm7rP7A==
+X-Received: by 2002:adf:edc9:: with SMTP id v9mr22550609wro.125.1566164669299; 
+ Sun, 18 Aug 2019 14:44:29 -0700 (PDT)
+Received: from [192.168.1.39] (251.red-88-10-102.dynamicip.rima-tde.net.
+ [88.10.102.251])
+ by smtp.gmail.com with ESMTPSA id f18sm13122174wrx.85.2019.08.18.14.44.25
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 18 Aug 2019 14:44:28 -0700 (PDT)
 To: tony.nguyen@bt.com, qemu-devel@nongnu.org
-Cc: frederic.konrad@adacore.com, berto@igalia.com, qemu-block@nongnu.org,
- arikalo@wavecomp.com, pasic@linux.ibm.com, hpoussin@reactos.org,
- anthony.perard@citrix.com, xen-devel@lists.xenproject.org,
- lersek@redhat.com, jasowang@redhat.com, jiri@resnulli.us,
- ehabkost@redhat.com, b.galvani@gmail.com, eric.auger@redhat.com,
- alex.williamson@redhat.com, stefanha@redhat.com, jsnow@redhat.com,
- rth@twiddle.net, kwolf@redhat.com, andrew@aj.id.au,
- claudio.fontana@suse.com, crwulff@gmail.com, laurent@vivier.eu,
- sundeep.lkml@gmail.com, michael@walle.cc, qemu-ppc@nongnu.org,
- kbastian@mail.uni-paderborn.de, imammedo@redhat.com, fam@euphon.net,
- peter.maydell@linaro.org, david@redhat.com, palmer@sifive.com,
- keith.busch@intel.com, jcmvbkbc@gmail.com, hare@suse.com,
- sstabellini@kernel.org, andrew.smirnov@gmail.com, deller@gmx.de,
- magnus.damm@gmail.com, atar4qemu@gmail.com, minyard@acm.org, sw@weilnetz.de,
- yuval.shaia@oracle.com, qemu-s390x@nongnu.org, qemu-arm@nongnu.org,
- jan.kiszka@web.de, clg@kaod.org, shorne@gmail.com, qemu-riscv@nongnu.org,
- i.mitsyanko@gmail.com, cohuck@redhat.com, philmd@redhat.com,
- amarkovic@wavecomp.com, peter.chubb@nicta.com.au, aurelien@aurel32.net,
- pburton@wavecomp.com, sagark@eecs.berkeley.edu, green@moxielogic.com,
- kraxel@redhat.com, edgar.iglesias@gmail.com, gxt@mprc.pku.edu.cn,
- robh@kernel.org, borntraeger@de.ibm.com, joel@jms.id.au,
- antonynpavlov@gmail.com, chouteau@adacore.com, Andrew.Baumann@microsoft.com,
- mreitz@redhat.com, walling@linux.ibm.com, dmitry.fleytman@gmail.com,
- mst@redhat.com, mark.cave-ayland@ilande.co.uk, jslaby@suse.cz,
- marex@denx.de, proljc@gmail.com, marcandre.lureau@redhat.com,
- alistair@alistair23.me, paul.durrant@citrix.com,
- david@gibson.dropbear.id.au, xiaoguangrong.eric@gmail.com,
- huth@tuxfamily.org, jcd@tribudubois.net, pbonzini@redhat.com,
- stefanb@linux.ibm.com
+Cc: rth@twiddle.net, pbonzini@redhat.com, mst@redhat.com,
+ imammedo@redhat.com, marcel.apfelbaum@gmail.com,
+ xiaoguangrong.eric@gmail.com, alistair@alistair23.me,
+ peter.maydell@linaro.org, b.galvani@gmail.com, clg@kaod.org,
+ andrew@aj.id.au, joel@jms.id.au, i.mitsyanko@gmail.com, robh@kernel.org,
+ peter.chubb@nicta.com.au, sundeep.lkml@gmail.com, jan.kiszka@web.de,
+ balrogg@gmail.com, eric.auger@redhat.com, kraxel@redhat.com,
+ michael@walle.cc, kwolf@redhat.com, mreitz@redhat.com, jsnow@redhat.com,
+ keith.busch@intel.com, marcandre.lureau@redhat.com,
+ Andrew.Baumann@microsoft.com, edgar.iglesias@gmail.com,
+ antonynpavlov@gmail.com, chouteau@adacore.com, frederic.konrad@adacore.com,
+ huth@tuxfamily.org, mark.cave-ayland@ilande.co.uk, hpoussin@reactos.org,
+ arikalo@wavecomp.com, balaton@eik.bme.hu, gxt@mprc.pku.edu.cn,
+ david@gibson.dropbear.id.au, deller@gmx.de, ehabkost@redhat.com,
+ sstabellini@kernel.org, anthony.perard@citrix.com, paul.durrant@citrix.com,
+ aurelien@aurel32.net, amarkovic@wavecomp.com, magnus.damm@gmail.com,
+ berto@igalia.com, minyard@acm.org, pburton@wavecomp.com, jslaby@suse.cz,
+ jcd@tribudubois.net, andrew.smirnov@gmail.com, green@moxielogic.com,
+ jasowang@redhat.com, dmitry.fleytman@gmail.com, sw@weilnetz.de,
+ jiri@resnulli.us, crwulff@gmail.com, marex@denx.de, lersek@redhat.com,
+ proljc@gmail.com, shorne@gmail.com, yuval.shaia@oracle.com,
+ palmer@sifive.com, sagark@eecs.berkeley.edu, kbastian@mail.uni-paderborn.de,
+ walling@linux.ibm.com, cohuck@redhat.com, david@redhat.com,
+ pasic@linux.ibm.com, borntraeger@de.ibm.com, fam@euphon.net, hare@suse.com,
+ atar4qemu@gmail.com, stefanb@linux.ibm.com, alex.williamson@redhat.com,
+ jcmvbkbc@gmail.com, laurent@vivier.eu, claudio.fontana@suse.com,
+ stefanha@redhat.com, qemu-arm@nongnu.org, qemu-block@nongnu.org,
+ qemu-ppc@nongnu.org, xen-devel@lists.xenproject.org, qemu-riscv@nongnu.org,
+ qemu-s390x@nongnu.org
 References: <43bc5e07ac614d0e8e740bf6007ff77b@tpw09926dag18e.domain1.systemhost.net>
- <1565941122698.46462@bt.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-Openpgp: preference=signencrypt
-Message-ID: <0a8ecb15-e03d-c6fd-e9bd-38b4abc7b316@linaro.org>
-Date: Sun, 18 Aug 2019 13:46:16 +0100
+ <1565940633026.69822@bt.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>
+Openpgp: id=89C1E78F601EE86C867495CBA2A3FD6EDEADC0DE;
+ url=http://pgp.mit.edu/pks/lookup?op=get&search=0xA2A3FD6EDEADC0DE
+Message-ID: <3872a5ec-ccf1-2978-34b5-b0b5478d2b86@redhat.com>
+Date: Sun, 18 Aug 2019 23:44:24 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.8.0
+ Thunderbird/60.7.0
 MIME-Version: 1.0
-In-Reply-To: <1565941122698.46462@bt.com>
-Content-Type: text/plain; charset=utf-8
+In-Reply-To: <1565940633026.69822@bt.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2a00:1450:4864:20::431
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v7 38/42] memory: Single byte
- swap along the I/O path
+Content-Transfer-Encoding: quoted-printable
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+X-Received-From: 209.132.183.28
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v7 11/42] memory: Access
+ MemoryRegion with MemOp
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -105,37 +104,195 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 18 Aug 2019 12:46:46 -0000
+X-List-Received-Date: Sun, 18 Aug 2019 21:44:35 -0000
 
-On 8/16/19 8:38 AM, tony.nguyen@bt.com wrote:
-> +static void adjust_endianness(MemoryRegion *mr, uint64_t *data, MemOp op)
->  {
-> +    if ((op & MO_BSWAP) != mr->ops->endianness) {
-> +        switch (op & MO_SIZE) {
+On 8/16/19 9:30 AM, tony.nguyen@bt.com wrote:
+> Convert memory_region_dispatch_{read|write} operand "unsigned size"
+> into a "MemOp op".
+>=20
+> Signed-off-by: Tony Nguyen <tony.nguyen@bt.com>
+> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+> ---
+> =C2=A0include/exec/memop.h =C2=A0| 20 ++++++++++++++------
+> =C2=A0include/exec/memory.h | =C2=A09 +++++----
+> =C2=A0memory.c =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| =C2=A0=
+7 +++++--
+> =C2=A03 files changed, 24 insertions(+), 12 deletions(-)
+>=20
+> diff --git a/include/exec/memop.h b/include/exec/memop.h
+> index dfd76a1..0a610b7 100644
+> --- a/include/exec/memop.h
+> +++ b/include/exec/memop.h
+> @@ -12,6 +12,8 @@
+> =C2=A0#ifndef MEMOP_H
+> =C2=A0#define MEMOP_H
+> =C2=A0
+> +#include "qemu/host-utils.h"
+> +
+> =C2=A0typedef enum MemOp {
+> =C2=A0 =C2=A0 =C2=A0MO_8 =C2=A0 =C2=A0 =3D 0,
+> =C2=A0 =C2=A0 =C2=A0MO_16 =C2=A0 =C2=A0=3D 1,
+> @@ -107,14 +109,20 @@ typedef enum MemOp {
+> =C2=A0 =C2=A0 =C2=A0MO_SSIZE =3D MO_SIZE | MO_SIGN,
+> =C2=A0} MemOp;
+> =C2=A0
+> +/* MemOp to size in bytes. =C2=A0*/
+> +static inline unsigned memop_size(MemOp op)
+> +{
+> + =C2=A0 =C2=A0return 1 << (op & MO_SIZE);
+> +}
+> +
+> =C2=A0/* Size in bytes to MemOp. =C2=A0*/
+> -static inline unsigned size_memop(unsigned size)
+> +static inline MemOp size_memop(unsigned size)
+> =C2=A0{
+> - =C2=A0 =C2=A0/*
+> - =C2=A0 =C2=A0 * FIXME: No-op to aid conversion of
+> memory_region_dispatch_{read|write}
+> - =C2=A0 =C2=A0 * "unsigned size" operand into a "MemOp op".
+> - =C2=A0 =C2=A0 */
+> - =C2=A0 =C2=A0return size;
+> +#ifdef CONFIG_DEBUG_TCG
+> + =C2=A0 =C2=A0/* Power of 2 up to 8. =C2=A0*/
+> + =C2=A0 =C2=A0assert((size & (size - 1)) =3D=3D 0 && size >=3D 1 && si=
+ze <=3D 8);
 
-You'll want to use devend_memop() here, as previously discussed.
+Easier to review as:
 
-> @@ -2331,7 +2322,7 @@ void memory_region_add_eventfd(MemoryRegion *mr,
->      }
-> 
->      if (size) {
-> -        adjust_endianness(mr, &mrfd.data, size);
-> +        adjust_endianness(mr, &mrfd.data, size_memop(size));
->      }
->      memory_region_transaction_begin();
->      for (i = 0; i < mr->ioeventfd_nb; ++i) {
-> @@ -2366,7 +2357,7 @@ void memory_region_del_eventfd(MemoryRegion *mr,
->      unsigned i;
-> 
->      if (size) {
-> -        adjust_endianness(mr, &mrfd.data, size);
-> +        adjust_endianness(mr, &mrfd.data, size_memop(size));
->      }
->      memory_region_transaction_begin();
->      for (i = 0; i < mr->ioeventfd_nb; ++i) {
+       assert(is_power_of_2(size) && size <=3D 8);
 
-To preserve behaviour it would appear that these need MO_TE.
+(This can be cleaned later).
 
-
-r~
+> +#endif
+> + =C2=A0 =C2=A0return ctz32(size);
+> =C2=A0}
+> =C2=A0
+> =C2=A0#endif
+> diff --git a/include/exec/memory.h b/include/exec/memory.h
+> index bb0961d..975b86a 100644
+> --- a/include/exec/memory.h
+> +++ b/include/exec/memory.h
+> @@ -19,6 +19,7 @@
+> =C2=A0#include "exec/cpu-common.h"
+> =C2=A0#include "exec/hwaddr.h"
+> =C2=A0#include "exec/memattrs.h"
+> +#include "exec/memop.h"
+> =C2=A0#include "exec/ramlist.h"
+> =C2=A0#include "qemu/queue.h"
+> =C2=A0#include "qemu/int128.h"
+> @@ -1731,13 +1732,13 @@ void mtree_info(bool flatview, bool
+> dispatch_tree, bool owner);
+> =C2=A0 * @mr: #MemoryRegion to access
+> =C2=A0 * @addr: address within that region
+> =C2=A0 * @pval: pointer to uint64_t which the data is written to
+> - * @size: size of the access in bytes
+> + * @op: size, sign, and endianness of the memory operation
+> =C2=A0 * @attrs: memory transaction attributes to use for the access
+> =C2=A0 */
+> =C2=A0MemTxResult memory_region_dispatch_read(MemoryRegion *mr,
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+hwaddr addr,
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+uint64_t *pval,
+> - =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0uns=
+igned size,
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Mem=
+Op op,
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+MemTxAttrs attrs);
+> =C2=A0/**
+> =C2=A0 * memory_region_dispatch_write: perform a write directly to the =
+specified
+> @@ -1746,13 +1747,13 @@ MemTxResult
+> memory_region_dispatch_read(MemoryRegion *mr,
+> =C2=A0 * @mr: #MemoryRegion to access
+> =C2=A0 * @addr: address within that region
+> =C2=A0 * @data: data to write
+> - * @size: size of the access in bytes
+> + * @op: size, sign, and endianness of the memory operation
+> =C2=A0 * @attrs: memory transaction attributes to use for the access
+> =C2=A0 */
+> =C2=A0MemTxResult memory_region_dispatch_write(MemoryRegion *mr,
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ hwaddr addr,
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ uint64_t data,
+> - =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 un=
+signed size,
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 Me=
+mOp op,
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ MemTxAttrs attrs);
+> =C2=A0
+> =C2=A0/**
+> diff --git a/memory.c b/memory.c
+> index 5d8c9a9..89ea4fb 100644
+> --- a/memory.c
+> +++ b/memory.c
+> @@ -1439,9 +1439,10 @@ static MemTxResult
+> memory_region_dispatch_read1(MemoryRegion *mr,
+> =C2=A0MemTxResult memory_region_dispatch_read(MemoryRegion *mr,
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+hwaddr addr,
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+uint64_t *pval,
+> - =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0uns=
+igned size,
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Mem=
+Op op,
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+MemTxAttrs attrs)
+> =C2=A0{
+> + =C2=A0 =C2=A0unsigned size =3D memop_size(op);
+> =C2=A0 =C2=A0 =C2=A0MemTxResult r;
+> =C2=A0
+> =C2=A0 =C2=A0 =C2=A0if (!memory_region_access_valid(mr, addr, size, fal=
+se, attrs)) {
+> @@ -1483,9 +1484,11 @@ static bool
+> memory_region_dispatch_write_eventfds(MemoryRegion *mr,
+> =C2=A0MemTxResult memory_region_dispatch_write(MemoryRegion *mr,
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ hwaddr addr,
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ uint64_t data,
+> - =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 un=
+signed size,
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 Me=
+mOp op,
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ MemTxAttrs attrs)
+> =C2=A0{
+> + =C2=A0 =C2=A0unsigned size =3D memop_size(op);
+> +
+> =C2=A0 =C2=A0 =C2=A0if (!memory_region_access_valid(mr, addr, size, tru=
+e, attrs)) {
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0unassigned_mem_write(mr, addr, data, =
+size);
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return MEMTX_DECODE_ERROR;
+> --=C2=A0
+> 1.8.3.1
+>=20
+> =E2=80=8B
+>=20
+>=20
 
