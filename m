@@ -1,64 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1hzZyE-0005TR-Ok
-	for mharc-qemu-riscv@gnu.org; Mon, 19 Aug 2019 01:12:42 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43768)
+	id 1hzZyE-0005Tw-Vy
+	for mharc-qemu-riscv@gnu.org; Mon, 19 Aug 2019 01:12:43 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43876)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <bmeng.cn@gmail.com>) id 1hzZy6-0005Gp-9N
- for qemu-riscv@nongnu.org; Mon, 19 Aug 2019 01:12:36 -0400
+ (envelope-from <bmeng.cn@gmail.com>) id 1hzZy9-0005KA-HL
+ for qemu-riscv@nongnu.org; Mon, 19 Aug 2019 01:12:38 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <bmeng.cn@gmail.com>) id 1hzZy4-0008Hq-3a
- for qemu-riscv@nongnu.org; Mon, 19 Aug 2019 01:12:33 -0400
-Received: from mail-pf1-x443.google.com ([2607:f8b0:4864:20::443]:43248)
+ (envelope-from <bmeng.cn@gmail.com>) id 1hzZy8-0008WP-9t
+ for qemu-riscv@nongnu.org; Mon, 19 Aug 2019 01:12:37 -0400
+Received: from mail-pl1-x642.google.com ([2607:f8b0:4864:20::642]:42465)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
- id 1hzZxx-0007rC-OZ; Mon, 19 Aug 2019 01:12:25 -0400
-Received: by mail-pf1-x443.google.com with SMTP id v12so445802pfn.10;
- Sun, 18 Aug 2019 22:12:25 -0700 (PDT)
+ id 1hzZy4-00087D-0p; Mon, 19 Aug 2019 01:12:32 -0400
+Received: by mail-pl1-x642.google.com with SMTP id y1so375421plp.9;
+ Sun, 18 Aug 2019 22:12:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:to:subject:date:message-id:in-reply-to:references;
- bh=k81ZMxLa4YSaXM7FYyGMWZHDjNtien308wLbYNCZJ+o=;
- b=tmI6IYBCjr8i4SjyMjwj494FLifl7mxdRK1UQT2jaGSJ6CGq8/UeRB7LA4LsFH/rRJ
- eqpRXlazWz0sz0GPs7yL1q9ANJ2khpdB7MuRuqONJsUkM7k6d+ZOmuDRSMXBBB8ce6qz
- DVj/VHRkk3bDz16lHKID5/ayniWsYZJYBUY5Sbp0OjSZx9zjDLpMTpb1xfObAIS1fD9Y
- vLKpGVBS3c0BVihrWYEGjR9qZYWyoDQF3eS0Td18UP2STkfnbLgVxqxHOnqRkf0UZcGF
- j52Wq/D8XXzzzYDTRv1L9AcbQVd1G+grgfB0AL9m0FMr43/lXmHup5iS+SBbGla6rxQz
- J/MA==
+ bh=jRYXKkN9ELAFkYvShcEjA7QCCZhniz6CotBm9Ne6778=;
+ b=nIANLv9R91M78C/isUfZ4OGAwF4AUNDIeDuUl6HbRaw+opxRgj/ayGjue/px6nr9pW
+ zvPrQbixiy8iAShFOyQhQyjiY5Zpu2SyE0cGg4nYx2zohanrI0R3dp6DtB1f/9E6Pfsr
+ 7ySz7IqHSoJNlHpo1mTkPdYNAvXgja3Y2Ca4BTwDJ7MTi73j6Zw44c+ywVV7qusEe3s3
+ JUaouZlAEOcEOvUCE1DedAWgLMSh8sjurST61fLUypTQkCQA7ZE6XUTbebiH7rITsoVS
+ D1c0ZJTztlsOp8soNsxfwbAFf1yVYLbNwBQXyhORy1Ayfj2X20xsqvbpYficU/H9CIgg
+ F12w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
  :references;
- bh=k81ZMxLa4YSaXM7FYyGMWZHDjNtien308wLbYNCZJ+o=;
- b=QxiME6bGDktQfHjp0gABt92ZzL5D9YpGlwz8AXPMP3y7wubxRxm+OwsnttZl+feu1R
- HCVKOD7Y83utU/q5RXk7EeuenJs3+KD1F6a3q2znYHPalGm5f0GreeuxpTn0aCD30zJu
- GTiNW8eUKHdL5BTOsze1qxkVIQQhH3BizEvVsvrPw6vcO0jez2QEQPnnTmZjNO0/tPFR
- xZJe76h4eE5QLXMZHn0ALp2bWVikspcnX+gAcnoBWCcQK+YF1d27lsGbTYohSf02OuyS
- 2ECDUNF5sr8QVLNVp7vhBYSfKVK+ai0BEr9RElccdXvtcmk9RFXc/PSqBCW39BjGSJIw
- ap7w==
-X-Gm-Message-State: APjAAAWpGAtVsFSaPz2ab4j3bL7AnOcMRDa7wH13NCKn8a5UCQMDtdw9
- bSCGOvfsWeYkicsH8mnfrSE=
-X-Google-Smtp-Source: APXvYqysVt1NIlaIbI3+uI4gxK/NVOAB0Tc1IATWihweUyqJ0aVgQXFxYef52FwGpSsRt80c3OkkwQ==
-X-Received: by 2002:a17:90a:8081:: with SMTP id
- c1mr19322471pjn.62.1566191544408; 
- Sun, 18 Aug 2019 22:12:24 -0700 (PDT)
+ bh=jRYXKkN9ELAFkYvShcEjA7QCCZhniz6CotBm9Ne6778=;
+ b=DmLZOsqPeUxOs8J8bFc7f7b0uIOxpUAAn5tkz7Z2i/t8OIY8MvYtILPSTy4MsjrDCO
+ vAbap1tS4fufQOmnYd78eLvmAPQRMjDz9w7b5nHlyYekKgAkURr27qMOHhjbRR7ZFP+n
+ 4gUZebByyW3V1IASWuETONaFAoEooKc7ovosSlt+KGowoz1w3LhS7LavORzNj+j0cZdf
+ Iv3hpmSgHwm3jOj3L5IEGkTYbfJV4zaBz2rDpGjlvYzDhi0UEaytK8IFWDbmXjsDm1KV
+ h4e8OIW17z4D0BFJ61OMqZ9FKphfAg5+X4Qxp8NYAo7GKYk6rNZLpG86+iXdhtn11Xa1
+ A2Eg==
+X-Gm-Message-State: APjAAAV39FGxkS73Ra6+WEYEWAdDnkybRsLFnqIGCPBMEEVIGcL7RsY6
+ bYyzdaQdTwRayRudxumdMKo=
+X-Google-Smtp-Source: APXvYqy7+bzqKMvX21R3AtVHU3OiB7E9TlCWy5SZrLa+RA3JIMp9U/73jGa9P4WlCG0VtNBQplZNeA==
+X-Received: by 2002:a17:902:8d95:: with SMTP id
+ v21mr21151017plo.267.1566191548620; 
+ Sun, 18 Aug 2019 22:12:28 -0700 (PDT)
 Received: from localhost.localdomain (unknown-224-80.windriver.com.
  [147.11.224.80])
- by smtp.gmail.com with ESMTPSA id q13sm15464986pfl.124.2019.08.18.22.12.23
+ by smtp.gmail.com with ESMTPSA id q13sm15464986pfl.124.2019.08.18.22.12.27
  (version=TLS1 cipher=AES128-SHA bits=128/128);
- Sun, 18 Aug 2019 22:12:23 -0700 (PDT)
+ Sun, 18 Aug 2019 22:12:28 -0700 (PDT)
 From: Bin Meng <bmeng.cn@gmail.com>
 To: Alistair Francis <Alistair.Francis@wdc.com>,
  Palmer Dabbelt <palmer@sifive.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
-Date: Sun, 18 Aug 2019 22:11:49 -0700
-Message-Id: <1566191521-7820-17-git-send-email-bmeng.cn@gmail.com>
+Date: Sun, 18 Aug 2019 22:11:53 -0700
+Message-Id: <1566191521-7820-21-git-send-email-bmeng.cn@gmail.com>
 X-Mailer: git-send-email 1.7.1
 In-Reply-To: <1566191521-7820-1-git-send-email-bmeng.cn@gmail.com>
 References: <1566191521-7820-1-git-send-email-bmeng.cn@gmail.com>
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::443
-Subject: [Qemu-riscv] [PATCH v4 16/28] riscv: sifive_u: Update PLIC hart
- topology configuration string
+X-Received-From: 2607:f8b0:4864:20::642
+Subject: [Qemu-riscv] [PATCH v4 20/28] riscv: sifive_u: Reference PRCI
+ clocks in UART and ethernet nodes
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -70,42 +70,74 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Aug 2019 05:12:37 -0000
+X-List-Received-Date: Mon, 19 Aug 2019 05:12:40 -0000
 
-With heterogeneous harts config, the PLIC hart topology configuration
-string are "M,MS,.." because of the monitor hart #0.
+Now that we have added a PRCI node, update existing UART and ethernet
+nodes to reference PRCI as their clock sources, to keep in sync with
+the Linux kernel device tree.
 
-Suggested-by: Fabien Chouteau <chouteau@adacore.com>
 Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
 
 Changes in v4: None
 Changes in v3: None
 Changes in v2: None
 
- hw/riscv/sifive_u.c | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
+ hw/riscv/sifive_u.c              |  7 ++++---
+ include/hw/riscv/sifive_u_prci.h | 10 ++++++++++
+ 2 files changed, 14 insertions(+), 3 deletions(-)
 
 diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-index a36cd77..284f7a5 100644
+index bd5551c..8818fd6 100644
 --- a/hw/riscv/sifive_u.c
 +++ b/hw/riscv/sifive_u.c
-@@ -433,10 +433,11 @@ static void riscv_sifive_u_soc_realize(DeviceState *dev, Error **errp)
-     plic_hart_config = g_malloc0(plic_hart_config_len);
-     for (i = 0; i < ms->smp.cpus; i++) {
-         if (i != 0) {
--            strncat(plic_hart_config, ",", plic_hart_config_len);
-+            strncat(plic_hart_config, "," SIFIVE_U_PLIC_HART_CONFIG,
-+                    plic_hart_config_len);
-+        } else {
-+            strncat(plic_hart_config, "M", plic_hart_config_len);
-         }
--        strncat(plic_hart_config, SIFIVE_U_PLIC_HART_CONFIG,
--                plic_hart_config_len);
-         plic_hart_config_len -= (strlen(SIFIVE_U_PLIC_HART_CONFIG) + 1);
-     }
+@@ -80,7 +80,7 @@ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
+     int cpu;
+     uint32_t *cells;
+     char *nodename;
+-    char ethclk_names[] = "pclk\0hclk\0tx_clk";
++    char ethclk_names[] = "pclk\0hclk";
+     uint32_t plic_phandle, prci_phandle, ethclk_phandle, phandle = 1;
+     uint32_t uartclk_phandle;
+     uint32_t hfclk_phandle, rtcclk_phandle;
+@@ -265,7 +265,7 @@ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
+     qemu_fdt_setprop_cell(fdt, nodename, "interrupt-parent", plic_phandle);
+     qemu_fdt_setprop_cell(fdt, nodename, "interrupts", SIFIVE_U_GEM_IRQ);
+     qemu_fdt_setprop_cells(fdt, nodename, "clocks",
+-        ethclk_phandle, ethclk_phandle, ethclk_phandle);
++        prci_phandle, PRCI_CLK_GEMGXLPLL, prci_phandle, PRCI_CLK_GEMGXLPLL);
+     qemu_fdt_setprop(fdt, nodename, "clock-names", ethclk_names,
+         sizeof(ethclk_names));
+     qemu_fdt_setprop_cell(fdt, nodename, "#address-cells", 1);
+@@ -295,7 +295,8 @@ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
+     qemu_fdt_setprop_cells(fdt, nodename, "reg",
+         0x0, memmap[SIFIVE_U_UART0].base,
+         0x0, memmap[SIFIVE_U_UART0].size);
+-    qemu_fdt_setprop_cell(fdt, nodename, "clocks", uartclk_phandle);
++    qemu_fdt_setprop_cells(fdt, nodename, "clocks",
++        prci_phandle, PRCI_CLK_TLCLK);
+     qemu_fdt_setprop_cell(fdt, nodename, "interrupt-parent", plic_phandle);
+     qemu_fdt_setprop_cell(fdt, nodename, "interrupts", SIFIVE_U_UART0_IRQ);
  
+diff --git a/include/hw/riscv/sifive_u_prci.h b/include/hw/riscv/sifive_u_prci.h
+index 66eacb5..cdf1d33 100644
+--- a/include/hw/riscv/sifive_u_prci.h
++++ b/include/hw/riscv/sifive_u_prci.h
+@@ -87,4 +87,14 @@ typedef struct SiFiveUPRCIState {
+ 
+ DeviceState *sifive_u_prci_create(hwaddr addr);
+ 
++/*
++ * Clock indexes for use by Device Tree data and the PRCI driver.
++ *
++ * These values are from sifive-fu540-prci.h in the Linux kernel.
++ */
++#define PRCI_CLK_COREPLL        0
++#define PRCI_CLK_DDRPLL         1
++#define PRCI_CLK_GEMGXLPLL      2
++#define PRCI_CLK_TLCLK          3
++
+ #endif /* HW_SIFIVE_U_PRCI_H */
 -- 
 2.7.4
 
