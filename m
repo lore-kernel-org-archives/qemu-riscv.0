@@ -1,78 +1,46 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1hzgbU-0003EC-R7
-	for mharc-qemu-riscv@gnu.org; Mon, 19 Aug 2019 08:17:40 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37901)
+	id 1hzhxN-0001fq-4u
+	for mharc-qemu-riscv@gnu.org; Mon, 19 Aug 2019 09:44:21 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:57288)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <alex.bennee@linaro.org>) id 1hzgbH-00039s-St
- for qemu-riscv@nongnu.org; Mon, 19 Aug 2019 08:17:32 -0400
+ (envelope-from <zhiwei_liu@c-sky.com>) id 1hzhxJ-0001am-PK
+ for qemu-riscv@nongnu.org; Mon, 19 Aug 2019 09:44:18 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alex.bennee@linaro.org>) id 1hzgbG-0007Gv-Ff
- for qemu-riscv@nongnu.org; Mon, 19 Aug 2019 08:17:27 -0400
-Received: from mail-wr1-x430.google.com ([2a00:1450:4864:20::430]:38262)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <alex.bennee@linaro.org>)
- id 1hzgbE-0007B4-8w
- for qemu-riscv@nongnu.org; Mon, 19 Aug 2019 08:17:24 -0400
-Received: by mail-wr1-x430.google.com with SMTP id g17so8500466wrr.5
- for <qemu-riscv@nongnu.org>; Mon, 19 Aug 2019 05:17:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=5KWGpM2yFitmukAYRZPxrR2ZBIZTL/Or6P8Yp0GX2SU=;
- b=sSi+7gsKqtKPpyTyOFyo8hmsuPAruLqIR+noqR8QEaYN4LSeq8GhoVlEfebZ77AHO6
- NjI3W+comt9NigoZffxDP31PPok368ujseNULyvvy5GBKY5XH6rb4QCU5D9mDDJgIajc
- atEM07UgjUYlP0q5q0diPh6qI0QA+tNodGTaCe6JrxZc+tBeeMHvPjxG8ZHrsNqQ929O
- /jfl0Atn7C38oeIITbb6m6qwAm97+Wqpy0GyRkFkpv/E5ZGHrXiHd2htXex4Jb39Y5SJ
- K/r5GOo6R9MStPgt4AwlkzQfRgIxV9Wt8bSv5iXPTTKSZkxTNz5IMPeHW7QWgHqnakGy
- c9CA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=5KWGpM2yFitmukAYRZPxrR2ZBIZTL/Or6P8Yp0GX2SU=;
- b=sbZjepjeerfpsJfaFoCHbIDwI5fI9YFlYo4SYka6wS3tJYBcCnbpRoVYtyTSke2CV1
- Vk06iUSvG4sggS+w5MXgRmQMakH20XvjWz57P0i8+hd8OnQPWLSv66VIk4p3FjVtjiml
- SeMyoF7qGjjze+uDLQjE7bH+uUkekOj9PqxrVlVQv0B0aayp99NJfqe+fN9IUNSyBcYQ
- Z6JuoKKRld/GGKuLBADHGZ4Us298Obb3pIRNvfDIuGgyrkAUM1X/dHICnH07qgpckLFj
- 0VWQB6C+cTskRGlXaNRlZjDgsCwfDfEu1FP6V90eaywTU8wFHCtkuZ4F7eu6UA/aRndr
- Nn8Q==
-X-Gm-Message-State: APjAAAVpE7KBA3pLHsJdaKc/qOma5STqK5NAlkOxS2MX4ttgj0sTmXE2
- EYdhA1NOmYjQrI7S9fyR8e0/Ux42JAE=
-X-Google-Smtp-Source: APXvYqwEy7hadn4nFPQBjIACGWP7GLdFGRt5iUGa5E6Eeg6xe+c8cfVHSfRnAiFteYih+XAW6xV4vg==
-X-Received: by 2002:adf:d187:: with SMTP id v7mr17120942wrc.33.1566217038428; 
- Mon, 19 Aug 2019 05:17:18 -0700 (PDT)
-Received: from zen.linaroharston ([81.128.185.34])
- by smtp.gmail.com with ESMTPSA id t13sm15361389wrr.0.2019.08.19.05.17.13
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 19 Aug 2019 05:17:15 -0700 (PDT)
-Received: from zen.linaroharston. (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id DE19B1FF9B;
- Mon, 19 Aug 2019 13:17:10 +0100 (BST)
-From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: peter.maydell@linaro.org
-Cc: qemu-devel@nongnu.org,
- =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Richard Henderson <richard.henderson@linaro.org>,
- Alistair Francis <alistair.francis@wdc.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>,
- Palmer Dabbelt <palmer@sifive.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ (envelope-from <zhiwei_liu@c-sky.com>) id 1hzhxI-0002le-GZ
+ for qemu-riscv@nongnu.org; Mon, 19 Aug 2019 09:44:17 -0400
+Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:43833)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <zhiwei_liu@c-sky.com>)
+ id 1hzhxF-0002N0-19; Mon, 19 Aug 2019 09:44:13 -0400
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.06474514|-1; CH=green;
+ DM=CONTINUE|CONTINUE|true|0.0746243-0.00383168-0.921544; FP=0|0|0|0|0|-1|-1|-1;
+ HT=e01a16384; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS; RN=7; RT=7; SR=0;
+ TI=SMTPD_---.FEfjRoa_1566222239; 
+Received: from 172.16.28.187(mailfrom:zhiwei_liu@c-sky.com
+ fp:SMTPD_---.FEfjRoa_1566222239)
+ by smtp.aliyun-inc.com(10.147.42.16); Mon, 19 Aug 2019 21:44:02 +0800
+From: liuzhiwei <zhiwei_liu@c-sky.com>
+To: Alistair Francis <alistair23@gmail.com>
+Cc: Palmer Dabbelt <palmer@sifive.com>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
-Date: Mon, 19 Aug 2019 13:17:08 +0100
-Message-Id: <20190819121709.31597-12-alex.bennee@linaro.org>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20190819121709.31597-1-alex.bennee@linaro.org>
-References: <20190819121709.31597-1-alex.bennee@linaro.org>
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
+References: <0141541d-43ff-98d8-e9d4-4a2fdcfdcf36@c-sky.com>
+ <CAKmqyKPr0V6acB2-Y+N1-aoj-5LSofwi=Jz=u6KFJN1fPUWjzA@mail.gmail.com>
+Message-ID: <2b741fb0-0f12-0f07-a516-9cc23abc0b6e@c-sky.com>
+Date: Mon, 19 Aug 2019 21:39:11 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.2.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+In-Reply-To: <CAKmqyKPr0V6acB2-Y+N1-aoj-5LSofwi=Jz=u6KFJN1fPUWjzA@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2a00:1450:4864:20::430
-Subject: [Qemu-riscv] [PULL 11/12] target/riscv: rationalise softfloat
- includes
+Content-Language: en-US
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 3.x [generic]
+X-Received-From: 121.197.200.217
+Subject: Re: [Qemu-riscv] [Qemu-devel] RISCV: when will the CLIC be ready?
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -84,57 +52,74 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Aug 2019 12:17:36 -0000
+X-List-Received-Date: Mon, 19 Aug 2019 13:44:19 -0000
 
-We should avoid including the whole of softfloat headers in cpu.h and
-explicitly include it only where we will be calling softfloat
-functions. We can use the -types.h and -helpers.h in cpu.h for the few
-bits that are global.
 
-Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@redhat.com>
-Acked-by: Palmer Dabbelt <palmer@sifive.com>
+On 2019/8/17 上午1:29, Alistair Francis wrote:
+> On Thu, Aug 15, 2019 at 8:39 PM liuzhiwei<zhiwei_liu@c-sky.com>  wrote:
+>> Hi, Palmer
+>>
+>> When Michael Clark still was the maintainer of RISCV QEMU, he wrote in the mail list, "the CLIC interrupt controller is under testing,
+>> and will be included in QEMU 3.1 or 3.2". It is pity that the CLIC is not in
+>> included even in QEMU 4.1.0.
+> I see that there is a CLIC branch available here:
+> https://github.com/riscv/riscv-qemu/pull/157
+>
+> It looks like all of the work is in a single commit
+> (https://github.com/riscv/riscv-qemu/pull/157/commits/206d9ac339feb9ef2c325402a00f0f45f453d019)
+> and that most of the other commits in the PR have already made it into
+> master.
+>
+> Although the CLIC commit is very large it doesn't seem impossible to
+> manually pull out the CLIC bits and apply it onto master.
+>
+> Do you know the state of the CLIC model? If it's working it shouldn't
+> be too hard to rebase the work and get the code into mainline.
+>
+> Alistair
+>
+Hi,  Alistair
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index f8d07bd20ad..6d52f97d7c3 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -27,6 +27,7 @@
- #include "qemu/error-report.h"
- #include "hw/qdev-properties.h"
- #include "migration/vmstate.h"
-+#include "fpu/softfloat-helpers.h"
- 
- /* RISC-V CPU definitions */
- 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 0adb307f329..240b31e2ebb 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -22,7 +22,7 @@
- 
- #include "qom/cpu.h"
- #include "exec/cpu-defs.h"
--#include "fpu/softfloat.h"
-+#include "fpu/softfloat-types.h"
- 
- #define TCG_GUEST_DEFAULT_MO 0
- 
-diff --git a/target/riscv/fpu_helper.c b/target/riscv/fpu_helper.c
-index b4f818a6465..0b79562a690 100644
---- a/target/riscv/fpu_helper.c
-+++ b/target/riscv/fpu_helper.c
-@@ -21,6 +21,7 @@
- #include "qemu/host-utils.h"
- #include "exec/exec-all.h"
- #include "exec/helper-proto.h"
-+#include "fpu/softfloat.h"
- 
- target_ulong riscv_cpu_get_fflags(CPURISCVState *env)
- {
--- 
-2.20.1
+In my opinion, the CLIC code almost works.
+  
+Last year when my workmate ported an RTOS, I once read the CLIC specification and used the CLIC model code. It worked through  all the tests after fixed two bugs. I also had sent the patch to Michael, but without response(maybe a wrong email address).
 
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index 7bf6cbc..95d80ab 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -505,6 +505,9 @@ static target_ulong riscv_intr_pc(CPURISCVState *env,
+      if (!(async || clic)) {
+          return tvec & ~0b11;
+      }
++    if (clic) {
++        cause &= 0x3ff;
++    }
+  
+      /* bits [1:0] encode mode; 0 = direct, 1 = vectored, 2 >= reserved */
+      switch (mode1) {
+@@ -645,6 +648,9 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+          riscv_cpu_set_mode(env, PRV_M);
+      }
+  
++    if (clic) {
++        env->exccode = 0;
++    }
+      /* NOTE: it is not necessary to yield load reservations here. It is only
+         necessary for an SC from "another hart" to cause a load reservation
+         to be yielded. Refer to the memory consistency model section of the
+
+After that, the specification has updated and the code may changed. I didn't pull new code again.
+
+If the CLIC model may merged into the mainline, and no body maintain the code, I'd like to work on it, fixing the bugs and updating the code according to latest specification.
+
+Best Regards,
+Zhiwei
+
+>> As we have cpus using CLIC, I have to use the out of tree qemu code in SIFIVE
+>> a long time. Could you tell me when it will be upstreamed?
+>>
+>> Best Regards
+>> Zhiwei
+>>
 
