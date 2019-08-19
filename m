@@ -1,98 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1hzSya-0004Hf-8H
-	for mharc-qemu-riscv@gnu.org; Sun, 18 Aug 2019 17:44:36 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:40761)
+	id 1hzZxo-0004vJ-J7
+	for mharc-qemu-riscv@gnu.org; Mon, 19 Aug 2019 01:12:16 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43401)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <philmd@redhat.com>) id 1hzSyY-0004Gc-19
- for qemu-riscv@nongnu.org; Sun, 18 Aug 2019 17:44:35 -0400
+ (envelope-from <bmeng.cn@gmail.com>) id 1hzZxl-0004qE-8b
+ for qemu-riscv@nongnu.org; Mon, 19 Aug 2019 01:12:14 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <philmd@redhat.com>) id 1hzSyW-0008G5-EM
- for qemu-riscv@nongnu.org; Sun, 18 Aug 2019 17:44:33 -0400
-Received: from mx1.redhat.com ([209.132.183.28]:45098)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <philmd@redhat.com>) id 1hzSyW-0008F1-6y
- for qemu-riscv@nongnu.org; Sun, 18 Aug 2019 17:44:32 -0400
-Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
- [209.85.221.69])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id 492683DE31
- for <qemu-riscv@nongnu.org>; Sun, 18 Aug 2019 21:44:31 +0000 (UTC)
-Received: by mail-wr1-f69.google.com with SMTP id a2so4197186wrs.8
- for <qemu-riscv@nongnu.org>; Sun, 18 Aug 2019 14:44:31 -0700 (PDT)
+ (envelope-from <bmeng.cn@gmail.com>) id 1hzZxj-00074W-W7
+ for qemu-riscv@nongnu.org; Mon, 19 Aug 2019 01:12:13 -0400
+Received: from mail-pf1-x444.google.com ([2607:f8b0:4864:20::444]:40130)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
+ id 1hzZxh-0006rt-1e; Mon, 19 Aug 2019 01:12:09 -0400
+Received: by mail-pf1-x444.google.com with SMTP id w16so452097pfn.7;
+ Sun, 18 Aug 2019 22:12:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=from:to:subject:date:message-id:in-reply-to:references;
+ bh=gvStFXhZO7N9n237d3Cj1NjeQ88ijBK9AvD/w5kI1LA=;
+ b=XPaCEG7EGpOWg12+yON2DbhlQ42+1k7ZLTIH2DnTEh5PE/TplDu8YTU7jgE5V5vP/l
+ 8zB7ArJQSYf1JtVSMqievVP/3Su+d+/3Fggdp/DTxD6ORQmulyf6wgt4cNKCZTCNNYmV
+ eSMy98FYAiZf4GDtEOeHwuGDwBOhIAtqDMBsh9Zui9p2rmdb1UQzwsAcPc2vuTDlOOC5
+ TmfQ2iMa5WGu2zM7yBUCk60Ow9JY7oOXfcDlqHzWd3A/4QfUILipZqYF7PtGy2iRxatq
+ Qe4Kyd70ihfQgJ992gPncCoY/Y2wtMfc2mScQll+QWOhU56FAnZ7HVsm5Nei4l6VhhYN
+ b7UQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
- :date:user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=h2xzjSFZNTWlCffgvGmqesSJuEHPH52iwk5nP49KPQY=;
- b=o/O+j2ozUFpHHzY5u9jfXZUNm9IFMUwXAVSagOinuRo9UbT1AOWfYOyUZodYijJ63u
- +PHonlR8fj4xSdE8l6EpJW5xDxeNbk5hhnj5QVKJXgzettNmlhF/ZjUZCxEDhZSs1We8
- kTSmgpcQsR9+d/9ZLL4MCnv2JsqGnFlV7SCk9m4Hh6AGBm93RGSJJ1jJMiySqsjOm0ro
- P6JCu849lFTWRYwdq9E/B5Qa+/XXwOU18JMnz55X4WrAyv79dmZy3fFKP0ol+4VyAqFb
- eLTxcZLa3tdzhRTXi+eN8sBF/zsDZBkASgcldJw0N9SCdLChh4zJqZB35PrV6wV1djVq
- QOqQ==
-X-Gm-Message-State: APjAAAUiu+IFB9Uppq9+4796GGEYowiDCXO7AncOdl2IszZFPImCplpQ
- 1+Veci9O0xsqk3TPdvWx34hp9IqOzV3i07SxrNjGtCfqvZlLWurqiXDXNj0fGLkTSUIpFMQNzJ6
- 4YQy2oftxonsdK6s=
-X-Received: by 2002:adf:edc9:: with SMTP id v9mr22550681wro.125.1566164669527; 
- Sun, 18 Aug 2019 14:44:29 -0700 (PDT)
-X-Google-Smtp-Source: APXvYqyq1v4DfCMJNoAeYMrQK7nrdjPPaAOfkuNduzjgjCwxae6Z6aJ5i74L3JJILhmb7zElm7rP7A==
-X-Received: by 2002:adf:edc9:: with SMTP id v9mr22550609wro.125.1566164669299; 
- Sun, 18 Aug 2019 14:44:29 -0700 (PDT)
-Received: from [192.168.1.39] (251.red-88-10-102.dynamicip.rima-tde.net.
- [88.10.102.251])
- by smtp.gmail.com with ESMTPSA id f18sm13122174wrx.85.2019.08.18.14.44.25
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 18 Aug 2019 14:44:28 -0700 (PDT)
-To: tony.nguyen@bt.com, qemu-devel@nongnu.org
-Cc: rth@twiddle.net, pbonzini@redhat.com, mst@redhat.com,
- imammedo@redhat.com, marcel.apfelbaum@gmail.com,
- xiaoguangrong.eric@gmail.com, alistair@alistair23.me,
- peter.maydell@linaro.org, b.galvani@gmail.com, clg@kaod.org,
- andrew@aj.id.au, joel@jms.id.au, i.mitsyanko@gmail.com, robh@kernel.org,
- peter.chubb@nicta.com.au, sundeep.lkml@gmail.com, jan.kiszka@web.de,
- balrogg@gmail.com, eric.auger@redhat.com, kraxel@redhat.com,
- michael@walle.cc, kwolf@redhat.com, mreitz@redhat.com, jsnow@redhat.com,
- keith.busch@intel.com, marcandre.lureau@redhat.com,
- Andrew.Baumann@microsoft.com, edgar.iglesias@gmail.com,
- antonynpavlov@gmail.com, chouteau@adacore.com, frederic.konrad@adacore.com,
- huth@tuxfamily.org, mark.cave-ayland@ilande.co.uk, hpoussin@reactos.org,
- arikalo@wavecomp.com, balaton@eik.bme.hu, gxt@mprc.pku.edu.cn,
- david@gibson.dropbear.id.au, deller@gmx.de, ehabkost@redhat.com,
- sstabellini@kernel.org, anthony.perard@citrix.com, paul.durrant@citrix.com,
- aurelien@aurel32.net, amarkovic@wavecomp.com, magnus.damm@gmail.com,
- berto@igalia.com, minyard@acm.org, pburton@wavecomp.com, jslaby@suse.cz,
- jcd@tribudubois.net, andrew.smirnov@gmail.com, green@moxielogic.com,
- jasowang@redhat.com, dmitry.fleytman@gmail.com, sw@weilnetz.de,
- jiri@resnulli.us, crwulff@gmail.com, marex@denx.de, lersek@redhat.com,
- proljc@gmail.com, shorne@gmail.com, yuval.shaia@oracle.com,
- palmer@sifive.com, sagark@eecs.berkeley.edu, kbastian@mail.uni-paderborn.de,
- walling@linux.ibm.com, cohuck@redhat.com, david@redhat.com,
- pasic@linux.ibm.com, borntraeger@de.ibm.com, fam@euphon.net, hare@suse.com,
- atar4qemu@gmail.com, stefanb@linux.ibm.com, alex.williamson@redhat.com,
- jcmvbkbc@gmail.com, laurent@vivier.eu, claudio.fontana@suse.com,
- stefanha@redhat.com, qemu-arm@nongnu.org, qemu-block@nongnu.org,
- qemu-ppc@nongnu.org, xen-devel@lists.xenproject.org, qemu-riscv@nongnu.org,
- qemu-s390x@nongnu.org
-References: <43bc5e07ac614d0e8e740bf6007ff77b@tpw09926dag18e.domain1.systemhost.net>
- <1565940633026.69822@bt.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>
-Openpgp: id=89C1E78F601EE86C867495CBA2A3FD6EDEADC0DE;
- url=http://pgp.mit.edu/pks/lookup?op=get&search=0xA2A3FD6EDEADC0DE
-Message-ID: <3872a5ec-ccf1-2978-34b5-b0b5478d2b86@redhat.com>
-Date: Sun, 18 Aug 2019 23:44:24 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.7.0
-MIME-Version: 1.0
-In-Reply-To: <1565940633026.69822@bt.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
-X-Received-From: 209.132.183.28
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v7 11/42] memory: Access
- MemoryRegion with MemOp
+ h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+ :references;
+ bh=gvStFXhZO7N9n237d3Cj1NjeQ88ijBK9AvD/w5kI1LA=;
+ b=o1pLEK3YDX4yNzlbVxbqwTznQ62y8p6XYDi2SR1sQPgt6wpiJftNJ3F2ZYK4DxalsU
+ wBEy20lMNnICEr1GJhDV8lZ862Ybtr317khsqgga3RbuuZfvKshDEFRyF5wAXHOz3OvI
+ QONMJ2dpgRSKut4ISt4Io7fb83Ci1MevMtqHtca6k3LrB5X4lDEnNju1Sq96w5449KI9
+ rki78uQ5U28hd+d0QQIKFPHgzcSzbA+DkBEQaJQBWNnMgsvUI65DMQYBLs4BDU6jF+w/
+ FlMGWrwU4rRiwctl5PnStopibhGER+snMO2eBDTC9YXr81q3hfSWoGiLCf30rUYElcDh
+ Q/rA==
+X-Gm-Message-State: APjAAAVpfWEisvZz4Kya7GKfsaNaVQCy9uUSUg5uzwqeuIOl6tb7wKxu
+ k2Dkl2Z1z6wUPKrn80j0Y9E=
+X-Google-Smtp-Source: APXvYqz26s6OWGSF12be0TxQyOJDmXqNOXfP7/FWkJmSxMNeGTx6kUvgqt+/ie5pnkRu9965+lBrSQ==
+X-Received: by 2002:a62:f208:: with SMTP id m8mr21696013pfh.108.1566191528117; 
+ Sun, 18 Aug 2019 22:12:08 -0700 (PDT)
+Received: from localhost.localdomain (unknown-224-80.windriver.com.
+ [147.11.224.80])
+ by smtp.gmail.com with ESMTPSA id q13sm15464986pfl.124.2019.08.18.22.12.07
+ (version=TLS1 cipher=AES128-SHA bits=128/128);
+ Sun, 18 Aug 2019 22:12:07 -0700 (PDT)
+From: Bin Meng <bmeng.cn@gmail.com>
+To: Alistair Francis <Alistair.Francis@wdc.com>,
+ Palmer Dabbelt <palmer@sifive.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Date: Sun, 18 Aug 2019 22:11:34 -0700
+Message-Id: <1566191521-7820-2-git-send-email-bmeng.cn@gmail.com>
+X-Mailer: git-send-email 1.7.1
+In-Reply-To: <1566191521-7820-1-git-send-email-bmeng.cn@gmail.com>
+References: <1566191521-7820-1-git-send-email-bmeng.cn@gmail.com>
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2607:f8b0:4864:20::444
+Subject: [Qemu-riscv] [PATCH v4 01/28] riscv: hw: Remove superfluous "linux,
+ phandle" property
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -104,195 +69,101 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 18 Aug 2019 21:44:35 -0000
+X-List-Received-Date: Mon, 19 Aug 2019 05:12:15 -0000
 
-On 8/16/19 9:30 AM, tony.nguyen@bt.com wrote:
-> Convert memory_region_dispatch_{read|write} operand "unsigned size"
-> into a "MemOp op".
->=20
-> Signed-off-by: Tony Nguyen <tony.nguyen@bt.com>
-> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-> ---
-> =C2=A0include/exec/memop.h =C2=A0| 20 ++++++++++++++------
-> =C2=A0include/exec/memory.h | =C2=A09 +++++----
-> =C2=A0memory.c =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| =C2=A0=
-7 +++++--
-> =C2=A03 files changed, 24 insertions(+), 12 deletions(-)
->=20
-> diff --git a/include/exec/memop.h b/include/exec/memop.h
-> index dfd76a1..0a610b7 100644
-> --- a/include/exec/memop.h
-> +++ b/include/exec/memop.h
-> @@ -12,6 +12,8 @@
-> =C2=A0#ifndef MEMOP_H
-> =C2=A0#define MEMOP_H
-> =C2=A0
-> +#include "qemu/host-utils.h"
-> +
-> =C2=A0typedef enum MemOp {
-> =C2=A0 =C2=A0 =C2=A0MO_8 =C2=A0 =C2=A0 =3D 0,
-> =C2=A0 =C2=A0 =C2=A0MO_16 =C2=A0 =C2=A0=3D 1,
-> @@ -107,14 +109,20 @@ typedef enum MemOp {
-> =C2=A0 =C2=A0 =C2=A0MO_SSIZE =3D MO_SIZE | MO_SIGN,
-> =C2=A0} MemOp;
-> =C2=A0
-> +/* MemOp to size in bytes. =C2=A0*/
-> +static inline unsigned memop_size(MemOp op)
-> +{
-> + =C2=A0 =C2=A0return 1 << (op & MO_SIZE);
-> +}
-> +
-> =C2=A0/* Size in bytes to MemOp. =C2=A0*/
-> -static inline unsigned size_memop(unsigned size)
-> +static inline MemOp size_memop(unsigned size)
-> =C2=A0{
-> - =C2=A0 =C2=A0/*
-> - =C2=A0 =C2=A0 * FIXME: No-op to aid conversion of
-> memory_region_dispatch_{read|write}
-> - =C2=A0 =C2=A0 * "unsigned size" operand into a "MemOp op".
-> - =C2=A0 =C2=A0 */
-> - =C2=A0 =C2=A0return size;
-> +#ifdef CONFIG_DEBUG_TCG
-> + =C2=A0 =C2=A0/* Power of 2 up to 8. =C2=A0*/
-> + =C2=A0 =C2=A0assert((size & (size - 1)) =3D=3D 0 && size >=3D 1 && si=
-ze <=3D 8);
+"linux,phandle" property is optional. Remove all instances in the
+sifive_u, virt and spike machine device trees.
 
-Easier to review as:
+Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-       assert(is_power_of_2(size) && size <=3D 8);
+---
 
-(This can be cleaned later).
+Changes in v4:
+- remove 2 more "linux,phandle" instances in sifive_u.c and spike.c
+  after rebasing on Palmer's QEMU RISC-V tree
 
-> +#endif
-> + =C2=A0 =C2=A0return ctz32(size);
-> =C2=A0}
-> =C2=A0
-> =C2=A0#endif
-> diff --git a/include/exec/memory.h b/include/exec/memory.h
-> index bb0961d..975b86a 100644
-> --- a/include/exec/memory.h
-> +++ b/include/exec/memory.h
-> @@ -19,6 +19,7 @@
-> =C2=A0#include "exec/cpu-common.h"
-> =C2=A0#include "exec/hwaddr.h"
-> =C2=A0#include "exec/memattrs.h"
-> +#include "exec/memop.h"
-> =C2=A0#include "exec/ramlist.h"
-> =C2=A0#include "qemu/queue.h"
-> =C2=A0#include "qemu/int128.h"
-> @@ -1731,13 +1732,13 @@ void mtree_info(bool flatview, bool
-> dispatch_tree, bool owner);
-> =C2=A0 * @mr: #MemoryRegion to access
-> =C2=A0 * @addr: address within that region
-> =C2=A0 * @pval: pointer to uint64_t which the data is written to
-> - * @size: size of the access in bytes
-> + * @op: size, sign, and endianness of the memory operation
-> =C2=A0 * @attrs: memory transaction attributes to use for the access
-> =C2=A0 */
-> =C2=A0MemTxResult memory_region_dispatch_read(MemoryRegion *mr,
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
-hwaddr addr,
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
-uint64_t *pval,
-> - =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0uns=
-igned size,
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Mem=
-Op op,
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
-MemTxAttrs attrs);
-> =C2=A0/**
-> =C2=A0 * memory_region_dispatch_write: perform a write directly to the =
-specified
-> @@ -1746,13 +1747,13 @@ MemTxResult
-> memory_region_dispatch_read(MemoryRegion *mr,
-> =C2=A0 * @mr: #MemoryRegion to access
-> =C2=A0 * @addr: address within that region
-> =C2=A0 * @data: data to write
-> - * @size: size of the access in bytes
-> + * @op: size, sign, and endianness of the memory operation
-> =C2=A0 * @attrs: memory transaction attributes to use for the access
-> =C2=A0 */
-> =C2=A0MemTxResult memory_region_dispatch_write(MemoryRegion *mr,
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- hwaddr addr,
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- uint64_t data,
-> - =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 un=
-signed size,
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 Me=
-mOp op,
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- MemTxAttrs attrs);
-> =C2=A0
-> =C2=A0/**
-> diff --git a/memory.c b/memory.c
-> index 5d8c9a9..89ea4fb 100644
-> --- a/memory.c
-> +++ b/memory.c
-> @@ -1439,9 +1439,10 @@ static MemTxResult
-> memory_region_dispatch_read1(MemoryRegion *mr,
-> =C2=A0MemTxResult memory_region_dispatch_read(MemoryRegion *mr,
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
-hwaddr addr,
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
-uint64_t *pval,
-> - =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0uns=
-igned size,
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Mem=
-Op op,
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
-MemTxAttrs attrs)
-> =C2=A0{
-> + =C2=A0 =C2=A0unsigned size =3D memop_size(op);
-> =C2=A0 =C2=A0 =C2=A0MemTxResult r;
-> =C2=A0
-> =C2=A0 =C2=A0 =C2=A0if (!memory_region_access_valid(mr, addr, size, fal=
-se, attrs)) {
-> @@ -1483,9 +1484,11 @@ static bool
-> memory_region_dispatch_write_eventfds(MemoryRegion *mr,
-> =C2=A0MemTxResult memory_region_dispatch_write(MemoryRegion *mr,
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- hwaddr addr,
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- uint64_t data,
-> - =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 un=
-signed size,
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 Me=
-mOp op,
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- MemTxAttrs attrs)
-> =C2=A0{
-> + =C2=A0 =C2=A0unsigned size =3D memop_size(op);
-> +
-> =C2=A0 =C2=A0 =C2=A0if (!memory_region_access_valid(mr, addr, size, tru=
-e, attrs)) {
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0unassigned_mem_write(mr, addr, data, =
-size);
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return MEMTX_DECODE_ERROR;
-> --=C2=A0
-> 1.8.3.1
->=20
-> =E2=80=8B
->=20
->=20
+Changes in v3: None
+Changes in v2: None
+
+ hw/riscv/sifive_u.c | 4 ----
+ hw/riscv/spike.c    | 1 -
+ hw/riscv/virt.c     | 3 ---
+ 3 files changed, 8 deletions(-)
+
+diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+index 64e233d..afe304f 100644
+--- a/hw/riscv/sifive_u.c
++++ b/hw/riscv/sifive_u.c
+@@ -126,7 +126,6 @@ static void *create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
+         qemu_fdt_setprop_string(fdt, nodename, "device_type", "cpu");
+         qemu_fdt_add_subnode(fdt, intc);
+         qemu_fdt_setprop_cell(fdt, intc, "phandle", cpu_phandle);
+-        qemu_fdt_setprop_cell(fdt, intc, "linux,phandle", cpu_phandle);
+         qemu_fdt_setprop_string(fdt, intc, "compatible", "riscv,cpu-intc");
+         qemu_fdt_setprop(fdt, intc, "interrupt-controller", NULL, 0);
+         qemu_fdt_setprop_cell(fdt, intc, "#interrupt-cells", 1);
+@@ -185,7 +184,6 @@ static void *create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
+     qemu_fdt_setprop_cell(fdt, nodename, "riscv,max-priority", 7);
+     qemu_fdt_setprop_cell(fdt, nodename, "riscv,ndev", 0x35);
+     qemu_fdt_setprop_cells(fdt, nodename, "phandle", plic_phandle);
+-    qemu_fdt_setprop_cells(fdt, nodename, "linux,phandle", plic_phandle);
+     plic_phandle = qemu_fdt_get_phandle(fdt, nodename);
+     g_free(cells);
+     g_free(nodename);
+@@ -198,7 +196,6 @@ static void *create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
+     qemu_fdt_setprop_cell(fdt, nodename, "clock-frequency",
+         SIFIVE_U_GEM_CLOCK_FREQ);
+     qemu_fdt_setprop_cell(fdt, nodename, "phandle", ethclk_phandle);
+-    qemu_fdt_setprop_cell(fdt, nodename, "linux,phandle", ethclk_phandle);
+     ethclk_phandle = qemu_fdt_get_phandle(fdt, nodename);
+     g_free(nodename);
+ 
+@@ -234,7 +231,6 @@ static void *create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
+     qemu_fdt_setprop_cell(fdt, nodename, "#clock-cells", 0x0);
+     qemu_fdt_setprop_cell(fdt, nodename, "clock-frequency", 3686400);
+     qemu_fdt_setprop_cell(fdt, nodename, "phandle", uartclk_phandle);
+-    qemu_fdt_setprop_cell(fdt, nodename, "linux,phandle", uartclk_phandle);
+     uartclk_phandle = qemu_fdt_get_phandle(fdt, nodename);
+     g_free(nodename);
+ 
+diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
+index 2991b34..14acaef 100644
+--- a/hw/riscv/spike.c
++++ b/hw/riscv/spike.c
+@@ -112,7 +112,6 @@ static void create_fdt(SpikeState *s, const struct MemmapEntry *memmap,
+         qemu_fdt_setprop_string(fdt, nodename, "device_type", "cpu");
+         qemu_fdt_add_subnode(fdt, intc);
+         qemu_fdt_setprop_cell(fdt, intc, "phandle", 1);
+-        qemu_fdt_setprop_cell(fdt, intc, "linux,phandle", 1);
+         qemu_fdt_setprop_string(fdt, intc, "compatible", "riscv,cpu-intc");
+         qemu_fdt_setprop(fdt, intc, "interrupt-controller", NULL, 0);
+         qemu_fdt_setprop_cell(fdt, intc, "#interrupt-cells", 1);
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index 25faf3b..00be05a 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -170,11 +170,9 @@ static void *create_fdt(RISCVVirtState *s, const struct MemmapEntry *memmap,
+         qemu_fdt_setprop_cell(fdt, nodename, "reg", cpu);
+         qemu_fdt_setprop_string(fdt, nodename, "device_type", "cpu");
+         qemu_fdt_setprop_cell(fdt, nodename, "phandle", cpu_phandle);
+-        qemu_fdt_setprop_cell(fdt, nodename, "linux,phandle", cpu_phandle);
+         intc_phandle = phandle++;
+         qemu_fdt_add_subnode(fdt, intc);
+         qemu_fdt_setprop_cell(fdt, intc, "phandle", intc_phandle);
+-        qemu_fdt_setprop_cell(fdt, intc, "linux,phandle", intc_phandle);
+         qemu_fdt_setprop_string(fdt, intc, "compatible", "riscv,cpu-intc");
+         qemu_fdt_setprop(fdt, intc, "interrupt-controller", NULL, 0);
+         qemu_fdt_setprop_cell(fdt, intc, "#interrupt-cells", 1);
+@@ -250,7 +248,6 @@ static void *create_fdt(RISCVVirtState *s, const struct MemmapEntry *memmap,
+     qemu_fdt_setprop_cell(fdt, nodename, "riscv,max-priority", 7);
+     qemu_fdt_setprop_cell(fdt, nodename, "riscv,ndev", VIRTIO_NDEV);
+     qemu_fdt_setprop_cells(fdt, nodename, "phandle", plic_phandle);
+-    qemu_fdt_setprop_cells(fdt, nodename, "linux,phandle", plic_phandle);
+     plic_phandle = qemu_fdt_get_phandle(fdt, nodename);
+     g_free(cells);
+     g_free(nodename);
+-- 
+2.7.4
+
 
