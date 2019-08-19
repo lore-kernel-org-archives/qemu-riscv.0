@@ -1,64 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1hzZyB-0005O1-Ln
+	id 1hzZyB-0005Oa-Th
 	for mharc-qemu-riscv@gnu.org; Mon, 19 Aug 2019 01:12:39 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43764)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43664)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <bmeng.cn@gmail.com>) id 1hzZy6-0005Gm-8i
- for qemu-riscv@nongnu.org; Mon, 19 Aug 2019 01:12:36 -0400
+ (envelope-from <bmeng.cn@gmail.com>) id 1hzZxz-0005EB-SQ
+ for qemu-riscv@nongnu.org; Mon, 19 Aug 2019 01:12:32 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <bmeng.cn@gmail.com>) id 1hzZy4-0008IJ-5V
- for qemu-riscv@nongnu.org; Mon, 19 Aug 2019 01:12:33 -0400
-Received: from mail-pf1-x444.google.com ([2607:f8b0:4864:20::444]:35975)
+ (envelope-from <bmeng.cn@gmail.com>) id 1hzZxx-0007vv-Qr
+ for qemu-riscv@nongnu.org; Mon, 19 Aug 2019 01:12:27 -0400
+Received: from mail-pf1-x442.google.com ([2607:f8b0:4864:20::442]:43247)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
- id 1hzZxz-0007zB-Qe; Mon, 19 Aug 2019 01:12:27 -0400
-Received: by mail-pf1-x444.google.com with SMTP id w2so458103pfi.3;
- Sun, 18 Aug 2019 22:12:27 -0700 (PDT)
+ id 1hzZxs-0007XZ-0A; Mon, 19 Aug 2019 01:12:20 -0400
+Received: by mail-pf1-x442.google.com with SMTP id v12so445710pfn.10;
+ Sun, 18 Aug 2019 22:12:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:subject:date:message-id:in-reply-to:references;
- bh=N434gx6sLGralO/y6q4vOlnJsoETUf1kWJ817RFou/8=;
- b=K5GK6symyJ8DpgyFJkfibb4T+v0+0wtzxSQrXlL52W3APiszd75keAlqRYkzb6fgis
- +EKvgkVIqZR3OL1O4r2qVVV6gO549M/JcjPvsoq21wVsumdA3D1F98apmCWaxCiOsJbH
- FeXW5itMqWh6DHj9nRZ5ymnzZlbzqMI/3SxACjEXGNwOUFgwSgsPeDk4hREqkexzVTaR
- +P3BcfZNJxLkH7a0YLCrj7/fP08h5KzuqrUa2Z4vALeyf/ou6/B3VPxbgVXUloVeoGXF
- dlEWlXQTp1/SfuyaKNNEWPI9dZzS9M68cy9gKhIhBPpVt40r8nxswW6AhkBuiHMIHBwg
- NN3g==
+ h=from:to:subject:date:message-id:in-reply-to:references:mime-version
+ :content-transfer-encoding;
+ bh=pqOCkNiswrl8eqAUR5cT2tEbqpobUdAiltlSIodl66Y=;
+ b=HjHeWLX4H8vEB4p6A/CPalF7KtznkhW2/VHqmPtTM/uhwFeBHVZlQcreNyjdYaXt43
+ bbBxK89d5d/GKDHytEuDz7RIvlLeMO9wBdvwtmXX7TYSTjsM3qrtpr+1WATce0Cu4Ra7
+ yBZO4c6o6mfWkVTRu8rg/DLCojbvdSMOPp5k6wV3NEVcWThChCWV4cfhMvhCvGldem1A
+ CjKtDcFGCez9BZGAnm7vd6fW7k5gunIcmBGMKYYk8AJtfs6s0UqctHhIdXHnrIjhLbep
+ TOkKJ4SGmaX4SFD+xKPqj5W62Jk6d/Y+vW59nMiiMGUHDUq7I7zfWcUuHFii01z8Eroc
+ ubuQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
- :references;
- bh=N434gx6sLGralO/y6q4vOlnJsoETUf1kWJ817RFou/8=;
- b=slYQa1lsCgEaagnAgOGjpm+fseuJDxXEzfBNLb+MxSUp4Mg57Eg52qcoksH71fKCL9
- CGmRyKWYNb7jME8qe4RM8mjS/UEqLRtPOTt6VgT9TprTRKgGRg1Wx59vDDFQ+7qciW1m
- 2eXRUJgUPpdclQOY3paG+vimjBsW3Lc+YwDDuu2IQxGH3tSelGqwYhDSca+2uAdMBGRw
- ZJqeIuZ4oO+jl7hoQcW9Ovwba3+rUzLg+UXO+yc5lqM/FP16Cyk8lr/GiaJolWlR5AdC
- zH4bMjF0fA3NHFZud1yK/VVspXbrE7SbzOJhQV+MmbfGIqycFxJ4XeGf6hh3PZTxuYA5
- RLjw==
-X-Gm-Message-State: APjAAAW682P/4KB3ySBj+Ril+Xc18AIXMk7fbuWR7jVocDNtFnSRrMfy
- DxLGcoJBYLU3bntmr5nawY8=
-X-Google-Smtp-Source: APXvYqyXmuIiryY38ANUAEZaJvaCSjRrV7kbE6L93jzo7Q1PBPnkThereL0QBpD9p8tcWBrusCMt0Q==
-X-Received: by 2002:a17:90a:e392:: with SMTP id
- b18mr18372181pjz.140.1566191546534; 
- Sun, 18 Aug 2019 22:12:26 -0700 (PDT)
+ :references:mime-version:content-transfer-encoding;
+ bh=pqOCkNiswrl8eqAUR5cT2tEbqpobUdAiltlSIodl66Y=;
+ b=pPmkquuS7QkFyifVXxTwQnvh5CWUx33UwHHvYKWr7tDIEUVk7Z3R//MI4zy6Rx0zm5
+ h92Od5DyOthGcM8PCOjIsyFzhA3++nfmwz7L5ZsWUoJwXVbmUiKlp7DGzTptwi6UAUtp
+ VvQXttLAK9g2yakqbP+D7W1tVAmUZzRmYYWa12/6qpPzYqX18lG/ynbTYRnFpEq1YIkp
+ GECJfgSsUihsAgbayoUBNuXCnVdFOQJK0/BL5aZEp7662dxq7wOfuAJa9PwblhIsFeBf
+ ZLHLvf6Jlqec1+1qAnUxXlIQS88oJAfqO3EWOsARBxk9Wn4mGjPxCU7LhymviIxTdwqn
+ ew2Q==
+X-Gm-Message-State: APjAAAWdAR5CwAjP9n9Og50XCX9laSFV1Y4+hQ60ieqnwSsHaLJfsUfj
+ Z9YtIX21kZoj375txCnjMgEqp98A
+X-Google-Smtp-Source: APXvYqx8kjMMJ2VOPlp5bNJl0+vy4bNxB0QXFTP3CWLQgl1ivxnQwmCWZTrONi1gaapRzXt1KGal3A==
+X-Received: by 2002:a63:a35c:: with SMTP id v28mr18483156pgn.144.1566191539128; 
+ Sun, 18 Aug 2019 22:12:19 -0700 (PDT)
 Received: from localhost.localdomain (unknown-224-80.windriver.com.
  [147.11.224.80])
- by smtp.gmail.com with ESMTPSA id q13sm15464986pfl.124.2019.08.18.22.12.25
+ by smtp.gmail.com with ESMTPSA id q13sm15464986pfl.124.2019.08.18.22.12.18
  (version=TLS1 cipher=AES128-SHA bits=128/128);
- Sun, 18 Aug 2019 22:12:25 -0700 (PDT)
+ Sun, 18 Aug 2019 22:12:18 -0700 (PDT)
 From: Bin Meng <bmeng.cn@gmail.com>
 To: Alistair Francis <Alistair.Francis@wdc.com>,
  Palmer Dabbelt <palmer@sifive.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
-Date: Sun, 18 Aug 2019 22:11:51 -0700
-Message-Id: <1566191521-7820-19-git-send-email-bmeng.cn@gmail.com>
+Date: Sun, 18 Aug 2019 22:11:44 -0700
+Message-Id: <1566191521-7820-12-git-send-email-bmeng.cn@gmail.com>
 X-Mailer: git-send-email 1.7.1
 In-Reply-To: <1566191521-7820-1-git-send-email-bmeng.cn@gmail.com>
 References: <1566191521-7820-1-git-send-email-bmeng.cn@gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::444
-Subject: [Qemu-riscv] [PATCH v4 18/28] riscv: sifive_u: Generate hfclk and
- rtcclk nodes
+X-Received-From: 2607:f8b0:4864:20::442
+Subject: [Qemu-riscv] [PATCH v4 11/28] riscv: Add a sifive_cpu.h to include
+ both E and U cpu type defines
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -70,76 +73,108 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Aug 2019 05:12:37 -0000
+X-List-Received-Date: Mon, 19 Aug 2019 05:12:32 -0000
 
-To keep in sync with Linux kernel device tree, generate hfclk and
-rtcclk nodes in the device tree, to be referenced by PRCI node.
+Group SiFive E and U cpu type defines into one header file.
 
 Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Philippe Mathieu-Daudé <philmd@redhat.com>
 ---
 
 Changes in v4: None
 Changes in v3: None
 Changes in v2: None
 
- hw/riscv/sifive_u.c         | 23 +++++++++++++++++++++++
- include/hw/riscv/sifive_u.h |  2 ++
- 2 files changed, 25 insertions(+)
+ include/hw/riscv/sifive_cpu.h | 31 +++++++++++++++++++++++++++++++
+ include/hw/riscv/sifive_e.h   |  7 +------
+ include/hw/riscv/sifive_u.h   |  7 +------
+ 3 files changed, 33 insertions(+), 12 deletions(-)
+ create mode 100644 include/hw/riscv/sifive_cpu.h
 
-diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-index 284f7a5..08db741 100644
---- a/hw/riscv/sifive_u.c
-+++ b/hw/riscv/sifive_u.c
-@@ -80,6 +80,7 @@ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
-     char ethclk_names[] = "pclk\0hclk\0tx_clk";
-     uint32_t plic_phandle, ethclk_phandle, phandle = 1;
-     uint32_t uartclk_phandle;
-+    uint32_t hfclk_phandle, rtcclk_phandle;
- 
-     fdt = s->fdt = create_device_tree(&s->fdt_size);
-     if (!fdt) {
-@@ -98,6 +99,28 @@ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
-     qemu_fdt_setprop_cell(fdt, "/soc", "#size-cells", 0x2);
-     qemu_fdt_setprop_cell(fdt, "/soc", "#address-cells", 0x2);
- 
-+    hfclk_phandle = phandle++;
-+    nodename = g_strdup_printf("/hfclk");
-+    qemu_fdt_add_subnode(fdt, nodename);
-+    qemu_fdt_setprop_cell(fdt, nodename, "phandle", hfclk_phandle);
-+    qemu_fdt_setprop_string(fdt, nodename, "clock-output-names", "hfclk");
-+    qemu_fdt_setprop_cell(fdt, nodename, "clock-frequency",
-+        SIFIVE_U_HFCLK_FREQ);
-+    qemu_fdt_setprop_string(fdt, nodename, "compatible", "fixed-clock");
-+    qemu_fdt_setprop_cell(fdt, nodename, "#clock-cells", 0x0);
-+    g_free(nodename);
+diff --git a/include/hw/riscv/sifive_cpu.h b/include/hw/riscv/sifive_cpu.h
+new file mode 100644
+index 0000000..1367996
+--- /dev/null
++++ b/include/hw/riscv/sifive_cpu.h
+@@ -0,0 +1,31 @@
++/*
++ * SiFive CPU types
++ *
++ * Copyright (c) 2017 SiFive, Inc.
++ * Copyright (c) 2019 Bin Meng <bmeng.cn@gmail.com>
++ *
++ * This program is free software; you can redistribute it and/or modify it
++ * under the terms and conditions of the GNU General Public License,
++ * version 2 or later, as published by the Free Software Foundation.
++ *
++ * This program is distributed in the hope it will be useful, but WITHOUT
++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
++ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
++ * more details.
++ *
++ * You should have received a copy of the GNU General Public License along with
++ * this program.  If not, see <http://www.gnu.org/licenses/>.
++ */
 +
-+    rtcclk_phandle = phandle++;
-+    nodename = g_strdup_printf("/rtcclk");
-+    qemu_fdt_add_subnode(fdt, nodename);
-+    qemu_fdt_setprop_cell(fdt, nodename, "phandle", rtcclk_phandle);
-+    qemu_fdt_setprop_string(fdt, nodename, "clock-output-names", "rtcclk");
-+    qemu_fdt_setprop_cell(fdt, nodename, "clock-frequency",
-+        SIFIVE_U_RTCCLK_FREQ);
-+    qemu_fdt_setprop_string(fdt, nodename, "compatible", "fixed-clock");
-+    qemu_fdt_setprop_cell(fdt, nodename, "#clock-cells", 0x0);
-+    g_free(nodename);
++#ifndef HW_SIFIVE_CPU_H
++#define HW_SIFIVE_CPU_H
 +
-     nodename = g_strdup_printf("/memory@%lx",
-         (long)memmap[SIFIVE_U_DRAM].base);
-     qemu_fdt_add_subnode(fdt, nodename);
++#if defined(TARGET_RISCV32)
++#define SIFIVE_E_CPU TYPE_RISCV_CPU_SIFIVE_E31
++#define SIFIVE_U_CPU TYPE_RISCV_CPU_SIFIVE_U34
++#elif defined(TARGET_RISCV64)
++#define SIFIVE_E_CPU TYPE_RISCV_CPU_SIFIVE_E51
++#define SIFIVE_U_CPU TYPE_RISCV_CPU_SIFIVE_U54
++#endif
++
++#endif /* HW_SIFIVE_CPU_H */
+diff --git a/include/hw/riscv/sifive_e.h b/include/hw/riscv/sifive_e.h
+index d175b24..e17cdfd 100644
+--- a/include/hw/riscv/sifive_e.h
++++ b/include/hw/riscv/sifive_e.h
+@@ -19,6 +19,7 @@
+ #ifndef HW_SIFIVE_E_H
+ #define HW_SIFIVE_E_H
+ 
++#include "hw/riscv/sifive_cpu.h"
+ #include "hw/riscv/sifive_gpio.h"
+ 
+ #define TYPE_RISCV_E_SOC "riscv.sifive.e.soc"
+@@ -83,10 +84,4 @@ enum {
+ #define SIFIVE_E_PLIC_CONTEXT_BASE 0x200000
+ #define SIFIVE_E_PLIC_CONTEXT_STRIDE 0x1000
+ 
+-#if defined(TARGET_RISCV32)
+-#define SIFIVE_E_CPU TYPE_RISCV_CPU_SIFIVE_E31
+-#elif defined(TARGET_RISCV64)
+-#define SIFIVE_E_CPU TYPE_RISCV_CPU_SIFIVE_E51
+-#endif
+-
+ #endif
 diff --git a/include/hw/riscv/sifive_u.h b/include/hw/riscv/sifive_u.h
-index 7a1a4f3..debbf28 100644
+index 892f0ee..4abc621 100644
 --- a/include/hw/riscv/sifive_u.h
 +++ b/include/hw/riscv/sifive_u.h
-@@ -68,6 +68,8 @@ enum {
+@@ -20,6 +20,7 @@
+ #define HW_SIFIVE_U_H
  
- enum {
-     SIFIVE_U_CLOCK_FREQ = 1000000000,
-+    SIFIVE_U_HFCLK_FREQ = 33333333,
-+    SIFIVE_U_RTCCLK_FREQ = 1000000,
-     SIFIVE_U_GEM_CLOCK_FREQ = 125000000
- };
+ #include "hw/net/cadence_gem.h"
++#include "hw/riscv/sifive_cpu.h"
  
+ #define TYPE_RISCV_U_SOC "riscv.sifive.u.soc"
+ #define RISCV_U_SOC(obj) \
+@@ -77,10 +78,4 @@ enum {
+ #define SIFIVE_U_PLIC_CONTEXT_BASE 0x200000
+ #define SIFIVE_U_PLIC_CONTEXT_STRIDE 0x1000
+ 
+-#if defined(TARGET_RISCV32)
+-#define SIFIVE_U_CPU TYPE_RISCV_CPU_SIFIVE_U34
+-#elif defined(TARGET_RISCV64)
+-#define SIFIVE_U_CPU TYPE_RISCV_CPU_SIFIVE_U54
+-#endif
+-
+ #endif
 -- 
 2.7.4
 
