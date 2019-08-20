@@ -1,36 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1i05Kd-0007d5-Sb
-	for mharc-qemu-riscv@gnu.org; Tue, 20 Aug 2019 10:41:55 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:55725)
+	id 1i08uQ-000836-5K
+	for mharc-qemu-riscv@gnu.org; Tue, 20 Aug 2019 14:31:06 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:60593)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <georg.kotheimer@kernkonzept.com>) id 1i05Kb-0007ao-Fn
- for qemu-riscv@nongnu.org; Tue, 20 Aug 2019 10:41:54 -0400
+ (envelope-from <alistair23@gmail.com>) id 1i08uN-00080N-6r
+ for qemu-riscv@nongnu.org; Tue, 20 Aug 2019 14:31:04 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <georg.kotheimer@kernkonzept.com>) id 1i05KZ-0008LQ-VI
- for qemu-riscv@nongnu.org; Tue, 20 Aug 2019 10:41:53 -0400
-Received: from serv1.kernkonzept.com ([2a01:4f8:1c1c:b490::2]:39247
- helo=mx.kernkonzept.com)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <georg.kotheimer@kernkonzept.com>)
- id 1i05KW-0008IZ-Ka; Tue, 20 Aug 2019 10:41:48 -0400
-Received: from [95.90.100.178] (helo=tweek.dd1.int.kernkonzept.com)
- by mx.kernkonzept.com with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.92) id 1i05KS-0004Kp-Df; Tue, 20 Aug 2019 16:41:44 +0200
-From: Georg Kotheimer <georg.kotheimer@kernkonzept.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, Alistair Francis <alistair.francis@wdc.com>,
- Palmer Dabbelt <palmer@sifive.com>,
- Georg Kotheimer <georg.kotheimer@kernkonzept.com>
-Date: Tue, 20 Aug 2019 16:39:42 +0200
-Message-Id: <20190820143942.17371-1-georg.kotheimer@kernkonzept.com>
-X-Mailer: git-send-email 2.20.1
+ (envelope-from <alistair23@gmail.com>) id 1i08uL-0002tY-WC
+ for qemu-riscv@nongnu.org; Tue, 20 Aug 2019 14:31:03 -0400
+Received: from mail-lf1-x142.google.com ([2a00:1450:4864:20::142]:43083)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <alistair23@gmail.com>)
+ id 1i08uJ-0002qe-Bx; Tue, 20 Aug 2019 14:30:59 -0400
+Received: by mail-lf1-x142.google.com with SMTP id c19so4875738lfm.10;
+ Tue, 20 Aug 2019 11:30:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=gwOr14KGaGz9a1KxZ5kvmL2cBh45zg0ovh8E45LSHcA=;
+ b=sM3Az+iz/8aEM8yxHRFVU8pGlqRRu1UlpswT0DedcfIa7GNFX+d03/DwndDpddqVqa
+ DXXVY0KebJ5o+Vr/gl0lFNCKx4yeAqNMPRTTE4JOEYMRMSxdvQ/7+SYyNhzWoa5Ka2ly
+ hL+CfO4nFqAn1/3NhZbgoNLgWwfGoH7Kw3HI3R6IwyTA/01ka3DlFMZ6vwzttdbUconw
+ 9VLBPseE2MtnEl+ED40ByZdt1mtkydYzIc2N7SCiYmokvONpqviYEC8Chi8EBIB/mReT
+ RnRxdjTFXTwxLQoMrfyhyAXe49AbthTmzKpS+vuvfnCvpR7n8oRkzUcFtJq0JGVusPfO
+ lK/g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=gwOr14KGaGz9a1KxZ5kvmL2cBh45zg0ovh8E45LSHcA=;
+ b=YnSQ6UlDre3sZNYSwpbUdhy+F4GDtJwAJXCdKugBdz8Lpcz9DHHxpi2mksM69uC+7y
+ FeDBkbKSgat8jk310taWfFZ+3eM0i5qVgY/YMjC9m48t6nm3KEyFus3OW0ZXbJ/mPGBx
+ hWpiRVTGXBvTSr4QIcZ8fjfcU0P3Vs9FurALzkCteZy56TYExKMv+4RfURd2eS0AJM6d
+ 0NzCzCmClvIeEqLeyTs4NHnaQEyb7sjxyujQX+BPXmweMzUlKT1Lypc3GdcKXeKHLWQ+
+ AO7Pv6orsNNNk1Pkjveu+KdRLb4pCeXNdU/7ok1b6jxTTWKTnbLSbux+n31CVJBB2LCi
+ W7VQ==
+X-Gm-Message-State: APjAAAU2yTkVPrE1aoMqePGnRsvwcBOW8m7F5hZws3d19e+FfzvCGfig
+ V3gUcX9iiSA+ZoDunax1Wf1SbwsKIiHV/T+ixuU=
+X-Google-Smtp-Source: APXvYqzDNS0eNhrUsQdLXRIDOu2uVOVCW2u7uKOTWB5YiyG3LK+n6FQxCmrSzkMMQdCBhazrcmj9+Rnb3jtRPSJ8004=
+X-Received: by 2002:a19:ed11:: with SMTP id y17mr16106170lfy.141.1566325857684; 
+ Tue, 20 Aug 2019 11:30:57 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <1566191521-7820-1-git-send-email-bmeng.cn@gmail.com>
+ <1566191521-7820-21-git-send-email-bmeng.cn@gmail.com>
+In-Reply-To: <1566191521-7820-21-git-send-email-bmeng.cn@gmail.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 20 Aug 2019 11:26:55 -0700
+Message-ID: <CAKmqyKPu8=VB5AnbC3nqbc889T5oYZOwsdymkk=yjTz_jjsqYA@mail.gmail.com>
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>,
+ Palmer Dabbelt <palmer@sifive.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a01:4f8:1c1c:b490::2
-Subject: [Qemu-riscv] [PATCH v2] RISC-V: Select FPU gdb xml file based on
- the supported extensions
+X-Received-From: 2a00:1450:4864:20::142
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v4 20/28] riscv: sifive_u:
+ Reference PRCI clocks in UART and ethernet nodes
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -42,194 +68,83 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Aug 2019 14:41:55 -0000
+X-List-Received-Date: Tue, 20 Aug 2019 18:31:04 -0000
 
-The size of the FPU registers depends solely on the floating point
-extensions supported by the target architecture.
-However, in the previous implementation the floating point register
-size was derived from whether the target architecture is 32-bit or
-64-bit.
+On Sun, Aug 18, 2019 at 10:24 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+>
+> Now that we have added a PRCI node, update existing UART and ethernet
+> nodes to reference PRCI as their clock sources, to keep in sync with
+> the Linux kernel device tree.
+>
+> Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
 
-To allow RVF without RVD, changes to riscv_gdb_get_fpu() and
-riscv_gdb_set_fpu() were necessary.
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-In addition fflags, frm and fcsr were removed from
-riscv-XXbit-csr.xml, as the floating point csr registers are only
-available, if a FPU is present.
+Alistair
 
-Signed-off-by: Georg Kotheimer <georg.kotheimer@kernkonzept.com>
----
- configure                                     |  4 +-
- gdb-xml/riscv-32bit-csr.xml                   |  3 --
- gdb-xml/riscv-64bit-csr.xml                   |  3 --
- .../{riscv-64bit-fpu.xml => riscv-fpu-d.xml}  |  0
- .../{riscv-32bit-fpu.xml => riscv-fpu-f.xml}  |  0
- target/riscv/gdbstub.c                        | 50 ++++++++++---------
- 6 files changed, 29 insertions(+), 31 deletions(-)
- rename gdb-xml/{riscv-64bit-fpu.xml => riscv-fpu-d.xml} (100%)
- rename gdb-xml/{riscv-32bit-fpu.xml => riscv-fpu-f.xml} (100%)
-
-diff --git a/configure b/configure
-index 714e7fb6a1..f9e2320586 100755
---- a/configure
-+++ b/configure
-@@ -7596,14 +7596,14 @@ case "$target_name" in
-     TARGET_BASE_ARCH=riscv
-     TARGET_ABI_DIR=riscv
-     mttcg=yes
--    gdb_xml_files="riscv-32bit-cpu.xml riscv-32bit-fpu.xml riscv-32bit-csr.xml"
-+    gdb_xml_files="riscv-32bit-cpu.xml riscv-fpu-f.xml riscv-fpu-d.xml riscv-32bit-csr.xml"
-     target_compiler=$cross_cc_riscv32
-   ;;
-   riscv64)
-     TARGET_BASE_ARCH=riscv
-     TARGET_ABI_DIR=riscv
-     mttcg=yes
--    gdb_xml_files="riscv-64bit-cpu.xml riscv-64bit-fpu.xml riscv-64bit-csr.xml"
-+    gdb_xml_files="riscv-64bit-cpu.xml riscv-fpu-f.xml riscv-fpu-d.xml riscv-64bit-csr.xml"
-     target_compiler=$cross_cc_riscv64
-   ;;
-   sh4|sh4eb)
-diff --git a/gdb-xml/riscv-32bit-csr.xml b/gdb-xml/riscv-32bit-csr.xml
-index da1bf19e2f..cb36f7050a 100644
---- a/gdb-xml/riscv-32bit-csr.xml
-+++ b/gdb-xml/riscv-32bit-csr.xml
-@@ -15,9 +15,6 @@
-   <reg name="ucause" bitsize="32"/>
-   <reg name="utval" bitsize="32"/>
-   <reg name="uip" bitsize="32"/>
--  <reg name="fflags" bitsize="32"/>
--  <reg name="frm" bitsize="32"/>
--  <reg name="fcsr" bitsize="32"/>
-   <reg name="cycle" bitsize="32"/>
-   <reg name="time" bitsize="32"/>
-   <reg name="instret" bitsize="32"/>
-diff --git a/gdb-xml/riscv-64bit-csr.xml b/gdb-xml/riscv-64bit-csr.xml
-index 6aa4bed9f5..34ffe1e426 100644
---- a/gdb-xml/riscv-64bit-csr.xml
-+++ b/gdb-xml/riscv-64bit-csr.xml
-@@ -15,9 +15,6 @@
-   <reg name="ucause" bitsize="64"/>
-   <reg name="utval" bitsize="64"/>
-   <reg name="uip" bitsize="64"/>
--  <reg name="fflags" bitsize="64"/>
--  <reg name="frm" bitsize="64"/>
--  <reg name="fcsr" bitsize="64"/>
-   <reg name="cycle" bitsize="64"/>
-   <reg name="time" bitsize="64"/>
-   <reg name="instret" bitsize="64"/>
-diff --git a/gdb-xml/riscv-64bit-fpu.xml b/gdb-xml/riscv-fpu-d.xml
-similarity index 100%
-rename from gdb-xml/riscv-64bit-fpu.xml
-rename to gdb-xml/riscv-fpu-d.xml
-diff --git a/gdb-xml/riscv-32bit-fpu.xml b/gdb-xml/riscv-fpu-f.xml
-similarity index 100%
-rename from gdb-xml/riscv-32bit-fpu.xml
-rename to gdb-xml/riscv-fpu-f.xml
-diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
-index 27be93279b..c6e530fdd2 100644
---- a/target/riscv/gdbstub.c
-+++ b/target/riscv/gdbstub.c
-@@ -35,9 +35,6 @@ static int csr_register_map[] = {
-     CSR_UCAUSE,
-     CSR_UTVAL,
-     CSR_UIP,
--    CSR_FFLAGS,
--    CSR_FRM,
--    CSR_FCSR,
-     CSR_CYCLE,
-     CSR_TIME,
-     CSR_INSTRET,
-@@ -303,19 +300,22 @@ int riscv_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
- static int riscv_gdb_get_fpu(CPURISCVState *env, uint8_t *mem_buf, int n)
- {
-     if (n < 32) {
--        return gdb_get_reg64(mem_buf, env->fpr[n]);
-+        if (env->misa & RVD) {
-+            return gdb_get_reg64(mem_buf, env->fpr[n]);
-+        }
-+        return gdb_get_reg32(mem_buf, env->fpr[n]);
-     /* there is hole between ft11 and fflags in fpu.xml */
-     } else if (n < 36 && n > 32) {
-         target_ulong val = 0;
-         int result;
-         /*
--         * CSR_FFLAGS is at index 8 in csr_register, and gdb says it is FP
--         * register 33, so we recalculate the map index.
-+         * CSR_FFLAGS is at index 1 in the csr space, and gdb says it is FP
-+         * register 33, so we recalculate the csr index.
-          * This also works for CSR_FRM and CSR_FCSR.
-          */
--        result = riscv_csrrw_debug(env, n - 33 +  8, &val, 0, 0);
-+        result = riscv_csrrw_debug(env, n - 33 + CSR_FFLAGS, &val, 0, 0);
-         if (result == 0) {
--            return gdb_get_regl(mem_buf, val);
-+            return gdb_get_reg32(mem_buf, val);
-         }
-     }
-     return 0;
-@@ -324,20 +324,25 @@ static int riscv_gdb_get_fpu(CPURISCVState *env, uint8_t *mem_buf, int n)
- static int riscv_gdb_set_fpu(CPURISCVState *env, uint8_t *mem_buf, int n)
- {
-     if (n < 32) {
--        env->fpr[n] = ldq_p(mem_buf); /* always 64-bit */
--        return sizeof(uint64_t);
-+        if (env->misa & RVD) {
-+            env->fpr[n] = ldq_p(mem_buf);
-+            return sizeof(uint64_t);
-+        } else {
-+            env->fpr[n] = ldl_p(mem_buf);
-+            return sizeof(uint32_t);
-+        }
-     /* there is hole between ft11 and fflags in fpu.xml */
-     } else if (n < 36 && n > 32) {
--        target_ulong val = ldtul_p(mem_buf);
-+        target_ulong val = ldl_p(mem_buf);
-         int result;
-         /*
--         * CSR_FFLAGS is at index 8 in csr_register, and gdb says it is FP
--         * register 33, so we recalculate the map index.
-+         * CSR_FFLAGS is at index 1 in the csr space, and gdb says it is FP
-+         * register 33, so we recalculate the csr index.
-          * This also works for CSR_FRM and CSR_FCSR.
-          */
--        result = riscv_csrrw_debug(env, n - 33 + 8, NULL, val, -1);
-+        result = riscv_csrrw_debug(env, n - 33 + CSR_FFLAGS, NULL, val, -1);
-         if (result == 0) {
--            return sizeof(target_ulong);
-+            return sizeof(uint32_t);
-         }
-     }
-     return 0;
-@@ -375,20 +380,19 @@ void riscv_cpu_register_gdb_regs_for_features(CPUState *cs)
- {
-     RISCVCPU *cpu = RISCV_CPU(cs);
-     CPURISCVState *env = &cpu->env;
--#if defined(TARGET_RISCV32)
--    if (env->misa & RVF) {
-+
-+    if (env->misa & RVD) {
-+        gdb_register_coprocessor(cs, riscv_gdb_get_fpu, riscv_gdb_set_fpu,
-+                                 36, "riscv-fpu-d.xml", 0);
-+    } else if (env->misa & RVF) {
-         gdb_register_coprocessor(cs, riscv_gdb_get_fpu, riscv_gdb_set_fpu,
--                                 36, "riscv-32bit-fpu.xml", 0);
-+                                 36, "riscv-fpu-f.xml", 0);
-     }
- 
-+#if defined(TARGET_RISCV32)
-     gdb_register_coprocessor(cs, riscv_gdb_get_csr, riscv_gdb_set_csr,
-                              4096, "riscv-32bit-csr.xml", 0);
- #elif defined(TARGET_RISCV64)
--    if (env->misa & RVF) {
--        gdb_register_coprocessor(cs, riscv_gdb_get_fpu, riscv_gdb_set_fpu,
--                                 36, "riscv-64bit-fpu.xml", 0);
--    }
--
-     gdb_register_coprocessor(cs, riscv_gdb_get_csr, riscv_gdb_set_csr,
-                              4096, "riscv-64bit-csr.xml", 0);
- #endif
--- 
-2.20.1
-
+> ---
+>
+> Changes in v4: None
+> Changes in v3: None
+> Changes in v2: None
+>
+>  hw/riscv/sifive_u.c              |  7 ++++---
+>  include/hw/riscv/sifive_u_prci.h | 10 ++++++++++
+>  2 files changed, 14 insertions(+), 3 deletions(-)
+>
+> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+> index bd5551c..8818fd6 100644
+> --- a/hw/riscv/sifive_u.c
+> +++ b/hw/riscv/sifive_u.c
+> @@ -80,7 +80,7 @@ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
+>      int cpu;
+>      uint32_t *cells;
+>      char *nodename;
+> -    char ethclk_names[] = "pclk\0hclk\0tx_clk";
+> +    char ethclk_names[] = "pclk\0hclk";
+>      uint32_t plic_phandle, prci_phandle, ethclk_phandle, phandle = 1;
+>      uint32_t uartclk_phandle;
+>      uint32_t hfclk_phandle, rtcclk_phandle;
+> @@ -265,7 +265,7 @@ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
+>      qemu_fdt_setprop_cell(fdt, nodename, "interrupt-parent", plic_phandle);
+>      qemu_fdt_setprop_cell(fdt, nodename, "interrupts", SIFIVE_U_GEM_IRQ);
+>      qemu_fdt_setprop_cells(fdt, nodename, "clocks",
+> -        ethclk_phandle, ethclk_phandle, ethclk_phandle);
+> +        prci_phandle, PRCI_CLK_GEMGXLPLL, prci_phandle, PRCI_CLK_GEMGXLPLL);
+>      qemu_fdt_setprop(fdt, nodename, "clock-names", ethclk_names,
+>          sizeof(ethclk_names));
+>      qemu_fdt_setprop_cell(fdt, nodename, "#address-cells", 1);
+> @@ -295,7 +295,8 @@ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
+>      qemu_fdt_setprop_cells(fdt, nodename, "reg",
+>          0x0, memmap[SIFIVE_U_UART0].base,
+>          0x0, memmap[SIFIVE_U_UART0].size);
+> -    qemu_fdt_setprop_cell(fdt, nodename, "clocks", uartclk_phandle);
+> +    qemu_fdt_setprop_cells(fdt, nodename, "clocks",
+> +        prci_phandle, PRCI_CLK_TLCLK);
+>      qemu_fdt_setprop_cell(fdt, nodename, "interrupt-parent", plic_phandle);
+>      qemu_fdt_setprop_cell(fdt, nodename, "interrupts", SIFIVE_U_UART0_IRQ);
+>
+> diff --git a/include/hw/riscv/sifive_u_prci.h b/include/hw/riscv/sifive_u_prci.h
+> index 66eacb5..cdf1d33 100644
+> --- a/include/hw/riscv/sifive_u_prci.h
+> +++ b/include/hw/riscv/sifive_u_prci.h
+> @@ -87,4 +87,14 @@ typedef struct SiFiveUPRCIState {
+>
+>  DeviceState *sifive_u_prci_create(hwaddr addr);
+>
+> +/*
+> + * Clock indexes for use by Device Tree data and the PRCI driver.
+> + *
+> + * These values are from sifive-fu540-prci.h in the Linux kernel.
+> + */
+> +#define PRCI_CLK_COREPLL        0
+> +#define PRCI_CLK_DDRPLL         1
+> +#define PRCI_CLK_GEMGXLPLL      2
+> +#define PRCI_CLK_TLCLK          3
+> +
+>  #endif /* HW_SIFIVE_U_PRCI_H */
+> --
+> 2.7.4
+>
+>
 
