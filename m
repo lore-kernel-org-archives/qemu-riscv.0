@@ -1,64 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1i097T-0004Sl-6C
-	for mharc-qemu-riscv@gnu.org; Tue, 20 Aug 2019 14:44:36 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:33815)
+	id 1i0APB-0005bs-UB
+	for mharc-qemu-riscv@gnu.org; Tue, 20 Aug 2019 16:06:57 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:45194)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <alistair23@gmail.com>) id 1i097Q-0004Qz-Js
- for qemu-riscv@nongnu.org; Tue, 20 Aug 2019 14:44:33 -0400
+ (envelope-from <jimw@sifive.com>) id 1i0AP9-0005bR-Hb
+ for qemu-riscv@nongnu.org; Tue, 20 Aug 2019 16:06:56 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1i097P-0006wn-Nf
- for qemu-riscv@nongnu.org; Tue, 20 Aug 2019 14:44:32 -0400
-Received: from mail-lj1-x244.google.com ([2a00:1450:4864:20::244]:41823)
+ (envelope-from <jimw@sifive.com>) id 1i0AP8-0007cd-Bx
+ for qemu-riscv@nongnu.org; Tue, 20 Aug 2019 16:06:55 -0400
+Received: from mail-pl1-x644.google.com ([2607:f8b0:4864:20::644]:45709)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1i097N-0006w3-DQ; Tue, 20 Aug 2019 14:44:29 -0400
-Received: by mail-lj1-x244.google.com with SMTP id m24so6088190ljg.8;
- Tue, 20 Aug 2019 11:44:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=b7NnqSJ+WmmmeF092H0RreZ/saSRTH8UMqRQVH6Kx9g=;
- b=tuuBvr4AkC4AjrqS9MkOu12IAyHssXMfTPuYc+kZHzJelEAp1QI6pXzNk9yQNCbqJ/
- WtferDU2VrVaFk39oK52LNkKsdCjP8tpGvNkDume/67mTjdQD99SxwCzbSPXmBruXMGO
- IzS4QFdqwHp9LPKe6GcUXtDNmb2tOrzWb8cj2HKgRh80mkisyDsTRbJJ9Ak3ClWWWWEc
- vlJWpUI8pJdeJbkgzjr+LtR5xwWIArOz2x5bx5QOBQWdJRJfhNgV+y6oh8dESboW/yUo
- JZS6Lg+7t2xN4jh3AVYR7GOFHdA9QCfICqVxschqj5yY4cQzQ9TcD1/GI4ryXzUWoRzw
- 6Ixg==
+ (Exim 4.71) (envelope-from <jimw@sifive.com>) id 1i0AP8-0007b6-4Y
+ for qemu-riscv@nongnu.org; Tue, 20 Aug 2019 16:06:54 -0400
+Received: by mail-pl1-x644.google.com with SMTP id y8so3294729plr.12
+ for <qemu-riscv@nongnu.org>; Tue, 20 Aug 2019 13:06:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=gYuKJlJufpQ6maABKQTxUMxy5UrN7Ns1g6CYu+OMczo=;
+ b=UFYivqW0Y1tl2OcsMCEoRe+bbB4z+MM7pHj/1wEbCmeToEbS8tqDYcIPgBXTMjJDvk
+ kqSsNfEDbnLRS4am0piki5G+T0l6ntDNcmxP1l29kXrJZnJ65/sHy4BnqVqcj/1Fxujt
+ IbFCwFHcPphRVu5yS2bZ1f4aIKtq18U9PvIXsNkAqs/Ksg3v9r9Isq7JknRy3/dZgfe7
+ Ig5tTN1nLU4G93NmK5BeQN+C015Ksu8hzGdRQ5h37QPOLPZblrzXkHkLVlk7aZUitf9k
+ f2W6Zy1XqsQw+WpV3Zs7NBSMtqnr0NDdjUzrajZ6V5yX4TL5TjKhcJMqY3gimE8utN/4
+ nghQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=b7NnqSJ+WmmmeF092H0RreZ/saSRTH8UMqRQVH6Kx9g=;
- b=PNapilOScUCRuVAGtgXhDSiY23AiSL5EDblGU7llDNCFQ9BpRTG74ziX/wGMn7YoU+
- AYRBcCzu9ONoIHmU9//EBUoVkYqUGjSa/nggZHT3x7I3kQxkbraBQa73GX8y9yC0WuFG
- GkwB5DmYwndywoIA3gGdf/FM+eNBL+RPTP2nvh6qctYZR7DgTgSnVQgVdknrIb2eOF6s
- 1G5IZYTTC4tyze/8fieSLvf6CTEYIachMykdOFE1YPYzEtiOwfbE7TKI4HiiOZMH8Fiw
- clJteQL5pCGUnghH76d6WVdfuFZDkXB6zZb61BhSFu2nVhtbbrth5ECp9J797sWpiCPQ
- wJOQ==
-X-Gm-Message-State: APjAAAWAGBI8/KrYDeodJxpbUZaspIIUB3jLRdZc5mfsccZ0PYNpSTT4
- Zwj0UufYL9o+MyQwM1dPviPh/VegOhE4V+Jx1Uo=
-X-Google-Smtp-Source: APXvYqyeE01UJCyCBkhEDtV+8XUhR3HTp0u8UUKUw1pJegu1MJ0VW5fAI4LvSF48+xmtTwF7b1mUlIpUbRJqFb32ABs=
-X-Received: by 2002:a2e:7c0b:: with SMTP id x11mr16449046ljc.85.1566326667658; 
- Tue, 20 Aug 2019 11:44:27 -0700 (PDT)
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=gYuKJlJufpQ6maABKQTxUMxy5UrN7Ns1g6CYu+OMczo=;
+ b=k/1qoK8k8Gbsa056NwF6zYSidhspdH3OV4YwDy/5dncEkC1g7vaSqUqgQZO87QdpTI
+ BVnUR45uFzOj/Lomd7cHBPRQsvuCQzS+0fl9e/UgRWaa3DDuRK6bOf5atY1vt1sayHT6
+ Dl2Wa/rpZACAxKIkK1G9X1hIuyJXZH3NecGSr4bXJbeo3WYmkG5O2fdYmkDKMHTbacdk
+ X8rvS1TTDVBJPUd16PCwY1aWF8l0UZqCqTfbRZJbiKEr3aYvNrwYh3+puS1EnqD8oVy9
+ wCLRN+gjKnrdk3cEOe+yWCFGGpdyl5Ey3p9Hf6sW99R5QkcgR24My5O27RNNiNVyRfRg
+ P2pQ==
+X-Gm-Message-State: APjAAAUwU4uFcPxDVF+NQAX/ZXPtZNcq/QXg21L9lTaBTWXeBKz0Sh9R
+ J0SiC3JF8qYv4M/jcdF2mZKPk/QBce8=
+X-Google-Smtp-Source: APXvYqyQXXFX+cvmbBOY1jpV5LGdlS95qo6914OG2rmoxjxrJiYgt1QgZesTUJJNEGXdfSUPqaBnig==
+X-Received: by 2002:a17:902:7202:: with SMTP id
+ ba2mr30793044plb.266.1566331612977; 
+ Tue, 20 Aug 2019 13:06:52 -0700 (PDT)
+Received: from [10.17.0.199] ([12.206.222.5])
+ by smtp.gmail.com with ESMTPSA id i137sm47203581pgc.4.2019.08.20.13.06.52
+ (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+ Tue, 20 Aug 2019 13:06:52 -0700 (PDT)
+To: Georg Kotheimer <georg.kotheimer@kernkonzept.com>, qemu-devel@nongnu.org
+Cc: Alistair Francis <alistair.francis@wdc.com>,
+ Palmer Dabbelt <palmer@sifive.com>, qemu-riscv@nongnu.org
+References: <20190820143942.17371-1-georg.kotheimer@kernkonzept.com>
+From: Jim Wilson <jimw@sifive.com>
+Message-ID: <79a82be5-38a2-edeb-66a6-25d34246aea3@sifive.com>
+Date: Tue, 20 Aug 2019 13:06:51 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.8.0
 MIME-Version: 1.0
-References: <1565960976-6693-1-git-send-email-bmeng.cn@gmail.com>
- <1565960976-6693-3-git-send-email-bmeng.cn@gmail.com>
-In-Reply-To: <1565960976-6693-3-git-send-email-bmeng.cn@gmail.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 20 Aug 2019 11:40:26 -0700
-Message-ID: <CAKmqyKMBLdPrcvFvR5x=1d=tkDYmhV7uLeXq18F7jPrQHXOUYg@mail.gmail.com>
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Palmer Dabbelt <palmer@sifive.com>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
+In-Reply-To: <20190820143942.17371-1-georg.kotheimer@kernkonzept.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::244
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH 2/2] riscv: Resolve full path
- of the given bios image
+X-Received-From: 2607:f8b0:4864:20::644
+Subject: Re: [Qemu-riscv] [PATCH v2] RISC-V: Select FPU gdb xml file based
+ on the supported extensions
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -70,50 +76,42 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Aug 2019 18:44:33 -0000
+X-List-Received-Date: Tue, 20 Aug 2019 20:06:56 -0000
 
-On Fri, Aug 16, 2019 at 6:11 AM Bin Meng <bmeng.cn@gmail.com> wrote:
->
-> At present when "-bios image" is supplied, we just use the straight
-> path without searching for the configured data directories. Like
-> "-bios default", we add the same logic so that "-L" actually works.
->
-> Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
+On 8/20/19 7:39 AM, Georg Kotheimer wrote:
+> The size of the FPU registers depends solely on the floating point
+> extensions supported by the target architecture.
+> However, in the previous implementation the floating point register
+> size was derived from whether the target architecture is 32-bit or
+> 64-bit.
+> 
+> To allow RVF without RVD, changes to riscv_gdb_get_fpu() and
+> riscv_gdb_set_fpu() were necessary.
+> 
+> In addition fflags, frm and fcsr were removed from
+> riscv-XXbit-csr.xml, as the floating point csr registers are only
+> available, if a FPU is present.
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+The current XML files were identical to the XML files in gdb when 
+implemented.  This seems to be existing practice, as this is true of all 
+of the other targets I looked at when I implemented this.  Also, the 
+file names are the same with a / replaced with a -.  These files are in 
+the gdb/features/riscv dir in a gdb source tree.  It would be a shame to 
+break this.  I'm not sure if they are still identical.  The gdb copies 
+might have been updated since then, and may need to be copied into qemu 
+to update qemu, but we don't have a dedicated gdb/qemu maintainer to do 
+this.
 
-Alistair
+I don't see a need to remove the fp csr's from the csr list.  There are 
+other extension dependent CSRs, like hypervisor ones. I think it makes 
+more sense for the csr list to contain all of the csrs, and then disable 
+access to them if that extension is not enabled.  If there is a good 
+reason to require changes to the csr XML files, then it probably should 
+be discussed with the gdb developers too, so that the gdb and qemu 
+copies of the files remain consistent.
 
->
-> ---
->
->  hw/riscv/boot.c | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
->
-> diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
-> index a122846..15002d3 100644
-> --- a/hw/riscv/boot.c
-> +++ b/hw/riscv/boot.c
-> @@ -72,14 +72,14 @@ void riscv_find_and_load_firmware(MachineState *machine,
->          firmware_filename = riscv_find_firmware(default_machine_firmware);
->      } else {
->          firmware_filename = machine->firmware;
-> +        if (strcmp(firmware_filename, "none")) {
-> +            firmware_filename = riscv_find_firmware(firmware_filename);
-> +        }
->      }
->
->      if (strcmp(firmware_filename, "none")) {
->          /* If not "none" load the firmware */
->          riscv_load_firmware(firmware_filename, firmware_load_addr);
-> -    }
-> -
-> -    if (!strcmp(machine->firmware, "default")) {
->          g_free(firmware_filename);
->      }
->  }
-> --
-> 2.7.4
->
->
+Fixing the rvf/rvd 32/64-bit support is good.  That is a bug in my 
+original implementation.
+
+Jim
 
