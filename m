@@ -1,68 +1,92 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1hzsqE-0004Yy-52
-	for mharc-qemu-riscv@gnu.org; Mon, 19 Aug 2019 21:21:42 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:60717)
+	id 1hzvDl-0006Rq-Sg
+	for mharc-qemu-riscv@gnu.org; Mon, 19 Aug 2019 23:54:09 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:45378)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <bmeng.cn@gmail.com>) id 1hzsqC-0004Ys-AW
- for qemu-riscv@nongnu.org; Mon, 19 Aug 2019 21:21:41 -0400
+ (envelope-from <edgar.iglesias@gmail.com>) id 1hzuZA-0006Vk-0h
+ for qemu-riscv@nongnu.org; Mon, 19 Aug 2019 23:12:13 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <bmeng.cn@gmail.com>) id 1hzsqB-0003sF-3J
- for qemu-riscv@nongnu.org; Mon, 19 Aug 2019 21:21:40 -0400
-Received: from mail-ed1-x541.google.com ([2a00:1450:4864:20::541]:37032)
+ (envelope-from <edgar.iglesias@gmail.com>) id 1hzuZ8-0005bZ-QD
+ for qemu-riscv@nongnu.org; Mon, 19 Aug 2019 23:12:11 -0400
+Received: from mail-lj1-x241.google.com ([2a00:1450:4864:20::241]:36948)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
- id 1hzsqA-0003rG-RH; Mon, 19 Aug 2019 21:21:39 -0400
-Received: by mail-ed1-x541.google.com with SMTP id f22so4201790edt.4;
- Mon, 19 Aug 2019 18:21:38 -0700 (PDT)
+ (Exim 4.71) (envelope-from <edgar.iglesias@gmail.com>)
+ id 1hzuYw-0005TH-EZ; Mon, 19 Aug 2019 23:11:58 -0400
+Received: by mail-lj1-x241.google.com with SMTP id t14so3682860lji.4;
+ Mon, 19 Aug 2019 20:11:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=FyDhifdM46kGL6wLXdrdr45V4T4oPGnjGga7555czzQ=;
- b=Qq0DieCZIiippwewBm34jX5rUEpVBi8bgJGXDxL5Ao2UdBM3eIHdfr7q2PPYvzIr7/
- fweuPSl+bXT7N3/GIXSz3jTyf5Dx0PEYn5nnAB6P51XcivVlPajMfKfLZDFZoqXsRw6F
- HEUS5uUTDfa9yMRJeB+d4DhijMh6U+rRqlzYu2wQI2pvJVbXJYRzCbEUl72Am8/h6fnL
- kn3plSPDrAitv+nohjp6XPS7tbn6AVnQRTC9gSoBCNTyjA2TtLNsXsgIFFhlGfX4AP/N
- l1y6t7atOaD4vhCj5Eu1vi1lkXFaqi4KFvFGwr37F7VtQDDxO0gfo7DYiheRm8ijiWYs
- AasQ==
+ :cc; bh=opF2Kjd4xhjet2Ok9MagWcGdoiR+78PtkQz6eXk5xsk=;
+ b=pvwuH6x4g2RD618z9nkWleyIT+6+twBUIvVz2ZiuSW7t4OUC4ypUZILRbI5tzpPlXM
+ 01ZuAi7rMVbJ/luuKM7/OU8+CfxDwOxM6yahhJ3FIi819g+J3mXGhXnFSX/T1hMbQ6Mc
+ NpAZHDg0y+faC9iil7yD+b4B2CydMwJ86lVkBLi4tvsx16pbw924ZQId/jkaGPvOa+Ks
+ WFXC5CDoUf8lUcDbksineCbDwMOgbIHsZA57FmmrbSrozZKk3KLX+nRSQrFq4epUkdWZ
+ 6Fuf4XDh5PVWVOzVjPB1MGcakGK3z8A6DUeUD15puLgREEMw0VyMuXJS7dIKmU9Zb9OS
+ kNQA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=FyDhifdM46kGL6wLXdrdr45V4T4oPGnjGga7555czzQ=;
- b=Hs/DOf1LN/Mlh9bA7X3N2aDtXTJnOZDaSh1O9L6RMz2A6FlWJ7WRrWJEWACDd1FHiY
- jy6gbkYICdsFdHAffKXazTzdRT1O/o+ig1s4lZ2GoQ1qjMgOxOI7UHkIzZxwZ0gH9obB
- PhAUk9HmfAKp1HkLIXghdV4flGexBLhds0bl1UcqtDg0WtWjNfAtyz1G+4c5ayDy8i0/
- 2yzK7/z2/M14w3DKi1UyKTO6K179t7QsS2oXg5q6qAVtbTZSabphtd241A+LlOy3KIkK
- qEOi02DmGC+iDkeowJ8Z50k9ZqjOnQu0/rXXCH32qE+hoOWhbPMZaZ0YaPJnSlwy7Jbg
- ynPA==
-X-Gm-Message-State: APjAAAUy2IgBVA0SrmtDYBNyjodTiBA3tnbdBAy/Rb0tDfelff0FMvSf
- +ahMS6McPpMsJQeVMmflhf06Og7KzW1/UX7fKUw=
-X-Google-Smtp-Source: APXvYqygNxQ5Apj56i01NcfLDCzmWJFTd+VCE9jjO9Ea63vQAbGu6MyMy4nEE9LxXWDDydbTMiqhWDWWr/Bip2AJjy4=
-X-Received: by 2002:a50:8687:: with SMTP id r7mr28216214eda.137.1566264097355; 
- Mon, 19 Aug 2019 18:21:37 -0700 (PDT)
+ :message-id:subject:to:cc;
+ bh=opF2Kjd4xhjet2Ok9MagWcGdoiR+78PtkQz6eXk5xsk=;
+ b=Qm1aHZ5yrKlnl563+JmeO4G+G2lpmm0eDzkZuwkxmB2yAabcLxpc0t1FIjayC42THw
+ DqmMZQaGRanCkJ8W2g6FNscLJA1JBAsPi1+RwWgsVDuW/ke7CAbwTeKA43LQ3tyoTiEv
+ n2ISmt4GLzK0hclwHW9NpGDuS/I1jFG4IvhZINPrTKSCACaUTSXBGD5qNqsJQcQBhJJJ
+ 6UycYKkoG1tx8MCo5Av37IShSETwx0xlfqvYI/iGBv+fWDQBbZa2G37eWZEXuLNUkjRd
+ hrsS7/K6SLBNOw5YEqPelLiu0BYOgf+MIWisjA2s7SmZOa136XG0W5PUdsp9ppEDuX9W
+ 5Z3w==
+X-Gm-Message-State: APjAAAV5RVR+ey9+7B2Gqqz+KJmJheX29InimYupNSckMlFWnsDQtgV0
+ tVrGwuMhdgC9Ncr+jwSwak9zHcwrrPcC98vXUG4=
+X-Google-Smtp-Source: APXvYqx049c5BZmAP/osr25SDM/2wewEcsQwTaKoKF5FTV81RkVyM97wkfYz72vrFlTUdvzt6yXvg9zXn8tOUEjgzJg=
+X-Received: by 2002:a2e:9a84:: with SMTP id p4mr2611284lji.52.1566270716435;
+ Mon, 19 Aug 2019 20:11:56 -0700 (PDT)
 MIME-Version: 1.0
-References: <0141541d-43ff-98d8-e9d4-4a2fdcfdcf36@c-sky.com>
- <CAKmqyKPr0V6acB2-Y+N1-aoj-5LSofwi=Jz=u6KFJN1fPUWjzA@mail.gmail.com>
- <2b741fb0-0f12-0f07-a516-9cc23abc0b6e@c-sky.com>
- <CAKmqyKPa2YbAASRsQ8cAm+LR58Z3i_bCXDd7tYtD5TtXvv4YdQ@mail.gmail.com>
-In-Reply-To: <CAKmqyKPa2YbAASRsQ8cAm+LR58Z3i_bCXDd7tYtD5TtXvv4YdQ@mail.gmail.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Tue, 20 Aug 2019 09:21:26 +0800
-Message-ID: <CAEUhbmWsySubx0W__c6-6pWznfYb71JZfGm-EVKJ0iFeOWGKkg@mail.gmail.com>
-To: Alistair Francis <alistair23@gmail.com>
-Cc: liuzhiwei <zhiwei_liu@c-sky.com>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Palmer Dabbelt <palmer@sifive.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Alistair Francis <Alistair.Francis@wdc.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+References: <43bc5e07ac614d0e8e740bf6007ff77b@tpw09926dag18e.domain1.systemhost.net>
+ <1565941032362.60179@bt.com> <1b5f5a92-1b75-f0d9-d7bc-4605094ad8e7@redhat.com>
+ <8d8b37c9-3daf-d241-df92-1a5467bca451@redhat.com>
+ <3b983f77-8503-3fcd-7c42-45d0121845e6@redhat.com>
+ <b79a173d-a682-21da-6e7f-489ce06c8f7a@linaro.org>
+In-Reply-To: <b79a173d-a682-21da-6e7f-489ce06c8f7a@linaro.org>
+From: "Edgar E. Iglesias" <edgar.iglesias@gmail.com>
+Date: Tue, 20 Aug 2019 05:11:46 +0200
+Message-ID: <CAJy5ezpXMNnMTWh67cY1xOrWQEySsjv8uuTkd3VS5pyMKM9FAQ@mail.gmail.com>
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: Paolo Bonzini <pbonzini@redhat.com>, Thomas Huth <thuth@redhat.com>,
+ tony.nguyen@bt.com, 
+ qemu-devel@nongnu.org, frederic.konrad@adacore.com, berto@igalia.com, 
+ qemu-block@nongnu.org, arikalo@wavecomp.com, pasic@linux.ibm.com, 
+ hpoussin@reactos.org, anthony.perard@citrix.com, 
+ xen-devel@lists.xenproject.org, philmd@redhat.com, green@moxielogic.com, 
+ jiri@resnulli.us, ehabkost@redhat.com, b.galvani@gmail.com, 
+ eric.auger@redhat.com, alex.williamson@redhat.com, stefanha@redhat.com, 
+ jsnow@redhat.com, rth@twiddle.net, kwolf@redhat.com, andrew@aj.id.au, 
+ claudio.fontana@suse.com, crwulff@gmail.com, laurent@vivier.eu, 
+ sundeep.lkml@gmail.com, michael@walle.cc, qemu-ppc@nongnu.org, 
+ kbastian@mail.uni-paderborn.de, imammedo@redhat.com, fam@euphon.net, 
+ peter.maydell@linaro.org, david@redhat.com, palmer@sifive.com, 
+ keith.busch@intel.com, jcmvbkbc@gmail.com, hare@suse.com, 
+ sstabellini@kernel.org, andrew.smirnov@gmail.com, deller@gmx.de, 
+ magnus.damm@gmail.com, atar4qemu@gmail.com, minyard@acm.org, sw@weilnetz.de, 
+ yuval.shaia@oracle.com, qemu-s390x@nongnu.org, qemu-arm@nongnu.org, 
+ peter.chubb@nicta.com.au, clg@kaod.org, shorne@gmail.com, 
+ qemu-riscv@nongnu.org, i.mitsyanko@gmail.com, cohuck@redhat.com, 
+ amarkovic@wavecomp.com, jan.kiszka@web.de, aurelien@aurel32.net, 
+ pburton@wavecomp.com, sagark@eecs.berkeley.edu, jasowang@redhat.com, 
+ kraxel@redhat.com, gxt@mprc.pku.edu.cn, robh@kernel.org, lersek@redhat.com, 
+ borntraeger@de.ibm.com, joel@jms.id.au, antonynpavlov@gmail.com, 
+ chouteau@adacore.com, Andrew.Baumann@microsoft.com, mreitz@redhat.com, 
+ walling@linux.ibm.com, dmitry.fleytman@gmail.com, mst@redhat.com, 
+ mark.cave-ayland@ilande.co.uk, jslaby@suse.cz, marex@denx.de, 
+ proljc@gmail.com, marcandre.lureau@redhat.com, alistair@alistair23.me, 
+ paul.durrant@citrix.com, david@gibson.dropbear.id.au, 
+ xiaoguangrong.eric@gmail.com, huth@tuxfamily.org, jcd@tribudubois.net, 
+ stefanb@linux.ibm.com
+Content-Type: multipart/alternative; boundary="000000000000ace486059083d1f5"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::541
-Subject: Re: [Qemu-riscv] [Qemu-devel] RISCV: when will the CLIC be ready?
+X-Received-From: 2a00:1450:4864:20::241
+X-Mailman-Approved-At: Mon, 19 Aug 2019 23:54:09 -0400
+Subject: Re: [Qemu-riscv] [Qemu-devel] [qemu-s390x] [PATCH v7 33/42] exec:
+ Replace device_endian with MemOp
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -74,99 +98,96 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Aug 2019 01:21:41 -0000
+X-List-Received-Date: Tue, 20 Aug 2019 03:12:13 -0000
 
-On Tue, Aug 20, 2019 at 3:09 AM Alistair Francis <alistair23@gmail.com> wro=
-te:
+--000000000000ace486059083d1f5
+Content-Type: text/plain; charset="UTF-8"
+
+On Mon, 19 Aug. 2019, 23:01 Richard Henderson, <richard.henderson@linaro.org>
+wrote:
+
+> On 8/19/19 11:29 AM, Paolo Bonzini wrote:
+> > On 19/08/19 20:28, Paolo Bonzini wrote:
+> >> On 16/08/19 12:12, Thomas Huth wrote:
+> >>> This patch is *huge*, more than 800kB. It keeps being stuck in the the
+> >>> filter of the qemu-s390x list each time you send it. Please:
+> >>>
+> >>> 1) Try to break it up in more digestible pieces, e.g. change only one
+> >>> subsystem at a time (this is also better reviewable by people who are
+> >>> interested in one area)
+> >>
+> >> This is not really possible, since the patch is basically a
+> >> search-and-replace.  You could perhaps use some magic
+> >> ("DEVICE_MEMOP_ENDIAN" or something like that) to allow a split, but it
+> >> would introduce more complication than anything else.
+> >
+> > I'm stupid, at this point of the series it _would_ be possible to split
+> > the patch by subsystem.  Still not sure it would be actually an
+> advantage.
 >
-> On Mon, Aug 19, 2019 at 6:44 AM liuzhiwei <zhiwei_liu@c-sky.com> wrote:
-> >
-> >
-> > On 2019/8/17 =E4=B8=8A=E5=8D=881:29, Alistair Francis wrote:
-> > > On Thu, Aug 15, 2019 at 8:39 PM liuzhiwei<zhiwei_liu@c-sky.com>  wrot=
-e:
-> > >> Hi, Palmer
-> > >>
-> > >> When Michael Clark still was the maintainer of RISCV QEMU, he wrote =
-in the mail list, "the CLIC interrupt controller is under testing,
-> > >> and will be included in QEMU 3.1 or 3.2". It is pity that the CLIC i=
-s not in
-> > >> included even in QEMU 4.1.0.
-> > > I see that there is a CLIC branch available here:
-> > > https://github.com/riscv/riscv-qemu/pull/157
-> > >
-> > > It looks like all of the work is in a single commit
-> > > (https://github.com/riscv/riscv-qemu/pull/157/commits/206d9ac339feb9e=
-f2c325402a00f0f45f453d019)
-> > > and that most of the other commits in the PR have already made it int=
-o
-> > > master.
-> > >
-> > > Although the CLIC commit is very large it doesn't seem impossible to
-> > > manually pull out the CLIC bits and apply it onto master.
-> > >
-> > > Do you know the state of the CLIC model? If it's working it shouldn't
-> > > be too hard to rebase the work and get the code into mainline.
-> > >
-> > > Alistair
-> > >
-> > Hi,  Alistair
-> >
-> > In my opinion, the CLIC code almost works.
-> >
-> > Last year when my workmate ported an RTOS, I once read the CLIC specifi=
-cation and used the CLIC model code. It worked through  all the tests after=
- fixed two bugs. I also had sent the patch to Michael, but without response=
-(maybe a wrong email address).
-> >
-> > diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> > index 7bf6cbc..95d80ab 100644
-> > --- a/target/riscv/cpu_helper.c
-> > +++ b/target/riscv/cpu_helper.c
-> > @@ -505,6 +505,9 @@ static target_ulong riscv_intr_pc(CPURISCVState *en=
-v,
-> >       if (!(async || clic)) {
-> >           return tvec & ~0b11;
-> >       }
-> > +    if (clic) {
-> > +        cause &=3D 0x3ff;
-> > +    }
-> >
-> >       /* bits [1:0] encode mode; 0 =3D direct, 1 =3D vectored, 2 >=3D r=
-eserved */
-> >       switch (mode1) {
-> > @@ -645,6 +648,9 @@ void riscv_cpu_do_interrupt(CPUState *cs)
-> >           riscv_cpu_set_mode(env, PRV_M);
-> >       }
-> >
-> > +    if (clic) {
-> > +        env->exccode =3D 0;
-> > +    }
-> >       /* NOTE: it is not necessary to yield load reservations here. It =
-is only
-> >          necessary for an SC from "another hart" to cause a load reserv=
-ation
-> >          to be yielded. Refer to the memory consistency model section o=
-f the
-> >
-> > After that, the specification has updated and the code may changed. I d=
-idn't pull new code again.
-> >
-> > If the CLIC model may merged into the mainline, and no body maintain th=
-e code, I'd like to work on it, fixing the bugs and updating the code accor=
-ding to latest specification.
+> It might be easier to review if we split by symbol, one rename per patch
+> over
+> the entire code base.
 >
-> Yes please! We will be happy to merge it!
 >
-> If you would like to it would be great if you could update the code,
-> fix the bugs and then send patches to this list.
+> r~
 >
 
-Is the spec here?
-https://github.com/sifive/clic-spec/blob/master/clic.adoc
+Or if we review your script (I assume this wasn't a manual change). I'm not
+sure it's realistic to have review on the entire patch or patches.
 
-Which silicon is going to have this CLIC?
+Best regards,
+Edgar
 
-Regards,
-Bin
+>
+
+--000000000000ace486059083d1f5
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"auto"><div><br><br><div class=3D"gmail_quote"><div dir=3D"ltr" =
+class=3D"gmail_attr">On Mon, 19 Aug. 2019, 23:01 Richard Henderson, &lt;<a =
+href=3D"mailto:richard.henderson@linaro.org">richard.henderson@linaro.org</=
+a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0 =
+0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">On 8/19/19 11:29 AM, =
+Paolo Bonzini wrote:<br>
+&gt; On 19/08/19 20:28, Paolo Bonzini wrote:<br>
+&gt;&gt; On 16/08/19 12:12, Thomas Huth wrote:<br>
+&gt;&gt;&gt; This patch is *huge*, more than 800kB. It keeps being stuck in=
+ the the<br>
+&gt;&gt;&gt; filter of the qemu-s390x list each time you send it. Please:<b=
+r>
+&gt;&gt;&gt;<br>
+&gt;&gt;&gt; 1) Try to break it up in more digestible pieces, e.g. change o=
+nly one<br>
+&gt;&gt;&gt; subsystem at a time (this is also better reviewable by people =
+who are<br>
+&gt;&gt;&gt; interested in one area)<br>
+&gt;&gt;<br>
+&gt;&gt; This is not really possible, since the patch is basically a<br>
+&gt;&gt; search-and-replace.=C2=A0 You could perhaps use some magic<br>
+&gt;&gt; (&quot;DEVICE_MEMOP_ENDIAN&quot; or something like that) to allow =
+a split, but it<br>
+&gt;&gt; would introduce more complication than anything else.<br>
+&gt; <br>
+&gt; I&#39;m stupid, at this point of the series it _would_ be possible to =
+split<br>
+&gt; the patch by subsystem.=C2=A0 Still not sure it would be actually an a=
+dvantage.<br>
+<br>
+It might be easier to review if we split by symbol, one rename per patch ov=
+er<br>
+the entire code base.<br>
+<br>
+<br>
+r~<br></blockquote></div></div><div dir=3D"auto"><br></div><div dir=3D"auto=
+">Or if we review your script (I assume this wasn&#39;t a manual change). I=
+&#39;m not sure it&#39;s realistic to have review on the entire patch or pa=
+tches.</div><div dir=3D"auto"><br></div><div dir=3D"auto">Best regards,</di=
+v><div dir=3D"auto">Edgar=C2=A0</div><div dir=3D"auto"><div class=3D"gmail_=
+quote"><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-=
+left:1px #ccc solid;padding-left:1ex">
+</blockquote></div></div></div>
+
+--000000000000ace486059083d1f5--
 
