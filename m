@@ -1,69 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1i0vmq-0005ZO-FK
-	for mharc-qemu-riscv@gnu.org; Thu, 22 Aug 2019 18:42:32 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49785)
+	id 1i0voA-0006WB-7X
+	for mharc-qemu-riscv@gnu.org; Thu, 22 Aug 2019 18:43:54 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:50034)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <alistair23@gmail.com>) id 1i0vmn-0005Xm-Uc
- for qemu-riscv@nongnu.org; Thu, 22 Aug 2019 18:42:31 -0400
+ (envelope-from <alistair23@gmail.com>) id 1i0vo7-0006Tk-QO
+ for qemu-riscv@nongnu.org; Thu, 22 Aug 2019 18:43:52 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1i0vmm-00066Z-LE
- for qemu-riscv@nongnu.org; Thu, 22 Aug 2019 18:42:29 -0400
-Received: from mail-lj1-x243.google.com ([2a00:1450:4864:20::243]:42088)
+ (envelope-from <alistair23@gmail.com>) id 1i0vo6-00070P-KT
+ for qemu-riscv@nongnu.org; Thu, 22 Aug 2019 18:43:51 -0400
+Received: from mail-lf1-x142.google.com ([2a00:1450:4864:20::142]:47033)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1i0vmm-00066D-Dw; Thu, 22 Aug 2019 18:42:28 -0400
-Received: by mail-lj1-x243.google.com with SMTP id l14so7042557ljj.9;
- Thu, 22 Aug 2019 15:42:28 -0700 (PDT)
+ id 1i0vo4-0006v5-0Z; Thu, 22 Aug 2019 18:43:48 -0400
+Received: by mail-lf1-x142.google.com with SMTP id n19so5668170lfe.13;
+ Thu, 22 Aug 2019 15:43:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=pWkhXZk0KKhhkWWI9QaiGFst0vqmbdagqtqVp2rp5C4=;
- b=mCfIwrmCURPq/cMacLsNsxrTCxvCkOxfwBuWJRAr+9w+rE0iv+SlogWm96GBuEqk+Q
- kg999OPgBQxvo+cfMlIO2EdUPgYm3VLCEUTAgL+e2N9i8QmpCWTnVW+ICeHabjKfwUUq
- u3yHWEsnVgBL+yX03gsS6XwLnhalGHx9yL9jAmrWaUb/+V8pN6dJzpVUMgqq3bo0tAvy
- GeriYiOPGD7/nUozDcz/wNA1Bfb8Tw9uTTcexG7Gmq0wkxl5s1kRZYC+x8e7rqUxAH08
- Aew/dgc90cvEk++S5I2FlGt5J1ZptVHEuVE//gn3mnYbOp7vLu2idq6DtOnw65MuVRPv
- Dewg==
+ :cc; bh=wQ/wLYsLBZ4AJYC4nLOvYyuZenC/DykUOq/U3Ax8YYk=;
+ b=bGDERickFjBhvwt/oIMgqbeiCACZKpT07n6ifhRqEaPjFzNirDnBuDEWb1x2rKR9cR
+ Lvp9UpcHCYTvGlDuFdxNbNGOZARZB8/BG1soVXArv/WDPMRhuY1aitCZqiqAJrNSFiPv
+ CpR/qlOmgBMqDbfXXdGb2n8NHoDNRnAfmQ5aHg33vjXphFEeNxDeYNAknSZeoc/29ZP0
+ 2Qziyxk2ZhXuE/cYAzDqTFwnmzaIUyJsNrUyiX8QJ/dc2BVsUf+P+bNCBLMGrwCicryb
+ zLpQ9UwFENwlwHNoiA4CCer7AgufP4k3xMVJGBbOCliv3QO/bFBVmBuR9mr8+HBxDfkI
+ m2Og==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=pWkhXZk0KKhhkWWI9QaiGFst0vqmbdagqtqVp2rp5C4=;
- b=Sz9Okec2RoPiGXH0NnMZOugc2hWy7cdfSJFQHpLxsV/iEzzvVrD/sa4p607En8yHzh
- ABOgXi+APWxIdLkMeT4vwF19jYov4sQ6bfBUdL2kguZXWNVv2etF2hzZ51pV2rUBf+7j
- jpLJVhiIhiAYBI0LcvOoJMKwr0wCTVtcqgCh+lqH3CvMEOuxHO2XL3D9a8rBBB7FYkke
- 9RkZnn0nbcAFwXq+yCxw9/2PA64iqsQoJUo79x8hnjFkXR8+Btw/UqghhPfhistUOxGA
- 1IAqF7AL5tWlfi3OlvQTsIK8suCJqFm11eXmC+SFZnZ300Q4WQ3+f1BHDy0nY9Me+KSI
- z6ew==
-X-Gm-Message-State: APjAAAVgM+wTKB29GPpgJ9ISDzj5w5vZVsENxiIcyvg64yX6eo4+FPy4
- W21wrB4J8P7FnmJf7dX0RI91M57mxmVTdxrVOR4=
-X-Google-Smtp-Source: APXvYqwto8vjdd+neGRTSnds/0l9pgJazvqBmN1LhGufG2ajT4+THwjLar9qe0uTQfyLadGcK/L/2VYtaAqYYFtsSKY=
-X-Received: by 2002:a2e:a202:: with SMTP id h2mr956870ljm.146.1566513747343;
- Thu, 22 Aug 2019 15:42:27 -0700 (PDT)
+ :message-id:subject:to:cc;
+ bh=wQ/wLYsLBZ4AJYC4nLOvYyuZenC/DykUOq/U3Ax8YYk=;
+ b=iR/QZM6G/7+JHOnrYl5qffo+dRZEAZ/s2KpZrwkhMk6NLq0krBRau0yIdByxcyBEQH
+ 0W9Vwe6vEbjxfkErt5IKsAcc6N0PmL6cJjd/IBa7gsIS1M1px7r5btf/3hUnvhJVnE93
+ oZfKlEeh9ZorVyLDMZVTm8TpWiW/BrL3Zx/Bgdwam2WqCFeBgu6GBpSmsa66loVa5RgW
+ offSOAJmZtmS5LaZsmsqq6rdfvNK7ivA3DbVWXdRY4AajxDDr1OLNasIf+H78ZDAraTG
+ JDwIAGVRrbaTi/6mVmjewHpXwdZdmrpTn86xJIYmYkgHbC+JJnEg+VXNbQgjJq18MnfV
+ /oKg==
+X-Gm-Message-State: APjAAAWvDjIfTHNxEsZFFtwbx7Obj16VovyuZPHsiNZF2bIwaUl3dq98
+ 2ogE7CurWPK1FQ7xkgdli77Km75GzpmwY2xLYTh3iHp5
+X-Google-Smtp-Source: APXvYqwSJ74OrnCTrqrMplLgnAC991DDvUXnnSgREUCDC5DsyAI5f+zMHO6mUuaAlDhK0cCDfxy5AIxz4Ey6f5BO0hs=
+X-Received: by 2002:a19:6904:: with SMTP id e4mr828813lfc.156.1566513826599;
+ Thu, 22 Aug 2019 15:43:46 -0700 (PDT)
 MIME-Version: 1.0
-References: <0141541d-43ff-98d8-e9d4-4a2fdcfdcf36@c-sky.com>
- <CAKmqyKPr0V6acB2-Y+N1-aoj-5LSofwi=Jz=u6KFJN1fPUWjzA@mail.gmail.com>
- <2b741fb0-0f12-0f07-a516-9cc23abc0b6e@c-sky.com>
- <CAEiOBXU1SbdgJdsn_Cvny4=7NTxE+XQPrQQn6NevBxwB8Wox5w@mail.gmail.com>
- <8e288bee-75ee-5bd6-e085-d1679d1d1a1b@c-sky.com>
-In-Reply-To: <8e288bee-75ee-5bd6-e085-d1679d1d1a1b@c-sky.com>
+References: <1566191521-7820-1-git-send-email-bmeng.cn@gmail.com>
+ <1566191521-7820-28-git-send-email-bmeng.cn@gmail.com>
+In-Reply-To: <1566191521-7820-28-git-send-email-bmeng.cn@gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 22 Aug 2019 15:38:22 -0700
-Message-ID: <CAKmqyKOw-p=vGthSPwxKH9wOHTpv92gN8mPThM3ADGmp9zz=0Q@mail.gmail.com>
-To: liuzhiwei <zhiwei_liu@c-sky.com>
-Cc: Chih-Min Chao <chihmin.chao@sifive.com>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+Date: Thu, 22 Aug 2019 15:39:41 -0700
+Message-ID: <CAKmqyKOYZvNsEtH4Vzja1qkSKJyBMCCS_iONdOP90EDjbq7EGg@mail.gmail.com>
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>,
  Palmer Dabbelt <palmer@sifive.com>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Alistair Francis <Alistair.Francis@wdc.com>
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::243
-Subject: Re: [Qemu-riscv] [Qemu-devel] RISCV: when will the CLIC be ready?
+X-Received-From: 2a00:1450:4864:20::142
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v4 27/28] riscv: sifive_u:
+ Remove handcrafted clock nodes for UART and ethernet
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -75,131 +68,99 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Aug 2019 22:42:31 -0000
+X-List-Received-Date: Thu, 22 Aug 2019 22:43:53 -0000
 
-On Tue, Aug 20, 2019 at 8:38 PM liuzhiwei <zhiwei_liu@c-sky.com> wrote:
+On Sun, Aug 18, 2019 at 10:31 PM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
+> In the past we did not have a model for PRCI, hence two handcrafted
+> clock nodes ("/soc/ethclk" and "/soc/uartclk") were created for the
+> purpose of supplying hard-coded clock frequencies. But now since we
+> have added the PRCI support in QEMU, we don't need them any more.
 >
-> On 2019/8/20 =E4=B8=8A=E5=8D=8812:38, Chih-Min Chao wrote:
->
->
->
-> On Mon, Aug 19, 2019 at 9:47 PM liuzhiwei <zhiwei_liu@c-sky.com> wrote:
->>
->>
->> On 2019/8/17 =E4=B8=8A=E5=8D=881:29, Alistair Francis wrote:
->> > On Thu, Aug 15, 2019 at 8:39 PM liuzhiwei<zhiwei_liu@c-sky.com>  wrote=
-:
->> >> Hi, Palmer
->> >>
->> >> When Michael Clark still was the maintainer of RISCV QEMU, he wrote i=
-n the mail list, "the CLIC interrupt controller is under testing,
->> >> and will be included in QEMU 3.1 or 3.2". It is pity that the CLIC is=
- not in
->> >> included even in QEMU 4.1.0.
->> > I see that there is a CLIC branch available here:
->> > https://github.com/riscv/riscv-qemu/pull/157
->> >
->> > It looks like all of the work is in a single commit
->> > (https://github.com/riscv/riscv-qemu/pull/157/commits/206d9ac339feb9ef=
-2c325402a00f0f45f453d019)
->> > and that most of the other commits in the PR have already made it into
->> > master.
->> >
->> > Although the CLIC commit is very large it doesn't seem impossible to
->> > manually pull out the CLIC bits and apply it onto master.
->> >
->> > Do you know the state of the CLIC model? If it's working it shouldn't
->> > be too hard to rebase the work and get the code into mainline.
->> >
->> > Alistair
->> >
->> Hi,  Alistair
->>
->> In my opinion, the CLIC code almost works.
->>
->> Last year when my workmate ported an RTOS, I once read the CLIC specific=
-ation and used the CLIC model code. It worked through  all the tests after =
-fixed two bugs. I also had sent the patch to Michael, but without response(=
-maybe a wrong email address).
->>
->> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
->> index 7bf6cbc..95d80ab 100644
->> --- a/target/riscv/cpu_helper.c
->> +++ b/target/riscv/cpu_helper.c
->> @@ -505,6 +505,9 @@ static target_ulong riscv_intr_pc(CPURISCVState *env=
-,
->>       if (!(async || clic)) {
->>           return tvec & ~0b11;
->>       }
->> +    if (clic) {
->> +        cause &=3D 0x3ff;
->> +    }
->>
->>       /* bits [1:0] encode mode; 0 =3D direct, 1 =3D vectored, 2 >=3D re=
-served */
->>       switch (mode1) {
->> @@ -645,6 +648,9 @@ void riscv_cpu_do_interrupt(CPUState *cs)
->>           riscv_cpu_set_mode(env, PRV_M);
->>       }
->>
->> +    if (clic) {
->> +        env->exccode =3D 0;
->> +    }
->>       /* NOTE: it is not necessary to yield load reservations here. It i=
-s only
->>          necessary for an SC from "another hart" to cause a load reserva=
-tion
->>          to be yielded. Refer to the memory consistency model section of=
- the
->>
->> After that, the specification has updated and the code may changed. I di=
-dn't pull new code again.
->>
->> If the CLIC model may merged into the mainline, and no body maintain the=
- code, I'd like to work on it, fixing the bugs and updating the code accord=
-ing to latest specification.
->>
->> Best Regards,
->> Zhiwei
->>
->> >> As we have cpus using CLIC, I have to use the out of tree qemu code i=
-n SIFIVE
->> >> a long time. Could you tell me when it will be upstreamed?
->> >>
->> >> Best Regards
->> >> Zhiwei
->> >>
->>
->
-> Hi Zhiwei,
->
-> I think what Alistair point out is the latest clic version (or https://gi=
-thub.com/riscv/riscv-qemu/tree/riscv-qemu-3.1).  The two versions, on pull =
-request and 3.1 branch, should be similar.
->
-> As far as I know, there is no concrete plan on CLIC patch in short term.
-> It is good to know that the clic patch has been run with real RTOS.
-> It is also great if you could update the implementation to latest spec an=
-d send the patch again.
->
-> chihmin
->
-> Hi chihmin,
->
-> Thanks for your reminding and approval. I will pull the latest clic versi=
-on code and send the patch about two or three weeks later.
+> Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
 
-Great! I'm glad to see more contributions!
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 >
-> The RTOS is Rhino,  which is the kernel of AliOS-Things(https://github.co=
-m/alibaba/AliOS-Things).
+> ---
 >
-> It is also the kernel of YOC(https://cop.c-sky.com).
+> Changes in v4:
+> - new patch to remove handcrafted clock nodes for UART and ethernet
 >
-> Best Regards
-> Zhiwei
+> Changes in v3: None
+> Changes in v2: None
+>
+>  hw/riscv/sifive_u.c         | 24 +-----------------------
+>  include/hw/riscv/sifive_u.h |  3 +--
+>  2 files changed, 2 insertions(+), 25 deletions(-)
+>
+> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+> index 7a370e9..7d9fb3a 100644
+> --- a/hw/riscv/sifive_u.c
+> +++ b/hw/riscv/sifive_u.c
+> @@ -89,8 +89,7 @@ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
+>      uint32_t *cells;
+>      char *nodename;
+>      char ethclk_names[] = "pclk\0hclk";
+> -    uint32_t plic_phandle, prci_phandle, ethclk_phandle, phandle = 1;
+> -    uint32_t uartclk_phandle;
+> +    uint32_t plic_phandle, prci_phandle, phandle = 1;
+>      uint32_t hfclk_phandle, rtcclk_phandle, phy_phandle;
+>
+>      fdt = s->fdt = create_device_tree(&s->fdt_size);
+> @@ -250,17 +249,6 @@ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
+>      g_free(cells);
+>      g_free(nodename);
+>
+> -    ethclk_phandle = phandle++;
+> -    nodename = g_strdup_printf("/soc/ethclk");
+> -    qemu_fdt_add_subnode(fdt, nodename);
+> -    qemu_fdt_setprop_string(fdt, nodename, "compatible", "fixed-clock");
+> -    qemu_fdt_setprop_cell(fdt, nodename, "#clock-cells", 0x0);
+> -    qemu_fdt_setprop_cell(fdt, nodename, "clock-frequency",
+> -        SIFIVE_U_GEM_CLOCK_FREQ);
+> -    qemu_fdt_setprop_cell(fdt, nodename, "phandle", ethclk_phandle);
+> -    ethclk_phandle = qemu_fdt_get_phandle(fdt, nodename);
+> -    g_free(nodename);
+> -
+>      phy_phandle = phandle++;
+>      nodename = g_strdup_printf("/soc/ethernet@%lx",
+>          (long)memmap[SIFIVE_U_GEM].base);
+> @@ -292,16 +280,6 @@ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
+>      qemu_fdt_setprop_cell(fdt, nodename, "reg", 0x0);
+>      g_free(nodename);
+>
+> -    uartclk_phandle = phandle++;
+> -    nodename = g_strdup_printf("/soc/uartclk");
+> -    qemu_fdt_add_subnode(fdt, nodename);
+> -    qemu_fdt_setprop_string(fdt, nodename, "compatible", "fixed-clock");
+> -    qemu_fdt_setprop_cell(fdt, nodename, "#clock-cells", 0x0);
+> -    qemu_fdt_setprop_cell(fdt, nodename, "clock-frequency", 3686400);
+> -    qemu_fdt_setprop_cell(fdt, nodename, "phandle", uartclk_phandle);
+> -    uartclk_phandle = qemu_fdt_get_phandle(fdt, nodename);
+> -    g_free(nodename);
+> -
+>      nodename = g_strdup_printf("/soc/serial@%lx",
+>          (long)memmap[SIFIVE_U_UART0].base);
+>      qemu_fdt_add_subnode(fdt, nodename);
+> diff --git a/include/hw/riscv/sifive_u.h b/include/hw/riscv/sifive_u.h
+> index cba29e1..8880f9c 100644
+> --- a/include/hw/riscv/sifive_u.h
+> +++ b/include/hw/riscv/sifive_u.h
+> @@ -72,8 +72,7 @@ enum {
+>  enum {
+>      SIFIVE_U_CLOCK_FREQ = 1000000000,
+>      SIFIVE_U_HFCLK_FREQ = 33333333,
+> -    SIFIVE_U_RTCCLK_FREQ = 1000000,
+> -    SIFIVE_U_GEM_CLOCK_FREQ = 125000000
+> +    SIFIVE_U_RTCCLK_FREQ = 1000000
+>  };
+>
+>  #define SIFIVE_U_MANAGEMENT_CPU_COUNT   1
+> --
+> 2.7.4
+>
+>
 
