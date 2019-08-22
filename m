@@ -1,44 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1i0cKn-0003xy-EN
-	for mharc-qemu-riscv@gnu.org; Wed, 21 Aug 2019 21:56:17 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:36567)
+	id 1i0vm2-0004hL-6P
+	for mharc-qemu-riscv@gnu.org; Thu, 22 Aug 2019 18:41:42 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49671)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <zhiwei_liu@c-sky.com>) id 1i0cKj-0003sz-Gc
- for qemu-riscv@nongnu.org; Wed, 21 Aug 2019 21:56:14 -0400
+ (envelope-from <alistair23@gmail.com>) id 1i0vly-0004XU-IB
+ for qemu-riscv@nongnu.org; Thu, 22 Aug 2019 18:41:40 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <zhiwei_liu@c-sky.com>) id 1i0cKh-0001NP-TF
- for qemu-riscv@nongnu.org; Wed, 21 Aug 2019 21:56:13 -0400
-Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:39139)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1i0cKe-0001Jp-92; Wed, 21 Aug 2019 21:56:08 -0400
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07441657|-1; CH=green;
- DM=CONTINUE|CONTINUE|true|0.249713-0.0208414-0.729446; FP=0|0|0|0|0|-1|-1|-1;
- HT=e02c03275; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS; RN=10; RT=10; SR=0;
- TI=SMTPD_---.FG9x9hN_1566438956; 
-Received: from 172.16.28.187(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.FG9x9hN_1566438956)
- by smtp.aliyun-inc.com(10.147.42.253);
- Thu, 22 Aug 2019 09:56:01 +0800
-To: Palmer Dabbelt <palmer@sifive.com>, alistair23@gmail.com,
- Jonathan Behrens <fintelia@gmail.com>
-Cc: Peter Maydell <peter.maydell@linaro.org>, aleksandar.m.mail@gmail.com,
- qemu-riscv@nongnu.org, sagark@eecs.berkeley.edu,
- bastian@mail.uni-paderborn.de, qemu-devel@nongnu.org,
- Alistair Francis <Alistair.Francis@wdc.com>
-References: <mhng-04cdd93a-df3e-4de0-b1f5-0365f2be0fab@palmer-si-x1c4>
-From: liuzhiwei <zhiwei_liu@c-sky.com>
-Message-ID: <96d32c8a-a4a2-9e40-d5be-97a0617703ac@c-sky.com>
-Date: Thu, 22 Aug 2019 09:50:58 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.2.1
+ (envelope-from <alistair23@gmail.com>) id 1i0vlw-0005kp-IL
+ for qemu-riscv@nongnu.org; Thu, 22 Aug 2019 18:41:38 -0400
+Received: from mail-lj1-x243.google.com ([2a00:1450:4864:20::243]:40389)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <alistair23@gmail.com>)
+ id 1i0vlv-0005fk-S1; Thu, 22 Aug 2019 18:41:36 -0400
+Received: by mail-lj1-x243.google.com with SMTP id e27so7041684ljb.7;
+ Thu, 22 Aug 2019 15:41:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=k+7/+TSz1c2Nzi76RUXcfoz8jfFx9QVnpvMtgMDZcSE=;
+ b=IEm5RHs2+DL+efy1MJCnasox8oAC1R0ihbGA6+NfKijVYXEzsRG8Io+AtmjUGi6dmp
+ 1/zjISxl7ou5e8+UeOwUeBLpbfPjDvVUG6Wf+fPSxbcSOnpg4NOpEQ2Qbxzl89CM1/B1
+ jqRusBNPaYBm4bMU/uuU/mURaKNo/paSHwpzjoj9U/AUUOHT18z/afNun089adxO8UiR
+ Qx5LgSuhXLsGbKLD/PFuUpAokLZh68+CwL7HY0UDRgqlDtrjrT/5HLk1gy6hTFEoofVs
+ N8OD7lnr82GM66dkVXWy5zDB6N+dEceMkG1hl1I/7m152EZiQwTbg3SvKpRgSNHoTPKO
+ wtHQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=k+7/+TSz1c2Nzi76RUXcfoz8jfFx9QVnpvMtgMDZcSE=;
+ b=QsiqIzW7ttWtrG88sVt/MUFRAXoQWuYPwhnYpSGQ8u/8BPdDg/5ZJyIcwqQJwaigBb
+ 98rXdpjrEVna1TzhitgoCKdXONiRfhxUnS/gcICvUINXeCtGXMGeKALHhbn38mVVJpIa
+ 6j5LGfGmxOo+LGMo84D/9pfuyn/28zAZpMzr/C4UAIN4DqgqKz3C29yZmBqtaMBPH6xr
+ 81+T6CvuXoBRvsdUqCeFE5La2nLNLfn6wW7rYh2/gKwYT895849cD5lU+KvaYinDEGHl
+ ODVhcZLlsqiMAmWhAFI49ft8oRpfGJMmq3lRvaUtyywaP5QpwYE923/t75cQMxyy3+jK
+ ZjgQ==
+X-Gm-Message-State: APjAAAVi7VftMyGbqiz7xwSCDyhWAHIv9EOxV2Dg+Io1cQRo0o+Lob8i
+ 87hSaKooAZCfvXtlw4KR0lUjaiBaUcZcbHeadt4=
+X-Google-Smtp-Source: APXvYqzFhGJMl0uGarsG2R7wvkqfahSBVRJiK5O0dv+IFrfmY7fwTfKd34cWq+ZjXr6QwzlXSfN4DR16sM2fC7xam0A=
+X-Received: by 2002:a2e:8102:: with SMTP id d2mr965696ljg.58.1566513680994;
+ Thu, 22 Aug 2019 15:41:20 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <mhng-04cdd93a-df3e-4de0-b1f5-0365f2be0fab@palmer-si-x1c4>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 3.x [generic]
-X-Received-From: 121.197.200.217
+References: <mhng-04cdd93a-df3e-4de0-b1f5-0365f2be0fab@palmer-si-x1c4>
+ <96d32c8a-a4a2-9e40-d5be-97a0617703ac@c-sky.com>
+In-Reply-To: <96d32c8a-a4a2-9e40-d5be-97a0617703ac@c-sky.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Thu, 22 Aug 2019 15:37:15 -0700
+Message-ID: <CAKmqyKNZsmN6WmHLH8kL85oGYe6eX_pPmUXqUMr8Avhs--TYbQ@mail.gmail.com>
+To: liuzhiwei <zhiwei_liu@c-sky.com>
+Cc: Palmer Dabbelt <palmer@sifive.com>, Jonathan Behrens <fintelia@gmail.com>, 
+ Peter Maydell <peter.maydell@linaro.org>, 
+ Aleksandar Markovic <aleksandar.m.mail@gmail.com>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, bastian@mail.uni-paderborn.de, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Alistair Francis <Alistair.Francis@wdc.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2a00:1450:4864:20::243
 Subject: Re: [Qemu-riscv] [Qemu-devel] RISC-V: Vector && DSP Extension
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -51,122 +72,135 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Aug 2019 01:56:15 -0000
+X-List-Received-Date: Thu, 22 Aug 2019 22:41:40 -0000
 
-
-On 2019/8/22 上午3:31, Palmer Dabbelt wrote:
-> On Thu, 15 Aug 2019 14:37:52 PDT (-0700), alistair23@gmail.com wrote:
->> On Thu, Aug 15, 2019 at 2:07 AM Peter Maydell 
->> <peter.maydell@linaro.org> wrote:
->>>
->>> On Thu, 15 Aug 2019 at 09:53, Aleksandar Markovic
->>> <aleksandar.m.mail@gmail.com> wrote:
->>> >
->>> > > We can accept draft
->>> > > extensions in QEMU as long as they are disabled by default.
->>>
->>> > Hi, Alistair, Palmer,
->>> >
->>> > Is this an official stance of QEMU community, or perhaps Alistair's
->>> > personal judgement, or maybe a rule within risv subcomunity?
->>>
->>> Alistair asked on a previous thread; my view was:
->>> https://lists.gnu.org/archive/html/qemu-devel/2019-07/msg03364.html
->>> and nobody else spoke up disagreeing (summary: should at least be
->>> disabled-by-default and only enabled by setting an explicit
->>> property whose name should start with the 'x-' prefix).
->>
->> Agreed!
->>
->>>
->>> In general QEMU does sometimes introduce experimental extensions
->>> (we've had them in the block layer, for example) and so the 'x-'
->>> property to enable them is a reasonably established convention.
->>> I think it's a reasonable compromise to allow this sort of work
->>> to start and not have to live out-of-tree for a long time, without
->>> confusing users or getting into a situation where some QEMU
->>> versions behave differently or to obsolete drafts of a spec
->>> without it being clear from the command line that experimental
->>> extensions are being enabled.
->>>
->>> There is also an element of "submaintainer judgement" to be applied
->>> here -- upstream is probably not the place for a draft extension
->>> to be implemented if it is:
->>>  * still fast moving or subject to major changes of design direction
->>>  * major changes to the codebase (especially if it requires
->>>    changes to core code) that might later need to be redone
->>>    entirely differently
->>>  * still experimental
->>
->> Yep, agreed. For RISC-V I think this would extend to only allowing
->> extensions that have backing from the foundation and are under active
->> discussion.
+On Wed, Aug 21, 2019 at 6:56 PM liuzhiwei <zhiwei_liu@c-sky.com> wrote:
 >
-> My general philosophy here is that we'll take anything written down in 
-> an official RISC-V ISA manual (ie, the ones actually released by the 
-> foundation).  This provides a single source of truth for what an 
-> extension name / version means, which is important to avoid 
-> confusion.  If it's a ratified extension then I see no reason not to 
-> support it on my end.  For frozen extensions we should probably just 
-> wait the 45 days until they go up for a ratification vote, but I'd be 
-> happy to start reviewing patches then (or earlier :)).
 >
-> If the spec is a draft in the ISA manual then we need to worry about 
-> the support burden, which I don't have a fixed criteria for -- 
-> generally there shouldn't be issues here, but early drafts can be in a 
-> state where they're going to change extensively and are unlikely to be 
-> used by anyone.  There's also the question of "what is an official 
-> release of a draft specification?".
-> That's a bit awkward right now: the current ratified ISA manual 
-> contains version 0.3 of the hypervisor extension, but I just talked to 
-> Andrew and the plan is to remove the draft extensions from the 
-> ratified manuals because these drafts are old and the official manuals 
-> update slowly.  For now I guess we'll need an an-hoc way of 
-> determining if a draft extension has been officially versioned or not, 
-> which is a bit of a headache.
+> On 2019/8/22 =E4=B8=8A=E5=8D=883:31, Palmer Dabbelt wrote:
+> > On Thu, 15 Aug 2019 14:37:52 PDT (-0700), alistair23@gmail.com wrote:
+> >> On Thu, Aug 15, 2019 at 2:07 AM Peter Maydell
+> >> <peter.maydell@linaro.org> wrote:
+> >>>
+> >>> On Thu, 15 Aug 2019 at 09:53, Aleksandar Markovic
+> >>> <aleksandar.m.mail@gmail.com> wrote:
+> >>> >
+> >>> > > We can accept draft
+> >>> > > extensions in QEMU as long as they are disabled by default.
+> >>>
+> >>> > Hi, Alistair, Palmer,
+> >>> >
+> >>> > Is this an official stance of QEMU community, or perhaps Alistair's
+> >>> > personal judgement, or maybe a rule within risv subcomunity?
+> >>>
+> >>> Alistair asked on a previous thread; my view was:
+> >>> https://lists.gnu.org/archive/html/qemu-devel/2019-07/msg03364.html
+> >>> and nobody else spoke up disagreeing (summary: should at least be
+> >>> disabled-by-default and only enabled by setting an explicit
+> >>> property whose name should start with the 'x-' prefix).
+> >>
+> >> Agreed!
+> >>
+> >>>
+> >>> In general QEMU does sometimes introduce experimental extensions
+> >>> (we've had them in the block layer, for example) and so the 'x-'
+> >>> property to enable them is a reasonably established convention.
+> >>> I think it's a reasonable compromise to allow this sort of work
+> >>> to start and not have to live out-of-tree for a long time, without
+> >>> confusing users or getting into a situation where some QEMU
+> >>> versions behave differently or to obsolete drafts of a spec
+> >>> without it being clear from the command line that experimental
+> >>> extensions are being enabled.
+> >>>
+> >>> There is also an element of "submaintainer judgement" to be applied
+> >>> here -- upstream is probably not the place for a draft extension
+> >>> to be implemented if it is:
+> >>>  * still fast moving or subject to major changes of design direction
+> >>>  * major changes to the codebase (especially if it requires
+> >>>    changes to core code) that might later need to be redone
+> >>>    entirely differently
+> >>>  * still experimental
+> >>
+> >> Yep, agreed. For RISC-V I think this would extend to only allowing
+> >> extensions that have backing from the foundation and are under active
+> >> discussion.
+> >
+> > My general philosophy here is that we'll take anything written down in
+> > an official RISC-V ISA manual (ie, the ones actually released by the
+> > foundation).  This provides a single source of truth for what an
+> > extension name / version means, which is important to avoid
+> > confusion.  If it's a ratified extension then I see no reason not to
+> > support it on my end.  For frozen extensions we should probably just
+> > wait the 45 days until they go up for a ratification vote, but I'd be
+> > happy to start reviewing patches then (or earlier :)).
+> >
+> > If the spec is a draft in the ISA manual then we need to worry about
+> > the support burden, which I don't have a fixed criteria for --
+> > generally there shouldn't be issues here, but early drafts can be in a
+> > state where they're going to change extensively and are unlikely to be
+> > used by anyone.  There's also the question of "what is an official
+> > release of a draft specification?".
+> > That's a bit awkward right now: the current ratified ISA manual
+> > contains version 0.3 of the hypervisor extension, but I just talked to
+> > Andrew and the plan is to remove the draft extensions from the
+> > ratified manuals because these drafts are old and the official manuals
+> > update slowly.  For now I guess we'll need an an-hoc way of
+> > determining if a draft extension has been officially versioned or not,
+> > which is a bit of a headache.
+> >
+> > We already have examples of supporting draft extensions, including
+> > priv-1.9.1.  This does cause some pain for us on the QEMU side (CSR
+> > bits have different semantics between the specs), but there's 1.9.1
+> > hardware out there and the port continues to be useful so I'd be in
+> > favor of keeping it around for now.  I suppose there is an implicit
+> > risk that draft extensions will be deprecated, but the "x-" prefix,
+> > draft status, and long deprecation period should be sufficient to
+> > inform users of the risk.  I wouldn't be opposed to adding a "this is
+> > a draft ISA" warning, but I feel like it might be a bit overkill.
+> >
+> Hi, Palmer
 >
-> We already have examples of supporting draft extensions, including 
-> priv-1.9.1.  This does cause some pain for us on the QEMU side (CSR 
-> bits have different semantics between the specs), but there's 1.9.1 
-> hardware out there and the port continues to be useful so I'd be in 
-> favor of keeping it around for now.  I suppose there is an implicit 
-> risk that draft extensions will be deprecated, but the "x-" prefix, 
-> draft status, and long deprecation period should be sufficient to 
-> inform users of the risk.  I wouldn't be opposed to adding a "this is 
-> a draft ISA" warning, but I feel like it might be a bit overkill.
+> Maybe it is the headache of open source hardware. Everyone cooperates to
+> build a better architecture.
 >
-Hi, Palmer
-
-Maybe it is the headache of open source hardware. Everyone cooperates to 
-build a better architecture.
-
-In my opinion, we should focus on the future. The code in QEMU mainline 
-should evolve to the  ratified extension step by step, and only support 
-the best extension at last.
-
-At that time,  even many hardwares just support  the deprecated draft 
-extension,  the draft codes should be in the wild and maintained by the 
-hardware manufactures.
-
-But before that,  it is better to  have a draft implementation. So that 
-We can work step by step to accelerate the coming of the ratified 
-extension.
-
-Even at last draft extension implementation are deprecated, they are not 
-meaningless. The manufactures may use  the  history commit to support 
-their hardwares that
-
-only support drafted extension.
-
-Best Regards,
-
-Zhiwei
-
->>
->> Alistair
->>
->>>
->>> thanks
->>> -- PMM
+> In my opinion, we should focus on the future. The code in QEMU mainline
+> should evolve to the  ratified extension step by step, and only support
+> the best extension at last.
 >
+> At that time,  even many hardwares just support  the deprecated draft
+> extension,  the draft codes should be in the wild and maintained by the
+> hardware manufactures.
+>
+> But before that,  it is better to  have a draft implementation. So that
+> We can work step by step to accelerate the coming of the ratified
+> extension.
+>
+> Even at last draft extension implementation are deprecated, they are not
+> meaningless. The manufactures may use  the  history commit to support
+> their hardwares that
+>
+> only support drafted extension.
+
+Overall I agree with Palmer that we should accept all extensions in
+the RISC-V foundations ISA manual once the extension has reached some
+level of maturity.
+
+I think it then makes sense to only keep the latest version of these
+drafts until they are ratified. At that point we do have to support
+the ratified version for longer.
+
+Alistair
+
+>
+> Best Regards,
+>
+> Zhiwei
+>
+> >>
+> >> Alistair
+> >>
+> >>>
+> >>> thanks
+> >>> -- PMM
+> >
 
