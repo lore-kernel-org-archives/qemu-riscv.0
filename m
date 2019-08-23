@@ -1,63 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1i1BnM-00088Z-QV
-	for mharc-qemu-riscv@gnu.org; Fri, 23 Aug 2019 11:48:08 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:36775)
+	id 1i1DNH-0004ce-G0
+	for mharc-qemu-riscv@gnu.org; Fri, 23 Aug 2019 13:29:19 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58390)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <alistair23@gmail.com>) id 1i1BnK-00085n-C3
- for qemu-riscv@nongnu.org; Fri, 23 Aug 2019 11:48:07 -0400
+ (envelope-from <alistair23@gmail.com>) id 1i1DND-0004Uz-9G
+ for qemu-riscv@nongnu.org; Fri, 23 Aug 2019 13:29:17 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1i1BnJ-0005NW-3s
- for qemu-riscv@nongnu.org; Fri, 23 Aug 2019 11:48:06 -0400
-Received: from mail-lj1-x242.google.com ([2a00:1450:4864:20::242]:44512)
+ (envelope-from <alistair23@gmail.com>) id 1i1DN9-0004pg-LI
+ for qemu-riscv@nongnu.org; Fri, 23 Aug 2019 13:29:15 -0400
+Received: from mail-lj1-x242.google.com ([2a00:1450:4864:20::242]:40048)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1i1BnH-0005L8-1l; Fri, 23 Aug 2019 11:48:03 -0400
-Received: by mail-lj1-x242.google.com with SMTP id e24so9284288ljg.11;
- Fri, 23 Aug 2019 08:48:02 -0700 (PDT)
+ id 1i1DN4-0004mY-54; Fri, 23 Aug 2019 13:29:06 -0400
+Received: by mail-lj1-x242.google.com with SMTP id e27so9561760ljb.7;
+ Fri, 23 Aug 2019 10:29:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=h8BKNZUfrDowpntTpQTXLqsa0BM3N7JYQ28TeZBCjeI=;
- b=QKm5F/wEQXnM7pkzKpFzYOPF0HSJaGP0JBUGwrk3ZZTOcVM00QM7CCyqgXwIRYlFIl
- cVHIc83jAn/6fWS/ooALZVCYMYAj8qB59BfnoAPfgQ74+I2sJQl92Bq1Dkb4xHhNjWoK
- t8cSWHo9xl27BEWex8jiTX+zlT/WiBCRxoYuwuQOftdcB3+KJSJ/g3HjOfx+lWtUZThD
- IB7OdrIuPQTBdF745qgE7F4za13JSHTKsesye1m5953qcFoT79zSPt6rbx+qn7yrb/vv
- 5qA3QWFPGIVrubyzw+wwC5LLHjf20qp4Pg6rPGP2II/MygO9qR4TyggsT614RXBDAVUI
- jR1A==
+ :cc; bh=2VU+kxBlU2QQUUQywu8aSQ3y8DCic03Vze9lrurFUrA=;
+ b=NcLDbAcihAYDEExMdqxhrOajkIy3ROpXsB8b689FXsoS66oFo4T70b+AFPkiNPfVF6
+ 4fkPPVA6a579A5JOZ1wBhd0jM+POyTYd7w+5g4qIEjBy1J53drBYhicmSmxvVbLMc/hb
+ omK4GDwQkjcVAj8Vg0/oeIR4upelm/renJpZOTfBoJwEM8o2vS8b0iQ+84fH8vs9dhoF
+ RqG25waj167NB2xR1uaxg1ru1T0nb1PZIG8YK02Lo2WCuTq7HqfxlLmWR/YJhdCFiqrI
+ 5GvNCGPNTCw4h0i0jK8lFkFweAVs1t15vXK7U2GbEQwwf4CxbgYjrA6l9c7Y0MP1JMb8
+ XYrQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=h8BKNZUfrDowpntTpQTXLqsa0BM3N7JYQ28TeZBCjeI=;
- b=BO1R2MC4edxBPiRBpg/z89jhKYk9OFNOxDij1VwA6VpXA3QLPb3dRjyP+ci+9/JiKM
- MQQdk7K63A+vv45y7l41FarIZ19MvzoDSPkQCdxakRB4c1dBhQoHWoop8qqXBr2qVeAe
- xXZYu9FoGu522vqnqFWrQtaKKJOcMyvfV+IIgzeCUZn7BYHWLFxF5l4VvTF0ZRdpuno3
- 9xAiN2QJfkMEXGKYTsnRXBu1rxKQ+1Jfbd4vvPwSutU9KkwgG30MVNYpgo3D3L2JAjun
- DPZJNrV5WQH8ilrzga7Qg4Bz5KzwS1VSszzC4/a5mirq1E0dJz3sA/EjdySoRu5XCpgl
- cLwg==
-X-Gm-Message-State: APjAAAXsiTOD623GOMV3RUDWFA8LTdDub1yiS91d/XqUAN3p+RZOnRqX
- 9lk5ELpuVBNePy21aLYFg1cvVC+zKInEcbtOxZM=
-X-Google-Smtp-Source: APXvYqzrOg4Ei8bH8BwOhKKhofZpesonZpwB1PztffYihpILOaJSWXzFO14q+62fFaI8zGBG+pws8VsTTKe8XD1ux1Y=
-X-Received: by 2002:a2e:7c0b:: with SMTP id x11mr3401058ljc.85.1566575281417; 
- Fri, 23 Aug 2019 08:48:01 -0700 (PDT)
+ bh=2VU+kxBlU2QQUUQywu8aSQ3y8DCic03Vze9lrurFUrA=;
+ b=NfdMR9xGfU3aZwghQd7JBzc8rzGlnA1A1KuTddiVAMfGMCZS5gsrq9QzqLp9K8v7hM
+ H/xikcNMW7vcN+juJn0bumg6308MEouCQHzpOLxnDuNz3USeqeTArVnNtFYW8LJlfu6d
+ 0CrUSu1qNM03yRCsFu72+PVnmGkSOQP6kbEkoKPWH0zYsCoB1eTCjzv1kX0xyL24ep11
+ fui2QXIp6ob2FOZKoy3uInxsEZIdOt9ktGE8yvpUzxZPCXj6/gOok8ElZ2lCzWSEcGNV
+ 1ih03hJUIkGFwYLkfZ90Zcbv1blAvJTRvFeseeDIGAP7geoeJKyhHulMlyvHl7snFSte
+ N3Sw==
+X-Gm-Message-State: APjAAAWkCYDn+lE7+iy7LD+0psh1XW46x/NQj3sxhBo/Dn6wvUYkgtzb
+ GGqdWEJJ0MtFPQGDU8bE23wsdFObnzgNYNw5aSw=
+X-Google-Smtp-Source: APXvYqw9/1C/Mn4UuTSAJvETszqx0hh14/Q2CypEiNsNBQJi8DHZ9KO50qWbLdTkJWlfziOrw9P2J0Ml8Jl7RpauTYE=
+X-Received: by 2002:a2e:8102:: with SMTP id d2mr3673659ljg.58.1566581344444;
+ Fri, 23 Aug 2019 10:29:04 -0700 (PDT)
 MIME-Version: 1.0
-References: <cover.1566573576.git.alistair.francis@wdc.com>
- <066a2c520c38b0c175c052d6a3385d5661764833.1566573576.git.alistair.francis@wdc.com>
- <CAFEAcA8G8ufziwwLLWo6BQZtAHWjzt_3XMMveuMMxknKSgChNA@mail.gmail.com>
-In-Reply-To: <CAFEAcA8G8ufziwwLLWo6BQZtAHWjzt_3XMMveuMMxknKSgChNA@mail.gmail.com>
+References: <1566537069-22741-1-git-send-email-bmeng.cn@gmail.com>
+In-Reply-To: <1566537069-22741-1-git-send-email-bmeng.cn@gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 23 Aug 2019 08:43:55 -0700
-Message-ID: <CAKmqyKN__eTBhJs-5fqB1zL0ZZaS017tJ3Khc8Afoej9aFCSqA@mail.gmail.com>
-To: Peter Maydell <peter.maydell@linaro.org>
-Cc: Alistair Francis <alistair.francis@wdc.com>,
- QEMU Developers <qemu-devel@nongnu.org>, 
- "open list:RISC-V" <qemu-riscv@nongnu.org>, Palmer Dabbelt <palmer@sifive.com>,
- Bin Meng <bmeng.cn@gmail.com>
+Date: Fri, 23 Aug 2019 10:24:58 -0700
+Message-ID: <CAKmqyKOnEtyzW-=Lpe3kWPkQ2OwwPShtC7E=wmaUGRmns97D2w@mail.gmail.com>
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>,
+ Palmer Dabbelt <palmer@sifive.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
 X-Received-From: 2a00:1450:4864:20::242
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v4 7/7] target/riscv: Use
- TB_FLAGS_MSTATUS_FS for floating point
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v5 00/30] riscv: sifive_u:
+ Improve the emulation fidelity of sifive_u machine
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -69,44 +67,199 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Aug 2019 15:48:08 -0000
+X-List-Received-Date: Fri, 23 Aug 2019 17:29:18 -0000
 
-On Fri, Aug 23, 2019 at 8:44 AM Peter Maydell <peter.maydell@linaro.org> wrote:
+On Thu, Aug 22, 2019 at 10:15 PM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
-> On Fri, 23 Aug 2019 at 16:37, Alistair Francis <alistair.francis@wdc.com> wrote:
-> >
-> > Use the TB_FLAGS_MSTATUS_FS macro when enabling floating point in the tb
-> > flags.
-> >
-> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> > ---
-> >  target/riscv/cpu.h | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> >
-> > diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> > index eb7b5b0af3..0347be453b 100644
-> > --- a/target/riscv/cpu.h
-> > +++ b/target/riscv/cpu.h
-> > @@ -301,7 +301,7 @@ static inline void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
-> >  #else
-> >      *flags = cpu_mmu_index(env, 0);
-> >      if (riscv_cpu_fp_enabled(env)) {
-> > -        *flags |= env->mstatus & MSTATUS_FS;
-> > +        *flags |= TB_FLAGS_MSTATUS_FS;
-> >      }
-> >  #endif
+> As of today, the QEMU 'sifive_u' machine is a special target that does
+> not boot the upstream OpenSBI/U-Boot firmware images built for the real
+> SiFive HiFive Unleashed board. Hence OpenSBI supports a special platform
+> "qemu/sifive_u". For U-Boot, the sifive_fu540_defconfig is referenced
+> in the OpenSBI doc as its payload, but that does not boot at all due
+> to various issues in current QEMU 'sifive_u' machine codes.
 >
-> The old code was setting the bit in flags only if
-> it was also set in env->mstatus; the new code sets
-> the bit unconditionally -- deliberate change ?
+> This series aims to improve the emulation fidelity of sifive_u machine,
+> so that the upstream OpenSBI, U-Boot and kernel images built for the
+> SiFive HiFive Unleashed board can be used out of the box without any
+> special hack.
+>
+> The major changes include:
+> - Heterogeneous harts creation supported, so that we can create a CPU
+>   that exactly mirrors the real hardware: 1 E51 + 4 U54.
+> - Implemented a PRCI model for FU540
+> - Implemented an OTP model for FU540, primarily used for storing serial
+>   number of the board
+> - Fixed GEM support that was seriously broken on sifive_u
+> - Synced device tree with upstream Linux kernel on sifive_u
+>
+> OpenSBI v0.4 image built for sifive/fu540 is included as the default
+> bios image for 'sifive_u' machine.
+>
+> The series is tested against OpenSBI v0.4 image for sifive/fu540
+> paltform, U-Boot v2019.10-rc1 image for sifive_fu540_defconfig,
+> and Linux kernel v5.3-rc3 image with the following patch:
+>
+> macb: Update compatibility string for SiFive FU540-C000 [1]
+>
+> OpenSBI + U-Boot, ping/tftpboot with U-Boot MACB driver works well.
+> Boot Linux 64-bit defconfig image, verified that system console on
+> the serial 0 and ping host work pretty well.
+>
+> An OpenSBI patch [2] was sent to drop the special "qemu/sifive_u" platform
+> support in OpenSBI. The original plan was to get the drop patch applied
+> after this QEMU series is merged. However after discussion in the OpenSBI
+> mailing list, it seems the best option for us is to let OpenSBI continue
+> shipping the special "qemu/sifive_u" platform support to work with QEMU
+> version <= 4.1 and deprecate the support sometime in the future. A patch
+> will need to be sent to OpenSBI mailing list to update its document.
+>
+> v4 is now rebased on Palmer's QEMU RISC-V repo "for-master" branch.
+> Dropped the following v3 patch that was already done by someone else.
+> - riscv: sifive_u: Generate an aliases node in the device tree
+> - riscv: sifive_u: Support loading initramfs
+>
+> The following v3 patch was dropped too due to a different cluster approach
+> suggested by Richard Henderson is used in v4:
+> - riscv: hart: Support heterogeneous harts population
+>
+> [1]: https://patchwork.kernel.org/patch/11050003/
+> [2]: http://lists.infradead.org/pipermail/opensbi/2019-August/000335.html
+>
+> Changes in v5:
+> - new patch to change to use qemu_log_mask(LOG_GUEST_ERROR,...) instead
+>   in various sifive models
+> - new patch to remove the unnecessary include of target/riscv/cpu.h
+> - change to use defines instead of enums
+> - change to use qemu_log_mask(LOG_GUEST_ERROR,...) in sifive_u_prci
+> - creating a 32-bit val variable and using that instead of casting
+>   everywhere in sifive_u_prci_write()
+> - move all register initialization to sifive_u_prci_reset() function
+> - drop sifive_u_prci_create()
+> - s/codes that worked/code that works/g
+> - create sifive_u_prci block directly in the machine codes, instead
+>   of calling sifive_u_prci_create()
+> - change to use defines instead of enums
+> - change to use qemu_log_mask(LOG_GUEST_ERROR,...) in sifive_u_otp
+> - creating a 32-bit val variable and using that instead of casting
+>   everywhere in sifive_u_otp_write()
+> - move all register initialization to sifive_u_otp_reset() function
+> - drop sifive_u_otp_create()
+> - create sifive_u_otp block directly in the machine codes, instead
+>   of calling sifive_u_otp_create()
+> - add the missing "local-mac-address" property in the ethernet node
+>
+> Changes in v4:
+> - remove 2 more "linux,phandle" instances in sifive_u.c and spike.c
+>   after rebasing on Palmer's QEMU RISC-V tree
+> - change create_fdt() to return void in sifive_u.c too, after rebasing
+>   on Palmer's QEMU RISC-V tree
+> - new patch to remove executable attribute of opensbi images
+> - prefix all macros/variables/functions with SIFIVE_E/sifive_e
+>   in the sifive_e_prci driver
+> - new patch to add a "hartid-base" property to RISC-V hart array
+> - changed to create clusters for each cpu type
+> - prefix all macros/variables/functions with SIFIVE_U/sifive_u
+>   in the sifive_u_prci driver
+> - prefix all macros/variables/functions with SIFIVE_U/sifive_u
+>   in the sifive_u_otp driver
+> - new patch to remove handcrafted clock nodes for UART and ethernet
+>
+> Changes in v3:
+> - changed to use macros for management and compute cpu count
+> - use management cpu count + 1 for the min_cpus
+> - update IRQ numbers of both UARTs to match hardware as well
+>
+> Changes in v2:
+> - keep the PLIC compatible string unchanged as OpenSBI uses that
+>   for DT fix up
+> - drop patch "riscv: sifive: Move sifive_mmio_emulate() to a common place"
+> - new patch "riscv: sifive_e: Drop sifive_mmio_emulate()"
+> - fixed the "interrupts-extended" property size
+> - update the file header to indicate at least 2 harts are created
+> - use create_unimplemented_device() to create the GEM management
+>   block instead of sifive_mmio_emulate()
+> - add "phy-handle" property to the ethernet node
+>
+> Bin Meng (30):
+>   riscv: hw: Remove superfluous "linux,phandle" property
+>   riscv: hw: Use qemu_fdt_setprop_cell() for property with only 1 cell
+>   riscv: hw: Remove not needed PLIC properties in device tree
+>   riscv: hw: Change create_fdt() to return void
+>   riscv: hw: Change to use qemu_log_mask(LOG_GUEST_ERROR,...) instead
+>   riscv: hw: Remove the unnecessary include of target/riscv/cpu.h
+>   riscv: roms: Remove executable attribute of opensbi images
+>   riscv: sifive_u: Remove the unnecessary include of prci header
+>   riscv: sifive: Rename sifive_prci.{c,h} to sifive_e_prci.{c,h}
+>   riscv: sifive_e: prci: Fix a typo of hfxosccfg register programming
+>   riscv: sifive_e: prci: Update the PRCI register block size
+>   riscv: sifive_e: Drop sifive_mmio_emulate()
+>   riscv: Add a sifive_cpu.h to include both E and U cpu type defines
+>   riscv: hart: Extract hart realize to a separate routine
+>   riscv: hart: Add a "hartid-base" property to RISC-V hart array
+>   riscv: sifive_u: Update hart configuration to reflect the real FU540
+>     SoC
+>   riscv: sifive_u: Set the minimum number of cpus to 2
+>   riscv: sifive_u: Update PLIC hart topology configuration string
+>   riscv: sifive: Implement PRCI model for FU540
+>   riscv: sifive_u: Generate hfclk and rtcclk nodes
+>   riscv: sifive_u: Add PRCI block to the SoC
+>   riscv: sifive_u: Reference PRCI clocks in UART and ethernet nodes
+>   riscv: sifive_u: Update UART base addresses and IRQs
+>   riscv: sifive_u: Change UART node name in device tree
+>   riscv: roms: Update default bios for sifive_u machine
+>   riscv: sifive: Implement a model for SiFive FU540 OTP
+>   riscv: sifive_u: Instantiate OTP memory with a serial number
+>   riscv: sifive_u: Fix broken GEM support
+>   riscv: sifive_u: Remove handcrafted clock nodes for UART and ethernet
+>   riscv: sifive_u: Update model and compatible strings in device tree
 
-Yes it is deliberate as the riscv_cpu_fp_enabled() function already
-does the check. The function contains the exact same & operation
-inside of it.
+I can't see patch 12 and it looks like it didn't make it to the list either:
+
+https://patchew.org/QEMU/1566537069-22741-1-git-send-email-bmeng.cn@gmail.com/
 
 Alistair
 
 >
-> thanks
-> -- PMM
+>  hw/riscv/Makefile.objs                       |   4 +-
+>  hw/riscv/riscv_hart.c                        |  35 ++--
+>  hw/riscv/sifive_e.c                          |  27 +--
+>  hw/riscv/sifive_e_prci.c                     | 123 +++++++++++++
+>  hw/riscv/sifive_prci.c                       | 123 -------------
+>  hw/riscv/sifive_test.c                       |   6 +-
+>  hw/riscv/sifive_u.c                          | 262 ++++++++++++++++++---------
+>  hw/riscv/sifive_u_otp.c                      | 190 +++++++++++++++++++
+>  hw/riscv/sifive_u_prci.c                     | 171 +++++++++++++++++
+>  hw/riscv/sifive_uart.c                       |  10 +-
+>  hw/riscv/spike.c                             |   1 -
+>  hw/riscv/virt.c                              |  40 ++--
+>  include/hw/riscv/riscv_hart.h                |   1 +
+>  include/hw/riscv/sifive_cpu.h                |  31 ++++
+>  include/hw/riscv/sifive_e.h                  |   7 +-
+>  include/hw/riscv/sifive_e_prci.h             |  71 ++++++++
+>  include/hw/riscv/sifive_prci.h               |  69 -------
+>  include/hw/riscv/sifive_u.h                  |  31 ++--
+>  include/hw/riscv/sifive_u_otp.h              |  80 ++++++++
+>  include/hw/riscv/sifive_u_prci.h             |  91 ++++++++++
+>  pc-bios/opensbi-riscv32-virt-fw_jump.bin     | Bin
+>  pc-bios/opensbi-riscv64-sifive_u-fw_jump.bin | Bin 40968 -> 45064 bytes
+>  pc-bios/opensbi-riscv64-virt-fw_jump.bin     | Bin
+>  roms/Makefile                                |   4 +-
+>  24 files changed, 1018 insertions(+), 359 deletions(-)
+>  create mode 100644 hw/riscv/sifive_e_prci.c
+>  delete mode 100644 hw/riscv/sifive_prci.c
+>  create mode 100644 hw/riscv/sifive_u_otp.c
+>  create mode 100644 hw/riscv/sifive_u_prci.c
+>  create mode 100644 include/hw/riscv/sifive_cpu.h
+>  create mode 100644 include/hw/riscv/sifive_e_prci.h
+>  delete mode 100644 include/hw/riscv/sifive_prci.h
+>  create mode 100644 include/hw/riscv/sifive_u_otp.h
+>  create mode 100644 include/hw/riscv/sifive_u_prci.h
+>  mode change 100755 => 100644 pc-bios/opensbi-riscv32-virt-fw_jump.bin
+>  mode change 100755 => 100644 pc-bios/opensbi-riscv64-sifive_u-fw_jump.bin
+>  mode change 100755 => 100644 pc-bios/opensbi-riscv64-virt-fw_jump.bin
+>
+> --
+> 2.7.4
+>
+>
 
