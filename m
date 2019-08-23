@@ -1,73 +1,74 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1i1BQw-0001f5-CT
+	id 1i1BQw-0001fe-MN
 	for mharc-qemu-riscv@gnu.org; Fri, 23 Aug 2019 11:24:58 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:59825)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59832)
  by lists.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <prvs=1314b2cac=alistair.francis@wdc.com>)
- id 1i1BQt-0001c8-N2
- for qemu-riscv@nongnu.org; Fri, 23 Aug 2019 11:24:56 -0400
+ id 1i1BQu-0001cF-1U
+ for qemu-riscv@nongnu.org; Fri, 23 Aug 2019 11:24:57 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
  (envelope-from <prvs=1314b2cac=alistair.francis@wdc.com>)
- id 1i1BQs-00006W-Ne
+ id 1i1BQs-00006n-Rp
  for qemu-riscv@nongnu.org; Fri, 23 Aug 2019 11:24:55 -0400
-Received: from esa3.hgst.iphmx.com ([216.71.153.141]:38176)
+Received: from esa3.hgst.iphmx.com ([216.71.153.141]:38171)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <prvs=1314b2cac=alistair.francis@wdc.com>)
- id 1i1BQp-0008VZ-KE; Fri, 23 Aug 2019 11:24:51 -0400
+ id 1i1BQq-0008UJ-Eh; Fri, 23 Aug 2019 11:24:52 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1566573891; x=1598109891;
+ t=1566573892; x=1598109892;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=dNPHnBonHYmj24fakuU63K2w0RapOswOQO6wbRLxGds=;
- b=LWhzaOb/2uJdA5W3U9VCxeV+szHwhduyvwc0gkRkjMZmsWuRSr0y6M6T
- XaYmxX70432N+J7SVCVOQvOdgTrNB6maC/bvukXE784fPB6gohVm1y56N
- Kj5ggCfPcXwp8DUp+M5meIjZv29dok6zDKxaXIgnxNiizIqwhSZdpNwNf
- bAlbaBZXLqmKFFCDNWqChMUnFoIuMHuaiIeTWRTkIRFCrtvVZ/YTVKFSc
- 5nxGDZvvbeXVQeLrMUFy9wYZbj8dCVaC7WiuGDjnVFEvCuaISUUSuMjWr
- ps7CWxaEvL72j7tsqXu8l+8JYBq52MTst5Wt5CVZOvt9bc+aP/QnvGV8f A==;
-IronPort-SDR: ZWxp4ADug0MKqwU3hTcGLZ0lWp4M9GyEmhOgLXEPObRmUKCw2wXaidrF3cIzDfaqnp+An5W0L2
- LKP/IbzEA9hNVL3uz2izUzogeBCtnQJxnyhf9Q53RHQjKH9Quu+mxpRzjS3mqWTcxqSKfNm61e
- 0DUcXAc32wWzunM8P5LXvJn/mDNogL9l1jozq62pxzMM8/nXPicFnZW2XJvkAtzeo1iYd2gLJe
- Nl249gtDRtsS14pYX1qIFrOOkN9PM7F6Q1NB1fubYkCnMbZku9wEPEBdrCBJGLBRMzn+6OfdJK
- hk0=
-X-IronPort-AV: E=Sophos;i="5.64,421,1559491200"; d="scan'208";a="121112422"
+ bh=HavBuiu9o+dhYuPr9DtZDz8tL0ixVJOlU6zBl4mUFso=;
+ b=mz89vmlIlX7Xkn+6JJg4fSZQAINm4KoXeekfwQEszSah2BHS/Xf1NOZJ
+ i8PldDiLVBJD5HgVaLFkp4uz+WTVNOsyEbPG3POHZBxi+1y6AamxY8NIm
+ KOciwwYVNy83FrrRegarvGJTr+oYhkahLuS2dbwO9niyZdMPCtBz5/HMa
+ R74G6v1Yrbn1uwq4A1Ea6XEnNv5JP6Jay/b/LnVvzHYiuuYLOYXuqmUfp
+ SlaU3vJE8fg50XZYthrrDVE24VCHyPw+gSsYVbAAimMdwDIKsWwxoKnBK
+ KVfclNNYCGMrlmp7iez8GBh53KgaPt7K7hNRWu9ZTL8RwH1ZzEJZTE5DA w==;
+IronPort-SDR: nPCuerFax3eWZFHT5xS7sCfbCf4jNXmZDzQupxQG7ixRWY6LaIIgL+zhsQ82yNe1Eoq8WEx5Fi
+ /E24+92TEepUUEkYJr9w0j5dYMOe0WqDnz0/YTSYNrvI/Ynx5SeAW/PNU2uZMOBsLwTVG7mb5H
+ axouIOFwYb8ZmnocYSDRwi0ger1qe8ri7IokPRBAV+2OeN5qqcI36r90/6uH3OXKRMLFccrk/b
+ 48Fogdave0PrUOPaAOSTEpdh1lBexDTQ78i5t8e9Pndyd/WSuUqH98b5R2lU2mWRC4wQJrD5JW
+ Nwg=
+X-IronPort-AV: E=Sophos;i="5.64,421,1559491200"; d="scan'208";a="121112423"
 Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com)
  ([199.255.45.15])
- by ob1.hgst.iphmx.com with ESMTP; 23 Aug 2019 23:24:49 +0800
-IronPort-SDR: molqb5i362KXk2lCrBNIGGyW2LmKx+dLKSYHvySIflLfVPhng1ENWbJcxjc2vdd+KwqJG7Z6L/
- I4JTHM/MmciFGJdy2Z/ELIZVyRK7FCYAQcWB5A34eXMC/sZg2msZImWoC/Pz26z6j84i0ZrcMW
- fPVXhuUa8Hnnxh9y6367u1D3RXEF/LD5to4kxeoUmKYVvNYzbBjK/53sFHwLoPmYrRoVTfEh2F
- G6xHYeTgd8eRhq1i/gwoBxSbAGBMPdRRMv/vyR+iqvsSOsvRcDJTIVSRBzbmVS4LmvNu5SCiGr
- UjNNsppLEoNyI0QpzFeis4jM
+ by ob1.hgst.iphmx.com with ESMTP; 23 Aug 2019 23:24:52 +0800
+IronPort-SDR: hGaNfzoZVxWkNRv5DVXn6psL7cSLJPxSA4eeVmp5lthWS05xhEeNiaQf3b0X45dKrHyb2/AN6z
+ lIj1KlznQUxm51vlT1iaPsJjRd4h5FftJMoLyvIqMArz8odysr9jYgjKC0Abs1SS5XTYId6ykR
+ NVZ4HSIv+U8wjozD4ruKWerWBrAWQAhATA+GXhVCAMXNPOjkjb8cRXxVCaEJ77OBZRICiEagMA
+ w+OmUNTEcHjDpPf6ryhuXUHowt5zl4KmVnQR4DM9QnwfGfeKu59fO1Evo3K8jmqlUpRkfxyBKj
+ ACbidL7steMTmtgwUiuzFCWz
 Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
  by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 23 Aug 2019 08:22:06 -0700
-IronPort-SDR: qwiURRZn8R6rwP3yyifFkFWs31Dq7fcZ7zXXd0CS1fWtCnqkTH2LClm1tjgDmzZzKEFayEJtET
- HA2KNHykTj6Mq0yM9G1KsLPWTMZ8/a4MBFqBLDUJVN9fPPpsSpcQzrEKoKjMaXQTxOJNi/crLM
- ko8FdMXigcYEzF7fhRUlc0hCwRKsn7FlHma6Dqly2iCkdrRV1ZfRGn+JmLIcPZhR/dEhfEfOVS
- HrR/Hi4oS1gNWY7Cjt1GHtHEny/wYfaXuiYOyEJZ0qaBLYQpL935Dxp3x4p4KglXNgp1bfA5Fv
- mX8=
+ 23 Aug 2019 08:22:09 -0700
+IronPort-SDR: qy5CXmtGjA6wMmjZ7kVjnApH0FmPBaQCnD2uBgudTehQL8lpwToVCNVYbMPxmittanRubcNuul
+ z74SK/6NnETwIwt/UnMavH7v/OqzMxPV1po0rc9eY3RXksEd6uhvp3Ari5ijI5VOli46PvwScX
+ FQY9nHftWbM5AwXJar/kMdRLdYjroKQ/95EZOkM7nwdL8jb3xpeEWZ/u/FFNqZE0tMr0TfDLDD
+ 1TwO6btDcp093TtZkKwB1UgkHdOZOcNg8K8n93rRmMkmtoj7uah7fxgJ1cL8I0OMMuJa9q7AWa
+ yRs=
 WDCIronportException: Internal
 Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
  risc6-mainframe.int.fusionio.com) ([10.196.157.58])
- by uls-op-cesaip02.wdc.com with ESMTP; 23 Aug 2019 08:24:49 -0700
+ by uls-op-cesaip02.wdc.com with ESMTP; 23 Aug 2019 08:24:52 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: palmer@sifive.com, alistair.francis@wdc.com, alistair23@gmail.com,
  bmeng.cn@gmail.com
-Date: Fri, 23 Aug 2019 08:21:09 -0700
-Message-Id: <6532e1a327feada5bbd0631ed6ea72ec32528936.1566573576.git.alistair.francis@wdc.com>
+Date: Fri, 23 Aug 2019 08:21:12 -0700
+Message-Id: <f48008aade6df437a599000ca8531fbbf80b6e80.1566573576.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.22.0
 In-Reply-To: <cover.1566573576.git.alistair.francis@wdc.com>
 References: <cover.1566573576.git.alistair.francis@wdc.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: FreeBSD 9.x
 X-Received-From: 216.71.153.141
-Subject: [Qemu-riscv] [PATCH v4 1/7] target/riscv: Don't set write
- permissions on dirty PTEs
+Subject: [Qemu-riscv] [PATCH v4 2/7] riscv: plic: Remove unused interrupt
+ functions
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -81,34 +82,53 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Fri, 23 Aug 2019 15:24:57 -0000
 
-Setting write permission on dirty PTEs results in userspace inside a
-Hypervisor guest (VU) becoming corrupted. This appears to be because it
-ends up with write permission in the second stage translation in cases
-where we aren't doing a store.
-
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Jonathan Behrens <fintelia@gmail.com>
+Reviewed-by: Philippe Mathieu-Daudé <philmd@redhat.com>
+Reviewed-by: Chih-Min Chao <chihmin.chao@sifive.com>
 Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
 ---
- target/riscv/cpu_helper.c | 6 ++----
- 1 file changed, 2 insertions(+), 4 deletions(-)
+ hw/riscv/sifive_plic.c         | 12 ------------
+ include/hw/riscv/sifive_plic.h |  3 ---
+ 2 files changed, 15 deletions(-)
 
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index e32b6126af..f027be7f16 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -340,10 +340,8 @@ restart:
-             if ((pte & PTE_X)) {
-                 *prot |= PAGE_EXEC;
-             }
--            /* add write permission on stores or if the page is already dirty,
--               so that we TLB miss on later writes to update the dirty bit */
--            if ((pte & PTE_W) &&
--                    (access_type == MMU_DATA_STORE || (pte & PTE_D))) {
-+            /* add write permission on stores */
-+            if ((pte & PTE_W) && (access_type == MMU_DATA_STORE)) {
-                 *prot |= PAGE_WRITE;
-             }
-             return TRANSLATE_SUCCESS;
+diff --git a/hw/riscv/sifive_plic.c b/hw/riscv/sifive_plic.c
+index 64a1a10380..98e4304b66 100644
+--- a/hw/riscv/sifive_plic.c
++++ b/hw/riscv/sifive_plic.c
+@@ -162,18 +162,6 @@ static void sifive_plic_update(SiFivePLICState *plic)
+     }
+ }
+ 
+-void sifive_plic_raise_irq(SiFivePLICState *plic, uint32_t irq)
+-{
+-    sifive_plic_set_pending(plic, irq, true);
+-    sifive_plic_update(plic);
+-}
+-
+-void sifive_plic_lower_irq(SiFivePLICState *plic, uint32_t irq)
+-{
+-    sifive_plic_set_pending(plic, irq, false);
+-    sifive_plic_update(plic);
+-}
+-
+ static uint32_t sifive_plic_claim(SiFivePLICState *plic, uint32_t addrid)
+ {
+     int i, j;
+diff --git a/include/hw/riscv/sifive_plic.h b/include/hw/riscv/sifive_plic.h
+index b0edba2884..4421e81249 100644
+--- a/include/hw/riscv/sifive_plic.h
++++ b/include/hw/riscv/sifive_plic.h
+@@ -69,9 +69,6 @@ typedef struct SiFivePLICState {
+     uint32_t aperture_size;
+ } SiFivePLICState;
+ 
+-void sifive_plic_raise_irq(SiFivePLICState *plic, uint32_t irq);
+-void sifive_plic_lower_irq(SiFivePLICState *plic, uint32_t irq);
+-
+ DeviceState *sifive_plic_create(hwaddr addr, char *hart_config,
+     uint32_t num_sources, uint32_t num_priorities,
+     uint32_t priority_base, uint32_t pending_base,
 -- 
 2.22.0
 
