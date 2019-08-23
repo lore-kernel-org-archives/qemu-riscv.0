@@ -1,61 +1,73 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1i1BPF-0008Qv-SJ
-	for mharc-qemu-riscv@gnu.org; Fri, 23 Aug 2019 11:23:13 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:59416)
+	id 1i1BQw-0001f5-CT
+	for mharc-qemu-riscv@gnu.org; Fri, 23 Aug 2019 11:24:58 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59825)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <alistair23@gmail.com>) id 1i1BPD-0008NP-39
- for qemu-riscv@nongnu.org; Fri, 23 Aug 2019 11:23:11 -0400
+ (envelope-from <prvs=1314b2cac=alistair.francis@wdc.com>)
+ id 1i1BQt-0001c8-N2
+ for qemu-riscv@nongnu.org; Fri, 23 Aug 2019 11:24:56 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1i1BPC-0007sm-52
- for qemu-riscv@nongnu.org; Fri, 23 Aug 2019 11:23:11 -0400
-Received: from mail-lf1-x143.google.com ([2a00:1450:4864:20::143]:44227)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1i1BP9-0007rL-UI; Fri, 23 Aug 2019 11:23:08 -0400
-Received: by mail-lf1-x143.google.com with SMTP id v16so7373010lfg.11;
- Fri, 23 Aug 2019 08:23:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=qbJ4lagEeZciH+sffYeabCvVwbjwNj/7sds61ms8Evo=;
- b=Ph1KS7CJEEXk+Cv0rS1+7DLQvJk6N5nR1v0KNuCnUnc32cPBvTgjMFYJeEpCKmay1M
- FxMLhfPSf+nB8AJYbg/Mm/8QcGlU9EZn/s7l8jkSPzxVEcsFJWeQCE6na//T4uJrH1F+
- e5sxhatLczTioyuFfaiLG2nmjJYJcSNmX8rhdM11k+NjKphZ1Uhhtb2UdI8D3DWUA1hw
- f7cMPiB5+QafhTdUi2ROe1VvMU21LZCJq2Z7B/an6YfpolgVnuK2hgmhoBfIL0TXiddy
- /UW/MSarwuSb6oXQw6J6/YkpY5DcmCJO0rLdz6BB4YCVi0TzZTgVWbHbHhgyWyv1G7W5
- U+bQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=qbJ4lagEeZciH+sffYeabCvVwbjwNj/7sds61ms8Evo=;
- b=olpAIv6TL+Pbi4e+yuhCxII4PJyq/zSk4wXQ9vLIOoGOCwCOEHFW/5Xa1Jw9wuIM0w
- l8LIMNBVGuaZtNDVgchPJsGFA76e3aQ575EF4lUxnCzktf7eAdlfElG8OXFzHd+4aZUG
- EFz/TiuFtgyxJazakdV9DSNbxbaaHVpyfvi8P4pdgW9NNb6P1TgsnqWfuMztgNd2Tzn+
- uFd7VeyEH5wh4ZjiucTllcj3agS9+reklm0gBF87thc2jKaazLYPjxxRITPZNWXHNwj1
- tpKeC4y5CDJhLCzoP2Q7jBCMGQR24P7Zg7ltG4rXE0kQJHSHJaqBGI2WLk74aEQN2Qo5
- O1Mw==
-X-Gm-Message-State: APjAAAVVk5wwOQDSEvW1zyPZ146ig/ytJawmZGlNtRoOHsW7dntmm2lJ
- 87ciss5zsH487KBN/nXKSxa6jLa5r3K3eIKA8s0=
-X-Google-Smtp-Source: APXvYqz2KHuFVfo+DwZPIdFP/hmuj34haEiJbKNGmak9IJYWROqLrrjACFjpl/Er8bMeZdRFtQ9mLpKRhaXs7y2t0ks=
-X-Received: by 2002:ac2:528c:: with SMTP id q12mr2198539lfm.135.1566573786043; 
- Fri, 23 Aug 2019 08:23:06 -0700 (PDT)
+ (envelope-from <prvs=1314b2cac=alistair.francis@wdc.com>)
+ id 1i1BQs-00006W-Ne
+ for qemu-riscv@nongnu.org; Fri, 23 Aug 2019 11:24:55 -0400
+Received: from esa3.hgst.iphmx.com ([216.71.153.141]:38176)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <prvs=1314b2cac=alistair.francis@wdc.com>)
+ id 1i1BQp-0008VZ-KE; Fri, 23 Aug 2019 11:24:51 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1566573891; x=1598109891;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=dNPHnBonHYmj24fakuU63K2w0RapOswOQO6wbRLxGds=;
+ b=LWhzaOb/2uJdA5W3U9VCxeV+szHwhduyvwc0gkRkjMZmsWuRSr0y6M6T
+ XaYmxX70432N+J7SVCVOQvOdgTrNB6maC/bvukXE784fPB6gohVm1y56N
+ Kj5ggCfPcXwp8DUp+M5meIjZv29dok6zDKxaXIgnxNiizIqwhSZdpNwNf
+ bAlbaBZXLqmKFFCDNWqChMUnFoIuMHuaiIeTWRTkIRFCrtvVZ/YTVKFSc
+ 5nxGDZvvbeXVQeLrMUFy9wYZbj8dCVaC7WiuGDjnVFEvCuaISUUSuMjWr
+ ps7CWxaEvL72j7tsqXu8l+8JYBq52MTst5Wt5CVZOvt9bc+aP/QnvGV8f A==;
+IronPort-SDR: ZWxp4ADug0MKqwU3hTcGLZ0lWp4M9GyEmhOgLXEPObRmUKCw2wXaidrF3cIzDfaqnp+An5W0L2
+ LKP/IbzEA9hNVL3uz2izUzogeBCtnQJxnyhf9Q53RHQjKH9Quu+mxpRzjS3mqWTcxqSKfNm61e
+ 0DUcXAc32wWzunM8P5LXvJn/mDNogL9l1jozq62pxzMM8/nXPicFnZW2XJvkAtzeo1iYd2gLJe
+ Nl249gtDRtsS14pYX1qIFrOOkN9PM7F6Q1NB1fubYkCnMbZku9wEPEBdrCBJGLBRMzn+6OfdJK
+ hk0=
+X-IronPort-AV: E=Sophos;i="5.64,421,1559491200"; d="scan'208";a="121112422"
+Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com)
+ ([199.255.45.15])
+ by ob1.hgst.iphmx.com with ESMTP; 23 Aug 2019 23:24:49 +0800
+IronPort-SDR: molqb5i362KXk2lCrBNIGGyW2LmKx+dLKSYHvySIflLfVPhng1ENWbJcxjc2vdd+KwqJG7Z6L/
+ I4JTHM/MmciFGJdy2Z/ELIZVyRK7FCYAQcWB5A34eXMC/sZg2msZImWoC/Pz26z6j84i0ZrcMW
+ fPVXhuUa8Hnnxh9y6367u1D3RXEF/LD5to4kxeoUmKYVvNYzbBjK/53sFHwLoPmYrRoVTfEh2F
+ G6xHYeTgd8eRhq1i/gwoBxSbAGBMPdRRMv/vyR+iqvsSOsvRcDJTIVSRBzbmVS4LmvNu5SCiGr
+ UjNNsppLEoNyI0QpzFeis4jM
+Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
+ by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 23 Aug 2019 08:22:06 -0700
+IronPort-SDR: qwiURRZn8R6rwP3yyifFkFWs31Dq7fcZ7zXXd0CS1fWtCnqkTH2LClm1tjgDmzZzKEFayEJtET
+ HA2KNHykTj6Mq0yM9G1KsLPWTMZ8/a4MBFqBLDUJVN9fPPpsSpcQzrEKoKjMaXQTxOJNi/crLM
+ ko8FdMXigcYEzF7fhRUlc0hCwRKsn7FlHma6Dqly2iCkdrRV1ZfRGn+JmLIcPZhR/dEhfEfOVS
+ HrR/Hi4oS1gNWY7Cjt1GHtHEny/wYfaXuiYOyEJZ0qaBLYQpL935Dxp3x4p4KglXNgp1bfA5Fv
+ mX8=
+WDCIronportException: Internal
+Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
+ risc6-mainframe.int.fusionio.com) ([10.196.157.58])
+ by uls-op-cesaip02.wdc.com with ESMTP; 23 Aug 2019 08:24:49 -0700
+From: Alistair Francis <alistair.francis@wdc.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: palmer@sifive.com, alistair.francis@wdc.com, alistair23@gmail.com,
+ bmeng.cn@gmail.com
+Date: Fri, 23 Aug 2019 08:21:09 -0700
+Message-Id: <6532e1a327feada5bbd0631ed6ea72ec32528936.1566573576.git.alistair.francis@wdc.com>
+X-Mailer: git-send-email 2.22.0
+In-Reply-To: <cover.1566573576.git.alistair.francis@wdc.com>
+References: <cover.1566573576.git.alistair.francis@wdc.com>
 MIME-Version: 1.0
-References: <cover.1565904855.git.alistair.francis@wdc.com>
- <7e476df36a8c2ba53162e9a5f62e9fa171da00ad.1565904855.git.alistair.francis@wdc.com>
-In-Reply-To: <7e476df36a8c2ba53162e9a5f62e9fa171da00ad.1565904855.git.alistair.francis@wdc.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 23 Aug 2019 08:18:59 -0700
-Message-ID: <CAKmqyKOaoUBQ5PsOuDB4AZ=XK+p13LVHEn-GGt9+k-LS_MirvA@mail.gmail.com>
-To: Alistair Francis <alistair.francis@wdc.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Palmer Dabbelt <palmer@sifive.com>
-Content-Type: text/plain; charset="UTF-8"
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2a00:1450:4864:20::143
-Subject: Re: [Qemu-riscv] [PATCH v3 7/7] target/riscv: Convert mip to
- target_ulong
+Content-Transfer-Encoding: 8bit
+X-detected-operating-system: by eggs.gnu.org: FreeBSD 9.x
+X-Received-From: 216.71.153.141
+Subject: [Qemu-riscv] [PATCH v4 1/7] target/riscv: Don't set write
+ permissions on dirty PTEs
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -67,39 +79,37 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Aug 2019 15:23:12 -0000
+X-List-Received-Date: Fri, 23 Aug 2019 15:24:57 -0000
 
-On Thu, Aug 15, 2019 at 2:38 PM Alistair Francis
-<alistair.francis@wdc.com> wrote:
->
-> The mip register is an MXLEN-bit long register. Convert it to a
-> target_ulong type instead of uint32_t.
->
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+Setting write permission on dirty PTEs results in userspace inside a
+Hypervisor guest (VU) becoming corrupted. This appears to be because it
+ends up with write permission in the second stage translation in cases
+where we aren't doing a store.
 
-MIP is 32-bit to allow atomic access on 32-bit hosts, so I am going to
-send a v4 with this patch dropped.
+Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+---
+ target/riscv/cpu_helper.c | 6 ++----
+ 1 file changed, 2 insertions(+), 4 deletions(-)
 
-Alistair
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index e32b6126af..f027be7f16 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -340,10 +340,8 @@ restart:
+             if ((pte & PTE_X)) {
+                 *prot |= PAGE_EXEC;
+             }
+-            /* add write permission on stores or if the page is already dirty,
+-               so that we TLB miss on later writes to update the dirty bit */
+-            if ((pte & PTE_W) &&
+-                    (access_type == MMU_DATA_STORE || (pte & PTE_D))) {
++            /* add write permission on stores */
++            if ((pte & PTE_W) && (access_type == MMU_DATA_STORE)) {
+                 *prot |= PAGE_WRITE;
+             }
+             return TRANSLATE_SUCCESS;
+-- 
+2.22.0
 
-> ---
->  target/riscv/cpu.h | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 2dc9b17678..0a7985c3f7 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -130,7 +130,7 @@ struct CPURISCVState {
->       * wuth the invariant that CPU_INTERRUPT_HARD is set iff mip is non-zero.
->       * mip is 32-bits to allow atomic_read on 32-bit hosts.
->       */
-> -    uint32_t mip;
-> +    target_ulong mip;
->      uint32_t miclaim;
->
->      target_ulong mie;
-> --
-> 2.22.0
->
 
