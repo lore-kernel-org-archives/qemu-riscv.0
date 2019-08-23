@@ -1,74 +1,73 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1i1BR2-0001of-RM
-	for mharc-qemu-riscv@gnu.org; Fri, 23 Aug 2019 11:25:04 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:59887)
+	id 1i1BR3-0001pb-I5
+	for mharc-qemu-riscv@gnu.org; Fri, 23 Aug 2019 11:25:05 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59897)
  by lists.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <prvs=1314b2cac=alistair.francis@wdc.com>)
- id 1i1BQy-0001im-LS
+ id 1i1BQz-0001jb-B7
  for qemu-riscv@nongnu.org; Fri, 23 Aug 2019 11:25:02 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
  (envelope-from <prvs=1314b2cac=alistair.francis@wdc.com>)
- id 1i1BQx-000098-67
- for qemu-riscv@nongnu.org; Fri, 23 Aug 2019 11:25:00 -0400
+ id 1i1BQy-0000Ar-AG
+ for qemu-riscv@nongnu.org; Fri, 23 Aug 2019 11:25:01 -0400
 Received: from esa3.hgst.iphmx.com ([216.71.153.141]:38180)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <prvs=1314b2cac=alistair.francis@wdc.com>)
- id 1i1BQu-00006k-0k; Fri, 23 Aug 2019 11:24:56 -0400
+ id 1i1BQv-00006k-Qy; Fri, 23 Aug 2019 11:24:58 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1566573896; x=1598109896;
+ t=1566573898; x=1598109898;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=PdiuAFmDem2NcfwIlr7KZfavdshqYdGNmEj5KDDvBgE=;
- b=PushthN4caFhdVMbkv21FwIx19dqjzIYoBdgOqtQiFrijpz62s2tovwt
- ccileltO8OKC6ssVcbL5M/TsTn3X9vEKltKH2ENh635VnFYHgZZ/aEM3S
- +UHnTt4xm/4CcrPuBUQrvneB9b2X0Brl9XrVWyeteS5OFT1ZRRdJnYLtn
- kMjRPVeXqjGg8lyCdf+kr9Angm/JfKihdxdjZSD8V/FYNFPUMrPcM42se
- LV4ySkgw+ud+LJ4Hi1XSXCgF/dLjBGcRE+AW3pvZzJ5TsEE8XTwPB3Hgo
- S4ugcwUlAglttZYhy1JRkgBDt2l0toGCkZnGLRlFdwAbEulKuZxpjmPYY A==;
-IronPort-SDR: PjjUuMf2Gcl0oBrpzrM3gMlM/LShPynLBIZ1v1CSJtz+c16r+rOGHnUQddK+M3yJtuHhbGly6z
- GWr+5j+QD6sw6y2Sp9hTTgjfwhf3lgfSnUtYfrKo75Il9O1jcbFB4Lem/B3aafnA2JAsSe1bVM
- jqXFDyQgLBUv9hkZsAcKmo4/NkdQ+/olwaR76kysypp9vgu5aLrtXzT9wmPtRmHgUQnjd33WxW
- X7lQOokQTsngkIzqIs2PGZLYTHDW0bZ2WNGP6ECZrTALtZOxRl1v5bsHVhOdGNk6n1shWKG5rd
- vzI=
-X-IronPort-AV: E=Sophos;i="5.64,421,1559491200"; d="scan'208";a="121112425"
+ bh=iTOWHLEw0bbhWGN9g//sIyITc6JGe0udKgWEP4MPj3w=;
+ b=fzW9C2t79H1gR/Bi+l3ldTMNy8HKmz0rPjsRTOl8N7gqbbnzqDesv9yn
+ lNit5h6sGKPO8grOBjVOq833eS3IWk8guDutADlYAx6iz4EskKb1xb7hJ
+ ryYm35Yxt0oYSPK/+hRLnoUEuuqe2xtz1goZUhPyG2M89VC9B4DMwqlOK
+ XQtDA79mjp7zgXn6WWfCB4qhd5zZK4N7IXLYhgHvxo8onh5+Ktd8ZL+G3
+ PzZgsEb5bcUoxmM/BmH1/I+JwPi27N6Rway899VKP80Z6RupQQFuPy5GM
+ /JMjp5h548Xc69wLndIIDWyiSahFWhpbZNglR9pYumwzBzbGM76rkuiLF A==;
+IronPort-SDR: 3FZt9nrxNGt5Uk3kXmB+4000IbEW1GmyUB9QVFrNafKzI6kA/BfxI/CEO9fUdD5kkUC6SRjbgD
+ 2zTsnIAEB7YHKcLVlJmllrlbNQm7UFrXV1Sv76yxAQC4A8w5XqaCy1QBRjMAGhfhnRnuVKihcv
+ Z/xaNCZDXAVgV+VLbO4F1hngq6dIhX11f69BXAf/ozk9tUQT2fM/7sYVhWqNlQrNv16KzrCJBF
+ b1xpKQ2qYEF6pCDXg1P4wCL8NipokI5yaEgMel5/1/yLPEI7PYNM3wPkkxM0BM1KJf4Y8T/pFs
+ 5VM=
+X-IronPort-AV: E=Sophos;i="5.64,421,1559491200"; d="scan'208";a="121112427"
 Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com)
  ([199.255.45.15])
- by ob1.hgst.iphmx.com with ESMTP; 23 Aug 2019 23:24:54 +0800
-IronPort-SDR: N3Xi1dFyrGYvIPlUwlKUYeUMaIq+qSkQ/OyX7m0Eb7PQQt0K+ci2XGmaByvI7V6zatbOp/1jRk
- 830FpLazyiMqqFvzFyORpCYzLnb+MFaPNHqB7iHhmAY32YpcvHXbBxqZrknpHRl+gLx3c6PKTc
- YQXFY6w4zPX+ny4AvDbRABiTawpTIsuZw+KDMf1xh8XIjWtuLCYY5tC+ueJ922mCl25VsZ2aGp
- 3ZeD0QgChQ7VEFf3lWHbJmMN82nu+kJTTQA5++PHl3zn3vPrqWOd+AIeo9QP+Oo7nGmAY7OCiK
- 16s0yAoN+tJ/WdjxZT6cNM8O
+ by ob1.hgst.iphmx.com with ESMTP; 23 Aug 2019 23:24:57 +0800
+IronPort-SDR: ordmkUUW1nLFCu43lvN4c08vykgHKsgb0pQeX7zNT1r31cJU3Kbb7CYfvS5Oz3Xif94PtFBd7n
+ xIUQaiBYiKBXGTzByfrgwggIhg8YpnJ7KJK/+zFN7v6UIno0La14r7Nm8nTAjESP1o97rbI3Tk
+ sMK+BxuW/tYuM5etB+nghyR/COQ1F5oz2Zxq4q2FxHEXixMlvGud0rpk0/metIWRZrW4dxbjIL
+ j1N3jgBdLOT07+hIl+AsA6Meydjc7s5xYTwXtFJdq+8mZMenxTyL+M1X4tJ5B6l2lXj9Au9LFl
+ vYFhRO20ipuCLidQra+0tKmG
 Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
  by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 23 Aug 2019 08:22:12 -0700
-IronPort-SDR: 6C7Q1t4ltlnGsc7UZfA1ZJf+9LENhRBr6fZhqwRZUC6LxVEFXFNc7CE/H4MwsavpPHpK/raeTq
- zsY9y/yozsr6qW+4MwGZE14W+uYtgJvUfGlPcrLBkNOb3QKlGxG8oR8qmKqaWcM44QSOA4fgIG
- JkiuFtB9INOMVvX3WfVIeSbRxSx4jRt4YHppIYm0LNtH1SjsAmg7pwdFHPqzUJamlsGQuQZr+e
- gNhG2MUWAPglslWs1jOt8/6yDqW0m8LVOMW+Z3O7K7Gld379tojCaoO5+nKTytJrZZAqViK6C7
- dMc=
+ 23 Aug 2019 08:22:14 -0700
+IronPort-SDR: zQpO8CTzi/+ja/ITBErAb+ppkvtdaXgF5vmDmyUkJ0gXcHVQav1pIvcob9+5p0QULwAS8X5eAX
+ 8an9FIImIcutgo8hB2fvp3eQ5cRe0fJw5uhItJ9lTXFt7MCgCJ9kIdCktVJjkpJ/TAAIYPtBBS
+ JSSf8ZK69y4xOyy+SzerrV/z5RIscTWROCn6i4j8e1sBGnkdTh7rfUUgm2IVPbsgZjcj+pznEs
+ xgF6NHk+Z92GScsZoCDmYb3el12goceVYPSeMKy3vMb8jUFqX9QVtgCtCJOg+FKwVN5NGSGDZ2
+ ABU=
 WDCIronportException: Internal
 Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
  risc6-mainframe.int.fusionio.com) ([10.196.157.58])
- by uls-op-cesaip02.wdc.com with ESMTP; 23 Aug 2019 08:24:55 -0700
+ by uls-op-cesaip02.wdc.com with ESMTP; 23 Aug 2019 08:24:57 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: palmer@sifive.com, alistair.francis@wdc.com, alistair23@gmail.com,
  bmeng.cn@gmail.com
-Date: Fri, 23 Aug 2019 08:21:14 -0700
-Message-Id: <5cc26abb98a9534720f09674b4b9caafb8f2cf0a.1566573576.git.alistair.francis@wdc.com>
+Date: Fri, 23 Aug 2019 08:21:17 -0700
+Message-Id: <10379ff923d36b17dcca0a9ef6c0599b346106be.1566573576.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.22.0
 In-Reply-To: <cover.1566573576.git.alistair.francis@wdc.com>
 References: <cover.1566573576.git.alistair.francis@wdc.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: FreeBSD 9.x
 X-Received-From: 216.71.153.141
-Subject: [Qemu-riscv] [PATCH v4 3/7] target/riscv: Create function to test
- if FP is enabled
+Subject: [Qemu-riscv] [PATCH v4 4/7] target/riscv: Update the Hypervisor
+ CSRs to v0.4
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -82,156 +81,68 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Fri, 23 Aug 2019 15:25:03 -0000
 
-Let's create a function that tests if floating point support is
-enabled. We can then protect all floating point operations based on if
-they are enabled.
-
-This patch so far doesn't change anything, it's just preparing for the
-Hypervisor support for floating point operations.
+Update the Hypervisor CSR addresses to match the v0.4 spec.
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@redhat.com>
-Reviewed-by: Christophe de Dinechin <dinechin@redhat.com>
 Reviewed-by: Chih-Min Chao <chihmin.chao@sifive.com>
 Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
 ---
- target/riscv/cpu.h        |  6 +++++-
- target/riscv/cpu_helper.c | 10 ++++++++++
- target/riscv/csr.c        | 20 +++++++++++---------
- 3 files changed, 26 insertions(+), 10 deletions(-)
+ target/riscv/cpu_bits.h | 35 ++++++++++++++++++-----------------
+ 1 file changed, 18 insertions(+), 17 deletions(-)
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 240b31e2eb..eb7b5b0af3 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -255,6 +255,7 @@ void riscv_cpu_do_interrupt(CPUState *cpu);
- int riscv_cpu_gdb_read_register(CPUState *cpu, uint8_t *buf, int reg);
- int riscv_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
- bool riscv_cpu_exec_interrupt(CPUState *cs, int interrupt_request);
-+bool riscv_cpu_fp_enabled(CPURISCVState *env);
- int riscv_cpu_mmu_index(CPURISCVState *env, bool ifetch);
- hwaddr riscv_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
- void  riscv_cpu_do_unaligned_access(CPUState *cs, vaddr addr,
-@@ -298,7 +299,10 @@ static inline void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
- #ifdef CONFIG_USER_ONLY
-     *flags = TB_FLAGS_MSTATUS_FS;
- #else
--    *flags = cpu_mmu_index(env, 0) | (env->mstatus & MSTATUS_FS);
-+    *flags = cpu_mmu_index(env, 0);
-+    if (riscv_cpu_fp_enabled(env)) {
-+        *flags |= env->mstatus & MSTATUS_FS;
-+    }
- #endif
- }
+diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+index 11f971ad5d..e99834856c 100644
+--- a/target/riscv/cpu_bits.h
++++ b/target/riscv/cpu_bits.h
+@@ -173,6 +173,24 @@
+ #define CSR_SPTBR           0x180
+ #define CSR_SATP            0x180
  
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index f027be7f16..225e407cff 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -71,6 +71,16 @@ bool riscv_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
- 
- #if !defined(CONFIG_USER_ONLY)
- 
-+/* Return true is floating point support is currently enabled */
-+bool riscv_cpu_fp_enabled(CPURISCVState *env)
-+{
-+    if (env->mstatus & MSTATUS_FS) {
-+        return true;
-+    }
++/* Hpervisor CSRs */
++#define CSR_HSTATUS         0x600
++#define CSR_HEDELEG         0x602
++#define CSR_HIDELEG         0x603
++#define CSR_HCOUNTERNEN     0x606
++#define CSR_HGATP           0x680
 +
-+    return false;
-+}
++#if defined(TARGET_RISCV32)
++#define HGATP_MODE           SATP32_MODE
++#define HGATP_VMID           SATP32_ASID
++#define HGATP_PPN            SATP32_PPN
++#endif
++#if defined(TARGET_RISCV64)
++#define HGATP_MODE           SATP64_MODE
++#define HGATP_VMID           SATP64_ASID
++#define HGATP_PPN            SATP64_PPN
++#endif
 +
- int riscv_cpu_claim_interrupts(RISCVCPU *cpu, uint32_t interrupts)
- {
-     CPURISCVState *env = &cpu->env;
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index e0d4586760..2789215b5e 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -46,7 +46,7 @@ void riscv_set_csr_ops(int csrno, riscv_csr_operations *ops)
- static int fs(CPURISCVState *env, int csrno)
- {
- #if !defined(CONFIG_USER_ONLY)
--    if (!env->debugger && !(env->mstatus & MSTATUS_FS)) {
-+    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
-         return -1;
-     }
- #endif
-@@ -108,7 +108,7 @@ static int pmp(CPURISCVState *env, int csrno)
- static int read_fflags(CPURISCVState *env, int csrno, target_ulong *val)
- {
- #if !defined(CONFIG_USER_ONLY)
--    if (!env->debugger && !(env->mstatus & MSTATUS_FS)) {
-+    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
-         return -1;
-     }
- #endif
-@@ -119,7 +119,7 @@ static int read_fflags(CPURISCVState *env, int csrno, target_ulong *val)
- static int write_fflags(CPURISCVState *env, int csrno, target_ulong val)
- {
- #if !defined(CONFIG_USER_ONLY)
--    if (!env->debugger && !(env->mstatus & MSTATUS_FS)) {
-+    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
-         return -1;
-     }
-     env->mstatus |= MSTATUS_FS;
-@@ -131,7 +131,7 @@ static int write_fflags(CPURISCVState *env, int csrno, target_ulong val)
- static int read_frm(CPURISCVState *env, int csrno, target_ulong *val)
- {
- #if !defined(CONFIG_USER_ONLY)
--    if (!env->debugger && !(env->mstatus & MSTATUS_FS)) {
-+    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
-         return -1;
-     }
- #endif
-@@ -142,7 +142,7 @@ static int read_frm(CPURISCVState *env, int csrno, target_ulong *val)
- static int write_frm(CPURISCVState *env, int csrno, target_ulong val)
- {
- #if !defined(CONFIG_USER_ONLY)
--    if (!env->debugger && !(env->mstatus & MSTATUS_FS)) {
-+    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
-         return -1;
-     }
-     env->mstatus |= MSTATUS_FS;
-@@ -154,7 +154,7 @@ static int write_frm(CPURISCVState *env, int csrno, target_ulong val)
- static int read_fcsr(CPURISCVState *env, int csrno, target_ulong *val)
- {
- #if !defined(CONFIG_USER_ONLY)
--    if (!env->debugger && !(env->mstatus & MSTATUS_FS)) {
-+    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
-         return -1;
-     }
- #endif
-@@ -166,7 +166,7 @@ static int read_fcsr(CPURISCVState *env, int csrno, target_ulong *val)
- static int write_fcsr(CPURISCVState *env, int csrno, target_ulong val)
- {
- #if !defined(CONFIG_USER_ONLY)
--    if (!env->debugger && !(env->mstatus & MSTATUS_FS)) {
-+    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
-         return -1;
-     }
-     env->mstatus |= MSTATUS_FS;
-@@ -307,6 +307,7 @@ static int write_mstatus(CPURISCVState *env, int csrno, target_ulong val)
- {
-     target_ulong mstatus = env->mstatus;
-     target_ulong mask = 0;
-+    int dirty;
+ /* Physical Memory Protection */
+ #define CSR_PMPCFG0         0x3a0
+ #define CSR_PMPCFG1         0x3a1
+@@ -206,23 +224,6 @@
+ #define CSR_DPC             0x7b1
+ #define CSR_DSCRATCH        0x7b2
  
-     /* flush tlb on mstatus fields that affect VM */
-     if (env->priv_ver <= PRIV_VERSION_1_09_1) {
-@@ -340,8 +341,9 @@ static int write_mstatus(CPURISCVState *env, int csrno, target_ulong val)
- 
-     mstatus = (mstatus & ~mask) | (val & mask);
- 
--    int dirty = ((mstatus & MSTATUS_FS) == MSTATUS_FS) |
--                ((mstatus & MSTATUS_XS) == MSTATUS_XS);
-+    dirty = (riscv_cpu_fp_enabled(env) &&
-+             ((mstatus & MSTATUS_FS) == MSTATUS_FS)) |
-+            ((mstatus & MSTATUS_XS) == MSTATUS_XS);
-     mstatus = set_field(mstatus, MSTATUS_SD, dirty);
-     env->mstatus = mstatus;
- 
+-/* Hpervisor CSRs */
+-#define CSR_HSTATUS         0xa00
+-#define CSR_HEDELEG         0xa02
+-#define CSR_HIDELEG         0xa03
+-#define CSR_HGATP           0xa80
+-
+-#if defined(TARGET_RISCV32)
+-#define HGATP_MODE           SATP32_MODE
+-#define HGATP_ASID           SATP32_ASID
+-#define HGATP_PPN            SATP32_PPN
+-#endif
+-#if defined(TARGET_RISCV64)
+-#define HGATP_MODE           SATP64_MODE
+-#define HGATP_ASID           SATP64_ASID
+-#define HGATP_PPN            SATP64_PPN
+-#endif
+-
+ /* Performance Counters */
+ #define CSR_MHPMCOUNTER3    0xb03
+ #define CSR_MHPMCOUNTER4    0xb04
 -- 
 2.22.0
 
