@@ -1,71 +1,74 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1i1BQx-0001h5-K4
-	for mharc-qemu-riscv@gnu.org; Fri, 23 Aug 2019 11:24:59 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:59829)
+	id 1i1BR2-0001of-RM
+	for mharc-qemu-riscv@gnu.org; Fri, 23 Aug 2019 11:25:04 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59887)
  by lists.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <prvs=1314b2cac=alistair.francis@wdc.com>)
- id 1i1BQt-0001cA-Qz
- for qemu-riscv@nongnu.org; Fri, 23 Aug 2019 11:24:56 -0400
+ id 1i1BQy-0001im-LS
+ for qemu-riscv@nongnu.org; Fri, 23 Aug 2019 11:25:02 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
  (envelope-from <prvs=1314b2cac=alistair.francis@wdc.com>)
- id 1i1BQs-00006d-O0
- for qemu-riscv@nongnu.org; Fri, 23 Aug 2019 11:24:55 -0400
-Received: from esa3.hgst.iphmx.com ([216.71.153.141]:38171)
+ id 1i1BQx-000098-67
+ for qemu-riscv@nongnu.org; Fri, 23 Aug 2019 11:25:00 -0400
+Received: from esa3.hgst.iphmx.com ([216.71.153.141]:38180)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <prvs=1314b2cac=alistair.francis@wdc.com>)
- id 1i1BQp-0008UJ-8p; Fri, 23 Aug 2019 11:24:51 -0400
+ id 1i1BQu-00006k-0k; Fri, 23 Aug 2019 11:24:56 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1566573891; x=1598109891;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=KyjKoVgbWjhyAWWaXNNmm6XdA3xsCMe/mYWaSmUNglc=;
- b=T6xf1bTJEEwE3Un/lQx9EgjulVvu21027OdRi/tVLB7M4aQytW5tkt2U
- fIqkmdLUy74q++8tltbRfbB391YuhonJOo7Li0KE6YDnhAi6IGyBhmiTY
- xn1fMFAX1x1fXuPzIBCD0UCfIfEbP4Pm4tOK6n9kNLjKKE+jBIDRSE7B8
- 4IjuqZoCdlJoKI6eLzj3JlvpO3c3NGvJWkgvYm4EHA2fiWxbb5puI9al/
- 8Ht3DDUuxAZ677MW7LHbcE67iI82JX0k6AAe86xquYR14NPEsW14DsxgE
- 0AT1astSwuyJoi3PJaarvil8bVQoRtSrFtnPmRKZ6k1bOA0xXo7+3Xrq5 A==;
-IronPort-SDR: 9n4P8hYC0npJ366ZGU9zQOdrxdct5YJbyk7wYlZCPztHH0hzboRR926VZYD/r/0qd3//cpfnzQ
- hukMjR9jvKh8C+RnyYRD2Ll85KrvIsdgAaGsQTKyshaqHPRJxEvQsHpaTRUWNKatdBmbfRrVd/
- JdTcAT0y+gYudIDOD0KPnFpErXrGG3YSxPj6S0buZwPbKPejWBy68h45jAd3kKP4ZgkH8pw2QG
- x6jjibnf1gDZ1oQ34kPFVzhUGucVcDxE7UWlHVoWfC9wpqOb4G8I2dNIUYZh2EK1GBeoTnPIdo
- EO8=
-X-IronPort-AV: E=Sophos;i="5.64,421,1559491200"; d="scan'208";a="121112408"
+ t=1566573896; x=1598109896;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=PdiuAFmDem2NcfwIlr7KZfavdshqYdGNmEj5KDDvBgE=;
+ b=PushthN4caFhdVMbkv21FwIx19dqjzIYoBdgOqtQiFrijpz62s2tovwt
+ ccileltO8OKC6ssVcbL5M/TsTn3X9vEKltKH2ENh635VnFYHgZZ/aEM3S
+ +UHnTt4xm/4CcrPuBUQrvneB9b2X0Brl9XrVWyeteS5OFT1ZRRdJnYLtn
+ kMjRPVeXqjGg8lyCdf+kr9Angm/JfKihdxdjZSD8V/FYNFPUMrPcM42se
+ LV4ySkgw+ud+LJ4Hi1XSXCgF/dLjBGcRE+AW3pvZzJ5TsEE8XTwPB3Hgo
+ S4ugcwUlAglttZYhy1JRkgBDt2l0toGCkZnGLRlFdwAbEulKuZxpjmPYY A==;
+IronPort-SDR: PjjUuMf2Gcl0oBrpzrM3gMlM/LShPynLBIZ1v1CSJtz+c16r+rOGHnUQddK+M3yJtuHhbGly6z
+ GWr+5j+QD6sw6y2Sp9hTTgjfwhf3lgfSnUtYfrKo75Il9O1jcbFB4Lem/B3aafnA2JAsSe1bVM
+ jqXFDyQgLBUv9hkZsAcKmo4/NkdQ+/olwaR76kysypp9vgu5aLrtXzT9wmPtRmHgUQnjd33WxW
+ X7lQOokQTsngkIzqIs2PGZLYTHDW0bZ2WNGP6ECZrTALtZOxRl1v5bsHVhOdGNk6n1shWKG5rd
+ vzI=
+X-IronPort-AV: E=Sophos;i="5.64,421,1559491200"; d="scan'208";a="121112425"
 Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com)
  ([199.255.45.15])
- by ob1.hgst.iphmx.com with ESMTP; 23 Aug 2019 23:24:47 +0800
-IronPort-SDR: m7F8lq3QBG0YSspES/EuyHIvQr682LuuHpNwga9651x9ORCZpMslCOYQEmHUwmmE1xpfKQBJIP
- lpb8cG2/gaW0YOrKBOEdAboXN1LfvwlBgoAm7eXpjzIgu7K5GuxbiAwULrlw9BpcbN5dno63F7
- w1wCvI59prYATAhyHlI/t/bpqDHAv/KmQwNL1GS8Cofu8gl10P0X83XG1JeuDKml881eZ3PxLQ
- CjmwV4x5RX62cXgw61d9+1X8ClYWxk4vp+0R1IeM9wf4/+D03bk5tdOXWX2RTq+PGUqaCTIvbs
- Ir9lbprqV7QhG2em4jgf3bX4
+ by ob1.hgst.iphmx.com with ESMTP; 23 Aug 2019 23:24:54 +0800
+IronPort-SDR: N3Xi1dFyrGYvIPlUwlKUYeUMaIq+qSkQ/OyX7m0Eb7PQQt0K+ci2XGmaByvI7V6zatbOp/1jRk
+ 830FpLazyiMqqFvzFyORpCYzLnb+MFaPNHqB7iHhmAY32YpcvHXbBxqZrknpHRl+gLx3c6PKTc
+ YQXFY6w4zPX+ny4AvDbRABiTawpTIsuZw+KDMf1xh8XIjWtuLCYY5tC+ueJ922mCl25VsZ2aGp
+ 3ZeD0QgChQ7VEFf3lWHbJmMN82nu+kJTTQA5++PHl3zn3vPrqWOd+AIeo9QP+Oo7nGmAY7OCiK
+ 16s0yAoN+tJ/WdjxZT6cNM8O
 Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
  by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 23 Aug 2019 08:22:04 -0700
-IronPort-SDR: ArdcPMrAyMyFGftskyl36yRMFFw57SG3j5QQbf5GSPVTa2kHscmc5Gm8zu2Qfx3kFm7vZMxYzB
- QpM+918FsJzf5+8kVbgE1sfYOn8O3Q4NR99OGA59oMqRVCsY2D6PRJgm+199OBTpvoN33H1niU
- ATi5HlyDDTd5iO4v4okliMMSuahO5WBtdy2iOtyMnwYyx6R8KB51usJwDzX7CvTgs4m3BPDEhZ
- 8w1QiT1/mfcYp9Bq4V/OEsoFuAmHrmoPrLF2rmu/I7+wdJCDDxfgPAg0g+jnMzvMnXeal0on9i
- Wpo=
+ 23 Aug 2019 08:22:12 -0700
+IronPort-SDR: 6C7Q1t4ltlnGsc7UZfA1ZJf+9LENhRBr6fZhqwRZUC6LxVEFXFNc7CE/H4MwsavpPHpK/raeTq
+ zsY9y/yozsr6qW+4MwGZE14W+uYtgJvUfGlPcrLBkNOb3QKlGxG8oR8qmKqaWcM44QSOA4fgIG
+ JkiuFtB9INOMVvX3WfVIeSbRxSx4jRt4YHppIYm0LNtH1SjsAmg7pwdFHPqzUJamlsGQuQZr+e
+ gNhG2MUWAPglslWs1jOt8/6yDqW0m8LVOMW+Z3O7K7Gld379tojCaoO5+nKTytJrZZAqViK6C7
+ dMc=
 WDCIronportException: Internal
 Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
  risc6-mainframe.int.fusionio.com) ([10.196.157.58])
- by uls-op-cesaip02.wdc.com with ESMTP; 23 Aug 2019 08:24:47 -0700
+ by uls-op-cesaip02.wdc.com with ESMTP; 23 Aug 2019 08:24:55 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: palmer@sifive.com, alistair.francis@wdc.com, alistair23@gmail.com,
  bmeng.cn@gmail.com
-Date: Fri, 23 Aug 2019 08:21:06 -0700
-Message-Id: <cover.1566573576.git.alistair.francis@wdc.com>
+Date: Fri, 23 Aug 2019 08:21:14 -0700
+Message-Id: <5cc26abb98a9534720f09674b4b9caafb8f2cf0a.1566573576.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.22.0
+In-Reply-To: <cover.1566573576.git.alistair.francis@wdc.com>
+References: <cover.1566573576.git.alistair.francis@wdc.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: FreeBSD 9.x
 X-Received-From: 216.71.153.141
-Subject: [Qemu-riscv] [PATCH v4 0/7]  RISC-V: Hypervisor prep work part 2
+Subject: [Qemu-riscv] [PATCH v4 3/7] target/riscv: Create function to test
+ if FP is enabled
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -77,57 +80,158 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Aug 2019 15:24:57 -0000
+X-List-Received-Date: Fri, 23 Aug 2019 15:25:03 -0000
 
+Let's create a function that tests if floating point support is
+enabled. We can then protect all floating point operations based on if
+they are enabled.
 
-The first three patches are ones that I have pulled out of my original
-Hypervisor series at an attempt to reduce the number of patches in the
-series.
+This patch so far doesn't change anything, it's just preparing for the
+Hypervisor support for floating point operations.
 
-These three patches all make sense without the Hypervisor series so can
-be merged seperatley and will reduce the review burden of the next
-version of the patches.
+Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Philippe Mathieu-Daudé <philmd@redhat.com>
+Reviewed-by: Christophe de Dinechin <dinechin@redhat.com>
+Reviewed-by: Chih-Min Chao <chihmin.chao@sifive.com>
+Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+---
+ target/riscv/cpu.h        |  6 +++++-
+ target/riscv/cpu_helper.c | 10 ++++++++++
+ target/riscv/csr.c        | 20 +++++++++++---------
+ 3 files changed, 26 insertions(+), 10 deletions(-)
 
-The fource patch is a prep patch for the new v0.4 Hypervisor spec.
-
-The fifth patch is unreleated to Hypervisor that I'm just slipping in
-here because it seems easier then sending it by itself.
-
-The final two patches are issues I discovered while adding the v0.4
-Hypervisor extension.
-
-v4:
- - Drop MIP change patch
- - Add a Floating Point fixup patch
-v3:
- - Change names of all GP registers
- - Add two more patches
-v2:
- - Small corrections based on feedback
- - Remove the CSR permission check patch
-
-
-
-Alistair Francis (6):
-  target/riscv: Don't set write permissions on dirty PTEs
-  riscv: plic: Remove unused interrupt functions
-  target/riscv: Create function to test if FP is enabled
-  target/riscv: Update the Hypervisor CSRs to v0.4
-  target/riscv: Fix mstatus dirty mask
-  target/riscv: Use TB_FLAGS_MSTATUS_FS for floating point
-
-Atish Patra (1):
-  target/riscv: Use both register name and ABI name
-
- hw/riscv/sifive_plic.c         | 12 ------------
- include/hw/riscv/sifive_plic.h |  3 ---
- target/riscv/cpu.c             | 19 ++++++++++--------
- target/riscv/cpu.h             |  6 +++++-
- target/riscv/cpu_bits.h        | 35 +++++++++++++++++-----------------
- target/riscv/cpu_helper.c      | 16 ++++++++++++----
- target/riscv/csr.c             | 22 +++++++++++----------
- 7 files changed, 58 insertions(+), 55 deletions(-)
-
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 240b31e2eb..eb7b5b0af3 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -255,6 +255,7 @@ void riscv_cpu_do_interrupt(CPUState *cpu);
+ int riscv_cpu_gdb_read_register(CPUState *cpu, uint8_t *buf, int reg);
+ int riscv_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
+ bool riscv_cpu_exec_interrupt(CPUState *cs, int interrupt_request);
++bool riscv_cpu_fp_enabled(CPURISCVState *env);
+ int riscv_cpu_mmu_index(CPURISCVState *env, bool ifetch);
+ hwaddr riscv_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
+ void  riscv_cpu_do_unaligned_access(CPUState *cs, vaddr addr,
+@@ -298,7 +299,10 @@ static inline void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
+ #ifdef CONFIG_USER_ONLY
+     *flags = TB_FLAGS_MSTATUS_FS;
+ #else
+-    *flags = cpu_mmu_index(env, 0) | (env->mstatus & MSTATUS_FS);
++    *flags = cpu_mmu_index(env, 0);
++    if (riscv_cpu_fp_enabled(env)) {
++        *flags |= env->mstatus & MSTATUS_FS;
++    }
+ #endif
+ }
+ 
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index f027be7f16..225e407cff 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -71,6 +71,16 @@ bool riscv_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
+ 
+ #if !defined(CONFIG_USER_ONLY)
+ 
++/* Return true is floating point support is currently enabled */
++bool riscv_cpu_fp_enabled(CPURISCVState *env)
++{
++    if (env->mstatus & MSTATUS_FS) {
++        return true;
++    }
++
++    return false;
++}
++
+ int riscv_cpu_claim_interrupts(RISCVCPU *cpu, uint32_t interrupts)
+ {
+     CPURISCVState *env = &cpu->env;
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index e0d4586760..2789215b5e 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -46,7 +46,7 @@ void riscv_set_csr_ops(int csrno, riscv_csr_operations *ops)
+ static int fs(CPURISCVState *env, int csrno)
+ {
+ #if !defined(CONFIG_USER_ONLY)
+-    if (!env->debugger && !(env->mstatus & MSTATUS_FS)) {
++    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
+         return -1;
+     }
+ #endif
+@@ -108,7 +108,7 @@ static int pmp(CPURISCVState *env, int csrno)
+ static int read_fflags(CPURISCVState *env, int csrno, target_ulong *val)
+ {
+ #if !defined(CONFIG_USER_ONLY)
+-    if (!env->debugger && !(env->mstatus & MSTATUS_FS)) {
++    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
+         return -1;
+     }
+ #endif
+@@ -119,7 +119,7 @@ static int read_fflags(CPURISCVState *env, int csrno, target_ulong *val)
+ static int write_fflags(CPURISCVState *env, int csrno, target_ulong val)
+ {
+ #if !defined(CONFIG_USER_ONLY)
+-    if (!env->debugger && !(env->mstatus & MSTATUS_FS)) {
++    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
+         return -1;
+     }
+     env->mstatus |= MSTATUS_FS;
+@@ -131,7 +131,7 @@ static int write_fflags(CPURISCVState *env, int csrno, target_ulong val)
+ static int read_frm(CPURISCVState *env, int csrno, target_ulong *val)
+ {
+ #if !defined(CONFIG_USER_ONLY)
+-    if (!env->debugger && !(env->mstatus & MSTATUS_FS)) {
++    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
+         return -1;
+     }
+ #endif
+@@ -142,7 +142,7 @@ static int read_frm(CPURISCVState *env, int csrno, target_ulong *val)
+ static int write_frm(CPURISCVState *env, int csrno, target_ulong val)
+ {
+ #if !defined(CONFIG_USER_ONLY)
+-    if (!env->debugger && !(env->mstatus & MSTATUS_FS)) {
++    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
+         return -1;
+     }
+     env->mstatus |= MSTATUS_FS;
+@@ -154,7 +154,7 @@ static int write_frm(CPURISCVState *env, int csrno, target_ulong val)
+ static int read_fcsr(CPURISCVState *env, int csrno, target_ulong *val)
+ {
+ #if !defined(CONFIG_USER_ONLY)
+-    if (!env->debugger && !(env->mstatus & MSTATUS_FS)) {
++    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
+         return -1;
+     }
+ #endif
+@@ -166,7 +166,7 @@ static int read_fcsr(CPURISCVState *env, int csrno, target_ulong *val)
+ static int write_fcsr(CPURISCVState *env, int csrno, target_ulong val)
+ {
+ #if !defined(CONFIG_USER_ONLY)
+-    if (!env->debugger && !(env->mstatus & MSTATUS_FS)) {
++    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
+         return -1;
+     }
+     env->mstatus |= MSTATUS_FS;
+@@ -307,6 +307,7 @@ static int write_mstatus(CPURISCVState *env, int csrno, target_ulong val)
+ {
+     target_ulong mstatus = env->mstatus;
+     target_ulong mask = 0;
++    int dirty;
+ 
+     /* flush tlb on mstatus fields that affect VM */
+     if (env->priv_ver <= PRIV_VERSION_1_09_1) {
+@@ -340,8 +341,9 @@ static int write_mstatus(CPURISCVState *env, int csrno, target_ulong val)
+ 
+     mstatus = (mstatus & ~mask) | (val & mask);
+ 
+-    int dirty = ((mstatus & MSTATUS_FS) == MSTATUS_FS) |
+-                ((mstatus & MSTATUS_XS) == MSTATUS_XS);
++    dirty = (riscv_cpu_fp_enabled(env) &&
++             ((mstatus & MSTATUS_FS) == MSTATUS_FS)) |
++            ((mstatus & MSTATUS_XS) == MSTATUS_XS);
+     mstatus = set_field(mstatus, MSTATUS_SD, dirty);
+     env->mstatus = mstatus;
+ 
 -- 
 2.22.0
 
