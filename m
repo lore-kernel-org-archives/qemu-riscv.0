@@ -1,64 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1i11rd-0004Yb-7U
-	for mharc-qemu-riscv@gnu.org; Fri, 23 Aug 2019 01:11:53 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:45228)
+	id 1i11rq-0004fE-Sw
+	for mharc-qemu-riscv@gnu.org; Fri, 23 Aug 2019 01:12:06 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:45345)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <bmeng.cn@gmail.com>) id 1i11rX-0004S4-Ju
- for qemu-riscv@nongnu.org; Fri, 23 Aug 2019 01:11:48 -0400
+ (envelope-from <bmeng.cn@gmail.com>) id 1i11rh-0004Zr-5P
+ for qemu-riscv@nongnu.org; Fri, 23 Aug 2019 01:11:58 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <bmeng.cn@gmail.com>) id 1i11rW-0002n0-Fb
- for qemu-riscv@nongnu.org; Fri, 23 Aug 2019 01:11:47 -0400
-Received: from mail-pl1-x643.google.com ([2607:f8b0:4864:20::643]:35561)
+ (envelope-from <bmeng.cn@gmail.com>) id 1i11rc-0002s7-Tw
+ for qemu-riscv@nongnu.org; Fri, 23 Aug 2019 01:11:57 -0400
+Received: from mail-pf1-x442.google.com ([2607:f8b0:4864:20::442]:45734)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
- id 1i11rT-0002kN-PV; Fri, 23 Aug 2019 01:11:43 -0400
-Received: by mail-pl1-x643.google.com with SMTP id gn20so4881109plb.2;
- Thu, 22 Aug 2019 22:11:43 -0700 (PDT)
+ id 1i11ra-0002q0-6j; Fri, 23 Aug 2019 01:11:50 -0400
+Received: by mail-pf1-x442.google.com with SMTP id w26so5629154pfq.12;
+ Thu, 22 Aug 2019 22:11:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:to:subject:date:message-id:in-reply-to:references;
- bh=gZltYDF3iwdJcGYLhKT3YuPe5k+kq1mwUmYAQAVkYAc=;
- b=QmglgkV9i9dSU/JgxxDAna2XKFFs0e0OOy3tqwl5ihpZbqZwpD8kpNbt87bVQsze9S
- TdliBx1wCcgqSXvzSolXweF1i106fqDN+ILUtdiLJsyKI/LQfLDeT5BGfaQtx/XZIIqE
- r22o2QGJm41gJY1eVU4NXg2xRqO4bsvg8G2JxsquCKK7Waak6Iebn8T1wgXyKMLccwRT
- LNYaUOMOeixMkgL8LzHFbJevklaUOO5Y80ezCPHC555XLYawHu0abnySbxa/VGWsT6jn
- Of1eeH52be/XIjtiN0/jLF4QA4iYfzbvpIoGlLvwUoS7sGYqAonqhCwKhNcVqxnon9tb
- fSFA==
+ bh=4/fBrUSZM2vbDjvLLKFAmPyvCRfr5pCZu6f1f6oCKKg=;
+ b=UFckUj9btkM0rqXR2PcUt44WVYMZGbnICfNBAtu5ZYKXuKngL/PAo7la3IIK5n0COc
+ lfmD/G1bQtpOPqg1RhAhLU9nJSuv8v5OaKZKx/ftLgbGQiZRiU/RB00DXSbeAcjsTSpW
+ Xf69DGv7+RvFoawZ4prfx62xBML66LBzkdBhWW8V0WUBVUCrkxndlQ3LJwSh44tfD4hQ
+ V61aW0D4GaWOyNfMWwwxNXS+CS+YW8200YLC2W7MsEhn2DMcWK1rZCiOUAevjzexLVyG
+ z1KWL//hej2MsOQPs+AoowsJ/vGBS+O/d/PmFtJqCmrnzyrC56WD0dMVfbfMX97B16S2
+ aRUw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
  :references;
- bh=gZltYDF3iwdJcGYLhKT3YuPe5k+kq1mwUmYAQAVkYAc=;
- b=Z3XmnaNkp2mtl74VtblSwfoHlzRg+tOxA5OxxcOlwIx0ASpGz4cYdfZSkRFoTUaxQf
- iTLBuzMpWRO94oIUsMWeBHDXZAcy2YJI/DqUrLi8uo8IIhtOjLh6I2/AhqN7bfidC/9x
- hasrPFoWsSlcrobk0OIxY4fp+HC31xC8X1+4NIU3yTIwGyJl5WlmtL202urSa2gkezfL
- ku7Tlbm4Gs/1Q+FivKB6hOulUxdYfDOmRr6lfXrepHVxzS0RpMBW1jnIioY421/KEipE
- uKV0+2VGLTvYWU2wIkWpnVvp3986LP8GMyrTKIKFwzXdZwDfIRrZOdOEuksbMQpT/xLd
- pCkg==
-X-Gm-Message-State: APjAAAXpFnti5wxjpWG7acCfreTeil0NoPZq8C7qVJKCLm2NO57ai6O2
- 1UgeiHqYybvTRqpjErUorXE=
-X-Google-Smtp-Source: APXvYqyPP9Dqypdi929g5eyAkxQt0ZanfCzYwVd4WtAhF+plGFMHvsui8ueHNYIWZj2isTKb3vJHEg==
-X-Received: by 2002:a17:902:542:: with SMTP id
- 60mr2557669plf.272.1566537103122; 
- Thu, 22 Aug 2019 22:11:43 -0700 (PDT)
+ bh=4/fBrUSZM2vbDjvLLKFAmPyvCRfr5pCZu6f1f6oCKKg=;
+ b=GR5Kcj/fG11v39LvxfOzofHgUIbvRaNSEtNlvxRMO6spCWufpINc2xTvueUBCja6t3
+ Rk4163y20jNAv5XvuHf8tan/pdSgzdILS6k0hirqoJ8faPb1ZG59GyR83ksPNsfRi1z7
+ vri+ai8XWhohzwQ254IWyeras9Jr6iqWxuM41FJ9hNKhxWE4fogscYcD9vX8WaaL3NkM
+ uODdy648ibN5DOSyZldfKFGbF0wjZGNU+C43o/2KHi1mz0PfgacR8ZXZphhEPHGaz9/z
+ TfQ/0Fbx9uIK6VuDTJT0VoOqgWdIKkRMN6n3pilLQWdFCKWHc9zm7fXcjWSdtZUh1xyl
+ hrEg==
+X-Gm-Message-State: APjAAAU/c2JqStvgLkR8XGrMGiFq7ylUxLqDlRviEkriD9SSkabrzwK/
+ YGfU3oLKjYorj6k6cpyXV64=
+X-Google-Smtp-Source: APXvYqxHmuXhoMyIKBVTADJoFNU93+MVlgM0m8WfqFtMqrhiyKMYbZl0DbGOFOHGMZHOdozHrKJiGQ==
+X-Received: by 2002:a65:50c5:: with SMTP id s5mr2361462pgp.368.1566537109438; 
+ Thu, 22 Aug 2019 22:11:49 -0700 (PDT)
 Received: from localhost.localdomain (unknown-224-80.windriver.com.
  [147.11.224.80])
- by smtp.gmail.com with ESMTPSA id v189sm1122527pfv.176.2019.08.22.22.11.42
+ by smtp.gmail.com with ESMTPSA id v189sm1122527pfv.176.2019.08.22.22.11.48
  (version=TLS1 cipher=AES128-SHA bits=128/128);
- Thu, 22 Aug 2019 22:11:42 -0700 (PDT)
+ Thu, 22 Aug 2019 22:11:48 -0700 (PDT)
 From: Bin Meng <bmeng.cn@gmail.com>
 To: Alistair Francis <Alistair.Francis@wdc.com>,
  Palmer Dabbelt <palmer@sifive.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
-Date: Thu, 22 Aug 2019 22:11:03 -0700
-Message-Id: <1566537069-22741-25-git-send-email-bmeng.cn@gmail.com>
+Date: Thu, 22 Aug 2019 22:11:09 -0700
+Message-Id: <1566537069-22741-31-git-send-email-bmeng.cn@gmail.com>
 X-Mailer: git-send-email 1.7.1
 In-Reply-To: <1566537069-22741-1-git-send-email-bmeng.cn@gmail.com>
 References: <1566537069-22741-1-git-send-email-bmeng.cn@gmail.com>
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::643
-Subject: [Qemu-riscv] [PATCH v5 24/30] riscv: sifive_u: Change UART node
- name in device tree
+X-Received-From: 2607:f8b0:4864:20::442
+Subject: [Qemu-riscv] [PATCH v5 30/30] riscv: sifive_u: Update model and
+ compatible strings in device tree
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -70,16 +69,14 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Aug 2019 05:11:50 -0000
+X-List-Received-Date: Fri, 23 Aug 2019 05:11:59 -0000
 
-OpenSBI for fu540 does DT fix up (see fu540_modify_dt()) by updating
-chosen "stdout-path" to point to "/soc/serial@...", and U-Boot will
-use this information to locate the serial node and probe its driver.
-However currently we generate the UART node name as "/soc/uart@...",
-causing U-Boot fail to find the serial node in DT.
+This updates model and compatible strings to use the same strings
+as used in the Linux kernel device tree (hifive-unleashed-a00.dts).
 
 Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+
 ---
 
 Changes in v5: None
@@ -87,22 +84,25 @@ Changes in v4: None
 Changes in v3: None
 Changes in v2: None
 
- hw/riscv/sifive_u.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ hw/riscv/sifive_u.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
 diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-index 1a178dc..6cf669c 100644
+index 1140c38..fae19fe 100644
 --- a/hw/riscv/sifive_u.c
 +++ b/hw/riscv/sifive_u.c
-@@ -287,7 +287,7 @@ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
-     uartclk_phandle = qemu_fdt_get_phandle(fdt, nodename);
-     g_free(nodename);
+@@ -97,8 +97,9 @@ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
+         exit(1);
+     }
  
--    nodename = g_strdup_printf("/soc/uart@%lx",
-+    nodename = g_strdup_printf("/soc/serial@%lx",
-         (long)memmap[SIFIVE_U_UART0].base);
-     qemu_fdt_add_subnode(fdt, nodename);
-     qemu_fdt_setprop_string(fdt, nodename, "compatible", "sifive,uart0");
+-    qemu_fdt_setprop_string(fdt, "/", "model", "ucbbar,spike-bare,qemu");
+-    qemu_fdt_setprop_string(fdt, "/", "compatible", "ucbbar,spike-bare-dev");
++    qemu_fdt_setprop_string(fdt, "/", "model", "SiFive HiFive Unleashed A00");
++    qemu_fdt_setprop_string(fdt, "/", "compatible",
++                            "sifive,hifive-unleashed-a00");
+     qemu_fdt_setprop_cell(fdt, "/", "#size-cells", 0x2);
+     qemu_fdt_setprop_cell(fdt, "/", "#address-cells", 0x2);
+ 
 -- 
 2.7.4
 
