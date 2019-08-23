@@ -1,21 +1,21 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1i1FRE-0000la-Ns
-	for mharc-qemu-riscv@gnu.org; Fri, 23 Aug 2019 15:41:32 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:50756)
+	id 1i1FRa-0001Lx-F2
+	for mharc-qemu-riscv@gnu.org; Fri, 23 Aug 2019 15:41:54 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:50798)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <tony.nguyen@bt.com>) id 1i1FR2-0000SK-C1
- for qemu-riscv@nongnu.org; Fri, 23 Aug 2019 15:41:30 -0400
+ (envelope-from <tony.nguyen@bt.com>) id 1i1FRM-0000xf-NE
+ for qemu-riscv@nongnu.org; Fri, 23 Aug 2019 15:41:51 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <tony.nguyen@bt.com>) id 1i1FQr-00035N-RD
- for qemu-riscv@nongnu.org; Fri, 23 Aug 2019 15:41:20 -0400
-Received: from nsstlmta07p.bpe.bigpond.com ([203.38.21.7]:46676)
+ (envelope-from <tony.nguyen@bt.com>) id 1i1FRB-0003CC-NW
+ for qemu-riscv@nongnu.org; Fri, 23 Aug 2019 15:41:40 -0400
+Received: from nsstlmta39p.bpe.bigpond.com ([203.38.21.39]:45799)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <tony.nguyen@bt.com>)
- id 1i1FPO-00027w-D7; Fri, 23 Aug 2019 15:39:40 -0400
+ id 1i1FPg-0002DQ-JU; Fri, 23 Aug 2019 15:39:58 -0400
 Received: from smtp.telstra.com ([10.10.24.4])
- by nsstlfep07p-svc.bpe.nexus.telstra.com.au with ESMTP id
- <20190823193932.BBUI4111.nsstlfep07p-svc.bpe.nexus.telstra.com.au@smtp.telstra.com>;
- Sat, 24 Aug 2019 05:39:32 +1000
+ by nsstlfep39p-svc.bpe.nexus.telstra.com.au with ESMTP id
+ <20190823193950.RIGR26347.nsstlfep39p-svc.bpe.nexus.telstra.com.au@smtp.telstra.com>;
+ Sat, 24 Aug 2019 05:39:50 +1000
 X-RG-Spam: Unknown
 X-RazorGate-Vade: 
 X-RazorGate-Vade-Verdict: clean 0
@@ -24,67 +24,69 @@ X-RG-VS-CLASS: clean
 X-Authentication-Info: Submitted using ID tony.nguyen.git@bigpond.com
 Received: from dbz.telstra.com.au (58.173.98.68) by smtp.telstra.com (5.8.335)
  (authenticated as tony.nguyen.git@bigpond.com)
- id 5D3692920C8EBD6D; Sat, 24 Aug 2019 05:39:30 +1000
+ id 5D3692920C8EC1BD; Sat, 24 Aug 2019 05:39:47 +1000
 From: Tony Nguyen <tony.nguyen@bt.com>
 To: qemu-devel@nongnu.org
 Cc: Tony Nguyen <tony.nguyen@bt.com>,
  Richard Henderson <richard.henderson@linaro.org>,
  David Gibson <david@gibson.dropbear.id.au>,
- Richard Henderson <rth@twiddle.net>, Paolo Bonzini <pbonzini@redhat.com>,
- Alistair Francis <alistair@alistair23.me>,
- Peter Maydell <peter.maydell@linaro.org>,
- Beniamino Galvani <b.galvani@gmail.com>,
- =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
- Andrew Jeffery <andrew@aj.id.au>, Joel Stanley <joel@jms.id.au>,
- Igor Mitsyanko <i.mitsyanko@gmail.com>, Rob Herring <robh@kernel.org>,
- Peter Chubb <peter.chubb@nicta.com.au>,
- Subbaraya Sundeep <sundeep.lkml@gmail.com>, Jan Kiszka <jan.kiszka@web.de>,
- Andrzej Zaborowski <balrogg@gmail.com>, Gerd Hoffmann <kraxel@redhat.com>,
- John Snow <jsnow@redhat.com>, Kevin Wolf <kwolf@redhat.com>,
- Max Reitz <mreitz@redhat.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>,
- Andrew Baumann <Andrew.Baumann@microsoft.com>,
- =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
- Antony Pavlov <antonynpavlov@gmail.com>, Thomas Huth <huth@tuxfamily.org>,
- "Michael S. Tsirkin" <mst@redhat.com>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- =?UTF-8?q?Herv=C3=A9=20Poussineau?= <hpoussin@reactos.org>,
- Aleksandar Rikalo <arikalo@wavecomp.com>, Michael Walle <michael@walle.cc>,
- Guan Xuetao <gxt@mprc.pku.edu.cn>,
+ "Michael S. Tsirkin" <mst@redhat.com>, Igor Mammedov <imammedo@redhat.com>,
  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Xiao Guangrong <xiaoguangrong.eric@gmail.com>,
+ Richard Henderson <rth@twiddle.net>,
+ =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
+ Peter Maydell <peter.maydell@linaro.org>, Andrew Jeffery <andrew@aj.id.au>,
+ Joel Stanley <joel@jms.id.au>, Eric Auger <eric.auger@redhat.com>,
+ Gerd Hoffmann <kraxel@redhat.com>, Keith Busch <keith.busch@intel.com>,
+ Kevin Wolf <kwolf@redhat.com>, Max Reitz <mreitz@redhat.com>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Alistair Francis <alistair@alistair23.me>,
+ =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ Peter Chubb <peter.chubb@nicta.com.au>,
+ BALATON Zoltan <balaton@eik.bme.hu>,
+ Andrzej Zaborowski <balrogg@gmail.com>,
+ Andrew Baumann <Andrew.Baumann@microsoft.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>,
+ Guan Xuetao <gxt@mprc.pku.edu.cn>, Helge Deller <deller@gmx.de>,
  Eduardo Habkost <ehabkost@redhat.com>,
  Stefano Stabellini <sstabellini@kernel.org>,
  Anthony Perard <anthony.perard@citrix.com>,
- Paul Durrant <paul.durrant@citrix.com>,
- Fabien Chouteau <chouteau@adacore.com>,
- KONRAD Frederic <frederic.konrad@adacore.com>,
- Aurelien Jarno <aurelien@aurel32.net>,
+ Paul Durrant <paul.durrant@citrix.com>, John Snow <jsnow@redhat.com>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Corey Minyard <minyard@acm.org>,
+ =?UTF-8?q?Herv=C3=A9=20Poussineau?= <hpoussin@reactos.org>,
  Aleksandar Markovic <amarkovic@wavecomp.com>,
- Magnus Damm <magnus.damm@gmail.com>, Alberto Garcia <berto@igalia.com>,
- Paul Burton <pburton@wavecomp.com>, Jiri Slaby <jslaby@suse.cz>,
- Jean-Christophe Dubois <jcd@tribudubois.net>,
+ Aleksandar Rikalo <arikalo@wavecomp.com>,
+ Anthony Green <green@moxielogic.com>,
+ Beniamino Galvani <b.galvani@gmail.com>, Jason Wang <jasowang@redhat.com>,
+ Dmitry Fleytman <dmitry.fleytman@gmail.com>, Stefan Weil <sw@weilnetz.de>,
+ Jiri Pirko <jiri@resnulli.us>, Rob Herring <robh@kernel.org>,
+ Laszlo Ersek <lersek@redhat.com>,
  Andrey Smirnov <andrew.smirnov@gmail.com>,
- Jason Wang <jasowang@redhat.com>, Chris Wulff <crwulff@gmail.com>,
- Marek Vasut <marex@denx.de>, Jia Liu <proljc@gmail.com>,
- Stafford Horne <shorne@gmail.com>, Palmer Dabbelt <palmer@sifive.com>,
+ Yuval Shaia <yuval.shaia@oracle.com>, Palmer Dabbelt <palmer@sifive.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Fam Zheng <fam@euphon.net>, Artyom Tarasenko <atar4qemu@gmail.com>,
- Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org,
+ Collin Walling <walling@linux.ibm.com>, Cornelia Huck <cohuck@redhat.com>,
+ David Hildenbrand <david@redhat.com>, Halil Pasic <pasic@linux.ibm.com>,
+ Christian Borntraeger <borntraeger@de.ibm.com>, Fam Zheng <fam@euphon.net>,
+ Hannes Reinecke <hare@suse.com>,
+ Subbaraya Sundeep <sundeep.lkml@gmail.com>,
+ Stefan Berger <stefanb@linux.ibm.com>,
+ Alex Williamson <alex.williamson@redhat.com>, qemu-arm@nongnu.org,
  qemu-block@nongnu.org, qemu-ppc@nongnu.org, xen-devel@lists.xenproject.org,
- qemu-riscv@nongnu.org
-Date: Sat, 24 Aug 2019 05:42:41 +1000
-Message-Id: <a04a32cf5bc28bf5682a0c82acc3f7b4a826cba2.1566588034.git.tony.nguyen@bt.com>
+ qemu-riscv@nongnu.org, qemu-s390x@nongnu.org
+Date: Sat, 24 Aug 2019 05:42:42 +1000
+Message-Id: <7ef84d32116ddd701b8423f64aa0a390a2479e85.1566588034.git.tony.nguyen@bt.com>
 X-Mailer: git-send-email 2.23.0
 In-Reply-To: <cover.1566588033.git.tony.nguyen@bt.com>
 References: <cover.1566588033.git.tony.nguyen@bt.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 3.x
-X-Received-From: 203.38.21.7
-Subject: [Qemu-riscv] [Qemu-devel] [PATCH 2/9] exec: Replace
- DEVICE_NATIVE_ENDIAN with MO_TE
+X-Received-From: 203.38.21.39
+Subject: [Qemu-riscv] [Qemu-devel] [PATCH 3/9] exec: Replace
+ DEVICE_LITTLE_ENDIAN with MO_LE
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -96,7 +98,7 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Aug 2019 19:41:31 -0000
+X-List-Received-Date: Fri, 23 Aug 2019 19:41:52 -0000
 
 Simplify endianness comparisons with consistent use of the more
 expressive MemOp.
@@ -106,3639 +108,4132 @@ Signed-off-by: Tony Nguyen <tony.nguyen@bt.com>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Acked-by: David Gibson <david@gibson.dropbear.id.au>
 ---
- exec.c                         |  8 +++----
- hw/adc/stm32f2xx_adc.c         |  2 +-
- hw/arm/allwinner-a10.c         |  2 +-
- hw/arm/armv7m.c                |  2 +-
- hw/arm/aspeed.c                |  2 +-
- hw/arm/exynos4210.c            |  2 +-
- hw/arm/highbank.c              |  2 +-
- hw/arm/integratorcp.c          |  6 +++---
- hw/arm/kzm.c                   |  2 +-
- hw/arm/msf2-soc.c              |  2 +-
- hw/arm/musicpal.c              | 20 +++++++++---------
- hw/arm/omap1.c                 | 38 +++++++++++++++++-----------------
- hw/arm/omap2.c                 | 10 ++++-----
- hw/arm/omap_sx1.c              |  2 +-
- hw/arm/palm.c                  |  2 +-
- hw/arm/pxa2xx.c                | 20 +++++++++---------
- hw/arm/pxa2xx_gpio.c           |  2 +-
- hw/arm/pxa2xx_pic.c            |  2 +-
- hw/arm/spitz.c                 |  2 +-
- hw/arm/stellaris.c             |  8 +++----
- hw/arm/strongarm.c             | 12 +++++------
- hw/arm/versatilepb.c           |  2 +-
- hw/audio/intel-hda.c           |  2 +-
- hw/block/fdc.c                 |  4 ++--
- hw/block/pflash_cfi01.c        |  2 +-
- hw/block/pflash_cfi02.c        |  2 +-
- hw/char/bcm2835_aux.c          |  2 +-
- hw/char/digic-uart.c           |  2 +-
- hw/char/exynos4210_uart.c      |  2 +-
- hw/char/mcf_uart.c             |  2 +-
- hw/char/omap_uart.c            |  6 +++---
- hw/char/parallel.c             |  2 +-
- hw/char/sh_serial.c            |  2 +-
- hw/char/stm32f2xx_usart.c      |  2 +-
- hw/char/xilinx_uartlite.c      |  2 +-
- hw/core/empty_slot.c           |  2 +-
- hw/cris/axis_dev88.c           |  4 ++--
- hw/display/bcm2835_fb.c        |  2 +-
- hw/display/cg3.c               |  2 +-
- hw/display/exynos4210_fimd.c   |  2 +-
- hw/display/jazz_led.c          |  2 +-
- hw/display/milkymist-tmu2.c    |  2 +-
- hw/display/milkymist-vgafb.c   |  2 +-
- hw/display/omap_dss.c          | 10 ++++-----
- hw/display/omap_lcdc.c         |  2 +-
- hw/display/pxa2xx_lcd.c        |  2 +-
- hw/display/tcx.c               | 14 ++++++-------
- hw/display/vga-isa-mm.c        |  2 +-
- hw/display/xlnx_dp.c           |  8 +++----
- hw/dma/i8257.c                 |  4 ++--
- hw/dma/omap_dma.c              |  4 ++--
- hw/dma/pxa2xx_dma.c            |  2 +-
- hw/dma/rc4030.c                |  4 ++--
- hw/dma/xilinx_axidma.c         |  2 +-
- hw/dma/xlnx_dpdma.c            |  2 +-
- hw/gpio/bcm2835_gpio.c         |  2 +-
- hw/gpio/imx_gpio.c             |  2 +-
- hw/gpio/omap_gpio.c            |  6 +++---
- hw/gpio/puv3_gpio.c            |  2 +-
- hw/i2c/exynos4210_i2c.c        |  2 +-
- hw/i2c/omap_i2c.c              |  2 +-
- hw/i2c/ppc4xx_i2c.c            |  2 +-
- hw/i386/kvm/apic.c             |  2 +-
- hw/i386/kvmvapic.c             |  2 +-
- hw/i386/pc.c                   |  4 ++--
- hw/i386/xen/xen_apic.c         |  2 +-
- hw/i386/xen/xen_platform.c     |  2 +-
- hw/input/milkymist-softusb.c   |  2 +-
- hw/input/pckbd.c               |  2 +-
- hw/input/pxa2xx_keypad.c       |  2 +-
- hw/intc/allwinner-a10-pic.c    |  2 +-
- hw/intc/apic.c                 |  2 +-
- hw/intc/arm_gicv3_its_common.c |  2 +-
- hw/intc/armv7m_nvic.c          |  6 +++---
- hw/intc/bcm2835_ic.c           |  2 +-
- hw/intc/bcm2836_control.c      |  2 +-
- hw/intc/exynos4210_combiner.c  |  2 +-
- hw/intc/grlib_irqmp.c          |  2 +-
- hw/intc/ioapic.c               |  2 +-
- hw/intc/mips_gic.c             |  2 +-
- hw/intc/omap_intc.c            |  4 ++--
- hw/intc/ompic.c                |  2 +-
- hw/intc/sh_intc.c              |  2 +-
- hw/intc/slavio_intctl.c        |  4 ++--
- hw/intc/xilinx_intc.c          |  2 +-
- hw/ipack/tpci200.c             | 10 ++++-----
- hw/m68k/mcf5206.c              |  2 +-
- hw/m68k/mcf5208.c              |  4 ++--
- hw/m68k/mcf_intc.c             |  2 +-
- hw/mips/boston.c               |  6 +++---
- hw/mips/gt64xxx_pci.c          |  2 +-
- hw/mips/mips_jazz.c            |  8 +++----
- hw/mips/mips_malta.c           |  4 ++--
- hw/mips/mips_r4k.c             |  2 +-
- hw/misc/arm_integrator_debug.c |  2 +-
- hw/misc/arm_sysctl.c           |  2 +-
- hw/misc/aspeed_xdma.c          |  2 +-
- hw/misc/bcm2835_mbox.c         |  2 +-
- hw/misc/bcm2835_property.c     |  2 +-
- hw/misc/bcm2835_rng.c          |  2 +-
- hw/misc/eccmemctl.c            |  4 ++--
- hw/misc/edu.c                  |  2 +-
- hw/misc/exynos4210_clk.c       |  2 +-
- hw/misc/exynos4210_pmu.c       |  2 +-
- hw/misc/exynos4210_rng.c       |  2 +-
- hw/misc/imx25_ccm.c            |  2 +-
- hw/misc/imx2_wdt.c             |  2 +-
- hw/misc/imx31_ccm.c            |  2 +-
- hw/misc/imx6_ccm.c             |  4 ++--
- hw/misc/imx6_src.c             |  2 +-
- hw/misc/imx6ul_ccm.c           |  4 ++--
- hw/misc/imx7_ccm.c             |  4 ++--
- hw/misc/imx7_gpr.c             |  2 +-
- hw/misc/imx7_snvs.c            |  2 +-
- hw/misc/ivshmem.c              |  2 +-
- hw/misc/milkymist-hpdmc.c      |  2 +-
- hw/misc/milkymist-pfpu.c       |  2 +-
- hw/misc/mips_cmgcr.c           |  2 +-
- hw/misc/mips_cpc.c             |  2 +-
- hw/misc/mips_itu.c             |  4 ++--
- hw/misc/mos6522.c              |  2 +-
- hw/misc/msf2-sysreg.c          |  2 +-
- hw/misc/mst_fpga.c             |  2 +-
- hw/misc/omap_gpmc.c            |  6 +++---
- hw/misc/omap_l4.c              |  2 +-
- hw/misc/omap_sdrc.c            |  2 +-
- hw/misc/omap_tap.c             |  2 +-
- hw/misc/slavio_misc.c          | 16 +++++++-------
- hw/misc/stm32f2xx_syscfg.c     |  2 +-
- hw/misc/unimp.c                |  2 +-
- hw/misc/zynq-xadc.c            |  2 +-
- hw/misc/zynq_slcr.c            |  2 +-
- hw/net/dp8393x.c               |  2 +-
- hw/net/fsl_etsec/etsec.c       |  2 +-
- hw/net/mcf_fec.c               |  2 +-
- hw/net/milkymist-minimac2.c    |  2 +-
- hw/net/xilinx_ethlite.c        |  2 +-
- hw/nios2/10m50_devboard.c      |  2 +-
- hw/openrisc/openrisc_sim.c     |  2 +-
- hw/pci-host/bonito.c           | 10 ++++-----
- hw/pcmcia/pxa2xx.c             |  6 +++---
- hw/ppc/ppc405_boards.c         |  2 +-
- hw/ppc/ppc405_uc.c             |  4 ++--
- hw/riscv/sifive_prci.c         |  2 +-
- hw/riscv/sifive_test.c         |  2 +-
- hw/riscv/sifive_uart.c         |  2 +-
- hw/scsi/esp.c                  |  2 +-
- hw/sd/bcm2835_sdhost.c         |  2 +-
- hw/sd/milkymist-memcard.c      |  2 +-
- hw/sd/omap_mmc.c               |  2 +-
- hw/sd/pxa2xx_mmci.c            |  2 +-
- hw/sh4/r2d.c                   |  2 +-
- hw/sh4/sh7750.c                |  4 ++--
- hw/sh4/sh_pci.c                |  2 +-
- hw/sparc/sun4m_iommu.c         |  2 +-
- hw/sparc64/sun4u.c             |  2 +-
- hw/ssi/imx_spi.c               |  2 +-
- hw/ssi/omap_spi.c              |  2 +-
- hw/ssi/xilinx_spi.c            |  2 +-
- hw/timer/allwinner-a10-pit.c   |  2 +-
- hw/timer/altera_timer.c        |  2 +-
- hw/timer/digic-timer.c         |  2 +-
- hw/timer/exynos4210_mct.c      |  2 +-
- hw/timer/exynos4210_pwm.c      |  2 +-
- hw/timer/exynos4210_rtc.c      |  2 +-
- hw/timer/omap_gptimer.c        |  2 +-
- hw/timer/omap_synctimer.c      |  2 +-
- hw/timer/puv3_ost.c            |  2 +-
- hw/timer/pxa2xx_timer.c        |  2 +-
- hw/timer/sh_timer.c            |  2 +-
- hw/timer/slavio_timer.c        |  2 +-
- hw/timer/xilinx_timer.c        |  2 +-
- hw/usb/chipidea.c              |  4 ++--
- hw/usb/tusb6010.c              |  2 +-
- hw/virtio/virtio-mmio.c        |  2 +-
- hw/xen/xen_pt.c                |  2 +-
- hw/xen/xen_pt_msi.c            |  2 +-
- hw/xtensa/mx_pic.c             |  2 +-
- hw/xtensa/xtfpga.c             |  6 +++---
- ioport.c                       |  2 +-
- memory.c                       |  4 ++--
- memory_ldst.inc.c              | 12 +++++------
- 182 files changed, 304 insertions(+), 304 deletions(-)
+ hw/acpi/core.c                      |  6 +++---
+ hw/acpi/cpu.c                       |  2 +-
+ hw/acpi/cpu_hotplug.c               |  2 +-
+ hw/acpi/ich9.c                      |  4 ++--
+ hw/acpi/memory_hotplug.c            |  2 +-
+ hw/acpi/nvdimm.c                    |  2 +-
+ hw/acpi/pcihp.c                     |  2 +-
+ hw/acpi/piix4.c                     |  2 +-
+ hw/acpi/tco.c                       |  2 +-
+ hw/alpha/pci.c                      |  6 +++---
+ hw/alpha/typhoon.c                  |  6 +++---
+ hw/arm/aspeed_soc.c                 |  2 +-
+ hw/arm/omap1.c                      |  2 +-
+ hw/arm/smmuv3.c                     |  2 +-
+ hw/audio/ac97.c                     |  4 ++--
+ hw/audio/es1370.c                   |  2 +-
+ hw/audio/marvell_88w8618.c          |  2 +-
+ hw/audio/pl041.c                    |  2 +-
+ hw/block/nvme.c                     |  4 ++--
+ hw/block/onenand.c                  |  2 +-
+ hw/char/cadence_uart.c              |  2 +-
+ hw/char/cmsdk-apb-uart.c            |  2 +-
+ hw/char/debugcon.c                  |  2 +-
+ hw/char/etraxfs_ser.c               |  2 +-
+ hw/char/imx_serial.c                |  2 +-
+ hw/char/nrf51_uart.c                |  2 +-
+ hw/char/pl011.c                     |  2 +-
+ hw/char/serial.c                    |  4 ++--
+ hw/display/ati.c                    |  2 +-
+ hw/display/bochs-display.c          |  4 ++--
+ hw/display/cirrus_vga.c             | 10 +++++-----
+ hw/display/edid-region.c            |  2 +-
+ hw/display/g364fb.c                 |  2 +-
+ hw/display/pl110.c                  |  2 +-
+ hw/display/sm501.c                  | 10 +++++-----
+ hw/display/tc6393xb.c               |  2 +-
+ hw/display/vga-pci.c                |  6 +++---
+ hw/display/vga.c                    |  2 +-
+ hw/display/vmware_vga.c             |  2 +-
+ hw/dma/bcm2835_dma.c                |  4 ++--
+ hw/dma/etraxfs_dma.c                |  2 +-
+ hw/dma/pl080.c                      |  2 +-
+ hw/dma/pl330.c                      |  2 +-
+ hw/dma/puv3_dma.c                   |  2 +-
+ hw/dma/xlnx-zdma.c                  |  2 +-
+ hw/dma/xlnx-zynq-devcfg.c           |  2 +-
+ hw/gpio/nrf51_gpio.c                |  2 +-
+ hw/gpio/pl061.c                     |  2 +-
+ hw/gpio/zaurus.c                    |  2 +-
+ hw/hppa/dino.c                      |  2 +-
+ hw/hyperv/hyperv_testdev.c          |  2 +-
+ hw/i2c/aspeed_i2c.c                 |  4 ++--
+ hw/i2c/imx_i2c.c                    |  2 +-
+ hw/i2c/microbit_i2c.c               |  2 +-
+ hw/i2c/pm_smbus.c                   |  2 +-
+ hw/i2c/versatile_i2c.c              |  2 +-
+ hw/i386/amd_iommu.c                 |  4 ++--
+ hw/i386/intel_iommu.c               |  4 ++--
+ hw/i386/pc.c                        |  2 +-
+ hw/i386/vmport.c                    |  2 +-
+ hw/i386/xen/xen_platform.c          |  2 +-
+ hw/i386/xen/xen_pvdevice.c          |  2 +-
+ hw/ide/ahci-allwinner.c             |  2 +-
+ hw/ide/ahci.c                       |  4 ++--
+ hw/ide/macio.c                      |  2 +-
+ hw/ide/mmio.c                       |  4 ++--
+ hw/ide/pci.c                        |  6 +++---
+ hw/ide/sii3112.c                    |  2 +-
+ hw/input/pckbd.c                    |  4 ++--
+ hw/input/pl050.c                    |  2 +-
+ hw/intc/arm_gic.c                   | 12 ++++++------
+ hw/intc/arm_gicv2m.c                |  2 +-
+ hw/intc/arm_gicv3.c                 |  4 ++--
+ hw/intc/aspeed_vic.c                |  2 +-
+ hw/intc/etraxfs_pic.c               |  2 +-
+ hw/intc/heathrow_pic.c              |  2 +-
+ hw/intc/imx_avic.c                  |  2 +-
+ hw/intc/imx_gpcv2.c                 |  2 +-
+ hw/intc/openpic.c                   |  8 ++++----
+ hw/intc/pl190.c                     |  2 +-
+ hw/intc/puv3_intc.c                 |  2 +-
+ hw/intc/xlnx-pmu-iomod-intc.c       |  2 +-
+ hw/intc/xlnx-zynqmp-ipi.c           |  2 +-
+ hw/ipmi/isa_ipmi_bt.c               |  2 +-
+ hw/ipmi/isa_ipmi_kcs.c              |  2 +-
+ hw/isa/lpc_ich9.c                   |  4 ++--
+ hw/isa/pc87312.c                    |  2 +-
+ hw/isa/vt82c686.c                   |  2 +-
+ hw/microblaze/petalogix_ml605_mmu.c |  2 +-
+ hw/misc/a9scu.c                     |  2 +-
+ hw/misc/applesmc.c                  |  6 +++---
+ hw/misc/arm11scu.c                  |  2 +-
+ hw/misc/arm_l2x0.c                  |  2 +-
+ hw/misc/armsse-cpuid.c              |  2 +-
+ hw/misc/armsse-mhu.c                |  2 +-
+ hw/misc/aspeed_scu.c                |  2 +-
+ hw/misc/aspeed_sdmc.c               |  2 +-
+ hw/misc/debugexit.c                 |  2 +-
+ hw/misc/iotkit-secctl.c             |  4 ++--
+ hw/misc/iotkit-sysctl.c             |  2 +-
+ hw/misc/iotkit-sysinfo.c            |  2 +-
+ hw/misc/macio/gpio.c                |  2 +-
+ hw/misc/macio/mac_dbdma.c           |  2 +-
+ hw/misc/macio/macio.c               |  2 +-
+ hw/misc/mps2-fpgaio.c               |  2 +-
+ hw/misc/mps2-scc.c                  |  2 +-
+ hw/misc/nrf51_rng.c                 |  2 +-
+ hw/misc/pc-testdev.c                | 10 +++++-----
+ hw/misc/pci-testdev.c               |  4 ++--
+ hw/misc/puv3_pm.c                   |  2 +-
+ hw/misc/tz-mpc.c                    |  4 ++--
+ hw/misc/tz-msc.c                    |  2 +-
+ hw/misc/tz-ppc.c                    |  2 +-
+ hw/moxie/moxiesim.c                 |  2 +-
+ hw/net/allwinner_emac.c             |  2 +-
+ hw/net/cadence_gem.c                |  2 +-
+ hw/net/can/can_kvaser_pci.c         |  6 +++---
+ hw/net/can/can_mioe3680_pci.c       |  4 ++--
+ hw/net/can/can_pcm3680_pci.c        |  4 ++--
+ hw/net/e1000.c                      |  4 ++--
+ hw/net/e1000e.c                     |  4 ++--
+ hw/net/eepro100.c                   |  2 +-
+ hw/net/etraxfs_eth.c                |  2 +-
+ hw/net/ftgmac100.c                  |  2 +-
+ hw/net/imx_fec.c                    |  2 +-
+ hw/net/lan9118.c                    |  4 ++--
+ hw/net/ne2000.c                     |  2 +-
+ hw/net/pcnet-pci.c                  |  4 ++--
+ hw/net/rocker/rocker.c              |  2 +-
+ hw/net/rtl8139.c                    |  2 +-
+ hw/net/smc91c111.c                  |  2 +-
+ hw/net/stellaris_enet.c             |  2 +-
+ hw/net/sungem.c                     | 12 ++++++------
+ hw/net/sunhme.c                     | 10 +++++-----
+ hw/net/vmxnet3.c                    |  4 ++--
+ hw/net/xgmac.c                      |  2 +-
+ hw/net/xilinx_axienet.c             |  2 +-
+ hw/nvram/ds1225y.c                  |  2 +-
+ hw/nvram/fw_cfg.c                   |  2 +-
+ hw/nvram/nrf51_nvm.c                |  8 ++++----
+ hw/pci-host/designware.c            |  6 +++---
+ hw/pci-host/piix.c                  |  2 +-
+ hw/pci-host/prep.c                  |  4 ++--
+ hw/pci-host/q35.c                   |  4 ++--
+ hw/pci-host/sabre.c                 |  2 +-
+ hw/pci-host/uninorth.c              |  2 +-
+ hw/pci-host/versatile.c             |  4 ++--
+ hw/pci/msix.c                       |  4 ++--
+ hw/pci/pci_host.c                   |  4 ++--
+ hw/pci/pcie_host.c                  |  2 +-
+ hw/pci/shpc.c                       |  2 +-
+ hw/ppc/ppc440_pcix.c                |  4 ++--
+ hw/ppc/ppc4xx_pci.c                 |  2 +-
+ hw/ppc/spapr_pci.c                  |  2 +-
+ hw/ppc/virtex_ml507.c               |  2 +-
+ hw/rdma/vmw/pvrdma_main.c           |  4 ++--
+ hw/riscv/sifive_clint.c             |  2 +-
+ hw/riscv/sifive_gpio.c              |  2 +-
+ hw/riscv/sifive_plic.c              |  2 +-
+ hw/riscv/virt.c                     |  2 +-
+ hw/s390x/s390-pci-bus.c             |  2 +-
+ hw/scsi/esp-pci.c                   |  2 +-
+ hw/scsi/lsi53c895a.c                |  6 +++---
+ hw/scsi/megasas.c                   |  6 +++---
+ hw/scsi/mptsas.c                    |  6 +++---
+ hw/scsi/vmw_pvscsi.c                |  2 +-
+ hw/sd/pl181.c                       |  2 +-
+ hw/sd/sdhci.c                       |  4 ++--
+ hw/ssi/aspeed_smc.c                 |  6 +++---
+ hw/ssi/mss-spi.c                    |  2 +-
+ hw/ssi/pl022.c                      |  2 +-
+ hw/ssi/stm32f2xx_spi.c              |  2 +-
+ hw/ssi/xilinx_spips.c               |  8 ++++----
+ hw/timer/a9gtimer.c                 |  4 ++--
+ hw/timer/arm_mptimer.c              |  4 ++--
+ hw/timer/arm_timer.c                |  4 ++--
+ hw/timer/armv7m_systick.c           |  2 +-
+ hw/timer/aspeed_rtc.c               |  2 +-
+ hw/timer/aspeed_timer.c             |  2 +-
+ hw/timer/cadence_ttc.c              |  2 +-
+ hw/timer/cmsdk-apb-dualtimer.c      |  2 +-
+ hw/timer/cmsdk-apb-timer.c          |  2 +-
+ hw/timer/etraxfs_timer.c            |  2 +-
+ hw/timer/hpet.c                     |  2 +-
+ hw/timer/i8254.c                    |  2 +-
+ hw/timer/imx_epit.c                 |  2 +-
+ hw/timer/imx_gpt.c                  |  2 +-
+ hw/timer/m48t59.c                   |  2 +-
+ hw/timer/mc146818rtc.c              |  2 +-
+ hw/timer/mss-timer.c                |  2 +-
+ hw/timer/nrf51_timer.c              |  2 +-
+ hw/timer/pl031.c                    |  2 +-
+ hw/timer/stm32f2xx_timer.c          |  2 +-
+ hw/timer/xlnx-zynqmp-rtc.c          |  2 +-
+ hw/tpm/tpm_crb.c                    |  2 +-
+ hw/tpm/tpm_tis.c                    |  2 +-
+ hw/usb/hcd-ehci-sysbus.c            |  2 +-
+ hw/usb/hcd-ehci.c                   |  6 +++---
+ hw/usb/hcd-ohci.c                   |  2 +-
+ hw/usb/hcd-uhci.c                   |  2 +-
+ hw/usb/hcd-xhci.c                   | 10 +++++-----
+ hw/vfio/common.c                    |  2 +-
+ hw/vfio/pci-quirks.c                | 26 +++++++++++++-------------
+ hw/vfio/pci.c                       |  4 ++--
+ hw/virtio/virtio-pci.c              | 12 ++++++------
+ hw/watchdog/cmsdk-apb-watchdog.c    |  2 +-
+ hw/watchdog/wdt_aspeed.c            |  2 +-
+ hw/watchdog/wdt_i6300esb.c          |  2 +-
+ include/exec/cpu-common.h           |  2 +-
+ ioport.c                            |  2 +-
+ memory.c                            |  6 +++---
+ memory_ldst.inc.c                   | 24 ++++++++++++------------
+ 212 files changed, 343 insertions(+), 343 deletions(-)
 
-diff --git a/exec.c b/exec.c
-index b3c38be5df..05717a3b40 100644
---- a/exec.c
-+++ b/exec.c
-@@ -2797,7 +2797,7 @@ static bool notdirty_mem_accepts(void *opaque, hwaddr addr,
- static const MemoryRegionOps notdirty_mem_ops = {
-     .write = notdirty_mem_write,
-     .valid.accepts = notdirty_mem_accepts,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .valid = {
-         .min_access_size = 1,
-         .max_access_size = 8,
-@@ -2926,7 +2926,7 @@ static MemTxResult watch_mem_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps watch_mem_ops = {
-     .read_with_attrs = watch_mem_read,
-     .write_with_attrs = watch_mem_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .valid = {
-         .min_access_size = 1,
-         .max_access_size = 8,
-@@ -3002,7 +3002,7 @@ static const MemoryRegionOps subpage_ops = {
-     .valid.min_access_size = 1,
-     .valid.max_access_size = 8,
-     .valid.accepts = subpage_accepts,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+diff --git a/hw/acpi/core.c b/hw/acpi/core.c
+index 45cbed49ab..fd5be650dc 100644
+--- a/hw/acpi/core.c
++++ b/hw/acpi/core.c
+@@ -463,7 +463,7 @@ static const MemoryRegionOps acpi_pm_evt_ops = {
+     .write = acpi_pm_evt_write,
+     .valid.min_access_size = 2,
+     .valid.max_access_size = 2,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
  };
  
- static int subpage_register (subpage_t *mmio, uint32_t start, uint32_t end,
-@@ -3077,7 +3077,7 @@ static bool readonly_mem_accepts(void *opaque, hwaddr addr,
- static const MemoryRegionOps readonly_mem_ops = {
-     .write = readonly_mem_write,
-     .valid.accepts = readonly_mem_accepts,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+ void acpi_pm1_evt_init(ACPIREGS *ar, acpi_update_sci_fn update_sci,
+@@ -532,7 +532,7 @@ static const MemoryRegionOps acpi_pm_tmr_ops = {
+     .write = acpi_pm_tmr_write,
+     .valid.min_access_size = 4,
+     .valid.max_access_size = 4,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ void acpi_pm_tmr_init(ACPIREGS *ar, acpi_update_sci_fn update_sci,
+@@ -604,7 +604,7 @@ static const MemoryRegionOps acpi_pm_cnt_ops = {
+     .write = acpi_pm_cnt_write,
+     .valid.min_access_size = 2,
+     .valid.max_access_size = 2,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ void acpi_pm1_cnt_init(ACPIREGS *ar, MemoryRegion *parent,
+diff --git a/hw/acpi/cpu.c b/hw/acpi/cpu.c
+index 87f30a31d7..09b0d676c3 100644
+--- a/hw/acpi/cpu.c
++++ b/hw/acpi/cpu.c
+@@ -180,7 +180,7 @@ static void cpu_hotplug_wr(void *opaque, hwaddr addr, uint64_t data,
+ static const MemoryRegionOps cpu_hotplug_ops = {
+     .read = cpu_hotplug_rd,
+     .write = cpu_hotplug_wr,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
      .valid = {
          .min_access_size = 1,
-         .max_access_size = 8,
-diff --git a/hw/adc/stm32f2xx_adc.c b/hw/adc/stm32f2xx_adc.c
-index 4f9d485ecf..598687aa60 100644
---- a/hw/adc/stm32f2xx_adc.c
-+++ b/hw/adc/stm32f2xx_adc.c
-@@ -245,7 +245,7 @@ static void stm32f2xx_adc_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps stm32f2xx_adc_ops = {
-     .read = stm32f2xx_adc_read,
-     .write = stm32f2xx_adc_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static const VMStateDescription vmstate_stm32f2xx_adc = {
-diff --git a/hw/arm/allwinner-a10.c b/hw/arm/allwinner-a10.c
-index 73810a4440..d326dc7fdf 100644
---- a/hw/arm/allwinner-a10.c
-+++ b/hw/arm/allwinner-a10.c
-@@ -116,7 +116,7 @@ static void aw_a10_realize(DeviceState *dev, Error **errp)
- 
-     /* FIXME use a qdev chardev prop instead of serial_hd() */
-     serial_mm_init(get_system_memory(), AW_A10_UART0_REG_BASE, 2, s->irq[1],
--                   115200, serial_hd(0), DEVICE_NATIVE_ENDIAN);
-+                   115200, serial_hd(0), MO_TE);
- }
- 
- static void aw_a10_class_init(ObjectClass *oc, void *data)
-diff --git a/hw/arm/armv7m.c b/hw/arm/armv7m.c
-index 7a3c48f002..0700cbd654 100644
---- a/hw/arm/armv7m.c
-+++ b/hw/arm/armv7m.c
-@@ -88,7 +88,7 @@ static MemTxResult bitband_write(void *opaque, hwaddr offset, uint64_t value,
- static const MemoryRegionOps bitband_ops = {
-     .read_with_attrs = bitband_read,
-     .write_with_attrs = bitband_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .impl.min_access_size = 1,
-     .impl.max_access_size = 4,
-     .valid.min_access_size = 1,
-diff --git a/hw/arm/aspeed.c b/hw/arm/aspeed.c
-index 7a2e885e0b..481e2ab310 100644
---- a/hw/arm/aspeed.c
-+++ b/hw/arm/aspeed.c
-@@ -106,7 +106,7 @@ static void max_ram_write(void *opaque, hwaddr offset, uint64_t value,
- static const MemoryRegionOps max_ram_ops = {
-     .read = max_ram_read,
-     .write = max_ram_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- #define FIRMWARE_ADDR 0x0
-diff --git a/hw/arm/exynos4210.c b/hw/arm/exynos4210.c
-index a9f8a5c868..17ad052c2d 100644
---- a/hw/arm/exynos4210.c
-+++ b/hw/arm/exynos4210.c
-@@ -121,7 +121,7 @@ static void exynos4210_chipid_and_omr_write(void *opaque, hwaddr offset,
- static const MemoryRegionOps exynos4210_chipid_and_omr_ops = {
-     .read = exynos4210_chipid_and_omr_read,
-     .write = exynos4210_chipid_and_omr_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .impl = {
+         .max_access_size = 4,
+diff --git a/hw/acpi/cpu_hotplug.c b/hw/acpi/cpu_hotplug.c
+index a83567e6aa..c9a210b700 100644
+--- a/hw/acpi/cpu_hotplug.c
++++ b/hw/acpi/cpu_hotplug.c
+@@ -48,7 +48,7 @@ static void cpu_status_write(void *opaque, hwaddr addr, uint64_t data,
+ static const MemoryRegionOps AcpiCpuHotplug_ops = {
+     .read = cpu_status_read,
+     .write = cpu_status_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .valid = {
+         .min_access_size = 1,
          .max_access_size = 1,
-     }
-diff --git a/hw/arm/highbank.c b/hw/arm/highbank.c
-index 362e5ba044..93a730813b 100644
---- a/hw/arm/highbank.c
-+++ b/hw/arm/highbank.c
-@@ -150,7 +150,7 @@ static uint64_t hb_regs_read(void *opaque, hwaddr offset,
- static const MemoryRegionOps hb_mem_ops = {
-     .read = hb_regs_read,
-     .write = hb_regs_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+diff --git a/hw/acpi/ich9.c b/hw/acpi/ich9.c
+index 2ca52bf045..140ed7784b 100644
+--- a/hw/acpi/ich9.c
++++ b/hw/acpi/ich9.c
+@@ -77,7 +77,7 @@ static const MemoryRegionOps ich9_gpe_ops = {
+     .valid.max_access_size = 4,
+     .impl.min_access_size = 1,
+     .impl.max_access_size = 1,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
  };
  
- #define TYPE_HIGHBANK_REGISTERS "highbank-regs"
-diff --git a/hw/arm/integratorcp.c b/hw/arm/integratorcp.c
-index 200568b42a..d90fe462ee 100644
---- a/hw/arm/integratorcp.c
-+++ b/hw/arm/integratorcp.c
-@@ -263,7 +263,7 @@ static void integratorcm_write(void *opaque, hwaddr offset,
- static const MemoryRegionOps integratorcm_ops = {
-     .read = integratorcm_read,
-     .write = integratorcm_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+ static uint64_t ich9_smi_readl(void *opaque, hwaddr addr, unsigned width)
+@@ -118,7 +118,7 @@ static const MemoryRegionOps ich9_smi_ops = {
+     .write = ich9_smi_writel,
+     .valid.min_access_size = 4,
+     .valid.max_access_size = 4,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
  };
  
- static void integratorcm_init(Object *obj)
-@@ -439,7 +439,7 @@ static void icp_pic_write(void *opaque, hwaddr offset,
- static const MemoryRegionOps icp_pic_ops = {
-     .read = icp_pic_read,
-     .write = icp_pic_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+ void ich9_pm_iospace_update(ICH9LPCPMRegs *pm, uint32_t pm_io_base)
+diff --git a/hw/acpi/memory_hotplug.c b/hw/acpi/memory_hotplug.c
+index 9483d66e86..e7e5c4801b 100644
+--- a/hw/acpi/memory_hotplug.c
++++ b/hw/acpi/memory_hotplug.c
+@@ -202,7 +202,7 @@ static void acpi_memory_hotplug_write(void *opaque, hwaddr addr, uint64_t data,
+ static const MemoryRegionOps acpi_memory_hotplug_ops = {
+     .read = acpi_memory_hotplug_read,
+     .write = acpi_memory_hotplug_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .valid = {
+         .min_access_size = 1,
+         .max_access_size = 4,
+diff --git a/hw/acpi/nvdimm.c b/hw/acpi/nvdimm.c
+index 9fdad6dc3f..b7fe093e3f 100644
+--- a/hw/acpi/nvdimm.c
++++ b/hw/acpi/nvdimm.c
+@@ -911,7 +911,7 @@ exit:
+ static const MemoryRegionOps nvdimm_dsm_ops = {
+     .read = nvdimm_dsm_read,
+     .write = nvdimm_dsm_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .valid = {
+         .min_access_size = 4,
+         .max_access_size = 4,
+diff --git a/hw/acpi/pcihp.c b/hw/acpi/pcihp.c
+index 82d295b6e8..f4959f9a9a 100644
+--- a/hw/acpi/pcihp.c
++++ b/hw/acpi/pcihp.c
+@@ -352,7 +352,7 @@ static void pci_write(void *opaque, hwaddr addr, uint64_t data,
+ static const MemoryRegionOps acpi_pcihp_io_ops = {
+     .read = pci_read,
+     .write = pci_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .valid = {
+         .min_access_size = 4,
+         .max_access_size = 4,
+diff --git a/hw/acpi/piix4.c b/hw/acpi/piix4.c
+index 1c907d2a7d..6e3f736952 100644
+--- a/hw/acpi/piix4.c
++++ b/hw/acpi/piix4.c
+@@ -603,7 +603,7 @@ static const MemoryRegionOps piix4_gpe_ops = {
+     .valid.max_access_size = 4,
+     .impl.min_access_size = 1,
+     .impl.max_access_size = 1,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
  };
  
- static void icp_pic_init(Object *obj)
-@@ -531,7 +531,7 @@ static void icp_control_write(void *opaque, hwaddr offset,
- static const MemoryRegionOps icp_control_ops = {
-     .read = icp_control_read,
-     .write = icp_control_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+ 
+diff --git a/hw/acpi/tco.c b/hw/acpi/tco.c
+index fb9052dbca..16222c920c 100644
+--- a/hw/acpi/tco.c
++++ b/hw/acpi/tco.c
+@@ -217,7 +217,7 @@ static const MemoryRegionOps tco_io_ops = {
+     .valid.max_access_size = 4,
+     .impl.min_access_size = 1,
+     .impl.max_access_size = 2,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
  };
  
- static void icp_control_mmc_wprot(void *opaque, int line, int level)
-diff --git a/hw/arm/kzm.c b/hw/arm/kzm.c
-index 2f052e1f8c..d927af0063 100644
---- a/hw/arm/kzm.c
-+++ b/hw/arm/kzm.c
-@@ -123,7 +123,7 @@ static void kzm_init(MachineState *machine)
-     if (serial_hd(2)) { /* touchscreen */
-         serial_mm_init(get_system_memory(), KZM_FPGA_ADDR+0x10, 0,
-                        qdev_get_gpio_in(DEVICE(&s->soc.avic), 52),
--                       14745600, serial_hd(2), DEVICE_NATIVE_ENDIAN);
-+                       14745600, serial_hd(2), MO_TE);
-     }
- 
-     kzm_binfo.ram_size = machine->ram_size;
-diff --git a/hw/arm/msf2-soc.c b/hw/arm/msf2-soc.c
-index 008fd9327a..a613504ef7 100644
---- a/hw/arm/msf2-soc.c
-+++ b/hw/arm/msf2-soc.c
-@@ -141,7 +141,7 @@ static void m2sxxx_soc_realize(DeviceState *dev_soc, Error **errp)
-         if (serial_hd(i)) {
-             serial_mm_init(get_system_memory(), uart_addr[i], 2,
-                            qdev_get_gpio_in(armv7m, uart_irq[i]),
--                           115200, serial_hd(i), DEVICE_NATIVE_ENDIAN);
-+                           115200, serial_hd(i), MO_TE);
-         }
-     }
- 
-diff --git a/hw/arm/musicpal.c b/hw/arm/musicpal.c
-index 8ae4751d75..5a8aa2f149 100644
---- a/hw/arm/musicpal.c
-+++ b/hw/arm/musicpal.c
-@@ -371,7 +371,7 @@ static void mv88w8618_eth_write(void *opaque, hwaddr offset,
- static const MemoryRegionOps mv88w8618_eth_ops = {
-     .read = mv88w8618_eth_read,
-     .write = mv88w8618_eth_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static void eth_cleanup(NetClientState *nc)
-@@ -617,7 +617,7 @@ static void musicpal_lcd_write(void *opaque, hwaddr offset,
- static const MemoryRegionOps musicpal_lcd_ops = {
-     .read = musicpal_lcd_read,
-     .write = musicpal_lcd_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static const GraphicHwOps musicpal_gfx_ops = {
-@@ -758,7 +758,7 @@ static void mv88w8618_pic_reset(DeviceState *d)
- static const MemoryRegionOps mv88w8618_pic_ops = {
-     .read = mv88w8618_pic_read,
-     .write = mv88w8618_pic_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static void mv88w8618_pic_init(Object *obj)
-@@ -922,7 +922,7 @@ static void mv88w8618_pit_reset(DeviceState *d)
- static const MemoryRegionOps mv88w8618_pit_ops = {
-     .read = mv88w8618_pit_read,
-     .write = mv88w8618_pit_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static void mv88w8618_pit_init(Object *obj)
-@@ -1026,7 +1026,7 @@ static void mv88w8618_flashcfg_write(void *opaque, hwaddr offset,
- static const MemoryRegionOps mv88w8618_flashcfg_ops = {
-     .read = mv88w8618_flashcfg_read,
-     .write = mv88w8618_flashcfg_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static void mv88w8618_flashcfg_init(Object *obj)
-@@ -1099,7 +1099,7 @@ static void musicpal_misc_write(void *opaque, hwaddr offset,
- static const MemoryRegionOps musicpal_misc_ops = {
-     .read = musicpal_misc_read,
-     .write = musicpal_misc_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static void musicpal_misc_init(Object *obj)
-@@ -1147,7 +1147,7 @@ static void mv88w8618_wlan_write(void *opaque, hwaddr offset,
- static const MemoryRegionOps mv88w8618_wlan_ops = {
-     .read = mv88w8618_wlan_read,
-     .write =mv88w8618_wlan_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static void mv88w8618_wlan_realize(DeviceState *dev, Error **errp)
-@@ -1344,7 +1344,7 @@ static void musicpal_gpio_write(void *opaque, hwaddr offset,
- static const MemoryRegionOps musicpal_gpio_ops = {
-     .read = musicpal_gpio_read,
-     .write = musicpal_gpio_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static void musicpal_gpio_reset(DeviceState *d)
-@@ -1614,11 +1614,11 @@ static void musicpal_init(MachineState *machine)
- 
+ void acpi_pm_tco_init(TCOIORegs *tr, MemoryRegion *parent)
+diff --git a/hw/alpha/pci.c b/hw/alpha/pci.c
+index 72251fcdf0..0dfaa5cb45 100644
+--- a/hw/alpha/pci.c
++++ b/hw/alpha/pci.c
+@@ -26,7 +26,7 @@ static void ignore_write(void *opaque, hwaddr addr, uint64_t v, unsigned size)
+ const MemoryRegionOps alpha_pci_ignore_ops = {
+     .read = ignore_read,
+     .write = ignore_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .valid = {
+         .min_access_size = 1,
+         .max_access_size = 8,
+@@ -56,7 +56,7 @@ static void bw_conf1_write(void *opaque, hwaddr addr,
+ const MemoryRegionOps alpha_pci_conf1_ops = {
+     .read = bw_conf1_read,
+     .write = bw_conf1_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .impl = {
+         .min_access_size = 1,
+         .max_access_size = 4,
+@@ -79,7 +79,7 @@ static void special_write(void *opaque, hwaddr addr,
+ const MemoryRegionOps alpha_pci_iack_ops = {
+     .read = iack_read,
+     .write = special_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .valid = {
+         .min_access_size = 4,
+         .max_access_size = 4,
+diff --git a/hw/alpha/typhoon.c b/hw/alpha/typhoon.c
+index 179e1f7658..75d113788b 100644
+--- a/hw/alpha/typhoon.c
++++ b/hw/alpha/typhoon.c
+@@ -568,7 +568,7 @@ static MemTxResult pchip_write(void *opaque, hwaddr addr,
+ static const MemoryRegionOps cchip_ops = {
+     .read_with_attrs = cchip_read,
+     .write_with_attrs = cchip_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .valid = {
+         .min_access_size = 8,
+         .max_access_size = 8,
+@@ -582,7 +582,7 @@ static const MemoryRegionOps cchip_ops = {
+ static const MemoryRegionOps dchip_ops = {
+     .read = dchip_read,
+     .write = dchip_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .valid = {
+         .min_access_size = 8,
+         .max_access_size = 8,
+@@ -596,7 +596,7 @@ static const MemoryRegionOps dchip_ops = {
+ static const MemoryRegionOps pchip_ops = {
+     .read_with_attrs = pchip_read,
+     .write_with_attrs = pchip_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .valid = {
+         .min_access_size = 8,
+         .max_access_size = 8,
+diff --git a/hw/arm/aspeed_soc.c b/hw/arm/aspeed_soc.c
+index 9ee8104832..93360895cc 100644
+--- a/hw/arm/aspeed_soc.c
++++ b/hw/arm/aspeed_soc.c
+@@ -332,7 +332,7 @@ static void aspeed_soc_realize(DeviceState *dev, Error **errp)
      if (serial_hd(0)) {
-         serial_mm_init(address_space_mem, MP_UART1_BASE, 2, pic[MP_UART1_IRQ],
--                       1825000, serial_hd(0), DEVICE_NATIVE_ENDIAN);
-+                       1825000, serial_hd(0), MO_TE);
-     }
-     if (serial_hd(1)) {
-         serial_mm_init(address_space_mem, MP_UART2_BASE, 2, pic[MP_UART2_IRQ],
--                       1825000, serial_hd(1), DEVICE_NATIVE_ENDIAN);
-+                       1825000, serial_hd(1), MO_TE);
+         qemu_irq uart5 = aspeed_soc_get_irq(s, ASPEED_UART5);
+         serial_mm_init(get_system_memory(), sc->info->memmap[ASPEED_UART5], 2,
+-                       uart5, 38400, serial_hd(0), DEVICE_LITTLE_ENDIAN);
++                       uart5, 38400, serial_hd(0), MO_LE);
      }
  
-     /* Register flash */
+     /* I2C */
 diff --git a/hw/arm/omap1.c b/hw/arm/omap1.c
-index 0400593805..b6807be542 100644
+index b6807be542..def50d0b09 100644
 --- a/hw/arm/omap1.c
 +++ b/hw/arm/omap1.c
-@@ -381,7 +381,7 @@ static void omap_wd_timer_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps omap_wd_timer_ops = {
-     .read = omap_wd_timer_read,
-     .write = omap_wd_timer_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+@@ -258,7 +258,7 @@ static void omap_mpu_timer_write(void *opaque, hwaddr addr,
+ static const MemoryRegionOps omap_mpu_timer_ops = {
+     .read = omap_mpu_timer_read,
+     .write = omap_mpu_timer_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
  };
  
- static void omap_wd_timer_reset(struct omap_watchdog_timer_s *s)
-@@ -493,7 +493,7 @@ static void omap_os_timer_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps omap_os_timer_ops = {
-     .read = omap_os_timer_read,
-     .write = omap_os_timer_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static void omap_os_timer_reset(struct omap_32khz_timer_s *s)
-@@ -720,7 +720,7 @@ static void omap_ulpd_pm_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps omap_ulpd_pm_ops = {
-     .read = omap_ulpd_pm_read,
-     .write = omap_ulpd_pm_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static void omap_ulpd_pm_reset(struct omap_mpu_state_s *mpu)
-@@ -954,7 +954,7 @@ static void omap_pin_cfg_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps omap_pin_cfg_ops = {
-     .read = omap_pin_cfg_read,
-     .write = omap_pin_cfg_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static void omap_pin_cfg_reset(struct omap_mpu_state_s *mpu)
-@@ -1045,7 +1045,7 @@ static void omap_id_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps omap_id_ops = {
-     .read = omap_id_read,
-     .write = omap_id_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static void omap_id_init(MemoryRegion *memory, struct omap_mpu_state_s *mpu)
-@@ -1134,7 +1134,7 @@ static void omap_mpui_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps omap_mpui_ops = {
-     .read = omap_mpui_read,
-     .write = omap_mpui_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static void omap_mpui_reset(struct omap_mpu_state_s *s)
-@@ -1237,7 +1237,7 @@ static void omap_tipb_bridge_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps omap_tipb_bridge_ops = {
-     .read = omap_tipb_bridge_read,
-     .write = omap_tipb_bridge_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static void omap_tipb_bridge_reset(struct omap_tipb_bridge_s *s)
-@@ -1342,7 +1342,7 @@ static void omap_tcmi_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps omap_tcmi_ops = {
-     .read = omap_tcmi_read,
-     .write = omap_tcmi_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static void omap_tcmi_reset(struct omap_mpu_state_s *mpu)
-@@ -1437,7 +1437,7 @@ static void omap_dpll_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps omap_dpll_ops = {
-     .read = omap_dpll_read,
-     .write = omap_dpll_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static void omap_dpll_reset(struct dpll_ctl_s *s)
-@@ -1749,7 +1749,7 @@ static void omap_clkm_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps omap_clkm_ops = {
-     .read = omap_clkm_read,
-     .write = omap_clkm_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static uint64_t omap_clkdsp_read(void *opaque, hwaddr addr,
-@@ -1838,7 +1838,7 @@ static void omap_clkdsp_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps omap_clkdsp_ops = {
-     .read = omap_clkdsp_read,
-     .write = omap_clkdsp_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static void omap_clkm_reset(struct omap_mpu_state_s *s)
-@@ -2083,7 +2083,7 @@ static void omap_mpuio_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps omap_mpuio_ops  = {
-     .read = omap_mpuio_read,
-     .write = omap_mpuio_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static void omap_mpuio_reset(struct omap_mpuio_s *s)
-@@ -2289,7 +2289,7 @@ static void omap_uwire_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps omap_uwire_ops = {
-     .read = omap_uwire_read,
-     .write = omap_uwire_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static void omap_uwire_reset(struct omap_uwire_s *s)
-@@ -2400,7 +2400,7 @@ static void omap_pwl_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps omap_pwl_ops = {
-     .read = omap_pwl_read,
-     .write = omap_pwl_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static void omap_pwl_reset(struct omap_pwl_s *s)
-@@ -2518,7 +2518,7 @@ static void omap_pwt_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps omap_pwt_ops = {
-     .read =omap_pwt_read,
-     .write = omap_pwt_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static void omap_pwt_reset(struct omap_pwt_s *s)
-@@ -2855,7 +2855,7 @@ static void omap_rtc_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps omap_rtc_ops = {
-     .read = omap_rtc_read,
-     .write = omap_rtc_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static void omap_rtc_tick(void *opaque)
-@@ -3453,7 +3453,7 @@ static void omap_mcbsp_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps omap_mcbsp_ops = {
-     .read = omap_mcbsp_read,
-     .write = omap_mcbsp_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static void omap_mcbsp_reset(struct omap_mcbsp_s *s)
-@@ -3645,7 +3645,7 @@ static void omap_lpg_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps omap_lpg_ops = {
-     .read = omap_lpg_read,
-     .write = omap_lpg_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static void omap_lpg_clk_update(void *opaque, int line, int on)
-@@ -3698,7 +3698,7 @@ static void omap_mpui_io_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps omap_mpui_io_ops = {
-     .read = omap_mpui_io_read,
-     .write = omap_mpui_io_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static void omap_setup_mpui_io(MemoryRegion *system_memory,
-diff --git a/hw/arm/omap2.c b/hw/arm/omap2.c
-index bd7ddff983..405aa29671 100644
---- a/hw/arm/omap2.c
-+++ b/hw/arm/omap2.c
-@@ -597,7 +597,7 @@ static void omap_eac_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps omap_eac_ops = {
-     .read = omap_eac_read,
-     .write = omap_eac_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static struct omap_eac_s *omap_eac_init(struct omap_target_agent_s *ta,
-@@ -748,7 +748,7 @@ static void omap_sti_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps omap_sti_ops = {
-     .read = omap_sti_read,
-     .write = omap_sti_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static uint64_t omap_sti_fifo_read(void *opaque, hwaddr addr,
-@@ -789,7 +789,7 @@ static void omap_sti_fifo_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps omap_sti_fifo_ops = {
-     .read = omap_sti_fifo_read,
-     .write = omap_sti_fifo_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static struct omap_sti_s *omap_sti_init(struct omap_target_agent_s *ta,
-@@ -1728,7 +1728,7 @@ static void omap_prcm_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps omap_prcm_ops = {
-     .read = omap_prcm_read,
-     .write = omap_prcm_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static void omap_prcm_reset(struct omap_prcm_s *s)
-@@ -2128,7 +2128,7 @@ static const MemoryRegionOps omap_sysctl_ops = {
-     .write = omap_sysctl_writefn,
-     .valid.min_access_size = 1,
-     .valid.max_access_size = 4,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static void omap_sysctl_reset(struct omap_sysctl_s *s)
-diff --git a/hw/arm/omap_sx1.c b/hw/arm/omap_sx1.c
-index 75a05c36b0..1a8f7b4e61 100644
---- a/hw/arm/omap_sx1.c
-+++ b/hw/arm/omap_sx1.c
-@@ -82,7 +82,7 @@ static void static_write(void *opaque, hwaddr offset,
- static const MemoryRegionOps static_ops = {
-     .read = static_read,
-     .write = static_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- #define sdram_size	0x02000000
-diff --git a/hw/arm/palm.c b/hw/arm/palm.c
-index bea47b917d..4de6fbe639 100644
---- a/hw/arm/palm.c
-+++ b/hw/arm/palm.c
-@@ -54,7 +54,7 @@ static const MemoryRegionOps static_ops = {
-     .write = static_write,
-     .valid.min_access_size = 1,
-     .valid.max_access_size = 4,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- /* Palm Tunsgten|E support */
-diff --git a/hw/arm/pxa2xx.c b/hw/arm/pxa2xx.c
-index cdafde2f76..dccd71e955 100644
---- a/hw/arm/pxa2xx.c
-+++ b/hw/arm/pxa2xx.c
-@@ -152,7 +152,7 @@ static void pxa2xx_pm_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps pxa2xx_pm_ops = {
-     .read = pxa2xx_pm_read,
-     .write = pxa2xx_pm_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static const VMStateDescription vmstate_pxa2xx_pm = {
-@@ -218,7 +218,7 @@ static void pxa2xx_cm_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps pxa2xx_cm_ops = {
-     .read = pxa2xx_cm_read,
-     .write = pxa2xx_cm_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static const VMStateDescription vmstate_pxa2xx_cm = {
-@@ -442,7 +442,7 @@ static void pxa2xx_mm_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps pxa2xx_mm_ops = {
-     .read = pxa2xx_mm_read,
-     .write = pxa2xx_mm_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static const VMStateDescription vmstate_pxa2xx_mm = {
-@@ -741,7 +741,7 @@ static void pxa2xx_ssp_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps pxa2xx_ssp_ops = {
-     .read = pxa2xx_ssp_read,
-     .write = pxa2xx_ssp_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static void pxa2xx_ssp_reset(DeviceState *d)
-@@ -1108,7 +1108,7 @@ static void pxa2xx_rtc_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps pxa2xx_rtc_ops = {
-     .read = pxa2xx_rtc_read,
-     .write = pxa2xx_rtc_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static void pxa2xx_rtc_init(Object *obj)
-@@ -1429,7 +1429,7 @@ static void pxa2xx_i2c_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps pxa2xx_i2c_ops = {
-     .read = pxa2xx_i2c_read,
-     .write = pxa2xx_i2c_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static const VMStateDescription vmstate_pxa2xx_i2c_slave = {
-@@ -1687,7 +1687,7 @@ static void pxa2xx_i2s_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps pxa2xx_i2s_ops = {
-     .read = pxa2xx_i2s_read,
-     .write = pxa2xx_i2s_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static const VMStateDescription vmstate_pxa2xx_i2s = {
-@@ -1924,7 +1924,7 @@ static void pxa2xx_fir_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps pxa2xx_fir_ops = {
-     .read = pxa2xx_fir_read,
-     .write = pxa2xx_fir_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static int pxa2xx_fir_is_empty(void *opaque)
-@@ -2113,7 +2113,7 @@ PXA2xxState *pxa270_init(MemoryRegion *address_space,
-             serial_mm_init(address_space, pxa270_serial[i].io_base, 2,
-                            qdev_get_gpio_in(s->pic, pxa270_serial[i].irqn),
-                            14857000 / 16, serial_hd(i),
--                           DEVICE_NATIVE_ENDIAN);
-+                           MO_TE);
-         } else {
-             break;
-         }
-@@ -2237,7 +2237,7 @@ PXA2xxState *pxa255_init(MemoryRegion *address_space, unsigned int sdram_size)
-             serial_mm_init(address_space, pxa255_serial[i].io_base, 2,
-                            qdev_get_gpio_in(s->pic, pxa255_serial[i].irqn),
-                            14745600 / 16, serial_hd(i),
--                           DEVICE_NATIVE_ENDIAN);
-+                           MO_TE);
-         } else {
-             break;
-         }
-diff --git a/hw/arm/pxa2xx_gpio.c b/hw/arm/pxa2xx_gpio.c
-index 86a0e86c4c..16f9127cdf 100644
---- a/hw/arm/pxa2xx_gpio.c
-+++ b/hw/arm/pxa2xx_gpio.c
-@@ -259,7 +259,7 @@ static void pxa2xx_gpio_write(void *opaque, hwaddr offset,
- static const MemoryRegionOps pxa_gpio_ops = {
-     .read = pxa2xx_gpio_read,
-     .write = pxa2xx_gpio_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- DeviceState *pxa2xx_gpio_init(hwaddr base,
-diff --git a/hw/arm/pxa2xx_pic.c b/hw/arm/pxa2xx_pic.c
-index 203d4d28af..9819186385 100644
---- a/hw/arm/pxa2xx_pic.c
-+++ b/hw/arm/pxa2xx_pic.c
-@@ -256,7 +256,7 @@ static const ARMCPRegInfo pxa_pic_cp_reginfo[] = {
- static const MemoryRegionOps pxa2xx_pic_ops = {
-     .read = pxa2xx_pic_mem_read,
-     .write = pxa2xx_pic_mem_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static int pxa2xx_pic_post_load(void *opaque, int version_id)
-diff --git a/hw/arm/spitz.c b/hw/arm/spitz.c
-index 59348123b5..e4e84ea35b 100644
---- a/hw/arm/spitz.c
-+++ b/hw/arm/spitz.c
-@@ -148,7 +148,7 @@ enum {
- static const MemoryRegionOps sl_ops = {
-     .read = sl_read,
-     .write = sl_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static void sl_flash_register(PXA2xxState *cpu, int size)
-diff --git a/hw/arm/stellaris.c b/hw/arm/stellaris.c
-index b198066b54..e514ff8114 100644
---- a/hw/arm/stellaris.c
-+++ b/hw/arm/stellaris.c
-@@ -308,7 +308,7 @@ static void gptm_write(void *opaque, hwaddr offset,
- static const MemoryRegionOps gptm_ops = {
-     .read = gptm_read,
-     .write = gptm_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static const VMStateDescription vmstate_stellaris_gptm = {
-@@ -640,7 +640,7 @@ static void ssys_write(void *opaque, hwaddr offset,
- static const MemoryRegionOps ssys_ops = {
-     .read = ssys_read,
-     .write = ssys_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static void ssys_reset(void *opaque)
-@@ -877,7 +877,7 @@ static void stellaris_i2c_reset(stellaris_i2c_state *s)
- static const MemoryRegionOps stellaris_i2c_ops = {
-     .read = stellaris_i2c_read,
-     .write = stellaris_i2c_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static const VMStateDescription vmstate_stellaris_i2c = {
-@@ -1147,7 +1147,7 @@ static void stellaris_adc_write(void *opaque, hwaddr offset,
- static const MemoryRegionOps stellaris_adc_ops = {
-     .read = stellaris_adc_read,
-     .write = stellaris_adc_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static const VMStateDescription vmstate_stellaris_adc = {
-diff --git a/hw/arm/strongarm.c b/hw/arm/strongarm.c
-index dc65d88a65..439bb7dd5c 100644
---- a/hw/arm/strongarm.c
-+++ b/hw/arm/strongarm.c
-@@ -182,7 +182,7 @@ static void strongarm_pic_mem_write(void *opaque, hwaddr offset,
- static const MemoryRegionOps strongarm_pic_ops = {
-     .read = strongarm_pic_mem_read,
-     .write = strongarm_pic_mem_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static void strongarm_pic_initfn(Object *obj)
-@@ -382,7 +382,7 @@ static void strongarm_rtc_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps strongarm_rtc_ops = {
-     .read = strongarm_rtc_read,
-     .write = strongarm_rtc_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static void strongarm_rtc_init(Object *obj)
-@@ -630,7 +630,7 @@ static void strongarm_gpio_write(void *opaque, hwaddr offset,
- static const MemoryRegionOps strongarm_gpio_ops = {
-     .read = strongarm_gpio_read,
-     .write = strongarm_gpio_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static DeviceState *strongarm_gpio_init(hwaddr base,
-@@ -823,7 +823,7 @@ static void strongarm_ppc_write(void *opaque, hwaddr offset,
- static const MemoryRegionOps strongarm_ppc_ops = {
-     .read = strongarm_ppc_read,
-     .write = strongarm_ppc_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static void strongarm_ppc_init(Object *obj)
-@@ -1228,7 +1228,7 @@ static void strongarm_uart_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps strongarm_uart_ops = {
-     .read = strongarm_uart_read,
-     .write = strongarm_uart_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static void strongarm_uart_init(Object *obj)
-@@ -1517,7 +1517,7 @@ static void strongarm_ssp_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps strongarm_ssp_ops = {
-     .read = strongarm_ssp_read,
-     .write = strongarm_ssp_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static int strongarm_ssp_post_load(void *opaque, int version_id)
-diff --git a/hw/arm/versatilepb.c b/hw/arm/versatilepb.c
-index e25561705f..a7762170fd 100644
---- a/hw/arm/versatilepb.c
-+++ b/hw/arm/versatilepb.c
-@@ -151,7 +151,7 @@ static void vpb_sic_write(void *opaque, hwaddr offset,
- static const MemoryRegionOps vpb_sic_ops = {
-     .read = vpb_sic_read,
-     .write = vpb_sic_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static void vpb_sic_init(Object *obj)
-diff --git a/hw/audio/intel-hda.c b/hw/audio/intel-hda.c
-index 6ecd383540..3699d960b9 100644
---- a/hw/audio/intel-hda.c
-+++ b/hw/audio/intel-hda.c
-@@ -1069,7 +1069,7 @@ static const MemoryRegionOps intel_hda_mmio_ops = {
+ static void omap_mpu_timer_reset(struct omap_mpu_timer_s *s)
+diff --git a/hw/arm/smmuv3.c b/hw/arm/smmuv3.c
+index 2eaf07fb5f..d7c2bbb014 100644
+--- a/hw/arm/smmuv3.c
++++ b/hw/arm/smmuv3.c
+@@ -1349,7 +1349,7 @@ static MemTxResult smmu_read_mmio(void *opaque, hwaddr offset, uint64_t *data,
+ static const MemoryRegionOps smmu_mem_ops = {
+     .read_with_attrs = smmu_read_mmio,
+     .write_with_attrs = smmu_write_mmio,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .valid = {
+         .min_access_size = 4,
+         .max_access_size = 8,
+diff --git a/hw/audio/ac97.c b/hw/audio/ac97.c
+index a136b97f68..1ee74a9d21 100644
+--- a/hw/audio/ac97.c
++++ b/hw/audio/ac97.c
+@@ -1276,7 +1276,7 @@ static const MemoryRegionOps ac97_io_nam_ops = {
          .min_access_size = 1,
          .max_access_size = 4,
      },
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
  };
  
- /* --------------------------------------------------------------------- */
-diff --git a/hw/block/fdc.c b/hw/block/fdc.c
-index ac5d31e8c1..7a5720cea9 100644
---- a/hw/block/fdc.c
-+++ b/hw/block/fdc.c
-@@ -984,13 +984,13 @@ static void fdctrl_write_mem (void *opaque, hwaddr reg,
- static const MemoryRegionOps fdctrl_mem_ops = {
-     .read = fdctrl_read_mem,
-     .write = fdctrl_write_mem,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static const MemoryRegionOps fdctrl_mem_strict_ops = {
-     .read = fdctrl_read_mem,
-     .write = fdctrl_write_mem,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .valid = {
+ static uint64_t nabm_read(void *opaque, hwaddr addr, unsigned size)
+@@ -1325,7 +1325,7 @@ static const MemoryRegionOps ac97_io_nabm_ops = {
          .min_access_size = 1,
-         .max_access_size = 1,
-diff --git a/hw/block/pflash_cfi01.c b/hw/block/pflash_cfi01.c
-index 566c0acb77..80240c5a4b 100644
---- a/hw/block/pflash_cfi01.c
-+++ b/hw/block/pflash_cfi01.c
-@@ -695,7 +695,7 @@ static MemTxResult pflash_mem_write_with_attrs(void *opaque, hwaddr addr, uint64
- static const MemoryRegionOps pflash_cfi01_ops = {
-     .read_with_attrs = pflash_mem_read_with_attrs,
-     .write_with_attrs = pflash_mem_write_with_attrs,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+         .max_access_size = 4,
+     },
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
  };
  
- static void pflash_cfi01_realize(DeviceState *dev, Error **errp)
-diff --git a/hw/block/pflash_cfi02.c b/hw/block/pflash_cfi02.c
-index 4baca701b7..16404ea9d2 100644
---- a/hw/block/pflash_cfi02.c
-+++ b/hw/block/pflash_cfi02.c
-@@ -714,7 +714,7 @@ static const MemoryRegionOps pflash_cfi02_ops = {
-     .write = pflash_write,
-     .valid.min_access_size = 1,
-     .valid.max_access_size = 4,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static void pflash_cfi02_realize(DeviceState *dev, Error **errp)
-diff --git a/hw/char/bcm2835_aux.c b/hw/char/bcm2835_aux.c
-index 3f855196e3..527f36b178 100644
---- a/hw/char/bcm2835_aux.c
-+++ b/hw/char/bcm2835_aux.c
-@@ -247,7 +247,7 @@ static void bcm2835_aux_receive(void *opaque, const uint8_t *buf, int size)
- static const MemoryRegionOps bcm2835_aux_ops = {
-     .read = bcm2835_aux_read,
-     .write = bcm2835_aux_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .valid.min_access_size = 4,
-     .valid.max_access_size = 4,
- };
-diff --git a/hw/char/digic-uart.c b/hw/char/digic-uart.c
-index 974a2619dd..3de66380e2 100644
---- a/hw/char/digic-uart.c
-+++ b/hw/char/digic-uart.c
-@@ -111,7 +111,7 @@ static const MemoryRegionOps uart_mmio_ops = {
+ static void ac97_on_reset (DeviceState *dev)
+diff --git a/hw/audio/es1370.c b/hw/audio/es1370.c
+index f9e9f2a3b3..2ccee054b8 100644
+--- a/hw/audio/es1370.c
++++ b/hw/audio/es1370.c
+@@ -774,7 +774,7 @@ static const MemoryRegionOps es1370_io_ops = {
          .min_access_size = 4,
          .max_access_size = 4,
      },
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
  };
  
- static int uart_can_rx(void *opaque)
-diff --git a/hw/char/exynos4210_uart.c b/hw/char/exynos4210_uart.c
-index d6b6b62366..651f15f1ce 100644
---- a/hw/char/exynos4210_uart.c
-+++ b/hw/char/exynos4210_uart.c
-@@ -483,7 +483,7 @@ static uint64_t exynos4210_uart_read(void *opaque, hwaddr offset,
- static const MemoryRegionOps exynos4210_uart_ops = {
-     .read = exynos4210_uart_read,
-     .write = exynos4210_uart_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .valid = {
-         .max_access_size = 4,
-         .unaligned = false
-diff --git a/hw/char/mcf_uart.c b/hw/char/mcf_uart.c
-index 58323baf43..99e361c3df 100644
---- a/hw/char/mcf_uart.c
-+++ b/hw/char/mcf_uart.c
-@@ -287,7 +287,7 @@ static void mcf_uart_receive(void *opaque, const uint8_t *buf, int size)
- static const MemoryRegionOps mcf_uart_ops = {
-     .read = mcf_uart_read,
-     .write = mcf_uart_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+ static const VMStateDescription vmstate_es1370_channel = {
+diff --git a/hw/audio/marvell_88w8618.c b/hw/audio/marvell_88w8618.c
+index da1ab89ce6..6431d1af8f 100644
+--- a/hw/audio/marvell_88w8618.c
++++ b/hw/audio/marvell_88w8618.c
+@@ -242,7 +242,7 @@ static void mv88w8618_audio_reset(DeviceState *d)
+ static const MemoryRegionOps mv88w8618_audio_ops = {
+     .read = mv88w8618_audio_read,
+     .write = mv88w8618_audio_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
  };
  
- static void mcf_uart_instance_init(Object *obj)
-diff --git a/hw/char/omap_uart.c b/hw/char/omap_uart.c
-index 13e4f43c4c..ca0d429579 100644
---- a/hw/char/omap_uart.c
-+++ b/hw/char/omap_uart.c
-@@ -63,7 +63,7 @@ struct omap_uart_s *omap_uart_init(hwaddr base,
-     s->serial = serial_mm_init(get_system_memory(), base, 2, irq,
-                                omap_clk_getrate(fclk)/16,
-                                chr ?: qemu_chr_new(label, "null", NULL),
--                               DEVICE_NATIVE_ENDIAN);
-+                               MO_TE);
-     return s;
- }
- 
-@@ -155,7 +155,7 @@ static void omap_uart_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps omap_uart_ops = {
-     .read = omap_uart_read,
-     .write = omap_uart_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+ static void mv88w8618_audio_init(Object *obj)
+diff --git a/hw/audio/pl041.c b/hw/audio/pl041.c
+index 5803bfcf0c..2715dae341 100644
+--- a/hw/audio/pl041.c
++++ b/hw/audio/pl041.c
+@@ -522,7 +522,7 @@ static void pl041_device_reset(DeviceState *d)
+ static const MemoryRegionOps pl041_ops = {
+     .read = pl041_read,
+     .write = pl041_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
  };
  
- struct omap_uart_s *omap2_uart_init(MemoryRegion *sysmem,
-@@ -183,5 +183,5 @@ void omap_uart_attach(struct omap_uart_s *s, Chardev *chr)
-     s->serial = serial_mm_init(get_system_memory(), s->base, 2, s->irq,
-                                omap_clk_getrate(s->fclk) / 16,
-                                chr ?: qemu_chr_new("null", "null", NULL),
--                               DEVICE_NATIVE_ENDIAN);
-+                               MO_TE);
- }
-diff --git a/hw/char/parallel.c b/hw/char/parallel.c
-index 40174eeda1..66871c4499 100644
---- a/hw/char/parallel.c
-+++ b/hw/char/parallel.c
-@@ -591,7 +591,7 @@ static const MemoryRegionOps parallel_mm_ops = {
-     .write = parallel_mm_writefn,
-     .valid.min_access_size = 1,
-     .valid.max_access_size = 4,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+ static void pl041_init(Object *obj)
+diff --git a/hw/block/nvme.c b/hw/block/nvme.c
+index 12d8254250..ce5424dc99 100644
+--- a/hw/block/nvme.c
++++ b/hw/block/nvme.c
+@@ -1273,7 +1273,7 @@ static void nvme_mmio_write(void *opaque, hwaddr addr, uint64_t data,
+ static const MemoryRegionOps nvme_mmio_ops = {
+     .read = nvme_mmio_read,
+     .write = nvme_mmio_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .impl = {
+         .min_access_size = 2,
+         .max_access_size = 8,
+@@ -1296,7 +1296,7 @@ static uint64_t nvme_cmb_read(void *opaque, hwaddr addr, unsigned size)
+ static const MemoryRegionOps nvme_cmb_ops = {
+     .read = nvme_cmb_read,
+     .write = nvme_cmb_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .impl = {
+         .min_access_size = 1,
+         .max_access_size = 8,
+diff --git a/hw/block/onenand.c b/hw/block/onenand.c
+index 95fc0443d3..e5901e70b8 100644
+--- a/hw/block/onenand.c
++++ b/hw/block/onenand.c
+@@ -771,7 +771,7 @@ static void onenand_write(void *opaque, hwaddr addr,
+ static const MemoryRegionOps onenand_ops = {
+     .read = onenand_read,
+     .write = onenand_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
  };
  
- /* If fd is zero, it means that the parallel device uses the console */
-diff --git a/hw/char/sh_serial.c b/hw/char/sh_serial.c
-index 07dc16be13..0a2418a97d 100644
---- a/hw/char/sh_serial.c
-+++ b/hw/char/sh_serial.c
-@@ -368,7 +368,7 @@ static void sh_serial_event(void *opaque, int event)
- static const MemoryRegionOps sh_serial_ops = {
-     .read = sh_serial_read,
-     .write = sh_serial_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- void sh_serial_init(MemoryRegion *sysmem,
-diff --git a/hw/char/stm32f2xx_usart.c b/hw/char/stm32f2xx_usart.c
-index 4ec843de38..1099b0492d 100644
---- a/hw/char/stm32f2xx_usart.c
-+++ b/hw/char/stm32f2xx_usart.c
-@@ -189,7 +189,7 @@ static void stm32f2xx_usart_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps stm32f2xx_usart_ops = {
-     .read = stm32f2xx_usart_read,
-     .write = stm32f2xx_usart_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static Property stm32f2xx_usart_properties[] = {
-diff --git a/hw/char/xilinx_uartlite.c b/hw/char/xilinx_uartlite.c
-index 2c47275068..3f6ba1e5d8 100644
---- a/hw/char/xilinx_uartlite.c
-+++ b/hw/char/xilinx_uartlite.c
-@@ -169,7 +169,7 @@ uart_write(void *opaque, hwaddr addr,
+ static void onenand_realize(DeviceState *dev, Error **errp)
+diff --git a/hw/char/cadence_uart.c b/hw/char/cadence_uart.c
+index 5a128aa5b3..c961c16457 100644
+--- a/hw/char/cadence_uart.c
++++ b/hw/char/cadence_uart.c
+@@ -459,7 +459,7 @@ static uint64_t uart_read(void *opaque, hwaddr offset,
  static const MemoryRegionOps uart_ops = {
      .read = uart_read,
      .write = uart_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static void cadence_uart_reset(DeviceState *dev)
+diff --git a/hw/char/cmsdk-apb-uart.c b/hw/char/cmsdk-apb-uart.c
+index 9e1aa43bd3..2002eba5d3 100644
+--- a/hw/char/cmsdk-apb-uart.c
++++ b/hw/char/cmsdk-apb-uart.c
+@@ -300,7 +300,7 @@ static void uart_write(void *opaque, hwaddr offset, uint64_t value,
+ static const MemoryRegionOps uart_ops = {
+     .read = uart_read,
+     .write = uart_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static void cmsdk_apb_uart_reset(DeviceState *dev)
+diff --git a/hw/char/debugcon.c b/hw/char/debugcon.c
+index 5c592e091b..b214154d21 100644
+--- a/hw/char/debugcon.c
++++ b/hw/char/debugcon.c
+@@ -82,7 +82,7 @@ static const MemoryRegionOps debugcon_ops = {
+     .write = debugcon_ioport_write,
+     .valid.min_access_size = 1,
+     .valid.max_access_size = 1,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static void debugcon_realize_core(DebugconState *s, Error **errp)
+diff --git a/hw/char/etraxfs_ser.c b/hw/char/etraxfs_ser.c
+index 6096158188..2c2b0271b7 100644
+--- a/hw/char/etraxfs_ser.c
++++ b/hw/char/etraxfs_ser.c
+@@ -157,7 +157,7 @@ ser_write(void *opaque, hwaddr addr,
+ static const MemoryRegionOps ser_ops = {
+     .read = ser_read,
+     .write = ser_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
      .valid = {
-         .min_access_size = 1,
+         .min_access_size = 4,
          .max_access_size = 4
-diff --git a/hw/core/empty_slot.c b/hw/core/empty_slot.c
-index 3ba450e1ca..950fb1564e 100644
---- a/hw/core/empty_slot.c
-+++ b/hw/core/empty_slot.c
-@@ -49,7 +49,7 @@ static void empty_slot_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps empty_slot_ops = {
-     .read = empty_slot_read,
-     .write = empty_slot_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+diff --git a/hw/char/imx_serial.c b/hw/char/imx_serial.c
+index 8a2f10d7bd..52a305f9eb 100644
+--- a/hw/char/imx_serial.c
++++ b/hw/char/imx_serial.c
+@@ -334,7 +334,7 @@ static void imx_event(void *opaque, int event)
+ static const struct MemoryRegionOps imx_serial_ops = {
+     .read = imx_serial_read,
+     .write = imx_serial_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
  };
  
- void empty_slot_init(hwaddr addr, uint64_t slot_size)
-diff --git a/hw/cris/axis_dev88.c b/hw/cris/axis_dev88.c
-index 940c7dd122..a98ffd3dd2 100644
---- a/hw/cris/axis_dev88.c
-+++ b/hw/cris/axis_dev88.c
-@@ -83,7 +83,7 @@ nand_write(void *opaque, hwaddr addr, uint64_t value,
- static const MemoryRegionOps nand_ops = {
-     .read = nand_read,
-     .write = nand_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+ static void imx_serial_realize(DeviceState *dev, Error **errp)
+diff --git a/hw/char/nrf51_uart.c b/hw/char/nrf51_uart.c
+index 2777afe366..937444a763 100644
+--- a/hw/char/nrf51_uart.c
++++ b/hw/char/nrf51_uart.c
+@@ -192,7 +192,7 @@ static void uart_write(void *opaque, hwaddr addr,
+ static const MemoryRegionOps uart_ops = {
+     .read =  uart_read,
+     .write = uart_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
  };
  
- struct tempsensor_t
-@@ -235,7 +235,7 @@ static void gpio_write(void *opaque, hwaddr addr, uint64_t value,
- static const MemoryRegionOps gpio_ops = {
-     .read = gpio_read,
-     .write = gpio_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .valid = {
-         .min_access_size = 4,
-         .max_access_size = 4,
-diff --git a/hw/display/bcm2835_fb.c b/hw/display/bcm2835_fb.c
-index 8f856878cd..9650007f86 100644
---- a/hw/display/bcm2835_fb.c
-+++ b/hw/display/bcm2835_fb.c
-@@ -344,7 +344,7 @@ static void bcm2835_fb_write(void *opaque, hwaddr offset, uint64_t value,
- static const MemoryRegionOps bcm2835_fb_ops = {
-     .read = bcm2835_fb_read,
-     .write = bcm2835_fb_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .valid.min_access_size = 4,
-     .valid.max_access_size = 4,
- };
-diff --git a/hw/display/cg3.c b/hw/display/cg3.c
-index f90baae4de..97dd7f44ec 100644
---- a/hw/display/cg3.c
-+++ b/hw/display/cg3.c
-@@ -270,7 +270,7 @@ static void cg3_reg_write(void *opaque, hwaddr addr, uint64_t val,
- static const MemoryRegionOps cg3_reg_ops = {
-     .read = cg3_reg_read,
-     .write = cg3_reg_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .valid = {
-         .min_access_size = 1,
-         .max_access_size = 4,
-diff --git a/hw/display/exynos4210_fimd.c b/hw/display/exynos4210_fimd.c
-index c1071ecd46..f74693f547 100644
---- a/hw/display/exynos4210_fimd.c
-+++ b/hw/display/exynos4210_fimd.c
-@@ -1821,7 +1821,7 @@ static const MemoryRegionOps exynos4210_fimd_mmio_ops = {
-         .max_access_size = 4,
-         .unaligned = false
-     },
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+ static void nrf51_uart_reset(DeviceState *dev)
+diff --git a/hw/char/pl011.c b/hw/char/pl011.c
+index 0a86f6f340..6f46f39486 100644
+--- a/hw/char/pl011.c
++++ b/hw/char/pl011.c
+@@ -289,7 +289,7 @@ static void pl011_event(void *opaque, int event)
+ static const MemoryRegionOps pl011_ops = {
+     .read = pl011_read,
+     .write = pl011_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
  };
  
- static int exynos4210_fimd_load(void *opaque, int version_id)
-diff --git a/hw/display/jazz_led.c b/hw/display/jazz_led.c
-index 3e0112b1ca..7ffd2d36a6 100644
---- a/hw/display/jazz_led.c
-+++ b/hw/display/jazz_led.c
-@@ -73,7 +73,7 @@ static void jazz_led_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps led_ops = {
-     .read = jazz_led_read,
-     .write = jazz_led_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .impl.min_access_size = 1,
-     .impl.max_access_size = 1,
- };
-diff --git a/hw/display/milkymist-tmu2.c b/hw/display/milkymist-tmu2.c
-index 199f1227e7..f38e06aeba 100644
---- a/hw/display/milkymist-tmu2.c
-+++ b/hw/display/milkymist-tmu2.c
-@@ -435,7 +435,7 @@ static const MemoryRegionOps tmu2_mmio_ops = {
-         .min_access_size = 4,
-         .max_access_size = 4,
-     },
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static void milkymist_tmu2_reset(DeviceState *d)
-diff --git a/hw/display/milkymist-vgafb.c b/hw/display/milkymist-vgafb.c
-index 8b0da4660a..a5a7654f5b 100644
---- a/hw/display/milkymist-vgafb.c
-+++ b/hw/display/milkymist-vgafb.c
-@@ -271,7 +271,7 @@ static const MemoryRegionOps vgafb_mmio_ops = {
-         .min_access_size = 4,
-         .max_access_size = 4,
-     },
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static void milkymist_vgafb_reset(DeviceState *d)
-diff --git a/hw/display/omap_dss.c b/hw/display/omap_dss.c
-index 637aae8d39..34ba41e913 100644
---- a/hw/display/omap_dss.c
-+++ b/hw/display/omap_dss.c
-@@ -247,7 +247,7 @@ static void omap_diss_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps omap_diss_ops = {
-     .read = omap_diss_read,
-     .write = omap_diss_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static uint64_t omap_disc_read(void *opaque, hwaddr addr,
-@@ -591,7 +591,7 @@ static void omap_disc_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps omap_disc_ops = {
-     .read = omap_disc_read,
-     .write = omap_disc_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static void omap_rfbi_transfer_stop(struct omap_dss_s *s)
-@@ -867,7 +867,7 @@ static void omap_rfbi_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps omap_rfbi_ops = {
-     .read = omap_rfbi_read,
-     .write = omap_rfbi_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static uint64_t omap_venc_read(void *opaque, hwaddr addr,
-@@ -990,7 +990,7 @@ static void omap_venc_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps omap_venc_ops = {
-     .read = omap_venc_read,
-     .write = omap_venc_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static uint64_t omap_im3_read(void *opaque, hwaddr addr,
-@@ -1044,7 +1044,7 @@ static void omap_im3_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps omap_im3_ops = {
-     .read = omap_im3_read,
-     .write = omap_im3_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- struct omap_dss_s *omap_dss_init(struct omap_target_agent_s *ta,
-diff --git a/hw/display/omap_lcdc.c b/hw/display/omap_lcdc.c
-index 6ad13f2e9e..ab98c1dc1b 100644
---- a/hw/display/omap_lcdc.c
-+++ b/hw/display/omap_lcdc.c
-@@ -331,7 +331,7 @@ static void omap_lcdc_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps omap_lcdc_ops = {
-     .read = omap_lcdc_read,
-     .write = omap_lcdc_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- void omap_lcdc_reset(struct omap_lcd_panel_s *s)
-diff --git a/hw/display/pxa2xx_lcd.c b/hw/display/pxa2xx_lcd.c
-index 05f5f84671..4b692565ab 100644
---- a/hw/display/pxa2xx_lcd.c
-+++ b/hw/display/pxa2xx_lcd.c
-@@ -569,7 +569,7 @@ static void pxa2xx_lcdc_write(void *opaque, hwaddr offset,
- static const MemoryRegionOps pxa2xx_lcdc_ops = {
-     .read = pxa2xx_lcdc_read,
-     .write = pxa2xx_lcdc_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- /* Load new palette for a given DMA channel, convert to internal format */
-diff --git a/hw/display/tcx.c b/hw/display/tcx.c
-index 14e829d3fa..3ef8c85f22 100644
---- a/hw/display/tcx.c
-+++ b/hw/display/tcx.c
-@@ -464,7 +464,7 @@ static void tcx_dac_writel(void *opaque, hwaddr addr, uint64_t val,
- static const MemoryRegionOps tcx_dac_ops = {
-     .read = tcx_dac_readl,
-     .write = tcx_dac_writel,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .valid = {
-         .min_access_size = 4,
-         .max_access_size = 4,
-@@ -545,7 +545,7 @@ static void tcx_rstip_writel(void *opaque, hwaddr addr,
- static const MemoryRegionOps tcx_stip_ops = {
-     .read = tcx_stip_readl,
-     .write = tcx_stip_writel,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .valid = {
-         .min_access_size = 4,
-         .max_access_size = 4,
-@@ -555,7 +555,7 @@ static const MemoryRegionOps tcx_stip_ops = {
- static const MemoryRegionOps tcx_rstip_ops = {
-     .read = tcx_stip_readl,
-     .write = tcx_rstip_writel,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .valid = {
-         .min_access_size = 4,
-         .max_access_size = 4,
-@@ -637,7 +637,7 @@ static void tcx_rblit_writel(void *opaque, hwaddr addr,
- static const MemoryRegionOps tcx_blit_ops = {
-     .read = tcx_blit_readl,
-     .write = tcx_blit_writel,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .valid = {
-         .min_access_size = 4,
-         .max_access_size = 4,
-@@ -647,7 +647,7 @@ static const MemoryRegionOps tcx_blit_ops = {
- static const MemoryRegionOps tcx_rblit_ops = {
-     .read = tcx_blit_readl,
-     .write = tcx_rblit_writel,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .valid = {
-         .min_access_size = 4,
-         .max_access_size = 4,
-@@ -709,7 +709,7 @@ static void tcx_thc_writel(void *opaque, hwaddr addr,
- static const MemoryRegionOps tcx_thc_ops = {
-     .read = tcx_thc_readl,
-     .write = tcx_thc_writel,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .valid = {
-         .min_access_size = 4,
-         .max_access_size = 4,
-@@ -731,7 +731,7 @@ static void tcx_dummy_writel(void *opaque, hwaddr addr,
- static const MemoryRegionOps tcx_dummy_ops = {
-     .read = tcx_dummy_readl,
-     .write = tcx_dummy_writel,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .valid = {
-         .min_access_size = 4,
-         .max_access_size = 4,
-diff --git a/hw/display/vga-isa-mm.c b/hw/display/vga-isa-mm.c
-index e9c43e5530..e90c821d6e 100644
---- a/hw/display/vga-isa-mm.c
-+++ b/hw/display/vga-isa-mm.c
-@@ -62,7 +62,7 @@ static const MemoryRegionOps vga_mm_ctrl_ops = {
-     .valid.max_access_size = 4,
-     .impl.min_access_size = 1,
-     .impl.max_access_size = 4,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static void vga_mm_init(ISAVGAMMState *s, hwaddr vram_base,
-diff --git a/hw/display/xlnx_dp.c b/hw/display/xlnx_dp.c
-index fde3b21ea5..625a7c2ac7 100644
---- a/hw/display/xlnx_dp.c
-+++ b/hw/display/xlnx_dp.c
-@@ -303,7 +303,7 @@ static void xlnx_dp_audio_write(void *opaque, hwaddr offset, uint64_t value,
- static const MemoryRegionOps audio_ops = {
-     .read = xlnx_dp_audio_read,
-     .write = xlnx_dp_audio_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static inline uint32_t xlnx_dp_audio_get_volume(XlnxDPState *s,
-@@ -878,7 +878,7 @@ static void xlnx_dp_write(void *opaque, hwaddr offset, uint64_t value,
- static const MemoryRegionOps dp_ops = {
-     .read = xlnx_dp_read,
-     .write = xlnx_dp_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .valid = {
-         .min_access_size = 4,
-         .max_access_size = 4,
-@@ -993,7 +993,7 @@ static uint64_t xlnx_dp_vblend_read(void *opaque, hwaddr offset,
- static const MemoryRegionOps vblend_ops = {
-     .read = xlnx_dp_vblend_read,
-     .write = xlnx_dp_vblend_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .valid = {
-         .min_access_size = 4,
-         .max_access_size = 4,
-@@ -1106,7 +1106,7 @@ static uint64_t xlnx_dp_avbufm_read(void *opaque, hwaddr offset,
- static const MemoryRegionOps avbufm_ops = {
-     .read = xlnx_dp_avbufm_read,
-     .write = xlnx_dp_avbufm_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .valid = {
-         .min_access_size = 4,
-         .max_access_size = 4,
-diff --git a/hw/dma/i8257.c b/hw/dma/i8257.c
-index 792f617eb4..f588bc2d34 100644
---- a/hw/dma/i8257.c
-+++ b/hw/dma/i8257.c
-@@ -476,7 +476,7 @@ static int i8257_phony_handler(void *opaque, int nchan, int dma_pos,
- static const MemoryRegionOps channel_io_ops = {
-     .read = i8257_read_chan,
-     .write = i8257_write_chan,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .impl = {
+ static const VMStateDescription vmstate_pl011 = {
+diff --git a/hw/char/serial.c b/hw/char/serial.c
+index 6328476f52..b4e2232fc7 100644
+--- a/hw/char/serial.c
++++ b/hw/char/serial.c
+@@ -977,7 +977,7 @@ const MemoryRegionOps serial_io_ops = {
          .min_access_size = 1,
          .max_access_size = 1,
-@@ -500,7 +500,7 @@ static const MemoryRegionPortio pageh_portio_list[] = {
- static const MemoryRegionOps cont_io_ops = {
-     .read = i8257_read_cont,
-     .write = i8257_write_cont,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .impl = {
-         .min_access_size = 1,
-         .max_access_size = 1,
-diff --git a/hw/dma/omap_dma.c b/hw/dma/omap_dma.c
-index eab83c5c3a..16cc7df945 100644
---- a/hw/dma/omap_dma.c
-+++ b/hw/dma/omap_dma.c
-@@ -1552,7 +1552,7 @@ static void omap_dma_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps omap_dma_ops = {
-     .read = omap_dma_read,
-     .write = omap_dma_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+     },
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
  };
  
- static void omap_dma_request(void *opaque, int drq, int req)
-@@ -2073,7 +2073,7 @@ static void omap_dma4_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps omap_dma4_ops = {
-     .read = omap_dma4_read,
-     .write = omap_dma4_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+ SerialState *serial_init(int base, qemu_irq irq, int baudbase,
+@@ -1020,7 +1020,7 @@ static const MemoryRegionOps serial_mm_ops[2] = {
+     [0] = {
+         .read = serial_mm_read,
+         .write = serial_mm_write,
+-        .endianness = DEVICE_LITTLE_ENDIAN,
++        .endianness = MO_LE,
+         .valid.max_access_size = 8,
+         .impl.max_access_size = 8,
+     },
+diff --git a/hw/display/ati.c b/hw/display/ati.c
+index 35f49a591b..61b6f9447a 100644
+--- a/hw/display/ati.c
++++ b/hw/display/ati.c
+@@ -810,7 +810,7 @@ static void ati_mm_write(void *opaque, hwaddr addr,
+ static const MemoryRegionOps ati_mm_ops = {
+     .read = ati_mm_read,
+     .write = ati_mm_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
  };
  
- struct soc_dma_s *omap_dma4_init(hwaddr base, qemu_irq *irqs,
-diff --git a/hw/dma/pxa2xx_dma.c b/hw/dma/pxa2xx_dma.c
-index 18e7a0b694..35828c989b 100644
---- a/hw/dma/pxa2xx_dma.c
-+++ b/hw/dma/pxa2xx_dma.c
-@@ -427,7 +427,7 @@ static void pxa2xx_dma_write(void *opaque, hwaddr offset,
- static const MemoryRegionOps pxa2xx_dma_ops = {
-     .read = pxa2xx_dma_read,
-     .write = pxa2xx_dma_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static void pxa2xx_dma_request(void *opaque, int req_num, int on)
-diff --git a/hw/dma/rc4030.c b/hw/dma/rc4030.c
-index d54e296d3a..16a055df48 100644
---- a/hw/dma/rc4030.c
-+++ b/hw/dma/rc4030.c
-@@ -388,7 +388,7 @@ static const MemoryRegionOps rc4030_ops = {
-     .write = rc4030_write,
-     .impl.min_access_size = 4,
-     .impl.max_access_size = 4,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static void update_jazz_irq(rc4030State *s)
-@@ -491,7 +491,7 @@ static const MemoryRegionOps jazzio_ops = {
-     .write = jazzio_write,
+ static void ati_vga_realize(PCIDevice *dev, Error **errp)
+diff --git a/hw/display/bochs-display.c b/hw/display/bochs-display.c
+index dc1bd1641d..62fea0c07c 100644
+--- a/hw/display/bochs-display.c
++++ b/hw/display/bochs-display.c
+@@ -107,7 +107,7 @@ static const MemoryRegionOps bochs_display_vbe_ops = {
+     .valid.max_access_size = 4,
      .impl.min_access_size = 2,
      .impl.max_access_size = 2,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
  };
  
- static IOMMUTLBEntry rc4030_dma_translate(IOMMUMemoryRegion *iommu, hwaddr addr,
-diff --git a/hw/dma/xilinx_axidma.c b/hw/dma/xilinx_axidma.c
-index d176df6d44..30c479fbbc 100644
---- a/hw/dma/xilinx_axidma.c
-+++ b/hw/dma/xilinx_axidma.c
-@@ -515,7 +515,7 @@ static void axidma_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps axidma_ops = {
-     .read = axidma_read,
-     .write = axidma_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static void xilinx_axidma_realize(DeviceState *dev, Error **errp)
-diff --git a/hw/dma/xlnx_dpdma.c b/hw/dma/xlnx_dpdma.c
-index b40c897de2..67605c515e 100644
---- a/hw/dma/xlnx_dpdma.c
-+++ b/hw/dma/xlnx_dpdma.c
-@@ -554,7 +554,7 @@ static void xlnx_dpdma_write(void *opaque, hwaddr offset,
- static const MemoryRegionOps dma_ops = {
-     .read = xlnx_dpdma_read,
-     .write = xlnx_dpdma_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .valid = {
-         .min_access_size = 4,
-         .max_access_size = 4,
-diff --git a/hw/gpio/bcm2835_gpio.c b/hw/gpio/bcm2835_gpio.c
-index 91ce3d10cc..d1dfb576ec 100644
---- a/hw/gpio/bcm2835_gpio.c
-+++ b/hw/gpio/bcm2835_gpio.c
-@@ -277,7 +277,7 @@ static void bcm2835_gpio_reset(DeviceState *dev)
- static const MemoryRegionOps bcm2835_gpio_ops = {
-     .read = bcm2835_gpio_read,
-     .write = bcm2835_gpio_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static const VMStateDescription vmstate_bcm2835_gpio = {
-diff --git a/hw/gpio/imx_gpio.c b/hw/gpio/imx_gpio.c
-index ac8304ec56..cf1b3dae56 100644
---- a/hw/gpio/imx_gpio.c
-+++ b/hw/gpio/imx_gpio.c
-@@ -270,7 +270,7 @@ static const MemoryRegionOps imx_gpio_ops = {
-     .write = imx_gpio_write,
+ static uint64_t bochs_display_qext_read(void *ptr, hwaddr addr,
+@@ -148,7 +148,7 @@ static const MemoryRegionOps bochs_display_qext_ops = {
+     .write = bochs_display_qext_write,
      .valid.min_access_size = 4,
      .valid.max_access_size = 4,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
  };
  
- static const VMStateDescription vmstate_imx_gpio = {
-diff --git a/hw/gpio/omap_gpio.c b/hw/gpio/omap_gpio.c
-index 41e1aa798c..7b716d61f3 100644
---- a/hw/gpio/omap_gpio.c
-+++ b/hw/gpio/omap_gpio.c
-@@ -178,7 +178,7 @@ static void omap_gpio_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps omap_gpio_ops = {
-     .read = omap_gpio_read,
-     .write = omap_gpio_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static void omap_gpio_reset(struct omap_gpio_s *s)
-@@ -593,7 +593,7 @@ static const MemoryRegionOps omap2_gpio_module_ops = {
-     .write = omap2_gpio_module_writep,
-     .valid.min_access_size = 1,
-     .valid.max_access_size = 4,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static void omap_gpif_reset(DeviceState *dev)
-@@ -676,7 +676,7 @@ static void omap2_gpif_top_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps omap2_gpif_top_ops = {
-     .read = omap2_gpif_top_read,
-     .write = omap2_gpif_top_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static void omap_gpio_init(Object *obj)
-diff --git a/hw/gpio/puv3_gpio.c b/hw/gpio/puv3_gpio.c
-index d19e342514..241431d79a 100644
---- a/hw/gpio/puv3_gpio.c
-+++ b/hw/gpio/puv3_gpio.c
-@@ -97,7 +97,7 @@ static const MemoryRegionOps puv3_gpio_ops = {
-         .min_access_size = 4,
-         .max_access_size = 4,
-     },
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static void puv3_gpio_realize(DeviceState *dev, Error **errp)
-diff --git a/hw/i2c/exynos4210_i2c.c b/hw/i2c/exynos4210_i2c.c
-index a600f65560..b9402defba 100644
---- a/hw/i2c/exynos4210_i2c.c
-+++ b/hw/i2c/exynos4210_i2c.c
-@@ -266,7 +266,7 @@ static void exynos4210_i2c_write(void *opaque, hwaddr offset,
- static const MemoryRegionOps exynos4210_i2c_ops = {
-     .read = exynos4210_i2c_read,
-     .write = exynos4210_i2c_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static const VMStateDescription exynos4210_i2c_vmstate = {
-diff --git a/hw/i2c/omap_i2c.c b/hw/i2c/omap_i2c.c
-index 3ba965a58f..c67477e2cf 100644
---- a/hw/i2c/omap_i2c.c
-+++ b/hw/i2c/omap_i2c.c
-@@ -470,7 +470,7 @@ static const MemoryRegionOps omap_i2c_ops = {
-     .write = omap_i2c_writefn,
-     .valid.min_access_size = 1,
-     .valid.max_access_size = 4,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static void omap_i2c_init(Object *obj)
-diff --git a/hw/i2c/ppc4xx_i2c.c b/hw/i2c/ppc4xx_i2c.c
-index 3f015a1581..e9fded6378 100644
---- a/hw/i2c/ppc4xx_i2c.c
-+++ b/hw/i2c/ppc4xx_i2c.c
-@@ -335,7 +335,7 @@ static const MemoryRegionOps ppc4xx_i2c_ops = {
+ static int bochs_display_get_mode(BochsDisplayState *s,
+diff --git a/hw/display/cirrus_vga.c b/hw/display/cirrus_vga.c
+index cd283e53b4..cda7d9f5ff 100644
+--- a/hw/display/cirrus_vga.c
++++ b/hw/display/cirrus_vga.c
+@@ -2125,7 +2125,7 @@ static void cirrus_vga_mem_write(void *opaque,
+ static const MemoryRegionOps cirrus_vga_mem_ops = {
+     .read = cirrus_vga_mem_read,
+     .write = cirrus_vga_mem_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .impl = {
+         .min_access_size = 1,
+         .max_access_size = 1,
+@@ -2438,7 +2438,7 @@ static void cirrus_linear_bitblt_write(void *opaque,
+ static const MemoryRegionOps cirrus_linear_bitblt_io_ops = {
+     .read = cirrus_linear_bitblt_read,
+     .write = cirrus_linear_bitblt_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .impl = {
+         .min_access_size = 1,
+         .max_access_size = 1,
+@@ -2738,7 +2738,7 @@ static void cirrus_mmio_write(void *opaque, hwaddr addr,
+ static const MemoryRegionOps cirrus_mmio_io_ops = {
+     .read = cirrus_mmio_read,
+     .write = cirrus_mmio_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .impl = {
+         .min_access_size = 1,
+         .max_access_size = 1,
+@@ -2849,7 +2849,7 @@ static void cirrus_reset(void *opaque)
+ static const MemoryRegionOps cirrus_linear_io_ops = {
+     .read = cirrus_linear_read,
+     .write = cirrus_linear_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .impl = {
+         .min_access_size = 1,
+         .max_access_size = 1,
+@@ -2859,7 +2859,7 @@ static const MemoryRegionOps cirrus_linear_io_ops = {
+ static const MemoryRegionOps cirrus_vga_io_ops = {
+     .read = cirrus_vga_ioport_read,
+     .write = cirrus_vga_ioport_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .impl = {
+         .min_access_size = 1,
+         .max_access_size = 1,
+diff --git a/hw/display/edid-region.c b/hw/display/edid-region.c
+index 675429dc18..a7b2252890 100644
+--- a/hw/display/edid-region.c
++++ b/hw/display/edid-region.c
+@@ -22,7 +22,7 @@ static const MemoryRegionOps edid_region_ops = {
      .valid.max_access_size = 4,
      .impl.min_access_size = 1,
      .impl.max_access_size = 1,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
  };
  
- static void ppc4xx_i2c_init(Object *o)
-diff --git a/hw/i386/kvm/apic.c b/hw/i386/kvm/apic.c
-index 91fb622d63..e645447fc8 100644
---- a/hw/i386/kvm/apic.c
-+++ b/hw/i386/kvm/apic.c
-@@ -207,7 +207,7 @@ static void kvm_apic_mem_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps kvm_apic_io_ops = {
-     .read = kvm_apic_mem_read,
-     .write = kvm_apic_mem_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+ void qemu_edid_region_io(MemoryRegion *region, Object *owner,
+diff --git a/hw/display/g364fb.c b/hw/display/g364fb.c
+index 839d26eca1..d6111a7391 100644
+--- a/hw/display/g364fb.c
++++ b/hw/display/g364fb.c
+@@ -431,7 +431,7 @@ static void g364fb_ctrl_write(void *opaque,
+ static const MemoryRegionOps g364fb_ctrl_ops = {
+     .read = g364fb_ctrl_read,
+     .write = g364fb_ctrl_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .impl.min_access_size = 4,
+     .impl.max_access_size = 4,
+ };
+diff --git a/hw/display/pl110.c b/hw/display/pl110.c
+index 3831505165..65361a0118 100644
+--- a/hw/display/pl110.c
++++ b/hw/display/pl110.c
+@@ -473,7 +473,7 @@ static void pl110_write(void *opaque, hwaddr offset,
+ static const MemoryRegionOps pl110_ops = {
+     .read = pl110_read,
+     .write = pl110_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
  };
  
- static void kvm_apic_reset(APICCommonState *s)
-diff --git a/hw/i386/kvmvapic.c b/hw/i386/kvmvapic.c
-index 51639202c2..d8f1c22d72 100644
---- a/hw/i386/kvmvapic.c
-+++ b/hw/i386/kvmvapic.c
-@@ -719,7 +719,7 @@ static uint64_t vapic_read(void *opaque, hwaddr addr, unsigned size)
- static const MemoryRegionOps vapic_ops = {
-     .write = vapic_write,
-     .read = vapic_read,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+ static void pl110_mux_ctrl_set(void *opaque, int line, int level)
+diff --git a/hw/display/sm501.c b/hw/display/sm501.c
+index d9e5762e36..aa7287c343 100644
+--- a/hw/display/sm501.c
++++ b/hw/display/sm501.c
+@@ -968,7 +968,7 @@ static const MemoryRegionOps sm501_system_config_ops = {
+         .min_access_size = 4,
+         .max_access_size = 4,
+     },
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
  };
  
- static void vapic_realize(DeviceState *dev, Error **errp)
+ static uint64_t sm501_i2c_read(void *opaque, hwaddr addr, unsigned size)
+@@ -1071,7 +1071,7 @@ static const MemoryRegionOps sm501_i2c_ops = {
+         .min_access_size = 1,
+         .max_access_size = 1,
+     },
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static uint32_t sm501_palette_read(void *opaque, hwaddr addr)
+@@ -1359,7 +1359,7 @@ static const MemoryRegionOps sm501_disp_ctrl_ops = {
+         .min_access_size = 4,
+         .max_access_size = 4,
+     },
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static uint64_t sm501_2d_engine_read(void *opaque, hwaddr addr,
+@@ -1534,7 +1534,7 @@ static const MemoryRegionOps sm501_2d_engine_ops = {
+         .min_access_size = 4,
+         .max_access_size = 4,
+     },
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ /* draw line functions for all console modes */
+@@ -1962,7 +1962,7 @@ static void sm501_realize_sysbus(DeviceState *dev, Error **errp)
+     if (s->chr_state) {
+         serial_mm_init(&s->state.mmio_region, SM501_UART0, 2,
+                        NULL, /* TODO : chain irq to IRL */
+-                       115200, s->chr_state, DEVICE_LITTLE_ENDIAN);
++                       115200, s->chr_state, MO_LE);
+     }
+ }
+ 
+diff --git a/hw/display/tc6393xb.c b/hw/display/tc6393xb.c
+index 6a9477a0c7..dd0cf3505d 100644
+--- a/hw/display/tc6393xb.c
++++ b/hw/display/tc6393xb.c
+@@ -549,7 +549,7 @@ TC6393xbState *tc6393xb_init(MemoryRegion *sysmem, uint32_t base, qemu_irq irq)
+     static const MemoryRegionOps tc6393xb_ops = {
+         .read = tc6393xb_readb,
+         .write = tc6393xb_writeb,
+-        .endianness = DEVICE_LITTLE_ENDIAN,
++        .endianness = MO_LE,
+         .impl = {
+             .min_access_size = 1,
+             .max_access_size = 1,
+diff --git a/hw/display/vga-pci.c b/hw/display/vga-pci.c
+index a27b88122d..43e0547659 100644
+--- a/hw/display/vga-pci.c
++++ b/hw/display/vga-pci.c
+@@ -111,7 +111,7 @@ static const MemoryRegionOps pci_vga_ioport_ops = {
+     .valid.max_access_size = 4,
+     .impl.min_access_size = 1,
+     .impl.max_access_size = 2,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static uint64_t pci_vga_bochs_read(void *ptr, hwaddr addr,
+@@ -141,7 +141,7 @@ static const MemoryRegionOps pci_vga_bochs_ops = {
+     .valid.max_access_size = 4,
+     .impl.min_access_size = 2,
+     .impl.max_access_size = 2,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static uint64_t pci_vga_qext_read(void *ptr, hwaddr addr, unsigned size)
+@@ -195,7 +195,7 @@ static const MemoryRegionOps pci_vga_qext_ops = {
+     .write = pci_vga_qext_write,
+     .valid.min_access_size = 4,
+     .valid.max_access_size = 4,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ void pci_std_vga_mmio_region_init(VGACommonState *s,
+diff --git a/hw/display/vga.c b/hw/display/vga.c
+index 573d223d46..4b04d9bd1e 100644
+--- a/hw/display/vga.c
++++ b/hw/display/vga.c
+@@ -2064,7 +2064,7 @@ static void vga_mem_write(void *opaque, hwaddr addr,
+ const MemoryRegionOps vga_mem_ops = {
+     .read = vga_mem_read,
+     .write = vga_mem_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .impl = {
+         .min_access_size = 1,
+         .max_access_size = 1,
+diff --git a/hw/display/vmware_vga.c b/hw/display/vmware_vga.c
+index 23dc8910cc..9408a3b845 100644
+--- a/hw/display/vmware_vga.c
++++ b/hw/display/vmware_vga.c
+@@ -1281,7 +1281,7 @@ static void vmsvga_io_write(void *opaque, hwaddr addr,
+ static const MemoryRegionOps vmsvga_io_ops = {
+     .read = vmsvga_io_read,
+     .write = vmsvga_io_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .valid = {
+         .min_access_size = 4,
+         .max_access_size = 4,
+diff --git a/hw/dma/bcm2835_dma.c b/hw/dma/bcm2835_dma.c
+index 550e67f686..e5b6e94df9 100644
+--- a/hw/dma/bcm2835_dma.c
++++ b/hw/dma/bcm2835_dma.c
+@@ -290,7 +290,7 @@ static void bcm2835_dma15_write(void *opaque, hwaddr offset, uint64_t value,
+ static const MemoryRegionOps bcm2835_dma0_ops = {
+     .read = bcm2835_dma0_read,
+     .write = bcm2835_dma0_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .valid.min_access_size = 4,
+     .valid.max_access_size = 4,
+ };
+@@ -298,7 +298,7 @@ static const MemoryRegionOps bcm2835_dma0_ops = {
+ static const MemoryRegionOps bcm2835_dma15_ops = {
+     .read = bcm2835_dma15_read,
+     .write = bcm2835_dma15_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .valid.min_access_size = 4,
+     .valid.max_access_size = 4,
+ };
+diff --git a/hw/dma/etraxfs_dma.c b/hw/dma/etraxfs_dma.c
+index b4e3f83ca4..0c68bd29d2 100644
+--- a/hw/dma/etraxfs_dma.c
++++ b/hw/dma/etraxfs_dma.c
+@@ -700,7 +700,7 @@ dma_write(void *opaque, hwaddr addr,
+ static const MemoryRegionOps dma_ops = {
+ 	.read = dma_read,
+ 	.write = dma_write,
+-	.endianness = DEVICE_LITTLE_ENDIAN,
++	.endianness = MO_LE,
+ 	.valid = {
+ 		.min_access_size = 1,
+ 		.max_access_size = 4
+diff --git a/hw/dma/pl080.c b/hw/dma/pl080.c
+index cbdd1849cd..19fab1b3ed 100644
+--- a/hw/dma/pl080.c
++++ b/hw/dma/pl080.c
+@@ -350,7 +350,7 @@ static void pl080_write(void *opaque, hwaddr offset,
+ static const MemoryRegionOps pl080_ops = {
+     .read = pl080_read,
+     .write = pl080_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static void pl080_reset(DeviceState *dev)
+diff --git a/hw/dma/pl330.c b/hw/dma/pl330.c
+index a9216680ef..f1120abc56 100644
+--- a/hw/dma/pl330.c
++++ b/hw/dma/pl330.c
+@@ -1496,7 +1496,7 @@ static uint64_t pl330_iomem_read(void *opaque, hwaddr offset,
+ static const MemoryRegionOps pl330_ops = {
+     .read = pl330_iomem_read,
+     .write = pl330_iomem_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .impl = {
+         .min_access_size = 4,
+         .max_access_size = 4,
+diff --git a/hw/dma/puv3_dma.c b/hw/dma/puv3_dma.c
+index 1577056715..ae58c20b65 100644
+--- a/hw/dma/puv3_dma.c
++++ b/hw/dma/puv3_dma.c
+@@ -74,7 +74,7 @@ static const MemoryRegionOps puv3_dma_ops = {
+         .min_access_size = 4,
+         .max_access_size = 4,
+     },
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static void puv3_dma_realize(DeviceState *dev, Error **errp)
+diff --git a/hw/dma/xlnx-zdma.c b/hw/dma/xlnx-zdma.c
+index 75b660988f..69e16b0d46 100644
+--- a/hw/dma/xlnx-zdma.c
++++ b/hw/dma/xlnx-zdma.c
+@@ -745,7 +745,7 @@ static void zdma_write(void *opaque, hwaddr addr, uint64_t value,
+ static const MemoryRegionOps zdma_ops = {
+     .read = zdma_read,
+     .write = zdma_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .valid = {
+         .min_access_size = 4,
+         .max_access_size = 4,
+diff --git a/hw/dma/xlnx-zynq-devcfg.c b/hw/dma/xlnx-zynq-devcfg.c
+index e33112b6f0..dd7145aa80 100644
+--- a/hw/dma/xlnx-zynq-devcfg.c
++++ b/hw/dma/xlnx-zynq-devcfg.c
+@@ -320,7 +320,7 @@ static const RegisterAccessInfo xlnx_zynq_devcfg_regs_info[] = {
+ static const MemoryRegionOps xlnx_zynq_devcfg_reg_ops = {
+     .read = register_read_memory,
+     .write = register_write_memory,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .valid = {
+         .min_access_size = 4,
+         .max_access_size = 4,
+diff --git a/hw/gpio/nrf51_gpio.c b/hw/gpio/nrf51_gpio.c
+index b47fddf4ed..4e09e57ef9 100644
+--- a/hw/gpio/nrf51_gpio.c
++++ b/hw/gpio/nrf51_gpio.c
+@@ -227,7 +227,7 @@ static void nrf51_gpio_write(void *opaque, hwaddr offset,
+ static const MemoryRegionOps gpio_ops = {
+     .read =  nrf51_gpio_read,
+     .write = nrf51_gpio_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .impl.min_access_size = 4,
+     .impl.max_access_size = 4,
+ };
+diff --git a/hw/gpio/pl061.c b/hw/gpio/pl061.c
+index 25371d6c5a..15a45a22e7 100644
+--- a/hw/gpio/pl061.c
++++ b/hw/gpio/pl061.c
+@@ -341,7 +341,7 @@ static void pl061_set_irq(void * opaque, int irq, int level)
+ static const MemoryRegionOps pl061_ops = {
+     .read = pl061_read,
+     .write = pl061_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static void pl061_luminary_init(Object *obj)
+diff --git a/hw/gpio/zaurus.c b/hw/gpio/zaurus.c
+index 60bbbb8564..d7ba4c2ee7 100644
+--- a/hw/gpio/zaurus.c
++++ b/hw/gpio/zaurus.c
+@@ -157,7 +157,7 @@ static void scoop_write(void *opaque, hwaddr addr,
+ static const MemoryRegionOps scoop_ops = {
+     .read = scoop_read,
+     .write = scoop_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static void scoop_gpio_set(void *opaque, int line, int level)
+diff --git a/hw/hppa/dino.c b/hw/hppa/dino.c
+index e0466ee055..5bc223d9b2 100644
+--- a/hw/hppa/dino.c
++++ b/hw/hppa/dino.c
+@@ -357,7 +357,7 @@ static void dino_config_data_write(void *opaque, hwaddr addr,
+ static const MemoryRegionOps dino_config_data_ops = {
+     .read = dino_config_data_read,
+     .write = dino_config_data_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static uint64_t dino_config_addr_read(void *opaque, hwaddr addr, unsigned len)
+diff --git a/hw/hyperv/hyperv_testdev.c b/hw/hyperv/hyperv_testdev.c
+index 88a5a63782..e09e575800 100644
+--- a/hw/hyperv/hyperv_testdev.c
++++ b/hw/hyperv/hyperv_testdev.c
+@@ -287,7 +287,7 @@ static const MemoryRegionOps synic_test_sint_ops = {
+     .write = hv_test_dev_write,
+     .valid.min_access_size = 4,
+     .valid.max_access_size = 4,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static void hv_test_dev_realizefn(DeviceState *d, Error **errp)
+diff --git a/hw/i2c/aspeed_i2c.c b/hw/i2c/aspeed_i2c.c
+index a956eb3849..4fffc49bfa 100644
+--- a/hw/i2c/aspeed_i2c.c
++++ b/hw/i2c/aspeed_i2c.c
+@@ -366,13 +366,13 @@ static void aspeed_i2c_ctrl_write(void *opaque, hwaddr offset,
+ static const MemoryRegionOps aspeed_i2c_bus_ops = {
+     .read = aspeed_i2c_bus_read,
+     .write = aspeed_i2c_bus_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static const MemoryRegionOps aspeed_i2c_ctrl_ops = {
+     .read = aspeed_i2c_ctrl_read,
+     .write = aspeed_i2c_ctrl_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static const VMStateDescription aspeed_i2c_bus_vmstate = {
+diff --git a/hw/i2c/imx_i2c.c b/hw/i2c/imx_i2c.c
+index cc2689d967..a74a6672b6 100644
+--- a/hw/i2c/imx_i2c.c
++++ b/hw/i2c/imx_i2c.c
+@@ -278,7 +278,7 @@ static const MemoryRegionOps imx_i2c_ops = {
+     .write = imx_i2c_write,
+     .valid.min_access_size = 1,
+     .valid.max_access_size = 2,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static const VMStateDescription imx_i2c_vmstate = {
+diff --git a/hw/i2c/microbit_i2c.c b/hw/i2c/microbit_i2c.c
+index 4661f05253..3d5c730870 100644
+--- a/hw/i2c/microbit_i2c.c
++++ b/hw/i2c/microbit_i2c.c
+@@ -71,7 +71,7 @@ static void microbit_i2c_write(void *opaque, hwaddr addr, uint64_t data,
+ static const MemoryRegionOps microbit_i2c_ops = {
+     .read = microbit_i2c_read,
+     .write = microbit_i2c_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .impl.min_access_size = 4,
+     .impl.max_access_size = 4,
+ };
+diff --git a/hw/i2c/pm_smbus.c b/hw/i2c/pm_smbus.c
+index 36994ff585..c01cc04a5b 100644
+--- a/hw/i2c/pm_smbus.c
++++ b/hw/i2c/pm_smbus.c
+@@ -452,7 +452,7 @@ static const MemoryRegionOps pm_smbus_ops = {
+     .write = smb_ioport_writeb,
+     .valid.min_access_size = 1,
+     .valid.max_access_size = 1,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ bool pm_smbus_vmstate_needed(void)
+diff --git a/hw/i2c/versatile_i2c.c b/hw/i2c/versatile_i2c.c
+index c92d3b115c..be0f9892fe 100644
+--- a/hw/i2c/versatile_i2c.c
++++ b/hw/i2c/versatile_i2c.c
+@@ -77,7 +77,7 @@ static void versatile_i2c_write(void *opaque, hwaddr offset,
+ static const MemoryRegionOps versatile_i2c_ops = {
+     .read = versatile_i2c_read,
+     .write = versatile_i2c_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static void versatile_i2c_init(Object *obj)
+diff --git a/hw/i386/amd_iommu.c b/hw/i386/amd_iommu.c
+index 08884523e2..140755ec1d 100644
+--- a/hw/i386/amd_iommu.c
++++ b/hw/i386/amd_iommu.c
+@@ -1380,7 +1380,7 @@ static MemTxResult amdvi_mem_ir_read(void *opaque, hwaddr addr,
+ static const MemoryRegionOps amdvi_ir_ops = {
+     .read_with_attrs = amdvi_mem_ir_read,
+     .write_with_attrs = amdvi_mem_ir_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .impl = {
+         .min_access_size = 4,
+         .max_access_size = 4,
+@@ -1454,7 +1454,7 @@ static AddressSpace *amdvi_host_dma_iommu(PCIBus *bus, void *opaque, int devfn)
+ static const MemoryRegionOps mmio_mem_ops = {
+     .read = amdvi_mmio_read,
+     .write = amdvi_mmio_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .impl = {
+         .min_access_size = 1,
+         .max_access_size = 8,
+diff --git a/hw/i386/intel_iommu.c b/hw/i386/intel_iommu.c
+index 75ca6f9c70..eb7f2cf841 100644
+--- a/hw/i386/intel_iommu.c
++++ b/hw/i386/intel_iommu.c
+@@ -2996,7 +2996,7 @@ static const VMStateDescription vtd_vmstate = {
+ static const MemoryRegionOps vtd_mem_ops = {
+     .read = vtd_mem_read,
+     .write = vtd_mem_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .impl = {
+         .min_access_size = 4,
+         .max_access_size = 8,
+@@ -3273,7 +3273,7 @@ static MemTxResult vtd_mem_ir_write(void *opaque, hwaddr addr,
+ static const MemoryRegionOps vtd_mem_ir_ops = {
+     .read_with_attrs = vtd_mem_ir_read,
+     .write_with_attrs = vtd_mem_ir_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .impl = {
+         .min_access_size = 4,
+         .max_access_size = 4,
 diff --git a/hw/i386/pc.c b/hw/i386/pc.c
-index 697c33606a..f79922d096 100644
+index f79922d096..a4fb97fdf1 100644
 --- a/hw/i386/pc.c
 +++ b/hw/i386/pc.c
-@@ -2000,7 +2000,7 @@ DeviceState *pc_vga_init(ISABus *isa_bus, PCIBus *pci_bus)
- static const MemoryRegionOps ioport80_io_ops = {
-     .write = ioport80_write,
-     .read = ioport80_read,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .impl = {
+@@ -819,7 +819,7 @@ static const MemoryRegionOps port92_ops = {
          .min_access_size = 1,
          .max_access_size = 1,
-@@ -2010,7 +2010,7 @@ static const MemoryRegionOps ioport80_io_ops = {
- static const MemoryRegionOps ioportF0_io_ops = {
-     .write = ioportF0_write,
-     .read = ioportF0_read,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .impl = {
-         .min_access_size = 1,
-         .max_access_size = 1,
-diff --git a/hw/i386/xen/xen_apic.c b/hw/i386/xen/xen_apic.c
-index 7c7a60b166..2a28057562 100644
---- a/hw/i386/xen/xen_apic.c
-+++ b/hw/i386/xen/xen_apic.c
-@@ -36,7 +36,7 @@ static void xen_apic_mem_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps xen_apic_io_ops = {
-     .read = xen_apic_mem_read,
-     .write = xen_apic_mem_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+     },
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
  };
  
- static void xen_apic_realize(DeviceState *dev, Error **errp)
+ static void port92_initfn(Object *obj)
+diff --git a/hw/i386/vmport.c b/hw/i386/vmport.c
+index 1f31e27c8a..65bce73024 100644
+--- a/hw/i386/vmport.c
++++ b/hw/i386/vmport.c
+@@ -137,7 +137,7 @@ static const MemoryRegionOps vmport_ops = {
+         .min_access_size = 4,
+         .max_access_size = 4,
+     },
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static void vmport_realizefn(DeviceState *dev, Error **errp)
 diff --git a/hw/i386/xen/xen_platform.c b/hw/i386/xen/xen_platform.c
-index 0f7b05e5e1..bf0c6eb341 100644
+index bf0c6eb341..3e6b476cf4 100644
 --- a/hw/i386/xen/xen_platform.c
 +++ b/hw/i386/xen/xen_platform.c
-@@ -427,7 +427,7 @@ static void platform_mmio_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps platform_mmio_handler = {
-     .read = &platform_mmio_read,
-     .write = &platform_mmio_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+@@ -329,7 +329,7 @@ static const MemoryRegionOps platform_fixed_io_ops = {
+         .max_access_size = 4,
+         .unaligned = true,
+     },
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
  };
  
- static void platform_mmio_setup(PCIXenPlatformState *d)
-diff --git a/hw/input/milkymist-softusb.c b/hw/input/milkymist-softusb.c
-index 67fcb3595f..2fba741ac0 100644
---- a/hw/input/milkymist-softusb.c
-+++ b/hw/input/milkymist-softusb.c
-@@ -129,7 +129,7 @@ softusb_write(void *opaque, hwaddr addr, uint64_t value,
- static const MemoryRegionOps softusb_mmio_ops = {
-     .read = softusb_read,
-     .write = softusb_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .valid = {
-         .min_access_size = 4,
-         .max_access_size = 4,
+ static void platform_fixed_ioport_init(PCIXenPlatformState* s)
+diff --git a/hw/i386/xen/xen_pvdevice.c b/hw/i386/xen/xen_pvdevice.c
+index 27f646da06..a4d06b25bd 100644
+--- a/hw/i386/xen/xen_pvdevice.c
++++ b/hw/i386/xen/xen_pvdevice.c
+@@ -70,7 +70,7 @@ static void xen_pv_mmio_write(void *opaque, hwaddr addr,
+ static const MemoryRegionOps xen_pv_mmio_ops = {
+     .read = &xen_pv_mmio_read,
+     .write = &xen_pv_mmio_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static const VMStateDescription vmstate_xen_pvdevice = {
+diff --git a/hw/ide/ahci-allwinner.c b/hw/ide/ahci-allwinner.c
+index bb8393d2b6..1d1686a4fe 100644
+--- a/hw/ide/ahci-allwinner.c
++++ b/hw/ide/ahci-allwinner.c
+@@ -82,7 +82,7 @@ static const MemoryRegionOps allwinner_ahci_mem_ops = {
+     .write = allwinner_ahci_mem_write,
+     .valid.min_access_size = 4,
+     .valid.max_access_size = 4,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static void allwinner_ahci_init(Object *obj)
+diff --git a/hw/ide/ahci.c b/hw/ide/ahci.c
+index d45393c019..5271ae1338 100644
+--- a/hw/ide/ahci.c
++++ b/hw/ide/ahci.c
+@@ -523,7 +523,7 @@ static void ahci_mem_write(void *opaque, hwaddr addr,
+ static const MemoryRegionOps ahci_mem_ops = {
+     .read = ahci_mem_read,
+     .write = ahci_mem_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static uint64_t ahci_idp_read(void *opaque, hwaddr addr,
+@@ -559,7 +559,7 @@ static void ahci_idp_write(void *opaque, hwaddr addr,
+ static const MemoryRegionOps ahci_idp_ops = {
+     .read = ahci_idp_read,
+     .write = ahci_idp_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ 
+diff --git a/hw/ide/macio.c b/hw/ide/macio.c
+index 79f787c539..9aa802153d 100644
+--- a/hw/ide/macio.c
++++ b/hw/ide/macio.c
+@@ -352,7 +352,7 @@ static const MemoryRegionOps pmac_ide_ops = {
+     .write = pmac_ide_write,
+     .valid.min_access_size = 1,
+     .valid.max_access_size = 4,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static const VMStateDescription vmstate_pmac = {
+diff --git a/hw/ide/mmio.c b/hw/ide/mmio.c
+index 7149a9cba6..339b064ed4 100644
+--- a/hw/ide/mmio.c
++++ b/hw/ide/mmio.c
+@@ -85,7 +85,7 @@ static void mmio_ide_write(void *opaque, hwaddr addr,
+ static const MemoryRegionOps mmio_ide_ops = {
+     .read = mmio_ide_read,
+     .write = mmio_ide_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static uint64_t mmio_ide_status_read(void *opaque, hwaddr addr,
+@@ -105,7 +105,7 @@ static void mmio_ide_cmd_write(void *opaque, hwaddr addr,
+ static const MemoryRegionOps mmio_ide_cs_ops = {
+     .read = mmio_ide_status_read,
+     .write = mmio_ide_cmd_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static const VMStateDescription vmstate_ide_mmio = {
+diff --git a/hw/ide/pci.c b/hw/ide/pci.c
+index cce1da804d..abff389665 100644
+--- a/hw/ide/pci.c
++++ b/hw/ide/pci.c
+@@ -62,7 +62,7 @@ static void pci_ide_cmd_write(void *opaque, hwaddr addr,
+ const MemoryRegionOps pci_ide_cmd_le_ops = {
+     .read = pci_ide_cmd_read,
+     .write = pci_ide_cmd_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static uint64_t pci_ide_data_read(void *opaque, hwaddr addr, unsigned size)
+@@ -100,7 +100,7 @@ static void pci_ide_data_write(void *opaque, hwaddr addr,
+ const MemoryRegionOps pci_ide_data_le_ops = {
+     .read = pci_ide_data_read,
+     .write = pci_ide_data_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static void bmdma_start_dma(IDEDMA *dma, IDEState *s,
+@@ -338,7 +338,7 @@ static void bmdma_addr_write(void *opaque, hwaddr addr,
+ MemoryRegionOps bmdma_addr_ioport_ops = {
+     .read = bmdma_addr_read,
+     .write = bmdma_addr_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static bool ide_bmdma_current_needed(void *opaque)
+diff --git a/hw/ide/sii3112.c b/hw/ide/sii3112.c
+index 2181260531..9d15472cdd 100644
+--- a/hw/ide/sii3112.c
++++ b/hw/ide/sii3112.c
+@@ -209,7 +209,7 @@ static void sii3112_reg_write(void *opaque, hwaddr addr,
+ static const MemoryRegionOps sii3112_reg_ops = {
+     .read = sii3112_reg_read,
+     .write = sii3112_reg_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ /* the PCI irq level is the logical OR of the two channels */
 diff --git a/hw/input/pckbd.c b/hw/input/pckbd.c
-index f0acfd86f7..3676131427 100644
+index 3676131427..447376009a 100644
 --- a/hw/input/pckbd.c
 +++ b/hw/input/pckbd.c
-@@ -459,7 +459,7 @@ static const MemoryRegionOps i8042_mmio_ops = {
-     .write = kbd_mm_writefn,
-     .valid.min_access_size = 1,
-     .valid.max_access_size = 4,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+@@ -521,7 +521,7 @@ static const MemoryRegionOps i8042_data_ops = {
+         .min_access_size = 1,
+         .max_access_size = 1,
+     },
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
  };
  
- void i8042_mm_init(qemu_irq kbd_irq, qemu_irq mouse_irq,
-diff --git a/hw/input/pxa2xx_keypad.c b/hw/input/pxa2xx_keypad.c
-index 31862a7d16..b694678a72 100644
---- a/hw/input/pxa2xx_keypad.c
-+++ b/hw/input/pxa2xx_keypad.c
-@@ -287,7 +287,7 @@ static void pxa2xx_keypad_write(void *opaque, hwaddr offset,
- static const MemoryRegionOps pxa2xx_keypad_ops = {
-     .read = pxa2xx_keypad_read,
-     .write = pxa2xx_keypad_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+ static const MemoryRegionOps i8042_cmd_ops = {
+@@ -531,7 +531,7 @@ static const MemoryRegionOps i8042_cmd_ops = {
+         .min_access_size = 1,
+         .max_access_size = 1,
+     },
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
  };
  
- static const VMStateDescription vmstate_pxa2xx_keypad = {
-diff --git a/hw/intc/allwinner-a10-pic.c b/hw/intc/allwinner-a10-pic.c
-index 8cca124807..c6be48bbf6 100644
---- a/hw/intc/allwinner-a10-pic.c
-+++ b/hw/intc/allwinner-a10-pic.c
-@@ -138,7 +138,7 @@ static void aw_a10_pic_write(void *opaque, hwaddr offset, uint64_t value,
- static const MemoryRegionOps aw_a10_pic_ops = {
-     .read = aw_a10_pic_read,
-     .write = aw_a10_pic_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+ static void i8042_initfn(Object *obj)
+diff --git a/hw/input/pl050.c b/hw/input/pl050.c
+index 873f44abad..76e21428f2 100644
+--- a/hw/input/pl050.c
++++ b/hw/input/pl050.c
+@@ -139,7 +139,7 @@ static void pl050_write(void *opaque, hwaddr offset,
+ static const MemoryRegionOps pl050_ops = {
+     .read = pl050_read,
+     .write = pl050_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
  };
  
- static const VMStateDescription vmstate_aw_a10_pic = {
-diff --git a/hw/intc/apic.c b/hw/intc/apic.c
-index bce89911dc..6379c66042 100644
---- a/hw/intc/apic.c
-+++ b/hw/intc/apic.c
-@@ -878,7 +878,7 @@ static const MemoryRegionOps apic_io_ops = {
-     .impl.max_access_size = 4,
-     .valid.min_access_size = 1,
-     .valid.max_access_size = 4,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+ static void pl050_realize(DeviceState *dev, Error **errp)
+diff --git a/hw/intc/arm_gic.c b/hw/intc/arm_gic.c
+index abcadc9af4..3b5d8320bd 100644
+--- a/hw/intc/arm_gic.c
++++ b/hw/intc/arm_gic.c
+@@ -2000,38 +2000,38 @@ static const MemoryRegionOps gic_ops[2] = {
+     {
+         .read_with_attrs = gic_dist_read,
+         .write_with_attrs = gic_dist_write,
+-        .endianness = DEVICE_LITTLE_ENDIAN,
++        .endianness = MO_LE,
+     },
+     {
+         .read_with_attrs = gic_thiscpu_read,
+         .write_with_attrs = gic_thiscpu_write,
+-        .endianness = DEVICE_LITTLE_ENDIAN,
++        .endianness = MO_LE,
+     }
  };
  
- static void apic_realize(DeviceState *dev, Error **errp)
-diff --git a/hw/intc/arm_gicv3_its_common.c b/hw/intc/arm_gicv3_its_common.c
-index 66c4c6a188..219de07a03 100644
---- a/hw/intc/arm_gicv3_its_common.c
-+++ b/hw/intc/arm_gicv3_its_common.c
-@@ -96,7 +96,7 @@ static MemTxResult gicv3_its_trans_write(void *opaque, hwaddr offset,
- static const MemoryRegionOps gicv3_its_trans_ops = {
-     .read_with_attrs = gicv3_its_trans_read,
-     .write_with_attrs = gicv3_its_trans_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+ static const MemoryRegionOps gic_cpu_ops = {
+     .read_with_attrs = gic_do_cpu_read,
+     .write_with_attrs = gic_do_cpu_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
  };
  
- void gicv3_its_init_mmio(GICv3ITSState *s, const MemoryRegionOps *ops)
-diff --git a/hw/intc/armv7m_nvic.c b/hw/intc/armv7m_nvic.c
-index 8e93e51e81..10c646fe39 100644
---- a/hw/intc/armv7m_nvic.c
-+++ b/hw/intc/armv7m_nvic.c
-@@ -2337,7 +2337,7 @@ static MemTxResult nvic_sysreg_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps nvic_sysreg_ops = {
-     .read_with_attrs = nvic_sysreg_read,
-     .write_with_attrs = nvic_sysreg_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+ static const MemoryRegionOps gic_virt_ops[2] = {
+     {
+         .read_with_attrs = gic_thiscpu_hyp_read,
+         .write_with_attrs = gic_thiscpu_hyp_write,
+-        .endianness = DEVICE_LITTLE_ENDIAN,
++        .endianness = MO_LE,
+     },
+     {
+         .read_with_attrs = gic_thisvcpu_read,
+         .write_with_attrs = gic_thisvcpu_write,
+-        .endianness = DEVICE_LITTLE_ENDIAN,
++        .endianness = MO_LE,
+     }
  };
  
- static MemTxResult nvic_sysreg_ns_write(void *opaque, hwaddr addr,
-@@ -2384,7 +2384,7 @@ static MemTxResult nvic_sysreg_ns_read(void *opaque, hwaddr addr,
- static const MemoryRegionOps nvic_sysreg_ns_ops = {
-     .read_with_attrs = nvic_sysreg_ns_read,
-     .write_with_attrs = nvic_sysreg_ns_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+ static const MemoryRegionOps gic_viface_ops = {
+     .read_with_attrs = gic_do_hyp_read,
+     .write_with_attrs = gic_do_hyp_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
  };
  
- static MemTxResult nvic_systick_write(void *opaque, hwaddr addr,
-@@ -2416,7 +2416,7 @@ static MemTxResult nvic_systick_read(void *opaque, hwaddr addr,
- static const MemoryRegionOps nvic_systick_ops = {
-     .read_with_attrs = nvic_systick_read,
-     .write_with_attrs = nvic_systick_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+ static void arm_gic_realize(DeviceState *dev, Error **errp)
+diff --git a/hw/intc/arm_gicv2m.c b/hw/intc/arm_gicv2m.c
+index 6e45f4ff39..aa2aafe086 100644
+--- a/hw/intc/arm_gicv2m.c
++++ b/hw/intc/arm_gicv2m.c
+@@ -128,7 +128,7 @@ static void gicv2m_write(void *opaque, hwaddr offset,
+ static const MemoryRegionOps gicv2m_ops = {
+     .read = gicv2m_read,
+     .write = gicv2m_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
  };
  
- static int nvic_post_load(void *opaque, int version_id)
-diff --git a/hw/intc/bcm2835_ic.c b/hw/intc/bcm2835_ic.c
-index 05bd28e4f9..c3312feb9b 100644
---- a/hw/intc/bcm2835_ic.c
-+++ b/hw/intc/bcm2835_ic.c
-@@ -170,7 +170,7 @@ static void bcm2835_ic_write(void *opaque, hwaddr offset, uint64_t val,
- static const MemoryRegionOps bcm2835_ic_ops = {
-     .read = bcm2835_ic_read,
-     .write = bcm2835_ic_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+ static void gicv2m_realize(DeviceState *dev, Error **errp)
+diff --git a/hw/intc/arm_gicv3.c b/hw/intc/arm_gicv3.c
+index 9b4d5bad69..3e6526dcd1 100644
+--- a/hw/intc/arm_gicv3.c
++++ b/hw/intc/arm_gicv3.c
+@@ -352,12 +352,12 @@ static const MemoryRegionOps gic_ops[] = {
+     {
+         .read_with_attrs = gicv3_dist_read,
+         .write_with_attrs = gicv3_dist_write,
+-        .endianness = DEVICE_LITTLE_ENDIAN,
++        .endianness = MO_LE,
+     },
+     {
+         .read_with_attrs = gicv3_redist_read,
+         .write_with_attrs = gicv3_redist_write,
+-        .endianness = DEVICE_LITTLE_ENDIAN,
++        .endianness = MO_LE,
+     }
+ };
+ 
+diff --git a/hw/intc/aspeed_vic.c b/hw/intc/aspeed_vic.c
+index 5ba06c5262..42ff5c8b2c 100644
+--- a/hw/intc/aspeed_vic.c
++++ b/hw/intc/aspeed_vic.c
+@@ -285,7 +285,7 @@ static void aspeed_vic_write(void *opaque, hwaddr offset, uint64_t data,
+ static const MemoryRegionOps aspeed_vic_ops = {
+     .read = aspeed_vic_read,
+     .write = aspeed_vic_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
      .valid.min_access_size = 4,
      .valid.max_access_size = 4,
- };
-diff --git a/hw/intc/bcm2836_control.c b/hw/intc/bcm2836_control.c
-index 04229b8a17..41af557fba 100644
---- a/hw/intc/bcm2836_control.c
-+++ b/hw/intc/bcm2836_control.c
-@@ -304,7 +304,7 @@ static void bcm2836_control_write(void *opaque, hwaddr offset,
- static const MemoryRegionOps bcm2836_control_ops = {
-     .read = bcm2836_control_read,
-     .write = bcm2836_control_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .valid.min_access_size = 4,
-     .valid.max_access_size = 4,
- };
-diff --git a/hw/intc/exynos4210_combiner.c b/hw/intc/exynos4210_combiner.c
-index 5b33ca6628..8b4805ed34 100644
---- a/hw/intc/exynos4210_combiner.c
-+++ b/hw/intc/exynos4210_combiner.c
-@@ -405,7 +405,7 @@ static void exynos4210_combiner_reset(DeviceState *d)
- static const MemoryRegionOps exynos4210_combiner_ops = {
-     .read = exynos4210_combiner_read,
-     .write = exynos4210_combiner_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- /*
-diff --git a/hw/intc/grlib_irqmp.c b/hw/intc/grlib_irqmp.c
-index bc78e1a14f..799a353c0e 100644
---- a/hw/intc/grlib_irqmp.c
-+++ b/hw/intc/grlib_irqmp.c
-@@ -314,7 +314,7 @@ static void grlib_irqmp_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps grlib_irqmp_ops = {
-     .read = grlib_irqmp_read,
-     .write = grlib_irqmp_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .valid = {
-         .min_access_size = 4,
-         .max_access_size = 4,
-diff --git a/hw/intc/ioapic.c b/hw/intc/ioapic.c
-index 1ede055387..18ac05cc61 100644
---- a/hw/intc/ioapic.c
-+++ b/hw/intc/ioapic.c
-@@ -404,7 +404,7 @@ ioapic_mem_write(void *opaque, hwaddr addr, uint64_t val,
- static const MemoryRegionOps ioapic_io_ops = {
-     .read = ioapic_mem_read,
-     .write = ioapic_mem_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static void ioapic_machine_done_notify(Notifier *notifier, void *data)
-diff --git a/hw/intc/mips_gic.c b/hw/intc/mips_gic.c
-index 54b3059f3f..7465550bc5 100644
---- a/hw/intc/mips_gic.c
-+++ b/hw/intc/mips_gic.c
-@@ -386,7 +386,7 @@ static void gic_reset(void *opaque)
- static const MemoryRegionOps gic_ops = {
-     .read = gic_read,
-     .write = gic_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .impl = {
-         .max_access_size = 8,
-     },
-diff --git a/hw/intc/omap_intc.c b/hw/intc/omap_intc.c
-index 854b709ca0..0ad3a4efc9 100644
---- a/hw/intc/omap_intc.c
-+++ b/hw/intc/omap_intc.c
-@@ -331,7 +331,7 @@ static void omap_inth_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps omap_inth_mem_ops = {
-     .read = omap_inth_read,
-     .write = omap_inth_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .valid = {
-         .min_access_size = 4,
-         .max_access_size = 4,
-@@ -607,7 +607,7 @@ static void omap2_inth_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps omap2_inth_mem_ops = {
-     .read = omap2_inth_read,
-     .write = omap2_inth_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .valid = {
-         .min_access_size = 4,
-         .max_access_size = 4,
-diff --git a/hw/intc/ompic.c b/hw/intc/ompic.c
-index ca9614fda1..4daf60dcd4 100644
---- a/hw/intc/ompic.c
-+++ b/hw/intc/ompic.c
-@@ -97,7 +97,7 @@ static void ompic_write(void *opaque, hwaddr addr, uint64_t data, unsigned size)
- static const MemoryRegionOps ompic_ops = {
-     .read = ompic_read,
-     .write = ompic_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .impl = {
-         .max_access_size = 8,
-     },
-diff --git a/hw/intc/sh_intc.c b/hw/intc/sh_intc.c
-index 72a55e32dd..7031e5dba3 100644
---- a/hw/intc/sh_intc.c
-+++ b/hw/intc/sh_intc.c
-@@ -289,7 +289,7 @@ static void sh_intc_write(void *opaque, hwaddr offset,
- static const MemoryRegionOps sh_intc_ops = {
-     .read = sh_intc_read,
-     .write = sh_intc_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- struct intc_source *sh_intc_source(struct intc_desc *desc, intc_enum id)
-diff --git a/hw/intc/slavio_intctl.c b/hw/intc/slavio_intctl.c
-index c4cf9096eb..44c9b698bd 100644
---- a/hw/intc/slavio_intctl.c
-+++ b/hw/intc/slavio_intctl.c
-@@ -136,7 +136,7 @@ static void slavio_intctl_mem_writel(void *opaque, hwaddr addr,
- static const MemoryRegionOps slavio_intctl_mem_ops = {
-     .read = slavio_intctl_mem_readl,
-     .write = slavio_intctl_mem_writel,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .valid = {
-         .min_access_size = 4,
-         .max_access_size = 4,
-@@ -206,7 +206,7 @@ static void slavio_intctlm_mem_writel(void *opaque, hwaddr addr,
- static const MemoryRegionOps slavio_intctlm_mem_ops = {
-     .read = slavio_intctlm_mem_readl,
-     .write = slavio_intctlm_mem_writel,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .valid = {
-         .min_access_size = 4,
-         .max_access_size = 4,
-diff --git a/hw/intc/xilinx_intc.c b/hw/intc/xilinx_intc.c
-index e15cb42b36..45634b3cba 100644
---- a/hw/intc/xilinx_intc.c
-+++ b/hw/intc/xilinx_intc.c
-@@ -143,7 +143,7 @@ pic_write(void *opaque, hwaddr addr,
+     .valid.unaligned = false,
+diff --git a/hw/intc/etraxfs_pic.c b/hw/intc/etraxfs_pic.c
+index 5895b671b1..2bedb55026 100644
+--- a/hw/intc/etraxfs_pic.c
++++ b/hw/intc/etraxfs_pic.c
+@@ -112,7 +112,7 @@ static void pic_write(void *opaque, hwaddr addr,
  static const MemoryRegionOps pic_ops = {
      .read = pic_read,
      .write = pic_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
      .valid = {
          .min_access_size = 4,
          .max_access_size = 4
-diff --git a/hw/ipack/tpci200.c b/hw/ipack/tpci200.c
-index f931d4df62..b287694c33 100644
---- a/hw/ipack/tpci200.c
-+++ b/hw/ipack/tpci200.c
-@@ -526,7 +526,7 @@ static void tpci200_write_las3(void *opaque, hwaddr addr, uint64_t val,
- static const MemoryRegionOps tpci200_cfg_ops = {
-     .read = tpci200_read_cfg,
-     .write = tpci200_write_cfg,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .valid =  {
+diff --git a/hw/intc/heathrow_pic.c b/hw/intc/heathrow_pic.c
+index cb97c315da..82c6f3c6d0 100644
+--- a/hw/intc/heathrow_pic.c
++++ b/hw/intc/heathrow_pic.c
+@@ -110,7 +110,7 @@ static uint64_t heathrow_read(void *opaque, hwaddr addr,
+ static const MemoryRegionOps heathrow_ops = {
+     .read = heathrow_read,
+     .write = heathrow_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static void heathrow_set_irq(void *opaque, int num, int level)
+diff --git a/hw/intc/imx_avic.c b/hw/intc/imx_avic.c
+index 15ed512e86..d16cb3db76 100644
+--- a/hw/intc/imx_avic.c
++++ b/hw/intc/imx_avic.c
+@@ -310,7 +310,7 @@ static void imx_avic_write(void *opaque, hwaddr offset,
+ static const MemoryRegionOps imx_avic_ops = {
+     .read = imx_avic_read,
+     .write = imx_avic_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static void imx_avic_reset(DeviceState *dev)
+diff --git a/hw/intc/imx_gpcv2.c b/hw/intc/imx_gpcv2.c
+index 3df4a443b8..f808892e19 100644
+--- a/hw/intc/imx_gpcv2.c
++++ b/hw/intc/imx_gpcv2.c
+@@ -65,7 +65,7 @@ static void imx_gpcv2_write(void *opaque, hwaddr offset,
+ static const struct MemoryRegionOps imx_gpcv2_ops = {
+     .read = imx_gpcv2_read,
+     .write = imx_gpcv2_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .impl = {
+         /*
+          * Our device would not work correctly if the guest was doing
+diff --git a/hw/intc/openpic.c b/hw/intc/openpic.c
+index c797ba78f3..4e8d5a8050 100644
+--- a/hw/intc/openpic.c
++++ b/hw/intc/openpic.c
+@@ -1150,7 +1150,7 @@ static uint64_t openpic_cpu_read(void *opaque, hwaddr addr, unsigned len)
+ static const MemoryRegionOps openpic_glb_ops_le = {
+     .write = openpic_gbl_write,
+     .read  = openpic_gbl_read,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .impl = {
+         .min_access_size = 4,
+         .max_access_size = 4,
+@@ -1170,7 +1170,7 @@ static const MemoryRegionOps openpic_glb_ops_be = {
+ static const MemoryRegionOps openpic_tmr_ops_le = {
+     .write = openpic_tmr_write,
+     .read  = openpic_tmr_read,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .impl = {
+         .min_access_size = 4,
+         .max_access_size = 4,
+@@ -1190,7 +1190,7 @@ static const MemoryRegionOps openpic_tmr_ops_be = {
+ static const MemoryRegionOps openpic_cpu_ops_le = {
+     .write = openpic_cpu_write,
+     .read  = openpic_cpu_read,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .impl = {
+         .min_access_size = 4,
+         .max_access_size = 4,
+@@ -1210,7 +1210,7 @@ static const MemoryRegionOps openpic_cpu_ops_be = {
+ static const MemoryRegionOps openpic_src_ops_le = {
+     .write = openpic_src_write,
+     .read  = openpic_src_read,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .impl = {
+         .min_access_size = 4,
+         .max_access_size = 4,
+diff --git a/hw/intc/pl190.c b/hw/intc/pl190.c
+index 1b474d25b9..88e6e3df6c 100644
+--- a/hw/intc/pl190.c
++++ b/hw/intc/pl190.c
+@@ -222,7 +222,7 @@ static void pl190_write(void *opaque, hwaddr offset,
+ static const MemoryRegionOps pl190_ops = {
+     .read = pl190_read,
+     .write = pl190_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static void pl190_reset(DeviceState *d)
+diff --git a/hw/intc/puv3_intc.c b/hw/intc/puv3_intc.c
+index 1c8ddbd70d..b4a85039c0 100644
+--- a/hw/intc/puv3_intc.c
++++ b/hw/intc/puv3_intc.c
+@@ -101,7 +101,7 @@ static const MemoryRegionOps puv3_intc_ops = {
+         .min_access_size = 4,
+         .max_access_size = 4,
+     },
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static void puv3_intc_realize(DeviceState *dev, Error **errp)
+diff --git a/hw/intc/xlnx-pmu-iomod-intc.c b/hw/intc/xlnx-pmu-iomod-intc.c
+index f9a1401a94..cb8fb86053 100644
+--- a/hw/intc/xlnx-pmu-iomod-intc.c
++++ b/hw/intc/xlnx-pmu-iomod-intc.c
+@@ -467,7 +467,7 @@ static void xlnx_pmu_io_intc_reset(DeviceState *dev)
+ static const MemoryRegionOps xlnx_pmu_io_intc_ops = {
+     .read = register_read_memory,
+     .write = register_write_memory,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .valid = {
+         .min_access_size = 4,
+         .max_access_size = 4,
+diff --git a/hw/intc/xlnx-zynqmp-ipi.c b/hw/intc/xlnx-zynqmp-ipi.c
+index adc1179014..93a87a281c 100644
+--- a/hw/intc/xlnx-zynqmp-ipi.c
++++ b/hw/intc/xlnx-zynqmp-ipi.c
+@@ -297,7 +297,7 @@ static void xlnx_zynqmp_obs_handler(void *opaque, int n, int level)
+ static const MemoryRegionOps xlnx_zynqmp_ipi_ops = {
+     .read = register_read_memory,
+     .write = register_write_memory,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .valid = {
+         .min_access_size = 4,
+         .max_access_size = 4,
+diff --git a/hw/ipmi/isa_ipmi_bt.c b/hw/ipmi/isa_ipmi_bt.c
+index a696096cbb..69c2f6f466 100644
+--- a/hw/ipmi/isa_ipmi_bt.c
++++ b/hw/ipmi/isa_ipmi_bt.c
+@@ -322,7 +322,7 @@ static const MemoryRegionOps ipmi_bt_io_ops = {
          .min_access_size = 1,
-         .max_access_size = 4
-@@ -540,7 +540,7 @@ static const MemoryRegionOps tpci200_cfg_ops = {
- static const MemoryRegionOps tpci200_las0_ops = {
-     .read = tpci200_read_las0,
-     .write = tpci200_write_las0,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .valid =  {
-         .min_access_size = 2,
-         .max_access_size = 2
-@@ -550,7 +550,7 @@ static const MemoryRegionOps tpci200_las0_ops = {
- static const MemoryRegionOps tpci200_las1_ops = {
-     .read = tpci200_read_las1,
-     .write = tpci200_write_las1,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .valid =  {
+         .max_access_size = 1,
+     },
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static void ipmi_bt_set_atn(IPMIInterface *ii, int val, int irq)
+diff --git a/hw/ipmi/isa_ipmi_kcs.c b/hw/ipmi/isa_ipmi_kcs.c
+index 374b2a0709..6ea485a106 100644
+--- a/hw/ipmi/isa_ipmi_kcs.c
++++ b/hw/ipmi/isa_ipmi_kcs.c
+@@ -315,7 +315,7 @@ const MemoryRegionOps ipmi_kcs_io_ops = {
          .min_access_size = 1,
-         .max_access_size = 2
-@@ -560,7 +560,7 @@ static const MemoryRegionOps tpci200_las1_ops = {
- static const MemoryRegionOps tpci200_las2_ops = {
-     .read = tpci200_read_las2,
-     .write = tpci200_write_las2,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .valid =  {
+         .max_access_size = 1,
+     },
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static void ipmi_kcs_set_atn(IPMIInterface *ii, int val, int irq)
+diff --git a/hw/isa/lpc_ich9.c b/hw/isa/lpc_ich9.c
+index eec9eb31c1..fd75d1e63d 100644
+--- a/hw/isa/lpc_ich9.c
++++ b/hw/isa/lpc_ich9.c
+@@ -573,7 +573,7 @@ static void ich9_lpc_reset(DeviceState *qdev)
+ static const MemoryRegionOps rcrb_mmio_ops = {
+     .read = ich9_cc_read,
+     .write = ich9_cc_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static void ich9_lpc_machine_ready(Notifier *n, void *opaque)
+@@ -624,7 +624,7 @@ static uint64_t ich9_rst_cnt_read(void *opaque, hwaddr addr, unsigned len)
+ static const MemoryRegionOps ich9_rst_cnt_ops = {
+     .read = ich9_rst_cnt_read,
+     .write = ich9_rst_cnt_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN
++    .endianness = MO_LE
+ };
+ 
+ static void ich9_lpc_get_sci_int(Object *obj, Visitor *v, const char *name,
+diff --git a/hw/isa/pc87312.c b/hw/isa/pc87312.c
+index b9bd57471e..11a9a8466f 100644
+--- a/hw/isa/pc87312.c
++++ b/hw/isa/pc87312.c
+@@ -267,7 +267,7 @@ static uint64_t pc87312_io_read(void *opaque, hwaddr addr, unsigned int size)
+ static const MemoryRegionOps pc87312_io_ops = {
+     .read  = pc87312_io_read,
+     .write = pc87312_io_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .valid = {
          .min_access_size = 1,
-         .max_access_size = 2
-@@ -570,7 +570,7 @@ static const MemoryRegionOps tpci200_las2_ops = {
- static const MemoryRegionOps tpci200_las3_ops = {
-     .read = tpci200_read_las3,
-     .write = tpci200_write_las3,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .valid =  {
+         .max_access_size = 1,
+diff --git a/hw/isa/vt82c686.c b/hw/isa/vt82c686.c
+index 400f2b3c87..3596adee51 100644
+--- a/hw/isa/vt82c686.c
++++ b/hw/isa/vt82c686.c
+@@ -109,7 +109,7 @@ static uint64_t superio_ioport_readb(void *opaque, hwaddr addr, unsigned size)
+ static const MemoryRegionOps superio_ops = {
+     .read = superio_ioport_readb,
+     .write = superio_ioport_writeb,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .impl = {
          .min_access_size = 1,
-         .max_access_size = 1
-diff --git a/hw/m68k/mcf5206.c b/hw/m68k/mcf5206.c
-index a9c2c95b0d..25f3098408 100644
---- a/hw/m68k/mcf5206.c
-+++ b/hw/m68k/mcf5206.c
-@@ -551,7 +551,7 @@ static const MemoryRegionOps m5206_mbar_ops = {
-     .write = m5206_mbar_writefn,
+         .max_access_size = 1,
+diff --git a/hw/microblaze/petalogix_ml605_mmu.c b/hw/microblaze/petalogix_ml605_mmu.c
+index 09486bc8bf..c06ca9280e 100644
+--- a/hw/microblaze/petalogix_ml605_mmu.c
++++ b/hw/microblaze/petalogix_ml605_mmu.c
+@@ -122,7 +122,7 @@ petalogix_ml605_init(MachineState *machine)
+ 
+     serial_mm_init(address_space_mem, UART16550_BASEADDR + 0x1000, 2,
+                    irq[UART16550_IRQ], 115200, serial_hd(0),
+-                   DEVICE_LITTLE_ENDIAN);
++                   MO_LE);
+ 
+     /* 2 timers at irq 2 @ 100 Mhz.  */
+     dev = qdev_create(NULL, "xlnx.xps-timer");
+diff --git a/hw/misc/a9scu.c b/hw/misc/a9scu.c
+index 59335ca72f..6396a78778 100644
+--- a/hw/misc/a9scu.c
++++ b/hw/misc/a9scu.c
+@@ -96,7 +96,7 @@ static void a9_scu_write(void *opaque, hwaddr offset,
+ static const MemoryRegionOps a9_scu_ops = {
+     .read = a9_scu_read,
+     .write = a9_scu_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static void a9_scu_reset(DeviceState *dev)
+diff --git a/hw/misc/applesmc.c b/hw/misc/applesmc.c
+index fb39837b7f..0de32d4275 100644
+--- a/hw/misc/applesmc.c
++++ b/hw/misc/applesmc.c
+@@ -285,7 +285,7 @@ static void qdev_applesmc_isa_reset(DeviceState *dev)
+ static const MemoryRegionOps applesmc_data_io_ops = {
+     .write = applesmc_io_data_write,
+     .read = applesmc_io_data_read,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .impl = {
+         .min_access_size = 1,
+         .max_access_size = 1,
+@@ -295,7 +295,7 @@ static const MemoryRegionOps applesmc_data_io_ops = {
+ static const MemoryRegionOps applesmc_cmd_io_ops = {
+     .write = applesmc_io_cmd_write,
+     .read = applesmc_io_cmd_read,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .impl = {
+         .min_access_size = 1,
+         .max_access_size = 1,
+@@ -305,7 +305,7 @@ static const MemoryRegionOps applesmc_cmd_io_ops = {
+ static const MemoryRegionOps applesmc_err_io_ops = {
+     .write = applesmc_io_err_write,
+     .read = applesmc_io_err_read,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .impl = {
+         .min_access_size = 1,
+         .max_access_size = 1,
+diff --git a/hw/misc/arm11scu.c b/hw/misc/arm11scu.c
+index dd690dc985..a4ad53638c 100644
+--- a/hw/misc/arm11scu.c
++++ b/hw/misc/arm11scu.c
+@@ -58,7 +58,7 @@ static void mpcore_scu_write(void *opaque, hwaddr offset,
+ static const MemoryRegionOps mpcore_scu_ops = {
+     .read = mpcore_scu_read,
+     .write = mpcore_scu_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static void arm11_scu_realize(DeviceState *dev, Error **errp)
+diff --git a/hw/misc/arm_l2x0.c b/hw/misc/arm_l2x0.c
+index cd1747b7a1..2d0ccc1228 100644
+--- a/hw/misc/arm_l2x0.c
++++ b/hw/misc/arm_l2x0.c
+@@ -159,7 +159,7 @@ static void l2x0_priv_reset(DeviceState *dev)
+ static const MemoryRegionOps l2x0_mem_ops = {
+     .read = l2x0_priv_read,
+     .write = l2x0_priv_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+  };
+ 
+ static void l2x0_priv_init(Object *obj)
+diff --git a/hw/misc/armsse-cpuid.c b/hw/misc/armsse-cpuid.c
+index 8ab15fea81..61294b7413 100644
+--- a/hw/misc/armsse-cpuid.c
++++ b/hw/misc/armsse-cpuid.c
+@@ -84,7 +84,7 @@ static void armsse_cpuid_write(void *opaque, hwaddr offset,
+ static const MemoryRegionOps armsse_cpuid_ops = {
+     .read = armsse_cpuid_read,
+     .write = armsse_cpuid_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     /* byte/halfword accesses are just zero-padded on reads and writes */
+     .impl.min_access_size = 4,
+     .impl.max_access_size = 4,
+diff --git a/hw/misc/armsse-mhu.c b/hw/misc/armsse-mhu.c
+index a45d97fada..24cfdedddf 100644
+--- a/hw/misc/armsse-mhu.c
++++ b/hw/misc/armsse-mhu.c
+@@ -140,7 +140,7 @@ static void armsse_mhu_write(void *opaque, hwaddr offset,
+ static const MemoryRegionOps armsse_mhu_ops = {
+     .read = armsse_mhu_read,
+     .write = armsse_mhu_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .valid.min_access_size = 4,
+     .valid.max_access_size = 4,
+ };
+diff --git a/hw/misc/aspeed_scu.c b/hw/misc/aspeed_scu.c
+index 268cb24e56..66db82959d 100644
+--- a/hw/misc/aspeed_scu.c
++++ b/hw/misc/aspeed_scu.c
+@@ -277,7 +277,7 @@ static void aspeed_scu_write(void *opaque, hwaddr offset, uint64_t data,
+ static const MemoryRegionOps aspeed_scu_ops = {
+     .read = aspeed_scu_read,
+     .write = aspeed_scu_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .valid.min_access_size = 4,
+     .valid.max_access_size = 4,
+     .valid.unaligned = false,
+diff --git a/hw/misc/aspeed_sdmc.c b/hw/misc/aspeed_sdmc.c
+index cb13c63ec8..34a38c7503 100644
+--- a/hw/misc/aspeed_sdmc.c
++++ b/hw/misc/aspeed_sdmc.c
+@@ -170,7 +170,7 @@ static void aspeed_sdmc_write(void *opaque, hwaddr addr, uint64_t data,
+ static const MemoryRegionOps aspeed_sdmc_ops = {
+     .read = aspeed_sdmc_read,
+     .write = aspeed_sdmc_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .valid.min_access_size = 4,
+     .valid.max_access_size = 4,
+ };
+diff --git a/hw/misc/debugexit.c b/hw/misc/debugexit.c
+index ccf02bdbd4..e15a4755a8 100644
+--- a/hw/misc/debugexit.c
++++ b/hw/misc/debugexit.c
+@@ -40,7 +40,7 @@ static const MemoryRegionOps debug_exit_ops = {
+     .write = debug_exit_write,
      .valid.min_access_size = 1,
      .valid.max_access_size = 4,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
  };
  
- qemu_irq *mcf5206_init(MemoryRegion *sysmem, uint32_t base, M68kCPU *cpu)
-diff --git a/hw/m68k/mcf5208.c b/hw/m68k/mcf5208.c
-index 012710d057..1749e2abf5 100644
---- a/hw/m68k/mcf5208.c
-+++ b/hw/m68k/mcf5208.c
-@@ -141,7 +141,7 @@ static uint64_t m5208_timer_read(void *opaque, hwaddr addr,
- static const MemoryRegionOps m5208_timer_ops = {
-     .read = m5208_timer_read,
-     .write = m5208_timer_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static uint64_t m5208_sys_read(void *opaque, hwaddr addr,
-@@ -175,7 +175,7 @@ static void m5208_sys_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps m5208_sys_ops = {
-     .read = m5208_sys_read,
-     .write = m5208_sys_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static void mcf5208_sys_init(MemoryRegion *address_space, qemu_irq *pic)
-diff --git a/hw/m68k/mcf_intc.c b/hw/m68k/mcf_intc.c
-index d9e03a06ab..e6599d343e 100644
---- a/hw/m68k/mcf_intc.c
-+++ b/hw/m68k/mcf_intc.c
-@@ -160,7 +160,7 @@ static void mcf_intc_reset(DeviceState *dev)
- static const MemoryRegionOps mcf_intc_ops = {
-     .read = mcf_intc_read,
-     .write = mcf_intc_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static void mcf_intc_instance_init(Object *obj)
-diff --git a/hw/mips/boston.c b/hw/mips/boston.c
-index ca7d813a52..6e753681cd 100644
---- a/hw/mips/boston.c
-+++ b/hw/mips/boston.c
-@@ -166,7 +166,7 @@ static void boston_lcd_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps boston_lcd_ops = {
-     .read = boston_lcd_read,
-     .write = boston_lcd_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static uint64_t boston_platreg_read(void *opaque, hwaddr addr,
-@@ -245,7 +245,7 @@ static void boston_platreg_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps boston_platreg_ops = {
-     .read = boston_platreg_read,
-     .write = boston_platreg_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static const TypeInfo boston_device = {
-@@ -505,7 +505,7 @@ static void boston_mach_init(MachineState *machine)
- 
-     s->uart = serial_mm_init(sys_mem, 0x17ffe000, 2,
-                              get_cps_irq(&s->cps, 3), 10000000,
--                             serial_hd(0), DEVICE_NATIVE_ENDIAN);
-+                             serial_hd(0), MO_TE);
- 
-     lcd = g_new(MemoryRegion, 1);
-     memory_region_init_io(lcd, NULL, &boston_lcd_ops, s, "boston-lcd", 0x8);
-diff --git a/hw/mips/gt64xxx_pci.c b/hw/mips/gt64xxx_pci.c
-index f325bd6c1c..f292ec71f7 100644
---- a/hw/mips/gt64xxx_pci.c
-+++ b/hw/mips/gt64xxx_pci.c
-@@ -973,7 +973,7 @@ static uint64_t gt64120_readl(void *opaque,
- static const MemoryRegionOps isd_mem_ops = {
-     .read = gt64120_readl,
-     .write = gt64120_writel,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static int gt64120_pci_map_irq(PCIDevice *pci_dev, int irq_num)
-diff --git a/hw/mips/mips_jazz.c b/hw/mips/mips_jazz.c
-index 388c15c376..e0c83df045 100644
---- a/hw/mips/mips_jazz.c
-+++ b/hw/mips/mips_jazz.c
-@@ -84,7 +84,7 @@ static void rtc_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps rtc_ops = {
-     .read = rtc_read,
-     .write = rtc_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static uint64_t dma_dummy_read(void *opaque, hwaddr addr,
-@@ -105,7 +105,7 @@ static void dma_dummy_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps dma_dummy_ops = {
-     .read = dma_dummy_read,
-     .write = dma_dummy_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- #define MAGNUM_BIOS_SIZE_MAX 0x7e000
-@@ -320,12 +320,12 @@ static void mips_jazz_init(MachineState *machine,
-     if (serial_hd(0)) {
-         serial_mm_init(address_space, 0x80006000, 0,
-                        qdev_get_gpio_in(rc4030, 8), 8000000/16,
--                       serial_hd(0), DEVICE_NATIVE_ENDIAN);
-+                       serial_hd(0), MO_TE);
-     }
-     if (serial_hd(1)) {
-         serial_mm_init(address_space, 0x80007000, 0,
-                        qdev_get_gpio_in(rc4030, 9), 8000000/16,
--                       serial_hd(1), DEVICE_NATIVE_ENDIAN);
-+                       serial_hd(1), MO_TE);
-     }
- 
-     /* Parallel port */
-diff --git a/hw/mips/mips_malta.c b/hw/mips/mips_malta.c
-index 4d9c64b36a..c3aa6e0744 100644
---- a/hw/mips/mips_malta.c
-+++ b/hw/mips/mips_malta.c
-@@ -531,7 +531,7 @@ static void malta_fpga_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps malta_fpga_ops = {
-     .read = malta_fpga_read,
-     .write = malta_fpga_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static void malta_fpga_reset(void *opaque)
-@@ -592,7 +592,7 @@ static MaltaFPGAState *malta_fpga_init(MemoryRegion *address_space,
-                              malta_fgpa_display_event, NULL, s, NULL, true);
- 
-     s->uart = serial_mm_init(address_space, base + 0x900, 3, uart_irq,
--                             230400, uart_chr, DEVICE_NATIVE_ENDIAN);
-+                             230400, uart_chr, MO_TE);
- 
-     malta_fpga_reset(s);
-     qemu_register_reset(malta_fpga_reset, s);
-diff --git a/hw/mips/mips_r4k.c b/hw/mips/mips_r4k.c
-index bc0be26544..189bf6a779 100644
---- a/hw/mips/mips_r4k.c
-+++ b/hw/mips/mips_r4k.c
-@@ -72,7 +72,7 @@ static uint64_t mips_qemu_read (void *opaque, hwaddr addr,
- static const MemoryRegionOps mips_qemu_ops = {
-     .read = mips_qemu_read,
-     .write = mips_qemu_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- typedef struct ResetData {
-diff --git a/hw/misc/arm_integrator_debug.c b/hw/misc/arm_integrator_debug.c
-index 3e23201ae6..109388bf6f 100644
---- a/hw/misc/arm_integrator_debug.c
-+++ b/hw/misc/arm_integrator_debug.c
-@@ -72,7 +72,7 @@ static void intdbg_control_write(void *opaque, hwaddr offset,
- static const MemoryRegionOps intdbg_control_ops = {
-     .read = intdbg_control_read,
-     .write = intdbg_control_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static void intdbg_control_init(Object *obj)
-diff --git a/hw/misc/arm_sysctl.c b/hw/misc/arm_sysctl.c
-index fc79522ece..6ead04da44 100644
---- a/hw/misc/arm_sysctl.c
-+++ b/hw/misc/arm_sysctl.c
-@@ -563,7 +563,7 @@ static void arm_sysctl_write(void *opaque, hwaddr offset,
- static const MemoryRegionOps arm_sysctl_ops = {
-     .read = arm_sysctl_read,
-     .write = arm_sysctl_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static void arm_sysctl_gpio_set(void *opaque, int line, int level)
-diff --git a/hw/misc/aspeed_xdma.c b/hw/misc/aspeed_xdma.c
-index dca5585a75..973c84f8a7 100644
---- a/hw/misc/aspeed_xdma.c
-+++ b/hw/misc/aspeed_xdma.c
-@@ -108,7 +108,7 @@ static void aspeed_xdma_write(void *opaque, hwaddr addr, uint64_t val,
- static const MemoryRegionOps aspeed_xdma_ops = {
-     .read = aspeed_xdma_read,
-     .write = aspeed_xdma_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .valid.min_access_size = 4,
+ static void debug_exit_realizefn(DeviceState *d, Error **errp)
+diff --git a/hw/misc/iotkit-secctl.c b/hw/misc/iotkit-secctl.c
+index 609869821a..1b64231788 100644
+--- a/hw/misc/iotkit-secctl.c
++++ b/hw/misc/iotkit-secctl.c
+@@ -562,7 +562,7 @@ static MemTxResult iotkit_secctl_ns_write(void *opaque, hwaddr addr,
+ static const MemoryRegionOps iotkit_secctl_s_ops = {
+     .read_with_attrs = iotkit_secctl_s_read,
+     .write_with_attrs = iotkit_secctl_s_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .valid.min_access_size = 1,
      .valid.max_access_size = 4,
- };
-diff --git a/hw/misc/bcm2835_mbox.c b/hw/misc/bcm2835_mbox.c
-index 79bad11631..d8f12bf689 100644
---- a/hw/misc/bcm2835_mbox.c
-+++ b/hw/misc/bcm2835_mbox.c
-@@ -239,7 +239,7 @@ static void bcm2835_mbox_write(void *opaque, hwaddr offset,
- static const MemoryRegionOps bcm2835_mbox_ops = {
-     .read = bcm2835_mbox_read,
-     .write = bcm2835_mbox_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .valid.min_access_size = 4,
+     .impl.min_access_size = 1,
+@@ -572,7 +572,7 @@ static const MemoryRegionOps iotkit_secctl_s_ops = {
+ static const MemoryRegionOps iotkit_secctl_ns_ops = {
+     .read_with_attrs = iotkit_secctl_ns_read,
+     .write_with_attrs = iotkit_secctl_ns_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .valid.min_access_size = 1,
      .valid.max_access_size = 4,
- };
-diff --git a/hw/misc/bcm2835_property.c b/hw/misc/bcm2835_property.c
-index d86d510572..4740f2a83e 100644
---- a/hw/misc/bcm2835_property.c
-+++ b/hw/misc/bcm2835_property.c
-@@ -346,7 +346,7 @@ static void bcm2835_property_write(void *opaque, hwaddr offset,
- static const MemoryRegionOps bcm2835_property_ops = {
-     .read = bcm2835_property_read,
-     .write = bcm2835_property_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .valid.min_access_size = 4,
-     .valid.max_access_size = 4,
- };
-diff --git a/hw/misc/bcm2835_rng.c b/hw/misc/bcm2835_rng.c
-index d0c4e64e88..c5737f96b6 100644
---- a/hw/misc/bcm2835_rng.c
-+++ b/hw/misc/bcm2835_rng.c
-@@ -92,7 +92,7 @@ static void bcm2835_rng_write(void *opaque, hwaddr offset,
- static const MemoryRegionOps bcm2835_rng_ops = {
-     .read = bcm2835_rng_read,
-     .write = bcm2835_rng_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static const VMStateDescription vmstate_bcm2835_rng = {
-diff --git a/hw/misc/eccmemctl.c b/hw/misc/eccmemctl.c
-index 4b1f2b675a..c9760e7993 100644
---- a/hw/misc/eccmemctl.c
-+++ b/hw/misc/eccmemctl.c
-@@ -231,7 +231,7 @@ static uint64_t ecc_mem_read(void *opaque, hwaddr addr,
- static const MemoryRegionOps ecc_mem_ops = {
-     .read = ecc_mem_read,
-     .write = ecc_mem_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .valid = {
-         .min_access_size = 4,
-         .max_access_size = 4,
-@@ -260,7 +260,7 @@ static uint64_t ecc_diag_mem_read(void *opaque, hwaddr addr,
- static const MemoryRegionOps ecc_diag_mem_ops = {
-     .read = ecc_diag_mem_read,
-     .write = ecc_diag_mem_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .valid = {
+     .impl.min_access_size = 1,
+diff --git a/hw/misc/iotkit-sysctl.c b/hw/misc/iotkit-sysctl.c
+index 9aa8109463..cd23d3f273 100644
+--- a/hw/misc/iotkit-sysctl.c
++++ b/hw/misc/iotkit-sysctl.c
+@@ -390,7 +390,7 @@ static void iotkit_sysctl_write(void *opaque, hwaddr offset,
+ static const MemoryRegionOps iotkit_sysctl_ops = {
+     .read = iotkit_sysctl_read,
+     .write = iotkit_sysctl_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     /* byte/halfword accesses are just zero-padded on reads and writes */
+     .impl.min_access_size = 4,
+     .impl.max_access_size = 4,
+diff --git a/hw/misc/iotkit-sysinfo.c b/hw/misc/iotkit-sysinfo.c
+index 783e613959..8bb8e717b1 100644
+--- a/hw/misc/iotkit-sysinfo.c
++++ b/hw/misc/iotkit-sysinfo.c
+@@ -88,7 +88,7 @@ static void iotkit_sysinfo_write(void *opaque, hwaddr offset,
+ static const MemoryRegionOps iotkit_sysinfo_ops = {
+     .read = iotkit_sysinfo_read,
+     .write = iotkit_sysinfo_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     /* byte/halfword accesses are just zero-padded on reads and writes */
+     .impl.min_access_size = 4,
+     .impl.max_access_size = 4,
+diff --git a/hw/misc/macio/gpio.c b/hw/misc/macio/gpio.c
+index 6cca6b27d6..920fa93196 100644
+--- a/hw/misc/macio/gpio.c
++++ b/hw/misc/macio/gpio.c
+@@ -145,7 +145,7 @@ static uint64_t macio_gpio_read(void *opaque, hwaddr addr, unsigned size)
+ static const MemoryRegionOps macio_gpio_ops = {
+     .read = macio_gpio_read,
+     .write = macio_gpio_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .impl = {
          .min_access_size = 1,
          .max_access_size = 1,
-diff --git a/hw/misc/edu.c b/hw/misc/edu.c
-index d5e2bdbb57..eea38632ab 100644
---- a/hw/misc/edu.c
-+++ b/hw/misc/edu.c
-@@ -295,7 +295,7 @@ static void edu_mmio_write(void *opaque, hwaddr addr, uint64_t val,
- static const MemoryRegionOps edu_mmio_ops = {
-     .read = edu_mmio_read,
-     .write = edu_mmio_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .valid = {
-         .min_access_size = 4,
-         .max_access_size = 8,
-diff --git a/hw/misc/exynos4210_clk.c b/hw/misc/exynos4210_clk.c
-index bc1463ff89..276de59abb 100644
---- a/hw/misc/exynos4210_clk.c
-+++ b/hw/misc/exynos4210_clk.c
-@@ -101,7 +101,7 @@ static void exynos4210_clk_write(void *opaque, hwaddr offset,
- static const MemoryRegionOps exynos4210_clk_ops = {
-     .read = exynos4210_clk_read,
-     .write = exynos4210_clk_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+diff --git a/hw/misc/macio/mac_dbdma.c b/hw/misc/macio/mac_dbdma.c
+index e220f1a927..a5dd2c68a1 100644
+--- a/hw/misc/macio/mac_dbdma.c
++++ b/hw/misc/macio/mac_dbdma.c
+@@ -794,7 +794,7 @@ static uint64_t dbdma_read(void *opaque, hwaddr addr,
+ static const MemoryRegionOps dbdma_ops = {
+     .read = dbdma_read,
+     .write = dbdma_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
      .valid = {
          .min_access_size = 4,
          .max_access_size = 4,
-diff --git a/hw/misc/exynos4210_pmu.c b/hw/misc/exynos4210_pmu.c
-index 500f28343f..3abc877d68 100644
---- a/hw/misc/exynos4210_pmu.c
-+++ b/hw/misc/exynos4210_pmu.c
-@@ -458,7 +458,7 @@ static void exynos4210_pmu_write(void *opaque, hwaddr offset,
- static const MemoryRegionOps exynos4210_pmu_ops = {
-     .read = exynos4210_pmu_read,
-     .write = exynos4210_pmu_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .valid = {
-         .min_access_size = 4,
-         .max_access_size = 4,
-diff --git a/hw/misc/exynos4210_rng.c b/hw/misc/exynos4210_rng.c
-index 38cd61c7ea..cf32c72273 100644
---- a/hw/misc/exynos4210_rng.c
-+++ b/hw/misc/exynos4210_rng.c
-@@ -216,7 +216,7 @@ static void exynos4210_rng_write(void *opaque, hwaddr offset,
- static const MemoryRegionOps exynos4210_rng_ops = {
-     .read = exynos4210_rng_read,
-     .write = exynos4210_rng_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+diff --git a/hw/misc/macio/macio.c b/hw/misc/macio/macio.c
+index 50f20d8206..72c66a0fa9 100644
+--- a/hw/misc/macio/macio.c
++++ b/hw/misc/macio/macio.c
+@@ -286,7 +286,7 @@ static uint64_t timer_read(void *opaque, hwaddr addr, unsigned size)
+ static const MemoryRegionOps timer_ops = {
+     .read = timer_read,
+     .write = timer_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
  };
  
- static void exynos4210_rng_reset(DeviceState *dev)
-diff --git a/hw/misc/imx25_ccm.c b/hw/misc/imx25_ccm.c
-index d3107e5ca2..2797923d34 100644
---- a/hw/misc/imx25_ccm.c
-+++ b/hw/misc/imx25_ccm.c
-@@ -267,7 +267,7 @@ static void imx25_ccm_write(void *opaque, hwaddr offset, uint64_t value,
- static const struct MemoryRegionOps imx25_ccm_ops = {
-     .read = imx25_ccm_read,
-     .write = imx25_ccm_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .valid = {
-         /*
-          * Our device would not work correctly if the guest was doing
-diff --git a/hw/misc/imx2_wdt.c b/hw/misc/imx2_wdt.c
-index 5576778a32..07e97a27f7 100644
---- a/hw/misc/imx2_wdt.c
-+++ b/hw/misc/imx2_wdt.c
-@@ -37,7 +37,7 @@ static void imx2_wdt_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps imx2_wdt_ops = {
-     .read  = imx2_wdt_read,
-     .write = imx2_wdt_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .impl = {
-         /*
-          * Our device would not work correctly if the guest was doing
-diff --git a/hw/misc/imx31_ccm.c b/hw/misc/imx31_ccm.c
-index 6e246827ab..060ea64eb3 100644
---- a/hw/misc/imx31_ccm.c
-+++ b/hw/misc/imx31_ccm.c
-@@ -293,7 +293,7 @@ static void imx31_ccm_write(void *opaque, hwaddr offset, uint64_t value,
- static const struct MemoryRegionOps imx31_ccm_ops = {
-     .read = imx31_ccm_read,
-     .write = imx31_ccm_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .valid = {
-         /*
-          * Our device would not work correctly if the guest was doing
-diff --git a/hw/misc/imx6_ccm.c b/hw/misc/imx6_ccm.c
-index 7fec8f0a47..a08b824768 100644
---- a/hw/misc/imx6_ccm.c
-+++ b/hw/misc/imx6_ccm.c
-@@ -697,7 +697,7 @@ static void imx6_analog_write(void *opaque, hwaddr offset, uint64_t value,
- static const struct MemoryRegionOps imx6_ccm_ops = {
-     .read = imx6_ccm_read,
-     .write = imx6_ccm_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .valid = {
-         /*
-          * Our device would not work correctly if the guest was doing
-@@ -714,7 +714,7 @@ static const struct MemoryRegionOps imx6_ccm_ops = {
- static const struct MemoryRegionOps imx6_analog_ops = {
-     .read = imx6_analog_read,
-     .write = imx6_analog_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .valid = {
-         /*
-          * Our device would not work correctly if the guest was doing
-diff --git a/hw/misc/imx6_src.c b/hw/misc/imx6_src.c
-index 8ab18967b5..c3fbcdd425 100644
---- a/hw/misc/imx6_src.c
-+++ b/hw/misc/imx6_src.c
-@@ -263,7 +263,7 @@ static void imx6_src_write(void *opaque, hwaddr offset, uint64_t value,
- static const struct MemoryRegionOps imx6_src_ops = {
-     .read = imx6_src_read,
-     .write = imx6_src_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .valid = {
-         /*
-          * Our device would not work correctly if the guest was doing
-diff --git a/hw/misc/imx6ul_ccm.c b/hw/misc/imx6ul_ccm.c
-index a2fc1d0364..84960c1f67 100644
---- a/hw/misc/imx6ul_ccm.c
-+++ b/hw/misc/imx6ul_ccm.c
-@@ -802,7 +802,7 @@ static void imx6ul_analog_write(void *opaque, hwaddr offset, uint64_t value,
- static const struct MemoryRegionOps imx6ul_ccm_ops = {
-     .read = imx6ul_ccm_read,
-     .write = imx6ul_ccm_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .valid = {
-         /*
-          * Our device would not work correctly if the guest was doing
-@@ -819,7 +819,7 @@ static const struct MemoryRegionOps imx6ul_ccm_ops = {
- static const struct MemoryRegionOps imx6ul_analog_ops = {
-     .read = imx6ul_analog_read,
-     .write = imx6ul_analog_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .valid = {
-         /*
-          * Our device would not work correctly if the guest was doing
-diff --git a/hw/misc/imx7_ccm.c b/hw/misc/imx7_ccm.c
-index 02fc1ae8d0..fa0b270ec0 100644
---- a/hw/misc/imx7_ccm.c
-+++ b/hw/misc/imx7_ccm.c
-@@ -117,7 +117,7 @@ static void imx7_set_clr_tog_write(void *opaque, hwaddr offset,
- static const struct MemoryRegionOps imx7_set_clr_tog_ops = {
-     .read = imx7_set_clr_tog_read,
-     .write = imx7_set_clr_tog_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .impl = {
-         /*
-          * Our device would not work correctly if the guest was doing
-@@ -133,7 +133,7 @@ static const struct MemoryRegionOps imx7_set_clr_tog_ops = {
- 
- static const struct MemoryRegionOps imx7_digprog_ops = {
-     .read = imx7_set_clr_tog_read,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .impl = {
-         .min_access_size = 4,
-         .max_access_size = 4,
-diff --git a/hw/misc/imx7_gpr.c b/hw/misc/imx7_gpr.c
-index b03341a2eb..31f0b17a5a 100644
---- a/hw/misc/imx7_gpr.c
-+++ b/hw/misc/imx7_gpr.c
-@@ -78,7 +78,7 @@ static void imx7_gpr_write(void *opaque, hwaddr offset,
- static const struct MemoryRegionOps imx7_gpr_ops = {
-     .read = imx7_gpr_read,
-     .write = imx7_gpr_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .impl = {
-         /*
-          * Our device would not work correctly if the guest was doing
-diff --git a/hw/misc/imx7_snvs.c b/hw/misc/imx7_snvs.c
-index 45972a5920..ff299fe700 100644
---- a/hw/misc/imx7_snvs.c
-+++ b/hw/misc/imx7_snvs.c
-@@ -37,7 +37,7 @@ static void imx7_snvs_write(void *opaque, hwaddr offset,
- static const struct MemoryRegionOps imx7_snvs_ops = {
-     .read = imx7_snvs_read,
-     .write = imx7_snvs_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .impl = {
-         /*
-          * Our device would not work correctly if the guest was doing
-diff --git a/hw/misc/ivshmem.c b/hw/misc/ivshmem.c
-index 5e3b05eae0..a2b2d5c09e 100644
---- a/hw/misc/ivshmem.c
-+++ b/hw/misc/ivshmem.c
-@@ -276,7 +276,7 @@ static uint64_t ivshmem_io_read(void *opaque, hwaddr addr,
- static const MemoryRegionOps ivshmem_mmio_ops = {
-     .read = ivshmem_io_read,
-     .write = ivshmem_io_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .impl = {
-         .min_access_size = 4,
-         .max_access_size = 4,
-diff --git a/hw/misc/milkymist-hpdmc.c b/hw/misc/milkymist-hpdmc.c
-index 61e86e6b34..2c11e87e5b 100644
---- a/hw/misc/milkymist-hpdmc.c
-+++ b/hw/misc/milkymist-hpdmc.c
-@@ -113,7 +113,7 @@ static const MemoryRegionOps hpdmc_mmio_ops = {
-         .min_access_size = 4,
-         .max_access_size = 4,
-     },
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+ static void macio_newworld_realize(PCIDevice *d, Error **errp)
+diff --git a/hw/misc/mps2-fpgaio.c b/hw/misc/mps2-fpgaio.c
+index 5e8b103914..f57ff87542 100644
+--- a/hw/misc/mps2-fpgaio.c
++++ b/hw/misc/mps2-fpgaio.c
+@@ -222,7 +222,7 @@ static void mps2_fpgaio_write(void *opaque, hwaddr offset, uint64_t value,
+ static const MemoryRegionOps mps2_fpgaio_ops = {
+     .read = mps2_fpgaio_read,
+     .write = mps2_fpgaio_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
  };
  
- static void milkymist_hpdmc_reset(DeviceState *d)
-diff --git a/hw/misc/milkymist-pfpu.c b/hw/misc/milkymist-pfpu.c
-index 516825e83d..9882ba0a0f 100644
---- a/hw/misc/milkymist-pfpu.c
-+++ b/hw/misc/milkymist-pfpu.c
-@@ -476,7 +476,7 @@ static const MemoryRegionOps pfpu_mmio_ops = {
-         .min_access_size = 4,
-         .max_access_size = 4,
-     },
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+ static void mps2_fpgaio_reset(DeviceState *dev)
+diff --git a/hw/misc/mps2-scc.c b/hw/misc/mps2-scc.c
+index 25779a1dca..c7f9ba98cc 100644
+--- a/hw/misc/mps2-scc.c
++++ b/hw/misc/mps2-scc.c
+@@ -217,7 +217,7 @@ static void mps2_scc_write(void *opaque, hwaddr offset, uint64_t value,
+ static const MemoryRegionOps mps2_scc_ops = {
+     .read = mps2_scc_read,
+     .write = mps2_scc_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
  };
  
- static void milkymist_pfpu_reset(DeviceState *d)
-diff --git a/hw/misc/mips_cmgcr.c b/hw/misc/mips_cmgcr.c
-index 8176d91c0c..f5c324c7ec 100644
---- a/hw/misc/mips_cmgcr.c
-+++ b/hw/misc/mips_cmgcr.c
-@@ -170,7 +170,7 @@ static void gcr_write(void *opaque, hwaddr addr, uint64_t data, unsigned size)
- static const MemoryRegionOps gcr_ops = {
-     .read = gcr_read,
-     .write = gcr_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .impl = {
-         .max_access_size = 8,
-     },
-diff --git a/hw/misc/mips_cpc.c b/hw/misc/mips_cpc.c
-index 19ea016b87..b9720fd506 100644
---- a/hw/misc/mips_cpc.c
-+++ b/hw/misc/mips_cpc.c
-@@ -113,7 +113,7 @@ static uint64_t cpc_read(void *opaque, hwaddr offset, unsigned size)
- static const MemoryRegionOps cpc_ops = {
-     .read = cpc_read,
-     .write = cpc_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .impl = {
-         .max_access_size = 8,
-     },
-diff --git a/hw/misc/mips_itu.c b/hw/misc/mips_itu.c
-index ea0cf9726b..2918135bcb 100644
---- a/hw/misc/mips_itu.c
-+++ b/hw/misc/mips_itu.c
-@@ -142,7 +142,7 @@ static const MemoryRegionOps itc_tag_ops = {
-     .impl = {
-         .max_access_size = 8,
-     },
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+ static void mps2_scc_reset(DeviceState *dev)
+diff --git a/hw/misc/nrf51_rng.c b/hw/misc/nrf51_rng.c
+index 5140981c96..fba72e2937 100644
+--- a/hw/misc/nrf51_rng.c
++++ b/hw/misc/nrf51_rng.c
+@@ -140,7 +140,7 @@ static void rng_write(void *opaque, hwaddr offset,
+ static const MemoryRegionOps rng_ops = {
+     .read =  rng_read,
+     .write = rng_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .impl.min_access_size = 4,
+     .impl.max_access_size = 4
+ };
+diff --git a/hw/misc/pc-testdev.c b/hw/misc/pc-testdev.c
+index 0fb84ddc6b..c56726e3f4 100644
+--- a/hw/misc/pc-testdev.c
++++ b/hw/misc/pc-testdev.c
+@@ -77,7 +77,7 @@ static const MemoryRegionOps test_irq_ops = {
+     .write = test_irq_line_write,
+     .valid.min_access_size = 1,
+     .valid.max_access_size = 1,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
  };
  
- static inline uint32_t get_num_cells(MIPSITUState *s)
-@@ -483,7 +483,7 @@ static void itc_storage_write(void *opaque, hwaddr addr, uint64_t data,
- static const MemoryRegionOps itc_storage_ops = {
-     .read = itc_storage_read,
-     .write = itc_storage_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+ static void test_ioport_write(void *opaque, hwaddr addr, uint64_t data,
+@@ -103,7 +103,7 @@ static uint64_t test_ioport_read(void *opaque, hwaddr addr, unsigned len)
+ static const MemoryRegionOps test_ioport_ops = {
+     .read = test_ioport_read,
+     .write = test_ioport_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
  };
  
- static void itc_reset_cells(MIPSITUState *s)
-diff --git a/hw/misc/mos6522.c b/hw/misc/mos6522.c
-index 57f13db266..3961379558 100644
---- a/hw/misc/mos6522.c
-+++ b/hw/misc/mos6522.c
-@@ -365,7 +365,7 @@ void mos6522_write(void *opaque, hwaddr addr, uint64_t val, unsigned size)
- static const MemoryRegionOps mos6522_ops = {
-     .read = mos6522_read,
-     .write = mos6522_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .valid = {
-         .min_access_size = 1,
-         .max_access_size = 1,
-diff --git a/hw/misc/msf2-sysreg.c b/hw/misc/msf2-sysreg.c
-index ddc5a30c80..211e1909ad 100644
---- a/hw/misc/msf2-sysreg.c
-+++ b/hw/misc/msf2-sysreg.c
-@@ -96,7 +96,7 @@ static void msf2_sysreg_write(void *opaque, hwaddr offset,
- static const MemoryRegionOps sysreg_ops = {
-     .read = msf2_sysreg_read,
-     .write = msf2_sysreg_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static void msf2_sysreg_init(Object *obj)
-diff --git a/hw/misc/mst_fpga.c b/hw/misc/mst_fpga.c
-index 81abdf8ede..5a0f3a2511 100644
---- a/hw/misc/mst_fpga.c
-+++ b/hw/misc/mst_fpga.c
-@@ -192,7 +192,7 @@ mst_fpga_writeb(void *opaque, hwaddr addr, uint64_t value,
- static const MemoryRegionOps mst_fpga_ops = {
- 	.read = mst_fpga_readb,
- 	.write = mst_fpga_writeb,
--	.endianness = DEVICE_NATIVE_ENDIAN,
-+	.endianness = MO_TE,
- };
- 
- static int mst_fpga_post_load(void *opaque, int version_id)
-diff --git a/hw/misc/omap_gpmc.c b/hw/misc/omap_gpmc.c
-index 10de7a5523..93bf6c69cd 100644
---- a/hw/misc/omap_gpmc.c
-+++ b/hw/misc/omap_gpmc.c
-@@ -213,7 +213,7 @@ static void omap_nand_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps omap_nand_ops = {
-     .read = omap_nand_read,
-     .write = omap_nand_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static void fill_prefetch_fifo(struct omap_gpmc_s *s)
-@@ -370,7 +370,7 @@ static void omap_gpmc_prefetch_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps omap_prefetch_ops = {
-     .read = omap_gpmc_prefetch_read,
-     .write = omap_gpmc_prefetch_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+ static const MemoryRegionOps test_ioport_byte_ops = {
+@@ -113,7 +113,7 @@ static const MemoryRegionOps test_ioport_byte_ops = {
+     .valid.max_access_size = 4,
      .impl.min_access_size = 1,
      .impl.max_access_size = 1,
- };
-@@ -820,7 +820,7 @@ static void omap_gpmc_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps omap_gpmc_ops = {
-     .read = omap_gpmc_read,
-     .write = omap_gpmc_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
  };
  
- struct omap_gpmc_s *omap_gpmc_init(struct omap_mpu_state_s *mpu,
-diff --git a/hw/misc/omap_l4.c b/hw/misc/omap_l4.c
-index 61b6df564a..531b77eac9 100644
---- a/hw/misc/omap_l4.c
-+++ b/hw/misc/omap_l4.c
-@@ -106,7 +106,7 @@ static void omap_l4ta_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps omap_l4ta_ops = {
-     .read = omap_l4ta_read,
-     .write = omap_l4ta_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+ static uint64_t test_flush_page_read(void *opaque, hwaddr addr, unsigned size)
+@@ -141,7 +141,7 @@ static const MemoryRegionOps test_flush_ops = {
+     .write = test_flush_page_write,
+     .valid.min_access_size = 4,
+     .valid.max_access_size = 4,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
  };
  
- struct omap_target_agent_s *omap_l4ta_get(struct omap_l4_s *bus,
-diff --git a/hw/misc/omap_sdrc.c b/hw/misc/omap_sdrc.c
-index f2f72f6810..c9a0e5647f 100644
---- a/hw/misc/omap_sdrc.c
-+++ b/hw/misc/omap_sdrc.c
-@@ -151,7 +151,7 @@ static void omap_sdrc_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps omap_sdrc_ops = {
-     .read = omap_sdrc_read,
-     .write = omap_sdrc_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+ static uint64_t test_iomem_read(void *opaque, hwaddr addr, unsigned len)
+@@ -164,7 +164,7 @@ static void test_iomem_write(void *opaque, hwaddr addr, uint64_t val,
+ static const MemoryRegionOps test_iomem_ops = {
+     .read = test_iomem_read,
+     .write = test_iomem_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
  };
  
- struct omap_sdrc_s *omap_sdrc_init(MemoryRegion *sysmem,
-diff --git a/hw/misc/omap_tap.c b/hw/misc/omap_tap.c
-index 3f595e8df7..d005ac2093 100644
---- a/hw/misc/omap_tap.c
-+++ b/hw/misc/omap_tap.c
-@@ -106,7 +106,7 @@ static void omap_tap_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps omap_tap_ops = {
-     .read = omap_tap_read,
-     .write = omap_tap_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- void omap_tap_init(struct omap_target_agent_s *ta,
-diff --git a/hw/misc/slavio_misc.c b/hw/misc/slavio_misc.c
-index 279b38dfc7..c41bc49137 100644
---- a/hw/misc/slavio_misc.c
-+++ b/hw/misc/slavio_misc.c
-@@ -144,7 +144,7 @@ static uint64_t slavio_cfg_mem_readb(void *opaque, hwaddr addr,
- static const MemoryRegionOps slavio_cfg_mem_ops = {
-     .read = slavio_cfg_mem_readb,
-     .write = slavio_cfg_mem_writeb,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .valid = {
-         .min_access_size = 1,
-         .max_access_size = 1,
-@@ -174,7 +174,7 @@ static uint64_t slavio_diag_mem_readb(void *opaque, hwaddr addr,
- static const MemoryRegionOps slavio_diag_mem_ops = {
-     .read = slavio_diag_mem_readb,
-     .write = slavio_diag_mem_writeb,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .valid = {
-         .min_access_size = 1,
-         .max_access_size = 1,
-@@ -204,7 +204,7 @@ static uint64_t slavio_mdm_mem_readb(void *opaque, hwaddr addr,
- static const MemoryRegionOps slavio_mdm_mem_ops = {
-     .read = slavio_mdm_mem_readb,
-     .write = slavio_mdm_mem_writeb,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .valid = {
-         .min_access_size = 1,
-         .max_access_size = 1,
-@@ -242,7 +242,7 @@ static uint64_t slavio_aux1_mem_readb(void *opaque, hwaddr addr,
- static const MemoryRegionOps slavio_aux1_mem_ops = {
-     .read = slavio_aux1_mem_readb,
-     .write = slavio_aux1_mem_writeb,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .valid = {
-         .min_access_size = 1,
-         .max_access_size = 1,
-@@ -279,7 +279,7 @@ static uint64_t slavio_aux2_mem_readb(void *opaque, hwaddr addr,
- static const MemoryRegionOps slavio_aux2_mem_ops = {
-     .read = slavio_aux2_mem_readb,
-     .write = slavio_aux2_mem_writeb,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .valid = {
-         .min_access_size = 1,
-         .max_access_size = 1,
-@@ -307,7 +307,7 @@ static uint64_t apc_mem_readb(void *opaque, hwaddr addr,
- static const MemoryRegionOps apc_mem_ops = {
-     .read = apc_mem_readb,
-     .write = apc_mem_writeb,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .valid = {
-         .min_access_size = 1,
-         .max_access_size = 1,
-@@ -352,7 +352,7 @@ static void slavio_sysctrl_mem_writel(void *opaque, hwaddr addr,
- static const MemoryRegionOps slavio_sysctrl_mem_ops = {
-     .read = slavio_sysctrl_mem_readl,
-     .write = slavio_sysctrl_mem_writel,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .valid = {
-         .min_access_size = 4,
-         .max_access_size = 4,
-@@ -394,7 +394,7 @@ static void slavio_led_mem_writew(void *opaque, hwaddr addr,
- static const MemoryRegionOps slavio_led_mem_ops = {
-     .read = slavio_led_mem_readw,
-     .write = slavio_led_mem_writew,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .valid = {
-         .min_access_size = 2,
-         .max_access_size = 2,
-diff --git a/hw/misc/stm32f2xx_syscfg.c b/hw/misc/stm32f2xx_syscfg.c
-index aa59b43549..1efe7e25a1 100644
---- a/hw/misc/stm32f2xx_syscfg.c
-+++ b/hw/misc/stm32f2xx_syscfg.c
-@@ -126,7 +126,7 @@ static void stm32f2xx_syscfg_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps stm32f2xx_syscfg_ops = {
-     .read = stm32f2xx_syscfg_read,
-     .write = stm32f2xx_syscfg_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static void stm32f2xx_syscfg_init(Object *obj)
-diff --git a/hw/misc/unimp.c b/hw/misc/unimp.c
-index 0e1cb24629..5c4f36de06 100644
---- a/hw/misc/unimp.c
-+++ b/hw/misc/unimp.c
-@@ -46,7 +46,7 @@ static const MemoryRegionOps unimp_ops = {
-     .impl.max_access_size = 8,
-     .valid.min_access_size = 1,
-     .valid.max_access_size = 8,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static void unimp_realize(DeviceState *dev, Error **errp)
-diff --git a/hw/misc/zynq-xadc.c b/hw/misc/zynq-xadc.c
-index 7b1972ce06..2d0cca75eb 100644
---- a/hw/misc/zynq-xadc.c
-+++ b/hw/misc/zynq-xadc.c
-@@ -251,7 +251,7 @@ static void zynq_xadc_write(void *opaque, hwaddr offset, uint64_t val,
- static const MemoryRegionOps xadc_ops = {
-     .read = zynq_xadc_read,
-     .write = zynq_xadc_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static void zynq_xadc_init(Object *obj)
-diff --git a/hw/misc/zynq_slcr.c b/hw/misc/zynq_slcr.c
-index b9a38272d9..1c0076ef5d 100644
---- a/hw/misc/zynq_slcr.c
-+++ b/hw/misc/zynq_slcr.c
-@@ -415,7 +415,7 @@ static void zynq_slcr_write(void *opaque, hwaddr offset,
- static const MemoryRegionOps slcr_ops = {
-     .read = zynq_slcr_read,
-     .write = zynq_slcr_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static void zynq_slcr_init(Object *obj)
-diff --git a/hw/net/dp8393x.c b/hw/net/dp8393x.c
-index a5678e11fa..f3c1e55390 100644
---- a/hw/net/dp8393x.c
-+++ b/hw/net/dp8393x.c
-@@ -654,7 +654,7 @@ static const MemoryRegionOps dp8393x_ops = {
-     .write = dp8393x_write,
-     .impl.min_access_size = 2,
-     .impl.max_access_size = 2,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static void dp8393x_watchdog(void *opaque)
-diff --git a/hw/net/fsl_etsec/etsec.c b/hw/net/fsl_etsec/etsec.c
-index 8451c17fb8..d6cf92bf8d 100644
---- a/hw/net/fsl_etsec/etsec.c
-+++ b/hw/net/fsl_etsec/etsec.c
-@@ -283,7 +283,7 @@ static void etsec_write(void     *opaque,
- static const MemoryRegionOps etsec_ops = {
-     .read = etsec_read,
-     .write = etsec_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+ static void testdev_realizefn(DeviceState *d, Error **errp)
+diff --git a/hw/misc/pci-testdev.c b/hw/misc/pci-testdev.c
+index 74d8571a73..615c5deea0 100644
+--- a/hw/misc/pci-testdev.c
++++ b/hw/misc/pci-testdev.c
+@@ -222,7 +222,7 @@ pci_testdev_pio_write(void *opaque, hwaddr addr, uint64_t val,
+ static const MemoryRegionOps pci_testdev_mmio_ops = {
+     .read = pci_testdev_read,
+     .write = pci_testdev_mmio_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
      .impl = {
-         .min_access_size = 4,
-         .max_access_size = 4,
-diff --git a/hw/net/mcf_fec.c b/hw/net/mcf_fec.c
-index 8fcf354a4b..3e50bc3959 100644
---- a/hw/net/mcf_fec.c
-+++ b/hw/net/mcf_fec.c
-@@ -626,7 +626,7 @@ static ssize_t mcf_fec_receive(NetClientState *nc, const uint8_t *buf, size_t si
- static const MemoryRegionOps mcf_fec_ops = {
-     .read = mcf_fec_read,
-     .write = mcf_fec_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static NetClientInfo net_mcf_fec_info = {
-diff --git a/hw/net/milkymist-minimac2.c b/hw/net/milkymist-minimac2.c
-index 86b6d28033..bd2731006a 100644
---- a/hw/net/milkymist-minimac2.c
-+++ b/hw/net/milkymist-minimac2.c
-@@ -433,7 +433,7 @@ static const MemoryRegionOps minimac2_ops = {
+         .min_access_size = 1,
+         .max_access_size = 1,
+@@ -232,7 +232,7 @@ static const MemoryRegionOps pci_testdev_mmio_ops = {
+ static const MemoryRegionOps pci_testdev_pio_ops = {
+     .read = pci_testdev_read,
+     .write = pci_testdev_pio_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .impl = {
+         .min_access_size = 1,
+         .max_access_size = 1,
+diff --git a/hw/misc/puv3_pm.c b/hw/misc/puv3_pm.c
+index b04950ecb9..d83bf6a786 100644
+--- a/hw/misc/puv3_pm.c
++++ b/hw/misc/puv3_pm.c
+@@ -117,7 +117,7 @@ static const MemoryRegionOps puv3_pm_ops = {
          .min_access_size = 4,
          .max_access_size = 4,
      },
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
  };
  
- static void milkymist_minimac2_reset(DeviceState *d)
-diff --git a/hw/net/xilinx_ethlite.c b/hw/net/xilinx_ethlite.c
-index 384e72b157..ee38ff2e65 100644
---- a/hw/net/xilinx_ethlite.c
-+++ b/hw/net/xilinx_ethlite.c
-@@ -168,7 +168,7 @@ eth_write(void *opaque, hwaddr addr,
+ static void puv3_pm_realize(DeviceState *dev, Error **errp)
+diff --git a/hw/misc/tz-mpc.c b/hw/misc/tz-mpc.c
+index 49dd6050bd..e310dc59ba 100644
+--- a/hw/misc/tz-mpc.c
++++ b/hw/misc/tz-mpc.c
+@@ -335,7 +335,7 @@ static MemTxResult tz_mpc_reg_write(void *opaque, hwaddr addr,
+ static const MemoryRegionOps tz_mpc_reg_ops = {
+     .read_with_attrs = tz_mpc_reg_read,
+     .write_with_attrs = tz_mpc_reg_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .valid.min_access_size = 1,
+     .valid.max_access_size = 4,
+     .impl.min_access_size = 1,
+@@ -411,7 +411,7 @@ static MemTxResult tz_mpc_mem_blocked_write(void *opaque, hwaddr addr,
+ static const MemoryRegionOps tz_mpc_mem_blocked_ops = {
+     .read_with_attrs = tz_mpc_mem_blocked_read,
+     .write_with_attrs = tz_mpc_mem_blocked_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .valid.min_access_size = 1,
+     .valid.max_access_size = 8,
+     .impl.min_access_size = 1,
+diff --git a/hw/misc/tz-msc.c b/hw/misc/tz-msc.c
+index 7d522ac0ec..4d15a03462 100644
+--- a/hw/misc/tz-msc.c
++++ b/hw/misc/tz-msc.c
+@@ -209,7 +209,7 @@ static MemTxResult tz_msc_write(void *opaque, hwaddr addr, uint64_t val,
+ static const MemoryRegionOps tz_msc_ops = {
+     .read_with_attrs = tz_msc_read,
+     .write_with_attrs = tz_msc_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static void tz_msc_reset(DeviceState *dev)
+diff --git a/hw/misc/tz-ppc.c b/hw/misc/tz-ppc.c
+index 181a5f1e81..fd525f2535 100644
+--- a/hw/misc/tz-ppc.c
++++ b/hw/misc/tz-ppc.c
+@@ -182,7 +182,7 @@ static MemTxResult tz_ppc_write(void *opaque, hwaddr addr, uint64_t val,
+ static const MemoryRegionOps tz_ppc_ops = {
+     .read_with_attrs = tz_ppc_read,
+     .write_with_attrs = tz_ppc_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static bool tz_ppc_dummy_accepts(void *opaque, hwaddr addr,
+diff --git a/hw/moxie/moxiesim.c b/hw/moxie/moxiesim.c
+index 57af1b4891..f56b1300d4 100644
+--- a/hw/moxie/moxiesim.c
++++ b/hw/moxie/moxiesim.c
+@@ -142,7 +142,7 @@ static void moxiesim_init(MachineState *machine)
+     /* A single 16450 sits at offset 0x3f8.  */
+     if (serial_hd(0)) {
+         serial_mm_init(address_space_mem, 0x3f8, 0, env->irq[4],
+-                       8000000/16, serial_hd(0), DEVICE_LITTLE_ENDIAN);
++                       8000000/16, serial_hd(0), MO_LE);
+     }
+ }
+ 
+diff --git a/hw/net/allwinner_emac.c b/hw/net/allwinner_emac.c
+index 84b48b1774..67b91088e3 100644
+--- a/hw/net/allwinner_emac.c
++++ b/hw/net/allwinner_emac.c
+@@ -421,7 +421,7 @@ static void aw_emac_set_link(NetClientState *nc)
+ static const MemoryRegionOps aw_emac_mem_ops = {
+     .read = aw_emac_read,
+     .write = aw_emac_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .valid = {
+         .min_access_size = 4,
+         .max_access_size = 4,
+diff --git a/hw/net/cadence_gem.c b/hw/net/cadence_gem.c
+index 7f9cb5ab95..6566b890d1 100644
+--- a/hw/net/cadence_gem.c
++++ b/hw/net/cadence_gem.c
+@@ -1518,7 +1518,7 @@ static void gem_write(void *opaque, hwaddr offset, uint64_t val,
+ static const MemoryRegionOps gem_ops = {
+     .read = gem_read,
+     .write = gem_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static void gem_set_link(NetClientState *nc)
+diff --git a/hw/net/can/can_kvaser_pci.c b/hw/net/can/can_kvaser_pci.c
+index 16861b8f9f..3a55c3046d 100644
+--- a/hw/net/can/can_kvaser_pci.c
++++ b/hw/net/can/can_kvaser_pci.c
+@@ -192,7 +192,7 @@ static void kvaser_pci_xilinx_io_write(void *opaque, hwaddr addr, uint64_t data,
+ static const MemoryRegionOps kvaser_pci_s5920_io_ops = {
+     .read = kvaser_pci_s5920_io_read,
+     .write = kvaser_pci_s5920_io_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .impl = {
+         .min_access_size = 4,
+         .max_access_size = 4,
+@@ -202,7 +202,7 @@ static const MemoryRegionOps kvaser_pci_s5920_io_ops = {
+ static const MemoryRegionOps kvaser_pci_sja_io_ops = {
+     .read = kvaser_pci_sja_io_read,
+     .write = kvaser_pci_sja_io_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .impl = {
+         .max_access_size = 1,
+     },
+@@ -211,7 +211,7 @@ static const MemoryRegionOps kvaser_pci_sja_io_ops = {
+ static const MemoryRegionOps kvaser_pci_xilinx_io_ops = {
+     .read = kvaser_pci_xilinx_io_read,
+     .write = kvaser_pci_xilinx_io_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .impl = {
+         .max_access_size = 1,
+     },
+diff --git a/hw/net/can/can_mioe3680_pci.c b/hw/net/can/can_mioe3680_pci.c
+index 965e252d9d..3143049489 100644
+--- a/hw/net/can/can_mioe3680_pci.c
++++ b/hw/net/can/can_mioe3680_pci.c
+@@ -137,7 +137,7 @@ static void mioe3680_pci_sja2_io_write(void *opaque, hwaddr addr, uint64_t data,
+ static const MemoryRegionOps mioe3680_pci_sja1_io_ops = {
+     .read = mioe3680_pci_sja1_io_read,
+     .write = mioe3680_pci_sja1_io_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .impl = {
+         .max_access_size = 1,
+     },
+@@ -146,7 +146,7 @@ static const MemoryRegionOps mioe3680_pci_sja1_io_ops = {
+ static const MemoryRegionOps mioe3680_pci_sja2_io_ops = {
+     .read = mioe3680_pci_sja2_io_read,
+     .write = mioe3680_pci_sja2_io_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .impl = {
+         .max_access_size = 1,
+     },
+diff --git a/hw/net/can/can_pcm3680_pci.c b/hw/net/can/can_pcm3680_pci.c
+index 51b6540072..284350f14e 100644
+--- a/hw/net/can/can_pcm3680_pci.c
++++ b/hw/net/can/can_pcm3680_pci.c
+@@ -137,7 +137,7 @@ static void pcm3680i_pci_sja2_io_write(void *opaque, hwaddr addr, uint64_t data,
+ static const MemoryRegionOps pcm3680i_pci_sja1_io_ops = {
+     .read = pcm3680i_pci_sja1_io_read,
+     .write = pcm3680i_pci_sja1_io_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .impl = {
+         .max_access_size = 1,
+     },
+@@ -146,7 +146,7 @@ static const MemoryRegionOps pcm3680i_pci_sja1_io_ops = {
+ static const MemoryRegionOps pcm3680i_pci_sja2_io_ops = {
+     .read = pcm3680i_pci_sja2_io_read,
+     .write = pcm3680i_pci_sja2_io_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .impl = {
+         .max_access_size = 1,
+     },
+diff --git a/hw/net/e1000.c b/hw/net/e1000.c
+index 8ae4e08f1e..e037e81f7d 100644
+--- a/hw/net/e1000.c
++++ b/hw/net/e1000.c
+@@ -1342,7 +1342,7 @@ e1000_mmio_read(void *opaque, hwaddr addr, unsigned size)
+ static const MemoryRegionOps e1000_mmio_ops = {
+     .read = e1000_mmio_read,
+     .write = e1000_mmio_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .impl = {
+         .min_access_size = 4,
+         .max_access_size = 4,
+@@ -1369,7 +1369,7 @@ static void e1000_io_write(void *opaque, hwaddr addr,
+ static const MemoryRegionOps e1000_io_ops = {
+     .read = e1000_io_read,
+     .write = e1000_io_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static bool is_version_1(void *opaque, int version_id)
+diff --git a/hw/net/e1000e.c b/hw/net/e1000e.c
+index b69fd7d8ad..24b2d99122 100644
+--- a/hw/net/e1000e.c
++++ b/hw/net/e1000e.c
+@@ -182,7 +182,7 @@ e1000e_io_write(void *opaque, hwaddr addr,
+ static const MemoryRegionOps mmio_ops = {
+     .read = e1000e_mmio_read,
+     .write = e1000e_mmio_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .impl = {
+         .min_access_size = 4,
+         .max_access_size = 4,
+@@ -192,7 +192,7 @@ static const MemoryRegionOps mmio_ops = {
+ static const MemoryRegionOps io_ops = {
+     .read = e1000e_io_read,
+     .write = e1000e_io_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .impl = {
+         .min_access_size = 4,
+         .max_access_size = 4,
+diff --git a/hw/net/eepro100.c b/hw/net/eepro100.c
+index cc2dd8b1c9..477e405352 100644
+--- a/hw/net/eepro100.c
++++ b/hw/net/eepro100.c
+@@ -1603,7 +1603,7 @@ static void eepro100_write(void *opaque, hwaddr addr,
+ static const MemoryRegionOps eepro100_ops = {
+     .read = eepro100_read,
+     .write = eepro100_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static ssize_t nic_receive(NetClientState *nc, const uint8_t * buf, size_t size)
+diff --git a/hw/net/etraxfs_eth.c b/hw/net/etraxfs_eth.c
+index 4cfbf1135a..f748f5e759 100644
+--- a/hw/net/etraxfs_eth.c
++++ b/hw/net/etraxfs_eth.c
+@@ -569,7 +569,7 @@ static void eth_set_link(NetClientState *nc)
  static const MemoryRegionOps eth_ops = {
      .read = eth_read,
      .write = eth_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
      .valid = {
          .min_access_size = 4,
          .max_access_size = 4
-diff --git a/hw/nios2/10m50_devboard.c b/hw/nios2/10m50_devboard.c
-index ad8b2fc670..2da4af8f5a 100644
---- a/hw/nios2/10m50_devboard.c
-+++ b/hw/nios2/10m50_devboard.c
-@@ -91,7 +91,7 @@ static void nios2_10m50_ghrd_init(MachineState *machine)
+diff --git a/hw/net/ftgmac100.c b/hw/net/ftgmac100.c
+index 04c78e8517..24ad88279b 100644
+--- a/hw/net/ftgmac100.c
++++ b/hw/net/ftgmac100.c
+@@ -982,7 +982,7 @@ static const MemoryRegionOps ftgmac100_ops = {
+     .write = ftgmac100_write,
+     .valid.min_access_size = 4,
+     .valid.max_access_size = 4,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
  
-     /* Register: Altera 16550 UART */
-     serial_mm_init(address_space_mem, 0xf8001600, 2, irq[1], 115200,
--                   serial_hd(0), DEVICE_NATIVE_ENDIAN);
-+                   serial_hd(0), MO_TE);
+ static void ftgmac100_cleanup(NetClientState *nc)
+diff --git a/hw/net/imx_fec.c b/hw/net/imx_fec.c
+index 0f3dd7e8e4..bf67a70a5b 100644
+--- a/hw/net/imx_fec.c
++++ b/hw/net/imx_fec.c
+@@ -1285,7 +1285,7 @@ static const MemoryRegionOps imx_eth_ops = {
+     .write                 = imx_eth_write,
+     .valid.min_access_size = 4,
+     .valid.max_access_size = 4,
+-    .endianness            = DEVICE_LITTLE_ENDIAN,
++    .endianness            = MO_LE,
+ };
  
-     /* Register: Timer sys_clk_timer  */
-     dev = qdev_create(NULL, "ALTR.timer");
-diff --git a/hw/openrisc/openrisc_sim.c b/hw/openrisc/openrisc_sim.c
-index 79e70493fc..51b0c5c46b 100644
---- a/hw/openrisc/openrisc_sim.c
-+++ b/hw/openrisc/openrisc_sim.c
-@@ -166,7 +166,7 @@ static void openrisc_sim_init(MachineState *machine)
-     }
+ static void imx_eth_cleanup(NetClientState *nc)
+diff --git a/hw/net/lan9118.c b/hw/net/lan9118.c
+index 498a6acfe9..244cfd8d4e 100644
+--- a/hw/net/lan9118.c
++++ b/hw/net/lan9118.c
+@@ -1308,13 +1308,13 @@ static uint64_t lan9118_16bit_mode_read(void *opaque, hwaddr offset,
+ static const MemoryRegionOps lan9118_mem_ops = {
+     .read = lan9118_readl,
+     .write = lan9118_writel,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
  
-     serial_mm_init(get_system_memory(), 0x90000000, 0, serial_irq,
--                   115200, serial_hd(0), DEVICE_NATIVE_ENDIAN);
-+                   115200, serial_hd(0), MO_TE);
+ static const MemoryRegionOps lan9118_16bit_mem_ops = {
+     .read = lan9118_16bit_mode_read,
+     .write = lan9118_16bit_mode_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
  
-     openrisc_load_kernel(ram_size, kernel_filename);
- }
-diff --git a/hw/pci-host/bonito.c b/hw/pci-host/bonito.c
-index ceee463a11..8c302ee0d5 100644
---- a/hw/pci-host/bonito.c
-+++ b/hw/pci-host/bonito.c
-@@ -313,7 +313,7 @@ static uint64_t bonito_readl(void *opaque, hwaddr addr,
- static const MemoryRegionOps bonito_ops = {
-     .read = bonito_readl,
-     .write = bonito_writel,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .valid = {
-         .min_access_size = 4,
-         .max_access_size = 4,
-@@ -346,7 +346,7 @@ static uint64_t bonito_pciconf_readl(void *opaque, hwaddr addr,
- static const MemoryRegionOps bonito_pciconf_ops = {
-     .read = bonito_pciconf_readl,
-     .write = bonito_pciconf_writel,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .valid = {
-         .min_access_size = 4,
-         .max_access_size = 4,
-@@ -383,7 +383,7 @@ static void bonito_ldma_writel(void *opaque, hwaddr addr,
- static const MemoryRegionOps bonito_ldma_ops = {
-     .read = bonito_ldma_readl,
-     .write = bonito_ldma_writel,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .valid = {
-         .min_access_size = 4,
-         .max_access_size = 4,
-@@ -420,7 +420,7 @@ static void bonito_cop_writel(void *opaque, hwaddr addr,
- static const MemoryRegionOps bonito_cop_ops = {
-     .read = bonito_cop_readl,
-     .write = bonito_cop_writel,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .valid = {
-         .min_access_size = 4,
-         .max_access_size = 4,
-@@ -526,7 +526,7 @@ static const MemoryRegionOps bonito_spciconf_ops = {
+ static NetClientInfo net_lan9118_info = {
+diff --git a/hw/net/ne2000.c b/hw/net/ne2000.c
+index 6c17ee1ae2..0f2b24c5a2 100644
+--- a/hw/net/ne2000.c
++++ b/hw/net/ne2000.c
+@@ -688,7 +688,7 @@ static void ne2000_write(void *opaque, hwaddr addr,
+ static const MemoryRegionOps ne2000_ops = {
+     .read = ne2000_read,
+     .write = ne2000_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ /***********************************************************/
+diff --git a/hw/net/pcnet-pci.c b/hw/net/pcnet-pci.c
+index 4723c30c79..2144bdecc1 100644
+--- a/hw/net/pcnet-pci.c
++++ b/hw/net/pcnet-pci.c
+@@ -140,7 +140,7 @@ static void pcnet_ioport_write(void *opaque, hwaddr addr,
+ static const MemoryRegionOps pcnet_io_ops = {
+     .read = pcnet_ioport_read,
+     .write = pcnet_ioport_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static const VMStateDescription vmstate_pci_pcnet = {
+@@ -163,7 +163,7 @@ static const MemoryRegionOps pcnet_mmio_ops = {
      .valid.max_access_size = 4,
      .impl.min_access_size = 1,
      .impl.max_access_size = 4,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
  };
  
- #define BONITO_IRQ_BASE 32
-diff --git a/hw/pcmcia/pxa2xx.c b/hw/pcmcia/pxa2xx.c
-index 14e4dfe8b1..09ba6c3efd 100644
---- a/hw/pcmcia/pxa2xx.c
-+++ b/hw/pcmcia/pxa2xx.c
-@@ -117,19 +117,19 @@ static void pxa2xx_pcmcia_io_write(void *opaque, hwaddr offset,
- static const MemoryRegionOps pxa2xx_pcmcia_common_ops = {
-     .read = pxa2xx_pcmcia_common_read,
-     .write = pxa2xx_pcmcia_common_write,
--    .endianness = DEVICE_NATIVE_ENDIAN
-+    .endianness = MO_TE
+ static void pci_physical_memory_write(void *dma_opaque, hwaddr addr,
+diff --git a/hw/net/rocker/rocker.c b/hw/net/rocker/rocker.c
+index 50f9e33e2f..bbd9f09f94 100644
+--- a/hw/net/rocker/rocker.c
++++ b/hw/net/rocker/rocker.c
+@@ -1197,7 +1197,7 @@ static uint64_t rocker_mmio_read(void *opaque, hwaddr addr, unsigned size)
+ static const MemoryRegionOps rocker_mmio_ops = {
+     .read = rocker_mmio_read,
+     .write = rocker_mmio_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .valid = {
+         .min_access_size = 4,
+         .max_access_size = 8,
+diff --git a/hw/net/rtl8139.c b/hw/net/rtl8139.c
+index 88a97d756d..629d627496 100644
+--- a/hw/net/rtl8139.c
++++ b/hw/net/rtl8139.c
+@@ -3312,7 +3312,7 @@ static const MemoryRegionOps rtl8139_io_ops = {
+         .min_access_size = 1,
+         .max_access_size = 4,
+     },
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
  };
  
- static const MemoryRegionOps pxa2xx_pcmcia_attr_ops = {
-     .read = pxa2xx_pcmcia_attr_read,
-     .write = pxa2xx_pcmcia_attr_write,
--    .endianness = DEVICE_NATIVE_ENDIAN
-+    .endianness = MO_TE
+ static void rtl8139_timer(void *opaque)
+diff --git a/hw/net/smc91c111.c b/hw/net/smc91c111.c
+index 50cd6fc140..861dca9fc2 100644
+--- a/hw/net/smc91c111.c
++++ b/hw/net/smc91c111.c
+@@ -760,7 +760,7 @@ static const MemoryRegionOps smc91c111_mem_ops = {
+     .write = smc91c111_writefn,
+     .valid.min_access_size = 1,
+     .valid.max_access_size = 4,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
  };
  
- static const MemoryRegionOps pxa2xx_pcmcia_io_ops = {
-     .read = pxa2xx_pcmcia_io_read,
-     .write = pxa2xx_pcmcia_io_write,
--    .endianness = DEVICE_NATIVE_ENDIAN
-+    .endianness = MO_TE
+ static NetClientInfo net_smc91c111_info = {
+diff --git a/hw/net/stellaris_enet.c b/hw/net/stellaris_enet.c
+index 5dfd43b3f2..ddeccefb30 100644
+--- a/hw/net/stellaris_enet.c
++++ b/hw/net/stellaris_enet.c
+@@ -459,7 +459,7 @@ static void stellaris_enet_write(void *opaque, hwaddr offset,
+ static const MemoryRegionOps stellaris_enet_ops = {
+     .read = stellaris_enet_read,
+     .write = stellaris_enet_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
  };
  
- static void pxa2xx_pcmcia_set_irq(void *opaque, int line, int level)
-diff --git a/hw/ppc/ppc405_boards.c b/hw/ppc/ppc405_boards.c
-index 388cae0b43..e98933fb55 100644
---- a/hw/ppc/ppc405_boards.c
-+++ b/hw/ppc/ppc405_boards.c
-@@ -383,7 +383,7 @@ static const MemoryRegionOps taihu_cpld_ops = {
+ static void stellaris_enet_reset(DeviceState *dev)
+diff --git a/hw/net/sungem.c b/hw/net/sungem.c
+index f31d41ac5b..d7b395239e 100644
+--- a/hw/net/sungem.c
++++ b/hw/net/sungem.c
+@@ -926,7 +926,7 @@ static uint64_t sungem_mmio_greg_read(void *opaque, hwaddr addr, unsigned size)
+ static const MemoryRegionOps sungem_mmio_greg_ops = {
+     .read = sungem_mmio_greg_read,
+     .write = sungem_mmio_greg_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .impl = {
+         .min_access_size = 4,
+         .max_access_size = 4,
+@@ -995,7 +995,7 @@ static uint64_t sungem_mmio_txdma_read(void *opaque, hwaddr addr, unsigned size)
+ static const MemoryRegionOps sungem_mmio_txdma_ops = {
+     .read = sungem_mmio_txdma_read,
+     .write = sungem_mmio_txdma_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .impl = {
+         .min_access_size = 4,
+         .max_access_size = 4,
+@@ -1068,7 +1068,7 @@ static uint64_t sungem_mmio_rxdma_read(void *opaque, hwaddr addr, unsigned size)
+ static const MemoryRegionOps sungem_mmio_rxdma_ops = {
+     .read = sungem_mmio_rxdma_read,
+     .write = sungem_mmio_rxdma_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .impl = {
+         .min_access_size = 4,
+         .max_access_size = 4,
+@@ -1165,7 +1165,7 @@ static uint64_t sungem_mmio_mac_read(void *opaque, hwaddr addr, unsigned size)
+ static const MemoryRegionOps sungem_mmio_mac_ops = {
+     .read = sungem_mmio_mac_read,
+     .write = sungem_mmio_mac_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .impl = {
+         .min_access_size = 4,
+         .max_access_size = 4,
+@@ -1231,7 +1231,7 @@ static uint64_t sungem_mmio_mif_read(void *opaque, hwaddr addr, unsigned size)
+ static const MemoryRegionOps sungem_mmio_mif_ops = {
+     .read = sungem_mmio_mif_read,
+     .write = sungem_mmio_mif_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .impl = {
+         .min_access_size = 4,
+         .max_access_size = 4,
+@@ -1286,7 +1286,7 @@ static uint64_t sungem_mmio_pcs_read(void *opaque, hwaddr addr, unsigned size)
+ static const MemoryRegionOps sungem_mmio_pcs_ops = {
+     .read = sungem_mmio_pcs_read,
+     .write = sungem_mmio_pcs_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .impl = {
+         .min_access_size = 4,
+         .max_access_size = 4,
+diff --git a/hw/net/sunhme.c b/hw/net/sunhme.c
+index 2243b7cf7b..637f6ab62b 100644
+--- a/hw/net/sunhme.c
++++ b/hw/net/sunhme.c
+@@ -288,7 +288,7 @@ static uint64_t sunhme_seb_read(void *opaque, hwaddr addr,
+ static const MemoryRegionOps sunhme_seb_ops = {
+     .read = sunhme_seb_read,
+     .write = sunhme_seb_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .valid = {
+         .min_access_size = 4,
+         .max_access_size = 4,
+@@ -331,7 +331,7 @@ static uint64_t sunhme_etx_read(void *opaque, hwaddr addr,
+ static const MemoryRegionOps sunhme_etx_ops = {
+     .read = sunhme_etx_read,
+     .write = sunhme_etx_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .valid = {
+         .min_access_size = 4,
+         .max_access_size = 4,
+@@ -364,7 +364,7 @@ static uint64_t sunhme_erx_read(void *opaque, hwaddr addr,
+ static const MemoryRegionOps sunhme_erx_ops = {
+     .read = sunhme_erx_read,
+     .write = sunhme_erx_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .valid = {
+         .min_access_size = 4,
+         .max_access_size = 4,
+@@ -407,7 +407,7 @@ static uint64_t sunhme_mac_read(void *opaque, hwaddr addr,
+ static const MemoryRegionOps sunhme_mac_ops = {
+     .read = sunhme_mac_read,
+     .write = sunhme_mac_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .valid = {
+         .min_access_size = 4,
+         .max_access_size = 4,
+@@ -529,7 +529,7 @@ static uint64_t sunhme_mif_read(void *opaque, hwaddr addr,
+ static const MemoryRegionOps sunhme_mif_ops = {
+     .read = sunhme_mif_read,
+     .write = sunhme_mif_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .valid = {
+         .min_access_size = 4,
+         .max_access_size = 4,
+diff --git a/hw/net/vmxnet3.c b/hw/net/vmxnet3.c
+index b07adeed9c..ce42a92b81 100644
+--- a/hw/net/vmxnet3.c
++++ b/hw/net/vmxnet3.c
+@@ -2146,7 +2146,7 @@ vmxnet3_cleanup_msi(VMXNET3State *s)
+ static const MemoryRegionOps b0_ops = {
+     .read = vmxnet3_io_bar0_read,
+     .write = vmxnet3_io_bar0_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .impl = {
+             .min_access_size = 4,
+             .max_access_size = 4,
+@@ -2156,7 +2156,7 @@ static const MemoryRegionOps b0_ops = {
+ static const MemoryRegionOps b1_ops = {
+     .read = vmxnet3_io_bar1_read,
+     .write = vmxnet3_io_bar1_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .impl = {
+             .min_access_size = 4,
+             .max_access_size = 4,
+diff --git a/hw/net/xgmac.c b/hw/net/xgmac.c
+index 2ea8d2ec72..e6c267060a 100644
+--- a/hw/net/xgmac.c
++++ b/hw/net/xgmac.c
+@@ -312,7 +312,7 @@ static void enet_write(void *opaque, hwaddr addr,
+ static const MemoryRegionOps enet_mem_ops = {
+     .read = enet_read,
+     .write = enet_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static int eth_can_rx(XgmacState *s)
+diff --git a/hw/net/xilinx_axienet.c b/hw/net/xilinx_axienet.c
+index d8716a1f73..02b0c875b6 100644
+--- a/hw/net/xilinx_axienet.c
++++ b/hw/net/xilinx_axienet.c
+@@ -665,7 +665,7 @@ static void enet_write(void *opaque, hwaddr addr,
+ static const MemoryRegionOps enet_ops = {
+     .read = enet_read,
+     .write = enet_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static int eth_can_rx(XilinxAXIEnet *s)
+diff --git a/hw/nvram/ds1225y.c b/hw/nvram/ds1225y.c
+index 934e09bf75..81599d62df 100644
+--- a/hw/nvram/ds1225y.c
++++ b/hw/nvram/ds1225y.c
+@@ -71,7 +71,7 @@ static const MemoryRegionOps nvram_ops = {
          .min_access_size = 1,
          .max_access_size = 1,
      },
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
  };
  
- static void taihu_cpld_reset (void *opaque)
-diff --git a/hw/ppc/ppc405_uc.c b/hw/ppc/ppc405_uc.c
-index 381720aced..97f0c8687a 100644
---- a/hw/ppc/ppc405_uc.c
-+++ b/hw/ppc/ppc405_uc.c
-@@ -724,7 +724,7 @@ static void ppc405_gpio_write(void *opaque, hwaddr addr, uint64_t value,
- static const MemoryRegionOps ppc405_gpio_ops = {
-     .read = ppc405_gpio_read,
-     .write = ppc405_gpio_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+ static int nvram_post_load(void *opaque, int version_id)
+diff --git a/hw/nvram/fw_cfg.c b/hw/nvram/fw_cfg.c
+index 7dc3ac378e..4c62667afd 100644
+--- a/hw/nvram/fw_cfg.c
++++ b/hw/nvram/fw_cfg.c
+@@ -544,7 +544,7 @@ static const MemoryRegionOps fw_cfg_data_mem_ops = {
+ static const MemoryRegionOps fw_cfg_comb_mem_ops = {
+     .read = fw_cfg_data_read,
+     .write = fw_cfg_comb_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .valid.accepts = fw_cfg_comb_valid,
  };
  
- static void ppc405_gpio_reset (void *opaque)
-@@ -1106,7 +1106,7 @@ static const MemoryRegionOps gpt_ops = {
-     .write = ppc4xx_gpt_write,
+diff --git a/hw/nvram/nrf51_nvm.c b/hw/nvram/nrf51_nvm.c
+index 4d678f994e..69b158a666 100644
+--- a/hw/nvram/nrf51_nvm.c
++++ b/hw/nvram/nrf51_nvm.c
+@@ -98,7 +98,7 @@ static const MemoryRegionOps ficr_ops = {
+     .write = ficr_write,
+     .impl.min_access_size = 4,
+     .impl.max_access_size = 4,
+-    .endianness = DEVICE_LITTLE_ENDIAN
++    .endianness = MO_LE
+ };
+ 
+ /*
+@@ -191,7 +191,7 @@ static const MemoryRegionOps uicr_ops = {
+     .write = uicr_write,
+     .impl.min_access_size = 4,
+     .impl.max_access_size = 4,
+-    .endianness = DEVICE_LITTLE_ENDIAN
++    .endianness = MO_LE
+ };
+ 
+ 
+@@ -270,7 +270,7 @@ static const MemoryRegionOps io_ops = {
+         .write = io_write,
+         .impl.min_access_size = 4,
+         .impl.max_access_size = 4,
+-        .endianness = DEVICE_LITTLE_ENDIAN,
++        .endianness = MO_LE,
+ };
+ 
+ 
+@@ -303,7 +303,7 @@ static const MemoryRegionOps flash_ops = {
+     .write = flash_write,
      .valid.min_access_size = 4,
      .valid.max_access_size = 4,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
  };
  
- static void ppc4xx_gpt_cb (void *opaque)
-diff --git a/hw/riscv/sifive_prci.c b/hw/riscv/sifive_prci.c
-index 9837b6166f..65cfd22280 100644
---- a/hw/riscv/sifive_prci.c
-+++ b/hw/riscv/sifive_prci.c
-@@ -75,7 +75,7 @@ static void sifive_prci_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps sifive_prci_ops = {
-     .read = sifive_prci_read,
-     .write = sifive_prci_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .valid = {
-         .min_access_size = 4,
-         .max_access_size = 4
-diff --git a/hw/riscv/sifive_test.c b/hw/riscv/sifive_test.c
-index afbb3aaf34..401755f477 100644
---- a/hw/riscv/sifive_test.c
-+++ b/hw/riscv/sifive_test.c
-@@ -53,7 +53,7 @@ static void sifive_test_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps sifive_test_ops = {
-     .read = sifive_test_read,
-     .write = sifive_test_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .valid = {
-         .min_access_size = 4,
-         .max_access_size = 4
-diff --git a/hw/riscv/sifive_uart.c b/hw/riscv/sifive_uart.c
-index 9de42b1680..829d52ccf9 100644
---- a/hw/riscv/sifive_uart.c
-+++ b/hw/riscv/sifive_uart.c
-@@ -134,7 +134,7 @@ uart_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps uart_ops = {
-     .read = uart_read,
-     .write = uart_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .valid = {
-         .min_access_size = 4,
-         .max_access_size = 4
-diff --git a/hw/scsi/esp.c b/hw/scsi/esp.c
-index 841d79b60e..531cfeff89 100644
---- a/hw/scsi/esp.c
-+++ b/hw/scsi/esp.c
-@@ -637,7 +637,7 @@ static uint64_t sysbus_esp_mem_read(void *opaque, hwaddr addr,
- static const MemoryRegionOps sysbus_esp_mem_ops = {
-     .read = sysbus_esp_mem_read,
-     .write = sysbus_esp_mem_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .valid.accepts = esp_mem_accepts,
- };
+ static void nrf51_nvm_init(Object *obj)
+diff --git a/hw/pci-host/designware.c b/hw/pci-host/designware.c
+index 71e9b0d9b5..d2bf587a30 100644
+--- a/hw/pci-host/designware.c
++++ b/hw/pci-host/designware.c
+@@ -78,7 +78,7 @@ static void designware_pcie_root_msi_write(void *opaque, hwaddr addr,
  
-diff --git a/hw/sd/bcm2835_sdhost.c b/hw/sd/bcm2835_sdhost.c
-index 4a80fbcc86..6b56e2eb91 100644
---- a/hw/sd/bcm2835_sdhost.c
-+++ b/hw/sd/bcm2835_sdhost.c
-@@ -372,7 +372,7 @@ static void bcm2835_sdhost_write(void *opaque, hwaddr offset,
- static const MemoryRegionOps bcm2835_sdhost_ops = {
-     .read = bcm2835_sdhost_read,
-     .write = bcm2835_sdhost_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static const VMStateDescription vmstate_bcm2835_sdhost = {
-diff --git a/hw/sd/milkymist-memcard.c b/hw/sd/milkymist-memcard.c
-index 926e1af475..d66a1ccf2a 100644
---- a/hw/sd/milkymist-memcard.c
-+++ b/hw/sd/milkymist-memcard.c
-@@ -236,7 +236,7 @@ static const MemoryRegionOps memcard_mmio_ops = {
-         .min_access_size = 4,
-         .max_access_size = 4,
-     },
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static void milkymist_memcard_reset(DeviceState *d)
-diff --git a/hw/sd/omap_mmc.c b/hw/sd/omap_mmc.c
-index c6e516b611..6f9cf61c40 100644
---- a/hw/sd/omap_mmc.c
-+++ b/hw/sd/omap_mmc.c
-@@ -571,7 +571,7 @@ static void omap_mmc_write(void *opaque, hwaddr offset,
- static const MemoryRegionOps omap_mmc_ops = {
-     .read = omap_mmc_read,
-     .write = omap_mmc_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static void omap_mmc_cover_cb(void *opaque, int line, int level)
-diff --git a/hw/sd/pxa2xx_mmci.c b/hw/sd/pxa2xx_mmci.c
-index 8f9ab0ec16..431e5e0415 100644
---- a/hw/sd/pxa2xx_mmci.c
-+++ b/hw/sd/pxa2xx_mmci.c
-@@ -472,7 +472,7 @@ static void pxa2xx_mmci_write(void *opaque,
- static const MemoryRegionOps pxa2xx_mmci_ops = {
-     .read = pxa2xx_mmci_read,
-     .write = pxa2xx_mmci_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- PXA2xxMMCIState *pxa2xx_mmci_init(MemoryRegion *sysmem,
-diff --git a/hw/sh4/r2d.c b/hw/sh4/r2d.c
-index ee0840f380..6b59eb99d9 100644
---- a/hw/sh4/r2d.c
-+++ b/hw/sh4/r2d.c
-@@ -179,7 +179,7 @@ static const MemoryRegionOps r2d_fpga_ops = {
-     .write = r2d_fpga_write,
-     .impl.min_access_size = 2,
-     .impl.max_access_size = 2,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static qemu_irq *r2d_fpga_init(MemoryRegion *sysmem,
-diff --git a/hw/sh4/sh7750.c b/hw/sh4/sh7750.c
-index d660714443..696052c56f 100644
---- a/hw/sh4/sh7750.c
-+++ b/hw/sh4/sh7750.c
-@@ -488,7 +488,7 @@ static const MemoryRegionOps sh7750_mem_ops = {
-     .write = sh7750_mem_writefn,
-     .valid.min_access_size = 1,
-     .valid.max_access_size = 4,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- /* sh775x interrupt controller tables for sh_intc.c
-@@ -749,7 +749,7 @@ static void sh7750_mmct_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps sh7750_mmct_ops = {
-     .read = sh7750_mmct_read,
-     .write = sh7750_mmct_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- SH7750State *sh7750_init(SuperHCPU *cpu, MemoryRegion *sysmem)
-diff --git a/hw/sh4/sh_pci.c b/hw/sh4/sh_pci.c
-index 71afd23b67..133a5ac5ae 100644
---- a/hw/sh4/sh_pci.c
-+++ b/hw/sh4/sh_pci.c
-@@ -104,7 +104,7 @@ static uint64_t sh_pci_reg_read (void *p, hwaddr addr,
- static const MemoryRegionOps sh_pci_reg_ops = {
-     .read = sh_pci_reg_read,
-     .write = sh_pci_reg_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+ static const MemoryRegionOps designware_pci_host_msi_ops = {
+     .write = designware_pcie_root_msi_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
      .valid = {
          .min_access_size = 4,
          .max_access_size = 4,
-diff --git a/hw/sparc/sun4m_iommu.c b/hw/sparc/sun4m_iommu.c
-index ccf46a5147..8f8546e5ae 100644
---- a/hw/sparc/sun4m_iommu.c
-+++ b/hw/sparc/sun4m_iommu.c
-@@ -238,7 +238,7 @@ static void iommu_mem_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps iommu_mem_ops = {
-     .read = iommu_mem_read,
-     .write = iommu_mem_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+@@ -238,7 +238,7 @@ static void designware_pcie_root_data_write(void *opaque, hwaddr addr,
+ static const MemoryRegionOps designware_pci_host_conf_ops = {
+     .read = designware_pcie_root_data_read,
+     .write = designware_pcie_root_data_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
      .valid = {
-         .min_access_size = 4,
+         .min_access_size = 1,
          .max_access_size = 4,
-diff --git a/hw/sparc64/sun4u.c b/hw/sparc64/sun4u.c
-index 1ded2a4c9a..a5d2ee9ba2 100644
---- a/hw/sparc64/sun4u.c
-+++ b/hw/sparc64/sun4u.c
-@@ -252,7 +252,7 @@ static void power_mem_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps power_mem_ops = {
-     .read = power_mem_read,
-     .write = power_mem_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .valid = {
-         .min_access_size = 4,
-         .max_access_size = 4,
-diff --git a/hw/ssi/imx_spi.c b/hw/ssi/imx_spi.c
-index 2dd9a631e1..e9257c517e 100644
---- a/hw/ssi/imx_spi.c
-+++ b/hw/ssi/imx_spi.c
-@@ -398,7 +398,7 @@ static void imx_spi_write(void *opaque, hwaddr offset, uint64_t value,
- static const struct MemoryRegionOps imx_spi_ops = {
-     .read = imx_spi_read,
-     .write = imx_spi_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .valid = {
+@@ -623,7 +623,7 @@ static void designware_pcie_host_mmio_write(void *opaque, hwaddr addr,
+ static const MemoryRegionOps designware_pci_mmio_ops = {
+     .read       = designware_pcie_host_mmio_read,
+     .write      = designware_pcie_host_mmio_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .impl = {
          /*
           * Our device would not work correctly if the guest was doing
-diff --git a/hw/ssi/omap_spi.c b/hw/ssi/omap_spi.c
-index 7c7e689707..08e593bf15 100644
---- a/hw/ssi/omap_spi.c
-+++ b/hw/ssi/omap_spi.c
-@@ -344,7 +344,7 @@ static void omap_mcspi_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps omap_mcspi_ops = {
-     .read = omap_mcspi_read,
-     .write = omap_mcspi_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+diff --git a/hw/pci-host/piix.c b/hw/pci-host/piix.c
+index 135c645535..4ed3539566 100644
+--- a/hw/pci-host/piix.c
++++ b/hw/pci-host/piix.c
+@@ -695,7 +695,7 @@ static uint64_t rcr_read(void *opaque, hwaddr addr, unsigned len)
+ static const MemoryRegionOps rcr_ops = {
+     .read = rcr_read,
+     .write = rcr_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN
++    .endianness = MO_LE
  };
  
- struct omap_mcspi_s *omap_mcspi_init(struct omap_target_agent_s *ta, int chnum,
-diff --git a/hw/ssi/xilinx_spi.c b/hw/ssi/xilinx_spi.c
-index a1be0de039..be0fe71bcb 100644
---- a/hw/ssi/xilinx_spi.c
-+++ b/hw/ssi/xilinx_spi.c
-@@ -315,7 +315,7 @@ done:
+ static void piix3_realize(PCIDevice *dev, Error **errp)
+diff --git a/hw/pci-host/prep.c b/hw/pci-host/prep.c
+index 85d7ba9037..aa6b78132d 100644
+--- a/hw/pci-host/prep.c
++++ b/hw/pci-host/prep.c
+@@ -110,7 +110,7 @@ static uint64_t raven_pci_io_read(void *opaque, hwaddr addr,
+ static const MemoryRegionOps raven_pci_io_ops = {
+     .read = raven_pci_io_read,
+     .write = raven_pci_io_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static uint64_t raven_intack_read(void *opaque, hwaddr addr,
+@@ -188,7 +188,7 @@ static void raven_io_write(void *opaque, hwaddr addr,
+ static const MemoryRegionOps raven_io_ops = {
+     .read = raven_io_read,
+     .write = raven_io_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .impl.max_access_size = 4,
+     .valid.unaligned = true,
+ };
+diff --git a/hw/pci-host/q35.c b/hw/pci-host/q35.c
+index 485e2a02af..0a31a500cc 100644
+--- a/hw/pci-host/q35.c
++++ b/hw/pci-host/q35.c
+@@ -289,12 +289,12 @@ static void tseg_blackhole_write(void *opaque, hwaddr addr, uint64_t val,
+ static const MemoryRegionOps tseg_blackhole_ops = {
+     .read = tseg_blackhole_read,
+     .write = tseg_blackhole_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .valid.min_access_size = 1,
+     .valid.max_access_size = 4,
+     .impl.min_access_size = 4,
+     .impl.max_access_size = 4,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ /* PCIe MMCFG */
+diff --git a/hw/pci-host/sabre.c b/hw/pci-host/sabre.c
+index fae20ee97c..7f9520bcc4 100644
+--- a/hw/pci-host/sabre.c
++++ b/hw/pci-host/sabre.c
+@@ -370,7 +370,7 @@ static void sabre_reset(DeviceState *d)
+ static const MemoryRegionOps pci_config_ops = {
+     .read = sabre_pci_config_read,
+     .write = sabre_pci_config_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static void sabre_realize(DeviceState *dev, Error **errp)
+diff --git a/hw/pci-host/uninorth.c b/hw/pci-host/uninorth.c
+index 75bc506965..c3c2c85192 100644
+--- a/hw/pci-host/uninorth.c
++++ b/hw/pci-host/uninorth.c
+@@ -109,7 +109,7 @@ static uint64_t unin_data_read(void *opaque, hwaddr addr,
+ static const MemoryRegionOps unin_data_ops = {
+     .read = unin_data_read,
+     .write = unin_data_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static void pci_unin_init_irqs(UNINHostState *s)
+diff --git a/hw/pci-host/versatile.c b/hw/pci-host/versatile.c
+index df7212237d..cd4d1c623d 100644
+--- a/hw/pci-host/versatile.c
++++ b/hw/pci-host/versatile.c
+@@ -243,7 +243,7 @@ static uint64_t pci_vpb_reg_read(void *opaque, hwaddr addr,
+ static const MemoryRegionOps pci_vpb_reg_ops = {
+     .read = pci_vpb_reg_read,
+     .write = pci_vpb_reg_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .valid = {
+         .min_access_size = 4,
+         .max_access_size = 4,
+@@ -309,7 +309,7 @@ static uint64_t pci_vpb_config_read(void *opaque, hwaddr addr,
+ static const MemoryRegionOps pci_vpb_config_ops = {
+     .read = pci_vpb_config_read,
+     .write = pci_vpb_config_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static int pci_vpb_map_irq(PCIDevice *d, int irq_num)
+diff --git a/hw/pci/msix.c b/hw/pci/msix.c
+index 29187898f2..bcec8aa74b 100644
+--- a/hw/pci/msix.c
++++ b/hw/pci/msix.c
+@@ -196,7 +196,7 @@ static void msix_table_mmio_write(void *opaque, hwaddr addr,
+ static const MemoryRegionOps msix_table_mmio_ops = {
+     .read = msix_table_mmio_read,
+     .write = msix_table_mmio_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .valid = {
+         .min_access_size = 4,
+         .max_access_size = 4,
+@@ -224,7 +224,7 @@ static void msix_pba_mmio_write(void *opaque, hwaddr addr,
+ static const MemoryRegionOps msix_pba_mmio_ops = {
+     .read = msix_pba_mmio_read,
+     .write = msix_pba_mmio_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .valid = {
+         .min_access_size = 4,
+         .max_access_size = 4,
+diff --git a/hw/pci/pci_host.c b/hw/pci/pci_host.c
+index c5f9244934..ed407d096d 100644
+--- a/hw/pci/pci_host.c
++++ b/hw/pci/pci_host.c
+@@ -190,7 +190,7 @@ static uint64_t pci_host_data_read(void *opaque,
+ const MemoryRegionOps pci_host_conf_le_ops = {
+     .read = pci_host_config_read,
+     .write = pci_host_config_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ const MemoryRegionOps pci_host_conf_be_ops = {
+@@ -202,7 +202,7 @@ const MemoryRegionOps pci_host_conf_be_ops = {
+ const MemoryRegionOps pci_host_data_le_ops = {
+     .read = pci_host_data_read,
+     .write = pci_host_data_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ const MemoryRegionOps pci_host_data_be_ops = {
+diff --git a/hw/pci/pcie_host.c b/hw/pci/pcie_host.c
+index 3534006f99..da10d259c1 100644
+--- a/hw/pci/pcie_host.c
++++ b/hw/pci/pcie_host.c
+@@ -71,7 +71,7 @@ static uint64_t pcie_mmcfg_data_read(void *opaque,
+ static const MemoryRegionOps pcie_mmcfg_ops = {
+     .read = pcie_mmcfg_data_read,
+     .write = pcie_mmcfg_data_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static void pcie_host_init(Object *obj)
+diff --git a/hw/pci/shpc.c b/hw/pci/shpc.c
+index 7f0aa28e44..cb38d643f2 100644
+--- a/hw/pci/shpc.c
++++ b/hw/pci/shpc.c
+@@ -478,7 +478,7 @@ static void shpc_mmio_write(void *opaque, hwaddr addr,
+ static const MemoryRegionOps shpc_mmio_ops = {
+     .read = shpc_mmio_read,
+     .write = shpc_mmio_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .valid = {
+         /* SHPC ECN requires dword accesses, but the original 1.0 spec doesn't.
+          * It's easier to suppport all sizes than worry about it. */
+diff --git a/hw/ppc/ppc440_pcix.c b/hw/ppc/ppc440_pcix.c
+index 2ee2d4f4fc..c5b9c32f81 100644
+--- a/hw/ppc/ppc440_pcix.c
++++ b/hw/ppc/ppc440_pcix.c
+@@ -393,7 +393,7 @@ static uint64_t ppc440_pcix_reg_read4(void *opaque, hwaddr addr,
+ static const MemoryRegionOps pci_reg_ops = {
+     .read = ppc440_pcix_reg_read4,
+     .write = ppc440_pcix_reg_write4,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static void ppc440_pcix_reset(DeviceState *dev)
+@@ -464,7 +464,7 @@ static uint64_t pci_host_data_read(void *opaque,
+ const MemoryRegionOps ppc440_pcix_host_data_ops = {
+     .read = pci_host_data_read,
+     .write = pci_host_data_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static void ppc440_pcix_realize(DeviceState *dev, Error **errp)
+diff --git a/hw/ppc/ppc4xx_pci.c b/hw/ppc/ppc4xx_pci.c
+index 3ea47df71f..860f1b7341 100644
+--- a/hw/ppc/ppc4xx_pci.c
++++ b/hw/ppc/ppc4xx_pci.c
+@@ -229,7 +229,7 @@ static uint64_t ppc4xx_pci_reg_read4(void *opaque, hwaddr offset,
+ static const MemoryRegionOps pci_reg_ops = {
+     .read = ppc4xx_pci_reg_read4,
+     .write = ppc4xx_pci_reg_write4,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static void ppc4xx_pci_reset(void *opaque)
+diff --git a/hw/ppc/spapr_pci.c b/hw/ppc/spapr_pci.c
+index deb0b0c80c..f71a06b3af 100644
+--- a/hw/ppc/spapr_pci.c
++++ b/hw/ppc/spapr_pci.c
+@@ -757,7 +757,7 @@ static const MemoryRegionOps spapr_msi_ops = {
+     /* There is no .read as the read result is undefined by PCI spec */
+     .read = NULL,
+     .write = spapr_msi_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN
++    .endianness = MO_LE
+ };
+ 
+ /*
+diff --git a/hw/ppc/virtex_ml507.c b/hw/ppc/virtex_ml507.c
+index 68625522d8..18ab4b8c87 100644
+--- a/hw/ppc/virtex_ml507.c
++++ b/hw/ppc/virtex_ml507.c
+@@ -243,7 +243,7 @@ static void virtex_init(MachineState *machine)
+     }
+ 
+     serial_mm_init(address_space_mem, UART16550_BASEADDR, 2, irq[UART16550_IRQ],
+-                   115200, serial_hd(0), DEVICE_LITTLE_ENDIAN);
++                   115200, serial_hd(0), MO_LE);
+ 
+     /* 2 timers at irq 2 @ 62 Mhz.  */
+     dev = qdev_create(NULL, "xlnx.xps-timer");
+diff --git a/hw/rdma/vmw/pvrdma_main.c b/hw/rdma/vmw/pvrdma_main.c
+index 3e36e13013..c2df742180 100644
+--- a/hw/rdma/vmw/pvrdma_main.c
++++ b/hw/rdma/vmw/pvrdma_main.c
+@@ -437,7 +437,7 @@ static void pvrdma_regs_write(void *opaque, hwaddr addr, uint64_t val,
+ static const MemoryRegionOps regs_ops = {
+     .read = pvrdma_regs_read,
+     .write = pvrdma_regs_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .impl = {
+         .min_access_size = sizeof(uint32_t),
+         .max_access_size = sizeof(uint32_t),
+@@ -505,7 +505,7 @@ static void pvrdma_uar_write(void *opaque, hwaddr addr, uint64_t val,
+ static const MemoryRegionOps uar_ops = {
+     .read = pvrdma_uar_read,
+     .write = pvrdma_uar_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .impl = {
+         .min_access_size = sizeof(uint32_t),
+         .max_access_size = sizeof(uint32_t),
+diff --git a/hw/riscv/sifive_clint.c b/hw/riscv/sifive_clint.c
+index e5a8f75cee..43c26fc96e 100644
+--- a/hw/riscv/sifive_clint.c
++++ b/hw/riscv/sifive_clint.c
+@@ -177,7 +177,7 @@ static void sifive_clint_write(void *opaque, hwaddr addr, uint64_t value,
+ static const MemoryRegionOps sifive_clint_ops = {
+     .read = sifive_clint_read,
+     .write = sifive_clint_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .valid = {
+         .min_access_size = 4,
+         .max_access_size = 4
+diff --git a/hw/riscv/sifive_gpio.c b/hw/riscv/sifive_gpio.c
+index 5c7c596e6b..13d41aa0ba 100644
+--- a/hw/riscv/sifive_gpio.c
++++ b/hw/riscv/sifive_gpio.c
+@@ -274,7 +274,7 @@ static void sifive_gpio_write(void *opaque, hwaddr offset,
+ static const MemoryRegionOps gpio_ops = {
+     .read =  sifive_gpio_read,
+     .write = sifive_gpio_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .impl.min_access_size = 4,
+     .impl.max_access_size = 4,
+ };
+diff --git a/hw/riscv/sifive_plic.c b/hw/riscv/sifive_plic.c
+index 64a1a10380..a64b20c265 100644
+--- a/hw/riscv/sifive_plic.c
++++ b/hw/riscv/sifive_plic.c
+@@ -355,7 +355,7 @@ err:
+ static const MemoryRegionOps sifive_plic_ops = {
+     .read = sifive_plic_read,
+     .write = sifive_plic_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .valid = {
+         .min_access_size = 4,
+         .max_access_size = 4
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index 9bced28486..8e767c8faa 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -502,7 +502,7 @@ static void riscv_virt_board_init(MachineState *machine)
+ 
+     serial_mm_init(system_memory, memmap[VIRT_UART0].base,
+         0, qdev_get_gpio_in(DEVICE(s->plic), UART0_IRQ), 399193,
+-        serial_hd(0), DEVICE_LITTLE_ENDIAN);
++        serial_hd(0), MO_LE);
+ 
+     g_free(plic_hart_config);
+ }
+diff --git a/hw/s390x/s390-pci-bus.c b/hw/s390x/s390-pci-bus.c
+index 963a41c7f5..3228ff28bd 100644
+--- a/hw/s390x/s390-pci-bus.c
++++ b/hw/s390x/s390-pci-bus.c
+@@ -690,7 +690,7 @@ static uint64_t s390_msi_ctrl_read(void *opaque, hwaddr addr, unsigned size)
+ static const MemoryRegionOps s390_msi_ctrl_ops = {
+     .write = s390_msi_ctrl_write,
+     .read = s390_msi_ctrl_read,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ void s390_pci_iommu_enable(S390PCIIOMMU *iommu)
+diff --git a/hw/scsi/esp-pci.c b/hw/scsi/esp-pci.c
+index d5a1f9e017..889ab35cbe 100644
+--- a/hw/scsi/esp-pci.c
++++ b/hw/scsi/esp-pci.c
+@@ -293,7 +293,7 @@ static void esp_pci_dma_memory_write(void *opaque, uint8_t *buf, int len)
+ static const MemoryRegionOps esp_pci_io_ops = {
+     .read = esp_pci_io_read,
+     .write = esp_pci_io_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .impl = {
+         .min_access_size = 1,
+         .max_access_size = 4,
+diff --git a/hw/scsi/lsi53c895a.c b/hw/scsi/lsi53c895a.c
+index ec53b14f7f..5c3977c926 100644
+--- a/hw/scsi/lsi53c895a.c
++++ b/hw/scsi/lsi53c895a.c
+@@ -2105,7 +2105,7 @@ static uint64_t lsi_mmio_read(void *opaque, hwaddr addr,
+ static const MemoryRegionOps lsi_mmio_ops = {
+     .read = lsi_mmio_read,
+     .write = lsi_mmio_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .impl = {
+         .min_access_size = 1,
+         .max_access_size = 1,
+@@ -2129,7 +2129,7 @@ static uint64_t lsi_ram_read(void *opaque, hwaddr addr,
+ static const MemoryRegionOps lsi_ram_ops = {
+     .read = lsi_ram_read,
+     .write = lsi_ram_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static uint64_t lsi_io_read(void *opaque, hwaddr addr,
+@@ -2149,7 +2149,7 @@ static void lsi_io_write(void *opaque, hwaddr addr,
+ static const MemoryRegionOps lsi_io_ops = {
+     .read = lsi_io_read,
+     .write = lsi_io_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .impl = {
+         .min_access_size = 1,
+         .max_access_size = 1,
+diff --git a/hw/scsi/megasas.c b/hw/scsi/megasas.c
+index de9bd20887..752da4f6a5 100644
+--- a/hw/scsi/megasas.c
++++ b/hw/scsi/megasas.c
+@@ -2154,7 +2154,7 @@ static void megasas_mmio_write(void *opaque, hwaddr addr,
+ static const MemoryRegionOps megasas_mmio_ops = {
+     .read = megasas_mmio_read,
+     .write = megasas_mmio_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .impl = {
+         .min_access_size = 8,
+         .max_access_size = 8,
+@@ -2176,7 +2176,7 @@ static void megasas_port_write(void *opaque, hwaddr addr,
+ static const MemoryRegionOps megasas_port_ops = {
+     .read = megasas_port_read,
+     .write = megasas_port_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .impl = {
+         .min_access_size = 4,
+         .max_access_size = 4,
+@@ -2198,7 +2198,7 @@ static void megasas_queue_write(void *opaque, hwaddr addr,
+ static const MemoryRegionOps megasas_queue_ops = {
+     .read = megasas_queue_read,
+     .write = megasas_queue_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .impl = {
+         .min_access_size = 8,
+         .max_access_size = 8,
+diff --git a/hw/scsi/mptsas.c b/hw/scsi/mptsas.c
+index b8a4b37cf3..2bdc49d5f7 100644
+--- a/hw/scsi/mptsas.c
++++ b/hw/scsi/mptsas.c
+@@ -1088,7 +1088,7 @@ static void mptsas_mmio_write(void *opaque, hwaddr addr,
+ static const MemoryRegionOps mptsas_mmio_ops = {
+     .read = mptsas_mmio_read,
+     .write = mptsas_mmio_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .impl = {
+         .min_access_size = 4,
+         .max_access_size = 4,
+@@ -1098,7 +1098,7 @@ static const MemoryRegionOps mptsas_mmio_ops = {
+ static const MemoryRegionOps mptsas_port_ops = {
+     .read = mptsas_mmio_read,
+     .write = mptsas_mmio_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .impl = {
+         .min_access_size = 4,
+         .max_access_size = 4,
+@@ -1123,7 +1123,7 @@ static void mptsas_diag_write(void *opaque, hwaddr addr,
+ static const MemoryRegionOps mptsas_diag_ops = {
+     .read = mptsas_diag_read,
+     .write = mptsas_diag_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .impl = {
+         .min_access_size = 4,
+         .max_access_size = 4,
+diff --git a/hw/scsi/vmw_pvscsi.c b/hw/scsi/vmw_pvscsi.c
+index 452a3b63b2..72443f0c66 100644
+--- a/hw/scsi/vmw_pvscsi.c
++++ b/hw/scsi/vmw_pvscsi.c
+@@ -1089,7 +1089,7 @@ pvscsi_cleanup_msi(PVSCSIState *s)
+ static const MemoryRegionOps pvscsi_ops = {
+         .read = pvscsi_io_read,
+         .write = pvscsi_io_write,
+-        .endianness = DEVICE_LITTLE_ENDIAN,
++        .endianness = MO_LE,
+         .impl = {
+                 .min_access_size = 4,
+                 .max_access_size = 4,
+diff --git a/hw/sd/pl181.c b/hw/sd/pl181.c
+index f19d8764e8..907fb7c003 100644
+--- a/hw/sd/pl181.c
++++ b/hw/sd/pl181.c
+@@ -451,7 +451,7 @@ static void pl181_write(void *opaque, hwaddr offset,
+ static const MemoryRegionOps pl181_ops = {
+     .read = pl181_read,
+     .write = pl181_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static void pl181_reset(DeviceState *d)
+diff --git a/hw/sd/sdhci.c b/hw/sd/sdhci.c
+index e08ec3e398..54b604121f 100644
+--- a/hw/sd/sdhci.c
++++ b/hw/sd/sdhci.c
+@@ -1288,7 +1288,7 @@ static const MemoryRegionOps sdhci_mmio_ops = {
+         .max_access_size = 4,
+         .unaligned = false
+     },
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static void sdhci_init_readonly_registers(SDHCIState *s, Error **errp)
+@@ -1743,7 +1743,7 @@ static const MemoryRegionOps usdhc_mmio_ops = {
+         .max_access_size = 4,
+         .unaligned = false
+     },
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static void imx_usdhc_init(Object *obj)
+diff --git a/hw/ssi/aspeed_smc.c b/hw/ssi/aspeed_smc.c
+index 9f3cff5fb6..833ea7b85b 100644
+--- a/hw/ssi/aspeed_smc.c
++++ b/hw/ssi/aspeed_smc.c
+@@ -401,7 +401,7 @@ static void aspeed_smc_flash_default_write(void *opaque, hwaddr addr,
+ static const MemoryRegionOps aspeed_smc_flash_default_ops = {
+     .read = aspeed_smc_flash_default_read,
+     .write = aspeed_smc_flash_default_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .valid = {
+         .min_access_size = 1,
+         .max_access_size = 4,
+@@ -709,7 +709,7 @@ static void aspeed_smc_flash_write(void *opaque, hwaddr addr, uint64_t data,
+ static const MemoryRegionOps aspeed_smc_flash_ops = {
+     .read = aspeed_smc_flash_read,
+     .write = aspeed_smc_flash_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .valid = {
+         .min_access_size = 1,
+         .max_access_size = 4,
+@@ -820,7 +820,7 @@ static void aspeed_smc_write(void *opaque, hwaddr addr, uint64_t data,
+ static const MemoryRegionOps aspeed_smc_ops = {
+     .read = aspeed_smc_read,
+     .write = aspeed_smc_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .valid.unaligned = true,
+ };
+ 
+diff --git a/hw/ssi/mss-spi.c b/hw/ssi/mss-spi.c
+index 914f90f3ad..3cef81565b 100644
+--- a/hw/ssi/mss-spi.c
++++ b/hw/ssi/mss-spi.c
+@@ -361,7 +361,7 @@ static void spi_write(void *opaque, hwaddr addr,
  static const MemoryRegionOps spi_ops = {
      .read = spi_read,
      .write = spi_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .valid = {
-         .min_access_size = 4,
-         .max_access_size = 4
-diff --git a/hw/timer/allwinner-a10-pit.c b/hw/timer/allwinner-a10-pit.c
-index ca5a905059..94fc234503 100644
---- a/hw/timer/allwinner-a10-pit.c
-+++ b/hw/timer/allwinner-a10-pit.c
-@@ -181,7 +181,7 @@ static void a10_pit_write(void *opaque, hwaddr offset, uint64_t value,
- static const MemoryRegionOps a10_pit_ops = {
-     .read = a10_pit_read,
-     .write = a10_pit_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static Property a10_pit_properties[] = {
-diff --git a/hw/timer/altera_timer.c b/hw/timer/altera_timer.c
-index 936b31311d..5fbe700ecd 100644
---- a/hw/timer/altera_timer.c
-+++ b/hw/timer/altera_timer.c
-@@ -147,7 +147,7 @@ static void timer_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps timer_ops = {
-     .read = timer_read,
-     .write = timer_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
      .valid = {
          .min_access_size = 1,
          .max_access_size = 4
-diff --git a/hw/timer/digic-timer.c b/hw/timer/digic-timer.c
-index 021c4ef714..59a5796a42 100644
---- a/hw/timer/digic-timer.c
-+++ b/hw/timer/digic-timer.c
-@@ -122,7 +122,7 @@ static const MemoryRegionOps digic_timer_ops = {
+diff --git a/hw/ssi/pl022.c b/hw/ssi/pl022.c
+index 1501af2850..54a3d13880 100644
+--- a/hw/ssi/pl022.c
++++ b/hw/ssi/pl022.c
+@@ -228,7 +228,7 @@ static void pl022_reset(DeviceState *dev)
+ static const MemoryRegionOps pl022_ops = {
+     .read = pl022_read,
+     .write = pl022_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static int pl022_post_load(void *opaque, int version_id)
+diff --git a/hw/ssi/stm32f2xx_spi.c b/hw/ssi/stm32f2xx_spi.c
+index dbb109b2dc..b68d249b5b 100644
+--- a/hw/ssi/stm32f2xx_spi.c
++++ b/hw/ssi/stm32f2xx_spi.c
+@@ -167,7 +167,7 @@ static void stm32f2xx_spi_write(void *opaque, hwaddr addr,
+ static const MemoryRegionOps stm32f2xx_spi_ops = {
+     .read = stm32f2xx_spi_read,
+     .write = stm32f2xx_spi_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static const VMStateDescription vmstate_stm32f2xx_spi = {
+diff --git a/hw/ssi/xilinx_spips.c b/hw/ssi/xilinx_spips.c
+index e622e38f6d..18c1446118 100644
+--- a/hw/ssi/xilinx_spips.c
++++ b/hw/ssi/xilinx_spips.c
+@@ -1031,7 +1031,7 @@ no_reg_update:
+ static const MemoryRegionOps spips_ops = {
+     .read = xilinx_spips_read,
+     .write = xilinx_spips_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static void xilinx_qspips_invalidate_mmio_ptr(XilinxQSPIPS *q)
+@@ -1122,13 +1122,13 @@ static void xlnx_zynqmp_qspips_write(void *opaque, hwaddr addr,
+ static const MemoryRegionOps qspips_ops = {
+     .read = xilinx_spips_read,
+     .write = xilinx_qspips_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static const MemoryRegionOps xlnx_zynqmp_qspips_ops = {
+     .read = xlnx_zynqmp_qspips_read,
+     .write = xlnx_zynqmp_qspips_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ #define LQSPI_CACHE_SIZE 1024
+@@ -1240,7 +1240,7 @@ static MemTxResult lqspi_write(void *opaque, hwaddr offset, uint64_t value,
+ static const MemoryRegionOps lqspi_ops = {
+     .read_with_attrs = lqspi_read,
+     .write_with_attrs = lqspi_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .impl = {
+         .min_access_size = 4,
+         .max_access_size = 4,
+diff --git a/hw/timer/a9gtimer.c b/hw/timer/a9gtimer.c
+index ffdc78f383..4745e79fe4 100644
+--- a/hw/timer/a9gtimer.c
++++ b/hw/timer/a9gtimer.c
+@@ -258,7 +258,7 @@ static const MemoryRegionOps a9_gtimer_this_ops = {
          .min_access_size = 4,
          .max_access_size = 4,
      },
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
  };
  
- static void digic_timer_init(Object *obj)
-diff --git a/hw/timer/exynos4210_mct.c b/hw/timer/exynos4210_mct.c
-index 77b9af05f4..903449f176 100644
---- a/hw/timer/exynos4210_mct.c
-+++ b/hw/timer/exynos4210_mct.c
-@@ -1416,7 +1416,7 @@ static void exynos4210_mct_write(void *opaque, hwaddr offset,
- static const MemoryRegionOps exynos4210_mct_ops = {
-     .read = exynos4210_mct_read,
-     .write = exynos4210_mct_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- /* MCT init */
-diff --git a/hw/timer/exynos4210_pwm.c b/hw/timer/exynos4210_pwm.c
-index b7fad2ad44..840c74c8db 100644
---- a/hw/timer/exynos4210_pwm.c
-+++ b/hw/timer/exynos4210_pwm.c
-@@ -377,7 +377,7 @@ static void exynos4210_pwm_reset(DeviceState *d)
- static const MemoryRegionOps exynos4210_pwm_ops = {
-     .read = exynos4210_pwm_read,
-     .write = exynos4210_pwm_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- /*
-diff --git a/hw/timer/exynos4210_rtc.c b/hw/timer/exynos4210_rtc.c
-index ea68904229..7928e3e61a 100644
---- a/hw/timer/exynos4210_rtc.c
-+++ b/hw/timer/exynos4210_rtc.c
-@@ -545,7 +545,7 @@ static void exynos4210_rtc_reset(DeviceState *d)
- static const MemoryRegionOps exynos4210_rtc_ops = {
-     .read = exynos4210_rtc_read,
-     .write = exynos4210_rtc_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- /*
-diff --git a/hw/timer/omap_gptimer.c b/hw/timer/omap_gptimer.c
-index c407190138..ed53d5a43b 100644
---- a/hw/timer/omap_gptimer.c
-+++ b/hw/timer/omap_gptimer.c
-@@ -489,7 +489,7 @@ static const MemoryRegionOps omap_gp_timer_ops = {
-     .write = omap_gp_timer_writefn,
-     .valid.min_access_size = 1,
-     .valid.max_access_size = 4,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- struct omap_gp_timer_s *omap_gp_timer_init(struct omap_target_agent_s *ta,
-diff --git a/hw/timer/omap_synctimer.c b/hw/timer/omap_synctimer.c
-index 72b997939b..a3fc08cbf1 100644
---- a/hw/timer/omap_synctimer.c
-+++ b/hw/timer/omap_synctimer.c
-@@ -93,7 +93,7 @@ static const MemoryRegionOps omap_synctimer_ops = {
-     .write = omap_synctimer_writefn,
-     .valid.min_access_size = 1,
-     .valid.max_access_size = 4,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- struct omap_synctimer_s *omap_synctimer_init(struct omap_target_agent_s *ta,
-diff --git a/hw/timer/puv3_ost.c b/hw/timer/puv3_ost.c
-index 6fe370049b..f1d8a25ecd 100644
---- a/hw/timer/puv3_ost.c
-+++ b/hw/timer/puv3_ost.c
-@@ -99,7 +99,7 @@ static const MemoryRegionOps puv3_ost_ops = {
+ static const MemoryRegionOps a9_gtimer_ops = {
+@@ -268,7 +268,7 @@ static const MemoryRegionOps a9_gtimer_ops = {
          .min_access_size = 4,
          .max_access_size = 4,
      },
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
  };
  
- static void puv3_ost_tick(void *opaque)
-diff --git a/hw/timer/pxa2xx_timer.c b/hw/timer/pxa2xx_timer.c
-index 311cd38aac..5764a6ba91 100644
---- a/hw/timer/pxa2xx_timer.c
-+++ b/hw/timer/pxa2xx_timer.c
-@@ -401,7 +401,7 @@ static void pxa2xx_timer_write(void *opaque, hwaddr offset,
- static const MemoryRegionOps pxa2xx_timer_ops = {
-     .read = pxa2xx_timer_read,
-     .write = pxa2xx_timer_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static void pxa2xx_timer_tick(void *opaque)
-diff --git a/hw/timer/sh_timer.c b/hw/timer/sh_timer.c
-index adcc0c138e..80d1571379 100644
---- a/hw/timer/sh_timer.c
-+++ b/hw/timer/sh_timer.c
-@@ -303,7 +303,7 @@ static void tmu012_write(void *opaque, hwaddr offset,
- static const MemoryRegionOps tmu012_ops = {
-     .read = tmu012_read,
-     .write = tmu012_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- void tmu012_init(MemoryRegion *sysmem, hwaddr base,
-diff --git a/hw/timer/slavio_timer.c b/hw/timer/slavio_timer.c
-index 38fd32b62a..8b8494735b 100644
---- a/hw/timer/slavio_timer.c
-+++ b/hw/timer/slavio_timer.c
-@@ -322,7 +322,7 @@ static void slavio_timer_mem_writel(void *opaque, hwaddr addr,
- static const MemoryRegionOps slavio_timer_mem_ops = {
-     .read = slavio_timer_mem_readl,
-     .write = slavio_timer_mem_writel,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .valid = {
+ static void a9_gtimer_reset(DeviceState *dev)
+diff --git a/hw/timer/arm_mptimer.c b/hw/timer/arm_mptimer.c
+index bf6295add1..3c13f86a6d 100644
+--- a/hw/timer/arm_mptimer.c
++++ b/hw/timer/arm_mptimer.c
+@@ -194,7 +194,7 @@ static const MemoryRegionOps arm_thistimer_ops = {
          .min_access_size = 4,
          .max_access_size = 4,
-diff --git a/hw/timer/xilinx_timer.c b/hw/timer/xilinx_timer.c
-index 355518232c..c31d7d7333 100644
---- a/hw/timer/xilinx_timer.c
-+++ b/hw/timer/xilinx_timer.c
-@@ -189,7 +189,7 @@ timer_write(void *opaque, hwaddr addr,
+     },
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static const MemoryRegionOps timerblock_ops = {
+@@ -204,7 +204,7 @@ static const MemoryRegionOps timerblock_ops = {
+         .min_access_size = 4,
+         .max_access_size = 4,
+     },
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static void timerblock_reset(TimerBlock *tb)
+diff --git a/hw/timer/arm_timer.c b/hw/timer/arm_timer.c
+index f95c897d05..ac5b1c0935 100644
+--- a/hw/timer/arm_timer.c
++++ b/hw/timer/arm_timer.c
+@@ -267,7 +267,7 @@ static void sp804_write(void *opaque, hwaddr offset,
+ static const MemoryRegionOps sp804_ops = {
+     .read = sp804_read,
+     .write = sp804_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static const VMStateDescription vmstate_sp804 = {
+@@ -348,7 +348,7 @@ static void icp_pit_write(void *opaque, hwaddr offset,
+ static const MemoryRegionOps icp_pit_ops = {
+     .read = icp_pit_read,
+     .write = icp_pit_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static void icp_pit_init(Object *obj)
+diff --git a/hw/timer/armv7m_systick.c b/hw/timer/armv7m_systick.c
+index b8003e2962..4565d3c144 100644
+--- a/hw/timer/armv7m_systick.c
++++ b/hw/timer/armv7m_systick.c
+@@ -193,7 +193,7 @@ static MemTxResult systick_write(void *opaque, hwaddr addr,
+ static const MemoryRegionOps systick_ops = {
+     .read_with_attrs = systick_read,
+     .write_with_attrs = systick_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .valid.min_access_size = 4,
+     .valid.max_access_size = 4,
+ };
+diff --git a/hw/timer/aspeed_rtc.c b/hw/timer/aspeed_rtc.c
+index e3bd196dc0..803b4ab791 100644
+--- a/hw/timer/aspeed_rtc.c
++++ b/hw/timer/aspeed_rtc.c
+@@ -131,7 +131,7 @@ static void aspeed_rtc_reset(DeviceState *d)
+ static const MemoryRegionOps aspeed_rtc_ops = {
+     .read = aspeed_rtc_read,
+     .write = aspeed_rtc_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static const VMStateDescription vmstate_aspeed_rtc = {
+diff --git a/hw/timer/aspeed_timer.c b/hw/timer/aspeed_timer.c
+index ed81d5c44c..408eb439f3 100644
+--- a/hw/timer/aspeed_timer.c
++++ b/hw/timer/aspeed_timer.c
+@@ -450,7 +450,7 @@ static void aspeed_timer_write(void *opaque, hwaddr offset, uint64_t value,
+ static const MemoryRegionOps aspeed_timer_ops = {
+     .read = aspeed_timer_read,
+     .write = aspeed_timer_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .valid.min_access_size = 4,
+     .valid.max_access_size = 4,
+     .valid.unaligned = false,
+diff --git a/hw/timer/cadence_ttc.c b/hw/timer/cadence_ttc.c
+index 6155d0055f..0752c52da9 100644
+--- a/hw/timer/cadence_ttc.c
++++ b/hw/timer/cadence_ttc.c
+@@ -391,7 +391,7 @@ static void cadence_ttc_write(void *opaque, hwaddr offset,
+ static const MemoryRegionOps cadence_ttc_ops = {
+     .read = cadence_ttc_read,
+     .write = cadence_ttc_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static void cadence_timer_reset(CadenceTimerState *s)
+diff --git a/hw/timer/cmsdk-apb-dualtimer.c b/hw/timer/cmsdk-apb-dualtimer.c
+index 5e2352dd32..dbe1e847ca 100644
+--- a/hw/timer/cmsdk-apb-dualtimer.c
++++ b/hw/timer/cmsdk-apb-dualtimer.c
+@@ -376,7 +376,7 @@ static void cmsdk_apb_dualtimer_write(void *opaque, hwaddr offset,
+ static const MemoryRegionOps cmsdk_apb_dualtimer_ops = {
+     .read = cmsdk_apb_dualtimer_read,
+     .write = cmsdk_apb_dualtimer_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     /* byte/halfword accesses are just zero-padded on reads and writes */
+     .impl.min_access_size = 4,
+     .impl.max_access_size = 4,
+diff --git a/hw/timer/cmsdk-apb-timer.c b/hw/timer/cmsdk-apb-timer.c
+index c83e26566a..c02f4b8f0c 100644
+--- a/hw/timer/cmsdk-apb-timer.c
++++ b/hw/timer/cmsdk-apb-timer.c
+@@ -171,7 +171,7 @@ static void cmsdk_apb_timer_write(void *opaque, hwaddr offset, uint64_t value,
+ static const MemoryRegionOps cmsdk_apb_timer_ops = {
+     .read = cmsdk_apb_timer_read,
+     .write = cmsdk_apb_timer_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static void cmsdk_apb_timer_tick(void *opaque)
+diff --git a/hw/timer/etraxfs_timer.c b/hw/timer/etraxfs_timer.c
+index d62025b879..582a000241 100644
+--- a/hw/timer/etraxfs_timer.c
++++ b/hw/timer/etraxfs_timer.c
+@@ -300,7 +300,7 @@ timer_write(void *opaque, hwaddr addr,
  static const MemoryRegionOps timer_ops = {
      .read = timer_read,
      .write = timer_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
      .valid = {
          .min_access_size = 4,
          .max_access_size = 4
-diff --git a/hw/usb/chipidea.c b/hw/usb/chipidea.c
-index 3dcd22ccba..5085a7fcfd 100644
---- a/hw/usb/chipidea.c
-+++ b/hw/usb/chipidea.c
-@@ -35,7 +35,7 @@ static void chipidea_write(void *opaque, hwaddr offset,
- static const struct MemoryRegionOps chipidea_ops = {
-     .read = chipidea_read,
-     .write = chipidea_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .impl = {
-         /*
-          * Our device would not work correctly if the guest was doing
-@@ -76,7 +76,7 @@ static void chipidea_dc_write(void *opaque, hwaddr offset,
- static const struct MemoryRegionOps chipidea_dc_ops = {
-     .read = chipidea_dc_read,
-     .write = chipidea_dc_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .impl = {
-         /*
-          * Our device would not work correctly if the guest was doing
-diff --git a/hw/usb/tusb6010.c b/hw/usb/tusb6010.c
-index 17580876c6..cf1f6b6cfb 100644
---- a/hw/usb/tusb6010.c
-+++ b/hw/usb/tusb6010.c
-@@ -679,7 +679,7 @@ static const MemoryRegionOps tusb_async_ops = {
-     .write = tusb_async_writefn,
-     .valid.min_access_size = 1,
-     .valid.max_access_size = 4,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+diff --git a/hw/timer/hpet.c b/hw/timer/hpet.c
+index 380abeb709..8d628af08c 100644
+--- a/hw/timer/hpet.c
++++ b/hw/timer/hpet.c
+@@ -676,7 +676,7 @@ static const MemoryRegionOps hpet_ram_ops = {
+         .min_access_size = 4,
+         .max_access_size = 4,
+     },
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
  };
  
- static void tusb_otg_tick(void *opaque)
-diff --git a/hw/virtio/virtio-mmio.c b/hw/virtio/virtio-mmio.c
-index eccc795f28..25f72fb374 100644
---- a/hw/virtio/virtio-mmio.c
-+++ b/hw/virtio/virtio-mmio.c
-@@ -316,7 +316,7 @@ static void virtio_mmio_write(void *opaque, hwaddr offset, uint64_t value,
- static const MemoryRegionOps virtio_mem_ops = {
-     .read = virtio_mmio_read,
-     .write = virtio_mmio_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+ static void hpet_reset(DeviceState *d)
+diff --git a/hw/timer/i8254.c b/hw/timer/i8254.c
+index a4be7330ef..5dd47f49b1 100644
+--- a/hw/timer/i8254.c
++++ b/hw/timer/i8254.c
+@@ -315,7 +315,7 @@ static const MemoryRegionOps pit_ioport_ops = {
+         .min_access_size = 1,
+         .max_access_size = 1,
+     },
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
  };
  
- static void virtio_mmio_update_irq(DeviceState *opaque, uint16_t vector)
-diff --git a/hw/xen/xen_pt.c b/hw/xen/xen_pt.c
-index 8fbaf2eae9..794a1f5a32 100644
---- a/hw/xen/xen_pt.c
-+++ b/hw/xen/xen_pt.c
-@@ -437,7 +437,7 @@ static void xen_pt_bar_write(void *o, hwaddr addr, uint64_t val,
- }
- 
- static const MemoryRegionOps ops = {
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
-     .read = xen_pt_bar_read,
-     .write = xen_pt_bar_write,
+ static void pit_post_load(PITCommonState *s)
+diff --git a/hw/timer/imx_epit.c b/hw/timer/imx_epit.c
+index 7e605d29c7..2e9861fafa 100644
+--- a/hw/timer/imx_epit.c
++++ b/hw/timer/imx_epit.c
+@@ -284,7 +284,7 @@ static void imx_epit_cmp(void *opaque)
+ static const MemoryRegionOps imx_epit_ops = {
+     .read = imx_epit_read,
+     .write = imx_epit_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
  };
-diff --git a/hw/xen/xen_pt_msi.c b/hw/xen/xen_pt_msi.c
-index fb4b887b92..d12cc1f923 100644
---- a/hw/xen/xen_pt_msi.c
-+++ b/hw/xen/xen_pt_msi.c
-@@ -507,7 +507,7 @@ static bool pci_msix_accepts(void *opaque, hwaddr addr,
- static const MemoryRegionOps pci_msix_ops = {
-     .read = pci_msix_read,
-     .write = pci_msix_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+ 
+ static const VMStateDescription vmstate_imx_timer_epit = {
+diff --git a/hw/timer/imx_gpt.c b/hw/timer/imx_gpt.c
+index 27bacdb758..d2e9f90cc1 100644
+--- a/hw/timer/imx_gpt.c
++++ b/hw/timer/imx_gpt.c
+@@ -476,7 +476,7 @@ static void imx_gpt_timeout(void *opaque)
+ static const MemoryRegionOps imx_gpt_ops = {
+     .read = imx_gpt_read,
+     .write = imx_gpt_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ 
+diff --git a/hw/timer/m48t59.c b/hw/timer/m48t59.c
+index a9fc2f981a..191b19494b 100644
+--- a/hw/timer/m48t59.c
++++ b/hw/timer/m48t59.c
+@@ -562,7 +562,7 @@ const MemoryRegionOps m48t59_io_ops = {
+         .min_access_size = 1,
+         .max_access_size = 1,
+     },
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ /* Initialisation routine */
+diff --git a/hw/timer/mc146818rtc.c b/hw/timer/mc146818rtc.c
+index 6cb378751b..8fe25acd25 100644
+--- a/hw/timer/mc146818rtc.c
++++ b/hw/timer/mc146818rtc.c
+@@ -919,7 +919,7 @@ static const MemoryRegionOps cmos_ops = {
+         .min_access_size = 1,
+         .max_access_size = 1,
+     },
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static void rtc_get_date(Object *obj, struct tm *current_tm, Error **errp)
+diff --git a/hw/timer/mss-timer.c b/hw/timer/mss-timer.c
+index b9edb39837..7903087f64 100644
+--- a/hw/timer/mss-timer.c
++++ b/hw/timer/mss-timer.c
+@@ -200,7 +200,7 @@ timer_write(void *opaque, hwaddr offset,
+ static const MemoryRegionOps timer_ops = {
+     .read = timer_read,
+     .write = timer_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .valid = {
+         .min_access_size = 1,
+         .max_access_size = 4
+diff --git a/hw/timer/nrf51_timer.c b/hw/timer/nrf51_timer.c
+index e04046eb15..0c6c7f397a 100644
+--- a/hw/timer/nrf51_timer.c
++++ b/hw/timer/nrf51_timer.c
+@@ -302,7 +302,7 @@ static void nrf51_timer_write(void *opaque, hwaddr offset,
+ static const MemoryRegionOps rng_ops = {
+     .read =  nrf51_timer_read,
+     .write = nrf51_timer_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .impl.min_access_size = 4,
+     .impl.max_access_size = 4,
+ };
+diff --git a/hw/timer/pl031.c b/hw/timer/pl031.c
+index 7ac2a0ca37..9101fcb8c9 100644
+--- a/hw/timer/pl031.c
++++ b/hw/timer/pl031.c
+@@ -178,7 +178,7 @@ static void pl031_write(void * opaque, hwaddr offset,
+ static const MemoryRegionOps pl031_ops = {
+     .read = pl031_read,
+     .write = pl031_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static void pl031_init(Object *obj)
+diff --git a/hw/timer/stm32f2xx_timer.c b/hw/timer/stm32f2xx_timer.c
+index 88ae286b14..3fccab99d3 100644
+--- a/hw/timer/stm32f2xx_timer.c
++++ b/hw/timer/stm32f2xx_timer.c
+@@ -268,7 +268,7 @@ static void stm32f2xx_timer_write(void *opaque, hwaddr offset,
+ static const MemoryRegionOps stm32f2xx_timer_ops = {
+     .read = stm32f2xx_timer_read,
+     .write = stm32f2xx_timer_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static const VMStateDescription vmstate_stm32f2xx_timer = {
+diff --git a/hw/timer/xlnx-zynqmp-rtc.c b/hw/timer/xlnx-zynqmp-rtc.c
+index 5692db98c2..e153fd421a 100644
+--- a/hw/timer/xlnx-zynqmp-rtc.c
++++ b/hw/timer/xlnx-zynqmp-rtc.c
+@@ -175,7 +175,7 @@ static void rtc_reset(DeviceState *dev)
+ static const MemoryRegionOps rtc_ops = {
+     .read = register_read_memory,
+     .write = register_write_memory,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
      .valid = {
          .min_access_size = 4,
          .max_access_size = 4,
-diff --git a/hw/xtensa/mx_pic.c b/hw/xtensa/mx_pic.c
-index d889f953d1..f4f509ad7a 100644
---- a/hw/xtensa/mx_pic.c
-+++ b/hw/xtensa/mx_pic.c
-@@ -266,7 +266,7 @@ static void xtensa_mx_pic_ext_reg_write(void *opaque, hwaddr offset,
- static const MemoryRegionOps xtensa_mx_pic_ops = {
-     .read = xtensa_mx_pic_ext_reg_read,
-     .write = xtensa_mx_pic_ext_reg_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+diff --git a/hw/tpm/tpm_crb.c b/hw/tpm/tpm_crb.c
+index faae733120..ae7fe038bd 100644
+--- a/hw/tpm/tpm_crb.c
++++ b/hw/tpm/tpm_crb.c
+@@ -178,7 +178,7 @@ static void tpm_crb_mmio_write(void *opaque, hwaddr addr,
+ static const MemoryRegionOps tpm_crb_memory_ops = {
+     .read = tpm_crb_mmio_read,
+     .write = tpm_crb_mmio_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
      .valid = {
-         .unaligned = true,
+         .min_access_size = 1,
+         .max_access_size = 4,
+diff --git a/hw/tpm/tpm_tis.c b/hw/tpm/tpm_tis.c
+index 7aaf9b946d..2663e166d8 100644
+--- a/hw/tpm/tpm_tis.c
++++ b/hw/tpm/tpm_tis.c
+@@ -849,7 +849,7 @@ static void tpm_tis_mmio_write(void *opaque, hwaddr addr,
+ static const MemoryRegionOps tpm_tis_memory_ops = {
+     .read = tpm_tis_mmio_read,
+     .write = tpm_tis_mmio_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .valid = {
+         .min_access_size = 1,
+         .max_access_size = 4,
+diff --git a/hw/usb/hcd-ehci-sysbus.c b/hw/usb/hcd-ehci-sysbus.c
+index 020211fd10..d6a0f0bacb 100644
+--- a/hw/usb/hcd-ehci-sysbus.c
++++ b/hw/usb/hcd-ehci-sysbus.c
+@@ -225,7 +225,7 @@ static const MemoryRegionOps fusbh200_ehci_mmio_ops = {
+     .write = fusbh200_ehci_write,
+     .valid.min_access_size = 4,
+     .valid.max_access_size = 4,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static void fusbh200_ehci_init(Object *obj)
+diff --git a/hw/usb/hcd-ehci.c b/hw/usb/hcd-ehci.c
+index 9ca7b87a80..1ccc214d63 100644
+--- a/hw/usb/hcd-ehci.c
++++ b/hw/usb/hcd-ehci.c
+@@ -2361,7 +2361,7 @@ static const MemoryRegionOps ehci_mmio_caps_ops = {
+     .valid.max_access_size = 4,
+     .impl.min_access_size = 1,
+     .impl.max_access_size = 1,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static const MemoryRegionOps ehci_mmio_opreg_ops = {
+@@ -2369,7 +2369,7 @@ static const MemoryRegionOps ehci_mmio_opreg_ops = {
+     .write = ehci_opreg_write,
+     .valid.min_access_size = 4,
+     .valid.max_access_size = 4,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static const MemoryRegionOps ehci_mmio_port_ops = {
+@@ -2377,7 +2377,7 @@ static const MemoryRegionOps ehci_mmio_port_ops = {
+     .write = ehci_port_write,
+     .valid.min_access_size = 4,
+     .valid.max_access_size = 4,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static USBPortOps ehci_port_ops = {
+diff --git a/hw/usb/hcd-ohci.c b/hw/usb/hcd-ohci.c
+index 145ee21fd6..f7fd3b8d19 100644
+--- a/hw/usb/hcd-ohci.c
++++ b/hw/usb/hcd-ohci.c
+@@ -1776,7 +1776,7 @@ static void ohci_async_cancel_device(OHCIState *ohci, USBDevice *dev)
+ static const MemoryRegionOps ohci_mem_ops = {
+     .read = ohci_mem_read,
+     .write = ohci_mem_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static USBPortOps ohci_port_ops = {
+diff --git a/hw/usb/hcd-uhci.c b/hw/usb/hcd-uhci.c
+index 23507ad3b5..72bce48726 100644
+--- a/hw/usb/hcd-uhci.c
++++ b/hw/usb/hcd-uhci.c
+@@ -1197,7 +1197,7 @@ static const MemoryRegionOps uhci_ioport_ops = {
+     .valid.max_access_size = 4,
+     .impl.min_access_size = 2,
+     .impl.max_access_size = 2,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static USBPortOps uhci_port_ops = {
+diff --git a/hw/usb/hcd-xhci.c b/hw/usb/hcd-xhci.c
+index f698224c8a..a5e91a226d 100644
+--- a/hw/usb/hcd-xhci.c
++++ b/hw/usb/hcd-xhci.c
+@@ -3162,7 +3162,7 @@ static const MemoryRegionOps xhci_cap_ops = {
+     .valid.max_access_size = 4,
+     .impl.min_access_size = 4,
+     .impl.max_access_size = 4,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static const MemoryRegionOps xhci_oper_ops = {
+@@ -3170,7 +3170,7 @@ static const MemoryRegionOps xhci_oper_ops = {
+     .write = xhci_oper_write,
+     .valid.min_access_size = 4,
+     .valid.max_access_size = 4,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static const MemoryRegionOps xhci_port_ops = {
+@@ -3178,7 +3178,7 @@ static const MemoryRegionOps xhci_port_ops = {
+     .write = xhci_port_write,
+     .valid.min_access_size = 4,
+     .valid.max_access_size = 4,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static const MemoryRegionOps xhci_runtime_ops = {
+@@ -3186,7 +3186,7 @@ static const MemoryRegionOps xhci_runtime_ops = {
+     .write = xhci_runtime_write,
+     .valid.min_access_size = 4,
+     .valid.max_access_size = 4,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static const MemoryRegionOps xhci_doorbell_ops = {
+@@ -3194,7 +3194,7 @@ static const MemoryRegionOps xhci_doorbell_ops = {
+     .write = xhci_doorbell_write,
+     .valid.min_access_size = 4,
+     .valid.max_access_size = 4,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static void xhci_attach(USBPort *usbport)
+diff --git a/hw/vfio/common.c b/hw/vfio/common.c
+index 3e03c495d8..ec9b905d5d 100644
+--- a/hw/vfio/common.c
++++ b/hw/vfio/common.c
+@@ -276,7 +276,7 @@ uint64_t vfio_region_read(void *opaque,
+ const MemoryRegionOps vfio_region_ops = {
+     .read = vfio_region_read,
+     .write = vfio_region_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .valid = {
+         .min_access_size = 1,
+         .max_access_size = 8,
+diff --git a/hw/vfio/pci-quirks.c b/hw/vfio/pci-quirks.c
+index 136f3a9ad6..82b7a9d6f8 100644
+--- a/hw/vfio/pci-quirks.c
++++ b/hw/vfio/pci-quirks.c
+@@ -152,7 +152,7 @@ static void vfio_generic_window_quirk_address_write(void *opaque, hwaddr addr,
+ static const MemoryRegionOps vfio_generic_window_address_quirk = {
+     .read = vfio_generic_window_quirk_address_read,
+     .write = vfio_generic_window_quirk_address_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static uint64_t vfio_generic_window_quirk_data_read(void *opaque,
+@@ -195,7 +195,7 @@ static void vfio_generic_window_quirk_data_write(void *opaque, hwaddr addr,
+ static const MemoryRegionOps vfio_generic_window_data_quirk = {
+     .read = vfio_generic_window_quirk_data_read,
+     .write = vfio_generic_window_quirk_data_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ /*
+@@ -245,7 +245,7 @@ static void vfio_generic_quirk_mirror_write(void *opaque, hwaddr addr,
+ static const MemoryRegionOps vfio_generic_mirror_quirk = {
+     .read = vfio_generic_quirk_mirror_read,
+     .write = vfio_generic_quirk_mirror_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ /* Is range1 fully contained within range2?  */
+@@ -280,7 +280,7 @@ static uint64_t vfio_ati_3c3_quirk_read(void *opaque,
+ 
+ static const MemoryRegionOps vfio_ati_3c3_quirk = {
+     .read = vfio_ati_3c3_quirk_read,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static VFIOQuirk *vfio_quirk_alloc(int nr_mem)
+@@ -607,7 +607,7 @@ static void vfio_nvidia_3d4_quirk_write(void *opaque, hwaddr addr,
+ static const MemoryRegionOps vfio_nvidia_3d4_quirk = {
+     .read = vfio_nvidia_3d4_quirk_read,
+     .write = vfio_nvidia_3d4_quirk_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static uint64_t vfio_nvidia_3d0_quirk_read(void *opaque,
+@@ -665,7 +665,7 @@ static void vfio_nvidia_3d0_quirk_write(void *opaque, hwaddr addr,
+ static const MemoryRegionOps vfio_nvidia_3d0_quirk = {
+     .read = vfio_nvidia_3d0_quirk_read,
+     .write = vfio_nvidia_3d0_quirk_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static void vfio_vga_probe_nvidia_3d0_quirk(VFIOPCIDevice *vdev)
+@@ -754,7 +754,7 @@ static void vfio_nvidia_bar5_quirk_master_write(void *opaque, hwaddr addr,
+ static const MemoryRegionOps vfio_nvidia_bar5_quirk_master = {
+     .read = vfio_nvidia_bar5_quirk_master_read,
+     .write = vfio_nvidia_bar5_quirk_master_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static uint64_t vfio_nvidia_bar5_quirk_enable_read(void *opaque,
+@@ -781,7 +781,7 @@ static void vfio_nvidia_bar5_quirk_enable_write(void *opaque, hwaddr addr,
+ static const MemoryRegionOps vfio_nvidia_bar5_quirk_enable = {
+     .read = vfio_nvidia_bar5_quirk_enable_read,
+     .write = vfio_nvidia_bar5_quirk_enable_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static void vfio_probe_nvidia_bar5_quirk(VFIOPCIDevice *vdev, int nr)
+@@ -931,7 +931,7 @@ static void vfio_nvidia_quirk_mirror_write(void *opaque, hwaddr addr,
+ static const MemoryRegionOps vfio_nvidia_mirror_quirk = {
+     .read = vfio_generic_quirk_mirror_read,
+     .write = vfio_nvidia_quirk_mirror_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static void vfio_nvidia_bar0_quirk_reset(VFIOPCIDevice *vdev, VFIOQuirk *quirk)
+@@ -1093,7 +1093,7 @@ static const MemoryRegionOps vfio_rtl_address_quirk = {
+         .max_access_size = 4,
+         .unaligned = false,
      },
-diff --git a/hw/xtensa/xtfpga.c b/hw/xtensa/xtfpga.c
-index 8220c7a379..70c256f87e 100644
---- a/hw/xtensa/xtfpga.c
-+++ b/hw/xtensa/xtfpga.c
-@@ -121,7 +121,7 @@ static void xtfpga_fpga_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps xtfpga_fpga_ops = {
-     .read = xtfpga_fpga_read,
-     .write = xtfpga_fpga_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
  };
  
- static XtfpgaFpgaState *xtfpga_fpga_init(MemoryRegion *address_space,
-@@ -216,7 +216,7 @@ static void xtfpga_io_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps xtfpga_io_ops = {
-     .read = xtfpga_io_read,
-     .write = xtfpga_io_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+ static uint64_t vfio_rtl8168_quirk_data_read(void *opaque,
+@@ -1133,7 +1133,7 @@ static const MemoryRegionOps vfio_rtl_data_quirk = {
+         .max_access_size = 4,
+         .unaligned = false,
+     },
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
  };
  
- static void xtfpga_init(const XtfpgaBoardDesc *board, MachineState *machine)
-@@ -315,7 +315,7 @@ static void xtfpga_init(const XtfpgaBoardDesc *board, MachineState *machine)
-     }
+ static void vfio_probe_rtl8168_bar2_quirk(VFIOPCIDevice *vdev, int nr)
+@@ -1529,7 +1529,7 @@ static void vfio_igd_quirk_data_write(void *opaque, hwaddr addr,
+ static const MemoryRegionOps vfio_igd_data_quirk = {
+     .read = vfio_igd_quirk_data_read,
+     .write = vfio_igd_quirk_data_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
  
-     serial_mm_init(system_io, 0x0d050020, 2, extints[0],
--                   115200, serial_hd(0), DEVICE_NATIVE_ENDIAN);
-+                   115200, serial_hd(0), MO_TE);
+ static uint64_t vfio_igd_quirk_index_read(void *opaque,
+@@ -1557,7 +1557,7 @@ static void vfio_igd_quirk_index_write(void *opaque, hwaddr addr,
+ static const MemoryRegionOps vfio_igd_index_quirk = {
+     .read = vfio_igd_quirk_index_read,
+     .write = vfio_igd_quirk_index_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
  
-     dinfo = drive_get(IF_PFLASH, 0, 0);
-     if (dinfo) {
+ static void vfio_probe_igd_bar4_quirk(VFIOPCIDevice *vdev, int nr)
+diff --git a/hw/vfio/pci.c b/hw/vfio/pci.c
+index dc3479c374..7010f0575d 100644
+--- a/hw/vfio/pci.c
++++ b/hw/vfio/pci.c
+@@ -884,7 +884,7 @@ static void vfio_rom_write(void *opaque, hwaddr addr,
+ static const MemoryRegionOps vfio_rom_ops = {
+     .read = vfio_rom_read,
+     .write = vfio_rom_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static void vfio_pci_size_rom(VFIOPCIDevice *vdev)
+@@ -1032,7 +1032,7 @@ uint64_t vfio_vga_read(void *opaque, hwaddr addr, unsigned size)
+ static const MemoryRegionOps vfio_vga_ops = {
+     .read = vfio_vga_read,
+     .write = vfio_vga_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ /*
+diff --git a/hw/virtio/virtio-pci.c b/hw/virtio/virtio-pci.c
+index ffb03728f9..4450c24d57 100644
+--- a/hw/virtio/virtio-pci.c
++++ b/hw/virtio/virtio-pci.c
+@@ -486,7 +486,7 @@ static const MemoryRegionOps virtio_pci_config_ops = {
+         .min_access_size = 1,
+         .max_access_size = 4,
+     },
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static MemoryRegion *virtio_address_space_lookup(VirtIOPCIProxy *proxy,
+@@ -1389,7 +1389,7 @@ static void virtio_pci_modern_regions_init(VirtIOPCIProxy *proxy)
+             .min_access_size = 1,
+             .max_access_size = 4,
+         },
+-        .endianness = DEVICE_LITTLE_ENDIAN,
++        .endianness = MO_LE,
+     };
+     static const MemoryRegionOps isr_ops = {
+         .read = virtio_pci_isr_read,
+@@ -1398,7 +1398,7 @@ static void virtio_pci_modern_regions_init(VirtIOPCIProxy *proxy)
+             .min_access_size = 1,
+             .max_access_size = 4,
+         },
+-        .endianness = DEVICE_LITTLE_ENDIAN,
++        .endianness = MO_LE,
+     };
+     static const MemoryRegionOps device_ops = {
+         .read = virtio_pci_device_read,
+@@ -1407,7 +1407,7 @@ static void virtio_pci_modern_regions_init(VirtIOPCIProxy *proxy)
+             .min_access_size = 1,
+             .max_access_size = 4,
+         },
+-        .endianness = DEVICE_LITTLE_ENDIAN,
++        .endianness = MO_LE,
+     };
+     static const MemoryRegionOps notify_ops = {
+         .read = virtio_pci_notify_read,
+@@ -1416,7 +1416,7 @@ static void virtio_pci_modern_regions_init(VirtIOPCIProxy *proxy)
+             .min_access_size = 1,
+             .max_access_size = 4,
+         },
+-        .endianness = DEVICE_LITTLE_ENDIAN,
++        .endianness = MO_LE,
+     };
+     static const MemoryRegionOps notify_pio_ops = {
+         .read = virtio_pci_notify_read,
+@@ -1425,7 +1425,7 @@ static void virtio_pci_modern_regions_init(VirtIOPCIProxy *proxy)
+             .min_access_size = 1,
+             .max_access_size = 4,
+         },
+-        .endianness = DEVICE_LITTLE_ENDIAN,
++        .endianness = MO_LE,
+     };
+ 
+ 
+diff --git a/hw/watchdog/cmsdk-apb-watchdog.c b/hw/watchdog/cmsdk-apb-watchdog.c
+index 6bf43f943f..29ac258f3f 100644
+--- a/hw/watchdog/cmsdk-apb-watchdog.c
++++ b/hw/watchdog/cmsdk-apb-watchdog.c
+@@ -264,7 +264,7 @@ bad_offset:
+ static const MemoryRegionOps cmsdk_apb_watchdog_ops = {
+     .read = cmsdk_apb_watchdog_read,
+     .write = cmsdk_apb_watchdog_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     /* byte/halfword accesses are just zero-padded on reads and writes */
+     .impl.min_access_size = 4,
+     .impl.max_access_size = 4,
+diff --git a/hw/watchdog/wdt_aspeed.c b/hw/watchdog/wdt_aspeed.c
+index 9b93213417..d761509529 100644
+--- a/hw/watchdog/wdt_aspeed.c
++++ b/hw/watchdog/wdt_aspeed.c
+@@ -204,7 +204,7 @@ static const VMStateDescription vmstate_aspeed_wdt = {
+ static const MemoryRegionOps aspeed_wdt_ops = {
+     .read = aspeed_wdt_read,
+     .write = aspeed_wdt_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .valid.min_access_size = 4,
+     .valid.max_access_size = 4,
+     .valid.unaligned = false,
+diff --git a/hw/watchdog/wdt_i6300esb.c b/hw/watchdog/wdt_i6300esb.c
+index 370cf92e85..3ea9a74a5e 100644
+--- a/hw/watchdog/wdt_i6300esb.c
++++ b/hw/watchdog/wdt_i6300esb.c
+@@ -398,7 +398,7 @@ static const MemoryRegionOps i6300esb_ops = {
+     .write = i6300esb_mem_writefn,
+     .valid.min_access_size = 1,
+     .valid.max_access_size = 4,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+ };
+ 
+ static const VMStateDescription vmstate_i6300esb = {
+diff --git a/include/exec/cpu-common.h b/include/exec/cpu-common.h
+index c388453ed7..f61f269465 100644
+--- a/include/exec/cpu-common.h
++++ b/include/exec/cpu-common.h
+@@ -29,7 +29,7 @@ enum device_endian {
+ #if defined(HOST_WORDS_BIGENDIAN)
+ #define DEVICE_HOST_ENDIAN DEVICE_BIG_ENDIAN
+ #else
+-#define DEVICE_HOST_ENDIAN DEVICE_LITTLE_ENDIAN
++#define DEVICE_HOST_ENDIAN MO_LE
+ #endif
+ 
+ /* address in the RAM (different from a physical address) */
 diff --git a/ioport.c b/ioport.c
-index 04e360e79a..c8a4128d33 100644
+index c8a4128d33..e5713e83c8 100644
 --- a/ioport.c
 +++ b/ioport.c
-@@ -51,7 +51,7 @@ static void unassigned_io_write(void *opaque, hwaddr addr, uint64_t val,
- const MemoryRegionOps unassigned_io_ops = {
-     .read = unassigned_io_read,
-     .write = unassigned_io_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
+@@ -213,7 +213,7 @@ static void portio_write(void *opaque, hwaddr addr, uint64_t data,
+ static const MemoryRegionOps portio_ops = {
+     .read = portio_read,
+     .write = portio_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = MO_LE,
+     .valid.unaligned = true,
+     .impl.unaligned = true,
  };
- 
- void cpu_outb(uint32_t addr, uint8_t val)
 diff --git a/memory.c b/memory.c
-index f30ce520c9..7578ad1dfd 100644
+index 7578ad1dfd..01703988be 100644
 --- a/memory.c
 +++ b/memory.c
-@@ -1298,7 +1298,7 @@ static bool unassigned_mem_accepts(void *opaque, hwaddr addr,
- 
- const MemoryRegionOps unassigned_mem_ops = {
-     .valid.accepts = unassigned_mem_accepts,
--    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .endianness = MO_TE,
- };
- 
- static uint64_t memory_region_ram_device_read(void *opaque,
-@@ -3277,7 +3277,7 @@ MemOp devend_memop(enum device_endian end)
+@@ -346,7 +346,7 @@ static void flatview_simplify(FlatView *view)
+ static bool memory_region_big_endian(MemoryRegion *mr)
+ {
+ #ifdef TARGET_WORDS_BIGENDIAN
+-    return mr->ops->endianness != DEVICE_LITTLE_ENDIAN;
++    return mr->ops->endianness != MO_LE;
+ #else
+     return mr->ops->endianness == DEVICE_BIG_ENDIAN;
+ #endif
+@@ -3275,13 +3275,13 @@ type_init(memory_register_types)
+ MemOp devend_memop(enum device_endian end)
+ {
      static MemOp conv[] = {
-         [DEVICE_LITTLE_ENDIAN] = MO_LE,
+-        [DEVICE_LITTLE_ENDIAN] = MO_LE,
++        [MO_LE] = MO_LE,
          [DEVICE_BIG_ENDIAN] = MO_BE,
--        [DEVICE_NATIVE_ENDIAN] = MO_TE,
-+        [MO_TE] = MO_TE,
+         [MO_TE] = MO_TE,
          [DEVICE_HOST_ENDIAN] = 0,
      };
      switch (end) {
+-    case DEVICE_LITTLE_ENDIAN:
++    case MO_LE:
+     case DEVICE_BIG_ENDIAN:
+         return conv[end];
+     default:
 diff --git a/memory_ldst.inc.c b/memory_ldst.inc.c
-index c54aee4a95..b321da28de 100644
+index b321da28de..8d723cffc2 100644
 --- a/memory_ldst.inc.c
 +++ b/memory_ldst.inc.c
-@@ -70,7 +70,7 @@ uint32_t glue(address_space_ldl, SUFFIX)(ARG1_DECL,
+@@ -44,7 +44,7 @@ static inline uint32_t glue(address_space_ldl_internal, SUFFIX)(ARG1_DECL,
+         /* RAM case */
+         ptr = qemu_map_ram_ptr(mr->ram_block, addr1);
+         switch (endian) {
+-        case DEVICE_LITTLE_ENDIAN:
++        case MO_LE:
+             val = ldl_le_p(ptr);
+             break;
+         case DEVICE_BIG_ENDIAN:
+@@ -77,7 +77,7 @@ uint32_t glue(address_space_ldl_le, SUFFIX)(ARG1_DECL,
      hwaddr addr, MemTxAttrs attrs, MemTxResult *result)
  {
      return glue(address_space_ldl_internal, SUFFIX)(ARG1, addr, attrs, result,
--                                                    DEVICE_NATIVE_ENDIAN);
-+                                                    MO_TE);
+-                                                    DEVICE_LITTLE_ENDIAN);
++                                                    MO_LE);
  }
  
- uint32_t glue(address_space_ldl_le, SUFFIX)(ARG1_DECL,
-@@ -138,7 +138,7 @@ uint64_t glue(address_space_ldq, SUFFIX)(ARG1_DECL,
+ uint32_t glue(address_space_ldl_be, SUFFIX)(ARG1_DECL,
+@@ -112,7 +112,7 @@ static inline uint64_t glue(address_space_ldq_internal, SUFFIX)(ARG1_DECL,
+         /* RAM case */
+         ptr = qemu_map_ram_ptr(mr->ram_block, addr1);
+         switch (endian) {
+-        case DEVICE_LITTLE_ENDIAN:
++        case MO_LE:
+             val = ldq_le_p(ptr);
+             break;
+         case DEVICE_BIG_ENDIAN:
+@@ -145,7 +145,7 @@ uint64_t glue(address_space_ldq_le, SUFFIX)(ARG1_DECL,
      hwaddr addr, MemTxAttrs attrs, MemTxResult *result)
  {
      return glue(address_space_ldq_internal, SUFFIX)(ARG1, addr, attrs, result,
--                                                    DEVICE_NATIVE_ENDIAN);
-+                                                    MO_TE);
+-                                                    DEVICE_LITTLE_ENDIAN);
++                                                    MO_LE);
  }
  
- uint64_t glue(address_space_ldq_le, SUFFIX)(ARG1_DECL,
-@@ -240,7 +240,7 @@ uint32_t glue(address_space_lduw, SUFFIX)(ARG1_DECL,
+ uint64_t glue(address_space_ldq_be, SUFFIX)(ARG1_DECL,
+@@ -214,7 +214,7 @@ static inline uint32_t glue(address_space_lduw_internal, SUFFIX)(ARG1_DECL,
+         /* RAM case */
+         ptr = qemu_map_ram_ptr(mr->ram_block, addr1);
+         switch (endian) {
+-        case DEVICE_LITTLE_ENDIAN:
++        case MO_LE:
+             val = lduw_le_p(ptr);
+             break;
+         case DEVICE_BIG_ENDIAN:
+@@ -247,7 +247,7 @@ uint32_t glue(address_space_lduw_le, SUFFIX)(ARG1_DECL,
      hwaddr addr, MemTxAttrs attrs, MemTxResult *result)
  {
      return glue(address_space_lduw_internal, SUFFIX)(ARG1, addr, attrs, result,
--                                                     DEVICE_NATIVE_ENDIAN);
-+                                                     MO_TE);
+-                                                     DEVICE_LITTLE_ENDIAN);
++                                                     MO_LE);
  }
  
- uint32_t glue(address_space_lduw_le, SUFFIX)(ARG1_DECL,
-@@ -344,7 +344,7 @@ void glue(address_space_stl, SUFFIX)(ARG1_DECL,
+ uint32_t glue(address_space_lduw_be, SUFFIX)(ARG1_DECL,
+@@ -318,7 +318,7 @@ static inline void glue(address_space_stl_internal, SUFFIX)(ARG1_DECL,
+         /* RAM case */
+         ptr = qemu_map_ram_ptr(mr->ram_block, addr1);
+         switch (endian) {
+-        case DEVICE_LITTLE_ENDIAN:
++        case MO_LE:
+             stl_le_p(ptr, val);
+             break;
+         case DEVICE_BIG_ENDIAN:
+@@ -351,7 +351,7 @@ void glue(address_space_stl_le, SUFFIX)(ARG1_DECL,
      hwaddr addr, uint32_t val, MemTxAttrs attrs, MemTxResult *result)
  {
      glue(address_space_stl_internal, SUFFIX)(ARG1, addr, val, attrs,
--                                             result, DEVICE_NATIVE_ENDIAN);
-+                                             result, MO_TE);
+-                                             result, DEVICE_LITTLE_ENDIAN);
++                                             result, MO_LE);
  }
  
- void glue(address_space_stl_le, SUFFIX)(ARG1_DECL,
-@@ -440,7 +440,7 @@ void glue(address_space_stw, SUFFIX)(ARG1_DECL,
+ void glue(address_space_stl_be, SUFFIX)(ARG1_DECL,
+@@ -414,7 +414,7 @@ static inline void glue(address_space_stw_internal, SUFFIX)(ARG1_DECL,
+         /* RAM case */
+         ptr = qemu_map_ram_ptr(mr->ram_block, addr1);
+         switch (endian) {
+-        case DEVICE_LITTLE_ENDIAN:
++        case MO_LE:
+             stw_le_p(ptr, val);
+             break;
+         case DEVICE_BIG_ENDIAN:
+@@ -447,7 +447,7 @@ void glue(address_space_stw_le, SUFFIX)(ARG1_DECL,
      hwaddr addr, uint32_t val, MemTxAttrs attrs, MemTxResult *result)
  {
      glue(address_space_stw_internal, SUFFIX)(ARG1, addr, val, attrs, result,
--                                             DEVICE_NATIVE_ENDIAN);
-+                                             MO_TE);
+-                                             DEVICE_LITTLE_ENDIAN);
++                                             MO_LE);
  }
  
- void glue(address_space_stw_le, SUFFIX)(ARG1_DECL,
-@@ -504,7 +504,7 @@ void glue(address_space_stq, SUFFIX)(ARG1_DECL,
+ void glue(address_space_stw_be, SUFFIX)(ARG1_DECL,
+@@ -478,7 +478,7 @@ static void glue(address_space_stq_internal, SUFFIX)(ARG1_DECL,
+         /* RAM case */
+         ptr = qemu_map_ram_ptr(mr->ram_block, addr1);
+         switch (endian) {
+-        case DEVICE_LITTLE_ENDIAN:
++        case MO_LE:
+             stq_le_p(ptr, val);
+             break;
+         case DEVICE_BIG_ENDIAN:
+@@ -511,7 +511,7 @@ void glue(address_space_stq_le, SUFFIX)(ARG1_DECL,
      hwaddr addr, uint64_t val, MemTxAttrs attrs, MemTxResult *result)
  {
      glue(address_space_stq_internal, SUFFIX)(ARG1, addr, val, attrs, result,
--                                             DEVICE_NATIVE_ENDIAN);
-+                                             MO_TE);
+-                                             DEVICE_LITTLE_ENDIAN);
++                                             MO_LE);
  }
  
- void glue(address_space_stq_le, SUFFIX)(ARG1_DECL,
+ void glue(address_space_stq_be, SUFFIX)(ARG1_DECL,
 -- 
 2.23.0
 
