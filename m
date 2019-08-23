@@ -1,68 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1i11rL-0004Bo-QA
-	for mharc-qemu-riscv@gnu.org; Fri, 23 Aug 2019 01:11:35 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44866)
+	id 1i11rN-0004E0-DO
+	for mharc-qemu-riscv@gnu.org; Fri, 23 Aug 2019 01:11:37 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44920)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <bmeng.cn@gmail.com>) id 1i11rH-00045G-N6
- for qemu-riscv@nongnu.org; Fri, 23 Aug 2019 01:11:32 -0400
+ (envelope-from <bmeng.cn@gmail.com>) id 1i11rJ-000499-U5
+ for qemu-riscv@nongnu.org; Fri, 23 Aug 2019 01:11:35 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <bmeng.cn@gmail.com>) id 1i11rG-0002Zi-Kw
- for qemu-riscv@nongnu.org; Fri, 23 Aug 2019 01:11:31 -0400
-Received: from mail-pf1-x442.google.com ([2607:f8b0:4864:20::442]:38646)
+ (envelope-from <bmeng.cn@gmail.com>) id 1i11rI-0002bL-OU
+ for qemu-riscv@nongnu.org; Fri, 23 Aug 2019 01:11:33 -0400
+Received: from mail-pg1-x542.google.com ([2607:f8b0:4864:20::542]:43066)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
- id 1i11rE-0002XS-Cn; Fri, 23 Aug 2019 01:11:28 -0400
-Received: by mail-pf1-x442.google.com with SMTP id o70so5655174pfg.5;
- Thu, 22 Aug 2019 22:11:28 -0700 (PDT)
+ id 1i11rF-0002YK-F7; Fri, 23 Aug 2019 01:11:29 -0400
+Received: by mail-pg1-x542.google.com with SMTP id k3so5072743pgb.10;
+ Thu, 22 Aug 2019 22:11:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:subject:date:message-id:in-reply-to:references:mime-version
- :content-transfer-encoding;
- bh=abfIhjs94ppdRZa0sqZhx+9vkYxwlbvhyOHMnX1hFyI=;
- b=a35FTrJU/yetHol+fB12TFhQFvvUG6ZO/ku5TYsKcZ7Pcn4dZzab3MLUJiTlQe5CJb
- nf8nL9Q99m+5nuPXwMc3xVGMeFoAm5hZJRYm11M0obbVrdWKw7t21Yst5hhAlRswFUDR
- yAhD1ZNfK9jhLSs1EgGtc2Aqx+iLX91X6L20D7yqslAgjzeiGP9LUOSMBB6RLIDsMUaF
- qbqSnYmgmeeKDTBvJz7Oy8eJO299RvBpuA6Mrsn0kTDzMddeWQvR1f37GAiyqMHcwUCg
- 4rY5TQPeJGajfNaKHmRaRc0pb8tm+QmCsVGEtiObjL1aXsGPK+BJS4jBW/adu9kk5PyS
- Ko/w==
+ h=from:to:subject:date:message-id:in-reply-to:references;
+ bh=1QsGGydW2bZUHoxiW5W0EtCouM+ZnvHGwY2Nm3XyYGs=;
+ b=JlQJ7jB45CUalt8PgtbfqRxTWPg0JwYhadqb8ib3ZFmLTYaVE4ihFS3CTtCpt59UCn
+ TiZXJyWAg8upRYFZ9W7a3svDtHxVCwYt+WKgGrnHZ51i6rH2n/AnpgR89bU+2UNzDYAf
+ bD7r6CFf3Asej//INAGmoUtvZ7C64/aSoUwPMAtlx2T1MwzVYeEAbsRoVq+i9ktxcNGC
+ xI/goLTftH5w1nze6BjhsIEvRlflj8U/eVLV1aiP+1qLPmFIxO5hwMLj3FyYZiyAYdta
+ brvSEIckCdKUzzwZszu3BHYGTtb2rikrlrVta45FsST6tkfa2wV4gxtV8rLRHx7VWLv3
+ FiKg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=abfIhjs94ppdRZa0sqZhx+9vkYxwlbvhyOHMnX1hFyI=;
- b=QcgANakQHhdrsBapOzmCsD5HL3haru99uB38b/fAfpWMOt2XYfrkenAihzrXhJQHx1
- xkny32ASN3U2Q7vQ3Uy0F04Y4uDdXvM93knhKupZ9ZkUO6GNnI6H/h8sbP7FJVz1SvmD
- 4qTgxvzUUyU2UzDasbi2oM36rvZ40qMrLjFgDy/fvPEZI+SuYgMhoeZ+8M8P4VRhg+U6
- +Zb6NhBrYmm0RjVGeKG/A3WZrxFXStWZbosCrZn99+ds15n/AVJMpTgAre6f3wNrPiAz
- LIkll0rB/DGfMagN75BMRfs1adPLApgNmWb5ORWcgVkrRl3TN+/sbTbTaed4/uVWy5m2
- RIzA==
-X-Gm-Message-State: APjAAAWQTENo1R7JxDSYNqOFF4mtLzGm9knuFsE8I9P22+GBEWkBKFwk
- norHmxv0p/jQtiF/o4ThcFc=
-X-Google-Smtp-Source: APXvYqx4Yh81ILslZzR6mXpYVRFhGdQbJUfMnpNtHSe2KZa1GiS+xn6YlJb95x9zTxU32TPqoMcB+Q==
-X-Received: by 2002:a17:90a:b290:: with SMTP id
- c16mr3301911pjr.34.1566537087608; 
- Thu, 22 Aug 2019 22:11:27 -0700 (PDT)
+ :references;
+ bh=1QsGGydW2bZUHoxiW5W0EtCouM+ZnvHGwY2Nm3XyYGs=;
+ b=J4JeHlB+cWLUAnlnKFE86xXtyizGmsM1banbn8yLzCERb4K2piwDaPN8rPH+Oplkx5
+ pn5FaoFVt+pFeEzYRFDm6uHm8OFWN5HxoiEwi2DlQ0R7kec9hEsE5bsAqowK6nJAmtvZ
+ +TJczV0jIwFd0EQuUehGToNhe8f7LlBwHNdk9xPXCNpaFsH3UNwyR9pJuRyYZzp5qHxj
+ H4hWTamiVj4+RbmnAvmsSYiVLq8pcTBZ1EyA+pQHj9lHNwqkV4XwdRrR3PVzPXMLa06H
+ AeV55NEKbbk6i8X1/e9N48P7ErZUUfZMeVp5ud7iKSWb9hYMXjMU9dsf3Ou+mTXoHx67
+ p11w==
+X-Gm-Message-State: APjAAAUmxW7d8KN9vw3KX8+rHEy/UndDV3ki9Orgfr7xj1hwdQU3Ca9r
+ 9oKckZ53VehINYN0hl/inEQ=
+X-Google-Smtp-Source: APXvYqwfn65qOpB3D9nHMQ4Kqh8gsR+wkZl9u6Tw5StB4SMoUtP27TzSPbBciZugmsn0kcRxQC9iRQ==
+X-Received: by 2002:a17:90a:bb01:: with SMTP id
+ u1mr3257602pjr.92.1566537088671; 
+ Thu, 22 Aug 2019 22:11:28 -0700 (PDT)
 Received: from localhost.localdomain (unknown-224-80.windriver.com.
  [147.11.224.80])
- by smtp.gmail.com with ESMTPSA id v189sm1122527pfv.176.2019.08.22.22.11.26
+ by smtp.gmail.com with ESMTPSA id v189sm1122527pfv.176.2019.08.22.22.11.27
  (version=TLS1 cipher=AES128-SHA bits=128/128);
- Thu, 22 Aug 2019 22:11:26 -0700 (PDT)
+ Thu, 22 Aug 2019 22:11:28 -0700 (PDT)
 From: Bin Meng <bmeng.cn@gmail.com>
 To: Alistair Francis <Alistair.Francis@wdc.com>,
  Palmer Dabbelt <palmer@sifive.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
-Date: Thu, 22 Aug 2019 22:10:49 -0700
-Message-Id: <1566537069-22741-11-git-send-email-bmeng.cn@gmail.com>
+Date: Thu, 22 Aug 2019 22:10:50 -0700
+Message-Id: <1566537069-22741-12-git-send-email-bmeng.cn@gmail.com>
 X-Mailer: git-send-email 1.7.1
 In-Reply-To: <1566537069-22741-1-git-send-email-bmeng.cn@gmail.com>
 References: <1566537069-22741-1-git-send-email-bmeng.cn@gmail.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::442
-Subject: [Qemu-riscv] [PATCH v5 10/30] riscv: sifive_e: prci: Fix a typo of
- hfxosccfg register programming
+X-Received-From: 2607:f8b0:4864:20::542
+Subject: [Qemu-riscv] [PATCH v5 11/30] riscv: sifive_e: prci: Update the
+ PRCI register block size
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -74,15 +70,14 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Aug 2019 05:11:34 -0000
+X-List-Received-Date: Fri, 23 Aug 2019 05:11:36 -0000
 
-For hfxosccfg register programming, SIFIVE_E_PRCI_HFXOSCCFG_RDY and
-SIFIVE_E_PRCI_HFXOSCCFG_EN should be used.
+Currently the PRCI register block size is set to 0x8000, but in fact
+0x1000 is enough, which is also what the manual says.
 
 Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
 Reviewed-by: Chih-Min Chao <chihmin.chao@sifive.com>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@redhat.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
 
 Changes in v5: None
@@ -90,22 +85,36 @@ Changes in v4: None
 Changes in v3: None
 Changes in v2: None
 
- hw/riscv/sifive_e_prci.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ hw/riscv/sifive_e_prci.c         | 2 +-
+ include/hw/riscv/sifive_e_prci.h | 2 ++
+ 2 files changed, 3 insertions(+), 1 deletion(-)
 
 diff --git a/hw/riscv/sifive_e_prci.c b/hw/riscv/sifive_e_prci.c
-index c514032..71de089 100644
+index 71de089..ad6c624 100644
 --- a/hw/riscv/sifive_e_prci.c
 +++ b/hw/riscv/sifive_e_prci.c
-@@ -90,7 +90,7 @@ static void sifive_e_prci_init(Object *obj)
+@@ -86,7 +86,7 @@ static void sifive_e_prci_init(Object *obj)
+     SiFiveEPRCIState *s = SIFIVE_E_PRCI(obj);
+ 
+     memory_region_init_io(&s->mmio, obj, &sifive_e_prci_ops, s,
+-                          TYPE_SIFIVE_E_PRCI, 0x8000);
++                          TYPE_SIFIVE_E_PRCI, SIFIVE_E_PRCI_REG_SIZE);
      sysbus_init_mmio(SYS_BUS_DEVICE(obj), &s->mmio);
  
      s->hfrosccfg = (SIFIVE_E_PRCI_HFROSCCFG_RDY | SIFIVE_E_PRCI_HFROSCCFG_EN);
--    s->hfxosccfg = (SIFIVE_E_PRCI_HFROSCCFG_RDY | SIFIVE_E_PRCI_HFROSCCFG_EN);
-+    s->hfxosccfg = (SIFIVE_E_PRCI_HFXOSCCFG_RDY | SIFIVE_E_PRCI_HFXOSCCFG_EN);
-     s->pllcfg = (SIFIVE_E_PRCI_PLLCFG_REFSEL | SIFIVE_E_PRCI_PLLCFG_BYPASS |
-                  SIFIVE_E_PRCI_PLLCFG_LOCK);
-     s->plloutdiv = SIFIVE_E_PRCI_PLLOUTDIV_DIV1;
+diff --git a/include/hw/riscv/sifive_e_prci.h b/include/hw/riscv/sifive_e_prci.h
+index c4b76aa..698b0b4 100644
+--- a/include/hw/riscv/sifive_e_prci.h
++++ b/include/hw/riscv/sifive_e_prci.h
+@@ -47,6 +47,8 @@ enum {
+     SIFIVE_E_PRCI_PLLOUTDIV_DIV1 = (1 << 8)
+ };
+ 
++#define SIFIVE_E_PRCI_REG_SIZE  0x1000
++
+ #define TYPE_SIFIVE_E_PRCI      "riscv.sifive.e.prci"
+ 
+ #define SIFIVE_E_PRCI(obj) \
 -- 
 2.7.4
 
