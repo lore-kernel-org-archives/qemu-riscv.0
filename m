@@ -1,63 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1i2dkS-0002fh-Dc
-	for mharc-qemu-riscv@gnu.org; Tue, 27 Aug 2019 11:51:08 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:56044)
+	id 1i2kjW-0002kb-V1
+	for mharc-qemu-riscv@gnu.org; Tue, 27 Aug 2019 19:18:38 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49225)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <chihmin.chao@sifive.com>) id 1i2dkP-0002cj-Ma
- for qemu-riscv@nongnu.org; Tue, 27 Aug 2019 11:51:06 -0400
+ (envelope-from <palmer@dabbelt.com>) id 1i2kjV-0002kJ-4O
+ for qemu-riscv@nongnu.org; Tue, 27 Aug 2019 19:18:38 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <chihmin.chao@sifive.com>) id 1i2dkO-0005Zo-HE
- for qemu-riscv@nongnu.org; Tue, 27 Aug 2019 11:51:05 -0400
-Received: from mail-io1-xd42.google.com ([2607:f8b0:4864:20::d42]:35823)
+ (envelope-from <palmer@dabbelt.com>) id 1i2kjT-00009M-KU
+ for qemu-riscv@nongnu.org; Tue, 27 Aug 2019 19:18:37 -0400
+Received: from mail-pf1-f193.google.com ([209.85.210.193]:39796)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <chihmin.chao@sifive.com>)
- id 1i2dkO-0005ZV-Bv
- for qemu-riscv@nongnu.org; Tue, 27 Aug 2019 11:51:04 -0400
-Received: by mail-io1-xd42.google.com with SMTP id b10so38395258ioj.2
- for <qemu-riscv@nongnu.org>; Tue, 27 Aug 2019 08:51:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=v+lH8Rmoew2rqkppJIq9VYIhR98MkxmJCflZaHejMXM=;
- b=BXf0wgFU/Xjb7QZtSL7d6bIX2pa0hfSCY0bDGhQferoEj2kstXXnfA1/WRscJwh60C
- Q9eg/vn0wCdphHU/ASo8u3EaKSLG4kkqX+x3SALCQbPcie+grYOLRQwZ9KU2b/mTKUeq
- Xeg+8W7MiLRtablz5xqidnncSl6ENqQfriT4nlNIXYiQBHAz/ivXESBMludHbPToFpTz
- WUIdthv11SbFmdPBNARktLAGYsMh1vp4YYiTONzevsqAppHNs0X5Y8CgH3fbFBJkEvWG
- YBC8QsO68uiDNLHL9mo5VHihxZT4+AImynkdlUZAIuSzpLUz+/Ns3XO1j+VYm+BZfkEA
- a6ww==
+ (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1i2kjT-00008l-Fh
+ for qemu-riscv@nongnu.org; Tue, 27 Aug 2019 19:18:35 -0400
+Received: by mail-pf1-f193.google.com with SMTP id y200so373992pfb.6
+ for <qemu-riscv@nongnu.org>; Tue, 27 Aug 2019 16:18:35 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=v+lH8Rmoew2rqkppJIq9VYIhR98MkxmJCflZaHejMXM=;
- b=ghbjD7nf4HnvRLPwYoxpMFBF9fgA+F5iWk2yLlCrLrKKNx0cBtIRU7/AfYGjQeQ8/V
- GOjWZnTbH1Bipks8+YGN3lFAMB44qNRgLmle3zLcDV/uujjkboiO6LDUzw6iV7ziXl1U
- YWiQnOjOjqmaUTXb03R3lWFiNhbR16oCIww0zEjx5EhfT5jDOpQL/KpNnYtg4z5O9rc9
- wcrib/qOSjgFi991UIUrSVhG8hSb2jHD5gRdw/RZFYcQ+KvncgXjiJDatvuzxkgMZ47Y
- yYr5I8rfw6cQ2fe1xfezuXa1lNlW/o0+oB817x/HCuL55gIwXWhfw20UCVLJovBaYl1H
- WNbw==
-X-Gm-Message-State: APjAAAU0v1XmNqq+Apyz9chRnYwPFj53om4vCpOXbLhUqBoY/0F++Yi6
- LNlgiurq32hmgE816rBYE/XtePh2I9IdbW9F/l6liA==
-X-Google-Smtp-Source: APXvYqzacKm4FYtxclYdKDgjQZnFnIPVeyN83/m+yGPla+26oZKxVenGpkrGAJmgRV7TewqnAdOnmPNJW3rbCIw0JOQ=
-X-Received: by 2002:a02:a07:: with SMTP id 7mr23529361jaw.141.1566921063513;
- Tue, 27 Aug 2019 08:51:03 -0700 (PDT)
-MIME-Version: 1.0
-References: <cover.1566603412.git.alistair.francis@wdc.com>
- <e959ee81e5121c74678d2383a28665e44db9e31d.1566603412.git.alistair.francis@wdc.com>
-In-Reply-To: <e959ee81e5121c74678d2383a28665e44db9e31d.1566603412.git.alistair.francis@wdc.com>
-From: Chih-Min Chao <chihmin.chao@sifive.com>
-Date: Tue, 27 Aug 2019 23:50:52 +0800
-Message-ID: <CAEiOBXX5RvuVjR805xnFDtGY-THYgUtiHvA-Yp-=NSP6SryUaA@mail.gmail.com>
-To: Alistair Francis <alistair.francis@wdc.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Alistair Francis <alistair23@gmail.com>, Anup.Patel@wdc.com, 
- Palmer Dabbelt <palmer@sifive.com>, Atish.Patra@wdc.com
-Content-Type: multipart/alternative; boundary="00000000000061d97a05911b3d8f"
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2607:f8b0:4864:20::d42
-Subject: Re: [Qemu-riscv] [PATCH v1 05/28] target/riscv: Add the Hypervisor
- CSRs to CPUState
+ h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
+ :mime-version:content-transfer-encoding;
+ bh=+NdJXzop9xzMrXs45gCXpBCRNCnn/BP7yEKo856qVN8=;
+ b=ClSbZdbcMhDFzLTLNntXJNN5OYl2Ec47Ok79rJl3weNmcBaPsI9IvMtqELy/ez87bh
+ 8As5OV2rViquWQPfJovp2oPiCxNX0vyhqWENJq5y7vpI+udPvS6kfXKhcaT5400y9zpV
+ W9WZ7RegLb0y52wymbeVT1nPHRZrwdjYoJmFRIkB+eH/oFMxL1jPN8RMpSsUDgCfiRW8
+ mYkngfsBTjEJIJkir80eEn36GKdZNh49t3Yhx7KDDQyFNjVv+LY58xDEQQxI7rHRMOJ8
+ tJICZbhX456u388Jztkvb8fCcCUItS6+xqCZ0X5oWX6Qr4Pv6+yN3KEi5zIsAkJKlf76
+ feBg==
+X-Gm-Message-State: APjAAAWwwdqc6gYcMgVBUQHoxZ8mlStkN3v+0qsZOqeHJFyFhe6CO23t
+ pxdoCPA3L7vMIKItpbE5VK0D9g==
+X-Google-Smtp-Source: APXvYqywcUq5YaCvD5t/iURf9viSeWS/h6sspDDjvgcBz8/6SQ5zT90k3b2unNnsps5xupgxbdrPyw==
+X-Received: by 2002:a63:5048:: with SMTP id q8mr816030pgl.446.1566947913939;
+ Tue, 27 Aug 2019 16:18:33 -0700 (PDT)
+Received: from localhost ([12.206.222.5])
+ by smtp.gmail.com with ESMTPSA id d2sm247111pjg.19.2019.08.27.16.18.32
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 27 Aug 2019 16:18:33 -0700 (PDT)
+Date: Tue, 27 Aug 2019 16:18:33 -0700 (PDT)
+X-Google-Original-Date: Tue, 27 Aug 2019 16:18:25 PDT (-0700)
+In-Reply-To: <CAEUhbmWacQtwTRYhCw6GwfGBabrWbe2Ss2JVCJ5XE7s3bVE-gA@mail.gmail.com>
+CC: Alistair Francis <Alistair.Francis@wdc.com>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, sagark@eecs.berkeley.edu,
+ dgilbert@redhat.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+From: Palmer Dabbelt <palmer@sifive.com>
+To: bmeng.cn@gmail.com
+Message-ID: <mhng-e6db993a-530d-4220-8345-59a8b642a5ac@palmer-si-x1e>
+Mime-Version: 1.0 (MHng)
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+ [fuzzy]
+X-Received-From: 209.85.210.193
+Subject: Re: [Qemu-riscv] [PATCH v4] riscv: hmp: Add a command to show
+ virtual memory mappings
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -69,107 +62,45 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Aug 2019 15:51:07 -0000
+X-List-Received-Date: Tue, 27 Aug 2019 23:18:38 -0000
 
---00000000000061d97a05911b3d8f
-Content-Type: text/plain; charset="UTF-8"
+On Sun, 18 Aug 2019 22:59:54 PDT (-0700), bmeng.cn@gmail.com wrote:
+> On Wed, Aug 14, 2019 at 11:33 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+>>
+>> This adds 'info mem' command for RISC-V, to show virtual memory
+>> mappings that aids debugging.
+>>
+>> Rather than showing every valid PTE, the command compacts the
+>> output by merging all contiguous physical address mappings into
+>> one block and only shows the merged block mapping details.
+>>
+>> Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
+>> Acked-by: Dr. David Alan Gilbert <dgilbert@redhat.com>
+>> Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
+>>
+>> ---
+>>
+>> Changes in v4:
+>> - restore to v2, that does not print all harts's PTE, since we
+>>   should switch to a cpu context via the 'cpu' command
+>>
+>> Changes in v3:
+>> - print PTEs for all harts instead of just current hart
+>>
+>> Changes in v2:
+>> - promote ppn to hwaddr when doing page table address calculation
+>>
+>>  hmp-commands-info.hx       |   2 +-
+>>  target/riscv/Makefile.objs |   4 +
+>>  target/riscv/monitor.c     | 229 +++++++++++++++++++++++++++++++++++++++++++++
+>>  3 files changed, 234 insertions(+), 1 deletion(-)
+>>  create mode 100644 target/riscv/monitor.c
+>>
+>
+> Ping?
+>
+> What's the status of this patch?
 
-On Sat, Aug 24, 2019 at 7:45 AM Alistair Francis <alistair.francis@wdc.com>
-wrote:
-
-> As the MIP CSR is 32-bits to allow atomic_read on 32-bit hosts the vsip
-> is 32-bit as well.
->
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> ---
->  target/riscv/cpu.h | 17 +++++++++++++++++
->  1 file changed, 17 insertions(+)
->
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 3a95c41428..4c342e7a79 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -154,6 +154,23 @@ struct CPURISCVState {
->      target_ulong mcause;
->      target_ulong mtval;  /* since: priv-1.10.0 */
->
-> +    /* Hypervisor CSRs */
-> +    target_ulong hstatus;
-> +    target_ulong hedeleg;
-> +    target_ulong hideleg;
-> +    target_ulong hgatp;
-> +
-> +    /* Virtual CSRs */
-> +    target_ulong vsstatus;
-> +    uint32_t vsip;
-> +    target_ulong vsie;
-> +    target_ulong vstvec;
-> +    target_ulong vsscratch;
-> +    target_ulong vsepc;
-> +    target_ulong vscause;
-> +    target_ulong vstval;
-> +    target_ulong vsatp;
-> +
->      target_ulong scounteren;
->      target_ulong mcounteren;
->
-> --
-> 2.22.0
->
->
-Reviewed-by: Chih-Min Chao <chihmin.chao@sifive.com>
-
---00000000000061d97a05911b3d8f
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
-<div dir=3D"ltr" class=3D"gmail_attr">On Sat, Aug 24, 2019 at 7:45 AM Alist=
-air Francis &lt;<a href=3D"mailto:alistair.francis@wdc.com">alistair.franci=
-s@wdc.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=
-=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding=
--left:1ex">As the MIP CSR is 32-bits to allow atomic_read on 32-bit hosts t=
-he vsip<br>
-is 32-bit as well.<br>
-<br>
-Signed-off-by: Alistair Francis &lt;<a href=3D"mailto:alistair.francis@wdc.=
-com" target=3D"_blank">alistair.francis@wdc.com</a>&gt;<br>
----<br>
-=C2=A0target/riscv/cpu.h | 17 +++++++++++++++++<br>
-=C2=A01 file changed, 17 insertions(+)<br>
-<br>
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h<br>
-index 3a95c41428..4c342e7a79 100644<br>
---- a/target/riscv/cpu.h<br>
-+++ b/target/riscv/cpu.h<br>
-@@ -154,6 +154,23 @@ struct CPURISCVState {<br>
-=C2=A0 =C2=A0 =C2=A0target_ulong mcause;<br>
-=C2=A0 =C2=A0 =C2=A0target_ulong mtval;=C2=A0 /* since: priv-1.10.0 */<br>
-<br>
-+=C2=A0 =C2=A0 /* Hypervisor CSRs */<br>
-+=C2=A0 =C2=A0 target_ulong hstatus;<br>
-+=C2=A0 =C2=A0 target_ulong hedeleg;<br>
-+=C2=A0 =C2=A0 target_ulong hideleg;<br>
-+=C2=A0 =C2=A0 target_ulong hgatp;<br>
-+<br>
-+=C2=A0 =C2=A0 /* Virtual CSRs */<br>
-+=C2=A0 =C2=A0 target_ulong vsstatus;<br>
-+=C2=A0 =C2=A0 uint32_t vsip;<br>
-+=C2=A0 =C2=A0 target_ulong vsie;<br>
-+=C2=A0 =C2=A0 target_ulong vstvec;<br>
-+=C2=A0 =C2=A0 target_ulong vsscratch;<br>
-+=C2=A0 =C2=A0 target_ulong vsepc;<br>
-+=C2=A0 =C2=A0 target_ulong vscause;<br>
-+=C2=A0 =C2=A0 target_ulong vstval;<br>
-+=C2=A0 =C2=A0 target_ulong vsatp;<br>
-+<br>
-=C2=A0 =C2=A0 =C2=A0target_ulong scounteren;<br>
-=C2=A0 =C2=A0 =C2=A0target_ulong mcounteren;<br>
-<br>
--- <br>
-2.22.0<br><br></blockquote><div><br></div><div>Reviewed-by: Chih-Min Chao &=
-lt;<a href=3D"mailto:chihmin.chao@sifive.com" target=3D"_blank">chihmin.cha=
-o@sifive.com</a>&gt;=C2=A0</div></div></div>
-
---00000000000061d97a05911b3d8f--
+This is in my patch queue (for-master on github).  I'm still a bit backed up on 
+email, but when I get caught back up I'll send a PR.
 
