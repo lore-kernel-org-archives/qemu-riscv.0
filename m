@@ -1,64 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1i2cwi-0003pP-Ux
-	for mharc-qemu-riscv@gnu.org; Tue, 27 Aug 2019 10:59:44 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:47229)
+	id 1i2cwj-0003qO-Lo
+	for mharc-qemu-riscv@gnu.org; Tue, 27 Aug 2019 10:59:45 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47238)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <bmeng.cn@gmail.com>) id 1i2cwd-0003hT-EL
- for qemu-riscv@nongnu.org; Tue, 27 Aug 2019 10:59:41 -0400
+ (envelope-from <bmeng.cn@gmail.com>) id 1i2cwd-0003i8-Uw
+ for qemu-riscv@nongnu.org; Tue, 27 Aug 2019 10:59:42 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <bmeng.cn@gmail.com>) id 1i2cwZ-0003wq-Uu
+ (envelope-from <bmeng.cn@gmail.com>) id 1i2cwb-0003xP-AI
  for qemu-riscv@nongnu.org; Tue, 27 Aug 2019 10:59:39 -0400
-Received: from mail-pl1-x641.google.com ([2607:f8b0:4864:20::641]:36531)
+Received: from mail-pg1-x543.google.com ([2607:f8b0:4864:20::543]:40976)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
- id 1i2cwS-0003kf-Em; Tue, 27 Aug 2019 10:59:29 -0400
-Received: by mail-pl1-x641.google.com with SMTP id f19so11916818plr.3;
- Tue, 27 Aug 2019 07:59:12 -0700 (PDT)
+ id 1i2cwS-0003n5-Ds; Tue, 27 Aug 2019 10:59:29 -0400
+Received: by mail-pg1-x543.google.com with SMTP id x15so12850907pgg.8;
+ Tue, 27 Aug 2019 07:59:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:to:subject:date:message-id:in-reply-to:references;
- bh=l4mnDEipFGEh17kvXqEfnXVEcHixTpadUgorARruiEM=;
- b=HLCBVXh6PiEHN7SFesL0IEi02juaUmJaVcPPWQzruul4Nq9/oMhFZetytnrK370MNU
- yu7DJte2ZNhnTBdRynP32ARyzcGvrTzqnfUyaVEOi7imendZaapBndy1QWA8zIuR78lQ
- 4QrJcxGNTPHmTd5VaBp+t72qKkWqjUi0gr6CSa2KUp1nAsS25XTJ4HlsFPjz26O+/OAG
- rfnSvkiN/3V68AxtSCuu4z1GzW2mBf/lI4xCaJTN+2UVqyHEKfKOQEWVpPXkI3Co68c7
- Etkiq/wC0RBF7SAKUCn9XTBt/DSD1GfedCzwwR84+s8RnIksLI8aYnBzw070vb1fgcom
- 4f2A==
+ bh=pn67UZsnC0fBABeEhbb7qsEbngTloit0lPBfCFb080c=;
+ b=Qz5x9RVY0f6zy1sxv15jZFQgu4BTKyctPMGPG+Fhn+abLOZa3KMUSIc0vaaMHXaGtm
+ y0l1aWpHn6VU2mBOH+Tt+PsASTQSFfDJ59u90OAs7wNTH0VAVFiASqKDOafK+BQn318B
+ AM3eDU6E87R7jFUZlfYPUbIzsKxfAnZlxc4bxQGLxT0fR5X3Tkb4pknyyHrrNXOiC/wl
+ 7q+U+Rdf31sWa/tVHNVIDrsAyqXSwy5EJwSdgN6I/G3wsM/CxjpUTrGdF+MqT4ZF3LO3
+ AKCnBdczHIR8OubncjYfyFE9NsfVQfsHH3I6g9Jz+KeuA5wklpA9mQI6aHGD79R415ut
+ YkAg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
  :references;
- bh=l4mnDEipFGEh17kvXqEfnXVEcHixTpadUgorARruiEM=;
- b=NaqqVF3uo9qEbuCzHk/eu1b241FgN0PItXiId5a93DiupwATdLQUSBINqhA7RCVCy5
- Tnd5ZYTiW2Ju5FJ2qJA2yWxZios4HfuSDz6T54wTUn9uAIE2wnfBz6GHPpXHpfW8Fchb
- 7rvY9QjCXQ1oI9NqrMKlDxDNqxTB2DUgXxWTp9aUx6AigBa5dRm1O0SIaktJ8VfwAZD3
- 9RX+mQgfQwa9o4jGklIEI6JxAPHfEohjKcZiDBUg8/mhVxUK/uz88dZFNfmaI9kTQS50
- eRfi+Sdv5N6ntr79xA6lya3ksAyCYUSQAfnyJdwwasKaXhRYqfoGSgNiVCkXOSR+tB8R
- EBEg==
-X-Gm-Message-State: APjAAAW5qclx2aYRo9wb9hQ8kw2oXqWY/Z/fPE0FVmLp1tYL2VC27mmd
- exUmlsJgNV+/9l4fFyyd+6k=
-X-Google-Smtp-Source: APXvYqzO0X0lNzAPzieS+53NBKuoI1KXh8KEDt8sC9R2zj6OIotLFObxulDzjmJK8FcADVQzkOLRrQ==
-X-Received: by 2002:a17:902:b714:: with SMTP id
- d20mr7527653pls.281.1566917951657; 
- Tue, 27 Aug 2019 07:59:11 -0700 (PDT)
+ bh=pn67UZsnC0fBABeEhbb7qsEbngTloit0lPBfCFb080c=;
+ b=NS2nS4xSXFH2/DXbnXwylV1eJtMD96KNxg+WeN6s3vDrSmbIAAvvhFfl+HXw+duaWb
+ sD1q13e9gjH4x9p9yZ2On91uGO/tLFd7vVIaSLtBq6yMqgYiYS0FcgaHvgSQKnBsI/37
+ mTWrCeUBexveAvafAhm3X2OS7UeOaY5SWyiOgq1IsHVsDnEKEnnEYsrZxctHgeWQrU4X
+ XDBd2R1SNDOekC0CA3Nj6O7tqw6lnSEkNfDgnQPPfNNLbILVylGUK5qPKd1/x804zL2O
+ 2rpEaNu8qXSIlVJNnYGlmZ9r78DlrcsenEL5ek2zObjo6rwLSFOmaAKvIOrQOOsW+BvQ
+ K9cw==
+X-Gm-Message-State: APjAAAUEjWSqddj1I4h7nwxJECs1JQKwLHP4d09VFUUYNXYVddbAEE7V
+ 8IkuWnfrbAVlSYO0Zn2a0X4=
+X-Google-Smtp-Source: APXvYqwyBZSKgsxtQBF/ZMY0B9UtRW65m9H5AhDbJqRcx34mYlvhBBgfWfRL4GC26g1L+e2+PQaClw==
+X-Received: by 2002:a63:eb06:: with SMTP id t6mr21544689pgh.107.1566917959504; 
+ Tue, 27 Aug 2019 07:59:19 -0700 (PDT)
 Received: from localhost.localdomain (unknown-224-80.windriver.com.
  [147.11.224.80])
- by smtp.gmail.com with ESMTPSA id j15sm14839344pfr.146.2019.08.27.07.59.10
+ by smtp.gmail.com with ESMTPSA id j15sm14839344pfr.146.2019.08.27.07.59.18
  (version=TLS1 cipher=AES128-SHA bits=128/128);
- Tue, 27 Aug 2019 07:59:10 -0700 (PDT)
+ Tue, 27 Aug 2019 07:59:18 -0700 (PDT)
 From: Bin Meng <bmeng.cn@gmail.com>
 To: Alistair Francis <Alistair.Francis@wdc.com>,
  Palmer Dabbelt <palmer@sifive.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
-Date: Tue, 27 Aug 2019 07:58:32 -0700
-Message-Id: <1566917919-25381-24-git-send-email-bmeng.cn@gmail.com>
+Date: Tue, 27 Aug 2019 07:58:39 -0700
+Message-Id: <1566917919-25381-31-git-send-email-bmeng.cn@gmail.com>
 X-Mailer: git-send-email 1.7.1
 In-Reply-To: <1566917919-25381-1-git-send-email-bmeng.cn@gmail.com>
 References: <1566917919-25381-1-git-send-email-bmeng.cn@gmail.com>
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::641
-Subject: [Qemu-riscv] [PATCH v6 23/30] riscv: sifive_u: Update UART base
- addresses and IRQs
+X-Received-From: 2607:f8b0:4864:20::543
+Subject: [Qemu-riscv] [PATCH v6 30/30] riscv: sifive_u: Update model and
+ compatible strings in device tree
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -70,58 +69,40 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Aug 2019 14:59:41 -0000
+X-List-Received-Date: Tue, 27 Aug 2019 14:59:44 -0000
 
-This updates the UART base address and IRQs to match the hardware.
+This updates model and compatible strings to use the same strings
+as used in the Linux kernel device tree (hifive-unleashed-a00.dts).
 
 Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
-Reviewed-by: Jonathan Behrens <fintelia@gmail.com>
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Chih-Min Chao <chihmin.chao@sifive.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 ---
 
 Changes in v6: None
 Changes in v5: None
 Changes in v4: None
-Changes in v3:
-- update IRQ numbers of both UARTs to match hardware as well
-
+Changes in v3: None
 Changes in v2: None
 
- hw/riscv/sifive_u.c         | 4 ++--
- include/hw/riscv/sifive_u.h | 4 ++--
- 2 files changed, 4 insertions(+), 4 deletions(-)
+ hw/riscv/sifive_u.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
 diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-index 3b1fe46..c7b9f96 100644
+index f14217c..c7f7c2c 100644
 --- a/hw/riscv/sifive_u.c
 +++ b/hw/riscv/sifive_u.c
-@@ -62,8 +62,8 @@ static const struct MemmapEntry {
-     [SIFIVE_U_CLINT] =    {  0x2000000,    0x10000 },
-     [SIFIVE_U_PLIC] =     {  0xc000000,  0x4000000 },
-     [SIFIVE_U_PRCI] =     { 0x10000000,     0x1000 },
--    [SIFIVE_U_UART0] =    { 0x10013000,     0x1000 },
--    [SIFIVE_U_UART1] =    { 0x10023000,     0x1000 },
-+    [SIFIVE_U_UART0] =    { 0x10010000,     0x1000 },
-+    [SIFIVE_U_UART1] =    { 0x10011000,     0x1000 },
-     [SIFIVE_U_DRAM] =     { 0x80000000,        0x0 },
-     [SIFIVE_U_GEM] =      { 0x100900FC,     0x2000 },
- };
-diff --git a/include/hw/riscv/sifive_u.h b/include/hw/riscv/sifive_u.h
-index 2a023be..b41e730 100644
---- a/include/hw/riscv/sifive_u.h
-+++ b/include/hw/riscv/sifive_u.h
-@@ -64,8 +64,8 @@ enum {
- };
+@@ -96,8 +96,9 @@ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
+         exit(1);
+     }
  
- enum {
--    SIFIVE_U_UART0_IRQ = 3,
--    SIFIVE_U_UART1_IRQ = 4,
-+    SIFIVE_U_UART0_IRQ = 4,
-+    SIFIVE_U_UART1_IRQ = 5,
-     SIFIVE_U_GEM_IRQ = 0x35
- };
+-    qemu_fdt_setprop_string(fdt, "/", "model", "ucbbar,spike-bare,qemu");
+-    qemu_fdt_setprop_string(fdt, "/", "compatible", "ucbbar,spike-bare-dev");
++    qemu_fdt_setprop_string(fdt, "/", "model", "SiFive HiFive Unleashed A00");
++    qemu_fdt_setprop_string(fdt, "/", "compatible",
++                            "sifive,hifive-unleashed-a00");
+     qemu_fdt_setprop_cell(fdt, "/", "#size-cells", 0x2);
+     qemu_fdt_setprop_cell(fdt, "/", "#address-cells", 0x2);
  
 -- 
 2.7.4
