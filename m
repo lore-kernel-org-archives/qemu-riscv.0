@@ -1,64 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1i2cwU-0003UU-Qx
-	for mharc-qemu-riscv@gnu.org; Tue, 27 Aug 2019 10:59:30 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:46855)
+	id 1i2cwW-0003Xe-Ct
+	for mharc-qemu-riscv@gnu.org; Tue, 27 Aug 2019 10:59:32 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:46909)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <bmeng.cn@gmail.com>) id 1i2cwL-0003Nj-HI
- for qemu-riscv@nongnu.org; Tue, 27 Aug 2019 10:59:24 -0400
+ (envelope-from <bmeng.cn@gmail.com>) id 1i2cwQ-0003OS-9V
+ for qemu-riscv@nongnu.org; Tue, 27 Aug 2019 10:59:27 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <bmeng.cn@gmail.com>) id 1i2cwJ-0003mz-GL
- for qemu-riscv@nongnu.org; Tue, 27 Aug 2019 10:59:21 -0400
-Received: from mail-pl1-x642.google.com ([2607:f8b0:4864:20::642]:45918)
+ (envelope-from <bmeng.cn@gmail.com>) id 1i2cwL-0003nd-9s
+ for qemu-riscv@nongnu.org; Tue, 27 Aug 2019 10:59:23 -0400
+Received: from mail-pg1-x544.google.com ([2607:f8b0:4864:20::544]:37682)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
- id 1i2cw1-0003Vq-2W; Tue, 27 Aug 2019 10:59:02 -0400
-Received: by mail-pl1-x642.google.com with SMTP id y8so11933328plr.12;
- Tue, 27 Aug 2019 07:58:57 -0700 (PDT)
+ id 1i2cw1-0003Wk-4b; Tue, 27 Aug 2019 10:59:02 -0400
+Received: by mail-pg1-x544.google.com with SMTP id d1so12842449pgp.4;
+ Tue, 27 Aug 2019 07:58:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:to:subject:date:message-id:in-reply-to:references;
- bh=ErrTzEEaH5aNtZRQ7ubqrvTfgn5HEr8cg14yqsqvLuo=;
- b=qm8P/mEUshfOkuRiceSGWGTZqz/IX9pJTLBn3ssIAQwIoievZrh6aVrb7lteyj8aez
- HSM9YD9EAUrVM75wkq1ruOx+F2ZVun+WEbiFRiUs6ls0pEjZAPgy3oycA/9aV/UjFtx7
- Wlj5s67zIUfaspWevWvSYTKrUojo+PVO5P0RlAZXbTq5EsCNL/ihaU4jmGpHI76QmtLl
- jznzRSw62qfNYYEL3Fzxj8NTHw4q2Hymu1mVeUluZWOwI8gAPtMr5xrcg3rcl15Uc/Av
- GbjfN/hHbxKq8ZC3CFd7Gmu6DXBQllDwAHx63pIIgF01pkJAkXhmDmpfVBG4Yg3OmnBL
- NrAw==
+ bh=o5G5QsojHpHLZ4b2+LQv6vJDJLY5Fa7mmuwFQaJWcVM=;
+ b=LlpFlNiWY1rkY43jpTpQb7MD/cZqjwYD+2VXSMjc2SgP2yUCX/jrCuZaioZQdHfobH
+ rkecDGA3fiNMd+A/q+DHv+prxjkMn/V8ENPeK3qr3XRZuQ7+DQkISfQxmYDBY6xtTp4g
+ uP5P+Ac7TO4jnceH5piPvZ/QAYr1/1eSIdow5UTJnNB+ZeZQf8NrpzlFPnZlCc1sb4pK
+ AtWs6TpOK85favCoiShr07RmPpBn0SjjhKaXqDiMli3gX7zhQnwi6gIb66mNANbrdv3t
+ rhLbywihuQio49spRPh4neqr3vJq+r/3z3lKeBBBVJuninJmuQjXcgsM4I6yZqDxCei3
+ dtHA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
  :references;
- bh=ErrTzEEaH5aNtZRQ7ubqrvTfgn5HEr8cg14yqsqvLuo=;
- b=ebOK87SO3krZUZlDZs34UNMi3jhBkaauCNRSm8C+UtEcdi9CpdYYo/OPufhJ8euAwi
- nzR763fWazz/7DmgMRNe5ln7/U0bMIf1bDQlNgqk/MH5nhHF7W0V8romwpDJ7RHIvIaj
- jOIbF2nax5Asz7FcSuHY6c3/hN21bYNUymK7hW8dEh11at+EGkHSPZgXRHDdokgfUxnu
- CVf2OKaEo+aUYHyrOOrYw7Ra6Mm3BkfLxS8vy7/N3N09ObyBhACL2e09Gzmskm/C6l/h
- Vs957Ecc5Ov8AY6Y/XHPw83t2zCdWcAKythWJuPYIbopjPAxXXz92YhBCEAd/jN7K635
- BtAg==
-X-Gm-Message-State: APjAAAWxV4Hl0fh0dov2uds2+hzWPL+Dw8lvXR2smlGX65SQeVxDlHm4
- FQ0bnj0WHrB/QZNVTOQp5KM=
-X-Google-Smtp-Source: APXvYqxgnAO+ds4pEnGHY6HBS7KP2AgX9fhJ4WF42+jEC1REw3fMVF5/ogUd2mXbKvOxmBCkus9I4g==
-X-Received: by 2002:a17:902:2be6:: with SMTP id
- l93mr25256352plb.0.1566917937079; 
- Tue, 27 Aug 2019 07:58:57 -0700 (PDT)
+ bh=o5G5QsojHpHLZ4b2+LQv6vJDJLY5Fa7mmuwFQaJWcVM=;
+ b=i81C86a35V408iHMaCE4cW6NzMc7BQ/3LphbKDgOmoIjKSLXn967oKKJJoggNihJk+
+ lKMkl/+EKfxKf1jJDt/eTmNZ54bVzpHKOZZq3BC5LYXPnCcreBDiKrped947gIpaeLXQ
+ v+jRtHt8m+Hn2fi8GZeET3POmsgg3jlulp8gLYcnF3fg7UxPmY1mZNygTgmZv9mmM5Ro
+ ByPe4fbM4HIDC/+89ASCi7UQxHP6Rbjr4wVLE328B3RedSDxsTX5+hyDNAmAZGnAUpyC
+ lkB+DPS2U5bzYydztzHiG2g1adCou75Qw0oB/kK6zHHnqAyeZemC/vou4POO7SZ1DpS9
+ a0WA==
+X-Gm-Message-State: APjAAAUpQOtQD3/CBYGmGKd3+zxDsuWuQi0fnbyIky79uZkGX6bfPsuX
+ 1iNNoqdahHoEKR3Kq4F98pY=
+X-Google-Smtp-Source: APXvYqxYFc1ev1IVwtO9KjiW1BMXoZ66pm1AVfh5A5412bmWba0v/QLJGXZjcgO+dlGcUMEiD7QrdA==
+X-Received: by 2002:a63:1046:: with SMTP id 6mr22169466pgq.111.1566917938209; 
+ Tue, 27 Aug 2019 07:58:58 -0700 (PDT)
 Received: from localhost.localdomain (unknown-224-80.windriver.com.
  [147.11.224.80])
- by smtp.gmail.com with ESMTPSA id j15sm14839344pfr.146.2019.08.27.07.58.56
+ by smtp.gmail.com with ESMTPSA id j15sm14839344pfr.146.2019.08.27.07.58.57
  (version=TLS1 cipher=AES128-SHA bits=128/128);
- Tue, 27 Aug 2019 07:58:56 -0700 (PDT)
+ Tue, 27 Aug 2019 07:58:57 -0700 (PDT)
 From: Bin Meng <bmeng.cn@gmail.com>
 To: Alistair Francis <Alistair.Francis@wdc.com>,
  Palmer Dabbelt <palmer@sifive.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
-Date: Tue, 27 Aug 2019 07:58:20 -0700
-Message-Id: <1566917919-25381-12-git-send-email-bmeng.cn@gmail.com>
+Date: Tue, 27 Aug 2019 07:58:21 -0700
+Message-Id: <1566917919-25381-13-git-send-email-bmeng.cn@gmail.com>
 X-Mailer: git-send-email 1.7.1
 In-Reply-To: <1566917919-25381-1-git-send-email-bmeng.cn@gmail.com>
 References: <1566917919-25381-1-git-send-email-bmeng.cn@gmail.com>
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::642
-Subject: [Qemu-riscv] [PATCH v6 11/30] riscv: sifive_e: prci: Update the
- PRCI register block size
+X-Received-From: 2607:f8b0:4864:20::544
+Subject: [Qemu-riscv] [PATCH v6 12/30] riscv: sifive_e: Drop
+ sifive_mmio_emulate()
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -70,52 +69,88 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Aug 2019 14:59:28 -0000
+X-List-Received-Date: Tue, 27 Aug 2019 14:59:29 -0000
 
-Currently the PRCI register block size is set to 0x8000, but in fact
-0x1000 is enough, which is also what the manual says.
+Use create_unimplemented_device() instead.
 
 Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
-Reviewed-by: Chih-Min Chao <chihmin.chao@sifive.com>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+
 ---
 
 Changes in v6: None
 Changes in v5: None
 Changes in v4: None
 Changes in v3: None
-Changes in v2: None
+Changes in v2:
+- drop patch "riscv: sifive: Move sifive_mmio_emulate() to a common place"
+- new patch "riscv: sifive_e: Drop sifive_mmio_emulate()"
 
- hw/riscv/sifive_e_prci.c         | 2 +-
- include/hw/riscv/sifive_e_prci.h | 2 ++
- 2 files changed, 3 insertions(+), 1 deletion(-)
+ hw/riscv/sifive_e.c | 23 ++++++++---------------
+ 1 file changed, 8 insertions(+), 15 deletions(-)
 
-diff --git a/hw/riscv/sifive_e_prci.c b/hw/riscv/sifive_e_prci.c
-index 71de089..ad6c624 100644
---- a/hw/riscv/sifive_e_prci.c
-+++ b/hw/riscv/sifive_e_prci.c
-@@ -86,7 +86,7 @@ static void sifive_e_prci_init(Object *obj)
-     SiFiveEPRCIState *s = SIFIVE_E_PRCI(obj);
- 
-     memory_region_init_io(&s->mmio, obj, &sifive_e_prci_ops, s,
--                          TYPE_SIFIVE_E_PRCI, 0x8000);
-+                          TYPE_SIFIVE_E_PRCI, SIFIVE_E_PRCI_REG_SIZE);
-     sysbus_init_mmio(SYS_BUS_DEVICE(obj), &s->mmio);
- 
-     s->hfrosccfg = (SIFIVE_E_PRCI_HFROSCCFG_RDY | SIFIVE_E_PRCI_HFROSCCFG_EN);
-diff --git a/include/hw/riscv/sifive_e_prci.h b/include/hw/riscv/sifive_e_prci.h
-index c4b76aa..698b0b4 100644
---- a/include/hw/riscv/sifive_e_prci.h
-+++ b/include/hw/riscv/sifive_e_prci.h
-@@ -47,6 +47,8 @@ enum {
-     SIFIVE_E_PRCI_PLLOUTDIV_DIV1 = (1 << 8)
+diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
+index 2d67670..040d59f 100644
+--- a/hw/riscv/sifive_e.c
++++ b/hw/riscv/sifive_e.c
+@@ -37,6 +37,7 @@
+ #include "hw/loader.h"
+ #include "hw/sysbus.h"
+ #include "hw/char/serial.h"
++#include "hw/misc/unimp.h"
+ #include "target/riscv/cpu.h"
+ #include "hw/riscv/riscv_hart.h"
+ #include "hw/riscv/sifive_plic.h"
+@@ -74,14 +75,6 @@ static const struct MemmapEntry {
+     [SIFIVE_E_DTIM] =     { 0x80000000,     0x4000 }
  };
  
-+#define SIFIVE_E_PRCI_REG_SIZE  0x1000
-+
- #define TYPE_SIFIVE_E_PRCI      "riscv.sifive.e.prci"
+-static void sifive_mmio_emulate(MemoryRegion *parent, const char *name,
+-                             uintptr_t offset, uintptr_t length)
+-{
+-    MemoryRegion *mock_mmio = g_new(MemoryRegion, 1);
+-    memory_region_init_ram(mock_mmio, NULL, name, length, &error_fatal);
+-    memory_region_add_subregion(parent, offset, mock_mmio);
+-}
+-
+ static void riscv_sifive_e_init(MachineState *machine)
+ {
+     const struct MemmapEntry *memmap = sifive_e_memmap;
+@@ -172,7 +165,7 @@ static void riscv_sifive_e_soc_realize(DeviceState *dev, Error **errp)
+     sifive_clint_create(memmap[SIFIVE_E_CLINT].base,
+         memmap[SIFIVE_E_CLINT].size, ms->smp.cpus,
+         SIFIVE_SIP_BASE, SIFIVE_TIMECMP_BASE, SIFIVE_TIME_BASE);
+-    sifive_mmio_emulate(sys_mem, "riscv.sifive.e.aon",
++    create_unimplemented_device("riscv.sifive.e.aon",
+         memmap[SIFIVE_E_AON].base, memmap[SIFIVE_E_AON].size);
+     sifive_e_prci_create(memmap[SIFIVE_E_PRCI].base);
  
- #define SIFIVE_E_PRCI(obj) \
+@@ -199,19 +192,19 @@ static void riscv_sifive_e_soc_realize(DeviceState *dev, Error **errp)
+ 
+     sifive_uart_create(sys_mem, memmap[SIFIVE_E_UART0].base,
+         serial_hd(0), qdev_get_gpio_in(DEVICE(s->plic), SIFIVE_E_UART0_IRQ));
+-    sifive_mmio_emulate(sys_mem, "riscv.sifive.e.qspi0",
++    create_unimplemented_device("riscv.sifive.e.qspi0",
+         memmap[SIFIVE_E_QSPI0].base, memmap[SIFIVE_E_QSPI0].size);
+-    sifive_mmio_emulate(sys_mem, "riscv.sifive.e.pwm0",
++    create_unimplemented_device("riscv.sifive.e.pwm0",
+         memmap[SIFIVE_E_PWM0].base, memmap[SIFIVE_E_PWM0].size);
+     sifive_uart_create(sys_mem, memmap[SIFIVE_E_UART1].base,
+         serial_hd(1), qdev_get_gpio_in(DEVICE(s->plic), SIFIVE_E_UART1_IRQ));
+-    sifive_mmio_emulate(sys_mem, "riscv.sifive.e.qspi1",
++    create_unimplemented_device("riscv.sifive.e.qspi1",
+         memmap[SIFIVE_E_QSPI1].base, memmap[SIFIVE_E_QSPI1].size);
+-    sifive_mmio_emulate(sys_mem, "riscv.sifive.e.pwm1",
++    create_unimplemented_device("riscv.sifive.e.pwm1",
+         memmap[SIFIVE_E_PWM1].base, memmap[SIFIVE_E_PWM1].size);
+-    sifive_mmio_emulate(sys_mem, "riscv.sifive.e.qspi2",
++    create_unimplemented_device("riscv.sifive.e.qspi2",
+         memmap[SIFIVE_E_QSPI2].base, memmap[SIFIVE_E_QSPI2].size);
+-    sifive_mmio_emulate(sys_mem, "riscv.sifive.e.pwm2",
++    create_unimplemented_device("riscv.sifive.e.pwm2",
+         memmap[SIFIVE_E_PWM2].base, memmap[SIFIVE_E_PWM2].size);
+ 
+     /* Flash memory */
 -- 
 2.7.4
 
