@@ -1,63 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1i2cws-0003vY-UC
-	for mharc-qemu-riscv@gnu.org; Tue, 27 Aug 2019 10:59:54 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:47359)
+	id 1i2cwx-0003xD-8F
+	for mharc-qemu-riscv@gnu.org; Tue, 27 Aug 2019 10:59:59 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47358)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <bmeng.cn@gmail.com>) id 1i2cwj-0003q9-9L
- for qemu-riscv@nongnu.org; Tue, 27 Aug 2019 10:59:47 -0400
+ (envelope-from <bmeng.cn@gmail.com>) id 1i2cwk-0003pT-5f
+ for qemu-riscv@nongnu.org; Tue, 27 Aug 2019 10:59:48 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <bmeng.cn@gmail.com>) id 1i2cwf-0003zh-O6
- for qemu-riscv@nongnu.org; Tue, 27 Aug 2019 10:59:45 -0400
-Received: from mail-pg1-x542.google.com ([2607:f8b0:4864:20::542]:45050)
+ (envelope-from <bmeng.cn@gmail.com>) id 1i2cwf-0003ze-OP
+ for qemu-riscv@nongnu.org; Tue, 27 Aug 2019 10:59:44 -0400
+Received: from mail-pf1-x443.google.com ([2607:f8b0:4864:20::443]:39995)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
- id 1i2cwS-0003lg-Dl; Tue, 27 Aug 2019 10:59:29 -0400
-Received: by mail-pg1-x542.google.com with SMTP id i18so12832299pgl.11;
- Tue, 27 Aug 2019 07:59:16 -0700 (PDT)
+ id 1i2cwS-0003gD-Ix; Tue, 27 Aug 2019 10:59:29 -0400
+Received: by mail-pf1-x443.google.com with SMTP id w16so14285290pfn.7;
+ Tue, 27 Aug 2019 07:59:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:to:subject:date:message-id:in-reply-to:references;
- bh=yTrGOZqcn9Ur+DdirV1AaFOzOQBx22unwFJ7Yun/vxk=;
- b=AXi2X6VrjqqEomnw4rQZ/u5ux87CSq7E1P1o5mbLCDibgup3Var3uhfF9PM6abClvc
- cGvaO8wV9JlOmmwLOdD46jM9Bf2eOhCRzDQu1C+XXX4R/BCXuWV6ClDnbWSX6V0Fggxp
- xckbQNENW+HvqF6h3qOOTic46lKyR9mCvetJYoHXnGlz+Ft4m+FNWo2iG9g4PTAXwEpD
- jJ0SSr75yrP/2rsgNEZ0S7+5jwEHFU4rLcf1FB6OiHYXr80TIPlf+zyr4dAOEHDtjO6x
- avPiONI2ohEFlvrOhpgsUe9uCyBaRxGWgZWkGhHV+MVcPFyeDsKxHeG71DnbauumWBf8
- DYFg==
+ bh=K/QjoSrZSncRwXvKc/BnOUWqW1TGuvsrLcrTWiBRDHA=;
+ b=p8DlcpmkAOkBt434si/YukSjvbPrKftMU8rGyFmfu89hLdfzaAv3D3STmdp2vbyeYR
+ LB7AWoMyJR5bCdsuNPCoq4aapBYld1QXFk2j1IeVOtgJVpWTqVoXUOOtFLhjjTg8NXRC
+ lr1E5oaqxJqAS+3JLYC74ELj/L8DXCKqcokDcQ8ydUi18YvQImkzMMr4UnkYlilR5POJ
+ KbgMb13ZBZccpjdsEYhXnLJHSk3FEYemCnXPwWTY+t/8VKlXQywr/CSfG1fsPJF1PFHr
+ HoLJomyNBJGVvZyWWu3D8jqxIioLdpAkjeDHd24jKjqg8bHRahVgPLYIglFjPLVr8JuG
+ Ss3A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
  :references;
- bh=yTrGOZqcn9Ur+DdirV1AaFOzOQBx22unwFJ7Yun/vxk=;
- b=Eg1mbDKjq1vIEJ7KAVYnaLjZDG977eSXgX3ywKg5vo1ZImX2JT9/wRm6qwG7OfMcqL
- CAISTWM/aiTU4pYPXlKHhL12hnx2rSUqq9GRhvrXB0X+WoOrSgWNogZu3pT1Lkpg4IoF
- +rb6t5UAtG2cgtcpQ061DxmhLnE1+NW3s7Pbcx0dmbs7JLqLYPSAbSZJmLeLOGSpj6sE
- 4KZbvv65jOVvGC3ABwOg0rKC4o6ZDCWPFR/nlad8T7xGCIlCX4MGFJOybn0wNWKJbPtw
- 1yipeZLKgy6NyV5wzGwSi7w/uastKaXRWxQAWehpdNXsPqU/r1Jk0pbKgcZL/YOiT6nb
- XtaA==
-X-Gm-Message-State: APjAAAWkuhSNDuIzuM2R8gE1Pw9Q0s9XCQ2MW2l3iZE9zzOo27IEWJ42
- 0PM8iylKwOuaBKsJOWVoIa4=
-X-Google-Smtp-Source: APXvYqx2AcqdWNL/DviMHAfJJlA4Bo4HKLsE4R63YstVKVG+rIHoKEtQRjXYupUTm9yZWQPdnGwV1g==
-X-Received: by 2002:a63:2364:: with SMTP id u36mr20881926pgm.449.1566917955308; 
- Tue, 27 Aug 2019 07:59:15 -0700 (PDT)
+ bh=K/QjoSrZSncRwXvKc/BnOUWqW1TGuvsrLcrTWiBRDHA=;
+ b=UHpOZp+x857USU5YsD3Z1k5xmqx3moORt98Gf/EifM1cAgbB6uuf3E+SgAZKWf4N4h
+ qum56Q+HeVwfJzzwomBeflg0ijVIWLYcs7TDH7lpHyjfFbkHVFng7T/P2WYgx0ls9E7K
+ fWclhn7i6DzbnwQtkd1CrEhl/rzCUXbJhhehw7ZxdWeZW3WwAIZ7+VPwH1YnXPhmQbx6
+ JpLwPKJOjasl170wDmMqC17rUORiVruRKGrnY+vpc4r/K+YOWKjXS4ATUi2CoXDBKU+I
+ CMnp1d87cn6JwDiAAyV8gnhm3sFzZOWcZksDsGAHw3FOnytstuUw+k7dBpTWv6xa7n1P
+ W+ag==
+X-Gm-Message-State: APjAAAUmxCPdhx0sGytpOuySzEuH0m9CZn8mFc04s/ul5a5Yg8J8kASZ
+ A98pk3jrtfhpOYzNdzD/Lm8PCn2K
+X-Google-Smtp-Source: APXvYqwc50m0L03smyGQJkz2BkYLF0ioa6W5tZ7xRDRZqBz5XN/IinJbX2NJf2qjB0/xts4rkPYcKw==
+X-Received: by 2002:a65:6401:: with SMTP id a1mr21622927pgv.42.1566917944048; 
+ Tue, 27 Aug 2019 07:59:04 -0700 (PDT)
 Received: from localhost.localdomain (unknown-224-80.windriver.com.
  [147.11.224.80])
- by smtp.gmail.com with ESMTPSA id j15sm14839344pfr.146.2019.08.27.07.59.13
+ by smtp.gmail.com with ESMTPSA id j15sm14839344pfr.146.2019.08.27.07.59.03
  (version=TLS1 cipher=AES128-SHA bits=128/128);
- Tue, 27 Aug 2019 07:59:14 -0700 (PDT)
+ Tue, 27 Aug 2019 07:59:03 -0700 (PDT)
 From: Bin Meng <bmeng.cn@gmail.com>
 To: Alistair Francis <Alistair.Francis@wdc.com>,
  Palmer Dabbelt <palmer@sifive.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
-Date: Tue, 27 Aug 2019 07:58:35 -0700
-Message-Id: <1566917919-25381-27-git-send-email-bmeng.cn@gmail.com>
+Date: Tue, 27 Aug 2019 07:58:26 -0700
+Message-Id: <1566917919-25381-18-git-send-email-bmeng.cn@gmail.com>
 X-Mailer: git-send-email 1.7.1
 In-Reply-To: <1566917919-25381-1-git-send-email-bmeng.cn@gmail.com>
 References: <1566917919-25381-1-git-send-email-bmeng.cn@gmail.com>
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::542
-Subject: [Qemu-riscv] [PATCH v6 26/30] riscv: sifive: Implement a model for
- SiFive FU540 OTP
+X-Received-From: 2607:f8b0:4864:20::443
+Subject: [Qemu-riscv] [PATCH v6 17/30] riscv: sifive_u: Update hart
+ configuration to reflect the real FU540 SoC
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -69,334 +69,243 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Aug 2019 14:59:48 -0000
+X-List-Received-Date: Tue, 27 Aug 2019 14:59:49 -0000
 
-This implements a simple model for SiFive FU540 OTP (One-Time
-Programmable) Memory interface, primarily for reading out the
-stored serial number from the first 1 KiB of the 16 KiB OTP
-memory reserved by SiFive for internal use.
+The FU540-C000 includes a 64-bit E51 RISC-V core and four 64-bit U54
+RISC-V cores. Currently the sifive_u machine only populates 4 U54
+cores. Update the max cpu number to 5 to reflect the real hardware,
+by creating 2 CPU clusters as containers for RISC-V hart arrays to
+populate heterogeneous harts.
+
+The cpu nodes in the generated DTS have been updated as well.
 
 Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 ---
 
-Changes in v6: None
-Changes in v5:
-- change to use defines instead of enums
-- change to use qemu_log_mask(LOG_GUEST_ERROR,...) in sifive_u_otp
-- creating a 32-bit val variable and using that instead of casting
-  everywhere in sifive_u_otp_write()
-- move all register initialization to sifive_u_otp_reset() function
-- drop sifive_u_otp_create()
+Changes in v6:
+- generate u cpus unconditionally (not test ms->smp.cpus > 1)
+  since the minimal required number of cpu is now 2, due to
+  this patch is reordered
 
+Changes in v5: None
 Changes in v4:
-- prefix all macros/variables/functions with SIFIVE_U/sifive_u
-  in the sifive_u_otp driver
+- changed to create clusters for each cpu type
 
-Changes in v3: None
-Changes in v2: None
+Changes in v3:
+- changed to use macros for management and compute cpu count
 
- hw/riscv/Makefile.objs          |   1 +
- hw/riscv/sifive_u_otp.c         | 190 ++++++++++++++++++++++++++++++++++++++++
- include/hw/riscv/sifive_u_otp.h |  80 +++++++++++++++++
- 3 files changed, 271 insertions(+)
- create mode 100644 hw/riscv/sifive_u_otp.c
- create mode 100644 include/hw/riscv/sifive_u_otp.h
+Changes in v2:
+- fixed the "interrupts-extended" property size
 
-diff --git a/hw/riscv/Makefile.objs b/hw/riscv/Makefile.objs
-index b95bbd5..fc3c6dd 100644
---- a/hw/riscv/Makefile.objs
-+++ b/hw/riscv/Makefile.objs
-@@ -8,6 +8,7 @@ obj-$(CONFIG_SIFIVE) += sifive_gpio.o
- obj-$(CONFIG_SIFIVE) += sifive_plic.o
- obj-$(CONFIG_SIFIVE) += sifive_test.o
- obj-$(CONFIG_SIFIVE_U) += sifive_u.o
-+obj-$(CONFIG_SIFIVE_U) += sifive_u_otp.o
- obj-$(CONFIG_SIFIVE_U) += sifive_u_prci.o
- obj-$(CONFIG_SIFIVE) += sifive_uart.o
- obj-$(CONFIG_SPIKE) += spike.o
-diff --git a/hw/riscv/sifive_u_otp.c b/hw/riscv/sifive_u_otp.c
-new file mode 100644
-index 0000000..7d65a85
---- /dev/null
-+++ b/hw/riscv/sifive_u_otp.c
-@@ -0,0 +1,190 @@
-+/*
-+ * QEMU SiFive U OTP (One-Time Programmable) Memory interface
-+ *
-+ * Copyright (c) 2019 Bin Meng <bmeng.cn@gmail.com>
-+ *
-+ * Simple model of the OTP to emulate register reads made by the SDK BSP
-+ *
-+ * This program is free software; you can redistribute it and/or modify it
-+ * under the terms and conditions of the GNU General Public License,
-+ * version 2 or later, as published by the Free Software Foundation.
-+ *
-+ * This program is distributed in the hope it will be useful, but WITHOUT
-+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-+ * more details.
-+ *
-+ * You should have received a copy of the GNU General Public License along with
-+ * this program.  If not, see <http://www.gnu.org/licenses/>.
-+ */
-+
-+#include "qemu/osdep.h"
-+#include "hw/sysbus.h"
-+#include "qemu/log.h"
-+#include "qemu/module.h"
-+#include "hw/riscv/sifive_u_otp.h"
-+
-+static uint64_t sifive_u_otp_read(void *opaque, hwaddr addr, unsigned int size)
-+{
-+    SiFiveUOTPState *s = opaque;
-+
-+    switch (addr) {
-+    case SIFIVE_U_OTP_PA:
-+        return s->pa;
-+    case SIFIVE_U_OTP_PAIO:
-+        return s->paio;
-+    case SIFIVE_U_OTP_PAS:
-+        return s->pas;
-+    case SIFIVE_U_OTP_PCE:
-+        return s->pce;
-+    case SIFIVE_U_OTP_PCLK:
-+        return s->pclk;
-+    case SIFIVE_U_OTP_PDIN:
-+        return s->pdin;
-+    case SIFIVE_U_OTP_PDOUT:
-+        if ((s->pce & SIFIVE_U_OTP_PCE_EN) &&
-+            (s->pdstb & SIFIVE_U_OTP_PDSTB_EN) &&
-+            (s->ptrim & SIFIVE_U_OTP_PTRIM_EN)) {
-+            return s->fuse[s->pa & SIFIVE_U_OTP_PA_MASK];
+ hw/riscv/sifive_u.c         | 92 +++++++++++++++++++++++++++++++++------------
+ include/hw/riscv/sifive_u.h |  6 ++-
+ 2 files changed, 72 insertions(+), 26 deletions(-)
+
+diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+index 67b503a..7f51d9d 100644
+--- a/hw/riscv/sifive_u.c
++++ b/hw/riscv/sifive_u.c
+@@ -11,7 +11,7 @@
+  * 2) PLIC (Platform Level Interrupt Controller)
+  *
+  * This board currently generates devicetree dynamically that indicates at least
+- * two harts.
++ * two harts and up to five harts.
+  *
+  * This program is free software; you can redistribute it and/or modify it
+  * under the terms and conditions of the GNU General Public License,
+@@ -35,6 +35,7 @@
+ #include "hw/loader.h"
+ #include "hw/sysbus.h"
+ #include "hw/char/serial.h"
++#include "hw/cpu/cluster.h"
+ #include "target/riscv/cpu.h"
+ #include "hw/riscv/riscv_hart.h"
+ #include "hw/riscv/sifive_plic.h"
+@@ -70,6 +71,7 @@ static const struct MemmapEntry {
+ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
+     uint64_t mem_size, const char *cmdline)
+ {
++    MachineState *ms = MACHINE(qdev_get_machine());
+     void *fdt;
+     int cpu;
+     uint32_t *cells;
+@@ -110,15 +112,21 @@ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
+     qemu_fdt_setprop_cell(fdt, "/cpus", "#size-cells", 0x0);
+     qemu_fdt_setprop_cell(fdt, "/cpus", "#address-cells", 0x1);
+ 
+-    for (cpu = s->soc.cpus.num_harts - 1; cpu >= 0; cpu--) {
++    for (cpu = ms->smp.cpus - 1; cpu >= 0; cpu--) {
+         int cpu_phandle = phandle++;
+         nodename = g_strdup_printf("/cpus/cpu@%d", cpu);
+         char *intc = g_strdup_printf("/cpus/cpu@%d/interrupt-controller", cpu);
+-        char *isa = riscv_isa_string(&s->soc.cpus.harts[cpu]);
++        char *isa;
+         qemu_fdt_add_subnode(fdt, nodename);
+         qemu_fdt_setprop_cell(fdt, nodename, "clock-frequency",
+                               SIFIVE_U_CLOCK_FREQ);
+-        qemu_fdt_setprop_string(fdt, nodename, "mmu-type", "riscv,sv48");
++        /* cpu 0 is the management hart that does not have mmu */
++        if (cpu != 0) {
++            qemu_fdt_setprop_string(fdt, nodename, "mmu-type", "riscv,sv48");
++            isa = riscv_isa_string(&s->soc.u_cpus.harts[cpu - 1]);
 +        } else {
-+            return 0xff;
++            isa = riscv_isa_string(&s->soc.e_cpus.harts[0]);
 +        }
-+    case SIFIVE_U_OTP_PDSTB:
-+        return s->pdstb;
-+    case SIFIVE_U_OTP_PPROG:
-+        return s->pprog;
-+    case SIFIVE_U_OTP_PTC:
-+        return s->ptc;
-+    case SIFIVE_U_OTP_PTM:
-+        return s->ptm;
-+    case SIFIVE_U_OTP_PTM_REP:
-+        return s->ptm_rep;
-+    case SIFIVE_U_OTP_PTR:
-+        return s->ptr;
-+    case SIFIVE_U_OTP_PTRIM:
-+        return s->ptrim;
-+    case SIFIVE_U_OTP_PWE:
-+        return s->pwe;
-+    }
+         qemu_fdt_setprop_string(fdt, nodename, "riscv,isa", isa);
+         qemu_fdt_setprop_string(fdt, nodename, "compatible", "riscv");
+         qemu_fdt_setprop_string(fdt, nodename, "status", "okay");
+@@ -134,8 +142,8 @@ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
+         g_free(nodename);
+     }
+ 
+-    cells =  g_new0(uint32_t, s->soc.cpus.num_harts * 4);
+-    for (cpu = 0; cpu < s->soc.cpus.num_harts; cpu++) {
++    cells =  g_new0(uint32_t, ms->smp.cpus * 4);
++    for (cpu = 0; cpu < ms->smp.cpus; cpu++) {
+         nodename =
+             g_strdup_printf("/cpus/cpu@%d/interrupt-controller", cpu);
+         uint32_t intc_phandle = qemu_fdt_get_phandle(fdt, nodename);
+@@ -153,20 +161,26 @@ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
+         0x0, memmap[SIFIVE_U_CLINT].base,
+         0x0, memmap[SIFIVE_U_CLINT].size);
+     qemu_fdt_setprop(fdt, nodename, "interrupts-extended",
+-        cells, s->soc.cpus.num_harts * sizeof(uint32_t) * 4);
++        cells, ms->smp.cpus * sizeof(uint32_t) * 4);
+     g_free(cells);
+     g_free(nodename);
+ 
+     plic_phandle = phandle++;
+-    cells =  g_new0(uint32_t, s->soc.cpus.num_harts * 4);
+-    for (cpu = 0; cpu < s->soc.cpus.num_harts; cpu++) {
++    cells =  g_new0(uint32_t, ms->smp.cpus * 4 - 2);
++    for (cpu = 0; cpu < ms->smp.cpus; cpu++) {
+         nodename =
+             g_strdup_printf("/cpus/cpu@%d/interrupt-controller", cpu);
+         uint32_t intc_phandle = qemu_fdt_get_phandle(fdt, nodename);
+-        cells[cpu * 4 + 0] = cpu_to_be32(intc_phandle);
+-        cells[cpu * 4 + 1] = cpu_to_be32(IRQ_M_EXT);
+-        cells[cpu * 4 + 2] = cpu_to_be32(intc_phandle);
+-        cells[cpu * 4 + 3] = cpu_to_be32(IRQ_S_EXT);
++        /* cpu 0 is the management hart that does not have S-mode */
++        if (cpu == 0) {
++            cells[0] = cpu_to_be32(intc_phandle);
++            cells[1] = cpu_to_be32(IRQ_M_EXT);
++        } else {
++            cells[cpu * 4 - 2] = cpu_to_be32(intc_phandle);
++            cells[cpu * 4 - 1] = cpu_to_be32(IRQ_M_EXT);
++            cells[cpu * 4 + 0] = cpu_to_be32(intc_phandle);
++            cells[cpu * 4 + 1] = cpu_to_be32(IRQ_S_EXT);
++        }
+         g_free(nodename);
+     }
+     nodename = g_strdup_printf("/soc/interrupt-controller@%lx",
+@@ -176,7 +190,7 @@ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
+     qemu_fdt_setprop_string(fdt, nodename, "compatible", "riscv,plic0");
+     qemu_fdt_setprop(fdt, nodename, "interrupt-controller", NULL, 0);
+     qemu_fdt_setprop(fdt, nodename, "interrupts-extended",
+-        cells, s->soc.cpus.num_harts * sizeof(uint32_t) * 4);
++        cells, (ms->smp.cpus * 4 - 2) * sizeof(uint32_t));
+     qemu_fdt_setprop_cells(fdt, nodename, "reg",
+         0x0, memmap[SIFIVE_U_PLIC].base,
+         0x0, memmap[SIFIVE_U_PLIC].size);
+@@ -339,12 +353,31 @@ static void riscv_sifive_u_soc_init(Object *obj)
+     MachineState *ms = MACHINE(qdev_get_machine());
+     SiFiveUSoCState *s = RISCV_U_SOC(obj);
+ 
+-    object_initialize_child(obj, "cpus", &s->cpus, sizeof(s->cpus),
+-                            TYPE_RISCV_HART_ARRAY, &error_abort, NULL);
+-    object_property_set_str(OBJECT(&s->cpus), SIFIVE_U_CPU, "cpu-type",
+-                            &error_abort);
+-    object_property_set_int(OBJECT(&s->cpus), ms->smp.cpus, "num-harts",
+-                            &error_abort);
++    object_initialize_child(obj, "e-cluster", &s->e_cluster,
++                            sizeof(s->e_cluster), TYPE_CPU_CLUSTER,
++                            &error_abort, NULL);
++    qdev_prop_set_uint32(DEVICE(&s->e_cluster), "cluster-id", 0);
 +
-+    qemu_log_mask(LOG_GUEST_ERROR, "%s: read: addr=0x%x\n",
-+                  __func__, (int)addr);
-+    return 0;
-+}
++    object_initialize_child(OBJECT(&s->e_cluster), "e-cpus",
++                            &s->e_cpus, sizeof(s->e_cpus),
++                            TYPE_RISCV_HART_ARRAY, &error_abort,
++                            NULL);
++    qdev_prop_set_uint32(DEVICE(&s->e_cpus), "num-harts", 1);
++    qdev_prop_set_uint32(DEVICE(&s->e_cpus), "hartid-base", 0);
++    qdev_prop_set_string(DEVICE(&s->e_cpus), "cpu-type", SIFIVE_E_CPU);
 +
-+static void sifive_u_otp_write(void *opaque, hwaddr addr,
-+                               uint64_t val64, unsigned int size)
-+{
-+    SiFiveUOTPState *s = opaque;
-+    uint32_t val32 = (uint32_t)val64;
++    object_initialize_child(obj, "u-cluster", &s->u_cluster,
++                            sizeof(s->u_cluster), TYPE_CPU_CLUSTER,
++                            &error_abort, NULL);
++    qdev_prop_set_uint32(DEVICE(&s->u_cluster), "cluster-id", 1);
 +
-+    switch (addr) {
-+    case SIFIVE_U_OTP_PA:
-+        s->pa = val32 & SIFIVE_U_OTP_PA_MASK;
-+        break;
-+    case SIFIVE_U_OTP_PAIO:
-+        s->paio = val32;
-+        break;
-+    case SIFIVE_U_OTP_PAS:
-+        s->pas = val32;
-+        break;
-+    case SIFIVE_U_OTP_PCE:
-+        s->pce = val32;
-+        break;
-+    case SIFIVE_U_OTP_PCLK:
-+        s->pclk = val32;
-+        break;
-+    case SIFIVE_U_OTP_PDIN:
-+        s->pdin = val32;
-+        break;
-+    case SIFIVE_U_OTP_PDOUT:
-+        /* read-only */
-+        break;
-+    case SIFIVE_U_OTP_PDSTB:
-+        s->pdstb = val32;
-+        break;
-+    case SIFIVE_U_OTP_PPROG:
-+        s->pprog = val32;
-+        break;
-+    case SIFIVE_U_OTP_PTC:
-+        s->ptc = val32;
-+        break;
-+    case SIFIVE_U_OTP_PTM:
-+        s->ptm = val32;
-+        break;
-+    case SIFIVE_U_OTP_PTM_REP:
-+        s->ptm_rep = val32;
-+        break;
-+    case SIFIVE_U_OTP_PTR:
-+        s->ptr = val32;
-+        break;
-+    case SIFIVE_U_OTP_PTRIM:
-+        s->ptrim = val32;
-+        break;
-+    case SIFIVE_U_OTP_PWE:
-+        s->pwe = val32;
-+        break;
-+    default:
-+        qemu_log_mask(LOG_GUEST_ERROR, "%s: bad write: addr=0x%x v=0x%x\n",
-+                      __func__, (int)addr, (int)val64);
-+    }
-+}
-+
-+static const MemoryRegionOps sifive_u_otp_ops = {
-+    .read = sifive_u_otp_read,
-+    .write = sifive_u_otp_write,
-+    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .valid = {
-+        .min_access_size = 4,
-+        .max_access_size = 4
-+    }
-+};
-+
-+static Property sifive_u_otp_properties[] = {
-+    DEFINE_PROP_UINT32("serial", SiFiveUOTPState, serial, 0),
-+    DEFINE_PROP_END_OF_LIST(),
-+};
-+
-+static void sifive_u_otp_realize(DeviceState *dev, Error **errp)
-+{
-+    SiFiveUOTPState *s = SIFIVE_U_OTP(dev);
-+
-+    memory_region_init_io(&s->mmio, OBJECT(dev), &sifive_u_otp_ops, s,
-+                          TYPE_SIFIVE_U_OTP, SIFIVE_U_OTP_REG_SIZE);
-+    sysbus_init_mmio(SYS_BUS_DEVICE(dev), &s->mmio);
-+}
-+
-+static void sifive_u_otp_reset(DeviceState *dev)
-+{
-+    SiFiveUOTPState *s = SIFIVE_U_OTP(dev);
-+
-+    /* Initialize all fuses' initial value to 0xFFs */
-+    memset(s->fuse, 0xff, sizeof(s->fuse));
-+
-+    /* Make a valid content of serial number */
-+    s->fuse[SIFIVE_U_OTP_SERIAL_ADDR] = s->serial;
-+    s->fuse[SIFIVE_U_OTP_SERIAL_ADDR + 1] = ~(s->serial);
-+}
-+
-+static void sifive_u_otp_class_init(ObjectClass *klass, void *data)
-+{
-+    DeviceClass *dc = DEVICE_CLASS(klass);
-+
-+    dc->props = sifive_u_otp_properties;
-+    dc->realize = sifive_u_otp_realize;
-+    dc->reset = sifive_u_otp_reset;
-+}
-+
-+static const TypeInfo sifive_u_otp_info = {
-+    .name          = TYPE_SIFIVE_U_OTP,
-+    .parent        = TYPE_SYS_BUS_DEVICE,
-+    .instance_size = sizeof(SiFiveUOTPState),
-+    .class_init    = sifive_u_otp_class_init,
-+};
-+
-+static void sifive_u_otp_register_types(void)
-+{
-+    type_register_static(&sifive_u_otp_info);
-+}
-+
-+type_init(sifive_u_otp_register_types)
-diff --git a/include/hw/riscv/sifive_u_otp.h b/include/hw/riscv/sifive_u_otp.h
-new file mode 100644
-index 0000000..6392975
---- /dev/null
-+++ b/include/hw/riscv/sifive_u_otp.h
-@@ -0,0 +1,80 @@
-+/*
-+ * QEMU SiFive U OTP (One-Time Programmable) Memory interface
-+ *
-+ * Copyright (c) 2019 Bin Meng <bmeng.cn@gmail.com>
-+ *
-+ * This program is free software; you can redistribute it and/or modify it
-+ * under the terms and conditions of the GNU General Public License,
-+ * version 2 or later, as published by the Free Software Foundation.
-+ *
-+ * This program is distributed in the hope it will be useful, but WITHOUT
-+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-+ * more details.
-+ *
-+ * You should have received a copy of the GNU General Public License along with
-+ * this program.  If not, see <http://www.gnu.org/licenses/>.
-+ */
-+
-+#ifndef HW_SIFIVE_U_OTP_H
-+#define HW_SIFIVE_U_OTP_H
-+
-+#define SIFIVE_U_OTP_PA         0x00
-+#define SIFIVE_U_OTP_PAIO       0x04
-+#define SIFIVE_U_OTP_PAS        0x08
-+#define SIFIVE_U_OTP_PCE        0x0C
-+#define SIFIVE_U_OTP_PCLK       0x10
-+#define SIFIVE_U_OTP_PDIN       0x14
-+#define SIFIVE_U_OTP_PDOUT      0x18
-+#define SIFIVE_U_OTP_PDSTB      0x1C
-+#define SIFIVE_U_OTP_PPROG      0x20
-+#define SIFIVE_U_OTP_PTC        0x24
-+#define SIFIVE_U_OTP_PTM        0x28
-+#define SIFIVE_U_OTP_PTM_REP    0x2C
-+#define SIFIVE_U_OTP_PTR        0x30
-+#define SIFIVE_U_OTP_PTRIM      0x34
-+#define SIFIVE_U_OTP_PWE        0x38
-+
-+#define SIFIVE_U_OTP_PCE_EN     (1 << 0)
-+
-+#define SIFIVE_U_OTP_PDSTB_EN   (1 << 0)
-+
-+#define SIFIVE_U_OTP_PTRIM_EN   (1 << 0)
-+
-+#define SIFIVE_U_OTP_PA_MASK        0xfff
-+#define SIFIVE_U_OTP_NUM_FUSES      0x1000
-+#define SIFIVE_U_OTP_SERIAL_ADDR    0xfc
-+
-+#define SIFIVE_U_OTP_REG_SIZE       0x1000
-+
-+#define TYPE_SIFIVE_U_OTP           "riscv.sifive.u.otp"
-+
-+#define SIFIVE_U_OTP(obj) \
-+    OBJECT_CHECK(SiFiveUOTPState, (obj), TYPE_SIFIVE_U_OTP)
-+
-+typedef struct SiFiveUOTPState {
-+    /*< private >*/
-+    SysBusDevice parent_obj;
-+
-+    /*< public >*/
-+    MemoryRegion mmio;
-+    uint32_t pa;
-+    uint32_t paio;
-+    uint32_t pas;
-+    uint32_t pce;
-+    uint32_t pclk;
-+    uint32_t pdin;
-+    uint32_t pdstb;
-+    uint32_t pprog;
-+    uint32_t ptc;
-+    uint32_t ptm;
-+    uint32_t ptm_rep;
-+    uint32_t ptr;
-+    uint32_t ptrim;
-+    uint32_t pwe;
-+    uint32_t fuse[SIFIVE_U_OTP_NUM_FUSES];
-+    /* config */
-+    uint32_t serial;
-+} SiFiveUOTPState;
-+
-+#endif /* HW_SIFIVE_U_OTP_H */
++    object_initialize_child(OBJECT(&s->u_cluster), "u-cpus",
++                            &s->u_cpus, sizeof(s->u_cpus),
++                            TYPE_RISCV_HART_ARRAY, &error_abort,
++                            NULL);
++    qdev_prop_set_uint32(DEVICE(&s->u_cpus), "num-harts", ms->smp.cpus - 1);
++    qdev_prop_set_uint32(DEVICE(&s->u_cpus), "hartid-base", 1);
++    qdev_prop_set_string(DEVICE(&s->u_cpus), "cpu-type", SIFIVE_U_CPU);
+ 
+     sysbus_init_child_obj(obj, "gem", &s->gem, sizeof(s->gem),
+                           TYPE_CADENCE_GEM);
+@@ -364,7 +397,19 @@ static void riscv_sifive_u_soc_realize(DeviceState *dev, Error **errp)
+     Error *err = NULL;
+     NICInfo *nd = &nd_table[0];
+ 
+-    object_property_set_bool(OBJECT(&s->cpus), true, "realized",
++    object_property_set_bool(OBJECT(&s->e_cpus), true, "realized",
++                             &error_abort);
++    object_property_set_bool(OBJECT(&s->u_cpus), true, "realized",
++                             &error_abort);
++    /*
++     * The cluster must be realized after the RISC-V hart array container,
++     * as the container's CPU object is only created on realize, and the
++     * CPU must exist and have been parented into the cluster before the
++     * cluster is realized.
++     */
++    object_property_set_bool(OBJECT(&s->e_cluster), true, "realized",
++                             &error_abort);
++    object_property_set_bool(OBJECT(&s->u_cluster), true, "realized",
+                              &error_abort);
+ 
+     /* boot rom */
+@@ -430,10 +475,7 @@ static void riscv_sifive_u_machine_init(MachineClass *mc)
+ {
+     mc->desc = "RISC-V Board compatible with SiFive U SDK";
+     mc->init = riscv_sifive_u_init;
+-    /* The real hardware has 5 CPUs, but one of them is a small embedded power
+-     * management CPU.
+-     */
+-    mc->max_cpus = 4;
++    mc->max_cpus = SIFIVE_U_MANAGEMENT_CPU_COUNT + SIFIVE_U_COMPUTE_CPU_COUNT;
+     mc->min_cpus = SIFIVE_U_MANAGEMENT_CPU_COUNT + 1;
+ }
+ 
+diff --git a/include/hw/riscv/sifive_u.h b/include/hw/riscv/sifive_u.h
+index 32d680c..7a1a4f3 100644
+--- a/include/hw/riscv/sifive_u.h
++++ b/include/hw/riscv/sifive_u.h
+@@ -31,7 +31,10 @@ typedef struct SiFiveUSoCState {
+     SysBusDevice parent_obj;
+ 
+     /*< public >*/
+-    RISCVHartArrayState cpus;
++    CPUClusterState e_cluster;
++    CPUClusterState u_cluster;
++    RISCVHartArrayState e_cpus;
++    RISCVHartArrayState u_cpus;
+     DeviceState *plic;
+     CadenceGEMState gem;
+ } SiFiveUSoCState;
+@@ -69,6 +72,7 @@ enum {
+ };
+ 
+ #define SIFIVE_U_MANAGEMENT_CPU_COUNT   1
++#define SIFIVE_U_COMPUTE_CPU_COUNT      4
+ 
+ #define SIFIVE_U_PLIC_HART_CONFIG "MS"
+ #define SIFIVE_U_PLIC_NUM_SOURCES 54
 -- 
 2.7.4
 
