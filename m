@@ -1,68 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1i2cwE-0003L2-HQ
-	for mharc-qemu-riscv@gnu.org; Tue, 27 Aug 2019 10:59:14 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:46658)
+	id 1i2cwI-0003Md-4f
+	for mharc-qemu-riscv@gnu.org; Tue, 27 Aug 2019 10:59:19 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:46690)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <bmeng.cn@gmail.com>) id 1i2cvx-0003Fd-Jc
- for qemu-riscv@nongnu.org; Tue, 27 Aug 2019 10:59:00 -0400
+ (envelope-from <bmeng.cn@gmail.com>) id 1i2cw1-0003Hj-0S
+ for qemu-riscv@nongnu.org; Tue, 27 Aug 2019 10:59:03 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <bmeng.cn@gmail.com>) id 1i2cvu-0003PP-CE
- for qemu-riscv@nongnu.org; Tue, 27 Aug 2019 10:58:55 -0400
-Received: from mail-pf1-x444.google.com ([2607:f8b0:4864:20::444]:41378)
+ (envelope-from <bmeng.cn@gmail.com>) id 1i2cvx-0003W1-H2
+ for qemu-riscv@nongnu.org; Tue, 27 Aug 2019 10:58:58 -0400
+Received: from mail-pg1-x544.google.com ([2607:f8b0:4864:20::544]:34731)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
- id 1i2cvq-0003L5-7P; Tue, 27 Aug 2019 10:58:50 -0400
-Received: by mail-pf1-x444.google.com with SMTP id 196so14283076pfz.8;
- Tue, 27 Aug 2019 07:58:50 -0700 (PDT)
+ id 1i2cvs-0003OA-HH; Tue, 27 Aug 2019 10:58:52 -0400
+Received: by mail-pg1-x544.google.com with SMTP id n9so12856991pgc.1;
+ Tue, 27 Aug 2019 07:58:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:subject:date:message-id:in-reply-to:references:mime-version
- :content-transfer-encoding;
- bh=WTSIdpTim8PZZEQ7sQ3k/MMjq+tZYHOHsOC3II1eIRc=;
- b=V9PlO+ftyN0XUa/gma5d4RGboAjPuTlPOVhyXrywNLdRYDdrbw0x0272Hv6uAmHj6M
- 00cZQyVpk/X1NrkGPFS1Foq/DDw0sZSTDsDAQRvqHpPpOzfJ0ZEk17y45g5rdbjSMjU2
- U8SasH+486tIXOH3kxBAMk464kqtqXA5DRFj7wzND4HzkUmbCI2WzgNmorisYkWIsIt4
- WW45EpMa9eXSye+rXufwJaHxcDQyTZ5iLZsrAQIgQu4c7Hy00Y6zdre+ZawkHQRLMIYa
- aHpDITBo4j54x3URvMs1n7/ODJ667sFUzESII1oKSjb/5wmS7SvkashsNaI4J9TUahNx
- YlWA==
+ h=from:to:subject:date:message-id:in-reply-to:references;
+ bh=9zPJ4Q9TIgxIyECVOCVkDoBRfMIAHimE+QxZVrAJ+Xo=;
+ b=mMDwwOz7p9gowc1r3aRglqPDJZ6In/MRrdUIGzJp4OD+kvIlvi0zO70cwdgeD96Ol6
+ UygXm3vKL5Lk+GXiS834cTSQhVS2otMKdtZICtswVGz6q45sn7mr9Ccmo42LXsiPjLmB
+ dPyVEkvHGqij9lfKdZqwnbQOJhG9XpV4yMLS8QAjXQDymbX75AGjnIEWywSMcc4JPCyJ
+ v6i/XMHM4taEyJ5+7ZZiSEHyK9cvzMNYCn7ul6Essfwzl2mkQVVyn0ceZr+MDi0uL1bm
+ QumT5DEhxsHf24wElAUqAWPAM8flpFwvmtHSQw0jZbSwoVSKh8OOL/L1RokS7t+ZgrM4
+ O44g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=WTSIdpTim8PZZEQ7sQ3k/MMjq+tZYHOHsOC3II1eIRc=;
- b=o291n24PKRdUXLpQsubaMBMnZ5dDiSs2X7kpSyrbeOn6HTtNQhkG+JrRuIOZVoxfNA
- 1DfgdANMwsmyWwKdC0Iz5gsFK81EaNAafWY0KulFlfF6YCs+G2ExJ+zzpKpcnff3h4ea
- ZrhQx36A9qVqlnKaJehDIaEppCnS5F1jn4GP4w6JUHH7J8YtZCeNXVnbk342VEWEQTIu
- /Dt32HKw3mRnCPBIPhvHaWDZq/edSVQq6fT+SMQSS8cp2SfjVZweqe1ThcQmP7QC9FGC
- VJSFVzseRvYsacItAHEZUsrn46HovH9h/I5LQ1Kmsc7OzgXNVAEZKJaodj9X/48u/4bK
- J/sA==
-X-Gm-Message-State: APjAAAVeuyrni+uABO9DArxMpWHyBP/Zkf1vulfNs2UFaRaecCxwtGGC
- 0u9b5dOMNIJVYfCdxpx/33E=
-X-Google-Smtp-Source: APXvYqxwwGYcWTaVjoGeyV2klpdDrgNYD1rTew/RXfGZMniKDFQM3k4W5HXlsldF/f273aJ607ojzg==
-X-Received: by 2002:a17:90a:17c4:: with SMTP id
- q62mr25352673pja.135.1566917929479; 
- Tue, 27 Aug 2019 07:58:49 -0700 (PDT)
+ :references;
+ bh=9zPJ4Q9TIgxIyECVOCVkDoBRfMIAHimE+QxZVrAJ+Xo=;
+ b=qy31XN2l70tUZwjO1KeGnloe6xx0ru75ricMpkcCi50DOQ9RwNYs2kPI3T+vy5X8kM
+ 51yZT7JGdihI7X8YmrUgrcrSpuwyHI8veaOj43c5pshhDACIxatsxsjCdWCUrtvjCxZW
+ 8NG8Y5Y1l6+7toYQ3qOJftpVCdmJHKsZOmOKm51qncZmfTgX1T8trb4EEHNEVPWNI7bE
+ 63PwenttqAh3F6HAzvsN87qPTWD4jY1QR7FHJFBUbG97z9QJeecm41YhTRbTtYHX6TiK
+ eiFaE+U0X/5pnRqtStpyCRnF1OJIJRMf96m37f7hr9yCqDkMWtoR9KEweEQCzWZ6WjRh
+ D+sw==
+X-Gm-Message-State: APjAAAWESQxf12/ckC/5jF6B3ybWBhaF4AaFtc7tRfJotIUy7RPfIBzz
+ Si1MnBd+mbk4m/FXYaUXOOo=
+X-Google-Smtp-Source: APXvYqwB2h13iFT/lvPIBPhltqcGQ0tCsEjc7GmSxNYH2DbIJq1Vp++Xg58RHWl5oGiZzPwNl+PgBA==
+X-Received: by 2002:a17:90b:907:: with SMTP id
+ bo7mr26153582pjb.107.1566917931720; 
+ Tue, 27 Aug 2019 07:58:51 -0700 (PDT)
 Received: from localhost.localdomain (unknown-224-80.windriver.com.
  [147.11.224.80])
- by smtp.gmail.com with ESMTPSA id j15sm14839344pfr.146.2019.08.27.07.58.48
+ by smtp.gmail.com with ESMTPSA id j15sm14839344pfr.146.2019.08.27.07.58.50
  (version=TLS1 cipher=AES128-SHA bits=128/128);
- Tue, 27 Aug 2019 07:58:48 -0700 (PDT)
+ Tue, 27 Aug 2019 07:58:51 -0700 (PDT)
 From: Bin Meng <bmeng.cn@gmail.com>
 To: Alistair Francis <Alistair.Francis@wdc.com>,
  Palmer Dabbelt <palmer@sifive.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
-Date: Tue, 27 Aug 2019 07:58:13 -0700
-Message-Id: <1566917919-25381-5-git-send-email-bmeng.cn@gmail.com>
+Date: Tue, 27 Aug 2019 07:58:15 -0700
+Message-Id: <1566917919-25381-7-git-send-email-bmeng.cn@gmail.com>
 X-Mailer: git-send-email 1.7.1
 In-Reply-To: <1566917919-25381-1-git-send-email-bmeng.cn@gmail.com>
 References: <1566917919-25381-1-git-send-email-bmeng.cn@gmail.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::444
-Subject: [Qemu-riscv] [PATCH v6 04/30] riscv: hw: Change create_fdt() to
- return void
+X-Received-From: 2607:f8b0:4864:20::544
+Subject: [Qemu-riscv] [PATCH v6 06/30] riscv: hw: Remove the unnecessary
+ include of target/riscv/cpu.h
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -74,131 +70,65 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Aug 2019 14:59:01 -0000
+X-List-Received-Date: Tue, 27 Aug 2019 14:59:04 -0000
 
-There is no need to return fdt at the end of create_fdt() because
-it's already saved in s->fdt.
+The inclusion of "target/riscv/cpu.h" is unnecessary in various
+sifive model drivers.
 
 Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
-Reviewed-by: Chih-Min Chao <chihmin.chao@sifive.com>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@redhat.com>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 ---
 
 Changes in v6: None
-Changes in v5: None
-Changes in v4:
-- change create_fdt() to return void in sifive_u.c too, after rebasing
-  on Palmer's QEMU RISC-V tree
+Changes in v5:
+- new patch to remove the unnecessary include of target/riscv/cpu.h
 
+Changes in v4: None
 Changes in v3: None
 Changes in v2: None
 
- hw/riscv/sifive_u.c | 11 ++++-------
- hw/riscv/virt.c     | 11 ++++-------
- 2 files changed, 8 insertions(+), 14 deletions(-)
+ hw/riscv/sifive_prci.c | 1 -
+ hw/riscv/sifive_test.c | 1 -
+ hw/riscv/sifive_uart.c | 1 -
+ 3 files changed, 3 deletions(-)
 
-diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-index 5fe0033..e22803b 100644
---- a/hw/riscv/sifive_u.c
-+++ b/hw/riscv/sifive_u.c
-@@ -67,7 +67,7 @@ static const struct MemmapEntry {
+diff --git a/hw/riscv/sifive_prci.c b/hw/riscv/sifive_prci.c
+index 1ab98d4..1957dcd 100644
+--- a/hw/riscv/sifive_prci.c
++++ b/hw/riscv/sifive_prci.c
+@@ -22,7 +22,6 @@
+ #include "hw/sysbus.h"
+ #include "qemu/log.h"
+ #include "qemu/module.h"
+-#include "target/riscv/cpu.h"
+ #include "hw/riscv/sifive_prci.h"
  
- #define GEM_REVISION        0x10070109
+ static uint64_t sifive_prci_read(void *opaque, hwaddr addr, unsigned int size)
+diff --git a/hw/riscv/sifive_test.c b/hw/riscv/sifive_test.c
+index 655a3d7..31cad9f 100644
+--- a/hw/riscv/sifive_test.c
++++ b/hw/riscv/sifive_test.c
+@@ -23,7 +23,6 @@
+ #include "qemu/log.h"
+ #include "qemu/module.h"
+ #include "sysemu/sysemu.h"
+-#include "target/riscv/cpu.h"
+ #include "hw/riscv/sifive_test.h"
  
--static void *create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
-+static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
-     uint64_t mem_size, const char *cmdline)
- {
-     void *fdt;
-@@ -253,14 +253,11 @@ static void *create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
-     qemu_fdt_setprop_string(fdt, "/aliases", "serial0", nodename);
+ static uint64_t sifive_test_read(void *opaque, hwaddr addr, unsigned int size)
+diff --git a/hw/riscv/sifive_uart.c b/hw/riscv/sifive_uart.c
+index cd74043..1601bd9 100644
+--- a/hw/riscv/sifive_uart.c
++++ b/hw/riscv/sifive_uart.c
+@@ -22,7 +22,6 @@
+ #include "hw/sysbus.h"
+ #include "chardev/char.h"
+ #include "chardev/char-fe.h"
+-#include "target/riscv/cpu.h"
+ #include "hw/riscv/sifive_uart.h"
  
-     g_free(nodename);
--
--    return fdt;
- }
- 
- static void riscv_sifive_u_init(MachineState *machine)
- {
-     const struct MemmapEntry *memmap = sifive_u_memmap;
--    void *fdt;
- 
-     SiFiveUState *s = g_new0(SiFiveUState, 1);
-     MemoryRegion *system_memory = get_system_memory();
-@@ -281,7 +278,7 @@ static void riscv_sifive_u_init(MachineState *machine)
-                                 main_mem);
- 
-     /* create device tree */
--    fdt = create_fdt(s, memmap, machine->ram_size, machine->kernel_cmdline);
-+    create_fdt(s, memmap, machine->ram_size, machine->kernel_cmdline);
- 
-     riscv_find_and_load_firmware(machine, BIOS_FILENAME,
-                                  memmap[SIFIVE_U_DRAM].base);
-@@ -294,9 +291,9 @@ static void riscv_sifive_u_init(MachineState *machine)
-             hwaddr end = riscv_load_initrd(machine->initrd_filename,
-                                            machine->ram_size, kernel_entry,
-                                            &start);
--            qemu_fdt_setprop_cell(fdt, "/chosen",
-+            qemu_fdt_setprop_cell(s->fdt, "/chosen",
-                                   "linux,initrd-start", start);
--            qemu_fdt_setprop_cell(fdt, "/chosen", "linux,initrd-end",
-+            qemu_fdt_setprop_cell(s->fdt, "/chosen", "linux,initrd-end",
-                                   end);
-         }
-     }
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index 2f75195..6bfa721 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -112,7 +112,7 @@ static void create_pcie_irq_map(void *fdt, char *nodename,
-                            0x1800, 0, 0, 0x7);
- }
- 
--static void *create_fdt(RISCVVirtState *s, const struct MemmapEntry *memmap,
-+static void create_fdt(RISCVVirtState *s, const struct MemmapEntry *memmap,
-     uint64_t mem_size, const char *cmdline)
- {
-     void *fdt;
-@@ -316,8 +316,6 @@ static void *create_fdt(RISCVVirtState *s, const struct MemmapEntry *memmap,
-         qemu_fdt_setprop_string(fdt, "/chosen", "bootargs", cmdline);
-     }
-     g_free(nodename);
--
--    return fdt;
- }
- 
- 
-@@ -373,7 +371,6 @@ static void riscv_virt_board_init(MachineState *machine)
-     size_t plic_hart_config_len;
-     int i;
-     unsigned int smp_cpus = machine->smp.cpus;
--    void *fdt;
- 
-     /* Initialize SOC */
-     object_initialize_child(OBJECT(machine), "soc", &s->soc, sizeof(s->soc),
-@@ -392,7 +389,7 @@ static void riscv_virt_board_init(MachineState *machine)
-         main_mem);
- 
-     /* create device tree */
--    fdt = create_fdt(s, memmap, machine->ram_size, machine->kernel_cmdline);
-+    create_fdt(s, memmap, machine->ram_size, machine->kernel_cmdline);
- 
-     /* boot rom */
-     memory_region_init_rom(mask_rom, NULL, "riscv_virt_board.mrom",
-@@ -411,9 +408,9 @@ static void riscv_virt_board_init(MachineState *machine)
-             hwaddr end = riscv_load_initrd(machine->initrd_filename,
-                                            machine->ram_size, kernel_entry,
-                                            &start);
--            qemu_fdt_setprop_cell(fdt, "/chosen",
-+            qemu_fdt_setprop_cell(s->fdt, "/chosen",
-                                   "linux,initrd-start", start);
--            qemu_fdt_setprop_cell(fdt, "/chosen", "linux,initrd-end",
-+            qemu_fdt_setprop_cell(s->fdt, "/chosen", "linux,initrd-end",
-                                   end);
-         }
-     }
+ /*
 -- 
 2.7.4
 
