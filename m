@@ -1,63 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1i2cvx-0003Fe-N2
-	for mharc-qemu-riscv@gnu.org; Tue, 27 Aug 2019 10:58:57 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:46581)
+	id 1i2cw1-0003I2-9v
+	for mharc-qemu-riscv@gnu.org; Tue, 27 Aug 2019 10:59:01 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:46621)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <bmeng.cn@gmail.com>) id 1i2cvr-0003Ar-W9
- for qemu-riscv@nongnu.org; Tue, 27 Aug 2019 10:58:54 -0400
+ (envelope-from <bmeng.cn@gmail.com>) id 1i2cvu-0003Cz-Hi
+ for qemu-riscv@nongnu.org; Tue, 27 Aug 2019 10:58:56 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <bmeng.cn@gmail.com>) id 1i2cvq-0003Lb-B2
- for qemu-riscv@nongnu.org; Tue, 27 Aug 2019 10:58:51 -0400
-Received: from mail-pf1-x444.google.com ([2607:f8b0:4864:20::444]:39112)
+ (envelope-from <bmeng.cn@gmail.com>) id 1i2cvr-0003Ns-SM
+ for qemu-riscv@nongnu.org; Tue, 27 Aug 2019 10:58:54 -0400
+Received: from mail-pg1-x542.google.com ([2607:f8b0:4864:20::542]:37678)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
- id 1i2cvn-0003J4-Dd; Tue, 27 Aug 2019 10:58:47 -0400
-Received: by mail-pf1-x444.google.com with SMTP id y200so6603619pfb.6;
- Tue, 27 Aug 2019 07:58:47 -0700 (PDT)
+ id 1i2cvo-0003KH-A7; Tue, 27 Aug 2019 10:58:48 -0400
+Received: by mail-pg1-x542.google.com with SMTP id d1so12842195pgp.4;
+ Tue, 27 Aug 2019 07:58:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:to:subject:date:message-id:in-reply-to:references;
- bh=mpyu+9zeR5NQecSQEyPIQD+gt/2HHvJQuLsDykgSNvo=;
- b=tC3Ikvo+TYfryayx3R86IT1tjNyF+wZn6nEAJ8mWcLu/MhDlUKpZh59w8QDM3+y3LZ
- x9BSS7n5oZIn4my20ccNywVK+5M0EKodD4CpKM3KyrRVw0Ngg1MPe6nYza9ine+Zpbpv
- IPnR8d5fiJrKSSfadoore5+vyvxyzIrtlS1uAEopT/cDcxx2ARRTZzyHe1b7zYfvqMfL
- FQffT7ldhTMyMbubPoSRscvT26t4Rc3zQt1Mr314DxOQd9oCeD3m3EvY06cNtEavkPas
- f1UQzw/UMLYbeFd3rmljGbl6zlqOWOvuDagqElWTYbxdA+Qh1mRiKLMbk4yj+K/dNoQA
- S/6A==
+ bh=79G/OIW3W58EivGR8bRMjsOd8VJ7kwN5WzPGmoORvJg=;
+ b=fjoGOMtjjhIc/+MRmtJbdKuzTV+JFlcdtR8VpE3OAqpaAXY7y3KTMwMRAT6sUdJvWQ
+ eb9x95xPRc48reNp6fGD5Vw9gQwq759ziTAHM9qoBmlh0gG5SJ3UotkpkRYu7z3R7BKj
+ NYQ8EvvtfhXhI81Qq60BhWmmGpBiqd8L6u0fxxJgALoqMyZ4thiS8oK7bqeu4kCCpaVP
+ vzDBn/kJVgbONr424uDdyZFlvqabt4pnjCs3z8X/Qs0Wk5wmkBhVYwWeNUkBiLZUGXQB
+ voH7ew4RkRwlCkQeUxxvoMJxfqhIDbqm0M9JwVy0aMlkQc3Tx3V7HIU/JGNHDGEQFDyj
+ CR0A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
  :references;
- bh=mpyu+9zeR5NQecSQEyPIQD+gt/2HHvJQuLsDykgSNvo=;
- b=GS005xnhDkRqmmopsM+L/SqzfaDy25nQh9sm4RLzZMuGRIlnGi06AXuk4P0OzR+jdM
- 9Pn3WUZcOJQTh+kJeSNKAVSd+HcuSUVFybseB3zGXW/V4kTW3/uyA3ULdZbqqmxpowgK
- aZkxvySfyRpq3SsMX6d/HNl3A7mIFElx1pzc25z8J2b0FrAynjhvw8GTk5aZnEvu5Omh
- 6dXBLLrUBcfE3Ee5PaAgTLMmipEmkmYCGHw5r4hIx0Y4dJfC8wzr9HPet0J920O2sEZ+
- lfxoZwNf/VQO5+Z/UIANUo08Q005nn7eb2WcGtP/skf6tWjOLrJXyW3r7daXVyXusNTS
- aLVw==
-X-Gm-Message-State: APjAAAV5tI7OmGjiQ7+O478WeGdHTghS+aZYiY15Fntpk7xThb+K8ebn
- 6dvwlC+0Ek7pokpSQfcpERQ=
-X-Google-Smtp-Source: APXvYqwiAm91cMUBHNzoR/2vxP4ubMvTkxkJnuNPigxyDdlst8TKIz5llSgQAsfMo+EOXUbUN0Asxw==
-X-Received: by 2002:a65:68c9:: with SMTP id k9mr20449300pgt.28.1566917926098; 
- Tue, 27 Aug 2019 07:58:46 -0700 (PDT)
+ bh=79G/OIW3W58EivGR8bRMjsOd8VJ7kwN5WzPGmoORvJg=;
+ b=PfU1YzuNaanB9L3n9vQp8TgsesTlwgwQzxWj/SyYpFQqAnjxT+lrDjA145LURfMUk5
+ sBKZW+jiy6j1Vb/njT9LF5lDCyeripINKfWggV1OdQVczHDGNRAZ9p3otxed05Ag7WUA
+ CsMBYQ7HE12XnILvc5I9FCgRIdVoujwLRqk8qFnfOy77yP97negnH6/m4Ey3B/XscJzx
+ U4Vg5r5kWrjgA+4T2t07dyYKe8ocZ9VBt0WSk+hI/JcEFnk1NioolUZ8sQfT/mIMN0Rl
+ C9lD3u+igfaEmUcysgaNWelHJB0RdpbODFTYD6G2agEVFAqgUzVW2wiQuVFaRqaZv0mC
+ 64qg==
+X-Gm-Message-State: APjAAAXLAL+C+omRzfH6AmwllL/5ku4mbjXwgUxeQw3QFacDNV+bV7iu
+ v8cz7z8ABqL69g38pXHkwcc=
+X-Google-Smtp-Source: APXvYqzIV/syxdYxFQ0YUwGrWGP29R+A62rcseLwRtqe+6UfZrg+xb1P5O3212ITTpCyGxc7u2GGRw==
+X-Received: by 2002:a17:90a:c20f:: with SMTP id
+ e15mr25491190pjt.123.1566917927429; 
+ Tue, 27 Aug 2019 07:58:47 -0700 (PDT)
 Received: from localhost.localdomain (unknown-224-80.windriver.com.
  [147.11.224.80])
- by smtp.gmail.com with ESMTPSA id j15sm14839344pfr.146.2019.08.27.07.58.45
+ by smtp.gmail.com with ESMTPSA id j15sm14839344pfr.146.2019.08.27.07.58.46
  (version=TLS1 cipher=AES128-SHA bits=128/128);
- Tue, 27 Aug 2019 07:58:45 -0700 (PDT)
+ Tue, 27 Aug 2019 07:58:46 -0700 (PDT)
 From: Bin Meng <bmeng.cn@gmail.com>
 To: Alistair Francis <Alistair.Francis@wdc.com>,
  Palmer Dabbelt <palmer@sifive.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
-Date: Tue, 27 Aug 2019 07:58:10 -0700
-Message-Id: <1566917919-25381-2-git-send-email-bmeng.cn@gmail.com>
+Date: Tue, 27 Aug 2019 07:58:11 -0700
+Message-Id: <1566917919-25381-3-git-send-email-bmeng.cn@gmail.com>
 X-Mailer: git-send-email 1.7.1
 In-Reply-To: <1566917919-25381-1-git-send-email-bmeng.cn@gmail.com>
 References: <1566917919-25381-1-git-send-email-bmeng.cn@gmail.com>
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::444
-Subject: [Qemu-riscv] [PATCH v6 01/30] riscv: hw: Remove superfluous "linux,
- phandle" property
+X-Received-From: 2607:f8b0:4864:20::542
+Subject: [Qemu-riscv] [PATCH v6 02/30] riscv: hw: Use
+ qemu_fdt_setprop_cell() for property with only 1 cell
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -69,102 +70,139 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Aug 2019 14:58:54 -0000
+X-List-Received-Date: Tue, 27 Aug 2019 14:58:56 -0000
 
-"linux,phandle" property is optional. Remove all instances in the
-sifive_u, virt and spike machine device trees.
+Some of the properties only have 1 cell so we should use
+qemu_fdt_setprop_cell() instead of qemu_fdt_setprop_cells().
 
 Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-
 ---
 
 Changes in v6: None
 Changes in v5: None
-Changes in v4:
-- remove 2 more "linux,phandle" instances in sifive_u.c and spike.c
-  after rebasing on Palmer's QEMU RISC-V tree
-
+Changes in v4: None
 Changes in v3: None
 Changes in v2: None
 
- hw/riscv/sifive_u.c | 4 ----
- hw/riscv/spike.c    | 1 -
- hw/riscv/virt.c     | 3 ---
- 3 files changed, 8 deletions(-)
+ hw/riscv/sifive_u.c | 18 +++++++++---------
+ hw/riscv/virt.c     | 24 ++++++++++++------------
+ 2 files changed, 21 insertions(+), 21 deletions(-)
 
 diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-index 64e233d..afe304f 100644
+index afe304f..3f9284e 100644
 --- a/hw/riscv/sifive_u.c
 +++ b/hw/riscv/sifive_u.c
-@@ -126,7 +126,6 @@ static void *create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
-         qemu_fdt_setprop_string(fdt, nodename, "device_type", "cpu");
-         qemu_fdt_add_subnode(fdt, intc);
-         qemu_fdt_setprop_cell(fdt, intc, "phandle", cpu_phandle);
--        qemu_fdt_setprop_cell(fdt, intc, "linux,phandle", cpu_phandle);
-         qemu_fdt_setprop_string(fdt, intc, "compatible", "riscv,cpu-intc");
-         qemu_fdt_setprop(fdt, intc, "interrupt-controller", NULL, 0);
-         qemu_fdt_setprop_cell(fdt, intc, "#interrupt-cells", 1);
-@@ -185,7 +184,6 @@ static void *create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
+@@ -183,7 +183,7 @@ static void *create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
+     qemu_fdt_setprop_string(fdt, nodename, "reg-names", "control");
      qemu_fdt_setprop_cell(fdt, nodename, "riscv,max-priority", 7);
      qemu_fdt_setprop_cell(fdt, nodename, "riscv,ndev", 0x35);
-     qemu_fdt_setprop_cells(fdt, nodename, "phandle", plic_phandle);
--    qemu_fdt_setprop_cells(fdt, nodename, "linux,phandle", plic_phandle);
+-    qemu_fdt_setprop_cells(fdt, nodename, "phandle", plic_phandle);
++    qemu_fdt_setprop_cell(fdt, nodename, "phandle", plic_phandle);
      plic_phandle = qemu_fdt_get_phandle(fdt, nodename);
      g_free(cells);
      g_free(nodename);
-@@ -198,7 +196,6 @@ static void *create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
-     qemu_fdt_setprop_cell(fdt, nodename, "clock-frequency",
-         SIFIVE_U_GEM_CLOCK_FREQ);
-     qemu_fdt_setprop_cell(fdt, nodename, "phandle", ethclk_phandle);
--    qemu_fdt_setprop_cell(fdt, nodename, "linux,phandle", ethclk_phandle);
-     ethclk_phandle = qemu_fdt_get_phandle(fdt, nodename);
+@@ -208,20 +208,20 @@ static void *create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
+         0x0, memmap[SIFIVE_U_GEM].size);
+     qemu_fdt_setprop_string(fdt, nodename, "reg-names", "control");
+     qemu_fdt_setprop_string(fdt, nodename, "phy-mode", "gmii");
+-    qemu_fdt_setprop_cells(fdt, nodename, "interrupt-parent", plic_phandle);
+-    qemu_fdt_setprop_cells(fdt, nodename, "interrupts", SIFIVE_U_GEM_IRQ);
++    qemu_fdt_setprop_cell(fdt, nodename, "interrupt-parent", plic_phandle);
++    qemu_fdt_setprop_cell(fdt, nodename, "interrupts", SIFIVE_U_GEM_IRQ);
+     qemu_fdt_setprop_cells(fdt, nodename, "clocks",
+         ethclk_phandle, ethclk_phandle, ethclk_phandle);
+     qemu_fdt_setprop(fdt, nodename, "clock-names", ethclk_names,
+         sizeof(ethclk_names));
+-    qemu_fdt_setprop_cells(fdt, nodename, "#address-cells", 1);
+-    qemu_fdt_setprop_cells(fdt, nodename, "#size-cells", 0);
++    qemu_fdt_setprop_cell(fdt, nodename, "#address-cells", 1);
++    qemu_fdt_setprop_cell(fdt, nodename, "#size-cells", 0);
      g_free(nodename);
  
-@@ -234,7 +231,6 @@ static void *create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
-     qemu_fdt_setprop_cell(fdt, nodename, "#clock-cells", 0x0);
-     qemu_fdt_setprop_cell(fdt, nodename, "clock-frequency", 3686400);
-     qemu_fdt_setprop_cell(fdt, nodename, "phandle", uartclk_phandle);
--    qemu_fdt_setprop_cell(fdt, nodename, "linux,phandle", uartclk_phandle);
-     uartclk_phandle = qemu_fdt_get_phandle(fdt, nodename);
+     nodename = g_strdup_printf("/soc/ethernet@%lx/ethernet-phy@0",
+         (long)memmap[SIFIVE_U_GEM].base);
+     qemu_fdt_add_subnode(fdt, nodename);
+-    qemu_fdt_setprop_cells(fdt, nodename, "reg", 0x0);
++    qemu_fdt_setprop_cell(fdt, nodename, "reg", 0x0);
      g_free(nodename);
  
-diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
-index 2991b34..14acaef 100644
---- a/hw/riscv/spike.c
-+++ b/hw/riscv/spike.c
-@@ -112,7 +112,6 @@ static void create_fdt(SpikeState *s, const struct MemmapEntry *memmap,
-         qemu_fdt_setprop_string(fdt, nodename, "device_type", "cpu");
-         qemu_fdt_add_subnode(fdt, intc);
-         qemu_fdt_setprop_cell(fdt, intc, "phandle", 1);
--        qemu_fdt_setprop_cell(fdt, intc, "linux,phandle", 1);
-         qemu_fdt_setprop_string(fdt, intc, "compatible", "riscv,cpu-intc");
-         qemu_fdt_setprop(fdt, intc, "interrupt-controller", NULL, 0);
-         qemu_fdt_setprop_cell(fdt, intc, "#interrupt-cells", 1);
+     uartclk_phandle = phandle++;
+@@ -241,9 +241,9 @@ static void *create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
+     qemu_fdt_setprop_cells(fdt, nodename, "reg",
+         0x0, memmap[SIFIVE_U_UART0].base,
+         0x0, memmap[SIFIVE_U_UART0].size);
+-    qemu_fdt_setprop_cells(fdt, nodename, "clocks", uartclk_phandle);
+-    qemu_fdt_setprop_cells(fdt, nodename, "interrupt-parent", plic_phandle);
+-    qemu_fdt_setprop_cells(fdt, nodename, "interrupts", SIFIVE_U_UART0_IRQ);
++    qemu_fdt_setprop_cell(fdt, nodename, "clocks", uartclk_phandle);
++    qemu_fdt_setprop_cell(fdt, nodename, "interrupt-parent", plic_phandle);
++    qemu_fdt_setprop_cell(fdt, nodename, "interrupts", SIFIVE_U_UART0_IRQ);
+ 
+     qemu_fdt_add_subnode(fdt, "/chosen");
+     qemu_fdt_setprop_string(fdt, "/chosen", "stdout-path", nodename);
 diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index 25faf3b..00be05a 100644
+index 00be05a..127f005 100644
 --- a/hw/riscv/virt.c
 +++ b/hw/riscv/virt.c
-@@ -170,11 +170,9 @@ static void *create_fdt(RISCVVirtState *s, const struct MemmapEntry *memmap,
-         qemu_fdt_setprop_cell(fdt, nodename, "reg", cpu);
-         qemu_fdt_setprop_string(fdt, nodename, "device_type", "cpu");
-         qemu_fdt_setprop_cell(fdt, nodename, "phandle", cpu_phandle);
--        qemu_fdt_setprop_cell(fdt, nodename, "linux,phandle", cpu_phandle);
-         intc_phandle = phandle++;
-         qemu_fdt_add_subnode(fdt, intc);
-         qemu_fdt_setprop_cell(fdt, intc, "phandle", intc_phandle);
--        qemu_fdt_setprop_cell(fdt, intc, "linux,phandle", intc_phandle);
-         qemu_fdt_setprop_string(fdt, intc, "compatible", "riscv,cpu-intc");
-         qemu_fdt_setprop(fdt, intc, "interrupt-controller", NULL, 0);
-         qemu_fdt_setprop_cell(fdt, intc, "#interrupt-cells", 1);
-@@ -250,7 +248,6 @@ static void *create_fdt(RISCVVirtState *s, const struct MemmapEntry *memmap,
+@@ -233,8 +233,8 @@ static void *create_fdt(RISCVVirtState *s, const struct MemmapEntry *memmap,
+     nodename = g_strdup_printf("/soc/interrupt-controller@%lx",
+         (long)memmap[VIRT_PLIC].base);
+     qemu_fdt_add_subnode(fdt, nodename);
+-    qemu_fdt_setprop_cells(fdt, nodename, "#address-cells",
+-                           FDT_PLIC_ADDR_CELLS);
++    qemu_fdt_setprop_cell(fdt, nodename, "#address-cells",
++                          FDT_PLIC_ADDR_CELLS);
+     qemu_fdt_setprop_cell(fdt, nodename, "#interrupt-cells",
+                           FDT_PLIC_INT_CELLS);
+     qemu_fdt_setprop_string(fdt, nodename, "compatible", "riscv,plic0");
+@@ -247,7 +247,7 @@ static void *create_fdt(RISCVVirtState *s, const struct MemmapEntry *memmap,
+     qemu_fdt_setprop_string(fdt, nodename, "reg-names", "control");
      qemu_fdt_setprop_cell(fdt, nodename, "riscv,max-priority", 7);
      qemu_fdt_setprop_cell(fdt, nodename, "riscv,ndev", VIRTIO_NDEV);
-     qemu_fdt_setprop_cells(fdt, nodename, "phandle", plic_phandle);
--    qemu_fdt_setprop_cells(fdt, nodename, "linux,phandle", plic_phandle);
+-    qemu_fdt_setprop_cells(fdt, nodename, "phandle", plic_phandle);
++    qemu_fdt_setprop_cell(fdt, nodename, "phandle", plic_phandle);
      plic_phandle = qemu_fdt_get_phandle(fdt, nodename);
      g_free(cells);
      g_free(nodename);
+@@ -260,19 +260,19 @@ static void *create_fdt(RISCVVirtState *s, const struct MemmapEntry *memmap,
+         qemu_fdt_setprop_cells(fdt, nodename, "reg",
+             0x0, memmap[VIRT_VIRTIO].base + i * memmap[VIRT_VIRTIO].size,
+             0x0, memmap[VIRT_VIRTIO].size);
+-        qemu_fdt_setprop_cells(fdt, nodename, "interrupt-parent", plic_phandle);
+-        qemu_fdt_setprop_cells(fdt, nodename, "interrupts", VIRTIO_IRQ + i);
++        qemu_fdt_setprop_cell(fdt, nodename, "interrupt-parent", plic_phandle);
++        qemu_fdt_setprop_cell(fdt, nodename, "interrupts", VIRTIO_IRQ + i);
+         g_free(nodename);
+     }
+ 
+     nodename = g_strdup_printf("/soc/pci@%lx",
+         (long) memmap[VIRT_PCIE_ECAM].base);
+     qemu_fdt_add_subnode(fdt, nodename);
+-    qemu_fdt_setprop_cells(fdt, nodename, "#address-cells",
+-                           FDT_PCI_ADDR_CELLS);
+-    qemu_fdt_setprop_cells(fdt, nodename, "#interrupt-cells",
+-                           FDT_PCI_INT_CELLS);
+-    qemu_fdt_setprop_cells(fdt, nodename, "#size-cells", 0x2);
++    qemu_fdt_setprop_cell(fdt, nodename, "#address-cells",
++                          FDT_PCI_ADDR_CELLS);
++    qemu_fdt_setprop_cell(fdt, nodename, "#interrupt-cells",
++                          FDT_PCI_INT_CELLS);
++    qemu_fdt_setprop_cell(fdt, nodename, "#size-cells", 0x2);
+     qemu_fdt_setprop_string(fdt, nodename, "compatible",
+                             "pci-host-ecam-generic");
+     qemu_fdt_setprop_string(fdt, nodename, "device_type", "pci");
+@@ -309,8 +309,8 @@ static void *create_fdt(RISCVVirtState *s, const struct MemmapEntry *memmap,
+         0x0, memmap[VIRT_UART0].base,
+         0x0, memmap[VIRT_UART0].size);
+     qemu_fdt_setprop_cell(fdt, nodename, "clock-frequency", 3686400);
+-        qemu_fdt_setprop_cells(fdt, nodename, "interrupt-parent", plic_phandle);
+-        qemu_fdt_setprop_cells(fdt, nodename, "interrupts", UART0_IRQ);
++    qemu_fdt_setprop_cell(fdt, nodename, "interrupt-parent", plic_phandle);
++    qemu_fdt_setprop_cell(fdt, nodename, "interrupts", UART0_IRQ);
+ 
+     qemu_fdt_add_subnode(fdt, "/chosen");
+     qemu_fdt_setprop_string(fdt, "/chosen", "stdout-path", nodename);
 -- 
 2.7.4
 
