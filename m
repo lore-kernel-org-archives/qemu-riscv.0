@@ -1,57 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1i2l1a-0007rJ-8P
-	for mharc-qemu-riscv@gnu.org; Tue, 27 Aug 2019 19:37:18 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:51764)
+	id 1i2lZQ-0006hL-4L
+	for mharc-qemu-riscv@gnu.org; Tue, 27 Aug 2019 20:12:16 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:55794)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <palmer@dabbelt.com>) id 1i2l1X-0007qo-Of
- for qemu-riscv@nongnu.org; Tue, 27 Aug 2019 19:37:16 -0400
+ (envelope-from <alistair23@gmail.com>) id 1i2lZN-0006eQ-V3
+ for qemu-riscv@nongnu.org; Tue, 27 Aug 2019 20:12:15 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmer@dabbelt.com>) id 1i2l1W-0001mG-Mm
- for qemu-riscv@nongnu.org; Tue, 27 Aug 2019 19:37:15 -0400
-Received: from mail-pl1-f193.google.com ([209.85.214.193]:40364)
+ (envelope-from <alistair23@gmail.com>) id 1i2lZM-0000K0-Ss
+ for qemu-riscv@nongnu.org; Tue, 27 Aug 2019 20:12:13 -0400
+Received: from mail-lf1-x142.google.com ([2a00:1450:4864:20::142]:37022)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1i2l1W-0001lh-GS
- for qemu-riscv@nongnu.org; Tue, 27 Aug 2019 19:37:14 -0400
-Received: by mail-pl1-f193.google.com with SMTP id h3so289257pls.7
- for <qemu-riscv@nongnu.org>; Tue, 27 Aug 2019 16:37:14 -0700 (PDT)
+ (Exim 4.71) (envelope-from <alistair23@gmail.com>)
+ id 1i2lZK-0000Io-Di; Tue, 27 Aug 2019 20:12:10 -0400
+Received: by mail-lf1-x142.google.com with SMTP id w67so515436lff.4;
+ Tue, 27 Aug 2019 17:12:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=4hRlrmFP06/1JRTRiJ5WRR6Ii0rh/52IH0rpBQCRJqg=;
+ b=NET2Y47JUrmXL06CzWELiaWwVCNGpcWJbGnQqrEVw0XhWqyxKtzSBYc3c9ClxM+cbl
+ 72+mqRWy685faoF8r49skbIC9AYI2oHD8NDYc9CutQX4+EcLVqyJs6wUowsGBKF1m60s
+ lp+Uzz+B0TuZVgBC9n5ilMpkq68tDrbcZ9byKyVOLCTQOj3AMT4m7gQz3x7Qxr3kj+JT
+ SVFcW6R6mXaPYKeTilLPm2ImtzxisMKHhTp+kD8jFTAD+usomJgbQspVFcgy0yc3vFZY
+ XxyvdH30+8tFbRNiDvjtjIAA5kiCttrUv69i28eb8b31512Ech91eTu6Sj264N28gL/b
+ Ul/w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
- :mime-version:content-transfer-encoding;
- bh=lNhY61kCNEIlXahWpgFva8wdwRqrY6iHqmW7zL+QA1c=;
- b=TBWpOOo2wSzvoksxAGAWwLMHydL8nRvFS/HjpJv0AlkDO7jpx47zQ6z4dwsGaLrW8f
- UXSPq2dXM8nmU17dKE6MRsfGe8Ppr5xAqcnCPcJ5V25AyG1V4xA1GbrAsZkS/wSuvAbw
- qZneC4g2FnVEVQFIJFTEpRdV3PTSiZBYKqZEV3PofZ+HgtgvvA8HICLPFiuquv0QOZCq
- l5sQ8YVetl5VaL0KKyX+43W8CI7KY1f3KXBvBYE/g/ANzSFHT60PCC80rTm/UgvwWZU5
- 7cvrdipU/3PoFOItBWTTZ032zGDNLRpCYY1zZ6n4HT8NI/EbudU8x3uDnR8WG5VQ83SO
- BgOQ==
-X-Gm-Message-State: APjAAAWqKH4Q1TNOqolMew7MfEAqeFSIeR75GvSDCDTGfxeab1oA97zF
- 3G45r7tzs3tDK8Q2PV2980hXBw==
-X-Google-Smtp-Source: APXvYqx3sCMeUWqzcXSF7WkmHfah3oitVBBEOB9dvULZyUOg+1fx23voBYgpP1e7KoyGOiUbNnPHFA==
-X-Received: by 2002:a17:902:8492:: with SMTP id
- c18mr1458294plo.279.1566949032948; 
- Tue, 27 Aug 2019 16:37:12 -0700 (PDT)
-Received: from localhost ([12.206.222.5])
- by smtp.gmail.com with ESMTPSA id r4sm436454pfl.127.2019.08.27.16.37.11
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 27 Aug 2019 16:37:12 -0700 (PDT)
-Date: Tue, 27 Aug 2019 16:37:12 -0700 (PDT)
-X-Google-Original-Date: Tue, 27 Aug 2019 16:20:29 PDT (-0700)
-In-Reply-To: <CAEUhbmWmCqCGpbw30QS_kYADnJkZOVUAn3eqmxLKPWhHjfuT7w@mail.gmail.com>
-CC: alistair23@gmail.com, Alistair Francis <Alistair.Francis@wdc.com>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, sagark@eecs.berkeley.edu,
- richard.henderson@linaro.org, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-From: Palmer Dabbelt <palmer@sifive.com>
-To: bmeng.cn@gmail.com
-Message-ID: <mhng-e8630d97-52b4-4626-a9ea-ccbc1c921d74@palmer-si-x1e>
-Mime-Version: 1.0 (MHng)
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
- [fuzzy]
-X-Received-From: 209.85.214.193
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v2] riscv: rv32: Root page
- table address can be larger than 32-bit
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=4hRlrmFP06/1JRTRiJ5WRR6Ii0rh/52IH0rpBQCRJqg=;
+ b=Ypl1zoqYNn326KYsv9s6By8+5v/sQFJ/OYgQkCPtOkAoIEfUcYDlM6BtlkifKRgFTh
+ BfCR065u/nP4U65A1+Y8V+TWrVKO8Y+Yf5lAm3s/5+UZFZekeunicMfYszoKizMB20XI
+ W5C9/hX15TC2iQm1wa0B9xqBhNGEHSeVBdJ1coxyoapYPexm7ey+Yx+cw3fFnWgc/QIQ
+ 2mR5R2Jl+/CNJMoGUHoYzUeT2GE5cTX/f6cVDzpHjFVKEEvbrX9/9McvuehXvw2BeiK/
+ 35pGadn/bQeN+R7PMpSBVyHFIT5/soWPzVDm+TEyYp9MOJvbTmsSng4iMm1V/Bbzs9Di
+ kMQg==
+X-Gm-Message-State: APjAAAV/Nfb0v79kMWZ2Fzs+Du2GdAuHxj8Wbn+9jNywmSQFqkszmpC9
+ Ka4piML5Z9Rzgx47cfIGkhW5H3KOow/FoXqCffE=
+X-Google-Smtp-Source: APXvYqx+bDfLSO9UCawx4Zm0+uZev+Vr2kNk9UIX/Tr9q0DnnrtD/yKE3Oa4FCFU6ESYtcGUIOKWwhdYT3MTTdHZxmQ=
+X-Received: by 2002:ac2:528c:: with SMTP id q12mr650739lfm.135.1566951128667; 
+ Tue, 27 Aug 2019 17:12:08 -0700 (PDT)
+MIME-Version: 1.0
+References: <cover.1566603412.git.alistair.francis@wdc.com>
+ <1c1d359caa6633349158debc38e07156a10b63e8.1566603412.git.alistair.francis@wdc.com>
+ <CAEiOBXUeKnPyZd7i5Aqw5+G2G9M-OeWxsBqTsF0MTV_abkDe5A@mail.gmail.com>
+In-Reply-To: <CAEiOBXUeKnPyZd7i5Aqw5+G2G9M-OeWxsBqTsF0MTV_abkDe5A@mail.gmail.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 27 Aug 2019 17:08:02 -0700
+Message-ID: <CAKmqyKOphhLWZfbDPdPU3EPy8rsgpL5GzqTtdpFBA+rOxTSYsA@mail.gmail.com>
+To: Chih-Min Chao <chihmin.chao@sifive.com>
+Cc: Alistair Francis <alistair.francis@wdc.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, Anup.Patel@wdc.com, 
+ Palmer Dabbelt <palmer@sifive.com>, Atish Patra <Atish.Patra@wdc.com>
+Content-Type: text/plain; charset="UTF-8"
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2a00:1450:4864:20::142
+Subject: Re: [Qemu-riscv] [PATCH v1 02/28] target/riscv: Add the
+ virtulisation mode
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -63,32 +69,113 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Aug 2019 23:37:16 -0000
+X-List-Received-Date: Wed, 28 Aug 2019 00:12:15 -0000
 
-On Sun, 18 Aug 2019 23:00:40 PDT (-0700), bmeng.cn@gmail.com wrote:
-> On Wed, Aug 14, 2019 at 5:46 PM Bin Meng <bmeng.cn@gmail.com> wrote:
->>
->> Hi Palmer,
->>
->> On Sat, Aug 10, 2019 at 9:49 AM Alistair Francis <alistair23@gmail.com> wrote:
->> >
->> > On Wed, Aug 7, 2019 at 7:50 PM Bin Meng <bmeng.cn@gmail.com> wrote:
->> > >
->> > > For RV32, the root page table's PPN has 22 bits hence its address
->> > > bits could be larger than the maximum bits that target_ulong is
->> > > able to represent. Use hwaddr instead.
->> > >
->> > > Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
->> >
->> > Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
->> >
->>
->> Would you take this one too?
->>
+On Tue, Aug 27, 2019 at 8:44 AM Chih-Min Chao <chihmin.chao@sifive.com> wrote:
 >
-> Ping?
 >
-> What's the status of this patch?
+>
+> On Sat, Aug 24, 2019 at 7:41 AM Alistair Francis <alistair.francis@wdc.com> wrote:
+>>
+>> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+>> ---
+>>  target/riscv/cpu.h        |  4 ++++
+>>  target/riscv/cpu_bits.h   |  6 ++++++
+>>  target/riscv/cpu_helper.c | 23 +++++++++++++++++++++++
+>>  3 files changed, 33 insertions(+)
+>>
+>> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+>> index 7f54fb8c87..0ef1ecb0e0 100644
+>> --- a/target/riscv/cpu.h
+>> +++ b/target/riscv/cpu.h
+>> @@ -117,6 +117,8 @@ struct CPURISCVState {
+>>
+>>  #ifndef CONFIG_USER_ONLY
+>>      target_ulong priv;
+>> +    /* This contains QEMU specific information about the virt state. */
+>> +    target_ulong virt;
+>>      target_ulong resetvec;
+>>
+>>      target_ulong mhartid;
+>> @@ -257,6 +259,8 @@ int riscv_cpu_gdb_read_register(CPUState *cpu, uint8_t *buf, int reg);
+>>  int riscv_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
+>>  bool riscv_cpu_exec_interrupt(CPUState *cs, int interrupt_request);
+>>  bool riscv_cpu_fp_enabled(CPURISCVState *env);
+>> +bool riscv_cpu_virt_enabled(CPURISCVState *env);
+>> +void riscv_cpu_set_virt_enabled(CPURISCVState *env, bool enable);
+>>  int riscv_cpu_mmu_index(CPURISCVState *env, bool ifetch);
+>>  hwaddr riscv_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
+>>  void  riscv_cpu_do_unaligned_access(CPUState *cs, vaddr addr,
+>> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+>> index e99834856c..1fbde516be 100644
+>> --- a/target/riscv/cpu_bits.h
+>> +++ b/target/riscv/cpu_bits.h
+>> @@ -422,6 +422,12 @@
+>>  #define PRV_H 2 /* Reserved */
+>>  #define PRV_M 3
+>>
+>> +/* Virtulisation modes */
+>> +#define VIRT_OFF            0
+>> +#define VIRT_ON             1
+>> +#define VIRT_MODE_SHIFT     0
+>> +#define VIRT_MODE_MASK      (1 << VIRT_MODE_SHIFT)
+>> +
+>>
+>>  /* RV32 satp CSR field masks */
+>>  #define SATP32_MODE         0x80000000
+>>  #define SATP32_ASID         0x7fc00000
+>> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+>> index 225e407cff..7b0bb14c01 100644
+>> --- a/target/riscv/cpu_helper.c
+>> +++ b/target/riscv/cpu_helper.c
+>> @@ -81,6 +81,29 @@ bool riscv_cpu_fp_enabled(CPURISCVState *env)
+>>      return false;
+>>  }
+>>
+>> +bool riscv_cpu_virt_enabled(CPURISCVState *env)
+>> +{
+>> +    bool tmp;
+>> +
+>> +    if (!riscv_has_ext(env, RVH)) {
+>> +        return false;
+>> +    }
+>> +
+>> +    tmp = (env->virt & VIRT_MODE_MASK) >> VIRT_MODE_SHIFT;
+>> +
+>> +    return tmp == VIRT_ON;
+>> +}
+>> +
+>> +void riscv_cpu_set_virt_enabled(CPURISCVState *env, bool enable)
+>> +{
+>> +    if (!riscv_has_ext(env, RVH)) {
+>> +        return;
+>> +    }
+>> +
+>> +    env->virt &= ~VIRT_MODE_MASK;
+>> +    env->virt |= enable << VIRT_MODE_SHIFT;
+>> +}
+>> +
+>>  int riscv_cpu_claim_interrupts(RISCVCPU *cpu, uint32_t interrupts)
+>>  {
+>>      CPURISCVState *env = &cpu->env;
+>> --
+>> 2.22.0
+>>
+> Why not to use get_field and set_field though it is not a real register but an internal state
+>
+> #define VIRT_ONOFF            0x01
+> #define VIRT_OFF             0
+> #define VIRT_ON             1
+>
+> access
+>        get_field(env->virt, VIRT_ONOFF);
+>        set_field(env->virt, VIRT_ONOFF, enable);
 
-Also in the patch queue.
+Good idea, I have updated this.
+
+Alistair
+
+>
+>
+> chihmin
 
