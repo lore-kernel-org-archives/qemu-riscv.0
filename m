@@ -1,44 +1,39 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1i3JBp-0007GA-UH
-	for mharc-qemu-riscv@gnu.org; Thu, 29 Aug 2019 08:06:13 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:36538)
+	id 1i3JtY-0002Kq-Vh
+	for mharc-qemu-riscv@gnu.org; Thu, 29 Aug 2019 08:51:21 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:46162)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <zhiwei_liu@c-sky.com>) id 1i3JBi-00079F-KC
- for qemu-riscv@nongnu.org; Thu, 29 Aug 2019 08:06:03 -0400
+ (envelope-from <zhiwei_liu@c-sky.com>) id 1i3JtV-0002Gz-PF
+ for qemu-riscv@nongnu.org; Thu, 29 Aug 2019 08:51:18 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <zhiwei_liu@c-sky.com>) id 1i3JBh-000127-4C
- for qemu-riscv@nongnu.org; Thu, 29 Aug 2019 08:06:02 -0400
-Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:36290)
+ (envelope-from <zhiwei_liu@c-sky.com>) id 1i3JtU-0004wn-OS
+ for qemu-riscv@nongnu.org; Thu, 29 Aug 2019 08:51:17 -0400
+Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:54941)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1i3JBa-0000rj-JF; Thu, 29 Aug 2019 08:05:55 -0400
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07271378|-1; CH=green;
- DM=CONTINUE|CONTINUE|true|0.130802-0.0139632-0.855235; FP=0|0|0|0|0|-1|-1|-1;
- HT=e01a16370; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS; RN=12; RT=12; SR=0;
- TI=SMTPD_---.FL--YOH_1567080343; 
+ id 1i3JtR-0004hU-Qw; Thu, 29 Aug 2019 08:51:14 -0400
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.08202056|-1; CH=green;
+ DM=CONTINUE|CONTINUE|true|0.367247-0.0192661-0.613486; FP=0|0|0|0|0|-1|-1|-1;
+ HT=e01a16367; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS; RN=12; RT=12; SR=0;
+ TI=SMTPD_---.FL.ZmEX_1567083061; 
 Received: from 172.16.28.187(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.FL--YOH_1567080343)
- by smtp.aliyun-inc.com(10.147.43.230);
- Thu, 29 Aug 2019 20:05:46 +0800
-To: Alistair Francis <alistair23@gmail.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>,
- Peter Maydell <peter.maydell@linaro.org>, Palmer Dabbelt
- <palmer@sifive.com>, Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Riku Voipio <riku.voipio@iki.fi>, Laurent Vivier <laurent@vivier.eu>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- =?UTF-8?Q?Alex_Benn=c3=a9e?= <alex.bennee@linaro.org>,
- Aurelien Jarno <aurelien@aurel32.net>
+ fp:SMTPD_---.FL.ZmEX_1567083061)
+ by smtp.aliyun-inc.com(10.147.43.95); Thu, 29 Aug 2019 20:51:04 +0800
+To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: peter.maydell@linaro.org, palmer@sifive.com, sagark@eecs.berkeley.edu,
+ kbastian@mail.uni-paderborn.de, riku.voipio@iki.fi, laurent@vivier.eu,
+ Alistair.Francis@wdc.com, alex.bennee@linaro.org, aurelien@aurel32.net
 References: <1566959818-38369-1-git-send-email-zhiwei_liu@c-sky.com>
- <CAKmqyKMDmaABGWyLZD2R-4J8=jM6hry6Bfmu498+UZzQtxsTMA@mail.gmail.com>
+ <ba8c7451-b0a7-0405-f881-0c6d0d8574fb@linaro.org>
+ <3b85e9b6-8799-9682-9aaf-b688924cb52e@linaro.org>
 From: liuzhiwei <zhiwei_liu@c-sky.com>
-Message-ID: <af15b620-1350-aa1a-0f02-2a46518f0ef2@c-sky.com>
-Date: Thu, 29 Aug 2019 20:00:10 +0800
+Message-ID: <841ebe5f-dd5e-c59d-d7e9-c246ad7741c0@c-sky.com>
+Date: Thu, 29 Aug 2019 20:45:29 +0800
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
  Thunderbird/60.2.1
 MIME-Version: 1.0
-In-Reply-To: <CAKmqyKMDmaABGWyLZD2R-4J8=jM6hry6Bfmu498+UZzQtxsTMA@mail.gmail.com>
+In-Reply-To: <3b85e9b6-8799-9682-9aaf-b688924cb52e@linaro.org>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
 Content-Language: en-US
@@ -57,82 +52,56 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Aug 2019 12:06:04 -0000
+X-List-Received-Date: Thu, 29 Aug 2019 12:51:19 -0000
 
-On 2019/8/29 上午5:34, Alistair Francis wrote:
-> On Wed, Aug 28, 2019 at 12:04 AM liuzhiwei <zhiwei_liu@c-sky.com> wrote:
->> Change-Id: I3cf891bc400713b95f47ecca82b1bf773f3dcb25
->> Signed-off-by: liuzhiwei <zhiwei_liu@c-sky.com>
->> ---
->>   fpu/softfloat.c                         |   119 +
->>   include/fpu/softfloat.h                 |     4 +
->>   linux-user/riscv/cpu_loop.c             |     8 +-
->>   target/riscv/Makefile.objs              |     2 +-
->>   target/riscv/cpu.h                      |    30 +
->>   target/riscv/cpu_bits.h                 |    15 +
->>   target/riscv/cpu_helper.c               |     7 +
->>   target/riscv/csr.c                      |    65 +-
->>   target/riscv/helper.h                   |   354 +
->>   target/riscv/insn32.decode              |   374 +-
->>   target/riscv/insn_trans/trans_rvv.inc.c |   484 +
->>   target/riscv/translate.c                |     1 +
->>   target/riscv/vector_helper.c            | 26563 ++++++++++++++++++++++++++++++
->>   13 files changed, 28017 insertions(+), 9 deletions(-)
->>   create mode 100644 target/riscv/insn_trans/trans_rvv.inc.c
->>   create mode 100644 target/riscv/vector_helper.c
->>
-> Hello,
+
+On 2019/8/29 上午4:43, Richard Henderson wrote:
+> On 8/28/19 11:54 AM, Richard Henderson wrote:
+>> But it might be reasonable to include (VSTART == 0 && VL == VLMAX) as a
+>> single bit.
+> BTW, it is reasonable to check VSTART == 0 always.  Quoting the spec:
 >
-> Thanks for the patch!
+> # Implementations are permitted to raise illegal instruction exceptions
+> # when attempting to execute a vector instruction with a value of vstart
+> # that the implementation can never produce when executing that same
+> # instruction with the same vtype setting.
 >
-> As others have pointed out you will need to split the patch up into
-> multiple smaller patches, otherwise it is too hard to review almost
-> 30,000 lines of code.
+> Since qemu will never interrupt a single instruction, each vector instruction
+> will always run to completion, which clears VSTART.  Since QEMU will never
+> produce a non-zero value of VSTART, it is allowed to trap on any non-zero
+> setting of VSTART.
+>
+> I.e. it can be handled at translation time alongside VILL.
 
-Hi, Alistair
+Hi, Richard
 
-I'm so sorry for the inconvenience. It will be a patch set with a cover 
-letter in V2.
+I am so sorry for the inconvenience. It is very kind of you to review 
+the horrible long code and give so many comments.
 
-> Can you also include a cover letter with your patch series describing
-> how you are testing this? AFAIK vector extension support isn't in any
-> compiler so I'm assuming you are handwriting the assembly or have
-> toolchain patches. Either way it will help if you can share that so
-> others can test your implementation.
+Even in qemu,  it may be some situations that VSTART != 0. For example, 
+a load instruction leads to a page fault exception in a middle position. 
+If VSTART == 0,  some elements that had been loaded before the exception 
+will be loaded once again.
 
-Yes, it's handwriting assembly. The assembler in Binutils has support 
-Vector extension.  First define an function test_vadd_vv_8 in assembly 
-and then it can be called from a C program.
+Specially,  it may be a mistake if  the instruction restores execution 
+with VSTART==  0.  When lmul == 1,
 
-The function is something like
+    "vlb v0 ,(a0), v0.t"
 
-/* vadd.vv */
-TEST_FUNC(test_vadd_vv_8)
-         vsetvli        t1, x0, e8, m2
-         vlb.v           v6, (a4)
-         vsb.v           v6, (a3)
-         vsetvli        t1, a0, e8, m2
-         vlb.v           v0, (a1)
-         vlb.v           v2, (a2)
-         vadd.vv     v4, v0, v2
-         vsb.v          v4, (a3)
-ret
-         .size   test_vadd_vv_8, .-test_vadd_vv_8
+As v0 is the mask register,  if it is modified,  some part of it can't 
+be used again.
 
-It takes more time to test than to implement the instructions. Maybe 
-there is some better test method or some forced test cases in QEMU. 
-Could you give me some advice for testing?
+It will take some time to address the other comments. After that I will 
+split the patch into patch set with a cover letter in V2.
+
+Thank you again for your review!
 
 Best Regards,
 
 Zhiwei
 
-> Alex and Richard have kindly started the review. Once you have
-> addressed their comments and split this patch up into smaller patches
-> you can send a v2 and we can go from there.
 >
-> Once again thanks for doing this implementation for QEMU!
 >
-> Alistair
+> r~
 >
 
