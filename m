@@ -1,65 +1,49 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1i35e6-0006QT-OC
-	for mharc-qemu-riscv@gnu.org; Wed, 28 Aug 2019 17:38:26 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:34712)
+	id 1i3JBp-0007GA-UH
+	for mharc-qemu-riscv@gnu.org; Thu, 29 Aug 2019 08:06:13 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:36538)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <alistair23@gmail.com>) id 1i35e4-0006OR-Ho
- for qemu-riscv@nongnu.org; Wed, 28 Aug 2019 17:38:25 -0400
+ (envelope-from <zhiwei_liu@c-sky.com>) id 1i3JBi-00079F-KC
+ for qemu-riscv@nongnu.org; Thu, 29 Aug 2019 08:06:03 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1i35e3-000278-HA
- for qemu-riscv@nongnu.org; Wed, 28 Aug 2019 17:38:24 -0400
-Received: from mail-lj1-x244.google.com ([2a00:1450:4864:20::244]:37327)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1i35e0-00025P-SS; Wed, 28 Aug 2019 17:38:21 -0400
-Received: by mail-lj1-x244.google.com with SMTP id t14so998136lji.4;
- Wed, 28 Aug 2019 14:38:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=X5wk+8gVakk2QaHZrElhQHkVAKujHeUPl9eJtj2HmYM=;
- b=O6vZPyQDkZDP8nKlBGDwDcsSUz3xGmVSaBbGWvIvANtnOQBVbbldKaqaQt/38tJ50u
- Pvdhlq00zUvDfo24a4QEzA9r3SJJpPMlsrgerQZMxj0HOATrEJ2zNq9YmcoIWCL4dEID
- t/WUKDBsLXflqkkqm4fZPAv+H2pAIUYzIcGpU0tILetKUjBUL7B0H6TtU9LJLTY7lMLr
- 7Cr28NpKP0J7tUvyGen1FeRSLD4tz0t6IgQl4xbJvIzf5fBkazX2g0+kvfecXiJPayim
- TNjywpUK2sae6xImiwWOpkQjYCp68dOqSOZNm86yc9T88nQ9z1ky+9nYOVXzBTv6/OgM
- d9fw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=X5wk+8gVakk2QaHZrElhQHkVAKujHeUPl9eJtj2HmYM=;
- b=ksMdBNUyuYCFxZIRlSDyqQhLXiaMbkBvrYfYb8hrAhgFsR8Idbo/kHjcJiYwk2WaQG
- F3u47Zx3E/9cseBKYNn+E4oIyfosgQB8W6ehnTS3rqQkuU/lpzSFQBza+eO8fw+TRhT5
- 3RdxAgbjy7dm/ysxQRQe3+i719TFkCHm9ZSdkhwgnalpmPdJMB0dhWtCm37u2rxx/FcT
- ynU0vGYBComyFcLu9SzuwePwNf2T1eS2OQlsz2c8NTEXcqUGQPflxCbCNNPZK458ROBl
- IPPH1wGDqnRGOs0INQN7gH8zy7AkIHN39O/Nk5MMxBvRlPpi+Ffw+Zu8qZyh2NPpnD88
- RItw==
-X-Gm-Message-State: APjAAAXsZxiDtxKIhgPOW+0e9848qjZRm0O9Bvjy4kdg4kNRTPIhmFVY
- NyVJHxEHOcMCFhNJDM/e3i4AyR6KR4Yn0xtxniE=
-X-Google-Smtp-Source: APXvYqxL3799NS+8JcPRdfitOqMkrk2GfdoAebfMJIGyuaA1KRv3JPJGmuD9sFPCCkA/P24kixwtQuhmi3ga7CgctF0=
-X-Received: by 2002:a05:651c:109:: with SMTP id
- a9mr3239364ljb.33.1567028299301; 
- Wed, 28 Aug 2019 14:38:19 -0700 (PDT)
-MIME-Version: 1.0
-References: <1566959818-38369-1-git-send-email-zhiwei_liu@c-sky.com>
-In-Reply-To: <1566959818-38369-1-git-send-email-zhiwei_liu@c-sky.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 28 Aug 2019 14:34:11 -0700
-Message-ID: <CAKmqyKMDmaABGWyLZD2R-4J8=jM6hry6Bfmu498+UZzQtxsTMA@mail.gmail.com>
-To: liuzhiwei <zhiwei_liu@c-sky.com>
+ (envelope-from <zhiwei_liu@c-sky.com>) id 1i3JBh-000127-4C
+ for qemu-riscv@nongnu.org; Thu, 29 Aug 2019 08:06:02 -0400
+Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:36290)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <zhiwei_liu@c-sky.com>)
+ id 1i3JBa-0000rj-JF; Thu, 29 Aug 2019 08:05:55 -0400
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07271378|-1; CH=green;
+ DM=CONTINUE|CONTINUE|true|0.130802-0.0139632-0.855235; FP=0|0|0|0|0|-1|-1|-1;
+ HT=e01a16370; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS; RN=12; RT=12; SR=0;
+ TI=SMTPD_---.FL--YOH_1567080343; 
+Received: from 172.16.28.187(mailfrom:zhiwei_liu@c-sky.com
+ fp:SMTPD_---.FL--YOH_1567080343)
+ by smtp.aliyun-inc.com(10.147.43.230);
+ Thu, 29 Aug 2019 20:05:46 +0800
+To: Alistair Francis <alistair23@gmail.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Peter Maydell <peter.maydell@linaro.org>, Palmer Dabbelt <palmer@sifive.com>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ Peter Maydell <peter.maydell@linaro.org>, Palmer Dabbelt
+ <palmer@sifive.com>, Sagar Karandikar <sagark@eecs.berkeley.edu>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Riku Voipio <riku.voipio@iki.fi>, 
- Laurent Vivier <laurent@vivier.eu>, Alistair Francis <Alistair.Francis@wdc.com>,
- =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>, 
+ Riku Voipio <riku.voipio@iki.fi>, Laurent Vivier <laurent@vivier.eu>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ =?UTF-8?Q?Alex_Benn=c3=a9e?= <alex.bennee@linaro.org>,
  Aurelien Jarno <aurelien@aurel32.net>
-Content-Type: text/plain; charset="UTF-8"
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2a00:1450:4864:20::244
+References: <1566959818-38369-1-git-send-email-zhiwei_liu@c-sky.com>
+ <CAKmqyKMDmaABGWyLZD2R-4J8=jM6hry6Bfmu498+UZzQtxsTMA@mail.gmail.com>
+From: liuzhiwei <zhiwei_liu@c-sky.com>
+Message-ID: <af15b620-1350-aa1a-0f02-2a46518f0ef2@c-sky.com>
+Date: Thu, 29 Aug 2019 20:00:10 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.2.1
+MIME-Version: 1.0
+In-Reply-To: <CAKmqyKMDmaABGWyLZD2R-4J8=jM6hry6Bfmu498+UZzQtxsTMA@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 3.x [generic]
+X-Received-From: 121.197.200.217
 Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH] RISCV: support riscv vector
  extension 0.7.1
 X-BeenThere: qemu-riscv@nongnu.org
@@ -73,50 +57,82 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Aug 2019 21:38:25 -0000
+X-List-Received-Date: Thu, 29 Aug 2019 12:06:04 -0000
 
-On Wed, Aug 28, 2019 at 12:04 AM liuzhiwei <zhiwei_liu@c-sky.com> wrote:
+On 2019/8/29 上午5:34, Alistair Francis wrote:
+> On Wed, Aug 28, 2019 at 12:04 AM liuzhiwei <zhiwei_liu@c-sky.com> wrote:
+>> Change-Id: I3cf891bc400713b95f47ecca82b1bf773f3dcb25
+>> Signed-off-by: liuzhiwei <zhiwei_liu@c-sky.com>
+>> ---
+>>   fpu/softfloat.c                         |   119 +
+>>   include/fpu/softfloat.h                 |     4 +
+>>   linux-user/riscv/cpu_loop.c             |     8 +-
+>>   target/riscv/Makefile.objs              |     2 +-
+>>   target/riscv/cpu.h                      |    30 +
+>>   target/riscv/cpu_bits.h                 |    15 +
+>>   target/riscv/cpu_helper.c               |     7 +
+>>   target/riscv/csr.c                      |    65 +-
+>>   target/riscv/helper.h                   |   354 +
+>>   target/riscv/insn32.decode              |   374 +-
+>>   target/riscv/insn_trans/trans_rvv.inc.c |   484 +
+>>   target/riscv/translate.c                |     1 +
+>>   target/riscv/vector_helper.c            | 26563 ++++++++++++++++++++++++++++++
+>>   13 files changed, 28017 insertions(+), 9 deletions(-)
+>>   create mode 100644 target/riscv/insn_trans/trans_rvv.inc.c
+>>   create mode 100644 target/riscv/vector_helper.c
+>>
+> Hello,
 >
-> Change-Id: I3cf891bc400713b95f47ecca82b1bf773f3dcb25
-> Signed-off-by: liuzhiwei <zhiwei_liu@c-sky.com>
-> ---
->  fpu/softfloat.c                         |   119 +
->  include/fpu/softfloat.h                 |     4 +
->  linux-user/riscv/cpu_loop.c             |     8 +-
->  target/riscv/Makefile.objs              |     2 +-
->  target/riscv/cpu.h                      |    30 +
->  target/riscv/cpu_bits.h                 |    15 +
->  target/riscv/cpu_helper.c               |     7 +
->  target/riscv/csr.c                      |    65 +-
->  target/riscv/helper.h                   |   354 +
->  target/riscv/insn32.decode              |   374 +-
->  target/riscv/insn_trans/trans_rvv.inc.c |   484 +
->  target/riscv/translate.c                |     1 +
->  target/riscv/vector_helper.c            | 26563 ++++++++++++++++++++++++++++++
->  13 files changed, 28017 insertions(+), 9 deletions(-)
->  create mode 100644 target/riscv/insn_trans/trans_rvv.inc.c
->  create mode 100644 target/riscv/vector_helper.c
+> Thanks for the patch!
 >
+> As others have pointed out you will need to split the patch up into
+> multiple smaller patches, otherwise it is too hard to review almost
+> 30,000 lines of code.
 
-Hello,
+Hi, Alistair
 
-Thanks for the patch!
+I'm so sorry for the inconvenience. It will be a patch set with a cover 
+letter in V2.
 
-As others have pointed out you will need to split the patch up into
-multiple smaller patches, otherwise it is too hard to review almost
-30,000 lines of code.
+> Can you also include a cover letter with your patch series describing
+> how you are testing this? AFAIK vector extension support isn't in any
+> compiler so I'm assuming you are handwriting the assembly or have
+> toolchain patches. Either way it will help if you can share that so
+> others can test your implementation.
 
-Can you also include a cover letter with your patch series describing
-how you are testing this? AFAIK vector extension support isn't in any
-compiler so I'm assuming you are handwriting the assembly or have
-toolchain patches. Either way it will help if you can share that so
-others can test your implementation.
+Yes, it's handwriting assembly. The assembler in Binutils has support 
+Vector extension.  First define an function test_vadd_vv_8 in assembly 
+and then it can be called from a C program.
 
-Alex and Richard have kindly started the review. Once you have
-addressed their comments and split this patch up into smaller patches
-you can send a v2 and we can go from there.
+The function is something like
 
-Once again thanks for doing this implementation for QEMU!
+/* vadd.vv */
+TEST_FUNC(test_vadd_vv_8)
+         vsetvli        t1, x0, e8, m2
+         vlb.v           v6, (a4)
+         vsb.v           v6, (a3)
+         vsetvli        t1, a0, e8, m2
+         vlb.v           v0, (a1)
+         vlb.v           v2, (a2)
+         vadd.vv     v4, v0, v2
+         vsb.v          v4, (a3)
+ret
+         .size   test_vadd_vv_8, .-test_vadd_vv_8
 
-Alistair
+It takes more time to test than to implement the instructions. Maybe 
+there is some better test method or some forced test cases in QEMU. 
+Could you give me some advice for testing?
+
+Best Regards,
+
+Zhiwei
+
+> Alex and Richard have kindly started the review. Once you have
+> addressed their comments and split this patch up into smaller patches
+> you can send a v2 and we can go from there.
+>
+> Once again thanks for doing this implementation for QEMU!
+>
+> Alistair
+>
 
