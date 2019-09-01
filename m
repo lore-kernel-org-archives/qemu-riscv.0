@@ -1,63 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1i4Fzw-0007pE-Tu
-	for mharc-qemu-riscv@gnu.org; Sat, 31 Aug 2019 22:53:48 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:47653)
+	id 1i4Fzx-0007pv-En
+	for mharc-qemu-riscv@gnu.org; Sat, 31 Aug 2019 22:53:49 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47639)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <bmeng.cn@gmail.com>) id 1i4Fzd-0007bQ-I4
+ (envelope-from <bmeng.cn@gmail.com>) id 1i4Fzc-0007az-VT
  for qemu-riscv@nongnu.org; Sat, 31 Aug 2019 22:53:31 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <bmeng.cn@gmail.com>) id 1i4Fzc-0006Mk-HE
- for qemu-riscv@nongnu.org; Sat, 31 Aug 2019 22:53:29 -0400
-Received: from mail-pf1-x443.google.com ([2607:f8b0:4864:20::443]:46072)
+ (envelope-from <bmeng.cn@gmail.com>) id 1i4Fzb-0006LX-R1
+ for qemu-riscv@nongnu.org; Sat, 31 Aug 2019 22:53:28 -0400
+Received: from mail-pf1-x444.google.com ([2607:f8b0:4864:20::444]:33207)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
- id 1i4FzZ-0006Fa-U7; Sat, 31 Aug 2019 22:53:26 -0400
-Received: by mail-pf1-x443.google.com with SMTP id w26so6902881pfq.12;
- Sat, 31 Aug 2019 19:53:25 -0700 (PDT)
+ id 1i4FzY-0006DK-Tv; Sat, 31 Aug 2019 22:53:25 -0400
+Received: by mail-pf1-x444.google.com with SMTP id q10so1865665pfl.0;
+ Sat, 31 Aug 2019 19:53:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:to:subject:date:message-id:in-reply-to:references;
- bh=Hn68U2K6KP93bDFVlK3cFjeBSh27MtQi2nLu5yWHiWY=;
- b=EoHbxu4WEyJNw3V3fG+2EFKBL85klcbwKleG4oq566MFb6pW3I9bB3YKLuZo/mnBHQ
- aHMkkJEcuiJyPgfDw4d2MAVAqPJNSTiTCukJ6j/JwI+VW+9FK+Ab0RZ1qQYP5v7M4gCN
- pUYgXxF+gBDUMlZWy9veBsCoQFdDwjkgMyLI7UWRAU4C2zxAlXyNgepCCPNlIRF9Ge1j
- AToGTHFnKvmwvySUKwD+LBV1JT/3USCBbx3PW90FdYDkNOdn5bnNZMTLG30Se/iLed9j
- 7Ghc93s6C12n/TTyIHUNM8GVSQXFDPVWAIj9vZgWF/+TYCIyMk4RVsNBKvA4qV9Y8S1M
- 3xng==
+ bh=lXtGv9HRdPTFI+Me4gtyUazvsCGsUrPGnXpSFbFm+8k=;
+ b=OwNILccBuhk2MCU7VMhNIEcRJUjggHcTbgJLdYq53Th0Jh5eAw6md/8lH8DvLP/8i9
+ 0GPXyQX59uOD8+3vDWO9HVjk1VLPmKq4+fazrfT4Sh3sI5ioCegx1OPRVLBA/zDPk0HU
+ V9sBhV90akN4sIjYLSFsLSrnFOwiy7FIlXwQvTBfw4CGap7zn0KW1rqQpeIGQY9gnqQu
+ 2fjbYbW7UhdmjyQtSVMx3dB4XQ52mVDKbEEr6oFGtHXQzJeVvAgMDrKtVSpRthHrFyf7
+ aJVy7puF0zHJRk28fKGMJXXz95to6Iogtfh6/7NjaUk88cROAtouB6BqVvqtQX0TGG+s
+ o7Yw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
  :references;
- bh=Hn68U2K6KP93bDFVlK3cFjeBSh27MtQi2nLu5yWHiWY=;
- b=WEy8BWz7MMeXISJGkzsOYw2tKVWj5GGamB5VX/qjkyv3+dDRPHt2bMhNa7UcTWoGBF
- 0B3Igg/zaTFTxIflfADxfO/G8DszXMDMwPf8n9V8iM7Hkfew9qEm9yu7e2ZP6lnoRyfX
- vXdAWhWUhcXtOcfq9ZxrIlnJ31ZVP89iQn7tiUAfayQh2PvRw5Ypk18uUfd5JhCOSkza
- 15L5inN6h+ru4Y+5mCQN8AxQFSn5+ewZnLDiBVC8RFSgE3QhQGWx60gV4DrzP2mRWNGk
- 4wCZQl4190JexGxUPc50OAzextm2C/oCnuPFojDaeflfIvkrvri2nGe9WX962fGw1z4g
- 2ioA==
-X-Gm-Message-State: APjAAAV1UrY7QQg8D1QNaEWpmz5DFnKDDfejoHj2Cb2xcPMEncwP5GdY
- jnay47Va7uwTgkvFOqLGMfM=
-X-Google-Smtp-Source: APXvYqwFOrjLE4OFFCdyCPZ5Ytlm8FNBrQvlkUCzsUTFh3p09UJDmI9LPRjdr5FTfTyPJl62CwzgsQ==
-X-Received: by 2002:a62:3644:: with SMTP id d65mr27499830pfa.128.1567306405196; 
- Sat, 31 Aug 2019 19:53:25 -0700 (PDT)
+ bh=lXtGv9HRdPTFI+Me4gtyUazvsCGsUrPGnXpSFbFm+8k=;
+ b=FyMj6DmNs3lbu4LeR62mfcciZZzdAdN2AxLlY1zbWWIoXnUlVNxKMFP1jd5AH4ncOi
+ CudHJ8qhjZM2aUqKeMNrFAY9i6Xj6F95lKZJ2OqjJNv4E+Q1SYM32g3q5BzPRxS5gulh
+ Gbrj06cm3QV2EFtETafnlv+4ZiBQwdqDEKIy47b9uRGY8xrnIk8fsxNHTH69tWpzokG5
+ xr8B9hgtd6DSqPp5V64TKEdZuygD7D8HwFFTD6ABuE4j9WDKVGVH03XRXeH1Kg4+Q6wf
+ ph9h0umVqrfQkFnFutLty7H0edgd2aN3RzIosZnghrKdzdhTQvQxzXm8A7oVacsjywC6
+ u51g==
+X-Gm-Message-State: APjAAAWzoX1lSLQHgoQlidgF46u1iFsGixzdi7NK5Pr10jNaCGYHLSzG
+ doRGkQzg6bdnUepE8C8SiqQ=
+X-Google-Smtp-Source: APXvYqwT8UKcEgOKABR6xcf7OV8tHo5GFe7774tIWHqgfyGom6bFiAtKKVcBgvgsVZgJTW1q3sF75g==
+X-Received: by 2002:aa7:908b:: with SMTP id i11mr25159631pfa.199.1567306404051; 
+ Sat, 31 Aug 2019 19:53:24 -0700 (PDT)
 Received: from localhost.localdomain (unknown-224-80.windriver.com.
  [147.11.224.80])
- by smtp.gmail.com with ESMTPSA id p10sm11453307pff.132.2019.08.31.19.53.24
+ by smtp.gmail.com with ESMTPSA id p10sm11453307pff.132.2019.08.31.19.53.22
  (version=TLS1 cipher=AES128-SHA bits=128/128);
- Sat, 31 Aug 2019 19:53:24 -0700 (PDT)
+ Sat, 31 Aug 2019 19:53:23 -0700 (PDT)
 From: Bin Meng <bmeng.cn@gmail.com>
 To: Alistair Francis <Alistair.Francis@wdc.com>,
  Palmer Dabbelt <palmer@sifive.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
-Date: Sat, 31 Aug 2019 19:52:47 -0700
-Message-Id: <1567306391-2682-7-git-send-email-bmeng.cn@gmail.com>
+Date: Sat, 31 Aug 2019 19:52:46 -0700
+Message-Id: <1567306391-2682-6-git-send-email-bmeng.cn@gmail.com>
 X-Mailer: git-send-email 1.7.1
 In-Reply-To: <1567306391-2682-1-git-send-email-bmeng.cn@gmail.com>
 References: <1567306391-2682-1-git-send-email-bmeng.cn@gmail.com>
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::443
-Subject: [Qemu-riscv] [PATCH v7 06/30] riscv: hw: Remove the unnecessary
- include of target/riscv/cpu.h
+X-Received-From: 2607:f8b0:4864:20::444
+Subject: [Qemu-riscv] [PATCH v7 05/30] riscv: hw: Change to use
+ qemu_log_mask(LOG_GUEST_ERROR, ...) instead
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -71,8 +71,8 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Sun, 01 Sep 2019 02:53:32 -0000
 
-The inclusion of "target/riscv/cpu.h" is unnecessary in various
-sifive model drivers.
+Replace the call to hw_error() with qemu_log_mask(LOG_GUEST_ERROR,...)
+in various sifive models.
 
 Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
@@ -82,53 +82,108 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Changes in v7: None
 Changes in v6: None
 Changes in v5:
-- new patch to remove the unnecessary include of target/riscv/cpu.h
+- new patch to change to use qemu_log_mask(LOG_GUEST_ERROR,...) instead
+  in various sifive models
 
 Changes in v4: None
 Changes in v3: None
 Changes in v2: None
 
- hw/riscv/sifive_prci.c | 1 -
- hw/riscv/sifive_test.c | 1 -
- hw/riscv/sifive_uart.c | 1 -
- 3 files changed, 3 deletions(-)
+ hw/riscv/sifive_prci.c | 8 +++++---
+ hw/riscv/sifive_test.c | 5 +++--
+ hw/riscv/sifive_uart.c | 9 +++++----
+ 3 files changed, 13 insertions(+), 9 deletions(-)
 
 diff --git a/hw/riscv/sifive_prci.c b/hw/riscv/sifive_prci.c
-index 1ab98d4..1957dcd 100644
+index f406682..1ab98d4 100644
 --- a/hw/riscv/sifive_prci.c
 +++ b/hw/riscv/sifive_prci.c
-@@ -22,7 +22,6 @@
- #include "hw/sysbus.h"
- #include "qemu/log.h"
- #include "qemu/module.h"
--#include "target/riscv/cpu.h"
- #include "hw/riscv/sifive_prci.h"
+@@ -20,6 +20,7 @@
  
- static uint64_t sifive_prci_read(void *opaque, hwaddr addr, unsigned int size)
+ #include "qemu/osdep.h"
+ #include "hw/sysbus.h"
++#include "qemu/log.h"
+ #include "qemu/module.h"
+ #include "target/riscv/cpu.h"
+ #include "hw/riscv/sifive_prci.h"
+@@ -37,7 +38,8 @@ static uint64_t sifive_prci_read(void *opaque, hwaddr addr, unsigned int size)
+     case SIFIVE_PRCI_PLLOUTDIV:
+         return s->plloutdiv;
+     }
+-    hw_error("%s: read: addr=0x%x\n", __func__, (int)addr);
++    qemu_log_mask(LOG_GUEST_ERROR, "%s: read: addr=0x%x\n",
++                  __func__, (int)addr);
+     return 0;
+ }
+ 
+@@ -65,8 +67,8 @@ static void sifive_prci_write(void *opaque, hwaddr addr,
+         s->plloutdiv = (uint32_t) val64;
+         break;
+     default:
+-        hw_error("%s: bad write: addr=0x%x v=0x%x\n",
+-                 __func__, (int)addr, (int)val64);
++        qemu_log_mask(LOG_GUEST_ERROR, "%s: bad write: addr=0x%x v=0x%x\n",
++                      __func__, (int)addr, (int)val64);
+     }
+ }
+ 
 diff --git a/hw/riscv/sifive_test.c b/hw/riscv/sifive_test.c
-index 655a3d7..31cad9f 100644
+index cd86831..655a3d7 100644
 --- a/hw/riscv/sifive_test.c
 +++ b/hw/riscv/sifive_test.c
-@@ -23,7 +23,6 @@
- #include "qemu/log.h"
+@@ -20,6 +20,7 @@
+ 
+ #include "qemu/osdep.h"
+ #include "hw/sysbus.h"
++#include "qemu/log.h"
  #include "qemu/module.h"
  #include "sysemu/sysemu.h"
--#include "target/riscv/cpu.h"
- #include "hw/riscv/sifive_test.h"
+ #include "target/riscv/cpu.h"
+@@ -48,8 +49,8 @@ static void sifive_test_write(void *opaque, hwaddr addr,
+             break;
+         }
+     }
+-    hw_error("%s: write: addr=0x%x val=0x%016" PRIx64 "\n",
+-        __func__, (int)addr, val64);
++    qemu_log_mask(LOG_GUEST_ERROR, "%s: write: addr=0x%x val=0x%016" PRIx64 "\n",
++                  __func__, (int)addr, val64);
+ }
  
- static uint64_t sifive_test_read(void *opaque, hwaddr addr, unsigned int size)
+ static const MemoryRegionOps sifive_test_ops = {
 diff --git a/hw/riscv/sifive_uart.c b/hw/riscv/sifive_uart.c
-index cd74043..1601bd9 100644
+index 3b3f94f..cd74043 100644
 --- a/hw/riscv/sifive_uart.c
 +++ b/hw/riscv/sifive_uart.c
-@@ -22,7 +22,6 @@
+@@ -18,6 +18,7 @@
+ 
+ #include "qemu/osdep.h"
+ #include "qapi/error.h"
++#include "qemu/log.h"
  #include "hw/sysbus.h"
  #include "chardev/char.h"
  #include "chardev/char-fe.h"
--#include "target/riscv/cpu.h"
- #include "hw/riscv/sifive_uart.h"
+@@ -93,8 +94,8 @@ uart_read(void *opaque, hwaddr addr, unsigned int size)
+         return s->div;
+     }
  
- /*
+-    hw_error("%s: bad read: addr=0x%x\n",
+-        __func__, (int)addr);
++    qemu_log_mask(LOG_GUEST_ERROR, "%s: bad read: addr=0x%x\n",
++                  __func__, (int)addr);
+     return 0;
+ }
+ 
+@@ -125,8 +126,8 @@ uart_write(void *opaque, hwaddr addr,
+         s->div = val64;
+         return;
+     }
+-    hw_error("%s: bad write: addr=0x%x v=0x%x\n",
+-        __func__, (int)addr, (int)value);
++    qemu_log_mask(LOG_GUEST_ERROR, "%s: bad write: addr=0x%x v=0x%x\n",
++                  __func__, (int)addr, (int)value);
+ }
+ 
+ static const MemoryRegionOps uart_ops = {
 -- 
 2.7.4
 
