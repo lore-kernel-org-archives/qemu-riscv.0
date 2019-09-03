@@ -1,44 +1,77 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1i4ixc-0000U3-Vl
-	for mharc-qemu-riscv@gnu.org; Mon, 02 Sep 2019 05:49:20 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:51579)
+	id 1i59ws-0002Cy-4n
+	for mharc-qemu-riscv@gnu.org; Tue, 03 Sep 2019 10:38:22 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44838)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <zhiwei_liu@c-sky.com>) id 1i4ixZ-0000R5-Vl
- for qemu-riscv@nongnu.org; Mon, 02 Sep 2019 05:49:19 -0400
+ (envelope-from <richard.henderson@linaro.org>) id 1i59wq-0002Au-3Y
+ for qemu-riscv@nongnu.org; Tue, 03 Sep 2019 10:38:21 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <zhiwei_liu@c-sky.com>) id 1i4ixX-0002Yv-WD
- for qemu-riscv@nongnu.org; Mon, 02 Sep 2019 05:49:17 -0400
-Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:34601)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1i4ixO-0001z3-Ok; Mon, 02 Sep 2019 05:49:07 -0400
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.04436282|-1; CH=green;
- DM=CONTINUE|CONTINUE|true|0.163324-0.00313813-0.833538; FP=0|0|0|0|0|-1|-1|-1;
- HT=e02c03308; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS; RN=12; RT=12; SR=0;
- TI=SMTPD_---.FNRGL-N_1567417734; 
-Received: from 172.16.28.187(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.FNRGL-N_1567417734)
- by smtp.aliyun-inc.com(10.147.40.233);
- Mon, 02 Sep 2019 17:48:57 +0800
-To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org,
+ (envelope-from <richard.henderson@linaro.org>) id 1i59wo-00043P-ER
+ for qemu-riscv@nongnu.org; Tue, 03 Sep 2019 10:38:19 -0400
+Received: from mail-pl1-x642.google.com ([2607:f8b0:4864:20::642]:34324)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
+ id 1i59wo-00042O-67
+ for qemu-riscv@nongnu.org; Tue, 03 Sep 2019 10:38:18 -0400
+Received: by mail-pl1-x642.google.com with SMTP id d3so8004774plr.1
+ for <qemu-riscv@nongnu.org>; Tue, 03 Sep 2019 07:38:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=subject:to:cc:references:from:openpgp:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=8MYd+lFoloNEHw0qLMoU3OSS3eKyWUwCcjVjCG5XqLo=;
+ b=ur1nQyr/M5CKzzg45eWCcL0VWC8yBq/DDVArCSCvTCxDVxGmC8gvqbflX7XsAFJBaW
+ leHQUHCtoHN/9IzTF4nt4sRJ4yh98LXs7flnePt286Cu80RwFW2bysvUTPeohGcXht2T
+ /FFa+ww18zf61EUV/31aLm6FNUWc99w0gak6t52QLLgTjsh0yPs3QM8Ua5Y6w20eNE4S
+ ZzsK5/BpX4J1NgDfTTKOa6i54bftEdGRWBTtlQmfsTI52RgdEN1EQCPSsqYEs6L6QpMp
+ GL5iXwaKTpqI7bAWaJCCq6r0u33+3OPjD/CHHGkeS84ZAUVMztdO7vqa+Hrnkh5Kdqfv
+ 9rEw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
+ :date:user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=8MYd+lFoloNEHw0qLMoU3OSS3eKyWUwCcjVjCG5XqLo=;
+ b=Wk1YTL63GSWToPkCRNztCzsoy9mb1GFVsNUfsafSNwXXhgLwfzx1KISNXkdu7RIzdL
+ JESebdYG413lKlZdYpyDS2qLitHFg23KPY5ctLPV0EgWTqicqrzdpI9zXrSPsFM8JeDp
+ 4CYLxQuzh4SkeavjIeEjXv79ByMFuOFqRKUOB6X8We0mK6c6vErJgv7+0V+evUyVDBD1
+ sPDs6pIudykH+I75RegDkc7/xEv8xzKz20cL2/au8B0qaIK/3uHYMnRG20MsZdu1BOyy
+ +HEhO63tS6WYhEI3Us6LLNRSxyLGfe6sYXHd+2Hlc2c08x54XnbU7R9A0EAJLlw7OB9t
+ 12eQ==
+X-Gm-Message-State: APjAAAXaa8aFO0vuNHgq/AbkbQz0EHvrmUc99NRQCNCzdAXoyYiWpPEv
+ GAyyAw+f6c3+/t1WAXrxh59OxQ==
+X-Google-Smtp-Source: APXvYqzANab0lIOxbJTJ5JRviYrXMjrPk9A0tLoi2uhBU7DjQx9BleNTZBrwh2tG8ugzS8LaVYlbeQ==
+X-Received: by 2002:a17:902:2ea2:: with SMTP id
+ r31mr36284791plb.200.1567521496563; 
+ Tue, 03 Sep 2019 07:38:16 -0700 (PDT)
+Received: from [192.168.1.11] (97-113-7-119.tukw.qwest.net. [97.113.7.119])
+ by smtp.gmail.com with ESMTPSA id h70sm17002101pgc.36.2019.09.03.07.38.15
+ (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+ Tue, 03 Sep 2019 07:38:15 -0700 (PDT)
+To: liuzhiwei <zhiwei_liu@c-sky.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
 Cc: peter.maydell@linaro.org, palmer@sifive.com, sagark@eecs.berkeley.edu,
  kbastian@mail.uni-paderborn.de, riku.voipio@iki.fi, laurent@vivier.eu,
  Alistair.Francis@wdc.com, alex.bennee@linaro.org, aurelien@aurel32.net
 References: <1566959818-38369-1-git-send-email-zhiwei_liu@c-sky.com>
  <ba8c7451-b0a7-0405-f881-0c6d0d8574fb@linaro.org>
-From: liuzhiwei <zhiwei_liu@c-sky.com>
-Message-ID: <39fe5b33-86b1-cb42-9733-5d8e1ea08127@c-sky.com>
-Date: Mon, 2 Sep 2019 17:43:04 +0800
+ <3b85e9b6-8799-9682-9aaf-b688924cb52e@linaro.org>
+ <841ebe5f-dd5e-c59d-d7e9-c246ad7741c0@c-sky.com>
+ <f81553cc-0f95-003e-f608-f83f9a7e8dd2@linaro.org>
+ <b439e5a8-8ade-2f90-d298-9cedd1b2333b@c-sky.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+Openpgp: preference=signencrypt
+Message-ID: <e0617778-892c-0c83-71b8-a59bd375a85e@linaro.org>
+Date: Tue, 3 Sep 2019 07:38:13 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.2.1
+ Thunderbird/60.8.0
 MIME-Version: 1.0
-In-Reply-To: <ba8c7451-b0a7-0405-f881-0c6d0d8574fb@linaro.org>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <b439e5a8-8ade-2f90-d298-9cedd1b2333b@c-sky.com>
+Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 3.x [generic]
-X-Received-From: 121.197.200.217
+Content-Transfer-Encoding: 8bit
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2607:f8b0:4864:20::642
 Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH] RISCV: support riscv vector
  extension 0.7.1
 X-BeenThere: qemu-riscv@nongnu.org
@@ -52,317 +85,91 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Sep 2019 09:49:20 -0000
+X-List-Received-Date: Tue, 03 Sep 2019 14:38:21 -0000
+
+On 9/2/19 12:45 AM, liuzhiwei wrote:
+> 
+> On 2019/8/29 下午11:09, Richard Henderson wrote:
+>> On 8/29/19 5:45 AM, liuzhiwei wrote:
+>>> Even in qemu,  it may be some situations that VSTART != 0. For example, a load
+>>> instruction leads to a page fault exception in a middle position. If VSTART ==
+>>> 0,  some elements that had been loaded before the exception will be loaded once
+>>> again.
+>> Alternately, you can validate all of the pages before performing any memory
+>> operations.  At which point there will never be an exception in the middle.
+> 
+> As a vector instruction may access memory  across many pages,  is there any way
+> to validate the pages? Page table walk ?Or some TLB APIs?
+
+Yes, there are TLB APIs.  Several of them, depending on what is needed.
+
+> #0  cpu_watchpoint_address_matches (wp=0x555556228110, addr=536871072, len=1)
+> at qemu/exec.c:1094
+> #1  0x000055555567204f in check_watchpoint (offset=160, len=1, attrs=...,
+> flags=2) at qemu/exec.c:2803
+> #2  0x0000555555672379 in watch_mem_write (opaque=0x0, addr=536871072, val=165,
+> size=1, attrs=...) at qemu/exec.c:2878
+> #3  0x00005555556d44bb in memory_region_write_with_attrs_accessor
+> (mr=0x5555561292e0 <io_mem_watch>, addr=536871072, value=0x7fffedffe2c8,
+> size=1, shift=0, mask=255, attrs=...)
+>     at qemu/memory.c:553
+> #4  0x00005555556d45de in access_with_adjusted_size (addr=536871072,
+> value=0x7fffedffe2c8, size=1, access_size_min=1, access_size_max=8,
+> access_fn=0x5555556d43cd <memory_region_write_with_attrs_accessor>,
+>     mr=0x5555561292e0 <io_mem_watch>, attrs=...) at qemu/memory.c:594
+> #5  0x00005555556d7247 in memory_region_dispatch_write (mr=0x5555561292e0
+> <io_mem_watch>, addr=536871072, data=165, size=1, attrs=...) at qemu/memory.c:1480
+> #6  0x00005555556f0d13 in io_writex (env=0x5555561efb58,
+> iotlbentry=0x5555561f5398, mmu_idx=1, val=165, addr=536871072, retaddr=0,
+> recheck=false, size=1) at qemu/accel/tcg/cputlb.c:909
+> #7  0x00005555556f19a6 in io_writeb (env=0x5555561efb58, mmu_idx=1, index=0,
+> val=165 '\245', addr=536871072, retaddr=0, recheck=false) at
+> qemu/accel/tcg/softmmu_template.h:268
+> #8  0x00005555556f1b54 in helper_ret_stb_mmu (env=0x5555561efb58,
+> addr=536871072, val=165 '\245', oi=1, retaddr=0) at
+> qemu/accel/tcg/softmmu_template.h:304
+> #9  0x0000555555769f06 in cpu_stb_data_ra (env=0x5555561efb58, ptr=536871072,
+> v=165, retaddr=0) at qemu/include/exec/cpu_ldst_template.h:182
+> #10 0x0000555555769f80 in cpu_stb_data (env=0x5555561efb58, ptr=536871072,
+> v=165) at /qemu/include/exec/cpu_ldst_template.h:194
+> #11 0x000055555576a913 in csky_cpu_stb_data (env=0x5555561efb58,
+> vaddr=536871072, data=165 '\245') at qemu/target/csky/csky_ldst.c:48
+> #12 0x000055555580ba7d in helper_vdsp2_vstru_n (env=0x5555561efb58,
+> insn=4167183360) at qemu/target/csky/op_vdsp2.c:1317
+> 
+> The path is not related to probe_write in the patch().
+
+Of course.  It wasn't supposed to be.
+
+> Could you give more details or a test case where watchpoint doesn't work
+> correctly?
+
+If the store partially, but not completely, overlaps the watchpoint.  This is
+obviously much easier to do with large vector operations than with normal
+integer operations.
+
+In this case, we may have completed some of the stores before encountering the
+watchpoint.  Which, inside check_watchpoint(), will longjmp back to the cpu
+main loop.  Now we have a problem: the store is partially complete and it
+should not be.
+
+Therefore, we now have patches queued in tcg-next that adjust probe_write to
+perform both access and watchpoint tests.  There is still target-specific code
+that must be adjusted to match, so there are not currently any examples in the
+tree to show.
+
+However, the idea is:
+  (1) Instructions that perform more than one host store must probe
+      the entire range to be stored before performing any stores.
+
+  (2) Instructions that perform more than one host load must either
+      probe the entire range to be loaded, or collect the data in
+      temporary storage.  If not using probes, writeback to the
+      register file must be delayed until after all loads are done.
+
+  (3) Any one probe may not cross a page boundary; splitting of the
+      access across pages must be done by the helper.
 
 
-On 2019/8/29 上午2:54, Richard Henderson wrote:
-> On 8/27/19 7:36 PM, liuzhiwei wrote:
->> Change-Id: I3cf891bc400713b95f47ecca82b1bf773f3dcb25
->> Signed-off-by: liuzhiwei <zhiwei_liu@c-sky.com>
->> ---
->>   fpu/softfloat.c                         |   119 +
->>   include/fpu/softfloat.h                 |     4 +
->>   linux-user/riscv/cpu_loop.c             |     8 +-
->>   target/riscv/Makefile.objs              |     2 +-
->>   target/riscv/cpu.h                      |    30 +
->>   target/riscv/cpu_bits.h                 |    15 +
->>   target/riscv/cpu_helper.c               |     7 +
->>   target/riscv/csr.c                      |    65 +-
->>   target/riscv/helper.h                   |   354 +
->>   target/riscv/insn32.decode              |   374 +-
->>   target/riscv/insn_trans/trans_rvv.inc.c |   484 +
->>   target/riscv/translate.c                |     1 +
->>   target/riscv/vector_helper.c            | 26563 ++++++++++++++++++++++++++++++
->>   13 files changed, 28017 insertions(+), 9 deletions(-)
-> As Alex mentioned, this is *far* too big to be presented as a single patch.
-OK, split it into patch set in V2
->
->> diff --git a/include/fpu/softfloat.h b/include/fpu/softfloat.h
->> index 3ff3fa5..3b0754c 100644
->> --- a/include/fpu/softfloat.h
->> +++ b/include/fpu/softfloat.h
->> @@ -293,6 +293,10 @@ float16 float16_maxnummag(float16, float16, float_status *status);
->>   float16 float16_sqrt(float16, float_status *status);
->>   int float16_compare(float16, float16, float_status *status);
->>   int float16_compare_quiet(float16, float16, float_status *status);
->> +int float16_unordered_quiet(float16, float16, float_status *status);
->> +int float16_le(float16, float16, float_status *status);
->> +int float16_lt(float16, float16, float_status *status);
->> +int float16_eq_quiet(float16, float16, float_status *status);
-> As Alex mentioned, none of these changes are required, as all
-> functionality is provided by float16_compare{,_quiet}.
-Yes, use float16_compare instead.
->> diff --git a/linux-user/riscv/cpu_loop.c b/linux-user/riscv/cpu_loop.c
->> index 12aa3c0..b01548a 100644
->> --- a/linux-user/riscv/cpu_loop.c
->> +++ b/linux-user/riscv/cpu_loop.c
->> @@ -40,7 +40,13 @@ void cpu_loop(CPURISCVState *env)
->>           signum = 0;
->>           sigcode = 0;
->>           sigaddr = 0;
->> -
->> +        if (env->foflag) {
->> +            if (env->vfp.vl != 0) {
->> +                env->foflag = false;
->> +                env->pc += 4;
->> +                continue;
->> +            }
-> This is most definitely not the correct way to implement first-fault.
->
-> You need to have a look at target/arm/sve_helper.c, e.g. sve_ldff1_r,
-> where we test pages for validity with tlb_vaddr_to_host.
-Why should  test pages for validity? If there is a page fault in running 
-time, it just the case why it must use the fault-only-first instruction.
->> +    /* vector coprocessor state.  */
->> +    struct {
->> +        union VECTOR {
->> +            float64  f64[VUNIT(64)];
->> +            float32  f32[VUNIT(32)];
->> +            float16  f16[VUNIT(16)];
->> +            target_ulong ul[VUNIT(sizeof(target_ulong))];
->> +            uint64_t u64[VUNIT(64)];
->> +            int64_t  s64[VUNIT(64)];
->> +            uint32_t u32[VUNIT(32)];
->> +            int32_t  s32[VUNIT(32)];
->> +            uint16_t u16[VUNIT(16)];
->> +            int16_t  s16[VUNIT(16)];
->> +            uint8_t  u8[VUNIT(8)];
->> +            int8_t   s8[VUNIT(8)];
->> +        } vreg[32];
->> +        target_ulong vxrm;
->> +        target_ulong vxsat;
->> +        target_ulong vl;
->> +        target_ulong vstart;
->> +        target_ulong vtype;
->> +        float_status fp_status;
->> +    } vfp;
-> You've obviously copied "vfp" from target/arm.  Drop that.  It makes no sense
-> in the context of risc-v.
-> I'm not sure that vreg[].element[] really makes the most sense in the context
-> of how risc-v rearranges its elements.  It will almost certainly fail clang
-> validators, if enabled, since you'll be indexing beyond the end of vreg[n] into
-> vreg[n+1].
->
-> It might be best to have a single array:
->
->      union {
->          uint64_t u64[32 * VLEN / 64];
->          ...
->          uint8_t u8[32 * VLEN / 8];
->      } velt;
->
-> This is clearer to the compiler that this is a single block of memory that we
-> can index as we please.
-
-A single array is a good idea. But vreg[] will be better for understanding as it preserve the register concepts.
-
-> Note that float64/float32/float16 are legacy.  They will always be equivalent
-> to the unsigned integer types of the same size.
->
-> Is there really any vector operation at all that is dependent on XLEN?  If not,
-> then there is no reason to confuse things by including target_ulong.
->
-OK.
->> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
->> index e32b612..405caf6 100644
->> --- a/target/riscv/cpu_helper.c
->> +++ b/target/riscv/cpu_helper.c
->> @@ -521,6 +521,13 @@ void riscv_cpu_do_interrupt(CPUState *cs)
->>           [PRV_H] = RISCV_EXCP_H_ECALL,
->>           [PRV_M] = RISCV_EXCP_M_ECALL
->>       };
->> +    if (env->foflag) {
->> +        if (env->vfp.vl != 0) {
->> +            env->foflag = false;
->> +            env->pc += 4;
->> +            return;
->> +        }
->> +    }
-> Again, not the way to implement first-fault.
->
-> In particular, you haven't even verified that do_interrupt has been called on
-> behalf of a RISCV_EXCP_LOAD_PAGE_FAULT.  This could be a timer tick.
-
-I don't think this could be a timer tick. A timer tick must not 
-interrupt one instruction in qemu.
-
-According to the specification, if there is a RISCV_EXCP_LOAD_PAGE_FAULT 
-in the instruction,  and some elements had been loaded or stored,
-
-the remaining elements will not be processed again after restore from 
-the exception.
-
-If there is a RISCV_EXCP_LOAD_PAGE_FAULT in the instruction,  and no 
-elements had been loaded or stored, the remaining elements will be 
-processed again after restore from the exception.
-
->
->> +#define MAX_U8      ((uint8_t)0xff)
->> +#define MIN_U8      ((uint8_t)0x0)
->> +#define MAX_S8      ((int8_t)0x7f)
->> +#define MIN_S8      ((int8_t)0x80)
->> +#define SIGNBIT16   (1 << 15)
->> +#define MAX_U16     ((uint16_t)0xffff)
->> +#define MIN_U16     ((uint16_t)0x0)
->> +#define MAX_S16     ((int16_t)0x7fff)
->> +#define MIN_S16     ((int16_t)0x8000)
->> +#define SIGNBIT32   (1 << 31)
->> +#define MAX_U32     ((uint32_t)0xffffffff)
->> +#define MIN_U32     ((uint32_t)0x0)
->> +#define MAX_S32     ((int32_t)0x7fffffff)
->> +#define MIN_S32     ((int32_t)0x80000000)
->> +#define SIGNBIT64   ((uint64_t)1 << 63)
->> +#define MAX_U64     ((uint64_t)0xffffffffffffffff)
->> +#define MIN_U64     ((uint64_t)0x0)
->> +#define MAX_S64     ((int64_t)0x7fffffffffffffff)
->> +#define MIN_S64     ((int64_t)0x8000000000000000)
-> Why are you replicating INT8_MIN et al?
-Thanks, it will be removed.
->
->
->> +static target_ulong vector_get_index(CPURISCVState *env, int rs1, int rs2,
->> +    int index, int mem, int width, int nf)
->> +{
->> +    target_ulong abs_off, base = env->gpr[rs1];
->> +    target_long offset;
->> +    switch (width) {
->> +    case 8:
->> +        offset = sign_extend(env->vfp.vreg[rs2].s8[index], 8) + nf * mem;
->> +        break;
->> +    case 16:
->> +        offset = sign_extend(env->vfp.vreg[rs2].s16[index], 16) + nf * mem;
->> +        break;
->> +    case 32:
->> +        offset = sign_extend(env->vfp.vreg[rs2].s32[index], 32) + nf * mem;
->> +        break;
->> +    case 64:
->> +        offset = env->vfp.vreg[rs2].s64[index] + nf * mem;
->> +        break;
->> +    default:
->> +        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
-> This is broken.  You cannot use GETPC() anywhere except in the outermost
-> HELPER().  Otherwise you're not computing the return address back into the
-> code_gen_buffer, which is what is required to properly unwind the guest state.
-
-Yes, I will fix it.
-
->
->> +static inline bool vector_vtype_ill(CPURISCVState *env)
->> +{
->> +    if ((env->vfp.vtype >> (sizeof(target_ulong) - 1)) & 0x1) {
->> +        return true;
->> +    }
->> +    return false;
->> +}
->> +
->> +static inline void vector_vtype_set_ill(CPURISCVState *env)
->> +{
->> +    env->vfp.vtype = ((target_ulong)1) << (sizeof(target_ulong) - 1);
->> +    return;
->> +}
->> +
->> +static inline int vector_vtype_get_sew(CPURISCVState *env)
->> +{
->> +    return (env->vfp.vtype >> 2) & 0x7;
->> +}
->> +
->> +static inline int vector_get_width(CPURISCVState *env)
->> +{
->> +    return  8 * (1 << vector_vtype_get_sew(env));
->> +}
->> +
->> +static inline int vector_get_lmul(CPURISCVState *env)
->> +{
->> +    return 1 << (env->vfp.vtype & 0x3);
->> +}
->> +
->> +static inline int vector_get_vlmax(CPURISCVState *env)
->> +{
->> +    return vector_get_lmul(env) * VLEN / vector_get_width(env);
->> +}
->> +
->> +static inline int vector_elem_mask(CPURISCVState *env, uint32_t vm, int width,
->> +    int lmul, int index)
->> +{
->> +    int mlen = width / lmul;
->> +    int idx = (index * mlen) / 8;
->> +    int pos = (index * mlen) % 8;
->> +
->> +    return vm || ((env->vfp.vreg[0].u8[idx] >> pos) & 0x1);
->> +}
-> I would strongly encourage you place the components of vtype within tb_flags
-> via cpu_get_tb_cpu_state.  This would allow you to move quite a few checks from
-> run-time to translation-time.
-Good idea and some difficult.
-> Recall that translation happens once (per configuration), whereas execution
-> happens many times.  Obviously, the more configurations that we create, the
-> more translation that must happen.
->
-> But the vtypei argument to vsetvli is a good choice, because it is constant,
-> relates directly to the compiled code, and is unrelated to the length of the
-> data being processed.
-Good choice for what? I am not quite understand.
-> With that, you can verify at translation:
->
-> (1) vill
-> (2) v[n], for (n % lmul) != 0
-> (3) v[n] overlapping v[0] for masked/carry operations, with lmul > 1
->
-> and
->
-> (4) you can arrange the helpers so that instead of 1 helper that has to
->      handle all SEW, you have N helpers, each handling a different SEW.
-For all vector instructions or just vsetvli?
-> And with all of this done, I believe you no longer need to pass the register
-> number to the helper.  You can pass the address of v[n], which is much more
-> like how the tcg generic vector support works.
->
-> Whether or not to include VL in tb_flags is a harder choice.  Certainly not the
-> exact value of VL, as that would lead to different translations for every loop
-> tail.  But it might be reasonable to include (VSTART == 0 && VL == VLMAX) as a
-> single bit.  Knowing that this condition is true would allow some use of the
-> tcg generic vector support.
->
-> E.g. vadd.vv could be
->
->      if (masked) {
->          switch (SEW) {
->          case MO_8:
->              gen_helper_vadd8_mask(...);
->              break;
->          ...
->          }
->      } else if (vl_eq_vlmax) {
->          tcg_gen_gvec_add(SEW, vreg_ofs(vd), vreg_ofs(vs2), vreg_ofs(vs1),
->                           VLEN * LMUL, VLEN * LMUL);
->      } else {
->          switch (SEW) {
->          case MO_8:
->              gen_helper_vadd8(...);
->              break;
->          ...
->          }
->      }
->
-> Or, equivalently, pack pointers to the actual generator functions into a
-> structure so that this code structure can be shared between many instructions.
->
-> Bear in mind that all tcg gvec operations operate strictly upon lanes.  I.e.
->
->     vd[x] = vs1[x] op vs2[x]
->
-> thus the actual arrangement of the elements in storage is irrelevant and SLEN
-> need not be considered here.
-
-Thank you very much.  Although it is some difficult for me to address 
-your comments, they are very helpful.
-
-Best Regards,
-
-Zhiwei
-
->
->
-> r~
->
+r~
 
