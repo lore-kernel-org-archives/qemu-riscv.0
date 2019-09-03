@@ -1,56 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1i5Dp8-0008Tz-2z
-	for mharc-qemu-riscv@gnu.org; Tue, 03 Sep 2019 14:46:38 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:33971)
+	id 1i5Hvk-0002RA-Me
+	for mharc-qemu-riscv@gnu.org; Tue, 03 Sep 2019 19:09:44 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:46504)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <palmer@dabbelt.com>) id 1i5Dp5-0008Tk-Go
- for qemu-riscv@nongnu.org; Tue, 03 Sep 2019 14:46:36 -0400
+ (envelope-from <alistair23@gmail.com>) id 1i5Hvi-0002Oh-5g
+ for qemu-riscv@nongnu.org; Tue, 03 Sep 2019 19:09:43 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmer@dabbelt.com>) id 1i5Dp4-0004El-6u
- for qemu-riscv@nongnu.org; Tue, 03 Sep 2019 14:46:35 -0400
-Received: from mail-pg1-f195.google.com ([209.85.215.195]:40979)
+ (envelope-from <alistair23@gmail.com>) id 1i5Hvh-0007yF-3z
+ for qemu-riscv@nongnu.org; Tue, 03 Sep 2019 19:09:42 -0400
+Received: from mail-lj1-x241.google.com ([2a00:1450:4864:20::241]:47028)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1i5Dp4-0004EB-10
- for qemu-riscv@nongnu.org; Tue, 03 Sep 2019 14:46:34 -0400
-Received: by mail-pg1-f195.google.com with SMTP id x15so9621187pgg.8
- for <qemu-riscv@nongnu.org>; Tue, 03 Sep 2019 11:46:33 -0700 (PDT)
+ (Exim 4.71) (envelope-from <alistair23@gmail.com>)
+ id 1i5Hve-0007uu-Sl; Tue, 03 Sep 2019 19:09:39 -0400
+Received: by mail-lj1-x241.google.com with SMTP id e17so6721815ljf.13;
+ Tue, 03 Sep 2019 16:09:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=PPwljZA2rPpRbvS0e37mfASF5sIMRnIrD2rdGIOq6EE=;
+ b=Bp7/Gh76IvXkUb2TIwPCQH7SkPJRZb4pKec+pQ34MTd+g2k9gZSwuKT7i3fhZFlT4y
+ MYT+91RolBwwgBOwg0SWOT9MkTkdq+gYaZZ3a13wbYlFgkDjJpdxaPkCHQOt6xeE+FBg
+ Abwv7ZjXhrCVmqfRkMcF0KSX9G9MukfhfLMn95WSaQVy71OvNZpPOj0S7oqflonqpvZz
+ +UjTpi/4EQ/vtoIc1zunJcpky9EYB8NsamzGnAPgBxdaJjTOikqhfzYkM9CIyWnoJiic
+ K2I0eYakAKR4fncR4pT390H4GUKn1JfwiTmii8BboZJ+5EgEpRj72jkm2cBPXNxHX+J0
+ 6PLg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
- :mime-version:content-transfer-encoding;
- bh=lTBnmSOBqUKx2hxZLXlAr5Jk335lHE92K6mAhufuKb0=;
- b=Mru9u8NIPp4NHwxQ8K8UlWPIkyOI3mLRdGBog5G+MZT2YU5Qt/m/WBvE4b1+2SmKbL
- aE1lrgb6YLvwiekcUNx1w1pBRgUhdxHtjscosHR4nICOPk8f+xRsaG0WjXWnVIXQHuxi
- 7nE6/KhToHm5Yb8jewVU5uBZF+hbfdqrqrwl7VI4GFEyRTiucEHGAnB3SBjzNDnBO/mP
- zeS0q4ty/ze9O6Il/I47dfngOM5lZWPrfsOZKp05oolcEmzcGW8J7bV7jN/41fPjOM/Q
- dyq86zsf5eyayOcWGbX55b4BCQZ8pyUFvXZo2Abnb/H07Gdcve9eCpCMLt7Lnkas7wzY
- cfJQ==
-X-Gm-Message-State: APjAAAWKUr62At2BdeLXSBK8Ubdh/wbRdZCd4bkl3muBN9wKRFY2yq9T
- TSJ4KijH010Y4CGAxARcH0kCCQ==
-X-Google-Smtp-Source: APXvYqyCURPjGi+zSKb5TovgXT/uNBgY2uC1FxCLDolVYEDgiIujwtZjOMK3nvrGiePEoCtISw4miw==
-X-Received: by 2002:a63:4a51:: with SMTP id j17mr31507143pgl.284.1567536392250; 
- Tue, 03 Sep 2019 11:46:32 -0700 (PDT)
-Received: from localhost ([12.206.222.5])
- by smtp.gmail.com with ESMTPSA id r23sm272493pjo.22.2019.09.03.11.46.31
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 03 Sep 2019 11:46:31 -0700 (PDT)
-Date: Tue, 03 Sep 2019 11:46:31 -0700 (PDT)
-X-Google-Original-Date: Tue, 03 Sep 2019 10:35:56 PDT (-0700)
-In-Reply-To: <CAEUhbmV5fWqzPcdWW52n7DTczTtoLfbmE0HhLCz1jsgcNbLwRA@mail.gmail.com>
-CC: Alistair Francis <Alistair.Francis@wdc.com>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, sagark@eecs.berkeley.edu,
- dgilbert@redhat.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-From: Palmer Dabbelt <palmer@sifive.com>
-To: bmeng.cn@gmail.com
-Message-ID: <mhng-255d26e8-02dd-4acb-8b8f-a5e35aabd6c4@palmer-si-x1e>
-Mime-Version: 1.0 (MHng)
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
- [fuzzy]
-X-Received-From: 209.85.215.195
-Subject: Re: [Qemu-riscv] [PATCH v4] riscv: hmp: Add a command to show
- virtual memory mappings
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=PPwljZA2rPpRbvS0e37mfASF5sIMRnIrD2rdGIOq6EE=;
+ b=ISnH5bwHSBgon9hhjIjM7mICdEe0cpXU15aECjxG/LH/Mun/t5rJqjH4XvXz1atYfC
+ yobkpLALvk+PtqdfRavEAvsp1p4v2XM0cU/WM3FzHUUDbLxgYYs0F5Po63lmMcccIaLt
+ zoPBICpoTUcBha25bZ4gN7ieSeN/Z6pX3Y6szWVFeWjeNypkCU2NP96DAtZingZBZTXp
+ 1VxXHfUa2G3fDpHc2xReGRoCJr/+RkjEzdOv2KQAprWPHTnl0HOtBXDWnEzhOip5cWiR
+ kkW4BefKmO/KEyOqZ+vfxfrAVuqMT6D9yYg23hAKAik5FBODM73fO5ojqk59fSvYQyNE
+ l57w==
+X-Gm-Message-State: APjAAAWygJuss8H0JaFD/l3gJw4MYrZbeY+qn3Ez4klEz6HTMhiMPiq2
+ AFA49tWJinvTTWYw9rcqZdn9VleooywORasul2s=
+X-Google-Smtp-Source: APXvYqyRcEcIj7iHac1aJtg6fUExpgZ4lqDRh6vfSsv1K0FkpfV7qQGOpK2NoE/yeOUQLWSIr6BUOYzovawXZspAvVM=
+X-Received: by 2002:a05:651c:109:: with SMTP id
+ a9mr21125800ljb.33.1567552177827; 
+ Tue, 03 Sep 2019 16:09:37 -0700 (PDT)
+MIME-Version: 1.0
+References: <1567306391-2682-1-git-send-email-bmeng.cn@gmail.com>
+ <1567306391-2682-16-git-send-email-bmeng.cn@gmail.com>
+In-Reply-To: <1567306391-2682-16-git-send-email-bmeng.cn@gmail.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 3 Sep 2019 16:09:11 -0700
+Message-ID: <CAKmqyKOmP6KjJBrY8Taw1DKqcmkeY22gNgJZ9r8=ccRwbzxtXw@mail.gmail.com>
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>,
+ Palmer Dabbelt <palmer@sifive.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2a00:1450:4864:20::241
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v7 15/30] riscv: hart: Add a
+ "hartid-base" property to RISC-V hart array
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -62,58 +69,78 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Sep 2019 18:46:36 -0000
+X-List-Received-Date: Tue, 03 Sep 2019 23:09:43 -0000
 
-On Tue, 27 Aug 2019 18:31:18 PDT (-0700), bmeng.cn@gmail.com wrote:
-> Hi Palmer,
+On Sat, Aug 31, 2019 at 7:58 PM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
-> On Wed, Aug 28, 2019 at 7:18 AM Palmer Dabbelt <palmer@sifive.com> wrote:
->>
->> On Sun, 18 Aug 2019 22:59:54 PDT (-0700), bmeng.cn@gmail.com wrote:
->> > On Wed, Aug 14, 2019 at 11:33 PM Bin Meng <bmeng.cn@gmail.com> wrote:
->> >>
->> >> This adds 'info mem' command for RISC-V, to show virtual memory
->> >> mappings that aids debugging.
->> >>
->> >> Rather than showing every valid PTE, the command compacts the
->> >> output by merging all contiguous physical address mappings into
->> >> one block and only shows the merged block mapping details.
->> >>
->> >> Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
->> >> Acked-by: Dr. David Alan Gilbert <dgilbert@redhat.com>
->> >> Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
->> >>
->> >> ---
->> >>
->> >> Changes in v4:
->> >> - restore to v2, that does not print all harts's PTE, since we
->> >>   should switch to a cpu context via the 'cpu' command
->> >>
->> >> Changes in v3:
->> >> - print PTEs for all harts instead of just current hart
->> >>
->> >> Changes in v2:
->> >> - promote ppn to hwaddr when doing page table address calculation
->> >>
->> >>  hmp-commands-info.hx       |   2 +-
->> >>  target/riscv/Makefile.objs |   4 +
->> >>  target/riscv/monitor.c     | 229 +++++++++++++++++++++++++++++++++++++++++++++
->> >>  3 files changed, 234 insertions(+), 1 deletion(-)
->> >>  create mode 100644 target/riscv/monitor.c
->> >>
->> >
->> > Ping?
->> >
->> > What's the status of this patch?
->>
->> This is in my patch queue (for-master on github).  I'm still a bit backed up on
->> email, but when I get caught back up I'll send a PR.
+> At present each hart's hartid in a RISC-V hart array is assigned
+> the same value of its index in the hart array. But for a system
+> that has multiple hart arrays, this is not the case any more.
 >
-> I double checked your git repo, and found you applied an older version
-> of this patch.
+> Add a new "hartid-base" property so that hartid number can be
+> assigned based on the property value.
 >
-> Please drop that, and apply this v4 one.
-> http://patchwork.ozlabs.org/patch/1147104/
+> Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
 
-Sorry about that, it should be fixed now.
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+
+Alistair
+
+>
+> ---
+>
+> Changes in v7:
+> - use `s->hartid_base + idx` directly
+>
+> Changes in v6:
+> - use s->hartid_base directly, instead of an extra variable
+>
+> Changes in v5: None
+> Changes in v4:
+> - new patch to add a "hartid-base" property to RISC-V hart array
+>
+> Changes in v3: None
+> Changes in v2: None
+>
+>  hw/riscv/riscv_hart.c         | 3 ++-
+>  include/hw/riscv/riscv_hart.h | 1 +
+>  2 files changed, 3 insertions(+), 1 deletion(-)
+>
+> diff --git a/hw/riscv/riscv_hart.c b/hw/riscv/riscv_hart.c
+> index 9deef869..e28db80 100644
+> --- a/hw/riscv/riscv_hart.c
+> +++ b/hw/riscv/riscv_hart.c
+> @@ -27,6 +27,7 @@
+>
+>  static Property riscv_harts_props[] = {
+>      DEFINE_PROP_UINT32("num-harts", RISCVHartArrayState, num_harts, 1),
+> +    DEFINE_PROP_UINT32("hartid-base", RISCVHartArrayState, hartid_base, 0),
+>      DEFINE_PROP_STRING("cpu-type", RISCVHartArrayState, cpu_type),
+>      DEFINE_PROP_END_OF_LIST(),
+>  };
+> @@ -45,7 +46,7 @@ static void riscv_hart_realize(RISCVHartArrayState *s, int idx,
+>      object_initialize_child(OBJECT(s), "harts[*]", &s->harts[idx],
+>                              sizeof(RISCVCPU), cpu_type,
+>                              &error_abort, NULL);
+> -    s->harts[idx].env.mhartid = idx;
+> +    s->harts[idx].env.mhartid = s->hartid_base + idx;
+>      qemu_register_reset(riscv_harts_cpu_reset, &s->harts[idx]);
+>      object_property_set_bool(OBJECT(&s->harts[idx]), true,
+>                               "realized", &err);
+> diff --git a/include/hw/riscv/riscv_hart.h b/include/hw/riscv/riscv_hart.h
+> index 0671d88..1984e30 100644
+> --- a/include/hw/riscv/riscv_hart.h
+> +++ b/include/hw/riscv/riscv_hart.h
+> @@ -32,6 +32,7 @@ typedef struct RISCVHartArrayState {
+>
+>      /*< public >*/
+>      uint32_t num_harts;
+> +    uint32_t hartid_base;
+>      char *cpu_type;
+>      RISCVCPU *harts;
+>  } RISCVHartArrayState;
+> --
+> 2.7.4
+>
+>
 
