@@ -1,63 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1i5teB-0005Jb-Un
-	for mharc-qemu-riscv@gnu.org; Thu, 05 Sep 2019 11:26:07 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43871)
+	id 1i5u6b-0000Ty-MT
+	for mharc-qemu-riscv@gnu.org; Thu, 05 Sep 2019 11:55:29 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:51678)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <bmeng.cn@gmail.com>) id 1i5te9-0005G1-36
- for qemu-riscv@nongnu.org; Thu, 05 Sep 2019 11:26:06 -0400
+ (envelope-from <bmeng.cn@gmail.com>) id 1i5u6Z-0000Qu-8d
+ for qemu-riscv@nongnu.org; Thu, 05 Sep 2019 11:55:28 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <bmeng.cn@gmail.com>) id 1i5te7-0000VR-PV
- for qemu-riscv@nongnu.org; Thu, 05 Sep 2019 11:26:04 -0400
-Received: from mail-ed1-x542.google.com ([2a00:1450:4864:20::542]:46146)
+ (envelope-from <bmeng.cn@gmail.com>) id 1i5u6Y-0004fY-35
+ for qemu-riscv@nongnu.org; Thu, 05 Sep 2019 11:55:27 -0400
+Received: from mail-pl1-x62c.google.com ([2607:f8b0:4864:20::62c]:33443)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
- id 1i5te4-0000Us-Vv; Thu, 05 Sep 2019 11:26:01 -0400
-Received: by mail-ed1-x542.google.com with SMTP id i8so3015150edn.13;
- Thu, 05 Sep 2019 08:26:00 -0700 (PDT)
+ id 1i5u6V-0004dI-J4; Thu, 05 Sep 2019 11:55:23 -0400
+Received: by mail-pl1-x62c.google.com with SMTP id t11so1517891plo.0;
+ Thu, 05 Sep 2019 08:55:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=6G0JlvMUrwOQNBgV7evwiXq6c4f3w/LLRYfXbU572Ec=;
- b=GJiRQJjX7U8labh1veRUnVA/9kuAgONqnX/GuwvBmhQWtDyNa6oaGWrJdhgEibnocD
- u37auTV6jZ8/2ClQfWsfKQa5+IKFaJ9BMBiWH3vsLF1NFpo9beLQwCJv773a9qnlw7bP
- qU4zuyhzXIPAmHJPlpjzuqgwZic4b8KF6OBGkn8/Jp4U+7D+Ro+3MATTsTVj+45YqIv0
- D74wpuy7alJ//kXkwknvZvlr86o5YFkSCHejSBrilJK16tommH0b704j2KcWg64OUHmH
- q64TOFl3jFilQGpnrQPmmngq+kh0aPsULcgX7aDFJVUsjPur9bJ7CVoNGDU2aE5xIc6m
- J+WQ==
+ h=from:to:subject:date:message-id;
+ bh=AJQpNWcSAo4RkweDJuqLwKMc7Co8pkQh7Ml6FPpTVcc=;
+ b=o+MNGZ+6gWNnEUBuC7wYMWVhAzeBFgqnd7wHxD9Vl20juv4vRGd5SXBKkJsjEVrdo7
+ LnB/LYfhC6u6E54cai96E8c66+WFy/oONIYDkAEC90cOTfM8eZRzIFzLksaS22h3ejCa
+ 6kxlKo7Wpzs/Cd6ko0YwPIYsvQ56FqKXl1OV178AVs67M9s1Pk7LntK1emxPAB+wBcZy
+ adPdcCUnal+aqf/b/92mF5MiBNnVlS92LM84OaEFLf+yrgQzeBShsFcmBG+JIoM3QZcj
+ eaRe4MEeN6LjHdUUuWm8DUwgZ8ech0XL373oLXyAi5CaFqR0hziy1MpccUUjdVH2GO85
+ LxMA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=6G0JlvMUrwOQNBgV7evwiXq6c4f3w/LLRYfXbU572Ec=;
- b=XTNmZD0YGYUvncV8GZe1XaEQ1CdBxSSvh+xv7nke33lJaVjeKNRCS7J5y1EtfKJaCN
- 6qiRGI5CrVnWuukVpkK2pyqeYh+mqr7SRzqZ/DOhEEX3J+IoA6UVix8b4KUkCIoVRSoq
- HUIxDvSx2PiFghX0jGprahkMLDzv9WugM6F/pZg5LaMbNin/0E/IJkKZmbCpKQnqHrrX
- RNSkUBuSyIlu5SLXzHB1njGKaiuttBtOIR2lqD247PEVIBDw5+eVnh/cxD/wIYOPYZ+5
- W3txPC4lNqezCFBLhcLXSaWRGogCbA8sTCGI1iAiIpUiMMJdd5bFJfu4SCuizVa3s5T8
- 9Xqg==
-X-Gm-Message-State: APjAAAWCOGMPc0wGtB5pIiydhG1O6X13SEQabc788vBLmxKmreIAl9Sm
- P0wnC0fQkHu4WbybuxeGdkw1yBoQVjd9ScVIuKo=
-X-Google-Smtp-Source: APXvYqzGvMG0hjy+jf1jc4MTlmKO7Nu0ii2P63ah/MwI+h/JLpgiEfG6y2o9fY/rEt/f17vJjQzZaX2xpLnQjT668yE=
-X-Received: by 2002:a17:906:57cc:: with SMTP id
- u12mr3408238ejr.170.1567697159276; 
- Thu, 05 Sep 2019 08:25:59 -0700 (PDT)
-MIME-Version: 1.0
-References: <1567306391-2682-1-git-send-email-bmeng.cn@gmail.com>
- <CAKmqyKNrBtZFEp3JCL0N5Kbw2f9cG6gu3YG+b9pTKaprHysjCw@mail.gmail.com>
-In-Reply-To: <CAKmqyKNrBtZFEp3JCL0N5Kbw2f9cG6gu3YG+b9pTKaprHysjCw@mail.gmail.com>
+ h=x-gm-message-state:from:to:subject:date:message-id;
+ bh=AJQpNWcSAo4RkweDJuqLwKMc7Co8pkQh7Ml6FPpTVcc=;
+ b=nvnu//vTEn6lGEU6vBS7CFCgxmfMQQx3yf9eCeX9f/23vcgIYLCLF01tmQ9y/8DV6h
+ g0b0zAczvIhTIQ85q93373VtXuElE3hWqCyiatNdoXjzOqx7JabRHefkvImeMuRjjSUx
+ 0gl47D86Ahn/1Gb4zaBeJ0wjSkMJCNhFOQzE4lh1LyZ0d60xvFfQZY6r0VLrFx0lVAaF
+ vniVB/c7kKagHuzz/nM1RhvXOXeNT++mBUieeOQ/mxl4bzZ98eIyUCgaHYvPSwDlkM6C
+ SKAswDWJ5U4ZPUAVQLe2dCY5+2IEEwMpDZXfvsMf777L3xXaOLcKias99mpZ9bSP6UiE
+ rZ2g==
+X-Gm-Message-State: APjAAAXMed40858anwOTsvpW+Pnks1d/VfBzgH2bhz/lsGu79aNNukDi
+ RwOfLg+zbG99rdBkRK7Dd1w=
+X-Google-Smtp-Source: APXvYqyNwJYRCgjGPBEdQ66gRM7HqA0t6CtS6vHR9CYxcou0kqlV+WMJzQSACYJ2sZ3Mr1AbgiZYbQ==
+X-Received: by 2002:a17:902:e506:: with SMTP id
+ ck6mr4322585plb.132.1567698922685; 
+ Thu, 05 Sep 2019 08:55:22 -0700 (PDT)
+Received: from localhost.localdomain (unknown-224-80.windriver.com.
+ [147.11.224.80])
+ by smtp.gmail.com with ESMTPSA id m19sm5712114pff.108.2019.09.05.08.55.21
+ (version=TLS1 cipher=AES128-SHA bits=128/128);
+ Thu, 05 Sep 2019 08:55:21 -0700 (PDT)
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Thu, 5 Sep 2019 23:25:46 +0800
-Message-ID: <CAEUhbmWGHbBXO+NtkfxJc1tHNLKY_nLPKQ_L=MVsyuToZ02e9w@mail.gmail.com>
-To: Alistair Francis <alistair23@gmail.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>,
- Palmer Dabbelt <palmer@sifive.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
+To: Palmer Dabbelt <palmer@sifive.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Date: Thu,  5 Sep 2019 08:55:16 -0700
+Message-Id: <1567698916-28260-1-git-send-email-bmeng.cn@gmail.com>
+X-Mailer: git-send-email 1.7.1
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::542
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v7 00/30] riscv: sifive_u:
- Improve the emulation fidelity of sifive_u machine
+X-Received-From: 2607:f8b0:4864:20::62c
+Subject: [Qemu-riscv] [PATCH v2] riscv: sifive_test: Add reset functionality
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -69,68 +65,61 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Sep 2019 15:26:07 -0000
+X-List-Received-Date: Thu, 05 Sep 2019 15:55:28 -0000
 
-Hi Alistair,
+This adds a reset opcode for sifive_test device to trigger a system
+reset for testing purpose.
 
-On Thu, Sep 5, 2019 at 3:50 AM Alistair Francis <alistair23@gmail.com> wrote:
->
-> On Sat, Aug 31, 2019 at 7:54 PM Bin Meng <bmeng.cn@gmail.com> wrote:
-> >
-> > As of today, the QEMU 'sifive_u' machine is a special target that does
-> > not boot the upstream OpenSBI/U-Boot firmware images built for the real
-> > SiFive HiFive Unleashed board. Hence OpenSBI supports a special platform
-> > "qemu/sifive_u". For U-Boot, the sifive_fu540_defconfig is referenced
-> > in the OpenSBI doc as its payload, but that does not boot at all due
-> > to various issues in current QEMU 'sifive_u' machine codes.
-> >
-> > This series aims to improve the emulation fidelity of sifive_u machine,
-> > so that the upstream OpenSBI, U-Boot and kernel images built for the
-> > SiFive HiFive Unleashed board can be used out of the box without any
-> > special hack.
-> >
-> > The major changes include:
-> > - Heterogeneous harts creation supported, so that we can create a CPU
-> >   that exactly mirrors the real hardware: 1 E51 + 4 U54.
-> > - Implemented a PRCI model for FU540
-> > - Implemented an OTP model for FU540, primarily used for storing serial
-> >   number of the board
-> > - Fixed GEM support that was seriously broken on sifive_u
-> > - Synced device tree with upstream Linux kernel on sifive_u
-> >
-> > OpenSBI v0.4 image built for sifive/fu540 is included as the default
-> > bios image for 'sifive_u' machine.
-> >
-> > The series is tested against OpenSBI v0.4 image for sifive/fu540
-> > paltform, U-Boot v2019.10-rc1 image for sifive_fu540_defconfig,
-> > and Linux kernel v5.3-rc3 image with the following patch:
-> >
-> > macb: Update compatibility string for SiFive FU540-C000 [1]
-> >
-> > OpenSBI + U-Boot, ping/tftpboot with U-Boot MACB driver works well.
-> > Boot Linux 64-bit defconfig image, verified that system console on
-> > the serial 0 and ping host work pretty well.
-> >
-> > An OpenSBI patch [2] was sent to drop the special "qemu/sifive_u" platform
-> > support in OpenSBI. The original plan was to get the drop patch applied
-> > after this QEMU series is merged. However after discussion in the OpenSBI
-> > mailing list, it seems the best option for us is to let OpenSBI continue
-> > shipping the special "qemu/sifive_u" platform support to work with QEMU
-> > version <= 4.1 and deprecate the support sometime in the future. A patch
-> > will need to be sent to OpenSBI mailing list to update its document.
-> >
-> > v4 is now rebased on Palmer's QEMU RISC-V repo "for-master" branch.
-> > Dropped the following v3 patch that was already done by someone else.
-> > - riscv: sifive_u: Generate an aliases node in the device tree
-> > - riscv: sifive_u: Support loading initramfs
->
-> I'm having trouble applying this. Do you mind sharing a public git branch?
+Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
+Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
 
-So I see Palmer has rebased his "for-master" branch against QEMU
-master and now this patch series cannot be applied cleanly.
+---
 
-Even worse, the current "for-master" branch has build errors for QEMU RISC-V.
+Changes in v2:
+- fix build error in the "for-master" branch of Palmer's RISC-V repo
+  that was rebased on QEMU master
 
-Regards,
-Bin
+ hw/riscv/sifive_test.c         | 4 ++++
+ include/hw/riscv/sifive_test.h | 3 ++-
+ 2 files changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/hw/riscv/sifive_test.c b/hw/riscv/sifive_test.c
+index afbb3aa..3557e16 100644
+--- a/hw/riscv/sifive_test.c
++++ b/hw/riscv/sifive_test.c
+@@ -22,6 +22,7 @@
+ #include "hw/hw.h"
+ #include "hw/sysbus.h"
+ #include "qemu/module.h"
++#include "sysemu/runstate.h"
+ #include "target/riscv/cpu.h"
+ #include "hw/hw.h"
+ #include "hw/riscv/sifive_test.h"
+@@ -42,6 +43,9 @@ static void sifive_test_write(void *opaque, hwaddr addr,
+             exit(code);
+         case FINISHER_PASS:
+             exit(0);
++        case FINISHER_RESET:
++            qemu_system_reset_request(SHUTDOWN_CAUSE_GUEST_RESET);
++            return;
+         default:
+             break;
+         }
+diff --git a/include/hw/riscv/sifive_test.h b/include/hw/riscv/sifive_test.h
+index 3a603a6..1ec416a 100644
+--- a/include/hw/riscv/sifive_test.h
++++ b/include/hw/riscv/sifive_test.h
+@@ -36,7 +36,8 @@ typedef struct SiFiveTestState {
+ 
+ enum {
+     FINISHER_FAIL = 0x3333,
+-    FINISHER_PASS = 0x5555
++    FINISHER_PASS = 0x5555,
++    FINISHER_RESET = 0x7777
+ };
+ 
+ DeviceState *sifive_test_create(hwaddr addr);
+-- 
+2.7.4
+
 
