@@ -1,63 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1i6Gz2-000565-Dw
-	for mharc-qemu-riscv@gnu.org; Fri, 06 Sep 2019 12:21:12 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:56875)
+	id 1i6Gz3-00057C-5H
+	for mharc-qemu-riscv@gnu.org; Fri, 06 Sep 2019 12:21:13 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:56896)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <bmeng.cn@gmail.com>) id 1i6Gyx-0004yH-5b
- for qemu-riscv@nongnu.org; Fri, 06 Sep 2019 12:21:08 -0400
+ (envelope-from <bmeng.cn@gmail.com>) id 1i6Gyy-00050N-Hs
+ for qemu-riscv@nongnu.org; Fri, 06 Sep 2019 12:21:09 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <bmeng.cn@gmail.com>) id 1i6Gyv-0004h6-R3
- for qemu-riscv@nongnu.org; Fri, 06 Sep 2019 12:21:06 -0400
-Received: from mail-pl1-x641.google.com ([2607:f8b0:4864:20::641]:35648)
+ (envelope-from <bmeng.cn@gmail.com>) id 1i6Gyx-0004hl-0R
+ for qemu-riscv@nongnu.org; Fri, 06 Sep 2019 12:21:08 -0400
+Received: from mail-pf1-x443.google.com ([2607:f8b0:4864:20::443]:41016)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
- id 1i6Gyp-0004ac-Op; Fri, 06 Sep 2019 12:21:00 -0400
-Received: by mail-pl1-x641.google.com with SMTP id gn20so3382670plb.2;
- Fri, 06 Sep 2019 09:20:58 -0700 (PDT)
+ id 1i6Gyp-0004aJ-Ms; Fri, 06 Sep 2019 12:21:00 -0400
+Received: by mail-pf1-x443.google.com with SMTP id b13so4813174pfo.8;
+ Fri, 06 Sep 2019 09:20:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:to:subject:date:message-id:in-reply-to:references;
- bh=jfFTdv5B4sGuBqEYzNJzYgO1q5f33aGSCik/yWhYEl8=;
- b=q9oI06eofCw2xsOu5mmPX/5r4LxKHuihbNdcRxzOA+9BGpZ02WMcyxowFjRb1DXVJj
- b5L7Zr9z7k5DkhsXyAFcqrGD2GqeCK1fK+Jr7dOItcNQKQn4dIX7dRSfiWueBXsrgNpR
- jsCkG4XBNkal5GDZRW0C8WFM/ZAvrCpUynDEZw4RRPXq4WcarAlIJYbDp3shmpWgfk6N
- fNNMW1QDP+B+JsAhVvpp9EsuRY0RbWkXS3aRtxXK8AopVdTou/QbPL8iH8H4te72PlV4
- 00GEcU0Fmfk3rv5ezKT2BSrRiLa3TBzW1epG7KZndPA9d7kLQb1mW8eOQsVhftEy7Egg
- ZgbQ==
+ bh=1tve8+Ba3DM/qRQHy3eai96wpNp7DZ/JqR8WQUk82po=;
+ b=GSNd+mf132cyng8jhnN6CwZ5CG8ILgdHfu+zOMZDSPwFIpzrT93bti64zWkZdMCPM7
+ Mel2aW9J+HiHTlR14CQb6z3zwFgqirfXE3Ni+MsYZr1Wc4kl1EaBglKGPNDhYa+upraq
+ redzywtIzuvjNzdEPIkuPYoAyeCxgNafjWV8E2SyZd7D0lV5+2yn3kPF8cA6uU4T6ef0
+ I982u/CD08RaE2ExCYPTDl9dS4mxF2eohyTbMjrLd/PNIaQHZX2eILwKxOz8cSNO2KuQ
+ d+uF66HjUuGcr9PNvhiQQGVvcBtZJrqh08b7WCDBtuzhw1jJV0EeUKIwHyxWNTZYjXb+
+ f2/g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
  :references;
- bh=jfFTdv5B4sGuBqEYzNJzYgO1q5f33aGSCik/yWhYEl8=;
- b=UhemRJfIp+UiPgKFlHF/3IKlFF5kfGY5d1LC3uuZTM89lO2RofUtAH3LMC8r7tmn47
- 9LEkZ6omAvnsZIDGav8QKlA+OO2k9MqwI+/GD3KcntmFvlL30APTvNGy5myqL2d5U8CE
- FmRTq6OlRtzEU8S1pi7fCLSg+CGdUIGG70Sby+ycdbXsAf63w6Ler3BLsSn+wbJKPGd5
- bf/N0Nqo0xB2N/bt5bBqGzIVh5Xq7BydME9xtyz3k8DpBNiQvB/camwFxcKPvwhroFlb
- BwxME34ruksO2ymDMjL2R1rhwA53lZqYyxZsqX3t9gkEcICiRUHLCXhqcHMmv8F/YHWT
- 6IMQ==
-X-Gm-Message-State: APjAAAVnpTbPxFv2xFaNlb/wif75qJ/4SQDViAxflyzDSb2mhSVvTrXW
- 6feoNcwy28E3oF+yEgxDAtvs8axK
-X-Google-Smtp-Source: APXvYqxSU5VIdW1Jd3o1ABZ6rDkYW+biJfzdz4UpT3D6iMn9U4DnUMkYzScF4npGhUt9cZrJvQl2RQ==
-X-Received: by 2002:a17:902:465:: with SMTP id 92mr9930063ple.65.1567786858077; 
- Fri, 06 Sep 2019 09:20:58 -0700 (PDT)
+ bh=1tve8+Ba3DM/qRQHy3eai96wpNp7DZ/JqR8WQUk82po=;
+ b=Cf/6k11Fe+YKaM7rkoXOIV1Nm+W6fszRvSab6S0MGMeUZJIGOcvt/IxorRoJyBdrqI
+ VZ40KIF9Tr/RtXrLhAMA6FJBT1A1ZXHWP5B6w7o/f+50nBclB7YeSUGsugQ/WrH6de0V
+ bmU1+hyFBqiguW3Ukx3FCds1aInwhW1lNP6IMDH9n8AMTyvnjx2EmWtqOivu/FB/3VMd
+ otF2ZJxylaXhB7ZcPp/Cq3tZdjbu/X8aOQNqpYllCpLCzFXHVNmtFCddPfKeY6QW/q2S
+ xZOa83J9obPt3/xNkwnrcOjjsUhx+/bPM5cmh7FNzDWsBecjTXXqVuRJfgBzG+4cu+AS
+ Hmmg==
+X-Gm-Message-State: APjAAAUF++TTY8nVRz7+fgp5ApcSpuAM5vAcQBF9ek0Q4hXDJxgr5XoN
+ jBK0FFf9dpIC30yUXMct/NE=
+X-Google-Smtp-Source: APXvYqz4YMAr8Uw0irBveRqRFgxmcVn77ilyrrJmCHpeITxFZdWl0vV6wuMGF9PbDKjsTMMTNZi5kg==
+X-Received: by 2002:a62:cdca:: with SMTP id
+ o193mr11894205pfg.204.1567786857220; 
+ Fri, 06 Sep 2019 09:20:57 -0700 (PDT)
 Received: from localhost.localdomain (unknown-224-80.windriver.com.
  [147.11.224.80])
- by smtp.gmail.com with ESMTPSA id f89sm11146228pje.20.2019.09.06.09.20.57
+ by smtp.gmail.com with ESMTPSA id f89sm11146228pje.20.2019.09.06.09.20.56
  (version=TLS1 cipher=AES128-SHA bits=128/128);
- Fri, 06 Sep 2019 09:20:57 -0700 (PDT)
+ Fri, 06 Sep 2019 09:20:56 -0700 (PDT)
 From: Bin Meng <bmeng.cn@gmail.com>
 To: Alistair Francis <Alistair.Francis@wdc.com>,
  Palmer Dabbelt <palmer@sifive.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
-Date: Fri,  6 Sep 2019 09:20:19 -0700
-Message-Id: <1567786819-22142-33-git-send-email-bmeng.cn@gmail.com>
+Date: Fri,  6 Sep 2019 09:20:18 -0700
+Message-Id: <1567786819-22142-32-git-send-email-bmeng.cn@gmail.com>
 X-Mailer: git-send-email 1.7.1
 In-Reply-To: <1567786819-22142-1-git-send-email-bmeng.cn@gmail.com>
 References: <1567786819-22142-1-git-send-email-bmeng.cn@gmail.com>
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::641
-Subject: [Qemu-riscv] [PATCH v8 32/32] riscv: sifive_u: Update model and
- compatible strings in device tree
+X-Received-From: 2607:f8b0:4864:20::443
+Subject: [Qemu-riscv] [PATCH v8 31/32] riscv: sifive_u: Remove handcrafted
+ clock nodes for UART and ethernet
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -71,8 +72,10 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Fri, 06 Sep 2019 16:21:10 -0000
 
-This updates model and compatible strings to use the same strings
-as used in the Linux kernel device tree (hifive-unleashed-a00.dts).
+In the past we did not have a model for PRCI, hence two handcrafted
+clock nodes ("/soc/ethclk" and "/soc/uartclk") were created for the
+purpose of supplying hard-coded clock frequencies. But now since we
+have added the PRCI support in QEMU, we don't need them any more.
 
 Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
@@ -83,29 +86,79 @@ Changes in v8: None
 Changes in v7: None
 Changes in v6: None
 Changes in v5: None
-Changes in v4: None
+Changes in v4:
+- new patch to remove handcrafted clock nodes for UART and ethernet
+
 Changes in v3: None
 Changes in v2: None
 
- hw/riscv/sifive_u.c | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+ hw/riscv/sifive_u.c         | 24 +-----------------------
+ include/hw/riscv/sifive_u.h |  3 +--
+ 2 files changed, 2 insertions(+), 25 deletions(-)
 
 diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-index 507a6e2..ca9f7fe 100644
+index 3b61fab..507a6e2 100644
 --- a/hw/riscv/sifive_u.c
 +++ b/hw/riscv/sifive_u.c
-@@ -96,8 +96,9 @@ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
-         exit(1);
-     }
+@@ -87,8 +87,7 @@ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
+     uint32_t *cells;
+     char *nodename;
+     char ethclk_names[] = "pclk\0hclk";
+-    uint32_t plic_phandle, prci_phandle, ethclk_phandle, phandle = 1;
+-    uint32_t uartclk_phandle;
++    uint32_t plic_phandle, prci_phandle, phandle = 1;
+     uint32_t hfclk_phandle, rtcclk_phandle, phy_phandle;
  
--    qemu_fdt_setprop_string(fdt, "/", "model", "ucbbar,spike-bare,qemu");
--    qemu_fdt_setprop_string(fdt, "/", "compatible", "ucbbar,spike-bare-dev");
-+    qemu_fdt_setprop_string(fdt, "/", "model", "SiFive HiFive Unleashed A00");
-+    qemu_fdt_setprop_string(fdt, "/", "compatible",
-+                            "sifive,hifive-unleashed-a00");
-     qemu_fdt_setprop_cell(fdt, "/", "#size-cells", 0x2);
-     qemu_fdt_setprop_cell(fdt, "/", "#address-cells", 0x2);
+     fdt = s->fdt = create_device_tree(&s->fdt_size);
+@@ -248,17 +247,6 @@ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
+     g_free(cells);
+     g_free(nodename);
  
+-    ethclk_phandle = phandle++;
+-    nodename = g_strdup_printf("/soc/ethclk");
+-    qemu_fdt_add_subnode(fdt, nodename);
+-    qemu_fdt_setprop_string(fdt, nodename, "compatible", "fixed-clock");
+-    qemu_fdt_setprop_cell(fdt, nodename, "#clock-cells", 0x0);
+-    qemu_fdt_setprop_cell(fdt, nodename, "clock-frequency",
+-        SIFIVE_U_GEM_CLOCK_FREQ);
+-    qemu_fdt_setprop_cell(fdt, nodename, "phandle", ethclk_phandle);
+-    ethclk_phandle = qemu_fdt_get_phandle(fdt, nodename);
+-    g_free(nodename);
+-
+     phy_phandle = phandle++;
+     nodename = g_strdup_printf("/soc/ethernet@%lx",
+         (long)memmap[SIFIVE_U_GEM].base);
+@@ -292,16 +280,6 @@ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
+     qemu_fdt_setprop_cell(fdt, nodename, "reg", 0x0);
+     g_free(nodename);
+ 
+-    uartclk_phandle = phandle++;
+-    nodename = g_strdup_printf("/soc/uartclk");
+-    qemu_fdt_add_subnode(fdt, nodename);
+-    qemu_fdt_setprop_string(fdt, nodename, "compatible", "fixed-clock");
+-    qemu_fdt_setprop_cell(fdt, nodename, "#clock-cells", 0x0);
+-    qemu_fdt_setprop_cell(fdt, nodename, "clock-frequency", 3686400);
+-    qemu_fdt_setprop_cell(fdt, nodename, "phandle", uartclk_phandle);
+-    uartclk_phandle = qemu_fdt_get_phandle(fdt, nodename);
+-    g_free(nodename);
+-
+     nodename = g_strdup_printf("/soc/serial@%lx",
+         (long)memmap[SIFIVE_U_UART0].base);
+     qemu_fdt_add_subnode(fdt, nodename);
+diff --git a/include/hw/riscv/sifive_u.h b/include/hw/riscv/sifive_u.h
+index 5270851..e4df298 100644
+--- a/include/hw/riscv/sifive_u.h
++++ b/include/hw/riscv/sifive_u.h
+@@ -77,8 +77,7 @@ enum {
+ enum {
+     SIFIVE_U_CLOCK_FREQ = 1000000000,
+     SIFIVE_U_HFCLK_FREQ = 33333333,
+-    SIFIVE_U_RTCCLK_FREQ = 1000000,
+-    SIFIVE_U_GEM_CLOCK_FREQ = 125000000
++    SIFIVE_U_RTCCLK_FREQ = 1000000
+ };
+ 
+ #define SIFIVE_U_MANAGEMENT_CPU_COUNT   1
 -- 
 2.7.4
 
