@@ -1,62 +1,55 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1i6LjR-0004Ux-TX
-	for mharc-qemu-riscv@gnu.org; Fri, 06 Sep 2019 17:25:25 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:41617)
+	id 1i7MPV-0004bX-Eg
+	for mharc-qemu-riscv@gnu.org; Mon, 09 Sep 2019 12:21:01 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:36066)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <alistair23@gmail.com>) id 1i6LjN-0004PK-W5
- for qemu-riscv@nongnu.org; Fri, 06 Sep 2019 17:25:23 -0400
+ (envelope-from <palmer@dabbelt.com>) id 1i7MPT-0004b6-94
+ for qemu-riscv@nongnu.org; Mon, 09 Sep 2019 12:21:00 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1i6LjM-0002xb-ML
- for qemu-riscv@nongnu.org; Fri, 06 Sep 2019 17:25:21 -0400
-Received: from mail-lf1-x143.google.com ([2a00:1450:4864:20::143]:39881)
+ (envelope-from <palmer@dabbelt.com>) id 1i7MPR-0008VS-W6
+ for qemu-riscv@nongnu.org; Mon, 09 Sep 2019 12:20:58 -0400
+Received: from mail-wm1-f67.google.com ([209.85.128.67]:52740)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1i6LjJ-0002sS-Tf; Fri, 06 Sep 2019 17:25:18 -0400
-Received: by mail-lf1-x143.google.com with SMTP id l11so6177362lfk.6;
- Fri, 06 Sep 2019 14:25:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=41vitPaR9QJU0hyMIKTOsEnYo8xWm+xShqZjqioEH/s=;
- b=hZimwDULM8L2NvaeATEUnPYm+zjrG7nQD2lh7Hwt7PBkDM6POfUCw8RujxyGdR1cII
- 7Mcd0ffQcjXkKZpjr+uiba+bwjFQ531O1JSC8F1Qwy6/ijUB9GchWr5jdRpkX5IoNRJ2
- BoGV0gUQmCLQBAkLYestpSK9U6ZvcUez+GH9C7R/PKkt8/pOZwmy9yn5M9q/UYkrKjEs
- Dm4a4REV20pohS2s76DIz8jXSeVCWUOdTk4Raqhb6wCez1TT/gQvwM4ATL12AXWuS8vu
- 8W2zX7G0rP8hp9wN6WkDPy4kKpULVmtaCKU9luli2XzViUCAgUtkE1kEmzhAcRO9llRL
- 8bWg==
+ (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1i7MPR-0008V0-R3
+ for qemu-riscv@nongnu.org; Mon, 09 Sep 2019 12:20:57 -0400
+Received: by mail-wm1-f67.google.com with SMTP id t17so262646wmi.2
+ for <qemu-riscv@nongnu.org>; Mon, 09 Sep 2019 09:20:57 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=41vitPaR9QJU0hyMIKTOsEnYo8xWm+xShqZjqioEH/s=;
- b=V9iB8qH1wFGShojqO9joZM8H8DD/ZKWeovKHToZcY4Gb0Cl52Cb1YB/Jb1jS1p4Ren
- 64QSDdk3OshmMKBsCtlXiO1r6I5Y71MWuGLW7hKzRhlLyyDffJku0lRWEA8HnH4JNuyJ
- Vu4VBNKBITXo6K1DUR9Xs3yiL+AxJfG3cEN/AXxBufzfP73/bVwKNk0qrPdXq8wtfa5+
- maL+KMc7kQgvDgA8yWVjtR69plgvDkcH74YQ2VqxDarp64SSoH6dp+U7IAjPX/vUXH2I
- deR/v/pCXTgHeNotjvUzJhX8XUo7EgOcybUC5AnFkJjoqus7JwfprGBPUJdh2DqwK7AM
- VA3Q==
-X-Gm-Message-State: APjAAAWEimWtzgfeFg6+GVCdCYgDFFqZB3N1SBF6Pg22Bj/nlr4zycuY
- jJsTZ0Jp4D8CxuFT1NlH6XeGddl1dDsBTvxN2c8=
-X-Google-Smtp-Source: APXvYqzuM1C0sxWAwZn0iI6hvWtphG1gWjhalo7iSuEn9PwyX54TqXKz3QcKNYRyzZ9TrRthq4lD+sVnHgEdmv62/68=
-X-Received: by 2002:a19:f11c:: with SMTP id p28mr7631834lfh.44.1567805116003; 
- Fri, 06 Sep 2019 14:25:16 -0700 (PDT)
-MIME-Version: 1.0
-References: <1567786819-22142-1-git-send-email-bmeng.cn@gmail.com>
- <1567786819-22142-2-git-send-email-bmeng.cn@gmail.com>
+ h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
+ :mime-version:content-transfer-encoding;
+ bh=k8mmStJgxO3xH5XM/EhqR2y7Ns9lt8r0g1sa9/rZBUg=;
+ b=LEdOotE6lKJYFcoztIU/q3MAHePCBF0CHjzZ+qos3xfMVZrhQwU4zySE/WFVn4x5z8
+ h9iGxUcOpY00iDN4HpxhDIRvxA+KqyvjElVMPA4afJdehQp1VTcvlUsEw7IuM1CL9d3H
+ FYTABVJGo0Ay2CkAYQzJ9JybsF8aMi5YxrnVmpmFq+kB2Rjd0zoOdYg/Dk3xM/o4n2+I
+ 7dEMNK4h2vrs/cJSSxRAUlK46Y0BPBiFQJ5AHEzJpKRtx/dd9M7QTWtD4Zh7Pe0ebpCr
+ I3/ECCZ6n9OvOZCQxVyOEDv1ixoEWwkbw0Qcq96+Ti9ztFS3BlQjLx5nScLhvzP6+DVL
+ LyJw==
+X-Gm-Message-State: APjAAAVKCL9F1N25BfJ7tNfWkaf0LpvzY1bxnfZIxqR4RWHYTWWB9iSp
+ 2i6apMdzIFBalEpBaUzRuhro4g==
+X-Google-Smtp-Source: APXvYqyifi14asoSzTSN6pXgMYqAaLVV5RvcSrD66Avro2MCWiq//8PwEdLO0+SKIJlrx5bUyneMgg==
+X-Received: by 2002:a1c:a8d8:: with SMTP id r207mr48378wme.135.1568046055942; 
+ Mon, 09 Sep 2019 09:20:55 -0700 (PDT)
+Received: from localhost ([148.69.85.38])
+ by smtp.gmail.com with ESMTPSA id z1sm24856457wre.40.2019.09.09.09.20.55
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 09 Sep 2019 09:20:55 -0700 (PDT)
+Date: Mon, 09 Sep 2019 09:20:55 -0700 (PDT)
+X-Google-Original-Date: Mon, 09 Sep 2019 09:04:19 PDT (-0700)
 In-Reply-To: <1567786819-22142-2-git-send-email-bmeng.cn@gmail.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 6 Sep 2019 14:20:56 -0700
-Message-ID: <CAKmqyKP9G5kHhMGPjXpHVNj4S5io5xtbLU4=QiNzCx9cgn9Npw@mail.gmail.com>
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>,
- Palmer Dabbelt <palmer@sifive.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2a00:1450:4864:20::143
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v8 01/32] riscv: hw: Remove
- duplicated "hw/hw.h" inclusion
+CC: Alistair Francis <Alistair.Francis@wdc.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+From: Palmer Dabbelt <palmer@sifive.com>
+To: bmeng.cn@gmail.com
+Message-ID: <mhng-8a13e03d-e64a-46e3-bdb8-e2649b13cfb2@palmer-si-x1e>
+Mime-Version: 1.0 (MHng)
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+ [fuzzy]
+X-Received-From: 209.85.128.67
+Subject: Re: [Qemu-riscv] [PATCH v8 01/32] riscv: hw: Remove duplicated
+ "hw/hw.h" inclusion
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -68,10 +61,9 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Sep 2019 21:25:23 -0000
+X-List-Received-Date: Mon, 09 Sep 2019 16:21:00 -0000
 
-On Fri, Sep 6, 2019 at 9:20 AM Bin Meng <bmeng.cn@gmail.com> wrote:
->
+On Fri, 06 Sep 2019 09:19:48 PDT (-0700), bmeng.cn@gmail.com wrote:
 > Commit a27bd6c779ba ("Include hw/qdev-properties.h less") wrongly
 > added "hw/hw.h" to sifive_prci.c and sifive_test.c.
 >
@@ -81,11 +73,6 @@ On Fri, Sep 6, 2019 at 9:20 AM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
 > Fixes: a27bd6c779ba ("Include hw/qdev-properties.h less")
 > Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
-
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-
-Alistair
-
 >
 > ---
 >
@@ -120,8 +107,6 @@ Alistair
 >  #include "hw/sysbus.h"
 >  #include "qemu/module.h"
 >  #include "target/riscv/cpu.h"
-> --
-> 2.7.4
->
->
+
+Revieweb-by: Palmer Dabbelt <palmer@sifive.com>
 
