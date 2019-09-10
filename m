@@ -1,56 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1i7hRC-0000Md-HQ
-	for mharc-qemu-riscv@gnu.org; Tue, 10 Sep 2019 10:48:10 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:54753)
+	id 1i7hRF-0000PJ-TD
+	for mharc-qemu-riscv@gnu.org; Tue, 10 Sep 2019 10:48:15 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:54782)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <palmer@dabbelt.com>) id 1i7hR8-0000Ic-U5
- for qemu-riscv@nongnu.org; Tue, 10 Sep 2019 10:48:08 -0400
+ (envelope-from <palmer@dabbelt.com>) id 1i7hRA-0000KN-DY
+ for qemu-riscv@nongnu.org; Tue, 10 Sep 2019 10:48:09 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmer@dabbelt.com>) id 1i7hR7-0006NM-Tf
- for qemu-riscv@nongnu.org; Tue, 10 Sep 2019 10:48:06 -0400
-Received: from mail-wr1-f65.google.com ([209.85.221.65]:46164)
+ (envelope-from <palmer@dabbelt.com>) id 1i7hR9-0006OK-Dm
+ for qemu-riscv@nongnu.org; Tue, 10 Sep 2019 10:48:08 -0400
+Received: from mail-wr1-f67.google.com ([209.85.221.67]:36013)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1i7hR7-0006Mw-Nw
- for qemu-riscv@nongnu.org; Tue, 10 Sep 2019 10:48:05 -0400
-Received: by mail-wr1-f65.google.com with SMTP id d17so8091738wrq.13
- for <qemu-riscv@nongnu.org>; Tue, 10 Sep 2019 07:48:05 -0700 (PDT)
+ (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1i7hR9-0006Nq-79
+ for qemu-riscv@nongnu.org; Tue, 10 Sep 2019 10:48:07 -0400
+Received: by mail-wr1-f67.google.com with SMTP id y19so20864917wrd.3
+ for <qemu-riscv@nongnu.org>; Tue, 10 Sep 2019 07:48:07 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
  :mime-version:content-transfer-encoding;
- bh=9r/tsin+WnzvHfmEc7iVPUi/buDct7somnXFCcxsN4M=;
- b=QN2TA1cL2wDLvJfNZv+PTItOJ/Jx7c9fuj/JlXrAo4f89OE1olo8g7cUeJiM0sHndt
- 2e5nZkixEwyoN82edH+7oBKCG/n9387gIGBq4bGT3DIephfDJ+QyimT+rHaMIl+YhLkw
- HMcg29dNTQ/9l77n0lGkGLqPeuPO1lPpfA+Fc7Di08H4UXPgOKF+uynTambo8GEx03dm
- x5FJd/JjiaDy0lgCuMNoUleh9qM8UyNJ6YY8cOQ9xFcFJ+TeW2QkKemkF3gNO+FtO02B
- QafvLRPzLE+0vXb3URB7j4kQTjbrp1fZJYrvYCeHcEy8Tn4j/l8rXtbgyOYUinOo73V3
- Wpkg==
-X-Gm-Message-State: APjAAAW8zkujdCKrrwdPzxKW/88xMPWarV30tVfjicAHb4TcCcqrZVZ5
- /vdyppngC87bgp6ZgdYgZx2xKg==
-X-Google-Smtp-Source: APXvYqx+MMVn21LPEsYVh4ZdCTqfuyQUbh76195ywvIFJ5C3yTWkYyr5hoeGjchAictUvs1bD59zqA==
-X-Received: by 2002:a5d:4ac5:: with SMTP id y5mr21240676wrs.179.1568126884538; 
- Tue, 10 Sep 2019 07:48:04 -0700 (PDT)
+ bh=62DKnnZ3R2aQjTeCpvnqwbJlIX89ZfIbEuBSBRs6M78=;
+ b=m0i1PBFSgA7rDQHM2QF+2+Q+HFXcit45gS9Ywm0wPzgsRdpEd6tEACJwjxeTqvHrk7
+ bSa0SK13W0VnTT3bcMZgTAqY9eOiSz7qGNUiY4Zul58NWBpNDBygfoyouhzlxhl91mm7
+ 1QFegZeKDqD00/W15wSulbV59wepMYxB8vEx4mOuaH3D0k+XSQv4h4pOUg/gAVaJ1yyk
+ +WGqqb/mszKn/Kcb7rqawhiw9Sxu44epSr4iVmDqpVKcfeqwdpl1u4X+0o0Upb6YRWWc
+ ASv30rIWMgo/ahcmQXfLzf3sbj/r8OcedCEYwBqnfarFnwGqkPLJMvbnI4hq/HeXtU/f
+ 3Fzg==
+X-Gm-Message-State: APjAAAWgPdyc5ioVjPvOTuuhivh5lFMAqt96rNfEBLqzdguVmRYwNQJQ
+ t84kSo33j8r3a0jjIxBYMfM8Rg==
+X-Google-Smtp-Source: APXvYqweODaLB/2nQGD5iozLW2AcB/NxHwY68xJWogAwgxdAYIyKvBm20JFinAI1KYkXdSnLcd4oqA==
+X-Received: by 2002:adf:e986:: with SMTP id h6mr27558802wrm.59.1568126886071; 
+ Tue, 10 Sep 2019 07:48:06 -0700 (PDT)
 Received: from localhost ([148.69.85.38])
- by smtp.gmail.com with ESMTPSA id a144sm5175207wme.13.2019.09.10.07.48.03
+ by smtp.gmail.com with ESMTPSA id d193sm5796622wmd.0.2019.09.10.07.48.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Sep 2019 07:48:04 -0700 (PDT)
-Date: Tue, 10 Sep 2019 07:48:04 -0700 (PDT)
-X-Google-Original-Date: Tue, 10 Sep 2019 07:40:13 PDT (-0700)
-In-Reply-To: <a090bc437bf412c279b1254d05eae5c2d67225db.1566603412.git.alistair.francis@wdc.com>
+ Tue, 10 Sep 2019 07:48:05 -0700 (PDT)
+Date: Tue, 10 Sep 2019 07:48:05 -0700 (PDT)
+X-Google-Original-Date: Tue, 10 Sep 2019 07:42:56 PDT (-0700)
+In-Reply-To: <e959ee81e5121c74678d2383a28665e44db9e31d.1566603412.git.alistair.francis@wdc.com>
 CC: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
  Alistair Francis <Alistair.Francis@wdc.com>, alistair23@gmail.com,
  Atish Patra <Atish.Patra@wdc.com>, Anup Patel <Anup.Patel@wdc.com>
 From: Palmer Dabbelt <palmer@sifive.com>
 To: Alistair Francis <Alistair.Francis@wdc.com>
-Message-ID: <mhng-afa69c9b-17b7-4043-b204-512c92cf618a@palmer-si-x1e>
+Message-ID: <mhng-91f54d04-62bd-44b7-a4ce-d7f3631181c0@palmer-si-x1e>
 Mime-Version: 1.0 (MHng)
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
  [fuzzy]
-X-Received-From: 209.85.221.65
-Subject: Re: [Qemu-riscv] [PATCH v1 04/28] target/riscv: Fix CSR perm
- checking for HS mode
+X-Received-From: 209.85.221.67
+Subject: Re: [Qemu-riscv] [PATCH v1 05/28] target/riscv: Add the Hypervisor
+ CSRs to CPUState
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -62,61 +62,44 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Sep 2019 14:48:08 -0000
+X-List-Received-Date: Tue, 10 Sep 2019 14:48:11 -0000
 
-On Fri, 23 Aug 2019 16:38:00 PDT (-0700), Alistair Francis wrote:
-> Update the CSR permission checking to work correctly when we are in
-> HS-mode.
+On Fri, 23 Aug 2019 16:38:02 PDT (-0700), Alistair Francis wrote:
+> As the MIP CSR is 32-bits to allow atomic_read on 32-bit hosts the vsip
+> is 32-bit as well.
 >
 > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 > ---
->  target/riscv/csr.c | 10 ++++++++--
->  1 file changed, 8 insertions(+), 2 deletions(-)
+>  target/riscv/cpu.h | 17 +++++++++++++++++
+>  1 file changed, 17 insertions(+)
 >
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index f767ad24be..471f23a1d0 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -799,9 +799,15 @@ int riscv_csrrw(CPURISCVState *env, int csrno, target_ulong *ret_value,
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 3a95c41428..4c342e7a79 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -154,6 +154,23 @@ struct CPURISCVState {
+>      target_ulong mcause;
+>      target_ulong mtval;  /* since: priv-1.10.0 */
 >
->      /* check privileges and return -1 if check fails */
->  #if !defined(CONFIG_USER_ONLY)
-> -    int csr_priv = get_field(csrno, 0x300);
-> +    int csr_priv = env->priv;
-
-This isn't really "csr_priv" (ie, the priv needed to access the CSR) any more, 
-it's really the effective priv of the machine.  Leaving the variable with the 
-same name makes this hard to read, but I think it is correct.
-
->      int read_only = get_field(csrno, 0xC00) == 3;
-> -    if ((write_mask && read_only) || (env->priv < csr_priv)) {
+> +    /* Hypervisor CSRs */
+> +    target_ulong hstatus;
+> +    target_ulong hedeleg;
+> +    target_ulong hideleg;
+> +    target_ulong hgatp;
 > +
-> +    if (riscv_has_ext(env, RVH) && !riscv_cpu_virt_enabled(env)) {
-> +        /* Plus 1 as we are in HS mode */
-
-The comment is useless, it doesn't say why we increment it.  Also, I don't 
-think this is correct: doesn't it allow U mode to access S CSRs when H is 
-present and V is disabled?
-
-Something like
-
-    riscv_effective_priv(CPURISCVState *env)
-    {
-        if (riscv_has_ext(env, RVH) && env->priv == PRIV_S && !riscv_cpu_virt_enabled(env)) {
-            return PRIV_HS;
-        }
-    
-        return env->priv;
-    }
-
-would probably be used in a handful of places, and would be a drop in for
-env->priv here.
-
-> +        csr_priv++;
-> +    }
+> +    /* Virtual CSRs */
+> +    target_ulong vsstatus;
+> +    uint32_t vsip;
+> +    target_ulong vsie;
+> +    target_ulong vstvec;
+> +    target_ulong vsscratch;
+> +    target_ulong vsepc;
+> +    target_ulong vscause;
+> +    target_ulong vstval;
+> +    target_ulong vsatp;
 > +
-> +    if ((write_mask && read_only) || (csr_priv < get_field(csrno, 0x300))) {
->          return -1;
->      }
->  #endif
+>      target_ulong scounteren;
+>      target_ulong mcounteren;
+
+Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
 
