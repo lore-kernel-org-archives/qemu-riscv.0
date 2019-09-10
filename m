@@ -1,55 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1i7xvq-0007Zr-K7
-	for mharc-qemu-riscv@gnu.org; Wed, 11 Sep 2019 04:24:54 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:57049)
+	id 1i7xvr-0007bd-Q7
+	for mharc-qemu-riscv@gnu.org; Wed, 11 Sep 2019 04:24:55 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:57074)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <palmer@dabbelt.com>) id 1i7xvk-0007Rq-FY
- for qemu-riscv@nongnu.org; Wed, 11 Sep 2019 04:24:49 -0400
+ (envelope-from <palmer@dabbelt.com>) id 1i7xvl-0007Ts-VV
+ for qemu-riscv@nongnu.org; Wed, 11 Sep 2019 04:24:50 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmer@dabbelt.com>) id 1i7xvj-0006RG-By
- for qemu-riscv@nongnu.org; Wed, 11 Sep 2019 04:24:48 -0400
-Received: from mail-wr1-f67.google.com ([209.85.221.67]:46302)
+ (envelope-from <palmer@dabbelt.com>) id 1i7xvk-0006Rw-NB
+ for qemu-riscv@nongnu.org; Wed, 11 Sep 2019 04:24:49 -0400
+Received: from mail-wm1-f67.google.com ([209.85.128.67]:52098)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1i7xvj-0006Qs-6r
- for qemu-riscv@nongnu.org; Wed, 11 Sep 2019 04:24:47 -0400
-Received: by mail-wr1-f67.google.com with SMTP id d17so10677434wrq.13
- for <qemu-riscv@nongnu.org>; Wed, 11 Sep 2019 01:24:47 -0700 (PDT)
+ (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1i7xvk-0006RX-I7
+ for qemu-riscv@nongnu.org; Wed, 11 Sep 2019 04:24:48 -0400
+Received: by mail-wm1-f67.google.com with SMTP id 7so2331243wme.1
+ for <qemu-riscv@nongnu.org>; Wed, 11 Sep 2019 01:24:48 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding:cc:from:to;
- bh=92TyKMJVZqYJ1sG0e0fGsni//VQCxIEBuXE2vZnuLSU=;
- b=fCp/v3PClLrI0imaiFwq7qMFFi2zmj1QxRgMjS7wACCNfjqmwqvpSOme7dkgjmIxMC
- EDUWpbe6vQMb+4ZmBmEEt5ghk9BECqsjXnOUmeMZvc/GHxGGhbM+EkQT51Ak+l1jl0Gk
- e0VFHGUq/EulYOIN363hXs4N0qE8457le8B9ZcU1scRhKiurcqee7keIrBgu2aNuNst6
- s4q/1FXKkxew1jBMK8FqPNO8YA/vy3Cb08nb/tsZDbD2wVZYYWtsRfKIAW+4YflSZIWZ
- tcpsWF2pTqdyqNKuAf6FfMJD7jOR5Aud9gy/tFQRgUKZBVgb1QTOVVCdwEUjoZn6UDxu
- ysQg==
-X-Gm-Message-State: APjAAAXB/8D6OOPcg53Dc0e6wzWVgfUzrDVVhvw5FpgvIzuHRvwN1TkE
- FbJ6pKCNiNVKpUSwRh0kqeq0S4AiNf+pRA==
-X-Google-Smtp-Source: APXvYqwDK11TTw79/z98st8PiM//6SWGwXKKfruRtjYHVssroUDTejAIHpN4CLSF/ik7ILJtsJMl1A==
-X-Received: by 2002:adf:dcc4:: with SMTP id x4mr21464894wrm.221.1568190285688; 
- Wed, 11 Sep 2019 01:24:45 -0700 (PDT)
+ bh=ObpRu4yWGJ56Lce0E8Qj/S0MZ1B/JMtbNndq30ymwo0=;
+ b=NoGNCgCh/O9SwuJwHsFTSXQhfim2oXWbArdliOw06JyC0uvICRXbPmLPj+Bfu4zvi3
+ 9QzRnN+IhMbVnlUVlpWocCx8kfHaaUIxULh7Hc2sB9ZBY8K7zVzGlWzVVFJ2tWhK+T09
+ f+DnvPqmlCrNd8SVjkZaWQTMAWTZhHwzrOwczRyx7HLVytNr6byAh420HI0jmGCbjceW
+ D6pa4BQdP0VYPhwPPk7LpGvFj3YXc8zotgBp6bbzGjt3+CI37g/V65EBxzso71A2mE8F
+ n4wBWwoZNYN36QWMXbKvW6HNqPxGv8y4hRRtZC8Wd2bN3cKcq8jQ6GWqA1jIodexzyLd
+ qWXA==
+X-Gm-Message-State: APjAAAWGm+o5P+Ewt4qfbla+AZeDpMYqhg8qNj8C8B/QK5Cko7TlCzQv
+ YFptYgxi8xRfCMbiHB5Bt26VzmAVIraUjA==
+X-Google-Smtp-Source: APXvYqxNqrIiqEfeTP1aB6QlMIjUB+10N7FyZyAqvpceN0arO6UlOSXNdVdzFApNV3LXtQ4yolCG8w==
+X-Received: by 2002:a1c:7406:: with SMTP id p6mr2764209wmc.30.1568190287159;
+ Wed, 11 Sep 2019 01:24:47 -0700 (PDT)
 Received: from localhost ([148.69.85.38])
- by smtp.gmail.com with ESMTPSA id c132sm2301142wme.27.2019.09.11.01.24.45
+ by smtp.gmail.com with ESMTPSA id j30sm24749986wrb.66.2019.09.11.01.24.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Sep 2019 01:24:45 -0700 (PDT)
-Date: Tue, 10 Sep 2019 12:04:34 -0700
-Message-Id: <20190910190513.21160-9-palmer@sifive.com>
+ Wed, 11 Sep 2019 01:24:46 -0700 (PDT)
+Date: Tue, 10 Sep 2019 12:04:35 -0700
+Message-Id: <20190910190513.21160-10-palmer@sifive.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <20190910190513.21160-1-palmer@sifive.com>
 References: <20190910190513.21160-1-palmer@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Cc: qemu-riscv@nongnu.org,       qemu-devel@nongnu.org,
- Alistair Francis <alistair.francis@wdc.com>, Palmer Dabbelt <palmer@sifive.com>
+ Bin Meng <bmeng.cn@gmail.com>, Alistair Francis <alistair.francis@wdc.com>,
+ Palmer Dabbelt <palmer@sifive.com>
 From: Palmer Dabbelt <palmer@sifive.com>
 To: Peter Maydell <peter.maydell@linaro.org>
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
  [fuzzy]
-X-Received-From: 209.85.221.67
-Subject: [Qemu-riscv] [PULL 08/47] target/riscv: Update the Hypervisor CSRs
- to v0.4
+X-Received-From: 209.85.128.67
+Subject: [Qemu-riscv] [PULL 09/47] riscv: rv32: Root page table address can
+ be larger than 32-bit
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -61,72 +62,67 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Sep 2019 08:24:51 -0000
+X-List-Received-Date: Wed, 11 Sep 2019 08:24:53 -0000
 
-From: Alistair Francis <alistair.francis@wdc.com>
+From: Bin Meng <bmeng.cn@gmail.com>
 
-Update the Hypervisor CSR addresses to match the v0.4 spec.
+For RV32, the root page table's PPN has 22 bits hence its address
+bits could be larger than the maximum bits that target_ulong is
+able to represent. Use hwaddr instead.
 
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
+Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
 ---
- target/riscv/cpu_bits.h | 35 ++++++++++++++++++-----------------
- 1 file changed, 18 insertions(+), 17 deletions(-)
+ target/riscv/cpu_helper.c | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-index 11f971ad5d..e99834856c 100644
---- a/target/riscv/cpu_bits.h
-+++ b/target/riscv/cpu_bits.h
-@@ -173,6 +173,24 @@
- #define CSR_SPTBR           0x180
- #define CSR_SATP            0x180
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index 96373b67d8..87dd6a6ece 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -186,12 +186,12 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
  
-+/* Hpervisor CSRs */
-+#define CSR_HSTATUS         0x600
-+#define CSR_HEDELEG         0x602
-+#define CSR_HIDELEG         0x603
-+#define CSR_HCOUNTERNEN     0x606
-+#define CSR_HGATP           0x680
-+
-+#if defined(TARGET_RISCV32)
-+#define HGATP_MODE           SATP32_MODE
-+#define HGATP_VMID           SATP32_ASID
-+#define HGATP_PPN            SATP32_PPN
-+#endif
-+#if defined(TARGET_RISCV64)
-+#define HGATP_MODE           SATP64_MODE
-+#define HGATP_VMID           SATP64_ASID
-+#define HGATP_PPN            SATP64_PPN
-+#endif
-+
- /* Physical Memory Protection */
- #define CSR_PMPCFG0         0x3a0
- #define CSR_PMPCFG1         0x3a1
-@@ -206,23 +224,6 @@
- #define CSR_DPC             0x7b1
- #define CSR_DSCRATCH        0x7b2
+     *prot = 0;
  
--/* Hpervisor CSRs */
--#define CSR_HSTATUS         0xa00
--#define CSR_HEDELEG         0xa02
--#define CSR_HIDELEG         0xa03
--#define CSR_HGATP           0xa80
--
--#if defined(TARGET_RISCV32)
--#define HGATP_MODE           SATP32_MODE
--#define HGATP_ASID           SATP32_ASID
--#define HGATP_PPN            SATP32_PPN
--#endif
--#if defined(TARGET_RISCV64)
--#define HGATP_MODE           SATP64_MODE
--#define HGATP_ASID           SATP64_ASID
--#define HGATP_PPN            SATP64_PPN
--#endif
--
- /* Performance Counters */
- #define CSR_MHPMCOUNTER3    0xb03
- #define CSR_MHPMCOUNTER4    0xb04
+-    target_ulong base;
++    hwaddr base;
+     int levels, ptidxbits, ptesize, vm, sum;
+     int mxr = get_field(env->mstatus, MSTATUS_MXR);
+ 
+     if (env->priv_ver >= PRIV_VERSION_1_10_0) {
+-        base = get_field(env->satp, SATP_PPN) << PGSHIFT;
++        base = (hwaddr)get_field(env->satp, SATP_PPN) << PGSHIFT;
+         sum = get_field(env->mstatus, MSTATUS_SUM);
+         vm = get_field(env->satp, SATP_MODE);
+         switch (vm) {
+@@ -211,7 +211,7 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
+           g_assert_not_reached();
+         }
+     } else {
+-        base = env->sptbr << PGSHIFT;
++        base = (hwaddr)(env->sptbr) << PGSHIFT;
+         sum = !get_field(env->mstatus, MSTATUS_PUM);
+         vm = get_field(env->mstatus, MSTATUS_VM);
+         switch (vm) {
+@@ -249,7 +249,7 @@ restart:
+                            ((1 << ptidxbits) - 1);
+ 
+         /* check that physical address of PTE is legal */
+-        target_ulong pte_addr = base + idx * ptesize;
++        hwaddr pte_addr = base + idx * ptesize;
+ 
+         if (riscv_feature(env, RISCV_FEATURE_PMP) &&
+             !pmp_hart_has_privs(env, pte_addr, sizeof(target_ulong),
+@@ -261,7 +261,7 @@ restart:
+ #elif defined(TARGET_RISCV64)
+         target_ulong pte = ldq_phys(cs->as, pte_addr);
+ #endif
+-        target_ulong ppn = pte >> PTE_PPN_SHIFT;
++        hwaddr ppn = pte >> PTE_PPN_SHIFT;
+ 
+         if (!(pte & PTE_V)) {
+             /* Invalid PTE */
 -- 
 2.21.0
 
