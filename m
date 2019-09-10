@@ -1,55 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1i7g0k-0000Cd-A0
-	for mharc-qemu-riscv@gnu.org; Tue, 10 Sep 2019 09:16:46 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37755)
+	id 1i7gRB-0002r6-GU
+	for mharc-qemu-riscv@gnu.org; Tue, 10 Sep 2019 09:44:05 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43012)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <palmer@dabbelt.com>) id 1i7g0g-00009C-Sj
- for qemu-riscv@nongnu.org; Tue, 10 Sep 2019 09:16:43 -0400
+ (envelope-from <palmer@dabbelt.com>) id 1i7gR8-0002qU-Gs
+ for qemu-riscv@nongnu.org; Tue, 10 Sep 2019 09:44:03 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmer@dabbelt.com>) id 1i7g0f-0006fF-S6
- for qemu-riscv@nongnu.org; Tue, 10 Sep 2019 09:16:42 -0400
-Received: from mail-wr1-f65.google.com ([209.85.221.65]:41283)
+ (envelope-from <palmer@dabbelt.com>) id 1i7gR7-0001s1-CQ
+ for qemu-riscv@nongnu.org; Tue, 10 Sep 2019 09:44:02 -0400
+Received: from mail-wr1-f68.google.com ([209.85.221.68]:33677)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1i7g0f-0006ez-ML
- for qemu-riscv@nongnu.org; Tue, 10 Sep 2019 09:16:41 -0400
-Received: by mail-wr1-f65.google.com with SMTP id h7so19157345wrw.8
- for <qemu-riscv@nongnu.org>; Tue, 10 Sep 2019 06:16:41 -0700 (PDT)
+ (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1i7gR7-0001rk-6R
+ for qemu-riscv@nongnu.org; Tue, 10 Sep 2019 09:44:01 -0400
+Received: by mail-wr1-f68.google.com with SMTP id u16so20417381wrr.0
+ for <qemu-riscv@nongnu.org>; Tue, 10 Sep 2019 06:44:01 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
  :mime-version:content-transfer-encoding;
- bh=z9JvWVeEbyWm2+to6czdf1YkWTTv0yFivC2PxELEm94=;
- b=jrpgBtxYzGSFfaehhIH8/6SdNILQJwabWCG5DWaMlYtGaPHcuwARHYLcFFt2pgUqNM
- FPypPTxZxrnMyxUCENWMBevlHMjuyWG1+z0QK8uDzRJOQx/+iQbUcO5q5BaNcsuoLHct
- nTjHBgR8qc23Yowk1P+dtgRgoMRrgG/Y7uXKLhw0HwiVw2Jrp1hybFOKWLk8HzBNxOh3
- Bo3UDaOkK5Pi8YlXwOX0SMBzH3Yk7Gl7JHfZoB3BFgtNDZFBBBZ2lLIoCfOWdlO2qwfy
- jkMWPXFsx6FddEsahRA0haFJrU0tXlgbOzaDk00TwsKmA5pcaVsenJqaLzVNSdzy3TE3
- 9ppA==
-X-Gm-Message-State: APjAAAVNNEpMT306zj8iGccXL/I2dxVtjjWjZJ2s//9YGjRPcQ+Av+Fq
- lO0b11bQ/jUZM4IdBHUchTKb/A==
-X-Google-Smtp-Source: APXvYqwDmhwDhs3WKG34RsEKvgP/Y5dPP7xlaHnoJVhfHzy5tbCIjgRPjR95sMtfnrwC6tmY9dMjLg==
-X-Received: by 2002:adf:e30e:: with SMTP id b14mr26116154wrj.168.1568121400402; 
- Tue, 10 Sep 2019 06:16:40 -0700 (PDT)
+ bh=y9npP439xdxmCG7GzT6XJIeofQhv6EpyJUjkj0mjnbA=;
+ b=My+TeZYOs6SLm7b/hvdrZM2hbIxBFAygTXg2KHXoOtrp5wmwdV+H4U/srgZ5XgGrj1
+ FAYuEHzzXQBOX0nwm20b7guWPoO9WOlhlW1N6AtQcpt6HJ5/XO6xFlIlY14JucImWvFG
+ I11e/q+adoEZ48mHGsIPqssbOm+yS3x0wbnj0Q08qdcw8CCz/zC+j23jGiW9fnkLRnpS
+ GMa6NB8k23SuSSWteUQl14GHU6SX0ui9Osd//vO2HoyFJuDqUl1vXI9krtFQ4wYGLXMQ
+ WsUiBlvpnsAy3d3QPsOzoL1zkxPclq55EI7WZoqO0VXWuRBc+2VPXT2Ym0n5f1Qr1Lit
+ fG8g==
+X-Gm-Message-State: APjAAAXETXXmCDKU6liIY8ukut/jdQe8fcPBAXcWrJj4xntu7O+FrxRc
+ enAtSRHHoD8PuIlIcbRcJKHD4A==
+X-Google-Smtp-Source: APXvYqxBKLmqkhroW1nQHv5wadRS0PbQpwCW3MqBAFUPq4+dxBM4h4Eyt6a8dXcoV0yuwHuiag2Q6A==
+X-Received: by 2002:adf:e704:: with SMTP id c4mr27654647wrm.283.1568123039721; 
+ Tue, 10 Sep 2019 06:43:59 -0700 (PDT)
 Received: from localhost ([148.69.85.38])
- by smtp.gmail.com with ESMTPSA id o22sm32214327wra.96.2019.09.10.06.16.33
+ by smtp.gmail.com with ESMTPSA id o8sm2717120wmc.30.2019.09.10.06.43.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Sep 2019 06:16:34 -0700 (PDT)
-Date: Tue, 10 Sep 2019 06:16:34 -0700 (PDT)
-X-Google-Original-Date: Tue, 10 Sep 2019 06:15:11 PDT (-0700)
-In-Reply-To: <cover.1566573576.git.alistair.francis@wdc.com>
+ Tue, 10 Sep 2019 06:43:59 -0700 (PDT)
+Date: Tue, 10 Sep 2019 06:43:59 -0700 (PDT)
+X-Google-Original-Date: Tue, 10 Sep 2019 06:16:54 PDT (-0700)
+In-Reply-To: <008eba3fe3b65cc5d37a1ced51d3631b23bef330.1566603412.git.alistair.francis@wdc.com>
 CC: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
  Alistair Francis <Alistair.Francis@wdc.com>, alistair23@gmail.com,
- bmeng.cn@gmail.com
+ Atish Patra <Atish.Patra@wdc.com>, Anup Patel <Anup.Patel@wdc.com>
 From: Palmer Dabbelt <palmer@sifive.com>
 To: Alistair Francis <Alistair.Francis@wdc.com>
-Message-ID: <mhng-d54ccfda-315c-4d9b-8b29-dd6cc43818e6@palmer-si-x1e>
+Message-ID: <mhng-1d14dd22-e463-4adb-ae6a-2f1623260659@palmer-si-x1e>
 Mime-Version: 1.0 (MHng)
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
  [fuzzy]
-X-Received-From: 209.85.221.65
-Subject: Re: [Qemu-riscv] [PATCH v4 0/7] RISC-V: Hypervisor prep work part 2
+X-Received-From: 209.85.221.68
+Subject: Re: [Qemu-riscv] [PATCH v1 01/28] target/riscv: Add the Hypervisor
+ extension
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -61,65 +62,26 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Sep 2019 13:16:44 -0000
+X-List-Received-Date: Tue, 10 Sep 2019 13:44:03 -0000
 
-On Fri, 23 Aug 2019 08:21:06 PDT (-0700), Alistair Francis wrote:
+On Fri, 23 Aug 2019 16:37:52 PDT (-0700), Alistair Francis wrote:
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> ---
+>  target/riscv/cpu.h | 1 +
+>  1 file changed, 1 insertion(+)
 >
-> The first three patches are ones that I have pulled out of my original
-> Hypervisor series at an attempt to reduce the number of patches in the
-> series.
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 124ed33ee4..7f54fb8c87 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -67,6 +67,7 @@
+>  #define RVC RV('C')
+>  #define RVS RV('S')
+>  #define RVU RV('U')
+> +#define RVH RV('H')
 >
-> These three patches all make sense without the Hypervisor series so can
-> be merged seperatley and will reduce the review burden of the next
-> version of the patches.
->
-> The fource patch is a prep patch for the new v0.4 Hypervisor spec.
->
-> The fifth patch is unreleated to Hypervisor that I'm just slipping in
-> here because it seems easier then sending it by itself.
->
-> The final two patches are issues I discovered while adding the v0.4
-> Hypervisor extension.
->
-> v4:
->  - Drop MIP change patch
->  - Add a Floating Point fixup patch
-> v3:
->  - Change names of all GP registers
->  - Add two more patches
-> v2:
->  - Small corrections based on feedback
->  - Remove the CSR permission check patch
->
->
->
-> Alistair Francis (6):
->   target/riscv: Don't set write permissions on dirty PTEs
->   riscv: plic: Remove unused interrupt functions
->   target/riscv: Create function to test if FP is enabled
->   target/riscv: Update the Hypervisor CSRs to v0.4
->   target/riscv: Fix mstatus dirty mask
->   target/riscv: Use TB_FLAGS_MSTATUS_FS for floating point
->
-> Atish Patra (1):
->   target/riscv: Use both register name and ABI name
->
->  hw/riscv/sifive_plic.c         | 12 ------------
->  include/hw/riscv/sifive_plic.h |  3 ---
->  target/riscv/cpu.c             | 19 ++++++++++--------
->  target/riscv/cpu.h             |  6 +++++-
->  target/riscv/cpu_bits.h        | 35 +++++++++++++++++-----------------
->  target/riscv/cpu_helper.c      | 16 ++++++++++++----
->  target/riscv/csr.c             | 22 +++++++++++----------
->  7 files changed, 58 insertions(+), 55 deletions(-)
+>  /* S extension denotes that Supervisor mode exists, however it is possible
+>     to have a core that support S mode but does not have an MMU and there
 
-Aside from that PTE patch, I've applied
-
-    target/riscv: Use both register name and ABI name
-    target/riscv: Fix mstatus dirty mask
-    target/riscv: Use TB_FLAGS_MSTATUS_FS for floating point
-
-on top of Bin's patch set, as the rest had made it into for-master.  Like we 
-talked about at lunch, I'm not sure the PTE one is actually correct -- it might 
-just be paranoia, though.
+Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
 
