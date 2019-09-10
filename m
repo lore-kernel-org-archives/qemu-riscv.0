@@ -1,41 +1,41 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1i7xvr-0007bd-Q7
-	for mharc-qemu-riscv@gnu.org; Wed, 11 Sep 2019 04:24:55 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:57074)
+	id 1i7xvs-0007c0-1P
+	for mharc-qemu-riscv@gnu.org; Wed, 11 Sep 2019 04:24:56 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:57096)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <palmer@dabbelt.com>) id 1i7xvl-0007Ts-VV
- for qemu-riscv@nongnu.org; Wed, 11 Sep 2019 04:24:50 -0400
+ (envelope-from <palmer@dabbelt.com>) id 1i7xvn-0007Vl-3L
+ for qemu-riscv@nongnu.org; Wed, 11 Sep 2019 04:24:52 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmer@dabbelt.com>) id 1i7xvk-0006Rw-NB
- for qemu-riscv@nongnu.org; Wed, 11 Sep 2019 04:24:49 -0400
-Received: from mail-wm1-f67.google.com ([209.85.128.67]:52098)
+ (envelope-from <palmer@dabbelt.com>) id 1i7xvm-0006SW-1s
+ for qemu-riscv@nongnu.org; Wed, 11 Sep 2019 04:24:50 -0400
+Received: from mail-wr1-f67.google.com ([209.85.221.67]:44653)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1i7xvk-0006RX-I7
- for qemu-riscv@nongnu.org; Wed, 11 Sep 2019 04:24:48 -0400
-Received: by mail-wm1-f67.google.com with SMTP id 7so2331243wme.1
- for <qemu-riscv@nongnu.org>; Wed, 11 Sep 2019 01:24:48 -0700 (PDT)
+ (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1i7xvl-0006S5-T8
+ for qemu-riscv@nongnu.org; Wed, 11 Sep 2019 04:24:50 -0400
+Received: by mail-wr1-f67.google.com with SMTP id k6so11297375wrn.11
+ for <qemu-riscv@nongnu.org>; Wed, 11 Sep 2019 01:24:49 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding:cc:from:to;
- bh=ObpRu4yWGJ56Lce0E8Qj/S0MZ1B/JMtbNndq30ymwo0=;
- b=NoGNCgCh/O9SwuJwHsFTSXQhfim2oXWbArdliOw06JyC0uvICRXbPmLPj+Bfu4zvi3
- 9QzRnN+IhMbVnlUVlpWocCx8kfHaaUIxULh7Hc2sB9ZBY8K7zVzGlWzVVFJ2tWhK+T09
- f+DnvPqmlCrNd8SVjkZaWQTMAWTZhHwzrOwczRyx7HLVytNr6byAh420HI0jmGCbjceW
- D6pa4BQdP0VYPhwPPk7LpGvFj3YXc8zotgBp6bbzGjt3+CI37g/V65EBxzso71A2mE8F
- n4wBWwoZNYN36QWMXbKvW6HNqPxGv8y4hRRtZC8Wd2bN3cKcq8jQ6GWqA1jIodexzyLd
- qWXA==
-X-Gm-Message-State: APjAAAWGm+o5P+Ewt4qfbla+AZeDpMYqhg8qNj8C8B/QK5Cko7TlCzQv
- YFptYgxi8xRfCMbiHB5Bt26VzmAVIraUjA==
-X-Google-Smtp-Source: APXvYqxNqrIiqEfeTP1aB6QlMIjUB+10N7FyZyAqvpceN0arO6UlOSXNdVdzFApNV3LXtQ4yolCG8w==
-X-Received: by 2002:a1c:7406:: with SMTP id p6mr2764209wmc.30.1568190287159;
- Wed, 11 Sep 2019 01:24:47 -0700 (PDT)
+ bh=4YRrInDZ0nZMnqkxeYbaNMMDWGEYLAY0VfYbuezaFh4=;
+ b=CRCa5G5lqyqRbNxzmoHgr81+HxYOeRXxYJfm/k93g1QB0h/2uKHUGrZ0B9Zm2cv+qM
+ KsjC9sS8UemV7E5XK08e93UQSntpoGx11yZsMmoWqT6mBD8aPUx0w18S0EO6d77QUAiL
+ Y53jjpsJvMsc31Nc9fecdKfnxhGhyGiYD2UZvLO98PZzzCrR3L/et3yxVIhib9nAeFVu
+ ObVFUY2eJxQ1ubsPq8+IzgzafPgm//aHAq1/7/WaOEPf1hDT2a1wGeMnJG+4Eor7QfOd
+ QEtNSQ+C/DTGOfQrg7AndhHO4ETcNZVjqv1697wYaPcoZyGuvg4zenss3fowcWMv8LvO
+ OY9A==
+X-Gm-Message-State: APjAAAVujf7AJnZhVn6wgy3JW6DP/t/RM23SJy6pzgjrib62Gp9a6TJt
+ 9ZRkat8wSb6CjUkpUXHv4fhsoRaXcR4cjg==
+X-Google-Smtp-Source: APXvYqxv0C4mt0fovfgKEk29/h6jDH0gnmoSegp+CN/TXUs3DZpXOUpI3znU1rNs9l9j3hPClu01EQ==
+X-Received: by 2002:adf:dfc5:: with SMTP id q5mr31264999wrn.142.1568190288501; 
+ Wed, 11 Sep 2019 01:24:48 -0700 (PDT)
 Received: from localhost ([148.69.85.38])
- by smtp.gmail.com with ESMTPSA id j30sm24749986wrb.66.2019.09.11.01.24.46
+ by smtp.gmail.com with ESMTPSA id z21sm2012852wmf.30.2019.09.11.01.24.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Sep 2019 01:24:46 -0700 (PDT)
-Date: Tue, 10 Sep 2019 12:04:35 -0700
-Message-Id: <20190910190513.21160-10-palmer@sifive.com>
+ Wed, 11 Sep 2019 01:24:48 -0700 (PDT)
+Date: Tue, 10 Sep 2019 12:04:36 -0700
+Message-Id: <20190910190513.21160-11-palmer@sifive.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <20190910190513.21160-1-palmer@sifive.com>
 References: <20190910190513.21160-1-palmer@sifive.com>
@@ -48,9 +48,9 @@ From: Palmer Dabbelt <palmer@sifive.com>
 To: Peter Maydell <peter.maydell@linaro.org>
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
  [fuzzy]
-X-Received-From: 209.85.128.67
-Subject: [Qemu-riscv] [PULL 09/47] riscv: rv32: Root page table address can
- be larger than 32-bit
+X-Received-From: 209.85.221.67
+Subject: [Qemu-riscv] [PULL 10/47] riscv: Add a helper routine for finding
+ firmware
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -62,67 +62,73 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Sep 2019 08:24:53 -0000
+X-List-Received-Date: Wed, 11 Sep 2019 08:24:54 -0000
 
 From: Bin Meng <bmeng.cn@gmail.com>
 
-For RV32, the root page table's PPN has 22 bits hence its address
-bits could be larger than the maximum bits that target_ulong is
-able to represent. Use hwaddr instead.
+This adds a helper routine for finding firmware. It is currently
+used only for "-bios default" case.
 
 Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
 ---
- target/riscv/cpu_helper.c | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+ hw/riscv/boot.c         | 22 +++++++++++++++-------
+ include/hw/riscv/boot.h |  1 +
+ 2 files changed, 16 insertions(+), 7 deletions(-)
 
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 96373b67d8..87dd6a6ece 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -186,12 +186,12 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
- 
-     *prot = 0;
- 
--    target_ulong base;
-+    hwaddr base;
-     int levels, ptidxbits, ptesize, vm, sum;
-     int mxr = get_field(env->mstatus, MSTATUS_MXR);
- 
-     if (env->priv_ver >= PRIV_VERSION_1_10_0) {
--        base = get_field(env->satp, SATP_PPN) << PGSHIFT;
-+        base = (hwaddr)get_field(env->satp, SATP_PPN) << PGSHIFT;
-         sum = get_field(env->mstatus, MSTATUS_SUM);
-         vm = get_field(env->satp, SATP_MODE);
-         switch (vm) {
-@@ -211,7 +211,7 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
-           g_assert_not_reached();
-         }
+diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
+index 4c63b5cf8a..10f7991490 100644
+--- a/hw/riscv/boot.c
++++ b/hw/riscv/boot.c
+@@ -69,13 +69,7 @@ void riscv_find_and_load_firmware(MachineState *machine,
+          * so then in the future we can make "-bios default" the default option
+          * if no -bios option is set without breaking anything.
+          */
+-        firmware_filename = qemu_find_file(QEMU_FILE_TYPE_BIOS,
+-                                           default_machine_firmware);
+-        if (firmware_filename == NULL) {
+-            error_report("Unable to load the default RISC-V firmware \"%s\"",
+-                         default_machine_firmware);
+-            exit(1);
+-        }
++        firmware_filename = riscv_find_firmware(default_machine_firmware);
      } else {
--        base = env->sptbr << PGSHIFT;
-+        base = (hwaddr)(env->sptbr) << PGSHIFT;
-         sum = !get_field(env->mstatus, MSTATUS_PUM);
-         vm = get_field(env->mstatus, MSTATUS_VM);
-         switch (vm) {
-@@ -249,7 +249,7 @@ restart:
-                            ((1 << ptidxbits) - 1);
+         firmware_filename = machine->firmware;
+     }
+@@ -90,6 +84,20 @@ void riscv_find_and_load_firmware(MachineState *machine,
+     }
+ }
  
-         /* check that physical address of PTE is legal */
--        target_ulong pte_addr = base + idx * ptesize;
-+        hwaddr pte_addr = base + idx * ptesize;
- 
-         if (riscv_feature(env, RISCV_FEATURE_PMP) &&
-             !pmp_hart_has_privs(env, pte_addr, sizeof(target_ulong),
-@@ -261,7 +261,7 @@ restart:
- #elif defined(TARGET_RISCV64)
-         target_ulong pte = ldq_phys(cs->as, pte_addr);
- #endif
--        target_ulong ppn = pte >> PTE_PPN_SHIFT;
-+        hwaddr ppn = pte >> PTE_PPN_SHIFT;
- 
-         if (!(pte & PTE_V)) {
-             /* Invalid PTE */
++char *riscv_find_firmware(const char *firmware_filename)
++{
++    char *filename;
++
++    filename = qemu_find_file(QEMU_FILE_TYPE_BIOS, firmware_filename);
++    if (filename == NULL) {
++        error_report("Unable to load the RISC-V firmware \"%s\"",
++                     firmware_filename);
++        exit(1);
++    }
++
++    return filename;
++}
++
+ target_ulong riscv_load_firmware(const char *firmware_filename,
+                                  hwaddr firmware_load_addr)
+ {
+diff --git a/include/hw/riscv/boot.h b/include/hw/riscv/boot.h
+index 1f21c2bef1..66075d0e57 100644
+--- a/include/hw/riscv/boot.h
++++ b/include/hw/riscv/boot.h
+@@ -25,6 +25,7 @@
+ void riscv_find_and_load_firmware(MachineState *machine,
+                                   const char *default_machine_firmware,
+                                   hwaddr firmware_load_addr);
++char *riscv_find_firmware(const char *firmware_filename);
+ target_ulong riscv_load_firmware(const char *firmware_filename,
+                                  hwaddr firmware_load_addr);
+ target_ulong riscv_load_kernel(const char *kernel_filename);
 -- 
 2.21.0
 
