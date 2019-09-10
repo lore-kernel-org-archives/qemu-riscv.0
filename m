@@ -1,41 +1,41 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1i7xvk-0007S3-LL
-	for mharc-qemu-riscv@gnu.org; Wed, 11 Sep 2019 04:24:48 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:56941)
+	id 1i7xvl-0007TI-FV
+	for mharc-qemu-riscv@gnu.org; Wed, 11 Sep 2019 04:24:49 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:56980)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <palmer@dabbelt.com>) id 1i7xvf-0007KY-9N
- for qemu-riscv@nongnu.org; Wed, 11 Sep 2019 04:24:44 -0400
+ (envelope-from <palmer@dabbelt.com>) id 1i7xvg-0007Mg-RY
+ for qemu-riscv@nongnu.org; Wed, 11 Sep 2019 04:24:45 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmer@dabbelt.com>) id 1i7xve-0006O3-7n
- for qemu-riscv@nongnu.org; Wed, 11 Sep 2019 04:24:43 -0400
-Received: from mail-wr1-f65.google.com ([209.85.221.65]:33141)
+ (envelope-from <palmer@dabbelt.com>) id 1i7xvf-0006Ol-Ee
+ for qemu-riscv@nongnu.org; Wed, 11 Sep 2019 04:24:44 -0400
+Received: from mail-wr1-f47.google.com ([209.85.221.47]:42551)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1i7xve-0006Nd-2P
- for qemu-riscv@nongnu.org; Wed, 11 Sep 2019 04:24:42 -0400
-Received: by mail-wr1-f65.google.com with SMTP id u16so23487424wrr.0
- for <qemu-riscv@nongnu.org>; Wed, 11 Sep 2019 01:24:41 -0700 (PDT)
+ (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1i7xvf-0006OB-8r
+ for qemu-riscv@nongnu.org; Wed, 11 Sep 2019 04:24:43 -0400
+Received: by mail-wr1-f47.google.com with SMTP id q14so23413633wrm.9
+ for <qemu-riscv@nongnu.org>; Wed, 11 Sep 2019 01:24:43 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding:cc:from:to;
- bh=SNUwgSqPs8KK5z86gRWObQ6qeL9sTS6I7byaj7lBBbw=;
- b=sBQZkQ/IKPiKt0pb7O7IvmSpPJLGe8eoIN1T9m/ksY484u/GfNlYjOO22VeqzZv8tL
- rDv/OEKx0FJYE+bp3P13bQOIWeVljYA7TSc+/zmWTqnt6Y1mrGilyyYJ2er/E+FqXJIm
- jFYq/SRXFGDtEocZnZIPCzeHM34O5Mi4VyxHSj2v1i3xTlXiE6nHnSz3mqAcLUUmVs3z
- Fu53GwzYRIawmwG+xrNdZC527n16vB73/F6vRi/fttNdKGE52x7x63b0sKRBsvmD6wfr
- bDlaS+I6ujHA0JKEr+eEzvqi6Jm8NjNi5UrV2KfCRda/d6G+3sUWViLNQcdfYMfjM3Hn
- xVnw==
-X-Gm-Message-State: APjAAAXgDTzYrAbpEHBXMz70k/xnfi2H4bMAC2qCBjuHVGEOT0d+554u
- 7Yd7u68tnt2OUxSQ9XUbq4migVdJtk28wQ==
-X-Google-Smtp-Source: APXvYqyug4DsvLjCGQCA4v242m57ZTZQgKJMvUj3h1+wJpWKw3/bBWqv30C2A3EapRwI/w7bSlxsNg==
-X-Received: by 2002:a5d:438c:: with SMTP id i12mr28157912wrq.238.1568190280448; 
- Wed, 11 Sep 2019 01:24:40 -0700 (PDT)
+ bh=f1obdWZEdYPCxiLjAjjERigqaNazFElY8RAjlYJpnb0=;
+ b=PFCeTFJ/XT9nBV4PFZ3SwyFenZew2AVvMJmqtHTA5hM/i64AQ3xh3g6w+PhaS3+1OQ
+ m42jCHPotsEA16U8xq462/xBI6XLxD/jlNiVh9tdIPXJRMwRPsZ3/6bms4T4eFuAdB8B
+ 9hhMnYn7VS6N5UoaTl7+3nEFRZAz54NLQClK2UyOs4okcGB9jH361QYl7N4kx6F132NY
+ jW5Y99sO/goLMtpd+FPE5y0mzzXWzKKo8cM4mgegyxnKVu08aW/bV1AxUuRyNBQd81iJ
+ gJvcKbVoibO54R4uPGIxu/rkyf3AX1c+iHatk02GlhEqqJGai/nQ6QU2xfaH1HyY9m6Z
+ mMqg==
+X-Gm-Message-State: APjAAAXy4PHmsS6T1SPbAgfBTIroggk4Sgxg4V797wMaNlxWeVCU5Hsf
+ td2wkvJ0a1VPd4yknVvpSJ9hiDlVuxUn7w==
+X-Google-Smtp-Source: APXvYqwfxJA10l2JPfMvWpbDoyBjq9brs2mEPhVoL3ZKvV5/oxBamdaBYZY3/Ba+xCWjGN9BjynvrA==
+X-Received: by 2002:adf:f801:: with SMTP id s1mr15287wrp.320.1568190281754;
+ Wed, 11 Sep 2019 01:24:41 -0700 (PDT)
 Received: from localhost ([148.69.85.38])
- by smtp.gmail.com with ESMTPSA id r28sm28106127wrr.94.2019.09.11.01.24.39
+ by smtp.gmail.com with ESMTPSA id s1sm30209117wrg.80.2019.09.11.01.24.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Sep 2019 01:24:40 -0700 (PDT)
-Date: Tue, 10 Sep 2019 12:04:30 -0700
-Message-Id: <20190910190513.21160-5-palmer@sifive.com>
+ Wed, 11 Sep 2019 01:24:41 -0700 (PDT)
+Date: Tue, 10 Sep 2019 12:04:31 -0700
+Message-Id: <20190910190513.21160-6-palmer@sifive.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <20190910190513.21160-1-palmer@sifive.com>
 References: <20190910190513.21160-1-palmer@sifive.com>
@@ -50,9 +50,9 @@ From: Palmer Dabbelt <palmer@sifive.com>
 To: Peter Maydell <peter.maydell@linaro.org>
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
  [fuzzy]
-X-Received-From: 209.85.221.65
-Subject: [Qemu-riscv] [PULL 04/47] target/riscv/pmp: Restrict priviledged
- PMP to system-mode emulation
+X-Received-From: 209.85.221.47
+Subject: [Qemu-riscv] [PULL 05/47] target/riscv/pmp: Convert
+ qemu_log_mask(LOG_TRACE) to trace events
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -64,51 +64,110 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Sep 2019 08:24:45 -0000
+X-List-Received-Date: Wed, 11 Sep 2019 08:24:47 -0000
 
 From: Philippe Mathieu-Daudé <philmd@redhat.com>
 
-The RISC-V Physical Memory Protection is restricted to privileged
-modes. Restrict its compilation to QEMU system builds.
+Use the always-compiled trace events, remove the now unused
+RISCV_DEBUG_PMP definition.
+
+Note pmpaddr_csr_read() could previously do out-of-bound accesses
+passing addr_index >= MAX_RISCV_PMPS.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@redhat.com>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
 ---
- target/riscv/Makefile.objs | 3 ++-
- target/riscv/pmp.c         | 4 ----
- 2 files changed, 2 insertions(+), 5 deletions(-)
+ target/riscv/pmp.c        | 31 ++++++++++---------------------
+ target/riscv/trace-events |  6 ++++++
+ 2 files changed, 16 insertions(+), 21 deletions(-)
 
-diff --git a/target/riscv/Makefile.objs b/target/riscv/Makefile.objs
-index b1c79bc1d1..b754e4bf32 100644
---- a/target/riscv/Makefile.objs
-+++ b/target/riscv/Makefile.objs
-@@ -1,4 +1,5 @@
--obj-y += translate.o op_helper.o cpu_helper.o cpu.o csr.o fpu_helper.o gdbstub.o pmp.o
-+obj-y += translate.o op_helper.o cpu_helper.o cpu.o csr.o fpu_helper.o gdbstub.o
-+obj-$(CONFIG_SOFTMMU) += pmp.o
- 
- DECODETREE = $(SRC_PATH)/scripts/decodetree.py
- 
 diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-index 958c7502a0..d836288cb4 100644
+index d836288cb4..d4f1007109 100644
 --- a/target/riscv/pmp.c
 +++ b/target/riscv/pmp.c
-@@ -28,8 +28,6 @@
+@@ -27,14 +27,7 @@
+ #include "qemu/log.h"
  #include "qapi/error.h"
  #include "cpu.h"
+-
+-#define RISCV_DEBUG_PMP 0
+-#define PMP_DEBUG(fmt, ...)                                                    \
+-    do {                                                                       \
+-        if (RISCV_DEBUG_PMP) {                                                 \
+-            qemu_log_mask(LOG_TRACE, "%s: " fmt "\n", __func__, ##__VA_ARGS__);\
+-        }                                                                      \
+-    } while (0)
++#include "trace.h"
  
--#ifndef CONFIG_USER_ONLY
--
- #define RISCV_DEBUG_PMP 0
- #define PMP_DEBUG(fmt, ...)                                                    \
-     do {                                                                       \
-@@ -382,5 +380,3 @@ target_ulong pmpaddr_csr_read(CPURISCVState *env, uint32_t addr_index)
-         return 0;
+ static void pmp_write_cfg(CPURISCVState *env, uint32_t addr_index,
+     uint8_t val);
+@@ -302,8 +295,7 @@ void pmpcfg_csr_write(CPURISCVState *env, uint32_t reg_index,
+     int i;
+     uint8_t cfg_val;
+ 
+-    PMP_DEBUG("hart " TARGET_FMT_ld ": reg%d, val: 0x" TARGET_FMT_lx,
+-        env->mhartid, reg_index, val);
++    trace_pmpcfg_csr_write(env->mhartid, reg_index, val);
+ 
+     if ((reg_index & 1) && (sizeof(target_ulong) == 8)) {
+         qemu_log_mask(LOG_GUEST_ERROR,
+@@ -332,9 +324,7 @@ target_ulong pmpcfg_csr_read(CPURISCVState *env, uint32_t reg_index)
+         val = pmp_read_cfg(env, (reg_index * sizeof(target_ulong)) + i);
+         cfg_val |= (val << (i * 8));
      }
- }
 -
--#endif
+-    PMP_DEBUG("hart " TARGET_FMT_ld ": reg%d, val: 0x" TARGET_FMT_lx,
+-        env->mhartid, reg_index, cfg_val);
++    trace_pmpcfg_csr_read(env->mhartid, reg_index, cfg_val);
+ 
+     return cfg_val;
+ }
+@@ -346,9 +336,7 @@ target_ulong pmpcfg_csr_read(CPURISCVState *env, uint32_t reg_index)
+ void pmpaddr_csr_write(CPURISCVState *env, uint32_t addr_index,
+     target_ulong val)
+ {
+-    PMP_DEBUG("hart " TARGET_FMT_ld ": addr%d, val: 0x" TARGET_FMT_lx,
+-        env->mhartid, addr_index, val);
+-
++    trace_pmpaddr_csr_write(env->mhartid, addr_index, val);
+     if (addr_index < MAX_RISCV_PMPS) {
+         if (!pmp_is_locked(env, addr_index)) {
+             env->pmp_state.pmp[addr_index].addr_reg = val;
+@@ -369,14 +357,15 @@ void pmpaddr_csr_write(CPURISCVState *env, uint32_t addr_index,
+  */
+ target_ulong pmpaddr_csr_read(CPURISCVState *env, uint32_t addr_index)
+ {
+-    PMP_DEBUG("hart " TARGET_FMT_ld ": addr%d, val: 0x" TARGET_FMT_lx,
+-        env->mhartid, addr_index,
+-        env->pmp_state.pmp[addr_index].addr_reg);
++    target_ulong val = 0;
++
+     if (addr_index < MAX_RISCV_PMPS) {
+-        return env->pmp_state.pmp[addr_index].addr_reg;
++        val = env->pmp_state.pmp[addr_index].addr_reg;
++        trace_pmpaddr_csr_read(env->mhartid, addr_index, val);
+     } else {
+         qemu_log_mask(LOG_GUEST_ERROR,
+                       "ignoring pmpaddr read - out of bounds\n");
+-        return 0;
+     }
++
++    return val;
+ }
+diff --git a/target/riscv/trace-events b/target/riscv/trace-events
+index 48af0373df..4b6c652ae9 100644
+--- a/target/riscv/trace-events
++++ b/target/riscv/trace-events
+@@ -1,2 +1,8 @@
+ # target/riscv/cpu_helper.c
+ riscv_trap(uint64_t hartid, bool async, uint64_t cause, uint64_t epc, uint64_t tval, const char *desc) "hart:%"PRId64", async:%d, cause:%"PRId64", epc:0x%"PRIx64", tval:0x%"PRIx64", desc=%s"
++
++# pmp.c
++pmpcfg_csr_read(uint64_t mhartid, uint32_t reg_index, uint64_t val) "hart %" PRIu64 ": read reg%" PRIu32", val: 0x%" PRIx64
++pmpcfg_csr_write(uint64_t mhartid, uint32_t reg_index, uint64_t val) "hart %" PRIu64 ": write reg%" PRIu32", val: 0x%" PRIx64
++pmpaddr_csr_read(uint64_t mhartid, uint32_t addr_index, uint64_t val) "hart %" PRIu64 ": read addr%" PRIu32", val: 0x%" PRIx64
++pmpaddr_csr_write(uint64_t mhartid, uint32_t addr_index, uint64_t val) "hart %" PRIu64 ": write addr%" PRIu32", val: 0x%" PRIx64
 -- 
 2.21.0
 
