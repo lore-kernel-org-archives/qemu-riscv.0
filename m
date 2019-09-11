@@ -1,40 +1,40 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1i7wDw-0007ZO-7h
+	id 1i7wDw-0007Zp-GL
 	for mharc-qemu-riscv@gnu.org; Wed, 11 Sep 2019 02:35:28 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:38558)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:38575)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <zhiwei_liu@c-sky.com>) id 1i7wDn-0007M6-9D
- for qemu-riscv@nongnu.org; Wed, 11 Sep 2019 02:35:24 -0400
+ (envelope-from <zhiwei_liu@c-sky.com>) id 1i7wDo-0007OG-8g
+ for qemu-riscv@nongnu.org; Wed, 11 Sep 2019 02:35:25 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <zhiwei_liu@c-sky.com>) id 1i7wDh-0007vV-NW
- for qemu-riscv@nongnu.org; Wed, 11 Sep 2019 02:35:19 -0400
-Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:34645)
+ (envelope-from <zhiwei_liu@c-sky.com>) id 1i7wDi-0007wK-Ru
+ for qemu-riscv@nongnu.org; Wed, 11 Sep 2019 02:35:20 -0400
+Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:40152)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1i7wDT-0007jy-1H; Wed, 11 Sep 2019 02:35:00 -0400
+ id 1i7wDU-0007kP-5Z; Wed, 11 Sep 2019 02:35:01 -0400
 X-Alimail-AntiSpam: AC=CONTINUE; BC=0.03883426|-1; CH=green;
- DM=CONTINUE|CONTINUE|true|0.353627-0.00801203-0.638361; FP=0|0|0|0|0|-1|-1|-1;
- HT=e01l07391; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS; RN=11; RT=11; SR=0;
- TI=SMTPD_---.FSRFPyr_1568183693; 
+ DM=CONTINUE|CONTINUE|true|0.273373-0.00435976-0.722268; FP=0|0|0|0|0|-1|-1|-1;
+ HT=e02c03307; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS; RN=11; RT=11; SR=0;
+ TI=SMTPD_---.FSRDYQn_1568183696; 
 Received: from localhost(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.FSRFPyr_1568183693)
- by smtp.aliyun-inc.com(10.147.40.233);
- Wed, 11 Sep 2019 14:34:54 +0800
+ fp:SMTPD_---.FSRDYQn_1568183696)
+ by smtp.aliyun-inc.com(10.147.44.118);
+ Wed, 11 Sep 2019 14:34:56 +0800
 From: liuzhiwei <zhiwei_liu@c-sky.com>
 To: Alistair.Francis@wdc.com, palmer@sifive.com, sagark@eecs.berkeley.edu,
  kbastian@mail.uni-paderborn.de, riku.voipio@iki.fi, laurent@vivier.eu,
  wenmeng_zhang@c-sky.com
 Cc: wxy194768@alibaba-inc.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
  LIU Zhiwei <zhiwei_liu@c-sky.com>
-Date: Wed, 11 Sep 2019 14:25:31 +0800
-Message-Id: <1568183141-67641-8-git-send-email-zhiwei_liu@c-sky.com>
+Date: Wed, 11 Sep 2019 14:25:33 +0800
+Message-Id: <1568183141-67641-10-git-send-email-zhiwei_liu@c-sky.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1568183141-67641-1-git-send-email-zhiwei_liu@c-sky.com>
 References: <1568183141-67641-1-git-send-email-zhiwei_liu@c-sky.com>
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 3.x [generic]
 X-Received-From: 121.197.200.217
-Subject: [Qemu-riscv] [PATCH v2 07/17] RISC-V: add vector extension atomic
- instructions
+Subject: [Qemu-riscv] [PATCH v2 09/17] RISC-V: add vector extension integer
+ instructions part2, bit/shift
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -46,154 +46,143 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Sep 2019 06:35:26 -0000
+X-List-Received-Date: Wed, 11 Sep 2019 06:35:27 -0000
 
 From: LIU Zhiwei <zhiwei_liu@c-sky.com>
 
 Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
 ---
- target/riscv/helper.h                   |   18 +
- target/riscv/insn32.decode              |   21 +
- target/riscv/insn_trans/trans_rvv.inc.c |   36 +
- target/riscv/vector_helper.c            | 1467 +++++++++++++++++++++++++++++++
- 4 files changed, 1542 insertions(+)
+ target/riscv/helper.h                   |   25 +
+ target/riscv/insn32.decode              |   25 +
+ target/riscv/insn_trans/trans_rvv.inc.c |   25 +
+ target/riscv/vector_helper.c            | 1477 +++++++++++++++++++++++++++++++
+ 4 files changed, 1552 insertions(+)
 
 diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-index 973342f..c107925 100644
+index 31e20dc..28863e2 100644
 --- a/target/riscv/helper.h
 +++ b/target/riscv/helper.h
-@@ -121,5 +121,23 @@ DEF_HELPER_6(vector_vsuxb_v, void, env, i32, i32, i32, i32, i32)
- DEF_HELPER_6(vector_vsuxh_v, void, env, i32, i32, i32, i32, i32)
- DEF_HELPER_6(vector_vsuxw_v, void, env, i32, i32, i32, i32, i32)
- DEF_HELPER_6(vector_vsuxe_v, void, env, i32, i32, i32, i32, i32)
-+DEF_HELPER_6(vector_vamoswapw_v, void, env, i32, i32, i32, i32, i32)
-+DEF_HELPER_6(vector_vamoswapd_v, void, env, i32, i32, i32, i32, i32)
-+DEF_HELPER_6(vector_vamoaddw_v, void, env, i32, i32, i32, i32, i32)
-+DEF_HELPER_6(vector_vamoaddd_v, void, env, i32, i32, i32, i32, i32)
-+DEF_HELPER_6(vector_vamoxorw_v, void, env, i32, i32, i32, i32, i32)
-+DEF_HELPER_6(vector_vamoxord_v, void, env, i32, i32, i32, i32, i32)
-+DEF_HELPER_6(vector_vamoandw_v, void, env, i32, i32, i32, i32, i32)
-+DEF_HELPER_6(vector_vamoandd_v, void, env, i32, i32, i32, i32, i32)
-+DEF_HELPER_6(vector_vamoorw_v, void, env, i32, i32, i32, i32, i32)
-+DEF_HELPER_6(vector_vamoord_v, void, env, i32, i32, i32, i32, i32)
-+DEF_HELPER_6(vector_vamominw_v, void, env, i32, i32, i32, i32, i32)
-+DEF_HELPER_6(vector_vamomind_v, void, env, i32, i32, i32, i32, i32)
-+DEF_HELPER_6(vector_vamomaxw_v, void, env, i32, i32, i32, i32, i32)
-+DEF_HELPER_6(vector_vamomaxd_v, void, env, i32, i32, i32, i32, i32)
-+DEF_HELPER_6(vector_vamominuw_v, void, env, i32, i32, i32, i32, i32)
-+DEF_HELPER_6(vector_vamominud_v, void, env, i32, i32, i32, i32, i32)
-+DEF_HELPER_6(vector_vamomaxuw_v, void, env, i32, i32, i32, i32, i32)
-+DEF_HELPER_6(vector_vamomaxud_v, void, env, i32, i32, i32, i32, i32)
+@@ -175,5 +175,30 @@ DEF_HELPER_5(vector_vwsubu_wx, void, env, i32, i32, i32, i32)
+ DEF_HELPER_5(vector_vwsub_wv, void, env, i32, i32, i32, i32)
+ DEF_HELPER_5(vector_vwsub_wx, void, env, i32, i32, i32, i32)
+ 
++DEF_HELPER_5(vector_vand_vv, void, env, i32, i32, i32, i32)
++DEF_HELPER_5(vector_vand_vx, void, env, i32, i32, i32, i32)
++DEF_HELPER_5(vector_vand_vi, void, env, i32, i32, i32, i32)
++DEF_HELPER_5(vector_vor_vv, void, env, i32, i32, i32, i32)
++DEF_HELPER_5(vector_vor_vx, void, env, i32, i32, i32, i32)
++DEF_HELPER_5(vector_vor_vi, void, env, i32, i32, i32, i32)
++DEF_HELPER_5(vector_vxor_vv, void, env, i32, i32, i32, i32)
++DEF_HELPER_5(vector_vxor_vx, void, env, i32, i32, i32, i32)
++DEF_HELPER_5(vector_vxor_vi, void, env, i32, i32, i32, i32)
++DEF_HELPER_5(vector_vsll_vv, void, env, i32, i32, i32, i32)
++DEF_HELPER_5(vector_vsll_vx, void, env, i32, i32, i32, i32)
++DEF_HELPER_5(vector_vsll_vi, void, env, i32, i32, i32, i32)
++DEF_HELPER_5(vector_vsrl_vv, void, env, i32, i32, i32, i32)
++DEF_HELPER_5(vector_vsrl_vx, void, env, i32, i32, i32, i32)
++DEF_HELPER_5(vector_vsrl_vi, void, env, i32, i32, i32, i32)
++DEF_HELPER_5(vector_vsra_vv, void, env, i32, i32, i32, i32)
++DEF_HELPER_5(vector_vsra_vx, void, env, i32, i32, i32, i32)
++DEF_HELPER_5(vector_vsra_vi, void, env, i32, i32, i32, i32)
++DEF_HELPER_5(vector_vnsrl_vv, void, env, i32, i32, i32, i32)
++DEF_HELPER_5(vector_vnsrl_vx, void, env, i32, i32, i32, i32)
++DEF_HELPER_5(vector_vnsrl_vi, void, env, i32, i32, i32, i32)
++DEF_HELPER_5(vector_vnsra_vv, void, env, i32, i32, i32, i32)
++DEF_HELPER_5(vector_vnsra_vx, void, env, i32, i32, i32, i32)
++DEF_HELPER_5(vector_vnsra_vi, void, env, i32, i32, i32, i32)
++
  DEF_HELPER_4(vector_vsetvli, void, env, i32, i32, i32)
  DEF_HELPER_4(vector_vsetvl, void, env, i32, i32, i32)
 diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index b286997..48e7661 100644
+index fc7e498..19710f5 100644
 --- a/target/riscv/insn32.decode
 +++ b/target/riscv/insn32.decode
-@@ -63,6 +63,7 @@
- @r_rm    .......   ..... ..... ... ..... ....... %rs2 %rs1 %rm %rd
- @r2_rm   .......   ..... ..... ... ..... ....... %rs1 %rm %rd
- @r2      .......   ..... ..... ... ..... ....... %rs1 %rd
-+@r_wdvm  ..... wd:1 vm:1 ..... ..... ... ..... ....... %rs2 %rs1 %rd
- @r_nfvm  nf:3 ... vm:1 ..... ..... ... ..... ....... %rs2 %rs1 %rd
- @r2_nfvm nf:3 ... vm:1 ..... ..... ... ..... ....... %rs1 %rd
- @r2_zimm . zimm:11  ..... ... ..... ....... %rs1 %rd
-@@ -258,6 +259,26 @@ vsuxh_v    ... 111 . ..... ..... 101 ..... 0100111 @r_nfvm
- vsuxw_v    ... 111 . ..... ..... 110 ..... 0100111 @r_nfvm
- vsuxe_v    ... 111 . ..... ..... 111 ..... 0100111 @r_nfvm
+@@ -315,5 +315,30 @@ vsbc_vxm        010010 1 ..... ..... 100 ..... 1010111 @r
+ vmsbc_vvm       010011 1 ..... ..... 000 ..... 1010111 @r
+ vmsbc_vxm       010011 1 ..... ..... 100 ..... 1010111 @r
  
-+#*** Vector AMO operations are encoded under the standard AMO major opcode.***
-+vamoswapw_v     00001 . . ..... ..... 110 ..... 0101111 @r_wdvm
-+vamoswapd_v     00001 . . ..... ..... 111 ..... 0101111 @r_wdvm
-+vamoaddw_v      00000 . . ..... ..... 110 ..... 0101111 @r_wdvm
-+vamoaddd_v      00000 . . ..... ..... 111 ..... 0101111 @r_wdvm
-+vamoxorw_v      00100 . . ..... ..... 110 ..... 0101111 @r_wdvm
-+vamoxord_v      00100 . . ..... ..... 111 ..... 0101111 @r_wdvm
-+vamoandw_v      01100 . . ..... ..... 110 ..... 0101111 @r_wdvm
-+vamoandd_v      01100 . . ..... ..... 111 ..... 0101111 @r_wdvm
-+vamoorw_v       01000 . . ..... ..... 110 ..... 0101111 @r_wdvm
-+vamoord_v       01000 . . ..... ..... 111 ..... 0101111 @r_wdvm
-+vamominw_v      10000 . . ..... ..... 110 ..... 0101111 @r_wdvm
-+vamomind_v      10000 . . ..... ..... 111 ..... 0101111 @r_wdvm
-+vamomaxw_v      10100 . . ..... ..... 110 ..... 0101111 @r_wdvm
-+vamomaxd_v      10100 . . ..... ..... 111 ..... 0101111 @r_wdvm
-+vamominuw_v     11000 . . ..... ..... 110 ..... 0101111 @r_wdvm
-+vamominud_v     11000 . . ..... ..... 111 ..... 0101111 @r_wdvm
-+vamomaxuw_v     11100 . . ..... ..... 110 ..... 0101111 @r_wdvm
-+vamomaxud_v     11100 . . ..... ..... 111 ..... 0101111 @r_wdvm
++vand_vv         001001 . ..... ..... 000 ..... 1010111 @r_vm
++vand_vx         001001 . ..... ..... 100 ..... 1010111 @r_vm
++vand_vi         001001 . ..... ..... 011 ..... 1010111 @r_vm
++vor_vv          001010 . ..... ..... 000 ..... 1010111 @r_vm
++vor_vx          001010 . ..... ..... 100 ..... 1010111 @r_vm
++vor_vi          001010 . ..... ..... 011 ..... 1010111 @r_vm
++vxor_vv         001011 . ..... ..... 000 ..... 1010111 @r_vm
++vxor_vx         001011 . ..... ..... 100 ..... 1010111 @r_vm
++vxor_vi         001011 . ..... ..... 011 ..... 1010111 @r_vm
++vsll_vv         100101 . ..... ..... 000 ..... 1010111 @r_vm
++vsll_vx         100101 . ..... ..... 100 ..... 1010111 @r_vm
++vsll_vi         100101 . ..... ..... 011 ..... 1010111 @r_vm
++vsrl_vv         101000 . ..... ..... 000 ..... 1010111 @r_vm
++vsrl_vx         101000 . ..... ..... 100 ..... 1010111 @r_vm
++vsrl_vi         101000 . ..... ..... 011 ..... 1010111 @r_vm
++vsra_vv         101001 . ..... ..... 000 ..... 1010111 @r_vm
++vsra_vx         101001 . ..... ..... 100 ..... 1010111 @r_vm
++vsra_vi         101001 . ..... ..... 011 ..... 1010111 @r_vm
++vnsrl_vv        101100 . ..... ..... 000 ..... 1010111 @r_vm
++vnsrl_vx        101100 . ..... ..... 100 ..... 1010111 @r_vm
++vnsrl_vi        101100 . ..... ..... 011 ..... 1010111 @r_vm
++vnsra_vv        101101 . ..... ..... 000 ..... 1010111 @r_vm
++vnsra_vx        101101 . ..... ..... 100 ..... 1010111 @r_vm
++vnsra_vi        101101 . ..... ..... 011 ..... 1010111 @r_vm
 +
- #*** new major opcode OP-V ***
  vsetvli         0 ........... ..... 111 ..... 1010111  @r2_zimm
  vsetvl          1000000 ..... ..... 111 ..... 1010111  @r
 diff --git a/target/riscv/insn_trans/trans_rvv.inc.c b/target/riscv/insn_trans/trans_rvv.inc.c
-index bd83885..7bda378 100644
+index a1c1960..6af29d0 100644
 --- a/target/riscv/insn_trans/trans_rvv.inc.c
 +++ b/target/riscv/insn_trans/trans_rvv.inc.c
-@@ -47,6 +47,23 @@ static bool trans_##INSN(DisasContext *ctx, arg_##INSN * a) \
-     return true;                                       \
- }
+@@ -204,5 +204,30 @@ GEN_VECTOR_R_VM(vwsubu_wx)
+ GEN_VECTOR_R_VM(vwsub_wv)
+ GEN_VECTOR_R_VM(vwsub_wx)
  
-+#define GEN_VECTOR_R_WDVM(INSN) \
-+static bool trans_##INSN(DisasContext *ctx, arg_##INSN * a) \
-+{                                                      \
-+    TCGv_i32 s1 = tcg_const_i32(a->rs1);               \
-+    TCGv_i32 s2 = tcg_const_i32(a->rs2);               \
-+    TCGv_i32 d  = tcg_const_i32(a->rd);                \
-+    TCGv_i32 wd  = tcg_const_i32(a->wd);               \
-+    TCGv_i32 vm = tcg_const_i32(a->vm);                \
-+    gen_helper_vector_##INSN(cpu_env, wd, vm, s1, s2, d);\
-+    tcg_temp_free_i32(s1);                             \
-+    tcg_temp_free_i32(s2);                             \
-+    tcg_temp_free_i32(d);                              \
-+    tcg_temp_free_i32(wd);                             \
-+    tcg_temp_free_i32(vm);                             \
-+    return true;                                       \
-+}
-+
- #define GEN_VECTOR_R(INSN) \
- static bool trans_##INSN(DisasContext *ctx, arg_##INSN * a) \
- {                                                      \
-@@ -119,5 +136,24 @@ GEN_VECTOR_R_NFVM(vsuxh_v)
- GEN_VECTOR_R_NFVM(vsuxw_v)
- GEN_VECTOR_R_NFVM(vsuxe_v)
- 
-+GEN_VECTOR_R_WDVM(vamoswapw_v)
-+GEN_VECTOR_R_WDVM(vamoswapd_v)
-+GEN_VECTOR_R_WDVM(vamoaddw_v)
-+GEN_VECTOR_R_WDVM(vamoaddd_v)
-+GEN_VECTOR_R_WDVM(vamoxorw_v)
-+GEN_VECTOR_R_WDVM(vamoxord_v)
-+GEN_VECTOR_R_WDVM(vamoandw_v)
-+GEN_VECTOR_R_WDVM(vamoandd_v)
-+GEN_VECTOR_R_WDVM(vamoorw_v)
-+GEN_VECTOR_R_WDVM(vamoord_v)
-+GEN_VECTOR_R_WDVM(vamominw_v)
-+GEN_VECTOR_R_WDVM(vamomind_v)
-+GEN_VECTOR_R_WDVM(vamomaxw_v)
-+GEN_VECTOR_R_WDVM(vamomaxd_v)
-+GEN_VECTOR_R_WDVM(vamominuw_v)
-+GEN_VECTOR_R_WDVM(vamominud_v)
-+GEN_VECTOR_R_WDVM(vamomaxuw_v)
-+GEN_VECTOR_R_WDVM(vamomaxud_v)
++GEN_VECTOR_R_VM(vand_vv)
++GEN_VECTOR_R_VM(vand_vx)
++GEN_VECTOR_R_VM(vand_vi)
++GEN_VECTOR_R_VM(vor_vv)
++GEN_VECTOR_R_VM(vor_vx)
++GEN_VECTOR_R_VM(vor_vi)
++GEN_VECTOR_R_VM(vxor_vv)
++GEN_VECTOR_R_VM(vxor_vx)
++GEN_VECTOR_R_VM(vxor_vi)
++GEN_VECTOR_R_VM(vsll_vv)
++GEN_VECTOR_R_VM(vsll_vx)
++GEN_VECTOR_R_VM(vsll_vi)
++GEN_VECTOR_R_VM(vsrl_vv)
++GEN_VECTOR_R_VM(vsrl_vx)
++GEN_VECTOR_R_VM(vsrl_vi)
++GEN_VECTOR_R_VM(vsra_vv)
++GEN_VECTOR_R_VM(vsra_vx)
++GEN_VECTOR_R_VM(vsra_vi)
++GEN_VECTOR_R_VM(vnsrl_vv)
++GEN_VECTOR_R_VM(vnsrl_vx)
++GEN_VECTOR_R_VM(vnsrl_vi)
++GEN_VECTOR_R_VM(vnsra_vv)
++GEN_VECTOR_R_VM(vnsra_vx)
++GEN_VECTOR_R_VM(vnsra_vi)
 +
  GEN_VECTOR_R2_ZIMM(vsetvli)
  GEN_VECTOR_R(vsetvl)
 diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index 0ac8c74..9ebf70d 100644
+index 95336c9..298a10a 100644
 --- a/target/riscv/vector_helper.c
 +++ b/target/riscv/vector_helper.c
-@@ -136,6 +136,21 @@ static bool  vector_lmul_check_reg(CPURISCVState *env, uint32_t lmul,
-     return true;
+@@ -268,6 +268,25 @@ static void vector_tail_widen(CPURISCVState *env, int vreg, int index,
+     }
  }
  
-+static void vector_tail_amo(CPURISCVState *env, int vreg, int index, int width)
++static void vector_tail_narrow(CPURISCVState *env, int vreg, int index,
++    int width)
 +{
 +    switch (width) {
++    case 8:
++        env->vfp.vreg[vreg].u8[index] = 0;
++        break;
++    case 16:
++        env->vfp.vreg[vreg].u16[index] = 0;
++        break;
 +    case 32:
 +        env->vfp.vreg[vreg].u32[index] = 0;
-+        break;
-+    case 64:
-+        env->vfp.vreg[vreg].u64[index] = 0;
 +        break;
 +    default:
 +        helper_raise_exception(env, RISCV_EXCP_ILLEGAL_INST);
@@ -201,90 +190,64 @@ index 0ac8c74..9ebf70d 100644
 +    }
 +}
 +
- static void vector_tail_segment(CPURISCVState *env, int vreg, int index,
-     int width, int nf, int lmul)
+ static inline int vector_get_carry(CPURISCVState *env, int width, int lmul,
+     int index)
  {
-@@ -3329,3 +3344,1455 @@ void VECTOR_HELPER(vleff_v)(CPURISCVState *env, uint32_t nf, uint32_t vm,
-     env->vfp.vl = vl;
+@@ -7131,3 +7150,1461 @@ void VECTOR_HELPER(vwsub_wx)(CPURISCVState *env, uint32_t vm, uint32_t rs1,
+     }
      env->vfp.vstart = 0;
  }
 +
-+void VECTOR_HELPER(vamoswapw_v)(CPURISCVState *env, uint32_t wd, uint32_t vm,
-+    uint32_t rs1, uint32_t vs2, uint32_t vs3)
++void VECTOR_HELPER(vand_vv)(CPURISCVState *env, uint32_t vm, uint32_t rs1,
++    uint32_t rs2, uint32_t rd)
 +{
 +    int i, j, vl;
-+    target_long idx;
-+    uint32_t lmul, width, src2, src3, vlmax;
-+    target_ulong addr;
-+#ifdef CONFIG_SOFTMMU
-+    int mem_idx = cpu_mmu_index(env, false);
-+    TCGMemOp memop = MO_ALIGN | MO_TESL;
-+#endif
++    uint32_t lmul, width, src1, src2, dest, vlmax;
 +
-+    vl    = env->vfp.vl;
++    vl = env->vfp.vl;
 +    lmul  = vector_get_lmul(env);
-+    width = vector_get_width(env);
++    width   = vector_get_width(env);
 +    vlmax = vector_get_vlmax(env);
-+    /* MEM <= SEW <= XLEN */
-+    if (width < 32 || (width > sizeof(target_ulong) * 8)) {
-+        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
-+        return;
-+    }
-+    /* if wd, rd is writen the old value */
-+    if (vector_vtype_ill(env) ||
-+        (vector_overlap_vm_common(lmul, vm, vs3) && wd)) {
-+        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
-+        return;
-+    }
 +
-+    vector_lmul_check_reg(env, lmul, vs2, false);
-+    vector_lmul_check_reg(env, lmul, vs3, false);
++    if (vector_vtype_ill(env) || vector_overlap_vm_common(lmul, vm, rd)) {
++        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
++        return;
++    }
++    vector_lmul_check_reg(env, lmul, rs1, false);
++    vector_lmul_check_reg(env, lmul, rs2, false);
++    vector_lmul_check_reg(env, lmul, rd, false);
 +
 +    for (i = 0; i < vlmax; i++) {
-+        src2 = vs2 + (i / (VLEN / width));
-+        src3 = vs3 + (i / (VLEN / width));
++        src1 = rs1 + (i / (VLEN / width));
++        src2 = rs2 + (i / (VLEN / width));
++        dest = rd + (i / (VLEN / width));
 +        j = i % (VLEN / width);
 +        if (i < env->vfp.vstart) {
 +            continue;
 +        } else if (i < vl) {
 +            switch (width) {
++            case 8:
++                if (vector_elem_mask(env, vm, width, lmul, i)) {
++                    env->vfp.vreg[dest].u8[j] = env->vfp.vreg[src1].u8[j]
++                        & env->vfp.vreg[src2].u8[j];
++                }
++                break;
++            case 16:
++                if (vector_elem_mask(env, vm, width, lmul, i)) {
++                    env->vfp.vreg[dest].u16[j] = env->vfp.vreg[src1].u16[j]
++                        & env->vfp.vreg[src2].u16[j];
++                }
++                break;
 +            case 32:
 +                if (vector_elem_mask(env, vm, width, lmul, i)) {
-+                    int32_t tmp;
-+                    idx    = (target_long)env->vfp.vreg[src2].s32[j];
-+                    addr   = idx + env->gpr[rs1];
-+#ifdef CONFIG_SOFTMMU
-+                    tmp = helper_atomic_xchgl_le(env, addr,
-+                        env->vfp.vreg[src3].s32[j],
-+                        make_memop_idx(memop & ~MO_SIGN, mem_idx));
-+#else
-+                    tmp = helper_atomic_xchgl_le(env, addr,
-+                        env->vfp.vreg[src3].s32[j]);
-+#endif
-+                    if (wd) {
-+                        env->vfp.vreg[src3].s32[j] = tmp;
-+                    }
-+                    env->vfp.vstart++;
++                    env->vfp.vreg[dest].u32[j] = env->vfp.vreg[src1].u32[j]
++                        & env->vfp.vreg[src2].u32[j];
 +                }
 +                break;
 +            case 64:
 +                if (vector_elem_mask(env, vm, width, lmul, i)) {
-+                    int64_t tmp;
-+                    idx    = (target_long)env->vfp.vreg[src2].s64[j];
-+                    addr   = idx + env->gpr[rs1];
-+
-+#ifdef CONFIG_SOFTMMU
-+                    tmp = (int64_t)(int32_t)helper_atomic_xchgl_le(env, addr,
-+                        env->vfp.vreg[src3].s64[j],
-+                        make_memop_idx(memop & ~MO_SIGN, mem_idx));
-+#else
-+                    tmp = (int64_t)(int32_t)helper_atomic_xchgl_le(env, addr,
-+                        env->vfp.vreg[src3].s64[j]);
-+#endif
-+                    if (wd) {
-+                        env->vfp.vreg[src3].s64[j] = tmp;
-+                    }
-+                    env->vfp.vstart++;
++                    env->vfp.vreg[dest].u64[j] = env->vfp.vreg[src1].u64[j]
++                        & env->vfp.vreg[src2].u64[j];
 +                }
 +                break;
 +            default:
@@ -292,159 +255,62 @@ index 0ac8c74..9ebf70d 100644
 +                break;
 +            }
 +        } else {
-+            vector_tail_amo(env, src3, j, width);
++            vector_tail_common(env, dest, j, width);
 +        }
 +    }
++
 +    env->vfp.vstart = 0;
 +}
 +
-+void VECTOR_HELPER(vamoswapd_v)(CPURISCVState *env, uint32_t wd, uint32_t vm,
-+    uint32_t rs1, uint32_t vs2, uint32_t vs3)
++void VECTOR_HELPER(vand_vx)(CPURISCVState *env, uint32_t vm, uint32_t rs1,
++    uint32_t rs2, uint32_t rd)
 +{
 +    int i, j, vl;
-+    target_long idx;
-+    uint32_t lmul, width, src2, src3, vlmax;
-+    target_ulong addr;
-+#ifdef CONFIG_SOFTMMU
-+    int mem_idx = cpu_mmu_index(env, false);
-+    TCGMemOp memop = MO_ALIGN | MO_TEQ;
-+#endif
++    uint32_t lmul, width, src2, dest, vlmax;
 +
-+    vl    = env->vfp.vl;
++    vl = env->vfp.vl;
 +    lmul  = vector_get_lmul(env);
-+    width = vector_get_width(env);
++    width   = vector_get_width(env);
 +    vlmax = vector_get_vlmax(env);
-+    /* MEM <= SEW <= XLEN */
-+    if (width < 64 || (width > sizeof(target_ulong) * 8)) {
-+        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
-+        return;
-+    }
-+    /* if wd, rd is writen the old value */
-+    if (vector_vtype_ill(env) ||
-+        (vector_overlap_vm_common(lmul, vm, vs3) && wd)) {
-+        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
-+        return;
-+    }
 +
-+    vector_lmul_check_reg(env, lmul, vs2, false);
-+    vector_lmul_check_reg(env, lmul, vs3, false);
++    if (vector_vtype_ill(env) || vector_overlap_vm_common(lmul, vm, rd)) {
++        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
++        return;
++    }
++    vector_lmul_check_reg(env, lmul, rs2, false);
++    vector_lmul_check_reg(env, lmul, rd, false);
 +
 +    for (i = 0; i < vlmax; i++) {
-+        src2 = vs2 + (i / (VLEN / width));
-+        src3 = vs3 + (i / (VLEN / width));
++        src2 = rs2 + (i / (VLEN / width));
++        dest = rd + (i / (VLEN / width));
 +        j = i % (VLEN / width);
 +        if (i < env->vfp.vstart) {
 +            continue;
 +        } else if (i < vl) {
 +            switch (width) {
-+            case 64:
++            case 8:
 +                if (vector_elem_mask(env, vm, width, lmul, i)) {
-+                    int64_t tmp;
-+                    idx    = (target_long)env->vfp.vreg[src2].s64[j];
-+                    addr   = idx + env->gpr[rs1];
-+
-+#ifdef CONFIG_SOFTMMU
-+                    tmp = helper_atomic_xchgq_le(env, addr,
-+                        env->vfp.vreg[src3].s64[j],
-+                        make_memop_idx(memop & ~MO_SIGN, mem_idx));
-+#else
-+                    tmp = helper_atomic_xchgq_le(env, addr,
-+                        env->vfp.vreg[src3].s64[j]);
-+#endif
-+
-+                    if (wd) {
-+                        env->vfp.vreg[src3].s64[j] = tmp;
-+                    }
-+                    env->vfp.vstart++;
++                    env->vfp.vreg[dest].u8[j] = env->gpr[rs1]
++                        & env->vfp.vreg[src2].u8[j];
 +                }
 +                break;
-+            default:
-+                riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
++            case 16:
++                if (vector_elem_mask(env, vm, width, lmul, i)) {
++                    env->vfp.vreg[dest].u16[j] = env->gpr[rs1]
++                        & env->vfp.vreg[src2].u16[j];
++                }
 +                break;
-+            }
-+        } else {
-+            vector_tail_amo(env, src3, j, width);
-+        }
-+    }
-+    env->vfp.vstart = 0;
-+}
-+
-+void VECTOR_HELPER(vamoaddw_v)(CPURISCVState *env, uint32_t wd, uint32_t vm,
-+    uint32_t rs1, uint32_t vs2, uint32_t vs3)
-+{
-+    int i, j, vl;
-+    target_long idx;
-+    uint32_t lmul, width, src2, src3, vlmax;
-+    target_ulong addr;
-+#ifdef CONFIG_SOFTMMU
-+    int mem_idx = cpu_mmu_index(env, false);
-+    TCGMemOp memop = MO_ALIGN | MO_TESL;
-+#endif
-+
-+    vl    = env->vfp.vl;
-+    lmul  = vector_get_lmul(env);
-+    width = vector_get_width(env);
-+    vlmax = vector_get_vlmax(env);
-+    /* MEM <= SEW <= XLEN */
-+    if (width < 32 || (width > sizeof(target_ulong) * 8)) {
-+        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
-+        return;
-+    }
-+    /* if wd, rd is writen the old value */
-+    if (vector_vtype_ill(env) ||
-+        (vector_overlap_vm_common(lmul, vm, vs3) && wd)) {
-+        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
-+        return;
-+    }
-+
-+    vector_lmul_check_reg(env, lmul, vs2, false);
-+    vector_lmul_check_reg(env, lmul, vs3, false);
-+
-+    for (i = 0; i < vlmax; i++) {
-+        src2 = vs2 + (i / (VLEN / width));
-+        src3 = vs3 + (i / (VLEN / width));
-+        j = i % (VLEN / width);
-+        if (i < env->vfp.vstart) {
-+            continue;
-+        } else if (i < vl) {
-+            switch (width) {
 +            case 32:
 +                if (vector_elem_mask(env, vm, width, lmul, i)) {
-+                    int32_t tmp;
-+                    idx    = (target_long)env->vfp.vreg[src2].s32[j];
-+                    addr   = idx + env->gpr[rs1];
-+#ifdef CONFIG_SOFTMMU
-+                    tmp = helper_atomic_fetch_addl_le(env, addr,
-+                        env->vfp.vreg[src3].s32[j],
-+                        make_memop_idx(memop & ~MO_SIGN, mem_idx));
-+#else
-+                    tmp = helper_atomic_fetch_addl_le(env, addr,
-+                        env->vfp.vreg[src3].s32[j]);
-+#endif
-+                    if (wd) {
-+                        env->vfp.vreg[src3].s32[j] = tmp;
-+                    }
-+                    env->vfp.vstart++;
++                    env->vfp.vreg[dest].u32[j] = env->gpr[rs1]
++                        & env->vfp.vreg[src2].u32[j];
 +                }
 +                break;
 +            case 64:
 +                if (vector_elem_mask(env, vm, width, lmul, i)) {
-+                    int64_t tmp;
-+                    idx    = (target_long)env->vfp.vreg[src2].s64[j];
-+                    addr   = idx + env->gpr[rs1];
-+
-+#ifdef CONFIG_SOFTMMU
-+                    tmp = (int64_t)(int32_t)helper_atomic_fetch_addl_le(env,
-+                        addr, env->vfp.vreg[src3].s64[j],
-+                        make_memop_idx(memop & ~MO_SIGN, mem_idx));
-+#else
-+                    tmp = (int64_t)(int32_t)helper_atomic_fetch_addl_le(env,
-+                        addr, env->vfp.vreg[src3].s64[j]);
-+#endif
-+                    if (wd) {
-+                        env->vfp.vreg[src3].s64[j] = tmp;
-+                    }
-+                    env->vfp.vstart++;
++                    env->vfp.vreg[dest].u64[j] =
++                        (uint64_t)extend_gpr(env->gpr[rs1])
++                        & env->vfp.vreg[src2].u64[j];
 +                }
 +                break;
 +            default:
@@ -452,158 +318,60 @@ index 0ac8c74..9ebf70d 100644
 +                break;
 +            }
 +        } else {
-+            vector_tail_amo(env, src3, j, width);
++            vector_tail_common(env, dest, j, width);
 +        }
 +    }
 +    env->vfp.vstart = 0;
 +}
-+void VECTOR_HELPER(vamoaddd_v)(CPURISCVState *env, uint32_t wd, uint32_t vm,
-+    uint32_t rs1, uint32_t vs2, uint32_t vs3)
++
++void VECTOR_HELPER(vand_vi)(CPURISCVState *env, uint32_t vm, uint32_t rs1,
++    uint32_t rs2, uint32_t rd)
 +{
 +    int i, j, vl;
-+    target_long idx;
-+    uint32_t lmul, width, src2, src3, vlmax;
-+    target_ulong addr;
-+#ifdef CONFIG_SOFTMMU
-+    int mem_idx = cpu_mmu_index(env, false);
-+    TCGMemOp memop = MO_ALIGN | MO_TEQ;
-+#endif
++    uint32_t lmul, width, src2, dest, vlmax;
 +
-+    vl    = env->vfp.vl;
++    vl = env->vfp.vl;
 +    lmul  = vector_get_lmul(env);
-+    width = vector_get_width(env);
++    width   = vector_get_width(env);
 +    vlmax = vector_get_vlmax(env);
-+    /* MEM <= SEW <= XLEN */
-+    if (width < 64 || (width > sizeof(target_ulong) * 8)) {
-+        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
-+        return;
-+    }
-+    /* if wd, rd is writen the old value */
-+    if (vector_vtype_ill(env) ||
-+        (vector_overlap_vm_common(lmul, vm, vs3) && wd)) {
-+        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
-+        return;
-+    }
 +
-+    vector_lmul_check_reg(env, lmul, vs2, false);
-+    vector_lmul_check_reg(env, lmul, vs3, false);
++    if (vector_vtype_ill(env) || vector_overlap_vm_common(lmul, vm, rd)) {
++        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
++        return;
++    }
++    vector_lmul_check_reg(env, lmul, rs2, false);
++    vector_lmul_check_reg(env, lmul, rd, false);
 +
 +    for (i = 0; i < vlmax; i++) {
-+        src2 = vs2 + (i / (VLEN / width));
-+        src3 = vs3 + (i / (VLEN / width));
++        src2 = rs2 + (i / (VLEN / width));
++        dest = rd + (i / (VLEN / width));
 +        j = i % (VLEN / width);
 +        if (i < env->vfp.vstart) {
 +            continue;
 +        } else if (i < vl) {
 +            switch (width) {
-+            case 64:
++            case 8:
 +                if (vector_elem_mask(env, vm, width, lmul, i)) {
-+                    int64_t tmp;
-+                    idx    = (target_long)env->vfp.vreg[src2].s64[j];
-+                    addr   = idx + env->gpr[rs1];
-+
-+#ifdef CONFIG_SOFTMMU
-+                    tmp = helper_atomic_fetch_addq_le(env, addr,
-+                        env->vfp.vreg[src3].s64[j],
-+                        make_memop_idx(memop & ~MO_SIGN, mem_idx));
-+#else
-+                    tmp = helper_atomic_fetch_addq_le(env, addr,
-+                        env->vfp.vreg[src3].s64[j]);
-+#endif
-+                    if (wd) {
-+                        env->vfp.vreg[src3].s64[j] = tmp;
-+                    }
-+                    env->vfp.vstart++;
++                    env->vfp.vreg[dest].s8[j] = sign_extend(rs1, 5)
++                        & env->vfp.vreg[src2].s8[j];
 +                }
 +                break;
-+            default:
-+                riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
++            case 16:
++                if (vector_elem_mask(env, vm, width, lmul, i)) {
++                    env->vfp.vreg[dest].s16[j] = sign_extend(rs1, 5)
++                        & env->vfp.vreg[src2].s16[j];
++                }
 +                break;
-+            }
-+        } else {
-+            vector_tail_amo(env, src3, j, width);
-+        }
-+    }
-+
-+    env->vfp.vstart = 0;
-+}
-+
-+void VECTOR_HELPER(vamoxorw_v)(CPURISCVState *env, uint32_t wd, uint32_t vm,
-+    uint32_t rs1, uint32_t vs2, uint32_t vs3)
-+{
-+    int i, j, vl;
-+    target_long idx;
-+    uint32_t lmul, width, src2, src3, vlmax;
-+    target_ulong addr;
-+#ifdef CONFIG_SOFTMMU
-+    int mem_idx = cpu_mmu_index(env, false);
-+    TCGMemOp memop = MO_ALIGN | MO_TESL;
-+#endif
-+
-+    vl    = env->vfp.vl;
-+    lmul  = vector_get_lmul(env);
-+    width = vector_get_width(env);
-+    vlmax = vector_get_vlmax(env);
-+    /* MEM <= SEW <= XLEN */
-+    if (width < 32 || (width > sizeof(target_ulong) * 8)) {
-+        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
-+        return;
-+    }
-+    /* if wd, rd is writen the old value */
-+    if (vector_vtype_ill(env) ||
-+        (vector_overlap_vm_common(lmul, vm, vs3) && wd)) {
-+        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
-+        return;
-+    }
-+
-+    vector_lmul_check_reg(env, lmul, vs2, false);
-+    vector_lmul_check_reg(env, lmul, vs3, false);
-+
-+    for (i = 0; i < vlmax; i++) {
-+        src2 = vs2 + (i / (VLEN / width));
-+        src3 = vs3 + (i / (VLEN / width));
-+        j = i % (VLEN / width);
-+        if (i < env->vfp.vstart) {
-+            continue;
-+        } else if (i < vl) {
-+            switch (width) {
 +            case 32:
 +                if (vector_elem_mask(env, vm, width, lmul, i)) {
-+                    int32_t tmp;
-+                    idx    = (target_long)env->vfp.vreg[src2].s32[j];
-+                    addr   = idx + env->gpr[rs1];
-+#ifdef CONFIG_SOFTMMU
-+                    tmp = helper_atomic_fetch_xorl_le(env, addr,
-+                        env->vfp.vreg[src3].s32[j],
-+                        make_memop_idx(memop & ~MO_SIGN, mem_idx));
-+#else
-+                    tmp = helper_atomic_fetch_xorl_le(env, addr,
-+                        env->vfp.vreg[src3].s32[j]);
-+#endif
-+                    if (wd) {
-+                        env->vfp.vreg[src3].s32[j] = tmp;
-+                    }
-+                    env->vfp.vstart++;
++                    env->vfp.vreg[dest].s32[j] = sign_extend(rs1, 5)
++                        & env->vfp.vreg[src2].s32[j];
 +                }
 +                break;
 +            case 64:
 +                if (vector_elem_mask(env, vm, width, lmul, i)) {
-+                    int64_t tmp;
-+                    idx    = (target_long)env->vfp.vreg[src2].s64[j];
-+                    addr   = idx + env->gpr[rs1];
-+
-+#ifdef CONFIG_SOFTMMU
-+                    tmp = (int64_t)(int32_t)helper_atomic_fetch_xorl_le(env,
-+                        addr, env->vfp.vreg[src3].s64[j],
-+                        make_memop_idx(memop & ~MO_SIGN, mem_idx));
-+#else
-+                    tmp = (int64_t)(int32_t)helper_atomic_fetch_xorl_le(env,
-+                        addr, env->vfp.vreg[src3].s64[j]);
-+#endif
-+                    if (wd) {
-+                        env->vfp.vreg[src3].s64[j] = tmp;
-+                    }
-+                    env->vfp.vstart++;
++                    env->vfp.vreg[dest].s64[j] = sign_extend(rs1, 5)
++                        & env->vfp.vreg[src2].s64[j];
 +                }
 +                break;
 +            default:
@@ -611,158 +379,62 @@ index 0ac8c74..9ebf70d 100644
 +                break;
 +            }
 +        } else {
-+            vector_tail_amo(env, src3, j, width);
++            vector_tail_common(env, dest, j, width);
 +        }
 +    }
 +    env->vfp.vstart = 0;
 +}
 +
-+void VECTOR_HELPER(vamoxord_v)(CPURISCVState *env, uint32_t wd, uint32_t vm,
-+    uint32_t rs1, uint32_t vs2, uint32_t vs3)
++void VECTOR_HELPER(vor_vv)(CPURISCVState *env, uint32_t vm, uint32_t rs1,
++    uint32_t rs2, uint32_t rd)
 +{
 +    int i, j, vl;
-+    target_long idx;
-+    uint32_t lmul, width, src2, src3, vlmax;
-+    target_ulong addr;
-+#ifdef CONFIG_SOFTMMU
-+    int mem_idx = cpu_mmu_index(env, false);
-+    TCGMemOp memop = MO_ALIGN | MO_TESL;
-+#endif
++    uint32_t lmul, width, src1, src2, dest, vlmax;
 +
-+    vl    = env->vfp.vl;
++    vl = env->vfp.vl;
 +    lmul  = vector_get_lmul(env);
-+    width = vector_get_width(env);
++    width   = vector_get_width(env);
 +    vlmax = vector_get_vlmax(env);
-+    /* MEM <= SEW <= XLEN */
-+    if (width < 64 || (width > sizeof(target_ulong) * 8)) {
-+        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
-+        return;
-+    }
-+    /* if wd, rd is writen the old value */
-+    if (vector_vtype_ill(env) ||
-+        (vector_overlap_vm_common(lmul, vm, vs3) && wd)) {
-+        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
-+        return;
-+    }
 +
-+    vector_lmul_check_reg(env, lmul, vs2, false);
-+    vector_lmul_check_reg(env, lmul, vs3, false);
++    if (vector_vtype_ill(env) || vector_overlap_vm_common(lmul, vm, rd)) {
++        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
++        return;
++    }
++    vector_lmul_check_reg(env, lmul, rs1, false);
++    vector_lmul_check_reg(env, lmul, rs2, false);
++    vector_lmul_check_reg(env, lmul, rd, false);
 +
 +    for (i = 0; i < vlmax; i++) {
-+        src2 = vs2 + (i / (VLEN / width));
-+        src3 = vs3 + (i / (VLEN / width));
++        src1 = rs1 + (i / (VLEN / width));
++        src2 = rs2 + (i / (VLEN / width));
++        dest = rd + (i / (VLEN / width));
 +        j = i % (VLEN / width);
 +        if (i < env->vfp.vstart) {
 +            continue;
 +        } else if (i < vl) {
 +            switch (width) {
-+            case 64:
++            case 8:
 +                if (vector_elem_mask(env, vm, width, lmul, i)) {
-+                    int64_t tmp;
-+                    idx    = (target_long)env->vfp.vreg[src2].s64[j];
-+                    addr   = idx + env->gpr[rs1];
-+
-+#ifdef CONFIG_SOFTMMU
-+                    tmp = helper_atomic_fetch_xorq_le(env, addr,
-+                        env->vfp.vreg[src3].s64[j],
-+                        make_memop_idx(memop & ~MO_SIGN, mem_idx));
-+#else
-+                    tmp = helper_atomic_fetch_xorq_le(env, addr,
-+                        env->vfp.vreg[src3].s64[j]);
-+#endif
-+                    if (wd) {
-+                        env->vfp.vreg[src3].s64[j] = tmp;
-+                    }
-+                    env->vfp.vstart++;
++                    env->vfp.vreg[dest].u8[j] = env->vfp.vreg[src1].u8[j]
++                        | env->vfp.vreg[src2].u8[j];
 +                }
 +                break;
-+            default:
-+                riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
++            case 16:
++                if (vector_elem_mask(env, vm, width, lmul, i)) {
++                    env->vfp.vreg[dest].u16[j] = env->vfp.vreg[src1].u16[j]
++                        | env->vfp.vreg[src2].u16[j];
++                }
 +                break;
-+            }
-+        } else {
-+            vector_tail_amo(env, src3, j, width);
-+        }
-+    }
-+    env->vfp.vstart = 0;
-+}
-+
-+void VECTOR_HELPER(vamoandw_v)(CPURISCVState *env, uint32_t wd, uint32_t vm,
-+    uint32_t rs1, uint32_t vs2, uint32_t vs3)
-+{
-+    int i, j, vl;
-+    target_long idx;
-+    uint32_t lmul, width, src2, src3, vlmax;
-+    target_ulong addr;
-+#ifdef CONFIG_SOFTMMU
-+    int mem_idx = cpu_mmu_index(env, false);
-+    TCGMemOp memop = MO_ALIGN | MO_TESL;
-+#endif
-+
-+    vl    = env->vfp.vl;
-+    lmul  = vector_get_lmul(env);
-+    width = vector_get_width(env);
-+    vlmax = vector_get_vlmax(env);
-+    /* MEM <= SEW <= XLEN */
-+    if (width < 32 || (width > sizeof(target_ulong) * 8)) {
-+        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
-+        return;
-+    }
-+    /* if wd, rd is writen the old value */
-+    if (vector_vtype_ill(env) ||
-+        (vector_overlap_vm_common(lmul, vm, vs3) && wd)) {
-+        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
-+        return;
-+    }
-+
-+    vector_lmul_check_reg(env, lmul, vs2, false);
-+    vector_lmul_check_reg(env, lmul, vs3, false);
-+
-+    for (i = 0; i < vlmax; i++) {
-+        src2 = vs2 + (i / (VLEN / width));
-+        src3 = vs3 + (i / (VLEN / width));
-+        j = i % (VLEN / width);
-+        if (i < env->vfp.vstart) {
-+            continue;
-+        } else if (i < vl) {
-+            switch (width) {
 +            case 32:
 +                if (vector_elem_mask(env, vm, width, lmul, i)) {
-+                    int32_t tmp;
-+                    idx    = (target_long)env->vfp.vreg[src2].s32[j];
-+                    addr   = idx + env->gpr[rs1];
-+#ifdef CONFIG_SOFTMMU
-+                    tmp = helper_atomic_fetch_andl_le(env, addr,
-+                        env->vfp.vreg[src3].s32[j],
-+                        make_memop_idx(memop & ~MO_SIGN, mem_idx));
-+#else
-+                    tmp = helper_atomic_fetch_andl_le(env, addr,
-+                        env->vfp.vreg[src3].s32[j]);
-+#endif
-+                    if (wd) {
-+                        env->vfp.vreg[src3].s32[j] = tmp;
-+                    }
-+                    env->vfp.vstart++;
++                    env->vfp.vreg[dest].u32[j] = env->vfp.vreg[src1].u32[j]
++                        | env->vfp.vreg[src2].u32[j];
 +                }
 +                break;
 +            case 64:
 +                if (vector_elem_mask(env, vm, width, lmul, i)) {
-+                    int64_t tmp;
-+                    idx    = (target_long)env->vfp.vreg[src2].s64[j];
-+                    addr   = idx + env->gpr[rs1];
-+
-+#ifdef CONFIG_SOFTMMU
-+                    tmp = (int64_t)(int32_t)helper_atomic_fetch_andl_le(env,
-+                        addr, env->vfp.vreg[src3].s64[j],
-+                        make_memop_idx(memop & ~MO_SIGN, mem_idx));
-+#else
-+                    tmp = (int64_t)(int32_t)helper_atomic_fetch_andl_le(env,
-+                        addr, env->vfp.vreg[src3].s64[j]);
-+#endif
-+                    if (wd) {
-+                        env->vfp.vreg[src3].s64[j] = tmp;
-+                    }
-+                    env->vfp.vstart++;
++                    env->vfp.vreg[dest].u64[j] = env->vfp.vreg[src1].u64[j]
++                        | env->vfp.vreg[src2].u64[j];
 +                }
 +                break;
 +            default:
@@ -770,159 +442,60 @@ index 0ac8c74..9ebf70d 100644
 +                break;
 +            }
 +        } else {
-+            vector_tail_amo(env, src3, j, width);
++            vector_tail_common(env, dest, j, width);
 +        }
 +    }
-+
 +    env->vfp.vstart = 0;
 +}
-+
-+void VECTOR_HELPER(vamoandd_v)(CPURISCVState *env, uint32_t wd, uint32_t vm,
-+    uint32_t rs1, uint32_t vs2, uint32_t vs3)
++void VECTOR_HELPER(vor_vx)(CPURISCVState *env, uint32_t vm, uint32_t rs1,
++    uint32_t rs2, uint32_t rd)
 +{
 +    int i, j, vl;
-+    target_long idx;
-+    uint32_t lmul, width, src2, src3, vlmax;
-+    target_ulong addr;
-+#ifdef CONFIG_SOFTMMU
-+    int mem_idx = cpu_mmu_index(env, false);
-+    TCGMemOp memop = MO_ALIGN | MO_TEQ;
-+#endif
++    uint32_t lmul, width, src2, dest, vlmax;
 +
-+    vl    = env->vfp.vl;
++    vl = env->vfp.vl;
 +    lmul  = vector_get_lmul(env);
-+    width = vector_get_width(env);
++    width   = vector_get_width(env);
 +    vlmax = vector_get_vlmax(env);
-+    /* MEM <= SEW <= XLEN */
-+    if (width < 64 || (width > sizeof(target_ulong) * 8)) {
-+        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
-+        return;
-+    }
-+    /* if wd, rd is writen the old value */
-+    if (vector_vtype_ill(env) ||
-+        (vector_overlap_vm_common(lmul, vm, vs3) && wd)) {
-+        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
-+        return;
-+    }
 +
-+    vector_lmul_check_reg(env, lmul, vs2, false);
-+    vector_lmul_check_reg(env, lmul, vs3, false);
++    if (vector_vtype_ill(env) || vector_overlap_vm_common(lmul, vm, rd)) {
++        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
++        return;
++    }
++    vector_lmul_check_reg(env, lmul, rs2, false);
++    vector_lmul_check_reg(env, lmul, rd, false);
 +
 +    for (i = 0; i < vlmax; i++) {
-+        src2 = vs2 + (i / (VLEN / width));
-+        src3 = vs3 + (i / (VLEN / width));
++        src2 = rs2 + (i / (VLEN / width));
++        dest = rd + (i / (VLEN / width));
 +        j = i % (VLEN / width);
 +        if (i < env->vfp.vstart) {
 +            continue;
 +        } else if (i < vl) {
 +            switch (width) {
-+            case 64:
++            case 8:
 +                if (vector_elem_mask(env, vm, width, lmul, i)) {
-+                    int64_t tmp;
-+                    idx    = (target_long)env->vfp.vreg[src2].s64[j];
-+                    addr   = idx + env->gpr[rs1];
-+
-+#ifdef CONFIG_SOFTMMU
-+                    tmp = helper_atomic_fetch_andq_le(env, addr,
-+                        env->vfp.vreg[src3].s64[j],
-+                        make_memop_idx(memop & ~MO_SIGN, mem_idx));
-+#else
-+                    tmp = helper_atomic_fetch_andq_le(env, addr,
-+                        env->vfp.vreg[src3].s64[j]);
-+#endif
-+                    if (wd) {
-+                        env->vfp.vreg[src3].s64[j] = tmp;
-+                    }
-+                    env->vfp.vstart++;
++                    env->vfp.vreg[dest].u8[j] = env->gpr[rs1]
++                        | env->vfp.vreg[src2].u8[j];
 +                }
 +                break;
-+            default:
-+                riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
++            case 16:
++                if (vector_elem_mask(env, vm, width, lmul, i)) {
++                    env->vfp.vreg[dest].u16[j] = env->gpr[rs1]
++                        | env->vfp.vreg[src2].u16[j];
++                }
 +                break;
-+            }
-+        } else {
-+            vector_tail_amo(env, src3, j, width);
-+        }
-+    }
-+    env->vfp.vstart = 0;
-+}
-+
-+void VECTOR_HELPER(vamoorw_v)(CPURISCVState *env, uint32_t wd, uint32_t vm,
-+    uint32_t rs1, uint32_t vs2, uint32_t vs3)
-+{
-+    int i, j, vl;
-+    target_long idx;
-+    uint32_t lmul, width, src2, src3, vlmax;
-+    target_ulong addr;
-+#ifdef CONFIG_SOFTMMU
-+    int mem_idx = cpu_mmu_index(env, false);
-+    TCGMemOp memop = MO_ALIGN | MO_TESL;
-+#endif
-+
-+    vl    = env->vfp.vl;
-+    lmul  = vector_get_lmul(env);
-+    width = vector_get_width(env);
-+    vlmax = vector_get_vlmax(env);
-+    /* MEM <= SEW <= XLEN */
-+    if (width < 32 || (width > sizeof(target_ulong) * 8)) {
-+        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
-+        return;
-+    }
-+    /* if wd, rd is writen the old value */
-+    if (vector_vtype_ill(env) ||
-+        (vector_overlap_vm_common(lmul, vm, vs3) && wd)) {
-+        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
-+        return;
-+    }
-+
-+    vector_lmul_check_reg(env, lmul, vs2, false);
-+    vector_lmul_check_reg(env, lmul, vs3, false);
-+
-+    for (i = 0; i < vlmax; i++) {
-+        src2 = vs2 + (i / (VLEN / width));
-+        src3 = vs3 + (i / (VLEN / width));
-+        j = i % (VLEN / width);
-+        if (i < env->vfp.vstart) {
-+            continue;
-+        } else if (i < vl) {
-+            switch (width) {
 +            case 32:
 +                if (vector_elem_mask(env, vm, width, lmul, i)) {
-+                    int32_t tmp;
-+                    idx    = (target_long)env->vfp.vreg[src2].s32[j];
-+                    addr   = idx + env->gpr[rs1];
-+#ifdef CONFIG_SOFTMMU
-+                    tmp = helper_atomic_fetch_orl_le(env, addr,
-+                        env->vfp.vreg[src3].s32[j],
-+                        make_memop_idx(memop & ~MO_SIGN, mem_idx));
-+#else
-+                    tmp = helper_atomic_fetch_orl_le(env, addr,
-+                        env->vfp.vreg[src3].s32[j]);
-+#endif
-+                    if (wd) {
-+                        env->vfp.vreg[src3].s32[j] = tmp;
-+                    }
-+                    env->vfp.vstart++;
++                    env->vfp.vreg[dest].u32[j] = env->gpr[rs1]
++                        | env->vfp.vreg[src2].u32[j];
 +                }
 +                break;
 +            case 64:
 +                if (vector_elem_mask(env, vm, width, lmul, i)) {
-+                    int64_t tmp;
-+                    idx    = (target_long)env->vfp.vreg[src2].s64[j];
-+                    addr   = idx + env->gpr[rs1];
-+
-+#ifdef CONFIG_SOFTMMU
-+                    tmp = (int64_t)(int32_t)helper_atomic_fetch_orl_le(env,
-+                        addr, env->vfp.vreg[src3].s64[j],
-+                        make_memop_idx(memop & ~MO_SIGN, mem_idx));
-+#else
-+                    tmp = (int64_t)(int32_t)helper_atomic_fetch_orl_le(env,
-+                        addr, env->vfp.vreg[src3].s64[j]);
-+#endif
-+                    if (wd) {
-+                        env->vfp.vreg[src3].s64[j] = tmp;
-+                    }
-+                    env->vfp.vstart++;
++                    env->vfp.vreg[dest].u64[j] =
++                        (uint64_t)extend_gpr(env->gpr[rs1])
++                        | env->vfp.vreg[src2].u64[j];
 +                }
 +                break;
 +            default:
@@ -930,158 +503,59 @@ index 0ac8c74..9ebf70d 100644
 +                break;
 +            }
 +        } else {
-+            vector_tail_amo(env, src3, j, width);
++            vector_tail_common(env, dest, j, width);
 +        }
 +    }
 +    env->vfp.vstart = 0;
 +}
-+
-+void VECTOR_HELPER(vamoord_v)(CPURISCVState *env, uint32_t wd, uint32_t vm,
-+    uint32_t rs1, uint32_t vs2, uint32_t vs3)
++void VECTOR_HELPER(vor_vi)(CPURISCVState *env, uint32_t vm, uint32_t rs1,
++    uint32_t rs2, uint32_t rd)
 +{
 +    int i, j, vl;
-+    target_long idx;
-+    uint32_t lmul, width, src2, src3, vlmax;
-+    target_ulong addr;
-+#ifdef CONFIG_SOFTMMU
-+    int mem_idx = cpu_mmu_index(env, false);
-+    TCGMemOp memop = MO_ALIGN | MO_TEQ;
-+#endif
++    uint32_t lmul, width, src2, dest, vlmax;
 +
-+    vl    = env->vfp.vl;
++    vl = env->vfp.vl;
 +    lmul  = vector_get_lmul(env);
-+    width = vector_get_width(env);
++    width   = vector_get_width(env);
 +    vlmax = vector_get_vlmax(env);
-+    /* MEM <= SEW <= XLEN */
-+    if (width < 64 || (width > sizeof(target_ulong) * 8)) {
-+        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
-+        return;
-+    }
-+    /* if wd, rd is writen the old value */
-+    if (vector_vtype_ill(env) ||
-+        (vector_overlap_vm_common(lmul, vm, vs3) && wd)) {
-+        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
-+        return;
-+    }
 +
-+    vector_lmul_check_reg(env, lmul, vs2, false);
-+    vector_lmul_check_reg(env, lmul, vs3, false);
++    if (vector_vtype_ill(env) || vector_overlap_vm_common(lmul, vm, rd)) {
++        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
++        return;
++    }
++    vector_lmul_check_reg(env, lmul, rs2, false);
++    vector_lmul_check_reg(env, lmul, rd, false);
 +
 +    for (i = 0; i < vlmax; i++) {
-+        src2 = vs2 + (i / (VLEN / width));
-+        src3 = vs3 + (i / (VLEN / width));
++        src2 = rs2 + (i / (VLEN / width));
++        dest = rd + (i / (VLEN / width));
 +        j = i % (VLEN / width);
 +        if (i < env->vfp.vstart) {
 +            continue;
 +        } else if (i < vl) {
 +            switch (width) {
-+            case 64:
++            case 8:
 +                if (vector_elem_mask(env, vm, width, lmul, i)) {
-+                    int64_t tmp;
-+                    idx    = (target_long)env->vfp.vreg[src2].s64[j];
-+                    addr   = idx + env->gpr[rs1];
-+
-+#ifdef CONFIG_SOFTMMU
-+                    tmp = helper_atomic_fetch_orq_le(env, addr,
-+                        env->vfp.vreg[src3].s64[j],
-+                        make_memop_idx(memop & ~MO_SIGN, mem_idx));
-+#else
-+                    tmp = helper_atomic_fetch_orq_le(env, addr,
-+                        env->vfp.vreg[src3].s64[j]);
-+#endif
-+                    if (wd) {
-+                        env->vfp.vreg[src3].s64[j] = tmp;
-+                    }
-+                    env->vfp.vstart++;
++                    env->vfp.vreg[dest].s8[j] = sign_extend(rs1, 5)
++                        | env->vfp.vreg[src2].s8[j];
 +                }
 +                break;
-+            default:
-+                riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
++            case 16:
++                if (vector_elem_mask(env, vm, width, lmul, i)) {
++                    env->vfp.vreg[dest].s16[j] = sign_extend(rs1, 5)
++                        | env->vfp.vreg[src2].s16[j];
++                }
 +                break;
-+            }
-+        } else {
-+            vector_tail_amo(env, src3, j, width);
-+        }
-+    }
-+    env->vfp.vstart = 0;
-+}
-+
-+void VECTOR_HELPER(vamominw_v)(CPURISCVState *env, uint32_t wd, uint32_t vm,
-+    uint32_t rs1, uint32_t vs2, uint32_t vs3)
-+{
-+    int i, j, vl;
-+    target_long idx;
-+    uint32_t lmul, width, src2, src3, vlmax;
-+    target_ulong addr;
-+#ifdef CONFIG_SOFTMMU
-+    int mem_idx = cpu_mmu_index(env, false);
-+    TCGMemOp memop = MO_ALIGN | MO_TESL;
-+#endif
-+
-+    vl    = env->vfp.vl;
-+    lmul  = vector_get_lmul(env);
-+    width = vector_get_width(env);
-+    vlmax = vector_get_vlmax(env);
-+    /* MEM <= SEW <= XLEN */
-+    if (width < 32 || (width > sizeof(target_ulong) * 8)) {
-+        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
-+        return;
-+    }
-+    /* if wd, rd is writen the old value */
-+    if (vector_vtype_ill(env) ||
-+        (vector_overlap_vm_common(lmul, vm, vs3) && wd)) {
-+        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
-+        return;
-+    }
-+
-+    vector_lmul_check_reg(env, lmul, vs2, false);
-+    vector_lmul_check_reg(env, lmul, vs3, false);
-+
-+    for (i = 0; i < vlmax; i++) {
-+        src2 = vs2 + (i / (VLEN / width));
-+        src3 = vs3 + (i / (VLEN / width));
-+        j = i % (VLEN / width);
-+        if (i < env->vfp.vstart) {
-+            continue;
-+        } else if (i < vl) {
-+            switch (width) {
 +            case 32:
 +                if (vector_elem_mask(env, vm, width, lmul, i)) {
-+                    int32_t tmp;
-+                    idx    = (target_long)env->vfp.vreg[src2].s32[j];
-+                    addr   = idx + env->gpr[rs1];
-+#ifdef CONFIG_SOFTMMU
-+                    tmp = helper_atomic_fetch_sminl_le(env, addr,
-+                        env->vfp.vreg[src3].s32[j],
-+                        make_memop_idx(memop & ~MO_SIGN, mem_idx));
-+#else
-+                    tmp = helper_atomic_fetch_sminl_le(env, addr,
-+                        env->vfp.vreg[src3].s32[j]);
-+#endif
-+                    if (wd) {
-+                        env->vfp.vreg[src3].s32[j] = tmp;
-+                    }
-+                    env->vfp.vstart++;
++                    env->vfp.vreg[dest].s32[j] = sign_extend(rs1, 5)
++                        | env->vfp.vreg[src2].s32[j];
 +                }
 +                break;
 +            case 64:
 +                if (vector_elem_mask(env, vm, width, lmul, i)) {
-+                    int64_t tmp;
-+                    idx    = (target_long)env->vfp.vreg[src2].s64[j];
-+                    addr   = idx + env->gpr[rs1];
-+
-+#ifdef CONFIG_SOFTMMU
-+                    tmp = (int64_t)(int32_t)helper_atomic_fetch_sminl_le(env,
-+                        addr, env->vfp.vreg[src3].s64[j],
-+                        make_memop_idx(memop & ~MO_SIGN, mem_idx));
-+#else
-+                    tmp = (int64_t)(int32_t)helper_atomic_fetch_sminl_le(env,
-+                        addr, env->vfp.vreg[src3].s64[j]);
-+#endif
-+                    if (wd) {
-+                        env->vfp.vreg[src3].s64[j] = tmp;
-+                    }
-+                    env->vfp.vstart++;
++                    env->vfp.vreg[dest].s64[j] = sign_extend(rs1, 5)
++                        | env->vfp.vreg[src2].s64[j];
 +                }
 +                break;
 +            default:
@@ -1089,158 +563,62 @@ index 0ac8c74..9ebf70d 100644
 +                break;
 +            }
 +        } else {
-+            vector_tail_amo(env, src3, j, width);
++            vector_tail_common(env, dest, j, width);
 +        }
 +    }
 +    env->vfp.vstart = 0;
 +}
 +
-+void VECTOR_HELPER(vamomind_v)(CPURISCVState *env, uint32_t wd, uint32_t vm,
-+    uint32_t rs1, uint32_t vs2, uint32_t vs3)
++void VECTOR_HELPER(vxor_vv)(CPURISCVState *env, uint32_t vm, uint32_t rs1,
++    uint32_t rs2, uint32_t rd)
 +{
 +    int i, j, vl;
-+    target_long idx;
-+    uint32_t lmul, width, src2, src3, vlmax;
-+    target_ulong addr;
-+#ifdef CONFIG_SOFTMMU
-+    int mem_idx = cpu_mmu_index(env, false);
-+    TCGMemOp memop = MO_ALIGN | MO_TEQ;
-+#endif
++    uint32_t lmul, width, src1, src2, dest, vlmax;
 +
-+    vl    = env->vfp.vl;
++    vl = env->vfp.vl;
 +    lmul  = vector_get_lmul(env);
-+    width = vector_get_width(env);
++    width   = vector_get_width(env);
 +    vlmax = vector_get_vlmax(env);
-+    /* MEM <= SEW <= XLEN */
-+    if (width < 64 || (width > sizeof(target_ulong) * 8)) {
-+        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
-+        return;
-+    }
-+    /* if wd, rd is writen the old value */
-+    if (vector_vtype_ill(env) ||
-+        (vector_overlap_vm_common(lmul, vm, vs3) && wd)) {
-+        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
-+        return;
-+    }
 +
-+    vector_lmul_check_reg(env, lmul, vs2, false);
-+    vector_lmul_check_reg(env, lmul, vs3, false);
++    if (vector_vtype_ill(env) || vector_overlap_vm_common(lmul, vm, rd)) {
++        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
++        return;
++    }
++    vector_lmul_check_reg(env, lmul, rs1, false);
++    vector_lmul_check_reg(env, lmul, rs2, false);
++    vector_lmul_check_reg(env, lmul, rd, false);
 +
 +    for (i = 0; i < vlmax; i++) {
-+        src2 = vs2 + (i / (VLEN / width));
-+        src3 = vs3 + (i / (VLEN / width));
++        src1 = rs1 + (i / (VLEN / width));
++        src2 = rs2 + (i / (VLEN / width));
++        dest = rd + (i / (VLEN / width));
 +        j = i % (VLEN / width);
 +        if (i < env->vfp.vstart) {
 +            continue;
 +        } else if (i < vl) {
 +            switch (width) {
-+            case 64:
++            case 8:
 +                if (vector_elem_mask(env, vm, width, lmul, i)) {
-+                    int64_t tmp;
-+                    idx    = (target_long)env->vfp.vreg[src2].s64[j];
-+                    addr   = idx + env->gpr[rs1];
-+
-+#ifdef CONFIG_SOFTMMU
-+                    tmp = helper_atomic_fetch_sminq_le(env, addr,
-+                        env->vfp.vreg[src3].s64[j],
-+                        make_memop_idx(memop & ~MO_SIGN, mem_idx));
-+#else
-+                    tmp = helper_atomic_fetch_sminq_le(env, addr,
-+                        env->vfp.vreg[src3].s64[j]);
-+#endif
-+                    if (wd) {
-+                        env->vfp.vreg[src3].s64[j] = tmp;
-+                    }
-+                    env->vfp.vstart++;
++                    env->vfp.vreg[dest].u8[j] = env->vfp.vreg[src1].u8[j]
++                        ^ env->vfp.vreg[src2].u8[j];
 +                }
 +                break;
-+            default:
-+                riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
++            case 16:
++                if (vector_elem_mask(env, vm, width, lmul, i)) {
++                    env->vfp.vreg[dest].u16[j] = env->vfp.vreg[src1].u16[j]
++                        ^ env->vfp.vreg[src2].u16[j];
++                }
 +                break;
-+            }
-+        } else {
-+            vector_tail_amo(env, src3, j, width);
-+        }
-+    }
-+    env->vfp.vstart = 0;
-+}
-+
-+void VECTOR_HELPER(vamomaxw_v)(CPURISCVState *env, uint32_t wd, uint32_t vm,
-+    uint32_t rs1, uint32_t vs2, uint32_t vs3)
-+{
-+    int i, j, vl;
-+    target_long idx;
-+    uint32_t lmul, width, src2, src3, vlmax;
-+    target_ulong addr;
-+#ifdef CONFIG_SOFTMMU
-+    int mem_idx = cpu_mmu_index(env, false);
-+    TCGMemOp memop = MO_ALIGN | MO_TESL;
-+#endif
-+
-+    vl    = env->vfp.vl;
-+    lmul  = vector_get_lmul(env);
-+    width = vector_get_width(env);
-+    vlmax = vector_get_vlmax(env);
-+    /* MEM <= SEW <= XLEN */
-+    if (width < 32 || (width > sizeof(target_ulong) * 8)) {
-+        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
-+        return;
-+    }
-+    /* if wd, rd is writen the old value */
-+    if (vector_vtype_ill(env) ||
-+        (vector_overlap_vm_common(lmul, vm, vs3) && wd)) {
-+        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
-+        return;
-+    }
-+
-+    vector_lmul_check_reg(env, lmul, vs2, false);
-+    vector_lmul_check_reg(env, lmul, vs3, false);
-+
-+    for (i = 0; i < vlmax; i++) {
-+        src2 = vs2 + (i / (VLEN / width));
-+        src3 = vs3 + (i / (VLEN / width));
-+        j = i % (VLEN / width);
-+        if (i < env->vfp.vstart) {
-+            continue;
-+        } else if (i < vl) {
-+            switch (width) {
 +            case 32:
 +                if (vector_elem_mask(env, vm, width, lmul, i)) {
-+                    int32_t tmp;
-+                    idx    = (target_long)env->vfp.vreg[src2].s32[j];
-+                    addr   = idx + env->gpr[rs1];
-+#ifdef CONFIG_SOFTMMU
-+                    tmp = helper_atomic_fetch_smaxl_le(env, addr,
-+                        env->vfp.vreg[src3].s32[j],
-+                        make_memop_idx(memop & ~MO_SIGN, mem_idx));
-+#else
-+                    tmp = helper_atomic_fetch_smaxl_le(env, addr,
-+                        env->vfp.vreg[src3].s32[j]);
-+#endif
-+                    if (wd) {
-+                        env->vfp.vreg[src3].s32[j] = tmp;
-+                    }
-+                    env->vfp.vstart++;
++                    env->vfp.vreg[dest].u32[j] = env->vfp.vreg[src1].u32[j]
++                        ^ env->vfp.vreg[src2].u32[j];
 +                }
 +                break;
 +            case 64:
 +                if (vector_elem_mask(env, vm, width, lmul, i)) {
-+                    int64_t tmp;
-+                    idx    = (target_long)env->vfp.vreg[src2].s64[j];
-+                    addr   = idx + env->gpr[rs1];
-+
-+#ifdef CONFIG_SOFTMMU
-+                    tmp = (int64_t)(int32_t)helper_atomic_fetch_smaxl_le(env,
-+                        addr, env->vfp.vreg[src3].s64[j],
-+                        make_memop_idx(memop & ~MO_SIGN, mem_idx));
-+#else
-+                    tmp = (int64_t)(int32_t)helper_atomic_fetch_smaxl_le(env,
-+                        addr, env->vfp.vreg[src3].s64[j]);
-+#endif
-+                    if (wd) {
-+                        env->vfp.vreg[src3].s64[j] = tmp;
-+                    }
-+                    env->vfp.vstart++;
++                    env->vfp.vreg[dest].u64[j] = env->vfp.vreg[src1].u64[j]
++                        ^ env->vfp.vreg[src2].u64[j];
 +                }
 +                break;
 +            default:
@@ -1248,158 +626,60 @@ index 0ac8c74..9ebf70d 100644
 +                break;
 +            }
 +        } else {
-+            vector_tail_amo(env, src3, j, width);
++            vector_tail_common(env, dest, j, width);
 +        }
 +    }
 +    env->vfp.vstart = 0;
 +}
-+
-+void VECTOR_HELPER(vamomaxd_v)(CPURISCVState *env, uint32_t wd, uint32_t vm,
-+    uint32_t rs1, uint32_t vs2, uint32_t vs3)
++void VECTOR_HELPER(vxor_vx)(CPURISCVState *env, uint32_t vm, uint32_t rs1,
++    uint32_t rs2, uint32_t rd)
 +{
 +    int i, j, vl;
-+    target_long idx;
-+    uint32_t lmul, width, src2, src3, vlmax;
-+    target_ulong addr;
-+#ifdef CONFIG_SOFTMMU
-+    int mem_idx = cpu_mmu_index(env, false);
-+    TCGMemOp memop = MO_ALIGN | MO_TEQ;
-+#endif
++    uint32_t lmul, width, src2, dest, vlmax;
 +
-+    vl    = env->vfp.vl;
++    vl = env->vfp.vl;
 +    lmul  = vector_get_lmul(env);
-+    width = vector_get_width(env);
++    width   = vector_get_width(env);
 +    vlmax = vector_get_vlmax(env);
-+    /* MEM <= SEW <= XLEN */
-+    if (width < 64 || (width > sizeof(target_ulong) * 8)) {
-+        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
-+        return;
-+    }
-+    /* if wd, rd is writen the old value */
-+    if (vector_vtype_ill(env) ||
-+        (vector_overlap_vm_common(lmul, vm, vs3) && wd)) {
-+        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
-+        return;
-+    }
 +
-+    vector_lmul_check_reg(env, lmul, vs2, false);
-+    vector_lmul_check_reg(env, lmul, vs3, false);
++    if (vector_vtype_ill(env) || vector_overlap_vm_common(lmul, vm, rd)) {
++        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
++        return;
++    }
++    vector_lmul_check_reg(env, lmul, rs2, false);
++    vector_lmul_check_reg(env, lmul, rd, false);
 +
 +    for (i = 0; i < vlmax; i++) {
-+        src2 = vs2 + (i / (VLEN / width));
-+        src3 = vs3 + (i / (VLEN / width));
++        src2 = rs2 + (i / (VLEN / width));
++        dest = rd + (i / (VLEN / width));
 +        j = i % (VLEN / width);
 +        if (i < env->vfp.vstart) {
 +            continue;
 +        } else if (i < vl) {
 +            switch (width) {
-+            case 64:
++            case 8:
 +                if (vector_elem_mask(env, vm, width, lmul, i)) {
-+                    int64_t tmp;
-+                    idx    = (target_long)env->vfp.vreg[src2].s64[j];
-+                    addr   = idx + env->gpr[rs1];
-+
-+#ifdef CONFIG_SOFTMMU
-+                    tmp = helper_atomic_fetch_smaxq_le(env, addr,
-+                        env->vfp.vreg[src3].s64[j],
-+                        make_memop_idx(memop & ~MO_SIGN, mem_idx));
-+#else
-+                    tmp = helper_atomic_fetch_smaxq_le(env, addr,
-+                        env->vfp.vreg[src3].s64[j]);
-+#endif
-+                if (wd) {
-+                        env->vfp.vreg[src3].s64[j] = tmp;
-+                    }
-+                    env->vfp.vstart++;
++                    env->vfp.vreg[dest].u8[j] = env->gpr[rs1]
++                        ^ env->vfp.vreg[src2].u8[j];
 +                }
 +                break;
-+            default:
-+                riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
++            case 16:
++                if (vector_elem_mask(env, vm, width, lmul, i)) {
++                    env->vfp.vreg[dest].u16[j] = env->gpr[rs1]
++                        ^ env->vfp.vreg[src2].u16[j];
++                }
 +                break;
-+            }
-+        } else {
-+            vector_tail_amo(env, src3, j, width);
-+        }
-+    }
-+    env->vfp.vstart = 0;
-+}
-+
-+void VECTOR_HELPER(vamominuw_v)(CPURISCVState *env, uint32_t wd, uint32_t vm,
-+    uint32_t rs1, uint32_t vs2, uint32_t vs3)
-+{
-+    int i, j, vl;
-+    target_long idx;
-+    uint32_t lmul, width, src2, src3, vlmax;
-+    target_ulong addr;
-+#ifdef CONFIG_SOFTMMU
-+    int mem_idx = cpu_mmu_index(env, false);
-+    TCGMemOp memop = MO_ALIGN | MO_TESL;
-+#endif
-+
-+    vl    = env->vfp.vl;
-+    lmul  = vector_get_lmul(env);
-+    width = vector_get_width(env);
-+    vlmax = vector_get_vlmax(env);
-+    /* MEM <= SEW <= XLEN */
-+    if (width < 32 || (width > sizeof(target_ulong) * 8)) {
-+        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
-+        return;
-+    }
-+    /* if wd, rd is writen the old value */
-+    if (vector_vtype_ill(env) ||
-+        (vector_overlap_vm_common(lmul, vm, vs3) && wd)) {
-+        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
-+        return;
-+    }
-+
-+    vector_lmul_check_reg(env, lmul, vs2, false);
-+    vector_lmul_check_reg(env, lmul, vs3, false);
-+
-+    for (i = 0; i < vlmax; i++) {
-+        src2 = vs2 + (i / (VLEN / width));
-+        src3 = vs3 + (i / (VLEN / width));
-+        j = i % (VLEN / width);
-+        if (i < env->vfp.vstart) {
-+            continue;
-+        } else if (i < vl) {
-+            switch (width) {
 +            case 32:
 +                if (vector_elem_mask(env, vm, width, lmul, i)) {
-+                    uint32_t tmp;
-+                    idx    = (target_long)env->vfp.vreg[src2].s32[j];
-+                    addr   = idx + env->gpr[rs1];
-+#ifdef CONFIG_SOFTMMU
-+                    tmp = helper_atomic_fetch_uminl_le(env, addr,
-+                        env->vfp.vreg[src3].s32[j],
-+                        make_memop_idx(memop & ~MO_SIGN, mem_idx));
-+#else
-+                    tmp = helper_atomic_fetch_uminl_le(env, addr,
-+                        env->vfp.vreg[src3].s32[j]);
-+#endif
-+                    if (wd) {
-+                        env->vfp.vreg[src3].s32[j] = tmp;
-+                    }
-+                    env->vfp.vstart++;
++                    env->vfp.vreg[dest].u32[j] = env->gpr[rs1]
++                        ^ env->vfp.vreg[src2].u32[j];
 +                }
 +                break;
 +            case 64:
 +                if (vector_elem_mask(env, vm, width, lmul, i)) {
-+                    uint64_t tmp;
-+                    idx    = (target_long)env->vfp.vreg[src2].s64[j];
-+                    addr   = idx + env->gpr[rs1];
-+
-+#ifdef CONFIG_SOFTMMU
-+                    tmp = (int64_t)(int32_t)helper_atomic_fetch_uminl_le(
-+                        env, addr, env->vfp.vreg[src3].s64[j],
-+                        make_memop_idx(memop & ~MO_SIGN, mem_idx));
-+#else
-+                    tmp = (int64_t)(int32_t)helper_atomic_fetch_uminl_le(
-+                        env, addr, env->vfp.vreg[src3].s64[j]);
-+#endif
-+                    if (wd) {
-+                        env->vfp.vreg[src3].s64[j] = tmp;
-+                    }
-+                    env->vfp.vstart++;
++                    env->vfp.vreg[dest].u64[j] =
++                        (uint64_t)extend_gpr(env->gpr[rs1])
++                        ^ env->vfp.vreg[src2].u64[j];
 +                }
 +                break;
 +            default:
@@ -1407,88 +687,60 @@ index 0ac8c74..9ebf70d 100644
 +                break;
 +            }
 +        } else {
-+            vector_tail_amo(env, src3, j, width);
++            vector_tail_common(env, dest, j, width);
 +        }
 +    }
 +    env->vfp.vstart = 0;
 +}
 +
-+void VECTOR_HELPER(vamominud_v)(CPURISCVState *env, uint32_t wd, uint32_t vm,
-+    uint32_t rs1, uint32_t vs2, uint32_t vs3)
++void VECTOR_HELPER(vxor_vi)(CPURISCVState *env, uint32_t vm, uint32_t rs1,
++    uint32_t rs2, uint32_t rd)
 +{
 +    int i, j, vl;
-+    target_long idx;
-+    uint32_t lmul, width, src2, src3, vlmax;
-+    target_ulong addr;
-+#ifdef CONFIG_SOFTMMU
-+    int mem_idx = cpu_mmu_index(env, false);
-+    TCGMemOp memop = MO_ALIGN | MO_TESL;
-+#endif
++    uint32_t lmul, width, src2, dest, vlmax;
 +
-+    vl    = env->vfp.vl;
++    vl = env->vfp.vl;
 +    lmul  = vector_get_lmul(env);
-+    width = vector_get_width(env);
++    width   = vector_get_width(env);
 +    vlmax = vector_get_vlmax(env);
-+    /* MEM <= SEW <= XLEN */
-+    if (width < 64 || (width > sizeof(target_ulong) * 8)) {
-+        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
-+        return;
-+    }
-+    /* if wd, rd is writen the old value */
-+    if (vector_vtype_ill(env) ||
-+        (vector_overlap_vm_common(lmul, vm, vs3) && wd)) {
-+        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
-+        return;
-+    }
 +
-+    vector_lmul_check_reg(env, lmul, vs2, false);
-+    vector_lmul_check_reg(env, lmul, vs3, false);
++    if (vector_vtype_ill(env) || vector_overlap_vm_common(lmul, vm, rd)) {
++        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
++        return;
++    }
++    vector_lmul_check_reg(env, lmul, rs2, false);
++    vector_lmul_check_reg(env, lmul, rd, false);
 +
 +    for (i = 0; i < vlmax; i++) {
-+        src2 = vs2 + (i / (VLEN / width));
-+        src3 = vs3 + (i / (VLEN / width));
++        src2 = rs2 + (i / (VLEN / width));
++        dest = rd + (i / (VLEN / width));
 +        j = i % (VLEN / width);
 +        if (i < env->vfp.vstart) {
 +            continue;
 +        } else if (i < vl) {
 +            switch (width) {
++            case 8:
++                if (vector_elem_mask(env, vm, width, lmul, i)) {
++                    env->vfp.vreg[dest].s8[j] = sign_extend(rs1, 5)
++                        ^ env->vfp.vreg[src2].s8[j];
++                }
++                break;
++            case 16:
++                if (vector_elem_mask(env, vm, width, lmul, i)) {
++                    env->vfp.vreg[dest].s16[j] = sign_extend(rs1, 5)
++                        ^ env->vfp.vreg[src2].s16[j];
++                }
++                break;
 +            case 32:
 +                if (vector_elem_mask(env, vm, width, lmul, i)) {
-+                    uint32_t tmp;
-+                    idx    = (target_long)env->vfp.vreg[src2].s32[j];
-+                    addr   = idx + env->gpr[rs1];
-+#ifdef CONFIG_SOFTMMU
-+                    tmp = helper_atomic_fetch_uminl_le(env, addr,
-+                        env->vfp.vreg[src3].s32[j],
-+                        make_memop_idx(memop & ~MO_SIGN, mem_idx));
-+#else
-+                    tmp = helper_atomic_fetch_uminl_le(env, addr,
-+                        env->vfp.vreg[src3].s32[j]);
-+#endif
-+                    if (wd) {
-+                        env->vfp.vreg[src3].s32[j] = tmp;
-+                    }
-+                    env->vfp.vstart++;
++                    env->vfp.vreg[dest].s32[j] = sign_extend(rs1, 5)
++                        ^ env->vfp.vreg[src2].s32[j];
 +                }
 +                break;
 +            case 64:
 +                if (vector_elem_mask(env, vm, width, lmul, i)) {
-+                    uint64_t tmp;
-+                    idx    = (target_long)env->vfp.vreg[src2].s64[j];
-+                    addr   = idx + env->gpr[rs1];
-+
-+#ifdef CONFIG_SOFTMMU
-+                    tmp = helper_atomic_fetch_uminq_le(
-+                        env, addr, env->vfp.vreg[src3].s64[j],
-+                        make_memop_idx(memop & ~MO_SIGN, mem_idx));
-+#else
-+                    tmp = helper_atomic_fetch_uminq_le(env, addr,
-+                        env->vfp.vreg[src3].s64[j]);
-+#endif
-+                    if (wd) {
-+                        env->vfp.vreg[src3].s64[j] = tmp;
-+                    }
-+                    env->vfp.vstart++;
++                    env->vfp.vreg[dest].s64[j] = sign_extend(rs1, 5)
++                        ^ env->vfp.vreg[src2].s64[j];
 +                }
 +                break;
 +            default:
@@ -1496,88 +748,62 @@ index 0ac8c74..9ebf70d 100644
 +                break;
 +            }
 +        } else {
-+            vector_tail_amo(env, src3, j, width);
++            vector_tail_common(env, dest, j, width);
 +        }
 +    }
 +    env->vfp.vstart = 0;
 +}
 +
-+void VECTOR_HELPER(vamomaxuw_v)(CPURISCVState *env, uint32_t wd, uint32_t vm,
-+    uint32_t rs1, uint32_t vs2, uint32_t vs3)
++void VECTOR_HELPER(vsll_vv)(CPURISCVState *env, uint32_t vm, uint32_t rs1,
++    uint32_t rs2, uint32_t rd)
 +{
 +    int i, j, vl;
-+    target_long idx;
-+    uint32_t lmul, width, src2, src3, vlmax;
-+    target_ulong addr;
-+#ifdef CONFIG_SOFTMMU
-+    int mem_idx = cpu_mmu_index(env, false);
-+    TCGMemOp memop = MO_ALIGN | MO_TESL;
-+#endif
++    uint32_t lmul, width, src1, src2, dest, vlmax;
 +
-+    vl    = env->vfp.vl;
++    vl = env->vfp.vl;
 +    lmul  = vector_get_lmul(env);
-+    width = vector_get_width(env);
++    width   = vector_get_width(env);
 +    vlmax = vector_get_vlmax(env);
-+    /* MEM <= SEW <= XLEN */
-+    if (width < 32 || (width > sizeof(target_ulong) * 8)) {
-+        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
-+        return;
-+    }
-+    /* if wd, rd is writen the old value */
-+    if (vector_vtype_ill(env) ||
-+        (vector_overlap_vm_common(lmul, vm, vs3) && wd)) {
-+        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
-+        return;
-+    }
 +
-+    vector_lmul_check_reg(env, lmul, vs2, false);
-+    vector_lmul_check_reg(env, lmul, vs3, false);
++    if (vector_vtype_ill(env) || vector_overlap_vm_common(lmul, vm, rd)) {
++        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
++        return;
++    }
++    vector_lmul_check_reg(env, lmul, rs1, false);
++    vector_lmul_check_reg(env, lmul, rs2, false);
++    vector_lmul_check_reg(env, lmul, rd, false);
 +
 +    for (i = 0; i < vlmax; i++) {
-+        src2 = vs2 + (i / (VLEN / width));
-+        src3 = vs3 + (i / (VLEN / width));
++        src1 = rs1 + (i / (VLEN / width));
++        src2 = rs2 + (i / (VLEN / width));
++        dest = rd + (i / (VLEN / width));
 +        j = i % (VLEN / width);
 +        if (i < env->vfp.vstart) {
 +            continue;
 +        } else if (i < vl) {
 +            switch (width) {
++            case 8:
++                if (vector_elem_mask(env, vm, width, lmul, i)) {
++                    env->vfp.vreg[dest].u8[j] = env->vfp.vreg[src2].u8[j]
++                        << (env->vfp.vreg[src1].u8[j] & 0x7);
++                }
++                break;
++            case 16:
++                if (vector_elem_mask(env, vm, width, lmul, i)) {
++                    env->vfp.vreg[dest].u16[j] = env->vfp.vreg[src2].u16[j]
++                        << (env->vfp.vreg[src1].u16[j] & 0xf);
++                }
++                break;
 +            case 32:
 +                if (vector_elem_mask(env, vm, width, lmul, i)) {
-+                    uint32_t tmp;
-+                    idx    = (target_long)env->vfp.vreg[src2].s32[j];
-+                    addr   = idx + env->gpr[rs1];
-+#ifdef CONFIG_SOFTMMU
-+                    tmp = helper_atomic_fetch_umaxl_le(env, addr,
-+                        env->vfp.vreg[src3].s32[j],
-+                        make_memop_idx(memop & ~MO_SIGN, mem_idx));
-+#else
-+                    tmp = helper_atomic_fetch_umaxl_le(env, addr,
-+                        env->vfp.vreg[src3].s32[j]);
-+#endif
-+                    if (wd) {
-+                        env->vfp.vreg[src3].s32[j] = tmp;
-+                    }
-+                    env->vfp.vstart++;
++                    env->vfp.vreg[dest].u32[j] = env->vfp.vreg[src2].u32[j]
++                        << (env->vfp.vreg[src1].u32[j] & 0x1f);
 +                }
 +                break;
 +            case 64:
 +                if (vector_elem_mask(env, vm, width, lmul, i)) {
-+                    uint64_t tmp;
-+                    idx    = (target_long)env->vfp.vreg[src2].s64[j];
-+                    addr   = idx + env->gpr[rs1];
-+
-+#ifdef CONFIG_SOFTMMU
-+                    tmp = (int64_t)(int32_t)helper_atomic_fetch_umaxl_le(
-+                        env, addr, env->vfp.vreg[src3].s64[j],
-+                        make_memop_idx(memop & ~MO_SIGN, mem_idx));
-+#else
-+                    tmp = (int64_t)(int32_t)helper_atomic_fetch_umaxl_le(
-+                        env, addr, env->vfp.vreg[src3].s64[j]);
-+#endif
-+                    if (wd) {
-+                        env->vfp.vreg[src3].s64[j] = tmp;
-+                    }
-+                    env->vfp.vstart++;
++                    env->vfp.vreg[dest].u64[j] = env->vfp.vreg[src2].u64[j]
++                        << (env->vfp.vreg[src1].u64[j] & 0x3f);
 +                }
 +                break;
 +            default:
@@ -1585,68 +811,60 @@ index 0ac8c74..9ebf70d 100644
 +                break;
 +            }
 +        } else {
-+            vector_tail_amo(env, src3, j, width);
++            vector_tail_common(env, dest, j, width);
 +        }
 +    }
 +    env->vfp.vstart = 0;
 +}
-+void VECTOR_HELPER(vamomaxud_v)(CPURISCVState *env, uint32_t wd, uint32_t vm,
-+    uint32_t rs1, uint32_t vs2, uint32_t vs3)
++
++void VECTOR_HELPER(vsll_vx)(CPURISCVState *env, uint32_t vm, uint32_t rs1,
++    uint32_t rs2, uint32_t rd)
 +{
 +    int i, j, vl;
-+    target_long idx;
-+    uint32_t lmul, width, src2, src3, vlmax;
-+    target_ulong addr;
-+#ifdef CONFIG_SOFTMMU
-+    int mem_idx = cpu_mmu_index(env, false);
-+    TCGMemOp memop = MO_ALIGN | MO_TEQ;
-+#endif
++    uint32_t lmul, width, src2, dest, vlmax;
 +
-+    vl    = env->vfp.vl;
++    vl = env->vfp.vl;
 +    lmul  = vector_get_lmul(env);
-+    width = vector_get_width(env);
++    width   = vector_get_width(env);
 +    vlmax = vector_get_vlmax(env);
-+    /* MEM <= SEW <= XLEN */
-+    if (width < 64 || (width > sizeof(target_ulong) * 8)) {
-+        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
-+        return;
-+    }
-+    /* if wd, rd is writen the old value */
-+    if (vector_vtype_ill(env) ||
-+        (vector_overlap_vm_common(lmul, vm, vs3) && wd)) {
-+        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
-+        return;
-+    }
 +
-+    vector_lmul_check_reg(env, lmul, vs2, false);
-+    vector_lmul_check_reg(env, lmul, vs3, false);
++    if (vector_vtype_ill(env) || vector_overlap_vm_common(lmul, vm, rd)) {
++        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
++        return;
++    }
++    vector_lmul_check_reg(env, lmul, rs2, false);
++    vector_lmul_check_reg(env, lmul, rd, false);
 +
 +    for (i = 0; i < vlmax; i++) {
-+        src2 = vs2 + (i / (VLEN / width));
-+        src3 = vs3 + (i / (VLEN / width));
++        src2 = rs2 + (i / (VLEN / width));
++        dest = rd + (i / (VLEN / width));
 +        j = i % (VLEN / width);
 +        if (i < env->vfp.vstart) {
 +            continue;
 +        } else if (i < vl) {
 +            switch (width) {
++            case 8:
++                if (vector_elem_mask(env, vm, width, lmul, i)) {
++                    env->vfp.vreg[dest].u8[j] = env->vfp.vreg[src2].u8[j]
++                        << (env->gpr[rs1] & 0x7);
++                }
++                break;
++            case 16:
++                if (vector_elem_mask(env, vm, width, lmul, i)) {
++                    env->vfp.vreg[dest].u16[j] = env->vfp.vreg[src2].u16[j]
++                        << (env->gpr[rs1] & 0xf);
++                }
++                break;
++            case 32:
++                if (vector_elem_mask(env, vm, width, lmul, i)) {
++                    env->vfp.vreg[dest].u32[j] = env->vfp.vreg[src2].u32[j]
++                        << (env->gpr[rs1] & 0x1f);
++                }
++                break;
 +            case 64:
 +                if (vector_elem_mask(env, vm, width, lmul, i)) {
-+                    uint64_t tmp;
-+                    idx    = (target_long)env->vfp.vreg[src2].s64[j];
-+                    addr   = idx + env->gpr[rs1];
-+
-+#ifdef CONFIG_SOFTMMU
-+                    tmp = helper_atomic_fetch_umaxq_le(
-+                        env, addr, env->vfp.vreg[src3].s64[j],
-+                        make_memop_idx(memop & ~MO_SIGN, mem_idx));
-+#else
-+                    tmp = helper_atomic_fetch_umaxq_le(env, addr,
-+                        env->vfp.vreg[src3].s64[j]);
-+#endif
-+                    if (wd) {
-+                        env->vfp.vreg[src3].s64[j] = tmp;
-+                    }
-+                    env->vfp.vstart++;
++                    env->vfp.vreg[dest].u64[j] = env->vfp.vreg[src2].u64[j]
++                        << ((uint64_t)extend_gpr(env->gpr[rs1]) & 0x3f);
 +                }
 +                break;
 +            default:
@@ -1654,7 +872,784 @@ index 0ac8c74..9ebf70d 100644
 +                break;
 +            }
 +        } else {
-+            vector_tail_amo(env, src3, j, width);
++            vector_tail_common(env, dest, j, width);
++        }
++    }
++    env->vfp.vstart = 0;
++}
++
++void VECTOR_HELPER(vsll_vi)(CPURISCVState *env, uint32_t vm, uint32_t rs1,
++    uint32_t rs2, uint32_t rd)
++{
++    int i, j, vl;
++    uint32_t lmul, width, src2, dest, vlmax;
++
++    vl = env->vfp.vl;
++    lmul  = vector_get_lmul(env);
++    width   = vector_get_width(env);
++    vlmax = vector_get_vlmax(env);
++
++    if (vector_vtype_ill(env) || vector_overlap_vm_common(lmul, vm, rd)) {
++        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
++        return;
++    }
++    vector_lmul_check_reg(env, lmul, rs2, false);
++    vector_lmul_check_reg(env, lmul, rd, false);
++
++    for (i = 0; i < vlmax; i++) {
++        src2 = rs2 + (i / (VLEN / width));
++        dest = rd + (i / (VLEN / width));
++        j = i % (VLEN / width);
++        if (i < env->vfp.vstart) {
++            continue;
++        } else if (i < vl) {
++            switch (width) {
++            case 8:
++                if (vector_elem_mask(env, vm, width, lmul, i)) {
++                    env->vfp.vreg[dest].u8[j] = env->vfp.vreg[src2].u8[j]
++                        << (rs1);
++                }
++                break;
++            case 16:
++                if (vector_elem_mask(env, vm, width, lmul, i)) {
++                    env->vfp.vreg[dest].u16[j] = env->vfp.vreg[src2].u16[j]
++                        << (rs1);
++                }
++                break;
++            case 32:
++                if (vector_elem_mask(env, vm, width, lmul, i)) {
++                    env->vfp.vreg[dest].u32[j] = env->vfp.vreg[src2].u32[j]
++                        << (rs1);
++                }
++                break;
++            case 64:
++                if (vector_elem_mask(env, vm, width, lmul, i)) {
++                    env->vfp.vreg[dest].u64[j] = env->vfp.vreg[src2].u64[j]
++                        << (rs1);
++                }
++                break;
++            default:
++                riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
++                break;
++            }
++        } else {
++            vector_tail_common(env, dest, j, width);
++        }
++    }
++    env->vfp.vstart = 0;
++}
++
++void VECTOR_HELPER(vsrl_vv)(CPURISCVState *env, uint32_t vm, uint32_t rs1,
++    uint32_t rs2, uint32_t rd)
++{
++    int i, j, vl;
++    uint32_t lmul, width, src1, src2, dest, vlmax;
++
++    vl = env->vfp.vl;
++    lmul  = vector_get_lmul(env);
++    width   = vector_get_width(env);
++    vlmax = vector_get_vlmax(env);
++
++    if (vector_vtype_ill(env) || vector_overlap_vm_common(lmul, vm, rd)) {
++        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
++        return;
++    }
++    vector_lmul_check_reg(env, lmul, rs1, false);
++    vector_lmul_check_reg(env, lmul, rs2, false);
++    vector_lmul_check_reg(env, lmul, rd, false);
++
++    for (i = 0; i < vlmax; i++) {
++        src1 = rs1 + (i / (VLEN / width));
++        src2 = rs2 + (i / (VLEN / width));
++        dest = rd + (i / (VLEN / width));
++        j = i % (VLEN / width);
++        if (i < env->vfp.vstart) {
++            continue;
++        } else if (i < vl) {
++            switch (width) {
++            case 8:
++                if (vector_elem_mask(env, vm, width, lmul, i)) {
++                    env->vfp.vreg[dest].u8[j] = env->vfp.vreg[src2].u8[j]
++                        >> (env->vfp.vreg[src1].u8[j] & 0x7);
++                }
++                break;
++            case 16:
++                if (vector_elem_mask(env, vm, width, lmul, i)) {
++                    env->vfp.vreg[dest].u16[j] = env->vfp.vreg[src2].u16[j]
++                        >> (env->vfp.vreg[src1].u16[j] & 0xf);
++                }
++                break;
++            case 32:
++                if (vector_elem_mask(env, vm, width, lmul, i)) {
++                    env->vfp.vreg[dest].u32[j] = env->vfp.vreg[src2].u32[j]
++                        >> (env->vfp.vreg[src1].u32[j] & 0x1f);
++                }
++                break;
++            case 64:
++                if (vector_elem_mask(env, vm, width, lmul, i)) {
++                    env->vfp.vreg[dest].u64[j] = env->vfp.vreg[src2].u64[j]
++                        >> (env->vfp.vreg[src1].u64[j] & 0x3f);
++                }
++                break;
++            default:
++                riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
++                break;
++            }
++        } else {
++            vector_tail_common(env, dest, j, width);
++        }
++    }
++    env->vfp.vstart = 0;
++}
++void VECTOR_HELPER(vsrl_vx)(CPURISCVState *env, uint32_t vm, uint32_t rs1,
++    uint32_t rs2, uint32_t rd)
++{
++    int i, j, vl;
++    uint32_t lmul, width, src2, dest, vlmax;
++
++    vl = env->vfp.vl;
++    lmul  = vector_get_lmul(env);
++    width   = vector_get_width(env);
++    vlmax = vector_get_vlmax(env);
++
++    if (vector_vtype_ill(env) || vector_overlap_vm_common(lmul, vm, rd)) {
++        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
++        return;
++    }
++    vector_lmul_check_reg(env, lmul, rs2, false);
++    vector_lmul_check_reg(env, lmul, rd, false);
++
++    for (i = 0; i < vlmax; i++) {
++        src2 = rs2 + (i / (VLEN / width));
++        dest = rd + (i / (VLEN / width));
++        j = i % (VLEN / width);
++        if (i < env->vfp.vstart) {
++            continue;
++        } else if (i < vl) {
++            switch (width) {
++            case 8:
++                if (vector_elem_mask(env, vm, width, lmul, i)) {
++                    env->vfp.vreg[dest].u8[j] = env->vfp.vreg[src2].u8[j]
++                        >> (env->gpr[rs1] & 0x7);
++                }
++                break;
++            case 16:
++                if (vector_elem_mask(env, vm, width, lmul, i)) {
++                    env->vfp.vreg[dest].u16[j] = env->vfp.vreg[src2].u16[j]
++                        >> (env->gpr[rs1] & 0xf);
++                }
++                break;
++            case 32:
++                if (vector_elem_mask(env, vm, width, lmul, i)) {
++                    env->vfp.vreg[dest].u32[j] = env->vfp.vreg[src2].u32[j]
++                        >> (env->gpr[rs1] & 0x1f);
++                }
++                break;
++            case 64:
++                if (vector_elem_mask(env, vm, width, lmul, i)) {
++                    env->vfp.vreg[dest].u64[j] = env->vfp.vreg[src2].u64[j]
++                        >> ((uint64_t)extend_gpr(env->gpr[rs1]) & 0x3f);
++                }
++                break;
++            default:
++                riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
++                break;
++            }
++        } else {
++            vector_tail_common(env, dest, j, width);
++        }
++    }
++    env->vfp.vstart = 0;
++}
++void VECTOR_HELPER(vsrl_vi)(CPURISCVState *env, uint32_t vm, uint32_t rs1,
++    uint32_t rs2, uint32_t rd)
++{
++    int i, j, vl;
++    uint32_t lmul, width, src2, dest, vlmax;
++
++    vl = env->vfp.vl;
++    lmul  = vector_get_lmul(env);
++    width   = vector_get_width(env);
++    vlmax = vector_get_vlmax(env);
++
++    if (vector_vtype_ill(env) || vector_overlap_vm_common(lmul, vm, rd)) {
++        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
++        return;
++    }
++    vector_lmul_check_reg(env, lmul, rs2, false);
++    vector_lmul_check_reg(env, lmul, rd, false);
++
++    for (i = 0; i < vlmax; i++) {
++        src2 = rs2 + (i / (VLEN / width));
++        dest = rd + (i / (VLEN / width));
++        j = i % (VLEN / width);
++        if (i < env->vfp.vstart) {
++            continue;
++        } else if (i < vl) {
++            switch (width) {
++            case 8:
++                if (vector_elem_mask(env, vm, width, lmul, i)) {
++                    env->vfp.vreg[dest].u8[j] = env->vfp.vreg[src2].u8[j]
++                        >> (rs1);
++                }
++                break;
++            case 16:
++                if (vector_elem_mask(env, vm, width, lmul, i)) {
++                    env->vfp.vreg[dest].u16[j] = env->vfp.vreg[src2].u16[j]
++                        >> (rs1);
++                }
++                break;
++            case 32:
++                if (vector_elem_mask(env, vm, width, lmul, i)) {
++                    env->vfp.vreg[dest].u32[j] = env->vfp.vreg[src2].u32[j]
++                        >> (rs1);
++                }
++                break;
++            case 64:
++                if (vector_elem_mask(env, vm, width, lmul, i)) {
++                    env->vfp.vreg[dest].u64[j] = env->vfp.vreg[src2].u64[j]
++                        >> (rs1);
++                }
++                break;
++            default:
++                riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
++                break;
++            }
++        } else {
++            vector_tail_common(env, dest, j, width);
++        }
++    }
++    env->vfp.vstart = 0;
++}
++
++void VECTOR_HELPER(vsra_vv)(CPURISCVState *env, uint32_t vm, uint32_t rs1,
++    uint32_t rs2, uint32_t rd)
++{
++    int i, j, vl;
++    uint32_t lmul, width, src1, src2, dest, vlmax;
++
++    vl = env->vfp.vl;
++    lmul  = vector_get_lmul(env);
++    width   = vector_get_width(env);
++    vlmax = vector_get_vlmax(env);
++
++    if (vector_vtype_ill(env) || vector_overlap_vm_common(lmul, vm, rd)) {
++        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
++        return;
++    }
++    vector_lmul_check_reg(env, lmul, rs1, false);
++    vector_lmul_check_reg(env, lmul, rs2, false);
++    vector_lmul_check_reg(env, lmul, rd, false);
++
++    for (i = 0; i < vlmax; i++) {
++        src1 = rs1 + (i / (VLEN / width));
++        src2 = rs2 + (i / (VLEN / width));
++        dest = rd + (i / (VLEN / width));
++        j = i % (VLEN / width);
++        if (i < env->vfp.vstart) {
++            continue;
++        } else if (i < vl) {
++            switch (width) {
++            case 8:
++                if (vector_elem_mask(env, vm, width, lmul, i)) {
++                    env->vfp.vreg[dest].s8[j] = env->vfp.vreg[src2].s8[j]
++                        >> (env->vfp.vreg[src1].s8[j] & 0x7);
++                }
++                break;
++            case 16:
++                if (vector_elem_mask(env, vm, width, lmul, i)) {
++                    env->vfp.vreg[dest].s16[j] = env->vfp.vreg[src2].s16[j]
++                        >> (env->vfp.vreg[src1].s16[j] & 0xf);
++                }
++                break;
++            case 32:
++                if (vector_elem_mask(env, vm, width, lmul, i)) {
++                    env->vfp.vreg[dest].s32[j] = env->vfp.vreg[src2].s32[j]
++                        >> (env->vfp.vreg[src1].s32[j] & 0x1f);
++                }
++                break;
++            case 64:
++                if (vector_elem_mask(env, vm, width, lmul, i)) {
++                    env->vfp.vreg[dest].s64[j] = env->vfp.vreg[src2].s64[j]
++                        >> (env->vfp.vreg[src1].s64[j] & 0x3f);
++                }
++                break;
++            default:
++                riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
++                break;
++            }
++        } else {
++            vector_tail_common(env, dest, j, width);
++        }
++    }
++    env->vfp.vstart = 0;
++}
++
++void VECTOR_HELPER(vsra_vx)(CPURISCVState *env, uint32_t vm, uint32_t rs1,
++    uint32_t rs2, uint32_t rd)
++{
++    int i, j, vl;
++    uint32_t lmul, width, src2, dest, vlmax;
++
++    vl = env->vfp.vl;
++    lmul  = vector_get_lmul(env);
++    width   = vector_get_width(env);
++    vlmax = vector_get_vlmax(env);
++
++    if (vector_vtype_ill(env) || vector_overlap_vm_common(lmul, vm, rd)) {
++        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
++        return;
++    }
++    vector_lmul_check_reg(env, lmul, rs2, false);
++    vector_lmul_check_reg(env, lmul, rd, false);
++
++    for (i = 0; i < vlmax; i++) {
++        src2 = rs2 + (i / (VLEN / width));
++        dest = rd + (i / (VLEN / width));
++        j = i % (VLEN / width);
++        if (i < env->vfp.vstart) {
++            continue;
++        } else if (i < vl) {
++            switch (width) {
++            case 8:
++                if (vector_elem_mask(env, vm, width, lmul, i)) {
++                    env->vfp.vreg[dest].s8[j] = env->vfp.vreg[src2].s8[j]
++                        >> (env->gpr[rs1] & 0x7);
++                }
++                break;
++            case 16:
++                if (vector_elem_mask(env, vm, width, lmul, i)) {
++                    env->vfp.vreg[dest].s16[j] = env->vfp.vreg[src2].s16[j]
++                        >> (env->gpr[rs1] & 0xf);
++                }
++                break;
++            case 32:
++                if (vector_elem_mask(env, vm, width, lmul, i)) {
++                    env->vfp.vreg[dest].s32[j] = env->vfp.vreg[src2].s32[j]
++                        >> (env->gpr[rs1] & 0x1f);
++                }
++                break;
++            case 64:
++                if (vector_elem_mask(env, vm, width, lmul, i)) {
++                    env->vfp.vreg[dest].s64[j] = env->vfp.vreg[src2].s64[j]
++                        >> ((uint64_t)extend_gpr(env->gpr[rs1]) & 0x3f);
++                }
++                break;
++            default:
++                riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
++                break;
++            }
++        } else {
++            vector_tail_common(env, dest, j, width);
++        }
++    }
++    env->vfp.vstart = 0;
++}
++
++void VECTOR_HELPER(vsra_vi)(CPURISCVState *env, uint32_t vm, uint32_t rs1,
++    uint32_t rs2, uint32_t rd)
++{
++    int i, j, vl;
++    uint32_t lmul, width, src2, dest, vlmax;
++
++    vl = env->vfp.vl;
++    lmul  = vector_get_lmul(env);
++    width   = vector_get_width(env);
++    vlmax = vector_get_vlmax(env);
++
++    if (vector_vtype_ill(env) || vector_overlap_vm_common(lmul, vm, rd)) {
++        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
++        return;
++    }
++    vector_lmul_check_reg(env, lmul, rs2, false);
++    vector_lmul_check_reg(env, lmul, rd, false);
++
++    for (i = 0; i < vlmax; i++) {
++        src2 = rs2 + (i / (VLEN / width));
++        dest = rd + (i / (VLEN / width));
++        j = i % (VLEN / width);
++        if (i < env->vfp.vstart) {
++            continue;
++        } else if (i < vl) {
++            switch (width) {
++            case 8:
++                if (vector_elem_mask(env, vm, width, lmul, i)) {
++                    env->vfp.vreg[dest].s8[j] = env->vfp.vreg[src2].s8[j]
++                        >> (rs1);
++                }
++                break;
++            case 16:
++                if (vector_elem_mask(env, vm, width, lmul, i)) {
++                    env->vfp.vreg[dest].s16[j] = env->vfp.vreg[src2].s16[j]
++                        >> (rs1);
++                }
++                break;
++            case 32:
++                if (vector_elem_mask(env, vm, width, lmul, i)) {
++                    env->vfp.vreg[dest].s32[j] = env->vfp.vreg[src2].s32[j]
++                        >> (rs1);
++                }
++                break;
++            case 64:
++                if (vector_elem_mask(env, vm, width, lmul, i)) {
++                    env->vfp.vreg[dest].s64[j] = env->vfp.vreg[src2].s64[j]
++                        >> (rs1);
++                }
++                break;
++            default:
++                riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
++                break;
++            }
++        } else {
++            vector_tail_common(env, dest, j, width);
++        }
++    }
++    env->vfp.vstart = 0;
++}
++
++void VECTOR_HELPER(vnsrl_vv)(CPURISCVState *env, uint32_t vm, uint32_t rs1,
++    uint32_t rs2, uint32_t rd)
++{
++    int i, j, k, vl;
++    uint32_t lmul, width, src1, src2, dest, vlmax;
++
++    vl = env->vfp.vl;
++    lmul  = vector_get_lmul(env);
++    width   = vector_get_width(env);
++    vlmax = vector_get_vlmax(env);
++
++    if (vector_vtype_ill(env) ||
++        vector_overlap_vm_common(lmul, vm, rd) ||
++        vector_overlap_dstgp_srcgp(rd, lmul, rs2, 2 * lmul)) {
++        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
++        return;
++    }
++    vector_lmul_check_reg(env, lmul, rs1, false);
++    vector_lmul_check_reg(env, lmul, rs2, true);
++    vector_lmul_check_reg(env, lmul, rd, false);
++
++    for (i = 0; i < vlmax; i++) {
++        src1 = rs1 + (i / (VLEN / width));
++        src2 = rs2 + (i / (VLEN / (2 * width)));
++        dest = rd + (i / (VLEN / width));
++        j = i % (VLEN / width);
++        k = i % (VLEN / (2 * width));
++        if (i < env->vfp.vstart) {
++            continue;
++        } else if (i < vl) {
++            switch (width) {
++            case 8:
++                if (vector_elem_mask(env, vm, width, lmul, i)) {
++                    env->vfp.vreg[dest].u8[j] = env->vfp.vreg[src2].u16[k]
++                        >> (env->vfp.vreg[src1].u8[j] & 0xf);
++                }
++                break;
++            case 16:
++                if (vector_elem_mask(env, vm, width, lmul, i)) {
++                    env->vfp.vreg[dest].u16[j] = env->vfp.vreg[src2].u32[k]
++                        >> (env->vfp.vreg[src1].u16[j] & 0x1f);
++                }
++                break;
++            case 32:
++                if (vector_elem_mask(env, vm, width, lmul, i)) {
++                    env->vfp.vreg[dest].u32[j] = env->vfp.vreg[src2].u64[k]
++                        >> (env->vfp.vreg[src1].u32[j] & 0x3f);
++                }
++                break;
++            default:
++                riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
++                break;
++            }
++        } else {
++            vector_tail_narrow(env, dest, j, width);
++        }
++    }
++    env->vfp.vstart = 0;
++}
++void VECTOR_HELPER(vnsrl_vx)(CPURISCVState *env, uint32_t vm, uint32_t rs1,
++    uint32_t rs2, uint32_t rd)
++{
++    int i, j, k, vl;
++    uint32_t lmul, width, src2, dest, vlmax;
++
++    vl = env->vfp.vl;
++    lmul  = vector_get_lmul(env);
++    width   = vector_get_width(env);
++    vlmax = vector_get_vlmax(env);
++
++    if (vector_vtype_ill(env) ||
++        vector_overlap_vm_common(lmul, vm, rd) ||
++        vector_overlap_dstgp_srcgp(rd, lmul, rs2, 2 * lmul)) {
++        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
++        return;
++    }
++    vector_lmul_check_reg(env, lmul, rs2, true);
++    vector_lmul_check_reg(env, lmul, rd, false);
++
++    for (i = 0; i < vlmax; i++) {
++        src2 = rs2 + (i / (VLEN / (2 * width)));
++        dest = rd + (i / (VLEN / width));
++        j = i % (VLEN / width);
++        k = i % (VLEN / (2 * width));
++        if (i < env->vfp.vstart) {
++            continue;
++        } else if (i < vl) {
++            switch (width) {
++            case 8:
++                if (vector_elem_mask(env, vm, width, lmul, i)) {
++                    env->vfp.vreg[dest].u8[j] = env->vfp.vreg[src2].u16[k]
++                        >> (env->gpr[rs1] & 0xf);
++                }
++                break;
++            case 16:
++                if (vector_elem_mask(env, vm, width, lmul, i)) {
++                    env->vfp.vreg[dest].u16[j] = env->vfp.vreg[src2].u32[k]
++                        >> (env->gpr[rs1] & 0x1f);
++                }
++                break;
++            case 32:
++                if (vector_elem_mask(env, vm, width, lmul, i)) {
++                    env->vfp.vreg[dest].u32[j] = env->vfp.vreg[src2].u64[k]
++                        >> (env->gpr[rs1] & 0x3f);
++                }
++                break;
++            default:
++                riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
++                break;
++            }
++        } else {
++            vector_tail_narrow(env, dest, j, width);
++        }
++    }
++    env->vfp.vstart = 0;
++}
++void VECTOR_HELPER(vnsrl_vi)(CPURISCVState *env, uint32_t vm, uint32_t rs1,
++    uint32_t rs2, uint32_t rd)
++{
++    int i, j, k, vl;
++    uint32_t lmul, width, src2, dest, vlmax;
++
++    vl = env->vfp.vl;
++    lmul  = vector_get_lmul(env);
++    width   = vector_get_width(env);
++    vlmax = vector_get_vlmax(env);
++
++    if (vector_vtype_ill(env) ||
++        vector_overlap_vm_common(lmul, vm, rd) ||
++        vector_overlap_dstgp_srcgp(rd, lmul, rs2, 2 * lmul)) {
++        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
++        return;
++    }
++    vector_lmul_check_reg(env, lmul, rs2, true);
++    vector_lmul_check_reg(env, lmul, rd, false);
++
++    for (i = 0; i < vlmax; i++) {
++        src2 = rs2 + (i / (VLEN / (2 * width)));
++        dest = rd + (i / (VLEN / width));
++        j = i % (VLEN / width);
++        k = i % (VLEN / (2 * width));
++        if (i < env->vfp.vstart) {
++            continue;
++        } else if (i < vl) {
++            switch (width) {
++            case 8:
++                if (vector_elem_mask(env, vm, width, lmul, i)) {
++                    env->vfp.vreg[dest].u8[j] = env->vfp.vreg[src2].u16[k]
++                        >> (rs1);
++                }
++                break;
++            case 16:
++                if (vector_elem_mask(env, vm, width, lmul, i)) {
++                    env->vfp.vreg[dest].u16[j] = env->vfp.vreg[src2].u32[k]
++                        >> (rs1);
++                }
++                break;
++            case 32:
++                if (vector_elem_mask(env, vm, width, lmul, i)) {
++                    env->vfp.vreg[dest].u32[j] = env->vfp.vreg[src2].u64[k]
++                        >> (rs1);
++                }
++                break;
++            default:
++                riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
++                break;
++            }
++        } else {
++            vector_tail_narrow(env, dest, j, width);
++        }
++    }
++    env->vfp.vstart = 0;
++}
++
++void VECTOR_HELPER(vnsra_vv)(CPURISCVState *env, uint32_t vm, uint32_t rs1,
++    uint32_t rs2, uint32_t rd)
++{
++    int i, j, k, vl;
++    uint32_t lmul, width, src1, src2, dest, vlmax;
++
++    vl = env->vfp.vl;
++    lmul  = vector_get_lmul(env);
++    width   = vector_get_width(env);
++    vlmax = vector_get_vlmax(env);
++
++    if (vector_vtype_ill(env) ||
++        vector_overlap_vm_common(lmul, vm, rd) ||
++        vector_overlap_dstgp_srcgp(rd, lmul, rs2, 2 * lmul)) {
++        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
++        return;
++    }
++    vector_lmul_check_reg(env, lmul, rs1, false);
++    vector_lmul_check_reg(env, lmul, rs2, true);
++    vector_lmul_check_reg(env, lmul, rd, false);
++
++    for (i = 0; i < vlmax; i++) {
++        src1 = rs1 + (i / (VLEN / width));
++        src2 = rs2 + (i / (VLEN / (2 * width)));
++        dest = rd + (i / (VLEN / width));
++        j = i % (VLEN / width);
++        k = i % (VLEN / (2 * width));
++        if (i < env->vfp.vstart) {
++            continue;
++        } else if (i < vl) {
++            switch (width) {
++            case 8:
++                if (vector_elem_mask(env, vm, width, lmul, i)) {
++                    env->vfp.vreg[dest].s8[j] = env->vfp.vreg[src2].s16[k]
++                        >> (env->vfp.vreg[src1].s8[j] & 0xf);
++                }
++                break;
++            case 16:
++                if (vector_elem_mask(env, vm, width, lmul, i)) {
++                    env->vfp.vreg[dest].s16[j] = env->vfp.vreg[src2].s32[k]
++                        >> (env->vfp.vreg[src1].s16[j] & 0x1f);
++                }
++                break;
++            case 32:
++                if (vector_elem_mask(env, vm, width, lmul, i)) {
++                    env->vfp.vreg[dest].s32[j] = env->vfp.vreg[src2].s64[k]
++                        >> (env->vfp.vreg[src1].s32[j] & 0x3f);
++                }
++                break;
++            default:
++                riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
++                break;
++            }
++        } else {
++            vector_tail_narrow(env, dest, j, width);
++        }
++    }
++    env->vfp.vstart = 0;
++}
++void VECTOR_HELPER(vnsra_vx)(CPURISCVState *env, uint32_t vm, uint32_t rs1,
++    uint32_t rs2, uint32_t rd)
++{
++    int i, j, k, vl;
++    uint32_t lmul, width, src2, dest, vlmax;
++
++    vl = env->vfp.vl;
++    lmul  = vector_get_lmul(env);
++    width   = vector_get_width(env);
++    vlmax = vector_get_vlmax(env);
++
++    if (vector_vtype_ill(env) ||
++        vector_overlap_vm_common(lmul, vm, rd) ||
++        vector_overlap_dstgp_srcgp(rd, lmul, rs2, 2 * lmul)) {
++        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
++        return;
++    }
++    vector_lmul_check_reg(env, lmul, rs2, true);
++    vector_lmul_check_reg(env, lmul, rd, false);
++
++    for (i = 0; i < vlmax; i++) {
++        src2 = rs2 + (i / (VLEN / (2 * width)));
++        dest = rd + (i / (VLEN / width));
++        j = i % (VLEN / width);
++        k = i % (VLEN / (2 * width));
++        if (i < env->vfp.vstart) {
++            continue;
++        } else if (i < vl) {
++            switch (width) {
++            case 8:
++                if (vector_elem_mask(env, vm, width, lmul, i)) {
++                    env->vfp.vreg[dest].s8[j] = env->vfp.vreg[src2].s16[k]
++                        >> (env->gpr[rs1] & 0xf);
++                }
++                break;
++            case 16:
++                if (vector_elem_mask(env, vm, width, lmul, i)) {
++                    env->vfp.vreg[dest].s16[j] = env->vfp.vreg[src2].s32[k]
++                        >> (env->gpr[rs1] & 0x1f);
++                }
++                break;
++            case 32:
++                if (vector_elem_mask(env, vm, width, lmul, i)) {
++                    env->vfp.vreg[dest].s32[j] = env->vfp.vreg[src2].s64[k]
++                        >> (env->gpr[rs1] & 0x3f);
++                }
++                break;
++            default:
++                riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
++                break;
++            }
++        } else {
++            vector_tail_narrow(env, dest, j, width);
++        }
++    }
++    env->vfp.vstart = 0;
++}
++void VECTOR_HELPER(vnsra_vi)(CPURISCVState *env, uint32_t vm, uint32_t rs1,
++    uint32_t rs2, uint32_t rd)
++{
++    int i, j, k, vl;
++    uint32_t lmul, width, src2, dest, vlmax;
++
++    vl = env->vfp.vl;
++    lmul  = vector_get_lmul(env);
++    width   = vector_get_width(env);
++    vlmax = vector_get_vlmax(env);
++
++    if (vector_vtype_ill(env) ||
++        vector_overlap_vm_common(lmul, vm, rd) ||
++        vector_overlap_dstgp_srcgp(rd, lmul, rs2, 2 * lmul)) {
++        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
++        return;
++    }
++    vector_lmul_check_reg(env, lmul, rs2, true);
++    vector_lmul_check_reg(env, lmul, rd, false);
++
++    for (i = 0; i < vlmax; i++) {
++        src2 = rs2 + (i / (VLEN / (2 * width)));
++        dest = rd + (i / (VLEN / width));
++        j = i % (VLEN / width);
++        k = i % (VLEN / (2 * width));
++        if (i < env->vfp.vstart) {
++            continue;
++        } else if (i < vl) {
++            switch (width) {
++            case 8:
++                if (vector_elem_mask(env, vm, width, lmul, i)) {
++                    env->vfp.vreg[dest].s8[j] = env->vfp.vreg[src2].s16[k]
++                        >> (rs1);
++                }
++                break;
++            case 16:
++                if (vector_elem_mask(env, vm, width, lmul, i)) {
++                    env->vfp.vreg[dest].s16[j] = env->vfp.vreg[src2].s32[k]
++                        >> (rs1);
++                }
++                break;
++            case 32:
++                if (vector_elem_mask(env, vm, width, lmul, i)) {
++                    env->vfp.vreg[dest].s32[j] = env->vfp.vreg[src2].s64[k]
++                        >> (rs1);
++                }
++                break;
++            default:
++                riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
++                break;
++            }
++        } else {
++            vector_tail_narrow(env, dest, j, width);
 +        }
 +    }
 +    env->vfp.vstart = 0;
