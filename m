@@ -1,52 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1i84VD-0005dG-G4
-	for mharc-qemu-riscv@gnu.org; Wed, 11 Sep 2019 11:25:51 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:54922)
+	id 1i8576-0004MB-7f
+	for mharc-qemu-riscv@gnu.org; Wed, 11 Sep 2019 12:05:00 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:34786)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <chihmin.chao@sifive.com>) id 1i84V8-0005XG-OP
- for qemu-riscv@nongnu.org; Wed, 11 Sep 2019 11:25:48 -0400
+ (envelope-from <chihmin.chao@sifive.com>) id 1i856z-0004D9-IV
+ for qemu-riscv@nongnu.org; Wed, 11 Sep 2019 12:04:56 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <chihmin.chao@sifive.com>) id 1i84V6-0000Pl-KU
- for qemu-riscv@nongnu.org; Wed, 11 Sep 2019 11:25:46 -0400
-Received: from mail-io1-xd43.google.com ([2607:f8b0:4864:20::d43]:40286)
+ (envelope-from <chihmin.chao@sifive.com>) id 1i856w-0001RP-Id
+ for qemu-riscv@nongnu.org; Wed, 11 Sep 2019 12:04:53 -0400
+Received: from mail-io1-xd43.google.com ([2607:f8b0:4864:20::d43]:40112)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <chihmin.chao@sifive.com>)
- id 1i84V6-0000PH-Dj
- for qemu-riscv@nongnu.org; Wed, 11 Sep 2019 11:25:44 -0400
-Received: by mail-io1-xd43.google.com with SMTP id h144so46667602iof.7
- for <qemu-riscv@nongnu.org>; Wed, 11 Sep 2019 08:25:44 -0700 (PDT)
+ id 1i856w-0001Qx-9T
+ for qemu-riscv@nongnu.org; Wed, 11 Sep 2019 12:04:50 -0400
+Received: by mail-io1-xd43.google.com with SMTP id h144so46985342iof.7
+ for <qemu-riscv@nongnu.org>; Wed, 11 Sep 2019 09:04:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=WDXxo7RChx1Yedny8qFMElJwnL7cMFzyo3wfJ0zwgjk=;
- b=Zb0oQ47/+P1wa+mjC6AdQ3unyt/Z99GBT2SLffyBL8pROPEDPrc5RA2FkHfvBl5h8r
- L0fuKYYMYcRnY/KzS8fk9avB1uKW+Jq7nRs6G8+jLXq26r09M9Ist+O29/lYQ1vk8zLx
- VlFxOs18FXVW+9ScNZ3cqe4kz8qR4LZo9nda+TR55edmKGlMfyYqWI9819o0r+8O9LS+
- i3MsGxTNudvbRum6dJE6S6o7QwUq3FWnQTgomqC+xJklGAuHPzQEg36sarTyncB8OzyS
- nd6v1Kfhyuot5xdHebYVs6njJ1AsrSxm5iDzcrNsGiv7ySIfDpvOnuZeoZHsITotejn8
- 2Q+w==
+ :cc; bh=NpxJWpS8/LST6Afz5+sKG/0CQ6l7N8dpKlYJAnkHE2s=;
+ b=DACrEz6OkERkS6gR2xU5YRmirFivqPY9qFgdMh8ao+EyXzX10TJtMauo+WSrfnP53r
+ fdXLxmDIfgwYCN4X0acigDQRV7IyupVQrlySBdb9cUYvd22tnSVk2M/9yzjeggptBK9q
+ TtG0ztm874dQM5yvFkYX2lZ3hqm9TGbodXhmSKx3lb/LcQkQRRgS8m4uS31xSlrxqtHp
+ 2YvvGWzGo0OJdUGKuQNL59qf79IOkJH7hVToztGHxr6PRdDY9vppZrpgch/zec7GCnq3
+ Dz5e/z09K8m/1jbTZiiyblWt62n+Qt4Bzda8ePRFMhvUNixUph6q/g1Tjkks/GGIcX1b
+ ww6A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=WDXxo7RChx1Yedny8qFMElJwnL7cMFzyo3wfJ0zwgjk=;
- b=oqcoLzrZMp06WpPt36Z/LUrUABxh83+pP2zSbtLiRyoX7OfDn8ELOj23xXLaAKd3iT
- TVhIdtR07UBkmxzfoGxixSQR9ejA67ID5h7m7OUWq61uucWcPiv3hZRxyvVKYW4WqgzU
- a7QeDazru7spO1aKP+jK1l1TbWX9jL4nr/OF+cnqpmeBVAFwUGGf/Eqqzuobh6OHY++W
- htiqQOJ5xXHXnbgeII3uNvwJidy3PGOzuW7i63ngkHNsjXUTESXoXGL8Emsv4mFk7aJU
- zjsIjFpwsV7pEVHcSCInKQt/n1A6uk5jL1Rf+2KYcNmRvJtax8KZ9P3qlRebcCXCU34p
- b1Lw==
-X-Gm-Message-State: APjAAAUGvfI4j786/nY4803qWEa7MLHli8NSIiw5hcEOqAzFgUgjrVBo
- orAIKaW/WwS0XDgUomPCnqlI/k1TWsOHf7+J9i4wqQ==
-X-Google-Smtp-Source: APXvYqwmrchLaUawFJaNqlPBFrAFk1kmYTK8WctTcZDjfjl0TKZpAGBqbCj0a6yxPGpBLzbTsgJ2MZse2nprmURRtLk=
-X-Received: by 2002:a6b:ec16:: with SMTP id c22mr1362431ioh.185.1568215543429; 
- Wed, 11 Sep 2019 08:25:43 -0700 (PDT)
+ bh=NpxJWpS8/LST6Afz5+sKG/0CQ6l7N8dpKlYJAnkHE2s=;
+ b=cQ+VZ3skrVqVFwoiNtqx28wCM6LGnvLieB7X7TZVWo6WRfhCpIA6ofCcFcclqJOMY6
+ 76f1BlM1c7M0nQqv0TsrUMkVoeL0MF9X61LInyQIgeF9caAV63v21soStf6jXQjrgQM1
+ yYEsyGs2+G+PnpAHiByiW8sJeXyR3PjRClTj3QLslkBKlAIi1tBzsPh80busivnmiOLX
+ w3cGcQg0w5m8BCIcFrgZ8jlLNS0EOBsK7h8UwFM9uVGWA1rNXuu5E5gFcFVJnP8ZzKS9
+ IZWDOHlzb9YWBJJSHQIQxeztDxvmwilEHi+/9b/IDn5jN4g/3MG1Np4n/OmY/z543JFr
+ rZXA==
+X-Gm-Message-State: APjAAAW45yBQBJ9Mzty3tT3HwGXlMXiHGZUO0zTSq27q11menV311yN8
+ XurWsa7m37xiEf3tv45ur2ZCywTZ3M+IFGxGxpjaTg==
+X-Google-Smtp-Source: APXvYqycntMLAPsX39w2VHJ6TCzDl3rB2FHJ96lRCR2v/iJwJwyZF6k6fn/tMOPkVCAeuRAtbepGu73HgjyqcS3ksEQ=
+X-Received: by 2002:a5d:9f0f:: with SMTP id q15mr2397000iot.163.1568217889497; 
+ Wed, 11 Sep 2019 09:04:49 -0700 (PDT)
 MIME-Version: 1.0
 References: <1568183141-67641-1-git-send-email-zhiwei_liu@c-sky.com>
- <1568183141-67641-4-git-send-email-zhiwei_liu@c-sky.com>
-In-Reply-To: <1568183141-67641-4-git-send-email-zhiwei_liu@c-sky.com>
+ <1568183141-67641-5-git-send-email-zhiwei_liu@c-sky.com>
+In-Reply-To: <1568183141-67641-5-git-send-email-zhiwei_liu@c-sky.com>
 From: Chih-Min Chao <chihmin.chao@sifive.com>
-Date: Wed, 11 Sep 2019 23:25:32 +0800
-Message-ID: <CAEiOBXUoYKPes+BoDCWdDw60nyaqzW2qtgTVAdQ4Sbf_QuNTJA@mail.gmail.com>
+Date: Thu, 12 Sep 2019 00:04:38 +0800
+Message-ID: <CAEiOBXWsuVeQ82ockYf=Vwqaxfzoc9fin+w3itNZZho2tO+6Mg@mail.gmail.com>
 To: liuzhiwei <zhiwei_liu@c-sky.com>
 Cc: Alistair Francis <Alistair.Francis@wdc.com>,
  Palmer Dabbelt <palmer@sifive.com>, 
@@ -56,12 +56,12 @@ Cc: Alistair Francis <Alistair.Francis@wdc.com>,
  wenmeng_zhang@c-sky.com, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  wxy194768@alibaba-inc.com
-Content-Type: multipart/alternative; boundary="00000000000065dbcd059248a27b"
+Content-Type: multipart/alternative; boundary="0000000000003bf7110592492ecb"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
 X-Received-From: 2607:f8b0:4864:20::d43
-Subject: Re: [Qemu-riscv] [PATCH v2 03/17] RISC-V: support vector extension
- csr
+Subject: Re: [Qemu-riscv] [PATCH v2 04/17] RISC-V: add vector extension
+ configure instruction
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -73,9 +73,9 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Sep 2019 15:25:50 -0000
+X-List-Received-Date: Wed, 11 Sep 2019 16:04:58 -0000
 
---00000000000065dbcd059248a27b
+--0000000000003bf7110592492ecb
 Content-Type: text/plain; charset="UTF-8"
 
 On Wed, Sep 11, 2019 at 2:38 PM liuzhiwei <zhiwei_liu@c-sky.com> wrote:
@@ -84,172 +84,290 @@ On Wed, Sep 11, 2019 at 2:38 PM liuzhiwei <zhiwei_liu@c-sky.com> wrote:
 >
 > Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
 > ---
->  target/riscv/cpu_bits.h | 15 ++++++++++++
->  target/riscv/csr.c      | 65
-> ++++++++++++++++++++++++++++++++++++++++++++++---
->  2 files changed, 76 insertions(+), 4 deletions(-)
+>  target/riscv/Makefile.objs              |   2 +-
+>  target/riscv/helper.h                   |   3 +
+>  target/riscv/insn32.decode              |   5 ++
+>  target/riscv/insn_trans/trans_rvv.inc.c |  46 ++++++++++++
+>  target/riscv/translate.c                |   1 +
+>  target/riscv/vector_helper.c            | 126
+> ++++++++++++++++++++++++++++++++
+>  6 files changed, 182 insertions(+), 1 deletion(-)
+>  create mode 100644 target/riscv/insn_trans/trans_rvv.inc.c
+>  create mode 100644 target/riscv/vector_helper.c
 >
-> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-> index 11f971a..9eb43ec 100644
-> --- a/target/riscv/cpu_bits.h
-> +++ b/target/riscv/cpu_bits.h
-> @@ -29,6 +29,14 @@
->  #define FSR_NXA             (FPEXC_NX << FSR_AEXC_SHIFT)
->  #define FSR_AEXC            (FSR_NVA | FSR_OFA | FSR_UFA | FSR_DZA |
-> FSR_NXA)
+> diff --git a/target/riscv/Makefile.objs b/target/riscv/Makefile.objs
+> index b1c79bc..d577cef 100644
+> --- a/target/riscv/Makefile.objs
+> +++ b/target/riscv/Makefile.objs
+> @@ -1,4 +1,4 @@
+> -obj-y += translate.o op_helper.o cpu_helper.o cpu.o csr.o fpu_helper.o
+> gdbstub.o pmp.o
+> +obj-y += translate.o op_helper.o cpu_helper.o cpu.o csr.o fpu_helper.o
+> vector_helper.o gdbstub.o pmp.o
 >
-> +/* Vector Fixed-Point round model */
-> +#define FSR_VXRM_SHIFT      9
-> +#define FSR_VXRM            (0x3 << FSR_VXRM_SHIFT)
-> +
-> +/* Vector Fixed-Point saturation flag */
-> +#define FSR_VXSAT_SHIFT     8
-> +#define FSR_VXSAT           (0x1 << FSR_VXSAT_SHIFT)
-> +
->  /* Control and Status Registers */
+>  DECODETREE = $(SRC_PATH)/scripts/decodetree.py
 >
->  /* User Trap Setup */
-> @@ -48,6 +56,13 @@
->  #define CSR_FRM             0x002
->  #define CSR_FCSR            0x003
->
-> +/* User Vector CSRs */
-> +#define CSR_VSTART          0x008
-> +#define CSR_VXSAT           0x009
-> +#define CSR_VXRM            0x00a
-> +#define CSR_VL              0xc20
-> +#define CSR_VTYPE           0xc21
-> +
->  /* User Timers and Counters */
->  #define CSR_CYCLE           0xc00
->  #define CSR_TIME            0xc01
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index e0d4586..a6131ff 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -87,12 +87,12 @@ static int ctr(CPURISCVState *env, int csrno)
->      return 0;
->  }
->
-> -#if !defined(CONFIG_USER_ONLY)
->  static int any(CPURISCVState *env, int csrno)
->  {
->      return 0;
->  }
->
-> +#if !defined(CONFIG_USER_ONLY)
->  static int smode(CPURISCVState *env, int csrno)
->  {
->      return -!riscv_has_ext(env, RVS);
-> @@ -158,8 +158,10 @@ static int read_fcsr(CPURISCVState *env, int csrno,
-> target_ulong *val)
->          return -1;
->      }
+> diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+> index debb22a..652f8c3 100644
+> --- a/target/riscv/helper.h
+> +++ b/target/riscv/helper.h
+> @@ -76,3 +76,6 @@ DEF_HELPER_2(mret, tl, env, tl)
+>  DEF_HELPER_1(wfi, void, env)
+>  DEF_HELPER_1(tlb_flush, void, env)
 >  #endif
-> -    *val = (riscv_cpu_get_fflags(env) << FSR_AEXC_SHIFT)
-> -        | (env->frm << FSR_RD_SHIFT);
-> +    *val = (env->vfp.vxrm << FSR_VXRM_SHIFT)
-> +            | (env->vfp.vxsat << FSR_VXSAT_SHIFT)
-> +            | (riscv_cpu_get_fflags(env) << FSR_AEXC_SHIFT)
-> +            | (env->frm << FSR_RD_SHIFT);
->      return 0;
->  }
+> +/* Vector functions */
+> +DEF_HELPER_4(vector_vsetvli, void, env, i32, i32, i32)
+> +DEF_HELPER_4(vector_vsetvl, void, env, i32, i32, i32)
+> diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+> index 77f794e..5dc009c 100644
+> --- a/target/riscv/insn32.decode
+> +++ b/target/riscv/insn32.decode
+> @@ -62,6 +62,7 @@
+>  @r_rm    .......   ..... ..... ... ..... ....... %rs2 %rs1 %rm %rd
+>  @r2_rm   .......   ..... ..... ... ..... ....... %rs1 %rm %rd
+>  @r2      .......   ..... ..... ... ..... ....... %rs1 %rd
+> +@r2_zimm . zimm:11  ..... ... ..... ....... %rs1 %rd
 >
-> @@ -172,10 +174,60 @@ static int write_fcsr(CPURISCVState *env, int csrno,
-> target_ulong val)
->      env->mstatus |= MSTATUS_FS;
->  #endif
->      env->frm = (val & FSR_RD) >> FSR_RD_SHIFT;
-> +    env->vfp.vxrm = (val & FSR_VXRM) >> FSR_VXRM_SHIFT;
-> +    env->vfp.vxsat = (val & FSR_VXSAT) >> FSR_VXSAT_SHIFT;
->      riscv_cpu_set_fflags(env, (val & FSR_AEXC) >> FSR_AEXC_SHIFT);
->      return 0;
->  }
+>  @sfence_vma ....... ..... .....   ... ..... ....... %rs2 %rs1
+>  @sfence_vm  ....... ..... .....   ... ..... ....... %rs1
+> @@ -203,3 +204,7 @@ fcvt_w_d   1100001  00000 ..... ... ..... 1010011
+> @r2_rm
+>  fcvt_wu_d  1100001  00001 ..... ... ..... 1010011 @r2_rm
+>  fcvt_d_w   1101001  00000 ..... ... ..... 1010011 @r2_rm
+>  fcvt_d_wu  1101001  00001 ..... ... ..... 1010011 @r2_rm
+> +
+> +# *** RV32V Extension ***
+> +vsetvli         0 ........... ..... 111 ..... 1010111  @r2_zimm
+> +vsetvl          1000000 ..... ..... 111 ..... 1010111  @r
+> diff --git a/target/riscv/insn_trans/trans_rvv.inc.c
+> b/target/riscv/insn_trans/trans_rvv.inc.c
+> new file mode 100644
+> index 0000000..82e7ad6
+> --- /dev/null
+> +++ b/target/riscv/insn_trans/trans_rvv.inc.c
+> @@ -0,0 +1,46 @@
+> +/*
+> + * RISC-V translation routines for the RVV Standard Extension.
+> + *
+> + * Copyright (c) 2019 C-SKY Limited. All rights reserved.
+> + *
+> + * This program is free software; you can redistribute it and/or modify it
+> + * under the terms and conditions of the GNU General Public License,
+> + * version 2 or later, as published by the Free Software Foundation.
+> + *
+> + * This program is distributed in the hope it will be useful, but WITHOUT
+> + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+> + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+> for
+> + * more details.
+> + *
+> + * You should have received a copy of the GNU General Public License
+> along with
+> + * this program.  If not, see <http://www.gnu.org/licenses/>.
+> + */
+> +
+> +#define GEN_VECTOR_R(INSN) \
+> +static bool trans_##INSN(DisasContext *ctx, arg_##INSN * a) \
+> +{                                                      \
+> +    TCGv_i32 s1 = tcg_const_i32(a->rs1);               \
+> +    TCGv_i32 s2 = tcg_const_i32(a->rs2);               \
+> +    TCGv_i32 d  = tcg_const_i32(a->rd);                \
+> +    gen_helper_vector_##INSN(cpu_env, s1, s2, d);    \
+> +    tcg_temp_free_i32(s1);                             \
+> +    tcg_temp_free_i32(s2);                             \
+> +    tcg_temp_free_i32(d);                              \
+> +    return true;                                       \
+> +}
+> +
+> +#define GEN_VECTOR_R2_ZIMM(INSN) \
+> +static bool trans_##INSN(DisasContext *ctx, arg_##INSN * a) \
+> +{                                                      \
+> +    TCGv_i32 s1 = tcg_const_i32(a->rs1);               \
+> +    TCGv_i32 zimm = tcg_const_i32(a->zimm);            \
+> +    TCGv_i32 d  = tcg_const_i32(a->rd);                \
+> +    gen_helper_vector_##INSN(cpu_env, s1, zimm, d);      \
+> +    tcg_temp_free_i32(s1);                             \
+> +    tcg_temp_free_i32(zimm);                           \
+> +    tcg_temp_free_i32(d);                              \
+> +    return true;                                       \
+> +}
+> +
+> +GEN_VECTOR_R2_ZIMM(vsetvli)
+> +GEN_VECTOR_R(vsetvl)
+> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+> index 8d6ab73..587c23e 100644
+> --- a/target/riscv/translate.c
+> +++ b/target/riscv/translate.c
+> @@ -706,6 +706,7 @@ static bool gen_shift(DisasContext *ctx, arg_r *a,
+>  #include "insn_trans/trans_rva.inc.c"
+>  #include "insn_trans/trans_rvf.inc.c"
+>  #include "insn_trans/trans_rvd.inc.c"
+> +#include "insn_trans/trans_rvv.inc.c"
+>  #include "insn_trans/trans_privileged.inc.c"
 >
-> +static int read_vtype(CPURISCVState *env, int csrno, target_ulong *val)
+>  /*
+> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+> new file mode 100644
+> index 0000000..b279e6f
+> --- /dev/null
+> +++ b/target/riscv/vector_helper.c
+> @@ -0,0 +1,126 @@
+> +/*
+> + * RISC-V Vectore Extension Helpers for QEMU.
+> + *
+> + * Copyright (c) 2019 C-SKY Limited. All rights reserved.
+> + *
+> + * This program is free software; you can redistribute it and/or modify it
+> + * under the terms and conditions of the GNU General Public License,
+> + * version 2 or later, as published by the Free Software Foundation.
+> + *
+> + * This program is distributed in the hope it will be useful, but WITHOUT
+> + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+> + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+> for
+> + * more details.
+> + *
+> + * You should have received a copy of the GNU General Public License
+> along with
+> + * this program.  If not, see <http://www.gnu.org/licenses/>.
+> + */
+> +
+> +#include "qemu/osdep.h"
+> +#include "cpu.h"
+> +#include "exec/exec-all.h"
+> +#include "exec/helper-proto.h"
+> +#include <math.h>
+> +
+> +#define VECTOR_HELPER(name) HELPER(glue(vector_, name))
+> +
+> +static inline void vector_vtype_set_ill(CPURISCVState *env)
 > +{
-> +    *val = env->vfp.vtype;
-> +    return 0;
+> +    env->vfp.vtype = ((target_ulong)1) << (sizeof(target_ulong) - 1);
+> +    return;
 > +}
 > +
-> +static int read_vl(CPURISCVState *env, int csrno, target_ulong *val)
+>
+   env->vfp.vtype = ((target_ulong)1) << (sizeof(target_ulong) * 8 - 1);
+
+> +static inline int vector_vtype_get_sew(CPURISCVState *env)
 > +{
-> +    *val = env->vfp.vl;
-> +    return 0;
+> +    return (env->vfp.vtype >> 2) & 0x7;
 > +}
 > +
-> +static int read_vxrm(CPURISCVState *env, int csrno, target_ulong *val)
+>
+ extract64(env->vfp.vtype, 2, 3);
+
+> +static inline int vector_get_width(CPURISCVState *env)
 > +{
-> +    *val = env->vfp.vxrm;
-> +    return 0;
+> +    return  8 * (1 << vector_vtype_get_sew(env));
 > +}
 > +
-> +static int read_vxsat(CPURISCVState *env, int csrno, target_ulong *val)
+> +static inline int vector_get_lmul(CPURISCVState *env)
 > +{
-> +    *val = env->vfp.vxsat;
-> +    return 0;
+> +    return 1 << (env->vfp.vtype & 0x3);
 > +}
 > +
-> +static int read_vstart(CPURISCVState *env, int csrno, target_ulong *val)
+>
+ extract64(env->vfp.vtype, 0, 2);
+
+> +static inline int vector_get_vlmax(CPURISCVState *env)
 > +{
-> +    *val = env->vfp.vstart;
-> +    return 0;
+> +    return vector_get_lmul(env) * VLEN / vector_get_width(env);
 > +}
 > +
-> +static int write_vxrm(CPURISCVState *env, int csrno, target_ulong val)
+> +void VECTOR_HELPER(vsetvl)(CPURISCVState *env, uint32_t rs1, uint32_t rs2,
+> +    uint32_t rd)
 > +{
-> +    env->vfp.vxrm = val;
-> +    return 0;
+> +    int sew, max_sew, vlmax, vl;
+> +
+> +    if (rs2 == 0) {
+> +        vector_vtype_set_ill(env);
+> +        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
+> +        return;
+> +    }
+> +    env->vfp.vtype = env->gpr[rs2];
+> +    sew = 1 << vector_get_width(env) / 8;
+> +    max_sew = sizeof(target_ulong);
+> +
+> +    if (env->misa & RVD) {
+> +        max_sew = max_sew > 8 ? max_sew : 8;
+> +    } else if (env->misa & RVF) {
+> +        max_sew = max_sew > 4 ? max_sew : 4;
+> +    }
+
+
+As far as i understand, max_sew is defined by ELEN but not by existing
+floating-point extensions.
+ELEN should be configurable through command line cpu parameter.
+
+
+
++    if (sew > max_sew) {
+> +        vector_vtype_set_ill(env);
+> +        return;
+> +    }
+> +
+> +    vlmax = vector_get_vlmax(env);
+> +    if (rs1 == 0) {
+> +        vl = vlmax;
+> +    } else if (env->gpr[rs1] <= vlmax) {
+> +        vl = env->gpr[rs1];
+> +    } else if (env->gpr[rs1] < 2 * vlmax) {
+> +        vl = ceil(env->gpr[rs1] / 2);
+> +    } else {
+> +        vl = vlmax;
+> +    }
+> +    env->vfp.vl = vl;
+> +    env->gpr[rd] = vl;
+> +    env->vfp.vstart = 0;
+> +    return;
 > +}
 > +
-> +static int write_vxsat(CPURISCVState *env, int csrno, target_ulong val)
+> +void VECTOR_HELPER(vsetvli)(CPURISCVState *env, uint32_t rs1, uint32_t
+> zimm,
+> +    uint32_t rd)
 > +{
-> +    env->vfp.vxsat = val;
-> +    return 0;
-> +}
+> +    int sew, max_sew, vlmax, vl;
 > +
-> +static int write_vstart(CPURISCVState *env, int csrno, target_ulong val)
-> +{
-> +    env->vfp.vstart = val;
-> +    return 0;
-> +}
+> +    env->vfp.vtype = zimm;
+> +    sew = vector_get_width(env) / 8;
+> +    max_sew = sizeof(target_ulong);
 > +
->  /* User Timers and Counters */
->  static int read_instret(CPURISCVState *env, int csrno, target_ulong *val)
->  {
-> @@ -873,7 +925,12 @@ static riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =
-> {
->      [CSR_FFLAGS] =              { fs,   read_fflags,      write_fflags
->   },
->      [CSR_FRM] =                 { fs,   read_frm,         write_frm
->    },
->      [CSR_FCSR] =                { fs,   read_fcsr,        write_fcsr
->   },
-> -
-> +    /* Vector CSRs */
-> +    [CSR_VSTART] =              { any,   read_vstart,     write_vstart
->   },
-> +    [CSR_VXSAT] =               { any,   read_vxsat,      write_vxsat
->    },
-> +    [CSR_VXRM] =                { any,   read_vxrm,       write_vxrm
->   },
-> +    [CSR_VL] =                  { any,   read_vl
->   },
-> +    [CSR_VTYPE] =               { any,   read_vtype
->    },
->      /* User Timers and Counters */
->      [CSR_CYCLE] =               { ctr,  read_instret
->   },
->      [CSR_INSTRET] =             { ctr,  read_instret
->   },
+> +    if (env->misa & RVD) {
+> +        max_sew = max_sew > 8 ? max_sew : 8;
+> +    } else if (env->misa & RVF) {
+> +        max_sew = max_sew > 4 ? max_sew : 4;
+> +    }
+> +    if (sew > max_sew) {
+> +        vector_vtype_set_ill(env);
+> +        return;
+> +    }
+> +
+
+The same comment described above.
+
+> +    vlmax = vector_get_vlmax(env);
+> +    if (rs1 == 0) {
+> +        vl = vlmax;
+> +    } else if (env->gpr[rs1] <= vlmax) {
+> +        vl = env->gpr[rs1];
+> +    } else if (env->gpr[rs1] < 2 * vlmax) {
+> +        vl = ceil(env->gpr[rs1] / 2);
+> +    } else {
+> +        vl = vlmax;
+> +    }
+> +    env->vfp.vl = vl;
+> +    env->gpr[rd] = vl;
+> +    env->vfp.vstart = 0;
+> +    return;
+> +}
 > --
 > 2.7.4
 >
 >
 >
-Reviewed-by: Chih-Min Chao <chihmin.chao@sifive.com>
 
---00000000000065dbcd059248a27b
+--0000000000003bf7110592492ecb
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
@@ -264,198 +382,334 @@ iwei_liu@c-sky.com</a>&gt;<br>
 Signed-off-by: LIU Zhiwei &lt;<a href=3D"mailto:zhiwei_liu@c-sky.com" targe=
 t=3D"_blank">zhiwei_liu@c-sky.com</a>&gt;<br>
 ---<br>
-=C2=A0target/riscv/cpu_bits.h | 15 ++++++++++++<br>
-=C2=A0target/riscv/csr.c=C2=A0 =C2=A0 =C2=A0 | 65 +++++++++++++++++++++++++=
-+++++++++++++++++++++---<br>
-=C2=A02 files changed, 76 insertions(+), 4 deletions(-)<br>
+=C2=A0target/riscv/Makefile.objs=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 |=C2=A0 =C2=A02 +-<br>
+=C2=A0target/riscv/helper.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A03 +<br>
+=C2=A0target/riscv/insn32.decode=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 |=C2=A0 =C2=A05 ++<br>
+=C2=A0target/riscv/insn_trans/trans_rvv.inc.c |=C2=A0 46 ++++++++++++<br>
+=C2=A0target/riscv/translate.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 |=C2=A0 =C2=A01 +<br>
+=C2=A0target/riscv/vector_helper.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ | 126 ++++++++++++++++++++++++++++++++<br>
+=C2=A06 files changed, 182 insertions(+), 1 deletion(-)<br>
+=C2=A0create mode 100644 target/riscv/insn_trans/trans_rvv.inc.c<br>
+=C2=A0create mode 100644 target/riscv/vector_helper.c<br>
 <br>
-diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h<br>
-index 11f971a..9eb43ec 100644<br>
---- a/target/riscv/cpu_bits.h<br>
-+++ b/target/riscv/cpu_bits.h<br>
-@@ -29,6 +29,14 @@<br>
-=C2=A0#define FSR_NXA=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0(FPEXC=
-_NX &lt;&lt; FSR_AEXC_SHIFT)<br>
-=C2=A0#define FSR_AEXC=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 (FSR_NVA | =
-FSR_OFA | FSR_UFA | FSR_DZA | FSR_NXA)<br>
+diff --git a/target/riscv/Makefile.objs b/target/riscv/Makefile.objs<br>
+index b1c79bc..d577cef 100644<br>
+--- a/target/riscv/Makefile.objs<br>
++++ b/target/riscv/Makefile.objs<br>
+@@ -1,4 +1,4 @@<br>
+-obj-y +=3D translate.o op_helper.o cpu_helper.o cpu.o csr.o fpu_helper.o g=
+dbstub.o pmp.o<br>
++obj-y +=3D translate.o op_helper.o cpu_helper.o cpu.o csr.o fpu_helper.o v=
+ector_helper.o gdbstub.o pmp.o<br>
 <br>
-+/* Vector Fixed-Point round model */<br>
-+#define FSR_VXRM_SHIFT=C2=A0 =C2=A0 =C2=A0 9<br>
-+#define FSR_VXRM=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 (0x3 &lt;&lt; FS=
-R_VXRM_SHIFT)<br>
+=C2=A0DECODETREE =3D $(SRC_PATH)/scripts/decodetree.py<br>
+<br>
+diff --git a/target/riscv/helper.h b/target/riscv/helper.h<br>
+index debb22a..652f8c3 100644<br>
+--- a/target/riscv/helper.h<br>
++++ b/target/riscv/helper.h<br>
+@@ -76,3 +76,6 @@ DEF_HELPER_2(mret, tl, env, tl)<br>
+=C2=A0DEF_HELPER_1(wfi, void, env)<br>
+=C2=A0DEF_HELPER_1(tlb_flush, void, env)<br>
+=C2=A0#endif<br>
++/* Vector functions */<br>
++DEF_HELPER_4(vector_vsetvli, void, env, i32, i32, i32)<br>
++DEF_HELPER_4(vector_vsetvl, void, env, i32, i32, i32)<br>
+diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode<br>
+index 77f794e..5dc009c 100644<br>
+--- a/target/riscv/insn32.decode<br>
++++ b/target/riscv/insn32.decode<br>
+@@ -62,6 +62,7 @@<br>
+=C2=A0@r_rm=C2=A0 =C2=A0 .......=C2=A0 =C2=A0..... ..... ... ..... ....... =
+%rs2 %rs1 %rm %rd<br>
+=C2=A0@r2_rm=C2=A0 =C2=A0.......=C2=A0 =C2=A0..... ..... ... ..... ....... =
+%rs1 %rm %rd<br>
+=C2=A0@r2=C2=A0 =C2=A0 =C2=A0 .......=C2=A0 =C2=A0..... ..... ... ..... ...=
+.... %rs1 %rd<br>
++@r2_zimm . zimm:11=C2=A0 ..... ... ..... ....... %rs1 %rd<br>
+<br>
+=C2=A0@sfence_vma ....... ..... .....=C2=A0 =C2=A0... ..... ....... %rs2 %r=
+s1<br>
+=C2=A0@sfence_vm=C2=A0 ....... ..... .....=C2=A0 =C2=A0... ..... ....... %r=
+s1<br>
+@@ -203,3 +204,7 @@ fcvt_w_d=C2=A0 =C2=A01100001=C2=A0 00000 ..... ... ....=
+. 1010011 @r2_rm<br>
+=C2=A0fcvt_wu_d=C2=A0 1100001=C2=A0 00001 ..... ... ..... 1010011 @r2_rm<br=
+>
+=C2=A0fcvt_d_w=C2=A0 =C2=A01101001=C2=A0 00000 ..... ... ..... 1010011 @r2_=
+rm<br>
+=C2=A0fcvt_d_wu=C2=A0 1101001=C2=A0 00001 ..... ... ..... 1010011 @r2_rm<br=
+>
 +<br>
-+/* Vector Fixed-Point saturation flag */<br>
-+#define FSR_VXSAT_SHIFT=C2=A0 =C2=A0 =C2=A08<br>
-+#define FSR_VXSAT=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0(0x1 &lt;&lt; FS=
-R_VXSAT_SHIFT)<br>
-+<br>
-=C2=A0/* Control and Status Registers */<br>
++# *** RV32V Extension ***<br>
++vsetvli=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A00 ........... ..... 111 ..... 101=
+0111=C2=A0 @r2_zimm<br>
++vsetvl=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 1000000 ..... ..... 111 ..... 101=
+0111=C2=A0 @r<br>
+diff --git a/target/riscv/insn_trans/trans_rvv.inc.c b/target/riscv/insn_tr=
+ans/trans_rvv.inc.c<br>
+new file mode 100644<br>
+index 0000000..82e7ad6<br>
+--- /dev/null<br>
++++ b/target/riscv/insn_trans/trans_rvv.inc.c<br>
+@@ -0,0 +1,46 @@<br>
++/*<br>
++ * RISC-V translation routines for the RVV Standard Extension.<br>
++ *<br>
++ * Copyright (c) 2019 C-SKY Limited. All rights reserved.<br>
++ *<br>
++ * This program is free software; you can redistribute it and/or modify it=
 <br>
-=C2=A0/* User Trap Setup */<br>
-@@ -48,6 +56,13 @@<br>
-=C2=A0#define CSR_FRM=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A00x002<=
++ * under the terms and conditions of the GNU General Public License,<br>
++ * version 2 or later, as published by the Free Software Foundation.<br>
++ *<br>
++ * This program is distributed in the hope it will be useful, but WITHOUT<=
 br>
-=C2=A0#define CSR_FCSR=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0x003<br>
-<br>
-+/* User Vector CSRs */<br>
-+#define CSR_VSTART=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0x008<br>
-+#define CSR_VXSAT=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A00x009<br>
-+#define CSR_VXRM=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0x00a<br>
-+#define CSR_VL=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0xc20<br>
-+#define CSR_VTYPE=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A00xc21<br>
-+<br>
-=C2=A0/* User Timers and Counters */<br>
-=C2=A0#define CSR_CYCLE=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A00xc00<br>
-=C2=A0#define CSR_TIME=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0xc01<br>
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c<br>
-index e0d4586..a6131ff 100644<br>
---- a/target/riscv/csr.c<br>
-+++ b/target/riscv/csr.c<br>
-@@ -87,12 +87,12 @@ static int ctr(CPURISCVState *env, int csrno)<br>
-=C2=A0 =C2=A0 =C2=A0return 0;<br>
-=C2=A0}<br>
-<br>
--#if !defined(CONFIG_USER_ONLY)<br>
-=C2=A0static int any(CPURISCVState *env, int csrno)<br>
-=C2=A0{<br>
-=C2=A0 =C2=A0 =C2=A0return 0;<br>
-=C2=A0}<br>
-<br>
-+#if !defined(CONFIG_USER_ONLY)<br>
-=C2=A0static int smode(CPURISCVState *env, int csrno)<br>
-=C2=A0{<br>
-=C2=A0 =C2=A0 =C2=A0return -!riscv_has_ext(env, RVS);<br>
-@@ -158,8 +158,10 @@ static int read_fcsr(CPURISCVState *env, int csrno, ta=
-rget_ulong *val)<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return -1;<br>
-=C2=A0 =C2=A0 =C2=A0}<br>
-=C2=A0#endif<br>
--=C2=A0 =C2=A0 *val =3D (riscv_cpu_get_fflags(env) &lt;&lt; FSR_AEXC_SHIFT)=
-<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 | (env-&gt;frm &lt;&lt; FSR_RD_SHIFT);<br>
-+=C2=A0 =C2=A0 *val =3D (env-&gt;vfp.vxrm &lt;&lt; FSR_VXRM_SHIFT)<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 | (env-&gt;vfp.vxsat &lt;&lt; FS=
-R_VXSAT_SHIFT)<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 | (riscv_cpu_get_fflags(env) &lt=
-;&lt; FSR_AEXC_SHIFT)<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 | (env-&gt;frm &lt;&lt; FSR_RD_S=
-HIFT);<br>
-=C2=A0 =C2=A0 =C2=A0return 0;<br>
-=C2=A0}<br>
-<br>
-@@ -172,10 +174,60 @@ static int write_fcsr(CPURISCVState *env, int csrno, =
-target_ulong val)<br>
-=C2=A0 =C2=A0 =C2=A0env-&gt;mstatus |=3D MSTATUS_FS;<br>
-=C2=A0#endif<br>
-=C2=A0 =C2=A0 =C2=A0env-&gt;frm =3D (val &amp; FSR_RD) &gt;&gt; FSR_RD_SHIF=
-T;<br>
-+=C2=A0 =C2=A0 env-&gt;vfp.vxrm =3D (val &amp; FSR_VXRM) &gt;&gt; FSR_VXRM_=
-SHIFT;<br>
-+=C2=A0 =C2=A0 env-&gt;vfp.vxsat =3D (val &amp; FSR_VXSAT) &gt;&gt; FSR_VXS=
-AT_SHIFT;<br>
-=C2=A0 =C2=A0 =C2=A0riscv_cpu_set_fflags(env, (val &amp; FSR_AEXC) &gt;&gt;=
- FSR_AEXC_SHIFT);<br>
-=C2=A0 =C2=A0 =C2=A0return 0;<br>
-=C2=A0}<br>
-<br>
-+static int read_vtype(CPURISCVState *env, int csrno, target_ulong *val)<br=
->
-+{<br>
-+=C2=A0 =C2=A0 *val =3D env-&gt;vfp.vtype;<br>
-+=C2=A0 =C2=A0 return 0;<br>
-+}<br>
-+<br>
-+static int read_vl(CPURISCVState *env, int csrno, target_ulong *val)<br>
-+{<br>
-+=C2=A0 =C2=A0 *val =3D env-&gt;vfp.vl;<br>
-+=C2=A0 =C2=A0 return 0;<br>
-+}<br>
-+<br>
-+static int read_vxrm(CPURISCVState *env, int csrno, target_ulong *val)<br>
-+{<br>
-+=C2=A0 =C2=A0 *val =3D env-&gt;vfp.vxrm;<br>
-+=C2=A0 =C2=A0 return 0;<br>
-+}<br>
-+<br>
-+static int read_vxsat(CPURISCVState *env, int csrno, target_ulong *val)<br=
->
-+{<br>
-+=C2=A0 =C2=A0 *val =3D env-&gt;vfp.vxsat;<br>
-+=C2=A0 =C2=A0 return 0;<br>
-+}<br>
-+<br>
-+static int read_vstart(CPURISCVState *env, int csrno, target_ulong *val)<b=
++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or<b=
 r>
-+{<br>
-+=C2=A0 =C2=A0 *val =3D env-&gt;vfp.vstart;<br>
-+=C2=A0 =C2=A0 return 0;<br>
++ * FITNESS FOR A PARTICULAR PURPOSE.=C2=A0 See the GNU General Public Lice=
+nse for<br>
++ * more details.<br>
++ *<br>
++ * You should have received a copy of the GNU General Public License along=
+ with<br>
++ * this program.=C2=A0 If not, see &lt;<a href=3D"http://www.gnu.org/licen=
+ses/" rel=3D"noreferrer" target=3D"_blank">http://www.gnu.org/licenses/</a>=
+&gt;.<br>
++ */<br>
++<br>
++#define GEN_VECTOR_R(INSN) \<br>
++static bool trans_##INSN(DisasContext *ctx, arg_##INSN * a) \<br>
++{=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 \<br>
++=C2=A0 =C2=A0 TCGv_i32 s1 =3D tcg_const_i32(a-&gt;rs1);=C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0\<br>
++=C2=A0 =C2=A0 TCGv_i32 s2 =3D tcg_const_i32(a-&gt;rs2);=C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0\<br>
++=C2=A0 =C2=A0 TCGv_i32 d=C2=A0 =3D tcg_const_i32(a-&gt;rd);=C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 \<br>
++=C2=A0 =C2=A0 gen_helper_vector_##INSN(cpu_env, s1, s2, d);=C2=A0 =C2=A0 \=
+<br>
++=C2=A0 =C2=A0 tcg_temp_free_i32(s1);=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0\<br>
++=C2=A0 =C2=A0 tcg_temp_free_i32(s2);=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0\<br>
++=C2=A0 =C2=A0 tcg_temp_free_i32(d);=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 \<br>
++=C2=A0 =C2=A0 return true;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0\<br>
 +}<br>
 +<br>
-+static int write_vxrm(CPURISCVState *env, int csrno, target_ulong val)<br>
-+{<br>
-+=C2=A0 =C2=A0 env-&gt;vfp.vxrm =3D val;<br>
-+=C2=A0 =C2=A0 return 0;<br>
++#define GEN_VECTOR_R2_ZIMM(INSN) \<br>
++static bool trans_##INSN(DisasContext *ctx, arg_##INSN * a) \<br>
++{=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 \<br>
++=C2=A0 =C2=A0 TCGv_i32 s1 =3D tcg_const_i32(a-&gt;rs1);=C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0\<br>
++=C2=A0 =C2=A0 TCGv_i32 zimm =3D tcg_const_i32(a-&gt;zimm);=C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 \<br>
++=C2=A0 =C2=A0 TCGv_i32 d=C2=A0 =3D tcg_const_i32(a-&gt;rd);=C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 \<br>
++=C2=A0 =C2=A0 gen_helper_vector_##INSN(cpu_env, s1, zimm, d);=C2=A0 =C2=A0=
+ =C2=A0 \<br>
++=C2=A0 =C2=A0 tcg_temp_free_i32(s1);=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0\<br>
++=C2=A0 =C2=A0 tcg_temp_free_i32(zimm);=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0\<br>
++=C2=A0 =C2=A0 tcg_temp_free_i32(d);=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 \<br>
++=C2=A0 =C2=A0 return true;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0\<br>
 +}<br>
 +<br>
-+static int write_vxsat(CPURISCVState *env, int csrno, target_ulong val)<br=
++GEN_VECTOR_R2_ZIMM(vsetvli)<br>
++GEN_VECTOR_R(vsetvl)<br>
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c<br>
+index 8d6ab73..587c23e 100644<br>
+--- a/target/riscv/translate.c<br>
++++ b/target/riscv/translate.c<br>
+@@ -706,6 +706,7 @@ static bool gen_shift(DisasContext *ctx, arg_r *a,<br>
+=C2=A0#include &quot;insn_trans/trans_rva.inc.c&quot;<br>
+=C2=A0#include &quot;insn_trans/trans_rvf.inc.c&quot;<br>
+=C2=A0#include &quot;insn_trans/trans_rvd.inc.c&quot;<br>
++#include &quot;insn_trans/trans_rvv.inc.c&quot;<br>
+=C2=A0#include &quot;insn_trans/trans_privileged.inc.c&quot;<br>
+<br>
+=C2=A0/*<br>
+diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c<br=
 >
-+{<br>
-+=C2=A0 =C2=A0 env-&gt;vfp.vxsat =3D val;<br>
-+=C2=A0 =C2=A0 return 0;<br>
-+}<br>
-+<br>
-+static int write_vstart(CPURISCVState *env, int csrno, target_ulong val)<b=
+new file mode 100644<br>
+index 0000000..b279e6f<br>
+--- /dev/null<br>
++++ b/target/riscv/vector_helper.c<br>
+@@ -0,0 +1,126 @@<br>
++/*<br>
++ * RISC-V Vectore Extension Helpers for QEMU.<br>
++ *<br>
++ * Copyright (c) 2019 C-SKY Limited. All rights reserved.<br>
++ *<br>
++ * This program is free software; you can redistribute it and/or modify it=
+<br>
++ * under the terms and conditions of the GNU General Public License,<br>
++ * version 2 or later, as published by the Free Software Foundation.<br>
++ *<br>
++ * This program is distributed in the hope it will be useful, but WITHOUT<=
+br>
++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or<b=
 r>
++ * FITNESS FOR A PARTICULAR PURPOSE.=C2=A0 See the GNU General Public Lice=
+nse for<br>
++ * more details.<br>
++ *<br>
++ * You should have received a copy of the GNU General Public License along=
+ with<br>
++ * this program.=C2=A0 If not, see &lt;<a href=3D"http://www.gnu.org/licen=
+ses/" rel=3D"noreferrer" target=3D"_blank">http://www.gnu.org/licenses/</a>=
+&gt;.<br>
++ */<br>
++<br>
++#include &quot;qemu/osdep.h&quot;<br>
++#include &quot;cpu.h&quot;<br>
++#include &quot;exec/exec-all.h&quot;<br>
++#include &quot;exec/helper-proto.h&quot;<br>
++#include &lt;math.h&gt;<br>
++<br>
++#define VECTOR_HELPER(name) HELPER(glue(vector_, name))<br>
++<br>
++static inline void vector_vtype_set_ill(CPURISCVState *env)<br>
 +{<br>
-+=C2=A0 =C2=A0 env-&gt;vfp.vstart =3D val;<br>
-+=C2=A0 =C2=A0 return 0;<br>
++=C2=A0 =C2=A0 env-&gt;vfp.vtype =3D ((target_ulong)1) &lt;&lt; (sizeof(tar=
+get_ulong) - 1);<br>
++=C2=A0 =C2=A0 return;<br>
++}<br>
++<br></blockquote><div>=C2=A0 =C2=A0env-&gt;vfp.vtype =3D ((target_ulong)1)=
+ &lt;&lt; (sizeof(target_ulong) * 8 - 1);</div><blockquote class=3D"gmail_q=
+uote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,2=
+04);padding-left:1ex">
++static inline int vector_vtype_get_sew(CPURISCVState *env)<br>
++{<br>
++=C2=A0 =C2=A0 return (env-&gt;vfp.vtype &gt;&gt; 2) &amp; 0x7;<br>
++}<br>
++<br></blockquote><div>=C2=A0extract64(env-&gt;vfp.vtype, 2, 3);=C2=A0</div=
+><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border=
+-left:1px solid rgb(204,204,204);padding-left:1ex">
++static inline int vector_get_width(CPURISCVState *env)<br>
++{<br>
++=C2=A0 =C2=A0 return=C2=A0 8 * (1 &lt;&lt; vector_vtype_get_sew(env));<br>
 +}<br>
 +<br>
-=C2=A0/* User Timers and Counters */<br>
-=C2=A0static int read_instret(CPURISCVState *env, int csrno, target_ulong *=
-val)<br>
-=C2=A0{<br>
-@@ -873,7 +925,12 @@ static riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =
-=3D {<br>
-=C2=A0 =C2=A0 =C2=A0[CSR_FFLAGS] =3D=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 { fs,=C2=A0 =C2=A0read_fflags,=C2=A0 =C2=A0 =C2=A0 write_fflags=
-=C2=A0 =C2=A0 =C2=A0 },<br>
-=C2=A0 =C2=A0 =C2=A0[CSR_FRM] =3D=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0{ fs,=C2=A0 =C2=A0read_frm,=C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0write_frm=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0},<br>
-=C2=A0 =C2=A0 =C2=A0[CSR_FCSR] =3D=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 { fs,=C2=A0 =C2=A0read_fcsr,=C2=A0 =C2=A0 =C2=A0 =C2=A0 writ=
-e_fcsr=C2=A0 =C2=A0 =C2=A0 =C2=A0 },<br>
--<br>
-+=C2=A0 =C2=A0 /* Vector CSRs */<br>
-+=C2=A0 =C2=A0 [CSR_VSTART] =3D=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 { any,=C2=A0 =C2=A0read_vstart,=C2=A0 =C2=A0 =C2=A0write_vstart=C2=
-=A0 =C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 [CSR_VXSAT] =3D=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0{ any,=C2=A0 =C2=A0read_vxsat,=C2=A0 =C2=A0 =C2=A0 write_vxsat=C2=
-=A0 =C2=A0 =C2=A0 =C2=A0},<br>
-+=C2=A0 =C2=A0 [CSR_VXRM] =3D=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 { any,=C2=A0 =C2=A0read_vxrm,=C2=A0 =C2=A0 =C2=A0 =C2=A0write_vx=
-rm=C2=A0 =C2=A0 =C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 [CSR_VL] =3D=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 { any,=C2=A0 =C2=A0read_vl=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 },<br>
-+=C2=A0 =C2=A0 [CSR_VTYPE] =3D=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0{ any,=C2=A0 =C2=A0read_vtype=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0},<br>
-=C2=A0 =C2=A0 =C2=A0/* User Timers and Counters */<br>
-=C2=A0 =C2=A0 =C2=A0[CSR_CYCLE] =3D=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0{ ctr,=C2=A0 read_instret=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 },<br>
-=C2=A0 =C2=A0 =C2=A0[CSR_INSTRET] =3D=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0{ ctr,=C2=A0 read_instret=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 },<br>
++static inline int vector_get_lmul(CPURISCVState *env)<br>
++{<br>
++=C2=A0 =C2=A0 return 1 &lt;&lt; (env-&gt;vfp.vtype &amp; 0x3);<br>
++}<br>
++<br></blockquote><div>=C2=A0extract64(env-&gt;vfp.vtype, 0, 2);=C2=A0=C2=
+=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8e=
+x;border-left:1px solid rgb(204,204,204);padding-left:1ex">
++static inline int vector_get_vlmax(CPURISCVState *env)<br>
++{<br>
++=C2=A0 =C2=A0 return vector_get_lmul(env) * VLEN / vector_get_width(env);<=
+br>
++}<br>
++<br>
++void VECTOR_HELPER(vsetvl)(CPURISCVState *env, uint32_t rs1, uint32_t rs2,=
+<br>
++=C2=A0 =C2=A0 uint32_t rd)<br>
++{<br>
++=C2=A0 =C2=A0 int sew, max_sew, vlmax, vl;<br>
++<br>
++=C2=A0 =C2=A0 if (rs2 =3D=3D 0) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 vector_vtype_set_ill(env);<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_=
+INST, GETPC());<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 return;<br>
++=C2=A0 =C2=A0 }<br>
++=C2=A0 =C2=A0 env-&gt;vfp.vtype =3D env-&gt;gpr[rs2];<br>
++=C2=A0 =C2=A0 sew =3D 1 &lt;&lt; vector_get_width(env) / 8;<br>
++=C2=A0 =C2=A0 max_sew =3D sizeof(target_ulong);<br>
++<br>
++=C2=A0 =C2=A0 if (env-&gt;misa &amp; RVD) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 max_sew =3D max_sew &gt; 8 ? max_sew : 8;<br>
++=C2=A0 =C2=A0 } else if (env-&gt;misa &amp; RVF) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 max_sew =3D max_sew &gt; 4 ? max_sew : 4;<br>
++=C2=A0 =C2=A0 }</blockquote><div><br></div><div>As far as i understand, ma=
+x_sew is defined by ELEN but not by existing floating-point extensions.</di=
+v><div>ELEN should be configurable through command line cpu parameter.</div=
+><div><br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0=
+px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">=C2=A0</b=
+lockquote><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8=
+ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
++=C2=A0 =C2=A0 if (sew &gt; max_sew) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 vector_vtype_set_ill(env);<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 return;<br>
++=C2=A0 =C2=A0 }<br>
++<br>
++=C2=A0 =C2=A0 vlmax =3D vector_get_vlmax(env);<br>
++=C2=A0 =C2=A0 if (rs1 =3D=3D 0) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 vl =3D vlmax;<br>
++=C2=A0 =C2=A0 } else if (env-&gt;gpr[rs1] &lt;=3D vlmax) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 vl =3D env-&gt;gpr[rs1];<br>
++=C2=A0 =C2=A0 } else if (env-&gt;gpr[rs1] &lt; 2 * vlmax) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 vl =3D ceil(env-&gt;gpr[rs1] / 2);<br>
++=C2=A0 =C2=A0 } else {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 vl =3D vlmax;<br>
++=C2=A0 =C2=A0 }<br>
++=C2=A0 =C2=A0 env-&gt;vfp.vl =3D vl;<br>
++=C2=A0 =C2=A0 env-&gt;gpr[rd] =3D vl;<br>
++=C2=A0 =C2=A0 env-&gt;vfp.vstart =3D 0;<br>
++=C2=A0 =C2=A0 return;<br>
++}<br>
++<br>
++void VECTOR_HELPER(vsetvli)(CPURISCVState *env, uint32_t rs1, uint32_t zim=
+m,<br>
++=C2=A0 =C2=A0 uint32_t rd)<br>
++{<br>
++=C2=A0 =C2=A0 int sew, max_sew, vlmax, vl;<br>
++<br>
++=C2=A0 =C2=A0 env-&gt;vfp.vtype =3D zimm;<br>
++=C2=A0 =C2=A0 sew =3D vector_get_width(env) / 8;<br>
++=C2=A0 =C2=A0 max_sew =3D sizeof(target_ulong);<br>
++<br>
++=C2=A0 =C2=A0 if (env-&gt;misa &amp; RVD) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 max_sew =3D max_sew &gt; 8 ? max_sew : 8;<br>
++=C2=A0 =C2=A0 } else if (env-&gt;misa &amp; RVF) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 max_sew =3D max_sew &gt; 4 ? max_sew : 4;<br>
++=C2=A0 =C2=A0 }<br>
++=C2=A0 =C2=A0 if (sew &gt; max_sew) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 vector_vtype_set_ill(env);<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 return;<br>
++=C2=A0 =C2=A0 }<br>
++</blockquote><div>The same comment described above.=C2=A0</div><blockquote=
+ class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px so=
+lid rgb(204,204,204);padding-left:1ex">
++=C2=A0 =C2=A0 vlmax =3D vector_get_vlmax(env);<br>
++=C2=A0 =C2=A0 if (rs1 =3D=3D 0) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 vl =3D vlmax;<br>
++=C2=A0 =C2=A0 } else if (env-&gt;gpr[rs1] &lt;=3D vlmax) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 vl =3D env-&gt;gpr[rs1];<br>
++=C2=A0 =C2=A0 } else if (env-&gt;gpr[rs1] &lt; 2 * vlmax) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 vl =3D ceil(env-&gt;gpr[rs1] / 2);<br>
++=C2=A0 =C2=A0 } else {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 vl =3D vlmax;<br>
++=C2=A0 =C2=A0 }<br>
++=C2=A0 =C2=A0 env-&gt;vfp.vl =3D vl;<br>
++=C2=A0 =C2=A0 env-&gt;gpr[rd] =3D vl;<br>
++=C2=A0 =C2=A0 env-&gt;vfp.vstart =3D 0;<br>
++=C2=A0 =C2=A0 return;<br>
++}<br>
 -- <br>
 2.7.4<br>
 <br>
-<br></blockquote><div><br></div><div>Reviewed-by: Chih-Min Chao &lt;<a href=
-=3D"mailto:chihmin.chao@sifive.com" target=3D"_blank">chihmin.chao@sifive.c=
-om</a>&gt;=C2=A0=C2=A0=C2=A0</div></div></div>
+<br>
+</blockquote></div></div>
 
---00000000000065dbcd059248a27b--
+--0000000000003bf7110592492ecb--
 
