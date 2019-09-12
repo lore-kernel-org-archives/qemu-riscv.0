@@ -1,74 +1,73 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1i8R8N-0001bp-LF
-	for mharc-qemu-riscv@gnu.org; Thu, 12 Sep 2019 11:35:47 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:45482)
+	id 1i8SAX-0003o8-3V
+	for mharc-qemu-riscv@gnu.org; Thu, 12 Sep 2019 12:42:05 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59254)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <richard.henderson@linaro.org>) id 1i8R8L-0001a0-Rd
- for qemu-riscv@nongnu.org; Thu, 12 Sep 2019 11:35:46 -0400
+ (envelope-from <richard.henderson@linaro.org>) id 1i8SAU-0003nS-4x
+ for qemu-riscv@nongnu.org; Thu, 12 Sep 2019 12:42:03 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <richard.henderson@linaro.org>) id 1i8R8K-0005R5-LU
- for qemu-riscv@nongnu.org; Thu, 12 Sep 2019 11:35:45 -0400
-Received: from mail-qk1-x743.google.com ([2607:f8b0:4864:20::743]:43465)
+ (envelope-from <richard.henderson@linaro.org>) id 1i8SAS-0001In-Hb
+ for qemu-riscv@nongnu.org; Thu, 12 Sep 2019 12:42:01 -0400
+Received: from mail-qk1-x742.google.com ([2607:f8b0:4864:20::742]:37880)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
- id 1i8R8K-0005Qs-EI
- for qemu-riscv@nongnu.org; Thu, 12 Sep 2019 11:35:44 -0400
-Received: by mail-qk1-x743.google.com with SMTP id h126so17218321qke.10
- for <qemu-riscv@nongnu.org>; Thu, 12 Sep 2019 08:35:44 -0700 (PDT)
+ id 1i8SAS-0001HR-9S
+ for qemu-riscv@nongnu.org; Thu, 12 Sep 2019 12:42:00 -0400
+Received: by mail-qk1-x742.google.com with SMTP id u184so22238661qkd.4
+ for <qemu-riscv@nongnu.org>; Thu, 12 Sep 2019 09:42:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=subject:from:to:cc:references:openpgp:message-id:date:user-agent
+ h=subject:to:cc:references:from:openpgp:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=vbV1VsWRy4JGhj+HyjrWiwMobmXD95X4RSgI2CIV3uQ=;
- b=lIO8+K3uuuo7JCCAKvRKyjDAC2RhD3DoZjiDFWF7t6SqkpqJ5NmBqVTBuxtwnZxGmO
- IobtcFu5q+w9xKN3qpo+3u8jDKx8kvZEyaSNaevFhO0RUeUvK/OZBEz6XCN/DCe2e4ST
- pANyRhKdWYcr3F/RMPQ1RIwPMlCkkYV9ZOUvtXufZPNlZLVsKNp3N8EXYjNbHBc12CR/
- FW7OlvSicRErue7h4tZC+yDYORGaGMmWwsSRfhlp6lgt1jAU2QE6xlpher81JM1XoKAK
- A2Xlv2uAFQ8Zw81URUvwvoLmTczwH3ijAoaubOqjGQbzbWZcShrUuyFWanXRiaBgexn/
- XTqw==
+ bh=YS9/Qq3kpBdzCw97IrsBJ1Krr6ZKQtQ/hWzHljt+FAY=;
+ b=ooqUJN8K+KqObp2dM6XItRBaaZyVxpKRwxjl3f+r8+AQ+z5nemU8Nuuu1WlbVV1von
+ 5/cEUQ/0WNdlWml3QlBQ91CNDPMnnl9uvHMwuhFy8SU7YQHl2svVkJfupzAf/ASlNMFh
+ O8rGGu6Mdwgj6FwQ7qTH9ypvLSrwd1jMDQ1e8M5UONBsxTPHrgOKI0Yv827bkGVY+mLJ
+ tAqrgZpWMwblyNmNLLcehcCC1EcNPNun+WjiILvd/HW03O+0hdUkyaSJoA0HDjM6+Zqu
+ txMmu3H+eRSuRc2Wn9iLNbhIVOHUt6s9rvCKf5SdpI7lYkPSiVGR5NhNAHY/b5SAgA9f
+ +VQw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:from:to:cc:references:openpgp:message-id
+ h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
  :date:user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=vbV1VsWRy4JGhj+HyjrWiwMobmXD95X4RSgI2CIV3uQ=;
- b=XK6l/oqrW/jzP6qWMtL0l9LetJns+Ok2Rpy05EH06NvCxAWdLkahUA+HVzL9LMXoOy
- KkQvxH6hycdli8Svwx4q+FR4Hzh3TLc1dRHTFQCj4ggFt1maYmJYXz/uwxYH/YiovbyG
- jTdcj73jmerAD/UJ+g8thhqL2BqsDwz4l2Unre20SXDqyk/2tPqPlEOoxzPXQlpBau6T
- yCv7gPzsG/Ojp/tVNGor/cU9Qt5R2apUNuZ1YkncqQIjeDGST2qCHa/vUltYTeOLrdQe
- hJnCfEqKYh5GCGRxTIy4jp1mu49rxYHde5dmmIQrLtcYuskjySWA4ovN5ztb23jjhKUg
- EeCA==
-X-Gm-Message-State: APjAAAWO9O6uOA5HhIJV19k854qgS2brvRNaMXnoifi0ifo9lTeFWnyJ
- Xy4Dp2I3C+/FISrsM5GtB6HSzg==
-X-Google-Smtp-Source: APXvYqyXLoW2qmGXf4NT9fFIk2GnpevuQBqOiNkRlJLHiwZJ/dlCAE7lj7H5GhNWFoRwdoTaT4F0ZQ==
-X-Received: by 2002:a37:981:: with SMTP id 123mr42578896qkj.190.1568302543518; 
- Thu, 12 Sep 2019 08:35:43 -0700 (PDT)
+ bh=YS9/Qq3kpBdzCw97IrsBJ1Krr6ZKQtQ/hWzHljt+FAY=;
+ b=m6YZcM6M0p36chCDnBQAVRsZgN3xkzjJF+I+7Iggw0NVOPXIljbMFagcWuKz0H/W6p
+ +wh9XtQY9sC8nw5XYh/NNBYhLC2epwq5fRfoKgbI3plG6NYavVNk4Y9LAtjAvQPsPIQ2
+ NJQIVUf3JFCv4uUQvARM/E7BVtT1wYC1yJ5rn/zrGsVwjW324/VUOWA9s4T7UDYOMezj
+ ccn9MZ4MGa1bEGz+SlOVLWz0vhXxHckbDsdyP+DJ4fuFS1PVU0q+30dTGPB3l9yWWHzM
+ isDSrs1isBYhad2tZJ9DLMPEOn2FMi8kEui5M4ZKPekEaUnGmSDBOM1njZ9qZOvl1WEc
+ TVvw==
+X-Gm-Message-State: APjAAAWclONNeXQiKWtvApxNF2ql7+A893huIHIKSjtweUlKuGfOHTan
+ aqj3xAxsn/DVYYNcAIJK9YHOyg==
+X-Google-Smtp-Source: APXvYqxZ6SPy95lWXReYTkumfT22PmbslAKm1zpIMKEw/unfxEXFGNn3tQu7RWllupWf+6XbWr7ICg==
+X-Received: by 2002:a37:9544:: with SMTP id x65mr43714433qkd.100.1568306519036; 
+ Thu, 12 Sep 2019 09:41:59 -0700 (PDT)
 Received: from [172.20.5.51] ([67.69.50.154])
- by smtp.gmail.com with ESMTPSA id j4sm12601044qkf.116.2019.09.12.08.35.42
+ by smtp.gmail.com with ESMTPSA id j137sm11104368qke.64.2019.09.12.09.41.57
  (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
- Thu, 12 Sep 2019 08:35:42 -0700 (PDT)
-From: Richard Henderson <richard.henderson@linaro.org>
+ Thu, 12 Sep 2019 09:41:58 -0700 (PDT)
 To: liuzhiwei <zhiwei_liu@c-sky.com>, Alistair.Francis@wdc.com,
  palmer@sifive.com, sagark@eecs.berkeley.edu, kbastian@mail.uni-paderborn.de,
  riku.voipio@iki.fi, laurent@vivier.eu, wenmeng_zhang@c-sky.com
 Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, wxy194768@alibaba-inc.com
 References: <1568183141-67641-1-git-send-email-zhiwei_liu@c-sky.com>
- <1568183141-67641-9-git-send-email-zhiwei_liu@c-sky.com>
- <1e707c9c-e74e-8a21-11f7-6ce8d09cf06d@linaro.org>
+ <1568183141-67641-10-git-send-email-zhiwei_liu@c-sky.com>
+From: Richard Henderson <richard.henderson@linaro.org>
 Openpgp: preference=signencrypt
-Message-ID: <bd07e348-7fd5-8263-a781-1f40f46ed6ac@linaro.org>
-Date: Thu, 12 Sep 2019 11:35:40 -0400
+Message-ID: <2d4c21ee-3c2c-7c14-82f7-9916b66444cc@linaro.org>
+Date: Thu, 12 Sep 2019 12:41:55 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
  Thunderbird/60.8.0
 MIME-Version: 1.0
-In-Reply-To: <1e707c9c-e74e-8a21-11f7-6ce8d09cf06d@linaro.org>
+In-Reply-To: <1568183141-67641-10-git-send-email-zhiwei_liu@c-sky.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::743
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v2 08/17] RISC-V: add vector
- extension integer instructions part1, add/sub/adc/sbc
+X-Received-From: 2607:f8b0:4864:20::742
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v2 09/17] RISC-V: add vector
+ extension integer instructions part2, bit/shift
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -80,28 +79,75 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Sep 2019 15:35:47 -0000
+X-List-Received-Date: Thu, 12 Sep 2019 16:42:03 -0000
 
-On 9/12/19 11:27 AM, Richard Henderson wrote:
->> +void VECTOR_HELPER(vadc_vxm)(CPURISCVState *env, uint32_t rs1,
->> +    uint32_t rs2, uint32_t rd)
->> +{
-> 
-> Watch the spacing between functions.
-> Pass gpr rs1 by value.
-> 
->> +void VECTOR_HELPER(vadc_vim)(CPURISCVState *env, uint32_t rs1,
->> +    uint32_t rs2, uint32_t rd)
->> +{
-> ...
->> +                env->vfp.vreg[dest].u8[j] = sign_extend(rs1, 5)
-> 
-> Pass the immediate as a sign-extended immediate to begin with, not as an
-> unsigned 5-bit field.
+On 9/11/19 2:25 AM, liuzhiwei wrote:
+> +void VECTOR_HELPER(vand_vv)(CPURISCVState *env, uint32_t vm, uint32_t rs1,
+> +    uint32_t rs2, uint32_t rd)
+> +{
+> +    int i, j, vl;
+> +    uint32_t lmul, width, src1, src2, dest, vlmax;
+> +
+> +    vl = env->vfp.vl;
+> +    lmul  = vector_get_lmul(env);
+> +    width   = vector_get_width(env);
+> +    vlmax = vector_get_vlmax(env);
+> +
+> +    if (vector_vtype_ill(env) || vector_overlap_vm_common(lmul, vm, rd)) {
+> +        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
+> +        return;
+> +    }
+> +    vector_lmul_check_reg(env, lmul, rs1, false);
+> +    vector_lmul_check_reg(env, lmul, rs2, false);
+> +    vector_lmul_check_reg(env, lmul, rd, false);
+> +
+> +    for (i = 0; i < vlmax; i++) {
+> +        src1 = rs1 + (i / (VLEN / width));
+> +        src2 = rs2 + (i / (VLEN / width));
+> +        dest = rd + (i / (VLEN / width));
+> +        j = i % (VLEN / width);
+> +        if (i < env->vfp.vstart) {
+> +            continue;
+> +        } else if (i < vl) {
+> +            switch (width) {
+> +            case 8:
+> +                if (vector_elem_mask(env, vm, width, lmul, i)) {
+> +                    env->vfp.vreg[dest].u8[j] = env->vfp.vreg[src1].u8[j]
+> +                        & env->vfp.vreg[src2].u8[j];
+> +                }
+> +                break;
 
-Oh, and of course *_vxm and *_vim should be identical, because in both cases
-there is a single scalar parameter.  In the first case the scalar is passed by
-value from the gpr; in the second case the scalar is the sign-extended constant.
+Note that a non-predicated logical operation need not consider the width.  All
+of the widths perform the same operation, and therefore having the host operate
+on u64 is fastest.  This is another good reason to notice vm=1 within the
+translator and use separate helper functions for masked vs non-masked.
+
+> +void VECTOR_HELPER(vand_vx)(CPURISCVState *env, uint32_t vm, uint32_t rs1,
+> +    uint32_t rs2, uint32_t rd)
+...
+> +void VECTOR_HELPER(vand_vi)(CPURISCVState *env, uint32_t vm, uint32_t rs1,
+> +    uint32_t rs2, uint32_t rd)
+
+As with the previous set of arithmetic instructions, these should be a single
+helper that is passed a 64-bit scalar.
+
+Note that scalars smaller than 64-bit can be replicated with dup_const().  At
+which point the logical operation is easily performed in 64-bit units instead
+of any smaller unit.
+
+Note that predication can be handled via logical masking.  For ARM SVE, we have
+a set of functions that map the active bits of a predicate mask to byte masks.
+ See e.g.
+
+static inline uint64_t expand_pred_b(uint8_t byte)
+static inline uint64_t expand_pred_h(uint8_t byte)
+static inline uint64_t expand_pred_s(uint8_t byte)
+
+so that the predicated logical and operation looks like
+
+    mask = expand_pred_n(env->vfp.vreg[0].u8[i]);
+    result = in1 & in2;
+    dest = (result & mask) | (dest & ~mask);
 
 
 r~
