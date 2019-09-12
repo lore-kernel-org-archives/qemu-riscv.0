@@ -1,73 +1,68 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1i8Q97-0003hY-PA
-	for mharc-qemu-riscv@gnu.org; Thu, 12 Sep 2019 10:32:29 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:47888)
+	id 1i8QUC-0007o3-AY
+	for mharc-qemu-riscv@gnu.org; Thu, 12 Sep 2019 10:54:16 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:34042)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <richard.henderson@linaro.org>) id 1i8Q94-0003cf-G3
- for qemu-riscv@nongnu.org; Thu, 12 Sep 2019 10:32:27 -0400
+ (envelope-from <chihmin.chao@sifive.com>) id 1i8QU9-0007mR-97
+ for qemu-riscv@nongnu.org; Thu, 12 Sep 2019 10:54:14 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <richard.henderson@linaro.org>) id 1i8Q93-0004ia-6p
- for qemu-riscv@nongnu.org; Thu, 12 Sep 2019 10:32:26 -0400
-Received: from mail-qt1-x841.google.com ([2607:f8b0:4864:20::841]:45038)
+ (envelope-from <chihmin.chao@sifive.com>) id 1i8QU8-0003ib-0Q
+ for qemu-riscv@nongnu.org; Thu, 12 Sep 2019 10:54:13 -0400
+Received: from mail-io1-xd44.google.com ([2607:f8b0:4864:20::d44]:46076)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
- id 1i8Q93-0004hh-0I
- for qemu-riscv@nongnu.org; Thu, 12 Sep 2019 10:32:25 -0400
-Received: by mail-qt1-x841.google.com with SMTP id u40so29814925qth.11
- for <qemu-riscv@nongnu.org>; Thu, 12 Sep 2019 07:32:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=subject:to:cc:references:from:openpgp:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=uBS103W/hIPtIJjDYmCrdnuJp0w4ne1F6jD7wH4AyKY=;
- b=IkfdzM6ieVxOJZC3DxVjzB4gLzt+mlX5MBmC1cUwDx5BxB9bkV7OCzc6OIA5D38gv0
- 5Hytio2sJbZVahpsPLk1+WV9uO/X17K0Euxc84fcc+Y3IHYna4voNoD/Y5daQr4/wnlL
- G3dzGFiJdcZCdycahBMINwC+MN93DKl9A0IWxu9Cf1WjL17UN0meYaOgs/Y+zDUUCXqr
- 7Lv4/72KLM+3omSuvF4z6I+mB7IhAz8of3jFzTcuRutb7ZeZWSMj6FYunwzQnRFpnX/P
- wPim+Gr77fxruHb9/hKZF5h8fjm7grzplR8J3V3vizq/2pQtPDjPjRad3jmpekZz9uhW
- XJow==
+ (Exim 4.71) (envelope-from <chihmin.chao@sifive.com>)
+ id 1i8QU7-0003hx-OK
+ for qemu-riscv@nongnu.org; Thu, 12 Sep 2019 10:54:11 -0400
+Received: by mail-io1-xd44.google.com with SMTP id f12so55266008iog.12
+ for <qemu-riscv@nongnu.org>; Thu, 12 Sep 2019 07:54:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=fbRovGJL1ys/q2wukbTOOY8adLV0Az6QtxpHk6uBFbw=;
+ b=IVdAIplK9n52ntU2Pow8IrXJ+90KUT9W2CqqheuLIQaTgdhoRrgManupeYVuc/BOPl
+ 0ByfGEdlymTICgByaC/X+nXAWjMScFRMrFpxoD42iZdwec+PskpX1MlB5AQl1qZb8Clf
+ R/vmDvbA8e8s5+4yP11Yzpwe48Z0/cxiqkPO4yrNwcSSQIVNWuEcJGwiJqbC99BY8ADe
+ U0vLRT01t1+oGhpjpcrYdocLfSBNfgta7kUmmYyhRzaqR1pbOujmr+KQ1qUxuPx/gkTX
+ zumuKntGaskLbuQA/AVJnfwLMeDU21FU0/t4gtDEwwj93W1T4IpMSR1uUsRSl/FXymTq
+ lVHg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
- :date:user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=uBS103W/hIPtIJjDYmCrdnuJp0w4ne1F6jD7wH4AyKY=;
- b=OoVjcykRtuVqx1FR7DQ92c9zbObABjFHViUGh4FR+1MiNNUdukNLRmA76iKKtxjGXD
- Iif6PT7iVZdUohj9iMkl6ZeUwyejhAbsGW0NUlj3qdy/rISJtB41atJHPVaQX6kgDiIw
- LAldB/iZ7SuGmebmQyo3M1ZZJE7fj/NBzvOY5NO/Bg0PDbuhFG3w9p965nSebMhgZuRY
- mPo4u72M4hw1hIBdlW9hI2lLpO5O3QsklCWrbhkmdS8PblQS6u6hZPJZWIazXG5VEVAK
- 9yKdivPKmGQSGL6lg6sCKNSNtnOFw/udZtdBQueAXztiLaOLJ99g3cM2KpFKTIbW8r5V
- s9Qw==
-X-Gm-Message-State: APjAAAXaEcF7zbBzvYWFqs2HcAQ2rhCizYzEw07wn45NcTqulTOJp35d
- AZiR4gCz6Zp76zU7oPjolvFyzA==
-X-Google-Smtp-Source: APXvYqzzEKObUH+pYBq70hPKUjcOFt4JmrAf48u7z0pZgkb9qxu+9fjDTjLQG6Ic3lyfTGsf+nttGg==
-X-Received: by 2002:aed:2da4:: with SMTP id i33mr8293066qtd.320.1568298743578; 
- Thu, 12 Sep 2019 07:32:23 -0700 (PDT)
-Received: from [172.20.5.51] ([67.69.50.154])
- by smtp.gmail.com with ESMTPSA id c131sm11327881qke.24.2019.09.12.07.32.22
- (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
- Thu, 12 Sep 2019 07:32:22 -0700 (PDT)
-To: liuzhiwei <zhiwei_liu@c-sky.com>, Alistair.Francis@wdc.com,
- palmer@sifive.com, sagark@eecs.berkeley.edu, kbastian@mail.uni-paderborn.de,
- riku.voipio@iki.fi, laurent@vivier.eu, wenmeng_zhang@c-sky.com
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, wxy194768@alibaba-inc.com
-References: <1568183141-67641-1-git-send-email-zhiwei_liu@c-sky.com>
- <1568183141-67641-7-git-send-email-zhiwei_liu@c-sky.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-Openpgp: preference=signencrypt
-Message-ID: <78f805d4-720f-6777-bf91-4b4aaf0a15a3@linaro.org>
-Date: Thu, 12 Sep 2019 10:32:20 -0400
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.8.0
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=fbRovGJL1ys/q2wukbTOOY8adLV0Az6QtxpHk6uBFbw=;
+ b=c0Z7WV4erQAIQA5UiHX9o0nRpKogj/ANnLcTcLQl0it9MqXGMxx4JW1bAb6deERG51
+ c4et2oKZX3IhApyQmFBjDNeO5vnOHho57OwHrnY9TNhnlTQkB9QgWKlXQfoq8g5+egjv
+ rLBwDrra1gTQqKWLgQW3YLG9SiooNnZHQAT0gtMN2f9dd8dNvaHZDvIify7H8ANxySoD
+ kYqE8d4B7xZzkS+fP1xquzKAecMo/dy95sqqg5Iw6JMxb1xZyE0oMoVpjv3c236RoTVx
+ nscpkiVy5ORhE2r54aoUEX/ShGAhDAOC+XnkhQL6AzDbltPfig6mcdNMcMmk30Vy7sHj
+ LZ5Q==
+X-Gm-Message-State: APjAAAVyRvOpI8p1L2Qo6f73OY1m7VuUA68q8QDN2ArxspsDcpLAcnz3
+ E3a/iHXfNB9UeCZF75bIHhGI3gg/cVYhdXGk1XHcKQ==
+X-Google-Smtp-Source: APXvYqzFQgPIz3BCK6jmQh9qrkx3/l0CwCP1bBvD8YlgM3FqzMUzishwXi1TivXMAzMVEax/ydmFTmiOnxLuM3EGHEc=
+X-Received: by 2002:a6b:ec16:: with SMTP id c22mr4953253ioh.185.1568300050272; 
+ Thu, 12 Sep 2019 07:54:10 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <1568183141-67641-7-git-send-email-zhiwei_liu@c-sky.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+References: <1568183141-67641-1-git-send-email-zhiwei_liu@c-sky.com>
+ <1568183141-67641-2-git-send-email-zhiwei_liu@c-sky.com>
+ <CAEiOBXUveMJGpavU7_zK0UTdNniQvnXnw5MvE-hu7yHCSw8MPQ@mail.gmail.com>
+ <b9c89438-5346-e2ee-403b-3bc1fa1637bc@linaro.org>
+In-Reply-To: <b9c89438-5346-e2ee-403b-3bc1fa1637bc@linaro.org>
+From: Chih-Min Chao <chihmin.chao@sifive.com>
+Date: Thu, 12 Sep 2019 22:53:59 +0800
+Message-ID: <CAEiOBXXsag8hfHJGcqKLVKcVkndC67iPikcp-01WACoBA4ev3Q@mail.gmail.com>
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: liuzhiwei <zhiwei_liu@c-sky.com>, Palmer Dabbelt <palmer@sifive.com>, 
+ "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, riku.voipio@iki.fi,
+ laurent@vivier.eu, wxy194768@alibaba-inc.com, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ wenmeng_zhang@c-sky.com, Alistair Francis <Alistair.Francis@wdc.com>
+Content-Type: multipart/alternative; boundary="00000000000065fa0305925c4f52"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::841
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v2 06/17] RISC-V: add vector
- extension fault-only-first implementation
+X-Received-From: 2607:f8b0:4864:20::d44
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v2 01/17] RISC-V: add vfp
+ field in CPURISCVState
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -79,49 +74,97 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Sep 2019 14:32:28 -0000
+X-List-Received-Date: Thu, 12 Sep 2019 14:54:14 -0000
 
-On 9/11/19 2:25 AM, liuzhiwei wrote:
-> diff --git a/linux-user/riscv/cpu_loop.c b/linux-user/riscv/cpu_loop.c
-> index 12aa3c0..d673fa5 100644
-> --- a/linux-user/riscv/cpu_loop.c
-> +++ b/linux-user/riscv/cpu_loop.c
-> @@ -41,6 +41,13 @@ void cpu_loop(CPURISCVState *env)
->          sigcode = 0;
->          sigaddr = 0;
->  
-> +        if (env->foflag) {
-> +            if (env->vfp.vl != 0) {
-> +                env->foflag = false;
-> +                env->pc += 4;
-> +                continue;
-> +            }
-> +        }
->          switch (trapnr) {
->          case EXCP_INTERRUPT:
->              /* just indicate that signals should be handled asap */
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index e32b612..405caf6 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -521,6 +521,13 @@ void riscv_cpu_do_interrupt(CPUState *cs)
->          [PRV_H] = RISCV_EXCP_H_ECALL,
->          [PRV_M] = RISCV_EXCP_M_ECALL
->      };
-> +    if (env->foflag) {
-> +        if (env->vfp.vl != 0) {
-> +            env->foflag = false;
-> +            env->pc += 4;
-> +            return;
-> +        }
-> +    }
+--00000000000065fa0305925c4f52
+Content-Type: text/plain; charset="UTF-8"
 
-I renew my objection to this FOFLAG mechanism.  I believe, but have no proof,
-that this will race between different types of interrupts.  Once again I
-present the ARM SVE first-fault helpers as proof that there is another way.
+On Thu, Sep 12, 2019 at 6:39 AM Richard Henderson <
+richard.henderson@linaro.org> wrote:
 
-Otherwise, all of the same comments from the normal loads apply.
+> On 9/11/19 10:51 AM, Chih-Min Chao wrote:
+> > Could  the VLEN be configurable in cpu initialization but not fixed in
+> > compilation phase ?
+> > Take the integer element as example  and the difference should be the
+> > stride of vfp.vreg[x] isn't continuous
+>
+> Do you really want an unbounded amount of vector register storage?
 
 
-r~
+ Hi Richard,
+
+VLEN is implementation-defined parameter and the only limitation on spec is
+that it must be power of 2.
+What I prefer is the value could be adjustable in runtime.
+
+>
+
+
+> >     uint8_t *mem = malloc(size)
+> >     for (int idx = 0; idx < 32; ++idx) {
+> >         vfp.vreg[idx].u64 = (void *)&mem[idx * elem];
+> >         vfp.vreg[idx].u32 = (void *)&mem[idx * elem];
+> >         vfp.vreg[idx].u16 = (void *)&mem[idx * elem];
+> >    }
+>
+> This isn't adjusting the stride of the elements.  And in any case this
+> would
+> have to be re-adjusted for every vsetvl.
+>
+>  Not sure about the relation with vsetvl. Could you provide an example ?
+
+Chih-Min
+
+>
+> r~
+>
+
+--00000000000065fa0305925c4f52
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
+<div dir=3D"ltr" class=3D"gmail_attr">On Thu, Sep 12, 2019 at 6:39 AM Richa=
+rd Henderson &lt;<a href=3D"mailto:richard.henderson@linaro.org">richard.he=
+nderson@linaro.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote=
+" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);=
+padding-left:1ex">On 9/11/19 10:51 AM, Chih-Min Chao wrote:<br>
+&gt; Could=C2=A0 the VLEN be configurable in cpu initialization but not fix=
+ed in<br>
+&gt; compilation phase ?<br>
+&gt; Take the integer element as example=C2=A0 and the difference should be=
+ the<br>
+&gt; stride of vfp.vreg[x] isn&#39;t continuous<br>
+<br>
+Do you really want an unbounded amount of vector register storage?</blockqu=
+ote><div><br></div><div>=C2=A0Hi Richard,</div><div><br></div><div>VLEN is =
+implementation-defined parameter and the only limitation on spec is that it=
+ must be power of 2.</div><div>What I prefer is the value could be adjustab=
+le in runtime.</div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0=
+px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">=C2=
+=A0</blockquote><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0=
+px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
+<br>
+&gt;=C2=A0 =C2=A0 =C2=A0uint8_t *mem =3D malloc(size)<br>
+&gt;=C2=A0 =C2=A0 =C2=A0for (int idx =3D 0; idx &lt; 32; ++idx) {<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0vfp.vreg[idx].u64 =3D (void *)&amp;me=
+m[idx * elem];<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0vfp.vreg[idx].u32 =3D (void *)&amp;me=
+m[idx * elem];<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0vfp.vreg[idx].u16 =3D (void *)&amp;me=
+m[idx * elem];<br>
+&gt;=C2=A0 =C2=A0 }<br>
+<br>
+This isn&#39;t adjusting the stride of the elements.=C2=A0 And in any case =
+this would<br>
+have to be re-adjusted for every vsetvl.<br>
+<br></blockquote><div>=C2=A0Not sure about the relation with vsetvl. Could =
+you provide an example ?</div><div><br></div><div>Chih-Min=C2=A0</div><bloc=
+kquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:=
+1px solid rgb(204,204,204);padding-left:1ex">
+<br>
+r~<br>
+</blockquote></div></div>
+
+--00000000000065fa0305925c4f52--
 
