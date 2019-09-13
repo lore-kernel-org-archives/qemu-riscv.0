@@ -1,62 +1,57 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1i8nS8-0006UR-57
-	for mharc-qemu-riscv@gnu.org; Fri, 13 Sep 2019 11:25:40 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53082)
+	id 1i8szs-0005W9-Lz
+	for mharc-qemu-riscv@gnu.org; Fri, 13 Sep 2019 17:20:52 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:48493)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <bmeng.cn@gmail.com>) id 1i8nS5-0006Rv-OO
- for qemu-riscv@nongnu.org; Fri, 13 Sep 2019 11:25:38 -0400
+ (envelope-from <palmer@dabbelt.com>) id 1i8szp-0005Vg-O4
+ for qemu-riscv@nongnu.org; Fri, 13 Sep 2019 17:20:50 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <bmeng.cn@gmail.com>) id 1i8nS4-0003G0-N6
- for qemu-riscv@nongnu.org; Fri, 13 Sep 2019 11:25:37 -0400
-Received: from mail-ed1-x542.google.com ([2a00:1450:4864:20::542]:44382)
+ (envelope-from <palmer@dabbelt.com>) id 1i8szo-0005LD-Cd
+ for qemu-riscv@nongnu.org; Fri, 13 Sep 2019 17:20:49 -0400
+Received: from mail-pl1-f195.google.com ([209.85.214.195]:39212)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
- id 1i8nS2-0003Eo-4g; Fri, 13 Sep 2019 11:25:34 -0400
-Received: by mail-ed1-x542.google.com with SMTP id p2so26184231edx.11;
- Fri, 13 Sep 2019 08:25:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=FCl877NqqCGz8u/w1orC7xsxT3SEdlVk8feSHSCN2m0=;
- b=X6GZyu0I4nK8d9knHN1toBMI6D1n4q/pKLABSM7EeGXYpxue+Z5/YD3GvnftSodLZS
- DkPLx3fjIMPHnbn2tizWKSCBVPHAq9Wmb8U2s/VpyHXOldBNatlyolXt1s6wCPblwUHb
- 9jhkuXX6bsiMkrRfAd9E7hSj0+DR01G7uEW1bQKkdcG1LAoGQdoPAhjPeKYkCuSyBh08
- N+ww6ERtIIJWmwL4f3z+caVHkzekEho+WDTlbcPIhdqEJ5AvwHiel5hoacgmIazAnFPn
- vruzLWAvOcOAsEJZUz8pbFztIQRfxMu9orwyxfqOEPB8clFpkbhUZClxLYFHLBz2zVPV
- lnrA==
+ (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1i8szo-0005Ku-6p
+ for qemu-riscv@nongnu.org; Fri, 13 Sep 2019 17:20:48 -0400
+Received: by mail-pl1-f195.google.com with SMTP id bd8so13771377plb.6
+ for <qemu-riscv@nongnu.org>; Fri, 13 Sep 2019 14:20:47 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=FCl877NqqCGz8u/w1orC7xsxT3SEdlVk8feSHSCN2m0=;
- b=C6GURcdReTFOTIBsIQ2OTfrZ4xXhW1HBfYZa4XDhQo1pv+4aFpH21WvhEOM1zHkQrb
- Tncgt1KWSWBWWlYL0j+Hbz2ItzkiQI9eXTa/JC+TGmboa2OfMwO5/rZy1lA1kfsK/q95
- eSAh8fAJXrJvHWigGmLldrI4K4Ys0ZUZ+RAwQ9ssS+doPVytzq004Q8P7uGNFe6PrWo1
- u4CrDt6hqlr4vtS71F5onMDbG0hvlJEhQdF47Qtns690bujLpipocaRVCm6PoWrr+zcM
- 7pHrCE/FVUinsvu7bm18ys5Zq3Eg3Bz/VM3mtRa+Z/mD6eCgUANi1vomuPjBARizyfbj
- UP9w==
-X-Gm-Message-State: APjAAAWRPj94RZJhi4YA62GuJNLbekkcUNw2zkviJb226YttByNXyDcb
- dvQmsmv3jMt2CxHDwT7dcSWmGbwDJ5dpSD4o924L4M0c
-X-Google-Smtp-Source: APXvYqzj6GmZpmTGRVyOI3EaL9wxbgzT61oPYcZeLCTyFu3mCfQ+t/Eno5m6kN9DromJgJzVxbYX/aIUDY1J/a8xQN0=
-X-Received: by 2002:a17:906:57cc:: with SMTP id
- u12mr32665681ejr.170.1568388332360; 
- Fri, 13 Sep 2019 08:25:32 -0700 (PDT)
-MIME-Version: 1.0
-References: <1567786819-22142-19-git-send-email-bmeng.cn@gmail.com>
- <mhng-81295c42-a2f8-4f95-a54f-f9a319e10a36@palmer-si-x1e>
-In-Reply-To: <mhng-81295c42-a2f8-4f95-a54f-f9a319e10a36@palmer-si-x1e>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Fri, 13 Sep 2019 23:25:21 +0800
-Message-ID: <CAEUhbmUksfEiGLZ0qzsWkaDOaocTvkEYefiSUmGZT7TftYfmEg@mail.gmail.com>
-To: Palmer Dabbelt <palmer@sifive.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2a00:1450:4864:20::542
-Subject: Re: [Qemu-riscv] [PATCH v8 18/32] riscv: sifive_u: Set the minimum
- number of cpus to 2
+ h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
+ :mime-version:content-transfer-encoding;
+ bh=/Fq7QcmmLLwNTeanlUU4aXQDyzZiHPkisBlI1lGIvVk=;
+ b=nz1qMsXJzdkMM5GDJnq5LJ0U7Yg7rK1jKT0YHTnPjR1dJ2sXFXIeuSdk9v+k9Dxf0F
+ P+Q8AnxL1H5fp/9HfKugw2OgQhN3mUkkOqobm6f327PeWKWCUw4dC+iQoMiLQ3fY+M8m
+ BOrDkbeVqxTOXVS2nUu0RNXK0zRXSN40nw6IoS2NBuID6AkSlhmnicY875wrSYiZ+UEo
+ 9IQfvL2Lzxu9/QKmltPGWAeqHjYUV5U0iuQUsFtExu3BZWXLfHc1ku+b1sottJFq8DWl
+ K4kKXtca3HtVXq80TWMSz4gUwPgnIWQiklLzEsnkhVinrULlcqiL7t5AH4bel+bGnWf7
+ vYeA==
+X-Gm-Message-State: APjAAAV6Av7mv2Kt/Lzhh9KrYE13l1hxUD/S2tbAbVwdpfQrFgxWf8ez
+ i+5xSt7b11VPLwUzk2wZOnbZ/g==
+X-Google-Smtp-Source: APXvYqw9AQJVJaHANAMOmw71j87KMC/B3mNgFPIfMnjY8PaWTUJ4nKnov6uId2tqccPYZqEMYp5Y6Q==
+X-Received: by 2002:a17:902:8d81:: with SMTP id
+ v1mr34370902plo.23.1568409646480; 
+ Fri, 13 Sep 2019 14:20:46 -0700 (PDT)
+Received: from localhost (amx-tls3.starhub.net.sg. [203.116.164.13])
+ by smtp.gmail.com with ESMTPSA id x8sm28754237pfm.35.2019.09.13.14.20.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 13 Sep 2019 14:20:45 -0700 (PDT)
+Date: Fri, 13 Sep 2019 14:20:45 -0700 (PDT)
+X-Google-Original-Date: Fri, 13 Sep 2019 14:14:14 PDT (-0700)
+In-Reply-To: <1568103341-28636-1-git-send-email-frederic.konrad@adacore.com>
+CC: qemu-devel@nongnu.org, frederic.konrad@adacore.com,
+ Alistair Francis <Alistair.Francis@wdc.com>, sagark@eecs.berkeley.edu,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
+ qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
+From: Palmer Dabbelt <palmer@sifive.com>
+To: frederic.konrad@adacore.com
+Message-ID: <mhng-b33d5ee5-58d7-402f-ad7f-e79f58ed84f7@palmer-si-x1e>
+Mime-Version: 1.0 (MHng)
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+ [fuzzy]
+X-Received-From: 209.85.214.195
+Subject: Re: [Qemu-riscv] [PATCH v1] gdbstub: riscv: fix the fflags registers
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -68,93 +63,50 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Sep 2019 15:25:39 -0000
+X-List-Received-Date: Fri, 13 Sep 2019 21:20:50 -0000
 
-Hi Palmer,
-
-On Fri, Sep 13, 2019 at 10:33 PM Palmer Dabbelt <palmer@sifive.com> wrote:
+On Tue, 10 Sep 2019 01:15:41 PDT (-0700), frederic.konrad@adacore.com wrote:
+> While debugging an application with GDB the following might happen:
 >
-> On Fri, 06 Sep 2019 09:20:05 PDT (-0700), bmeng.cn@gmail.com wrote:
-> > It is not useful if we only have one management CPU.
-> >
-> > Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
-> > Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-> >
-> > ---
-> >
-> > Changes in v8: None
-> > Changes in v7: None
-> > Changes in v6: None
-> > Changes in v5: None
-> > Changes in v4: None
-> > Changes in v3:
-> > - use management cpu count + 1 for the min_cpus
-> >
-> > Changes in v2:
-> > - update the file header to indicate at least 2 harts are created
-> >
-> >  hw/riscv/sifive_u.c         | 4 +++-
-> >  include/hw/riscv/sifive_u.h | 2 ++
-> >  2 files changed, 5 insertions(+), 1 deletion(-)
-> >
-> > diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-> > index 2947e06..2023b71 100644
-> > --- a/hw/riscv/sifive_u.c
-> > +++ b/hw/riscv/sifive_u.c
-> > @@ -10,7 +10,8 @@
-> >   * 1) CLINT (Core Level Interruptor)
-> >   * 2) PLIC (Platform Level Interrupt Controller)
-> >   *
-> > - * This board currently uses a hardcoded devicetree that indicates one hart.
-> > + * This board currently generates devicetree dynamically that indicates at least
-> > + * two harts.
-> >   *
-> >   * This program is free software; you can redistribute it and/or modify it
-> >   * under the terms and conditions of the GNU General Public License,
-> > @@ -433,6 +434,7 @@ static void riscv_sifive_u_machine_init(MachineClass *mc)
-> >       * management CPU.
-> >       */
-> >      mc->max_cpus = 4;
-> > +    mc->min_cpus = SIFIVE_U_MANAGEMENT_CPU_COUNT + 1;
-> >  }
-> >
-> >  DEFINE_MACHINE("sifive_u", riscv_sifive_u_machine_init)
-> > diff --git a/include/hw/riscv/sifive_u.h b/include/hw/riscv/sifive_u.h
-> > index f25bad8..6d22741 100644
-> > --- a/include/hw/riscv/sifive_u.h
-> > +++ b/include/hw/riscv/sifive_u.h
-> > @@ -69,6 +69,8 @@ enum {
-> >      SIFIVE_U_GEM_CLOCK_FREQ = 125000000
-> >  };
-> >
-> > +#define SIFIVE_U_MANAGEMENT_CPU_COUNT   1
-> > +
-> >  #define SIFIVE_U_PLIC_HART_CONFIG "MS"
-> >  #define SIFIVE_U_PLIC_NUM_SOURCES 54
-> >  #define SIFIVE_U_PLIC_NUM_PRIORITIES 7
+> (gdb) return
+> Make xxx return now? (y or n) y
+> Could not fetch register "fflags"; remote failure reply 'E14'
 >
-> This fails "make check", so I'm going to squash in this
+> This is because riscv_gdb_get_fpu calls riscv_csrrw_debug with a wrong csr
+> number (8). It should use the csr_register_map in order to reach the
+> riscv_cpu_get_fflags callback.
 >
-> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-> index ca9f7fea41..adecbf1dd9 100644
-> --- a/hw/riscv/sifive_u.c
-> +++ b/hw/riscv/sifive_u.c
-> @@ -528,6 +528,7 @@ static void riscv_sifive_u_machine_init(MachineClass *mc)
->      mc->init = riscv_sifive_u_init;
->      mc->max_cpus = SIFIVE_U_MANAGEMENT_CPU_COUNT + SIFIVE_U_COMPUTE_CPU_COUNT;
->      mc->min_cpus = SIFIVE_U_MANAGEMENT_CPU_COUNT + 1;
-> +    mc->default_cpus = mc->max_cpus;
-
-Thank you for fixing the 'make check'. Shouldn't it be:
-
-mc->default_cpus = mc->min_cpus;
-
-?
-
->  }
+> Signed-off-by: KONRAD Frederic <frederic.konrad@adacore.com>
+> ---
+>  target/riscv/gdbstub.c | 6 ++++--
+>  1 file changed, 4 insertions(+), 2 deletions(-)
 >
->  DEFINE_MACHINE("sifive_u", riscv_sifive_u_machine_init)
+> diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
+> index 27be932..ded140e 100644
+> --- a/target/riscv/gdbstub.c
+> +++ b/target/riscv/gdbstub.c
+> @@ -313,7 +313,8 @@ static int riscv_gdb_get_fpu(CPURISCVState *env, uint8_t *mem_buf, int n)
+>           * register 33, so we recalculate the map index.
+>           * This also works for CSR_FRM and CSR_FCSR.
+>           */
+> -        result = riscv_csrrw_debug(env, n - 33 +  8, &val, 0, 0);
+> +        result = riscv_csrrw_debug(env, n - 33 + csr_register_map[8], &val,
+> +                                   0, 0);
+>          if (result == 0) {
+>              return gdb_get_regl(mem_buf, val);
+>          }
+> @@ -335,7 +336,8 @@ static int riscv_gdb_set_fpu(CPURISCVState *env, uint8_t *mem_buf, int n)
+>           * register 33, so we recalculate the map index.
+>           * This also works for CSR_FRM and CSR_FCSR.
+>           */
+> -        result = riscv_csrrw_debug(env, n - 33 + 8, NULL, val, -1);
+> +        result = riscv_csrrw_debug(env, n - 33 + csr_register_map[8], NULL,
+> +                                   val, -1);
+>          if (result == 0) {
+>              return sizeof(target_ulong);
+>          }
 
-Regards,
-Bin
+Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
+
+I just tagged a fixed version of my PR, but I'll include this in the next one.
 
