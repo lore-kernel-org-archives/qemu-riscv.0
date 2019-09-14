@@ -1,56 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1i9Eh6-0004L9-6I
-	for mharc-qemu-riscv@gnu.org; Sat, 14 Sep 2019 16:30:56 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37642)
+	id 1i9EjA-00068U-TD
+	for mharc-qemu-riscv@gnu.org; Sat, 14 Sep 2019 16:33:04 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:37867)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <palmer@dabbelt.com>) id 1i9Eh2-0004HK-Rt
- for qemu-riscv@nongnu.org; Sat, 14 Sep 2019 16:30:53 -0400
+ (envelope-from <palmer@dabbelt.com>) id 1i9Ej6-00061b-V0
+ for qemu-riscv@nongnu.org; Sat, 14 Sep 2019 16:33:01 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmer@dabbelt.com>) id 1i9Eh1-0007e6-UV
- for qemu-riscv@nongnu.org; Sat, 14 Sep 2019 16:30:52 -0400
-Received: from mail-pf1-f193.google.com ([209.85.210.193]:39394)
+ (envelope-from <palmer@dabbelt.com>) id 1i9Ej5-0008NP-Sf
+ for qemu-riscv@nongnu.org; Sat, 14 Sep 2019 16:33:00 -0400
+Received: from mail-pg1-f196.google.com ([209.85.215.196]:46004)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1i9Eh1-0007dm-M9
- for qemu-riscv@nongnu.org; Sat, 14 Sep 2019 16:30:51 -0400
-Received: by mail-pf1-f193.google.com with SMTP id i1so11245764pfa.6
- for <qemu-riscv@nongnu.org>; Sat, 14 Sep 2019 13:30:51 -0700 (PDT)
+ (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1i9Ej5-0008NF-Np
+ for qemu-riscv@nongnu.org; Sat, 14 Sep 2019 16:32:59 -0400
+Received: by mail-pg1-f196.google.com with SMTP id 4so17047586pgm.12
+ for <qemu-riscv@nongnu.org>; Sat, 14 Sep 2019 13:32:59 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
  :mime-version:content-transfer-encoding;
- bh=lmIE6brnWQtY5H4j71QmKIIANTmcMtcTWXj0yIx25yc=;
- b=TONDM8AEr/eSET1IRf+mP41f1AYxuNDj8MwrF8tvfcazKNie1XxwX5xnIu/sxEnkBF
- tVV0l2cx0o0jHk5XPxpOl6mHDTnAvJMpe8UT+Z1f3sYVav4+Y9PVgiKnehJOHq8DVxu8
- DkWNEaEJqHt2jZCpzG27fdGg+qfa8Z+fIsWjxngHjYBZ70z5srxubcZaCun2MDtsxOJo
- hD9cDLSP9His18XFcRpT04s2AkRE83S588KGbw4qMa0+YUjGkXqJFU1vRKh55hIa0XCn
- eNZH/sK5Fn3vgx6MPkFtmuJSjU+/vXtzqskNxastCFzcGCVGc2SMurC4t8+zYF1tml7o
- fYzg==
-X-Gm-Message-State: APjAAAWubbQggMo2rx7z+wfWa2e7Dm15aSkjrPUiHrjKyFzvAdZX56rm
- MvJZDp2aVbpRg1oQD4GfbtorQg==
-X-Google-Smtp-Source: APXvYqzVykDWGPVtRdm206gXhojwCpiwp4WNX7JLu4an0m2s4ppqJlDrbf5FHMYBI2Ne+0qdv/Ezzg==
-X-Received: by 2002:a62:2c85:: with SMTP id s127mr25398173pfs.55.1568493050583; 
- Sat, 14 Sep 2019 13:30:50 -0700 (PDT)
+ bh=4SGplVlvAeilU0vnEoPWo2vlTvRUOb+zpOK1n3ckaTU=;
+ b=QK40ObUrtHPYfxulpeBAfBcgmZFEUVeJou9CZrvC/xm+KRYZOOVwHPGH7x1DnMQoJ8
+ WXiG7adY112QuEAUek97tAgN5e/dyxyTokZY2tVs3r5u+P1NsULao/0tbLEtc32dcujQ
+ v2kdcidYnBfCbggeIVSfHsFzFXtMFmbmHTwzQ8Y47br/UlHqyxxwBJpBPwAZht6W6Kdz
+ ZjNoWGKD2iFdtVes8sMuQtfJerFNvX2yIGlwuay3jvdPN/eAsb7vceX9jENMmpJKDF+r
+ HyHc56ZUtedK2XaqtmmskmiUVw6UZ2fQLS0O0+6HNo1bIU7Y0zhGlSDZJTCKPgGpk4fC
+ KlHA==
+X-Gm-Message-State: APjAAAViiVzjqPG7sxTu/Ksi3ZqJrkY4IYgHUhgqzHis0KgnUm7b26Tw
+ 5bNJPXNtmfDtHWmYZGnck9lnfA==
+X-Google-Smtp-Source: APXvYqzaFiG0Q2zvZBtvLQwY1OANzKpl3xy5CYW/2EijJSfYOebkvpSVe/NbtL5gEVv/MJThMu/hYg==
+X-Received: by 2002:a65:62cd:: with SMTP id m13mr48953385pgv.437.1568493178490; 
+ Sat, 14 Sep 2019 13:32:58 -0700 (PDT)
 Received: from localhost (amx-tls3.starhub.net.sg. [203.116.164.13])
- by smtp.gmail.com with ESMTPSA id h18sm5378122pjt.18.2019.09.14.13.30.47
+ by smtp.gmail.com with ESMTPSA id ck13sm4975609pjb.29.2019.09.14.13.32.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 14 Sep 2019 13:30:49 -0700 (PDT)
-Date: Sat, 14 Sep 2019 13:30:49 -0700 (PDT)
-X-Google-Original-Date: Sat, 14 Sep 2019 13:30:13 PDT (-0700)
-In-Reply-To: <f3f7e9fdb539df1aa4c5f2b64db5847ad8d2eaee.1566603412.git.alistair.francis@wdc.com>
+ Sat, 14 Sep 2019 13:32:58 -0700 (PDT)
+Date: Sat, 14 Sep 2019 13:32:58 -0700 (PDT)
+X-Google-Original-Date: Sat, 14 Sep 2019 13:32:40 PDT (-0700)
+In-Reply-To: <2b2e042b3c80d4f37cf150853a0a040581feb403.1566603412.git.alistair.francis@wdc.com>
 CC: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
  Alistair Francis <Alistair.Francis@wdc.com>, alistair23@gmail.com,
  Atish Patra <Atish.Patra@wdc.com>, Anup Patel <Anup.Patel@wdc.com>
 From: Palmer Dabbelt <palmer@sifive.com>
 To: Alistair Francis <Alistair.Francis@wdc.com>
-Message-ID: <mhng-d02a4b9d-36d3-4d6c-9616-8a73edaca517@palmer-si-x1e>
+Message-ID: <mhng-bfe535ba-174e-466d-9ee4-0c8d98be850b@palmer-si-x1e>
 Mime-Version: 1.0 (MHng)
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
  [fuzzy]
-X-Received-From: 209.85.210.193
-Subject: Re: [Qemu-riscv] [PATCH v1 14/28] target/riscv: Generate illegal
- instruction on WFI when V=1
+X-Received-From: 209.85.215.196
+Subject: Re: [Qemu-riscv] [PATCH v1 15/28] riscv: plic: Always set sip.SEIP
+ bit for HS
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -62,31 +62,40 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 14 Sep 2019 20:30:55 -0000
+X-List-Received-Date: Sat, 14 Sep 2019 20:33:02 -0000
 
-On Fri, 23 Aug 2019 16:38:26 PDT (-0700), Alistair Francis wrote:
+On Fri, 23 Aug 2019 16:38:29 PDT (-0700), Alistair Francis wrote:
+> When the PLIC generates an interrupt ensure we always set it for the SIP
+> CSR that corresponds to the HS (V=0) register.
+>
 > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 > ---
->  target/riscv/op_helper.c | 5 +++--
->  1 file changed, 3 insertions(+), 2 deletions(-)
+>  hw/riscv/sifive_plic.c | 12 +++++++++++-
+>  1 file changed, 11 insertions(+), 1 deletion(-)
 >
-> diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
-> index d150551bc9..beb34e705b 100644
-> --- a/target/riscv/op_helper.c
-> +++ b/target/riscv/op_helper.c
-> @@ -130,9 +130,10 @@ void helper_wfi(CPURISCVState *env)
->  {
->      CPUState *cs = env_cpu(env);
->
-> -    if (env->priv == PRV_S &&
-> +    if ((env->priv == PRV_S &&
->          env->priv_ver >= PRIV_VERSION_1_10_0 &&
-> -        get_field(*env->mstatus, MSTATUS_TW)) {
-> +        get_field(*env->mstatus, MSTATUS_TW)) ||
-> +        riscv_cpu_virt_enabled(env)) {
->          riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
->      } else {
->          cs->halted = 1;
+> diff --git a/hw/riscv/sifive_plic.c b/hw/riscv/sifive_plic.c
+> index 98e4304b66..8309e96f64 100644
+> --- a/hw/riscv/sifive_plic.c
+> +++ b/hw/riscv/sifive_plic.c
+> @@ -150,7 +150,17 @@ static void sifive_plic_update(SiFivePLICState *plic)
+>              riscv_cpu_update_mip(RISCV_CPU(cpu), MIP_MEIP, BOOL_TO_MASK(level));
+>              break;
+>          case PLICMode_S:
+> -            riscv_cpu_update_mip(RISCV_CPU(cpu), MIP_SEIP, BOOL_TO_MASK(level));
+> +            if (riscv_cpu_virt_enabled(env)) {
+> +                if (level) {
+> +                    atomic_or(&env->mip_novirt, MIP_SEIP);
+> +                    g_assert(riscv_cpu_virt_enabled(env));
+> +                } else {
+> +                    atomic_and(&env->mip_novirt, ~MIP_SEIP);
+> +                    g_assert(riscv_cpu_virt_enabled(env));
+> +                }
+> +            } else {
+> +                riscv_cpu_update_mip(RISCV_CPU(cpu), MIP_SEIP, BOOL_TO_MASK(level));
+> +            }
+>              break;
+>          default:
+>              break;
 
-Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
+This is going to go when we change the interrupt delivery mechanism.
 
