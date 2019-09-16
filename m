@@ -1,45 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1i9mzq-00022L-KF
-	for mharc-qemu-riscv@gnu.org; Mon, 16 Sep 2019 05:08:34 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:36415)
+	id 1i9tSS-0004y4-Lb
+	for mharc-qemu-riscv@gnu.org; Mon, 16 Sep 2019 12:02:32 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:37810)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <diodesign@tuta.io>) id 1i9mzn-0001zf-Nr
- for qemu-riscv@nongnu.org; Mon, 16 Sep 2019 05:08:32 -0400
+ (envelope-from <alistair23@gmail.com>) id 1i9tSP-0004uZ-G2
+ for qemu-riscv@nongnu.org; Mon, 16 Sep 2019 12:02:30 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <diodesign@tuta.io>) id 1i9mzm-0000UM-Ll
- for qemu-riscv@nongnu.org; Mon, 16 Sep 2019 05:08:31 -0400
-Received: from w4.tutanota.de ([81.3.6.165]:50038)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <diodesign@tuta.io>)
- id 1i9mzh-0000S7-I6; Mon, 16 Sep 2019 05:08:26 -0400
-Received: from w2.tutanota.de (unknown [192.168.1.163])
- by w4.tutanota.de (Postfix) with ESMTP id 2C8E310601EF;
- Mon, 16 Sep 2019 09:08:23 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1568624903; 
- s=s1; d=tuta.io;
- h=Date:From:To:Cc:Message-ID:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding;
- bh=7JWpvMXnZewMxf5Vz8XxSkXYIp99BfTkq6W8838Sal4=;
- b=sbfPxdIcSuKS06DqcRlVljiZm9iBJiPOBANJ2sRK0ZkSFw0jzfWK5etuySGw4hHG
- U/Xqiu3YWRYyi06FsIfbTUauJWJFMBmQn8/26GFkIiqk+WysCeoFHqvEKHG7UXr5xdo
- nzs7v3ZtReFo5Wj+P/G0OTtugt43/7ZRurKn4PqVEamHCiGJMlViWqixR1w+qn3WOQX
- 0SRp6BqGhOOS0tLT20XDWJzuE/8is2C5/L1idBtCoPJkp5ik/+Dvr+2vX0jStX/xXad
- TvX81HnS/FcwdBq2wo19VCznXVCmMaYKxvS7qUnjyeUqiTjdSTRKxDz4ZAe33WoG7C2
- emWTP/SetQ==
-Date: Mon, 16 Sep 2019 11:08:23 +0200 (CEST)
-From: Chris Williams <diodesign@tuta.io>
-To: Palmer Dabbelt <palmer@sifive.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-Cc: qemu-riscv@nongnu.org,  <qemu-devel@nongnu.org>
-Message-ID: <LotC_Mg--3-1@tuta.io>
+ (envelope-from <alistair23@gmail.com>) id 1i9tSO-0006IP-8C
+ for qemu-riscv@nongnu.org; Mon, 16 Sep 2019 12:02:29 -0400
+Received: from mail-lf1-x144.google.com ([2a00:1450:4864:20::144]:38271)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <alistair23@gmail.com>)
+ id 1i9tSL-0006Gy-Hg; Mon, 16 Sep 2019 12:02:25 -0400
+Received: by mail-lf1-x144.google.com with SMTP id u28so386177lfc.5;
+ Mon, 16 Sep 2019 09:02:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=AeDrdWoph1c/zo2OnhjnI4KMjDluFfv/o+PCV5TtfKU=;
+ b=dm6U+CvMeiCZCTD9FamXpjiptV6kfGOvX11DBQeCVsTp0llMIbDXurn065xOYIfreq
+ afLTTuPciJuhqa4cNzktka97Cd3lHUNLEMB/n3cfHZEnfGK9rdhrd1F7V9wjX0BBtaER
+ eHq2yEYQZNeA+fBTMfVZPCYlJUxt2in3BQ2IGgCyU84WITbZNMWHQIqmP81uVuLUFoNF
+ LqglEmMA+aa6jNvlSleDsTzqGB2ctA8JrHPxVRr7cGBxRdXEJqCbZb36Op5ZeQxiECdT
+ 2hKErS7lzUd7tKcoyqqTnOGNugM1KGp+w++LXbb5trtGvVkbcCcUOFTCmiZ1vspsDQrF
+ uAtQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=AeDrdWoph1c/zo2OnhjnI4KMjDluFfv/o+PCV5TtfKU=;
+ b=T7z3rrHx6TRELM6H6s7lNAo7G6aj2iNs0a96V4hcJPAz/r4PvPkZvblU4UVEYQaxeu
+ b4ZhC406k76IYFOo4cTtdnqywSgCzoukk1JmtvauVtEx7XgSl5IroY3EhP4f1D/XW2si
+ LGqDGa5czHh4CJtzSDidbDq+U3YgEnip7PDRH/YVfzXhYgSCehfSh/SmK31TajwzLkkk
+ JjqDqDOoovr1OetkPyhINRbhKEX1cQHBKFoZ9przK6OlBLD7f5k0TuD7m13tq64Q+oEE
+ 8XsWGz+LIPAdT/Z/GDqixYBuQK4cxcqM5jFNiQhNGV9QVcZkfg7CrSYdLtutSf63VEGS
+ LcBg==
+X-Gm-Message-State: APjAAAVIgLQuy43mNPwIVBvsBwn/tuIU9VhsLlKvPqoh6d7bdP3jRMjI
+ 7rR2XkIlxCYfXGOlnD+SgADNbB3KrrogdAGoLPI=
+X-Google-Smtp-Source: APXvYqwxMlTZj0mkXSWjl5ZbZSuZON6zWCBxp1QeXrHm1dJpVTMMHTF/BSiR8ZyFMO02zSifaLNOdoezDg0x9xad9UM=
+X-Received: by 2002:ac2:4a69:: with SMTP id q9mr90720lfp.86.1568649743426;
+ Mon, 16 Sep 2019 09:02:23 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
-X-Received-From: 81.3.6.165
-Subject: [Qemu-riscv] [PATCH v1 1/1] riscv: pmp: Allow valid instruction
- fetches at the start of a PMP range
+References: <1c1d359caa6633349158debc38e07156a10b63e8.1566603412.git.alistair.francis@wdc.com>
+ <mhng-9017291b-1ed2-4cea-ab34-03825a8c8a8c@palmer-si-x1e>
+In-Reply-To: <mhng-9017291b-1ed2-4cea-ab34-03825a8c8a8c@palmer-si-x1e>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Mon, 16 Sep 2019 08:57:52 -0700
+Message-ID: <CAKmqyKP5Ld5TQH+J2bArXOEChcB+0RFTdqNS-Sg-_G-UuOz_uQ@mail.gmail.com>
+To: Palmer Dabbelt <palmer@sifive.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Atish Patra <Atish.Patra@wdc.com>, Anup Patel <Anup.Patel@wdc.com>
+Content-Type: text/plain; charset="UTF-8"
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2a00:1450:4864:20::144
+Subject: Re: [Qemu-riscv] [PATCH v1 02/28] target/riscv: Add the
+ virtulisation mode
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -51,63 +68,101 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Sep 2019 09:08:33 -0000
+X-List-Received-Date: Mon, 16 Sep 2019 16:02:31 -0000
 
-Allow Qemu guest code to execute from the very start of a PMP range without=
- faulting.
-
-When an instruction is fetched from the first word of a PMP range,=C2=A0pmp=
-_hart_has_privs()
-is called with a size of zero. This causes pmp_is_in_range() to be called w=
-ith an address
-lower than addr, when obtaining a value for e, and a fault is incorrectly g=
-enerated.
-
-This fault was observed by creating a PMP range with RWX access, filling th=
-e range with
-valid code from its base address, and then jumping to the first instruction=
- at the base address.
-Qemu generates an instruction access fault: the correct behavior is to allo=
-w the instruction fetch.
-
-This patch checks a size is non-zero before applying a calculation operatio=
-n that would bring it
-below addr, and thus erroneously raise a fault.
-
-Signed-off-by: Chris Williams <diodesign@tuta.io <mailto:diodesign@tuta.io>=
+On Tue, Sep 10, 2019 at 6:44 AM Palmer Dabbelt <palmer@sifive.com> wrote:
 >
----
-target/riscv/pmp.c | 6 ++++--
-1 file changed, 4 insertions(+), 2 deletions(-)
+> On Fri, 23 Aug 2019 16:37:54 PDT (-0700), Alistair Francis wrote:
+> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> > ---
+> >  target/riscv/cpu.h        |  4 ++++
+> >  target/riscv/cpu_bits.h   |  6 ++++++
+> >  target/riscv/cpu_helper.c | 23 +++++++++++++++++++++++
+> >  3 files changed, 33 insertions(+)
+> >
+> > diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> > index 7f54fb8c87..0ef1ecb0e0 100644
+> > --- a/target/riscv/cpu.h
+> > +++ b/target/riscv/cpu.h
+> > @@ -117,6 +117,8 @@ struct CPURISCVState {
+> >
+> >  #ifndef CONFIG_USER_ONLY
+> >      target_ulong priv;
+> > +    /* This contains QEMU specific information about the virt state. */
+> > +    target_ulong virt;
+> >      target_ulong resetvec;
+> >
+> >      target_ulong mhartid;
+> > @@ -257,6 +259,8 @@ int riscv_cpu_gdb_read_register(CPUState *cpu, uint8_t *buf, int reg);
+> >  int riscv_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
+> >  bool riscv_cpu_exec_interrupt(CPUState *cs, int interrupt_request);
+> >  bool riscv_cpu_fp_enabled(CPURISCVState *env);
+> > +bool riscv_cpu_virt_enabled(CPURISCVState *env);
+> > +void riscv_cpu_set_virt_enabled(CPURISCVState *env, bool enable);
+> >  int riscv_cpu_mmu_index(CPURISCVState *env, bool ifetch);
+> >  hwaddr riscv_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
+> >  void  riscv_cpu_do_unaligned_access(CPUState *cs, vaddr addr,
+> > diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+> > index e99834856c..1fbde516be 100644
+> > --- a/target/riscv/cpu_bits.h
+> > +++ b/target/riscv/cpu_bits.h
+> > @@ -422,6 +422,12 @@
+> >  #define PRV_H 2 /* Reserved */
+> >  #define PRV_M 3
+> >
+> > +/* Virtulisation modes */
+> > +#define VIRT_OFF            0
+> > +#define VIRT_ON             1
+> > +#define VIRT_MODE_SHIFT     0
+> > +#define VIRT_MODE_MASK      (1 << VIRT_MODE_SHIFT)
+> > +
+> >  /* RV32 satp CSR field masks */
+> >  #define SATP32_MODE         0x80000000
+> >  #define SATP32_ASID         0x7fc00000
+> > diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> > index 225e407cff..7b0bb14c01 100644
+> > --- a/target/riscv/cpu_helper.c
+> > +++ b/target/riscv/cpu_helper.c
+> > @@ -81,6 +81,29 @@ bool riscv_cpu_fp_enabled(CPURISCVState *env)
+> >      return false;
+> >  }
+> >
+> > +bool riscv_cpu_virt_enabled(CPURISCVState *env)
+> > +{
+> > +    bool tmp;
+> > +
+> > +    if (!riscv_has_ext(env, RVH)) {
+> > +        return false;
+> > +    }
+> > +
+> > +    tmp = (env->virt & VIRT_MODE_MASK) >> VIRT_MODE_SHIFT;
+> > +
+> > +    return tmp == VIRT_ON;
+> > +}
+>
+> extract64() is a bit cleaner.
 
-diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-index 958c7502a0..06f2cd52f0 100644
---- a/target/riscv/pmp.c
-+++ b/target/riscv/pmp.c
-@@ -242,10 +242,12 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ul=
-ong addr,
-=C2=A0=C2=A0=C2=A0=C2=A0 }
+I have already changed it to get_field() and set_field().
 
-=C2=A0=C2=A0=C2=A0=C2=A0 /* 1.10 draft priv spec states there is an implici=
-t order
--=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 from low to high */
-+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 from low to high. Also, c=
-atch attempts to check a request
-+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 size of zero, and ensure =
-it does not accidentally fail by
-+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 checking for an address *=
-below* addr */
-=C2=A0=C2=A0=C2=A0=C2=A0 for (i =3D 0; i < MAX_RISCV_PMPS; i++) {
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 s =3D pmp_is_in_range(env,=
- i, addr);
--=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 e =3D pmp_is_in_range(env, i, a=
-ddr + size - 1);
-+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 e =3D pmp_is_in_range(env, i, (=
-size =3D=3D 0) ? addr : addr + size - 1);
+>
+> > +
+> > +void riscv_cpu_set_virt_enabled(CPURISCVState *env, bool enable)
+> > +{
+> > +    if (!riscv_has_ext(env, RVH)) {
+> > +        return;
+> > +    }
+> > +
+> > +    env->virt &= ~VIRT_MODE_MASK;
+> > +    env->virt |= enable << VIRT_MODE_SHIFT;
+> > +}
+> > +
+> >  int riscv_cpu_claim_interrupts(RISCVCPU *cpu, uint32_t interrupts)
+> >  {
+> >      CPURISCVState *env = &cpu->env;
+>
+> Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
 
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 /* partially inside */
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if ((s + e) =3D=3D 1) {
---
-2.20.1
+This patch is a little out of date, so I'll not include your RB line in the v2.
 
+Alistair
 
