@@ -1,62 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1i9tSS-0004y4-Lb
-	for mharc-qemu-riscv@gnu.org; Mon, 16 Sep 2019 12:02:32 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37810)
+	id 1i9uTW-00072i-0g
+	for mharc-qemu-riscv@gnu.org; Mon, 16 Sep 2019 13:07:42 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:50484)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <alistair23@gmail.com>) id 1i9tSP-0004uZ-G2
- for qemu-riscv@nongnu.org; Mon, 16 Sep 2019 12:02:30 -0400
+ (envelope-from <alistair23@gmail.com>) id 1i9uTO-00070K-Is
+ for qemu-riscv@nongnu.org; Mon, 16 Sep 2019 13:07:40 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1i9tSO-0006IP-8C
- for qemu-riscv@nongnu.org; Mon, 16 Sep 2019 12:02:29 -0400
-Received: from mail-lf1-x144.google.com ([2a00:1450:4864:20::144]:38271)
+ (envelope-from <alistair23@gmail.com>) id 1i9uTJ-0003vF-Mb
+ for qemu-riscv@nongnu.org; Mon, 16 Sep 2019 13:07:34 -0400
+Received: from mail-lj1-x244.google.com ([2a00:1450:4864:20::244]:42847)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1i9tSL-0006Gy-Hg; Mon, 16 Sep 2019 12:02:25 -0400
-Received: by mail-lf1-x144.google.com with SMTP id u28so386177lfc.5;
- Mon, 16 Sep 2019 09:02:24 -0700 (PDT)
+ id 1i9uTJ-0003ub-Ez; Mon, 16 Sep 2019 13:07:29 -0400
+Received: by mail-lj1-x244.google.com with SMTP id y23so634867lje.9;
+ Mon, 16 Sep 2019 10:07:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=AeDrdWoph1c/zo2OnhjnI4KMjDluFfv/o+PCV5TtfKU=;
- b=dm6U+CvMeiCZCTD9FamXpjiptV6kfGOvX11DBQeCVsTp0llMIbDXurn065xOYIfreq
- afLTTuPciJuhqa4cNzktka97Cd3lHUNLEMB/n3cfHZEnfGK9rdhrd1F7V9wjX0BBtaER
- eHq2yEYQZNeA+fBTMfVZPCYlJUxt2in3BQ2IGgCyU84WITbZNMWHQIqmP81uVuLUFoNF
- LqglEmMA+aa6jNvlSleDsTzqGB2ctA8JrHPxVRr7cGBxRdXEJqCbZb36Op5ZeQxiECdT
- 2hKErS7lzUd7tKcoyqqTnOGNugM1KGp+w++LXbb5trtGvVkbcCcUOFTCmiZ1vspsDQrF
- uAtQ==
+ :cc; bh=D36R4TxC9kabrXw4LckB9IixL5aslsuDDTMAnaEx/ng=;
+ b=t7loyxUCDt53/J47VQr+1KckMz5a1DRiZomr3eq7Jow5xw1mHlDni43TBWQZV8lvRT
+ cv5kbjqH7TN4QoYYmd1GkBbo1ZATCzQjJ0qlC8sKC7IrEYfWHgatVcq3lYwPPXP2BVsb
+ BP1bI9yQWYBX4cnC++3T4M2Mvt0ay/9vjXGkYWN9fUICoXzm86DvF7W29nJHvyAp/rwT
+ xYsY4W0cid+AbsmuJChgfGU91ETRRx6fDMOPcJmWvEbCFoB3ymXmOCJPsrqUdkrHL8PT
+ JRLyk3wYALGXTm3jJ5vtBswqXrtJlIg45tplUkJoh6u1PWFEL+KYfAb8njvigjMfivkD
+ 68/Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=AeDrdWoph1c/zo2OnhjnI4KMjDluFfv/o+PCV5TtfKU=;
- b=T7z3rrHx6TRELM6H6s7lNAo7G6aj2iNs0a96V4hcJPAz/r4PvPkZvblU4UVEYQaxeu
- b4ZhC406k76IYFOo4cTtdnqywSgCzoukk1JmtvauVtEx7XgSl5IroY3EhP4f1D/XW2si
- LGqDGa5czHh4CJtzSDidbDq+U3YgEnip7PDRH/YVfzXhYgSCehfSh/SmK31TajwzLkkk
- JjqDqDOoovr1OetkPyhINRbhKEX1cQHBKFoZ9przK6OlBLD7f5k0TuD7m13tq64Q+oEE
- 8XsWGz+LIPAdT/Z/GDqixYBuQK4cxcqM5jFNiQhNGV9QVcZkfg7CrSYdLtutSf63VEGS
- LcBg==
-X-Gm-Message-State: APjAAAVIgLQuy43mNPwIVBvsBwn/tuIU9VhsLlKvPqoh6d7bdP3jRMjI
- 7rR2XkIlxCYfXGOlnD+SgADNbB3KrrogdAGoLPI=
-X-Google-Smtp-Source: APXvYqwxMlTZj0mkXSWjl5ZbZSuZON6zWCBxp1QeXrHm1dJpVTMMHTF/BSiR8ZyFMO02zSifaLNOdoezDg0x9xad9UM=
-X-Received: by 2002:ac2:4a69:: with SMTP id q9mr90720lfp.86.1568649743426;
- Mon, 16 Sep 2019 09:02:23 -0700 (PDT)
+ bh=D36R4TxC9kabrXw4LckB9IixL5aslsuDDTMAnaEx/ng=;
+ b=gN70sCnn/EqbA4gFlI1lPmbqG8YcgY1gU0ZEqB81MjJmCRHlFkZN1sopYZZu0U1SXV
+ 8zex5kYl7XuB/Kl6gkF3WAYbtvZpB0fs0HkniMSdSagRoZsrCLeeuPeANpC4vO7R+KBf
+ 2NaImxrms1742X3OMu2kg2x/v8jLkoXSxKmH6lhCA+rYf4stb/cM7Xyqq+O5t/k0pXi2
+ y7l/KWlUVIwV3pY0Pn3m7pBTG23lssX57z9ZuXOTF8bYsTyYfkRADPRXkRr16F9uSewF
+ PNmUbU6Om/sOH2WvIsnV7XFE5ZpK8Gi52zdNEWZ3ReLRhbTXcT9iwlxEIYBF1G+1pyuP
+ g3Pw==
+X-Gm-Message-State: APjAAAUcrW4spE7kUWag34Xe2u8sYd8WN1VvFhOJzjaE7MuYVnm8B/qU
+ m1g7ErGpAuQItWUhIUoDM0UcLeNBumzkJWNtwFw=
+X-Google-Smtp-Source: APXvYqzyRgR7ygR3MrnpIq4dYBOkMAtYElG55UWFQ/bNMy+RBHvc5GdAv3m/eyxK+AskwGacXWH3YSwBGRAjp/PZypI=
+X-Received: by 2002:a2e:91d9:: with SMTP id u25mr355859ljg.85.1568653647468;
+ Mon, 16 Sep 2019 10:07:27 -0700 (PDT)
 MIME-Version: 1.0
-References: <1c1d359caa6633349158debc38e07156a10b63e8.1566603412.git.alistair.francis@wdc.com>
- <mhng-9017291b-1ed2-4cea-ab34-03825a8c8a8c@palmer-si-x1e>
-In-Reply-To: <mhng-9017291b-1ed2-4cea-ab34-03825a8c8a8c@palmer-si-x1e>
+References: <CAEUhbmUksfEiGLZ0qzsWkaDOaocTvkEYefiSUmGZT7TftYfmEg@mail.gmail.com>
+ <mhng-165ebd8f-3595-48d3-a614-79f52d81c14c@palmer-si-x1e>
+ <CAEUhbmV=v62a0CAHe2mt1Qzz0n+fESgVYDtjdoXfyhH6_j5zFw@mail.gmail.com>
+In-Reply-To: <CAEUhbmV=v62a0CAHe2mt1Qzz0n+fESgVYDtjdoXfyhH6_j5zFw@mail.gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 16 Sep 2019 08:57:52 -0700
-Message-ID: <CAKmqyKP5Ld5TQH+J2bArXOEChcB+0RFTdqNS-Sg-_G-UuOz_uQ@mail.gmail.com>
-To: Palmer Dabbelt <palmer@sifive.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+Date: Mon, 16 Sep 2019 10:02:56 -0700
+Message-ID: <CAKmqyKN3kF3EtKJxQ3iZRaiVrvaBEmkFuX6fsfP7FSbOwpnD3Q@mail.gmail.com>
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Palmer Dabbelt <palmer@sifive.com>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Atish Patra <Atish.Patra@wdc.com>, Anup Patel <Anup.Patel@wdc.com>
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::144
-Subject: Re: [Qemu-riscv] [PATCH v1 02/28] target/riscv: Add the
- virtulisation mode
+X-Received-From: 2a00:1450:4864:20::244
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v8 18/32] riscv: sifive_u: Set
+ the minimum number of cpus to 2
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -68,101 +69,111 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Sep 2019 16:02:31 -0000
+X-List-Received-Date: Mon, 16 Sep 2019 17:07:40 -0000
 
-On Tue, Sep 10, 2019 at 6:44 AM Palmer Dabbelt <palmer@sifive.com> wrote:
+On Sun, Sep 15, 2019 at 6:07 AM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
-> On Fri, 23 Aug 2019 16:37:54 PDT (-0700), Alistair Francis wrote:
-> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> > ---
-> >  target/riscv/cpu.h        |  4 ++++
-> >  target/riscv/cpu_bits.h   |  6 ++++++
-> >  target/riscv/cpu_helper.c | 23 +++++++++++++++++++++++
-> >  3 files changed, 33 insertions(+)
-> >
-> > diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> > index 7f54fb8c87..0ef1ecb0e0 100644
-> > --- a/target/riscv/cpu.h
-> > +++ b/target/riscv/cpu.h
-> > @@ -117,6 +117,8 @@ struct CPURISCVState {
-> >
-> >  #ifndef CONFIG_USER_ONLY
-> >      target_ulong priv;
-> > +    /* This contains QEMU specific information about the virt state. */
-> > +    target_ulong virt;
-> >      target_ulong resetvec;
-> >
-> >      target_ulong mhartid;
-> > @@ -257,6 +259,8 @@ int riscv_cpu_gdb_read_register(CPUState *cpu, uint8_t *buf, int reg);
-> >  int riscv_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
-> >  bool riscv_cpu_exec_interrupt(CPUState *cs, int interrupt_request);
-> >  bool riscv_cpu_fp_enabled(CPURISCVState *env);
-> > +bool riscv_cpu_virt_enabled(CPURISCVState *env);
-> > +void riscv_cpu_set_virt_enabled(CPURISCVState *env, bool enable);
-> >  int riscv_cpu_mmu_index(CPURISCVState *env, bool ifetch);
-> >  hwaddr riscv_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
-> >  void  riscv_cpu_do_unaligned_access(CPUState *cs, vaddr addr,
-> > diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-> > index e99834856c..1fbde516be 100644
-> > --- a/target/riscv/cpu_bits.h
-> > +++ b/target/riscv/cpu_bits.h
-> > @@ -422,6 +422,12 @@
-> >  #define PRV_H 2 /* Reserved */
-> >  #define PRV_M 3
-> >
-> > +/* Virtulisation modes */
-> > +#define VIRT_OFF            0
-> > +#define VIRT_ON             1
-> > +#define VIRT_MODE_SHIFT     0
-> > +#define VIRT_MODE_MASK      (1 << VIRT_MODE_SHIFT)
-> > +
-> >  /* RV32 satp CSR field masks */
-> >  #define SATP32_MODE         0x80000000
-> >  #define SATP32_ASID         0x7fc00000
-> > diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> > index 225e407cff..7b0bb14c01 100644
-> > --- a/target/riscv/cpu_helper.c
-> > +++ b/target/riscv/cpu_helper.c
-> > @@ -81,6 +81,29 @@ bool riscv_cpu_fp_enabled(CPURISCVState *env)
-> >      return false;
-> >  }
-> >
-> > +bool riscv_cpu_virt_enabled(CPURISCVState *env)
-> > +{
-> > +    bool tmp;
-> > +
-> > +    if (!riscv_has_ext(env, RVH)) {
-> > +        return false;
-> > +    }
-> > +
-> > +    tmp = (env->virt & VIRT_MODE_MASK) >> VIRT_MODE_SHIFT;
-> > +
-> > +    return tmp == VIRT_ON;
-> > +}
+> Hi Palmer,
 >
-> extract64() is a bit cleaner.
+> On Sun, Sep 15, 2019 at 3:00 AM Palmer Dabbelt <palmer@sifive.com> wrote:
+> >
+> > On Fri, 13 Sep 2019 08:25:21 PDT (-0700), bmeng.cn@gmail.com wrote:
+> > > Hi Palmer,
+> > >
+> > > On Fri, Sep 13, 2019 at 10:33 PM Palmer Dabbelt <palmer@sifive.com> wrote:
+> > >>
+> > >> On Fri, 06 Sep 2019 09:20:05 PDT (-0700), bmeng.cn@gmail.com wrote:
+> > >> > It is not useful if we only have one management CPU.
+> > >> >
+> > >> > Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
+> > >> > Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+> > >> >
+> > >> > ---
+> > >> >
+> > >> > Changes in v8: None
+> > >> > Changes in v7: None
+> > >> > Changes in v6: None
+> > >> > Changes in v5: None
+> > >> > Changes in v4: None
+> > >> > Changes in v3:
+> > >> > - use management cpu count + 1 for the min_cpus
+> > >> >
+> > >> > Changes in v2:
+> > >> > - update the file header to indicate at least 2 harts are created
+> > >> >
+> > >> >  hw/riscv/sifive_u.c         | 4 +++-
+> > >> >  include/hw/riscv/sifive_u.h | 2 ++
+> > >> >  2 files changed, 5 insertions(+), 1 deletion(-)
+> > >> >
+> > >> > diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+> > >> > index 2947e06..2023b71 100644
+> > >> > --- a/hw/riscv/sifive_u.c
+> > >> > +++ b/hw/riscv/sifive_u.c
+> > >> > @@ -10,7 +10,8 @@
+> > >> >   * 1) CLINT (Core Level Interruptor)
+> > >> >   * 2) PLIC (Platform Level Interrupt Controller)
+> > >> >   *
+> > >> > - * This board currently uses a hardcoded devicetree that indicates one hart.
+> > >> > + * This board currently generates devicetree dynamically that indicates at least
+> > >> > + * two harts.
+> > >> >   *
+> > >> >   * This program is free software; you can redistribute it and/or modify it
+> > >> >   * under the terms and conditions of the GNU General Public License,
+> > >> > @@ -433,6 +434,7 @@ static void riscv_sifive_u_machine_init(MachineClass *mc)
+> > >> >       * management CPU.
+> > >> >       */
+> > >> >      mc->max_cpus = 4;
+> > >> > +    mc->min_cpus = SIFIVE_U_MANAGEMENT_CPU_COUNT + 1;
+> > >> >  }
+> > >> >
+> > >> >  DEFINE_MACHINE("sifive_u", riscv_sifive_u_machine_init)
+> > >> > diff --git a/include/hw/riscv/sifive_u.h b/include/hw/riscv/sifive_u.h
+> > >> > index f25bad8..6d22741 100644
+> > >> > --- a/include/hw/riscv/sifive_u.h
+> > >> > +++ b/include/hw/riscv/sifive_u.h
+> > >> > @@ -69,6 +69,8 @@ enum {
+> > >> >      SIFIVE_U_GEM_CLOCK_FREQ = 125000000
+> > >> >  };
+> > >> >
+> > >> > +#define SIFIVE_U_MANAGEMENT_CPU_COUNT   1
+> > >> > +
+> > >> >  #define SIFIVE_U_PLIC_HART_CONFIG "MS"
+> > >> >  #define SIFIVE_U_PLIC_NUM_SOURCES 54
+> > >> >  #define SIFIVE_U_PLIC_NUM_PRIORITIES 7
+> > >>
+> > >> This fails "make check", so I'm going to squash in this
+> > >>
+> > >> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+> > >> index ca9f7fea41..adecbf1dd9 100644
+> > >> --- a/hw/riscv/sifive_u.c
+> > >> +++ b/hw/riscv/sifive_u.c
+> > >> @@ -528,6 +528,7 @@ static void riscv_sifive_u_machine_init(MachineClass *mc)
+> > >>      mc->init = riscv_sifive_u_init;
+> > >>      mc->max_cpus = SIFIVE_U_MANAGEMENT_CPU_COUNT + SIFIVE_U_COMPUTE_CPU_COUNT;
+> > >>      mc->min_cpus = SIFIVE_U_MANAGEMENT_CPU_COUNT + 1;
+> > >> +    mc->default_cpus = mc->max_cpus;
+> > >
+> > > Thank you for fixing the 'make check'. Shouldn't it be:
+> > >
+> > > mc->default_cpus = mc->min_cpus;
+> >
+> > We have 5 harts on the board that this matches, so I figured that'd be the
+> > better default.
+> >
+>
+> Per my understanding mc->default_cpus is used when invoking QEMU
+> without passing '-smp n' (that's what 'make check' uses), and with the
+> updated sifive_u machine, '-smp 2' is the actual useful configuration
+> to boot Linux. For consistency with user experience on other machines,
+> without '-smp' means we want a uni-processor machine hence I would
+> suggest we set "mc->default_cpus = mc->min_cpus".
 
-I have already changed it to get_field() and set_field().
-
->
-> > +
-> > +void riscv_cpu_set_virt_enabled(CPURISCVState *env, bool enable)
-> > +{
-> > +    if (!riscv_has_ext(env, RVH)) {
-> > +        return;
-> > +    }
-> > +
-> > +    env->virt &= ~VIRT_MODE_MASK;
-> > +    env->virt |= enable << VIRT_MODE_SHIFT;
-> > +}
-> > +
-> >  int riscv_cpu_claim_interrupts(RISCVCPU *cpu, uint32_t interrupts)
-> >  {
-> >      CPURISCVState *env = &cpu->env;
->
-> Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
-
-This patch is a little out of date, so I'll not include your RB line in the v2.
+Agreed!
 
 Alistair
+
+>
+> Regards,
+> Bin
+>
 
