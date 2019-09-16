@@ -1,63 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1i9uTW-00072i-0g
-	for mharc-qemu-riscv@gnu.org; Mon, 16 Sep 2019 13:07:42 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:50484)
+	id 1i9ydH-0003um-0a
+	for mharc-qemu-riscv@gnu.org; Mon, 16 Sep 2019 17:34:03 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:34273)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <alistair23@gmail.com>) id 1i9uTO-00070K-Is
- for qemu-riscv@nongnu.org; Mon, 16 Sep 2019 13:07:40 -0400
+ (envelope-from <alistair23@gmail.com>) id 1i9ydC-0003qd-Te
+ for qemu-riscv@nongnu.org; Mon, 16 Sep 2019 17:33:59 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1i9uTJ-0003vF-Mb
- for qemu-riscv@nongnu.org; Mon, 16 Sep 2019 13:07:34 -0400
-Received: from mail-lj1-x244.google.com ([2a00:1450:4864:20::244]:42847)
+ (envelope-from <alistair23@gmail.com>) id 1i9ydB-0006HH-9U
+ for qemu-riscv@nongnu.org; Mon, 16 Sep 2019 17:33:58 -0400
+Received: from mail-lf1-x141.google.com ([2a00:1450:4864:20::141]:37070)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1i9uTJ-0003ub-Ez; Mon, 16 Sep 2019 13:07:29 -0400
-Received: by mail-lj1-x244.google.com with SMTP id y23so634867lje.9;
- Mon, 16 Sep 2019 10:07:29 -0700 (PDT)
+ id 1i9yd7-0006Fg-Oy; Mon, 16 Sep 2019 17:33:54 -0400
+Received: by mail-lf1-x141.google.com with SMTP id w67so1145913lff.4;
+ Mon, 16 Sep 2019 14:33:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=D36R4TxC9kabrXw4LckB9IixL5aslsuDDTMAnaEx/ng=;
- b=t7loyxUCDt53/J47VQr+1KckMz5a1DRiZomr3eq7Jow5xw1mHlDni43TBWQZV8lvRT
- cv5kbjqH7TN4QoYYmd1GkBbo1ZATCzQjJ0qlC8sKC7IrEYfWHgatVcq3lYwPPXP2BVsb
- BP1bI9yQWYBX4cnC++3T4M2Mvt0ay/9vjXGkYWN9fUICoXzm86DvF7W29nJHvyAp/rwT
- xYsY4W0cid+AbsmuJChgfGU91ETRRx6fDMOPcJmWvEbCFoB3ymXmOCJPsrqUdkrHL8PT
- JRLyk3wYALGXTm3jJ5vtBswqXrtJlIg45tplUkJoh6u1PWFEL+KYfAb8njvigjMfivkD
- 68/Q==
+ :cc; bh=IFzMaL0xFQFOEUoKgKzc361NWhxPrdYCvHGNa9V4cuo=;
+ b=W9gX6BOqr24tpW/Bgh3rio0LWnucWy1+cxf2b5ugsdSz0GiipFDayUdanxbtInIyav
+ hTlM6jAu3SVf1vaO9Ams2615ppRGtCMujY8FrGP1R1JNIcc0jIQzhsSmk9LmXTHoAUZA
+ mv4JJOdXs4jinyYYyJIGm3nFbQWq+sLqv69HGl6Hszj8jK7M4XYUE0iXSu5lc1KHyh+K
+ 4z69JtgRqKBEJF+37htenZs/5KsR4WWhaVVhOY63ehUhX58HMtIGgA27qcpkJCFR8gix
+ nl32v2yjuHeG6S5QySYxwnNP/5uDAc7hqbneTbSSdIhSX7SSH0KZe0eLitKlfgC1uFgy
+ Xalg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=D36R4TxC9kabrXw4LckB9IixL5aslsuDDTMAnaEx/ng=;
- b=gN70sCnn/EqbA4gFlI1lPmbqG8YcgY1gU0ZEqB81MjJmCRHlFkZN1sopYZZu0U1SXV
- 8zex5kYl7XuB/Kl6gkF3WAYbtvZpB0fs0HkniMSdSagRoZsrCLeeuPeANpC4vO7R+KBf
- 2NaImxrms1742X3OMu2kg2x/v8jLkoXSxKmH6lhCA+rYf4stb/cM7Xyqq+O5t/k0pXi2
- y7l/KWlUVIwV3pY0Pn3m7pBTG23lssX57z9ZuXOTF8bYsTyYfkRADPRXkRr16F9uSewF
- PNmUbU6Om/sOH2WvIsnV7XFE5ZpK8Gi52zdNEWZ3ReLRhbTXcT9iwlxEIYBF1G+1pyuP
- g3Pw==
-X-Gm-Message-State: APjAAAUcrW4spE7kUWag34Xe2u8sYd8WN1VvFhOJzjaE7MuYVnm8B/qU
- m1g7ErGpAuQItWUhIUoDM0UcLeNBumzkJWNtwFw=
-X-Google-Smtp-Source: APXvYqzyRgR7ygR3MrnpIq4dYBOkMAtYElG55UWFQ/bNMy+RBHvc5GdAv3m/eyxK+AskwGacXWH3YSwBGRAjp/PZypI=
-X-Received: by 2002:a2e:91d9:: with SMTP id u25mr355859ljg.85.1568653647468;
- Mon, 16 Sep 2019 10:07:27 -0700 (PDT)
+ bh=IFzMaL0xFQFOEUoKgKzc361NWhxPrdYCvHGNa9V4cuo=;
+ b=fjEU4KJkZiOfgc3WCFalRvrYDiT+ObVVerVeodx4SsaVxwtFXS2MgDmA6OkQONo98Q
+ hLchnvjV885v6a/Hj5FraAx/7wP0x0zMu6AygpuSvBDZbo6y5mizJPSIV6gY77WCcTnT
+ kJPKbeDrI1H62uwicNMcTzf9Nsa1IZSyM6J8C8IKxjIuWMLRg/P/5xy0oTVB2kZzA8V/
+ SpnLhjfA+zGamsdFUSdP4zrZISezfXclPCWDGkpba/lOLAcnuavT3MLlHvOZNBTMJ0Np
+ Mz3jPCuRh2BzWyY/6O9XkOGUbck5g0/Q9Tgy7dUzyfDvt7xmQM9q3Dhn3/mOIyX1/xR/
+ Nw2Q==
+X-Gm-Message-State: APjAAAXGDLWmHVbtoRPbTdXstK3iCnI/8a9jP67r07dB7DTMUukk4+9I
+ hzH4m+qjM2lp1uKtmJNlc1Ji/CZ62LN9bxT8pp8=
+X-Google-Smtp-Source: APXvYqw97x/naFKy8KmhT76zixyo+ounStBVot1DwCNoEhyLWRNfgC5cxTQOHptYY+TniyJIdLvxcK4qnE1xvxOPA1I=
+X-Received: by 2002:ac2:5e9e:: with SMTP id b30mr154264lfq.5.1568669632472;
+ Mon, 16 Sep 2019 14:33:52 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAEUhbmUksfEiGLZ0qzsWkaDOaocTvkEYefiSUmGZT7TftYfmEg@mail.gmail.com>
- <mhng-165ebd8f-3595-48d3-a614-79f52d81c14c@palmer-si-x1e>
- <CAEUhbmV=v62a0CAHe2mt1Qzz0n+fESgVYDtjdoXfyhH6_j5zFw@mail.gmail.com>
-In-Reply-To: <CAEUhbmV=v62a0CAHe2mt1Qzz0n+fESgVYDtjdoXfyhH6_j5zFw@mail.gmail.com>
+References: <1568103341-28636-1-git-send-email-frederic.konrad@adacore.com>
+In-Reply-To: <1568103341-28636-1-git-send-email-frederic.konrad@adacore.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 16 Sep 2019 10:02:56 -0700
-Message-ID: <CAKmqyKN3kF3EtKJxQ3iZRaiVrvaBEmkFuX6fsfP7FSbOwpnD3Q@mail.gmail.com>
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Palmer Dabbelt <palmer@sifive.com>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Alistair Francis <Alistair.Francis@wdc.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
+Date: Mon, 16 Sep 2019 14:29:21 -0700
+Message-ID: <CAKmqyKNOzrgWWRyJOKucN5eVi-rbJ9z6=jn+4WfEGOzv8BpOZQ@mail.gmail.com>
+To: KONRAD Frederic <frederic.konrad@adacore.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>, 
+ "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Palmer Dabbelt <palmer@sifive.com>, 
+ Alistair Francis <Alistair.Francis@wdc.com>
 Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::244
-Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v8 18/32] riscv: sifive_u: Set
- the minimum number of cpus to 2
+X-Received-From: 2a00:1450:4864:20::141
+Subject: Re: [Qemu-riscv] [Qemu-devel] [PATCH v1] gdbstub: riscv: fix the
+ fflags registers
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -69,111 +69,57 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Sep 2019 17:07:40 -0000
+X-List-Received-Date: Mon, 16 Sep 2019 21:34:00 -0000
 
-On Sun, Sep 15, 2019 at 6:07 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+On Tue, Sep 10, 2019 at 1:16 AM KONRAD Frederic
+<frederic.konrad@adacore.com> wrote:
 >
-> Hi Palmer,
+> While debugging an application with GDB the following might happen:
 >
-> On Sun, Sep 15, 2019 at 3:00 AM Palmer Dabbelt <palmer@sifive.com> wrote:
-> >
-> > On Fri, 13 Sep 2019 08:25:21 PDT (-0700), bmeng.cn@gmail.com wrote:
-> > > Hi Palmer,
-> > >
-> > > On Fri, Sep 13, 2019 at 10:33 PM Palmer Dabbelt <palmer@sifive.com> wrote:
-> > >>
-> > >> On Fri, 06 Sep 2019 09:20:05 PDT (-0700), bmeng.cn@gmail.com wrote:
-> > >> > It is not useful if we only have one management CPU.
-> > >> >
-> > >> > Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
-> > >> > Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-> > >> >
-> > >> > ---
-> > >> >
-> > >> > Changes in v8: None
-> > >> > Changes in v7: None
-> > >> > Changes in v6: None
-> > >> > Changes in v5: None
-> > >> > Changes in v4: None
-> > >> > Changes in v3:
-> > >> > - use management cpu count + 1 for the min_cpus
-> > >> >
-> > >> > Changes in v2:
-> > >> > - update the file header to indicate at least 2 harts are created
-> > >> >
-> > >> >  hw/riscv/sifive_u.c         | 4 +++-
-> > >> >  include/hw/riscv/sifive_u.h | 2 ++
-> > >> >  2 files changed, 5 insertions(+), 1 deletion(-)
-> > >> >
-> > >> > diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-> > >> > index 2947e06..2023b71 100644
-> > >> > --- a/hw/riscv/sifive_u.c
-> > >> > +++ b/hw/riscv/sifive_u.c
-> > >> > @@ -10,7 +10,8 @@
-> > >> >   * 1) CLINT (Core Level Interruptor)
-> > >> >   * 2) PLIC (Platform Level Interrupt Controller)
-> > >> >   *
-> > >> > - * This board currently uses a hardcoded devicetree that indicates one hart.
-> > >> > + * This board currently generates devicetree dynamically that indicates at least
-> > >> > + * two harts.
-> > >> >   *
-> > >> >   * This program is free software; you can redistribute it and/or modify it
-> > >> >   * under the terms and conditions of the GNU General Public License,
-> > >> > @@ -433,6 +434,7 @@ static void riscv_sifive_u_machine_init(MachineClass *mc)
-> > >> >       * management CPU.
-> > >> >       */
-> > >> >      mc->max_cpus = 4;
-> > >> > +    mc->min_cpus = SIFIVE_U_MANAGEMENT_CPU_COUNT + 1;
-> > >> >  }
-> > >> >
-> > >> >  DEFINE_MACHINE("sifive_u", riscv_sifive_u_machine_init)
-> > >> > diff --git a/include/hw/riscv/sifive_u.h b/include/hw/riscv/sifive_u.h
-> > >> > index f25bad8..6d22741 100644
-> > >> > --- a/include/hw/riscv/sifive_u.h
-> > >> > +++ b/include/hw/riscv/sifive_u.h
-> > >> > @@ -69,6 +69,8 @@ enum {
-> > >> >      SIFIVE_U_GEM_CLOCK_FREQ = 125000000
-> > >> >  };
-> > >> >
-> > >> > +#define SIFIVE_U_MANAGEMENT_CPU_COUNT   1
-> > >> > +
-> > >> >  #define SIFIVE_U_PLIC_HART_CONFIG "MS"
-> > >> >  #define SIFIVE_U_PLIC_NUM_SOURCES 54
-> > >> >  #define SIFIVE_U_PLIC_NUM_PRIORITIES 7
-> > >>
-> > >> This fails "make check", so I'm going to squash in this
-> > >>
-> > >> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-> > >> index ca9f7fea41..adecbf1dd9 100644
-> > >> --- a/hw/riscv/sifive_u.c
-> > >> +++ b/hw/riscv/sifive_u.c
-> > >> @@ -528,6 +528,7 @@ static void riscv_sifive_u_machine_init(MachineClass *mc)
-> > >>      mc->init = riscv_sifive_u_init;
-> > >>      mc->max_cpus = SIFIVE_U_MANAGEMENT_CPU_COUNT + SIFIVE_U_COMPUTE_CPU_COUNT;
-> > >>      mc->min_cpus = SIFIVE_U_MANAGEMENT_CPU_COUNT + 1;
-> > >> +    mc->default_cpus = mc->max_cpus;
-> > >
-> > > Thank you for fixing the 'make check'. Shouldn't it be:
-> > >
-> > > mc->default_cpus = mc->min_cpus;
-> >
-> > We have 5 harts on the board that this matches, so I figured that'd be the
-> > better default.
-> >
+> (gdb) return
+> Make xxx return now? (y or n) y
+> Could not fetch register "fflags"; remote failure reply 'E14'
 >
-> Per my understanding mc->default_cpus is used when invoking QEMU
-> without passing '-smp n' (that's what 'make check' uses), and with the
-> updated sifive_u machine, '-smp 2' is the actual useful configuration
-> to boot Linux. For consistency with user experience on other machines,
-> without '-smp' means we want a uni-processor machine hence I would
-> suggest we set "mc->default_cpus = mc->min_cpus".
+> This is because riscv_gdb_get_fpu calls riscv_csrrw_debug with a wrong csr
+> number (8). It should use the csr_register_map in order to reach the
+> riscv_cpu_get_fflags callback.
+>
+> Signed-off-by: KONRAD Frederic <frederic.konrad@adacore.com>
 
-Agreed!
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
+> ---
+>  target/riscv/gdbstub.c | 6 ++++--
+>  1 file changed, 4 insertions(+), 2 deletions(-)
 >
-> Regards,
-> Bin
+> diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
+> index 27be932..ded140e 100644
+> --- a/target/riscv/gdbstub.c
+> +++ b/target/riscv/gdbstub.c
+> @@ -313,7 +313,8 @@ static int riscv_gdb_get_fpu(CPURISCVState *env, uint8_t *mem_buf, int n)
+>           * register 33, so we recalculate the map index.
+>           * This also works for CSR_FRM and CSR_FCSR.
+>           */
+> -        result = riscv_csrrw_debug(env, n - 33 +  8, &val, 0, 0);
+> +        result = riscv_csrrw_debug(env, n - 33 + csr_register_map[8], &val,
+> +                                   0, 0);
+>          if (result == 0) {
+>              return gdb_get_regl(mem_buf, val);
+>          }
+> @@ -335,7 +336,8 @@ static int riscv_gdb_set_fpu(CPURISCVState *env, uint8_t *mem_buf, int n)
+>           * register 33, so we recalculate the map index.
+>           * This also works for CSR_FRM and CSR_FCSR.
+>           */
+> -        result = riscv_csrrw_debug(env, n - 33 + 8, NULL, val, -1);
+> +        result = riscv_csrrw_debug(env, n - 33 + csr_register_map[8], NULL,
+> +                                   val, -1);
+>          if (result == 0) {
+>              return sizeof(target_ulong);
+>          }
+> --
+> 1.8.3.1
+>
 >
 
