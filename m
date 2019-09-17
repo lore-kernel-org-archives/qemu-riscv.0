@@ -1,64 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iAMsT-0004GS-PX
-	for mharc-qemu-riscv@gnu.org; Tue, 17 Sep 2019 19:27:21 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:50828)
+	id 1iAMsV-0004I0-2u
+	for mharc-qemu-riscv@gnu.org; Tue, 17 Sep 2019 19:27:23 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:50852)
  by lists.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <prvs=156d039a9=alistair.francis@wdc.com>)
- id 1iAMsO-0004DL-CJ
- for qemu-riscv@nongnu.org; Tue, 17 Sep 2019 19:27:17 -0400
+ id 1iAMsS-0004EC-6y
+ for qemu-riscv@nongnu.org; Tue, 17 Sep 2019 19:27:21 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
  (envelope-from <prvs=156d039a9=alistair.francis@wdc.com>)
- id 1iAMsN-0002oX-52
- for qemu-riscv@nongnu.org; Tue, 17 Sep 2019 19:27:16 -0400
-Received: from esa1.hgst.iphmx.com ([68.232.141.245]:35346)
+ id 1iAMsQ-0002va-83
+ for qemu-riscv@nongnu.org; Tue, 17 Sep 2019 19:27:20 -0400
+Received: from esa1.hgst.iphmx.com ([68.232.141.245]:35336)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <prvs=156d039a9=alistair.francis@wdc.com>)
- id 1iAMsI-0002eD-S6; Tue, 17 Sep 2019 19:27:11 -0400
+ id 1iAMsK-0002d5-Ng; Tue, 17 Sep 2019 19:27:12 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1568762830; x=1600298830;
+ t=1568762832; x=1600298832;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=2aGksb+6wpuxxwZws3oCDFLqyYmlLrKjPA5jBwu9NTY=;
- b=Y9ZAc2WORRg+YpS00iCnYrCLOXUaZYszRigOv0t/30N/fwz3PSQXtkFa
- dAmCbQo7frp3ag16nX77JILrFdOJ4ysAbOmQmHuQ8LTvpJV4FTjuWoadH
- qkQPC0AFVip69w3dz8tmiWpmDRWWGqzLaZHSyAiF7yrs5/YG1gbfGUuxz
- rXS+L9GPNA2PK1+dwo0l0RFpByb/qgKaIITKYF3M7xHtQtDcNDhiYeWc7
- HhnSLp7PjdLRUoZX8rEsWgU+2FVtLsSRo40NjFEoVZB0PHZoP9TSJZ8p8
- oHOUhCIja8R/DJWjCgNu3C/F/rxfiQ4xZDZ0oHWoHj8SyEIz0CsYjNGse A==;
-IronPort-SDR: AI5nK1U84UGyIIDDEMf4RoB2X9DshPwcCtwhaI8eJNSuKCzsJekB5jOemkfb3MCVTcGW3JcBmx
- cHZhlnlYwK21sRO8EJ3FIr2FY4tCEEloQG/qdVZhG8mCi0hwS6mO4V3QuIcDi+wLDIrn/kbmep
- m1LZuTFuOlLEf0DapQj4vBAoSe2vaQBnI+MBkHQlKVGHHL5EI+5AwfzC8vS/k/iQYfsOyGBlNi
- S131maryacValclBeow1OaXiTZiigBQ5RIlGyKRkduvPqBleRfrkHGTO0RGy5Y1ibqr+DZHS+G
- ELk=
-X-IronPort-AV: E=Sophos;i="5.64,518,1559491200"; d="scan'208";a="225302172"
+ bh=GHkKx2iMe0DVDnMz2PJlSqovsjWMq6y8Tg7I8i9Imdc=;
+ b=aFOM+UNDeZ5XFZSsxnYpLSrzLbgkpGoTlqb2qo64jO+CXZIDjvqHb0Jc
+ 1jmZ76ZWMjXvdvG6TXPcLVak0BVkWS/+D8GQWTrVqJE4a7TMJoleHSjX4
+ 5H2IVGpP2qMExiKs5halHCCRtWdKavqtw/2x1X8AIdJ60rEMR5ImnBiV3
+ +h9WLyVdBn+STSd7PAoLfo610LAG/XqxUjS1qg8+12xmht4KWtg6FPIBt
+ sx1ZcAAoAnVnwi0BKesiQNCotXClErYQcCVZ+7btXUYUI4Nsl/1YHZYIs
+ 9pFTgQUFYh3Y8M24SLTCncsDkUYDYKIZXrhcRAzvf1PTfVtv2MzFTb3YT A==;
+IronPort-SDR: kIbapOoMffOtUumA58cu41O4MYlIcY7fUmYKnJj40k1IDXsRxdCOnEy8xNkKPNGNSLhg36MyqC
+ oklrwuPycYqoX5j3M0pVZx0p12s1hyP552a1LtK9zxgDxD/J0zy/PUH046Atex5bgKK4n70/f8
+ VW3VwvqeMFRvH98y/+qlZT3aWpH6h2JWOdo6y0JE5l8FINpucW9VFDpl0169wiotIrFDpX1HH4
+ mFCv420RQvEjRNQ4YA8AOmgK3A5kWaXc009/59ugo9opPbPurkQGftCfuNJoXGb4L0mDKnWNAa
+ wDM=
+X-IronPort-AV: E=Sophos;i="5.64,518,1559491200"; d="scan'208";a="225302175"
 Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com)
  ([199.255.45.15])
- by ob1.hgst.iphmx.com with ESMTP; 18 Sep 2019 07:27:05 +0800
-IronPort-SDR: O5URhE8TvMq2t+Y4EKR9+nkGUtFsj6GOlGxNFWf//BFS9wfJXpgKWPs9j5QbOsYoLKeYeS/rfS
- G62onOETpyyX6L7VuiQTv+rg+OIzspTbcANxhKgnOLAuJWyxZJeb5Ds2W7dUQRqYqrD57Hqmgr
- vmr9n85TCCNqws8Jygem0/x/5W2wKTPRu20PN+SEvp1TpfpfHOXRFCwOeYoWS3hBigppRi2Lht
- BVZKKUnpWuznGsWbeARuu8FW6u7CCTByu6ArZOeX2Wfr0UZjEmeJVNBThUM0f2adaut732oUQ/
- kO3mxM9orwE3Jo/hcskdyqa+
+ by ob1.hgst.iphmx.com with ESMTP; 18 Sep 2019 07:27:08 +0800
+IronPort-SDR: pnUYMrM0ok7UQohTcLTCXu1N5PSQGjrxmhqO462jOgnb1yWto2tx0pVx96elGkePVn3vyTIwAn
+ c86xzk1K3LDcgvvVX2NKyrrO14+zsIvi7l9dyMuPldjKh6QYO+Dr4FstsRfT0+YK6BEl9h1l3S
+ ZZwEcvaxXzld/n7iQrNxX/XZxT9I7nym4EysJVBie5w3PJTCtj7PqniIkuSaoAdxTFoXWn1kcc
+ h6AD7Vb0O0wCoRoGmlW16tXRkyPHYfXzIjNn6xvqiJVUQlkHhSrfAHIOzDXqH5ymVzVRFw+Drs
+ NxRj0imcs1wUmAtUGGM64zh3
 Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
  by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 17 Sep 2019 16:23:41 -0700
-IronPort-SDR: IRhbjgdMNR7UFyaMIsQfrocbBMmGagBFmaNQTNdjhZeYmn4NQXClG+1RcUtGI1hI7XCN8jsq1C
- HMfHtvKiXvehGoT71hWbQiOlZrtPMIL0zbUN9YWfO51ZaD58KXQi9MoPh09usI2YbE87RJuR7p
- T1AeS/YuMYY9YxsEHg0nHXbIRxAErX5NZr5nJMCpVNQlvg1DA/PBbZApFecEjtOGogjNVACiI4
- 6MO7XW08XC2hB+jew/ACUOv4tF8yOT4H0yKaFHdKu3BduKHqRRuqKhsDfr8GtX1y8iiYNZDeNB
- reQ=
+ 17 Sep 2019 16:23:43 -0700
+IronPort-SDR: nAfKiDgCf864YPlYhHl7EN80oO7bjpo3CEQLTOwzayDBs+fZEwekKXNYZGNjWtlWTgV/UX/jnI
+ jjxb2o7/S9c8zK2Me9iie3pjTDj+q3njRkOrUCGwNZX6GydvJyEq+1zEjZma1PuZsGxY9xrKbE
+ xWsyORH0PdjSFvt2Z9azEq0tDC4f5DU1z6p1NRkq3+crVkME/MeAs2jflrusWqkOUhLMAJQ9Jq
+ 2qB4vDjrUQ/i1v4qS3o3iZRj4K0DUCnTfP/kbECnFxs9cPwvT30sZopJQ2xFNZzivRPUgLuetK
+ 0iY=
 WDCIronportException: Internal
 Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
  risc6-mainframe.int.fusionio.com) ([10.196.157.58])
- by uls-op-cesaip01.wdc.com with ESMTP; 17 Sep 2019 16:27:05 -0700
+ by uls-op-cesaip01.wdc.com with ESMTP; 17 Sep 2019 16:27:08 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: palmer@sifive.com, peter.maydell@linaro.org, alistair.francis@wdc.com,
  alistair23@gmail.com
-Date: Tue, 17 Sep 2019 16:22:59 -0700
-Message-Id: <dfb8bc9fb7cad494d53f89774a3a4a5f3e478792.1568762497.git.alistair.francis@wdc.com>
+Date: Tue, 17 Sep 2019 16:23:02 -0700
+Message-Id: <62b87f2ee604c437cc59e82b84853c6f02a83372.1568762497.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.23.0
 In-Reply-To: <cover.1568762497.git.alistair.francis@wdc.com>
 References: <cover.1568762497.git.alistair.francis@wdc.com>
@@ -66,8 +66,8 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: FreeBSD 9.x
 X-Received-From: 68.232.141.245
-Subject: [Qemu-riscv] [PATCH v1 1/2] RISC-V: Handle bus errors in the page
- table walker
+Subject: [Qemu-riscv] [PATCH v1 2/2] RISC-V: Implement
+ cpu_do_transaction_failed
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -79,54 +79,85 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Sep 2019 23:27:18 -0000
+X-List-Received-Date: Tue, 17 Sep 2019 23:27:21 -0000
 
 From: Palmer Dabbelt <palmer@sifive.com>
 
-We directly access physical memory while walking the page tables on
-RISC-V, but while doing so we were using cpu_ld*() which does not report
-bus errors.  This patch converts the page table walker over to use
-address_space_ld*(), which allows bus errors to be detected.
+This converts our port over from cpu_do_unassigned_access to
+cpu_do_transaction_failed, as cpu_do_unassigned_access has been
+deprecated.
 
 Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/cpu_helper.c | 12 +++++++++---
- 1 file changed, 9 insertions(+), 3 deletions(-)
+ target/riscv/cpu.c        |  2 +-
+ target/riscv/cpu.h        |  7 +++++--
+ target/riscv/cpu_helper.c | 11 +++++++----
+ 3 files changed, 13 insertions(+), 7 deletions(-)
 
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index f13e298a36..3939963b71 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -484,7 +484,7 @@ static void riscv_cpu_class_init(ObjectClass *c, void *data)
+     cc->gdb_stop_before_watchpoint = true;
+     cc->disas_set_info = riscv_cpu_disas_set_info;
+ #ifndef CONFIG_USER_ONLY
+-    cc->do_unassigned_access = riscv_cpu_unassigned_access;
++    cc->do_transaction_failed = riscv_cpu_do_transaction_failed;
+     cc->do_unaligned_access = riscv_cpu_do_unaligned_access;
+     cc->get_phys_page_debug = riscv_cpu_get_phys_page_debug;
+ #endif
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 124ed33ee4..8c64c68538 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -264,8 +264,11 @@ void  riscv_cpu_do_unaligned_access(CPUState *cs, vaddr addr,
+ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+                         MMUAccessType access_type, int mmu_idx,
+                         bool probe, uintptr_t retaddr);
+-void riscv_cpu_unassigned_access(CPUState *cpu, hwaddr addr, bool is_write,
+-                                 bool is_exec, int unused, unsigned size);
++void riscv_cpu_do_transaction_failed(CPUState *cs, hwaddr physaddr,
++                                     vaddr addr, unsigned size,
++                                     MMUAccessType access_type,
++                                     int mmu_idx, MemTxAttrs attrs,
++                                     MemTxResult response, uintptr_t retaddr);
+ char *riscv_isa_string(RISCVCPU *cpu);
+ void riscv_cpu_list(void);
+ 
 diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 87dd6a6ece..c82e7ed52b 100644
+index c82e7ed52b..917252f71b 100644
 --- a/target/riscv/cpu_helper.c
 +++ b/target/riscv/cpu_helper.c
-@@ -169,7 +169,8 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
-     /* NOTE: the env->pc value visible here will not be
-      * correct, but the value visible to the exception handler
-      * (riscv_cpu_do_interrupt) is correct */
--
-+    MemTxResult res;
-+    MemTxAttrs attrs = MEMTXATTRS_UNSPECIFIED;
-     int mode = mmu_idx;
+@@ -408,20 +408,23 @@ hwaddr riscv_cpu_get_phys_page_debug(CPUState *cs, vaddr addr)
+     return phys_addr;
+ }
  
-     if (mode == PRV_M && access_type != MMU_INST_FETCH) {
-@@ -256,11 +257,16 @@ restart:
-             1 << MMU_DATA_LOAD, PRV_S)) {
-             return TRANSLATE_PMP_FAIL;
-         }
-+
- #if defined(TARGET_RISCV32)
--        target_ulong pte = ldl_phys(cs->as, pte_addr);
-+        target_ulong pte = address_space_ldl(cs->as, pte_addr, attrs, &res);
- #elif defined(TARGET_RISCV64)
--        target_ulong pte = ldq_phys(cs->as, pte_addr);
-+        target_ulong pte = address_space_ldq(cs->as, pte_addr, attrs, &res);
- #endif
-+        if (res != MEMTX_OK) {
-+            return TRANSLATE_FAIL;
-+        }
-+
-         hwaddr ppn = pte >> PTE_PPN_SHIFT;
+-void riscv_cpu_unassigned_access(CPUState *cs, hwaddr addr, bool is_write,
+-                                 bool is_exec, int unused, unsigned size)
++void riscv_cpu_do_transaction_failed(CPUState *cs, hwaddr physaddr,
++                                     vaddr addr, unsigned size,
++                                     MMUAccessType access_type,
++                                     int mmu_idx, MemTxAttrs attrs,
++                                     MemTxResult response, uintptr_t retaddr)
+ {
+     RISCVCPU *cpu = RISCV_CPU(cs);
+     CPURISCVState *env = &cpu->env;
  
-         if (!(pte & PTE_V)) {
+-    if (is_write) {
++    if (access_type == MMU_DATA_STORE) {
+         cs->exception_index = RISCV_EXCP_STORE_AMO_ACCESS_FAULT;
+     } else {
+         cs->exception_index = RISCV_EXCP_LOAD_ACCESS_FAULT;
+     }
+ 
+     env->badaddr = addr;
+-    riscv_raise_exception(&cpu->env, cs->exception_index, GETPC());
++    riscv_raise_exception(&cpu->env, cs->exception_index, retaddr);
+ }
+ 
+ void riscv_cpu_do_unaligned_access(CPUState *cs, vaddr addr,
 -- 
 2.23.0
 
