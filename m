@@ -1,55 +1,55 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iAbtE-0008Ce-TW
-	for mharc-qemu-riscv@gnu.org; Wed, 18 Sep 2019 11:29:08 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:50096)
+	id 1iAbtG-0008EQ-4U
+	for mharc-qemu-riscv@gnu.org; Wed, 18 Sep 2019 11:29:10 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:50120)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <palmer@dabbelt.com>) id 1iAbsz-0007yH-ML
- for qemu-riscv@nongnu.org; Wed, 18 Sep 2019 11:28:54 -0400
+ (envelope-from <palmer@dabbelt.com>) id 1iAbt0-0007zk-UM
+ for qemu-riscv@nongnu.org; Wed, 18 Sep 2019 11:28:55 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmer@dabbelt.com>) id 1iAbsy-0007FJ-70
- for qemu-riscv@nongnu.org; Wed, 18 Sep 2019 11:28:53 -0400
-Received: from mail-pg1-f196.google.com ([209.85.215.196]:32897)
+ (envelope-from <palmer@dabbelt.com>) id 1iAbsz-0007GH-NC
+ for qemu-riscv@nongnu.org; Wed, 18 Sep 2019 11:28:54 -0400
+Received: from mail-pf1-f195.google.com ([209.85.210.195]:42924)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1iAbsx-0007Ef-Va
- for qemu-riscv@nongnu.org; Wed, 18 Sep 2019 11:28:52 -0400
-Received: by mail-pg1-f196.google.com with SMTP id n190so67147pgn.0
- for <qemu-riscv@nongnu.org>; Wed, 18 Sep 2019 08:28:51 -0700 (PDT)
+ (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1iAbsz-0007Fi-Hl
+ for qemu-riscv@nongnu.org; Wed, 18 Sep 2019 11:28:53 -0400
+Received: by mail-pf1-f195.google.com with SMTP id q12so190182pff.9
+ for <qemu-riscv@nongnu.org>; Wed, 18 Sep 2019 08:28:53 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding:cc:from:to;
- bh=s35F55O2Em8wHwXR9VPPU+OtN5AgatRpyAF6CF2QIKI=;
- b=m+4Orh1FkHUgwREvHQdzq9nmO+DENriK0r8y4Y/z1oErLZR5XxglrLLIit01TChrvH
- +VTVEEzB0H4j2NeN8a6JBIu/PSG6zV6ga/0zv1uP8peTlHRXgTDi69dKO1vEWZnPj3uJ
- O6Hzjf+uH9drL6ZspfE6e+Iw+Ks/IzZ6LhJ2fjqCpnm6ohSlX9ZMBIBVvm53SQKcbNje
- ka38oH2MKJxjxdfI63dPwQqwT1A+eeirafEtR92ZXq/TyneiDoApZIVJJndPV0SrsfgP
- kG1vOWpR9DCDE82+yBmPow6kCTS7SAngWrBU/pUKBaRxwpXG4CNQICFGkgx9zavQafz9
- eWDg==
-X-Gm-Message-State: APjAAAUe/1FYC6M5sCtNRt/wfXvjRAM/mtZ5BQbm5a0OjOMMJ1Otdwfm
- NYzdRIUnUt5ZnmMMee4753sSFhzHeIk=
-X-Google-Smtp-Source: APXvYqzfy1VAvBWF50RP0rDWtfaHd15KCdWTqLI6sI18eWmoectT8vFWQSUyCS2r5ByGoB1WXU/NGw==
-X-Received: by 2002:a63:2a46:: with SMTP id q67mr4587738pgq.108.1568820530572; 
- Wed, 18 Sep 2019 08:28:50 -0700 (PDT)
+ bh=MhpoxMmHxg0lKHxp/4pAOLqG726Jjd89bWqoZDT3AGo=;
+ b=qjHXaIOEviJmn08hR5e/U66tZ1xntVGvg4GXdkrANI/m+uZJ87F3CTOG7DQVAWvB5h
+ 4k3pXJrtIklec9tR5d0XFIXGJ+zCAvc5vhtVWP+5jmfw1iTKKDx1jCNZeu4SyCVdzU8F
+ uswViTttTGpHVp7IyIysCmR7bLG+QjPKbpCuohNTZpdDr6DLdZDAGtLyU8n7g+TpDP7g
+ 3SyA/+FnASK4GWN9po6kCCwj3hSiA1kO17gK07R8IZtsbPkF5KTxxa9yh8obfeYJXwgD
+ QHWAtfoBmtxiR/5pdHdDfVeh+o5sCWjPiVe0AfD35NK9XoZwpRycBRNflMxqEsT3ELZ1
+ gxLw==
+X-Gm-Message-State: APjAAAV0b5a57MCDum/hvUaeDnFQdQ/sZ31vrtxJo684Uf7Zuzg9VQsL
+ VN3OBZfxZIcfnC5A1FGhDKWh59Jun20=
+X-Google-Smtp-Source: APXvYqwPQ1oQ1Qz9FhVPFZZl2I+e0I+cO0pEPLeCvedK2TKe3T3Dgg2Ck8T9+R5AhfdWSSPauB786A==
+X-Received: by 2002:a63:6947:: with SMTP id e68mr4588266pgc.60.1568820531931; 
+ Wed, 18 Sep 2019 08:28:51 -0700 (PDT)
 Received: from localhost ([12.206.222.5])
- by smtp.gmail.com with ESMTPSA id i6sm10705310pfq.20.2019.09.18.08.28.49
+ by smtp.gmail.com with ESMTPSA id 5sm4269904pgk.75.2019.09.18.08.28.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Sep 2019 08:28:50 -0700 (PDT)
-Date: Wed, 18 Sep 2019 07:56:39 -0700
-Message-Id: <20190918145640.17349-48-palmer@sifive.com>
+ Wed, 18 Sep 2019 08:28:51 -0700 (PDT)
+Date: Wed, 18 Sep 2019 07:56:40 -0700
+Message-Id: <20190918145640.17349-49-palmer@sifive.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <20190918145640.17349-1-palmer@sifive.com>
 References: <20190918145640.17349-1-palmer@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Cc: qemu-riscv@nongnu.org,       qemu-devel@nongnu.org,
- Alistair Francis <alistair.francis@wdc.com>, Palmer Dabbelt <palmer@sifive.com>
+ KONRAD Frederic <frederic.konrad@adacore.com>,
+ Palmer Dabbelt <palmer@sifive.com>
 From: Palmer Dabbelt <palmer@sifive.com>
 To: Peter Maydell <peter.maydell@linaro.org>
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
  [fuzzy]
-X-Received-From: 209.85.215.196
-Subject: [Qemu-riscv] [PULL 47/48] target/riscv: Use TB_FLAGS_MSTATUS_FS for
- floating point
+X-Received-From: 209.85.210.195
+Subject: [Qemu-riscv] [PULL 48/48] gdbstub: riscv: fix the fflags registers
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -61,33 +61,51 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Sep 2019 15:28:58 -0000
+X-List-Received-Date: Wed, 18 Sep 2019 15:28:59 -0000
 
-From: Alistair Francis <alistair.francis@wdc.com>
+From: KONRAD Frederic <frederic.konrad@adacore.com>
 
-Use the TB_FLAGS_MSTATUS_FS macro when enabling floating point in the tb
-flags.
+While debugging an application with GDB the following might happen:
 
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+(gdb) return
+Make xxx return now? (y or n) y
+Could not fetch register "fflags"; remote failure reply 'E14'
+
+This is because riscv_gdb_get_fpu calls riscv_csrrw_debug with a wrong csr
+number (8). It should use the csr_register_map in order to reach the
+riscv_cpu_get_fflags callback.
+
+Signed-off-by: KONRAD Frederic <frederic.konrad@adacore.com>
 Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
 Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
 ---
- target/riscv/cpu.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ target/riscv/gdbstub.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 16efe8c860..124ed33ee4 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -301,7 +301,7 @@ static inline void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
- #else
-     *flags = cpu_mmu_index(env, 0);
-     if (riscv_cpu_fp_enabled(env)) {
--        *flags |= env->mstatus & MSTATUS_FS;
-+        *flags |= TB_FLAGS_MSTATUS_FS;
-     }
- #endif
- }
+diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
+index 27be93279b..ded140e8d8 100644
+--- a/target/riscv/gdbstub.c
++++ b/target/riscv/gdbstub.c
+@@ -313,7 +313,8 @@ static int riscv_gdb_get_fpu(CPURISCVState *env, uint8_t *mem_buf, int n)
+          * register 33, so we recalculate the map index.
+          * This also works for CSR_FRM and CSR_FCSR.
+          */
+-        result = riscv_csrrw_debug(env, n - 33 +  8, &val, 0, 0);
++        result = riscv_csrrw_debug(env, n - 33 + csr_register_map[8], &val,
++                                   0, 0);
+         if (result == 0) {
+             return gdb_get_regl(mem_buf, val);
+         }
+@@ -335,7 +336,8 @@ static int riscv_gdb_set_fpu(CPURISCVState *env, uint8_t *mem_buf, int n)
+          * register 33, so we recalculate the map index.
+          * This also works for CSR_FRM and CSR_FCSR.
+          */
+-        result = riscv_csrrw_debug(env, n - 33 + 8, NULL, val, -1);
++        result = riscv_csrrw_debug(env, n - 33 + csr_register_map[8], NULL,
++                                   val, -1);
+         if (result == 0) {
+             return sizeof(target_ulong);
+         }
 -- 
 2.21.0
 
