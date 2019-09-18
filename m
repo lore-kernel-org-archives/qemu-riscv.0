@@ -1,41 +1,42 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iAbsV-0007CC-0h
-	for mharc-qemu-riscv@gnu.org; Wed, 18 Sep 2019 11:28:23 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49444)
+	id 1iAbsX-0007GU-DV
+	for mharc-qemu-riscv@gnu.org; Wed, 18 Sep 2019 11:28:25 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49465)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <palmer@dabbelt.com>) id 1iAbsP-00074O-Ve
- for qemu-riscv@nongnu.org; Wed, 18 Sep 2019 11:28:18 -0400
+ (envelope-from <palmer@dabbelt.com>) id 1iAbsR-00076F-3I
+ for qemu-riscv@nongnu.org; Wed, 18 Sep 2019 11:28:20 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmer@dabbelt.com>) id 1iAbsO-0006nD-L9
- for qemu-riscv@nongnu.org; Wed, 18 Sep 2019 11:28:17 -0400
-Received: from mail-pf1-f181.google.com ([209.85.210.181]:32809)
+ (envelope-from <palmer@dabbelt.com>) id 1iAbsP-0006or-UY
+ for qemu-riscv@nongnu.org; Wed, 18 Sep 2019 11:28:18 -0400
+Received: from mail-pl1-f172.google.com ([209.85.214.172]:45225)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1iAbsO-0006mZ-CW
- for qemu-riscv@nongnu.org; Wed, 18 Sep 2019 11:28:16 -0400
-Received: by mail-pf1-f181.google.com with SMTP id q10so229640pfl.0
- for <qemu-riscv@nongnu.org>; Wed, 18 Sep 2019 08:28:16 -0700 (PDT)
+ (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1iAbsP-0006ni-Oo
+ for qemu-riscv@nongnu.org; Wed, 18 Sep 2019 11:28:17 -0400
+Received: by mail-pl1-f172.google.com with SMTP id u12so95842pls.12
+ for <qemu-riscv@nongnu.org>; Wed, 18 Sep 2019 08:28:17 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding:cc:from:to;
- bh=0zhLpxGbfvJYXKDT6JDUoSPfFak+q70sNluuZCqQPHw=;
- b=tDYWeGlqm/tplVFBiANw3aPdntduYfzfaiCPX5xjxEwSqVhL6S0X4cWd6I0PLZY9iS
- UXOpcxFdPkkl3sb6Ci+fPjbuRlp9JudwgNsVGia0FJqP0qXwEeO/wFvMVdZst4s95Vhu
- LLi3CK9NPBVX65YHCMYaT75Ib1XYp9DPDR3fI3pE36J6jzY7QKpTBN271LB64NFnAlag
- O95nBoUeJtPw53pSSZn6XLK73ugN7DaxY5Z1+tUXlPoqPcB/x46J3VmSeuPDCVnKh5Q5
- px5sQ2WRPLNx3f6wZvieShMLP86UlAl2s2sCCXam6Ys6ZJ079FfT9OSltZx1i0DI5snI
- raow==
-X-Gm-Message-State: APjAAAVWUpF74JVLu+Xq/sYObvV84AR4fsBRfyTWYTL/kkp+xFsC8dd2
- hwEEV8y7Gt9HbU68R2G5FC46EdtU3qE=
-X-Google-Smtp-Source: APXvYqx8ajtS3KPqIVO6RFPZoVwoWoaFGkzftQs0B4mggERLuOWo/9GwVttFWHfMKI+VsHN/QQNKUg==
-X-Received: by 2002:a65:67d4:: with SMTP id b20mr4497385pgs.445.1568820494753; 
- Wed, 18 Sep 2019 08:28:14 -0700 (PDT)
+ bh=xpkGcRJRYadCT6ocDlVxXul15aD8WH0BAO94YOt7Pqc=;
+ b=ruujDxAdo80kxm71tBRwncj5jS3hQnCIQwFEV73SlyjiStg8cclPVoksbM01ZN4PbF
+ mJ44QbkthA8+JwWcE7PQzn5FghkFqcf9E1s8SJ77s6rJ+paYCpDbp45YJDhtBpSnAekV
+ KZ89tzDGZ6hQPvEG75pMLe3x7A5rhEc5X1CVGS/iiTb1ccvhYWNU5CcYjFKNFo2odp7r
+ mjlLKTxLxQnZy8ERX31pIkDlMysw2FSFqd2Edkzm+Gxi/pp8QKwA1Q2cpbJ9cOhPlHzO
+ Ny3C9pGYJlnS3XVlY219ZBcL+gQ86fAW7PLo2auy40ycjq+dVO35jLvIhb/coLrKsSSu
+ o1Eg==
+X-Gm-Message-State: APjAAAW0EFydul34bwpdseX+BfeZ5O8WHxZcgHqI5QnMsJZrah3q6Qit
+ 0k9OGiAVSSvfVDnVTaYcexUGOGs2VWE=
+X-Google-Smtp-Source: APXvYqxiUJaoP6chcZoXKqQu9MwlV1dyNJvg0+aOvok3WF+W+DaW7MHkF0Jvw/qULcVkMuubbNPo6A==
+X-Received: by 2002:a17:902:6545:: with SMTP id
+ d5mr4877277pln.333.1568820496321; 
+ Wed, 18 Sep 2019 08:28:16 -0700 (PDT)
 Received: from localhost ([12.206.222.5])
- by smtp.gmail.com with ESMTPSA id f22sm5512651pgb.4.2019.09.18.08.28.13
+ by smtp.gmail.com with ESMTPSA id i1sm13119473pfg.2.2019.09.18.08.28.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Sep 2019 08:28:13 -0700 (PDT)
-Date: Wed, 18 Sep 2019 07:56:13 -0700
-Message-Id: <20190918145640.17349-22-palmer@sifive.com>
+ Wed, 18 Sep 2019 08:28:15 -0700 (PDT)
+Date: Wed, 18 Sep 2019 07:56:14 -0700
+Message-Id: <20190918145640.17349-23-palmer@sifive.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <20190918145640.17349-1-palmer@sifive.com>
 References: <20190918145640.17349-1-palmer@sifive.com>
@@ -48,9 +49,9 @@ From: Palmer Dabbelt <palmer@sifive.com>
 To: Peter Maydell <peter.maydell@linaro.org>
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
  [fuzzy]
-X-Received-From: 209.85.210.181
-Subject: [Qemu-riscv] [PULL 21/48] riscv: roms: Remove executable attribute
- of opensbi images
+X-Received-From: 209.85.214.172
+Subject: [Qemu-riscv] [PULL 22/48] riscv: sifive_u: Remove the unnecessary
+ include of prci header
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -62,34 +63,32 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Sep 2019 15:28:21 -0000
+X-List-Received-Date: Wed, 18 Sep 2019 15:28:23 -0000
 
 From: Bin Meng <bmeng.cn@gmail.com>
 
-Like other binary files, the executable attribute of opensbi images
-should not be set.
+sifive_u machine does not use PRCI as of today. Remove the prci
+header inclusion.
 
 Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
 ---
- pc-bios/opensbi-riscv32-virt-fw_jump.bin     | Bin
- pc-bios/opensbi-riscv64-sifive_u-fw_jump.bin | Bin
- pc-bios/opensbi-riscv64-virt-fw_jump.bin     | Bin
- 3 files changed, 0 insertions(+), 0 deletions(-)
- mode change 100755 => 100644 pc-bios/opensbi-riscv32-virt-fw_jump.bin
- mode change 100755 => 100644 pc-bios/opensbi-riscv64-sifive_u-fw_jump.bin
- mode change 100755 => 100644 pc-bios/opensbi-riscv64-virt-fw_jump.bin
+ hw/riscv/sifive_u.c | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/pc-bios/opensbi-riscv32-virt-fw_jump.bin b/pc-bios/opensbi-riscv32-virt-fw_jump.bin
-old mode 100755
-new mode 100644
-diff --git a/pc-bios/opensbi-riscv64-sifive_u-fw_jump.bin b/pc-bios/opensbi-riscv64-sifive_u-fw_jump.bin
-old mode 100755
-new mode 100644
-diff --git a/pc-bios/opensbi-riscv64-virt-fw_jump.bin b/pc-bios/opensbi-riscv64-virt-fw_jump.bin
-old mode 100755
-new mode 100644
+diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+index 32d8cee335..2947e06f71 100644
+--- a/hw/riscv/sifive_u.c
++++ b/hw/riscv/sifive_u.c
+@@ -38,7 +38,6 @@
+ #include "hw/riscv/sifive_plic.h"
+ #include "hw/riscv/sifive_clint.h"
+ #include "hw/riscv/sifive_uart.h"
+-#include "hw/riscv/sifive_prci.h"
+ #include "hw/riscv/sifive_u.h"
+ #include "hw/riscv/boot.h"
+ #include "chardev/char.h"
 -- 
 2.21.0
 
