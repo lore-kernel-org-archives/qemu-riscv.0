@@ -1,66 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iB4vP-0001SJ-6Z
-	for mharc-qemu-riscv@gnu.org; Thu, 19 Sep 2019 18:29:19 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:33897)
+	id 1iB4vU-0001Yt-IW
+	for mharc-qemu-riscv@gnu.org; Thu, 19 Sep 2019 18:29:24 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:33932)
  by lists.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <prvs=1583187f4=alistair.francis@wdc.com>)
- id 1iB4vL-0001Nz-Ox
- for qemu-riscv@nongnu.org; Thu, 19 Sep 2019 18:29:16 -0400
+ id 1iB4vQ-0001Ug-SR
+ for qemu-riscv@nongnu.org; Thu, 19 Sep 2019 18:29:21 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
  (envelope-from <prvs=1583187f4=alistair.francis@wdc.com>)
- id 1iB4vK-00051y-KT
- for qemu-riscv@nongnu.org; Thu, 19 Sep 2019 18:29:15 -0400
-Received: from esa2.hgst.iphmx.com ([68.232.143.124]:53808)
+ id 1iB4vP-00053i-Qq
+ for qemu-riscv@nongnu.org; Thu, 19 Sep 2019 18:29:20 -0400
+Received: from esa2.hgst.iphmx.com ([68.232.143.124]:53819)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <prvs=1583187f4=alistair.francis@wdc.com>)
- id 1iB4vH-0004yW-RY; Thu, 19 Sep 2019 18:29:12 -0400
+ id 1iB4vN-00052h-De; Thu, 19 Sep 2019 18:29:17 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1568932169; x=1600468169;
+ t=1568932177; x=1600468177;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=fm00N2pqx55Z9HSQRjm13vGLCGM5jiG5vv/ccdS4eU0=;
- b=O4Jd1J1gWxI2qLyXbTXCtly1broFWhMDJnXVIZ3Bm5VXlQ+KIuUocjRJ
- zQtuWVNd0rUhbjXmHlyVTj0XrQBM0ulTB0ai7L+5h2z5wJyAJojFeGOEm
- WlKKtXuj7m9WlJhlmb/gieNxdggB8qYOXEpBlPg71OwvSXj/E+18KwQZO
- UpIVk+ZrWWI2y7rrX2Gh0h97xYlaNy0J2hqSEMPM7qxOtWK//d3wde0ph
- vXjJ+9D0IfDCct7Yvka2QtfKOXK0ogjvoKcEhSra6fi3qjOhst4ryFcZg
- zOpy3Ccxsxkn0N3M7ihrnbMctnLZGHwJ9ITu+9C92EjBbXYbKD0YjiHKQ A==;
-IronPort-SDR: 2OIaRANq2l5509NAfHRb8DTGGy9dFDYak79fX90FovLLHmEeB9Qdr5/tdynEn5PXVa50kU+M78
- wJmE/TuSqRu02hGM/J+Kwyc0R5NW1X62vYR+a+rOubTDk8d6DJtWwymWboddKkY5ZSyZq1EL89
- WInonXBnRuiyXt/J8ffg7HGsvhROsZSipmtHBxh0qFqp8KufTPcJ/zw0L2hr3ncKlhb0tpegv9
- D03Gqyp2CVdV2zOFDPH4xzx/5CM6AAJ8FN3qNPjcqfX3NFuC+w25YvQPg5hqqe/EeyeEQvvKmQ
- d4o=
-X-IronPort-AV: E=Sophos;i="5.64,526,1559491200"; d="scan'208";a="219490592"
+ bh=DdrHjKo4Ejm/yxVn75Wd2s1We09kw2iSPTLiAnM5W4Q=;
+ b=Ejp8H14GI3uT7occlzp0jVMfVIepDNjo6aOJp8Gt4dDyYAyetNShVmUL
+ BTlUp8HxeszDAyGopPAD4CWrc1czdq5SZSU0iawU1nIBQsnufXZ3ZkCMr
+ seiyXTKyQ7HCdBe9BER62bNRMtpQ95NYRC4GIchOdudWHLbpfVUe1p6jZ
+ jisEcKAU0AwOKaTZxjc9QBlHu79JX39ysOCk9BXplhqEXesc1A4tvtLDW
+ uF+TYgDeUI459AJf3C1PaxXGMf3wSfj0qp5QhRRYWjgrSccGhssy69B1D
+ 7WjZX626NYYzrHYZiROWPTxKbrJwHRyjSm5k5ojqR8u7zDHIDn4oxLnsd A==;
+IronPort-SDR: MpqJPU70IHBx11hBffmhdzSPoHZdtJ+fVqbscLNnDG7uyVVSlmpFWrB8Z5OEVT060JgPJl9+Ms
+ BVQO2XsTy/xCvcuhBX0Ah083BTwgOJS7LCqOmoUWYaoRlYdmNWValHT9/CLbFQyaEHwcTAjnTz
+ 8p6QS2+49WbukwH44+AMi+yBJ6tz5iFhmOzFbhWABrKePWos+CzHK/hOZ8anntsGlHhFAfR9k4
+ 4Qcj5LhgW0r8zPF8edj+swfTLUXBgadA2D2aPAeiBG19064IK2Xl2I6dvmZ7i88CMuUkbcInMO
+ zeU=
+X-IronPort-AV: E=Sophos;i="5.64,526,1559491200"; d="scan'208";a="219490597"
 Received: from h199-255-45-15.hgst.com (HELO uls-op-cesaep02.wdc.com)
  ([199.255.45.15])
- by ob1.hgst.iphmx.com with ESMTP; 20 Sep 2019 06:29:28 +0800
-IronPort-SDR: OYluSz2f79BPPRmrc3ArgWPxy3H/j6TgbnDzxxCkiwAoa7bw8CW4DyG4YEjsU7rDKBi+FyjVKv
- oiwMVfmStsaEyaYmDCrTS8AZi4I2B4f0BZauKEgZLED58sY3cmaFLaYsfQw26Gdj+NLixkOoQ6
- vWtim1IJgGL0SJ+X4uf4vbSgTlZnsBl2SgDPT8L2lCdtPC+Gru4it5XcmVhSjAftloQDpq8SlY
- i1rLH2XJi8mqSEhba5AjIYFCxD1NDlEzgBHYtBlPmfBt3OHNnYDgVSiLMPuY5DtQ0k5YtmiOzQ
- yqz0bh7tPtA+Bs2xrJhMgPJF
+ by ob1.hgst.iphmx.com with ESMTP; 20 Sep 2019 06:29:36 +0800
+IronPort-SDR: WKctnQsPGljMffycGJXgz7Qz74uEVSd/mxxNx8yBr42Ej7NJYiz6amxdJrGDCzaV6W6mjQdCxe
+ RXchZVnRGY4BoI6NQK16/ZnPei61I/SfhiZw3AEiU+7wXMtq7q/WRQJRlRD6DXWFX8xn2tQHeO
+ lW4G48nWNZteyVPfz96DzAs4Zc8LHEY7avwdT+rUZdUokVW/5XHbO+vUCYyeONpPgQpBl/uLkM
+ FsvAYyhXyk2YW4BJ4alU8/PYsUTS/s4zosDkCms5qdL48VzXjKRWfiI4+UhIC6YKNm/gLT8fKR
+ lSU4uGDKxItsOX3TJANgHInP
 Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
  by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 19 Sep 2019 15:25:43 -0700
-IronPort-SDR: 0zxKz3+VDzILValg0v/hUllzghAIwx7bvI/KQXqy7uSpJo3fgDiNWntkMEl7tvc7MIsYKl00Yy
- /YGvHj1s8DQzeHTMleUvW+R/FEpxbeWpqa+CAglbCXCytzl/2NxXSCX3J88XnbVSHBPVtTm08m
- ETOj5QOPoa/m7+mJ/5kYqR0ZzO3SddtpC+Gfuec0orTYIaayYF0HBOwucMa9fj+ZPpGBmYAuxH
- I6siqcRhA6GkeFrdy1v/FKYfgOMmfYmJ/8TqKcIOXP5RJusWga5twIZnbrNwvgj5ybgdOa1piz
- n0o=
+ 19 Sep 2019 15:25:48 -0700
+IronPort-SDR: +2GHoSGSHbrKJ8tqSrajCQxOYT+GC1J6Mx2V8BqtgdK8C0KI2IsXrMwAfRQJC2i841z7l1kJtz
+ QG80HQc4HYyZWKTIx5rvooKDjMTryRB11eLWJ/JXQL6o6yxpNqoy1ZdDtQBG2/8Wr+rFIw8jgm
+ yUMeRJBeTbFtzAPCrTTlZwXUAyjeRTIw9cf1mNmO2hy0D4lJrlnKD4Jmg8qG10vI0EMmeOcyI6
+ o3OwBxhpbq46EG7xZuAagp8fDn2jodRX5hfSn2DaM66Y4Z9L0q396DL83PqBaXChh6QAtwDpBA
+ MwQ=
 WDCIronportException: Internal
 Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
  risc6-mainframe.int.fusionio.com) ([10.196.157.58])
- by uls-op-cesaip01.wdc.com with ESMTP; 19 Sep 2019 15:29:12 -0700
+ by uls-op-cesaip01.wdc.com with ESMTP; 19 Sep 2019 15:29:17 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: palmer@sifive.com,
 	alistair.francis@wdc.com,
 	alistair23@gmail.com
-Subject: [PATCH v1 4/6] riscv/sifive_u: Add the start-in-flash property
-Date: Thu, 19 Sep 2019 15:25:03 -0700
-Message-Id: <d3357e0b87cce025418f6383ce971246ded547bd.1568931866.git.alistair.francis@wdc.com>
+Subject: [PATCH v1 6/6] riscv/virt: Jump to pflash if specified
+Date: Thu, 19 Sep 2019 15:25:08 -0700
+Message-Id: <a3649f52a79eff39c707546d88ecd25b753dbf33.1568931866.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.23.0
 In-Reply-To: <cover.1568931866.git.alistair.francis@wdc.com>
 References: <cover.1568931866.git.alistair.francis@wdc.com>
@@ -79,78 +79,51 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Sep 2019 22:29:17 -0000
+X-List-Received-Date: Thu, 19 Sep 2019 22:29:23 -0000
 
-Add a property that when set to true QEMU will jump from the ROM code to
-the start of flash memory instead of DRAM which is the default
-behaviour.
+If the user supplied pflash to QEMU then change the reset code to jump
+to the pflash base address instead of the DRAM base address.
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- hw/riscv/sifive_u.c         | 27 +++++++++++++++++++++++++++
- include/hw/riscv/sifive_u.h |  2 ++
- 2 files changed, 29 insertions(+)
+ hw/riscv/virt.c | 10 +++++++++-
+ 1 file changed, 9 insertions(+), 1 deletion(-)
 
-diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-index c3949fb316..b7cd3631cd 100644
---- a/hw/riscv/sifive_u.c
-+++ b/hw/riscv/sifive_u.c
-@@ -373,6 +373,10 @@ static void riscv_sifive_u_init(MachineState *machine)
-                                        /* dtb: */
-     };
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index ca002ecea7..ed25cc6761 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -441,6 +441,7 @@ static void riscv_virt_board_init(MachineState *machine)
+     MemoryRegion *mask_rom = g_new(MemoryRegion, 1);
+     char *plic_hart_config;
+     size_t plic_hart_config_len;
++    target_ulong start_addr = memmap[VIRT_DRAM].base;
+     int i;
+     unsigned int smp_cpus = machine->smp.cpus;
  
-+    if (s->start_in_flash) {
-+        reset_vec[6] = memmap[SIFIVE_U_FLASH0].base; /* start: .dword FLASH0_BASE */
+@@ -487,6 +488,13 @@ static void riscv_virt_board_init(MachineState *machine)
+         }
+     }
+ 
++    if (drive_get(IF_PFLASH, 0, 0)) {
++        /* Pflash was supplied, let's overwrite the address we jump to after
++         * reset to the base of the flash.
++         */
++        start_addr = virt_memmap[VIRT_FLASH].base;
 +    }
 +
-     /* copy in the reset vector in little_endian byte order */
-     for (i = 0; i < sizeof(reset_vec) >> 2; i++) {
-         reset_vec[i] = cpu_to_le32(reset_vec[i]);
-@@ -544,8 +548,31 @@ static void riscv_sifive_u_soc_realize(DeviceState *dev, Error **errp)
-         memmap[SIFIVE_U_GEM_MGMT].base, memmap[SIFIVE_U_GEM_MGMT].size);
- }
- 
-+static bool virt_get_start_in_flash(Object *obj, Error **errp)
-+{
-+    SiFiveUState *s = RISCV_U_MACHINE(obj);
-+
-+    return s->start_in_flash;
-+}
-+
-+static void virt_set_start_in_flash(Object *obj, bool value, Error **errp)
-+{
-+    SiFiveUState *s = RISCV_U_MACHINE(obj);
-+
-+    s->start_in_flash = value;
-+}
-+
- static void riscv_sifive_u_machine_instance_init(Object *obj)
- {
-+    SiFiveUState *s = RISCV_U_MACHINE(obj);
-+
-+    s->start_in_flash = false;
-+    object_property_add_bool(obj, "start-in-flash", virt_get_start_in_flash,
-+                             virt_set_start_in_flash, NULL);
-+    object_property_set_description(obj, "start-in-flash",
-+                                    "Set on to tell QEMU's ROM to jump to " \
-+                                    "flash. Otherwise QEMU will jump to DRAM",
-+                                    NULL);
- 
- }
- 
-diff --git a/include/hw/riscv/sifive_u.h b/include/hw/riscv/sifive_u.h
-index a921079fbe..2656b43c58 100644
---- a/include/hw/riscv/sifive_u.h
-+++ b/include/hw/riscv/sifive_u.h
-@@ -57,6 +57,8 @@ typedef struct SiFiveUState {
- 
-     void *fdt;
-     int fdt_size;
-+
-+    bool start_in_flash;
- } SiFiveUState;
- 
- enum {
+     /* reset vector */
+     uint32_t reset_vec[8] = {
+         0x00000297,                  /* 1:  auipc  t0, %pcrel_hi(dtb) */
+@@ -499,7 +507,7 @@ static void riscv_virt_board_init(MachineState *machine)
+ #endif
+         0x00028067,                  /*     jr     t0 */
+         0x00000000,
+-        memmap[VIRT_DRAM].base,      /* start: .dword memmap[VIRT_DRAM].base */
++        start_addr,                  /* start: .dword */
+         0x00000000,
+                                      /* dtb: */
+     };
 -- 
 2.23.0
 
