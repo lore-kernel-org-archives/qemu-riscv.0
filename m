@@ -1,66 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iB4vN-0001Qe-U8
-	for mharc-qemu-riscv@gnu.org; Thu, 19 Sep 2019 18:29:17 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:33871)
+	id 1iB4vP-0001SJ-6Z
+	for mharc-qemu-riscv@gnu.org; Thu, 19 Sep 2019 18:29:19 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:33897)
  by lists.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <prvs=1583187f4=alistair.francis@wdc.com>)
- id 1iB4vJ-0001Kg-3K
- for qemu-riscv@nongnu.org; Thu, 19 Sep 2019 18:29:14 -0400
+ id 1iB4vL-0001Nz-Ox
+ for qemu-riscv@nongnu.org; Thu, 19 Sep 2019 18:29:16 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
  (envelope-from <prvs=1583187f4=alistair.francis@wdc.com>)
- id 1iB4vH-00050x-PN
- for qemu-riscv@nongnu.org; Thu, 19 Sep 2019 18:29:12 -0400
+ id 1iB4vK-00051y-KT
+ for qemu-riscv@nongnu.org; Thu, 19 Sep 2019 18:29:15 -0400
 Received: from esa2.hgst.iphmx.com ([68.232.143.124]:53808)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <prvs=1583187f4=alistair.francis@wdc.com>)
- id 1iB4vF-0004yW-4f; Thu, 19 Sep 2019 18:29:09 -0400
+ id 1iB4vH-0004yW-RY; Thu, 19 Sep 2019 18:29:12 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1568932165; x=1600468165;
+ t=1568932169; x=1600468169;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=B2gJ3AYtGJfxpiBCTCmZcHguxPxVbHMIn0H3NBT5lCc=;
- b=H8m0R2SIOj9lfUPDpWY315f8TKuMSUa3HnB2Xb01nFBUh+1n89SmFFgn
- sKuNfk8u2TIekTLWeQLGpbGEHUglnXtom5A2I5dsm1aJI46MCwaWfL03N
- ZHk+l+hJGM+jJSNsYES7XA6ohSLftyh5oAhWutZ9pB8wUNLDrJbYvb2ni
- z4BfwdsNKvp9ukmqI5TYtGfYqdjEDTEoGmZ47Mo7N8+eulObPYk4RZBJH
- 2fdKNoQR3moiERPls0dX7UuF3UE/n8Hd3mlOC95k4Is2WWdJMQqnNW7Rc
- T/oT96ObLYGO1BT6GVpJr8Z6G9283WN/CMeS1A6d223K2L9wyXtfKpqxa Q==;
-IronPort-SDR: BOFiuVx0rC55x8Dy7XB38bM5HQqUIXk37K9kFd+ga8JXz7TR47gXJXFgqk2iMcnKJlNG67f0ZD
- Q6suqSRP1B8+e3saJ0loxY3AVCf8B7fTfh57/k5+TFUaCLBTabEolvqqD6Fa/1wvYwxYWMS+nd
- N+RsMrMTqJBNZeE1OICoi+qHH3sZlh+IKu1/ggs18nFfLRYB+J1LTDG07pA1+48L8PCiRnZbYS
- 1rRrFNmEiLQpbsjnJHBFegmVwPFhINhL/5FzBU0BcRPPJF3hlXJ0TLphpbcjYoQhio3ViqaK92
- zjg=
-X-IronPort-AV: E=Sophos;i="5.64,526,1559491200"; d="scan'208";a="219490590"
+ bh=fm00N2pqx55Z9HSQRjm13vGLCGM5jiG5vv/ccdS4eU0=;
+ b=O4Jd1J1gWxI2qLyXbTXCtly1broFWhMDJnXVIZ3Bm5VXlQ+KIuUocjRJ
+ zQtuWVNd0rUhbjXmHlyVTj0XrQBM0ulTB0ai7L+5h2z5wJyAJojFeGOEm
+ WlKKtXuj7m9WlJhlmb/gieNxdggB8qYOXEpBlPg71OwvSXj/E+18KwQZO
+ UpIVk+ZrWWI2y7rrX2Gh0h97xYlaNy0J2hqSEMPM7qxOtWK//d3wde0ph
+ vXjJ+9D0IfDCct7Yvka2QtfKOXK0ogjvoKcEhSra6fi3qjOhst4ryFcZg
+ zOpy3Ccxsxkn0N3M7ihrnbMctnLZGHwJ9ITu+9C92EjBbXYbKD0YjiHKQ A==;
+IronPort-SDR: 2OIaRANq2l5509NAfHRb8DTGGy9dFDYak79fX90FovLLHmEeB9Qdr5/tdynEn5PXVa50kU+M78
+ wJmE/TuSqRu02hGM/J+Kwyc0R5NW1X62vYR+a+rOubTDk8d6DJtWwymWboddKkY5ZSyZq1EL89
+ WInonXBnRuiyXt/J8ffg7HGsvhROsZSipmtHBxh0qFqp8KufTPcJ/zw0L2hr3ncKlhb0tpegv9
+ D03Gqyp2CVdV2zOFDPH4xzx/5CM6AAJ8FN3qNPjcqfX3NFuC+w25YvQPg5hqqe/EeyeEQvvKmQ
+ d4o=
+X-IronPort-AV: E=Sophos;i="5.64,526,1559491200"; d="scan'208";a="219490592"
 Received: from h199-255-45-15.hgst.com (HELO uls-op-cesaep02.wdc.com)
  ([199.255.45.15])
- by ob1.hgst.iphmx.com with ESMTP; 20 Sep 2019 06:29:24 +0800
-IronPort-SDR: dknlNu4v2ne05JLeKaEV/m1AQPpApQxKj99nx4GBwLpBB5OnNMPs5fzMQepZ7J+lwYUi9VrWRD
- 9cw5SeymXOuPsw5U1eXM9YirZ1oQE5h/JSJVYpoSLsTrT+VkljjHnJq6vm/sBEWNGqmmY9TnwS
- 8gsRsA2An5z2ErI7zOAwsT/cIXEPU0e4aGtcZRx9SF53MWCyVEAyrPrJb10n8OJuKDxRYYVDHL
- GNw+Xt7fj6/CInagQfBZC7hxPX/dt0tDH1sZ+J2S0QGxPsHFvTTcisQpR1es3WHwODb+7L+UZ3
- a9GRh4kB9aB7CXNSOQHyloaZ
-Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
+ by ob1.hgst.iphmx.com with ESMTP; 20 Sep 2019 06:29:28 +0800
+IronPort-SDR: OYluSz2f79BPPRmrc3ArgWPxy3H/j6TgbnDzxxCkiwAoa7bw8CW4DyG4YEjsU7rDKBi+FyjVKv
+ oiwMVfmStsaEyaYmDCrTS8AZi4I2B4f0BZauKEgZLED58sY3cmaFLaYsfQw26Gdj+NLixkOoQ6
+ vWtim1IJgGL0SJ+X4uf4vbSgTlZnsBl2SgDPT8L2lCdtPC+Gru4it5XcmVhSjAftloQDpq8SlY
+ i1rLH2XJi8mqSEhba5AjIYFCxD1NDlEzgBHYtBlPmfBt3OHNnYDgVSiLMPuY5DtQ0k5YtmiOzQ
+ yqz0bh7tPtA+Bs2xrJhMgPJF
+Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
  by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 19 Sep 2019 15:25:41 -0700
-IronPort-SDR: phdgGjJsfcLJhzJUTi8ibtLU18q2CllfPiFfZkBEYzAq0SFXoATo3vKRxRtCPxdx39hPTp3iNF
- 9MQYdSa/Oxau6JqarwKYWNAeYUqErrqiBobpgrUenoChocoK85BoMnkUGyYJffcqb2rEFgo83x
- gC3b38vzaAZUT17ZVJ5STXXWR4GdehiafbwlY8MifFbkIHdnbhPKzxGG3xq6lrSj/2ml+UUjI3
- /yYWFXsSGAb8Jc+Oc2ehLh1FnNakjgun/ZiWX4ZQmnYTLHCvDXB4iDWBQTHuIKHxr355uf/7NQ
- AbY=
+ 19 Sep 2019 15:25:43 -0700
+IronPort-SDR: 0zxKz3+VDzILValg0v/hUllzghAIwx7bvI/KQXqy7uSpJo3fgDiNWntkMEl7tvc7MIsYKl00Yy
+ /YGvHj1s8DQzeHTMleUvW+R/FEpxbeWpqa+CAglbCXCytzl/2NxXSCX3J88XnbVSHBPVtTm08m
+ ETOj5QOPoa/m7+mJ/5kYqR0ZzO3SddtpC+Gfuec0orTYIaayYF0HBOwucMa9fj+ZPpGBmYAuxH
+ I6siqcRhA6GkeFrdy1v/FKYfgOMmfYmJ/8TqKcIOXP5RJusWga5twIZnbrNwvgj5ybgdOa1piz
+ n0o=
 WDCIronportException: Internal
 Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
  risc6-mainframe.int.fusionio.com) ([10.196.157.58])
- by uls-op-cesaip02.wdc.com with ESMTP; 19 Sep 2019 15:29:09 -0700
+ by uls-op-cesaip01.wdc.com with ESMTP; 19 Sep 2019 15:29:12 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: palmer@sifive.com,
 	alistair.francis@wdc.com,
 	alistair23@gmail.com
-Subject: [PATCH v1 3/6] riscv/sifive_u: Manually define the machine
-Date: Thu, 19 Sep 2019 15:25:01 -0700
-Message-Id: <95b47a08da3038df82cd1cc9d69cd005270906f8.1568931866.git.alistair.francis@wdc.com>
+Subject: [PATCH v1 4/6] riscv/sifive_u: Add the start-in-flash property
+Date: Thu, 19 Sep 2019 15:25:03 -0700
+Message-Id: <d3357e0b87cce025418f6383ce971246ded547bd.1568931866.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.23.0
 In-Reply-To: <cover.1568931866.git.alistair.francis@wdc.com>
 References: <cover.1568931866.git.alistair.francis@wdc.com>
@@ -79,95 +79,78 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Sep 2019 22:29:15 -0000
+X-List-Received-Date: Thu, 19 Sep 2019 22:29:17 -0000
 
-Instead of using the DEFINE_MACHINE() macro to define the machine let's
-do it manually. This allows us to specify machine properties.
-
-This patch is no functional change.
+Add a property that when set to true QEMU will jump from the ROM code to
+the start of flash memory instead of DRAM which is the default
+behaviour.
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- hw/riscv/sifive_u.c         | 27 +++++++++++++++++++++++----
- include/hw/riscv/sifive_u.h |  7 ++++++-
- 2 files changed, 29 insertions(+), 5 deletions(-)
+ hw/riscv/sifive_u.c         | 27 +++++++++++++++++++++++++++
+ include/hw/riscv/sifive_u.h |  2 ++
+ 2 files changed, 29 insertions(+)
 
 diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-index 9c5d791320..c3949fb316 100644
+index c3949fb316..b7cd3631cd 100644
 --- a/hw/riscv/sifive_u.c
 +++ b/hw/riscv/sifive_u.c
-@@ -310,8 +310,7 @@ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
- static void riscv_sifive_u_init(MachineState *machine)
- {
-     const struct MemmapEntry *memmap = sifive_u_memmap;
--
--    SiFiveUState *s = g_new0(SiFiveUState, 1);
-+    SiFiveUState *s = RISCV_U_MACHINE(machine);
-     MemoryRegion *system_memory = get_system_memory();
-     MemoryRegion *main_mem = g_new(MemoryRegion, 1);
-     MemoryRegion *flash0 = g_new(MemoryRegion, 1);
-@@ -545,8 +544,15 @@ static void riscv_sifive_u_soc_realize(DeviceState *dev, Error **errp)
+@@ -373,6 +373,10 @@ static void riscv_sifive_u_init(MachineState *machine)
+                                        /* dtb: */
+     };
+ 
++    if (s->start_in_flash) {
++        reset_vec[6] = memmap[SIFIVE_U_FLASH0].base; /* start: .dword FLASH0_BASE */
++    }
++
+     /* copy in the reset vector in little_endian byte order */
+     for (i = 0; i < sizeof(reset_vec) >> 2; i++) {
+         reset_vec[i] = cpu_to_le32(reset_vec[i]);
+@@ -544,8 +548,31 @@ static void riscv_sifive_u_soc_realize(DeviceState *dev, Error **errp)
          memmap[SIFIVE_U_GEM_MGMT].base, memmap[SIFIVE_U_GEM_MGMT].size);
  }
  
--static void riscv_sifive_u_machine_init(MachineClass *mc)
-+static void riscv_sifive_u_machine_instance_init(Object *obj)
++static bool virt_get_start_in_flash(Object *obj, Error **errp)
 +{
++    SiFiveUState *s = RISCV_U_MACHINE(obj);
 +
++    return s->start_in_flash;
 +}
 +
-+static void riscv_sifive_u_machine_class_init(ObjectClass *oc, void *data)
- {
-+    MachineClass *mc = MACHINE_CLASS(oc);
++static void virt_set_start_in_flash(Object *obj, bool value, Error **errp)
++{
++    SiFiveUState *s = RISCV_U_MACHINE(obj);
 +
-     mc->desc = "RISC-V Board compatible with SiFive U SDK";
-     mc->init = riscv_sifive_u_init;
-     mc->max_cpus = SIFIVE_U_MANAGEMENT_CPU_COUNT + SIFIVE_U_COMPUTE_CPU_COUNT;
-@@ -554,7 +560,20 @@ static void riscv_sifive_u_machine_init(MachineClass *mc)
-     mc->default_cpus = mc->min_cpus;
++    s->start_in_flash = value;
++}
++
+ static void riscv_sifive_u_machine_instance_init(Object *obj)
+ {
++    SiFiveUState *s = RISCV_U_MACHINE(obj);
++
++    s->start_in_flash = false;
++    object_property_add_bool(obj, "start-in-flash", virt_get_start_in_flash,
++                             virt_set_start_in_flash, NULL);
++    object_property_set_description(obj, "start-in-flash",
++                                    "Set on to tell QEMU's ROM to jump to " \
++                                    "flash. Otherwise QEMU will jump to DRAM",
++                                    NULL);
+ 
  }
  
--DEFINE_MACHINE("sifive_u", riscv_sifive_u_machine_init)
-+static const TypeInfo riscv_sifive_u_machine_init_typeinfo = {
-+    .name       = MACHINE_TYPE_NAME("sifive_u"),
-+    .parent     = TYPE_MACHINE,
-+    .class_init = riscv_sifive_u_machine_class_init,
-+    .instance_init = riscv_sifive_u_machine_instance_init,
-+    .instance_size = sizeof(SiFiveUState),
-+};
-+
-+static void riscv_sifive_u_machine_init_register_types(void)
-+{
-+    type_register_static(&riscv_sifive_u_machine_init_typeinfo);
-+}
-+
-+type_init(riscv_sifive_u_machine_init_register_types)
- 
- static void riscv_sifive_u_soc_class_init(ObjectClass *oc, void *data)
- {
 diff --git a/include/hw/riscv/sifive_u.h b/include/hw/riscv/sifive_u.h
-index 2a08e2a5db..a921079fbe 100644
+index a921079fbe..2656b43c58 100644
 --- a/include/hw/riscv/sifive_u.h
 +++ b/include/hw/riscv/sifive_u.h
-@@ -44,12 +44,17 @@ typedef struct SiFiveUSoCState {
-     CadenceGEMState gem;
- } SiFiveUSoCState;
+@@ -57,6 +57,8 @@ typedef struct SiFiveUState {
  
-+#define TYPE_RISCV_U_MACHINE MACHINE_TYPE_NAME("sifive_u")
-+#define RISCV_U_MACHINE(obj) \
-+    OBJECT_CHECK(SiFiveUState, (obj), TYPE_RISCV_U_MACHINE)
-+
- typedef struct SiFiveUState {
-     /*< private >*/
--    SysBusDevice parent_obj;
-+    MachineState parent_obj;
- 
-     /*< public >*/
-     SiFiveUSoCState soc;
-+
      void *fdt;
      int fdt_size;
++
++    bool start_in_flash;
  } SiFiveUState;
+ 
+ enum {
 -- 
 2.23.0
 
