@@ -1,65 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iBRZs-0006dg-Fv
-	for mharc-qemu-riscv@gnu.org; Fri, 20 Sep 2019 18:40:37 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:33349)
+	id 1iBRZx-0006h5-UZ
+	for mharc-qemu-riscv@gnu.org; Fri, 20 Sep 2019 18:40:43 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:33387)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <palmer@sifive.com>) id 1iBRZn-0006cj-2Y
- for qemu-riscv@nongnu.org; Fri, 20 Sep 2019 18:40:32 -0400
+ (envelope-from <palmer@sifive.com>) id 1iBRZt-0006dq-K9
+ for qemu-riscv@nongnu.org; Fri, 20 Sep 2019 18:40:38 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmer@sifive.com>) id 1iBRZl-0008KF-7S
- for qemu-riscv@nongnu.org; Fri, 20 Sep 2019 18:40:30 -0400
-Received: from mail-pl1-x642.google.com ([2607:f8b0:4864:20::642]:33435)
+ (envelope-from <palmer@sifive.com>) id 1iBRZr-0008Qj-O7
+ for qemu-riscv@nongnu.org; Fri, 20 Sep 2019 18:40:37 -0400
+Received: from mail-pf1-x442.google.com ([2607:f8b0:4864:20::442]:45351)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmer@sifive.com>) id 1iBRZk-0008K1-VL
- for qemu-riscv@nongnu.org; Fri, 20 Sep 2019 18:40:29 -0400
-Received: by mail-pl1-x642.google.com with SMTP id d22so2538355pls.0
- for <qemu-riscv@nongnu.org>; Fri, 20 Sep 2019 15:40:28 -0700 (PDT)
+ (Exim 4.71) (envelope-from <palmer@sifive.com>) id 1iBRZr-0008M9-5d
+ for qemu-riscv@nongnu.org; Fri, 20 Sep 2019 18:40:35 -0400
+Received: by mail-pf1-x442.google.com with SMTP id y72so5442815pfb.12
+ for <qemu-riscv@nongnu.org>; Fri, 20 Sep 2019 15:40:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
  :content-transfer-encoding;
- bh=F7KhDBWvvRG4v4Y73mCUrfxmfjSUF1Jf74k4kp3VlZY=;
- b=bWNmqWNG3HmyhkqlwmT+2BKfMErmlMueueTjyRwp78SN/A0ijzwTbTFmEsKF2lWEZf
- lMuHk9k5nehQG6zHUBPb+85VGq8MgzgGEkN+rFSbK8AwEw5c6daUhrLxjcnsZxmXpWNj
- ftCgiGGVTTUHPSpOqNXHZDiDPzJA4Ll8iuIiN3qr0ionGZcZpL4F98SFsTmIbLewCvWO
- E1SdaXTRcGsQLNc9ld1xdecwxU4AKpIaX+xRw1Pu5S51ieTJiYQV9oDVFuGQCFCl79xU
- 7eWomlpO5BH+Gw5CTODsakltNYiz0kW8gU2Yag94RdixJ0DoRubNvf0dpYf2AwQzau+V
- K9AQ==
+ bh=TaZ6yCIhc7FrZ/8pQ2Uf580lBs/WJu0+Pmb7HjYtIFs=;
+ b=ct6RZ4WVpJgD1dsI9FBA+H8RvVusZatEnCqm/iMpxi0zw3kfDE7+QI8YpZyn2hmSfR
+ IJmrd8cMOv0wPFk/BPgtfy4BVEY2qaNbAcqwEY+H2Pa7owBy33Gz7f+H0TqCsg7dfQKg
+ Uo8ijMzfUlIXB0CPVGeELwTk2wdrMlNXj60nI5pp3gAxg4lQqzE8rEqUyiHCDuhhZ/Tt
+ KQN7PhwT0WtQu+E5P+TFoZowtF1LLd3hA6VlAEDIqyEv3Lg5gsdYDFfaB/YBZdnfTrZ0
+ C+S42NPiqE/yBv9MIuZUYllOdx6lYnZtNnAKKfpCXbLQy7p9VELYY4LhKWoG8RcqJrEc
+ bbyQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
  :mime-version:content-transfer-encoding;
- bh=F7KhDBWvvRG4v4Y73mCUrfxmfjSUF1Jf74k4kp3VlZY=;
- b=t0USFfFSbEI1x+N8z6UEELc6P4J7W85GSYY2vpOwwSMH/58njv3QjPOXnmc9ujzpoz
- mf+8cEXkQJ4qBlUOy/HyxzxFwERYrmJgtHx/RG9VDJCIsLASKmPVkIQ3nPHB5+9swqWm
- oqvYH3Ay0z45K1fAPQuMj6sro+UJEQKQs6kssRGN2w1kW5hwFNKu/GxX4DUS9nlnYtb2
- Xee6RhwbhvU4x+mDrGwzqTr+XGvq6HT75BiTV4/npuBVe3cqALg1jrE+14GBZWJL6ipN
- EbpuO9NgZ93UwNuVMcyndfuxYc3p8Q7RBGEksTltkBUxPpf/zkgnqkW4MYEIQURv+9Ix
- kiyQ==
-X-Gm-Message-State: APjAAAUMeUK33AW+zAn1rZJu/CUbSm+QPeCLsjL9K+qM6wHd606Wq1/k
- 35wxmEvwtCzNzLIgBW9cFaVuZw==
-X-Google-Smtp-Source: APXvYqyf27puHe3FR6Ndq+Z1ZT6YyCVechBXtwKhw89KvWRRcXuHY4MnqgRpdvIP0u4v8JuGPNtIwg==
-X-Received: by 2002:a17:902:b903:: with SMTP id
- bf3mr19905313plb.1.1569019227609; 
- Fri, 20 Sep 2019 15:40:27 -0700 (PDT)
+ bh=TaZ6yCIhc7FrZ/8pQ2Uf580lBs/WJu0+Pmb7HjYtIFs=;
+ b=oyw89ky9DVdM6Vv+TUXYDt+gGIYrmeiUpW2RjzWpVp6pV/iPoM8NLJ2PYPyHrgyDxI
+ hGc+4Q0c8sp3Mi0ca9gr8Al9hru9eDirVD58E33PjZUMl2oQqQ4cLfc3915dzxMSpdlA
+ GLI/b+Sabs3WJ5xpW9Btiv5yn2zT8u3NA4Po83+CM/7BQPXWEVuSo/RdZW9FR014smRG
+ VLm2sEFANvZaZA038KG6eh9OvKFwwqyhrde9EjzcqwybyEPrcdDTiHxM5kKYQxln//Nr
+ ruH58B1bMPJDXDiF1eQewNwzUY8dnqXGotF2wO7By1YTu498jmsG8R+72KLrNoBKVLp4
+ 59TQ==
+X-Gm-Message-State: APjAAAUBzoEbhc8AzjDWyGlNoLWvMSxWtndNhp4JAN+KW4nLm9I2KMbP
+ yO3zQ3dRifsoIfX4SiXtUMlIxg==
+X-Google-Smtp-Source: APXvYqy37LpUonLdzNfB3hT6rjqMXIEpEWy3PBpCUQQowENf8ZBUtGSwCJ7EIFxsutjKxkysnbdAIQ==
+X-Received: by 2002:a63:925d:: with SMTP id s29mr17686796pgn.144.1569019233509; 
+ Fri, 20 Sep 2019 15:40:33 -0700 (PDT)
 Received: from localhost ([2607:fb90:5de:df7b:9794:c3bf:6169:a06c])
- by smtp.gmail.com with ESMTPSA id s24sm2674064pgm.3.2019.09.20.15.40.25
+ by smtp.gmail.com with ESMTPSA id n8sm538959pgd.57.2019.09.20.15.40.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Sep 2019 15:40:26 -0700 (PDT)
-Date: Fri, 20 Sep 2019 15:40:26 -0700 (PDT)
-X-Google-Original-Date: Fri, 20 Sep 2019 15:32:41 PDT (-0700)
-Subject: Re: [PATCH v1 0/6]  RISC-V: Add more machine memory
-In-Reply-To: <cover.1568931866.git.alistair.francis@wdc.com>
-CC: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- Alistair Francis <Alistair.Francis@wdc.com>, alistair23@gmail.com
+ Fri, 20 Sep 2019 15:40:32 -0700 (PDT)
+Date: Fri, 20 Sep 2019 15:40:32 -0700 (PDT)
+X-Google-Original-Date: Fri, 20 Sep 2019 15:37:49 PDT (-0700)
+Subject: Re: [Qemu-devel] [PULL 04/32] target/riscv: Implement
+ riscv_cpu_unassigned_access
+In-Reply-To: <CAKmqyKPPqzo+dKqXoqmBpuaHp3hbdzA=mpgqECMLGX+whn2pcw@mail.gmail.com>
+CC: Peter Maydell <peter.maydell@linaro.org>,
+ Alistair Francis <Alistair.Francis@wdc.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
 From: Palmer Dabbelt <palmer@sifive.com>
-To: Alistair Francis <Alistair.Francis@wdc.com>
-Message-ID: <mhng-7a5e8460-9140-4c81-8342-8854da4a3359@palmer-si-x1c4>
+To: alistair23@gmail.com
+Message-ID: <mhng-939dc1af-ff30-4ff4-83b5-c93807eb7180@palmer-si-x1c4>
 Mime-Version: 1.0 (MHng)
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::642
+X-Received-From: 2607:f8b0:4864:20::442
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -71,46 +72,59 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Sep 2019 22:40:32 -0000
+X-List-Received-Date: Fri, 20 Sep 2019 22:40:39 -0000
 
-On Thu, 19 Sep 2019 15:24:51 PDT (-0700), Alistair Francis wrote:
-> This series aims to improve the use of QEMU for developing boot code. It
-> does a few things:
+On Tue, 17 Sep 2019 09:37:47 PDT (-0700), alistair23@gmail.com wrote:
+> On Tue, Sep 17, 2019 at 6:56 AM Peter Maydell <peter.maydell@linaro.org> wrote:
+>>
+>> On Fri, 16 Aug 2019 at 09:57, Peter Maydell <peter.maydell@linaro.org> wrote:
+>> >
+>> > On Thu, 15 Aug 2019 at 23:17, Palmer Dabbelt <palmer@sifive.com> wrote:
+>> > > You're more than welcome to take them over.  I've got something that boots
+>> > > Linux on my unassigned_access branch (github.com/palmer-dabbelt/qemu), but I
+>> > > haven't sanitized the whole port for physical accesses and I haven't convinced
+>> > > myself that my hook implementation is correct.
+>> >
+>> > Rather than doing
+>> >    if (retaddr) {
+>> >        cpu_restore_state(cs, retaddr, true);
+>> >    }
+>> >
+>> > at the start of the hook I think you just want to pass 'retaddr'
+>> > as the final argument to riscv_raise_exception() instead of
+>> > using GETPC(). Other than that I think the hook itself is right.
+>> >
+>> > The 'git grep' regexes in docs/devel/loads-stores.rst are handy
+>> > for finding the places where the target code is doing physical
+>> > accesses. IIRC the only ones I found with a quick scan were the
+>> > PTE loads in get_physical_address() via ldl_phys/ldq_phys, which will
+>> > now return 0 and run into the 'invalid PTE' code path. I don't
+>> > know whether your architecture requires some different behaviour
+>> > for bus errors on page table walk than that (you might want to
+>> > specifically code the error path anyway or comment it even if the
+>> > behaviour is right, to be a bit more explicit that it can happen).
+>>
+>> Gentle ping -- would somebody like to have a go at the riscv
+>> do_transaction_failed hook conversion? I think it should be
+>> straightforward, and riscv is now the only architecture still
+>> using the old unassigned_access hook and preventing us from
+>> getting rid of it entirely.
 >
->  - sifive_u machine:
->    - Adds a chunk of memory in the Flash area. This allows boot loaders
->    to use this memory. I can't find details on the QSPI flash used on
->    the real board, so this is the best bet at the moment.
+> Thanks for the ping Peter, I forgot about this.
+>
+> @Palmer I have taken your patches, made some changes based on Peter's
+> comments and rebased them on your PR branch.
+>
+> I'll double check, but the hook implementation looks correct and I
+> can't see any other obvious unsanitised physical accesses so it should
+> be ok. I'll send them out today if I don't find any issues.
 
-IIRC it's a is25wp256.
+Thanks!
 
->    - Adds a chunk of memory in the L2-LIM area. This is actualy the L2
->    cache and should shrink as the L2 cache is enalbed. Unfortunatley I
->    don't see a nice way to shrink this memory.
->    - Adds a property that allows users to specify if QEMU should jump to
->    flash or DRAM after the ROM code.
 >
->  - virt machine:
->    - Add the pflash_cfi01 flash device. This is based on the ARM virt
->    board implementation
->    - Adjusts QEMU to jump to the flash if a user has speciefied any
->    pflash.
+> Alistair
 >
-> Both machines have been tested with oreboot, but this should also help
-> the coreboot developers.
->
-> Alistair Francis (6):
->   riscv/sifive_u: Add L2-LIM cache memory
->   riscv/sifive_u: Add QSPI memory region
->   riscv/sifive_u: Manually define the machine
->   riscv/sifive_u: Add the start-in-flash property
->   riscv/virt: Add the PFlash CFI01 device
->   riscv/virt: Jump to pflash if specified
->
->  hw/riscv/Kconfig            |  1 +
->  hw/riscv/sifive_u.c         | 77 +++++++++++++++++++++++++++++--
->  hw/riscv/virt.c             | 91 ++++++++++++++++++++++++++++++++++++-
->  include/hw/riscv/sifive_u.h | 11 ++++-
->  include/hw/riscv/virt.h     |  3 ++
->  5 files changed, 177 insertions(+), 6 deletions(-)
+>>
+>> thanks
+>> -- PMM
 
