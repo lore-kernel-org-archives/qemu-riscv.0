@@ -1,65 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iBJTP-0002rd-Dd
-	for mharc-qemu-riscv@gnu.org; Fri, 20 Sep 2019 10:01:23 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:58176)
+	id 1iBKC1-0003Vq-AB
+	for mharc-qemu-riscv@gnu.org; Fri, 20 Sep 2019 10:47:30 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:37681)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <palmer@sifive.com>) id 1iBJTM-0002rL-KS
- for qemu-riscv@nongnu.org; Fri, 20 Sep 2019 10:01:22 -0400
+ (envelope-from <bmeng.cn@gmail.com>) id 1iBKBv-0003QW-S3
+ for qemu-riscv@nongnu.org; Fri, 20 Sep 2019 10:47:24 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmer@sifive.com>) id 1iBJTJ-0006pJ-Sc
- for qemu-riscv@nongnu.org; Fri, 20 Sep 2019 10:01:19 -0400
-Received: from mail-io1-xd44.google.com ([2607:f8b0:4864:20::d44]:43940)
+ (envelope-from <bmeng.cn@gmail.com>) id 1iBKBu-0003An-SI
+ for qemu-riscv@nongnu.org; Fri, 20 Sep 2019 10:47:23 -0400
+Received: from mail-pl1-x644.google.com ([2607:f8b0:4864:20::644]:38573)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmer@sifive.com>) id 1iBJTJ-0006ot-MG
- for qemu-riscv@nongnu.org; Fri, 20 Sep 2019 10:01:17 -0400
-Received: by mail-io1-xd44.google.com with SMTP id v2so16311705iob.10
- for <qemu-riscv@nongnu.org>; Fri, 20 Sep 2019 07:01:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
- h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
- :content-transfer-encoding;
- bh=rKgJEebPfoisKf23Nda39qUbX8jwzUziPhdGX0qWHzo=;
- b=YJh9N4qF7eJPp5t3vOmqxe8/Jp8w6lZVLPDt/7LfrUPvScTeG6pJ8OBuTWV68Z9rAj
- kTGLEWL8cUA4IjALGfPUk68WOhpjgj9O0e2hNsDHB1KnHaVSp09IqkmtUUNJf28DU/mp
- Py7iTnp/m8Lb0ayXnw+ZBoqI6MA9wfv0BIgvbpbwxpmUxlJkbFBW9VMlhQqJPMnUQEzh
- BgTMGQvjpi6N/XSzJgmKWiE3ibmE71PqofKh8N+CT4JzR0+lUs5R7lEl3tlh8RSme63+
- a6d/qUXxrdhgfN/fPk9w6FI/Mv6XeItALtbVBBQ06XTSUvx+lJ08kuErsj3FXNUdNcZW
- zrCg==
+ (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
+ id 1iBKBs-00039q-ID; Fri, 20 Sep 2019 10:47:20 -0400
+Received: by mail-pl1-x644.google.com with SMTP id w10so3291676plq.5;
+ Fri, 20 Sep 2019 07:47:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=from:to:cc:subject:date:message-id;
+ bh=Jkm0ljehZywZ2iXiHGqHTmmKoGBleQrarPOjldtOvIw=;
+ b=XB0mj5rAi5k79Ektlt4WBY57icoLPPhHkMPmbmnBljNKjTjkBqc2d9kjHAuvMPeoZ/
+ la2CTfKjIrwU1xcGLdB3w1iBMVAG8xlKUImd6C1ns33vXeJ5wGwYicVV155wwY7GmQaJ
+ vw5YEzd4v2B4eGRh4jWHcaq9L4oFCQRL+qjnu2kHD4rFHi/VWvZsX70E1DHyt+cHR0vn
+ nzIkpMlCcN7jFQLbHSAVyofb9Vk+Tz1ZQID4vsjv68wXaNyknZrPj0tadnk0tEM0Vgns
+ P1tF3KNTMFaoITjKsBTNJWDvJCBqcIZPIoAGSJxYeeqaOCZBI9X1sZLdzgbOiR8PVxmH
+ jOyA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
- :mime-version:content-transfer-encoding;
- bh=rKgJEebPfoisKf23Nda39qUbX8jwzUziPhdGX0qWHzo=;
- b=kvAFk6RmKiAHTg/GaSxpfirUCAHFzx74n+uwxioXCnjhlvuTqhf7YwfFtRIFlWdlhL
- hgvnj7GyRP9XBoh1/vTZu6ca0clAYMEEcvcnDlgz4qEIiMAoA/uKcVYCguK0zkpCdljQ
- h5OHNGcFilyisGkInEWhaQ6LnJA9wZc/EaC52GMgiB18WUpgsWhTl8oqydx2uBeXoRjL
- 2emctN243/W1iUualSjjKNuOhECErXNzOKGrHNRPyB+zqjHMZl4L7YG1YFt8b2mdh3ym
- 7Ba+Ny/xzHKrDuu3lXpgNDKvIdaBNtuB1DMeBFH2h0sAdzLyKCrMZZ9A4WJdf3F95e3O
- oBWQ==
-X-Gm-Message-State: APjAAAU6v6QUS93hv0158Xmh1JbhiA2mfc9K6mvnSdc5UtgRqpP5qs8r
- MaCatVrB9FHD3rzD9iMyl+l4BA==
-X-Google-Smtp-Source: APXvYqwKq1AoxmE9Dl1WwGDzPQL659l21iSB1oxH4vPg7QvsK7zTxghSHD3aQ4mnc4nGgas0/gEVcA==
-X-Received: by 2002:a6b:9085:: with SMTP id s127mr14715737iod.26.1568988076212; 
- Fri, 20 Sep 2019 07:01:16 -0700 (PDT)
-Received: from localhost ([8.46.73.109])
- by smtp.gmail.com with ESMTPSA id f12sm3439165iob.58.2019.09.20.07.01.13
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Sep 2019 07:01:15 -0700 (PDT)
-Date: Fri, 20 Sep 2019 07:01:15 -0700 (PDT)
-X-Google-Original-Date: Fri, 20 Sep 2019 07:01:07 PDT (-0700)
-Subject: Re: [PATCH v1 16/28] target/riscv: Add hypvervisor trap support
-In-Reply-To: <f8cb17bfb8abe59261394c36d915c2eabd2f4703.1566603412.git.alistair.francis@wdc.com>
-CC: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- Alistair Francis <Alistair.Francis@wdc.com>, alistair23@gmail.com,
- Atish Patra <Atish.Patra@wdc.com>, Anup Patel <Anup.Patel@wdc.com>
-From: Palmer Dabbelt <palmer@sifive.com>
-To: Alistair Francis <Alistair.Francis@wdc.com>
-Message-ID: <mhng-5090a31d-34ee-455b-bb77-965a09e5bd94@palmer-si-x1c4>
-Mime-Version: 1.0 (MHng)
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
+ h=x-gm-message-state:from:to:cc:subject:date:message-id;
+ bh=Jkm0ljehZywZ2iXiHGqHTmmKoGBleQrarPOjldtOvIw=;
+ b=OGng49z3I33flhgw2BM9vBPyeKCPpdAbArt0vNG/0R8QZqckiRpna5Xl/GrUQABcVN
+ KC+88zjw3q4VI3eHZt/qm3T/RqDixXWBU1VxBCwOuD7RnsV2MFMx4aS0HeenfsBPgYrH
+ mycgxFw/OhSC/LkDtPA9Xr7ltlTGnbBrRjSxamsdUcKIhiwLRaEI/aWaJ3vakyU9elVs
+ TQ/abxILqviimhstjStciGN/lEuqSriuez3vRUEcx0jn6/b3W7yri6p2EM7BGQBzdMl3
+ c5bhVBFd+cvD3kTPUNyhc+6E/3/1flyTSJqpkZGm+UbIwefNPwtoJBIYCCYn8R6PkhdS
+ IVKA==
+X-Gm-Message-State: APjAAAUqXC2OyPHX7LwLnjuZykfQWxAvjoChouGaBazuaKAO+EUGYgXL
+ geJW6DXCw5CRtHyc3MqJVgA=
+X-Google-Smtp-Source: APXvYqyGBNdYrp4JC7beAU5zXlZzIA9enGnaEvnTJY6vDmxh+5uNBMrYRJv8syXWW6UzoINAGPe2YA==
+X-Received: by 2002:a17:902:a406:: with SMTP id
+ p6mr17492719plq.134.1568990839606; 
+ Fri, 20 Sep 2019 07:47:19 -0700 (PDT)
+Received: from localhost.localdomain (unknown-224-80.windriver.com.
+ [147.11.224.80])
+ by smtp.gmail.com with ESMTPSA id m102sm2483247pje.5.2019.09.20.07.47.18
+ (version=TLS1 cipher=AES128-SHA bits=128/128);
+ Fri, 20 Sep 2019 07:47:19 -0700 (PDT)
+From: Bin Meng <bmeng.cn@gmail.com>
+To: Alistair Francis <Alistair.Francis@wdc.com>,
+ Palmer Dabbelt <palmer@sifive.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: Zong Li <zong.li@sifive.com>
+Subject: [PATCH] riscv: Skip checking CSR privilege level in debugger mode
+Date: Fri, 20 Sep 2019 07:47:14 -0700
+Message-Id: <1568990834-9371-1-git-send-email-bmeng.cn@gmail.com>
+X-Mailer: git-send-email 1.7.1
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::d44
+X-Received-From: 2607:f8b0:4864:20::644
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -71,156 +67,40 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Sep 2019 14:01:22 -0000
+X-List-Received-Date: Fri, 20 Sep 2019 14:47:26 -0000
 
-On Fri, 23 Aug 2019 16:38:31 PDT (-0700), Alistair Francis wrote:
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> ---
->  target/riscv/cpu_bits.h   |  4 +--
->  target/riscv/cpu_helper.c | 71 +++++++++++++++++++++++++++++++++------
->  target/riscv/csr.c        |  4 +--
->  3 files changed, 65 insertions(+), 14 deletions(-)
->
-> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-> index 5cee72b726..353fc9a24a 100644
-> --- a/target/riscv/cpu_bits.h
-> +++ b/target/riscv/cpu_bits.h
-> @@ -513,8 +513,8 @@
->  #define RISCV_EXCP_STORE_AMO_ADDR_MIS      0x6
->  #define RISCV_EXCP_STORE_AMO_ACCESS_FAULT  0x7
->  #define RISCV_EXCP_U_ECALL                 0x8
-> -#define RISCV_EXCP_S_ECALL                 0x9
-> -#define RISCV_EXCP_H_ECALL                 0xa
-> +#define RISCV_EXCP_HS_ECALL                0x9
-> +#define RISCV_EXCP_VS_ECALL                0xa
->  #define RISCV_EXCP_M_ECALL                 0xb
->  #define RISCV_EXCP_INST_PAGE_FAULT         0xc /* since: priv-1.10.0 */
->  #define RISCV_EXCP_LOAD_PAGE_FAULT         0xd /* since: priv-1.10.0 */
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index 8e8b156fc0..17eec6217b 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -668,6 +668,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
->
->      RISCVCPU *cpu = RISCV_CPU(cs);
->      CPURISCVState *env = &cpu->env;
-> +    target_ulong s;
->
->      /* cs->exception is 32-bits wide unlike mcause which is XLEN-bits wide
->       * so we mask off the MSB and separate into trap type and cause.
-> @@ -677,13 +678,6 @@ void riscv_cpu_do_interrupt(CPUState *cs)
->      target_ulong deleg = async ? env->mideleg : env->medeleg;
->      target_ulong tval = 0;
->
-> -    static const int ecall_cause_map[] = {
-> -        [PRV_U] = RISCV_EXCP_U_ECALL,
-> -        [PRV_S] = RISCV_EXCP_S_ECALL,
-> -        [PRV_H] = RISCV_EXCP_H_ECALL,
-> -        [PRV_M] = RISCV_EXCP_M_ECALL
-> -    };
-> -
->      if (!async) {
->          /* set tval to badaddr for traps with address information */
->          switch (cause) {
-> @@ -704,7 +698,16 @@ void riscv_cpu_do_interrupt(CPUState *cs)
->          /* ecall is dispatched as one cause so translate based on mode */
->          if (cause == RISCV_EXCP_U_ECALL) {
->              assert(env->priv <= 3);
-> -            cause = ecall_cause_map[env->priv];
-> +
-> +            if (env->priv == PRV_M) {
-> +                cause = RISCV_EXCP_M_ECALL;
-> +            } else if (env->priv == PRV_S && riscv_cpu_virt_enabled(env)) {
-> +                cause = RISCV_EXCP_VS_ECALL;
-> +            } else if (env->priv == PRV_S && !riscv_cpu_virt_enabled(env)) {
-> +                cause = RISCV_EXCP_HS_ECALL;
-> +            } else if (env->priv == PRV_U) {
-> +                cause = RISCV_EXCP_U_ECALL;
-> +            }
->          }
->      }
->
-> @@ -714,7 +717,42 @@ void riscv_cpu_do_interrupt(CPUState *cs)
->      if (env->priv <= PRV_S &&
->              cause < TARGET_LONG_BITS && ((deleg >> cause) & 1)) {
->          /* handle the trap in S-mode */
-> -        target_ulong s = *env->mstatus;
-> +        if (riscv_has_ext(env, RVH)) {
-> +            target_ulong hdeleg = async ? env->hideleg : env->hedeleg;
-> +
-> +            if (riscv_cpu_virt_enabled(env) && ((hdeleg >> cause) & 1) &&
-> +                !riscv_cpu_force_hs_excep_enabled(env)) {
-> +                /* Trap to VS mode */
-> +            } else if (riscv_cpu_virt_enabled(env)) {
-> +                /* Trap into HS mode, from virt */
-> +                riscv_cpu_swap_hypervisor_regs(env);
-> +                env->hstatus = set_field(env->hstatus, HSTATUS_SP2V,
-> +                                         get_field(env->hstatus, HSTATUS_SPV));
-> +                env->hstatus = set_field(env->hstatus, HSTATUS_SP2P,
-> +                                         get_field(*env->mstatus, SSTATUS_SPP));
-> +                env->hstatus = set_field(env->hstatus, HSTATUS_SPV,
-> +                                         riscv_cpu_virt_enabled(env));
-> +
-> +                if (riscv_cpu_force_hs_excep_enabled(env)) {
-> +                    env->hstatus = set_field(env->hstatus, HSTATUS_STL, 1);
-> +                } else {
-> +                    env->hstatus = set_field(env->hstatus, HSTATUS_STL, 0);
-> +                }
-> +
-> +                riscv_cpu_set_virt_enabled(env, VIRT_OFF);
-> +                riscv_cpu_set_force_hs_excep(env, CLEAR_HS_EXCEP);
-> +            } else {
-> +                /* Trap into HS mode */
-> +                env->hstatus = set_field(env->hstatus, HSTATUS_SP2V,
-> +                                         get_field(env->hstatus, HSTATUS_SPV));
-> +                env->hstatus = set_field(env->hstatus, HSTATUS_SP2P,
-> +                                         get_field(*env->mstatus, SSTATUS_SPP));
-> +                env->hstatus = set_field(env->hstatus, HSTATUS_SPV,
-> +                                         riscv_cpu_virt_enabled(env));
-> +            }
-> +        }
-> +
-> +        s = *env->mstatus;
->          s = set_field(s, MSTATUS_SPIE, env->priv_ver >= PRIV_VERSION_1_10_0 ?
->              get_field(s, MSTATUS_SIE) : get_field(s, MSTATUS_UIE << env->priv));
->          s = set_field(s, MSTATUS_SPP, env->priv);
-> @@ -728,7 +766,20 @@ void riscv_cpu_do_interrupt(CPUState *cs)
->          riscv_cpu_set_mode(env, PRV_S);
->      } else {
->          /* handle the trap in M-mode */
-> -        target_ulong s = *env->mstatus;
-> +        if (riscv_has_ext(env, RVH)) {
-> +            if (riscv_cpu_virt_enabled(env)) {
-> +                riscv_cpu_swap_hypervisor_regs(env);
-> +            }
-> +            *env->mstatus = set_field(*env->mstatus, MSTATUS_MPV,
-> +                                      riscv_cpu_virt_enabled(env));
-> +            *env->mstatus = set_field(*env->mstatus, MSTATUS_MTL,
-> +                                      riscv_cpu_force_hs_excep_enabled(env));
-> +
-> +            /* Trapping to M mode, virt is disabled */
-> +            riscv_cpu_set_virt_enabled(env, VIRT_OFF);
-> +        }
-> +
-> +        s = *env->mstatus;
->          s = set_field(s, MSTATUS_MPIE, env->priv_ver >= PRIV_VERSION_1_10_0 ?
->              get_field(s, MSTATUS_MIE) : get_field(s, MSTATUS_UIE << env->priv));
->          s = set_field(s, MSTATUS_MPP, env->priv);
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index 30ec8c0a8e..47be4b1d42 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -255,8 +255,8 @@ static const target_ulong delegable_excps =
->      (1ULL << (RISCV_EXCP_STORE_AMO_ADDR_MIS)) |
->      (1ULL << (RISCV_EXCP_STORE_AMO_ACCESS_FAULT)) |
->      (1ULL << (RISCV_EXCP_U_ECALL)) |
-> -    (1ULL << (RISCV_EXCP_S_ECALL)) |
-> -    (1ULL << (RISCV_EXCP_H_ECALL)) |
-> +    (1ULL << (RISCV_EXCP_VS_ECALL)) |
-> +    (1ULL << (RISCV_EXCP_HS_ECALL)) |
->      (1ULL << (RISCV_EXCP_M_ECALL)) |
->      (1ULL << (RISCV_EXCP_INST_PAGE_FAULT)) |
->      (1ULL << (RISCV_EXCP_LOAD_PAGE_FAULT)) |
+If we are in debugger mode, skip the CSR privilege level checking
+so that we can read/write all CSRs. Otherwise we get:
 
-Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
+(gdb) p/x $mtvec
+Could not fetch register "mtvec"; remote failure reply 'E14'
+
+when the hart is currently in S-mode.
+
+Reported-by: Zong Li <zong.li@sifive.com>
+Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
+---
+
+ target/riscv/csr.c | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index f767ad2..974c9c2 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -801,7 +801,10 @@ int riscv_csrrw(CPURISCVState *env, int csrno, target_ulong *ret_value,
+ #if !defined(CONFIG_USER_ONLY)
+     int csr_priv = get_field(csrno, 0x300);
+     int read_only = get_field(csrno, 0xC00) == 3;
+-    if ((write_mask && read_only) || (env->priv < csr_priv)) {
++    if ((!env->debugger) && (env->priv < csr_priv)) {
++        return -1;
++    }
++    if (write_mask && read_only) {
+         return -1;
+     }
+ #endif
+-- 
+2.7.4
+
 
