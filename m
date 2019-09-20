@@ -1,60 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iBNwc-00076r-CF
-	for mharc-qemu-riscv@gnu.org; Fri, 20 Sep 2019 14:47:50 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53329)
+	id 1iBO08-0001h7-9Y
+	for mharc-qemu-riscv@gnu.org; Fri, 20 Sep 2019 14:51:28 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:54106)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <alistair23@gmail.com>) id 1iBNwZ-000741-6v
- for qemu-riscv@nongnu.org; Fri, 20 Sep 2019 14:47:48 -0400
+ (envelope-from <alistair23@gmail.com>) id 1iBO04-0001dA-ML
+ for qemu-riscv@nongnu.org; Fri, 20 Sep 2019 14:51:26 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1iBNwY-0003Vk-5P
- for qemu-riscv@nongnu.org; Fri, 20 Sep 2019 14:47:47 -0400
-Received: from mail-lf1-x142.google.com ([2a00:1450:4864:20::142]:35155)
+ (envelope-from <alistair23@gmail.com>) id 1iBO02-0005Qa-NP
+ for qemu-riscv@nongnu.org; Fri, 20 Sep 2019 14:51:24 -0400
+Received: from mail-lf1-x143.google.com ([2a00:1450:4864:20::143]:43112)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1iBNwV-0003NJ-3q; Fri, 20 Sep 2019 14:47:43 -0400
-Received: by mail-lf1-x142.google.com with SMTP id w6so5749294lfl.2;
- Fri, 20 Sep 2019 11:47:42 -0700 (PDT)
+ id 1iBNzw-0005NF-Rn; Fri, 20 Sep 2019 14:51:18 -0400
+Received: by mail-lf1-x143.google.com with SMTP id u3so5728404lfl.10;
+ Fri, 20 Sep 2019 11:51:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=rnFGOHnHSmx+gH8pWbprb1CW/SxRheV3caXJkoIiCzY=;
- b=YS2evtAUM6y2aGPOPa1089EIes7ZyrD6K225uJ18Tmelojl7Nc46cCBuD+1Wky4te4
- vrwJOtQ+9sm1wXyc2RbE7z2dQyzDGK2nKRfE/er+omkNPuZAbe6mjBO6kDJaxDdPxgYN
- cCq6tXGM6pGPRfqbv+5Dc9yTngG7WvC/pzc/W/jptcKkWwjlQeOPPbnm/RkM2vgkuvAE
- JRB5LQmBkjRS2L9PlZlHZLXqF3hkdWW4g5yin3lv9lYtDcUiTYpdp0FwbSuwWyHSB2Sl
- 5TKnYKDrc+WBjopCeg+C9/qujXZpAs560/FhRVD8gBBTlxfqEGoc9lBbyDYXNRLu+Unr
- UuQw==
+ :cc; bh=/r1z3XdozrSg5hiEdNJT8S+6KbDkz/+rhir16zqnjxc=;
+ b=GwLQyrjc4A+E+3Bc1eLxC1I1i8dwbZSRCdX/jJ2eNBjhtJ9u4QNJ/zNcgbWqyVSTpc
+ VbmrW6/7+MzCwbmCMoK7rqPgwAYHUc1vpRFYVR7xgDVU0ugOjQbltPytyDHVdHxZAwwd
+ juNSixuB/QZaaojLG6lpOOPpOFxZLe/cKs/52oPf4QUE3ySP3t/FNbSUS9EwBVn7yx1N
+ tk0IYd7XHjTvt3QX6jstUEAbqqXPqOcn5nOwRWfQJOBLuaBVYOpzLtSIb2jmBVwQnuCS
+ rStI9Qx/0Oaq8N3qIUA2+Am5YCPmQuOc+mWYP2Vo5BZJs+xuxWQdc82HRlrFncYK5BUT
+ siAg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=rnFGOHnHSmx+gH8pWbprb1CW/SxRheV3caXJkoIiCzY=;
- b=TR63kUahnpaSlyla9Adf5H7AOvuU/k5FRYFeFcTjIuMDzuFfOdV33MGSERw2uxooKM
- kI0nj+FydCKOuUSJG3n86XBr3pnhgkIBBuKpTc+lmVkClqDogzigxWKQYncNNKyEHidc
- eSXQ82+KbWkYhwP03Zsgr9HJG7e4ncvTXKCPpntt3TlA8Ws80kjD4atj03yo/ydbedKa
- aIe9XKCf32ijp4rPomYCbLOtiuPOV+4yuQGgHNHitnhz5653OV36aremXqcjSKh23OoL
- lk1h6P5wnFR/3DJdpmGICgvsB3FH2WxBpqYIzkUYegGpXeqF2yt8HcCHQSLEDJt3MkFH
- GwQw==
-X-Gm-Message-State: APjAAAWNwgSDL1rRpV91OX0ZnzGAoiNWD07fVu5/BnB/AcAFLuY3K60O
- WYQKzh1AEHa70mSslThA41KirVb/X3aL8IM/0kw=
-X-Google-Smtp-Source: APXvYqwrvTxVmlB3g+zYmarQJmvXonLkXwX95FW/DkO5q5gAnHeC/I0tpWjQx0euwbwLaiJgTyFJDEGWi1bNnFPu110=
-X-Received: by 2002:ac2:484a:: with SMTP id 10mr3388328lfy.135.1569005260940; 
- Fri, 20 Sep 2019 11:47:40 -0700 (PDT)
+ bh=/r1z3XdozrSg5hiEdNJT8S+6KbDkz/+rhir16zqnjxc=;
+ b=g0K9kKBUaQQubWpylnMlyO4PLfaONpf4/pmcoUqbVS+ZTJX0FDM7Gv2uD4mDbKI7wX
+ GKTBQplTi9SMuFO9/zxgoznCr/QxGyzrUIOtpH1/egs0l8fe1sOqJF4Tu6cPUTjXbPFx
+ pOrdP2yiSpg0hFxqLEK6qVw+CP+Y5W5Cpsl6YeT68ReN4QE6rfgaOjEN7tlaa8P85HXn
+ Ka+DEy87PLMRsV4DaRlg46kKwVsWP+qeseYARO5HpQ7N6hoNHyhqU6+MENBYJYIl2jru
+ kggKEi5VDhgYoW7V46tWt8/Dn5Yl8ymj0a0UhvnjgBjwfvOCTTJmTq6bb4sjVCIaXMpq
+ Y+wg==
+X-Gm-Message-State: APjAAAUyYnz5dqfKtEUYPPndndBvFPvfpje3vMpB1K5Cj/14ERG1ciMS
+ o38IPsq4pqw/dGwS+us6mItWN085uS3x3d6GLBM=
+X-Google-Smtp-Source: APXvYqxUGyiFKRPn/dPvuVurZwX+bltpfjaWpomfjfN8ALXfi8JtybY9KdBWbskTfGZ0EWQ0ie172QpBPhrYe5WAF84=
+X-Received: by 2002:ac2:5e9e:: with SMTP id b30mr9599479lfq.5.1569005473978;
+ Fri, 20 Sep 2019 11:51:13 -0700 (PDT)
 MIME-Version: 1.0
-References: <1568990834-9371-1-git-send-email-bmeng.cn@gmail.com>
-In-Reply-To: <1568990834-9371-1-git-send-email-bmeng.cn@gmail.com>
+References: <1568971142-27979-1-git-send-email-bmeng.cn@gmail.com>
+In-Reply-To: <1568971142-27979-1-git-send-email-bmeng.cn@gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 20 Sep 2019 11:43:05 -0700
-Message-ID: <CAKmqyKMFUs_KsR7JJbnWF=inCfd1o6ebCa4s++JkPJK71r=+kg@mail.gmail.com>
-Subject: Re: [PATCH] riscv: Skip checking CSR privilege level in debugger mode
+Date: Fri, 20 Sep 2019 11:46:38 -0700
+Message-ID: <CAKmqyKMa-kG7zrjFJ7aZd1Ey=7sCRHj2wEkukFz4GkT5gR0fKw@mail.gmail.com>
+Subject: Re: [PATCH 1/2] riscv: sifive_u: Drop "clock-frequency" property of
+ cpu nodes
 To: Bin Meng <bmeng.cn@gmail.com>
 Cc: Alistair Francis <Alistair.Francis@wdc.com>,
  Palmer Dabbelt <palmer@sifive.com>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, Zong Li <zong.li@sifive.com>
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::142
+X-Received-From: 2a00:1450:4864:20::143
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -66,19 +67,15 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Sep 2019 18:47:48 -0000
+X-List-Received-Date: Fri, 20 Sep 2019 18:51:26 -0000
 
-On Fri, Sep 20, 2019 at 7:48 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+On Fri, Sep 20, 2019 at 2:26 AM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
-> If we are in debugger mode, skip the CSR privilege level checking
-> so that we can read/write all CSRs. Otherwise we get:
+> The "clock-frequency" property of cpu nodes isn't required. Drop it.
 >
-> (gdb) p/x $mtvec
-> Could not fetch register "mtvec"; remote failure reply 'E14'
+> This is to keep in sync with Linux kernel commit below:
+> https://patchwork.kernel.org/patch/11133031/
 >
-> when the hart is currently in S-mode.
->
-> Reported-by: Zong Li <zong.li@sifive.com>
 > Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
@@ -87,25 +84,35 @@ Alistair
 
 > ---
 >
->  target/riscv/csr.c | 5 ++++-
->  1 file changed, 4 insertions(+), 1 deletion(-)
+>  hw/riscv/sifive_u.c         | 2 --
+>  include/hw/riscv/sifive_u.h | 1 -
+>  2 files changed, 3 deletions(-)
 >
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index f767ad2..974c9c2 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -801,7 +801,10 @@ int riscv_csrrw(CPURISCVState *env, int csrno, target_ulong *ret_value,
->  #if !defined(CONFIG_USER_ONLY)
->      int csr_priv = get_field(csrno, 0x300);
->      int read_only = get_field(csrno, 0xC00) == 3;
-> -    if ((write_mask && read_only) || (env->priv < csr_priv)) {
-> +    if ((!env->debugger) && (env->priv < csr_priv)) {
-> +        return -1;
-> +    }
-> +    if (write_mask && read_only) {
->          return -1;
->      }
->  #endif
+> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+> index 9f8e84b..02dd761 100644
+> --- a/hw/riscv/sifive_u.c
+> +++ b/hw/riscv/sifive_u.c
+> @@ -151,8 +151,6 @@ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
+>          char *intc = g_strdup_printf("/cpus/cpu@%d/interrupt-controller", cpu);
+>          char *isa;
+>          qemu_fdt_add_subnode(fdt, nodename);
+> -        qemu_fdt_setprop_cell(fdt, nodename, "clock-frequency",
+> -                              SIFIVE_U_CLOCK_FREQ);
+>          /* cpu 0 is the management hart that does not have mmu */
+>          if (cpu != 0) {
+>              qemu_fdt_setprop_string(fdt, nodename, "mmu-type", "riscv,sv48");
+> diff --git a/include/hw/riscv/sifive_u.h b/include/hw/riscv/sifive_u.h
+> index e4df298..4850805 100644
+> --- a/include/hw/riscv/sifive_u.h
+> +++ b/include/hw/riscv/sifive_u.h
+> @@ -75,7 +75,6 @@ enum {
+>  };
+>
+>  enum {
+> -    SIFIVE_U_CLOCK_FREQ = 1000000000,
+>      SIFIVE_U_HFCLK_FREQ = 33333333,
+>      SIFIVE_U_RTCCLK_FREQ = 1000000
+>  };
 > --
 > 2.7.4
 >
