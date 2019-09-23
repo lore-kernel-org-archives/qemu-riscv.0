@@ -1,27 +1,28 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iCUUo-0006hy-B1
-	for mharc-qemu-riscv@gnu.org; Mon, 23 Sep 2019 15:59:42 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:34794)
+	id 1iCUba-0001A7-3y
+	for mharc-qemu-riscv@gnu.org; Mon, 23 Sep 2019 16:06:42 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:36575)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <eblake@redhat.com>) id 1iCUUl-0006hJ-9g
- for qemu-riscv@nongnu.org; Mon, 23 Sep 2019 15:59:40 -0400
+ (envelope-from <eblake@redhat.com>) id 1iCUbX-00018w-Em
+ for qemu-riscv@nongnu.org; Mon, 23 Sep 2019 16:06:40 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <eblake@redhat.com>) id 1iCUUj-00023n-Vx
- for qemu-riscv@nongnu.org; Mon, 23 Sep 2019 15:59:39 -0400
-Received: from mx1.redhat.com ([209.132.183.28]:44822)
+ (envelope-from <eblake@redhat.com>) id 1iCUbW-0005BP-9x
+ for qemu-riscv@nongnu.org; Mon, 23 Sep 2019 16:06:39 -0400
+Received: from mx1.redhat.com ([209.132.183.28]:51454)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <eblake@redhat.com>)
- id 1iCUUY-00020p-SV; Mon, 23 Sep 2019 15:59:27 -0400
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
- [10.5.11.11])
+ id 1iCUbK-00057Q-TR; Mon, 23 Sep 2019 16:06:27 -0400
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
+ [10.5.11.23])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id 9320D8A1C8C;
- Mon, 23 Sep 2019 19:59:24 +0000 (UTC)
+ by mx1.redhat.com (Postfix) with ESMTPS id 06205307CDE7;
+ Mon, 23 Sep 2019 20:06:24 +0000 (UTC)
 Received: from [10.3.116.249] (ovpn-116-249.phx2.redhat.com [10.3.116.249])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 321B26017E;
- Mon, 23 Sep 2019 19:58:11 +0000 (UTC)
-Subject: Re: [RFC v2 1/9] error: auto propagated local_err
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 630F819D70;
+ Mon, 23 Sep 2019 20:05:50 +0000 (UTC)
+Subject: Re: [RFC v2 6/9] scripts: add coccinelle script to use auto
+ propagated errp
 To: Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>,
  qemu-devel@nongnu.org
 Cc: kraxel@redhat.com, berrange@redhat.com, arei.gonglei@huawei.com,
@@ -58,7 +59,7 @@ Cc: kraxel@redhat.com, berrange@redhat.com, arei.gonglei@huawei.com,
  xen-devel@lists.xenproject.org, qemu-ppc@nongnu.org, qemu-s390x@nongnu.org,
  qemu-riscv@nongnu.org
 References: <20190923161231.22028-1-vsementsov@virtuozzo.com>
- <20190923161231.22028-2-vsementsov@virtuozzo.com>
+ <20190923161231.22028-7-vsementsov@virtuozzo.com>
 From: Eric Blake <eblake@redhat.com>
 Openpgp: preference=signencrypt
 Autocrypt: addr=eblake@redhat.com; keydata=
@@ -85,18 +86,18 @@ Autocrypt: addr=eblake@redhat.com; keydata=
  Dp6/QDjDFtfS39bHSWXKVZUbqaMPqlj/z6Ugk027/3GUjHHr8WkeL1ezWepYDY7WSoXwfoAL
  2UXYsMAr/uUncSKlfjvArhsej0S4zbqim2ZY6S8aRWw94J3bSvJR+Nwbs34GPTD4Pg==
 Organization: Red Hat, Inc.
-Message-ID: <b345e88b-f426-5bcc-cf2f-4774d5b98bcb@redhat.com>
-Date: Mon, 23 Sep 2019 14:58:10 -0500
+Message-ID: <57e97ed0-b1a1-d209-fc23-cf41ec467157@redhat.com>
+Date: Mon, 23 Sep 2019 15:05:49 -0500
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
  Thunderbird/60.8.0
 MIME-Version: 1.0
-In-Reply-To: <20190923161231.22028-2-vsementsov@virtuozzo.com>
+In-Reply-To: <20190923161231.22028-7-vsementsov@virtuozzo.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.6.2
- (mx1.redhat.com [10.5.110.69]); Mon, 23 Sep 2019 19:59:26 +0000 (UTC)
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+ (mx1.redhat.com [10.5.110.49]); Mon, 23 Sep 2019 20:06:24 +0000 (UTC)
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
 X-Received-From: 209.132.183.28
 X-BeenThere: qemu-riscv@nongnu.org
@@ -110,120 +111,136 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Sep 2019 19:59:40 -0000
+X-List-Received-Date: Mon, 23 Sep 2019 20:06:40 -0000
 
 On 9/23/19 11:12 AM, Vladimir Sementsov-Ogievskiy wrote:
-> Here is introduced ERRP_FUNCTION_BEGIN macro, to be used at start of
-> any function with errp parameter.
-> 
-> It has three goals:
-> 
-> 1. Fix issue with error_fatal & error_append_hint: user can't see these
-> hints, because exit() happens in error_setg earlier than hint is
-> appended. [Reported by Greg Kurz]
-> 
-> 2. Fix issue with error_abort & error_propagate: when we wrap
-> error_abort by local_err+error_propagate, resulting coredump will
-> refer to error_propagate and not to the place where error happened.
-> (the macro itself don't fix the issue, but it allows to [3.] drop all
-
-doesn't
-
-> local_err+error_propagate pattern, which will definitely fix the issue)
-> [Reported by Kevin Wolf]
-> 
-> 3. Drop local_err+error_propagate pattern, which is used to workaround
-> void functions with errp parameter, when caller wants to know resulting
-> status. (Note: actually these functions should be merely updated to
-
-Maybe:
-
-s/should/could/
-
-> return int error code).
-> 
 > Signed-off-by: Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>
 > ---
->  include/qapi/error.h | 37 +++++++++++++++++++++++++++++++++++++
->  1 file changed, 37 insertions(+)
+>  scripts/coccinelle/auto-propagated-errp.cocci | 82 +++++++++++++++++++
+>  1 file changed, 82 insertions(+)
+>  create mode 100644 scripts/coccinelle/auto-propagated-errp.cocci
 > 
-> diff --git a/include/qapi/error.h b/include/qapi/error.h
-> index 3f95141a01..f6f4fa0fac 100644
-> --- a/include/qapi/error.h
-> +++ b/include/qapi/error.h
-> @@ -322,6 +322,43 @@ void error_set_internal(Error **errp,
->                          ErrorClass err_class, const char *fmt, ...)
->      GCC_FMT_ATTR(6, 7);
->  
-> +typedef struct ErrorPropagator {
-> +    Error *local_err;
-> +    Error **errp;
-> +} ErrorPropagator;
+> diff --git a/scripts/coccinelle/auto-propagated-errp.cocci b/scripts/coccinelle/auto-propagated-errp.cocci
+> new file mode 100644
+> index 0000000000..1a3f006f0b
+> --- /dev/null
+> +++ b/scripts/coccinelle/auto-propagated-errp.cocci
+> @@ -0,0 +1,82 @@
+> +@@
+> +identifier fn;
+> +identifier local_err;
+> +@@
 > +
-> +static inline void error_propagator_cleanup(ErrorPropagator *prop)
-> +{
-> +    error_propagate(prop->errp, prop->local_err);
-> +}
-> +
-> +G_DEFINE_AUTO_CLEANUP_CLEAR_FUNC(ErrorPropagator, error_propagator_cleanup);
-> +
-> +/*
-> + * ERRP_FUNCTION_BEGIN
-> + *
-> + * This macro MUST be the first line of EACH function with Error **errp
-> + * parameter.
+> + fn(..., Error **errp)
+> + {
+> ++    ERRP_FUNCTION_BEGIN();
+> + }
 
-Maybe s/EACH function/ANY non-empty function/ (allowing our stub
-functions to be exemptions).
+This doesn't catch functions where Error **errp is not the last
+parameter.  Some examples (some of which may need independent tweaking
+in their own right for being inconsistent, although we DO want errp to
+appear before any 'format, ...' arguments):
 
-> + *
-> + * If errp is NULL or points to error_fatal, it is rewritten to point to
+block/ssh.c:sftp_error_setg(Error **errp, BDRVSSHState *s, const char
+*fs, ...)
+exec.c:static void ram_block_add(RAMBlock *new_block, Error **errp, bool
+shared)
 
-s/to/to a/
+Does running this Coccinelle script 2 times in a row add a second
+ERRP_FUNCTION_BEGIN() line?  We want it to be idempotent (no changes on
+a second run).  (Admittedly, I did not actually test that yet).  Also, I
+don't know if this can be tweaked to avoid adding the line to a function
+with an empty body, maybe:
 
-> + * local Error object, which will be automatically propagated to original
+ fn(..., Error **errp, ...)
+ {
++    ERRP_FUNCTION_BEGIN();
+     ...
+ }
 
-s/to/to the/
-
-> + * errp on function exit (see error_propagator_cleanup).
-> + *
-> + * After invocation of this macro it is always safe to dereference errp
-> + * (as it's not NULL anymore) and to append hint (by error_append_hint)
-
-s/append hint/append hints/
-
-> + * (as, if it was error_fatal, we swapped it by local_error to be
-
-s/by local_error/with a local error/
-
-> + * propagated on cleanup).
-> + *
-> + * Note: we don't wrap error_abort case, as we want resulting coredump
-> + * to point to the place where the error happened, not to error_propagate.
-
-s/wrap/wrap the/
-
-> + */
-> +#define ERRP_FUNCTION_BEGIN() \
-> +g_auto(ErrorPropagator) __auto_errp_prop = {.errp = errp}; \
-> +Error **__local_errp_unused __attribute__ ((unused)) = \
-> +    (errp = (errp == NULL || *errp == error_fatal ? \
-> +             &__auto_errp_prop.local_err : errp))
-
-I'm not sold on why we need the dummy declaration (yeah, I know it's so
-that you don't have to fight the battle of mixing declarations and
-statements - but this is in a macro call whose usage LOOKS like a
-statement rather than a declaration, so we're already on fuzzy ground).
-We could make this macro expansion one line shorter and still be
-correct, but I'm not going to insist (we'll see what consensus is,
-and/or what Markus says).
+to only add it to a function that already has a body (thanks to the ...)
+- but I'm fuzzy enough on Coccinelle that I may be saying something
+totally wrong.
 
 > +
+> +@rule1@
+> +identifier fn;
+> +identifier local_err;
+> +@@
 > +
->  /*
->   * Special error destination to abort on error.
->   * See error_setg() and error_propagate() for details.
+> + fn(..., Error **errp)
+> + {
+> +     <...
+> +-    Error *local_err = NULL;
+> +     ...>
+> + }
+> +
+> +@@
+> +identifier rule1.fn;
+> +identifier rule1.local_err;
+> +identifier out;
+> +@@
+> +
+> + fn(...)
+> + {
+> +     <...
+> +-    goto out;
+> ++    return;
+> +     ...>
+> +- out:
+> +-    error_propagate(errp, local_err);
+> + }
+> +
+> +@@
+> +identifier rule1.fn;
+> +identifier rule1.local_err;
+> +@@
+> +
+> + fn(...)
+> + {
+> +     <...
+> +(
+> +-    error_free(local_err);
+> +-    local_err = NULL;
+> ++    error_free_errp(errp);
+> +|
+> +-    error_free(local_err);
+> ++    error_free_errp(errp);
+> +|
+> +-    error_report_err(local_err);
+> ++    error_report_errp(errp);
+> +|
+> +-    warn_report_err(local_err);
+> ++    warn_report_errp(errp);
+> +|
+> +-    error_propagate(errp, local_err);
+> +)
+> +     ...>
+> + }
+> +
+> +@@
+> +identifier rule1.fn;
+> +identifier rule1.local_err;
+> +@@
+> +
+> + fn(...)
+> + {
+> +     <...
+> +(
+> +-    &local_err
+> ++    errp
+> +|
+> +-    local_err
+> ++    *errp
+> +)
+> +     ...>
+> + }
 > 
+
+Overall, the script makes sense in my reading (but no idea if it
+actually catches everything we want, or if it missed something).  At any
+rate, once patch 7 is split into more manageable chunks, we can
+definitely spot-check results to make sure they all look reasonable.
 
 -- 
 Eric Blake, Principal Software Engineer
