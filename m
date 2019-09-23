@@ -1,21 +1,21 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iCRAW-0003OB-IG
-	for mharc-qemu-riscv@gnu.org; Mon, 23 Sep 2019 12:26:32 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:57712)
+	id 1iCRAY-0003Qf-CY
+	for mharc-qemu-riscv@gnu.org; Mon, 23 Sep 2019 12:26:34 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:57639)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <vsementsov@virtuozzo.com>) id 1iCQxw-0002le-3V
- for qemu-riscv@nongnu.org; Mon, 23 Sep 2019 12:13:34 -0400
+ (envelope-from <vsementsov@virtuozzo.com>) id 1iCQxq-0002i7-CV
+ for qemu-riscv@nongnu.org; Mon, 23 Sep 2019 12:13:28 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <vsementsov@virtuozzo.com>) id 1iCQxu-00047J-KQ
- for qemu-riscv@nongnu.org; Mon, 23 Sep 2019 12:13:31 -0400
-Received: from relay.sw.ru ([185.231.240.75]:39506)
+ (envelope-from <vsementsov@virtuozzo.com>) id 1iCQxn-00044O-OM
+ for qemu-riscv@nongnu.org; Mon, 23 Sep 2019 12:13:26 -0400
+Received: from relay.sw.ru ([185.231.240.75]:39522)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <vsementsov@virtuozzo.com>)
- id 1iCQxM-0003a7-Gv; Mon, 23 Sep 2019 12:12:56 -0400
+ id 1iCQxM-0003aE-IE; Mon, 23 Sep 2019 12:12:56 -0400
 Received: from [10.94.3.0] (helo=kvm.qa.sw.ru)
  by relay.sw.ru with esmtp (Exim 4.92.2)
  (envelope-from <vsementsov@virtuozzo.com>)
- id 1iCQx1-0001Fp-PU; Mon, 23 Sep 2019 19:12:35 +0300
+ id 1iCQwy-0001Fp-8L; Mon, 23 Sep 2019 19:12:32 +0300
 From: Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>
 To: qemu-devel@nongnu.org
 Cc: kraxel@redhat.com, berrange@redhat.com, arei.gonglei@huawei.com,
@@ -52,9 +52,9 @@ Cc: kraxel@redhat.com, berrange@redhat.com, arei.gonglei@huawei.com,
  integration@gluster.org, sheepdog@lists.wpkg.org, qemu-arm@nongnu.org,
  xen-devel@lists.xenproject.org, qemu-ppc@nongnu.org, qemu-s390x@nongnu.org,
  qemu-riscv@nongnu.org, vsementsov@virtuozzo.com
-Subject: [RFC v2 9/9] fix-compilation: includes
-Date: Mon, 23 Sep 2019 19:12:31 +0300
-Message-Id: <20190923161231.22028-10-vsementsov@virtuozzo.com>
+Subject: [RFC v2 1/9] error: auto propagated local_err
+Date: Mon, 23 Sep 2019 19:12:23 +0300
+Message-Id: <20190923161231.22028-2-vsementsov@virtuozzo.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <20190923161231.22028-1-vsementsov@virtuozzo.com>
 References: <20190923161231.22028-1-vsementsov@virtuozzo.com>
@@ -74,122 +74,82 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Sep 2019 16:13:34 -0000
+X-List-Received-Date: Mon, 23 Sep 2019 16:13:31 -0000
 
-Hmm. Should we allow empty stubs with errp parameter without calling
-new macro?
+Here is introduced ERRP_FUNCTION_BEGIN macro, to be used at start of
+any function with errp parameter.
 
-Or, just apply this commit before auto-generated commit.
+It has three goals:
+
+1. Fix issue with error_fatal & error_append_hint: user can't see these
+hints, because exit() happens in error_setg earlier than hint is
+appended. [Reported by Greg Kurz]
+
+2. Fix issue with error_abort & error_propagate: when we wrap
+error_abort by local_err+error_propagate, resulting coredump will
+refer to error_propagate and not to the place where error happened.
+(the macro itself don't fix the issue, but it allows to [3.] drop all
+local_err+error_propagate pattern, which will definitely fix the issue)
+[Reported by Kevin Wolf]
+
+3. Drop local_err+error_propagate pattern, which is used to workaround
+void functions with errp parameter, when caller wants to know resulting
+status. (Note: actually these functions should be merely updated to
+return int error code).
 
 Signed-off-by: Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>
 ---
- target/ppc/kvm_ppc.h        | 2 ++
- target/s390x/cpu_models.h   | 1 +
- hw/i386/kvm/apic.c          | 1 +
- hw/misc/arm11scu.c          | 1 +
- hw/misc/mps2-scc.c          | 1 +
- hw/pci-bridge/dec.c         | 1 +
- qapi/qapi-dealloc-visitor.c | 1 +
- stubs/xen-hvm.c             | 1 +
- 8 files changed, 9 insertions(+)
+ include/qapi/error.h | 37 +++++++++++++++++++++++++++++++++++++
+ 1 file changed, 37 insertions(+)
 
-diff --git a/target/ppc/kvm_ppc.h b/target/ppc/kvm_ppc.h
-index 807c245e90..f6366c19aa 100644
---- a/target/ppc/kvm_ppc.h
-+++ b/target/ppc/kvm_ppc.h
-@@ -9,6 +9,8 @@
- #ifndef KVM_PPC_H
- #define KVM_PPC_H
+diff --git a/include/qapi/error.h b/include/qapi/error.h
+index 3f95141a01..f6f4fa0fac 100644
+--- a/include/qapi/error.h
++++ b/include/qapi/error.h
+@@ -322,6 +322,43 @@ void error_set_internal(Error **errp,
+                         ErrorClass err_class, const char *fmt, ...)
+     GCC_FMT_ATTR(6, 7);
  
-+#include "qapi/error.h"
++typedef struct ErrorPropagator {
++    Error *local_err;
++    Error **errp;
++} ErrorPropagator;
 +
- #define TYPE_HOST_POWERPC_CPU POWERPC_CPU_TYPE_NAME("host")
- 
- #ifdef CONFIG_KVM
-diff --git a/target/s390x/cpu_models.h b/target/s390x/cpu_models.h
-index 5329045a71..062161c5fa 100644
---- a/target/s390x/cpu_models.h
-+++ b/target/s390x/cpu_models.h
-@@ -16,6 +16,7 @@
- #include "cpu_features.h"
- #include "gen-features.h"
- #include "hw/core/cpu.h"
-+#include "qapi/error.h"
- 
- /* static CPU definition */
- struct S390CPUDef {
-diff --git a/hw/i386/kvm/apic.c b/hw/i386/kvm/apic.c
-index d125b370f4..cadf75b71c 100644
---- a/hw/i386/kvm/apic.c
-+++ b/hw/i386/kvm/apic.c
-@@ -18,6 +18,7 @@
- #include "sysemu/hw_accel.h"
- #include "sysemu/kvm.h"
- #include "target/i386/kvm_i386.h"
-+#include "qapi/error.h"
- 
- static inline void kvm_apic_set_reg(struct kvm_lapic_state *kapic,
-                                     int reg_id, uint32_t val)
-diff --git a/hw/misc/arm11scu.c b/hw/misc/arm11scu.c
-index befc85f321..9c1fec7825 100644
---- a/hw/misc/arm11scu.c
-+++ b/hw/misc/arm11scu.c
-@@ -13,6 +13,7 @@
- #include "hw/qdev-properties.h"
- #include "qemu/log.h"
- #include "qemu/module.h"
-+#include "qapi/error.h"
- 
- static uint64_t mpcore_scu_read(void *opaque, hwaddr offset,
-                                 unsigned size)
-diff --git a/hw/misc/mps2-scc.c b/hw/misc/mps2-scc.c
-index f2a00d3235..c41e776996 100644
---- a/hw/misc/mps2-scc.c
-+++ b/hw/misc/mps2-scc.c
-@@ -26,6 +26,7 @@
- #include "hw/registerfields.h"
- #include "hw/misc/mps2-scc.h"
- #include "hw/qdev-properties.h"
-+#include "qapi/error.h"
- 
- REG32(CFG0, 0)
- REG32(CFG1, 4)
-diff --git a/hw/pci-bridge/dec.c b/hw/pci-bridge/dec.c
-index fbe781474e..06445e0545 100644
---- a/hw/pci-bridge/dec.c
-+++ b/hw/pci-bridge/dec.c
-@@ -31,6 +31,7 @@
- #include "hw/pci/pci_host.h"
- #include "hw/pci/pci_bridge.h"
- #include "hw/pci/pci_bus.h"
-+#include "qapi/error.h"
- 
- /* debug DEC */
- //#define DEBUG_DEC
-diff --git a/qapi/qapi-dealloc-visitor.c b/qapi/qapi-dealloc-visitor.c
-index 3ee4c7a2e7..e265e29234 100644
---- a/qapi/qapi-dealloc-visitor.c
-+++ b/qapi/qapi-dealloc-visitor.c
-@@ -16,6 +16,7 @@
- #include "qapi/dealloc-visitor.h"
- #include "qapi/qmp/qnull.h"
- #include "qapi/visitor-impl.h"
-+#include "qapi/error.h"
- 
- struct QapiDeallocVisitor
- {
-diff --git a/stubs/xen-hvm.c b/stubs/xen-hvm.c
-index 840a2a0d09..350c762c64 100644
---- a/stubs/xen-hvm.c
-+++ b/stubs/xen-hvm.c
-@@ -12,6 +12,7 @@
- #include "hw/xen/xen.h"
- #include "exec/memory.h"
- #include "qapi/qapi-commands-misc.h"
-+#include "qapi/error.h"
- 
- int xen_pci_slot_get_pirq(PCIDevice *pci_dev, int irq_num)
- {
++static inline void error_propagator_cleanup(ErrorPropagator *prop)
++{
++    error_propagate(prop->errp, prop->local_err);
++}
++
++G_DEFINE_AUTO_CLEANUP_CLEAR_FUNC(ErrorPropagator, error_propagator_cleanup);
++
++/*
++ * ERRP_FUNCTION_BEGIN
++ *
++ * This macro MUST be the first line of EACH function with Error **errp
++ * parameter.
++ *
++ * If errp is NULL or points to error_fatal, it is rewritten to point to
++ * local Error object, which will be automatically propagated to original
++ * errp on function exit (see error_propagator_cleanup).
++ *
++ * After invocation of this macro it is always safe to dereference errp
++ * (as it's not NULL anymore) and to append hint (by error_append_hint)
++ * (as, if it was error_fatal, we swapped it by local_error to be
++ * propagated on cleanup).
++ *
++ * Note: we don't wrap error_abort case, as we want resulting coredump
++ * to point to the place where the error happened, not to error_propagate.
++ */
++#define ERRP_FUNCTION_BEGIN() \
++g_auto(ErrorPropagator) __auto_errp_prop = {.errp = errp}; \
++Error **__local_errp_unused __attribute__ ((unused)) = \
++    (errp = (errp == NULL || *errp == error_fatal ? \
++             &__auto_errp_prop.local_err : errp))
++
++
+ /*
+  * Special error destination to abort on error.
+  * See error_setg() and error_propagate() for details.
 -- 
 2.21.0
 
