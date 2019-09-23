@@ -1,64 +1,104 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iCUe2-0001b8-Vg
-	for mharc-qemu-riscv@gnu.org; Mon, 23 Sep 2019 16:09:15 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:36846)
+	id 1iCUzo-00079G-1l
+	for mharc-qemu-riscv@gnu.org; Mon, 23 Sep 2019 16:31:44 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:39128)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <alistair23@gmail.com>) id 1iCUe0-0001ZA-VQ
- for qemu-riscv@nongnu.org; Mon, 23 Sep 2019 16:09:14 -0400
+ (envelope-from <eblake@redhat.com>) id 1iCUzk-00078V-RK
+ for qemu-riscv@nongnu.org; Mon, 23 Sep 2019 16:31:42 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1iCUdz-0006gv-JL
- for qemu-riscv@nongnu.org; Mon, 23 Sep 2019 16:09:12 -0400
-Received: from mail-lf1-x142.google.com ([2a00:1450:4864:20::142]:41967)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1iCUdw-0006ft-JV; Mon, 23 Sep 2019 16:09:08 -0400
-Received: by mail-lf1-x142.google.com with SMTP id r2so11118725lfn.8;
- Mon, 23 Sep 2019 13:09:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=ZF1KUTZJcXM9LfX7+T1t8fDj2BRmNGXMx083Eh8oPEQ=;
- b=lK7Lk0relsQ4CXWHenQp4gr60qmdBXZyvrrnWEqBnGhSprm3eDMgBQxWtn181cjN5Z
- GMpOgnP6QQ2g9653Z3qEc62jszNzN/ZQs1RQLEDc7go0BXyBbmKQSbQ0LmFGH7YmDVXn
- BwlDMns1Bg2O6Nzd1LOh+97hWyb75pWkCGU1ldFRpdqimRkWfC/xoYFFAYGPpmliF4dP
- 042GDiksOr03728EqSJ8mYenjE7WT/eKl8cgaDW0VCS8x9eN//WuJ4LLIOQda+JI4N3k
- 5V5ho/f189RbRV5KFgks+Sz7eUNYjVjv1absvJv5xP0QsbVVUAWI14BP6uJ6nBcY4Oam
- LTgg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=ZF1KUTZJcXM9LfX7+T1t8fDj2BRmNGXMx083Eh8oPEQ=;
- b=U8SZ9FIFWZEC2VHI0vUVrgbGmpxi65ld0/YI5gd8KMgEVu/eDrR95hMIz5GHEwT+tO
- SPUtTRtkvjt6gYow13Goq0cA00sGC1Jsca0HNRGrmBTeUGGptI85qkDUymXK27y8nQXT
- ipVioa8KqomWt0b+vv4juY29BkLQytHG3nsBlJwILFeD91VveRZNONRygHej8UON2CZg
- T11GSAud/ShfB4v4wQ0ciyErGkwm7vV0EvgDhT/lR7J+JxsYmc0X/dUM84luHJG3050z
- /fnhLsENacP9T9W2Z8HGI7W0tgwgDX1TgkdQsyOTCJpmQ7n7Wci8JIJZG0TqMR/1t3JA
- /wlg==
-X-Gm-Message-State: APjAAAXzO/wmbz5wvv3FDHBjwT7L/3RdKN81CMDjFsODeIhc7l1kjJUi
- h/1MzI23C8d8TzAC+wsz5nJQSVcU6s7tEDwMcUk=
-X-Google-Smtp-Source: APXvYqyVwsaLtj0JUYdFdfixP5PYzxz4vwvLzdJxLntDdxJV1RDctFPRQLgj3zX+QiHiZt9im/5Q478g8wUiqbovdFU=
-X-Received: by 2002:a19:f11c:: with SMTP id p28mr796050lfh.44.1569269347466;
- Mon, 23 Sep 2019 13:09:07 -0700 (PDT)
+ (envelope-from <eblake@redhat.com>) id 1iCUzj-0000eX-4B
+ for qemu-riscv@nongnu.org; Mon, 23 Sep 2019 16:31:40 -0400
+Received: from mx1.redhat.com ([209.132.183.28]:3796)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <eblake@redhat.com>)
+ id 1iCUzS-0000Vf-3H; Mon, 23 Sep 2019 16:31:23 -0400
+Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
+ [10.5.11.11])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mx1.redhat.com (Postfix) with ESMTPS id DAE9E3090FC3;
+ Mon, 23 Sep 2019 20:31:19 +0000 (UTC)
+Received: from [10.3.116.249] (ovpn-116-249.phx2.redhat.com [10.3.116.249])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id AD3F0601AF;
+ Mon, 23 Sep 2019 20:30:35 +0000 (UTC)
+Subject: Re: [RFC v2 7/9] Use auto-propagated errp
+To: Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>,
+ qemu-devel@nongnu.org
+Cc: kraxel@redhat.com, berrange@redhat.com, arei.gonglei@huawei.com,
+ ehabkost@redhat.com, imammedo@redhat.com, lvivier@redhat.com,
+ amit@kernel.org, kwolf@redhat.com, mreitz@redhat.com, ari@tuxera.com,
+ pavel.dovgaluk@ispras.ru, pbonzini@redhat.com, stefanha@redhat.com,
+ jsnow@redhat.com, sw@weilnetz.de, fam@euphon.net, ronniesahlberg@gmail.com,
+ pl@kamp.de, den@openvz.org, armbru@redhat.com, berto@igalia.com,
+ dillaman@redhat.com, wencongyang2@huawei.com, xiechanglong.d@gmail.com,
+ namei.unix@gmail.com, rjones@redhat.com, codyprime@gmail.com,
+ marcandre.lureau@redhat.com, rth@twiddle.net, groug@kaod.org,
+ mst@redhat.com, marcel.apfelbaum@gmail.com, b.galvani@gmail.com,
+ peter.maydell@linaro.org, Andrew.Baumann@microsoft.com, philmd@redhat.com,
+ antonynpavlov@gmail.com, jcd@tribudubois.net, peter.chubb@nicta.com.au,
+ sundeep.lkml@gmail.com, joel@jms.id.au, eric.auger@redhat.com,
+ alistair@alistair23.me, balrogg@gmail.com, edgar.iglesias@gmail.com,
+ sstabellini@kernel.org, anthony.perard@citrix.com, paul.durrant@citrix.com,
+ pburton@wavecomp.com, arikalo@wavecomp.com, clg@kaod.org, andrew@aj.id.au,
+ crwulff@gmail.com, marex@denx.de, david@gibson.dropbear.id.au,
+ pasic@linux.ibm.com, cohuck@redhat.com, borntraeger@de.ibm.com,
+ hpoussin@reactos.org, xiaoguangrong.eric@gmail.com, aurelien@aurel32.net,
+ amarkovic@wavecomp.com, mark.cave-ayland@ilande.co.uk, jasowang@redhat.com,
+ lersek@redhat.com, palmer@sifive.com, sagark@eecs.berkeley.edu,
+ kbastian@mail.uni-paderborn.de, david@redhat.com, thuth@redhat.com,
+ farman@linux.ibm.com, walling@linux.ibm.com, hare@suse.com,
+ michael@walle.cc, atar4qemu@gmail.com, stefanb@linux.ibm.com,
+ samuel.thibault@ens-lyon.org, akrowiak@linux.ibm.com, pmorel@linux.ibm.com,
+ alex.williamson@redhat.com, mdroth@linux.vnet.ibm.com,
+ zhang.zhanghailiang@huawei.com, quintela@redhat.com, dgilbert@redhat.com,
+ rizzo@iet.unipi.it, g.lettieri@iet.unipi.it, v.maffione@gmail.com,
+ jan.kiszka@siemens.com, green@moxielogic.com, shorne@gmail.com,
+ gxt@mprc.pku.edu.cn, jcmvbkbc@gmail.com, qemu-block@nongnu.org,
+ integration@gluster.org, sheepdog@lists.wpkg.org, qemu-arm@nongnu.org,
+ xen-devel@lists.xenproject.org, qemu-ppc@nongnu.org, qemu-s390x@nongnu.org,
+ qemu-riscv@nongnu.org
+References: <20190923161231.22028-1-vsementsov@virtuozzo.com>
+ <20190923161231.22028-8-vsementsov@virtuozzo.com>
+From: Eric Blake <eblake@redhat.com>
+Openpgp: preference=signencrypt
+Autocrypt: addr=eblake@redhat.com; keydata=
+ xsBNBEvHyWwBCACw7DwsQIh0kAbUXyqhfiKAKOTVu6OiMGffw2w90Ggrp4bdVKmCaEXlrVLU
+ xphBM8mb+wsFkU+pq9YR621WXo9REYVIl0FxKeQo9dyQBZ/XvmUMka4NOmHtFg74nvkpJFCD
+ TUNzmqfcjdKhfFV0d7P/ixKQeZr2WP1xMcjmAQY5YvQ2lUoHP43m8TtpB1LkjyYBCodd+LkV
+ GmCx2Bop1LSblbvbrOm2bKpZdBPjncRNob73eTpIXEutvEaHH72LzpzksfcKM+M18cyRH+nP
+ sAd98xIbVjm3Jm4k4d5oQyE2HwOur+trk2EcxTgdp17QapuWPwMfhaNq3runaX7x34zhABEB
+ AAHNHkVyaWMgQmxha2UgPGVibGFrZUByZWRoYXQuY29tPsLAegQTAQgAJAIbAwULCQgHAwUV
+ CgkICwUWAgMBAAIeAQIXgAUCS8fL9QIZAQAKCRCnoWtKJSdDahBHCACbl/5FGkUqJ89GAjeX
+ RjpAeJtdKhujir0iS4CMSIng7fCiGZ0fNJCpL5RpViSo03Q7l37ss+No+dJI8KtAp6ID+PMz
+ wTJe5Egtv/KGUKSDvOLYJ9WIIbftEObekP+GBpWP2+KbpADsc7EsNd70sYxExD3liwVJYqLc
+ Rw7so1PEIFp+Ni9A1DrBR5NaJBnno2PHzHPTS9nmZVYm/4I32qkLXOcdX0XElO8VPDoVobG6
+ gELf4v/vIImdmxLh/w5WctUpBhWWIfQDvSOW2VZDOihm7pzhQodr3QP/GDLfpK6wI7exeu3P
+ pfPtqwa06s1pae3ad13mZGzkBdNKs1HEm8x6zsBNBEvHyWwBCADGkMFzFjmmyqAEn5D+Mt4P
+ zPdO8NatsDw8Qit3Rmzu+kUygxyYbz52ZO40WUu7EgQ5kDTOeRPnTOd7awWDQcl1gGBXgrkR
+ pAlQ0l0ReO57Q0eglFydLMi5bkwYhfY+TwDPMh3aOP5qBXkm4qIYSsxb8A+i00P72AqFb9Q7
+ 3weG/flxSPApLYQE5qWGSXjOkXJv42NGS6o6gd4RmD6Ap5e8ACo1lSMPfTpGzXlt4aRkBfvb
+ NCfNsQikLZzFYDLbQgKBA33BDeV6vNJ9Cj0SgEGOkYyed4I6AbU0kIy1hHAm1r6+sAnEdIKj
+ cHi3xWH/UPrZW5flM8Kqo14OTDkI9EtlABEBAAHCwF8EGAEIAAkFAkvHyWwCGwwACgkQp6Fr
+ SiUnQ2q03wgAmRFGDeXzc58NX0NrDijUu0zx3Lns/qZ9VrkSWbNZBFjpWKaeL1fdVeE4TDGm
+ I5mRRIsStjQzc2R9b+2VBUhlAqY1nAiBDv0Qnt+9cLiuEICeUwlyl42YdwpmY0ELcy5+u6wz
+ mK/jxrYOpzXKDwLq5k4X+hmGuSNWWAN3gHiJqmJZPkhFPUIozZUCeEc76pS/IUN72NfprZmF
+ Dp6/QDjDFtfS39bHSWXKVZUbqaMPqlj/z6Ugk027/3GUjHHr8WkeL1ezWepYDY7WSoXwfoAL
+ 2UXYsMAr/uUncSKlfjvArhsej0S4zbqim2ZY6S8aRWw94J3bSvJR+Nwbs34GPTD4Pg==
+Organization: Red Hat, Inc.
+Message-ID: <59c5ccc7-3d4c-9613-fcd3-97642c1394cd@redhat.com>
+Date: Mon, 23 Sep 2019 15:30:31 -0500
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.8.0
 MIME-Version: 1.0
-References: <cover.1568931866.git.alistair.francis@wdc.com>
- <0a5c141a26fada6d93d06e996a2f24e1b269ec50.1568931866.git.alistair.francis@wdc.com>
- <CAEUhbmVvDKQqQYE-riq=cvSrCe_NMoW_KDsLjh8CVHRUhJvk9A@mail.gmail.com>
- <CAKmqyKOofA3U+8kjMkzQ0sNd1=uwJHq3c9eaLZdoNCb7=e-PAw@mail.gmail.com>
- <CAEUhbmWu_OTGmUBTcMg9uvm36-fDQheSSiwH5mjnokJSrLvoBA@mail.gmail.com>
-In-Reply-To: <CAEUhbmWu_OTGmUBTcMg9uvm36-fDQheSSiwH5mjnokJSrLvoBA@mail.gmail.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 23 Sep 2019 13:08:41 -0700
-Message-ID: <CAKmqyKN8g767av=FeCe_UsapPd7cPCNGWzEx7ByF9QYu-3NbxQ@mail.gmail.com>
-Subject: Re: [PATCH v1 5/6] riscv/virt: Add the PFlash CFI01 device
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Alistair Francis <alistair.francis@wdc.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Palmer Dabbelt <palmer@sifive.com>
-Content-Type: text/plain; charset="UTF-8"
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2a00:1450:4864:20::142
+In-Reply-To: <20190923161231.22028-8-vsementsov@virtuozzo.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+ (mx1.redhat.com [10.5.110.43]); Mon, 23 Sep 2019 20:31:20 +0000 (UTC)
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+X-Received-From: 209.132.183.28
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -70,117 +110,241 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Sep 2019 20:09:14 -0000
+X-List-Received-Date: Mon, 23 Sep 2019 20:31:42 -0000
 
-On Sat, Sep 21, 2019 at 7:15 PM Bin Meng <bmeng.cn@gmail.com> wrote:
->
-> On Sat, Sep 21, 2019 at 6:16 AM Alistair Francis <alistair23@gmail.com> wrote:
-> >
-> > On Thu, Sep 19, 2019 at 10:15 PM Bin Meng <bmeng.cn@gmail.com> wrote:
-> > >
-> > > On Fri, Sep 20, 2019 at 6:36 AM Alistair Francis
-> > > <alistair.francis@wdc.com> wrote:
-> > > >
-> > > > Add the CFI01 PFlash to the RISC-V virt board. This is the same PFlash
-> > > > from the ARM Virt board and the implementation is based on the ARM Virt
-> > > > board. This allows users to specify flash files from the command line.
-> > > >
-> > > > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> > > > ---
-> > > >  hw/riscv/Kconfig        |  1 +
-> > > >  hw/riscv/virt.c         | 81 +++++++++++++++++++++++++++++++++++++++++
-> > > >  include/hw/riscv/virt.h |  3 ++
-> > > >  3 files changed, 85 insertions(+)
-> > > >
-> > > > diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-> > > > index fb19b2df3a..b12660b9f8 100644
-> > > > --- a/hw/riscv/Kconfig
-> > > > +++ b/hw/riscv/Kconfig
-> > > > @@ -36,4 +36,5 @@ config RISCV_VIRT
-> > > >      select SERIAL
-> > > >      select VIRTIO_MMIO
-> > > >      select PCI_EXPRESS_GENERIC_BRIDGE
-> > > > +    select PFLASH_CFI01
-> > > >      select SIFIVE
-> > > > diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> > > > index d36f5625ec..ca002ecea7 100644
-> > > > --- a/hw/riscv/virt.c
-> > > > +++ b/hw/riscv/virt.c
-> > > > @@ -26,6 +26,7 @@
-> > > >  #include "hw/boards.h"
-> > > >  #include "hw/loader.h"
-> > > >  #include "hw/sysbus.h"
-> > > > +#include "hw/qdev-properties.h"
-> > > >  #include "hw/char/serial.h"
-> > > >  #include "target/riscv/cpu.h"
-> > > >  #include "hw/riscv/riscv_hart.h"
-> > > > @@ -61,12 +62,72 @@ static const struct MemmapEntry {
-> > > >      [VIRT_PLIC] =        {  0xc000000,     0x4000000 },
-> > > >      [VIRT_UART0] =       { 0x10000000,         0x100 },
-> > > >      [VIRT_VIRTIO] =      { 0x10001000,        0x1000 },
-> > > > +    [VIRT_FLASH] =       { 0x20000000,     0x2000000 },
-> > > >      [VIRT_DRAM] =        { 0x80000000,           0x0 },
-> > > >      [VIRT_PCIE_MMIO] =   { 0x40000000,    0x40000000 },
-> > > >      [VIRT_PCIE_PIO] =    { 0x03000000,    0x00010000 },
-> > > >      [VIRT_PCIE_ECAM] =   { 0x30000000,    0x10000000 },
-> > > >  };
-> > > >
-> > > > +#define VIRT_FLASH_SECTOR_SIZE (256 * KiB)
-> > > > +
-> > > > +static PFlashCFI01 *virt_flash_create1(RISCVVirtState *s,
-> > > > +                                       const char *name,
-> > > > +                                       const char *alias_prop_name)
-> > > > +{
-> > > > +    /*
-> > > > +     * Create a single flash device.  We use the same parameters as
-> > > > +     * the flash devices on the ARM virt board.
-> > > > +     */
-> > > > +    DeviceState *dev = qdev_create(NULL, TYPE_PFLASH_CFI01);
-> > > > +
-> > > > +    qdev_prop_set_uint64(dev, "sector-length", VIRT_FLASH_SECTOR_SIZE);
-> > > > +    qdev_prop_set_uint8(dev, "width", 4);
-> > > > +    qdev_prop_set_uint8(dev, "device-width", 2);
-> > > > +    qdev_prop_set_bit(dev, "big-endian", false);
-> > > > +    qdev_prop_set_uint16(dev, "id0", 0x89);
-> > > > +    qdev_prop_set_uint16(dev, "id1", 0x18);
-> > > > +    qdev_prop_set_uint16(dev, "id2", 0x00);
-> > > > +    qdev_prop_set_uint16(dev, "id3", 0x00);
-> > > > +    qdev_prop_set_string(dev, "name", name);
-> > >
-> > > alias_prop_name is unused? ARM virt has 2 more calls in the same function here.
-> >
-> > Yep, you are right. I have removed this.
->
-> Any reason of removing this?
+On 9/23/19 11:12 AM, Vladimir Sementsov-Ogievskiy wrote:
+> This commit is generated by command
+> 
+> git grep -l 'Error \*\*errp' | while read f; \
+> do spatch --sp-file \
+> scripts/coccinelle/auto-propagated-errp.cocci --in-place $f; done
+> 
 
-The way the virt machine was structured didn't work with the options.
-I have fixed that in v2 of the series.
+As mentioned in your cover letter, this fails syntax-check and
+compilation without squashing in some followups; if we can't improve the
+.cocci script to do it automatically, then manually squashing in
+cleanups (and documenting what types of cleanups they were) is fine.
+(The goal for a mechanical patch like this is to make it easy enough to
+automate downstream, even where the file contents are changed, but where
+the process for creating those changes are the same).
 
-Alistair
+> Signed-off-by: Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>
+> ---
 
->
-> >
-> > >
-> > > > +
-> > > > +    return PFLASH_CFI01(dev);
-> > > > +}
-> > > > +
-> > > > +static void virt_flash_create(RISCVVirtState *s)
-> > > > +{
-> > > > +    s->flash[0] = virt_flash_create1(s, "virt.flash0", "pflash0");
-> > > > +    s->flash[1] = virt_flash_create1(s, "virt.flash1", "pflash1");
-> > >
-> > > I don't think we should mirror what is used on ARM virt board to
-> > > create 2 flash for sifive_u. For ARM virt, there are 2 flashes because
-> > > they need distinguish secure and non-secure. For sifive_u, only one is
-> > > enough.
-> >
-> > I went back and forward about 1 or 2. Two seems more usable as maybe
-> > someone wants to include two pflash files? The Xilinx machine also has
-> > two so I'm kind of used to 2, but I'm not really fussed.
-> >
-> > Unless anyone else wants two I will change it to 1.
->
-> Regards,
-> Bin
+Spot-checking
+
+>  block/io.c                          |  11 +-
+
+>  block/nbd.c                         |  44 +++---
+
+>  qapi/qapi-visit-core.c              |  53 ++-----
+
+just to see how it looks.
+
+> +++ b/block/io.c
+> @@ -136,7 +136,6 @@ static void bdrv_merge_limits(BlockLimits *dst, const BlockLimits *src)
+>  void bdrv_refresh_limits(BlockDriverState *bs, Error **errp)
+>  {
+>      BlockDriver *drv = bs->drv;
+> -    Error *local_err = NULL;
+>  
+
+Umm, no insertion of ERR_FUNCTION_BEGIN().  Oops.
+
+>      memset(&bs->bl, 0, sizeof(bs->bl));
+>  
+> @@ -151,9 +150,8 @@ void bdrv_refresh_limits(BlockDriverState *bs, Error **errp)
+>  
+>      /* Take some limits from the children as a default */
+>      if (bs->file) {
+> -        bdrv_refresh_limits(bs->file->bs, &local_err);
+> -        if (local_err) {
+> -            error_propagate(errp, local_err);
+> +        bdrv_refresh_limits(bs->file->bs, errp);
+> +        if (*errp) {
+>              return;
+>          }
+>          bdrv_merge_limits(&bs->bl, &bs->file->bs->bl);
+> @@ -166,9 +164,8 @@ void bdrv_refresh_limits(BlockDriverState *bs, Error **errp)
+>      }
+>  
+>      if (bs->backing) {
+> -        bdrv_refresh_limits(bs->backing->bs, &local_err);
+> -        if (local_err) {
+> -            error_propagate(errp, local_err);
+> +        bdrv_refresh_limits(bs->backing->bs, errp);
+> +        if (*errp) {
+>              return;
+
+Rest of the changes in this file are good if the macro gets added correctly.
+
+>          }
+>          bdrv_merge_limits(&bs->bl, &bs->backing->bs->bl);
+
+> +++ b/block/nbd.c
+> @@ -808,7 +808,6 @@ static int nbd_co_receive_cmdread_reply(BDRVNBDState *s, uint64_t handle,
+>      NBDReplyChunkIter iter;
+>      NBDReply reply;
+>      void *payload = NULL;
+> -    Error *local_err = NULL;
+
+Recurring problem of not inserting the macro as expected.
+
+>  
+>      NBD_FOREACH_REPLY_CHUNK(s, iter, handle, s->info.structured_reply,
+>                              qiov, &reply, &payload)
+> @@ -827,20 +826,20 @@ static int nbd_co_receive_cmdread_reply(BDRVNBDState *s, uint64_t handle,
+>              break;
+>          case NBD_REPLY_TYPE_OFFSET_HOLE:
+>              ret = nbd_parse_offset_hole_payload(s, &reply.structured, payload,
+> -                                                offset, qiov, &local_err);
+> +                                                offset, qiov, errp);
+>              if (ret < 0) {
+>                  nbd_channel_error(s, ret);
+> -                nbd_iter_channel_error(&iter, ret, &local_err);
+> +                nbd_iter_channel_error(&iter, ret, errp);
+>              }
+>              break;
+>          default:
+>              if (!nbd_reply_type_is_error(chunk->type)) {
+>                  /* not allowed reply type */
+>                  nbd_channel_error(s, -EINVAL);
+> -                error_setg(&local_err,
+> +                error_setg(errp,
+>                             "Unexpected reply type: %d (%s) for CMD_READ",
+
+Could almost fold these lines (but I'm not asking you to; keeping this
+patch as mechanical as possible is fine).
+
+>                             chunk->type, nbd_reply_type_lookup(chunk->type));
+> -                nbd_iter_channel_error(&iter, -EINVAL, &local_err);
+> +                nbd_iter_channel_error(&iter, -EINVAL, errp);
+>              }
+>          }
+>  
+> @@ -861,7 +860,6 @@ static int nbd_co_receive_blockstatus_reply(BDRVNBDState *s,
+>      NBDReplyChunkIter iter;
+>      NBDReply reply;
+>      void *payload = NULL;
+> -    Error *local_err = NULL;
+>      bool received = false;
+
+Oops on the macro.
+
+> @@ -1174,15 +1172,13 @@ static QIOChannelSocket *nbd_establish_connection(SocketAddress *saddr,
+>                                                    Error **errp)
+>  {
+>      QIOChannelSocket *sioc;
+> -    Error *local_err = NULL;
+>  
+>      sioc = qio_channel_socket_new();
+>      qio_channel_set_name(QIO_CHANNEL(sioc), "nbd-client");
+>  
+> -    qio_channel_socket_connect_sync(sioc, saddr, &local_err);
+> -    if (local_err) {
+> +    qio_channel_socket_connect_sync(sioc, saddr, errp);
+> +    if (*errp) {
+>          object_unref(OBJECT(sioc));
+> -        error_propagate(errp, local_err);
+>          return NULL;
+
+But getting rid of error_propagate() is nice.
+
+Did you grep for instances of error_propagate() after your mechanical
+patch, to see what else the Coccinelle script might have missed?
+
+
+> +++ b/qapi/opts-visitor.c
+> @@ -275,6 +275,7 @@ opts_next_list(Visitor *v, GenericList *tail, size_t size)
+>  static void
+>  opts_check_list(Visitor *v, Error **errp)
+>  {
+> +	ERRP_FUNCTION_BEGIN();
+>      /*
+>       * Unvisited list elements will be reported later when checking
+>       * whether unvisited struct members remain.
+
+Here the macro got added, but with no obvious benefit later on (although
+we also argued that adding it even when it makes no difference is not
+bad, if that's easier to automate for style checking).
+
+> diff --git a/qapi/qapi-dealloc-visitor.c b/qapi/qapi-dealloc-visitor.c
+> index d192724b13..3ee4c7a2e7 100644
+> --- a/qapi/qapi-dealloc-visitor.c
+> +++ b/qapi/qapi-dealloc-visitor.c
+> @@ -25,6 +25,7 @@ struct QapiDeallocVisitor
+>  static void qapi_dealloc_start_struct(Visitor *v, const char *name, void **obj,
+>                                        size_t unused, Error **errp)
+>  {
+> +	ERRP_FUNCTION_BEGIN();
+>  }
+
+Here's an example where exempting empty functions would be nicer.
+
+
+> +++ b/qapi/qapi-visit-core.c
+> @@ -39,18 +39,15 @@ void visit_free(Visitor *v)
+>  void visit_start_struct(Visitor *v, const char *name, void **obj,
+>                          size_t size, Error **errp)
+>  {
+> -    Error *err = NULL;
+> -
+
+Oops, macro not added.
+
+>      trace_visit_start_struct(v, name, obj, size);
+>      if (obj) {
+>          assert(size);
+>          assert(!(v->type & VISITOR_OUTPUT) || *obj);
+>      }
+> -    v->start_struct(v, name, obj, size, &err);
+> +    v->start_struct(v, name, obj, size, errp);
+>      if (obj && (v->type & VISITOR_INPUT)) {
+> -        assert(!err != !*obj);
+> +        assert(!*errp != !*obj);
+>      }
+> -    error_propagate(errp, err);
+>  }
+
+But the cleanup is sane, once the macro is present.
+
+> @@ -152,12 +143,10 @@ void visit_type_int(Visitor *v, const char *name, int64_t *obj, Error **errp)
+>  static void visit_type_uintN(Visitor *v, uint64_t *obj, const char *name,
+>                               uint64_t max, const char *type, Error **errp)
+>  {
+> -    Error *err = NULL;
+>      uint64_t value = *obj;
+>  
+> -    v->type_uint64(v, name, &value, &err);
+> -    if (err) {
+> -        error_propagate(errp, err);
+> +    v->type_uint64(v, name, &value, errp);
+> +    if (*errp) {
+>      } else if (value > max) {
+>          error_setg(errp, QERR_INVALID_PARAMETER_VALUE,
+>                     name ? name : "null", type);
+
+Results in an empty if which looks funny.  This one could be a manual
+touchup later.
+
+> @@ -211,12 +200,10 @@ static void visit_type_intN(Visitor *v, int64_t *obj, const char *name,
+>                              int64_t min, int64_t max, const char *type,
+>                              Error **errp)
+>  {
+> -    Error *err = NULL;
+>      int64_t value = *obj;
+>  
+> -    v->type_int64(v, name, &value, &err);
+> -    if (err) {
+> -        error_propagate(errp, err);
+> +    v->type_int64(v, name, &value, errp);
+> +    if (*errp) {
+>      } else if (value < min || value > max) {
+
+and again
+
+-- 
+Eric Blake, Principal Software Engineer
+Red Hat, Inc.           +1-919-301-3226
+Virtualization:  qemu.org | libvirt.org
 
