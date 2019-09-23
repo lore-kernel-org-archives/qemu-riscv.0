@@ -1,21 +1,21 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iCRAa-0003To-FN
+	id 1iCRAa-0003UG-Q7
 	for mharc-qemu-riscv@gnu.org; Mon, 23 Sep 2019 12:26:36 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:57554)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:57596)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <vsementsov@virtuozzo.com>) id 1iCQxi-0002f5-Pf
- for qemu-riscv@nongnu.org; Mon, 23 Sep 2019 12:13:21 -0400
+ (envelope-from <vsementsov@virtuozzo.com>) id 1iCQxn-0002fy-Ri
+ for qemu-riscv@nongnu.org; Mon, 23 Sep 2019 12:13:28 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <vsementsov@virtuozzo.com>) id 1iCQxh-000425-5Z
- for qemu-riscv@nongnu.org; Mon, 23 Sep 2019 12:13:18 -0400
-Received: from relay.sw.ru ([185.231.240.75]:39508)
+ (envelope-from <vsementsov@virtuozzo.com>) id 1iCQxl-00043Z-R2
+ for qemu-riscv@nongnu.org; Mon, 23 Sep 2019 12:13:23 -0400
+Received: from relay.sw.ru ([185.231.240.75]:39528)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <vsementsov@virtuozzo.com>)
- id 1iCQxM-0003a8-Tg; Mon, 23 Sep 2019 12:12:57 -0400
+ id 1iCQxM-0003aD-9p; Mon, 23 Sep 2019 12:12:56 -0400
 Received: from [10.94.3.0] (helo=kvm.qa.sw.ru)
  by relay.sw.ru with esmtp (Exim 4.92.2)
  (envelope-from <vsementsov@virtuozzo.com>)
- id 1iCQwy-0001Fp-Od; Mon, 23 Sep 2019 19:12:32 +0300
+ id 1iCQx0-0001Fp-Dl; Mon, 23 Sep 2019 19:12:34 +0300
 From: Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>
 To: qemu-devel@nongnu.org
 Cc: kraxel@redhat.com, berrange@redhat.com, arei.gonglei@huawei.com,
@@ -52,9 +52,10 @@ Cc: kraxel@redhat.com, berrange@redhat.com, arei.gonglei@huawei.com,
  integration@gluster.org, sheepdog@lists.wpkg.org, qemu-arm@nongnu.org,
  xen-devel@lists.xenproject.org, qemu-ppc@nongnu.org, qemu-s390x@nongnu.org,
  qemu-riscv@nongnu.org, vsementsov@virtuozzo.com
-Subject: [RFC v2 2/9] qapi/error: add (Error **errp) cleaning APIs
-Date: Mon, 23 Sep 2019 19:12:24 +0300
-Message-Id: <20190923161231.22028-3-vsementsov@virtuozzo.com>
+Subject: [RFC v2 6/9] scripts: add coccinelle script to use auto propagated
+ errp
+Date: Mon, 23 Sep 2019 19:12:28 +0300
+Message-Id: <20190923161231.22028-7-vsementsov@virtuozzo.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <20190923161231.22028-1-vsementsov@virtuozzo.com>
 References: <20190923161231.22028-1-vsementsov@virtuozzo.com>
@@ -74,64 +75,102 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Sep 2019 16:13:24 -0000
+X-List-Received-Date: Mon, 23 Sep 2019 16:13:31 -0000
 
 Signed-off-by: Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>
 ---
- include/qapi/error.h | 22 ++++++++++++++++++++++
- util/error.c         |  6 +++---
- 2 files changed, 25 insertions(+), 3 deletions(-)
+ scripts/coccinelle/auto-propagated-errp.cocci | 82 +++++++++++++++++++
+ 1 file changed, 82 insertions(+)
+ create mode 100644 scripts/coccinelle/auto-propagated-errp.cocci
 
-diff --git a/include/qapi/error.h b/include/qapi/error.h
-index f6f4fa0fac..551385aa91 100644
---- a/include/qapi/error.h
-+++ b/include/qapi/error.h
-@@ -297,6 +297,28 @@ void warn_report_err(Error *err);
-  */
- void error_report_err(Error *err);
- 
-+/*
-+ * Functions to clean Error **errp: call corresponding Error *err cleaning
-+ * function an set pointer to NULL
-+ */
-+static inline void error_free_errp(Error **errp)
-+{
-+    error_free(*errp_in);
-+    *errp_in = NULL;
-+}
+diff --git a/scripts/coccinelle/auto-propagated-errp.cocci b/scripts/coccinelle/auto-propagated-errp.cocci
+new file mode 100644
+index 0000000000..1a3f006f0b
+--- /dev/null
++++ b/scripts/coccinelle/auto-propagated-errp.cocci
+@@ -0,0 +1,82 @@
++@@
++identifier fn;
++identifier local_err;
++@@
 +
-+static inline void error_report_errp(Error **errp)
-+{
-+    error_report_err(*errp_in);
-+    *errp_in = NULL;
-+}
++ fn(..., Error **errp)
++ {
+++    ERRP_FUNCTION_BEGIN();
++ }
 +
-+static inline void warn_report_errp(Error **errp)
-+{
-+    warn_report_err(*errp_in);
-+    *errp_in = NULL;
-+}
++@rule1@
++identifier fn;
++identifier local_err;
++@@
 +
- /*
-  * Convenience function to error_prepend(), warn_report() and free @err.
-  */
-diff --git a/util/error.c b/util/error.c
-index d4532ce318..dfba091757 100644
---- a/util/error.c
-+++ b/util/error.c
-@@ -273,9 +273,9 @@ void error_free(Error *err)
- 
- void error_free_or_abort(Error **errp)
- {
--    assert(errp && *errp);
--    error_free(*errp);
--    *errp = NULL;
-+    assert(errp_in && *errp_in);
-+    error_free(*errp_in);
-+    *errp_in = NULL;
- }
- 
- void error_propagate(Error **dst_errp, Error *local_err)
++ fn(..., Error **errp)
++ {
++     <...
++-    Error *local_err = NULL;
++     ...>
++ }
++
++@@
++identifier rule1.fn;
++identifier rule1.local_err;
++identifier out;
++@@
++
++ fn(...)
++ {
++     <...
++-    goto out;
+++    return;
++     ...>
++- out:
++-    error_propagate(errp, local_err);
++ }
++
++@@
++identifier rule1.fn;
++identifier rule1.local_err;
++@@
++
++ fn(...)
++ {
++     <...
++(
++-    error_free(local_err);
++-    local_err = NULL;
+++    error_free_errp(errp);
++|
++-    error_free(local_err);
+++    error_free_errp(errp);
++|
++-    error_report_err(local_err);
+++    error_report_errp(errp);
++|
++-    warn_report_err(local_err);
+++    warn_report_errp(errp);
++|
++-    error_propagate(errp, local_err);
++)
++     ...>
++ }
++
++@@
++identifier rule1.fn;
++identifier rule1.local_err;
++@@
++
++ fn(...)
++ {
++     <...
++(
++-    &local_err
+++    errp
++|
++-    local_err
+++    *errp
++)
++     ...>
++ }
 -- 
 2.21.0
 
