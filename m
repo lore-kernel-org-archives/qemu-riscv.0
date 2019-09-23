@@ -1,64 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iCUzo-00079G-1l
-	for mharc-qemu-riscv@gnu.org; Mon, 23 Sep 2019 16:31:44 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:39128)
+	id 1iCVvL-0007NV-8n
+	for mharc-qemu-riscv@gnu.org; Mon, 23 Sep 2019 17:31:11 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:46888)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <eblake@redhat.com>) id 1iCUzk-00078V-RK
- for qemu-riscv@nongnu.org; Mon, 23 Sep 2019 16:31:42 -0400
+ (envelope-from <eblake@redhat.com>) id 1iCVvH-0007Jz-Lj
+ for qemu-riscv@nongnu.org; Mon, 23 Sep 2019 17:31:08 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <eblake@redhat.com>) id 1iCUzj-0000eX-4B
- for qemu-riscv@nongnu.org; Mon, 23 Sep 2019 16:31:40 -0400
-Received: from mx1.redhat.com ([209.132.183.28]:3796)
+ (envelope-from <eblake@redhat.com>) id 1iCVvG-0000dO-IN
+ for qemu-riscv@nongnu.org; Mon, 23 Sep 2019 17:31:07 -0400
+Received: from mx1.redhat.com ([209.132.183.28]:37560)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <eblake@redhat.com>)
- id 1iCUzS-0000Vf-3H; Mon, 23 Sep 2019 16:31:23 -0400
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
- [10.5.11.11])
+ id 1iCVv5-0000ZX-NE; Mon, 23 Sep 2019 17:30:55 -0400
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
+ [10.5.11.15])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id DAE9E3090FC3;
- Mon, 23 Sep 2019 20:31:19 +0000 (UTC)
+ by mx1.redhat.com (Postfix) with ESMTPS id 6C9B559449;
+ Mon, 23 Sep 2019 21:30:51 +0000 (UTC)
 Received: from [10.3.116.249] (ovpn-116-249.phx2.redhat.com [10.3.116.249])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id AD3F0601AF;
- Mon, 23 Sep 2019 20:30:35 +0000 (UTC)
-Subject: Re: [RFC v2 7/9] Use auto-propagated errp
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 4B7125D71C;
+ Mon, 23 Sep 2019 21:30:02 +0000 (UTC)
+Subject: Re: [RFC v2 6/9] scripts: add coccinelle script to use auto
+ propagated errp
 To: Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>,
  qemu-devel@nongnu.org
-Cc: kraxel@redhat.com, berrange@redhat.com, arei.gonglei@huawei.com,
- ehabkost@redhat.com, imammedo@redhat.com, lvivier@redhat.com,
- amit@kernel.org, kwolf@redhat.com, mreitz@redhat.com, ari@tuxera.com,
- pavel.dovgaluk@ispras.ru, pbonzini@redhat.com, stefanha@redhat.com,
- jsnow@redhat.com, sw@weilnetz.de, fam@euphon.net, ronniesahlberg@gmail.com,
- pl@kamp.de, den@openvz.org, armbru@redhat.com, berto@igalia.com,
- dillaman@redhat.com, wencongyang2@huawei.com, xiechanglong.d@gmail.com,
- namei.unix@gmail.com, rjones@redhat.com, codyprime@gmail.com,
- marcandre.lureau@redhat.com, rth@twiddle.net, groug@kaod.org,
- mst@redhat.com, marcel.apfelbaum@gmail.com, b.galvani@gmail.com,
- peter.maydell@linaro.org, Andrew.Baumann@microsoft.com, philmd@redhat.com,
- antonynpavlov@gmail.com, jcd@tribudubois.net, peter.chubb@nicta.com.au,
- sundeep.lkml@gmail.com, joel@jms.id.au, eric.auger@redhat.com,
- alistair@alistair23.me, balrogg@gmail.com, edgar.iglesias@gmail.com,
- sstabellini@kernel.org, anthony.perard@citrix.com, paul.durrant@citrix.com,
- pburton@wavecomp.com, arikalo@wavecomp.com, clg@kaod.org, andrew@aj.id.au,
- crwulff@gmail.com, marex@denx.de, david@gibson.dropbear.id.au,
- pasic@linux.ibm.com, cohuck@redhat.com, borntraeger@de.ibm.com,
- hpoussin@reactos.org, xiaoguangrong.eric@gmail.com, aurelien@aurel32.net,
- amarkovic@wavecomp.com, mark.cave-ayland@ilande.co.uk, jasowang@redhat.com,
- lersek@redhat.com, palmer@sifive.com, sagark@eecs.berkeley.edu,
- kbastian@mail.uni-paderborn.de, david@redhat.com, thuth@redhat.com,
- farman@linux.ibm.com, walling@linux.ibm.com, hare@suse.com,
- michael@walle.cc, atar4qemu@gmail.com, stefanb@linux.ibm.com,
- samuel.thibault@ens-lyon.org, akrowiak@linux.ibm.com, pmorel@linux.ibm.com,
- alex.williamson@redhat.com, mdroth@linux.vnet.ibm.com,
- zhang.zhanghailiang@huawei.com, quintela@redhat.com, dgilbert@redhat.com,
- rizzo@iet.unipi.it, g.lettieri@iet.unipi.it, v.maffione@gmail.com,
- jan.kiszka@siemens.com, green@moxielogic.com, shorne@gmail.com,
- gxt@mprc.pku.edu.cn, jcmvbkbc@gmail.com, qemu-block@nongnu.org,
- integration@gluster.org, sheepdog@lists.wpkg.org, qemu-arm@nongnu.org,
- xen-devel@lists.xenproject.org, qemu-ppc@nongnu.org, qemu-s390x@nongnu.org,
- qemu-riscv@nongnu.org
+Cc: stefanha@redhat.com, jan.kiszka@siemens.com,
+ zhang.zhanghailiang@huawei.com, qemu-block@nongnu.org, arikalo@wavecomp.com,
+ pasic@linux.ibm.com, hpoussin@reactos.org, anthony.perard@citrix.com,
+ samuel.thibault@ens-lyon.org, philmd@redhat.com, green@moxielogic.com,
+ lvivier@redhat.com, ehabkost@redhat.com, xiechanglong.d@gmail.com,
+ pl@kamp.de, dgilbert@redhat.com, b.galvani@gmail.com, eric.auger@redhat.com,
+ alex.williamson@redhat.com, ronniesahlberg@gmail.com, rth@twiddle.net,
+ kwolf@redhat.com, andrew@aj.id.au, crwulff@gmail.com,
+ sundeep.lkml@gmail.com, michael@walle.cc, qemu-ppc@nongnu.org,
+ kbastian@mail.uni-paderborn.de, imammedo@redhat.com, fam@euphon.net,
+ peter.maydell@linaro.org, sheepdog@lists.wpkg.org, david@redhat.com,
+ palmer@sifive.com, thuth@redhat.com, jcmvbkbc@gmail.com, den@openvz.org,
+ hare@suse.com, sstabellini@kernel.org, arei.gonglei@huawei.com,
+ marcel.apfelbaum@gmail.com, namei.unix@gmail.com, atar4qemu@gmail.com,
+ amit@kernel.org, sw@weilnetz.de, groug@kaod.org, qemu-s390x@nongnu.org,
+ qemu-arm@nongnu.org, peter.chubb@nicta.com.au, clg@kaod.org,
+ shorne@gmail.com, qemu-riscv@nongnu.org, cohuck@redhat.com,
+ amarkovic@wavecomp.com, aurelien@aurel32.net, pburton@wavecomp.com,
+ sagark@eecs.berkeley.edu, jasowang@redhat.com, kraxel@redhat.com,
+ edgar.iglesias@gmail.com, gxt@mprc.pku.edu.cn, quintela@redhat.com,
+ mdroth@linux.vnet.ibm.com, lersek@redhat.com, borntraeger@de.ibm.com,
+ antonynpavlov@gmail.com, joel@jms.id.au, xen-devel@lists.xenproject.org,
+ integration@gluster.org, balrogg@gmail.com, Andrew.Baumann@microsoft.com,
+ mreitz@redhat.com, walling@linux.ibm.com, mst@redhat.com,
+ mark.cave-ayland@ilande.co.uk, v.maffione@gmail.com, marex@denx.de,
+ armbru@redhat.com, marcandre.lureau@redhat.com, alistair@alistair23.me,
+ paul.durrant@citrix.com, pavel.dovgaluk@ispras.ru, g.lettieri@iet.unipi.it,
+ rizzo@iet.unipi.it, david@gibson.dropbear.id.au, akrowiak@linux.ibm.com,
+ berrange@redhat.com, xiaoguangrong.eric@gmail.com, pmorel@linux.ibm.com,
+ wencongyang2@huawei.com, jcd@tribudubois.net, pbonzini@redhat.com,
+ stefanb@linux.ibm.com
 References: <20190923161231.22028-1-vsementsov@virtuozzo.com>
- <20190923161231.22028-8-vsementsov@virtuozzo.com>
+ <20190923161231.22028-7-vsementsov@virtuozzo.com>
+ <57e97ed0-b1a1-d209-fc23-cf41ec467157@redhat.com>
 From: Eric Blake <eblake@redhat.com>
 Openpgp: preference=signencrypt
 Autocrypt: addr=eblake@redhat.com; keydata=
@@ -85,18 +85,18 @@ Autocrypt: addr=eblake@redhat.com; keydata=
  Dp6/QDjDFtfS39bHSWXKVZUbqaMPqlj/z6Ugk027/3GUjHHr8WkeL1ezWepYDY7WSoXwfoAL
  2UXYsMAr/uUncSKlfjvArhsej0S4zbqim2ZY6S8aRWw94J3bSvJR+Nwbs34GPTD4Pg==
 Organization: Red Hat, Inc.
-Message-ID: <59c5ccc7-3d4c-9613-fcd3-97642c1394cd@redhat.com>
-Date: Mon, 23 Sep 2019 15:30:31 -0500
+Message-ID: <7cffb999-35e5-742e-7241-6da4777885bf@redhat.com>
+Date: Mon, 23 Sep 2019 16:29:59 -0500
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
  Thunderbird/60.8.0
 MIME-Version: 1.0
-In-Reply-To: <20190923161231.22028-8-vsementsov@virtuozzo.com>
+In-Reply-To: <57e97ed0-b1a1-d209-fc23-cf41ec467157@redhat.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
 X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.43]); Mon, 23 Sep 2019 20:31:20 +0000 (UTC)
+ (mx1.redhat.com [10.5.110.39]); Mon, 23 Sep 2019 21:30:51 +0000 (UTC)
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
 X-Received-From: 209.132.183.28
 X-BeenThere: qemu-riscv@nongnu.org
@@ -110,238 +110,42 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Sep 2019 20:31:42 -0000
+X-List-Received-Date: Mon, 23 Sep 2019 21:31:09 -0000
 
-On 9/23/19 11:12 AM, Vladimir Sementsov-Ogievskiy wrote:
-> This commit is generated by command
+On 9/23/19 3:05 PM, Eric Blake wrote:
+
+> Does running this Coccinelle script 2 times in a row add a second
+> ERRP_FUNCTION_BEGIN() line?  We want it to be idempotent (no changes on
+> a second run).  (Admittedly, I did not actually test that yet).  Also, I
+> don't know if this can be tweaked to avoid adding the line to a function
+> with an empty body, maybe:
 > 
-> git grep -l 'Error \*\*errp' | while read f; \
-> do spatch --sp-file \
-> scripts/coccinelle/auto-propagated-errp.cocci --in-place $f; done
-> 
-
-As mentioned in your cover letter, this fails syntax-check and
-compilation without squashing in some followups; if we can't improve the
-.cocci script to do it automatically, then manually squashing in
-cleanups (and documenting what types of cleanups they were) is fine.
-(The goal for a mechanical patch like this is to make it easy enough to
-automate downstream, even where the file contents are changed, but where
-the process for creating those changes are the same).
-
-> Signed-off-by: Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>
-> ---
-
-Spot-checking
-
->  block/io.c                          |  11 +-
-
->  block/nbd.c                         |  44 +++---
-
->  qapi/qapi-visit-core.c              |  53 ++-----
-
-just to see how it looks.
-
-> +++ b/block/io.c
-> @@ -136,7 +136,6 @@ static void bdrv_merge_limits(BlockLimits *dst, const BlockLimits *src)
->  void bdrv_refresh_limits(BlockDriverState *bs, Error **errp)
+>  fn(..., Error **errp, ...)
 >  {
->      BlockDriver *drv = bs->drv;
-> -    Error *local_err = NULL;
->  
-
-Umm, no insertion of ERR_FUNCTION_BEGIN().  Oops.
-
->      memset(&bs->bl, 0, sizeof(bs->bl));
->  
-> @@ -151,9 +150,8 @@ void bdrv_refresh_limits(BlockDriverState *bs, Error **errp)
->  
->      /* Take some limits from the children as a default */
->      if (bs->file) {
-> -        bdrv_refresh_limits(bs->file->bs, &local_err);
-> -        if (local_err) {
-> -            error_propagate(errp, local_err);
-> +        bdrv_refresh_limits(bs->file->bs, errp);
-> +        if (*errp) {
->              return;
->          }
->          bdrv_merge_limits(&bs->bl, &bs->file->bs->bl);
-> @@ -166,9 +164,8 @@ void bdrv_refresh_limits(BlockDriverState *bs, Error **errp)
->      }
->  
->      if (bs->backing) {
-> -        bdrv_refresh_limits(bs->backing->bs, &local_err);
-> -        if (local_err) {
-> -            error_propagate(errp, local_err);
-> +        bdrv_refresh_limits(bs->backing->bs, errp);
-> +        if (*errp) {
->              return;
-
-Rest of the changes in this file are good if the macro gets added correctly.
-
->          }
->          bdrv_merge_limits(&bs->bl, &bs->backing->bs->bl);
-
-> +++ b/block/nbd.c
-> @@ -808,7 +808,6 @@ static int nbd_co_receive_cmdread_reply(BDRVNBDState *s, uint64_t handle,
->      NBDReplyChunkIter iter;
->      NBDReply reply;
->      void *payload = NULL;
-> -    Error *local_err = NULL;
-
-Recurring problem of not inserting the macro as expected.
-
->  
->      NBD_FOREACH_REPLY_CHUNK(s, iter, handle, s->info.structured_reply,
->                              qiov, &reply, &payload)
-> @@ -827,20 +826,20 @@ static int nbd_co_receive_cmdread_reply(BDRVNBDState *s, uint64_t handle,
->              break;
->          case NBD_REPLY_TYPE_OFFSET_HOLE:
->              ret = nbd_parse_offset_hole_payload(s, &reply.structured, payload,
-> -                                                offset, qiov, &local_err);
-> +                                                offset, qiov, errp);
->              if (ret < 0) {
->                  nbd_channel_error(s, ret);
-> -                nbd_iter_channel_error(&iter, ret, &local_err);
-> +                nbd_iter_channel_error(&iter, ret, errp);
->              }
->              break;
->          default:
->              if (!nbd_reply_type_is_error(chunk->type)) {
->                  /* not allowed reply type */
->                  nbd_channel_error(s, -EINVAL);
-> -                error_setg(&local_err,
-> +                error_setg(errp,
->                             "Unexpected reply type: %d (%s) for CMD_READ",
-
-Could almost fold these lines (but I'm not asking you to; keeping this
-patch as mechanical as possible is fine).
-
->                             chunk->type, nbd_reply_type_lookup(chunk->type));
-> -                nbd_iter_channel_error(&iter, -EINVAL, &local_err);
-> +                nbd_iter_channel_error(&iter, -EINVAL, errp);
->              }
->          }
->  
-> @@ -861,7 +860,6 @@ static int nbd_co_receive_blockstatus_reply(BDRVNBDState *s,
->      NBDReplyChunkIter iter;
->      NBDReply reply;
->      void *payload = NULL;
-> -    Error *local_err = NULL;
->      bool received = false;
-
-Oops on the macro.
-
-> @@ -1174,15 +1172,13 @@ static QIOChannelSocket *nbd_establish_connection(SocketAddress *saddr,
->                                                    Error **errp)
->  {
->      QIOChannelSocket *sioc;
-> -    Error *local_err = NULL;
->  
->      sioc = qio_channel_socket_new();
->      qio_channel_set_name(QIO_CHANNEL(sioc), "nbd-client");
->  
-> -    qio_channel_socket_connect_sync(sioc, saddr, &local_err);
-> -    if (local_err) {
-> +    qio_channel_socket_connect_sync(sioc, saddr, errp);
-> +    if (*errp) {
->          object_unref(OBJECT(sioc));
-> -        error_propagate(errp, local_err);
->          return NULL;
-
-But getting rid of error_propagate() is nice.
-
-Did you grep for instances of error_propagate() after your mechanical
-patch, to see what else the Coccinelle script might have missed?
-
-
-> +++ b/qapi/opts-visitor.c
-> @@ -275,6 +275,7 @@ opts_next_list(Visitor *v, GenericList *tail, size_t size)
->  static void
->  opts_check_list(Visitor *v, Error **errp)
->  {
-> +	ERRP_FUNCTION_BEGIN();
->      /*
->       * Unvisited list elements will be reported later when checking
->       * whether unvisited struct members remain.
-
-Here the macro got added, but with no obvious benefit later on (although
-we also argued that adding it even when it makes no difference is not
-bad, if that's easier to automate for style checking).
-
-> diff --git a/qapi/qapi-dealloc-visitor.c b/qapi/qapi-dealloc-visitor.c
-> index d192724b13..3ee4c7a2e7 100644
-> --- a/qapi/qapi-dealloc-visitor.c
-> +++ b/qapi/qapi-dealloc-visitor.c
-> @@ -25,6 +25,7 @@ struct QapiDeallocVisitor
->  static void qapi_dealloc_start_struct(Visitor *v, const char *name, void **obj,
->                                        size_t unused, Error **errp)
->  {
-> +	ERRP_FUNCTION_BEGIN();
+> +    ERRP_FUNCTION_BEGIN();
+>      ...
 >  }
 
-Here's an example where exempting empty functions would be nicer.
+Also untested:
+
+ fn(..., Error **errp, ...)
+ {
+(
+|
+     ERRP_FUNCTION_BEGIN();
+     ...
+|
++    ERRP_FUNCTION_BEGIN()
+     ...
+)
+ }
 
 
-> +++ b/qapi/qapi-visit-core.c
-> @@ -39,18 +39,15 @@ void visit_free(Visitor *v)
->  void visit_start_struct(Visitor *v, const char *name, void **obj,
->                          size_t size, Error **errp)
->  {
-> -    Error *err = NULL;
-> -
+> Overall, the script makes sense in my reading (but no idea if it
+> actually catches everything we want, or if it missed something).
 
-Oops, macro not added.
-
->      trace_visit_start_struct(v, name, obj, size);
->      if (obj) {
->          assert(size);
->          assert(!(v->type & VISITOR_OUTPUT) || *obj);
->      }
-> -    v->start_struct(v, name, obj, size, &err);
-> +    v->start_struct(v, name, obj, size, errp);
->      if (obj && (v->type & VISITOR_INPUT)) {
-> -        assert(!err != !*obj);
-> +        assert(!*errp != !*obj);
->      }
-> -    error_propagate(errp, err);
->  }
-
-But the cleanup is sane, once the macro is present.
-
-> @@ -152,12 +143,10 @@ void visit_type_int(Visitor *v, const char *name, int64_t *obj, Error **errp)
->  static void visit_type_uintN(Visitor *v, uint64_t *obj, const char *name,
->                               uint64_t max, const char *type, Error **errp)
->  {
-> -    Error *err = NULL;
->      uint64_t value = *obj;
->  
-> -    v->type_uint64(v, name, &value, &err);
-> -    if (err) {
-> -        error_propagate(errp, err);
-> +    v->type_uint64(v, name, &value, errp);
-> +    if (*errp) {
->      } else if (value > max) {
->          error_setg(errp, QERR_INVALID_PARAMETER_VALUE,
->                     name ? name : "null", type);
-
-Results in an empty if which looks funny.  This one could be a manual
-touchup later.
-
-> @@ -211,12 +200,10 @@ static void visit_type_intN(Visitor *v, int64_t *obj, const char *name,
->                              int64_t min, int64_t max, const char *type,
->                              Error **errp)
->  {
-> -    Error *err = NULL;
->      int64_t value = *obj;
->  
-> -    v->type_int64(v, name, &value, &err);
-> -    if (err) {
-> -        error_propagate(errp, err);
-> +    v->type_int64(v, name, &value, errp);
-> +    if (*errp) {
->      } else if (value < min || value > max) {
-
-and again
+Having spot-checked 7, it definitely misses cases where it was supposed
+to add ERRP_FUNCTION_BEGIN().
 
 -- 
 Eric Blake, Principal Software Engineer
