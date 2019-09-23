@@ -1,63 +1,83 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iBrTb-0001b0-4B
-	for mharc-qemu-riscv@gnu.org; Sat, 21 Sep 2019 22:19:51 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:34371)
+	id 1iCKM4-00082P-TQ
+	for mharc-qemu-riscv@gnu.org; Mon, 23 Sep 2019 05:10:00 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:52720)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <bmeng.cn@gmail.com>) id 1iBrTY-0001YG-Bs
- for qemu-riscv@nongnu.org; Sat, 21 Sep 2019 22:19:49 -0400
+ (envelope-from <philmd@redhat.com>) id 1iCKM1-0007x2-Dc
+ for qemu-riscv@nongnu.org; Mon, 23 Sep 2019 05:09:58 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <bmeng.cn@gmail.com>) id 1iBrTX-0004fO-5j
- for qemu-riscv@nongnu.org; Sat, 21 Sep 2019 22:19:48 -0400
-Received: from mail-yb1-xb42.google.com ([2607:f8b0:4864:20::b42]:43474)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
- id 1iBrTU-0004ep-Fc; Sat, 21 Sep 2019 22:19:44 -0400
-Received: by mail-yb1-xb42.google.com with SMTP id m143so4125781ybf.10;
- Sat, 21 Sep 2019 19:19:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=5TXMBFJyTzsMHF0WmjbpGFRjjVz7dsOcEaBtbNDlHQw=;
- b=q7U4GVl2j7cpZ2+rC7jr7zYzgvT3UTMJJPr5iS3uh7qB5vBC7h/kEx0bEqY+gbJLia
- 9oo0LPylsyw0/vK0Hkbcjviv8MUV51E4eAe9SqY00QHTLPloongwSppQjz6O1aEsotlq
- McIIFpjEFt/GVS2Q0+l58MOYLlrVSLLKmNUhKHKjZ1wPCz8KO6e8oDZyMyLuuafHPC3y
- TYRih4wIlYDzjFXhAlomlJywdu1P8YRbV3abAs6HfPjv5P4hQRGsFn/27N6bcsu1GxBR
- BuONyfj70QE4J/Ighc6omrmSUrmJOlmBahPA/mUe1Olmw94MdO7ixppWQt5/DKF5KUNC
- s2Dw==
+ (envelope-from <philmd@redhat.com>) id 1iCKLy-0008Dq-MK
+ for qemu-riscv@nongnu.org; Mon, 23 Sep 2019 05:09:55 -0400
+Received: from us-smtp-1.mimecast.com ([207.211.31.81]:28194
+ helo=us-smtp-delivery-1.mimecast.com)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <philmd@redhat.com>) id 1iCKLy-0008CN-7N
+ for qemu-riscv@nongnu.org; Mon, 23 Sep 2019 05:09:54 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1569229793;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:openpgp:openpgp;
+ bh=jKga1tA8YbDtAFc6D1iqzbhRz2b0Enh0pJ0iCH4FGGM=;
+ b=RmZQDKHKbufeW9sKuta9UifPWQF3+SLFEs2GyBeWF7YbfdeNgtWHfELlfbhl9tZbATKa/r
+ 9C7eg3YYJXafTuRzY9iJf8zs4NlS9duVajNHs6zA1rfQ+pKF8FOTCmnHM+NCJPMZXliG3Y
+ 2Xj6U2hmmxFoOeR/JfsYIgf77Kj7a6U=
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-77-DFOQ5C5uPI2PGm4aP9TdxA-1; Mon, 23 Sep 2019 05:09:50 -0400
+Received: by mail-wm1-f70.google.com with SMTP id m6so4705947wmf.2
+ for <qemu-riscv@nongnu.org>; Mon, 23 Sep 2019 02:09:49 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=5TXMBFJyTzsMHF0WmjbpGFRjjVz7dsOcEaBtbNDlHQw=;
- b=GKfpMiezuAgZkwgt6LwoGSj/u4gjgJBW1TUUUealpts/oOAHCG2PpzQeLXsez1mBoZ
- AGkNcmjynEiUtUR+rMROvPe8iLHYI0SYts/F6TwvOsU6XNAGZoPK3wLGqmEkSlPgiRDw
- 5h3AbuppFtqtaqWYe/RAVBFTTbwCqij4K7J/ZHmG3D34nulcCHI9qP4honxnx7JhYjbd
- 2qUG9kuFWkdOJPqMQwAnqIO2w8diYIHx61q8pTfudzaHgmGKxyIbJfNDxS22lBM0xB4g
- FFp51o4mXWq7nD4f53JzaKWdPXSWCCyP1wUlRxujf016Rb3waD00EmCdCWcLsj9bJZOa
- lhYQ==
-X-Gm-Message-State: APjAAAVJg64dRDGEB+xwlcG21uPl569c5yAPq75e2l/KnCw3Nw92l5MM
- T4q/uHWTXhbkcU1Yfy1n3lwYEenerTskjc05/cA=
-X-Google-Smtp-Source: APXvYqwVyG8B4L2MebuuuePpAScnJP2syqKiTeDv7GdkZ/SSZAML5L+QJLV6RAfk1KlpP8+Jv0aoQibUy9/StBjy8WM=
-X-Received: by 2002:a25:b911:: with SMTP id x17mr15163142ybj.29.1569118783462; 
- Sat, 21 Sep 2019 19:19:43 -0700 (PDT)
-MIME-Version: 1.0
+ h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
+ :date:user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=3UZ5UpiM5VMl98zukP4c1o3KaJWeHTA6Ym5KGThfkEM=;
+ b=HQyAGEuvAqglK+ODRz22rsbUEhwl7qeyl7wspOWswDVaWMj3t6fXI9ZipTE/2M60Ay
+ VyEeW4xFUng1MK+l6kNrX9guFC/iXsW9kTc+YlQeIqBBo3+BUcsmVmI2jD0qgl/HZuH0
+ GgGSwf4MTAo8DtvdE4zVwz22ofNFoxKybuR+AOezcJALU0IgFHQfszzeB0scjuslyiEG
+ 2JFcSu5RZss3WN6UQZtazQVVOrUjAyFDRge+70hUvIlcO7R2PSo6+7n1lQvdWe/K+mtm
+ xcNNpIPVF0aewrGvdw/yPxP8kKUGExLjiagziVih3tsQr9DmswDeXaKsI549TJXBGXHa
+ mNXg==
+X-Gm-Message-State: APjAAAUCxYT2i7sg/lhZLLkHyN6HnoSKpAFeJ36JxMKiWQ/p0i0b0wa3
+ 4zXUjTiyDFI/CUyMgKqwNSl7tE4L4gJyg5sya84L42lbydVmdc232WIdDDQtBhfCQL3vunCYdrz
+ 7P4gjDCLwNz2pTIw=
+X-Received: by 2002:a1c:7fcc:: with SMTP id a195mr13236494wmd.27.1569229788998; 
+ Mon, 23 Sep 2019 02:09:48 -0700 (PDT)
+X-Google-Smtp-Source: APXvYqxBenpdZaKKg5q9L3EU1AiYKwI145GhCLELXT1Fp+0+lNx/eUzMDqapCop+zqB5NYN9Q2+HDw==
+X-Received: by 2002:a1c:7fcc:: with SMTP id a195mr13236469wmd.27.1569229788709; 
+ Mon, 23 Sep 2019 02:09:48 -0700 (PDT)
+Received: from [192.168.1.40] (240.red-88-21-68.staticip.rima-tde.net.
+ [88.21.68.240])
+ by smtp.gmail.com with ESMTPSA id p85sm19949506wme.23.2019.09.23.02.09.47
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 23 Sep 2019 02:09:48 -0700 (PDT)
+Subject: Re: [PATCH v1 6/6] riscv/virt: Jump to pflash if specified
+To: Bin Meng <bmeng.cn@gmail.com>, Alistair Francis <alistair.francis@wdc.com>
+Cc: Alistair Francis <alistair23@gmail.com>,
+ Palmer Dabbelt <palmer@sifive.com>, "open list:RISC-V"
+ <qemu-riscv@nongnu.org>,
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
 References: <cover.1568931866.git.alistair.francis@wdc.com>
- <d3357e0b87cce025418f6383ce971246ded547bd.1568931866.git.alistair.francis@wdc.com>
- <CAEUhbmV7Ao6L25HM+8AJLP8unn=HhvdRc1Kt+tUQgRB4S4zsBQ@mail.gmail.com>
- <CAKmqyKO=PahfKej1Ch6=x3zcxN8R26Gkd9dsjScMSHPxitp=rA@mail.gmail.com>
-In-Reply-To: <CAKmqyKO=PahfKej1Ch6=x3zcxN8R26Gkd9dsjScMSHPxitp=rA@mail.gmail.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Sun, 22 Sep 2019 10:19:31 +0800
-Message-ID: <CAEUhbmVO=POsb+Jpy12w=WD-vLM9Km0YrryaGYc1PLYdSzka5A@mail.gmail.com>
-Subject: Re: [PATCH v1 4/6] riscv/sifive_u: Add the start-in-flash property
-To: Alistair Francis <alistair23@gmail.com>
-Cc: Alistair Francis <alistair.francis@wdc.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Palmer Dabbelt <palmer@sifive.com>
-Content-Type: text/plain; charset="UTF-8"
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2607:f8b0:4864:20::b42
+ <a3649f52a79eff39c707546d88ecd25b753dbf33.1568931866.git.alistair.francis@wdc.com>
+ <CAEUhbmVcupHEesoyrfnyCfSUg4Q8pZnyUt=3hpC_g11BL1wxwg@mail.gmail.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>
+Openpgp: id=89C1E78F601EE86C867495CBA2A3FD6EDEADC0DE;
+ url=http://pgp.mit.edu/pks/lookup?op=get&search=0xA2A3FD6EDEADC0DE
+Message-ID: <b6236eec-d60a-c502-e010-f3ca137e8b89@redhat.com>
+Date: Mon, 23 Sep 2019 11:09:47 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.7.0
+MIME-Version: 1.0
+In-Reply-To: <CAEUhbmVcupHEesoyrfnyCfSUg4Q8pZnyUt=3hpC_g11BL1wxwg@mail.gmail.com>
+Content-Language: en-US
+X-MC-Unique: DFOQ5C5uPI2PGm4aP9TdxA-1
+X-Mimecast-Spam-Score: 0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+X-Received-From: 207.211.31.81
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -69,117 +89,69 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 22 Sep 2019 02:19:49 -0000
+X-List-Received-Date: Mon, 23 Sep 2019 09:09:59 -0000
 
-On Sat, Sep 21, 2019 at 6:12 AM Alistair Francis <alistair23@gmail.com> wrote:
->
-> On Thu, Sep 19, 2019 at 10:15 PM Bin Meng <bmeng.cn@gmail.com> wrote:
-> >
-> > On Fri, Sep 20, 2019 at 6:32 AM Alistair Francis
-> > <alistair.francis@wdc.com> wrote:
-> > >
-> > > Add a property that when set to true QEMU will jump from the ROM code to
-> > > the start of flash memory instead of DRAM which is the default
-> > > behaviour.
-> > >
-> > > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> > > ---
-> > >  hw/riscv/sifive_u.c         | 27 +++++++++++++++++++++++++++
-> > >  include/hw/riscv/sifive_u.h |  2 ++
-> > >  2 files changed, 29 insertions(+)
-> > >
-> > > diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-> > > index c3949fb316..b7cd3631cd 100644
-> > > --- a/hw/riscv/sifive_u.c
-> > > +++ b/hw/riscv/sifive_u.c
-> > > @@ -373,6 +373,10 @@ static void riscv_sifive_u_init(MachineState *machine)
-> > >                                         /* dtb: */
-> > >      };
-> > >
-> > > +    if (s->start_in_flash) {
-> > > +        reset_vec[6] = memmap[SIFIVE_U_FLASH0].base; /* start: .dword FLASH0_BASE */
-> > > +    }
-> > > +
-> > >      /* copy in the reset vector in little_endian byte order */
-> > >      for (i = 0; i < sizeof(reset_vec) >> 2; i++) {
-> > >          reset_vec[i] = cpu_to_le32(reset_vec[i]);
-> > > @@ -544,8 +548,31 @@ static void riscv_sifive_u_soc_realize(DeviceState *dev, Error **errp)
-> > >          memmap[SIFIVE_U_GEM_MGMT].base, memmap[SIFIVE_U_GEM_MGMT].size);
-> > >  }
-> > >
-> > > +static bool virt_get_start_in_flash(Object *obj, Error **errp)
-> > > +{
-> > > +    SiFiveUState *s = RISCV_U_MACHINE(obj);
-> > > +
-> > > +    return s->start_in_flash;
-> > > +}
-> > > +
-> > > +static void virt_set_start_in_flash(Object *obj, bool value, Error **errp)
-> > > +{
-> > > +    SiFiveUState *s = RISCV_U_MACHINE(obj);
-> > > +
-> > > +    s->start_in_flash = value;
-> > > +}
-> > > +
-> > >  static void riscv_sifive_u_machine_instance_init(Object *obj)
-> > >  {
-> > > +    SiFiveUState *s = RISCV_U_MACHINE(obj);
-> > > +
-> > > +    s->start_in_flash = false;
-> > > +    object_property_add_bool(obj, "start-in-flash", virt_get_start_in_flash,
-> > > +                             virt_set_start_in_flash, NULL);
-> > > +    object_property_set_description(obj, "start-in-flash",
-> > > +                                    "Set on to tell QEMU's ROM to jump to " \
-> > > +                                    "flash. Otherwise QEMU will jump to DRAM",
-> > > +                                    NULL);
-> > >
-> > >  }
-> > >
-> > > diff --git a/include/hw/riscv/sifive_u.h b/include/hw/riscv/sifive_u.h
-> > > index a921079fbe..2656b43c58 100644
-> > > --- a/include/hw/riscv/sifive_u.h
-> > > +++ b/include/hw/riscv/sifive_u.h
-> > > @@ -57,6 +57,8 @@ typedef struct SiFiveUState {
-> > >
-> > >      void *fdt;
-> > >      int fdt_size;
-> > > +
-> > > +    bool start_in_flash;
-> > >  } SiFiveUState;
-> > >
-> > >  enum {
-> >
-> > This patch chose a different way from the one used in patch "[v1,6/6]
-> > riscv/virt: Jump to pflash if specified":
-> >
-> > - this patch uses reset_vec[6] while patch [6/6] defines a variable start_addr
-> > - this patch adds a "start-in-flash" property to the machine, while
-> > patch [6/6] tests against drive IF_PFLASH
->
-> Yes, we do it differently for the sifive_u board as the sifive_u board
-> doesn't use pflash so there is no way to know if the user has loaded
-> anything into the SPI memory.
->
+On 9/20/19 7:15 AM, Bin Meng wrote:
+> On Fri, Sep 20, 2019 at 6:35 AM Alistair Francis
+> <alistair.francis@wdc.com> wrote:
+>>
+>> If the user supplied pflash to QEMU then change the reset code to jump
+>> to the pflash base address instead of the DRAM base address.
+>>
+>> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+>> ---
+>>  hw/riscv/virt.c | 10 +++++++++-
+>>  1 file changed, 9 insertions(+), 1 deletion(-)
+>>
+>> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+>> index ca002ecea7..ed25cc6761 100644
+>> --- a/hw/riscv/virt.c
+>> +++ b/hw/riscv/virt.c
+>> @@ -441,6 +441,7 @@ static void riscv_virt_board_init(MachineState *mach=
+ine)
+>>      MemoryRegion *mask_rom =3D g_new(MemoryRegion, 1);
+>>      char *plic_hart_config;
+>>      size_t plic_hart_config_len;
+>> +    target_ulong start_addr =3D memmap[VIRT_DRAM].base;
+>>      int i;
+>>      unsigned int smp_cpus =3D machine->smp.cpus;
+>>
+>> @@ -487,6 +488,13 @@ static void riscv_virt_board_init(MachineState *mac=
+hine)
+>>          }
+>>      }
+>>
+>> +    if (drive_get(IF_PFLASH, 0, 0)) {
+>> +        /* Pflash was supplied, let's overwrite the address we jump to =
+after
+>=20
+> nits: wrong multi-line comment format
+>=20
+>> +         * reset to the base of the flash.
+>> +         */
+>> +        start_addr =3D virt_memmap[VIRT_FLASH].base;
+>> +    }
+>> +
+>>      /* reset vector */
+>>      uint32_t reset_vec[8] =3D {
+>>          0x00000297,                  /* 1:  auipc  t0, %pcrel_hi(dtb) *=
+/
+>> @@ -499,7 +507,7 @@ static void riscv_virt_board_init(MachineState *mach=
+ine)
+>>  #endif
+>>          0x00028067,                  /*     jr     t0 */
+>>          0x00000000,
+>> -        memmap[VIRT_DRAM].base,      /* start: .dword memmap[VIRT_DRAM]=
+.base */
+>> +        start_addr,                  /* start: .dword */
+>>          0x00000000,
+>>                                       /* dtb: */
+>>      };
+>> --
+>=20
+> Otherwise,
+> Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
 
-OK.
+Reviewed-by: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
 
-> >
-> > We should be consistent and I would prefer to use the patch [6/6] way.
-> > On Unleashed an SPI flash is mounted so we cannot add a PFlash to
-> > sifive_u machine like what was done on virt machine, so we should test
-> > IF_MTD instead. Thoughts?
->
-> How would we test that?
->
-> Right now I am loading the binary in SPI with the -device loader
-> option. The machine can't really know what is/isn't loaded there.
->
-> It's not ideal, but I don't see a nicer way.
-
-I think we need write a SiFive SPI model to support this in a clean
-way. Ideally we should simulate the hardware boot workflow as
-documented in the FU540 manual chapter 6 "Boot Process".
-
-Regards,
-Bin
 
