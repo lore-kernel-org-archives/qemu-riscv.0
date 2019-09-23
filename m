@@ -1,61 +1,104 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iCSWw-0002ik-CT
-	for mharc-qemu-riscv@gnu.org; Mon, 23 Sep 2019 13:53:46 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:45051)
+	id 1iCTDT-0003r3-Pt
+	for mharc-qemu-riscv@gnu.org; Mon, 23 Sep 2019 14:37:43 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:51427)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <alistair23@gmail.com>) id 1iCSWt-0002gL-W3
- for qemu-riscv@nongnu.org; Mon, 23 Sep 2019 13:53:44 -0400
+ (envelope-from <eblake@redhat.com>) id 1iCTDQ-0003na-Iq
+ for qemu-riscv@nongnu.org; Mon, 23 Sep 2019 14:37:41 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1iCSWt-0001GX-2F
- for qemu-riscv@nongnu.org; Mon, 23 Sep 2019 13:53:43 -0400
-Received: from mail-lf1-x143.google.com ([2a00:1450:4864:20::143]:39795)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1iCSWq-0001F1-Sv; Mon, 23 Sep 2019 13:53:41 -0400
-Received: by mail-lf1-x143.google.com with SMTP id 72so10825605lfh.6;
- Mon, 23 Sep 2019 10:53:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=VldKBAk85sop/e+voE6z8Ho52l0yXVnctg44/nSITvs=;
- b=usm79w3Jerp08xKmkOFeH8iIOd6sYbzbCMio+K/ZvTEENucWeKYX90pBReBggPwMZY
- tjxHdgA/lrC05mXcxa5IeeIl8QDwbnWDb3TEtJ3cli4ztXa1ggbfwE12d7kqmWWt+JdT
- lV0Kwuwt9/lwkxtEYjR7YgeST9/8rB2lSs5bnFf1hdxR1pG4Y4J4DrhYoFLsKpTbhWzL
- tT9CnSWmv2bDFys4AVKu9/rmvKfMOPuhLAYWrGZB5ib7xeQKmI9MLqKPZCTJN2t/VS3B
- rWZ1FzqsOq3Db19/U1PbkOB2uwGYdTmRunoTwlXLLJNiFH/8Dzr+kqxowvxOtTLXWB7y
- NR/Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=VldKBAk85sop/e+voE6z8Ho52l0yXVnctg44/nSITvs=;
- b=AxZyBgziCprigUHTmK6MiZEeQQRqjra0SyNzk7ySPCs370NFidxCFwWs0qYpIZRoLt
- /N56cT9+sW9IuQhy3/zVNZB6MKb+2SPrvEjk/arFJXjaO6HHlmCVYJqYaE1jMKSkJFJ+
- DS46zbPSJwwdSK9fLp3lXJY5cXxoqS0uevXqtK1rJNAuwfr6aH2no7zeHlQYykNPwtRu
- 8EzJA5w67GVTzLEp4XfNcaC8c3g1Hl9Yh8KxGeARrXUqrGmx21mB97GfTM/BUupie1+1
- 8TB32/v5eImvyhBpcmXv97Ue/NeWnqkUZkP7Kx5LRxVNYG7/X+dqVzEEKznEYqwxqCuT
- 9qrw==
-X-Gm-Message-State: APjAAAUU3+3XCqyFv/wzJzY0+Ce+4mhP2HswZHISABMREIMlDb3gIazR
- a2I1s6DYjIEdUXMzxI3J78oRxYXVztf2otq07l0=
-X-Google-Smtp-Source: APXvYqzdV1JtJ4XapgQPbv5dEwNHT6IHXVv6P/lF+nbyTnaVkj+0nRAiWiPV1jwoTGHMHkM4v7nEfeT3DtgFZYXmu4Q=
-X-Received: by 2002:ac2:5e9e:: with SMTP id b30mr484334lfq.5.1569261219826;
- Mon, 23 Sep 2019 10:53:39 -0700 (PDT)
+ (envelope-from <eblake@redhat.com>) id 1iCTDP-0003Nb-GD
+ for qemu-riscv@nongnu.org; Mon, 23 Sep 2019 14:37:40 -0400
+Received: from mx1.redhat.com ([209.132.183.28]:10785)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <eblake@redhat.com>)
+ id 1iCTDF-0003KR-77; Mon, 23 Sep 2019 14:37:29 -0400
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
+ [10.5.11.12])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mx1.redhat.com (Postfix) with ESMTPS id 5833310DCC84;
+ Mon, 23 Sep 2019 18:37:27 +0000 (UTC)
+Received: from [10.3.116.249] (ovpn-116-249.phx2.redhat.com [10.3.116.249])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 9317460C5E;
+ Mon, 23 Sep 2019 18:35:52 +0000 (UTC)
+Subject: Re: [RFC v2 3/9] errp: rename errp to errp_in where it is IN-argument
+To: Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>,
+ qemu-devel@nongnu.org
+Cc: kraxel@redhat.com, berrange@redhat.com, arei.gonglei@huawei.com,
+ ehabkost@redhat.com, imammedo@redhat.com, lvivier@redhat.com,
+ amit@kernel.org, kwolf@redhat.com, mreitz@redhat.com, ari@tuxera.com,
+ pavel.dovgaluk@ispras.ru, pbonzini@redhat.com, stefanha@redhat.com,
+ jsnow@redhat.com, sw@weilnetz.de, fam@euphon.net, ronniesahlberg@gmail.com,
+ pl@kamp.de, den@openvz.org, armbru@redhat.com, berto@igalia.com,
+ dillaman@redhat.com, wencongyang2@huawei.com, xiechanglong.d@gmail.com,
+ namei.unix@gmail.com, rjones@redhat.com, codyprime@gmail.com,
+ marcandre.lureau@redhat.com, rth@twiddle.net, groug@kaod.org,
+ mst@redhat.com, marcel.apfelbaum@gmail.com, b.galvani@gmail.com,
+ peter.maydell@linaro.org, Andrew.Baumann@microsoft.com, philmd@redhat.com,
+ antonynpavlov@gmail.com, jcd@tribudubois.net, peter.chubb@nicta.com.au,
+ sundeep.lkml@gmail.com, joel@jms.id.au, eric.auger@redhat.com,
+ alistair@alistair23.me, balrogg@gmail.com, edgar.iglesias@gmail.com,
+ sstabellini@kernel.org, anthony.perard@citrix.com, paul.durrant@citrix.com,
+ pburton@wavecomp.com, arikalo@wavecomp.com, clg@kaod.org, andrew@aj.id.au,
+ crwulff@gmail.com, marex@denx.de, david@gibson.dropbear.id.au,
+ pasic@linux.ibm.com, cohuck@redhat.com, borntraeger@de.ibm.com,
+ hpoussin@reactos.org, xiaoguangrong.eric@gmail.com, aurelien@aurel32.net,
+ amarkovic@wavecomp.com, mark.cave-ayland@ilande.co.uk, jasowang@redhat.com,
+ lersek@redhat.com, palmer@sifive.com, sagark@eecs.berkeley.edu,
+ kbastian@mail.uni-paderborn.de, david@redhat.com, thuth@redhat.com,
+ farman@linux.ibm.com, walling@linux.ibm.com, hare@suse.com,
+ michael@walle.cc, atar4qemu@gmail.com, stefanb@linux.ibm.com,
+ samuel.thibault@ens-lyon.org, akrowiak@linux.ibm.com, pmorel@linux.ibm.com,
+ alex.williamson@redhat.com, mdroth@linux.vnet.ibm.com,
+ zhang.zhanghailiang@huawei.com, quintela@redhat.com, dgilbert@redhat.com,
+ rizzo@iet.unipi.it, g.lettieri@iet.unipi.it, v.maffione@gmail.com,
+ jan.kiszka@siemens.com, green@moxielogic.com, shorne@gmail.com,
+ gxt@mprc.pku.edu.cn, jcmvbkbc@gmail.com, qemu-block@nongnu.org,
+ integration@gluster.org, sheepdog@lists.wpkg.org, qemu-arm@nongnu.org,
+ xen-devel@lists.xenproject.org, qemu-ppc@nongnu.org, qemu-s390x@nongnu.org,
+ qemu-riscv@nongnu.org
+References: <20190923161231.22028-1-vsementsov@virtuozzo.com>
+ <20190923161231.22028-4-vsementsov@virtuozzo.com>
+From: Eric Blake <eblake@redhat.com>
+Openpgp: preference=signencrypt
+Autocrypt: addr=eblake@redhat.com; keydata=
+ xsBNBEvHyWwBCACw7DwsQIh0kAbUXyqhfiKAKOTVu6OiMGffw2w90Ggrp4bdVKmCaEXlrVLU
+ xphBM8mb+wsFkU+pq9YR621WXo9REYVIl0FxKeQo9dyQBZ/XvmUMka4NOmHtFg74nvkpJFCD
+ TUNzmqfcjdKhfFV0d7P/ixKQeZr2WP1xMcjmAQY5YvQ2lUoHP43m8TtpB1LkjyYBCodd+LkV
+ GmCx2Bop1LSblbvbrOm2bKpZdBPjncRNob73eTpIXEutvEaHH72LzpzksfcKM+M18cyRH+nP
+ sAd98xIbVjm3Jm4k4d5oQyE2HwOur+trk2EcxTgdp17QapuWPwMfhaNq3runaX7x34zhABEB
+ AAHNHkVyaWMgQmxha2UgPGVibGFrZUByZWRoYXQuY29tPsLAegQTAQgAJAIbAwULCQgHAwUV
+ CgkICwUWAgMBAAIeAQIXgAUCS8fL9QIZAQAKCRCnoWtKJSdDahBHCACbl/5FGkUqJ89GAjeX
+ RjpAeJtdKhujir0iS4CMSIng7fCiGZ0fNJCpL5RpViSo03Q7l37ss+No+dJI8KtAp6ID+PMz
+ wTJe5Egtv/KGUKSDvOLYJ9WIIbftEObekP+GBpWP2+KbpADsc7EsNd70sYxExD3liwVJYqLc
+ Rw7so1PEIFp+Ni9A1DrBR5NaJBnno2PHzHPTS9nmZVYm/4I32qkLXOcdX0XElO8VPDoVobG6
+ gELf4v/vIImdmxLh/w5WctUpBhWWIfQDvSOW2VZDOihm7pzhQodr3QP/GDLfpK6wI7exeu3P
+ pfPtqwa06s1pae3ad13mZGzkBdNKs1HEm8x6zsBNBEvHyWwBCADGkMFzFjmmyqAEn5D+Mt4P
+ zPdO8NatsDw8Qit3Rmzu+kUygxyYbz52ZO40WUu7EgQ5kDTOeRPnTOd7awWDQcl1gGBXgrkR
+ pAlQ0l0ReO57Q0eglFydLMi5bkwYhfY+TwDPMh3aOP5qBXkm4qIYSsxb8A+i00P72AqFb9Q7
+ 3weG/flxSPApLYQE5qWGSXjOkXJv42NGS6o6gd4RmD6Ap5e8ACo1lSMPfTpGzXlt4aRkBfvb
+ NCfNsQikLZzFYDLbQgKBA33BDeV6vNJ9Cj0SgEGOkYyed4I6AbU0kIy1hHAm1r6+sAnEdIKj
+ cHi3xWH/UPrZW5flM8Kqo14OTDkI9EtlABEBAAHCwF8EGAEIAAkFAkvHyWwCGwwACgkQp6Fr
+ SiUnQ2q03wgAmRFGDeXzc58NX0NrDijUu0zx3Lns/qZ9VrkSWbNZBFjpWKaeL1fdVeE4TDGm
+ I5mRRIsStjQzc2R9b+2VBUhlAqY1nAiBDv0Qnt+9cLiuEICeUwlyl42YdwpmY0ELcy5+u6wz
+ mK/jxrYOpzXKDwLq5k4X+hmGuSNWWAN3gHiJqmJZPkhFPUIozZUCeEc76pS/IUN72NfprZmF
+ Dp6/QDjDFtfS39bHSWXKVZUbqaMPqlj/z6Ugk027/3GUjHHr8WkeL1ezWepYDY7WSoXwfoAL
+ 2UXYsMAr/uUncSKlfjvArhsej0S4zbqim2ZY6S8aRWw94J3bSvJR+Nwbs34GPTD4Pg==
+Organization: Red Hat, Inc.
+Message-ID: <8ad05d4f-e7e6-d7b5-dce4-c4d24ac81e0e@redhat.com>
+Date: Mon, 23 Sep 2019 13:35:51 -0500
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.8.0
 MIME-Version: 1.0
-References: <cover.1568762497.git.alistair.francis@wdc.com>
- <mhng-a10f93b3-147d-42a0-8f24-6d4b1f3a214b@palmer-si-x1c4>
-In-Reply-To: <mhng-a10f93b3-147d-42a0-8f24-6d4b1f3a214b@palmer-si-x1c4>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 23 Sep 2019 10:53:11 -0700
-Message-ID: <CAKmqyKNXZjU715rOuwb980tA5uELdV3TJW4FYu5gK7ZMqAjqbA@mail.gmail.com>
-Subject: Re: [PATCH v1 0/2] RISC-V: Convert to do_transaction_failed hook
-To: Palmer Dabbelt <palmer@sifive.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Peter Maydell <peter.maydell@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2a00:1450:4864:20::143
+In-Reply-To: <20190923161231.22028-4-vsementsov@virtuozzo.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.6.2
+ (mx1.redhat.com [10.5.110.64]); Mon, 23 Sep 2019 18:37:28 +0000 (UTC)
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+X-Received-From: 209.132.183.28
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -67,46 +110,33 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Sep 2019 17:53:45 -0000
+X-List-Received-Date: Mon, 23 Sep 2019 18:37:42 -0000
 
-On Fri, Sep 20, 2019 at 3:48 PM Palmer Dabbelt <palmer@sifive.com> wrote:
->
-> On Tue, 17 Sep 2019 16:22:56 PDT (-0700), Alistair Francis wrote:
-> > The do_unassigned_access hook has been deprecated and RISC-V is the last
-> > user of it. Let's instead update the RISC-V implementation to use
-> > do_transaction_failed instead.
-> >
-> > After this series I used the 'git grep' regexes in
-> > docs/devel/loads-stores.rst and these are the memory accesses inside
-> > target/riscv:
-> >
-> > monitor.c:102:        cpu_physical_memory_read(pte_addr, &pte, ptesize);
-> >
-> > cpu_helper.c:262:        target_ulong pte = address_space_ldl(cs->as, pte_addr, attrs, &res);
-> > cpu_helper.c:264:        target_ulong pte = address_space_ldq(cs->as, pte_addr, attrs, &res);
-> >
-> > translate.c:782:    ctx->opcode = cpu_ldl_code(env, ctx->base.pc_next);
-> >
-> > gdbstub.c:328:        env->fpr[n] = ldq_p(mem_buf); /* always 64-bit */
-> >
-> > All of these look safe to me.
-> >
-> > Palmer Dabbelt (2):
-> >   RISC-V: Handle bus errors in the page table walker
-> >   RISC-V: Implement cpu_do_transaction_failed
->
-> Can you Reviewed-By these, as they've still got my Author on them?  That way I
-> can pull them in :)
+On 9/23/19 11:12 AM, Vladimir Sementsov-Ogievskiy wrote:
+> Error **errp is almost always OUT-argument: it's assumed to be NULL, or
+> pointer to NULL-initialized pointer, or pointer to error_abort or
+> error_fatal, for callee to report error.
+> 
+> But very few functions (most of the are error API) instead get Error
+> **errp as IN-argument: it's assumed to be set, and callee should clean
+> it. In such cases, rename errp to errp_in.
+> 
+> Signed-off-by: Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>
+> ---
+>  include/monitor/hmp.h |  2 +-
+>  include/qapi/error.h  |  8 ++++----
+>  ui/vnc.h              |  2 +-
+>  monitor/hmp-cmds.c    |  8 ++++----
+>  ui/vnc.c              | 10 +++++-----
+>  util/error.c          |  2 +-
+>  6 files changed, 16 insertions(+), 16 deletions(-)
 
-Richard and Philippe have both reviewed it, that should be enough. I'm
-not sure if I can review it with my SOB as well.
+This is worthwhile, regardless of the fate of the rest of the series.
 
-Alistair
+Reviewed-by: Eric Blake <eblake@redhat.com>
 
->
-> >
-> >  target/riscv/cpu.c        |  2 +-
-> >  target/riscv/cpu.h        |  7 +++++--
-> >  target/riscv/cpu_helper.c | 23 ++++++++++++++++-------
-> >  3 files changed, 22 insertions(+), 10 deletions(-)
+-- 
+Eric Blake, Principal Software Engineer
+Red Hat, Inc.           +1-919-301-3226
+Virtualization:  qemu.org | libvirt.org
 
