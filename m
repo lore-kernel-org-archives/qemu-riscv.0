@@ -1,104 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iCVvL-0007NV-8n
-	for mharc-qemu-riscv@gnu.org; Mon, 23 Sep 2019 17:31:11 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:46888)
+	id 1iCWjN-0005jD-GB
+	for mharc-qemu-riscv@gnu.org; Mon, 23 Sep 2019 18:22:53 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58499)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <eblake@redhat.com>) id 1iCVvH-0007Jz-Lj
- for qemu-riscv@nongnu.org; Mon, 23 Sep 2019 17:31:08 -0400
+ (envelope-from <peter.maydell@linaro.org>) id 1iCWjL-0005iN-AB
+ for qemu-riscv@nongnu.org; Mon, 23 Sep 2019 18:22:52 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <eblake@redhat.com>) id 1iCVvG-0000dO-IN
- for qemu-riscv@nongnu.org; Mon, 23 Sep 2019 17:31:07 -0400
-Received: from mx1.redhat.com ([209.132.183.28]:37560)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <eblake@redhat.com>)
- id 1iCVv5-0000ZX-NE; Mon, 23 Sep 2019 17:30:55 -0400
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
- [10.5.11.15])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id 6C9B559449;
- Mon, 23 Sep 2019 21:30:51 +0000 (UTC)
-Received: from [10.3.116.249] (ovpn-116-249.phx2.redhat.com [10.3.116.249])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 4B7125D71C;
- Mon, 23 Sep 2019 21:30:02 +0000 (UTC)
-Subject: Re: [RFC v2 6/9] scripts: add coccinelle script to use auto
- propagated errp
-To: Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>,
- qemu-devel@nongnu.org
-Cc: stefanha@redhat.com, jan.kiszka@siemens.com,
- zhang.zhanghailiang@huawei.com, qemu-block@nongnu.org, arikalo@wavecomp.com,
- pasic@linux.ibm.com, hpoussin@reactos.org, anthony.perard@citrix.com,
- samuel.thibault@ens-lyon.org, philmd@redhat.com, green@moxielogic.com,
- lvivier@redhat.com, ehabkost@redhat.com, xiechanglong.d@gmail.com,
- pl@kamp.de, dgilbert@redhat.com, b.galvani@gmail.com, eric.auger@redhat.com,
- alex.williamson@redhat.com, ronniesahlberg@gmail.com, rth@twiddle.net,
- kwolf@redhat.com, andrew@aj.id.au, crwulff@gmail.com,
- sundeep.lkml@gmail.com, michael@walle.cc, qemu-ppc@nongnu.org,
- kbastian@mail.uni-paderborn.de, imammedo@redhat.com, fam@euphon.net,
- peter.maydell@linaro.org, sheepdog@lists.wpkg.org, david@redhat.com,
- palmer@sifive.com, thuth@redhat.com, jcmvbkbc@gmail.com, den@openvz.org,
- hare@suse.com, sstabellini@kernel.org, arei.gonglei@huawei.com,
- marcel.apfelbaum@gmail.com, namei.unix@gmail.com, atar4qemu@gmail.com,
- amit@kernel.org, sw@weilnetz.de, groug@kaod.org, qemu-s390x@nongnu.org,
- qemu-arm@nongnu.org, peter.chubb@nicta.com.au, clg@kaod.org,
- shorne@gmail.com, qemu-riscv@nongnu.org, cohuck@redhat.com,
- amarkovic@wavecomp.com, aurelien@aurel32.net, pburton@wavecomp.com,
- sagark@eecs.berkeley.edu, jasowang@redhat.com, kraxel@redhat.com,
- edgar.iglesias@gmail.com, gxt@mprc.pku.edu.cn, quintela@redhat.com,
- mdroth@linux.vnet.ibm.com, lersek@redhat.com, borntraeger@de.ibm.com,
- antonynpavlov@gmail.com, joel@jms.id.au, xen-devel@lists.xenproject.org,
- integration@gluster.org, balrogg@gmail.com, Andrew.Baumann@microsoft.com,
- mreitz@redhat.com, walling@linux.ibm.com, mst@redhat.com,
- mark.cave-ayland@ilande.co.uk, v.maffione@gmail.com, marex@denx.de,
- armbru@redhat.com, marcandre.lureau@redhat.com, alistair@alistair23.me,
- paul.durrant@citrix.com, pavel.dovgaluk@ispras.ru, g.lettieri@iet.unipi.it,
- rizzo@iet.unipi.it, david@gibson.dropbear.id.au, akrowiak@linux.ibm.com,
- berrange@redhat.com, xiaoguangrong.eric@gmail.com, pmorel@linux.ibm.com,
- wencongyang2@huawei.com, jcd@tribudubois.net, pbonzini@redhat.com,
- stefanb@linux.ibm.com
-References: <20190923161231.22028-1-vsementsov@virtuozzo.com>
- <20190923161231.22028-7-vsementsov@virtuozzo.com>
- <57e97ed0-b1a1-d209-fc23-cf41ec467157@redhat.com>
-From: Eric Blake <eblake@redhat.com>
-Openpgp: preference=signencrypt
-Autocrypt: addr=eblake@redhat.com; keydata=
- xsBNBEvHyWwBCACw7DwsQIh0kAbUXyqhfiKAKOTVu6OiMGffw2w90Ggrp4bdVKmCaEXlrVLU
- xphBM8mb+wsFkU+pq9YR621WXo9REYVIl0FxKeQo9dyQBZ/XvmUMka4NOmHtFg74nvkpJFCD
- TUNzmqfcjdKhfFV0d7P/ixKQeZr2WP1xMcjmAQY5YvQ2lUoHP43m8TtpB1LkjyYBCodd+LkV
- GmCx2Bop1LSblbvbrOm2bKpZdBPjncRNob73eTpIXEutvEaHH72LzpzksfcKM+M18cyRH+nP
- sAd98xIbVjm3Jm4k4d5oQyE2HwOur+trk2EcxTgdp17QapuWPwMfhaNq3runaX7x34zhABEB
- AAHNHkVyaWMgQmxha2UgPGVibGFrZUByZWRoYXQuY29tPsLAegQTAQgAJAIbAwULCQgHAwUV
- CgkICwUWAgMBAAIeAQIXgAUCS8fL9QIZAQAKCRCnoWtKJSdDahBHCACbl/5FGkUqJ89GAjeX
- RjpAeJtdKhujir0iS4CMSIng7fCiGZ0fNJCpL5RpViSo03Q7l37ss+No+dJI8KtAp6ID+PMz
- wTJe5Egtv/KGUKSDvOLYJ9WIIbftEObekP+GBpWP2+KbpADsc7EsNd70sYxExD3liwVJYqLc
- Rw7so1PEIFp+Ni9A1DrBR5NaJBnno2PHzHPTS9nmZVYm/4I32qkLXOcdX0XElO8VPDoVobG6
- gELf4v/vIImdmxLh/w5WctUpBhWWIfQDvSOW2VZDOihm7pzhQodr3QP/GDLfpK6wI7exeu3P
- pfPtqwa06s1pae3ad13mZGzkBdNKs1HEm8x6zsBNBEvHyWwBCADGkMFzFjmmyqAEn5D+Mt4P
- zPdO8NatsDw8Qit3Rmzu+kUygxyYbz52ZO40WUu7EgQ5kDTOeRPnTOd7awWDQcl1gGBXgrkR
- pAlQ0l0ReO57Q0eglFydLMi5bkwYhfY+TwDPMh3aOP5qBXkm4qIYSsxb8A+i00P72AqFb9Q7
- 3weG/flxSPApLYQE5qWGSXjOkXJv42NGS6o6gd4RmD6Ap5e8ACo1lSMPfTpGzXlt4aRkBfvb
- NCfNsQikLZzFYDLbQgKBA33BDeV6vNJ9Cj0SgEGOkYyed4I6AbU0kIy1hHAm1r6+sAnEdIKj
- cHi3xWH/UPrZW5flM8Kqo14OTDkI9EtlABEBAAHCwF8EGAEIAAkFAkvHyWwCGwwACgkQp6Fr
- SiUnQ2q03wgAmRFGDeXzc58NX0NrDijUu0zx3Lns/qZ9VrkSWbNZBFjpWKaeL1fdVeE4TDGm
- I5mRRIsStjQzc2R9b+2VBUhlAqY1nAiBDv0Qnt+9cLiuEICeUwlyl42YdwpmY0ELcy5+u6wz
- mK/jxrYOpzXKDwLq5k4X+hmGuSNWWAN3gHiJqmJZPkhFPUIozZUCeEc76pS/IUN72NfprZmF
- Dp6/QDjDFtfS39bHSWXKVZUbqaMPqlj/z6Ugk027/3GUjHHr8WkeL1ezWepYDY7WSoXwfoAL
- 2UXYsMAr/uUncSKlfjvArhsej0S4zbqim2ZY6S8aRWw94J3bSvJR+Nwbs34GPTD4Pg==
-Organization: Red Hat, Inc.
-Message-ID: <7cffb999-35e5-742e-7241-6da4777885bf@redhat.com>
-Date: Mon, 23 Sep 2019 16:29:59 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.8.0
+ (envelope-from <peter.maydell@linaro.org>) id 1iCWjK-0003pb-BB
+ for qemu-riscv@nongnu.org; Mon, 23 Sep 2019 18:22:51 -0400
+Received: from mail-ot1-x342.google.com ([2607:f8b0:4864:20::342]:43293)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <peter.maydell@linaro.org>)
+ id 1iCWAA-0001Za-DM
+ for qemu-riscv@nongnu.org; Mon, 23 Sep 2019 17:46:30 -0400
+Received: by mail-ot1-x342.google.com with SMTP id o44so5067773ota.10
+ for <qemu-riscv@nongnu.org>; Mon, 23 Sep 2019 14:46:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=1lwzpWN8tjukbbISDvbnJRJp7+j23v5G7tQvo2iviAw=;
+ b=NgJuH4J4A33lyPD33YF15BNN5RpNHLbOuf5gm0qILbL/ica6Cuc9Zmb5BoeJC/Pp6M
+ 6eBAoOjf3wfumYLUsh4z4j3BGRNFyNGfwhsNopx8kE2yp8jIIumstlLJbrvhXBmOxqtc
+ Ca7X5qxIHVtmUDwcJ3sfOVl/8fkjqa4TS0xNkgiuVI9tNeLGKrStTt6FOtiQFN4qTdBs
+ dxklM/lynYEnNOJ+fUWdtxcCaPplYEfCRmw7Qj0c69MdtYhtXIO5cokxOxbD91dCTydE
+ xB7iWiKfPU5y3D7ebnLAiHEFm6bkrG9Frp7P42C4CchQ4VYDheJ1acT6JGUkeTWHLkT8
+ 9THw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=1lwzpWN8tjukbbISDvbnJRJp7+j23v5G7tQvo2iviAw=;
+ b=jVU4MH8/d4i5wlNIcboUkCkbQtQXI6jc8aHclrFS9ENklgdrf/KYFdLlchrrWB4XZG
+ EBvnBS7uwewq2icBeScF0nMBqFFU5co8z5R8xeEhJ7ZrEClEHKLao2kaETIpciRnir9f
+ RWpsJ20+q15iNg3hE43vIs5nV6cGo7zVtw1gqXhveN8MakWulvJmHvm+/AMh0zJQm8rj
+ 5CYjjxPiKojjxKNm0qpja0FGQB3H+I6FD33uzX+dRPt9kff45MjsJQEutcjAlJC3tin+
+ iMrfBG29RJfpLNVNmEMwVM1i5IweQNHuH3g+n/eFdhlRBr0vlfb+SYpMveH6sHunt8So
+ sEfg==
+X-Gm-Message-State: APjAAAVoHsYdaUcQT+ifiQdhrE73hJSWHYPAy2m6VJDkVJaq8wAsjjpM
+ wZKwKubkboAAsqDXQXvf7C4uBh3ptQPJFbcN/4vw8Q==
+X-Google-Smtp-Source: APXvYqzlviW3HUvhH+fobID+Iesir2GZbVjn9P0OyQFYL8SkBo09OrV9KfQruiYNxghNEMxTA6uf1Kx1Rls0R+BwCc4=
+X-Received: by 2002:a9d:6d0a:: with SMTP id o10mr304805otp.221.1569275188921; 
+ Mon, 23 Sep 2019 14:46:28 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <57e97ed0-b1a1-d209-fc23-cf41ec467157@redhat.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.39]); Mon, 23 Sep 2019 21:30:51 +0000 (UTC)
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
-X-Received-From: 209.132.183.28
+References: <cover.1568931866.git.alistair.francis@wdc.com>
+ <0a5c141a26fada6d93d06e996a2f24e1b269ec50.1568931866.git.alistair.francis@wdc.com>
+ <CAEUhbmVvDKQqQYE-riq=cvSrCe_NMoW_KDsLjh8CVHRUhJvk9A@mail.gmail.com>
+ <CAKmqyKOofA3U+8kjMkzQ0sNd1=uwJHq3c9eaLZdoNCb7=e-PAw@mail.gmail.com>
+In-Reply-To: <CAKmqyKOofA3U+8kjMkzQ0sNd1=uwJHq3c9eaLZdoNCb7=e-PAw@mail.gmail.com>
+From: Peter Maydell <peter.maydell@linaro.org>
+Date: Mon, 23 Sep 2019 22:46:17 +0100
+Message-ID: <CAFEAcA-uFPGf4BiDXH=Om3Df-xXrt7QwjzVF7E3kY4aMWMP4YQ@mail.gmail.com>
+Subject: Re: [PATCH v1 5/6] riscv/virt: Add the PFlash CFI01 device
+To: Alistair Francis <alistair23@gmail.com>
+Cc: Bin Meng <bmeng.cn@gmail.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Palmer Dabbelt <palmer@sifive.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Markus Armbruster <armbru@redhat.com>
+Content-Type: text/plain; charset="UTF-8"
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2607:f8b0:4864:20::342
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -110,45 +71,35 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Sep 2019 21:31:09 -0000
+X-List-Received-Date: Mon, 23 Sep 2019 22:22:52 -0000
 
-On 9/23/19 3:05 PM, Eric Blake wrote:
+On Fri, 20 Sep 2019 at 23:23, Alistair Francis <alistair23@gmail.com> wrote:
+> On Thu, Sep 19, 2019 at 10:15 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+> > I don't think we should mirror what is used on ARM virt board to
+> > create 2 flash for sifive_u. For ARM virt, there are 2 flashes because
+> > they need distinguish secure and non-secure. For sifive_u, only one is
+> > enough.
+>
+> I went back and forward about 1 or 2. Two seems more usable as maybe
+> someone wants to include two pflash files? The Xilinx machine also has
+> two so I'm kind of used to 2, but I'm not really fussed.
 
-> Does running this Coccinelle script 2 times in a row add a second
-> ERRP_FUNCTION_BEGIN() line?  We want it to be idempotent (no changes on
-> a second run).  (Admittedly, I did not actually test that yet).  Also, I
-> don't know if this can be tweaked to avoid adding the line to a function
-> with an empty body, maybe:
-> 
->  fn(..., Error **errp, ...)
->  {
-> +    ERRP_FUNCTION_BEGIN();
->      ...
->  }
+One of the reasons for having 2 on the Arm board (we do this
+even if we're not supporting secure vs non-secure) is that
+then you can use one for a fixed read-only BIOS image (backed
+by a file on the host filesystem shared between all VMs), and
+one backed by a read-write per-VM file providing permanent
+storage for BIOS environment variables. Notably UEFI likes to
+work this way, but the idea applies in theory to other
+boot loader or BIOSes I guess.
 
-Also untested:
+I would suggest also checking with Markus that your code
+for instantiating the flash devices follows the current
+recommendations so the backing storage can be configured
+via -blockdev. (This is a fairly recent change from June or
+so; current-in-master virt and sbsa boards provide an example
+of doing the right thing, I think.)
 
- fn(..., Error **errp, ...)
- {
-(
-|
-     ERRP_FUNCTION_BEGIN();
-     ...
-|
-+    ERRP_FUNCTION_BEGIN()
-     ...
-)
- }
-
-
-> Overall, the script makes sense in my reading (but no idea if it
-> actually catches everything we want, or if it missed something).
-
-Having spot-checked 7, it definitely misses cases where it was supposed
-to add ERRP_FUNCTION_BEGIN().
-
--- 
-Eric Blake, Principal Software Engineer
-Red Hat, Inc.           +1-919-301-3226
-Virtualization:  qemu.org | libvirt.org
+thanks
+-- PMM
 
