@@ -1,83 +1,68 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iCKM4-00082P-TQ
-	for mharc-qemu-riscv@gnu.org; Mon, 23 Sep 2019 05:10:00 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:52720)
+	id 1iCRAW-0003Ng-95
+	for mharc-qemu-riscv@gnu.org; Mon, 23 Sep 2019 12:26:32 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:57675)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <philmd@redhat.com>) id 1iCKM1-0007x2-Dc
- for qemu-riscv@nongnu.org; Mon, 23 Sep 2019 05:09:58 -0400
+ (envelope-from <vsementsov@virtuozzo.com>) id 1iCQxs-0002io-NU
+ for qemu-riscv@nongnu.org; Mon, 23 Sep 2019 12:13:30 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <philmd@redhat.com>) id 1iCKLy-0008Dq-MK
- for qemu-riscv@nongnu.org; Mon, 23 Sep 2019 05:09:55 -0400
-Received: from us-smtp-1.mimecast.com ([207.211.31.81]:28194
- helo=us-smtp-delivery-1.mimecast.com)
+ (envelope-from <vsementsov@virtuozzo.com>) id 1iCQxq-00045R-95
+ for qemu-riscv@nongnu.org; Mon, 23 Sep 2019 12:13:28 -0400
+Received: from relay.sw.ru ([185.231.240.75]:39502)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <philmd@redhat.com>) id 1iCKLy-0008CN-7N
- for qemu-riscv@nongnu.org; Mon, 23 Sep 2019 05:09:54 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1569229793;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:openpgp:openpgp;
- bh=jKga1tA8YbDtAFc6D1iqzbhRz2b0Enh0pJ0iCH4FGGM=;
- b=RmZQDKHKbufeW9sKuta9UifPWQF3+SLFEs2GyBeWF7YbfdeNgtWHfELlfbhl9tZbATKa/r
- 9C7eg3YYJXafTuRzY9iJf8zs4NlS9duVajNHs6zA1rfQ+pKF8FOTCmnHM+NCJPMZXliG3Y
- 2Xj6U2hmmxFoOeR/JfsYIgf77Kj7a6U=
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-77-DFOQ5C5uPI2PGm4aP9TdxA-1; Mon, 23 Sep 2019 05:09:50 -0400
-Received: by mail-wm1-f70.google.com with SMTP id m6so4705947wmf.2
- for <qemu-riscv@nongnu.org>; Mon, 23 Sep 2019 02:09:49 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
- :date:user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=3UZ5UpiM5VMl98zukP4c1o3KaJWeHTA6Ym5KGThfkEM=;
- b=HQyAGEuvAqglK+ODRz22rsbUEhwl7qeyl7wspOWswDVaWMj3t6fXI9ZipTE/2M60Ay
- VyEeW4xFUng1MK+l6kNrX9guFC/iXsW9kTc+YlQeIqBBo3+BUcsmVmI2jD0qgl/HZuH0
- GgGSwf4MTAo8DtvdE4zVwz22ofNFoxKybuR+AOezcJALU0IgFHQfszzeB0scjuslyiEG
- 2JFcSu5RZss3WN6UQZtazQVVOrUjAyFDRge+70hUvIlcO7R2PSo6+7n1lQvdWe/K+mtm
- xcNNpIPVF0aewrGvdw/yPxP8kKUGExLjiagziVih3tsQr9DmswDeXaKsI549TJXBGXHa
- mNXg==
-X-Gm-Message-State: APjAAAUCxYT2i7sg/lhZLLkHyN6HnoSKpAFeJ36JxMKiWQ/p0i0b0wa3
- 4zXUjTiyDFI/CUyMgKqwNSl7tE4L4gJyg5sya84L42lbydVmdc232WIdDDQtBhfCQL3vunCYdrz
- 7P4gjDCLwNz2pTIw=
-X-Received: by 2002:a1c:7fcc:: with SMTP id a195mr13236494wmd.27.1569229788998; 
- Mon, 23 Sep 2019 02:09:48 -0700 (PDT)
-X-Google-Smtp-Source: APXvYqxBenpdZaKKg5q9L3EU1AiYKwI145GhCLELXT1Fp+0+lNx/eUzMDqapCop+zqB5NYN9Q2+HDw==
-X-Received: by 2002:a1c:7fcc:: with SMTP id a195mr13236469wmd.27.1569229788709; 
- Mon, 23 Sep 2019 02:09:48 -0700 (PDT)
-Received: from [192.168.1.40] (240.red-88-21-68.staticip.rima-tde.net.
- [88.21.68.240])
- by smtp.gmail.com with ESMTPSA id p85sm19949506wme.23.2019.09.23.02.09.47
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 23 Sep 2019 02:09:48 -0700 (PDT)
-Subject: Re: [PATCH v1 6/6] riscv/virt: Jump to pflash if specified
-To: Bin Meng <bmeng.cn@gmail.com>, Alistair Francis <alistair.francis@wdc.com>
-Cc: Alistair Francis <alistair23@gmail.com>,
- Palmer Dabbelt <palmer@sifive.com>, "open list:RISC-V"
- <qemu-riscv@nongnu.org>,
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
-References: <cover.1568931866.git.alistair.francis@wdc.com>
- <a3649f52a79eff39c707546d88ecd25b753dbf33.1568931866.git.alistair.francis@wdc.com>
- <CAEUhbmVcupHEesoyrfnyCfSUg4Q8pZnyUt=3hpC_g11BL1wxwg@mail.gmail.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>
-Openpgp: id=89C1E78F601EE86C867495CBA2A3FD6EDEADC0DE;
- url=http://pgp.mit.edu/pks/lookup?op=get&search=0xA2A3FD6EDEADC0DE
-Message-ID: <b6236eec-d60a-c502-e010-f3ca137e8b89@redhat.com>
-Date: Mon, 23 Sep 2019 11:09:47 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.7.0
+ (Exim 4.71) (envelope-from <vsementsov@virtuozzo.com>)
+ id 1iCQxN-0003a9-HI; Mon, 23 Sep 2019 12:12:57 -0400
+Received: from [10.94.3.0] (helo=kvm.qa.sw.ru)
+ by relay.sw.ru with esmtp (Exim 4.92.2)
+ (envelope-from <vsementsov@virtuozzo.com>)
+ id 1iCQx0-0001Fp-4Q; Mon, 23 Sep 2019 19:12:34 +0300
+From: Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>
+To: qemu-devel@nongnu.org
+Cc: kraxel@redhat.com, berrange@redhat.com, arei.gonglei@huawei.com,
+ ehabkost@redhat.com, imammedo@redhat.com, lvivier@redhat.com,
+ amit@kernel.org, kwolf@redhat.com, mreitz@redhat.com, ari@tuxera.com,
+ pavel.dovgaluk@ispras.ru, pbonzini@redhat.com, stefanha@redhat.com,
+ jsnow@redhat.com, sw@weilnetz.de, fam@euphon.net, ronniesahlberg@gmail.com,
+ pl@kamp.de, eblake@redhat.com, den@openvz.org, armbru@redhat.com,
+ berto@igalia.com, dillaman@redhat.com, wencongyang2@huawei.com,
+ xiechanglong.d@gmail.com, namei.unix@gmail.com, rjones@redhat.com,
+ codyprime@gmail.com, marcandre.lureau@redhat.com, rth@twiddle.net,
+ groug@kaod.org, mst@redhat.com, marcel.apfelbaum@gmail.com,
+ b.galvani@gmail.com, peter.maydell@linaro.org,
+ Andrew.Baumann@microsoft.com, philmd@redhat.com, antonynpavlov@gmail.com,
+ jcd@tribudubois.net, peter.chubb@nicta.com.au, sundeep.lkml@gmail.com,
+ joel@jms.id.au, eric.auger@redhat.com, alistair@alistair23.me,
+ balrogg@gmail.com, edgar.iglesias@gmail.com, sstabellini@kernel.org,
+ anthony.perard@citrix.com, paul.durrant@citrix.com, pburton@wavecomp.com,
+ arikalo@wavecomp.com, clg@kaod.org, andrew@aj.id.au, crwulff@gmail.com,
+ marex@denx.de, david@gibson.dropbear.id.au, pasic@linux.ibm.com,
+ cohuck@redhat.com, borntraeger@de.ibm.com, hpoussin@reactos.org,
+ xiaoguangrong.eric@gmail.com, aurelien@aurel32.net, amarkovic@wavecomp.com,
+ mark.cave-ayland@ilande.co.uk, jasowang@redhat.com, lersek@redhat.com,
+ palmer@sifive.com, sagark@eecs.berkeley.edu,
+ kbastian@mail.uni-paderborn.de, david@redhat.com, thuth@redhat.com,
+ farman@linux.ibm.com, walling@linux.ibm.com, hare@suse.com,
+ michael@walle.cc, atar4qemu@gmail.com, stefanb@linux.ibm.com,
+ samuel.thibault@ens-lyon.org, akrowiak@linux.ibm.com, pmorel@linux.ibm.com,
+ alex.williamson@redhat.com, mdroth@linux.vnet.ibm.com,
+ zhang.zhanghailiang@huawei.com, quintela@redhat.com, dgilbert@redhat.com,
+ rizzo@iet.unipi.it, g.lettieri@iet.unipi.it, v.maffione@gmail.com,
+ jan.kiszka@siemens.com, green@moxielogic.com, shorne@gmail.com,
+ gxt@mprc.pku.edu.cn, jcmvbkbc@gmail.com, qemu-block@nongnu.org,
+ integration@gluster.org, sheepdog@lists.wpkg.org, qemu-arm@nongnu.org,
+ xen-devel@lists.xenproject.org, qemu-ppc@nongnu.org, qemu-s390x@nongnu.org,
+ qemu-riscv@nongnu.org, vsementsov@virtuozzo.com
+Subject: [RFC v2 5/9] net/net: fix local variable shadowing in net_client_init
+Date: Mon, 23 Sep 2019 19:12:27 +0300
+Message-Id: <20190923161231.22028-6-vsementsov@virtuozzo.com>
+X-Mailer: git-send-email 2.21.0
+In-Reply-To: <20190923161231.22028-1-vsementsov@virtuozzo.com>
+References: <20190923161231.22028-1-vsementsov@virtuozzo.com>
 MIME-Version: 1.0
-In-Reply-To: <CAEUhbmVcupHEesoyrfnyCfSUg4Q8pZnyUt=3hpC_g11BL1wxwg@mail.gmail.com>
-Content-Language: en-US
-X-MC-Unique: DFOQ5C5uPI2PGm4aP9TdxA-1
-X-Mimecast-Spam-Score: 0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
-X-Received-From: 207.211.31.81
+Content-Transfer-Encoding: 8bit
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 3.x
+X-Received-From: 185.231.240.75
+X-Mailman-Approved-At: Mon, 23 Sep 2019 12:26:31 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -89,69 +74,35 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Sep 2019 09:09:59 -0000
+X-List-Received-Date: Mon, 23 Sep 2019 16:13:31 -0000
 
-On 9/20/19 7:15 AM, Bin Meng wrote:
-> On Fri, Sep 20, 2019 at 6:35 AM Alistair Francis
-> <alistair.francis@wdc.com> wrote:
->>
->> If the user supplied pflash to QEMU then change the reset code to jump
->> to the pflash base address instead of the DRAM base address.
->>
->> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
->> ---
->>  hw/riscv/virt.c | 10 +++++++++-
->>  1 file changed, 9 insertions(+), 1 deletion(-)
->>
->> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
->> index ca002ecea7..ed25cc6761 100644
->> --- a/hw/riscv/virt.c
->> +++ b/hw/riscv/virt.c
->> @@ -441,6 +441,7 @@ static void riscv_virt_board_init(MachineState *mach=
-ine)
->>      MemoryRegion *mask_rom =3D g_new(MemoryRegion, 1);
->>      char *plic_hart_config;
->>      size_t plic_hart_config_len;
->> +    target_ulong start_addr =3D memmap[VIRT_DRAM].base;
->>      int i;
->>      unsigned int smp_cpus =3D machine->smp.cpus;
->>
->> @@ -487,6 +488,13 @@ static void riscv_virt_board_init(MachineState *mac=
-hine)
->>          }
->>      }
->>
->> +    if (drive_get(IF_PFLASH, 0, 0)) {
->> +        /* Pflash was supplied, let's overwrite the address we jump to =
-after
->=20
-> nits: wrong multi-line comment format
->=20
->> +         * reset to the base of the flash.
->> +         */
->> +        start_addr =3D virt_memmap[VIRT_FLASH].base;
->> +    }
->> +
->>      /* reset vector */
->>      uint32_t reset_vec[8] =3D {
->>          0x00000297,                  /* 1:  auipc  t0, %pcrel_hi(dtb) *=
-/
->> @@ -499,7 +507,7 @@ static void riscv_virt_board_init(MachineState *mach=
-ine)
->>  #endif
->>          0x00028067,                  /*     jr     t0 */
->>          0x00000000,
->> -        memmap[VIRT_DRAM].base,      /* start: .dword memmap[VIRT_DRAM]=
-.base */
->> +        start_addr,                  /* start: .dword */
->>          0x00000000,
->>                                       /* dtb: */
->>      };
->> --
->=20
-> Otherwise,
-> Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+Don't shadow Error *err: it's a bad thing. This patch also simplifies
+following Error propagation conversion.
 
-Reviewed-by: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
+Signed-off-by: Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>
+---
+ net/net.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/net/net.c b/net/net.c
+index 84aa6d8d00..5fc72511c1 100644
+--- a/net/net.c
++++ b/net/net.c
+@@ -1128,10 +1128,10 @@ static int net_client_init(QemuOpts *opts, bool is_netdev, Error **errp)
+ 
+             if (substrings[1]) {
+                 /* User-specified prefix length.  */
+-                int err;
++                int ret2;
+ 
+-                err = qemu_strtoul(substrings[1], NULL, 10, &prefix_len);
+-                if (err) {
++                ret2 = qemu_strtoul(substrings[1], NULL, 10, &prefix_len);
++                if (ret2) {
+                     error_setg(errp, QERR_INVALID_PARAMETER_VALUE,
+                                "ipv6-prefixlen", "a number");
+                     goto out;
+-- 
+2.21.0
 
 
