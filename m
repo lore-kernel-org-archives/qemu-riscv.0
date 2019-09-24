@@ -1,58 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iCpD4-0007GW-Ix
-	for mharc-qemu-riscv@gnu.org; Tue, 24 Sep 2019 14:06:46 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:39157)
+	id 1iCpdg-0005Kx-9D
+	for mharc-qemu-riscv@gnu.org; Tue, 24 Sep 2019 14:34:16 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:50341)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <lersek@redhat.com>) id 1iCoN3-00087Q-VQ
- for qemu-riscv@nongnu.org; Tue, 24 Sep 2019 13:13:03 -0400
+ (envelope-from <alistair23@gmail.com>) id 1iCpdb-0005K6-Aa
+ for qemu-riscv@nongnu.org; Tue, 24 Sep 2019 14:34:13 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <lersek@redhat.com>) id 1iCoN2-0005F8-1w
- for qemu-riscv@nongnu.org; Tue, 24 Sep 2019 13:13:01 -0400
-Received: from mx1.redhat.com ([209.132.183.28]:41984)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <lersek@redhat.com>)
- id 1iCoMx-0005CW-SV; Tue, 24 Sep 2019 13:12:56 -0400
-Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
- [10.5.11.13])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id 12DDA81F31;
- Tue, 24 Sep 2019 17:12:55 +0000 (UTC)
-Received: from lacos-laptop-7.usersys.redhat.com (ovpn-120-118.rdu2.redhat.com
- [10.10.120.118])
- by smtp.corp.redhat.com (Postfix) with ESMTP id E1EA060852;
- Tue, 24 Sep 2019 17:12:50 +0000 (UTC)
-Subject: Re: [PATCH v1 5/6] riscv/virt: Add the PFlash CFI01 device
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>,
- Peter Maydell <peter.maydell@linaro.org>,
- Alistair Francis <alistair23@gmail.com>
-Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
- Palmer Dabbelt <palmer@sifive.com>,
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Markus Armbruster <armbru@redhat.com>,
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>
-References: <cover.1568931866.git.alistair.francis@wdc.com>
- <0a5c141a26fada6d93d06e996a2f24e1b269ec50.1568931866.git.alistair.francis@wdc.com>
- <CAEUhbmVvDKQqQYE-riq=cvSrCe_NMoW_KDsLjh8CVHRUhJvk9A@mail.gmail.com>
- <CAKmqyKOofA3U+8kjMkzQ0sNd1=uwJHq3c9eaLZdoNCb7=e-PAw@mail.gmail.com>
- <CAFEAcA-uFPGf4BiDXH=Om3Df-xXrt7QwjzVF7E3kY4aMWMP4YQ@mail.gmail.com>
- <16bab4bf-b91e-ef0c-2d22-53538f74cfc4@redhat.com>
-From: Laszlo Ersek <lersek@redhat.com>
-Message-ID: <102dcf49-2bce-757d-be28-3594b5d280cc@redhat.com>
-Date: Tue, 24 Sep 2019 19:12:49 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
+ (envelope-from <alistair23@gmail.com>) id 1iCpdZ-0003tc-NF
+ for qemu-riscv@nongnu.org; Tue, 24 Sep 2019 14:34:11 -0400
+Received: from mail-lf1-x143.google.com ([2a00:1450:4864:20::143]:38570)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <alistair23@gmail.com>)
+ id 1iCpdZ-0003rz-83; Tue, 24 Sep 2019 14:34:09 -0400
+Received: by mail-lf1-x143.google.com with SMTP id u28so2185428lfc.5;
+ Tue, 24 Sep 2019 11:34:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=0WUBUDYYD97l0YxSlbW+BjQJFD96jFL3ws7Jj4OI5sk=;
+ b=pZFXZoqu0jfCEhU1stE6pwtYTO6G9jOox2HWoDh6axguhL253iag/okyo1tNYYoa/A
+ qbqTHIZqfnMelxrkLJejiawGug0/ACEI7wcuoIfsBLKQcxWKnvkcZSu5uRx80pqod0pf
+ jaNZ6ZXwyCEx2oMTfCtRc2jO5ylZw/EEjB1yb/n8boaaGCIqIOvXMVBPDzjGecqiL/3h
+ QPpB2Y6XFZQTFGfhuR1bXu4r6VUoOTKlbfpxAKbdh3K8PhJgBzDjn/yDkHmv38nLCLlo
+ q9wW1xA2iVh2BOfnWDjB68LKWPxShlcYTrAB92ixKxOqWYXp1IR2TtJ/ZxIkNXue6Dg/
+ JXRg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=0WUBUDYYD97l0YxSlbW+BjQJFD96jFL3ws7Jj4OI5sk=;
+ b=GpCeTtDXIeG5khajlXBl+N5+Tamcr7xrF+jILKqeqGhnN2rbZUoFiwyZ6iGX+Voq7V
+ Y4NrjjVS1ov21lO2lt2uF5F2ytmkaByOIj5ejTlyaVzOmBX8Uqn1KgnAG5YjBNFYrgg9
+ C6WKAL+0ZhuMYOVmaP0jucOo6u0yKmBA6jVVf9b6yZMbRp2WtcnzoESulwQMj5oIhK3H
+ Deg4VYpCdGN3rQaSYXEatKOQfGNRtwoLINCzIqt39KZokleM3ByPvp3RBV6S7+tpnBAZ
+ UTla05RirK/MgH+Nz8otB/5gMfAEqBfXKBtWKsqlzTpBvBF1Fkaat92ll95fNTe/WTzS
+ 3S8g==
+X-Gm-Message-State: APjAAAWNqY2zL8X4pDjJf4LYP3IVKt+moACLGhJJ6juvQXhaymjTzQHX
+ 9va4XscQ1bUWWInYLriZrxWnM46ZGCfH+p973yI=
+X-Google-Smtp-Source: APXvYqzu6P4fzmY0JdHTcPV4gJ36sp387IwuhqIEJOXC7ekEjKBwNLqlQX40exKW60huJ/EuB0MoZbqkgr16m9WqUwk=
+X-Received: by 2002:a19:4912:: with SMTP id w18mr2687562lfa.93.1569350047032; 
+ Tue, 24 Sep 2019 11:34:07 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <16bab4bf-b91e-ef0c-2d22-53538f74cfc4@redhat.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.25]); Tue, 24 Sep 2019 17:12:55 +0000 (UTC)
-Content-Transfer-Encoding: quoted-printable
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
-X-Received-From: 209.132.183.28
-X-Mailman-Approved-At: Tue, 24 Sep 2019 14:06:42 -0400
+References: <20190616191900.GH61734@hippo.sing.id.au>
+ <41ef5fbf-f438-e60a-2fba-a72e3ad422f9@linaro.org>
+ <20190624180837.GM61734@hippo.sing.id.au>
+In-Reply-To: <20190624180837.GM61734@hippo.sing.id.au>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 24 Sep 2019 11:29:25 -0700
+Message-ID: <CAKmqyKP+HNfzh5kCKkGDtfr=pDRwcjL+dUQ79NZEk+jMZ3q=_Q@mail.gmail.com>
+Subject: Re: [Qemu-devel] [PATCH] atomic failures on qemu-system-riscv64
+To: Joel Sing <joel@sing.id.au>
+Cc: Richard Henderson <richard.henderson@linaro.org>, me@carlosedp.com, 
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, Palmer Dabbelt <palmer@sifive.com>,
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Alistair Francis <Alistair.Francis@wdc.com>, marco@decred.org
+Content-Type: text/plain; charset="UTF-8"
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2a00:1450:4864:20::143
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -64,70 +68,120 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Sep 2019 17:13:04 -0000
+X-List-Received-Date: Tue, 24 Sep 2019 18:34:13 -0000
 
-On 09/24/19 11:32, Philippe Mathieu-Daud=C3=A9 wrote:
-> On 9/23/19 11:46 PM, Peter Maydell wrote:
->> On Fri, 20 Sep 2019 at 23:23, Alistair Francis <alistair23@gmail.com> =
-wrote:
->>> On Thu, Sep 19, 2019 at 10:15 PM Bin Meng <bmeng.cn@gmail.com> wrote:
->>>> I don't think we should mirror what is used on ARM virt board to
->>>> create 2 flash for sifive_u. For ARM virt, there are 2 flashes becau=
-se
->>>> they need distinguish secure and non-secure. For sifive_u, only one =
-is
->>>> enough.
->>>
->>> I went back and forward about 1 or 2. Two seems more usable as maybe
->>> someone wants to include two pflash files? The Xilinx machine also ha=
-s
->>> two so I'm kind of used to 2, but I'm not really fussed.
->=20
-> The Xilinx machine has 2 because it matches the hardware.
->=20
->> One of the reasons for having 2 on the Arm board (we do this
->> even if we're not supporting secure vs non-secure) is that
->> then you can use one for a fixed read-only BIOS image (backed
->> by a file on the host filesystem shared between all VMs), and
->> one backed by a read-write per-VM file providing permanent
->> storage for BIOS environment variables. Notably UEFI likes to
->> work this way, but the idea applies in theory to other
->> boot loader or BIOSes I guess.
->=20
-> IIRC Laszlo's explanation, the only reason it is that way is because th=
-e
-> pflash_cfi01 model still doesn't implement sector locking. At the OVMF
-> emerged from EDK2, to have a safe ROM vs DATA storage it was decided to
-> use 2 different flashes.
-> When I understood when this config layout started, I suggested Laszlo t=
-o
-> use a real ROM to store the OVMF CODE since it is pointless to do
-> firmware upgrade in virtualized environment, but he said it was too lat=
-e
-> to change the design.
+On Mon, Jun 24, 2019 at 11:21 AM Joel Sing <joel@sing.id.au> wrote:
+>
+> On 19-06-17 16:52:44, Richard Henderson wrote:
+> > On 6/16/19 12:19 PM, Joel Sing wrote:
+> > > +    /*
+> > > +     * Clear the load reservation, since an SC must fail if there is
+> > > +     * an SC to any address, in between an LR and SC pair.
+> > > +     */
+> > > +    tcg_gen_movi_tl(load_res, 0);
+> > > +
+> > >      gen_set_label(l2);
+> >
+> > This clear needs to be moved down below label l2.
+> > Otherwise, with lr / sc / sc, the second sc could succeed in error.
+>
+> Indeed, thanks.
+>
+> > FWIW, other targets have used -1 as the "invalid" load reservation, since the
+> > architecture does not require address 0 to be unmapped.  This should be quite
+> > visible in M-mode with paging disabled and ram at offset 0.  Often, other
+> > targets require alignment for the lr/sc address, though I don't see that for riscv.
+>
+> I've switched to -1 as suggested. Regarding the alignment for reservations, the
+> specification does require this, although I do not recall seeing any enforcement
+> of this by qemu itself.
+>
+> New diff follows.
+>
+> From 8ef31a2ce8ef1cbeee92995a0b2994f480e9bb6d Mon Sep 17 00:00:00 2001
+> From: Joel Sing <joel@sing.id.au>
+> Date: Tue, 25 Jun 2019 02:44:24 +1000
+> Subject: [PATCH] Clear load reservations on qemu riscv target
+>
+> This prevents a load reservation from being placed in one context/process,
+> then being used in another, resulting in an SC succeeding incorrectly and
+> breaking atomics.
+>
+> Signed-off-by: Joel Sing <joel@sing.id.au>
+> ---
+>  target/riscv/cpu.c                      | 1 +
+>  target/riscv/cpu_helper.c               | 9 +++++++++
+>  target/riscv/insn_trans/trans_rva.inc.c | 8 +++++++-
+>  3 files changed, 17 insertions(+), 1 deletion(-)
+>
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index d61bce6d55..e7c8bf48fc 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -281,6 +281,7 @@ static void riscv_cpu_reset(CPUState *cs)
+>      env->pc = env->resetvec;
+>  #endif
+>      cs->exception_index = EXCP_NONE;
+> +    env->load_res = -1;
+>      set_default_nan_mode(1, &env->fp_status);
+>  }
+>
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index b17f169681..6a07b12e65 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -113,6 +113,15 @@ void riscv_cpu_set_mode(CPURISCVState *env, target_ulong newpriv)
+>      }
+>      /* tlb_flush is unnecessary as mode is contained in mmu_idx */
+>      env->priv = newpriv;
+> +
+> +    /* Clear the load reservation - otherwise a reservation placed in one
+> +     * context/process can be used by another, resulting in an SC succeeding
+> +     * incorrectly. Version 2.2 of the ISA specification explicitly requires
+> +     * this behaviour, while later revisions say that the kernel "should" use
+> +     * an SC instruction to force the yielding of a load reservation on a
+> +     * preemptive context switch. As a result, do both.
+> +     */
+> +    env->load_res = -1;
+>  }
+>
+>  /* get_physical_address - get the physical address for this virtual address
+> diff --git a/target/riscv/insn_trans/trans_rva.inc.c b/target/riscv/insn_trans/trans_rva.inc.c
+> index f6dbbc065e..fadd88849e 100644
+> --- a/target/riscv/insn_trans/trans_rva.inc.c
+> +++ b/target/riscv/insn_trans/trans_rva.inc.c
+> @@ -61,7 +61,7 @@ static inline bool gen_sc(DisasContext *ctx, arg_atomic *a, TCGMemOp mop)
+>
+>      gen_set_label(l1);
+>      /*
+> -     * Address comparion failure.  However, we still need to
+> +     * Address comparison failure.  However, we still need to
+>       * provide the memory barrier implied by AQ/RL.
+>       */
+>      tcg_gen_mb(TCG_MO_ALL + a->aq * TCG_BAR_LDAQ + a->rl * TCG_BAR_STRL);
+> @@ -69,6 +69,12 @@ static inline bool gen_sc(DisasContext *ctx, arg_atomic *a, TCGMemOp mop)
+>      gen_set_gpr(a->rd, dat);
+>
+>      gen_set_label(l2);
+> +    /*
+> +     * Clear the load reservation, since an SC must fail if there is
+> +     * an SC to any address, in between an LR and SC pair.
+> +     */
+> +    tcg_gen_movi_tl(load_res, -1);
+> +
+>      tcg_temp_free(dat);
+>      tcg_temp_free(src1);
+>      tcg_temp_free(src2);
+> --
 
-Right, at that point I couldn't see how "-bios" *plus* "-pflash" could
-have worked. In chronological order (for OVMF anyway), there was -bios,
-then -pflash (R/W), then (with some QEMU changes) two -pflash flags (R/O
-+ R/W, which OVMF wouldn't tell apart from the single R/W -pflash).
+This patch causes boot failures when booting systemd built with musl on RV64.
 
-Thanks
-Laszlo
+It could possibly be a musl bug, but I wanted to throw that out here
+first to see what people think.
 
->=20
-> If you don't plan to run UEFI "Capsule Update" on your Virt board, I
-> suggest using memory_region_init_rom() with your firmware CODE, and a
-> parallel/SPI flash for the data VARStore.
->=20
->> I would suggest also checking with Markus that your code
->> for instantiating the flash devices follows the current
->> recommendations so the backing storage can be configured
->> via -blockdev. (This is a fairly recent change from June or
->> so; current-in-master virt and sbsa boards provide an example
->> of doing the right thing, I think.)
->>
->> thanks
->> -- PMM
->>
+Alistair
 
+> 2.21.0
+>
+>
 
