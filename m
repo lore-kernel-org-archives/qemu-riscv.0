@@ -1,162 +1,169 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iCmlR-0007YI-7A
-	for mharc-qemu-riscv@gnu.org; Tue, 24 Sep 2019 11:30:05 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49450)
+	id 1iCmzM-0005P6-Bj
+	for mharc-qemu-riscv@gnu.org; Tue, 24 Sep 2019 11:44:28 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:52047)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <eblake@redhat.com>) id 1iCmlM-0007RX-K6
- for qemu-riscv@nongnu.org; Tue, 24 Sep 2019 11:30:01 -0400
+ (envelope-from <vsementsov@virtuozzo.com>) id 1iCmzI-0005Ha-6i
+ for qemu-riscv@nongnu.org; Tue, 24 Sep 2019 11:44:25 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <eblake@redhat.com>) id 1iCmlL-0000M0-6p
- for qemu-riscv@nongnu.org; Tue, 24 Sep 2019 11:30:00 -0400
-Received: from mx1.redhat.com ([209.132.183.28]:35298)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <eblake@redhat.com>)
- id 1iCml6-0000I2-FI; Tue, 24 Sep 2019 11:29:44 -0400
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
- [10.5.11.12])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id E0637C069B4B;
- Tue, 24 Sep 2019 15:29:40 +0000 (UTC)
-Received: from [10.3.116.249] (ovpn-116-249.phx2.redhat.com [10.3.116.249])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 9D57860BFB;
- Tue, 24 Sep 2019 15:28:53 +0000 (UTC)
-Subject: Re: [RFC v2 0/9] error: auto propagated local_err
-To: Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>,
- "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>
-Cc: "kraxel@redhat.com" <kraxel@redhat.com>,
- "berrange@redhat.com" <berrange@redhat.com>,
- "arei.gonglei@huawei.com" <arei.gonglei@huawei.com>,
- "ehabkost@redhat.com" <ehabkost@redhat.com>,
- "imammedo@redhat.com" <imammedo@redhat.com>,
- "lvivier@redhat.com" <lvivier@redhat.com>, "amit@kernel.org"
- <amit@kernel.org>, "kwolf@redhat.com" <kwolf@redhat.com>,
+ (envelope-from <vsementsov@virtuozzo.com>) id 1iCmzG-0001LL-Ez
+ for qemu-riscv@nongnu.org; Tue, 24 Sep 2019 11:44:23 -0400
+Received: from mail-eopbgr10114.outbound.protection.outlook.com
+ ([40.107.1.114]:58375 helo=EUR02-HE1-obe.outbound.protection.outlook.com)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <vsementsov@virtuozzo.com>)
+ id 1iCmzF-0001KR-M2; Tue, 24 Sep 2019 11:44:22 -0400
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=CIN8FEVyMq9zzDQj3/JR5PG5cFEhGpCIQOhJqV6Zi6aoaWwF9YvA2VD0uYu7GCfUvPVcAMw9k3lN8oWFuKBP2EgMtigU/8nCIhx1OP1GluJdi58bLl99v7I1Mv7etVMfFoQA2rdtEuRaZWWliCjcdPMiUoOSOCR637/mIT6Hsu2mNBXkpxh/LE0mvBCp81YCOrJXOGq5mT/VfYck1ouJpHcobZe/pDZNujg63VvhjSAvNltKG7S6Hf7a0FjeoBR/BgN2yBh04UchXsvdseXEIVU6INVBzELxZClhlf5q6kwVg/xpfFQ6mqUUy1rqnc3DOew1ikpCUrqFZouXJ/a63Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=jtvaAOFSWQShvdYli2h1DMsogbMNuGaeeEBtgDwSVdI=;
+ b=oMeWSlRhU7fO76lKNMZjU8QV7lQ4PEO17ssRlH+3+oaOYXdEtgHxr+sTtJsENR2iZm+LLLftVR1HEWVyhq/KI+q8D2BdznzkX2ePCng29MnIM7CpCFJYlQGECEpyMNJK3DqYBFgvipjCqmHbthIY0AguNCd516qMXhABUqVEm6giQIa+qE1JJCW2tl7e55H43mDcL/4yKBQ8culO/R/WCyXEbEDcrYOZtEtblJuE91++9Ww/4xT2bQNtlkDITqbvgkCVEvEzFHe7hnCxrT3mcM2DHaLPpuXQZ8H6l3j4EhZpeOz0U5/nWR9/oTQ5w1+STBkwmKoqbyyMAuY+aMhMnw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=virtuozzo.com; dmarc=pass action=none
+ header.from=virtuozzo.com; dkim=pass header.d=virtuozzo.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=virtuozzo.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=jtvaAOFSWQShvdYli2h1DMsogbMNuGaeeEBtgDwSVdI=;
+ b=Ctn+/Nncs/KKbAJ9XYltiDsm13OnYeo9tEIGOLq42rEFBiHLcypzbpxCmReNvB+ovBUIiBhjtriLY8Fp4RRd/Bg+k7LBQ7b7XPe40PU5PXr4SXdsBAbGhKI1jc6kdZs8nefusrSSH3qWMchkzT7uGpymmLw/ySgxADW3qYRoYOs=
+Received: from DB8PR08MB5498.eurprd08.prod.outlook.com (52.133.242.216) by
+ DB8PR08MB5337.eurprd08.prod.outlook.com (52.133.243.73) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.2284.22; Tue, 24 Sep 2019 15:44:18 +0000
+Received: from DB8PR08MB5498.eurprd08.prod.outlook.com
+ ([fe80::b5c0:6b97:438d:77ed]) by DB8PR08MB5498.eurprd08.prod.outlook.com
+ ([fe80::b5c0:6b97:438d:77ed%2]) with mapi id 15.20.2284.023; Tue, 24 Sep 2019
+ 15:44:18 +0000
+From: Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>
+To: Eric Blake <eblake@redhat.com>, "qemu-devel@nongnu.org"
+ <qemu-devel@nongnu.org>
+CC: "kraxel@redhat.com" <kraxel@redhat.com>, "berrange@redhat.com"
+ <berrange@redhat.com>, "arei.gonglei@huawei.com" <arei.gonglei@huawei.com>,
+ "ehabkost@redhat.com" <ehabkost@redhat.com>, "imammedo@redhat.com"
+ <imammedo@redhat.com>, "lvivier@redhat.com" <lvivier@redhat.com>,
+ "amit@kernel.org" <amit@kernel.org>, "kwolf@redhat.com" <kwolf@redhat.com>,
  "mreitz@redhat.com" <mreitz@redhat.com>, "ari@tuxera.com" <ari@tuxera.com>,
- "pavel.dovgaluk@ispras.ru" <pavel.dovgaluk@ispras.ru>,
- "pbonzini@redhat.com" <pbonzini@redhat.com>,
- "stefanha@redhat.com" <stefanha@redhat.com>,
+ "pavel.dovgaluk@ispras.ru" <pavel.dovgaluk@ispras.ru>, "pbonzini@redhat.com"
+ <pbonzini@redhat.com>, "stefanha@redhat.com" <stefanha@redhat.com>,
  "jsnow@redhat.com" <jsnow@redhat.com>, "sw@weilnetz.de" <sw@weilnetz.de>,
- "fam@euphon.net" <fam@euphon.net>,
- "ronniesahlberg@gmail.com" <ronniesahlberg@gmail.com>,
- "pl@kamp.de" <pl@kamp.de>, Denis Lunev <den@virtuozzo.com>,
- "armbru@redhat.com" <armbru@redhat.com>, "berto@igalia.com"
- <berto@igalia.com>, "dillaman@redhat.com" <dillaman@redhat.com>,
- "wencongyang2@huawei.com" <wencongyang2@huawei.com>,
- "xiechanglong.d@gmail.com" <xiechanglong.d@gmail.com>,
- "namei.unix@gmail.com" <namei.unix@gmail.com>,
- "rjones@redhat.com" <rjones@redhat.com>,
- "codyprime@gmail.com" <codyprime@gmail.com>,
- "marcandre.lureau@redhat.com" <marcandre.lureau@redhat.com>,
- "rth@twiddle.net" <rth@twiddle.net>, "groug@kaod.org" <groug@kaod.org>,
- "mst@redhat.com" <mst@redhat.com>,
+ "fam@euphon.net" <fam@euphon.net>, "ronniesahlberg@gmail.com"
+ <ronniesahlberg@gmail.com>, "pl@kamp.de" <pl@kamp.de>, Denis Lunev
+ <den@virtuozzo.com>, "armbru@redhat.com" <armbru@redhat.com>,
+ "berto@igalia.com" <berto@igalia.com>, "dillaman@redhat.com"
+ <dillaman@redhat.com>, "wencongyang2@huawei.com" <wencongyang2@huawei.com>,
+ "xiechanglong.d@gmail.com" <xiechanglong.d@gmail.com>, "namei.unix@gmail.com"
+ <namei.unix@gmail.com>, "rjones@redhat.com" <rjones@redhat.com>,
+ "codyprime@gmail.com" <codyprime@gmail.com>, "marcandre.lureau@redhat.com"
+ <marcandre.lureau@redhat.com>, "rth@twiddle.net" <rth@twiddle.net>,
+ "groug@kaod.org" <groug@kaod.org>, "mst@redhat.com" <mst@redhat.com>,
  "marcel.apfelbaum@gmail.com" <marcel.apfelbaum@gmail.com>,
- "b.galvani@gmail.com" <b.galvani@gmail.com>,
- "peter.maydell@linaro.org" <peter.maydell@linaro.org>,
- "Andrew.Baumann@microsoft.com" <Andrew.Baumann@microsoft.com>,
- "philmd@redhat.com" <philmd@redhat.com>,
- "antonynpavlov@gmail.com" <antonynpavlov@gmail.com>,
- "jcd@tribudubois.net" <jcd@tribudubois.net>,
- "peter.chubb@nicta.com.au" <peter.chubb@nicta.com.au>,
- "sundeep.lkml@gmail.com" <sundeep.lkml@gmail.com>,
- "joel@jms.id.au" <joel@jms.id.au>,
- "eric.auger@redhat.com" <eric.auger@redhat.com>,
- "alistair@alistair23.me" <alistair@alistair23.me>,
- "balrogg@gmail.com" <balrogg@gmail.com>,
- "edgar.iglesias@gmail.com" <edgar.iglesias@gmail.com>,
+ "b.galvani@gmail.com" <b.galvani@gmail.com>, "peter.maydell@linaro.org"
+ <peter.maydell@linaro.org>, "Andrew.Baumann@microsoft.com"
+ <Andrew.Baumann@microsoft.com>, "philmd@redhat.com" <philmd@redhat.com>,
+ "antonynpavlov@gmail.com" <antonynpavlov@gmail.com>, "jcd@tribudubois.net"
+ <jcd@tribudubois.net>, "peter.chubb@nicta.com.au" <peter.chubb@nicta.com.au>, 
+ "sundeep.lkml@gmail.com" <sundeep.lkml@gmail.com>, "joel@jms.id.au"
+ <joel@jms.id.au>, "eric.auger@redhat.com" <eric.auger@redhat.com>,
+ "alistair@alistair23.me" <alistair@alistair23.me>, "balrogg@gmail.com"
+ <balrogg@gmail.com>, "edgar.iglesias@gmail.com" <edgar.iglesias@gmail.com>,
  "sstabellini@kernel.org" <sstabellini@kernel.org>,
  "anthony.perard@citrix.com" <anthony.perard@citrix.com>,
- "paul.durrant@citrix.com" <paul.durrant@citrix.com>,
- "pburton@wavecomp.com" <pburton@wavecomp.com>,
- "arikalo@wavecomp.com" <arikalo@wavecomp.com>, "clg@kaod.org"
- <clg@kaod.org>, "andrew@aj.id.au" <andrew@aj.id.au>,
+ "paul.durrant@citrix.com" <paul.durrant@citrix.com>, "pburton@wavecomp.com"
+ <pburton@wavecomp.com>, "arikalo@wavecomp.com" <arikalo@wavecomp.com>,
+ "clg@kaod.org" <clg@kaod.org>, "andrew@aj.id.au" <andrew@aj.id.au>,
  "crwulff@gmail.com" <crwulff@gmail.com>, "marex@denx.de" <marex@denx.de>,
  "david@gibson.dropbear.id.au" <david@gibson.dropbear.id.au>,
- "pasic@linux.ibm.com" <pasic@linux.ibm.com>,
- "cohuck@redhat.com" <cohuck@redhat.com>,
- "borntraeger@de.ibm.com" <borntraeger@de.ibm.com>,
- "hpoussin@reactos.org" <hpoussin@reactos.org>,
- "xiaoguangrong.eric@gmail.com" <xiaoguangrong.eric@gmail.com>,
- "aurelien@aurel32.net" <aurelien@aurel32.net>,
- "amarkovic@wavecomp.com" <amarkovic@wavecomp.com>,
+ "pasic@linux.ibm.com" <pasic@linux.ibm.com>, "cohuck@redhat.com"
+ <cohuck@redhat.com>, "borntraeger@de.ibm.com" <borntraeger@de.ibm.com>,
+ "hpoussin@reactos.org" <hpoussin@reactos.org>, "xiaoguangrong.eric@gmail.com"
+ <xiaoguangrong.eric@gmail.com>, "aurelien@aurel32.net"
+ <aurelien@aurel32.net>, "amarkovic@wavecomp.com" <amarkovic@wavecomp.com>,
  "mark.cave-ayland@ilande.co.uk" <mark.cave-ayland@ilande.co.uk>,
- "jasowang@redhat.com" <jasowang@redhat.com>,
- "lersek@redhat.com" <lersek@redhat.com>,
- "palmer@sifive.com" <palmer@sifive.com>,
+ "jasowang@redhat.com" <jasowang@redhat.com>, "lersek@redhat.com"
+ <lersek@redhat.com>, "palmer@sifive.com" <palmer@sifive.com>,
  "sagark@eecs.berkeley.edu" <sagark@eecs.berkeley.edu>,
  "kbastian@mail.uni-paderborn.de" <kbastian@mail.uni-paderborn.de>,
- "david@redhat.com" <david@redhat.com>, "thuth@redhat.com"
- <thuth@redhat.com>, "farman@linux.ibm.com" <farman@linux.ibm.com>,
- "walling@linux.ibm.com" <walling@linux.ibm.com>,
- "hare@suse.com" <hare@suse.com>, "michael@walle.cc" <michael@walle.cc>,
- "atar4qemu@gmail.com" <atar4qemu@gmail.com>,
+ "david@redhat.com" <david@redhat.com>, "thuth@redhat.com" <thuth@redhat.com>, 
+ "farman@linux.ibm.com" <farman@linux.ibm.com>, "walling@linux.ibm.com"
+ <walling@linux.ibm.com>, "hare@suse.com" <hare@suse.com>, "michael@walle.cc"
+ <michael@walle.cc>, "atar4qemu@gmail.com" <atar4qemu@gmail.com>,
  "stefanb@linux.ibm.com" <stefanb@linux.ibm.com>,
  "samuel.thibault@ens-lyon.org" <samuel.thibault@ens-lyon.org>,
- "akrowiak@linux.ibm.com" <akrowiak@linux.ibm.com>,
- "pmorel@linux.ibm.com" <pmorel@linux.ibm.com>,
- "alex.williamson@redhat.com" <alex.williamson@redhat.com>,
- "mdroth@linux.vnet.ibm.com" <mdroth@linux.vnet.ibm.com>,
- "zhang.zhanghailiang@huawei.com" <zhang.zhanghailiang@huawei.com>,
- "quintela@redhat.com" <quintela@redhat.com>,
- "dgilbert@redhat.com" <dgilbert@redhat.com>,
- "rizzo@iet.unipi.it" <rizzo@iet.unipi.it>,
- "g.lettieri@iet.unipi.it" <g.lettieri@iet.unipi.it>,
- "v.maffione@gmail.com" <v.maffione@gmail.com>,
- "jan.kiszka@siemens.com" <jan.kiszka@siemens.com>,
- "green@moxielogic.com" <green@moxielogic.com>,
- "shorne@gmail.com" <shorne@gmail.com>,
- "gxt@mprc.pku.edu.cn" <gxt@mprc.pku.edu.cn>,
- "jcmvbkbc@gmail.com" <jcmvbkbc@gmail.com>,
- "qemu-block@nongnu.org" <qemu-block@nongnu.org>,
+ "akrowiak@linux.ibm.com" <akrowiak@linux.ibm.com>, "pmorel@linux.ibm.com"
+ <pmorel@linux.ibm.com>, "alex.williamson@redhat.com"
+ <alex.williamson@redhat.com>, "mdroth@linux.vnet.ibm.com"
+ <mdroth@linux.vnet.ibm.com>, "zhang.zhanghailiang@huawei.com"
+ <zhang.zhanghailiang@huawei.com>, "quintela@redhat.com"
+ <quintela@redhat.com>, "dgilbert@redhat.com" <dgilbert@redhat.com>,
+ "rizzo@iet.unipi.it" <rizzo@iet.unipi.it>, "g.lettieri@iet.unipi.it"
+ <g.lettieri@iet.unipi.it>, "v.maffione@gmail.com" <v.maffione@gmail.com>,
+ "jan.kiszka@siemens.com" <jan.kiszka@siemens.com>, "green@moxielogic.com"
+ <green@moxielogic.com>, "shorne@gmail.com" <shorne@gmail.com>,
+ "gxt@mprc.pku.edu.cn" <gxt@mprc.pku.edu.cn>, "jcmvbkbc@gmail.com"
+ <jcmvbkbc@gmail.com>, "qemu-block@nongnu.org" <qemu-block@nongnu.org>,
  "integration@gluster.org" <integration@gluster.org>,
- "sheepdog@lists.wpkg.org" <sheepdog@lists.wpkg.org>,
- "qemu-arm@nongnu.org" <qemu-arm@nongnu.org>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- "qemu-ppc@nongnu.org" <qemu-ppc@nongnu.org>,
- "qemu-s390x@nongnu.org" <qemu-s390x@nongnu.org>,
+ "sheepdog@lists.wpkg.org" <sheepdog@lists.wpkg.org>, "qemu-arm@nongnu.org"
+ <qemu-arm@nongnu.org>, "xen-devel@lists.xenproject.org"
+ <xen-devel@lists.xenproject.org>, "qemu-ppc@nongnu.org"
+ <qemu-ppc@nongnu.org>, "qemu-s390x@nongnu.org" <qemu-s390x@nongnu.org>,
  "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>
+Subject: Re: [RFC v2 0/9] error: auto propagated local_err
+Thread-Topic: [RFC v2 0/9] error: auto propagated local_err
+Thread-Index: AQHVcioNiDMY2yo+Z0yF9jZaFGvJZ6c5qyCAgAFm+wD//+MaAIAABEQA
+Date: Tue, 24 Sep 2019 15:44:18 +0000
+Message-ID: <97b77e48-b370-a596-0a06-9ceaaf6bc72e@virtuozzo.com>
 References: <20190923161231.22028-1-vsementsov@virtuozzo.com>
  <d1527fdc-b5e8-093a-9206-6f7ceeece2ac@redhat.com>
  <84c9e5dd-3e0f-94e1-5da1-2c7baa594bf1@virtuozzo.com>
-From: Eric Blake <eblake@redhat.com>
-Openpgp: preference=signencrypt
-Autocrypt: addr=eblake@redhat.com; keydata=
- xsBNBEvHyWwBCACw7DwsQIh0kAbUXyqhfiKAKOTVu6OiMGffw2w90Ggrp4bdVKmCaEXlrVLU
- xphBM8mb+wsFkU+pq9YR621WXo9REYVIl0FxKeQo9dyQBZ/XvmUMka4NOmHtFg74nvkpJFCD
- TUNzmqfcjdKhfFV0d7P/ixKQeZr2WP1xMcjmAQY5YvQ2lUoHP43m8TtpB1LkjyYBCodd+LkV
- GmCx2Bop1LSblbvbrOm2bKpZdBPjncRNob73eTpIXEutvEaHH72LzpzksfcKM+M18cyRH+nP
- sAd98xIbVjm3Jm4k4d5oQyE2HwOur+trk2EcxTgdp17QapuWPwMfhaNq3runaX7x34zhABEB
- AAHNHkVyaWMgQmxha2UgPGVibGFrZUByZWRoYXQuY29tPsLAegQTAQgAJAIbAwULCQgHAwUV
- CgkICwUWAgMBAAIeAQIXgAUCS8fL9QIZAQAKCRCnoWtKJSdDahBHCACbl/5FGkUqJ89GAjeX
- RjpAeJtdKhujir0iS4CMSIng7fCiGZ0fNJCpL5RpViSo03Q7l37ss+No+dJI8KtAp6ID+PMz
- wTJe5Egtv/KGUKSDvOLYJ9WIIbftEObekP+GBpWP2+KbpADsc7EsNd70sYxExD3liwVJYqLc
- Rw7so1PEIFp+Ni9A1DrBR5NaJBnno2PHzHPTS9nmZVYm/4I32qkLXOcdX0XElO8VPDoVobG6
- gELf4v/vIImdmxLh/w5WctUpBhWWIfQDvSOW2VZDOihm7pzhQodr3QP/GDLfpK6wI7exeu3P
- pfPtqwa06s1pae3ad13mZGzkBdNKs1HEm8x6zsBNBEvHyWwBCADGkMFzFjmmyqAEn5D+Mt4P
- zPdO8NatsDw8Qit3Rmzu+kUygxyYbz52ZO40WUu7EgQ5kDTOeRPnTOd7awWDQcl1gGBXgrkR
- pAlQ0l0ReO57Q0eglFydLMi5bkwYhfY+TwDPMh3aOP5qBXkm4qIYSsxb8A+i00P72AqFb9Q7
- 3weG/flxSPApLYQE5qWGSXjOkXJv42NGS6o6gd4RmD6Ap5e8ACo1lSMPfTpGzXlt4aRkBfvb
- NCfNsQikLZzFYDLbQgKBA33BDeV6vNJ9Cj0SgEGOkYyed4I6AbU0kIy1hHAm1r6+sAnEdIKj
- cHi3xWH/UPrZW5flM8Kqo14OTDkI9EtlABEBAAHCwF8EGAEIAAkFAkvHyWwCGwwACgkQp6Fr
- SiUnQ2q03wgAmRFGDeXzc58NX0NrDijUu0zx3Lns/qZ9VrkSWbNZBFjpWKaeL1fdVeE4TDGm
- I5mRRIsStjQzc2R9b+2VBUhlAqY1nAiBDv0Qnt+9cLiuEICeUwlyl42YdwpmY0ELcy5+u6wz
- mK/jxrYOpzXKDwLq5k4X+hmGuSNWWAN3gHiJqmJZPkhFPUIozZUCeEc76pS/IUN72NfprZmF
- Dp6/QDjDFtfS39bHSWXKVZUbqaMPqlj/z6Ugk027/3GUjHHr8WkeL1ezWepYDY7WSoXwfoAL
- 2UXYsMAr/uUncSKlfjvArhsej0S4zbqim2ZY6S8aRWw94J3bSvJR+Nwbs34GPTD4Pg==
-Organization: Red Hat, Inc.
-Message-ID: <22191b09-822a-1f54-dcaa-3726c833805b@redhat.com>
-Date: Tue, 24 Sep 2019 10:28:52 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.8.0
-MIME-Version: 1.0
-In-Reply-To: <84c9e5dd-3e0f-94e1-5da1-2c7baa594bf1@virtuozzo.com>
-Content-Type: text/plain; charset=utf-8
+ <22191b09-822a-1f54-dcaa-3726c833805b@redhat.com>
+In-Reply-To: <22191b09-822a-1f54-dcaa-3726c833805b@redhat.com>
+Accept-Language: ru-RU, en-US
 Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.31]); Tue, 24 Sep 2019 15:29:43 +0000 (UTC)
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
-X-Received-From: 209.132.183.28
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-clientproxiedby: HE1P18901CA0014.EURP189.PROD.OUTLOOK.COM
+ (2603:10a6:3:8b::24) To DB8PR08MB5498.eurprd08.prod.outlook.com
+ (2603:10a6:10:11c::24)
+authentication-results: spf=none (sender IP is )
+ smtp.mailfrom=vsementsov@virtuozzo.com; 
+x-ms-exchange-messagesentrepresentingtype: 1
+x-tagtoolbar-keys: D20190924184408309
+x-originating-ip: [185.231.240.5]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: d372e8c5-ad1f-4844-9b39-08d741060f07
+x-microsoft-antispam: BCL:0; PCL:0;
+ RULEID:(2390118)(7020095)(4652040)(8989299)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(5600167)(711020)(4605104)(1401327)(2017052603328)(7193020);
+ SRVR:DB8PR08MB5337; 
+x-ms-traffictypediagnostic: DB8PR08MB5337:
+x-ms-exchange-transport-forked: True
+x-microsoft-antispam-prvs: <DB8PR08MB5337AE8A858F0348452593B2C1840@DB8PR08MB5337.eurprd08.prod.outlook.com>
+x-ms-oob-tlc-oobclassifiers: OLM:7219;
+x-forefront-prvs: 0170DAF08C
+x-forefront-antispam-report: SFV:NSPM;
+ SFS:(10019020)(366004)(39850400004)(396003)(376002)(346002)(136003)(189003)(199004)(229853002)(71200400001)(14454004)(71190400001)(64756008)(99286004)(478600001)(52116002)(81156014)(446003)(7366002)(66556008)(7416002)(7276002)(256004)(486006)(7336002)(45426003)(86362001)(53546011)(6506007)(26005)(305945005)(2616005)(76176011)(31686004)(8936002)(81166006)(66446008)(8676002)(186003)(11346002)(31696002)(2906002)(7406005)(386003)(2501003)(36756003)(5660300002)(4326008)(6436002)(102836004)(476003)(7736002)(3846002)(66476007)(25786009)(316002)(66066001)(6486002)(6246003)(6512007)(66946007)(6116002)(54906003)(110136005);
+ DIR:OUT; SFP:1102; SCL:1; SRVR:DB8PR08MB5337;
+ H:DB8PR08MB5498.eurprd08.prod.outlook.com; FPR:; SPF:None; LANG:en;
+ PTR:InfoNoRecords; MX:1; A:1; 
+received-spf: None (protection.outlook.com: virtuozzo.com does not designate
+ permitted sender hosts)
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam-message-info: vpdKp2GZB6HBV3owJKeCMxLcOTlxzFSUAGFEICZV3e2EmaiWVMngHkQWWNU/8XsIemQm9uQe68l0OMrECf9oV7PSuTGSSw7ikbAyLp+MXksyEmCR03Cte5fa2w1uDaJLmS9QHWhjKojMOI8FEeqcuspOGvx8rvko5SHSBnZ8JwWS/83IXCu7TQ+JRwGmD67vhfxtzdcmp7VuhlRVVy+2ArTjm+yfFQFk/BpEF5NssSegrs/fWucQJcm3qV6aTFbSA+kla5OH0/R0EtNSrNT6ks0Mzxru6TSr3yqYIku5HCfVUJBkT13/ub87LWWKGHNEtvuXbvR7A0bcSA7I6w9yNAvZRd3Zw9kw9akry46Dix3fFh9jVZ2GsOpc2hxQBPtF/whdUK4nZX9QZATuZOShupJHL+W1r+o2cqng+5jOpns=
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <5E5FEBF655307A49B3A44F5E718496B3@eurprd08.prod.outlook.com>
+Content-Transfer-Encoding: base64
+MIME-Version: 1.0
+X-OriginatorOrg: virtuozzo.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: d372e8c5-ad1f-4844-9b39-08d741060f07
+X-MS-Exchange-CrossTenant-originalarrivaltime: 24 Sep 2019 15:44:18.0465 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 0bc7f26d-0264-416e-a6fc-8352af79c58f
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: U8sRYUpouOont3+xCuHJhh+RUJqw0ijlRmnePEW2xyvtaN/Xcc+ZtPyTe1yBrQRfZ5OyNc+kTuTvM0+g0niY0GKxxw1m4ChAaVoHoPBjgvM=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB8PR08MB5337
+X-detected-operating-system: by eggs.gnu.org: Windows 7 or 8 [fuzzy]
+X-Received-From: 40.107.1.114
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -168,63 +175,59 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Sep 2019 15:30:03 -0000
+X-List-Received-Date: Tue, 24 Sep 2019 15:44:27 -0000
 
-On 9/24/19 9:12 AM, Vladimir Sementsov-Ogievskiy wrote:
-
->>> 3. What to do with huge auto-generated commit 07? Should I split it
->>> per-maintainer or per-subsystem, or leave it as-is?
->>
->> It's big. I'd split it into multiple patches (and reduce the cc - except
->> for the cover letter, the rest of the patches can be limited to the
->> actual maintainer/subsystem affected rather than everyone involved
->> anywhere else in the series. With the current large cc, anyone that
->> replies gets several mail bounces about "too many recipients").  It may
->> be easier to split along directory boundaries than by maintainer
->> boundaries.  Markus has applied large tree-wide Coccinelle cleanups
->> before, maybe he has some advice.
-> 
-> 
-> If split by subsystem it would be 200+ patches:
-> git diff --name-only | while read f; do scripts/get_maintainer.pl -f $f --subsystem --no-rolestats 2>/dev/null | grep -v @ | head -1; done | sort | uniq | wc -l
-> 205
-> 
-> 
-> Try to look at larger subsystem:
-> git diff --name-only | while read f; do scripts/get_maintainer.pl -f $f --subsystem --no-rolestats 2>/dev/null | grep -v @ | tail -2 | head -1; done | sort | uniq | wc -l
-> 139
-> 
-> still too many.. Or is it OK?
-
-Hmm - that becomes a tradeoff in length of the series (where individual
-patches may be reviewed fast, but where the overall process may be
-bogged down by sheer length), vs. length of individual emails (where the
-email itself is daunting, but as the review is mechanical and done by
-automation, it becomes a matter of spot-checking if we trust that the
-automation was done correctly).  You can probably group it in fewer
-patches, by joining smaller patches across a couple of subsystems.  It's
-an art form, there's probably several ways to do it that would work, and
-it comes down to a judgment call on how much work you want to do to try
-and reduce other's work in reviewing it.  Maybe even an off-hand split
-of gathering files until you reach about 500 or so lines per diff.  I
-wish I had easier advice on how to tackle this sort of project in the
-way that will get the fastest response time.
-
-
->>>   vl.c                                          |  13 +-
->>>   scripts/coccinelle/auto-propagated-errp.cocci |  82 +++++++
->>>   319 files changed, 2729 insertions(+), 4245 deletions(-)
->>>   create mode 100644 scripts/coccinelle/auto-propagated-errp.cocci
->>
->> The diffstat is huge, but promising.
-
-We also learned in reviews of 7/9 that the diffstat here is misleading,
-the number of insertions will definitely be increasing once the
-Coccinelle script is fixed to insert the macro in more functions, but
-hopefully it's still a net reduction in overall lines.
-
--- 
-Eric Blake, Principal Software Engineer
-Red Hat, Inc.           +1-919-301-3226
-Virtualization:  qemu.org | libvirt.org
+MjQuMDkuMjAxOSAxODoyOCwgRXJpYyBCbGFrZSB3cm90ZToNCj4gT24gOS8yNC8xOSA5OjEyIEFN
+LCBWbGFkaW1pciBTZW1lbnRzb3YtT2dpZXZza2l5IHdyb3RlOg0KPiANCj4+Pj4gMy4gV2hhdCB0
+byBkbyB3aXRoIGh1Z2UgYXV0by1nZW5lcmF0ZWQgY29tbWl0IDA3PyBTaG91bGQgSSBzcGxpdCBp
+dA0KPj4+PiBwZXItbWFpbnRhaW5lciBvciBwZXItc3Vic3lzdGVtLCBvciBsZWF2ZSBpdCBhcy1p
+cz8NCj4+Pg0KPj4+IEl0J3MgYmlnLiBJJ2Qgc3BsaXQgaXQgaW50byBtdWx0aXBsZSBwYXRjaGVz
+IChhbmQgcmVkdWNlIHRoZSBjYyAtIGV4Y2VwdA0KPj4+IGZvciB0aGUgY292ZXIgbGV0dGVyLCB0
+aGUgcmVzdCBvZiB0aGUgcGF0Y2hlcyBjYW4gYmUgbGltaXRlZCB0byB0aGUNCj4+PiBhY3R1YWwg
+bWFpbnRhaW5lci9zdWJzeXN0ZW0gYWZmZWN0ZWQgcmF0aGVyIHRoYW4gZXZlcnlvbmUgaW52b2x2
+ZWQNCj4+PiBhbnl3aGVyZSBlbHNlIGluIHRoZSBzZXJpZXMuIFdpdGggdGhlIGN1cnJlbnQgbGFy
+Z2UgY2MsIGFueW9uZSB0aGF0DQo+Pj4gcmVwbGllcyBnZXRzIHNldmVyYWwgbWFpbCBib3VuY2Vz
+IGFib3V0ICJ0b28gbWFueSByZWNpcGllbnRzIikuICBJdCBtYXkNCj4+PiBiZSBlYXNpZXIgdG8g
+c3BsaXQgYWxvbmcgZGlyZWN0b3J5IGJvdW5kYXJpZXMgdGhhbiBieSBtYWludGFpbmVyDQo+Pj4g
+Ym91bmRhcmllcy4gIE1hcmt1cyBoYXMgYXBwbGllZCBsYXJnZSB0cmVlLXdpZGUgQ29jY2luZWxs
+ZSBjbGVhbnVwcw0KPj4+IGJlZm9yZSwgbWF5YmUgaGUgaGFzIHNvbWUgYWR2aWNlLg0KPj4NCj4+
+DQo+PiBJZiBzcGxpdCBieSBzdWJzeXN0ZW0gaXQgd291bGQgYmUgMjAwKyBwYXRjaGVzOg0KPj4g
+Z2l0IGRpZmYgLS1uYW1lLW9ubHkgfCB3aGlsZSByZWFkIGY7IGRvIHNjcmlwdHMvZ2V0X21haW50
+YWluZXIucGwgLWYgJGYgLS1zdWJzeXN0ZW0gLS1uby1yb2xlc3RhdHMgMj4vZGV2L251bGwgfCBn
+cmVwIC12IEAgfCBoZWFkIC0xOyBkb25lIHwgc29ydCB8IHVuaXEgfCB3YyAtbA0KPj4gMjA1DQo+
+Pg0KPj4NCj4+IFRyeSB0byBsb29rIGF0IGxhcmdlciBzdWJzeXN0ZW06DQo+PiBnaXQgZGlmZiAt
+LW5hbWUtb25seSB8IHdoaWxlIHJlYWQgZjsgZG8gc2NyaXB0cy9nZXRfbWFpbnRhaW5lci5wbCAt
+ZiAkZiAtLXN1YnN5c3RlbSAtLW5vLXJvbGVzdGF0cyAyPi9kZXYvbnVsbCB8IGdyZXAgLXYgQCB8
+IHRhaWwgLTIgfCBoZWFkIC0xOyBkb25lIHwgc29ydCB8IHVuaXEgfCB3YyAtbA0KPj4gMTM5DQo+
+Pg0KPj4gc3RpbGwgdG9vIG1hbnkuLiBPciBpcyBpdCBPSz8NCj4gDQo+IEhtbSAtIHRoYXQgYmVj
+b21lcyBhIHRyYWRlb2ZmIGluIGxlbmd0aCBvZiB0aGUgc2VyaWVzICh3aGVyZSBpbmRpdmlkdWFs
+DQo+IHBhdGNoZXMgbWF5IGJlIHJldmlld2VkIGZhc3QsIGJ1dCB3aGVyZSB0aGUgb3ZlcmFsbCBw
+cm9jZXNzIG1heSBiZQ0KPiBib2dnZWQgZG93biBieSBzaGVlciBsZW5ndGgpLCB2cy4gbGVuZ3Ro
+IG9mIGluZGl2aWR1YWwgZW1haWxzICh3aGVyZSB0aGUNCj4gZW1haWwgaXRzZWxmIGlzIGRhdW50
+aW5nLCBidXQgYXMgdGhlIHJldmlldyBpcyBtZWNoYW5pY2FsIGFuZCBkb25lIGJ5DQo+IGF1dG9t
+YXRpb24sIGl0IGJlY29tZXMgYSBtYXR0ZXIgb2Ygc3BvdC1jaGVja2luZyBpZiB3ZSB0cnVzdCB0
+aGF0IHRoZQ0KPiBhdXRvbWF0aW9uIHdhcyBkb25lIGNvcnJlY3RseSkuICBZb3UgY2FuIHByb2Jh
+Ymx5IGdyb3VwIGl0IGluIGZld2VyDQo+IHBhdGNoZXMsIGJ5IGpvaW5pbmcgc21hbGxlciBwYXRj
+aGVzIGFjcm9zcyBhIGNvdXBsZSBvZiBzdWJzeXN0ZW1zLiAgSXQncw0KPiBhbiBhcnQgZm9ybSwg
+dGhlcmUncyBwcm9iYWJseSBzZXZlcmFsIHdheXMgdG8gZG8gaXQgdGhhdCB3b3VsZCB3b3JrLCBh
+bmQNCj4gaXQgY29tZXMgZG93biB0byBhIGp1ZGdtZW50IGNhbGwgb24gaG93IG11Y2ggd29yayB5
+b3Ugd2FudCB0byBkbyB0byB0cnkNCj4gYW5kIHJlZHVjZSBvdGhlcidzIHdvcmsgaW4gcmV2aWV3
+aW5nIGl0LiAgTWF5YmUgZXZlbiBhbiBvZmYtaGFuZCBzcGxpdA0KPiBvZiBnYXRoZXJpbmcgZmls
+ZXMgdW50aWwgeW91IHJlYWNoIGFib3V0IDUwMCBvciBzbyBsaW5lcyBwZXIgZGlmZi4gIEkNCj4g
+d2lzaCBJIGhhZCBlYXNpZXIgYWR2aWNlIG9uIGhvdyB0byB0YWNrbGUgdGhpcyBzb3J0IG9mIHBy
+b2plY3QgaW4gdGhlDQo+IHdheSB0aGF0IHdpbGwgZ2V0IHRoZSBmYXN0ZXN0IHJlc3BvbnNlIHRp
+bWUuDQo+IA0KPiANCj4+Pj4gICAgdmwuYyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgIHwgIDEzICstDQo+Pj4+ICAgIHNjcmlwdHMvY29jY2luZWxsZS9hdXRvLXByb3Bh
+Z2F0ZWQtZXJycC5jb2NjaSB8ICA4MiArKysrKysrDQo+Pj4+ICAgIDMxOSBmaWxlcyBjaGFuZ2Vk
+LCAyNzI5IGluc2VydGlvbnMoKyksIDQyNDUgZGVsZXRpb25zKC0pDQo+Pj4+ICAgIGNyZWF0ZSBt
+b2RlIDEwMDY0NCBzY3JpcHRzL2NvY2NpbmVsbGUvYXV0by1wcm9wYWdhdGVkLWVycnAuY29jY2kN
+Cj4+Pg0KPj4+IFRoZSBkaWZmc3RhdCBpcyBodWdlLCBidXQgcHJvbWlzaW5nLg0KPiANCj4gV2Ug
+YWxzbyBsZWFybmVkIGluIHJldmlld3Mgb2YgNy85IHRoYXQgdGhlIGRpZmZzdGF0IGhlcmUgaXMg
+bWlzbGVhZGluZywNCj4gdGhlIG51bWJlciBvZiBpbnNlcnRpb25zIHdpbGwgZGVmaW5pdGVseSBi
+ZSBpbmNyZWFzaW5nIG9uY2UgdGhlDQo+IENvY2NpbmVsbGUgc2NyaXB0IGlzIGZpeGVkIHRvIGlu
+c2VydCB0aGUgbWFjcm8gaW4gbW9yZSBmdW5jdGlvbnMsIGJ1dA0KPiBob3BlZnVsbHkgaXQncyBz
+dGlsbCBhIG5ldCByZWR1Y3Rpb24gaW4gb3ZlcmFsbCBsaW5lcy4NCj4gDQoNCk5vIGhvcGUgZm9y
+IHVzOiB3aXRoIGZpeGVkIHNjcmlwdCBJIG5vdyBzZWUNCg0KOTE5IGZpbGVzIGNoYW5nZWQsIDY0
+MjUgaW5zZXJ0aW9ucygrKSwgNDIzNCBkZWxldGlvbnMoLSkNCg0KLS0gDQpCZXN0IHJlZ2FyZHMs
+DQpWbGFkaW1pcg0K
 
