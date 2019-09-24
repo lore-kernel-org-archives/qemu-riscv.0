@@ -1,169 +1,119 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iCiB0-0000E9-6v
-	for mharc-qemu-riscv@gnu.org; Tue, 24 Sep 2019 06:36:10 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:35839)
+	id 1iCiov-0004C2-Oh
+	for mharc-qemu-riscv@gnu.org; Tue, 24 Sep 2019 07:17:25 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:40622)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <vsementsov@virtuozzo.com>) id 1iCiAw-0000A8-Lr
- for qemu-riscv@nongnu.org; Tue, 24 Sep 2019 06:36:07 -0400
+ (envelope-from <prvs=1633f89ff=Anup.Patel@wdc.com>)
+ id 1iCios-000490-Od
+ for qemu-riscv@nongnu.org; Tue, 24 Sep 2019 07:17:24 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <vsementsov@virtuozzo.com>) id 1iCiAv-0005TO-FU
- for qemu-riscv@nongnu.org; Tue, 24 Sep 2019 06:36:06 -0400
-Received: from mail-eopbgr50098.outbound.protection.outlook.com
- ([40.107.5.98]:38605 helo=EUR03-VE1-obe.outbound.protection.outlook.com)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <vsementsov@virtuozzo.com>)
- id 1iCiAr-0005Ro-Tm; Tue, 24 Sep 2019 06:36:02 -0400
+ (envelope-from <prvs=1633f89ff=Anup.Patel@wdc.com>)
+ id 1iCior-0000QY-AC
+ for qemu-riscv@nongnu.org; Tue, 24 Sep 2019 07:17:22 -0400
+Received: from esa4.hgst.iphmx.com ([216.71.154.42]:61134)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <prvs=1633f89ff=Anup.Patel@wdc.com>)
+ id 1iCioq-0000Pq-HI; Tue, 24 Sep 2019 07:17:21 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1569323841; x=1600859841;
+ h=from:to:cc:subject:date:message-id:references:
+ in-reply-to:content-transfer-encoding:mime-version;
+ bh=iiB4WeFIlQG74LsnyKAe4J40IGn896WARzAOkcbN3Fk=;
+ b=TzuMDZLKtcfiOzTmkLZT7dCPiAcEcU3s85urkIdLpT4H5cNWVpOljf65
+ ViIah0/8mWFrQd4hWK+fUZSa9khotPpNqzPQ2ix2eNVRx6uAMwi7EtOGv
+ hiPLwSszf8iBI5Q1KrcfffYrjGxamBM/wAUrK4JZj75S8Mz1RoG+f1Cdj
+ mvIR/5hrYcpAv9sw13hWBzs1hd32DnmQwyX7+i/b3IN8VV0rwceWu2mBV
+ 7WBj+Nh6JjICNs6oqlNgYhhxgwwTq6FrrUVwEBBGPw7KQUfGSwO93+og2
+ Fo5adgcxt46BE3bBMLvjp/EXfrNOJ2oJIOmwRfNJUaReieY/tp+n007Xr A==;
+IronPort-SDR: LjSyhLBj2b16vFaCH4393+jr5ME1xDvZVDlFkhL1X2Ms4hoAo6onSfUzq7eYyTjyiP0dSBa4ga
+ eY0ZlHSMke7gtsWjcScEKtpV+h3N9HczNLbYdeNzIPwvXlFLTF/JWF337BEbrcst5Pz2gV0V1P
+ 3L3QeWvH2CDdoxTPEkxnCkClCRVpgm4x+0c8PnF2zHzX0+ksGmhNHEUNTFN+fn10Pxu4+FK1nr
+ d3PESs3BmiLzNoKoNgwtAm8t0xHW7DoPrEdslgvwjJoOR/0VodOCk2sfHxPaKdowXa6M2V51qm
+ WNU=
+X-IronPort-AV: E=Sophos;i="5.64,543,1559491200"; d="scan'208";a="118963691"
+Received: from mail-dm3nam03lp2055.outbound.protection.outlook.com (HELO
+ NAM03-DM3-obe.outbound.protection.outlook.com) ([104.47.41.55])
+ by ob1.hgst.iphmx.com with ESMTP; 24 Sep 2019 19:17:10 +0800
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=c8BjiU/bFwBYJLgmXN0go770DziO46oyObhfNcKLcPU8WRmpkq7OInQDABbdCjgCwkGoJMLq562WsQc0bS75efH6Y+1FD1lI3mi7Ui3kcwMFzln1rq3bvyZNAoIa+WxkBBxSSpcgUL3DR3BZYnmb7P86OXcDHVBh78qOKqN7XL8KAwhO+4m1w+ZvIRR8RxHMdIgPJJHmc3l4VHbpBnWIHVK1Tguxe0WQrsPCcxCMUWJnyahBSr7RWKWthQS4kBmI+oiAETA3URlvOSqVuMmAaThvo1DcB8dZC5VbCMDXjVfzojwKFv+dNQsQT+d/AHnXiXrhmTZFq6d/Ktx+ni25SA==
+ b=UiAoq9PqmZn84hqHgkPmvJuQAn8DMcLFiiVk4mk48sGotMEqcssSsmeLTx7oiLuSSZ6Cx+5Z7qX7ZvahQlJZWNs12gUAPSOCT2bLrFh3o9GD0DRyzBgkoWMuKUdmFQi388ftMfE7OHd25wb6/4px+dHtEwZTOVReFukN4I2GBxbn+J2G3mzJbC0qK2QGEHS37QVMD/xePnDc7Vl0IUHZBhMHIiVYGRg6CLf/Gs92P6BRoGkSt+xGgZqCIXb9zUHjaCEcK9HY17WjuT2FZmJ2mPTFbm2Yx2c7TRD20Oyy2GHqENnebTHgvXrfgKIE/uZuhpL3C/RVFJpswJQjFXzaRA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=JmvZlQ0ce7s+N8dBgVBHG3H0VsJezhsQxCEK1sAZW9U=;
- b=ESQWuWoLU+g8e2hu72PyqWus4WgnmBwVGR/MepEepVPn041b8msEUMiXI17LVkwfOSCvhvWj3Se6sIo1Rj9zWijHB9QF3spyDxSUkXpxePfvzral5q/S5754Vqq99NWcF/DUTW9rnaKWVaehkXliQZsDzZYAkK8RV6HjeR+aKjqaFElDlDit5NJzKtV26hmdvoKLE5JSARGdTRTsB51QM+59knICFWi0XfI0B7ZuhPasEqDRFTpxixZ8Fw9ZkkAlvEnsYVwKmvKv06IQ0Z58eNpJsfpkvdNpnUy0JIJducQtQwnp9mRrm318Hg270tOhx4+/d3fPSNDh23XKQQ2fTA==
+ bh=iiB4WeFIlQG74LsnyKAe4J40IGn896WARzAOkcbN3Fk=;
+ b=hwt7caqu3jfCk1rFVOO7gYyab33bQaeaOry5sDz3v0MMwQDmbG/ICvEsTlK6EyRUUc0CGhKK3mSrsrd0iSJKzNsABse3GqYrDHn0ZJyTByEUDYj+9wEQYjiW+zUM+27OPTQ/3bYyYXe6SZH4ExLBWDIVZtV9ZOFYhmhb6k2MYD1GHjSc1gZQ37OcJq9/kAMq2MQC1kpjW+1tLFIhv51H/PUtRtReT4PgZCy0lLveqF9NAh9Fl910k4EO+AYzdkf3bfzNU2IazOlfEGBNd/mcUSJ5gxZDUu2C+miiuOiLpaHwMOMgSInggfRHmg3Ttf+3MdfmHFoeHE4x+eY0dqdDVA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=virtuozzo.com; dmarc=pass action=none
- header.from=virtuozzo.com; dkim=pass header.d=virtuozzo.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=virtuozzo.com;
- s=selector2;
+ smtp.mailfrom=wdc.com; dmarc=pass action=none header.from=wdc.com; dkim=pass
+ header.d=wdc.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=JmvZlQ0ce7s+N8dBgVBHG3H0VsJezhsQxCEK1sAZW9U=;
- b=LztEQmsHM2zI64UGMgH8UzJzvkIEvZ2O+Kny1fRVdI7/GF8IB6+7fkca0aMzcrKL6zr1mxWwuiCDP5fn8/4pulAwdUVSbxFY7aXgm22HkctJCbtRmEww10ONuQo9MH5nfJU3NMGo4fybNApmq11558QXm7r7P+ROfwE9wna1GM4=
-Received: from DB8PR08MB5498.eurprd08.prod.outlook.com (52.133.242.216) by
- DB8PR08MB3947.eurprd08.prod.outlook.com (20.179.11.148) with Microsoft SMTP
+ bh=iiB4WeFIlQG74LsnyKAe4J40IGn896WARzAOkcbN3Fk=;
+ b=iAKPmq2P+VfjV+AnRPhiUpe/qL6CEW02V4C3KQGaeA+Q9+sj36SnKDZi0s2aQETqdPn3TH1OPTqKEXk4237t63FaokpL2AdpO0QywsduzojLZQfsqmn8cOiP/s/BdpziYJXhj/JZ8bjV64ekVxi3g0a5EABVsp2BFMI1fW5fn20=
+Received: from MN2PR04MB6061.namprd04.prod.outlook.com (20.178.246.15) by
+ MN2PR04MB5949.namprd04.prod.outlook.com (20.178.255.152) with Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.2284.20; Tue, 24 Sep 2019 10:35:56 +0000
-Received: from DB8PR08MB5498.eurprd08.prod.outlook.com
- ([fe80::b5c0:6b97:438d:77ed]) by DB8PR08MB5498.eurprd08.prod.outlook.com
- ([fe80::b5c0:6b97:438d:77ed%2]) with mapi id 15.20.2284.023; Tue, 24 Sep 2019
- 10:35:56 +0000
-From: Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>
-To: Eric Blake <eblake@redhat.com>, "qemu-devel@nongnu.org"
- <qemu-devel@nongnu.org>
-CC: "stefanha@redhat.com" <stefanha@redhat.com>, "jan.kiszka@siemens.com"
- <jan.kiszka@siemens.com>, "zhang.zhanghailiang@huawei.com"
- <zhang.zhanghailiang@huawei.com>, "qemu-block@nongnu.org"
- <qemu-block@nongnu.org>, "arikalo@wavecomp.com" <arikalo@wavecomp.com>,
- "pasic@linux.ibm.com" <pasic@linux.ibm.com>, "hpoussin@reactos.org"
- <hpoussin@reactos.org>, "anthony.perard@citrix.com"
- <anthony.perard@citrix.com>, "samuel.thibault@ens-lyon.org"
- <samuel.thibault@ens-lyon.org>, "philmd@redhat.com" <philmd@redhat.com>,
- "green@moxielogic.com" <green@moxielogic.com>, "lvivier@redhat.com"
- <lvivier@redhat.com>, "ehabkost@redhat.com" <ehabkost@redhat.com>,
- "xiechanglong.d@gmail.com" <xiechanglong.d@gmail.com>, "pl@kamp.de"
- <pl@kamp.de>, "dgilbert@redhat.com" <dgilbert@redhat.com>,
- "b.galvani@gmail.com" <b.galvani@gmail.com>, "eric.auger@redhat.com"
- <eric.auger@redhat.com>, "alex.williamson@redhat.com"
- <alex.williamson@redhat.com>, "ronniesahlberg@gmail.com"
- <ronniesahlberg@gmail.com>, "rth@twiddle.net" <rth@twiddle.net>,
- "kwolf@redhat.com" <kwolf@redhat.com>, "andrew@aj.id.au" <andrew@aj.id.au>,
- "crwulff@gmail.com" <crwulff@gmail.com>, "sundeep.lkml@gmail.com"
- <sundeep.lkml@gmail.com>, "michael@walle.cc" <michael@walle.cc>,
- "qemu-ppc@nongnu.org" <qemu-ppc@nongnu.org>, "kbastian@mail.uni-paderborn.de"
- <kbastian@mail.uni-paderborn.de>, "imammedo@redhat.com"
- <imammedo@redhat.com>, "fam@euphon.net" <fam@euphon.net>,
- "peter.maydell@linaro.org" <peter.maydell@linaro.org>,
- "sheepdog@lists.wpkg.org" <sheepdog@lists.wpkg.org>, "david@redhat.com"
- <david@redhat.com>, "palmer@sifive.com" <palmer@sifive.com>,
- "thuth@redhat.com" <thuth@redhat.com>, "jcmvbkbc@gmail.com"
- <jcmvbkbc@gmail.com>, Denis Lunev <den@virtuozzo.com>, "hare@suse.com"
- <hare@suse.com>, "sstabellini@kernel.org" <sstabellini@kernel.org>,
- "arei.gonglei@huawei.com" <arei.gonglei@huawei.com>,
- "marcel.apfelbaum@gmail.com" <marcel.apfelbaum@gmail.com>,
- "namei.unix@gmail.com" <namei.unix@gmail.com>, "atar4qemu@gmail.com"
- <atar4qemu@gmail.com>, "amit@kernel.org" <amit@kernel.org>, "sw@weilnetz.de"
- <sw@weilnetz.de>, "groug@kaod.org" <groug@kaod.org>, "qemu-s390x@nongnu.org"
- <qemu-s390x@nongnu.org>, "qemu-arm@nongnu.org" <qemu-arm@nongnu.org>,
- "peter.chubb@nicta.com.au" <peter.chubb@nicta.com.au>, "clg@kaod.org"
- <clg@kaod.org>, "shorne@gmail.com" <shorne@gmail.com>,
- "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>, "cohuck@redhat.com"
- <cohuck@redhat.com>, "amarkovic@wavecomp.com" <amarkovic@wavecomp.com>,
- "aurelien@aurel32.net" <aurelien@aurel32.net>, "pburton@wavecomp.com"
- <pburton@wavecomp.com>, "sagark@eecs.berkeley.edu"
- <sagark@eecs.berkeley.edu>, "jasowang@redhat.com" <jasowang@redhat.com>,
- "kraxel@redhat.com" <kraxel@redhat.com>, "edgar.iglesias@gmail.com"
- <edgar.iglesias@gmail.com>, "gxt@mprc.pku.edu.cn" <gxt@mprc.pku.edu.cn>,
- "quintela@redhat.com" <quintela@redhat.com>, "mdroth@linux.vnet.ibm.com"
- <mdroth@linux.vnet.ibm.com>, "lersek@redhat.com" <lersek@redhat.com>,
- "borntraeger@de.ibm.com" <borntraeger@de.ibm.com>, "antonynpavlov@gmail.com"
- <antonynpavlov@gmail.com>, "joel@jms.id.au" <joel@jms.id.au>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- "integration@gluster.org" <integration@gluster.org>, "balrogg@gmail.com"
- <balrogg@gmail.com>, "Andrew.Baumann@microsoft.com"
- <Andrew.Baumann@microsoft.com>, "mreitz@redhat.com" <mreitz@redhat.com>,
- "walling@linux.ibm.com" <walling@linux.ibm.com>, "mst@redhat.com"
- <mst@redhat.com>, "mark.cave-ayland@ilande.co.uk"
- <mark.cave-ayland@ilande.co.uk>, "v.maffione@gmail.com"
- <v.maffione@gmail.com>, "marex@denx.de" <marex@denx.de>, "armbru@redhat.com"
- <armbru@redhat.com>, "marcandre.lureau@redhat.com"
- <marcandre.lureau@redhat.com>, "alistair@alistair23.me"
- <alistair@alistair23.me>, "paul.durrant@citrix.com"
- <paul.durrant@citrix.com>, "pavel.dovgaluk@ispras.ru"
- <pavel.dovgaluk@ispras.ru>, "g.lettieri@iet.unipi.it"
- <g.lettieri@iet.unipi.it>, "rizzo@iet.unipi.it" <rizzo@iet.unipi.it>,
- "david@gibson.dropbear.id.au" <david@gibson.dropbear.id.au>,
- "akrowiak@linux.ibm.com" <akrowiak@linux.ibm.com>, "berrange@redhat.com"
- <berrange@redhat.com>, "xiaoguangrong.eric@gmail.com"
- <xiaoguangrong.eric@gmail.com>, "pmorel@linux.ibm.com"
- <pmorel@linux.ibm.com>, "wencongyang2@huawei.com" <wencongyang2@huawei.com>,
- "jcd@tribudubois.net" <jcd@tribudubois.net>, "pbonzini@redhat.com"
- <pbonzini@redhat.com>, "stefanb@linux.ibm.com" <stefanb@linux.ibm.com>
-Subject: Re: [RFC v2 6/9] scripts: add coccinelle script to use auto
- propagated errp
-Thread-Topic: [RFC v2 6/9] scripts: add coccinelle script to use auto
- propagated errp
-Thread-Index: AQHVcin6p36e+6YlfEqQb7RcIZ1Pjqc5sEKAgAAXhICAANuNgA==
-Date: Tue, 24 Sep 2019 10:35:56 +0000
-Message-ID: <4fa70142-28e1-9e38-9786-2a66728a0265@virtuozzo.com>
-References: <20190923161231.22028-1-vsementsov@virtuozzo.com>
- <20190923161231.22028-7-vsementsov@virtuozzo.com>
- <57e97ed0-b1a1-d209-fc23-cf41ec467157@redhat.com>
- <7cffb999-35e5-742e-7241-6da4777885bf@redhat.com>
-In-Reply-To: <7cffb999-35e5-742e-7241-6da4777885bf@redhat.com>
-Accept-Language: ru-RU, en-US
+ 15.20.2284.20; Tue, 24 Sep 2019 11:17:08 +0000
+Received: from MN2PR04MB6061.namprd04.prod.outlook.com
+ ([fe80::e1a5:8de2:c3b1:3fb0]) by MN2PR04MB6061.namprd04.prod.outlook.com
+ ([fe80::e1a5:8de2:c3b1:3fb0%7]) with mapi id 15.20.2284.023; Tue, 24 Sep 2019
+ 11:17:08 +0000
+From: Anup Patel <Anup.Patel@wdc.com>
+To: Peter Maydell <peter.maydell@linaro.org>
+CC: Palmer Dabbelt <palmer@sifive.com>, Alistair Francis
+ <Alistair.Francis@wdc.com>, Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, Atish Patra
+ <Atish.Patra@wdc.com>, "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>,
+ "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, Anup Patel
+ <anup@brainfault.org>
+Subject: RE: [PATCH 1/2] hw: timer: Add Goldfish RTC device
+Thread-Topic: [PATCH 1/2] hw: timer: Add Goldfish RTC device
+Thread-Index: AQHVcrQNCvgG16FtZEeROSOS3DihBac6lZmAgAAXUFA=
+Date: Tue, 24 Sep 2019 11:17:08 +0000
+Message-ID: <MN2PR04MB60610CCAEED38F30F9B274208D840@MN2PR04MB6061.namprd04.prod.outlook.com>
+References: <20190924084201.107958-1-anup.patel@wdc.com>
+ <20190924084201.107958-2-anup.patel@wdc.com>
+ <CAFEAcA-cm2GaKHg7_VcSb-OHp8GA9KuWiyWbc6r3F1p7tLc35A@mail.gmail.com>
+In-Reply-To: <CAFEAcA-cm2GaKHg7_VcSb-OHp8GA9KuWiyWbc6r3F1p7tLc35A@mail.gmail.com>
+Accept-Language: en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
-x-clientproxiedby: HE1PR0102CA0046.eurprd01.prod.exchangelabs.com
- (2603:10a6:7:7d::23) To DB8PR08MB5498.eurprd08.prod.outlook.com
- (2603:10a6:10:11c::24)
 authentication-results: spf=none (sender IP is )
- smtp.mailfrom=vsementsov@virtuozzo.com; 
-x-ms-exchange-messagesentrepresentingtype: 1
-x-tagtoolbar-keys: D20190924133547109
-x-originating-ip: [185.231.240.5]
+ smtp.mailfrom=Anup.Patel@wdc.com; 
+x-originating-ip: [49.207.51.80]
 x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: d50a5f5d-ff28-4323-3246-08d740dafb61
+x-ms-office365-filtering-correlation-id: 459074b9-a20a-48ed-4b82-08d740e0bcf2
+x-ms-office365-filtering-ht: Tenant
 x-microsoft-antispam: BCL:0; PCL:0;
- RULEID:(2390118)(7020095)(4652040)(8989299)(5600167)(711020)(4605104)(1401327)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(2017052603328)(7193020);
- SRVR:DB8PR08MB3947; 
-x-ms-traffictypediagnostic: DB8PR08MB3947:
+ RULEID:(2390118)(7020095)(4652040)(8989299)(4534185)(7168020)(4627221)(201703031133081)(201702281549075)(8990200)(5600167)(711020)(4605104)(1401327)(4618075)(2017052603328)(7193020);
+ SRVR:MN2PR04MB5949; 
+x-ms-traffictypediagnostic: MN2PR04MB5949:
 x-ms-exchange-transport-forked: True
-x-microsoft-antispam-prvs: <DB8PR08MB39476333DFCA0CD4085D94A4C1840@DB8PR08MB3947.eurprd08.prod.outlook.com>
-x-ms-oob-tlc-oobclassifiers: OLM:9508;
+x-microsoft-antispam-prvs: <MN2PR04MB5949021A33A1811D40250C728D840@MN2PR04MB5949.namprd04.prod.outlook.com>
+wdcipoutbound: EOP-TRUE
+x-ms-oob-tlc-oobclassifiers: OLM:10000;
 x-forefront-prvs: 0170DAF08C
 x-forefront-antispam-report: SFV:NSPM;
- SFS:(10019020)(346002)(39840400004)(136003)(366004)(396003)(376002)(199004)(189003)(71190400001)(66556008)(53546011)(486006)(229853002)(476003)(446003)(14454004)(3846002)(7406005)(54906003)(64756008)(6116002)(305945005)(11346002)(7336002)(81156014)(81166006)(4326008)(66476007)(386003)(186003)(8936002)(8676002)(6506007)(2501003)(102836004)(31686004)(2616005)(66946007)(71200400001)(478600001)(26005)(7416002)(7366002)(52116002)(99286004)(6436002)(6486002)(36756003)(5024004)(6512007)(256004)(25786009)(6246003)(31696002)(45426003)(110136005)(76176011)(7736002)(5660300002)(66066001)(66446008)(316002)(86362001)(2906002);
- DIR:OUT; SFP:1102; SCL:1; SRVR:DB8PR08MB3947;
- H:DB8PR08MB5498.eurprd08.prod.outlook.com; FPR:; SPF:None; LANG:en;
- PTR:InfoNoRecords; A:1; MX:1; 
-received-spf: None (protection.outlook.com: virtuozzo.com does not designate
- permitted sender hosts)
+ SFS:(10019020)(4636009)(136003)(366004)(396003)(346002)(376002)(39860400002)(189003)(199004)(13464003)(305945005)(33656002)(66446008)(54906003)(66476007)(256004)(66946007)(99286004)(4326008)(6246003)(64756008)(7696005)(8936002)(66556008)(14444005)(316002)(5660300002)(229853002)(52536014)(74316002)(486006)(6436002)(25786009)(2906002)(102836004)(76176011)(446003)(66066001)(81156014)(81166006)(71190400001)(71200400001)(7736002)(6916009)(53546011)(9686003)(14454004)(26005)(55016002)(186003)(76116006)(55236004)(476003)(6506007)(6116002)(11346002)(3846002)(8676002)(478600001)(86362001);
+ DIR:OUT; SFP:1102; SCL:1; SRVR:MN2PR04MB5949;
+ H:MN2PR04MB6061.namprd04.prod.outlook.com; FPR:; SPF:None; LANG:en;
+ PTR:InfoNoRecords; MX:1; A:1; 
 x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam-message-info: 2j4owejUvnBhqD0hl3IIEePXxL7vBGcG8sa09LjXPVbWS8un2ApBTnDVI3VuhleaSuH90XKUF65mtFSbi1iXgGKHTfFTtmR7fLTMpGPLfayuhN7SVBSLFizMVTnFxUXnSAzKZoMgF5URb9GMoNzbSB/1F5yPu9dS8Qmasz83fSgRY6TFY7tcH/DHH4zkVnobz6E08bak9AurVZthuaaAl7BBo7lbkAYgmceOiEoyTwCjGph7S7KM9fLz2fK5HmxrvYgDc7hgSSrg89A5oou+V5cBxv34s+Yr1tGCPgeaSaae3afOAj2/3tCMwkrrBEznxGwJeaUW9KZsnWTNLW4yQ4ki222kz1rBXiyzGAC1rJRpzhtNtoHplpKj7w6Tv5E0v7ROtuB91dkeYUFOnGVjC+PnNxFySm/OtnALVRaixFg=
+x-microsoft-antispam-message-info: JqHj3RX06jR5S3Kk10MP7DjVna7TMS9k3m6lw4d2g4zELDMT87DnlQhKbG/Fv0sqkVIvXa2fNYiDZpBoRMQ5me4S/qL5w2uMVZvsylkZlml9lKaE6VcYqe69anEpLbOvEgKDF4ELx5ZHa5+eHfgfWelfuuNIF9KuvyeMCjyn8BB7whZo4BjD4fss+mm0rZhDe/DY66CFy7bOKH971e+ba87cUeqX0V7ijQ7P6unsuEBxuJFmE9ysEVCu1R/MpGZia7bd+j1UpdXN1Enmv8SQV8TSMkJhgTIy2hWsIChGfGxUZ5F0YKCJzJNndSk49QKr+eO5fQhmiXPBsi0YeXW76hulRnvSBA/n0ziJFkpijrSkXcKIp90qkbt1yViDMVgLJHcCA11WIIIQ19NDiGrrzfx6LbXJhG+ZuCn0M9BmaC4=
 Content-Type: text/plain; charset="utf-8"
-Content-ID: <E4D82432CE417948B1B27BA21D43D7C0@eurprd08.prod.outlook.com>
 Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-X-OriginatorOrg: virtuozzo.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d50a5f5d-ff28-4323-3246-08d740dafb61
-X-MS-Exchange-CrossTenant-originalarrivaltime: 24 Sep 2019 10:35:56.4626 (UTC)
+X-OriginatorOrg: wdc.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 459074b9-a20a-48ed-4b82-08d740e0bcf2
+X-MS-Exchange-CrossTenant-originalarrivaltime: 24 Sep 2019 11:17:08.0993 (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 0bc7f26d-0264-416e-a6fc-8352af79c58f
+X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: PjCKb0rEsZOAoQIEwq7sBdB76S93P7StQcNZwZ3hADTK+zI6sSX5vJxjO4pzP7MNyPPhoXMKP1w03ywhx0yRqEH1IptTdk19ujtCxJ6LSBY=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB8PR08MB3947
-X-detected-operating-system: by eggs.gnu.org: Windows 7 or 8 [fuzzy]
-X-Received-From: 40.107.5.98
+X-MS-Exchange-CrossTenant-userprincipalname: YcLrXu0nSoD1XMB2cj5PRyUXKZ+GZujGhLtKr9zd7tRj3bsEq8fa6Jdy4CgFHPmTMERZy7mM/y40vklCbtSHWg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR04MB5949
+X-detected-operating-system: by eggs.gnu.org: FreeBSD 9.x
+X-Received-From: 216.71.154.42
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -175,29 +125,51 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Sep 2019 10:36:08 -0000
+X-List-Received-Date: Tue, 24 Sep 2019 11:17:24 -0000
 
-MjQuMDkuMjAxOSAwOjI5LCBFcmljIEJsYWtlIHdyb3RlOg0KPiBPbiA5LzIzLzE5IDM6MDUgUE0s
-IEVyaWMgQmxha2Ugd3JvdGU6DQo+IA0KPj4gRG9lcyBydW5uaW5nIHRoaXMgQ29jY2luZWxsZSBz
-Y3JpcHQgMiB0aW1lcyBpbiBhIHJvdyBhZGQgYSBzZWNvbmQNCj4+IEVSUlBfRlVOQ1RJT05fQkVH
-SU4oKSBsaW5lPyAgV2Ugd2FudCBpdCB0byBiZSBpZGVtcG90ZW50IChubyBjaGFuZ2VzIG9uDQo+
-PiBhIHNlY29uZCBydW4pLiAgKEFkbWl0dGVkbHksIEkgZGlkIG5vdCBhY3R1YWxseSB0ZXN0IHRo
-YXQgeWV0KS4gIEFsc28sIEkNCj4+IGRvbid0IGtub3cgaWYgdGhpcyBjYW4gYmUgdHdlYWtlZCB0
-byBhdm9pZCBhZGRpbmcgdGhlIGxpbmUgdG8gYSBmdW5jdGlvbg0KPj4gd2l0aCBhbiBlbXB0eSBi
-b2R5LCBtYXliZToNCj4+DQo+PiAgIGZuKC4uLiwgRXJyb3IgKiplcnJwLCAuLi4pDQo+PiAgIHsN
-Cj4+ICsgICAgRVJSUF9GVU5DVElPTl9CRUdJTigpOw0KPj4gICAgICAgLi4uDQo+PiAgIH0NCg0K
-Tm8sIHdlIG5lZWQgZXhhY3RseSB0aGlzIHRvIG1hdGNoIG5vdCBvbmx5IGVtcHR5IGZ1bmN0aW9u
-cy4gQnV0IHdpdGggLi4uIGl0IG1hdGNoZXMNCmVtcHR5IGZ1bmN0aW9ucyBhcyB3ZWxsLg0KDQo+
-IA0KPiBBbHNvIHVudGVzdGVkOg0KPiANCj4gICBmbiguLi4sIEVycm9yICoqZXJycCwgLi4uKQ0K
-PiAgIHsNCj4gKA0KPiB8DQo+ICAgICAgIEVSUlBfRlVOQ1RJT05fQkVHSU4oKTsNCj4gICAgICAg
-Li4uDQo+IHwNCj4gKyAgICBFUlJQX0ZVTkNUSU9OX0JFR0lOKCkNCj4gICAgICAgLi4uDQo+ICkN
-Cj4gICB9DQoNClNlZW1zLCB0aGF0IGRvZXNuJ3Qgd29yay4uDQoNCkl0IHNheXM6DQoxMjogbm8g
-YXZhaWxhYmxlIHRva2VuIHRvIGF0dGFjaCB0bw0KDQp3aGVyZSAxMiBpcyBsaW5lICIrICAgIEVS
-UlBfRlVOQ1RJT05fQkVHSU4oKSINCg0KDQpTbywgSSB0ZW5kIHRvIGp1c3QgYWRkIGNodW5rIHRv
-IHJlbW92ZSBkdXBsaWNhdGVkIGludm9jYXRpb24gOikNCg0KPiANCj4gDQo+PiBPdmVyYWxsLCB0
-aGUgc2NyaXB0IG1ha2VzIHNlbnNlIGluIG15IHJlYWRpbmcgKGJ1dCBubyBpZGVhIGlmIGl0DQo+
-PiBhY3R1YWxseSBjYXRjaGVzIGV2ZXJ5dGhpbmcgd2Ugd2FudCwgb3IgaWYgaXQgbWlzc2VkIHNv
-bWV0aGluZykuDQo+IA0KPiBIYXZpbmcgc3BvdC1jaGVja2VkIDcsIGl0IGRlZmluaXRlbHkgbWlz
-c2VzIGNhc2VzIHdoZXJlIGl0IHdhcyBzdXBwb3NlZA0KPiB0byBhZGQgRVJSUF9GVU5DVElPTl9C
-RUdJTigpLg0KPiANCg0KDQotLSANCkJlc3QgcmVnYXJkcywNClZsYWRpbWlyDQo=
+DQoNCj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4gRnJvbTogUGV0ZXIgTWF5ZGVsbCA8
+cGV0ZXIubWF5ZGVsbEBsaW5hcm8ub3JnPg0KPiBTZW50OiBUdWVzZGF5LCBTZXB0ZW1iZXIgMjQs
+IDIwMTkgMzoyMSBQTQ0KPiBUbzogQW51cCBQYXRlbCA8QW51cC5QYXRlbEB3ZGMuY29tPg0KPiBD
+YzogUGFsbWVyIERhYmJlbHQgPHBhbG1lckBzaWZpdmUuY29tPjsgQWxpc3RhaXIgRnJhbmNpcw0K
+PiA8QWxpc3RhaXIuRnJhbmNpc0B3ZGMuY29tPjsgU2FnYXIgS2FyYW5kaWthciA8c2FnYXJrQGVl
+Y3MuYmVya2VsZXkuZWR1PjsNCj4gQmFzdGlhbiBLb3BwZWxtYW5uIDxrYmFzdGlhbkBtYWlsLnVu
+aS1wYWRlcmJvcm4uZGU+OyBBdGlzaCBQYXRyYQ0KPiA8QXRpc2guUGF0cmFAd2RjLmNvbT47IHFl
+bXUtcmlzY3ZAbm9uZ251Lm9yZzsgcWVtdS0NCj4gZGV2ZWxAbm9uZ251Lm9yZzsgQW51cCBQYXRl
+bCA8YW51cEBicmFpbmZhdWx0Lm9yZz4NCj4gU3ViamVjdDogUmU6IFtQQVRDSCAxLzJdIGh3OiB0
+aW1lcjogQWRkIEdvbGRmaXNoIFJUQyBkZXZpY2UNCj4gDQo+IE9uIFR1ZSwgMjQgU2VwIDIwMTkg
+YXQgMDk6NDUsIEFudXAgUGF0ZWwgPEFudXAuUGF0ZWxAd2RjLmNvbT4gd3JvdGU6DQo+ID4NCj4g
+PiBUaGlzIHBhdGNoIGFkZHMgbW9kZWwgZm9yIEdvb2dsZSBHb2xkZmlzaCB2aXJ0dWFsIHBsYXRm
+b3JtIFJUQyBkZXZpY2UuDQo+ID4NCj4gPiBXZSB3aWxsIGJlIGFkZGluZyBHb2xkZmlzaCBSVEMg
+ZGV2aWNlIHRvIHRoZSBRRU1VIFJJU0MtViB2aXJ0IG1hY2hpbmUNCj4gPiBmb3IgcHJvdmlkaW5n
+IHJlYWwgZGF0ZS10aW1lIHRvIEd1ZXN0IExpbnV4LiBUaGUgY29ycmVzcG9uZGluZyBMaW51eA0K
+PiA+IGRyaXZlciBmb3IgR29sZGZpc2ggUlRDIGRldmljZSBpcyBhbHJlYWR5IGF2YWlsYWJsZSBp
+biB1cHN0cmVhbSBMaW51eC4NCj4gPg0KPiA+IEZvciBub3csIFZNIG1pZ3JhdGlvbiBzdXBwb3J0
+IGlzIG5vdCBhdmFpbGFibGUgZm9yIEdvbGRmaXNoIFJUQyBkZXZpY2UNCj4gPiBidXQgaXQgd2ls
+bCBiZSBhZGRlZCBsYXRlciB3aGVuIHdlIGltcGxlbWVudCBWTSBtaWdyYXRpb24gZm9yIEtWTSBS
+SVNDLQ0KPiBWLg0KPiA+DQo+ID4gU2lnbmVkLW9mZi1ieTogQW51cCBQYXRlbCA8YW51cC5wYXRl
+bEB3ZGMuY29tPg0KPiA+IC0tLQ0KPiA+ICsNCj4gPiArc3RhdGljIFByb3BlcnR5IGdvbGRmaXNo
+X3J0Y19wcm9wZXJ0aWVzW10gPSB7DQo+ID4gKyAgICBERUZJTkVfUFJPUF9VSU5UNjQoInRpY2st
+b2Zmc2V0IiwgR29sZGZpc2hSVENTdGF0ZSwgdGlja19vZmZzZXQsIDApLA0KPiA+ICsgICAgREVG
+SU5FX1BST1BfVUlOVDY0KCJhbGFybS1uZXh0IiwgR29sZGZpc2hSVENTdGF0ZSwgYWxhcm1fbmV4
+dCwgMCksDQo+ID4gKyAgICBERUZJTkVfUFJPUF9VSU5UMzIoImFsYXJtLXJ1bm5pbmciLCBHb2xk
+ZmlzaFJUQ1N0YXRlLA0KPiBhbGFybV9ydW5uaW5nLCAwKSwNCj4gPiArICAgIERFRklORV9QUk9Q
+X1VJTlQzMigiaXJxLXBlbmRpbmciLCBHb2xkZmlzaFJUQ1N0YXRlLCBpcnFfcGVuZGluZywNCj4g
+MCksDQo+ID4gKyAgICBERUZJTkVfUFJPUF9VSU5UMzIoImlycS1lbmFibGVkIiwgR29sZGZpc2hS
+VENTdGF0ZSwgaXJxX2VuYWJsZWQsDQo+IDApLA0KPiA+ICsgICAgREVGSU5FX1BST1BfRU5EX09G
+X0xJU1QoKSwNCj4gPiArfTsNCj4gDQo+IFdoYXQgYXJlIGFsbCB0aGVzZSBwcm9wZXJ0aWVzIHRy
+eWluZyB0byBkbyA/DQoNCkFyZ2gsIEkgZm9yZ290IHRvIHJlbW92ZSB0aGVzZSBiZWZvcmUgc2Vu
+ZGluZy4NCg0KSSB3aWxsIGRyb3AgdGhlc2UgaW4gbmV4dCByZXZpc2lvbi4NCg0KPiANCj4gPiAr
+DQo+ID4gK3N0YXRpYyB2b2lkIGdvbGRmaXNoX3J0Y19jbGFzc19pbml0KE9iamVjdENsYXNzICpr
+bGFzcywgdm9pZCAqZGF0YSkgew0KPiA+ICsgICAgRGV2aWNlQ2xhc3MgKmRjID0gREVWSUNFX0NM
+QVNTKGtsYXNzKTsNCj4gPiArICAgIGRjLT5wcm9wcyA9IGdvbGRmaXNoX3J0Y19wcm9wZXJ0aWVz
+Ow0KPiANCj4gTWlzc2luZyByZXNldCBmdW5jdGlvbi4NCg0KU3VyZSwgSSB3aWxsIGFkZCBpdC4g
+SSBnb3QgY29uZnVzZWQgYmVjYXVzZSBJIHNhdyByZXNldCBmdW5jdGlvbiBpbiBIUEVUDQpidXQg
+bm90IGluIFBMMDMxLg0KDQo+IA0KPiBJZiB5b3UgZG9uJ3Qgd2FudCB0byBpbXBsZW1lbnQgbWln
+cmF0aW9uIHN1cHBvcnQgbm93IHlvdSBzaG91bGQgYXQgbGVhc3QNCj4gcHV0IGluIHNvbWV0aGlu
+ZyB0aGF0IGJsb2NrIG1pZ3JhdGlvbi4NCj4gKFBlcnNvbmFsbHkgSSBwcmVmZXIgdG8ganVzdCB3
+cml0ZSB0aGUgdm1zdGF0ZSwgaXQncyBhcyBlYXN5IGFzIHdyaXRpbmcgdGhlIGNvZGUNCj4gdG8g
+YmxvY2sgbWlncmF0aW9ucy4pDQoNCk9rYXksIEkgd2lsbCBhZGQgdm1zdGF0ZS4NCg0KSXMgdGhl
+cmUgYSB3YXkgdG8gdW5pdCB0ZXN0IHRoZSB2bXN0YXRlIHBhcnQgPw0KT1INCkFyZSB5b3UgZmlu
+ZSBpZiB3ZSB0ZXN0LW4tZml4IGl0IGxhdGVyID8NCg0KPiANCj4gdGhhbmtzDQo+IC0tIFBNTQ0K
+DQpSZWdhcmRzLA0KQW51cA0K
 
