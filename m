@@ -1,121 +1,77 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iCgPf-0007gC-Pa
-	for mharc-qemu-riscv@gnu.org; Tue, 24 Sep 2019 04:43:11 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49014)
+	id 1iChBP-0000xa-G3
+	for mharc-qemu-riscv@gnu.org; Tue, 24 Sep 2019 05:32:33 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:55031)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <prvs=1633f89ff=Anup.Patel@wdc.com>)
- id 1iCgPd-0007dM-A8
- for qemu-riscv@nongnu.org; Tue, 24 Sep 2019 04:43:10 -0400
+ (envelope-from <philmd@redhat.com>) id 1iChBL-0000ux-Dk
+ for qemu-riscv@nongnu.org; Tue, 24 Sep 2019 05:32:29 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <prvs=1633f89ff=Anup.Patel@wdc.com>)
- id 1iCgPc-0004zC-1z
- for qemu-riscv@nongnu.org; Tue, 24 Sep 2019 04:43:09 -0400
-Received: from esa5.hgst.iphmx.com ([216.71.153.144]:49366)
+ (envelope-from <philmd@redhat.com>) id 1iChBH-0006tY-CY
+ for qemu-riscv@nongnu.org; Tue, 24 Sep 2019 05:32:27 -0400
+Received: from mx1.redhat.com ([209.132.183.28]:37416)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <prvs=1633f89ff=Anup.Patel@wdc.com>)
- id 1iCgPb-0004y3-PL; Tue, 24 Sep 2019 04:43:08 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1569314589; x=1600850589;
- h=from:to:cc:subject:date:message-id:references:
- in-reply-to:content-transfer-encoding:mime-version;
- bh=YjRlnmJ8YkdtsmNOvvOzVJi1LZ55WMensqP3Mc6kIk8=;
- b=hZfVkksJn1DPA5XlUIBfkvhB8SaYYcbzHBU3khuPDV1UxZupxTXjxjGF
- 66+HZWGv+InumtE6lATDj7gTp4hKM049e9LTf1vkvcNAKG5/BkoGyo3p5
- zFNP7UKb332RBVHen8GS9NOuy5dXxRrXSK6xAk5NSHbOEW7B3j+Q6aDuT
- H7m1XJ57zFiZlR0ekTYf/sD9aNlaZKW1h/ORdwYYZpccmdklyJhMzWsox
- HvfuvHQD6qJg+f8WeS2g2ldg71zk3JAcSmmjM+oH1byZ/NAc1AG6DSCec
- 6YrQUEixxjmwehNsu5i8ogV6QXJHN+6zMavr+STtNF9hB06/l3GyzTiSQ g==;
-IronPort-SDR: EGS5DMJQf89tINH1cqJQmanqlYhiJ3KbCTSn6p6u4uRVrqrjG4f5CmHskbEyGS7c5ZcekfGGmQ
- 7+Rb8XOikRpX+vwTpOoDG9P7Z8n5EoC/c6Fq0m/rpUySqob9VL3rm/RYEXCudP9gGScRoz9Ccj
- xfC/P6wuT8huz1vOP6yPTMLTkvFkCuhm6y6HEz7sHh46q4NZvRzSulQFkU2Yb1AdIkDbNC+VED
- etPTLCsBeqCQ1oSnzTN4efz8e2vXNo1UPLuZZwJBYxNo6dWfxhek6bRtpWVPUXMsB5kU1fdGCM
- FZs=
-X-IronPort-AV: E=Sophos;i="5.64,543,1559491200"; d="scan'208";a="119740823"
-Received: from mail-by2nam01lp2051.outbound.protection.outlook.com (HELO
- NAM01-BY2-obe.outbound.protection.outlook.com) ([104.47.34.51])
- by ob1.hgst.iphmx.com with ESMTP; 24 Sep 2019 16:43:07 +0800
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=YGSyTpP/4AJACFdNzF67N7WRZFXz3eM6ubrGogBWIbuerzEHJGQ9X2iaorRfdaAe/PyyHFn0zGlnjZ+1Lcls27kBFTlYmRSDs3VqXCgHiubSMDQxPs6aC+xwbAFctVDW8kLzNn6fM+IgL5E6EkqloDOsTyI+AFosCHsBmSxqOKSPRafm+Iw2RUsTJbMxfI0pVLPFhm8cABCYsowgOw+3m2+G9eK9PL1uibfCQyAsk6pdqij9VCHKrlL0PgA3yi2E5fUMc4hlLuYatIuBMFrrsa4HoZSBPNkE5p9JAJ0R7QDfK71e9YXVVG07CoFC9OOY/lM3hnVx76FZIl93tO6ATw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=9QFalQcva71sTGAhg6PdUkHuKxqhy6hkayNCFUhn99w=;
- b=fePmRDGgBRAf2C249k7sNHjP0rS7TZ5UFIHyXbCUXoLGE0+9h/Ij5x47nPam3MGv8oAs9a3jJ81y7dzyj2EL4azycTPapySzg51JRYwLAQwTtSaFG5Q2ylyjiSwW8u51hsq14tQt8f7Oc2tO4a4sSTAStTmQ1D6q6v+8CTKWtJoCnG2/mdlKT+6v2q92wZBF61kxY68bpWdQTOxt2GAC/s6W9Wrn1rVHC+Q3hlL5Gr764UVEn6GOoPU8oIV2gz3QDi311VMG249Q++ow0D4QNPhesnhThbZ4xbK1k2TFznyWoZ8x0MicqoQPT4nOEaZrbt6sA7hFJi69fRgdOTa7kA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=wdc.com; dmarc=pass action=none header.from=wdc.com; dkim=pass
- header.d=wdc.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=9QFalQcva71sTGAhg6PdUkHuKxqhy6hkayNCFUhn99w=;
- b=Iw4fiGjUM4WR8cT8JVU9oRbvQhdmleLyRs2oAQLn14uIwWlv8eqKJrDGYw3/WKYX864jKSgBWTFLjQejgEzpCoTwD7y5u027wpOWGtGOmt/Ndw6EIDTuSrwtzBL9j9UQ0i+JbAM+niFvO102f4PPVwERW2UJAg48Vk1ueAaYnPk=
-Received: from MN2PR04MB6061.namprd04.prod.outlook.com (20.178.246.15) by
- MN2PR04MB6957.namprd04.prod.outlook.com (10.186.147.9) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.2263.15; Tue, 24 Sep 2019 08:43:05 +0000
-Received: from MN2PR04MB6061.namprd04.prod.outlook.com
- ([fe80::e1a5:8de2:c3b1:3fb0]) by MN2PR04MB6061.namprd04.prod.outlook.com
- ([fe80::e1a5:8de2:c3b1:3fb0%7]) with mapi id 15.20.2284.023; Tue, 24 Sep 2019
- 08:43:05 +0000
-From: Anup Patel <Anup.Patel@wdc.com>
-To: Palmer Dabbelt <palmer@sifive.com>, Alistair Francis
- <Alistair.Francis@wdc.com>, Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-CC: Atish Patra <Atish.Patra@wdc.com>, Anup Patel <anup@brainfault.org>,
- "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>, "qemu-devel@nongnu.org"
- <qemu-devel@nongnu.org>, Anup Patel <Anup.Patel@wdc.com>
-Subject: [PATCH 2/2] riscv: virt: Use Goldfish RTC device
-Thread-Topic: [PATCH 2/2] riscv: virt: Use Goldfish RTC device
-Thread-Index: AQHVcrQVe624jW09nEa7T4mrUJmZyw==
-Date: Tue, 24 Sep 2019 08:43:05 +0000
-Message-ID: <20190924084201.107958-3-anup.patel@wdc.com>
-References: <20190924084201.107958-1-anup.patel@wdc.com>
-In-Reply-To: <20190924084201.107958-1-anup.patel@wdc.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-clientproxiedby: MA1PR01CA0135.INDPRD01.PROD.OUTLOOK.COM
- (2603:1096:a00:35::29) To MN2PR04MB6061.namprd04.prod.outlook.com
- (2603:10b6:208:d8::15)
-authentication-results: spf=none (sender IP is )
- smtp.mailfrom=Anup.Patel@wdc.com; 
-x-ms-exchange-messagesentrepresentingtype: 1
-x-mailer: git-send-email 2.17.1
-x-originating-ip: [199.255.44.175]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: a755d127-04fc-4ac2-ad8a-08d740cb3744
-x-ms-office365-filtering-ht: Tenant
-x-microsoft-antispam: BCL:0; PCL:0;
- RULEID:(2390118)(7020095)(4652040)(8989299)(5600167)(711020)(4605104)(1401327)(4618075)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(2017052603328)(7193020);
- SRVR:MN2PR04MB6957; 
-x-ms-traffictypediagnostic: MN2PR04MB6957:
-x-ms-exchange-transport-forked: True
-x-microsoft-antispam-prvs: <MN2PR04MB6957275E96CC73CFDAB042EC8D840@MN2PR04MB6957.namprd04.prod.outlook.com>
-wdcipoutbound: EOP-TRUE
-x-ms-oob-tlc-oobclassifiers: OLM:131;
-x-forefront-prvs: 0170DAF08C
-x-forefront-antispam-report: SFV:NSPM;
- SFS:(10019020)(4636009)(346002)(39860400002)(376002)(136003)(366004)(396003)(189003)(199004)(76176011)(66446008)(2171002)(5660300002)(66556008)(25786009)(99286004)(86362001)(50226002)(44832011)(66066001)(1076003)(8936002)(2616005)(6506007)(54906003)(256004)(305945005)(446003)(81156014)(478600001)(8676002)(81166006)(3846002)(2906002)(6486002)(71190400001)(14454004)(26005)(71200400001)(11346002)(7736002)(386003)(66946007)(316002)(52116002)(64756008)(4326008)(186003)(6512007)(6116002)(66476007)(36756003)(110136005)(476003)(6436002)(102836004)(486006);
- DIR:OUT; SFP:1102; SCL:1; SRVR:MN2PR04MB6957;
- H:MN2PR04MB6061.namprd04.prod.outlook.com; FPR:; SPF:None; LANG:en;
- PTR:InfoNoRecords; MX:1; A:1; 
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam-message-info: 4i1N7X60aH4uuESwyEZYb8/2zztRWEHbR9kcke40F8cyrE5AsQWtGeLLOIXbIrT3FV7LaO9XpL1JYPJSj6Nk1y76Eds+Ko9aPOcnGlm5qvaRFhr1UIP1f7k1dpuDKC6WgPmbHBWP2GEFsIsyqzsU4Czi8agMdtJ3mFoUlseVTQdVeZXiHUB6bSSuKhn9sizqPdCGAS8hf/+ZqLSzIY2NA/BvX1y+I0D+TGCQTwAFGKFck1nZRKSIcN7cq2o1nJ3TwE0Fzp4TnPmqWkmjbDjIEYX7itYg3EY4DeQEYuKqZu6AP+7kQC2qHm2VFNP9rRd/FumhCpvd052qClm5ozLtvr5+XK9vXqABDeT91Ju8ToFY1bZjNBZ91KgYRbhLYAtl8ld5cM2ijQqLjkY7k4RLsGvZQmCwUpxkeO8ISrwsd9c=
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+ (Exim 4.71) (envelope-from <philmd@redhat.com>) id 1iChBF-0006sU-BW
+ for qemu-riscv@nongnu.org; Tue, 24 Sep 2019 05:32:21 -0400
+Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
+ [209.85.128.71])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (No client certificate requested)
+ by mx1.redhat.com (Postfix) with ESMTPS id 03B2A81F07
+ for <qemu-riscv@nongnu.org>; Tue, 24 Sep 2019 09:32:18 +0000 (UTC)
+Received: by mail-wm1-f71.google.com with SMTP id c188so554459wmd.9
+ for <qemu-riscv@nongnu.org>; Tue, 24 Sep 2019 02:32:17 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
+ :date:user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=Gt4nkXocCUcTz/iKG4/H57HkiQCiCBPpE7cI9pNF/UY=;
+ b=RvcAmCe38QFq3jsTgnkapWdHo2k+w2AaruyO8vsJlWmcoXsQxT5dE+NQGP/OKO21hO
+ FJzSsYxhI5bdydHMiFm2oRep7yNEYLHqNhyViCJZgWNm3vQyvRAHsLcI9p130qz/Iv8p
+ uBlKJrZifCzLIru72nn0ChZ9KiEOtD7/quQNW7NIbJMEZ/evbHsc303bOEwbw4NXpLqm
+ jTjx2kcWxRZhWYShY0vpo9HceuZz4e+E/iOKXoYmoYZ7wtOrFo/eg/62xajHqPhl6XPS
+ mmWTCKr4KIMPBbgOrBUSAOKa1XmQtxO7pXPSbSLH8+dd+83U1Uby3DrBLw6Bv49Q5lus
+ 6SQA==
+X-Gm-Message-State: APjAAAVF3mJ/5Pyg90ajORHyIRZx2wh32qLUCe6JWn4WBvpmQBytbZDi
+ 7BlmM6/afRnz2M4lzuDOmHQcZjtiYsRd9hg3T9VsxE5QOoR2IFbeWQmhkw72R5OXVkh4zf61Nnt
+ cinlHAIYyK0ZQ0x8=
+X-Received: by 2002:a7b:cb0e:: with SMTP id u14mr2050882wmj.115.1569317536652; 
+ Tue, 24 Sep 2019 02:32:16 -0700 (PDT)
+X-Google-Smtp-Source: APXvYqzxlkLiFaH7aBkkyTDpeqEXUmPUj8g9fIoOVe0yipFXeX6PC07o8+q+Z6sQvLP4grvlkxQHxg==
+X-Received: by 2002:a7b:cb0e:: with SMTP id u14mr2050867wmj.115.1569317536437; 
+ Tue, 24 Sep 2019 02:32:16 -0700 (PDT)
+Received: from [192.168.1.115] (240.red-88-21-68.staticip.rima-tde.net.
+ [88.21.68.240])
+ by smtp.gmail.com with ESMTPSA id d193sm2150901wmd.0.2019.09.24.02.32.15
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 24 Sep 2019 02:32:15 -0700 (PDT)
+Subject: Re: [PATCH v1 5/6] riscv/virt: Add the PFlash CFI01 device
+To: Peter Maydell <peter.maydell@linaro.org>,
+ Alistair Francis <alistair23@gmail.com>, Laszlo Ersek <lersek@redhat.com>
+Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ Palmer Dabbelt <palmer@sifive.com>,
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Markus Armbruster <armbru@redhat.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>
+References: <cover.1568931866.git.alistair.francis@wdc.com>
+ <0a5c141a26fada6d93d06e996a2f24e1b269ec50.1568931866.git.alistair.francis@wdc.com>
+ <CAEUhbmVvDKQqQYE-riq=cvSrCe_NMoW_KDsLjh8CVHRUhJvk9A@mail.gmail.com>
+ <CAKmqyKOofA3U+8kjMkzQ0sNd1=uwJHq3c9eaLZdoNCb7=e-PAw@mail.gmail.com>
+ <CAFEAcA-uFPGf4BiDXH=Om3Df-xXrt7QwjzVF7E3kY4aMWMP4YQ@mail.gmail.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>
+Openpgp: id=89C1E78F601EE86C867495CBA2A3FD6EDEADC0DE;
+ url=http://pgp.mit.edu/pks/lookup?op=get&search=0xA2A3FD6EDEADC0DE
+Message-ID: <16bab4bf-b91e-ef0c-2d22-53538f74cfc4@redhat.com>
+Date: Tue, 24 Sep 2019 11:32:14 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.7.0
 MIME-Version: 1.0
-X-OriginatorOrg: wdc.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: a755d127-04fc-4ac2-ad8a-08d740cb3744
-X-MS-Exchange-CrossTenant-originalarrivaltime: 24 Sep 2019 08:43:05.4246 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 0HNH+xZSJFYwEa8XVAABXVF3fYQjaKy2stJyr/HBl52N+M5dqalJv4leBJEK2L1mH9piHRqsxNDtERBpzz7Elw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR04MB6957
-X-detected-operating-system: by eggs.gnu.org: FreeBSD 9.x
-X-Received-From: 216.71.153.144
+In-Reply-To: <CAFEAcA-uFPGf4BiDXH=Om3Df-xXrt7QwjzVF7E3kY4aMWMP4YQ@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+X-Received-From: 209.132.183.28
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -127,96 +83,52 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Sep 2019 08:43:10 -0000
+X-List-Received-Date: Tue, 24 Sep 2019 09:32:29 -0000
 
-We extend QEMU RISC-V virt machine by adding Goldfish RTC device
-to it. This will allow Guest Linux to sync it's local date/time
-with Host date/time via RTC device.
+On 9/23/19 11:46 PM, Peter Maydell wrote:
+> On Fri, 20 Sep 2019 at 23:23, Alistair Francis <alistair23@gmail.com> wrote:
+>> On Thu, Sep 19, 2019 at 10:15 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+>>> I don't think we should mirror what is used on ARM virt board to
+>>> create 2 flash for sifive_u. For ARM virt, there are 2 flashes because
+>>> they need distinguish secure and non-secure. For sifive_u, only one is
+>>> enough.
+>>
+>> I went back and forward about 1 or 2. Two seems more usable as maybe
+>> someone wants to include two pflash files? The Xilinx machine also has
+>> two so I'm kind of used to 2, but I'm not really fussed.
 
-Signed-off-by: Anup Patel <anup.patel@wdc.com>
----
- hw/riscv/Kconfig        |  1 +
- hw/riscv/virt.c         | 15 +++++++++++++++
- include/hw/riscv/virt.h |  2 ++
- 3 files changed, 18 insertions(+)
+The Xilinx machine has 2 because it matches the hardware.
 
-diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-index fb19b2df3a..b33753c780 100644
---- a/hw/riscv/Kconfig
-+++ b/hw/riscv/Kconfig
-@@ -34,6 +34,7 @@ config RISCV_VIRT
-     select PCI
-     select HART
-     select SERIAL
-+    select GOLDFISH_RTC
-     select VIRTIO_MMIO
-     select PCI_EXPRESS_GENERIC_BRIDGE
-     select SIFIVE
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index d36f5625ec..95c42ab993 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -57,6 +57,7 @@ static const struct MemmapEntry {
-     [VIRT_DEBUG] =3D       {        0x0,         0x100 },
-     [VIRT_MROM] =3D        {     0x1000,       0x11000 },
-     [VIRT_TEST] =3D        {   0x100000,        0x1000 },
-+    [VIRT_RTC] =3D         {   0x101000,        0x1000 },
-     [VIRT_CLINT] =3D       {  0x2000000,       0x10000 },
-     [VIRT_PLIC] =3D        {  0xc000000,     0x4000000 },
-     [VIRT_UART0] =3D       { 0x10000000,         0x100 },
-@@ -310,6 +311,17 @@ static void create_fdt(RISCVVirtState *s, const struct=
- MemmapEntry *memmap,
-     qemu_fdt_setprop_cell(fdt, nodename, "interrupt-parent", plic_phandle)=
-;
-     qemu_fdt_setprop_cell(fdt, nodename, "interrupts", UART0_IRQ);
-=20
-+    nodename =3D g_strdup_printf("/rtc@%lx",
-+        (long)memmap[VIRT_RTC].base);
-+    qemu_fdt_add_subnode(fdt, nodename);
-+    qemu_fdt_setprop_string(fdt, nodename, "compatible",
-+        "google,goldfish-rtc");
-+    qemu_fdt_setprop_cells(fdt, nodename, "reg",
-+        0x0, memmap[VIRT_RTC].base,
-+        0x0, memmap[VIRT_RTC].size);
-+    qemu_fdt_setprop_cell(fdt, nodename, "interrupt-parent", plic_phandle)=
-;
-+    qemu_fdt_setprop_cell(fdt, nodename, "interrupts", RTC_IRQ);
-+
-     qemu_fdt_add_subnode(fdt, "/chosen");
-     qemu_fdt_setprop_string(fdt, "/chosen", "stdout-path", nodename);
-     if (cmdline) {
-@@ -496,6 +508,9 @@ static void riscv_virt_board_init(MachineState *machine=
-)
-         0, qdev_get_gpio_in(DEVICE(s->plic), UART0_IRQ), 399193,
-         serial_hd(0), DEVICE_LITTLE_ENDIAN);
-=20
-+    sysbus_create_simple("goldfish_rtc", memmap[VIRT_RTC].base,
-+        qdev_get_gpio_in(DEVICE(s->plic), RTC_IRQ));
-+
-     g_free(plic_hart_config);
- }
-=20
-diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
-index 6e5fbe5d3b..e6423258d3 100644
---- a/include/hw/riscv/virt.h
-+++ b/include/hw/riscv/virt.h
-@@ -37,6 +37,7 @@ enum {
-     VIRT_DEBUG,
-     VIRT_MROM,
-     VIRT_TEST,
-+    VIRT_RTC,
-     VIRT_CLINT,
-     VIRT_PLIC,
-     VIRT_UART0,
-@@ -49,6 +50,7 @@ enum {
-=20
- enum {
-     UART0_IRQ =3D 10,
-+    RTC_IRQ =3D 11,
-     VIRTIO_IRQ =3D 1, /* 1 to 8 */
-     VIRTIO_COUNT =3D 8,
-     PCIE_IRQ =3D 0x20, /* 32 to 35 */
---=20
-2.17.1
+> One of the reasons for having 2 on the Arm board (we do this
+> even if we're not supporting secure vs non-secure) is that
+> then you can use one for a fixed read-only BIOS image (backed
+> by a file on the host filesystem shared between all VMs), and
+> one backed by a read-write per-VM file providing permanent
+> storage for BIOS environment variables. Notably UEFI likes to
+> work this way, but the idea applies in theory to other
+> boot loader or BIOSes I guess.
 
+IIRC Laszlo's explanation, the only reason it is that way is because the
+pflash_cfi01 model still doesn't implement sector locking. At the OVMF
+emerged from EDK2, to have a safe ROM vs DATA storage it was decided to
+use 2 different flashes.
+When I understood when this config layout started, I suggested Laszlo to
+use a real ROM to store the OVMF CODE since it is pointless to do
+firmware upgrade in virtualized environment, but he said it was too late
+to change the design.
+
+If you don't plan to run UEFI "Capsule Update" on your Virt board, I
+suggest using memory_region_init_rom() with your firmware CODE, and a
+parallel/SPI flash for the data VARStore.
+
+> I would suggest also checking with Markus that your code
+> for instantiating the flash devices follows the current
+> recommendations so the backing storage can be configured
+> via -blockdev. (This is a fairly recent change from June or
+> so; current-in-master virt and sbsa boards provide an example
+> of doing the right thing, I think.)
+> 
+> thanks
+> -- PMM
+> 
 
