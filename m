@@ -1,169 +1,120 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iCfer-0002HM-P0
-	for mharc-qemu-riscv@gnu.org; Tue, 24 Sep 2019 03:54:49 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43209)
+	id 1iCgPJ-0007JN-Fz
+	for mharc-qemu-riscv@gnu.org; Tue, 24 Sep 2019 04:42:49 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:48925)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <vsementsov@virtuozzo.com>) id 1iCfeh-0002Bx-Qf
- for qemu-riscv@nongnu.org; Tue, 24 Sep 2019 03:54:41 -0400
+ (envelope-from <prvs=1633f89ff=Anup.Patel@wdc.com>)
+ id 1iCgPG-0007Eh-4L
+ for qemu-riscv@nongnu.org; Tue, 24 Sep 2019 04:42:47 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <vsementsov@virtuozzo.com>) id 1iCfef-0002Bt-Kl
- for qemu-riscv@nongnu.org; Tue, 24 Sep 2019 03:54:39 -0400
-Received: from mail-ve1eur01on0711.outbound.protection.outlook.com
- ([2a01:111:f400:fe1f::711]:51012
- helo=EUR01-VE1-obe.outbound.protection.outlook.com)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <vsementsov@virtuozzo.com>)
- id 1iCfeb-00029k-Vy; Tue, 24 Sep 2019 03:54:36 -0400
+ (envelope-from <prvs=1633f89ff=Anup.Patel@wdc.com>)
+ id 1iCgPE-0004eu-Pr
+ for qemu-riscv@nongnu.org; Tue, 24 Sep 2019 04:42:45 -0400
+Received: from esa5.hgst.iphmx.com ([216.71.153.144]:49315)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <prvs=1633f89ff=Anup.Patel@wdc.com>)
+ id 1iCgPD-0004dU-Ux; Tue, 24 Sep 2019 04:42:44 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1569314565; x=1600850565;
+ h=from:to:cc:subject:date:message-id:
+ content-transfer-encoding:mime-version;
+ bh=cGEOwFwyerf3/zVSV8rjJq+0gKpKMNQoTHE/DGWVWT4=;
+ b=o28BcAN1f400SNGwQHCja4MkQwPC0iY6RveUdskEDN7eh14F2Rx8a6TV
+ 18hToRUrqbkblEl+VJZowaPRb4cEv62eRht6OV+MiTcD5tQdFggiNbpcC
+ LSECl1NpMxnFtHH3oDSB0Vjfw5SHc2IwRP0rP/9ch/IP67Z9mM2vTP0bs
+ 1YIHiq2yzzxFiHn5aMOVA3D05+2yKSux++mU0ZsV7E5mTVV4aMCFw8+ZT
+ 5X3XLrTS7D4U7SEDtfYk7wqN7Bl5+C8IG0PuBlFA0lni2Wm+TdbcJuqNQ
+ aXQdKXfYEmbRlc8pgORiFvoQCCiN6uKCPaFLbyg1O9bB3gSmQxcrr4b58 w==;
+IronPort-SDR: 79lajFWK1P4iV7Gu5KyVlHd02urFEuVqDkgLciLWeNLD3dsmv4tdyrUIghb3XalzMlpCsNGPqH
+ hUjJMuo/4gyq/Roqn1tVlUdTcTn1bMt2aEIjcGQSCo/KqqIsGOT0M3axIGSARMDq/v+kMNcr0s
+ urFE/ibGoHx977fU2ePvdYcUE/6pfNvgFWncFp6RDTrRdRhD8lAJ73xoRJBku8acwVp24xnWbQ
+ /y2aUh4L6y9DMJUGewGv9D/TgpCVhavBjfR1wGSdqoxa0ePwt0sEIeFWx3RZmk//ODTfrkYYn8
+ QWo=
+X-IronPort-AV: E=Sophos;i="5.64,543,1559491200"; d="scan'208";a="119740806"
+Received: from mail-by2nam01lp2053.outbound.protection.outlook.com (HELO
+ NAM01-BY2-obe.outbound.protection.outlook.com) ([104.47.34.53])
+ by ob1.hgst.iphmx.com with ESMTP; 24 Sep 2019 16:42:38 +0800
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=hMc8xDdVkp+WVfIzWQORB8tXJsVdk+w3YDBx5hLqCE3/puY869BboqAuxLcskVyWF9cSlfHL3QaLCBs1klrUj4/ZXfeATB+CxW3W9H0duQ6K/cVQcrzu4wKIzcfxEx9evf/h2GDM35hwps49cy4O87sXwCa9FYmEV33+T/8qSafS66WelaEff2Aw2X4Cxch2JMZvytTc/Cg/AyAfZVuimG/sF7LKvSt4rNRqJBwMtKuzHy3DN5yXu5WCUFgB+z+2hJN70I0cQRK1w8vXkc37Mz5Xy9IKbMVT5pkiNiuGWgTYu/xmH3ri3pEJYf6xo6E2dLfWw+UlHaIzN6AlzNLohg==
+ b=cKWhYOfbWKDWGUiictWqiTN9dPz0Ja4RjHknK8ySRpkkbWFowG7bLzbZkYqAC66huJ724mTjg8otLQ526rOS8vOMw9pKkDF9rL4xs5VZeqeH00a4v7hAgLzc8gQjf/8p0ACB8+TBTavNnY6f02NuH0LwGt8tM8qzE0R/WG470uN1W3KkUU3M9ebVlqw8Mus4sw8iFklih42kr2wyf1CXpvnFoMbszAYYd8GrorIgiWvVh7sUcFn3WXigOHfpkE78SNC/LrSIwThYMiEzN8PF0kQlqqYv4JB4R9G41NLitiYDQ/e+rbJ+ZiThTkvOrevxduHMRqJY3bjBX4cGjHaYVQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ZIgeirNZhwVWWSOFwVPvSYLwY9tTAKHHrb+6pw3Vvzc=;
- b=gIC3ReIKD5w8Ke6m4O3Gmw1YBsTvCExSQwskqCdpYz9ENbUFDLy/FTmcPhqvqL8rHP1rLF1MZG4wVnWs0P9LSPFwf+XD919P2DbVmmHxcjSsZce+2qyswt6pedoNqwGCxYpJzVgdmaoXbLd4ETd9I1ZrSMNZx62fza+WO6xh0/LZ8Dn0YFbNtYFK+nL9HyZ5c9ycDOWQ/y5KF6G55I6u2/the8KWMudRF8ji64ejbgvAP1J8NvHH3rJa5l85eLrkZ9vqgGZUnBdBrA5o2O9kXt+DGhNYUX/mMI9EcrdKGWvwx3czA9RmTnOIk1MJYqBCCwFDbyos+gORFmivrXYdyQ==
+ bh=qBGFFMAigjclfoFf/15lmk1RqcTHgVhTLnB7Apd/Rd8=;
+ b=gLRLyPQm3r+2ej/A14YUTus8Vh9ms/nIJ3fWSNF5o6wepyqMH6vREz9vRjsHpgPBexQb8uY4r4W+KekHZ1Tu2DckGFWv1sAD4ZxDEelnlJy851aa7S44PZHae3h82qQ12tfJlNTA7hNg2awjklx2Upm14rB9rcSFz+OT+KgPbI3CjZRfC2wx/LHaHmhjAwMUVh96cZJ7VDMctUwYgE4SgMVs1/BSaDbr+o/mk4QzEybFNnUwI8TQW4iaghDG6m+4mUGBlPYi+/pL2zP3KFS3uDYGaDw89AaQJt2KVV3wiUQNc6cWCBTGspwElP4cVM0kl61tx/aLRNEoMsZV/+p8aQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=virtuozzo.com; dmarc=pass action=none
- header.from=virtuozzo.com; dkim=pass header.d=virtuozzo.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=virtuozzo.com;
- s=selector2;
+ smtp.mailfrom=wdc.com; dmarc=pass action=none header.from=wdc.com; dkim=pass
+ header.d=wdc.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ZIgeirNZhwVWWSOFwVPvSYLwY9tTAKHHrb+6pw3Vvzc=;
- b=qjxIo/UzN6G9zwbSFHMmQzv70vPHyOggOKsr5+a35UE8VWHaO/WsZzJ4Zafe2FS3HjDPYHYVA5JygTqdDbLWR4wOP8tpcfCPr/eL3jviPnvX7DcRPg3x+hCLYUCMG/xTsyDT+ZMqNqun4MDw1Q6cSmFJmi3UFiIueDVpztXtxBc=
-Received: from DB8PR08MB5498.eurprd08.prod.outlook.com (52.133.242.216) by
- DB8PR08MB5001.eurprd08.prod.outlook.com (10.255.16.202) with Microsoft SMTP
+ bh=qBGFFMAigjclfoFf/15lmk1RqcTHgVhTLnB7Apd/Rd8=;
+ b=JGGq3PGEXMtTXfmDkom73yx024/pqUR8AZf7GqcW2xdaYkwFDlrdDNIIvHd96g4nmp8uprya+Cm24oQKXBn56v8kPnsFgNJpot/ZLup+fErBj0GfmG3E9TkoatMrqF3cYeigDUfVquDKX2ABwqJNhEY3+nMJVTeEeUAdgctMESM=
+Received: from MN2PR04MB6061.namprd04.prod.outlook.com (20.178.246.15) by
+ MN2PR04MB6957.namprd04.prod.outlook.com (10.186.147.9) with Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.2284.25; Tue, 24 Sep 2019 07:54:30 +0000
-Received: from DB8PR08MB5498.eurprd08.prod.outlook.com
- ([fe80::b5c0:6b97:438d:77ed]) by DB8PR08MB5498.eurprd08.prod.outlook.com
- ([fe80::b5c0:6b97:438d:77ed%2]) with mapi id 15.20.2284.023; Tue, 24 Sep 2019
- 07:54:30 +0000
-From: Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>
-To: Eric Blake <eblake@redhat.com>, "qemu-devel@nongnu.org"
- <qemu-devel@nongnu.org>
-CC: "kraxel@redhat.com" <kraxel@redhat.com>, "berrange@redhat.com"
- <berrange@redhat.com>, "arei.gonglei@huawei.com" <arei.gonglei@huawei.com>,
- "ehabkost@redhat.com" <ehabkost@redhat.com>, "imammedo@redhat.com"
- <imammedo@redhat.com>, "lvivier@redhat.com" <lvivier@redhat.com>,
- "amit@kernel.org" <amit@kernel.org>, "kwolf@redhat.com" <kwolf@redhat.com>,
- "mreitz@redhat.com" <mreitz@redhat.com>, "ari@tuxera.com" <ari@tuxera.com>,
- "pavel.dovgaluk@ispras.ru" <pavel.dovgaluk@ispras.ru>, "pbonzini@redhat.com"
- <pbonzini@redhat.com>, "stefanha@redhat.com" <stefanha@redhat.com>,
- "jsnow@redhat.com" <jsnow@redhat.com>, "sw@weilnetz.de" <sw@weilnetz.de>,
- "fam@euphon.net" <fam@euphon.net>, "ronniesahlberg@gmail.com"
- <ronniesahlberg@gmail.com>, "pl@kamp.de" <pl@kamp.de>, Denis Lunev
- <den@virtuozzo.com>, "armbru@redhat.com" <armbru@redhat.com>,
- "berto@igalia.com" <berto@igalia.com>, "dillaman@redhat.com"
- <dillaman@redhat.com>, "wencongyang2@huawei.com" <wencongyang2@huawei.com>,
- "xiechanglong.d@gmail.com" <xiechanglong.d@gmail.com>, "namei.unix@gmail.com"
- <namei.unix@gmail.com>, "rjones@redhat.com" <rjones@redhat.com>,
- "codyprime@gmail.com" <codyprime@gmail.com>, "marcandre.lureau@redhat.com"
- <marcandre.lureau@redhat.com>, "rth@twiddle.net" <rth@twiddle.net>,
- "groug@kaod.org" <groug@kaod.org>, "mst@redhat.com" <mst@redhat.com>,
- "marcel.apfelbaum@gmail.com" <marcel.apfelbaum@gmail.com>,
- "b.galvani@gmail.com" <b.galvani@gmail.com>, "peter.maydell@linaro.org"
- <peter.maydell@linaro.org>, "Andrew.Baumann@microsoft.com"
- <Andrew.Baumann@microsoft.com>, "philmd@redhat.com" <philmd@redhat.com>,
- "antonynpavlov@gmail.com" <antonynpavlov@gmail.com>, "jcd@tribudubois.net"
- <jcd@tribudubois.net>, "peter.chubb@nicta.com.au" <peter.chubb@nicta.com.au>, 
- "sundeep.lkml@gmail.com" <sundeep.lkml@gmail.com>, "joel@jms.id.au"
- <joel@jms.id.au>, "eric.auger@redhat.com" <eric.auger@redhat.com>,
- "alistair@alistair23.me" <alistair@alistair23.me>, "balrogg@gmail.com"
- <balrogg@gmail.com>, "edgar.iglesias@gmail.com" <edgar.iglesias@gmail.com>,
- "sstabellini@kernel.org" <sstabellini@kernel.org>,
- "anthony.perard@citrix.com" <anthony.perard@citrix.com>,
- "paul.durrant@citrix.com" <paul.durrant@citrix.com>, "pburton@wavecomp.com"
- <pburton@wavecomp.com>, "arikalo@wavecomp.com" <arikalo@wavecomp.com>,
- "clg@kaod.org" <clg@kaod.org>, "andrew@aj.id.au" <andrew@aj.id.au>,
- "crwulff@gmail.com" <crwulff@gmail.com>, "marex@denx.de" <marex@denx.de>,
- "david@gibson.dropbear.id.au" <david@gibson.dropbear.id.au>,
- "pasic@linux.ibm.com" <pasic@linux.ibm.com>, "cohuck@redhat.com"
- <cohuck@redhat.com>, "borntraeger@de.ibm.com" <borntraeger@de.ibm.com>,
- "hpoussin@reactos.org" <hpoussin@reactos.org>, "xiaoguangrong.eric@gmail.com"
- <xiaoguangrong.eric@gmail.com>, "aurelien@aurel32.net"
- <aurelien@aurel32.net>, "amarkovic@wavecomp.com" <amarkovic@wavecomp.com>,
- "mark.cave-ayland@ilande.co.uk" <mark.cave-ayland@ilande.co.uk>,
- "jasowang@redhat.com" <jasowang@redhat.com>, "lersek@redhat.com"
- <lersek@redhat.com>, "palmer@sifive.com" <palmer@sifive.com>,
- "sagark@eecs.berkeley.edu" <sagark@eecs.berkeley.edu>,
- "kbastian@mail.uni-paderborn.de" <kbastian@mail.uni-paderborn.de>,
- "david@redhat.com" <david@redhat.com>, "thuth@redhat.com" <thuth@redhat.com>, 
- "farman@linux.ibm.com" <farman@linux.ibm.com>, "walling@linux.ibm.com"
- <walling@linux.ibm.com>, "hare@suse.com" <hare@suse.com>, "michael@walle.cc"
- <michael@walle.cc>, "atar4qemu@gmail.com" <atar4qemu@gmail.com>,
- "stefanb@linux.ibm.com" <stefanb@linux.ibm.com>,
- "samuel.thibault@ens-lyon.org" <samuel.thibault@ens-lyon.org>,
- "akrowiak@linux.ibm.com" <akrowiak@linux.ibm.com>, "pmorel@linux.ibm.com"
- <pmorel@linux.ibm.com>, "alex.williamson@redhat.com"
- <alex.williamson@redhat.com>, "mdroth@linux.vnet.ibm.com"
- <mdroth@linux.vnet.ibm.com>, "zhang.zhanghailiang@huawei.com"
- <zhang.zhanghailiang@huawei.com>, "quintela@redhat.com"
- <quintela@redhat.com>, "dgilbert@redhat.com" <dgilbert@redhat.com>,
- "rizzo@iet.unipi.it" <rizzo@iet.unipi.it>, "g.lettieri@iet.unipi.it"
- <g.lettieri@iet.unipi.it>, "v.maffione@gmail.com" <v.maffione@gmail.com>,
- "jan.kiszka@siemens.com" <jan.kiszka@siemens.com>, "green@moxielogic.com"
- <green@moxielogic.com>, "shorne@gmail.com" <shorne@gmail.com>,
- "gxt@mprc.pku.edu.cn" <gxt@mprc.pku.edu.cn>, "jcmvbkbc@gmail.com"
- <jcmvbkbc@gmail.com>, "qemu-block@nongnu.org" <qemu-block@nongnu.org>,
- "integration@gluster.org" <integration@gluster.org>,
- "sheepdog@lists.wpkg.org" <sheepdog@lists.wpkg.org>, "qemu-arm@nongnu.org"
- <qemu-arm@nongnu.org>, "xen-devel@lists.xenproject.org"
- <xen-devel@lists.xenproject.org>, "qemu-ppc@nongnu.org"
- <qemu-ppc@nongnu.org>, "qemu-s390x@nongnu.org" <qemu-s390x@nongnu.org>,
- "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>
-Subject: Re: [RFC v2 7/9] Use auto-propagated errp
-Thread-Topic: [RFC v2 7/9] Use auto-propagated errp
-Thread-Index: AQHVcio2QQn2PPiLskGYHg6Pi8bE8Kc5tyiAgAC/DgA=
-Date: Tue, 24 Sep 2019 07:54:29 +0000
-Message-ID: <6191a8ae-983a-ebc2-98bd-14c6b351b00e@virtuozzo.com>
-References: <20190923161231.22028-1-vsementsov@virtuozzo.com>
- <20190923161231.22028-8-vsementsov@virtuozzo.com>
- <59c5ccc7-3d4c-9613-fcd3-97642c1394cd@redhat.com>
-In-Reply-To: <59c5ccc7-3d4c-9613-fcd3-97642c1394cd@redhat.com>
-Accept-Language: ru-RU, en-US
+ 15.20.2263.15; Tue, 24 Sep 2019 08:42:36 +0000
+Received: from MN2PR04MB6061.namprd04.prod.outlook.com
+ ([fe80::e1a5:8de2:c3b1:3fb0]) by MN2PR04MB6061.namprd04.prod.outlook.com
+ ([fe80::e1a5:8de2:c3b1:3fb0%7]) with mapi id 15.20.2284.023; Tue, 24 Sep 2019
+ 08:42:36 +0000
+From: Anup Patel <Anup.Patel@wdc.com>
+To: Palmer Dabbelt <palmer@sifive.com>, Alistair Francis
+ <Alistair.Francis@wdc.com>, Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+CC: Atish Patra <Atish.Patra@wdc.com>, Anup Patel <anup@brainfault.org>,
+ "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>, "qemu-devel@nongnu.org"
+ <qemu-devel@nongnu.org>, Anup Patel <Anup.Patel@wdc.com>
+Subject: [PATCH 0/2] RTC support for QEMU RISC-V virt machine
+Thread-Topic: [PATCH 0/2] RTC support for QEMU RISC-V virt machine
+Thread-Index: AQHVcrQDVebPiIecyUaeeiRl9lWtHA==
+Date: Tue, 24 Sep 2019 08:42:36 +0000
+Message-ID: <20190924084201.107958-1-anup.patel@wdc.com>
+Accept-Language: en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
-x-clientproxiedby: HE1PR0901CA0055.eurprd09.prod.outlook.com
- (2603:10a6:3:45::23) To DB8PR08MB5498.eurprd08.prod.outlook.com
- (2603:10a6:10:11c::24)
+x-clientproxiedby: MA1PR01CA0135.INDPRD01.PROD.OUTLOOK.COM
+ (2603:1096:a00:35::29) To MN2PR04MB6061.namprd04.prod.outlook.com
+ (2603:10b6:208:d8::15)
 authentication-results: spf=none (sender IP is )
- smtp.mailfrom=vsementsov@virtuozzo.com; 
+ smtp.mailfrom=Anup.Patel@wdc.com; 
 x-ms-exchange-messagesentrepresentingtype: 1
-x-tagtoolbar-keys: D20190924105420756
-x-originating-ip: [185.231.240.5]
+x-mailer: git-send-email 2.17.1
+x-originating-ip: [199.255.44.175]
 x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 08e2405c-5c6b-4ee4-a9aa-08d740c46d70
+x-ms-office365-filtering-correlation-id: 71e99f5e-b186-402f-1bab-08d740cb2613
+x-ms-office365-filtering-ht: Tenant
 x-microsoft-antispam: BCL:0; PCL:0;
- RULEID:(2390118)(7020095)(4652040)(8989299)(5600167)(711020)(4605104)(1401327)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(2017052603328)(7193020);
- SRVR:DB8PR08MB5001; 
-x-ms-traffictypediagnostic: DB8PR08MB5001:
+ RULEID:(2390118)(7020095)(4652040)(8989299)(5600167)(711020)(4605104)(1401327)(4618075)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(2017052603328)(7193020);
+ SRVR:MN2PR04MB6957; 
+x-ms-traffictypediagnostic: MN2PR04MB6957:
+x-ms-exchange-purlcount: 1
 x-ms-exchange-transport-forked: True
-x-microsoft-antispam-prvs: <DB8PR08MB50018935B6CCD604EA296315C1840@DB8PR08MB5001.eurprd08.prod.outlook.com>
-x-ms-oob-tlc-oobclassifiers: OLM:457;
+x-microsoft-antispam-prvs: <MN2PR04MB6957E278C5B5AE70AF5793638D840@MN2PR04MB6957.namprd04.prod.outlook.com>
+wdcipoutbound: EOP-TRUE
+x-ms-oob-tlc-oobclassifiers: OLM:6790;
 x-forefront-prvs: 0170DAF08C
 x-forefront-antispam-report: SFV:NSPM;
- SFS:(10019020)(39840400004)(366004)(346002)(396003)(376002)(136003)(189003)(199004)(2501003)(25786009)(36756003)(66946007)(305945005)(66476007)(476003)(66556008)(81166006)(5660300002)(8936002)(446003)(2616005)(31696002)(54906003)(6436002)(2906002)(7736002)(6486002)(11346002)(7276002)(256004)(3846002)(14454004)(31686004)(6246003)(26005)(4326008)(102836004)(86362001)(6506007)(7416002)(52116002)(76176011)(45426003)(110136005)(386003)(7336002)(186003)(7406005)(7366002)(6116002)(316002)(486006)(6512007)(99286004)(71200400001)(71190400001)(64756008)(66446008)(81156014)(229853002)(8676002)(478600001)(53546011)(66066001);
- DIR:OUT; SFP:1102; SCL:1; SRVR:DB8PR08MB5001;
- H:DB8PR08MB5498.eurprd08.prod.outlook.com; FPR:; SPF:None; LANG:en;
+ SFS:(10019020)(4636009)(346002)(39860400002)(376002)(136003)(366004)(396003)(189003)(199004)(66446008)(2171002)(5660300002)(66556008)(25786009)(99286004)(86362001)(14444005)(50226002)(966005)(44832011)(66066001)(1076003)(8936002)(2616005)(6506007)(54906003)(4744005)(256004)(305945005)(81156014)(478600001)(6306002)(8676002)(81166006)(3846002)(2906002)(6486002)(71190400001)(14454004)(26005)(71200400001)(7736002)(386003)(66946007)(316002)(52116002)(64756008)(4326008)(186003)(6512007)(6116002)(66476007)(36756003)(110136005)(476003)(6436002)(102836004)(486006);
+ DIR:OUT; SFP:1102; SCL:1; SRVR:MN2PR04MB6957;
+ H:MN2PR04MB6061.namprd04.prod.outlook.com; FPR:; SPF:None; LANG:en;
  PTR:InfoNoRecords; MX:1; A:1; 
-received-spf: None (protection.outlook.com: virtuozzo.com does not designate
- permitted sender hosts)
 x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam-message-info: DgTMU3Cno4BBcv9hyvyNQ2DGCflxF8AbeIrinOSnnd/vP1pRcbEzXnfnzuY8Zx0uRFWvnlRBVtnXESosftMO6tEq5LCUfGLhV4a3vtbkhrc7ZZ7DP44MgH4wAM0iKSoeeXBwwMed0LmhhGaogcvrjOzBTEl/Fowdawk+qaVfhz9OVxTiJAGJaEycFcRMYAP49E2q8CDhaiK497nT2JJPKBeP821idhCcb5NBdeBuF9bCefZNiq+uAu+a8cVipVYXn52QNSWhJ1jMLFw8lKwnc/vA/8RsVxmnLJnsyf80fWz3Mr7UCM709hMn+h7ilEGnohUTebvM/c3ZiXBHl6mH0G4cvtzDPyTcPQaEEpmGIhbyZGyXOaahIi82Hrd7M/3NdGwzsXODQwZhR8EGyzhU5BcFnk4SCIqqMOZmsF0dl3s=
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <B2B0EC06FDE38E48A415580333DB3103@eurprd08.prod.outlook.com>
-Content-Transfer-Encoding: base64
+x-microsoft-antispam-message-info: aIWxmOt8uj6JRw2QAFD1/5eQB2PJIifK0GmVib1w9m+Qe7c+Pb4FgMqM9at66VymdeD+yfWpjt1iYmL6kHVqsMbmSa8hKRxPcPARoyWMjRp/oRKBHwqd05PIktzOoe0zzlN8Xm3e//88DD8CM9MP7iHXJ46l+F27krJTQgM3elz5KLzqK0Hxbjl1mofmuDiLMPK18nHX8ynspYcL3Bjr1h5Bqf1Z852LzXeXgs1njS1qrsCs/92x9MFwjrPOQYSEjAscmPhKQ6BkrqBxMz37lWSgp8F5j4rfeA/d4At3jIeMzeEufJq6SPmCNiimARUR5RV4gHy6JPoPlJfcnmeSpgwagLdbjERqIP1FCqR5bBMvLVCn3gjO8oUY0uJumxONI/kpPpCA5COqXyliay44ZlT6y0qdaTo/mdJCDJzt51YVhiyqypTLPoNV7Q8mxqJnUSZFZVmkoJiV4uCSHIjWdA==
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-X-OriginatorOrg: virtuozzo.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 08e2405c-5c6b-4ee4-a9aa-08d740c46d70
-X-MS-Exchange-CrossTenant-originalarrivaltime: 24 Sep 2019 07:54:29.4735 (UTC)
+X-OriginatorOrg: wdc.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 71e99f5e-b186-402f-1bab-08d740cb2613
+X-MS-Exchange-CrossTenant-originalarrivaltime: 24 Sep 2019 08:42:36.5944 (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 0bc7f26d-0264-416e-a6fc-8352af79c58f
+X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: IqX4zlHD8Ryipw7oe81+uLMbsiyEy428psN5yjRKuJCSXgyYMWTJJ3Fg427KKwyF1tW0H7ZsnAf+l9CoMKfSf98zjaG2O19Zn5eLeZUdc3g=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB8PR08MB5001
-X-detected-operating-system: by eggs.gnu.org: Windows 7 or 8 [fuzzy]
-X-Received-From: 2a01:111:f400:fe1f::711
+X-MS-Exchange-CrossTenant-userprincipalname: rZ9PfPL0TCrGB8pKNf13UIYzK238+GgeirNbwELlx+QiE9vcwIBSAJKFRMprVeGzLmGYOUio9JJ9P9Z0tZEQ1w==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR04MB6957
+X-detected-operating-system: by eggs.gnu.org: FreeBSD 9.x
+X-Received-From: 216.71.153.144
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -175,34 +126,34 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Sep 2019 07:54:43 -0000
+X-List-Received-Date: Tue, 24 Sep 2019 08:42:48 -0000
 
-MjMuMDkuMjAxOSAyMzozMCwgRXJpYyBCbGFrZSB3cm90ZToNCj4gT24gOS8yMy8xOSAxMToxMiBB
-TSwgVmxhZGltaXIgU2VtZW50c292LU9naWV2c2tpeSB3cm90ZToNCj4+IFRoaXMgY29tbWl0IGlz
-IGdlbmVyYXRlZCBieSBjb21tYW5kDQo+Pg0KPj4gZ2l0IGdyZXAgLWwgJ0Vycm9yIFwqXCplcnJw
-JyB8IHdoaWxlIHJlYWQgZjsgXA0KPj4gZG8gc3BhdGNoIC0tc3AtZmlsZSBcDQo+PiBzY3JpcHRz
-L2NvY2NpbmVsbGUvYXV0by1wcm9wYWdhdGVkLWVycnAuY29jY2kgLS1pbi1wbGFjZSAkZjsgZG9u
-ZQ0KPj4NCj4gDQo+IEFzIG1lbnRpb25lZCBpbiB5b3VyIGNvdmVyIGxldHRlciwgdGhpcyBmYWls
-cyBzeW50YXgtY2hlY2sgYW5kDQo+IGNvbXBpbGF0aW9uIHdpdGhvdXQgc3F1YXNoaW5nIGluIHNv
-bWUgZm9sbG93dXBzOyBpZiB3ZSBjYW4ndCBpbXByb3ZlIHRoZQ0KPiAuY29jY2kgc2NyaXB0IHRv
-IGRvIGl0IGF1dG9tYXRpY2FsbHksIHRoZW4gbWFudWFsbHkgc3F1YXNoaW5nIGluDQo+IGNsZWFu
-dXBzIChhbmQgZG9jdW1lbnRpbmcgd2hhdCB0eXBlcyBvZiBjbGVhbnVwcyB0aGV5IHdlcmUpIGlz
-IGZpbmUuDQo+IChUaGUgZ29hbCBmb3IgYSBtZWNoYW5pY2FsIHBhdGNoIGxpa2UgdGhpcyBpcyB0
-byBtYWtlIGl0IGVhc3kgZW5vdWdoIHRvDQo+IGF1dG9tYXRlIGRvd25zdHJlYW0sIGV2ZW4gd2hl
-cmUgdGhlIGZpbGUgY29udGVudHMgYXJlIGNoYW5nZWQsIGJ1dCB3aGVyZQ0KPiB0aGUgcHJvY2Vz
-cyBmb3IgY3JlYXRpbmcgdGhvc2UgY2hhbmdlcyBhcmUgdGhlIHNhbWUpLg0KPiANCj4+IFNpZ25l
-ZC1vZmYtYnk6IFZsYWRpbWlyIFNlbWVudHNvdi1PZ2lldnNraXkgPHZzZW1lbnRzb3ZAdmlydHVv
-enpvLmNvbT4NCj4+IC0tLQ0KPiANCj4gU3BvdC1jaGVja2luZw0KPiANCj4+ICAgYmxvY2svaW8u
-YyAgICAgICAgICAgICAgICAgICAgICAgICAgfCAgMTEgKy0NCj4gDQo+PiAgIGJsb2NrL25iZC5j
-ICAgICAgICAgICAgICAgICAgICAgICAgIHwgIDQ0ICsrKy0tLQ0KPiANCj4+ICAgcWFwaS9xYXBp
-LXZpc2l0LWNvcmUuYyAgICAgICAgICAgICAgfCAgNTMgKystLS0tLQ0KPiANCj4ganVzdCB0byBz
-ZWUgaG93IGl0IGxvb2tzLg0KPiANCj4+ICsrKyBiL2Jsb2NrL2lvLmMNCj4+IEBAIC0xMzYsNyAr
-MTM2LDYgQEAgc3RhdGljIHZvaWQgYmRydl9tZXJnZV9saW1pdHMoQmxvY2tMaW1pdHMgKmRzdCwg
-Y29uc3QgQmxvY2tMaW1pdHMgKnNyYykNCj4+ICAgdm9pZCBiZHJ2X3JlZnJlc2hfbGltaXRzKEJs
-b2NrRHJpdmVyU3RhdGUgKmJzLCBFcnJvciAqKmVycnApDQo+PiAgIHsNCj4+ICAgICAgIEJsb2Nr
-RHJpdmVyICpkcnYgPSBicy0+ZHJ2Ow0KPj4gLSAgICBFcnJvciAqbG9jYWxfZXJyID0gTlVMTDsN
-Cj4+ICAgDQo+IA0KPiBVbW0sIG5vIGluc2VydGlvbiBvZiBFUlJfRlVOQ1RJT05fQkVHSU4oKS4g
-IE9vcHMuDQoNCg0KT29wcy4gU2VlbXMgSSBpbmplY3RlZCBpdCBfb25seV8gdG8gZW1wdHkgZnVu
-Y3Rpb25zLiBJdCdzIGJlY2F1c2UgSSBtaXNzZWQgJy4uLicgaW4gZmlyc3QgaHVuay4NCg0KLS0g
-DQpCZXN0IHJlZ2FyZHMsDQpWbGFkaW1pcg0K
+This series adds RTC device to QEMU RISC-V virt machine. We have
+selected Goldfish RTC device model for this. It's a pretty simple
+synthetic device with few MMIO registers and no dependency external
+clock. The driver for Goldfish RTC is already available in Linux so
+we just need to enable it in Kconfig for RISCV and also update Linux
+defconfigs.
+
+We have tested this series with Linux-5.3 plus defconfig changes
+available in 'goldfish_rtc_v1' branch of:
+https://github.com/avpatel/linux.git
+
+Anup Patel (2):
+  hw: timer: Add Goldfish RTC device
+  riscv: virt: Use Goldfish RTC device
+
+ hw/riscv/Kconfig                |   1 +
+ hw/riscv/virt.c                 |  15 +++
+ hw/timer/Kconfig                |   3 +
+ hw/timer/Makefile.objs          |   1 +
+ hw/timer/goldfish_rtc.c         | 221 ++++++++++++++++++++++++++++++++
+ include/hw/riscv/virt.h         |   2 +
+ include/hw/timer/goldfish_rtc.h |  45 +++++++
+ 7 files changed, 288 insertions(+)
+ create mode 100644 hw/timer/goldfish_rtc.c
+ create mode 100644 include/hw/timer/goldfish_rtc.h
+
+--
+2.17.1
 
