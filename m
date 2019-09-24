@@ -1,48 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iCkbA-00083X-QC
-	for mharc-qemu-riscv@gnu.org; Tue, 24 Sep 2019 09:11:20 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44153)
+	id 1iCkbB-00084c-Jk
+	for mharc-qemu-riscv@gnu.org; Tue, 24 Sep 2019 09:11:21 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:41833)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <guoren@kernel.org>) id 1iCfmI-0007mD-Sp
- for qemu-riscv@nongnu.org; Tue, 24 Sep 2019 04:02:34 -0400
+ (envelope-from <guoren@kernel.org>) id 1iCfU4-0002bW-0T
+ for qemu-riscv@nongnu.org; Tue, 24 Sep 2019 03:43:41 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <guoren@kernel.org>) id 1iCfmF-0005Hv-UY
- for qemu-riscv@nongnu.org; Tue, 24 Sep 2019 04:02:30 -0400
-Received: from mail.kernel.org ([198.145.29.99]:38282)
+ (envelope-from <guoren@kernel.org>) id 1iCfU2-0004Wz-VT
+ for qemu-riscv@nongnu.org; Tue, 24 Sep 2019 03:43:39 -0400
+Received: from mail.kernel.org ([198.145.29.99]:54666)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <guoren@kernel.org>)
- id 1iCfmD-0005Gt-6M; Tue, 24 Sep 2019 04:02:25 -0400
-Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com
- [209.85.221.46])
+ id 1iCfU0-0004Pk-6Z; Tue, 24 Sep 2019 03:43:36 -0400
+Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com
+ [209.85.221.50])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 06645214DA;
- Tue, 24 Sep 2019 08:02:24 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id B0E3A214DA;
+ Tue, 24 Sep 2019 07:43:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1569312144;
- bh=1ZiYWI6zpc/T/IrpNHuqqmG0tT4483zjxG7GaqOGz9c=;
+ s=default; t=1569311015;
+ bh=izqiCldVI+IqJ9y6fkccFKPCDpgGmGqFvGvV7pRg3S0=;
  h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=v+nEK+4tPaWB4WxiCboJ1KuDE8SbBQRpMGNNNeAyzca+zbgu10JnxNqyr4AmF2X11
- MwjyXcnAnRA8lqd3+29I7V/u6HhX+yX5YKy8vnbpUGZ3uEf9OKm70vLMfot7op+g2Z
- 7vMw50bOXnsMAWTgJkqkUNuU3Pb7FEg99Dues0l0=
-Received: by mail-wr1-f46.google.com with SMTP id i18so783362wru.11;
- Tue, 24 Sep 2019 01:02:23 -0700 (PDT)
-X-Gm-Message-State: APjAAAW/98Ix1mAXesmdDrs2vwAyfK4SXln/aSbcTT6nOJBivLZpr+lD
- Nu9QG8Iz+xv0Bq7WqBMdBDEf4adxzEbW2jqnASk=
-X-Google-Smtp-Source: APXvYqyEjj1yyvM1tuDRQ/kHPBHfXfNdRRZolhDBCgT0vf0zpAQZEyH7D3kQjXEJfwUybiHLUxEhYx4PGoZ/HTp8tsU=
-X-Received: by 2002:adf:fac3:: with SMTP id a3mr1151180wrs.24.1569312142490;
- Tue, 24 Sep 2019 01:02:22 -0700 (PDT)
+ b=1neH1Ma0yU7b5TfugpLSmNKyi1s2Y7TW/sXCt+UGk55YVvkQ/nrZRjbBQ5bt3aPQd
+ bccCVr8RhMP8f3HY3FyIzQIAnczeXT6G3VOrFFDSg73KwT/nl+r2VRRYv9+KHxC9qE
+ C6rQ5fp8nVKcbqppQSCP28gu/XddiVcZiF4VMGV4=
+Received: by mail-wr1-f50.google.com with SMTP id r5so715945wrm.12;
+ Tue, 24 Sep 2019 00:43:34 -0700 (PDT)
+X-Gm-Message-State: APjAAAXQi7/1EUM2MrzReu1eCcFuztuCVyoVT5lcOgowo4qsXCg9RReh
+ 3gMphbLt/b7W3NTW394axnUcCwt75sKgSSakMGM=
+X-Google-Smtp-Source: APXvYqymHnDiJx8TNMhVrYiza/m4Fx8YcJgf6l+Z6jHQiFoj97uqHh+ujVlQrhLPekB6EaAR0CXMpzk75Or+4YXyry8=
+X-Received: by 2002:adf:fac3:: with SMTP id a3mr1094534wrs.24.1569311013240;
+ Tue, 24 Sep 2019 00:43:33 -0700 (PDT)
 MIME-Version: 1.0
-References: <1569311902-12173-1-git-send-email-guoren@kernel.org>
-In-Reply-To: <1569311902-12173-1-git-send-email-guoren@kernel.org>
+References: <1569301232-7128-1-git-send-email-guoren@kernel.org>
+ <CAKmqyKO9=FuqsEDbuA_iw3+W8fpcGxudxV76vu2ZucRLeExQUA@mail.gmail.com>
+In-Reply-To: <CAKmqyKO9=FuqsEDbuA_iw3+W8fpcGxudxV76vu2ZucRLeExQUA@mail.gmail.com>
 From: Guo Ren <guoren@kernel.org>
-Date: Tue, 24 Sep 2019 16:02:10 +0800
-X-Gmail-Original-Message-ID: <CAJF2gTT6mXQ7dP+C_MdT==kCoreYWVBEV1bRO+143Ar8AbEuyg@mail.gmail.com>
-Message-ID: <CAJF2gTT6mXQ7dP+C_MdT==kCoreYWVBEV1bRO+143Ar8AbEuyg@mail.gmail.com>
-Subject: Re: [PATCH V2] target/riscv: Bugfix reserved bits in PTE for RV64
-To: qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-Cc: alistair23@gmail.com, Palmer Dabbelt <palmer@sifive.com>, 
- Alistair Francis <alistair.francis@wdc.com>, Guo Ren <ren_guo@c-sky.com>
+Date: Tue, 24 Sep 2019 15:43:21 +0800
+X-Gmail-Original-Message-ID: <CAJF2gTSTyKMNYbG_hF9EwdsyBeHjqbzAxG41uZrQPmxUaD9hCA@mail.gmail.com>
+Message-ID: <CAJF2gTSTyKMNYbG_hF9EwdsyBeHjqbzAxG41uZrQPmxUaD9hCA@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: Bugfix reserved bits in PTE for RV64
+To: Alistair Francis <alistair23@gmail.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Alistair Francis <alistair.francis@wdc.com>, Palmer Dabbelt <palmer@sifive.com>,
+ Guo Ren <ren_guo@c-sky.com>
 Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
 X-Received-From: 198.145.29.99
@@ -58,67 +61,52 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Sep 2019 08:02:35 -0000
+X-List-Received-Date: Tue, 24 Sep 2019 07:43:41 -0000
 
-I only tested it on qemu-3.1.0, pls have a try before merge.
+Ok, In fact it's wrong patch, don't try it. pte is destroyed.
 
-On Tue, Sep 24, 2019 at 4:00 PM <guoren@kernel.org> wrote:
+Sorry for that, I'll send V2.
+
+On Tue, Sep 24, 2019 at 1:03 PM Alistair Francis <alistair23@gmail.com> wrote:
 >
-> From: Guo Ren <ren_guo@c-sky.com>
+> On Mon, Sep 23, 2019 at 10:01 PM <guoren@kernel.org> wrote:
+> >
+> > From: Guo Ren <ren_guo@c-sky.com>
+> >
+> > Highest 10 bits of PTE are reserved in riscv-privileged, ref: [1], so we
+> > need to ignore them. They can not be a part of ppn.
+> >
+> > 1: The RISC-V Instruction Set Manual, Volume II: Privileged Architecture
+> >    4.4 Sv39: Page-Based 39-bit Virtual-Memory System
+> >    4.5 Sv48: Page-Based 48-bit Virtual-Memory System
+> >
+> > Signed-off-by: Guo Ren <ren_guo@c-sky.com>
+> > Reviewed-by: Liu Zhiwei <zhiwei_liu@c-sky.com>
+> > ---
+> >  target/riscv/cpu_helper.c | 1 +
+> >  1 file changed, 1 insertion(+)
+> >
+> > diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> > index 87dd6a6..3c5e8f6 100644
+> > --- a/target/riscv/cpu_helper.c
+> > +++ b/target/riscv/cpu_helper.c
+> > @@ -260,6 +260,7 @@ restart:
+> >          target_ulong pte = ldl_phys(cs->as, pte_addr);
+> >  #elif defined(TARGET_RISCV64)
+> >          target_ulong pte = ldq_phys(cs->as, pte_addr);
+> > +        pte = pte << 10 >> 10;
 >
-> Highest 10 bits of PTE are reserved in riscv-privileged, ref: [1], so we
-> need to ignore them. They can not be a part of ppn.
+> You can just AND with a mask instead of shifting both directions.
 >
-> 1: The RISC-V Instruction Set Manual, Volume II: Privileged Architecture
->    4.4 Sv39: Page-Based 39-bit Virtual-Memory System
->    4.5 Sv48: Page-Based 48-bit Virtual-Memory System
+> Alistair
 >
-> Changelog V2:
->  - Bugfix pte destroyed cause boot fail
->  - Change to AND with a mask instead of shifting both directions
->
-> Signed-off-by: Guo Ren <ren_guo@c-sky.com>
-> Reviewed-by: Liu Zhiwei <zhiwei_liu@c-sky.com>
-> ---
->  target/riscv/cpu_bits.h   | 3 +++
->  target/riscv/cpu_helper.c | 3 ++-
->  2 files changed, 5 insertions(+), 1 deletion(-)
->
-> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-> index e998348..ae8aa0f 100644
-> --- a/target/riscv/cpu_bits.h
-> +++ b/target/riscv/cpu_bits.h
-> @@ -470,6 +470,9 @@
->  #define PTE_D               0x080 /* Dirty */
->  #define PTE_SOFT            0x300 /* Reserved for Software */
->
-> +/* Reserved highest 10 bits in PTE */
-> +#define PTE_RESERVED        ((target_ulong)0x3ff << 54)
-> +
->  /* Page table PPN shift amount */
->  #define PTE_PPN_SHIFT       10
->
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index 87dd6a6..7a540cc 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -258,10 +258,11 @@ restart:
->          }
->  #if defined(TARGET_RISCV32)
->          target_ulong pte = ldl_phys(cs->as, pte_addr);
-> +        hwaddr ppn = pte >> PTE_PPN_SHIFT;
->  #elif defined(TARGET_RISCV64)
->          target_ulong pte = ldq_phys(cs->as, pte_addr);
-> +        hwaddr ppn = (pte & ~PTE_RESERVED) >> PTE_PPN_SHIFT;
->  #endif
-> -        hwaddr ppn = pte >> PTE_PPN_SHIFT;
->
->          if (!(pte & PTE_V)) {
->              /* Invalid PTE */
-> --
-> 2.7.4
->
->
+> >  #endif
+> >          hwaddr ppn = pte >> PTE_PPN_SHIFT;
+> >
+> > --
+> > 2.7.4
+> >
+
 
 
 -- 
