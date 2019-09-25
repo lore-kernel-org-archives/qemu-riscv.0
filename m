@@ -1,56 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iD6Pt-0007Ns-3V
-	for mharc-qemu-riscv@gnu.org; Wed, 25 Sep 2019 08:29:09 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:55509)
+	id 1iD966-0002Oz-Sl
+	for mharc-qemu-riscv@gnu.org; Wed, 25 Sep 2019 11:20:54 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:60611)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <guoren@kernel.org>) id 1iD6Pp-0007Ij-Vh
- for qemu-riscv@nongnu.org; Wed, 25 Sep 2019 08:29:07 -0400
+ (envelope-from <fintelia@gmail.com>) id 1iD960-0002HJ-Rs
+ for qemu-riscv@nongnu.org; Wed, 25 Sep 2019 11:20:51 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <guoren@kernel.org>) id 1iD6Po-0003iq-Us
- for qemu-riscv@nongnu.org; Wed, 25 Sep 2019 08:29:05 -0400
-Received: from mail.kernel.org ([198.145.29.99]:52276)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <guoren@kernel.org>)
- id 1iD6Pm-0003hz-Ga; Wed, 25 Sep 2019 08:29:02 -0400
-Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com
- [209.85.128.41])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 33BC720665;
- Wed, 25 Sep 2019 12:29:00 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1569414540;
- bh=oXaekWF4ps2BBah8Kc1yQPnkaMiXX/Go11DbBfkvzaM=;
- h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=WrttZxqyGQusmjO7ttTITAtFDjOXuJ+J6P32t3Apkg95stwdHsUdsTwFoHNxO4qAa
- d62XSrpd+W6d5Csq8rqDDgGFgJl4I2J9x+Ac+WILyMET0rBLyruJDx5XJsVVMb/+1T
- jiU0BJJI8tbGOGqhhdo4b1Z4+Uee5KNOyXWhtnms=
-Received: by mail-wm1-f41.google.com with SMTP id 3so4742740wmi.3;
- Wed, 25 Sep 2019 05:29:00 -0700 (PDT)
-X-Gm-Message-State: APjAAAWTRulK6g+Mvnt9NZjlN0SG0i7nW+alZ8TL4ZikcjIzgeKq6MrM
- Ty0iErA2yg9OeELUsxuu/vaCzNtzXOrld2rH1AI=
-X-Google-Smtp-Source: APXvYqznwoA3E3rOh7gGSRV9zErUkLmcEic9EWHjLBr1Vm63dx1COo/ejpRRDDcTMh0d4JvzWVV5fkciHX0OGTZK3z4=
-X-Received: by 2002:a05:600c:1103:: with SMTP id
- b3mr7757560wma.3.1569414538702; 
- Wed, 25 Sep 2019 05:28:58 -0700 (PDT)
+ (envelope-from <fintelia@gmail.com>) id 1iD95z-0005QY-Ao
+ for qemu-riscv@nongnu.org; Wed, 25 Sep 2019 11:20:48 -0400
+Received: from mail-lf1-x144.google.com ([2a00:1450:4864:20::144]:42569)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <fintelia@gmail.com>)
+ id 1iD95z-0005Pg-3H; Wed, 25 Sep 2019 11:20:47 -0400
+Received: by mail-lf1-x144.google.com with SMTP id c195so4516064lfg.9;
+ Wed, 25 Sep 2019 08:20:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=hBoDidx9ZQfLS3KKPQQ3ChK5cRax0JL9wFoDaCafu70=;
+ b=eX8mEnyBBQ2AhN6eRJqtUg0xNcm/4QcMP70JaVjikhxfGZQT9JNPP49Z543iDdwfVB
+ A0myyoSAXB8pWwiXo783GAKwD4vKTQGCTBXKqnuThdfqXzFy6imD2tdqnpYKX+nysomT
+ 4BppEqSVRj3oqAkQsMCcgsxVtEQtAH50qvKHTgnY23xpEqj8p/hODwwiXc6qO2etCSlN
+ MuiYM9y1Bo0up6DPcpvK0kKvVw2qjekvDY60f1h2GdZNHeHPdzHmCHMqJ2nJacGoNZ5Y
+ U0CsohhSWowSTFR5S+hpt32KPrCc4eBTcBIczpGxrpHDJc6rYCfsjJa6wQDIIQyOnAyX
+ X76A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=hBoDidx9ZQfLS3KKPQQ3ChK5cRax0JL9wFoDaCafu70=;
+ b=hUgSWptZ4+d8/8bFK8YEB2VED6kDDEPsJXT3nK1uWuW7GuN1C9xXa3XK110QljlgAv
+ j8tjOI9TRV2dvDkIyA7Qbs8f5cyyW1kaKYhpS1RnOMFOdXYDVHkqZZGcEGnlQ9xX1bA8
+ upspSVTpuKwmNieHA3Uao2xVNR1DBwaC3KQA4ayafQenl0Lnr6x6AwYup+bdNE1UIwK7
+ zCiQHyVi6ljl3osIMpzmX3fP5BF0hlO6Hvpy9QG+Du+JjcTAg33NOgeV1KD7s7RL9Zp5
+ HnyV+UiMsYGLgfgjWhCfkvJcC0mmJKC2hg6oe3t05XzFNIwj177oB4GXBs9Q/Bo8Ps+9
+ qCVA==
+X-Gm-Message-State: APjAAAXXsTtaWLQZZ/Mho5MkTLBOoGEDO0AAbLspFNIX/h4/3hXS1PGW
+ oe3eTXAQyVXPMFdHvVCEnFpvnFR6CzZn5/dz8Qg=
+X-Google-Smtp-Source: APXvYqwArIGULCJL36G8mc0x7Ql6n5L8wPLZ0cr9eSkSw3glW8xhVecTguLSEt73o3q3z6RnbUkjWiH1CY20naQIJkc=
+X-Received: by 2002:ac2:4427:: with SMTP id w7mr6588461lfl.143.1569424844768; 
+ Wed, 25 Sep 2019 08:20:44 -0700 (PDT)
 MIME-Version: 1.0
 References: <1569386895-8726-1-git-send-email-guoren@kernel.org>
  <CAKmqyKMraotFmqMg7MrJC5C4SogGqSaVtHkVYTEgGWK9UnWb5g@mail.gmail.com>
-In-Reply-To: <CAKmqyKMraotFmqMg7MrJC5C4SogGqSaVtHkVYTEgGWK9UnWb5g@mail.gmail.com>
-From: Guo Ren <guoren@kernel.org>
-Date: Wed, 25 Sep 2019 20:28:47 +0800
-X-Gmail-Original-Message-ID: <CAJF2gTR0o0s_p0H669BRZ86phLtpATwWczczWV8HWw1nc+doFA@mail.gmail.com>
-Message-ID: <CAJF2gTR0o0s_p0H669BRZ86phLtpATwWczczWV8HWw1nc+doFA@mail.gmail.com>
+ <CAJF2gTR0o0s_p0H669BRZ86phLtpATwWczczWV8HWw1nc+doFA@mail.gmail.com>
+In-Reply-To: <CAJF2gTR0o0s_p0H669BRZ86phLtpATwWczczWV8HWw1nc+doFA@mail.gmail.com>
+From: Jonathan Behrens <fintelia@gmail.com>
+Date: Wed, 25 Sep 2019 11:19:43 -0400
+Message-ID: <CANnJOVFkviip0g1tBHdL6n2B8pMAQxVBC83RTaF4PAE1t+aPew@mail.gmail.com>
 Subject: Re: [PATCH V3] target/riscv: Bugfix reserved bits in PTE for RV64
-To: Alistair Francis <alistair23@gmail.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Alistair Francis <alistair.francis@wdc.com>, Palmer Dabbelt <palmer@sifive.com>,
+To: Guo Ren <guoren@kernel.org>
+Cc: Alistair Francis <alistair23@gmail.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Palmer Dabbelt <palmer@sifive.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  Guo Ren <ren_guo@c-sky.com>
-Content-Type: text/plain; charset="UTF-8"
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
- [fuzzy]
-X-Received-From: 198.145.29.99
+Content-Type: multipart/alternative; boundary="0000000000005fcd970593623226"
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2a00:1450:4864:20::144
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -62,33 +69,108 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Sep 2019 12:29:07 -0000
+X-List-Received-Date: Wed, 25 Sep 2019 15:20:53 -0000
 
-On Wed, Sep 25, 2019 at 1:19 PM Alistair Francis <alistair23@gmail.com> wrote:
->
-> On Tue, Sep 24, 2019 at 9:48 PM <guoren@kernel.org> wrote:
+--0000000000005fcd970593623226
+Content-Type: text/plain; charset="UTF-8"
+
+Any code whose behavior is changed by this patch is wrong, so it doesn't
+seem like it matters much whether this is merged or not. Personally I'd
+lean towards making sure that attempts to use PTEs with the reserved bit
+set would always fault, rather than wrapping around to low memory and
+perhaps silently succeeding.
+
+Jonathan
+
+On Wed, Sep 25, 2019 at 8:29 AM Guo Ren <guoren@kernel.org> wrote:
+
+> On Wed, Sep 25, 2019 at 1:19 PM Alistair Francis <alistair23@gmail.com>
+> wrote:
 > >
-> > From: Guo Ren <ren_guo@c-sky.com>
+> > On Tue, Sep 24, 2019 at 9:48 PM <guoren@kernel.org> wrote:
+> > >
+> > > From: Guo Ren <ren_guo@c-sky.com>
+> > >
+> > > Highest 10 bits of PTE are reserved in riscv-privileged, ref: [1], so
+> we
+> > > need to ignore them. They can not be a part of ppn.
+> > >
+> > > 1: The RISC-V Instruction Set Manual, Volume II: Privileged
+> Architecture
+> > >    4.4 Sv39: Page-Based 39-bit Virtual-Memory System
+> > >    4.5 Sv48: Page-Based 48-bit Virtual-Memory System
 > >
-> > Highest 10 bits of PTE are reserved in riscv-privileged, ref: [1], so we
-> > need to ignore them. They can not be a part of ppn.
+> > Hey,
 > >
-> > 1: The RISC-V Instruction Set Manual, Volume II: Privileged Architecture
-> >    4.4 Sv39: Page-Based 39-bit Virtual-Memory System
-> >    4.5 Sv48: Page-Based 48-bit Virtual-Memory System
+> > As I mentioned on patch 2 I don't think this is right. It isn't up to
+> > HW to clear these bits, software should keep them clear.
 >
-> Hey,
+> These bits are not part of ppn in spec, so we still need to ignore them
+> for ppn.
 >
-> As I mentioned on patch 2 I don't think this is right. It isn't up to
-> HW to clear these bits, software should keep them clear.
+> The patch is reasonable.
+>
+> --
+> Best Regards
+>  Guo Ren
+>
+> ML: https://lore.kernel.org/linux-csky/
+>
+>
 
-These bits are not part of ppn in spec, so we still need to ignore them for ppn.
+--0000000000005fcd970593623226
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-The patch is reasonable.
+<div dir=3D"ltr"><div>Any code whose behavior is changed by this patch is w=
+rong, so it doesn&#39;t seem like it matters much whether this is merged or=
+ not. Personally I&#39;d lean towards making sure that attempts to use PTEs=
+ with the reserved bit set would always fault, rather than wrapping around =
+to low memory and perhaps silently succeeding.</div><div><br></div><div>Jon=
+athan<br></div></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
+=3D"gmail_attr">On Wed, Sep 25, 2019 at 8:29 AM Guo Ren &lt;<a href=3D"mail=
+to:guoren@kernel.org">guoren@kernel.org</a>&gt; wrote:<br></div><blockquote=
+ class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px so=
+lid rgb(204,204,204);padding-left:1ex">On Wed, Sep 25, 2019 at 1:19 PM Alis=
+tair Francis &lt;<a href=3D"mailto:alistair23@gmail.com" target=3D"_blank">=
+alistair23@gmail.com</a>&gt; wrote:<br>
+&gt;<br>
+&gt; On Tue, Sep 24, 2019 at 9:48 PM &lt;<a href=3D"mailto:guoren@kernel.or=
+g" target=3D"_blank">guoren@kernel.org</a>&gt; wrote:<br>
+&gt; &gt;<br>
+&gt; &gt; From: Guo Ren &lt;<a href=3D"mailto:ren_guo@c-sky.com" target=3D"=
+_blank">ren_guo@c-sky.com</a>&gt;<br>
+&gt; &gt;<br>
+&gt; &gt; Highest 10 bits of PTE are reserved in riscv-privileged, ref: [1]=
+, so we<br>
+&gt; &gt; need to ignore them. They can not be a part of ppn.<br>
+&gt; &gt;<br>
+&gt; &gt; 1: The RISC-V Instruction Set Manual, Volume II: Privileged Archi=
+tecture<br>
+&gt; &gt;=C2=A0 =C2=A0 4.4 Sv39: Page-Based 39-bit Virtual-Memory System<br=
+>
+&gt; &gt;=C2=A0 =C2=A0 4.5 Sv48: Page-Based 48-bit Virtual-Memory System<br=
+>
+&gt;<br>
+&gt; Hey,<br>
+&gt;<br>
+&gt; As I mentioned on patch 2 I don&#39;t think this is right. It isn&#39;=
+t up to<br>
+&gt; HW to clear these bits, software should keep them clear.<br>
+<br>
+These bits are not part of ppn in spec, so we still need to ignore them for=
+ ppn.<br>
+<br>
+The patch is reasonable.<br>
+<br>
+-- <br>
+Best Regards<br>
+=C2=A0Guo Ren<br>
+<br>
+ML: <a href=3D"https://lore.kernel.org/linux-csky/" rel=3D"noreferrer" targ=
+et=3D"_blank">https://lore.kernel.org/linux-csky/</a><br>
+<br>
+</blockquote></div>
 
--- 
-Best Regards
- Guo Ren
-
-ML: https://lore.kernel.org/linux-csky/
+--0000000000005fcd970593623226--
 
