@@ -1,37 +1,45 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iD9yB-00087f-PV
-	for mharc-qemu-riscv@gnu.org; Wed, 25 Sep 2019 12:16:47 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:41746)
+	id 1iDG9R-0008Ur-87
+	for mharc-qemu-riscv@gnu.org; Wed, 25 Sep 2019 18:52:49 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:55512)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <guoren@kernel.org>) id 1iD9y7-00083O-N8
- for qemu-riscv@nongnu.org; Wed, 25 Sep 2019 12:16:44 -0400
+ (envelope-from <alistair23@gmail.com>) id 1iDG9N-0008UV-RN
+ for qemu-riscv@nongnu.org; Wed, 25 Sep 2019 18:52:47 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <guoren@kernel.org>) id 1iD9y6-0002gH-Lj
- for qemu-riscv@nongnu.org; Wed, 25 Sep 2019 12:16:43 -0400
-Received: from mail.kernel.org ([198.145.29.99]:41444)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <guoren@kernel.org>)
- id 1iD9y4-0002el-4H; Wed, 25 Sep 2019 12:16:40 -0400
-Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com
- [209.85.221.44])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 46F2921D7F;
- Wed, 25 Sep 2019 16:16:38 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1569428198;
- bh=G2rWrfgCLyXkXuoP1p6fWLaQHHJK8GenQPy5V1iTb3A=;
- h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=QkOUvG0SpvalvnxfvNk71KeNopsp05lh1aPxatreGIgRrnZ5v/1pg/A8YA02OiYO7
- BOIratqJaL+8mFKYx2z68MxogCEpV+vKBC/6tjk5xP0cWZLYLjcLl+fa2/ki0W1hOm
- EDjsH9mIWIZWEIQx+v7lckDZ+rxxTzIfQX/uZKeE=
-Received: by mail-wr1-f44.google.com with SMTP id q17so7655609wrx.10;
- Wed, 25 Sep 2019 09:16:38 -0700 (PDT)
-X-Gm-Message-State: APjAAAV7IagbakWYxxdXI4VXCcSoXxbqLpg+Nrz7BUNsdMkTroLveuEQ
- k+0wcppMDngwIK+0M4/6qpY3pqbz9gCStZo+Z3U=
-X-Google-Smtp-Source: APXvYqwMWMH9sHZMAxqHGk19ydPa07PadcsCmgVGvNPeGZhJ2/cyNBP0ur5l7Os6z/uyFWelhEphZjfHMdZQE3pjJMI=
-X-Received: by 2002:a5d:49c2:: with SMTP id t2mr9903770wrs.351.1569428196823; 
- Wed, 25 Sep 2019 09:16:36 -0700 (PDT)
+ (envelope-from <alistair23@gmail.com>) id 1iDG9M-0000yu-Bt
+ for qemu-riscv@nongnu.org; Wed, 25 Sep 2019 18:52:45 -0400
+Received: from mail-lf1-f66.google.com ([209.85.167.66]:37171)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <alistair23@gmail.com>)
+ id 1iDG9L-0000v2-1k; Wed, 25 Sep 2019 18:52:44 -0400
+Received: by mail-lf1-f66.google.com with SMTP id w67so201041lff.4;
+ Wed, 25 Sep 2019 15:52:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=frQu29Nj8ZdlahMtLQpA647Txr2OvkpzXynOlToVIZE=;
+ b=E/VXofHl2j18Dm9Lw8dU/gu/ITvSxNPbcCv8pknxQSr5MND4BOUSeEW2V0xWzc+lNN
+ 2q0RsS69UGXVCbgwu0cME0lEkK3HCQyx1JFOLBSQ/bKQcyWTZ4GhkypdpYTt0DxaS4P/
+ t9E3QPQxMkSkboP1RkyVXzb45R58fWbGqOQn59AIvNAhifcbdhrRgamsc5Chq7dsgCMp
+ gfWo/DqmXspfkz80t5dgyuSobrYezKBRe3PGd37WpYHXCvWGJmqo+BnsQtE4NJ3nq1nP
+ gfRfNxsCdNMUGI3iyMRyOi7xQrCdEkllRGpnqi5isfDs5YXS6OWWVUGSDzfyjv0KkCxG
+ yGnw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=frQu29Nj8ZdlahMtLQpA647Txr2OvkpzXynOlToVIZE=;
+ b=bxFy2TdP71puQZEKGzzaRHOe5lpkyaIMcjMvHe1dLyi7HQziQ1KZ1hcCR1PVax6hV+
+ acMrCASqff5BfYjba7eOQuUQQlONt41FoRGie8KKPWhPqGrnQh5Qi/YI/dTv8vulJpFX
+ P+PvyXbMVksjMtYYTgYNcfMK1jIpWkXnU+bYliQZu8nRN7v+BUdwg/W+EOCMOvjK3w9Q
+ hY9gflVZeOJTEJdw/0BNDTQpQtwJEZRdO5AxHBtXYldCDpoqV0royrOmSt1veHf11LbC
+ tcKNJAsE/x6pYdzfh3L9lAoGlT+Tzg4hbGmk1lHij1m6DtT3KH4gV60UhAKMZ17WxKBr
+ h2Rw==
+X-Gm-Message-State: APjAAAWR3sKp81C8S2FrRJCT9o0VASM/Sp/6vhts5QN1QLKhjJQRlHTw
+ y0Z/KEc9VP5N/LWcLb2xAjxG1c3+4oktFWMI3sw=
+X-Google-Smtp-Source: APXvYqz+8xtFnly0lmpF1kaJTt4IWUyHQvG/PrTOWiw2wvOjx/0JAazsk91+6onFEhWhCp9OWxrXSSrT2EWMWngzrRU=
+X-Received: by 2002:ac2:5e9e:: with SMTP id b30mr209761lfq.5.1569451899079;
+ Wed, 25 Sep 2019 15:51:39 -0700 (PDT)
 MIME-Version: 1.0
 References: <1569386895-8726-1-git-send-email-guoren@kernel.org>
  <CAKmqyKMraotFmqMg7MrJC5C4SogGqSaVtHkVYTEgGWK9UnWb5g@mail.gmail.com>
@@ -39,14 +47,14 @@ References: <1569386895-8726-1-git-send-email-guoren@kernel.org>
  <CANnJOVFkviip0g1tBHdL6n2B8pMAQxVBC83RTaF4PAE1t+aPew@mail.gmail.com>
  <CAJF2gTS=1uaQi7=CXg7f0eh2xb-HcG_sriMtU208VHXnJ4GTvA@mail.gmail.com>
  <CANnJOVFkUAS3mP4y0mu+jCajy9m4hDK389xpZz4wza1t0Bvo_g@mail.gmail.com>
-In-Reply-To: <CANnJOVFkUAS3mP4y0mu+jCajy9m4hDK389xpZz4wza1t0Bvo_g@mail.gmail.com>
-From: Guo Ren <guoren@kernel.org>
-Date: Thu, 26 Sep 2019 00:16:25 +0800
-X-Gmail-Original-Message-ID: <CAJF2gTQR7cZ+HNAfKwdQ9P3rJTStmmjVGZ7UsaA9dbMYh9PqYw@mail.gmail.com>
-Message-ID: <CAJF2gTQR7cZ+HNAfKwdQ9P3rJTStmmjVGZ7UsaA9dbMYh9PqYw@mail.gmail.com>
+ <CAJF2gTQR7cZ+HNAfKwdQ9P3rJTStmmjVGZ7UsaA9dbMYh9PqYw@mail.gmail.com>
+In-Reply-To: <CAJF2gTQR7cZ+HNAfKwdQ9P3rJTStmmjVGZ7UsaA9dbMYh9PqYw@mail.gmail.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Wed, 25 Sep 2019 15:46:55 -0700
+Message-ID: <CAKmqyKM5rNDGCmNTBqk4F7zETeMiwLjGgq4m3Wx2rAKUsJxeag@mail.gmail.com>
 Subject: Re: [PATCH V3] target/riscv: Bugfix reserved bits in PTE for RV64
-To: Jonathan Behrens <fintelia@gmail.com>
-Cc: Alistair Francis <alistair23@gmail.com>,
+To: Guo Ren <guoren@kernel.org>
+Cc: Jonathan Behrens <fintelia@gmail.com>,
  Alistair Francis <alistair.francis@wdc.com>, 
  Palmer Dabbelt <palmer@sifive.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>,
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
@@ -55,7 +63,7 @@ Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
  [fuzzy]
-X-Received-From: 198.145.29.99
+X-Received-From: 209.85.167.66
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -67,40 +75,47 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Sep 2019 16:16:46 -0000
+X-List-Received-Date: Wed, 25 Sep 2019 22:52:48 -0000
 
-"Bits 63=E2=80=9354 are reserved for future use and must be
-zeroed by software for forward compatibility."
-
-That doesn't mean 63-54 are belong to ppn, it's reserved for future
-and nobody know 63-54 will be part of ppn.
-Current riscv qemu ppn implementation is obviously wrong. It shouldn't
-care the software's behavior, please follow the spec.
-
-On Wed, Sep 25, 2019 at 11:58 PM Jonathan Behrens <fintelia@gmail.com> wrot=
-e:
+On Wed, Sep 25, 2019 at 9:16 AM Guo Ren <guoren@kernel.org> wrote:
 >
-> > The specification is very clear: these bits are not part of ppn, not
-> > part of the translation target address. The current code is against
-> > the riscv-privilege specification.
+> "Bits 63=E2=80=9354 are reserved for future use and must be
+> zeroed by software for forward compatibility."
 >
-> If all of the reserved bits are zero then the patch changes nothing.
-> Further the only normative mention of the reserved bits in the spec
-> says they must be: "Bits 63=E2=80=9354 are reserved for future use and mu=
-st be
-> zeroed by software for forward compatibility." Provided that software
-> follows the spec current QEMU will behave properly. For software that
-> ignores that directive an sets some of those bits, the spec says
-> nothing  about what hardware should do, so both the old an the new
-> behavior are fine.
+> That doesn't mean 63-54 are belong to ppn, it's reserved for future
+> and nobody know 63-54 will be part of ppn.
+> Current riscv qemu ppn implementation is obviously wrong. It shouldn't
+> care the software's behavior, please follow the spec.
+
+You have convinced me, I think this is an acceptable change.
+
+Alistair
+
 >
-> Jonathan
-
-
-
---=20
-Best Regards
- Guo Ren
-
-ML: https://lore.kernel.org/linux-csky/
+> On Wed, Sep 25, 2019 at 11:58 PM Jonathan Behrens <fintelia@gmail.com> wr=
+ote:
+> >
+> > > The specification is very clear: these bits are not part of ppn, not
+> > > part of the translation target address. The current code is against
+> > > the riscv-privilege specification.
+> >
+> > If all of the reserved bits are zero then the patch changes nothing.
+> > Further the only normative mention of the reserved bits in the spec
+> > says they must be: "Bits 63=E2=80=9354 are reserved for future use and =
+must be
+> > zeroed by software for forward compatibility." Provided that software
+> > follows the spec current QEMU will behave properly. For software that
+> > ignores that directive an sets some of those bits, the spec says
+> > nothing  about what hardware should do, so both the old an the new
+> > behavior are fine.
+> >
+> > Jonathan
+>
+>
+>
+> --
+> Best Regards
+>  Guo Ren
+>
+> ML: https://lore.kernel.org/linux-csky/
 
