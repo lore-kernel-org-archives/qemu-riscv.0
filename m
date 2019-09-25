@@ -1,64 +1,120 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iCvlB-0004fA-Gr
-	for mharc-qemu-riscv@gnu.org; Tue, 24 Sep 2019 21:06:25 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:34417)
+	id 1iCyXp-0001zM-Hj
+	for mharc-qemu-riscv@gnu.org; Wed, 25 Sep 2019 00:04:49 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49688)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <alistair23@gmail.com>) id 1iCvl8-0004eh-5w
- for qemu-riscv@nongnu.org; Tue, 24 Sep 2019 21:06:23 -0400
+ (envelope-from <prvs=1646f416f=Anup.Patel@wdc.com>)
+ id 1iCyXn-0001zF-4E
+ for qemu-riscv@nongnu.org; Wed, 25 Sep 2019 00:04:48 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1iCvl6-0004oy-IL
- for qemu-riscv@nongnu.org; Tue, 24 Sep 2019 21:06:22 -0400
-Received: from mail-lj1-x242.google.com ([2a00:1450:4864:20::242]:44225)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1iCvl6-0004oc-7p; Tue, 24 Sep 2019 21:06:20 -0400
-Received: by mail-lj1-x242.google.com with SMTP id m13so3784994ljj.11;
- Tue, 24 Sep 2019 18:06:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=yUUIa5Ov6YlwQGXP9ytN25tO/ntGka441s3AW41ZIbY=;
- b=kTVu+sViOawRNoye69G0ic+AAFlGT/9b8XHUdGaPqwLaCXbSz4n0sTMuo4w/4rEvJ0
- 9qp0Xd62fZM4WCDsHN/WSPY+uX6meR0TE5xb+TAhW7jThELWoSJhvCB2Onc6YR19865X
- T1xXQLE0Zc2n/ZbYbTgDTZMgrapJHI8qzIL9qHoBZ4fPPiID9PZ95qGWyReynWcB/pI2
- tnj2mVfl4mG9XBWZOIEssifta+6daLXyBOwqEf6KTtfMLrEvSIY6B/8H1B5FHrZU23I8
- HYpLSwhQ5wbd0l7gXXueK0FoEWJh4rx1PpxDL0YAwLP47KV4vEYcwmOpR9Fw4UPnmZCO
- rA0g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=yUUIa5Ov6YlwQGXP9ytN25tO/ntGka441s3AW41ZIbY=;
- b=LyvhazIGsThEGgzWzCBhMhD1r6mIbzXWZJapevtaD2gHftDSBJjkOffkLorGEalUjV
- KUAqyYNUuuyEdNcIa6uw2GiH9ln1BwqZNrorlFzgYUeGLW+7spqRvAb6qt3g4vYhn0Gt
- 5k8xpl6xxtzRDTHGngDUqOUliV9mWh7wgZmTXlGZLzxLWHJkjs4k1oHcmDhAB+KN2XXD
- L0bArXOujFXWljMhg2IJCvn2I2tt8dNAB3gXfecrmn6XfS5oR2iEww0V6kwMRvU718Ol
- pAdeoM+iGUbAOtRX9UQLVMtBIHimLeOma4mlopwzRLzz+UgqX8y7VMryXhtpQgAwoNE4
- 0W1w==
-X-Gm-Message-State: APjAAAVVCEYVoAYug+nh+KMCmIEn23hjDkl+aE5cbustDHFT34pz7HlR
- wJjOOXnSS7QYZYsNzMeY4NVNijx1+1JB5H+yWAA=
-X-Google-Smtp-Source: APXvYqxfLUwHnwUXw8Lz3jfTPWKPtqWa2qXXSl3h2+miavJhnqIQNAl3NALDwBJcz8/vpAD1dhQq4ZT3e/b/CW1jKd0=
-X-Received: by 2002:a05:651c:1132:: with SMTP id
- e18mr3976249ljo.33.1569373578718; 
- Tue, 24 Sep 2019 18:06:18 -0700 (PDT)
+ (envelope-from <prvs=1646f416f=Anup.Patel@wdc.com>)
+ id 1iCyXk-0004i7-JR
+ for qemu-riscv@nongnu.org; Wed, 25 Sep 2019 00:04:46 -0400
+Received: from esa5.hgst.iphmx.com ([216.71.153.144]:6810)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <prvs=1646f416f=Anup.Patel@wdc.com>)
+ id 1iCyXj-0004gE-P6; Wed, 25 Sep 2019 00:04:44 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1569384284; x=1600920284;
+ h=from:to:cc:subject:date:message-id:references:
+ in-reply-to:content-transfer-encoding:mime-version;
+ bh=Qz9t+6siI3hv7CGhUTqtMcK0OcnVLU6ftOUWShi7hg4=;
+ b=W6m5PP22/5Ahqc8EPHHnp5S4d6Zxsh5f61aMxMtsGjmOKcMUhQ7/eKcW
+ CueHP4votFFKxtCoCmfJTfqSu+svaerU+Oj3Hm6f95T03WEquXDg0ATOW
+ nuRJ71ctudJ8KZwiy6M9WVEGC7XTc8ZBp77tVW3f5LmQWL0ihciwmK/Uv
+ EBDwp9yNVwtFBI3hr4h1hS9tvWldfqiUe1MGW1iFqILK0FQODeqVnkirB
+ ZyglAfH7sa8kmHA5qK6wzDoYtL/VywbD6vXTk2Hg8reZJa4TD525u35yZ
+ xA5BV5qiKoVsO6iziqsSoV0Ipc7IsvGyE+kKzb3nOW6qVcDMuz+DqvQZ0 g==;
+IronPort-SDR: 9l0rUgYpAJaMmGzIVAE7ACFhO3D4Go4r2D9uykjGLysNv6/egAC04Du+epqGuooMLILSGpBC7t
+ MeOF5ynjBbQhk96shPUXWh2KKTA34uKVo/1k03+FHSIM3eG3B+Y1TmfNZE7FzRmEkE1gMLVUy1
+ mWv4Vg4eIA0ut8FuuqiX5weXXyBYedNYAE00qRfojOOfCNpXDqbeZbn2+DxKhR04jtnZl2uZ0N
+ lwLu9fBOzhH56NKH2Z+OCHjB2/ljCGVI9UoTAOkTJcsvb1IkOFbSrCcLjQeQfdDhR9XsVgyBWk
+ PAA=
+X-IronPort-AV: E=Sophos;i="5.64,546,1559491200"; d="scan'208";a="119813865"
+Received: from mail-co1nam04lp2058.outbound.protection.outlook.com (HELO
+ NAM04-CO1-obe.outbound.protection.outlook.com) ([104.47.45.58])
+ by ob1.hgst.iphmx.com with ESMTP; 25 Sep 2019 12:04:37 +0800
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=mi2/xRxD0RtYHlmn7yX8vx0G2N7486DA7qp5hYjTbvHtOzps42V2yi1lwGQx5vh5MjnHqe3XQ44fQsGaemRR+JNqBBzPzLvUgv35dOKdjcjozDtV5VdYrK1UGIzXmLEIsqnhc4v4tS6EbH1Hh2mKo2SLDR1BoHgNVl5QTnZbbffVQrB0ZgWCq1gg6LkBGd43sTX1DXPpLAIEKnBLIVxF6jD8yKiLFWoTBewbCxFm9kyyBOobfpnMRj2jXkEc1cUMrldsw1EvO/tM2/O1DL8yUk33+trmQZs6X82xsZA5kwRKtu+F2gF8OtFkzFTCDqRs5u4F+wBB/iGWbotlgzs/3g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Qz9t+6siI3hv7CGhUTqtMcK0OcnVLU6ftOUWShi7hg4=;
+ b=I7saROfoFoYTxOuxgud9OI2AIdF1UdS8dE8hevvp6Zz+C7UZVrDBd8brTJwmKqw3vpF5rA1CYolwnD7TZzl2juv0PRG3eO1ktoTUutOpp7z2FAEDrwiFMxsifhP5ER/Kj6mQBu19YRtLBza+msWCsPlyhHAM4gLcrpDY/kBOa5+ZoV+hxLugPAXr3OLXb7ClYDMJOo11xE/RWCS55ZQSfR8SgrqOmlQDIdkjdwJ8CmEGvJPRRQskFT3BNvq8fnFkRZIADXDsqZJuN03lgbdb2GMimf+UNEnc6g4yp/NvmYbhJqR2C7p4r/wYtflT/NQ8zDmEgkqHhPcpc1g3BXhkpw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=wdc.com; dmarc=pass action=none header.from=wdc.com; dkim=pass
+ header.d=wdc.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Qz9t+6siI3hv7CGhUTqtMcK0OcnVLU6ftOUWShi7hg4=;
+ b=G4panujVHsIFlZWAxL1ankB8AY49cJpeyiRgQiTPSNhU77Qw84OmdypRnIckJI76n5C6gdCBrfmb02Kp90I1BiHVXYpD3oQtO3e56d9LyUtWCqdSm+qjZ7hkMTiKfG38MwAWjwEJ8eutT35UdgCq9bsIommW9oD+bjRanTYnsAQ=
+Received: from MN2PR04MB6061.namprd04.prod.outlook.com (20.178.246.15) by
+ MN2PR04MB6222.namprd04.prod.outlook.com (20.178.246.17) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.2284.20; Wed, 25 Sep 2019 04:04:35 +0000
+Received: from MN2PR04MB6061.namprd04.prod.outlook.com
+ ([fe80::e1a5:8de2:c3b1:3fb0]) by MN2PR04MB6061.namprd04.prod.outlook.com
+ ([fe80::e1a5:8de2:c3b1:3fb0%7]) with mapi id 15.20.2284.023; Wed, 25 Sep 2019
+ 04:04:34 +0000
+From: Anup Patel <Anup.Patel@wdc.com>
+To: =?utf-8?B?UGhpbGlwcGUgTWF0aGlldS1EYXVkw6k=?= <philmd@redhat.com>, Peter
+ Maydell <peter.maydell@linaro.org>, Palmer Dabbelt <palmer@sifive.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>, Sagar Karandikar
+ <sagark@eecs.berkeley.edu>, Bastian Koppelmann
+ <kbastian@mail.uni-paderborn.de>
+CC: Atish Patra <Atish.Patra@wdc.com>, "qemu-riscv@nongnu.org"
+ <qemu-riscv@nongnu.org>, "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>,
+ Anup Patel <anup@brainfault.org>
+Subject: RE: [PATCH v2 0/2] RTC support for QEMU RISC-V virt machine
+Thread-Topic: [PATCH v2 0/2] RTC support for QEMU RISC-V virt machine
+Thread-Index: AQHVctmkW8P3iH8gtEirKQ31pP1PT6c63IIAgADpvaA=
+Date: Wed, 25 Sep 2019 04:04:34 +0000
+Message-ID: <MN2PR04MB6061A7A7A871CC5095F072FC8D870@MN2PR04MB6061.namprd04.prod.outlook.com>
+References: <20190924131131.118155-1-anup.patel@wdc.com>
+ <735d696e-f0dc-cad3-acc3-056cf152cc22@redhat.com>
+In-Reply-To: <735d696e-f0dc-cad3-acc3-056cf152cc22@redhat.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: spf=none (sender IP is )
+ smtp.mailfrom=Anup.Patel@wdc.com; 
+x-originating-ip: [129.253.179.161]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: f3f5cd41-f6c3-4f96-656c-08d7416d79f5
+x-ms-office365-filtering-ht: Tenant
+x-microsoft-antispam: BCL:0; PCL:0;
+ RULEID:(2390118)(7020095)(4652040)(8989299)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(5600167)(711020)(4605104)(1401327)(4618075)(2017052603328)(7193020);
+ SRVR:MN2PR04MB6222; 
+x-ms-traffictypediagnostic: MN2PR04MB6222:
+x-ms-exchange-purlcount: 2
+x-ms-exchange-transport-forked: True
+x-microsoft-antispam-prvs: <MN2PR04MB622250C78ABBB66EC3747ADD8D870@MN2PR04MB6222.namprd04.prod.outlook.com>
+wdcipoutbound: EOP-TRUE
+x-ms-oob-tlc-oobclassifiers: OLM:7691;
+x-forefront-prvs: 01713B2841
+x-forefront-antispam-report: SFV:NSPM;
+ SFS:(10019020)(4636009)(376002)(136003)(366004)(396003)(39860400002)(346002)(189003)(199004)(13464003)(66066001)(478600001)(55016002)(305945005)(6306002)(54906003)(476003)(966005)(110136005)(7736002)(66556008)(229853002)(66446008)(316002)(86362001)(66946007)(81156014)(81166006)(33656002)(6246003)(8676002)(2171002)(5660300002)(66476007)(14444005)(74316002)(64756008)(8936002)(76116006)(6436002)(71200400001)(256004)(102836004)(11346002)(2906002)(6116002)(14454004)(4326008)(52536014)(186003)(71190400001)(26005)(9686003)(76176011)(99286004)(7696005)(25786009)(446003)(6506007)(486006)(3846002)(53546011);
+ DIR:OUT; SFP:1102; SCL:1; SRVR:MN2PR04MB6222;
+ H:MN2PR04MB6061.namprd04.prod.outlook.com; FPR:; SPF:None; LANG:en;
+ PTR:InfoNoRecords; MX:1; A:1; 
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam-message-info: 5V32/peZZDdEV+hDFG7t7WWXYz+cHMX4xQZZ9v1CrLBP5wGa4x2dEYWPPmk3VTzmJuA1qqPy/jFbEInAlhAggkQoInCUj66ejNTuUmUr+KJfbk4LZWqnJKXOZ3vgp1Vvy5v+6C079KJKWeRKHoIAOF8c9VbgruMitconO8B/FgRPChP90slG1H6QJGYJRTCEczMoUarwJyNwvfwURfMmD1pr2yscZrYOF0RDTBUMeMQlFK+MtZXh7NNI7Sn4CeO9wy8vWshEht0NTKy9WzjPzQWspXLewmu0hlfu4vjGQJXdrXS12b3LA+n2SmRiN/N2gZ0ieSDFjXdgWs7JMQLmnIKx3szKyMhzq2Kf/zX/WPDImYm4yV+aKnJSokfot/kHOPsCrG7KSJ19TuyPhNqdAJgjieDl0EOY+X96hp8V9J5cTX1pRXoc3yhiodyJ8iicBPPZwVFHchCo99F3HUKTTw==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-References: <CAKmqyKP+HNfzh5kCKkGDtfr=pDRwcjL+dUQ79NZEk+jMZ3q=_Q@mail.gmail.com>
- <mhng-a172dfe8-dd34-427f-89dd-ca65da3145fb@palmer-si-x1e>
- <CAKmqyKON2=3mO-n3nXwyqN9i-RDOeyrpjxt9JJMSBwyyiEiuow@mail.gmail.com>
-In-Reply-To: <CAKmqyKON2=3mO-n3nXwyqN9i-RDOeyrpjxt9JJMSBwyyiEiuow@mail.gmail.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 24 Sep 2019 18:01:36 -0700
-Message-ID: <CAKmqyKPVxkbKkZPg5u+nKiLtNgtf5Na6JgzF3ocrx8wy8+bxJw@mail.gmail.com>
-Subject: Re: [Qemu-devel] [PATCH] atomic failures on qemu-system-riscv64
-To: Palmer Dabbelt <palmer@sifive.com>
-Cc: Joel Sing <joel@sing.id.au>,
- Richard Henderson <richard.henderson@linaro.org>, me@carlosedp.com, 
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Alistair Francis <Alistair.Francis@wdc.com>, marco@decred.org
-Content-Type: text/plain; charset="UTF-8"
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2a00:1450:4864:20::242
+X-OriginatorOrg: wdc.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: f3f5cd41-f6c3-4f96-656c-08d7416d79f5
+X-MS-Exchange-CrossTenant-originalarrivaltime: 25 Sep 2019 04:04:34.8321 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: BEDRA5lRGp08ikAdZSG31IzG4nOjOpMjhA4BhHjjHBEzi+T6E3hTpgsJQzRjbpaiYqMzjjXT8DDYe4wDHZJ7Lw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR04MB6222
+X-detected-operating-system: by eggs.gnu.org: FreeBSD 9.x [fuzzy]
+X-Received-From: 216.71.153.144
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -70,180 +126,45 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Sep 2019 01:06:23 -0000
+X-List-Received-Date: Wed, 25 Sep 2019 04:04:48 -0000
 
-On Tue, Sep 24, 2019 at 4:35 PM Alistair Francis <alistair23@gmail.com> wrote:
->
-> On Tue, Sep 24, 2019 at 1:04 PM Palmer Dabbelt <palmer@sifive.com> wrote:
-> >
-> > On Tue, 24 Sep 2019 11:29:25 PDT (-0700), alistair23@gmail.com wrote:
-> > > On Mon, Jun 24, 2019 at 11:21 AM Joel Sing <joel@sing.id.au> wrote:
-> > >>
-> > >> On 19-06-17 16:52:44, Richard Henderson wrote:
-> > >> > On 6/16/19 12:19 PM, Joel Sing wrote:
-> > >> > > +    /*
-> > >> > > +     * Clear the load reservation, since an SC must fail if there is
-> > >> > > +     * an SC to any address, in between an LR and SC pair.
-> > >> > > +     */
-> > >> > > +    tcg_gen_movi_tl(load_res, 0);
-> > >> > > +
-> > >> > >      gen_set_label(l2);
-> > >> >
-> > >> > This clear needs to be moved down below label l2.
-> > >> > Otherwise, with lr / sc / sc, the second sc could succeed in error.
-> > >>
-> > >> Indeed, thanks.
-> > >>
-> > >> > FWIW, other targets have used -1 as the "invalid" load reservation, since the
-> > >> > architecture does not require address 0 to be unmapped.  This should be quite
-> > >> > visible in M-mode with paging disabled and ram at offset 0.  Often, other
-> > >> > targets require alignment for the lr/sc address, though I don't see that for riscv.
-> > >>
-> > >> I've switched to -1 as suggested. Regarding the alignment for reservations, the
-> > >> specification does require this, although I do not recall seeing any enforcement
-> > >> of this by qemu itself.
-> > >>
-> > >> New diff follows.
-> > >>
-> > >> From 8ef31a2ce8ef1cbeee92995a0b2994f480e9bb6d Mon Sep 17 00:00:00 2001
-> > >> From: Joel Sing <joel@sing.id.au>
-> > >> Date: Tue, 25 Jun 2019 02:44:24 +1000
-> > >> Subject: [PATCH] Clear load reservations on qemu riscv target
-> > >>
-> > >> This prevents a load reservation from being placed in one context/process,
-> > >> then being used in another, resulting in an SC succeeding incorrectly and
-> > >> breaking atomics.
-> > >>
-> > >> Signed-off-by: Joel Sing <joel@sing.id.au>
-> > >> ---
-> > >>  target/riscv/cpu.c                      | 1 +
-> > >>  target/riscv/cpu_helper.c               | 9 +++++++++
-> > >>  target/riscv/insn_trans/trans_rva.inc.c | 8 +++++++-
-> > >>  3 files changed, 17 insertions(+), 1 deletion(-)
-> > >>
-> > >> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> > >> index d61bce6d55..e7c8bf48fc 100644
-> > >> --- a/target/riscv/cpu.c
-> > >> +++ b/target/riscv/cpu.c
-> > >> @@ -281,6 +281,7 @@ static void riscv_cpu_reset(CPUState *cs)
-> > >>      env->pc = env->resetvec;
-> > >>  #endif
-> > >>      cs->exception_index = EXCP_NONE;
-> > >> +    env->load_res = -1;
-> > >>      set_default_nan_mode(1, &env->fp_status);
-> > >>  }
-> > >>
-> > >> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> > >> index b17f169681..6a07b12e65 100644
-> > >> --- a/target/riscv/cpu_helper.c
-> > >> +++ b/target/riscv/cpu_helper.c
-> > >> @@ -113,6 +113,15 @@ void riscv_cpu_set_mode(CPURISCVState *env, target_ulong newpriv)
-> > >>      }
-> > >>      /* tlb_flush is unnecessary as mode is contained in mmu_idx */
-> > >>      env->priv = newpriv;
-> > >> +
-> > >> +    /* Clear the load reservation - otherwise a reservation placed in one
-> > >> +     * context/process can be used by another, resulting in an SC succeeding
-> > >> +     * incorrectly. Version 2.2 of the ISA specification explicitly requires
-> > >> +     * this behaviour, while later revisions say that the kernel "should" use
-> > >> +     * an SC instruction to force the yielding of a load reservation on a
-> > >> +     * preemptive context switch. As a result, do both.
-> > >> +     */
-> > >> +    env->load_res = -1;
-> > >>  }
-> > >>
-> > >>  /* get_physical_address - get the physical address for this virtual address
-> > >> diff --git a/target/riscv/insn_trans/trans_rva.inc.c b/target/riscv/insn_trans/trans_rva.inc.c
-> > >> index f6dbbc065e..fadd88849e 100644
-> > >> --- a/target/riscv/insn_trans/trans_rva.inc.c
-> > >> +++ b/target/riscv/insn_trans/trans_rva.inc.c
-> > >> @@ -61,7 +61,7 @@ static inline bool gen_sc(DisasContext *ctx, arg_atomic *a, TCGMemOp mop)
-> > >>
-> > >>      gen_set_label(l1);
-> > >>      /*
-> > >> -     * Address comparion failure.  However, we still need to
-> > >> +     * Address comparison failure.  However, we still need to
-> > >>       * provide the memory barrier implied by AQ/RL.
-> > >>       */
-> > >>      tcg_gen_mb(TCG_MO_ALL + a->aq * TCG_BAR_LDAQ + a->rl * TCG_BAR_STRL);
-> > >> @@ -69,6 +69,12 @@ static inline bool gen_sc(DisasContext *ctx, arg_atomic *a, TCGMemOp mop)
-> > >>      gen_set_gpr(a->rd, dat);
-> > >>
-> > >>      gen_set_label(l2);
-> > >> +    /*
-> > >> +     * Clear the load reservation, since an SC must fail if there is
-> > >> +     * an SC to any address, in between an LR and SC pair.
-> > >> +     */
-> > >> +    tcg_gen_movi_tl(load_res, -1);
-> > >> +
-> > >>      tcg_temp_free(dat);
-> > >>      tcg_temp_free(src1);
-> > >>      tcg_temp_free(src2);
-> > >> --
-> > >
-> > > This patch causes boot failures when booting systemd built with musl on RV64.
-> > >
-> > > It could possibly be a musl bug, but I wanted to throw that out here
-> > > first to see what people think.
-> >
-> > Looking at the musl port, I see at least one bug in their atomics jumping out
-> > at me:
-> >
-> > diff --git a/arch/riscv64/atomic_arch.h b/arch/riscv64/atomic_arch.h
-> > index c9765342..41ad4d04 100644
-> > --- a/arch/riscv64/atomic_arch.h
-> > +++ b/arch/riscv64/atomic_arch.h
-> > @@ -14,7 +14,7 @@ static inline int a_cas(volatile int *p, int t, int s)
-> >                 "       sc.w.aqrl %1, %4, (%2)\n"
-> >                 "       bnez %1, 1b\n"
-> >                 "1:"
-> > -               : "=&r"(old), "=r"(tmp)
-> > +               : "=&r"(old), "=&r"(tmp)
-> >                 : "r"(p), "r"(t), "r"(s)
-> >                 : "memory");
-> >         return old;
-> > @@ -31,7 +31,7 @@ static inline void *a_cas_p(volatile void *p, void *t, void *s)
-> >                 "       sc.d.aqrl %1, %4, (%2)\n"
-> >                 "       bnez %1, 1b\n"
-> >                 "1:"
-> > -               : "=&r"(old), "=r"(tmp)
-> > +               : "=&r"(old), "=&r"(tmp)
-> >                 : "r"(p), "r"(t), "r"(s)
-> >                 : "memory");
-> >         return old;
-> >
-> > It's a shot in the dark as to whether that'll fix your bug, but I could at
-> > least see a mechanism for it: before we yielded load reservations on context
-> > switches then that backwards branch would never be taken, so we wouldn't notice
-> > if tmp was allocated into one of the same registers as the inputs.  Even if it
-> > doesn't fix your issue it's still a bug so I'll send the patch out, just LMK so
-> > I can indicate how important the issue is.
->
-> I haven't had a chance to test this fix yet. The bug was reported by
-> Khem (and other OE people) as it's break musl for RISC-V.
-
-I did get a chance to test it. This seems to fix the issue :)
-
-Please send the patch to musl and CC me when you do.
-
-Good catch!
-
-Alistair
-
->
-> >
-> > This should manifest on hardware, but it looks like we managed to drop that SC
-> > patch.  I'll go send the patch out now...
->
-> Thanks, do you mind CCing me?
->
-> Alistair
->
-> >
-> > >
-> > > Alistair
-> > >
-> > >> 2.21.0
-> > >>
-> > >>
+DQoNCj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4gRnJvbTogUGhpbGlwcGUgTWF0aGll
+dS1EYXVkw6kgPHBoaWxtZEByZWRoYXQuY29tPg0KPiBTZW50OiBUdWVzZGF5LCBTZXB0ZW1iZXIg
+MjQsIDIwMTkgNzozNSBQTQ0KPiBUbzogQW51cCBQYXRlbCA8QW51cC5QYXRlbEB3ZGMuY29tPjsg
+UGV0ZXIgTWF5ZGVsbA0KPiA8cGV0ZXIubWF5ZGVsbEBsaW5hcm8ub3JnPjsgUGFsbWVyIERhYmJl
+bHQgPHBhbG1lckBzaWZpdmUuY29tPjsgQWxpc3RhaXINCj4gRnJhbmNpcyA8QWxpc3RhaXIuRnJh
+bmNpc0B3ZGMuY29tPjsgU2FnYXIgS2FyYW5kaWthcg0KPiA8c2FnYXJrQGVlY3MuYmVya2VsZXku
+ZWR1PjsgQmFzdGlhbiBLb3BwZWxtYW5uIDxrYmFzdGlhbkBtYWlsLnVuaS0NCj4gcGFkZXJib3Ju
+LmRlPg0KPiBDYzogQXRpc2ggUGF0cmEgPEF0aXNoLlBhdHJhQHdkYy5jb20+OyBxZW11LXJpc2N2
+QG5vbmdudS5vcmc7IHFlbXUtDQo+IGRldmVsQG5vbmdudS5vcmc7IEFudXAgUGF0ZWwgPGFudXBA
+YnJhaW5mYXVsdC5vcmc+DQo+IFN1YmplY3Q6IFJlOiBbUEFUQ0ggdjIgMC8yXSBSVEMgc3VwcG9y
+dCBmb3IgUUVNVSBSSVNDLVYgdmlydCBtYWNoaW5lDQo+IA0KPiBIaSBBbnVwLA0KPiANCj4gT24g
+OS8yNC8xOSAzOjExIFBNLCBBbnVwIFBhdGVsIHdyb3RlOg0KPiA+IFRoaXMgc2VyaWVzIGFkZHMg
+UlRDIGRldmljZSB0byBRRU1VIFJJU0MtViB2aXJ0IG1hY2hpbmUuIFdlIGhhdmUNCj4gPiBzZWxl
+Y3RlZCBHb2xkZmlzaCBSVEMgZGV2aWNlIG1vZGVsIGZvciB0aGlzLiBJdCdzIGEgcHJldHR5IHNp
+bXBsZQ0KPiA+IHN5bnRoZXRpYyBkZXZpY2Ugd2l0aCBmZXcgTU1JTyByZWdpc3RlcnMgYW5kIG5v
+IGRlcGVuZGVuY3kgZXh0ZXJuYWwNCj4gPiBjbG9jay4gVGhlIGRyaXZlciBmb3IgR29sZGZpc2gg
+UlRDIGlzIGFscmVhZHkgYXZhaWxhYmxlIGluIExpbnV4IHNvIHdlDQo+ID4ganVzdCBuZWVkIHRv
+IGVuYWJsZSBpdCBpbiBLY29uZmlnIGZvciBSSVNDViBhbmQgYWxzbyB1cGRhdGUgTGludXgNCj4g
+PiBkZWZjb25maWdzLg0KPiA+DQo+ID4gV2UgaGF2ZSB0ZXN0ZWQgdGhpcyBzZXJpZXMgd2l0aCBM
+aW51eC01LjMgcGx1cyBkZWZjb25maWcgY2hhbmdlcw0KPiA+IGF2YWlsYWJsZSBpbiAnZ29sZGZp
+c2hfcnRjX3YxJyBicmFuY2ggb2Y6DQo+ID4gaHR0cHM6Ly9naXRodWIuY29tL2F2cGF0ZWwvbGlu
+dXguZ2l0DQo+ID4NCj4gPiBDaGFuZ2VzIHNpbmNlIHYxOg0KPiA+ICAtIFJlbW92ZWQgcmVkdW5k
+YW50IG9iamVjdCBwcm9wZXJ0aWVzIGZyb20gR29sZGZpc2ggUlRDIGVtdWxhdGlvbg0KPiA+ICAt
+IEFkZGVkIHZtc3RhdGUgZm9yIEdvbGRmaXNoIFJUQw0KPiA+DQo+ID4gQW51cCBQYXRlbCAoMik6
+DQo+ID4gICBodzogdGltZXI6IEFkZCBHb2xkZmlzaCBSVEMgZGV2aWNlDQo+ID4gICByaXNjdjog
+dmlydDogVXNlIEdvbGRmaXNoIFJUQyBkZXZpY2UNCj4gPg0KPiA+ICBody9yaXNjdi9LY29uZmln
+ICAgICAgICAgICAgICAgIHwgICAxICsNCj4gPiAgaHcvcmlzY3YvdmlydC5jICAgICAgICAgICAg
+ICAgICB8ICAxNSArKw0KPiA+ICBody90aW1lci9LY29uZmlnICAgICAgICAgICAgICAgIHwgICAz
+ICsNCj4gPiAgaHcvdGltZXIvTWFrZWZpbGUub2JqcyAgICAgICAgICB8ICAgMSArDQo+ID4gIGh3
+L3RpbWVyL2dvbGRmaXNoX3J0Yy5jICAgICAgICAgfCAyNzgNCj4gKysrKysrKysrKysrKysrKysr
+KysrKysrKysrKysrKysNCj4gPiAgaW5jbHVkZS9ody9yaXNjdi92aXJ0LmggICAgICAgICB8ICAg
+MiArDQo+ID4gIGluY2x1ZGUvaHcvdGltZXIvZ29sZGZpc2hfcnRjLmggfCAgNDYgKysrKysrDQo+
+IA0KPiBNaW5vciBjb21tZW50LCBpZiBteSBvbmdvaW5nIHNlcmllcyAiU3BsaXQgUlRDIGRldmlj
+ZXMgZnJvbSBody90aW1lci8gdG8NCj4gaHcvcnRjLyIgaXMgYWNjZXB0ZWQsIHlvdSdkIGhhdmUg
+dG8gcmViYXNlIHRoaXMgaW4gaHcvcnRjL2dvbGRmaXNoX3J0YzoNCj4gaHR0cHM6Ly9saXN0cy5n
+bnUub3JnL2FyY2hpdmUvaHRtbC9xZW11LWRldmVsLzIwMTktMDkvbXNnMDMzMzQuaHRtbA0KPiAo
+bm8gbG9naWNhbCBjaGFuZ2UgaW52b2x2ZWQpLg0KDQpObyBwcm9ibGVtLCBJIHdpbGwgcmViYXNl
+IHRoZXNlIHBhdGNoZXMgb25jZSB5b3VyIHNlcmllcyBhZnRlciBpdCBpcw0KYWNjZXB0ZWQuDQoN
+ClJlZ2FyZHMsDQpBbnVwDQo=
 
