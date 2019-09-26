@@ -1,41 +1,82 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iDHQn-0000LX-WB
-	for mharc-qemu-riscv@gnu.org; Wed, 25 Sep 2019 20:14:51 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:47737)
+	id 1iDODL-00046I-Op
+	for mharc-qemu-riscv@gnu.org; Thu, 26 Sep 2019 03:29:23 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:57875)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <guoren@kernel.org>) id 1iDHQb-0000K6-Ma
- for qemu-riscv@nongnu.org; Wed, 25 Sep 2019 20:14:40 -0400
+ (envelope-from <philmd@redhat.com>) id 1iDODI-00044h-QK
+ for qemu-riscv@nongnu.org; Thu, 26 Sep 2019 03:29:22 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <guoren@kernel.org>) id 1iDHQa-0000bu-KV
- for qemu-riscv@nongnu.org; Wed, 25 Sep 2019 20:14:37 -0400
-Received: from mail.kernel.org ([198.145.29.99]:36090)
+ (envelope-from <philmd@redhat.com>) id 1iDODG-0004pX-EL
+ for qemu-riscv@nongnu.org; Thu, 26 Sep 2019 03:29:19 -0400
+Received: from us-smtp-delivery-1.mimecast.com ([207.211.31.120]:41928
+ helo=us-smtp-1.mimecast.com)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <guoren@kernel.org>)
- id 1iDHQW-0000SS-Il; Wed, 25 Sep 2019 20:14:33 -0400
-Received: from guoren-Inspiron-7460.lan (89.208.247.74.16clouds.com
- [89.208.247.74])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-SHA256 (128/128 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id A0F5720872;
- Thu, 26 Sep 2019 00:14:25 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1569456868;
- bh=nkYa3WtRIEfBWb7YBlTFdX/qMHhKMBrRs4NV9j2H004=;
- h=From:To:Cc:Subject:Date:From;
- b=xHMkPOtG2yIc0lDPVxtW00HufdmozLXvSm6BWlIGBIThiahFIKVL0oLqGf9cfcZxW
- 3jmXrHE+DYdJJO8ENtITOukYG/VbMMYxnkpbPmWSI2TqT1DZ06Z3jEuCIu9TBjkwmg
- O1QMtHK+Kh15+MrCZLkBs+kcPm7/+9o7xpUWcuMo=
-From: guoren@kernel.org
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: alistair.francis@wdc.com, palmer@sifive.com, alistair23@gmail.com,
- bmeng.cn@gmail.com, Guo Ren <ren_guo@c-sky.com>
-Subject: [PATCH V6] target/riscv: Ignore reserved bits in PTE for RV64
-Date: Thu, 26 Sep 2019 08:14:21 +0800
-Message-Id: <1569456861-8502-1-git-send-email-guoren@kernel.org>
-X-Mailer: git-send-email 2.7.4
+ (Exim 4.71) (envelope-from <philmd@redhat.com>) id 1iDODG-0004oc-BO
+ for qemu-riscv@nongnu.org; Thu, 26 Sep 2019 03:29:18 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1569482958;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:openpgp:openpgp;
+ bh=/cGhteoZZJM+vapsRTgKYXtTysqbQNmn8NRXYFFQri8=;
+ b=GBd2aZnhw7Xtq4WN+kA5S0iDSoecZ7Cc8595DfSAVGV2Zuqz/Bb7mrV80Ek6qkpwYZ5jF+
+ yBFMEzfu2VaGC/ytdfnwb/f6P0mKO3BQKCVn+iyk10ChUWXfZGiDxniGq8lsnlSjjMZrPq
+ UnRDtA8QucRga8UOB0Qff+jeHiPwd/w=
+Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
+ [209.85.221.69]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-227-ig8FfeaGPkGh3zPFAKPcLg-1; Thu, 26 Sep 2019 03:29:14 -0400
+Received: by mail-wr1-f69.google.com with SMTP id a15so561522wrq.4
+ for <qemu-riscv@nongnu.org>; Thu, 26 Sep 2019 00:29:14 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
+ :date:user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=iDJmicGAl96yidCuawMr1CMMu54lmfAcQ3Il8nPoQpk=;
+ b=Jh7HogDLk5JQkMB20jsSYxtvGGiapsZsiebRZqpOl0pDqb+eqMyJxcCjokBkB0OSzT
+ NhvJkhlZFomG2zoRmoyp/FDyf258y3UZaMCHiwfjLCH5nK/q+sg7nlxV5FgBQ99iANvt
+ QpTNqIPjC3JkO4fD/XqnDscfCHDI1xCUayy0ksyeANSxsmdbDghfYW3mI/+eMYMHUyWg
+ 1+q/zca8Wis8oy18wnzgMOxt4ClrLJ0RP+RB226V+JxzDohMLKaHVpFmKmwIF/kv91yj
+ bXHZi0ta/Kypc4IqQo3crT8eRRhsPDj/ADXiL2Jd58zMLT1anEFIK/LuUhisrogIz2Nh
+ z62w==
+X-Gm-Message-State: APjAAAXAl2hgsJW13rsX/4z9exAcj9NTaquiWoR0praWW7DBOuAYFp7Q
+ dR6fsuEb20VZUn1WQ5on2tJFLfAAUDl76xfGToxyjL7x4PVcVP6rqxycvTmx8Ne/1CcVscs5a4m
+ 9CkvWM5bOMNQext8=
+X-Received: by 2002:a1c:1b58:: with SMTP id b85mr1763100wmb.95.1569482953430; 
+ Thu, 26 Sep 2019 00:29:13 -0700 (PDT)
+X-Google-Smtp-Source: APXvYqytWh9o/+F5HwiXhX4OCTQ27hOmu6kO4GRZHJI2D7s1OaF+YcfghSexKpmUXgflgUkJ82HKHw==
+X-Received: by 2002:a1c:1b58:: with SMTP id b85mr1763088wmb.95.1569482953208; 
+ Thu, 26 Sep 2019 00:29:13 -0700 (PDT)
+Received: from [192.168.1.35] (240.red-88-21-68.staticip.rima-tde.net.
+ [88.21.68.240])
+ by smtp.gmail.com with ESMTPSA id o188sm2839780wma.14.2019.09.26.00.29.12
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 26 Sep 2019 00:29:12 -0700 (PDT)
+Subject: Re: [RFC PATCH] configure: deprecate 32 bit build hosts
+To: =?UTF-8?Q?Alex_Benn=c3=a9e?= <alex.bennee@linaro.org>,
+ qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, Richard Henderson <richard.henderson@linaro.org>,
+ qemu-discuss@nongnu.org, qemu-s390x@nongnu.org, qemu-arm@nongnu.org,
+ qemu-ppc@nongnnu.org
+References: <20190925233013.6449-1-alex.bennee@linaro.org>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>
+Openpgp: id=89C1E78F601EE86C867495CBA2A3FD6EDEADC0DE;
+ url=http://pgp.mit.edu/pks/lookup?op=get&search=0xA2A3FD6EDEADC0DE
+Message-ID: <e08a9d80-a797-76a9-b1e5-6ccbef0b1c37@redhat.com>
+Date: Thu, 26 Sep 2019 09:29:11 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.7.0
+MIME-Version: 1.0
+In-Reply-To: <20190925233013.6449-1-alex.bennee@linaro.org>
+Content-Language: en-US
+X-MC-Unique: ig8FfeaGPkGh3zPFAKPcLg-1
+X-Mimecast-Spam-Score: 0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
-X-Received-From: 198.145.29.99
+ [fuzzy]
+X-Received-From: 207.211.31.120
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -47,77 +88,115 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Sep 2019 00:14:44 -0000
+X-List-Received-Date: Thu, 26 Sep 2019 07:29:22 -0000
 
-From: Guo Ren <ren_guo@c-sky.com>
+On 9/26/19 1:30 AM, Alex Benn=C3=A9e wrote:
+> The 32 bit hosts are already a second class citizen especially with
+> support for running 64 bit guests under TCG. We are also limited by
+> testing as actual working 32 bit machines are getting quite rare in
+> developers personal menageries. For TCG supporting newer types like
+> Int128 is a lot harder with 32 bit calling conventions compared to
+> their larger bit sized cousins. Fundamentally address space is the
+> most useful thing for the translator to have even for a 32 bit guest a
+> 32 bit host is quite constrained.
+>=20
+> As far as I'm aware 32 bit KVM users are even less numerous. Even
+> ILP32 doesn't make much sense given the address space QEMU needs to
+> manage.
+>=20
+> Lets mark these machines as deprecated so we can have the wailing and
+> gnashing of teeth now and look to actually dropping the support in a
+> couple of cycles.
+>=20
+> Signed-off-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
+> Cc: Richard Henderson <richard.henderson@linaro.org>
+> ---
+>  configure | 24 +++++++++++++-----------
+>  1 file changed, 13 insertions(+), 11 deletions(-)
+>=20
+> diff --git a/configure b/configure
+> index 542f6aea3f..776fd460b5 100755
+> --- a/configure
+> +++ b/configure
+> @@ -728,7 +728,7 @@ ARCH=3D
+>  # Normalise host CPU name and set ARCH.
+>  # Note that this case should only have supported host CPUs, not guests.
+>  case "$cpu" in
+> -  ppc|ppc64|s390|s390x|sparc64|x32|riscv32|riscv64)
+> +  ppc64|s390|s390x|sparc64|riscv64)
+>      supported_cpu=3D"yes"
+>    ;;
+>    ppc64le)
+> @@ -737,7 +737,6 @@ case "$cpu" in
+>    ;;
+>    i386|i486|i586|i686|i86pc|BePC)
+>      cpu=3D"i386"
+> -    supported_cpu=3D"yes"
+>    ;;
+>    x86_64|amd64)
+>      cpu=3D"x86_64"
+> @@ -745,19 +744,22 @@ case "$cpu" in
+>    ;;
+>    armv*b|armv*l|arm)
+>      cpu=3D"arm"
+> -    supported_cpu=3D"yes"
 
-Highest 10 bits of PTE are reserved in riscv-privileged, ref: [1], so we
-need to ignore them. They cannot be a part of ppn.
+I think linux-user is quite used in embedded stuff such NAS.
 
-1: The RISC-V Instruction Set Manual, Volume II: Privileged Architecture
-   4.4 Sv39: Page-Based 39-bit Virtual-Memory System
-   4.5 Sv48: Page-Based 48-bit Virtual-Memory System
+Eventually this public don't need edge QEMU, it might keep using QEMU
+v5.0.stable until all NAS/embedded devices are 64-bit...
 
-Signed-off-by: Guo Ren <ren_guo@c-sky.com>
-Tested-by: Bin Meng <bmeng.cn@gmail.com>
-Reviewed-by: Liu Zhiwei <zhiwei_liu@c-sky.com>
-Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
----
- target/riscv/cpu_bits.h   | 7 +++++++
- target/riscv/cpu_helper.c | 2 +-
- 2 files changed, 8 insertions(+), 1 deletion(-)
+>    ;;
+>    aarch64)
+>      cpu=3D"aarch64"
+>      supported_cpu=3D"yes"
+>    ;;
+> -  mips*)
+> +  mips64*)
+>      cpu=3D"mips"
+>      supported_cpu=3D"yes"
+>    ;;
+> +  mips*)
+> +    cpu=3D"mips"
 
- Changelog V6:
-  - Add Reviewer: Alistair Francis
+Similarly I can imagine linux-user being used on some routers.
 
- Changelog V5:
-  - Add Reviewer and Tester: Bin Meng
+> +  ;;
+>    sparc|sun4[cdmuv])
+>      cpu=3D"sparc"
+> -    supported_cpu=3D"yes"
+> +  ;;
+> +  x32|riscv32)
 
- Changelog V4:
-  - Change title to Ignore not Bugfix
-  - Use PTE_PPN_MASK for RV32 and RV64
+x32 is borderline :) but yes, pointers are 32-bit.
 
- Changelog V3:
-  - Use UUL define for PTE_RESERVED
-  - Keep ppn >> PTE_PPN_SHIFT
-
- Changelog V2:
-  - Bugfix pte destroyed cause boot fail
-  - Change to AND with a mask instead of shifting both directions
-
-diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-index e998348..399c2c6 100644
---- a/target/riscv/cpu_bits.h
-+++ b/target/riscv/cpu_bits.h
-@@ -473,6 +473,13 @@
- /* Page table PPN shift amount */
- #define PTE_PPN_SHIFT       10
- 
-+/* Page table PPN mask */
-+#if defined(TARGET_RISCV32)
-+#define PTE_PPN_MASK        0xffffffffUL
-+#elif defined(TARGET_RISCV64)
-+#define PTE_PPN_MASK        0x3fffffffffffffULL
-+#endif
-+
- /* Leaf page shift amount */
- #define PGSHIFT             12
- 
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 87dd6a6..9961b37 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -261,7 +261,7 @@ restart:
- #elif defined(TARGET_RISCV64)
-         target_ulong pte = ldq_phys(cs->as, pte_addr);
- #endif
--        hwaddr ppn = pte >> PTE_PPN_SHIFT;
-+        hwaddr ppn = (pte & PTE_PPN_MASK) >> PTE_PPN_SHIFT;
- 
-         if (!(pte & PTE_V)) {
-             /* Invalid PTE */
--- 
-2.7.4
+>    ;;
+>    *)
+>      # This will result in either an error or falling back to TCI later
+> @@ -6438,12 +6440,12 @@ if test "$supported_cpu" =3D "no"; then
+>      echo "WARNING: SUPPORT FOR THIS HOST CPU WILL GO AWAY IN FUTURE RELE=
+ASES!"
+>      echo
+>      echo "CPU host architecture $cpu support is not currently maintained=
+."
+> -    echo "The QEMU project intends to remove support for this host CPU i=
+n"
+> -    echo "a future release if nobody volunteers to maintain it and to"
+> -    echo "provide a build host for our continuous integration setup."
+> -    echo "configure has succeeded and you can continue to build, but"
+> -    echo "if you care about QEMU on this platform you should contact"
+> -    echo "us upstream at qemu-devel@nongnu.org."
+> +    echo "The QEMU project intends to remove support for all 32 bit host=
+"
+> +    echo "CPUs in a future release. 64 bit hosts will need a volunteer"
+> +    echo "to maintain it and to provide a build host for our continuous"
+> +    echo "integration setup. configure has succeeded and you can continu=
+e"
+> +    echo "to build, but if you care about QEMU on this platform you"
+> +    echo "should contact us upstream at qemu-devel@nongnu.org."
+>  fi
+> =20
+>  if test "$supported_os" =3D "no"; then
+>=20
 
 
