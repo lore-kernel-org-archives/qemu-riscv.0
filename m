@@ -1,135 +1,74 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iDWie-0001B7-Ba
-	for mharc-qemu-riscv@gnu.org; Thu, 26 Sep 2019 12:34:16 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:54397)
+	id 1iDXJV-0000on-Rn
+	for mharc-qemu-riscv@gnu.org; Thu, 26 Sep 2019 13:12:22 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:53769)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <borntraeger@de.ibm.com>) id 1iDU67-0007xa-Bs
- for qemu-riscv@nongnu.org; Thu, 26 Sep 2019 09:46:20 -0400
+ (envelope-from <richard.henderson@linaro.org>) id 1iDXJO-0000l1-RA
+ for qemu-riscv@nongnu.org; Thu, 26 Sep 2019 13:12:16 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <borntraeger@de.ibm.com>) id 1iDU64-0004Lh-Sk
- for qemu-riscv@nongnu.org; Thu, 26 Sep 2019 09:46:19 -0400
-Received: from mx0b-001b2d01.pphosted.com ([148.163.158.5]:45578
- helo=mx0a-001b2d01.pphosted.com)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <borntraeger@de.ibm.com>)
- id 1iDU64-0004Jz-ND
- for qemu-riscv@nongnu.org; Thu, 26 Sep 2019 09:46:16 -0400
-Received: from pps.filterd (m0098417.ppops.net [127.0.0.1])
- by mx0a-001b2d01.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
- x8QDbOT6136737
- for <qemu-riscv@nongnu.org>; Thu, 26 Sep 2019 09:46:08 -0400
-Received: from e06smtp02.uk.ibm.com (e06smtp02.uk.ibm.com [195.75.94.98])
- by mx0a-001b2d01.pphosted.com with ESMTP id 2v8ur60brt-1
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
- for <qemu-riscv@nongnu.org>; Thu, 26 Sep 2019 09:46:07 -0400
-Received: from localhost
- by e06smtp02.uk.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use Only!
- Violators will be prosecuted
- for <qemu-riscv@nongnu.org> from <borntraeger@de.ibm.com>;
- Thu, 26 Sep 2019 14:46:06 +0100
-Received: from b06cxnps4076.portsmouth.uk.ibm.com (9.149.109.198)
- by e06smtp02.uk.ibm.com (192.168.101.132) with IBM ESMTP SMTP Gateway:
- Authorized Use Only! Violators will be prosecuted; 
- (version=TLSv1/SSLv3 cipher=AES256-GCM-SHA384 bits=256/256)
- Thu, 26 Sep 2019 14:46:02 +0100
-Received: from d06av22.portsmouth.uk.ibm.com (d06av22.portsmouth.uk.ibm.com
- [9.149.105.58])
- by b06cxnps4076.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
- x8QDk1uC47251496
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 26 Sep 2019 13:46:01 GMT
-Received: from d06av22.portsmouth.uk.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id E8C2F4C046;
- Thu, 26 Sep 2019 13:46:00 +0000 (GMT)
-Received: from d06av22.portsmouth.uk.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 8EFE94C044;
- Thu, 26 Sep 2019 13:46:00 +0000 (GMT)
-Received: from oc7455500831.ibm.com (unknown [9.152.224.146])
- by d06av22.portsmouth.uk.ibm.com (Postfix) with ESMTP;
- Thu, 26 Sep 2019 13:46:00 +0000 (GMT)
+ (envelope-from <richard.henderson@linaro.org>) id 1iDXJM-0007Mm-Fy
+ for qemu-riscv@nongnu.org; Thu, 26 Sep 2019 13:12:13 -0400
+Received: from mail-pf1-f195.google.com ([209.85.210.195]:45631)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
+ id 1iDXJM-0007KP-9s
+ for qemu-riscv@nongnu.org; Thu, 26 Sep 2019 13:12:12 -0400
+Received: by mail-pf1-f195.google.com with SMTP id y72so2161835pfb.12
+ for <qemu-riscv@nongnu.org>; Thu, 26 Sep 2019 10:12:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=subject:to:cc:references:from:openpgp:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=9SeAmBswGPUU/7s1XP2AkyYn8Y1JWganLEKiKSJadmw=;
+ b=HOUa2Yg3NKZH23KPRP27i1SuQYGPZ0ioWma8hZRodfHbySuHPCAeela1Euern5q3ra
+ Fz7qksFFNuCiBRxT3m+9l3nJxQMAUO5CfpSYeiI5E93O1tblteC0Q4XKWS9ag7mCsfS4
+ ATGtHARHsrR8L1EnufpviMg5KfYZco+QKqOPcFoypHY8MW8SdspJPUSL1Dr32OUu0C0s
+ xWs9W1brPzf+GqH2vkGXX3z9mAwfQAlkg30XaODDZdu12DKT10IPcScdBr3jbZ/SsPRM
+ /fl4oDZY2MaCDxR7WeobbISX9f9Z+bBDTURjo7oh3PF7CBnkZjE+ivMuYISqSqAaGmrG
+ +j2Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
+ :date:user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=9SeAmBswGPUU/7s1XP2AkyYn8Y1JWganLEKiKSJadmw=;
+ b=X0j5ls3oRinVfsD2DQW/FRU8R4rN8eLKVX4XBuGNTz46QYEOmqXkbNfZQBVKhohNeX
+ dCzY/QOzSJ+w8KtPwLg0oFpGL/wjPuaud8XrmVBfYrNEViRyEOB69tbR1CD05PAfwS7N
+ sYNxIL1Ya6RYhEVHridhc0h82Y0wa97vYrBz4z+EWCwGXg+fAIdqRrF4991d0sTGb/Ze
+ m5R0AuG0Y45dSaAWCcqMD8NpKrUV5ddBRNFJyOfo/6GjXLEXQeZVjkBJ6keiu5TYfizX
+ FXd6s+74CDXVW2bLc/jLzET0B1LudjRwmnENfR/ivJjxyQi5u43du30O8Uqk+ANPjG/V
+ 8eSg==
+X-Gm-Message-State: APjAAAUxC7CDf0jfUHcLNk57hLUApjo0nndbCgWUXIaL79H9UartxvJP
+ Q2scPPkt9sPluNdaFLJ7xAsZzQ==
+X-Google-Smtp-Source: APXvYqwuZdwdokxX7L2XLlS5TdmlGrJY1vSMMT7B6mTyEQmDtdAcjlg5kPy2z3STwqoZ2VqMANAWQg==
+X-Received: by 2002:a62:8209:: with SMTP id w9mr4981825pfd.112.1569517869117; 
+ Thu, 26 Sep 2019 10:11:09 -0700 (PDT)
+Received: from [172.20.32.216] ([12.157.10.114])
+ by smtp.gmail.com with ESMTPSA id c128sm4188974pfc.166.2019.09.26.10.11.07
+ (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+ Thu, 26 Sep 2019 10:11:07 -0700 (PDT)
 Subject: Re: [RFC PATCH] configure: deprecate 32 bit build hosts
-To: =?UTF-8?Q?Daniel_P=2e_Berrang=c3=a9?= <berrange@redhat.com>,
- Peter Maydell <peter.maydell@linaro.org>
-Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
- Richard Henderson <richard.henderson@linaro.org>,
- QEMU Developers <qemu-devel@nongnu.org>,
- qemu-discuss <qemu-discuss@nongnu.org>,
- qemu-s390x <qemu-s390x@nongnu.org>, qemu-arm <qemu-arm@nongnu.org>,
- qemu-ppc@nongnu.org, =?UTF-8?Q?Alex_Benn=c3=a9e?= <alex.bennee@linaro.org>
+To: Peter Maydell <peter.maydell@linaro.org>,
+ =?UTF-8?Q?Alex_Benn=c3=a9e?= <alex.bennee@linaro.org>
+Cc: QEMU Developers <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ qemu-discuss <qemu-discuss@nongnu.org>, qemu-s390x <qemu-s390x@nongnu.org>,
+ qemu-arm <qemu-arm@nongnu.org>, qemu-ppc@nongnnu.org
 References: <20190925233013.6449-1-alex.bennee@linaro.org>
  <CAFEAcA9vb5_Mi_axWpu7269Zg0xMLbiiV80ofLeyDpfws3G4nQ@mail.gmail.com>
- <20190926125817.GB19660@redhat.com>
-From: Christian Borntraeger <borntraeger@de.ibm.com>
+From: Richard Henderson <richard.henderson@linaro.org>
 Openpgp: preference=signencrypt
-Autocrypt: addr=borntraeger@de.ibm.com; prefer-encrypt=mutual; keydata=
- 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
- syiRa+UVlsKmx1hsEg==
-Date: Thu, 26 Sep 2019 15:46:00 +0200
+Message-ID: <4512b61a-ed82-e628-88e5-f44ef87c2b50@linaro.org>
+Date: Thu, 26 Sep 2019 10:11:05 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
  Thunderbird/60.8.0
 MIME-Version: 1.0
-In-Reply-To: <20190926125817.GB19660@redhat.com>
+In-Reply-To: <CAFEAcA9vb5_Mi_axWpu7269Zg0xMLbiiV80ofLeyDpfws3G4nQ@mail.gmail.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
-X-TM-AS-GCONF: 00
-x-cbid: 19092613-0008-0000-0000-0000031B5904
-X-IBM-AV-DETECTION: SAVI=unused REMOTE=unused XFE=unused
-x-cbparentid: 19092613-0009-0000-0000-00004A39F4A5
-Message-Id: <ea6b671a-0c05-d880-3b9f-62a4f8626ec1@de.ibm.com>
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
- definitions=2019-09-26_06:, , signatures=0
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501
- malwarescore=0 suspectscore=0 phishscore=0 bulkscore=0 spamscore=0
- clxscore=1011 lowpriorityscore=0 mlxscore=0 impostorscore=0
- mlxlogscore=999 adultscore=0 classifier=spam adjust=0 reason=mlx
- scancount=1 engine=8.0.1-1908290000 definitions=main-1909260127
-Content-Transfer-Encoding: quoted-printable
-X-MIME-Autoconverted: from 8bit to quoted-printable by
- mx0a-001b2d01.pphosted.com id x8QDbOT6136737
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 3.x [generic]
-X-Received-From: 148.163.158.5
-X-Mailman-Approved-At: Thu, 26 Sep 2019 12:34:12 -0400
+Content-Transfer-Encoding: 8bit
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+ [fuzzy]
+X-Received-From: 209.85.210.195
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -141,67 +80,48 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Sep 2019 13:46:20 -0000
+X-List-Received-Date: Thu, 26 Sep 2019 17:12:17 -0000
 
-
-
-On 26.09.19 14:58, Daniel P. Berrang=C3=A9 wrote:
-> On Thu, Sep 26, 2019 at 08:50:36AM +0100, Peter Maydell wrote:
->> On Thu, 26 Sep 2019 at 00:31, Alex Benn=C3=A9e <alex.bennee@linaro.org=
-> wrote:
->>>
->>> The 32 bit hosts are already a second class citizen especially with
->>> support for running 64 bit guests under TCG. We are also limited by
->>> testing as actual working 32 bit machines are getting quite rare in
->>> developers personal menageries. For TCG supporting newer types like
->>> Int128 is a lot harder with 32 bit calling conventions compared to
->>> their larger bit sized cousins. Fundamentally address space is the
->>> most useful thing for the translator to have even for a 32 bit guest =
-a
->>> 32 bit host is quite constrained.
->>>
->>> As far as I'm aware 32 bit KVM users are even less numerous. Even
->>> ILP32 doesn't make much sense given the address space QEMU needs to
->>> manage.
+On 9/26/19 12:50 AM, Peter Maydell wrote:
+> On Thu, 26 Sep 2019 at 00:31, Alex Bennée <alex.bennee@linaro.org> wrote:
 >>
->> For KVM we should wait until the kernel chooses to drop support,
->> I think.
->=20
-> What if the kernel is waiting for QEMU to drop support too ;-P
-
-For what its worth on kvm/s390 we never cared about implementing
-32 bit.=20
-
->=20
->>> @@ -745,19 +744,22 @@ case "$cpu" in
->>>    ;;
->>>    armv*b|armv*l|arm)
->>>      cpu=3D"arm"
->>> -    supported_cpu=3D"yes"
->>>    ;;
+>> The 32 bit hosts are already a second class citizen especially with
+>> support for running 64 bit guests under TCG. We are also limited by
+>> testing as actual working 32 bit machines are getting quite rare in
+>> developers personal menageries. For TCG supporting newer types like
+>> Int128 is a lot harder with 32 bit calling conventions compared to
+>> their larger bit sized cousins. Fundamentally address space is the
+>> most useful thing for the translator to have even for a 32 bit guest a
+>> 32 bit host is quite constrained.
 >>
->> I'll leave others to voice opinions about their architectures,
->> but I still have 32-bit arm in my test set for builds, and
->> I'm pretty sure we have users (raspi users, for a start).
->=20
-> RHEL dropped all 32-bit host support a long time ago, so Red Hat
-> don't care for our products.
->=20
-> Fedora has recently stopped building i686 kernels and thus also no
-> long composes i686 installs. Some users complained, but ultimately
-> no one cares enough to step forward as maintainers.
->=20
-> That leaves armv7 as the only 32-bit arch in Fedora that is somewhat
-> active & maintained. I don't have any real insight on whether any
-> armv7 (Fedora) users are making much use of QEMU/KVM though, either
-> system or user emulation.=20
->=20
-> Our preference in Fedora is to have things built on every architecture
-> that the distro targets, but if upstream developers explicitly drop an
-> architecture we're not going to try to add it back.
->=20
-> Regards,
-> Daniel
->=20
+>> As far as I'm aware 32 bit KVM users are even less numerous. Even
+>> ILP32 doesn't make much sense given the address space QEMU needs to
+>> manage.
+> 
+> For KVM we should wait until the kernel chooses to drop support,
+> I think.
 
+Agreed.  I think this discussion should be more about TCG.
+
+>> @@ -745,19 +744,22 @@ case "$cpu" in
+>>    ;;
+>>    armv*b|armv*l|arm)
+>>      cpu="arm"
+>> -    supported_cpu="yes"
+>>    ;;
+> 
+> I'll leave others to voice opinions about their architectures,
+> but I still have 32-bit arm in my test set for builds, and
+> I'm pretty sure we have users (raspi users, for a start).
+
+I'd really like to know what raspi users might be using qemu for.  Depending on
+that answer, perhaps it would be sufficient for arm32 tcg to only support
+32-bit guests.
+
+For context, the discussion that Alex and I were having was about int128_t, and
+how to support that directly in tcg (especially to/from helpers), and how that
+might be vastly easier if we didn't have to consider 32-bit hosts.
+
+
+r~
 
