@@ -1,73 +1,72 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iDeRJ-00071I-Es
-	for mharc-qemu-riscv@gnu.org; Thu, 26 Sep 2019 20:48:54 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49209)
+	id 1iDeRM-00073d-Dt
+	for mharc-qemu-riscv@gnu.org; Thu, 26 Sep 2019 20:48:56 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49212)
  by lists.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <prvs=1662a5b7b=alistair.francis@wdc.com>)
- id 1iDeRE-0006x6-DN
- for qemu-riscv@nongnu.org; Thu, 26 Sep 2019 20:48:49 -0400
+ id 1iDeRE-0006xD-EX
+ for qemu-riscv@nongnu.org; Thu, 26 Sep 2019 20:48:50 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
  (envelope-from <prvs=1662a5b7b=alistair.francis@wdc.com>)
- id 1iDeRD-0008NX-53
+ id 1iDeRD-0008NQ-4W
  for qemu-riscv@nongnu.org; Thu, 26 Sep 2019 20:48:48 -0400
-Received: from esa4.hgst.iphmx.com ([216.71.154.42]:12529)
+Received: from esa5.hgst.iphmx.com ([216.71.153.144]:49428)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <prvs=1662a5b7b=alistair.francis@wdc.com>)
- id 1iDeR9-0008DJ-9b; Thu, 26 Sep 2019 20:48:43 -0400
+ id 1iDeR9-0008AO-52; Thu, 26 Sep 2019 20:48:43 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
  t=1569545323; x=1601081323;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=ggDV9bhhIBrddaIOEiUcTS+TZwSqEAtDgfLE9jehKbk=;
- b=prYUzvkKetfCy1qEbiwuanUUkS7E4TfNy2VXk41w4naZ5VyDdzN8Q6R8
- 9egyW7RXuaAg0a9IMMzX/E9VvkFH9cfIXF0+CsqvFEo9+b5d5YyMltW8+
- JCpRIb2LJXuTgaGIXGNKMNKIGGG5/1cKlorvGXCcS6jq1SbGupUAJ6Dkv
- 9+f/8YF7Y+/oDFG+4M9fSIm6v9tyGykHJ9GYn8FJg4oogMG8ZC08gYyhG
- pvNDs1DI8uznqoDGU4XYWeUR1ThC0ka2Q+6PKrKUFS9aX7oTUckeDsGsO
- 4HRDHOXvVQVxYu4CztXZ++vh+LFx+myz2NY/rooG0kF1Gb17/cVBq0igD Q==;
-IronPort-SDR: 15ac9S3SXe3Fko7wmzy5uj5zWO8su29JM2ZvH22L9XAm4qF+gHKa5GlXkiBAaplGjwL/6R8jJV
- wyI/5O8IpMfYLD8XoZrl7DMARgi+w+/Jg2B/BTqYG5pCkTxjfkZ7ymu3bhO3dfwA6j8spmGcXN
- iCpb1aRLknSN79mOVVRF7wNHKsdwhTX1y/S+XYlhiBEYAgij9VvTgqJrDCMTDITkDqX9f15UZM
- OqYvswvY8hHQFpXtiEoshRmNiSWa8Jlgi3Pz9Kos5m/1G0SGZKuzXR7mQQ1JkUFXDl4tfLTFUP
- kiI=
-X-IronPort-AV: E=Sophos;i="5.64,553,1559491200"; d="scan'208";a="119225537"
-Received: from h199-255-45-14.hgst.com (HELO uls-op-cesaep01.wdc.com)
- ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 27 Sep 2019 08:48:39 +0800
-IronPort-SDR: K7zZO+m8yh498U/ye80Y4ehGTF4UmtDj/4oP7/Hxk41ubSSMv1Uiw+RkbPq7gvHiGy6Bi/qRbK
- XONWgx+AYsZMsRrgc03toiOHJYXrjHpDTYQeG6n7M2+tynqJqr/oA8YNLKVeCv0xSxsicmG2Kz
- OkbFh4Io/1hEiCYiMLvQFZ82eaEXGaSkqVUDvIAIC82AL9zOJQjmcFhXqMIA1RhXsawX0jQWyd
- jb24p8gADfzHFCspX86XdCuFaPGfsGaNVEOvkh5VkJOAQtOuwdbWdz4hiZfmcvfdzG5zp3w8sm
- Vu0QXbLwLxELN91sQrakimvo
-Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
- by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 26 Sep 2019 17:44:54 -0700
-IronPort-SDR: iS9dpf0zpmmLSlwC4FT2TmBsUjl30ZvupR6hr3+T2PPo82edg9kBD+UupbV766QUN3ns0bAJ3m
- +tWDt88ekgBuW54FGeacaS4tz28QlrO0Y5rRMA7/7/Enw75CPbY4kTZ1ce9kHVeu4KXDsg/Wol
- 21brSq1vLFONUneQolKjMD9JA88kEqo4OhDCfx8Jt14HxQ4FJ/NPEY893rXUBkE5xy2RHDBFsY
- fsqObKAsM0VDhTOHOGrCVeh+HyP+wjYiHJ4Rm6XKZfzZ7XWnkcRer53zYMAR3yfSfciVWC7MGY
- /5k=
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=to2LSvU6SRtGzE2StLUvISodwbfvMN16nW0KP1wbnVw=;
+ b=gf0rqPjUW5VGZmYq5XJCTrwFS0lhUvZBpPEI+T1+wsETJK5RCHpaxpc/
+ FKOtx2gTyiYmvrASEqJReukhXgPWhTuYdYfzC+hfnZf9y05PZkZiMz64s
+ vgDdM16J9r59sI5dDFF0pFS+F3y3EQpHq+nx21snQTTb4muGld7OJa37b
+ v34u75mO8FstVbcYJQkJtnHgE2LyTuvJ62RGZ8WXPAjIAPKmYrQ/wqVvV
+ mU8po6vEIEqnR9dmLbImnGBamuIffNRwMwlcFe5XAo0Ip+rC9PxilQ3O5
+ Ys1kIUMV0gQPGo7TJDDT11cq0WD39Nt91KlnUnbOJo7TOgREUDO3m4pi9 g==;
+IronPort-SDR: gZ6i0KSYUQHijrEOndPwg3aYGICuw6RGGVstH+aZNW0OudeLeW8KL0mIE8M19PXm8AVp0NvtYB
+ LJVXXGcPpfF8O0qO4ppjOl2F2ImpVvxiwRS13ClKnO+iupwi1N0sEe5jjy8lE+yPhQMRCyEwmS
+ nv2qX4PjAbNIdH+DRes9WCQ+toWc4URiGfMUNP6aAB76WXXiKxwj4W81aIgimqlHGZ+Ujd3nqY
+ L5tTrIb0nH0hEHhmpm5rENbjyiVUBhEQDKdUaEhzGWTnEsCvqqAfNildBd3JWMWy4rBBlAIOIk
+ EfU=
+X-IronPort-AV: E=Sophos;i="5.64,553,1559491200"; d="scan'208";a="120012181"
+Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com)
+ ([199.255.45.15])
+ by ob1.hgst.iphmx.com with ESMTP; 27 Sep 2019 08:48:36 +0800
+IronPort-SDR: Ndww3ipI075j3B0QvLBvGooHVorpPd5BhTo5tBzKH2isIFA95Urs9UFcwpuWRnnhWCiWqC7+WD
+ t1HqwnqhRJZx2OPQZFq8+X+R7BOo/BYBdlZcVrvJBdFuO4SuNZXCR9HAtBJOdQLAvKuN9Zccf6
+ zm9DMXRLhm2jka4a2no2HMFUZJDV0dGiBlkSVnVMEqE4elR99jLjfj5wiLBjZE0NBUDx4WbXi4
+ N/s5ofOaK6BAUr5Qjx1agkDIkDwltnr66NdEg54L/xokywD4Irfug7KMkSfLhsLtc3c53qk5Uh
+ UNmC8cWNC1X14X/ULnrmAa/H
+Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
+ by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 26 Sep 2019 17:44:56 -0700
+IronPort-SDR: w9TNfa7USp9TYeeBNJX5TGG4Fiqqkj6QTTJzms1rlmvycuih3VIdO95sr3FOJ8Hx2jGhD+ayuZ
+ h9tDLpAR+mISnDxJG17fkyV/gmlQfTGXw+m9HkCdmInnCAlHiD0G8rhBhYCIZ6dLYkP807D1+A
+ lxDnRee7akksB5X4sOXcQ50vM1RcYWgousQ+AXOFHv6cer7Blvvwc1qqqpgFjid6GBCWu+ISUj
+ rOGnLFcGx7xqLil1o+mt7I6HLeOLy/5pjKvMnm98uJL79KaJmQddb0mCR2+quT27BeYjsS4H8h
+ PbI=
 WDCIronportException: Internal
 Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
  risc6-mainframe.int.fusionio.com) ([10.196.157.58])
- by uls-op-cesaip01.wdc.com with ESMTP; 26 Sep 2019 17:48:39 -0700
+ by uls-op-cesaip02.wdc.com with ESMTP; 26 Sep 2019 17:48:36 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: palmer@sifive.com,
 	alistair.francis@wdc.com,
 	alistair23@gmail.com
-Subject: [PATCH v2 1/7] riscv/sifive_u: Add L2-LIM cache memory
-Date: Thu, 26 Sep 2019 17:44:20 -0700
-Message-Id: <bf4f869cab915364855a1c9ffadfeac16b151e4b.1569545046.git.alistair.francis@wdc.com>
+Subject: [PATCH v2 0/7]  RISC-V: Add more machine memory
+Date: Thu, 26 Sep 2019 17:44:17 -0700
+Message-Id: <cover.1569545046.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.23.0
-In-Reply-To: <cover.1569545046.git.alistair.francis@wdc.com>
-References: <cover.1569545046.git.alistair.francis@wdc.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: FreeBSD 9.x [fuzzy]
-X-Received-From: 216.71.154.42
+X-Received-From: 216.71.153.144
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -79,78 +78,54 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Sep 2019 00:48:50 -0000
+X-List-Received-Date: Fri, 27 Sep 2019 00:48:51 -0000
 
-On reset only a single L2 cache way is enabled, the others are exposed
-as memory that can be used by early boot firmware. This L2 region is
-generally disabled using the WayEnable register at a later stage in the
-boot process. To allow firmware to target QEMU and the HiFive Unleashed
-let's add the L2 LIM (LooselyIntegrated Memory).
 
-Ideally we would want to adjust the size of this chunk of memory as the
-L2 Cache Controller WayEnable register is incremented. Unfortunately I
-don't see a nice way to handle reducing or blocking out the L2 LIM while
-still allowing it be re returned to all enabled from a reset.
+This series aims to improve the use of QEMU for developing boot code. It
+does a few things:
 
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
----
- hw/riscv/sifive_u.c         | 16 ++++++++++++++++
- include/hw/riscv/sifive_u.h |  1 +
- 2 files changed, 17 insertions(+)
+ - sifive_u machine:
+   - Adds a chunk of memory in the Flash area. This allows boot loaders
+   to use this memory. I can't find details on the QSPI flash used on
+   the real board, so this is the best bet at the moment.
+   - Adds a chunk of memory in the L2-LIM area. This is actualy the L2
+   cache and should shrink as the L2 cache is enalbed. Unfortunatley I
+   don't see a nice way to shrink this memory.
+   - Adds a property that allows users to specify if QEMU should jump to
+   flash or DRAM after the ROM code.
 
-diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-index 9f8e84bf2e..1d255ad13e 100644
---- a/hw/riscv/sifive_u.c
-+++ b/hw/riscv/sifive_u.c
-@@ -65,6 +65,7 @@ static const struct MemmapEntry {
-     [SIFIVE_U_DEBUG] =    {        0x0,      0x100 },
-     [SIFIVE_U_MROM] =     {     0x1000,    0x11000 },
-     [SIFIVE_U_CLINT] =    {  0x2000000,    0x10000 },
-+    [SIFIVE_U_L2LIM] =    {  0x8000000,  0x2000000 },
-     [SIFIVE_U_PLIC] =     {  0xc000000,  0x4000000 },
-     [SIFIVE_U_PRCI] =     { 0x10000000,     0x1000 },
-     [SIFIVE_U_UART0] =    { 0x10010000,     0x1000 },
-@@ -431,6 +432,7 @@ static void riscv_sifive_u_soc_realize(DeviceState *dev, Error **errp)
-     const struct MemmapEntry *memmap = sifive_u_memmap;
-     MemoryRegion *system_memory = get_system_memory();
-     MemoryRegion *mask_rom = g_new(MemoryRegion, 1);
-+    MemoryRegion *l2lim_mem = g_new(MemoryRegion, 1);
-     qemu_irq plic_gpios[SIFIVE_U_PLIC_NUM_SOURCES];
-     char *plic_hart_config;
-     size_t plic_hart_config_len;
-@@ -459,6 +461,20 @@ static void riscv_sifive_u_soc_realize(DeviceState *dev, Error **errp)
-     memory_region_add_subregion(system_memory, memmap[SIFIVE_U_MROM].base,
-                                 mask_rom);
- 
-+    /*
-+     * Add L2-LIM at reset size.
-+     * This should be reduced in size as the L2 Cache Controller WayEnable
-+     * register is incremented. Unfortunately I don't see a nice (or any) way
-+     * to handle reducing or blocking out the L2 LIM while still allowing it
-+     * be re returned to all enabled after a reset. For the time being, just
-+     * leave it enabled all the time. This won't break anything, but will be
-+     * too generous to misbehaving guests.
-+     */
-+    memory_region_init_ram(l2lim_mem, NULL, "riscv.sifive.u.l2lim",
-+                           memmap[SIFIVE_U_L2LIM].size, &error_fatal);
-+    memory_region_add_subregion(system_memory, memmap[SIFIVE_U_L2LIM].base,
-+                                l2lim_mem);
-+
-     /* create PLIC hart topology configuration string */
-     plic_hart_config_len = (strlen(SIFIVE_U_PLIC_HART_CONFIG) + 1) *
-                            ms->smp.cpus;
-diff --git a/include/hw/riscv/sifive_u.h b/include/hw/riscv/sifive_u.h
-index e4df298c23..50e3620c02 100644
---- a/include/hw/riscv/sifive_u.h
-+++ b/include/hw/riscv/sifive_u.h
-@@ -58,6 +58,7 @@ enum {
-     SIFIVE_U_DEBUG,
-     SIFIVE_U_MROM,
-     SIFIVE_U_CLINT,
-+    SIFIVE_U_L2LIM,
-     SIFIVE_U_PLIC,
-     SIFIVE_U_PRCI,
-     SIFIVE_U_UART0,
+ - virt machine:
+   - Add the pflash_cfi01 flash device. This is based on the ARM virt
+   board implementation
+   - Adjusts QEMU to jump to the flash if a user has speciefied any
+   pflash.
+
+Both machines have been tested with oreboot, but this should also help
+the coreboot developers.
+
+v2:
+ - Address comments
+ - Fixup addresses
+ - Don't use macro for machine definition of RISC-V virt machine
+
+
+
+Alistair Francis (7):
+  riscv/sifive_u: Add L2-LIM cache memory
+  riscv/sifive_u: Add QSPI memory region
+  riscv/sifive_u: Manually define the machine
+  riscv/sifive_u: Add the start-in-flash property
+  riscv/virt: Manually define the machine
+  riscv/virt: Add the PFlash CFI01 device
+  riscv/virt: Jump to pflash if specified
+
+ hw/riscv/Kconfig            |   1 +
+ hw/riscv/sifive_u.c         |  95 +++++++++++++++++++++++----
+ hw/riscv/virt.c             | 127 ++++++++++++++++++++++++++++++++++--
+ include/hw/riscv/sifive_u.h |  11 +++-
+ include/hw/riscv/virt.h     |  10 ++-
+ 5 files changed, 222 insertions(+), 22 deletions(-)
+
 -- 
 2.23.0
 
