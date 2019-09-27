@@ -1,75 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iDuR3-0008Qw-Fl
-	for mharc-qemu-riscv@gnu.org; Fri, 27 Sep 2019 13:53:41 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:33043)
+	id 1iDxsI-0005iJ-FS
+	for mharc-qemu-riscv@gnu.org; Fri, 27 Sep 2019 17:34:02 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:33339)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <richard.henderson@linaro.org>) id 1iDuR0-0008Li-JI
- for qemu-riscv@nongnu.org; Fri, 27 Sep 2019 13:53:39 -0400
+ (envelope-from <alistair23@gmail.com>) id 1iDxsF-0005gk-1w
+ for qemu-riscv@nongnu.org; Fri, 27 Sep 2019 17:34:00 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <richard.henderson@linaro.org>) id 1iDuQy-000799-To
- for qemu-riscv@nongnu.org; Fri, 27 Sep 2019 13:53:37 -0400
-Received: from mail-pf1-x443.google.com ([2607:f8b0:4864:20::443]:44601)
+ (envelope-from <alistair23@gmail.com>) id 1iDxsE-0004u6-1V
+ for qemu-riscv@nongnu.org; Fri, 27 Sep 2019 17:33:58 -0400
+Received: from mail-lj1-x244.google.com ([2a00:1450:4864:20::244]:33183)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
- id 1iDuQy-00077b-FZ
- for qemu-riscv@nongnu.org; Fri, 27 Sep 2019 13:53:36 -0400
-Received: by mail-pf1-x443.google.com with SMTP id q21so1989360pfn.11
- for <qemu-riscv@nongnu.org>; Fri, 27 Sep 2019 10:53:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=subject:to:cc:references:from:openpgp:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=mtqj6XjR77FGB/2lmnWGkD6fBdEnoZDtg9W++umi9WM=;
- b=PP3nc+RWhFnhezJV3IGo2lKvdbWw0SIdPhto3AC1hnW6wGUq9gP/nUnAHM51BF8Pxv
- Iye4Xt+dfDOzyvnOx+IS9fF35Kcvk9pXQUXeCmRmergG9mh6xO1wZv9nhybMmx4xcICU
- 4x1nf0Ih8WQbFhdm2RLsD2v9ckdm3BkD40e6oN6yuqMwOGoJB9xa4yTXRE3G4ptfCd44
- I/g+68H5vq6/VG0cJAE8j6RAN5RftMLvjbDavF8u8OPnRACajky0iWMrgHOVaERzHjB1
- FR+9F5azMa0wVVdbqbmnwIs8xT/fw22vKoCqv3CFvm3r1S/lGYZwYggiTklg9WBQU+V9
- Uh/g==
+ (Exim 4.71) (envelope-from <alistair23@gmail.com>)
+ id 1iDxs8-0004mL-M0; Fri, 27 Sep 2019 17:33:53 -0400
+Received: by mail-lj1-x244.google.com with SMTP id a22so3890360ljd.0;
+ Fri, 27 Sep 2019 14:33:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=52Nl/hnrTdintPo+v2dNLw5Df8YagLSXj5rzf3GKQ0w=;
+ b=u3sHJx6f1V3AhrD+T/KiXT3CGZRv/MvIm0mN7j8Ody9rmqVsBaJ23x6aEqhwi6qIYm
+ GbCJ4snKAjgjHDhpAv20tSyTe/j5rNdIedIrhhzERm7j0jUx+1uu6GyXrN5dYUVdmnL/
+ jd6yh5pTx1W3iIro6000p2TErMXuhsAKVlh1yH3mohvVMpq+saMM5CoxDQMErTpCgo0F
+ JZFcSMyDVvForCfMS507LlUy2muhWaywCJKwNhmieaEUhbm2r8FKoqqnzQXQPDs1NhRe
+ sy37BF3CZeV0izoBfS/c9E+0g0X4W2xTNoizwAnKJSudegNoprtLEEkriXoaLzDBIAai
+ mRrg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
- :date:user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=mtqj6XjR77FGB/2lmnWGkD6fBdEnoZDtg9W++umi9WM=;
- b=bxA/CTsUhHiBR0XHqj4v4ks4vdMfTDQXJwO0gnGvscoYdaw9CQCaHgx91dJVTnj/IR
- 3Iik+6bo4F1FTlJFSn+mVUi8U9m7a5Ud1Be8n/gGH9r2AbdKB8ETrjpG0ZjLDsEhVKCt
- 8JDlduB674r2v1nhAR/dxSS3iN9Soi/nDABLNpCjT0UcO6YYeh/muOHSp0Wdu13UJ+zc
- /bS8a2gmXRGXiCjSXafc/inBxiCHKFBmtkE8nfhOwth6WOXHwHckhsN1PTy3CikrtXWq
- PXcAEhl+w1VwVFsF/rPq5vbaIGmIp+U5W5aiz5svs61kq/Bi79cJCXqwYdr106i4w3NL
- 3Tlw==
-X-Gm-Message-State: APjAAAXqnYvv0TjFNMxKw7fk80B9HriftokS1ToWycsasmzm3XoInTf/
- K1uJjbtx2umrUeUnlkjo+1TGoA==
-X-Google-Smtp-Source: APXvYqyp5pWxRwDIHkdiZwskJdsI3b7BpiqwKwZ9Tfl6WTsT49pDaTKkRNzC79fNOqheVQNM/2y5LQ==
-X-Received: by 2002:a17:90a:6c90:: with SMTP id
- y16mr11884264pjj.58.1569606814892; 
- Fri, 27 Sep 2019 10:53:34 -0700 (PDT)
-Received: from [172.20.32.216] ([12.157.10.118])
- by smtp.gmail.com with ESMTPSA id b69sm3357794pfb.132.2019.09.27.10.53.33
- (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
- Fri, 27 Sep 2019 10:53:34 -0700 (PDT)
-Subject: Re: [PATCH v1 1/1] target/riscv: Print CPU and privledge in disas
-To: Alistair Francis <alistair23@gmail.com>
-Cc: Alistair Francis <alistair.francis@wdc.com>,
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>,
- Palmer Dabbelt <palmer@sifive.com>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=52Nl/hnrTdintPo+v2dNLw5Df8YagLSXj5rzf3GKQ0w=;
+ b=J4HQHj33KTzZa7TsyIhVD1668bCdDOSemtYekR2wAcVhQO1icvsyXX5Vlvep/3UXgZ
+ Dz7e0/60IFSD2xYqkkJeYntXvIbJP0fGJkDP32NmDdx0j2wULRwln2aoXQPQEZzHhFrz
+ 3a/V1xgo13fbY8pmZxdICYUZ/3JvE+YUa5LIXzPeajBUhLk7cUzC6zUey54qZBEo6D6s
+ BN8oKLUO0si0AvpR+xX3NeCojaQwZUAYpwi5OjVg9oRn5OUf2LTQHrvu6oB+MrSszYFL
+ HPRqz0pKi533ZXRh66hKZs3BNHg1nzsJNyAnAIs+rJTuJ1oAIDOCsu15Hwsis2LHYnPG
+ s5Rw==
+X-Gm-Message-State: APjAAAWzCEotzEbqF0II0oSkpSGCgOkZ2h+MhpilSs25nf+cuBhfuOhO
+ YhxjnQD0RMSCMTAsISzXe3bTLwidEzboYvWfryY=
+X-Google-Smtp-Source: APXvYqxMvt19AaHC82+q9Kv371N3TsPow5Kan4vED/+LgKS2XFIkMUucQDOtHkwjCzsZ+RjfQzBkiUMZ1J/oIT+kFnM=
+X-Received: by 2002:a2e:3902:: with SMTP id g2mr4430722lja.196.1569620027988; 
+ Fri, 27 Sep 2019 14:33:47 -0700 (PDT)
+MIME-Version: 1.0
 References: <ab8f108eceb973aaee565bb1fe347fcf8c788f5b.1569545120.git.alistair.francis@wdc.com>
  <960d9622-8241-efe7-cee6-1d4a1307fbc0@linaro.org>
  <CAKmqyKP90UDcS4moAYvLVN2q+aZ_cqGwY2fEgfX8dCjsHW1Tfg@mail.gmail.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-Openpgp: preference=signencrypt
-Message-ID: <8248daee-d5d0-0576-ee89-bd1400ddf947@linaro.org>
-Date: Fri, 27 Sep 2019 10:53:31 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.8.0
-MIME-Version: 1.0
-In-Reply-To: <CAKmqyKP90UDcS4moAYvLVN2q+aZ_cqGwY2fEgfX8dCjsHW1Tfg@mail.gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+ <8248daee-d5d0-0576-ee89-bd1400ddf947@linaro.org>
+In-Reply-To: <8248daee-d5d0-0576-ee89-bd1400ddf947@linaro.org>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Fri, 27 Sep 2019 14:29:01 -0700
+Message-ID: <CAKmqyKP86E9aJBKjrGzG7=A7dLDsfhFBdnDjc6pZjtECpticAg@mail.gmail.com>
+Subject: Re: [PATCH v1 1/1] target/riscv: Print CPU and privledge in disas
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: Alistair Francis <alistair.francis@wdc.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Palmer Dabbelt <palmer@sifive.com>
+Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::443
+X-Received-From: 2a00:1450:4864:20::244
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -81,25 +69,35 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Sep 2019 17:53:40 -0000
+X-List-Received-Date: Fri, 27 Sep 2019 21:34:00 -0000
 
-On 9/27/19 10:23 AM, Alistair Francis wrote:
->> I'm curious about the motivation here.
->>
->> In particular, what difference does it make what cpu the TB is generated for?
->> It would seem like the more relevant place to look for this is with -d cpu or
->> -d exec where the TB is actually executed, which could well be multiple cpus.
-> 
-> The main reason is that the sifive_u machine now has two RISC-V
-> clusters so it's useful to see what is happening on each CPU. -d cpu
-> and -d exec are much more difficult to comprehend so aren't always as
-> useful.
+On Fri, Sep 27, 2019 at 10:53 AM Richard Henderson
+<richard.henderson@linaro.org> wrote:
+>
+> On 9/27/19 10:23 AM, Alistair Francis wrote:
+> >> I'm curious about the motivation here.
+> >>
+> >> In particular, what difference does it make what cpu the TB is generated for?
+> >> It would seem like the more relevant place to look for this is with -d cpu or
+> >> -d exec where the TB is actually executed, which could well be multiple cpus.
+> >
+> > The main reason is that the sifive_u machine now has two RISC-V
+> > clusters so it's useful to see what is happening on each CPU. -d cpu
+> > and -d exec are much more difficult to comprehend so aren't always as
+> > useful.
+>
+> Hmm.  I wonder if it might be time to find a way to be able to optionally split
+> the qemu_log output on a per-cpu basis.  It wouldn't necessarily always be
+> helpful, because we'd still have the case of a given TB being translated by one
+> cpu and executed on another, but it could make some things easier to follow.
 
-Hmm.  I wonder if it might be time to find a way to be able to optionally split
-the qemu_log output on a per-cpu basis.  It wouldn't necessarily always be
-helpful, because we'd still have the case of a given TB being translated by one
-cpu and executed on another, but it could make some things easier to follow.
+A per cpu-cluster basis would be useful.
 
+Until then though this patch helps.
 
-r~
+Alistair
+
+>
+>
+> r~
 
