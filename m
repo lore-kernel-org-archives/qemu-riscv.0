@@ -1,52 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iDl7s-0006XU-Td
-	for mharc-qemu-riscv@gnu.org; Fri, 27 Sep 2019 03:57:16 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:40360)
+	id 1iDl7w-0006bX-M7
+	for mharc-qemu-riscv@gnu.org; Fri, 27 Sep 2019 03:57:20 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:40423)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <bmeng.cn@gmail.com>) id 1iDl7p-0006Ss-Dl
- for qemu-riscv@nongnu.org; Fri, 27 Sep 2019 03:57:14 -0400
+ (envelope-from <bmeng.cn@gmail.com>) id 1iDl7u-0006Zx-Mi
+ for qemu-riscv@nongnu.org; Fri, 27 Sep 2019 03:57:19 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <bmeng.cn@gmail.com>) id 1iDl7o-00012e-CX
- for qemu-riscv@nongnu.org; Fri, 27 Sep 2019 03:57:13 -0400
-Received: from mail-yb1-xb42.google.com ([2607:f8b0:4864:20::b42]:44136)
+ (envelope-from <bmeng.cn@gmail.com>) id 1iDl7t-0001C7-H7
+ for qemu-riscv@nongnu.org; Fri, 27 Sep 2019 03:57:18 -0400
+Received: from mail-yb1-xb42.google.com ([2607:f8b0:4864:20::b42]:42727)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
- id 1iDl7m-0000xe-Dc; Fri, 27 Sep 2019 03:57:10 -0400
-Received: by mail-yb1-xb42.google.com with SMTP id f1so1593240ybq.11;
- Fri, 27 Sep 2019 00:57:10 -0700 (PDT)
+ id 1iDl7r-00016x-65; Fri, 27 Sep 2019 03:57:15 -0400
+Received: by mail-yb1-xb42.google.com with SMTP id v6so1601436ybe.9;
+ Fri, 27 Sep 2019 00:57:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=v8Kmjb7JEJdUO93lT88oGf9S3/5JV3dA3AhwEfBdZNk=;
- b=qGVo78QtOHD7LEEtwNqBE/u16n+MKXMngnSPaPbvBsKJJ0piuX0lCT+I5coaWVuIMJ
- lKGPZmA691P3Rmc+4IpdDChJifxF+yTRHJdEdU75Xn7tYjsPyw+iJ6hGWgKnlnRbgYqj
- kBReeyhSPOLVplmW+n4/3dz1nL3uEw1FIl9FcwhlzYeqm5vryuJ0nPSbnhJfsslc4jch
- WUeE929x8+5psR+sGY+Ck/6ETtXsOjKNf6w4m+sAipqg7/TVmXlxBjX/uSCXGdn8yKNk
- Yg1kCZeat8aSPs4N7bd4rhcqf0hmw1mln5oh5c020ZUyInbRh8cNrqCtcOElkaO5Xbfc
- 4M8A==
+ :cc; bh=GAxQh9j+Ykk2bGicyyBcNjusETSmwhuQo+QjUK8BzHc=;
+ b=s7LiTrdezk4dLpSKNQT2hqP6qobRiju5jCvWnqq367o/Y8Byhkkx5LvlDRxbpiQEKB
+ GgirBHHVimH0aclV4+VhU1Z2C1JSDDTi2MsCe6w2mkkUWHF8jU3FQ0L1SzfAbQUULqGD
+ /SipotCf3sh4jdPGltMHtFwHXYWYgJhJ815pH9MuVDD6/UxiF+REgJ8M6nTCG0MgytmR
+ HOCtg6HPWdmTjTPwNfmSkcS3hOaNIekYIkRjuy7lypMqFDjzSc00blX2jYrUljMzPquF
+ c6hvToeUcwH33g0Zaltoog6P2VMdu0xRxfbZJmv0/3mt0MY5zmlHx+1Xhd57gJ90kn28
+ j3Zw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=v8Kmjb7JEJdUO93lT88oGf9S3/5JV3dA3AhwEfBdZNk=;
- b=KNEJmU+2TIY+6Uby9oaegkgbPy8nvVDt/4BW2sRbAbqhmxZS/bm4BorAEYTUi9jp7I
- McGW0pZFCUjOe2iqW76fsTO5XISIUl4ZhUv/VzKHbR4OUPBzCKep1zye2sKhZgGJEZ2c
- 3TZKd5pwCpQguEBCrY7JEOVbbJ7Z3qazE85igxZT8kYG9FLSxBYfM0G40cOXyeUsz/iK
- E7hiMTBSWIjvJyq8fTIWIJ8prtW/9lbn3toZx+LiVv4N7TkVVynXY0B3/X9+hwTlNJAc
- Z/BxK3cghlnOHHG+tmYDjfATL5oHjTKWKu3Eu2tnSTUl1qnoOQKX2ezWfwBLdHL81o3y
- rC0A==
-X-Gm-Message-State: APjAAAUl4/c5V5KEO09fGuMzKCzkxDEjJfEOu7oOcd6U2BtZL1fpPrQe
- KhoXdPruGTJnMLyelbF+iOU4MrAoOUHvuwdIUdc=
-X-Google-Smtp-Source: APXvYqwsPiY3BK7Ii/VfqdXB5lTMhXdf0W0vS5QlU4chdDDBzuC2jZqgZAHegcJT1bRGZ2U2wEAvr7lcIyNv7xqCjpQ=
-X-Received: by 2002:a25:ae09:: with SMTP id a9mr5155104ybj.11.1569571029956;
- Fri, 27 Sep 2019 00:57:09 -0700 (PDT)
+ bh=GAxQh9j+Ykk2bGicyyBcNjusETSmwhuQo+QjUK8BzHc=;
+ b=tIQDCiYA1xdqzi/78aPK7tAcNkCsGj65gZjQLAclSMOOCn66kyikV/ORQiiTONcIC8
+ jdFNki40wpt1mk8j6ChLCfavj5TDtzNVLsSe9XNSpeHEmO1lBSW8Gh+jW7zwdBcoSkqE
+ 1rUXDSqIPrQkWdAsbE/yjLeCMo6AeV4iliZpjzqx67nrWyFTWNFK/ZVhLF8ET5Iw+8Gk
+ L0VNYKf4jglx7tB5gf0cIP64+KFTgMVobWCOSpMWiQXYFti3TAlY9gtdGloUItdzR21c
+ R8jzwNDKPocTU2CHpbPJ4kXRUReAINRYf/jXGi2EdtV4uZk4GWOWgzMY7AecPvUwZMy2
+ 5juQ==
+X-Gm-Message-State: APjAAAUBSM2NyRA+m9oaAL0ncmkqRZZ53Gjbvsj/wzJJxkJLw/AveaHV
+ toYquXh/frJu+/Ly6eo4KJn/rH1JlH+nHxZHK4K+mA==
+X-Google-Smtp-Source: APXvYqwzSGjx2xJRUskILso39/luBWTpN8bAMQbxc2erXd4QKtvdAfwGjHWZqgRsEPkTnCHDI0sCeWncj98Z12vQdhU=
+X-Received: by 2002:a25:7481:: with SMTP id p123mr4627916ybc.392.1569571034808; 
+ Fri, 27 Sep 2019 00:57:14 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1569545046.git.alistair.francis@wdc.com>
- <7406836747a1a0e9f91c6d79f9fe40ca17995c8a.1569545046.git.alistair.francis@wdc.com>
-In-Reply-To: <7406836747a1a0e9f91c6d79f9fe40ca17995c8a.1569545046.git.alistair.francis@wdc.com>
+ <a24af06cea57073f4a75381755ab05e825679445.1569545046.git.alistair.francis@wdc.com>
+In-Reply-To: <a24af06cea57073f4a75381755ab05e825679445.1569545046.git.alistair.francis@wdc.com>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Fri, 27 Sep 2019 15:56:58 +0800
-Message-ID: <CAEUhbmUx_fF1eNAN5WcVr=Hbmbtn9vCj=AVpYVVDtZDz+uEshg@mail.gmail.com>
-Subject: Re: [PATCH v2 3/7] riscv/sifive_u: Manually define the machine
+Date: Fri, 27 Sep 2019 15:57:02 +0800
+Message-ID: <CAEUhbmVvsujN-EG3hdpaAbf-OF-NvvQnX4k5KWS_MscPHhKg-A@mail.gmail.com>
+Subject: Re: [PATCH v2 4/7] riscv/sifive_u: Add the start-in-flash property
 To: Alistair Francis <alistair.francis@wdc.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
@@ -66,23 +66,96 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Sep 2019 07:57:15 -0000
+X-List-Received-Date: Fri, 27 Sep 2019 07:57:19 -0000
 
-On Fri, Sep 27, 2019 at 8:48 AM Alistair Francis
+On Fri, Sep 27, 2019 at 8:55 AM Alistair Francis
 <alistair.francis@wdc.com> wrote:
 >
-> Instead of using the DEFINE_MACHINE() macro to define the machine let's
-> do it manually. This allows us to specify machine properties.
->
-> This patch is no functional change.
+> Add a property that when set to true QEMU will jump from the ROM code to
+> the start of flash memory instead of DRAM which is the default
+> behaviour.
 >
 > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 > ---
->  hw/riscv/sifive_u.c         | 44 ++++++++++++++++++++++++++-----------
->  include/hw/riscv/sifive_u.h |  7 +++++-
->  2 files changed, 37 insertions(+), 14 deletions(-)
+>  hw/riscv/sifive_u.c         | 27 +++++++++++++++++++++++++++
+>  include/hw/riscv/sifive_u.h |  2 ++
+>  2 files changed, 29 insertions(+)
+>
+> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+> index f5741e9a38..33b55d0d5b 100644
+> --- a/hw/riscv/sifive_u.c
+> +++ b/hw/riscv/sifive_u.c
+> @@ -373,6 +373,10 @@ static void riscv_sifive_u_init(MachineState *machine)
+>                                         /* dtb: */
+>      };
+>
+> +    if (s->start_in_flash) {
+> +        reset_vec[6] = memmap[SIFIVE_U_FLASH0].base; /* start: .dword FLASH0_BASE */
+> +    }
+
+Please change to use the way that patch "[v2,7/7] riscv/virt: Jump to
+pflash if specified" does for consistency, ie:
+
+    if (s->start_in_flash) {
+        start_addr = memmap[SIFIVE_U_FLASH0].base; /* start: .dword
+FLASH0_BASE */
+    }
+
+> +
+>      /* copy in the reset vector in little_endian byte order */
+>      for (i = 0; i < sizeof(reset_vec) >> 2; i++) {
+>          reset_vec[i] = cpu_to_le32(reset_vec[i]);
+> @@ -432,8 +436,31 @@ static void riscv_sifive_u_soc_init(Object *obj)
+>                            TYPE_CADENCE_GEM);
+>  }
+>
+> +static bool virt_get_start_in_flash(Object *obj, Error **errp)
+
+sifive_u_get_start_in_flash()
+
+> +{
+> +    SiFiveUState *s = RISCV_U_MACHINE(obj);
+> +
+> +    return s->start_in_flash;
+> +}
+> +
+> +static void virt_set_start_in_flash(Object *obj, bool value, Error **errp)
+
+sifive_u_set_start_in_flash()
+
+> +{
+> +    SiFiveUState *s = RISCV_U_MACHINE(obj);
+> +
+> +    s->start_in_flash = value;
+> +}
+> +
+>  static void riscv_sifive_u_machine_instance_init(Object *obj)
+>  {
+> +    SiFiveUState *s = RISCV_U_MACHINE(obj);
+> +
+> +    s->start_in_flash = false;
+> +    object_property_add_bool(obj, "start-in-flash", virt_get_start_in_flash,
+> +                             virt_set_start_in_flash, NULL);
+> +    object_property_set_description(obj, "start-in-flash",
+> +                                    "Set on to tell QEMU's ROM to jump to " \
+> +                                    "flash. Otherwise QEMU will jump to DRAM",
+> +                                    NULL);
+>  }
+>
+>  static void riscv_sifive_u_soc_realize(DeviceState *dev, Error **errp)
+> diff --git a/include/hw/riscv/sifive_u.h b/include/hw/riscv/sifive_u.h
+> index a921079fbe..2656b43c58 100644
+> --- a/include/hw/riscv/sifive_u.h
+> +++ b/include/hw/riscv/sifive_u.h
+> @@ -57,6 +57,8 @@ typedef struct SiFiveUState {
+>
+>      void *fdt;
+>      int fdt_size;
+> +
+> +    bool start_in_flash;
+>  } SiFiveUState;
 >
 
-Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
-Tested-by: Bin Meng <bmeng.cn@gmail.com>
+Regards,
+Bin
 
