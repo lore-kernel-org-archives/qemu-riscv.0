@@ -1,52 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iDl7m-0006OA-3L
-	for mharc-qemu-riscv@gnu.org; Fri, 27 Sep 2019 03:57:10 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:40309)
+	id 1iDl7o-0006Rn-MW
+	for mharc-qemu-riscv@gnu.org; Fri, 27 Sep 2019 03:57:12 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:40333)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <bmeng.cn@gmail.com>) id 1iDl7j-0006Kg-65
- for qemu-riscv@nongnu.org; Fri, 27 Sep 2019 03:57:08 -0400
+ (envelope-from <bmeng.cn@gmail.com>) id 1iDl7l-0006Nn-Mp
+ for qemu-riscv@nongnu.org; Fri, 27 Sep 2019 03:57:10 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <bmeng.cn@gmail.com>) id 1iDl7h-0000rR-6h
- for qemu-riscv@nongnu.org; Fri, 27 Sep 2019 03:57:07 -0400
-Received: from mail-yw1-xc44.google.com ([2607:f8b0:4864:20::c44]:38990)
+ (envelope-from <bmeng.cn@gmail.com>) id 1iDl7k-0000wt-P1
+ for qemu-riscv@nongnu.org; Fri, 27 Sep 2019 03:57:09 -0400
+Received: from mail-yw1-xc41.google.com ([2607:f8b0:4864:20::c41]:38988)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
- id 1iDl7e-0000oV-Q2; Fri, 27 Sep 2019 03:57:02 -0400
-Received: by mail-yw1-xc44.google.com with SMTP id n11so608539ywn.6;
- Fri, 27 Sep 2019 00:57:02 -0700 (PDT)
+ id 1iDl7i-0000tN-OD; Fri, 27 Sep 2019 03:57:06 -0400
+Received: by mail-yw1-xc41.google.com with SMTP id n11so608581ywn.6;
+ Fri, 27 Sep 2019 00:57:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=MDlIcQvG0sBTRVNF3tCQBU01IG04beRStYQE7JqLpvk=;
- b=sr1IgLpPdL3mlpvIw9OXHbQON/aRLu012eB8oaFEqpzJpgwT0tbh6XlIHX6ZgMyjyH
- fcNwkqtXBGoWlgOxKxargtviOOWSGDwSyxvMzpS7j1KUF4A1oGYJfCoaKtJatDrXmhzi
- 2/ubEaBN+f+4vKS1wDsEz00VsK4ibYYkqnEImZIBfWoRy2ZxMuYdVQWGf/3EsN2SUjsu
- xghUMM8um4WE01xW3Tshf7bSvC8379rZBec1R5JBZzcHOkP6pxMnzouta/K8xCw3ZimC
- dmBGR8+iLsbKlODJ5Zgs5EwnPWbunYK9FWibw5yDpa/G9YK4YMeKj08kz/Xy1jLByFe0
- Hu0w==
+ :cc; bh=XvNlffDIBXRZ3eFiksPvktc1aFre30nAocuB8LHpKWA=;
+ b=Y1tNp8fKJfEyN31Bj+hBREYFeB0y9kXd9KmHApYDPkZyYeA896+LuiSTFJbnIQmzZZ
+ 8e//b402y/gFRIJPOvEvpj9Pv7RYiciGMslfk01K0y+X5pSO44z1CMnxQBSE4doONVaN
+ u8dfCTPeNKU5rihEnnOCEwBxH1rRwgeJpF/XIKZ7a0mq+mPEhEmYxpHpPm1P5wDzJVBY
+ ynD4YaKfWm3V9C8RRgtOMtkcYEsSy+MIF9nchqVl1ePzghAex8f1lEHGHD+W7DDG3981
+ 66NBSbAVZYY8uZmdRN4DAzedYf+KLHULAPImaURXrcgbG8jV6pFTMVut84KBI/SlBDzB
+ P/1w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=MDlIcQvG0sBTRVNF3tCQBU01IG04beRStYQE7JqLpvk=;
- b=hNniqHPQEa6QSAvLE5FxP5r96O7/nFxKIKB9Jh4krO4F9hR1Iy5SvVLU21BAUUdDT4
- 5XVRIe/Qg7dpVxVG6aA7XrypYoBhV9Clv/F2JSbelMNMw7WnmS5ouYurpzZkPdSUYjO5
- fGkPLL0HBLWwWvGq4k2Xf8Jc/duN1O2cuYAyJhk3KbU0YUcb7TPnz7T0DbjUVGikZk6T
- b2dxzRL4lLh9/ja/bEIvYzDkmGwCgf6Rxcp7oMx7ZU0a5dL+OWNhkxhCAdOqK6LpRbjy
- Tenu6yqRPE/LspB2K3KHVet0oTJvGYJz64yKpZL8EGpekTHGKpIrFNT5McutlIi+onZd
- C/7g==
-X-Gm-Message-State: APjAAAV1B8HYcS495eJr3PhW5qo3fTmX99QWsUKGz+UaC4wOzzMwTJst
- 5FXotI5YSg9aoPVY+Dl2ndUcQ1+Q4ItFB8bU7D4=
-X-Google-Smtp-Source: APXvYqzDEov2Dksb0P0skBsQW4m2PJ4BcXPOrjiNHw3pX8YLAZl/Z7p1C/c96tFkDYmmko3HG4iUSlmhVWLvJGHQzzE=
-X-Received: by 2002:a81:4cc8:: with SMTP id z191mr1648050ywa.137.1569571022143; 
- Fri, 27 Sep 2019 00:57:02 -0700 (PDT)
+ bh=XvNlffDIBXRZ3eFiksPvktc1aFre30nAocuB8LHpKWA=;
+ b=KXHQI4cu1JsejYzDgHTn6cy8KcCIvMVsmGOewuWTOs6aO4MzLzNBWety43iBCjiAiP
+ I8RKbDYXzBUs+rcHVUhPG1HfZ7PMo7DqYyrCy0PBd1eVD1X1PYBO9iMKq3/KNozLTmOb
+ ghwzsC1081VJ5NtCve0iCXhgQ0bUeGKW2eUBHE0rYFz6sa9vxWByY1oGa/dB8wVdVHyb
+ sHr7rerRuNQBi29b4y+IKsNNsKWhrHkiboEQ8Bumc8em45WTLyXtGH6yi3PpQaK7D4sX
+ d1lcdWbdCOd/q4kl3NdJv6t3Uofdvuhe8fauFhhj/PDGYn0D15TqBILyovYnUKbpzjNH
+ RWFw==
+X-Gm-Message-State: APjAAAUbJHY4Zp8UcQVGu0HLAMZ8YvCpQTng2KQeA43lXeWTNDrONSXt
+ cRgEf8EeQIpqS1tT3NVCUAJHtp33Vd95XFyBRew=
+X-Google-Smtp-Source: APXvYqw/VW61dAZ8zrrsxBzB+UqkM/H32dU5RKdsyKf1DIUga7OHxO9rbDV/qr2cXF9kOEyFXqvTqqWcbK/vSt+E8Mc=
+X-Received: by 2002:a81:48c3:: with SMTP id v186mr1754043ywa.140.1569571026306; 
+ Fri, 27 Sep 2019 00:57:06 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1569545046.git.alistair.francis@wdc.com>
- <bf4f869cab915364855a1c9ffadfeac16b151e4b.1569545046.git.alistair.francis@wdc.com>
-In-Reply-To: <bf4f869cab915364855a1c9ffadfeac16b151e4b.1569545046.git.alistair.francis@wdc.com>
+ <427130d2510a6c3dd7a4266bd586b15ecefba103.1569545046.git.alistair.francis@wdc.com>
+In-Reply-To: <427130d2510a6c3dd7a4266bd586b15ecefba103.1569545046.git.alistair.francis@wdc.com>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Fri, 27 Sep 2019 15:56:50 +0800
-Message-ID: <CAEUhbmVBDs5dNH06BjA=Xsa_AEtqoaA6Nm04VtY9-nxJUhmkPQ@mail.gmail.com>
-Subject: Re: [PATCH v2 1/7] riscv/sifive_u: Add L2-LIM cache memory
+Date: Fri, 27 Sep 2019 15:56:54 +0800
+Message-ID: <CAEUhbmVo-+=bEH75TTpL-PxwF+NJT6Q=fc6sGxn+OZOq=Qyjvg@mail.gmail.com>
+Subject: Re: [PATCH v2 2/7] riscv/sifive_u: Add QSPI memory region
 To: Alistair Francis <alistair.francis@wdc.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
@@ -54,7 +54,7 @@ Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
 Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::c44
+X-Received-From: 2607:f8b0:4864:20::c41
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -66,31 +66,24 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Sep 2019 07:57:08 -0000
+X-List-Received-Date: Fri, 27 Sep 2019 07:57:11 -0000
 
-On Fri, Sep 27, 2019 at 8:52 AM Alistair Francis
+On Fri, Sep 27, 2019 at 8:51 AM Alistair Francis
 <alistair.francis@wdc.com> wrote:
 >
-> On reset only a single L2 cache way is enabled, the others are exposed
-> as memory that can be used by early boot firmware. This L2 region is
-> generally disabled using the WayEnable register at a later stage in the
-> boot process. To allow firmware to target QEMU and the HiFive Unleashed
-> let's add the L2 LIM (LooselyIntegrated Memory).
+> The HiFive Unleashed uses is25wp256 SPI NOR flash. There is currently no
+> model of this in QEMU, so to allow boot firmware developers to use QEMU
+> to target the Unleashed let's add a chunk of memory to represent the QSPI0
+> memory mapped flash. This can be targeted using QEMU's -device loader
+> command line option.
 >
-> Ideally we would want to adjust the size of this chunk of memory as the
-> L2 Cache Controller WayEnable register is incremented. Unfortunately I
-> don't see a nice way to handle reducing or blocking out the L2 LIM while
-> still allowing it be re returned to all enabled from a reset.
+> In the future we can look at adding a model for the is25wp256 flash.
 >
 > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 > ---
-
-Please include a changelog in the future. otherwise it's hard to track
-what is changed between patch versions.
-
->  hw/riscv/sifive_u.c         | 16 ++++++++++++++++
->  include/hw/riscv/sifive_u.h |  1 +
->  2 files changed, 17 insertions(+)
+>  hw/riscv/sifive_u.c         | 8 ++++++++
+>  include/hw/riscv/sifive_u.h | 1 +
+>  2 files changed, 9 insertions(+)
 >
 
 Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
