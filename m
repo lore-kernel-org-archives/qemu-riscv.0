@@ -1,68 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iDyAY-0000g7-2m
-	for mharc-qemu-riscv@gnu.org; Fri, 27 Sep 2019 17:52:55 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37715)
+	id 1iDyC2-0002Dv-Oy
+	for mharc-qemu-riscv@gnu.org; Fri, 27 Sep 2019 17:54:26 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:38033)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <alistair23@gmail.com>) id 1iDyAT-0000d1-W4
- for qemu-riscv@nongnu.org; Fri, 27 Sep 2019 17:52:52 -0400
+ (envelope-from <alistair23@gmail.com>) id 1iDyBz-0002AH-MH
+ for qemu-riscv@nongnu.org; Fri, 27 Sep 2019 17:54:24 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1iDyAS-0001ds-UB
- for qemu-riscv@nongnu.org; Fri, 27 Sep 2019 17:52:49 -0400
-Received: from mail-lf1-x142.google.com ([2a00:1450:4864:20::142]:44107)
+ (envelope-from <alistair23@gmail.com>) id 1iDyBy-00041A-IP
+ for qemu-riscv@nongnu.org; Fri, 27 Sep 2019 17:54:23 -0400
+Received: from mail-lf1-x143.google.com ([2a00:1450:4864:20::143]:34517)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1iDyAS-0001dF-NG; Fri, 27 Sep 2019 17:52:48 -0400
-Received: by mail-lf1-x142.google.com with SMTP id q11so2960649lfc.11;
- Fri, 27 Sep 2019 14:52:47 -0700 (PDT)
+ id 1iDyBy-0003yu-B1; Fri, 27 Sep 2019 17:54:22 -0400
+Received: by mail-lf1-x143.google.com with SMTP id r22so2998830lfm.1;
+ Fri, 27 Sep 2019 14:54:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=lJcKZk8/IoSvhj7jWvlyxigM7z8UqdXfxfgYKDykwLY=;
- b=S7fJFqfJ/NjODtXLl85taQuTnuSx+f4bJxlaLKaRWJM1dD7KxFiyMaWKxCq6Q65SU9
- Bh7alMry3k1bBejOZgBUC0ZPR/jzWrjPa3bqh+Fjkcrtzz4nOvkPMY0TutAnZo8y36+v
- 2Znu7TydSOllLIaYeWeI2PD0wio8AxJT1QMxgFTuVgdKoprkVnq3T7q6VUBNCPu//owV
- xnltIoZ/zJ/xgwfBlorrniHoO7ywLo4+3qFKhVxGLbTE6nsdvtQgkg0rOpxy+vgDcL+J
- BOenb7cgxKrwc6W6hBNQJHlnl0unyGlXkV/yQW/PVDYL2ejHLguDOEL3s/Y7LJ0oTAmr
- mqXA==
+ :cc; bh=jkOir/wyT+RF7Mh1S6xJDDGBy1VpXPxRvS0hvYj7V5w=;
+ b=JMsK1/v701qjYU6XisrkwCJohmdg9dDyxlO2OJTAzzw9ap2h+Ul4YZw0lBqF15+8cB
+ 4hNJIry/NZg+djA+pUkZD4clhiLefhv2n09xL/Fq4s50UeEZuQa8oDrFUu6NSlo4oqdf
+ OxDBbMyVNL8K8DCMWMVXMNlM4u1ULePg51JJg4qeWveHlvlalwkRIM+YDaGy+a6bN6Na
+ Tuj/+yl0CLU5S3cCD8Rxhhz/6NX2srPojj5Dpxe1/6oToinQlPPQfbbMZtVJLMuEYTbd
+ +x5nwP4WFloymh35MLiZy97MxZ6eyeNpB8x3WpH5Rja5sBHxttsPkT5zTPLHpbhQ9fVa
+ L+3Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=lJcKZk8/IoSvhj7jWvlyxigM7z8UqdXfxfgYKDykwLY=;
- b=Iyd3+V6NZ2+0qyhMpTZr7qwoflIhY5XObyXG6mkcb7a3QVQij7wazJmivpk40YKMNO
- hyj9oKyVSFCcXTWeRleApsjVmnuSHEqMkf0/sVToZG1WT6Ry8XOECKVuKjP1aOuloSq8
- ZdEUmAhgKMkcg4lhf87HjNCp4rEAUF6iL0/yCLUTbbrwgBeM9xs/mCUhFzLRJsSSD6ez
- 7LYSc1FK0r9UcYuL+axvNFMAyHZp/VSi9YFAL10SBCVWt+jMgP9f02PaPu3v6iDSxO8E
- 5EgCheeknzo7IpWbuvvnJnQLrCDJbKw2qwj//U1FioKvbuniFR19i77/bsRi0eOzZBLA
- 0B4A==
-X-Gm-Message-State: APjAAAVV9bRJhZ4VoBciGS5NX5dcthnwKSkvBOxlQuEgYe/T0QYtYtsq
- wdb7+Jbst8Z5t7mzMY46HmlKTYxKlFhFrrZTtMQ=
-X-Google-Smtp-Source: APXvYqyonzFrGrNnWzXCasu1TtEIUoV7KvsVKuw+9Q7BomhBeH+NioUYddlfqusODWnnx5LOQ/Dc1DeWIHNVqJPpmMU=
-X-Received: by 2002:ac2:484a:: with SMTP id 10mr4209412lfy.135.1569621166581; 
- Fri, 27 Sep 2019 14:52:46 -0700 (PDT)
+ :message-id:subject:to:cc;
+ bh=jkOir/wyT+RF7Mh1S6xJDDGBy1VpXPxRvS0hvYj7V5w=;
+ b=R9kqdLrY7fUPftD21bbz+f/zvSaj981c89+oycXkNuQ75pLanNWBAKnnUiGyjeeblu
+ EZXpZBTVijV5C1xIQVHLurGOKDNBduCXeTiiTUzf4eWqqGBL/AzP/OFdgHnzHTlviZl7
+ xcMHHRHvWe/isgRE3Ur/uVfA5N/+T6IfAeKXqkeFj3I6Nw+rRyZgrSoZe/eBBkdwEO3J
+ yDbr87/u35/ijzGiICYVUSD1dbAkLu5FsOr/IgbD2q1SeTwViCGxjq/iMHLRguWsRweR
+ q/a3BSSSorEW7FeTHPFFi1uiui6m3bq+qmnR8Ol07IpA117PF8GCYS3NgaoxnRuGGK2I
+ pfWQ==
+X-Gm-Message-State: APjAAAVKvmMPdbylBUZ0SqUBCnU3gh1ARqkft0D3/XaiSuKTAWis5NGe
+ bpqf4UONmoiKIWq/6/mxU9VyZQ7Y25VA2eghZYg=
+X-Google-Smtp-Source: APXvYqwizPplLTwwerFLg9f5p8Wwjc9EHKz1KaMYJd1LpuPSvctc5I/Q6xzNkDhzu0JkXWDu6CQp2bcDrkJ+Vb+LEms=
+X-Received: by 2002:ac2:5e9e:: with SMTP id b30mr4235200lfq.5.1569621261054;
+ Fri, 27 Sep 2019 14:54:21 -0700 (PDT)
 MIME-Version: 1.0
-References: <98e88256-7a88-b505-9bde-0836cf21c654@linaro.org>
- <mhng-a709557f-be85-4a1e-9f95-d708e95c540e@palmer-si-x1e>
-In-Reply-To: <mhng-a709557f-be85-4a1e-9f95-d708e95c540e@palmer-si-x1e>
+References: <cover.1568931866.git.alistair.francis@wdc.com>
+ <0a5c141a26fada6d93d06e996a2f24e1b269ec50.1568931866.git.alistair.francis@wdc.com>
+ <CAEUhbmVvDKQqQYE-riq=cvSrCe_NMoW_KDsLjh8CVHRUhJvk9A@mail.gmail.com>
+ <CAKmqyKOofA3U+8kjMkzQ0sNd1=uwJHq3c9eaLZdoNCb7=e-PAw@mail.gmail.com>
+ <CAFEAcA-uFPGf4BiDXH=Om3Df-xXrt7QwjzVF7E3kY4aMWMP4YQ@mail.gmail.com>
+ <CAKmqyKP3T79qVUXftO=0hmhYbD9MKccdvsAcs=_4CQFoNmfucw@mail.gmail.com>
+ <87a7aszr5p.fsf@dusky.pond.sub.org>
+In-Reply-To: <87a7aszr5p.fsf@dusky.pond.sub.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 27 Sep 2019 14:47:59 -0700
-Message-ID: <CAKmqyKNp=-CezYO0OMKwmM0a0p7VKUhv7K3dDr1OUbyY+JVyAw@mail.gmail.com>
-Subject: Re: [Qemu-devel] [PATCH v3 33/50] target/riscv: fetch code with
- translator_ld
-To: Palmer Dabbelt <palmer@sifive.com>
-Cc: Richard Henderson <richard.henderson@linaro.org>, 
- "open list:RISC-V" <qemu-riscv@nongnu.org>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
+Date: Fri, 27 Sep 2019 14:49:33 -0700
+Message-ID: <CAKmqyKNdE5C2eKeLWi7vUU=_GVp0+9stNHcNV=6UyZ+LoZnhBg@mail.gmail.com>
+Subject: Re: [PATCH v1 5/6] riscv/virt: Add the PFlash CFI01 device
+To: Markus Armbruster <armbru@redhat.com>
+Cc: Peter Maydell <peter.maydell@linaro.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Palmer Dabbelt <palmer@sifive.com>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "Emilio G. Cota" <cota@braap.org>, 
- Alistair Francis <Alistair.Francis@wdc.com>,
- =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::142
+X-Received-From: 2a00:1450:4864:20::143
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -74,39 +73,58 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Sep 2019 21:52:52 -0000
+X-List-Received-Date: Fri, 27 Sep 2019 21:54:25 -0000
 
-On Wed, Jun 19, 2019 at 3:50 AM Palmer Dabbelt <palmer@sifive.com> wrote:
+On Wed, Sep 25, 2019 at 2:00 AM Markus Armbruster <armbru@redhat.com> wrote:
 >
-> On Mon, 17 Jun 2019 15:38:45 PDT (-0700), richard.henderson@linaro.org wr=
-ote:
-> > On 6/14/19 10:11 AM, Alex Benn=C3=A9e wrote:
-> >> +++ b/target/riscv/translate.c
-> >> @@ -793,7 +793,7 @@ static void riscv_tr_translate_insn(DisasContextBa=
-se *dcbase, CPUState *cpu)
-> >>      DisasContext *ctx =3D container_of(dcbase, DisasContext, base);
-> >>      CPURISCVState *env =3D cpu->env_ptr;
+> Alistair Francis <alistair23@gmail.com> writes:
+>
+> > On Mon, Sep 23, 2019 at 2:46 PM Peter Maydell <peter.maydell@linaro.org> wrote:
 > >>
-> >> -    ctx->opcode =3D cpu_ldl_code(env, ctx->base.pc_next);
-> >> +    ctx->opcode =3D translator_ldl(env, ctx->base.pc_next);
+> >> On Fri, 20 Sep 2019 at 23:23, Alistair Francis <alistair23@gmail.com> wrote:
+> >> > On Thu, Sep 19, 2019 at 10:15 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+> >> > > I don't think we should mirror what is used on ARM virt board to
+> >> > > create 2 flash for sifive_u. For ARM virt, there are 2 flashes because
+> >> > > they need distinguish secure and non-secure. For sifive_u, only one is
+> >> > > enough.
+> >> >
+> >> > I went back and forward about 1 or 2. Two seems more usable as maybe
+> >> > someone wants to include two pflash files? The Xilinx machine also has
+> >> > two so I'm kind of used to 2, but I'm not really fussed.
+> >>
+> >> One of the reasons for having 2 on the Arm board (we do this
+> >> even if we're not supporting secure vs non-secure) is that
+> >> then you can use one for a fixed read-only BIOS image (backed
+> >> by a file on the host filesystem shared between all VMs), and
+> >> one backed by a read-write per-VM file providing permanent
+> >> storage for BIOS environment variables. Notably UEFI likes to
+> >> work this way, but the idea applies in theory to other
+> >> boot loader or BIOSes I guess.
 > >
-> > I'll note for the riscv folks that this is an existing bug, reading too=
- much in
-> > the case of an RVC instruction.  This could well matter for the last 2-=
-byte
-> > instruction at the end of a page.
-> >
-> > Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+> > This seems like a good reason to have two and there isn't really a
+> > disadvantage so I have kept it with two.
 >
-> Thanks for pointing this out.  I'm checking the ISA semantics with Andrew=
- to
-> make sure I've got it right, as there's some implicit wording in the docu=
-ment
-> that doesn't quite do what I'd expect it to.
+> Good.
+>
+> Implementing sector locking would be even better.  I'm not asking you to
+> do that work.
+>
+> >> I would suggest also checking with Markus that your code
+> >> for instantiating the flash devices follows the current
+> >> recommendations so the backing storage can be configured
+> >> via -blockdev. (This is a fairly recent change from June or
+> >> so; current-in-master virt and sbsa boards provide an example
+> >> of doing the right thing, I think.)
+> >
+> > I have updated the code to more closely match the ARM virt machine, so
+> > I think I'm doing it correctly.
+>
+> You might want to consider omitting legacy configuration options -drive
+> if=pflash and -bios for a simpler interface.
 
-Did we figure out what to do here?
+We just moved to -bios and it's been really helpful.
+
+Doesn't -pflash use -drive if=pflash? How else should these be attached?
 
 Alistair
-
->
 
