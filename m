@@ -1,62 +1,68 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iDy9w-00007s-S8
-	for mharc-qemu-riscv@gnu.org; Fri, 27 Sep 2019 17:52:16 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37564)
+	id 1iDyAY-0000g7-2m
+	for mharc-qemu-riscv@gnu.org; Fri, 27 Sep 2019 17:52:55 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:37715)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <alistair23@gmail.com>) id 1iDy9p-0008Vq-FX
- for qemu-riscv@nongnu.org; Fri, 27 Sep 2019 17:52:11 -0400
+ (envelope-from <alistair23@gmail.com>) id 1iDyAT-0000d1-W4
+ for qemu-riscv@nongnu.org; Fri, 27 Sep 2019 17:52:52 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1iDy9m-0001AM-Aj
- for qemu-riscv@nongnu.org; Fri, 27 Sep 2019 17:52:09 -0400
-Received: from mail-lf1-x143.google.com ([2a00:1450:4864:20::143]:41135)
+ (envelope-from <alistair23@gmail.com>) id 1iDyAS-0001ds-UB
+ for qemu-riscv@nongnu.org; Fri, 27 Sep 2019 17:52:49 -0400
+Received: from mail-lf1-x142.google.com ([2a00:1450:4864:20::142]:44107)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1iDy9b-0000tH-Bw; Fri, 27 Sep 2019 17:51:59 -0400
-Received: by mail-lf1-x143.google.com with SMTP id r2so2965852lfn.8;
- Fri, 27 Sep 2019 14:51:52 -0700 (PDT)
+ id 1iDyAS-0001dF-NG; Fri, 27 Sep 2019 17:52:48 -0400
+Received: by mail-lf1-x142.google.com with SMTP id q11so2960649lfc.11;
+ Fri, 27 Sep 2019 14:52:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=BLBr7qiWAfyYl/v8+1LEkv7+EHsq3wG4rWqEdWOyVVc=;
- b=UpnHg/fM814d+qRvJDmmYAtzTbvz/aI2wP9H2PNG8Q5GNfIM5HJdmhR20aTuq4byCa
- JA/aBTEgA5uHcUb6zZYcVXlVZTLbKj8hPZGjUBJD6Hf6EYfoUL15Ae/tEyVAthQCM4s3
- hz8GPGAuGl+F/PlI2od22POjinDuihHLGHfY1hWxkX36msLBFL6VLixn1SRnOU3plZpH
- gYw46Pu3czH9hA6iCq2ovrw8ADuJIDjKOzBHN1QSJJI/DRSbi9v/aOYV8hvCeU7PsldQ
- iqgr6+yViSRHC8f5LPEa46E3aR++7uv3/lkiQ/xTElk9Y1MncNG/YGI3q2LrHBtMvK2U
- GQBw==
+ :cc:content-transfer-encoding;
+ bh=lJcKZk8/IoSvhj7jWvlyxigM7z8UqdXfxfgYKDykwLY=;
+ b=S7fJFqfJ/NjODtXLl85taQuTnuSx+f4bJxlaLKaRWJM1dD7KxFiyMaWKxCq6Q65SU9
+ Bh7alMry3k1bBejOZgBUC0ZPR/jzWrjPa3bqh+Fjkcrtzz4nOvkPMY0TutAnZo8y36+v
+ 2Znu7TydSOllLIaYeWeI2PD0wio8AxJT1QMxgFTuVgdKoprkVnq3T7q6VUBNCPu//owV
+ xnltIoZ/zJ/xgwfBlorrniHoO7ywLo4+3qFKhVxGLbTE6nsdvtQgkg0rOpxy+vgDcL+J
+ BOenb7cgxKrwc6W6hBNQJHlnl0unyGlXkV/yQW/PVDYL2ejHLguDOEL3s/Y7LJ0oTAmr
+ mqXA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=BLBr7qiWAfyYl/v8+1LEkv7+EHsq3wG4rWqEdWOyVVc=;
- b=rrg8d90wBCzAfXG4MSpI1MygDAXb6YGKxZOoazycKHbhVnz0fzyB8Y+1cZ2X/5iI52
- 9WFcnIazCM9UdhT+pFK2cP1wAKbU03cKp8iVXTNKYb13AGcoN5ZMq1ZO27GvvqX9yVpP
- 8q3wBwAqSd7oThBkn/BGZl9/cjhsXOQ/BgzVbCAZmH3nD1ow4wI3wrQb/dQ4eAwW/vLB
- 4p+DNXj0Lsj0U1xd8rt2H5Ww0MHLKZ8uwIEICmwn1uGwMQ30dCZHLuFp13/K9OgFDcgm
- lx/Nr7iaFPEu68jEFwlS/g+b0g6tLRGjgV2TNdrUl6AhbP9wMN6B/BAR+em7MvpYhpRJ
- pTGg==
-X-Gm-Message-State: APjAAAU0NzmP6anbEoUF+kOKAPQe2glLHAk9z1l+Fdrb5SETr382/4VG
- v4VtfFC9Lok65nK2fatEP0MLV2cu85l1n4Bsngc=
-X-Google-Smtp-Source: APXvYqys1PzcQ0RXjf19NdGe/VFEyKwjB1ruDI/i7FPiNrI8itTEZEEI8CVWsGiyfFGxOHnFIzxeVZWzpmA6u7XnGDk=
-X-Received: by 2002:a19:4912:: with SMTP id w18mr4049708lfa.93.1569621111014; 
- Fri, 27 Sep 2019 14:51:51 -0700 (PDT)
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=lJcKZk8/IoSvhj7jWvlyxigM7z8UqdXfxfgYKDykwLY=;
+ b=Iyd3+V6NZ2+0qyhMpTZr7qwoflIhY5XObyXG6mkcb7a3QVQij7wazJmivpk40YKMNO
+ hyj9oKyVSFCcXTWeRleApsjVmnuSHEqMkf0/sVToZG1WT6Ry8XOECKVuKjP1aOuloSq8
+ ZdEUmAhgKMkcg4lhf87HjNCp4rEAUF6iL0/yCLUTbbrwgBeM9xs/mCUhFzLRJsSSD6ez
+ 7LYSc1FK0r9UcYuL+axvNFMAyHZp/VSi9YFAL10SBCVWt+jMgP9f02PaPu3v6iDSxO8E
+ 5EgCheeknzo7IpWbuvvnJnQLrCDJbKw2qwj//U1FioKvbuniFR19i77/bsRi0eOzZBLA
+ 0B4A==
+X-Gm-Message-State: APjAAAVV9bRJhZ4VoBciGS5NX5dcthnwKSkvBOxlQuEgYe/T0QYtYtsq
+ wdb7+Jbst8Z5t7mzMY46HmlKTYxKlFhFrrZTtMQ=
+X-Google-Smtp-Source: APXvYqyonzFrGrNnWzXCasu1TtEIUoV7KvsVKuw+9Q7BomhBeH+NioUYddlfqusODWnnx5LOQ/Dc1DeWIHNVqJPpmMU=
+X-Received: by 2002:ac2:484a:: with SMTP id 10mr4209412lfy.135.1569621166581; 
+ Fri, 27 Sep 2019 14:52:46 -0700 (PDT)
 MIME-Version: 1.0
-References: <cover.1569545046.git.alistair.francis@wdc.com>
- <bf4f869cab915364855a1c9ffadfeac16b151e4b.1569545046.git.alistair.francis@wdc.com>
- <CAEUhbmVBDs5dNH06BjA=Xsa_AEtqoaA6Nm04VtY9-nxJUhmkPQ@mail.gmail.com>
-In-Reply-To: <CAEUhbmVBDs5dNH06BjA=Xsa_AEtqoaA6Nm04VtY9-nxJUhmkPQ@mail.gmail.com>
+References: <98e88256-7a88-b505-9bde-0836cf21c654@linaro.org>
+ <mhng-a709557f-be85-4a1e-9f95-d708e95c540e@palmer-si-x1e>
+In-Reply-To: <mhng-a709557f-be85-4a1e-9f95-d708e95c540e@palmer-si-x1e>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 27 Sep 2019 14:47:04 -0700
-Message-ID: <CAKmqyKMiZ6gNn6rgABfa=QWL_X4oXVN1Pd4itFzFoR66=hgQhQ@mail.gmail.com>
-Subject: Re: [PATCH v2 1/7] riscv/sifive_u: Add L2-LIM cache memory
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Alistair Francis <alistair.francis@wdc.com>, 
+Date: Fri, 27 Sep 2019 14:47:59 -0700
+Message-ID: <CAKmqyKNp=-CezYO0OMKwmM0a0p7VKUhv7K3dDr1OUbyY+JVyAw@mail.gmail.com>
+Subject: Re: [Qemu-devel] [PATCH v3 33/50] target/riscv: fetch code with
+ translator_ld
+To: Palmer Dabbelt <palmer@sifive.com>
+Cc: Richard Henderson <richard.henderson@linaro.org>, 
+ "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Palmer Dabbelt <palmer@sifive.com>
+ "Emilio G. Cota" <cota@braap.org>, 
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::143
+X-Received-From: 2a00:1450:4864:20::142
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -68,41 +74,39 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Sep 2019 21:52:12 -0000
+X-List-Received-Date: Fri, 27 Sep 2019 21:52:52 -0000
 
-On Fri, Sep 27, 2019 at 12:57 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+On Wed, Jun 19, 2019 at 3:50 AM Palmer Dabbelt <palmer@sifive.com> wrote:
 >
-> On Fri, Sep 27, 2019 at 8:52 AM Alistair Francis
-> <alistair.francis@wdc.com> wrote:
+> On Mon, 17 Jun 2019 15:38:45 PDT (-0700), richard.henderson@linaro.org wr=
+ote:
+> > On 6/14/19 10:11 AM, Alex Benn=C3=A9e wrote:
+> >> +++ b/target/riscv/translate.c
+> >> @@ -793,7 +793,7 @@ static void riscv_tr_translate_insn(DisasContextBa=
+se *dcbase, CPUState *cpu)
+> >>      DisasContext *ctx =3D container_of(dcbase, DisasContext, base);
+> >>      CPURISCVState *env =3D cpu->env_ptr;
+> >>
+> >> -    ctx->opcode =3D cpu_ldl_code(env, ctx->base.pc_next);
+> >> +    ctx->opcode =3D translator_ldl(env, ctx->base.pc_next);
 > >
-> > On reset only a single L2 cache way is enabled, the others are exposed
-> > as memory that can be used by early boot firmware. This L2 region is
-> > generally disabled using the WayEnable register at a later stage in the
-> > boot process. To allow firmware to target QEMU and the HiFive Unleashed
-> > let's add the L2 LIM (LooselyIntegrated Memory).
+> > I'll note for the riscv folks that this is an existing bug, reading too=
+ much in
+> > the case of an RVC instruction.  This could well matter for the last 2-=
+byte
+> > instruction at the end of a page.
 > >
-> > Ideally we would want to adjust the size of this chunk of memory as the
-> > L2 Cache Controller WayEnable register is incremented. Unfortunately I
-> > don't see a nice way to handle reducing or blocking out the L2 LIM while
-> > still allowing it be re returned to all enabled from a reset.
-> >
-> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> > ---
+> > Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 >
-> Please include a changelog in the future. otherwise it's hard to track
-> what is changed between patch versions.
+> Thanks for pointing this out.  I'm checking the ISA semantics with Andrew=
+ to
+> make sure I've got it right, as there's some implicit wording in the docu=
+ment
+> that doesn't quite do what I'd expect it to.
 
-I normally just include one in the cover letter, individual patch
-change logs can be a bit of a pain to maintain. I'll try to do a
-better job in the future.
+Did we figure out what to do here?
 
 Alistair
 
 >
-> >  hw/riscv/sifive_u.c         | 16 ++++++++++++++++
-> >  include/hw/riscv/sifive_u.h |  1 +
-> >  2 files changed, 17 insertions(+)
-> >
->
-> Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
 
