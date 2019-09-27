@@ -1,80 +1,119 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iDmGN-0007Ze-67
-	for mharc-qemu-riscv@gnu.org; Fri, 27 Sep 2019 05:10:07 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:54812)
+	id 1iDplD-0003YL-VZ
+	for mharc-qemu-riscv@gnu.org; Fri, 27 Sep 2019 08:54:11 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:52441)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <philmd@redhat.com>) id 1iDmGJ-0007Ue-8k
- for qemu-riscv@nongnu.org; Fri, 27 Sep 2019 05:10:04 -0400
+ (envelope-from <prvs=1667f8e37=Anup.Patel@wdc.com>)
+ id 1iDpl9-0003TJ-UX
+ for qemu-riscv@nongnu.org; Fri, 27 Sep 2019 08:54:09 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <philmd@redhat.com>) id 1iDmGI-0002Ya-4m
- for qemu-riscv@nongnu.org; Fri, 27 Sep 2019 05:10:03 -0400
-Received: from us-smtp-delivery-1.mimecast.com ([205.139.110.120]:25923
- helo=us-smtp-1.mimecast.com)
+ (envelope-from <prvs=1667f8e37=Anup.Patel@wdc.com>)
+ id 1iDpl8-0001hi-C9
+ for qemu-riscv@nongnu.org; Fri, 27 Sep 2019 08:54:07 -0400
+Received: from esa2.hgst.iphmx.com ([68.232.143.124]:38358)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <philmd@redhat.com>) id 1iDmGH-0002Xl-W6
- for qemu-riscv@nongnu.org; Fri, 27 Sep 2019 05:10:02 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1569575401;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:openpgp:openpgp;
- bh=P9psUB6/KiwaS9H3i7HotZch7N5x0EpQX8KuIQgs6HY=;
- b=fvHnvUWqVwmI3pwYQoiYN+oQG1lpQ/KOioIICQBubseZY5nVOMDpEpXmoIYsmF/PZ95fOx
- 91a6VzdgSH7xzgaRLLFfZkw8ahJDj0xeZ42Rj/BrvHkJDcrz+frAoVqy19ShUGeBgbGIZK
- xOjX2ytfijEmEEX0mzcowQE6BzMBel8=
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-294-xAeSIZ5vP8GIi2XPw3WB8Q-1; Fri, 27 Sep 2019 05:09:59 -0400
-Received: by mail-wm1-f70.google.com with SMTP id k184so2482981wmk.1
- for <qemu-riscv@nongnu.org>; Fri, 27 Sep 2019 02:09:59 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
- :date:user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=nlNeTP7NbLjKSuFudQImRwe8GPXTrHcfQIxAIjyT0I0=;
- b=WbnfFMhu78j6p8aAt9S2BN8jefaRZjPn5owcy+BFTazfMA9uMnTaLfuZNGnX2iqp4d
- 4HRTrVgSfknydFsKVNV5EW7Tz62hFs1AN49D2eZ0jV6NvjaXqXcRKStJA7SdlTZbfvAL
- t34bo74mIne0pQ8i1NPmaMuzhgYeAdnupdQXdKQL0+gD2RVspuwhcFH5EU8G4JdYx415
- tLoqYSuZux+o2qtRfngs0JkmGB3qiYExDa2OXMuzoIudjpiy3Hh49odEII4/bgraH2mE
- Yo6sLzIbJVkRu7wbjFcd4ybP9DwhmILTvtei9jzEgcBgk/E2593Rt6iLUlj4wK+0jFMA
- UKpg==
-X-Gm-Message-State: APjAAAVGDTLzVl83WHiTtqx/IHhznMkAuQomjN/tSLWbSgeWwxJsOiKE
- TKOL/ShkCurrWpgKbZkJrmwchkZr57n1G0Ytcp9DA4OUYd//LztrTGaolr3sc6ge+9YKD4yHkqX
- wT8GZOBSQuzTmGFE=
-X-Received: by 2002:a1c:4e01:: with SMTP id g1mr5816495wmh.134.1569575398623; 
- Fri, 27 Sep 2019 02:09:58 -0700 (PDT)
-X-Google-Smtp-Source: APXvYqxf0TOaXmlFkKoUgI2m5CkYyzKOgy48FTz49Sv3XC4NTR/F+DQOrN/vZQWUpX4ZXjXjRTmtAQ==
-X-Received: by 2002:a1c:4e01:: with SMTP id g1mr5816486wmh.134.1569575398455; 
- Fri, 27 Sep 2019 02:09:58 -0700 (PDT)
-Received: from [192.168.1.35] (240.red-88-21-68.staticip.rima-tde.net.
- [88.21.68.240])
- by smtp.gmail.com with ESMTPSA id n8sm9425071wma.7.2019.09.27.02.09.57
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 27 Sep 2019 02:09:57 -0700 (PDT)
-Subject: Re: [PATCH v1 1/1] target/riscv: Print CPU and privledge in disas
-To: Alistair Francis <alistair.francis@wdc.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: alistair23@gmail.com, palmer@sifive.com
-References: <ab8f108eceb973aaee565bb1fe347fcf8c788f5b.1569545120.git.alistair.francis@wdc.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>
-Openpgp: id=89C1E78F601EE86C867495CBA2A3FD6EDEADC0DE;
- url=http://pgp.mit.edu/pks/lookup?op=get&search=0xA2A3FD6EDEADC0DE
-Message-ID: <7ffed750-767a-40be-4ef1-d52aad93f2e5@redhat.com>
-Date: Fri, 27 Sep 2019 11:09:57 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.7.0
-MIME-Version: 1.0
-In-Reply-To: <ab8f108eceb973aaee565bb1fe347fcf8c788f5b.1569545120.git.alistair.francis@wdc.com>
+ (Exim 4.71) (envelope-from <prvs=1667f8e37=Anup.Patel@wdc.com>)
+ id 1iDpl7-0001gq-FO; Fri, 27 Sep 2019 08:54:06 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1569588868; x=1601124868;
+ h=from:to:cc:subject:date:message-id:references:
+ in-reply-to:content-transfer-encoding:mime-version;
+ bh=ZgXu6EP89eScVxxMMksOAviahy2Xh4HX0Qb4xZcaFeU=;
+ b=An1IcI0BKHQpQS6XZY3TbnbZLlCP0qrvA709IdwVwR4qRZIx09+JCWda
+ nf2BeYPWify+fk7r3C9KT8xrJn2QdJMJ8Y2PCthbO/xPAcObqEbhMbGub
+ M7t80WcUtBMpeAjcYVJ/n9FVhtQ8Xw8HIcEXT62Uer1VGX+Gc0iv4Ezjt
+ 4q7bBR5rI3kBKki4+SiH4xDjI3c4SBh8hnVKfpW+j06uhxA+tIMACX7Z7
+ jdYePiNui/QznfhnIr76N/UoWPGzgQbMWHfbqyHuHTS4yZDFutQ24yaEb
+ vE7Dkq/uGvVhLul0MVNv+7kLBtds4E4JQL6VihcqX3rIJxiCBs8pdYGua A==;
+IronPort-SDR: aXL+zQ9E77m3hz/AL5SWZnlmiXSimbA77NYxicuhjCEt8nbXWC1N6okbDYdhMKzg7xv81mT6T8
+ 9PyXtEmhfuMzHt+wIWHJRaFfeNf4/SOM5VupK7lchghBE4QDBKX/QI+IlVyREGuc1Vj4S/v2Om
+ 6jnm+lnIkLb7GmkUG55CvzxMWYctUvkupBw48q3cRCXkEgDUG1AhnJYV/+sBkeyG8hoOMOfnzk
+ GaHDakFBqiuwPxwGVNnEaRYhNs2yIu7TGos06ZnZ608YpioQHCSqM2yNizSadoOPFKLfollcz1
+ CzU=
+X-IronPort-AV: E=Sophos;i="5.64,555,1559491200"; d="scan'208";a="220147513"
+Received: from mail-bn3nam04lp2055.outbound.protection.outlook.com (HELO
+ NAM04-BN3-obe.outbound.protection.outlook.com) ([104.47.46.55])
+ by ob1.hgst.iphmx.com with ESMTP; 27 Sep 2019 20:39:53 +0800
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=ABCk5UrJaS/7vNgMQSQxKEDAbehshLKjEZe6UJsqX2WnF35wtJMCL8enayW/JDPdSJN1nKggHEBvjWKCcTbyCaGqXXZBDctWPF9GM+ig6Wm5MS6b6bWcL4NH55BUkk+9Tc1/sg1HJJ7qBYBC5FiixOaB13TSt5NAgd19oG8a5q5d8uO1JnBuVz/SXgumM/SBGsCpwb/yRFrRtVBKrYoD2H9YOKrxDderJlhnxwNrzwX7cNpK0ix9COj7f+Xgk8nqCJbCHXsfoQjglH5+Ye8oCga0VoxxNarNSYkLM9jbTpcPFEA3at7dNf18jVEy2V9t1ajTNhy8yPWzb2dO379GLA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=KPmyxJkmMJdUUq88TMQlMwQptqKbivhNiQmIAN9Kzzs=;
+ b=K+x3nXW6l5hkMjORrjSjBUPj08Wq732jvaYruB72CIb1MRhCxOffrw1QslD7wKWYRWp8nmhRj6PIugHsG5gkdVrWq7MFf/sX68jeKPIGzLtQNvJMPnz24HF20waDkOtuudvgn0pt3WSX4D5C3+yxSf5cwE77YyDlcxTYlRZux9chYL7+m4Cq0V3+6ko7UTnnp8BaHDkeI8WRN9g7oxt7wTI0gbUbH5DG89LXxI28RUtb52VTNsDVibFuUxMLtfBFQdJrBzFDgrCWb2Arf33RefqJboRqy6YMpfh4i2GyKtyzHsHZL0X3X76u5YSQHS1O3KCB9LG5OvxzdOd4i8J4Ew==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=wdc.com; dmarc=pass action=none header.from=wdc.com; dkim=pass
+ header.d=wdc.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=KPmyxJkmMJdUUq88TMQlMwQptqKbivhNiQmIAN9Kzzs=;
+ b=J3LyeHD4A2Awk20bVLx1krvr3HqcTu1dn3A+jWOjNhtIAZUS4rhZpUddCzak3wnVxNbKX9UDZr3G/7Rm8z8YEWklJSeo1gsdSi7IpkF/Y1J4yyQch1ZFxisq5RRK/e+jPvfRdo+QrukrmeY0pjBd+tKlempnGerHNHDtPygA7fw=
+Received: from MN2PR04MB6061.namprd04.prod.outlook.com (20.178.246.15) by
+ MN2PR04MB5711.namprd04.prod.outlook.com (20.179.23.18) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.2305.18; Fri, 27 Sep 2019 12:39:11 +0000
+Received: from MN2PR04MB6061.namprd04.prod.outlook.com
+ ([fe80::e1a5:8de2:c3b1:3fb0]) by MN2PR04MB6061.namprd04.prod.outlook.com
+ ([fe80::e1a5:8de2:c3b1:3fb0%7]) with mapi id 15.20.2284.028; Fri, 27 Sep 2019
+ 12:39:10 +0000
+From: Anup Patel <Anup.Patel@wdc.com>
+To: "Richard W.M. Jones" <rjones@redhat.com>
+CC: Palmer Dabbelt <palmer@sifive.com>, Alistair Francis
+ <Alistair.Francis@wdc.com>, Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, Atish Patra
+ <Atish.Patra@wdc.com>, "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>,
+ "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, Anup Patel
+ <anup@brainfault.org>
+Subject: RE: [PATCH 0/2] RTC support for QEMU RISC-V virt machine
+Thread-Topic: [PATCH 0/2] RTC support for QEMU RISC-V virt machine
+Thread-Index: AQHVcrQDVebPiIecyUaeeiRl9lWtHKc/bjGAgAADe6CAAAeygIAAAFIQ
+Date: Fri, 27 Sep 2019 12:39:10 +0000
+Message-ID: <MN2PR04MB6061EFA89098F03C51ED173E8D810@MN2PR04MB6061.namprd04.prod.outlook.com>
+References: <20190924084201.107958-1-anup.patel@wdc.com>
+ <20190927115047.GA6575@redhat.com>
+ <MN2PR04MB6061BA18651453F590A1CE738D810@MN2PR04MB6061.namprd04.prod.outlook.com>
+ <20190927123047.GO3888@redhat.com>
+In-Reply-To: <20190927123047.GO3888@redhat.com>
+Accept-Language: en-US
 Content-Language: en-US
-X-MC-Unique: xAeSIZ5vP8GIi2XPw3WB8Q-1
-X-Mimecast-Spam-Score: 0
-Content-Type: text/plain; charset=UTF-8
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: spf=none (sender IP is )
+ smtp.mailfrom=Anup.Patel@wdc.com; 
+x-originating-ip: [49.207.51.217]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: 9609d91f-1660-4fd2-d99d-08d74347b255
+x-ms-office365-filtering-ht: Tenant
+x-ms-traffictypediagnostic: MN2PR04MB5711:
+x-ms-exchange-purlcount: 1
+x-ms-exchange-transport-forked: True
+x-microsoft-antispam-prvs: <MN2PR04MB57113FA6C16ECA03F4E456388D810@MN2PR04MB5711.namprd04.prod.outlook.com>
+wdcipoutbound: EOP-TRUE
+x-ms-oob-tlc-oobclassifiers: OLM:4714;
+x-forefront-prvs: 0173C6D4D5
+x-forefront-antispam-report: SFV:NSPM;
+ SFS:(10019020)(4636009)(366004)(39860400002)(346002)(396003)(376002)(136003)(13464003)(199004)(189003)(81156014)(8676002)(81166006)(229853002)(8936002)(33656002)(25786009)(9686003)(6306002)(66446008)(14454004)(5660300002)(966005)(66556008)(478600001)(6246003)(55016002)(64756008)(99286004)(66946007)(66476007)(2906002)(4326008)(86362001)(76116006)(186003)(6916009)(53546011)(6506007)(52536014)(486006)(11346002)(476003)(7736002)(6436002)(55236004)(102836004)(305945005)(446003)(316002)(26005)(66066001)(71190400001)(71200400001)(7696005)(6116002)(14444005)(256004)(54906003)(3846002)(74316002)(76176011);
+ DIR:OUT; SFP:1102; SCL:1; SRVR:MN2PR04MB5711;
+ H:MN2PR04MB6061.namprd04.prod.outlook.com; FPR:; SPF:None; LANG:en;
+ PTR:InfoNoRecords; A:1; MX:1; 
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: Mzpn1p9nmbf5tNOhguillFnFIUpBC97qWp8mRYz6gvAoKEuyTNeNW6Hdx219j/MvAkxAieiZV2fyPJbgOroNkA1i23gCqGhXuap+Q7IQnOd1EVXo82aM1Pc+BPXmYNSThYXFloeyVkYZrJlQALapxRIOWsViqDYubZXIhtuefIpgmMMCc2dguDzCMr4/vXQ0EJx0tmgX2vPEpkZrtgd91zNptZTl/EpOTRdFVRuHgknNfSMXqJMmkAU/wdgrxnl40R/2oYkdZ3U84uGH3nb1auHJh/gu3IVRyYy8Ovkd8/tSZ8s+Ri+VvCxnC0bijHLykqQ1HbuwbenfPYvTvprKXxwjdHwdAJzcFpDJK+1jacN43YDecYGFsZnbksMPsdKnZp2I0h3AQSVdy9eYMFYJIHXYSZ5eIreI5MSmGw9nIuuF9uFy3JtOXISTn+Mlo3JDAmlWcsY5YHDbAhzK7klsdg==
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
- [fuzzy]
-X-Received-From: 205.139.110.120
+MIME-Version: 1.0
+X-OriginatorOrg: wdc.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9609d91f-1660-4fd2-d99d-08d74347b255
+X-MS-Exchange-CrossTenant-originalarrivaltime: 27 Sep 2019 12:39:10.8185 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: 5dCbeTYBFY3DhEi6NnairkPlc73lDBYwtUIaUeTKy5/N3z4Ga+Yhb2MtYYQbqOc5qztvsM5/kP3sv1mHEki66A==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR04MB5711
+X-detected-operating-system: by eggs.gnu.org: FreeBSD 9.x [fuzzy]
+X-Received-From: 68.232.143.124
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -86,57 +125,84 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Sep 2019 09:10:05 -0000
+X-List-Received-Date: Fri, 27 Sep 2019 12:54:10 -0000
 
-On 9/27/19 2:45 AM, Alistair Francis wrote:
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> ---
->  target/riscv/translate.c | 7 +++++++
->  1 file changed, 7 insertions(+)
+
+
+> -----Original Message-----
+> From: Richard W.M. Jones <rjones@redhat.com>
+> Sent: Friday, September 27, 2019 6:01 PM
+> To: Anup Patel <Anup.Patel@wdc.com>
+> Cc: Palmer Dabbelt <palmer@sifive.com>; Alistair Francis
+> <Alistair.Francis@wdc.com>; Sagar Karandikar <sagark@eecs.berkeley.edu>;
+> Bastian Koppelmann <kbastian@mail.uni-paderborn.de>; Atish Patra
+> <Atish.Patra@wdc.com>; qemu-riscv@nongnu.org; qemu-
+> devel@nongnu.org; Anup Patel <anup@brainfault.org>
+> Subject: Re: [PATCH 0/2] RTC support for QEMU RISC-V virt machine
 >=20
-> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index adeddb85f6..537af0003e 100644
-> --- a/target/riscv/translate.c
-> +++ b/target/riscv/translate.c
-> @@ -810,7 +810,14 @@ static void riscv_tr_tb_stop(DisasContextBase *dcbas=
-e, CPUState *cpu)
-> =20
->  static void riscv_tr_disas_log(const DisasContextBase *dcbase, CPUState =
-*cpu)
->  {
-> +#ifndef CONFIG_USER_ONLY
-> +    RISCVCPU *rvcpu =3D RISCV_CPU(cpu);
-> +    CPURISCVState *env =3D &rvcpu->env;
-> +#endif
->      qemu_log("IN: %s\n", lookup_symbol(dcbase->pc_first));
-> +#ifndef CONFIG_USER_ONLY
-> +    qemu_log("CPU: %d; priv: "TARGET_FMT_ld"\n", cpu->cpu_index, env->pr=
-iv);
-> +#endif
+> On Fri, Sep 27, 2019 at 12:05:43PM +0000, Anup Patel wrote:
+> >
+> >
+> > > -----Original Message-----
+> > > From: Richard W.M. Jones <rjones@redhat.com>
+> > > Sent: Friday, September 27, 2019 5:21 PM
+> > > To: Anup Patel <Anup.Patel@wdc.com>
+> > > Cc: Palmer Dabbelt <palmer@sifive.com>; Alistair Francis
+> > > <Alistair.Francis@wdc.com>; Sagar Karandikar
+> > > <sagark@eecs.berkeley.edu>; Bastian Koppelmann
+> > > <kbastian@mail.uni-paderborn.de>; Atish Patra
+> <Atish.Patra@wdc.com>;
+> > > qemu-riscv@nongnu.org; qemu- devel@nongnu.org; Anup Patel
+> > > <anup@brainfault.org>
+> > > Subject: Re: [PATCH 0/2] RTC support for QEMU RISC-V virt machine
+> > >
+> > >
+> > > On Tue, Sep 24, 2019 at 08:42:36AM +0000, Anup Patel wrote:
+> > > > This series adds RTC device to QEMU RISC-V virt machine. We have
+> > > > selected Goldfish RTC device model for this. It's a pretty simple
+> > > > synthetic device with few MMIO registers and no dependency
+> > > > external clock. The driver for Goldfish RTC is already available
+> > > > in Linux so we just need to enable it in Kconfig for RISCV and
+> > > > also update Linux defconfigs.
+> > > >
+> > > > We have tested this series with Linux-5.3 plus defconfig changes
+> > > > available in 'goldfish_rtc_v1' branch of:
+> > > > https://github.com/avpatel/linux.git
+> > >
+> > > Why was this device chosen instead of kvm-clock?
+> >
+> > We need a RTC device which worked fine in TCG mode (even without
+> KVM).
+> > The KVMCLOCK is PTP clock which depends on KVM hypercalls.
+> >
+> > On ARM virt machine, we have PL031 so instead of that we have Goldfish
+> > RTC on RISC-V virt machine.
+>=20
+> Could we not make kvm-clock work on TCG (I wasn't aware that it needed
+> actual KVM - I wonder how timekeeping works on TCG?)
+>=20
+> Alternately why not use PL031 here?
 
-Nit: can be extracted as another function to reduce the ifdef'ry and
-simply use:
+PL031 requires input clock.
 
-       log_cpu_priv(cpu);
+Of course, we can provide fake input clock (i.e. some random
+fixed clock) to make it work but it will be a HACK.
 
->      log_target_disas(cpu, dcbase->pc_first, dcbase->tb->size);
->  }
-> =20
+Also, it will be really strange to hook an ARM device into RISC-V
+virt machine. On other hand, Goldfish para-virt devices are used
+across architectures x86, ARM and MIPS.
 
-With function previously defined:
+>=20
+> The reason I'm asking this is because adding a new virtual device means w=
+e
+> have to change this all the way up the stack (libvirt,
+> virt-*) _and_ have special cases everywhere just for RISC-V.  That's a lo=
+ad of
+> extra work for everyone.
 
-static void log_cpu_priv(const CPUState *cpu)
-{
-#ifndef CONFIG_USER_ONLY
-    RISCVCPU *rvcpu =3D RISCV_CPU(cpu);
-    CPURISCVState *env =3D &rvcpu->env;
+The RTC devices are pretty much transparent in usage. I am not sure
+why libvirt will require to know about type of RTC device.
 
-    qemu_log("CPU: %d; priv: "TARGET_FMT_ld"\n", cpu->cpu_index, env->priv)=
-;
-#endif
-}
-
-Anyway, fixing the typo in the patch subject:
-Reviewed-by: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
-
+Regards,
+Anup
 
