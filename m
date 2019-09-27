@@ -1,73 +1,53 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iDqdn-0004hT-8b
-	for mharc-qemu-riscv@gnu.org; Fri, 27 Sep 2019 09:50:35 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:59115)
+	id 1iDqdo-0004io-Gy
+	for mharc-qemu-riscv@gnu.org; Fri, 27 Sep 2019 09:50:36 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58397)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <mark.cave-ayland@ilande.co.uk>) id 1iDpzZ-00006Q-6m
- for qemu-riscv@nongnu.org; Fri, 27 Sep 2019 09:09:03 -0400
+ (envelope-from <rjones@redhat.com>) id 1iDpxX-00077b-TV
+ for qemu-riscv@nongnu.org; Fri, 27 Sep 2019 09:06:57 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <mark.cave-ayland@ilande.co.uk>) id 1iDpzU-0005bI-SG
- for qemu-riscv@nongnu.org; Fri, 27 Sep 2019 09:08:59 -0400
-Received: from mail.ilande.co.uk ([46.43.2.167]:41968
- helo=mail.default.ilande.uk0.bigv.io)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <mark.cave-ayland@ilande.co.uk>)
- id 1iDpz8-0005Tb-FT; Fri, 27 Sep 2019 09:08:34 -0400
-Received: from host86-138-245-63.range86-138.btcentralplus.com
- ([86.138.245.63] helo=[192.168.1.65])
- by mail.default.ilande.uk0.bigv.io with esmtpsa
- (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.89)
- (envelope-from <mark.cave-ayland@ilande.co.uk>)
- id 1iDnhu-0005eZ-JE; Fri, 27 Sep 2019 11:42:40 +0100
-To: =?UTF-8?Q?Alex_Benn=c3=a9e?= <alex.bennee@linaro.org>,
- qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, Richard Henderson <richard.henderson@linaro.org>,
- qemu-discuss@nongnu.org, qemu-s390x@nongnu.org, qemu-arm@nongnu.org,
- qemu-ppc@nongnnu.org
-References: <20190925233013.6449-1-alex.bennee@linaro.org>
-From: Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>
-Openpgp: preference=signencrypt
-Autocrypt: addr=mark.cave-ayland@ilande.co.uk; keydata=
- mQENBFQJuzwBCADAYvxrwUh1p/PvUlNFwKosVtVHHplgWi5p29t58QlOUkceZG0DBYSNqk93
- 3JzBTbtd4JfFcSupo6MNNOrCzdCbCjZ64ik8ycaUOSzK2tKbeQLEXzXoaDL1Y7vuVO7nL9bG
- E5Ru3wkhCFc7SkoypIoAUqz8EtiB6T89/D9TDEyjdXUacc53R5gu8wEWiMg5MQQuGwzbQy9n
- PFI+mXC7AaEUqBVc2lBQVpAYXkN0EyqNNT12UfDLdxaxaFpUAE2pCa2LTyo5vn5hEW+i3VdN
- PkmjyPvL6DdY03fvC01PyY8zaw+UI94QqjlrDisHpUH40IUPpC/NB0LwzL2aQOMkzT2NABEB
- AAG0ME1hcmsgQ2F2ZS1BeWxhbmQgPG1hcmsuY2F2ZS1heWxhbmRAaWxhbmRlLmNvLnVrPokB
- OAQTAQIAIgUCVAm7PAIbAwYLCQgHAwIGFQgCCQoLBBYCAwECHgECF4AACgkQW8LFb64PMh9f
- NAgAuc3ObOEY8NbZko72AGrg2tWKdybcMVITxmcor4hb9155o/OWcA4IDbeATR6cfiDL/oxU
- mcmtXVgPqOwtW3NYAKr5g/FrZZ3uluQ2mtNYAyTFeALy8YF7N3yhs7LOcpbFP7tEbkSzoXNG
- z8iYMiYtKwttt40WaheWuRs0ZOLbs6yoczZBDhna3Nj0LA3GpeJKlaV03O4umjKJgACP1c/q
- T2Pkg+FCBHHFP454+waqojHp4OCBo6HyK+8I4wJRa9Z0EFqXIu8lTDYoggeX0Xd6bWeCFHK3
- DhD0/Xi/kegSW33unsp8oVcM4kcFxTkpBgj39dB4KwAUznhTJR0zUHf63LkBDQRUCbs8AQgA
- y7kyevA4bpetM/EjtuqQX4U05MBhEz/2SFkX6IaGtTG2NNw5wbcAfhOIuNNBYbw6ExuaJ3um
- 2uLseHnudmvN4VSJ5Hfbd8rhqoMmmO71szgT/ZD9MEe2KHzBdmhmhxJdp+zQNivy215j6H27
- 14mbC2dia7ktwP1rxPIX1OOfQwPuqlkmYPuVwZP19S4EYnCELOrnJ0m56tZLn5Zj+1jZX9Co
- YbNLMa28qsktYJ4oU4jtn6V79H+/zpERZAHmH40IRXdR3hA+Ye7iC/ZpWzT2VSDlPbGY9Yja
- Sp7w2347L5G+LLbAfaVoejHlfy/msPeehUcuKjAdBLoEhSPYzzdvEQARAQABiQEfBBgBAgAJ
- BQJUCbs8AhsMAAoJEFvCxW+uDzIfabYIAJXmBepHJpvCPiMNEQJNJ2ZSzSjhic84LTMWMbJ+
- opQgr5cb8SPQyyb508fc8b4uD8ejlF/cdbbBNktp3BXsHlO5BrmcABgxSP8HYYNsX0n9kERv
- NMToU0oiBuAaX7O/0K9+BW+3+PGMwiu5ml0cwDqljxfVN0dUBZnQ8kZpLsY+WDrIHmQWjtH+
- Ir6VauZs5Gp25XLrL6bh/SL8aK0BX6y79m5nhfKI1/6qtzHAjtMAjqy8ChPvOqVVVqmGUzFg
- KPsrrIoklWcYHXPyMLj9afispPVR8e0tMKvxzFBWzrWX1mzljbBlnV2n8BIwVXWNbgwpHSsj
- imgcU9TTGC5qd9g=
-Message-ID: <573abf48-b616-47d4-0296-cc0b4ad9e1f2@ilande.co.uk>
-Date: Fri, 27 Sep 2019 11:42:19 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.9.0
+ (envelope-from <rjones@redhat.com>) id 1iDpxV-00059V-SD
+ for qemu-riscv@nongnu.org; Fri, 27 Sep 2019 09:06:55 -0400
+Received: from mx1.redhat.com ([209.132.183.28]:46536)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <rjones@redhat.com>)
+ id 1iDpxP-00057Z-UT; Fri, 27 Sep 2019 09:06:48 -0400
+Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
+ [10.5.11.11])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mx1.redhat.com (Postfix) with ESMTPS id 4B2523083394;
+ Fri, 27 Sep 2019 12:30:48 +0000 (UTC)
+Received: from localhost (ovpn-116-117.ams2.redhat.com [10.36.116.117])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id CDAC2600C6;
+ Fri, 27 Sep 2019 12:30:47 +0000 (UTC)
+Date: Fri, 27 Sep 2019 13:30:47 +0100
+From: "Richard W.M. Jones" <rjones@redhat.com>
+To: Anup Patel <Anup.Patel@wdc.com>
+Cc: Palmer Dabbelt <palmer@sifive.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Atish Patra <Atish.Patra@wdc.com>,
+ "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>,
+ "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>,
+ Anup Patel <anup@brainfault.org>
+Subject: Re: [PATCH 0/2] RTC support for QEMU RISC-V virt machine
+Message-ID: <20190927123047.GO3888@redhat.com>
+References: <20190924084201.107958-1-anup.patel@wdc.com>
+ <20190927115047.GA6575@redhat.com>
+ <MN2PR04MB6061BA18651453F590A1CE738D810@MN2PR04MB6061.namprd04.prod.outlook.com>
 MIME-Version: 1.0
-In-Reply-To: <20190925233013.6449-1-alex.bennee@linaro.org>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-GB
-Content-Transfer-Encoding: 8bit
-X-SA-Exim-Connect-IP: 86.138.245.63
-X-SA-Exim-Mail-From: mark.cave-ayland@ilande.co.uk
-Subject: Re: [RFC PATCH] configure: deprecate 32 bit build hosts
-X-SA-Exim-Version: 4.2.1 (built Tue, 02 Aug 2016 21:08:31 +0000)
-X-SA-Exim-Scanned: Yes (on mail.default.ilande.uk0.bigv.io)
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <MN2PR04MB6061BA18651453F590A1CE738D810@MN2PR04MB6061.namprd04.prod.outlook.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+ (mx1.redhat.com [10.5.110.44]); Fri, 27 Sep 2019 12:30:48 +0000 (UTC)
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
  [fuzzy]
-X-Received-From: 46.43.2.167
+X-Received-From: 209.132.183.28
 X-Mailman-Approved-At: Fri, 27 Sep 2019 09:50:34 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -80,110 +60,58 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Sep 2019 13:09:03 -0000
+X-List-Received-Date: Fri, 27 Sep 2019 13:06:58 -0000
 
-On 26/09/2019 00:30, Alex Bennée wrote:
-
-> The 32 bit hosts are already a second class citizen especially with
-> support for running 64 bit guests under TCG. We are also limited by
-> testing as actual working 32 bit machines are getting quite rare in
-> developers personal menageries. For TCG supporting newer types like
-> Int128 is a lot harder with 32 bit calling conventions compared to
-> their larger bit sized cousins. Fundamentally address space is the
-> most useful thing for the translator to have even for a 32 bit guest a
-> 32 bit host is quite constrained.
+On Fri, Sep 27, 2019 at 12:05:43PM +0000, Anup Patel wrote:
 > 
-> As far as I'm aware 32 bit KVM users are even less numerous. Even
-> ILP32 doesn't make much sense given the address space QEMU needs to
-> manage.
 > 
-> Lets mark these machines as deprecated so we can have the wailing and
-> gnashing of teeth now and look to actually dropping the support in a
-> couple of cycles.
+> > -----Original Message-----
+> > From: Richard W.M. Jones <rjones@redhat.com>
+> > Sent: Friday, September 27, 2019 5:21 PM
+> > To: Anup Patel <Anup.Patel@wdc.com>
+> > Cc: Palmer Dabbelt <palmer@sifive.com>; Alistair Francis
+> > <Alistair.Francis@wdc.com>; Sagar Karandikar <sagark@eecs.berkeley.edu>;
+> > Bastian Koppelmann <kbastian@mail.uni-paderborn.de>; Atish Patra
+> > <Atish.Patra@wdc.com>; qemu-riscv@nongnu.org; qemu-
+> > devel@nongnu.org; Anup Patel <anup@brainfault.org>
+> > Subject: Re: [PATCH 0/2] RTC support for QEMU RISC-V virt machine
+> > 
+> > 
+> > On Tue, Sep 24, 2019 at 08:42:36AM +0000, Anup Patel wrote:
+> > > This series adds RTC device to QEMU RISC-V virt machine. We have
+> > > selected Goldfish RTC device model for this. It's a pretty simple
+> > > synthetic device with few MMIO registers and no dependency external
+> > > clock. The driver for Goldfish RTC is already available in Linux so we
+> > > just need to enable it in Kconfig for RISCV and also update Linux
+> > > defconfigs.
+> > >
+> > > We have tested this series with Linux-5.3 plus defconfig changes
+> > > available in 'goldfish_rtc_v1' branch of:
+> > > https://github.com/avpatel/linux.git
+> > 
+> > Why was this device chosen instead of kvm-clock?
 > 
-> Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-> Cc: Richard Henderson <richard.henderson@linaro.org>
-> ---
->  configure | 24 +++++++++++++-----------
->  1 file changed, 13 insertions(+), 11 deletions(-)
+> We need a RTC device which worked fine in TCG mode (even without
+> KVM). The KVMCLOCK is PTP clock which depends on KVM hypercalls.
 > 
-> diff --git a/configure b/configure
-> index 542f6aea3f..776fd460b5 100755
-> --- a/configure
-> +++ b/configure
-> @@ -728,7 +728,7 @@ ARCH=
->  # Normalise host CPU name and set ARCH.
->  # Note that this case should only have supported host CPUs, not guests.
->  case "$cpu" in
-> -  ppc|ppc64|s390|s390x|sparc64|x32|riscv32|riscv64)
-> +  ppc64|s390|s390x|sparc64|riscv64)
->      supported_cpu="yes"
->    ;;
->    ppc64le)
-> @@ -737,7 +737,6 @@ case "$cpu" in
->    ;;
->    i386|i486|i586|i686|i86pc|BePC)
->      cpu="i386"
-> -    supported_cpu="yes"
->    ;;
->    x86_64|amd64)
->      cpu="x86_64"
-> @@ -745,19 +744,22 @@ case "$cpu" in
->    ;;
->    armv*b|armv*l|arm)
->      cpu="arm"
-> -    supported_cpu="yes"
->    ;;
->    aarch64)
->      cpu="aarch64"
->      supported_cpu="yes"
->    ;;
-> -  mips*)
-> +  mips64*)
->      cpu="mips"
->      supported_cpu="yes"
->    ;;
-> +  mips*)
-> +    cpu="mips"
-> +  ;;
->    sparc|sun4[cdmuv])
->      cpu="sparc"
-> -    supported_cpu="yes"
-> +  ;;
-> +  x32|riscv32)
->    ;;
->    *)
->      # This will result in either an error or falling back to TCI later
-> @@ -6438,12 +6440,12 @@ if test "$supported_cpu" = "no"; then
->      echo "WARNING: SUPPORT FOR THIS HOST CPU WILL GO AWAY IN FUTURE RELEASES!"
->      echo
->      echo "CPU host architecture $cpu support is not currently maintained."
-> -    echo "The QEMU project intends to remove support for this host CPU in"
-> -    echo "a future release if nobody volunteers to maintain it and to"
-> -    echo "provide a build host for our continuous integration setup."
-> -    echo "configure has succeeded and you can continue to build, but"
-> -    echo "if you care about QEMU on this platform you should contact"
-> -    echo "us upstream at qemu-devel@nongnu.org."
-> +    echo "The QEMU project intends to remove support for all 32 bit host"
-> +    echo "CPUs in a future release. 64 bit hosts will need a volunteer"
-> +    echo "to maintain it and to provide a build host for our continuous"
-> +    echo "integration setup. configure has succeeded and you can continue"
-> +    echo "to build, but if you care about QEMU on this platform you"
-> +    echo "should contact us upstream at qemu-devel@nongnu.org."
->  fi
->  
->  if test "$supported_os" = "no"; then
+> On ARM virt machine, we have PL031 so instead of that we have
+> Goldfish RTC on RISC-V virt machine.
 
-FWIW I still use my Mac Mini G4 (with KVM) to help debug bits of TCG for
-qemu-system-ppc and so I would certainly miss this for bits of my Mac work.
+Could we not make kvm-clock work on TCG (I wasn't aware that it needed
+actual KVM - I wonder how timekeeping works on TCG?)
 
-Is it possible to reach a compromise based on host/target i.e. allow 32-bit hosts to
-only run targets up to 32-bits? I'd only ever want to use qemu-system-ppc on the Mac
-Mini for testing: for qemu-system-ppc64 it is clearly much quicker just to use the
-nearest x86 box.
+Alternately why not use PL031 here?
 
+The reason I'm asking this is because adding a new virtual device
+means we have to change this all the way up the stack (libvirt,
+virt-*) _and_ have special cases everywhere just for RISC-V.  That's a
+load of extra work for everyone.
 
-ATB,
+Rich.
 
-Mark.
+-- 
+Richard Jones, Virtualization Group, Red Hat http://people.redhat.com/~rjones
+Read my programming and virtualization blog: http://rwmj.wordpress.com
+virt-builder quickly builds VMs from scratch
+http://libguestfs.org/virt-builder.1.html
 
