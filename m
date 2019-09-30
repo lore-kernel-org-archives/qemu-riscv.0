@@ -1,54 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iErwT-0006wQ-2m
-	for mharc-qemu-riscv@gnu.org; Mon, 30 Sep 2019 05:26:05 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:60323)
+	id 1iEt2b-0005Rz-Kh
+	for mharc-qemu-riscv@gnu.org; Mon, 30 Sep 2019 06:36:29 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44226)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <berrange@redhat.com>) id 1iErwP-0006rw-LL
- for qemu-riscv@nongnu.org; Mon, 30 Sep 2019 05:26:02 -0400
+ (envelope-from <peter.maydell@linaro.org>) id 1iEt2Z-0005PU-5h
+ for qemu-riscv@nongnu.org; Mon, 30 Sep 2019 06:36:28 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <berrange@redhat.com>) id 1iErwO-0001gr-8Y
- for qemu-riscv@nongnu.org; Mon, 30 Sep 2019 05:26:01 -0400
-Received: from mx1.redhat.com ([209.132.183.28]:34130)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <berrange@redhat.com>)
- id 1iErwB-0001Zy-Ew; Mon, 30 Sep 2019 05:25:47 -0400
-Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
- [10.5.11.22])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id 4B85818CB8F9;
- Mon, 30 Sep 2019 09:25:46 +0000 (UTC)
-Received: from redhat.com (unknown [10.42.17.55])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id C73D01001B33;
- Mon, 30 Sep 2019 09:25:44 +0000 (UTC)
-Date: Mon, 30 Sep 2019 10:25:42 +0100
-From: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: Peter Maydell <peter.maydell@linaro.org>,
- Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>,
- QEMU Developers <qemu-devel@nongnu.org>,
- qemu-discuss <qemu-discuss@nongnu.org>,
- qemu-s390x <qemu-s390x@nongnu.org>, qemu-arm <qemu-arm@nongnu.org>,
- qemu-ppc@nongnu.org
-Subject: Re: [RFC PATCH] configure: deprecate 32 bit build hosts
-Message-ID: <20190930092519.GB11996@redhat.com>
-Reply-To: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
+ (envelope-from <peter.maydell@linaro.org>) id 1iEt2X-0000EW-Vy
+ for qemu-riscv@nongnu.org; Mon, 30 Sep 2019 06:36:26 -0400
+Received: from mail-oi1-x243.google.com ([2607:f8b0:4864:20::243]:40546)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <peter.maydell@linaro.org>)
+ id 1iEt2X-0000DU-Ob
+ for qemu-riscv@nongnu.org; Mon, 30 Sep 2019 06:36:25 -0400
+Received: by mail-oi1-x243.google.com with SMTP id k9so10641909oib.7
+ for <qemu-riscv@nongnu.org>; Mon, 30 Sep 2019 03:36:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=RIpIdKusdl+IE2Li/qyUEzusAPTfzSa89LvtdLMUo0g=;
+ b=gcXan2xJP+z7JjARjErViz2CERrDuoztTZzKjyjJK8bI4YGb/FgB6+/L+RuyWE3sBZ
+ O60PaQyQbG+vI2gDEk7pMyhzs1xOhQ3pZuZGBgliijP2kJuiAICf2dQlbZBDWofDHTSO
+ zyipQVAuTFix0feS0Pho2617ib+M9uC8mCprFcjIoxobBMFWh7f/WFZst203p29W33y3
+ Y3egtDXOuynsGn3Lp6C0/3Y3Nkk7JkhcRa1daminunout5uOc/ysZUCWejcp5py8BHw4
+ H4XxWTZmZDUpdehFumvqFURMWF2dA23i/TrTrnRUIccstB43BbbXavG/KTYW4P0tmAKB
+ GHeA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=RIpIdKusdl+IE2Li/qyUEzusAPTfzSa89LvtdLMUo0g=;
+ b=W4y8ZSYKnjF18FQKNczqtMF4edgz3tOQO8sTpqbUCy7y3s9Ec+IJCYfHnFzcA1K2nr
+ 8Vts8H+JykzXRWTish23bMVGzCk7umQMRHEzjO59tn1DPryf4ooHqfqggxIVogjCYomf
+ yixq3u06evb0PBzCg0RJ7T2Dhatqd4hGpXvcFL6kt/II1Dt5o7FG1RQkn7gSTS1LEbK2
+ OtdvI5LNu9DOoKbF+6iPu0OOWF30Ur28CPTkiyfBfq75QpwQG4voI/VWz+PupVPC5VEc
+ lo7TMpq4FZV+AmXhcUZ+V0t2CWmt/Z+8CRbG1Tlkanj9IUFtvEGtE/KonMejq1cbCj+n
+ b2ig==
+X-Gm-Message-State: APjAAAVZ+UC544MmwyD5YRh8b+X9shoGwBeARvHwI5IHz2lEXpgKZ1T9
+ sVAzWJsSbnkst/4iMBjVL4hYUqntmlva8C6oLjF2dg==
+X-Google-Smtp-Source: APXvYqxYhOUnByla57bN4hLMfMV17by52x9MiPYPYIVih0/mKA/kbkkOpU9BEJDpUHnKoOQJrp64OCAfYLeF0MNxSJU=
+X-Received: by 2002:aca:f54d:: with SMTP id t74mr17817001oih.170.1569839784454; 
+ Mon, 30 Sep 2019 03:36:24 -0700 (PDT)
+MIME-Version: 1.0
 References: <20190925233013.6449-1-alex.bennee@linaro.org>
  <CAFEAcA9vb5_Mi_axWpu7269Zg0xMLbiiV80ofLeyDpfws3G4nQ@mail.gmail.com>
  <4512b61a-ed82-e628-88e5-f44ef87c2b50@linaro.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <4512b61a-ed82-e628-88e5-f44ef87c2b50@linaro.org>
-User-Agent: Mutt/1.12.1 (2019-06-15)
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.6.2
- (mx1.redhat.com [10.5.110.63]); Mon, 30 Sep 2019 09:25:46 +0000 (UTC)
+ <20190930092519.GB11996@redhat.com> <87impakrky.fsf@linaro.org>
+In-Reply-To: <87impakrky.fsf@linaro.org>
+From: Peter Maydell <peter.maydell@linaro.org>
+Date: Mon, 30 Sep 2019 11:36:13 +0100
+Message-ID: <CAFEAcA9TT9hpRF29CVdZ8h83+b_rwc0bRWeVNjC4PLPJkzdFOA@mail.gmail.com>
+Subject: Re: [RFC PATCH] configure: deprecate 32 bit build hosts
+To: =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>
+Cc: =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>, 
+ Richard Henderson <richard.henderson@linaro.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ QEMU Developers <qemu-devel@nongnu.org>,
+ "qemu-discuss@nongnu.org" <qemu-discuss@nongnu.org>, 
+ qemu-s390x <qemu-s390x@nongnu.org>, "qemu-arm@nongnu.org" <qemu-arm@nongnu.org>,
+ qemu-ppc <qemu-ppc@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
- [fuzzy]
-X-Received-From: 209.132.183.28
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2607:f8b0:4864:20::243
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -60,81 +75,18 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Sep 2019 09:26:03 -0000
+X-List-Received-Date: Mon, 30 Sep 2019 10:36:28 -0000
 
-On Thu, Sep 26, 2019 at 10:11:05AM -0700, Richard Henderson wrote:
-> On 9/26/19 12:50 AM, Peter Maydell wrote:
-> > On Thu, 26 Sep 2019 at 00:31, Alex Benn=C3=A9e <alex.bennee@linaro.or=
-g> wrote:
-> >>
-> >> The 32 bit hosts are already a second class citizen especially with
-> >> support for running 64 bit guests under TCG. We are also limited by
-> >> testing as actual working 32 bit machines are getting quite rare in
-> >> developers personal menageries. For TCG supporting newer types like
-> >> Int128 is a lot harder with 32 bit calling conventions compared to
-> >> their larger bit sized cousins. Fundamentally address space is the
-> >> most useful thing for the translator to have even for a 32 bit guest=
- a
-> >> 32 bit host is quite constrained.
-> >>
-> >> As far as I'm aware 32 bit KVM users are even less numerous. Even
-> >> ILP32 doesn't make much sense given the address space QEMU needs to
-> >> manage.
-> >=20
-> > For KVM we should wait until the kernel chooses to drop support,
-> > I think.
->=20
-> Agreed.  I think this discussion should be more about TCG.
->=20
-> >> @@ -745,19 +744,22 @@ case "$cpu" in
-> >>    ;;
-> >>    armv*b|armv*l|arm)
-> >>      cpu=3D"arm"
-> >> -    supported_cpu=3D"yes"
-> >>    ;;
-> >=20
-> > I'll leave others to voice opinions about their architectures,
-> > but I still have 32-bit arm in my test set for builds, and
-> > I'm pretty sure we have users (raspi users, for a start).
->=20
-> I'd really like to know what raspi users might be using qemu for.  Depe=
-nding on
-> that answer, perhaps it would be sufficient for arm32 tcg to only suppo=
-rt
-> 32-bit guests.
+On Mon, 30 Sep 2019 at 11:26, Alex Benn=C3=A9e <alex.bennee@linaro.org> wro=
+te:
+> So if lots of people still want 32 bit host support for TCG guests we
+> can probably come up with something that keeps existing functionality
+> ticking over while leaving the newer architectural features to 64 bit
+> hosts only.
 
-I asked on the Fedora development lists for feedback on the idea of
-dropping QEMU 32-bit host support
+I don't think we should do that -- QEMU should offer the same
+(emulated) functionality regardless of host.
 
-  https://lists.fedoraproject.org/archives/list/devel@lists.fedoraproject=
-.org/thread/TPAVIC6YANGP2NK4RUOP7OCIOIFIOV3A/
-
-The response was rather underwhealming to say the least, with only one
-person explicitly expressing a desire for QEMU to keep 32-bit host
-support for armv7l.
-
-The main interesting thing I learnt was that even with 64-bit Raspberry
-Pi hardware, it can be desirable to run 32-bit Raspberry Pi supporting
-distro, supposedly for performance benefits.
-
-> For context, the discussion that Alex and I were having was about int12=
-8_t, and
-> how to support that directly in tcg (especially to/from helpers), and h=
-ow that
-> might be vastly easier if we didn't have to consider 32-bit hosts.
-
-I know nothing about TCG internals, but Is it viable to implement int128_=
-t
-support only in 64-bit host, leaving 32-bit hosts without it ? Or is this
-really a blocking item that is holding back 64-bit host features.
-
-Regards,
-Daniel
---=20
-|: https://berrange.com      -o-    https://www.flickr.com/photos/dberran=
-ge :|
-|: https://libvirt.org         -o-            https://fstop138.berrange.c=
-om :|
-|: https://entangle-photo.org    -o-    https://www.instagram.com/dberran=
-ge :|
+thanks
+-- PMM
 
