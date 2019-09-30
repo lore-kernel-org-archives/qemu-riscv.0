@@ -1,67 +1,54 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iDyC2-0002Dv-Oy
-	for mharc-qemu-riscv@gnu.org; Fri, 27 Sep 2019 17:54:26 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:38033)
+	id 1iErwT-0006wQ-2m
+	for mharc-qemu-riscv@gnu.org; Mon, 30 Sep 2019 05:26:05 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:60323)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <alistair23@gmail.com>) id 1iDyBz-0002AH-MH
- for qemu-riscv@nongnu.org; Fri, 27 Sep 2019 17:54:24 -0400
+ (envelope-from <berrange@redhat.com>) id 1iErwP-0006rw-LL
+ for qemu-riscv@nongnu.org; Mon, 30 Sep 2019 05:26:02 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1iDyBy-00041A-IP
- for qemu-riscv@nongnu.org; Fri, 27 Sep 2019 17:54:23 -0400
-Received: from mail-lf1-x143.google.com ([2a00:1450:4864:20::143]:34517)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1iDyBy-0003yu-B1; Fri, 27 Sep 2019 17:54:22 -0400
-Received: by mail-lf1-x143.google.com with SMTP id r22so2998830lfm.1;
- Fri, 27 Sep 2019 14:54:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=jkOir/wyT+RF7Mh1S6xJDDGBy1VpXPxRvS0hvYj7V5w=;
- b=JMsK1/v701qjYU6XisrkwCJohmdg9dDyxlO2OJTAzzw9ap2h+Ul4YZw0lBqF15+8cB
- 4hNJIry/NZg+djA+pUkZD4clhiLefhv2n09xL/Fq4s50UeEZuQa8oDrFUu6NSlo4oqdf
- OxDBbMyVNL8K8DCMWMVXMNlM4u1ULePg51JJg4qeWveHlvlalwkRIM+YDaGy+a6bN6Na
- Tuj/+yl0CLU5S3cCD8Rxhhz/6NX2srPojj5Dpxe1/6oToinQlPPQfbbMZtVJLMuEYTbd
- +x5nwP4WFloymh35MLiZy97MxZ6eyeNpB8x3WpH5Rja5sBHxttsPkT5zTPLHpbhQ9fVa
- L+3Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=jkOir/wyT+RF7Mh1S6xJDDGBy1VpXPxRvS0hvYj7V5w=;
- b=R9kqdLrY7fUPftD21bbz+f/zvSaj981c89+oycXkNuQ75pLanNWBAKnnUiGyjeeblu
- EZXpZBTVijV5C1xIQVHLurGOKDNBduCXeTiiTUzf4eWqqGBL/AzP/OFdgHnzHTlviZl7
- xcMHHRHvWe/isgRE3Ur/uVfA5N/+T6IfAeKXqkeFj3I6Nw+rRyZgrSoZe/eBBkdwEO3J
- yDbr87/u35/ijzGiICYVUSD1dbAkLu5FsOr/IgbD2q1SeTwViCGxjq/iMHLRguWsRweR
- q/a3BSSSorEW7FeTHPFFi1uiui6m3bq+qmnR8Ol07IpA117PF8GCYS3NgaoxnRuGGK2I
- pfWQ==
-X-Gm-Message-State: APjAAAVKvmMPdbylBUZ0SqUBCnU3gh1ARqkft0D3/XaiSuKTAWis5NGe
- bpqf4UONmoiKIWq/6/mxU9VyZQ7Y25VA2eghZYg=
-X-Google-Smtp-Source: APXvYqwizPplLTwwerFLg9f5p8Wwjc9EHKz1KaMYJd1LpuPSvctc5I/Q6xzNkDhzu0JkXWDu6CQp2bcDrkJ+Vb+LEms=
-X-Received: by 2002:ac2:5e9e:: with SMTP id b30mr4235200lfq.5.1569621261054;
- Fri, 27 Sep 2019 14:54:21 -0700 (PDT)
-MIME-Version: 1.0
-References: <cover.1568931866.git.alistair.francis@wdc.com>
- <0a5c141a26fada6d93d06e996a2f24e1b269ec50.1568931866.git.alistair.francis@wdc.com>
- <CAEUhbmVvDKQqQYE-riq=cvSrCe_NMoW_KDsLjh8CVHRUhJvk9A@mail.gmail.com>
- <CAKmqyKOofA3U+8kjMkzQ0sNd1=uwJHq3c9eaLZdoNCb7=e-PAw@mail.gmail.com>
- <CAFEAcA-uFPGf4BiDXH=Om3Df-xXrt7QwjzVF7E3kY4aMWMP4YQ@mail.gmail.com>
- <CAKmqyKP3T79qVUXftO=0hmhYbD9MKccdvsAcs=_4CQFoNmfucw@mail.gmail.com>
- <87a7aszr5p.fsf@dusky.pond.sub.org>
-In-Reply-To: <87a7aszr5p.fsf@dusky.pond.sub.org>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 27 Sep 2019 14:49:33 -0700
-Message-ID: <CAKmqyKNdE5C2eKeLWi7vUU=_GVp0+9stNHcNV=6UyZ+LoZnhBg@mail.gmail.com>
-Subject: Re: [PATCH v1 5/6] riscv/virt: Add the PFlash CFI01 device
-To: Markus Armbruster <armbru@redhat.com>
+ (envelope-from <berrange@redhat.com>) id 1iErwO-0001gr-8Y
+ for qemu-riscv@nongnu.org; Mon, 30 Sep 2019 05:26:01 -0400
+Received: from mx1.redhat.com ([209.132.183.28]:34130)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <berrange@redhat.com>)
+ id 1iErwB-0001Zy-Ew; Mon, 30 Sep 2019 05:25:47 -0400
+Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
+ [10.5.11.22])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mx1.redhat.com (Postfix) with ESMTPS id 4B85818CB8F9;
+ Mon, 30 Sep 2019 09:25:46 +0000 (UTC)
+Received: from redhat.com (unknown [10.42.17.55])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id C73D01001B33;
+ Mon, 30 Sep 2019 09:25:44 +0000 (UTC)
+Date: Mon, 30 Sep 2019 10:25:42 +0100
+From: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
+To: Richard Henderson <richard.henderson@linaro.org>
 Cc: Peter Maydell <peter.maydell@linaro.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Palmer Dabbelt <palmer@sifive.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2a00:1450:4864:20::143
+ Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ QEMU Developers <qemu-devel@nongnu.org>,
+ qemu-discuss <qemu-discuss@nongnu.org>,
+ qemu-s390x <qemu-s390x@nongnu.org>, qemu-arm <qemu-arm@nongnu.org>,
+ qemu-ppc@nongnu.org
+Subject: Re: [RFC PATCH] configure: deprecate 32 bit build hosts
+Message-ID: <20190930092519.GB11996@redhat.com>
+Reply-To: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
+References: <20190925233013.6449-1-alex.bennee@linaro.org>
+ <CAFEAcA9vb5_Mi_axWpu7269Zg0xMLbiiV80ofLeyDpfws3G4nQ@mail.gmail.com>
+ <4512b61a-ed82-e628-88e5-f44ef87c2b50@linaro.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <4512b61a-ed82-e628-88e5-f44ef87c2b50@linaro.org>
+User-Agent: Mutt/1.12.1 (2019-06-15)
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.6.2
+ (mx1.redhat.com [10.5.110.63]); Mon, 30 Sep 2019 09:25:46 +0000 (UTC)
+Content-Transfer-Encoding: quoted-printable
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+ [fuzzy]
+X-Received-From: 209.132.183.28
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -73,58 +60,81 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Sep 2019 21:54:25 -0000
+X-List-Received-Date: Mon, 30 Sep 2019 09:26:03 -0000
 
-On Wed, Sep 25, 2019 at 2:00 AM Markus Armbruster <armbru@redhat.com> wrote:
->
-> Alistair Francis <alistair23@gmail.com> writes:
->
-> > On Mon, Sep 23, 2019 at 2:46 PM Peter Maydell <peter.maydell@linaro.org> wrote:
+On Thu, Sep 26, 2019 at 10:11:05AM -0700, Richard Henderson wrote:
+> On 9/26/19 12:50 AM, Peter Maydell wrote:
+> > On Thu, 26 Sep 2019 at 00:31, Alex Benn=C3=A9e <alex.bennee@linaro.or=
+g> wrote:
 > >>
-> >> On Fri, 20 Sep 2019 at 23:23, Alistair Francis <alistair23@gmail.com> wrote:
-> >> > On Thu, Sep 19, 2019 at 10:15 PM Bin Meng <bmeng.cn@gmail.com> wrote:
-> >> > > I don't think we should mirror what is used on ARM virt board to
-> >> > > create 2 flash for sifive_u. For ARM virt, there are 2 flashes because
-> >> > > they need distinguish secure and non-secure. For sifive_u, only one is
-> >> > > enough.
-> >> >
-> >> > I went back and forward about 1 or 2. Two seems more usable as maybe
-> >> > someone wants to include two pflash files? The Xilinx machine also has
-> >> > two so I'm kind of used to 2, but I'm not really fussed.
+> >> The 32 bit hosts are already a second class citizen especially with
+> >> support for running 64 bit guests under TCG. We are also limited by
+> >> testing as actual working 32 bit machines are getting quite rare in
+> >> developers personal menageries. For TCG supporting newer types like
+> >> Int128 is a lot harder with 32 bit calling conventions compared to
+> >> their larger bit sized cousins. Fundamentally address space is the
+> >> most useful thing for the translator to have even for a 32 bit guest=
+ a
+> >> 32 bit host is quite constrained.
 > >>
-> >> One of the reasons for having 2 on the Arm board (we do this
-> >> even if we're not supporting secure vs non-secure) is that
-> >> then you can use one for a fixed read-only BIOS image (backed
-> >> by a file on the host filesystem shared between all VMs), and
-> >> one backed by a read-write per-VM file providing permanent
-> >> storage for BIOS environment variables. Notably UEFI likes to
-> >> work this way, but the idea applies in theory to other
-> >> boot loader or BIOSes I guess.
-> >
-> > This seems like a good reason to have two and there isn't really a
-> > disadvantage so I have kept it with two.
->
-> Good.
->
-> Implementing sector locking would be even better.  I'm not asking you to
-> do that work.
->
-> >> I would suggest also checking with Markus that your code
-> >> for instantiating the flash devices follows the current
-> >> recommendations so the backing storage can be configured
-> >> via -blockdev. (This is a fairly recent change from June or
-> >> so; current-in-master virt and sbsa boards provide an example
-> >> of doing the right thing, I think.)
-> >
-> > I have updated the code to more closely match the ARM virt machine, so
-> > I think I'm doing it correctly.
->
-> You might want to consider omitting legacy configuration options -drive
-> if=pflash and -bios for a simpler interface.
+> >> As far as I'm aware 32 bit KVM users are even less numerous. Even
+> >> ILP32 doesn't make much sense given the address space QEMU needs to
+> >> manage.
+> >=20
+> > For KVM we should wait until the kernel chooses to drop support,
+> > I think.
+>=20
+> Agreed.  I think this discussion should be more about TCG.
+>=20
+> >> @@ -745,19 +744,22 @@ case "$cpu" in
+> >>    ;;
+> >>    armv*b|armv*l|arm)
+> >>      cpu=3D"arm"
+> >> -    supported_cpu=3D"yes"
+> >>    ;;
+> >=20
+> > I'll leave others to voice opinions about their architectures,
+> > but I still have 32-bit arm in my test set for builds, and
+> > I'm pretty sure we have users (raspi users, for a start).
+>=20
+> I'd really like to know what raspi users might be using qemu for.  Depe=
+nding on
+> that answer, perhaps it would be sufficient for arm32 tcg to only suppo=
+rt
+> 32-bit guests.
 
-We just moved to -bios and it's been really helpful.
+I asked on the Fedora development lists for feedback on the idea of
+dropping QEMU 32-bit host support
 
-Doesn't -pflash use -drive if=pflash? How else should these be attached?
+  https://lists.fedoraproject.org/archives/list/devel@lists.fedoraproject=
+.org/thread/TPAVIC6YANGP2NK4RUOP7OCIOIFIOV3A/
 
-Alistair
+The response was rather underwhealming to say the least, with only one
+person explicitly expressing a desire for QEMU to keep 32-bit host
+support for armv7l.
+
+The main interesting thing I learnt was that even with 64-bit Raspberry
+Pi hardware, it can be desirable to run 32-bit Raspberry Pi supporting
+distro, supposedly for performance benefits.
+
+> For context, the discussion that Alex and I were having was about int12=
+8_t, and
+> how to support that directly in tcg (especially to/from helpers), and h=
+ow that
+> might be vastly easier if we didn't have to consider 32-bit hosts.
+
+I know nothing about TCG internals, but Is it viable to implement int128_=
+t
+support only in 64-bit host, leaving 32-bit hosts without it ? Or is this
+really a blocking item that is holding back 64-bit host features.
+
+Regards,
+Daniel
+--=20
+|: https://berrange.com      -o-    https://www.flickr.com/photos/dberran=
+ge :|
+|: https://libvirt.org         -o-            https://fstop138.berrange.c=
+om :|
+|: https://entangle-photo.org    -o-    https://www.instagram.com/dberran=
+ge :|
 
