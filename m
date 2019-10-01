@@ -1,66 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iFMyN-0008MA-7x
-	for mharc-qemu-riscv@gnu.org; Tue, 01 Oct 2019 14:34:07 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:41437)
+	id 1iFMyO-0008O1-Mp
+	for mharc-qemu-riscv@gnu.org; Tue, 01 Oct 2019 14:34:08 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:41461)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <palmer@sifive.com>) id 1iFMyK-0008K3-Fo
- for qemu-riscv@nongnu.org; Tue, 01 Oct 2019 14:34:05 -0400
+ (envelope-from <palmer@sifive.com>) id 1iFMyL-0008KS-SZ
+ for qemu-riscv@nongnu.org; Tue, 01 Oct 2019 14:34:06 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmer@sifive.com>) id 1iFMyJ-0002iD-93
- for qemu-riscv@nongnu.org; Tue, 01 Oct 2019 14:34:04 -0400
-Received: from mail-pf1-x441.google.com ([2607:f8b0:4864:20::441]:36899)
+ (envelope-from <palmer@sifive.com>) id 1iFMyK-0002j8-Rh
+ for qemu-riscv@nongnu.org; Tue, 01 Oct 2019 14:34:05 -0400
+Received: from mail-pf1-x444.google.com ([2607:f8b0:4864:20::444]:42844)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmer@sifive.com>) id 1iFMyJ-0002hq-1c
- for qemu-riscv@nongnu.org; Tue, 01 Oct 2019 14:34:03 -0400
-Received: by mail-pf1-x441.google.com with SMTP id y5so8668853pfo.4
- for <qemu-riscv@nongnu.org>; Tue, 01 Oct 2019 11:34:03 -0700 (PDT)
+ (Exim 4.71) (envelope-from <palmer@sifive.com>) id 1iFMyK-0002il-MH
+ for qemu-riscv@nongnu.org; Tue, 01 Oct 2019 14:34:04 -0400
+Received: by mail-pf1-x444.google.com with SMTP id q12so8654259pff.9
+ for <qemu-riscv@nongnu.org>; Tue, 01 Oct 2019 11:34:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
  :content-transfer-encoding;
- bh=2lnDo4LAhYTztHDWQTK8AHuV8AASUlMryESwQyVRmy8=;
- b=muZXyMQbpBzVu/qUDAzfuhXWKY7fm3e5GSAJI2eJ1SLUCBmYegxMq8japyNyevkFcn
- E19wiiyUaVNHD4cX2r+TFiZ//OUT0QixQ6qVHB60sOyQwHyuVth+f6aUFfRW4crsdBAc
- 0aKrWz50yTs3E5wKZQBoRGa++3WR1+e3CO4Peur3822ot1LZFqkFjNPOLUOkp/nR6Q1R
- lsRAcxnUPOVARJdwAoY0F/2+UQ4Gqw9Frgz7MRBWh22QSZiDkyKFjYktwQBq8kAoyidv
- 5mdqPadtfKD+glmyjvp7Et3SflifGdFQGApAMKqMnTu5uFt9fYvXg/zPY1WriN6RVvox
- zU1g==
+ bh=pz0D2/ekdx2L9LGzzrxsNOaKJHXNmStYb+seabNgP4U=;
+ b=guw706AaJmsMfXFv3V0/dkcEGkRJV8Zpo6DD6r+I4Wco1GUg+8GC1fItDK1oOn+RrY
+ wKBZFTLoEz1hDKtzgGqw42oDqaqlPsSneVjWANDxL7SpLEH6HOVtaSuQzFi7BlYrMgLO
+ TWlaZ5wCM5p6lD+gbIokIkdsuh6bEShVBfPHTAsEoFGJX8kHkvGlONtiQ752/4Z1FCWa
+ RBFuH4eDrGG6daCfrMdWpSt8medpbhr64NXwSp2LZRqXwJTow3My/kbpohQKd12Gte7U
+ 7R+ekfmjccO05nlkzV2yWgD8bBMJbv7i3OOv0iza/7FDZVbi5cqPIXY5mSNaXDkxoxiH
+ sxaw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
  :mime-version:content-transfer-encoding;
- bh=2lnDo4LAhYTztHDWQTK8AHuV8AASUlMryESwQyVRmy8=;
- b=GdhlIuz4nXCT3eWfoxiH0i5GIdZhuMy0buAvvbYyLiH51SLePO5EWEYoxOneXLxDcN
- 96oZse6aG6JuFp0vCDpybrfbIuUZmHUd9ADABuM9b9Ci6uww4egziSihC6tGkOMKXzHI
- MugU5NOR0KXsYln61tnWRpK3Cc/LNG/nAxOpuYBzQaZDkPSL0IBfojkR/90lc/QMepTA
- RTx/N9xkgzjTXnmx/Cf2NmH+g5LhHyb0TlH5nXd9BBvUdz1Md1k8LxWfISGyDkQwKiJ1
- iN/bLuCvtF+vbsz0s31mw6i0BsGruam95FMsc1dsjhr/Vb9qoYqnGb7w2x2zd9ekgNg9
- beRg==
-X-Gm-Message-State: APjAAAVK+FN0E/I8uj5z2jScDh2cZ8PJJnHIxC31IFPcJiPNt5I4R2gX
- FsnAV7zDI7Jibo+/zS2HWt2Nmw==
-X-Google-Smtp-Source: APXvYqzmqXVtU1JYh1FCI13QmGZFHTRam36X19LH77VsD0Enzd9VBxZOevRMCFmJC+Rl0tf712bhNA==
-X-Received: by 2002:a17:90a:1b46:: with SMTP id
- q64mr7166825pjq.97.1569954841962; 
- Tue, 01 Oct 2019 11:34:01 -0700 (PDT)
+ bh=pz0D2/ekdx2L9LGzzrxsNOaKJHXNmStYb+seabNgP4U=;
+ b=o846UaGsKHITD80k2xGg0vtvhz4v6UsBvaVcoFVBQifok0qTo9bY7JoaokDjDjOS7p
+ SfGG3VIEZgtG/a8+rp6mN5gw04xNMpzds6BTyIKMdTipHdfk3vQ+BIQVlyoAppRoFkYp
+ jwJWRqxwOvq/W7vlwocETkUxFdZTt2VMYlJZ2yJuXODayNk/2vMa3hlmLFy6ZmrlBBF/
+ d4/rDRCIex/bZYmD7up38e+a7wcRvm3uPat/hhi+vCZ6Mqy3WDf3fwtadXR1oa+zLD03
+ 4xpN+7kWhgRUcz88ixRg9IldTUpg5I49qVTWmrLrg9etpwmJbHL8JQdKrv/LRM6M/ehQ
+ v/Kw==
+X-Gm-Message-State: APjAAAVQwT4hfQIu2USXVDlULwkLZuRKYHL9vf2hSneTCl0PZWlzySYk
+ nxVV2DyK9lC2O+8SYrw8l4S1tA==
+X-Google-Smtp-Source: APXvYqwV2fJBmWzaXEmemHqqxag+iUPHQUA/uYzzIQqSbah6Jk4gGnuZgAt+ECX4o0NC2I51lJA15g==
+X-Received: by 2002:a63:ed10:: with SMTP id d16mr32422317pgi.307.1569954843724; 
+ Tue, 01 Oct 2019 11:34:03 -0700 (PDT)
 Received: from localhost ([12.206.222.5])
- by smtp.gmail.com with ESMTPSA id b123sm23990829pgc.72.2019.10.01.11.34.00
+ by smtp.gmail.com with ESMTPSA id r30sm19308133pfl.42.2019.10.01.11.34.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 01 Oct 2019 11:34:01 -0700 (PDT)
-Date: Tue, 01 Oct 2019 11:34:01 -0700 (PDT)
-X-Google-Original-Date: Tue, 01 Oct 2019 11:31:56 PDT (-0700)
-Subject: Re: [PATCH v1 18/28] target/riscv: Add hfence instructions
-In-Reply-To: <d0a6c68c4af8e3f160cce19fea8bbd9f20aea0be.1566603412.git.alistair.francis@wdc.com>
+ Tue, 01 Oct 2019 11:34:03 -0700 (PDT)
+Date: Tue, 01 Oct 2019 11:34:03 -0700 (PDT)
+X-Google-Original-Date: Tue, 01 Oct 2019 11:32:24 PDT (-0700)
+Subject: Re: [PATCH v1 19/28] target/riscv: Disable guest FP support based on
+ virtual status
+In-Reply-To: <4f1ff6ef5fb2baa3c461d16b5669d3bd829733a0.1566603412.git.alistair.francis@wdc.com>
 CC: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
  Alistair Francis <Alistair.Francis@wdc.com>, alistair23@gmail.com,
  Atish Patra <Atish.Patra@wdc.com>, Anup Patel <Anup.Patel@wdc.com>
 From: Palmer Dabbelt <palmer@sifive.com>
 To: Alistair Francis <Alistair.Francis@wdc.com>
-Message-ID: <mhng-11759a7c-bd92-4ae8-9d7c-4def81fe4feb@palmer-si-x1c4>
+Message-ID: <mhng-caebff54-201e-4407-a992-d99a8a33817c@palmer-si-x1c4>
 Mime-Version: 1.0 (MHng)
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::441
+X-Received-From: 2607:f8b0:4864:20::444
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -72,102 +72,31 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Oct 2019 18:34:05 -0000
+X-List-Received-Date: Tue, 01 Oct 2019 18:34:07 -0000
 
-On Fri, 23 Aug 2019 16:38:36 PDT (-0700), Alistair Francis wrote:
+On Fri, 23 Aug 2019 16:38:39 PDT (-0700), Alistair Francis wrote:
+> When the Hypervisor extension is in use we only enable floating point
+> support when both status and vsstatus have enabled floating point
+> support.
+>
 > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 > ---
->  target/riscv/insn32.decode                    | 23 ++++++-----
->  .../riscv/insn_trans/trans_privileged.inc.c   | 40 +++++++++++++++++++
->  2 files changed, 54 insertions(+), 9 deletions(-)
+>  target/riscv/cpu_helper.c | 3 +++
+>  1 file changed, 3 insertions(+)
 >
-> diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-> index 77f794ed70..cfd9ca6d2b 100644
-> --- a/target/riscv/insn32.decode
-> +++ b/target/riscv/insn32.decode
-> @@ -63,20 +63,25 @@
->  @r2_rm   .......   ..... ..... ... ..... ....... %rs1 %rm %rd
->  @r2      .......   ..... ..... ... ..... ....... %rs1 %rd
->
-> +@hfence_gvma ....... ..... .....   ... ..... ....... %rs2 %rs1
-> +@hfence_bvma ....... ..... .....   ... ..... ....... %rs2 %rs1
-> +
->  @sfence_vma ....... ..... .....   ... ..... ....... %rs2 %rs1
->  @sfence_vm  ....... ..... .....   ... ..... ....... %rs1
->
->
->  # *** Privileged Instructions ***
-> -ecall      000000000000     00000 000 00000 1110011
-> -ebreak     000000000001     00000 000 00000 1110011
-> -uret       0000000    00010 00000 000 00000 1110011
-> -sret       0001000    00010 00000 000 00000 1110011
-> -hret       0010000    00010 00000 000 00000 1110011
-> -mret       0011000    00010 00000 000 00000 1110011
-> -wfi        0001000    00101 00000 000 00000 1110011
-> -sfence_vma 0001001    ..... ..... 000 00000 1110011 @sfence_vma
-> -sfence_vm  0001000    00100 ..... 000 00000 1110011 @sfence_vm
-> +ecall       000000000000     00000 000 00000 1110011
-> +ebreak      000000000001     00000 000 00000 1110011
-> +uret        0000000    00010 00000 000 00000 1110011
-> +sret        0001000    00010 00000 000 00000 1110011
-> +hret        0010000    00010 00000 000 00000 1110011
-> +mret        0011000    00010 00000 000 00000 1110011
-> +wfi         0001000    00101 00000 000 00000 1110011
-> +hfence_gvma 0110001    ..... ..... 000 00000 1110011 @hfence_gvma
-> +hfence_bvma 0010001    ..... ..... 000 00000 1110011 @hfence_bvma
-> +sfence_vma  0001001    ..... ..... 000 00000 1110011 @sfence_vma
-> +sfence_vm   0001000    00100 ..... 000 00000 1110011 @sfence_vm
->
->  # *** RV32I Base Instruction Set ***
->  lui      ....................       ..... 0110111 @u
-> diff --git a/target/riscv/insn_trans/trans_privileged.inc.c b/target/riscv/insn_trans/trans_privileged.inc.c
-> index c5e4b3e49a..b9b5a89b52 100644
-> --- a/target/riscv/insn_trans/trans_privileged.inc.c
-> +++ b/target/riscv/insn_trans/trans_privileged.inc.c
-> @@ -108,3 +108,43 @@ static bool trans_sfence_vm(DisasContext *ctx, arg_sfence_vm *a)
->  #endif
->      return false;
->  }
-> +
-> +static bool trans_hfence_gvma(DisasContext *ctx, arg_sfence_vma *a)
-> +{
-> +#ifndef CONFIG_USER_ONLY
-> +    if (ctx->priv_ver >= PRIV_VERSION_1_10_0 &&
-> +        has_ext(ctx, RVH)) {
-> +        /* Hpervisor extensions exist */
-> +        /*
-> +         * if (env->priv == PRV_M ||
-> +         *   (env->priv == PRV_S &&
-> +         *    !riscv_cpu_virt_enabled(env) &&
-> +         *    get_field(ctx->mstatus_fs, MSTATUS_TVM))) {
-> +         */
-> +            gen_helper_tlb_flush(cpu_env);
-> +            return true;
-> +        /* } */
-> +    }
-> +#endif
-> +    return false;
-> +}
-> +
-> +static bool trans_hfence_bvma(DisasContext *ctx, arg_sfence_vma *a)
-> +{
-> +#ifndef CONFIG_USER_ONLY
-> +    if (ctx->priv_ver >= PRIV_VERSION_1_10_0 &&
-> +        has_ext(ctx, RVH)) {
-> +        /* Hpervisor extensions exist */
-> +        /*
-> +         * if (env->priv == PRV_M ||
-> +         *   (env->priv == PRV_S &&
-> +         *    !riscv_cpu_virt_enabled(env) &&
-> +         *    get_field(ctx->mstatus_fs, MSTATUS_TVM))) {
-> +         */
-> +            gen_helper_tlb_flush(cpu_env);
-> +            return true;
-> +        /* } */
-> +    }
-> +#endif
-> +    return false;
-> +}
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index 17eec6217b..098873c83e 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -90,6 +90,9 @@ bool riscv_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
+>  bool riscv_cpu_fp_enabled(CPURISCVState *env)
+>  {
+>      if (*env->mstatus & MSTATUS_FS) {
+> +        if (riscv_cpu_virt_enabled(env) && !(env->vsstatus & MSTATUS_FS)) {
+> +            return false;
+> +        }
+>          return true;
+>      }
 
 Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
 
