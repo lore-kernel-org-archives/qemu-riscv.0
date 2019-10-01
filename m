@@ -1,62 +1,81 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iF033-0004i1-H3
-	for mharc-qemu-riscv@gnu.org; Mon, 30 Sep 2019 14:05:25 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:55637)
+	id 1iFMR9-0002ML-Iu
+	for mharc-qemu-riscv@gnu.org; Tue, 01 Oct 2019 13:59:47 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:37889)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <alistair23@gmail.com>) id 1iF02x-0004gz-KJ
- for qemu-riscv@nongnu.org; Mon, 30 Sep 2019 14:05:21 -0400
+ (envelope-from <mark.cave-ayland@ilande.co.uk>) id 1iFMR7-0002KL-Hn
+ for qemu-riscv@nongnu.org; Tue, 01 Oct 2019 13:59:46 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1iF02w-0005hD-IY
- for qemu-riscv@nongnu.org; Mon, 30 Sep 2019 14:05:19 -0400
-Received: from mail-lf1-x142.google.com ([2a00:1450:4864:20::142]:36341)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1iF02t-0005eq-W6; Mon, 30 Sep 2019 14:05:16 -0400
-Received: by mail-lf1-x142.google.com with SMTP id x80so7773013lff.3;
- Mon, 30 Sep 2019 11:05:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=qbAWtxRsy/NMXfNeZQkP2QtBTIR7MRb2SHAvDdiJmtk=;
- b=Y1vFB6WsnMtQLjjNHBIPx+1BwTxrOgggLmZNDfN9tR4k2enYi6d9Kx2aq0ZkOGrnil
- LKSFF04HSxlohhDhSOCDsL5+UhwL86HtPDq/LBnN2m2bY0OmPiU1L8uHecuGpIDcn4uK
- A4gITZ8xz1j90/Q1uWFAyhdKrSwQDczhBhgXp6UnVWTXAIp+WXiTsBI4+9OOnH5U9hIi
- 7Wo9EEnnd2Jal8xhPeL1W3xClZujxOGTkZFbbTVZQMl9JGwRjvofpUV6qLII9h+JeNMV
- XREMb3HssE5DGb8zad2aFvBOTmxk4a9AsL0U8vi21sF3awaoCMU5XmCVzv0y74WRVOwi
- akvA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=qbAWtxRsy/NMXfNeZQkP2QtBTIR7MRb2SHAvDdiJmtk=;
- b=aboeRGHr9oyDqBSb8C5cmdiF9OEA9UTBAB3GreItrIiSEJPFeY4wDOcpYogf4Bgmlj
- 3AlZmyBd4/v6sMzscTKoiSZt5zUb7H4HHmHAm8r0uXkPmVX7tUEtYr/lzWzZsrm++mEe
- t4PSHsOziUSPylMat0CcETMVm54ykTkYC5EaI6xjJZUM+/kj00PhTO6oIkf/+jkJC04a
- NknIs6Iq9LE+PWsydGomeDsMLtcvENz5ogmlEWfTBNt5zGH/ygIECN4DTAubwlDM9m6T
- fN7NIdO6SsQMTAAg4kyW9+pDDodfXguhGNzDRzBN7Jm8UTQgn8f5PNWnGlJEvmLHLccx
- XD+w==
-X-Gm-Message-State: APjAAAWozHyaB+8ssf+ZE6QjW9Iueg0cMmj8oNu+cbJEB2BlPSbZUFqH
- j6e+uU3h8PirjOavJx4b2Xm12MATsmemSXl6N2c=
-X-Google-Smtp-Source: APXvYqz7ID+a97wUQ4Jyo7Xat5JoXYNb9m4AgmjlMLiU72asVMT3iSGnIISLcZPsNrLHh1xssug+Gx8VNadUSTOS4dw=
-X-Received: by 2002:a19:4912:: with SMTP id w18mr11814539lfa.93.1569866714364; 
- Mon, 30 Sep 2019 11:05:14 -0700 (PDT)
+ (envelope-from <mark.cave-ayland@ilande.co.uk>) id 1iFMR6-0007br-FE
+ for qemu-riscv@nongnu.org; Tue, 01 Oct 2019 13:59:45 -0400
+Received: from mail.ilande.co.uk ([46.43.2.167]:47876
+ helo=mail.default.ilande.uk0.bigv.io)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <mark.cave-ayland@ilande.co.uk>)
+ id 1iFMR6-0006ZF-9Z; Tue, 01 Oct 2019 13:59:44 -0400
+Received: from host86-133-194-221.range86-133.btcentralplus.com
+ ([86.133.194.221] helo=[192.168.1.65])
+ by mail.default.ilande.uk0.bigv.io with esmtpsa
+ (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.89)
+ (envelope-from <mark.cave-ayland@ilande.co.uk>)
+ id 1iFMOI-0007Yu-Tm; Tue, 01 Oct 2019 18:56:51 +0100
+To: Peter Maydell <peter.maydell@linaro.org>,
+ =?UTF-8?Q?Alex_Benn=c3=a9e?= <alex.bennee@linaro.org>
+Cc: =?UTF-8?Q?Daniel_P=2e_Berrang=c3=a9?= <berrange@redhat.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ QEMU Developers <qemu-devel@nongnu.org>,
+ "qemu-discuss@nongnu.org" <qemu-discuss@nongnu.org>,
+ qemu-s390x <qemu-s390x@nongnu.org>, "qemu-arm@nongnu.org"
+ <qemu-arm@nongnu.org>, qemu-ppc <qemu-ppc@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
+References: <20190925233013.6449-1-alex.bennee@linaro.org>
+ <CAFEAcA9vb5_Mi_axWpu7269Zg0xMLbiiV80ofLeyDpfws3G4nQ@mail.gmail.com>
+ <4512b61a-ed82-e628-88e5-f44ef87c2b50@linaro.org>
+ <20190930092519.GB11996@redhat.com> <87impakrky.fsf@linaro.org>
+ <CAFEAcA8_Zt+4RuXh8ww3Xm5=fQT+e_XcjZ6VC2N9k5mzLy0bnw@mail.gmail.com>
+From: Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>
+Openpgp: preference=signencrypt
+Autocrypt: addr=mark.cave-ayland@ilande.co.uk; keydata=
+ mQENBFQJuzwBCADAYvxrwUh1p/PvUlNFwKosVtVHHplgWi5p29t58QlOUkceZG0DBYSNqk93
+ 3JzBTbtd4JfFcSupo6MNNOrCzdCbCjZ64ik8ycaUOSzK2tKbeQLEXzXoaDL1Y7vuVO7nL9bG
+ E5Ru3wkhCFc7SkoypIoAUqz8EtiB6T89/D9TDEyjdXUacc53R5gu8wEWiMg5MQQuGwzbQy9n
+ PFI+mXC7AaEUqBVc2lBQVpAYXkN0EyqNNT12UfDLdxaxaFpUAE2pCa2LTyo5vn5hEW+i3VdN
+ PkmjyPvL6DdY03fvC01PyY8zaw+UI94QqjlrDisHpUH40IUPpC/NB0LwzL2aQOMkzT2NABEB
+ AAG0ME1hcmsgQ2F2ZS1BeWxhbmQgPG1hcmsuY2F2ZS1heWxhbmRAaWxhbmRlLmNvLnVrPokB
+ OAQTAQIAIgUCVAm7PAIbAwYLCQgHAwIGFQgCCQoLBBYCAwECHgECF4AACgkQW8LFb64PMh9f
+ NAgAuc3ObOEY8NbZko72AGrg2tWKdybcMVITxmcor4hb9155o/OWcA4IDbeATR6cfiDL/oxU
+ mcmtXVgPqOwtW3NYAKr5g/FrZZ3uluQ2mtNYAyTFeALy8YF7N3yhs7LOcpbFP7tEbkSzoXNG
+ z8iYMiYtKwttt40WaheWuRs0ZOLbs6yoczZBDhna3Nj0LA3GpeJKlaV03O4umjKJgACP1c/q
+ T2Pkg+FCBHHFP454+waqojHp4OCBo6HyK+8I4wJRa9Z0EFqXIu8lTDYoggeX0Xd6bWeCFHK3
+ DhD0/Xi/kegSW33unsp8oVcM4kcFxTkpBgj39dB4KwAUznhTJR0zUHf63LkBDQRUCbs8AQgA
+ y7kyevA4bpetM/EjtuqQX4U05MBhEz/2SFkX6IaGtTG2NNw5wbcAfhOIuNNBYbw6ExuaJ3um
+ 2uLseHnudmvN4VSJ5Hfbd8rhqoMmmO71szgT/ZD9MEe2KHzBdmhmhxJdp+zQNivy215j6H27
+ 14mbC2dia7ktwP1rxPIX1OOfQwPuqlkmYPuVwZP19S4EYnCELOrnJ0m56tZLn5Zj+1jZX9Co
+ YbNLMa28qsktYJ4oU4jtn6V79H+/zpERZAHmH40IRXdR3hA+Ye7iC/ZpWzT2VSDlPbGY9Yja
+ Sp7w2347L5G+LLbAfaVoejHlfy/msPeehUcuKjAdBLoEhSPYzzdvEQARAQABiQEfBBgBAgAJ
+ BQJUCbs8AhsMAAoJEFvCxW+uDzIfabYIAJXmBepHJpvCPiMNEQJNJ2ZSzSjhic84LTMWMbJ+
+ opQgr5cb8SPQyyb508fc8b4uD8ejlF/cdbbBNktp3BXsHlO5BrmcABgxSP8HYYNsX0n9kERv
+ NMToU0oiBuAaX7O/0K9+BW+3+PGMwiu5ml0cwDqljxfVN0dUBZnQ8kZpLsY+WDrIHmQWjtH+
+ Ir6VauZs5Gp25XLrL6bh/SL8aK0BX6y79m5nhfKI1/6qtzHAjtMAjqy8ChPvOqVVVqmGUzFg
+ KPsrrIoklWcYHXPyMLj9afispPVR8e0tMKvxzFBWzrWX1mzljbBlnV2n8BIwVXWNbgwpHSsj
+ imgcU9TTGC5qd9g=
+Message-ID: <ddf455e3-742e-81ce-c51a-d783e8d2ad55@ilande.co.uk>
+Date: Tue, 1 Oct 2019 18:56:26 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.9.0
 MIME-Version: 1.0
-References: <cover.1569545046.git.alistair.francis@wdc.com>
- <a24af06cea57073f4a75381755ab05e825679445.1569545046.git.alistair.francis@wdc.com>
- <CAEUhbmVvsujN-EG3hdpaAbf-OF-NvvQnX4k5KWS_MscPHhKg-A@mail.gmail.com>
-In-Reply-To: <CAEUhbmVvsujN-EG3hdpaAbf-OF-NvvQnX4k5KWS_MscPHhKg-A@mail.gmail.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 30 Sep 2019 11:04:45 -0700
-Message-ID: <CAKmqyKPMOAq3oeU-_MQHBAbzTv__iKr=uR8WkCfGbH8yk4afFg@mail.gmail.com>
-Subject: Re: [PATCH v2 4/7] riscv/sifive_u: Add the start-in-flash property
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Alistair Francis <alistair.francis@wdc.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Palmer Dabbelt <palmer@sifive.com>
-Content-Type: text/plain; charset="UTF-8"
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2a00:1450:4864:20::142
+In-Reply-To: <CAFEAcA8_Zt+4RuXh8ww3Xm5=fQT+e_XcjZ6VC2N9k5mzLy0bnw@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-GB
+Content-Transfer-Encoding: 8bit
+X-SA-Exim-Connect-IP: 86.133.194.221
+X-SA-Exim-Mail-From: mark.cave-ayland@ilande.co.uk
+Subject: Re: [RFC PATCH] configure: deprecate 32 bit build hosts
+X-SA-Exim-Version: 4.2.1 (built Tue, 02 Aug 2016 21:08:31 +0000)
+X-SA-Exim-Scanned: Yes (on mail.default.ilande.uk0.bigv.io)
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+ [fuzzy]
+X-Received-From: 46.43.2.167
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -68,103 +87,29 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Sep 2019 18:05:21 -0000
+X-List-Received-Date: Tue, 01 Oct 2019 17:59:46 -0000
 
-On Fri, Sep 27, 2019 at 12:57 AM Bin Meng <bmeng.cn@gmail.com> wrote:
->
-> On Fri, Sep 27, 2019 at 8:55 AM Alistair Francis
-> <alistair.francis@wdc.com> wrote:
-> >
-> > Add a property that when set to true QEMU will jump from the ROM code to
-> > the start of flash memory instead of DRAM which is the default
-> > behaviour.
-> >
-> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> > ---
-> >  hw/riscv/sifive_u.c         | 27 +++++++++++++++++++++++++++
-> >  include/hw/riscv/sifive_u.h |  2 ++
-> >  2 files changed, 29 insertions(+)
-> >
-> > diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-> > index f5741e9a38..33b55d0d5b 100644
-> > --- a/hw/riscv/sifive_u.c
-> > +++ b/hw/riscv/sifive_u.c
-> > @@ -373,6 +373,10 @@ static void riscv_sifive_u_init(MachineState *machine)
-> >                                         /* dtb: */
-> >      };
-> >
-> > +    if (s->start_in_flash) {
-> > +        reset_vec[6] = memmap[SIFIVE_U_FLASH0].base; /* start: .dword FLASH0_BASE */
-> > +    }
->
-> Please change to use the way that patch "[v2,7/7] riscv/virt: Jump to
-> pflash if specified" does for consistency, ie:
->
->     if (s->start_in_flash) {
->         start_addr = memmap[SIFIVE_U_FLASH0].base; /* start: .dword
-> FLASH0_BASE */
->     }
->
-> > +
-> >      /* copy in the reset vector in little_endian byte order */
-> >      for (i = 0; i < sizeof(reset_vec) >> 2; i++) {
-> >          reset_vec[i] = cpu_to_le32(reset_vec[i]);
-> > @@ -432,8 +436,31 @@ static void riscv_sifive_u_soc_init(Object *obj)
-> >                            TYPE_CADENCE_GEM);
-> >  }
-> >
-> > +static bool virt_get_start_in_flash(Object *obj, Error **errp)
->
-> sifive_u_get_start_in_flash()
->
-> > +{
-> > +    SiFiveUState *s = RISCV_U_MACHINE(obj);
-> > +
-> > +    return s->start_in_flash;
-> > +}
-> > +
-> > +static void virt_set_start_in_flash(Object *obj, bool value, Error **errp)
->
-> sifive_u_set_start_in_flash()
+On 30/09/2019 12:41, Peter Maydell wrote:
 
-Yep, I have fixed all of these.
+> On Mon, 30 Sep 2019 at 11:26, Alex Bennée <alex.bennee@linaro.org> wrote:
+>> The int128 support is due to the fact we are going to start to see newer
+>> architectures with things like 128 bit shadow capability registers and
+>> they will be a pain to shuffle around in 32 bit generated host code as
+>> well as requiring writing new extra plumbing for TCG's pre/post amble to
+>> pass them back and forth between C and generated code. These guest
+>> architectures may not even be full 64 bit guests so it's not quite as
+>> simple as saying you can't have 64 bit guests on a 32 bit host.
+> 
+> I think that for int128_t in particular, the ideal answer is
+> that if the compiler developers want to introduce a new
+> abstraction like that, they should support it on all targets,
+> not just half of them...
 
-Alistair
+Just out of interest, which host/compiler combinations don't currently implement
+int128_t?
 
->
-> > +{
-> > +    SiFiveUState *s = RISCV_U_MACHINE(obj);
-> > +
-> > +    s->start_in_flash = value;
-> > +}
-> > +
-> >  static void riscv_sifive_u_machine_instance_init(Object *obj)
-> >  {
-> > +    SiFiveUState *s = RISCV_U_MACHINE(obj);
-> > +
-> > +    s->start_in_flash = false;
-> > +    object_property_add_bool(obj, "start-in-flash", virt_get_start_in_flash,
-> > +                             virt_set_start_in_flash, NULL);
-> > +    object_property_set_description(obj, "start-in-flash",
-> > +                                    "Set on to tell QEMU's ROM to jump to " \
-> > +                                    "flash. Otherwise QEMU will jump to DRAM",
-> > +                                    NULL);
-> >  }
-> >
-> >  static void riscv_sifive_u_soc_realize(DeviceState *dev, Error **errp)
-> > diff --git a/include/hw/riscv/sifive_u.h b/include/hw/riscv/sifive_u.h
-> > index a921079fbe..2656b43c58 100644
-> > --- a/include/hw/riscv/sifive_u.h
-> > +++ b/include/hw/riscv/sifive_u.h
-> > @@ -57,6 +57,8 @@ typedef struct SiFiveUState {
-> >
-> >      void *fdt;
-> >      int fdt_size;
-> > +
-> > +    bool start_in_flash;
-> >  } SiFiveUState;
-> >
->
-> Regards,
-> Bin
+
+ATB,
+
+Mark.
 
