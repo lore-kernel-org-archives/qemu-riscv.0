@@ -1,28 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iFMR9-0002ML-Iu
-	for mharc-qemu-riscv@gnu.org; Tue, 01 Oct 2019 13:59:47 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37889)
+	id 1iFMTe-00045Y-Uh
+	for mharc-qemu-riscv@gnu.org; Tue, 01 Oct 2019 14:02:22 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:38424)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <mark.cave-ayland@ilande.co.uk>) id 1iFMR7-0002KL-Hn
- for qemu-riscv@nongnu.org; Tue, 01 Oct 2019 13:59:46 -0400
+ (envelope-from <richard.henderson@linaro.org>) id 1iFMTb-00041A-6a
+ for qemu-riscv@nongnu.org; Tue, 01 Oct 2019 14:02:19 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <mark.cave-ayland@ilande.co.uk>) id 1iFMR6-0007br-FE
- for qemu-riscv@nongnu.org; Tue, 01 Oct 2019 13:59:45 -0400
-Received: from mail.ilande.co.uk ([46.43.2.167]:47876
- helo=mail.default.ilande.uk0.bigv.io)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <mark.cave-ayland@ilande.co.uk>)
- id 1iFMR6-0006ZF-9Z; Tue, 01 Oct 2019 13:59:44 -0400
-Received: from host86-133-194-221.range86-133.btcentralplus.com
- ([86.133.194.221] helo=[192.168.1.65])
- by mail.default.ilande.uk0.bigv.io with esmtpsa
- (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.89)
- (envelope-from <mark.cave-ayland@ilande.co.uk>)
- id 1iFMOI-0007Yu-Tm; Tue, 01 Oct 2019 18:56:51 +0100
-To: Peter Maydell <peter.maydell@linaro.org>,
+ (envelope-from <richard.henderson@linaro.org>) id 1iFMTa-0000Cd-3Y
+ for qemu-riscv@nongnu.org; Tue, 01 Oct 2019 14:02:19 -0400
+Received: from mail-pf1-x444.google.com ([2607:f8b0:4864:20::444]:37705)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
+ id 1iFMTZ-0000Bq-SY
+ for qemu-riscv@nongnu.org; Tue, 01 Oct 2019 14:02:18 -0400
+Received: by mail-pf1-x444.google.com with SMTP id y5so8594866pfo.4
+ for <qemu-riscv@nongnu.org>; Tue, 01 Oct 2019 11:02:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=subject:to:cc:references:from:openpgp:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=2XXEriAxokMcV7VOY031/4RQoGYJDLoaB/07nRGpCKM=;
+ b=GcSKQVJe0hDgfuUVrjwf8cbVpJsYjZJ8FYiDKjunSttpomWeGlaVhfljPY/+JtTcAJ
+ GI4bjuWcDbmE/xGI/K1uIHI70u4ML9zHIf01veQ5UgJ+oqrNCQP7Y6haSMqXOV/NeYB+
+ HTBkbe+q6L9+6drCOEAGDKZktDfBn+1fxswfMajwGEBTBTzxJ+Exy8FecNe/t2+R7N4t
+ QR+OxZ/e7bdInv6u5DhPfyEgF44AXxuL69a6O02eGU0YwoZmCE1DAsV50V2o7X9Ct4oJ
+ AuSuT7enz0stT4TNTC3dty+smG6G6emQSUnHmp6K9hzbc1mMKq1T7WLH+ffYB7uphQMq
+ 4eLg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
+ :date:user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=2XXEriAxokMcV7VOY031/4RQoGYJDLoaB/07nRGpCKM=;
+ b=grK0Ck9w/yKrhFuEeRHdRh0xmDO4xFpagVby1er+9O5W4z9hk/y4J4+jOi7N9Ms7L3
+ SEEUEYJKSSSeFTsY7VjVwbnyNQWI1n+Vgl6P5RGErz3AmGb4YfjwQLufzkaZODJqyA9c
+ 45dlCOci9Fmg6tndRVN0v5nUy2DGhxL7/Zj9Zltyll7IYpzAsn8x6FUT/1Ow6CuT0DXf
+ NnGHTr4JlXOrcO1stRsPC8w03rrF+8gwdQokNxoct/hJ6xUHjJYxiPDA25K2MAd3bXCN
+ OFM73u1M6OBeVor/TTdvq6p1Qg8Lf2oP85y5ZCfsi5Ab4yPNjI9y+OIte51HuaJH9fZ5
+ J1Gw==
+X-Gm-Message-State: APjAAAVeWLEOTwd0/v+JgqL/ciN977Bp9UUPys+RqNJNxCkcpKuu7iS3
+ ncUScPDCrInyHT62//noT80duBtOURU=
+X-Google-Smtp-Source: APXvYqwkbbkDV8sT9mZvbQO/xf2srShFmxJ4hZ0ngt3dV9YdFQYTxA9H+mo/23++bqgXGLQqotirmQ==
+X-Received: by 2002:a63:dc13:: with SMTP id s19mr31102952pgg.272.1569952936575; 
+ Tue, 01 Oct 2019 11:02:16 -0700 (PDT)
+Received: from [192.168.1.11] (97-113-7-119.tukw.qwest.net. [97.113.7.119])
+ by smtp.gmail.com with ESMTPSA id n6sm15997932pgp.12.2019.10.01.11.02.15
+ (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+ Tue, 01 Oct 2019 11:02:15 -0700 (PDT)
+Subject: Re: [RFC PATCH] configure: deprecate 32 bit build hosts
+To: Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Peter Maydell <peter.maydell@linaro.org>,
  =?UTF-8?Q?Alex_Benn=c3=a9e?= <alex.bennee@linaro.org>
 Cc: =?UTF-8?Q?Daniel_P=2e_Berrang=c3=a9?= <berrange@redhat.com>,
- Richard Henderson <richard.henderson@linaro.org>,
  QEMU Developers <qemu-devel@nongnu.org>,
  "qemu-discuss@nongnu.org" <qemu-discuss@nongnu.org>,
  qemu-s390x <qemu-s390x@nongnu.org>, "qemu-arm@nongnu.org"
@@ -33,49 +61,21 @@ References: <20190925233013.6449-1-alex.bennee@linaro.org>
  <4512b61a-ed82-e628-88e5-f44ef87c2b50@linaro.org>
  <20190930092519.GB11996@redhat.com> <87impakrky.fsf@linaro.org>
  <CAFEAcA8_Zt+4RuXh8ww3Xm5=fQT+e_XcjZ6VC2N9k5mzLy0bnw@mail.gmail.com>
-From: Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>
+ <ddf455e3-742e-81ce-c51a-d783e8d2ad55@ilande.co.uk>
+From: Richard Henderson <richard.henderson@linaro.org>
 Openpgp: preference=signencrypt
-Autocrypt: addr=mark.cave-ayland@ilande.co.uk; keydata=
- mQENBFQJuzwBCADAYvxrwUh1p/PvUlNFwKosVtVHHplgWi5p29t58QlOUkceZG0DBYSNqk93
- 3JzBTbtd4JfFcSupo6MNNOrCzdCbCjZ64ik8ycaUOSzK2tKbeQLEXzXoaDL1Y7vuVO7nL9bG
- E5Ru3wkhCFc7SkoypIoAUqz8EtiB6T89/D9TDEyjdXUacc53R5gu8wEWiMg5MQQuGwzbQy9n
- PFI+mXC7AaEUqBVc2lBQVpAYXkN0EyqNNT12UfDLdxaxaFpUAE2pCa2LTyo5vn5hEW+i3VdN
- PkmjyPvL6DdY03fvC01PyY8zaw+UI94QqjlrDisHpUH40IUPpC/NB0LwzL2aQOMkzT2NABEB
- AAG0ME1hcmsgQ2F2ZS1BeWxhbmQgPG1hcmsuY2F2ZS1heWxhbmRAaWxhbmRlLmNvLnVrPokB
- OAQTAQIAIgUCVAm7PAIbAwYLCQgHAwIGFQgCCQoLBBYCAwECHgECF4AACgkQW8LFb64PMh9f
- NAgAuc3ObOEY8NbZko72AGrg2tWKdybcMVITxmcor4hb9155o/OWcA4IDbeATR6cfiDL/oxU
- mcmtXVgPqOwtW3NYAKr5g/FrZZ3uluQ2mtNYAyTFeALy8YF7N3yhs7LOcpbFP7tEbkSzoXNG
- z8iYMiYtKwttt40WaheWuRs0ZOLbs6yoczZBDhna3Nj0LA3GpeJKlaV03O4umjKJgACP1c/q
- T2Pkg+FCBHHFP454+waqojHp4OCBo6HyK+8I4wJRa9Z0EFqXIu8lTDYoggeX0Xd6bWeCFHK3
- DhD0/Xi/kegSW33unsp8oVcM4kcFxTkpBgj39dB4KwAUznhTJR0zUHf63LkBDQRUCbs8AQgA
- y7kyevA4bpetM/EjtuqQX4U05MBhEz/2SFkX6IaGtTG2NNw5wbcAfhOIuNNBYbw6ExuaJ3um
- 2uLseHnudmvN4VSJ5Hfbd8rhqoMmmO71szgT/ZD9MEe2KHzBdmhmhxJdp+zQNivy215j6H27
- 14mbC2dia7ktwP1rxPIX1OOfQwPuqlkmYPuVwZP19S4EYnCELOrnJ0m56tZLn5Zj+1jZX9Co
- YbNLMa28qsktYJ4oU4jtn6V79H+/zpERZAHmH40IRXdR3hA+Ye7iC/ZpWzT2VSDlPbGY9Yja
- Sp7w2347L5G+LLbAfaVoejHlfy/msPeehUcuKjAdBLoEhSPYzzdvEQARAQABiQEfBBgBAgAJ
- BQJUCbs8AhsMAAoJEFvCxW+uDzIfabYIAJXmBepHJpvCPiMNEQJNJ2ZSzSjhic84LTMWMbJ+
- opQgr5cb8SPQyyb508fc8b4uD8ejlF/cdbbBNktp3BXsHlO5BrmcABgxSP8HYYNsX0n9kERv
- NMToU0oiBuAaX7O/0K9+BW+3+PGMwiu5ml0cwDqljxfVN0dUBZnQ8kZpLsY+WDrIHmQWjtH+
- Ir6VauZs5Gp25XLrL6bh/SL8aK0BX6y79m5nhfKI1/6qtzHAjtMAjqy8ChPvOqVVVqmGUzFg
- KPsrrIoklWcYHXPyMLj9afispPVR8e0tMKvxzFBWzrWX1mzljbBlnV2n8BIwVXWNbgwpHSsj
- imgcU9TTGC5qd9g=
-Message-ID: <ddf455e3-742e-81ce-c51a-d783e8d2ad55@ilande.co.uk>
-Date: Tue, 1 Oct 2019 18:56:26 +0100
+Message-ID: <58da7aa4-877b-2c85-71f5-e703a841e6d4@linaro.org>
+Date: Tue, 1 Oct 2019 11:02:14 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.9.0
+ Thunderbird/60.8.0
 MIME-Version: 1.0
-In-Reply-To: <CAFEAcA8_Zt+4RuXh8ww3Xm5=fQT+e_XcjZ6VC2N9k5mzLy0bnw@mail.gmail.com>
+In-Reply-To: <ddf455e3-742e-81ce-c51a-d783e8d2ad55@ilande.co.uk>
 Content-Type: text/plain; charset=utf-8
-Content-Language: en-GB
-Content-Transfer-Encoding: 8bit
-X-SA-Exim-Connect-IP: 86.133.194.221
-X-SA-Exim-Mail-From: mark.cave-ayland@ilande.co.uk
-Subject: Re: [RFC PATCH] configure: deprecate 32 bit build hosts
-X-SA-Exim-Version: 4.2.1 (built Tue, 02 Aug 2016 21:08:31 +0000)
-X-SA-Exim-Scanned: Yes (on mail.default.ilande.uk0.bigv.io)
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
- [fuzzy]
-X-Received-From: 46.43.2.167
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2607:f8b0:4864:20::444
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -87,29 +87,14 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Oct 2019 17:59:46 -0000
+X-List-Received-Date: Tue, 01 Oct 2019 18:02:20 -0000
 
-On 30/09/2019 12:41, Peter Maydell wrote:
+On 10/1/19 10:56 AM, Mark Cave-Ayland wrote:
+> Just out of interest, which host/compiler combinations don't currently implement
+> int128_t?
 
-> On Mon, 30 Sep 2019 at 11:26, Alex Bennée <alex.bennee@linaro.org> wrote:
->> The int128 support is due to the fact we are going to start to see newer
->> architectures with things like 128 bit shadow capability registers and
->> they will be a pain to shuffle around in 32 bit generated host code as
->> well as requiring writing new extra plumbing for TCG's pre/post amble to
->> pass them back and forth between C and generated code. These guest
->> architectures may not even be full 64 bit guests so it's not quite as
->> simple as saying you can't have 64 bit guests on a 32 bit host.
-> 
-> I think that for int128_t in particular, the ideal answer is
-> that if the compiler developers want to introduce a new
-> abstraction like that, they should support it on all targets,
-> not just half of them...
-
-Just out of interest, which host/compiler combinations don't currently implement
-int128_t?
+GCC only implements int128_t for 64-bit targets.
 
 
-ATB,
-
-Mark.
+r~
 
