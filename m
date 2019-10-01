@@ -1,81 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iFMTe-00045Y-Uh
-	for mharc-qemu-riscv@gnu.org; Tue, 01 Oct 2019 14:02:22 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:38424)
+	id 1iFMyL-0008KV-WE
+	for mharc-qemu-riscv@gnu.org; Tue, 01 Oct 2019 14:34:06 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:41413)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <richard.henderson@linaro.org>) id 1iFMTb-00041A-6a
- for qemu-riscv@nongnu.org; Tue, 01 Oct 2019 14:02:19 -0400
+ (envelope-from <palmer@sifive.com>) id 1iFMyJ-0008Jt-FD
+ for qemu-riscv@nongnu.org; Tue, 01 Oct 2019 14:34:04 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <richard.henderson@linaro.org>) id 1iFMTa-0000Cd-3Y
- for qemu-riscv@nongnu.org; Tue, 01 Oct 2019 14:02:19 -0400
-Received: from mail-pf1-x444.google.com ([2607:f8b0:4864:20::444]:37705)
+ (envelope-from <palmer@sifive.com>) id 1iFMyI-0002hb-3b
+ for qemu-riscv@nongnu.org; Tue, 01 Oct 2019 14:34:03 -0400
+Received: from mail-pg1-x541.google.com ([2607:f8b0:4864:20::541]:37195)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
- id 1iFMTZ-0000Bq-SY
- for qemu-riscv@nongnu.org; Tue, 01 Oct 2019 14:02:18 -0400
-Received: by mail-pf1-x444.google.com with SMTP id y5so8594866pfo.4
- for <qemu-riscv@nongnu.org>; Tue, 01 Oct 2019 11:02:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=subject:to:cc:references:from:openpgp:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=2XXEriAxokMcV7VOY031/4RQoGYJDLoaB/07nRGpCKM=;
- b=GcSKQVJe0hDgfuUVrjwf8cbVpJsYjZJ8FYiDKjunSttpomWeGlaVhfljPY/+JtTcAJ
- GI4bjuWcDbmE/xGI/K1uIHI70u4ML9zHIf01veQ5UgJ+oqrNCQP7Y6haSMqXOV/NeYB+
- HTBkbe+q6L9+6drCOEAGDKZktDfBn+1fxswfMajwGEBTBTzxJ+Exy8FecNe/t2+R7N4t
- QR+OxZ/e7bdInv6u5DhPfyEgF44AXxuL69a6O02eGU0YwoZmCE1DAsV50V2o7X9Ct4oJ
- AuSuT7enz0stT4TNTC3dty+smG6G6emQSUnHmp6K9hzbc1mMKq1T7WLH+ffYB7uphQMq
- 4eLg==
+ (Exim 4.71) (envelope-from <palmer@sifive.com>) id 1iFMyH-0002h6-SU
+ for qemu-riscv@nongnu.org; Tue, 01 Oct 2019 14:34:02 -0400
+Received: by mail-pg1-x541.google.com with SMTP id c17so10277232pgg.4
+ for <qemu-riscv@nongnu.org>; Tue, 01 Oct 2019 11:34:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+ h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
+ :content-transfer-encoding;
+ bh=S6a5oA3Zj6JrzqQjT6/wQI3o70xoT4MbmOz5qrTzy84=;
+ b=EJonZtdKHP3xCRc9u71MMH/41QaBX1QO0p6JxCyjkcGgYS9Lc97bcQIkYfeipkSPe1
+ e2UEiOU7xgsGGX+jqK4vwn4Gc2V66JOcK3kKl+SgipTHr7dnpjh2+nwoVF12MKb8YF5M
+ z6kEC6bBx+YUfMiSkqmPc1yN50BaIqcISUIgMLgjKei+75JoIhd2CD69YIEFwNYM0CRs
+ BIVPzkUQTVdMBtwfL5qdshkzLTLCF9gRfSN2cF1xuMEMfQgoB6NuHy4a8MJhxz8Q6l/6
+ v8FMrlbcXcj7VCD6FY2pMQv5gpoyw4Sik0lOw7waneiqZHcQHFpiQ//MbqdwkydXoECH
+ cjkQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
- :date:user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=2XXEriAxokMcV7VOY031/4RQoGYJDLoaB/07nRGpCKM=;
- b=grK0Ck9w/yKrhFuEeRHdRh0xmDO4xFpagVby1er+9O5W4z9hk/y4J4+jOi7N9Ms7L3
- SEEUEYJKSSSeFTsY7VjVwbnyNQWI1n+Vgl6P5RGErz3AmGb4YfjwQLufzkaZODJqyA9c
- 45dlCOci9Fmg6tndRVN0v5nUy2DGhxL7/Zj9Zltyll7IYpzAsn8x6FUT/1Ow6CuT0DXf
- NnGHTr4JlXOrcO1stRsPC8w03rrF+8gwdQokNxoct/hJ6xUHjJYxiPDA25K2MAd3bXCN
- OFM73u1M6OBeVor/TTdvq6p1Qg8Lf2oP85y5ZCfsi5Ab4yPNjI9y+OIte51HuaJH9fZ5
- J1Gw==
-X-Gm-Message-State: APjAAAVeWLEOTwd0/v+JgqL/ciN977Bp9UUPys+RqNJNxCkcpKuu7iS3
- ncUScPDCrInyHT62//noT80duBtOURU=
-X-Google-Smtp-Source: APXvYqwkbbkDV8sT9mZvbQO/xf2srShFmxJ4hZ0ngt3dV9YdFQYTxA9H+mo/23++bqgXGLQqotirmQ==
-X-Received: by 2002:a63:dc13:: with SMTP id s19mr31102952pgg.272.1569952936575; 
- Tue, 01 Oct 2019 11:02:16 -0700 (PDT)
-Received: from [192.168.1.11] (97-113-7-119.tukw.qwest.net. [97.113.7.119])
- by smtp.gmail.com with ESMTPSA id n6sm15997932pgp.12.2019.10.01.11.02.15
- (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
- Tue, 01 Oct 2019 11:02:15 -0700 (PDT)
-Subject: Re: [RFC PATCH] configure: deprecate 32 bit build hosts
-To: Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Peter Maydell <peter.maydell@linaro.org>,
- =?UTF-8?Q?Alex_Benn=c3=a9e?= <alex.bennee@linaro.org>
-Cc: =?UTF-8?Q?Daniel_P=2e_Berrang=c3=a9?= <berrange@redhat.com>,
- QEMU Developers <qemu-devel@nongnu.org>,
- "qemu-discuss@nongnu.org" <qemu-discuss@nongnu.org>,
- qemu-s390x <qemu-s390x@nongnu.org>, "qemu-arm@nongnu.org"
- <qemu-arm@nongnu.org>, qemu-ppc <qemu-ppc@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>
-References: <20190925233013.6449-1-alex.bennee@linaro.org>
- <CAFEAcA9vb5_Mi_axWpu7269Zg0xMLbiiV80ofLeyDpfws3G4nQ@mail.gmail.com>
- <4512b61a-ed82-e628-88e5-f44ef87c2b50@linaro.org>
- <20190930092519.GB11996@redhat.com> <87impakrky.fsf@linaro.org>
- <CAFEAcA8_Zt+4RuXh8ww3Xm5=fQT+e_XcjZ6VC2N9k5mzLy0bnw@mail.gmail.com>
- <ddf455e3-742e-81ce-c51a-d783e8d2ad55@ilande.co.uk>
-From: Richard Henderson <richard.henderson@linaro.org>
-Openpgp: preference=signencrypt
-Message-ID: <58da7aa4-877b-2c85-71f5-e703a841e6d4@linaro.org>
-Date: Tue, 1 Oct 2019 11:02:14 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.8.0
-MIME-Version: 1.0
-In-Reply-To: <ddf455e3-742e-81ce-c51a-d783e8d2ad55@ilande.co.uk>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+ h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
+ :mime-version:content-transfer-encoding;
+ bh=S6a5oA3Zj6JrzqQjT6/wQI3o70xoT4MbmOz5qrTzy84=;
+ b=DWxfyCMru8pwB+ttVd+OsPkrWM6SctL6RF9fCGTUaJn1MyZCTPBsXlQev5XrelLdX+
+ vosV/JDr1Q1j9jJi+7FfwD3AIA+HFUItmOY3o/byxZshF2FSu29LI3LqzsULu9/ZUacU
+ wxjL9eLxmlxfdt7/h+s7oRnt+GN6HMv9+acfHNgscgSa2uD2Kfxgpe6aQ1MMBZfPGtEm
+ qx6B2lNd2T3sotbjZ8Y2k+9j3KcFHUjy6ziOtMqHGJdKpKc6PhVCTYnayyBp+mgACNfJ
+ PrvbNqDrQSE80N9Xlyfhk00y7YYDOPd8qM/vVmYaF6l6t3dPlBXPwEE/Jf2ilil8e1gW
+ l4Lg==
+X-Gm-Message-State: APjAAAX5uaqpgX6SKNvoPaG84aK3WUXI8CNbaPj4k2bjBvDJBkNXbNDc
+ F4n/807GzhEBlC+QM+5ZvO7MfA==
+X-Google-Smtp-Source: APXvYqwCHOF1mdeKfYaRJ25LqX8lifdSE5T1sA9JBgRGxl9uvtzQvLUedip/7XlfwSfVZhcPmJ7eAQ==
+X-Received: by 2002:a62:e106:: with SMTP id q6mr28730857pfh.14.1569954840139; 
+ Tue, 01 Oct 2019 11:34:00 -0700 (PDT)
+Received: from localhost ([12.206.222.5])
+ by smtp.gmail.com with ESMTPSA id c3sm3551608pgl.51.2019.10.01.11.33.58
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 01 Oct 2019 11:33:59 -0700 (PDT)
+Date: Tue, 01 Oct 2019 11:33:59 -0700 (PDT)
+X-Google-Original-Date: Tue, 01 Oct 2019 11:27:13 PDT (-0700)
+Subject: Re: [PATCH v1 17/28] target/riscv: Add Hypervisor trap return support
+In-Reply-To: <6e2920dbef1ed86b8784827200525c5a112468b2.1566603412.git.alistair.francis@wdc.com>
+CC: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
+ Alistair Francis <Alistair.Francis@wdc.com>, alistair23@gmail.com,
+ Atish Patra <Atish.Patra@wdc.com>, Anup Patel <Anup.Patel@wdc.com>
+From: Palmer Dabbelt <palmer@sifive.com>
+To: Alistair Francis <Alistair.Francis@wdc.com>
+Message-ID: <mhng-5f63f9ba-daec-4cae-a1f8-23f2a59a244b@palmer-si-x1c4>
+Mime-Version: 1.0 (MHng)
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::444
+X-Received-From: 2607:f8b0:4864:20::541
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -87,14 +71,111 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Oct 2019 18:02:20 -0000
+X-List-Received-Date: Tue, 01 Oct 2019 18:34:04 -0000
 
-On 10/1/19 10:56 AM, Mark Cave-Ayland wrote:
-> Just out of interest, which host/compiler combinations don't currently implement
-> int128_t?
+On Fri, 23 Aug 2019 16:38:34 PDT (-0700), Alistair Francis wrote:
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> ---
+>  target/riscv/op_helper.c | 66 ++++++++++++++++++++++++++++++++--------
+>  1 file changed, 54 insertions(+), 12 deletions(-)
+>
+> diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+> index beb34e705b..5bcf5d2ff7 100644
+> --- a/target/riscv/op_helper.c
+> +++ b/target/riscv/op_helper.c
+> @@ -73,6 +73,8 @@ target_ulong helper_csrrc(CPURISCVState *env, target_ulong src,
+>
+>  target_ulong helper_sret(CPURISCVState *env, target_ulong cpu_pc_deb)
+>  {
+> +    target_ulong prev_priv, prev_virt, mstatus;
+> +
+>      if (!(env->priv >= PRV_S)) {
+>          riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
+>      }
+> @@ -87,16 +89,46 @@ target_ulong helper_sret(CPURISCVState *env, target_ulong cpu_pc_deb)
+>          riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
+>      }
+>
+> -    target_ulong mstatus = *env->mstatus;
+> -    target_ulong prev_priv = get_field(mstatus, MSTATUS_SPP);
+> -    mstatus = set_field(mstatus,
+> -        env->priv_ver >= PRIV_VERSION_1_10_0 ?
+> -        MSTATUS_SIE : MSTATUS_UIE << prev_priv,
+> -        get_field(mstatus, MSTATUS_SPIE));
+> -    mstatus = set_field(mstatus, MSTATUS_SPIE, 0);
+> -    mstatus = set_field(mstatus, MSTATUS_SPP, PRV_U);
+> +    mstatus = *env->mstatus;
+> +
+> +    if (riscv_has_ext(env, RVH) && !riscv_cpu_virt_enabled(env)) {
+> +        /* We support Hypervisor extensions and virtulisation is disabled */
+> +        target_ulong hstatus = env->hstatus;
+> +
+> +        prev_priv = get_field(mstatus, MSTATUS_SPP);
+> +        prev_virt = get_field(hstatus, HSTATUS_SPV);
+> +
+> +        hstatus = set_field(hstatus, HSTATUS_SPV,
+> +                                 get_field(hstatus, HSTATUS_SP2V));
+> +        mstatus = set_field(mstatus, MSTATUS_SPP,
+> +                            get_field(hstatus, HSTATUS_SP2P));
+> +        hstatus = set_field(hstatus, HSTATUS_SP2V, 0);
+> +        hstatus = set_field(hstatus, HSTATUS_SP2P, 0);
+> +        mstatus = set_field(mstatus, SSTATUS_SIE,
+> +                            get_field(mstatus, SSTATUS_SPIE));
+> +        mstatus = set_field(mstatus, SSTATUS_SPIE, 1);
+> +
+> +        *env->mstatus = mstatus;
+> +        env->hstatus = hstatus;
+> +
+> +        if (prev_virt == VIRT_ON) {
+> +            riscv_cpu_swap_hypervisor_regs(env);
+> +        }
+> +
+> +        riscv_cpu_set_virt_enabled(env, prev_virt);
+> +    } else {
+> +        prev_priv = get_field(mstatus, MSTATUS_SPP);
+> +
+> +        mstatus = set_field(mstatus,
+> +            env->priv_ver >= PRIV_VERSION_1_10_0 ?
+> +            MSTATUS_SIE : MSTATUS_UIE << prev_priv,
+> +            get_field(mstatus, MSTATUS_SPIE));
+> +        mstatus = set_field(mstatus, MSTATUS_SPIE, 0);
+> +        mstatus = set_field(mstatus, MSTATUS_SPP, PRV_U);
+> +        *env->mstatus = mstatus;
+> +    }
+> +
+>      riscv_cpu_set_mode(env, prev_priv);
+> -    *env->mstatus = mstatus;
+>
+>      return retpc;
+>  }
+> @@ -114,14 +146,24 @@ target_ulong helper_mret(CPURISCVState *env, target_ulong cpu_pc_deb)
+>
+>      target_ulong mstatus = *env->mstatus;
+>      target_ulong prev_priv = get_field(mstatus, MSTATUS_MPP);
+> +    target_ulong prev_virt = get_field(mstatus, MSTATUS_MPV);
+>      mstatus = set_field(mstatus,
+>          env->priv_ver >= PRIV_VERSION_1_10_0 ?
+>          MSTATUS_MIE : MSTATUS_UIE << prev_priv,
+>          get_field(mstatus, MSTATUS_MPIE));
+> -    mstatus = set_field(mstatus, MSTATUS_MPIE, 0);
+> -    mstatus = set_field(mstatus, MSTATUS_MPP, PRV_U);
+> -    riscv_cpu_set_mode(env, prev_priv);
+> +    mstatus = set_field(mstatus, MSTATUS_MPIE, 1);
+> +    mstatus = set_field(mstatus, MSTATUS_MPP, 0);
+> +    mstatus = set_field(mstatus, MSTATUS_MPV, 0);
+>      *env->mstatus = mstatus;
+> +    riscv_cpu_set_mode(env, prev_priv);
+> +
+> +    if (riscv_has_ext(env, RVH)) {
+> +        if (prev_virt == VIRT_ON) {
+> +            riscv_cpu_swap_hypervisor_regs(env);
+> +        }
+> +
+> +        riscv_cpu_set_virt_enabled(env, prev_virt);
+> +    }
+>
+>      return retpc;
+>  }
 
-GCC only implements int128_t for 64-bit targets.
-
-
-r~
+Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
 
