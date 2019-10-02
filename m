@@ -1,66 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iFMz3-0000Sf-99
-	for mharc-qemu-riscv@gnu.org; Tue, 01 Oct 2019 14:34:49 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:41608)
+	id 1iFaf2-0006Tj-E8
+	for mharc-qemu-riscv@gnu.org; Wed, 02 Oct 2019 05:11:04 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43603)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <palmer@sifive.com>) id 1iFMyw-0000QM-0S
- for qemu-riscv@nongnu.org; Tue, 01 Oct 2019 14:34:43 -0400
+ (envelope-from <berrange@redhat.com>) id 1iFaf0-0006S3-6J
+ for qemu-riscv@nongnu.org; Wed, 02 Oct 2019 05:11:03 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmer@sifive.com>) id 1iFMyt-00030v-OH
- for qemu-riscv@nongnu.org; Tue, 01 Oct 2019 14:34:41 -0400
-Received: from mail-pg1-x543.google.com ([2607:f8b0:4864:20::543]:44078)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmer@sifive.com>) id 1iFMyr-0002zE-R0
- for qemu-riscv@nongnu.org; Tue, 01 Oct 2019 14:34:37 -0400
-Received: by mail-pg1-x543.google.com with SMTP id i14so10239685pgt.11
- for <qemu-riscv@nongnu.org>; Tue, 01 Oct 2019 11:34:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
- h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
- :content-transfer-encoding;
- bh=OQi8CqLf3Tb5M+LSz1qzY7Pv1ZfhCTbNTGqS3rwVxX4=;
- b=Kp/vdRSiqArrA5SkRH8eV0CAzQp1ZegVPyzGK9YO/JiUom8yVMHS3zvJfwTQqbk7fg
- KTgMsdSIPvwo1s3/hTlUiXGojditaHxHhltRlx6AmmnvNqQ0uIrhusfknpJJT5iiSp8S
- 4wzvON3tORrseAf2fPF3VpWY62vLcBdQJoj+hx9z9PpHo7wqj5ugdJAM0HU62BNblZLe
- cBz3v6kvUDtBaoZKXqoCzO0ow8y7G1QjYt179ChJcokZLbiQf0w0HqTujJ+3xfEKOy/5
- RcExy65nEvWy5dKIG7FmWoigZacbq0UU8TasrDwTa8Se6ojsFpUSqB14xhalUxehHL+P
- K+Kw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
- :mime-version:content-transfer-encoding;
- bh=OQi8CqLf3Tb5M+LSz1qzY7Pv1ZfhCTbNTGqS3rwVxX4=;
- b=hM9KG9HvVOQjskbtxxpdC9rjjARirdMA5fntEcZ506mjYV0t0ZFmeqr7pFWV+HaKmg
- m+nOaaFX2YAzis+Nh7U5S6FrAUwF/SKtbA0EH9ME2g1JpRYAzAAgZQ2k+g/gbmfs+y9l
- tSwa8cFNF2yHnUHrOJpJcN7fvMzoyAZfN8yUuOdU1VT1Lop9m5FWNUuZm/DA2vYQ692d
- LL0kO6QDo7zt0Rwn+xqKaaM28hht7X7cFiYWQ7TOtiUc+PW+R0mQDO4lgPu5muMoyDp0
- gMzx4PkIM0GCTX0ihFv/8Zz0+7KgM36D9VRV6fV39/qgOybP02bFyOLoOm6PTRn0SW9k
- kaNg==
-X-Gm-Message-State: APjAAAVmqGd6NssXKjEvRPHHYPgkhwh/CsjyBAJLJe+8zCCGftBYBNGC
- 2GhJaU3jjpNUhQ+8NfATByOq6Q==
-X-Google-Smtp-Source: APXvYqxYvkk9MUEcdlMnSf2Nc4OHtWzpFc5Lct4D1ZB5TqSDApfpimxMUgCzWQ6EJc3Ao3bNmtVAsg==
-X-Received: by 2002:a65:4785:: with SMTP id e5mr30973147pgs.407.1569954875513; 
- Tue, 01 Oct 2019 11:34:35 -0700 (PDT)
-Received: from localhost ([12.206.222.5])
- by smtp.gmail.com with ESMTPSA id f15sm16250203pfd.141.2019.10.01.11.34.34
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 01 Oct 2019 11:34:34 -0700 (PDT)
-Date: Tue, 01 Oct 2019 11:34:34 -0700 (PDT)
-X-Google-Original-Date: Tue, 01 Oct 2019 11:34:23 PDT (-0700)
-Subject: Re: [PATCH v1 20/28] target/riscv: Mark both sstatus and vsstatus as
- dirty
-In-Reply-To: <035e50d6438660130233c472de56b883e369f6d4.1566603412.git.alistair.francis@wdc.com>
-CC: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- Alistair Francis <Alistair.Francis@wdc.com>, alistair23@gmail.com,
- Atish Patra <Atish.Patra@wdc.com>, Anup Patel <Anup.Patel@wdc.com>
-From: Palmer Dabbelt <palmer@sifive.com>
-To: Alistair Francis <Alistair.Francis@wdc.com>
-Message-ID: <mhng-de7a25b6-4610-45a6-9718-25ceeed0429f@palmer-si-x1c4>
-Mime-Version: 1.0 (MHng)
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2607:f8b0:4864:20::543
+ (envelope-from <berrange@redhat.com>) id 1iFaey-00010Q-Kr
+ for qemu-riscv@nongnu.org; Wed, 02 Oct 2019 05:11:01 -0400
+Received: from mx1.redhat.com ([209.132.183.28]:48742)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <berrange@redhat.com>)
+ id 1iFaek-0000ks-04; Wed, 02 Oct 2019 05:10:46 -0400
+Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
+ [10.5.11.14])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mx1.redhat.com (Postfix) with ESMTPS id E8A388F4E1;
+ Wed,  2 Oct 2019 09:10:41 +0000 (UTC)
+Received: from redhat.com (unknown [10.42.17.55])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id CD3175D9D3;
+ Wed,  2 Oct 2019 09:10:39 +0000 (UTC)
+Date: Wed, 2 Oct 2019 10:10:37 +0100
+From: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ QEMU Developers <qemu-devel@nongnu.org>,
+ "qemu-discuss@nongnu.org" <qemu-discuss@nongnu.org>,
+ qemu-s390x <qemu-s390x@nongnu.org>,
+ "qemu-arm@nongnu.org" <qemu-arm@nongnu.org>,
+ qemu-ppc <qemu-ppc@nongnu.org>, "open list:RISC-V" <qemu-riscv@nongnu.org>
+Subject: Re: [RFC PATCH] configure: deprecate 32 bit build hosts
+Message-ID: <20191002091037.GB607@redhat.com>
+Reply-To: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
+References: <20190925233013.6449-1-alex.bennee@linaro.org>
+ <CAFEAcA9vb5_Mi_axWpu7269Zg0xMLbiiV80ofLeyDpfws3G4nQ@mail.gmail.com>
+ <4512b61a-ed82-e628-88e5-f44ef87c2b50@linaro.org>
+ <20190930092519.GB11996@redhat.com> <87impakrky.fsf@linaro.org>
+ <CAFEAcA8_Zt+4RuXh8ww3Xm5=fQT+e_XcjZ6VC2N9k5mzLy0bnw@mail.gmail.com>
+ <ddf455e3-742e-81ce-c51a-d783e8d2ad55@ilande.co.uk>
+ <58da7aa4-877b-2c85-71f5-e703a841e6d4@linaro.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <58da7aa4-877b-2c85-71f5-e703a841e6d4@linaro.org>
+User-Agent: Mutt/1.12.1 (2019-06-15)
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+ (mx1.redhat.com [10.5.110.28]); Wed, 02 Oct 2019 09:10:42 +0000 (UTC)
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+ [fuzzy]
+X-Received-From: 209.132.183.28
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -72,53 +64,30 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Oct 2019 18:34:44 -0000
+X-List-Received-Date: Wed, 02 Oct 2019 09:11:03 -0000
 
-On Fri, 23 Aug 2019 16:38:42 PDT (-0700), Alistair Francis wrote:
-> Mark both sstatus and vsstatus as dirty (3).
->
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> ---
->  target/riscv/translate.c | 12 ++++++++++++
->  1 file changed, 12 insertions(+)
->
-> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index 8ac72c6470..19771904f4 100644
-> --- a/target/riscv/translate.c
-> +++ b/target/riscv/translate.c
-> @@ -44,6 +44,7 @@ typedef struct DisasContext {
->      /* pc_succ_insn points to the instruction following base.pc_next */
->      target_ulong pc_succ_insn;
->      target_ulong priv_ver;
-> +    bool virt_enabled;
->      uint32_t opcode;
->      uint32_t mstatus_fs;
->      uint32_t misa;
-> @@ -398,6 +399,12 @@ static void mark_fs_dirty(DisasContext *ctx)
->      tcg_gen_ld_tl(tmp, cpu_env, offsetof(CPURISCVState, mstatus));
->      tcg_gen_ori_tl(tmp, tmp, MSTATUS_FS);
->      tcg_gen_st_tl(tmp, cpu_env, offsetof(CPURISCVState, mstatus));
-> +
-> +    if (ctx->virt_enabled) {
-> +        tcg_gen_ld_tl(tmp, cpu_env, offsetof(CPURISCVState, vsstatus));
-> +        tcg_gen_ori_tl(tmp, tmp, MSTATUS_FS);
-> +        tcg_gen_st_tl(tmp, cpu_env, offsetof(CPURISCVState, vsstatus));
-> +    }
->      tcg_temp_free(tmp);
->  }
->  #else
-> @@ -742,6 +749,11 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
->      ctx->mem_idx = ctx->base.tb->flags & TB_FLAGS_MMU_MASK;
->      ctx->mstatus_fs = ctx->base.tb->flags & TB_FLAGS_MSTATUS_FS;
->      ctx->priv_ver = env->priv_ver;
-> +#if !defined(CONFIG_USER_ONLY)
-> +    ctx->virt_enabled = riscv_cpu_virt_enabled(env);
-> +#else
-> +    ctx->virt_enabled = false;
-> +#endif
->      ctx->misa = env->misa;
->      ctx->frm = -1;  /* unknown rounding mode */
->      ctx->ext_ifencei = cpu->cfg.ext_ifencei;
+On Tue, Oct 01, 2019 at 11:02:14AM -0700, Richard Henderson wrote:
+> On 10/1/19 10:56 AM, Mark Cave-Ayland wrote:
+> > Just out of interest, which host/compiler combinations don't currently implement
+> > int128_t?
+> 
+> GCC only implements int128_t for 64-bit targets.
 
-Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
+QEMU probes for that during configure  and sets CONFIG_INT128
+
+If I'm reading correctly include/qemu/int128.h then provides a
+fallback type based on a struct with two int64s.
+
+This has some inconvenience though as you have to use the the (inline)
+function calls for all the basic operands and will be less efficient
+when using the fallback.
+
+Presumably this is not viable for TCG ?
+
+Regards,
+Daniel
+-- 
+|: https://berrange.com      -o-    https://www.flickr.com/photos/dberrange :|
+|: https://libvirt.org         -o-            https://fstop138.berrange.com :|
+|: https://entangle-photo.org    -o-    https://www.instagram.com/dberrange :|
 
