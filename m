@@ -1,71 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iFnjb-00015V-BC
-	for mharc-qemu-riscv@gnu.org; Wed, 02 Oct 2019 19:08:39 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:48366)
+	id 1iFoQX-00049I-HD
+	for mharc-qemu-riscv@gnu.org; Wed, 02 Oct 2019 19:53:01 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:53081)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <richard.henderson@linaro.org>) id 1iFnjX-00013a-Te
- for qemu-riscv@nongnu.org; Wed, 02 Oct 2019 19:08:36 -0400
+ (envelope-from <palmer@sifive.com>) id 1iFoQV-000493-Bz
+ for qemu-riscv@nongnu.org; Wed, 02 Oct 2019 19:53:00 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <richard.henderson@linaro.org>) id 1iFnjW-0000uT-Ut
- for qemu-riscv@nongnu.org; Wed, 02 Oct 2019 19:08:35 -0400
-Received: from mail-pg1-x542.google.com ([2607:f8b0:4864:20::542]:35062)
+ (envelope-from <palmer@sifive.com>) id 1iFoQU-00033T-7d
+ for qemu-riscv@nongnu.org; Wed, 02 Oct 2019 19:52:59 -0400
+Received: from mail-pl1-x641.google.com ([2607:f8b0:4864:20::641]:33670)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
- id 1iFnjW-0000qe-Pm
- for qemu-riscv@nongnu.org; Wed, 02 Oct 2019 19:08:34 -0400
-Received: by mail-pg1-x542.google.com with SMTP id a24so544859pgj.2
- for <qemu-riscv@nongnu.org>; Wed, 02 Oct 2019 16:08:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=subject:to:cc:references:from:openpgp:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=DaO6bq36RSNja0H9UehPx0sTvcNKofrMBZiI0r699aU=;
- b=XJG41UlsPkpGWlwmyvPOXWcYxasDgLtpxQuQjEwRzayWLLCCs+htdrAeF6i0UU7CM7
- 1QFdkEa7insbu17ABqbf+yr87p/Wf9zAWjVM0gkcCR529giASbIxc3KCfNqKN+ycroJ7
- nFRwVgL92uqbMcrmU+INA+YGSsQKBkwztlNaj8Gp5Lxa2B/iK0xo9dweDuh6H7OtDpLu
- PEMLkQlrg6ixtebd4sMjuskQVXNEuCGDNQIYqd7SZLvWUPDyCm3dV+Ylrp4WlP7bmRcE
- r4XSUM0JzuvPWMYFm5/HXfd789/1pV5lpk7dSpqnEeaXaQbPKnhKcswxBaPZGysAQzVQ
- 7g/A==
+ (Exim 4.71) (envelope-from <palmer@sifive.com>) id 1iFoQU-00032t-1a
+ for qemu-riscv@nongnu.org; Wed, 02 Oct 2019 19:52:58 -0400
+Received: by mail-pl1-x641.google.com with SMTP id d22so616577pls.0
+ for <qemu-riscv@nongnu.org>; Wed, 02 Oct 2019 16:52:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+ h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
+ :content-transfer-encoding;
+ bh=YSnlhCmlA8Qg+kgyP8DOZPiH3d/vplXaX6h7i1qGnXU=;
+ b=jNYXMMMRYVEhEFJCocpxW0Zjy/I/YUITHiFz2TuV3ZJ9OuCkYq3Mz1RKVj7EzgvLnd
+ wk2mzB2DH1NDNosztZvBVVl76p2qUQv1BfFPpR4XW0OVGclGbwpM8U8sW7TVF9qLS62k
+ YEfmPjAXY+3d1Ay6lR17wDvOpv/UT1QE4ajM93ZTLwFUjvOPvVsxkmq6fAH8rcWJdLZ8
+ /ffubBtjtHeOIZOCbI7GPQw0+5o/KU7VPz34UE1lbZrzp9b2zRwzbAQ3VJEL7lx5aXCM
+ ta3zumIFqy/qmvWDboTyySSciQMJLo+gsLUi1x/kNfCQmj0w9CMl4wGFy7vgFN+iEiYa
+ SXUg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
- :date:user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=DaO6bq36RSNja0H9UehPx0sTvcNKofrMBZiI0r699aU=;
- b=fuqn3fkmL2XXup/Bw8QKbFgEJE+qg0lnb1ZWYspAZEF7evrM4V+GJc/TQZshj597a7
- H//2RnRa+5/4i23O9vTmJXSEoc8KWVueUja7xRynivdNLJq8dTtuFRyAiZ8auJkPfi2t
- 8VEYtPyFZEzzkQYkIxLBrfI4z/960dQtQP9AxqcNai5EQJ5bqv+wOG8wA4oFdhA9ljxg
- yHIYumTbhaM0W7UgDMK7LqGxvwwNpfWTa+mMeTCdbRUoNVV2IVIGX3F5vQsdW7xhk/vg
- UoGYAJMeei9LTTZ2uyvQOGF1tZ1Cux6ggxCt3RN66ynKoyXB22rVCtbR7s2G3AEO9ADT
- dIjw==
-X-Gm-Message-State: APjAAAVGEPWAc6+G4FrCGsl8R+a7wUDzaemkwXRnTgCfBkQW6rOVRtSM
- uX2uttuGNp/XeZjzhnB9U6Cx/A==
-X-Google-Smtp-Source: APXvYqwRurITgKIo+itQiVtkEYl8lwaBwfHF9UDrn9LsazOBHoyp2yHvdWaMSZPCsNTMsOCRYgzdAg==
-X-Received: by 2002:aa7:8f03:: with SMTP id x3mr7447832pfr.91.1570057712526;
- Wed, 02 Oct 2019 16:08:32 -0700 (PDT)
-Received: from [192.168.1.11] (97-113-7-119.tukw.qwest.net. [97.113.7.119])
- by smtp.gmail.com with ESMTPSA id o60sm307115pje.21.2019.10.02.16.08.30
- (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
- Wed, 02 Oct 2019 16:08:31 -0700 (PDT)
-Subject: Re: [PATCH v1 1/1] riscv/boot: Fix possible memory leak
-To: Alistair Francis <alistair.francis@wdc.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: alistair23@gmail.com, palmer@sifive.com, bmeng.cn@gmail.com,
- peter.maydell@linaro.org
-References: <4cba4d80e570372183b6685a26c72fa3e907bb51.1570051975.git.alistair.francis@wdc.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-Openpgp: preference=signencrypt
-Message-ID: <fe84f682-f38b-4587-09fc-10f95d813a43@linaro.org>
-Date: Wed, 2 Oct 2019 16:08:29 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.8.0
-MIME-Version: 1.0
-In-Reply-To: <4cba4d80e570372183b6685a26c72fa3e907bb51.1570051975.git.alistair.francis@wdc.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+ h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
+ :mime-version:content-transfer-encoding;
+ bh=YSnlhCmlA8Qg+kgyP8DOZPiH3d/vplXaX6h7i1qGnXU=;
+ b=dOd0kw5rTErOvlPXijlxdl3LuBlPeMUhCH6gkQUlrGHmviSFFPC1MhJ/wgxSvGf10a
+ 9kfTijv+V8CxJX8Qxme+rlMx7GLvPoQFaN9Cedlk/wEEhRFJLUASXIkWlT6X8989nKYN
+ FSYbaX2KZm+D0Ea6oFmKPKe0kiYf0MghaUsHRqvXIF7Fpz8ED/oYDFnLoQ9o1zNG1HZP
+ BB5TSzMspu2fIJnCxxHIuRUzCuHn4ik+YisC7CGOqUkbZrJOvaWszbkLEV4Gg0KDTu/U
+ 3vGWCUGgCiEUdX2lc3jleCyIn7gRH9appLwkRvtmbgPS2IhEzsjVk+HpdEsS+nkT0Rfn
+ 34Wg==
+X-Gm-Message-State: APjAAAV0k6SblMGbh5Yb3akMrsz8ncdCE4kB/e3ijXAtRiuW12Hrbnl1
+ dfWAYlaW1GD50Tg53i1a8D7X6g==
+X-Google-Smtp-Source: APXvYqwI6MqTDZKpKu6Uy5WraJcgejZvbSW4wIlI3hWpXDy8G4d16eBuc1A0TRtVKx4M8mE007G37g==
+X-Received: by 2002:a17:902:b497:: with SMTP id
+ y23mr6689706plr.82.1570060376372; 
+ Wed, 02 Oct 2019 16:52:56 -0700 (PDT)
+Received: from localhost (c-73-15-177-105.hsd1.ca.comcast.net. [73.15.177.105])
+ by smtp.gmail.com with ESMTPSA id l189sm459098pgd.46.2019.10.02.16.52.55
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 02 Oct 2019 16:52:55 -0700 (PDT)
+Date: Wed, 02 Oct 2019 16:52:55 -0700 (PDT)
+X-Google-Original-Date: Wed, 02 Oct 2019 16:44:52 PDT (-0700)
+Subject: Re: [PATCH v1 21/28] target/riscv: Respect MPRV and SPRV for floating
+ point ops
+In-Reply-To: <8a628d1542d547b6d639cdba51db67590d0b56de.1566603412.git.alistair.francis@wdc.com>
+CC: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
+ Alistair Francis <Alistair.Francis@wdc.com>, alistair23@gmail.com,
+ Atish Patra <Atish.Patra@wdc.com>, Anup Patel <Anup.Patel@wdc.com>
+From: Palmer Dabbelt <palmer@sifive.com>
+To: Alistair Francis <Alistair.Francis@wdc.com>
+Message-ID: <mhng-7c045b6d-544e-40df-95a6-e46c479e41c8@palmer-si-x1c4>
+Mime-Version: 1.0 (MHng)
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::542
+X-Received-From: 2607:f8b0:4864:20::641
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -77,21 +73,45 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Oct 2019 23:08:37 -0000
+X-List-Received-Date: Wed, 02 Oct 2019 23:53:00 -0000
 
-On 10/2/19 2:34 PM, Alistair Francis wrote:
-> Coverity (CID 1405786) thinks that there is a possible memory leak as
-> we don't guarentee that the memory allocatd from riscv_find_firmware()
-> is freed. This is a false positive, but let's tidy up the code to fix
-> the warning.
-> 
+On Fri, 23 Aug 2019 16:38:44 PDT (-0700), Alistair Francis wrote:
+> Respect the contents of MSTATUS.MPRV and HSTATUS.SPRV when performing
+> floating point operations when V=0.
+
+I'm confused as to what this has to do with floating point.
+
+>
 > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 > ---
->  hw/riscv/boot.c | 11 ++++-------
->  1 file changed, 4 insertions(+), 7 deletions(-)
-
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-
-
-r~
+>  target/riscv/translate.c | 16 +++++++++++++++-
+>  1 file changed, 15 insertions(+), 1 deletion(-)
+>
+> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+> index 19771904f4..ea19ba9c5d 100644
+> --- a/target/riscv/translate.c
+> +++ b/target/riscv/translate.c
+> @@ -750,7 +750,21 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
+>      ctx->mstatus_fs = ctx->base.tb->flags & TB_FLAGS_MSTATUS_FS;
+>      ctx->priv_ver = env->priv_ver;
+>  #if !defined(CONFIG_USER_ONLY)
+> -    ctx->virt_enabled = riscv_cpu_virt_enabled(env);
+> +    if (riscv_has_ext(env, RVH)) {
+> +        ctx->virt_enabled = riscv_cpu_virt_enabled(env);
+> +        if (env->priv_ver == PRV_M &&
+> +            get_field(*env->mstatus, MSTATUS_MPRV) &&
+> +            get_field(*env->mstatus, MSTATUS_MPV)) {
+> +            ctx->virt_enabled = true;
+> +        } else if (env->priv == PRV_S &&
+> +                   !riscv_cpu_virt_enabled(env) &&
+> +                   get_field(env->hstatus, HSTATUS_SPRV) &&
+> +                   get_field(env->hstatus, HSTATUS_SPV)) {
+> +            ctx->virt_enabled = true;
+> +        }
+> +    } else {
+> +        ctx->virt_enabled = false;
+> +    }
+>  #else
+>      ctx->virt_enabled = false;
+>  #endif
 
