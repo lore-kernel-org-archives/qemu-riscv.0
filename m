@@ -1,60 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iFpMq-0002qC-A5
-	for mharc-qemu-riscv@gnu.org; Wed, 02 Oct 2019 20:53:16 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:59435)
+	id 1iFpSZ-0005Ve-Ls
+	for mharc-qemu-riscv@gnu.org; Wed, 02 Oct 2019 20:59:11 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59899)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <bmeng.cn@gmail.com>) id 1iFpMo-0002nP-GQ
- for qemu-riscv@nongnu.org; Wed, 02 Oct 2019 20:53:15 -0400
+ (envelope-from <bmeng.cn@gmail.com>) id 1iFpSW-0005Rt-OT
+ for qemu-riscv@nongnu.org; Wed, 02 Oct 2019 20:59:09 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <bmeng.cn@gmail.com>) id 1iFpMn-0007rj-I0
- for qemu-riscv@nongnu.org; Wed, 02 Oct 2019 20:53:14 -0400
-Received: from mail-yb1-xb41.google.com ([2607:f8b0:4864:20::b41]:40617)
+ (envelope-from <bmeng.cn@gmail.com>) id 1iFpSV-0005mv-O9
+ for qemu-riscv@nongnu.org; Wed, 02 Oct 2019 20:59:08 -0400
+Received: from mail-yw1-xc42.google.com ([2607:f8b0:4864:20::c42]:38267)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
- id 1iFpMl-0007qA-9T; Wed, 02 Oct 2019 20:53:11 -0400
-Received: by mail-yb1-xb41.google.com with SMTP id g9so337875ybi.7;
- Wed, 02 Oct 2019 17:53:10 -0700 (PDT)
+ id 1iFpST-0005m4-7A; Wed, 02 Oct 2019 20:59:05 -0400
+Received: by mail-yw1-xc42.google.com with SMTP id s6so395494ywe.5;
+ Wed, 02 Oct 2019 17:59:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=QQIA3Xv/elH5E6zZTPpmkVulKegMJ0TVhkxOL8hfK3U=;
- b=MePjYksx8jyKPzcTxgU4QlBehVrKVIfw44j4YXi4blrNtxWRbPWVNM0UKbdyqfvSzY
- pMKx4ipG2BbIJExsrQ5frZbkeQTvnRwxCac2mZcImMrnhanYEZBr4cEEtXb7Q/h3qeHk
- E6mPKfFL87T0Iik43NF4WQf88hmGAhXLWvdaqmGmJ37BHiovhKRbj7QcXAylD9Af3hKa
- C8mftFEpom9AgoK9Ubw07ul4mTZU4MiCoDGafL4Uj25J909d6EtlH9CSLx2hyt+xp0Ru
- gQeCzrTLo/IjZnuvZ2w5K59VvADu296rGOyemPypathD0TUv7Kf6JrG97hDeGF1hGXsT
- 8ZFw==
+ :cc; bh=F90W0inCa8+t9lUSx1aHYhRTxYmY/Uj5sscShRlY0xU=;
+ b=UenB6Pv2aMcwORYnJa/udEOK/OMlOlz6jqMy2TXcIu5duEzwrrlfqSWP60bKR8amNd
+ GLa50HXoEv+zkV9wOKZmEvPhWeM+mrC3iKtidu2TPYGEpVSqLyBRldFLqqSqvsoPZOg3
+ aZg8WOeuv7h7oWzx32cbuAcfU59/CpknE6VaNwHy2hI6S2QPmVRhV7VvfZ2i8UDPM+Sk
+ gZ68jcrUX/dCCRmX+s+J8ll5NkGeUjSYd/N7I21ZYfFfItZPm3Isy7GgqnFE4n0ajWEn
+ W3s1VpeZ9L6cu1x7R3JaEVwQQKToDiqg2fFyt99IgNLcbH1CEM0GzxkR+NUQTI2HbrCs
+ aR/w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=QQIA3Xv/elH5E6zZTPpmkVulKegMJ0TVhkxOL8hfK3U=;
- b=IQQaxiW/gULzFrWDeTAz+e5pLJUWNhOVdWmY1xt059gLTVJFuG/pxxWEhARkpvmG5L
- FDdG5ZQ2tNi6Fqd8FefKMEv6CWutRLYgsGa/Y1hdlsT8qsgxlfokk0DDF7JZHMJ25gF/
- cTCKkD/E047/UKMeYrscUj0+vnsLeG/ijDIB8f4lcqGgkrhULBtav1yRZdH89grmeEha
- BHnRpfy5DLd7H8Gu/rTiVyoSrK2WrEw53IrnVhfD+uwyj6aYDRT7leYzZHlehD7ujrLi
- JabYO6d0jT43wEpJ1pxHkhIX1cVMAldAi1SidbOELBRoTUHJPkBnSybrolkb7ZPsVNF2
- vFxQ==
-X-Gm-Message-State: APjAAAULpVy4dJbf5Gds1M45fDpCh+dspxP6JuEILfFG4HAjwkXmIFXN
- PY+ifOtfFo8BAUoWl49M3sQgXG9NpaQYVdgIPMA=
-X-Google-Smtp-Source: APXvYqzyhVK/O45KpPk7lOtP6wi22hTTujC4zoPF85wFpJWQh+J6sd2S1UQpmRuDLk0tiFyCDNIqMVRjMPZSDDibfws=
-X-Received: by 2002:a25:2781:: with SMTP id n123mr4247957ybn.154.1570063989664; 
- Wed, 02 Oct 2019 17:53:09 -0700 (PDT)
+ bh=F90W0inCa8+t9lUSx1aHYhRTxYmY/Uj5sscShRlY0xU=;
+ b=k9zYP+6/ADIZs2VpV3rw+U7iALst+SY4w/Gl3LPJFKkMmDwsZfbGA/zzSkI6HNHTLd
+ CTPE5Sn8e89797jvl/jWOQNqwwRP9jc8m+Sx5uiTJMTjbEr4Hhv/Vk8Hc1Fb0zHJWvG0
+ 5DZbMjxOQwfgQGQ1Wi8dDy46OfubPJXfEReP4QP9SCD1Zo3FJOCuP+uRL3hxqn3h9yzB
+ Yo1m63z7HuUXnHv984kJ7d1Jwn5ihP/xKXUHOKfTqZKZ0VBJ7MCNjfFDBrY1Ha0pZmfO
+ IVLRHsWQQ00N4YSliOxKCJtSxNFuCmEXLQJ8dcXTE8zMyiJB48EfnTXef1RTz+heVC2m
+ 0Gow==
+X-Gm-Message-State: APjAAAUf/P1HJ196Nop8zOMxQVDKFuFwQisiYN98fylhdRrltkapH4do
+ o0CjH9zZwGmTWZY4N7e5t2z8UaM9vyaSCF/esMs=
+X-Google-Smtp-Source: APXvYqz8hBNak9nVkhSFZ3co9kYIGhIZ0GYJJRkSgfVP8oMqNoBPziJ9Z5uyyO1CbY+PyyNvaOGQ7XikGQMYaqIJLk8=
+X-Received: by 2002:a81:a401:: with SMTP id b1mr4516299ywh.280.1570064344541; 
+ Wed, 02 Oct 2019 17:59:04 -0700 (PDT)
 MIME-Version: 1.0
-References: <4cba4d80e570372183b6685a26c72fa3e907bb51.1570051975.git.alistair.francis@wdc.com>
-In-Reply-To: <4cba4d80e570372183b6685a26c72fa3e907bb51.1570051975.git.alistair.francis@wdc.com>
+References: <20191002144859.18208-1-jonathan@fintelia.io>
+In-Reply-To: <20191002144859.18208-1-jonathan@fintelia.io>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Thu, 3 Oct 2019 08:52:58 +0800
-Message-ID: <CAEUhbmUYTn2+166CAg=uiy-sP7xkcc7mK=v66UGpiqd3tNZMVA@mail.gmail.com>
-Subject: Re: [PATCH v1 1/1] riscv/boot: Fix possible memory leak
-To: Alistair Francis <alistair.francis@wdc.com>
+Date: Thu, 3 Oct 2019 08:58:53 +0800
+Message-ID: <CAEUhbmV6J_fj_+2t+wxyQqgUmmQYrN3_N5T4ignX0qYA2wOdFg@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: Expose "priv" register for GDB
+To: Jonathan Behrens <jonathan@fintelia.io>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Palmer Dabbelt <palmer@sifive.com>, Alistair Francis <alistair23@gmail.com>, 
- Peter Maydell <peter.maydell@linaro.org>
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, Palmer Dabbelt <palmer@sifive.com>,
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>, 
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::b41
+X-Received-From: 2607:f8b0:4864:20::c42
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -66,26 +69,94 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Oct 2019 00:53:15 -0000
+X-List-Received-Date: Thu, 03 Oct 2019 00:59:10 -0000
 
-On Thu, Oct 3, 2019 at 5:38 AM Alistair Francis
-<alistair.francis@wdc.com> wrote:
+On Wed, Oct 2, 2019 at 10:51 PM Jonathan Behrens <jonathan@fintelia.io> wrote:
 >
-> Coverity (CID 1405786) thinks that there is a possible memory leak as
-> we don't guarentee that the memory allocatd from riscv_find_firmware()
-> is freed. This is a false positive, but let's tidy up the code to fix
-> the warning.
+> This patch enables a debugger to read and write the current privilege level via
+> a special "priv" register. When compiled with CONFIG_USER_ONLY the register is
+> still visible but is hardwired to zero.
 >
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> Signed-off-by: Jonathan Behrens <jonathan@fintelia.io>
 > ---
->  hw/riscv/boot.c | 11 ++++-------
->  1 file changed, 4 insertions(+), 7 deletions(-)
+>  gdb-xml/riscv-32bit-cpu.xml |  1 +
+>  gdb-xml/riscv-64bit-cpu.xml |  1 +
+>  target/riscv/cpu.c          |  2 +-
+>  target/riscv/gdbstub.c      | 14 ++++++++++++++
+>  4 files changed, 17 insertions(+), 1 deletion(-)
 >
+> diff --git a/gdb-xml/riscv-32bit-cpu.xml b/gdb-xml/riscv-32bit-cpu.xml
+> index 0d07aaec85..d6d76aafd8 100644
+> --- a/gdb-xml/riscv-32bit-cpu.xml
+> +++ b/gdb-xml/riscv-32bit-cpu.xml
+> @@ -44,4 +44,5 @@
+>    <reg name="t5" bitsize="32" type="int"/>
+>    <reg name="t6" bitsize="32" type="int"/>
+>    <reg name="pc" bitsize="32" type="code_ptr"/>
+> +  <reg name="priv" bitsize="32" type="int"/>
+>  </feature>
+> diff --git a/gdb-xml/riscv-64bit-cpu.xml b/gdb-xml/riscv-64bit-cpu.xml
+> index b8aa424ae4..0758d1b5fe 100644
+> --- a/gdb-xml/riscv-64bit-cpu.xml
+> +++ b/gdb-xml/riscv-64bit-cpu.xml
+> @@ -44,4 +44,5 @@
+>    <reg name="t5" bitsize="64" type="int"/>
+>    <reg name="t6" bitsize="64" type="int"/>
+>    <reg name="pc" bitsize="64" type="code_ptr"/>
+> +  <reg name="priv" bitsize="64" type="int" />
+>  </feature>
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index f13e298a36..347989858f 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -475,7 +475,7 @@ static void riscv_cpu_class_init(ObjectClass *c, void *data)
+>      cc->synchronize_from_tb = riscv_cpu_synchronize_from_tb;
+>      cc->gdb_read_register = riscv_cpu_gdb_read_register;
+>      cc->gdb_write_register = riscv_cpu_gdb_write_register;
+> -    cc->gdb_num_core_regs = 33;
+> +    cc->gdb_num_core_regs = 34;
+>  #if defined(TARGET_RISCV32)
+>      cc->gdb_core_xml_file = "riscv-32bit-cpu.xml";
+>  #elif defined(TARGET_RISCV64)
+> diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
+> index ded140e8d8..dc8cb4d26c 100644
+> --- a/target/riscv/gdbstub.c
+> +++ b/target/riscv/gdbstub.c
+> @@ -278,6 +278,12 @@ int riscv_cpu_gdb_read_register(CPUState *cs, uint8_t *mem_buf, int n)
+>          return gdb_get_regl(mem_buf, env->gpr[n]);
+>      } else if (n == 32) {
+>          return gdb_get_regl(mem_buf, env->pc);
+> +    } else if (n == 33) {
+> +#ifdef CONFIG_USER_ONLY
+> +        return gdb_get_regl(mem_buf, 0);
+> +#else
+> +        return gdb_get_regl(mem_buf, env->priv);
+> +#endif
+>      }
+>      return 0;
+>  }
+> @@ -296,6 +302,14 @@ int riscv_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
+>      } else if (n == 32) {
+>          env->pc = ldtul_p(mem_buf);
+>          return sizeof(target_ulong);
+> +    } else if (n == 33) {
+> +#ifndef CONFIG_USER_ONLY
+> +        env->priv = ldtul_p(mem_buf) & 0x3;
+> +        if (env->priv == 2) {
 
-Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+Please use PRV_H
 
-Thanks for the patch. I am not sure how I can easily run Coverity to
-verify the fix though.
+> +            env->priv = 1;
+
+and PRV_S here
+
+> +        }
+> +#endif
+> +        return sizeof(target_ulong);
+>      }
+>      return 0;
+>  }
+> --
 
 Regards,
 Bin
