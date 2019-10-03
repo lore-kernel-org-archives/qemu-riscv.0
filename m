@@ -1,63 +1,79 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iFpSZ-0005Ve-Ls
-	for mharc-qemu-riscv@gnu.org; Wed, 02 Oct 2019 20:59:11 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:59899)
+	id 1iFvAc-0000bQ-Eu
+	for mharc-qemu-riscv@gnu.org; Thu, 03 Oct 2019 03:05:02 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:32925)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <bmeng.cn@gmail.com>) id 1iFpSW-0005Rt-OT
- for qemu-riscv@nongnu.org; Wed, 02 Oct 2019 20:59:09 -0400
+ (envelope-from <philmd@redhat.com>) id 1iFvAa-0000b8-7R
+ for qemu-riscv@nongnu.org; Thu, 03 Oct 2019 03:05:01 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <bmeng.cn@gmail.com>) id 1iFpSV-0005mv-O9
- for qemu-riscv@nongnu.org; Wed, 02 Oct 2019 20:59:08 -0400
-Received: from mail-yw1-xc42.google.com ([2607:f8b0:4864:20::c42]:38267)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
- id 1iFpST-0005m4-7A; Wed, 02 Oct 2019 20:59:05 -0400
-Received: by mail-yw1-xc42.google.com with SMTP id s6so395494ywe.5;
- Wed, 02 Oct 2019 17:59:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=F90W0inCa8+t9lUSx1aHYhRTxYmY/Uj5sscShRlY0xU=;
- b=UenB6Pv2aMcwORYnJa/udEOK/OMlOlz6jqMy2TXcIu5duEzwrrlfqSWP60bKR8amNd
- GLa50HXoEv+zkV9wOKZmEvPhWeM+mrC3iKtidu2TPYGEpVSqLyBRldFLqqSqvsoPZOg3
- aZg8WOeuv7h7oWzx32cbuAcfU59/CpknE6VaNwHy2hI6S2QPmVRhV7VvfZ2i8UDPM+Sk
- gZ68jcrUX/dCCRmX+s+J8ll5NkGeUjSYd/N7I21ZYfFfItZPm3Isy7GgqnFE4n0ajWEn
- W3s1VpeZ9L6cu1x7R3JaEVwQQKToDiqg2fFyt99IgNLcbH1CEM0GzxkR+NUQTI2HbrCs
- aR/w==
+ (envelope-from <philmd@redhat.com>) id 1iFvAY-00048z-LY
+ for qemu-riscv@nongnu.org; Thu, 03 Oct 2019 03:04:59 -0400
+Received: from us-smtp-1.mimecast.com ([205.139.110.61]:30586
+ helo=us-smtp-delivery-1.mimecast.com)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <philmd@redhat.com>) id 1iFvAY-00048s-Ic
+ for qemu-riscv@nongnu.org; Thu, 03 Oct 2019 03:04:58 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1570086298;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=C6ltcGQLZfldS8yXWHTgjtks/bc5B9SoVXaYQ5Gcnwo=;
+ b=KKy7W5t+tNTytNDQ72Dj+pXptji5/K5S42y6a6CxTOoL9IRRzkUONkni+x1WpE2cbyBzwC
+ QMLiDgMBjLyxsTBaDPZ4TNXD7TuGMyYEiatkVfxLcC19vpfK5p9RqRE2YZsXMEnoYKWdbI
+ aWTdpmrUVMB3dDMut4BdMpivEzWWf3g=
+Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
+ [209.85.128.71]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-42-h7LtOYx_OAaJpaJgGyk-nA-1; Thu, 03 Oct 2019 03:04:54 -0400
+Received: by mail-wm1-f71.google.com with SMTP id o8so731812wmc.2
+ for <qemu-riscv@nongnu.org>; Thu, 03 Oct 2019 00:04:53 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=F90W0inCa8+t9lUSx1aHYhRTxYmY/Uj5sscShRlY0xU=;
- b=k9zYP+6/ADIZs2VpV3rw+U7iALst+SY4w/Gl3LPJFKkMmDwsZfbGA/zzSkI6HNHTLd
- CTPE5Sn8e89797jvl/jWOQNqwwRP9jc8m+Sx5uiTJMTjbEr4Hhv/Vk8Hc1Fb0zHJWvG0
- 5DZbMjxOQwfgQGQ1Wi8dDy46OfubPJXfEReP4QP9SCD1Zo3FJOCuP+uRL3hxqn3h9yzB
- Yo1m63z7HuUXnHv984kJ7d1Jwn5ihP/xKXUHOKfTqZKZ0VBJ7MCNjfFDBrY1Ha0pZmfO
- IVLRHsWQQ00N4YSliOxKCJtSxNFuCmEXLQJ8dcXTE8zMyiJB48EfnTXef1RTz+heVC2m
- 0Gow==
-X-Gm-Message-State: APjAAAUf/P1HJ196Nop8zOMxQVDKFuFwQisiYN98fylhdRrltkapH4do
- o0CjH9zZwGmTWZY4N7e5t2z8UaM9vyaSCF/esMs=
-X-Google-Smtp-Source: APXvYqz8hBNak9nVkhSFZ3co9kYIGhIZ0GYJJRkSgfVP8oMqNoBPziJ9Z5uyyO1CbY+PyyNvaOGQ7XikGQMYaqIJLk8=
-X-Received: by 2002:a81:a401:: with SMTP id b1mr4516299ywh.280.1570064344541; 
- Wed, 02 Oct 2019 17:59:04 -0700 (PDT)
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=ehvHZDO8kG+zG/2KzYQqnzm1x88Z2sej/c5l+4eo2l4=;
+ b=JrUQLQYj3SbyWrM2He29KeIHUqmASt7KUo0vpLMBGqEzHF2BSK3d7dprss6pL2YxiK
+ Lzmtsv3viln9mQx9MOnzXB1Cd1MVPu5OTBv9/0rbmL4DdRnyOr4LPGcTuaFS/3D+JLLz
+ qiU+Gm83T3i9GxUsoktuxSe4vcinJi+e2MiEHBwhrPuySeXiTHR40ICQlNWx50KRo0HR
+ vi8RrAVEdAmTfD7SFCHN1tWKCsgTvMykJvga+7JEMnpAJnHbUiVHbFSXftFEcqE8c/7d
+ uNSnOiuCe606Eij5KNbiTHIVkVo0hvwhEgo4agKht7b/gLCZaipvIrtEdkLUEfSAtFL/
+ tRVg==
+X-Gm-Message-State: APjAAAWNJmdyeKsk8apaEHMohUWs5ZFhP9nYAMWN1UTNlP4IELicS5nX
+ iL2q4vecpBLTgs9Prai9tgbNBMe4LeeGkVtpSTelyVBKKuY+yOP91Nh2HEwHULUH9kbGMZB9EUA
+ KyHYkQD+puKuYp78=
+X-Received: by 2002:adf:eec5:: with SMTP id a5mr1720112wrp.191.1570086292923; 
+ Thu, 03 Oct 2019 00:04:52 -0700 (PDT)
+X-Google-Smtp-Source: APXvYqxyMkMIF21P9FdlT28VM+54ZAxwp7xiHRhi4Ff1yPBYYGOniGnwlSAlf6AmRK47Sf1TfmWPkA==
+X-Received: by 2002:adf:eec5:: with SMTP id a5mr1720094wrp.191.1570086292716; 
+ Thu, 03 Oct 2019 00:04:52 -0700 (PDT)
+Received: from [192.168.1.35] (240.red-88-21-68.staticip.rima-tde.net.
+ [88.21.68.240])
+ by smtp.gmail.com with ESMTPSA id b15sm1557775wmb.28.2019.10.03.00.04.51
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 03 Oct 2019 00:04:52 -0700 (PDT)
+Subject: Re: [PATCH v1 1/1] riscv/boot: Fix possible memory leak
+To: Alistair Francis <alistair.francis@wdc.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: alistair23@gmail.com, palmer@sifive.com, bmeng.cn@gmail.com,
+ peter.maydell@linaro.org
+References: <4cba4d80e570372183b6685a26c72fa3e907bb51.1570051975.git.alistair.francis@wdc.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>
+Message-ID: <b26817c1-c2ae-6637-1cb2-81187b6682bc@redhat.com>
+Date: Thu, 3 Oct 2019 09:04:51 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.1.0
 MIME-Version: 1.0
-References: <20191002144859.18208-1-jonathan@fintelia.io>
-In-Reply-To: <20191002144859.18208-1-jonathan@fintelia.io>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Thu, 3 Oct 2019 08:58:53 +0800
-Message-ID: <CAEUhbmV6J_fj_+2t+wxyQqgUmmQYrN3_N5T4ignX0qYA2wOdFg@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv: Expose "priv" register for GDB
-To: Jonathan Behrens <jonathan@fintelia.io>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, Palmer Dabbelt <palmer@sifive.com>,
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2607:f8b0:4864:20::c42
+In-Reply-To: <4cba4d80e570372183b6685a26c72fa3e907bb51.1570051975.git.alistair.francis@wdc.com>
+Content-Language: en-US
+X-MC-Unique: h7LtOYx_OAaJpaJgGyk-nA-1
+X-Mimecast-Spam-Score: 0
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+ [fuzzy]
+X-Received-From: 205.139.110.61
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -69,95 +85,59 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Oct 2019 00:59:10 -0000
+X-List-Received-Date: Thu, 03 Oct 2019 07:05:01 -0000
 
-On Wed, Oct 2, 2019 at 10:51 PM Jonathan Behrens <jonathan@fintelia.io> wrote:
->
-> This patch enables a debugger to read and write the current privilege level via
-> a special "priv" register. When compiled with CONFIG_USER_ONLY the register is
-> still visible but is hardwired to zero.
->
-> Signed-off-by: Jonathan Behrens <jonathan@fintelia.io>
+On 10/2/19 11:34 PM, Alistair Francis wrote:
+> Coverity (CID 1405786) thinks that there is a possible memory leak as
+> we don't guarentee that the memory allocatd from riscv_find_firmware()
+
+typos: 'guarantee', 'allocated'
+
+> is freed. This is a false positive, but let's tidy up the code to fix
+> the warning.
+>=20
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 > ---
->  gdb-xml/riscv-32bit-cpu.xml |  1 +
->  gdb-xml/riscv-64bit-cpu.xml |  1 +
->  target/riscv/cpu.c          |  2 +-
->  target/riscv/gdbstub.c      | 14 ++++++++++++++
->  4 files changed, 17 insertions(+), 1 deletion(-)
->
-> diff --git a/gdb-xml/riscv-32bit-cpu.xml b/gdb-xml/riscv-32bit-cpu.xml
-> index 0d07aaec85..d6d76aafd8 100644
-> --- a/gdb-xml/riscv-32bit-cpu.xml
-> +++ b/gdb-xml/riscv-32bit-cpu.xml
-> @@ -44,4 +44,5 @@
->    <reg name="t5" bitsize="32" type="int"/>
->    <reg name="t6" bitsize="32" type="int"/>
->    <reg name="pc" bitsize="32" type="code_ptr"/>
-> +  <reg name="priv" bitsize="32" type="int"/>
->  </feature>
-> diff --git a/gdb-xml/riscv-64bit-cpu.xml b/gdb-xml/riscv-64bit-cpu.xml
-> index b8aa424ae4..0758d1b5fe 100644
-> --- a/gdb-xml/riscv-64bit-cpu.xml
-> +++ b/gdb-xml/riscv-64bit-cpu.xml
-> @@ -44,4 +44,5 @@
->    <reg name="t5" bitsize="64" type="int"/>
->    <reg name="t6" bitsize="64" type="int"/>
->    <reg name="pc" bitsize="64" type="code_ptr"/>
-> +  <reg name="priv" bitsize="64" type="int" />
->  </feature>
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index f13e298a36..347989858f 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -475,7 +475,7 @@ static void riscv_cpu_class_init(ObjectClass *c, void *data)
->      cc->synchronize_from_tb = riscv_cpu_synchronize_from_tb;
->      cc->gdb_read_register = riscv_cpu_gdb_read_register;
->      cc->gdb_write_register = riscv_cpu_gdb_write_register;
-> -    cc->gdb_num_core_regs = 33;
-> +    cc->gdb_num_core_regs = 34;
->  #if defined(TARGET_RISCV32)
->      cc->gdb_core_xml_file = "riscv-32bit-cpu.xml";
->  #elif defined(TARGET_RISCV64)
-> diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
-> index ded140e8d8..dc8cb4d26c 100644
-> --- a/target/riscv/gdbstub.c
-> +++ b/target/riscv/gdbstub.c
-> @@ -278,6 +278,12 @@ int riscv_cpu_gdb_read_register(CPUState *cs, uint8_t *mem_buf, int n)
->          return gdb_get_regl(mem_buf, env->gpr[n]);
->      } else if (n == 32) {
->          return gdb_get_regl(mem_buf, env->pc);
-> +    } else if (n == 33) {
-> +#ifdef CONFIG_USER_ONLY
-> +        return gdb_get_regl(mem_buf, 0);
-> +#else
-> +        return gdb_get_regl(mem_buf, env->priv);
-> +#endif
->      }
->      return 0;
->  }
-> @@ -296,6 +302,14 @@ int riscv_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
->      } else if (n == 32) {
->          env->pc = ldtul_p(mem_buf);
->          return sizeof(target_ulong);
-> +    } else if (n == 33) {
-> +#ifndef CONFIG_USER_ONLY
-> +        env->priv = ldtul_p(mem_buf) & 0x3;
-> +        if (env->priv == 2) {
+>   hw/riscv/boot.c | 11 ++++-------
+>   1 file changed, 4 insertions(+), 7 deletions(-)
+>=20
+> diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
+> index 2e92fb0680..7fee98d2f8 100644
+> --- a/hw/riscv/boot.c
+> +++ b/hw/riscv/boot.c
+> @@ -38,7 +38,7 @@ void riscv_find_and_load_firmware(MachineState *machine=
+,
+>                                     const char *default_machine_firmware,
+>                                     hwaddr firmware_load_addr)
+>   {
+> -    char *firmware_filename;
+> +    char *firmware_filename =3D NULL;
+>  =20
+>       if (!machine->firmware) {
+>           /*
+> @@ -70,14 +70,11 @@ void riscv_find_and_load_firmware(MachineState *machi=
+ne,
+>            * if no -bios option is set without breaking anything.
+>            */
+>           firmware_filename =3D riscv_find_firmware(default_machine_firmw=
+are);
+> -    } else {
+> -        firmware_filename =3D machine->firmware;
+> -        if (strcmp(firmware_filename, "none")) {
+> -            firmware_filename =3D riscv_find_firmware(firmware_filename)=
+;
+> -        }
+> +    } else if (strcmp(machine->firmware, "none")) {
+> +        firmware_filename =3D riscv_find_firmware(machine->firmware);
+>       }
+>  =20
+> -    if (strcmp(firmware_filename, "none")) {
+> +    if (firmware_filename) {
+>           /* If not "none" load the firmware */
+>           riscv_load_firmware(firmware_filename, firmware_load_addr);
+>           g_free(firmware_filename);
+>=20
 
-Please use PRV_H
+Reviewed-by: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
 
-> +            env->priv = 1;
-
-and PRV_S here
-
-> +        }
-> +#endif
-> +        return sizeof(target_ulong);
->      }
->      return 0;
->  }
-> --
-
-Regards,
-Bin
 
