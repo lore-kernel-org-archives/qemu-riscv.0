@@ -1,57 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iGPKj-0000CX-V7
-	for mharc-qemu-riscv@gnu.org; Fri, 04 Oct 2019 11:17:29 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:36750)
+	id 1iGirZ-00070I-5W
+	for mharc-qemu-riscv@gnu.org; Sat, 05 Oct 2019 08:08:41 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:50285)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <bounce+d13a72.9b4e76-qemu-riscv=nongnu.org@fintelia.io>)
- id 1iGPKe-00007f-1F
- for qemu-riscv@nongnu.org; Fri, 04 Oct 2019 11:17:25 -0400
+ (envelope-from <bmeng.cn@gmail.com>) id 1iGirW-0006z6-Vo
+ for qemu-riscv@nongnu.org; Sat, 05 Oct 2019 08:08:39 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <bounce+d13a72.9b4e76-qemu-riscv=nongnu.org@fintelia.io>)
- id 1iGPKX-0006Fv-RO
- for qemu-riscv@nongnu.org; Fri, 04 Oct 2019 11:17:21 -0400
-Received: from rs224.mailgun.us ([209.61.151.224]:53886)
+ (envelope-from <bmeng.cn@gmail.com>) id 1iGirW-0002kR-4g
+ for qemu-riscv@nongnu.org; Sat, 05 Oct 2019 08:08:38 -0400
+Received: from mail-yb1-xb44.google.com ([2607:f8b0:4864:20::b44]:38724)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71)
- (envelope-from <bounce+d13a72.9b4e76-qemu-riscv=nongnu.org@fintelia.io>)
- id 1iGPKN-00067a-Or
- for qemu-riscv@nongnu.org; Fri, 04 Oct 2019 11:17:13 -0400
-DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=fintelia.io; q=dns/txt;
- s=pic; 
- t=1570202222; h=Content-Transfer-Encoding: MIME-Version: Message-Id:
- Date: Subject: Cc: To: From: Sender;
- bh=tCetiAvXfVBrKyF+Aw4/cFWBZ2TuN7FeWmx69qUVE+g=;
- b=5fznc/skjXb/j+TbQdGCZCAh0wIwJwI66clvBZacXzZnwl3V2eh8o1v2wma73vHGKzdpyqWZ
- MGeCf9pqzn0Lt4bkhSFPt+/xlOa+mBXM0VTDZ27d1kjan8K8sKNRe+iw1VWjmjlQustmK10X
- 5n88edcyJA/q+PrZRFdBPfxQomiYMtEMH1CsFkjXGWB8PnmALiTNmYFCnBSgfVRLAWhE8bT8
- VopHjtVRP6DqtDoWOrLQ6N6HvTH6JG8hp0scWPPqR2OUD7FdDqzKUD4jI3s7Jv8C2gmSx9F+
- 07tzAdTrhfgSu3r5+spKbVE/IumC2jjexUBcoKt0UXVACEW7nviUuA==
-X-Mailgun-Sending-Ip: 209.61.151.224
-X-Mailgun-Sid: WyJkNjk0ZSIsICJxZW11LXJpc2N2QG5vbmdudS5vcmciLCAiOWI0ZTc2Il0=
-Sender: jonathan@fintelia.io
-Received: from jonathan-ThinkPad-X1-Carbon.csail.mit.edu
- (30-10-182.wireless.csail.mit.edu [128.30.10.182])
- by mxa.mailgun.org with ESMTP id 5d97626c.7f56c4139120-smtp-out-n01;
- Fri, 04 Oct 2019 15:17:00 -0000 (UTC)
-From: Jonathan Behrens <jonathan@fintelia.io>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: Jonathan Behrens <jonathan@fintelia.io>,
- =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>,
- Palmer Dabbelt <palmer@sifive.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-Subject: [PATCH v2] target/riscv: Expose "priv" register for GDB
-Date: Fri,  4 Oct 2019 11:16:14 -0400
-Message-Id: <20191004151614.81516-1-jonathan@fintelia.io>
-X-Mailer: git-send-email 2.23.0
+ (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
+ id 1iGirU-0002jM-4A; Sat, 05 Oct 2019 08:08:36 -0400
+Received: by mail-yb1-xb44.google.com with SMTP id x4so3042263ybr.5;
+ Sat, 05 Oct 2019 05:08:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=CDGg1+HUjwfIQhQbE7gNj8BSYDtqDSqlom25bWUyY8Y=;
+ b=Ol3TNqP3hGPvGoe/yUfK59pB0kyv4KZJvsiqa8vRLrjJFtCN5T6PZvkrkvfpcEna65
+ PQqvnx2ILVagljjhRdPWMiDhgua/2k5URutbnwHFJn7pvxUGPhsmKXn7tutMYgnnCLBw
+ y0K6FBNvnsksi3pFxBsHk6i+M3r7gLf02BB8LCU8Hat5hRM3z10/YSFUng6VIuv7W61T
+ aO3fEO6SVyPjfbMIFZy5fAZUnzktkEuAMH6tGIKY42SWuba/htctOYb6FtLMBf3NMVxV
+ JFDTSv2AVciyCMWi6Wcw1CetfjNoUy+ylMcTyxSlrQhiiPn5iqvggsi1mWdp/+NGSW3M
+ M1/A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=CDGg1+HUjwfIQhQbE7gNj8BSYDtqDSqlom25bWUyY8Y=;
+ b=TnHuqptDeASvIpHkg/xQR0XLhaqxL2eZuaDO2nk8W9dxU+mF8b40kNjke4OX5fIeRW
+ qSg2mVB3r+561G9HOv2P60vs1VmJvw5gO49gM+TwTSOw6SsTmk7aIVaTqivOxDa70LPs
+ nUNaKVZQJj3LiKlMlRjWJEHlTl91RHYi8RzquMo5eHNm+6U/w8xS9BUzggVGe8fgttaI
+ XWRccDMbLhVVMS5lxVX9/sz2d20hJXj4eo6BZu2j8jf8+2bo/ozP3NgwT8zuGvptK2yk
+ w7xghuPqR71bQ7Uoe09GPkhmUK6/N8E70zelzqyk3gFBorkkqcEcRmS0XZylbBRRqiyP
+ bBBQ==
+X-Gm-Message-State: APjAAAXhiSPiFQ6TNjXpFc11Fj9vfFacpbqdnsvcBM0cUgyWeoB8aWYX
+ vgZ0gLSHE2TYMFxSx1fxfXea+Up2X3DXAhuUtWk=
+X-Google-Smtp-Source: APXvYqykSmP6uBcb3jHCHOa9XjYLENBGHEcsKJTSFjseZE4rx1iIql6x2aXDiLmxL5qN7f/Zxv4xJ7cQie34f6B11Tg=
+X-Received: by 2002:a05:6902:4f0:: with SMTP id
+ w16mr5364899ybs.11.1570277314831; 
+ Sat, 05 Oct 2019 05:08:34 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
- [fuzzy]
-X-Received-From: 209.61.151.224
+References: <20191004151614.81516-1-jonathan@fintelia.io>
+In-Reply-To: <20191004151614.81516-1-jonathan@fintelia.io>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Sat, 5 Oct 2019 20:08:24 +0800
+Message-ID: <CAEUhbmXBtTghDsVXitER5O7U2_UnzEOyPxVXAQ9_5X2t_WxvNw@mail.gmail.com>
+Subject: Re: [PATCH v2] target/riscv: Expose "priv" register for GDB
+To: Jonathan Behrens <jonathan@fintelia.io>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, Palmer Dabbelt <palmer@sifive.com>,
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>, 
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2607:f8b0:4864:20::b44
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -63,88 +70,26 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Oct 2019 15:17:26 -0000
+X-List-Received-Date: Sat, 05 Oct 2019 12:08:40 -0000
 
-This patch enables a debugger to read and write the current privilege level via
-a special "priv" register. When compiled with CONFIG_USER_ONLY the register is
-still visible but is hardwired to zero.
+On Fri, Oct 4, 2019 at 11:18 PM Jonathan Behrens <jonathan@fintelia.io> wrote:
+>
+> This patch enables a debugger to read and write the current privilege level via
+> a special "priv" register. When compiled with CONFIG_USER_ONLY the register is
+> still visible but is hardwired to zero.
+>
+> Signed-off-by: Jonathan Behrens <jonathan@fintelia.io>
+> ---
+>  gdb-xml/riscv-32bit-cpu.xml |  1 +
+>  gdb-xml/riscv-64bit-cpu.xml |  1 +
+>  target/riscv/cpu.c          |  2 +-
+>  target/riscv/gdbstub.c      | 14 ++++++++++++++
+>  4 files changed, 17 insertions(+), 1 deletion(-)
+> ---
+> Changelog V2:
+> - Use PRV_H and PRV_S instead of integer literals
+>
 
-Signed-off-by: Jonathan Behrens <jonathan@fintelia.io>
----
- gdb-xml/riscv-32bit-cpu.xml |  1 +
- gdb-xml/riscv-64bit-cpu.xml |  1 +
- target/riscv/cpu.c          |  2 +-
- target/riscv/gdbstub.c      | 14 ++++++++++++++
- 4 files changed, 17 insertions(+), 1 deletion(-)
----
-Changelog V2:
-- Use PRV_H and PRV_S instead of integer literals
-
-diff --git a/gdb-xml/riscv-32bit-cpu.xml b/gdb-xml/riscv-32bit-cpu.xml
-index 0d07aaec85..d6d76aafd8 100644
---- a/gdb-xml/riscv-32bit-cpu.xml
-+++ b/gdb-xml/riscv-32bit-cpu.xml
-@@ -44,4 +44,5 @@
-   <reg name="t5" bitsize="32" type="int"/>
-   <reg name="t6" bitsize="32" type="int"/>
-   <reg name="pc" bitsize="32" type="code_ptr"/>
-+  <reg name="priv" bitsize="32" type="int"/>
- </feature>
-diff --git a/gdb-xml/riscv-64bit-cpu.xml b/gdb-xml/riscv-64bit-cpu.xml
-index b8aa424ae4..0758d1b5fe 100644
---- a/gdb-xml/riscv-64bit-cpu.xml
-+++ b/gdb-xml/riscv-64bit-cpu.xml
-@@ -44,4 +44,5 @@
-   <reg name="t5" bitsize="64" type="int"/>
-   <reg name="t6" bitsize="64" type="int"/>
-   <reg name="pc" bitsize="64" type="code_ptr"/>
-+  <reg name="priv" bitsize="64" type="int" />
- </feature>
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index f13e298a36..347989858f 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -475,7 +475,7 @@ static void riscv_cpu_class_init(ObjectClass *c, void *data)
-     cc->synchronize_from_tb = riscv_cpu_synchronize_from_tb;
-     cc->gdb_read_register = riscv_cpu_gdb_read_register;
-     cc->gdb_write_register = riscv_cpu_gdb_write_register;
--    cc->gdb_num_core_regs = 33;
-+    cc->gdb_num_core_regs = 34;
- #if defined(TARGET_RISCV32)
-     cc->gdb_core_xml_file = "riscv-32bit-cpu.xml";
- #elif defined(TARGET_RISCV64)
-diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
-index ded140e8d8..7e0822145d 100644
---- a/target/riscv/gdbstub.c
-+++ b/target/riscv/gdbstub.c
-@@ -278,6 +278,12 @@ int riscv_cpu_gdb_read_register(CPUState *cs, uint8_t *mem_buf, int n)
-         return gdb_get_regl(mem_buf, env->gpr[n]);
-     } else if (n == 32) {
-         return gdb_get_regl(mem_buf, env->pc);
-+    } else if (n == 33) {
-+#ifdef CONFIG_USER_ONLY
-+        return gdb_get_regl(mem_buf, 0);
-+#else
-+        return gdb_get_regl(mem_buf, env->priv);
-+#endif
-     }
-     return 0;
- }
-@@ -296,6 +302,14 @@ int riscv_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
-     } else if (n == 32) {
-         env->pc = ldtul_p(mem_buf);
-         return sizeof(target_ulong);
-+    } else if (n == 33) {
-+#ifndef CONFIG_USER_ONLY
-+        env->priv = ldtul_p(mem_buf) & 0x3;
-+        if (env->priv == PRV_H) {
-+            env->priv = PRV_S;
-+        }
-+#endif
-+        return sizeof(target_ulong);
-     }
-     return 0;
- }
--- 
-2.23.0
+Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+Tested-by: Bin Meng <bmeng.cn@gmail.com>
 
