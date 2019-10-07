@@ -1,65 +1,74 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iHXx1-0001kL-QB
-	for mharc-qemu-riscv@gnu.org; Mon, 07 Oct 2019 14:41:43 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:52260)
+	id 1iHaNM-0004dj-6G
+	for mharc-qemu-riscv@gnu.org; Mon, 07 Oct 2019 17:17:04 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44511)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <dayeol@berkeley.edu>) id 1iHXwy-0001js-CT
- for qemu-riscv@nongnu.org; Mon, 07 Oct 2019 14:41:42 -0400
+ (envelope-from <jimw@sifive.com>) id 1iHaNI-0004cS-W5
+ for qemu-riscv@nongnu.org; Mon, 07 Oct 2019 17:17:02 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <dayeol@berkeley.edu>) id 1iHXww-0006R8-Qz
- for qemu-riscv@nongnu.org; Mon, 07 Oct 2019 14:41:39 -0400
-Received: from mail-pg1-x542.google.com ([2607:f8b0:4864:20::542]:34784)
+ (envelope-from <jimw@sifive.com>) id 1iHaNH-00077I-PN
+ for qemu-riscv@nongnu.org; Mon, 07 Oct 2019 17:17:00 -0400
+Received: from mail-pl1-x642.google.com ([2607:f8b0:4864:20::642]:33645)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <dayeol@berkeley.edu>) id 1iHXww-0006Qg-Gz
- for qemu-riscv@nongnu.org; Mon, 07 Oct 2019 14:41:38 -0400
-Received: by mail-pg1-x542.google.com with SMTP id y35so8763357pgl.1
- for <qemu-riscv@nongnu.org>; Mon, 07 Oct 2019 11:41:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=berkeley-edu.20150623.gappssmtp.com; s=20150623;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=KJzG2axKoZkgi+l/x9Y+YilciqreDl/CMUAdZrHp2aw=;
- b=iGcgrGOCKgHnYj0SOxs4byq0fzbx3qX+oOOzRHokaMHdEiD8mDY6Q3JygO931nMbqJ
- fzWFuzu8hPpdhWk9JEnpE9d6x6zzAzcKHAEg2Na+INFJAhv2R6MjZtcaHYVNgf4QI37D
- DJHpuk9lHL1TtvncnkAmP+sOVvxQxpuOEpdJj6gkcHoVTyTXvsbvxUILntTXb9dQ8gcf
- Z6LRr/tYlTaRBPD1Hfdz+sKjaKSnjMpdbfjjuufDgw5Vt+YvzSTKtUSVrbtfDlneELT8
- I1c74nccf5kKFy1rhccOhr50gar9wY4rJrAUbthHyDcAJkW6rmbxmppVpHe0BJjFH4+z
- 21Jg==
+ (Exim 4.71) (envelope-from <jimw@sifive.com>) id 1iHaNH-00076t-K0
+ for qemu-riscv@nongnu.org; Mon, 07 Oct 2019 17:16:59 -0400
+Received: by mail-pl1-x642.google.com with SMTP id d22so7481148pls.0
+ for <qemu-riscv@nongnu.org>; Mon, 07 Oct 2019 14:16:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=katVuAhmvu3Pqz8FzvCmsgKw4pFmRYZqkjKzNJMiDk4=;
+ b=T89o6JQzfrEXYci73vfjDrZR3JC/Ex39CXExTn5KMc2sdEirUiRO0Fg3z3JXE2Xtdj
+ E/hceRjJoU1ejAZ5j/U3qpXXQm9SE6Nlz7rSCc260afl8nzuMoIxnWSIxlaE7gR8boSc
+ ush0g7yRZed5XhTJwosBnMgqwBnAR5bjowpgN3djum3KUQh13NVyK1WZhIhtmkPSBwzz
+ YPCW5JfwcPycNE+ifVSRSosm0cx15A11I3CltM16hRgoXEYpy/dTTN+X6NpHTkgTqViC
+ xiXr/5lJNflNvi40BObiHve6OtJO2VSga9tXHfhAjuCODtvsDKEhhxFEH88jMj//OPOz
+ tMfA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=KJzG2axKoZkgi+l/x9Y+YilciqreDl/CMUAdZrHp2aw=;
- b=PzZq+/PJmvt+a4D8rqyfebL86TL9/0CXBxGbDbVUBWqYep1p8utoQbBqUgbMwxJLRl
- YV8xgfdP4vK8gSb7DuWmUFw3KTBPF7MnexzwqUZnc+ClVusnnbgraaqMUaAyKxB/EBxf
- WDR8J0aU8Hdvj4yJNnLPm92TX/82xIdXgY+NLMBZXEAAHLKM1TwNKRhiUO/5J1wScxjX
- YtyWcx5Nd0ccCEuF43HnIxnDHp59GSnEJN4dHlSw1F7zrpa6SBqInuaCkH7qlh3rZm81
- hkCm0y+tXx7kCbzFQ2LzHIk7pcehkcXMu5YpcCzVz05YjpMCPpxshwWa5ayMVukAaFim
- zhWA==
-X-Gm-Message-State: APjAAAVKeLqwNcWICqq5Cf3c6YjkV19DWuqzxp3ZFiTvPxYGJBBOtB93
- +OZL789YVhlqyFRHEgRoiM1QK8J6edRMzwacOeMlcA==
-X-Google-Smtp-Source: APXvYqy56w92ZslacwtCzrc4WCV82EQC6F0vE5pppvDkBeVbKt5gFBFOxqcL+j6uZvTu+A5wjfNQqF6iLd1S+OS1L5I=
-X-Received: by 2002:aa7:8816:: with SMTP id c22mr25727116pfo.197.1570473697061; 
- Mon, 07 Oct 2019 11:41:37 -0700 (PDT)
-MIME-Version: 1.0
-References: <20191007052813.25814-1-dayeol@berkeley.edu>
- <5583387c-5c5b-8890-999b-2ba4d75cd69d@linaro.org>
- <CACjxMEsw+Deh176JLP2aF4Pdkb_s8MiPApwMON-_K6ed61-Zyw@mail.gmail.com>
- <3747223d-23ee-1f28-e165-b2b0c5746b68@linaro.org>
-In-Reply-To: <3747223d-23ee-1f28-e165-b2b0c5746b68@linaro.org>
-From: Dayeol Lee <dayeol@berkeley.edu>
-Date: Mon, 7 Oct 2019 11:41:26 -0700
-Message-ID: <CACjxMEtPRxTQdOYFL97G7aYXC6KTBuGY2avf1bPJLYGEpURh=Q@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv: PMP violation due to wrong size parameter
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: qemu-devel@nongnu.org, "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=katVuAhmvu3Pqz8FzvCmsgKw4pFmRYZqkjKzNJMiDk4=;
+ b=GA6SqNV5jyuBqK1dw1k46bK5VfHCSYgONaXI+yY2CG1QYMDEnuKEGKIdYmoh6hmfED
+ UTeCnLcYv0Tya2UzIMqlBxCIjCFyE/CKRujlrvBaLGLQoBqnEkSStz5Ce+RQW4qG+2/B
+ z5Ob8xtwxf2j7ryWV5nC/HGCUKAkD2Bp+vu5T2jf1wiGdjHYZGjEntvYuMoj+Mccqe+i
+ 5VtFjjeBWZ1Q06vmefyF0xyzrmu7LYOznAAYm5nguELaraRr/aYPhJMu8ZT22Wfagj4M
+ /EKKJX+WW+tUwM8OTnzIt+yAAFzIv2kCDL6D1J1uXeG7AJW4jwkrjVjJD9ogs3CZN4hN
+ 3smw==
+X-Gm-Message-State: APjAAAUHZ3ieq0luo6pUYDJgl+Eey0dJ+VkqLduMz+S025co+AzA/vr5
+ dk5GGXB7KTH/wQ95mUkpMwHbwA==
+X-Google-Smtp-Source: APXvYqxB5uFnrbRYoagnAAjyIWQlPDUydyA30pUIijwPVWm3itxc1CUbaJf1fgNJucQgjWEBlbQbfA==
+X-Received: by 2002:a17:902:ff08:: with SMTP id
+ f8mr22768763plj.309.1570483017954; 
+ Mon, 07 Oct 2019 14:16:57 -0700 (PDT)
+Received: from [10.17.0.102] ([12.206.222.5])
+ by smtp.gmail.com with ESMTPSA id i74sm19200018pfe.28.2019.10.07.14.16.57
+ (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+ Mon, 07 Oct 2019 14:16:57 -0700 (PDT)
+Subject: Re: [PATCH v2] target/riscv: Expose "priv" register for GDB
+To: Jonathan Behrens <jonathan@fintelia.io>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ Palmer Dabbelt <palmer@sifive.com>,
+ =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Palmer Dabbelt <palmer@sifive.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>
-Content-Type: multipart/alternative; boundary="000000000000d7ce0905945666d7"
+ =?UTF-8?Q?Alex_Benn=c3=a9e?= <alex.bennee@linaro.org>
+References: <20191004151614.81516-1-jonathan@fintelia.io>
+From: Jim Wilson <jimw@sifive.com>
+Message-ID: <5393a150-71b6-a729-7530-a50df05353bd@sifive.com>
+Date: Mon, 7 Oct 2019 14:16:56 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.8.0
+MIME-Version: 1.0
+In-Reply-To: <20191004151614.81516-1-jonathan@fintelia.io>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::542
+X-Received-From: 2607:f8b0:4864:20::642
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -71,73 +80,44 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Oct 2019 18:41:42 -0000
+X-List-Received-Date: Mon, 07 Oct 2019 21:17:02 -0000
 
---000000000000d7ce0905945666d7
-Content-Type: text/plain; charset="UTF-8"
+On 10/4/19 8:16 AM, Jonathan Behrens wrote:
+> diff --git a/gdb-xml/riscv-32bit-cpu.xml b/gdb-xml/riscv-32bit-cpu.xml
+> index 0d07aaec85..d6d76aafd8 100644
+> --- a/gdb-xml/riscv-32bit-cpu.xml
+> +++ b/gdb-xml/riscv-32bit-cpu.xml
+> @@ -44,4 +44,5 @@
+>     <reg name="t5" bitsize="32" type="int"/>
+>     <reg name="t6" bitsize="32" type="int"/>
+>     <reg name="pc" bitsize="32" type="code_ptr"/>
+> +  <reg name="priv" bitsize="32" type="int"/>
+>   </feature>
 
-On Mon, Oct 7, 2019 at 11:25 AM Richard Henderson <
-richard.henderson@linaro.org> wrote:
+Adding this to the cpu register set means that the gdb "info registers" 
+command will now list a value for the mysterious undocumented "priv" 
+register.  That is likely to result in user confusion, and a few gdb bug 
+reports.
 
-> On 10/7/19 10:19 AM, Dayeol Lee wrote:
-> > Thank you very much for the clarification!
-> >
-> > I found tlb_set_page with size != TARGET_PAGE_SIZE makes the translation
-> way
-> > too slow; the Linux doesn't seem to boot.
->
-> To clarify, PMP specifies a range.  That range has only two end points.
-> Therefore, a maximum of 2 pages may be affected by a mis-aligned PMP
-> boundary.
->
-> It sounds like you're getting size != TARGET_PAGE_SIZE for all pages.
->
->
-The cause of the problem is not a mis-aligned PMP boundary.
-Let's say a PMP range is 0x1000 - 0x2000
-if pmp_hart_has_privs() gets addr=0x2000 and size=0,
-pmp_hart_has_privs() will ALWAYS return false because the code assumes size
-> 0.
-It checks if (addr) and (addr + size - 1) are within the PMP range for each
-PMP entry.
-(addr + size - 1) is supposed to be the last byte address of the memory
-access, but it ends up with (addr - 1) if size = 0.
-Thus, pmp_hart_has_privs() returns false as (addr - 1) = 0x1fff is within
-the range, and addr = 0x2000 is out of the range (partial match violation).
+Gdb incidentally already has support for a virtual priv register.  From 
+gdb/riscv-tdep.c:
 
---000000000000d7ce0905945666d7
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+static const struct riscv_register_feature riscv_virtual_feature =
+{
+  "org.gnu.gdb.riscv.virtual",
+  {
+    { RISCV_PRIV_REGNUM, { "priv" }, false }
+  }
+};
 
-<div dir=3D"ltr"><div dir=3D"ltr">On Mon, Oct 7, 2019 at 11:25 AM Richard H=
-enderson &lt;<a href=3D"mailto:richard.henderson@linaro.org">richard.hender=
-son@linaro.org</a>&gt; wrote:<br></div><div class=3D"gmail_quote"><blockquo=
-te class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px =
-solid rgb(204,204,204);padding-left:1ex">On 10/7/19 10:19 AM, Dayeol Lee wr=
-ote:<br>
-&gt; Thank you very much for the clarification!<br>
-&gt; <br>
-&gt; I found tlb_set_page with size !=3D TARGET_PAGE_SIZE makes the transla=
-tion way<br>
-&gt; too slow; the Linux doesn&#39;t seem to boot.<br>
-<br>
-To clarify, PMP specifies a range.=C2=A0 That range has only two end points=
-.<br>
-Therefore, a maximum of 2 pages may be affected by a mis-aligned PMP bounda=
-ry.<br>
-<br>
-It sounds like you&#39;re getting size !=3D TARGET_PAGE_SIZE for all pages.=
-<br><br></blockquote><div><br></div><div>The cause of the problem is not a =
-mis-aligned PMP boundary.</div><div>Let&#39;s say a PMP range is 0x1000 - 0=
-x2000</div><div>if pmp_hart_has_privs() gets addr=3D0x2000 and size=3D0,</d=
-iv><div>pmp_hart_has_privs() will ALWAYS return false because the code assu=
-mes size &gt; 0.</div><div>It checks if (addr) and (addr=C2=A0+ size - 1) a=
-re within the PMP range for each PMP entry.</div><div>(addr=C2=A0+ size - 1=
-) is supposed to be the last byte address of the memory access, but it ends=
- up with (addr - 1) if size =3D 0.</div><div>Thus, pmp_hart_has_privs() ret=
-urns false as (addr - 1) =3D 0x1fff is within the range, and addr =3D 0x200=
-0 is out of the range (partial match violation).</div><div><br></div><div><=
-br></div><div><br></div></div></div>
+So the correct way to fix this is to add a 
+gdb-xml/riscv-32bit-virtual.xml file, along with code to handle this new 
+xml file and the registers in it.  Likewise for the 64-bit support.
 
---000000000000d7ce0905945666d7--
+The main advantage of doing things this way is that only people that 
+care about the priv register will see it, and this will interoperate 
+with other RISC-V debuggers and targets (if any) that already have 
+virtual priv register support.
+
+Jim
 
