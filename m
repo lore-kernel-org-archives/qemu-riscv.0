@@ -1,65 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iHVg8-0005dm-TE
-	for mharc-qemu-riscv@gnu.org; Mon, 07 Oct 2019 12:16:10 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:57276)
+	id 1iHWfY-0002Go-MZ
+	for mharc-qemu-riscv@gnu.org; Mon, 07 Oct 2019 13:19:36 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:39015)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <palmer@sifive.com>) id 1iHVg4-0005aa-QK
- for qemu-riscv@nongnu.org; Mon, 07 Oct 2019 12:16:06 -0400
+ (envelope-from <dayeol@berkeley.edu>) id 1iHWfV-00029S-LE
+ for qemu-riscv@nongnu.org; Mon, 07 Oct 2019 13:19:35 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmer@sifive.com>) id 1iHVg3-0003em-2R
- for qemu-riscv@nongnu.org; Mon, 07 Oct 2019 12:16:04 -0400
-Received: from mail-pg1-x541.google.com ([2607:f8b0:4864:20::541]:40647)
+ (envelope-from <dayeol@berkeley.edu>) id 1iHWfT-0000q9-Oj
+ for qemu-riscv@nongnu.org; Mon, 07 Oct 2019 13:19:32 -0400
+Received: from mail-pl1-x641.google.com ([2607:f8b0:4864:20::641]:33185)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmer@sifive.com>) id 1iHVg2-0003c6-Qz
- for qemu-riscv@nongnu.org; Mon, 07 Oct 2019 12:16:03 -0400
-Received: by mail-pg1-x541.google.com with SMTP id d26so8501979pgl.7
- for <qemu-riscv@nongnu.org>; Mon, 07 Oct 2019 09:16:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
- h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
- :content-transfer-encoding;
- bh=F5KcZ05xCSG+C6zK4MWjs4KZwuOvY5DewcEsAGMwKZg=;
- b=f0cpZ7YZCZrJKz9CrE6m8uYUIKGkBQSzChOWh5MRov16P5UUkG+g8lMDAonrHaFKqv
- 2GZ8wTPszQuKsom7O+Wznx8CQSU/RhnZNOvCPtkX2xkv0RnySTWQyuzY8Rs6jJ4Cvj1M
- wt+4+3ckrXoyI1STaq6waNPmZJoiOFit228mpW+baLSHiZHUB7JpUT5YNSCSVj0COkWu
- tE8sInmzRStYmf4loNHfBgdt9VDzbnofsTPKPrihYzULBsaeHENNR+KRF6uvmn+1CeA+
- HtUag0WfmdyZm3g7pX9ByGjE2I+3Bh4ZYZSL2q+i4k7zE6LDcHxHH+I0q6QUB/8i/qXv
- JSCA==
+ (Exim 4.71) (envelope-from <dayeol@berkeley.edu>) id 1iHWfT-0000pD-B9
+ for qemu-riscv@nongnu.org; Mon, 07 Oct 2019 13:19:31 -0400
+Received: by mail-pl1-x641.google.com with SMTP id d22so7199353pls.0
+ for <qemu-riscv@nongnu.org>; Mon, 07 Oct 2019 10:19:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=berkeley-edu.20150623.gappssmtp.com; s=20150623;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=0jM2EbhQp5OuMkBVePwdxLyjvQ1BUKCkrGxUtHCHOtw=;
+ b=ofNw0AVzwCg5Fn6+pGgBca0O3aG3hwJUhMoTeM4kNG0wixUQbE+jhZUTaogKEcmQWA
+ NynqV14VDBzrlSbAZ9z11ixyvKR30wA+3senvVlD4HpCXa4A0yRxK4v5UGSQPJx7tWFL
+ sga1XMFq9MhpGzkLvbly6GlK98dR/87FpNPVJx5SQ+lFjScbbm5syURAvPPAx+WvRZN9
+ 4wYcc2slzAJ4hpPkxHTTiF4hIokoFuXjz7SY/F+liiklCPOcK9QmstOoR6+didTBr3m/
+ jS6irGKhFOOQMxFJ2CJaXX+qq9eZmPhkiz7Kwo3NWPQonkWwk7VKgwxksevrLl0rtPPT
+ 5bag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
- :mime-version:content-transfer-encoding;
- bh=F5KcZ05xCSG+C6zK4MWjs4KZwuOvY5DewcEsAGMwKZg=;
- b=TSPawwYjLIQ25G2iJmbmzHBrq9kzhmWkLLR6St0X1u4cKIRBaopDzB/C+ihpNenXWd
- TuZndGsjAWxz853iP6OLuqKVfx4qFPQ/yUakt/lnTsETiiOLNc6thm3LKkoVaIa3WYfz
- a99Y3kBv9ytzIWWVk1wi2Y6MuIuY9qH2zrvzgVNkH3jtHtWBfHrsmq5iDw2tMMkHkksq
- Gt42tONJoAVAGG9OUWCUy2zDbwflJbRU3cJ1fjfRXRHe/SKyh7d8Yz+j1fmuaf76H4jH
- tF1POHAGZYeAwabtkiYFAyVjI6WcATngdOhSBB98D6sfqnrsAs7jbPsWagSBJcu42vHf
- swiQ==
-X-Gm-Message-State: APjAAAWt7S8Vrw/3l9U6vO8jaml3fTLx3nU50XLJ2DVo8aQXQ0+wb63z
- EXMOkL5XIabYHSS+KTjsaN+RBQ==
-X-Google-Smtp-Source: APXvYqzGHulA17E5bcK9+NDhvNZyeKJDbCqySzfXkQObH6dPCdLFFd5YC0uyjfJKgCHliIZHEI+LBA==
-X-Received: by 2002:a63:6441:: with SMTP id y62mr13874896pgb.177.1570464960709; 
- Mon, 07 Oct 2019 09:16:00 -0700 (PDT)
-Received: from localhost ([12.206.222.5])
- by smtp.gmail.com with ESMTPSA id 7sm12841486pgj.35.2019.10.07.09.15.59
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 07 Oct 2019 09:15:59 -0700 (PDT)
-Date: Mon, 07 Oct 2019 09:15:59 -0700 (PDT)
-X-Google-Original-Date: Mon, 07 Oct 2019 09:04:43 PDT (-0700)
-Subject: Re: [PATCH v1 24/28] target/riscv: Implement second stage MMU
-In-Reply-To: <67e93a4f45693067abb03441e159b1f4a0a48276.1566603412.git.alistair.francis@wdc.com>
-CC: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- Alistair Francis <Alistair.Francis@wdc.com>, alistair23@gmail.com,
- Atish Patra <Atish.Patra@wdc.com>, Anup Patel <Anup.Patel@wdc.com>
-From: Palmer Dabbelt <palmer@sifive.com>
-To: Alistair Francis <Alistair.Francis@wdc.com>
-Message-ID: <mhng-a9412752-518e-4527-ad6c-3830ddead66d@palmer-si-x1c4>
-Mime-Version: 1.0 (MHng)
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=0jM2EbhQp5OuMkBVePwdxLyjvQ1BUKCkrGxUtHCHOtw=;
+ b=bgGgFZ8J6VHp1rR94qz9umj+sQp3FkMWbijdhpDittKS5bojAscGv2SE8bde37VKDl
+ Zx9qY+/LnooOzNMqZYEjWmEx3wx8cAVQMB6wEbt4EwgsAKUzEentU0H8hAv1u8l/Rehn
+ IkEroSBShRodIk50hKfILH2I/6E1JiUqKyBKVKFhFTaWjJv0KBu2Wf/lnDE3ksHel6ym
+ ITny7d3j7/DE+/ImQyCZqy5PCyRZ7YCTI1QuVzDWqbJZC6tIT3PpPg2MbtYnqg3mUbxS
+ caVEFK7QpC5xN3xgZWNSOFJivBF4eW3eAc1Sfo8ES43e1hcfedJbbqfGP0xinRL2aWjO
+ fHkw==
+X-Gm-Message-State: APjAAAXlquzw8KBZuQ20cYjtnHUK+D1KseKTzMi5FnQ6y66kUpJMSgA9
+ jmEI13OFUkhIVfD8VAJvNmlJZzCv5sTKMpSxxZR+NA==
+X-Google-Smtp-Source: APXvYqwoErOY34fu1A4KhIrVhCcBTJiuxKyewwemH2kK0qwyYo/JBtB99M1YO28u8BB28M0fQy1FxECB4SPh1niOIkE=
+X-Received: by 2002:a17:902:2e:: with SMTP id 43mr31712457pla.55.1570468769964; 
+ Mon, 07 Oct 2019 10:19:29 -0700 (PDT)
+MIME-Version: 1.0
+References: <20191007052813.25814-1-dayeol@berkeley.edu>
+ <5583387c-5c5b-8890-999b-2ba4d75cd69d@linaro.org>
+In-Reply-To: <5583387c-5c5b-8890-999b-2ba4d75cd69d@linaro.org>
+From: Dayeol Lee <dayeol@berkeley.edu>
+Date: Mon, 7 Oct 2019 10:19:18 -0700
+Message-ID: <CACjxMEsw+Deh176JLP2aF4Pdkb_s8MiPApwMON-_K6ed61-Zyw@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: PMP violation due to wrong size parameter
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: qemu-devel@nongnu.org, "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Palmer Dabbelt <palmer@sifive.com>, 
+ Alistair Francis <Alistair.Francis@wdc.com>
+Content-Type: multipart/alternative; boundary="0000000000002a65b40594554190"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::541
+X-Received-From: 2607:f8b0:4864:20::641
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -71,175 +69,133 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Oct 2019 16:16:07 -0000
+X-List-Received-Date: Mon, 07 Oct 2019 17:19:35 -0000
 
-On Fri, 23 Aug 2019 16:38:52 PDT (-0700), Alistair Francis wrote:
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> ---
->  target/riscv/cpu_helper.c | 96 +++++++++++++++++++++++++++++++++++----
->  1 file changed, 86 insertions(+), 10 deletions(-)
->
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index 8b9871f9ea..188d5cb39f 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -337,13 +337,40 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
->       * (riscv_cpu_do_interrupt) is correct */
->
->      int mode = mmu_idx;
-> +    bool use_background = false;
->
-> +    /*
-> +     * Check if we should use the background registers for the two
-> +     * stage translation. We don't need to check if we actually need
-> +     * two stage translation as that happened before this function
-> +     * was called. Background registers will be used if the guest has
-> +     * forced a two stage translation to be on (in HS or M mode).
-> +     */
->      if (mode == PRV_M && access_type != MMU_INST_FETCH) {
->          if (get_field(*env->mstatus, MSTATUS_MPRV)) {
->              mode = get_field(*env->mstatus, MSTATUS_MPP);
-> +
-> +            if (riscv_has_ext(env, RVH) &&
-> +                get_field(*env->mstatus, MSTATUS_MPV)) {
-> +                use_background = true;
-> +            }
->          }
->      }
->
-> +    if (mode == PRV_S && access_type != MMU_INST_FETCH &&
-> +        riscv_has_ext(env, RVH) && !riscv_cpu_virt_enabled(env)) {
-> +        if (get_field(env->hstatus, HSTATUS_SPRV)) {
-> +            mode = get_field(*env->mstatus, SSTATUS_SPP);
-> +            use_background = true;
-> +        }
-> +    }
-> +
-> +    if (first_stage == false) {
-> +        /* We are in stage 2 translation, this is similar to stage 1. */
-> +        /* Stage 2 is always taken as U-mode */
-> +        mode = PRV_U;
-> +    }
-> +
->      if (mode == PRV_M || !riscv_feature(env, RISCV_FEATURE_MMU)) {
->          *physical = addr;
->          *prot = PAGE_READ | PAGE_WRITE | PAGE_EXEC;
-> @@ -353,13 +380,30 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
->      *prot = 0;
->
->      target_ulong base;
-> -    int levels, ptidxbits, ptesize, vm, sum;
-> -    int mxr = get_field(*env->mstatus, MSTATUS_MXR);
-> +    int levels, ptidxbits, ptesize, vm, sum, mxr, widened;
-> +
-> +    if (first_stage == true) {
-> +        mxr = get_field(*env->mstatus, MSTATUS_MXR);
-> +    } else {
-> +        mxr = get_field(env->vsstatus, MSTATUS_MXR);
-> +    }
->
->      if (env->priv_ver >= PRIV_VERSION_1_10_0) {
-> -        base = get_field(env->satp, SATP_PPN) << PGSHIFT;
-> +        if (first_stage == true) {
-> +            if (use_background) {
-> +                base = get_field(env->vsatp, SATP_PPN) << PGSHIFT;
-> +                vm = get_field(env->vsatp, SATP_MODE);
-> +            } else {
-> +                base = get_field(env->satp, SATP_PPN) << PGSHIFT;
-> +                vm = get_field(env->satp, SATP_MODE);
-> +            }
-> +            widened = 0;
-> +        } else {
-> +            base = get_field(env->hgatp, HGATP_PPN) << PGSHIFT;
-> +            vm = get_field(env->hgatp, HGATP_MODE);
-> +            widened = 2;
-> +        }
->          sum = get_field(*env->mstatus, MSTATUS_SUM);
-> -        vm = get_field(env->satp, SATP_MODE);
->          switch (vm) {
->          case VM_1_10_SV32:
->            levels = 2; ptidxbits = 10; ptesize = 4; break;
-> @@ -377,6 +421,7 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
->            g_assert_not_reached();
->          }
->      } else {
-> +        widened = 0;
->          base = env->sptbr << PGSHIFT;
->          sum = !get_field(*env->mstatus, MSTATUS_PUM);
->          vm = get_field(*env->mstatus, MSTATUS_VM);
-> @@ -397,9 +442,16 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
->      }
->
->      CPUState *cs = env_cpu(env);
-> -    int va_bits = PGSHIFT + levels * ptidxbits;
-> -    target_ulong mask = (1L << (TARGET_LONG_BITS - (va_bits - 1))) - 1;
-> -    target_ulong masked_msbs = (addr >> (va_bits - 1)) & mask;
-> +    int va_bits = PGSHIFT + levels * ptidxbits + widened;
-> +    target_ulong mask, masked_msbs;
-> +
-> +    if (TARGET_LONG_BITS > (va_bits - 1)) {
-> +        mask = (1L << (TARGET_LONG_BITS - (va_bits - 1))) - 1;
-> +    } else {
-> +        mask = 0;
-> +    }
-> +    masked_msbs = (addr >> (va_bits - 1)) & mask;
-> +
->      if (masked_msbs != 0 && masked_msbs != mask) {
->          return TRANSLATE_FAIL;
->      }
-> @@ -411,17 +463,36 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
->  restart:
->  #endif
->      for (i = 0; i < levels; i++, ptshift -= ptidxbits) {
-> -        target_ulong idx = (addr >> (PGSHIFT + ptshift)) &
-> +        target_ulong idx;
-> +        if (i == 0) {
-> +            idx = (addr >> (PGSHIFT + ptshift)) &
-> +                           ((1 << (ptidxbits + widened)) - 1);
-> +        } else {
-> +            idx = (addr >> (PGSHIFT + ptshift)) &
->                             ((1 << ptidxbits) - 1);
-> +        }
->
->          /* check that physical address of PTE is legal */
-> -        target_ulong pte_addr = base + idx * ptesize;
-> +        target_ulong pte_addr;
-> +
-> +        if (two_stage && first_stage) {
-> +            hwaddr vbase;
-> +
-> +            /* Do the second stage translation on the base PTE address. */
-> +            get_physical_address(env, &vbase, prot, base, access_type,
-> +                                 mmu_idx, false, true);
-> +
-> +            pte_addr = vbase + idx * ptesize;
-> +        } else {
-> +            pte_addr = base + idx * ptesize;
-> +        }
->
->          if (riscv_feature(env, RISCV_FEATURE_PMP) &&
->              !pmp_hart_has_privs(env, pte_addr, sizeof(target_ulong),
->              1 << MMU_DATA_LOAD, PRV_S)) {
->              return TRANSLATE_PMP_FAIL;
->          }
-> +
->  #if defined(TARGET_RISCV32)
->          target_ulong pte = ldl_phys(cs->as, pte_addr);
->  #elif defined(TARGET_RISCV64)
-> @@ -507,7 +578,12 @@ restart:
->              /* for superpage mappings, make a fake leaf PTE for the TLB's
->                 benefit. */
->              target_ulong vpn = addr >> PGSHIFT;
-> -            *physical = (ppn | (vpn & ((1L << ptshift) - 1))) << PGSHIFT;
-> +            if (i == 0) {
-> +                *physical = (ppn | (vpn & ((1L << (ptshift + widened)) - 1))) <<
-> +                             PGSHIFT;
-> +            } else {
-> +                *physical = (ppn | (vpn & ((1L << ptshift) - 1))) << PGSHIFT;
-> +            }
->
->              /* set permissions on the TLB entry */
->              if ((pte & PTE_R) || ((pte & PTE_X) && mxr)) {
+--0000000000002a65b40594554190
+Content-Type: text/plain; charset="UTF-8"
 
-Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
+Thank you very much for the clarification!
+
+I found tlb_set_page with size != TARGET_PAGE_SIZE makes the translation
+way too slow; the Linux doesn't seem to boot.
+
+If that's the only way to reduce PMP granularity to less than
+TARGET_PAGE_SIZE,
+Can we just set the PMP default granularity to TARGET_PAGE_SIZE as it did
+before?
+
+OR
+
+Can we bypass the partial match violation when size is unknown? (check the
+starting address only)
+
+I think both of the options does not exactly match with the ISA
+specification,
+but given that size=0 always causes the problem, I want it to be fixed as
+soon as possible.
+
+Any thoughts would be appreciated!
+
+On Mon, Oct 7, 2019, 6:00 AM Richard Henderson <richard.henderson@linaro.org>
+wrote:
+
+> On 10/6/19 10:28 PM, Dayeol Lee wrote:
+> > riscv_cpu_tlb_fill() uses the `size` parameter to check PMP violation
+> > using pmp_hart_has_privs().
+> > However, the size passed from tlb_fill(), which is called by
+> > get_page_addr_code(), is always a hard-coded value 0.
+> > This causes a false PMP violation if the instruction presents on a
+> > PMP boundary.
+> >
+> > In order to fix, simply correct the size to 4 if the access_type is
+> > MMU_INST_FETCH.
+>
+> That's not correct.
+>
+> In general, size 0 means "unknown size".  In this case, the one tlb lookup
+> is
+> going to be used by lots of instructions -- everything that fits on the
+> page.
+>
+> If you want to support PMP on things that are not page boundaries, then you
+> will also have to call tlb_set_page with size != TARGET_PAGE_SIZE.
+>
+> Fixing that will cause instructions within that page to be executed one at
+> a
+> time, which also means they will be tlb_fill'd one at a time, which means
+> that
+> you'll get the correct size value.
+>
+> Which will be 2 or 4, depending on whether the configuration supports the
+> Compressed extension, and not just 4.
+>
+>
+> r~
+>
+
+>
+
+--0000000000002a65b40594554190
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"auto"><div>Thank you very much for the clarifi=
+cation!</div><div><br></div><div>I found tlb_set_page with size !=3D TARGET=
+_PAGE_SIZE makes the translation way too slow; the Linux doesn&#39;t seem t=
+o boot.</div><div><br></div><div>If that&#39;s the only way to reduce PMP g=
+ranularity to less than TARGET_PAGE_SIZE,</div><div>Can we just set the PMP=
+ default granularity to TARGET_PAGE_SIZE as it did before?</div><div><br></=
+div><div>OR=C2=A0</div><div><br></div><div>Can we bypass the partial match =
+violation when size is unknown? (check the starting address only)</div><div=
+><br></div><div>I think both of the options does not exactly match with the=
+ ISA specification,</div><div>but given that size=3D0 always causes the pro=
+blem, I want it to be fixed as soon as possible.</div><div><br></div><div>A=
+ny thoughts would be=C2=A0appreciated!</div><div><br></div><div dir=3D"auto=
+"><div class=3D"gmail_quote" dir=3D"auto"><div dir=3D"ltr" class=3D"gmail_a=
+ttr">On Mon, Oct 7, 2019, 6:00 AM Richard Henderson &lt;<a href=3D"mailto:r=
+ichard.henderson@linaro.org" target=3D"_blank">richard.henderson@linaro.org=
+</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:=
+0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">On 10/6/19 10:28 PM=
+, Dayeol Lee wrote:<br>
+&gt; riscv_cpu_tlb_fill() uses the `size` parameter to check PMP violation<=
+br>
+&gt; using pmp_hart_has_privs().<br>
+&gt; However, the size passed from tlb_fill(), which is called by<br>
+&gt; get_page_addr_code(), is always a hard-coded value 0.<br>
+&gt; This causes a false PMP violation if the instruction presents on a<br>
+&gt; PMP boundary.<br>
+&gt; <br>
+&gt; In order to fix, simply correct the size to 4 if the access_type is<br=
+>
+&gt; MMU_INST_FETCH.<br>
+<br>
+That&#39;s not correct.<br>
+<br>
+In general, size 0 means &quot;unknown size&quot;.=C2=A0 In this case, the =
+one tlb lookup is<br>
+going to be used by lots of instructions -- everything that fits on the pag=
+e.<br>
+<br>
+If you want to support PMP on things that are not page boundaries, then you=
+<br>
+will also have to call tlb_set_page with size !=3D TARGET_PAGE_SIZE.<br>
+<br>
+Fixing that will cause instructions within that page to be executed one at =
+a<br>
+time, which also means they will be tlb_fill&#39;d one at a time, which mea=
+ns that<br>
+you&#39;ll get the correct size value.<br>
+<br>
+Which will be 2 or 4, depending on whether the configuration supports the<b=
+r>
+Compressed extension, and not just 4.<br>
+<br>
+<br>
+r~<br>
+</blockquote><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;b=
+order-left:1px #ccc solid;padding-left:1ex"><br></blockquote></div></div></=
+div>
+</div>
+
+--0000000000002a65b40594554190--
 
