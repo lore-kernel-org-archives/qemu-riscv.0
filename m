@@ -1,61 +1,75 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iHXSy-0001Y9-Lk
-	for mharc-qemu-riscv@gnu.org; Mon, 07 Oct 2019 14:10:40 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:47667)
+	id 1iHXhb-0002hH-UT
+	for mharc-qemu-riscv@gnu.org; Mon, 07 Oct 2019 14:25:47 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49729)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <alistair23@gmail.com>) id 1iHXSv-0001VP-F2
- for qemu-riscv@nongnu.org; Mon, 07 Oct 2019 14:10:38 -0400
+ (envelope-from <richard.henderson@linaro.org>) id 1iHXhY-0002et-LP
+ for qemu-riscv@nongnu.org; Mon, 07 Oct 2019 14:25:45 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1iHXSu-000541-6m
- for qemu-riscv@nongnu.org; Mon, 07 Oct 2019 14:10:37 -0400
-Received: from mail-lj1-x244.google.com ([2a00:1450:4864:20::244]:43722)
+ (envelope-from <richard.henderson@linaro.org>) id 1iHXhX-00072N-EV
+ for qemu-riscv@nongnu.org; Mon, 07 Oct 2019 14:25:44 -0400
+Received: from mail-yb1-xb43.google.com ([2607:f8b0:4864:20::b43]:38484)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1iHXSq-00052U-Qb; Mon, 07 Oct 2019 14:10:33 -0400
-Received: by mail-lj1-x244.google.com with SMTP id n14so14670057ljj.10;
- Mon, 07 Oct 2019 11:10:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=OzbvGigIYTDinndI7OgOMeW5d4ZDX0kILT/nZ6Ckwmc=;
- b=Js4AJEjeIk/3ncDbFTUzoFBeDpYo1woEVW5H1PPIVJra19G/zZh8w1mNneSbTFlYPs
- 5zmOZQMfgf8O4PLqWl0hIVYLzewLuwsCB2W+h0h7uWNyk56DMXJ/mNP9SwwriXlGk+yU
- l0WEOFXAPUuLtFC4mnOBphAG9Wwal8nWlac7HjTlNsoTISe/LG4yFp2bQCMXEKuVtMIZ
- pvNIpEnJeJq4MXylybpehoHEIxjhlOXz6Av03kSdoBWD5VnbKr/CREPbUd+f4RN1XzMw
- U0vGUbplA6OAMZ4L/OsD6SKjs+JL1BVGMBr5RVlyZlTHxq0JL7mf7HC3+MHlLxzGVkHE
- Chwg==
+ (Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
+ id 1iHXhX-00071a-9q
+ for qemu-riscv@nongnu.org; Mon, 07 Oct 2019 14:25:43 -0400
+Received: by mail-yb1-xb43.google.com with SMTP id k10so1809853ybs.5
+ for <qemu-riscv@nongnu.org>; Mon, 07 Oct 2019 11:25:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=subject:to:cc:references:from:openpgp:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=cs8zxU93aD8ynvB0tt+JhMRUQ4TwR66VJedOixxINHs=;
+ b=OZ1MJaQrzXMbX/Fl3hbEeR5p7XUBoFuhIce8qlMx838m2pSQ1o15VL9I2fTi2WZIar
+ DnwdU+HRW2S7y8hOzMSlvXeolP/Izz/9zNtFGV6kyCUdhXbkmbEBDJRtfHpms4LnL5oV
+ bq3lIU8alKSNj/N2e2PoAgfe226mQoLhHb7D7f7HByQ06/ajKAmNbPgCfG3gv/aw4u6m
+ mDQ/aXA2nQXhs+pYS6ffrJrhzhvYJLFWyP82Ms4ryYdpCcdBBI4U7UWeHyjM+iDt4Iqr
+ WjwgXM1sFFiteQi4d3ze7zV4Xm2+er7eWaAgrKWefD/0fKZvIZ39dHw1xsVjq5X8d0vT
+ l8UQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=OzbvGigIYTDinndI7OgOMeW5d4ZDX0kILT/nZ6Ckwmc=;
- b=d80IsKNFSumyIk3s6SpbrHgOw2PC6/1EjMkZ+0tTZnsd9+kQTL0La6xszBVsl9HGbq
- P9MjSRiCJhtTmcHzvLf6hzOPnuHefKkFNXsDI/4T3/Y4sc/lfX2yQaYR/RJ4g4o/jB4W
- Osq0DtnYntsE9QB1zh+ooIpOyTKmeU18gp5Rrl6YOpYohp5rs7fUTqRAsRYeQg37vcRa
- pD0961O9EwF1Lon0xcChdYYjUAusiA7IoWkBkpgH4eP72EaPdBrTEcrbJt1YXlCFCD9R
- NW/MJSsEbdYO40Y3l/OVY5pRI5z30tPS83dp9u2pHIt5cmmxITu04gomXPGnQGA+DFOJ
- +q3A==
-X-Gm-Message-State: APjAAAWgWAQjZwcsmSRvEfPpyg/1u/h647qZPe8tAeY+JfBhxqf1ivip
- Q4tXR54+EQv7735hbmLnyxq8TjuTuuicp0N3iAk=
-X-Google-Smtp-Source: APXvYqxQTadnculSdSqOymk/sfHOVIfWQfxX648K3wVxHBpXZO6Cu8imwOezZOThU7R/hcuKwxW8nja0iZ9ZKq8P338=
-X-Received: by 2002:a2e:2c02:: with SMTP id s2mr19815668ljs.156.1570471830861; 
- Mon, 07 Oct 2019 11:10:30 -0700 (PDT)
+ h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
+ :date:user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=cs8zxU93aD8ynvB0tt+JhMRUQ4TwR66VJedOixxINHs=;
+ b=TZ9f7iGu7RSqnpe++qYGbpCDA6tDxubq/TDVF7TiMEDYhdrBLhygZoVa5AS0V4wcx4
+ OI7nYNp2zXL3jaoEHmJ7T9DuT0fKpy5iAvtv+lNu/zksfW5czHfNAl1BP/EX+0g+1C4g
+ Ga6AbShlh3UOGQEoUraTFcKHqhXBD75Yf6HhsZCtIYGO7PMpms/9naqyZfwz1bL5Nmph
+ jyxngr9ivNJdA32ZKPP7RxlnZmPWWfMxYyaqhzS1FxR5kOT+ba6FaRsZCE89PemhoEeP
+ bJ9NonUgYOabRM9iaUaNFYwbjHNPSJp9uNBgTkua1sPic/FUFzXt3IufB1kC5vdbCb0Q
+ nQRA==
+X-Gm-Message-State: APjAAAUSok4ghWZOjTl1CAvHtZozEFMmQzrk7nyzqjNc30ZRaeSjlNkZ
+ aEtkSJoXpQHib7jlyAWRYTAhKw==
+X-Google-Smtp-Source: APXvYqw7M4zeGpw+lqQPcGr0FVjgCOq+k7o0m8G4S4ptUI3KHcoq7plIlTTnuob53XnM9x04cO805Q==
+X-Received: by 2002:a25:b7c8:: with SMTP id u8mr12240390ybj.212.1570472742310; 
+ Mon, 07 Oct 2019 11:25:42 -0700 (PDT)
+Received: from [192.168.1.44] (67.216.144.16.pool.hargray.net. [67.216.144.16])
+ by smtp.gmail.com with ESMTPSA id a130sm4075650ywc.81.2019.10.07.11.25.41
+ (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+ Mon, 07 Oct 2019 11:25:41 -0700 (PDT)
+Subject: Re: [PATCH] target/riscv: PMP violation due to wrong size parameter
+To: Dayeol Lee <dayeol@berkeley.edu>
+Cc: qemu-devel@nongnu.org, "open list:RISC-V TCG CPUs"
+ <qemu-riscv@nongnu.org>, Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Palmer Dabbelt <palmer@sifive.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>
+References: <20191007052813.25814-1-dayeol@berkeley.edu>
+ <5583387c-5c5b-8890-999b-2ba4d75cd69d@linaro.org>
+ <CACjxMEsw+Deh176JLP2aF4Pdkb_s8MiPApwMON-_K6ed61-Zyw@mail.gmail.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+Openpgp: preference=signencrypt
+Message-ID: <3747223d-23ee-1f28-e165-b2b0c5746b68@linaro.org>
+Date: Mon, 7 Oct 2019 14:25:16 -0400
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.8.0
 MIME-Version: 1.0
-References: <4d84c887def558fc178c31e3adc52f1c4b2fb075.1566603412.git.alistair.francis@wdc.com>
- <mhng-87129cf6-394a-4b08-bf67-a6bb60f86245@palmer-si-x1e>
-In-Reply-To: <mhng-87129cf6-394a-4b08-bf67-a6bb60f86245@palmer-si-x1e>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 7 Oct 2019 11:05:33 -0700
-Message-ID: <CAKmqyKOV0J3w3fPUF3CGAip=j_+D_M+7X9r+2TwEZwkapsQZMQ@mail.gmail.com>
-Subject: Re: [PATCH v1 22/28] target/riscv: Allow specifying MMU stage
-To: Palmer Dabbelt <palmer@sifive.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Atish Patra <Atish.Patra@wdc.com>, Anup Patel <Anup.Patel@wdc.com>
-Content-Type: text/plain; charset="UTF-8"
+In-Reply-To: <CACjxMEsw+Deh176JLP2aF4Pdkb_s8MiPApwMON-_K6ed61-Zyw@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::244
+X-Received-From: 2607:f8b0:4864:20::b43
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -67,111 +81,19 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Oct 2019 18:10:38 -0000
+X-List-Received-Date: Mon, 07 Oct 2019 18:25:45 -0000
 
-On Thu, Oct 3, 2019 at 8:53 AM Palmer Dabbelt <palmer@sifive.com> wrote:
->
-> On Fri, 23 Aug 2019 16:38:47 PDT (-0700), Alistair Francis wrote:
-> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> > ---
-> >  target/riscv/cpu_helper.c | 39 ++++++++++++++++++++++++++++++---------
-> >  1 file changed, 30 insertions(+), 9 deletions(-)
-> >
-> > diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> > index 098873c83e..9aa6906acd 100644
-> > --- a/target/riscv/cpu_helper.c
-> > +++ b/target/riscv/cpu_helper.c
-> > @@ -318,10 +318,19 @@ void riscv_cpu_set_mode(CPURISCVState *env, target_ulong newpriv)
-> >   *
-> >   * Adapted from Spike's mmu_t::translate and mmu_t::walk
-> >   *
-> > + * @env: CPURISCVState
-> > + * @physical: This will be set to the calculated physical address
-> > + * @prot: The returned protection attributes
-> > + * @addr: The virtual address to be translated
-> > + * @access_type: The type of MMU access
-> > + * @mmu_idx: Indicates current privilege level
-> > + * @first_stage: Are we in first stage translation?
-> > + *               Second stage is used for hypervisor guest translation
-> >   */
-> >  static int get_physical_address(CPURISCVState *env, hwaddr *physical,
-> >                                  int *prot, target_ulong addr,
-> > -                                int access_type, int mmu_idx)
-> > +                                int access_type, int mmu_idx,
-> > +                                bool first_stage)
-> >  {
-> >      /* NOTE: the env->pc value visible here will not be
-> >       * correct, but the value visible to the exception handler
-> > @@ -518,13 +527,23 @@ restart:
-> >  }
-> >
-> >  static void raise_mmu_exception(CPURISCVState *env, target_ulong address,
-> > -                                MMUAccessType access_type, bool pmp_violation)
-> > +                                MMUAccessType access_type, bool pmp_violation,
-> > +                                bool first_stage)
-> >  {
-> >      CPUState *cs = env_cpu(env);
-> > -    int page_fault_exceptions =
-> > -        (env->priv_ver >= PRIV_VERSION_1_10_0) &&
-> > -        get_field(env->satp, SATP_MODE) != VM_1_10_MBARE &&
-> > -        !pmp_violation;
-> > +    int page_fault_exceptions;
-> > +    if (first_stage) {
-> > +        page_fault_exceptions =
-> > +            (env->priv_ver >= PRIV_VERSION_1_10_0) &&
-> > +            get_field(env->satp, SATP_MODE) != VM_1_10_MBARE &&
-> > +            !pmp_violation;
-> > +            riscv_cpu_set_force_hs_excep(env, CLEAR_HS_EXCEP);
->
-> It might just be email, but the indentation looks wrong here.
+On 10/7/19 10:19 AM, Dayeol Lee wrote:
+> Thank you very much for the clarification!
+> 
+> I found tlb_set_page with size != TARGET_PAGE_SIZE makes the translation way
+> too slow; the Linux doesn't seem to boot.
 
-Yep, fixed.
+To clarify, PMP specifies a range.  That range has only two end points.
+Therefore, a maximum of 2 pages may be affected by a mis-aligned PMP boundary.
 
->
-> > +    } else {
-> > +        page_fault_exceptions =
-> > +            get_field(env->hgatp, HGATP_MODE) != VM_1_10_MBARE &&
-> > +            !pmp_violation;
-> > +            riscv_cpu_set_force_hs_excep(env, FORCE_HS_EXCEP);
-> > +    }
-> >      switch (access_type) {
-> >      case MMU_INST_FETCH:
-> >          cs->exception_index = page_fault_exceptions ?
-> > @@ -551,7 +570,8 @@ hwaddr riscv_cpu_get_phys_page_debug(CPUState *cs, vaddr addr)
-> >      int prot;
-> >      int mmu_idx = cpu_mmu_index(&cpu->env, false);
-> >
-> > -    if (get_physical_address(&cpu->env, &phys_addr, &prot, addr, 0, mmu_idx)) {
-> > +    if (get_physical_address(&cpu->env, &phys_addr, &prot, addr, 0, mmu_idx,
-> > +                             true)) {
-> >          return -1;
-> >      }
-> >      return phys_addr;
-> > @@ -613,7 +633,8 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-> >      qemu_log_mask(CPU_LOG_MMU, "%s ad %" VADDR_PRIx " rw %d mmu_idx %d\n",
-> >                    __func__, address, access_type, mmu_idx);
-> >
-> > -    ret = get_physical_address(env, &pa, &prot, address, access_type, mmu_idx);
-> > +    ret = get_physical_address(env, &pa, &prot, address, access_type, mmu_idx,
-> > +                               true);
-> >
-> >      if (mode == PRV_M && access_type != MMU_INST_FETCH) {
-> >          if (get_field(*env->mstatus, MSTATUS_MPRV)) {
-> > @@ -640,7 +661,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-> >      } else if (probe) {
-> >          return false;
-> >      } else {
-> > -        raise_mmu_exception(env, address, access_type, pmp_violation);
-> > +        raise_mmu_exception(env, address, access_type, pmp_violation, true);
-> >          riscv_raise_exception(env, cs->exception_index, retaddr);
-> >      }
-> >  #else
->
-> I don't think it makes sense to split off these two (23 and 24, that add the
-> argument) out from the implementation.
+It sounds like you're getting size != TARGET_PAGE_SIZE for all pages.
 
-The goal was just to make it easier to review. If you want them
-combined I can easily combine them.
 
-Alistair
+r~
 
