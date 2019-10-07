@@ -1,63 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iHWfY-0002Go-MZ
-	for mharc-qemu-riscv@gnu.org; Mon, 07 Oct 2019 13:19:36 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:39015)
+	id 1iHXSy-0001Y9-Lk
+	for mharc-qemu-riscv@gnu.org; Mon, 07 Oct 2019 14:10:40 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47667)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <dayeol@berkeley.edu>) id 1iHWfV-00029S-LE
- for qemu-riscv@nongnu.org; Mon, 07 Oct 2019 13:19:35 -0400
+ (envelope-from <alistair23@gmail.com>) id 1iHXSv-0001VP-F2
+ for qemu-riscv@nongnu.org; Mon, 07 Oct 2019 14:10:38 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <dayeol@berkeley.edu>) id 1iHWfT-0000q9-Oj
- for qemu-riscv@nongnu.org; Mon, 07 Oct 2019 13:19:32 -0400
-Received: from mail-pl1-x641.google.com ([2607:f8b0:4864:20::641]:33185)
+ (envelope-from <alistair23@gmail.com>) id 1iHXSu-000541-6m
+ for qemu-riscv@nongnu.org; Mon, 07 Oct 2019 14:10:37 -0400
+Received: from mail-lj1-x244.google.com ([2a00:1450:4864:20::244]:43722)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <dayeol@berkeley.edu>) id 1iHWfT-0000pD-B9
- for qemu-riscv@nongnu.org; Mon, 07 Oct 2019 13:19:31 -0400
-Received: by mail-pl1-x641.google.com with SMTP id d22so7199353pls.0
- for <qemu-riscv@nongnu.org>; Mon, 07 Oct 2019 10:19:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=berkeley-edu.20150623.gappssmtp.com; s=20150623;
+ (Exim 4.71) (envelope-from <alistair23@gmail.com>)
+ id 1iHXSq-00052U-Qb; Mon, 07 Oct 2019 14:10:33 -0400
+Received: by mail-lj1-x244.google.com with SMTP id n14so14670057ljj.10;
+ Mon, 07 Oct 2019 11:10:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=0jM2EbhQp5OuMkBVePwdxLyjvQ1BUKCkrGxUtHCHOtw=;
- b=ofNw0AVzwCg5Fn6+pGgBca0O3aG3hwJUhMoTeM4kNG0wixUQbE+jhZUTaogKEcmQWA
- NynqV14VDBzrlSbAZ9z11ixyvKR30wA+3senvVlD4HpCXa4A0yRxK4v5UGSQPJx7tWFL
- sga1XMFq9MhpGzkLvbly6GlK98dR/87FpNPVJx5SQ+lFjScbbm5syURAvPPAx+WvRZN9
- 4wYcc2slzAJ4hpPkxHTTiF4hIokoFuXjz7SY/F+liiklCPOcK9QmstOoR6+didTBr3m/
- jS6irGKhFOOQMxFJ2CJaXX+qq9eZmPhkiz7Kwo3NWPQonkWwk7VKgwxksevrLl0rtPPT
- 5bag==
+ :cc; bh=OzbvGigIYTDinndI7OgOMeW5d4ZDX0kILT/nZ6Ckwmc=;
+ b=Js4AJEjeIk/3ncDbFTUzoFBeDpYo1woEVW5H1PPIVJra19G/zZh8w1mNneSbTFlYPs
+ 5zmOZQMfgf8O4PLqWl0hIVYLzewLuwsCB2W+h0h7uWNyk56DMXJ/mNP9SwwriXlGk+yU
+ l0WEOFXAPUuLtFC4mnOBphAG9Wwal8nWlac7HjTlNsoTISe/LG4yFp2bQCMXEKuVtMIZ
+ pvNIpEnJeJq4MXylybpehoHEIxjhlOXz6Av03kSdoBWD5VnbKr/CREPbUd+f4RN1XzMw
+ U0vGUbplA6OAMZ4L/OsD6SKjs+JL1BVGMBr5RVlyZlTHxq0JL7mf7HC3+MHlLxzGVkHE
+ Chwg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=0jM2EbhQp5OuMkBVePwdxLyjvQ1BUKCkrGxUtHCHOtw=;
- b=bgGgFZ8J6VHp1rR94qz9umj+sQp3FkMWbijdhpDittKS5bojAscGv2SE8bde37VKDl
- Zx9qY+/LnooOzNMqZYEjWmEx3wx8cAVQMB6wEbt4EwgsAKUzEentU0H8hAv1u8l/Rehn
- IkEroSBShRodIk50hKfILH2I/6E1JiUqKyBKVKFhFTaWjJv0KBu2Wf/lnDE3ksHel6ym
- ITny7d3j7/DE+/ImQyCZqy5PCyRZ7YCTI1QuVzDWqbJZC6tIT3PpPg2MbtYnqg3mUbxS
- caVEFK7QpC5xN3xgZWNSOFJivBF4eW3eAc1Sfo8ES43e1hcfedJbbqfGP0xinRL2aWjO
- fHkw==
-X-Gm-Message-State: APjAAAXlquzw8KBZuQ20cYjtnHUK+D1KseKTzMi5FnQ6y66kUpJMSgA9
- jmEI13OFUkhIVfD8VAJvNmlJZzCv5sTKMpSxxZR+NA==
-X-Google-Smtp-Source: APXvYqwoErOY34fu1A4KhIrVhCcBTJiuxKyewwemH2kK0qwyYo/JBtB99M1YO28u8BB28M0fQy1FxECB4SPh1niOIkE=
-X-Received: by 2002:a17:902:2e:: with SMTP id 43mr31712457pla.55.1570468769964; 
- Mon, 07 Oct 2019 10:19:29 -0700 (PDT)
+ bh=OzbvGigIYTDinndI7OgOMeW5d4ZDX0kILT/nZ6Ckwmc=;
+ b=d80IsKNFSumyIk3s6SpbrHgOw2PC6/1EjMkZ+0tTZnsd9+kQTL0La6xszBVsl9HGbq
+ P9MjSRiCJhtTmcHzvLf6hzOPnuHefKkFNXsDI/4T3/Y4sc/lfX2yQaYR/RJ4g4o/jB4W
+ Osq0DtnYntsE9QB1zh+ooIpOyTKmeU18gp5Rrl6YOpYohp5rs7fUTqRAsRYeQg37vcRa
+ pD0961O9EwF1Lon0xcChdYYjUAusiA7IoWkBkpgH4eP72EaPdBrTEcrbJt1YXlCFCD9R
+ NW/MJSsEbdYO40Y3l/OVY5pRI5z30tPS83dp9u2pHIt5cmmxITu04gomXPGnQGA+DFOJ
+ +q3A==
+X-Gm-Message-State: APjAAAWgWAQjZwcsmSRvEfPpyg/1u/h647qZPe8tAeY+JfBhxqf1ivip
+ Q4tXR54+EQv7735hbmLnyxq8TjuTuuicp0N3iAk=
+X-Google-Smtp-Source: APXvYqxQTadnculSdSqOymk/sfHOVIfWQfxX648K3wVxHBpXZO6Cu8imwOezZOThU7R/hcuKwxW8nja0iZ9ZKq8P338=
+X-Received: by 2002:a2e:2c02:: with SMTP id s2mr19815668ljs.156.1570471830861; 
+ Mon, 07 Oct 2019 11:10:30 -0700 (PDT)
 MIME-Version: 1.0
-References: <20191007052813.25814-1-dayeol@berkeley.edu>
- <5583387c-5c5b-8890-999b-2ba4d75cd69d@linaro.org>
-In-Reply-To: <5583387c-5c5b-8890-999b-2ba4d75cd69d@linaro.org>
-From: Dayeol Lee <dayeol@berkeley.edu>
-Date: Mon, 7 Oct 2019 10:19:18 -0700
-Message-ID: <CACjxMEsw+Deh176JLP2aF4Pdkb_s8MiPApwMON-_K6ed61-Zyw@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv: PMP violation due to wrong size parameter
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: qemu-devel@nongnu.org, "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Palmer Dabbelt <palmer@sifive.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>
-Content-Type: multipart/alternative; boundary="0000000000002a65b40594554190"
+References: <4d84c887def558fc178c31e3adc52f1c4b2fb075.1566603412.git.alistair.francis@wdc.com>
+ <mhng-87129cf6-394a-4b08-bf67-a6bb60f86245@palmer-si-x1e>
+In-Reply-To: <mhng-87129cf6-394a-4b08-bf67-a6bb60f86245@palmer-si-x1e>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Mon, 7 Oct 2019 11:05:33 -0700
+Message-ID: <CAKmqyKOV0J3w3fPUF3CGAip=j_+D_M+7X9r+2TwEZwkapsQZMQ@mail.gmail.com>
+Subject: Re: [PATCH v1 22/28] target/riscv: Allow specifying MMU stage
+To: Palmer Dabbelt <palmer@sifive.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Atish Patra <Atish.Patra@wdc.com>, Anup Patel <Anup.Patel@wdc.com>
+Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::641
+X-Received-From: 2a00:1450:4864:20::244
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -69,133 +67,111 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Oct 2019 17:19:35 -0000
+X-List-Received-Date: Mon, 07 Oct 2019 18:10:38 -0000
 
---0000000000002a65b40594554190
-Content-Type: text/plain; charset="UTF-8"
-
-Thank you very much for the clarification!
-
-I found tlb_set_page with size != TARGET_PAGE_SIZE makes the translation
-way too slow; the Linux doesn't seem to boot.
-
-If that's the only way to reduce PMP granularity to less than
-TARGET_PAGE_SIZE,
-Can we just set the PMP default granularity to TARGET_PAGE_SIZE as it did
-before?
-
-OR
-
-Can we bypass the partial match violation when size is unknown? (check the
-starting address only)
-
-I think both of the options does not exactly match with the ISA
-specification,
-but given that size=0 always causes the problem, I want it to be fixed as
-soon as possible.
-
-Any thoughts would be appreciated!
-
-On Mon, Oct 7, 2019, 6:00 AM Richard Henderson <richard.henderson@linaro.org>
-wrote:
-
-> On 10/6/19 10:28 PM, Dayeol Lee wrote:
-> > riscv_cpu_tlb_fill() uses the `size` parameter to check PMP violation
-> > using pmp_hart_has_privs().
-> > However, the size passed from tlb_fill(), which is called by
-> > get_page_addr_code(), is always a hard-coded value 0.
-> > This causes a false PMP violation if the instruction presents on a
-> > PMP boundary.
+On Thu, Oct 3, 2019 at 8:53 AM Palmer Dabbelt <palmer@sifive.com> wrote:
+>
+> On Fri, 23 Aug 2019 16:38:47 PDT (-0700), Alistair Francis wrote:
+> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> > ---
+> >  target/riscv/cpu_helper.c | 39 ++++++++++++++++++++++++++++++---------
+> >  1 file changed, 30 insertions(+), 9 deletions(-)
 > >
-> > In order to fix, simply correct the size to 4 if the access_type is
-> > MMU_INST_FETCH.
+> > diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> > index 098873c83e..9aa6906acd 100644
+> > --- a/target/riscv/cpu_helper.c
+> > +++ b/target/riscv/cpu_helper.c
+> > @@ -318,10 +318,19 @@ void riscv_cpu_set_mode(CPURISCVState *env, target_ulong newpriv)
+> >   *
+> >   * Adapted from Spike's mmu_t::translate and mmu_t::walk
+> >   *
+> > + * @env: CPURISCVState
+> > + * @physical: This will be set to the calculated physical address
+> > + * @prot: The returned protection attributes
+> > + * @addr: The virtual address to be translated
+> > + * @access_type: The type of MMU access
+> > + * @mmu_idx: Indicates current privilege level
+> > + * @first_stage: Are we in first stage translation?
+> > + *               Second stage is used for hypervisor guest translation
+> >   */
+> >  static int get_physical_address(CPURISCVState *env, hwaddr *physical,
+> >                                  int *prot, target_ulong addr,
+> > -                                int access_type, int mmu_idx)
+> > +                                int access_type, int mmu_idx,
+> > +                                bool first_stage)
+> >  {
+> >      /* NOTE: the env->pc value visible here will not be
+> >       * correct, but the value visible to the exception handler
+> > @@ -518,13 +527,23 @@ restart:
+> >  }
+> >
+> >  static void raise_mmu_exception(CPURISCVState *env, target_ulong address,
+> > -                                MMUAccessType access_type, bool pmp_violation)
+> > +                                MMUAccessType access_type, bool pmp_violation,
+> > +                                bool first_stage)
+> >  {
+> >      CPUState *cs = env_cpu(env);
+> > -    int page_fault_exceptions =
+> > -        (env->priv_ver >= PRIV_VERSION_1_10_0) &&
+> > -        get_field(env->satp, SATP_MODE) != VM_1_10_MBARE &&
+> > -        !pmp_violation;
+> > +    int page_fault_exceptions;
+> > +    if (first_stage) {
+> > +        page_fault_exceptions =
+> > +            (env->priv_ver >= PRIV_VERSION_1_10_0) &&
+> > +            get_field(env->satp, SATP_MODE) != VM_1_10_MBARE &&
+> > +            !pmp_violation;
+> > +            riscv_cpu_set_force_hs_excep(env, CLEAR_HS_EXCEP);
 >
-> That's not correct.
->
-> In general, size 0 means "unknown size".  In this case, the one tlb lookup
-> is
-> going to be used by lots of instructions -- everything that fits on the
-> page.
->
-> If you want to support PMP on things that are not page boundaries, then you
-> will also have to call tlb_set_page with size != TARGET_PAGE_SIZE.
->
-> Fixing that will cause instructions within that page to be executed one at
-> a
-> time, which also means they will be tlb_fill'd one at a time, which means
-> that
-> you'll get the correct size value.
->
-> Which will be 2 or 4, depending on whether the configuration supports the
-> Compressed extension, and not just 4.
->
->
-> r~
->
+> It might just be email, but the indentation looks wrong here.
+
+Yep, fixed.
 
 >
-
---0000000000002a65b40594554190
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"auto"><div>Thank you very much for the clarifi=
-cation!</div><div><br></div><div>I found tlb_set_page with size !=3D TARGET=
-_PAGE_SIZE makes the translation way too slow; the Linux doesn&#39;t seem t=
-o boot.</div><div><br></div><div>If that&#39;s the only way to reduce PMP g=
-ranularity to less than TARGET_PAGE_SIZE,</div><div>Can we just set the PMP=
- default granularity to TARGET_PAGE_SIZE as it did before?</div><div><br></=
-div><div>OR=C2=A0</div><div><br></div><div>Can we bypass the partial match =
-violation when size is unknown? (check the starting address only)</div><div=
-><br></div><div>I think both of the options does not exactly match with the=
- ISA specification,</div><div>but given that size=3D0 always causes the pro=
-blem, I want it to be fixed as soon as possible.</div><div><br></div><div>A=
-ny thoughts would be=C2=A0appreciated!</div><div><br></div><div dir=3D"auto=
-"><div class=3D"gmail_quote" dir=3D"auto"><div dir=3D"ltr" class=3D"gmail_a=
-ttr">On Mon, Oct 7, 2019, 6:00 AM Richard Henderson &lt;<a href=3D"mailto:r=
-ichard.henderson@linaro.org" target=3D"_blank">richard.henderson@linaro.org=
-</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:=
-0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">On 10/6/19 10:28 PM=
-, Dayeol Lee wrote:<br>
-&gt; riscv_cpu_tlb_fill() uses the `size` parameter to check PMP violation<=
-br>
-&gt; using pmp_hart_has_privs().<br>
-&gt; However, the size passed from tlb_fill(), which is called by<br>
-&gt; get_page_addr_code(), is always a hard-coded value 0.<br>
-&gt; This causes a false PMP violation if the instruction presents on a<br>
-&gt; PMP boundary.<br>
-&gt; <br>
-&gt; In order to fix, simply correct the size to 4 if the access_type is<br=
+> > +    } else {
+> > +        page_fault_exceptions =
+> > +            get_field(env->hgatp, HGATP_MODE) != VM_1_10_MBARE &&
+> > +            !pmp_violation;
+> > +            riscv_cpu_set_force_hs_excep(env, FORCE_HS_EXCEP);
+> > +    }
+> >      switch (access_type) {
+> >      case MMU_INST_FETCH:
+> >          cs->exception_index = page_fault_exceptions ?
+> > @@ -551,7 +570,8 @@ hwaddr riscv_cpu_get_phys_page_debug(CPUState *cs, vaddr addr)
+> >      int prot;
+> >      int mmu_idx = cpu_mmu_index(&cpu->env, false);
+> >
+> > -    if (get_physical_address(&cpu->env, &phys_addr, &prot, addr, 0, mmu_idx)) {
+> > +    if (get_physical_address(&cpu->env, &phys_addr, &prot, addr, 0, mmu_idx,
+> > +                             true)) {
+> >          return -1;
+> >      }
+> >      return phys_addr;
+> > @@ -613,7 +633,8 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+> >      qemu_log_mask(CPU_LOG_MMU, "%s ad %" VADDR_PRIx " rw %d mmu_idx %d\n",
+> >                    __func__, address, access_type, mmu_idx);
+> >
+> > -    ret = get_physical_address(env, &pa, &prot, address, access_type, mmu_idx);
+> > +    ret = get_physical_address(env, &pa, &prot, address, access_type, mmu_idx,
+> > +                               true);
+> >
+> >      if (mode == PRV_M && access_type != MMU_INST_FETCH) {
+> >          if (get_field(*env->mstatus, MSTATUS_MPRV)) {
+> > @@ -640,7 +661,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+> >      } else if (probe) {
+> >          return false;
+> >      } else {
+> > -        raise_mmu_exception(env, address, access_type, pmp_violation);
+> > +        raise_mmu_exception(env, address, access_type, pmp_violation, true);
+> >          riscv_raise_exception(env, cs->exception_index, retaddr);
+> >      }
+> >  #else
 >
-&gt; MMU_INST_FETCH.<br>
-<br>
-That&#39;s not correct.<br>
-<br>
-In general, size 0 means &quot;unknown size&quot;.=C2=A0 In this case, the =
-one tlb lookup is<br>
-going to be used by lots of instructions -- everything that fits on the pag=
-e.<br>
-<br>
-If you want to support PMP on things that are not page boundaries, then you=
-<br>
-will also have to call tlb_set_page with size !=3D TARGET_PAGE_SIZE.<br>
-<br>
-Fixing that will cause instructions within that page to be executed one at =
-a<br>
-time, which also means they will be tlb_fill&#39;d one at a time, which mea=
-ns that<br>
-you&#39;ll get the correct size value.<br>
-<br>
-Which will be 2 or 4, depending on whether the configuration supports the<b=
-r>
-Compressed extension, and not just 4.<br>
-<br>
-<br>
-r~<br>
-</blockquote><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;b=
-order-left:1px #ccc solid;padding-left:1ex"><br></blockquote></div></div></=
-div>
-</div>
+> I don't think it makes sense to split off these two (23 and 24, that add the
+> argument) out from the implementation.
 
---0000000000002a65b40594554190--
+The goal was just to make it easier to review. If you want them
+combined I can easily combine them.
+
+Alistair
 
