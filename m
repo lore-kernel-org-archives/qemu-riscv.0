@@ -1,74 +1,50 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iHaNM-0004dj-6G
-	for mharc-qemu-riscv@gnu.org; Mon, 07 Oct 2019 17:17:04 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44511)
+	id 1iHd8z-0002Rf-2c
+	for mharc-qemu-riscv@gnu.org; Mon, 07 Oct 2019 20:14:25 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:37103)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <jimw@sifive.com>) id 1iHaNI-0004cS-W5
- for qemu-riscv@nongnu.org; Mon, 07 Oct 2019 17:17:02 -0400
+ (envelope-from <bounce+d13a72.9b4e76-qemu-riscv=nongnu.org@fintelia.io>)
+ id 1iHd8w-0002R0-LP
+ for qemu-riscv@nongnu.org; Mon, 07 Oct 2019 20:14:24 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <jimw@sifive.com>) id 1iHaNH-00077I-PN
- for qemu-riscv@nongnu.org; Mon, 07 Oct 2019 17:17:00 -0400
-Received: from mail-pl1-x642.google.com ([2607:f8b0:4864:20::642]:33645)
+ (envelope-from <bounce+d13a72.9b4e76-qemu-riscv=nongnu.org@fintelia.io>)
+ id 1iHd8u-0005Hn-GL
+ for qemu-riscv@nongnu.org; Mon, 07 Oct 2019 20:14:22 -0400
+Received: from rs224.mailgun.us ([209.61.151.224]:21472)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <jimw@sifive.com>) id 1iHaNH-00076t-K0
- for qemu-riscv@nongnu.org; Mon, 07 Oct 2019 17:16:59 -0400
-Received: by mail-pl1-x642.google.com with SMTP id d22so7481148pls.0
- for <qemu-riscv@nongnu.org>; Mon, 07 Oct 2019 14:16:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
- h=subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=katVuAhmvu3Pqz8FzvCmsgKw4pFmRYZqkjKzNJMiDk4=;
- b=T89o6JQzfrEXYci73vfjDrZR3JC/Ex39CXExTn5KMc2sdEirUiRO0Fg3z3JXE2Xtdj
- E/hceRjJoU1ejAZ5j/U3qpXXQm9SE6Nlz7rSCc260afl8nzuMoIxnWSIxlaE7gR8boSc
- ush0g7yRZed5XhTJwosBnMgqwBnAR5bjowpgN3djum3KUQh13NVyK1WZhIhtmkPSBwzz
- YPCW5JfwcPycNE+ifVSRSosm0cx15A11I3CltM16hRgoXEYpy/dTTN+X6NpHTkgTqViC
- xiXr/5lJNflNvi40BObiHve6OtJO2VSga9tXHfhAjuCODtvsDKEhhxFEH88jMj//OPOz
- tMfA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=katVuAhmvu3Pqz8FzvCmsgKw4pFmRYZqkjKzNJMiDk4=;
- b=GA6SqNV5jyuBqK1dw1k46bK5VfHCSYgONaXI+yY2CG1QYMDEnuKEGKIdYmoh6hmfED
- UTeCnLcYv0Tya2UzIMqlBxCIjCFyE/CKRujlrvBaLGLQoBqnEkSStz5Ce+RQW4qG+2/B
- z5Ob8xtwxf2j7ryWV5nC/HGCUKAkD2Bp+vu5T2jf1wiGdjHYZGjEntvYuMoj+Mccqe+i
- 5VtFjjeBWZ1Q06vmefyF0xyzrmu7LYOznAAYm5nguELaraRr/aYPhJMu8ZT22Wfagj4M
- /EKKJX+WW+tUwM8OTnzIt+yAAFzIv2kCDL6D1J1uXeG7AJW4jwkrjVjJD9ogs3CZN4hN
- 3smw==
-X-Gm-Message-State: APjAAAUHZ3ieq0luo6pUYDJgl+Eey0dJ+VkqLduMz+S025co+AzA/vr5
- dk5GGXB7KTH/wQ95mUkpMwHbwA==
-X-Google-Smtp-Source: APXvYqxB5uFnrbRYoagnAAjyIWQlPDUydyA30pUIijwPVWm3itxc1CUbaJf1fgNJucQgjWEBlbQbfA==
-X-Received: by 2002:a17:902:ff08:: with SMTP id
- f8mr22768763plj.309.1570483017954; 
- Mon, 07 Oct 2019 14:16:57 -0700 (PDT)
-Received: from [10.17.0.102] ([12.206.222.5])
- by smtp.gmail.com with ESMTPSA id i74sm19200018pfe.28.2019.10.07.14.16.57
- (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
- Mon, 07 Oct 2019 14:16:57 -0700 (PDT)
-Subject: Re: [PATCH v2] target/riscv: Expose "priv" register for GDB
-To: Jonathan Behrens <jonathan@fintelia.io>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Palmer Dabbelt <palmer@sifive.com>,
- =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- =?UTF-8?Q?Alex_Benn=c3=a9e?= <alex.bennee@linaro.org>
-References: <20191004151614.81516-1-jonathan@fintelia.io>
-From: Jim Wilson <jimw@sifive.com>
-Message-ID: <5393a150-71b6-a729-7530-a50df05353bd@sifive.com>
-Date: Mon, 7 Oct 2019 14:16:56 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.8.0
+ (Exim 4.71)
+ (envelope-from <bounce+d13a72.9b4e76-qemu-riscv=nongnu.org@fintelia.io>)
+ id 1iHd8t-0005Gw-VK
+ for qemu-riscv@nongnu.org; Mon, 07 Oct 2019 20:14:20 -0400
+DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=fintelia.io; q=dns/txt;
+ s=pic; 
+ t=1570493658; h=Content-Transfer-Encoding: MIME-Version: Message-Id:
+ Date: Subject: To: From: Sender;
+ bh=gP0eQg3wg3/BRnD4OucGfDqnuNj/+RvsVg+lwRViW68=;
+ b=wH+eB1tBxVgOkj6U8QSIVb0SkBD2Z8CYz9i+8fAUnKhakDuu2oaulDWKtrooHYO9ZWjsY3hf
+ 3xRlhnirem5UQWtNj+PwXikGX36yPjS5NvWY1kJgambp17B3eGymaib43XMGOZxBd5kIAdj3
+ NCILdnpcSzT/UfHMhOHXaFavPZ8IhcTWcY/l4B5xMdxepCaHb21PkKzMf6/fula8jf6UuCs4
+ ypd70F5aJGEVBZ4f2DxZT+55rYVrKIGJbtBQNgRCYEY6KEDMgCHnKYIfyLyB5KomsfqTJPyf
+ txoIIXYmS1pMQa1F3ivz7GgUsXAggKv/7MsB+SbdMM2GacwdutOqug==
+X-Mailgun-Sending-Ip: 209.61.151.224
+X-Mailgun-Sid: WyJkNjk0ZSIsICJxZW11LXJpc2N2QG5vbmdudS5vcmciLCAiOWI0ZTc2Il0=
+Sender: jonathan@fintelia.io
+Received: from jonathan-ThinkPad-X1-Carbon.pdos.lcs.mit.edu
+ (26-5-211.dynamic.csail.mit.edu [18.26.5.211])
+ by mxa.mailgun.org with ESMTP id 5d9bd4d8.7f51c380ba28-smtp-out-n01;
+ Tue, 08 Oct 2019 00:14:16 -0000 (UTC)
+From: Jonathan Behrens <jonathan@fintelia.io>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Subject: [PATCH v3 0/3] target/riscv: Expose "priv" register for GDB
+Date: Mon,  7 Oct 2019 20:13:15 -0400
+Message-Id: <20191008001318.219367-1-jonathan@fintelia.io>
+X-Mailer: git-send-email 2.23.0
 MIME-Version: 1.0
-In-Reply-To: <20191004151614.81516-1-jonathan@fintelia.io>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2607:f8b0:4864:20::642
+Content-Transfer-Encoding: 8bit
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+ [fuzzy]
+X-Received-From: 209.61.151.224
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -80,44 +56,36 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Oct 2019 21:17:02 -0000
+X-List-Received-Date: Tue, 08 Oct 2019 00:14:24 -0000
 
-On 10/4/19 8:16 AM, Jonathan Behrens wrote:
-> diff --git a/gdb-xml/riscv-32bit-cpu.xml b/gdb-xml/riscv-32bit-cpu.xml
-> index 0d07aaec85..d6d76aafd8 100644
-> --- a/gdb-xml/riscv-32bit-cpu.xml
-> +++ b/gdb-xml/riscv-32bit-cpu.xml
-> @@ -44,4 +44,5 @@
->     <reg name="t5" bitsize="32" type="int"/>
->     <reg name="t6" bitsize="32" type="int"/>
->     <reg name="pc" bitsize="32" type="code_ptr"/>
-> +  <reg name="priv" bitsize="32" type="int"/>
->   </feature>
+The third patch in this series makes the priv virtual register writitable. I'm
+not entirely sure this is a good idea, so I split it out into its own patch. In
+particular, this change will conflict with the hypervisor extension work which
+assumes that the privilege mode does not change in unexpected cases.
 
-Adding this to the cpu register set means that the gdb "info registers" 
-command will now list a value for the mysterious undocumented "priv" 
-register.  That is likely to result in user confusion, and a few gdb bug 
-reports.
+As pointed out in a previous version of this series, GDB actually contains some
+support already for the accessing the privilege mode via a virtual "priv"
+register, including to convert the values into human readable forms:
 
-Gdb incidentally already has support for a virtual priv register.  From 
-gdb/riscv-tdep.c:
+(gdb) info reg priv
+priv           0x3	prv:3 [Machine]
 
-static const struct riscv_register_feature riscv_virtual_feature =
-{
-  "org.gnu.gdb.riscv.virtual",
-  {
-    { RISCV_PRIV_REGNUM, { "priv" }, false }
-  }
-};
+Changlog V3:
+- Break patch into series
+- Make priv a virtual register
 
-So the correct way to fix this is to add a 
-gdb-xml/riscv-32bit-virtual.xml file, along with code to handle this new 
-xml file and the registers in it.  Likewise for the 64-bit support.
+Changelog V2:
+- Use PRV_H and PRV_S instead of integer literals
 
-The main advantage of doing things this way is that only people that 
-care about the priv register will see it, and this will interoperate 
-with other RISC-V debuggers and targets (if any) that already have 
-virtual priv register support.
+Jonathan Behrens (3)
+  target/riscv: Tell gdbstub the correct number of CSRs
+  target/riscv: Expose priv register for GDB for reads
+  target/riscv: Make the priv register writable by GDB
 
-Jim
+ configure                       |  4 ++--
+ gdb-xml/riscv-32bit-virtual.xml | 11 +++++++++++
+ gdb-xml/riscv-64bit-virtual.xml | 11 +++++++++++
+ target/riscv/gdbstub.c          | 36 ++++++++++++++++++++++++++++++++++--
+ 4 files changed, 58 insertions(+), 4 deletions(-)
+
 
