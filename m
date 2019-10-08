@@ -1,56 +1,57 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iHtgi-00055R-Lf
-	for mharc-qemu-riscv@gnu.org; Tue, 08 Oct 2019 13:54:20 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:54071)
+	id 1iHuLv-00076a-Tm
+	for mharc-qemu-riscv@gnu.org; Tue, 08 Oct 2019 14:36:55 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:39402)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <palmer@dabbelt.com>) id 1iHtgf-00052O-2B
- for qemu-riscv@nongnu.org; Tue, 08 Oct 2019 13:54:18 -0400
+ (envelope-from <palmer@dabbelt.com>) id 1iHuLt-00075y-59
+ for qemu-riscv@nongnu.org; Tue, 08 Oct 2019 14:36:54 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmer@dabbelt.com>) id 1iHtgd-0003LL-Dr
- for qemu-riscv@nongnu.org; Tue, 08 Oct 2019 13:54:16 -0400
-Received: from mail-pg1-f194.google.com ([209.85.215.194]:41643)
+ (envelope-from <palmer@dabbelt.com>) id 1iHuLr-0001ky-MJ
+ for qemu-riscv@nongnu.org; Tue, 08 Oct 2019 14:36:53 -0400
+Received: from mail-pl1-f194.google.com ([209.85.214.194]:39608)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1iHtgc-0003FN-7G
- for qemu-riscv@nongnu.org; Tue, 08 Oct 2019 13:54:14 -0400
-Received: by mail-pg1-f194.google.com with SMTP id t3so4828744pga.8
- for <qemu-riscv@nongnu.org>; Tue, 08 Oct 2019 10:54:11 -0700 (PDT)
+ (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1iHuLr-0001kP-Fi
+ for qemu-riscv@nongnu.org; Tue, 08 Oct 2019 14:36:51 -0400
+Received: by mail-pl1-f194.google.com with SMTP id s17so8836188plp.6
+ for <qemu-riscv@nongnu.org>; Tue, 08 Oct 2019 11:36:51 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
  :mime-version:content-transfer-encoding;
- bh=B7wKIi/5798WS7RpfpfHrlyTL9zGtqpyds0KiQbN+mI=;
- b=ICbZ7Vfe3/HHZ2KWsLfghZHVYcub4Ef6AEFfegd/1d1hXRJuwRfznCh22aGHa8NdyV
- 7EmfnOt6QnNSJjWwUtNIYOPdxAJoc/rAdl4PGb/apCGtbJ3kwYFJ1RejTdpZGiHrX2nN
- PCjI6XjXKQQPg5AN7vrRqliROTsxCtRFrS+EnnyyXZKewaBhTp5+hzGi0Yc9g4nniW9v
- /PoIAvFzQbowf8VH6KsoMCRsr9Tkf20j/Wz9nd/NWrCmaY+PfiHvjd/ZlMXBqvXLUSsm
- q/GeknPee/3cRCwxU0BWdIanuFgNPPJ35DJaR0otM201Rb+K38r+Pp94bYlFmluNzSI7
- fNDg==
-X-Gm-Message-State: APjAAAWwQJHAONa6qW0wWVkb77nuCKCX69PyXoBraYiDutz2HR1f1+6R
- VJBURl5/UgpTn2O4oUkp8+BtRw==
-X-Google-Smtp-Source: APXvYqxZ708jkMHd7L+EYrLojCQ+qJp9AHgpI3JAGVtF4gu6ApkwdIjHqg69tml3D7Ud+glEVp345w==
-X-Received: by 2002:a62:1cf:: with SMTP id 198mr41272175pfb.31.1570557250406; 
- Tue, 08 Oct 2019 10:54:10 -0700 (PDT)
+ bh=1p5wtpKDczKiRs05oJflv+Gkh5Itnx00+VwT+r5Xi7Q=;
+ b=oo+kJKC4igT68fW3siOgjmPZXo9284kFeV0RI6p/7pVRi2H9uPMlAsnAAggwGgD9qn
+ qegLrdiAK5pmtxbQGr5tc62sGIWfV0JLmF+RkjEVzctSL95+/U0QHqGQQYEuxZ1J2nG8
+ IeCv8km+dkVzbtcA8aA/ycBLQf+eoxVOO4/vI++UbePUltcfP/XAHGCSniVsRi3Lqugb
+ b3or485U5M1D1A3Po5HG4rHAnW7diBladv7p3h5nKZSGteVWez2clAGf+PA5ipkB6CGh
+ DjT1VIY0u5AXk9BxqHNdr/4l358srd/ksm1bG0Hr0RTl6hD5kH7fl+IN/gXhLmQKq8uL
+ Eh4w==
+X-Gm-Message-State: APjAAAU5MN868OQGyySIkqTLHtkcIfaNcAveMTZNrSbry/5q6m8+equg
+ e4cs9LA997LtbYFOP/Wf51rdxw==
+X-Google-Smtp-Source: APXvYqwb6ly2xe5WIntHCkDIF1kuWNe+xbABVhggcUHVW6R5U/QxHy8UymSMu+P4ry6Jlu0W4B/2Ig==
+X-Received: by 2002:a17:902:8e8b:: with SMTP id
+ bg11mr5465062plb.326.1570559809994; 
+ Tue, 08 Oct 2019 11:36:49 -0700 (PDT)
 Received: from localhost ([12.206.222.5])
- by smtp.gmail.com with ESMTPSA id x18sm18652176pge.76.2019.10.08.10.54.09
+ by smtp.gmail.com with ESMTPSA id f14sm20673585pfq.187.2019.10.08.11.36.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 08 Oct 2019 10:54:09 -0700 (PDT)
-Date: Tue, 08 Oct 2019 10:54:09 -0700 (PDT)
-X-Google-Original-Date: Tue, 08 Oct 2019 10:53:10 PDT (-0700)
-Subject: Re: [PATCH v1 25/28] target/riscv: Call the second stage MMU in
- virtualisation mode
-In-Reply-To: <39abe56d7ba4d0ba392af6df09986af849f19403.1566603412.git.alistair.francis@wdc.com>
+ Tue, 08 Oct 2019 11:36:49 -0700 (PDT)
+Date: Tue, 08 Oct 2019 11:36:49 -0700 (PDT)
+X-Google-Original-Date: Tue, 08 Oct 2019 11:34:45 PDT (-0700)
+Subject: Re: [PATCH v1 26/28] target/riscv: Add support for the 32-bit
+ MSTATUSH CSR
+In-Reply-To: <f4e877ca1f9fece2e25f1b8bc655d6e240208ae5.1566603412.git.alistair.francis@wdc.com>
 CC: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
  Alistair Francis <Alistair.Francis@wdc.com>, alistair23@gmail.com,
  Atish Patra <Atish.Patra@wdc.com>, Anup Patel <Anup.Patel@wdc.com>
 From: Palmer Dabbelt <palmer@sifive.com>
 To: Alistair Francis <Alistair.Francis@wdc.com>
-Message-ID: <mhng-e7dcbf56-f54c-41fd-9198-f729fc818f96@palmer-si-x1e>
+Message-ID: <mhng-95ae283b-4369-4508-ab27-784960597e72@palmer-si-x1e>
 Mime-Version: 1.0 (MHng)
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
  [fuzzy]
-X-Received-From: 209.85.215.194
+X-Received-From: 209.85.214.194
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -62,169 +63,163 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Oct 2019 17:54:19 -0000
+X-List-Received-Date: Tue, 08 Oct 2019 18:36:54 -0000
 
-On Fri, 23 Aug 2019 16:38:55 PDT (-0700), Alistair Francis wrote:
-> The qemu_log_mask(CPU_LOG_MMU,... calls trigger false positive
-> checkpatch errors which are being ignored.
->
+On Fri, 23 Aug 2019 16:38:58 PDT (-0700), Alistair Francis wrote:
 > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 > ---
->  target/riscv/cpu_helper.c | 94 +++++++++++++++++++++++++++++++++++----
->  1 file changed, 86 insertions(+), 8 deletions(-)
+>  target/riscv/cpu.c        |  6 ++++++
+>  target/riscv/cpu.h        |  7 +++++++
+>  target/riscv/cpu_bits.h   |  3 +++
+>  target/riscv/cpu_helper.c |  7 +++++++
+>  target/riscv/csr.c        | 23 +++++++++++++++++++++++
+>  target/riscv/op_helper.c  |  4 ++++
+>  6 files changed, 50 insertions(+)
 >
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index 188d5cb39f..0761191f11 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -642,15 +642,23 @@ static void raise_mmu_exception(CPURISCVState *env, target_ulong address,
->  hwaddr riscv_cpu_get_phys_page_debug(CPUState *cs, vaddr addr)
->  {
->      RISCVCPU *cpu = RISCV_CPU(cs);
-> +    CPURISCVState *env = &cpu->env;
->      hwaddr phys_addr;
->      int prot;
->      int mmu_idx = cpu_mmu_index(&cpu->env, false);
->
-> -    if (get_physical_address(&cpu->env, &phys_addr, &prot, addr, 0, mmu_idx,
-> -                             true, false)) {
-> +    if (get_physical_address(env, &phys_addr, &prot, addr, 0, mmu_idx,
-> +                             true, riscv_cpu_virt_enabled(env))) {
->          return -1;
->      }
->
-> +    if (riscv_cpu_virt_enabled(env)) {
-> +        if (get_physical_address(env, &phys_addr, &prot, phys_addr,
-> +                                 0, mmu_idx, false, true)) {
-> +            return -1;
-> +        }
-> +    }
-> +
->      return phys_addr;
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 371d5845af..06ee551ebe 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -229,6 +229,9 @@ static void riscv_cpu_dump_state(CPUState *cs, FILE *f, int flags)
+>  #ifndef CONFIG_USER_ONLY
+>      qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mhartid ", env->mhartid);
+>      qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mstatus ", *env->mstatus);
+> +#ifdef TARGET_RISCV32
+> +    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mstatush ", *env->mstatush);
+> +#endif
+>      if (riscv_has_ext(env, RVH)) {
+>          qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "hstatus ", env->hstatus);
+>          qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "bstatus ", env->vsstatus);
+> @@ -468,6 +471,9 @@ static void riscv_cpu_init(Object *obj)
+>  #ifndef CONFIG_USER_ONLY
+>      env->mie = &env->mie_novirt;
+>      env->mstatus = &env->mstatus_novirt;
+> +# ifdef TARGET_RISCV32
+> +    env->mstatush = &env->mstatush_novirt;
+> +# endif
+>  #endif
 >  }
 >
-> @@ -701,17 +709,35 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
->  #ifndef CONFIG_USER_ONLY
->      RISCVCPU *cpu = RISCV_CPU(cs);
->      CPURISCVState *env = &cpu->env;
-> +    vaddr im_address;
->      hwaddr pa = 0;
->      int prot;
->      bool pmp_violation = false;
-> +    bool m_mode_two_stage = false;
-> +    bool hs_mode_two_stage = false;
-> +    bool first_stage_error = true;
->      int ret = TRANSLATE_FAIL;
->      int mode = mmu_idx;
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 05957f32a8..b63f1f3cdc 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -124,6 +124,10 @@ struct CPURISCVState {
+>      target_ulong mhartid;
+>      target_ulong *mstatus;
 >
->      qemu_log_mask(CPU_LOG_MMU, "%s ad %" VADDR_PRIx " rw %d mmu_idx %d\n",
->                    __func__, address, access_type, mmu_idx);
+> +#ifdef TARGET_RISCV32
+> +    target_ulong *mstatush;
+> +#endif
+> +
+>      /*
+>       * CAUTION! Unlike the rest of this struct, mip and mip_novirt is accessed
+>       * asynchonously by I/O threads. It should be read with atomic_read. It should
+> @@ -164,6 +168,9 @@ struct CPURISCVState {
+>       */
+>      target_ulong mie_novirt;
+>      target_ulong mstatus_novirt;
+> +#ifdef TARGET_RISCV32
+> +    target_ulong mstatush_novirt;
+> +#endif
 >
-> -    ret = get_physical_address(env, &pa, &prot, address, access_type, mmu_idx,
-> -                               true, false);
-> +    /*
-> +     * Determine if we are in M mode and MPRV is set or in HS mode and SPRV is
-> +     * set and we want to access a virtulisation address.
-> +     */
-> +    if (riscv_has_ext(env, RVH)) {
-> +        m_mode_two_stage = env->priv == PRV_M &&
-> +                           access_type != MMU_INST_FETCH &&
-> +                           get_field(*env->mstatus, MSTATUS_MPRV) &&
-> +                           get_field(*env->mstatus, MSTATUS_MPV);
-> +
-> +        hs_mode_two_stage = env->priv == PRV_S &&
-> +                            !riscv_cpu_virt_enabled(env) &&
-> +                            access_type != MMU_INST_FETCH &&
-> +                            get_field(env->hstatus, HSTATUS_SPRV) &&
-> +                            get_field(env->hstatus, HSTATUS_SPV);
-> +    }
+>      /* Hypervisor CSRs */
+>      target_ulong hstatus;
+> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+> index 353fc9a24a..55e20af6d9 100644
+> --- a/target/riscv/cpu_bits.h
+> +++ b/target/riscv/cpu_bits.h
+> @@ -135,6 +135,9 @@
+>  #define CSR_MTVEC           0x305
+>  #define CSR_MCOUNTEREN      0x306
 >
->      if (mode == PRV_M && access_type != MMU_INST_FETCH) {
->          if (get_field(*env->mstatus, MSTATUS_MPRV)) {
-> @@ -719,10 +745,58 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
->          }
->      }
+> +/* 32-bit only */
+> +#define CSR_MSTATUSH        0x310
+> +
+>  /* Legacy Counter Setup (priv v1.9.1) */
+>  /* Update to #define CSR_MCOUNTINHIBIT 0x320 for 1.11.0 */
+>  #define CSR_MUCOUNTEREN     0x320
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index 0761191f11..8c80486dd0 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -949,10 +949,17 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+>              if (riscv_cpu_virt_enabled(env)) {
+>                  riscv_cpu_swap_hypervisor_regs(env);
+>              }
+> +#ifdef TARGET_RISCV32
+> +            *env->mstatush = set_field(*env->mstatush, MSTATUS_MPV,
+> +                                       riscv_cpu_virt_enabled(env));
+> +            *env->mstatush = set_field(*env->mstatush, MSTATUS_MTL,
+> +                                       riscv_cpu_force_hs_excep_enabled(env));
+> +#else
+>              *env->mstatus = set_field(*env->mstatus, MSTATUS_MPV,
+>                                        riscv_cpu_virt_enabled(env));
+>              *env->mstatus = set_field(*env->mstatus, MSTATUS_MTL,
+>                                        riscv_cpu_force_hs_excep_enabled(env));
+> +#endif
 >
-> -    qemu_log_mask(CPU_LOG_MMU,
-> -                  "%s address=%" VADDR_PRIx " ret %d physical " TARGET_FMT_plx
-> -                  " prot %d\n", __func__, address, ret, pa, prot);
-> +    if (riscv_cpu_virt_enabled(env) || m_mode_two_stage || hs_mode_two_stage) {
-> +        /* Two stage lookup */
-> +        ret = get_physical_address(env, &pa, &prot, address, access_type,
-> +                                   mmu_idx, true, true);
-> +
-> +        qemu_log_mask(CPU_LOG_MMU,
-> +                      "%s 1st-stage address=%" VADDR_PRIx " ret %d physical "
-> +                      TARGET_FMT_plx " prot %d\n",
-> +                      __func__, address, ret, pa, prot);
-> +
-> +        if (ret == TRANSLATE_FAIL) {
-> +            goto tlb_lookup_done;
-> +        }
-> +
-> +        /* Second stage lookup */
-> +        im_address = pa;
+>              /* Trapping to M mode, virt is disabled */
+>              riscv_cpu_set_virt_enabled(env, VIRT_OFF);
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index 47be4b1d42..b7d6d009dc 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -364,6 +364,25 @@ static int write_mstatus(CPURISCVState *env, int csrno, target_ulong val)
+>      return 0;
+>  }
 >
-> +        ret = get_physical_address(env, &pa, &prot, im_address, access_type, mmu_idx,
-> +                                   false, true);
+> +#ifdef TARGET_RISCV32
+> +static int read_mstatush(CPURISCVState *env, int csrno, target_ulong *val)
+> +{
+> +    *val = *env->mstatush;
+> +    return 0;
+> +}
 > +
-> +        qemu_log_mask(CPU_LOG_MMU,
-> +                "%s 2nd-stage address=%" VADDR_PRIx " ret %d physical "
-> +                TARGET_FMT_plx " prot %d\n",
-> +                __func__, im_address, ret, pa, prot);
-> +
-> +        if (riscv_feature(env, RISCV_FEATURE_PMP) &&
-> +            (ret == TRANSLATE_SUCCESS) &&
-> +            !pmp_hart_has_privs(env, pa, size, 1 << access_type, mode)) {
-> +            ret = TRANSLATE_PMP_FAIL;
-> +        }
-> +
-> +        if (ret != TRANSLATE_SUCCESS) {
-> +            /*
-> +             * Guest physical address translation failed, this is a HS
-> +             * level exception
-> +             */
-> +            first_stage_error = false;
-> +            address = im_address | (address & (TARGET_PAGE_SIZE - 1));
-> +            goto tlb_lookup_done;
-> +        }
-> +    } else {
-> +        /* Single stage lookup */
-> +        ret = get_physical_address(env, &pa, &prot, address, access_type,
-> +                                   mmu_idx, true, false);
-> +
-> +        qemu_log_mask(CPU_LOG_MMU,
-> +                      "%s address=%" VADDR_PRIx " ret %d physical "
-> +                      TARGET_FMT_plx " prot %d\n",
-> +                      __func__, address, ret, pa, prot);
+> +static int write_mstatush(CPURISCVState *env, int csrno, target_ulong val)
+> +{
+> +    if ((val ^ *env->mstatush) & (MSTATUS_MPV)) {
+> +        tlb_flush(env_cpu(env));
 > +    }
 > +
-> +tlb_lookup_done:
->      if (riscv_feature(env, RISCV_FEATURE_PMP) &&
->          (ret == TRANSLATE_SUCCESS) &&
->          !pmp_hart_has_privs(env, pa, size, 1 << access_type, mode)) {
-> @@ -731,6 +805,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
->      if (ret == TRANSLATE_PMP_FAIL) {
->          pmp_violation = true;
->      }
-> +
->      if (ret == TRANSLATE_SUCCESS) {
->          tlb_set_page(cs, address & TARGET_PAGE_MASK, pa & TARGET_PAGE_MASK,
->                       prot, mmu_idx, TARGET_PAGE_SIZE);
-> @@ -738,9 +813,12 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
->      } else if (probe) {
->          return false;
->      } else {
-> -        raise_mmu_exception(env, address, access_type, pmp_violation, true);
-> +        raise_mmu_exception(env, address, access_type, pmp_violation, first_stage_error);
->          riscv_raise_exception(env, cs->exception_index, retaddr);
->      }
-> +
-> +    return true;
-> +
->  #else
->      switch (access_type) {
->      case MMU_INST_FETCH:
+> +    *env->mstatush = val;
 
-Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
+The unsupported bits need to be masked off before writing them in.
+
+> +
+> +    return 0;
+> +}
+> +#endif
+> +
+>  static int read_misa(CPURISCVState *env, int csrno, target_ulong *val)
+>  {
+>      *val = env->misa;
+> @@ -1095,6 +1114,10 @@ static riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+>      [CSR_MTVEC] =               { any,  read_mtvec,       write_mtvec       },
+>      [CSR_MCOUNTEREN] =          { any,  read_mcounteren,  write_mcounteren  },
+>
+> +#if defined(TARGET_RISCV32)
+> +    [CSR_MSTATUSH] =            { any,  read_mstatush,    write_mstatush    },
+> +#endif
+> +
+>      /* Legacy Counter Setup (priv v1.9.1) */
+>      [CSR_MUCOUNTEREN] =         { any,  read_mucounteren, write_mucounteren },
+>      [CSR_MSCOUNTEREN] =         { any,  read_mscounteren, write_mscounteren },
+> diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+> index 5bcf5d2ff7..8dec1aee99 100644
+> --- a/target/riscv/op_helper.c
+> +++ b/target/riscv/op_helper.c
+> @@ -153,7 +153,11 @@ target_ulong helper_mret(CPURISCVState *env, target_ulong cpu_pc_deb)
+>          get_field(mstatus, MSTATUS_MPIE));
+>      mstatus = set_field(mstatus, MSTATUS_MPIE, 1);
+>      mstatus = set_field(mstatus, MSTATUS_MPP, 0);
+> +#ifdef TARGET_RISCV32
+> +    *env->mstatush = set_field(*env->mstatush, MSTATUS_MPV, 0);
+> +#else
+>      mstatus = set_field(mstatus, MSTATUS_MPV, 0);
+> +#endif
+>      *env->mstatus = mstatus;
+>      riscv_cpu_set_mode(env, prev_priv);
+
+
 
