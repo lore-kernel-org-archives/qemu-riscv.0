@@ -1,57 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iHuLy-0007AP-5x
-	for mharc-qemu-riscv@gnu.org; Tue, 08 Oct 2019 14:36:58 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:39415)
+	id 1iHuc8-0001P7-O4
+	for mharc-qemu-riscv@gnu.org; Tue, 08 Oct 2019 14:53:41 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:42101)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <palmer@dabbelt.com>) id 1iHuLt-000760-TQ
- for qemu-riscv@nongnu.org; Tue, 08 Oct 2019 14:36:55 -0400
+ (envelope-from <palmer@dabbelt.com>) id 1iHuc3-0001Oe-Kk
+ for qemu-riscv@nongnu.org; Tue, 08 Oct 2019 14:53:38 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmer@dabbelt.com>) id 1iHuLs-0001le-Ix
- for qemu-riscv@nongnu.org; Tue, 08 Oct 2019 14:36:53 -0400
-Received: from mail-pl1-f195.google.com ([209.85.214.195]:40588)
+ (envelope-from <palmer@dabbelt.com>) id 1iHuc2-0005KW-Ak
+ for qemu-riscv@nongnu.org; Tue, 08 Oct 2019 14:53:35 -0400
+Received: from mail-pg1-f196.google.com ([209.85.215.196]:46963)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1iHuLs-0001l7-D1
- for qemu-riscv@nongnu.org; Tue, 08 Oct 2019 14:36:52 -0400
-Received: by mail-pl1-f195.google.com with SMTP id d22so8839799pll.7
- for <qemu-riscv@nongnu.org>; Tue, 08 Oct 2019 11:36:52 -0700 (PDT)
+ (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1iHuc2-0005KJ-5d
+ for qemu-riscv@nongnu.org; Tue, 08 Oct 2019 14:53:34 -0400
+Received: by mail-pg1-f196.google.com with SMTP id b8so4415533pgm.13
+ for <qemu-riscv@nongnu.org>; Tue, 08 Oct 2019 11:53:34 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
  :mime-version:content-transfer-encoding;
- bh=WA3BSFZ8RONqPYJHwcelSXyfYIVhgyy/6OnQZPLBwAU=;
- b=mMx6iCinRxwwU+E3Z96Gxd7S3v9eescq3Kb3HT7xdZRaOXTOYgSr7qXsrdNLS32P8q
- I0w0/1i1pS/mCoC3hMW4Aktuivri29Ld+P4ud0O07Vjz1p9GkYnaJbRUa+oDhpwnSMyP
- JL77q/IqTAwYMpQLTnAwnFtmqLJfgpQRawPXWvH5wUA7td8gPUSqU/Z+ozTHU6gp7Zx8
- 2U/DLAnRNfBA9M9l+1umnqCjRM6VhCQwkg2eStLN9cBzLWPM68AcZ8fo4qo436fKYtVY
- 4dLMtPU6s4NNNyexsr84uk76ax+BMSHVdvoH9L9FSyeh0eri77R1hYE1JUFvv04KkC85
- 1oFA==
-X-Gm-Message-State: APjAAAVM6tojbJpOO3VQWqh9WwyqJVSXAxMDDQ0vYzJ25/o90xP4noG/
- buOtubP4W7cUdU0GAO8Lr7e7mQ==
-X-Google-Smtp-Source: APXvYqyxj666HhKRrcZj1h2ZAa1wCZlPOWsUwh7z+cTBoJbkfg6MqQTFPpmjX6MH3fL3P29N2msglg==
-X-Received: by 2002:a17:902:ba87:: with SMTP id
- k7mr36911520pls.244.1570559811025; 
- Tue, 08 Oct 2019 11:36:51 -0700 (PDT)
+ bh=fsDW0tzjaqiDnhtIyUGrjXSiZZAdOdLAXXd67hwHzks=;
+ b=t2+B0dje3J6VvPXSAjaRgkpgKHL+p1RMijBeZJB0HrGv4533NpvqNHktKP41CCeSjW
+ f1ZpCCnuilXN0vNPiqeO5mCTyTZWcy4zCOSwbdW+MY8Y6HbCy9Jg2LtALD/Zcr7SJnKY
+ VJQnK6RRKByZmOicc3s35+SVIgHhKn7fNn9R9CQjRhIh2BllM6yIMEbqiY/jFuxBuGEm
+ kqFv2JV3lvVRDgi4WMp3Qmp8pvijPRC5AEifHk9v/VEXSE35pBucSoOju9ASIhDWtK3J
+ PXfDphLNcIstHW6neQHypxYYhCjOQV/VgrydD/L8xgtmJHSLlz5wac3IbJd16ASG7ijw
+ /CQw==
+X-Gm-Message-State: APjAAAULM66ToteISFX/iGOk1bA5LLAWrJrIJ0zPBtUsiXKo4NxvoL5v
+ CMrn5BLeiMS9UEZeZ3JSNA/dbw==
+X-Google-Smtp-Source: APXvYqyG4GaI+j7ZvTsqBI3G2MSIJr8zxra2N/j6k0XRZEozeCkWF7y97oXktcddE3tRXrGS/IkznA==
+X-Received: by 2002:a63:881:: with SMTP id 123mr9879229pgi.227.1570560812484; 
+ Tue, 08 Oct 2019 11:53:32 -0700 (PDT)
 Received: from localhost ([12.206.222.5])
- by smtp.gmail.com with ESMTPSA id 2sm19198780pfa.43.2019.10.08.11.36.50
+ by smtp.gmail.com with ESMTPSA id 22sm17454478pfo.131.2019.10.08.11.53.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 08 Oct 2019 11:36:50 -0700 (PDT)
-Date: Tue, 08 Oct 2019 11:36:50 -0700 (PDT)
-X-Google-Original-Date: Tue, 08 Oct 2019 11:36:39 PDT (-0700)
-Subject: Re: [PATCH v1 27/28] target/riscv: Add the MSTATUS_MPV_ISSET helper
- macro
-In-Reply-To: <c7961e38284feb8de1180173bf92c78153fd6970.1566603412.git.alistair.francis@wdc.com>
+ Tue, 08 Oct 2019 11:53:32 -0700 (PDT)
+Date: Tue, 08 Oct 2019 11:53:32 -0700 (PDT)
+X-Google-Original-Date: Tue, 08 Oct 2019 11:39:34 PDT (-0700)
+Subject: Re: [PATCH v1 28/28] target/riscv: Allow enabling the Hypervisor
+ extension
+In-Reply-To: <8dae4338c8938696dfcecee6e736f6b09cc82877.1566603412.git.alistair.francis@wdc.com>
 CC: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
  Alistair Francis <Alistair.Francis@wdc.com>, alistair23@gmail.com,
  Atish Patra <Atish.Patra@wdc.com>, Anup Patel <Anup.Patel@wdc.com>
 From: Palmer Dabbelt <palmer@sifive.com>
 To: Alistair Francis <Alistair.Francis@wdc.com>
-Message-ID: <mhng-bbcac2a5-ee88-404e-a755-420242ec0153@palmer-si-x1e>
+Message-ID: <mhng-f658dc0f-4818-44d6-ae06-22a24fc09624@palmer-si-x1e>
 Mime-Version: 1.0 (MHng)
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
  [fuzzy]
-X-Received-From: 209.85.214.195
+X-Received-From: 209.85.215.196
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -63,94 +62,50 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Oct 2019 18:36:55 -0000
+X-List-Received-Date: Tue, 08 Oct 2019 18:53:38 -0000
 
-On Fri, 23 Aug 2019 16:39:00 PDT (-0700), Alistair Francis wrote:
-> Add a helper macro MSTATUS_MPV_ISSET() which will determine if the
-> MSTATUS_MPV bit is set for both 32-bit and 64-bit RISC-V.
->
+On Fri, 23 Aug 2019 16:39:03 PDT (-0700), Alistair Francis wrote:
 > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 > ---
->  target/riscv/cpu_bits.h   | 11 +++++++++++
->  target/riscv/cpu_helper.c |  4 ++--
->  target/riscv/op_helper.c  |  2 +-
->  target/riscv/translate.c  |  2 +-
->  4 files changed, 15 insertions(+), 4 deletions(-)
+>  target/riscv/cpu.c | 5 +++++
+>  target/riscv/cpu.h | 1 +
+>  2 files changed, 6 insertions(+)
 >
-> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-> index 55e20af6d9..7056d9218b 100644
-> --- a/target/riscv/cpu_bits.h
-> +++ b/target/riscv/cpu_bits.h
-> @@ -365,8 +365,19 @@
->  #define MSTATUS_TVM         0x00100000 /* since: priv-1.10 */
->  #define MSTATUS_TW          0x20000000 /* since: priv-1.10 */
->  #define MSTATUS_TSR         0x40000000 /* since: priv-1.10 */
-> +#if defined(TARGET_RISCV64)
->  #define MSTATUS_MTL         0x4000000000ULL
->  #define MSTATUS_MPV         0x8000000000ULL
-> +#elif defined(TARGET_RISCV32)
-> +#define MSTATUS_MTL         0x00000040
-> +#define MSTATUS_MPV         0x00000080
-> +#endif
-> +
-> +#ifdef TARGET_RISCV32
-> +# define MSTATUS_MPV_ISSET(env)  get_field(*env->mstatush, MSTATUS_MPV)
-> +#else
-> +# define MSTATUS_MPV_ISSET(env)  get_field(*env->mstatus, MSTATUS_MPV)
-> +#endif
->
->  #define MSTATUS64_UXL       0x0000000300000000ULL
->  #define MSTATUS64_SXL       0x0000000C00000000ULL
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index 8c80486dd0..2b88f756bb 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -351,7 +351,7 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
->              mode = get_field(*env->mstatus, MSTATUS_MPP);
->
->              if (riscv_has_ext(env, RVH) &&
-> -                get_field(*env->mstatus, MSTATUS_MPV)) {
-> +                MSTATUS_MPV_ISSET(env)) {
->                  use_background = true;
->              }
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 06ee551ebe..39e1c130df 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -447,6 +447,9 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+>          if (cpu->cfg.ext_u) {
+>              target_misa |= RVU;
 >          }
-> @@ -730,7 +730,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
->          m_mode_two_stage = env->priv == PRV_M &&
->                             access_type != MMU_INST_FETCH &&
->                             get_field(*env->mstatus, MSTATUS_MPRV) &&
-> -                           get_field(*env->mstatus, MSTATUS_MPV);
-> +                           MSTATUS_MPV_ISSET(env);
+> +        if (cpu->cfg.ext_h) {
+> +            target_misa |= RVH;
+> +        }
 >
->          hs_mode_two_stage = env->priv == PRV_S &&
->                              !riscv_cpu_virt_enabled(env) &&
-> diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
-> index 8dec1aee99..6149cd9c15 100644
-> --- a/target/riscv/op_helper.c
-> +++ b/target/riscv/op_helper.c
-> @@ -146,7 +146,7 @@ target_ulong helper_mret(CPURISCVState *env, target_ulong cpu_pc_deb)
->
->      target_ulong mstatus = *env->mstatus;
->      target_ulong prev_priv = get_field(mstatus, MSTATUS_MPP);
-> -    target_ulong prev_virt = get_field(mstatus, MSTATUS_MPV);
-> +    target_ulong prev_virt = MSTATUS_MPV_ISSET(env);
->      mstatus = set_field(mstatus,
->          env->priv_ver >= PRIV_VERSION_1_10_0 ?
->          MSTATUS_MIE : MSTATUS_UIE << prev_priv,
-> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index ea19ba9c5d..f0d9860429 100644
-> --- a/target/riscv/translate.c
-> +++ b/target/riscv/translate.c
-> @@ -754,7 +754,7 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
->          ctx->virt_enabled = riscv_cpu_virt_enabled(env);
->          if (env->priv_ver == PRV_M &&
->              get_field(*env->mstatus, MSTATUS_MPRV) &&
-> -            get_field(*env->mstatus, MSTATUS_MPV)) {
-> +            MSTATUS_MPV_ISSET(env)) {
->              ctx->virt_enabled = true;
->          } else if (env->priv == PRV_S &&
->                     !riscv_cpu_virt_enabled(env) &&
+>          set_misa(env, RVXLEN | target_misa);
+>      }
+> @@ -493,6 +496,8 @@ static Property riscv_cpu_properties[] = {
+>      DEFINE_PROP_BOOL("c", RISCVCPU, cfg.ext_c, true),
+>      DEFINE_PROP_BOOL("s", RISCVCPU, cfg.ext_s, true),
+>      DEFINE_PROP_BOOL("u", RISCVCPU, cfg.ext_u, true),
+> +    /* This is experimental so mark with 'x-' */
+> +    DEFINE_PROP_BOOL("x-h", RISCVCPU, cfg.ext_h, false),
+>      DEFINE_PROP_BOOL("Counters", RISCVCPU, cfg.ext_counters, true),
+>      DEFINE_PROP_BOOL("Zifencei", RISCVCPU, cfg.ext_ifencei, true),
+>      DEFINE_PROP_BOOL("Zicsr", RISCVCPU, cfg.ext_icsr, true),
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index b63f1f3cdc..500496a3be 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -268,6 +268,7 @@ typedef struct RISCVCPU {
+>          bool ext_c;
+>          bool ext_s;
+>          bool ext_u;
+> +        bool ext_h;
+>          bool ext_counters;
+>          bool ext_ifencei;
+>          bool ext_icsr;
 
-This should be either ordered before or atomic with the patch that allows 
-mstatush.mpv to be set, as otherwise there's point at which QEMU doesn't match 
-the ISA.
+Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
 
