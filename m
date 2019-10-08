@@ -1,54 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iHw4J-0002qL-JH
-	for mharc-qemu-riscv@gnu.org; Tue, 08 Oct 2019 16:26:51 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:39269)
+	id 1iHwFe-0000u9-U8
+	for mharc-qemu-riscv@gnu.org; Tue, 08 Oct 2019 16:38:34 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:41175)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <palmer@dabbelt.com>) id 1iHw4H-0002q3-Pj
- for qemu-riscv@nongnu.org; Tue, 08 Oct 2019 16:26:50 -0400
+ (envelope-from <alistair23@gmail.com>) id 1iHwFb-0000qv-VZ
+ for qemu-riscv@nongnu.org; Tue, 08 Oct 2019 16:38:33 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmer@dabbelt.com>) id 1iHw4G-00049J-DA
- for qemu-riscv@nongnu.org; Tue, 08 Oct 2019 16:26:49 -0400
-Received: from mail-pf1-f195.google.com ([209.85.210.195]:42053)
+ (envelope-from <alistair23@gmail.com>) id 1iHwFa-0000gZ-Oa
+ for qemu-riscv@nongnu.org; Tue, 08 Oct 2019 16:38:31 -0400
+Received: from mail-lf1-x141.google.com ([2a00:1450:4864:20::141]:45679)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1iHw4G-00048x-6c
- for qemu-riscv@nongnu.org; Tue, 08 Oct 2019 16:26:48 -0400
-Received: by mail-pf1-f195.google.com with SMTP id q12so39966pff.9
- for <qemu-riscv@nongnu.org>; Tue, 08 Oct 2019 13:26:48 -0700 (PDT)
+ (Exim 4.71) (envelope-from <alistair23@gmail.com>)
+ id 1iHwFX-0000eB-De; Tue, 08 Oct 2019 16:38:27 -0400
+Received: by mail-lf1-x141.google.com with SMTP id r134so12978089lff.12;
+ Tue, 08 Oct 2019 13:38:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=XCPjj57kQgQLJcPcvoqbLBI71lfQjENYLDR7lzwPQVM=;
+ b=PBMHKsplcYsVLC+ZLjSuqIduxzRUp92gBw6p7zXj87dCJe+k66D2HwwxhK6QdgPO4v
+ DD7yyMMuRyklPAjyQngEWodVjACtqwebQ+UYhsdTRQvCOdGhI5HQPD/kkh2JKn8/+WC4
+ KFGI0k/4cmwdTXHXaWQufMNeE27FOG5D8Sb8DlE7OB126KT7t87rx54j2caCx5Jdl7Rf
+ JIQCDqdvLB6lNaU3Dg31RT3FFxiKxtIzqQ9PAQbGjIOsygiBRoaceogge74MjoTBbLVL
+ acb1eS3lxqVyILrWpYZJHjlBspXX9rk/2gb3RwlGTq2eZmRIhy/1K1WzsTzVRrq7BYO1
+ mBGg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
- :mime-version:content-transfer-encoding;
- bh=kQc89uftmwa+HzRPnyPSuM5Jq7S/nmCRSuOBGRsogm4=;
- b=ZhgTBN8186KpoGLpeZO0XJfqKqBa647ETa81cAtjJV/cKj1/1U99TuNGYwJ/eHDmIM
- ordpKDNpNe1jYcSq8yytN89+kXLdnNFAyoPHGYfbU5bcV91UAnumvmA+eTV+VBeuP/3q
- wYYwK6yoFgZP8/6b0iqu0nNLnzKZAl2GIuTMjmc6xmZ4bxJDsmdx3CG4qnojHZVeV8KQ
- ld7fseC39S4HpmfmwB3oBO7TKZgj6Mf26Oebs+u7Nn4OAV3cPM3kVRDkM/OFk5RUFwfr
- twTjcDrptbyK6/wxoRbWf+ZjvZrGdasbnV6VZIHOvLzmCoPfaEBkW3yyEv+jD8ZbGxXX
- zxDA==
-X-Gm-Message-State: APjAAAUcDXzViFfyMkZhnfo2abAFIoROe5ce7Zo9wvQYViW/N4spW23+
- gyrhpe173qEdCd8zAAaxA11Yng==
-X-Google-Smtp-Source: APXvYqygQrQrxipwBSmo7JicVOTCEPcsUJpDbD6xpeoTB4ZVcqDiZOojaFV3pQ39zQYDvyOdmYTfNg==
-X-Received: by 2002:a62:cb:: with SMTP id 194mr42573892pfa.130.1570566406794; 
- Tue, 08 Oct 2019 13:26:46 -0700 (PDT)
-Received: from localhost ([12.206.222.5])
- by smtp.gmail.com with ESMTPSA id u194sm57947pgc.30.2019.10.08.13.26.46
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 08 Oct 2019 13:26:46 -0700 (PDT)
-Date: Tue, 08 Oct 2019 13:26:46 -0700 (PDT)
-X-Google-Original-Date: Tue, 08 Oct 2019 13:26:42 PDT (-0700)
-Subject: Re: [PATCH 2/2] riscv: sifive_u: Add ethernet0 to the aliases node
-In-Reply-To: <1568971142-27979-2-git-send-email-bmeng.cn@gmail.com>
-CC: Alistair Francis <Alistair.Francis@wdc.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-From: Palmer Dabbelt <palmer@sifive.com>
-To: bmeng.cn@gmail.com
-Message-ID: <mhng-be9f6302-4920-4a48-bf8a-0fe7a560545b@palmer-si-x1e>
-Mime-Version: 1.0 (MHng)
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
- [fuzzy]
-X-Received-From: 209.85.210.195
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=XCPjj57kQgQLJcPcvoqbLBI71lfQjENYLDR7lzwPQVM=;
+ b=IrI66cuovhQuDiYYcVXFcKwpudcIFC6eS3Pd2eQZjZE7T3UHN4ULjJ+ezK0CSf0vQf
+ SthW9NYI2kz+4YJFpjDK9rZ9BnSdq+/PpDYD/h5//tJU2CeZ+jGMcp/F1+FxX+Da0SUi
+ R82wl7lfNz6mFlR1fGARbxEbXhHCqn7XQHYqDqdkUNrQnc6J9jr4z7a6lJwPY7UyBDzx
+ Zp4sb+T+6AqMuEfHJKm1/lLBvTSHn8JHTGf5BO0LqqkIHbLZlizHkQpke2faOxezy0Bk
+ 5XzcHVSaQAFYmsGUnpfnSBNx4BeIfFr70FzZ+TtMjJ2/IJC/hmUL4+On0IrCLO2YhGOv
+ WU8g==
+X-Gm-Message-State: APjAAAVyLDQ2wkAOdeNXQ2HvOAui9MWfadBVG+aQYDbXSoXguoQ2PksL
+ rETKL1EAv+NeUtSztPDTPRJCJcIwlyy3Dc2VYG0=
+X-Google-Smtp-Source: APXvYqx5XBJQKq44cAbltXdfUE+pDOK7ljgZwV+CKlWPtOeMhiXglmVudQt3hnMvc79p3w0AIoaSetKQTmdRhZgEXWg=
+X-Received: by 2002:a19:4912:: with SMTP id w18mr21093275lfa.93.1570567105492; 
+ Tue, 08 Oct 2019 13:38:25 -0700 (PDT)
+MIME-Version: 1.0
+References: <CAKmqyKPMOAq3oeU-_MQHBAbzTv__iKr=uR8WkCfGbH8yk4afFg@mail.gmail.com>
+ <mhng-1d294790-a5b7-4fa7-8b5e-9adf550c5d1a@palmer-si-x1e>
+In-Reply-To: <mhng-1d294790-a5b7-4fa7-8b5e-9adf550c5d1a@palmer-si-x1e>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 8 Oct 2019 13:33:26 -0700
+Message-ID: <CAKmqyKPnA=GzRVT=AVPcs0-MghBOrnms4_xx=oE0O4UkrG4r7A@mail.gmail.com>
+Subject: Re: [PATCH v2 4/7] riscv/sifive_u: Add the start-in-flash property
+To: Palmer Dabbelt <palmer@sifive.com>
+Cc: Bin Meng <bmeng.cn@gmail.com>, Alistair Francis <Alistair.Francis@wdc.com>,
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2a00:1450:4864:20::141
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -60,44 +66,114 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Oct 2019 20:26:51 -0000
+X-List-Received-Date: Tue, 08 Oct 2019 20:38:33 -0000
 
-On Fri, 20 Sep 2019 02:19:02 PDT (-0700), bmeng.cn@gmail.com wrote:
-> U-Boot expects this alias to be in place in order to fix up the mac
-> address of the ethernet node.
+On Tue, Oct 8, 2019 at 1:12 PM Palmer Dabbelt <palmer@sifive.com> wrote:
 >
-> This is to keep in sync with Linux kernel commit below:
-> https://patchwork.kernel.org/patch/11133033/
+> On Mon, 30 Sep 2019 11:04:45 PDT (-0700), alistair23@gmail.com wrote:
+> > On Fri, Sep 27, 2019 at 12:57 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+> >>
+> >> On Fri, Sep 27, 2019 at 8:55 AM Alistair Francis
+> >> <alistair.francis@wdc.com> wrote:
+> >> >
+> >> > Add a property that when set to true QEMU will jump from the ROM code to
+> >> > the start of flash memory instead of DRAM which is the default
+> >> > behaviour.
+> >> >
+> >> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> >> > ---
+> >> >  hw/riscv/sifive_u.c         | 27 +++++++++++++++++++++++++++
+> >> >  include/hw/riscv/sifive_u.h |  2 ++
+> >> >  2 files changed, 29 insertions(+)
+> >> >
+> >> > diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+> >> > index f5741e9a38..33b55d0d5b 100644
+> >> > --- a/hw/riscv/sifive_u.c
+> >> > +++ b/hw/riscv/sifive_u.c
+> >> > @@ -373,6 +373,10 @@ static void riscv_sifive_u_init(MachineState *machine)
+> >> >                                         /* dtb: */
+> >> >      };
+> >> >
+> >> > +    if (s->start_in_flash) {
+> >> > +        reset_vec[6] = memmap[SIFIVE_U_FLASH0].base; /* start: .dword FLASH0_BASE */
+> >> > +    }
+> >>
+> >> Please change to use the way that patch "[v2,7/7] riscv/virt: Jump to
+> >> pflash if specified" does for consistency, ie:
+> >>
+> >>     if (s->start_in_flash) {
+> >>         start_addr = memmap[SIFIVE_U_FLASH0].base; /* start: .dword
+> >> FLASH0_BASE */
+> >>     }
+> >>
+> >> > +
+> >> >      /* copy in the reset vector in little_endian byte order */
+> >> >      for (i = 0; i < sizeof(reset_vec) >> 2; i++) {
+> >> >          reset_vec[i] = cpu_to_le32(reset_vec[i]);
+> >> > @@ -432,8 +436,31 @@ static void riscv_sifive_u_soc_init(Object *obj)
+> >> >                            TYPE_CADENCE_GEM);
+> >> >  }
+> >> >
+> >> > +static bool virt_get_start_in_flash(Object *obj, Error **errp)
+> >>
+> >> sifive_u_get_start_in_flash()
+> >>
+> >> > +{
+> >> > +    SiFiveUState *s = RISCV_U_MACHINE(obj);
+> >> > +
+> >> > +    return s->start_in_flash;
+> >> > +}
+> >> > +
+> >> > +static void virt_set_start_in_flash(Object *obj, bool value, Error **errp)
+> >>
+> >> sifive_u_set_start_in_flash()
+> >
+> > Yep, I have fixed all of these.
 >
-> Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
-> ---
->
->  hw/riscv/sifive_u.c | 5 ++++-
->  1 file changed, 4 insertions(+), 1 deletion(-)
->
-> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-> index 02dd761..1ac51e3 100644
-> --- a/hw/riscv/sifive_u.c
-> +++ b/hw/riscv/sifive_u.c
-> @@ -270,6 +270,10 @@ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
->          s->soc.gem.conf.macaddr.a, ETH_ALEN);
->      qemu_fdt_setprop_cell(fdt, nodename, "#address-cells", 1);
->      qemu_fdt_setprop_cell(fdt, nodename, "#size-cells", 0);
-> +
-> +    qemu_fdt_add_subnode(fdt, "/aliases");
-> +    qemu_fdt_setprop_string(fdt, "/aliases", "ethernet0", nodename);
-> +
->      g_free(nodename);
->
->      nodename = g_strdup_printf("/soc/ethernet@%lx/ethernet-phy@0",
-> @@ -297,7 +301,6 @@ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
->          qemu_fdt_setprop_string(fdt, "/chosen", "bootargs", cmdline);
->      }
->
-> -    qemu_fdt_add_subnode(fdt, "/aliases");
->      qemu_fdt_setprop_string(fdt, "/aliases", "serial0", nodename);
->
->      g_free(nodename);
+> Did I miss the v3?
 
-Thanks.  These two are in the patch queue.
+Nope, I'll send it today.
+
+Alistair
+
+>
+> >
+> > Alistair
+> >
+> >>
+> >> > +{
+> >> > +    SiFiveUState *s = RISCV_U_MACHINE(obj);
+> >> > +
+> >> > +    s->start_in_flash = value;
+> >> > +}
+> >> > +
+> >> >  static void riscv_sifive_u_machine_instance_init(Object *obj)
+> >> >  {
+> >> > +    SiFiveUState *s = RISCV_U_MACHINE(obj);
+> >> > +
+> >> > +    s->start_in_flash = false;
+> >> > +    object_property_add_bool(obj, "start-in-flash", virt_get_start_in_flash,
+> >> > +                             virt_set_start_in_flash, NULL);
+> >> > +    object_property_set_description(obj, "start-in-flash",
+> >> > +                                    "Set on to tell QEMU's ROM to jump to " \
+> >> > +                                    "flash. Otherwise QEMU will jump to DRAM",
+> >> > +                                    NULL);
+> >> >  }
+> >> >
+> >> >  static void riscv_sifive_u_soc_realize(DeviceState *dev, Error **errp)
+> >> > diff --git a/include/hw/riscv/sifive_u.h b/include/hw/riscv/sifive_u.h
+> >> > index a921079fbe..2656b43c58 100644
+> >> > --- a/include/hw/riscv/sifive_u.h
+> >> > +++ b/include/hw/riscv/sifive_u.h
+> >> > @@ -57,6 +57,8 @@ typedef struct SiFiveUState {
+> >> >
+> >> >      void *fdt;
+> >> >      int fdt_size;
+> >> > +
+> >> > +    bool start_in_flash;
+> >> >  } SiFiveUState;
+> >> >
+> >>
+> >> Regards,
+> >> Bin
 
