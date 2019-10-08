@@ -1,65 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iHlMN-0003HN-UL
-	for mharc-qemu-riscv@gnu.org; Tue, 08 Oct 2019 05:00:47 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:60537)
+	id 1iHmBp-0005ZR-48
+	for mharc-qemu-riscv@gnu.org; Tue, 08 Oct 2019 05:53:57 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:39135)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <bmeng.cn@gmail.com>) id 1iHlMJ-0003E7-AK
- for qemu-riscv@nongnu.org; Tue, 08 Oct 2019 05:00:45 -0400
+ (envelope-from <bmeng.cn@gmail.com>) id 1iHmBm-0005Wj-Kk
+ for qemu-riscv@nongnu.org; Tue, 08 Oct 2019 05:53:55 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <bmeng.cn@gmail.com>) id 1iHlMH-0004oA-RK
- for qemu-riscv@nongnu.org; Tue, 08 Oct 2019 05:00:43 -0400
-Received: from mail-yb1-xb42.google.com ([2607:f8b0:4864:20::b42]:41795)
+ (envelope-from <bmeng.cn@gmail.com>) id 1iHmBl-0003YR-Fa
+ for qemu-riscv@nongnu.org; Tue, 08 Oct 2019 05:53:54 -0400
+Received: from mail-yw1-xc44.google.com ([2607:f8b0:4864:20::c44]:43281)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
- id 1iHlMA-0004ez-UF; Tue, 08 Oct 2019 05:00:35 -0400
-Received: by mail-yb1-xb42.google.com with SMTP id 206so5643309ybc.8;
- Tue, 08 Oct 2019 02:00:34 -0700 (PDT)
+ id 1iHmBj-0003WK-17; Tue, 08 Oct 2019 05:53:51 -0400
+Received: by mail-yw1-xc44.google.com with SMTP id q7so6204792ywe.10;
+ Tue, 08 Oct 2019 02:53:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=KityKsHZrOQodKrg5hE8kA9mZCthnEQ4reQqbLW1gA0=;
- b=f3PsecfXuRJnMJNHrxlAwnHKJEMAENfSchPfCSGJN0Hj4UEqjZ0CqacTgXXnAFQgn2
- OSNQagtCA96x59mQPvm1CDJabi4Jod8QA4uUuotnTRWcWy/Z9iHFsjelJMprJZiK2zEg
- sTjGwgzm6kY+yGiyrHoEGkoGy/4hGIVzZaO5XE039b+AKY/PqDbvTl1XoyUPg/xTgeMw
- WFPE3q9tI9856y9khQcQhkPW+41cP1dOTpZR4VhN/IWmzLOXH/gAULHZ7/56cZI0bnf0
- qBRZtOeVoSmRsXTY6L73oqgwf4BzJblyvQUuFw7BseejZTYrD9SLegvgD1tdFvahmgLA
- omSA==
+ :cc; bh=4ORxxJ0M/325MeidPci2KxTjX/RdOiKnspbSwICjoPE=;
+ b=Erx7bG7q3DXAUGzy4Lzntrwt/MSYl2IfHoa5yYHl6W3QaJxYUbSmCAAyYk1r5/FXxF
+ 3eBJ8xggvpYVUEC/NnHpSnkvAKrxp3LAjQVJ8f3CPzS0bVT1qz9u4ZCHhgXeNUTedx/r
+ Vm9hcT2H/b+Ea0YXQWYGljW3IKmeE16zhLRsdXhRvJO3HMYfXhzyELay1A/iZw+sP++E
+ TgA27dfFKZgvXHPOkjNQ22SUnm6aCnXzimJhDfJzv7hWx76GEnynKm/kYp5kZX1CIF1I
+ LO9pg/WlcXRncef2lvF6/hyJqQ22T1UQ5WiY+fctL3tMkp4zxCz1evh2iM4mfU1DUWAI
+ AoNA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=KityKsHZrOQodKrg5hE8kA9mZCthnEQ4reQqbLW1gA0=;
- b=B/Tn/MVzE9NQZGFIBqG5jLrEeMzO94aE/p7GPIBYlbND/+539PzP/e7/NeX2dI1G+w
- zT910wu/sRovKVie6F6UjjexMXmJItAuwnEQXvITuipO+j7XeQ/N0uqod2N9Vo+wOlu+
- Vv90VR7WHijGuLnkzHuFxvxJ7yS9vBnOs5ArGss3ATdv5Yvdq2+tymya8u+NQVSlTJNJ
- dTfcjpu9EeykpNvUPpsXrkDjFvyAPJK4L/FEgFLiT9QkndxtDBTYY5G3/CFkLwloMlXh
- c4elBPAwdxWeooISwRMXs9lJjc/xaPibSXQ8tsaF5/9LVm2bID7ZnrteGRaSK5Zicem1
- 4x/A==
-X-Gm-Message-State: APjAAAX5dsmk5zrFT6Q4wMhjDVN9yyPZGoTrK/cm6RYM5mHWEeT9lWkH
- ex2Omq7CXlDfIvQ2B1kWVkIlv6B01OgG+G2mUIk=
-X-Google-Smtp-Source: APXvYqxjWjrFqPbh1q+WOZAvlXibXIeirCN15UP+5bBIoe7nh6jzUIYtKAjYeAlLAnxvOINeageA07XUX3GfHMSpezk=
-X-Received: by 2002:a25:bfc4:: with SMTP id q4mr2289949ybm.29.1570525233594;
- Tue, 08 Oct 2019 02:00:33 -0700 (PDT)
+ bh=4ORxxJ0M/325MeidPci2KxTjX/RdOiKnspbSwICjoPE=;
+ b=oYw7yp7ZRCMBJTQOgymAMK6WQSU80a/3BO5JhnEKBrEx4FMDXJgVss8BZO/QrlUVSf
+ AajMZiotixLlro+1LoFyn9FCFyYvWZUEmxVMaW6nFcf/gaMcIimXjiN5AYzd5CKO8PYw
+ K5VAPpTKgz8wUQOZls5BvqOsjzFFDcTNREvmQEJ4Sp2hLdY2gTbL425xtK8I+qMj3l5T
+ WeTCOrmUR3tWgw9vxkao8+LGKMJSw7a7OgxO/ViNEqq2sLg/OMKnGLa/AwTcq/gfRn06
+ WCIoaCFVfkYxKcMrFkP2LlPqMOMOei7h7I1ZqxAHFJNZx2RUQAg1fYjBHsfcDelbDYna
+ t19Q==
+X-Gm-Message-State: APjAAAWJljLhxctIWoRVewLWHpRgd01VPeSsQAjgQR5UdP6M9ZaDKaoQ
+ XgaH2J60xXZrOQq3wDcJ4Ncj6ZaNSJmfzoIQtPc=
+X-Google-Smtp-Source: APXvYqzRCeqk7xeShWLGS3gYOcId3u+BTyOYQM/m050BwLplvORe2oJEVsYnVs9v9cauVZ6bwLrnVzM1Plm4eBCP4/g=
+X-Received: by 2002:a81:2f12:: with SMTP id v18mr13947029ywv.137.1570528430487; 
+ Tue, 08 Oct 2019 02:53:50 -0700 (PDT)
 MIME-Version: 1.0
-References: <20191004151614.81516-1-jonathan@fintelia.io>
- <5393a150-71b6-a729-7530-a50df05353bd@sifive.com>
-In-Reply-To: <5393a150-71b6-a729-7530-a50df05353bd@sifive.com>
+References: <20191008001318.219367-1-jonathan@fintelia.io>
+ <20191008001318.219367-2-jonathan@fintelia.io>
+In-Reply-To: <20191008001318.219367-2-jonathan@fintelia.io>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Tue, 8 Oct 2019 17:00:20 +0800
-Message-ID: <CAEUhbmXXwZTu2rJ7Oen4mVSBjp+-7Jd7WBpmds1xm9m-tR+Q-A@mail.gmail.com>
-Subject: Re: [PATCH v2] target/riscv: Expose "priv" register for GDB
-To: Jim Wilson <jimw@sifive.com>
-Cc: Jonathan Behrens <jonathan@fintelia.io>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+Date: Tue, 8 Oct 2019 17:53:37 +0800
+Message-ID: <CAEUhbmXHdj=-28inH5-ToS4tOAYOva1Lc1QCz6RGijkMrWhFdg@mail.gmail.com>
+Subject: Re: [PATCH v3 1/3] target/riscv: Tell gdbstub the correct number of
+ CSRs
+To: Jonathan Behrens <jonathan@fintelia.io>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>, 
  Palmer Dabbelt <palmer@sifive.com>, Alistair Francis <Alistair.Francis@wdc.com>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
 Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::b42
+X-Received-From: 2607:f8b0:4864:20::c44
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -71,88 +69,45 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Oct 2019 09:00:45 -0000
+X-List-Received-Date: Tue, 08 Oct 2019 09:53:55 -0000
 
-Hi Jim,
-
-On Tue, Oct 8, 2019 at 5:17 AM Jim Wilson <jimw@sifive.com> wrote:
+On Tue, Oct 8, 2019 at 8:15 AM Jonathan Behrens <jonathan@fintelia.io> wrote:
 >
-> On 10/4/19 8:16 AM, Jonathan Behrens wrote:
-> > diff --git a/gdb-xml/riscv-32bit-cpu.xml b/gdb-xml/riscv-32bit-cpu.xml
-> > index 0d07aaec85..d6d76aafd8 100644
-> > --- a/gdb-xml/riscv-32bit-cpu.xml
-> > +++ b/gdb-xml/riscv-32bit-cpu.xml
-> > @@ -44,4 +44,5 @@
-> >     <reg name="t5" bitsize="32" type="int"/>
-> >     <reg name="t6" bitsize="32" type="int"/>
-> >     <reg name="pc" bitsize="32" type="code_ptr"/>
-> > +  <reg name="priv" bitsize="32" type="int"/>
-> >   </feature>
->
-> Adding this to the cpu register set means that the gdb "info registers"
-> command will now list a value for the mysterious undocumented "priv"
+> If the number of registers reported to the gdbstub code does not match the
+> number in the associated XML file, then the register numbers used by the stub
+> may get out of sync with a remote GDB instance.
 
-My gdb does not list "priv" register after applying this patch.
+I am not sure how to trigger the out of sync issue. Do you know how?
 
->>> info registers
-ra             0x0      0x0
-sp             0x0      0x0
-gp             0x0      0x0
-tp             0x0      0x0
-t0             0x1000   4096
-t1             0x0      0
-t2             0x0      0
-fp             0x0      0x0
-s1             0x0      0
-a0             0x0      0
-a1             0x1020   4128
-a2             0x0      0
-a3             0x0      0
-a4             0x0      0
-a5             0x0      0
-a6             0x0      0
-a7             0x0      0
-s2             0x0      0
-s3             0x0      0
-s4             0x0      0
-s5             0x0      0
-s6             0x0      0
-s7             0x0      0
-s8             0x0      0
-s9             0x0      0
-s10            0x0      0
-s11            0x0      0
-t3             0x0      0
-t4             0x0      0
-t5             0x0      0
-t6             0x0      0
-pc             0x1008   0x1008
+>
+> Signed-off-by: Jonathan Behrens <jonathan@fintelia.io>
+> ---
+>  target/riscv/gdbstub.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
+> index ded140e8d8..cb5bfd3d50 100644
+> --- a/target/riscv/gdbstub.c
+> +++ b/target/riscv/gdbstub.c
+> @@ -384,7 +384,7 @@ void riscv_cpu_register_gdb_regs_for_features(CPUState *cs)
+>      }
+>
+>      gdb_register_coprocessor(cs, riscv_gdb_get_csr, riscv_gdb_set_csr,
+> -                             4096, "riscv-32bit-csr.xml", 0);
+> +                             240, "riscv-32bit-csr.xml", 0);
+>  #elif defined(TARGET_RISCV64)
+>      if (env->misa & RVF) {
+>          gdb_register_coprocessor(cs, riscv_gdb_get_fpu, riscv_gdb_set_fpu,
+> @@ -392,6 +392,6 @@ void riscv_cpu_register_gdb_regs_for_features(CPUState *cs)
+>      }
+>
+>      gdb_register_coprocessor(cs, riscv_gdb_get_csr, riscv_gdb_set_csr,
+> -                             4096, "riscv-64bit-csr.xml", 0);
+> +                             240, "riscv-64bit-csr.xml", 0);
+>  #endif
+>  }
 
-Anything I was missing?
+The change looks good to me.
 
-> register.  That is likely to result in user confusion, and a few gdb bug
-> reports.
->
-> Gdb incidentally already has support for a virtual priv register.  From
-> gdb/riscv-tdep.c:
->
-> static const struct riscv_register_feature riscv_virtual_feature =
-> {
->   "org.gnu.gdb.riscv.virtual",
->   {
->     { RISCV_PRIV_REGNUM, { "priv" }, false }
->   }
-> };
->
-> So the correct way to fix this is to add a
-> gdb-xml/riscv-32bit-virtual.xml file, along with code to handle this new
-> xml file and the registers in it.  Likewise for the 64-bit support.
->
-> The main advantage of doing things this way is that only people that
-> care about the priv register will see it, and this will interoperate
-> with other RISC-V debuggers and targets (if any) that already have
-> virtual priv register support.
-
-Regards,
-Bin
+Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
 
