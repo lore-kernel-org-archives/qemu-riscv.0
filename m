@@ -1,60 +1,74 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iHwFe-0000u9-U8
-	for mharc-qemu-riscv@gnu.org; Tue, 08 Oct 2019 16:38:34 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:41175)
+	id 1iHwWz-0008EN-Sm
+	for mharc-qemu-riscv@gnu.org; Tue, 08 Oct 2019 16:56:29 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44216)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <alistair23@gmail.com>) id 1iHwFb-0000qv-VZ
- for qemu-riscv@nongnu.org; Tue, 08 Oct 2019 16:38:33 -0400
+ (envelope-from <prvs=177211c83=alistair.francis@wdc.com>)
+ id 1iHwWw-0008Bt-PN
+ for qemu-riscv@nongnu.org; Tue, 08 Oct 2019 16:56:27 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1iHwFa-0000gZ-Oa
- for qemu-riscv@nongnu.org; Tue, 08 Oct 2019 16:38:31 -0400
-Received: from mail-lf1-x141.google.com ([2a00:1450:4864:20::141]:45679)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1iHwFX-0000eB-De; Tue, 08 Oct 2019 16:38:27 -0400
-Received: by mail-lf1-x141.google.com with SMTP id r134so12978089lff.12;
- Tue, 08 Oct 2019 13:38:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=XCPjj57kQgQLJcPcvoqbLBI71lfQjENYLDR7lzwPQVM=;
- b=PBMHKsplcYsVLC+ZLjSuqIduxzRUp92gBw6p7zXj87dCJe+k66D2HwwxhK6QdgPO4v
- DD7yyMMuRyklPAjyQngEWodVjACtqwebQ+UYhsdTRQvCOdGhI5HQPD/kkh2JKn8/+WC4
- KFGI0k/4cmwdTXHXaWQufMNeE27FOG5D8Sb8DlE7OB126KT7t87rx54j2caCx5Jdl7Rf
- JIQCDqdvLB6lNaU3Dg31RT3FFxiKxtIzqQ9PAQbGjIOsygiBRoaceogge74MjoTBbLVL
- acb1eS3lxqVyILrWpYZJHjlBspXX9rk/2gb3RwlGTq2eZmRIhy/1K1WzsTzVRrq7BYO1
- mBGg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=XCPjj57kQgQLJcPcvoqbLBI71lfQjENYLDR7lzwPQVM=;
- b=IrI66cuovhQuDiYYcVXFcKwpudcIFC6eS3Pd2eQZjZE7T3UHN4ULjJ+ezK0CSf0vQf
- SthW9NYI2kz+4YJFpjDK9rZ9BnSdq+/PpDYD/h5//tJU2CeZ+jGMcp/F1+FxX+Da0SUi
- R82wl7lfNz6mFlR1fGARbxEbXhHCqn7XQHYqDqdkUNrQnc6J9jr4z7a6lJwPY7UyBDzx
- Zp4sb+T+6AqMuEfHJKm1/lLBvTSHn8JHTGf5BO0LqqkIHbLZlizHkQpke2faOxezy0Bk
- 5XzcHVSaQAFYmsGUnpfnSBNx4BeIfFr70FzZ+TtMjJ2/IJC/hmUL4+On0IrCLO2YhGOv
- WU8g==
-X-Gm-Message-State: APjAAAVyLDQ2wkAOdeNXQ2HvOAui9MWfadBVG+aQYDbXSoXguoQ2PksL
- rETKL1EAv+NeUtSztPDTPRJCJcIwlyy3Dc2VYG0=
-X-Google-Smtp-Source: APXvYqx5XBJQKq44cAbltXdfUE+pDOK7ljgZwV+CKlWPtOeMhiXglmVudQt3hnMvc79p3w0AIoaSetKQTmdRhZgEXWg=
-X-Received: by 2002:a19:4912:: with SMTP id w18mr21093275lfa.93.1570567105492; 
- Tue, 08 Oct 2019 13:38:25 -0700 (PDT)
+ (envelope-from <prvs=177211c83=alistair.francis@wdc.com>)
+ id 1iHwWv-0002Hk-Ma
+ for qemu-riscv@nongnu.org; Tue, 08 Oct 2019 16:56:26 -0400
+Received: from esa1.hgst.iphmx.com ([68.232.141.245]:46687)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <prvs=177211c83=alistair.francis@wdc.com>)
+ id 1iHwWs-0002GZ-Ek; Tue, 08 Oct 2019 16:56:23 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1570568182; x=1602104182;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=wesWJj6QvwS88ThbHC6ZBLzVjCXfFibXEQU4dzUr07U=;
+ b=h2S8VnqV1KNmLdOfU+6uPmaJm6sQdOPWBcmnxzREvIwP0NGYYFbwTJM6
+ seBnS1r0+c+dFKOjHmxM/1nspn4RIM8CwtOwRVCteqvjDJE5UUziubl8a
+ Lyg/lw9h5Ua3cPesvmCQ5CJl7W6Ch1CnaOV1zmuHixDkgDxN0v83D9N/e
+ LYZynEZz44fWKhhhPF85LmJO+p63E4d+dH5eBm159aUX9ti3lIqoUFRoQ
+ jp1APTTYI3f5M1O0mImEnUIdbp+Bl9pN8HjaBbZNUWhaTuL77/pneptGC
+ doKexTolKWOnPs806gRvF6RTjF8rPc7Ivty7593Qn36jfoVW/LpXhyHOn w==;
+IronPort-SDR: a4v8IRJJplQwntak5Vjh+a0VRQZqzIYXzRR9Dp0soiSoWW1GHzPXGNbZANsp0byudK1S5SLcXl
+ jx1WycwTIPQvacJYWQFChGWwhx9RouZQ5wHEA7AYE6qSTCZ0do1BGWPNC/Hn2FVbJ0DJUy1Vcz
+ o8azeVCEEtA93ltF8/4UozHfmaq4hY5Rnpl7AKwSH6jXZsDQRtEBWtZA3PrVnQGOkwNpVKiAgP
+ yPUGRceZ+5DYAlNTTrNEjrj71P26pwj7CN86XyHv8xhVxgsOneSCVy29wwAnKAy4JMRdU5s1kO
+ RLU=
+X-IronPort-AV: E=Sophos;i="5.67,272,1566835200"; d="scan'208";a="227047824"
+Received: from h199-255-45-15.hgst.com (HELO uls-op-cesaep02.wdc.com)
+ ([199.255.45.15])
+ by ob1.hgst.iphmx.com with ESMTP; 09 Oct 2019 04:56:20 +0800
+IronPort-SDR: O8tQ+pIRFywICgypgKdKIGPPzVbtbeZEDCfZMZuqJtKtiPZj4DoyrDjTUgK4balxYFZeX7JzCb
+ Bw9rTzXoTZGh8SehuXYF6AAHMPPI2xAW2ZJmJ3iy2YNMP5A0Uzx9rgWdjax0bmOEWyxlu14Y/X
+ gdTp9y1NJYtH+MyzKDd0l7DXdQDYZlWEGYrRbalAA54tcHXrmeOLhcJcznGtB6Sf54+NK+opEJ
+ PnebNz/6K508eaCbgTpAK7VwqawCCTW/Yy/7Q0mGMvs1s71sk0PGeWbSBknX2JZNCOYgOvkSQG
+ GgJTP0ZI189rrc19v+euW/zS
+Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
+ by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 08 Oct 2019 13:52:21 -0700
+IronPort-SDR: hZpQ/tawF4T7Y0qzha7L8YGo917+rHaRgn2wf/Bq04egX+E/FQXkdhNqvHDyXndZfguqXUyUnT
+ gF30emQyCm3qmjEr0orrvIP9VMP+5OcW93L1Vtdm2rZIr2mHwK8hD7azEYMZAfE9pBa4yPab62
+ exoy3kAVze6mjjC8Nt7yNq4Zr42Wk970QRuxDIzbtYWvahBNj76heJoL0dHwvEzyip25DWP6j6
+ XJWdm6+lBcltZ2bWPtO5p6smtGG8dRGMm2bL9J7kANjbMphcS01pZG6UXc/lQ119at7qIe3LgQ
+ O+Q=
+WDCIronportException: Internal
+Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
+ risc6-mainframe.int.fusionio.com) ([10.196.157.58])
+ by uls-op-cesaip01.wdc.com with ESMTP; 08 Oct 2019 13:56:21 -0700
+From: Alistair Francis <alistair.francis@wdc.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: palmer@sifive.com,
+	alistair.francis@wdc.com,
+	alistair23@gmail.com
+Subject: [PATCH v2 1/2] RISC-V: Handle bus errors in the page table walker
+Date: Tue,  8 Oct 2019 13:51:50 -0700
+Message-Id: <944c4c9c5ef8c134cff2a7bef6e5994685e065ee.1570567870.git.alistair.francis@wdc.com>
+X-Mailer: git-send-email 2.23.0
+In-Reply-To: <cover.1570567870.git.alistair.francis@wdc.com>
+References: <cover.1570567870.git.alistair.francis@wdc.com>
 MIME-Version: 1.0
-References: <CAKmqyKPMOAq3oeU-_MQHBAbzTv__iKr=uR8WkCfGbH8yk4afFg@mail.gmail.com>
- <mhng-1d294790-a5b7-4fa7-8b5e-9adf550c5d1a@palmer-si-x1e>
-In-Reply-To: <mhng-1d294790-a5b7-4fa7-8b5e-9adf550c5d1a@palmer-si-x1e>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 8 Oct 2019 13:33:26 -0700
-Message-ID: <CAKmqyKPnA=GzRVT=AVPcs0-MghBOrnms4_xx=oE0O4UkrG4r7A@mail.gmail.com>
-Subject: Re: [PATCH v2 4/7] riscv/sifive_u: Add the start-in-flash property
-To: Palmer Dabbelt <palmer@sifive.com>
-Cc: Bin Meng <bmeng.cn@gmail.com>, Alistair Francis <Alistair.Francis@wdc.com>,
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2a00:1450:4864:20::141
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-detected-operating-system: by eggs.gnu.org: FreeBSD 9.x [fuzzy]
+X-Received-From: 68.232.141.245
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -66,114 +80,57 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Oct 2019 20:38:33 -0000
+X-List-Received-Date: Tue, 08 Oct 2019 20:56:28 -0000
 
-On Tue, Oct 8, 2019 at 1:12 PM Palmer Dabbelt <palmer@sifive.com> wrote:
->
-> On Mon, 30 Sep 2019 11:04:45 PDT (-0700), alistair23@gmail.com wrote:
-> > On Fri, Sep 27, 2019 at 12:57 AM Bin Meng <bmeng.cn@gmail.com> wrote:
-> >>
-> >> On Fri, Sep 27, 2019 at 8:55 AM Alistair Francis
-> >> <alistair.francis@wdc.com> wrote:
-> >> >
-> >> > Add a property that when set to true QEMU will jump from the ROM code to
-> >> > the start of flash memory instead of DRAM which is the default
-> >> > behaviour.
-> >> >
-> >> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> >> > ---
-> >> >  hw/riscv/sifive_u.c         | 27 +++++++++++++++++++++++++++
-> >> >  include/hw/riscv/sifive_u.h |  2 ++
-> >> >  2 files changed, 29 insertions(+)
-> >> >
-> >> > diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-> >> > index f5741e9a38..33b55d0d5b 100644
-> >> > --- a/hw/riscv/sifive_u.c
-> >> > +++ b/hw/riscv/sifive_u.c
-> >> > @@ -373,6 +373,10 @@ static void riscv_sifive_u_init(MachineState *machine)
-> >> >                                         /* dtb: */
-> >> >      };
-> >> >
-> >> > +    if (s->start_in_flash) {
-> >> > +        reset_vec[6] = memmap[SIFIVE_U_FLASH0].base; /* start: .dword FLASH0_BASE */
-> >> > +    }
-> >>
-> >> Please change to use the way that patch "[v2,7/7] riscv/virt: Jump to
-> >> pflash if specified" does for consistency, ie:
-> >>
-> >>     if (s->start_in_flash) {
-> >>         start_addr = memmap[SIFIVE_U_FLASH0].base; /* start: .dword
-> >> FLASH0_BASE */
-> >>     }
-> >>
-> >> > +
-> >> >      /* copy in the reset vector in little_endian byte order */
-> >> >      for (i = 0; i < sizeof(reset_vec) >> 2; i++) {
-> >> >          reset_vec[i] = cpu_to_le32(reset_vec[i]);
-> >> > @@ -432,8 +436,31 @@ static void riscv_sifive_u_soc_init(Object *obj)
-> >> >                            TYPE_CADENCE_GEM);
-> >> >  }
-> >> >
-> >> > +static bool virt_get_start_in_flash(Object *obj, Error **errp)
-> >>
-> >> sifive_u_get_start_in_flash()
-> >>
-> >> > +{
-> >> > +    SiFiveUState *s = RISCV_U_MACHINE(obj);
-> >> > +
-> >> > +    return s->start_in_flash;
-> >> > +}
-> >> > +
-> >> > +static void virt_set_start_in_flash(Object *obj, bool value, Error **errp)
-> >>
-> >> sifive_u_set_start_in_flash()
-> >
-> > Yep, I have fixed all of these.
->
-> Did I miss the v3?
+From: Palmer Dabbelt <palmer@sifive.com>
 
-Nope, I'll send it today.
+We directly access physical memory while walking the page tables on
+RISC-V, but while doing so we were using cpu_ld*() which does not report
+bus errors.  This patch converts the page table walker over to use
+address_space_ld*(), which allows bus errors to be detected.
 
-Alistair
+Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
+Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Reviewed-by: Philippe Mathieu-Daudé <philmd@redhat.com>
+---
+ target/riscv/cpu_helper.c | 12 +++++++++---
+ 1 file changed, 9 insertions(+), 3 deletions(-)
 
->
-> >
-> > Alistair
-> >
-> >>
-> >> > +{
-> >> > +    SiFiveUState *s = RISCV_U_MACHINE(obj);
-> >> > +
-> >> > +    s->start_in_flash = value;
-> >> > +}
-> >> > +
-> >> >  static void riscv_sifive_u_machine_instance_init(Object *obj)
-> >> >  {
-> >> > +    SiFiveUState *s = RISCV_U_MACHINE(obj);
-> >> > +
-> >> > +    s->start_in_flash = false;
-> >> > +    object_property_add_bool(obj, "start-in-flash", virt_get_start_in_flash,
-> >> > +                             virt_set_start_in_flash, NULL);
-> >> > +    object_property_set_description(obj, "start-in-flash",
-> >> > +                                    "Set on to tell QEMU's ROM to jump to " \
-> >> > +                                    "flash. Otherwise QEMU will jump to DRAM",
-> >> > +                                    NULL);
-> >> >  }
-> >> >
-> >> >  static void riscv_sifive_u_soc_realize(DeviceState *dev, Error **errp)
-> >> > diff --git a/include/hw/riscv/sifive_u.h b/include/hw/riscv/sifive_u.h
-> >> > index a921079fbe..2656b43c58 100644
-> >> > --- a/include/hw/riscv/sifive_u.h
-> >> > +++ b/include/hw/riscv/sifive_u.h
-> >> > @@ -57,6 +57,8 @@ typedef struct SiFiveUState {
-> >> >
-> >> >      void *fdt;
-> >> >      int fdt_size;
-> >> > +
-> >> > +    bool start_in_flash;
-> >> >  } SiFiveUState;
-> >> >
-> >>
-> >> Regards,
-> >> Bin
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index 87dd6a6ece..c82e7ed52b 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -169,7 +169,8 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
+     /* NOTE: the env->pc value visible here will not be
+      * correct, but the value visible to the exception handler
+      * (riscv_cpu_do_interrupt) is correct */
+-
++    MemTxResult res;
++    MemTxAttrs attrs = MEMTXATTRS_UNSPECIFIED;
+     int mode = mmu_idx;
+ 
+     if (mode == PRV_M && access_type != MMU_INST_FETCH) {
+@@ -256,11 +257,16 @@ restart:
+             1 << MMU_DATA_LOAD, PRV_S)) {
+             return TRANSLATE_PMP_FAIL;
+         }
++
+ #if defined(TARGET_RISCV32)
+-        target_ulong pte = ldl_phys(cs->as, pte_addr);
++        target_ulong pte = address_space_ldl(cs->as, pte_addr, attrs, &res);
+ #elif defined(TARGET_RISCV64)
+-        target_ulong pte = ldq_phys(cs->as, pte_addr);
++        target_ulong pte = address_space_ldq(cs->as, pte_addr, attrs, &res);
+ #endif
++        if (res != MEMTX_OK) {
++            return TRANSLATE_FAIL;
++        }
++
+         hwaddr ppn = pte >> PTE_PPN_SHIFT;
+ 
+         if (!(pte & PTE_V)) {
+-- 
+2.23.0
+
 
