@@ -1,45 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iHd8z-0002Rf-2c
-	for mharc-qemu-riscv@gnu.org; Mon, 07 Oct 2019 20:14:25 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37103)
+	id 1iHd95-0002Xc-8z
+	for mharc-qemu-riscv@gnu.org; Mon, 07 Oct 2019 20:14:31 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:37156)
  by lists.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <bounce+d13a72.9b4e76-qemu-riscv=nongnu.org@fintelia.io>)
- id 1iHd8w-0002R0-LP
- for qemu-riscv@nongnu.org; Mon, 07 Oct 2019 20:14:24 -0400
+ id 1iHd92-0002V5-BW
+ for qemu-riscv@nongnu.org; Mon, 07 Oct 2019 20:14:29 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
  (envelope-from <bounce+d13a72.9b4e76-qemu-riscv=nongnu.org@fintelia.io>)
- id 1iHd8u-0005Hn-GL
- for qemu-riscv@nongnu.org; Mon, 07 Oct 2019 20:14:22 -0400
+ id 1iHd91-0005LM-1K
+ for qemu-riscv@nongnu.org; Mon, 07 Oct 2019 20:14:28 -0400
 Received: from rs224.mailgun.us ([209.61.151.224]:21472)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71)
  (envelope-from <bounce+d13a72.9b4e76-qemu-riscv=nongnu.org@fintelia.io>)
- id 1iHd8t-0005Gw-VK
- for qemu-riscv@nongnu.org; Mon, 07 Oct 2019 20:14:20 -0400
+ id 1iHd90-0005Gw-Cb
+ for qemu-riscv@nongnu.org; Mon, 07 Oct 2019 20:14:26 -0400
 DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=fintelia.io; q=dns/txt;
  s=pic; 
- t=1570493658; h=Content-Transfer-Encoding: MIME-Version: Message-Id:
- Date: Subject: To: From: Sender;
- bh=gP0eQg3wg3/BRnD4OucGfDqnuNj/+RvsVg+lwRViW68=;
- b=wH+eB1tBxVgOkj6U8QSIVb0SkBD2Z8CYz9i+8fAUnKhakDuu2oaulDWKtrooHYO9ZWjsY3hf
- 3xRlhnirem5UQWtNj+PwXikGX36yPjS5NvWY1kJgambp17B3eGymaib43XMGOZxBd5kIAdj3
- NCILdnpcSzT/UfHMhOHXaFavPZ8IhcTWcY/l4B5xMdxepCaHb21PkKzMf6/fula8jf6UuCs4
- ypd70F5aJGEVBZ4f2DxZT+55rYVrKIGJbtBQNgRCYEY6KEDMgCHnKYIfyLyB5KomsfqTJPyf
- txoIIXYmS1pMQa1F3ivz7GgUsXAggKv/7MsB+SbdMM2GacwdutOqug==
+ t=1570493666; h=Content-Transfer-Encoding: MIME-Version: References:
+ In-Reply-To: Message-Id: Date: Subject: Cc: To: From: Sender;
+ bh=gUUopECUHc7cg4bXJNiFx5+MQFSc9HWlEgYorCg8juM=;
+ b=Lh8WarIsK7LNDa0ABiFNj9TPgclGttGYh1CiEJRaBTDkQo9RK6N4ESpudydvq1+TR/o/cHaR
+ ZNVM8oWQ/docunS9N3ESvBFm7OUuPZmvOa1zHuM2u30tQ4gnf5eUHnVizruqj6mtRFAfJQc+
+ 5DYZMczNFfy3eQj/cDwVg2b/zhsY4MCL25HKSUCKldvcEdi3xCW0Erka5XoHsoNmD9kdD+OF
+ NA6YmYV2YTm6jXimjcF3qHbUj4ZshfL8D7AgQTP9hqfmpG5iDOPW0d8AaOjs8+kmJ9PivwPH
+ wSu8jWh38D+CWEl1laPNW3t/AILtSiO6QiFIRyiBMSqPBe0AR9Xc8w==
 X-Mailgun-Sending-Ip: 209.61.151.224
 X-Mailgun-Sid: WyJkNjk0ZSIsICJxZW11LXJpc2N2QG5vbmdudS5vcmciLCAiOWI0ZTc2Il0=
 Sender: jonathan@fintelia.io
 Received: from jonathan-ThinkPad-X1-Carbon.pdos.lcs.mit.edu
  (26-5-211.dynamic.csail.mit.edu [18.26.5.211])
- by mxa.mailgun.org with ESMTP id 5d9bd4d8.7f51c380ba28-smtp-out-n01;
- Tue, 08 Oct 2019 00:14:16 -0000 (UTC)
+ by mxa.mailgun.org with ESMTP id 5d9bd4de.7f51c380ba28-smtp-out-n01;
+ Tue, 08 Oct 2019 00:14:22 -0000 (UTC)
 From: Jonathan Behrens <jonathan@fintelia.io>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
-Subject: [PATCH v3 0/3] target/riscv: Expose "priv" register for GDB
-Date: Mon,  7 Oct 2019 20:13:15 -0400
-Message-Id: <20191008001318.219367-1-jonathan@fintelia.io>
+Cc: Jonathan Behrens <jonathan@fintelia.io>,
+ Palmer Dabbelt <palmer@sifive.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+Subject: [PATCH v3 1/3] target/riscv: Tell gdbstub the correct number of CSRs
+Date: Mon,  7 Oct 2019 20:13:16 -0400
+Message-Id: <20191008001318.219367-2-jonathan@fintelia.io>
 X-Mailer: git-send-email 2.23.0
+In-Reply-To: <20191008001318.219367-1-jonathan@fintelia.io>
+References: <20191008001318.219367-1-jonathan@fintelia.io>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
@@ -56,36 +63,38 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Oct 2019 00:14:24 -0000
+X-List-Received-Date: Tue, 08 Oct 2019 00:14:29 -0000
 
-The third patch in this series makes the priv virtual register writitable. I'm
-not entirely sure this is a good idea, so I split it out into its own patch. In
-particular, this change will conflict with the hypervisor extension work which
-assumes that the privilege mode does not change in unexpected cases.
+If the number of registers reported to the gdbstub code does not match the
+number in the associated XML file, then the register numbers used by the stub
+may get out of sync with a remote GDB instance.
 
-As pointed out in a previous version of this series, GDB actually contains some
-support already for the accessing the privilege mode via a virtual "priv"
-register, including to convert the values into human readable forms:
+Signed-off-by: Jonathan Behrens <jonathan@fintelia.io>
+---
+ target/riscv/gdbstub.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-(gdb) info reg priv
-priv           0x3	prv:3 [Machine]
-
-Changlog V3:
-- Break patch into series
-- Make priv a virtual register
-
-Changelog V2:
-- Use PRV_H and PRV_S instead of integer literals
-
-Jonathan Behrens (3)
-  target/riscv: Tell gdbstub the correct number of CSRs
-  target/riscv: Expose priv register for GDB for reads
-  target/riscv: Make the priv register writable by GDB
-
- configure                       |  4 ++--
- gdb-xml/riscv-32bit-virtual.xml | 11 +++++++++++
- gdb-xml/riscv-64bit-virtual.xml | 11 +++++++++++
- target/riscv/gdbstub.c          | 36 ++++++++++++++++++++++++++++++++++--
- 4 files changed, 58 insertions(+), 4 deletions(-)
-
+diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
+index ded140e8d8..cb5bfd3d50 100644
+--- a/target/riscv/gdbstub.c
++++ b/target/riscv/gdbstub.c
+@@ -384,7 +384,7 @@ void riscv_cpu_register_gdb_regs_for_features(CPUState *cs)
+     }
+ 
+     gdb_register_coprocessor(cs, riscv_gdb_get_csr, riscv_gdb_set_csr,
+-                             4096, "riscv-32bit-csr.xml", 0);
++                             240, "riscv-32bit-csr.xml", 0);
+ #elif defined(TARGET_RISCV64)
+     if (env->misa & RVF) {
+         gdb_register_coprocessor(cs, riscv_gdb_get_fpu, riscv_gdb_set_fpu,
+@@ -392,6 +392,6 @@ void riscv_cpu_register_gdb_regs_for_features(CPUState *cs)
+     }
+ 
+     gdb_register_coprocessor(cs, riscv_gdb_get_csr, riscv_gdb_set_csr,
+-                             4096, "riscv-64bit-csr.xml", 0);
++                             240, "riscv-64bit-csr.xml", 0);
+ #endif
+ }
+-- 
+2.23.0
 
