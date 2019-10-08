@@ -1,66 +1,77 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iHdIH-0002eu-D1
-	for mharc-qemu-riscv@gnu.org; Mon, 07 Oct 2019 20:24:01 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:38294)
+	id 1iHg1V-0008V4-99
+	for mharc-qemu-riscv@gnu.org; Mon, 07 Oct 2019 23:18:53 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:55494)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <bounce+d13a72.9b4e76-qemu-riscv=nongnu.org@fintelia.io>)
- id 1iHdIE-0002ei-LJ
- for qemu-riscv@nongnu.org; Mon, 07 Oct 2019 20:23:59 -0400
+ (envelope-from <richard.henderson@linaro.org>) id 1iHg1S-0008Ur-VX
+ for qemu-riscv@nongnu.org; Mon, 07 Oct 2019 23:18:51 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <bounce+d13a72.9b4e76-qemu-riscv=nongnu.org@fintelia.io>)
- id 1iHdID-0002xQ-Pm
- for qemu-riscv@nongnu.org; Mon, 07 Oct 2019 20:23:58 -0400
-Received: from rs224.mailgun.us ([209.61.151.224]:27100)
+ (envelope-from <richard.henderson@linaro.org>) id 1iHg1R-0000jL-Pl
+ for qemu-riscv@nongnu.org; Mon, 07 Oct 2019 23:18:50 -0400
+Received: from mail-yw1-xc43.google.com ([2607:f8b0:4864:20::c43]:41588)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71)
- (envelope-from <bounce+d13a72.9b4e76-qemu-riscv=nongnu.org@fintelia.io>)
- id 1iHdIC-0002vj-GX
- for qemu-riscv@nongnu.org; Mon, 07 Oct 2019 20:23:57 -0400
-DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=fintelia.io; q=dns/txt;
- s=pic; 
- t=1570494237; h=Content-Type: Cc: To: Subject: Message-ID: Date: From:
- In-Reply-To: References: MIME-Version: Sender;
- bh=OplKAgqTr65Hkpakpf37PaPcCQdfMS2D6asm2PWvOy4=;
- b=d+6AjTEQO9wGW9jKtJczeowzg+aXVds/alzGeAlcKUMvrRcNo9kfhdwetw8zbRfrC06+nzQt
- OdMBGupWKFkR5+Sf1VxQ8yXaLwgp7oNtRO1zDh2RwJ73VOL2XHc+SGMH8/WrdtM+DqTuJ20Q
- qGJ5tfqOtC97zI6vGYQokkEQfQrKS+VQFfiosydEJLfVlu/Abf10OHle0BKJrmbOm+bqzAjm
- LAxqzdr0gCpiu8DFr//R0rpB7m8Y5l9XIwQgVFFtP3GJc+GVdvkS0ES+yLPizQ9hzspuK/oi
- HNqHLMidF7dCMZ+zhyDq4gcnPHLJTjawkKLX93lxtgVBDdWlc8jzJA==
-X-Mailgun-Sending-Ip: 209.61.151.224
-X-Mailgun-Sid: WyJkNjk0ZSIsICJxZW11LXJpc2N2QG5vbmdudS5vcmciLCAiOWI0ZTc2Il0=
-Sender: jonathan@fintelia.io
-Received: from mail-lf1-f44.google.com (mail-lf1-f44.google.com
- [209.85.167.44])
- by mxa.mailgun.org with ESMTP id 5d9bd71a.7fbf7c6e7cb0-smtp-out-n03;
- Tue, 08 Oct 2019 00:23:54 -0000 (UTC)
-Received: by mail-lf1-f44.google.com with SMTP id w67so10577339lff.4;
- Mon, 07 Oct 2019 17:23:54 -0700 (PDT)
-X-Gm-Message-State: APjAAAUmVjAbFKkA2fl7bG/oQ5NeAR9qWYTyqmwHax+/AnhVg3jX3aJl
- ULIkPS+p1Ie2mPZO5tBY3gbcy9Dyv+tGp6f4LwY=
-X-Google-Smtp-Source: APXvYqxgwH0csB4WlZEBh4rxOfaL6INyur+bOXoUKRhgxa9t/gwefu6lc3XYGMJQtEbuL1/xeYYLfV0oZrRnUmXKeC0=
-X-Received: by 2002:a19:2489:: with SMTP id k131mr17852210lfk.52.1570494232310; 
- Mon, 07 Oct 2019 17:23:52 -0700 (PDT)
-MIME-Version: 1.0
-References: <20191004151614.81516-1-jonathan@fintelia.io>
- <CAKmqyKPFuyuC6sGCRGJGo2f_3=2z33MmuXHZov5R0pc7A9O9Jg@mail.gmail.com>
-In-Reply-To: <CAKmqyKPFuyuC6sGCRGJGo2f_3=2z33MmuXHZov5R0pc7A9O9Jg@mail.gmail.com>
-From: Jonathan Behrens <jonathan@fintelia.io>
-Date: Mon, 7 Oct 2019 20:22:47 -0400
-X-Gmail-Original-Message-ID: <CANnJOVGDcGrM5FY12GBurSTWWD++EKdrkUB5o-ZEOPsBm8RhQg@mail.gmail.com>
-Message-ID: <CANnJOVGDcGrM5FY12GBurSTWWD++EKdrkUB5o-ZEOPsBm8RhQg@mail.gmail.com>
-Subject: Re: [PATCH v2] target/riscv: Expose "priv" register for GDB
-To: Alistair Francis <alistair23@gmail.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, Palmer Dabbelt <palmer@sifive.com>,
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>, 
+ (Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
+ id 1iHg1R-0000j6-Kk
+ for qemu-riscv@nongnu.org; Mon, 07 Oct 2019 23:18:49 -0400
+Received: by mail-yw1-xc43.google.com with SMTP id 129so5934968ywb.8
+ for <qemu-riscv@nongnu.org>; Mon, 07 Oct 2019 20:18:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=subject:to:cc:references:from:openpgp:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=b5yIKmmNoKJrilF6g3EXjAEu9BhFAIhQDCBPbmUikMY=;
+ b=VYqkHCtAnHYMzjHqblHLvsMEANl7+Oyg7EJw9OLHD5H59u+zKMwBffPMIumEKUsU8t
+ zDRdEyIUiON7P8DwCE2jwR6CG/cMYdFYnLzs1lsd7wONmMY0BijxKyv8xxsmieur6Meg
+ BZxA+lENLR60/AKHlql6hLq7xwd5GQ77ewIzkZJzWrgVV9jcNRI9jMhbCe9P1XVcgOMk
+ zCRP9GWwp+6GfThmXDJw1wzyBVujGYBWjW8iBHfoKdiWYngTNtsliukvHKQc6MzsgeRx
+ 37OQD3Kxbz4FFqhyTXBsE+81vRHPMdDeZwtM19qY0CD85gUNkNb3rM6FCZZZJBNguaLK
+ j0ww==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
+ :date:user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=b5yIKmmNoKJrilF6g3EXjAEu9BhFAIhQDCBPbmUikMY=;
+ b=nxE/+alCwRwChL0L0zenno7vFj6/MhI67IpnQAW2fmAekSY5ibebyBiuxFUqpv8TX3
+ aRNzjVloMWgMYJvt/8WpyaNv2HeZf7Q04NBZ1vZPVQJqGFr4BjV4kG4wQ6mrdsSO2vyS
+ FH7401FGzQ8MJ8AlYzVkPj7OFbtPZipmDrwfvNYYzwk2ICZ6KES6YYFuoSP1QrC5V+UD
+ IgtnTIp458ggRWOIDOtJK1oA8cNy1vErIitNeYTtZ8GL5tRbBq2qQ5u9j0j1m0K1wxq1
+ iPlrlUEsFgTkttDVVVz7511QUzJIyiOk24ZKfoQO3EIdZsitPk3794SQ7a+Q9lmPRR/C
+ ichQ==
+X-Gm-Message-State: APjAAAXR4TRLGqq133rjPESuv6EbZRA0jbx6vtogCOaRXaGEbIEFfoEv
+ RXL7eM0uN3eZj3GlLBs++vu3eg==
+X-Google-Smtp-Source: APXvYqwVxZ1mFJGsFOjEybvI6UCk4L/2uklWE5f5Td+iWydo4mnk1Hql2GwBcMtDx3XmknDHiiG3xg==
+X-Received: by 2002:a0d:e301:: with SMTP id m1mr22389524ywe.243.1570504728607; 
+ Mon, 07 Oct 2019 20:18:48 -0700 (PDT)
+Received: from [192.168.1.44] (67.216.144.16.pool.hargray.net. [67.216.144.16])
+ by smtp.gmail.com with ESMTPSA id g1sm4282639ywk.53.2019.10.07.20.18.47
+ (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+ Mon, 07 Oct 2019 20:18:47 -0700 (PDT)
+Subject: Re: [PATCH] target/riscv: PMP violation due to wrong size parameter
+To: Dayeol Lee <dayeol@berkeley.edu>
+Cc: qemu-devel@nongnu.org, "open list:RISC-V TCG CPUs"
+ <qemu-riscv@nongnu.org>, Sagar Karandikar <sagark@eecs.berkeley.edu>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
- [fuzzy]
-X-Received-From: 209.61.151.224
+ Palmer Dabbelt <palmer@sifive.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>
+References: <20191007052813.25814-1-dayeol@berkeley.edu>
+ <5583387c-5c5b-8890-999b-2ba4d75cd69d@linaro.org>
+ <CACjxMEsw+Deh176JLP2aF4Pdkb_s8MiPApwMON-_K6ed61-Zyw@mail.gmail.com>
+ <3747223d-23ee-1f28-e165-b2b0c5746b68@linaro.org>
+ <CACjxMEtPRxTQdOYFL97G7aYXC6KTBuGY2avf1bPJLYGEpURh=Q@mail.gmail.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+Openpgp: preference=signencrypt
+Message-ID: <4cfde72b-9a31-a6c5-a7af-a3418a750f3a@linaro.org>
+Date: Mon, 7 Oct 2019 23:18:45 -0400
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.8.0
+MIME-Version: 1.0
+In-Reply-To: <CACjxMEtPRxTQdOYFL97G7aYXC6KTBuGY2avf1bPJLYGEpURh=Q@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2607:f8b0:4864:20::c43
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -72,29 +83,31 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Oct 2019 00:23:59 -0000
+X-List-Received-Date: Tue, 08 Oct 2019 03:18:52 -0000
 
-On Mon, Oct 7, 2019 at 2:36 PM Alistair Francis <alistair23@gmail.com> wrote:
-> On Fri, Oct 4, 2019 at 8:18 AM Jonathan Behrens <jonathan@fintelia.io> wrote:
-> > @@ -296,6 +302,14 @@ int riscv_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
-> >      } else if (n == 32) {
-> >          env->pc = ldtul_p(mem_buf);
-> >          return sizeof(target_ulong);
-> > +    } else if (n == 33) {
-> > +#ifndef CONFIG_USER_ONLY
-> > +        env->priv = ldtul_p(mem_buf) & 0x3;
-> > +        if (env->priv == PRV_H) {
-> > +            env->priv = PRV_S;
-> > +        }
->
-> Why have this? There is no PRV_H so we should never be in that privilege mode.
->
-> Alistair
+On 10/7/19 11:41 AM, Dayeol Lee wrote:
+> if pmp_hart_has_privs() gets addr=0x2000 and size=0,
+> pmp_hart_has_privs() will ALWAYS return false because the code assumes size > 0.
+> It checks if (addr) and (addr + size - 1) are within the PMP range for each PMP
+> entry.
 
-This is hopefully more clear in the next version, but the idea is that
-since GDB can try to set the privilege mode to *any* value this
-function needs to make sure that it isn't set to something unsupported
-like PRV_H.
+You certainly could do
 
-Jonathan
+    if (size == 0) {
+        size = -(addr | TARGET_PAGE_MASK);
+    }
+
+to assume that all bytes from addr to the end of the page are accessed.  That
+would avoid changing too much of the rest of the logic.
+
+That said, this code will continue to not work for mis-aligned boundaries.
+
+r~
+
+
+> (addr + size - 1) is supposed to be the last byte address of the memory access,
+> but it ends up with (addr - 1) if size = 0.
+> Thus, pmp_hart_has_privs() returns false as (addr - 1) = 0x1fff is within the
+> range, and addr = 0x2000 is out of the range (partial match violation).
+
 
