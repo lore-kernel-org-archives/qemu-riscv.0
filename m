@@ -1,63 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iHoff-0000Q2-Jy
-	for mharc-qemu-riscv@gnu.org; Tue, 08 Oct 2019 08:32:57 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:58796)
+	id 1iHq4r-0001Lz-Db
+	for mharc-qemu-riscv@gnu.org; Tue, 08 Oct 2019 10:03:01 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:46586)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <bmeng.cn@gmail.com>) id 1iHofb-0000Nq-M1
- for qemu-riscv@nongnu.org; Tue, 08 Oct 2019 08:32:52 -0400
+ (envelope-from <bounce+d13a72.9b4e76-qemu-riscv=nongnu.org@fintelia.io>)
+ id 1iHq4o-0001Ja-BB
+ for qemu-riscv@nongnu.org; Tue, 08 Oct 2019 10:02:59 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <bmeng.cn@gmail.com>) id 1iHofa-00052a-7K
- for qemu-riscv@nongnu.org; Tue, 08 Oct 2019 08:32:51 -0400
-Received: from mail-yw1-xc42.google.com ([2607:f8b0:4864:20::c42]:33316)
+ (envelope-from <bounce+d13a72.9b4e76-qemu-riscv=nongnu.org@fintelia.io>)
+ id 1iHq4n-0000gT-5E
+ for qemu-riscv@nongnu.org; Tue, 08 Oct 2019 10:02:58 -0400
+Received: from rs224.mailgun.us ([209.61.151.224]:12094)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
- id 1iHofX-0004iK-Po; Tue, 08 Oct 2019 08:32:47 -0400
-Received: by mail-yw1-xc42.google.com with SMTP id w140so4701798ywd.0;
- Tue, 08 Oct 2019 05:32:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=laQZPpYCWvsVBz1PuAewm2U9OUXfUMXrTOy5aXh8xIQ=;
- b=uc5+RcJAWT+x9DkD4X/LVe2Adi63siBZPBy7u3ZyUsweoc7pKq6cFOHwn1IrL7V5Z0
- EblbHmRilKMG2KVaehdj6Nru5bhSuhjBElSWZE7V5aRuYCaBOROkFk1f6QOYIjHNn334
- 5+AJBZUUWY6HenfX6w+XgyWDPVaIPK2GFuKjgMiLTgVWEhPliGl0xa917s8NAuzFLl/7
- rshXvckNnbtpmaIwwmoPVIZwTTuQBaQ4/MBHGOIaqD5BYAw63h6DnyXpEBHJTX8SJSdt
- qsuSjJp5feZqlBoewjTyPUvfxeuWmcEqDTMAhHnN7vPpF3ZZDJgS0xhIlsoCk0ApLIPR
- e/lw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=laQZPpYCWvsVBz1PuAewm2U9OUXfUMXrTOy5aXh8xIQ=;
- b=YBqdSBcWnKIkXQUyfNVoR9c+cTe72sIyq+vW9zbZvalDtNcoRc2vm3OUcC8ziecp62
- LwQhB0VHhMnCtzZoEMu3Q1BqMvD2Qvm78KPWRIuaenKxl/6t33mbG1XsX3xHKsgAX7NV
- o9SmY3ft92Jqrt60P+B5a9eDl7EhCYQuUJRJ8zsiwufIbbdkNULS6+rmYZ6bbxWYdEgR
- yQaYjNwCQNDYQE4r5FgPnslmUuYGYPWkkgFfbvnCuNgMS6kd+yhMp0owu8u9MNqpycO7
- 5OgTDiFdNcjQZMQyxKEPyfmjG9wC8fIKJ8zboWbeNwtQlYvWkKJvQksKSHEWYPVUx4CS
- 4SeQ==
-X-Gm-Message-State: APjAAAVXyRFGGygrjhsa8kl0XrqWrHJtulE1CRjIrN+gMPeogrbrU47q
- dvUlFx7prcDTSO9x+ZrCD7X2WG8L05fOHoP7ve8=
-X-Google-Smtp-Source: APXvYqwcfxlxKUxOGCOs9SwCenXSO0fm/JPEb6i9apLSOyzSYXtmE1gj8uLyxFRFZX+hbbYbYOqimHj3mkgOn0PlyRM=
-X-Received: by 2002:a81:4b41:: with SMTP id y62mr22951344ywa.67.1570537963429; 
- Tue, 08 Oct 2019 05:32:43 -0700 (PDT)
+ (Exim 4.71)
+ (envelope-from <bounce+d13a72.9b4e76-qemu-riscv=nongnu.org@fintelia.io>)
+ id 1iHq4m-0000eZ-PI
+ for qemu-riscv@nongnu.org; Tue, 08 Oct 2019 10:02:57 -0400
+DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=fintelia.io; q=dns/txt;
+ s=pic; 
+ t=1570543376; h=Content-Type: Cc: To: Subject: Message-ID: Date: From:
+ In-Reply-To: References: MIME-Version: Sender;
+ bh=8zNle5/VxdvMH7fjCV+Jj0vLf54BpetbGDTm4WTua4o=;
+ b=cpdzqGxUqWTnd6xOkP8O3mUyGCaUnhjjzfxdlS9ZQt9GuMqRu0Nw6EXcU7xjvXRBsr4jiWfL
+ 2JHu0ft+6PNmZDWFtq1bUWkb5eTf0zBB75aXB14fk+Ou1EMCbbMNuPrG9Rj73/3JCFifq5h1
+ EPJAigfTJ5GEeMMj5yX2Vq5O4WwLuvY2MZ06QIxyNU2JYFoENaQVkntpn6sP1FHoHBRbkU2h
+ CYM2tCqNVAy4bC0oy0VCli8xpk/nH0TB1K8b3EKocbZGtx5HY3zCeq4GmhqTXUcZg1neZsiN
+ VfBiMkd3oKH+qi3lV3xcfYzAUtlqPON5MiPsdlGvABkStuxG4S4YeQ==
+X-Mailgun-Sending-Ip: 209.61.151.224
+X-Mailgun-Sid: WyJkNjk0ZSIsICJxZW11LXJpc2N2QG5vbmdudS5vcmciLCAiOWI0ZTc2Il0=
+Sender: jonathan@fintelia.io
+Received: from mail-lj1-f177.google.com (mail-lj1-f177.google.com
+ [209.85.208.177])
+ by mxa.mailgun.org with ESMTP id 5d9c970f.7f81ed39b3b0-smtp-out-n02;
+ Tue, 08 Oct 2019 14:02:55 -0000 (UTC)
+Received: by mail-lj1-f177.google.com with SMTP id 7so17680467ljw.7;
+ Tue, 08 Oct 2019 07:02:54 -0700 (PDT)
+X-Gm-Message-State: APjAAAU0mzrKgzx168lPJGkNyDop/LMV5Ymbny2GjpAxukmoru7h+Zja
+ P3YBrtljV3mblaUzLUAmn48gRYkvlEw+u31DcHA=
+X-Google-Smtp-Source: APXvYqz98wF5Iiu8KibDWCUnQLdRlYUwWHT4FdlWRbKL/t5JuS9VIdDG+bXXVdDPMUkTBehqFWTpdWg0dYKlKWoVPX8=
+X-Received: by 2002:a2e:6e04:: with SMTP id j4mr19408425ljc.99.1570543372757; 
+ Tue, 08 Oct 2019 07:02:52 -0700 (PDT)
 MIME-Version: 1.0
 References: <20191008001318.219367-1-jonathan@fintelia.io>
- <20191008001318.219367-4-jonathan@fintelia.io>
-In-Reply-To: <20191008001318.219367-4-jonathan@fintelia.io>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Tue, 8 Oct 2019 20:32:30 +0800
-Message-ID: <CAEUhbmVGnVi_5LKFXYL3fMoPLHrLMYK0p_8MvnugiNkyh35TtQ@mail.gmail.com>
-Subject: Re: [PATCH v3 3/3] target/riscv: Make the priv register writable by
- GDB
-To: Jonathan Behrens <jonathan@fintelia.io>
+ <20191008001318.219367-2-jonathan@fintelia.io>
+ <CAEUhbmXHdj=-28inH5-ToS4tOAYOva1Lc1QCz6RGijkMrWhFdg@mail.gmail.com>
+In-Reply-To: <CAEUhbmXHdj=-28inH5-ToS4tOAYOva1Lc1QCz6RGijkMrWhFdg@mail.gmail.com>
+From: Jonathan Behrens <jonathan@fintelia.io>
+Date: Tue, 8 Oct 2019 10:01:47 -0400
+X-Gmail-Original-Message-ID: <CANnJOVH6a5m=bVhyk=cKbJ51TRv2XnimfrxHQEY4LmWD7sKXCQ@mail.gmail.com>
+Message-ID: <CANnJOVH6a5m=bVhyk=cKbJ51TRv2XnimfrxHQEY4LmWD7sKXCQ@mail.gmail.com>
+Subject: Re: [PATCH v3 1/3] target/riscv: Tell gdbstub the correct number of
+ CSRs
+To: Bin Meng <bmeng.cn@gmail.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  Palmer Dabbelt <palmer@sifive.com>, Alistair Francis <Alistair.Francis@wdc.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>, 
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
 Content-Type: text/plain; charset="UTF-8"
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2607:f8b0:4864:20::c42
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+ [fuzzy]
+X-Received-From: 209.61.151.224
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -69,21 +72,22 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Oct 2019 12:32:53 -0000
+X-List-Received-Date: Tue, 08 Oct 2019 14:03:00 -0000
 
-On Tue, Oct 8, 2019 at 8:20 AM Jonathan Behrens <jonathan@fintelia.io> wrote:
+On Tue, Oct 8, 2019 at 5:54 AM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
-> Currently only PRV_U, PRV_S and PRV_M are supported, so this patch ensures that
-> the privilege mode is set to one of them. Once support for the H-extension is
-> added, this code will also need to properly update the virtualization status
-> when switching between VU/VS-modes and M-mode.
+> On Tue, Oct 8, 2019 at 8:15 AM Jonathan Behrens <jonathan@fintelia.io> wrote:
+> >
+> > If the number of registers reported to the gdbstub code does not match the
+> > number in the associated XML file, then the register numbers used by the stub
+> > may get out of sync with a remote GDB instance.
 >
-> Signed-off-by: Jonathan Behrens <jonathan@fintelia.io>
-> ---
->  target/riscv/gdbstub.c | 9 +++++++++
->  1 file changed, 9 insertions(+)
->
+> I am not sure how to trigger the out of sync issue. Do you know how?
 
-Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
-Tested-by: Bin Meng <bmeng.cn@gmail.com>
+Try applying the next patch in the series without this one. Attempting
+to access the priv register will return E14 because GDB will think
+that priv has register number 309 (since the last register with an
+assigned regnum is fcsr=68 and then none of the 240 CSRs have assigned
+numbers) while the GDB stub will think that the number is 4165 (=33 +
+36 + 4096).
 
