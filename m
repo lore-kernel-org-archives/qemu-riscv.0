@@ -1,70 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iI0un-0002wH-V2
-	for mharc-qemu-riscv@gnu.org; Tue, 08 Oct 2019 21:37:21 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:41584)
+	id 1iIEBO-0002aD-UB
+	for mharc-qemu-riscv@gnu.org; Wed, 09 Oct 2019 11:47:23 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:45754)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <richard.henderson@linaro.org>) id 1iI0ul-0002s4-Ja
- for qemu-riscv@nongnu.org; Tue, 08 Oct 2019 21:37:20 -0400
+ (envelope-from <bmeng.cn@gmail.com>) id 1iI1t6-0001lf-84
+ for qemu-riscv@nongnu.org; Tue, 08 Oct 2019 22:39:41 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <richard.henderson@linaro.org>) id 1iI0uk-0005Im-7Q
- for qemu-riscv@nongnu.org; Tue, 08 Oct 2019 21:37:19 -0400
-Received: from mail-yb1-xb42.google.com ([2607:f8b0:4864:20::b42]:36735)
+ (envelope-from <bmeng.cn@gmail.com>) id 1iI1Tq-0007ow-47
+ for qemu-riscv@nongnu.org; Tue, 08 Oct 2019 22:13:34 -0400
+Received: from mail-yb1-xb44.google.com ([2607:f8b0:4864:20::b44]:41360)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
- id 1iI0uk-0005Ic-24
- for qemu-riscv@nongnu.org; Tue, 08 Oct 2019 21:37:18 -0400
-Received: by mail-yb1-xb42.google.com with SMTP id r2so207509ybg.3
- for <qemu-riscv@nongnu.org>; Tue, 08 Oct 2019 18:37:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=subject:to:cc:references:from:openpgp:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=2M0QElxVB/CyxdHrHz7p+BbYVSSnjE2w4SAIhBUcbv8=;
- b=XdZbuszpfeGTL8m/FRsqcqg1/ojxuja8/TdUl8oUztciGqycjlzMmCE0brSa5+eUJU
- XRpQ/KarU+I3LnASVWGLLVB90Dx4Qhn0j54ld08LN87ncCtTGv+bTH+c/yirMlGyYcd6
- 7uqEtU3YejDOMy0MYfquYh3SVWrIG/Whc+TPJZGYUd673om5HzEAAX+Sh8FyhndQZj1+
- +k3ZdLztGX23vCT69JTduhxxO4KgoUzKKF1hN+aybD7YyZVzq/rYt8FEMad3pP4LErv+
- IzoPbj/U/SO++6ExFqjJ+oGhXeStDlMTCINgCh+xfNYdQ9SmZJxhHf+fQ5ZVIjaX2JQ+
- 3zmg==
+ (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
+ id 1iI1Tn-0007mC-Ch; Tue, 08 Oct 2019 22:13:31 -0400
+Received: by mail-yb1-xb44.google.com with SMTP id 206so219037ybc.8;
+ Tue, 08 Oct 2019 19:13:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=5Yk7ePV9onB1hM/nMaz5Irva7XOHsONdnJ8bX+tDHUo=;
+ b=fbJpvmoKfzmLha+4IUh8EjsoqK1ea0YSFKLlzJnWznaJG5RYc6V8O1QDHK+ecN44QW
+ ARtgRuMYWzzMy3w85d8cJ2Y7PHuqoY7T0oLAxm5ZY1/AeRd6J0c2MCh6oDIWX2Q5/5i6
+ LMTqEhu8F8Q+AefGlPoSYHHecs3wu5rDYtooXc5ucxe4KpZHOKXKXuyupKuomvw5yuBy
+ Q7xY/oHQiGmQV34Ir1nBbVM9f+t+ruoS0e0vZJUzxgBVtbKmpXwn8f9KmlRJU2Pq1fQW
+ CFejQ0sE2EzvoXGa7gkVqgDdFV13Qodj2k81mGYqC9/vwtd25iGoTfQb4l265y6YolQ1
+ FATg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
- :date:user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=2M0QElxVB/CyxdHrHz7p+BbYVSSnjE2w4SAIhBUcbv8=;
- b=flw4p3bMcp984bBB4gT3CdGK5d5BBdCB5M4K0AaWohfD3qxM+TEXFG4xkk41bWWOtG
- g9ssFtWR0fsH/VoIJ9UYIqCzVX4uHULU2laSdu86/spgg5OodTXD09AeuB5//gU+6GtN
- QHIuKpd6U7Q+o/2MjMnTwiBKtLiuA5sx6u28LQAHlX2FwQUPatIdhrD5PJinJ7dza2sZ
- VxVyTASGPU2k9aIXPW7e+ychWcFeIFfpBrvkNce4Te/qD097RQcEu9IlnA/fKp7+JsHw
- nE2WvrTetx9q80K/2aT/bpF66Ugkr4cizcdoiA0RoN07DWY9oI6mGpCfPjYYV53CeGsj
- ss+A==
-X-Gm-Message-State: APjAAAWvCXFpkKvZuq2BoAm8oSPqfednOqcgI/1IZLtN810+Oyv0kRVs
- MKhevqWt+YRsi5qxC1oiyJ0KzQ==
-X-Google-Smtp-Source: APXvYqy78dDh8EifhxNIrXkqOIu2sFt9YcO71AwoqqWF0wd9nePaFu9g61vYxTTK7VKuYmIBw1LTng==
-X-Received: by 2002:a25:824c:: with SMTP id d12mr473415ybn.217.1570585036957; 
- Tue, 08 Oct 2019 18:37:16 -0700 (PDT)
-Received: from [192.168.1.44] (67.216.144.16.pool.hargray.net. [67.216.144.16])
- by smtp.gmail.com with ESMTPSA id h65sm220235ywa.62.2019.10.08.18.37.15
- (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
- Tue, 08 Oct 2019 18:37:16 -0700 (PDT)
-Subject: Re: [PATCH v1 1/1] target/riscv: Remove atomic accesses to MIP CSR
-To: Alistair Francis <alistair.francis@wdc.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: alistair23@gmail.com, palmer@sifive.com
-References: <34350af3b53fadc50bfe4f1fbc452c7d3a8fe8f7.1570572202.git.alistair.francis@wdc.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-Openpgp: preference=signencrypt
-Message-ID: <8b816d13-0243-562c-7fa9-96f350935895@linaro.org>
-Date: Tue, 8 Oct 2019 21:37:11 -0400
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.8.0
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=5Yk7ePV9onB1hM/nMaz5Irva7XOHsONdnJ8bX+tDHUo=;
+ b=jxn49iBk3G8bSmfvQQ+j+UivUodKCC2tajtcK8J9ZHWqCQFgFDknPVdEWNcn/f5nJA
+ 9WaprLlvnoQG+Xy2yRM1taa/IYdGnDwrwZtiBPfOIkjajuP8ReUjLPfj27fbEPW3mTBW
+ OgW9y2acqRGnwMpV9hR2A99S0UqLlQaXdODk5Qm2WbR1AMQkTBYKA6e+REtHMhYRLlT1
+ zo96jQgRkt0lQZP4oapJmx7IRWxM8sFRElTgLn+sibBXqyuiSy7Kgfv2rpA6wO8y8Ckc
+ W3m9oUl77YGV1xIWxF1Z2/n6qTN4wkOVyLB1zE80emhKrOkk97tLVvUQa0U/MkcSkjyt
+ Cv3w==
+X-Gm-Message-State: APjAAAWYX0Tp/dT5FLWvyyf42U4s58fymgkz2qUoEzQouZq4y5G895Gj
+ 0yJNdR6rMfMs8GRYmA7zRImBEPGDB43AxXrVMkI=
+X-Google-Smtp-Source: APXvYqz/O7Ad+ta9sdjU2d/WfCJd6toygPp0zYOMExFeMZjd4xoBlQlmxLXibyurc5r5M0FgLtE7P5rKtccHb9A+jto=
+X-Received: by 2002:a25:cd88:: with SMTP id d130mr474752ybf.65.1570587210487; 
+ Tue, 08 Oct 2019 19:13:30 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <34350af3b53fadc50bfe4f1fbc452c7d3a8fe8f7.1570572202.git.alistair.francis@wdc.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+References: <cover.1570577500.git.alistair.francis@wdc.com>
+ <03cc7cf5c8400dffd6af60f06fe637f117747d9a.1570577500.git.alistair.francis@wdc.com>
+In-Reply-To: <03cc7cf5c8400dffd6af60f06fe637f117747d9a.1570577500.git.alistair.francis@wdc.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Wed, 9 Oct 2019 10:13:19 +0800
+Message-ID: <CAEUhbmUu+Un91AvHq5G6RCoqccSd4Rg3NwxW9xfk_ykjWqrxzw@mail.gmail.com>
+Subject: Re: [PATCH v3 4/7] riscv/sifive_u: Add the start-in-flash property
+To: Alistair Francis <alistair.francis@wdc.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Alistair Francis <alistair23@gmail.com>, Palmer Dabbelt <palmer@sifive.com>
+Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::b42
+X-Received-From: 2607:f8b0:4864:20::b44
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -76,23 +66,26 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Oct 2019 01:37:20 -0000
+X-List-Received-Date: Wed, 09 Oct 2019 02:39:41 -0000
 
-On 10/8/19 6:04 PM, Alistair Francis wrote:
-> Instead of relying on atomics to access the MIP register let's update
-> our helper function to instead just lock the IO mutex thread before
-> writing. This follows the same concept as used in PPC for handling
-> interrupts
-> 
+On Wed, Oct 9, 2019 at 7:41 AM Alistair Francis
+<alistair.francis@wdc.com> wrote:
+>
+> Add a property that when set to true QEMU will jump from the ROM code to
+> the start of flash memory instead of DRAM which is the default
+> behaviour.
+>
 > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 > ---
->  target/riscv/cpu.c        |  5 ++--
->  target/riscv/cpu.h        |  9 --------
->  target/riscv/cpu_helper.c | 48 +++++++++++++++------------------------
->  target/riscv/csr.c        |  2 +-
->  4 files changed, 21 insertions(+), 43 deletions(-)
+> v3:
+>  - Use the start_addr variable instead of editing reset vector
+>  - Fix function names
+>
+>  hw/riscv/sifive_u.c         | 30 +++++++++++++++++++++++++++++-
+>  include/hw/riscv/sifive_u.h |  2 ++
+>  2 files changed, 31 insertions(+), 1 deletion(-)
+>
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-
-r~
+Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+Tested-by: Bin Meng <bmeng.cn@gmail.com>
 
