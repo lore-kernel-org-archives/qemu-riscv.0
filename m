@@ -1,60 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iIEBO-0002aD-UB
-	for mharc-qemu-riscv@gnu.org; Wed, 09 Oct 2019 11:47:23 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:45754)
+	id 1iIJJo-0002TK-7U
+	for mharc-qemu-riscv@gnu.org; Wed, 09 Oct 2019 17:16:24 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:46439)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <bmeng.cn@gmail.com>) id 1iI1t6-0001lf-84
- for qemu-riscv@nongnu.org; Tue, 08 Oct 2019 22:39:41 -0400
+ (envelope-from <palmer@dabbelt.com>) id 1iIJJj-0002Rz-T1
+ for qemu-riscv@nongnu.org; Wed, 09 Oct 2019 17:16:22 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <bmeng.cn@gmail.com>) id 1iI1Tq-0007ow-47
- for qemu-riscv@nongnu.org; Tue, 08 Oct 2019 22:13:34 -0400
-Received: from mail-yb1-xb44.google.com ([2607:f8b0:4864:20::b44]:41360)
+ (envelope-from <palmer@dabbelt.com>) id 1iIJJi-00031h-Dx
+ for qemu-riscv@nongnu.org; Wed, 09 Oct 2019 17:16:19 -0400
+Received: from mail-pl1-f195.google.com ([209.85.214.195]:42178)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
- id 1iI1Tn-0007mC-Ch; Tue, 08 Oct 2019 22:13:31 -0400
-Received: by mail-yb1-xb44.google.com with SMTP id 206so219037ybc.8;
- Tue, 08 Oct 2019 19:13:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=5Yk7ePV9onB1hM/nMaz5Irva7XOHsONdnJ8bX+tDHUo=;
- b=fbJpvmoKfzmLha+4IUh8EjsoqK1ea0YSFKLlzJnWznaJG5RYc6V8O1QDHK+ecN44QW
- ARtgRuMYWzzMy3w85d8cJ2Y7PHuqoY7T0oLAxm5ZY1/AeRd6J0c2MCh6oDIWX2Q5/5i6
- LMTqEhu8F8Q+AefGlPoSYHHecs3wu5rDYtooXc5ucxe4KpZHOKXKXuyupKuomvw5yuBy
- Q7xY/oHQiGmQV34Ir1nBbVM9f+t+ruoS0e0vZJUzxgBVtbKmpXwn8f9KmlRJU2Pq1fQW
- CFejQ0sE2EzvoXGa7gkVqgDdFV13Qodj2k81mGYqC9/vwtd25iGoTfQb4l265y6YolQ1
- FATg==
+ (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1iIJJg-0002zL-H2
+ for qemu-riscv@nongnu.org; Wed, 09 Oct 2019 17:16:16 -0400
+Received: by mail-pl1-f195.google.com with SMTP id e5so1659454pls.9
+ for <qemu-riscv@nongnu.org>; Wed, 09 Oct 2019 14:16:13 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=5Yk7ePV9onB1hM/nMaz5Irva7XOHsONdnJ8bX+tDHUo=;
- b=jxn49iBk3G8bSmfvQQ+j+UivUodKCC2tajtcK8J9ZHWqCQFgFDknPVdEWNcn/f5nJA
- 9WaprLlvnoQG+Xy2yRM1taa/IYdGnDwrwZtiBPfOIkjajuP8ReUjLPfj27fbEPW3mTBW
- OgW9y2acqRGnwMpV9hR2A99S0UqLlQaXdODk5Qm2WbR1AMQkTBYKA6e+REtHMhYRLlT1
- zo96jQgRkt0lQZP4oapJmx7IRWxM8sFRElTgLn+sibBXqyuiSy7Kgfv2rpA6wO8y8Ckc
- W3m9oUl77YGV1xIWxF1Z2/n6qTN4wkOVyLB1zE80emhKrOkk97tLVvUQa0U/MkcSkjyt
- Cv3w==
-X-Gm-Message-State: APjAAAWYX0Tp/dT5FLWvyyf42U4s58fymgkz2qUoEzQouZq4y5G895Gj
- 0yJNdR6rMfMs8GRYmA7zRImBEPGDB43AxXrVMkI=
-X-Google-Smtp-Source: APXvYqz/O7Ad+ta9sdjU2d/WfCJd6toygPp0zYOMExFeMZjd4xoBlQlmxLXibyurc5r5M0FgLtE7P5rKtccHb9A+jto=
-X-Received: by 2002:a25:cd88:: with SMTP id d130mr474752ybf.65.1570587210487; 
- Tue, 08 Oct 2019 19:13:30 -0700 (PDT)
+ h=x-gm-message-state:subject:date:message-id:mime-version
+ :content-transfer-encoding:cc:from:to;
+ bh=H8fNamXSWGVsAQ92a4GC/hqc7AkmkMqrSnuj2ieP89M=;
+ b=lc/DxU2iWFxYnwUGaqtHXTI78gG5eLl7FjzLJGnI/S1xuHMkj2ABabl9YHLlfgmnjh
+ HCBRvmSiQUL2qFMKShdFG6hHzaD6H/G9wdIb036pJkN3d+9aug++4oyIR7tmLV8kbUoK
+ SIFTzcHdgOAdXlwMw7HsAXeej+wXaNUgzPKi71uD5/KPbII94EfQMwpZxaXI/0kWgD9C
+ X4g6aWIeiyfK0s4SSklFdmRKlJCJ8JrnbKudRAuXhQ2A2yvHQ+zS8SJDzQh3yYXhIpPd
+ PyWB8K6OLkVQDg5vg9quTfxVcmn/+4ELhpdT/dV+uXkaeXhGgNDjwLSy20xRS+zCzfhw
+ Rs6A==
+X-Gm-Message-State: APjAAAXONQ07Y95R5zdCAAilkXEe4Kxuj618rjcbW7L39E3b7enFgwLp
+ x8ZF5MqI6lx/wZ2Sb06CmaXj1Izvets=
+X-Google-Smtp-Source: APXvYqw+f8eixv2AE2dlkWm8FE1Q5gaynqq37O0wzyb/PfVA0NR0LLyAiNqBmi2V+jNFfIFAajwUsQ==
+X-Received: by 2002:a17:902:9a41:: with SMTP id
+ x1mr5090007plv.331.1570655771648; 
+ Wed, 09 Oct 2019 14:16:11 -0700 (PDT)
+Received: from localhost ([12.206.222.5])
+ by smtp.gmail.com with ESMTPSA id l62sm4341432pfl.167.2019.10.09.14.16.09
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 09 Oct 2019 14:16:09 -0700 (PDT)
+Subject: [PATCH] RISC-V: fcvt can set fflags, so set FS accordingly
+Date: Wed,  9 Oct 2019 14:15:41 -0700
+Message-Id: <20191009211541.9937-1-palmer@sifive.com>
+X-Mailer: git-send-email 2.21.0
 MIME-Version: 1.0
-References: <cover.1570577500.git.alistair.francis@wdc.com>
- <03cc7cf5c8400dffd6af60f06fe637f117747d9a.1570577500.git.alistair.francis@wdc.com>
-In-Reply-To: <03cc7cf5c8400dffd6af60f06fe637f117747d9a.1570577500.git.alistair.francis@wdc.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Wed, 9 Oct 2019 10:13:19 +0800
-Message-ID: <CAEUhbmUu+Un91AvHq5G6RCoqccSd4Rg3NwxW9xfk_ykjWqrxzw@mail.gmail.com>
-Subject: Re: [PATCH v3 4/7] riscv/sifive_u: Add the start-in-flash property
-To: Alistair Francis <alistair.francis@wdc.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Alistair Francis <alistair23@gmail.com>, Palmer Dabbelt <palmer@sifive.com>
-Content-Type: text/plain; charset="UTF-8"
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2607:f8b0:4864:20::b44
+Content-Transfer-Encoding: 8bit
+Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@sifive.com>
+From: Palmer Dabbelt <palmer@sifive.com>
+To: qemu-riscv@nongnu.org
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+ [fuzzy]
+X-Received-From: 209.85.214.195
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -66,26 +58,84 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Oct 2019 02:39:41 -0000
+X-List-Received-Date: Wed, 09 Oct 2019 21:16:22 -0000
 
-On Wed, Oct 9, 2019 at 7:41 AM Alistair Francis
-<alistair.francis@wdc.com> wrote:
->
-> Add a property that when set to true QEMU will jump from the ROM code to
-> the start of flash memory instead of DRAM which is the default
-> behaviour.
->
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> ---
-> v3:
->  - Use the start_addr variable instead of editing reset vector
->  - Fix function names
->
->  hw/riscv/sifive_u.c         | 30 +++++++++++++++++++++++++++++-
->  include/hw/riscv/sifive_u.h |  2 ++
->  2 files changed, 31 insertions(+), 1 deletion(-)
->
+A user pinged me to say "my floating point heavy code works in user mode
+but not system mode", which I'm guessing is the result of a lazy FP
+save/restore issue as those still crop up from time to time as long tail
+bugs.  I figured it was worth giving the FP stuff a look to see if
+anything jumps out, and it turns out that there is a bug: converting
+float to integer can set the invalid flag, which is supposed to mark FS
+as dirty, but the emulation routine doesn't do so.
 
-Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
-Tested-by: Bin Meng <bmeng.cn@gmail.com>
+This patch unconditionally marks FS as dirty for fcvt instructions that
+convert into X registers (fcvt into F registers already did so).  I
+haven't actually tried to manifest a bug here, but as far as I can tell
+the soft float stuff does set the invalid flag.
+
+Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
+---
+ target/riscv/insn_trans/trans_rvd.inc.c | 2 ++
+ target/riscv/insn_trans/trans_rvf.inc.c | 4 ++++
+ 2 files changed, 6 insertions(+)
+
+diff --git a/target/riscv/insn_trans/trans_rvd.inc.c b/target/riscv/insn_trans/trans_rvd.inc.c
+index 393fa0248c..8611e95486 100644
+--- a/target/riscv/insn_trans/trans_rvd.inc.c
++++ b/target/riscv/insn_trans/trans_rvd.inc.c
+@@ -371,6 +371,7 @@ static bool trans_fcvt_l_d(DisasContext *ctx, arg_fcvt_l_d *a)
+     gen_helper_fcvt_l_d(t0, cpu_env, cpu_fpr[a->rs1]);
+     gen_set_gpr(a->rd, t0);
+     tcg_temp_free(t0);
++    mark_fs_dirty(ctx);
+     return true;
+ }
+ 
+@@ -384,6 +385,7 @@ static bool trans_fcvt_lu_d(DisasContext *ctx, arg_fcvt_lu_d *a)
+     gen_helper_fcvt_lu_d(t0, cpu_env, cpu_fpr[a->rs1]);
+     gen_set_gpr(a->rd, t0);
+     tcg_temp_free(t0);
++    mark_fs_dirty(ctx);
+     return true;
+ }
+ 
+diff --git a/target/riscv/insn_trans/trans_rvf.inc.c b/target/riscv/insn_trans/trans_rvf.inc.c
+index 172dbfa919..87a250a3f2 100644
+--- a/target/riscv/insn_trans/trans_rvf.inc.c
++++ b/target/riscv/insn_trans/trans_rvf.inc.c
+@@ -237,6 +237,7 @@ static bool trans_fcvt_w_s(DisasContext *ctx, arg_fcvt_w_s *a)
+     gen_helper_fcvt_w_s(t0, cpu_env, cpu_fpr[a->rs1]);
+     gen_set_gpr(a->rd, t0);
+     tcg_temp_free(t0);
++    mark_fs_dirty(ctx);
+ 
+     return true;
+ }
+@@ -251,6 +252,7 @@ static bool trans_fcvt_wu_s(DisasContext *ctx, arg_fcvt_wu_s *a)
+     gen_helper_fcvt_wu_s(t0, cpu_env, cpu_fpr[a->rs1]);
+     gen_set_gpr(a->rd, t0);
+     tcg_temp_free(t0);
++    mark_fs_dirty(ctx);
+ 
+     return true;
+ }
+@@ -389,6 +391,7 @@ static bool trans_fcvt_l_s(DisasContext *ctx, arg_fcvt_l_s *a)
+     gen_helper_fcvt_l_s(t0, cpu_env, cpu_fpr[a->rs1]);
+     gen_set_gpr(a->rd, t0);
+     tcg_temp_free(t0);
++    mark_fs_dirty(ctx);
+     return true;
+ }
+ 
+@@ -402,6 +405,7 @@ static bool trans_fcvt_lu_s(DisasContext *ctx, arg_fcvt_lu_s *a)
+     gen_helper_fcvt_lu_s(t0, cpu_env, cpu_fpr[a->rs1]);
+     gen_set_gpr(a->rd, t0);
+     tcg_temp_free(t0);
++    mark_fs_dirty(ctx);
+     return true;
+ }
+ 
+-- 
+2.21.0
+
 
