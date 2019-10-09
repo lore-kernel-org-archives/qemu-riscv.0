@@ -1,74 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iHz2V-0000r5-Oy
-	for mharc-qemu-riscv@gnu.org; Tue, 08 Oct 2019 19:37:11 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:33100)
+	id 1iI0un-0002wH-V2
+	for mharc-qemu-riscv@gnu.org; Tue, 08 Oct 2019 21:37:21 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:41584)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <prvs=177211c83=alistair.francis@wdc.com>)
- id 1iHz2Q-0000jl-9f
- for qemu-riscv@nongnu.org; Tue, 08 Oct 2019 19:37:07 -0400
+ (envelope-from <richard.henderson@linaro.org>) id 1iI0ul-0002s4-Ja
+ for qemu-riscv@nongnu.org; Tue, 08 Oct 2019 21:37:20 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <prvs=177211c83=alistair.francis@wdc.com>)
- id 1iHz2O-0006WM-Tw
- for qemu-riscv@nongnu.org; Tue, 08 Oct 2019 19:37:06 -0400
-Received: from esa4.hgst.iphmx.com ([216.71.154.42]:55070)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <prvs=177211c83=alistair.francis@wdc.com>)
- id 1iHz2L-0006Tc-8c; Tue, 08 Oct 2019 19:37:01 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1570577821; x=1602113821;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=RU8L3oxCCu9rwkGr2v5lEfYto4Cw/aINw92350YjUp8=;
- b=j4gwr/67d++55lsKAfTX5SREEy/BOfu91AVGg09el7+xrNVe3dVU7CQ6
- D+krLEeAVqc/uMeXVGIfNkxlRTsjHNo1+MZt7evKVvYUruHPVnYCaRqj8
- u2ohsFutcil1zaeYZ3esJIr4b8Hr8AR3UasdQPlCnAqmBfjoYVuazU7Cz
- 6aF5jky3Bqy/4n52SmCm1KgLJr1kG2MmRztzjVnaeIKmH4/WlFVdwwKQW
- 5tNqk/jDN04tALm7hsRn8JWGJ0LRRoH2POR6F+/bwk/CiZC4cF3gNgUKt
- ELR7k+fCWac1UYGJETMkEdGA01CdRcwtgiRZb2r2eG6R1X8aMD66oblLn Q==;
-IronPort-SDR: Cuo5cqX/2nmKQ+v+Tu7PD/7LmJTAVXPBxz6Uh2GuZC49/ZBE9hdvFXL0B6ajMqZIsM8+RWMFG3
- J1eNtWdk2ejEeriHmrOc4A0k60zlJBcR4Zb01YxovQsKsLLIXMN47QQnt4YJ4CUXbYPDxRvAuu
- GVrJpeQIWowx1OY7fVRWG4tCfLc7tOVHxseCeMevcVXPwyy/6lfEe22cffvq4NTwe+VSB7Kw+E
- rMypuN1NDPSz3zt37K6aZkERmv7bS9t+W/5th09uxNYajzMwypHOymRjyq4dhmAOzOZ3dcrg9A
- N/c=
-X-IronPort-AV: E=Sophos;i="5.67,273,1566835200"; d="scan'208";a="120085879"
-Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
- ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 09 Oct 2019 07:37:00 +0800
-IronPort-SDR: DcFjVJqdBQgI9fazqAJ6grSV6crstLZWuM7SJ6/dg/Y8TcYFno/V33fPKTxWfc+9tpVHspBEwM
- IGLo/bTCNukhL4vHHvNoLdHpTv913zZ4AjV5m3VXqT3vJObX3RUI5Br2ivAXPjsCaW0jCtY0hi
- cCOYLjlLyVC99DTtbJdfl0j83BbQ24cXVyb+ZExcQ7TjMmpSU5p8dxi28zDjTi3V+oIqsetMZB
- 7cqOYFBnNcdwjPMKuB5oYXXcVGyHiYogezBPvetOO6IO1vvLyaWZWCTPfRv3rIabQvYksB+tXg
- 4XDksQv/+AlwFCl1L3GZRReH
-Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
- by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 08 Oct 2019 16:32:55 -0700
-IronPort-SDR: Oey/FfhnXJjAxlfNX5/vzfwxAy6t+zqluSyETm0CX8W/Z6UF+joQnKtLrKV1pH3ml/YR4Th854
- H1PUnLWmApxdcTWHaaXnfITt7SDFSWPLCH8tRZd9eg/dW4iXfPovNAXGHERlhHCNRTLiol2zFd
- AUrF8Qi2zojGT2TfIFGmEWkBwJeBcl1GGFey4fjykZSbrFYIAZiaqimgDviGQkekC6Li6+mkTr
- mhQu7630s6mYK5Rt4Lnf6tTQoP0sHL11vHexRXXeFhYg9VpbFbAtdhJ6Ydu5R6xjKZwQX+Bngv
- Ot8=
-WDCIronportException: Internal
-Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
- risc6-mainframe.int.fusionio.com) ([10.196.157.58])
- by uls-op-cesaip02.wdc.com with ESMTP; 08 Oct 2019 16:37:01 -0700
-From: Alistair Francis <alistair.francis@wdc.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: palmer@sifive.com,
-	alistair.francis@wdc.com,
-	alistair23@gmail.com
-Subject: [PATCH v3 7/7] riscv/virt: Jump to pflash if specified
-Date: Tue,  8 Oct 2019 16:32:29 -0700
-Message-Id: <17eaa7913cfb731de7311e0e63b26723706073eb.1570577500.git.alistair.francis@wdc.com>
-X-Mailer: git-send-email 2.23.0
-In-Reply-To: <cover.1570577500.git.alistair.francis@wdc.com>
-References: <cover.1570577500.git.alistair.francis@wdc.com>
+ (envelope-from <richard.henderson@linaro.org>) id 1iI0uk-0005Im-7Q
+ for qemu-riscv@nongnu.org; Tue, 08 Oct 2019 21:37:19 -0400
+Received: from mail-yb1-xb42.google.com ([2607:f8b0:4864:20::b42]:36735)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
+ id 1iI0uk-0005Ic-24
+ for qemu-riscv@nongnu.org; Tue, 08 Oct 2019 21:37:18 -0400
+Received: by mail-yb1-xb42.google.com with SMTP id r2so207509ybg.3
+ for <qemu-riscv@nongnu.org>; Tue, 08 Oct 2019 18:37:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=subject:to:cc:references:from:openpgp:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=2M0QElxVB/CyxdHrHz7p+BbYVSSnjE2w4SAIhBUcbv8=;
+ b=XdZbuszpfeGTL8m/FRsqcqg1/ojxuja8/TdUl8oUztciGqycjlzMmCE0brSa5+eUJU
+ XRpQ/KarU+I3LnASVWGLLVB90Dx4Qhn0j54ld08LN87ncCtTGv+bTH+c/yirMlGyYcd6
+ 7uqEtU3YejDOMy0MYfquYh3SVWrIG/Whc+TPJZGYUd673om5HzEAAX+Sh8FyhndQZj1+
+ +k3ZdLztGX23vCT69JTduhxxO4KgoUzKKF1hN+aybD7YyZVzq/rYt8FEMad3pP4LErv+
+ IzoPbj/U/SO++6ExFqjJ+oGhXeStDlMTCINgCh+xfNYdQ9SmZJxhHf+fQ5ZVIjaX2JQ+
+ 3zmg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:subject:to:cc:references:from:openpgp:message-id
+ :date:user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=2M0QElxVB/CyxdHrHz7p+BbYVSSnjE2w4SAIhBUcbv8=;
+ b=flw4p3bMcp984bBB4gT3CdGK5d5BBdCB5M4K0AaWohfD3qxM+TEXFG4xkk41bWWOtG
+ g9ssFtWR0fsH/VoIJ9UYIqCzVX4uHULU2laSdu86/spgg5OodTXD09AeuB5//gU+6GtN
+ QHIuKpd6U7Q+o/2MjMnTwiBKtLiuA5sx6u28LQAHlX2FwQUPatIdhrD5PJinJ7dza2sZ
+ VxVyTASGPU2k9aIXPW7e+ychWcFeIFfpBrvkNce4Te/qD097RQcEu9IlnA/fKp7+JsHw
+ nE2WvrTetx9q80K/2aT/bpF66Ugkr4cizcdoiA0RoN07DWY9oI6mGpCfPjYYV53CeGsj
+ ss+A==
+X-Gm-Message-State: APjAAAWvCXFpkKvZuq2BoAm8oSPqfednOqcgI/1IZLtN810+Oyv0kRVs
+ MKhevqWt+YRsi5qxC1oiyJ0KzQ==
+X-Google-Smtp-Source: APXvYqy78dDh8EifhxNIrXkqOIu2sFt9YcO71AwoqqWF0wd9nePaFu9g61vYxTTK7VKuYmIBw1LTng==
+X-Received: by 2002:a25:824c:: with SMTP id d12mr473415ybn.217.1570585036957; 
+ Tue, 08 Oct 2019 18:37:16 -0700 (PDT)
+Received: from [192.168.1.44] (67.216.144.16.pool.hargray.net. [67.216.144.16])
+ by smtp.gmail.com with ESMTPSA id h65sm220235ywa.62.2019.10.08.18.37.15
+ (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+ Tue, 08 Oct 2019 18:37:16 -0700 (PDT)
+Subject: Re: [PATCH v1 1/1] target/riscv: Remove atomic accesses to MIP CSR
+To: Alistair Francis <alistair.francis@wdc.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: alistair23@gmail.com, palmer@sifive.com
+References: <34350af3b53fadc50bfe4f1fbc452c7d3a8fe8f7.1570572202.git.alistair.francis@wdc.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+Openpgp: preference=signencrypt
+Message-ID: <8b816d13-0243-562c-7fa9-96f350935895@linaro.org>
+Date: Tue, 8 Oct 2019 21:37:11 -0400
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.8.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-detected-operating-system: by eggs.gnu.org: FreeBSD 9.x [fuzzy]
-X-Received-From: 216.71.154.42
+In-Reply-To: <34350af3b53fadc50bfe4f1fbc452c7d3a8fe8f7.1570572202.git.alistair.francis@wdc.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2607:f8b0:4864:20::b42
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -80,56 +76,23 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Oct 2019 23:37:08 -0000
+X-List-Received-Date: Wed, 09 Oct 2019 01:37:20 -0000
 
-If the user supplied pflash to QEMU then change the reset code to jump
-to the pflash base address instead of the DRAM base address.
+On 10/8/19 6:04 PM, Alistair Francis wrote:
+> Instead of relying on atomics to access the MIP register let's update
+> our helper function to instead just lock the IO mutex thread before
+> writing. This follows the same concept as used in PPC for handling
+> interrupts
+> 
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> ---
+>  target/riscv/cpu.c        |  5 ++--
+>  target/riscv/cpu.h        |  9 --------
+>  target/riscv/cpu_helper.c | 48 +++++++++++++++------------------------
+>  target/riscv/csr.c        |  2 +-
+>  4 files changed, 21 insertions(+), 43 deletions(-)
 
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@redhat.com>
-Tested-by: Bin Meng <bmeng.cn@gmail.com>
----
- hw/riscv/virt.c | 11 ++++++++++-
- 1 file changed, 10 insertions(+), 1 deletion(-)
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index ad29e14d5f..a79d16d99a 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -445,6 +445,7 @@ static void riscv_virt_board_init(MachineState *machine)
-     MemoryRegion *mask_rom = g_new(MemoryRegion, 1);
-     char *plic_hart_config;
-     size_t plic_hart_config_len;
-+    target_ulong start_addr = memmap[VIRT_DRAM].base;
-     int i;
-     unsigned int smp_cpus = machine->smp.cpus;
- 
-@@ -491,6 +492,14 @@ static void riscv_virt_board_init(MachineState *machine)
-         }
-     }
- 
-+    if (drive_get(IF_PFLASH, 0, 0)) {
-+        /*
-+         * Pflash was supplied, let's overwrite the address we jump to after
-+         * reset to the base of the flash.
-+         */
-+        start_addr = virt_memmap[VIRT_FLASH].base;
-+    }
-+
-     /* reset vector */
-     uint32_t reset_vec[8] = {
-         0x00000297,                  /* 1:  auipc  t0, %pcrel_hi(dtb) */
-@@ -503,7 +512,7 @@ static void riscv_virt_board_init(MachineState *machine)
- #endif
-         0x00028067,                  /*     jr     t0 */
-         0x00000000,
--        memmap[VIRT_DRAM].base,      /* start: .dword memmap[VIRT_DRAM].base */
-+        start_addr,                  /* start: .dword */
-         0x00000000,
-                                      /* dtb: */
-     };
--- 
-2.23.0
-
+r~
 
