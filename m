@@ -1,25 +1,25 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iIxSb-0000ZC-RX
-	for mharc-qemu-riscv@gnu.org; Fri, 11 Oct 2019 12:08:09 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:38004)
+	id 1iIxSd-0000b8-4k
+	for mharc-qemu-riscv@gnu.org; Fri, 11 Oct 2019 12:08:12 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:38017)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <vsementsov@virtuozzo.com>) id 1iIxSU-0000Nb-Ug
- for qemu-riscv@nongnu.org; Fri, 11 Oct 2019 12:08:07 -0400
+ (envelope-from <vsementsov@virtuozzo.com>) id 1iIxSW-0000Pi-7f
+ for qemu-riscv@nongnu.org; Fri, 11 Oct 2019 12:08:08 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <vsementsov@virtuozzo.com>) id 1iIxSQ-0005kK-Um
- for qemu-riscv@nongnu.org; Fri, 11 Oct 2019 12:08:02 -0400
-Received: from relay.sw.ru ([185.231.240.75]:48110)
+ (envelope-from <vsementsov@virtuozzo.com>) id 1iIxSR-0005kt-Q8
+ for qemu-riscv@nongnu.org; Fri, 11 Oct 2019 12:08:04 -0400
+Received: from relay.sw.ru ([185.231.240.75]:48100)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <vsementsov@virtuozzo.com>)
- id 1iIxRj-0004GG-LO; Fri, 11 Oct 2019 12:07:15 -0400
+ id 1iIxRj-0004GL-Mi; Fri, 11 Oct 2019 12:07:16 -0400
 Received: from [10.94.3.0] (helo=kvm.qa.sw.ru)
  by relay.sw.ru with esmtp (Exim 4.92.2)
  (envelope-from <vsementsov@virtuozzo.com>)
- id 1iIxQb-0003XG-BC; Fri, 11 Oct 2019 19:06:05 +0300
+ id 1iIxQb-0003XG-Ro; Fri, 11 Oct 2019 19:06:05 +0300
 From: Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>
 To: qemu-devel@nongnu.org
 Cc: armbru@redhat.com, vsementsov@virtuozzo.com,
- Eric Blake <eblake@redhat.com>, Gerd Hoffmann <kraxel@redhat.com>,
+ Gerd Hoffmann <kraxel@redhat.com>,
  "Gonglei (Arei)" <arei.gonglei@huawei.com>,
  Eduardo Habkost <ehabkost@redhat.com>, Igor Mammedov <imammedo@redhat.com>,
  Laurent Vivier <lvivier@redhat.com>, Amit Shah <amit@kernel.org>,
@@ -29,8 +29,8 @@ Cc: armbru@redhat.com, vsementsov@virtuozzo.com,
  Paolo Bonzini <pbonzini@redhat.com>, Stefan Hajnoczi <stefanha@redhat.com>,
  Fam Zheng <fam@euphon.net>, Stefan Weil <sw@weilnetz.de>,
  Ronnie Sahlberg <ronniesahlberg@gmail.com>, Peter Lieven <pl@kamp.de>,
- "Denis V. Lunev" <den@openvz.org>, Alberto Garcia <berto@igalia.com>,
- Jason Dillaman <dillaman@redhat.com>,
+ Eric Blake <eblake@redhat.com>, "Denis V. Lunev" <den@openvz.org>,
+ Alberto Garcia <berto@igalia.com>, Jason Dillaman <dillaman@redhat.com>,
  Wen Congyang <wencongyang2@huawei.com>,
  Xie Changlong <xiechanglong.d@gmail.com>, Liu Yuan <namei.unix@gmail.com>,
  "Richard W.M. Jones" <rjones@redhat.com>, Jeff Cody <codyprime@gmail.com>,
@@ -89,9 +89,9 @@ Cc: armbru@redhat.com, vsementsov@virtuozzo.com,
  integration@gluster.org, sheepdog@lists.wpkg.org, qemu-arm@nongnu.org,
  xen-devel@lists.xenproject.org, qemu-ppc@nongnu.org, qemu-s390x@nongnu.org,
  qemu-riscv@nongnu.org
-Subject: [RFC v5 024/126] error: auto propagated local_err
-Date: Fri, 11 Oct 2019 19:04:10 +0300
-Message-Id: <20191011160552.22907-25-vsementsov@virtuozzo.com>
+Subject: [RFC v5 026/126] python: add commit-per-subsystem.py
+Date: Fri, 11 Oct 2019 19:04:12 +0300
+Message-Id: <20191011160552.22907-27-vsementsov@virtuozzo.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <20191011160552.22907-1-vsementsov@virtuozzo.com>
 References: <20191011160552.22907-1-vsementsov@virtuozzo.com>
@@ -111,37 +111,11 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Oct 2019 16:08:07 -0000
+X-List-Received-Date: Fri, 11 Oct 2019 16:08:09 -0000
 
-Here is introduced ERRP_AUTO_PROPAGATE macro, to be used at start of
-functions with errp OUT parameter.
-
-It has three goals:
-
-1. Fix issue with error_fatal & error_prepend/error_append_hint: user
-can't see this additional information, because exit() happens in
-error_setg earlier than information is added. [Reported by Greg Kurz]
-
-2. Fix issue with error_abort & error_propagate: when we wrap
-error_abort by local_err+error_propagate, resulting coredump will
-refer to error_propagate and not to the place where error happened.
-(the macro itself doesn't fix the issue, but it allows to [3.] drop all
-local_err+error_propagate pattern, which will definitely fix the issue)
-[Reported by Kevin Wolf]
-
-3. Drop local_err+error_propagate pattern, which is used to workaround
-void functions with errp parameter, when caller wants to know resulting
-status. (Note: actually these functions could be merely updated to
-return int error code).
-
-To achieve these goals, we need to add invocation of the macro at start
-of functions, which needs error_prepend/error_append_hint (1.); add
-invocation of the macro at start of functions which do
-local_err+error_propagate scenario the check errors, drop local errors
-from them and just use *errp instead (2., 3.).
+Add script to automatically commit tree-wide changes per-subsystem.
 
 Signed-off-by: Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>
-Reviewed-by: Eric Blake <eblake@redhat.com>
 ---
 
 CC: Gerd Hoffmann <kraxel@redhat.com>
@@ -246,58 +220,220 @@ CC: qemu-ppc@nongnu.org
 CC: qemu-s390x@nongnu.org
 CC: qemu-riscv@nongnu.org
 
- include/qapi/error.h | 38 ++++++++++++++++++++++++++++++++++++++
- 1 file changed, 38 insertions(+)
+ python/commit-per-subsystem.py | 204 +++++++++++++++++++++++++++++++++
+ 1 file changed, 204 insertions(+)
+ create mode 100755 python/commit-per-subsystem.py
 
-diff --git a/include/qapi/error.h b/include/qapi/error.h
-index d6898d833b..47238d9065 100644
---- a/include/qapi/error.h
-+++ b/include/qapi/error.h
-@@ -345,6 +345,44 @@ void error_set_internal(Error **errp,
-                         ErrorClass err_class, const char *fmt, ...)
-     GCC_FMT_ATTR(6, 7);
- 
-+typedef struct ErrorPropagator {
-+    Error *local_err;
-+    Error **errp;
-+} ErrorPropagator;
+diff --git a/python/commit-per-subsystem.py b/python/commit-per-subsystem.py
+new file mode 100755
+index 0000000000..2ccf84cb15
+--- /dev/null
++++ b/python/commit-per-subsystem.py
+@@ -0,0 +1,204 @@
++#!/usr/bin/env python3
++#
++# Copyright (c) 2019 Virtuozzo International GmbH
++#
++# This program is free software; you can redistribute it and/or modify
++# it under the terms of the GNU General Public License as published by
++# the Free Software Foundation; either version 2 of the License, or
++# (at your option) any later version.
++#
++# This program is distributed in the hope that it will be useful,
++# but WITHOUT ANY WARRANTY; without even the implied warranty of
++# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++# GNU General Public License for more details.
++#
++# You should have received a copy of the GNU General Public License
++# along with this program.  If not, see <http://www.gnu.org/licenses/>.
++#
 +
-+static inline void error_propagator_cleanup(ErrorPropagator *prop)
-+{
-+    error_propagate(prop->errp, prop->local_err);
++import subprocess
++import sys
++import os
++import glob
++
++
++def git_add(pattern):
++    subprocess.run(['git', 'add', pattern])
++
++
++def git_commit(msg):
++    subprocess.run(['git', 'commit', '-m', msg], capture_output=True)
++
++
++def git_changed_files():
++    ret = subprocess.check_output(['git', 'diff', '--name-only'], encoding='utf-8').split('\n')
++    if ret[-1] == '':
++        del ret[-1]
++    return ret
++
++
++maintainers = sys.argv[1]
++message = sys.argv[2].strip()
++
++subsystem = None
++
++remap = {
++    'Block layer core': 'block',
++    'Block Jobs': 'block',
++    'Dirty Bitmaps': 'block',
++    'Block QAPI, monitor, command line': 'block',
++    'Block I/O path': 'block',
++    'Throttling infrastructure': 'block',
++    'Architecture support': 's390x',
++    'Guest CPU Cores (KVM)': 'kvm',
++    'Guest CPU Cores (Xen)': 'xen',
++    'Guest CPU cores (TCG)': 'tcg',
++    'Network Block Device (NBD)': 'nbd',
++    'Parallel NOR Flash devices': 'pflash',
++    'Firmware configuration (fw_cfg)': 'fw_cfg',
++    'Block SCSI subsystem': 'scsi',
++    'Network device backends': 'net',
++    'Netmap network backend': 'net',
++    'Host Memory Backends': 'hostmem',
++    'Cryptodev Backends': 'cryptodev',
++    'QEMU Guest Agent': 'qga',
++    'COLO Framework': 'colo',
++    'Command line option argument parsing': 'cmdline',
++    'Character device backends': 'chardev'
 +}
 +
-+G_DEFINE_AUTO_CLEANUP_CLEAR_FUNC(ErrorPropagator, error_propagator_cleanup);
 +
-+/*
-+ * ERRP_AUTO_PROPAGATE
-+ *
-+ * This macro is created to be the first line of a function with Error **errp
-+ * OUT parameter. It's needed only in cases where we want to use error_prepend,
-+ * error_append_hint or dereference *errp. It's still safe (but useless) in
-+ * other cases.
-+ *
-+ * If errp is NULL or points to error_fatal, it is rewritten to point to a
-+ * local Error object, which will be automatically propagated to the original
-+ * errp on function exit (see error_propagator_cleanup).
-+ *
-+ * After invocation of this macro it is always safe to dereference errp
-+ * (as it's not NULL anymore) and to add information (by error_prepend or
-+ * error_append_hint)
-+ * (as, if it was error_fatal, we swapped it with a local_error to be
-+ * propagated on cleanup).
-+ *
-+ * Note: we don't wrap the error_abort case, as we want resulting coredump
-+ * to point to the place where the error happened, not to error_propagate.
-+ */
-+#define ERRP_AUTO_PROPAGATE()                                  \
-+    g_auto(ErrorPropagator) _auto_errp_prop = {.errp = errp};  \
-+    errp = ((errp == NULL || *errp == error_fatal)             \
-+            ? &_auto_errp_prop.local_err : errp)
++class Maintainers:
++    def add(self, subsystem, path, mapper, mapper_name, glob_count=1):
++        if subsystem in remap:
++            subsystem = remap[subsystem]
++        if subsystem not in self.subsystems:
++            self.subsystems.append(subsystem)
 +
- /*
-  * Special error destination to abort on error.
-  * See error_setg() and error_propagate() for details.
++        if path[-1] == '/':
++            path = path[:-1]
++
++        if path in mapper:
++            if mapper[path][1] == glob_count:
++                print('Warning: "{}" both in "{}" and "{}" in {} mapper with '
++                      'same glob-count={}. {} ignored for this path.'.format(
++                        path, mapper[path][0], subsystem, mapper_name, glob_count,
++                          subsystem))
++                return
++            if mapper[path][1] < glob_count:
++                # silently ignore worse match
++                return
++
++        mapper[path] = (subsystem, glob_count)
++
++    def __init__(self, file_name):
++        self.map_file = {}
++        self.map_glob_file = {}
++        self.map_dir = {}
++        self.map_glob_dir = {}
++        self.map_unmaintained_dir = {
++            'python': ('python', 1),
++            'hw/misc': ('misc', 1)
++        }
++        self.subsystems = ['python', 'misc']
++        subsystem = None
++
++        with open(file_name) as f:
++            mode2 = False
++            prevline = ''
++            for line in f:
++                line = line.rstrip()
++                if not line:
++                    continue
++                if len(line) >= 2 and line[1] == ':':
++                    if line[0] == 'F':
++                        fname = line[3:]
++                        if fname in ['*', '*/']:
++                            continue
++                        if os.path.isfile(fname):
++                            self.add(subsystem, fname, self.map_file, 'file')
++                        elif os.path.isdir(fname):
++                            self.add(subsystem, fname, self.map_dir, 'dir')
++                        else:
++                            paths = glob.glob(fname)
++                            if not paths:
++                                print('Warning: nothing corresponds to "{}"'.format(fname))
++                                continue
++
++                            n = len(paths)
++                            for f in paths:
++                                if os.path.isfile(f):
++                                    self.add(subsystem, f, self.map_glob_file, 'glob-file', n)
++                                else:
++                                    assert os.path.isdir(f)
++                                    self.add(subsystem, f, self.map_glob_dir, 'glob-dir', n)
++                elif line[:3] == '---':
++                    subsystem = prevline
++                    if subsystem == 'Devices':
++                        mode2 = True
++                elif mode2:
++                    subsystem = line
++                prevline = line
++
++    def find_in_map_dir(self, file_name, mapper):
++        while file_name != '' and file_name not in mapper:
++            file_name = os.path.dirname(file_name)
++
++        return None if file_name == '' else mapper[file_name][0]
++
++    def find_in_map_file(self, file_name, mapper):
++        if file_name in mapper:
++            return mapper[file_name][0]
++
++    def find_subsystem(self, file_name):
++        s = self.find_in_map_file(file_name, self.map_file)
++        if s is not None:
++            return s
++
++        s = self.find_in_map_file(file_name, self.map_glob_file)
++        if s is not None:
++            return s
++
++        s = self.find_in_map_dir(file_name, self.map_dir)
++        if s is not None:
++            return s
++
++        s = self.find_in_map_dir(file_name, self.map_glob_dir)
++        if s is not None:
++            return s
++
++        s = self.find_in_map_dir(file_name, self.map_unmaintained_dir)
++        if s is not None:
++            return s
++
++        self.subsystems.append(file_name)
++        return file_name
++
++
++def commit(subsystem):
++    msg = subsystem
++    if msg in remap:
++        msg = remap[msg]
++    msg += ': ' + message
++    git_commit(msg)
++
++mnt = Maintainers(maintainers)
++res = {}
++for f in git_changed_files():
++    s = mnt.find_subsystem(f)
++    if s in res:
++        res[s].append(f)
++    else:
++        res[s] = [f]
++
++for s in mnt.subsystems:
++    if s in res:
++        print(s)
++        for f in res[s]:
++            print('  ', f)
++
++for s in mnt.subsystems:
++    if s in res:
++        for f in res[s]:
++            git_add(f)
++        commit(s)
 -- 
 2.21.0
 
