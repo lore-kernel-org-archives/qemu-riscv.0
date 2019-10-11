@@ -1,27 +1,28 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iIyKY-00082i-9a
-	for mharc-qemu-riscv@gnu.org; Fri, 11 Oct 2019 13:03:54 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:46156)
+	id 1iIyU0-0004xr-LE
+	for mharc-qemu-riscv@gnu.org; Fri, 11 Oct 2019 13:13:40 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47512)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <eblake@redhat.com>) id 1iIyKU-0007wb-FI
- for qemu-riscv@nongnu.org; Fri, 11 Oct 2019 13:03:51 -0400
+ (envelope-from <eblake@redhat.com>) id 1iIyTx-0004tM-T2
+ for qemu-riscv@nongnu.org; Fri, 11 Oct 2019 13:13:39 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <eblake@redhat.com>) id 1iIyKT-0004j1-B2
- for qemu-riscv@nongnu.org; Fri, 11 Oct 2019 13:03:50 -0400
-Received: from mx1.redhat.com ([209.132.183.28]:53958)
+ (envelope-from <eblake@redhat.com>) id 1iIyTw-0008Lu-Jy
+ for qemu-riscv@nongnu.org; Fri, 11 Oct 2019 13:13:37 -0400
+Received: from mx1.redhat.com ([209.132.183.28]:55802)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <eblake@redhat.com>)
- id 1iIyKF-0004eJ-Ko; Fri, 11 Oct 2019 13:03:36 -0400
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
- [10.5.11.12])
+ id 1iIyTl-0008D5-Qi; Fri, 11 Oct 2019 13:13:26 -0400
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
+ [10.5.11.13])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id 26D51307D868;
- Fri, 11 Oct 2019 17:03:34 +0000 (UTC)
+ by mx1.redhat.com (Postfix) with ESMTPS id ABE5711A23;
+ Fri, 11 Oct 2019 17:13:24 +0000 (UTC)
 Received: from [10.3.116.168] (ovpn-116-168.phx2.redhat.com [10.3.116.168])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 419B660C05;
- Fri, 11 Oct 2019 17:02:52 +0000 (UTC)
-Subject: Re: [RFC v5 000/126] error: auto propagated local_err
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id F02B560923;
+ Fri, 11 Oct 2019 17:12:49 +0000 (UTC)
+Subject: Re: [RFC v5 025/126] scripts: add coccinelle script to use auto
+ propagated errp
 To: Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>,
  qemu-devel@nongnu.org
 Cc: armbru@redhat.com, Gerd Hoffmann <kraxel@redhat.com>,
@@ -91,20 +92,21 @@ Cc: armbru@redhat.com, Gerd Hoffmann <kraxel@redhat.com>,
  xen-devel@lists.xenproject.org, qemu-ppc@nongnu.org, qemu-s390x@nongnu.org,
  qemu-riscv@nongnu.org
 References: <20191011160552.22907-1-vsementsov@virtuozzo.com>
+ <20191011160552.22907-26-vsementsov@virtuozzo.com>
 From: Eric Blake <eblake@redhat.com>
 Organization: Red Hat, Inc.
-Message-ID: <b4195e1b-c78d-a58e-d34c-eddbd8d1f438@redhat.com>
-Date: Fri, 11 Oct 2019 12:02:51 -0500
+Message-ID: <5dd4d642-7ea6-42a2-66fc-6d6710b77b8d@redhat.com>
+Date: Fri, 11 Oct 2019 12:12:49 -0500
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.1.0
 MIME-Version: 1.0
-In-Reply-To: <20191011160552.22907-1-vsementsov@virtuozzo.com>
+In-Reply-To: <20191011160552.22907-26-vsementsov@virtuozzo.com>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
 X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.48]); Fri, 11 Oct 2019 17:03:34 +0000 (UTC)
+ (mx1.redhat.com [10.5.110.28]); Fri, 11 Oct 2019 17:13:25 +0000 (UTC)
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
  [fuzzy]
 X-Received-From: 209.132.183.28
@@ -119,31 +121,133 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Oct 2019 17:03:52 -0000
+X-List-Received-Date: Fri, 11 Oct 2019 17:13:39 -0000
 
-On 10/11/19 11:03 AM, Vladimir Sementsov-Ogievskiy wrote:
-> Hi all!
+On 10/11/19 11:04 AM, Vladimir Sementsov-Ogievskiy wrote:
+> Signed-off-by: Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>
+> ---
 > 
-> At the request of Markus: full version of errp propagation. Let's look
-> at it. Cover as much as possible, except inserting macro invocation
-> where it's not necessary.
-> 
-> It's huge, and so it's an RFC.
 
-Is there a repo containing these patches, to make it easier to play with 
-them locally without having to 'git am' the entire 126 messages?
-
-
->   util/qemu-sockets.c                           |  31 +--
->   vl.c                                          |  14 +-
->   python/commit-per-subsystem.py                | 204 ++++++++++++++
->   scripts/coccinelle/auto-propagated-errp.cocci | 118 ++++++++
->   341 files changed, 3851 insertions(+), 4455 deletions(-)
->   create mode 100755 python/commit-per-subsystem.py
+>   scripts/coccinelle/auto-propagated-errp.cocci | 118 ++++++++++++++++++
+>   1 file changed, 118 insertions(+)
 >   create mode 100644 scripts/coccinelle/auto-propagated-errp.cocci
+> 
+> diff --git a/scripts/coccinelle/auto-propagated-errp.cocci b/scripts/coccinelle/auto-propagated-errp.cocci
+> new file mode 100644
+> index 0000000000..d9731620aa
+> --- /dev/null
+> +++ b/scripts/coccinelle/auto-propagated-errp.cocci
 
-So, whether or not we take commit-per-subsystem.py, the overall series 
-appears to be a nice reduction in lines of code.
+> +@rule1@
+> +// Drop local_err
+> +identifier fn, local_err;
+> +symbol errp;
+> +@@
+> +
+> + fn(..., Error **errp, ...)
+> + {
+> +     <...
+> +-    Error *local_err = NULL;
+> +     ...>
+> + }
+> +
+
+So our goal is to automate removal of all local_err (including when it 
+is spelled err)...
+
+> +@@
+> +// Handle pattern with goto, otherwise we'll finish up
+> +// with labels at function end which will not compile.
+> +identifier rule1.fn;
+> +identifier rule1.local_err;
+> +identifier OUT;
+> +@@
+> +
+> + fn(...)
+> + {
+> +     <...
+> +-    goto OUT;
+> ++    return;
+> +     ...>
+> +- OUT:
+> +-    error_propagate(errp, local_err);
+> + }
+> +
+
+this dangling label cleanup makes sense
+
+> +@@
+> +identifier rule1.fn;
+> +identifier rule1.local_err;
+> +@@
+> +
+> + fn(...)
+> + {
+> +     <...
+> +(
+> +-    error_free(local_err);
+> +-    local_err = NULL;
+> ++    error_free_errp(errp);
+
+This does not make sense - error_free_errp() is not defined prior to 
+this series or anywhere in patches 1-24, if I'm reading it correctly.
+
+> +|
+> +-    error_free(local_err);
+> ++    error_free_errp(errp);
+
+and again
+
+> +|
+> +-    error_report_err(local_err);
+> ++    error_report_errp(errp);
+> +|
+> +-    warn_report_err(local_err);
+> ++    warn_report_errp(errp);
+> +|
+> +-    error_propagate_prepend(errp, local_err,
+> ++    error_prepend(errp,
+> +                              ...);
+> +|
+> +-    error_propagate(errp, local_err);
+> +)
+> +     ...>
+> + }
+> +
+
+It looks like once this script is run, error_propagate_prepend() will 
+have no clients.  Is there a non-generated cleanup patch that removes it 
+(and once it is removed, it can also be removed from the .cocci script 
+as no further clients will reappear later)?
+
+
+> +@@
+> +identifier rule1.fn;
+> +identifier rule1.local_err;
+> +@@
+> +
+> + fn(...)
+> + {
+> +     <...
+> +(
+> +-    &local_err
+> ++    errp
+> +|
+> +-    local_err
+> ++    *errp
+> +)
+> +     ...>
+> + }
+> +
+> +@@
+> +symbol errp;
+> +@@
+> +
+> +- *errp != NULL
+> ++ *errp
+> 
+
+Seems to make sense.
 
 -- 
 Eric Blake, Principal Software Engineer
