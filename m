@@ -1,112 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iIzSe-0004yB-N3
-	for mharc-qemu-riscv@gnu.org; Fri, 11 Oct 2019 14:16:20 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:56155)
+	id 1iJ3KT-0004vH-P9
+	for mharc-qemu-riscv@gnu.org; Fri, 11 Oct 2019 18:24:09 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:33669)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <eblake@redhat.com>) id 1iIzSZ-0004sB-7r
- for qemu-riscv@nongnu.org; Fri, 11 Oct 2019 14:16:16 -0400
+ (envelope-from <alistair23@gmail.com>) id 1iJ3KQ-0004uh-DA
+ for qemu-riscv@nongnu.org; Fri, 11 Oct 2019 18:24:07 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <eblake@redhat.com>) id 1iIzSY-0001qo-3L
- for qemu-riscv@nongnu.org; Fri, 11 Oct 2019 14:16:15 -0400
-Received: from mx1.redhat.com ([209.132.183.28]:55686)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <eblake@redhat.com>)
- id 1iIzSH-0001ag-9L; Fri, 11 Oct 2019 14:15:57 -0400
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
- [10.5.11.12])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id 8E21C7BDA5;
- Fri, 11 Oct 2019 18:15:54 +0000 (UTC)
-Received: from [10.3.116.168] (ovpn-116-168.phx2.redhat.com [10.3.116.168])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 42A2C60BF4;
- Fri, 11 Oct 2019 18:15:16 +0000 (UTC)
-Subject: Re: [RFC v5 025/126] scripts: add coccinelle script to use auto
- propagated errp
-From: Eric Blake <eblake@redhat.com>
-To: Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>,
- qemu-devel@nongnu.org
-Cc: Stefan Hajnoczi <stefanha@redhat.com>, Jeff Cody <codyprime@gmail.com>,
- Jan Kiszka <jan.kiszka@siemens.com>, Alberto Garcia <berto@igalia.com>,
- Hailiang Zhang <zhang.zhanghailiang@huawei.com>, qemu-block@nongnu.org,
- Aleksandar Rikalo <arikalo@wavecomp.com>, Halil Pasic <pasic@linux.ibm.com>,
- =?UTF-8?Q?Herv=c3=a9_Poussineau?= <hpoussin@reactos.org>,
- Anthony Perard <anthony.perard@citrix.com>,
- Samuel Thibault <samuel.thibault@ens-lyon.org>,
- =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>,
- Anthony Green <green@moxielogic.com>, Laurent Vivier <lvivier@redhat.com>,
- Eduardo Habkost <ehabkost@redhat.com>,
- Xie Changlong <xiechanglong.d@gmail.com>, Peter Lieven <pl@kamp.de>,
- "Dr. David Alan Gilbert" <dgilbert@redhat.com>,
- Beniamino Galvani <b.galvani@gmail.com>, Eric Auger <eric.auger@redhat.com>,
- Alex Williamson <alex.williamson@redhat.com>,
- Ronnie Sahlberg <ronniesahlberg@gmail.com>, John Snow <jsnow@redhat.com>,
- Richard Henderson <rth@twiddle.net>, Kevin Wolf <kwolf@redhat.com>,
- Andrew Jeffery <andrew@aj.id.au>, Chris Wulff <crwulff@gmail.com>,
- Subbaraya Sundeep <sundeep.lkml@gmail.com>, Michael Walle
- <michael@walle.cc>, qemu-ppc@nongnu.org,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Igor Mammedov <imammedo@redhat.com>, Fam Zheng <fam@euphon.net>,
- Peter Maydell <peter.maydell@linaro.org>, sheepdog@lists.wpkg.org,
- Matthew Rosato <mjrosato@linux.ibm.com>, David Hildenbrand
- <david@redhat.com>, Palmer Dabbelt <palmer@sifive.com>,
- Thomas Huth <thuth@redhat.com>, Max Filippov <jcmvbkbc@gmail.com>,
- "Denis V. Lunev" <den@openvz.org>, Hannes Reinecke <hare@suse.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- "Gonglei (Arei)" <arei.gonglei@huawei.com>, Liu Yuan <namei.unix@gmail.com>,
- Artyom Tarasenko <atar4qemu@gmail.com>, Eric Farman <farman@linux.ibm.com>,
- Amit Shah <amit@kernel.org>, Stefan Weil <sw@weilnetz.de>,
- Greg Kurz <groug@kaod.org>, Yuval Shaia <yuval.shaia@oracle.com>,
- qemu-s390x@nongnu.org, qemu-arm@nongnu.org,
- Peter Chubb <peter.chubb@nicta.com.au>, =?UTF-8?Q?C=c3=a9dric_Le_Goater?=
- <clg@kaod.org>, Stafford Horne <shorne@gmail.com>, qemu-riscv@nongnu.org,
- Cornelia Huck <cohuck@redhat.com>,
- Aleksandar Markovic <amarkovic@wavecomp.com>,
- Aurelien Jarno <aurelien@aurel32.net>, Paul Burton <pburton@wavecomp.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, Paul Durrant <paul@xen.org>,
- Jason Wang <jasowang@redhat.com>, Gerd Hoffmann <kraxel@redhat.com>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Guan Xuetao <gxt@mprc.pku.edu.cn>, Ari Sundholm <ari@tuxera.com>,
- Juan Quintela <quintela@redhat.com>, Michael Roth
- <mdroth@linux.vnet.ibm.com>, Christian Borntraeger <borntraeger@de.ibm.com>,
- Joel Stanley <joel@jms.id.au>, Jason Dillaman <dillaman@redhat.com>,
- Antony Pavlov <antonynpavlov@gmail.com>, xen-devel@lists.xenproject.org,
- integration@gluster.org, Laszlo Ersek <lersek@redhat.com>,
- "Richard W.M. Jones" <rjones@redhat.com>,
- Andrew Baumann <Andrew.Baumann@microsoft.com>, Max Reitz
- <mreitz@redhat.com>, "Michael S. Tsirkin" <mst@redhat.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Vincenzo Maffione <v.maffione@gmail.com>, Marek Vasut <marex@denx.de>,
- armbru@redhat.com, =?UTF-8?Q?Marc-Andr=c3=a9_Lureau?=
- <marcandre.lureau@redhat.com>, Alistair Francis <alistair@alistair23.me>,
- Pavel Dovgalyuk <pavel.dovgaluk@ispras.ru>,
- Giuseppe Lettieri <g.lettieri@iet.unipi.it>, Luigi Rizzo
- <rizzo@iet.unipi.it>, David Gibson <david@gibson.dropbear.id.au>,
- Tony Krowiak <akrowiak@linux.ibm.com>,
- =?UTF-8?Q?Daniel_P=2e_Berrang=c3=a9?= <berrange@redhat.com>,
- Xiao Guangrong <xiaoguangrong.eric@gmail.com>,
- Pierre Morel <pmorel@linux.ibm.com>, Wen Congyang <wencongyang2@huawei.com>,
- Jean-Christophe Dubois <jcd@tribudubois.net>,
- Paolo Bonzini <pbonzini@redhat.com>, Stefan Berger <stefanb@linux.ibm.com>
-References: <20191011160552.22907-1-vsementsov@virtuozzo.com>
- <20191011160552.22907-26-vsementsov@virtuozzo.com>
- <5dd4d642-7ea6-42a2-66fc-6d6710b77b8d@redhat.com>
-Organization: Red Hat, Inc.
-Message-ID: <f846f0dc-854f-90f7-5f25-eb4f2b461520@redhat.com>
-Date: Fri, 11 Oct 2019 13:15:15 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.1.0
+ (envelope-from <alistair23@gmail.com>) id 1iJ3KO-0001PJ-TD
+ for qemu-riscv@nongnu.org; Fri, 11 Oct 2019 18:24:06 -0400
+Received: from mail-lf1-x141.google.com ([2a00:1450:4864:20::141]:43498)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <alistair23@gmail.com>)
+ id 1iJ3KO-0001Mn-JK; Fri, 11 Oct 2019 18:24:04 -0400
+Received: by mail-lf1-x141.google.com with SMTP id u3so8065243lfl.10;
+ Fri, 11 Oct 2019 15:24:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=k98FUPIsfV/LM/5NVcO5lDSAEMNWmkx1yca0Rwd7Ozo=;
+ b=k+JD85aKN0Gr3kB0ykAR0dZ7YvVqhK0X6crBA3FYyV35OwIFxT/SiP6WHVvoaA5kUY
+ CHfUJQqsa0Zsxu6TQyctkR+BMkwTbl2smAFmVsn0r8zJ+fyVzmJGDSi6T1huTSIdgUl/
+ J+BV3PWABp9rOFB1cmxgJKZgqRB4P7zn1/Op2iIUpyfLK7tqTFYbdsZyN5nqPHYfuX2n
+ t3fuV44HFSf41LtgH0VFB4G+au4NpAA1X9u07Q+Rw8GIsMfAUSHYPGJkmO5qAJ/5JADR
+ XnqH73oLU9TCxOUbH7gZhwaH+DQ5SmtarUVX8lVTngf/FSkrqbNe0myhglc8xtugRc8o
+ H51w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=k98FUPIsfV/LM/5NVcO5lDSAEMNWmkx1yca0Rwd7Ozo=;
+ b=s9QFVvoYiM60H3vNs3vsMYPn2mlFCeWIcEbtuTBCZXYvN3pckIniW/qXGy9VZUpywQ
+ TTKPYQfnRxnDW5zD4jXDHv2S8EKxDm6LVoyf8b2ZF3z9PboGmptY0YH1aSUqBKe8edc9
+ qWG8voDyC/08WJJ1NC894xYBfDAJ2l7xIImtN0Y/gw53NERwBJbJQWFUA/VrzFUI9MYg
+ giAqRQ5XXfNf3ngUCu7ecU0iZcbJ3s+63HTkoawTf0xokZ6W5iLdSrLR8D4jMuy3cZPx
+ KhrnnMOuAeckk3qgzBHHf9t79PLPNfFeip7h9gUD1AeFxkoBN0i2tcB54hhjXjC/prxi
+ Ms2Q==
+X-Gm-Message-State: APjAAAUVi6x4ZPHxVbjtARIt05+bTeAzfTmuOFc92eNId4xyd/wwbXty
+ 5mvmeuMQ5XNCEPcnAaNYT87HJgeDVhmepr6kIUg=
+X-Google-Smtp-Source: APXvYqyvRX8vT89krooWVA7CZwnqTWVr6sLq6Defg7QJnoYUZ5KiohFYzFdq3DYSbti1s3nCYZZKpZdcDKP7T7K3G9k=
+X-Received: by 2002:a19:c392:: with SMTP id
+ t140mr10228222lff.156.1570832642085; 
+ Fri, 11 Oct 2019 15:24:02 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <5dd4d642-7ea6-42a2-66fc-6d6710b77b8d@redhat.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.26]); Fri, 11 Oct 2019 18:15:55 +0000 (UTC)
-Content-Transfer-Encoding: quoted-printable
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
- [fuzzy]
-X-Received-From: 209.132.183.28
+References: <LqVBb_I--3-1@tuta.io>
+In-Reply-To: <LqVBb_I--3-1@tuta.io>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Fri, 11 Oct 2019 15:18:56 -0700
+Message-ID: <CAKmqyKNh-jgg-LWHp4RMM9vaaMNr7qHtNSVYs9OFXhvJ-+7RXA@mail.gmail.com>
+Subject: Re: [PATCH v2 1/1] target/riscv/pmp: Fix bug preventing
+To: Chris Williams <diodesign@tuta.io>
+Cc: Palmer Dabbelt <palmer@sifive.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Qemu Riscv <qemu-riscv@nongnu.org>, 
+ Qemu Devel <qemu-devel@nongnu.org>, dayeol@berkeley.edu
+Content-Type: text/plain; charset="UTF-8"
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2a00:1450:4864:20::141
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -118,38 +69,106 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Oct 2019 18:16:16 -0000
+X-List-Received-Date: Fri, 11 Oct 2019 22:24:07 -0000
 
-On 10/11/19 12:12 PM, Eric Blake wrote:
-> On 10/11/19 11:04 AM, Vladimir Sementsov-Ogievskiy wrote:
->> Signed-off-by: Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>
->> ---
->>
+On Sun, Oct 6, 2019 at 1:32 AM Chris Williams <diodesign@tuta.io> wrote:
+>
+> Hello. I hope you don't mind me resubmitting this patch. Please let me know if
 
->> +@@
->> +identifier rule1.fn;
->> +identifier rule1.local_err;
->> +@@
->> +
->> + fn(...)
->> + {
->> +=C2=A0=C2=A0=C2=A0=C2=A0 <...
->> +(
->> +-=C2=A0=C2=A0=C2=A0 error_free(local_err);
->> +-=C2=A0=C2=A0=C2=A0 local_err =3D NULL;
->> ++=C2=A0=C2=A0=C2=A0 error_free_errp(errp);
->=20
-> This does not make sense - error_free_errp() is not defined prior to=20
-> this series or anywhere in patches 1-24, if I'm reading it correctly.
+Not at all!
 
-Apologies - I sent my reply to this message before 21/126 showed up in=20
-my inbox, and didn't realize that I had skipped over sequencing.  This=20
-part is fine after all, but it points to the perils of reviewing a=20
-thread as it comes in piecemeal, vs. reviewing an actual branch with all=20
-patches instantly available.
+Thanks for the patch.
 
---=20
-Eric Blake, Principal Software Engineer
-Red Hat, Inc.           +1-919-301-3226
-Virtualization:  qemu.org | libvirt.org
+In future if people don't respond you can just keep pinging your patch.
+
+> I've formatted it incorrectly or if it needs more explanation. My previous
+> attempt probably wasn't formatted quite right. This is my first time
+> contributing to Qemu, so I'm keen to get it right - thanks.
+
+This whole paragraph should not be in the commit. It can go below the
+line though.
+
+Also please use `git format-patch` to format the patch and then `git
+send-email` to send the patch. There is a whole heap of detail here:
+https://wiki.qemu.org/Contribute/SubmitAPatch
+
+>
+> This fixes an issue that prevents a RISC-V CPU from executing instructions
+> immediately from the base address of a PMP TOR region.
+>
+> When jumping to an instruction in a PMP TOR region, pmp_hart_has_privs() is
+> called to validate the access. If this instruction is the very first word of a
+> PMP TOR region, at address 0 relative to the start address of the region, then
+> the access will fail. This is because pmp_hart_has_privs() is called with size
+> 0 to perform this validation, causing this check...
+>
+> e = pmp_is_in_range(env, i, addr + size - 1);
+>
+> ... to fail, as (addr + size - 1) falls below the base address of the PMP
+> region. Really, the access should succeed. For example, if I have a region
+> spanning 0x80d96000 to 0x88d95fff and the CPU jumps to 0x80d96000, then:
+>
+> s = 0x80d96000
+> e = 0x80d95fff
+>
+> And the validation fails. The size check proposed below catches these zero-size
+> instruction fetch access probes. The word alignment in pmpaddr{0-15} and
+> earlier instruction alignment checks should prevent the execution of
+> instructions over the upper boundary of the PMP region, though I'm happy to give
+> this more attention if this is a concern.
+
+This seems like a similar issue to this patch as well:
+https://lore.kernel.org/qemu-devel/20191007052813.25814-1-dayeol@berkeley.edu/
+
+From that discussion:
+
+"In general, size 0 means "unknown size".  In this case, the one tlb lookup is
+going to be used by lots of instructions -- everything that fits on the page."
+
+Richard's last comment seems like a better fix:
+
+"You certainly could do
+
+    if (size == 0) {
+        size = -(addr | TARGET_PAGE_MASK);
+    }
+
+to assume that all bytes from addr to the end of the page are accessed.  That
+would avoid changing too much of the rest of the logic.
+
+That said, this code will continue to not work for mis-aligned boundaries."
+
+So I don't think this is the correct solution. I'm not sure if Dayeol
+is planning on sending a follow up version. If not feel free to send
+it.
+
+>
+> Signed-off-by: Chris Williams <diodesign@tuta.io <mailto:diodesign@tuta.io>>
+
+It looks like this is a HTML patch, also ensure all patches are just
+plain text, `git send-email` will do this.
+
+Thanks for the patch though! Please send any more fixes that you find :)
+
+Alistair
+
+>
+> diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
+> index d4f1007109..9308672e20 100644
+> --- a/target/riscv/pmp.c
+> +++ b/target/riscv/pmp.c
+> @@ -235,8 +235,9 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong
+> addr,
+>      /* 1.10 draft priv spec states there is an implicit order
+>           from low to high */
+>      for (i = 0; i < MAX_RISCV_PMPS; i++) {
+> +        /* catch zero-size instruction checks */
+>          s = pmp_is_in_range(env, i, addr);
+> -        e = pmp_is_in_range(env, i, addr + size - 1);
+> +        e = pmp_is_in_range(env, i, (size == 0) ? addr : addr + size - 1);
+>
+>          /* partially inside */
+>          if ((s + e) == 1) {
+>
+>
 
