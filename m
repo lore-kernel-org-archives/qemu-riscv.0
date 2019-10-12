@@ -1,63 +1,81 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iJ4AJ-0001co-H2
-	for mharc-qemu-riscv@gnu.org; Fri, 11 Oct 2019 19:17:43 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:38143)
+	id 1iJ7CM-00010I-PO
+	for mharc-qemu-riscv@gnu.org; Fri, 11 Oct 2019 22:32:02 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:54319)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <dayeol@berkeley.edu>) id 1iJ4AG-0001by-ON
- for qemu-riscv@nongnu.org; Fri, 11 Oct 2019 19:17:42 -0400
+ (envelope-from <no-reply@patchew.org>) id 1iJ7CJ-0000v8-F8
+ for qemu-riscv@nongnu.org; Fri, 11 Oct 2019 22:32:00 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <dayeol@berkeley.edu>) id 1iJ4AE-0002Eg-Se
- for qemu-riscv@nongnu.org; Fri, 11 Oct 2019 19:17:40 -0400
-Received: from mail-pf1-x444.google.com ([2607:f8b0:4864:20::444]:42974)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <dayeol@berkeley.edu>) id 1iJ4AD-0002DV-2L
- for qemu-riscv@nongnu.org; Fri, 11 Oct 2019 19:17:38 -0400
-Received: by mail-pf1-x444.google.com with SMTP id q12so6928153pff.9
- for <qemu-riscv@nongnu.org>; Fri, 11 Oct 2019 16:17:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=berkeley-edu.20150623.gappssmtp.com; s=20150623;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=WqqbTIAy+kfymfY7HkIZ00SnVjzCr6un7JnhABIzqoM=;
- b=MGQLcawiaRcn+4K840jk+UHH+OyWbQT0KGhbgC94OCMOn6803UyZdmo2gOfLGje+2N
- K4vsYaYNT7QDY93YkvUCxn1rY+zqt1Cupg/7iJ0/+h/qAKpwD4CjSCix6uawbP0XLw2p
- 1urUdbR99TSFxxjVIXCyjC10sDzZINp9PIF1EPyBJ3Z2hA1rAgRmjfaYfHhxR2R4s/Xy
- T1PZp8O92BNwu6yEu/uu+QHQFAOXnuTAPfs7mPlJy6PmR9QvB6+5r/hR9TyciAn3vUnu
- p/jnhYiSVM/MGtyWjCcNIx6/NIxaX1bZ5NSvcj7FSU/waRXI9RsPh3TD2WjrD2NAxxfw
- T/aw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=WqqbTIAy+kfymfY7HkIZ00SnVjzCr6un7JnhABIzqoM=;
- b=fQOyZVLOeqo3LmRQC19JUn1qmhbHINVu7qaoi2BXHSohLzIH+5mNxSURSjqW+Ntq4A
- 6fJ6FiZJOcc75eF11wcoEg5sQLIqSq845qRdQx2WYlGIkR6qB6LyANr42cuiDGd/oW4T
- tnZF4CEU7yUAwel6+ZXeGwHd8Sged0ZQbFi/Mdn19ApcmXvU6ecPqatZz6A/xQ1DajtD
- 2mMzKHar94+rBq/4CS2rX4JFNCVHw10alUnAmfLqVsT368j5BTDHcLXPZLKMqIhN17CW
- qiw0sM8V28SKIP6on9X7JCzMO8/Eh7LaZPgo+0taFTu4cCfm+JlT2cExmZ+oYkuVj0lX
- 8tAA==
-X-Gm-Message-State: APjAAAW/u6gsHzm1Ap2KWyE4rBV3E7Ae6WLbVBBOFqDw5xgAB52yDCnc
- 8iIgBitUDQybMsr4G3m1c64tQenBjyg7Y+mRSl97Zw==
-X-Google-Smtp-Source: APXvYqwywFjpVpY4fX+LhgHydWhqDVf1u0VRAKcGuXi0vj/NL6kwNvtSXLcXpWPUxeUD6T7wkGkXJWBtC7XgmjL4aQA=
-X-Received: by 2002:a63:1521:: with SMTP id v33mr1072460pgl.273.1570835854898; 
- Fri, 11 Oct 2019 16:17:34 -0700 (PDT)
+ (envelope-from <no-reply@patchew.org>) id 1iJ7CI-0005Q4-2m
+ for qemu-riscv@nongnu.org; Fri, 11 Oct 2019 22:31:59 -0400
+Resent-Date: Fri, 11 Oct 2019 22:31:59 -0400
+Resent-Message-Id: <E1iJ7CI-0005Q4-2m@eggs.gnu.org>
+Received: from sender4-of-o54.zoho.com ([136.143.188.54]:21479)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <no-reply@patchew.org>)
+ id 1iJ7CH-0005NU-RY
+ for qemu-riscv@nongnu.org; Fri, 11 Oct 2019 22:31:58 -0400
+ARC-Seal: i=1; a=rsa-sha256; t=1570846255; cv=none; d=zoho.com; s=zohoarc; 
+ b=VUxSVqeGjbYocgCxZ0W1FhNccn6cM6qZLCuYnRgoYA42haMRd+Fb5v5exSvA/b6QdDTcDDKBwdX9KLDYP9U868tPKJbWCQMxuRAQtoeD0TykR3JRVVlZxCn7Rw1LFtfcMhIZYz3dgKXhebsKc7fXiv0BGjKCsFfFGbv/JJgzmMY=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zoho.com;
+ s=zohoarc; t=1570846255;
+ h=Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:MIME-Version:Message-ID:Reply-To:Subject:To;
+ bh=Nn+4ktKBi6cVLXwxBAHDx3j4KR5hpkHDis4KeeHetHY=; 
+ b=kHqNrULIYgGoCxxHNWy0Vj7FuVcB+OAuwI1BahGD0g+0Nk4SMXAM164d6AIu6zcqmSsZjUuxTZKSRZZb+NMIyxqd//z1kYBlRn45TSHkc+8ntWAAggU01/c3K1oSZfYlMPF8NN6MA+4D+xgjKLtar6DTdJY/+DAB2WcVMZr0oio=
+ARC-Authentication-Results: i=1; mx.zoho.com; dkim=pass  header.i=patchew.org;
+ spf=pass  smtp.mailfrom=no-reply@patchew.org;
+ dmarc=pass header.from=<no-reply@patchew.org>
+ header.from=<no-reply@patchew.org>
+Received: from [172.17.0.3] (23.253.156.214 [23.253.156.214]) by
+ mx.zohomail.com with SMTPS id 1570846252297989.3517926014251;
+ Fri, 11 Oct 2019 19:10:52 -0700 (PDT)
+In-Reply-To: <20191011160552.22907-1-vsementsov@virtuozzo.com>
+Reply-To: <qemu-devel@nongnu.org>
+Subject: Re: [RFC v5 000/126] error: auto propagated local_err
+Message-ID: <157084624355.16951.11945043823681183793@37313f22b938>
 MIME-Version: 1.0
-References: <LqVBb_I--3-1@tuta.io>
- <CAKmqyKNh-jgg-LWHp4RMM9vaaMNr7qHtNSVYs9OFXhvJ-+7RXA@mail.gmail.com>
-In-Reply-To: <CAKmqyKNh-jgg-LWHp4RMM9vaaMNr7qHtNSVYs9OFXhvJ-+7RXA@mail.gmail.com>
-From: Dayeol Lee <dayeol@berkeley.edu>
-Date: Fri, 11 Oct 2019 16:17:24 -0700
-Message-ID: <CACjxMEsUrDqSZNHdLEXoOAbNFmyT+iNjjTqSDBDBZ-NgdggJqA@mail.gmail.com>
-Subject: Re: [PATCH v2 1/1] target/riscv/pmp: Fix bug preventing
-To: Alistair Francis <alistair23@gmail.com>
-Cc: Chris Williams <diodesign@tuta.io>, Palmer Dabbelt <palmer@sifive.com>, 
- Alistair Francis <alistair.francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Qemu Riscv <qemu-riscv@nongnu.org>, Qemu Devel <qemu-devel@nongnu.org>
-Content-Type: multipart/alternative; boundary="00000000000021d5920594aab983"
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2607:f8b0:4864:20::444
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+Resent-From: 
+From: no-reply@patchew.org
+To: vsementsov@virtuozzo.com
+Cc: qemu-devel@nongnu.org, ronniesahlberg@gmail.com, codyprime@gmail.com,
+ jan.kiszka@siemens.com, berto@igalia.com, zhang.zhanghailiang@huawei.com,
+ qemu-block@nongnu.org, arikalo@wavecomp.com, pasic@linux.ibm.com,
+ hpoussin@reactos.org, anthony.perard@citrix.com, samuel.thibault@ens-lyon.org,
+ philmd@redhat.com, green@moxielogic.com, lvivier@redhat.com,
+ ehabkost@redhat.com, xiechanglong.d@gmail.com, pl@kamp.de, dgilbert@redhat.com,
+ b.galvani@gmail.com, eric.auger@redhat.com, alex.williamson@redhat.com,
+ stefanha@redhat.com, jsnow@redhat.com, rth@twiddle.net, kwolf@redhat.com,
+ vsementsov@virtuozzo.com, andrew@aj.id.au, crwulff@gmail.com,
+ sundeep.lkml@gmail.com, michael@walle.cc, qemu-ppc@nongnu.org,
+ kbastian@mail.uni-paderborn.de, imammedo@redhat.com, fam@euphon.net,
+ peter.maydell@linaro.org, sheepdog@lists.wpkg.org, mjrosato@linux.ibm.com,
+ david@redhat.com, palmer@sifive.com, thuth@redhat.com, jcmvbkbc@gmail.com,
+ den@openvz.org, hare@suse.com, sstabellini@kernel.org, arei.gonglei@huawei.com,
+ namei.unix@gmail.com, atar4qemu@gmail.com, farman@linux.ibm.com,
+ amit@kernel.org, sw@weilnetz.de, groug@kaod.org, yuval.shaia@oracle.com,
+ qemu-s390x@nongnu.org, qemu-arm@nongnu.org, peter.chubb@nicta.com.au,
+ clg@kaod.org, shorne@gmail.com, qemu-riscv@nongnu.org, cohuck@redhat.com,
+ amarkovic@wavecomp.com, aurelien@aurel32.net, pburton@wavecomp.com,
+ sagark@eecs.berkeley.edu, paul@xen.org, jasowang@redhat.com, kraxel@redhat.com,
+ edgar.iglesias@gmail.com, gxt@mprc.pku.edu.cn, ari@tuxera.com,
+ quintela@redhat.com, mdroth@linux.vnet.ibm.com, borntraeger@de.ibm.com,
+ joel@jms.id.au, dillaman@redhat.com, antonynpavlov@gmail.com,
+ xen-devel@lists.xenproject.org, integration@gluster.org, lersek@redhat.com,
+ rjones@redhat.com, Andrew.Baumann@microsoft.com, mreitz@redhat.com,
+ mst@redhat.com, mark.cave-ayland@ilande.co.uk, v.maffione@gmail.com,
+ marex@denx.de, armbru@redhat.com, marcandre.lureau@redhat.com,
+ alistair@alistair23.me, pavel.dovgaluk@ispras.ru, g.lettieri@iet.unipi.it,
+ rizzo@iet.unipi.it, david@gibson.dropbear.id.au, akrowiak@linux.ibm.com,
+ berrange@redhat.com, xiaoguangrong.eric@gmail.com, pmorel@linux.ibm.com,
+ wencongyang2@huawei.com, jcd@tribudubois.net, pbonzini@redhat.com,
+ stefanb@linux.ibm.com
+Date: Fri, 11 Oct 2019 19:10:52 -0700 (PDT)
+X-ZohoMailClient: External
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+ [fuzzy]
+X-Received-From: 136.143.188.54
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -69,291 +87,48 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Oct 2019 23:17:42 -0000
+X-List-Received-Date: Sat, 12 Oct 2019 02:32:01 -0000
 
---00000000000021d5920594aab983
-Content-Type: text/plain; charset="UTF-8"
+UGF0Y2hldyBVUkw6IGh0dHBzOi8vcGF0Y2hldy5vcmcvUUVNVS8yMDE5MTAxMTE2MDU1Mi4yMjkw
+Ny0xLXZzZW1lbnRzb3ZAdmlydHVvenpvLmNvbS8KCgoKSGksCgpUaGlzIHNlcmllcyBmYWlsZWQg
+dGhlIGRvY2tlci1xdWlja0BjZW50b3M3IGJ1aWxkIHRlc3QuIFBsZWFzZSBmaW5kIHRoZSB0ZXN0
+aW5nIGNvbW1hbmRzIGFuZAp0aGVpciBvdXRwdXQgYmVsb3cuIElmIHlvdSBoYXZlIERvY2tlciBp
+bnN0YWxsZWQsIHlvdSBjYW4gcHJvYmFibHkgcmVwcm9kdWNlIGl0CmxvY2FsbHkuCgo9PT0gVEVT
+VCBTQ1JJUFQgQkVHSU4gPT09CiMhL2Jpbi9iYXNoCm1ha2UgZG9ja2VyLWltYWdlLWNlbnRvczcg
+Vj0xIE5FVFdPUks9MQp0aW1lIG1ha2UgZG9ja2VyLXRlc3QtcXVpY2tAY2VudG9zNyBTSE9XX0VO
+Vj0xIEo9MTQgTkVUV09SSz0xCj09PSBURVNUIFNDUklQVCBFTkQgPT09CgogIFRFU1QgICAgaW90
+ZXN0LXFjb3cyOiAwMTMKICBURVNUICAgIGNoZWNrLXVuaXQ6IHRlc3RzL3Rlc3QtYmxvY2staW90
+aHJlYWQKICBURVNUICAgIGNoZWNrLXVuaXQ6IHRlc3RzL3Rlc3QtaW1hZ2UtbG9ja2luZwp3YXJu
+aW5nOiBGYWlsZWQgdG8gZ2V0IHNoYXJlZCAiY29uc2lzdGVudCByZWFkIiBsb2NrCklzIGFub3Ro
+ZXIgcHJvY2VzcyB1c2luZyB0aGUgaW1hZ2UgWy90bXAvcXRlc3QuTzY2bDN0XT8Kd2FybmluZzog
+RmFpbGVkIHRvIGdldCBzaGFyZWQgImNvbnNpc3RlbnQgcmVhZCIgbG9jawpJcyBhbm90aGVyIHBy
+b2Nlc3MgdXNpbmcgdGhlIGltYWdlIFsvdG1wL3F0ZXN0LkcwTTlWOF0/CiAgVEVTVCAgICBjaGVj
+ay11bml0OiB0ZXN0cy90ZXN0LXg4Ni1jcHVpZAogIFRFU1QgICAgY2hlY2stdW5pdDogdGVzdHMv
+dGVzdC14YnpybGUKLS0tCiAgVEVTVCAgICBpb3Rlc3QtcWNvdzI6IDI2NwpGYWlsdXJlczogMDU0
+CkZhaWxlZCAxIG9mIDEwOCBpb3Rlc3RzCm1ha2U6ICoqKiBbY2hlY2stdGVzdHMvY2hlY2stYmxv
+Y2suc2hdIEVycm9yIDEKbWFrZTogKioqIFdhaXRpbmcgZm9yIHVuZmluaXNoZWQgam9icy4uLi4K
+ICBURVNUICAgIGNoZWNrLXF0ZXN0LWFhcmNoNjQ6IHRlc3RzL3Fvcy10ZXN0ClRyYWNlYmFjayAo
+bW9zdCByZWNlbnQgY2FsbCBsYXN0KToKLS0tCiAgICByYWlzZSBDYWxsZWRQcm9jZXNzRXJyb3Io
+cmV0Y29kZSwgY21kKQpzdWJwcm9jZXNzLkNhbGxlZFByb2Nlc3NFcnJvcjogQ29tbWFuZCAnWydz
+dWRvJywgJy1uJywgJ2RvY2tlcicsICdydW4nLCAnLS1sYWJlbCcsICdjb20ucWVtdS5pbnN0YW5j
+ZS51dWlkPTJjNTVmYjYxYTYzYTQwOTM4MmYyYjNhOTlmY2E5M2Q5JywgJy11JywgJzEwMDMnLCAn
+LS1zZWN1cml0eS1vcHQnLCAnc2VjY29tcD11bmNvbmZpbmVkJywgJy0tcm0nLCAnLWUnLCAnVEFS
+R0VUX0xJU1Q9JywgJy1lJywgJ0VYVFJBX0NPTkZJR1VSRV9PUFRTPScsICctZScsICdWPScsICct
+ZScsICdKPTE0JywgJy1lJywgJ0RFQlVHPScsICctZScsICdTSE9XX0VOVj0xJywgJy1lJywgJ0ND
+QUNIRV9ESVI9L3Zhci90bXAvY2NhY2hlJywgJy12JywgJy9ob21lL3BhdGNoZXcyLy5jYWNoZS9x
+ZW11LWRvY2tlci1jY2FjaGU6L3Zhci90bXAvY2NhY2hlOnonLCAnLXYnLCAnL3Zhci90bXAvcGF0
+Y2hldy10ZXN0ZXItdG1wLXVzdmk4Zm9iL3NyYy9kb2NrZXItc3JjLjIwMTktMTAtMTEtMjIuMDAu
+MTAuMTkzMzovdmFyL3RtcC9xZW11Onoscm8nLCAncWVtdTpjZW50b3M3JywgJy92YXIvdG1wL3Fl
+bXUvcnVuJywgJ3Rlc3QtcXVpY2snXScgcmV0dXJuZWQgbm9uLXplcm8gZXhpdCBzdGF0dXMgMi4K
+ZmlsdGVyPS0tZmlsdGVyPWxhYmVsPWNvbS5xZW11Lmluc3RhbmNlLnV1aWQ9MmM1NWZiNjFhNjNh
+NDA5MzgyZjJiM2E5OWZjYTkzZDkKbWFrZVsxXTogKioqIFtkb2NrZXItcnVuXSBFcnJvciAxCm1h
+a2VbMV06IExlYXZpbmcgZGlyZWN0b3J5IGAvdmFyL3RtcC9wYXRjaGV3LXRlc3Rlci10bXAtdXN2
+aThmb2Ivc3JjJwptYWtlOiAqKiogW2RvY2tlci1ydW4tdGVzdC1xdWlja0BjZW50b3M3XSBFcnJv
+ciAyCgpyZWFsICAgIDEwbTMzLjcxNHMKdXNlciAgICAwbTguMzYwcwoKClRoZSBmdWxsIGxvZyBp
+cyBhdmFpbGFibGUgYXQKaHR0cDovL3BhdGNoZXcub3JnL2xvZ3MvMjAxOTEwMTExNjA1NTIuMjI5
+MDctMS12c2VtZW50c292QHZpcnR1b3p6by5jb20vdGVzdGluZy5kb2NrZXItcXVpY2tAY2VudG9z
+Ny8/dHlwZT1tZXNzYWdlLgotLS0KRW1haWwgZ2VuZXJhdGVkIGF1dG9tYXRpY2FsbHkgYnkgUGF0
+Y2hldyBbaHR0cHM6Ly9wYXRjaGV3Lm9yZy9dLgpQbGVhc2Ugc2VuZCB5b3VyIGZlZWRiYWNrIHRv
+IHBhdGNoZXctZGV2ZWxAcmVkaGF0LmNvbQ==
 
-Hi, Alistair,
-
-Thank you for reminding me.
-I already had the local patch, so I re-submitted the patch.
-Please let me know if that's fair enough (or you have any other comments)
-
-Thanks,
-
-Dayeol
-
-On Fri, Oct 11, 2019 at 3:24 PM Alistair Francis <alistair23@gmail.com>
-wrote:
-
-> On Sun, Oct 6, 2019 at 1:32 AM Chris Williams <diodesign@tuta.io> wrote:
-> >
-> > Hello. I hope you don't mind me resubmitting this patch. Please let me
-> know if
->
-> Not at all!
->
-> Thanks for the patch.
->
-> In future if people don't respond you can just keep pinging your patch.
->
-> > I've formatted it incorrectly or if it needs more explanation. My
-> previous
-> > attempt probably wasn't formatted quite right. This is my first time
-> > contributing to Qemu, so I'm keen to get it right - thanks.
->
-> This whole paragraph should not be in the commit. It can go below the
-> line though.
->
-> Also please use `git format-patch` to format the patch and then `git
-> send-email` to send the patch. There is a whole heap of detail here:
-> https://wiki.qemu.org/Contribute/SubmitAPatch
->
-> >
-> > This fixes an issue that prevents a RISC-V CPU from executing
-> instructions
-> > immediately from the base address of a PMP TOR region.
-> >
-> > When jumping to an instruction in a PMP TOR region, pmp_hart_has_privs()
-> is
-> > called to validate the access. If this instruction is the very first
-> word of a
-> > PMP TOR region, at address 0 relative to the start address of the
-> region, then
-> > the access will fail. This is because pmp_hart_has_privs() is called
-> with size
-> > 0 to perform this validation, causing this check...
-> >
-> > e = pmp_is_in_range(env, i, addr + size - 1);
-> >
-> > ... to fail, as (addr + size - 1) falls below the base address of the PMP
-> > region. Really, the access should succeed. For example, if I have a
-> region
-> > spanning 0x80d96000 to 0x88d95fff and the CPU jumps to 0x80d96000, then:
-> >
-> > s = 0x80d96000
-> > e = 0x80d95fff
-> >
-> > And the validation fails. The size check proposed below catches these
-> zero-size
-> > instruction fetch access probes. The word alignment in pmpaddr{0-15} and
-> > earlier instruction alignment checks should prevent the execution of
-> > instructions over the upper boundary of the PMP region, though I'm happy
-> to give
-> > this more attention if this is a concern.
->
-> This seems like a similar issue to this patch as well:
->
-> https://lore.kernel.org/qemu-devel/20191007052813.25814-1-dayeol@berkeley.edu/
->
-> From that discussion:
->
-> "In general, size 0 means "unknown size".  In this case, the one tlb
-> lookup is
-> going to be used by lots of instructions -- everything that fits on the
-> page."
->
-> Richard's last comment seems like a better fix:
->
-> "You certainly could do
->
->     if (size == 0) {
->         size = -(addr | TARGET_PAGE_MASK);
->     }
->
-> to assume that all bytes from addr to the end of the page are accessed.
-> That
-> would avoid changing too much of the rest of the logic.
->
-> That said, this code will continue to not work for mis-aligned boundaries."
->
-> So I don't think this is the correct solution. I'm not sure if Dayeol
-> is planning on sending a follow up version. If not feel free to send
-> it.
->
-> >
-> > Signed-off-by: Chris Williams <diodesign@tuta.io <mailto:
-> diodesign@tuta.io>>
->
-> It looks like this is a HTML patch, also ensure all patches are just
-> plain text, `git send-email` will do this.
->
-> Thanks for the patch though! Please send any more fixes that you find :)
->
-> Alistair
->
-> >
-> > diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-> > index d4f1007109..9308672e20 100644
-> > --- a/target/riscv/pmp.c
-> > +++ b/target/riscv/pmp.c
-> > @@ -235,8 +235,9 @@ bool pmp_hart_has_privs(CPURISCVState *env,
-> target_ulong
-> > addr,
-> >      /* 1.10 draft priv spec states there is an implicit order
-> >           from low to high */
-> >      for (i = 0; i < MAX_RISCV_PMPS; i++) {
-> > +        /* catch zero-size instruction checks */
-> >          s = pmp_is_in_range(env, i, addr);
-> > -        e = pmp_is_in_range(env, i, addr + size - 1);
-> > +        e = pmp_is_in_range(env, i, (size == 0) ? addr : addr + size -
-> 1);
-> >
-> >          /* partially inside */
-> >          if ((s + e) == 1) {
-> >
-> >
->
-
---00000000000021d5920594aab983
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Hi, Alistair,=C2=A0<div><br><div>Thank you for reminding m=
-e.<div>I already had the local patch, so I re-submitted the patch.</div></d=
-iv></div><div>Please let me know if that&#39;s fair enough (or you have any=
- other comments)<br></div><div><br></div><div>Thanks,</div><div><br></div><=
-div>Dayeol</div></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
-=3D"gmail_attr">On Fri, Oct 11, 2019 at 3:24 PM Alistair Francis &lt;<a hre=
-f=3D"mailto:alistair23@gmail.com">alistair23@gmail.com</a>&gt; wrote:<br></=
-div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;bor=
-der-left:1px solid rgb(204,204,204);padding-left:1ex">On Sun, Oct 6, 2019 a=
-t 1:32 AM Chris Williams &lt;<a href=3D"mailto:diodesign@tuta.io" target=3D=
-"_blank">diodesign@tuta.io</a>&gt; wrote:<br>
-&gt;<br>
-&gt; Hello. I hope you don&#39;t mind me resubmitting this patch. Please le=
-t me know if<br>
-<br>
-Not at all!<br>
-<br>
-Thanks for the patch.<br>
-<br>
-In future if people don&#39;t respond you can just keep pinging your patch.=
-<br>
-<br>
-&gt; I&#39;ve formatted it incorrectly or if it needs more explanation. My =
-previous<br>
-&gt; attempt probably wasn&#39;t formatted quite right. This is my first ti=
-me<br>
-&gt; contributing to Qemu, so I&#39;m keen to get it right - thanks.<br>
-<br>
-This whole paragraph should not be in the commit. It can go below the<br>
-line though.<br>
-<br>
-Also please use `git format-patch` to format the patch and then `git<br>
-send-email` to send the patch. There is a whole heap of detail here:<br>
-<a href=3D"https://wiki.qemu.org/Contribute/SubmitAPatch" rel=3D"noreferrer=
-" target=3D"_blank">https://wiki.qemu.org/Contribute/SubmitAPatch</a><br>
-<br>
-&gt;<br>
-&gt; This fixes an issue that prevents a RISC-V CPU from executing instruct=
-ions<br>
-&gt; immediately from the base address of a PMP TOR region.<br>
-&gt;<br>
-&gt; When jumping to an instruction in a PMP TOR region, pmp_hart_has_privs=
-() is<br>
-&gt; called to validate the access. If this instruction is the very first w=
-ord of a<br>
-&gt; PMP TOR region, at address 0 relative to the start address of the regi=
-on, then<br>
-&gt; the access will fail. This is because pmp_hart_has_privs() is called w=
-ith size<br>
-&gt; 0 to perform this validation, causing this check...<br>
-&gt;<br>
-&gt; e =3D pmp_is_in_range(env, i, addr + size - 1);<br>
-&gt;<br>
-&gt; ... to fail, as (addr + size - 1) falls below the base address of the =
-PMP<br>
-&gt; region. Really, the access should succeed. For example, if I have a re=
-gion<br>
-&gt; spanning 0x80d96000 to 0x88d95fff and the CPU jumps to 0x80d96000, the=
-n:<br>
-&gt;<br>
-&gt; s =3D 0x80d96000<br>
-&gt; e =3D 0x80d95fff<br>
-&gt;<br>
-&gt; And the validation fails. The size check proposed below catches these =
-zero-size<br>
-&gt; instruction fetch access probes. The word alignment in pmpaddr{0-15} a=
-nd<br>
-&gt; earlier instruction alignment checks should prevent the execution of<b=
-r>
-&gt; instructions over the upper boundary of the PMP region, though I&#39;m=
- happy to give<br>
-&gt; this more attention if this is a concern.<br>
-<br>
-This seems like a similar issue to this patch as well:<br>
-<a href=3D"https://lore.kernel.org/qemu-devel/20191007052813.25814-1-dayeol=
-@berkeley.edu/" rel=3D"noreferrer" target=3D"_blank">https://lore.kernel.or=
-g/qemu-devel/20191007052813.25814-1-dayeol@berkeley.edu/</a><br>
-<br>
-From that discussion:<br>
-<br>
-&quot;In general, size 0 means &quot;unknown size&quot;.=C2=A0 In this case=
-, the one tlb lookup is<br>
-going to be used by lots of instructions -- everything that fits on the pag=
-e.&quot;<br>
-<br>
-Richard&#39;s last comment seems like a better fix:<br>
-<br>
-&quot;You certainly could do<br>
-<br>
-=C2=A0 =C2=A0 if (size =3D=3D 0) {<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 size =3D -(addr | TARGET_PAGE_MASK);<br>
-=C2=A0 =C2=A0 }<br>
-<br>
-to assume that all bytes from addr to the end of the page are accessed.=C2=
-=A0 That<br>
-would avoid changing too much of the rest of the logic.<br>
-<br>
-That said, this code will continue to not work for mis-aligned boundaries.&=
-quot;<br>
-<br>
-So I don&#39;t think this is the correct solution. I&#39;m not sure if Daye=
-ol<br>
-is planning on sending a follow up version. If not feel free to send<br>
-it.<br>
-<br>
-&gt;<br>
-&gt; Signed-off-by: Chris Williams &lt;<a href=3D"mailto:diodesign@tuta.io"=
- target=3D"_blank">diodesign@tuta.io</a> &lt;mailto:<a href=3D"mailto:diode=
-sign@tuta.io" target=3D"_blank">diodesign@tuta.io</a>&gt;&gt;<br>
-<br>
-It looks like this is a HTML patch, also ensure all patches are just<br>
-plain text, `git send-email` will do this.<br>
-<br>
-Thanks for the patch though! Please send any more fixes that you find :)<br=
->
-<br>
-Alistair<br>
-<br>
-&gt;<br>
-&gt; diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c<br>
-&gt; index d4f1007109..9308672e20 100644<br>
-&gt; --- a/target/riscv/pmp.c<br>
-&gt; +++ b/target/riscv/pmp.c<br>
-&gt; @@ -235,8 +235,9 @@ bool pmp_hart_has_privs(CPURISCVState *env, target=
-_ulong<br>
-&gt; addr,<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 /* 1.10 draft priv spec states there is an implici=
-t order<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0from low to high */<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 for (i =3D 0; i &lt; MAX_RISCV_PMPS; i++) {<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 /* catch zero-size instruction checks */<=
-br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 s =3D pmp_is_in_range(env, i, addr);=
-<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 e =3D pmp_is_in_range(env, i, addr + size=
- - 1);<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 e =3D pmp_is_in_range(env, i, (size =3D=
-=3D 0) ? addr : addr + size - 1);<br>
-&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 /* partially inside */<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if ((s + e) =3D=3D 1) {<br>
-&gt;<br>
-&gt;<br>
-</blockquote></div>
-
---00000000000021d5920594aab983--
 
