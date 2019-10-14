@@ -1,64 +1,156 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iJRpr-0001kO-SI
-	for mharc-qemu-riscv@gnu.org; Sat, 12 Oct 2019 20:34:11 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:50863)
+	id 1iJvaH-0008Fh-G5
+	for mharc-qemu-riscv@gnu.org; Mon, 14 Oct 2019 04:20:05 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:52504)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <fintelia@gmail.com>) id 1iJRpp-0001k5-0e
- for qemu-riscv@nongnu.org; Sat, 12 Oct 2019 20:34:10 -0400
+ (envelope-from <vsementsov@virtuozzo.com>) id 1iJvaE-0008D4-2T
+ for qemu-riscv@nongnu.org; Mon, 14 Oct 2019 04:20:03 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <fintelia@gmail.com>) id 1iJRpn-00051Z-LL
- for qemu-riscv@nongnu.org; Sat, 12 Oct 2019 20:34:08 -0400
-Received: from mail-lf1-x142.google.com ([2a00:1450:4864:20::142]:44109)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <fintelia@gmail.com>)
- id 1iJRpn-00050g-BE; Sat, 12 Oct 2019 20:34:07 -0400
-Received: by mail-lf1-x142.google.com with SMTP id q12so9414732lfc.11;
- Sat, 12 Oct 2019 17:34:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=nOKDNalhYB5f7D2qAfxWaYaAViL2od6h8EtYhXFIKjY=;
- b=BOEXnbZDitThFslOPXY10uz8WC4x3bC1hi04y8Sc7gm4RKA+aVRWADF5aKIzgKt1fp
- zlsBpeVhSzHaqEAIhbq3p2fYPOjqeqG70ZuZirVrYMF8XnPdeUzJ7jKmkylkWKphf6pl
- M0f+RkJ9WFMgFkgqOX5JjwUZIHvuD0aPdAbvYrzymgK5cgf4HRozG+XfVEjuZz5B7f3q
- 9ngkalTANekr0zJNDJ34ZSm/iRiSzGVlNgbdbCxiaaEboKMLnD4FYb1aEPICAn2a7VTC
- Mf3rlN9QVRSwLL8VPRxEq34lZPTYlglPSkAxx6J4HQ2hW5tTaqClpW5vnSsDxH5Z+dTL
- Cc5w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=nOKDNalhYB5f7D2qAfxWaYaAViL2od6h8EtYhXFIKjY=;
- b=qThuhgaVvJBSPgXEHCVvmI3WGvkDFiYn43H0ZCLyfiEmCYpIfhLBq/Yn6iG1qLwUnZ
- CcJb+Ptoe0ct4P94R8bJNCjHdvQjussn6T2RkF36kyLQ+kTRKOz5EtYy3/MFrG9riYri
- w7vh3J1ht8wBdek8KHfHCZsieHg5EIQJxWtG/ZEnGroec5OMHpi9FjsqJxSjSj5/iuj2
- Fxdb9DGpOsKN5toUptptMpYzquLV+/Tt244D2J9P997gO7ofASvhkjf2KXChix9Pmi0b
- 2dq5zsRYSx1FfkrnRAphFQNQuOyETu2Nn/NUEsp7ZE7ohsazcLjqzyzxM+Laxw1IV5Rh
- 9d+w==
-X-Gm-Message-State: APjAAAXvkAyK1z7dluyjFL7Q4v58u9t4sbpHedhVeBQLPoMTiQpPg1Uk
- Uu4RE1FfNlfM13kbgABO2DSmPATKX4HuAoDtzHc=
-X-Google-Smtp-Source: APXvYqwyfwrMG1Awh8Jn6PDarHaHsqV3KOA8Vp2Y5RTI+BUyfFHKE2j4CzmMfpQa9XOC1RY+eRocHtHBLplGzXxcuVY=
-X-Received: by 2002:ac2:5bc1:: with SMTP id u1mr12951572lfn.182.1570926845054; 
- Sat, 12 Oct 2019 17:34:05 -0700 (PDT)
+ (envelope-from <vsementsov@virtuozzo.com>) id 1iJvaB-0004eD-HE
+ for qemu-riscv@nongnu.org; Mon, 14 Oct 2019 04:20:01 -0400
+Received: from mail-eopbgr10126.outbound.protection.outlook.com
+ ([40.107.1.126]:55682 helo=EUR02-HE1-obe.outbound.protection.outlook.com)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <vsementsov@virtuozzo.com>)
+ id 1iJvaA-0004c3-Li; Mon, 14 Oct 2019 04:19:59 -0400
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=BpYmI0pS+0yJ7cV2vP4UwNTcd9lZAAURTOhu+VfX5cDYe6M/th0UuEDdQCRfv5HbAMP+dAOoe7ZnAyW1CqTHSRsw++ruJ1ciDBHvK05aeHhj5q/ZSVQIFPCDm2js88PSgqi/b9AznvX/1A52wsEU2OGPNAk0MY8AFTmTzsDiSVRVITXzvFMna/8cmIYkJDXiV0B/imRVaq5mPmlcTMz+RdHW51pU+3NQ91yuhrZUt9iqUdgbLFBMaAtS0ox3lCAs/j8PxUhg0g0yPbLPhoViiBpwea49KYCLKmUiZJKBkz9d+tnnB28NJitSnb66edJak+hfyNnWcvjYbCW2s3c+PQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=LqWzROTW11e8FonVvvq50XA/3CzppCV8wRKb9jcx3DU=;
+ b=CCtMKwnGzbXPEiA58PkeaYxTHT/IKJxskdrRfyHcFRJxdJ0Nhp1MzDjX4N0LSoDG9uZxg1FAN0jLY+TSF9OTfNLjQ1qKz4qq5pO9K6qTciHImm5+uFnMUwmnRS9Gg1QKaNBZUf/wKyHcMVfdTFULpOYDumgC/fiyR8p0NznHJUshMyhKTsKMyQEnpnaSdf/jMxh/fH6dej4rmjkdgrC+NwhAuuJlRgmFz1hLrBjq5A8DApeI8KkUh4j0hmr8O0Tjf9SQCVrrAJkZxPiCC33gF5X8bZ02ajpSyItYjrDCl4pZNWSTKE0VcIqo67txxc5r6ABQeY078SHeU97WDgAt4Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=virtuozzo.com; dmarc=pass action=none
+ header.from=virtuozzo.com; dkim=pass header.d=virtuozzo.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=virtuozzo.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=LqWzROTW11e8FonVvvq50XA/3CzppCV8wRKb9jcx3DU=;
+ b=Lpbni0EXfK1nkaw8Sf36PlHv+MRU1sU9sf+HKn3sbQZSma+S5RrEcPUYlIqshhQXj1F3WFADuhNv4OS/r7cCs+Y/Yq8MwunrKkn8i1ihDeiLtmo9NUC9KaN/wUs4tfYT7L5FFiUCgv5xhYiL5hkkt+Vt99ZgRsogX/SeHjMRi7A=
+Received: from DB8PR08MB5498.eurprd08.prod.outlook.com (52.133.242.216) by
+ DB8PR08MB5257.eurprd08.prod.outlook.com (10.255.18.14) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.2347.16; Mon, 14 Oct 2019 08:19:49 +0000
+Received: from DB8PR08MB5498.eurprd08.prod.outlook.com
+ ([fe80::2856:990a:197a:288f]) by DB8PR08MB5498.eurprd08.prod.outlook.com
+ ([fe80::2856:990a:197a:288f%2]) with mapi id 15.20.2347.021; Mon, 14 Oct 2019
+ 08:19:49 +0000
+From: Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>
+To: Eric Blake <eblake@redhat.com>, "qemu-devel@nongnu.org"
+ <qemu-devel@nongnu.org>
+CC: "armbru@redhat.com" <armbru@redhat.com>, Gerd Hoffmann
+ <kraxel@redhat.com>, "Gonglei (Arei)" <arei.gonglei@huawei.com>, Eduardo
+ Habkost <ehabkost@redhat.com>, Igor Mammedov <imammedo@redhat.com>, Laurent
+ Vivier <lvivier@redhat.com>, Amit Shah <amit@kernel.org>, Kevin Wolf
+ <kwolf@redhat.com>, Max Reitz <mreitz@redhat.com>, John Snow
+ <jsnow@redhat.com>, Ari Sundholm <ari@tuxera.com>, Pavel Dovgalyuk
+ <pavel.dovgaluk@ispras.ru>, Paolo Bonzini <pbonzini@redhat.com>, Stefan
+ Hajnoczi <stefanha@redhat.com>, Fam Zheng <fam@euphon.net>, Stefan Weil
+ <sw@weilnetz.de>, Ronnie Sahlberg <ronniesahlberg@gmail.com>, Peter Lieven
+ <pl@kamp.de>, Denis Lunev <den@virtuozzo.com>, Alberto Garcia
+ <berto@igalia.com>, Jason Dillaman <dillaman@redhat.com>, Wen Congyang
+ <wencongyang2@huawei.com>, Xie Changlong <xiechanglong.d@gmail.com>, Liu Yuan
+ <namei.unix@gmail.com>, "Richard W.M. Jones" <rjones@redhat.com>, Jeff Cody
+ <codyprime@gmail.com>, =?utf-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?=
+ <marcandre.lureau@redhat.com>, =?utf-8?B?RGFuaWVsIFAuIEJlcnJhbmfDqQ==?=
+ <berrange@redhat.com>, Richard Henderson <rth@twiddle.net>, Greg Kurz
+ <groug@kaod.org>, "Michael S. Tsirkin" <mst@redhat.com>, Marcel Apfelbaum
+ <marcel.apfelbaum@gmail.com>, Beniamino Galvani <b.galvani@gmail.com>, Peter
+ Maydell <peter.maydell@linaro.org>, =?utf-8?B?Q8OpZHJpYyBMZSBHb2F0ZXI=?=
+ <clg@kaod.org>, Andrew Jeffery <andrew@aj.id.au>, Joel Stanley
+ <joel@jms.id.au>, Andrew Baumann <Andrew.Baumann@microsoft.com>,
+ =?utf-8?B?UGhpbGlwcGUgTWF0aGlldS1EYXVkw6k=?= <philmd@redhat.com>, Antony
+ Pavlov <antonynpavlov@gmail.com>, Jean-Christophe Dubois
+ <jcd@tribudubois.net>, Peter Chubb <peter.chubb@nicta.com.au>, Subbaraya
+ Sundeep <sundeep.lkml@gmail.com>, Eric Auger <eric.auger@redhat.com>,
+ Alistair Francis <alistair@alistair23.me>, "Edgar E. Iglesias"
+ <edgar.iglesias@gmail.com>, Stefano Stabellini <sstabellini@kernel.org>,
+ Anthony Perard <anthony.perard@citrix.com>, Paul Durrant <paul@xen.org>, Paul
+ Burton <pburton@wavecomp.com>, Aleksandar Rikalo <arikalo@wavecomp.com>,
+ Chris Wulff <crwulff@gmail.com>, Marek Vasut <marex@denx.de>, David Gibson
+ <david@gibson.dropbear.id.au>, Cornelia Huck <cohuck@redhat.com>, Halil Pasic
+ <pasic@linux.ibm.com>, Christian Borntraeger <borntraeger@de.ibm.com>,
+ =?utf-8?B?SGVydsOpIFBvdXNzaW5lYXU=?= <hpoussin@reactos.org>, Xiao Guangrong
+ <xiaoguangrong.eric@gmail.com>, Aurelien Jarno <aurelien@aurel32.net>,
+ Aleksandar Markovic <amarkovic@wavecomp.com>, Mark Cave-Ayland
+ <mark.cave-ayland@ilande.co.uk>, Jason Wang <jasowang@redhat.com>, Laszlo
+ Ersek <lersek@redhat.com>, Yuval Shaia <yuval.shaia@oracle.com>, Palmer
+ Dabbelt <palmer@sifive.com>, Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, David Hildenbrand
+ <david@redhat.com>, Thomas Huth <thuth@redhat.com>, Eric Farman
+ <farman@linux.ibm.com>, Matthew Rosato <mjrosato@linux.ibm.com>, Hannes
+ Reinecke <hare@suse.com>, Michael Walle <michael@walle.cc>, Artyom Tarasenko
+ <atar4qemu@gmail.com>, Stefan Berger <stefanb@linux.ibm.com>, Samuel Thibault
+ <samuel.thibault@ens-lyon.org>, Alex Williamson <alex.williamson@redhat.com>, 
+ Tony Krowiak <akrowiak@linux.ibm.com>, Pierre Morel <pmorel@linux.ibm.com>,
+ Michael Roth <mdroth@linux.vnet.ibm.com>, Hailiang Zhang
+ <zhang.zhanghailiang@huawei.com>, Juan Quintela <quintela@redhat.com>, "Dr.
+ David Alan Gilbert" <dgilbert@redhat.com>, Luigi Rizzo <rizzo@iet.unipi.it>,
+ Giuseppe Lettieri <g.lettieri@iet.unipi.it>, Vincenzo Maffione
+ <v.maffione@gmail.com>, Jan Kiszka <jan.kiszka@siemens.com>, Anthony Green
+ <green@moxielogic.com>, Stafford Horne <shorne@gmail.com>, Guan Xuetao
+ <gxt@mprc.pku.edu.cn>, Max Filippov <jcmvbkbc@gmail.com>,
+ "qemu-block@nongnu.org" <qemu-block@nongnu.org>, "integration@gluster.org"
+ <integration@gluster.org>, "sheepdog@lists.wpkg.org"
+ <sheepdog@lists.wpkg.org>, "qemu-arm@nongnu.org" <qemu-arm@nongnu.org>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ "qemu-ppc@nongnu.org" <qemu-ppc@nongnu.org>, "qemu-s390x@nongnu.org"
+ <qemu-s390x@nongnu.org>, "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>
+Subject: Re: [RFC v5 025/126] scripts: add coccinelle script to use auto
+ propagated errp
+Thread-Topic: [RFC v5 025/126] scripts: add coccinelle script to use auto
+ propagated errp
+Thread-Index: AQHVgE3Yxrwb2TPU1UWX1rcryXdDAKdVrZuAgAQiCQA=
+Date: Mon, 14 Oct 2019 08:19:49 +0000
+Message-ID: <6856bd09-65fc-30d7-2a3c-c85334a024e9@virtuozzo.com>
+References: <20191011160552.22907-1-vsementsov@virtuozzo.com>
+ <20191011160552.22907-26-vsementsov@virtuozzo.com>
+ <5dd4d642-7ea6-42a2-66fc-6d6710b77b8d@redhat.com>
+In-Reply-To: <5dd4d642-7ea6-42a2-66fc-6d6710b77b8d@redhat.com>
+Accept-Language: ru-RU, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-clientproxiedby: HE1PR1001CA0012.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:3:f7::22) To DB8PR08MB5498.eurprd08.prod.outlook.com
+ (2603:10a6:10:11c::24)
+authentication-results: spf=none (sender IP is )
+ smtp.mailfrom=vsementsov@virtuozzo.com; 
+x-ms-exchange-messagesentrepresentingtype: 1
+x-tagtoolbar-keys: D20191014111940423
+x-originating-ip: [185.231.240.5]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: ec25e92e-eb32-4668-238e-08d7507f476e
+x-ms-traffictypediagnostic: DB8PR08MB5257:
+x-ms-exchange-transport-forked: True
+x-microsoft-antispam-prvs: <DB8PR08MB5257AA45EFCAED84F4C52092C1900@DB8PR08MB5257.eurprd08.prod.outlook.com>
+x-ms-oob-tlc-oobclassifiers: OLM:6108;
+x-forefront-prvs: 01901B3451
+x-forefront-antispam-report: SFV:NSPM;
+ SFS:(10019020)(366004)(346002)(376002)(396003)(39840400004)(136003)(199004)(189003)(4326008)(486006)(7736002)(7336002)(7276002)(316002)(7406005)(52116002)(76176011)(305945005)(99286004)(110136005)(386003)(26005)(5660300002)(25786009)(54906003)(2906002)(476003)(11346002)(2616005)(31686004)(7366002)(446003)(7416002)(31696002)(6506007)(6512007)(186003)(6116002)(3846002)(86362001)(102836004)(478600001)(81156014)(66946007)(8676002)(81166006)(71200400001)(256004)(6436002)(71190400001)(8936002)(2501003)(66556008)(66476007)(66446008)(64756008)(14454004)(229853002)(53546011)(66066001)(6486002)(6246003)(36756003);
+ DIR:OUT; SFP:1102; SCL:1; SRVR:DB8PR08MB5257;
+ H:DB8PR08MB5498.eurprd08.prod.outlook.com; FPR:; SPF:None; LANG:en;
+ PTR:InfoNoRecords; A:1; MX:1; 
+received-spf: None (protection.outlook.com: virtuozzo.com does not designate
+ permitted sender hosts)
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: Tf6iIbyGk/5Oaol3u6qvRrD6GIOA3ZRhVVbSw/a4jPwEOmZyzJRu5EQjhfYwBOXKf/Ccd2OXi5tiGxx/U1+GS2MHvVRvr7wzd4eMNokLJbvjJ6MamoFqR4wF+YPIGWbEWAk0REk3NUvaryKzJiO8PnQkA0XUqH7dJy2L7eZFUhR8BYARlVHsmShEBWQDVfBGblDgphF9R0Sag7ND5RHGBbPlTqEWVbR9bWl6hIwNUpwpc2rPjL5NufNL7twSgjqqkvSXpMjuOe9rL8n5FOvbU4GgmD9KugToGXMx1Vtrj2q+6sjJR9Wiu5fVXLVMyT/Crv/c2K/8vzC56D65g8RoL3p9osnJW+VxRKlOMtXSN/I3NOllKd+T1QUvFqqAtnLpXnMfIyEb2rXmnEW8K9b5Idd6WgNNNNU+yPA8gUvd2q4=
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <7F3C0F0628EC7D48895BAAE7FEEEC08A@eurprd08.prod.outlook.com>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-References: <1569456861-8502-1-git-send-email-guoren@kernel.org>
- <mhng-32483094-26fb-4f1d-9d82-facd447bc7df@palmer-si-x1c4>
- <CAJF2gTRZ-WXTcUh3z8qmbNxb-i8x1vAyuOiSF5NA75WxyRaDcA@mail.gmail.com>
-In-Reply-To: <CAJF2gTRZ-WXTcUh3z8qmbNxb-i8x1vAyuOiSF5NA75WxyRaDcA@mail.gmail.com>
-From: Jonathan Behrens <fintelia@gmail.com>
-Date: Sat, 12 Oct 2019 20:33:38 -0400
-Message-ID: <CANnJOVEXmsVho7db1xq1-vDk7D4shxMRW-eh-PQuxtu1eKQsaQ@mail.gmail.com>
-Subject: Re: [PATCH V6] target/riscv: Ignore reserved bits in PTE for RV64
-To: Guo Ren <guoren@kernel.org>
-Cc: Palmer Dabbelt <palmer@sifive.com>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Alistair Francis <Alistair.Francis@wdc.com>, 
- Ren Guo <ren_guo@c-sky.com>, Alistair Francis <alistair23@gmail.com>,
- Bin Meng <bmeng.cn@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2a00:1450:4864:20::142
+X-OriginatorOrg: virtuozzo.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: ec25e92e-eb32-4668-238e-08d7507f476e
+X-MS-Exchange-CrossTenant-originalarrivaltime: 14 Oct 2019 08:19:49.2929 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 0bc7f26d-0264-416e-a6fc-8352af79c58f
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: jBF0IV5jHw2CUB0Z00Rka18xBUKskaPNpqQA9W5ZrVvs9o+1N/mVih5qj/PpttA57+8BlOl+1M5qIbxpM5mWQBWy/HLMQTfFWGiRgR/7zVY=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB8PR08MB5257
+X-detected-operating-system: by eggs.gnu.org: Windows 7 or 8 [fuzzy]
+X-Received-From: 40.107.1.126
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -70,109 +162,61 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 13 Oct 2019 00:34:10 -0000
+X-List-Received-Date: Mon, 14 Oct 2019 08:20:04 -0000
 
-There is nowhere in the spec that ever says what hardware has to do if
-any of those reserved bits are non-zero. Hardware is certainly not
-required to ignore them and treat the PTE as being valid (which is
-what this patch does). I'd argue that since only buggy code would ever
-set these bits, QEMU should treat any PTE with them set as being
-invalid so that programmers can realize they've made a mistake.
-
-Jonathan
-
-
-On Sat, Oct 12, 2019 at 8:16 PM Guo Ren <guoren@kernel.org> wrote:
->
-> The patch didn't wrap the physical address space directly, just follow the spec.
-> I admit that I am trying to use the compliance specification to allow
-> qemu to support some non-standard software.
-> But compliance specification and wrapping the physical address space
-> are different things.
-> I'm preparing c910 pachset for linux riscv and you can question me there.
->
-> On Sun, Oct 13, 2019 at 1:33 AM Palmer Dabbelt <palmer@sifive.com> wrote:
-> >
-> > On Wed, 25 Sep 2019 17:14:21 PDT (-0700), guoren@kernel.org wrote:
-> > > From: Guo Ren <ren_guo@c-sky.com>
-> > >
-> > > Highest 10 bits of PTE are reserved in riscv-privileged, ref: [1], so we
-> > > need to ignore them. They cannot be a part of ppn.
-> > >
-> > > 1: The RISC-V Instruction Set Manual, Volume II: Privileged Architecture
-> > >    4.4 Sv39: Page-Based 39-bit Virtual-Memory System
-> > >    4.5 Sv48: Page-Based 48-bit Virtual-Memory System
-> > >
-> > > Signed-off-by: Guo Ren <ren_guo@c-sky.com>
-> > > Tested-by: Bin Meng <bmeng.cn@gmail.com>
-> > > Reviewed-by: Liu Zhiwei <zhiwei_liu@c-sky.com>
-> > > Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
-> > > Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-> > > ---
-> > >  target/riscv/cpu_bits.h   | 7 +++++++
-> > >  target/riscv/cpu_helper.c | 2 +-
-> > >  2 files changed, 8 insertions(+), 1 deletion(-)
-> > >
-> > >  Changelog V6:
-> > >   - Add Reviewer: Alistair Francis
-> > >
-> > >  Changelog V5:
-> > >   - Add Reviewer and Tester: Bin Meng
-> > >
-> > >  Changelog V4:
-> > >   - Change title to Ignore not Bugfix
-> > >   - Use PTE_PPN_MASK for RV32 and RV64
-> > >
-> > >  Changelog V3:
-> > >   - Use UUL define for PTE_RESERVED
-> > >   - Keep ppn >> PTE_PPN_SHIFT
-> > >
-> > >  Changelog V2:
-> > >   - Bugfix pte destroyed cause boot fail
-> > >   - Change to AND with a mask instead of shifting both directions
-> > >
-> > > diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-> > > index e998348..399c2c6 100644
-> > > --- a/target/riscv/cpu_bits.h
-> > > +++ b/target/riscv/cpu_bits.h
-> > > @@ -473,6 +473,13 @@
-> > >  /* Page table PPN shift amount */
-> > >  #define PTE_PPN_SHIFT       10
-> > >
-> > > +/* Page table PPN mask */
-> > > +#if defined(TARGET_RISCV32)
-> > > +#define PTE_PPN_MASK        0xffffffffUL
-> > > +#elif defined(TARGET_RISCV64)
-> > > +#define PTE_PPN_MASK        0x3fffffffffffffULL
-> > > +#endif
-> > > +
-> > >  /* Leaf page shift amount */
-> > >  #define PGSHIFT             12
-> > >
-> > > diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> > > index 87dd6a6..9961b37 100644
-> > > --- a/target/riscv/cpu_helper.c
-> > > +++ b/target/riscv/cpu_helper.c
-> > > @@ -261,7 +261,7 @@ restart:
-> > >  #elif defined(TARGET_RISCV64)
-> > >          target_ulong pte = ldq_phys(cs->as, pte_addr);
-> > >  #endif
-> > > -        hwaddr ppn = pte >> PTE_PPN_SHIFT;
-> > > +        hwaddr ppn = (pte & PTE_PPN_MASK) >> PTE_PPN_SHIFT;
-> > >
-> > >          if (!(pte & PTE_V)) {
-> > >              /* Invalid PTE */
-> >
-> > I know I'm a bit late to the party here, but I don't like this.  There's ample
-> > evidence that wrapping the physical address space is a bad idea, and just
-> > because the ISA allows implementations to do this doesn't mean we should.
->
->
->
-> --
-> Best Regards
->  Guo Ren
->
-> ML: https://lore.kernel.org/linux-csky/
->
+MTEuMTAuMjAxOSAyMDoxMiwgRXJpYyBCbGFrZSB3cm90ZToNCj4gT24gMTAvMTEvMTkgMTE6MDQg
+QU0sIFZsYWRpbWlyIFNlbWVudHNvdi1PZ2lldnNraXkgd3JvdGU6DQo+PiBTaWduZWQtb2ZmLWJ5
+OiBWbGFkaW1pciBTZW1lbnRzb3YtT2dpZXZza2l5IDx2c2VtZW50c292QHZpcnR1b3p6by5jb20+
+DQo+PiAtLS0NCj4+DQo+IA0KPj4gwqAgc2NyaXB0cy9jb2NjaW5lbGxlL2F1dG8tcHJvcGFnYXRl
+ZC1lcnJwLmNvY2NpIHwgMTE4ICsrKysrKysrKysrKysrKysrKw0KPj4gwqAgMSBmaWxlIGNoYW5n
+ZWQsIDExOCBpbnNlcnRpb25zKCspDQo+PiDCoCBjcmVhdGUgbW9kZSAxMDA2NDQgc2NyaXB0cy9j
+b2NjaW5lbGxlL2F1dG8tcHJvcGFnYXRlZC1lcnJwLmNvY2NpDQo+Pg0KPj4gZGlmZiAtLWdpdCBh
+L3NjcmlwdHMvY29jY2luZWxsZS9hdXRvLXByb3BhZ2F0ZWQtZXJycC5jb2NjaSBiL3NjcmlwdHMv
+Y29jY2luZWxsZS9hdXRvLXByb3BhZ2F0ZWQtZXJycC5jb2NjaQ0KPj4gbmV3IGZpbGUgbW9kZSAx
+MDA2NDQNCj4+IGluZGV4IDAwMDAwMDAwMDAuLmQ5NzMxNjIwYWENCj4+IC0tLSAvZGV2L251bGwN
+Cj4+ICsrKyBiL3NjcmlwdHMvY29jY2luZWxsZS9hdXRvLXByb3BhZ2F0ZWQtZXJycC5jb2NjaQ0K
+PiANCj4+ICtAcnVsZTFADQo+PiArLy8gRHJvcCBsb2NhbF9lcnINCj4+ICtpZGVudGlmaWVyIGZu
+LCBsb2NhbF9lcnI7DQo+PiArc3ltYm9sIGVycnA7DQo+PiArQEANCj4+ICsNCj4+ICsgZm4oLi4u
+LCBFcnJvciAqKmVycnAsIC4uLikNCj4+ICsgew0KPj4gK8KgwqDCoMKgIDwuLi4NCj4+ICstwqDC
+oMKgIEVycm9yICpsb2NhbF9lcnIgPSBOVUxMOw0KPj4gK8KgwqDCoMKgIC4uLj4NCj4+ICsgfQ0K
+Pj4gKw0KPiANCj4gU28gb3VyIGdvYWwgaXMgdG8gYXV0b21hdGUgcmVtb3ZhbCBvZiBhbGwgbG9j
+YWxfZXJyIChpbmNsdWRpbmcgd2hlbiBpdCBpcyBzcGVsbGVkIGVycikuLi4NCj4gDQo+PiArQEAN
+Cj4+ICsvLyBIYW5kbGUgcGF0dGVybiB3aXRoIGdvdG8sIG90aGVyd2lzZSB3ZSdsbCBmaW5pc2gg
+dXANCj4+ICsvLyB3aXRoIGxhYmVscyBhdCBmdW5jdGlvbiBlbmQgd2hpY2ggd2lsbCBub3QgY29t
+cGlsZS4NCj4+ICtpZGVudGlmaWVyIHJ1bGUxLmZuOw0KPj4gK2lkZW50aWZpZXIgcnVsZTEubG9j
+YWxfZXJyOw0KPj4gK2lkZW50aWZpZXIgT1VUOw0KPj4gK0BADQo+PiArDQo+PiArIGZuKC4uLikN
+Cj4+ICsgew0KPj4gK8KgwqDCoMKgIDwuLi4NCj4+ICstwqDCoMKgIGdvdG8gT1VUOw0KPj4gKyvC
+oMKgwqAgcmV0dXJuOw0KPj4gK8KgwqDCoMKgIC4uLj4NCj4+ICstIE9VVDoNCj4+ICstwqDCoMKg
+IGVycm9yX3Byb3BhZ2F0ZShlcnJwLCBsb2NhbF9lcnIpOw0KPj4gKyB9DQo+PiArDQo+IA0KPiB0
+aGlzIGRhbmdsaW5nIGxhYmVsIGNsZWFudXAgbWFrZXMgc2Vuc2UNCj4gDQo+PiArQEANCj4+ICtp
+ZGVudGlmaWVyIHJ1bGUxLmZuOw0KPj4gK2lkZW50aWZpZXIgcnVsZTEubG9jYWxfZXJyOw0KPj4g
+K0BADQo+PiArDQo+PiArIGZuKC4uLikNCj4+ICsgew0KPj4gK8KgwqDCoMKgIDwuLi4NCj4+ICso
+DQo+PiArLcKgwqDCoCBlcnJvcl9mcmVlKGxvY2FsX2Vycik7DQo+PiArLcKgwqDCoCBsb2NhbF9l
+cnIgPSBOVUxMOw0KPj4gKyvCoMKgwqAgZXJyb3JfZnJlZV9lcnJwKGVycnApOw0KPiANCj4gVGhp
+cyBkb2VzIG5vdCBtYWtlIHNlbnNlIC0gZXJyb3JfZnJlZV9lcnJwKCkgaXMgbm90IGRlZmluZWQg
+cHJpb3IgdG8gdGhpcyBzZXJpZXMgb3IgYW55d2hlcmUgaW4gcGF0Y2hlcyAxLTI0LCBpZiBJJ20g
+cmVhZGluZyBpdCBjb3JyZWN0bHkuDQo+IA0KPj4gK3wNCj4+ICstwqDCoMKgIGVycm9yX2ZyZWUo
+bG9jYWxfZXJyKTsNCj4+ICsrwqDCoMKgIGVycm9yX2ZyZWVfZXJycChlcnJwKTsNCj4gDQo+IGFu
+ZCBhZ2Fpbg0KPiANCj4+ICt8DQo+PiArLcKgwqDCoCBlcnJvcl9yZXBvcnRfZXJyKGxvY2FsX2Vy
+cik7DQo+PiArK8KgwqDCoCBlcnJvcl9yZXBvcnRfZXJycChlcnJwKTsNCj4+ICt8DQo+PiArLcKg
+wqDCoCB3YXJuX3JlcG9ydF9lcnIobG9jYWxfZXJyKTsNCj4+ICsrwqDCoMKgIHdhcm5fcmVwb3J0
+X2VycnAoZXJycCk7DQo+PiArfA0KPj4gKy3CoMKgwqAgZXJyb3JfcHJvcGFnYXRlX3ByZXBlbmQo
+ZXJycCwgbG9jYWxfZXJyLA0KPj4gKyvCoMKgwqAgZXJyb3JfcHJlcGVuZChlcnJwLA0KPj4gK8Kg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAg
+Li4uKTsNCj4+ICt8DQo+PiArLcKgwqDCoCBlcnJvcl9wcm9wYWdhdGUoZXJycCwgbG9jYWxfZXJy
+KTsNCj4+ICspDQo+PiArwqDCoMKgwqAgLi4uPg0KPj4gKyB9DQo+PiArDQo+IA0KPiBJdCBsb29r
+cyBsaWtlIG9uY2UgdGhpcyBzY3JpcHQgaXMgcnVuLCBlcnJvcl9wcm9wYWdhdGVfcHJlcGVuZCgp
+IHdpbGwgaGF2ZSBubyBjbGllbnRzLg0KDQpObywgaXQgc3RpbGwgaGF2ZSBhIGJpdCwgd2hlbiB3
+b3JraW5nIHdpdGggZXJyb3JfY29weSwgYW5kL29yIG1vdmluZyBlcnJvcnMgZnJvbS90byBzdHJ1
+Y3R1cmVzLg0KDQo+IElzIHRoZXJlIGEgbm9uLWdlbmVyYXRlZCBjbGVhbnVwIHBhdGNoIHRoYXQg
+cmVtb3ZlcyBpdCAoYW5kIG9uY2UgaXQgaXMgcmVtb3ZlZCwgaXQgY2FuIGFsc28gYmUgcmVtb3Zl
+ZCBmcm9tIHRoZSAuY29jY2kgc2NyaXB0IGFzIG5vIGZ1cnRoZXIgY2xpZW50cyB3aWxsIHJlYXBw
+ZWFyIGxhdGVyKT8NCg0KTWF5YmUuDQoNCj4gDQo+IA0KPj4gK0BADQo+PiAraWRlbnRpZmllciBy
+dWxlMS5mbjsNCj4+ICtpZGVudGlmaWVyIHJ1bGUxLmxvY2FsX2VycjsNCj4+ICtAQA0KPj4gKw0K
+Pj4gKyBmbiguLi4pDQo+PiArIHsNCj4+ICvCoMKgwqDCoCA8Li4uDQo+PiArKA0KPj4gKy3CoMKg
+wqAgJmxvY2FsX2Vycg0KPj4gKyvCoMKgwqAgZXJycA0KPj4gK3wNCj4+ICstwqDCoMKgIGxvY2Fs
+X2Vycg0KPj4gKyvCoMKgwqAgKmVycnANCj4+ICspDQo+PiArwqDCoMKgwqAgLi4uPg0KPj4gKyB9
+DQo+PiArDQo+PiArQEANCj4+ICtzeW1ib2wgZXJycDsNCj4+ICtAQA0KPj4gKw0KPj4gKy0gKmVy
+cnAgIT0gTlVMTA0KPj4gKysgKmVycnANCj4+DQo+IA0KPiBTZWVtcyB0byBtYWtlIHNlbnNlLg0K
+PiANCg0KDQotLSANCkJlc3QgcmVnYXJkcywNClZsYWRpbWlyDQo=
 
