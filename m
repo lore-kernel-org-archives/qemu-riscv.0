@@ -1,76 +1,122 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iJy2M-0006qm-B9
-	for mharc-qemu-riscv@gnu.org; Mon, 14 Oct 2019 06:57:14 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:45468)
+	id 1iK0uZ-0004h5-PC
+	for mharc-qemu-riscv@gnu.org; Mon, 14 Oct 2019 10:01:23 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44613)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <alex.bennee@linaro.org>) id 1iJy29-0006a5-KI
- for qemu-riscv@nongnu.org; Mon, 14 Oct 2019 06:57:03 -0400
+ (envelope-from <eblake@redhat.com>) id 1iK0uR-0004Uf-OL
+ for qemu-riscv@nongnu.org; Mon, 14 Oct 2019 10:01:20 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alex.bennee@linaro.org>) id 1iJy28-00058Y-78
- for qemu-riscv@nongnu.org; Mon, 14 Oct 2019 06:57:01 -0400
-Received: from mail-wm1-x343.google.com ([2a00:1450:4864:20::343]:34514)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <alex.bennee@linaro.org>)
- id 1iJy28-00055E-0x
- for qemu-riscv@nongnu.org; Mon, 14 Oct 2019 06:57:00 -0400
-Received: by mail-wm1-x343.google.com with SMTP id y135so14227038wmc.1
- for <qemu-riscv@nongnu.org>; Mon, 14 Oct 2019 03:56:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=+MF52Dp1tIuy0gH0L5TXn68Hzokx6/nbmqPRJPtyksM=;
- b=tOsfDhQrvWGnrPVlnmK5f/TXut0hgwt19BVb3kVnHdg7JIntLwUKOuGk3Fex87sNFR
- ua29FaRJ944GmxxOQ//ypy/qqlukJYMb3mqxVyFDroPTMLD2u4depBlyruhBXYiQw2tF
- If+TmHeHP7dXxUZGmdTVVOkDbXJapok2RhVK7TXwF+N+eekRisc+jBBAfKI2m+O2yeXq
- Zs+VKBsLO07sGKafYHMMOqdG98VV6tT8/G8ABwQmlILJpT7IycWM7sxEoIRvemobI+TR
- JHriRBpULPNIr3vyWfS6UXitMRyfxj+l/NjwnbOqaf5GZgVOtqozjEHQn4n8mvVSCJB7
- BCkw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=+MF52Dp1tIuy0gH0L5TXn68Hzokx6/nbmqPRJPtyksM=;
- b=Xo5iY9jzmT9tPCI7YH8sp3emYJm+jnt0tQPLCtNb7C2HB/0X2PUw4GZyfsSh4QKAHs
- F19+kfiJBpjJAQqjexOyc4Cp3OJoNHGB3DyDRSFvYgo4gxE9hYGyWHfPe/C4j2e12o4D
- USeADm6rYySbjsvT5UU5O90O/5MLPs6WMyYF518y52ljI6Hk29DAOlG9qbT86paEr8yb
- WZYAGHMGshpOtO2KiCFpElfh6dzpeTjRh9WoCwMVRbvwhPwz9b4iE0fys9QvpwMDOzYZ
- HDdY4u+VDle/wtU6vKyYk2VQcEiF3xiBzQrZ6rEudVUJhZvrVoLL4sb5jS7MQtCFK7yH
- M8BA==
-X-Gm-Message-State: APjAAAXcSwmG8nZh1syR42UuxXknV0fIscnAYwuElaJpr2GzfW88luqJ
- LpGWfUaDy8R4rTc/pg327Ao/cw==
-X-Google-Smtp-Source: APXvYqwdnroOs3N9SFTp/ThRxrZn8iyvA5atzSUAbk4eSCk8ccw4KTWL0AyTvjsSFp/gNDzgpECE+A==
-X-Received: by 2002:a1c:41c1:: with SMTP id o184mr15324749wma.81.1571050617771; 
- Mon, 14 Oct 2019 03:56:57 -0700 (PDT)
-Received: from zen.linaroharston ([51.148.130.216])
- by smtp.gmail.com with ESMTPSA id f13sm16009547wmj.17.2019.10.14.03.56.53
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 14 Oct 2019 03:56:56 -0700 (PDT)
-Received: from zen.lan (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id 30E8C1FF8C;
- Mon, 14 Oct 2019 11:49:56 +0100 (BST)
-From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: qemu-devel@nongnu.org
-Cc: cota@braap.org, aaron@os.amperecomputing.com, peter.puhov@futurewei.com,
- robert.foley@futurewei.com,
- Richard Henderson <richard.henderson@linaro.org>,
- =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Palmer Dabbelt <palmer@sifive.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
+ (envelope-from <eblake@redhat.com>) id 1iK0uQ-0008CU-Dw
+ for qemu-riscv@nongnu.org; Mon, 14 Oct 2019 10:01:15 -0400
+Received: from mx1.redhat.com ([209.132.183.28]:9908)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <eblake@redhat.com>)
+ id 1iK0uC-000828-91; Mon, 14 Oct 2019 10:01:02 -0400
+Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
+ [10.5.11.16])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mx1.redhat.com (Postfix) with ESMTPS id 62DE020FD;
+ Mon, 14 Oct 2019 14:00:56 +0000 (UTC)
+Received: from [10.3.116.168] (ovpn-116-168.phx2.redhat.com [10.3.116.168])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id EDD0E5C541;
+ Mon, 14 Oct 2019 14:00:19 +0000 (UTC)
+Subject: Re: [RFC v5 025/126] scripts: add coccinelle script to use auto
+ propagated errp
+To: Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>,
+ "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>
+Cc: "armbru@redhat.com" <armbru@redhat.com>, Gerd Hoffmann
+ <kraxel@redhat.com>, "Gonglei (Arei)" <arei.gonglei@huawei.com>,
+ Eduardo Habkost <ehabkost@redhat.com>, Igor Mammedov <imammedo@redhat.com>,
+ Laurent Vivier <lvivier@redhat.com>, Amit Shah <amit@kernel.org>,
+ Kevin Wolf <kwolf@redhat.com>, Max Reitz <mreitz@redhat.com>,
+ John Snow <jsnow@redhat.com>, Ari Sundholm <ari@tuxera.com>,
+ Pavel Dovgalyuk <pavel.dovgaluk@ispras.ru>,
+ Paolo Bonzini <pbonzini@redhat.com>, Stefan Hajnoczi <stefanha@redhat.com>,
+ Fam Zheng <fam@euphon.net>, Stefan Weil <sw@weilnetz.de>,
+ Ronnie Sahlberg <ronniesahlberg@gmail.com>, Peter Lieven <pl@kamp.de>,
+ Denis Lunev <den@virtuozzo.com>, Alberto Garcia <berto@igalia.com>,
+ Jason Dillaman <dillaman@redhat.com>, Wen Congyang
+ <wencongyang2@huawei.com>, Xie Changlong <xiechanglong.d@gmail.com>,
+ Liu Yuan <namei.unix@gmail.com>, "Richard W.M. Jones" <rjones@redhat.com>,
+ Jeff Cody <codyprime@gmail.com>,
+ =?UTF-8?Q?Marc-Andr=c3=a9_Lureau?= <marcandre.lureau@redhat.com>,
+ =?UTF-8?Q?Daniel_P=2e_Berrang=c3=a9?= <berrange@redhat.com>,
+ Richard Henderson <rth@twiddle.net>, Greg Kurz <groug@kaod.org>,
+ "Michael S. Tsirkin" <mst@redhat.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Beniamino Galvani <b.galvani@gmail.com>,
+ Peter Maydell <peter.maydell@linaro.org>, =?UTF-8?Q?C=c3=a9dric_Le_Goater?=
+ <clg@kaod.org>, Andrew Jeffery <andrew@aj.id.au>,
+ Joel Stanley <joel@jms.id.au>, Andrew Baumann
+ <Andrew.Baumann@microsoft.com>, =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?=
+ <philmd@redhat.com>, Antony Pavlov <antonynpavlov@gmail.com>,
+ Jean-Christophe Dubois <jcd@tribudubois.net>,
+ Peter Chubb <peter.chubb@nicta.com.au>,
+ Subbaraya Sundeep <sundeep.lkml@gmail.com>,
+ Eric Auger <eric.auger@redhat.com>, Alistair Francis
+ <alistair@alistair23.me>, "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Anthony Perard <anthony.perard@citrix.com>, Paul Durrant <paul@xen.org>,
+ Paul Burton <pburton@wavecomp.com>, Aleksandar Rikalo
+ <arikalo@wavecomp.com>, Chris Wulff <crwulff@gmail.com>,
+ Marek Vasut <marex@denx.de>, David Gibson <david@gibson.dropbear.id.au>,
+ Cornelia Huck <cohuck@redhat.com>, Halil Pasic <pasic@linux.ibm.com>,
+ Christian Borntraeger <borntraeger@de.ibm.com>,
+ =?UTF-8?Q?Herv=c3=a9_Poussineau?= <hpoussin@reactos.org>,
+ Xiao Guangrong <xiaoguangrong.eric@gmail.com>,
+ Aurelien Jarno <aurelien@aurel32.net>,
+ Aleksandar Markovic <amarkovic@wavecomp.com>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Jason Wang <jasowang@redhat.com>, Laszlo Ersek <lersek@redhat.com>,
+ Yuval Shaia <yuval.shaia@oracle.com>, Palmer Dabbelt <palmer@sifive.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
-Subject: [PATCH  v5 31/55] target/riscv: fetch code with translator_ld
-Date: Mon, 14 Oct 2019 11:49:24 +0100
-Message-Id: <20191014104948.4291-32-alex.bennee@linaro.org>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20191014104948.4291-1-alex.bennee@linaro.org>
-References: <20191014104948.4291-1-alex.bennee@linaro.org>
+ David Hildenbrand <david@redhat.com>, Thomas Huth <thuth@redhat.com>,
+ Eric Farman <farman@linux.ibm.com>, Matthew Rosato <mjrosato@linux.ibm.com>,
+ Hannes Reinecke <hare@suse.com>, Michael Walle <michael@walle.cc>,
+ Artyom Tarasenko <atar4qemu@gmail.com>, Stefan Berger
+ <stefanb@linux.ibm.com>, Samuel Thibault <samuel.thibault@ens-lyon.org>,
+ Alex Williamson <alex.williamson@redhat.com>,
+ Tony Krowiak <akrowiak@linux.ibm.com>, Pierre Morel <pmorel@linux.ibm.com>,
+ Michael Roth <mdroth@linux.vnet.ibm.com>,
+ Hailiang Zhang <zhang.zhanghailiang@huawei.com>,
+ Juan Quintela <quintela@redhat.com>,
+ "Dr. David Alan Gilbert" <dgilbert@redhat.com>,
+ Luigi Rizzo <rizzo@iet.unipi.it>, Giuseppe Lettieri
+ <g.lettieri@iet.unipi.it>, Vincenzo Maffione <v.maffione@gmail.com>,
+ Jan Kiszka <jan.kiszka@siemens.com>, Anthony Green <green@moxielogic.com>,
+ Stafford Horne <shorne@gmail.com>, Guan Xuetao <gxt@mprc.pku.edu.cn>,
+ Max Filippov <jcmvbkbc@gmail.com>,
+ "qemu-block@nongnu.org" <qemu-block@nongnu.org>,
+ "integration@gluster.org" <integration@gluster.org>,
+ "sheepdog@lists.wpkg.org" <sheepdog@lists.wpkg.org>,
+ "qemu-arm@nongnu.org" <qemu-arm@nongnu.org>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ "qemu-ppc@nongnu.org" <qemu-ppc@nongnu.org>,
+ "qemu-s390x@nongnu.org" <qemu-s390x@nongnu.org>,
+ "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>
+References: <20191011160552.22907-1-vsementsov@virtuozzo.com>
+ <20191011160552.22907-26-vsementsov@virtuozzo.com>
+ <5dd4d642-7ea6-42a2-66fc-6d6710b77b8d@redhat.com>
+ <6856bd09-65fc-30d7-2a3c-c85334a024e9@virtuozzo.com>
+From: Eric Blake <eblake@redhat.com>
+Organization: Red Hat, Inc.
+Message-ID: <e8fa1e71-5f48-e1f0-80f3-ef438c117693@redhat.com>
+Date: Mon, 14 Oct 2019 09:00:19 -0500
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.1.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2a00:1450:4864:20::343
+In-Reply-To: <6856bd09-65fc-30d7-2a3c-c85334a024e9@virtuozzo.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.6.2
+ (mx1.redhat.com [10.5.110.71]); Mon, 14 Oct 2019 14:00:57 +0000 (UTC)
+Content-Transfer-Encoding: quoted-printable
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+ [fuzzy]
+X-Received-From: 209.132.183.28
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -82,31 +128,42 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Oct 2019 10:57:03 -0000
+X-List-Received-Date: Mon, 14 Oct 2019 14:01:21 -0000
 
-From: "Emilio G. Cota" <cota@braap.org>
+On 10/14/19 3:19 AM, Vladimir Sementsov-Ogievskiy wrote:
 
-Signed-off-by: Emilio G. Cota <cota@braap.org>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
----
- target/riscv/translate.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+>>> +|
+>>> +-=C2=A0=C2=A0=C2=A0 error_propagate(errp, local_err);
+>>> +)
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0 ...>
+>>> + }
+>>> +
+>>
+>> It looks like once this script is run, error_propagate_prepend() will =
+have no clients.
+>=20
+> No, it still have a bit, when working with error_copy, and/or moving er=
+rors from/to structures.
 
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index adeddb85f6..b26533d4fd 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -779,7 +779,7 @@ static void riscv_tr_translate_insn(DisasContextBase *dcbase, CPUState *cpu)
-     DisasContext *ctx = container_of(dcbase, DisasContext, base);
-     CPURISCVState *env = cpu->env_ptr;
- 
--    ctx->opcode = cpu_ldl_code(env, ctx->base.pc_next);
-+    ctx->opcode = translator_ldl(env, ctx->base.pc_next);
-     decode_opc(ctx);
-     ctx->base.pc_next = ctx->pc_succ_insn;
- 
--- 
-2.20.1
+No public clients. So can we turn it into a static function only used by=20
+error.c?
 
+>=20
+>> Is there a non-generated cleanup patch that removes it (and once it is=
+ removed, it can also be removed from the .cocci script as no further cli=
+ents will reappear later)?
+>=20
+> Maybe.
+>=20
+
+Basically, if we can get error_propagate out of error.h, that's a good=20
+sign.  But it's not a show-stopper if we can't do it for some legitimate=20
+reason (such a reason might include that the definition of the=20
+ERRP_AUTO_PROPAGATE macro is easier to write if error_propagate remains=20
+in the .h), so we'll just have to see what is possible.
+
+--=20
+Eric Blake, Principal Software Engineer
+Red Hat, Inc.           +1-919-301-3226
+Virtualization:  qemu.org | libvirt.org
 
