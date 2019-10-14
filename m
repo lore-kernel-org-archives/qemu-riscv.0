@@ -1,67 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iK4hw-0000bS-Qm
-	for mharc-qemu-riscv@gnu.org; Mon, 14 Oct 2019 14:04:38 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:54524)
+	id 1iK4iw-0001uw-HS
+	for mharc-qemu-riscv@gnu.org; Mon, 14 Oct 2019 14:05:38 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:54661)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <alistair23@gmail.com>) id 1iK4hn-0000Zz-N0
- for qemu-riscv@nongnu.org; Mon, 14 Oct 2019 14:04:29 -0400
+ (envelope-from <alistair23@gmail.com>) id 1iK4it-0001rQ-D3
+ for qemu-riscv@nongnu.org; Mon, 14 Oct 2019 14:05:36 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1iK4hm-00025C-Jt
- for qemu-riscv@nongnu.org; Mon, 14 Oct 2019 14:04:27 -0400
-Received: from mail-lj1-x243.google.com ([2a00:1450:4864:20::243]:41770)
+ (envelope-from <alistair23@gmail.com>) id 1iK4is-0002SB-4O
+ for qemu-riscv@nongnu.org; Mon, 14 Oct 2019 14:05:35 -0400
+Received: from mail-lj1-x241.google.com ([2a00:1450:4864:20::241]:46005)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1iK4hd-00020G-JB; Mon, 14 Oct 2019 14:04:17 -0400
-Received: by mail-lj1-x243.google.com with SMTP id f5so17538027ljg.8;
- Mon, 14 Oct 2019 11:04:16 -0700 (PDT)
+ id 1iK4io-0002QX-B4; Mon, 14 Oct 2019 14:05:30 -0400
+Received: by mail-lj1-x241.google.com with SMTP id q64so17516944ljb.12;
+ Mon, 14 Oct 2019 11:05:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=rhdrg81D3zFb/5jPiNttaG5jl5przVJq6yYoJEQEoZQ=;
- b=QLQ7i4Gf0Yeoxl7HlMx2eq7/1Hqi8jnLcvhxkFugP2X/0ea4utTCL3cCmvSy9ryNc2
- 9dNMgGlNz9mmmPllGkOTkiWvoYDTszjKloWTBd0ROBiVFcpT8A0jIfboTnT5JtgCuu0y
- Ckkk5+6LOLyEYCESu/NyBOS/kNtwy3k+Liyhqt0EAszE6wQt/s2qaDxfgrXuj9CAcyl1
- IlijkljTuIuN1re+meWkEMQJkleoZKAnGJZ5ngihzPRYGGeomTw2nst5SXlheDTQRFPq
- 8et2MQDOzNkWhNgpx+J3y98kOXgpwZpFLmH8Dw1FDMpIsGwWAfrT67YacTdKfa+SOp3y
- 5PCA==
+ :cc; bh=jMvhxdWzNtdIXTeuZyyU9CkWelT0B+uy8QsZVEjSeOg=;
+ b=Vv6vKvjomKgXj7xXSdOAD8IL9nth69qRE0YWYCZ7Nrt6ZgEsLLm9gz3XT/5COVTpYp
+ NnXKcZuC4763dw9mZvPPKh+2kFmKwvDJCVcDsSTTzmt7TpxuTzOSbqp2TCOPrFJBKyCY
+ MvXUByaxiqfLIq208uLwavLlm9gKd99ZapniOnz7B1nOnrd1XNlhRFZBM7u154ArKT0G
+ Jad8OTYhXRrtW+/gDF06olZ+xlEvMweQ8xUEKahwtuxCwb2yCg5HHoUbJEgO2Gi96qaV
+ RGTJqnwWADpcAk8EMmr3b2yPjWU/iC2HmkfbVY9mEtyBVxj2EfJXNr0BVpWD28Kj38b2
+ sgxA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=rhdrg81D3zFb/5jPiNttaG5jl5przVJq6yYoJEQEoZQ=;
- b=W4+3VX6poNlj2whrgS1EE0qnARcdsbBgBo23wj1eNuuj2TXhTNNZ11A+LRL4I4n1Rm
- LLxygbC+vPuNt7zWmDVUZxO5Ol8RER/fst6SKvLZynLUq3iIjsHUe2jJdhuynIE1HKBh
- S1KMGobL4Ps7d1WhQF9ordwzIgNm8PgTYuW2CQXTOXc0jYQy7fV0pNkqNSKf38xTEwaj
- yvDdAWRYZwvVHe7s8T6pGWqzMEsRTT24Rxo5tr9G2XIeREZRvwd75FKPkW5dTO266zzP
- xoZrxoj7VSGUBPyQr3njkEZBRRIdSTHXZnWBAqoL2cB3vP1XDxG4NvZ5eHMSYuSeozJs
- rBDg==
-X-Gm-Message-State: APjAAAUFqPGpLlt9hbyxHpdecMJlU1jKVbKr6QWCJx0cah8e3YTuJ85w
- e3H09jAv+v9qVs9x6ZgNfCVGxK1z9gwLReilCWo=
-X-Google-Smtp-Source: APXvYqxBHIMMYSmafcCHSzgVK7CAZ9NnrhSYQXsHXRyzzILtza+boqtIAtQVbdU+YZrK0TCf5GQLixnyKz50cMhXXxY=
-X-Received: by 2002:a2e:82cd:: with SMTP id n13mr19661355ljh.156.1571076254296; 
- Mon, 14 Oct 2019 11:04:14 -0700 (PDT)
+ :message-id:subject:to:cc;
+ bh=jMvhxdWzNtdIXTeuZyyU9CkWelT0B+uy8QsZVEjSeOg=;
+ b=FwG0BtQHIfuRItgghYi/RymuGKfYXnk5H6VMtGA44GTgSWTI50XDJRKT7nctIkafAl
+ nIlck3AoTFYOtRHME+MsTNoqoSFSCxNC38Rmml6HQh95IiJlC1m6F75doUs9EmJv5qvW
+ TdvTCFbDTO618tb7v5Erc9u+E00jwa/ok7yz+D4/k5f6veUMbgF6I7VUyUUDwJgNB/8U
+ vWY9naD3r1tl0rYRLa3tmKbNbwZS5YWAA4fyKFvGzL8ey3hLEUYdTxlKgQawuf3ibjZ9
+ cazvS1ad/ZjM5eV7NKB8e/9IjIZ2lgvKyVm50K96SaAfdewzOu2bkKBqfNNC3vzU4FhC
+ ShEw==
+X-Gm-Message-State: APjAAAVtUuZjx6iR0qnCch0zzDTPsluFsx7YOhqwryOrZIQZ6SV4feRI
+ Zi5IlXAsP0RsKWjZHJy2KLww5PACyGPTisjWgzc=
+X-Google-Smtp-Source: APXvYqyIoDeTn3P2wfE+yvHWILp6fNb4uvucDQ4uGMiL5W9qfO+mOQ58T/S8g4CvMnVtoAL/x1uGDAoBolapmJjwRyI=
+X-Received: by 2002:a2e:b010:: with SMTP id y16mr7530523ljk.147.1571076327873; 
+ Mon, 14 Oct 2019 11:05:27 -0700 (PDT)
 MIME-Version: 1.0
-References: <20191014104948.4291-1-alex.bennee@linaro.org>
- <20191014104948.4291-32-alex.bennee@linaro.org>
-In-Reply-To: <20191014104948.4291-32-alex.bennee@linaro.org>
+References: <20191014154529.287048-1-jonathan@fintelia.io>
+ <20191014154529.287048-3-jonathan@fintelia.io>
+In-Reply-To: <20191014154529.287048-3-jonathan@fintelia.io>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 14 Oct 2019 10:59:07 -0700
-Message-ID: <CAKmqyKPCYwYvD3hqJ1OW0KH3SjGpG7cypJw9V5sCg6bZ9ueUfw@mail.gmail.com>
-Subject: Re: [PATCH v5 31/55] target/riscv: fetch code with translator_ld
-To: =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>, 
- "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, robert.foley@futurewei.com,
- Palmer Dabbelt <palmer@sifive.com>,
- Richard Henderson <richard.henderson@linaro.org>, 
- peter.puhov@futurewei.com, aaron@os.amperecomputing.com, 
- "Emilio G. Cota" <cota@braap.org>, Alistair Francis <Alistair.Francis@wdc.com>
+Date: Mon, 14 Oct 2019 11:00:22 -0700
+Message-ID: <CAKmqyKOGWMDDm1-VRcQZJB3La3=2tcDw3oHpWjJBCirMrcGX8g@mail.gmail.com>
+Subject: Re: [PATCH v4 2/3] target/riscv: Expose "priv" register for GDB for
+ reads
+To: Jonathan Behrens <jonathan@fintelia.io>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, Palmer Dabbelt <palmer@sifive.com>,
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>, 
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::243
+X-Received-From: 2a00:1450:4864:20::241
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -73,41 +71,131 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Oct 2019 18:04:30 -0000
+X-List-Received-Date: Mon, 14 Oct 2019 18:05:37 -0000
 
-On Mon, Oct 14, 2019 at 4:20 AM Alex Benn=C3=A9e <alex.bennee@linaro.org> w=
-rote:
+On Mon, Oct 14, 2019 at 8:50 AM Jonathan Behrens <jonathan@fintelia.io> wrote:
 >
-> From: "Emilio G. Cota" <cota@braap.org>
+> This patch enables a debugger to read the current privilege level via a virtual
+> "priv" register. When compiled with CONFIG_USER_ONLY the register is still
+> visible but always reports the value zero.
 >
-> Signed-off-by: Emilio G. Cota <cota@braap.org>
-> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-> Signed-off-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
+> Signed-off-by: Jonathan Behrens <jonathan@fintelia.io>
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  target/riscv/translate.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  configure                       |  4 ++--
+>  gdb-xml/riscv-32bit-virtual.xml | 11 +++++++++++
+>  gdb-xml/riscv-64bit-virtual.xml | 11 +++++++++++
+>  target/riscv/gdbstub.c          | 23 +++++++++++++++++++++++
+>  4 files changed, 47 insertions(+), 2 deletions(-)
+>  create mode 100644 gdb-xml/riscv-32bit-virtual.xml
+>  create mode 100644 gdb-xml/riscv-64bit-virtual.xml
 >
-> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index adeddb85f6..b26533d4fd 100644
-> --- a/target/riscv/translate.c
-> +++ b/target/riscv/translate.c
-> @@ -779,7 +779,7 @@ static void riscv_tr_translate_insn(DisasContextBase =
-*dcbase, CPUState *cpu)
->      DisasContext *ctx =3D container_of(dcbase, DisasContext, base);
->      CPURISCVState *env =3D cpu->env_ptr;
+> diff --git a/configure b/configure
+> index 30544f52e6..6118a6a045 100755
+> --- a/configure
+> +++ b/configure
+> @@ -7520,13 +7520,13 @@ case "$target_name" in
+>      TARGET_BASE_ARCH=riscv
+>      TARGET_ABI_DIR=riscv
+>      mttcg=yes
+> -    gdb_xml_files="riscv-32bit-cpu.xml riscv-32bit-fpu.xml riscv-32bit-csr.xml"
+> +    gdb_xml_files="riscv-32bit-cpu.xml riscv-32bit-fpu.xml riscv-32bit-csr.xml riscv-32bit-virtual.xml"
+>    ;;
+>    riscv64)
+>      TARGET_BASE_ARCH=riscv
+>      TARGET_ABI_DIR=riscv
+>      mttcg=yes
+> -    gdb_xml_files="riscv-64bit-cpu.xml riscv-64bit-fpu.xml riscv-64bit-csr.xml"
+> +    gdb_xml_files="riscv-64bit-cpu.xml riscv-64bit-fpu.xml riscv-64bit-csr.xml riscv-64bit-virtual.xml"
+>    ;;
+>    sh4|sh4eb)
+>      TARGET_ARCH=sh4
+> diff --git a/gdb-xml/riscv-32bit-virtual.xml b/gdb-xml/riscv-32bit-virtual.xml
+> new file mode 100644
+> index 0000000000..905f1c555d
+> --- /dev/null
+> +++ b/gdb-xml/riscv-32bit-virtual.xml
+> @@ -0,0 +1,11 @@
+> +<?xml version="1.0"?>
+> +<!-- Copyright (C) 2018-2019 Free Software Foundation, Inc.
+> +
+> +     Copying and distribution of this file, with or without modification,
+> +     are permitted in any medium without royalty provided the copyright
+> +     notice and this notice are preserved.  -->
+> +
+> +<!DOCTYPE feature SYSTEM "gdb-target.dtd">
+> +<feature name="org.gnu.gdb.riscv.virtual">
+> +  <reg name="priv" bitsize="32"/>
+> +</feature>
+> diff --git a/gdb-xml/riscv-64bit-virtual.xml b/gdb-xml/riscv-64bit-virtual.xml
+> new file mode 100644
+> index 0000000000..62d86c237b
+> --- /dev/null
+> +++ b/gdb-xml/riscv-64bit-virtual.xml
+> @@ -0,0 +1,11 @@
+> +<?xml version="1.0"?>
+> +<!-- Copyright (C) 2018-2019 Free Software Foundation, Inc.
+> +
+> +     Copying and distribution of this file, with or without modification,
+> +     are permitted in any medium without royalty provided the copyright
+> +     notice and this notice are preserved.  -->
+> +
+> +<!DOCTYPE feature SYSTEM "gdb-target.dtd">
+> +<feature name="org.gnu.gdb.riscv.virtual">
+> +  <reg name="priv" bitsize="64"/>
+> +</feature>
+> diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
+> index cb5bfd3d50..1f71604b78 100644
+> --- a/target/riscv/gdbstub.c
+> +++ b/target/riscv/gdbstub.c
+> @@ -373,6 +373,23 @@ static int riscv_gdb_set_csr(CPURISCVState *env, uint8_t *mem_buf, int n)
+>      return 0;
+>  }
 >
-> -    ctx->opcode =3D cpu_ldl_code(env, ctx->base.pc_next);
-> +    ctx->opcode =3D translator_ldl(env, ctx->base.pc_next);
->      decode_opc(ctx);
->      ctx->base.pc_next =3D ctx->pc_succ_insn;
+> +static int riscv_gdb_get_virtual(CPURISCVState *cs, uint8_t *mem_buf, int n)
+> +{
+> +    if (n == 0) {
+> +#ifdef CONFIG_USER_ONLY
+> +        return gdb_get_regl(mem_buf, 0);
+> +#else
+> +        return gdb_get_regl(mem_buf, cs->priv);
+> +#endif
+> +    }
+> +    return 0;
+> +}
+> +
+> +static int riscv_gdb_set_virtual(CPURISCVState *cs, uint8_t *mem_buf, int n)
+> +{
+> +    return 0;
+> +}
+> +
+>  void riscv_cpu_register_gdb_regs_for_features(CPUState *cs)
+>  {
+>      RISCVCPU *cpu = RISCV_CPU(cs);
+> @@ -385,6 +402,9 @@ void riscv_cpu_register_gdb_regs_for_features(CPUState *cs)
 >
+>      gdb_register_coprocessor(cs, riscv_gdb_get_csr, riscv_gdb_set_csr,
+>                               240, "riscv-32bit-csr.xml", 0);
+> +
+> +    gdb_register_coprocessor(cs, riscv_gdb_get_virtual, riscv_gdb_set_virtual,
+> +                             1, "riscv-32bit-virtual.xml", 0);
+>  #elif defined(TARGET_RISCV64)
+>      if (env->misa & RVF) {
+>          gdb_register_coprocessor(cs, riscv_gdb_get_fpu, riscv_gdb_set_fpu,
+> @@ -393,5 +413,8 @@ void riscv_cpu_register_gdb_regs_for_features(CPUState *cs)
+>
+>      gdb_register_coprocessor(cs, riscv_gdb_get_csr, riscv_gdb_set_csr,
+>                               240, "riscv-64bit-csr.xml", 0);
+> +
+> +    gdb_register_coprocessor(cs, riscv_gdb_get_virtual, riscv_gdb_set_virtual,
+> +                             1, "riscv-64bit-virtual.xml", 0);
+>  #endif
+>  }
 > --
-> 2.20.1
->
+> 2.23.0
 >
 
