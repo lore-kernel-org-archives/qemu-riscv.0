@@ -1,65 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iK4iw-0001uw-HS
-	for mharc-qemu-riscv@gnu.org; Mon, 14 Oct 2019 14:05:38 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:54661)
+	id 1iK9FZ-0002dj-T1
+	for mharc-qemu-riscv@gnu.org; Mon, 14 Oct 2019 18:55:37 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44290)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <alistair23@gmail.com>) id 1iK4it-0001rQ-D3
- for qemu-riscv@nongnu.org; Mon, 14 Oct 2019 14:05:36 -0400
+ (envelope-from <alistair23@gmail.com>) id 1iK9FW-0002b4-UN
+ for qemu-riscv@nongnu.org; Mon, 14 Oct 2019 18:55:36 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1iK4is-0002SB-4O
- for qemu-riscv@nongnu.org; Mon, 14 Oct 2019 14:05:35 -0400
-Received: from mail-lj1-x241.google.com ([2a00:1450:4864:20::241]:46005)
+ (envelope-from <alistair23@gmail.com>) id 1iK9FV-0001sf-O6
+ for qemu-riscv@nongnu.org; Mon, 14 Oct 2019 18:55:34 -0400
+Received: from mail-lj1-x244.google.com ([2a00:1450:4864:20::244]:33168)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1iK4io-0002QX-B4; Mon, 14 Oct 2019 14:05:30 -0400
-Received: by mail-lj1-x241.google.com with SMTP id q64so17516944ljb.12;
- Mon, 14 Oct 2019 11:05:29 -0700 (PDT)
+ id 1iK9FT-0001qh-2O; Mon, 14 Oct 2019 18:55:31 -0400
+Received: by mail-lj1-x244.google.com with SMTP id a22so18224689ljd.0;
+ Mon, 14 Oct 2019 15:55:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=jMvhxdWzNtdIXTeuZyyU9CkWelT0B+uy8QsZVEjSeOg=;
- b=Vv6vKvjomKgXj7xXSdOAD8IL9nth69qRE0YWYCZ7Nrt6ZgEsLLm9gz3XT/5COVTpYp
- NnXKcZuC4763dw9mZvPPKh+2kFmKwvDJCVcDsSTTzmt7TpxuTzOSbqp2TCOPrFJBKyCY
- MvXUByaxiqfLIq208uLwavLlm9gKd99ZapniOnz7B1nOnrd1XNlhRFZBM7u154ArKT0G
- Jad8OTYhXRrtW+/gDF06olZ+xlEvMweQ8xUEKahwtuxCwb2yCg5HHoUbJEgO2Gi96qaV
- RGTJqnwWADpcAk8EMmr3b2yPjWU/iC2HmkfbVY9mEtyBVxj2EfJXNr0BVpWD28Kj38b2
- sgxA==
+ :cc; bh=DaahTCxl0gd6VO8eLTgXKhKcTiBd9QFV8L/VBsa9xr4=;
+ b=iGvR4K80od15B2DgSLC+hDAsEsX+y8LZmjwxc6vUR6M1RfDYyYKKFQ0SFh1F77aoHL
+ wf535wJE2HMmCGNr2zw8ZONRuW/SmU5LZc9XfKWnPLOVA4rnhqRMi7288dgH8NmDCwFq
+ 5zjk0Ax5rjEss8eS1/VNqR+TXWZnTd1JkXsn3wq/FRvlwYxgmrUtyNggArsY83aKZHeH
+ 9zT8Z9VGIvCMd8cVBDe++Aq+qKvFimSdtbwwxF/WVppCuSgLIMnP4JOvGdgHvM/G0nei
+ qrqLqCIAgFDYP0Aqu/S5eUGZJlx5ibUfz5H970vEAlpn4OaTGdF2pHIcpuSmtNT9WIm5
+ 3i8A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=jMvhxdWzNtdIXTeuZyyU9CkWelT0B+uy8QsZVEjSeOg=;
- b=FwG0BtQHIfuRItgghYi/RymuGKfYXnk5H6VMtGA44GTgSWTI50XDJRKT7nctIkafAl
- nIlck3AoTFYOtRHME+MsTNoqoSFSCxNC38Rmml6HQh95IiJlC1m6F75doUs9EmJv5qvW
- TdvTCFbDTO618tb7v5Erc9u+E00jwa/ok7yz+D4/k5f6veUMbgF6I7VUyUUDwJgNB/8U
- vWY9naD3r1tl0rYRLa3tmKbNbwZS5YWAA4fyKFvGzL8ey3hLEUYdTxlKgQawuf3ibjZ9
- cazvS1ad/ZjM5eV7NKB8e/9IjIZ2lgvKyVm50K96SaAfdewzOu2bkKBqfNNC3vzU4FhC
- ShEw==
-X-Gm-Message-State: APjAAAVtUuZjx6iR0qnCch0zzDTPsluFsx7YOhqwryOrZIQZ6SV4feRI
- Zi5IlXAsP0RsKWjZHJy2KLww5PACyGPTisjWgzc=
-X-Google-Smtp-Source: APXvYqyIoDeTn3P2wfE+yvHWILp6fNb4uvucDQ4uGMiL5W9qfO+mOQ58T/S8g4CvMnVtoAL/x1uGDAoBolapmJjwRyI=
-X-Received: by 2002:a2e:b010:: with SMTP id y16mr7530523ljk.147.1571076327873; 
- Mon, 14 Oct 2019 11:05:27 -0700 (PDT)
+ bh=DaahTCxl0gd6VO8eLTgXKhKcTiBd9QFV8L/VBsa9xr4=;
+ b=iAYfI9/jz1yTtdnkXj3rCcJaB2mf+NG7HvzRYbjRE5xg1PmlrnTsLSpMnyYzpQDhSu
+ 7+Jkq32UiXCQiJ73Tc8qIxx9Vle05Pa0lFrJm/mTyvD+iAdjL4OLiV6FrRT1PM6ERAiK
+ fS9OTQgrcdKAUJEEeoj9yORnpQw6/nrRy2K8ZLZRtZggaPiypr6/wlMeDXVJlUrvo/yH
+ qtjM/Dgfil9jthH2BZJ+kYa2OHosHbF0ONY3WdxKkctHTc6cGRB1dgMjZRYJjzmIImH5
+ hVYq2+nK9CXa5sDTlBiu8hfUxEz6N6Y30wI0V973Jw6cR7wejjdt6teWps9MMN0klThi
+ 6+EA==
+X-Gm-Message-State: APjAAAVmpOA7lImTYGe/D/ufLzoYqZyUh1z4XJ7kKYJP/devpqk8FEVG
+ NpZCORFmehfPDtxHXtWcd771IxXV+mGXQayRLbE=
+X-Google-Smtp-Source: APXvYqwr/BBv720r6XEjYte+khgPkFiXYmBNIHLntPB3cNPA7P/L0te/P369xh4fCTceT+KY2FdU3j5Pxs6v86ki6L8=
+X-Received: by 2002:a2e:9604:: with SMTP id v4mr1339993ljh.101.1571093729197; 
+ Mon, 14 Oct 2019 15:55:29 -0700 (PDT)
 MIME-Version: 1.0
-References: <20191014154529.287048-1-jonathan@fintelia.io>
- <20191014154529.287048-3-jonathan@fintelia.io>
-In-Reply-To: <20191014154529.287048-3-jonathan@fintelia.io>
+References: <1569456861-8502-1-git-send-email-guoren@kernel.org>
+ <mhng-32483094-26fb-4f1d-9d82-facd447bc7df@palmer-si-x1c4>
+In-Reply-To: <mhng-32483094-26fb-4f1d-9d82-facd447bc7df@palmer-si-x1c4>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 14 Oct 2019 11:00:22 -0700
-Message-ID: <CAKmqyKOGWMDDm1-VRcQZJB3La3=2tcDw3oHpWjJBCirMrcGX8g@mail.gmail.com>
-Subject: Re: [PATCH v4 2/3] target/riscv: Expose "priv" register for GDB for
- reads
-To: Jonathan Behrens <jonathan@fintelia.io>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+Date: Mon, 14 Oct 2019 15:50:24 -0700
+Message-ID: <CAKmqyKMQvxUG-ssGW4j3LYc9TRf1v4YtOPQcVytnEutjS5jO0g@mail.gmail.com>
+Subject: Re: [PATCH V6] target/riscv: Ignore reserved bits in PTE for RV64
+To: Palmer Dabbelt <palmer@sifive.com>
+Cc: Guo Ren <guoren@kernel.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, Palmer Dabbelt <palmer@sifive.com>,
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>
+ Alistair Francis <Alistair.Francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>, 
+ Guo Ren <ren_guo@c-sky.com>
 Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::241
+X-Received-From: 2a00:1450:4864:20::244
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -71,131 +68,93 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Oct 2019 18:05:37 -0000
+X-List-Received-Date: Mon, 14 Oct 2019 22:55:36 -0000
 
-On Mon, Oct 14, 2019 at 8:50 AM Jonathan Behrens <jonathan@fintelia.io> wrote:
+On Sat, Oct 12, 2019 at 10:33 AM Palmer Dabbelt <palmer@sifive.com> wrote:
 >
-> This patch enables a debugger to read the current privilege level via a virtual
-> "priv" register. When compiled with CONFIG_USER_ONLY the register is still
-> visible but always reports the value zero.
+> On Wed, 25 Sep 2019 17:14:21 PDT (-0700), guoren@kernel.org wrote:
+> > From: Guo Ren <ren_guo@c-sky.com>
+> >
+> > Highest 10 bits of PTE are reserved in riscv-privileged, ref: [1], so we
+> > need to ignore them. They cannot be a part of ppn.
+> >
+> > 1: The RISC-V Instruction Set Manual, Volume II: Privileged Architecture
+> >    4.4 Sv39: Page-Based 39-bit Virtual-Memory System
+> >    4.5 Sv48: Page-Based 48-bit Virtual-Memory System
+> >
+> > Signed-off-by: Guo Ren <ren_guo@c-sky.com>
+> > Tested-by: Bin Meng <bmeng.cn@gmail.com>
+> > Reviewed-by: Liu Zhiwei <zhiwei_liu@c-sky.com>
+> > Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+> > Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+> > ---
+> >  target/riscv/cpu_bits.h   | 7 +++++++
+> >  target/riscv/cpu_helper.c | 2 +-
+> >  2 files changed, 8 insertions(+), 1 deletion(-)
+> >
+> >  Changelog V6:
+> >   - Add Reviewer: Alistair Francis
+> >
+> >  Changelog V5:
+> >   - Add Reviewer and Tester: Bin Meng
+> >
+> >  Changelog V4:
+> >   - Change title to Ignore not Bugfix
+> >   - Use PTE_PPN_MASK for RV32 and RV64
+> >
+> >  Changelog V3:
+> >   - Use UUL define for PTE_RESERVED
+> >   - Keep ppn >> PTE_PPN_SHIFT
+> >
+> >  Changelog V2:
+> >   - Bugfix pte destroyed cause boot fail
+> >   - Change to AND with a mask instead of shifting both directions
+> >
+> > diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+> > index e998348..399c2c6 100644
+> > --- a/target/riscv/cpu_bits.h
+> > +++ b/target/riscv/cpu_bits.h
+> > @@ -473,6 +473,13 @@
+> >  /* Page table PPN shift amount */
+> >  #define PTE_PPN_SHIFT       10
+> >
+> > +/* Page table PPN mask */
+> > +#if defined(TARGET_RISCV32)
+> > +#define PTE_PPN_MASK        0xffffffffUL
+> > +#elif defined(TARGET_RISCV64)
+> > +#define PTE_PPN_MASK        0x3fffffffffffffULL
+> > +#endif
+> > +
+> >  /* Leaf page shift amount */
+> >  #define PGSHIFT             12
+> >
+> > diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> > index 87dd6a6..9961b37 100644
+> > --- a/target/riscv/cpu_helper.c
+> > +++ b/target/riscv/cpu_helper.c
+> > @@ -261,7 +261,7 @@ restart:
+> >  #elif defined(TARGET_RISCV64)
+> >          target_ulong pte = ldq_phys(cs->as, pte_addr);
+> >  #endif
+> > -        hwaddr ppn = pte >> PTE_PPN_SHIFT;
+> > +        hwaddr ppn = (pte & PTE_PPN_MASK) >> PTE_PPN_SHIFT;
+> >
+> >          if (!(pte & PTE_V)) {
+> >              /* Invalid PTE */
 >
-> Signed-off-by: Jonathan Behrens <jonathan@fintelia.io>
+> I know I'm a bit late to the party here, but I don't like this.  There's ample
+> evidence that wrapping the physical address space is a bad idea, and just
+> because the ISA allows implementations to do this doesn't mean we should.
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+I think this is ok as the spec specifically states that "These
+reserved bits may also be used to facilitate research
+experimentation." and as QEMU is generally used for developing new
+features it makes sense to allow guests to set these bit and we just
+ignore them.
+
+Software should always set these to zero, so the worst outcome of
+doing this is that QEMU will hid software bugs if people set the bits,
+but I don't see that as huge downside.
 
 Alistair
-
-> ---
->  configure                       |  4 ++--
->  gdb-xml/riscv-32bit-virtual.xml | 11 +++++++++++
->  gdb-xml/riscv-64bit-virtual.xml | 11 +++++++++++
->  target/riscv/gdbstub.c          | 23 +++++++++++++++++++++++
->  4 files changed, 47 insertions(+), 2 deletions(-)
->  create mode 100644 gdb-xml/riscv-32bit-virtual.xml
->  create mode 100644 gdb-xml/riscv-64bit-virtual.xml
->
-> diff --git a/configure b/configure
-> index 30544f52e6..6118a6a045 100755
-> --- a/configure
-> +++ b/configure
-> @@ -7520,13 +7520,13 @@ case "$target_name" in
->      TARGET_BASE_ARCH=riscv
->      TARGET_ABI_DIR=riscv
->      mttcg=yes
-> -    gdb_xml_files="riscv-32bit-cpu.xml riscv-32bit-fpu.xml riscv-32bit-csr.xml"
-> +    gdb_xml_files="riscv-32bit-cpu.xml riscv-32bit-fpu.xml riscv-32bit-csr.xml riscv-32bit-virtual.xml"
->    ;;
->    riscv64)
->      TARGET_BASE_ARCH=riscv
->      TARGET_ABI_DIR=riscv
->      mttcg=yes
-> -    gdb_xml_files="riscv-64bit-cpu.xml riscv-64bit-fpu.xml riscv-64bit-csr.xml"
-> +    gdb_xml_files="riscv-64bit-cpu.xml riscv-64bit-fpu.xml riscv-64bit-csr.xml riscv-64bit-virtual.xml"
->    ;;
->    sh4|sh4eb)
->      TARGET_ARCH=sh4
-> diff --git a/gdb-xml/riscv-32bit-virtual.xml b/gdb-xml/riscv-32bit-virtual.xml
-> new file mode 100644
-> index 0000000000..905f1c555d
-> --- /dev/null
-> +++ b/gdb-xml/riscv-32bit-virtual.xml
-> @@ -0,0 +1,11 @@
-> +<?xml version="1.0"?>
-> +<!-- Copyright (C) 2018-2019 Free Software Foundation, Inc.
-> +
-> +     Copying and distribution of this file, with or without modification,
-> +     are permitted in any medium without royalty provided the copyright
-> +     notice and this notice are preserved.  -->
-> +
-> +<!DOCTYPE feature SYSTEM "gdb-target.dtd">
-> +<feature name="org.gnu.gdb.riscv.virtual">
-> +  <reg name="priv" bitsize="32"/>
-> +</feature>
-> diff --git a/gdb-xml/riscv-64bit-virtual.xml b/gdb-xml/riscv-64bit-virtual.xml
-> new file mode 100644
-> index 0000000000..62d86c237b
-> --- /dev/null
-> +++ b/gdb-xml/riscv-64bit-virtual.xml
-> @@ -0,0 +1,11 @@
-> +<?xml version="1.0"?>
-> +<!-- Copyright (C) 2018-2019 Free Software Foundation, Inc.
-> +
-> +     Copying and distribution of this file, with or without modification,
-> +     are permitted in any medium without royalty provided the copyright
-> +     notice and this notice are preserved.  -->
-> +
-> +<!DOCTYPE feature SYSTEM "gdb-target.dtd">
-> +<feature name="org.gnu.gdb.riscv.virtual">
-> +  <reg name="priv" bitsize="64"/>
-> +</feature>
-> diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
-> index cb5bfd3d50..1f71604b78 100644
-> --- a/target/riscv/gdbstub.c
-> +++ b/target/riscv/gdbstub.c
-> @@ -373,6 +373,23 @@ static int riscv_gdb_set_csr(CPURISCVState *env, uint8_t *mem_buf, int n)
->      return 0;
->  }
->
-> +static int riscv_gdb_get_virtual(CPURISCVState *cs, uint8_t *mem_buf, int n)
-> +{
-> +    if (n == 0) {
-> +#ifdef CONFIG_USER_ONLY
-> +        return gdb_get_regl(mem_buf, 0);
-> +#else
-> +        return gdb_get_regl(mem_buf, cs->priv);
-> +#endif
-> +    }
-> +    return 0;
-> +}
-> +
-> +static int riscv_gdb_set_virtual(CPURISCVState *cs, uint8_t *mem_buf, int n)
-> +{
-> +    return 0;
-> +}
-> +
->  void riscv_cpu_register_gdb_regs_for_features(CPUState *cs)
->  {
->      RISCVCPU *cpu = RISCV_CPU(cs);
-> @@ -385,6 +402,9 @@ void riscv_cpu_register_gdb_regs_for_features(CPUState *cs)
->
->      gdb_register_coprocessor(cs, riscv_gdb_get_csr, riscv_gdb_set_csr,
->                               240, "riscv-32bit-csr.xml", 0);
-> +
-> +    gdb_register_coprocessor(cs, riscv_gdb_get_virtual, riscv_gdb_set_virtual,
-> +                             1, "riscv-32bit-virtual.xml", 0);
->  #elif defined(TARGET_RISCV64)
->      if (env->misa & RVF) {
->          gdb_register_coprocessor(cs, riscv_gdb_get_fpu, riscv_gdb_set_fpu,
-> @@ -393,5 +413,8 @@ void riscv_cpu_register_gdb_regs_for_features(CPUState *cs)
->
->      gdb_register_coprocessor(cs, riscv_gdb_get_csr, riscv_gdb_set_csr,
->                               240, "riscv-64bit-csr.xml", 0);
-> +
-> +    gdb_register_coprocessor(cs, riscv_gdb_get_virtual, riscv_gdb_set_virtual,
-> +                             1, "riscv-64bit-virtual.xml", 0);
->  #endif
->  }
-> --
-> 2.23.0
->
 
