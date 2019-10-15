@@ -1,62 +1,120 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iK9FZ-0002dj-T1
-	for mharc-qemu-riscv@gnu.org; Mon, 14 Oct 2019 18:55:37 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44290)
+	id 1iKIIn-0006tr-Rj
+	for mharc-qemu-riscv@gnu.org; Tue, 15 Oct 2019 04:35:33 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58566)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <alistair23@gmail.com>) id 1iK9FW-0002b4-UN
- for qemu-riscv@nongnu.org; Mon, 14 Oct 2019 18:55:36 -0400
+ (envelope-from <prvs=1843cfbdc=Anup.Patel@wdc.com>)
+ id 1iKIIl-0006qu-40
+ for qemu-riscv@nongnu.org; Tue, 15 Oct 2019 04:35:32 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1iK9FV-0001sf-O6
- for qemu-riscv@nongnu.org; Mon, 14 Oct 2019 18:55:34 -0400
-Received: from mail-lj1-x244.google.com ([2a00:1450:4864:20::244]:33168)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1iK9FT-0001qh-2O; Mon, 14 Oct 2019 18:55:31 -0400
-Received: by mail-lj1-x244.google.com with SMTP id a22so18224689ljd.0;
- Mon, 14 Oct 2019 15:55:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=DaahTCxl0gd6VO8eLTgXKhKcTiBd9QFV8L/VBsa9xr4=;
- b=iGvR4K80od15B2DgSLC+hDAsEsX+y8LZmjwxc6vUR6M1RfDYyYKKFQ0SFh1F77aoHL
- wf535wJE2HMmCGNr2zw8ZONRuW/SmU5LZc9XfKWnPLOVA4rnhqRMi7288dgH8NmDCwFq
- 5zjk0Ax5rjEss8eS1/VNqR+TXWZnTd1JkXsn3wq/FRvlwYxgmrUtyNggArsY83aKZHeH
- 9zT8Z9VGIvCMd8cVBDe++Aq+qKvFimSdtbwwxF/WVppCuSgLIMnP4JOvGdgHvM/G0nei
- qrqLqCIAgFDYP0Aqu/S5eUGZJlx5ibUfz5H970vEAlpn4OaTGdF2pHIcpuSmtNT9WIm5
- 3i8A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=DaahTCxl0gd6VO8eLTgXKhKcTiBd9QFV8L/VBsa9xr4=;
- b=iAYfI9/jz1yTtdnkXj3rCcJaB2mf+NG7HvzRYbjRE5xg1PmlrnTsLSpMnyYzpQDhSu
- 7+Jkq32UiXCQiJ73Tc8qIxx9Vle05Pa0lFrJm/mTyvD+iAdjL4OLiV6FrRT1PM6ERAiK
- fS9OTQgrcdKAUJEEeoj9yORnpQw6/nrRy2K8ZLZRtZggaPiypr6/wlMeDXVJlUrvo/yH
- qtjM/Dgfil9jthH2BZJ+kYa2OHosHbF0ONY3WdxKkctHTc6cGRB1dgMjZRYJjzmIImH5
- hVYq2+nK9CXa5sDTlBiu8hfUxEz6N6Y30wI0V973Jw6cR7wejjdt6teWps9MMN0klThi
- 6+EA==
-X-Gm-Message-State: APjAAAVmpOA7lImTYGe/D/ufLzoYqZyUh1z4XJ7kKYJP/devpqk8FEVG
- NpZCORFmehfPDtxHXtWcd771IxXV+mGXQayRLbE=
-X-Google-Smtp-Source: APXvYqwr/BBv720r6XEjYte+khgPkFiXYmBNIHLntPB3cNPA7P/L0te/P369xh4fCTceT+KY2FdU3j5Pxs6v86ki6L8=
-X-Received: by 2002:a2e:9604:: with SMTP id v4mr1339993ljh.101.1571093729197; 
- Mon, 14 Oct 2019 15:55:29 -0700 (PDT)
+ (envelope-from <prvs=1843cfbdc=Anup.Patel@wdc.com>)
+ id 1iKIIj-0004KL-J0
+ for qemu-riscv@nongnu.org; Tue, 15 Oct 2019 04:35:30 -0400
+Received: from esa3.hgst.iphmx.com ([216.71.153.141]:49833)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <prvs=1843cfbdc=Anup.Patel@wdc.com>)
+ id 1iKIIi-0004Ik-OT; Tue, 15 Oct 2019 04:35:29 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1571128529; x=1602664529;
+ h=from:to:cc:subject:date:message-id:content-id:
+ content-transfer-encoding:mime-version;
+ bh=05ZaGxn9gfD8Ho28WBUjaQVHahhbgzpw8jx2PKLYZlA=;
+ b=cQI9sZ+A3kQImsk4BLNlTI8BUQ1gEKZX19oGGpC/3Ht+FX1dNUbP1HjP
+ MwtDn+IY11zxqBNqnXbbTrcDBp/VTtWkn2Rsh7101XQR36qMP0oqB6vhv
+ GZga0Ny8oiZdoE7u9wJ83ZauQm+bmKEyZ42GBKeuoMqlo30RFmiOR7YT8
+ VknfXhchqa0l32NNSGaGGzWWSk97mXGx1A03Y1KzN6t5Fgx5h6uQUOB6T
+ 8snKLuwQudqy4vGr9txAKXPSB796PSElFFv+9zSphEWuWAl7nltQgbwS2
+ gfewbAqaJm/3crQ9JyBVj7CuvFwfQU4VkByFGBJbEaCyzKAdI1RY/l7or Q==;
+IronPort-SDR: zJwe1T8S0AI+2+JTE7zSi1PclKdxIBFlZCAOESDmt/s1oJWZHrmxCvaaUH4/wzOcQ8X/hFQ1qV
+ JtP0V7P67+wvPkCycH3GmkS6jUigOLWCIMLMvtt1g3aiZk/gI1AEjGIDP8VuPzkuFRjiRacWGI
+ QwR9n22vA6v4rB1qOKVVOYEvv1aJOQKUvDFv9JcR6bc67AJ+k6goc7LUZ1UmX75j9qyyaZjqJk
+ 0pFuvjY6W3Mow25D5qUgjGo6BV3aA1CMwenMrTlaaGVOGa9Hh2yO7IsovT7QEKLKnrQwV6qvZ0
+ kZU=
+X-IronPort-AV: E=Sophos;i="5.67,298,1566835200"; d="scan'208";a="124990110"
+Received: from mail-cys01nam02lp2054.outbound.protection.outlook.com (HELO
+ NAM02-CY1-obe.outbound.protection.outlook.com) ([104.47.37.54])
+ by ob1.hgst.iphmx.com with ESMTP; 15 Oct 2019 16:35:25 +0800
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=QsdttBxR2H5SX6kHZm7tlMKjL/q2WwxG298wBrmsbXDXaFpDvdGmi3posBHxoEFwbwb/yyvRDbro+YdlXiqW00j+eEeTt/rw3i413uQy5pL8auC1b1BaoH+K92lA2xzzGzc9/xAOAg0yH9kGsT8L8ZL15wa4sN8IDkQs7JfvNwR0yuGZjNggsAmUAtC3+3JIhUhIGqOeMNPPxVT/+7nIiTj2P9tyZnL8NntSo61vfYYA4h1q55qaGzK9Zw+b5ut16PpvGwyU/x/tPoOPHRbQJbsRBR/JRhyFcIc6YqBLfbP5l5M8UbBXygPxJbe2+YNQqqpk4sQmOQH6WWFYIGQQiA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Jfc6udNJNe9SwCUlMDNCIxBO9/c5cHRNtQiajaLmRSs=;
+ b=cqtcGgGF6ax3NjsbuehBjtOcMbH9Xu7zQ9HLaIHN8471N+IV9BGy0oIpry07H6LPfARjWERjFt7f/GDEarzJW3gMEZRhH8GdA4DuN5B33rW0Sx8aOdVJwshtYrW5P7BJ7FkFGRN4RhjVvpWUsDcpMoAwi4ia3mRWNzy5xQrZ5sq08e71N1+Q3OpDl71C79TfwoghtMi5YSs+zlRbShI6GbSYnbmuO9idlVibJorb71VcZDua1hxX23nOYhkuCpLhEnOfIoRkpGpUygfAl/Mmi8iRAsQn6oVk2f9KIfqHWyoIx9m4WebnTRcq/3A2rN103TvUzTdsznx7aY9ChC9z7w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=wdc.com; dmarc=pass action=none header.from=wdc.com; dkim=pass
+ header.d=wdc.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Jfc6udNJNe9SwCUlMDNCIxBO9/c5cHRNtQiajaLmRSs=;
+ b=jaCAvw1z7bfHOpc9ODHcubFojKuVT3Nz5GBe6CkxbqSvgTqMt8hWEMgls7pN1Y3Qh59LFTIPOn9j5bKXi9b0GwmAOZvT5Mm+dUBOCLcDqc8OwHyauMfa8fBFJ71SjFXNCuRuaG3C3Zi3gnhYE46gTtdbDFqb8fXaeUSE6U4QqsE=
+Received: from MN2PR04MB6061.namprd04.prod.outlook.com (20.178.246.15) by
+ MN2PR04MB7071.namprd04.prod.outlook.com (10.186.146.19) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.2347.17; Tue, 15 Oct 2019 08:35:24 +0000
+Received: from MN2PR04MB6061.namprd04.prod.outlook.com
+ ([fe80::1454:87a:13b0:d3a]) by MN2PR04MB6061.namprd04.prod.outlook.com
+ ([fe80::1454:87a:13b0:d3a%7]) with mapi id 15.20.2347.023; Tue, 15 Oct 2019
+ 08:35:24 +0000
+From: Anup Patel <Anup.Patel@wdc.com>
+To: Peter Maydell <peter.maydell@linaro.org>, Palmer Dabbelt
+ <palmer@sifive.com>, Alistair Francis <Alistair.Francis@wdc.com>, Sagar
+ Karandikar <sagark@eecs.berkeley.edu>, Bastian Koppelmann
+ <kbastian@mail.uni-paderborn.de>
+CC: Atish Patra <Atish.Patra@wdc.com>, Anup Patel <anup@brainfault.org>,
+ "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>, "qemu-devel@nongnu.org"
+ <qemu-devel@nongnu.org>, Anup Patel <Anup.Patel@wdc.com>
+Subject: [PATCH v3 0/2] RTC support for QEMU RISC-V virt machine
+Thread-Topic: [PATCH v3 0/2] RTC support for QEMU RISC-V virt machine
+Thread-Index: AQHVgzN8aIwWSXk02EWLNM6K8aNiZA==
+Date: Tue, 15 Oct 2019 08:35:23 +0000
+Message-ID: <20191015083459.76959-1-anup.patel@wdc.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-clientproxiedby: MA1PR01CA0128.INDPRD01.PROD.OUTLOOK.COM
+ (2603:1096:a00:35::22) To MN2PR04MB6061.namprd04.prod.outlook.com
+ (2603:10b6:208:d8::15)
+authentication-results: spf=none (sender IP is )
+ smtp.mailfrom=Anup.Patel@wdc.com; 
+x-ms-exchange-messagesentrepresentingtype: 1
+x-mailer: git-send-email 2.17.1
+x-originating-ip: [129.253.179.161]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: f5ce4bb3-b590-4fbf-a093-08d7514a9f0f
+x-ms-office365-filtering-ht: Tenant
+x-ms-traffictypediagnostic: MN2PR04MB7071:
+x-ms-exchange-purlcount: 2
+x-ms-exchange-transport-forked: True
+x-microsoft-antispam-prvs: <MN2PR04MB7071D14FA1E0CA4F04D71E308D930@MN2PR04MB7071.namprd04.prod.outlook.com>
+wdcipoutbound: EOP-TRUE
+x-ms-oob-tlc-oobclassifiers: OLM:7219;
+x-forefront-prvs: 01917B1794
+x-forefront-antispam-report: SFV:NSPM;
+ SFS:(10019020)(4636009)(346002)(396003)(39860400002)(136003)(366004)(376002)(189003)(199004)(26005)(71200400001)(256004)(14444005)(66946007)(386003)(6506007)(66476007)(66556008)(64756008)(66446008)(14454004)(966005)(36756003)(71190400001)(102836004)(186003)(478600001)(44832011)(66066001)(476003)(486006)(2616005)(2906002)(25786009)(5660300002)(86362001)(81166006)(3846002)(316002)(50226002)(305945005)(1076003)(4326008)(2171002)(6306002)(6512007)(6486002)(54906003)(8676002)(8936002)(110136005)(7736002)(52116002)(99286004)(6116002)(6436002)(81156014);
+ DIR:OUT; SFP:1102; SCL:1; SRVR:MN2PR04MB7071;
+ H:MN2PR04MB6061.namprd04.prod.outlook.com; FPR:; SPF:None; LANG:en;
+ PTR:InfoNoRecords; MX:1; A:1; 
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: a2X5VXuiY58jv72Tu4ap3y9X4/IZyeSFKo1YtzZOVXgFszus+0P2+TICBKZm69MPVZE1/vUgDLYSu41IOg3CZeclpQ75io+OCfq1ukuUdk1KLScCbGClqoHGWzCTyNie87y/5pDBjNlYguFIOnqw4CyhlOo916+DWviwPFF3SmsWUiCZ0B5wS/iFUp9jl0UR6F3ahCu3r3DSOCSdSua3A+A/dl6d9+ECt4ibZBDymNjYMPqUucG2EhMUco3X0roNKNrvxWK1DLuxmNjMHfOM8twmkQ0M9eciMPTaAkVHOTxIj6xcjzYrp6ptNv1Ppfid/Lx7QCzJEmcwlr51HUgbtmiB3CAkza7C3D0j84PdMc9mHXnoK3yCkNgn7T4kn93/HMsEUUGyq0Y+kP+CHvmS54a0+cpJYU+2pCYFvM6XQS1DpEPuZXiW9RmQ3yYEdgHISk2E2QqInFHquKGCSQdpTQ==
+Content-Type: text/plain; charset="us-ascii"
+Content-ID: <7B27D4AAFCE41544AB71EEEFFDFEBF98@namprd04.prod.outlook.com>
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-References: <1569456861-8502-1-git-send-email-guoren@kernel.org>
- <mhng-32483094-26fb-4f1d-9d82-facd447bc7df@palmer-si-x1c4>
-In-Reply-To: <mhng-32483094-26fb-4f1d-9d82-facd447bc7df@palmer-si-x1c4>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 14 Oct 2019 15:50:24 -0700
-Message-ID: <CAKmqyKMQvxUG-ssGW4j3LYc9TRf1v4YtOPQcVytnEutjS5jO0g@mail.gmail.com>
-Subject: Re: [PATCH V6] target/riscv: Ignore reserved bits in PTE for RV64
-To: Palmer Dabbelt <palmer@sifive.com>
-Cc: Guo Ren <guoren@kernel.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Alistair Francis <Alistair.Francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>, 
- Guo Ren <ren_guo@c-sky.com>
-Content-Type: text/plain; charset="UTF-8"
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2a00:1450:4864:20::244
+X-OriginatorOrg: wdc.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: f5ce4bb3-b590-4fbf-a093-08d7514a9f0f
+X-MS-Exchange-CrossTenant-originalarrivaltime: 15 Oct 2019 08:35:23.8493 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: ZhC4umuNKCpbz3JDVEl3jpe8GiEAhUSjd6t+u3lIOsbAnJVvd81pTfxCUp/+UCEn5n6w2dQbUQasOrBLsRTWcA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR04MB7071
+X-detected-operating-system: by eggs.gnu.org: FreeBSD 9.x [fuzzy]
+X-Received-From: 216.71.153.141
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -68,93 +126,42 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Oct 2019 22:55:36 -0000
+X-List-Received-Date: Tue, 15 Oct 2019 08:35:33 -0000
 
-On Sat, Oct 12, 2019 at 10:33 AM Palmer Dabbelt <palmer@sifive.com> wrote:
->
-> On Wed, 25 Sep 2019 17:14:21 PDT (-0700), guoren@kernel.org wrote:
-> > From: Guo Ren <ren_guo@c-sky.com>
-> >
-> > Highest 10 bits of PTE are reserved in riscv-privileged, ref: [1], so we
-> > need to ignore them. They cannot be a part of ppn.
-> >
-> > 1: The RISC-V Instruction Set Manual, Volume II: Privileged Architecture
-> >    4.4 Sv39: Page-Based 39-bit Virtual-Memory System
-> >    4.5 Sv48: Page-Based 48-bit Virtual-Memory System
-> >
-> > Signed-off-by: Guo Ren <ren_guo@c-sky.com>
-> > Tested-by: Bin Meng <bmeng.cn@gmail.com>
-> > Reviewed-by: Liu Zhiwei <zhiwei_liu@c-sky.com>
-> > Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
-> > Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-> > ---
-> >  target/riscv/cpu_bits.h   | 7 +++++++
-> >  target/riscv/cpu_helper.c | 2 +-
-> >  2 files changed, 8 insertions(+), 1 deletion(-)
-> >
-> >  Changelog V6:
-> >   - Add Reviewer: Alistair Francis
-> >
-> >  Changelog V5:
-> >   - Add Reviewer and Tester: Bin Meng
-> >
-> >  Changelog V4:
-> >   - Change title to Ignore not Bugfix
-> >   - Use PTE_PPN_MASK for RV32 and RV64
-> >
-> >  Changelog V3:
-> >   - Use UUL define for PTE_RESERVED
-> >   - Keep ppn >> PTE_PPN_SHIFT
-> >
-> >  Changelog V2:
-> >   - Bugfix pte destroyed cause boot fail
-> >   - Change to AND with a mask instead of shifting both directions
-> >
-> > diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-> > index e998348..399c2c6 100644
-> > --- a/target/riscv/cpu_bits.h
-> > +++ b/target/riscv/cpu_bits.h
-> > @@ -473,6 +473,13 @@
-> >  /* Page table PPN shift amount */
-> >  #define PTE_PPN_SHIFT       10
-> >
-> > +/* Page table PPN mask */
-> > +#if defined(TARGET_RISCV32)
-> > +#define PTE_PPN_MASK        0xffffffffUL
-> > +#elif defined(TARGET_RISCV64)
-> > +#define PTE_PPN_MASK        0x3fffffffffffffULL
-> > +#endif
-> > +
-> >  /* Leaf page shift amount */
-> >  #define PGSHIFT             12
-> >
-> > diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> > index 87dd6a6..9961b37 100644
-> > --- a/target/riscv/cpu_helper.c
-> > +++ b/target/riscv/cpu_helper.c
-> > @@ -261,7 +261,7 @@ restart:
-> >  #elif defined(TARGET_RISCV64)
-> >          target_ulong pte = ldq_phys(cs->as, pte_addr);
-> >  #endif
-> > -        hwaddr ppn = pte >> PTE_PPN_SHIFT;
-> > +        hwaddr ppn = (pte & PTE_PPN_MASK) >> PTE_PPN_SHIFT;
-> >
-> >          if (!(pte & PTE_V)) {
-> >              /* Invalid PTE */
->
-> I know I'm a bit late to the party here, but I don't like this.  There's ample
-> evidence that wrapping the physical address space is a bad idea, and just
-> because the ISA allows implementations to do this doesn't mean we should.
+This series adds RTC device to QEMU RISC-V virt machine. We have
+selected Goldfish RTC device model for this. It's a pretty simple
+synthetic device with few MMIO registers and no dependency external
+clock. The driver for Goldfish RTC is already available in Linux so
+we just need to enable it in Kconfig for RISCV and also update Linux
+defconfigs.
 
-I think this is ok as the spec specifically states that "These
-reserved bits may also be used to facilitate research
-experimentation." and as QEMU is generally used for developing new
-features it makes sense to allow guests to set these bit and we just
-ignore them.
+We have tested this series with Linux-5.4-rc1 plus defconfig changes
+available in 'goldfish_rtc_v2' branch of:
+https://github.com/avpatel/linux.git
 
-Software should always set these to zero, so the worst outcome of
-doing this is that QEMU will hid software bugs if people set the bits,
-but I don't see that as huge downside.
+Changes since v2:
+ - Rebased patches on recent RTC refactoring by Philippe Mathieu-Daud??
+   (Refer, https://patchew.org/QEMU/20191003230404.19384-1-philmd@redhat.co=
+m/)
 
-Alistair
+Changes since v1:
+ - Implemented VMState save/restore for Goldfish RTC
+
+Anup Patel (2):
+  hw: timer: Add Goldfish RTC device
+  riscv: virt: Use Goldfish RTC device
+
+ hw/riscv/Kconfig                |   1 +
+ hw/riscv/virt.c                 |  15 ++
+ hw/rtc/Kconfig                  |   3 +
+ hw/rtc/Makefile.objs            |   1 +
+ hw/rtc/goldfish_rtc.c           | 278 ++++++++++++++++++++++++++++++++
+ include/hw/riscv/virt.h         |   2 +
+ include/hw/timer/goldfish_rtc.h |  46 ++++++
+ 7 files changed, 346 insertions(+)
+ create mode 100644 hw/rtc/goldfish_rtc.c
+ create mode 100644 include/hw/timer/goldfish_rtc.h
+
+--
+2.17.1
 
