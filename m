@@ -1,65 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iKILu-0001xz-Fi
-	for mharc-qemu-riscv@gnu.org; Tue, 15 Oct 2019 04:38:46 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:59269)
+	id 1iKQFg-0005g5-DK
+	for mharc-qemu-riscv@gnu.org; Tue, 15 Oct 2019 13:04:52 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:46606)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <bmeng.cn@gmail.com>) id 1iKILr-0001wJ-RK
- for qemu-riscv@nongnu.org; Tue, 15 Oct 2019 04:38:44 -0400
+ (envelope-from <dayeol@berkeley.edu>) id 1iKQFc-0005a5-PZ
+ for qemu-riscv@nongnu.org; Tue, 15 Oct 2019 13:04:50 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <bmeng.cn@gmail.com>) id 1iKILq-0005e1-Vo
- for qemu-riscv@nongnu.org; Tue, 15 Oct 2019 04:38:43 -0400
-Received: from mail-yb1-xb43.google.com ([2607:f8b0:4864:20::b43]:41970)
+ (envelope-from <dayeol@berkeley.edu>) id 1iKQFa-0001m0-TD
+ for qemu-riscv@nongnu.org; Tue, 15 Oct 2019 13:04:48 -0400
+Received: from mail-pg1-x541.google.com ([2607:f8b0:4864:20::541]:42714)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
- id 1iKILn-0005ZM-NF; Tue, 15 Oct 2019 04:38:39 -0400
-Received: by mail-yb1-xb43.google.com with SMTP id 206so6301747ybc.8;
- Tue, 15 Oct 2019 01:38:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ (Exim 4.71) (envelope-from <dayeol@berkeley.edu>) id 1iKQFa-0001hn-Fp
+ for qemu-riscv@nongnu.org; Tue, 15 Oct 2019 13:04:46 -0400
+Received: by mail-pg1-x541.google.com with SMTP id f14so7397775pgi.9
+ for <qemu-riscv@nongnu.org>; Tue, 15 Oct 2019 10:04:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=berkeley-edu.20150623.gappssmtp.com; s=20150623;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=ry4JHBjbHFxt12FOcTkQZiN+903n59CRN91yPPfkTw4=;
- b=TbKJIkoiufOd3ZQ0/7xlpaYFkSReAqk3DI2fJC6S1cND1maAPgwpGQlfZN3vdtT4pw
- ODjZuGP1KGzXm+H+bLfB0+Meq8rRKec5QMty1oDBePiniiP5HT0H5dmvqC3LiE051wmx
- weeWdRW57ZvYgajiPz2ZPxnOYwOefAtIqWMOpV75B42nCHHWNx82kE0pGr9ngeKB+HXK
- SERCx2E23tP3ikhG2vhc+nuLsHmcOaO64IfnvrHT6PPs8em3zgnpAWrBFi/HPXSLvGiu
- 9v1mhNq7z37ATepdyd30a8XHegCzDwWu8LuQKpUvoBq/U45iTD3s0uksr7GL2lUcG2dl
- SbeQ==
+ :cc; bh=pm7hmCqdx2Rb2Pli7HnqIfRe1BNmvKqa8gvsn9zmfKw=;
+ b=YfgWJr7g9eThsdJnh/sPq1ndH6CLneOfw3uoH9TZdRix5f+zGBivFAlbVpUM9Rtmlt
+ 6T6Sn8rUWZtJ5BMJ+pa6+G7evm5Mtfk8RPN8Qgpj/TTITFFqfshKLIPdNZ+Mr1e9uhH9
+ cwsKH7HKlOQDtAE3T3AVreEEanrKYdLjYhKahOjpDqAeNck5UVhDHiM+TbUlDa7oqpMd
+ FJMjvAx8UP2FDRCrIXxqboaiZtAQ4UdvO2wHtSewiat7/28TGll0RjX2RE94f1Tum5hg
+ ZfSsEpRSWTvw6QRTDDlxFPUrUvHxxnVzHhb+IBjMYfhbFAsuTi15E4k5+/2+LBezCq0g
+ zuhg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=ry4JHBjbHFxt12FOcTkQZiN+903n59CRN91yPPfkTw4=;
- b=oBqsVzqZivYPwY4CfoWwTV2Gy9pQRbAtkE477sW/2I/oGeYiCNMFpsD9zXQjP5D0fU
- pI2R7XQbf6eiJjSmpt2b1C39OjrTHKrRgjQ+S8N9cvKqf1rw0gH8CKksQV0s3xEIFOd2
- hMCIHUNjTjmZ/IflnoxpIhMUqIdfBTQwq+HCXFDDvVWX+ayCDu6DzLnFZQuMEQwo26Fs
- zD0dCxZMFfT9qSATht12oFedAGbxFS7X7EfQ7tJNXQzTHXQCUt4boDYnt8hB+dgc+7L8
- DDhRMlHjh3IX7zcAmmhNi62XKEtc2d2NrtP7xskx3ilNXoAu4exuizbj76eHk773/dxH
- FJBg==
-X-Gm-Message-State: APjAAAVXEA9ueyg79WGU8zIZfq2dKvSdZIlheI3D1EiSsEb+z/YGwnsZ
- VbfVirllDMX8WmCJvGETCX+zeywEEQQGrVEDjzU=
-X-Google-Smtp-Source: APXvYqwOlTp2Bvnxdz2WlBTRO/JDuR+qXNQoW2ZX+SsNE/+gI1Yr+yYCjExugNdfpmyWEI1kr/qz0WrqT82RM/YSvPU=
-X-Received: by 2002:a25:d015:: with SMTP id h21mr23729233ybg.11.1571128718921; 
- Tue, 15 Oct 2019 01:38:38 -0700 (PDT)
+ bh=pm7hmCqdx2Rb2Pli7HnqIfRe1BNmvKqa8gvsn9zmfKw=;
+ b=aEuzuGoHp5egPqqoVWf2lG2K9bh2jVYoeDMsBTph1u7QJd9+H4jQzqimWWSzvzXIqY
+ 3B/NnlZLg5+sbRnhKFgs5r+LJkJTo/foIX9gMGPEDADzdheuzPXKjINtxIo26kRHZ3vj
+ qryjyRUWIt7y7ZR6or3KgwcMleuTniQ6QTzQC204xavHHnhedIrF6j3fu0XLwCixkJUL
+ I+R/+vdEyZoVzxP1QdhTJYsK/AkPrTa5HRmVzMaOU/l+e8wrrfFg+IhUMA2CmbrzF/6Z
+ BGlB6UTji8sldQ0MZBunRFCRN8xkbkE5FLBgWUJmUX8kP++QJBDN2A1HdvMXaQywZsL4
+ n3eA==
+X-Gm-Message-State: APjAAAW5+z8AXD4WwtTk0TekQoC64HtVRdpTusVhLp6Xx0jZChDT32Ky
+ yPplwF/e8weByZOuQH2fS6fmJ14PPaROzw8Vf9ybqA==
+X-Google-Smtp-Source: APXvYqzJDjYrlRfqss14zJ+JA1uAVz5UOo8j/DnRFHvkQWCv/Tr1Nu3kk5ZGpWc3Fz7r62skOKIjWzdOP6i5HJACOOo=
+X-Received: by 2002:a62:3203:: with SMTP id y3mr39427189pfy.91.1571159084770; 
+ Tue, 15 Oct 2019 10:04:44 -0700 (PDT)
 MIME-Version: 1.0
-References: <20191014154529.287048-1-jonathan@fintelia.io>
- <20191014154529.287048-3-jonathan@fintelia.io>
-In-Reply-To: <20191014154529.287048-3-jonathan@fintelia.io>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Tue, 15 Oct 2019 16:38:27 +0800
-Message-ID: <CAEUhbmXn-j42AK_wq1WJ-hWMt9XgBFGRNayGa80M2=jVC1F+-g@mail.gmail.com>
-Subject: Re: [PATCH v4 2/3] target/riscv: Expose "priv" register for GDB for
- reads
-To: Jonathan Behrens <jonathan@fintelia.io>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, Palmer Dabbelt <palmer@sifive.com>,
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>, 
+References: <20191011231406.9808-1-dayeol@berkeley.edu>
+ <CANnJOVHy8TuitQHBQ=+uh6ZKB=5iEZaE2CsLosti5mHQvRi_KA@mail.gmail.com>
+ <CACjxMEsTuKEsL2OPVDGuUX8mCJCcOcLO1d0c3YFwmY1xxqP+Tg@mail.gmail.com>
+In-Reply-To: <CACjxMEsTuKEsL2OPVDGuUX8mCJCcOcLO1d0c3YFwmY1xxqP+Tg@mail.gmail.com>
+From: Dayeol Lee <dayeol@berkeley.edu>
+Date: Tue, 15 Oct 2019 10:04:32 -0700
+Message-ID: <CACjxMEt-zOt8VktL_Ut-9vA0FdeO5jPf0XVeCzuT2OOnyehMmA@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: PMP violation due to wrong size parameter
+To: Jonathan Behrens <fintelia@gmail.com>
+Cc: Qemu Devel <qemu-devel@nongnu.org>, 
+ "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
+ Palmer Dabbelt <palmer@sifive.com>, 
+ Richard Henderson <richard.henderson@linaro.org>,
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ Chris Williams <diodesign@tuta.io>
+Content-Type: multipart/alternative; boundary="000000000000223aaa0594f5fb2d"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::b43
+X-Received-From: 2607:f8b0:4864:20::541
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -71,25 +73,202 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Oct 2019 08:38:44 -0000
+X-List-Received-Date: Tue, 15 Oct 2019 17:04:50 -0000
 
-On Mon, Oct 14, 2019 at 11:53 PM Jonathan Behrens <jonathan@fintelia.io> wrote:
->
-> This patch enables a debugger to read the current privilege level via a virtual
-> "priv" register. When compiled with CONFIG_USER_ONLY the register is still
-> visible but always reports the value zero.
->
-> Signed-off-by: Jonathan Behrens <jonathan@fintelia.io>
-> ---
->  configure                       |  4 ++--
->  gdb-xml/riscv-32bit-virtual.xml | 11 +++++++++++
->  gdb-xml/riscv-64bit-virtual.xml | 11 +++++++++++
->  target/riscv/gdbstub.c          | 23 +++++++++++++++++++++++
->  4 files changed, 47 insertions(+), 2 deletions(-)
->  create mode 100644 gdb-xml/riscv-32bit-virtual.xml
->  create mode 100644 gdb-xml/riscv-64bit-virtual.xml
->
+--000000000000223aaa0594f5fb2d
+Content-Type: text/plain; charset="UTF-8"
 
-Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
-Tested-by: Bin Meng <bmeng.cn@gmail.com>
+Hi,
+
+Could this patch go through?
+If not please let me know so that I can fix.
+Thank you!
+
+Dayeol
+
+
+On Sat, Oct 12, 2019, 11:30 AM Dayeol Lee <dayeol@berkeley.edu> wrote:
+
+> No it doesn't mean that.
+> But the following code will make the size TARGET_PAGE_SIZE - (page offset)
+> if the address is not aligned.
+>
+> pmp_size = -(address | TARGET_PAGE_MASK)
+>
+>
+> On Fri, Oct 11, 2019, 7:37 PM Jonathan Behrens <fintelia@gmail.com> wrote:
+>
+>> How do you know that the access won't straddle a page boundary? Is there
+>> a guarantee somewhere that size=0 means that the access is naturally
+>> aligned?
+>>
+>> Jonathan
+>>
+>>
+>> On Fri, Oct 11, 2019 at 7:14 PM Dayeol Lee <dayeol@berkeley.edu> wrote:
+>>
+>>> riscv_cpu_tlb_fill() uses the `size` parameter to check PMP violation
+>>> using pmp_hart_has_privs().
+>>> However, if the size is unknown (=0), the ending address will be
+>>> `addr - 1` as it is `addr + size - 1` in `pmp_hart_has_privs()`.
+>>> This always causes a false PMP violation on the starting address of the
+>>> range, as `addr - 1` is not in the range.
+>>>
+>>> In order to fix, we just assume that all bytes from addr to the end of
+>>> the page will be accessed if the size is unknown.
+>>>
+>>> Signed-off-by: Dayeol Lee <dayeol@berkeley.edu>
+>>> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+>>> ---
+>>>  target/riscv/cpu_helper.c | 13 ++++++++++++-
+>>>  1 file changed, 12 insertions(+), 1 deletion(-)
+>>>
+>>> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+>>> index e32b6126af..7d9a22b601 100644
+>>> --- a/target/riscv/cpu_helper.c
+>>> +++ b/target/riscv/cpu_helper.c
+>>> @@ -441,6 +441,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address,
+>>> int size,
+>>>      CPURISCVState *env = &cpu->env;
+>>>      hwaddr pa = 0;
+>>>      int prot;
+>>> +    int pmp_size = 0;
+>>>      bool pmp_violation = false;
+>>>      int ret = TRANSLATE_FAIL;
+>>>      int mode = mmu_idx;
+>>> @@ -460,9 +461,19 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr
+>>> address, int size,
+>>>                    "%s address=%" VADDR_PRIx " ret %d physical "
+>>> TARGET_FMT_plx
+>>>                    " prot %d\n", __func__, address, ret, pa, prot);
+>>>
+>>> +    /*
+>>> +     * if size is unknown (0), assume that all bytes
+>>> +     * from addr to the end of the page will be accessed.
+>>> +     */
+>>> +    if (size == 0) {
+>>> +        pmp_size = -(address | TARGET_PAGE_MASK);
+>>> +    } else {
+>>> +        pmp_size = size;
+>>> +    }
+>>> +
+>>>      if (riscv_feature(env, RISCV_FEATURE_PMP) &&
+>>>          (ret == TRANSLATE_SUCCESS) &&
+>>> -        !pmp_hart_has_privs(env, pa, size, 1 << access_type, mode)) {
+>>> +        !pmp_hart_has_privs(env, pa, pmp_size, 1 << access_type, mode))
+>>> {
+>>>          ret = TRANSLATE_PMP_FAIL;
+>>>      }
+>>>      if (ret == TRANSLATE_PMP_FAIL) {
+>>> --
+>>> 2.20.1
+>>>
+>>>
+>>>
+
+--000000000000223aaa0594f5fb2d
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"auto"><div dir=3D"auto">Hi,=C2=A0</div><div dir=3D"auto"><br></=
+div><div dir=3D"auto">Could this patch go through?</div><div dir=3D"auto">I=
+f not please let me know so that I can fix.</div><div dir=3D"auto">Thank yo=
+u!</div><div dir=3D"auto"><br></div><div dir=3D"auto">Dayeol</div><br><br><=
+div class=3D"gmail_quote" dir=3D"auto"><div dir=3D"ltr" class=3D"gmail_attr=
+">On Sat, Oct 12, 2019, 11:30 AM Dayeol Lee &lt;<a href=3D"mailto:dayeol@be=
+rkeley.edu" target=3D"_blank" rel=3D"noreferrer">dayeol@berkeley.edu</a>&gt=
+; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .=
+8ex;border-left:1px #ccc solid;padding-left:1ex"><div dir=3D"auto"><div>No =
+it doesn&#39;t mean that.</div><div dir=3D"auto">But the following code wil=
+l make the size TARGET_PAGE_SIZE - (page offset) if the address is not alig=
+ned.</div><div dir=3D"auto"><br></div><div dir=3D"auto"><span style=3D"font=
+-family:sans-serif">pmp_size =3D -(address | TARGET_PAGE_MASK)</span><br><b=
+r><br><div class=3D"gmail_quote" dir=3D"auto"><div dir=3D"ltr" class=3D"gma=
+il_attr">On Fri, Oct 11, 2019, 7:37 PM Jonathan Behrens &lt;<a href=3D"mail=
+to:fintelia@gmail.com" rel=3D"noreferrer noreferrer noreferrer" target=3D"_=
+blank">fintelia@gmail.com</a>&gt; wrote:<br></div><blockquote class=3D"gmai=
+l_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left=
+:1ex"><div dir=3D"ltr"><div>How do you know that the access won&#39;t strad=
+dle a page boundary? Is there a guarantee somewhere that size=3D0 means tha=
+t the access is naturally aligned?</div><div><br></div><div>Jonathan<br></d=
+iv><br></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail=
+_attr">On Fri, Oct 11, 2019 at 7:14 PM Dayeol Lee &lt;<a href=3D"mailto:day=
+eol@berkeley.edu" rel=3D"noreferrer noreferrer noreferrer noreferrer" targe=
+t=3D"_blank">dayeol@berkeley.edu</a>&gt; wrote:<br></div><blockquote class=
+=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rg=
+b(204,204,204);padding-left:1ex">riscv_cpu_tlb_fill() uses the `size` param=
+eter to check PMP violation<br>
+using pmp_hart_has_privs().<br>
+However, if the size is unknown (=3D0), the ending address will be<br>
+`addr - 1` as it is `addr + size - 1` in `pmp_hart_has_privs()`.<br>
+This always causes a false PMP violation on the starting address of the<br>
+range, as `addr - 1` is not in the range.<br>
+<br>
+In order to fix, we just assume that all bytes from addr to the end of<br>
+the page will be accessed if the size is unknown.<br>
+<br>
+Signed-off-by: Dayeol Lee &lt;<a href=3D"mailto:dayeol@berkeley.edu" rel=3D=
+"noreferrer noreferrer noreferrer noreferrer" target=3D"_blank">dayeol@berk=
+eley.edu</a>&gt;<br>
+Reviewed-by: Richard Henderson &lt;<a href=3D"mailto:richard.henderson@lina=
+ro.org" rel=3D"noreferrer noreferrer noreferrer noreferrer" target=3D"_blan=
+k">richard.henderson@linaro.org</a>&gt;<br>
+---<br>
+=C2=A0target/riscv/cpu_helper.c | 13 ++++++++++++-<br>
+=C2=A01 file changed, 12 insertions(+), 1 deletion(-)<br>
+<br>
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c<br>
+index e32b6126af..7d9a22b601 100644<br>
+--- a/target/riscv/cpu_helper.c<br>
++++ b/target/riscv/cpu_helper.c<br>
+@@ -441,6 +441,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, in=
+t size,<br>
+=C2=A0 =C2=A0 =C2=A0CPURISCVState *env =3D &amp;cpu-&gt;env;<br>
+=C2=A0 =C2=A0 =C2=A0hwaddr pa =3D 0;<br>
+=C2=A0 =C2=A0 =C2=A0int prot;<br>
++=C2=A0 =C2=A0 int pmp_size =3D 0;<br>
+=C2=A0 =C2=A0 =C2=A0bool pmp_violation =3D false;<br>
+=C2=A0 =C2=A0 =C2=A0int ret =3D TRANSLATE_FAIL;<br>
+=C2=A0 =C2=A0 =C2=A0int mode =3D mmu_idx;<br>
+@@ -460,9 +461,19 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, i=
+nt size,<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0&quot;=
+%s address=3D%&quot; VADDR_PRIx &quot; ret %d physical &quot; TARGET_FMT_pl=
+x<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0&quot;=
+ prot %d\n&quot;, __func__, address, ret, pa, prot);<br>
+<br>
++=C2=A0 =C2=A0 /*<br>
++=C2=A0 =C2=A0 =C2=A0* if size is unknown (0), assume that all bytes<br>
++=C2=A0 =C2=A0 =C2=A0* from addr to the end of the page will be accessed.<b=
+r>
++=C2=A0 =C2=A0 =C2=A0*/<br>
++=C2=A0 =C2=A0 if (size =3D=3D 0) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 pmp_size =3D -(address | TARGET_PAGE_MASK);<br=
+>
++=C2=A0 =C2=A0 } else {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 pmp_size =3D size;<br>
++=C2=A0 =C2=A0 }<br>
++<br>
+=C2=A0 =C2=A0 =C2=A0if (riscv_feature(env, RISCV_FEATURE_PMP) &amp;&amp;<br=
+>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0(ret =3D=3D TRANSLATE_SUCCESS) &amp;&amp;=
+<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 !pmp_hart_has_privs(env, pa, size, 1 &lt;&lt; =
+access_type, mode)) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 !pmp_hart_has_privs(env, pa, pmp_size, 1 &lt;&=
+lt; access_type, mode)) {<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0ret =3D TRANSLATE_PMP_FAIL;<br>
+=C2=A0 =C2=A0 =C2=A0}<br>
+=C2=A0 =C2=A0 =C2=A0if (ret =3D=3D TRANSLATE_PMP_FAIL) {<br>
+-- <br>
+2.20.1<br>
+<br>
+<br>
+</blockquote></div>
+</blockquote></div></div></div>
+</blockquote></div>
+</div>
+
+--000000000000223aaa0594f5fb2d--
 
