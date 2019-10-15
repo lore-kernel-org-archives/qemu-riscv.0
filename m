@@ -1,67 +1,50 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iKQFg-0005g5-DK
-	for mharc-qemu-riscv@gnu.org; Tue, 15 Oct 2019 13:04:52 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:46606)
+	id 1iKR9t-0005ft-Vh
+	for mharc-qemu-riscv@gnu.org; Tue, 15 Oct 2019 14:02:57 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:56724)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <dayeol@berkeley.edu>) id 1iKQFc-0005a5-PZ
- for qemu-riscv@nongnu.org; Tue, 15 Oct 2019 13:04:50 -0400
+ (envelope-from <diodesign@tuta.io>) id 1iKR9q-0005eG-RT
+ for qemu-riscv@nongnu.org; Tue, 15 Oct 2019 14:02:57 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <dayeol@berkeley.edu>) id 1iKQFa-0001m0-TD
- for qemu-riscv@nongnu.org; Tue, 15 Oct 2019 13:04:48 -0400
-Received: from mail-pg1-x541.google.com ([2607:f8b0:4864:20::541]:42714)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <dayeol@berkeley.edu>) id 1iKQFa-0001hn-Fp
- for qemu-riscv@nongnu.org; Tue, 15 Oct 2019 13:04:46 -0400
-Received: by mail-pg1-x541.google.com with SMTP id f14so7397775pgi.9
- for <qemu-riscv@nongnu.org>; Tue, 15 Oct 2019 10:04:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=berkeley-edu.20150623.gappssmtp.com; s=20150623;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=pm7hmCqdx2Rb2Pli7HnqIfRe1BNmvKqa8gvsn9zmfKw=;
- b=YfgWJr7g9eThsdJnh/sPq1ndH6CLneOfw3uoH9TZdRix5f+zGBivFAlbVpUM9Rtmlt
- 6T6Sn8rUWZtJ5BMJ+pa6+G7evm5Mtfk8RPN8Qgpj/TTITFFqfshKLIPdNZ+Mr1e9uhH9
- cwsKH7HKlOQDtAE3T3AVreEEanrKYdLjYhKahOjpDqAeNck5UVhDHiM+TbUlDa7oqpMd
- FJMjvAx8UP2FDRCrIXxqboaiZtAQ4UdvO2wHtSewiat7/28TGll0RjX2RE94f1Tum5hg
- ZfSsEpRSWTvw6QRTDDlxFPUrUvHxxnVzHhb+IBjMYfhbFAsuTi15E4k5+/2+LBezCq0g
- zuhg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=pm7hmCqdx2Rb2Pli7HnqIfRe1BNmvKqa8gvsn9zmfKw=;
- b=aEuzuGoHp5egPqqoVWf2lG2K9bh2jVYoeDMsBTph1u7QJd9+H4jQzqimWWSzvzXIqY
- 3B/NnlZLg5+sbRnhKFgs5r+LJkJTo/foIX9gMGPEDADzdheuzPXKjINtxIo26kRHZ3vj
- qryjyRUWIt7y7ZR6or3KgwcMleuTniQ6QTzQC204xavHHnhedIrF6j3fu0XLwCixkJUL
- I+R/+vdEyZoVzxP1QdhTJYsK/AkPrTa5HRmVzMaOU/l+e8wrrfFg+IhUMA2CmbrzF/6Z
- BGlB6UTji8sldQ0MZBunRFCRN8xkbkE5FLBgWUJmUX8kP++QJBDN2A1HdvMXaQywZsL4
- n3eA==
-X-Gm-Message-State: APjAAAW5+z8AXD4WwtTk0TekQoC64HtVRdpTusVhLp6Xx0jZChDT32Ky
- yPplwF/e8weByZOuQH2fS6fmJ14PPaROzw8Vf9ybqA==
-X-Google-Smtp-Source: APXvYqzJDjYrlRfqss14zJ+JA1uAVz5UOo8j/DnRFHvkQWCv/Tr1Nu3kk5ZGpWc3Fz7r62skOKIjWzdOP6i5HJACOOo=
-X-Received: by 2002:a62:3203:: with SMTP id y3mr39427189pfy.91.1571159084770; 
- Tue, 15 Oct 2019 10:04:44 -0700 (PDT)
-MIME-Version: 1.0
-References: <20191011231406.9808-1-dayeol@berkeley.edu>
- <CANnJOVHy8TuitQHBQ=+uh6ZKB=5iEZaE2CsLosti5mHQvRi_KA@mail.gmail.com>
- <CACjxMEsTuKEsL2OPVDGuUX8mCJCcOcLO1d0c3YFwmY1xxqP+Tg@mail.gmail.com>
-In-Reply-To: <CACjxMEsTuKEsL2OPVDGuUX8mCJCcOcLO1d0c3YFwmY1xxqP+Tg@mail.gmail.com>
-From: Dayeol Lee <dayeol@berkeley.edu>
-Date: Tue, 15 Oct 2019 10:04:32 -0700
-Message-ID: <CACjxMEt-zOt8VktL_Ut-9vA0FdeO5jPf0XVeCzuT2OOnyehMmA@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv: PMP violation due to wrong size parameter
-To: Jonathan Behrens <fintelia@gmail.com>
-Cc: Qemu Devel <qemu-devel@nongnu.org>, 
- "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ (envelope-from <diodesign@tuta.io>) id 1iKR9p-0000RB-Gi
+ for qemu-riscv@nongnu.org; Tue, 15 Oct 2019 14:02:54 -0400
+Received: from w4.tutanota.de ([81.3.6.165]:48380)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <diodesign@tuta.io>)
+ id 1iKR9k-0000MW-Bd; Tue, 15 Oct 2019 14:02:49 -0400
+Received: from w2.tutanota.de (unknown [192.168.1.163])
+ by w4.tutanota.de (Postfix) with ESMTP id 7313810601FE;
+ Tue, 15 Oct 2019 18:02:45 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1571162565; 
+ s=s1; d=tuta.io;
+ h=Date:From:To:Cc:Message-ID:In-Reply-To:References:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding;
+ bh=xTj0MPvOyNRMecjZAXuRAVBZspGbCA3DG/mtcIiviv4=;
+ b=t5Xl+OUlebsBVyTHMT77bD2+wK1ewWUZrK5RyJHf7yg1UYq1NmwE77iN6Nwjk9Aj
+ R0KwpETmWg48AjEaxCsnGb4tFyxeF2/nszYdLwcAct1OhdoO8rA6HKY8ZIoE1VoTU+q
+ JIAYgh2OCrH/N51KrAoA7H46Uk+42wOJvhgL+1X6dg9Vf3J19Tb7SJFqtgcwsCzNHPX
+ bERO1YJln7o2/8KlwCjEmfH46dKOwsap2eyCgHgddQiKWNw0YxlDMTI1LT23DjrdufB
+ AlLJkq3pSTahTZmZUH4+6XDfYuv9CkbYeL5Lgf2Slys1UcqICt0G4oXkmauaKzDfzku
+ ZcoHaTpBUA==
+Date: Tue, 15 Oct 2019 20:02:45 +0200 (CEST)
+From: Chris Williams <diodesign@tuta.io>
+To: Alistair Francis <alistair23@gmail.com>
+Cc: Palmer Dabbelt <palmer@sifive.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Palmer Dabbelt <palmer@sifive.com>, 
- Richard Henderson <richard.henderson@linaro.org>,
- Alistair Francis <Alistair.Francis@wdc.com>, 
- Chris Williams <diodesign@tuta.io>
-Content-Type: multipart/alternative; boundary="000000000000223aaa0594f5fb2d"
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2607:f8b0:4864:20::541
+ Qemu Riscv <qemu-riscv@nongnu.org>,
+ Qemu Devel <qemu-devel@nongnu.org>,  <dayeol@berkeley.edu>
+Message-ID: <LrF_XLH--3-1@tuta.io>
+In-Reply-To: <CAKmqyKNh-jgg-LWHp4RMM9vaaMNr7qHtNSVYs9OFXhvJ-+7RXA@mail.gmail.com>
+References: <LqVBb_I--3-1@tuta.io>
+ <CAKmqyKNh-jgg-LWHp4RMM9vaaMNr7qHtNSVYs9OFXhvJ-+7RXA@mail.gmail.com>
+Subject: Re: [PATCH v2 1/1] target/riscv/pmp: Fix bug preventing
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+ [fuzzy]
+X-Received-From: 81.3.6.165
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -73,202 +56,98 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Oct 2019 17:04:50 -0000
-
---000000000000223aaa0594f5fb2d
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 15 Oct 2019 18:02:57 -0000
 
 Hi,
+Oct 11, 2019, 15:18 by alistair23@gmail.com:
 
-Could this patch go through?
-If not please let me know so that I can fix.
-Thank you!
-
-Dayeol
-
-
-On Sat, Oct 12, 2019, 11:30 AM Dayeol Lee <dayeol@berkeley.edu> wrote:
-
-> No it doesn't mean that.
-> But the following code will make the size TARGET_PAGE_SIZE - (page offset)
-> if the address is not aligned.
+> On Sun, Oct 6, 2019 at 1:32 AM Chris Williams <diodesign@tuta.io> wrote:
 >
-> pmp_size = -(address | TARGET_PAGE_MASK)
+> Also please use `git format-patch` to format the patch and then `git
+> send-email` to send the patch. There is a whole heap of detail here:
+> https://wiki.qemu.org/Contribute/SubmitAPatch <https://wiki.qemu.org/Cont=
+ribute/SubmitAPatch>
 >
->
-> On Fri, Oct 11, 2019, 7:37 PM Jonathan Behrens <fintelia@gmail.com> wrote:
->
->> How do you know that the access won't straddle a page boundary? Is there
->> a guarantee somewhere that size=0 means that the access is naturally
->> aligned?
+OK, I will do in future. I read the page but failed to get it right. Thanks=
+ for spotting my patch, and the advice, though.
+
+>> This fixes an issue that prevents a RISC-V CPU from executing instructio=
+ns
+>> immediately from the base address of a PMP TOR region.
 >>
->> Jonathan
+>> When jumping to an instruction in a PMP TOR region, pmp_hart_has_privs()=
+ is
+>> called to validate the access. If this instruction is the very first wor=
+d of a
+>> PMP TOR region, at address 0 relative to the start address of the region=
+, then
+>> the access will fail. This is because pmp_hart_has_privs() is called wit=
+h size
+>> 0 to perform this validation, causing this check...
 >>
+>> e =3D pmp_is_in_range(env, i, addr + size - 1);
 >>
->> On Fri, Oct 11, 2019 at 7:14 PM Dayeol Lee <dayeol@berkeley.edu> wrote:
+>> ... to fail, as (addr + size - 1) falls below the base address of the PM=
+P
+>> region. Really, the access should succeed. For example, if I have a regi=
+on
+>> spanning 0x80d96000 to 0x88d95fff and the CPU jumps to 0x80d96000, then:
 >>
->>> riscv_cpu_tlb_fill() uses the `size` parameter to check PMP violation
->>> using pmp_hart_has_privs().
->>> However, if the size is unknown (=0), the ending address will be
->>> `addr - 1` as it is `addr + size - 1` in `pmp_hart_has_privs()`.
->>> This always causes a false PMP violation on the starting address of the
->>> range, as `addr - 1` is not in the range.
->>>
->>> In order to fix, we just assume that all bytes from addr to the end of
->>> the page will be accessed if the size is unknown.
->>>
->>> Signed-off-by: Dayeol Lee <dayeol@berkeley.edu>
->>> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
->>> ---
->>>  target/riscv/cpu_helper.c | 13 ++++++++++++-
->>>  1 file changed, 12 insertions(+), 1 deletion(-)
->>>
->>> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
->>> index e32b6126af..7d9a22b601 100644
->>> --- a/target/riscv/cpu_helper.c
->>> +++ b/target/riscv/cpu_helper.c
->>> @@ -441,6 +441,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address,
->>> int size,
->>>      CPURISCVState *env = &cpu->env;
->>>      hwaddr pa = 0;
->>>      int prot;
->>> +    int pmp_size = 0;
->>>      bool pmp_violation = false;
->>>      int ret = TRANSLATE_FAIL;
->>>      int mode = mmu_idx;
->>> @@ -460,9 +461,19 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr
->>> address, int size,
->>>                    "%s address=%" VADDR_PRIx " ret %d physical "
->>> TARGET_FMT_plx
->>>                    " prot %d\n", __func__, address, ret, pa, prot);
->>>
->>> +    /*
->>> +     * if size is unknown (0), assume that all bytes
->>> +     * from addr to the end of the page will be accessed.
->>> +     */
->>> +    if (size == 0) {
->>> +        pmp_size = -(address | TARGET_PAGE_MASK);
->>> +    } else {
->>> +        pmp_size = size;
->>> +    }
->>> +
->>>      if (riscv_feature(env, RISCV_FEATURE_PMP) &&
->>>          (ret == TRANSLATE_SUCCESS) &&
->>> -        !pmp_hart_has_privs(env, pa, size, 1 << access_type, mode)) {
->>> +        !pmp_hart_has_privs(env, pa, pmp_size, 1 << access_type, mode))
->>> {
->>>          ret = TRANSLATE_PMP_FAIL;
->>>      }
->>>      if (ret == TRANSLATE_PMP_FAIL) {
->>> --
->>> 2.20.1
->>>
->>>
->>>
-
---000000000000223aaa0594f5fb2d
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"auto"><div dir=3D"auto">Hi,=C2=A0</div><div dir=3D"auto"><br></=
-div><div dir=3D"auto">Could this patch go through?</div><div dir=3D"auto">I=
-f not please let me know so that I can fix.</div><div dir=3D"auto">Thank yo=
-u!</div><div dir=3D"auto"><br></div><div dir=3D"auto">Dayeol</div><br><br><=
-div class=3D"gmail_quote" dir=3D"auto"><div dir=3D"ltr" class=3D"gmail_attr=
-">On Sat, Oct 12, 2019, 11:30 AM Dayeol Lee &lt;<a href=3D"mailto:dayeol@be=
-rkeley.edu" target=3D"_blank" rel=3D"noreferrer">dayeol@berkeley.edu</a>&gt=
-; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .=
-8ex;border-left:1px #ccc solid;padding-left:1ex"><div dir=3D"auto"><div>No =
-it doesn&#39;t mean that.</div><div dir=3D"auto">But the following code wil=
-l make the size TARGET_PAGE_SIZE - (page offset) if the address is not alig=
-ned.</div><div dir=3D"auto"><br></div><div dir=3D"auto"><span style=3D"font=
--family:sans-serif">pmp_size =3D -(address | TARGET_PAGE_MASK)</span><br><b=
-r><br><div class=3D"gmail_quote" dir=3D"auto"><div dir=3D"ltr" class=3D"gma=
-il_attr">On Fri, Oct 11, 2019, 7:37 PM Jonathan Behrens &lt;<a href=3D"mail=
-to:fintelia@gmail.com" rel=3D"noreferrer noreferrer noreferrer" target=3D"_=
-blank">fintelia@gmail.com</a>&gt; wrote:<br></div><blockquote class=3D"gmai=
-l_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left=
-:1ex"><div dir=3D"ltr"><div>How do you know that the access won&#39;t strad=
-dle a page boundary? Is there a guarantee somewhere that size=3D0 means tha=
-t the access is naturally aligned?</div><div><br></div><div>Jonathan<br></d=
-iv><br></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail=
-_attr">On Fri, Oct 11, 2019 at 7:14 PM Dayeol Lee &lt;<a href=3D"mailto:day=
-eol@berkeley.edu" rel=3D"noreferrer noreferrer noreferrer noreferrer" targe=
-t=3D"_blank">dayeol@berkeley.edu</a>&gt; wrote:<br></div><blockquote class=
-=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rg=
-b(204,204,204);padding-left:1ex">riscv_cpu_tlb_fill() uses the `size` param=
-eter to check PMP violation<br>
-using pmp_hart_has_privs().<br>
-However, if the size is unknown (=3D0), the ending address will be<br>
-`addr - 1` as it is `addr + size - 1` in `pmp_hart_has_privs()`.<br>
-This always causes a false PMP violation on the starting address of the<br>
-range, as `addr - 1` is not in the range.<br>
-<br>
-In order to fix, we just assume that all bytes from addr to the end of<br>
-the page will be accessed if the size is unknown.<br>
-<br>
-Signed-off-by: Dayeol Lee &lt;<a href=3D"mailto:dayeol@berkeley.edu" rel=3D=
-"noreferrer noreferrer noreferrer noreferrer" target=3D"_blank">dayeol@berk=
-eley.edu</a>&gt;<br>
-Reviewed-by: Richard Henderson &lt;<a href=3D"mailto:richard.henderson@lina=
-ro.org" rel=3D"noreferrer noreferrer noreferrer noreferrer" target=3D"_blan=
-k">richard.henderson@linaro.org</a>&gt;<br>
----<br>
-=C2=A0target/riscv/cpu_helper.c | 13 ++++++++++++-<br>
-=C2=A01 file changed, 12 insertions(+), 1 deletion(-)<br>
-<br>
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c<br>
-index e32b6126af..7d9a22b601 100644<br>
---- a/target/riscv/cpu_helper.c<br>
-+++ b/target/riscv/cpu_helper.c<br>
-@@ -441,6 +441,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, in=
-t size,<br>
-=C2=A0 =C2=A0 =C2=A0CPURISCVState *env =3D &amp;cpu-&gt;env;<br>
-=C2=A0 =C2=A0 =C2=A0hwaddr pa =3D 0;<br>
-=C2=A0 =C2=A0 =C2=A0int prot;<br>
-+=C2=A0 =C2=A0 int pmp_size =3D 0;<br>
-=C2=A0 =C2=A0 =C2=A0bool pmp_violation =3D false;<br>
-=C2=A0 =C2=A0 =C2=A0int ret =3D TRANSLATE_FAIL;<br>
-=C2=A0 =C2=A0 =C2=A0int mode =3D mmu_idx;<br>
-@@ -460,9 +461,19 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, i=
-nt size,<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0&quot;=
-%s address=3D%&quot; VADDR_PRIx &quot; ret %d physical &quot; TARGET_FMT_pl=
-x<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0&quot;=
- prot %d\n&quot;, __func__, address, ret, pa, prot);<br>
-<br>
-+=C2=A0 =C2=A0 /*<br>
-+=C2=A0 =C2=A0 =C2=A0* if size is unknown (0), assume that all bytes<br>
-+=C2=A0 =C2=A0 =C2=A0* from addr to the end of the page will be accessed.<b=
-r>
-+=C2=A0 =C2=A0 =C2=A0*/<br>
-+=C2=A0 =C2=A0 if (size =3D=3D 0) {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 pmp_size =3D -(address | TARGET_PAGE_MASK);<br=
+>> s =3D 0x80d96000
+>> e =3D 0x80d95fff
+>>
+>> And the validation fails. The size check proposed below catches these ze=
+ro-size
+>> instruction fetch access probes. The word alignment in pmpaddr{0-15} and
+>> earlier instruction alignment checks should prevent the execution of
+>> instructions over the upper boundary of the PMP region, though I'm happy=
+ to give
+>> this more attention if this is a concern.
+>>
 >
-+=C2=A0 =C2=A0 } else {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 pmp_size =3D size;<br>
-+=C2=A0 =C2=A0 }<br>
-+<br>
-=C2=A0 =C2=A0 =C2=A0if (riscv_feature(env, RISCV_FEATURE_PMP) &amp;&amp;<br=
+> This seems like a similar issue to this patch as well:
+> https://lore.kernel.org/qemu-devel/20191007052813.25814-1-dayeol@berkeley=
+.edu/ <https://lore.kernel.org/qemu-devel/20191007052813.25814-1-dayeol@ber=
+keley.edu/>
 >
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0(ret =3D=3D TRANSLATE_SUCCESS) &amp;&amp;=
-<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 !pmp_hart_has_privs(env, pa, size, 1 &lt;&lt; =
-access_type, mode)) {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 !pmp_hart_has_privs(env, pa, pmp_size, 1 &lt;&=
-lt; access_type, mode)) {<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0ret =3D TRANSLATE_PMP_FAIL;<br>
-=C2=A0 =C2=A0 =C2=A0}<br>
-=C2=A0 =C2=A0 =C2=A0if (ret =3D=3D TRANSLATE_PMP_FAIL) {<br>
--- <br>
-2.20.1<br>
-<br>
-<br>
-</blockquote></div>
-</blockquote></div></div></div>
-</blockquote></div>
-</div>
+Yes, it appears Dayeol and I have encountered the same issue.
 
---000000000000223aaa0594f5fb2d--
+> From that discussion:
+>
+> "In general, size 0 means "unknown size".  In this case, the one tlb look=
+up is
+> going to be used by lots of instructions -- everything that fits on the p=
+age."
+>
+> Richard's last comment seems like a better fix:
+>
+> "You certainly could do
+>
+>  if (size =3D=3D 0) {
+>  size =3D -(addr | TARGET_PAGE_MASK);
+>  }
+>
+> to assume that all bytes from addr to the end of the page are accessed.  =
+That
+> would avoid changing too much of the rest of the logic.
+>
+> That said, this code will continue to not work for mis-aligned boundaries=
+."
+>
+> So I don't think this is the correct solution. I'm not sure if Dayeol
+> is planning on sending a follow up version. If not feel free to send
+> it.
+>
+I'm happy for Dayeol to submit a better patch, if necessary.=C2=A0
+>> Signed-off-by: Chris Williams <diodesign@tuta.io <mailto:diodesign@tuta.=
+io>>
+>>
+>
+> It looks like this is a HTML patch, also ensure all patches are just
+> plain text, `git send-email` will do this.
+>
+Yes, you're right: my webmail client isn't particularly neighborly with res=
+pect to Qemu's submission process.
+
+C.
 
