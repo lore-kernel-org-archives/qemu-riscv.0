@@ -1,56 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iKoZR-00025U-CG
-	for mharc-qemu-riscv@gnu.org; Wed, 16 Oct 2019 15:02:53 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:58373)
+	id 1iKqQ6-0004CB-KD
+	for mharc-qemu-riscv@gnu.org; Wed, 16 Oct 2019 17:01:22 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:45059)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <palmer@dabbelt.com>) id 1iKoZN-0001zp-S6
- for qemu-riscv@nongnu.org; Wed, 16 Oct 2019 15:02:51 -0400
+ (envelope-from <alistair23@gmail.com>) id 1iKqQ4-0004AQ-Hc
+ for qemu-riscv@nongnu.org; Wed, 16 Oct 2019 17:01:21 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmer@dabbelt.com>) id 1iKoZL-0006ml-MB
- for qemu-riscv@nongnu.org; Wed, 16 Oct 2019 15:02:49 -0400
-Received: from mail-pf1-f193.google.com ([209.85.210.193]:43969)
+ (envelope-from <alistair23@gmail.com>) id 1iKqQ3-0007SA-Cc
+ for qemu-riscv@nongnu.org; Wed, 16 Oct 2019 17:01:20 -0400
+Received: from mail-lj1-x244.google.com ([2a00:1450:4864:20::244]:44572)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1iKoZH-0006ip-Op
- for qemu-riscv@nongnu.org; Wed, 16 Oct 2019 15:02:45 -0400
-Received: by mail-pf1-f193.google.com with SMTP id a2so15290437pfo.10
- for <qemu-riscv@nongnu.org>; Wed, 16 Oct 2019 12:02:40 -0700 (PDT)
+ (Exim 4.71) (envelope-from <alistair23@gmail.com>)
+ id 1iKqQ0-0007JJ-Ka; Wed, 16 Oct 2019 17:01:16 -0400
+Received: by mail-lj1-x244.google.com with SMTP id m13so155468ljj.11;
+ Wed, 16 Oct 2019 14:01:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=ZgU+CS0nFS1d6H6euIDyJtA+7V3NZ/G1q7nqIQcmhQU=;
+ b=WNMmTUrcWtZTH28bykLrng0AMGYm15kBq8yhX8Tw8yyiBPS8YiXb6sZ1KU502AwymG
+ zopQjCz5reegDdg3w5bhWSFSOK+g/pk7CkF/u9DNq6ld2FS2fC1XA5TekeE5l0a9P73z
+ VfU/hySQWlugGbhNJK/CQ+Fe4eB7RnP+u5JtpRrnc4DgwCwDe9c99Ps+SL8bFApAk6Ub
+ Oq/LxKdiaRxoSqKmuYIZCN8TSoUGxkRrqD9TUhuTpVN4bUbwwE9vTWjs3lmmTMUsG/qO
+ YOkK7aijqFxo0SttSiFV49TKtcIgd6Z6mFpK5BfPbLbfpCjME2SnqpyYk0ZtQ1/mW02Q
+ eK4w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
- :mime-version:content-transfer-encoding;
- bh=VoUAelHoI5V1dDOgS0kCadoKVsKPF3UKMPiydVe91WA=;
- b=LzKmurGHVJcU+ErW/wDTw+P3WndnNV80jvPBLyUOI3AhGX8pgD/9d9wan8tpE/71Hj
- /HuocH+H1YZiQIu213SJLAIl3mYO7Pca/4sbFs5jYU0f++KkuL7REuXDGQ6YDkBw37Dj
- tgXWn8l7WRiscwJAIZuUSgONZzThYwDyLu8c0IUm6vbj76YHbtAjp2Aff9+F86inoRp3
- D+IArUBfxc6LBolzyXGS/PACcgSbn5FjmG2TIx1fy0u2+VE1yUX2E7u0+PGPEhscxQnc
- ybrEdzumDBzcrsmqLU/4+Ix8XX9WsPuZvmyCHu1DW7qasA6xK19YsdEaUNcgYcTR4G+r
- 9Yog==
-X-Gm-Message-State: APjAAAUpMsJ7ekNWX0fKcjvnkYfH1q57hDIcVSPnbAEhW+2DwHtMmipJ
- 4aKrqEfwD4eA1ASuB64oJGYJRg==
-X-Google-Smtp-Source: APXvYqzyn64nwbUQaFXJFN0zNxjeU3uva0H9KzIOUOJsapQy1O0csL+s73+oNNBZy0TUUaT5Sw3U7A==
-X-Received: by 2002:a17:90a:2ec1:: with SMTP id
- h1mr6881400pjs.96.1571252559100; 
- Wed, 16 Oct 2019 12:02:39 -0700 (PDT)
-Received: from localhost ([12.206.222.5])
- by smtp.gmail.com with ESMTPSA id s36sm26596156pgk.84.2019.10.16.12.02.37
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 16 Oct 2019 12:02:38 -0700 (PDT)
-Date: Wed, 16 Oct 2019 12:02:38 -0700 (PDT)
-X-Google-Original-Date: Wed, 16 Oct 2019 09:36:47 PDT (-0700)
-Subject: Re: [PATCH v1 22/28] target/riscv: Allow specifying MMU stage
-In-Reply-To: <CAKmqyKOV0J3w3fPUF3CGAip=j_+D_M+7X9r+2TwEZwkapsQZMQ@mail.gmail.com>
-CC: Alistair Francis <Alistair.Francis@wdc.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org, Atish Patra <Atish.Patra@wdc.com>,
- Anup Patel <Anup.Patel@wdc.com>
-From: Palmer Dabbelt <palmer@sifive.com>
-To: alistair23@gmail.com
-Message-ID: <mhng-8a742b0f-e79f-4da0-81fc-b91d184b6279@palmer-si-x1e>
-Mime-Version: 1.0 (MHng)
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
- [fuzzy]
-X-Received-From: 209.85.210.193
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=ZgU+CS0nFS1d6H6euIDyJtA+7V3NZ/G1q7nqIQcmhQU=;
+ b=rwBenOCIkUuPUHPpnYAyDQ2qzLQ5N43hsmG4A7ZV7+e5Ba6sBBdD0Ub7fKkMnYXiVE
+ RKKs8mSjDdqrbqhC57+e8v0rL88vekMvwmgM6uoFgMdUp9u725NI8GVPOYihPfV11u2j
+ BrGzLmz1fA9T04KyPpmbyOEB55wzRY3B1Mg/3mBSfzgSv4xVfaCe57hXyzMp027Ms6CE
+ yOnPqap4C94w9W7j9ERvimn427MNQfrCzHpdtZ7ymbI5y5RqWL29qByGAUOM5VmGuGYM
+ OirY7PYmMhtaSoM4muP05NikyILJqaV7u8nA99+JkieYGt3aD1fL9oevf32BHbqDmXdx
+ uh8g==
+X-Gm-Message-State: APjAAAV7MoitDiDgPZYMSuWzXUWy2UcBPkWWWLSAsD44iBabW3zksx9C
+ MQCNyekUucq9jUFsE5mZLn1uuVk+A+gEOGqR4l0=
+X-Google-Smtp-Source: APXvYqxHj873CSI4EMCmF1u85bevrHwiaEyLj4rsEGgUgfL47SkQvwkyBxkuFNHbe/wYuUG/BpF8qwP6wjGd2WlCa4I=
+X-Received: by 2002:a2e:9890:: with SMTP id b16mr113641ljj.4.1571259674714;
+ Wed, 16 Oct 2019 14:01:14 -0700 (PDT)
+MIME-Version: 1.0
+References: <a090bc437bf412c279b1254d05eae5c2d67225db.1566603412.git.alistair.francis@wdc.com>
+ <mhng-afa69c9b-17b7-4043-b204-512c92cf618a@palmer-si-x1e>
+In-Reply-To: <mhng-afa69c9b-17b7-4043-b204-512c92cf618a@palmer-si-x1e>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Wed, 16 Oct 2019 13:56:04 -0700
+Message-ID: <CAKmqyKMf1bPSpM7RP1ULmOK7sKcUFA5Rbb_TkD7f0vTtu5fa1Q@mail.gmail.com>
+Subject: Re: [PATCH v1 04/28] target/riscv: Fix CSR perm checking for HS mode
+To: Palmer Dabbelt <palmer@sifive.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Atish Patra <Atish.Patra@wdc.com>, Anup Patel <Anup.Patel@wdc.com>
+Content-Type: text/plain; charset="UTF-8"
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2a00:1450:4864:20::244
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -62,112 +67,77 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Oct 2019 19:02:51 -0000
+X-List-Received-Date: Wed, 16 Oct 2019 21:01:21 -0000
 
-On Mon, 07 Oct 2019 11:05:33 PDT (-0700), alistair23@gmail.com wrote:
-> On Thu, Oct 3, 2019 at 8:53 AM Palmer Dabbelt <palmer@sifive.com> wrote:
->>
->> On Fri, 23 Aug 2019 16:38:47 PDT (-0700), Alistair Francis wrote:
->> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
->> > ---
->> >  target/riscv/cpu_helper.c | 39 ++++++++++++++++++++++++++++++---------
->> >  1 file changed, 30 insertions(+), 9 deletions(-)
->> >
->> > diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
->> > index 098873c83e..9aa6906acd 100644
->> > --- a/target/riscv/cpu_helper.c
->> > +++ b/target/riscv/cpu_helper.c
->> > @@ -318,10 +318,19 @@ void riscv_cpu_set_mode(CPURISCVState *env, target_ulong newpriv)
->> >   *
->> >   * Adapted from Spike's mmu_t::translate and mmu_t::walk
->> >   *
->> > + * @env: CPURISCVState
->> > + * @physical: This will be set to the calculated physical address
->> > + * @prot: The returned protection attributes
->> > + * @addr: The virtual address to be translated
->> > + * @access_type: The type of MMU access
->> > + * @mmu_idx: Indicates current privilege level
->> > + * @first_stage: Are we in first stage translation?
->> > + *               Second stage is used for hypervisor guest translation
->> >   */
->> >  static int get_physical_address(CPURISCVState *env, hwaddr *physical,
->> >                                  int *prot, target_ulong addr,
->> > -                                int access_type, int mmu_idx)
->> > +                                int access_type, int mmu_idx,
->> > +                                bool first_stage)
->> >  {
->> >      /* NOTE: the env->pc value visible here will not be
->> >       * correct, but the value visible to the exception handler
->> > @@ -518,13 +527,23 @@ restart:
->> >  }
->> >
->> >  static void raise_mmu_exception(CPURISCVState *env, target_ulong address,
->> > -                                MMUAccessType access_type, bool pmp_violation)
->> > +                                MMUAccessType access_type, bool pmp_violation,
->> > +                                bool first_stage)
->> >  {
->> >      CPUState *cs = env_cpu(env);
->> > -    int page_fault_exceptions =
->> > -        (env->priv_ver >= PRIV_VERSION_1_10_0) &&
->> > -        get_field(env->satp, SATP_MODE) != VM_1_10_MBARE &&
->> > -        !pmp_violation;
->> > +    int page_fault_exceptions;
->> > +    if (first_stage) {
->> > +        page_fault_exceptions =
->> > +            (env->priv_ver >= PRIV_VERSION_1_10_0) &&
->> > +            get_field(env->satp, SATP_MODE) != VM_1_10_MBARE &&
->> > +            !pmp_violation;
->> > +            riscv_cpu_set_force_hs_excep(env, CLEAR_HS_EXCEP);
->>
->> It might just be email, but the indentation looks wrong here.
+On Tue, Sep 10, 2019 at 7:48 AM Palmer Dabbelt <palmer@sifive.com> wrote:
 >
-> Yep, fixed.
+> On Fri, 23 Aug 2019 16:38:00 PDT (-0700), Alistair Francis wrote:
+> > Update the CSR permission checking to work correctly when we are in
+> > HS-mode.
+> >
+> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> > ---
+> >  target/riscv/csr.c | 10 ++++++++--
+> >  1 file changed, 8 insertions(+), 2 deletions(-)
+> >
+> > diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> > index f767ad24be..471f23a1d0 100644
+> > --- a/target/riscv/csr.c
+> > +++ b/target/riscv/csr.c
+> > @@ -799,9 +799,15 @@ int riscv_csrrw(CPURISCVState *env, int csrno, target_ulong *ret_value,
+> >
+> >      /* check privileges and return -1 if check fails */
+> >  #if !defined(CONFIG_USER_ONLY)
+> > -    int csr_priv = get_field(csrno, 0x300);
+> > +    int csr_priv = env->priv;
 >
->>
->> > +    } else {
->> > +        page_fault_exceptions =
->> > +            get_field(env->hgatp, HGATP_MODE) != VM_1_10_MBARE &&
->> > +            !pmp_violation;
->> > +            riscv_cpu_set_force_hs_excep(env, FORCE_HS_EXCEP);
->> > +    }
->> >      switch (access_type) {
->> >      case MMU_INST_FETCH:
->> >          cs->exception_index = page_fault_exceptions ?
->> > @@ -551,7 +570,8 @@ hwaddr riscv_cpu_get_phys_page_debug(CPUState *cs, vaddr addr)
->> >      int prot;
->> >      int mmu_idx = cpu_mmu_index(&cpu->env, false);
->> >
->> > -    if (get_physical_address(&cpu->env, &phys_addr, &prot, addr, 0, mmu_idx)) {
->> > +    if (get_physical_address(&cpu->env, &phys_addr, &prot, addr, 0, mmu_idx,
->> > +                             true)) {
->> >          return -1;
->> >      }
->> >      return phys_addr;
->> > @@ -613,7 +633,8 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
->> >      qemu_log_mask(CPU_LOG_MMU, "%s ad %" VADDR_PRIx " rw %d mmu_idx %d\n",
->> >                    __func__, address, access_type, mmu_idx);
->> >
->> > -    ret = get_physical_address(env, &pa, &prot, address, access_type, mmu_idx);
->> > +    ret = get_physical_address(env, &pa, &prot, address, access_type, mmu_idx,
->> > +                               true);
->> >
->> >      if (mode == PRV_M && access_type != MMU_INST_FETCH) {
->> >          if (get_field(*env->mstatus, MSTATUS_MPRV)) {
->> > @@ -640,7 +661,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
->> >      } else if (probe) {
->> >          return false;
->> >      } else {
->> > -        raise_mmu_exception(env, address, access_type, pmp_violation);
->> > +        raise_mmu_exception(env, address, access_type, pmp_violation, true);
->> >          riscv_raise_exception(env, cs->exception_index, retaddr);
->> >      }
->> >  #else
->>
->> I don't think it makes sense to split off these two (23 and 24, that add the
->> argument) out from the implementation.
->
-> The goal was just to make it easier to review. If you want them
-> combined I can easily combine them.
+> This isn't really "csr_priv" (ie, the priv needed to access the CSR) any more,
+> it's really the effective priv of the machine.  Leaving the variable with the
+> same name makes this hard to read, but I think it is correct.
 
-It's making it harder to read on my end :)
+I changed the name to effective_priv.
+
+>
+> >      int read_only = get_field(csrno, 0xC00) == 3;
+> > -    if ((write_mask && read_only) || (env->priv < csr_priv)) {
+> > +
+> > +    if (riscv_has_ext(env, RVH) && !riscv_cpu_virt_enabled(env)) {
+> > +        /* Plus 1 as we are in HS mode */
+>
+> The comment is useless, it doesn't say why we increment it.  Also, I don't
+> think this is correct: doesn't it allow U mode to access S CSRs when H is
+> present and V is disabled?
+
+Yes, you are correct. I have changed it to check that we are in S mode.
+
+>
+> Something like
+>
+>     riscv_effective_priv(CPURISCVState *env)
+>     {
+>         if (riscv_has_ext(env, RVH) && env->priv == PRIV_S && !riscv_cpu_virt_enabled(env)) {
+>             return PRIV_HS;
+
+I don't like this as there is no PRIV_HS. It seems like a bad idea to
+start using a reserved privilege level, if it is ever used we will
+then be stuck updating this. I also don't think this is used anywhere
+else. I have just fixed up the if statement and comment.
+
+Alistair
+
+>         }
+>
+>         return env->priv;
+>     }
+>
+> would probably be used in a handful of places, and would be a drop in for
+> env->priv here.
+>
+> > +        csr_priv++;
+> > +    }
+> > +
+> > +    if ((write_mask && read_only) || (csr_priv < get_field(csrno, 0x300))) {
+> >          return -1;
+> >      }
+> >  #endif
 
