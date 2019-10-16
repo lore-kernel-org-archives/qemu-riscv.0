@@ -1,50 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iKR9t-0005ft-Vh
-	for mharc-qemu-riscv@gnu.org; Tue, 15 Oct 2019 14:02:57 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:56724)
+	id 1iKoZR-00025U-CG
+	for mharc-qemu-riscv@gnu.org; Wed, 16 Oct 2019 15:02:53 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58373)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <diodesign@tuta.io>) id 1iKR9q-0005eG-RT
- for qemu-riscv@nongnu.org; Tue, 15 Oct 2019 14:02:57 -0400
+ (envelope-from <palmer@dabbelt.com>) id 1iKoZN-0001zp-S6
+ for qemu-riscv@nongnu.org; Wed, 16 Oct 2019 15:02:51 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <diodesign@tuta.io>) id 1iKR9p-0000RB-Gi
- for qemu-riscv@nongnu.org; Tue, 15 Oct 2019 14:02:54 -0400
-Received: from w4.tutanota.de ([81.3.6.165]:48380)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <diodesign@tuta.io>)
- id 1iKR9k-0000MW-Bd; Tue, 15 Oct 2019 14:02:49 -0400
-Received: from w2.tutanota.de (unknown [192.168.1.163])
- by w4.tutanota.de (Postfix) with ESMTP id 7313810601FE;
- Tue, 15 Oct 2019 18:02:45 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1571162565; 
- s=s1; d=tuta.io;
- h=Date:From:To:Cc:Message-ID:In-Reply-To:References:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding;
- bh=xTj0MPvOyNRMecjZAXuRAVBZspGbCA3DG/mtcIiviv4=;
- b=t5Xl+OUlebsBVyTHMT77bD2+wK1ewWUZrK5RyJHf7yg1UYq1NmwE77iN6Nwjk9Aj
- R0KwpETmWg48AjEaxCsnGb4tFyxeF2/nszYdLwcAct1OhdoO8rA6HKY8ZIoE1VoTU+q
- JIAYgh2OCrH/N51KrAoA7H46Uk+42wOJvhgL+1X6dg9Vf3J19Tb7SJFqtgcwsCzNHPX
- bERO1YJln7o2/8KlwCjEmfH46dKOwsap2eyCgHgddQiKWNw0YxlDMTI1LT23DjrdufB
- AlLJkq3pSTahTZmZUH4+6XDfYuv9CkbYeL5Lgf2Slys1UcqICt0G4oXkmauaKzDfzku
- ZcoHaTpBUA==
-Date: Tue, 15 Oct 2019 20:02:45 +0200 (CEST)
-From: Chris Williams <diodesign@tuta.io>
-To: Alistair Francis <alistair23@gmail.com>
-Cc: Palmer Dabbelt <palmer@sifive.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Qemu Riscv <qemu-riscv@nongnu.org>,
- Qemu Devel <qemu-devel@nongnu.org>,  <dayeol@berkeley.edu>
-Message-ID: <LrF_XLH--3-1@tuta.io>
-In-Reply-To: <CAKmqyKNh-jgg-LWHp4RMM9vaaMNr7qHtNSVYs9OFXhvJ-+7RXA@mail.gmail.com>
-References: <LqVBb_I--3-1@tuta.io>
- <CAKmqyKNh-jgg-LWHp4RMM9vaaMNr7qHtNSVYs9OFXhvJ-+7RXA@mail.gmail.com>
-Subject: Re: [PATCH v2 1/1] target/riscv/pmp: Fix bug preventing
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+ (envelope-from <palmer@dabbelt.com>) id 1iKoZL-0006ml-MB
+ for qemu-riscv@nongnu.org; Wed, 16 Oct 2019 15:02:49 -0400
+Received: from mail-pf1-f193.google.com ([209.85.210.193]:43969)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1iKoZH-0006ip-Op
+ for qemu-riscv@nongnu.org; Wed, 16 Oct 2019 15:02:45 -0400
+Received: by mail-pf1-f193.google.com with SMTP id a2so15290437pfo.10
+ for <qemu-riscv@nongnu.org>; Wed, 16 Oct 2019 12:02:40 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
+ :mime-version:content-transfer-encoding;
+ bh=VoUAelHoI5V1dDOgS0kCadoKVsKPF3UKMPiydVe91WA=;
+ b=LzKmurGHVJcU+ErW/wDTw+P3WndnNV80jvPBLyUOI3AhGX8pgD/9d9wan8tpE/71Hj
+ /HuocH+H1YZiQIu213SJLAIl3mYO7Pca/4sbFs5jYU0f++KkuL7REuXDGQ6YDkBw37Dj
+ tgXWn8l7WRiscwJAIZuUSgONZzThYwDyLu8c0IUm6vbj76YHbtAjp2Aff9+F86inoRp3
+ D+IArUBfxc6LBolzyXGS/PACcgSbn5FjmG2TIx1fy0u2+VE1yUX2E7u0+PGPEhscxQnc
+ ybrEdzumDBzcrsmqLU/4+Ix8XX9WsPuZvmyCHu1DW7qasA6xK19YsdEaUNcgYcTR4G+r
+ 9Yog==
+X-Gm-Message-State: APjAAAUpMsJ7ekNWX0fKcjvnkYfH1q57hDIcVSPnbAEhW+2DwHtMmipJ
+ 4aKrqEfwD4eA1ASuB64oJGYJRg==
+X-Google-Smtp-Source: APXvYqzyn64nwbUQaFXJFN0zNxjeU3uva0H9KzIOUOJsapQy1O0csL+s73+oNNBZy0TUUaT5Sw3U7A==
+X-Received: by 2002:a17:90a:2ec1:: with SMTP id
+ h1mr6881400pjs.96.1571252559100; 
+ Wed, 16 Oct 2019 12:02:39 -0700 (PDT)
+Received: from localhost ([12.206.222.5])
+ by smtp.gmail.com with ESMTPSA id s36sm26596156pgk.84.2019.10.16.12.02.37
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 16 Oct 2019 12:02:38 -0700 (PDT)
+Date: Wed, 16 Oct 2019 12:02:38 -0700 (PDT)
+X-Google-Original-Date: Wed, 16 Oct 2019 09:36:47 PDT (-0700)
+Subject: Re: [PATCH v1 22/28] target/riscv: Allow specifying MMU stage
+In-Reply-To: <CAKmqyKOV0J3w3fPUF3CGAip=j_+D_M+7X9r+2TwEZwkapsQZMQ@mail.gmail.com>
+CC: Alistair Francis <Alistair.Francis@wdc.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org, Atish Patra <Atish.Patra@wdc.com>,
+ Anup Patel <Anup.Patel@wdc.com>
+From: Palmer Dabbelt <palmer@sifive.com>
+To: alistair23@gmail.com
+Message-ID: <mhng-8a742b0f-e79f-4da0-81fc-b91d184b6279@palmer-si-x1e>
+Mime-Version: 1.0 (MHng)
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
  [fuzzy]
-X-Received-From: 81.3.6.165
+X-Received-From: 209.85.210.193
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -56,98 +62,112 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Oct 2019 18:02:57 -0000
+X-List-Received-Date: Wed, 16 Oct 2019 19:02:51 -0000
 
-Hi,
-Oct 11, 2019, 15:18 by alistair23@gmail.com:
+On Mon, 07 Oct 2019 11:05:33 PDT (-0700), alistair23@gmail.com wrote:
+> On Thu, Oct 3, 2019 at 8:53 AM Palmer Dabbelt <palmer@sifive.com> wrote:
+>>
+>> On Fri, 23 Aug 2019 16:38:47 PDT (-0700), Alistair Francis wrote:
+>> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+>> > ---
+>> >  target/riscv/cpu_helper.c | 39 ++++++++++++++++++++++++++++++---------
+>> >  1 file changed, 30 insertions(+), 9 deletions(-)
+>> >
+>> > diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+>> > index 098873c83e..9aa6906acd 100644
+>> > --- a/target/riscv/cpu_helper.c
+>> > +++ b/target/riscv/cpu_helper.c
+>> > @@ -318,10 +318,19 @@ void riscv_cpu_set_mode(CPURISCVState *env, target_ulong newpriv)
+>> >   *
+>> >   * Adapted from Spike's mmu_t::translate and mmu_t::walk
+>> >   *
+>> > + * @env: CPURISCVState
+>> > + * @physical: This will be set to the calculated physical address
+>> > + * @prot: The returned protection attributes
+>> > + * @addr: The virtual address to be translated
+>> > + * @access_type: The type of MMU access
+>> > + * @mmu_idx: Indicates current privilege level
+>> > + * @first_stage: Are we in first stage translation?
+>> > + *               Second stage is used for hypervisor guest translation
+>> >   */
+>> >  static int get_physical_address(CPURISCVState *env, hwaddr *physical,
+>> >                                  int *prot, target_ulong addr,
+>> > -                                int access_type, int mmu_idx)
+>> > +                                int access_type, int mmu_idx,
+>> > +                                bool first_stage)
+>> >  {
+>> >      /* NOTE: the env->pc value visible here will not be
+>> >       * correct, but the value visible to the exception handler
+>> > @@ -518,13 +527,23 @@ restart:
+>> >  }
+>> >
+>> >  static void raise_mmu_exception(CPURISCVState *env, target_ulong address,
+>> > -                                MMUAccessType access_type, bool pmp_violation)
+>> > +                                MMUAccessType access_type, bool pmp_violation,
+>> > +                                bool first_stage)
+>> >  {
+>> >      CPUState *cs = env_cpu(env);
+>> > -    int page_fault_exceptions =
+>> > -        (env->priv_ver >= PRIV_VERSION_1_10_0) &&
+>> > -        get_field(env->satp, SATP_MODE) != VM_1_10_MBARE &&
+>> > -        !pmp_violation;
+>> > +    int page_fault_exceptions;
+>> > +    if (first_stage) {
+>> > +        page_fault_exceptions =
+>> > +            (env->priv_ver >= PRIV_VERSION_1_10_0) &&
+>> > +            get_field(env->satp, SATP_MODE) != VM_1_10_MBARE &&
+>> > +            !pmp_violation;
+>> > +            riscv_cpu_set_force_hs_excep(env, CLEAR_HS_EXCEP);
+>>
+>> It might just be email, but the indentation looks wrong here.
+>
+> Yep, fixed.
+>
+>>
+>> > +    } else {
+>> > +        page_fault_exceptions =
+>> > +            get_field(env->hgatp, HGATP_MODE) != VM_1_10_MBARE &&
+>> > +            !pmp_violation;
+>> > +            riscv_cpu_set_force_hs_excep(env, FORCE_HS_EXCEP);
+>> > +    }
+>> >      switch (access_type) {
+>> >      case MMU_INST_FETCH:
+>> >          cs->exception_index = page_fault_exceptions ?
+>> > @@ -551,7 +570,8 @@ hwaddr riscv_cpu_get_phys_page_debug(CPUState *cs, vaddr addr)
+>> >      int prot;
+>> >      int mmu_idx = cpu_mmu_index(&cpu->env, false);
+>> >
+>> > -    if (get_physical_address(&cpu->env, &phys_addr, &prot, addr, 0, mmu_idx)) {
+>> > +    if (get_physical_address(&cpu->env, &phys_addr, &prot, addr, 0, mmu_idx,
+>> > +                             true)) {
+>> >          return -1;
+>> >      }
+>> >      return phys_addr;
+>> > @@ -613,7 +633,8 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+>> >      qemu_log_mask(CPU_LOG_MMU, "%s ad %" VADDR_PRIx " rw %d mmu_idx %d\n",
+>> >                    __func__, address, access_type, mmu_idx);
+>> >
+>> > -    ret = get_physical_address(env, &pa, &prot, address, access_type, mmu_idx);
+>> > +    ret = get_physical_address(env, &pa, &prot, address, access_type, mmu_idx,
+>> > +                               true);
+>> >
+>> >      if (mode == PRV_M && access_type != MMU_INST_FETCH) {
+>> >          if (get_field(*env->mstatus, MSTATUS_MPRV)) {
+>> > @@ -640,7 +661,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+>> >      } else if (probe) {
+>> >          return false;
+>> >      } else {
+>> > -        raise_mmu_exception(env, address, access_type, pmp_violation);
+>> > +        raise_mmu_exception(env, address, access_type, pmp_violation, true);
+>> >          riscv_raise_exception(env, cs->exception_index, retaddr);
+>> >      }
+>> >  #else
+>>
+>> I don't think it makes sense to split off these two (23 and 24, that add the
+>> argument) out from the implementation.
+>
+> The goal was just to make it easier to review. If you want them
+> combined I can easily combine them.
 
-> On Sun, Oct 6, 2019 at 1:32 AM Chris Williams <diodesign@tuta.io> wrote:
->
-> Also please use `git format-patch` to format the patch and then `git
-> send-email` to send the patch. There is a whole heap of detail here:
-> https://wiki.qemu.org/Contribute/SubmitAPatch <https://wiki.qemu.org/Cont=
-ribute/SubmitAPatch>
->
-OK, I will do in future. I read the page but failed to get it right. Thanks=
- for spotting my patch, and the advice, though.
-
->> This fixes an issue that prevents a RISC-V CPU from executing instructio=
-ns
->> immediately from the base address of a PMP TOR region.
->>
->> When jumping to an instruction in a PMP TOR region, pmp_hart_has_privs()=
- is
->> called to validate the access. If this instruction is the very first wor=
-d of a
->> PMP TOR region, at address 0 relative to the start address of the region=
-, then
->> the access will fail. This is because pmp_hart_has_privs() is called wit=
-h size
->> 0 to perform this validation, causing this check...
->>
->> e =3D pmp_is_in_range(env, i, addr + size - 1);
->>
->> ... to fail, as (addr + size - 1) falls below the base address of the PM=
-P
->> region. Really, the access should succeed. For example, if I have a regi=
-on
->> spanning 0x80d96000 to 0x88d95fff and the CPU jumps to 0x80d96000, then:
->>
->> s =3D 0x80d96000
->> e =3D 0x80d95fff
->>
->> And the validation fails. The size check proposed below catches these ze=
-ro-size
->> instruction fetch access probes. The word alignment in pmpaddr{0-15} and
->> earlier instruction alignment checks should prevent the execution of
->> instructions over the upper boundary of the PMP region, though I'm happy=
- to give
->> this more attention if this is a concern.
->>
->
-> This seems like a similar issue to this patch as well:
-> https://lore.kernel.org/qemu-devel/20191007052813.25814-1-dayeol@berkeley=
-.edu/ <https://lore.kernel.org/qemu-devel/20191007052813.25814-1-dayeol@ber=
-keley.edu/>
->
-Yes, it appears Dayeol and I have encountered the same issue.
-
-> From that discussion:
->
-> "In general, size 0 means "unknown size".  In this case, the one tlb look=
-up is
-> going to be used by lots of instructions -- everything that fits on the p=
-age."
->
-> Richard's last comment seems like a better fix:
->
-> "You certainly could do
->
->  if (size =3D=3D 0) {
->  size =3D -(addr | TARGET_PAGE_MASK);
->  }
->
-> to assume that all bytes from addr to the end of the page are accessed.  =
-That
-> would avoid changing too much of the rest of the logic.
->
-> That said, this code will continue to not work for mis-aligned boundaries=
-."
->
-> So I don't think this is the correct solution. I'm not sure if Dayeol
-> is planning on sending a follow up version. If not feel free to send
-> it.
->
-I'm happy for Dayeol to submit a better patch, if necessary.=C2=A0
->> Signed-off-by: Chris Williams <diodesign@tuta.io <mailto:diodesign@tuta.=
-io>>
->>
->
-> It looks like this is a HTML patch, also ensure all patches are just
-> plain text, `git send-email` will do this.
->
-Yes, you're right: my webmail client isn't particularly neighborly with res=
-pect to Qemu's submission process.
-
-C.
+It's making it harder to read on my end :)
 
