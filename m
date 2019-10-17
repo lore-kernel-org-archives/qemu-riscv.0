@@ -1,62 +1,77 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iL4aM-0007vi-Od
-	for mharc-qemu-riscv@gnu.org; Thu, 17 Oct 2019 08:08:54 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:52560)
+	id 1iL5wR-0006G8-82
+	for mharc-qemu-riscv@gnu.org; Thu, 17 Oct 2019 09:35:47 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:37584)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <peter.maydell@linaro.org>) id 1iL4aK-0007tj-Pl
- for qemu-riscv@nongnu.org; Thu, 17 Oct 2019 08:08:53 -0400
+ (envelope-from <alex.bennee@linaro.org>) id 1iL5wD-00061p-5R
+ for qemu-riscv@nongnu.org; Thu, 17 Oct 2019 09:35:35 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <peter.maydell@linaro.org>) id 1iL4aJ-0002CQ-NV
- for qemu-riscv@nongnu.org; Thu, 17 Oct 2019 08:08:52 -0400
-Received: from mail-oi1-x242.google.com ([2607:f8b0:4864:20::242]:36314)
+ (envelope-from <alex.bennee@linaro.org>) id 1iL5wB-0004T6-0o
+ for qemu-riscv@nongnu.org; Thu, 17 Oct 2019 09:35:32 -0400
+Received: from mail-wm1-x342.google.com ([2a00:1450:4864:20::342]:36065)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <peter.maydell@linaro.org>)
- id 1iL4aJ-0002CD-JG
- for qemu-riscv@nongnu.org; Thu, 17 Oct 2019 08:08:51 -0400
-Received: by mail-oi1-x242.google.com with SMTP id k20so1931437oih.3
- for <qemu-riscv@nongnu.org>; Thu, 17 Oct 2019 05:08:51 -0700 (PDT)
+ (Exim 4.71) (envelope-from <alex.bennee@linaro.org>)
+ id 1iL5w9-0004Rg-05
+ for qemu-riscv@nongnu.org; Thu, 17 Oct 2019 09:35:29 -0400
+Received: by mail-wm1-x342.google.com with SMTP id m18so2582796wmc.1
+ for <qemu-riscv@nongnu.org>; Thu, 17 Oct 2019 06:35:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=Kvz+9MVpfKERSKaM+4J6RmraJtKLQBXbMl09w0KPDTU=;
- b=xQbbOJh6xvgdMpoE27wv2kVjUjT+Y5rlgKjytOAqsI2A817WCyBZ9IQg6+v+UOmlM6
- DcqZkij3waOeQmFdWHFnkVHZtbkNY6WQ+WWD6jdKz4W2WQojiqNcC0T93iq1WRhnovLo
- GV5F4KrMqQXfobfsYO8t7at9fpsj87NJNyThVKvJzSZR+vvUe5wdkp8wO90/CgXw3ApT
- LcdINWS4p/yMm29iRrgBdBphdxdhq65XyY60oUmRx7O/a5zoQrYtMk/uc7qPEMIx6PjG
- eLkR4fS7mLAUpta+V7L3E/ZqqUUTPNSKUmSYZVutTqE/uBt7TtOOugDKsWs5dtyhM9cl
- kgpQ==
+ h=from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding;
+ bh=zINIjrg5CEtICP7WAjfJ/LHNMUKajz/cR/8/N/SNqEo=;
+ b=UvRjCgLv76Ez7h3mX1zaGutHoDWjvqpwZUin/S2MygvBlEUKForsqAfZ/f2RXEfO0w
+ mF1Icgl9QQjLj6p9NNfs10lAwdah1+P3faAmRwldEKgvsvo0Rr6vKl3mpPA/NgzWtimQ
+ 926cudjLIrirkxuO6Eo/aHibeGUBGgLkEffjBsmzyOJtAm41MQ7ED7BVyQ7FuTRLvKIm
+ t54YtM9D6VU7IuNX+wpK5cEJdSkvPX4NTbHn4JSemv3pqvly1Gw05wNc+nnjMk/dixa6
+ 1tvffZHcsNQlR6u6m7CTCz0V37ByUQq9Vy68kioZ1XDic+M7Q9Aa3xA6jZBiWvL1W4Ou
+ XCrA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=Kvz+9MVpfKERSKaM+4J6RmraJtKLQBXbMl09w0KPDTU=;
- b=TuS8o5vkahGwPlzXTCTnAlDpjBXmqFdgWXyMz8NBoziRAEw6Ckbj/62JhAAjWO0TeI
- 7uTzyBStbTD6fkXFDhLmhDuK6P7Vq27QrMx2K/4jYB3Ej8i8n0yRZTbF7EkYTSMf6dca
- eljc7wq+L0pc6hcNblUiARUdb2/ixmQY+tm6VSMiu1RF3p+zw81CmzuFbZbZm8X3ILiH
- p0+7+CAiQ4ce4kAckF7YN+muhWUFVbyc/zCzSH9V5eCtsj5nVK+ev09Bc1R7DKi2LR1l
- vLOl7UWA33Uggx1k6+xA/9vPWtiQPD7MkXMYe/gIWhytDR+6xOoIqaJSWSNAAXIPPnwM
- CuUA==
-X-Gm-Message-State: APjAAAXGQt9StAa3+PHuvYSYoDZK1k6nYEoYWT0u3qQwYHY+6vn2/0lR
- NUbMaPz7p3sYpzfGpWBLtAoQ79iyELJu4KlGQzgOhw==
-X-Google-Smtp-Source: APXvYqy1lKWqn51y5cSlCxIoQ7xEJnScUnQwveT+GoXiLh0slojCIfAQLzvRyi5Tx1HC+4afschr0VJeOj3WAeJFbNA=
-X-Received: by 2002:a05:6808:9:: with SMTP id u9mr2923634oic.98.1571314130588; 
- Thu, 17 Oct 2019 05:08:50 -0700 (PDT)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=zINIjrg5CEtICP7WAjfJ/LHNMUKajz/cR/8/N/SNqEo=;
+ b=fPVOgQqjH5czDHW//+v69GRo1zAqeG3yvi80uUeVcn7whyzCbXmoNfwdF4tTjVqYAI
+ tZfrAlJYlnP4wXTxoyHLqRZ/m1oj0hJorBZ0fsLvvl52J1ztyTc6KSmc6OxEKuGxCR2n
+ ail3uGnRhSVVIib5I4vQyE3OZWsoL/17TNbwYtX0CE6E+MzE5mSaduABd3oPu85gKw7n
+ f+wHbmcKvv80AkvuK+FbUHQLuhw2RCgCsUgD1msr/U3sFYj7YH9ww8Ricx3/VpQZZn24
+ 54Q2Yqf+X+UVAoCzBg4JhTUJN1cWIf9QogQCzO9AKBhNIJT+R9eSoVXqhfBEjv3I1Yio
+ 9shw==
+X-Gm-Message-State: APjAAAXmA+wjjQMsGsaf2dZDKZAfIZCAifqZFP3KoPS1c5y83FmpN/o3
+ NLKmeGmgq5FJUJlIuUXTN2dWxQ==
+X-Google-Smtp-Source: APXvYqz3Yi8ec4OhaPCDeDa0Y3o7bPbClaInG4PhBnDTZClQxp9D9lAaQBtTHQ31EduWCApeuTWUHw==
+X-Received: by 2002:a1c:740a:: with SMTP id p10mr3035756wmc.130.1571319326697; 
+ Thu, 17 Oct 2019 06:35:26 -0700 (PDT)
+Received: from zen.linaroharston ([51.148.130.216])
+ by smtp.gmail.com with ESMTPSA id g17sm2215623wrq.58.2019.10.17.06.35.23
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 17 Oct 2019 06:35:25 -0700 (PDT)
+Received: from zen.lan (localhost [127.0.0.1])
+ by zen.linaroharston (Postfix) with ESMTP id B39581FFB4;
+ Thu, 17 Oct 2019 14:16:18 +0100 (BST)
+From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: cota@braap.org, aaron@os.amperecomputing.com, peter.puhov@futurewei.com,
+ robert.foley@futurewei.com,
+ Richard Henderson <richard.henderson@linaro.org>,
+ =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Palmer Dabbelt <palmer@sifive.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
+Subject: [PATCH  v6 30/54] target/riscv: fetch code with translator_ld
+Date: Thu, 17 Oct 2019 14:15:51 +0100
+Message-Id: <20191017131615.19660-31-alex.bennee@linaro.org>
+X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20191017131615.19660-1-alex.bennee@linaro.org>
+References: <20191017131615.19660-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
-References: <07ef5d368b4bbada15eaae0d23378a323969026b.1570121723.git.alistair.francis@wdc.com>
-In-Reply-To: <07ef5d368b4bbada15eaae0d23378a323969026b.1570121723.git.alistair.francis@wdc.com>
-From: Peter Maydell <peter.maydell@linaro.org>
-Date: Thu, 17 Oct 2019 13:08:39 +0100
-Message-ID: <CAFEAcA_Sk2VFxxHV92RpaaRt3MLY2n_xYYM7CSwTTcxLDVtsgg@mail.gmail.com>
-Subject: Re: [PATCH v2 1/1] riscv/boot: Fix possible memory leak
-To: Alistair Francis <alistair.francis@wdc.com>
-Cc: QEMU Developers <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Alistair Francis <alistair23@gmail.com>, Palmer Dabbelt <palmer@sifive.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::242
+X-Received-From: 2a00:1450:4864:20::342
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -68,68 +83,32 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Oct 2019 12:08:54 -0000
+X-List-Received-Date: Thu, 17 Oct 2019 13:35:35 -0000
 
-Ping? It would be nice to see this patch get into master
-to silence the coverity errors.
+From: "Emilio G. Cota" <cota@braap.org>
 
-thanks
--- PMM
+Signed-off-by: Emilio G. Cota <cota@braap.org>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+---
+ target/riscv/translate.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-On Thu, 3 Oct 2019 at 18:05, Alistair Francis <alistair.francis@wdc.com> wr=
-ote:
->
-> Coverity (CID 1405786) thinks that there is a possible memory leak as
-> we don't guarantee that the memory allocated from riscv_find_firmware()
-> is freed. This is a false positive, but let's tidy up the code to fix
-> the warning.
->
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-> Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
-> Reviewed-by: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
-> ---
-> v2:
->  - Fix commit typos
->
->  hw/riscv/boot.c | 11 ++++-------
->  1 file changed, 4 insertions(+), 7 deletions(-)
->
-> diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
-> index 2e92fb0680..7fee98d2f8 100644
-> --- a/hw/riscv/boot.c
-> +++ b/hw/riscv/boot.c
-> @@ -38,7 +38,7 @@ void riscv_find_and_load_firmware(MachineState *machine=
-,
->                                    const char *default_machine_firmware,
->                                    hwaddr firmware_load_addr)
->  {
-> -    char *firmware_filename;
-> +    char *firmware_filename =3D NULL;
->
->      if (!machine->firmware) {
->          /*
-> @@ -70,14 +70,11 @@ void riscv_find_and_load_firmware(MachineState *machi=
-ne,
->           * if no -bios option is set without breaking anything.
->           */
->          firmware_filename =3D riscv_find_firmware(default_machine_firmwa=
-re);
-> -    } else {
-> -        firmware_filename =3D machine->firmware;
-> -        if (strcmp(firmware_filename, "none")) {
-> -            firmware_filename =3D riscv_find_firmware(firmware_filename)=
-;
-> -        }
-> +    } else if (strcmp(machine->firmware, "none")) {
-> +        firmware_filename =3D riscv_find_firmware(machine->firmware);
->      }
->
-> -    if (strcmp(firmware_filename, "none")) {
-> +    if (firmware_filename) {
->          /* If not "none" load the firmware */
->          riscv_load_firmware(firmware_filename, firmware_load_addr);
->          g_free(firmware_filename);
-> --
-> 2.23.0
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index adeddb85f6..b26533d4fd 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -779,7 +779,7 @@ static void riscv_tr_translate_insn(DisasContextBase *dcbase, CPUState *cpu)
+     DisasContext *ctx = container_of(dcbase, DisasContext, base);
+     CPURISCVState *env = cpu->env_ptr;
+ 
+-    ctx->opcode = cpu_ldl_code(env, ctx->base.pc_next);
++    ctx->opcode = translator_ldl(env, ctx->base.pc_next);
+     decode_opc(ctx);
+     ctx->base.pc_next = ctx->pc_succ_insn;
+ 
+-- 
+2.20.1
+
 
