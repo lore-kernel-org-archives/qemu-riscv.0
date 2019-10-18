@@ -1,67 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iLX39-0002jl-5l
-	for mharc-qemu-riscv@gnu.org; Fri, 18 Oct 2019 14:32:31 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:36916)
+	id 1iLX6S-0004nt-Vy
+	for mharc-qemu-riscv@gnu.org; Fri, 18 Oct 2019 14:35:57 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:37387)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <palmer@sifive.com>) id 1iLX36-0002jY-GB
- for qemu-riscv@nongnu.org; Fri, 18 Oct 2019 14:32:29 -0400
+ (envelope-from <palmer@sifive.com>) id 1iLX6Q-0004jk-M8
+ for qemu-riscv@nongnu.org; Fri, 18 Oct 2019 14:35:55 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmer@sifive.com>) id 1iLX35-0001NA-CS
- for qemu-riscv@nongnu.org; Fri, 18 Oct 2019 14:32:28 -0400
-Received: from mail-pl1-x643.google.com ([2607:f8b0:4864:20::643]:34637)
+ (envelope-from <palmer@sifive.com>) id 1iLX6O-0003OA-M3
+ for qemu-riscv@nongnu.org; Fri, 18 Oct 2019 14:35:53 -0400
+Received: from mail-pf1-x442.google.com ([2607:f8b0:4864:20::442]:36204)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmer@sifive.com>) id 1iLX35-0001MX-4E
- for qemu-riscv@nongnu.org; Fri, 18 Oct 2019 14:32:27 -0400
-Received: by mail-pl1-x643.google.com with SMTP id k7so3260324pll.1
- for <qemu-riscv@nongnu.org>; Fri, 18 Oct 2019 11:32:26 -0700 (PDT)
+ (Exim 4.71) (envelope-from <palmer@sifive.com>) id 1iLX6O-0003My-GF
+ for qemu-riscv@nongnu.org; Fri, 18 Oct 2019 14:35:52 -0400
+Received: by mail-pf1-x442.google.com with SMTP id y22so4401339pfr.3
+ for <qemu-riscv@nongnu.org>; Fri, 18 Oct 2019 11:35:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
  :content-transfer-encoding;
- bh=HAUmOseX66QM1+mqec9EYCYFOyrXvIYQaZDTqVpKx6I=;
- b=lwfcWTFWSws9MY8EpIVt7eX7/8JvOCW7NBaVld2Lky7pNKlghNybFWioHXgQSKl6jO
- GB+cwHa5MeL6kp1nYTjb9thNb7TXOXGExnZC7zaD3rF7R60px0GVpuR5mosx89dKDiOI
- ctaF7BsVmYkp/tqxtGjCc0WMUE0kFmuTxlf9xAKtJ/m3pCmtYaZrhdH2LCzdQQgjrImz
- ol6ME/spF7QBzbJPsn54rUG5SheQ+4clIsb9yP0G8tJdjzJxWTHhMyZX1aCijSYxpBBW
- vh8teXjyafgUdrDi2pp1wmznIsOJLaSYaUkecjU0hH7ZxP358mMbCowBV7asewT8mEGB
- k5JA==
+ bh=J5NHhj92JqRcZSqlpsHIP0+hdLynWn5d3wktBBmpCYg=;
+ b=QTGK7ZDdXIs7cxJFi5s9ixZUuS/B+ZNhUpfFbg7PW/qczPNWT9RrWS+MG0N6+s4Gas
+ UjP97+i1MgYommZbR9TO5sYBHQCi3dBUYUegVWZPascI0u+Sd0I6T1zvh8sp5FaKO+oM
+ RDt7M5XaHf6/Fw6tU3FwdRj140qFJk+zQZimKD/4HOlSLSIH9Hm8yz+YbC4lKQxkr4aN
+ Z5UZ0KOCyIdeX8AD25ZMzTEUaRtpHtz2zb3+JfvDKHrpr/nq4/32D7CpZgKdaYzxNLxf
+ 8dPwzFQ1gI7BWvvh97d9uqpUfNJ4TzFEDLAP7x8cmBF9j8a5WA1YYOEB3cZmS+2oSM+S
+ gbuQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
  :mime-version:content-transfer-encoding;
- bh=HAUmOseX66QM1+mqec9EYCYFOyrXvIYQaZDTqVpKx6I=;
- b=AwAPP3lh2fo0QiSxstqiCb3PxPYRgEBVzZJkMLQtiE4Mm4EajlYMVMKXjrRFqDBifQ
- qwNUr0v4K+BYkkllNDWkNIvDmWku5ea3s4C9d3/h3mnS18nzoHYoANZIR2uB9bMsnDm9
- Sqk7zT6V7y7iD64InxhkSOu8YLxiAVBL0AZXiSmc5f4qKHfvlt+7WQX2Mk/rz2HGXfL5
- PH3y4yBrBMRGo4q6JSINVDkBU1MCw2/PLkzQRlHwjrQhFmH35nG4RHvrKYRJpC4A/8de
- abHv8yD1B8YUZmXlSIVyQZ2sQUvuCV/xZIxpKahi+9JG3fdl9AvB/R1Wj1Dd3K2WTsAO
- jQ8g==
-X-Gm-Message-State: APjAAAVZBzjxJrAIwAz8XkRyvRa9LzYUvEPQnCX3Q8KgI+srJp0O0InB
- vuetfuEN3cC20gvWrDHq3TOAbw==
-X-Google-Smtp-Source: APXvYqxOknLzfIuZFLrgLbHtpStrxp2BeyZT9CBVMRRxVCPXe8hEfT/jagwj1NT/YQaZY60NLNOCFQ==
-X-Received: by 2002:a17:902:209:: with SMTP id 9mr11896441plc.25.1571423546046; 
- Fri, 18 Oct 2019 11:32:26 -0700 (PDT)
+ bh=J5NHhj92JqRcZSqlpsHIP0+hdLynWn5d3wktBBmpCYg=;
+ b=OKQhv7V8gT80IrwFREbfUCXdHGDTKce68C6pijEYxB6bbGzxq5/0NYmrTl0f2VL/Nc
+ 7cA7p9znsKWYNKDLmU9SrZvemCxc7Bug1RSFLCi8oan0Gf9UUNz2TjcvT1tIXDz9eist
+ oyyQf+y1igvcqS94NnG6YCLZS944Zqjz836C8i0Ae/DFyeXfHSrzMdfHxiQpejNV6fQu
+ cA8cu6/doBZNS3lYpN4BaZIzm+R3cd3pIJ/B0HbWGzz4qNTbDbds7UUhd9vWTmenrdTa
+ lKTeGOlTJpbOSuRYBXkBdvxcXMGtGNQqIfqg2wy0+0pVtOPOhC/YxfVKUjQdEdZA9TQQ
+ tOqg==
+X-Gm-Message-State: APjAAAUJjtD+p+zQLF9tg9IherPjtfFzY/3P/k6fVRsLJzskhBRFfOoi
+ RRojWhViSoT5LzJ/W+3PDG58HA==
+X-Google-Smtp-Source: APXvYqzOR7+oMOgBS+Yxzp5UOu5HBeaQ4tE+v6HcO+GgBkQbGv28ynTZSLqWESLfJoEMWRch7VqdoQ==
+X-Received: by 2002:a63:5064:: with SMTP id q36mr11357638pgl.393.1571423750491; 
+ Fri, 18 Oct 2019 11:35:50 -0700 (PDT)
 Received: from localhost ([152.179.112.46])
- by smtp.gmail.com with ESMTPSA id v1sm11626338pfg.26.2019.10.18.11.32.24
+ by smtp.gmail.com with ESMTPSA id o42sm6170313pjo.32.2019.10.18.11.35.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 18 Oct 2019 11:32:25 -0700 (PDT)
-Date: Fri, 18 Oct 2019 11:32:25 -0700 (PDT)
-X-Google-Original-Date: Fri, 18 Oct 2019 11:31:52 PDT (-0700)
-Subject: Re: [PATCH v5 31/55] target/riscv: fetch code with translator_ld
-In-Reply-To: <CAKmqyKPCYwYvD3hqJ1OW0KH3SjGpG7cypJw9V5sCg6bZ9ueUfw@mail.gmail.com>
-CC: alex.bennee@linaro.org, qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- sagark@eecs.berkeley.edu, Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
- robert.foley@futurewei.com, richard.henderson@linaro.org,
- peter.puhov@futurewei.com, aaron@os.amperecomputing.com, cota@braap.org,
- Alistair Francis <Alistair.Francis@wdc.com>
+ Fri, 18 Oct 2019 11:35:49 -0700 (PDT)
+Date: Fri, 18 Oct 2019 11:35:49 -0700 (PDT)
+X-Google-Original-Date: Fri, 18 Oct 2019 11:35:29 PDT (-0700)
+Subject: Re: [PATCH v4 0/3] target/riscv: Expose "priv" register for GDB
+In-Reply-To: <20191014154529.287048-1-jonathan@fintelia.io>
+CC: qemu-devel@nongnu.org, qemu-riscv@nongnu.org
 From: Palmer Dabbelt <palmer@sifive.com>
-To: alex.bennee@linaro.org, alistair23@gmail.com
-Message-ID: <mhng-50bafce3-ff74-4a1a-b3fe-cdc21a85e7af@palmer-si-x1c4>
+To: jonathan@fintelia.io
+Message-ID: <mhng-734b54c4-1d13-4fe2-8ded-bec866ecf2f0@palmer-si-x1c4>
 Mime-Version: 1.0 (MHng)
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::643
+X-Received-From: 2607:f8b0:4864:20::442
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -73,47 +69,46 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Oct 2019 18:32:29 -0000
+X-List-Received-Date: Fri, 18 Oct 2019 18:35:56 -0000
 
-On Mon, 14 Oct 2019 10:59:07 PDT (-0700), alistair23@gmail.com wrote:
-> On Mon, Oct 14, 2019 at 4:20 AM Alex Bennée <alex.bennee@linaro.org> wrote:
->>
->> From: "Emilio G. Cota" <cota@braap.org>
->>
->> Signed-off-by: Emilio G. Cota <cota@braap.org>
->> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
->> Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+On Mon, 14 Oct 2019 08:45:26 PDT (-0700), jonathan@fintelia.io wrote:
 >
-> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-
-and
-
-Acked-by: Palmer Dabbelt <palmer@sifive.com>
-
-as I'm assuming this will go in with the rest of the patch set.
-
+> This series adds a new "priv" virtual register that reports the current
+> privilege mode. This is helpful for debugging purposes because that information
+> is not actually available in any of the real CSRs.
 >
-> Alistair
+> The third patch in this series makes the priv virtual register writitable. I'm
+> not entirely sure this is a good idea, so I split it out into its own patch. In
+> particular, this change will conflict with the hypervisor extension work which
+> assumes that the privilege mode does not change in unexpected cases.
 >
->> ---
->>  target/riscv/translate.c | 2 +-
->>  1 file changed, 1 insertion(+), 1 deletion(-)
->>
->> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
->> index adeddb85f6..b26533d4fd 100644
->> --- a/target/riscv/translate.c
->> +++ b/target/riscv/translate.c
->> @@ -779,7 +779,7 @@ static void riscv_tr_translate_insn(DisasContextBase *dcbase, CPUState *cpu)
->>      DisasContext *ctx = container_of(dcbase, DisasContext, base);
->>      CPURISCVState *env = cpu->env_ptr;
->>
->> -    ctx->opcode = cpu_ldl_code(env, ctx->base.pc_next);
->> +    ctx->opcode = translator_ldl(env, ctx->base.pc_next);
->>      decode_opc(ctx);
->>      ctx->base.pc_next = ctx->pc_succ_insn;
->>
->> --
->> 2.20.1
->>
->>
+> As pointed out in a previous version of this series, GDB actually contains some
+> support already for the accessing the privilege mode via a virtual "priv"
+> register, including to convert the values into human readable forms:
+>
+> (gdb) info reg priv
+> priv           0x3      prv:3 [Machine]
+>
+> Changlog V4:
+> - Fix typo in filename
+>
+> Changlog V3:
+> - Break patch into series
+> - Make priv a virtual register
+>
+> Changelog V2:
+> - Use PRV_H and PRV_S instead of integer literals
+>
+> Jonathan Behrens (3)
+>   target/riscv: Tell gdbstub the correct number of CSRs
+>   target/riscv: Expose priv register for GDB for reads
+>   target/riscv: Make the priv register writable by GDB
+>
+>  configure                       |  4 ++--
+>  gdb-xml/riscv-32bit-virtual.xml | 11 +++++++++++
+>  gdb-xml/riscv-64bit-virtual.xml | 11 +++++++++++
+>  target/riscv/gdbstub.c          | 36 ++++++++++++++++++++++++++++++++++--
+>  4 files changed, 58 insertions(+), 4 deletions(-)
+
+Thanks.  I've taken these into my patch queue, which I hope to submit soon!
 
