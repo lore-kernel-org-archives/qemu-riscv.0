@@ -1,68 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iLXMv-00029v-7n
-	for mharc-qemu-riscv@gnu.org; Fri, 18 Oct 2019 14:52:57 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:39816)
+	id 1iLXVH-0000Sb-QQ
+	for mharc-qemu-riscv@gnu.org; Fri, 18 Oct 2019 15:01:35 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:41068)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <palmer@sifive.com>) id 1iLXMp-00026y-IE
- for qemu-riscv@nongnu.org; Fri, 18 Oct 2019 14:52:53 -0400
+ (envelope-from <palmer@sifive.com>) id 1iLXVD-0000S8-7g
+ for qemu-riscv@nongnu.org; Fri, 18 Oct 2019 15:01:32 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmer@sifive.com>) id 1iLXMn-0004h6-PS
- for qemu-riscv@nongnu.org; Fri, 18 Oct 2019 14:52:51 -0400
-Received: from mail-pl1-x644.google.com ([2607:f8b0:4864:20::644]:44506)
+ (envelope-from <palmer@sifive.com>) id 1iLXVB-0007U4-VD
+ for qemu-riscv@nongnu.org; Fri, 18 Oct 2019 15:01:31 -0400
+Received: from mail-pl1-x643.google.com ([2607:f8b0:4864:20::643]:38952)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmer@sifive.com>) id 1iLXMn-0004ge-Jj
- for qemu-riscv@nongnu.org; Fri, 18 Oct 2019 14:52:49 -0400
-Received: by mail-pl1-x644.google.com with SMTP id q15so3260132pll.11
- for <qemu-riscv@nongnu.org>; Fri, 18 Oct 2019 11:52:49 -0700 (PDT)
+ (Exim 4.71) (envelope-from <palmer@sifive.com>) id 1iLXVB-0007T1-Oc
+ for qemu-riscv@nongnu.org; Fri, 18 Oct 2019 15:01:29 -0400
+Received: by mail-pl1-x643.google.com with SMTP id s17so3274874plp.6
+ for <qemu-riscv@nongnu.org>; Fri, 18 Oct 2019 12:01:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
  :content-transfer-encoding;
- bh=W4Q0p1F6snvYjb87ZNe382tMj7ucDM+3QvJeNbsWbhw=;
- b=N7Z6REbQX44f8ZWrrVsgVVI7LqCYO0wcf6LSfWN8j0okpr9uP5R1vA81F09n0zzS4H
- bCG4Nxl5EHzfrufWR6UB1Rtcv7DY90lHbbyxwKnaCdnczP2LRieW0KJn9uNjGs3Cn/IL
- C7TdEc+t44PF03xe2SSVr9EMM7CCmSwI3lKjAPpGwpvUg14DrpSVZVQd4ruEFOzrqzFt
- 43goQsUc+ikKwt3d1fS337y0+t+zqQcZVtoxSh19wsL15xEjFgJetbVRNVQPcgGHb35G
- pQ7z3PZlkFR2wfBrZx/ze5hSpnEsUKIdqt3zTSL2U3qmRA3E6cEbX2v4t+/lgiJYfkOl
- tR4A==
+ bh=encdaYOYfC8XLuPZ4BblADQ3/+oHllRKuIEmB/IctIs=;
+ b=lQzCcZKS+YWL53Ij7HA/AGTHwbSUQz39C7pAFfw0MHQ9iTh7gD3Xr1hzSB6ogYBkZh
+ k18uT9mYawokUI1kEZfWXlo6W+MJ9vS6uw8Da1pumRnM12z9z9+F14yLBwLDfwYyBf2+
+ aqwtfdra2zhQJpficcYP4nFJKPlCZ7xUI76y8rjqnvM/NR7wWQsImS6WGLx1YFUqh5Ag
+ oxZQnN1+qsPms1COXFzmhCjsOl7ZCajZH27CTXpxu2/JmKl+rn18YsO50xMGGn6XiY9T
+ rjUEtS5J/iuzYVWukP3e5MOSZCgp4qtTSUEZD4pmCeSNR6hVZGydS66fxaQQ8buzzomD
+ 5zuA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
  :mime-version:content-transfer-encoding;
- bh=W4Q0p1F6snvYjb87ZNe382tMj7ucDM+3QvJeNbsWbhw=;
- b=MKCqflIi6HBRWzzHIRkbIMUUziCB/aNc4ctRUzzj5ZJG7wmWgKisF+sZ/2Q8LWza1k
- 3Tccea1Ad7bSFLZgZve5flfvTJKfAshqKu2fhSwDYaDw1ZJicps1Zn5FL8+nQN3bO+cu
- 9/CVSWE+rtJQ0FHilnjTv5l8nC7Gbju4jfOwuUISfKrlnHVvzBD1p79Q39nZylN3SACh
- txoq5qqeNo9zrkMFBMM9iLvfjI7YlfUSZ+tjCTX4MOuquOjTf8f+SpbOq+isaxFBFmr4
- SfNNcYlYmrrqvAs/F8bWilGgUXfeZemnj+o7K5S7QCboSCfsYLraQTEFeHTMIKIpHGZe
- pdAg==
-X-Gm-Message-State: APjAAAVdem2tV9M1Y44ckAmCTEPX+9mXaBd4NtfL5SjPdbbpxErwLGoP
- Z7Bomvk4SSNwxwCT90HyKHH0pAjgSpNa3w==
-X-Google-Smtp-Source: APXvYqx3ZIKFccun5sB0Si0er8w0Os/S5tIyjXyDxb/gT2jYElJpvhQsPpTaZPoKRSoAZKRn2zt8+w==
-X-Received: by 2002:a17:902:8d84:: with SMTP id
- v4mr11645507plo.220.1571424768583; 
- Fri, 18 Oct 2019 11:52:48 -0700 (PDT)
+ bh=encdaYOYfC8XLuPZ4BblADQ3/+oHllRKuIEmB/IctIs=;
+ b=JsWBxFeBQh7MBK0OT9YLUV+ti4E32f/eeT/brmbXXyL8+M4OLiDB3ffbuAsYGozUD0
+ BmRvlYZCVqGotYp+F0oy6H5Qkg2cQoLsNlfox1cEFw2T91ym5uR9nNUKMyJWovlLUwmI
+ LK4hF/t8dr8KXBj7V6LFyu5QrqYf3Tua+usbrrMu765hLh8cT+6Q0ih673Lqdx0ggt0V
+ ZTmry4cSsaFO1iQ66su6F95ilyc6svGOg3qDGAH95rfX8yDb+SUQ1mcqcLCDaMRknV5T
+ 93F4ECHDHRyDrPX3U3IppTRLnJ8sTlEiGNjVXlU2L4y2on7drXhKfWWcqhq1Q9uh3//h
+ RdlA==
+X-Gm-Message-State: APjAAAXVkc4r25wjALvEHQoejx7u29Ab3pHQs3ub8sf/GZtNMH8MPO47
+ 0dJoYkoK4h7kdxi5aP4vp0XJwA==
+X-Google-Smtp-Source: APXvYqwWZyvcelj2PfLWDFJd6mlwU3z3rXr/5jUfqeql3n+ofb3FjtK8i/qT8z8jfeQ0E2TJDTnRSQ==
+X-Received: by 2002:a17:902:d689:: with SMTP id
+ v9mr6916649ply.198.1571425288392; 
+ Fri, 18 Oct 2019 12:01:28 -0700 (PDT)
 Received: from localhost ([152.179.112.46])
- by smtp.gmail.com with ESMTPSA id v9sm6893015pfe.109.2019.10.18.11.52.47
+ by smtp.gmail.com with ESMTPSA id r18sm6401448pgm.31.2019.10.18.12.01.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 18 Oct 2019 11:52:47 -0700 (PDT)
-Date: Fri, 18 Oct 2019 11:52:47 -0700 (PDT)
-X-Google-Original-Date: Fri, 18 Oct 2019 11:51:08 PDT (-0700)
-Subject: Re: [PATCH v3 2/2] riscv: virt: Use Goldfish RTC device
-In-Reply-To: <20191015083459.76959-3-anup.patel@wdc.com>
-CC: Peter Maydell <peter.maydell@linaro.org>,
- Alistair Francis <Alistair.Francis@wdc.com>, sagark@eecs.berkeley.edu,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
- Atish Patra <Atish.Patra@wdc.com>, anup@brainfault.org, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org, Anup Patel <Anup.Patel@wdc.com>
+ Fri, 18 Oct 2019 12:01:27 -0700 (PDT)
+Date: Fri, 18 Oct 2019 12:01:27 -0700 (PDT)
+X-Google-Original-Date: Fri, 18 Oct 2019 12:01:07 PDT (-0700)
+Subject: Re: [PATCH] target/riscv: PMP violation due to wrong size parameter
+In-Reply-To: <CACjxMEt-zOt8VktL_Ut-9vA0FdeO5jPf0XVeCzuT2OOnyehMmA@mail.gmail.com>
+CC: fintelia@gmail.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
+ sagark@eecs.berkeley.edu, Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
+ richard.henderson@linaro.org, Alistair Francis <Alistair.Francis@wdc.com>,
+ diodesign@tuta.io
 From: Palmer Dabbelt <palmer@sifive.com>
-To: Anup Patel <Anup.Patel@wdc.com>
-Message-ID: <mhng-b8dad426-0e7a-4e79-9a2f-b0e6eaf42cdb@palmer-si-x1c4>
+To: dayeol@berkeley.edu
+Message-ID: <mhng-20e0918b-b63e-4054-bae9-b94145e22cbe@palmer-si-x1c4>
 Mime-Version: 1.0 (MHng)
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::644
+X-Received-From: 2607:f8b0:4864:20::643
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -74,103 +73,99 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Oct 2019 18:52:54 -0000
+X-List-Received-Date: Fri, 18 Oct 2019 19:01:32 -0000
 
-On Tue, 15 Oct 2019 01:35:42 PDT (-0700), Anup Patel wrote:
-> We extend QEMU RISC-V virt machine by adding Goldfish RTC device
-> to it. This will allow Guest Linux to sync it's local date/time
-> with Host date/time via RTC device.
+On Tue, 15 Oct 2019 10:04:32 PDT (-0700), dayeol@berkeley.edu wrote:
+> Hi,
 >
-> Signed-off-by: Anup Patel <anup.patel@wdc.com>
-> ---
->  hw/riscv/Kconfig        |  1 +
->  hw/riscv/virt.c         | 15 +++++++++++++++
->  include/hw/riscv/virt.h |  2 ++
->  3 files changed, 18 insertions(+)
+> Could this patch go through?
+> If not please let me know so that I can fix.
+> Thank you!
+
+Sorry, I dropped this one.  It's in the patch queue now.  We should also check 
+for size==0 in pmp_hart_has_privs(), as that won't work.  LMK if you want to 
+send a patch for that.
+
 >
-> diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-> index fb19b2df3a..b33753c780 100644
-> --- a/hw/riscv/Kconfig
-> +++ b/hw/riscv/Kconfig
-> @@ -34,6 +34,7 @@ config RISCV_VIRT
->      select PCI
->      select HART
->      select SERIAL
-> +    select GOLDFISH_RTC
->      select VIRTIO_MMIO
->      select PCI_EXPRESS_GENERIC_BRIDGE
->      select SIFIVE
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index d36f5625ec..95c42ab993 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -57,6 +57,7 @@ static const struct MemmapEntry {
->      [VIRT_DEBUG] =       {        0x0,         0x100 },
->      [VIRT_MROM] =        {     0x1000,       0x11000 },
->      [VIRT_TEST] =        {   0x100000,        0x1000 },
-> +    [VIRT_RTC] =         {   0x101000,        0x1000 },
->      [VIRT_CLINT] =       {  0x2000000,       0x10000 },
->      [VIRT_PLIC] =        {  0xc000000,     0x4000000 },
->      [VIRT_UART0] =       { 0x10000000,         0x100 },
-> @@ -310,6 +311,17 @@ static void create_fdt(RISCVVirtState *s, const struct MemmapEntry *memmap,
->      qemu_fdt_setprop_cell(fdt, nodename, "interrupt-parent", plic_phandle);
->      qemu_fdt_setprop_cell(fdt, nodename, "interrupts", UART0_IRQ);
->  
-> +    nodename = g_strdup_printf("/rtc@%lx",
-> +        (long)memmap[VIRT_RTC].base);
-> +    qemu_fdt_add_subnode(fdt, nodename);
-> +    qemu_fdt_setprop_string(fdt, nodename, "compatible",
-> +        "google,goldfish-rtc");
-> +    qemu_fdt_setprop_cells(fdt, nodename, "reg",
-> +        0x0, memmap[VIRT_RTC].base,
-> +        0x0, memmap[VIRT_RTC].size);
-> +    qemu_fdt_setprop_cell(fdt, nodename, "interrupt-parent", plic_phandle);
-> +    qemu_fdt_setprop_cell(fdt, nodename, "interrupts", RTC_IRQ);
-> +
->      qemu_fdt_add_subnode(fdt, "/chosen");
->      qemu_fdt_setprop_string(fdt, "/chosen", "stdout-path", nodename);
->      if (cmdline) {
-> @@ -496,6 +508,9 @@ static void riscv_virt_board_init(MachineState *machine)
->          0, qdev_get_gpio_in(DEVICE(s->plic), UART0_IRQ), 399193,
->          serial_hd(0), DEVICE_LITTLE_ENDIAN);
->  
-> +    sysbus_create_simple("goldfish_rtc", memmap[VIRT_RTC].base,
-> +        qdev_get_gpio_in(DEVICE(s->plic), RTC_IRQ));
-> +
->      g_free(plic_hart_config);
->  }
->  
-> diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
-> index 6e5fbe5d3b..e6423258d3 100644
-> --- a/include/hw/riscv/virt.h
-> +++ b/include/hw/riscv/virt.h
-> @@ -37,6 +37,7 @@ enum {
->      VIRT_DEBUG,
->      VIRT_MROM,
->      VIRT_TEST,
-> +    VIRT_RTC,
->      VIRT_CLINT,
->      VIRT_PLIC,
->      VIRT_UART0,
-> @@ -49,6 +50,7 @@ enum {
->  
->  enum {
->      UART0_IRQ = 10,
-> +    RTC_IRQ = 11,
->      VIRTIO_IRQ = 1, /* 1 to 8 */
->      VIRTIO_COUNT = 8,
->      PCIE_IRQ = 0x20, /* 32 to 35 */
-
-This is a wacky enum, but it's already there.  I'm going to assume this patch 
-will get merged and then fix it later.
-
-> -- 
-> 2.17.1
-
-Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
-Acked-by: Palmer Dabbelt <palmer@sifive.com>
-
-I think it's easier to just keep this with the goldfish implementation.  I'm 
-assuming that will go in through a different tree, as per my comments on that 
-patch.
+> Dayeol
+>
+>
+> On Sat, Oct 12, 2019, 11:30 AM Dayeol Lee <dayeol@berkeley.edu> wrote:
+>
+>> No it doesn't mean that.
+>> But the following code will make the size TARGET_PAGE_SIZE - (page offset)
+>> if the address is not aligned.
+>>
+>> pmp_size = -(address | TARGET_PAGE_MASK)
+>>
+>>
+>> On Fri, Oct 11, 2019, 7:37 PM Jonathan Behrens <fintelia@gmail.com> wrote:
+>>
+>>> How do you know that the access won't straddle a page boundary? Is there
+>>> a guarantee somewhere that size=0 means that the access is naturally
+>>> aligned?
+>>>
+>>> Jonathan
+>>>
+>>>
+>>> On Fri, Oct 11, 2019 at 7:14 PM Dayeol Lee <dayeol@berkeley.edu> wrote:
+>>>
+>>>> riscv_cpu_tlb_fill() uses the `size` parameter to check PMP violation
+>>>> using pmp_hart_has_privs().
+>>>> However, if the size is unknown (=0), the ending address will be
+>>>> `addr - 1` as it is `addr + size - 1` in `pmp_hart_has_privs()`.
+>>>> This always causes a false PMP violation on the starting address of the
+>>>> range, as `addr - 1` is not in the range.
+>>>>
+>>>> In order to fix, we just assume that all bytes from addr to the end of
+>>>> the page will be accessed if the size is unknown.
+>>>>
+>>>> Signed-off-by: Dayeol Lee <dayeol@berkeley.edu>
+>>>> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+>>>> ---
+>>>>  target/riscv/cpu_helper.c | 13 ++++++++++++-
+>>>>  1 file changed, 12 insertions(+), 1 deletion(-)
+>>>>
+>>>> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+>>>> index e32b6126af..7d9a22b601 100644
+>>>> --- a/target/riscv/cpu_helper.c
+>>>> +++ b/target/riscv/cpu_helper.c
+>>>> @@ -441,6 +441,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address,
+>>>> int size,
+>>>>      CPURISCVState *env = &cpu->env;
+>>>>      hwaddr pa = 0;
+>>>>      int prot;
+>>>> +    int pmp_size = 0;
+>>>>      bool pmp_violation = false;
+>>>>      int ret = TRANSLATE_FAIL;
+>>>>      int mode = mmu_idx;
+>>>> @@ -460,9 +461,19 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr
+>>>> address, int size,
+>>>>                    "%s address=%" VADDR_PRIx " ret %d physical "
+>>>> TARGET_FMT_plx
+>>>>                    " prot %d\n", __func__, address, ret, pa, prot);
+>>>>
+>>>> +    /*
+>>>> +     * if size is unknown (0), assume that all bytes
+>>>> +     * from addr to the end of the page will be accessed.
+>>>> +     */
+>>>> +    if (size == 0) {
+>>>> +        pmp_size = -(address | TARGET_PAGE_MASK);
+>>>> +    } else {
+>>>> +        pmp_size = size;
+>>>> +    }
+>>>> +
+>>>>      if (riscv_feature(env, RISCV_FEATURE_PMP) &&
+>>>>          (ret == TRANSLATE_SUCCESS) &&
+>>>> -        !pmp_hart_has_privs(env, pa, size, 1 << access_type, mode)) {
+>>>> +        !pmp_hart_has_privs(env, pa, pmp_size, 1 << access_type, mode))
+>>>> {
+>>>>          ret = TRANSLATE_PMP_FAIL;
+>>>>      }
+>>>>      if (ret == TRANSLATE_PMP_FAIL) {
+>>>> --
+>>>> 2.20.1
+>>>>
+>>>>
+>>>>
 
