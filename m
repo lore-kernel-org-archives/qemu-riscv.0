@@ -1,63 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iLXvs-00036j-2H
-	for mharc-qemu-riscv@gnu.org; Fri, 18 Oct 2019 15:29:04 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43613)
+	id 1iLZ4H-00055Q-HP
+	for mharc-qemu-riscv@gnu.org; Fri, 18 Oct 2019 16:41:49 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49995)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <dayeol@berkeley.edu>) id 1iLXvo-00036L-JT
- for qemu-riscv@nongnu.org; Fri, 18 Oct 2019 15:29:02 -0400
+ (envelope-from <palmer@sifive.com>) id 1iLZ4E-00054b-Sg
+ for qemu-riscv@nongnu.org; Fri, 18 Oct 2019 16:41:47 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <dayeol@berkeley.edu>) id 1iLXvm-0004El-GH
- for qemu-riscv@nongnu.org; Fri, 18 Oct 2019 15:28:59 -0400
-Received: from mail-pf1-x442.google.com ([2607:f8b0:4864:20::442]:42751)
+ (envelope-from <palmer@sifive.com>) id 1iLZ4D-0005Vp-MU
+ for qemu-riscv@nongnu.org; Fri, 18 Oct 2019 16:41:46 -0400
+Received: from mail-pl1-x642.google.com ([2607:f8b0:4864:20::642]:39646)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <dayeol@berkeley.edu>) id 1iLXvl-0004E8-VA
- for qemu-riscv@nongnu.org; Fri, 18 Oct 2019 15:28:58 -0400
-Received: by mail-pf1-x442.google.com with SMTP id q12so4461305pff.9
- for <qemu-riscv@nongnu.org>; Fri, 18 Oct 2019 12:28:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=berkeley-edu.20150623.gappssmtp.com; s=20150623;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=o2ASzqNDOudnlD9OoriHepPheuyTCPpOcDnqilBEaGA=;
- b=E/DQLOre61oJePXWKAcCM2FJ90Gq955P1sO9rndKdQcJ16wudPnPIpXgHLXj57lkPa
- dHcNRHuhLRzX7OrPj/M7mwcwSjslrhstemtHGx/2uqs/7A84Au7/zJ+2AbXh1aaD1GPA
- KLCwXTNZ2nkjw7LL+ynA42iEA7liz2Q5GuXhBBjMVwYUnRTQve7iWZBhHT1Vaq8Pxu9R
- NJSGF76AS/0bAZwSwBXPbhjx0IYOgJy/ynuRQsquv4agmZQwmlE7r4UNw2UrV/24oYvg
- Aps3Rd8iuWnH91YtQzr2Le86aluptvS0c38sfwXadTJNFH94I2VjX63kvSHPOpNcEv0z
- 9Eew==
+ (Exim 4.71) (envelope-from <palmer@sifive.com>) id 1iLZ4D-0005Uu-Ds
+ for qemu-riscv@nongnu.org; Fri, 18 Oct 2019 16:41:45 -0400
+Received: by mail-pl1-x642.google.com with SMTP id s17so3391931plp.6
+ for <qemu-riscv@nongnu.org>; Fri, 18 Oct 2019 13:41:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+ h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
+ :content-transfer-encoding;
+ bh=MLz7DnVdESSnmHkJ4Sc37niu2QQkAm0+3fXFiaPQXJE=;
+ b=nBUrreQkpUmAByHTWzfYZfkEGqXWMHJQFbN8qUEEMbeXllXlYEPkqRlyhxjkgJ2WwG
+ R81fX8RtoNq4rFEluaBHBvjkzQ96rjPvUjkvEJ33osihmy+GKjaLnd/MfRJ/fwtxztiL
+ /Kx73p+cQOlkNYujrc/1WzhotFJ19KPs2WvSR/MUWvPWgCBWt75XQnlQ8g3GFMwkWNdw
+ Fsxlfft9WVSjMPtGhIH+LILnNiOP91xNbVbSDrS3CXuYfLka77k1mUVVxVC/hQkhWAEY
+ 4WmiVXxZl66CyYOJn+tDkxKbnaVxgV4w1EGqjsnUD+iu1hiUFEs4VXv9KWUN3V10sY7z
+ L+3A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=o2ASzqNDOudnlD9OoriHepPheuyTCPpOcDnqilBEaGA=;
- b=KBUunt2uVpwGC3+2E6Q+iomm28vCmnLpdcvBh+7Nm85UaHFGfY34r5ydJ88xGcLCVk
- pP5sU1Qtw/9VjphdwyXoHDHRyzjDoozmRPAelwipRpKGMpfK3OKK/SMRaecP7PwfuZI/
- 55gK7QaScl8+0q8cfiGGtmCA8b7K3/ZiPzrDzPZRqk9QLlmyYZfUFplFxl0qYVoQ6IWl
- o9OeuN498DS/jNIVW7HbZDCh6yp+MbfaYGhQmPul89P3NjQvXu6WQCif5D7X1sHlFlh2
- dAIknysJtenibhJYoQSSrWCeJlHgvnN42FutPWc7S1QoLkfSnqBfJlSLiaKJfs2ggZgI
- RnGQ==
-X-Gm-Message-State: APjAAAWB+NrsF+d7L1aUM4EfGS8BY353lOesTh5HGCD4mNyzm9KiIED0
- qQZJge9AS+SRiEqXI3znwEGZywjprmXedggTTP9M4g==
-X-Google-Smtp-Source: APXvYqyz4p9Xdnw6TsnqaTKQuROcf1yapEIpffd92Zc74q3zdKBTSX6GYQ83+MXfBxn8yYbSIwEOmWj5YD8izYaIvlI=
-X-Received: by 2002:a65:5b02:: with SMTP id y2mr12177529pgq.365.1571426935785; 
- Fri, 18 Oct 2019 12:28:55 -0700 (PDT)
-MIME-Version: 1.0
-References: <CACjxMEt-zOt8VktL_Ut-9vA0FdeO5jPf0XVeCzuT2OOnyehMmA@mail.gmail.com>
- <mhng-20e0918b-b63e-4054-bae9-b94145e22cbe@palmer-si-x1c4>
-In-Reply-To: <mhng-20e0918b-b63e-4054-bae9-b94145e22cbe@palmer-si-x1c4>
-From: Dayeol Lee <dayeol@berkeley.edu>
-Date: Fri, 18 Oct 2019 15:28:43 -0400
-Message-ID: <CACjxMEsN-7x0O_j0BYj1LYt_YD9nGdg4snhZM0He=L4Ogiq+iA@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv: PMP violation due to wrong size parameter
-To: Palmer Dabbelt <palmer@sifive.com>
-Cc: Jonathan Behrens <fintelia@gmail.com>, Qemu Devel <qemu-devel@nongnu.org>,
- qemu-riscv@nongnu.org, 
- sagark@eecs.berkeley.edu, Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
- richard.henderson@linaro.org, Alistair Francis <Alistair.Francis@wdc.com>,
- diodesign@tuta.io
-Content-Type: multipart/alternative; boundary="0000000000004c6ef805953458ee"
+ h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
+ :mime-version:content-transfer-encoding;
+ bh=MLz7DnVdESSnmHkJ4Sc37niu2QQkAm0+3fXFiaPQXJE=;
+ b=mhIdY/RJrc+8vLfz5YpWu0zRyyhdXjjcS666JFayxdFisByIBEWfhS0nfrZtiw8mXS
+ 6sl0DR0DieMks1JmQMUxev3lPWXrcD/2G4TnMWaTZFiapowNNinffyrXO+pDAcRKlUgn
+ W5I+/wNMs/cKiUu6He164vyM8caO09KL9n9thaKb+RjGiwh48IbMnWrRjEaaKo9mHwJ8
+ BmAs1jOClMxRvKwxPyZxzNZxzerEv81lHDLaX8ertgL7+IC64tHgo9Ouy5mlxWYZjblf
+ 9slfw35VKokDHyaP0gipKS10gqBeorkWBfpt9qKYRtxuYWULQdpNHWz7ub9jcIYORwvf
+ lbOg==
+X-Gm-Message-State: APjAAAXYNC+7uHLbhxsQ3YSWUgpGwXTaCsoRaxfSKPsQKUXIMUqnHSZY
+ 7tRkncIbsX6staK75LLr79/TRA==
+X-Google-Smtp-Source: APXvYqxHXvByHlY/eL1PwTCF/HIST0o6FRRo+d+t8Wi36ji+gjjirg/0PkVTMNmGqJpdm1mh2R0zrA==
+X-Received: by 2002:a17:902:8542:: with SMTP id
+ d2mr11829756plo.86.1571431303381; 
+ Fri, 18 Oct 2019 13:41:43 -0700 (PDT)
+Received: from localhost ([152.179.112.46])
+ by smtp.gmail.com with ESMTPSA id m12sm8965342pff.66.2019.10.18.13.41.41
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 18 Oct 2019 13:41:42 -0700 (PDT)
+Date: Fri, 18 Oct 2019 13:41:42 -0700 (PDT)
+X-Google-Original-Date: Fri, 18 Oct 2019 13:40:14 PDT (-0700)
+Subject: Re: [PATCH v2 1/1] riscv/boot: Fix possible memory leak
+In-Reply-To: <CAFEAcA_Sk2VFxxHV92RpaaRt3MLY2n_xYYM7CSwTTcxLDVtsgg@mail.gmail.com>
+CC: Alistair Francis <Alistair.Francis@wdc.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org, alistair23@gmail.com
+From: Palmer Dabbelt <palmer@sifive.com>
+To: Peter Maydell <peter.maydell@linaro.org>
+Message-ID: <mhng-91e0cd9d-237f-4dce-9ebf-2cc863c1b012@palmer-si-x1c4>
+Mime-Version: 1.0 (MHng)
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::442
+X-Received-From: 2607:f8b0:4864:20::642
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -69,263 +71,68 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Oct 2019 19:29:02 -0000
+X-List-Received-Date: Fri, 18 Oct 2019 20:41:48 -0000
 
---0000000000004c6ef805953458ee
-Content-Type: text/plain; charset="UTF-8"
+On Thu, 17 Oct 2019 05:08:39 PDT (-0700), Peter Maydell wrote:
+> Ping? It would be nice to see this patch get into master
+> to silence the coverity errors.
 
-I'll move the entire check into pmp_hart_has_privs as it makes more sense.
+Sorry, it looks like I dropped this.  It's in my queue, I hope to submit a PR 
+soon.
 
-Thanks!
-
-On Fri, Oct 18, 2019, 3:01 PM Palmer Dabbelt <palmer@sifive.com> wrote:
-
-> On Tue, 15 Oct 2019 10:04:32 PDT (-0700), dayeol@berkeley.edu wrote:
-> > Hi,
-> >
-> > Could this patch go through?
-> > If not please let me know so that I can fix.
-> > Thank you!
 >
-> Sorry, I dropped this one.  It's in the patch queue now.  We should also
-> check
-> for size==0 in pmp_hart_has_privs(), as that won't work.  LMK if you want
-> to
-> send a patch for that.
+> thanks
+> -- PMM
 >
-> >
-> > Dayeol
-> >
-> >
-> > On Sat, Oct 12, 2019, 11:30 AM Dayeol Lee <dayeol@berkeley.edu> wrote:
-> >
-> >> No it doesn't mean that.
-> >> But the following code will make the size TARGET_PAGE_SIZE - (page
-> offset)
-> >> if the address is not aligned.
-> >>
-> >> pmp_size = -(address | TARGET_PAGE_MASK)
-> >>
-> >>
-> >> On Fri, Oct 11, 2019, 7:37 PM Jonathan Behrens <fintelia@gmail.com>
-> wrote:
-> >>
-> >>> How do you know that the access won't straddle a page boundary? Is
-> there
-> >>> a guarantee somewhere that size=0 means that the access is naturally
-> >>> aligned?
-> >>>
-> >>> Jonathan
-> >>>
-> >>>
-> >>> On Fri, Oct 11, 2019 at 7:14 PM Dayeol Lee <dayeol@berkeley.edu>
-> wrote:
-> >>>
-> >>>> riscv_cpu_tlb_fill() uses the `size` parameter to check PMP violation
-> >>>> using pmp_hart_has_privs().
-> >>>> However, if the size is unknown (=0), the ending address will be
-> >>>> `addr - 1` as it is `addr + size - 1` in `pmp_hart_has_privs()`.
-> >>>> This always causes a false PMP violation on the starting address of
-> the
-> >>>> range, as `addr - 1` is not in the range.
-> >>>>
-> >>>> In order to fix, we just assume that all bytes from addr to the end of
-> >>>> the page will be accessed if the size is unknown.
-> >>>>
-> >>>> Signed-off-by: Dayeol Lee <dayeol@berkeley.edu>
-> >>>> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-> >>>> ---
-> >>>>  target/riscv/cpu_helper.c | 13 ++++++++++++-
-> >>>>  1 file changed, 12 insertions(+), 1 deletion(-)
-> >>>>
-> >>>> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> >>>> index e32b6126af..7d9a22b601 100644
-> >>>> --- a/target/riscv/cpu_helper.c
-> >>>> +++ b/target/riscv/cpu_helper.c
-> >>>> @@ -441,6 +441,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr
-> address,
-> >>>> int size,
-> >>>>      CPURISCVState *env = &cpu->env;
-> >>>>      hwaddr pa = 0;
-> >>>>      int prot;
-> >>>> +    int pmp_size = 0;
-> >>>>      bool pmp_violation = false;
-> >>>>      int ret = TRANSLATE_FAIL;
-> >>>>      int mode = mmu_idx;
-> >>>> @@ -460,9 +461,19 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr
-> >>>> address, int size,
-> >>>>                    "%s address=%" VADDR_PRIx " ret %d physical "
-> >>>> TARGET_FMT_plx
-> >>>>                    " prot %d\n", __func__, address, ret, pa, prot);
-> >>>>
-> >>>> +    /*
-> >>>> +     * if size is unknown (0), assume that all bytes
-> >>>> +     * from addr to the end of the page will be accessed.
-> >>>> +     */
-> >>>> +    if (size == 0) {
-> >>>> +        pmp_size = -(address | TARGET_PAGE_MASK);
-> >>>> +    } else {
-> >>>> +        pmp_size = size;
-> >>>> +    }
-> >>>> +
-> >>>>      if (riscv_feature(env, RISCV_FEATURE_PMP) &&
-> >>>>          (ret == TRANSLATE_SUCCESS) &&
-> >>>> -        !pmp_hart_has_privs(env, pa, size, 1 << access_type, mode)) {
-> >>>> +        !pmp_hart_has_privs(env, pa, pmp_size, 1 << access_type,
-> mode))
-> >>>> {
-> >>>>          ret = TRANSLATE_PMP_FAIL;
-> >>>>      }
-> >>>>      if (ret == TRANSLATE_PMP_FAIL) {
-> >>>> --
-> >>>> 2.20.1
-> >>>>
-> >>>>
-> >>>>
->
-
---0000000000004c6ef805953458ee
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"auto">I&#39;ll move the entire check into pmp_hart_has_privs as=
- it makes more=C2=A0sense.<div dir=3D"auto"><br></div><div dir=3D"auto">Tha=
-nks!</div></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gm=
-ail_attr">On Fri, Oct 18, 2019, 3:01 PM Palmer Dabbelt &lt;<a href=3D"mailt=
-o:palmer@sifive.com">palmer@sifive.com</a>&gt; wrote:<br></div><blockquote =
-class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid=
-;padding-left:1ex">On Tue, 15 Oct 2019 10:04:32 PDT (-0700), <a href=3D"mai=
-lto:dayeol@berkeley.edu" target=3D"_blank" rel=3D"noreferrer">dayeol@berkel=
-ey.edu</a> wrote:<br>
-&gt; Hi,<br>
-&gt;<br>
-&gt; Could this patch go through?<br>
-&gt; If not please let me know so that I can fix.<br>
-&gt; Thank you!<br>
-<br>
-Sorry, I dropped this one.=C2=A0 It&#39;s in the patch queue now.=C2=A0 We =
-should also check <br>
-for size=3D=3D0 in pmp_hart_has_privs(), as that won&#39;t work.=C2=A0 LMK =
-if you want to <br>
-send a patch for that.<br>
-<br>
-&gt;<br>
-&gt; Dayeol<br>
-&gt;<br>
-&gt;<br>
-&gt; On Sat, Oct 12, 2019, 11:30 AM Dayeol Lee &lt;<a href=3D"mailto:dayeol=
-@berkeley.edu" target=3D"_blank" rel=3D"noreferrer">dayeol@berkeley.edu</a>=
-&gt; wrote:<br>
-&gt;<br>
-&gt;&gt; No it doesn&#39;t mean that.<br>
-&gt;&gt; But the following code will make the size TARGET_PAGE_SIZE - (page=
- offset)<br>
-&gt;&gt; if the address is not aligned.<br>
-&gt;&gt;<br>
-&gt;&gt; pmp_size =3D -(address | TARGET_PAGE_MASK)<br>
-&gt;&gt;<br>
-&gt;&gt;<br>
-&gt;&gt; On Fri, Oct 11, 2019, 7:37 PM Jonathan Behrens &lt;<a href=3D"mail=
-to:fintelia@gmail.com" target=3D"_blank" rel=3D"noreferrer">fintelia@gmail.=
-com</a>&gt; wrote:<br>
-&gt;&gt;<br>
-&gt;&gt;&gt; How do you know that the access won&#39;t straddle a page boun=
-dary? Is there<br>
-&gt;&gt;&gt; a guarantee somewhere that size=3D0 means that the access is n=
-aturally<br>
-&gt;&gt;&gt; aligned?<br>
-&gt;&gt;&gt;<br>
-&gt;&gt;&gt; Jonathan<br>
-&gt;&gt;&gt;<br>
-&gt;&gt;&gt;<br>
-&gt;&gt;&gt; On Fri, Oct 11, 2019 at 7:14 PM Dayeol Lee &lt;<a href=3D"mail=
-to:dayeol@berkeley.edu" target=3D"_blank" rel=3D"noreferrer">dayeol@berkele=
-y.edu</a>&gt; wrote:<br>
-&gt;&gt;&gt;<br>
-&gt;&gt;&gt;&gt; riscv_cpu_tlb_fill() uses the `size` parameter to check PM=
-P violation<br>
-&gt;&gt;&gt;&gt; using pmp_hart_has_privs().<br>
-&gt;&gt;&gt;&gt; However, if the size is unknown (=3D0), the ending address=
- will be<br>
-&gt;&gt;&gt;&gt; `addr - 1` as it is `addr + size - 1` in `pmp_hart_has_pri=
-vs()`.<br>
-&gt;&gt;&gt;&gt; This always causes a false PMP violation on the starting a=
-ddress of the<br>
-&gt;&gt;&gt;&gt; range, as `addr - 1` is not in the range.<br>
-&gt;&gt;&gt;&gt;<br>
-&gt;&gt;&gt;&gt; In order to fix, we just assume that all bytes from addr t=
-o the end of<br>
-&gt;&gt;&gt;&gt; the page will be accessed if the size is unknown.<br>
-&gt;&gt;&gt;&gt;<br>
-&gt;&gt;&gt;&gt; Signed-off-by: Dayeol Lee &lt;<a href=3D"mailto:dayeol@ber=
-keley.edu" target=3D"_blank" rel=3D"noreferrer">dayeol@berkeley.edu</a>&gt;=
-<br>
-&gt;&gt;&gt;&gt; Reviewed-by: Richard Henderson &lt;<a href=3D"mailto:richa=
-rd.henderson@linaro.org" target=3D"_blank" rel=3D"noreferrer">richard.hende=
-rson@linaro.org</a>&gt;<br>
-&gt;&gt;&gt;&gt; ---<br>
-&gt;&gt;&gt;&gt;=C2=A0 target/riscv/cpu_helper.c | 13 ++++++++++++-<br>
-&gt;&gt;&gt;&gt;=C2=A0 1 file changed, 12 insertions(+), 1 deletion(-)<br>
-&gt;&gt;&gt;&gt;<br>
-&gt;&gt;&gt;&gt; diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_=
-helper.c<br>
-&gt;&gt;&gt;&gt; index e32b6126af..7d9a22b601 100644<br>
-&gt;&gt;&gt;&gt; --- a/target/riscv/cpu_helper.c<br>
-&gt;&gt;&gt;&gt; +++ b/target/riscv/cpu_helper.c<br>
-&gt;&gt;&gt;&gt; @@ -441,6 +441,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, =
-vaddr address,<br>
-&gt;&gt;&gt;&gt; int size,<br>
-&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 CPURISCVState *env =3D &amp;cpu-&gt;en=
-v;<br>
-&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 hwaddr pa =3D 0;<br>
-&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 int prot;<br>
-&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 int pmp_size =3D 0;<br>
-&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 bool pmp_violation =3D false;<br>
-&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 int ret =3D TRANSLATE_FAIL;<br>
-&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 int mode =3D mmu_idx;<br>
-&gt;&gt;&gt;&gt; @@ -460,9 +461,19 @@ bool riscv_cpu_tlb_fill(CPUState *cs,=
- vaddr<br>
-&gt;&gt;&gt;&gt; address, int size,<br>
-&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 &quot;%s address=3D%&quot; VADDR_PRIx &quot; ret %d physical &qu=
-ot;<br>
-&gt;&gt;&gt;&gt; TARGET_FMT_plx<br>
-&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 &quot; prot %d\n&quot;, __func__, address, ret, pa, prot);<br>
-&gt;&gt;&gt;&gt;<br>
-&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 /*<br>
-&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0* if size is unknown (0), assume that=
- all bytes<br>
-&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0* from addr to the end of the page wi=
-ll be accessed.<br>
-&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0*/<br>
-&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 if (size =3D=3D 0) {<br>
-&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 pmp_size =3D -(address | TARG=
-ET_PAGE_MASK);<br>
-&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 } else {<br>
-&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 pmp_size =3D size;<br>
-&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 }<br>
-&gt;&gt;&gt;&gt; +<br>
-&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 if (riscv_feature(env, RISCV_FEATURE_P=
-MP) &amp;&amp;<br>
-&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 (ret =3D=3D TRANSLATE_SU=
-CCESS) &amp;&amp;<br>
-&gt;&gt;&gt;&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 !pmp_hart_has_privs(env, pa, =
-size, 1 &lt;&lt; access_type, mode)) {<br>
-&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 !pmp_hart_has_privs(env, pa, =
-pmp_size, 1 &lt;&lt; access_type, mode))<br>
-&gt;&gt;&gt;&gt; {<br>
-&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ret =3D TRANSLATE_PMP_FA=
-IL;<br>
-&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 }<br>
-&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 if (ret =3D=3D TRANSLATE_PMP_FAIL) {<b=
-r>
-&gt;&gt;&gt;&gt; --<br>
-&gt;&gt;&gt;&gt; 2.20.1<br>
-&gt;&gt;&gt;&gt;<br>
-&gt;&gt;&gt;&gt;<br>
-&gt;&gt;&gt;&gt;<br>
-</blockquote></div>
-
---0000000000004c6ef805953458ee--
+> On Thu, 3 Oct 2019 at 18:05, Alistair Francis <alistair.francis@wdc.com> wrote:
+>>
+>> Coverity (CID 1405786) thinks that there is a possible memory leak as
+>> we don't guarantee that the memory allocated from riscv_find_firmware()
+>> is freed. This is a false positive, but let's tidy up the code to fix
+>> the warning.
+>>
+>> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+>> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+>> Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+>> Reviewed-by: Philippe Mathieu-Daudé <philmd@redhat.com>
+>> ---
+>> v2:
+>>  - Fix commit typos
+>>
+>>  hw/riscv/boot.c | 11 ++++-------
+>>  1 file changed, 4 insertions(+), 7 deletions(-)
+>>
+>> diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
+>> index 2e92fb0680..7fee98d2f8 100644
+>> --- a/hw/riscv/boot.c
+>> +++ b/hw/riscv/boot.c
+>> @@ -38,7 +38,7 @@ void riscv_find_and_load_firmware(MachineState *machine,
+>>                                    const char *default_machine_firmware,
+>>                                    hwaddr firmware_load_addr)
+>>  {
+>> -    char *firmware_filename;
+>> +    char *firmware_filename = NULL;
+>>
+>>      if (!machine->firmware) {
+>>          /*
+>> @@ -70,14 +70,11 @@ void riscv_find_and_load_firmware(MachineState *machine,
+>>           * if no -bios option is set without breaking anything.
+>>           */
+>>          firmware_filename = riscv_find_firmware(default_machine_firmware);
+>> -    } else {
+>> -        firmware_filename = machine->firmware;
+>> -        if (strcmp(firmware_filename, "none")) {
+>> -            firmware_filename = riscv_find_firmware(firmware_filename);
+>> -        }
+>> +    } else if (strcmp(machine->firmware, "none")) {
+>> +        firmware_filename = riscv_find_firmware(machine->firmware);
+>>      }
+>>
+>> -    if (strcmp(firmware_filename, "none")) {
+>> +    if (firmware_filename) {
+>>          /* If not "none" load the firmware */
+>>          riscv_load_firmware(firmware_filename, firmware_load_addr);
+>>          g_free(firmware_filename);
+>> --
+>> 2.23.0
 
