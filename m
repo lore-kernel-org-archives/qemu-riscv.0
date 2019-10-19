@@ -1,69 +1,118 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iLZao-00031q-JZ
-	for mharc-qemu-riscv@gnu.org; Fri, 18 Oct 2019 17:15:26 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:52847)
+	id 1iLgFL-0002mt-Q7
+	for mharc-qemu-riscv@gnu.org; Sat, 19 Oct 2019 00:21:43 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:51651)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <aleksandar.m.mail@gmail.com>) id 1iLZaj-0002xp-C5
- for qemu-riscv@nongnu.org; Fri, 18 Oct 2019 17:15:24 -0400
+ (envelope-from <prvs=188b0f19c=Anup.Patel@wdc.com>)
+ id 1iLgFH-0002me-Fu
+ for qemu-riscv@nongnu.org; Sat, 19 Oct 2019 00:21:42 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <aleksandar.m.mail@gmail.com>) id 1iLZag-0002LT-0A
- for qemu-riscv@nongnu.org; Fri, 18 Oct 2019 17:15:21 -0400
-Received: from mail-oi1-x244.google.com ([2607:f8b0:4864:20::244]:33172)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <aleksandar.m.mail@gmail.com>)
- id 1iLZaf-0002LA-OH; Fri, 18 Oct 2019 17:15:17 -0400
-Received: by mail-oi1-x244.google.com with SMTP id a15so6429378oic.0;
- Fri, 18 Oct 2019 14:15:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:in-reply-to:references:from:date:message-id:subject:to
- :cc; bh=K7Z+grIzwQLljov7s1BL4ZPWWlNNwSYRy7DCQQxojVM=;
- b=eWwG0LMXBElQUyOTjquuKaWxsM7PgI2sJjgRZ6yf7TdfGXeMrmh4dvqf0BILcGTPT0
- 1gscTf2HzbRt4zEUL3hA5htt4+VAeXOgknbofhaz2++U8OcwBGTTMhJr9T2JyEonDvRd
- CkEavJpcP2dwYY8MrGDqo/jvaNzVAMMJc8oD7JKWYkoiirZzJ14uwxV9pn0DY+ifFpqG
- NLVjDy6Qf1KB0x1rFwv8fOCcP6VnxRpdrY0+cVN6r2LWbRESltt9OFmNg9STc/7wteyF
- QQmAm2+Iorw6QYr+oCCEvGP/yUeofvt9625/lnrMhaTtIbPiV3qdHacUAKYZYwvPTkTG
- OIUw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:in-reply-to:references:from:date
- :message-id:subject:to:cc;
- bh=K7Z+grIzwQLljov7s1BL4ZPWWlNNwSYRy7DCQQxojVM=;
- b=IerFuJXa+Nu6cEMEBampOV1LcNOAJeyl9j52/uugjFgLydO9NquoZAObrjzApieSqi
- AZ/ruFTyKLYVWixmz51+Xld/DOcLzRJCPLLEaUyvd90XKyYmzj2fmH+3D1kOV4Er9iN8
- TFzj3+nBKZAjwgcq0bq4il0pE+0le8xsn/q3WRXBplpY/ca9cTCnEwVPw3vYx8eU/6z2
- 9aRQmPpebr41NYEiy7zYL5B19u/pfXdA06Xr9LVWx36wuFbvfrDrvpsE+OE1L8uKJmeM
- QEoJsiXOYGOxH2z31RUFTCjAGIunGvkwd+QHxqM4U7M1G6BKASGFuhPvGK1bM65JaeW6
- 7EsQ==
-X-Gm-Message-State: APjAAAXeh3wD6XZKUzpPvtYDIBW/PL224/Y5DfY4es57nDphhvhDn/VA
- Xr8mVMp7NswIcebCQJkuycmMxU0IREyS3fFfZH4=
-X-Google-Smtp-Source: APXvYqzp6pkSJfgZZiaB93lXrHTX7NONb3MFuQ9bl7ChFncQOwfOf44wIItkpZycetc/YHpudDjESrzyfueD8G4HQR0=
-X-Received: by 2002:a05:6808:341:: with SMTP id
- j1mr9416543oie.106.1571433316627; 
- Fri, 18 Oct 2019 14:15:16 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 2002:a9d:340a:0:0:0:0:0 with HTTP; Fri, 18 Oct 2019 14:15:15
- -0700 (PDT)
-In-Reply-To: <20191015083459.76959-2-anup.patel@wdc.com>
+ (envelope-from <prvs=188b0f19c=Anup.Patel@wdc.com>)
+ id 1iLgFE-0002zR-LL
+ for qemu-riscv@nongnu.org; Sat, 19 Oct 2019 00:21:38 -0400
+Received: from esa6.hgst.iphmx.com ([216.71.154.45]:62167)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <prvs=188b0f19c=Anup.Patel@wdc.com>)
+ id 1iLgFD-0002xI-Oj; Sat, 19 Oct 2019 00:21:36 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1571458895; x=1602994895;
+ h=from:to:cc:subject:date:message-id:references:
+ in-reply-to:content-transfer-encoding:mime-version;
+ bh=o3mtNtP3LNyQUCDpiGqwQ01Q5lDPGV+P6lrRTPjyKdQ=;
+ b=niZQYIMRkRRCL0Ztj618iHXZT5lRpggilAkSkaMMQbvOnIYEYxVWiAuX
+ DFqgS6eO51YcMZvn+5Yvaim5Zqi6sfIVnzUkPsQne2j0kGF4dcIW+kMzo
+ dQcO0TKw4fo4vACNYjBL10GfEckxcNiFW8hdauV3rIinZpQRUtna5PDwC
+ zNEDDEHiZ59/h+n+X70VedjLqflmyMdQ5pDgQEF1fW91Tg3hJ3xsZuFHZ
+ sIpKKzO5iGukAOwGrtGpuqdCl9t0PxG2JgNWK24E6DGWNKXEVLAM8M2qZ
+ 3UdX2NquVl0DBzAq5ehnJY6Pdj5OzQyeLCakKv6ita439YxFfiyinEWID A==;
+IronPort-SDR: CqwFEm99dPVGdSyMPtPE1nPO822r/QTFtFsbCS9N685wLRUDPkZxRYaQw27DtIp9frqfOV/PfY
+ FdQmtC/6t2JD/L0jetKn5W6dg4rEiprtRvMyDK/O8D5fkzTppEtJnNY8xRr+kAief5BRwVBcPS
+ 3GeyPMkkWyZGKN7r05JSpYoPt8QWVdLnAf2fHjb1HtvWEZMvFn2VbVuLMxwd17nkXmf9tRFj/Z
+ Qu+Bvt8xzxLp+K1gYTVRmBto5sg/cCOaQe21fF68ghVBV6wOexRzwrbYuyzZejRiZz5XN+DWyf
+ sG4=
+X-IronPort-AV: E=Sophos;i="5.67,314,1566835200"; d="scan'208";a="122463176"
+Received: from mail-cys01nam02lp2058.outbound.protection.outlook.com (HELO
+ NAM02-CY1-obe.outbound.protection.outlook.com) ([104.47.37.58])
+ by ob1.hgst.iphmx.com with ESMTP; 19 Oct 2019 12:21:28 +0800
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=SlxwwaK/4bKYJGrFilPDY6RBqoqkxbXCqNiDS9kB1ObCf7i+Gz9eVxcCrmkDXhqRD23SJLDCqTtAKNmuxdfUjnKlopw+JS8EZNaRBJoFJkMfJM/UxtCeVGXHr8W2fd9+pJAdTo6sX3ZsPC34+cOwd/eLFxrgUkBN2mOvFS3/hGSh3zZSsUsYnxO3kQak7rvy1eAjHFk7lknNDNC13LIEDCuScgHn/7cxDTuA3yPr0KU9mpJdQolhahawpOHKhnKhphTu0kKjhODyjpSRijfCHLAdBMZX5o1PV7c2KuoLSb3Pz7gO6iijgkP5NyXcAAI6fcdU/nEDdJBZ0fv8VbU1KA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=o3mtNtP3LNyQUCDpiGqwQ01Q5lDPGV+P6lrRTPjyKdQ=;
+ b=ekzrtnnypytV71ZHxPzI6d3odGLzdYryT6u884NIEY4I/sHhnclGg/eC1TMBYY0d/OqTYSmButWcr8Pl39sLCod+3OefCnUVkM/ia6jC2/0CT+j4068uNkfjFDVKa7flmm9QSGeAosv7y9YagZb5zE+8nxXYA6h+aCcR/HBq6gOxbomO1sNhzB9Zh6NTBOsxQH0GykmzWZJMSucsIY7ycEJU2NdY5PKBdqHAzNvbbyB/qOd7+ZqGgDgH8/Oq7mW91YD/BNtZeRkpQdc3j9Rh7fW2E2fZDHKAAU0WyGNR2tOd7RvJS2FJg3LPB54qXLuNG80PeO0zdRxArXaFT6hJEg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=wdc.com; dmarc=pass action=none header.from=wdc.com; dkim=pass
+ header.d=wdc.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=o3mtNtP3LNyQUCDpiGqwQ01Q5lDPGV+P6lrRTPjyKdQ=;
+ b=vNDsuqo8qKwHD9oMQkKpGrFWcke+xQwqt4HsipO4NFuvlQ/pt/jNlskHBu4nM02M3AtYgtiey/hE7T+toZ5BjOs9JfNuoKeGhasyA16vpZOvrw2QmrYaHdTdydqjfQ1Vjj2a5ZTyvuDwajqeQKc6U6SFzIk77ol8nIhygovrU3Q=
+Received: from MN2PR04MB6061.namprd04.prod.outlook.com (20.178.246.15) by
+ MN2PR04MB6271.namprd04.prod.outlook.com (20.178.245.154) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.2347.16; Sat, 19 Oct 2019 04:21:26 +0000
+Received: from MN2PR04MB6061.namprd04.prod.outlook.com
+ ([fe80::1454:87a:13b0:d3a]) by MN2PR04MB6061.namprd04.prod.outlook.com
+ ([fe80::1454:87a:13b0:d3a%7]) with mapi id 15.20.2347.023; Sat, 19 Oct 2019
+ 04:21:26 +0000
+From: Anup Patel <Anup.Patel@wdc.com>
+To: Alistair Francis <alistair23@gmail.com>
+CC: Peter Maydell <peter.maydell@linaro.org>, Palmer Dabbelt
+ <palmer@sifive.com>, Alistair Francis <Alistair.Francis@wdc.com>, Sagar
+ Karandikar <sagark@eecs.berkeley.edu>, Bastian Koppelmann
+ <kbastian@mail.uni-paderborn.de>, Atish Patra <Atish.Patra@wdc.com>,
+ "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>, "qemu-devel@nongnu.org"
+ <qemu-devel@nongnu.org>, Anup Patel <anup@brainfault.org>
+Subject: RE: [PATCH v3 1/2] hw: timer: Add Goldfish RTC device
+Thread-Topic: [PATCH v3 1/2] hw: timer: Add Goldfish RTC device
+Thread-Index: AQHVgzOBWMKi/ApwYEm2Tq90mJ++Nqdg51gAgAB6PeA=
+Date: Sat, 19 Oct 2019 04:21:26 +0000
+Message-ID: <MN2PR04MB606171F2FFFDF1BBCF933AD98D6F0@MN2PR04MB6061.namprd04.prod.outlook.com>
 References: <20191015083459.76959-1-anup.patel@wdc.com>
  <20191015083459.76959-2-anup.patel@wdc.com>
-From: Aleksandar Markovic <aleksandar.m.mail@gmail.com>
-Date: Fri, 18 Oct 2019 23:15:15 +0200
-Message-ID: <CAL1e-=guhS+vf4v7Mg6byZWEpuFuGXX3td4+0=wv1ypPs5wAEw@mail.gmail.com>
-Subject: Re: [PATCH v3 1/2] hw: timer: Add Goldfish RTC device
-To: Anup Patel <Anup.Patel@wdc.com>
-Cc: Peter Maydell <peter.maydell@linaro.org>,
- Palmer Dabbelt <palmer@sifive.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Atish Patra <Atish.Patra@wdc.com>, 
- "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>,
- "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, 
- Anup Patel <anup@brainfault.org>
-Content-Type: multipart/alternative; boundary="000000000000a03ab6059535d4fc"
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2607:f8b0:4864:20::244
+ <CAKmqyKM_pObuk_AYXre0aU9CF72xKcPrxBDixe0d2Q1PwKpqhA@mail.gmail.com>
+In-Reply-To: <CAKmqyKM_pObuk_AYXre0aU9CF72xKcPrxBDixe0d2Q1PwKpqhA@mail.gmail.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: spf=none (sender IP is )
+ smtp.mailfrom=Anup.Patel@wdc.com; 
+x-originating-ip: [106.51.21.244]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: 6a5092b0-bfe3-4bde-6ccc-08d7544bcef8
+x-ms-office365-filtering-ht: Tenant
+x-ms-traffictypediagnostic: MN2PR04MB6271:
+x-ms-exchange-purlcount: 2
+x-ms-exchange-transport-forked: True
+x-microsoft-antispam-prvs: <MN2PR04MB627190C42E05B11A383FCD208D6F0@MN2PR04MB6271.namprd04.prod.outlook.com>
+wdcipoutbound: EOP-TRUE
+x-ms-oob-tlc-oobclassifiers: OLM:195;
+x-forefront-prvs: 01952C6E96
+x-forefront-antispam-report: SFV:NSPM;
+ SFS:(10019020)(4636009)(366004)(39850400004)(136003)(396003)(346002)(376002)(189003)(199004)(13464003)(229853002)(7696005)(6306002)(74316002)(33656002)(186003)(55016002)(76116006)(66476007)(6246003)(26005)(66446008)(64756008)(71200400001)(71190400001)(102836004)(66066001)(55236004)(53546011)(6506007)(1411001)(99286004)(9686003)(76176011)(14454004)(66556008)(8936002)(81166006)(81156014)(9456002)(66946007)(8676002)(3846002)(7736002)(86362001)(2906002)(305945005)(52536014)(4326008)(30864003)(6116002)(11346002)(478600001)(256004)(6916009)(446003)(25786009)(54906003)(486006)(476003)(316002)(14444005)(6436002)(5660300002)(2004002);
+ DIR:OUT; SFP:1102; SCL:1; SRVR:MN2PR04MB6271;
+ H:MN2PR04MB6061.namprd04.prod.outlook.com; FPR:; SPF:None; LANG:en;
+ PTR:InfoNoRecords; MX:1; A:1; 
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: 3x2QvIKSBfcfI62fU7TDPPHQsZj7LCLyvkMcSRDou6evvDNdiO5XL88TWz/0onJxG9I4uc5OKhyboAWOXJAHeMp5MctVBwFwzPUDvdDQ9IzDHOH/JCJEJ/sAtNatGPadARXlxiGPD2/aRLcP0bSJjkuWUu1aPWeXFsKlX3SunmO76VxfQ/3E+CNQELObWFXio0lycuFAa0ugkF9CMe858gD+23xoH622/IGeY+KSOdRKatOZRCfxmviGo9O1xSY3WgUfZO1X5cTzS9S6NJwWt0Ma7T5hPEZ4hr/ciaUhg/o+bYuqtUIqcUkQ7d0feCv9TJjALRDLeo75olpEH9VPqYnRYfB75Wqq1IAAn0l8gAbpgQWtzumWdkrAMkE4VY8r2KSMJH7yAp0sU4VmFgc3ZeXC/eX6+tX1Wp/UBKGyQ4d2N2nmMNSEJ6QEIkkWKU80q14G0pfYNHWLo8W6aKCxxQ==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+MIME-Version: 1.0
+X-OriginatorOrg: wdc.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6a5092b0-bfe3-4bde-6ccc-08d7544bcef8
+X-MS-Exchange-CrossTenant-originalarrivaltime: 19 Oct 2019 04:21:26.6772 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: YqxRsEDoeeiv987he/QYlMki4Hyz9D0FXpUwxLJxRLcH66IEl9GOp4kypA6G0VNOefrww4qMXEfJ6NPq3Av9WA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR04MB6271
+X-detected-operating-system: by eggs.gnu.org: FreeBSD 9.x [fuzzy]
+X-Received-From: 216.71.154.45
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -75,882 +124,267 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Oct 2019 21:15:24 -0000
+X-List-Received-Date: Sat, 19 Oct 2019 04:21:42 -0000
 
---000000000000a03ab6059535d4fc
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-=C5=AB
-
-On Tuesday, October 15, 2019, Anup Patel <Anup.Patel@wdc.com> wrote:
-
-> This patch adds model for Google Goldfish virtual platform RTC device.
->
-> We will be adding Goldfish RTC device to the QEMU RISC-V virt machine
-> for providing real date-time to Guest Linux. The corresponding Linux
-> driver for Goldfish RTC device is already available in upstream Linux.
->
-> For now, VM migration support is available but untested for Goldfish RTC
-> device. It will be hardened in-future when we implement VM migration for
-> KVM RISC-V.
->
-> Signed-off-by: Anup Patel <anup.patel@wdc.com>
-> ---
->  hw/rtc/Kconfig                  |   3 +
->  hw/rtc/Makefile.objs            |   1 +
->  hw/rtc/goldfish_rtc.c           | 278 ++++++++++++++++++++++++++++++++
->  include/hw/timer/goldfish_rtc.h |  46 ++++++
->  4 files changed, 328 insertions(+)
->  create mode 100644 hw/rtc/goldfish_rtc.c
->  create mode 100644 include/hw/timer/goldfish_rtc.h
->
->
-Do you plan to add some other devices from Goldfish platform?
-
-Did you base your code on Android emulator code?
-
-Related to the previous question, are you sure the copyright line should go
-to Western Digital only?
-
-Thanks, A.
-
-
-
-
-> diff --git a/hw/rtc/Kconfig b/hw/rtc/Kconfig
-> index 45daa8d655..bafe6ac2c9 100644
-> --- a/hw/rtc/Kconfig
-> +++ b/hw/rtc/Kconfig
-> @@ -21,3 +21,6 @@ config MC146818RTC
->
->  config SUN4V_RTC
->      bool
-> +
-> +config GOLDFISH_RTC
-> +    bool
-> diff --git a/hw/rtc/Makefile.objs b/hw/rtc/Makefile.objs
-> index 8dc9fcd3a9..aa208d0d10 100644
-> --- a/hw/rtc/Makefile.objs
-> +++ b/hw/rtc/Makefile.objs
-> @@ -11,3 +11,4 @@ common-obj-$(CONFIG_EXYNOS4) +=3D exynos4210_rtc.o
->  obj-$(CONFIG_MC146818RTC) +=3D mc146818rtc.o
->  common-obj-$(CONFIG_SUN4V_RTC) +=3D sun4v-rtc.o
->  common-obj-$(CONFIG_ASPEED_SOC) +=3D aspeed_rtc.o
-> +common-obj-$(CONFIG_GOLDFISH_RTC) +=3D goldfish_rtc.o
-> diff --git a/hw/rtc/goldfish_rtc.c b/hw/rtc/goldfish_rtc.c
-> new file mode 100644
-> index 0000000000..223616ed75
-> --- /dev/null
-> +++ b/hw/rtc/goldfish_rtc.c
-> @@ -0,0 +1,278 @@
-> +/*
-> + * Goldfish virtual platform RTC
-> + *
-> + * Copyright (C) 2019 Western Digital Corporation or its affiliates.
-> + *
-> + * For more details on Google Goldfish virtual platform refer:
-> + * https://android.googlesource.com/platform/external/qemu/+/
-> master/docs/GOLDFISH-VIRTUAL-HARDWARE.TXT
-> + *
-> + * This program is free software; you can redistribute it and/or modify =
-it
-> + * under the terms and conditions of the GNU General Public License,
-> + * version 2 or later, as published by the Free Software Foundation.
-> + *
-> + * This program is distributed in the hope it will be useful, but WITHOU=
-T
-> + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-> + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
-> for
-> + * more details.
-> + *
-> + * You should have received a copy of the GNU General Public License
-> along with
-> + * this program.  If not, see <http://www.gnu.org/licenses/>.
-> + */
-> +
-> +#include "qemu/osdep.h"
-> +#include "qemu-common.h"
-> +#include "hw/timer/goldfish_rtc.h"
-> +#include "migration/vmstate.h"
-> +#include "hw/irq.h"
-> +#include "hw/qdev-properties.h"
-> +#include "hw/sysbus.h"
-> +#include "qemu/timer.h"
-> +#include "sysemu/sysemu.h"
-> +#include "qemu/cutils.h"
-> +#include "qemu/log.h"
-> +
-> +#define RTC_TIME_LOW            0x00
-> +#define RTC_TIME_HIGH           0x04
-> +#define RTC_ALARM_LOW           0x08
-> +#define RTC_ALARM_HIGH          0x0c
-> +#define RTC_IRQ_ENABLED         0x10
-> +#define RTC_CLEAR_ALARM         0x14
-> +#define RTC_ALARM_STATUS        0x18
-> +#define RTC_CLEAR_INTERRUPT     0x1c
-> +
-> +static void goldfish_rtc_update(GoldfishRTCState *s)
-> +{
-> +    qemu_set_irq(s->irq, (s->irq_pending & s->irq_enabled) ? 1 : 0);
-> +}
-> +
-> +static void goldfish_rtc_interrupt(void *opaque)
-> +{
-> +    GoldfishRTCState *s =3D (GoldfishRTCState *)opaque;
-> +
-> +    s->alarm_running =3D 0;
-> +    s->irq_pending =3D 1;
-> +    goldfish_rtc_update(s);
-> +}
-> +
-> +static uint64_t goldfish_rtc_get_count(GoldfishRTCState *s)
-> +{
-> +    return s->tick_offset + (uint64_t)qemu_clock_get_ns(rtc_clock);
-> +}
-> +
-> +static void goldfish_rtc_clear_alarm(GoldfishRTCState *s)
-> +{
-> +    timer_del(s->timer);
-> +    s->alarm_running =3D 0;
-> +}
-> +
-> +static void goldfish_rtc_set_alarm(GoldfishRTCState *s)
-> +{
-> +    uint64_t ticks =3D goldfish_rtc_get_count(s);
-> +    uint64_t event =3D s->alarm_next;
-> +
-> +    if (event <=3D ticks) {
-> +        goldfish_rtc_clear_alarm(s);
-> +        goldfish_rtc_interrupt(s);
-> +    } else {
-> +        int64_t now =3D qemu_clock_get_ns(rtc_clock);
-> +        timer_mod(s->timer, now + (event - ticks));
-> +        s->alarm_running =3D 1;
-> +    }
-> +}
-> +
-> +static uint64_t goldfish_rtc_read(void *opaque, hwaddr offset,
-> +                                  unsigned size)
-> +{
-> +    GoldfishRTCState *s =3D (GoldfishRTCState *)opaque;
-> +    uint64_t r;
-> +
-> +    switch (offset) {
-> +    case RTC_TIME_LOW:
-> +        r =3D goldfish_rtc_get_count(s) & 0xffffffff;
-> +        break;
-> +    case RTC_TIME_HIGH:
-> +        r =3D goldfish_rtc_get_count(s) >> 32;
-> +        break;
-> +    case RTC_ALARM_LOW:
-> +        r =3D s->alarm_next & 0xffffffff;
-> +        break;
-> +    case RTC_ALARM_HIGH:
-> +        r =3D s->alarm_next >> 32;
-> +        break;
-> +    case RTC_IRQ_ENABLED:
-> +        r =3D s->irq_enabled;
-> +        break;
-> +    case RTC_ALARM_STATUS:
-> +        r =3D s->alarm_running;
-> +        break;
-> +    default:
-> +        qemu_log_mask(LOG_GUEST_ERROR,
-> +                      "goldfish_rtc_read: Bad offset 0x%x\n",
-> (int)offset);
-> +        r =3D 0;
-> +        break;
-> +    }
-> +
-> +    return r;
-> +}
-> +
-> +static void goldfish_rtc_write(void *opaque, hwaddr offset,
-> +                               uint64_t value, unsigned size)
-> +{
-> +    uint64_t current_tick, new_tick;
-> +    GoldfishRTCState *s =3D (GoldfishRTCState *)opaque;
-> +
-> +    switch (offset) {
-> +    case RTC_TIME_LOW:
-> +        current_tick =3D goldfish_rtc_get_count(s);
-> +        new_tick =3D current_tick & (0xffffffffULL << 32);
-> +        new_tick |=3D value;
-> +        s->tick_offset +=3D new_tick - current_tick;
-> +        break;
-> +    case RTC_TIME_HIGH:
-> +        current_tick =3D goldfish_rtc_get_count(s);
-> +        new_tick =3D current_tick & 0xffffffffULL;
-> +        new_tick |=3D (value << 32);
-> +        s->tick_offset +=3D new_tick - current_tick;
-> +        break;
-> +    case RTC_ALARM_LOW:
-> +        s->alarm_next &=3D (0xffffffffULL << 32);
-> +        s->alarm_next |=3D value;
-> +        goldfish_rtc_set_alarm(s);
-> +        break;
-> +    case RTC_ALARM_HIGH:
-> +        s->alarm_next &=3D 0xffffffffULL;
-> +        s->alarm_next |=3D (value << 32);
-> +        break;
-> +    case RTC_IRQ_ENABLED:
-> +        s->irq_enabled =3D (uint32_t)(value & 0x1);
-> +        goldfish_rtc_update(s);
-> +        break;
-> +    case RTC_CLEAR_ALARM:
-> +        goldfish_rtc_clear_alarm(s);
-> +        break;
-> +    case RTC_CLEAR_INTERRUPT:
-> +        s->irq_pending =3D 0;
-> +        goldfish_rtc_update(s);
-> +        break;
-> +    default:
-> +        qemu_log_mask(LOG_GUEST_ERROR,
-> +                      "goldfish_rtc_write: Bad offset 0x%x\n",
-> (int)offset);
-> +        break;
-> +    }
-> +}
-> +
-> +static int goldfish_rtc_pre_save(void *opaque)
-> +{
-> +    uint64_t delta;
-> +    GoldfishRTCState *s =3D opaque;
-> +
-> +    /*
-> +     * We want to migrate this offset, which sounds straightforward.
-> +     * Unfortunately, we cannot directly pass tick_offset because
-> +     * rtc_clock on destinetion Host might not be same source Host.
-> +     *
-> +     * To tackle, this we pass tick_offset relative to vm_clock from
-> +     * source Host and make it relative to rtc_clock at destinetion Host=
-.
-> +     */
-> +    delta =3D qemu_clock_get_ns(rtc_clock) -
-> +            qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL);
-> +    s->tick_offset_vmstate =3D s->tick_offset + delta;
-> +
-> +    return 0;
-> +}
-> +
-> +static int goldfish_rtc_post_load(void *opaque, int version_id)
-> +{
-> +    uint64_t delta;
-> +    GoldfishRTCState *s =3D opaque;
-> +
-> +    /*
-> +     * We extract tick_offset from tick_offset_vmstate by doing
-> +     * reverse math compared to pre_save() function.
-> +     */
-> +    delta =3D qemu_clock_get_ns(rtc_clock) -
-> +            qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL);
-> +    s->tick_offset =3D s->tick_offset_vmstate - delta;
-> +
-> +    return 0;
-> +}
-> +
-> +static const MemoryRegionOps goldfish_rtc_ops =3D {
-> +    .read =3D goldfish_rtc_read,
-> +    .write =3D goldfish_rtc_write,
-> +    .endianness =3D DEVICE_LITTLE_ENDIAN,
-> +    .valid =3D {
-> +        .min_access_size =3D 4,
-> +        .max_access_size =3D 4
-> +    }
-> +};
-> +
-> +static const VMStateDescription goldfish_rtc_vmstate =3D {
-> +    .name =3D TYPE_GOLDFISH_RTC,
-> +    .version_id =3D 1,
-> +    .pre_save =3D goldfish_rtc_pre_save,
-> +    .post_load =3D goldfish_rtc_post_load,
-> +    .fields =3D (VMStateField[]) {
-> +        VMSTATE_UINT64(tick_offset_vmstate, GoldfishRTCState),
-> +        VMSTATE_UINT64(alarm_next, GoldfishRTCState),
-> +        VMSTATE_UINT32(alarm_running, GoldfishRTCState),
-> +        VMSTATE_UINT32(irq_pending, GoldfishRTCState),
-> +        VMSTATE_UINT32(irq_enabled, GoldfishRTCState),
-> +        VMSTATE_END_OF_LIST()
-> +    }
-> +};
-> +
-> +static void goldfish_rtc_reset(DeviceState *dev)
-> +{
-> +    GoldfishRTCState *s =3D GOLDFISH_RTC(dev);
-> +    struct tm tm;
-> +
-> +    timer_del(s->timer);
-> +
-> +    qemu_get_timedate(&tm, 0);
-> +    s->tick_offset =3D mktimegm(&tm);
-> +    s->tick_offset *=3D NANOSECONDS_PER_SECOND;
-> +    s->tick_offset -=3D qemu_clock_get_ns(rtc_clock);
-> +    s->tick_offset_vmstate =3D 0;
-> +    s->alarm_next =3D 0;
-> +    s->alarm_running =3D 0;
-> +    s->irq_pending =3D 0;
-> +    s->irq_enabled =3D 0;
-> +}
-> +
-> +static void goldfish_rtc_realize(DeviceState *d, Error **errp)
-> +{
-> +    SysBusDevice *dev =3D SYS_BUS_DEVICE(d);
-> +    GoldfishRTCState *s =3D GOLDFISH_RTC(d);
-> +
-> +    memory_region_init_io(&s->iomem, OBJECT(s), &goldfish_rtc_ops, s,
-> +                          "goldfish_rtc", 0x1000);
-> +    sysbus_init_mmio(dev, &s->iomem);
-> +
-> +    sysbus_init_irq(dev, &s->irq);
-> +
-> +    s->timer =3D timer_new_ns(rtc_clock, goldfish_rtc_interrupt, s);
-> +}
-> +
-> +static void goldfish_rtc_class_init(ObjectClass *klass, void *data)
-> +{
-> +    DeviceClass *dc =3D DEVICE_CLASS(klass);
-> +
-> +    dc->realize =3D goldfish_rtc_realize;
-> +    dc->reset =3D goldfish_rtc_reset;
-> +    dc->vmsd =3D &goldfish_rtc_vmstate;
-> +}
-> +
-> +static const TypeInfo goldfish_rtc_info =3D {
-> +    .name          =3D TYPE_GOLDFISH_RTC,
-> +    .parent        =3D TYPE_SYS_BUS_DEVICE,
-> +    .instance_size =3D sizeof(GoldfishRTCState),
-> +    .class_init    =3D goldfish_rtc_class_init,
-> +};
-> +
-> +static void goldfish_rtc_register_types(void)
-> +{
-> +    type_register_static(&goldfish_rtc_info);
-> +}
-> +
-> +type_init(goldfish_rtc_register_types)
-> diff --git a/include/hw/timer/goldfish_rtc.h b/include/hw/timer/goldfish_
-> rtc.h
-> new file mode 100644
-> index 0000000000..dfb6d70b86
-> --- /dev/null
-> +++ b/include/hw/timer/goldfish_rtc.h
-> @@ -0,0 +1,46 @@
-> +/*
-> + * Goldfish virtual platform RTC
-> + *
-> + * Copyright (C) 2019 Western Digital Corporation or its affiliates.
-> + *
-> + * For more details on Google Goldfish virtual platform refer:
-> + * https://android.googlesource.com/platform/external/qemu/+/
-> master/docs/GOLDFISH-VIRTUAL-HARDWARE.TXT
-> + *
-> + * This program is free software; you can redistribute it and/or modify =
-it
-> + * under the terms and conditions of the GNU General Public License,
-> + * version 2 or later, as published by the Free Software Foundation.
-> + *
-> + * This program is distributed in the hope it will be useful, but WITHOU=
-T
-> + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-> + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
-> for
-> + * more details.
-> + *
-> + * You should have received a copy of the GNU General Public License
-> along with
-> + * this program.  If not, see <http://www.gnu.org/licenses/>.
-> + */
-> +
-> +#ifndef HW_TIMER_GOLDFISH_RTC_H
-> +#define HW_TIMER_GOLDFISH_RTC_H
-> +
-> +#include "hw/sysbus.h"
-> +
-> +#define TYPE_GOLDFISH_RTC "goldfish_rtc"
-> +#define GOLDFISH_RTC(obj) \
-> +OBJECT_CHECK(GoldfishRTCState, (obj), TYPE_GOLDFISH_RTC)
-> +
-> +typedef struct GoldfishRTCState {
-> +    SysBusDevice parent_obj;
-> +
-> +    MemoryRegion iomem;
-> +    QEMUTimer *timer;
-> +    qemu_irq irq;
-> +
-> +    uint64_t tick_offset;
-> +    uint64_t tick_offset_vmstate;
-> +    uint64_t alarm_next;
-> +    uint32_t alarm_running;
-> +    uint32_t irq_pending;
-> +    uint32_t irq_enabled;
-> +} GoldfishRTCState;
-> +
-> +#endif
-> --
-> 2.17.1
->
->
->
-
---000000000000a03ab6059535d4fc
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-=C5=AB<br><br>On Tuesday, October 15, 2019, Anup Patel &lt;<a href=3D"mailt=
-o:Anup.Patel@wdc.com">Anup.Patel@wdc.com</a>&gt; wrote:<br><blockquote clas=
-s=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;pad=
-ding-left:1ex">This patch adds model for Google Goldfish virtual platform R=
-TC device.<br>
-<br>
-We will be adding Goldfish RTC device to the QEMU RISC-V virt machine<br>
-for providing real date-time to Guest Linux. The corresponding Linux<br>
-driver for Goldfish RTC device is already available in upstream Linux.<br>
-<br>
-For now, VM migration support is available but untested for Goldfish RTC<br=
->
-device. It will be hardened in-future when we implement VM migration for<br=
->
-KVM RISC-V.<br>
-<br>
-Signed-off-by: Anup Patel &lt;<a href=3D"mailto:anup.patel@wdc.com">anup.pa=
-tel@wdc.com</a>&gt;<br>
----<br>
-=C2=A0hw/rtc/Kconfig=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 |=C2=A0 =C2=A03 +<br>
-=C2=A0hw/rtc/Makefile.objs=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0=
- =C2=A01 +<br>
-=C2=A0hw/rtc/goldfish_rtc.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 278 +=
-+++++++++++++++++++++++++++++<wbr>++<br>
-=C2=A0include/hw/timer/goldfish_rtc.<wbr>h |=C2=A0 46 ++++++<br>
-=C2=A04 files changed, 328 insertions(+)<br>
-=C2=A0create mode 100644 hw/rtc/goldfish_rtc.c<br>
-=C2=A0create mode 100644 include/hw/timer/goldfish_rtc.<wbr>h<br>
-<br></blockquote><div><br></div><div>Do you plan to add some other devices =
-from Goldfish platform?</div><div><br></div><div>Did you base your code on =
-Android emulator code?</div><div><br></div><div>Related to the previous que=
-stion, are you sure the copyright line should go to Western Digital only?</=
-div><div><br></div><div>Thanks, A.</div><div><br></div><div><br></div><div>=
-=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;bo=
-rder-left:1px #ccc solid;padding-left:1ex">
-diff --git a/hw/rtc/Kconfig b/hw/rtc/Kconfig<br>
-index 45daa8d655..bafe6ac2c9 100644<br>
---- a/hw/rtc/Kconfig<br>
-+++ b/hw/rtc/Kconfig<br>
-@@ -21,3 +21,6 @@ config MC146818RTC<br>
-<br>
-=C2=A0config SUN4V_RTC<br>
-=C2=A0 =C2=A0 =C2=A0bool<br>
-+<br>
-+config GOLDFISH_RTC<br>
-+=C2=A0 =C2=A0 bool<br>
-diff --git a/hw/rtc/Makefile.objs b/hw/rtc/Makefile.objs<br>
-index 8dc9fcd3a9..aa208d0d10 100644<br>
---- a/hw/rtc/Makefile.objs<br>
-+++ b/hw/rtc/Makefile.objs<br>
-@@ -11,3 +11,4 @@ common-obj-$(CONFIG_EXYNOS4) +=3D exynos4210_rtc.o<br>
-=C2=A0obj-$(CONFIG_MC146818RTC) +=3D mc146818rtc.o<br>
-=C2=A0common-obj-$(CONFIG_SUN4V_RTC) +=3D sun4v-rtc.o<br>
-=C2=A0common-obj-$(CONFIG_ASPEED_<wbr>SOC) +=3D aspeed_rtc.o<br>
-+common-obj-$(CONFIG_GOLDFISH_<wbr>RTC) +=3D goldfish_rtc.o<br>
-diff --git a/hw/rtc/goldfish_rtc.c b/hw/rtc/goldfish_rtc.c<br>
-new file mode 100644<br>
-index 0000000000..223616ed75<br>
---- /dev/null<br>
-+++ b/hw/rtc/goldfish_rtc.c<br>
-@@ -0,0 +1,278 @@<br>
-+/*<br>
-+ * Goldfish virtual platform RTC<br>
-+ *<br>
-+ * Copyright (C) 2019 Western Digital Corporation or its affiliates.<br>
-+ *<br>
-+ * For more details on Google Goldfish virtual platform refer:<br>
-+ * <a href=3D"https://android.googlesource.com/platform/external/qemu/+/ma=
-ster/docs/GOLDFISH-VIRTUAL-HARDWARE.TXT" target=3D"_blank">https://android.=
-googlesource.<wbr>com/platform/external/qemu/+/<wbr>master/docs/GOLDFISH-VI=
-RTUAL-<wbr>HARDWARE.TXT</a><br>
-+ *<br>
-+ * This program is free software; you can redistribute it and/or modify it=
-<br>
-+ * under the terms and conditions of the GNU General Public License,<br>
-+ * version 2 or later, as published by the Free Software Foundation.<br>
-+ *<br>
-+ * This program is distributed in the hope it will be useful, but WITHOUT<=
-br>
-+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or<b=
-r>
-+ * FITNESS FOR A PARTICULAR PURPOSE.=C2=A0 See the GNU General Public Lice=
-nse for<br>
-+ * more details.<br>
-+ *<br>
-+ * You should have received a copy of the GNU General Public License along=
- with<br>
-+ * this program.=C2=A0 If not, see &lt;<a href=3D"http://www.gnu.org/licen=
-ses/" target=3D"_blank">http://www.gnu.org/licenses/</a>&gt;<wbr>.<br>
-+ */<br>
-+<br>
-+#include &quot;qemu/osdep.h&quot;<br>
-+#include &quot;qemu-common.h&quot;<br>
-+#include &quot;hw/timer/goldfish_rtc.h&quot;<br>
-+#include &quot;migration/vmstate.h&quot;<br>
-+#include &quot;hw/irq.h&quot;<br>
-+#include &quot;hw/qdev-properties.h&quot;<br>
-+#include &quot;hw/sysbus.h&quot;<br>
-+#include &quot;qemu/timer.h&quot;<br>
-+#include &quot;sysemu/sysemu.h&quot;<br>
-+#include &quot;qemu/cutils.h&quot;<br>
-+#include &quot;qemu/log.h&quot;<br>
-+<br>
-+#define RTC_TIME_LOW=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0x00<br>
-+#define RTC_TIME_HIGH=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A00x04<br>
-+#define RTC_ALARM_LOW=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A00x08<br>
-+#define RTC_ALARM_HIGH=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0x0c<br>
-+#define RTC_IRQ_ENABLED=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A00x10<br>
-+#define RTC_CLEAR_ALARM=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A00x14<br>
-+#define RTC_ALARM_STATUS=C2=A0 =C2=A0 =C2=A0 =C2=A0 0x18<br>
-+#define RTC_CLEAR_INTERRUPT=C2=A0 =C2=A0 =C2=A00x1c<br>
-+<br>
-+static void goldfish_rtc_update(<wbr>GoldfishRTCState *s)<br>
-+{<br>
-+=C2=A0 =C2=A0 qemu_set_irq(s-&gt;irq, (s-&gt;irq_pending &amp; s-&gt;irq_e=
-nabled) ? 1 : 0);<br>
-+}<br>
-+<br>
-+static void goldfish_rtc_interrupt(void *opaque)<br>
-+{<br>
-+=C2=A0 =C2=A0 GoldfishRTCState *s =3D (GoldfishRTCState *)opaque;<br>
-+<br>
-+=C2=A0 =C2=A0 s-&gt;alarm_running =3D 0;<br>
-+=C2=A0 =C2=A0 s-&gt;irq_pending =3D 1;<br>
-+=C2=A0 =C2=A0 goldfish_rtc_update(s);<br>
-+}<br>
-+<br>
-+static uint64_t goldfish_rtc_get_count(<wbr>GoldfishRTCState *s)<br>
-+{<br>
-+=C2=A0 =C2=A0 return s-&gt;tick_offset + (uint64_t)qemu_clock_get_ns(<wbr>=
-rtc_clock);<br>
-+}<br>
-+<br>
-+static void goldfish_rtc_clear_alarm(<wbr>GoldfishRTCState *s)<br>
-+{<br>
-+=C2=A0 =C2=A0 timer_del(s-&gt;timer);<br>
-+=C2=A0 =C2=A0 s-&gt;alarm_running =3D 0;<br>
-+}<br>
-+<br>
-+static void goldfish_rtc_set_alarm(<wbr>GoldfishRTCState *s)<br>
-+{<br>
-+=C2=A0 =C2=A0 uint64_t ticks =3D goldfish_rtc_get_count(s);<br>
-+=C2=A0 =C2=A0 uint64_t event =3D s-&gt;alarm_next;<br>
-+<br>
-+=C2=A0 =C2=A0 if (event &lt;=3D ticks) {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 goldfish_rtc_clear_alarm(s);<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 goldfish_rtc_interrupt(s);<br>
-+=C2=A0 =C2=A0 } else {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 int64_t now =3D qemu_clock_get_ns(rtc_clock);<=
-br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 timer_mod(s-&gt;timer, now + (event - ticks));=
-<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 s-&gt;alarm_running =3D 1;<br>
-+=C2=A0 =C2=A0 }<br>
-+}<br>
-+<br>
-+static uint64_t goldfish_rtc_read(void *opaque, hwaddr offset,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 unsigned size)<br>
-+{<br>
-+=C2=A0 =C2=A0 GoldfishRTCState *s =3D (GoldfishRTCState *)opaque;<br>
-+=C2=A0 =C2=A0 uint64_t r;<br>
-+<br>
-+=C2=A0 =C2=A0 switch (offset) {<br>
-+=C2=A0 =C2=A0 case RTC_TIME_LOW:<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 r =3D goldfish_rtc_get_count(s) &amp; 0xffffff=
-ff;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 break;<br>
-+=C2=A0 =C2=A0 case RTC_TIME_HIGH:<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 r =3D goldfish_rtc_get_count(s) &gt;&gt; 32;<b=
-r>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 break;<br>
-+=C2=A0 =C2=A0 case RTC_ALARM_LOW:<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 r =3D s-&gt;alarm_next &amp; 0xffffffff;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 break;<br>
-+=C2=A0 =C2=A0 case RTC_ALARM_HIGH:<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 r =3D s-&gt;alarm_next &gt;&gt; 32;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 break;<br>
-+=C2=A0 =C2=A0 case RTC_IRQ_ENABLED:<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 r =3D s-&gt;irq_enabled;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 break;<br>
-+=C2=A0 =C2=A0 case RTC_ALARM_STATUS:<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 r =3D s-&gt;alarm_running;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 break;<br>
-+=C2=A0 =C2=A0 default:<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 qemu_log_mask(LOG_GUEST_ERROR,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 &quot;goldfish_rtc_read: Bad offset 0x%x\n&quot;, (int)offset);<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 r =3D 0;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 break;<br>
-+=C2=A0 =C2=A0 }<br>
-+<br>
-+=C2=A0 =C2=A0 return r;<br>
-+}<br>
-+<br>
-+static void goldfish_rtc_write(void *opaque, hwaddr offset,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0uint64_t value, unsigned size)<br>
-+{<br>
-+=C2=A0 =C2=A0 uint64_t current_tick, new_tick;<br>
-+=C2=A0 =C2=A0 GoldfishRTCState *s =3D (GoldfishRTCState *)opaque;<br>
-+<br>
-+=C2=A0 =C2=A0 switch (offset) {<br>
-+=C2=A0 =C2=A0 case RTC_TIME_LOW:<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 current_tick =3D goldfish_rtc_get_count(s);<br=
->
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 new_tick =3D current_tick &amp; (0xffffffffULL=
- &lt;&lt; 32);<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 new_tick |=3D value;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 s-&gt;tick_offset +=3D new_tick - current_tick=
-;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 break;<br>
-+=C2=A0 =C2=A0 case RTC_TIME_HIGH:<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 current_tick =3D goldfish_rtc_get_count(s);<br=
->
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 new_tick =3D current_tick &amp; 0xffffffffULL;=
-<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 new_tick |=3D (value &lt;&lt; 32);<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 s-&gt;tick_offset +=3D new_tick - current_tick=
-;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 break;<br>
-+=C2=A0 =C2=A0 case RTC_ALARM_LOW:<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 s-&gt;alarm_next &amp;=3D (0xffffffffULL &lt;&=
-lt; 32);<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 s-&gt;alarm_next |=3D value;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 goldfish_rtc_set_alarm(s);<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 break;<br>
-+=C2=A0 =C2=A0 case RTC_ALARM_HIGH:<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 s-&gt;alarm_next &amp;=3D 0xffffffffULL;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 s-&gt;alarm_next |=3D (value &lt;&lt; 32);<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 break;<br>
-+=C2=A0 =C2=A0 case RTC_IRQ_ENABLED:<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 s-&gt;irq_enabled =3D (uint32_t)(value &amp; 0=
-x1);<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 goldfish_rtc_update(s);<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 break;<br>
-+=C2=A0 =C2=A0 case RTC_CLEAR_ALARM:<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 goldfish_rtc_clear_alarm(s);<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 break;<br>
-+=C2=A0 =C2=A0 case RTC_CLEAR_INTERRUPT:<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 s-&gt;irq_pending =3D 0;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 goldfish_rtc_update(s);<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 break;<br>
-+=C2=A0 =C2=A0 default:<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 qemu_log_mask(LOG_GUEST_ERROR,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 &quot;goldfish_rtc_write: Bad offset 0x%x\n&quot;, (int)offset);<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 break;<br>
-+=C2=A0 =C2=A0 }<br>
-+}<br>
-+<br>
-+static int goldfish_rtc_pre_save(void *opaque)<br>
-+{<br>
-+=C2=A0 =C2=A0 uint64_t delta;<br>
-+=C2=A0 =C2=A0 GoldfishRTCState *s =3D opaque;<br>
-+<br>
-+=C2=A0 =C2=A0 /*<br>
-+=C2=A0 =C2=A0 =C2=A0* We want to migrate this offset, which sounds straigh=
-tforward.<br>
-+=C2=A0 =C2=A0 =C2=A0* Unfortunately, we cannot directly pass tick_offset b=
-ecause<br>
-+=C2=A0 =C2=A0 =C2=A0* rtc_clock on destinetion Host might not be same sour=
-ce Host.<br>
-+=C2=A0 =C2=A0 =C2=A0*<br>
-+=C2=A0 =C2=A0 =C2=A0* To tackle, this we pass tick_offset relative to vm_c=
-lock from<br>
-+=C2=A0 =C2=A0 =C2=A0* source Host and make it relative to rtc_clock at des=
-tinetion Host.<br>
-+=C2=A0 =C2=A0 =C2=A0*/<br>
-+=C2=A0 =C2=A0 delta =3D qemu_clock_get_ns(rtc_clock) -<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 qemu_clock_get_ns(QEMU_CLOCK_<wb=
-r>VIRTUAL);<br>
-+=C2=A0 =C2=A0 s-&gt;tick_offset_vmstate =3D s-&gt;tick_offset + delta;<br>
-+<br>
-+=C2=A0 =C2=A0 return 0;<br>
-+}<br>
-+<br>
-+static int goldfish_rtc_post_load(void *opaque, int version_id)<br>
-+{<br>
-+=C2=A0 =C2=A0 uint64_t delta;<br>
-+=C2=A0 =C2=A0 GoldfishRTCState *s =3D opaque;<br>
-+<br>
-+=C2=A0 =C2=A0 /*<br>
-+=C2=A0 =C2=A0 =C2=A0* We extract tick_offset from tick_offset_vmstate by d=
-oing<br>
-+=C2=A0 =C2=A0 =C2=A0* reverse math compared to pre_save() function.<br>
-+=C2=A0 =C2=A0 =C2=A0*/<br>
-+=C2=A0 =C2=A0 delta =3D qemu_clock_get_ns(rtc_clock) -<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 qemu_clock_get_ns(QEMU_CLOCK_<wb=
-r>VIRTUAL);<br>
-+=C2=A0 =C2=A0 s-&gt;tick_offset =3D s-&gt;tick_offset_vmstate - delta;<br>
-+<br>
-+=C2=A0 =C2=A0 return 0;<br>
-+}<br>
-+<br>
-+static const MemoryRegionOps goldfish_rtc_ops =3D {<br>
-+=C2=A0 =C2=A0 .read =3D goldfish_rtc_read,<br>
-+=C2=A0 =C2=A0 .write =3D goldfish_rtc_write,<br>
-+=C2=A0 =C2=A0 .endianness =3D DEVICE_LITTLE_ENDIAN,<br>
-+=C2=A0 =C2=A0 .valid =3D {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 .min_access_size =3D 4,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 .max_access_size =3D 4<br>
-+=C2=A0 =C2=A0 }<br>
-+};<br>
-+<br>
-+static const VMStateDescription goldfish_rtc_vmstate =3D {<br>
-+=C2=A0 =C2=A0 .name =3D TYPE_GOLDFISH_RTC,<br>
-+=C2=A0 =C2=A0 .version_id =3D 1,<br>
-+=C2=A0 =C2=A0 .pre_save =3D goldfish_rtc_pre_save,<br>
-+=C2=A0 =C2=A0 .post_load =3D goldfish_rtc_post_load,<br>
-+=C2=A0 =C2=A0 .fields =3D (VMStateField[]) {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 VMSTATE_UINT64(tick_offset_<wbr>vmstate, Goldf=
-ishRTCState),<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 VMSTATE_UINT64(alarm_next, GoldfishRTCState),<=
-br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 VMSTATE_UINT32(alarm_running, GoldfishRTCState=
-),<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 VMSTATE_UINT32(irq_pending, GoldfishRTCState),=
-<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 VMSTATE_UINT32(irq_enabled, GoldfishRTCState),=
-<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 VMSTATE_END_OF_LIST()<br>
-+=C2=A0 =C2=A0 }<br>
-+};<br>
-+<br>
-+static void goldfish_rtc_reset(DeviceState *dev)<br>
-+{<br>
-+=C2=A0 =C2=A0 GoldfishRTCState *s =3D GOLDFISH_RTC(dev);<br>
-+=C2=A0 =C2=A0 struct tm tm;<br>
-+<br>
-+=C2=A0 =C2=A0 timer_del(s-&gt;timer);<br>
-+<br>
-+=C2=A0 =C2=A0 qemu_get_timedate(&amp;tm, 0);<br>
-+=C2=A0 =C2=A0 s-&gt;tick_offset =3D mktimegm(&amp;tm);<br>
-+=C2=A0 =C2=A0 s-&gt;tick_offset *=3D NANOSECONDS_PER_SECOND;<br>
-+=C2=A0 =C2=A0 s-&gt;tick_offset -=3D qemu_clock_get_ns(rtc_clock);<br>
-+=C2=A0 =C2=A0 s-&gt;tick_offset_vmstate =3D 0;<br>
-+=C2=A0 =C2=A0 s-&gt;alarm_next =3D 0;<br>
-+=C2=A0 =C2=A0 s-&gt;alarm_running =3D 0;<br>
-+=C2=A0 =C2=A0 s-&gt;irq_pending =3D 0;<br>
-+=C2=A0 =C2=A0 s-&gt;irq_enabled =3D 0;<br>
-+}<br>
-+<br>
-+static void goldfish_rtc_realize(<wbr>DeviceState *d, Error **errp)<br>
-+{<br>
-+=C2=A0 =C2=A0 SysBusDevice *dev =3D SYS_BUS_DEVICE(d);<br>
-+=C2=A0 =C2=A0 GoldfishRTCState *s =3D GOLDFISH_RTC(d);<br>
-+<br>
-+=C2=A0 =C2=A0 memory_region_init_io(&amp;s-&gt;<wbr>iomem, OBJECT(s), &amp=
-;goldfish_rtc_ops, s,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 &quot;goldfish_rtc&quot;, 0x1000);<br>
-+=C2=A0 =C2=A0 sysbus_init_mmio(dev, &amp;s-&gt;iomem);<br>
-+<br>
-+=C2=A0 =C2=A0 sysbus_init_irq(dev, &amp;s-&gt;irq);<br>
-+<br>
-+=C2=A0 =C2=A0 s-&gt;timer =3D timer_new_ns(rtc_clock, goldfish_rtc_interru=
-pt, s);<br>
-+}<br>
-+<br>
-+static void goldfish_rtc_class_init(<wbr>ObjectClass *klass, void *data)<b=
-r>
-+{<br>
-+=C2=A0 =C2=A0 DeviceClass *dc =3D DEVICE_CLASS(klass);<br>
-+<br>
-+=C2=A0 =C2=A0 dc-&gt;realize =3D goldfish_rtc_realize;<br>
-+=C2=A0 =C2=A0 dc-&gt;reset =3D goldfish_rtc_reset;<br>
-+=C2=A0 =C2=A0 dc-&gt;vmsd =3D &amp;goldfish_rtc_vmstate;<br>
-+}<br>
-+<br>
-+static const TypeInfo goldfish_rtc_info =3D {<br>
-+=C2=A0 =C2=A0 .name=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =3D TYPE_GOLDFISH_RT=
-C,<br>
-+=C2=A0 =C2=A0 .parent=C2=A0 =C2=A0 =C2=A0 =C2=A0 =3D TYPE_SYS_BUS_DEVICE,<=
-br>
-+=C2=A0 =C2=A0 .instance_size =3D sizeof(GoldfishRTCState),<br>
-+=C2=A0 =C2=A0 .class_init=C2=A0 =C2=A0 =3D goldfish_rtc_class_init,<br>
-+};<br>
-+<br>
-+static void goldfish_rtc_register_types(<wbr>void)<br>
-+{<br>
-+=C2=A0 =C2=A0 type_register_static(&amp;<wbr>goldfish_rtc_info);<br>
-+}<br>
-+<br>
-+type_init(goldfish_rtc_<wbr>register_types)<br>
-diff --git a/include/hw/timer/goldfish_<wbr>rtc.h b/include/hw/timer/goldfi=
-sh_<wbr>rtc.h<br>
-new file mode 100644<br>
-index 0000000000..dfb6d70b86<br>
---- /dev/null<br>
-+++ b/include/hw/timer/goldfish_<wbr>rtc.h<br>
-@@ -0,0 +1,46 @@<br>
-+/*<br>
-+ * Goldfish virtual platform RTC<br>
-+ *<br>
-+ * Copyright (C) 2019 Western Digital Corporation or its affiliates.<br>
-+ *<br>
-+ * For more details on Google Goldfish virtual platform refer:<br>
-+ * <a href=3D"https://android.googlesource.com/platform/external/qemu/+/ma=
-ster/docs/GOLDFISH-VIRTUAL-HARDWARE.TXT" target=3D"_blank">https://android.=
-googlesource.<wbr>com/platform/external/qemu/+/<wbr>master/docs/GOLDFISH-VI=
-RTUAL-<wbr>HARDWARE.TXT</a><br>
-+ *<br>
-+ * This program is free software; you can redistribute it and/or modify it=
-<br>
-+ * under the terms and conditions of the GNU General Public License,<br>
-+ * version 2 or later, as published by the Free Software Foundation.<br>
-+ *<br>
-+ * This program is distributed in the hope it will be useful, but WITHOUT<=
-br>
-+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or<b=
-r>
-+ * FITNESS FOR A PARTICULAR PURPOSE.=C2=A0 See the GNU General Public Lice=
-nse for<br>
-+ * more details.<br>
-+ *<br>
-+ * You should have received a copy of the GNU General Public License along=
- with<br>
-+ * this program.=C2=A0 If not, see &lt;<a href=3D"http://www.gnu.org/licen=
-ses/" target=3D"_blank">http://www.gnu.org/licenses/</a>&gt;<wbr>.<br>
-+ */<br>
-+<br>
-+#ifndef HW_TIMER_GOLDFISH_RTC_H<br>
-+#define HW_TIMER_GOLDFISH_RTC_H<br>
-+<br>
-+#include &quot;hw/sysbus.h&quot;<br>
-+<br>
-+#define TYPE_GOLDFISH_RTC &quot;goldfish_rtc&quot;<br>
-+#define GOLDFISH_RTC(obj) \<br>
-+OBJECT_CHECK(<wbr>GoldfishRTCState, (obj), TYPE_GOLDFISH_RTC)<br>
-+<br>
-+typedef struct GoldfishRTCState {<br>
-+=C2=A0 =C2=A0 SysBusDevice parent_obj;<br>
-+<br>
-+=C2=A0 =C2=A0 MemoryRegion iomem;<br>
-+=C2=A0 =C2=A0 QEMUTimer *timer;<br>
-+=C2=A0 =C2=A0 qemu_irq irq;<br>
-+<br>
-+=C2=A0 =C2=A0 uint64_t tick_offset;<br>
-+=C2=A0 =C2=A0 uint64_t tick_offset_vmstate;<br>
-+=C2=A0 =C2=A0 uint64_t alarm_next;<br>
-+=C2=A0 =C2=A0 uint32_t alarm_running;<br>
-+=C2=A0 =C2=A0 uint32_t irq_pending;<br>
-+=C2=A0 =C2=A0 uint32_t irq_enabled;<br>
-+} GoldfishRTCState;<br>
-+<br>
-+#endif<br>
--- <br>
-2.17.1<br>
-<br>
-<br>
-</blockquote>
-
---000000000000a03ab6059535d4fc--
+DQoNCj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4gRnJvbTogQWxpc3RhaXIgRnJhbmNp
+cyA8YWxpc3RhaXIyM0BnbWFpbC5jb20+DQo+IFNlbnQ6IFNhdHVyZGF5LCBPY3RvYmVyIDE5LCAy
+MDE5IDI6MjkgQU0NCj4gVG86IEFudXAgUGF0ZWwgPEFudXAuUGF0ZWxAd2RjLmNvbT4NCj4gQ2M6
+IFBldGVyIE1heWRlbGwgPHBldGVyLm1heWRlbGxAbGluYXJvLm9yZz47IFBhbG1lciBEYWJiZWx0
+DQo+IDxwYWxtZXJAc2lmaXZlLmNvbT47IEFsaXN0YWlyIEZyYW5jaXMgPEFsaXN0YWlyLkZyYW5j
+aXNAd2RjLmNvbT47IFNhZ2FyDQo+IEthcmFuZGlrYXIgPHNhZ2Fya0BlZWNzLmJlcmtlbGV5LmVk
+dT47IEJhc3RpYW4gS29wcGVsbWFubg0KPiA8a2Jhc3RpYW5AbWFpbC51bmktcGFkZXJib3JuLmRl
+PjsgQXRpc2ggUGF0cmEgPEF0aXNoLlBhdHJhQHdkYy5jb20+Ow0KPiBxZW11LXJpc2N2QG5vbmdu
+dS5vcmc7IHFlbXUtZGV2ZWxAbm9uZ251Lm9yZzsgQW51cCBQYXRlbA0KPiA8YW51cEBicmFpbmZh
+dWx0Lm9yZz4NCj4gU3ViamVjdDogUmU6IFtQQVRDSCB2MyAxLzJdIGh3OiB0aW1lcjogQWRkIEdv
+bGRmaXNoIFJUQyBkZXZpY2UNCj4gDQo+IE9uIFR1ZSwgT2N0IDE1LCAyMDE5IGF0IDE6MzYgQU0g
+QW51cCBQYXRlbCA8QW51cC5QYXRlbEB3ZGMuY29tPiB3cm90ZToNCj4gPg0KPiA+IFRoaXMgcGF0
+Y2ggYWRkcyBtb2RlbCBmb3IgR29vZ2xlIEdvbGRmaXNoIHZpcnR1YWwgcGxhdGZvcm0gUlRDIGRl
+dmljZS4NCj4gPg0KPiA+IFdlIHdpbGwgYmUgYWRkaW5nIEdvbGRmaXNoIFJUQyBkZXZpY2UgdG8g
+dGhlIFFFTVUgUklTQy1WIHZpcnQgbWFjaGluZQ0KPiA+IGZvciBwcm92aWRpbmcgcmVhbCBkYXRl
+LXRpbWUgdG8gR3Vlc3QgTGludXguIFRoZSBjb3JyZXNwb25kaW5nIExpbnV4DQo+ID4gZHJpdmVy
+IGZvciBHb2xkZmlzaCBSVEMgZGV2aWNlIGlzIGFscmVhZHkgYXZhaWxhYmxlIGluIHVwc3RyZWFt
+IExpbnV4Lg0KPiA+DQo+ID4gRm9yIG5vdywgVk0gbWlncmF0aW9uIHN1cHBvcnQgaXMgYXZhaWxh
+YmxlIGJ1dCB1bnRlc3RlZCBmb3IgR29sZGZpc2gNCj4gPiBSVEMgZGV2aWNlLiBJdCB3aWxsIGJl
+IGhhcmRlbmVkIGluLWZ1dHVyZSB3aGVuIHdlIGltcGxlbWVudCBWTQ0KPiA+IG1pZ3JhdGlvbiBm
+b3IgS1ZNIFJJU0MtVi4NCj4gPg0KPiA+IFNpZ25lZC1vZmYtYnk6IEFudXAgUGF0ZWwgPGFudXAu
+cGF0ZWxAd2RjLmNvbT4NCj4gPiAtLS0NCj4gPiAgaHcvcnRjL0tjb25maWcgICAgICAgICAgICAg
+ICAgICB8ICAgMyArDQo+ID4gIGh3L3J0Yy9NYWtlZmlsZS5vYmpzICAgICAgICAgICAgfCAgIDEg
+Kw0KPiA+ICBody9ydGMvZ29sZGZpc2hfcnRjLmMgICAgICAgICAgIHwgMjc4ICsrKysrKysrKysr
+KysrKysrKysrKysrKysrKysrKysrDQo+ID4gIGluY2x1ZGUvaHcvdGltZXIvZ29sZGZpc2hfcnRj
+LmggfCAgNDYgKysrKysrDQo+ID4gIDQgZmlsZXMgY2hhbmdlZCwgMzI4IGluc2VydGlvbnMoKykN
+Cj4gPiAgY3JlYXRlIG1vZGUgMTAwNjQ0IGh3L3J0Yy9nb2xkZmlzaF9ydGMuYyAgY3JlYXRlIG1v
+ZGUgMTAwNjQ0DQo+ID4gaW5jbHVkZS9ody90aW1lci9nb2xkZmlzaF9ydGMuaA0KPiA+DQo+ID4g
+ZGlmZiAtLWdpdCBhL2h3L3J0Yy9LY29uZmlnIGIvaHcvcnRjL0tjb25maWcgaW5kZXgNCj4gPiA0
+NWRhYThkNjU1Li5iYWZlNmFjMmM5IDEwMDY0NA0KPiA+IC0tLSBhL2h3L3J0Yy9LY29uZmlnDQo+
+ID4gKysrIGIvaHcvcnRjL0tjb25maWcNCj4gPiBAQCAtMjEsMyArMjEsNiBAQCBjb25maWcgTUMx
+NDY4MThSVEMNCj4gPg0KPiA+ICBjb25maWcgU1VONFZfUlRDDQo+ID4gICAgICBib29sDQo+ID4g
+Kw0KPiA+ICtjb25maWcgR09MREZJU0hfUlRDDQo+ID4gKyAgICBib29sDQo+ID4gZGlmZiAtLWdp
+dCBhL2h3L3J0Yy9NYWtlZmlsZS5vYmpzIGIvaHcvcnRjL01ha2VmaWxlLm9ianMgaW5kZXgNCj4g
+PiA4ZGM5ZmNkM2E5Li5hYTIwOGQwZDEwIDEwMDY0NA0KPiA+IC0tLSBhL2h3L3J0Yy9NYWtlZmls
+ZS5vYmpzDQo+ID4gKysrIGIvaHcvcnRjL01ha2VmaWxlLm9ianMNCj4gPiBAQCAtMTEsMyArMTEs
+NCBAQCBjb21tb24tb2JqLSQoQ09ORklHX0VYWU5PUzQpICs9DQo+IGV4eW5vczQyMTBfcnRjLm8N
+Cj4gPiAgb2JqLSQoQ09ORklHX01DMTQ2ODE4UlRDKSArPSBtYzE0NjgxOHJ0Yy5vDQo+ID4gIGNv
+bW1vbi1vYmotJChDT05GSUdfU1VONFZfUlRDKSArPSBzdW40di1ydGMubw0KPiA+ICBjb21tb24t
+b2JqLSQoQ09ORklHX0FTUEVFRF9TT0MpICs9IGFzcGVlZF9ydGMubw0KPiA+ICtjb21tb24tb2Jq
+LSQoQ09ORklHX0dPTERGSVNIX1JUQykgKz0gZ29sZGZpc2hfcnRjLm8NCj4gPiBkaWZmIC0tZ2l0
+IGEvaHcvcnRjL2dvbGRmaXNoX3J0Yy5jIGIvaHcvcnRjL2dvbGRmaXNoX3J0Yy5jIG5ldyBmaWxl
+DQo+ID4gbW9kZSAxMDA2NDQgaW5kZXggMDAwMDAwMDAwMC4uMjIzNjE2ZWQ3NQ0KPiA+IC0tLSAv
+ZGV2L251bGwNCj4gPiArKysgYi9ody9ydGMvZ29sZGZpc2hfcnRjLmMNCj4gPiBAQCAtMCwwICsx
+LDI3OCBAQA0KPiA+ICsvKg0KPiA+ICsgKiBHb2xkZmlzaCB2aXJ0dWFsIHBsYXRmb3JtIFJUQw0K
+PiA+ICsgKg0KPiA+ICsgKiBDb3B5cmlnaHQgKEMpIDIwMTkgV2VzdGVybiBEaWdpdGFsIENvcnBv
+cmF0aW9uIG9yIGl0cyBhZmZpbGlhdGVzLg0KPiA+ICsgKg0KPiA+ICsgKiBGb3IgbW9yZSBkZXRh
+aWxzIG9uIEdvb2dsZSBHb2xkZmlzaCB2aXJ0dWFsIHBsYXRmb3JtIHJlZmVyOg0KPiA+ICsgKg0K
+PiA+DQo+ICtodHRwczovL2FuZHJvaWQuZ29vZ2xlc291cmNlLmNvbS9wbGF0Zm9ybS9leHRlcm5h
+bC9xZW11LysvbWFzdGVyL2RvYw0KPiBzDQo+ID4gKy9HT0xERklTSC1WSVJUVUFMLUhBUkRXQVJF
+LlRYVA0KPiA+ICsgKg0KPiA+ICsgKiBUaGlzIHByb2dyYW0gaXMgZnJlZSBzb2Z0d2FyZTsgeW91
+IGNhbiByZWRpc3RyaWJ1dGUgaXQgYW5kL29yDQo+ID4gK21vZGlmeSBpdA0KPiA+ICsgKiB1bmRl
+ciB0aGUgdGVybXMgYW5kIGNvbmRpdGlvbnMgb2YgdGhlIEdOVSBHZW5lcmFsIFB1YmxpYyBMaWNl
+bnNlLA0KPiA+ICsgKiB2ZXJzaW9uIDIgb3IgbGF0ZXIsIGFzIHB1Ymxpc2hlZCBieSB0aGUgRnJl
+ZSBTb2Z0d2FyZSBGb3VuZGF0aW9uLg0KPiA+ICsgKg0KPiA+ICsgKiBUaGlzIHByb2dyYW0gaXMg
+ZGlzdHJpYnV0ZWQgaW4gdGhlIGhvcGUgaXQgd2lsbCBiZSB1c2VmdWwsIGJ1dA0KPiA+ICtXSVRI
+T1VUDQo+ID4gKyAqIEFOWSBXQVJSQU5UWTsgd2l0aG91dCBldmVuIHRoZSBpbXBsaWVkIHdhcnJh
+bnR5IG9mDQo+IE1FUkNIQU5UQUJJTElUWQ0KPiA+ICtvcg0KPiA+ICsgKiBGSVRORVNTIEZPUiBB
+IFBBUlRJQ1VMQVIgUFVSUE9TRS4gIFNlZSB0aGUgR05VIEdlbmVyYWwgUHVibGljDQo+ID4gK0xp
+Y2Vuc2UgZm9yDQo+ID4gKyAqIG1vcmUgZGV0YWlscy4NCj4gPiArICoNCj4gPiArICogWW91IHNo
+b3VsZCBoYXZlIHJlY2VpdmVkIGEgY29weSBvZiB0aGUgR05VIEdlbmVyYWwgUHVibGljIExpY2Vu
+c2UNCj4gPiArYWxvbmcgd2l0aA0KPiA+ICsgKiB0aGlzIHByb2dyYW0uICBJZiBub3QsIHNlZSA8
+aHR0cDovL3d3dy5nbnUub3JnL2xpY2Vuc2VzLz4uDQo+ID4gKyAqLw0KPiA+ICsNCj4gPiArI2lu
+Y2x1ZGUgInFlbXUvb3NkZXAuaCINCj4gPiArI2luY2x1ZGUgInFlbXUtY29tbW9uLmgiDQo+ID4g
+KyNpbmNsdWRlICJody90aW1lci9nb2xkZmlzaF9ydGMuaCINCj4gPiArI2luY2x1ZGUgIm1pZ3Jh
+dGlvbi92bXN0YXRlLmgiDQo+ID4gKyNpbmNsdWRlICJody9pcnEuaCINCj4gPiArI2luY2x1ZGUg
+Imh3L3FkZXYtcHJvcGVydGllcy5oIg0KPiA+ICsjaW5jbHVkZSAiaHcvc3lzYnVzLmgiDQo+ID4g
+KyNpbmNsdWRlICJxZW11L3RpbWVyLmgiDQo+ID4gKyNpbmNsdWRlICJzeXNlbXUvc3lzZW11Lmgi
+DQo+ID4gKyNpbmNsdWRlICJxZW11L2N1dGlscy5oIg0KPiA+ICsjaW5jbHVkZSAicWVtdS9sb2cu
+aCINCj4gPiArDQo+ID4gKyNkZWZpbmUgUlRDX1RJTUVfTE9XICAgICAgICAgICAgMHgwMA0KPiA+
+ICsjZGVmaW5lIFJUQ19USU1FX0hJR0ggICAgICAgICAgIDB4MDQNCj4gPiArI2RlZmluZSBSVENf
+QUxBUk1fTE9XICAgICAgICAgICAweDA4DQo+ID4gKyNkZWZpbmUgUlRDX0FMQVJNX0hJR0ggICAg
+ICAgICAgMHgwYw0KPiA+ICsjZGVmaW5lIFJUQ19JUlFfRU5BQkxFRCAgICAgICAgIDB4MTANCj4g
+PiArI2RlZmluZSBSVENfQ0xFQVJfQUxBUk0gICAgICAgICAweDE0DQo+ID4gKyNkZWZpbmUgUlRD
+X0FMQVJNX1NUQVRVUyAgICAgICAgMHgxOA0KPiA+ICsjZGVmaW5lIFJUQ19DTEVBUl9JTlRFUlJV
+UFQgICAgIDB4MWMNCj4gPiArDQo+ID4gK3N0YXRpYyB2b2lkIGdvbGRmaXNoX3J0Y191cGRhdGUo
+R29sZGZpc2hSVENTdGF0ZSAqcykgew0KPiA+ICsgICAgcWVtdV9zZXRfaXJxKHMtPmlycSwgKHMt
+PmlycV9wZW5kaW5nICYgcy0+aXJxX2VuYWJsZWQpID8gMSA6IDApOw0KPiA+ICt9DQo+ID4gKw0K
+PiA+ICtzdGF0aWMgdm9pZCBnb2xkZmlzaF9ydGNfaW50ZXJydXB0KHZvaWQgKm9wYXF1ZSkgew0K
+PiA+ICsgICAgR29sZGZpc2hSVENTdGF0ZSAqcyA9IChHb2xkZmlzaFJUQ1N0YXRlICopb3BhcXVl
+Ow0KPiA+ICsNCj4gPiArICAgIHMtPmFsYXJtX3J1bm5pbmcgPSAwOw0KPiA+ICsgICAgcy0+aXJx
+X3BlbmRpbmcgPSAxOw0KPiA+ICsgICAgZ29sZGZpc2hfcnRjX3VwZGF0ZShzKTsNCj4gPiArfQ0K
+PiA+ICsNCj4gPiArc3RhdGljIHVpbnQ2NF90IGdvbGRmaXNoX3J0Y19nZXRfY291bnQoR29sZGZp
+c2hSVENTdGF0ZSAqcykgew0KPiA+ICsgICAgcmV0dXJuIHMtPnRpY2tfb2Zmc2V0ICsgKHVpbnQ2
+NF90KXFlbXVfY2xvY2tfZ2V0X25zKHJ0Y19jbG9jayk7DQo+ID4gK30NCj4gPiArDQo+ID4gK3N0
+YXRpYyB2b2lkIGdvbGRmaXNoX3J0Y19jbGVhcl9hbGFybShHb2xkZmlzaFJUQ1N0YXRlICpzKSB7
+DQo+ID4gKyAgICB0aW1lcl9kZWwocy0+dGltZXIpOw0KPiA+ICsgICAgcy0+YWxhcm1fcnVubmlu
+ZyA9IDA7DQo+ID4gK30NCj4gPiArDQo+ID4gK3N0YXRpYyB2b2lkIGdvbGRmaXNoX3J0Y19zZXRf
+YWxhcm0oR29sZGZpc2hSVENTdGF0ZSAqcykgew0KPiA+ICsgICAgdWludDY0X3QgdGlja3MgPSBn
+b2xkZmlzaF9ydGNfZ2V0X2NvdW50KHMpOw0KPiA+ICsgICAgdWludDY0X3QgZXZlbnQgPSBzLT5h
+bGFybV9uZXh0Ow0KPiA+ICsNCj4gPiArICAgIGlmIChldmVudCA8PSB0aWNrcykgew0KPiA+ICsg
+ICAgICAgIGdvbGRmaXNoX3J0Y19jbGVhcl9hbGFybShzKTsNCj4gPiArICAgICAgICBnb2xkZmlz
+aF9ydGNfaW50ZXJydXB0KHMpOw0KPiA+ICsgICAgfSBlbHNlIHsNCj4gPiArICAgICAgICBpbnQ2
+NF90IG5vdyA9IHFlbXVfY2xvY2tfZ2V0X25zKHJ0Y19jbG9jayk7DQo+ID4gKyAgICAgICAgdGlt
+ZXJfbW9kKHMtPnRpbWVyLCBub3cgKyAoZXZlbnQgLSB0aWNrcykpOw0KPiANCj4gSXNuJ3QgdGhp
+cyBqdXN0OiBldmVudCAtIHMtPnRpY2tfb2Zmc2V0Pw0KDQpZZXMsIGVmZmVjdGl2ZWx5IGl0IGlz
+ICJldmVudCAtIHMtPnRpY2tfb2Zmc2V0IiBidXQgSSBmZWx0DQpjdXJyZW50IGNvZGUgaXMgbW9y
+ZSByZWFkYWJsZS4NCg0KSSB0aGluayBJIHdpbGwganVzdCBhZGQgYSBkZXRhaWxlZCBjb21tZW50
+IGhlcmUgdGhhdA0KIiBub3cgKyAoZXZlbnQgLSB0aWNrcykgPSBldmVudCAtIHMtPnRpY2tfb2Zm
+c2V0IiBhbmQNCnVzZSAiZXZlbnQgLSBzLT50aWNrX29mZnNldCIuDQoNCj4gDQo+ID4gKyAgICAg
+ICAgcy0+YWxhcm1fcnVubmluZyA9IDE7DQo+ID4gKyAgICB9DQo+ID4gK30NCj4gPiArDQo+ID4g
+K3N0YXRpYyB1aW50NjRfdCBnb2xkZmlzaF9ydGNfcmVhZCh2b2lkICpvcGFxdWUsIGh3YWRkciBv
+ZmZzZXQsDQo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB1bnNpZ25lZCBz
+aXplKSB7DQo+ID4gKyAgICBHb2xkZmlzaFJUQ1N0YXRlICpzID0gKEdvbGRmaXNoUlRDU3RhdGUg
+KilvcGFxdWU7DQo+ID4gKyAgICB1aW50NjRfdCByOw0KPiANCj4gVGhlcmUgc2hvdWxkIGJlIGEg
+dHJhY2Ugb3IgZGVidWcgcHJpbnQgc2hvd2luZyByZWFkL3dyaXRlIG9wZXJhdGlvbnMuDQoNClN1
+cmUsIEkgd2lsbCBhZGQgaW4gbmV4dCByZXZpc2lvbi4NCg0KPiANCj4gPiArDQo+ID4gKyAgICBz
+d2l0Y2ggKG9mZnNldCkgew0KPiA+ICsgICAgY2FzZSBSVENfVElNRV9MT1c6DQo+ID4gKyAgICAg
+ICAgciA9IGdvbGRmaXNoX3J0Y19nZXRfY291bnQocykgJiAweGZmZmZmZmZmOw0KPiA+ICsgICAg
+ICAgIGJyZWFrOw0KPiA+ICsgICAgY2FzZSBSVENfVElNRV9ISUdIOg0KPiA+ICsgICAgICAgIHIg
+PSBnb2xkZmlzaF9ydGNfZ2V0X2NvdW50KHMpID4+IDMyOw0KPiA+ICsgICAgICAgIGJyZWFrOw0K
+PiA+ICsgICAgY2FzZSBSVENfQUxBUk1fTE9XOg0KPiA+ICsgICAgICAgIHIgPSBzLT5hbGFybV9u
+ZXh0ICYgMHhmZmZmZmZmZjsNCj4gPiArICAgICAgICBicmVhazsNCj4gPiArICAgIGNhc2UgUlRD
+X0FMQVJNX0hJR0g6DQo+ID4gKyAgICAgICAgciA9IHMtPmFsYXJtX25leHQgPj4gMzI7DQo+ID4g
+KyAgICAgICAgYnJlYWs7DQo+ID4gKyAgICBjYXNlIFJUQ19JUlFfRU5BQkxFRDoNCj4gPiArICAg
+ICAgICByID0gcy0+aXJxX2VuYWJsZWQ7DQo+ID4gKyAgICAgICAgYnJlYWs7DQo+ID4gKyAgICBj
+YXNlIFJUQ19BTEFSTV9TVEFUVVM6DQo+ID4gKyAgICAgICAgciA9IHMtPmFsYXJtX3J1bm5pbmc7
+DQo+ID4gKyAgICAgICAgYnJlYWs7DQo+ID4gKyAgICBkZWZhdWx0Og0KPiA+ICsgICAgICAgIHFl
+bXVfbG9nX21hc2soTE9HX0dVRVNUX0VSUk9SLA0KPiA+ICsgICAgICAgICAgICAgICAgICAgICAg
+ImdvbGRmaXNoX3J0Y19yZWFkOiBCYWQgb2Zmc2V0IDB4JXhcbiIsIChpbnQpb2Zmc2V0KTsNCj4g
+PiArICAgICAgICByID0gMDsNCj4gDQo+IEp1c3Qgc2V0IDAgYXMgdGhlIGluaXQgdmFsdWUgYW5k
+IHJlbW92ZSB0aGlzLg0KDQpPa2F5LCBzdXJlLg0KDQo+IA0KPiA+ICsgICAgICAgIGJyZWFrOw0K
+PiA+ICsgICAgfQ0KPiA+ICsNCj4gPiArICAgIHJldHVybiByOw0KPiA+ICt9DQo+ID4gKw0KPiA+
+ICtzdGF0aWMgdm9pZCBnb2xkZmlzaF9ydGNfd3JpdGUodm9pZCAqb3BhcXVlLCBod2FkZHIgb2Zm
+c2V0LA0KPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgdWludDY0X3QgdmFsdWUs
+IHVuc2lnbmVkIHNpemUpIHsNCj4gPiArICAgIHVpbnQ2NF90IGN1cnJlbnRfdGljaywgbmV3X3Rp
+Y2s7DQo+ID4gKyAgICBHb2xkZmlzaFJUQ1N0YXRlICpzID0gKEdvbGRmaXNoUlRDU3RhdGUgKilv
+cGFxdWU7DQo+IA0KPiBUaGUgc3RhdGUgc3RydWN0IHNob3VsZCBiZSBmaXJzdC4NCg0KT2theSwg
+SSB3aWxsIHVwZGF0ZS4NCg0KPiANCj4gPiArDQo+ID4gKyAgICBzd2l0Y2ggKG9mZnNldCkgew0K
+PiA+ICsgICAgY2FzZSBSVENfVElNRV9MT1c6DQo+ID4gKyAgICAgICAgY3VycmVudF90aWNrID0g
+Z29sZGZpc2hfcnRjX2dldF9jb3VudChzKTsNCj4gPiArICAgICAgICBuZXdfdGljayA9IGN1cnJl
+bnRfdGljayAmICgweGZmZmZmZmZmVUxMIDw8IDMyKTsNCj4gPiArICAgICAgICBuZXdfdGljayB8
+PSB2YWx1ZTsNCj4gPiArICAgICAgICBzLT50aWNrX29mZnNldCArPSBuZXdfdGljayAtIGN1cnJl
+bnRfdGljazsNCj4gPiArICAgICAgICBicmVhazsNCj4gPiArICAgIGNhc2UgUlRDX1RJTUVfSElH
+SDoNCj4gPiArICAgICAgICBjdXJyZW50X3RpY2sgPSBnb2xkZmlzaF9ydGNfZ2V0X2NvdW50KHMp
+Ow0KPiA+ICsgICAgICAgIG5ld190aWNrID0gY3VycmVudF90aWNrICYgMHhmZmZmZmZmZlVMTDsN
+Cj4gPiArICAgICAgICBuZXdfdGljayB8PSAodmFsdWUgPDwgMzIpOw0KPiA+ICsgICAgICAgIHMt
+PnRpY2tfb2Zmc2V0ICs9IG5ld190aWNrIC0gY3VycmVudF90aWNrOw0KPiA+ICsgICAgICAgIGJy
+ZWFrOw0KPiA+ICsgICAgY2FzZSBSVENfQUxBUk1fTE9XOg0KPiA+ICsgICAgICAgIHMtPmFsYXJt
+X25leHQgJj0gKDB4ZmZmZmZmZmZVTEwgPDwgMzIpOw0KPiA+ICsgICAgICAgIHMtPmFsYXJtX25l
+eHQgfD0gdmFsdWU7DQo+ID4gKyAgICAgICAgZ29sZGZpc2hfcnRjX3NldF9hbGFybShzKTsNCj4g
+PiArICAgICAgICBicmVhazsNCj4gPiArICAgIGNhc2UgUlRDX0FMQVJNX0hJR0g6DQo+ID4gKyAg
+ICAgICAgcy0+YWxhcm1fbmV4dCAmPSAweGZmZmZmZmZmVUxMOw0KPiA+ICsgICAgICAgIHMtPmFs
+YXJtX25leHQgfD0gKHZhbHVlIDw8IDMyKTsNCj4gPiArICAgICAgICBicmVhazsNCj4gPiArICAg
+IGNhc2UgUlRDX0lSUV9FTkFCTEVEOg0KPiA+ICsgICAgICAgIHMtPmlycV9lbmFibGVkID0gKHVp
+bnQzMl90KSh2YWx1ZSAmIDB4MSk7DQo+ID4gKyAgICAgICAgZ29sZGZpc2hfcnRjX3VwZGF0ZShz
+KTsNCj4gPiArICAgICAgICBicmVhazsNCj4gPiArICAgIGNhc2UgUlRDX0NMRUFSX0FMQVJNOg0K
+PiA+ICsgICAgICAgIGdvbGRmaXNoX3J0Y19jbGVhcl9hbGFybShzKTsNCj4gPiArICAgICAgICBi
+cmVhazsNCj4gPiArICAgIGNhc2UgUlRDX0NMRUFSX0lOVEVSUlVQVDoNCj4gPiArICAgICAgICBz
+LT5pcnFfcGVuZGluZyA9IDA7DQo+ID4gKyAgICAgICAgZ29sZGZpc2hfcnRjX3VwZGF0ZShzKTsN
+Cj4gPiArICAgICAgICBicmVhazsNCj4gPiArICAgIGRlZmF1bHQ6DQo+ID4gKyAgICAgICAgcWVt
+dV9sb2dfbWFzayhMT0dfR1VFU1RfRVJST1IsDQo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAi
+Z29sZGZpc2hfcnRjX3dyaXRlOiBCYWQgb2Zmc2V0IDB4JXhcbiIsIChpbnQpb2Zmc2V0KTsNCj4g
+PiArICAgICAgICBicmVhazsNCj4gPiArICAgIH0NCj4gPiArfQ0KPiA+ICsNCj4gPiArc3RhdGlj
+IGludCBnb2xkZmlzaF9ydGNfcHJlX3NhdmUodm9pZCAqb3BhcXVlKSB7DQo+ID4gKyAgICB1aW50
+NjRfdCBkZWx0YTsNCj4gPiArICAgIEdvbGRmaXNoUlRDU3RhdGUgKnMgPSBvcGFxdWU7DQo+ID4g
+Kw0KPiA+ICsgICAgLyoNCj4gPiArICAgICAqIFdlIHdhbnQgdG8gbWlncmF0ZSB0aGlzIG9mZnNl
+dCwgd2hpY2ggc291bmRzIHN0cmFpZ2h0Zm9yd2FyZC4NCj4gPiArICAgICAqIFVuZm9ydHVuYXRl
+bHksIHdlIGNhbm5vdCBkaXJlY3RseSBwYXNzIHRpY2tfb2Zmc2V0IGJlY2F1c2UNCj4gPiArICAg
+ICAqIHJ0Y19jbG9jayBvbiBkZXN0aW5ldGlvbiBIb3N0IG1pZ2h0IG5vdCBiZSBzYW1lIHNvdXJj
+ZSBIb3N0Lg0KPiANCj4gcy9kZXN0aW5ldGlvbi9kZXN0aW5hdGlvbi9nDQo+IA0KPiBhbmQgYmVs
+b3cgYXMgd2VsbC4NCg0KU3VyZSwgSSB3aWxsIGZpeCB0aGUgdHlwby4NCg0KPiANCj4gQWxpc3Rh
+aXINCj4gDQo+ID4gKyAgICAgKg0KPiA+ICsgICAgICogVG8gdGFja2xlLCB0aGlzIHdlIHBhc3Mg
+dGlja19vZmZzZXQgcmVsYXRpdmUgdG8gdm1fY2xvY2sgZnJvbQ0KPiA+ICsgICAgICogc291cmNl
+IEhvc3QgYW5kIG1ha2UgaXQgcmVsYXRpdmUgdG8gcnRjX2Nsb2NrIGF0IGRlc3RpbmV0aW9uIEhv
+c3QuDQo+ID4gKyAgICAgKi8NCj4gPiArICAgIGRlbHRhID0gcWVtdV9jbG9ja19nZXRfbnMocnRj
+X2Nsb2NrKSAtDQo+ID4gKyAgICAgICAgICAgIHFlbXVfY2xvY2tfZ2V0X25zKFFFTVVfQ0xPQ0tf
+VklSVFVBTCk7DQo+ID4gKyAgICBzLT50aWNrX29mZnNldF92bXN0YXRlID0gcy0+dGlja19vZmZz
+ZXQgKyBkZWx0YTsNCj4gPiArDQo+ID4gKyAgICByZXR1cm4gMDsNCj4gPiArfQ0KPiA+ICsNCj4g
+PiArc3RhdGljIGludCBnb2xkZmlzaF9ydGNfcG9zdF9sb2FkKHZvaWQgKm9wYXF1ZSwgaW50IHZl
+cnNpb25faWQpIHsNCj4gPiArICAgIHVpbnQ2NF90IGRlbHRhOw0KPiA+ICsgICAgR29sZGZpc2hS
+VENTdGF0ZSAqcyA9IG9wYXF1ZTsNCj4gPiArDQo+ID4gKyAgICAvKg0KPiA+ICsgICAgICogV2Ug
+ZXh0cmFjdCB0aWNrX29mZnNldCBmcm9tIHRpY2tfb2Zmc2V0X3Ztc3RhdGUgYnkgZG9pbmcNCj4g
+PiArICAgICAqIHJldmVyc2UgbWF0aCBjb21wYXJlZCB0byBwcmVfc2F2ZSgpIGZ1bmN0aW9uLg0K
+PiA+ICsgICAgICovDQo+ID4gKyAgICBkZWx0YSA9IHFlbXVfY2xvY2tfZ2V0X25zKHJ0Y19jbG9j
+aykgLQ0KPiA+ICsgICAgICAgICAgICBxZW11X2Nsb2NrX2dldF9ucyhRRU1VX0NMT0NLX1ZJUlRV
+QUwpOw0KPiA+ICsgICAgcy0+dGlja19vZmZzZXQgPSBzLT50aWNrX29mZnNldF92bXN0YXRlIC0g
+ZGVsdGE7DQo+ID4gKw0KPiA+ICsgICAgcmV0dXJuIDA7DQo+ID4gK30NCj4gPiArDQo+ID4gK3N0
+YXRpYyBjb25zdCBNZW1vcnlSZWdpb25PcHMgZ29sZGZpc2hfcnRjX29wcyA9IHsNCj4gPiArICAg
+IC5yZWFkID0gZ29sZGZpc2hfcnRjX3JlYWQsDQo+ID4gKyAgICAud3JpdGUgPSBnb2xkZmlzaF9y
+dGNfd3JpdGUsDQo+ID4gKyAgICAuZW5kaWFubmVzcyA9IERFVklDRV9MSVRUTEVfRU5ESUFOLA0K
+PiA+ICsgICAgLnZhbGlkID0gew0KPiA+ICsgICAgICAgIC5taW5fYWNjZXNzX3NpemUgPSA0LA0K
+PiA+ICsgICAgICAgIC5tYXhfYWNjZXNzX3NpemUgPSA0DQo+ID4gKyAgICB9DQo+ID4gK307DQo+
+ID4gKw0KPiA+ICtzdGF0aWMgY29uc3QgVk1TdGF0ZURlc2NyaXB0aW9uIGdvbGRmaXNoX3J0Y192
+bXN0YXRlID0gew0KPiA+ICsgICAgLm5hbWUgPSBUWVBFX0dPTERGSVNIX1JUQywNCj4gPiArICAg
+IC52ZXJzaW9uX2lkID0gMSwNCj4gPiArICAgIC5wcmVfc2F2ZSA9IGdvbGRmaXNoX3J0Y19wcmVf
+c2F2ZSwNCj4gPiArICAgIC5wb3N0X2xvYWQgPSBnb2xkZmlzaF9ydGNfcG9zdF9sb2FkLA0KPiA+
+ICsgICAgLmZpZWxkcyA9IChWTVN0YXRlRmllbGRbXSkgew0KPiA+ICsgICAgICAgIFZNU1RBVEVf
+VUlOVDY0KHRpY2tfb2Zmc2V0X3Ztc3RhdGUsIEdvbGRmaXNoUlRDU3RhdGUpLA0KPiA+ICsgICAg
+ICAgIFZNU1RBVEVfVUlOVDY0KGFsYXJtX25leHQsIEdvbGRmaXNoUlRDU3RhdGUpLA0KPiA+ICsg
+ICAgICAgIFZNU1RBVEVfVUlOVDMyKGFsYXJtX3J1bm5pbmcsIEdvbGRmaXNoUlRDU3RhdGUpLA0K
+PiA+ICsgICAgICAgIFZNU1RBVEVfVUlOVDMyKGlycV9wZW5kaW5nLCBHb2xkZmlzaFJUQ1N0YXRl
+KSwNCj4gPiArICAgICAgICBWTVNUQVRFX1VJTlQzMihpcnFfZW5hYmxlZCwgR29sZGZpc2hSVENT
+dGF0ZSksDQo+ID4gKyAgICAgICAgVk1TVEFURV9FTkRfT0ZfTElTVCgpDQo+ID4gKyAgICB9DQo+
+ID4gK307DQo+ID4gKw0KPiA+ICtzdGF0aWMgdm9pZCBnb2xkZmlzaF9ydGNfcmVzZXQoRGV2aWNl
+U3RhdGUgKmRldikgew0KPiA+ICsgICAgR29sZGZpc2hSVENTdGF0ZSAqcyA9IEdPTERGSVNIX1JU
+QyhkZXYpOw0KPiA+ICsgICAgc3RydWN0IHRtIHRtOw0KPiA+ICsNCj4gPiArICAgIHRpbWVyX2Rl
+bChzLT50aW1lcik7DQo+ID4gKw0KPiA+ICsgICAgcWVtdV9nZXRfdGltZWRhdGUoJnRtLCAwKTsN
+Cj4gPiArICAgIHMtPnRpY2tfb2Zmc2V0ID0gbWt0aW1lZ20oJnRtKTsNCj4gPiArICAgIHMtPnRp
+Y2tfb2Zmc2V0ICo9IE5BTk9TRUNPTkRTX1BFUl9TRUNPTkQ7DQo+ID4gKyAgICBzLT50aWNrX29m
+ZnNldCAtPSBxZW11X2Nsb2NrX2dldF9ucyhydGNfY2xvY2spOw0KPiA+ICsgICAgcy0+dGlja19v
+ZmZzZXRfdm1zdGF0ZSA9IDA7DQo+ID4gKyAgICBzLT5hbGFybV9uZXh0ID0gMDsNCj4gPiArICAg
+IHMtPmFsYXJtX3J1bm5pbmcgPSAwOw0KPiA+ICsgICAgcy0+aXJxX3BlbmRpbmcgPSAwOw0KPiA+
+ICsgICAgcy0+aXJxX2VuYWJsZWQgPSAwOw0KPiA+ICt9DQo+ID4gKw0KPiA+ICtzdGF0aWMgdm9p
+ZCBnb2xkZmlzaF9ydGNfcmVhbGl6ZShEZXZpY2VTdGF0ZSAqZCwgRXJyb3IgKiplcnJwKSB7DQo+
+ID4gKyAgICBTeXNCdXNEZXZpY2UgKmRldiA9IFNZU19CVVNfREVWSUNFKGQpOw0KPiA+ICsgICAg
+R29sZGZpc2hSVENTdGF0ZSAqcyA9IEdPTERGSVNIX1JUQyhkKTsNCj4gPiArDQo+ID4gKyAgICBt
+ZW1vcnlfcmVnaW9uX2luaXRfaW8oJnMtPmlvbWVtLCBPQkpFQ1QocyksICZnb2xkZmlzaF9ydGNf
+b3BzLCBzLA0KPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICJnb2xkZmlzaF9ydGMiLCAw
+eDEwMDApOw0KPiA+ICsgICAgc3lzYnVzX2luaXRfbW1pbyhkZXYsICZzLT5pb21lbSk7DQo+ID4g
+Kw0KPiA+ICsgICAgc3lzYnVzX2luaXRfaXJxKGRldiwgJnMtPmlycSk7DQo+ID4gKw0KPiA+ICsg
+ICAgcy0+dGltZXIgPSB0aW1lcl9uZXdfbnMocnRjX2Nsb2NrLCBnb2xkZmlzaF9ydGNfaW50ZXJy
+dXB0LCBzKTsgfQ0KPiA+ICsNCj4gPiArc3RhdGljIHZvaWQgZ29sZGZpc2hfcnRjX2NsYXNzX2lu
+aXQoT2JqZWN0Q2xhc3MgKmtsYXNzLCB2b2lkICpkYXRhKSB7DQo+ID4gKyAgICBEZXZpY2VDbGFz
+cyAqZGMgPSBERVZJQ0VfQ0xBU1Moa2xhc3MpOw0KPiA+ICsNCj4gPiArICAgIGRjLT5yZWFsaXpl
+ID0gZ29sZGZpc2hfcnRjX3JlYWxpemU7DQo+ID4gKyAgICBkYy0+cmVzZXQgPSBnb2xkZmlzaF9y
+dGNfcmVzZXQ7DQo+ID4gKyAgICBkYy0+dm1zZCA9ICZnb2xkZmlzaF9ydGNfdm1zdGF0ZTsgfQ0K
+PiA+ICsNCj4gPiArc3RhdGljIGNvbnN0IFR5cGVJbmZvIGdvbGRmaXNoX3J0Y19pbmZvID0gew0K
+PiA+ICsgICAgLm5hbWUgICAgICAgICAgPSBUWVBFX0dPTERGSVNIX1JUQywNCj4gPiArICAgIC5w
+YXJlbnQgICAgICAgID0gVFlQRV9TWVNfQlVTX0RFVklDRSwNCj4gPiArICAgIC5pbnN0YW5jZV9z
+aXplID0gc2l6ZW9mKEdvbGRmaXNoUlRDU3RhdGUpLA0KPiA+ICsgICAgLmNsYXNzX2luaXQgICAg
+PSBnb2xkZmlzaF9ydGNfY2xhc3NfaW5pdCwNCj4gPiArfTsNCj4gPiArDQo+ID4gK3N0YXRpYyB2
+b2lkIGdvbGRmaXNoX3J0Y19yZWdpc3Rlcl90eXBlcyh2b2lkKSB7DQo+ID4gKyAgICB0eXBlX3Jl
+Z2lzdGVyX3N0YXRpYygmZ29sZGZpc2hfcnRjX2luZm8pOw0KPiA+ICt9DQo+ID4gKw0KPiA+ICt0
+eXBlX2luaXQoZ29sZGZpc2hfcnRjX3JlZ2lzdGVyX3R5cGVzKQ0KPiA+IGRpZmYgLS1naXQgYS9p
+bmNsdWRlL2h3L3RpbWVyL2dvbGRmaXNoX3J0Yy5oDQo+ID4gYi9pbmNsdWRlL2h3L3RpbWVyL2dv
+bGRmaXNoX3J0Yy5oIG5ldyBmaWxlIG1vZGUgMTAwNjQ0IGluZGV4DQo+ID4gMDAwMDAwMDAwMC4u
+ZGZiNmQ3MGI4Ng0KPiA+IC0tLSAvZGV2L251bGwNCj4gPiArKysgYi9pbmNsdWRlL2h3L3RpbWVy
+L2dvbGRmaXNoX3J0Yy5oDQo+ID4gQEAgLTAsMCArMSw0NiBAQA0KPiA+ICsvKg0KPiA+ICsgKiBH
+b2xkZmlzaCB2aXJ0dWFsIHBsYXRmb3JtIFJUQw0KPiA+ICsgKg0KPiA+ICsgKiBDb3B5cmlnaHQg
+KEMpIDIwMTkgV2VzdGVybiBEaWdpdGFsIENvcnBvcmF0aW9uIG9yIGl0cyBhZmZpbGlhdGVzLg0K
+PiA+ICsgKg0KPiA+ICsgKiBGb3IgbW9yZSBkZXRhaWxzIG9uIEdvb2dsZSBHb2xkZmlzaCB2aXJ0
+dWFsIHBsYXRmb3JtIHJlZmVyOg0KPiA+ICsgKg0KPiA+DQo+ICtodHRwczovL2FuZHJvaWQuZ29v
+Z2xlc291cmNlLmNvbS9wbGF0Zm9ybS9leHRlcm5hbC9xZW11LysvbWFzdGVyL2RvYw0KPiBzDQo+
+ID4gKy9HT0xERklTSC1WSVJUVUFMLUhBUkRXQVJFLlRYVA0KPiA+ICsgKg0KPiA+ICsgKiBUaGlz
+IHByb2dyYW0gaXMgZnJlZSBzb2Z0d2FyZTsgeW91IGNhbiByZWRpc3RyaWJ1dGUgaXQgYW5kL29y
+DQo+ID4gK21vZGlmeSBpdA0KPiA+ICsgKiB1bmRlciB0aGUgdGVybXMgYW5kIGNvbmRpdGlvbnMg
+b2YgdGhlIEdOVSBHZW5lcmFsIFB1YmxpYyBMaWNlbnNlLA0KPiA+ICsgKiB2ZXJzaW9uIDIgb3Ig
+bGF0ZXIsIGFzIHB1Ymxpc2hlZCBieSB0aGUgRnJlZSBTb2Z0d2FyZSBGb3VuZGF0aW9uLg0KPiA+
+ICsgKg0KPiA+ICsgKiBUaGlzIHByb2dyYW0gaXMgZGlzdHJpYnV0ZWQgaW4gdGhlIGhvcGUgaXQg
+d2lsbCBiZSB1c2VmdWwsIGJ1dA0KPiA+ICtXSVRIT1VUDQo+ID4gKyAqIEFOWSBXQVJSQU5UWTsg
+d2l0aG91dCBldmVuIHRoZSBpbXBsaWVkIHdhcnJhbnR5IG9mDQo+IE1FUkNIQU5UQUJJTElUWQ0K
+PiA+ICtvcg0KPiA+ICsgKiBGSVRORVNTIEZPUiBBIFBBUlRJQ1VMQVIgUFVSUE9TRS4gIFNlZSB0
+aGUgR05VIEdlbmVyYWwgUHVibGljDQo+ID4gK0xpY2Vuc2UgZm9yDQo+ID4gKyAqIG1vcmUgZGV0
+YWlscy4NCj4gPiArICoNCj4gPiArICogWW91IHNob3VsZCBoYXZlIHJlY2VpdmVkIGEgY29weSBv
+ZiB0aGUgR05VIEdlbmVyYWwgUHVibGljIExpY2Vuc2UNCj4gPiArYWxvbmcgd2l0aA0KPiA+ICsg
+KiB0aGlzIHByb2dyYW0uICBJZiBub3QsIHNlZSA8aHR0cDovL3d3dy5nbnUub3JnL2xpY2Vuc2Vz
+Lz4uDQo+ID4gKyAqLw0KPiA+ICsNCj4gPiArI2lmbmRlZiBIV19USU1FUl9HT0xERklTSF9SVENf
+SA0KPiA+ICsjZGVmaW5lIEhXX1RJTUVSX0dPTERGSVNIX1JUQ19IDQo+ID4gKw0KPiA+ICsjaW5j
+bHVkZSAiaHcvc3lzYnVzLmgiDQo+ID4gKw0KPiA+ICsjZGVmaW5lIFRZUEVfR09MREZJU0hfUlRD
+ICJnb2xkZmlzaF9ydGMiDQo+ID4gKyNkZWZpbmUgR09MREZJU0hfUlRDKG9iaikgXA0KPiA+ICtP
+QkpFQ1RfQ0hFQ0soR29sZGZpc2hSVENTdGF0ZSwgKG9iaiksIFRZUEVfR09MREZJU0hfUlRDKQ0K
+PiA+ICsNCj4gPiArdHlwZWRlZiBzdHJ1Y3QgR29sZGZpc2hSVENTdGF0ZSB7DQo+ID4gKyAgICBT
+eXNCdXNEZXZpY2UgcGFyZW50X29iajsNCj4gPiArDQo+ID4gKyAgICBNZW1vcnlSZWdpb24gaW9t
+ZW07DQo+ID4gKyAgICBRRU1VVGltZXIgKnRpbWVyOw0KPiA+ICsgICAgcWVtdV9pcnEgaXJxOw0K
+PiA+ICsNCj4gPiArICAgIHVpbnQ2NF90IHRpY2tfb2Zmc2V0Ow0KPiA+ICsgICAgdWludDY0X3Qg
+dGlja19vZmZzZXRfdm1zdGF0ZTsNCj4gPiArICAgIHVpbnQ2NF90IGFsYXJtX25leHQ7DQo+ID4g
+KyAgICB1aW50MzJfdCBhbGFybV9ydW5uaW5nOw0KPiA+ICsgICAgdWludDMyX3QgaXJxX3BlbmRp
+bmc7DQo+ID4gKyAgICB1aW50MzJfdCBpcnFfZW5hYmxlZDsNCj4gPiArfSBHb2xkZmlzaFJUQ1N0
+YXRlOw0KPiA+ICsNCj4gPiArI2VuZGlmDQo+ID4gLS0NCj4gPiAyLjE3LjENCj4gPg0KPiA+DQoN
+ClJlZ2FyZHMsDQpBbnVwDQo=
 
