@@ -1,69 +1,119 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iN1b3-0000eo-UD
-	for mharc-qemu-riscv@gnu.org; Tue, 22 Oct 2019 17:21:41 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:51525)
+	id 1iNAGU-0002IR-2X
+	for mharc-qemu-riscv@gnu.org; Wed, 23 Oct 2019 02:37:02 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:37922)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <dayeol@berkeley.edu>) id 1iN1b1-0000bn-3T
- for qemu-riscv@nongnu.org; Tue, 22 Oct 2019 17:21:40 -0400
+ (envelope-from <prvs=192d452e1=Anup.Patel@wdc.com>)
+ id 1iNAGQ-0002I3-6K
+ for qemu-riscv@nongnu.org; Wed, 23 Oct 2019 02:36:59 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <dayeol@berkeley.edu>) id 1iN1az-0001ep-HE
- for qemu-riscv@nongnu.org; Tue, 22 Oct 2019 17:21:38 -0400
-Received: from mail-qt1-x842.google.com ([2607:f8b0:4864:20::842]:42600)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <dayeol@berkeley.edu>) id 1iN1az-0001eL-4Y
- for qemu-riscv@nongnu.org; Tue, 22 Oct 2019 17:21:37 -0400
-Received: by mail-qt1-x842.google.com with SMTP id w14so29046566qto.9
- for <qemu-riscv@nongnu.org>; Tue, 22 Oct 2019 14:21:35 -0700 (PDT)
+ (envelope-from <prvs=192d452e1=Anup.Patel@wdc.com>)
+ id 1iNAGO-0004pY-Qz
+ for qemu-riscv@nongnu.org; Wed, 23 Oct 2019 02:36:57 -0400
+Received: from esa3.hgst.iphmx.com ([216.71.153.141]:1630)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <prvs=192d452e1=Anup.Patel@wdc.com>)
+ id 1iNAGO-0004mI-1h; Wed, 23 Oct 2019 02:36:56 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1571812616; x=1603348616;
+ h=from:to:cc:subject:date:message-id:
+ content-transfer-encoding:mime-version;
+ bh=k9e7P2ba8d3jSmt6uTKIogq9CCsN1t3c8xXyv75xIHY=;
+ b=LgBf9YBFORg4m0mWskY7JFdOTJ17RGIbwFOyZUvNhl5NB8XN4PcwXdrk
+ 8hlgIV2GKUQk93bdmwAlMOA3lzaHZPA/vYI9h2NyguBOL17jjkwU0Oktl
+ LJTsa7d4t94XDfmukezcqRMiW/OO5u6vzkxG3V08zN/d9XhpR/aPO2zcI
+ BroaB/xiUtPbTQM/IXroywCwMm/balV74SsDdZmr3doyX705tEqijORyH
+ cEgpG0kSRCqiDmtYDomxLkuF/+3KZveMLeErvjWr+CLvIWMTTwjqCd/C4
+ iDTXqX8+jUCF0h7wlioCWdYPwqzuaNLmnwA+GWf8TB/4j1cY84vzu3xwO Q==;
+IronPort-SDR: aPxouPEAc4Iq0pLnDgeCu64R1w0vEk+imhhQf5Er1iWn8L2OpJqEzcTP+HMji7KSCPxGYknmwc
+ 54IduAf2V7NH9RkORsuqa0XDR02s7HufHbc/8LesGJsGgAV8nkIzZyOKX8mpSxheZTmFCbq5Hd
+ 8zP1mWYKGOnNAcODVxbYWugrL7iHgy4nLo+RBXVrlvpY6f2AEtNYHtY1EYoE4FqZ4UQ+T7M/qc
+ qN9vBaRDTjT/h2nBzWcFDNjxgInQ3Zjnp8D6LFZaLJQyvx2w1j939K/RiAjI7AIH7AGCNEkwLv
+ 4DE=
+X-IronPort-AV: E=Sophos;i="5.68,219,1569254400"; d="scan'208";a="125553536"
+Received: from mail-sn1nam02lp2058.outbound.protection.outlook.com (HELO
+ NAM02-SN1-obe.outbound.protection.outlook.com) ([104.47.36.58])
+ by ob1.hgst.iphmx.com with ESMTP; 23 Oct 2019 14:36:50 +0800
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=Zikt5u+IYNBQecGtrgEsrlOZ5U4SCzOTcGsvMQvWS/sYry95uUBHyFItSmr427JTBU+yjKKtmEVF6f9aW4P6Fbf5TviLjggWTJX8ZDkH3xh2tHDSCRQsQaaXm7hiImnuGmEVnuV/QlHQ2Qqp4wE62sOcw2n7N+U+144NS86n96az2Y1vd17TvL30z9fQMiANMrpvL902gUlNMGSSafmGlL++GIg0qvv1WoPIJy3aJkJGI3LhrHrESdpUoeDN9CgbAc3XbkGuWdrGpmmnhphGsri0/z9oO2cnfnZB1Gf9ucpfsibRpQvaHXssDCMNsuQeq58d6rSSfvuIWAt0J/RvwA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Z/D6TBRFSN+I3Fyk8YyVx9TTcXOnUZmE2l7vYpxB+9I=;
+ b=VeiIS2buMUMMHeX0NcP9z0FeCLzbXIs7ITGJthg2Wcxz+h3J/E4fR4soZK3VKVcV3jvU5x0zE8RmDr9E49xX7tR3V7xZbBedPMEvivnW15zVtBa1qAg+AR87UTZorqxL4d3kc1RdM8ud64IwbeJuNx394spfWnIOpQR9u/DbpNZStGIU3MyLYg/kQrwhgen+OOCF1HnsiCW0bd1D3wA1vhuX5fq8Xp9x1lzxS8a+MfYqsSvfASjk9Kc0Ax/gDkzlrCehxI12UPzOLAqw+KUjMuKhSg2YY+iv/3gLqoct+MQFOCFIG51xJbQy1R3haWIKe7qyqWexHJF6U3bylBKyhQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=wdc.com; dmarc=pass action=none header.from=wdc.com; dkim=pass
+ header.d=wdc.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=berkeley-edu.20150623.gappssmtp.com; s=20150623;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=4ciWYO+JQTfvwrYJqiccgIFokh0umLIjCGNk8VTvZkI=;
- b=cVTdazFlt+E+xN+sUem5370SgcTGwyhjVxJXbzsYy5by9y4njNglJcHtu5y8/bCCo4
- zH3mOFyd9FNKLwkhqVHzDkEi2P/yryiJ0of76nnqxTUFoAYWpXE5Mr1UZKzjez4E0BOd
- lqrlYqirqnyc1aXGMbQwsiTV85oPWafEVzjCedjHurVnBmPA8e6D4hOj5cekY2OmmJIQ
- 6nX9Xrfl3gFQ0hTlIQrK858UdOBWept0FA9qnCnIk3ZBCbaUjdMDAFBEC1mTK95Wh+42
- +Ya05P/CM77DB3u9Cfg8tAQOUj+hC4FvIPbUJZ3CfO0RiU2TETaBiGXzc9Ri89HbP3vw
- kFxg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=4ciWYO+JQTfvwrYJqiccgIFokh0umLIjCGNk8VTvZkI=;
- b=VdgsGRx0+B7DrRkktJMaUHE71NwvxZBkwRTwSjHOF1pO8M/P/LwYW4ZmKL9AHqcSNp
- RdBaaAf9MTIFRNz23DoR/ZuTs4EyQw2Rn8MEjzPSMmh116HUYfMhKn5DPCmdUJyu335M
- 2oFDb9eYbZWZa9+gbTOPxBcC3QTKE7qjlbH2SzLtU+wpNcXpn+MEaQblfjIZ9nbems0z
- Wczdybm5EQ6rK9FAlRcwH+49kiSBIc8ZPo5qKFn8TMhB7zaGD6vfwRZTWyCtlju/3KH4
- zGhhLSSQFZZy47n+hgJQypFgFAhiz/VK/6vNxCkOF5rjUQ5zy3cehL3+eNyikJNTnqNh
- vSuA==
-X-Gm-Message-State: APjAAAXha2aCXoSYkN7L1NLRp1zBHQF9FGM6WjnLDK2Wzm0Y0pIpQE9j
- u9c83S6xan7KVgjy7ADQMUu5Tg==
-X-Google-Smtp-Source: APXvYqwsdr6ZhYJ8iiAjz/Hg+tgGmCI7x+R7tbcmQgArv30Q09txhTI2OVFfcCfN2iRTQPqYmh99Lg==
-X-Received: by 2002:ac8:73cf:: with SMTP id v15mr1610041qtp.310.1571779295221; 
- Tue, 22 Oct 2019 14:21:35 -0700 (PDT)
-Received: from ip-172-31-33-50.ec2.internal
- (ec2-34-206-44-154.compute-1.amazonaws.com. [34.206.44.154])
- by smtp.gmail.com with ESMTPSA id z5sm9625014qkl.101.2019.10.22.14.21.34
- (version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
- Tue, 22 Oct 2019 14:21:34 -0700 (PDT)
-From: Dayeol Lee <dayeol@berkeley.edu>
-To: qemu-devel@nongnu.org
-Cc: diodesign@tuta.io, Dayeol Lee <dayeol@berkeley.edu>,
- Richard Henderson <richard.henderson@linaro.org>,
- Palmer Dabbelt <palmer@sifive.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
-Subject: [PATCH] target/riscv: PMP violation due to wrong size parameter
-Date: Tue, 22 Oct 2019 21:21:29 +0000
-Message-Id: <20191022212129.8452-1-dayeol@berkeley.edu>
-X-Mailer: git-send-email 2.23.0
+ d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Z/D6TBRFSN+I3Fyk8YyVx9TTcXOnUZmE2l7vYpxB+9I=;
+ b=TAfSyMK1Yg/jCQXlp96pR4TXrYGA32sdfeMY1Hbtuvw82ocQfwPdP2OYPvWfqk8kCuQR+llmj8+5uz2WDp1W9KKq8zhGHa9NI/IEMRMO5kpaaxBnl+bJSTnpKHt49dTR1CVquPFxzsd6XMzcTUsas1+mNwzd83hoUg7/6RoBlvE=
+Received: from MN2PR04MB6061.namprd04.prod.outlook.com (20.178.246.15) by
+ MN2PR04MB5871.namprd04.prod.outlook.com (20.179.22.206) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.2347.18; Wed, 23 Oct 2019 06:36:48 +0000
+Received: from MN2PR04MB6061.namprd04.prod.outlook.com
+ ([fe80::1454:87a:13b0:d3a]) by MN2PR04MB6061.namprd04.prod.outlook.com
+ ([fe80::1454:87a:13b0:d3a%7]) with mapi id 15.20.2387.019; Wed, 23 Oct 2019
+ 06:36:48 +0000
+From: Anup Patel <Anup.Patel@wdc.com>
+To: Peter Maydell <peter.maydell@linaro.org>, Palmer Dabbelt
+ <palmer@sifive.com>, Alistair Francis <Alistair.Francis@wdc.com>, Sagar
+ Karandikar <sagark@eecs.berkeley.edu>, Bastian Koppelmann
+ <kbastian@mail.uni-paderborn.de>
+CC: Atish Patra <Atish.Patra@wdc.com>, Anup Patel <anup@brainfault.org>,
+ "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>, "qemu-devel@nongnu.org"
+ <qemu-devel@nongnu.org>, Anup Patel <Anup.Patel@wdc.com>
+Subject: [PATCH v4 0/2] RTC support for QEMU RISC-V virt machine
+Thread-Topic: [PATCH v4 0/2] RTC support for QEMU RISC-V virt machine
+Thread-Index: AQHViWw/BWZDFHJxK0eUKIsxb844jg==
+Date: Wed, 23 Oct 2019 06:36:48 +0000
+Message-ID: <20191023063620.35104-1-anup.patel@wdc.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-clientproxiedby: MA1PR01CA0130.INDPRD01.PROD.OUTLOOK.COM
+ (2603:1096:a00:35::24) To MN2PR04MB6061.namprd04.prod.outlook.com
+ (2603:10b6:208:d8::15)
+authentication-results: spf=none (sender IP is )
+ smtp.mailfrom=Anup.Patel@wdc.com; 
+x-ms-exchange-messagesentrepresentingtype: 1
+x-mailer: git-send-email 2.17.1
+x-originating-ip: [129.253.179.161]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-ht: Tenant
+x-ms-office365-filtering-correlation-id: 0e34bfec-b8f6-4712-a66d-08d757836145
+x-ms-traffictypediagnostic: MN2PR04MB5871:
+x-ms-exchange-purlcount: 1
+x-ms-exchange-transport-forked: True
+x-microsoft-antispam-prvs: <MN2PR04MB58712E6CDE0C34A070CC245C8D6B0@MN2PR04MB5871.namprd04.prod.outlook.com>
+wdcipoutbound: EOP-TRUE
+x-ms-oob-tlc-oobclassifiers: OLM:7691;
+x-forefront-prvs: 019919A9E4
+x-forefront-antispam-report: SFV:NSPM;
+ SFS:(10019020)(4636009)(39860400002)(396003)(376002)(136003)(366004)(346002)(199004)(189003)(8676002)(2906002)(26005)(486006)(50226002)(2171002)(86362001)(6486002)(476003)(25786009)(3846002)(44832011)(36756003)(6116002)(6506007)(386003)(7736002)(186003)(305945005)(2616005)(102836004)(4326008)(14454004)(99286004)(6436002)(52116002)(478600001)(966005)(6306002)(81156014)(66066001)(6512007)(81166006)(54906003)(71190400001)(316002)(8936002)(66946007)(1076003)(66556008)(110136005)(64756008)(66476007)(14444005)(256004)(71200400001)(5660300002)(66446008);
+ DIR:OUT; SFP:1102; SCL:1; SRVR:MN2PR04MB5871;
+ H:MN2PR04MB6061.namprd04.prod.outlook.com; FPR:; SPF:None; LANG:en;
+ PTR:InfoNoRecords; A:1; MX:1; 
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: yzN6cT8kE65uZusdj4rKZ7SIj5O3KIgmxLcbqRmh5BnXge7FImsPEqKT6p7MiWw0aXQzMZuJg+HcvQP2RuVjtIsiQzMew/Uqd1/LK67QKdWPZC4Gniil86U+3eE/xMtMAkjOm1WTgeKZwQQkdzDzYfzSufhmd/1+azoajel5WSlxL/Xc35I04dsXbyAOo/9D2RiLgd5xtWEd9Bn7qY2PgawnCSyFF6gLz+DxpOTJlZcRM0WF+2kfVTBNZu7mwPIfS0mjcXuYRmISmRV7ODdrrWdPSM6THijos0j7D0CB2uP3DFfNvEW4flWXL0tyutMyvATFVfz/ee82dMCswfA6GHeOo1EylKun0SvGBNmDm4lZWHw+rMUc/Zj/Av9H+UH6x+4GWpMjBYnPW2d9HTD5KYgnaNYnZePix/VFR3j9P8VlZsoulB6mjt7NxPyqxUTOYPpX6L5RW2nGc1wG3jr+jmgr0KG5aUf09GBM2KQixTY=
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2607:f8b0:4864:20::842
+X-OriginatorOrg: wdc.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0e34bfec-b8f6-4712-a66d-08d757836145
+X-MS-Exchange-CrossTenant-originalarrivaltime: 23 Oct 2019 06:36:48.5398 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: gSZEdLWyfMsYCgOp06Hh6EVWZNorislvLQeQsLjGGS31MRe5lMBz8/fFYTZt9ISImVCg0DrNICN9EyKrrlyz9w==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR04MB5871
+X-detected-operating-system: by eggs.gnu.org: FreeBSD 9.x [fuzzy]
+X-Received-From: 216.71.153.141
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -75,60 +125,44 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Oct 2019 21:21:40 -0000
+X-List-Received-Date: Wed, 23 Oct 2019 06:37:00 -0000
 
-riscv_cpu_tlb_fill() uses the `size` parameter to check PMP violation
-using pmp_hart_has_privs().
-However, if the size is unknown (=0), the ending address will be
-`addr - 1` as it is `addr + size - 1` in `pmp_hart_has_privs()`.
-This always causes a false PMP violation on the starting address of the
-range, as `addr - 1` is not in the range.
+This series adds RTC device to QEMU RISC-V virt machine. We have
+selected Goldfish RTC device model for this. It's a pretty simple
+synthetic device with few MMIO registers and no dependency external
+clock. The driver for Goldfish RTC is already available in Linux so
+we just need to enable it in Kconfig for RISCV and also update Linux
+defconfigs.
 
-In order to fix, we just assume that all bytes from addr to the end of
-the page will be accessed if the size is unknown.
+We have tested this series with Linux-5.4-rc4 plus defconfig changes
+available in 'goldfish_rtc_v2' branch of:
+https://github.com/avpatel/linux.git
 
-Signed-off-by: Dayeol Lee <dayeol@berkeley.edu>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
----
- target/riscv/pmp.c | 13 ++++++++++++-
- 1 file changed, 12 insertions(+), 1 deletion(-)
+Changes since v3:
+ - Address all nit comments from Alistair
 
-diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-index 958c7502a0..7a9fd415ba 100644
---- a/target/riscv/pmp.c
-+++ b/target/riscv/pmp.c
-@@ -232,6 +232,7 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
- {
-     int i = 0;
-     int ret = -1;
-+    int pmp_size = 0;
-     target_ulong s = 0;
-     target_ulong e = 0;
-     pmp_priv_t allowed_privs = 0;
-@@ -241,11 +242,21 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
-         return true;
-     }
- 
-+    /*
-+     * if size is unknown (0), assume that all bytes
-+     * from addr to the end of the page will be accessed.
-+     */
-+    if (size == 0) {
-+        pmp_size = -(addr | TARGET_PAGE_MASK);
-+    } else {
-+        pmp_size = size;
-+    }
-+
-     /* 1.10 draft priv spec states there is an implicit order
-          from low to high */
-     for (i = 0; i < MAX_RISCV_PMPS; i++) {
-         s = pmp_is_in_range(env, i, addr);
--        e = pmp_is_in_range(env, i, addr + size - 1);
-+        e = pmp_is_in_range(env, i, addr + pmp_size - 1);
- 
-         /* partially inside */
-         if ((s + e) == 1) {
--- 
-2.23.0
+Changes since v2:
+ - Rebased on RTC code refactoring
 
+Changes since v1:
+ - Implemented VMState save/restore callbacks
+
+Anup Patel (2):
+  hw: rtc: Add Goldfish RTC device
+  riscv: virt: Use Goldfish RTC device
+
+ hw/riscv/Kconfig                |   1 +
+ hw/riscv/virt.c                 |  15 ++
+ hw/rtc/Kconfig                  |   3 +
+ hw/rtc/Makefile.objs            |   1 +
+ hw/rtc/goldfish_rtc.c           | 288 ++++++++++++++++++++++++++++++++
+ hw/rtc/trace-events             |   4 +
+ include/hw/riscv/virt.h         |   2 +
+ include/hw/timer/goldfish_rtc.h |  46 +++++
+ 8 files changed, 360 insertions(+)
+ create mode 100644 hw/rtc/goldfish_rtc.c
+ create mode 100644 include/hw/timer/goldfish_rtc.h
+
+--
+2.17.1
 
