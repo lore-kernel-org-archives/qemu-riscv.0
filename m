@@ -1,66 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iO91D-0005Ez-Pp
-	for mharc-qemu-riscv@gnu.org; Fri, 25 Oct 2019 19:29:19 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49735)
+	id 1iO91E-0005FT-0u
+	for mharc-qemu-riscv@gnu.org; Fri, 25 Oct 2019 19:29:20 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49737)
  by lists.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <prvs=194c68654=alistair.francis@wdc.com>)
- id 1iO90x-00055M-Sq
+ id 1iO90x-00055W-WB
  for qemu-riscv@nongnu.org; Fri, 25 Oct 2019 19:29:05 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
  (envelope-from <prvs=194c68654=alistair.francis@wdc.com>)
- id 1iO90v-0004J1-0I
- for qemu-riscv@nongnu.org; Fri, 25 Oct 2019 19:29:01 -0400
-Received: from esa1.hgst.iphmx.com ([68.232.141.245]:10429)
+ id 1iO90u-0004Iw-WB
+ for qemu-riscv@nongnu.org; Fri, 25 Oct 2019 19:29:02 -0400
+Received: from esa1.hgst.iphmx.com ([68.232.141.245]:10430)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <prvs=194c68654=alistair.francis@wdc.com>)
- id 1iO90o-0004C1-5q; Fri, 25 Oct 2019 19:28:54 -0400
+ id 1iO90o-0004CY-81; Fri, 25 Oct 2019 19:28:54 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
  t=1572046134; x=1603582134;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=vgPO13ViDPpWds3HfXGuDWeCANwl/5UkQ1OHMUmW53I=;
- b=BsZRBymx0djYiAaBWCos9mpZ36AMPxaxiSgxDR5cz35eOez9WtvQZsAQ
- JNxrCrKfwSVjd2dQX/0TzXIY3JcYR1OPkmPR1LBjroZE3n7W9ykZ2DE4w
- mTj2Rokv00LYlshR24JkIIE4p7ly1/9seObOA2Hh4GbWZKHn/LAsakLcp
- siPuUNoKtACwgz0I4JQyOu1re8TuTWozl1aUw4neNxDe6trLoeVw5Ph3u
- n8YoUoSQLaU++bAQV8pl0f1BZ///Y7nXM+pAmqLVIlWspk8YOAA9Q+z40
- RTfOrYE588bJj3aZqAIT9t7w7+KiM0iPwUzHGrbRP9H2ipHgqkaysbMbX A==;
-IronPort-SDR: BX+EEyk0tC7T8cWmdGE2QcM7dkB7W0x9C2lSsQwoaERfHuXNLW7bVO8YHH8RJmVEoruVKpmhXp
- 7ZbNvjBTykmTcoQd3cNZxIjD/fbZ/CNxYD4VKh5s3cLfPvUMcNDud5+i9Rl8I+1PYEhr1Rb7Yr
- HTdz0HRD62eYWOeybpY6NhkcOyrh1gWKRTzKwCRgF4lins3wJev0Mb7UOFe7haF8YKdl3sTVCm
- DIT9TyAQYKNKcEBCzvmXzG67hQBuruDpezVYNiXM1zLxaxl3zvIg3mNE6c11QyhOECOvehsYLa
- yQE=
-X-IronPort-AV: E=Sophos;i="5.68,230,1569254400"; d="scan'208";a="228520396"
+ bh=RkqRFiZ2NZ94NDWMXf9YRLVxbO3l93rbLZrfnFMYQQ4=;
+ b=IzYh7nTSW4uwgAgjcJb6j79kxfL0Z3D1tsUE6arOEAfY654Iihy12pIJ
+ EPvRaUFRwe2RiAnNFqhSFpRn2VD0//4NJfabRZwJQslir88/23Svzk1DF
+ X0Sl5WhsTSH50YuljgtcbeWg70VIw0/BCLYu9yDFYrVCVvfCOsvr7Hi5v
+ C+QMeUH9yq5kvllIa/RKO0noA6jDRtcTUUfQA/lxjH3epmdiTgU4IAmEE
+ jtyZj8nx3BdWqDtjDdamZ2ZrOaC/9iKEA9+0qHVXWmpRuoMCbXMRCK8ld
+ f1cTrYGH1hZ0rrrcj8nATNh+MvYrPnR53Nrn5Wy3J+QbrifM7EqxfIx1n A==;
+IronPort-SDR: 7OITCTKhPB+eeox5FRRIAT3iSSETKcJ/MbO6LrA2qUBhM8nyn7igmQa06IaznKzC4QmKBZTqEs
+ kIy3gvt6/yLA/WQTgDvcdOVbWE2vBewy2UQKonybddoccL3dJ/IQD+pX//hP4yybZ7RH7G/K7Y
+ 2irjkPEU2/liktvMJY74fbHiYhCLEy86Zk5iWx2XcikR6wQRm6EtYT4sCPYd1jSf5jgN6SXRG6
+ mNq3XvLWmMS8/S8zMTUuNb4078D1Z/FM2GgGkBhNgB8xzsOXCpbq5IeGgsmWFqZLGZzGDbaN9f
+ ugs=
+X-IronPort-AV: E=Sophos;i="5.68,230,1569254400"; d="scan'208";a="228520397"
 Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
  ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 26 Oct 2019 07:28:24 +0800
-IronPort-SDR: v+5uTPt0owFb8DM+zBvkGPlbHpwIKZlQGVosxRIqWUHK9/dF31quxd3/RsGDXR0UCuJN1kygTs
- Yv/0dXE3Lf2A3oY55hjMxpq/zzwLodEW2UdyqXVePRU1jliqDN9Zy/Z3dOLpuvHVQXKT7OL56R
- 0eJZqWIpntRuSu5PSqL+D/PD7YRk6cp/7DInFFSfgyDDn0tiVsDT9krkdk/WoTP3Hyfuy5Sx7X
- LOPHxWlVCeWRSjmCtMvxsF1O9d80/svGSxLxf3+3RKfHYhvrHcvMPR3Yz8ot6qFYyMoSzPgc06
- kVPGgQyQmSV/vEvCy+KyL88C
-Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
+ by ob1.hgst.iphmx.com with ESMTP; 26 Oct 2019 07:28:27 +0800
+IronPort-SDR: BE4aCwb0A02r8vLrXfGa2mv6HGM0AxMPoP7BFcaEGeHD7tqEmDFQ5Lo3pp2573p4BF+gByPDgk
+ eZ9WSYz2I274qkf3yfbRWdUQk9PGnNpiMl8gfC7ioooznZn2j78UaMZ9IkF3xD/LG7erXMsxam
+ TQFM14NrEJwO7MbamX9MKU4noQWvjIAKwAhU+2LtE4s6o+ZRxa1twAWRyIAAsMOt1+3wj3MgNJ
+ oJVo+kdmZsz32kqUTzT0WonxjQGUU83EOk3DCAOXCmmEBphKK/j/Sx6DX8q5KyFiytXD09Gc4n
+ Sish1G6Pf0KciT8+Krhy0slP
+Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
  by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 25 Oct 2019 16:23:49 -0700
-IronPort-SDR: rtNAgrphkr7jqjU8Zfq7G7pMSiHifU+AFX7ztGqT3JYTqgaCamgS5GRC4YaHbZUlsvivFdp3u4
- YFI2CYTW0Q/s4Y29Lze/DhFSUYw822Bhw9wfDvmkRmE/3zERVRrNAGxsAx3ZgBxshUWUW+K8Ua
- 8Zjuz96mtHUVEN4QsSjEvZNNMv+Wa1WgrRA2d3ChoMdXQGaHZGad8dyqT+HITrWUFr3wtypSnR
- BF8XOuh1s3vfGOJ86NEG1vgHdR1arQRAAiuA6cnJUz4SXYaBF4T3QQtVzaXApvQPM9eT4GlhUb
- vrk=
+ 25 Oct 2019 16:23:53 -0700
+IronPort-SDR: sz4g0rjbkX9cJUSbBEqhtQnYHpFFc7+5SJAqxoNRqk/Tt3QBIK7lGt8moreL0GukvY9qVMWi/e
+ YRoLbdPSlX12tmtkB7FelPgM8U1unWXk4OstvpE/skcpCiYNQlWu3xuaDjp0QtD6bO7G3CNVnf
+ NMk+KVx6F9MiKzrcLwKXzwJ09efllTPs/ImD8D/zx/8GtcI9pxpFbif7sEvZcfjgFeDHMAGXQA
+ IBfclXDXNRYR9N2feQZoALDWB4R07i5DMRlcv9r/yRt1SOzQfSheMV52ltKJb6PYamJohTWq7l
+ TPI=
 WDCIronportException: Internal
 Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
  risc6-mainframe.int.fusionio.com) ([10.196.157.58])
- by uls-op-cesaip02.wdc.com with ESMTP; 25 Oct 2019 16:28:24 -0700
+ by uls-op-cesaip01.wdc.com with ESMTP; 25 Oct 2019 16:28:28 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: palmer@sifive.com,
 	alistair.francis@wdc.com,
 	alistair23@gmail.com
-Subject: [PATCH v2 06/27] target/riscv: Add the Hypervisor CSRs to CPUState
-Date: Fri, 25 Oct 2019 16:23:28 -0700
-Message-Id: <1b9ba32053453869847f39afb38b5c5cc53ccb8b.1572045716.git.alistair.francis@wdc.com>
+Subject: [PATCH v2 07/27] target/riscv: Print priv and virt in disas log
+Date: Fri, 25 Oct 2019 16:23:32 -0700
+Message-Id: <5de7c9ef581760a5e77bb0e66109837d215ffff9.1572045716.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.23.0
 In-Reply-To: <cover.1572045716.git.alistair.francis@wdc.com>
 References: <cover.1572045716.git.alistair.francis@wdc.com>
@@ -81,43 +81,31 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Fri, 25 Oct 2019 23:29:06 -0000
 
-As the MIP CSR is 32-bits to allow atomic_read on 32-bit hosts the vsip
-is 32-bit as well.
-
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Chih-Min Chao <chihmin.chao@sifive.com>
 Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
 ---
- target/riscv/cpu.h | 17 +++++++++++++++++
- 1 file changed, 17 insertions(+)
+ target/riscv/translate.c | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index bb7a0e27a7..a1625e8af0 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -145,6 +145,23 @@ struct CPURISCVState {
-     target_ulong mcause;
-     target_ulong mtval;  /* since: priv-1.10.0 */
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index adeddb85f6..8ac72c6470 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -810,7 +810,15 @@ static void riscv_tr_tb_stop(DisasContextBase *dcbase, CPUState *cpu)
  
-+    /* Hypervisor CSRs */
-+    target_ulong hstatus;
-+    target_ulong hedeleg;
-+    target_ulong hideleg;
-+    target_ulong hgatp;
+ static void riscv_tr_disas_log(const DisasContextBase *dcbase, CPUState *cpu)
+ {
++#ifndef CONFIG_USER_ONLY
++    RISCVCPU *rvcpu = RISCV_CPU(cpu);
++    CPURISCVState *env = &rvcpu->env;
++#endif
 +
-+    /* Virtual CSRs */
-+    target_ulong vsstatus;
-+    uint32_t vsip;
-+    target_ulong vsie;
-+    target_ulong vstvec;
-+    target_ulong vsscratch;
-+    target_ulong vsepc;
-+    target_ulong vscause;
-+    target_ulong vstval;
-+    target_ulong vsatp;
-+
-     target_ulong scounteren;
-     target_ulong mcounteren;
+     qemu_log("IN: %s\n", lookup_symbol(dcbase->pc_first));
++#ifndef CONFIG_USER_ONLY
++    qemu_log("Priv: "TARGET_FMT_ld"; Virt: "TARGET_FMT_ld"\n", env->priv, env->virt);
++#endif
+     log_target_disas(cpu, dcbase->pc_first, dcbase->tb->size);
+ }
  
 -- 
 2.23.0
