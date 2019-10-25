@@ -1,73 +1,73 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iO91c-00063Q-CV
-	for mharc-qemu-riscv@gnu.org; Fri, 25 Oct 2019 19:29:44 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:50203)
+	id 1iO91h-0006Ar-Rf
+	for mharc-qemu-riscv@gnu.org; Fri, 25 Oct 2019 19:29:51 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:50234)
  by lists.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <prvs=194c68654=alistair.francis@wdc.com>)
- id 1iO91Z-0005v3-0H
- for qemu-riscv@nongnu.org; Fri, 25 Oct 2019 19:29:42 -0400
+ id 1iO91b-0005zd-9D
+ for qemu-riscv@nongnu.org; Fri, 25 Oct 2019 19:29:44 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
  (envelope-from <prvs=194c68654=alistair.francis@wdc.com>)
- id 1iO91X-0004lj-Qr
- for qemu-riscv@nongnu.org; Fri, 25 Oct 2019 19:29:40 -0400
-Received: from esa6.hgst.iphmx.com ([216.71.154.45]:36814)
+ id 1iO91a-0004mv-6Z
+ for qemu-riscv@nongnu.org; Fri, 25 Oct 2019 19:29:43 -0400
+Received: from esa1.hgst.iphmx.com ([68.232.141.245]:10430)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <prvs=194c68654=alistair.francis@wdc.com>)
- id 1iO91V-0004Yx-9K; Fri, 25 Oct 2019 19:29:37 -0400
+ id 1iO91X-0004CY-PS; Fri, 25 Oct 2019 19:29:40 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1572046177; x=1603582177;
+ t=1572046179; x=1603582179;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=AhPwn0DIe1Bw+jGVJsxFYh4GSQcU4tWNGO2Y1sD5mM4=;
- b=GWRv4d7Wpftu7DlNYE/SychHYjsGBNjabxGQ09pXSRPFYGkJd5k4+57y
- QdqFEo4SOrF8vOs0YjmiYV3Skthcym55wJ3QMhA0ihcBBoPL25FrnYd25
- alhVn/aYf79/9mTp13nnkc7dAGz1V49eebGZRpHGBWrZE6KJ6D5l49qzx
- yiMURC5RhIY2Lqjy7hax3xCWyhdnE6RS1JqUPedoMB9tAUQW/0M/WpntL
- beYNtQ4kncN62EKcOeAFLiBVjqpYIW3rr8zGACjKBcngy1PPm2Y7V3DvP
- /jWb5wsefbK842pQnWllfAbq/TqVH/mP1R8caaWs1hzoTBJw9OWuYEIZr A==;
-IronPort-SDR: FZ5Vt+O+El/FBb42gIuQwT0k4NIu5VizCLEDOXoh7vGZ4X+QpVilcaRP7ETtsD2niitSXtnJtl
- SSMRaE9BGYe02NHynaoSW70ytuCmjxd+aU8cyxuvTCdSJ+aj/aKuC4XUtNTLQ018OK/Sv8p2Ow
- FXBqmnJlhyDU+4ZxS72oB7zOQFaQJPQ8wSlrLT9+NPaxpWIa+W6n1O+sx3uiCrRYLoIHb6C7Im
- Hxp2uItKoBST2hs6GnulE/PLZNjPbsBAEOJeZxYQsmBVq6Es1h2sl4qwTy74ZaCKTi/YVU199z
- D+g=
-X-IronPort-AV: E=Sophos;i="5.68,230,1569254400"; d="scan'208";a="122956710"
-Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com)
- ([199.255.45.15])
- by ob1.hgst.iphmx.com with ESMTP; 26 Oct 2019 07:29:37 +0800
-IronPort-SDR: AO39iiKaxFascB3sdk6AXpsJarKCLSjDNy/zRLT4AJDHJWHVpOfevmMfEW1qfi21io9bebM7Ru
- FF65KDI2zSGKmIPXX/iKzvWj6OAvKUCky+D7tITgzz0EV49OlWPSzRkXDo7As/OMLOq1aN9kWz
- 1AuuhW7BeZg+xWpVjbF1Y9tFnfWbF/nKUSBpYEAXqvO4H1X08ml3Fq3Jc2GwGwSB3tc1p1tFLn
- HUvk4YHPP/NfIs4P5oNvzZmoQ2WywOfWpQQOuvwvmDZxSEEQIW9S9vIeKG586O5Zsuk7RzsHgX
- oyrQ9Z6bKsLi2geL+SQqiYQV
-Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
- by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 25 Oct 2019 16:25:08 -0700
-IronPort-SDR: sym3R79PoIsMVp4UEqPTgyHajBLWD1uKcUYJZkdRBj31AFoY19XdacPCny4WCz/QXYqGt1F444
- KuYbKZ1bJ+Xbu2WvGroIDtZ+SDDhSAFhyXbJOpzXzGNsafrfCCcsOdQniB4fykN+50o8yYWeHY
- /XWipvN6GkrQMFjrN7/Odw6mwvZSuHzGx0rZbG0UT2lNxBmBcHNPtOGgwEb8N9z+8oxFr7oPJg
- VYti8uh3kdfe/Y/JY7xIAsiX/BmjOJGRKFbaWQSl0MJLrPN+HXe55mkVvjkTAtDGPE0ZaBpWDv
- Hz0=
+ bh=5xy/BQ5Ff17/zZ+q9QgWqRSx+0OeU4f0Sj1sSKNFPcQ=;
+ b=MpwxmYWz0QgxTJC6NMwOVmWn2Ajsvt7OqJ4uwl0rqEFW3yx1zlQ7dRGT
+ 2L9QgGHOm894xSliHYPRgBsnIz9GTEbeS7m3sTwXLACBqaxJ7N4mGrEoD
+ 4ZkeaT0iCSirN7x+htgDDUh4be8IOkMsTUrPve+jP2JofpJBbp47THYde
+ 35bFGuBlnmChfGUmpHwale7fkCPIdw0qe7/WL/sq/RI5NY9HB9Mf4Snh5
+ hgdxK+AV/VtOHHgc5J7ZZ1XwYszpn7HXTPDlcjeR+SgpxgnxLo3sm9Fym
+ MHMiijYhkcIMOVPhQp42NI8aSTD2RhpS2OBdqTDEz3T+ujnzreAtbgEvT g==;
+IronPort-SDR: zXixdOhZo36mF5ZtcXEykzhagF8ytU1ZmbRHmR5Tf9YeK8kKK1iLJQaY2g1krspIkGxZk9tInU
+ 1wIuAHfKrVYztGvAsn8zugql3le+tSHEoK1FF7P/kpqrsZdhKTc+SDwLu850claGwQM8h2IhvR
+ JJxv8pfx1lZMIjPxOxEik1jR3djg8kRXsytdvuHqhr5NkEFdMfkUFyxDuX0sBlSMUuhIHB3Sw5
+ l0+z7FzG8ow5tkTTnrQ/dDXxHQwbOH+grFP/tFLH672O5NCbGm9NvmMsyT+z/NrOim6j2MLbjM
+ oaI=
+X-IronPort-AV: E=Sophos;i="5.68,230,1569254400"; d="scan'208";a="228520418"
+Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
+ ([199.255.45.14])
+ by ob1.hgst.iphmx.com with ESMTP; 26 Oct 2019 07:28:58 +0800
+IronPort-SDR: Z3zY7b09YvyvAmtvtOCVnoEib+vFoXr1EWCR2REVigTV2CTNV5GIRvQ5qrJz6SySlAStVyU58e
+ REOQ25SQk3owxNMRnmZ1NP5iQA88YiNONru8BPG3T/2EnslPlD4fRg5MbXum/r1L9axLQuDNZy
+ PbyGn3lmBI6mTrDPbN1l18dbTqZQpcKTXwgbm0Y/8zUcmv86pJ+om3ZtE6Lycr0BJH3jxKDz68
+ 1xhSmAVKyKSre1BNxr0TWzKv+PZGCplTGixXbybh8Edj3vHbl9INGfQnE6uA+qA+KZ470wWqNY
+ mCDREEQC95s+NmiJrn7Doh9d
+Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
+ by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 25 Oct 2019 16:24:24 -0700
+IronPort-SDR: 8IkYaeWsa1WKFPlrikMUhWMIukbvr5buFfiArifeb7W8OK9r4PXJRq04IBg0viPveRbWQ3xW98
+ 2iCxdDyNN2b/OAphz6kO15giWF1D6qPDx6pVfMr18SgI0qxt09IAGZuEBpdYV9wu0qvUoRrRHG
+ A2F+2fyJKSZ54KN04EjuTUUBQSSBfUk22fxSrqPofi8nrqCWPztnYE4dyRcXMEugHBJ/AFLwY9
+ D9iUpDfObSyh/7mtoYJM7NiNjcx0kjJpFFWhzFTW2adguOhLWE/Kz/khQg8Wr8UPh1RnL55i6v
+ HaA=
 WDCIronportException: Internal
 Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
  risc6-mainframe.int.fusionio.com) ([10.196.157.58])
- by uls-op-cesaip01.wdc.com with ESMTP; 25 Oct 2019 16:29:37 -0700
+ by uls-op-cesaip02.wdc.com with ESMTP; 25 Oct 2019 16:28:59 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: palmer@sifive.com,
 	alistair.francis@wdc.com,
 	alistair23@gmail.com
-Subject: [PATCH v2 27/27] target/riscv: Allow enabling the Hypervisor extension
-Date: Fri, 25 Oct 2019 16:24:41 -0700
-Message-Id: <49eef14a789367ec9eccc0660574516a20f2dbd8.1572045716.git.alistair.francis@wdc.com>
+Subject: [PATCH v2 16/27] riscv: plic: Always set sip.SEIP bit for HS
+Date: Fri, 25 Oct 2019 16:24:03 -0700
+Message-Id: <ed72f249afccde44453efef12935e7804e24b55f.1572045716.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.23.0
 In-Reply-To: <cover.1572045716.git.alistair.francis@wdc.com>
 References: <cover.1572045716.git.alistair.francis@wdc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: FreeBSD 9.x [fuzzy]
-X-Received-From: 216.71.154.45
+X-Received-From: 68.232.141.245
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -79,50 +79,39 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Oct 2019 23:29:42 -0000
+X-List-Received-Date: Fri, 25 Oct 2019 23:29:44 -0000
+
+When the PLIC generates an interrupt ensure we always set it for the SIP
+CSR that corresponds to the HS (V=0) register.
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
 ---
- target/riscv/cpu.c | 5 +++++
- target/riscv/cpu.h | 1 +
- 2 files changed, 6 insertions(+)
+ hw/riscv/sifive_plic.c | 12 +++++++++++-
+ 1 file changed, 11 insertions(+), 1 deletion(-)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 03622825f3..6d02e61e8a 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -446,6 +446,9 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
-         if (cpu->cfg.ext_u) {
-             target_misa |= RVU;
-         }
-+        if (cpu->cfg.ext_h) {
-+            target_misa |= RVH;
-+        }
- 
-         set_misa(env, RVXLEN | target_misa);
-     }
-@@ -492,6 +495,8 @@ static Property riscv_cpu_properties[] = {
-     DEFINE_PROP_BOOL("c", RISCVCPU, cfg.ext_c, true),
-     DEFINE_PROP_BOOL("s", RISCVCPU, cfg.ext_s, true),
-     DEFINE_PROP_BOOL("u", RISCVCPU, cfg.ext_u, true),
-+    /* This is experimental so mark with 'x-' */
-+    DEFINE_PROP_BOOL("x-h", RISCVCPU, cfg.ext_h, false),
-     DEFINE_PROP_BOOL("Counters", RISCVCPU, cfg.ext_counters, true),
-     DEFINE_PROP_BOOL("Zifencei", RISCVCPU, cfg.ext_ifencei, true),
-     DEFINE_PROP_BOOL("Zicsr", RISCVCPU, cfg.ext_icsr, true),
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index b8b731df43..ed1f139369 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -258,6 +258,7 @@ typedef struct RISCVCPU {
-         bool ext_c;
-         bool ext_s;
-         bool ext_u;
-+        bool ext_h;
-         bool ext_counters;
-         bool ext_ifencei;
-         bool ext_icsr;
+diff --git a/hw/riscv/sifive_plic.c b/hw/riscv/sifive_plic.c
+index 98e4304b66..8309e96f64 100644
+--- a/hw/riscv/sifive_plic.c
++++ b/hw/riscv/sifive_plic.c
+@@ -150,7 +150,17 @@ static void sifive_plic_update(SiFivePLICState *plic)
+             riscv_cpu_update_mip(RISCV_CPU(cpu), MIP_MEIP, BOOL_TO_MASK(level));
+             break;
+         case PLICMode_S:
+-            riscv_cpu_update_mip(RISCV_CPU(cpu), MIP_SEIP, BOOL_TO_MASK(level));
++            if (riscv_cpu_virt_enabled(env)) {
++                if (level) {
++                    atomic_or(&env->mip_novirt, MIP_SEIP);
++                    g_assert(riscv_cpu_virt_enabled(env));
++                } else {
++                    atomic_and(&env->mip_novirt, ~MIP_SEIP);
++                    g_assert(riscv_cpu_virt_enabled(env));
++                }
++            } else {
++                riscv_cpu_update_mip(RISCV_CPU(cpu), MIP_SEIP, BOOL_TO_MASK(level));
++            }
+             break;
+         default:
+             break;
 -- 
 2.23.0
 
