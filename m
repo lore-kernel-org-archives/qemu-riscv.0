@@ -1,74 +1,73 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iO91P-0005cU-KM
-	for mharc-qemu-riscv@gnu.org; Fri, 25 Oct 2019 19:29:31 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:50056)
+	id 1iO91Q-0005fC-LP
+	for mharc-qemu-riscv@gnu.org; Fri, 25 Oct 2019 19:29:32 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:50072)
  by lists.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <prvs=194c68654=alistair.francis@wdc.com>)
- id 1iO91L-0005Ui-CF
- for qemu-riscv@nongnu.org; Fri, 25 Oct 2019 19:29:28 -0400
+ id 1iO91M-0005Wt-Gq
+ for qemu-riscv@nongnu.org; Fri, 25 Oct 2019 19:29:29 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
  (envelope-from <prvs=194c68654=alistair.francis@wdc.com>)
- id 1iO91K-0004g5-39
- for qemu-riscv@nongnu.org; Fri, 25 Oct 2019 19:29:27 -0400
-Received: from esa1.hgst.iphmx.com ([68.232.141.245]:10433)
+ id 1iO91L-0004gQ-2p
+ for qemu-riscv@nongnu.org; Fri, 25 Oct 2019 19:29:28 -0400
+Received: from esa6.hgst.iphmx.com ([216.71.154.45]:36814)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <prvs=194c68654=alistair.francis@wdc.com>)
- id 1iO91H-0004DA-KW; Fri, 25 Oct 2019 19:29:23 -0400
+ id 1iO91I-0004Yx-2H; Fri, 25 Oct 2019 19:29:24 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1572046163; x=1603582163;
+ t=1572046164; x=1603582164;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=e9FTCNGQSn8ALTPBkAOnbHvxJhruS8S5utjWhbO6qDU=;
- b=blkT/juYA/X8TcY1lKBHAJ4irv6lKecHd3k0AG7r1jsWnL6039VL94Mo
- FMKpzHOlzUlbco1vIpot86c1BlllEtQp7aa0UGZu32ZPVHUA+w7a5sM8F
- LLiD36xeTf+12JdxpZCqB67GnOAAxmsE9G94Wf9ktnW5ZyCNNThhAESSb
- eSDIhLhpigRgyoIMqzUNd5eLTYvZCliKFzq5Q/MNfv3zKj11bD522e9an
- x+6srmaehISCBL8SBFLJtuembdLThfo5h7UJrmTKRjRwTDAkO/65l4fhH
- nJlXqwcOisKT6kIft4fial4zZLPpa3RQICKrvOxyhTNoab843Gx/iUJJo Q==;
-IronPort-SDR: 0Q4jLSwwYfEMXBLi8aECAmEp5eTtwoFE+YKWgN+8pGMUbeCOO1WDJhZf7YgrGdrJklBAkXuDLU
- H2AelZN/89QpaSyYEO1BXsNBQeRicjKYAwVoMwiq5vkT1M/f2oH7gnNh5odGC0wL/wTYG997pq
- iAUVAlxTW2rl76xWjWoO3h/iYKT3fgiP5E2Y1hcLzIyFT5j+KyVJyGZqwTpyiRYRZWWu+9K4dw
- Df0y4q1zqZfBgPKV5TOd4RDJzNyKUOFH8JiOB9jUQ946Z1rrsS10PcU+YgKo0XA/Bqj0e9QvjD
- jaA=
-X-IronPort-AV: E=Sophos;i="5.68,230,1569254400"; d="scan'208";a="228520411"
+ bh=i8VVKNCleTNXc1sJm+bTXzJRq92Hz7ibezM65PfGzFQ=;
+ b=IHnP1hBlLbJ1pKoEc+P+iY34CwA93x5pc07S1qwIFtZwOoTsRDGrKGdK
+ VUhNEjAZGMynSzahU5gJve/S3kaRdtI3gmLJcz2t+pAIzQaw9NOBzKwhw
+ BHAINcyLJ9FNR1UYhytAOkm+x4WVq2LrBKyMUFlTpkNIVG78kypGalz9J
+ zXOZL7ELcmLWZ8oJTkHRlBQWMIoLFZIMzMN0UX7xOM7j5IaJvtemkj9QL
+ J5QMT9XsZLvT5zSGLut/tuBr+ziskbiJ1BbTn4BDf/jxHWaeVZFxhNrpQ
+ KBrG3uaXCM8QpKovz17r6FwK/BJ3/e0s6hzTFK28HeTUWhtVhahXm+Ood A==;
+IronPort-SDR: 5qXar3GzXyBZ3QBMTecNz1enKM4XiQDNA2GhDZlr109yNot1bTgnNiG14hu41u0liuYkYauZfl
+ r0xm1TCPRLKBa2qdgEAGhPU15SYSWsQFTeuJa+LVzowDAgqKKZWnIzNca17RASiwzkGDMclBb9
+ 8tL9JUOVqw7nR5IYi6HuUBa0c4u9EtGzebhad/bVo1/FuueP5Vvz6PGdoPvOP7l56taP4SV+TG
+ DzZM9FXztHjMAR4uqvwtYgAN4X1Gbai83VVD7JBT0unl+o9cXf6IsK/++NbEEMxydbsOnyL1N8
+ SPU=
+X-IronPort-AV: E=Sophos;i="5.68,230,1569254400"; d="scan'208";a="122956699"
 Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
  ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 26 Oct 2019 07:28:52 +0800
-IronPort-SDR: Pcs272boPlS0gSwFJGCPnxgLfCFnjb7RyZ0rZwbZvzAxUTgyG7d45u2KvRSEQJFF8j+2urUZCt
- eETcESD7chnDGcoKGrOkVI7lAG0jVE4nZcMeyXa+d5oGWWoXMEKhwaIL4eOv1q4ivgVFzJM/9T
- hA8iwCt7CfIIPhjVYXLLYaZutXVrTbxCz27jLJOGmYTIS53gum8tRB2u+4yTuIW2WsNsWnn5DL
- mqSRZ6nAGpZtDTqGjBfBIgdU7wpXKpnpvEq+KEwCXtFBVVE4ah6l0b5XC0Ea6eXJDrHesoaq6p
- p+E8IyuDfxaEx804JpJn5Pp3
+ by ob1.hgst.iphmx.com with ESMTP; 26 Oct 2019 07:29:23 +0800
+IronPort-SDR: W1nXGwwOpjWflXq5s4w06nxfSRRu36dYwthe0OKOUzc+XkzkdTTqOiRTT93aLJFYn452cYqpJX
+ /4cQ7I8I5Srra5IFZZQWy1FLa/3lykqzVeEQw+OThJqmiQjxOqExXUS7NnGw6rbimaQ+B8SGnJ
+ cBVt9ok4VmYgwKIgNsDW9nFRTUbFcrmSHVOI6giS89oMnzeApdsGqg62Zv1P7O+FnvW5lFgdhP
+ X1S67lUaGHQknQWHSmdWdCX/NKRWwNLJqHFI04SrtYYDLt033MT69vpQDRk3BzqFJikWZthPHw
+ WopEXM4heIC133/B//MwOhYx
 Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
  by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 25 Oct 2019 16:24:18 -0700
-IronPort-SDR: RQsPsSTzEvp3GKqnNarXX8/O6qsYOqM3++Qe/3A5AO3jq5SFNsJ5zOQ883h3LAj/lFm5LjyE0u
- F+24shIJdPmhkC57E6BmqkByiaOlCX/6jcvGh3HfmGWNg+omLgckXZaHaoFoGBR9pger5xC/V+
- jVTI9utenYgUzApwMaA2pAicXi3EziU6rzbHf6eqbilhhcaJHBk6w6Dd7KPDiYM3FMDIFj0iHt
- ZJWZY6Vp4akv+pfVduo8lzTrZbTJc/6vifkeHMSw7wWYmlTkCMjHh1jrUkeMksHDE3R5dKM0t1
- wtk=
+ 25 Oct 2019 16:24:49 -0700
+IronPort-SDR: FlTUyhGSx3cZUpthD0F/iI1FQMa4Zf/4Qlie90JrKlTQnmH62BpsiGoRU3Bky/MyJkwK6wp5C8
+ +v0S6Ol/eGJ+PEKtT7NoS0sdNQjUpIXqckQhBjrV0h4iqdcCFNJGjX3Inmnjp9xuNUAiWOG2EV
+ 8SDzY/TnsMh0RPUqFq7dpeMAa6beTvF2UEGNoSoj1FoAPYTTFcT2dYBawpVtnveGxxR7wcGZBW
+ Xe/87xPraQ5pklyHyd3rEr1DTmlsWYqzDfz2RZXD7Gga+YqJxUVheHsrgze+lYik1oJdbmV2qt
+ 1m8=
 WDCIronportException: Internal
 Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
  risc6-mainframe.int.fusionio.com) ([10.196.157.58])
- by uls-op-cesaip01.wdc.com with ESMTP; 25 Oct 2019 16:28:53 -0700
+ by uls-op-cesaip01.wdc.com with ESMTP; 25 Oct 2019 16:29:24 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: palmer@sifive.com,
 	alistair.francis@wdc.com,
 	alistair23@gmail.com
-Subject: [PATCH v2 14/27] target/ricsv: Flush the TLB on virtulisation mode
- changes
-Date: Fri, 25 Oct 2019 16:23:57 -0700
-Message-Id: <ad856f89f6f0be30be0eb28560eb85f1970e6756.1572045716.git.alistair.francis@wdc.com>
+Subject: [PATCH v2 23/27] target/riscv: Allow specifying MMU stage
+Date: Fri, 25 Oct 2019 16:24:28 -0700
+Message-Id: <472e51aff01eddec5ebc7e5550738caf2800b631.1572045716.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.23.0
 In-Reply-To: <cover.1572045716.git.alistair.francis@wdc.com>
 References: <cover.1572045716.git.alistair.francis@wdc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: FreeBSD 9.x [fuzzy]
-X-Received-From: 68.232.141.245
+X-Received-From: 216.71.154.45
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -80,34 +79,96 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Oct 2019 23:29:29 -0000
-
-To ensure our TLB isn't out-of-date we flush it on all virt mode
-changes. Unlike priv mode this isn't saved in the mmu_idx as all
-guests share V=1. The easiest option is just to flush on all changes.
+X-List-Received-Date: Fri, 25 Oct 2019 23:29:31 -0000
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
 ---
- target/riscv/cpu_helper.c | 5 +++++
- 1 file changed, 5 insertions(+)
+ target/riscv/cpu_helper.c | 39 ++++++++++++++++++++++++++++++---------
+ 1 file changed, 30 insertions(+), 9 deletions(-)
 
 diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index bb4557df16..637e05996a 100644
+index 79966ac6e6..275b6c2a67 100644
 --- a/target/riscv/cpu_helper.c
 +++ b/target/riscv/cpu_helper.c
-@@ -200,6 +200,11 @@ void riscv_cpu_set_virt_enabled(CPURISCVState *env, bool enable)
-         return;
-     }
- 
-+    /* Flush the TLB on all virt mode changes. */
-+    if (get_field(env->virt, VIRT_ONOFF) != enable) {
-+        tlb_flush(env_cpu(env));
-+    }
-+
-     env->virt = set_field(env->virt, VIRT_ONOFF, enable);
+@@ -296,10 +296,19 @@ void riscv_cpu_set_mode(CPURISCVState *env, target_ulong newpriv)
+  *
+  * Adapted from Spike's mmu_t::translate and mmu_t::walk
+  *
++ * @env: CPURISCVState
++ * @physical: This will be set to the calculated physical address
++ * @prot: The returned protection attributes
++ * @addr: The virtual address to be translated
++ * @access_type: The type of MMU access
++ * @mmu_idx: Indicates current privilege level
++ * @first_stage: Are we in first stage translation?
++ *               Second stage is used for hypervisor guest translation
+  */
+ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
+                                 int *prot, target_ulong addr,
+-                                int access_type, int mmu_idx)
++                                int access_type, int mmu_idx,
++                                bool first_stage)
+ {
+     /* NOTE: the env->pc value visible here will not be
+      * correct, but the value visible to the exception handler
+@@ -502,13 +511,23 @@ restart:
  }
  
+ static void raise_mmu_exception(CPURISCVState *env, target_ulong address,
+-                                MMUAccessType access_type, bool pmp_violation)
++                                MMUAccessType access_type, bool pmp_violation,
++                                bool first_stage)
+ {
+     CPUState *cs = env_cpu(env);
+-    int page_fault_exceptions =
+-        (env->priv_ver >= PRIV_VERSION_1_10_0) &&
+-        get_field(env->satp, SATP_MODE) != VM_1_10_MBARE &&
+-        !pmp_violation;
++    int page_fault_exceptions;
++    if (first_stage) {
++        page_fault_exceptions =
++            (env->priv_ver >= PRIV_VERSION_1_10_0) &&
++            get_field(env->satp, SATP_MODE) != VM_1_10_MBARE &&
++            !pmp_violation;
++        riscv_cpu_set_force_hs_excep(env, 0);
++    } else {
++        page_fault_exceptions =
++            get_field(env->hgatp, HGATP_MODE) != VM_1_10_MBARE &&
++            !pmp_violation;
++        riscv_cpu_set_force_hs_excep(env, 1);
++    }
+     switch (access_type) {
+     case MMU_INST_FETCH:
+         cs->exception_index = page_fault_exceptions ?
+@@ -535,7 +554,8 @@ hwaddr riscv_cpu_get_phys_page_debug(CPUState *cs, vaddr addr)
+     int prot;
+     int mmu_idx = cpu_mmu_index(&cpu->env, false);
+ 
+-    if (get_physical_address(&cpu->env, &phys_addr, &prot, addr, 0, mmu_idx)) {
++    if (get_physical_address(&cpu->env, &phys_addr, &prot, addr, 0, mmu_idx,
++                             true)) {
+         return -1;
+     }
+     return phys_addr;
+@@ -601,7 +621,8 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+     qemu_log_mask(CPU_LOG_MMU, "%s ad %" VADDR_PRIx " rw %d mmu_idx %d\n",
+                   __func__, address, access_type, mmu_idx);
+ 
+-    ret = get_physical_address(env, &pa, &prot, address, access_type, mmu_idx);
++    ret = get_physical_address(env, &pa, &prot, address, access_type, mmu_idx,
++                               true);
+ 
+     if (mode == PRV_M && access_type != MMU_INST_FETCH) {
+         if (get_field(*env->mstatus, MSTATUS_MPRV)) {
+@@ -638,7 +659,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+     } else if (probe) {
+         return false;
+     } else {
+-        raise_mmu_exception(env, address, access_type, pmp_violation);
++        raise_mmu_exception(env, address, access_type, pmp_violation, true);
+         riscv_raise_exception(env, cs->exception_index, retaddr);
+     }
+ #else
 -- 
 2.23.0
 
