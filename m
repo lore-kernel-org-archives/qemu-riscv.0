@@ -1,120 +1,76 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iNrDC-0006D9-Gh
-	for mharc-qemu-riscv@gnu.org; Fri, 25 Oct 2019 00:28:30 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53204)
+	id 1iNtq7-0004wk-CY
+	for mharc-qemu-riscv@gnu.org; Fri, 25 Oct 2019 03:16:51 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:40467)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <prvs=1942c9cee=Anup.Patel@wdc.com>)
- id 1iNrD9-0006A8-Ne
- for qemu-riscv@nongnu.org; Fri, 25 Oct 2019 00:28:28 -0400
+ (envelope-from <alex.bennee@linaro.org>) id 1iNtq0-0004ic-Pv
+ for qemu-riscv@nongnu.org; Fri, 25 Oct 2019 03:16:45 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <prvs=1942c9cee=Anup.Patel@wdc.com>)
- id 1iNrD8-0007km-JS
- for qemu-riscv@nongnu.org; Fri, 25 Oct 2019 00:28:27 -0400
-Received: from esa2.hgst.iphmx.com ([68.232.143.124]:31213)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <prvs=1942c9cee=Anup.Patel@wdc.com>)
- id 1iNrD8-0007ip-Ba; Fri, 25 Oct 2019 00:28:26 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1571977723; x=1603513723;
- h=from:to:cc:subject:date:message-id:references:
- in-reply-to:content-transfer-encoding:mime-version;
- bh=x2LYqHXcC7dq/y3KGLF8LgBgk5NG//4566p8xmnogNQ=;
- b=XN7I5TjcpZ9b6tbOD/M0imSSon8+GJgHRmQPD+niLgHiJ1u9P762iEnY
- mCJnRtsduZfnKFfbvBmO94CUGGasXkPfjW/o78Cevsuvo3zUf3OE+07kZ
- e4fPD2Zp9B2eUA9SDBxa8hWNmKs1au4XuSK10UA5aBFi6GjCkhLuBrw28
- TVgAHAtf7ZGH9wGve1vnpMkiunpKIVVY0vZneb5zyaDX2NPLXVJNjEiBZ
- liLI06+SpTUZlScC6etzdookaa+Pe1bFf3Uv6nzu/uoKydn+Yupjr9Pht
- gAMPgkI578JCqe5NAPayReMiVQzuUwNsbaxPgp0F0/2VKjYkXRvCYlLKJ g==;
-IronPort-SDR: c5B2kpsMr77Ppx0cANLNc+I7iXNu4GUDYcYl5nMvFn6ZHtmxjPq1DwWE9zhru3hCozQsyJwldu
- WcXgILweBZkM9CRy9dsJq1gV6idn/a2cPz9pQ1kDzQLpzpbhzByoe1tn6i6jxvpYjxfwXcSQfa
- 7cXOlADHfATpDgok9ORDqNI4oCnp+6U0yb68WZD31MV+YfUdDmBSU/8BST8k9zou8GKvcDlmfq
- rfrAEKcWeLQTgilNROVredMciGEtaBGAfnpw8bas9AfSfPcSsLuj5vSGidi+2Ayd0Wkqm35RoL
- ZSU=
-X-IronPort-AV: E=Sophos;i="5.68,227,1569254400"; d="scan'208";a="222437869"
-Received: from mail-co1nam04lp2055.outbound.protection.outlook.com (HELO
- NAM04-CO1-obe.outbound.protection.outlook.com) ([104.47.45.55])
- by ob1.hgst.iphmx.com with ESMTP; 25 Oct 2019 12:28:41 +0800
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=izRpSa6y2QqgwIElFnq8auHeboI2HHGImxj6Ps3J2VqqOsW/QC60mp1OmBmeIchfURLPzFpL2Y56zbS5FpfXDFRQycOagLd1evFCMnchvZEBJQl+MC4g424uIRoTEy8GcN3GfMdfMYOyNA4hgy2k0Z+qn/HQXTpiUmkj4jVtI60aNzLGaKT3hsrdbQoDi+6QgoCpgLEVOvGxSQ/KFIwJLkRxo+HfKmwZGGSD220JkN++IcgjWV8vGdnQSHbN+lDxPJ+BKJ2YhTHEfp1SSwRk4nQJwGlUnKHunmguUJuJM2/R6rISnPS7W53uI2apU6JG8XzDBGL2uSSNMLeRxevc4Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=J0y3+h1psXEIRtGMAZtdqQKFI9+CUrcrouf9S7Z1+wE=;
- b=TI+n0vsnMxpotTcQezguzA0bXCfTZXU54RYfXE1sLm/JngoqylnroKxeGT25mNMXg4oXw/1dTVERAMyVf9U1j+yhmDJdiwuejYcibV7DYQ/srxrUhMpY7OiCeLdTc/Qw6zqpUfMpH9/Oi3yjrV91ZvVbLqnaPz6aZqnh5B1c4LRnAurDel1WihA7Ekhi2wq/BlUdNIpoxe/T2ymxMkSZOLtkV+/yM/IhYd1q/A06wDeWZD3GV3dmPtpFcNB8Kr+rG2gTRN2/LXhsSft4F0pvLLYtEkpXEPW9/ZaqYLLTxSsNwVHaOgiOOzxIRccnJ83WFDBSbQQjz6N3S4nDfWydew==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=wdc.com; dmarc=pass action=none header.from=wdc.com; dkim=pass
- header.d=wdc.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=J0y3+h1psXEIRtGMAZtdqQKFI9+CUrcrouf9S7Z1+wE=;
- b=bL2GlJ0m+7Epm51fvvPkd2loEE7Zt87JKsW4G4QeUkSLeC4sSmfl1iN8xY+x0CWO8l8oBCOIttWp6W/CG66NCrrX2a5Ftju0j3dR3z7aw/RDsxbdinNK8WqZviV4wIsq8NjSJOIF+4SgNKNOTXm8pMz4foOWQVx+oCOAwXrLGrc=
-Received: from MN2PR04MB6061.namprd04.prod.outlook.com (20.178.246.15) by
- MN2PR04MB6048.namprd04.prod.outlook.com (20.178.249.90) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.2367.24; Fri, 25 Oct 2019 04:28:24 +0000
-Received: from MN2PR04MB6061.namprd04.prod.outlook.com
- ([fe80::1454:87a:13b0:d3a]) by MN2PR04MB6061.namprd04.prod.outlook.com
- ([fe80::1454:87a:13b0:d3a%7]) with mapi id 15.20.2387.019; Fri, 25 Oct 2019
- 04:28:24 +0000
-From: Anup Patel <Anup.Patel@wdc.com>
-To: Peter Maydell <peter.maydell@linaro.org>, Palmer Dabbelt
- <palmer@sifive.com>, Alistair Francis <Alistair.Francis@wdc.com>, Sagar
- Karandikar <sagark@eecs.berkeley.edu>, Bastian Koppelmann
- <kbastian@mail.uni-paderborn.de>
-CC: Atish Patra <Atish.Patra@wdc.com>, Anup Patel <anup@brainfault.org>,
- "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>, "qemu-devel@nongnu.org"
- <qemu-devel@nongnu.org>, Anup Patel <Anup.Patel@wdc.com>
-Subject: [PATCH v5 2/2] riscv: virt: Use Goldfish RTC device
-Thread-Topic: [PATCH v5 2/2] riscv: virt: Use Goldfish RTC device
-Thread-Index: AQHViuyjrZiK5XOhH06iDXRvjySOvA==
-Date: Fri, 25 Oct 2019 04:28:23 +0000
-Message-ID: <20191025042734.69244-3-anup.patel@wdc.com>
-References: <20191025042734.69244-1-anup.patel@wdc.com>
-In-Reply-To: <20191025042734.69244-1-anup.patel@wdc.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-clientproxiedby: MA1PR0101CA0058.INDPRD01.PROD.OUTLOOK.COM
- (2603:1096:a00:20::20) To MN2PR04MB6061.namprd04.prod.outlook.com
- (2603:10b6:208:d8::15)
-authentication-results: spf=none (sender IP is )
- smtp.mailfrom=Anup.Patel@wdc.com; 
-x-ms-exchange-messagesentrepresentingtype: 1
-x-mailer: git-send-email 2.17.1
-x-originating-ip: [49.207.51.187]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-ht: Tenant
-x-ms-office365-filtering-correlation-id: ce555e46-e0ed-4114-2ce1-08d75903c5f8
-x-ms-traffictypediagnostic: MN2PR04MB6048:
-x-ms-exchange-transport-forked: True
-x-microsoft-antispam-prvs: <MN2PR04MB60481AA17A665EF6319288458D650@MN2PR04MB6048.namprd04.prod.outlook.com>
-wdcipoutbound: EOP-TRUE
-x-ms-oob-tlc-oobclassifiers: OLM:131;
-x-forefront-prvs: 02015246A9
-x-forefront-antispam-report: SFV:NSPM;
- SFS:(10019020)(4636009)(366004)(346002)(376002)(136003)(39860400002)(396003)(189003)(199004)(14454004)(50226002)(476003)(8936002)(486006)(66556008)(81156014)(6512007)(76176011)(6436002)(6486002)(81166006)(4326008)(66476007)(66446008)(64756008)(7736002)(52116002)(2171002)(66066001)(99286004)(66946007)(305945005)(386003)(102836004)(6506007)(478600001)(256004)(25786009)(55236004)(186003)(36756003)(86362001)(54906003)(71200400001)(8676002)(2616005)(3846002)(6116002)(446003)(11346002)(5660300002)(110136005)(2906002)(26005)(1076003)(44832011)(71190400001)(316002);
- DIR:OUT; SFP:1102; SCL:1; SRVR:MN2PR04MB6048;
- H:MN2PR04MB6061.namprd04.prod.outlook.com; FPR:; SPF:None; LANG:en;
- PTR:InfoNoRecords; MX:1; A:1; 
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: z4WP8MybwY2lGRPthbvp+XGhzxTqYaithBfHcSakTWFpfnN+Myil6aDuSZ5W1OMLkzLGOwKxHzjeT6IMnG6/MTqS6bbBYMYHQjcY9XnkQlGfnNcPQViiScCEykIeCK+Ndo7FZuhYZhuzTtfOeEpuetSbatdjbz4MjoLAKGrGUwstWnR0BAfEx2XQrVhKibXQfl7K7W7mkmL91j8V2GnK06vn3arvYHfz8fPDzKRBeNYJvLty4Ow7C7/03L9sUvjJkSV4PTVCFYmTr7k7CO8i/NdeaIlA8khrx0rBoiXevkPNLCKBcfLI+EnS+THIIkuin+G2BOI1sByq2xz0DiimPQ7WIR76SzalUWHk300C/QmHSIsb9sZgAYXPa2rMofPMWB8fKMjk6o95ZQi9PMfan30viHXiDd0+IhVIaNVpKFgBmZvAIYp35spjAR70NwP7
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+ (envelope-from <alex.bennee@linaro.org>) id 1iNtpz-0007Ex-Gj
+ for qemu-riscv@nongnu.org; Fri, 25 Oct 2019 03:16:44 -0400
+Received: from mail-wm1-x32b.google.com ([2a00:1450:4864:20::32b]:55365)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <alex.bennee@linaro.org>)
+ id 1iNtpz-0007ED-9r
+ for qemu-riscv@nongnu.org; Fri, 25 Oct 2019 03:16:43 -0400
+Received: by mail-wm1-x32b.google.com with SMTP id g24so856988wmh.5
+ for <qemu-riscv@nongnu.org>; Fri, 25 Oct 2019 00:16:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding;
+ bh=e6OWosr3vkKtYZuEhZpOOVQK50EP38/6kxdAzEYGV48=;
+ b=O0cbxHjU7L9AvD0g3dMSk5Ee9wETctht8caLB2opxTRjFKTAxvHwpKurLzQnpyHCZ9
+ eEfJOJnz8cBghbdYpU5B2Xuox9MIkISKsX7N3FXiZkAW7rEVw1Ge7rEaHQJQwCT/l36o
+ uPT/vNe4YMPWgV5h2GVAWa0iTLc1HGnWJU2dbKaDUAq5gKKT9eaTKv2fBQEK2EOPX11H
+ o8uqZFjaTWFktYY9rO5TbMCxEHj7N/pEtbFUmTBYgOoCt3mXkpAJGh3o3jQNQLDmGvp7
+ 1cBG4yGE/RcODDOWrqAp3ytUgKZIXkcXtQV7xoZsytXThw2QQ3x5cav8k0/dC34W550K
+ TA1A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=e6OWosr3vkKtYZuEhZpOOVQK50EP38/6kxdAzEYGV48=;
+ b=Vlq1n8YRJbWwfOd9pNcepmz+U5aI5QX9HAjoC4kaIqv/TOiYgjsG/QLg0xqBMiWzD2
+ heQeSZX9e+0mfpSH3WF8g1kWKWIHvrw76gM5jCU0T/l4qpXpI2rEtbEkqz+WB2eZA68j
+ MX3boJK52+sjfS5iGlThs7cG2283f26pOQgX12LTkEw+kn9HoicvXKIkyI3fX4UH4WUR
+ J/lKJaqLpvgyymjmnq9shtc6wbfJtbMyFYrWq/NZ6LCEzDXq6s1oU12yNA7Al6oo41cy
+ FBlKrBbSRHYDbpsIu58JR7+qjiCZZpA2c5c4p3shpU5pm8lnC3TkHSSkhBIJXOuI3Por
+ y8Rw==
+X-Gm-Message-State: APjAAAXKM25CbEsLch0mPtH/GGWtfjFelwp6m/cIpG47HvqDdUUajWdV
+ 2VHnFjSunwYwH0et+DFZmKnLmQ==
+X-Google-Smtp-Source: APXvYqyzDslGrfRHk9Jqdp8fh8HWCByD71g69sMTX9Va0f7CvNLETFTxXnF4epA9/DovNnpy5XyoFg==
+X-Received: by 2002:a1c:7e10:: with SMTP id z16mr1906939wmc.11.1571987802066; 
+ Fri, 25 Oct 2019 00:16:42 -0700 (PDT)
+Received: from zen.linaroharston ([51.148.130.216])
+ by smtp.gmail.com with ESMTPSA id a17sm1176786wmb.8.2019.10.25.00.16.36
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 25 Oct 2019 00:16:40 -0700 (PDT)
+Received: from zen.lan (localhost [127.0.0.1])
+ by zen.linaroharston (Postfix) with ESMTP id 2F5E91FFC7;
+ Fri, 25 Oct 2019 07:37:18 +0100 (BST)
+From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
+To: peter.maydell@linaro.org
+Cc: qemu-devel@nongnu.org, "Emilio G. Cota" <cota@braap.org>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Palmer Dabbelt <palmer@sifive.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
+Subject: [PULL v2 47/73] target/riscv: fetch code with translator_ld
+Date: Fri, 25 Oct 2019 07:36:47 +0100
+Message-Id: <20191025063713.23374-48-alex.bennee@linaro.org>
+X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20191025063713.23374-1-alex.bennee@linaro.org>
+References: <20191025063713.23374-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
-X-OriginatorOrg: wdc.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: ce555e46-e0ed-4114-2ce1-08d75903c5f8
-X-MS-Exchange-CrossTenant-originalarrivaltime: 25 Oct 2019 04:28:23.9293 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: SfW3NbAeHrxUIKPc6ONbsxFs4nue7FDR5eCmBOGKLoX7woNsQ7ebdi0LGN4SUmTp2xTu5VpZjyMCVwbLKmdagw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR04MB6048
-X-detected-operating-system: by eggs.gnu.org: FreeBSD 9.x [fuzzy]
-X-Received-From: 68.232.143.124
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2a00:1450:4864:20::32b
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -126,99 +82,30 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Oct 2019 04:28:29 -0000
+X-List-Received-Date: Fri, 25 Oct 2019 07:16:48 -0000
 
-We extend QEMU RISC-V virt machine by adding Goldfish RTC device
-to it. This will allow Guest Linux to sync it's local date/time
-with Host date/time via RTC device.
+From: "Emilio G. Cota" <cota@braap.org>
 
-Signed-off-by: Anup Patel <anup.patel@wdc.com>
-Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
-Acked-by: Palmer Dabbelt <palmer@sifive.com>
+Signed-off-by: Emilio G. Cota <cota@braap.org>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
----
- hw/riscv/Kconfig        |  1 +
- hw/riscv/virt.c         | 15 +++++++++++++++
- include/hw/riscv/virt.h |  2 ++
- 3 files changed, 18 insertions(+)
+Acked-by: Palmer Dabbelt <palmer@sifive.com>
 
-diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-index fb19b2df3a..b33753c780 100644
---- a/hw/riscv/Kconfig
-+++ b/hw/riscv/Kconfig
-@@ -34,6 +34,7 @@ config RISCV_VIRT
-     select PCI
-     select HART
-     select SERIAL
-+    select GOLDFISH_RTC
-     select VIRTIO_MMIO
-     select PCI_EXPRESS_GENERIC_BRIDGE
-     select SIFIVE
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index d36f5625ec..95c42ab993 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -57,6 +57,7 @@ static const struct MemmapEntry {
-     [VIRT_DEBUG] =3D       {        0x0,         0x100 },
-     [VIRT_MROM] =3D        {     0x1000,       0x11000 },
-     [VIRT_TEST] =3D        {   0x100000,        0x1000 },
-+    [VIRT_RTC] =3D         {   0x101000,        0x1000 },
-     [VIRT_CLINT] =3D       {  0x2000000,       0x10000 },
-     [VIRT_PLIC] =3D        {  0xc000000,     0x4000000 },
-     [VIRT_UART0] =3D       { 0x10000000,         0x100 },
-@@ -310,6 +311,17 @@ static void create_fdt(RISCVVirtState *s, const struct=
- MemmapEntry *memmap,
-     qemu_fdt_setprop_cell(fdt, nodename, "interrupt-parent", plic_phandle)=
-;
-     qemu_fdt_setprop_cell(fdt, nodename, "interrupts", UART0_IRQ);
-=20
-+    nodename =3D g_strdup_printf("/rtc@%lx",
-+        (long)memmap[VIRT_RTC].base);
-+    qemu_fdt_add_subnode(fdt, nodename);
-+    qemu_fdt_setprop_string(fdt, nodename, "compatible",
-+        "google,goldfish-rtc");
-+    qemu_fdt_setprop_cells(fdt, nodename, "reg",
-+        0x0, memmap[VIRT_RTC].base,
-+        0x0, memmap[VIRT_RTC].size);
-+    qemu_fdt_setprop_cell(fdt, nodename, "interrupt-parent", plic_phandle)=
-;
-+    qemu_fdt_setprop_cell(fdt, nodename, "interrupts", RTC_IRQ);
-+
-     qemu_fdt_add_subnode(fdt, "/chosen");
-     qemu_fdt_setprop_string(fdt, "/chosen", "stdout-path", nodename);
-     if (cmdline) {
-@@ -496,6 +508,9 @@ static void riscv_virt_board_init(MachineState *machine=
-)
-         0, qdev_get_gpio_in(DEVICE(s->plic), UART0_IRQ), 399193,
-         serial_hd(0), DEVICE_LITTLE_ENDIAN);
-=20
-+    sysbus_create_simple("goldfish_rtc", memmap[VIRT_RTC].base,
-+        qdev_get_gpio_in(DEVICE(s->plic), RTC_IRQ));
-+
-     g_free(plic_hart_config);
- }
-=20
-diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
-index 6e5fbe5d3b..e6423258d3 100644
---- a/include/hw/riscv/virt.h
-+++ b/include/hw/riscv/virt.h
-@@ -37,6 +37,7 @@ enum {
-     VIRT_DEBUG,
-     VIRT_MROM,
-     VIRT_TEST,
-+    VIRT_RTC,
-     VIRT_CLINT,
-     VIRT_PLIC,
-     VIRT_UART0,
-@@ -49,6 +50,7 @@ enum {
-=20
- enum {
-     UART0_IRQ =3D 10,
-+    RTC_IRQ =3D 11,
-     VIRTIO_IRQ =3D 1, /* 1 to 8 */
-     VIRTIO_COUNT =3D 8,
-     PCIE_IRQ =3D 0x20, /* 32 to 35 */
---=20
-2.17.1
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index adeddb85f67..b26533d4fd7 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -779,7 +779,7 @@ static void riscv_tr_translate_insn(DisasContextBase *dcbase, CPUState *cpu)
+     DisasContext *ctx = container_of(dcbase, DisasContext, base);
+     CPURISCVState *env = cpu->env_ptr;
+ 
+-    ctx->opcode = cpu_ldl_code(env, ctx->base.pc_next);
++    ctx->opcode = translator_ldl(env, ctx->base.pc_next);
+     decode_opc(ctx);
+     ctx->base.pc_next = ctx->pc_succ_insn;
+ 
+-- 
+2.20.1
 
 
