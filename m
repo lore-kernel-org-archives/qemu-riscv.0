@@ -1,66 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iO91E-0005Fy-8e
+	id 1iO91E-0005GL-Hz
 	for mharc-qemu-riscv@gnu.org; Fri, 25 Oct 2019 19:29:20 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49740)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49773)
  by lists.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <prvs=194c68654=alistair.francis@wdc.com>)
- id 1iO90y-00055Y-0I
- for qemu-riscv@nongnu.org; Fri, 25 Oct 2019 19:29:05 -0400
+ id 1iO90z-00056C-UY
+ for qemu-riscv@nongnu.org; Fri, 25 Oct 2019 19:29:09 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
  (envelope-from <prvs=194c68654=alistair.francis@wdc.com>)
- id 1iO90s-0004H4-20
- for qemu-riscv@nongnu.org; Fri, 25 Oct 2019 19:29:03 -0400
+ id 1iO90x-0004Lv-RG
+ for qemu-riscv@nongnu.org; Fri, 25 Oct 2019 19:29:05 -0400
 Received: from esa1.hgst.iphmx.com ([68.232.141.245]:10430)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <prvs=194c68654=alistair.francis@wdc.com>)
- id 1iO90n-0004CY-Hb; Fri, 25 Oct 2019 19:28:53 -0400
+ id 1iO90q-0004CY-C9; Fri, 25 Oct 2019 19:28:58 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1572046133; x=1603582133;
+ t=1572046136; x=1603582136;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=FdeZ4NhLfUCPSsQnsVMq9BAn/ZA/owDOlR0AZEjNA30=;
- b=MsBFZSVLvGsdLnJ/eYyEfQZ6SLMVjqrlHlBsRuWK5wA4KmXsD6sVeA4B
- s8hHAVWenLNBdLiLZK/jczpr9I0Tf6mIY2nCFCQ5iPhzd+jujAByO45mL
- G1pyVFwQ9y3XN5hbVsQAMbbz6df2VxJPpeJG/JRncPjkFYmlE+uQCr2DY
- R72IcsBRCLzgh+YHNjrd/TtfSQkEYZd+qXCL2qWzl+od3pjfLuB+nOQGX
- vkJUPrsNI4hH81A0FFBrFM87GefpWBOvVIUWN56OeaVl1n+d/6pyQ0ZTL
- iLySQs/BOqrrf2WUkuROqdwp2pL0PXNq8g89kLt/BJmTN7MOLe0B7BZIE w==;
-IronPort-SDR: QIgdlC26c/9NlcD9JFOfk4I9sz+NM75la7FSlmqdBOxgUQwt1VfPgpM85BPoY8j16S5Xvk6Wxf
- JTfjB/nOjuw0tHHjjX5Z/fav0XKuB5lW7LZP8IiEeWrBbHnTsNnUkaSQLQRcUXLvF9bDFV5CSJ
- QtRjS4RmcA7yYMBE0Yniz6GmV3EfdE3/hhA7+7petqhSysDywtgrmUOuQwRCR/o8OUh6OtF9sk
- +szv5Azvxy6YJ9S/EbYscSyJe3Wwal4H2dPfc/SQ8yynZOEtx3G4Aqd9b36/HXNyhg5zzwlzK6
- x8Y=
-X-IronPort-AV: E=Sophos;i="5.68,230,1569254400"; d="scan'208";a="228520394"
+ bh=88AOf5/ricp3Olf5cMT5yk+9tNyrWu3Wq5dzzImifuI=;
+ b=quaRH4MrVUItjH+J0Vmj8Q+sEMtXN+Z5VfVNggTSHH4o6spwd3JcIwSG
+ 5ENWlepOna4lUKLGsjwXtAqcnwa2xJOkQsJ2KzvvZkZm7Bqwrx2vzbZBC
+ EpfZH/1L9Nw6QszgRBWGfK8qxZeIBgEXOOn1jb2isdmnF8gtkgUOZoLxt
+ nUBpunEjVjR1K0JTDRuFyuekKnPb7hNbH0OohHUc+t5gx8A3eYCkXt2Bm
+ ZNbu6TaEyCc5eY23pDGZQ6nQaTzZOw4TYCA6e14Y3oiBoSxxWyHWGkUj0
+ 6qyNGti4DYV1CSmKr9d26mad87hZvLEBgkZIQFemw+qodFmNvwNYKFrst g==;
+IronPort-SDR: avVTqrbhW6Qy8YkUBg9qTp+G4BT0WMtPhLMnSEYEZ4zpMh/KevzfwkwT0fzGgLSiHLZwa3vfKm
+ Sq7REheKw6aKWc7fDn7KoYesUqWcfX4NBsVNAGAQjuNiveIN/dkbd75alndZo3FPIjHW1cDOCf
+ /j8T7VBy7aWisWuTqMNuHUDOBkdnL+XOFDYn076i6geOpMXQXmDTT+DgW2aQ5yuNermxN3FNTt
+ zYkssyGgXq4XRjv9IAZKvXKe/NzNaPLAh1NKfP7hjIgf/Ikd681S3wiK4icUPW0qVB9juVvbQz
+ xvI=
+X-IronPort-AV: E=Sophos;i="5.68,230,1569254400"; d="scan'208";a="228520404"
 Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
  ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 26 Oct 2019 07:28:21 +0800
-IronPort-SDR: 8sEjert+rRdGwD95cgxpBTl/O0ah1ECxS5lz954x1vnz6U9KYajYYjHxRT5kFbB0IT8zHSu23q
- 8/GcNu53B5lGCsW6uHkJrx9ojOJMEHyaSu/GXXAyhE1NfDOI91xuNYtaQrd0SairBu077ohi/U
- 6qceM5v6RBdBDug/zArhmmytS3y/5szIgUA63X/N2CPclgm4esn4FVuhRXuEnX43Ew0q2Oi8xD
- l6s/6q1XJn9yEyrXDX8v+rjCtY6lVKZAQq/23sKN9ZhU73MUREpUCK3rQuntptq7U4tpGQs/Nb
- UGM2QursmSlqgIIRDke+wQJp
-Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
+ by ob1.hgst.iphmx.com with ESMTP; 26 Oct 2019 07:28:38 +0800
+IronPort-SDR: H9xo/IoxqE/yKFFwYlm9bmrc34A/mlG3Gyqm3CfAMaPZgJAwicwRdZiCqL/kQ2ksaa6RD0ADPk
+ jy09Yx3yK6CHdTb/sn+ZedR26Kstf2Hibs5scmWKUjawZPrCmm/ZwQEuGRK3AR65GkemmYAuLl
+ T94zaCdXomtSoVYWBxnOl2RNNHWFQV2Iys6dOOtRq9lMU8s7ctDEJotmx+N3Sjbf6S9dkWKX6P
+ q7N3zHFYLIcBp87d4P91Iq6r79IUSBpc10WpQpBmGVH30Lx1Z9fqpezzb2MVYWsBPQ4qsYNBFP
+ I0BfO5WTD0qMVfX1e0AKXLGs
+Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
  by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 25 Oct 2019 16:23:46 -0700
-IronPort-SDR: EaFI86jyQ2mwZkh2WIGp3Nwx7yinwDy8MSy2wV2tMZd+kOK+gZf7hS/gxpMn0F+6YBlyqcmYtt
- 9d8pHbjPDwcq/7sehmd+H8v7v2A9LGKmc8mm0+/mawGaK9P9/shFzMx8mBH2gMJDd5FlDD3j8q
- cRr5h10pc1acftoKcHxLHenyeXQbP2KBmsH57VXr0Kq3WDZFcVe88JL6D/5xoCDguH4R2HyfKW
- Slgkg2kGKB4Lb0enQsIrubpaWrSsdgCvPIk27i/suVJHOkp1k04rWOx+e/oyfRXJI0B5u0x6mG
- ZYk=
+ 25 Oct 2019 16:24:04 -0700
+IronPort-SDR: psxqcSipS3CbgbkRJHHv+Vbaes24J5/t+0pkJ6lnNAwLp9sQlcMEd508RN53nzVbvr4f07pDXw
+ 0T6oMyrEwFRxd9eFduJUiig+sRVcJW2stDyFFXbH5nWlSfm00dX9/bcDIswvbzWnOpKha0x58B
+ 5f2e8aHQ91Vst8MMYzIk0HUyM0H/FPAk1pM0v6JCWxYBhHrFtwQHVRaNme4aLs0kpWcZCKJwp+
+ W2jKC3kVO+yPqpnY9hmEoGLIhNuSFZSlk7Pejs1oA/dQ+9f8PKKdU+xUYGttDXTNcrcOxOMrcz
+ nZ4=
 WDCIronportException: Internal
 Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
  risc6-mainframe.int.fusionio.com) ([10.196.157.58])
- by uls-op-cesaip02.wdc.com with ESMTP; 25 Oct 2019 16:28:21 -0700
+ by uls-op-cesaip01.wdc.com with ESMTP; 25 Oct 2019 16:28:38 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: palmer@sifive.com,
 	alistair.francis@wdc.com,
 	alistair23@gmail.com
-Subject: [PATCH v2 05/27] target/riscv: Fix CSR perm checking for HS mode
-Date: Fri, 25 Oct 2019 16:23:25 -0700
-Message-Id: <1cb5cdbe67d8d9c489f6c0bedfc6c007e1f7243a.1572045716.git.alistair.francis@wdc.com>
+Subject: [PATCH v2 10/27] target/riscv: Add Hypervisor virtual CSRs accesses
+Date: Fri, 25 Oct 2019 16:23:42 -0700
+Message-Id: <99971b33159ada296222261e922b11a119a7bceb.1572045716.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.23.0
 In-Reply-To: <cover.1572045716.git.alistair.francis@wdc.com>
 References: <cover.1572045716.git.alistair.francis@wdc.com>
@@ -79,47 +79,174 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Oct 2019 23:29:06 -0000
-
-Update the CSR permission checking to work correctly when we are in
-HS-mode.
+X-List-Received-Date: Fri, 25 Oct 2019 23:29:10 -0000
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
 ---
- target/riscv/csr.c | 18 ++++++++++++++----
- 1 file changed, 14 insertions(+), 4 deletions(-)
+ target/riscv/cpu_bits.h |  11 ++++
+ target/riscv/csr.c      | 119 ++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 130 insertions(+)
 
+diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+index 162d42f211..95909f159a 100644
+--- a/target/riscv/cpu_bits.h
++++ b/target/riscv/cpu_bits.h
+@@ -191,6 +191,17 @@
+ #define HGATP_PPN            SATP64_PPN
+ #endif
+ 
++/* Virtual CSRs */
++#define CSR_VSSTATUS        0x200
++#define CSR_VSIE            0x204
++#define CSR_VSTVEC          0x205
++#define CSR_VSSCRATCH       0x240
++#define CSR_VSEPC           0x241
++#define CSR_VSCAUSE         0x242
++#define CSR_VSTVAL          0x243
++#define CSR_VSIP            0x244
++#define CSR_VSATP           0x280
++
+ /* Physical Memory Protection */
+ #define CSR_PMPCFG0         0x3a0
+ #define CSR_PMPCFG1         0x3a1
 diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index da02f9f0b1..08956aa557 100644
+index edfafca06f..a1eb15f507 100644
 --- a/target/riscv/csr.c
 +++ b/target/riscv/csr.c
-@@ -799,12 +799,22 @@ int riscv_csrrw(CPURISCVState *env, int csrno, target_ulong *ret_value,
+@@ -817,6 +817,115 @@ static int write_hgatp(CPURISCVState *env, int csrno, target_ulong val)
+     return 0;
+ }
  
-     /* check privileges and return -1 if check fails */
- #if !defined(CONFIG_USER_ONLY)
--    int csr_priv = get_field(csrno, 0x300);
-+    int effective_priv = env->priv;
-     int read_only = get_field(csrno, 0xC00) == 3;
--    if ((!env->debugger) && (env->priv < csr_priv)) {
--        return -1;
++/* Virtual CSR Registers */
++static int read_vsstatus(CPURISCVState *env, int csrno, target_ulong *val)
++{
++    *val = env->vsstatus;
++    return 0;
++}
 +
-+    if (riscv_has_ext(env, RVH) &&
-+        env->priv == PRV_S &&
-+        !riscv_cpu_virt_enabled(env)) {
-+        /*
-+         * We are in S mode without virtualisation, therefore we are in HS Mode.
-+         * Add 1 to the effective privledge level to allow us to access the
-+         * Hypervisor CSRs.
-+         */
-+        effective_priv++;
-     }
--    if (write_mask && read_only) {
++static int write_vsstatus(CPURISCVState *env, int csrno, target_ulong val)
++{
++    env->vsstatus = val;
++    return 0;
++}
 +
-+    if ((write_mask && read_only) ||
-+        (!env->debugger && (effective_priv < get_field(csrno, 0x300)))) {
-         return -1;
-     }
- #endif
++static int read_vsie(CPURISCVState *env, int csrno, target_ulong *val)
++{
++    *val = env->vsie;
++    return 0;
++}
++
++static int write_vsie(CPURISCVState *env, int csrno, target_ulong val)
++{
++    env->vsie = val;
++    return 0;
++}
++
++static int read_vstvec(CPURISCVState *env, int csrno, target_ulong *val)
++{
++    *val = env->vstvec;
++    return 0;
++}
++
++static int write_vstvec(CPURISCVState *env, int csrno, target_ulong val)
++{
++    env->vstvec = val;
++    return 0;
++}
++
++static int read_vsscratch(CPURISCVState *env, int csrno, target_ulong *val)
++{
++    *val = env->vsscratch;
++    return 0;
++}
++
++static int write_vsscratch(CPURISCVState *env, int csrno, target_ulong val)
++{
++    env->vsscratch = val;
++    return 0;
++}
++
++static int read_vsepc(CPURISCVState *env, int csrno, target_ulong *val)
++{
++    *val = env->vsepc;
++    return 0;
++}
++
++static int write_vsepc(CPURISCVState *env, int csrno, target_ulong val)
++{
++    env->vsepc = val;
++    return 0;
++}
++
++static int read_vscause(CPURISCVState *env, int csrno, target_ulong *val)
++{
++    *val = env->vscause;
++    return 0;
++}
++
++static int write_vscause(CPURISCVState *env, int csrno, target_ulong val)
++{
++    env->vscause = val;
++    return 0;
++}
++
++static int read_vstval(CPURISCVState *env, int csrno, target_ulong *val)
++{
++    *val = env->vstval;
++    return 0;
++}
++
++static int write_vstval(CPURISCVState *env, int csrno, target_ulong val)
++{
++    env->vstval = val;
++    return 0;
++}
++
++static int read_vsip(CPURISCVState *env, int csrno, target_ulong *val)
++{
++    *val = (target_ulong)atomic_read(&env->vsip);
++    return 0;
++}
++
++static int write_vsip(CPURISCVState *env, int csrno, target_ulong val)
++{
++    atomic_set(&env->vsip, val);
++    return 0;
++}
++
++static int read_vsatp(CPURISCVState *env, int csrno, target_ulong *val)
++{
++    *val = env->vsatp;
++    return 0;
++}
++
++static int write_vsatp(CPURISCVState *env, int csrno, target_ulong val)
++{
++    env->vsatp = val;
++    return 0;
++}
++
+ /* Physical Memory Protection */
+ static int read_pmpcfg(CPURISCVState *env, int csrno, target_ulong *val)
+ {
+@@ -1025,6 +1134,16 @@ static riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+     [CSR_HIDELEG] =             { hmode,   read_hideleg,     write_hideleg    },
+     [CSR_HGATP] =               { hmode,   read_hgatp,       write_hgatp      },
+ 
++    [CSR_VSSTATUS] =            { hmode,   read_vsstatus,    write_vsstatus   },
++    [CSR_VSIE] =                { hmode,   read_vsie,        write_vsie       },
++    [CSR_VSTVEC] =              { hmode,   read_vstvec,      write_vstvec     },
++    [CSR_VSSCRATCH] =           { hmode,   read_vsscratch,   write_vsscratch  },
++    [CSR_VSEPC] =               { hmode,   read_vsepc,       write_vsepc      },
++    [CSR_VSCAUSE] =             { hmode,   read_vscause,     write_vscause    },
++    [CSR_VSTVAL] =              { hmode,   read_vstval,      write_vstval     },
++    [CSR_VSIP] =                { hmode,   read_vsip,        write_vsip       },
++    [CSR_VSATP] =               { hmode,   read_vsatp,       write_vsatp      },
++
+     /* Physical Memory Protection */
+     [CSR_PMPCFG0  ... CSR_PMPADDR9] =  { pmp,   read_pmpcfg,  write_pmpcfg   },
+     [CSR_PMPADDR0 ... CSR_PMPADDR15] = { pmp,   read_pmpaddr, write_pmpaddr  },
 -- 
 2.23.0
 
