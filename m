@@ -1,62 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iO05H-0000I6-TZ
-	for mharc-qemu-riscv@gnu.org; Fri, 25 Oct 2019 09:56:55 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:39597)
+	id 1iO6CY-0002Lk-Rw
+	for mharc-qemu-riscv@gnu.org; Fri, 25 Oct 2019 16:28:51 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:34780)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <peter.maydell@linaro.org>) id 1iO05E-00007V-QD
- for qemu-riscv@nongnu.org; Fri, 25 Oct 2019 09:56:53 -0400
+ (envelope-from <alistair23@gmail.com>) id 1iO6CT-00022Q-OL
+ for qemu-riscv@nongnu.org; Fri, 25 Oct 2019 16:28:46 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <peter.maydell@linaro.org>) id 1iO05D-0004oV-EF
- for qemu-riscv@nongnu.org; Fri, 25 Oct 2019 09:56:52 -0400
-Received: from mail-oi1-x242.google.com ([2607:f8b0:4864:20::242]:32919)
+ (envelope-from <alistair23@gmail.com>) id 1iO6CS-0004FM-DE
+ for qemu-riscv@nongnu.org; Fri, 25 Oct 2019 16:28:45 -0400
+Received: from mail-lj1-x242.google.com ([2a00:1450:4864:20::242]:44362)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <peter.maydell@linaro.org>)
- id 1iO05D-0004oB-99
- for qemu-riscv@nongnu.org; Fri, 25 Oct 2019 09:56:51 -0400
-Received: by mail-oi1-x242.google.com with SMTP id a15so1706764oic.0
- for <qemu-riscv@nongnu.org>; Fri, 25 Oct 2019 06:56:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ (Exim 4.71) (envelope-from <alistair23@gmail.com>)
+ id 1iO6CS-0004F2-5u; Fri, 25 Oct 2019 16:28:44 -0400
+Received: by mail-lj1-x242.google.com with SMTP id c4so4182083lja.11;
+ Fri, 25 Oct 2019 13:28:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=/bRTAch7TN8AElK6YT0WBBYEsDIeLtG7aQXPhu3kJI4=;
- b=GZvnZsM6Pnd8X7VO0LEZDIWWduU95y52I8n/w/6aeSFytaTQg2F9WhPJvs//5jmQmS
- dWOEvJBxGy9YY4IkNDbmBOwJbIadog/IV9IzwwXp6h2B+gM2E8ISVmSe7/jSOyXxWuAY
- gV43z6MpSmukpfazkuKfHWa4jaTkdDpPIon5aCJ15lbXZP1jyvhkx/7zUmSC/WnU/U2w
- 3yP/MQgWg8aZGWBy9+0KVIBfzxW+gksm4RDF1IchroOIwOm6aY3g+mDewCPXBGvPRqif
- S0gWxDXoxXQLAbtJmM+qZ6ssPFcTtdttwUZLwJM838BPMCGRad54HdOAQgEqMT9YC5Zr
- O/hQ==
+ :cc; bh=74txzN/hJtYpBLyMGLJtucp74h4g7fv6LlmMqvR82HU=;
+ b=Dyx1BKFLqMWOPsmFgvc0oL730/qEHropt/mxB9txmLeOdXeGPeWnmO0kUH+l7gDWlZ
+ lOfHOlZoQclGXuVfbx+9rh0jYeiTdPcMZfQfp5Guo42BYk3j1xUYgJWVaD+8fMTHmKNQ
+ rtmQnCfVUBAmtCD+xDvt/q5vMzP9QRaXlnzhdvQ1TYrzcjM1ex33SBBHKobEshFfI3XF
+ f2+YW/nQFqUlI4xKQYnnmr/QAtWlpIEdr1yya7XX2IDIDqqn0/+1FbkuZ8Ul+WRjTJBk
+ mzMQwP57VJMcYm12CVA2FuyoKPsoSSHWcd2pnoLKHpeHhCAifuprcaXNK/vOqizSB6+3
+ 2eJw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=/bRTAch7TN8AElK6YT0WBBYEsDIeLtG7aQXPhu3kJI4=;
- b=njeiNTg8+GsmQS+TcZeid833bD51PXWetbcpkNExwWQ747RunvYs0nGdsGAjMWatav
- yCOBmj4iiQYBZ6NlIB3zkxv/rfIzkbonSXS5b0mS+tLx/UWZ326lSGTTrLDyj8K3QHD/
- A+dCOuKT8w+eEyLIyBVM4fNCmc13hHdcNeZpPsFe9m5MvezKvGmxjtSwUASnG8lut+RR
- PkkFniadLo4eBOsk94MctpUIvUJtOTmJwzvg2DQKfqCrX9lf3yKQT7ub8q2vvkRGxIZo
- IWsH7s1F4lbpN2MPo3igLTdtqCAiVolAw0Cf0IMum6YqRpRalEUsjrheLGp8KBKq0M7/
- ckBQ==
-X-Gm-Message-State: APjAAAWyEBosgiAXmJqt7QP5HvuNNajTDW96BqnG5SBfZ1rF9oS2efEj
- l064zTTCS9pFfEPO28NlmE1F1WoTFMdz/wMezb/lvA==
-X-Google-Smtp-Source: APXvYqx/2nIGI7laJjOizTEHsn9rqO7zwfRYbL0MYOlTcID/njBFEBvp7jh79RhvREn54ssV/9iSoM+0co+8LJHn/6M=
-X-Received: by 2002:aca:2312:: with SMTP id e18mr2135924oie.98.1572011810153; 
- Fri, 25 Oct 2019 06:56:50 -0700 (PDT)
+ bh=74txzN/hJtYpBLyMGLJtucp74h4g7fv6LlmMqvR82HU=;
+ b=I1J71UHtoLZBZzzIS50mOSTykno5oCOVyCatX8IUdanjC7HVLkG7cHbibaEV+5DmtK
+ Zg9X1UFRWMUtJpqzL9qXd9y3kj3VrfAhLyfKXzxETUz+Qqgg3iAS18GJdC2chk9bqmRa
+ LRw+ak+cudVvkgDiTyYuYgdeNvpa04ams2NlJgkmypmwh+k9kDV7TeEJJ6OehPd9M1AJ
+ UyTlOzMyOFtjukciG/yMAja8b6eQ2GM1xNHlj8C4jCdiCJBv33d12yLi+HKXNewho0sv
+ OXICilrxi8esG3CH1VJGGWlwH/OJNxJ1PGNC6X04Woo/VavoNxrRsvGV6m8yrQyECq1a
+ eRhg==
+X-Gm-Message-State: APjAAAW2IlMFRguGVH888JwTBUdF3Fn6iZ0GrzJZ/vIUGeT9VBmCONjy
+ LT/36MZYlh6teYDDuaBL2gy+q3Q9LesTe3cxeC0=
+X-Google-Smtp-Source: APXvYqwF6bpJR7bbKemxjTOyNfrNgSMeJlc99SIFKPzFVAa8NwY28yZG8h5VddzPagdaJDfnqlHpqbBpNhWMV96/RZ0=
+X-Received: by 2002:a2e:82cd:: with SMTP id n13mr3767871ljh.156.1572035322961; 
+ Fri, 25 Oct 2019 13:28:42 -0700 (PDT)
 MIME-Version: 1.0
-References: <cover.1570567870.git.alistair.francis@wdc.com>
- <mhng-0b0d87ea-8019-4226-b65c-76bdfc0c4189@palmer-si-x1e>
-In-Reply-To: <mhng-0b0d87ea-8019-4226-b65c-76bdfc0c4189@palmer-si-x1e>
-From: Peter Maydell <peter.maydell@linaro.org>
-Date: Fri, 25 Oct 2019 14:56:39 +0100
-Message-ID: <CAFEAcA-J-xGSx=0zjibvs5C1YD7_=YZy+NmghzUSFu6wh3e8Dg@mail.gmail.com>
-Subject: Re: [PATCH v2 0/2] RISC-V: Convert to do_transaction_failed hook
-To: Palmer Dabbelt <palmer@sifive.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- QEMU Developers <qemu-devel@nongnu.org>,
- Alistair Francis <alistair23@gmail.com>
+References: <850360df8fc15a3671bf2237f972ebaf09110015.1566603412.git.alistair.francis@wdc.com>
+ <mhng-b813f03d-c23e-405a-8213-c4c9b22a6831@palmer-si-x1e>
+ <CANnJOVFNqXEg9KkJC4CHkt0KTt2_6HjyhU2CvMROW+e79mDncA@mail.gmail.com>
+ <CAKmqyKMfODSjbBm5ZgmHYYzzrf3B_4WEbANeKXo6rSO6V5Pzeg@mail.gmail.com>
+ <CANnJOVGPW1ppNdx+=KAvgNhgGQPvJxjyGY=rxunicu=f++xhiQ@mail.gmail.com>
+ <CAKmqyKPQPrPKdkaRjZ7P75jamuqEq6BABir56VrYGm=ZSFpAww@mail.gmail.com>
+ <18b87754-d5b2-e4f1-bdc5-92ad26b97379@linaro.org>
+ <CANnJOVEsF57FBbNxJ_WvL3O7iJ_mZijYikC_aNhxKcP856qTzw@mail.gmail.com>
+In-Reply-To: <CANnJOVEsF57FBbNxJ_WvL3O7iJ_mZijYikC_aNhxKcP856qTzw@mail.gmail.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Fri, 25 Oct 2019 13:28:16 -0700
+Message-ID: <CAKmqyKP=2a+0sbDu78JFm2ZW_TZKWYdh5gsvrtu8W13Zt=DCFQ@mail.gmail.com>
+Subject: Re: [Qemu-devel] [Qemu-riscv] [PATCH v1 10/28] target/riscv: Convert
+ mie and mstatus to pointers
+To: Jonathan Behrens <fintelia@gmail.com>
+Cc: Richard Henderson <richard.henderson@linaro.org>,
+ Palmer Dabbelt <palmer@sifive.com>, 
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, Anup Patel <Anup.Patel@wdc.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Atish Patra <Atish.Patra@wdc.com>, 
+ Alistair Francis <Alistair.Francis@wdc.com>
 Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::242
+X-Received-From: 2a00:1450:4864:20::242
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -68,56 +76,75 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Oct 2019 13:56:54 -0000
+X-List-Received-Date: Fri, 25 Oct 2019 20:28:48 -0000
 
-On Tue, 8 Oct 2019 at 22:31, Palmer Dabbelt <palmer@sifive.com> wrote:
+On Thu, Sep 19, 2019 at 9:59 AM Jonathan Behrens <fintelia@gmail.com> wrote:
 >
-> On Tue, 08 Oct 2019 13:51:46 PDT (-0700), Alistair Francis wrote:
+> On Thu, Sep 19, 2019 at 10:50 AM Richard Henderson
+> <richard.henderson@linaro.org> wrote:
 > >
-> > The do_unassigned_access hook has been deprecated and RISC-V is the last
-> > user of it. Let's instead update the RISC-V implementation to use
-> > do_transaction_failed instead.
+> > On 9/18/19 4:47 PM, Alistair Francis wrote:
+> > > I'm not a fan of the pointer method that I'm using, but to me it seems
+> > > the least worst in terms of handling future code, keeping everythign
+> > > consistnent and avoiding complex access rules.
 > >
-> > After this series I used the 'git grep' regexes in
-> > docs/devel/loads-stores.rst and these are the memory accesses inside
-> > target/riscv:
+> > FWIW, I prefer the "banked" register method used by ARM.
 > >
-> > monitor.c:102:        cpu_physical_memory_read(pte_addr, &pte, ptesize);
+> > enum {
+> >     M_REG_NS = 0,    /* non-secure mode */
+> >     M_REG_S = 1,     /* secure mode */
+> >     M_REG_NUM_BANKS = 2,
+> > };
 > >
-> > cpu_helper.c:262:        target_ulong pte = address_space_ldl(cs->as, pte_addr, attrs, &res);
-> > cpu_helper.c:264:        target_ulong pte = address_space_ldq(cs->as, pte_addr, attrs, &res);
+> > ...
 > >
-> > translate.c:782:    ctx->opcode = cpu_ldl_code(env, ctx->base.pc_next);
+> >         uint32_t vecbase[M_REG_NUM_BANKS];
+> >         uint32_t basepri[M_REG_NUM_BANKS];
+> >         uint32_t control[M_REG_NUM_BANKS];
 > >
-> > gdbstub.c:328:        env->fpr[n] = ldq_p(mem_buf); /* always 64-bit */
-> >
-> > All of these look safe to me.
-> >
-> > v2:
-> >  - Rebase on master
-> >
-> >
-> > Palmer Dabbelt (2):
-> >   RISC-V: Handle bus errors in the page table walker
-> >   RISC-V: Implement cpu_do_transaction_failed
-> >
-> >  target/riscv/cpu.c        |  2 +-
-> >  target/riscv/cpu.h        |  7 +++++--
-> >  target/riscv/cpu_helper.c | 23 ++++++++++++++++-------
-> >  3 files changed, 22 insertions(+), 10 deletions(-)
+> > The major difference that I see is that a pointer can only represent a single
+> > state at a single time.  With an index, different parts of the code can ask
+> > different questions that may have different states.  E.g. "are we currently in
+> > secure mode" vs "will the exception return to secure mode".
 >
-> Thanks, these are in the queue.
+> This makes a lot of sense to me. It means that any individual control register
+> has an unambiguous name that doesn't change based on context. They aren't quite
+> the same names as used in the architecture specification (mie & vsie
+> vs. mie[NOVIRT] & mie[VIRT]), but they are reasonably close. It also means other
+> parts of the code can't ignore that there are two different versions of the
+> registers in play. Perhaps the biggest benefit though is that you can sidestep
+> swapping on mode changes *and* avoid needing any super fancy logic in the access
+> functions:
+>
+> int read_mstatus(...) {
+>     target_ulong novirt_mask = ...;
+>     *val = env->mstatus[NOVIRT] & novirt_mask | env->mstatus[virt_mode()];
+> }
+>
+> int read_vsstatus(...) {
+>     *val = env->mstatus[VIRT];
+> }
+>
+> int write_mstatus(...) {
+>     ...
+>     target_ulong novirt_mask = ...;
+>     env->mstatus[NOVIRT] = (env->mstatus[NOVIRT] & ~novirt_mask) |
+>                            (newval & novirt_mask);
+>     env->mstatus[virt_mode()] = (env->mstatus[virt_mode()] & novirt_mask) |
+>                                 (newval & ~novirt_mask);
 
-Ping! These still don't seem to be in master, and softfreeze
-is rapidly approaching (it's on the 29th).
+The part I don't like about this is that it then requires all of the
+RISC-V implementation to be affected by the Hypervisor extension. The
+current way means that if you aren't interested in the extension you
+can just ignore it and not worry about breaking anything. For ARM this
+isn't as big of an issue, but RISC-V is much more modular (there will
+be lots of platforms without the H extension) so I don't want people
+to have to worry about it.
 
-(As a general observation, flow of riscv patches into
-master seems to be quite slow. My recommendation would tend
-to be doing smaller pullrequests more frequently; I try to
-push through accumulated target-arm patches at least once
-a fortnight, though it depends on how many patches are
-arriving.)
+PS: Sorry for the delay here, I have been looking into some other ways
+of doing this, but I still think the current way is the least bad.
 
-thanks
--- PMM
+Alistair
+
+> }
 
