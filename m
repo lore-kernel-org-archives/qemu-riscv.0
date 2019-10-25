@@ -1,67 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iO91J-0005QY-Gn
-	for mharc-qemu-riscv@gnu.org; Fri, 25 Oct 2019 19:29:25 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49917)
+	id 1iO91K-0005Tp-Ra
+	for mharc-qemu-riscv@gnu.org; Fri, 25 Oct 2019 19:29:26 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49896)
  by lists.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <prvs=194c68654=alistair.francis@wdc.com>)
- id 1iO91E-0005Fu-85
- for qemu-riscv@nongnu.org; Fri, 25 Oct 2019 19:29:21 -0400
+ id 1iO91D-0005EN-Ho
+ for qemu-riscv@nongnu.org; Fri, 25 Oct 2019 19:29:20 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
  (envelope-from <prvs=194c68654=alistair.francis@wdc.com>)
- id 1iO91D-0004ao-5v
- for qemu-riscv@nongnu.org; Fri, 25 Oct 2019 19:29:20 -0400
+ id 1iO91C-0004aO-8R
+ for qemu-riscv@nongnu.org; Fri, 25 Oct 2019 19:29:19 -0400
 Received: from esa6.hgst.iphmx.com ([216.71.154.45]:36801)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <prvs=194c68654=alistair.francis@wdc.com>)
- id 1iO917-0004Sy-Pg; Fri, 25 Oct 2019 19:29:14 -0400
+ id 1iO914-0004Sy-1d; Fri, 25 Oct 2019 19:29:12 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1572046154; x=1603582154;
+ t=1572046150; x=1603582150;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=X5dyDZAU+qyzeBfQWrLfqPPCa3H8yb2Aup7zkIbTqeU=;
- b=iOBbjpOiFDgRRSWeLJRkBP//7UxYV7XlQ+ZUeJtYEsLSXjViY1Tnxtzh
- 6Zuf1BkQsn+DlQnZPZWn0KJ4W7W3v+dJ17JeaED0hFWrHWQW/FEDKI79Q
- jZPQGq7Y2BkIC2JDsOVtnd5Dw+jLpm4Dx+fcnVkG/yHIE+8bcaUZLSqzl
- oIU2i8Tj+YXGjsETmZM93Wk9Gx3fQwbunqp9E20eVY2K34M8WWCyPfWxb
- 5ynhuIAosNI9Ik9tD5CwzZ63Cl3Xo8Oedd80F0R7MNoquWLB5ufxG3pqF
- 9KBnaSl7oVN8cuFUdtYTLduvUcLhcYG3DSb0l8C6GutoMrREYkwWsHxly A==;
-IronPort-SDR: EmUJalDVyOJGEViwOXAN7v6RgpGGoEU+5CaFxU8M6qBg7o3nNEDXZT8jkh2BJHIA1G80PjKfPY
- H0kDKI29ZMmxO+WzZSrrM3oUUVWWaBnLfreyJfAbtF4OimW8nl1WrCvPp9Vh1gs056j42l++tw
- X2fjLU7dcJwJuCL/B+3ZFl6muXe4dyBTR1DutoCPSavb/Hrt2vIjlWe+D7HPlAykIW4wX5U3vx
- 7KFacJG5BZXcY6QREY2TaTF3tYvZvG1XmEuViMkPYhllTfNpUF0CNhn5OdKaNGSmxXDB8aqOVZ
- RxI=
-X-IronPort-AV: E=Sophos;i="5.68,230,1569254400"; d="scan'208";a="122956690"
+ bh=dMKqeONfKcctIWBRru6Nk23YmXDldC/KGUfehKsR0KY=;
+ b=PDXOLoG5QfCvC7wUCyGyMQdjBgyqbsHta7LY4SeACaJ8IO7rKxN+xntc
+ 5Bcx2Zd3KdVwohja9siaPVD6KDonQsIRtGBEZkSl9dtrxUw4JVU+iugxr
+ mlfjlPlE7JWF/kyIax30wJor+i09t10NCS4kcX7XY0xPR9enCa6OZGu7e
+ NmohxI/Tud5fOPwzbj+Pc1cC7NGhDK9ux18Xj9HCRU/nQqfJuoICPCe9e
+ IWL5mLfH92+9U0e9+LITNgUNguub7cQW+eQM7QVPzMVtb7IYfUiq/WMo7
+ /OUyEuyp+PDYrIyrb2ow+B70FEYPH+DwsaM6RRnLFF0Y6+VmE4gSgVlPE g==;
+IronPort-SDR: 0rbuNeuXF6rdV+bQM853tcoqfOKyYByGC3tBCENodf8lN6dly495qN7WbuIeYBS6bgtQjytdAh
+ IZhRxxSJx1ENMw041MXrJpnosbvufugUboMa10R3vD1ikOQl5hJLT9UP6kqlKh2T5etKBrO5Pp
+ 089VT6oMlzKo/wNWTRasu+l10raDoop9dQRUu9HUXq7j30vutd7QD/cO7XeBLB8y8At9GdfUEu
+ pQtBg4Quu07+nx2YSGl3x8G2F2XDzWNNt8al74jdKZoIJ3f1guckr7Aty3m3+WXQpIU9UK6LtE
+ HFk=
+X-IronPort-AV: E=Sophos;i="5.68,230,1569254400"; d="scan'208";a="122956680"
 Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
  ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 26 Oct 2019 07:29:13 +0800
-IronPort-SDR: 07/BLcAjcDiKWZ1ZgwA9rN0JaMN7uqa6aIVGorzgHeTpJjQDtTh+nzvdRWHDLTrfX2MbdJdsea
- Q4uoNCBoS3xLbsRPArmqfb26kDIpYvmgqTDYnLbgyw6x15OqQAcoHppSfiApYpC09nT9xlJAOY
- uqjlz5lwQVGYOruMY75mAo6On9GYJD292iV5aFc0bozcnW7IUhhXdvyVdP10Hs2Sq9xUs7U8M7
- CkU9C2+/Mz3jRN9kgaqT72RfrVoWmqipxJVXH0IjjMz7MS3QmQzG05nVB4u6g+mFjsExchXhQf
- fPG5IH/M5LEYssEuJqnBY1Bz
+ by ob1.hgst.iphmx.com with ESMTP; 26 Oct 2019 07:29:09 +0800
+IronPort-SDR: w4RoC75gdiYQXCzXk/7nwb67McwtBOSlPp+2Tfg2p6+2O8XROP1E2AjYQK2y0iO4ThgCB1VsDK
+ K/UYBss53qJWCnvVyI1jl2EIfAO8XkFaCbh1GiCeX5TWkD7+qbWIv40m017uO4sWb+JrIR6bfb
+ YmUuW8J1bg+srOljHsQJ4NnON3moEcPpku3VO9bRfZPCZRPJehvPYXNfe7MisJ9uJpWbFkzUsH
+ Ya+p5qeP3UEnPs/n0uuIAWzD7bJYDt41FoTdv3DzRCMJVicRC+qmr8zjOSnKGY+wqgZeAlwBnN
+ 4UKpSAwvkytKtezZGpK4QhMw
 Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
  by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 25 Oct 2019 16:24:39 -0700
-IronPort-SDR: P3AxYXNCx3emXoGrsUU6Z3FMnLFGM6bzUqEmwh0Ltu3W8aL9VxPYnymF3x+hruIbkXxyAVeNzu
- qU5ELiEbFcBfdoIsQN+jQ8RX33NHwi+rZpbWZhg9IndU0HgZ6CqF/RNc8o/qbXEj9FOMUlqb05
- 7sOSxhZ2GWONZiiKtkvsLRSTyewEBqLGJqR9jZzcIX3EvvzlJ6Z2sEyjzi0xycfWQr7Nrn5FX0
- mymP3uS87QcbMDtoupZL0FbjmOYulJHPJT5DE9U0ub6Nyo8gYTs9dFVwRv7CGc9eDICDyk1Vy+
- U9k=
+ 25 Oct 2019 16:24:35 -0700
+IronPort-SDR: UQISS66IE+rA+uCpRMrcdMKu7CEvkJkSJiM/5ebQfNi0RHnB8sXiMUyFNAASbq74YzuYqKi89o
+ 6kdUiTsYLyKDYokRUK/uZLoARiY0e5Z6ekOlFl1uCtDA6dhJ62mDnwMjzYNVw5YM1w3yG+EoWf
+ mwZCNY1F5JlFjQmSow5sF0ci7A9RO2vMm1EJLIC7rGPpBFACKUrRH/YWAAbmFSHRGvlI192TJQ
+ q3tfsoamngr2CQVp5o7+LmTAoN0TRMbSXA/X7AKldHgC6/YhGjPz5HERqXa2gxDoYAZwUtDQ/b
+ g9Y=
 WDCIronportException: Internal
 Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
  risc6-mainframe.int.fusionio.com) ([10.196.157.58])
- by uls-op-cesaip01.wdc.com with ESMTP; 25 Oct 2019 16:29:13 -0700
+ by uls-op-cesaip01.wdc.com with ESMTP; 25 Oct 2019 16:29:09 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: palmer@sifive.com,
 	alistair.francis@wdc.com,
 	alistair23@gmail.com
-Subject: [PATCH v2 20/27] target/riscv: Disable guest FP support based on
- virtual status
-Date: Fri, 25 Oct 2019 16:24:17 -0700
-Message-Id: <8014e06e5b0c5fad5b0a33e977bf9bb50a8cab30.1572045716.git.alistair.francis@wdc.com>
+Subject: [PATCH v2 19/27] target/riscv: Add hfence instructions
+Date: Fri, 25 Oct 2019 16:24:13 -0700
+Message-Id: <13c3cf8969b1c4c2a8c593501d4148041881a5f5.1572045716.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.23.0
 In-Reply-To: <cover.1572045716.git.alistair.francis@wdc.com>
 References: <cover.1572045716.git.alistair.francis@wdc.com>
@@ -82,30 +81,100 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Fri, 25 Oct 2019 23:29:23 -0000
 
-When the Hypervisor extension is in use we only enable floating point
-support when both status and vsstatus have enabled floating point
-support.
-
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
 ---
- target/riscv/cpu_helper.c | 3 +++
- 1 file changed, 3 insertions(+)
+ target/riscv/insn32.decode                    | 23 ++++++-----
+ .../riscv/insn_trans/trans_privileged.inc.c   | 40 +++++++++++++++++++
+ 2 files changed, 54 insertions(+), 9 deletions(-)
 
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 41cd314f64..79966ac6e6 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -91,6 +91,9 @@ bool riscv_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
- bool riscv_cpu_fp_enabled(CPURISCVState *env)
- {
-     if (*env->mstatus & MSTATUS_FS) {
-+        if (riscv_cpu_virt_enabled(env) && !(env->vsstatus & MSTATUS_FS)) {
-+            return false;
-+        }
-         return true;
-     }
+diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+index 77f794ed70..cfd9ca6d2b 100644
+--- a/target/riscv/insn32.decode
++++ b/target/riscv/insn32.decode
+@@ -63,20 +63,25 @@
+ @r2_rm   .......   ..... ..... ... ..... ....... %rs1 %rm %rd
+ @r2      .......   ..... ..... ... ..... ....... %rs1 %rd
  
++@hfence_gvma ....... ..... .....   ... ..... ....... %rs2 %rs1
++@hfence_bvma ....... ..... .....   ... ..... ....... %rs2 %rs1
++
+ @sfence_vma ....... ..... .....   ... ..... ....... %rs2 %rs1
+ @sfence_vm  ....... ..... .....   ... ..... ....... %rs1
+ 
+ 
+ # *** Privileged Instructions ***
+-ecall      000000000000     00000 000 00000 1110011
+-ebreak     000000000001     00000 000 00000 1110011
+-uret       0000000    00010 00000 000 00000 1110011
+-sret       0001000    00010 00000 000 00000 1110011
+-hret       0010000    00010 00000 000 00000 1110011
+-mret       0011000    00010 00000 000 00000 1110011
+-wfi        0001000    00101 00000 000 00000 1110011
+-sfence_vma 0001001    ..... ..... 000 00000 1110011 @sfence_vma
+-sfence_vm  0001000    00100 ..... 000 00000 1110011 @sfence_vm
++ecall       000000000000     00000 000 00000 1110011
++ebreak      000000000001     00000 000 00000 1110011
++uret        0000000    00010 00000 000 00000 1110011
++sret        0001000    00010 00000 000 00000 1110011
++hret        0010000    00010 00000 000 00000 1110011
++mret        0011000    00010 00000 000 00000 1110011
++wfi         0001000    00101 00000 000 00000 1110011
++hfence_gvma 0110001    ..... ..... 000 00000 1110011 @hfence_gvma
++hfence_bvma 0010001    ..... ..... 000 00000 1110011 @hfence_bvma
++sfence_vma  0001001    ..... ..... 000 00000 1110011 @sfence_vma
++sfence_vm   0001000    00100 ..... 000 00000 1110011 @sfence_vm
+ 
+ # *** RV32I Base Instruction Set ***
+ lui      ....................       ..... 0110111 @u
+diff --git a/target/riscv/insn_trans/trans_privileged.inc.c b/target/riscv/insn_trans/trans_privileged.inc.c
+index c5e4b3e49a..b9b5a89b52 100644
+--- a/target/riscv/insn_trans/trans_privileged.inc.c
++++ b/target/riscv/insn_trans/trans_privileged.inc.c
+@@ -108,3 +108,43 @@ static bool trans_sfence_vm(DisasContext *ctx, arg_sfence_vm *a)
+ #endif
+     return false;
+ }
++
++static bool trans_hfence_gvma(DisasContext *ctx, arg_sfence_vma *a)
++{
++#ifndef CONFIG_USER_ONLY
++    if (ctx->priv_ver >= PRIV_VERSION_1_10_0 &&
++        has_ext(ctx, RVH)) {
++        /* Hpervisor extensions exist */
++        /*
++         * if (env->priv == PRV_M ||
++         *   (env->priv == PRV_S &&
++         *    !riscv_cpu_virt_enabled(env) &&
++         *    get_field(ctx->mstatus_fs, MSTATUS_TVM))) {
++         */
++            gen_helper_tlb_flush(cpu_env);
++            return true;
++        /* } */
++    }
++#endif
++    return false;
++}
++
++static bool trans_hfence_bvma(DisasContext *ctx, arg_sfence_vma *a)
++{
++#ifndef CONFIG_USER_ONLY
++    if (ctx->priv_ver >= PRIV_VERSION_1_10_0 &&
++        has_ext(ctx, RVH)) {
++        /* Hpervisor extensions exist */
++        /*
++         * if (env->priv == PRV_M ||
++         *   (env->priv == PRV_S &&
++         *    !riscv_cpu_virt_enabled(env) &&
++         *    get_field(ctx->mstatus_fs, MSTATUS_TVM))) {
++         */
++            gen_helper_tlb_flush(cpu_env);
++            return true;
++        /* } */
++    }
++#endif
++    return false;
++}
 -- 
 2.23.0
 
