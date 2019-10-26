@@ -1,73 +1,77 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iO91h-0006Ar-Rf
-	for mharc-qemu-riscv@gnu.org; Fri, 25 Oct 2019 19:29:51 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:50234)
+	id 1iOHhe-00045B-2F
+	for mharc-qemu-riscv@gnu.org; Sat, 26 Oct 2019 04:45:42 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:52330)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <prvs=194c68654=alistair.francis@wdc.com>)
- id 1iO91b-0005zd-9D
- for qemu-riscv@nongnu.org; Fri, 25 Oct 2019 19:29:44 -0400
+ (envelope-from <philmd@redhat.com>) id 1iOHha-0003qD-VQ
+ for qemu-riscv@nongnu.org; Sat, 26 Oct 2019 04:45:40 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <prvs=194c68654=alistair.francis@wdc.com>)
- id 1iO91a-0004mv-6Z
- for qemu-riscv@nongnu.org; Fri, 25 Oct 2019 19:29:43 -0400
-Received: from esa1.hgst.iphmx.com ([68.232.141.245]:10430)
+ (envelope-from <philmd@redhat.com>) id 1iOHhY-0001Aj-ST
+ for qemu-riscv@nongnu.org; Sat, 26 Oct 2019 04:45:38 -0400
+Received: from us-smtp-1.mimecast.com ([207.211.31.81]:34426)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <prvs=194c68654=alistair.francis@wdc.com>)
- id 1iO91X-0004CY-PS; Fri, 25 Oct 2019 19:29:40 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1572046179; x=1603582179;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=5xy/BQ5Ff17/zZ+q9QgWqRSx+0OeU4f0Sj1sSKNFPcQ=;
- b=MpwxmYWz0QgxTJC6NMwOVmWn2Ajsvt7OqJ4uwl0rqEFW3yx1zlQ7dRGT
- 2L9QgGHOm894xSliHYPRgBsnIz9GTEbeS7m3sTwXLACBqaxJ7N4mGrEoD
- 4ZkeaT0iCSirN7x+htgDDUh4be8IOkMsTUrPve+jP2JofpJBbp47THYde
- 35bFGuBlnmChfGUmpHwale7fkCPIdw0qe7/WL/sq/RI5NY9HB9Mf4Snh5
- hgdxK+AV/VtOHHgc5J7ZZ1XwYszpn7HXTPDlcjeR+SgpxgnxLo3sm9Fym
- MHMiijYhkcIMOVPhQp42NI8aSTD2RhpS2OBdqTDEz3T+ujnzreAtbgEvT g==;
-IronPort-SDR: zXixdOhZo36mF5ZtcXEykzhagF8ytU1ZmbRHmR5Tf9YeK8kKK1iLJQaY2g1krspIkGxZk9tInU
- 1wIuAHfKrVYztGvAsn8zugql3le+tSHEoK1FF7P/kpqrsZdhKTc+SDwLu850claGwQM8h2IhvR
- JJxv8pfx1lZMIjPxOxEik1jR3djg8kRXsytdvuHqhr5NkEFdMfkUFyxDuX0sBlSMUuhIHB3Sw5
- l0+z7FzG8ow5tkTTnrQ/dDXxHQwbOH+grFP/tFLH672O5NCbGm9NvmMsyT+z/NrOim6j2MLbjM
- oaI=
-X-IronPort-AV: E=Sophos;i="5.68,230,1569254400"; d="scan'208";a="228520418"
-Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
- ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 26 Oct 2019 07:28:58 +0800
-IronPort-SDR: Z3zY7b09YvyvAmtvtOCVnoEib+vFoXr1EWCR2REVigTV2CTNV5GIRvQ5qrJz6SySlAStVyU58e
- REOQ25SQk3owxNMRnmZ1NP5iQA88YiNONru8BPG3T/2EnslPlD4fRg5MbXum/r1L9axLQuDNZy
- PbyGn3lmBI6mTrDPbN1l18dbTqZQpcKTXwgbm0Y/8zUcmv86pJ+om3ZtE6Lycr0BJH3jxKDz68
- 1xhSmAVKyKSre1BNxr0TWzKv+PZGCplTGixXbybh8Edj3vHbl9INGfQnE6uA+qA+KZ470wWqNY
- mCDREEQC95s+NmiJrn7Doh9d
-Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
- by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 25 Oct 2019 16:24:24 -0700
-IronPort-SDR: 8IkYaeWsa1WKFPlrikMUhWMIukbvr5buFfiArifeb7W8OK9r4PXJRq04IBg0viPveRbWQ3xW98
- 2iCxdDyNN2b/OAphz6kO15giWF1D6qPDx6pVfMr18SgI0qxt09IAGZuEBpdYV9wu0qvUoRrRHG
- A2F+2fyJKSZ54KN04EjuTUUBQSSBfUk22fxSrqPofi8nrqCWPztnYE4dyRcXMEugHBJ/AFLwY9
- D9iUpDfObSyh/7mtoYJM7NiNjcx0kjJpFFWhzFTW2adguOhLWE/Kz/khQg8Wr8UPh1RnL55i6v
- HaA=
-WDCIronportException: Internal
-Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
- risc6-mainframe.int.fusionio.com) ([10.196.157.58])
- by uls-op-cesaip02.wdc.com with ESMTP; 25 Oct 2019 16:28:59 -0700
-From: Alistair Francis <alistair.francis@wdc.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: palmer@sifive.com,
-	alistair.francis@wdc.com,
-	alistair23@gmail.com
-Subject: [PATCH v2 16/27] riscv: plic: Always set sip.SEIP bit for HS
-Date: Fri, 25 Oct 2019 16:24:03 -0700
-Message-Id: <ed72f249afccde44453efef12935e7804e24b55f.1572045716.git.alistair.francis@wdc.com>
-X-Mailer: git-send-email 2.23.0
-In-Reply-To: <cover.1572045716.git.alistair.francis@wdc.com>
-References: <cover.1572045716.git.alistair.francis@wdc.com>
+ (Exim 4.71) (envelope-from <philmd@redhat.com>) id 1iOHhY-0001AE-J5
+ for qemu-riscv@nongnu.org; Sat, 26 Oct 2019 04:45:36 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1572079535;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=C87K8gDnTe2PjKVO29Ay5pk9dJHtJSBWrg1tpzLTG1k=;
+ b=RdAf8QxwxbkASEl//SiSOSYI1NioKmLR6GVCwF33qoWZJJo9h8Bv7w6cZX42oocdGPHcYe
+ 50zezAlapjR+ZeOrary07tSwauLC82DKkBh1vxqXUiSa/BIh07RtgCLz3M2JMsEfxYPcg6
+ 5wst1ZgMwwHts1inZX4NbgHXfHa4omU=
+Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
+ [209.85.221.71]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-13-sM9B5oz9Mki5Kp5ev2b9yw-1; Sat, 26 Oct 2019 04:45:32 -0400
+Received: by mail-wr1-f71.google.com with SMTP id a6so2618738wru.1
+ for <qemu-riscv@nongnu.org>; Sat, 26 Oct 2019 01:45:32 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=QAf2B7KL4+Nxq2tBPi3AhG2VwmmMXDMiaLGnGrzUhJ8=;
+ b=lcg5cm0Jc6lNg8MzQvoNVCLkA96p4BY2IisN2oNb+1Ufn6xIM4QrmICpYKlIDnURXN
+ WENi8G4incd98Woop2MSc7ZoyNoMUx202Nfybc14t/QWQiWvlV8NctS8SKiqnVRV/bfG
+ BcPlmvJqEAKGwh6mT1P2wUUumg6zs5PpiPNFmLoH8rvtpUpBuDymaod34ODmEVH8K5eY
+ OdjmWvC6aE5hrrQgDsTVIXUv/BJD1rzwRGg7gCcZlzM6C/F9ducJZTN47BH52x9NBZDe
+ YqPLyi/GYpP5TcYx1H7LbvMFNcjwv2URCR1i7V+Ek+5eho3soqHiiExx+D2nPWQNDSxa
+ xGDw==
+X-Gm-Message-State: APjAAAV2zGMzGAuSomNtuqAmQirxmK95/9qji/8O/HoNpEe61QaoYIIo
+ L+drPVQ9wHRGSX2B8FyugMvA0MT9JJRdCXKpVGoVVGE1D0aLac6Zly1o6txbA1kdH+MH1USA44X
+ iJBF/+wNP9Xr8W/E=
+X-Received: by 2002:adf:da4a:: with SMTP id r10mr6849578wrl.356.1572079531877; 
+ Sat, 26 Oct 2019 01:45:31 -0700 (PDT)
+X-Google-Smtp-Source: APXvYqwArXvW+j4LDlRMSsZtcJD0YXARPqjWZM/4u5jAGdjsX7eouyEMBnJVwA+0bO8drKi3xb9sBg==
+X-Received: by 2002:adf:da4a:: with SMTP id r10mr6849558wrl.356.1572079531650; 
+ Sat, 26 Oct 2019 01:45:31 -0700 (PDT)
+Received: from [192.168.1.41] (129.red-83-57-174.dynamicip.rima-tde.net.
+ [83.57.174.129])
+ by smtp.gmail.com with ESMTPSA id l14sm5111964wrr.37.2019.10.26.01.45.30
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sat, 26 Oct 2019 01:45:31 -0700 (PDT)
+Subject: Re: [PATCH v1 1/1] opensbi: Upgrade from v0.4 to v0.5
+To: Alistair Francis <alistair.francis@wdc.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: alistair23@gmail.com, palmer@sifive.com
+References: <a88742acd6969991d44f897f7232a847e9768f57.1572045246.git.alistair.francis@wdc.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>
+Message-ID: <0178d892-dbb5-8970-08eb-416466b53002@redhat.com>
+Date: Sat, 26 Oct 2019 10:45:29 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.1.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-detected-operating-system: by eggs.gnu.org: FreeBSD 9.x [fuzzy]
-X-Received-From: 68.232.141.245
+In-Reply-To: <a88742acd6969991d44f897f7232a847e9768f57.1572045246.git.alistair.francis@wdc.com>
+Content-Language: en-US
+X-MC-Unique: sM9B5oz9Mki5Kp5ev2b9yw-1
+X-Mimecast-Spam-Score: 0
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+ [fuzzy]
+X-Received-From: 207.211.31.81
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -79,40 +83,45 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Oct 2019 23:29:44 -0000
+X-List-Received-Date: Sat, 26 Oct 2019 08:45:40 -0000
 
-When the PLIC generates an interrupt ensure we always set it for the SIP
-CSR that corresponds to the HS (V=0) register.
+Hi Alistair,
 
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
----
- hw/riscv/sifive_plic.c | 12 +++++++++++-
- 1 file changed, 11 insertions(+), 1 deletion(-)
+On 10/26/19 1:15 AM, Alistair Francis wrote:
+> This release has:
+>      Lot of critical fixes
+>      Hypervisor extension support
+>      SBI v0.2 base extension support
+>      Debug prints support
+>      Handle traps when doing unpriv load/store
+>      Allow compiling without FP support
+>      Use git describe to generate boot-time banner
+>      Andes AE350 platform support
 
-diff --git a/hw/riscv/sifive_plic.c b/hw/riscv/sifive_plic.c
-index 98e4304b66..8309e96f64 100644
---- a/hw/riscv/sifive_plic.c
-+++ b/hw/riscv/sifive_plic.c
-@@ -150,7 +150,17 @@ static void sifive_plic_update(SiFivePLICState *plic)
-             riscv_cpu_update_mip(RISCV_CPU(cpu), MIP_MEIP, BOOL_TO_MASK(level));
-             break;
-         case PLICMode_S:
--            riscv_cpu_update_mip(RISCV_CPU(cpu), MIP_SEIP, BOOL_TO_MASK(level));
-+            if (riscv_cpu_virt_enabled(env)) {
-+                if (level) {
-+                    atomic_or(&env->mip_novirt, MIP_SEIP);
-+                    g_assert(riscv_cpu_virt_enabled(env));
-+                } else {
-+                    atomic_and(&env->mip_novirt, ~MIP_SEIP);
-+                    g_assert(riscv_cpu_virt_enabled(env));
-+                }
-+            } else {
-+                riscv_cpu_update_mip(RISCV_CPU(cpu), MIP_SEIP, BOOL_TO_MASK(level));
-+            }
-             break;
-         default:
-             break;
--- 
-2.23.0
+Do you mind amending the output of 'git shortlog v0.4..v0.5'?
+
+>=20
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> ---
+> You can get the branch from here if the binaries are causing issues:
+> https://github.com/alistair23/qemu/tree/mainline/alistair/opensbi.next
+
+You can use 'git format-patch --no-binary'.
+
+>=20
+>   pc-bios/opensbi-riscv32-virt-fw_jump.bin     | Bin 36888 -> 40984 bytes
+>   pc-bios/opensbi-riscv64-sifive_u-fw_jump.bin | Bin 45064 -> 49160 bytes
+>   pc-bios/opensbi-riscv64-virt-fw_jump.bin     | Bin 40968 -> 45064 bytes
+>   roms/opensbi                                 |   2 +-
+>   4 files changed, 1 insertion(+), 1 deletion(-)
+[...]
+> diff --git a/roms/opensbi b/roms/opensbi
+> index ce228ee091..be92da280d 160000
+> --- a/roms/opensbi
+> +++ b/roms/opensbi
+> @@ -1 +1 @@
+> -Subproject commit ce228ee0919deb9957192d723eecc8aaae2697c6
+> +Subproject commit be92da280d87c38a2e0adc5d3f43bab7b5468f09
+>=20
 
 
