@@ -1,67 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iP7Pd-0005K6-2q
+	id 1iP7Pd-0005KW-DL
 	for mharc-qemu-riscv@gnu.org; Mon, 28 Oct 2019 11:58:33 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:34599)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:34628)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <palmer@sifive.com>) id 1iP7PX-0005Am-AR
+ (envelope-from <palmer@sifive.com>) id 1iP7PY-0005Co-Os
  for qemu-riscv@nongnu.org; Mon, 28 Oct 2019 11:58:29 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmer@sifive.com>) id 1iP7PW-0003ov-1E
- for qemu-riscv@nongnu.org; Mon, 28 Oct 2019 11:58:27 -0400
-Received: from mail-pg1-x541.google.com ([2607:f8b0:4864:20::541]:39568)
+ (envelope-from <palmer@sifive.com>) id 1iP7PX-0003ps-KT
+ for qemu-riscv@nongnu.org; Mon, 28 Oct 2019 11:58:28 -0400
+Received: from mail-pf1-x444.google.com ([2607:f8b0:4864:20::444]:36048)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmer@sifive.com>) id 1iP7PV-0003oU-Ri
- for qemu-riscv@nongnu.org; Mon, 28 Oct 2019 11:58:25 -0400
-Received: by mail-pg1-x541.google.com with SMTP id p12so7161705pgn.6
- for <qemu-riscv@nongnu.org>; Mon, 28 Oct 2019 08:58:25 -0700 (PDT)
+ (Exim 4.71) (envelope-from <palmer@sifive.com>) id 1iP7PX-0003pK-E9
+ for qemu-riscv@nongnu.org; Mon, 28 Oct 2019 11:58:27 -0400
+Received: by mail-pf1-x444.google.com with SMTP id v19so7165050pfm.3
+ for <qemu-riscv@nongnu.org>; Mon, 28 Oct 2019 08:58:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=subject:date:message-id:in-reply-to:references:mime-version
  :content-transfer-encoding:cc:from:to;
- bh=Wcazrf1d/6yq7xUtsUWqMfgOcS0Og4vhQQt08gFl/0k=;
- b=E7Bv8nszzqYRNDu0wJ0GehmOgmGOZ507uv3L5jUofx2a4PCFKaGL3TujuL514uP+Hm
- Y6gzyVya/vUMm6W0Ch8YvQ/vQN9j1ohUh7PWzWNtXiJL+9pMTe6L/ivadbZtAT7ArOkB
- RPoPhI5QBudqISQNA7euZOlodKygmOZEdSS8ckPKW4lkaQPn7K/c3ygP1tU700ZUQdYK
- 0C90H+hghYx/5YxFY2J2fBxW47B6pnTjCKa+/tmwvES5sQN5NgrVZvzq0ErHQlqvm8Ei
- dtZiTbgNGPAFzS9YTMg9PJtbehEy+l29v+9Y0xnE797RaI1lHnIFMcwbj4e5mJ1KiSzP
- 9uUg==
+ bh=HIR+c06Wfqq3ZkFGxgsdg0iHWKtF3xHcneoz3/psN0Y=;
+ b=YJh3uCNo2S9W9t3kF+BKtmjUFPIDp/7/zMEDIJY6puZ37YfFLh+y7dEiHV7coE2BMP
+ Zi+9DxvkuxBVzzaIopYEYELn6kkx8WZbC7iJwRrC6Gz6+It4fnsbQEeX5Zd80Kfb/ceW
+ tsTwX+b8CsC2XPfWuJrliGJBbUEhUkMuKm1CXIwD+BfSnuGhYxHkxJZ8rTJrNtpHdNvf
+ cBTM/iRi2d3gR9z1jCW//2uGutTO7gtf4KxqpuQ8KUTrco+GsX2iKTQTZlGiDXbPW5V9
+ UPo1G1R/B/iqo1D/YQtUaL4dInTc/oGqjxA+MAfn+X1APEQD5V4BYFVVZfPWi6DW9Igg
+ VuTw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding:cc:from:to;
- bh=Wcazrf1d/6yq7xUtsUWqMfgOcS0Og4vhQQt08gFl/0k=;
- b=cJjZy8FDnY6aN5XdBUu/XvCi1Rdpcq17CFpYScxgzZ8UbyeMMY2Wrnor+H2vMLDAlu
- sMvRNik62lkhxDzqJ0Pp2rZsJGlYMMY34FIZk14pwUXLyWkTQ+pALIb93p9EPkgl7GTn
- 36Fdoy4mg7JmDb5JJwuYO7qIPBGTFxGl8fKX0x1Ol3+VP6negVz01f3ww8JABp73bi2n
- oabFxaA1ZtpSvo1g9cdNpm/xxDyV5pZXyHGcnJdn0rTpSRYsuNffxwvi5+v3593Vs1Mq
- atBhg5ftR/Z1IlvO7awOplzDmV8GLBQVa8Wix/OL90EBjy/f/5684QBhfnCY7nq4hb5p
- tj0g==
-X-Gm-Message-State: APjAAAWjE30P9Lq+tmXzKnrcM0zGuxbIlPRO7v0IiYCikGKqJz12f8Ut
- /HgFTCtZQxlauXMofQCoa9DfWg==
-X-Google-Smtp-Source: APXvYqzmrhPmJxA2AbMG1Lt+nDArHSJ0TD1DWwygocl6qh3nZ3wzPD1OQN2Rae9luzF5CgsarQ650A==
-X-Received: by 2002:aa7:80c6:: with SMTP id a6mr20617068pfn.89.1572278304867; 
- Mon, 28 Oct 2019 08:58:24 -0700 (PDT)
+ bh=HIR+c06Wfqq3ZkFGxgsdg0iHWKtF3xHcneoz3/psN0Y=;
+ b=CFJPL9/GjrwUvHKjIMAcUIJyKlbzSHpSlPFsXVJRGkN7+dWKAvLbqmpoi2Xo+jGjPA
+ qskMoRA3QJcv2jxSPEBhHnfWgZu68kXdn3y+JVKu1L8DSQqbtlaAbLjpuq1+9/R+/teM
+ YUJlKPnRJBGCz/D47QDUx7f8+wCC5wUoXk/pXjyYHL0lYWFzr+rJAcXS+AthaD8m78pk
+ IDC8YMjnzo/BvxLK3FFm3xtTxM8jGzYIA/YYrWmhlV+Rw0ZJEIBTTqcxH6Fo+Bg5BFJ4
+ v64rijdAcITrydmjDKVlok77WGtXtis5DLAsFu0qmSvdSJ0UL9GBbqaLyOyz7rg+rfN+
+ 8aBg==
+X-Gm-Message-State: APjAAAWUsy443tw2bwBe5HsiWmqiYkYVQ9e6QJ9uut4IbKplcpJhszlw
+ isEdCTvvr04AIxhEVJRt+bGu0Q==
+X-Google-Smtp-Source: APXvYqy/cnTueqbJqpZmDFmGsbVAM6uHUE0dlQQ+8TE2OKciOXXgJe1NKCMiqE+2LhqCrkKCP/G0ZQ==
+X-Received: by 2002:a17:90a:5288:: with SMTP id w8mr846179pjh.97.1572278306521; 
+ Mon, 28 Oct 2019 08:58:26 -0700 (PDT)
 Received: from localhost ([12.206.222.5])
- by smtp.gmail.com with ESMTPSA id i123sm13313009pfe.145.2019.10.28.08.58.23
+ by smtp.gmail.com with ESMTPSA id 66sm3855027pgi.49.2019.10.28.08.58.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 28 Oct 2019 08:58:24 -0700 (PDT)
-Subject: [PULL 05/18] riscv: sifive_u: Add ethernet0 to the aliases node
-Date: Mon, 28 Oct 2019 08:48:49 -0700
-Message-Id: <20191028154902.32491-6-palmer@sifive.com>
+ Mon, 28 Oct 2019 08:58:25 -0700 (PDT)
+Subject: [PULL 06/18] linux-user/riscv: Propagate fault address
+Date: Mon, 28 Oct 2019 08:48:50 -0700
+Message-Id: <20191028154902.32491-7-palmer@sifive.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <20191028154902.32491-1-palmer@sifive.com>
 References: <20191028154902.32491-1-palmer@sifive.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 Cc: qemu-devel@nongnu.org,       qemu-riscv@nongnu.org,
- Bin Meng <bmeng.cn@gmail.com>, Alistair Francis <alistair.francis@wdc.com>,
- ilippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>,
- Palmer Dabbelt <palmer@sifive.com>
+ Giuseppe Musacchio <thatlemon@gmail.com>, Palmer Dabbelt <palmer@sifive.com>
 From: Palmer Dabbelt <palmer@sifive.com>
 To: Peter Maydell <peter.maydell@linaro.org>
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::541
+X-Received-From: 2607:f8b0:4864:20::444
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -75,45 +72,72 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Mon, 28 Oct 2019 15:58:31 -0000
 
-From: Bin Meng <bmeng.cn@gmail.com>
+From: Giuseppe Musacchio <thatlemon@gmail.com>
 
-U-Boot expects this alias to be in place in order to fix up the mac
-address of the ethernet node.
+The CPU loop tagged all the queued signals as QEMU_SI_KILL while it was
+filling the `_sigfault` part of `siginfo`: this caused QEMU to copy the
+wrong fields over to the userspace program.
 
-This is to keep in sync with Linux kernel commit below:
-https://patchwork.kernel.org/patch/11133033/
+Make sure the fault address recorded by the MMU is is stored in the CPU
+environment structure.
 
-Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@redhat.com>
+In case of memory faults store the exception address into `siginfo`.
+
+Signed-off-by: Giuseppe Musacchio <thatlemon@gmail.com>
+Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
 Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
 ---
- hw/riscv/sifive_u.c | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+ linux-user/riscv/cpu_loop.c | 3 ++-
+ target/riscv/cpu_helper.c   | 5 ++++-
+ 2 files changed, 6 insertions(+), 2 deletions(-)
 
-diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-index 02dd76176e..1ac51e3632 100644
---- a/hw/riscv/sifive_u.c
-+++ b/hw/riscv/sifive_u.c
-@@ -270,6 +270,10 @@ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
-         s->soc.gem.conf.macaddr.a, ETH_ALEN);
-     qemu_fdt_setprop_cell(fdt, nodename, "#address-cells", 1);
-     qemu_fdt_setprop_cell(fdt, nodename, "#size-cells", 0);
-+
-+    qemu_fdt_add_subnode(fdt, "/aliases");
-+    qemu_fdt_setprop_string(fdt, "/aliases", "ethernet0", nodename);
-+
-     g_free(nodename);
+diff --git a/linux-user/riscv/cpu_loop.c b/linux-user/riscv/cpu_loop.c
+index 12aa3c0f16..aa9e437875 100644
+--- a/linux-user/riscv/cpu_loop.c
++++ b/linux-user/riscv/cpu_loop.c
+@@ -89,6 +89,7 @@ void cpu_loop(CPURISCVState *env)
+         case RISCV_EXCP_STORE_PAGE_FAULT:
+             signum = TARGET_SIGSEGV;
+             sigcode = TARGET_SEGV_MAPERR;
++            sigaddr = env->badaddr;
+             break;
+         case EXCP_DEBUG:
+         gdbstep:
+@@ -108,7 +109,7 @@ void cpu_loop(CPURISCVState *env)
+                 .si_code = sigcode,
+                 ._sifields._sigfault._addr = sigaddr
+             };
+-            queue_signal(env, info.si_signo, QEMU_SI_KILL, &info);
++            queue_signal(env, info.si_signo, QEMU_SI_FAULT, &info);
+         }
  
-     nodename = g_strdup_printf("/soc/ethernet@%lx/ethernet-phy@0",
-@@ -297,7 +301,6 @@ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
-         qemu_fdt_setprop_string(fdt, "/chosen", "bootargs", cmdline);
+         process_pending_signals(env);
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index 917252f71b..f13131a51b 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -455,9 +455,9 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+                         MMUAccessType access_type, int mmu_idx,
+                         bool probe, uintptr_t retaddr)
+ {
+-#ifndef CONFIG_USER_ONLY
+     RISCVCPU *cpu = RISCV_CPU(cs);
+     CPURISCVState *env = &cpu->env;
++#ifndef CONFIG_USER_ONLY
+     hwaddr pa = 0;
+     int prot;
+     bool pmp_violation = false;
+@@ -508,7 +508,10 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+     case MMU_DATA_STORE:
+         cs->exception_index = RISCV_EXCP_STORE_PAGE_FAULT;
+         break;
++    default:
++        g_assert_not_reached();
      }
- 
--    qemu_fdt_add_subnode(fdt, "/aliases");
-     qemu_fdt_setprop_string(fdt, "/aliases", "serial0", nodename);
- 
-     g_free(nodename);
++    env->badaddr = address;
+     cpu_loop_exit_restore(cs, retaddr);
+ #endif
+ }
 -- 
 2.21.0
 
