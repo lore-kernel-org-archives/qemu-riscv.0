@@ -1,52 +1,53 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iP7Pj-0005V4-07
-	for mharc-qemu-riscv@gnu.org; Mon, 28 Oct 2019 11:58:39 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:34759)
+	id 1iP7Pm-0005c0-RZ
+	for mharc-qemu-riscv@gnu.org; Mon, 28 Oct 2019 11:58:42 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:34824)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <palmer@sifive.com>) id 1iP7Pf-0005O1-3B
- for qemu-riscv@nongnu.org; Mon, 28 Oct 2019 11:58:36 -0400
+ (envelope-from <palmer@sifive.com>) id 1iP7Pj-0005WJ-HB
+ for qemu-riscv@nongnu.org; Mon, 28 Oct 2019 11:58:40 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmer@sifive.com>) id 1iP7Pd-0003tg-OK
- for qemu-riscv@nongnu.org; Mon, 28 Oct 2019 11:58:34 -0400
-Received: from mail-pg1-x543.google.com ([2607:f8b0:4864:20::543]:42999)
+ (envelope-from <palmer@sifive.com>) id 1iP7Pi-0003xV-79
+ for qemu-riscv@nongnu.org; Mon, 28 Oct 2019 11:58:39 -0400
+Received: from mail-pl1-x629.google.com ([2607:f8b0:4864:20::629]:36216)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmer@sifive.com>) id 1iP7Pd-0003tN-HP
- for qemu-riscv@nongnu.org; Mon, 28 Oct 2019 11:58:33 -0400
-Received: by mail-pg1-x543.google.com with SMTP id f14so7152436pgi.9
- for <qemu-riscv@nongnu.org>; Mon, 28 Oct 2019 08:58:33 -0700 (PDT)
+ (Exim 4.71) (envelope-from <palmer@sifive.com>) id 1iP7Pi-0003wR-1A
+ for qemu-riscv@nongnu.org; Mon, 28 Oct 2019 11:58:38 -0400
+Received: by mail-pl1-x629.google.com with SMTP id g9so5184035plp.3
+ for <qemu-riscv@nongnu.org>; Mon, 28 Oct 2019 08:58:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=subject:date:message-id:in-reply-to:references:mime-version
  :content-transfer-encoding:cc:from:to;
- bh=WP8Cy2LjfUyKbvj4Exi5IKEff9PRhXsowYLykTeYI5E=;
- b=kORLJ6z6gEe/Ceo8UQOBHOKCOnfw6s2wmPE7QEw9n/qWGkJQup48aRtedF8UQBrMtY
- 9aElaVJLm517nJ0cFsA7r71GYN+GINEu30pEo8MRm/DhLnsTqDx8dEIWnqBNF7KdpH7g
- 6M3IG7p4wtHA87Ae0EA+Uk1mdwM2qDUBOzZ8BseTEburU1bGLuefQVsm66kjUTCe7C/A
- 4hu8ct1bfdn+evh6oszyDmUG6bNXZ4A+IikKeCZ90ofN7esFAaGMxfspCE+jZ3mWVPQ/
- SuFqLuW8Yh9Ou3yAg7f7hsDqUxPj7Z0J2GADsr5i21TSSiQmmNagYV7ehhiewxRmE/La
- x87Q==
+ bh=37C4bJsqwTYJDhkHJBdMxhyCv+2so2gtmom4EOj9zjo=;
+ b=JXDOeJUWYhMycj2BTvOKus1X4Ik0jtZ7jbj+pPkWeYEvoGwTcUASClHKuIdVLhRRM6
+ jqXq37jvmaQImZs1LH6l7CBEVkabWfTYeCgKYEU/o/+kQsqm/hEsleynUh8XQSnqdbdd
+ jpmFgm3ArOFo7n2YwlOh6CpSe7XRIKYdKm4Mo0NquDbDAkXYGcjaB89Ez/d53qlJPiC2
+ OGHxrXS/pi6195SKGCX25qyhPNg07l5xajakrTyEhvvY1/nyuMWdpjD8wc5E/EH9K333
+ WCRBo7A/djIOIioALyvxKUOGg5tWBeiS3nEsHcdomzPA6h8D9zlfwmzQ3vm8sna9At9k
+ tBvg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding:cc:from:to;
- bh=WP8Cy2LjfUyKbvj4Exi5IKEff9PRhXsowYLykTeYI5E=;
- b=dDGYut+e1jazapcpjW3XAb6r0y8VkMe6wgvRjiKnrtt3n6dtfeOGy9nuTj1/BfdnjO
- XBuUO6xUXHBgyRQaSX0afn8eIEPXRZKTi/tGLNpJNkQ7xiaKnpIyGnr3ir8w12Az2jO/
- +5i3Doc8s/b/Jmm145Yr0T3sdhElNnMLYWIievdME/Ev5C9y6fpJHNoRsHPxrAF+Q8l3
- BlOAl3jrTbzQtADrzpcQmbJb7C9FhllwgL7S2dk1zRKc34f5eQNkL9cS7UWx993+BQ5y
- A7dDQWI7Jx+vxyuTpA/qoy7WquN4J52siL0mQ+S9mYD9TcrEDrPqIbAIFIqHGArx038m
- F91w==
-X-Gm-Message-State: APjAAAW6TbGrwb7vbFABffDyqTurEKHHB55rhIs3kKDBWQmXBRBTxKaP
- XIaFTHudbiu4Wtaf03cuxt/B4A==
-X-Google-Smtp-Source: APXvYqzNElE53svNMF4biWhIynm8Rhq2pOSIu6Ieo3h91imlrRepPCKHzaYLSz5dKK5z+AheHfQpZg==
-X-Received: by 2002:a17:90b:914:: with SMTP id bo20mr17886pjb.6.1572278312458; 
- Mon, 28 Oct 2019 08:58:32 -0700 (PDT)
+ bh=37C4bJsqwTYJDhkHJBdMxhyCv+2so2gtmom4EOj9zjo=;
+ b=EP4MAaJpWXifVQTlXnq8s4px9NhuENy2lKiuAGDMNlQSvLxgpHMWiVHYrGUap1wNOS
+ PzJuriuY6Iyp+dHFY0HIvW+H3Gu2jVetkEM4cbjDO3k04O+sPQPN1UfYDFvkuIuO+Pn1
+ 5zlh6xo6oCnk9wkH0UT0yWgqv8ILcSudd07bdSNXQhrKKO6VkSszmGRpHVTpcyCzaq3p
+ FcPq9o0R3tdKOORKHlP6+axkjWBfvXxaWU6NVgTlY5/K8/loSjTIzY05yFQjgRN4UsHW
+ a9GdZdM7kwStd/yfQw+TdNk2W9phXse4W00tIB9hm8nV9qOnz8Hy+gOyyEtq9ESVDnrE
+ nuyA==
+X-Gm-Message-State: APjAAAXi/ajf21NkLelujOLo0bKXK7d4rsFuc1KG+BEXjrZ4W0wMq1nR
+ 4iHCIzp4qUT6LL8TlTnxpkNDbuSmM38V/g==
+X-Google-Smtp-Source: APXvYqx0HXMw+WJ11vbGgtsG9Kubu3dUa5iE8U1RoUZGeEDgjuai8CtjCKDtjbHW8wjaOjeLZLK0mw==
+X-Received: by 2002:a17:902:347:: with SMTP id
+ 65mr19256786pld.161.1572278317026; 
+ Mon, 28 Oct 2019 08:58:37 -0700 (PDT)
 Received: from localhost ([12.206.222.5])
- by smtp.gmail.com with ESMTPSA id y20sm12374138pge.48.2019.10.28.08.58.31
+ by smtp.gmail.com with ESMTPSA id s23sm11125289pgh.21.2019.10.28.08.58.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 28 Oct 2019 08:58:31 -0700 (PDT)
-Subject: [PULL 09/18] riscv/sifive_u: Manually define the machine
-Date: Mon, 28 Oct 2019 08:48:53 -0700
-Message-Id: <20191028154902.32491-10-palmer@sifive.com>
+ Mon, 28 Oct 2019 08:58:36 -0700 (PDT)
+Subject: [PULL 11/18] riscv/virt: Manually define the machine
+Date: Mon, 28 Oct 2019 08:48:55 -0700
+Message-Id: <20191028154902.32491-12-palmer@sifive.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <20191028154902.32491-1-palmer@sifive.com>
 References: <20191028154902.32491-1-palmer@sifive.com>
@@ -59,7 +60,7 @@ From: Palmer Dabbelt <palmer@sifive.com>
 To: Peter Maydell <peter.maydell@linaro.org>
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::543
+X-Received-From: 2607:f8b0:4864:20::629
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -71,12 +72,14 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Oct 2019 15:58:37 -0000
+X-List-Received-Date: Mon, 28 Oct 2019 15:58:41 -0000
 
 From: Alistair Francis <alistair.francis@wdc.com>
 
 Instead of using the DEFINE_MACHINE() macro to define the machine let's
-do it manually. This allows us to specify machine properties.
+do it manually. This allows us to use the machine object to create
+RISCVVirtState. This is required to add children and aliases to the
+machine.
 
 This patch is no functional change.
 
@@ -85,106 +88,84 @@ Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
 Tested-by: Bin Meng <bmeng.cn@gmail.com>
 Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
 ---
- hw/riscv/sifive_u.c         | 44 ++++++++++++++++++++++++++-----------
- include/hw/riscv/sifive_u.h |  7 +++++-
- 2 files changed, 37 insertions(+), 14 deletions(-)
+ hw/riscv/virt.c         | 30 ++++++++++++++++++++++++------
+ include/hw/riscv/virt.h |  7 ++++++-
+ 2 files changed, 30 insertions(+), 7 deletions(-)
 
-diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-index a32d6773a8..eb4124f5b4 100644
---- a/hw/riscv/sifive_u.c
-+++ b/hw/riscv/sifive_u.c
-@@ -311,8 +311,7 @@ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
- static void riscv_sifive_u_init(MachineState *machine)
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index 13030619d4..bdbdfadd29 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -360,8 +360,7 @@ static inline DeviceState *gpex_pcie_init(MemoryRegion *sys_mem,
+ static void riscv_virt_board_init(MachineState *machine)
  {
-     const struct MemmapEntry *memmap = sifive_u_memmap;
+     const struct MemmapEntry *memmap = virt_memmap;
 -
--    SiFiveUState *s = g_new0(SiFiveUState, 1);
-+    SiFiveUState *s = RISCV_U_MACHINE(machine);
+-    RISCVVirtState *s = g_new0(RISCVVirtState, 1);
++    RISCVVirtState *s = RISCV_VIRT_MACHINE(machine);
      MemoryRegion *system_memory = get_system_memory();
      MemoryRegion *main_mem = g_new(MemoryRegion, 1);
-     MemoryRegion *flash0 = g_new(MemoryRegion, 1);
-@@ -434,6 +433,10 @@ static void riscv_sifive_u_soc_init(Object *obj)
-                           TYPE_CADENCE_GEM);
+     MemoryRegion *mask_rom = g_new(MemoryRegion, 1);
+@@ -497,12 +496,31 @@ static void riscv_virt_board_init(MachineState *machine)
+     g_free(plic_hart_config);
  }
  
-+static void riscv_sifive_u_machine_instance_init(Object *obj)
-+{
+-static void riscv_virt_board_machine_init(MachineClass *mc)
++static void riscv_virt_machine_instance_init(Object *obj)
+ {
+-    mc->desc = "RISC-V VirtIO Board (Privileged ISA v1.10)";
 +}
 +
- static void riscv_sifive_u_soc_realize(DeviceState *dev, Error **errp)
- {
-     MachineState *ms = MACHINE(qdev_get_machine());
-@@ -547,17 +550,6 @@ static void riscv_sifive_u_soc_realize(DeviceState *dev, Error **errp)
-         memmap[SIFIVE_U_GEM_MGMT].base, memmap[SIFIVE_U_GEM_MGMT].size);
- }
- 
--static void riscv_sifive_u_machine_init(MachineClass *mc)
--{
--    mc->desc = "RISC-V Board compatible with SiFive U SDK";
--    mc->init = riscv_sifive_u_init;
--    mc->max_cpus = SIFIVE_U_MANAGEMENT_CPU_COUNT + SIFIVE_U_COMPUTE_CPU_COUNT;
--    mc->min_cpus = SIFIVE_U_MANAGEMENT_CPU_COUNT + 1;
--    mc->default_cpus = mc->min_cpus;
--}
--
--DEFINE_MACHINE("sifive_u", riscv_sifive_u_machine_init)
--
- static void riscv_sifive_u_soc_class_init(ObjectClass *oc, void *data)
- {
-     DeviceClass *dc = DEVICE_CLASS(oc);
-@@ -581,3 +573,29 @@ static void riscv_sifive_u_soc_register_types(void)
- }
- 
- type_init(riscv_sifive_u_soc_register_types)
-+
-+static void riscv_sifive_u_machine_class_init(ObjectClass *oc, void *data)
++static void riscv_virt_machine_class_init(ObjectClass *oc, void *data)
 +{
 +    MachineClass *mc = MACHINE_CLASS(oc);
 +
-+    mc->desc = "RISC-V Board compatible with SiFive U SDK";
-+    mc->init = riscv_sifive_u_init;
-+    mc->max_cpus = SIFIVE_U_MANAGEMENT_CPU_COUNT + SIFIVE_U_COMPUTE_CPU_COUNT;
-+    mc->min_cpus = SIFIVE_U_MANAGEMENT_CPU_COUNT + 1;
-+    mc->default_cpus = mc->min_cpus;
-+}
-+
-+static const TypeInfo riscv_sifive_u_machine_typeinfo = {
-+    .name       = MACHINE_TYPE_NAME("sifive_u"),
++    mc->desc = "RISC-V VirtIO board";
+     mc->init = riscv_virt_board_init;
+-    mc->max_cpus = 8; /* hardcoded limit in BBL */
++    mc->max_cpus = 8;
+     mc->default_cpu_type = VIRT_CPU;
+ }
+ 
+-DEFINE_MACHINE("virt", riscv_virt_board_machine_init)
++static const TypeInfo riscv_virt_machine_typeinfo = {
++    .name       = MACHINE_TYPE_NAME("virt"),
 +    .parent     = TYPE_MACHINE,
-+    .class_init = riscv_sifive_u_machine_class_init,
-+    .instance_init = riscv_sifive_u_machine_instance_init,
-+    .instance_size = sizeof(SiFiveUState),
++    .class_init = riscv_virt_machine_class_init,
++    .instance_init = riscv_virt_machine_instance_init,
++    .instance_size = sizeof(RISCVVirtState),
 +};
 +
-+static void riscv_sifive_u_machine_init_register_types(void)
++static void riscv_virt_machine_init_register_types(void)
 +{
-+    type_register_static(&riscv_sifive_u_machine_typeinfo);
++    type_register_static(&riscv_virt_machine_typeinfo);
 +}
 +
-+type_init(riscv_sifive_u_machine_init_register_types)
-diff --git a/include/hw/riscv/sifive_u.h b/include/hw/riscv/sifive_u.h
-index 0062276190..794b958dcc 100644
---- a/include/hw/riscv/sifive_u.h
-+++ b/include/hw/riscv/sifive_u.h
-@@ -44,12 +44,17 @@ typedef struct SiFiveUSoCState {
-     CadenceGEMState gem;
- } SiFiveUSoCState;
++type_init(riscv_virt_machine_init_register_types)
+diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
+index 68978a13e8..3d875305d3 100644
+--- a/include/hw/riscv/virt.h
++++ b/include/hw/riscv/virt.h
+@@ -22,13 +22,18 @@
+ #include "hw/riscv/riscv_hart.h"
+ #include "hw/sysbus.h"
  
-+#define TYPE_RISCV_U_MACHINE MACHINE_TYPE_NAME("sifive_u")
-+#define RISCV_U_MACHINE(obj) \
-+    OBJECT_CHECK(SiFiveUState, (obj), TYPE_RISCV_U_MACHINE)
++#define TYPE_RISCV_VIRT_MACHINE MACHINE_TYPE_NAME("virt")
++#define RISCV_VIRT_MACHINE(obj) \
++    OBJECT_CHECK(RISCVVirtState, (obj), TYPE_RISCV_VIRT_MACHINE)
 +
- typedef struct SiFiveUState {
+ typedef struct {
      /*< private >*/
 -    SysBusDevice parent_obj;
-+    MachineState parent_obj;
++    MachineState parent;
  
      /*< public >*/
-     SiFiveUSoCState soc;
+     RISCVHartArrayState soc;
+     DeviceState *plic;
 +
      void *fdt;
      int fdt_size;
- } SiFiveUState;
+ } RISCVVirtState;
 -- 
 2.21.0
 
