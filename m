@@ -1,66 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iP7Py-00063G-UC
-	for mharc-qemu-riscv@gnu.org; Mon, 28 Oct 2019 11:58:54 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:34998)
+	id 1iP8Jq-0008Ng-Nb
+	for mharc-qemu-riscv@gnu.org; Mon, 28 Oct 2019 12:56:38 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44515)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <palmer@sifive.com>) id 1iP7Pu-0005rh-0B
- for qemu-riscv@nongnu.org; Mon, 28 Oct 2019 11:58:51 -0400
+ (envelope-from <palmer@sifive.com>) id 1iP8Jm-0008I8-C1
+ for qemu-riscv@nongnu.org; Mon, 28 Oct 2019 12:56:35 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmer@sifive.com>) id 1iP7Ps-00047J-SM
- for qemu-riscv@nongnu.org; Mon, 28 Oct 2019 11:58:49 -0400
-Received: from mail-pg1-x543.google.com ([2607:f8b0:4864:20::543]:37835)
+ (envelope-from <palmer@sifive.com>) id 1iP8Jl-0004wf-3S
+ for qemu-riscv@nongnu.org; Mon, 28 Oct 2019 12:56:34 -0400
+Received: from mail-pg1-x541.google.com ([2607:f8b0:4864:20::541]:35316)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmer@sifive.com>) id 1iP7Ps-00046o-Ms
- for qemu-riscv@nongnu.org; Mon, 28 Oct 2019 11:58:48 -0400
-Received: by mail-pg1-x543.google.com with SMTP id p1so7165068pgi.4
- for <qemu-riscv@nongnu.org>; Mon, 28 Oct 2019 08:58:48 -0700 (PDT)
+ (Exim 4.71) (envelope-from <palmer@sifive.com>) id 1iP8Jk-0004w6-TD
+ for qemu-riscv@nongnu.org; Mon, 28 Oct 2019 12:56:33 -0400
+Received: by mail-pg1-x541.google.com with SMTP id c8so7282759pgb.2
+ for <qemu-riscv@nongnu.org>; Mon, 28 Oct 2019 09:56:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
- h=subject:date:message-id:in-reply-to:references:mime-version
- :content-transfer-encoding:cc:from:to;
- bh=o43RPnYxBJ6zG1efVp6eoAI+8V+9lXTJj+YBPx9n47c=;
- b=YURNv/wF0HooB/D3oxv2eoYK+Ml+CuSzNM2RBfdsnX0rrsGRkRn0Vz32SDxZeEllXv
- Z2HSCqCkPjkQv6aJY4CaT5LUhhWmXdp0y9vO9AFSxWvWBHfu5ovrHiLK/Uh8DGdme5UM
- i3zej0czQ7Z381cjq6XEGj3zGeV1iwYQCZJn2kMA+TkCKxWUR4meynzV+1N7kLVFwaV0
- FWZ9LPO9ZjaHHD7gj8rIvQrDZcOyHQNJHSVnIxidFJ731HGyVgiBnOL7XwkkxWpPJIKS
- XRED1kR3rsfM+7vDHkuI9ToLK589NLBGiP+5yJQq8Wr5cQx3ht/K8cxTVdZzhKQHoiFJ
- uyNQ==
+ h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
+ :content-transfer-encoding;
+ bh=7QjzFN0npZElQvBMgyEyOgLMwR1v53vRNPgzVoDubjE=;
+ b=RVwMoFSfrSfdW3iDDbCG5Maq/hrSrN5zfpE3QLjlyoNCk2Nhu+sh0BUh90ildNiG6Q
+ wWGxYw+Ii3Td6H+cBxItDfWmHTK6rjd3h9KfQNx1l3CjNr1MDw59xIJb9CK6N9PYQqvS
+ LYBojLIoScXOon0tSgmG9lULurMND3Q7DEK9yF49jMOlb9s0PYkGVyxQ520IJrpRbTkS
+ tbf929v8Y1ie8GpLZgHw2rx0a2tuiqAaCVpCcFW0dEmOw3ZWDyobayvGwBNY/kKpq2xd
+ +ZPXgPyq9UUPHVKSHoNj2gcVz5eYJpBEQR/4rReumjYw4g0hgVwTMda7s1Nd1jDei1NZ
+ VecQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding:cc:from:to;
- bh=o43RPnYxBJ6zG1efVp6eoAI+8V+9lXTJj+YBPx9n47c=;
- b=LrCI/FxAu2lN/RemR2ROxFJKtvCrcQmZJSdfCUTulBgKkI0a/E0nzalu9UgxVa9nMZ
- RLjMwzPEcaAn6tf1UgF2l4tc2OUyia4m6h8J3S5Ud2EmoPkQP/l4t02K5nl31LiOBGYv
- LuJl0paEKSxlK+38T6hNDLKz4coIEZt1K0sSN4aig0Nw6jJPp1zttVyoB2Dk/ypdyckG
- OCk8tbun48/cvklQLqgfq2iM5XaDJp44ld23CNzTJM63G5Y8v2kF+cg7v7/tn63DtyeJ
- TRgUshbr6Rm3dLx3pdNts8ZRn8WCnBAo7uafZoX9Y8UAtGsgsEY8wKI8GdeAq+0KAAW8
- IolQ==
-X-Gm-Message-State: APjAAAVelbYr5ed4CzlSHACIywjYtiYb8z6A2IqZZr7PYuusy4DdRl55
- BNx44p+gy4g15sT/ESOYNubVcA==
-X-Google-Smtp-Source: APXvYqxDmMHQz8muQRofK2H2gzvTBJSerDtfjffa7I72LYufKlKkxhHCgeB+0zSpFJvgagDLdOau7A==
-X-Received: by 2002:a63:5d06:: with SMTP id r6mr21640753pgb.216.1572278327779; 
- Mon, 28 Oct 2019 08:58:47 -0700 (PDT)
+ h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
+ :mime-version:content-transfer-encoding;
+ bh=7QjzFN0npZElQvBMgyEyOgLMwR1v53vRNPgzVoDubjE=;
+ b=UPMO2UOt8Cxxb2rfhnkONKA3MNRjDJEhP6WJ5PUjgPa5034zIz8jLYWR8LAwrH06F0
+ c1urPry9LUsYnjbVqkl+rEiA/NT4Aos2cCjrlue81Hx1JeuTzLyHgqclVcXbV4WfASAj
+ xkxrAOkI2UpvSBMksuj36Mh7PoI+3gQ3SDQGXfcoZdNmrV6324Pd+M4R7JJ6CfecWYhV
+ 8AzqoXw6NthhucMh7sIXJ8PD9CRUNpdLQfsWtoHfDDXobb1OByJKOMqe1SZmwahK6Uyo
+ DMNYjBCFib6kVoVXt/qaKTvCaNlTGAt5QQYiVX5nfWMgPkZ9C2pgD7lgsh7bI5oWobCx
+ Q0ZA==
+X-Gm-Message-State: APjAAAX19zaTiEF8FkHoS0qXRjQTJZYrh9I7KftkAsEnPNlyzvKzYrGw
+ OC4dCrvnoMP8mskI1WEM7hjPwQ==
+X-Google-Smtp-Source: APXvYqxLlmDBZg/P/vEF8ikzHnQffFtewrj9TzaWVoQNGC13iKdBk6LVrKEwayd/n2sMqP5zjZigzQ==
+X-Received: by 2002:a17:90a:cf8d:: with SMTP id
+ i13mr238909pju.139.1572281791228; 
+ Mon, 28 Oct 2019 09:56:31 -0700 (PDT)
 Received: from localhost ([12.206.222.5])
- by smtp.gmail.com with ESMTPSA id g17sm10503611pgn.37.2019.10.28.08.58.46
+ by smtp.gmail.com with ESMTPSA id t27sm11803729pfq.169.2019.10.28.09.56.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 28 Oct 2019 08:58:47 -0700 (PDT)
-Subject: [PULL 18/18] target/riscv: PMP violation due to wrong size parameter
-Date: Mon, 28 Oct 2019 08:49:02 -0700
-Message-Id: <20191028154902.32491-19-palmer@sifive.com>
-X-Mailer: git-send-email 2.21.0
-In-Reply-To: <20191028154902.32491-1-palmer@sifive.com>
-References: <20191028154902.32491-1-palmer@sifive.com>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Cc: qemu-devel@nongnu.org,       qemu-riscv@nongnu.org,
- Dayeol Lee <dayeol@berkeley.edu>,
- Richard Henderson <richard.henderson@linaro.org>, 
- Palmer Dabbelt <palmer@sifive.com>
+ Mon, 28 Oct 2019 09:56:30 -0700 (PDT)
+Date: Mon, 28 Oct 2019 09:56:30 -0700 (PDT)
+X-Google-Original-Date: Mon, 28 Oct 2019 09:55:55 PDT (-0700)
+Subject: Re: [PATCH v1 1/1] opensbi: Upgrade from v0.4 to v0.5
+In-Reply-To: <CAP+75-XUbnCDp-JH6JRnGLqVMxDWTFa9kPHJaZXm3NfCzZUbYg@mail.gmail.com>
+CC: Alistair Francis <Alistair.Francis@wdc.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org, alistair23@gmail.com
 From: Palmer Dabbelt <palmer@sifive.com>
-To: Peter Maydell <peter.maydell@linaro.org>
+To: philmd@redhat.com
+Message-ID: <mhng-90e9ee91-7ee7-488a-8db0-35d39043f2fc@palmer-si-x1c4>
+Mime-Version: 1.0 (MHng)
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::543
+X-Received-From: 2607:f8b0:4864:20::541
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -72,63 +71,54 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Oct 2019 15:58:52 -0000
+X-List-Received-Date: Mon, 28 Oct 2019 16:56:37 -0000
 
-From: Dayeol Lee <dayeol@berkeley.edu>
+On Sat, 26 Oct 2019 01:46:45 PDT (-0700), philmd@redhat.com wrote:
+> On Sat, Oct 26, 2019 at 10:45 AM Philippe Mathieu-Daudé
+> <philmd@redhat.com> wrote:
+>>
+>> Hi Alistair,
+>>
+>> On 10/26/19 1:15 AM, Alistair Francis wrote:
+>> > This release has:
+>> >      Lot of critical fixes
+>> >      Hypervisor extension support
+>> >      SBI v0.2 base extension support
+>> >      Debug prints support
+>> >      Handle traps when doing unpriv load/store
+>> >      Allow compiling without FP support
+>> >      Use git describe to generate boot-time banner
+>> >      Andes AE350 platform support
+>>
+>> Do you mind amending the output of 'git shortlog v0.4..v0.5'?
+>
+> Err this comment is for Palmer, if Alistair agree (no need to repost).
 
-riscv_cpu_tlb_fill() uses the `size` parameter to check PMP violation
-using pmp_hart_has_privs().
-However, if the size is unknown (=0), the ending address will be
-`addr - 1` as it is `addr + size - 1` in `pmp_hart_has_privs()`.
-This always causes a false PMP violation on the starting address of the
-range, as `addr - 1` is not in the range.
+Works for me.  I've included the shortlog as part of the patch on my for-master 
+branch, unless there's any opposition I'll include this in my next PR.
 
-In order to fix, we just assume that all bytes from addr to the end of
-the page will be accessed if the size is unknown.
-
-Signed-off-by: Dayeol Lee <dayeol@berkeley.edu>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
----
- target/riscv/pmp.c | 13 ++++++++++++-
- 1 file changed, 12 insertions(+), 1 deletion(-)
-
-diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-index d4f1007109..0e6b640fbd 100644
---- a/target/riscv/pmp.c
-+++ b/target/riscv/pmp.c
-@@ -223,6 +223,7 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
- {
-     int i = 0;
-     int ret = -1;
-+    int pmp_size = 0;
-     target_ulong s = 0;
-     target_ulong e = 0;
-     pmp_priv_t allowed_privs = 0;
-@@ -232,11 +233,21 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
-         return true;
-     }
- 
-+    /*
-+     * if size is unknown (0), assume that all bytes
-+     * from addr to the end of the page will be accessed.
-+     */
-+    if (size == 0) {
-+        pmp_size = -(addr | TARGET_PAGE_MASK);
-+    } else {
-+        pmp_size = size;
-+    }
-+
-     /* 1.10 draft priv spec states there is an implicit order
-          from low to high */
-     for (i = 0; i < MAX_RISCV_PMPS; i++) {
-         s = pmp_is_in_range(env, i, addr);
--        e = pmp_is_in_range(env, i, addr + size - 1);
-+        e = pmp_is_in_range(env, i, addr + pmp_size - 1);
- 
-         /* partially inside */
-         if ((s + e) == 1) {
--- 
-2.21.0
-
+>
+>> >
+>> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+>> > ---
+>> > You can get the branch from here if the binaries are causing issues:
+>> > https://github.com/alistair23/qemu/tree/mainline/alistair/opensbi.next
+>>
+>> You can use 'git format-patch --no-binary'.
+>>
+>> >
+>> >   pc-bios/opensbi-riscv32-virt-fw_jump.bin     | Bin 36888 -> 40984 bytes
+>> >   pc-bios/opensbi-riscv64-sifive_u-fw_jump.bin | Bin 45064 -> 49160 bytes
+>> >   pc-bios/opensbi-riscv64-virt-fw_jump.bin     | Bin 40968 -> 45064 bytes
+>> >   roms/opensbi                                 |   2 +-
+>> >   4 files changed, 1 insertion(+), 1 deletion(-)
+>> [...]
+>> > diff --git a/roms/opensbi b/roms/opensbi
+>> > index ce228ee091..be92da280d 160000
+>> > --- a/roms/opensbi
+>> > +++ b/roms/opensbi
+>> > @@ -1 +1 @@
+>> > -Subproject commit ce228ee0919deb9957192d723eecc8aaae2697c6
+>> > +Subproject commit be92da280d87c38a2e0adc5d3f43bab7b5468f09
+>> >
 
