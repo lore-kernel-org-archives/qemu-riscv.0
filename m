@@ -1,52 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iP7Pg-0005Pz-AN
-	for mharc-qemu-riscv@gnu.org; Mon, 28 Oct 2019 11:58:36 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:34711)
+	id 1iP7Pj-0005V4-07
+	for mharc-qemu-riscv@gnu.org; Mon, 28 Oct 2019 11:58:39 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:34759)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <palmer@sifive.com>) id 1iP7Pc-0005Iu-K6
- for qemu-riscv@nongnu.org; Mon, 28 Oct 2019 11:58:33 -0400
+ (envelope-from <palmer@sifive.com>) id 1iP7Pf-0005O1-3B
+ for qemu-riscv@nongnu.org; Mon, 28 Oct 2019 11:58:36 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmer@sifive.com>) id 1iP7Pb-0003rq-7m
- for qemu-riscv@nongnu.org; Mon, 28 Oct 2019 11:58:32 -0400
-Received: from mail-pg1-x544.google.com ([2607:f8b0:4864:20::544]:45109)
+ (envelope-from <palmer@sifive.com>) id 1iP7Pd-0003tg-OK
+ for qemu-riscv@nongnu.org; Mon, 28 Oct 2019 11:58:34 -0400
+Received: from mail-pg1-x543.google.com ([2607:f8b0:4864:20::543]:42999)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmer@sifive.com>) id 1iP7Pb-0003rK-2G
- for qemu-riscv@nongnu.org; Mon, 28 Oct 2019 11:58:31 -0400
-Received: by mail-pg1-x544.google.com with SMTP id r1so7137657pgj.12
- for <qemu-riscv@nongnu.org>; Mon, 28 Oct 2019 08:58:31 -0700 (PDT)
+ (Exim 4.71) (envelope-from <palmer@sifive.com>) id 1iP7Pd-0003tN-HP
+ for qemu-riscv@nongnu.org; Mon, 28 Oct 2019 11:58:33 -0400
+Received: by mail-pg1-x543.google.com with SMTP id f14so7152436pgi.9
+ for <qemu-riscv@nongnu.org>; Mon, 28 Oct 2019 08:58:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=subject:date:message-id:in-reply-to:references:mime-version
  :content-transfer-encoding:cc:from:to;
- bh=e7M7/g3Lxi9UwHK1x9XgkX5SPo7otVzIHSY4iLY4NQw=;
- b=WMzbUqIEG28xpHs6tMe/y+DW0zlwaXdKlHfXv8sJZowe0ki4eerPCVb9XTQ7tLIHkc
- dKBAl0vhKTr1y9PdXHjbNdwv3ShMUm0sfs80hvbBPjSulHo05HjyTIWDZFVdHEZFtfrB
- CAznVIdGtvpjNFoMuivYUgEJl1/srbvvZ7VPpKOZfkYRxV8LRknUKbAqLAVOuVCAY/g1
- o1dctuHostUthxAHDH6pTqo6x6rggjXXYTYyq3/JmXJvXojWVfMxYCeyrtFIloHtTWsP
- 8MCDLIjY+wWhpYW29sQ7kupqFh2EVtHB+X2UhCIf8lWcykAztCCT9FU1l56qW6Mm87m+
- Fitw==
+ bh=WP8Cy2LjfUyKbvj4Exi5IKEff9PRhXsowYLykTeYI5E=;
+ b=kORLJ6z6gEe/Ceo8UQOBHOKCOnfw6s2wmPE7QEw9n/qWGkJQup48aRtedF8UQBrMtY
+ 9aElaVJLm517nJ0cFsA7r71GYN+GINEu30pEo8MRm/DhLnsTqDx8dEIWnqBNF7KdpH7g
+ 6M3IG7p4wtHA87Ae0EA+Uk1mdwM2qDUBOzZ8BseTEburU1bGLuefQVsm66kjUTCe7C/A
+ 4hu8ct1bfdn+evh6oszyDmUG6bNXZ4A+IikKeCZ90ofN7esFAaGMxfspCE+jZ3mWVPQ/
+ SuFqLuW8Yh9Ou3yAg7f7hsDqUxPj7Z0J2GADsr5i21TSSiQmmNagYV7ehhiewxRmE/La
+ x87Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding:cc:from:to;
- bh=e7M7/g3Lxi9UwHK1x9XgkX5SPo7otVzIHSY4iLY4NQw=;
- b=dlBXorkJbVsG1xFkJqwGzgZuS6Zx2ntv05XlqUJa/YJOCGyRt+5efTTa100AZXOKq9
- eqLcpCCIEQIbjdwocpOu7Duf/yYpxTavBOFfW8G9EnAASTEX8i4m2oRUxAPDoYNUEw68
- X+UH8TSbhC6hJtgEok7pBgYK7Wct9EtRHsyaTma6I6wuDW3+owtPazYOKvivavl6Ntdy
- jeweFJie2ZteUgwI6Xa1fNwXsGuBvDZA60vhlQedP0Fef1qcMfjAK1hTwBtZ99fa7NoT
- 7TWLvJZMbChfiIhzDIJC+Ct6Tbjag7j4fq5K41MOLQWH2Gk6gl3m2Y5/Enbph5a3CaZ9
- c0mw==
-X-Gm-Message-State: APjAAAXg02EQTcS2QVHJXEQD811PrR5//Svhsvw0KNdMVdTki02moMsa
- UnaIkU2LC2DlT8L6VEqMciMRHQ==
-X-Google-Smtp-Source: APXvYqzHLJyhtdaSgzal0XpUko9I7J+6wasJrNFWVDwB0l7HmdoDXXNpG8+uLNIOO3QLOsZkAm4Omg==
-X-Received: by 2002:a63:9543:: with SMTP id t3mr21805496pgn.350.1572278310012; 
- Mon, 28 Oct 2019 08:58:30 -0700 (PDT)
+ bh=WP8Cy2LjfUyKbvj4Exi5IKEff9PRhXsowYLykTeYI5E=;
+ b=dDGYut+e1jazapcpjW3XAb6r0y8VkMe6wgvRjiKnrtt3n6dtfeOGy9nuTj1/BfdnjO
+ XBuUO6xUXHBgyRQaSX0afn8eIEPXRZKTi/tGLNpJNkQ7xiaKnpIyGnr3ir8w12Az2jO/
+ +5i3Doc8s/b/Jmm145Yr0T3sdhElNnMLYWIievdME/Ev5C9y6fpJHNoRsHPxrAF+Q8l3
+ BlOAl3jrTbzQtADrzpcQmbJb7C9FhllwgL7S2dk1zRKc34f5eQNkL9cS7UWx993+BQ5y
+ A7dDQWI7Jx+vxyuTpA/qoy7WquN4J52siL0mQ+S9mYD9TcrEDrPqIbAIFIqHGArx038m
+ F91w==
+X-Gm-Message-State: APjAAAW6TbGrwb7vbFABffDyqTurEKHHB55rhIs3kKDBWQmXBRBTxKaP
+ XIaFTHudbiu4Wtaf03cuxt/B4A==
+X-Google-Smtp-Source: APXvYqzNElE53svNMF4biWhIynm8Rhq2pOSIu6Ieo3h91imlrRepPCKHzaYLSz5dKK5z+AheHfQpZg==
+X-Received: by 2002:a17:90b:914:: with SMTP id bo20mr17886pjb.6.1572278312458; 
+ Mon, 28 Oct 2019 08:58:32 -0700 (PDT)
 Received: from localhost ([12.206.222.5])
- by smtp.gmail.com with ESMTPSA id l11sm12942229pgf.73.2019.10.28.08.58.28
+ by smtp.gmail.com with ESMTPSA id y20sm12374138pge.48.2019.10.28.08.58.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 28 Oct 2019 08:58:29 -0700 (PDT)
-Subject: [PULL 08/18] riscv/sifive_u: Add QSPI memory region
-Date: Mon, 28 Oct 2019 08:48:52 -0700
-Message-Id: <20191028154902.32491-9-palmer@sifive.com>
+ Mon, 28 Oct 2019 08:58:31 -0700 (PDT)
+Subject: [PULL 09/18] riscv/sifive_u: Manually define the machine
+Date: Mon, 28 Oct 2019 08:48:53 -0700
+Message-Id: <20191028154902.32491-10-palmer@sifive.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <20191028154902.32491-1-palmer@sifive.com>
 References: <20191028154902.32491-1-palmer@sifive.com>
@@ -59,7 +59,7 @@ From: Palmer Dabbelt <palmer@sifive.com>
 To: Peter Maydell <peter.maydell@linaro.org>
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::544
+X-Received-From: 2607:f8b0:4864:20::543
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -71,71 +71,120 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Oct 2019 15:58:35 -0000
+X-List-Received-Date: Mon, 28 Oct 2019 15:58:37 -0000
 
 From: Alistair Francis <alistair.francis@wdc.com>
 
-The HiFive Unleashed uses is25wp256 SPI NOR flash. There is currently no
-model of this in QEMU, so to allow boot firmware developers to use QEMU
-to target the Unleashed let's add a chunk of memory to represent the QSPI0
-memory mapped flash. This can be targeted using QEMU's -device loader
-command line option.
+Instead of using the DEFINE_MACHINE() macro to define the machine let's
+do it manually. This allows us to specify machine properties.
 
-In the future we can look at adding a model for the is25wp256 flash.
+This patch is no functional change.
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+Tested-by: Bin Meng <bmeng.cn@gmail.com>
 Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
 ---
- hw/riscv/sifive_u.c         | 8 ++++++++
- include/hw/riscv/sifive_u.h | 1 +
- 2 files changed, 9 insertions(+)
+ hw/riscv/sifive_u.c         | 44 ++++++++++++++++++++++++++-----------
+ include/hw/riscv/sifive_u.h |  7 +++++-
+ 2 files changed, 37 insertions(+), 14 deletions(-)
 
 diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-index fbaa3a234e..a32d6773a8 100644
+index a32d6773a8..eb4124f5b4 100644
 --- a/hw/riscv/sifive_u.c
 +++ b/hw/riscv/sifive_u.c
-@@ -71,6 +71,7 @@ static const struct MemmapEntry {
-     [SIFIVE_U_UART0] =    { 0x10010000,     0x1000 },
-     [SIFIVE_U_UART1] =    { 0x10011000,     0x1000 },
-     [SIFIVE_U_OTP] =      { 0x10070000,     0x1000 },
-+    [SIFIVE_U_FLASH0] =   { 0x20000000, 0x10000000 },
-     [SIFIVE_U_DRAM] =     { 0x80000000,        0x0 },
-     [SIFIVE_U_GEM] =      { 0x10090000,     0x2000 },
-     [SIFIVE_U_GEM_MGMT] = { 0x100a0000,     0x1000 },
-@@ -314,6 +315,7 @@ static void riscv_sifive_u_init(MachineState *machine)
-     SiFiveUState *s = g_new0(SiFiveUState, 1);
+@@ -311,8 +311,7 @@ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
+ static void riscv_sifive_u_init(MachineState *machine)
+ {
+     const struct MemmapEntry *memmap = sifive_u_memmap;
+-
+-    SiFiveUState *s = g_new0(SiFiveUState, 1);
++    SiFiveUState *s = RISCV_U_MACHINE(machine);
      MemoryRegion *system_memory = get_system_memory();
      MemoryRegion *main_mem = g_new(MemoryRegion, 1);
-+    MemoryRegion *flash0 = g_new(MemoryRegion, 1);
-     int i;
+     MemoryRegion *flash0 = g_new(MemoryRegion, 1);
+@@ -434,6 +433,10 @@ static void riscv_sifive_u_soc_init(Object *obj)
+                           TYPE_CADENCE_GEM);
+ }
  
-     /* Initialize SoC */
-@@ -329,6 +331,12 @@ static void riscv_sifive_u_init(MachineState *machine)
-     memory_region_add_subregion(system_memory, memmap[SIFIVE_U_DRAM].base,
-                                 main_mem);
- 
-+    /* register QSPI0 Flash */
-+    memory_region_init_ram(flash0, NULL, "riscv.sifive.u.flash0",
-+                           memmap[SIFIVE_U_FLASH0].size, &error_fatal);
-+    memory_region_add_subregion(system_memory, memmap[SIFIVE_U_FLASH0].base,
-+                                flash0);
++static void riscv_sifive_u_machine_instance_init(Object *obj)
++{
++}
 +
-     /* create device tree */
-     create_fdt(s, memmap, machine->ram_size, machine->kernel_cmdline);
+ static void riscv_sifive_u_soc_realize(DeviceState *dev, Error **errp)
+ {
+     MachineState *ms = MACHINE(qdev_get_machine());
+@@ -547,17 +550,6 @@ static void riscv_sifive_u_soc_realize(DeviceState *dev, Error **errp)
+         memmap[SIFIVE_U_GEM_MGMT].base, memmap[SIFIVE_U_GEM_MGMT].size);
+ }
  
+-static void riscv_sifive_u_machine_init(MachineClass *mc)
+-{
+-    mc->desc = "RISC-V Board compatible with SiFive U SDK";
+-    mc->init = riscv_sifive_u_init;
+-    mc->max_cpus = SIFIVE_U_MANAGEMENT_CPU_COUNT + SIFIVE_U_COMPUTE_CPU_COUNT;
+-    mc->min_cpus = SIFIVE_U_MANAGEMENT_CPU_COUNT + 1;
+-    mc->default_cpus = mc->min_cpus;
+-}
+-
+-DEFINE_MACHINE("sifive_u", riscv_sifive_u_machine_init)
+-
+ static void riscv_sifive_u_soc_class_init(ObjectClass *oc, void *data)
+ {
+     DeviceClass *dc = DEVICE_CLASS(oc);
+@@ -581,3 +573,29 @@ static void riscv_sifive_u_soc_register_types(void)
+ }
+ 
+ type_init(riscv_sifive_u_soc_register_types)
++
++static void riscv_sifive_u_machine_class_init(ObjectClass *oc, void *data)
++{
++    MachineClass *mc = MACHINE_CLASS(oc);
++
++    mc->desc = "RISC-V Board compatible with SiFive U SDK";
++    mc->init = riscv_sifive_u_init;
++    mc->max_cpus = SIFIVE_U_MANAGEMENT_CPU_COUNT + SIFIVE_U_COMPUTE_CPU_COUNT;
++    mc->min_cpus = SIFIVE_U_MANAGEMENT_CPU_COUNT + 1;
++    mc->default_cpus = mc->min_cpus;
++}
++
++static const TypeInfo riscv_sifive_u_machine_typeinfo = {
++    .name       = MACHINE_TYPE_NAME("sifive_u"),
++    .parent     = TYPE_MACHINE,
++    .class_init = riscv_sifive_u_machine_class_init,
++    .instance_init = riscv_sifive_u_machine_instance_init,
++    .instance_size = sizeof(SiFiveUState),
++};
++
++static void riscv_sifive_u_machine_init_register_types(void)
++{
++    type_register_static(&riscv_sifive_u_machine_typeinfo);
++}
++
++type_init(riscv_sifive_u_machine_init_register_types)
 diff --git a/include/hw/riscv/sifive_u.h b/include/hw/riscv/sifive_u.h
-index 66ee76a780..0062276190 100644
+index 0062276190..794b958dcc 100644
 --- a/include/hw/riscv/sifive_u.h
 +++ b/include/hw/riscv/sifive_u.h
-@@ -64,6 +64,7 @@ enum {
-     SIFIVE_U_UART0,
-     SIFIVE_U_UART1,
-     SIFIVE_U_OTP,
-+    SIFIVE_U_FLASH0,
-     SIFIVE_U_DRAM,
-     SIFIVE_U_GEM,
-     SIFIVE_U_GEM_MGMT
+@@ -44,12 +44,17 @@ typedef struct SiFiveUSoCState {
+     CadenceGEMState gem;
+ } SiFiveUSoCState;
+ 
++#define TYPE_RISCV_U_MACHINE MACHINE_TYPE_NAME("sifive_u")
++#define RISCV_U_MACHINE(obj) \
++    OBJECT_CHECK(SiFiveUState, (obj), TYPE_RISCV_U_MACHINE)
++
+ typedef struct SiFiveUState {
+     /*< private >*/
+-    SysBusDevice parent_obj;
++    MachineState parent_obj;
+ 
+     /*< public >*/
+     SiFiveUSoCState soc;
++
+     void *fdt;
+     int fdt_size;
+ } SiFiveUState;
 -- 
 2.21.0
 
