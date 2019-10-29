@@ -1,69 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iPQEE-0004j5-J1
-	for mharc-qemu-riscv@gnu.org; Tue, 29 Oct 2019 08:04:02 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43257)
+	id 1iPRT7-0001g6-QH
+	for mharc-qemu-riscv@gnu.org; Tue, 29 Oct 2019 09:23:29 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:53677)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <alex.bennee@linaro.org>) id 1iPQEB-0004gq-7l
- for qemu-riscv@nongnu.org; Tue, 29 Oct 2019 08:04:01 -0400
+ (envelope-from <alistair23@gmail.com>) id 1iPRT4-0001fz-QB
+ for qemu-riscv@nongnu.org; Tue, 29 Oct 2019 09:23:28 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alex.bennee@linaro.org>) id 1iPQE9-0001W2-58
- for qemu-riscv@nongnu.org; Tue, 29 Oct 2019 08:03:58 -0400
-Received: from mail-wm1-x341.google.com ([2a00:1450:4864:20::341]:50646)
+ (envelope-from <alistair23@gmail.com>) id 1iPRT2-0006JU-Lx
+ for qemu-riscv@nongnu.org; Tue, 29 Oct 2019 09:23:26 -0400
+Received: from mail-lj1-x241.google.com ([2a00:1450:4864:20::241]:46882)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <alex.bennee@linaro.org>)
- id 1iPQE8-0001VB-VI
- for qemu-riscv@nongnu.org; Tue, 29 Oct 2019 08:03:57 -0400
-Received: by mail-wm1-x341.google.com with SMTP id 11so2303349wmk.0
- for <qemu-riscv@nongnu.org>; Tue, 29 Oct 2019 05:03:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=references:user-agent:from:to:cc:subject:in-reply-to:date
- :message-id:mime-version:content-transfer-encoding;
- bh=1EfezWfQS4/maBDvfQ+2CoBQC3UGh2pF5F3aMbBn1QI=;
- b=PnSairzH1S+bowlIRuciH6B+PnCNEx3ue5Xb9BJdl1WYM3c9W9XZeC8NbIkYWWlgDf
- b5hHFVyZ+aAdJ60AIIModUY+7LU31wXbsBLGz/KHBQCPhzIjuhaLqzx3FsA7GPzSrs3R
- XyuwJcgXdv5/bClkfhEqqar/KeSPe5b4OrAJxBp3BIvQw8ktMjH0BUypV5La972vnz/q
- uHvuCQC8zpTw5gqRgpa4CIMwwoM19OrTVJ1yWXevQjzRVvzhnrQ7D3cPGFhOwIKdl1mw
- RONb2x/R1krKWBzVF9LDA+nV/V51sjq9C8ks1weyjO7PUAejOuo62XLffad+juuF+2mU
- AomA==
+ (Exim 4.71) (envelope-from <alistair23@gmail.com>)
+ id 1iPRT2-0006J7-B5; Tue, 29 Oct 2019 09:23:24 -0400
+Received: by mail-lj1-x241.google.com with SMTP id w8so10740271lji.13;
+ Tue, 29 Oct 2019 06:23:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=/lb4sVRigBEk2PxOdtO64mcEnuba5ySXmKns5mMo2hI=;
+ b=i3iImtcubLwk2y9/iovPv89dsBsG8F2QRZ9rWkvaWfAuGu8TqpkGqPFZTFt3UYMKG9
+ JoYpwwAxfNYmA/fpAsdhv3izvdZq1nZHed8iS9W7L4lzQXZgzXzAKcr+/O5ub9wtlEIo
+ yS6depr/PGbvG+7nljzRAQ6HoD6fuBRa1cn/7TPbitSWZCsk6aO3DGlVEWnet9M+73d7
+ SezviQEglVoNVyHdhmplM7TxQkpbboE/CelYlko3I4xuAunbR8FCAtsru0H8j5vMD4TI
+ oSvDAjRiOjku1hdA9+OgZyilmAKRBA7yhrhQcde7qazdueSW9JiRgilQotJsXKXl05bN
+ 75fQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:references:user-agent:from:to:cc:subject
- :in-reply-to:date:message-id:mime-version:content-transfer-encoding;
- bh=1EfezWfQS4/maBDvfQ+2CoBQC3UGh2pF5F3aMbBn1QI=;
- b=tauo6EXiHCMQhJndYNNLoya/XT8bUR4TDIh/4CHT2ZbYuiF1dU9wSC5ThvdFXK3+2U
- mLCMP4Da2EiY7PsKSpBh7eYdqvfEI00Dh1/5jWCE2OIwxb2pshE+hC9VoZn5959tc0w9
- PnDC1TqgaEMPbGxbQHCLPADYhnq5uXlpwZBs9Vuu3eH0YYnfkqHiHvEZa4OkxNBqSDLD
- +TLhBbmQPfKeG6E7lFgZzoTuPlrU2nZ8oTyB8SJcvufJfjje64GPqdJRH6tY8yKgubpJ
- Xniimn6oC6jUokCLZdfiY7i1NHnk7UWi1cyhzjsrO6Alpvao1shj/omuvlvqfhI3bePW
- EMdg==
-X-Gm-Message-State: APjAAAXTlEc6SbjUWKJ4EcDdT0SMONuL+W+WO17IhrETjoanHR1Eszg9
- 4phkFWJkPsS2pbglL669YZg8bf+jWLQ=
-X-Google-Smtp-Source: APXvYqwhNaqfwi40GOPvYkm6XVWISVSV0KEQ6/cwQcSUCE2F/1j6Wo7+POOr7hGWA+R6cVa2AJoY4A==
-X-Received: by 2002:a1c:9601:: with SMTP id y1mr3608867wmd.157.1572350633108; 
- Tue, 29 Oct 2019 05:03:53 -0700 (PDT)
-Received: from zen.linaroharston ([51.148.130.216])
- by smtp.gmail.com with ESMTPSA id i3sm14863366wrw.69.2019.10.29.05.03.51
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 29 Oct 2019 05:03:51 -0700 (PDT)
-Received: from zen (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id CA1751FF87;
- Tue, 29 Oct 2019 12:03:50 +0000 (GMT)
-References: <34350af3b53fadc50bfe4f1fbc452c7d3a8fe8f7.1570572202.git.alistair.francis@wdc.com>
-User-agent: mu4e 1.3.5; emacs 27.0.50
-From: Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair23@gmail.com, palmer@sifive.com,
- alistair.francis@wdc.com
-Subject: Re: [PATCH v1 1/1] target/riscv: Remove atomic accesses to MIP CSR
-In-reply-to: <34350af3b53fadc50bfe4f1fbc452c7d3a8fe8f7.1570572202.git.alistair.francis@wdc.com>
-Date: Tue, 29 Oct 2019 12:03:50 +0000
-Message-ID: <87v9s792s9.fsf@linaro.org>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=/lb4sVRigBEk2PxOdtO64mcEnuba5ySXmKns5mMo2hI=;
+ b=lPnRNCAvaYwTMmdop4g1gTm8JIxSFhCT0e9d2qXKzbGnM85mnUCm9W9UFOJQYx1ulY
+ y3L3MKV4ETmKWJ/jLqzIujKO8idmXo+gA+0J+MyvWDsLt4viEXbPgF+iDavN03n5xPs0
+ qOtX1pRda4XcvBhcqEy8tj1hmUrs0wPE4YaKC/blEs6ECzFLE2CMvLJQZi+BBNvzIPs+
+ ptfbPs13WwqHGFLAmiCuD0DLbNyFg3nVUJRJIgmYLNH82dqLclXKLt1TZrxq1UFWeOeK
+ CSKC4ykk4kv3uTZik6KyErWxxMcnj9C7/Ids6ikvakqCbZ+04dAB2j5WhvfjEW0csEer
+ dTKA==
+X-Gm-Message-State: APjAAAVsoYD9BlWRKDutMeE7D6bx0Iy7ayh0BV3cyOYMe+7lEL+lX6v4
+ VA1YOJmDpAUmHowOYF+O9lWNTp8gsasGYIChCJI=
+X-Google-Smtp-Source: APXvYqywjXtetqrfodfN99KY2iZULxabl5sAsDWupU+zO9qjxj6msAnxks2GwRx7tzLnuD36m8JtMzaUuL+9SrOxw5E=
+X-Received: by 2002:a2e:82cd:: with SMTP id n13mr2727893ljh.156.1572355402825; 
+ Tue, 29 Oct 2019 06:23:22 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+References: <20191025042734.69244-1-anup.patel@wdc.com>
+ <20191025042734.69244-2-anup.patel@wdc.com>
+In-Reply-To: <20191025042734.69244-2-anup.patel@wdc.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 29 Oct 2019 14:22:56 +0100
+Message-ID: <CAKmqyKOut0u+cHmj1UOfqXf3ueVjHCxHHOdaQ5gNxr6XCnXy4w@mail.gmail.com>
+Subject: Re: [PATCH v5 1/2] hw: rtc: Add Goldfish RTC device
+To: Anup Patel <Anup.Patel@wdc.com>
+Cc: Peter Maydell <peter.maydell@linaro.org>,
+ Palmer Dabbelt <palmer@sifive.com>, 
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Atish Patra <Atish.Patra@wdc.com>, 
+ "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>,
+ "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, 
+ Anup Patel <anup@brainfault.org>
+Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::341
+X-Received-From: 2a00:1450:4864:20::241
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -75,184 +72,416 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Oct 2019 12:04:01 -0000
+X-List-Received-Date: Tue, 29 Oct 2019 13:23:28 -0000
 
-
-Alistair Francis <alistair.francis@wdc.com> writes:
-
-> Instead of relying on atomics to access the MIP register let's update
-> our helper function to instead just lock the IO mutex thread before
-> writing. This follows the same concept as used in PPC for handling
-> interrupts
+On Fri, Oct 25, 2019 at 6:30 AM Anup Patel <Anup.Patel@wdc.com> wrote:
 >
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> This patch adds model for Google Goldfish virtual platform RTC device.
+>
+> We will be adding Goldfish RTC device to the QEMU RISC-V virt machine
+> for providing real date-time to Guest Linux. The corresponding Linux
+> driver for Goldfish RTC device is already available in upstream Linux.
+>
+> For now, VM migration support is available but untested for Goldfish RTC
+> device. It will be hardened in-future when we implement VM migration for
+> KVM RISC-V.
+>
+> Signed-off-by: Anup Patel <anup.patel@wdc.com>
 
-Acked-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-Generally anything that can trigger an IRQ or IO type activity should be
-locking with the BQL. MMIO accesses are automatically locked by the
-memory sub-system but you need to take special care with system
-registers that have cross vCPU effects.
+Alistair
 
 > ---
->  target/riscv/cpu.c        |  5 ++--
->  target/riscv/cpu.h        |  9 --------
->  target/riscv/cpu_helper.c | 48 +++++++++++++++------------------------
->  target/riscv/csr.c        |  2 +-
->  4 files changed, 21 insertions(+), 43 deletions(-)
+>  hw/rtc/Kconfig                |   3 +
+>  hw/rtc/Makefile.objs          |   1 +
+>  hw/rtc/goldfish_rtc.c         | 288 ++++++++++++++++++++++++++++++++++
+>  hw/rtc/trace-events           |   4 +
+>  include/hw/rtc/goldfish_rtc.h |  46 ++++++
+>  5 files changed, 342 insertions(+)
+>  create mode 100644 hw/rtc/goldfish_rtc.c
+>  create mode 100644 include/hw/rtc/goldfish_rtc.h
 >
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index f13e298a36..e09dd7aa23 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -224,8 +224,7 @@ static void riscv_cpu_dump_state(CPUState *cs, FILE *=
-f, int flags)
->  #ifndef CONFIG_USER_ONLY
->      qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mhartid ", env->mhartid);
->      qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mstatus ", env->mstatus);
-> -    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mip     ",
-> -                 (target_ulong)atomic_read(&env->mip));
-> +    qemu_fprintf(f, " %s 0x%x\n", "mip     ", env->mip);
->      qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mie     ", env->mie);
->      qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mideleg ", env->mideleg);
->      qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "medeleg ", env->medeleg);
-> @@ -275,7 +274,7 @@ static bool riscv_cpu_has_work(CPUState *cs)
->       * Definition of the WFI instruction requires it to ignore the privi=
-lege
->       * mode and delegation registers, but respect individual enables
->       */
-> -    return (atomic_read(&env->mip) & env->mie) !=3D 0;
-> +    return (env->mip & env->mie) !=3D 0;
->  #else
->      return true;
->  #endif
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 124ed33ee4..a71473b243 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -121,15 +121,6 @@ struct CPURISCVState {
->      target_ulong mhartid;
->      target_ulong mstatus;
+> diff --git a/hw/rtc/Kconfig b/hw/rtc/Kconfig
+> index 45daa8d655..bafe6ac2c9 100644
+> --- a/hw/rtc/Kconfig
+> +++ b/hw/rtc/Kconfig
+> @@ -21,3 +21,6 @@ config MC146818RTC
 >
-> -    /*
-> -     * CAUTION! Unlike the rest of this struct, mip is accessed asynchon=
-ously
-> -     * by I/O threads. It should be read with atomic_read. It should be =
-updated
-> -     * using riscv_cpu_update_mip with the iothread mutex held. The ioth=
-read
-> -     * mutex must be held because mip must be consistent with the CPU in=
-turrept
-> -     * state. riscv_cpu_update_mip calls cpu_interrupt or cpu_reset_inte=
-rrupt
-> -     * wuth the invariant that CPU_INTERRUPT_HARD is set iff mip is non-=
-zero.
-> -     * mip is 32-bits to allow atomic_read on 32-bit hosts.
-> -     */
->      uint32_t mip;
->      uint32_t miclaim;
->
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index 87dd6a6ece..4334978c2e 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -19,6 +19,7 @@
->
->  #include "qemu/osdep.h"
->  #include "qemu/log.h"
-> +#include "qemu/main-loop.h"
->  #include "cpu.h"
->  #include "exec/exec-all.h"
->  #include "tcg-op.h"
-> @@ -38,7 +39,7 @@ static int riscv_cpu_local_irq_pending(CPURISCVState *e=
-nv)
->  {
->      target_ulong mstatus_mie =3D get_field(env->mstatus, MSTATUS_MIE);
->      target_ulong mstatus_sie =3D get_field(env->mstatus, MSTATUS_SIE);
-> -    target_ulong pending =3D atomic_read(&env->mip) & env->mie;
-> +    target_ulong pending =3D env->mip & env->mie;
->      target_ulong mie =3D env->priv < PRV_M || (env->priv =3D=3D PRV_M &&=
- mstatus_mie);
->      target_ulong sie =3D env->priv < PRV_S || (env->priv =3D=3D PRV_S &&=
- mstatus_sie);
->      target_ulong irqs =3D (pending & ~env->mideleg & -mie) |
-> @@ -92,42 +93,29 @@ int riscv_cpu_claim_interrupts(RISCVCPU *cpu, uint32_=
-t interrupts)
->      }
->  }
->
-> -struct CpuAsyncInfo {
-> -    uint32_t new_mip;
-> -};
-> -
-> -static void riscv_cpu_update_mip_irqs_async(CPUState *target_cpu_state,
-> -                                            run_on_cpu_data data)
-> -{
-> -    struct CpuAsyncInfo *info =3D (struct CpuAsyncInfo *) data.host_ptr;
-> -
-> -    if (info->new_mip) {
-> -        cpu_interrupt(target_cpu_state, CPU_INTERRUPT_HARD);
-> -    } else {
-> -        cpu_reset_interrupt(target_cpu_state, CPU_INTERRUPT_HARD);
-> -    }
-> -
-> -    g_free(info);
-> -}
-> -
->  uint32_t riscv_cpu_update_mip(RISCVCPU *cpu, uint32_t mask, uint32_t val=
-ue)
->  {
->      CPURISCVState *env =3D &cpu->env;
->      CPUState *cs =3D CPU(cpu);
-> -    struct CpuAsyncInfo *info;
-> -    uint32_t old, new, cmp =3D atomic_read(&env->mip);
-> +    uint32_t old =3D env->mip;
-> +    bool locked =3D false;
+>  config SUN4V_RTC
+>      bool
 > +
-> +    if (!qemu_mutex_iothread_locked()) {
-> +        locked =3D true;
-> +        qemu_mutex_lock_iothread();
-> +    }
->
-> -    do {
-> -        old =3D cmp;
-> -        new =3D (old & ~mask) | (value & mask);
-> -        cmp =3D atomic_cmpxchg(&env->mip, old, new);
-> -    } while (old !=3D cmp);
-> +    env->mip =3D (env->mip & ~mask) | (value & mask);
->
-> -    info =3D g_new(struct CpuAsyncInfo, 1);
-> -    info->new_mip =3D new;
-> +    if (env->mip) {
-> +        cpu_interrupt(cs, CPU_INTERRUPT_HARD);
+> +config GOLDFISH_RTC
+> +    bool
+> diff --git a/hw/rtc/Makefile.objs b/hw/rtc/Makefile.objs
+> index 8dc9fcd3a9..aa208d0d10 100644
+> --- a/hw/rtc/Makefile.objs
+> +++ b/hw/rtc/Makefile.objs
+> @@ -11,3 +11,4 @@ common-obj-$(CONFIG_EXYNOS4) += exynos4210_rtc.o
+>  obj-$(CONFIG_MC146818RTC) += mc146818rtc.o
+>  common-obj-$(CONFIG_SUN4V_RTC) += sun4v-rtc.o
+>  common-obj-$(CONFIG_ASPEED_SOC) += aspeed_rtc.o
+> +common-obj-$(CONFIG_GOLDFISH_RTC) += goldfish_rtc.o
+> diff --git a/hw/rtc/goldfish_rtc.c b/hw/rtc/goldfish_rtc.c
+> new file mode 100644
+> index 0000000000..f71f6eaab0
+> --- /dev/null
+> +++ b/hw/rtc/goldfish_rtc.c
+> @@ -0,0 +1,288 @@
+> +/*
+> + * Goldfish virtual platform RTC
+> + *
+> + * Copyright (C) 2019 Western Digital Corporation or its affiliates.
+> + *
+> + * For more details on Google Goldfish virtual platform refer:
+> + * https://android.googlesource.com/platform/external/qemu/+/master/docs/GOLDFISH-VIRTUAL-HARDWARE.TXT
+> + *
+> + * This program is free software; you can redistribute it and/or modify it
+> + * under the terms and conditions of the GNU General Public License,
+> + * version 2 or later, as published by the Free Software Foundation.
+> + *
+> + * This program is distributed in the hope it will be useful, but WITHOUT
+> + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+> + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+> + * more details.
+> + *
+> + * You should have received a copy of the GNU General Public License along with
+> + * this program.  If not, see <http://www.gnu.org/licenses/>.
+> + */
+> +
+> +#include "qemu/osdep.h"
+> +#include "qemu-common.h"
+> +#include "hw/rtc/goldfish_rtc.h"
+> +#include "migration/vmstate.h"
+> +#include "hw/irq.h"
+> +#include "hw/qdev-properties.h"
+> +#include "hw/sysbus.h"
+> +#include "qemu/timer.h"
+> +#include "sysemu/sysemu.h"
+> +#include "qemu/cutils.h"
+> +#include "qemu/log.h"
+> +
+> +#include "trace.h"
+> +
+> +#define RTC_TIME_LOW            0x00
+> +#define RTC_TIME_HIGH           0x04
+> +#define RTC_ALARM_LOW           0x08
+> +#define RTC_ALARM_HIGH          0x0c
+> +#define RTC_IRQ_ENABLED         0x10
+> +#define RTC_CLEAR_ALARM         0x14
+> +#define RTC_ALARM_STATUS        0x18
+> +#define RTC_CLEAR_INTERRUPT     0x1c
+> +
+> +static void goldfish_rtc_update(GoldfishRTCState *s)
+> +{
+> +    qemu_set_irq(s->irq, (s->irq_pending & s->irq_enabled) ? 1 : 0);
+> +}
+> +
+> +static void goldfish_rtc_interrupt(void *opaque)
+> +{
+> +    GoldfishRTCState *s = (GoldfishRTCState *)opaque;
+> +
+> +    s->alarm_running = 0;
+> +    s->irq_pending = 1;
+> +    goldfish_rtc_update(s);
+> +}
+> +
+> +static uint64_t goldfish_rtc_get_count(GoldfishRTCState *s)
+> +{
+> +    return s->tick_offset + (uint64_t)qemu_clock_get_ns(rtc_clock);
+> +}
+> +
+> +static void goldfish_rtc_clear_alarm(GoldfishRTCState *s)
+> +{
+> +    timer_del(s->timer);
+> +    s->alarm_running = 0;
+> +}
+> +
+> +static void goldfish_rtc_set_alarm(GoldfishRTCState *s)
+> +{
+> +    uint64_t ticks = goldfish_rtc_get_count(s);
+> +    uint64_t event = s->alarm_next;
+> +
+> +    if (event <= ticks) {
+> +        goldfish_rtc_clear_alarm(s);
+> +        goldfish_rtc_interrupt(s);
 > +    } else {
-> +        cpu_reset_interrupt(cs, CPU_INTERRUPT_HARD);
+> +        /*
+> +         * We should be setting timer expiry to:
+> +         *     qemu_clock_get_ns(rtc_clock) + (event - ticks)
+> +         * but this is equivalent to:
+> +         *     event - s->tick_offset
+> +         */
+> +        timer_mod(s->timer, event - s->tick_offset);
+> +        s->alarm_running = 1;
 > +    }
->
-> -    async_run_on_cpu(cs, riscv_cpu_update_mip_irqs_async,
-> -                     RUN_ON_CPU_HOST_PTR(info));
-> +    if (locked) {
-> +        qemu_mutex_unlock_iothread();
+> +}
+> +
+> +static uint64_t goldfish_rtc_read(void *opaque, hwaddr offset,
+> +                                  unsigned size)
+> +{
+> +    GoldfishRTCState *s = opaque;
+> +    uint64_t r = 0;
+> +
+> +    switch (offset) {
+> +    case RTC_TIME_LOW:
+> +        r = goldfish_rtc_get_count(s) & 0xffffffff;
+> +        break;
+> +    case RTC_TIME_HIGH:
+> +        r = goldfish_rtc_get_count(s) >> 32;
+> +        break;
+> +    case RTC_ALARM_LOW:
+> +        r = s->alarm_next & 0xffffffff;
+> +        break;
+> +    case RTC_ALARM_HIGH:
+> +        r = s->alarm_next >> 32;
+> +        break;
+> +    case RTC_IRQ_ENABLED:
+> +        r = s->irq_enabled;
+> +        break;
+> +    case RTC_ALARM_STATUS:
+> +        r = s->alarm_running;
+> +        break;
+> +    default:
+> +        qemu_log_mask(LOG_GUEST_ERROR,
+> +                      "%s: Bad offset 0x%x\n", __func__, (uint32_t)offset);
+> +        break;
 > +    }
+> +
+> +    trace_goldfish_rtc_read(offset, r);
+> +
+> +    return r;
+> +}
+> +
+> +static void goldfish_rtc_write(void *opaque, hwaddr offset,
+> +                               uint64_t value, unsigned size)
+> +{
+> +    GoldfishRTCState *s = opaque;
+> +    uint64_t current_tick, new_tick;
+> +
+> +    switch (offset) {
+> +    case RTC_TIME_LOW:
+> +        current_tick = goldfish_rtc_get_count(s);
+> +        new_tick = current_tick & (0xffffffffULL << 32);
+> +        new_tick |= value;
+> +        s->tick_offset += new_tick - current_tick;
+> +        break;
+> +    case RTC_TIME_HIGH:
+> +        current_tick = goldfish_rtc_get_count(s);
+> +        new_tick = current_tick & 0xffffffffULL;
+> +        new_tick |= (value << 32);
+> +        s->tick_offset += new_tick - current_tick;
+> +        break;
+> +    case RTC_ALARM_LOW:
+> +        s->alarm_next &= (0xffffffffULL << 32);
+> +        s->alarm_next |= value;
+> +        goldfish_rtc_set_alarm(s);
+> +        break;
+> +    case RTC_ALARM_HIGH:
+> +        s->alarm_next &= 0xffffffffULL;
+> +        s->alarm_next |= (value << 32);
+> +        break;
+> +    case RTC_IRQ_ENABLED:
+> +        s->irq_enabled = (uint32_t)(value & 0x1);
+> +        goldfish_rtc_update(s);
+> +        break;
+> +    case RTC_CLEAR_ALARM:
+> +        goldfish_rtc_clear_alarm(s);
+> +        break;
+> +    case RTC_CLEAR_INTERRUPT:
+> +        s->irq_pending = 0;
+> +        goldfish_rtc_update(s);
+> +        break;
+> +    default:
+> +        qemu_log_mask(LOG_GUEST_ERROR,
+> +                      "%s: Bad offset 0x%x\n", __func__, (uint32_t)offset);
+> +        break;
+> +    }
+> +
+> +    trace_goldfish_rtc_write(offset, value);
+> +}
+> +
+> +static int goldfish_rtc_pre_save(void *opaque)
+> +{
+> +    uint64_t delta;
+> +    GoldfishRTCState *s = opaque;
+> +
+> +    /*
+> +     * We want to migrate this offset, which sounds straightforward.
+> +     * Unfortunately, we cannot directly pass tick_offset because
+> +     * rtc_clock on destination Host might not be same source Host.
+> +     *
+> +     * To tackle, this we pass tick_offset relative to vm_clock from
+> +     * source Host and make it relative to rtc_clock at destination Host.
+> +     */
+> +    delta = qemu_clock_get_ns(rtc_clock) -
+> +            qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL);
+> +    s->tick_offset_vmstate = s->tick_offset + delta;
+> +
+> +    return 0;
+> +}
+> +
+> +static int goldfish_rtc_post_load(void *opaque, int version_id)
+> +{
+> +    uint64_t delta;
+> +    GoldfishRTCState *s = opaque;
+> +
+> +    /*
+> +     * We extract tick_offset from tick_offset_vmstate by doing
+> +     * reverse math compared to pre_save() function.
+> +     */
+> +    delta = qemu_clock_get_ns(rtc_clock) -
+> +            qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL);
+> +    s->tick_offset = s->tick_offset_vmstate - delta;
+> +
+> +    return 0;
+> +}
+> +
+> +static const MemoryRegionOps goldfish_rtc_ops = {
+> +    .read = goldfish_rtc_read,
+> +    .write = goldfish_rtc_write,
+> +    .endianness = DEVICE_LITTLE_ENDIAN,
+> +    .valid = {
+> +        .min_access_size = 4,
+> +        .max_access_size = 4
+> +    }
+> +};
+> +
+> +static const VMStateDescription goldfish_rtc_vmstate = {
+> +    .name = TYPE_GOLDFISH_RTC,
+> +    .version_id = 1,
+> +    .pre_save = goldfish_rtc_pre_save,
+> +    .post_load = goldfish_rtc_post_load,
+> +    .fields = (VMStateField[]) {
+> +        VMSTATE_UINT64(tick_offset_vmstate, GoldfishRTCState),
+> +        VMSTATE_UINT64(alarm_next, GoldfishRTCState),
+> +        VMSTATE_UINT32(alarm_running, GoldfishRTCState),
+> +        VMSTATE_UINT32(irq_pending, GoldfishRTCState),
+> +        VMSTATE_UINT32(irq_enabled, GoldfishRTCState),
+> +        VMSTATE_END_OF_LIST()
+> +    }
+> +};
+> +
+> +static void goldfish_rtc_reset(DeviceState *dev)
+> +{
+> +    GoldfishRTCState *s = GOLDFISH_RTC(dev);
+> +    struct tm tm;
+> +
+> +    timer_del(s->timer);
+> +
+> +    qemu_get_timedate(&tm, 0);
+> +    s->tick_offset = mktimegm(&tm);
+> +    s->tick_offset *= NANOSECONDS_PER_SECOND;
+> +    s->tick_offset -= qemu_clock_get_ns(rtc_clock);
+> +    s->tick_offset_vmstate = 0;
+> +    s->alarm_next = 0;
+> +    s->alarm_running = 0;
+> +    s->irq_pending = 0;
+> +    s->irq_enabled = 0;
+> +}
+> +
+> +static void goldfish_rtc_realize(DeviceState *d, Error **errp)
+> +{
+> +    SysBusDevice *dev = SYS_BUS_DEVICE(d);
+> +    GoldfishRTCState *s = GOLDFISH_RTC(d);
+> +
+> +    memory_region_init_io(&s->iomem, OBJECT(s), &goldfish_rtc_ops, s,
+> +                          "goldfish_rtc", 0x1000);
+> +    sysbus_init_mmio(dev, &s->iomem);
+> +
+> +    sysbus_init_irq(dev, &s->irq);
+> +
+> +    s->timer = timer_new_ns(rtc_clock, goldfish_rtc_interrupt, s);
+> +}
+> +
+> +static void goldfish_rtc_class_init(ObjectClass *klass, void *data)
+> +{
+> +    DeviceClass *dc = DEVICE_CLASS(klass);
+> +
+> +    dc->realize = goldfish_rtc_realize;
+> +    dc->reset = goldfish_rtc_reset;
+> +    dc->vmsd = &goldfish_rtc_vmstate;
+> +}
+> +
+> +static const TypeInfo goldfish_rtc_info = {
+> +    .name          = TYPE_GOLDFISH_RTC,
+> +    .parent        = TYPE_SYS_BUS_DEVICE,
+> +    .instance_size = sizeof(GoldfishRTCState),
+> +    .class_init    = goldfish_rtc_class_init,
+> +};
+> +
+> +static void goldfish_rtc_register_types(void)
+> +{
+> +    type_register_static(&goldfish_rtc_info);
+> +}
+> +
+> +type_init(goldfish_rtc_register_types)
+> diff --git a/hw/rtc/trace-events b/hw/rtc/trace-events
+> index d6749f4616..0bfaa26cb8 100644
+> --- a/hw/rtc/trace-events
+> +++ b/hw/rtc/trace-events
+> @@ -17,3 +17,7 @@ pl031_set_alarm(uint32_t ticks) "alarm set for %u ticks"
+>  # aspeed-rtc.c
+>  aspeed_rtc_read(uint64_t addr, uint64_t value) "addr 0x%02" PRIx64 " value 0x%08" PRIx64
+>  aspeed_rtc_write(uint64_t addr, uint64_t value) "addr 0x%02" PRIx64 " value 0x%08" PRIx64
+> +
+> +# goldfish_rtc.c
+> +goldfish_rtc_read(uint64_t addr, uint64_t value) "addr 0x%02" PRIx64 " value 0x%08" PRIx64
+> +goldfish_rtc_write(uint64_t addr, uint64_t value) "addr 0x%02" PRIx64 " value 0x%08" PRIx64
+> diff --git a/include/hw/rtc/goldfish_rtc.h b/include/hw/rtc/goldfish_rtc.h
+> new file mode 100644
+> index 0000000000..3be586bdcb
+> --- /dev/null
+> +++ b/include/hw/rtc/goldfish_rtc.h
+> @@ -0,0 +1,46 @@
+> +/*
+> + * Goldfish virtual platform RTC
+> + *
+> + * Copyright (C) 2019 Western Digital Corporation or its affiliates.
+> + *
+> + * For more details on Google Goldfish virtual platform refer:
+> + * https://android.googlesource.com/platform/external/qemu/+/master/docs/GOLDFISH-VIRTUAL-HARDWARE.TXT
+> + *
+> + * This program is free software; you can redistribute it and/or modify it
+> + * under the terms and conditions of the GNU General Public License,
+> + * version 2 or later, as published by the Free Software Foundation.
+> + *
+> + * This program is distributed in the hope it will be useful, but WITHOUT
+> + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+> + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+> + * more details.
+> + *
+> + * You should have received a copy of the GNU General Public License along with
+> + * this program.  If not, see <http://www.gnu.org/licenses/>.
+> + */
+> +
+> +#ifndef HW_RTC_GOLDFISH_RTC_H
+> +#define HW_RTC_GOLDFISH_RTC_H
+> +
+> +#include "hw/sysbus.h"
+> +
+> +#define TYPE_GOLDFISH_RTC "goldfish_rtc"
+> +#define GOLDFISH_RTC(obj) \
+> +OBJECT_CHECK(GoldfishRTCState, (obj), TYPE_GOLDFISH_RTC)
+> +
+> +typedef struct GoldfishRTCState {
+> +    SysBusDevice parent_obj;
+> +
+> +    MemoryRegion iomem;
+> +    QEMUTimer *timer;
+> +    qemu_irq irq;
+> +
+> +    uint64_t tick_offset;
+> +    uint64_t tick_offset_vmstate;
+> +    uint64_t alarm_next;
+> +    uint32_t alarm_running;
+> +    uint32_t irq_pending;
+> +    uint32_t irq_enabled;
+> +} GoldfishRTCState;
+> +
+> +#endif
+> --
+> 2.17.1
 >
->      return old;
->  }
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index f767ad24be..db0cc6ef55 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -579,7 +579,7 @@ static int rmw_mip(CPURISCVState *env, int csrno, tar=
-get_ulong *ret_value,
->      if (mask) {
->          old_mip =3D riscv_cpu_update_mip(cpu, mask, (new_value & mask));
->      } else {
-> -        old_mip =3D atomic_read(&env->mip);
-> +        old_mip =3D env->mip;
->      }
 >
->      if (ret_value) {
-
-
---
-Alex Benn=C3=A9e
 
