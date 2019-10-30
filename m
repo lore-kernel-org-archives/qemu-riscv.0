@@ -1,64 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iPcJZ-0008N1-6y
-	for mharc-qemu-riscv@gnu.org; Tue, 29 Oct 2019 20:58:21 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:46619)
+	id 1iPg31-0003oY-0W
+	for mharc-qemu-riscv@gnu.org; Wed, 30 Oct 2019 00:57:31 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:57134)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <hiroyuki.obinata@gmail.com>) id 1iPblj-00050V-VV
- for qemu-riscv@nongnu.org; Tue, 29 Oct 2019 20:23:24 -0400
+ (envelope-from <palmer@dabbelt.com>) id 1iPg2y-0003n7-IM
+ for qemu-riscv@nongnu.org; Wed, 30 Oct 2019 00:57:29 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <hiroyuki.obinata@gmail.com>) id 1iPblj-0003FS-1f
- for qemu-riscv@nongnu.org; Tue, 29 Oct 2019 20:23:23 -0400
-Received: from mail-pf1-x443.google.com ([2607:f8b0:4864:20::443]:34755)
+ (envelope-from <palmer@dabbelt.com>) id 1iPg2x-0001C1-9T
+ for qemu-riscv@nongnu.org; Wed, 30 Oct 2019 00:57:28 -0400
+Received: from mail-pf1-x442.google.com ([2607:f8b0:4864:20::442]:34518)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <hiroyuki.obinata@gmail.com>)
- id 1iPblg-0003AZ-Pr; Tue, 29 Oct 2019 20:23:20 -0400
-Received: by mail-pf1-x443.google.com with SMTP id b128so289218pfa.1;
- Tue, 29 Oct 2019 17:23:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id;
- bh=cKiv4G9Jdvqdv8VdDDKTa4KgoftRUOjopQK0c1wrgb8=;
- b=mBBwHmJmM7HJ7mxErdvgocQSLnHk8jiU0Khud+rKUrv7JUllLgc3heWiVYGRwXcfbW
- vHTsl4gqfIxFQJ7jjVtbILGwG9ifZ2ZA2Bf2ngzeeLyKDkofEFaFaZilecqWoz9+TT1Z
- MxFH/zJsfIajw3R4RCC0aY0m61/l7sauEU/MBN9Ft7ibMULFXG9GUZ+PzJ+U/zihN1g5
- XenSZKlqzjJqy7YW21ZhAgzpG6V+DZuLXv/GvzxB7mU/XaHrUdcAkEF30AR00dcPBcN5
- a4fejLesEmnYII65AnVidDzTvGklkqegFTY7qP3/Mg1aPN+lQh5vwwSi6/ojgcuRDffJ
- bIqQ==
+ (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1iPg2w-0001BQ-TG
+ for qemu-riscv@nongnu.org; Wed, 30 Oct 2019 00:57:27 -0400
+Received: by mail-pf1-x442.google.com with SMTP id b128so691031pfa.1
+ for <qemu-riscv@nongnu.org>; Tue, 29 Oct 2019 21:57:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=dabbelt-com.20150623.gappssmtp.com; s=20150623;
+ h=subject:date:message-id:mime-version:content-transfer-encoding:cc
+ :from:to; bh=QD5lzKum+Qo4vVF6hgbVJbUU4Qh7RzWKO3RZ7H1Bm0A=;
+ b=p/socSB8T1sjyFDkXRmQkZSCZSjjCS+9CUG52wW/nmYHbXtYvK7u4yE5u9dm37Ec9M
+ wMuAZOzCptwbssantO/Vp3DVqKCEZe7gsaqrjpsBs1pXJfm50hRIaTCmO2Gdmn4MffGs
+ 5+VHBrNwWV/+skvMAdRwz9ekDh+H3DtYl2DbWNxbgCJYsDg6nha4d//KFf3ZwDwDQRKl
+ mPwpBg2i/uq7VUMl7/dKN+tokhHUxig1NcIwWDs1vmRCldQUC94OkdMLRDY9PRJ9Nr9N
+ 6XP6CF7aZMR9jThKetWL3rqOjq5lEm4isjHC3f049MKXyt0SmOWO1aiOPybzAZBXa3/U
+ DX5g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id;
- bh=cKiv4G9Jdvqdv8VdDDKTa4KgoftRUOjopQK0c1wrgb8=;
- b=bHrW+6SaxARx/+fSh7gUPwjtzSebSWSPbMdyE4vJTibKjhHSb1qvvHe5X+CmZNLq2D
- ZEqmbpsoAZSduw98SSD3XrV/GtP8LUkF0FvOvomgbJ1TgdgqNJN2W4CthQ+9qKCs+/+H
- 2Dt3CEepUc1B5j4IlE5TC7jPJZHpZZ9lEi6DChW/a9UCDbrqHl99kADn/hfZ+4f1jRo0
- bScX82RRWx6XS+0K3RP4yBxn3RJ2jo4+jZpmL2KeEzOC4YG0O8o7FGhBTIhR3xFA9xjf
- RISQSUUbghGkClkkTLnC0gauCE+kWmDkcLeGVQLPsbYlJUwo8tJ5jEIxDILxXIn8NIDL
- FRAg==
-X-Gm-Message-State: APjAAAXmVHS7iCfV4DaIYEy1FXaKRuDr3PlxijEI0ZKtYU4V2yWhoCMJ
- mTG+Q7+9iwc+IkbusvcoGJ+SVjnR5QE=
-X-Google-Smtp-Source: APXvYqyltxkxnVGIfAw2q1dKZGLmN0mJf8wkrtShT3BuiOSnfg2exJIU7jIGZz0gv6EI0EiTWAORKg==
-X-Received: by 2002:a65:4189:: with SMTP id a9mr30028495pgq.380.1572394998433; 
- Tue, 29 Oct 2019 17:23:18 -0700 (PDT)
-Received: from DESKTOP-GC166TB.localdomain (softbank126163109097.bbtec.net.
- [126.163.109.97])
- by smtp.gmail.com with ESMTPSA id l11sm351821pgr.77.2019.10.29.17.23.15
+ h=x-gm-message-state:subject:date:message-id:mime-version
+ :content-transfer-encoding:cc:from:to;
+ bh=QD5lzKum+Qo4vVF6hgbVJbUU4Qh7RzWKO3RZ7H1Bm0A=;
+ b=TGBh5cJM4A3gKbGvjgoj1E/xzm4NDYqBYWn7qBCdGOKhaVZHIJx+zP5CwNs8lMijps
+ S3XneZ7LqOOtbqir2BjIdSxMUTJ51H6btizcIbM2vzcGBnBUp4zSqHoqiknYQXZaTjm1
+ 8WDOasvHkYcFN/3VVv6+nToLl0bDZ3qvcBgbd49dynYjGi3u5n6QZ23tEoWTh+XlSXP1
+ 8CIVMVIoCEkmxl8p+epY8uPdCvlOhvEXzEe9T5fz9kshW5hFu0IEqTl2WAjBxZridmGL
+ 01nylkyAhPLj6ujefBapKTocESvT/pinNMIpUcyA/Nr57f/BPHVjMf9R1YAM4FwH3oa2
+ plgw==
+X-Gm-Message-State: APjAAAXkFSjTzzhV67Q/87xJ6GFDnWp5Ojy6wkOCOOdY6UH0jvUVJy24
+ nNVGFMceXRbGPb5iJ+HKXXThpA==
+X-Google-Smtp-Source: APXvYqyLnBnl0qQjGR+lCpSI8Rh9Tj0sQQUl92gf35LwP0Rqgf+XxkxFwU0pLzfsfmZmtnGi2bnmRg==
+X-Received: by 2002:a17:90a:9104:: with SMTP id
+ k4mr11442805pjo.39.1572411445399; 
+ Tue, 29 Oct 2019 21:57:25 -0700 (PDT)
+Received: from localhost (c-67-161-15-180.hsd1.ca.comcast.net. [67.161.15.180])
+ by smtp.gmail.com with ESMTPSA id s24sm974473pfm.144.2019.10.29.21.57.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 29 Oct 2019 17:23:17 -0700 (PDT)
-From: hiroyuki.obinata@gmail.com
-To: qemu-devel@nongnu.org
-Cc: "hiroyuki.obinata" <hiroyuki.obinata@gmail.com>,
- Palmer Dabbelt <palmer@sifive.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
-Subject: [PATCH] remove unnecessary ifdef TARGET_RISCV64
-Date: Wed, 30 Oct 2019 09:23:18 +0900
-Message-Id: <20191030002318.399-1-hiroyuki.obinata@gmail.com>
-X-Mailer: git-send-email 2.17.1
+ Tue, 29 Oct 2019 21:57:24 -0700 (PDT)
+Subject: [PATCH] MAINTAINERS: Change to my personal email address
+Date: Tue, 29 Oct 2019 21:43:41 -0700
+Message-Id: <20191030044341.29179-1-palmer@dabbelt.com>
+X-Mailer: git-send-email 2.21.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
+ Palmer Dabbelt <palmer@sifive.com>
+From: Palmer Dabbelt <palmer@dabbelt.com>
+To: qemu-riscv@nongnu.org, Peter Maydell <peter.maydell@linaro.org>
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::443
-X-Mailman-Approved-At: Tue, 29 Oct 2019 20:58:20 -0400
+X-Received-From: 2607:f8b0:4864:20::442
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -70,34 +69,41 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Oct 2019 00:23:24 -0000
+X-List-Received-Date: Wed, 30 Oct 2019 04:57:29 -0000
 
-From: "hiroyuki.obinata" <hiroyuki.obinata@gmail.com>
+I'm leaving SiFive in a bit less than two weeks, which means I'll be
+losing my @sifive email address.  I don't have my new email address yet,
+so I'm switching over to my personal address instead.
 
-Signed-off-by: Hiroyuki Obinata <hiroyuki.obinata@gmail.com>
+Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
+Signed-off-by: Palmer Dabbelt <palmer@dabbelt.com>
 ---
- target/riscv/translate.c | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
+ MAINTAINERS | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index adeddb85f6..5c4dd21a98 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -64,12 +64,10 @@ static const int tcg_memop_lookup[8] = {
-     [0] = MO_SB,
-     [1] = MO_TESW,
-     [2] = MO_TESL,
-+    [3] = MO_TEQ,
-     [4] = MO_UB,
-     [5] = MO_TEUW,
--#ifdef TARGET_RISCV64
--    [3] = MO_TEQ,
-     [6] = MO_TEUL,
--#endif
- };
- #endif
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 325e67a04eee..20445f353e7a 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -259,7 +259,7 @@ F: include/hw/ppc/
+ F: disas/ppc.c
  
+ RISC-V TCG CPUs
+-M: Palmer Dabbelt <palmer@sifive.com>
++M: Palmer Dabbelt <palmer@dabbelt.com>
+ M: Alistair Francis <Alistair.Francis@wdc.com>
+ M: Sagar Karandikar <sagark@eecs.berkeley.edu>
+ M: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+@@ -2392,7 +2392,7 @@ F: tcg/ppc/
+ F: disas/ppc.c
+ 
+ RISC-V TCG target
+-M: Palmer Dabbelt <palmer@sifive.com>
++M: Palmer Dabbelt <palmer@dabbelt.com>
+ M: Alistair Francis <Alistair.Francis@wdc.com>
+ L: qemu-riscv@nongnu.org
+ S: Maintained
 -- 
-2.17.1
+2.21.0
 
 
