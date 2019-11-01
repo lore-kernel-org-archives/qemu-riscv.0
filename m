@@ -1,60 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iQZcT-00033t-W3
-	for mharc-qemu-riscv@gnu.org; Fri, 01 Nov 2019 12:17:50 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:60320)
+	id 1iQZcV-00035D-5c
+	for mharc-qemu-riscv@gnu.org; Fri, 01 Nov 2019 12:17:51 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:60344)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <palmer@sifive.com>) id 1iQZcR-00031a-DI
- for qemu-riscv@nongnu.org; Fri, 01 Nov 2019 12:17:48 -0400
+ (envelope-from <palmer@sifive.com>) id 1iQZcS-00032r-JW
+ for qemu-riscv@nongnu.org; Fri, 01 Nov 2019 12:17:49 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmer@sifive.com>) id 1iQZcP-0005oK-Sv
- for qemu-riscv@nongnu.org; Fri, 01 Nov 2019 12:17:47 -0400
-Received: from mail-pg1-x52b.google.com ([2607:f8b0:4864:20::52b]:34013)
+ (envelope-from <palmer@sifive.com>) id 1iQZcR-0005vx-Ch
+ for qemu-riscv@nongnu.org; Fri, 01 Nov 2019 12:17:48 -0400
+Received: from mail-pl1-x641.google.com ([2607:f8b0:4864:20::641]:40322)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmer@sifive.com>) id 1iQZcP-0005jq-MO
- for qemu-riscv@nongnu.org; Fri, 01 Nov 2019 12:17:45 -0400
-Received: by mail-pg1-x52b.google.com with SMTP id e4so6801793pgs.1
- for <qemu-riscv@nongnu.org>; Fri, 01 Nov 2019 09:17:45 -0700 (PDT)
+ (Exim 4.71) (envelope-from <palmer@sifive.com>) id 1iQZcR-0005s6-79
+ for qemu-riscv@nongnu.org; Fri, 01 Nov 2019 12:17:47 -0400
+Received: by mail-pl1-x641.google.com with SMTP id e3so2476558plt.7
+ for <qemu-riscv@nongnu.org>; Fri, 01 Nov 2019 09:17:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
- h=subject:date:message-id:mime-version:content-transfer-encoding:cc
- :from:to; bh=agZSirPRdMoHVC3gCYphFvJ6jy/o+BLQv3H5zsgQARE=;
- b=fNPNtgSU1pPgW5CT98KHMktgOzlrHf2UCNCgRkrlsm0Pw7MOvEnQI0jJjI8TXzmTVN
- AlLVvIvPN9saL8fYFI0Tb/GDFmqaGsCpFJVGtdQSvCuI0/cR7LRlDo/qXMtLGb1S+U4F
- frUDTjiw3KUsW/ugSkUlJlFJzntUsU7AP3g8v8zMdR1FLca9IO1UtJCLZIo/+BrFCpDx
- 6SIwVbYyYRrqCbiNwsl+yypXoF70JoOcJy66isb1P0PLE1Ufqpu7ZHdiHGr2zYfwd4Ao
- oMnzIJzDZnQwHfIo4Kg8jEYHrYAOOpcN/HKq0F9SuxpZbf9arjO0/n7ykdI6s/cA5uEN
- 2DdA==
+ h=subject:date:message-id:in-reply-to:references:mime-version
+ :content-transfer-encoding:cc:from:to;
+ bh=FWN25eP3ttkhHBPL8KIS9xKijpRU7CQEubpr34vg72E=;
+ b=gZDwP1qPSECl8jBoIlwkw6alNMeF0H9HZNVUPRgxoOjIeJhVmrQUei+SCZ6PEOaJXe
+ wPya4mnkQsb1B/p+EXOuU6YvunEpoCNE2x9PMcEgD30fctVvHl+1AolFklyCzydpP/V6
+ OH7MkoNZg21AbnDGqazc7LiPgCp69gDMimu3CJKa5o6TCmMCXObGesJSds3i/wQT5KNY
+ L831PJQztWz99kh+QegWVhtj561Tcm5u78heZWB3XIbOx7qSUSFPOd9KrPvvjW7W1s3R
+ Y5ToJtP20vmIaYBLqK1nsKqg07QOGLjbscFXh0/IE8qhhRL4ukeMRtLaDye1sFbmJtBJ
+ /Wgw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:date:message-id:mime-version
- :content-transfer-encoding:cc:from:to;
- bh=agZSirPRdMoHVC3gCYphFvJ6jy/o+BLQv3H5zsgQARE=;
- b=PqPnrh1amQgNoCvhOlLzFo8bol6l/AVCpuKuZL/EBE4uZSP9lAPWkS4M5TgZ67e9b0
- WC/ON/5NTVDgTrU+phSOAcm1HVjEpPbSkwZBkbGKuGUZmk2bVRSrPBL/L8eCpMfI8+oj
- IC+uYO0AQw124E65uvmLWL+vEsUzMUS4PTxnMTrEGZZjAV/GA9KEr72dDeEf2Trl/gtg
- 7TQgEQj4nk/Kd1vrhzhsfW3S+kXIVt06Lr3xEOhYmspVaCTCEpGX3HNcYpfotsK35rtW
- eNYZU8p5GKiXFZc9bEK2yHU8ASOwbw1Le2hRPDS1RcBfHws0IBP/l7PwzTOhkSlwB5wH
- RWvg==
-X-Gm-Message-State: APjAAAXYJpwP5SG4VsdQjPG2O0/YER0NYv7qYgTrhMMBZYGnxKYadvOo
- JpUtfxurvpdflsej3SvHexscMw==
-X-Google-Smtp-Source: APXvYqydVJhG32ZGjWrO5icIbBzeaB7SEDOW8Orm4FOd8oB2sFmo4bAwS9PZ+67OQ0wpO9dh4Z/Pog==
-X-Received: by 2002:a63:d651:: with SMTP id d17mr14969909pgj.106.1572625064062; 
- Fri, 01 Nov 2019 09:17:44 -0700 (PDT)
+ h=x-gm-message-state:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding:cc:from:to;
+ bh=FWN25eP3ttkhHBPL8KIS9xKijpRU7CQEubpr34vg72E=;
+ b=kGofGmysLbMq6UKk/iLBoNl+k1pD5QfpYKQnLvqg4yKhXItKqWmL2PVr5P3Wo2Vdnr
+ jFSlkCkn2O+RxYnrN72SoEaxypXbM/UmvbkJdCkWZUUzgr8pwNnBby/MVtipJIVVp8Ki
+ uL6GcX0N+gxd7vQB6qzpqeiKdES4ySr57RrZLfD4T9UM+2waenoRbTo4ZOwhVt1H488G
+ Y60g3fI4Cxtjs61VkePkb0vmTcOJdDDbOiTLJn6/UeuIfOdwqLNOXw6xbv8SvJFcUZPr
+ o0Q9AkMk7B/jpeh4eMeIoJDTACgD1rpbTY6rwWHSEpZhmbxnAYzMDhyH1gWluS4PspGR
+ 7l9A==
+X-Gm-Message-State: APjAAAX5YpMlomyOR8zZXGXndfeu6OI9BkNzGyh5VAZKpQ0f+xCW/fR9
+ TXubOTucMBrgAgRPyORgPydYwQ==
+X-Google-Smtp-Source: APXvYqwneqcy2pixK4/B+flVdvqcT8IBq2G1XvEQvbekfmfu+onmMPvVOhXUmzsU+TK3RTt4twsKPA==
+X-Received: by 2002:a17:902:ab94:: with SMTP id
+ f20mr12637334plr.231.1572625066176; 
+ Fri, 01 Nov 2019 09:17:46 -0700 (PDT)
 Received: from localhost ([12.206.222.5])
- by smtp.gmail.com with ESMTPSA id o1sm7404270pgm.1.2019.11.01.09.17.42
+ by smtp.gmail.com with ESMTPSA id x10sm1889579pfn.36.2019.11.01.09.17.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 01 Nov 2019 09:17:42 -0700 (PDT)
-Subject: [PULL] Update my MAINTAINERS file entry
-Date: Fri,  1 Nov 2019 09:16:53 -0700
-Message-Id: <20191101161654.2871-1-palmer@sifive.com>
+ Fri, 01 Nov 2019 09:17:45 -0700 (PDT)
+Subject: [PULL] MAINTAINERS: Change to my personal email address
+Date: Fri,  1 Nov 2019 09:16:54 -0700
+Message-Id: <20191101161654.2871-2-palmer@sifive.com>
 X-Mailer: git-send-email 2.21.0
+In-Reply-To: <20191101161654.2871-1-palmer@sifive.com>
+References: <20191101161654.2871-1-palmer@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Cc: qemu-devel@nongnu.org,       qemu-riscv@nongnu.org
+Cc: qemu-devel@nongnu.org,       qemu-riscv@nongnu.org,
+ Palmer Dabbelt <palmer@sifive.com>, Alistair Francis <alistair.francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>
 From: Palmer Dabbelt <palmer@sifive.com>
 To: Peter Maydell <peter.maydell@linaro.org>
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::52b
+X-Received-From: 2607:f8b0:4864:20::641
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -66,30 +72,42 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Nov 2019 16:17:48 -0000
+X-List-Received-Date: Fri, 01 Nov 2019 16:17:49 -0000
 
-The following changes since commit b7c9a7f353c0e260519bf735ff0d4aa01e72784b:
+I'm leaving SiFive in a bit less than two weeks, which means I'll be
+losing my @sifive email address.  I don't have my new email address yet,
+so I'm switching over to my personal address.
 
-  Merge remote-tracking branch 'remotes/jnsnow/tags/ide-pull-request' into staging (2019-10-31 15:57:30 +0000)
-
-are available in the Git repository at:
-
-  git://github.com/palmer-dabbelt/qemu.git tags/palmer-for-master-4.2-sf1
-
-for you to fetch changes up to c1677bcc395eb977cc7279a1af0a1d23ad23fdd4:
-
-  MAINTAINERS: Change to my personal email address (2019-11-01 09:13:30 -0700)
-
-----------------------------------------------------------------
-Update my MAINTAINERS file entry
-
-This contains a single patch to change my email address.
-
-----------------------------------------------------------------
-Palmer Dabbelt (1):
-      MAINTAINERS: Change to my personal email address
-
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
+Signed-off-by: Palmer Dabbelt <palmer@dabbelt.com>
+---
  MAINTAINERS | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 92961faa0e..c2a68555ae 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -259,7 +259,7 @@ F: include/hw/ppc/
+ F: disas/ppc.c
+ 
+ RISC-V TCG CPUs
+-M: Palmer Dabbelt <palmer@sifive.com>
++M: Palmer Dabbelt <palmer@dabbelt.com>
+ M: Alistair Francis <Alistair.Francis@wdc.com>
+ M: Sagar Karandikar <sagark@eecs.berkeley.edu>
+ M: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+@@ -2401,7 +2401,7 @@ F: tcg/ppc/
+ F: disas/ppc.c
+ 
+ RISC-V TCG target
+-M: Palmer Dabbelt <palmer@sifive.com>
++M: Palmer Dabbelt <palmer@dabbelt.com>
+ M: Alistair Francis <Alistair.Francis@wdc.com>
+ L: qemu-riscv@nongnu.org
+ S: Maintained
+-- 
+2.21.0
 
 
