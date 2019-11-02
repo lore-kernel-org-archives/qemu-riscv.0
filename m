@@ -1,66 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iQqnI-0001Xj-Gs
-	for mharc-qemu-riscv@gnu.org; Sat, 02 Nov 2019 06:38:09 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43521)
+	id 1iQynq-0007ou-R6
+	for mharc-qemu-riscv@gnu.org; Sat, 02 Nov 2019 15:11:14 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59132)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <peter.maydell@linaro.org>) id 1iQqnC-0001Vs-Iu
- for qemu-riscv@nongnu.org; Sat, 02 Nov 2019 06:38:05 -0400
+ (envelope-from <peter.maydell@linaro.org>) id 1iQyno-0007nq-5e
+ for qemu-riscv@nongnu.org; Sat, 02 Nov 2019 15:11:13 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <peter.maydell@linaro.org>) id 1iQqn9-0004Sp-CP
- for qemu-riscv@nongnu.org; Sat, 02 Nov 2019 06:38:00 -0400
-Received: from mail-oi1-x243.google.com ([2607:f8b0:4864:20::243]:38607)
+ (envelope-from <peter.maydell@linaro.org>) id 1iQynm-0000IB-MS
+ for qemu-riscv@nongnu.org; Sat, 02 Nov 2019 15:11:11 -0400
+Received: from mail-ot1-x342.google.com ([2607:f8b0:4864:20::342]:42286)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <peter.maydell@linaro.org>)
- id 1iQqn8-00040r-5u
- for qemu-riscv@nongnu.org; Sat, 02 Nov 2019 06:37:59 -0400
-Received: by mail-oi1-x243.google.com with SMTP id v186so10266318oie.5
- for <qemu-riscv@nongnu.org>; Sat, 02 Nov 2019 03:37:56 -0700 (PDT)
+ id 1iQynm-0000HM-HP
+ for qemu-riscv@nongnu.org; Sat, 02 Nov 2019 15:11:10 -0400
+Received: by mail-ot1-x342.google.com with SMTP id b16so11172841otk.9
+ for <qemu-riscv@nongnu.org>; Sat, 02 Nov 2019 12:11:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=ii8JBGQ8IDHtTPb42tsT7pHzynIFjetvEE2jTkQp5io=;
- b=WGuCKCMDj6PyJqAApuYVUIJWSow8zyZobJyupJzV969MhUl/eKNZO1RH+d4/NEwVeB
- EI5885uL2AwXKehJdZ+ckKnVEYnf/Rbqky74i6FlgL87Y2ijiDCZR+XxIMQN7TjsBXz3
- XPWYLqM3BXGMeo294BHX7CQ8OWebGAJfMolwnsap8b0iUoGx9OaTfy54Zt9v3EMBBqJ0
- ZNEujAZPwygN4+lkP1eeUPk/W26/m7DG7HN9B4P/hFaPlZYmZEVX25gz8vB9Y/nswjWY
- l5PaqaYaZjYnY46APzn35IXiS4q0TOwvy7YZMT90HT1Z1EVRZC/23BrR4GbL3a1R3Eft
- am8Q==
+ :cc; bh=zPimsA8Gh9fQGgAO71ocUQL0iIVEb/d5agS+cm9E5Ig=;
+ b=eM8JsF6+6rym0qK7vIPrJjQojYn4jdpqGvhGUPA8TGxuyLjFeBLIog66Dthj6K4YVe
+ OLMkbvgDIhhSFJVShsNYIAhfs05EW2Bm2PhJtXsTv2/WYHspI30cuY2SqkyncL5yzuNz
+ nS0zNjc2iktODNpcfeSGmyVn93Ii5nkTXE7xhtQPkXS/rEG9zTN5OthQbuwmVj7s3KTF
+ yFAHkr9qh9gPah7Wh7vnTUU0GxIU30mOCmb822ihKuV7RphAdQbmSUi+1tvp1Y3GEIrQ
+ c2tXcnq4VduEebTBovP5SwTSmLwfgGUgLwZc1vk9uUBpJP3s6Euqbw0yp6d9TowH8irQ
+ g7jg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=ii8JBGQ8IDHtTPb42tsT7pHzynIFjetvEE2jTkQp5io=;
- b=hi257OPDu+4z+F/fEM/nOts2y0XYonK1K9zbe/GcwW4G80q4m3L2irzLvif+xZ5Olu
- 3WflEPfNhNQVYQkcfqrmdpTpvneTD2HeeijbVhWacJKHq5AWs8yz7LNySwj2nkDk1pZ8
- mqSau+nIrQLFJeEu+U/zw1xI+a5UGxGDoi8xk2kN/RVoIZ5m2YCxXeda+2iV8WTDh1u8
- 54LT4tm54JQR6f9LrrPsJkrgSnSDyhkXa6OX+RH/uj6SEQPMp703VYFu0VcdGWpmcmD5
- tqnj9l26Ud1C6vFsQn3OzB2Ts9mOc5x99Dbe7jgWclhGad+H/Iwl+ZfSwXyDEiGCMosh
- p4Kw==
-X-Gm-Message-State: APjAAAWZkWwYQFTq5DF1WH7AXZMGxG8HuU/1T65lFo8yKqP44k6TN+9i
- YwygduWQaW9u+/CXcipH1L803dn7TovLwenB5oIrrw==
-X-Google-Smtp-Source: APXvYqxJvHm9McNaYFIqZxFUy4JR7dNOyuTTatYkYhGknOUf5I1NNg38RbvNpsoQtRjXxpbdYr8nJ9U9yZfQnCMpGUs=
-X-Received: by 2002:aca:4945:: with SMTP id w66mr3094705oia.98.1572691074432; 
- Sat, 02 Nov 2019 03:37:54 -0700 (PDT)
+ bh=zPimsA8Gh9fQGgAO71ocUQL0iIVEb/d5agS+cm9E5Ig=;
+ b=HD45t12T6sgWy8hc+QH8AiGhEaRfOWhbMW3DXzZeqj8UDIjW8fGyreI5IodR9j6ckJ
+ 3gf3zhqV9S3SLah2kqGEeTrrYxE4PVsouBpVSD4ON7fmLOkfnnWqiqBjcFwh63BAEscp
+ 30H+cP4h8Xele/9Fy7QRvtjucyFWtQYg3ohTbOL+RI9r8Qv29AHcNkCDTdx2zHgtQePM
+ uV9BSdY1bTG+lRFo5P13U3kdjjZTvp6T07wvds6YeSOpV1d5yGlpxFRIxtoMsJxKfkMg
+ cZX6j2xbb3TG0sMVJ//+TMT/AZfQM+x5YDgEcuBb1NJy69B5lKTpEXMnEesFuWqV32YG
+ C9pQ==
+X-Gm-Message-State: APjAAAXiGVQ5+ZYuazA/q4q8qdrSo2xnPayzrUJbBbx2eDZuYh0MPJto
+ YqHD88hrpVsC/YA+zvSymzjwMf82oRs9zOyaSvXRkA==
+X-Google-Smtp-Source: APXvYqzREGGHeYJrOgoM5qlZrvt6Dv514oAFYm6HlGkgQn/1b8ew3zQgsaxHCk7Y01NiX55cCrzuFwyZxRNoX4XmUdU=
+X-Received: by 2002:a05:6830:c3:: with SMTP id
+ x3mr10354275oto.91.1572721869296; 
+ Sat, 02 Nov 2019 12:11:09 -0700 (PDT)
 MIME-Version: 1.0
-References: <20191025042734.69244-1-anup.patel@wdc.com>
- <CAKmqyKMQz-OMFQRTdmpBpGMLiZ_ZM+UL5T5aAWZ5F1fC6vddOQ@mail.gmail.com>
-In-Reply-To: <CAKmqyKMQz-OMFQRTdmpBpGMLiZ_ZM+UL5T5aAWZ5F1fC6vddOQ@mail.gmail.com>
+References: <20191101161654.2871-1-palmer@sifive.com>
+In-Reply-To: <20191101161654.2871-1-palmer@sifive.com>
 From: Peter Maydell <peter.maydell@linaro.org>
-Date: Sat, 2 Nov 2019 10:37:42 +0000
-Message-ID: <CAFEAcA9bV=-t0+ro6rxu7Atodj6J78aT1aMnz9bjaqyfLDV3_w@mail.gmail.com>
-Subject: Re: [PATCH v5 0/2] RTC support for QEMU RISC-V virt machine
-To: Alistair Francis <alistair23@gmail.com>
-Cc: Anup Patel <Anup.Patel@wdc.com>, Palmer Dabbelt <palmer@sifive.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Atish Patra <Atish.Patra@wdc.com>, 
- "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>,
- "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, 
- Anup Patel <anup@brainfault.org>
+Date: Sat, 2 Nov 2019 19:10:57 +0000
+Message-ID: <CAFEAcA9hPWTguDeM=BxbgVBq5yFpRfToMUJV86Rp0siCJUCOSQ@mail.gmail.com>
+Subject: Re: [PULL] Update my MAINTAINERS file entry
+To: Palmer Dabbelt <palmer@sifive.com>
+Cc: QEMU Developers <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::243
+X-Received-From: 2607:f8b0:4864:20::342
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -72,35 +66,34 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 02 Nov 2019 10:38:05 -0000
+X-List-Received-Date: Sat, 02 Nov 2019 19:11:13 -0000
 
-On Tue, 29 Oct 2019 at 13:25, Alistair Francis <alistair23@gmail.com> wrote:
+On Fri, 1 Nov 2019 at 16:17, Palmer Dabbelt <palmer@sifive.com> wrote:
 >
-> On Fri, Oct 25, 2019 at 6:28 AM Anup Patel <Anup.Patel@wdc.com> wrote:
-> >
-> > This series adds RTC device to QEMU RISC-V virt machine. We have
-> > selected Goldfish RTC device model for this. It's a pretty simple
-> > synthetic device with few MMIO registers and no dependency external
-> > clock. The driver for Goldfish RTC is already available in Linux so
-> > we just need to enable it in Kconfig for RISCV and also update Linux
-> > defconfigs.
-> >
-> > We have tested this series with Linux-5.4-rc4 plus defconfig changes
-> > available in 'goldfish_rtc_v2' branch of:
-> > https://github.com/avpatel/linux.git
+> The following changes since commit b7c9a7f353c0e260519bf735ff0d4aa01e72784b:
 >
-> @Peter Maydell this has been reviewed, do you mind taking this in you
-> next PR? I don't see a maintainer for hw/rtc.
+>   Merge remote-tracking branch 'remotes/jnsnow/tags/ide-pull-request' into staging (2019-10-31 15:57:30 +0000)
+>
+> are available in the Git repository at:
+>
+>   git://github.com/palmer-dabbelt/qemu.git tags/palmer-for-master-4.2-sf1
+>
+> for you to fetch changes up to c1677bcc395eb977cc7279a1af0a1d23ad23fdd4:
+>
+>   MAINTAINERS: Change to my personal email address (2019-11-01 09:13:30 -0700)
+>
+> ----------------------------------------------------------------
+> Update my MAINTAINERS file entry
+>
+> This contains a single patch to change my email address.
+>
+> ----------------------------------------------------------------
 
-Generally devices used by a single architecture should
-go via the tree of the maintainer who handles that
-architecture -- in this case that's riscv. (The reason
-is that it's only riscv folks who can test whether the
-device works in the machine model, and only riscv
-folks who can reasonably review whether the device
-is the right way of implementing the functionality for
-them.)
 
-thanks
+Applied, thanks.
+
+Please update the changelog at https://wiki.qemu.org/ChangeLog/4.2
+for any user-visible changes.
+
 -- PMM
 
