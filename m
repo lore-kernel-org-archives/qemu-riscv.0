@@ -1,61 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iQi2I-0000bX-Q1
-	for mharc-qemu-riscv@gnu.org; Fri, 01 Nov 2019 21:17:02 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:38984)
+	id 1iQqnI-0001Xj-Gs
+	for mharc-qemu-riscv@gnu.org; Sat, 02 Nov 2019 06:38:09 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43521)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <hiroyuki.obinata@gmail.com>) id 1iQi2G-0000Z5-IK
- for qemu-riscv@nongnu.org; Fri, 01 Nov 2019 21:17:01 -0400
+ (envelope-from <peter.maydell@linaro.org>) id 1iQqnC-0001Vs-Iu
+ for qemu-riscv@nongnu.org; Sat, 02 Nov 2019 06:38:05 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <hiroyuki.obinata@gmail.com>) id 1iQi2F-0008QI-Jv
- for qemu-riscv@nongnu.org; Fri, 01 Nov 2019 21:17:00 -0400
-Received: from mail-lf1-x142.google.com ([2a00:1450:4864:20::142]:44607)
+ (envelope-from <peter.maydell@linaro.org>) id 1iQqn9-0004Sp-CP
+ for qemu-riscv@nongnu.org; Sat, 02 Nov 2019 06:38:00 -0400
+Received: from mail-oi1-x243.google.com ([2607:f8b0:4864:20::243]:38607)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <hiroyuki.obinata@gmail.com>)
- id 1iQi2C-0008LW-PC; Fri, 01 Nov 2019 21:16:56 -0400
-Received: by mail-lf1-x142.google.com with SMTP id v4so8425747lfd.11;
- Fri, 01 Nov 2019 18:16:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ (Exim 4.71) (envelope-from <peter.maydell@linaro.org>)
+ id 1iQqn8-00040r-5u
+ for qemu-riscv@nongnu.org; Sat, 02 Nov 2019 06:37:59 -0400
+Received: by mail-oi1-x243.google.com with SMTP id v186so10266318oie.5
+ for <qemu-riscv@nongnu.org>; Sat, 02 Nov 2019 03:37:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=eruML1/25dKlqgZ7K3BVzp2Qya68T9UzemSWytJpWk4=;
- b=NF5xUSWXboyFD1NmgUkdleJnB7dxo4VrMHDY9Ovm4MqUeb+dyNb1ea2jWFppiuLcUg
- s/juhSfme5M/NRdy1XcEVCljYCTdRLt9kipXTUycTD4w1cmLjLqYWS42NpSaZUF9iQ2P
- IUQcEmsrFjSudm4VRIY7v4g2EFlXeNxNE2b6LahB8a61IuIMphRxzmY5WTuCFcejTMRV
- /pcGq1t0u/SdkTiW56pbtPSm99msafzcGDbu2RzgcMiHZqS/9x1COPt5TZ/fVoae10uF
- YqZlA1v68xH/SdwHINBEZepsSWD486CM8OpyN4KCBWsxJVWTSK2mL2fI0CFXGBbJ4KTS
- HhdA==
+ :cc; bh=ii8JBGQ8IDHtTPb42tsT7pHzynIFjetvEE2jTkQp5io=;
+ b=WGuCKCMDj6PyJqAApuYVUIJWSow8zyZobJyupJzV969MhUl/eKNZO1RH+d4/NEwVeB
+ EI5885uL2AwXKehJdZ+ckKnVEYnf/Rbqky74i6FlgL87Y2ijiDCZR+XxIMQN7TjsBXz3
+ XPWYLqM3BXGMeo294BHX7CQ8OWebGAJfMolwnsap8b0iUoGx9OaTfy54Zt9v3EMBBqJ0
+ ZNEujAZPwygN4+lkP1eeUPk/W26/m7DG7HN9B4P/hFaPlZYmZEVX25gz8vB9Y/nswjWY
+ l5PaqaYaZjYnY46APzn35IXiS4q0TOwvy7YZMT90HT1Z1EVRZC/23BrR4GbL3a1R3Eft
+ am8Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=eruML1/25dKlqgZ7K3BVzp2Qya68T9UzemSWytJpWk4=;
- b=OY7a6lkNCqPOIKNuR5bs/Y5m/HE5eZSlN+pxl7H30A8RC4YySL9/tZyZ5Jpo6TpNsK
- GA+9O8ji5Cm1/KlK7loUJpdqfdDO0U4mcg+zLpQPZ+TQMmrJte8DQadE+oLxdAugkiGY
- bxg8BVyERCGjh2l6R3zjyKLUN7sR9zJ28YcLXqxWlkTfflZx3d+wo6FL80iihvFFZ5bo
- 9IEai6K7sM5ikMcZwnrISkTAQqY4NzKGhiVosgORaI4Ndpk5HmFp03BqioFW4JG4gau0
- C91TZIyuBGN5zG99np1JMsLJJUqms3sstLcCuNHKXG4UVrQO/D6QnE96GmQzpmdVa1A3
- X8gg==
-X-Gm-Message-State: APjAAAWSJfdMzptkH2+gpzekOlO7woRLrg6SrsW/qBddI8meIpDbPw+5
- RXvpmCVSIBDR1Zb4AwhgCB6z30Scm159AdnKhVA=
-X-Google-Smtp-Source: APXvYqwqkQXpC4IBuXHSmmWS3Eb7zTS3ZjOwUltGPVleMI/LbVh1j5Rq40hD7mg2U5nt5mCUHrXhbuP53EDivEBVbSQ=
-X-Received: by 2002:a19:655b:: with SMTP id c27mr8889812lfj.122.1572657414534; 
- Fri, 01 Nov 2019 18:16:54 -0700 (PDT)
+ bh=ii8JBGQ8IDHtTPb42tsT7pHzynIFjetvEE2jTkQp5io=;
+ b=hi257OPDu+4z+F/fEM/nOts2y0XYonK1K9zbe/GcwW4G80q4m3L2irzLvif+xZ5Olu
+ 3WflEPfNhNQVYQkcfqrmdpTpvneTD2HeeijbVhWacJKHq5AWs8yz7LNySwj2nkDk1pZ8
+ mqSau+nIrQLFJeEu+U/zw1xI+a5UGxGDoi8xk2kN/RVoIZ5m2YCxXeda+2iV8WTDh1u8
+ 54LT4tm54JQR6f9LrrPsJkrgSnSDyhkXa6OX+RH/uj6SEQPMp703VYFu0VcdGWpmcmD5
+ tqnj9l26Ud1C6vFsQn3OzB2Ts9mOc5x99Dbe7jgWclhGad+H/Iwl+ZfSwXyDEiGCMosh
+ p4Kw==
+X-Gm-Message-State: APjAAAWZkWwYQFTq5DF1WH7AXZMGxG8HuU/1T65lFo8yKqP44k6TN+9i
+ YwygduWQaW9u+/CXcipH1L803dn7TovLwenB5oIrrw==
+X-Google-Smtp-Source: APXvYqxJvHm9McNaYFIqZxFUy4JR7dNOyuTTatYkYhGknOUf5I1NNg38RbvNpsoQtRjXxpbdYr8nJ9U9yZfQnCMpGUs=
+X-Received: by 2002:aca:4945:: with SMTP id w66mr3094705oia.98.1572691074432; 
+ Sat, 02 Nov 2019 03:37:54 -0700 (PDT)
 MIME-Version: 1.0
-References: <20191030002318.399-1-hiroyuki.obinata@gmail.com>
- <mhng-7b7098a1-1195-4532-80ab-2d7c51ebd2ed@palmer-si-x1c4>
-In-Reply-To: <mhng-7b7098a1-1195-4532-80ab-2d7c51ebd2ed@palmer-si-x1c4>
-From: Obinata Hiroyuki <hiroyuki.obinata@gmail.com>
-Date: Sat, 2 Nov 2019 10:16:45 +0900
-Message-ID: <CA+0n8CN3YC56nMpZqCQD_kCzFaZN+uign5NGj=SgAW5E+tKQLA@mail.gmail.com>
-Subject: Re: [PATCH] remove unnecessary ifdef TARGET_RISCV64
-To: Palmer Dabbelt <palmer@dabbelt.com>
-Cc: qemu-devel@nongnu.org, "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>,
+References: <20191025042734.69244-1-anup.patel@wdc.com>
+ <CAKmqyKMQz-OMFQRTdmpBpGMLiZ_ZM+UL5T5aAWZ5F1fC6vddOQ@mail.gmail.com>
+In-Reply-To: <CAKmqyKMQz-OMFQRTdmpBpGMLiZ_ZM+UL5T5aAWZ5F1fC6vddOQ@mail.gmail.com>
+From: Peter Maydell <peter.maydell@linaro.org>
+Date: Sat, 2 Nov 2019 10:37:42 +0000
+Message-ID: <CAFEAcA9bV=-t0+ro6rxu7Atodj6J78aT1aMnz9bjaqyfLDV3_w@mail.gmail.com>
+Subject: Re: [PATCH v5 0/2] RTC support for QEMU RISC-V virt machine
+To: Alistair Francis <alistair23@gmail.com>
+Cc: Anup Patel <Anup.Patel@wdc.com>, Palmer Dabbelt <palmer@sifive.com>, 
+ Alistair Francis <Alistair.Francis@wdc.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
- Alistair Francis <Alistair.Francis@wdc.com>
-Content-Type: multipart/alternative; boundary="0000000000008bfc7b059652d6f6"
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Atish Patra <Atish.Patra@wdc.com>, 
+ "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>,
+ "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, 
+ Anup Patel <anup@brainfault.org>
+Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::142
+X-Received-From: 2607:f8b0:4864:20::243
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -67,105 +72,35 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 02 Nov 2019 01:17:01 -0000
+X-List-Received-Date: Sat, 02 Nov 2019 10:38:05 -0000
 
---0000000000008bfc7b059652d6f6
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-Thanks!
-
-2019=E5=B9=B411=E6=9C=882=E6=97=A5(=E5=9C=9F) 1:58 Palmer Dabbelt <palmer@d=
-abbelt.com>:
-
-> On Tue, 29 Oct 2019 17:23:18 PDT (-0700), hiroyuki.obinata@gmail.com
-> wrote:
-> > From: "hiroyuki.obinata" <hiroyuki.obinata@gmail.com>
+On Tue, 29 Oct 2019 at 13:25, Alistair Francis <alistair23@gmail.com> wrote:
+>
+> On Fri, Oct 25, 2019 at 6:28 AM Anup Patel <Anup.Patel@wdc.com> wrote:
 > >
-> > Signed-off-by: Hiroyuki Obinata <hiroyuki.obinata@gmail.com>
-> > ---
-> >  target/riscv/translate.c | 4 +---
-> >  1 file changed, 1 insertion(+), 3 deletions(-)
+> > This series adds RTC device to QEMU RISC-V virt machine. We have
+> > selected Goldfish RTC device model for this. It's a pretty simple
+> > synthetic device with few MMIO registers and no dependency external
+> > clock. The driver for Goldfish RTC is already available in Linux so
+> > we just need to enable it in Kconfig for RISCV and also update Linux
+> > defconfigs.
 > >
-> > diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> > index adeddb85f6..5c4dd21a98 100644
-> > --- a/target/riscv/translate.c
-> > +++ b/target/riscv/translate.c
-> > @@ -64,12 +64,10 @@ static const int tcg_memop_lookup[8] =3D {
-> >      [0] =3D MO_SB,
-> >      [1] =3D MO_TESW,
-> >      [2] =3D MO_TESL,
-> > +    [3] =3D MO_TEQ,
-> >      [4] =3D MO_UB,
-> >      [5] =3D MO_TEUW,
-> > -#ifdef TARGET_RISCV64
-> > -    [3] =3D MO_TEQ,
-> >      [6] =3D MO_TEUL,
-> > -#endif
-> >  };
-> >  #endif
+> > We have tested this series with Linux-5.4-rc4 plus defconfig changes
+> > available in 'goldfish_rtc_v2' branch of:
+> > https://github.com/avpatel/linux.git
 >
-> Reviewed-by: Palmer Dabbelt <palmer@dabbelt.com>
->
-> This is a non-functional change (the code in question was already wrapped
-> in an
-> "#ifdef TARGET_RISCV64", so this internal one was redundant), so I'm happ=
-y
-> to
-> include it during the soft freeze.
->
-> I've added this to the queue for my next PR.
->
+> @Peter Maydell this has been reviewed, do you mind taking this in you
+> next PR? I don't see a maintainer for hw/rtc.
 
---0000000000008bfc7b059652d6f6
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Generally devices used by a single architecture should
+go via the tree of the maintainer who handles that
+architecture -- in this case that's riscv. (The reason
+is that it's only riscv folks who can test whether the
+device works in the machine model, and only riscv
+folks who can reasonably review whether the device
+is the right way of implementing the functionality for
+them.)
 
-<div dir=3D"ltr">Thanks!</div><br><div class=3D"gmail_quote"><div dir=3D"lt=
-r" class=3D"gmail_attr">2019=E5=B9=B411=E6=9C=882=E6=97=A5(=E5=9C=9F) 1:58 =
-Palmer Dabbelt &lt;<a href=3D"mailto:palmer@dabbelt.com">palmer@dabbelt.com=
-</a>&gt;:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0p=
-x 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">On Tue=
-, 29 Oct 2019 17:23:18 PDT (-0700), <a href=3D"mailto:hiroyuki.obinata@gmai=
-l.com" target=3D"_blank">hiroyuki.obinata@gmail.com</a> wrote:<br>
-&gt; From: &quot;hiroyuki.obinata&quot; &lt;<a href=3D"mailto:hiroyuki.obin=
-ata@gmail.com" target=3D"_blank">hiroyuki.obinata@gmail.com</a>&gt;<br>
-&gt;<br>
-&gt; Signed-off-by: Hiroyuki Obinata &lt;<a href=3D"mailto:hiroyuki.obinata=
-@gmail.com" target=3D"_blank">hiroyuki.obinata@gmail.com</a>&gt;<br>
-&gt; ---<br>
-&gt;=C2=A0 target/riscv/translate.c | 4 +---<br>
-&gt;=C2=A0 1 file changed, 1 insertion(+), 3 deletions(-)<br>
-&gt;<br>
-&gt; diff --git a/target/riscv/translate.c b/target/riscv/translate.c<br>
-&gt; index adeddb85f6..5c4dd21a98 100644<br>
-&gt; --- a/target/riscv/translate.c<br>
-&gt; +++ b/target/riscv/translate.c<br>
-&gt; @@ -64,12 +64,10 @@ static const int tcg_memop_lookup[8] =3D {<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 [0] =3D MO_SB,<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 [1] =3D MO_TESW,<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 [2] =3D MO_TESL,<br>
-&gt; +=C2=A0 =C2=A0 [3] =3D MO_TEQ,<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 [4] =3D MO_UB,<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 [5] =3D MO_TEUW,<br>
-&gt; -#ifdef TARGET_RISCV64<br>
-&gt; -=C2=A0 =C2=A0 [3] =3D MO_TEQ,<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 [6] =3D MO_TEUL,<br>
-&gt; -#endif<br>
-&gt;=C2=A0 };<br>
-&gt;=C2=A0 #endif<br>
-<br>
-Reviewed-by: Palmer Dabbelt &lt;<a href=3D"mailto:palmer@dabbelt.com" targe=
-t=3D"_blank">palmer@dabbelt.com</a>&gt;<br>
-<br>
-This is a non-functional change (the code in question was already wrapped i=
-n an <br>
-&quot;#ifdef TARGET_RISCV64&quot;, so this internal one was redundant), so =
-I&#39;m happy to <br>
-include it during the soft freeze.<br>
-<br>
-I&#39;ve added this to the queue for my next PR.<br>
-</blockquote></div>
-
---0000000000008bfc7b059652d6f6--
+thanks
+-- PMM
 
