@@ -1,64 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iS4W8-0004gU-2B
-	for mharc-qemu-riscv@gnu.org; Tue, 05 Nov 2019 14:29:28 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:45155)
+	id 1iS5ii-00042n-5e
+	for mharc-qemu-riscv@gnu.org; Tue, 05 Nov 2019 15:46:32 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:56955)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <alistair23@gmail.com>) id 1iS4W4-0004bQ-NF
- for qemu-riscv@nongnu.org; Tue, 05 Nov 2019 14:29:25 -0500
+ (envelope-from <palmer@dabbelt.com>) id 1iS5if-000419-2r
+ for qemu-riscv@nongnu.org; Tue, 05 Nov 2019 15:46:30 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1iS4W3-0008Dm-Hs
- for qemu-riscv@nongnu.org; Tue, 05 Nov 2019 14:29:24 -0500
-Received: from mail-lj1-x244.google.com ([2a00:1450:4864:20::244]:44021)
+ (envelope-from <palmer@dabbelt.com>) id 1iS5ic-0007bo-V7
+ for qemu-riscv@nongnu.org; Tue, 05 Nov 2019 15:46:28 -0500
+Received: from mail-pf1-x441.google.com ([2607:f8b0:4864:20::441]:44938)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1iS4W0-0008BG-Nu; Tue, 05 Nov 2019 14:29:20 -0500
-Received: by mail-lj1-x244.google.com with SMTP id y23so12305083ljh.10;
- Tue, 05 Nov 2019 11:29:20 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=jxg899qDRU7+5wIiCCiEm/EhtBxbvyNXrULLpItLwoE=;
- b=r+6lCdd1GeCIfVxcTb7CHNnTXZYz59hprOksMSU29Frgis8VLo3WmnfYqpfK9X/x8M
- 1J42d/i04adD8PeVgaoRw+JBY5CNP1I6a8Aeao51HB7+hB84dJSjFq7tz9ZyKjbGIMDs
- b6AM0Uh9+GLfGyDEiq32qPev+16mBmBo0UI1OPayzPj9dmDun1gkTUF5PeN4/KS7Xt1I
- 23zGYTPn4kaHjvt/XllgBfW3grMum2nsOFNn+uZ8g1qiZ2rmX+ZPfQ1SLpCkBCWVtki3
- LgDmiNsGfKWxJF0yfyNHchB7boUO/kfbunKMTjxBVeT8f5su8xOuhMjbK30YwyWoTCdO
- h6DA==
+ (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1iS5ic-0007bV-Kh
+ for qemu-riscv@nongnu.org; Tue, 05 Nov 2019 15:46:26 -0500
+Received: by mail-pf1-x441.google.com with SMTP id q26so16743124pfn.11
+ for <qemu-riscv@nongnu.org>; Tue, 05 Nov 2019 12:46:25 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=dabbelt-com.20150623.gappssmtp.com; s=20150623;
+ h=date:subject:in-reply-to:cc:from:to:message-id;
+ bh=20/y1HUrwfZgRolOUpWZx8/eN/1UEDZzRi0/Qf3bZXw=;
+ b=eEo2iZzvGn4tYzHjur+UVSJrmoTnAK9IERUZONqPROeGkUEVKVbdNv7yS/wK9BQLDd
+ yQwa8fW/KNg4uO8XD5dNjcPNIEAfhIWHQyUXCJkWFRQLytE4T1sxKZTBP4bBfiMK7/4+
+ Mfpo0tIcs4LEzWVoUZ9wbL7ljzcjFgwFB6q+EoREbvJY7SrQYPEKVr2mAWf4JLIgD6Cg
+ EN2OCjdTzlJm9byRZilURzdCb8n9zGMyX+pbDqYcKTxz2N2Im8frtcaNeDH6/NURaDkG
+ 1a7aqN7FJHxDJk3qLoWoHJsx0k3wXvQGgXKgC25ITbz2Qt0oHneNmlkyOz0Gnr0RQ1Bt
+ wQOg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=jxg899qDRU7+5wIiCCiEm/EhtBxbvyNXrULLpItLwoE=;
- b=edlySrKuMvsqufX+VjL93D/JyKXezmXilQwlTnB6sUEAeooSfY7o9GjfjU0eO0VM5B
- jjG0eP+X4mzdjB+o8E1wo2mxl6JPYAwVnIqQamhp2G2zyP7yvFvughextTsoZ14FMYm8
- VRqfw5c5d0jQBHHh1rm5lZvi0gofAqT1gpIRlBDmNVgQR4QFEZzapQ2ZXLD4XKkRs5mY
- 7TBfslbQGTLh8JXtIpLk1G/rUpeDLVCGzJkWNsFXtGzghSVPLwndrtsrt49Yrd3hbGKd
- KL/gDXL8j7ucL4AJ2enGT/XjeDrhkKni7gnHX0FrcTjctdyu2ryTc6sY0DvPj2FeeqCa
- fVUQ==
-X-Gm-Message-State: APjAAAWgS+yMQca6u6Dv7nt3fIP24P0+Z4SLMKNuxWtQhv3NIwMz2ceX
- QOTT6e5DNOM/lfTzLn2110tEk4RNgOZ8E4/qEis=
-X-Google-Smtp-Source: APXvYqyZF9yo7LCAh0cYRJ7NwQTMwln8LMYAEFTSQnyY7UTU8ZJpTIUKlMa8n8aBeQcr/Ibu7sLnQzOaDYEMGBciyO4=
-X-Received: by 2002:a2e:9417:: with SMTP id i23mr12140249ljh.152.1572982159020; 
- Tue, 05 Nov 2019 11:29:19 -0800 (PST)
-MIME-Version: 1.0
-References: <CAP+75-XUbnCDp-JH6JRnGLqVMxDWTFa9kPHJaZXm3NfCzZUbYg@mail.gmail.com>
- <mhng-90e9ee91-7ee7-488a-8db0-35d39043f2fc@palmer-si-x1c4>
- <CAKmqyKMVvLXbziQ8qFC-VcOq2jv1Qm1pK0upK0c1nuYRELgqxw@mail.gmail.com>
-In-Reply-To: <CAKmqyKMVvLXbziQ8qFC-VcOq2jv1Qm1pK0upK0c1nuYRELgqxw@mail.gmail.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 5 Nov 2019 11:23:39 -0800
-Message-ID: <CAKmqyKONh4tZ+DfBk2GVDt+k807ncKyrdL-qb1NnTsbyjztFkQ@mail.gmail.com>
+ h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id;
+ bh=20/y1HUrwfZgRolOUpWZx8/eN/1UEDZzRi0/Qf3bZXw=;
+ b=Y38X1Y0ZaGeR8GSFY4BqZ5yNsjHTdDYl5/Qn/EwVamlt1GAPyPyHKZD7CHxTdXgmhS
+ TYkp861HCEnCWz6y0q25tVxA0gcqa32+DQ+dkHeOyaWOT61eGahMa7Xz7pVbWFX8aLh9
+ axhOSNFoRsONc5t96IqCrF46PkHNC7zfYvMBHpamYQHXelA93RAOlnZk7RGhSSalEwI7
+ U6c0KR2YOWEKRyS7H7Z4994mDLwZmqqaBmd0qSXpS1T9NWfjJj6T9n43o+OZoJfgq2Zb
+ /K2duzcpuBLKMauiEQvPNG/mA6wlUQJ1dV4M3ihlugeGefI1WNEGw0CfVgxMhZM9SrhB
+ UZRQ==
+X-Gm-Message-State: APjAAAW2lJtN63pPcRa9Cs+IiQ/YkzwTAB6zkC/je61fFmPLUBC1DoCO
+ G6rzv4wMlGfjpOixcT4Xk6dTIA==
+X-Google-Smtp-Source: APXvYqwZuV7iQBTafFXCLyASYRPdTFc+in0U0FU4xW8UBHmPGP5BIWASAer6H/B/Ip3umOFQ5YfnUw==
+X-Received: by 2002:a62:6044:: with SMTP id u65mr40254034pfb.227.1572986783857; 
+ Tue, 05 Nov 2019 12:46:23 -0800 (PST)
+Received: from localhost ([12.206.222.5])
+ by smtp.gmail.com with ESMTPSA id f8sm10678623pgd.64.2019.11.05.12.46.23
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 05 Nov 2019 12:46:23 -0800 (PST)
+Date: Tue, 05 Nov 2019 12:46:23 -0800 (PST)
+X-Google-Original-Date: Tue, 05 Nov 2019 12:46:20 PST (-0800)
 Subject: Re: [PATCH v1 1/1] opensbi: Upgrade from v0.4 to v0.5
-To: Palmer Dabbelt <palmer@sifive.com>
-Cc: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+In-Reply-To: <CAKmqyKONh4tZ+DfBk2GVDt+k807ncKyrdL-qb1NnTsbyjztFkQ@mail.gmail.com>
+CC: palmer@sifive.com, Alistair Francis <Alistair.Francis@wdc.com>,
+ philmd@redhat.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+From: Palmer Dabbelt <palmer@dabbelt.com>
+To: alistair23@gmail.com
+Message-ID: <mhng-cc6999f1-fa87-4884-bf87-fac682d32f45@palmer-si-x1c4>
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::244
+X-Received-From: 2607:f8b0:4864:20::441
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -70,76 +66,74 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Nov 2019 19:29:26 -0000
+X-List-Received-Date: Tue, 05 Nov 2019 20:46:31 -0000
 
-On Tue, Oct 29, 2019 at 3:33 AM Alistair Francis <alistair23@gmail.com> wro=
-te:
+On Tue, 05 Nov 2019 11:23:39 PST (-0800), alistair23@gmail.com wrote:
+> On Tue, Oct 29, 2019 at 3:33 AM Alistair Francis <alistair23@gmail.com> wrote:
+>>
+>> On Mon, Oct 28, 2019 at 5:56 PM Palmer Dabbelt <palmer@sifive.com> wrote:
+>> >
+>> > On Sat, 26 Oct 2019 01:46:45 PDT (-0700), philmd@redhat.com wrote:
+>> > > On Sat, Oct 26, 2019 at 10:45 AM Philippe Mathieu-Daudé
+>> > > <philmd@redhat.com> wrote:
+>> > >>
+>> > >> Hi Alistair,
+>> > >>
+>> > >> On 10/26/19 1:15 AM, Alistair Francis wrote:
+>> > >> > This release has:
+>> > >> >      Lot of critical fixes
+>> > >> >      Hypervisor extension support
+>> > >> >      SBI v0.2 base extension support
+>> > >> >      Debug prints support
+>> > >> >      Handle traps when doing unpriv load/store
+>> > >> >      Allow compiling without FP support
+>> > >> >      Use git describe to generate boot-time banner
+>> > >> >      Andes AE350 platform support
+>> > >>
+>> > >> Do you mind amending the output of 'git shortlog v0.4..v0.5'?
+>> > >
+>> > > Err this comment is for Palmer, if Alistair agree (no need to repost).
+>> >
+>> > Works for me.  I've included the shortlog as part of the patch on my for-master
+>> > branch, unless there's any opposition I'll include this in my next PR.
+>>
+>> Sounds good!
 >
-> On Mon, Oct 28, 2019 at 5:56 PM Palmer Dabbelt <palmer@sifive.com> wrote:
-> >
-> > On Sat, 26 Oct 2019 01:46:45 PDT (-0700), philmd@redhat.com wrote:
-> > > On Sat, Oct 26, 2019 at 10:45 AM Philippe Mathieu-Daud=C3=A9
-> > > <philmd@redhat.com> wrote:
-> > >>
-> > >> Hi Alistair,
-> > >>
-> > >> On 10/26/19 1:15 AM, Alistair Francis wrote:
-> > >> > This release has:
-> > >> >      Lot of critical fixes
-> > >> >      Hypervisor extension support
-> > >> >      SBI v0.2 base extension support
-> > >> >      Debug prints support
-> > >> >      Handle traps when doing unpriv load/store
-> > >> >      Allow compiling without FP support
-> > >> >      Use git describe to generate boot-time banner
-> > >> >      Andes AE350 platform support
-> > >>
-> > >> Do you mind amending the output of 'git shortlog v0.4..v0.5'?
-> > >
-> > > Err this comment is for Palmer, if Alistair agree (no need to repost)=
-.
-> >
-> > Works for me.  I've included the shortlog as part of the patch on my fo=
-r-master
-> > branch, unless there's any opposition I'll include this in my next PR.
->
-> Sounds good!
+> Ping! Just want to make sure this makes it into 4.2.
 
-Ping! Just want to make sure this makes it into 4.2.
-
-Alistair
+Thanks, I must have somehow dropped this after fixing up the commit message -- 
+I'm up to three active laptops during the transition, so everything's a bit of 
+a mess on my end.  The commit (with the updated message) is back:.
 
 >
 > Alistair
 >
-> >
-> > >
-> > >> >
-> > >> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> > >> > ---
-> > >> > You can get the branch from here if the binaries are causing issue=
-s:
-> > >> > https://github.com/alistair23/qemu/tree/mainline/alistair/opensbi.=
-next
-> > >>
-> > >> You can use 'git format-patch --no-binary'.
-> > >>
-> > >> >
-> > >> >   pc-bios/opensbi-riscv32-virt-fw_jump.bin     | Bin 36888 -> 4098=
-4 bytes
-> > >> >   pc-bios/opensbi-riscv64-sifive_u-fw_jump.bin | Bin 45064 -> 4916=
-0 bytes
-> > >> >   pc-bios/opensbi-riscv64-virt-fw_jump.bin     | Bin 40968 -> 4506=
-4 bytes
-> > >> >   roms/opensbi                                 |   2 +-
-> > >> >   4 files changed, 1 insertion(+), 1 deletion(-)
-> > >> [...]
-> > >> > diff --git a/roms/opensbi b/roms/opensbi
-> > >> > index ce228ee091..be92da280d 160000
-> > >> > --- a/roms/opensbi
-> > >> > +++ b/roms/opensbi
-> > >> > @@ -1 +1 @@
-> > >> > -Subproject commit ce228ee0919deb9957192d723eecc8aaae2697c6
-> > >> > +Subproject commit be92da280d87c38a2e0adc5d3f43bab7b5468f09
-> > >> >
+>>
+>> Alistair
+>>
+>> >
+>> > >
+>> > >> >
+>> > >> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+>> > >> > ---
+>> > >> > You can get the branch from here if the binaries are causing issues:
+>> > >> > https://github.com/alistair23/qemu/tree/mainline/alistair/opensbi.next
+>> > >>
+>> > >> You can use 'git format-patch --no-binary'.
+>> > >>
+>> > >> >
+>> > >> >   pc-bios/opensbi-riscv32-virt-fw_jump.bin     | Bin 36888 -> 40984 bytes
+>> > >> >   pc-bios/opensbi-riscv64-sifive_u-fw_jump.bin | Bin 45064 -> 49160 bytes
+>> > >> >   pc-bios/opensbi-riscv64-virt-fw_jump.bin     | Bin 40968 -> 45064 bytes
+>> > >> >   roms/opensbi                                 |   2 +-
+>> > >> >   4 files changed, 1 insertion(+), 1 deletion(-)
+>> > >> [...]
+>> > >> > diff --git a/roms/opensbi b/roms/opensbi
+>> > >> > index ce228ee091..be92da280d 160000
+>> > >> > --- a/roms/opensbi
+>> > >> > +++ b/roms/opensbi
+>> > >> > @@ -1 +1 @@
+>> > >> > -Subproject commit ce228ee0919deb9957192d723eecc8aaae2697c6
+>> > >> > +Subproject commit be92da280d87c38a2e0adc5d3f43bab7b5468f09
+>> > >> >
 
