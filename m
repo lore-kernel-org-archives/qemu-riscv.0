@@ -1,63 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iSGmc-0006kt-Ql
-	for mharc-qemu-riscv@gnu.org; Wed, 06 Nov 2019 03:35:18 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43264)
+	id 1iSGmo-0006u2-0s
+	for mharc-qemu-riscv@gnu.org; Wed, 06 Nov 2019 03:35:30 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43302)
  by lists.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <prvs=20673f3fc=Anup.Patel@wdc.com>)
- id 1iSGmZ-0006kk-72
- for qemu-riscv@nongnu.org; Wed, 06 Nov 2019 03:35:16 -0500
+ id 1iSGml-0006rb-BE
+ for qemu-riscv@nongnu.org; Wed, 06 Nov 2019 03:35:28 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
  (envelope-from <prvs=20673f3fc=Anup.Patel@wdc.com>)
- id 1iSGmX-0003VE-U0
- for qemu-riscv@nongnu.org; Wed, 06 Nov 2019 03:35:15 -0500
-Received: from esa4.hgst.iphmx.com ([216.71.154.42]:17871)
+ id 1iSGmk-0003aJ-6d
+ for qemu-riscv@nongnu.org; Wed, 06 Nov 2019 03:35:27 -0500
+Received: from esa6.hgst.iphmx.com ([216.71.154.45]:29689)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <prvs=20673f3fc=Anup.Patel@wdc.com>)
- id 1iSGmX-0003PP-4h; Wed, 06 Nov 2019 03:35:13 -0500
+ id 1iSGmj-0003Zw-V2; Wed, 06 Nov 2019 03:35:26 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1573029312; x=1604565312;
- h=from:to:cc:subject:date:message-id:content-id:
- content-transfer-encoding:mime-version;
- bh=MNMQh6n///rZAoZAVRRjR9FMMNUqjlIL/EpJQjgLAJ8=;
- b=YfqvruNJo20c2nzIRO3QSItqo6VbpabmrBfRvpcKB6Wk5pzPZ1tQY8vL
- r6+D/iL4kP+RvvlGW57oSYPYb3ndMtdhGlHmdcP+l2pEXs4PSJrCVNkXE
- xuF/r/F5hxtjoTxLdMhyhFDvhnuS1fn0Vk3/Gns3ircuNf47b5bQ3r7dZ
- xMj7BkLc0UbeV1/78mj6GZ4WBet6A72SpXhiM+giA23ZOiNE47b0cJF6f
- L8a0KXzkOEV9kluAdjW0f8o6O1xkEqlF8A7/k5lEhyiRk46qDJW20uhq+
- LSxOx4Rr8EdZ/zPzAO1io0PDcTaFfry8s1rfJ2zgkL9X8Ewm5GRJKX0g0 A==;
-IronPort-SDR: 6f7KfoD2+sHckKlCnFxdj2zzh6SqwUx2NHjI+1jDUYihwB/Sfb5ghhv6DFV3v7L5SCKCBwEQRe
- RrVswi35o8f9OFf6z8MxJ7924SNRuJhZ8gbW6HMGbHY8IF+laM2L/nhp2ORhIwHlBgVm1RaNmq
- Mc+hZbLF/ysmtXBwg17fxMrkvHPsKfRNu394Xzkn0uMbwIwIARcD2/TKkggSpX4ROaOjA6zfud
- fsicetirA+Q3IaIPI//wlsNnrLvwn+EdVr63ExmspJDQVUgWUXCXttsOlRxQQ/r4O1/1VcdwPM
- k9k=
-X-IronPort-AV: E=Sophos;i="5.68,274,1569254400"; d="scan'208";a="122270215"
-Received: from mail-sn1nam01lp2051.outbound.protection.outlook.com (HELO
- NAM01-SN1-obe.outbound.protection.outlook.com) ([104.47.32.51])
- by ob1.hgst.iphmx.com with ESMTP; 06 Nov 2019 16:35:09 +0800
+ t=1573029326; x=1604565326;
+ h=from:to:cc:subject:date:message-id:references:
+ in-reply-to:content-transfer-encoding:mime-version;
+ bh=Ky8BZ8iaJiI0A0WDHkxMzZD2O+ipw7mbPNxy7q+UjxQ=;
+ b=g0kK0ALzy81hyA27XIVIgxliZhxEXscsYuo+CAh1r7kbLu9MPE5PzUeQ
+ 3/6/J4+hlLW9KYM4+go740AbSAN+ffmZ3kGrhOmljPtqmxsUIjkN5MHBQ
+ PFvrSdFKdx9/XcAnEgPnj8eYUIRVRyYno9le0VH96iWyAVXuUlr6GL1+2
+ JfJWQH98R/lFloMzxDEj0lcItNXXnVvSvmxXMn1Ra978fGkS1HWZ3aqIZ
+ +1AqPmsv2BofHTCYbjGstNYPHtuJgJsd1VXpooHoHQBJKkoiay09L0gDq
+ u3YgBF4UmdYp3qdsNt14XMNKOr866uLo7B8FtLzWlERl8E7qAHMN6tkqR g==;
+IronPort-SDR: fwsZoT0wpfCSGsggEjZ0zBnZ6OVSa6xBn8UEABeQKLWo2izQ6O3eVnYJYRO/nt7AklpbjFCNDe
+ YQHOb88B2xYO9OZ1pJkmOn0YNUP/BJ1zYetxnz12Kl3/FzpTaMMomUED34zEyFIJhnOOz1cXpN
+ cOBUIobRTZ9YU/dK/8N2dFLKII2R8q+VNaAvkgW1wmiKYawtPkolObEuD5ur+6+0OwrvaF18T1
+ V/mh0kYakhHnVBRvrk8tLzEN8viUx2wbvOJ7V5ujSJKH+ATOAs++YbCsOf+NpdZ+a1EJ1/gJcC
+ EAQ=
+X-IronPort-AV: E=Sophos;i="5.68,274,1569254400"; d="scan'208";a="123869337"
+Received: from mail-sn1nam01lp2057.outbound.protection.outlook.com (HELO
+ NAM01-SN1-obe.outbound.protection.outlook.com) ([104.47.32.57])
+ by ob1.hgst.iphmx.com with ESMTP; 06 Nov 2019 16:35:24 +0800
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Eip/95EPiVf3v512DjO9Vim8H8S2vm3L5WbZPsCxMyptxgXcrSEo6SiNFHIsAKT93KBcwSwNQn1SPuN0D6BjI6iN3rBWS9BQWNy2dUEiCGObbSTBzy+yyZ365PVOy2zC9s6wJBhBNLi+460MEUS9wF3WEFX/Kf9pjkEgLGTqIBaCBtH52HY5YL5zDAkh246Y8lZb1T+fMRkoAGZR4OOg2EjYJVL1skWbtf7Q19Azp49AVEuqG1KMvZ5hZ2Ro7D7vOBitsr/XVEZoMr0IdiiKS1naUOmzdxRmys8zmIe+qngrsnbWv+LjYkv1I//BAYXqZmhuRNG7G3UI7ZvQD0Qn1Q==
+ b=mVnQW+OmzHO0d5buIhOckHvWblOlxXi4TOkVvlpwdVxt1wPLotCSP90U77NY9WJqTpLw0tC1fuw2ykoK+ktvuFwuCgf263ZNFj0dZC2NTjsk03JufCQv7Zm0MexfwIbvNp8xjzrSeBtIqbO1d4CuXHfLI07ZCviLGeaEhVkQNQnHrFWgN5+dm+wJQY/lORnP3g/WdtTOtirfwJqeFrH/FZwnZ3DxxZV1iaA+ZM5sYdq97cTKA8VMjfO2oyQtY5lN6KRYk9Y20X1T0yh80QS7I3OAPswsW8x+TeozZ2q4Upcib5gagFKCnoHYVVexrrThuv/FS6yKdXqBJG9pl5/Sig==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=esm9YOMtbQ9QYWDoS++w6v3cOBQrMbHjC8CKhP/pftk=;
- b=NGQhMINLguHnKysBj8yvgIgi3BdTZ7gWpQDNMEEr4bi+EZKEweeIao7Ij0QaGPslxtpTva+IuCqS317ekbtWZn0tjLrsRdHUfel2Js6K7oMpiMWQ1gQ3pGoibWDEh07nF7nt6zd8DOl0xRkrKtZk/gVgRih3NqNyn+9tuYgwQ0U2ymHoBRLozO8zy/bXyXjEIJ/WWUiKMxaOoEt86AfjN0iDvzBbmSGtLNu908WS8dyi3AxUmbPIHKJY4yjWl/j4tp+Eo5920QWNP2Jo7Mga0BPUstPeuiW2IwrAcLaUMbwZHxxraoVq1kUdHCFT7V0sVvC7m+/8ILI4ws2o90uL4A==
+ bh=YfO82K7SRKK9ZCscBuVbuPJlRokkEhnF0xm0w3c+H70=;
+ b=INSL4GGDkmck7YyjiQox6jqwerQ16LBDjwVpJQb+8lnZ5024FnmQ7XSlXP+Ihsjfrb1qATQRi24n9z6WYSHAKEk6hz3SPPZZlJZHsaBCULW/FnpOHmQ6VnfEQn+kF2b58OoODLbptd0QOriobeZk3krU6RL/XRoBTF25nPzhWdRZdEBvsHM69FmupEdeeJgs3tXxBhk7xh3hwlBLrYEjwblR5MnKk04JdlYcqlD0san6wEkgirPu5nFTmxtcVxuw5iqEw9K4NpTtkJzdVZVy61hzyB+X+cVtc/LXhUcZvaoiLYWRF5wphRaETh/FF+LdzlYdDw7Ro/sUScftAthrXw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=wdc.com; dmarc=pass action=none header.from=wdc.com; dkim=pass
  header.d=wdc.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=esm9YOMtbQ9QYWDoS++w6v3cOBQrMbHjC8CKhP/pftk=;
- b=ULNWwctuDcCkRIusPoJWAC1H/+SEl24Yrbo2/f3YQ9yYxKybFW/GJSqHSkkdCdvj6EM1maH1tHRcFY6QERE9LmxpU6E3K2WVRQgVoxHDWmiVukKEz783QzSD2O7BKoWTiIh8tQty009cdHZD1BbUfOhnIQ6SLU32NvSnKOsBGcw=
+ bh=YfO82K7SRKK9ZCscBuVbuPJlRokkEhnF0xm0w3c+H70=;
+ b=lVgTEyORE0CaZOcHu6dgT4pf7FOKUPQXKu5H/DKhjqigba0LkZaGTEiyYxH0ILN+YYKaAEGYMfrfpMflZ6oA/HkOmM6I+1neXn/K1CP5fQW3VWAfW3EN3LUM/KOFssGnhVGIRnYWTHqOYd9XPSsYgsnIDo0lMAMx0zxgAaZwVuM=
 Received: from MN2PR04MB6061.namprd04.prod.outlook.com (20.178.246.15) by
  MN2PR04MB5936.namprd04.prod.outlook.com (20.179.21.218) with Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.2408.24; Wed, 6 Nov 2019 08:35:08 +0000
+ 15.20.2408.24; Wed, 6 Nov 2019 08:35:22 +0000
 Received: from MN2PR04MB6061.namprd04.prod.outlook.com
  ([fe80::b181:29c4:fcfb:7a0a]) by MN2PR04MB6061.namprd04.prod.outlook.com
  ([fe80::b181:29c4:fcfb:7a0a%7]) with mapi id 15.20.2408.024; Wed, 6 Nov 2019
- 08:35:08 +0000
+ 08:35:22 +0000
 From: Anup Patel <Anup.Patel@wdc.com>
 To: Peter Maydell <peter.maydell@linaro.org>, Palmer Dabbelt
  <palmer@sifive.com>, Alistair Francis <Alistair.Francis@wdc.com>, Sagar
@@ -68,11 +68,13 @@ CC: Atish Patra <Atish.Patra@wdc.com>,
  <anup@brainfault.org>, "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>,
  "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, Anup Patel
  <Anup.Patel@wdc.com>
-Subject: [PATCH v7 0/3] RTC support for QEMU RISC-V virt machine
-Thread-Topic: [PATCH v7 0/3] RTC support for QEMU RISC-V virt machine
-Thread-Index: AQHVlH0YZp18v5N/rEuwbe6k262aGQ==
-Date: Wed, 6 Nov 2019 08:35:08 +0000
-Message-ID: <20191106083444.41113-1-anup.patel@wdc.com>
+Subject: [PATCH v7 2/3] riscv: virt: Use Goldfish RTC device
+Thread-Topic: [PATCH v7 2/3] riscv: virt: Use Goldfish RTC device
+Thread-Index: AQHVlH0hhDcc0euSVkqbQuGiToNmTg==
+Date: Wed, 6 Nov 2019 08:35:22 +0000
+Message-ID: <20191106083444.41113-3-anup.patel@wdc.com>
+References: <20191106083444.41113-1-anup.patel@wdc.com>
+In-Reply-To: <20191106083444.41113-1-anup.patel@wdc.com>
 Accept-Language: en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
@@ -87,36 +89,34 @@ x-mailer: git-send-email 2.17.1
 x-originating-ip: [129.253.179.161]
 x-ms-publictraffictype: Email
 x-ms-office365-filtering-ht: Tenant
-x-ms-office365-filtering-correlation-id: 83a20a2c-01fe-44a7-a288-08d762943b10
+x-ms-office365-filtering-correlation-id: 927fc216-e4ca-4823-f460-08d76294439b
 x-ms-traffictypediagnostic: MN2PR04MB5936:
-x-ms-exchange-purlcount: 1
 x-ms-exchange-transport-forked: True
-x-microsoft-antispam-prvs: <MN2PR04MB59368C9475CEF956C5A1C70E8D790@MN2PR04MB5936.namprd04.prod.outlook.com>
+x-microsoft-antispam-prvs: <MN2PR04MB59369A79C390FBCBAE0B08378D790@MN2PR04MB5936.namprd04.prod.outlook.com>
 wdcipoutbound: EOP-TRUE
-x-ms-oob-tlc-oobclassifiers: OLM:7691;
+x-ms-oob-tlc-oobclassifiers: OLM:121;
 x-forefront-prvs: 02135EB356
 x-forefront-antispam-report: SFV:NSPM;
- SFS:(10019020)(4636009)(136003)(396003)(39860400002)(366004)(376002)(346002)(199004)(189003)(14444005)(25786009)(3846002)(6116002)(71190400001)(99286004)(2616005)(6436002)(8936002)(316002)(476003)(5660300002)(1076003)(71200400001)(6306002)(8676002)(6506007)(66066001)(386003)(110136005)(81166006)(4326008)(44832011)(54906003)(81156014)(14454004)(186003)(6512007)(50226002)(52116002)(86362001)(478600001)(36756003)(6486002)(256004)(966005)(66946007)(66446008)(64756008)(66556008)(66476007)(2906002)(102836004)(26005)(305945005)(7736002)(486006)(2171002);
+ SFS:(10019020)(4636009)(136003)(396003)(39860400002)(366004)(376002)(346002)(199004)(189003)(25786009)(3846002)(6116002)(71190400001)(99286004)(2616005)(6436002)(8936002)(316002)(476003)(5660300002)(1076003)(71200400001)(8676002)(6506007)(66066001)(386003)(110136005)(81166006)(446003)(4326008)(44832011)(54906003)(81156014)(14454004)(186003)(11346002)(6512007)(50226002)(52116002)(86362001)(478600001)(36756003)(6486002)(256004)(76176011)(66946007)(66446008)(64756008)(66556008)(66476007)(2906002)(102836004)(26005)(305945005)(7736002)(486006)(2171002);
  DIR:OUT; SFP:1102; SCL:1; SRVR:MN2PR04MB5936;
  H:MN2PR04MB6061.namprd04.prod.outlook.com; FPR:; SPF:None; LANG:en;
  PTR:InfoNoRecords; A:1; MX:1; 
 x-ms-exchange-senderadcheck: 1
 x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: eohR1/lwLpcLHTKIC9x4AZZUFB0JpwIKdWGukSc/tVDAWzCqIJ5auwIQKzX4cd//5JxW+xYffyEgaKqHv/lToXLp+4rvc2Q5JnJ0G3ukiIS/pMxauoTJXlKgEFzIhG3tk07ylf60mtOln7xTeat7NnBAUi4igwnngOdfFgSxZCJxn/h/rFD8riaDpxRezlvhHnkEx67iA/HBnBpZUgb6UaiMO83EipNZiVCn1RqLgCb0l6tImghuOLYZp9usoQUJgzlDO8kljkLPfT3u3ckNKeUlKUwOvy6PV8iD4crNdQSHsEABT+IGDofMQrcCZUrgoS4qzx2cN8OUyb8y2MWSNTyhl3HoU9OsagRWIrst6C4pgra/5PWCvA1dRWioueG+Wm6Ja2sWpdfnPh4g9zZy+z5PwHlFj9fZQdE6WMKVx/Vor0oCCBYSFE43OueJEtCKKNnVswvY1lcLjn5CC1Cfe7RXkJNinmCcnnqtFGshjzw=
+x-microsoft-antispam-message-info: vUbVOrYVIqm2lAhkulj0gBhnBCBXV043ysu1TYrsmeGRoaWWXa4rLf7PQ7gxq9G1hqMiBTky756uc4FwiSZlHkvkucfLIVYnihO5xjuaQt3SP2DYni1Wai8D7E3blUVmnke10oPJmMwxAPxmfQ+93dsxkxg9wR9AxeiShM6R+i4GPpVpU4i/evGERbBDe9GN5FvD5ihKokljangErd8wFZ58ijzNYTYTFn3COuZXz78ElIGylC/SCWTNuftj3iMqNrG0Ov3Dgji5Z72mJGL/4Q6qKv7TnlIQV82sWMOJSuVQYodIXdLgUvNlhqOLaZqObnbF4y1Z2f7cNNXoVWdtOzJroWXFOKfC5qacRO59yQuD9fEKFX9WFv7JGA3gcqmJCHDDGZXInENZM/OvwfghJDPqHkyDhfn0W7HlFID2p/iUEEGfamoemeb2FxTCoIZa
 Content-Type: text/plain; charset="iso-8859-1"
-Content-ID: <D86687CB2E1F034D96162D6342A6C01A@namprd04.prod.outlook.com>
 Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
 X-OriginatorOrg: wdc.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 83a20a2c-01fe-44a7-a288-08d762943b10
-X-MS-Exchange-CrossTenant-originalarrivaltime: 06 Nov 2019 08:35:08.5040 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 927fc216-e4ca-4823-f460-08d76294439b
+X-MS-Exchange-CrossTenant-originalarrivaltime: 06 Nov 2019 08:35:22.8628 (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: R6/J5zwqrSOzvcAb3TgaXzlZydBnpVfPFzZXTIarskF1hyeUv2prLDh7xn/66b59wLp+SifFUKgXd5Ik8DM6vA==
+X-MS-Exchange-CrossTenant-userprincipalname: 6Hp8WwLTmSlvDB77lhgx3xu4Xx0EFHxQzxC6B0VEkjPtrKyD3wUhAaaHsOGSSmowYUxJG25plxpAQMHxVjHzuw==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR04MB5936
 X-detected-operating-system: by eggs.gnu.org: FreeBSD 9.x [fuzzy]
-X-Received-From: 216.71.154.42
+X-Received-From: 216.71.154.45
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -128,58 +128,99 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Nov 2019 08:35:17 -0000
+X-List-Received-Date: Wed, 06 Nov 2019 08:35:28 -0000
 
-This series adds RTC device to QEMU RISC-V virt machine. We have
-selected Goldfish RTC device model for this. It's a pretty simple
-synthetic device with few MMIO registers and no dependency external
-clock. The driver for Goldfish RTC is already available in Linux so
-we just need to enable it in Kconfig for RISCV and also update Linux
-defconfigs.
+We extend QEMU RISC-V virt machine by adding Goldfish RTC device
+to it. This will allow Guest Linux to sync it's local date/time
+with Host date/time via RTC device.
 
-We have tested this series with Linux-5.4-rc4 plus defconfig changes
-available in 'goldfish_rtc_v2' branch of:
-https://github.com/avpatel/linux.git
+Signed-off-by: Anup Patel <anup.patel@wdc.com>
+Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
+Acked-by: Palmer Dabbelt <palmer@sifive.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+---
+ hw/riscv/Kconfig        |  1 +
+ hw/riscv/virt.c         | 15 +++++++++++++++
+ include/hw/riscv/virt.h |  2 ++
+ 3 files changed, 18 insertions(+)
 
-Changes since v6:
- - Rebased on latest QEMU master
- - Addressed all nit comments from Philippe Mathieu-Daud??
-
-Changes since v5:
- - Rebased on latest QEMU master
- - Added maintainer entry for Goldfish RTC
-
-Changes since v4:
- - Fixed typo in trace event usage
- - Moved goldfish_rtc.h to correct location
-
-Changes since v3:
- - Address all nit comments from Alistair
-
-Changes since v2:
- - Rebased on RTC code refactoring
-
-Changes since v1:
- - Implemented VMState save/restore callbacks
-
-Anup Patel (3):
-  hw: rtc: Add Goldfish RTC device
-  riscv: virt: Use Goldfish RTC device
-  MAINTAINERS: Add maintainer entry for Goldfish RTC
-
- MAINTAINERS                   |   8 +
- hw/riscv/Kconfig              |   1 +
- hw/riscv/virt.c               |  15 ++
- hw/rtc/Kconfig                |   3 +
- hw/rtc/Makefile.objs          |   1 +
- hw/rtc/goldfish_rtc.c         | 285 ++++++++++++++++++++++++++++++++++
- hw/rtc/trace-events           |   4 +
- include/hw/riscv/virt.h       |   2 +
- include/hw/rtc/goldfish_rtc.h |  46 ++++++
- 9 files changed, 365 insertions(+)
- create mode 100644 hw/rtc/goldfish_rtc.c
- create mode 100644 include/hw/rtc/goldfish_rtc.h
-
---
+diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
+index b12660b9f8..ff9fbe958a 100644
+--- a/hw/riscv/Kconfig
++++ b/hw/riscv/Kconfig
+@@ -34,6 +34,7 @@ config RISCV_VIRT
+     select PCI
+     select HART
+     select SERIAL
++    select GOLDFISH_RTC
+     select VIRTIO_MMIO
+     select PCI_EXPRESS_GENERIC_BRIDGE
+     select PFLASH_CFI01
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index cc8f311e6b..818678a4b2 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -58,6 +58,7 @@ static const struct MemmapEntry {
+     [VIRT_DEBUG] =3D       {        0x0,         0x100 },
+     [VIRT_MROM] =3D        {     0x1000,       0x11000 },
+     [VIRT_TEST] =3D        {   0x100000,        0x1000 },
++    [VIRT_RTC] =3D         {   0x101000,        0x1000 },
+     [VIRT_CLINT] =3D       {  0x2000000,       0x10000 },
+     [VIRT_PLIC] =3D        {  0xc000000,     0x4000000 },
+     [VIRT_UART0] =3D       { 0x10000000,         0x100 },
+@@ -376,6 +377,17 @@ static void create_fdt(RISCVVirtState *s, const struct=
+ MemmapEntry *memmap,
+     qemu_fdt_setprop_cell(fdt, nodename, "interrupt-parent", plic_phandle)=
+;
+     qemu_fdt_setprop_cell(fdt, nodename, "interrupts", UART0_IRQ);
+=20
++    nodename =3D g_strdup_printf("/rtc@%lx",
++        (long)memmap[VIRT_RTC].base);
++    qemu_fdt_add_subnode(fdt, nodename);
++    qemu_fdt_setprop_string(fdt, nodename, "compatible",
++        "google,goldfish-rtc");
++    qemu_fdt_setprop_cells(fdt, nodename, "reg",
++        0x0, memmap[VIRT_RTC].base,
++        0x0, memmap[VIRT_RTC].size);
++    qemu_fdt_setprop_cell(fdt, nodename, "interrupt-parent", plic_phandle)=
+;
++    qemu_fdt_setprop_cell(fdt, nodename, "interrupts", RTC_IRQ);
++
+     qemu_fdt_add_subnode(fdt, "/chosen");
+     qemu_fdt_setprop_string(fdt, "/chosen", "stdout-path", nodename);
+     if (cmdline) {
+@@ -579,6 +591,9 @@ static void riscv_virt_board_init(MachineState *machine=
+)
+         0, qdev_get_gpio_in(DEVICE(s->plic), UART0_IRQ), 399193,
+         serial_hd(0), DEVICE_LITTLE_ENDIAN);
+=20
++    sysbus_create_simple("goldfish_rtc", memmap[VIRT_RTC].base,
++        qdev_get_gpio_in(DEVICE(s->plic), RTC_IRQ));
++
+     virt_flash_create(s);
+=20
+     for (i =3D 0; i < ARRAY_SIZE(s->flash); i++) {
+diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
+index b17048a93a..e69355efaf 100644
+--- a/include/hw/riscv/virt.h
++++ b/include/hw/riscv/virt.h
+@@ -44,6 +44,7 @@ enum {
+     VIRT_DEBUG,
+     VIRT_MROM,
+     VIRT_TEST,
++    VIRT_RTC,
+     VIRT_CLINT,
+     VIRT_PLIC,
+     VIRT_UART0,
+@@ -57,6 +58,7 @@ enum {
+=20
+ enum {
+     UART0_IRQ =3D 10,
++    RTC_IRQ =3D 11,
+     VIRTIO_IRQ =3D 1, /* 1 to 8 */
+     VIRTIO_COUNT =3D 8,
+     PCIE_IRQ =3D 0x20, /* 32 to 35 */
+--=20
 2.17.1
+
 
