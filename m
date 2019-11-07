@@ -1,79 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iSm8o-00060g-16
-	for mharc-qemu-riscv@gnu.org; Thu, 07 Nov 2019 13:04:19 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:57880)
+	id 1iSm9X-0006yk-ON
+	for mharc-qemu-riscv@gnu.org; Thu, 07 Nov 2019 13:05:03 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58058)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <philmd@redhat.com>) id 1iSm8j-0005yb-4O
- for qemu-riscv@nongnu.org; Thu, 07 Nov 2019 13:04:15 -0500
+ (envelope-from <alistair23@gmail.com>) id 1iSm9U-0006v3-Md
+ for qemu-riscv@nongnu.org; Thu, 07 Nov 2019 13:05:01 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <philmd@redhat.com>) id 1iSm8h-0007g3-Hy
- for qemu-riscv@nongnu.org; Thu, 07 Nov 2019 13:04:13 -0500
-Received: from us-smtp-delivery-1.mimecast.com ([207.211.31.120]:40066
- helo=us-smtp-1.mimecast.com)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <philmd@redhat.com>) id 1iSm8h-0007fm-Ds
- for qemu-riscv@nongnu.org; Thu, 07 Nov 2019 13:04:11 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1573149850;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=8cA5Nj2lSy6a+kfwgiAcW5Spxg2tRNKg1j960jZLS/c=;
- b=cMlDZAtiD+Vr2sfXTPmEpnwhlYWUkOQ3SxAAYus9gt4XqdMqt/NXcLDX379ELJ+T/dRIJD
- FVm9WdOw605xMjvwagmHO8q3IaAq7zvysbp0E6r+PkfJeLMLngFqgLOpNWXG3hXQ9Ms4Ql
- MUfTGkh6OVT22dVIadK9+/6kgRmQl78=
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
- [209.85.221.71]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-279-ICPR9ZLcPumVKU9SBXEfBQ-1; Thu, 07 Nov 2019 13:04:09 -0500
-Received: by mail-wr1-f71.google.com with SMTP id f8so1507455wrq.6
- for <qemu-riscv@nongnu.org>; Thu, 07 Nov 2019 10:04:08 -0800 (PST)
+ (envelope-from <alistair23@gmail.com>) id 1iSm9T-0000Bf-II
+ for qemu-riscv@nongnu.org; Thu, 07 Nov 2019 13:05:00 -0500
+Received: from mail-lj1-x242.google.com ([2a00:1450:4864:20::242]:39827)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <alistair23@gmail.com>)
+ id 1iSm9T-00008F-Ar; Thu, 07 Nov 2019 13:04:59 -0500
+Received: by mail-lj1-x242.google.com with SMTP id p18so3308800ljc.6;
+ Thu, 07 Nov 2019 10:04:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=FY24fOw6o4HBDCzH2lKR8yEr39lJrGQkhK0mEp6DnU0=;
+ b=kW0ICBuq/asLGode1tllWIm2WPo6cyOXxwxYat7F7PwN1ukaIllVP0lZbq+/WT5zcX
+ U6bHvhz6OTjVY7y6nR/jTqS9A9CQ23pK0lvjdyZriWwsqtUo2hwkXMtBdfyw1ORFLqly
+ 5214jwncrBJ7NJNuj+wUam6+ExD9K8I7/s1Biz9ylmB7MQpefYZQ8miC1N+A8Ayd4EWW
+ W4ViHd+91q9+dD+6oSNL57tP21mjhGuiHpZv60n12+pxBmPKeWxlWyNFpGhiSoIyKr3v
+ AIU3HLAgWRerCZUzM9PKi4S+SxL2kU1hi6Q/naXFWDI+DtOgtiQi8EZlwbikK8ifY//C
+ E2mA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=9EKh4v8U/tcnBfisjslFQQy7nTkPVB+gqAlqojhWRuA=;
- b=DqVkENrYuX/fKjFdb4+fHFww8jyDBoB/nttgi9fDnUZ8qvg4oDrxSKStKFc1zkkrsC
- 9soKTsEShxGfvarGhCtfhTpDvmCzVVXLF2LPcno9kaz7j1HW4fx4qoUqYbsEVdTt7qHP
- 94htn+pZXNwQvZG5YpmbUfowwXy/dHs+szo6DvrjEhZNYsB0B57krceQAoPbk7kH3KP/
- +glDrz+zODchmqpxJvWnreSpcnyfC+c14qBsugX3it/apPJv9nmpghOYx03TdfQ0/nAP
- B5EHS3hSaM5lqtO3iAuFXLB/yxRTwb0mhupOO9DS774euAeeophfDdFpFwYt37P4BrC1
- y0Tw==
-X-Gm-Message-State: APjAAAXvHzNM0RAe8NFPfpL4DbD4oU3F03i1Q16Ohoezh8EKwRR6PmxM
- esjNKIBaHRSpL5gbvWQdV2sWLfbAK4PPV5TapiMhT76QKtEzCszKCS7fME62p2u1V/mGeafz4vm
- 24NurknPoFTA+7sQ=
-X-Received: by 2002:a1c:200f:: with SMTP id g15mr4302265wmg.96.1573149847888; 
- Thu, 07 Nov 2019 10:04:07 -0800 (PST)
-X-Google-Smtp-Source: APXvYqxZasOske5uA1TgXXaJKnYor89xB+6otSL4aKv4o7wbQt5FBwVdWfGIL6wQ4ZuNwPBWyrS10A==
-X-Received: by 2002:a1c:200f:: with SMTP id g15mr4302247wmg.96.1573149847669; 
- Thu, 07 Nov 2019 10:04:07 -0800 (PST)
-Received: from [10.101.1.81] ([176.12.107.132])
- by smtp.gmail.com with ESMTPSA id f188sm2627625wmf.3.2019.11.07.10.04.04
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 07 Nov 2019 10:04:07 -0800 (PST)
-Subject: Re: [PATCH v8 0/3] RTC support for QEMU RISC-V virt machine
-To: Palmer Dabbelt <palmer@dabbelt.com>, Anup Patel <Anup.Patel@wdc.com>
-Cc: Peter Maydell <peter.maydell@linaro.org>, palmer@sifive.com,
- Alistair Francis <Alistair.Francis@wdc.com>, sagark@eecs.berkeley.edu,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, qemu-riscv@nongnu.org,
- anup@brainfault.org, qemu-devel@nongnu.org, Atish Patra <Atish.Patra@wdc.com>
-References: <mhng-fceb5aa2-7610-421a-b350-d939ace5fee2@palmer-si-x1c4>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>
-Message-ID: <ac999ff0-3c47-7e79-a339-5b0cd1c2dc5c@redhat.com>
-Date: Thu, 7 Nov 2019 19:04:02 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.1.1
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=FY24fOw6o4HBDCzH2lKR8yEr39lJrGQkhK0mEp6DnU0=;
+ b=FR6vvhjFZ6ZpoVTwtnL/7SoXDmk0+9ElaQNJo+Zm+R2+l+sZYchE5ShxCFZxnTSMQk
+ HCItRjnJ1O3LZ1L0eceBYnNdwmzsu1Qc7LasjDKOVUS6AftpfteabxFUQVb9WUmaCfit
+ IsZTTuKbYwKuv1WssGb4OYPuJkrZBBHotQfoeGdtXcG/lhCcAykGD1EY2IaQyjLcL6Z0
+ TvAdvZeqLMhGma3g5HkrjQvvkdY8bEb4QKritix5ZWnW/ahKjA4BOtS6InDoqhuOEetH
+ Sycit7IKX+LDWGFg2hScINnNlc+KPKAfYcTEdu6bBgyG5f1E3k92ogFL67kHIuviw2yD
+ /CaA==
+X-Gm-Message-State: APjAAAV8X61jQrhDNsd6RhdLKvT2aa9nnDhWLehrI7zJgxoKyNQLqnI6
+ pEH9IRfOo2eqJaqWRu2cj/a/njOLZ6AB+XuvvM0=
+X-Google-Smtp-Source: APXvYqxJ84EGuov2NfXuqi04FmIKBIObByn+b93KQMt6HEEw0j8OQjdVXgAXHrn1RNBmPvZkYVtzwa8LjTQYLZfXpTs=
+X-Received: by 2002:a2e:8188:: with SMTP id e8mr3379608ljg.152.1573149897847; 
+ Thu, 07 Nov 2019 10:04:57 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <mhng-fceb5aa2-7610-421a-b350-d939ace5fee2@palmer-si-x1c4>
-Content-Language: en-US
-X-MC-Unique: ICPR9ZLcPumVKU9SBXEfBQ-1
-X-Mimecast-Spam-Score: 0
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
- [fuzzy]
-X-Received-From: 207.211.31.120
+References: <03c2f42b32fb4e304319c241122ae83584f085e0.1573087610.git.alistair.francis@wdc.com>
+ <mhng-35530489-a164-4825-90da-e550083fef9d@palmer-si-x1c4>
+ <CAFEAcA8YU5pp5xwqJSBqLtChp1WFmGFLUsHjnWPGk6+k1MtV3Q@mail.gmail.com>
+In-Reply-To: <CAFEAcA8YU5pp5xwqJSBqLtChp1WFmGFLUsHjnWPGk6+k1MtV3Q@mail.gmail.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Thu, 7 Nov 2019 09:59:15 -0800
+Message-ID: <CAKmqyKPy4e_Q6iS63Zuqk2fTwMcVAznACrU+0-NN0BCVbh0pDw@mail.gmail.com>
+Subject: Re: [PATCH for 4.2 v1 1/1] riscv/virt: Increase flash size
+To: Peter Maydell <peter.maydell@linaro.org>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ Palmer Dabbelt <palmer@sifive.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ QEMU Developers <qemu-devel@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2a00:1450:4864:20::242
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -85,79 +68,45 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Nov 2019 18:04:15 -0000
+X-List-Received-Date: Thu, 07 Nov 2019 18:05:02 -0000
 
-On 11/7/19 5:52 PM, Palmer Dabbelt wrote:
-> On Wed, 06 Nov 2019 03:56:29 PST (-0800), Anup Patel wrote:
->> This series adds RTC device to QEMU RISC-V virt machine. We have
->> selected Goldfish RTC device model for this. It's a pretty simple
->> synthetic device with few MMIO registers and no dependency external
->> clock. The driver for Goldfish RTC is already available in Linux so
->> we just need to enable it in Kconfig for RISCV and also update Linux
->> defconfigs.
->>
->> We have tested this series with Linux-5.4-rc4 plus defconfig changes
->> available in 'goldfish_rtc_v2' branch of:
->> https://github.com/avpatel/linux.git
->>
->> Changes since v7:
->> =C2=A0- Fix broken "stdout-path" in "/chosen" DT node of virt machine
->>
->> Changes since v6:
->> =C2=A0- Rebased on latest QEMU master
->> =C2=A0- Addressed all nit comments from Philippe Mathieu-Daude
->>
->> Changes since v5:
->> =C2=A0- Rebased on latest QEMU master
->> =C2=A0- Added maintainer entry for Goldfish RTC
->>
->> Changes since v4:
->> =C2=A0- Fixed typo in trace event usage
->> =C2=A0- Moved goldfish_rtc.h to correct location
->>
->> Changes since v3:
->> =C2=A0- Address all nit comments from Alistair
->>
->> Changes since v2:
->> =C2=A0- Rebased on RTC code refactoring
->>
->> Changes since v1:
->> =C2=A0- Implemented VMState save/restore callbacks
->>
->> Anup Patel (3):
->> =C2=A0 hw: rtc: Add Goldfish RTC device
->> =C2=A0 riscv: virt: Use Goldfish RTC device
->> =C2=A0 MAINTAINERS: Add maintainer entry for Goldfish RTC
->>
->> =C2=A0MAINTAINERS=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0=C2=A0 8 +
->> =C2=A0hw/riscv/Kconfig=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0=C2=A0 1 +
->> =C2=A0hw/riscv/virt.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0 16 ++
->> =C2=A0hw/rtc/Kconfig=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0=C2=A0 3 +
->> =C2=A0hw/rtc/Makefile.objs=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0 |=C2=A0=C2=A0 1 +
->> =C2=A0hw/rtc/goldfish_rtc.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0 | 285 ++++++++++++++++++++++++++++++++++
->> =C2=A0hw/rtc/trace-events=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0 |=C2=A0=C2=A0 4 +
->> =C2=A0include/hw/riscv/virt.h=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=
-=A0=C2=A0 2 +
->> =C2=A0include/hw/rtc/goldfish_rtc.h |=C2=A0 46 ++++++
->> =C2=A09 files changed, 366 insertions(+)
->> =C2=A0create mode 100644 hw/rtc/goldfish_rtc.c
->> =C2=A0create mode 100644 include/hw/rtc/goldfish_rtc.h
->=20
-> Thanks.=C2=A0 I've updated the patches on my queue, LMK if there are any =
-more=20
-> changes!
+On Thu, Nov 7, 2019 at 10:01 AM Peter Maydell <peter.maydell@linaro.org> wrote:
+>
+> On Thu, 7 Nov 2019 at 17:09, Palmer Dabbelt <palmer@dabbelt.com> wrote:
+> >
+> > On Wed, 06 Nov 2019 16:47:20 PST (-0800), Alistair Francis wrote:
+> > > Coreboot developers have requested that they have at least 32MB of flash
+> > > to load binaries. We currently have 32MB of flash, but it is split in
+> > > two to allow loading two flash binaries. Let's increase the flash size
+> > > from 32MB to 64MB to ensure we have a single region that is 32MB.
+> > >
+> > > No QEMU release has include flash in the RISC-V virt machine, so this
+> > > isn't a breaking change.
+> >
+> > Even if we had, I wouldn't consider it a breaking change because it adds to
+> > the memory map so existing programs will continue to run fine.
+>
+> I have a feeling you may find that some old command lines won't
+> work any more because they specified a flash contents binary
+> that was the old 32MB and now it needs to be padded out to 64MB.
 
-I'm happy with the series, thanks Anup for addressing all the comments.
+Yes, that is correct. Everyone using -pflash will need to change the
+size of their binaries. This was only just merged into QEMU master
+though and hasn't been in a release so I don't think many people are
+using it.
 
-Regards,
+I only know of two users, one is me and someone from Coreboot who
+requested the larger size. It doesn't seem like a problem users will
+see.
 
-Phil.
+Alistair
 
+> But I haven't tested whether this theory is correct (it will
+> depend on how the flash contents are specified -- --bios will
+> be ok, as will loading contents directly as an ELF file or
+> similar, specifying contents by a -drive option intended to be
+> consumed by the pflash is the case which likely needs extra padding.)
+>
+> thanks
+> -- PMM
 
