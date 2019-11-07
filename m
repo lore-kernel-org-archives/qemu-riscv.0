@@ -1,71 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iSW2a-00070F-Kw
-	for mharc-qemu-riscv@gnu.org; Wed, 06 Nov 2019 19:52:48 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:59134)
+	id 1iSl1T-0005cs-MP
+	for mharc-qemu-riscv@gnu.org; Thu, 07 Nov 2019 11:52:39 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:45114)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <prvs=207c28696=alistair.francis@wdc.com>)
- id 1iSW2Y-0006yQ-Lv
- for qemu-riscv@nongnu.org; Wed, 06 Nov 2019 19:52:47 -0500
+ (envelope-from <palmer@dabbelt.com>) id 1iSl1Q-0005X0-9Y
+ for qemu-riscv@nongnu.org; Thu, 07 Nov 2019 11:52:37 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <prvs=207c28696=alistair.francis@wdc.com>)
- id 1iSW2X-00077Z-Ll
- for qemu-riscv@nongnu.org; Wed, 06 Nov 2019 19:52:46 -0500
-Received: from esa5.hgst.iphmx.com ([216.71.153.144]:1280)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <prvs=207c28696=alistair.francis@wdc.com>)
- id 1iSW2R-0006wp-Hj; Wed, 06 Nov 2019 19:52:40 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1573087959; x=1604623959;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=91GA3k5Wf0zRgFBatOvuGps7IJjNusPf3pYDty1uXAE=;
- b=UEsLEO60tVVboRyBj0iJlOPXKmyjnE7mJ+kN+yt4vcSNktkJ9sambKcH
- jGh373dFMORcCBBfhP4+uLPKvnaoUGYucHYr6/Q6uNGNaw+Vuwgn4FAmL
- MCPNz0lX3PxAJe1uvyD1jegSx+xzhMHMxTwPqcN+VNuEquLPIRSpvK0fw
- t2NwPXlxsegSH9gWbJxBhRUrwyVqLr9bB1pAFEVywEu/KZokzFV1zNhPG
- mIHqfT1xLMmDi2UkJBvVkA49vdoHBv5j1NCh6I2Bm/VOVp8pZEs8GV6Az
- uw26doaFrVzWN3B0SbR33qK1bJdMr4ivQqLTADUTjNexGVrrtWqSntv2W g==;
-IronPort-SDR: OF9wVVZd+0i0IoJQNSVj2NzcRZEP/NKNwGcn29vPdIo8qOf3w0zZWBaC/e4xNMSzRfsCOS3rWi
- UmX/oygRkq8ID5JLV1vwPWlA2+o38aegxb86G3DzddrLSB8xJRkdCZo+OLbaR/iWG2U4DOuAFO
- QVsuxIegFLA2TtEBVgI6WyTKXrA9xb14YpC/mEjozhmxYCYStFWEb/6WAqQhIk8C6swRY1bAUf
- sdU+L1uixuZ8QFlxTII1eM1lMwTCqaK0Ksi8FVMn8TCHwM6jmRieoreiWV4bFcMwwbZlvwWDMj
- iXU=
-X-IronPort-AV: E=Sophos;i="5.68,276,1569254400"; d="scan'208";a="123069963"
-Received: from h199-255-45-15.hgst.com (HELO uls-op-cesaep02.wdc.com)
- ([199.255.45.15])
- by ob1.hgst.iphmx.com with ESMTP; 07 Nov 2019 08:52:34 +0800
-IronPort-SDR: DyG9ayykU4lR1Kcbcysxs7rEQDb5DVmkp1xvYjUBNmjXkN0epHptuF228tqB3i90ghPqDniBJh
- pvuTV7sMqol2Dd65EldICsMNi8c8Xccwq5gDrF5qnpNMwEtv3Ys2TWF4x4LEw4BnTPS6KmzhjT
- BjyChtiIf98gVahkuSxxC/EYAAsueGlYxgjE9Wq1mkMdi1TdXE2Nkcah4BjhV60qM4ZEbBkYwa
- JD0jBVgc6rCrNAN+6oKKF0kxeLwS/1nI7uI88/4yUbkproa7XHOykhvipMphE7pPfaLWpgC+/w
- JwdclsrTxtD/jSljf19aRekn
-Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
- by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 06 Nov 2019 16:47:45 -0800
-IronPort-SDR: s6jHkLwXqo7vFs/jRlJYA3om7/ZgAFilKrHTz1lkNbDuHlIS4HSsjXYcutFcUyQ5WRJOjPY2ws
- 360NHw13JuFS4jKcwjJvzZJRbfDhES17ainm49PLSCqKMCX4GbAHZ5gBHBR2zsa2KO/5lOa2tc
- /lguL1hD36hB82X7iQDYAsKcjo5sTk7CGzP82h+gXMEbVPksKnvODE6rll37wBzzHZG0ZhLNm0
- zT+dBOWjhXsAlm3zSYiYvEkEizwizib59PGOTJHJ4OpOJEOmk9ZTG/384rUfSjpBsN2Y3IOf8L
- aok=
-WDCIronportException: Internal
-Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
- risc6-mainframe.int.fusionio.com) ([10.196.157.58])
- by uls-op-cesaip01.wdc.com with ESMTP; 06 Nov 2019 16:52:34 -0800
-From: Alistair Francis <alistair.francis@wdc.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: palmer@sifive.com,
-	alistair.francis@wdc.com,
-	alistair23@gmail.com
-Subject: [PATCH for 4.2 v1 1/1] riscv/virt: Increase flash size
-Date: Wed,  6 Nov 2019 16:47:20 -0800
-Message-Id: <03c2f42b32fb4e304319c241122ae83584f085e0.1573087610.git.alistair.francis@wdc.com>
-X-Mailer: git-send-email 2.23.0
-MIME-Version: 1.0
+ (envelope-from <palmer@dabbelt.com>) id 1iSl1O-0002xG-NO
+ for qemu-riscv@nongnu.org; Thu, 07 Nov 2019 11:52:35 -0500
+Received: from mail-pg1-x542.google.com ([2607:f8b0:4864:20::542]:34445)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1iSl1O-0002wm-6i
+ for qemu-riscv@nongnu.org; Thu, 07 Nov 2019 11:52:34 -0500
+Received: by mail-pg1-x542.google.com with SMTP id e4so2461269pgs.1
+ for <qemu-riscv@nongnu.org>; Thu, 07 Nov 2019 08:52:34 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=dabbelt-com.20150623.gappssmtp.com; s=20150623;
+ h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
+ :content-transfer-encoding;
+ bh=KQCtLcefXWN3Ffga/uquHl+0Zn6mwEYpVn1eJIc/dDM=;
+ b=sTqJPxQyUZkgeRjSYG5u/UEeZopFo/XxJQ99wgv42BJ+ZP16qiEvEKTy+lDvCvA6Lc
+ P7RkXdOiBfaByNfKkccVzUH1TDhBhBtQxveBLkcVBJQj9SSpL/73v1nnw6rBF9Wge8Ah
+ 3NM+TuXeh0yC65yAmBhVUB49bzGlPDtz/ctH4v3DiHZ6DmevmCddIaeebfs6k34/v+yv
+ +wvVcB2q8tyteLEIz77jj3PzsCwfS8D+V8l/7F8mPrAa/WUt0wCqaG6YKru+Fvtytg1W
+ 26Nv8R2U0kxWT1v3xIt1rQqNfMhdU7fYrGBVU5CCYZMiko1y9pb8a0Q9SrH12vHHNXYp
+ vXIg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
+ :mime-version:content-transfer-encoding;
+ bh=KQCtLcefXWN3Ffga/uquHl+0Zn6mwEYpVn1eJIc/dDM=;
+ b=LVHvAVPB60g9fDX8HqbIut/xKGtrYESxGXXiySMSWr2QyJovFCBSsesmwfpT9QyruV
+ +aAGoUJ5oyP+w6E1UakLG8KolZBhMDV1FLEGYhn7h9dhxxxdi+og/fyL9KHJhZHvCZ+U
+ VOcS1KMS0bj++peUf5e4qnsGjwRzHJdkdLLHEDxOHw9QcFwggWBzzvC/67Lo3w8zEPC7
+ zw8ADY1sBPgCAjewGOdwb8cTGETyNvqgDdbX0h9+dt/4F11tHh9KWPlp1Wi0bvFoSCju
+ pdU1OFA5x0HV+qZFlSAymRrS/aPbJ6szFy9T2atDP7oL1kRtzIt2ibfUJC6Svs9+Zftj
+ B4kQ==
+X-Gm-Message-State: APjAAAW3wH1KXAJsGbmc9cVZWVkaOTagcOWyhLpsZYu5oHVGJ+/1m+sA
+ wFMe1BDbrqHVT1k5O2EuT8ieUg==
+X-Google-Smtp-Source: APXvYqxMH83l8Efo2BQC35h3P36kNgNcb/5nXZ0kAGYX3XgQPumNcc02056VVwv/BUKexO5QVcC9VQ==
+X-Received: by 2002:a65:664e:: with SMTP id z14mr5530898pgv.201.1573145552458; 
+ Thu, 07 Nov 2019 08:52:32 -0800 (PST)
+Received: from localhost ([12.206.222.5])
+ by smtp.gmail.com with ESMTPSA id m13sm2536669pga.70.2019.11.07.08.52.31
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 07 Nov 2019 08:52:31 -0800 (PST)
+Date: Thu, 07 Nov 2019 08:52:31 -0800 (PST)
+X-Google-Original-Date: Thu, 07 Nov 2019 08:34:14 PST (-0800)
+Subject: Re: [PATCH v8 0/3] RTC support for QEMU RISC-V virt machine
+In-Reply-To: <20191106115602.74299-1-anup.patel@wdc.com>
+CC: Peter Maydell <peter.maydell@linaro.org>, palmer@sifive.com,
+ Alistair Francis <Alistair.Francis@wdc.com>, sagark@eecs.berkeley.edu,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
+ qemu-riscv@nongnu.org, anup@brainfault.org, Anup Patel <Anup.Patel@wdc.com>,
+ qemu-devel@nongnu.org, 
+ Atish Patra <Atish.Patra@wdc.com>, philmd@redhat.com
+From: Palmer Dabbelt <palmer@dabbelt.com>
+To: Anup Patel <Anup.Patel@wdc.com>
+Message-ID: <mhng-fceb5aa2-7610-421a-b350-d939ace5fee2@palmer-si-x1c4>
+Mime-Version: 1.0 (MHng)
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-detected-operating-system: by eggs.gnu.org: FreeBSD 9.x [fuzzy]
-X-Received-From: 216.71.153.144
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2607:f8b0:4864:20::542
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -77,35 +75,62 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Nov 2019 00:52:47 -0000
+X-List-Received-Date: Thu, 07 Nov 2019 16:52:38 -0000
 
-Coreboot developers have requested that they have at least 32MB of flash
-to load binaries. We currently have 32MB of flash, but it is split in
-two to allow loading two flash binaries. Let's increase the flash size
-from 32MB to 64MB to ensure we have a single region that is 32MB.
+On Wed, 06 Nov 2019 03:56:29 PST (-0800), Anup Patel wrote:
+> This series adds RTC device to QEMU RISC-V virt machine. We have
+> selected Goldfish RTC device model for this. It's a pretty simple
+> synthetic device with few MMIO registers and no dependency external
+> clock. The driver for Goldfish RTC is already available in Linux so
+> we just need to enable it in Kconfig for RISCV and also update Linux
+> defconfigs.
+>
+> We have tested this series with Linux-5.4-rc4 plus defconfig changes
+> available in 'goldfish_rtc_v2' branch of:
+> https://github.com/avpatel/linux.git
+>
+> Changes since v7:
+>  - Fix broken "stdout-path" in "/chosen" DT node of virt machine
+>
+> Changes since v6:
+>  - Rebased on latest QEMU master
+>  - Addressed all nit comments from Philippe Mathieu-Daude
+>
+> Changes since v5:
+>  - Rebased on latest QEMU master
+>  - Added maintainer entry for Goldfish RTC
+>
+> Changes since v4:
+>  - Fixed typo in trace event usage
+>  - Moved goldfish_rtc.h to correct location
+>
+> Changes since v3:
+>  - Address all nit comments from Alistair
+>
+> Changes since v2:
+>  - Rebased on RTC code refactoring
+>
+> Changes since v1:
+>  - Implemented VMState save/restore callbacks
+>
+> Anup Patel (3):
+>   hw: rtc: Add Goldfish RTC device
+>   riscv: virt: Use Goldfish RTC device
+>   MAINTAINERS: Add maintainer entry for Goldfish RTC
+>
+>  MAINTAINERS                   |   8 +
+>  hw/riscv/Kconfig              |   1 +
+>  hw/riscv/virt.c               |  16 ++
+>  hw/rtc/Kconfig                |   3 +
+>  hw/rtc/Makefile.objs          |   1 +
+>  hw/rtc/goldfish_rtc.c         | 285 ++++++++++++++++++++++++++++++++++
+>  hw/rtc/trace-events           |   4 +
+>  include/hw/riscv/virt.h       |   2 +
+>  include/hw/rtc/goldfish_rtc.h |  46 ++++++
+>  9 files changed, 366 insertions(+)
+>  create mode 100644 hw/rtc/goldfish_rtc.c
+>  create mode 100644 include/hw/rtc/goldfish_rtc.h
 
-No QEMU release has include flash in the RISC-V virt machine, so this
-isn't a breaking change.
-
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
----
- hw/riscv/virt.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index cc8f311e6b..23f340df19 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -62,7 +62,7 @@ static const struct MemmapEntry {
-     [VIRT_PLIC] =        {  0xc000000,     0x4000000 },
-     [VIRT_UART0] =       { 0x10000000,         0x100 },
-     [VIRT_VIRTIO] =      { 0x10001000,        0x1000 },
--    [VIRT_FLASH] =       { 0x20000000,     0x2000000 },
-+    [VIRT_FLASH] =       { 0x20000000,     0x4000000 },
-     [VIRT_DRAM] =        { 0x80000000,           0x0 },
-     [VIRT_PCIE_MMIO] =   { 0x40000000,    0x40000000 },
-     [VIRT_PCIE_PIO] =    { 0x03000000,    0x00010000 },
--- 
-2.23.0
-
+Thanks.  I've updated the patches on my queue, LMK if there are any more 
+changes!
 
