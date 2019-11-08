@@ -1,53 +1,53 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iTAFG-0000Es-23
-	for mharc-qemu-riscv@gnu.org; Fri, 08 Nov 2019 14:48:34 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:35788)
+	id 1iTAFJ-0000Ir-0t
+	for mharc-qemu-riscv@gnu.org; Fri, 08 Nov 2019 14:48:37 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:35836)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <palmer@dabbelt.com>) id 1iTAFB-000096-9N
- for qemu-riscv@nongnu.org; Fri, 08 Nov 2019 14:48:30 -0500
+ (envelope-from <palmer@dabbelt.com>) id 1iTAFE-0000Cm-H4
+ for qemu-riscv@nongnu.org; Fri, 08 Nov 2019 14:48:33 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmer@dabbelt.com>) id 1iTAFA-00063F-5R
- for qemu-riscv@nongnu.org; Fri, 08 Nov 2019 14:48:29 -0500
-Received: from mail-pf1-x444.google.com ([2607:f8b0:4864:20::444]:39327)
+ (envelope-from <palmer@dabbelt.com>) id 1iTAFD-00065E-CU
+ for qemu-riscv@nongnu.org; Fri, 08 Nov 2019 14:48:32 -0500
+Received: from mail-pf1-x443.google.com ([2607:f8b0:4864:20::443]:34671)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1iTAFA-000600-0N
- for qemu-riscv@nongnu.org; Fri, 08 Nov 2019 14:48:28 -0500
-Received: by mail-pf1-x444.google.com with SMTP id x28so5304311pfo.6
- for <qemu-riscv@nongnu.org>; Fri, 08 Nov 2019 11:48:27 -0800 (PST)
+ (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1iTAFD-00064s-7P
+ for qemu-riscv@nongnu.org; Fri, 08 Nov 2019 14:48:31 -0500
+Received: by mail-pf1-x443.google.com with SMTP id n13so5341769pff.1
+ for <qemu-riscv@nongnu.org>; Fri, 08 Nov 2019 11:48:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=dabbelt-com.20150623.gappssmtp.com; s=20150623;
  h=subject:date:message-id:in-reply-to:references:mime-version
  :content-transfer-encoding:cc:from:to;
- bh=9MuKvPi+Vd4vUU4gqbdXcIHJqwKNnvJAqsIK6Fo7Ucc=;
- b=pi7fIL923oWWgDW4NPnQr/eftyTVeXcfwmZIwygNlZzAU9KU4roZv2++952mIomA2A
- aIf0ihpR6GsxlgDp3WbhP3DMao2VHHieH8F1TJfYCS145O6Q/LnbmrdttZPUkm0Rva7S
- DXwD9uGEwkdY70/o6rNq6GiprPPjNnjeU66Afl3J7IFfUKV1U22N54TOqkA1NtM+m5R7
- RIAvi1sQG+hmoWN09m+rdkaeCbMn7IMCqZ9pdNtTF4h3aL257z9sANMewLU/RihQDOz6
- uJM7n8jBG9OAA9VmElcrAiRrqH/coQ3u9xcdFs4v17kWX/w5zaxmYmgzZMQsWF0jp8hc
- hboQ==
+ bh=tM4Fro2TVwkO5f8g7B2j9ujSbXOxCnayqaeFwddAub0=;
+ b=YVUh2sWqTpEsCPUFUfc7lHA6DqDheheDlRXwy4adX+zaiGg5E35gi4DvX317kmuZ3F
+ uzd1E0aMootYzW3hWBEz7NPfcPbjHrFUtxVsAYYJ28+wic/rdrbMKGVASUePI4myZzsq
+ OceIEvUgvxZQ2B+eJoQpPfqkBksqyVt0UFlk81sOefbOCi9WQa8VzUyEXWD8njikPa0Q
+ KSKVlqoMzufrm2EdbdZSrhuzfz6EOslTTAn6DEJpYU4wz0+8Qowxd9CXTojwr6Owscuq
+ RqykuOXIoEtGEdlg2caWy62iH+cBBM6wBRrr//hnkQ8wUV7re69agX1oN1y+qGHJPyn9
+ N8cw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding:cc:from:to;
- bh=9MuKvPi+Vd4vUU4gqbdXcIHJqwKNnvJAqsIK6Fo7Ucc=;
- b=GOeq1cN0qgMmth4fK1Xy52CTRYkyNWH73z4iSKWRy3965fzZXO5sCEZzStMBHwf0Xd
- DxJFPj5rme1b/fVrD0wrgn8pzOR/gJfOVdJCZXoTbaN5zi/+v53KGZHRuuilZL9Hp3jg
- emvq+ulgUuMBk4q6bm8j5YJA6IAZE++//xjUczvX6M32834pxokzsMO1quSGpq1qxQGx
- nqC51fpfhp0AEVeFu9OBviBFqAeYdFHHCStGNuokOEmq3q7cKDSxHjwvh1JvxUCKaUDg
- jZAm7ZvBCO/p/vc8hEqgM5Ysw7jj8sHRYMOipUJ6lner8DNJdenYSbZ608CE9YPhxIf1
- vRwA==
-X-Gm-Message-State: APjAAAVUlVUh9DbTcsWu88ZtPUNvTqTQj7udt88dwLVynGVR6lWI8LiG
- sWow5utuELNMRXNUg/KrgkipYSiKWqQ=
-X-Google-Smtp-Source: APXvYqye9hkQzVWrvzFfvnjgCHDEpcWJPAIWeA2Fh2TraED35OgiTF3LQL4UzzHFLXFTLDyOEky3hA==
-X-Received: by 2002:a63:e26:: with SMTP id d38mr8265069pgl.44.1573242506131;
- Fri, 08 Nov 2019 11:48:26 -0800 (PST)
+ bh=tM4Fro2TVwkO5f8g7B2j9ujSbXOxCnayqaeFwddAub0=;
+ b=TBki/AAdoZszDFVwhKtu1KnW3f4+pFYySKNzdKPW1/PzIDZEaGWZw6tpmhqbX8HNgc
+ BdtSR8R35knM/8pxuAjTwkXkb64d0CXxJVQdTVcfqwMZfLI6f79JFDxrQ1t3UKwPrLgP
+ L4UrgCaR3MDGu9VtEfjulv3uoZ7pa17sXh9x/4bt1DMp2pJ2GOoUGn0kXz/apv3oK5by
+ gsH3hli+WWgPpXw06TEESEMjsXswRVR2RJ/cnKELYZa4GmBp1Z78nCBBr+YGvG/lmK2r
+ TssVVpB6e7sQthC4wj1UtrcLIDdpmEIPgr8nfdx/qRmluBak9Eu0oreHNOwL7taNkK06
+ GHhw==
+X-Gm-Message-State: APjAAAXaUcRkY98hp9nkVJte6ykH3JrpgiQiAeSsGVkT8Iw1MtHvQxT4
+ OPhooPPUwf4mKk423CQgRdATmIZJ38M=
+X-Google-Smtp-Source: APXvYqyrGOnLuRk4FgFZpne9bF6/pVqmwaDHEIfbSixB8zyzH8jvZtKCG8KIWTfttqaah879NKq8uw==
+X-Received: by 2002:a63:f513:: with SMTP id w19mr13779501pgh.55.1573242509630; 
+ Fri, 08 Nov 2019 11:48:29 -0800 (PST)
 Received: from localhost ([12.206.222.5])
- by smtp.gmail.com with ESMTPSA id y24sm8053861pfr.116.2019.11.08.11.48.24
+ by smtp.gmail.com with ESMTPSA id f13sm10128262pfa.57.2019.11.08.11.48.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 08 Nov 2019 11:48:25 -0800 (PST)
-Subject: [PATCH v2 1/3] device_tree: Add a helper function for string arrays
-Date: Fri,  8 Nov 2019 11:47:56 -0800
-Message-Id: <20191108194758.17813-2-palmer@dabbelt.com>
+ Fri, 08 Nov 2019 11:48:29 -0800 (PST)
+Subject: [PATCH v2 3/3] RISC-V: virt: This is a "sifive,test1" test finisher
+Date: Fri,  8 Nov 2019 11:47:58 -0800
+Message-Id: <20191108194758.17813-4-palmer@dabbelt.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <20191108194758.17813-1-palmer@dabbelt.com>
 References: <20191108194758.17813-1-palmer@dabbelt.com>
@@ -60,7 +60,7 @@ To: Peter Maydell <peter.maydell@linaro.org>,
  david@gibson.dropbear.id.au
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::444
+X-Received-From: 2607:f8b0:4864:20::443
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -72,69 +72,32 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Nov 2019 19:48:30 -0000
+X-List-Received-Date: Fri, 08 Nov 2019 19:48:35 -0000
 
-The device tree format allows for arrays of strings, which are encoded
-with '\0's inside regular strings.  These are ugly to represent in C, so
-the helper function represents them as strings with internal '\0's that
-are terminated with a double '\0'.  In other words, the array
-["string1", "string2"] is represeted as "string1\0string2\0".
+The test finisher implements the reset command, which means it's a
+"sifive,test1" device.  This is a backwards compatible change, so it's
+also a "sifive,test0" device.
 
-The DTB generated by this function is accepted by DTC and produces an
-array of strings, but I can't find any explicit line in the DT
-specification that defines how these are encoded.
-
+Fixes: 9a2551ed6f ("riscv: sifive_test: Add reset functionality")
 Signed-off-by: Palmer Dabbelt <palmer@dabbelt.com>
 ---
- device_tree.c                | 17 +++++++++++++++++
- include/sysemu/device_tree.h |  6 ++++++
- 2 files changed, 23 insertions(+)
+ hw/riscv/virt.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/device_tree.c b/device_tree.c
-index f8b46b3c73..b4379f13a7 100644
---- a/device_tree.c
-+++ b/device_tree.c
-@@ -397,6 +397,23 @@ int qemu_fdt_setprop_string(void *fdt, const char *node_path,
-     return r;
- }
- 
-+static size_t stringarr_length(const char *strings)
-+{
-+    size_t count = 1;
-+    while (strings[count - 1] != '\0' || strings[count] != '\0') {
-+        count++;
-+    }
-+    return count;
-+}
-+
-+int qemu_fdt_setprop_strings(void *fdt, const char *node_path,
-+                            const char *property, const char *strings)
-+{
-+    size_t length = stringarr_length(strings);
-+    return qemu_fdt_setprop(fdt, node_path, property, strings, length);
-+}
-+
-+
- const void *qemu_fdt_getprop(void *fdt, const char *node_path,
-                              const char *property, int *lenp, Error **errp)
- {
-diff --git a/include/sysemu/device_tree.h b/include/sysemu/device_tree.h
-index c16fd69bc0..d43c07128e 100644
---- a/include/sysemu/device_tree.h
-+++ b/include/sysemu/device_tree.h
-@@ -70,6 +70,12 @@ int qemu_fdt_setprop_string(void *fdt, const char *node_path,
- int qemu_fdt_setprop_phandle(void *fdt, const char *node_path,
-                              const char *property,
-                              const char *target_node_path);
-+/*
-+ * This uses a particularly odd encoding: "strings" is a list of strings that
-+ * must be terminated by two back-to-back '\0' characters.
-+ */
-+int qemu_fdt_setprop_strings(void *fdt, const char *node_path,
-+                             const char *property, const char *strings);
- /**
-  * qemu_fdt_getprop: retrieve the value of a given property
-  * @fdt: pointer to the device tree blob
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index 23f340df19..65ad725920 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -359,7 +359,8 @@ static void create_fdt(RISCVVirtState *s, const struct MemmapEntry *memmap,
+     nodename = g_strdup_printf("/test@%lx",
+         (long)memmap[VIRT_TEST].base);
+     qemu_fdt_add_subnode(fdt, nodename);
+-    qemu_fdt_setprop_string(fdt, nodename, "compatible", "sifive,test0");
++    qemu_fdt_setprop_strings(fdt, nodename, "compatible",
++                             "sifive,test1\0sifive,test0\0");
+     qemu_fdt_setprop_cells(fdt, nodename, "reg",
+         0x0, memmap[VIRT_TEST].base,
+         0x0, memmap[VIRT_TEST].size);
 -- 
 2.21.0
 
