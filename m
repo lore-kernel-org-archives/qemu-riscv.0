@@ -1,63 +1,47 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iTT9I-0004Fj-LH
-	for mharc-qemu-riscv@gnu.org; Sat, 09 Nov 2019 10:59:40 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49960)
+	id 1iTuUH-0007Jv-KC
+	for mharc-qemu-riscv@gnu.org; Sun, 10 Nov 2019 16:11:09 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:55993)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <peter.maydell@linaro.org>) id 1iTT9F-0004FM-VR
- for qemu-riscv@nongnu.org; Sat, 09 Nov 2019 10:59:39 -0500
+ (envelope-from <dgibson@ozlabs.org>) id 1iTuUB-0007Fo-RN
+ for qemu-riscv@nongnu.org; Sun, 10 Nov 2019 16:11:04 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <peter.maydell@linaro.org>) id 1iTT9E-0000MM-T8
- for qemu-riscv@nongnu.org; Sat, 09 Nov 2019 10:59:37 -0500
-Received: from mail-ot1-x342.google.com ([2607:f8b0:4864:20::342]:44290)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <peter.maydell@linaro.org>)
- id 1iTT9E-0000M2-N6
- for qemu-riscv@nongnu.org; Sat, 09 Nov 2019 10:59:36 -0500
-Received: by mail-ot1-x342.google.com with SMTP id c19so7779903otr.11
- for <qemu-riscv@nongnu.org>; Sat, 09 Nov 2019 07:59:36 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=UGGqpT/gP0e7fQ+6MCtKgbbjn+3VKjT+JR7zDj4O5G8=;
- b=aPB40RBcvrYHnkdE8sTfrneeyu1ffg6LGblJlFthmzsR1AR2li65z9OCnUNyvn14Bs
- R/+ajrdR2e1iEkAJYF2BkvA6YfIgMxpm06O1qvZ6AhpqTCF8A3qfZ4mJgbGpak/qJqFG
- NtPmiohiLQuvl4MG8oo+xG1yWfb9tKf4YC6YQPax8c1nrj5jhkZMCzmy6gK7LEXNb59Y
- AI5CXPu3P3BIo3tZ8gKc4b0fg0PGVAXnJGWHuFnYbDlBmOtpbLWVkoJMPC/zyhymC0PL
- h3amHFTZ7dotzMPzV8jp1A+FYH/GiqwOoNxzBIpcFz3KRQmbRYOSErawFZ3WAknqGyzz
- zwew==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=UGGqpT/gP0e7fQ+6MCtKgbbjn+3VKjT+JR7zDj4O5G8=;
- b=uQ7hLqdKZ/QWpDt/L+SXalA1NJid9BRVEUZ3qKnrTj/u9akHObMGntymzYEBa1NAk2
- XnMP8mOcaHGFCJERKK1vDElhMVSjT8Nv7mTFv1xIlUrqeN2ri1teXMRzuRjidlMyvjf3
- XnFobQ3AwjKJ6BDt+CTKOWVjbMP+ZYVffI5yxx8rkCJojMY5gXNcFrFpYPdkFFR0mOUx
- v/4r71flk66nJh/lM0Z9dw5Gcgj73kN4bEqXd22CnymNznwlkJ+T+/Oi07CM+iqXBBXw
- 4uEjtPWZd95kZPaz39ZIbXUlR0jNuv+47hSKia9oUpGD2/uP12u6DxZ70Jn6dnW1yTAr
- ssEg==
-X-Gm-Message-State: APjAAAWRTAik1pgd7KAn5rP0DVpIK2+0QdyR7GjBWDO9KjgHJAEqnTtv
- jfY0/TvrqKCaEalrjS2C5LO4sFKb9PtYpi3Qd7UuYg==
-X-Google-Smtp-Source: APXvYqw/Xcz8YEkW7c16WutFz4OG+fG7nzQepXTdu5rISugNjVPZixJ25wf4N8W5VEdP6M5uStDXYPOJ2/RtGw9KvNQ=
-X-Received: by 2002:a9d:7f12:: with SMTP id j18mr13025700otq.221.1573315175828; 
- Sat, 09 Nov 2019 07:59:35 -0800 (PST)
-MIME-Version: 1.0
-References: <20191108194758.17813-1-palmer@dabbelt.com>
- <20191108194758.17813-2-palmer@dabbelt.com>
-In-Reply-To: <20191108194758.17813-2-palmer@dabbelt.com>
-From: Peter Maydell <peter.maydell@linaro.org>
-Date: Sat, 9 Nov 2019 15:59:24 +0000
-Message-ID: <CAFEAcA_3jgn1WrX2wpBd+sCYe=nNaqA2POvaZkj-NsSyT2N9bQ@mail.gmail.com>
-Subject: Re: [PATCH v2 1/3] device_tree: Add a helper function for string
- arrays
-To: Palmer Dabbelt <palmer@dabbelt.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>,
- QEMU Developers <qemu-devel@nongnu.org>, 
- David Gibson <david@gibson.dropbear.id.au>,
+ (envelope-from <dgibson@ozlabs.org>) id 1iTuUA-0004lv-Jk
+ for qemu-riscv@nongnu.org; Sun, 10 Nov 2019 16:11:03 -0500
+Received: from bilbo.ozlabs.org ([2401:3900:2:1::2]:35913 helo=ozlabs.org)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <dgibson@ozlabs.org>)
+ id 1iTuU6-0004U7-JB; Sun, 10 Nov 2019 16:10:59 -0500
+Received: by ozlabs.org (Postfix, from userid 1007)
+ id 47B69g4d0Vz9sNx; Mon, 11 Nov 2019 08:10:47 +1100 (AEDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=gibson.dropbear.id.au; s=201602; t=1573420247;
+ bh=v5qDauUW5khZHryv3daXxIa4v7785PoQZ+Oopx4R+9M=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=g2d7WLEbUvvJd0WQk2hmTLsivIPdN1ibC41UUb+qVE89JCS8n4VSNOeQ9bFxTP8S8
+ NuxOF3aITwuQmOX1VmPoosq/RQAz1dP/KBL9dNMcx+bhZcjZD629Kkl8CB3R+liOVQ
+ 7iloJzmcRSxWPXkHsXuQK21ZylP94TyCxK2q2fOw=
+Date: Sun, 10 Nov 2019 19:47:23 +0000
+From: David Gibson <david@gibson.dropbear.id.au>
+To: Peter Maydell <peter.maydell@linaro.org>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ QEMU Developers <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
+Subject: Re: [PATCH v2 2/3] ARM/virt: Use fdt_setprop_strings()
+Message-ID: <20191110194723.GS2461@umbus.Home>
+References: <20191108194758.17813-1-palmer@dabbelt.com>
+ <20191108194758.17813-3-palmer@dabbelt.com>
+ <CAFEAcA_Lj2SmxMTEN06+FxwQrkuR80Vw5=Dkh1achFUySSFAxA@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature"; boundary="A3RWl4qWgABmkY4K"
+Content-Disposition: inline
+In-Reply-To: <CAFEAcA_Lj2SmxMTEN06+FxwQrkuR80Vw5=Dkh1achFUySSFAxA@mail.gmail.com>
+User-Agent: Mutt/1.12.1 (2019-06-15)
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::342
+X-Received-From: 2401:3900:2:1::2
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -69,42 +53,79 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 09 Nov 2019 15:59:39 -0000
+X-List-Received-Date: Sun, 10 Nov 2019 21:11:05 -0000
 
-On Fri, 8 Nov 2019 at 19:48, Palmer Dabbelt <palmer@dabbelt.com> wrote:
->
-> The device tree format allows for arrays of strings, which are encoded
-> with '\0's inside regular strings.  These are ugly to represent in C, so
-> the helper function represents them as strings with internal '\0's that
-> are terminated with a double '\0'.  In other words, the array
-> ["string1", "string2"] is represeted as "string1\0string2\0".
->
-> The DTB generated by this function is accepted by DTC and produces an
-> array of strings, but I can't find any explicit line in the DT
-> specification that defines how these are encoded.
 
-> +/*
-> + * This uses a particularly odd encoding: "strings" is a list of strings that
-> + * must be terminated by two back-to-back '\0' characters.
-> + */
-> +int qemu_fdt_setprop_strings(void *fdt, const char *node_path,
-> +                             const char *property, const char *strings);
+--A3RWl4qWgABmkY4K
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-The clean API for this would be to use varargs so you could write
+On Sat, Nov 09, 2019 at 03:56:21PM +0000, Peter Maydell wrote:
+> On Fri, 8 Nov 2019 at 19:48, Palmer Dabbelt <palmer@dabbelt.com> wrote:
+> >
+> > This new helper function encodes the idiom used by the ARM virt board to
+> > set a string array.  I don't currently have a working ARM userspace, so=
+ I haven't tested
+> > this, but I made the helper function because I wanted to use it for the
+> > RISC-V virt board where I have tested it.
+> >
+> > Signed-off-by: Palmer Dabbelt <palmer@dabbelt.com>
+> > ---
+> >  hw/arm/virt.c | 5 ++---
+> >  1 file changed, 2 insertions(+), 3 deletions(-)
+> >
+> > diff --git a/hw/arm/virt.c b/hw/arm/virt.c
+> > index d4bedc2607..4dc00f54d5 100644
+> > --- a/hw/arm/virt.c
+> > +++ b/hw/arm/virt.c
+> > @@ -304,9 +304,8 @@ static void fdt_add_timer_nodes(const VirtMachineSt=
+ate *vms)
+> >
+> >      armcpu =3D ARM_CPU(qemu_get_cpu(0));
+> >      if (arm_feature(&armcpu->env, ARM_FEATURE_V8)) {
+> > -        const char compat[] =3D "arm,armv8-timer\0arm,armv7-timer";
+> > -        qemu_fdt_setprop(vms->fdt, "/timer", "compatible",
+> > -                         compat, sizeof(compat));
+> > +        qemu_fdt_setprop_strings(vms->fdt, "/timer", "compatible",
+> > +                                 "arm,armv8-timer\0arm,armv7-timer\0");
+> >      } else {
+>=20
+>=20
+> This seems to be changing the property we put in -- in
+> the old code it is 'foo\0bar\0', but in the new code
+> there will end up being two \0 at the end: 'foo\0bar\0\0'.
 
-qemu_fdt_setprop_stringlist(fdt, node, prop, "arm,armv8-timer",
-                            "arm,armv7-timer");
+In fact it's not because the setprop_strings() helper just uses the
+\0\0 to detect the end, but truncates what it actually puts into the
+dtb at the first \0.  But I agree this is confusing enough not to
+really be an improvement over the original version.
 
-and have it do the assembly into the encoding that fdt expects.
-That would require us to do a bit of allocation-and-freeing
-to assemble the string, of course, but then we only do fdt
-creation at startup.
+--=20
+David Gibson			| I'll have my music baroque, and my code
+david AT gibson.dropbear.id.au	| minimalist, thank you.  NOT _the_ _other_
+				| _way_ _around_!
+http://www.ozlabs.org/~dgibson
 
-NB: I think that this is a good idea but not-for-4.2 material,
-so if you wanted your sifive board change to go into 4.2 you
-should probably start with the simple approach and leave the
-refactoring for the next release cycle.
+--A3RWl4qWgABmkY4K
+Content-Type: application/pgp-signature; name="signature.asc"
 
-thanks
--- PMM
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEEdfRlhq5hpmzETofcbDjKyiDZs5IFAl3IaUsACgkQbDjKyiDZ
+s5JNiQ//dQzJ3b9Z0jnIoeHqf7B+FFJvza+sCqMD0cN8MgVEA8az8w7jnDOpV8he
+Ui10nBm4fQAFWGPMVnz2pXDi8FZjzR7+ZRgWS1hgdEbKz3nck6724bZ01NLUm1lJ
+kVzSg+xKykkzFj2ez/D46FE2tmjhGic1UyaE4ScjdbsbJNZ5MQ+CWxdHeVVQ4pYb
+HgYR6JOxaRyqaZaTOt2xToUjTlwrbDWdwDpvrKbwRMEAAOXOosWLKBgHjkorEVEP
+MeX6GgUVXqt1AWhATKdw//G36sqOcGA0zXAK1cfacaDYN0kEOjyFYxpAhzBjLT1N
+lRMwfa3sOKggMuK35/XPiiN8/l/tK5haDYvVddgGdIyU1pYbjkwa0ocGqsKgJVtO
+RmN53IsaE4hEQywIGRu27PFy1QXw6KFmdlLo56GhpRkxCnFH3BeKZpo/oFHnXmPi
+81c0c4NQCQzpRMq4itJBF6ewyA8jw3BVA6cUuFFVrGb131MUwHt29Wke4lRj0MjO
+9imh1z84dvgs/g0aQsnKv+cv3znOcr7TSEq8o6UnhoYbv5rkXk69ftAnsAggHEN7
+M9DrbESEjY8Ju6tShcyKFaFcx/XvM2z3b74MhNuXVLmaxb5rLGIWNCwACMVksXzb
+25Db/m7JV+gv7Q6Mx/afvbEpFWzlGu0diWi0iru1FreMHMIUVvs=
+=E/uG
+-----END PGP SIGNATURE-----
+
+--A3RWl4qWgABmkY4K--
 
