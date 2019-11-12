@@ -1,45 +1,45 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iUWWP-0003sC-9m
-	for mharc-qemu-riscv@gnu.org; Tue, 12 Nov 2019 08:47:53 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:52172)
+	id 1iUYAh-0007dP-Hr
+	for mharc-qemu-riscv@gnu.org; Tue, 12 Nov 2019 10:33:35 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:45410)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <cohuck@redhat.com>) id 1iUWWM-0003qH-OR
- for qemu-riscv@nongnu.org; Tue, 12 Nov 2019 08:47:51 -0500
+ (envelope-from <vsementsov@virtuozzo.com>) id 1iUYAd-0007Zm-U9
+ for qemu-riscv@nongnu.org; Tue, 12 Nov 2019 10:33:33 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <cohuck@redhat.com>) id 1iUWWK-00064V-PD
- for qemu-riscv@nongnu.org; Tue, 12 Nov 2019 08:47:50 -0500
-Received: from us-smtp-2.mimecast.com ([205.139.110.61]:41754
- helo=us-smtp-delivery-1.mimecast.com)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <cohuck@redhat.com>) id 1iUWWG-0005qI-Mw
- for qemu-riscv@nongnu.org; Tue, 12 Nov 2019 08:47:46 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1573566454;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=RYLIFYQlGm9Ki6YHiQ6cr/ujzB2VBpC1BfYM0Iim6bA=;
- b=T5gs3IXM0rIlCcCwqVoTT3fxfphT9IDzAu5lpjrKz1S/Ont/MGqPVSQcjjX0cfoeZbDVG3
- +OAETxwth7WuECnYXEmL9ike/D2ISd6i84TDiy1ohTfQps1c+95XtM04U3b2YJWBghw9bU
- 9HIdadj1fy1s+Ip19xWOTLQm365Rc+4=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-274-zlx4a0vzMP2Ou6GrLn4HXA-1; Tue, 12 Nov 2019 08:47:31 -0500
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
- [10.5.11.12])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 2DF3385EE6D;
- Tue, 12 Nov 2019 13:47:27 +0000 (UTC)
-Received: from gondolin (dhcp-192-218.str.redhat.com [10.33.192.218])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 4CE076106A;
- Tue, 12 Nov 2019 13:46:40 +0000 (UTC)
-Date: Tue, 12 Nov 2019 14:46:38 +0100
-From: Cornelia Huck <cohuck@redhat.com>
-To: =?UTF-8?B?TWFyYy1BbmRyw6k=?= Lureau <marcandre.lureau@redhat.com>
-Cc: Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>,
- "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, "armbru@redhat.com"
+ (envelope-from <vsementsov@virtuozzo.com>) id 1iUYAc-0000RT-7g
+ for qemu-riscv@nongnu.org; Tue, 12 Nov 2019 10:33:31 -0500
+Received: from mail-eopbgr150137.outbound.protection.outlook.com
+ ([40.107.15.137]:30978 helo=EUR01-DB5-obe.outbound.protection.outlook.com)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <vsementsov@virtuozzo.com>)
+ id 1iUYAb-0000Pr-GJ; Tue, 12 Nov 2019 10:33:30 -0500
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=ZApIedXP16mNJDhP6n2uTo24AD1xItw71zGZkfxyZuV+jtq/79L4/F57QJhiuysHX8TBITkC65NK3YxT6+Qz98ybpzncfHunocYigmO1nAcUs1SYbFihTO1PhThLoZyDvnU9wuwMRxAeVcmscXsYrAqIhX/NKqaUdByVDPNcjQB4OIlN/Cz5bpdjnKShriDNGq9bKxw/bZCVTfTO+4fWbZtEgdyLdo+/5h0MKDUx8oJ6PYuv8Wl9mqJcp6SKfSoYtOmx2YqGmO89e2SH57SClnAElFaN4v1zQQhddIUMijcphjDFyg/csZ5Z5CLoexnHPi3EsERiOm7hR7zWgfXewA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Mr1I00U8Qko9aiSrxAD29kOa0EzrdJipu7cN95byTqo=;
+ b=gbBnORg2AZ+Zaa26oQA9H78gNpP5yKIp/Fg7ss08rNq5TRpIBMZJFsJWABmuQEDD/0eYxr4JWvtebhqvYSaAvgx9qIUf441F7WKgjNC5wy4bBd9l3vHVSMLLKGN5S/FdaLs+j7qhh+LtgPLdy6VQI/euVgzPwFihRK1v3qEexYRSriz/lkiG8/1YGsd4vuihU3e4kSm9Y1EYwVrPXA63uErr0f9NROHeKi7kN2WcYzR1uaS1rALY+HzFfr9L687lt0rKvUtWw5RsjbphUO0xtfeT8Tis8rctpZe7GlKILz9qTn79hNUcV7HYu7mPuG62PK8sUzhDgiA3mFTCurt3YQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=virtuozzo.com; dmarc=pass action=none
+ header.from=virtuozzo.com; dkim=pass header.d=virtuozzo.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=virtuozzo.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Mr1I00U8Qko9aiSrxAD29kOa0EzrdJipu7cN95byTqo=;
+ b=Cr/tgkqVaNq8gB5xFzwyy5V2MWOEnCX8x14laXMX3J5s9AlFd3W8WJpDWpnSWW/UqJN/Iqq+ykYktgsaeeGiLNCeckT5dSpT1WVxTpB+gBo5dhOEiAq5V2Zi8qQVTvXPsuWCysdFfUIpEu62FdSYwBn+I1tiRPa8U+FZxtNQ45g=
+Received: from AM6PR08MB4423.eurprd08.prod.outlook.com (20.179.7.140) by
+ AM6PR08MB3063.eurprd08.prod.outlook.com (52.135.164.13) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.2430.25; Tue, 12 Nov 2019 15:33:26 +0000
+Received: from AM6PR08MB4423.eurprd08.prod.outlook.com
+ ([fe80::31bd:5bb3:377e:706f]) by AM6PR08MB4423.eurprd08.prod.outlook.com
+ ([fe80::31bd:5bb3:377e:706f%3]) with mapi id 15.20.2430.027; Tue, 12 Nov 2019
+ 15:33:26 +0000
+From: Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>
+To: Cornelia Huck <cohuck@redhat.com>, =?utf-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?=
+ <marcandre.lureau@redhat.com>
+CC: "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, "armbru@redhat.com"
  <armbru@redhat.com>, Gerd Hoffmann <kraxel@redhat.com>, "Gonglei (Arei)"
  <arei.gonglei@huawei.com>, Eduardo Habkost <ehabkost@redhat.com>, Igor
  Mammedov <imammedo@redhat.com>, Laurent Vivier <lvivier@redhat.com>, Amit
@@ -51,69 +51,106 @@ Cc: Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>,
  <ronniesahlberg@gmail.com>, Peter Lieven <pl@kamp.de>, Eric Blake
  <eblake@redhat.com>, Denis Lunev <den@virtuozzo.com>, Alberto Garcia
  <berto@igalia.com>, Jason Dillaman <dillaman@redhat.com>, Wen Congyang
- <wencongyang2@huawei.com>, Xie Changlong <xiechanglong.d@gmail.com>, Liu
- Yuan <namei.unix@gmail.com>, "Richard W.M. Jones" <rjones@redhat.com>, Jeff
- Cody <codyprime@gmail.com>, "Daniel P. =?UTF-8?B?QmVycmFuZ8Op?="
+ <wencongyang2@huawei.com>, Xie Changlong <xiechanglong.d@gmail.com>, Liu Yuan
+ <namei.unix@gmail.com>, "Richard W.M. Jones" <rjones@redhat.com>, Jeff Cody
+ <codyprime@gmail.com>, =?utf-8?B?RGFuaWVsIFAuIEJlcnJhbmfDqQ==?=
  <berrange@redhat.com>, Richard Henderson <rth@twiddle.net>, Greg Kurz
  <groug@kaod.org>, "Michael S. Tsirkin" <mst@redhat.com>, Marcel Apfelbaum
- <marcel.apfelbaum@gmail.com>, Beniamino Galvani <b.galvani@gmail.com>,
- Peter Maydell <peter.maydell@linaro.org>, =?UTF-8?B?Q8OpZHJpYw==?= Le
- Goater <clg@kaod.org>, Andrew Jeffery <andrew@aj.id.au>, Joel Stanley
- <joel@jms.id.au>, Andrew Baumann <Andrew.Baumann@microsoft.com>, Philippe
- =?UTF-8?B?TWF0aGlldS1EYXVkw6k=?= <philmd@redhat.com>, Antony Pavlov
- <antonynpavlov@gmail.com>, Jean-Christophe Dubois <jcd@tribudubois.net>,
- Peter Chubb <peter.chubb@nicta.com.au>, Subbaraya Sundeep
- <sundeep.lkml@gmail.com>, Eric Auger <eric.auger@redhat.com>, Alistair
- Francis <alistair@alistair23.me>, "Edgar E. Iglesias"
+ <marcel.apfelbaum@gmail.com>, Beniamino Galvani <b.galvani@gmail.com>, Peter
+ Maydell <peter.maydell@linaro.org>, =?utf-8?B?Q8OpZHJpYyBMZSBHb2F0ZXI=?=
+ <clg@kaod.org>, Andrew Jeffery <andrew@aj.id.au>, Joel Stanley
+ <joel@jms.id.au>, Andrew Baumann <Andrew.Baumann@microsoft.com>,
+ =?utf-8?B?UGhpbGlwcGUgTWF0aGlldS1EYXVkw6k=?= <philmd@redhat.com>, Antony
+ Pavlov <antonynpavlov@gmail.com>, Jean-Christophe Dubois
+ <jcd@tribudubois.net>, Peter Chubb <peter.chubb@nicta.com.au>, Subbaraya
+ Sundeep <sundeep.lkml@gmail.com>, Eric Auger <eric.auger@redhat.com>,
+ Alistair Francis <alistair@alistair23.me>, "Edgar E. Iglesias"
  <edgar.iglesias@gmail.com>, Stefano Stabellini <sstabellini@kernel.org>,
- Anthony Perard <anthony.perard@citrix.com>, Paul Durrant <paul@xen.org>,
- Paul Burton <pburton@wavecomp.com>, Aleksandar Rikalo
- <arikalo@wavecomp.com>, Chris Wulff <crwulff@gmail.com>, Marek Vasut
- <marex@denx.de>, David Gibson <david@gibson.dropbear.id.au>, Halil Pasic
- <pasic@linux.ibm.com>, Christian Borntraeger <borntraeger@de.ibm.com>,
- =?UTF-8?B?SGVydsOp?= Poussineau <hpoussin@reactos.org>, Xiao Guangrong
- <xiaoguangrong.eric@gmail.com>, Aurelien Jarno <aurelien@aurel32.net>,
- Aleksandar Markovic <amarkovic@wavecomp.com>, Mark Cave-Ayland
- <mark.cave-ayland@ilande.co.uk>, Jason Wang <jasowang@redhat.com>, Laszlo
- Ersek <lersek@redhat.com>, Yuval Shaia <yuval.shaia@oracle.com>, Palmer
- Dabbelt <palmer@sifive.com>, Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, David Hildenbrand
- <david@redhat.com>, Thomas Huth <thuth@redhat.com>, Eric Farman
- <farman@linux.ibm.com>, Matthew Rosato <mjrosato@linux.ibm.com>, Hannes
- Reinecke <hare@suse.com>, Michael Walle <michael@walle.cc>, Artyom
- Tarasenko <atar4qemu@gmail.com>, Stefan Berger <stefanb@linux.ibm.com>,
- Samuel Thibault <samuel.thibault@ens-lyon.org>, Alex Williamson
- <alex.williamson@redhat.com>, Tony Krowiak <akrowiak@linux.ibm.com>, Pierre
- Morel <pmorel@linux.ibm.com>, Michael Roth <mdroth@linux.vnet.ibm.com>,
- Hailiang Zhang <zhang.zhanghailiang@huawei.com>, Juan Quintela
- <quintela@redhat.com>, "Dr. David Alan Gilbert" <dgilbert@redhat.com>,
- Luigi Rizzo <rizzo@iet.unipi.it>, Giuseppe Lettieri
- <g.lettieri@iet.unipi.it>, Vincenzo Maffione <v.maffione@gmail.com>, Jan
- Kiszka <jan.kiszka@siemens.com>, Anthony Green <green@moxielogic.com>,
- Stafford Horne <shorne@gmail.com>, Guan Xuetao <gxt@mprc.pku.edu.cn>, Max
- Filippov <jcmvbkbc@gmail.com>, "qemu-block@nongnu.org"
- <qemu-block@nongnu.org>, "integration@gluster.org"
+ Anthony Perard <anthony.perard@citrix.com>, Paul Durrant <paul@xen.org>, Paul
+ Burton <pburton@wavecomp.com>, Aleksandar Rikalo <arikalo@wavecomp.com>,
+ Chris Wulff <crwulff@gmail.com>, Marek Vasut <marex@denx.de>, David Gibson
+ <david@gibson.dropbear.id.au>, Halil Pasic <pasic@linux.ibm.com>, Christian
+ Borntraeger <borntraeger@de.ibm.com>, =?utf-8?B?SGVydsOpIFBvdXNzaW5lYXU=?=
+ <hpoussin@reactos.org>, Xiao Guangrong <xiaoguangrong.eric@gmail.com>,
+ Aurelien Jarno <aurelien@aurel32.net>, Aleksandar Markovic
+ <amarkovic@wavecomp.com>, Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Jason Wang <jasowang@redhat.com>, Laszlo Ersek <lersek@redhat.com>, Yuval
+ Shaia <yuval.shaia@oracle.com>, Palmer Dabbelt <palmer@sifive.com>, Sagar
+ Karandikar <sagark@eecs.berkeley.edu>, Bastian Koppelmann
+ <kbastian@mail.uni-paderborn.de>, David Hildenbrand <david@redhat.com>,
+ Thomas Huth <thuth@redhat.com>, Eric Farman <farman@linux.ibm.com>, Matthew
+ Rosato <mjrosato@linux.ibm.com>, Hannes Reinecke <hare@suse.com>, Michael
+ Walle <michael@walle.cc>, Artyom Tarasenko <atar4qemu@gmail.com>, Stefan
+ Berger <stefanb@linux.ibm.com>, Samuel Thibault
+ <samuel.thibault@ens-lyon.org>, Alex Williamson <alex.williamson@redhat.com>, 
+ Tony Krowiak <akrowiak@linux.ibm.com>, Pierre Morel <pmorel@linux.ibm.com>,
+ Michael Roth <mdroth@linux.vnet.ibm.com>, Hailiang Zhang
+ <zhang.zhanghailiang@huawei.com>, Juan Quintela <quintela@redhat.com>, "Dr.
+ David Alan Gilbert" <dgilbert@redhat.com>, Luigi Rizzo <rizzo@iet.unipi.it>,
+ Giuseppe Lettieri <g.lettieri@iet.unipi.it>, Vincenzo Maffione
+ <v.maffione@gmail.com>, Jan Kiszka <jan.kiszka@siemens.com>, Anthony Green
+ <green@moxielogic.com>, Stafford Horne <shorne@gmail.com>, Guan Xuetao
+ <gxt@mprc.pku.edu.cn>, Max Filippov <jcmvbkbc@gmail.com>,
+ "qemu-block@nongnu.org" <qemu-block@nongnu.org>, "integration@gluster.org"
  <integration@gluster.org>, "sheepdog@lists.wpkg.org"
  <sheepdog@lists.wpkg.org>, "qemu-arm@nongnu.org" <qemu-arm@nongnu.org>,
  "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
  "qemu-ppc@nongnu.org" <qemu-ppc@nongnu.org>, "qemu-s390x@nongnu.org"
  <qemu-s390x@nongnu.org>, "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>
 Subject: Re: [RFC v5 000/126] error: auto propagated local_err
-Message-ID: <20191112144638.4baf555a.cohuck@redhat.com>
-In-Reply-To: <CAMxuvawy_TStTDXYoNF0zFjh6eOF1EUKe6BYAxUo_S9-cxMPSg@mail.gmail.com>
+Thread-Topic: [RFC v5 000/126] error: auto propagated local_err
+Thread-Index: AQHVgE3dlsNxBDOk202dFu/C5nZLkaeBxI0AgAAHj4CABfJ+AIAAHc+A
+Date: Tue, 12 Nov 2019 15:33:26 +0000
+Message-ID: <85a110a7-e29a-158a-4d62-cd1ce6d54fa3@virtuozzo.com>
 References: <20191011160552.22907-1-vsementsov@virtuozzo.com>
  <d1756cd0-8ad7-1e6c-b127-59ed24c5e512@virtuozzo.com>
  <CAMxuvawy_TStTDXYoNF0zFjh6eOF1EUKe6BYAxUo_S9-cxMPSg@mail.gmail.com>
-Organization: Red Hat GmbH
+ <20191112144638.4baf555a.cohuck@redhat.com>
+In-Reply-To: <20191112144638.4baf555a.cohuck@redhat.com>
+Accept-Language: ru-RU, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-clientproxiedby: HE1PR0701CA0050.eurprd07.prod.outlook.com
+ (2603:10a6:3:9e::18) To AM6PR08MB4423.eurprd08.prod.outlook.com
+ (2603:10a6:20b:bf::12)
+authentication-results: spf=none (sender IP is )
+ smtp.mailfrom=vsementsov@virtuozzo.com; 
+x-ms-exchange-messagesentrepresentingtype: 1
+x-tagtoolbar-keys: D20191112183319757
+x-originating-ip: [185.231.240.5]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: 676d1f68-8a7f-4a86-3f0a-08d76785a916
+x-ms-traffictypediagnostic: AM6PR08MB3063:
+x-ms-exchange-purlcount: 2
+x-ms-exchange-transport-forked: True
+x-microsoft-antispam-prvs: <AM6PR08MB306304F88DBBC0C92448FB2FC1770@AM6PR08MB3063.eurprd08.prod.outlook.com>
+x-ms-oob-tlc-oobclassifiers: OLM:10000;
+x-forefront-prvs: 021975AE46
+x-forefront-antispam-report: SFV:NSPM;
+ SFS:(10019020)(136003)(376002)(346002)(39840400004)(396003)(366004)(189003)(199004)(52314003)(6486002)(102836004)(76176011)(229853002)(966005)(36756003)(256004)(52116002)(478600001)(316002)(64756008)(6306002)(6512007)(6246003)(99286004)(6436002)(26005)(66446008)(2906002)(53546011)(6506007)(386003)(66946007)(66476007)(5660300002)(4326008)(66556008)(3846002)(6116002)(186003)(110136005)(8676002)(31686004)(81156014)(2616005)(8936002)(66066001)(81166006)(446003)(11346002)(476003)(486006)(25786009)(71190400001)(71200400001)(14454004)(7736002)(7406005)(7336002)(86362001)(7366002)(7416002)(54906003)(31696002)(7276002)(305945005);
+ DIR:OUT; SFP:1102; SCL:1; SRVR:AM6PR08MB3063;
+ H:AM6PR08MB4423.eurprd08.prod.outlook.com; FPR:; SPF:None; LANG:en;
+ PTR:InfoNoRecords; MX:1; A:1; 
+received-spf: None (protection.outlook.com: virtuozzo.com does not designate
+ permitted sender hosts)
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: N5+YpprYFcuCZjmPOKykd0VXNWAW+aU7m0QWFQuEjvvbRqqUdPMLMhkv92gs/aJMuxpCkM2EynObilNZSGQ1AfUTn+wsXly/eueT5CphADxtwcSJ2NL1UW52JGAIsZFvTO9dsbLdGL9RLtisCpo+zkFPxt/J3vkmgM6iPOEpPP/3RcVWUNCRwoua4v8rgqqz0FvOxFwvKBs03s74yXPCAwIz/ce8WWM7l/4GWnjiJoCW6S5lDe+mNotquja3Q8DOgbNy0ozo3JXrE+GurUGZMD91g3Jmq1DPep9wRcOLMO+BienuoIP5H+Myoz4bjQzDm3LmvZkbgqVUi3Er6sb09lWnphuDVUCtSAZ1gWAHN/6azo5rm/z+DLKMqc6btnl0XDc7/74S6ljx9uRNakeT/XglnwuUKZoreSLEjsY5f9PdLKhtc1Gc9xi55iIYnKSGYEqeUMUqHT5eVzMknbXiRMditk/2AYn0t3XpwpJF+Ik=
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <20869F922F716A438200D8FFB82DB9D6@eurprd08.prod.outlook.com>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
-X-MC-Unique: zlx4a0vzMP2Ou6GrLn4HXA-1
-X-Mimecast-Spam-Score: 0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
- [fuzzy]
-X-Received-From: 205.139.110.61
+X-OriginatorOrg: virtuozzo.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 676d1f68-8a7f-4a86-3f0a-08d76785a916
+X-MS-Exchange-CrossTenant-originalarrivaltime: 12 Nov 2019 15:33:26.2852 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 0bc7f26d-0264-416e-a6fc-8352af79c58f
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: NCgM3jfdLTzOf5I0i9e34nzdAPsCe/V3tGv6OHxk6v8te5wVTu3+JpTh5uLMfr8S5lZVZn4AiNGet6N/e+cHY4J+mGVvURr7pY/D3FPo+uY=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM6PR08MB3063
+X-detected-operating-system: by eggs.gnu.org: Windows 7 or 8 [fuzzy]
+X-Received-From: 40.107.15.137
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -125,52 +162,44 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Nov 2019 13:47:52 -0000
+X-List-Received-Date: Tue, 12 Nov 2019 15:33:33 -0000
 
-On Fri, 8 Nov 2019 22:57:25 +0400
-Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com> wrote:
-
-> Hi
->=20
-> On Fri, Nov 8, 2019 at 7:31 PM Vladimir Sementsov-Ogievskiy
-> <vsementsov@virtuozzo.com> wrote:
-> >
-> > Finally, what is the plan?
-> >
-> > Markus what do you think?
-> >
-> > Now a lot of patches are reviewed, but a lot of are not.
-> >
-> > Is there any hope that all patches will be reviewed? Should I resend th=
-e
-> > whole series, or may be reduce it to reviewed subsystems only? =20
->=20
-> I don't think we have well established rules for whole-tree cleanups
-> like this. In the past, several cleanup series got lost.
-
-Yes, it is always problematic if a series touches a lot of different
-subsystems.
-
->=20
-> It will take ages to get every subsystem maintainer to review the
-> patches. Most likely, since they are quite systematic, there isn't
-> much to say and it is easy to miss something that has some hidden
-> ramifications. Perhaps whole-tree cleanups should require at least 2
-> reviewers to bypass the subsytem maintainer review? But my past
-> experience with this kind of exercice doesn't encourage me, and
-> probably I am not the only one.
-
-It's not just the reviews; it's easy to miss compile problems on less
-mainstream architectures (and even easier to miss functional problems
-there, although they are probably less likely with automated rework.)
-CI can probably help, but that's something for the future.
-
-Anyway, I've now gotten around to that series; spotted one problem in
-s390x code, I think.
-
-One thing that's helpful for such a large series is a git branch that
-makes it easy to give the series a quick go. (You can use patchew, but
-it takes time before it gets all mails, so just pushing it somewhere
-and letting people know is a good idea anyway.)
-
+MTIuMTEuMjAxOSAxNjo0NiwgQ29ybmVsaWEgSHVjayB3cm90ZToNCj4gT24gRnJpLCA4IE5vdiAy
+MDE5IDIyOjU3OjI1ICswNDAwDQo+IE1hcmMtQW5kcsOpIEx1cmVhdSA8bWFyY2FuZHJlLmx1cmVh
+dUByZWRoYXQuY29tPiB3cm90ZToNCj4gDQo+PiBIaQ0KPj4NCj4+IE9uIEZyaSwgTm92IDgsIDIw
+MTkgYXQgNzozMSBQTSBWbGFkaW1pciBTZW1lbnRzb3YtT2dpZXZza2l5DQo+PiA8dnNlbWVudHNv
+dkB2aXJ0dW96em8uY29tPiB3cm90ZToNCj4+Pg0KPj4+IEZpbmFsbHksIHdoYXQgaXMgdGhlIHBs
+YW4/DQo+Pj4NCj4+PiBNYXJrdXMgd2hhdCBkbyB5b3UgdGhpbms/DQo+Pj4NCj4+PiBOb3cgYSBs
+b3Qgb2YgcGF0Y2hlcyBhcmUgcmV2aWV3ZWQsIGJ1dCBhIGxvdCBvZiBhcmUgbm90Lg0KPj4+DQo+
+Pj4gSXMgdGhlcmUgYW55IGhvcGUgdGhhdCBhbGwgcGF0Y2hlcyB3aWxsIGJlIHJldmlld2VkPyBT
+aG91bGQgSSByZXNlbmQgdGhlDQo+Pj4gd2hvbGUgc2VyaWVzLCBvciBtYXkgYmUgcmVkdWNlIGl0
+IHRvIHJldmlld2VkIHN1YnN5c3RlbXMgb25seT8NCj4+DQo+PiBJIGRvbid0IHRoaW5rIHdlIGhh
+dmUgd2VsbCBlc3RhYmxpc2hlZCBydWxlcyBmb3Igd2hvbGUtdHJlZSBjbGVhbnVwcw0KPj4gbGlr
+ZSB0aGlzLiBJbiB0aGUgcGFzdCwgc2V2ZXJhbCBjbGVhbnVwIHNlcmllcyBnb3QgbG9zdC4NCj4g
+DQo+IFllcywgaXQgaXMgYWx3YXlzIHByb2JsZW1hdGljIGlmIGEgc2VyaWVzIHRvdWNoZXMgYSBs
+b3Qgb2YgZGlmZmVyZW50DQo+IHN1YnN5c3RlbXMuDQo+IA0KPj4NCj4+IEl0IHdpbGwgdGFrZSBh
+Z2VzIHRvIGdldCBldmVyeSBzdWJzeXN0ZW0gbWFpbnRhaW5lciB0byByZXZpZXcgdGhlDQo+PiBw
+YXRjaGVzLiBNb3N0IGxpa2VseSwgc2luY2UgdGhleSBhcmUgcXVpdGUgc3lzdGVtYXRpYywgdGhl
+cmUgaXNuJ3QNCj4+IG11Y2ggdG8gc2F5IGFuZCBpdCBpcyBlYXN5IHRvIG1pc3Mgc29tZXRoaW5n
+IHRoYXQgaGFzIHNvbWUgaGlkZGVuDQo+PiByYW1pZmljYXRpb25zLiBQZXJoYXBzIHdob2xlLXRy
+ZWUgY2xlYW51cHMgc2hvdWxkIHJlcXVpcmUgYXQgbGVhc3QgMg0KPj4gcmV2aWV3ZXJzIHRvIGJ5
+cGFzcyB0aGUgc3Vic3l0ZW0gbWFpbnRhaW5lciByZXZpZXc/IEJ1dCBteSBwYXN0DQo+PiBleHBl
+cmllbmNlIHdpdGggdGhpcyBraW5kIG9mIGV4ZXJjaWNlIGRvZXNuJ3QgZW5jb3VyYWdlIG1lLCBh
+bmQNCj4+IHByb2JhYmx5IEkgYW0gbm90IHRoZSBvbmx5IG9uZS4NCj4gDQo+IEl0J3Mgbm90IGp1
+c3QgdGhlIHJldmlld3M7IGl0J3MgZWFzeSB0byBtaXNzIGNvbXBpbGUgcHJvYmxlbXMgb24gbGVz
+cw0KPiBtYWluc3RyZWFtIGFyY2hpdGVjdHVyZXMgKGFuZCBldmVuIGVhc2llciB0byBtaXNzIGZ1
+bmN0aW9uYWwgcHJvYmxlbXMNCj4gdGhlcmUsIGFsdGhvdWdoIHRoZXkgYXJlIHByb2JhYmx5IGxl
+c3MgbGlrZWx5IHdpdGggYXV0b21hdGVkIHJld29yay4pDQo+IENJIGNhbiBwcm9iYWJseSBoZWxw
+LCBidXQgdGhhdCdzIHNvbWV0aGluZyBmb3IgdGhlIGZ1dHVyZS4NCj4gDQo+IEFueXdheSwgSSd2
+ZSBub3cgZ290dGVuIGFyb3VuZCB0byB0aGF0IHNlcmllczsgc3BvdHRlZCBvbmUgcHJvYmxlbSBp
+bg0KPiBzMzkweCBjb2RlLCBJIHRoaW5rLg0KPiANCj4gT25lIHRoaW5nIHRoYXQncyBoZWxwZnVs
+IGZvciBzdWNoIGEgbGFyZ2Ugc2VyaWVzIGlzIGEgZ2l0IGJyYW5jaCB0aGF0DQo+IG1ha2VzIGl0
+IGVhc3kgdG8gZ2l2ZSB0aGUgc2VyaWVzIGEgcXVpY2sgZ28uIChZb3UgY2FuIHVzZSBwYXRjaGV3
+LCBidXQNCj4gaXQgdGFrZXMgdGltZSBiZWZvcmUgaXQgZ2V0cyBhbGwgbWFpbHMsIHNvIGp1c3Qg
+cHVzaGluZyBpdCBzb21ld2hlcmUNCj4gYW5kIGxldHRpbmcgcGVvcGxlIGtub3cgaXMgYSBnb29k
+IGlkZWEgYW55d2F5LikNCj4gDQoNClRoYW5rcyBmb3IgcmV2aWV3IQ0KDQpUaGUgc2VyaWVzIGFy
+ZSBwb3N0ZWQgaGVyZToNCg0KaHR0cHM6Ly9zcmMub3BlbnZ6Lm9yZy91c2Vycy92c2VtZW50c292
+L3JlcG9zL3FlbXUvYnJvd3NlDQoNCmh0dHBzOi8vc3JjLm9wZW52ei5vcmcvc2NtL352c2VtZW50
+c292L3FlbXUuZ2l0ICN0YWcgdXAtYXV0by1sb2NhbC1lcnItdjUNCg0KDQotLSANCkJlc3QgcmVn
+YXJkcywNClZsYWRpbWlyDQo=
 
