@@ -1,67 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iVTQJ-00060G-I4
+	id 1iVTQJ-00060f-Ur
 	for mharc-qemu-riscv@gnu.org; Thu, 14 Nov 2019 23:41:31 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49632)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49622)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <palmer@dabbelt.com>) id 1iVTQH-0005zt-LX
+ (envelope-from <palmer@dabbelt.com>) id 1iVTQH-0005zq-CN
  for qemu-riscv@nongnu.org; Thu, 14 Nov 2019 23:41:30 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmer@dabbelt.com>) id 1iVTQG-00084i-NV
+ (envelope-from <palmer@dabbelt.com>) id 1iVTQG-00084L-4j
  for qemu-riscv@nongnu.org; Thu, 14 Nov 2019 23:41:29 -0500
-Received: from mail-pg1-x529.google.com ([2607:f8b0:4864:20::529]:39841)
+Received: from mail-pf1-x435.google.com ([2607:f8b0:4864:20::435]:43193)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1iVTQG-00084H-Iv
+ (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1iVTQF-00083H-Qf
  for qemu-riscv@nongnu.org; Thu, 14 Nov 2019 23:41:28 -0500
-Received: by mail-pg1-x529.google.com with SMTP id 29so5198296pgm.6
- for <qemu-riscv@nongnu.org>; Thu, 14 Nov 2019 20:41:28 -0800 (PST)
+Received: by mail-pf1-x435.google.com with SMTP id 3so5782024pfb.10
+ for <qemu-riscv@nongnu.org>; Thu, 14 Nov 2019 20:41:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=dabbelt-com.20150623.gappssmtp.com; s=20150623;
- h=subject:date:message-id:in-reply-to:references:mime-version
- :content-transfer-encoding:cc:from:to;
- bh=OzEoao2IwUVlnSm2tLOqOqfLN0Byl7NdWouaeEHTbz8=;
- b=YtEUxre54I2H3ekSyai7tTjcbmebsXNZrIAv+n6Z3tleuJouK7s3pMaa18Tx6TJZVH
- rqdhOqe3K99p6PiVOhgytj216zVFNK2he3GRT+vX/3LrwmHxr61aFITSopLi03DAKNey
- 3ldy0KgcFEhrfDWsUJ08rrAyuRCEs8T/iRwg++S83G1C82b6jtugn85iQMk/W0AlN6Sd
- KC1MXpmKGuygrBMGSMMCEj3im9V7DppOZMpiiu6WV/Ntuff/3sIrPyd3yX67rDPkaDdg
- UposlhaZmCjixPmQmpCNLHaUVmMbs7ED7jDGfGWotx8PyNKufwZAQG+wdZ64auwf98iM
- JPuw==
+ h=subject:date:message-id:mime-version:content-transfer-encoding:cc
+ :from:to; bh=0C617mmsq2xf+2uJYBTRpKRhyUaY9HAmVlh/3X3L69U=;
+ b=wHKgRAPen3UX4wvMstAiUZvXonrb5zPTq51DYz5N37NP+zP9ktFGku2ZQV/8k9u0xK
+ CYJtzcp4QJ5/0KoKFCIQuyZuJzei3W4R5MwS8VMZ6us1wlSxMdtcjsp9E+dWsksS3xxN
+ LAqboMuNjtegfioU5EX+CQZsO8bDwijjNfwdqC6zrf7slPyGT719gc6FlnD6jvSi4R/R
+ KlICKh+23pHGLW8vK6/aMFk1oE5c0OEFnUFRgCEHIwy/UdSSOcdMqOfhNxWoaLATyyJB
+ K3xUb4AJsj8m1Ue+oWK5v+94nhGwUaNLS9uZD4T6cB28XThiWxzThLhBlHs0Qh+UTqQm
+ 0sKQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding:cc:from:to;
- bh=OzEoao2IwUVlnSm2tLOqOqfLN0Byl7NdWouaeEHTbz8=;
- b=hqdeO3v9pFNDa/ALGc/V9c1ke705IVHy+3bD2YpbYzzNpKuxOwOTsd/QunnaJFRAaB
- e5+rcvHcr/AXk6Gz7FZ0GkZRxbc0yn4zKVdj+dtM/YvWaPyIuLiFmWlqewpbIQsExdTg
- kQRXGMY8HU7dmXJcpZX6p1XSYbj/f0Ad+D4IamNeQvfvKmriZV+KldkkFizW60sPhqY0
- jP/G1qlsz1DWJDOaE8n4pohtQOjhSNlK/6D0wLDERriiiF+6BxIcjdpyRKFsDCnlz+bK
- I61ZwY+GPDTuPOYaAg/RZ52+Kny9XzEM2iWTcRFxQ/C4GOBs0D4e6Vojc885H2eNSNEh
- 8ROA==
-X-Gm-Message-State: APjAAAV75GgV1LngX70HF5KwCoKuvv3x2aecG4XFYpXzMkTp/ArbX1rm
- ymSupO+iq5OWbLuAaWMxEJWb/iW3PSk=
-X-Google-Smtp-Source: APXvYqw6RvrDK8qlNn1ESpbD2e3Tj8Arj2xjs0SF6ZWTlrhDJ7sIYvp2BMGrnup4RX8Y1y09H8TSsg==
-X-Received: by 2002:a17:90a:a00d:: with SMTP id
- q13mr16931431pjp.106.1573792887135; 
- Thu, 14 Nov 2019 20:41:27 -0800 (PST)
+ h=x-gm-message-state:subject:date:message-id:mime-version
+ :content-transfer-encoding:cc:from:to;
+ bh=0C617mmsq2xf+2uJYBTRpKRhyUaY9HAmVlh/3X3L69U=;
+ b=p1hTFcskf1YN8GJABqsvff0hn8Mt1SfMKZjEaW5lwpamrx0Z1dD1Dk8TA9EnrRfgk/
+ L49n3N3QEOWkZL12LRu6ecTB0yumz3R7Rmt8AjYDIBWuM0f6VCO4TAOqL0eHvnRR2QcX
+ H2952aTTZ1cg9CX+50LwJi63coRn89mMGGoqn3ZEjcn4rif19tryC0pOkBj4VQJfemne
+ 72wwfcoqfcZZKzcdm5HFxPhr530zgzYls2Fb4Kgq0sFU9XSfkGwW4+FJ/JTgSDBggRtg
+ KK8HDn7kkrtgHMmkpjKfK9wfxuELRWbRvb9KCgTIBA934E02gGByi8IFnDXOEaKfkBvo
+ dJaA==
+X-Gm-Message-State: APjAAAXUT2K67dF57lcw3UHOhW8uIJM9+R+Da/rkXW+KvYDFKLwZb0uR
+ hufEW+1G0kQCF2k/XPnFz+uGGrciJl8=
+X-Google-Smtp-Source: APXvYqwvohUM2x80jAsoDLe7GKOIQqj6Ee47LfxlP4a1UUcIrZ6x4a8LkJAEhu+jnGFKROo/emZE0Q==
+X-Received: by 2002:a63:2057:: with SMTP id r23mr14902539pgm.274.1573792885494; 
+ Thu, 14 Nov 2019 20:41:25 -0800 (PST)
 Received: from localhost (c-67-161-15-180.hsd1.ca.comcast.net. [67.161.15.180])
- by smtp.gmail.com with ESMTPSA id a12sm9419246pfk.188.2019.11.14.20.41.26
+ by smtp.gmail.com with ESMTPSA id b137sm8216706pga.91.2019.11.14.20.41.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 14 Nov 2019 20:41:26 -0800 (PST)
-Subject: [PULL 1/4] remove unnecessary ifdef TARGET_RISCV64
-Date: Thu, 14 Nov 2019 20:41:01 -0800
-Message-Id: <20191115044104.4197-2-palmer@dabbelt.com>
+ Thu, 14 Nov 2019 20:41:24 -0800 (PST)
+Subject: [PULL] RISC-V Fixes for 4.2-rc2
+Date: Thu, 14 Nov 2019 20:41:00 -0800
+Message-Id: <20191115044104.4197-1-palmer@dabbelt.com>
 X-Mailer: git-send-email 2.21.0
-In-Reply-To: <20191115044104.4197-1-palmer@dabbelt.com>
-References: <20191115044104.4197-1-palmer@dabbelt.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Cc: qemu-riscv@nongnu.org,       qemu-devel@nongnu.org,
- "hiroyuki.obinata" <hiroyuki.obinata@gmail.com>,
- Palmer Dabbelt <palmer@sifive.com>
+Cc: qemu-riscv@nongnu.org,       qemu-devel@nongnu.org
 From: Palmer Dabbelt <palmer@dabbelt.com>
 To: Peter Maydell <peter.maydell@linaro.org>
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::529
+X-Received-From: 2607:f8b0:4864:20::435
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -75,33 +69,49 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Fri, 15 Nov 2019 04:41:30 -0000
 
-From: "hiroyuki.obinata" <hiroyuki.obinata@gmail.com>
+The following changes since commit aa464db69b40b4b695be31085e6d2f1e90956c89:
 
-Signed-off-by: Hiroyuki Obinata <hiroyuki.obinata@gmail.com>
-Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
----
- target/riscv/translate.c | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
+  Update version for v4.2.0-rc1 release (2019-11-12 18:40:02 +0000)
 
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index b26533d4fd78..ab6a891dc381 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -64,12 +64,10 @@ static const int tcg_memop_lookup[8] = {
-     [0] = MO_SB,
-     [1] = MO_TESW,
-     [2] = MO_TESL,
-+    [3] = MO_TEQ,
-     [4] = MO_UB,
-     [5] = MO_TEUW,
--#ifdef TARGET_RISCV64
--    [3] = MO_TEQ,
-     [6] = MO_TEUL,
--#endif
- };
- #endif
- 
--- 
-2.21.0
+are available in the Git repository at:
+
+  git@github.com:palmer-dabbelt/qemu.git tags/riscv-for-master-4.2-rc2
+
+for you to fetch changes up to 6911fde41006b2afe3510755c4cff259ca56c1d9:
+
+  riscv/virt: Increase flash size (2019-11-14 09:53:28 -0800)
+
+----------------------------------------------------------------
+RISC-V Fixes for 4.2-rc2
+
+This contains a handful of patches that I'd like to target for 4.2:
+
+* OpenSBI upgrade to 0.5
+* Increase in the flash size of the virt board.
+* A non-functional cleanup.
+* A cleanup to our MIP handling that avoids atomics.
+
+This passes "make check" and boots OpenEmbedded for me.
+
+----------------------------------------------------------------
+Alistair Francis (3):
+      target/riscv: Remove atomic accesses to MIP CSR
+      opensbi: Upgrade from v0.4 to v0.5
+      riscv/virt: Increase flash size
+
+hiroyuki.obinata (1):
+      remove unnecessary ifdef TARGET_RISCV64
+
+ hw/riscv/virt.c                              |   2 +-
+ pc-bios/opensbi-riscv32-virt-fw_jump.bin     | Bin 36888 -> 40984 bytes
+ pc-bios/opensbi-riscv64-sifive_u-fw_jump.bin | Bin 45064 -> 49160 bytes
+ pc-bios/opensbi-riscv64-virt-fw_jump.bin     | Bin 40968 -> 45064 bytes
+ roms/opensbi                                 |   2 +-
+ target/riscv/cpu.c                           |   5 ++-
+ target/riscv/cpu.h                           |   9 -----
+ target/riscv/cpu_helper.c                    |  48 ++++++++++-----------------
+ target/riscv/csr.c                           |   2 +-
+ target/riscv/translate.c                     |   4 +--
+ 10 files changed, 24 insertions(+), 48 deletions(-)
 
 
