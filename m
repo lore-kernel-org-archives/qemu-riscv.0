@@ -1,61 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iVTQJ-00060f-Ur
-	for mharc-qemu-riscv@gnu.org; Thu, 14 Nov 2019 23:41:31 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49622)
+	id 1iVTQN-00067W-QR
+	for mharc-qemu-riscv@gnu.org; Thu, 14 Nov 2019 23:41:35 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49665)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <palmer@dabbelt.com>) id 1iVTQH-0005zq-CN
- for qemu-riscv@nongnu.org; Thu, 14 Nov 2019 23:41:30 -0500
+ (envelope-from <palmer@dabbelt.com>) id 1iVTQJ-00060u-V2
+ for qemu-riscv@nongnu.org; Thu, 14 Nov 2019 23:41:33 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmer@dabbelt.com>) id 1iVTQG-00084L-4j
- for qemu-riscv@nongnu.org; Thu, 14 Nov 2019 23:41:29 -0500
-Received: from mail-pf1-x435.google.com ([2607:f8b0:4864:20::435]:43193)
+ (envelope-from <palmer@dabbelt.com>) id 1iVTQI-00085e-Ja
+ for qemu-riscv@nongnu.org; Thu, 14 Nov 2019 23:41:31 -0500
+Received: from mail-pf1-x441.google.com ([2607:f8b0:4864:20::441]:41738)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1iVTQF-00083H-Qf
- for qemu-riscv@nongnu.org; Thu, 14 Nov 2019 23:41:28 -0500
-Received: by mail-pf1-x435.google.com with SMTP id 3so5782024pfb.10
- for <qemu-riscv@nongnu.org>; Thu, 14 Nov 2019 20:41:27 -0800 (PST)
+ (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1iVTQI-00085K-Db
+ for qemu-riscv@nongnu.org; Thu, 14 Nov 2019 23:41:30 -0500
+Received: by mail-pf1-x441.google.com with SMTP id p26so5788855pfq.8
+ for <qemu-riscv@nongnu.org>; Thu, 14 Nov 2019 20:41:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=dabbelt-com.20150623.gappssmtp.com; s=20150623;
- h=subject:date:message-id:mime-version:content-transfer-encoding:cc
- :from:to; bh=0C617mmsq2xf+2uJYBTRpKRhyUaY9HAmVlh/3X3L69U=;
- b=wHKgRAPen3UX4wvMstAiUZvXonrb5zPTq51DYz5N37NP+zP9ktFGku2ZQV/8k9u0xK
- CYJtzcp4QJ5/0KoKFCIQuyZuJzei3W4R5MwS8VMZ6us1wlSxMdtcjsp9E+dWsksS3xxN
- LAqboMuNjtegfioU5EX+CQZsO8bDwijjNfwdqC6zrf7slPyGT719gc6FlnD6jvSi4R/R
- KlICKh+23pHGLW8vK6/aMFk1oE5c0OEFnUFRgCEHIwy/UdSSOcdMqOfhNxWoaLATyyJB
- K3xUb4AJsj8m1Ue+oWK5v+94nhGwUaNLS9uZD4T6cB28XThiWxzThLhBlHs0Qh+UTqQm
- 0sKQ==
+ h=subject:date:message-id:in-reply-to:references:mime-version
+ :content-transfer-encoding:cc:from:to;
+ bh=BDRz7F8WZuWovA+zwb21EWtUEg2HMx8lqlNygTR580E=;
+ b=XDFFDNZ20uGcvoeCSAFqRCYg+iMD7suGQ9t4gEXwrQdJ8RxgoTlDz/0mJJ8Z3/QjX9
+ xNpfZ0P+SOsd0fEOdcLJAZ5jGysTD970lW2beMHtvTBQcJbWRn225YsEvHL/zzfWqeKo
+ 6iULEEDUBqEgAT/qhEEA/XdvUnynNZxyAazGlBflkZSA/VMF8dv6SQievEFelCCGwkAq
+ o8nBSB0NLpCGjvvbHlJpfS87bzloypBgxmRItNFZG+FQk7Mo71EaiosmtyJhzU5XuzSe
+ TJvkKrUXwafhTS9hHfYTne52QKkuPZ+VqzlNUDzjoYSIOh0LHwgU3K2ri9gUjM3chHr0
+ RfHw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:date:message-id:mime-version
- :content-transfer-encoding:cc:from:to;
- bh=0C617mmsq2xf+2uJYBTRpKRhyUaY9HAmVlh/3X3L69U=;
- b=p1hTFcskf1YN8GJABqsvff0hn8Mt1SfMKZjEaW5lwpamrx0Z1dD1Dk8TA9EnrRfgk/
- L49n3N3QEOWkZL12LRu6ecTB0yumz3R7Rmt8AjYDIBWuM0f6VCO4TAOqL0eHvnRR2QcX
- H2952aTTZ1cg9CX+50LwJi63coRn89mMGGoqn3ZEjcn4rif19tryC0pOkBj4VQJfemne
- 72wwfcoqfcZZKzcdm5HFxPhr530zgzYls2Fb4Kgq0sFU9XSfkGwW4+FJ/JTgSDBggRtg
- KK8HDn7kkrtgHMmkpjKfK9wfxuELRWbRvb9KCgTIBA934E02gGByi8IFnDXOEaKfkBvo
- dJaA==
-X-Gm-Message-State: APjAAAXUT2K67dF57lcw3UHOhW8uIJM9+R+Da/rkXW+KvYDFKLwZb0uR
- hufEW+1G0kQCF2k/XPnFz+uGGrciJl8=
-X-Google-Smtp-Source: APXvYqwvohUM2x80jAsoDLe7GKOIQqj6Ee47LfxlP4a1UUcIrZ6x4a8LkJAEhu+jnGFKROo/emZE0Q==
-X-Received: by 2002:a63:2057:: with SMTP id r23mr14902539pgm.274.1573792885494; 
- Thu, 14 Nov 2019 20:41:25 -0800 (PST)
+ h=x-gm-message-state:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding:cc:from:to;
+ bh=BDRz7F8WZuWovA+zwb21EWtUEg2HMx8lqlNygTR580E=;
+ b=m8f5hkhOjF3fQhr74SsGEcJjeEGVe+YkN4NRoqjuj7VUkQpTW20jiwYJuIq5wCOypZ
+ 7R/9UmDbLcQAxW+NbDqKKC3DGH1vs9Jz22LacAJfoF5Pf84kCEc0MYRFbDd/AFOq0s7Q
+ lM24GYDaK64qA9nQoMIavQ5gLk5FCOYgsC51+eek5mHcwwAIE95bToZjE0MlX9YHZWts
+ oVskXAsCgqkJlkYick6RL1H0ErX/14Dm1OZ4u7tOzALLb4MCPojiT/+xUKbhLbsJvZoB
+ 1piu3Smq9C1ykuHB71PrgxgO2fIeKA2P4EQ0MgzYu8xsqO4nRg1bxor3Lr4hGa7CSZ0p
+ I5Gg==
+X-Gm-Message-State: APjAAAVZOQYWHD0o7DzBAPxXI/MQrYHgAg1yoXOGYdLS13B6Z/cAsER4
+ PU1nEd98YETaL4sbp7nJUhcg7Fide3A=
+X-Google-Smtp-Source: APXvYqwS6BlPymmpZsOvMaGNc5Nh6d6tU1tqyb9rIdi4gqOgLrr0sZEK36fxzsQm3X6s/H1i5VVy2w==
+X-Received: by 2002:a63:ec4b:: with SMTP id r11mr13922642pgj.147.1573792888617; 
+ Thu, 14 Nov 2019 20:41:28 -0800 (PST)
 Received: from localhost (c-67-161-15-180.hsd1.ca.comcast.net. [67.161.15.180])
- by smtp.gmail.com with ESMTPSA id b137sm8216706pga.91.2019.11.14.20.41.24
+ by smtp.gmail.com with ESMTPSA id a145sm9138943pfa.7.2019.11.14.20.41.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 14 Nov 2019 20:41:24 -0800 (PST)
-Subject: [PULL] RISC-V Fixes for 4.2-rc2
-Date: Thu, 14 Nov 2019 20:41:00 -0800
-Message-Id: <20191115044104.4197-1-palmer@dabbelt.com>
+ Thu, 14 Nov 2019 20:41:28 -0800 (PST)
+Subject: [PULL 2/4] target/riscv: Remove atomic accesses to MIP CSR
+Date: Thu, 14 Nov 2019 20:41:02 -0800
+Message-Id: <20191115044104.4197-3-palmer@dabbelt.com>
 X-Mailer: git-send-email 2.21.0
+In-Reply-To: <20191115044104.4197-1-palmer@dabbelt.com>
+References: <20191115044104.4197-1-palmer@dabbelt.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Cc: qemu-riscv@nongnu.org,       qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org,       qemu-devel@nongnu.org,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Richard Henderson <richard.henderson@linaro.org>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, Palmer Dabbelt <palmer@sifive.com>
 From: Palmer Dabbelt <palmer@dabbelt.com>
 To: Peter Maydell <peter.maydell@linaro.org>
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::435
+X-Received-From: 2607:f8b0:4864:20::441
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -67,51 +73,164 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Nov 2019 04:41:30 -0000
+X-List-Received-Date: Fri, 15 Nov 2019 04:41:33 -0000
 
-The following changes since commit aa464db69b40b4b695be31085e6d2f1e90956c89:
+From: Alistair Francis <alistair.francis@wdc.com>
 
-  Update version for v4.2.0-rc1 release (2019-11-12 18:40:02 +0000)
+Instead of relying on atomics to access the MIP register let's update
+our helper function to instead just lock the IO mutex thread before
+writing. This follows the same concept as used in PPC for handling
+interrupts
 
-are available in the Git repository at:
+Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Reviewed-by: Palmer Dabbelt <palmer@dabbelt.com>
+Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
+Signed-off-by: Palmer Dabbelt <palmer@dabbelt.com>
+---
+ target/riscv/cpu.c        |  5 ++--
+ target/riscv/cpu.h        |  9 --------
+ target/riscv/cpu_helper.c | 48 +++++++++++++++------------------------
+ target/riscv/csr.c        |  2 +-
+ 4 files changed, 21 insertions(+), 43 deletions(-)
 
-  git@github.com:palmer-dabbelt/qemu.git tags/riscv-for-master-4.2-rc2
-
-for you to fetch changes up to 6911fde41006b2afe3510755c4cff259ca56c1d9:
-
-  riscv/virt: Increase flash size (2019-11-14 09:53:28 -0800)
-
-----------------------------------------------------------------
-RISC-V Fixes for 4.2-rc2
-
-This contains a handful of patches that I'd like to target for 4.2:
-
-* OpenSBI upgrade to 0.5
-* Increase in the flash size of the virt board.
-* A non-functional cleanup.
-* A cleanup to our MIP handling that avoids atomics.
-
-This passes "make check" and boots OpenEmbedded for me.
-
-----------------------------------------------------------------
-Alistair Francis (3):
-      target/riscv: Remove atomic accesses to MIP CSR
-      opensbi: Upgrade from v0.4 to v0.5
-      riscv/virt: Increase flash size
-
-hiroyuki.obinata (1):
-      remove unnecessary ifdef TARGET_RISCV64
-
- hw/riscv/virt.c                              |   2 +-
- pc-bios/opensbi-riscv32-virt-fw_jump.bin     | Bin 36888 -> 40984 bytes
- pc-bios/opensbi-riscv64-sifive_u-fw_jump.bin | Bin 45064 -> 49160 bytes
- pc-bios/opensbi-riscv64-virt-fw_jump.bin     | Bin 40968 -> 45064 bytes
- roms/opensbi                                 |   2 +-
- target/riscv/cpu.c                           |   5 ++-
- target/riscv/cpu.h                           |   9 -----
- target/riscv/cpu_helper.c                    |  48 ++++++++++-----------------
- target/riscv/csr.c                           |   2 +-
- target/riscv/translate.c                     |   4 +--
- 10 files changed, 24 insertions(+), 48 deletions(-)
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 3939963b71ab..d37861a4305b 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -224,8 +224,7 @@ static void riscv_cpu_dump_state(CPUState *cs, FILE *f, int flags)
+ #ifndef CONFIG_USER_ONLY
+     qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mhartid ", env->mhartid);
+     qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mstatus ", env->mstatus);
+-    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mip     ",
+-                 (target_ulong)atomic_read(&env->mip));
++    qemu_fprintf(f, " %s 0x%x\n", "mip     ", env->mip);
+     qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mie     ", env->mie);
+     qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mideleg ", env->mideleg);
+     qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "medeleg ", env->medeleg);
+@@ -275,7 +274,7 @@ static bool riscv_cpu_has_work(CPUState *cs)
+      * Definition of the WFI instruction requires it to ignore the privilege
+      * mode and delegation registers, but respect individual enables
+      */
+-    return (atomic_read(&env->mip) & env->mie) != 0;
++    return (env->mip & env->mie) != 0;
+ #else
+     return true;
+ #endif
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 8c64c68538d8..e59343e13c02 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -121,15 +121,6 @@ struct CPURISCVState {
+     target_ulong mhartid;
+     target_ulong mstatus;
+ 
+-    /*
+-     * CAUTION! Unlike the rest of this struct, mip is accessed asynchonously
+-     * by I/O threads. It should be read with atomic_read. It should be updated
+-     * using riscv_cpu_update_mip with the iothread mutex held. The iothread
+-     * mutex must be held because mip must be consistent with the CPU inturrept
+-     * state. riscv_cpu_update_mip calls cpu_interrupt or cpu_reset_interrupt
+-     * wuth the invariant that CPU_INTERRUPT_HARD is set iff mip is non-zero.
+-     * mip is 32-bits to allow atomic_read on 32-bit hosts.
+-     */
+     uint32_t mip;
+     uint32_t miclaim;
+ 
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index f13131a51bde..767c8762ac42 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -19,6 +19,7 @@
+ 
+ #include "qemu/osdep.h"
+ #include "qemu/log.h"
++#include "qemu/main-loop.h"
+ #include "cpu.h"
+ #include "exec/exec-all.h"
+ #include "tcg-op.h"
+@@ -38,7 +39,7 @@ static int riscv_cpu_local_irq_pending(CPURISCVState *env)
+ {
+     target_ulong mstatus_mie = get_field(env->mstatus, MSTATUS_MIE);
+     target_ulong mstatus_sie = get_field(env->mstatus, MSTATUS_SIE);
+-    target_ulong pending = atomic_read(&env->mip) & env->mie;
++    target_ulong pending = env->mip & env->mie;
+     target_ulong mie = env->priv < PRV_M || (env->priv == PRV_M && mstatus_mie);
+     target_ulong sie = env->priv < PRV_S || (env->priv == PRV_S && mstatus_sie);
+     target_ulong irqs = (pending & ~env->mideleg & -mie) |
+@@ -92,42 +93,29 @@ int riscv_cpu_claim_interrupts(RISCVCPU *cpu, uint32_t interrupts)
+     }
+ }
+ 
+-struct CpuAsyncInfo {
+-    uint32_t new_mip;
+-};
+-
+-static void riscv_cpu_update_mip_irqs_async(CPUState *target_cpu_state,
+-                                            run_on_cpu_data data)
+-{
+-    struct CpuAsyncInfo *info = (struct CpuAsyncInfo *) data.host_ptr;
+-
+-    if (info->new_mip) {
+-        cpu_interrupt(target_cpu_state, CPU_INTERRUPT_HARD);
+-    } else {
+-        cpu_reset_interrupt(target_cpu_state, CPU_INTERRUPT_HARD);
+-    }
+-
+-    g_free(info);
+-}
+-
+ uint32_t riscv_cpu_update_mip(RISCVCPU *cpu, uint32_t mask, uint32_t value)
+ {
+     CPURISCVState *env = &cpu->env;
+     CPUState *cs = CPU(cpu);
+-    struct CpuAsyncInfo *info;
+-    uint32_t old, new, cmp = atomic_read(&env->mip);
++    uint32_t old = env->mip;
++    bool locked = false;
++
++    if (!qemu_mutex_iothread_locked()) {
++        locked = true;
++        qemu_mutex_lock_iothread();
++    }
+ 
+-    do {
+-        old = cmp;
+-        new = (old & ~mask) | (value & mask);
+-        cmp = atomic_cmpxchg(&env->mip, old, new);
+-    } while (old != cmp);
++    env->mip = (env->mip & ~mask) | (value & mask);
+ 
+-    info = g_new(struct CpuAsyncInfo, 1);
+-    info->new_mip = new;
++    if (env->mip) {
++        cpu_interrupt(cs, CPU_INTERRUPT_HARD);
++    } else {
++        cpu_reset_interrupt(cs, CPU_INTERRUPT_HARD);
++    }
+ 
+-    async_run_on_cpu(cs, riscv_cpu_update_mip_irqs_async,
+-                     RUN_ON_CPU_HOST_PTR(info));
++    if (locked) {
++        qemu_mutex_unlock_iothread();
++    }
+ 
+     return old;
+ }
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index 974c9c20b5f4..da02f9f0b177 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -579,7 +579,7 @@ static int rmw_mip(CPURISCVState *env, int csrno, target_ulong *ret_value,
+     if (mask) {
+         old_mip = riscv_cpu_update_mip(cpu, mask, (new_value & mask));
+     } else {
+-        old_mip = atomic_read(&env->mip);
++        old_mip = env->mip;
+     }
+ 
+     if (ret_value) {
+-- 
+2.21.0
 
 
