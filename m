@@ -1,61 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iUdi7-0005t0-S6
-	for mharc-qemu-riscv@gnu.org; Tue, 12 Nov 2019 16:28:27 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:33739)
+	id 1iVTQJ-00060G-I4
+	for mharc-qemu-riscv@gnu.org; Thu, 14 Nov 2019 23:41:31 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49632)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <alistair23@gmail.com>) id 1iUdi5-0005pP-3P
- for qemu-riscv@nongnu.org; Tue, 12 Nov 2019 16:28:26 -0500
+ (envelope-from <palmer@dabbelt.com>) id 1iVTQH-0005zt-LX
+ for qemu-riscv@nongnu.org; Thu, 14 Nov 2019 23:41:30 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1iUdi4-0008JA-3O
- for qemu-riscv@nongnu.org; Tue, 12 Nov 2019 16:28:25 -0500
-Received: from mail-lj1-x242.google.com ([2a00:1450:4864:20::242]:40879)
+ (envelope-from <palmer@dabbelt.com>) id 1iVTQG-00084i-NV
+ for qemu-riscv@nongnu.org; Thu, 14 Nov 2019 23:41:29 -0500
+Received: from mail-pg1-x529.google.com ([2607:f8b0:4864:20::529]:39841)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1iUdi2-0008H8-1x; Tue, 12 Nov 2019 16:28:22 -0500
-Received: by mail-lj1-x242.google.com with SMTP id q2so80011ljg.7;
- Tue, 12 Nov 2019 13:28:20 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=OkYIwG8iKsQTBiIO6UELEmwwXOJD4zlsIyx3im0h7cQ=;
- b=lg9QzQKr2PCiOwAY7GYPY+nyKufQXEAVBYLcntDQQHAWo+eMXuunk27kKfO3jbQqhb
- /lnDKUrsAjbGHV5NsTiF11ugZ54KH52iaxzVy/xLyGKbVu9liwLzsYG8xlkZNC0xX9Gs
- ScGGG9fEXNithZ3SQx9hew2dKCBcmfD5Ew9e+0MJMmHB/UKgVZAjU5adLkNoFna8HT1s
- 8Ur71g0NC4GGOU8KGzW1xG1ZPkN6XaDmgN67n4Q4a5k8JoN71CP0NUHs1jejJQetCqC0
- MArs4LiKHtLoIQ4wH4qXlful+8FZkcsRgJu9i+eNfEGlJ+xUM9Sj1CtWTGxfkhQFu4+E
- oYlA==
+ (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1iVTQG-00084H-Iv
+ for qemu-riscv@nongnu.org; Thu, 14 Nov 2019 23:41:28 -0500
+Received: by mail-pg1-x529.google.com with SMTP id 29so5198296pgm.6
+ for <qemu-riscv@nongnu.org>; Thu, 14 Nov 2019 20:41:28 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=dabbelt-com.20150623.gappssmtp.com; s=20150623;
+ h=subject:date:message-id:in-reply-to:references:mime-version
+ :content-transfer-encoding:cc:from:to;
+ bh=OzEoao2IwUVlnSm2tLOqOqfLN0Byl7NdWouaeEHTbz8=;
+ b=YtEUxre54I2H3ekSyai7tTjcbmebsXNZrIAv+n6Z3tleuJouK7s3pMaa18Tx6TJZVH
+ rqdhOqe3K99p6PiVOhgytj216zVFNK2he3GRT+vX/3LrwmHxr61aFITSopLi03DAKNey
+ 3ldy0KgcFEhrfDWsUJ08rrAyuRCEs8T/iRwg++S83G1C82b6jtugn85iQMk/W0AlN6Sd
+ KC1MXpmKGuygrBMGSMMCEj3im9V7DppOZMpiiu6WV/Ntuff/3sIrPyd3yX67rDPkaDdg
+ UposlhaZmCjixPmQmpCNLHaUVmMbs7ED7jDGfGWotx8PyNKufwZAQG+wdZ64auwf98iM
+ JPuw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=OkYIwG8iKsQTBiIO6UELEmwwXOJD4zlsIyx3im0h7cQ=;
- b=NktcUINfN5WoZk1TKCRR4iD4cvf5rFQTMqfydcVLKW6Jb4GWTMMa6gKOXlTto6NrA0
- wDTSu0A5+zKUudTcFfpm2yRor6kExfNvGUUZ8VifBQks+B5izRf/zAB6tOhj+7+u4g3Z
- ecRT0fidV/OCnZRdhwLb9NvgxJtbQzFyQLaxQGOkbIqr06iy/pTicQC3EtGDzZGAuFJm
- KiOyt5LP/zUeYW0x1eyz5coiNs2jupa9G0B+lcu4d0dR58IQDpfAELOomz6jU9FICRxv
- T1nWF4t3DifuI3Yi8pMa5UJZ5ebDBFGyV68MBEATHGqifHGCgmtWjgkzJdd/vSmMsWVU
- ENqw==
-X-Gm-Message-State: APjAAAUT3Vgkt2970Esk8EvKm84WTui3QjWpEVuARm887bASeDK1Y9Wx
- JCYTAQPrfeP5TCMT3xxc00zavrN6VUOcG5s7e9E=
-X-Google-Smtp-Source: APXvYqxy+dxpliykzlFUR/c/1ipzwKLRNcMO4rNgp/P+tVXUR3jZlnfggAFKO4xKmvOCCBF/R2EmXLmVWVJUbEdbkDM=
-X-Received: by 2002:a2e:b54d:: with SMTP id a13mr22015874ljn.4.1573594098974; 
- Tue, 12 Nov 2019 13:28:18 -0800 (PST)
+ h=x-gm-message-state:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding:cc:from:to;
+ bh=OzEoao2IwUVlnSm2tLOqOqfLN0Byl7NdWouaeEHTbz8=;
+ b=hqdeO3v9pFNDa/ALGc/V9c1ke705IVHy+3bD2YpbYzzNpKuxOwOTsd/QunnaJFRAaB
+ e5+rcvHcr/AXk6Gz7FZ0GkZRxbc0yn4zKVdj+dtM/YvWaPyIuLiFmWlqewpbIQsExdTg
+ kQRXGMY8HU7dmXJcpZX6p1XSYbj/f0Ad+D4IamNeQvfvKmriZV+KldkkFizW60sPhqY0
+ jP/G1qlsz1DWJDOaE8n4pohtQOjhSNlK/6D0wLDERriiiF+6BxIcjdpyRKFsDCnlz+bK
+ I61ZwY+GPDTuPOYaAg/RZ52+Kny9XzEM2iWTcRFxQ/C4GOBs0D4e6Vojc885H2eNSNEh
+ 8ROA==
+X-Gm-Message-State: APjAAAV75GgV1LngX70HF5KwCoKuvv3x2aecG4XFYpXzMkTp/ArbX1rm
+ ymSupO+iq5OWbLuAaWMxEJWb/iW3PSk=
+X-Google-Smtp-Source: APXvYqw6RvrDK8qlNn1ESpbD2e3Tj8Arj2xjs0SF6ZWTlrhDJ7sIYvp2BMGrnup4RX8Y1y09H8TSsg==
+X-Received: by 2002:a17:90a:a00d:: with SMTP id
+ q13mr16931431pjp.106.1573792887135; 
+ Thu, 14 Nov 2019 20:41:27 -0800 (PST)
+Received: from localhost (c-67-161-15-180.hsd1.ca.comcast.net. [67.161.15.180])
+ by smtp.gmail.com with ESMTPSA id a12sm9419246pfk.188.2019.11.14.20.41.26
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 14 Nov 2019 20:41:26 -0800 (PST)
+Subject: [PULL 1/4] remove unnecessary ifdef TARGET_RISCV64
+Date: Thu, 14 Nov 2019 20:41:01 -0800
+Message-Id: <20191115044104.4197-2-palmer@dabbelt.com>
+X-Mailer: git-send-email 2.21.0
+In-Reply-To: <20191115044104.4197-1-palmer@dabbelt.com>
+References: <20191115044104.4197-1-palmer@dabbelt.com>
 MIME-Version: 1.0
-References: <03c2f42b32fb4e304319c241122ae83584f085e0.1573087610.git.alistair.francis@wdc.com>
- <CAEUhbmWaT06GAdz=d-oVtMsM6bOWR23bZjicgBsJLUHqaVRH7g@mail.gmail.com>
-In-Reply-To: <CAEUhbmWaT06GAdz=d-oVtMsM6bOWR23bZjicgBsJLUHqaVRH7g@mail.gmail.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 12 Nov 2019 13:22:25 -0800
-Message-ID: <CAKmqyKPqRqqf0kpyTQ6HvMrCRztyMhRKfupLqXAaXyUkHnaydA@mail.gmail.com>
-Subject: Re: [PATCH for 4.2 v1 1/1] riscv/virt: Increase flash size
-To: Bin Meng <bmeng.cn@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>
-Cc: Alistair Francis <alistair.francis@wdc.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+Content-Transfer-Encoding: 8bit
+Cc: qemu-riscv@nongnu.org,       qemu-devel@nongnu.org,
+ "hiroyuki.obinata" <hiroyuki.obinata@gmail.com>,
  Palmer Dabbelt <palmer@sifive.com>
-Content-Type: text/plain; charset="UTF-8"
+From: Palmer Dabbelt <palmer@dabbelt.com>
+To: Peter Maydell <peter.maydell@linaro.org>
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::242
+X-Received-From: 2607:f8b0:4864:20::529
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -67,33 +73,35 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Nov 2019 21:28:26 -0000
+X-List-Received-Date: Fri, 15 Nov 2019 04:41:30 -0000
 
-On Mon, Nov 11, 2019 at 7:30 AM Bin Meng <bmeng.cn@gmail.com> wrote:
->
-> On Thu, Nov 7, 2019 at 8:54 AM Alistair Francis
-> <alistair.francis@wdc.com> wrote:
-> >
-> > Coreboot developers have requested that they have at least 32MB of flash
-> > to load binaries. We currently have 32MB of flash, but it is split in
-> > two to allow loading two flash binaries. Let's increase the flash size
-> > from 32MB to 64MB to ensure we have a single region that is 32MB.
-> >
-> > No QEMU release has include flash in the RISC-V virt machine, so this
-> > isn't a breaking change.
-> >
-> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> > ---
-> >  hw/riscv/virt.c | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> >
->
-> Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+From: "hiroyuki.obinata" <hiroyuki.obinata@gmail.com>
 
-Thanks!
+Signed-off-by: Hiroyuki Obinata <hiroyuki.obinata@gmail.com>
+Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
+---
+ target/riscv/translate.c | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
 
-Ping! I really want this in 4.2. Otherwise we are stuck with a
-compatibility issue.
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index b26533d4fd78..ab6a891dc381 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -64,12 +64,10 @@ static const int tcg_memop_lookup[8] = {
+     [0] = MO_SB,
+     [1] = MO_TESW,
+     [2] = MO_TESL,
++    [3] = MO_TEQ,
+     [4] = MO_UB,
+     [5] = MO_TEUW,
+-#ifdef TARGET_RISCV64
+-    [3] = MO_TEQ,
+     [6] = MO_TEUL,
+-#endif
+ };
+ #endif
+ 
+-- 
+2.21.0
 
-Alistair
 
