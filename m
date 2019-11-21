@@ -1,140 +1,68 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iXQ74-0002Wv-Sn
-	for mharc-qemu-riscv@gnu.org; Wed, 20 Nov 2019 08:33:42 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:36810)
+	id 1iXnVj-0007NI-CK
+	for mharc-qemu-riscv@gnu.org; Thu, 21 Nov 2019 09:32:44 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47230)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <kwolf@redhat.com>) id 1iXPoM-00027k-3o
- for qemu-riscv@nongnu.org; Wed, 20 Nov 2019 08:14:23 -0500
+ (envelope-from <palmerdabbelt@google.com>) id 1iXcOU-0004KK-Of
+ for qemu-riscv@nongnu.org; Wed, 20 Nov 2019 21:40:32 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <kwolf@redhat.com>) id 1iXPoK-0008AQ-4N
- for qemu-riscv@nongnu.org; Wed, 20 Nov 2019 08:14:21 -0500
-Received: from us-smtp-delivery-1.mimecast.com ([207.211.31.120]:56127
- helo=us-smtp-1.mimecast.com)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <kwolf@redhat.com>) id 1iXPoJ-00089G-Vv
- for qemu-riscv@nongnu.org; Wed, 20 Nov 2019 08:14:20 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1574255659;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=FPXFGLzziNWXlHtDlx+id3E16uwnVocjU9q+wnQ7Ym4=;
- b=dklurGm/7LUnexueoMxxcQrygijCTwfIJvZYLKHFm1hQEmFKOcszmhD/wdO+OX6BUepCf+
- BXhcHekTLc2wgpHFDfZ7VXDBXwJ+KigXqqmtBNOI5MRmg8Z7AgFLpWtsGi612eClJYnFPV
- rI5OwB43QGtKd1XEDYAiQYpw2dtk+9c=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-263-8D4dw5wwPgemGbK8SniO-Q-1; Wed, 20 Nov 2019 08:14:17 -0500
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
- [10.5.11.12])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 7A3C01005502;
- Wed, 20 Nov 2019 13:14:13 +0000 (UTC)
-Received: from linux.fritz.box (unknown [10.36.118.18])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id E45636106E;
- Wed, 20 Nov 2019 13:13:23 +0000 (UTC)
-Date: Wed, 20 Nov 2019 14:13:22 +0100
-From: Kevin Wolf <kwolf@redhat.com>
-To: Eric Blake <eblake@redhat.com>
-Cc: Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>,
- "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>,
- "armbru@redhat.com" <armbru@redhat.com>, Gerd Hoffmann <kraxel@redhat.com>,
- "Gonglei (Arei)" <arei.gonglei@huawei.com>,
- Eduardo Habkost <ehabkost@redhat.com>, Igor Mammedov <imammedo@redhat.com>,
- Laurent Vivier <lvivier@redhat.com>, Amit Shah <amit@kernel.org>,
- Max Reitz <mreitz@redhat.com>, John Snow <jsnow@redhat.com>,
- Ari Sundholm <ari@tuxera.com>, Pavel Dovgalyuk <pavel.dovgaluk@ispras.ru>,
- Paolo Bonzini <pbonzini@redhat.com>,
- Stefan Hajnoczi <stefanha@redhat.com>, Fam Zheng <fam@euphon.net>,
- Stefan Weil <sw@weilnetz.de>, Ronnie Sahlberg <ronniesahlberg@gmail.com>,
- Peter Lieven <pl@kamp.de>, Denis Lunev <den@virtuozzo.com>,
- Alberto Garcia <berto@igalia.com>, Jason Dillaman <dillaman@redhat.com>,
- Wen Congyang <wencongyang2@huawei.com>,
- Xie Changlong <xiechanglong.d@gmail.com>, Liu Yuan <namei.unix@gmail.com>,
- "Richard W.M. Jones" <rjones@redhat.com>, Jeff Cody <codyprime@gmail.com>,
- =?iso-8859-1?Q?Marc-Andr=E9?= Lureau <marcandre.lureau@redhat.com>,
- Daniel =?iso-8859-1?Q?P=2E_Berrang=E9?= <berrange@redhat.com>,
- Richard Henderson <rth@twiddle.net>, Greg Kurz <groug@kaod.org>,
- "Michael S. Tsirkin" <mst@redhat.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Beniamino Galvani <b.galvani@gmail.com>,
- Peter Maydell <peter.maydell@linaro.org>,
- =?iso-8859-1?Q?C=E9dric?= Le Goater <clg@kaod.org>,
- Andrew Jeffery <andrew@aj.id.au>, Joel Stanley <joel@jms.id.au>,
- Andrew Baumann <Andrew.Baumann@microsoft.com>,
- Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@redhat.com>,
- Antony Pavlov <antonynpavlov@gmail.com>,
- Jean-Christophe Dubois <jcd@tribudubois.net>,
- Peter Chubb <peter.chubb@nicta.com.au>,
- Subbaraya Sundeep <sundeep.lkml@gmail.com>,
- Eric Auger <eric.auger@redhat.com>,
- Alistair Francis <alistair@alistair23.me>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Anthony Perard <anthony.perard@citrix.com>,
- Paul Durrant <paul@xen.org>, Paul Burton <pburton@wavecomp.com>,
- Aleksandar Rikalo <arikalo@wavecomp.com>,
- Chris Wulff <crwulff@gmail.com>, Marek Vasut <marex@denx.de>,
- David Gibson <david@gibson.dropbear.id.au>,
- Cornelia Huck <cohuck@redhat.com>, Halil Pasic <pasic@linux.ibm.com>,
- Christian Borntraeger <borntraeger@de.ibm.com>,
- =?iso-8859-1?Q?Herv=E9?= Poussineau <hpoussin@reactos.org>,
- Xiao Guangrong <xiaoguangrong.eric@gmail.com>,
- Aurelien Jarno <aurelien@aurel32.net>,
- Aleksandar Markovic <amarkovic@wavecomp.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Jason Wang <jasowang@redhat.com>, Laszlo Ersek <lersek@redhat.com>,
- Yuval Shaia <yuval.shaia@oracle.com>, Palmer Dabbelt <palmer@sifive.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- David Hildenbrand <david@redhat.com>,
- Thomas Huth <thuth@redhat.com>, Eric Farman <farman@linux.ibm.com>,
- Matthew Rosato <mjrosato@linux.ibm.com>,
- Hannes Reinecke <hare@suse.com>, Michael Walle <michael@walle.cc>,
- Artyom Tarasenko <atar4qemu@gmail.com>,
- Stefan Berger <stefanb@linux.ibm.com>,
- Samuel Thibault <samuel.thibault@ens-lyon.org>,
- Alex Williamson <alex.williamson@redhat.com>,
- Tony Krowiak <akrowiak@linux.ibm.com>, Pierre Morel <pmorel@linux.ibm.com>,
- Michael Roth <mdroth@linux.vnet.ibm.com>,
- Hailiang Zhang <zhang.zhanghailiang@huawei.com>,
- Juan Quintela <quintela@redhat.com>,
- "Dr. David Alan Gilbert" <dgilbert@redhat.com>,
- Luigi Rizzo <rizzo@iet.unipi.it>,
- Giuseppe Lettieri <g.lettieri@iet.unipi.it>,
- Vincenzo Maffione <v.maffione@gmail.com>,
- Jan Kiszka <jan.kiszka@siemens.com>, Anthony Green <green@moxielogic.com>,
- Stafford Horne <shorne@gmail.com>, Guan Xuetao <gxt@mprc.pku.edu.cn>,
- Max Filippov <jcmvbkbc@gmail.com>,
- "qemu-block@nongnu.org" <qemu-block@nongnu.org>,
- "integration@gluster.org" <integration@gluster.org>,
- "sheepdog@lists.wpkg.org" <sheepdog@lists.wpkg.org>,
- "qemu-arm@nongnu.org" <qemu-arm@nongnu.org>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- "qemu-ppc@nongnu.org" <qemu-ppc@nongnu.org>,
- "qemu-s390x@nongnu.org" <qemu-s390x@nongnu.org>,
- "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>
-Subject: Re: [RFC v5 000/126] error: auto propagated local_err
-Message-ID: <20191120131322.GB5779@linux.fritz.box>
-References: <20191011160552.22907-1-vsementsov@virtuozzo.com>
- <d1756cd0-8ad7-1e6c-b127-59ed24c5e512@virtuozzo.com>
- <538354c8-7ba9-8b1c-476e-5733c418207b@virtuozzo.com>
- <606dbe22-0d1e-66bb-aba9-681ca7961623@redhat.com>
-MIME-Version: 1.0
-In-Reply-To: <606dbe22-0d1e-66bb-aba9-681ca7961623@redhat.com>
-User-Agent: Mutt/1.12.1 (2019-06-15)
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
-X-MC-Unique: 8D4dw5wwPgemGbK8SniO-Q-1
-X-Mimecast-Spam-Score: 0
-Content-Type: text/plain; charset=WINDOWS-1252
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
- [fuzzy]
-X-Received-From: 207.211.31.120
-X-Mailman-Approved-At: Wed, 20 Nov 2019 08:33:41 -0500
+ (envelope-from <palmerdabbelt@google.com>) id 1iXcOT-0002CI-6o
+ for qemu-riscv@nongnu.org; Wed, 20 Nov 2019 21:40:30 -0500
+Received: from mail-pl1-x641.google.com ([2607:f8b0:4864:20::641]:38252)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <palmerdabbelt@google.com>)
+ id 1iXcOS-0002BI-VH
+ for qemu-riscv@nongnu.org; Wed, 20 Nov 2019 21:40:29 -0500
+Received: by mail-pl1-x641.google.com with SMTP id q18so821303pls.5
+ for <qemu-riscv@nongnu.org>; Wed, 20 Nov 2019 18:40:25 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
+ h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
+ :content-transfer-encoding;
+ bh=6Lo0092N0xYP5HLEFRPH7wneSTB1+QKHMiBL2Md661s=;
+ b=JxOKZm4tCDXUXucOvb135SMfCSvQIawv/zwrU+YjV4r9bcvUXUnar2m76m97br+KeG
+ aAK6jDB+OwlyL6A/mitFXhY6iWyakdyTO2J6aqgJ7sr3KYBEDqUVg4ZbhSTZrsyz3X4x
+ SlAL3Uomui3/lKeYeSe77HKJjp8tK0DIVNpZlF5RMGbdhbfRWUcAvn+5UhE3bxeqnxAj
+ ZOdPnWKFLFhLSyuRp8M31xdyl2AN4M5xr6/qoGBGvZzDtY46LjpnBe83FsdEtLi/rAdM
+ PtGYfqhbg7O0hXFB9kx4V/EsWCfiY6X/pb9RCv1jHykPe2yGKePc3T0IBK1OhorS+peQ
+ dmsg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
+ :mime-version:content-transfer-encoding;
+ bh=6Lo0092N0xYP5HLEFRPH7wneSTB1+QKHMiBL2Md661s=;
+ b=FMndV6G/4DLZwIYm/Fa93EqFIhU0+PFiw2NiMP6MziEfOBu2vln4uk12Ah0XQczIB5
+ 2aaU5rmSzkrZv5Cr6tcwjtulaCuMyH3z2B1f7K54jOdO3LoShEQkuj9m3fiEvB7CHoga
+ m/XR4zGXCQe2vbF3+3OG7dA1+X+762VibY4rQr2efbd33oxMNtmxv658lmBE5Vd2XL6A
+ 45yTSApiK7F6OEUrF+YgjD4WWOxoqeFlV995oJX8Zpss8VYHP64YxZf+tFnv2ZzMIGu6
+ 38aH4aG3jzJwY9DJs9KOtYAbaEI1H2jTFSAGmKFexifKeyJ/BibRqRbp+QorusS1IygD
+ Y49w==
+X-Gm-Message-State: APjAAAUfONmf5Yt1tdm+8hSdEItyLmxixNlNu7DBsDEPhRQucyAT70CK
+ 3x9aTlRwRDMLe4JBOP8v0/sPVQ==
+X-Google-Smtp-Source: APXvYqxGzQHLAOZCUn8Hu6cZmqOTQi17tIxPWk3kS6uiCPhTbKs0BI9GLCxPHpplRNTcI5auvZR3Pg==
+X-Received: by 2002:a17:902:7c94:: with SMTP id
+ y20mr6360574pll.241.1574304024504; 
+ Wed, 20 Nov 2019 18:40:24 -0800 (PST)
+Received: from localhost ([2620:15c:211:200:12cb:e51e:cbf0:6e3f])
+ by smtp.gmail.com with ESMTPSA id w69sm786933pfc.164.2019.11.20.18.40.23
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 20 Nov 2019 18:40:24 -0800 (PST)
+Date: Wed, 20 Nov 2019 18:40:24 -0800 (PST)
+X-Google-Original-Date: Wed, 20 Nov 2019 18:40:22 PST (-0800)
+Subject: Re: [PATCH] RISC-V: virt: This is a "sifive,test1" test finisher
+In-Reply-To: <20191110211033.GU2461@umbus.Home>
+CC: Peter Maydell <peter.maydell@linaro.org>, alistair23@gmail.com,
+ palmer@sifive.com, Christoph Hellwig <hch@infradead.org>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
+From: Palmer Dabbelt <palmerdabbelt@google.com>
+To: david@gibson.dropbear.id.au
+Message-ID: <mhng-7d7315b7-0ef7-4f14-b152-9d478f15c739@palmerdabbelt.mtv.corp.google.com>
+Mime-Version: 1.0 (MHng)
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2607:f8b0:4864:20::641
+X-Mailman-Approved-At: Thu, 21 Nov 2019 09:32:41 -0500
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -146,59 +74,89 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Nov 2019 13:14:23 -0000
+X-List-Received-Date: Thu, 21 Nov 2019 02:40:32 -0000
 
-Am 20.11.2019 um 13:59 hat Eric Blake geschrieben:
-> On 11/20/19 3:50 AM, Vladimir Sementsov-Ogievskiy wrote:
-> > Okay...
-> >=20
-> > I think that:
-> >=20
-> > 1. A lot of efforts (not only my, I think reviewing is already exceeded=
- generation efforts)
-> >     are made, it would be sad to lose them.
-> >=20
-> > 2. It's safe enough to apply only part of generated patches: we just fi=
-x error_abort/error_fatal
-> >     in more popular subsystems, what's wrong with that? Why not to cove=
-r 80% cases by 20% efforts?
-> >=20
-> > 3. It's obviously impossible to merge the whole series. A lot of time p=
-assed, series diverges.
-> >=20
-> >=20
-> > So I propose the following plan:
-> >=20
-> > 1. I resend small separate series of preparation patches per maintainer=
-. They are good anyway.
-> >=20
-> > 2. We commit patch with macro (changing MUST to SHOULD in documentation=
-) and coccinelle script.
-> >      (or that may be combined with the first series from [3.])
-> >=20
-> > 3. When one of preparations taken to maintainer's tree, I send generate=
-d patches for
-> >      its maintainer.
->=20
-> I'd still prefer waiting for direction from Markus.  We've been tied up b=
-y
-> other things (KVM Forum, 4.2 release), but now that we are in freeze, thi=
-s
-> is actually a GOOD time for Markus to finally get back to this series, an=
-d
-> there is going to be less rebasing needed if we can apply the entire clea=
-nup
-> right as 5.0 development opens in a couple of weeks.
+On Sun, 10 Nov 2019 13:10:33 PST (-0800), david@gibson.dropbear.id.au wrote:
+> On Fri, Nov 08, 2019 at 10:13:16AM -0800, Palmer Dabbelt wrote:
+>> On Fri, 08 Nov 2019 10:04:47 PST (-0800), Peter Maydell wrote:
+>> > On Fri, 8 Nov 2019 at 17:15, Alistair Francis <alistair23@gmail.com> wrote:
+>> > > 
+>> > > On Fri, Nov 8, 2019 at 9:05 AM Palmer Dabbelt <palmer@sifive.com> wrote:
+>> > > >
+>> > > > The test finisher implements the reset command, which means it's a
+>> > > > "sifive,test1" device.  This is a backwards compatible change, so it's
+>> > > > also a "sifive,test0" device.  I copied the odd idiom for adding a
+>> > > > two-string compatible field from the ARM virt board.
+>> > > >
+>> > > > Fixes: 9a2551ed6f ("riscv: sifive_test: Add reset functionality")
+>> > > > Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
+>> > > > Signed-off-by: Palmer Dabbelt <palmer@dabbelt.com>
+>> > > > ---
+>> > > >  hw/riscv/virt.c | 5 ++++-
+>> > > >  1 file changed, 4 insertions(+), 1 deletion(-)
+>> > > >
+>> > > > diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+>> > > > index 23f340df19..74f2dce81c 100644
+>> > > > --- a/hw/riscv/virt.c
+>> > > > +++ b/hw/riscv/virt.c
+>> > > > @@ -359,7 +359,10 @@ static void create_fdt(RISCVVirtState *s, const struct MemmapEntry *memmap,
+>> > > >      nodename = g_strdup_printf("/test@%lx",
+>> > > >          (long)memmap[VIRT_TEST].base);
+>> > > >      qemu_fdt_add_subnode(fdt, nodename);
+>> > > > -    qemu_fdt_setprop_string(fdt, nodename, "compatible", "sifive,test0");
+>> > > > +    {
+>> > > > +        const char compat[] = "sifive,test1\0sifive,test0";
+>> > > 
+>> > > Does this really work? Why not use qemu_fdt_setprop_cells()?
+>> > > 
+>> > > Alistair
+>> > > 
+>> > > > +        qemu_fdt_setprop(fdt, nodename, "compatible", compat, sizeof(compat));
+>> > > > +    }
+>> > 
+>> > qemu_fdt_setprop_cells() is for "set this property to
+>> > contain this list of 32-bit integers" (and it does a byteswap
+>> > of each 32-bit value from host to BE). That's not what
+>> > you want for a string (or a string list, which is what
+>> > we have here).
+>> > 
+>> > Cc'ing David Gibson who's our device tree expert to see if there's
+>> > a nicer way to write this. Oddly, given that it's used in the
+>> > ubiquitous 'compatible' prop, the dtc Documentation/manual.txt
+>> > doesn't say anything about properties being able to be
+>> > 'string lists', only 'strings', '32 bit numbers', 'lists of
+>> > 32-bit numbers' and 'byte sequences'. You have to dig through
+>> > the header file comments to deduce that a string list is
+>> > represented by a string with embedded NULs separating
+>> > each list item.
+>> 
+>> I copied this from hw/arm/virt.c, but messed up.  There they use
+>> 
+>>        const char compat[] = "arm,armv8-timer\0arm,armv7-timer";
+>>        qemu_fdt_setprop(vms->fdt, "/timer", "compatible",
+>>                         compat, sizeof(compat));
+>
+> I'm not sure what you're saying is messed up.  AFAICT, this matches
+> the code you have above, and both should be correct.
 
-Actually, that's possibly the worst possible time for avoiding conflicts
-because during freeze, maintainers are collecting stuff in private
-branches for weeks without getting it into master.
+Sorry, I must have been hallucinating.  For some reason I though I wrote
+qemu_fdt_setprop_string(... compat).
 
-If you are the one who gets merged first (what are the odds?), that
-solves the problem for you, but then everyone else will get conflicts.
+I'd like to take this for 4.2 if possible, but I don't think I have a
+reviewed-by (I just got my email set up on my Google computer, so it might be
+messy for a bit).  I'm happy to submit the cleaner valist version after 4.2, as
+per Peter's suggestion.
 
-I like Vladimir's new plan.
+Alistair: are you OK with this?
 
-Kevin
-
+>> I'll send a v2, but I'd be happy to add some sort of setprop_stringlist
+>> function.  Maybe we just indicate the length with two '\0's?  IIRC that's
+>> how other similar-looking data structures are encoded.
+>> 
+>
+> -- 
+> David Gibson			| I'll have my music baroque, and my code
+> david AT gibson.dropbear.id.au	| minimalist, thank you.  NOT _the_ _other_
+> 				| _way_ _around_!
+> http://www.ozlabs.org/~dgibson
 
