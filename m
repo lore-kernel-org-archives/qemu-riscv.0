@@ -1,67 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iYHcF-00010C-Bo
-	for mharc-qemu-riscv@gnu.org; Fri, 22 Nov 2019 17:41:27 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44522)
+	id 1iYmPF-00008v-Tt
+	for mharc-qemu-riscv@gnu.org; Sun, 24 Nov 2019 02:34:05 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:41822)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <palmerdabbelt@google.com>) id 1iYHcC-0000zr-Ks
- for qemu-riscv@nongnu.org; Fri, 22 Nov 2019 17:41:25 -0500
+ (envelope-from <alistair23@gmail.com>) id 1iYmPC-00008W-Js
+ for qemu-riscv@nongnu.org; Sun, 24 Nov 2019 02:34:04 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmerdabbelt@google.com>) id 1iYHcB-0000zc-J4
- for qemu-riscv@nongnu.org; Fri, 22 Nov 2019 17:41:24 -0500
-Received: from mail-pj1-x1043.google.com ([2607:f8b0:4864:20::1043]:46520)
+ (envelope-from <alistair23@gmail.com>) id 1iYmPA-0006qg-Qn
+ for qemu-riscv@nongnu.org; Sun, 24 Nov 2019 02:34:02 -0500
+Received: from mail-lj1-x243.google.com ([2a00:1450:4864:20::243]:39930)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmerdabbelt@google.com>)
- id 1iYHcB-0000yZ-B2
- for qemu-riscv@nongnu.org; Fri, 22 Nov 2019 17:41:23 -0500
-Received: by mail-pj1-x1043.google.com with SMTP id a16so3644669pjs.13
- for <qemu-riscv@nongnu.org>; Fri, 22 Nov 2019 14:41:22 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
- h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
- :content-transfer-encoding;
- bh=KlErY0hNW4227X/7K3YZfer053bUFpvJk9lWakDSPhs=;
- b=sjI5g7MRBVeX8zsDOp0ahBkJ5VOT0XjCKaruB0PcvbeOSD5PP4dgQGCyQzaeLP36l1
- +9iHA8WU+cJpSOX2j97lxpnLPy/OQQ/lVwBIRqFJcIgNURVFC5nyv0qLq5Gs8MMgh9sC
- Q80jCTuQGynsssFYAGwGNlOfj+AHs1O3+Mapv0F+WKuhqNu4j8Uz6cOM/b3FoOeNFUF4
- HUeBCWAK3wHbzrgsfGgjzC1gqMEfUL1iN52urZm41OvPGtNG7u1CSK93L75T2z0I0QPa
- wIvVMkKv7VqlXbXa/iNMKVhDfowDQBGdZ01AdGCuP9tFB7p+RUjvSIpBGYVNrQjrOdJ8
- syWQ==
+ (Exim 4.71) (envelope-from <alistair23@gmail.com>)
+ id 1iYmPA-0006qJ-E0; Sun, 24 Nov 2019 02:34:00 -0500
+Received: by mail-lj1-x243.google.com with SMTP id e10so2928585ljj.6;
+ Sat, 23 Nov 2019 23:33:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=s7Zmr8bvQVhMBLI//4GPF3vV9J/C4rxuzQb97UON0t8=;
+ b=E/CJ/4iJKAOZL/rYkI3U+p8BsKd4VZzcfHC9bjPC1SwbFKfJHN9Rq2JZG2pNvk2rux
+ e3Rk3dJpjc2w/Sg9M2a3fwnEZpTjADnXai58PQlBn6LEDwa9bNL9jKyGNyJuzfcUhH5t
+ gdq2dWKpm2TOZtPLMH/yof31tExTbwYd1MsvlTxZvtdDksbyCcI7rp6ofTuGra0y16rt
+ Ntto0vcLxW4ig/4YPo5yxpn7ywGwhFWzk4rWFBTYu9Depwn6XR5Jqkx1Dj3a616pwpbj
+ gbXyWOosHLaifNMl4BUjltLNi2QTII/ZuVRiqtX2l5nMOdLHXk5Ra1ex0c+kVRhreUeA
+ bppQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
- :mime-version:content-transfer-encoding;
- bh=KlErY0hNW4227X/7K3YZfer053bUFpvJk9lWakDSPhs=;
- b=OiWWvkShgdgqC1Q4ENNbPefxsKyHJHxyth7k+345bsSnZfrmxmoBcsn78Cigy75G22
- VUHLilK/O7lxZ/1sCekqToyc7EK2FYgeQrq8hycL3zbPkjnT7gc4MHDZ5A5Ui02koqd8
- eHYCh7Vf+//foKR14bPV+cjrI8XfG2K1iL9ajSbRxyWaBZPvYUg10n8jzdAEWsJy23x+
- mgSX8NDGY5qvkkAz8CZ9E5sekYH6LVs8j3F/CzJGPHSn3HJy9TjDntAfIHCRZAcDi5D2
- mpaDxsER8K7BVRZYTUiE2bnh50tuv2SpBEfAUJwFg/dIi45NoYywVHpb1xSbtLK00BHm
- XQ3A==
-X-Gm-Message-State: APjAAAWRIg/OiOJYcYOE8B72kdahwxd4csS5kNAvvLzC+Gtmi/ZWw8ZE
- IAxCAHNNV8kwUfspGNBtgX1F5A==
-X-Google-Smtp-Source: APXvYqzafzdfmOf7eQOHus/oblgfFOgOk1gNtcyRJ/aCX7KY6++pciodoe6krxij0JSlzyzpkBoGCQ==
-X-Received: by 2002:a17:90a:1742:: with SMTP id
- 2mr21867558pjm.93.1574462481086; 
- Fri, 22 Nov 2019 14:41:21 -0800 (PST)
-Received: from localhost ([2620:15c:211:200:12cb:e51e:cbf0:6e3f])
- by smtp.gmail.com with ESMTPSA id j5sm8148917pfe.100.2019.11.22.14.41.20
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 22 Nov 2019 14:41:20 -0800 (PST)
-Date: Fri, 22 Nov 2019 14:41:20 -0800 (PST)
-X-Google-Original-Date: Fri, 22 Nov 2019 14:40:46 PST (-0800)
-Subject: Re: [PATCH] riscv: virt: Allow PCI address 0
-In-Reply-To: <1574436472-6017-1-git-send-email-bmeng.cn@gmail.com>
-CC: Alistair Francis <Alistair.Francis@wdc.com>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, sagark@eecs.berkeley.edu,
- qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-From: Palmer Dabbelt <palmerdabbelt@google.com>
-To: bmeng.cn@gmail.com
-Message-ID: <mhng-9c6e7c80-7375-4bba-8ba5-7b9a6eb141d7@palmerdabbelt.mtv.corp.google.com>
-Mime-Version: 1.0 (MHng)
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=s7Zmr8bvQVhMBLI//4GPF3vV9J/C4rxuzQb97UON0t8=;
+ b=Sz21EQh8YH1+vx+G4XGzF34QkEHs9DCNCca7MPwbWpwwIAIYIm4LCsIpg+r+hHYC83
+ oI/TVsSt1IP+/4GWBmsocN0jqNqDARZAE5IBITszA8OF/wBEs7NG2CCGpPVxJnYJ9/wL
+ jT4G6hIJ/pjp1LbKRsc+MRdzgL2JoHyATVx3mwYVX1UI734SoWwveYHJm1p09I1iT+jb
+ Lpua/pqNHN618ADLgcn2unk4cKWYUf5NkWL70a2bfR1GXgkc9pUCQWiqiFouM2CjAwmE
+ 2Q+MjNnoT2sXtCsGI63pfBikodTiTDWCitsC6KBeD4zLqE+faPE7qSMQI29l3JWXklkv
+ AV0g==
+X-Gm-Message-State: APjAAAUglDxIRG5fZkVIZqtuGbDGQhVTS73PPrXJwV6g/vCRvFXPbW+q
+ Fap0TB3x7w6hcEdxWP947dhW+E0HAdEcCBHkPKI=
+X-Google-Smtp-Source: APXvYqzhxZypmHxeKNZLJpSP4+NVaDU0uKT6bswuZv5Lupdv7hmLHK4MoWthjxhc8PvIIheI6RRTpTOezvOaJmfSTEM=
+X-Received: by 2002:a2e:7301:: with SMTP id o1mr18440345ljc.16.1574580838008; 
+ Sat, 23 Nov 2019 23:33:58 -0800 (PST)
+MIME-Version: 1.0
+References: <20191119062005.5787-1-siwei.zhuang@data61.csiro.au>
+In-Reply-To: <20191119062005.5787-1-siwei.zhuang@data61.csiro.au>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Sat, 23 Nov 2019 23:33:30 -0800
+Message-ID: <CAKmqyKNjAxxT+QbYBDngG6ad7VBJuEvnDDXw-AyPaCjZpeiEZg@mail.gmail.com>
+Subject: Re: [PATCH] hw/riscv: Add optional symbol callback ptr to
+ riscv_load_kernel()
+To: "Zhuang, Siwei (Data61, Kensington NSW)" <Siwei.Zhuang@data61.csiro.au>
+Cc: "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
+ "open list:All patches CC here" <qemu-devel@nongnu.org>,
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>
+Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::1043
+X-Received-From: 2a00:1450:4864:20::243
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -73,46 +69,144 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Nov 2019 22:41:25 -0000
+X-List-Received-Date: Sun, 24 Nov 2019 07:34:04 -0000
 
-On Fri, 22 Nov 2019 07:27:52 PST (-0800), bmeng.cn@gmail.com wrote:
-> When testing e1000 with the virt machine, e1000's I/O space cannot
-> be accessed. Debugging shows that the I/O BAR (BAR1) is correctly
-> written with address 0 plus I/O enable bit, but QEMU's "info pci"
-> shows that:
+On Tue, Nov 19, 2019 at 12:03 AM Zhuang, Siwei (Data61, Kensington
+NSW) <Siwei.Zhuang@data61.csiro.au> wrote:
 >
->   Bus  0, device   1, function 0:
->     Ethernet controller: PCI device 8086:100e
->   ...
->       BAR1: I/O at 0xffffffffffffffff [0x003e].
->   ...
+> This patch adds an optional function pointer, "sym_cb", to
+> riscv_load_kernel() which provides the possibility to access the symbol
+> table during kernel loading.
 >
-> It turns out we should set pci_allow_0_address to true to allow 0
-> PCI address, otherwise pci_bar_address() treats such address as
-> PCI_BAR_UNMAPPED.
+> The pointer is ignored, if supplied with Image or uImage file.
 >
-> Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
+> The Spike board requires the access to locate the HTIF symbols.
+>
+> Fixes: 0ac24d56c5e7 ("hw/riscv: Split out the boot functions")
+> Buglink: https://bugs.launchpad.net/qemu/+bug/1835827
+> Signed-off-by: Siwei Zhuang <siwei.zhuang@data61.csiro.au>
+
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+
+Alistair
+
 > ---
+>  hw/riscv/boot.c         | 7 ++++---
+>  hw/riscv/sifive_e.c     | 2 +-
+>  hw/riscv/sifive_u.c     | 3 ++-
+>  hw/riscv/spike.c        | 6 +++---
+>  hw/riscv/virt.c         | 3 ++-
+>  include/hw/riscv/boot.h | 3 ++-
+>  6 files changed, 14 insertions(+), 10 deletions(-)
 >
->  hw/riscv/virt.c | 1 +
->  1 file changed, 1 insertion(+)
->
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index 23f340d..411bef5 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -603,6 +603,7 @@ static void riscv_virt_machine_class_init(ObjectClass *oc, void *data)
->      mc->init = riscv_virt_board_init;
->      mc->max_cpus = 8;
->      mc->default_cpu_type = VIRT_CPU;
-> +    mc->pci_allow_0_address = true;
+> diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
+> index 7fee98d2f8..027303d2a3 100644
+> --- a/hw/riscv/boot.c
+> +++ b/hw/riscv/boot.c
+> @@ -114,12 +114,13 @@ target_ulong riscv_load_firmware(const char *firmware_filename,
+>      exit(1);
 >  }
 >
->  static const TypeInfo riscv_virt_machine_typeinfo = {
-
-Reviewed-by: Palmer Dabbelt <palmerdabbelt@google.com>
-
-I've put this on for-next, as I don't think this is 4.2 material.
-
-Thanks!
+> -target_ulong riscv_load_kernel(const char *kernel_filename)
+> +target_ulong riscv_load_kernel(const char *kernel_filename, symbol_fn_t sym_cb)
+>  {
+>      uint64_t kernel_entry, kernel_high;
+>
+> -    if (load_elf(kernel_filename, NULL, NULL, NULL,
+> -                 &kernel_entry, NULL, &kernel_high, 0, EM_RISCV, 1, 0) > 0) {
+> +    if (load_elf_ram_sym(kernel_filename, NULL, NULL, NULL,
+> +                         &kernel_entry, NULL, &kernel_high, 0,
+> +                         EM_RISCV, 1, 0, NULL, true, sym_cb) > 0) {
+>          return kernel_entry;
+>      }
+>
+> diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
+> index 0f9d641a0e..8a6b0348df 100644
+> --- a/hw/riscv/sifive_e.c
+> +++ b/hw/riscv/sifive_e.c
+> @@ -111,7 +111,7 @@ static void riscv_sifive_e_init(MachineState *machine)
+>                            memmap[SIFIVE_E_MROM].base, &address_space_memory);
+>
+>      if (machine->kernel_filename) {
+> -        riscv_load_kernel(machine->kernel_filename);
+> +        riscv_load_kernel(machine->kernel_filename, NULL);
+>      }
+>  }
+>
+> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+> index 9552abf4dd..0140e95732 100644
+> --- a/hw/riscv/sifive_u.c
+> +++ b/hw/riscv/sifive_u.c
+> @@ -344,7 +344,8 @@ static void riscv_sifive_u_init(MachineState *machine)
+>                                   memmap[SIFIVE_U_DRAM].base);
+>
+>      if (machine->kernel_filename) {
+> -        uint64_t kernel_entry = riscv_load_kernel(machine->kernel_filename);
+> +        uint64_t kernel_entry = riscv_load_kernel(machine->kernel_filename,
+> +                                                  NULL);
+>
+>          if (machine->initrd_filename) {
+>              hwaddr start;
+> diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
+> index 8bbffbcd0f..8823681783 100644
+> --- a/hw/riscv/spike.c
+> +++ b/hw/riscv/spike.c
+> @@ -184,7 +184,7 @@ static void spike_board_init(MachineState *machine)
+>                                  mask_rom);
+>
+>      if (machine->kernel_filename) {
+> -        riscv_load_kernel(machine->kernel_filename);
+> +        riscv_load_kernel(machine->kernel_filename, htif_symbol_callback);
+>      }
+>
+>      /* reset vector */
+> @@ -273,7 +273,7 @@ static void spike_v1_10_0_board_init(MachineState *machine)
+>                                  mask_rom);
+>
+>      if (machine->kernel_filename) {
+> -        riscv_load_kernel(machine->kernel_filename);
+> +        riscv_load_kernel(machine->kernel_filename, htif_symbol_callback);
+>      }
+>
+>      /* reset vector */
+> @@ -359,7 +359,7 @@ static void spike_v1_09_1_board_init(MachineState *machine)
+>                                  mask_rom);
+>
+>      if (machine->kernel_filename) {
+> -        riscv_load_kernel(machine->kernel_filename);
+> +        riscv_load_kernel(machine->kernel_filename, htif_symbol_callback);
+>      }
+>
+>      /* reset vector */
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index 23f340df19..65557c837e 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -476,7 +476,8 @@ static void riscv_virt_board_init(MachineState *machine)
+>                                   memmap[VIRT_DRAM].base);
+>
+>      if (machine->kernel_filename) {
+> -        uint64_t kernel_entry = riscv_load_kernel(machine->kernel_filename);
+> +        uint64_t kernel_entry = riscv_load_kernel(machine->kernel_filename,
+> +                                                  NULL);
+>
+>          if (machine->initrd_filename) {
+>              hwaddr start;
+> diff --git a/include/hw/riscv/boot.h b/include/hw/riscv/boot.h
+> index 66075d0e57..df80051fbc 100644
+> --- a/include/hw/riscv/boot.h
+> +++ b/include/hw/riscv/boot.h
+> @@ -28,7 +28,8 @@ void riscv_find_and_load_firmware(MachineState *machine,
+>  char *riscv_find_firmware(const char *firmware_filename);
+>  target_ulong riscv_load_firmware(const char *firmware_filename,
+>                                   hwaddr firmware_load_addr);
+> -target_ulong riscv_load_kernel(const char *kernel_filename);
+> +target_ulong riscv_load_kernel(const char *kernel_filename,
+> +                               symbol_fn_t sym_cb);
+>  hwaddr riscv_load_initrd(const char *filename, uint64_t mem_size,
+>                           uint64_t kernel_entry, hwaddr *start);
+>
+> --
+> 2.24.0
+>
 
