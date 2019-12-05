@@ -1,129 +1,156 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1icrLu-0007kL-7Y
-	for mharc-qemu-riscv@gnu.org; Thu, 05 Dec 2019 08:39:32 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:48787)
+	id 1icsb8-0007Uh-80
+	for mharc-qemu-riscv@gnu.org; Thu, 05 Dec 2019 09:59:21 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:33145)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <armbru@redhat.com>) id 1icrLh-0007hz-Tr
- for qemu-riscv@nongnu.org; Thu, 05 Dec 2019 08:39:20 -0500
+ (envelope-from <vsementsov@virtuozzo.com>) id 1icsb1-0007TJ-86
+ for qemu-riscv@nongnu.org; Thu, 05 Dec 2019 09:59:12 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <armbru@redhat.com>) id 1icrLg-0004Sr-DN
- for qemu-riscv@nongnu.org; Thu, 05 Dec 2019 08:39:17 -0500
-Received: from us-smtp-2.mimecast.com ([205.139.110.61]:29080
- helo=us-smtp-delivery-1.mimecast.com)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <armbru@redhat.com>) id 1icrLd-0004Pr-4J
- for qemu-riscv@nongnu.org; Thu, 05 Dec 2019 08:39:13 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1575553150;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=hnhb/x6YaZwfbYwlyRlda7171y0HPcU5qK2g5bnRUHs=;
- b=HV66kXuStetuAOJKDAWC5J25aq+52xIA7o9LJKwmjZYRVw6H80MmvmIgnBqPueQZ/u6qFZ
- z/0cXKIZFJBuTmnvKCAqULunXONc6vmcpbVxpy5mGnh/8G0NsAeL2klQXKcSe8cC3rJyA8
- mY/KRgMIkamjdIu4Qgj/o3A/P22H8H0=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-103-In8rOFh3PGWTvk4no7Xklw-1; Thu, 05 Dec 2019 07:37:20 -0500
-Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
- [10.5.11.16])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 247F5100;
- Thu,  5 Dec 2019 12:37:14 +0000 (UTC)
-Received: from blackfin.pond.sub.org (ovpn-116-134.ams2.redhat.com
- [10.36.116.134])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 59B435C1B5;
- Thu,  5 Dec 2019 12:36:42 +0000 (UTC)
-Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
- id BB0531138606; Thu,  5 Dec 2019 13:36:40 +0100 (CET)
-From: Markus Armbruster <armbru@redhat.com>
-To: Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>
-Cc: Markus Armbruster <armbru@redhat.com>,  Ronnie Sahlberg
- <ronniesahlberg@gmail.com>,  Jeff Cody <codyprime@gmail.com>,  Jan Kiszka
- <jan.kiszka@siemens.com>,  Alberto Garcia <berto@igalia.com>,  Hailiang
- Zhang <zhang.zhanghailiang@huawei.com>,  "qemu-block\@nongnu.org"
- <qemu-block@nongnu.org>,  Aleksandar Rikalo <arikalo@wavecomp.com>,  Halil
- Pasic <pasic@linux.ibm.com>,  =?utf-8?Q?Herv=C3=A9?= Poussineau
- <hpoussin@reactos.org>,
- Anthony Perard <anthony.perard@citrix.com>,  Samuel Thibault
- <samuel.thibault@ens-lyon.org>,  Laszlo Ersek <lersek@redhat.com>,  Jason
- Wang <jasowang@redhat.com>,  Laurent Vivier <lvivier@redhat.com>,  Eduardo
- Habkost <ehabkost@redhat.com>,  Xie Changlong <xiechanglong.d@gmail.com>,
- Peter Lieven <pl@kamp.de>,  "Dr. David Alan Gilbert"
- <dgilbert@redhat.com>,  Beniamino Galvani <b.galvani@gmail.com>,  Eric
- Auger <eric.auger@redhat.com>,  Alex Williamson
- <alex.williamson@redhat.com>,  Stefan Hajnoczi <stefanha@redhat.com>,
- John Snow <jsnow@redhat.com>,  Richard Henderson <rth@twiddle.net>,
- Kevin Wolf <kwolf@redhat.com>,  Andrew Jeffery <andrew@aj.id.au>,  Chris
- Wulff <crwulff@gmail.com>,  Subbaraya Sundeep <sundeep.lkml@gmail.com>,
- Michael Walle <michael@walle.cc>,  "qemu-ppc\@nongnu.org"
- <qemu-ppc@nongnu.org>,  Bastian Koppelmann
- <kbastian@mail.uni-paderborn.de>,  Igor Mammedov <imammedo@redhat.com>,
- Fam Zheng <fam@euphon.net>,  Peter Maydell <peter.maydell@linaro.org>,
- "sheepdog\@lists.wpkg.org" <sheepdog@lists.wpkg.org>,  Matthew Rosato
- <mjrosato@linux.ibm.com>,  David Hildenbrand <david@redhat.com>,  Palmer
- Dabbelt <palmer@sifive.com>,  Eric Farman <farman@linux.ibm.com>,  Max
- Filippov <jcmvbkbc@gmail.com>,  Hannes Reinecke <hare@suse.com>,  Stefano
- Stabellini <sstabellini@kernel.org>,  "Gonglei \(Arei\)"
- <arei.gonglei@huawei.com>,  Liu Yuan <namei.unix@gmail.com>,  Artyom
- Tarasenko <atar4qemu@gmail.com>,  Thomas Huth <thuth@redhat.com>,  Amit
- Shah <amit@kernel.org>,  Stefan Weil <sw@weilnetz.de>,  Greg Kurz
- <groug@kaod.org>,  Yuval Shaia <yuval.shaia@oracle.com>,
- "qemu-s390x\@nongnu.org" <qemu-s390x@nongnu.org>,  "qemu-arm\@nongnu.org"
- <qemu-arm@nongnu.org>,  Peter Chubb <peter.chubb@nicta.com.au>,
- =?utf-8?Q?C=C3=A9dric?= Le
- Goater <clg@kaod.org>,  Stafford Horne <shorne@gmail.com>,
- "qemu-riscv\@nongnu.org" <qemu-riscv@nongnu.org>,  Cornelia Huck
- <cohuck@redhat.com>,  Aleksandar Markovic <amarkovic@wavecomp.com>,
- Aurelien Jarno <aurelien@aurel32.net>,  Paul Burton
- <pburton@wavecomp.com>,  Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Paul Durrant <paul@xen.org>,  Anthony Green <green@moxielogic.com>,  Gerd
- Hoffmann <kraxel@redhat.com>,  "Edgar E. Iglesias"
- <edgar.iglesias@gmail.com>,  Guan Xuetao <gxt@mprc.pku.edu.cn>,  Ari
- Sundholm <ari@tuxera.com>,  Juan Quintela <quintela@redhat.com>,  Michael
- Roth <mdroth@linux.vnet.ibm.com>,  Christian Borntraeger
- <borntraeger@de.ibm.com>,  Joel Stanley <joel@jms.id.au>,  Jason Dillaman
- <dillaman@redhat.com>,  Antony Pavlov <antonynpavlov@gmail.com>,
- "xen-devel\@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- "integration\@gluster.org" <integration@gluster.org>,  Philippe
- =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@redhat.com>,  "Richard W.M. Jones"
- <rjones@redhat.com>,  Andrew Baumann <Andrew.Baumann@microsoft.com>,  Max
- Reitz <mreitz@redhat.com>,  Denis Lunev <den@virtuozzo.com>,  "Michael S.
- Tsirkin" <mst@redhat.com>,  Mark Cave-Ayland
- <mark.cave-ayland@ilande.co.uk>,  "qemu-devel\@nongnu.org"
- <qemu-devel@nongnu.org>,  Vincenzo Maffione <v.maffione@gmail.com>,  Marek
- Vasut <marex@denx.de>,  =?utf-8?Q?Marc-Andr=C3=A9?= Lureau
- <marcandre.lureau@redhat.com>,
- Alistair Francis <alistair@alistair23.me>,  Pavel Dovgalyuk
- <pavel.dovgaluk@ispras.ru>,  Giuseppe Lettieri <g.lettieri@iet.unipi.it>,
- Luigi Rizzo <rizzo@iet.unipi.it>,  David Gibson
- <david@gibson.dropbear.id.au>,  Tony Krowiak <akrowiak@linux.ibm.com>,
- Daniel P. =?utf-8?Q?Berrang=C3=A9?= <berrange@redhat.com>,  Xiao Guangrong
- <xiaoguangrong.eric@gmail.com>,  Pierre Morel <pmorel@linux.ibm.com>,  Wen
- Congyang <wencongyang2@huawei.com>,  Jean-Christophe Dubois
- <jcd@tribudubois.net>,  Paolo Bonzini <pbonzini@redhat.com>,  Stefan
- Berger <stefanb@linux.ibm.com>
+ (envelope-from <vsementsov@virtuozzo.com>) id 1icsaz-0008PY-OE
+ for qemu-riscv@nongnu.org; Thu, 05 Dec 2019 09:59:11 -0500
+Received: from mail-eopbgr20110.outbound.protection.outlook.com
+ ([40.107.2.110]:26143 helo=EUR02-VE1-obe.outbound.protection.outlook.com)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <vsementsov@virtuozzo.com>)
+ id 1icsaq-0007iY-7t; Thu, 05 Dec 2019 09:59:02 -0500
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=WQU3RZweU4eFuQT5pAoOJSL8qn26rFI7/JLB+Kx0T6sV8xlqjH6Fgwl9LDRicgwBY2MrBILOwmsxkx1a7mvVf4gY7j5HxH3qeNXDXj0+vmK3m4fkfzSkJADEx2ESFZYOu7dZTOWIXwzJ7NftYtl5UaIpCu+vK29XZVcEF9MvCbf+LqOztAcZLXMCqRMMrhelqYMyu1/DJKa2abEUmka0SvCUsdQGfm9z/6BKCoRSGnVROwZp5nQhvpa4iZmwE1pUU1VwLF/ZK9F6M49T3Q5171APHUHLvTpXC2wem7ak3eDtpXmJ35XJ9A1ImSj0Di+0jD7Yei65dwT/DI22K7oU6A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=z9qcvYIewmJI5A6vWn3JtW1ppPG3kwmVYrEc3hjTzyM=;
+ b=f4mBrYayH0nrP9mSofE1qPcRQ5FbABUXl9q0CKjZiSuA0z0B4DqiZtx87Oucylit2LpLEyfGLRshIPiANlaIYpVc+R4jQegzQ5QBwm8foAoRoefr6gR0sEqUqdUd9jR53t9opojkeEMYGEp5d/tF5mHaTAEOAxmoPMtv6Bp//pgQwdeAyPMirCGQdOCg/BH0PUMbEe/OZlTcX+VJoHOCrMwDOZpKiCQubO4U/CaU5XHdN0q8Xf+edV4aF//Vp21bF+LRFMtpOL8zMvBKJHwpz1eAjKHToPEE/JxQfw9P9hyXqonvP8FzVrUY6YQKuCcU3V7HwZu9w6xV1EHqAnSCLw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=virtuozzo.com; dmarc=pass action=none
+ header.from=virtuozzo.com; dkim=pass header.d=virtuozzo.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=virtuozzo.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=z9qcvYIewmJI5A6vWn3JtW1ppPG3kwmVYrEc3hjTzyM=;
+ b=fLNSvBOW+SN+uAa81zdtJe++gDojv06rNG4DZPXfBDYEQZSg7pCa6rFErFMD1A23ceWrvFd+bc2EJwuj4bxAmJUVdNQBCuQXejZguhbNs4IG2/K52M93hCMkkWkB1bnAypFZuUnjKw9AZxSE4oMPdJgTd4Artr1EmL8FD0D3rsM=
+Received: from AM6PR08MB4423.eurprd08.prod.outlook.com (20.179.7.140) by
+ AM6PR08MB2949.eurprd08.prod.outlook.com (52.135.167.152) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.2516.12; Thu, 5 Dec 2019 14:58:54 +0000
+Received: from AM6PR08MB4423.eurprd08.prod.outlook.com
+ ([fe80::11a9:a944:c946:3030]) by AM6PR08MB4423.eurprd08.prod.outlook.com
+ ([fe80::11a9:a944:c946:3030%7]) with mapi id 15.20.2516.014; Thu, 5 Dec 2019
+ 14:58:54 +0000
+From: Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>
+To: Markus Armbruster <armbru@redhat.com>
+CC: Ronnie Sahlberg <ronniesahlberg@gmail.com>, Jeff Cody
+ <codyprime@gmail.com>, Jan Kiszka <jan.kiszka@siemens.com>, Alberto Garcia
+ <berto@igalia.com>, Hailiang Zhang <zhang.zhanghailiang@huawei.com>,
+ "qemu-block@nongnu.org" <qemu-block@nongnu.org>, Aleksandar Rikalo
+ <arikalo@wavecomp.com>, Halil Pasic <pasic@linux.ibm.com>,
+ =?utf-8?B?SGVydsOpIFBvdXNzaW5lYXU=?= <hpoussin@reactos.org>, Anthony Perard
+ <anthony.perard@citrix.com>, Samuel Thibault <samuel.thibault@ens-lyon.org>,
+ Laszlo Ersek <lersek@redhat.com>, Jason Wang <jasowang@redhat.com>, Laurent
+ Vivier <lvivier@redhat.com>, Eduardo Habkost <ehabkost@redhat.com>, Xie
+ Changlong <xiechanglong.d@gmail.com>, Peter Lieven <pl@kamp.de>, "Dr. David
+ Alan Gilbert" <dgilbert@redhat.com>, Beniamino Galvani <b.galvani@gmail.com>, 
+ Eric Auger <eric.auger@redhat.com>, Alex Williamson
+ <alex.williamson@redhat.com>, Stefan Hajnoczi <stefanha@redhat.com>, John
+ Snow <jsnow@redhat.com>, Richard Henderson <rth@twiddle.net>, Kevin Wolf
+ <kwolf@redhat.com>, Andrew Jeffery <andrew@aj.id.au>, Chris Wulff
+ <crwulff@gmail.com>, Subbaraya Sundeep <sundeep.lkml@gmail.com>, Michael
+ Walle <michael@walle.cc>, "qemu-ppc@nongnu.org" <qemu-ppc@nongnu.org>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, Igor Mammedov
+ <imammedo@redhat.com>, Fam Zheng <fam@euphon.net>, Peter Maydell
+ <peter.maydell@linaro.org>, "sheepdog@lists.wpkg.org"
+ <sheepdog@lists.wpkg.org>, Matthew Rosato <mjrosato@linux.ibm.com>, David
+ Hildenbrand <david@redhat.com>, Palmer Dabbelt <palmer@sifive.com>, Eric
+ Farman <farman@linux.ibm.com>, Max Filippov <jcmvbkbc@gmail.com>, Hannes
+ Reinecke <hare@suse.com>, Stefano Stabellini <sstabellini@kernel.org>,
+ "Gonglei (Arei)" <arei.gonglei@huawei.com>, Liu Yuan <namei.unix@gmail.com>,
+ Artyom Tarasenko <atar4qemu@gmail.com>, Thomas Huth <thuth@redhat.com>, Amit
+ Shah <amit@kernel.org>, Stefan Weil <sw@weilnetz.de>, Greg Kurz
+ <groug@kaod.org>, Yuval Shaia <yuval.shaia@oracle.com>,
+ "qemu-s390x@nongnu.org" <qemu-s390x@nongnu.org>, "qemu-arm@nongnu.org"
+ <qemu-arm@nongnu.org>, Peter Chubb <peter.chubb@nicta.com.au>,
+ =?utf-8?B?Q8OpZHJpYyBMZSBHb2F0ZXI=?= <clg@kaod.org>, Stafford Horne
+ <shorne@gmail.com>, "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>, Cornelia
+ Huck <cohuck@redhat.com>, Aleksandar Markovic <amarkovic@wavecomp.com>,
+ Aurelien Jarno <aurelien@aurel32.net>, Paul Burton <pburton@wavecomp.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, Paul Durrant <paul@xen.org>,
+ Anthony Green <green@moxielogic.com>, Gerd Hoffmann <kraxel@redhat.com>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, Guan Xuetao
+ <gxt@mprc.pku.edu.cn>, Ari Sundholm <ari@tuxera.com>, Juan Quintela
+ <quintela@redhat.com>, Michael Roth <mdroth@linux.vnet.ibm.com>, Christian
+ Borntraeger <borntraeger@de.ibm.com>, Joel Stanley <joel@jms.id.au>, Jason
+ Dillaman <dillaman@redhat.com>, Antony Pavlov <antonynpavlov@gmail.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ "integration@gluster.org" <integration@gluster.org>,
+ =?utf-8?B?UGhpbGlwcGUgTWF0aGlldS1EYXVkw6k=?= <philmd@redhat.com>, "Richard
+ W.M. Jones" <rjones@redhat.com>, Andrew Baumann
+ <Andrew.Baumann@microsoft.com>, Max Reitz <mreitz@redhat.com>, Denis Lunev
+ <den@virtuozzo.com>, "Michael S. Tsirkin" <mst@redhat.com>, Mark Cave-Ayland
+ <mark.cave-ayland@ilande.co.uk>, "qemu-devel@nongnu.org"
+ <qemu-devel@nongnu.org>, Vincenzo Maffione <v.maffione@gmail.com>, Marek
+ Vasut <marex@denx.de>, =?utf-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?=
+ <marcandre.lureau@redhat.com>, Alistair Francis <alistair@alistair23.me>,
+ Pavel Dovgalyuk <pavel.dovgaluk@ispras.ru>, Giuseppe Lettieri
+ <g.lettieri@iet.unipi.it>, Luigi Rizzo <rizzo@iet.unipi.it>, David Gibson
+ <david@gibson.dropbear.id.au>, Tony Krowiak <akrowiak@linux.ibm.com>,
+ =?utf-8?B?RGFuaWVsIFAuIEJlcnJhbmfDqQ==?= <berrange@redhat.com>, Xiao
+ Guangrong <xiaoguangrong.eric@gmail.com>, Pierre Morel
+ <pmorel@linux.ibm.com>, Wen Congyang <wencongyang2@huawei.com>,
+ Jean-Christophe Dubois <jcd@tribudubois.net>, Paolo Bonzini
+ <pbonzini@redhat.com>, Stefan Berger <stefanb@linux.ibm.com>
 Subject: Re: [RFC v5 024/126] error: auto propagated local_err
+Thread-Topic: [RFC v5 024/126] error: auto propagated local_err
+Thread-Index: AQHVgE3c5dwPNEl0z0OyUhbNfTU1EqeqZpzagAFqo4D///+mMYAAJ34A
+Date: Thu, 5 Dec 2019 14:58:53 +0000
+Message-ID: <eef60af5-ff92-3df7-bad5-c981690d66ad@virtuozzo.com>
 References: <20191011160552.22907-1-vsementsov@virtuozzo.com>
  <20191011160552.22907-25-vsementsov@virtuozzo.com>
  <87muc8p24w.fsf@dusky.pond.sub.org>
  <55393c08-5bda-8042-1a95-f350b3781d99@virtuozzo.com>
-Date: Thu, 05 Dec 2019 13:36:40 +0100
-In-Reply-To: <55393c08-5bda-8042-1a95-f350b3781d99@virtuozzo.com> (Vladimir
- Sementsov-Ogievskiy's message of "Thu, 5 Dec 2019 09:38:49 +0000")
-Message-ID: <87d0d3c5k7.fsf@dusky.pond.sub.org>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/26.2 (gnu/linux)
+ <87d0d3c5k7.fsf@dusky.pond.sub.org>
+In-Reply-To: <87d0d3c5k7.fsf@dusky.pond.sub.org>
+Accept-Language: ru-RU, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-clientproxiedby: HE1PR06CA0141.eurprd06.prod.outlook.com
+ (2603:10a6:7:16::28) To AM6PR08MB4423.eurprd08.prod.outlook.com
+ (2603:10a6:20b:bf::12)
+authentication-results: spf=none (sender IP is )
+ smtp.mailfrom=vsementsov@virtuozzo.com; 
+x-ms-exchange-messagesentrepresentingtype: 1
+x-tagtoolbar-keys: D20191205175848006
+x-originating-ip: [185.231.240.5]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: 1b469883-1ae0-440e-ddae-08d77993a55d
+x-ms-traffictypediagnostic: AM6PR08MB2949:
+x-ms-exchange-transport-forked: True
+x-microsoft-antispam-prvs: <AM6PR08MB2949C842E2E59951446C6B61C15C0@AM6PR08MB2949.eurprd08.prod.outlook.com>
+x-ms-oob-tlc-oobclassifiers: OLM:10000;
+x-forefront-prvs: 02426D11FE
+x-forefront-antispam-report: SFV:NSPM;
+ SFS:(10019020)(136003)(366004)(39850400004)(346002)(396003)(376002)(189003)(199004)(81156014)(81166006)(8676002)(54906003)(6486002)(478600001)(8936002)(6512007)(26005)(6506007)(102836004)(186003)(4326008)(11346002)(99286004)(76176011)(14454004)(25786009)(31686004)(2616005)(52116002)(6916009)(5660300002)(36756003)(31696002)(305945005)(2906002)(86362001)(7366002)(7416002)(7406005)(316002)(64756008)(66946007)(66556008)(66476007)(229853002)(14444005)(7336002)(66446008)(71190400001)(71200400001);
+ DIR:OUT; SFP:1102; SCL:1; SRVR:AM6PR08MB2949;
+ H:AM6PR08MB4423.eurprd08.prod.outlook.com; FPR:; SPF:None; LANG:en;
+ PTR:InfoNoRecords; MX:1; A:1; 
+received-spf: None (protection.outlook.com: virtuozzo.com does not designate
+ permitted sender hosts)
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: 4crTOeKmgG48QjzZhnAuYFtWswZIf77y8ORhRNTejYzCsMIkLT6bFbpipZ3a8PBsHk8PT6270E308dkstK4wjxYSsV7D0MCni9iRBj2yDsi7F7FMTzSzhvXHM/pUy0uy0NBnAFd1nLxrx5L7MYYvuqu6wWv9OuBoNrCXIcZJE6lj94yvOi8OzEj37wsQMLqsqvTfEjG1tJK9mqK2o1YBVC4k20J905cYJ9YuyHPwNhV/mH/gVJB52Lq7NfiKF6crtp2CNS+NjSG8vH3ZqeZO6+UlMzyduDwB9GTfBwKv3FnQHNBVWZjSnPUcbXz48EhZLtUVpMojnbmQJppyk3Rhb/LnqTEBmWKwzrBHDH/AWq/Gs+cOGCEFxH7X8ShlOltuZwkqycuYZmsyNdeTvpqnhXfSm0ten/g6+72aymQ2PSAS5Gw1MSeu+64rRzMq+P/3
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <C0D07A0C4DBC374FAB57C7541713859B@eurprd08.prod.outlook.com>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
-X-MC-Unique: In8rOFh3PGWTvk4no7Xklw-1
-X-Mimecast-Spam-Score: 0
-Content-Type: text/plain
-Content-Transfer-Encoding: quoted-printable
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
- [fuzzy]
-X-Received-From: 205.139.110.61
+X-OriginatorOrg: virtuozzo.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1b469883-1ae0-440e-ddae-08d77993a55d
+X-MS-Exchange-CrossTenant-originalarrivaltime: 05 Dec 2019 14:58:53.9739 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 0bc7f26d-0264-416e-a6fc-8352af79c58f
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: N94XwTGcnPiNX6Z6dsbqpipTtg0l8F5dAsDF8P6qSeSD2lYtDayDjWdPouRNUKnhrv4XVzHNFGUUqvSL2so+xoap9LiXZHXnxo/99BUigak=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM6PR08MB2949
+X-detected-operating-system: by eggs.gnu.org: Windows 7 or 8 [fuzzy]
+X-Received-From: 40.107.2.110
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -135,118 +162,86 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Dec 2019 13:39:22 -0000
+X-List-Received-Date: Thu, 05 Dec 2019 14:59:13 -0000
 
-Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com> writes:
-
-> 04.12.2019 17:59, Markus Armbruster wrote:
->> Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com> writes:
->>=20
->>> Here is introduced ERRP_AUTO_PROPAGATE macro, to be used at start of
->>> functions with errp OUT parameter.
->>>
->>> It has three goals:
->>>
->>> 1. Fix issue with error_fatal & error_prepend/error_append_hint: user
->>> can't see this additional information, because exit() happens in
->>> error_setg earlier than information is added. [Reported by Greg Kurz]
->>>
->>> 2. Fix issue with error_abort & error_propagate: when we wrap
->>> error_abort by local_err+error_propagate, resulting coredump will
->>> refer to error_propagate and not to the place where error happened.
->>=20
->> I get what you mean, but I have plenty of context.
->>=20
->>> (the macro itself doesn't fix the issue, but it allows to [3.] drop all
->>> local_err+error_propagate pattern, which will definitely fix the issue)
->>=20
->> The parenthesis is not part of the goal.
->>=20
->>> [Reported by Kevin Wolf]
->>>
->>> 3. Drop local_err+error_propagate pattern, which is used to workaround
->>> void functions with errp parameter, when caller wants to know resulting
->>> status. (Note: actually these functions could be merely updated to
->>> return int error code).
->>>
->>> To achieve these goals, we need to add invocation of the macro at start
->>> of functions, which needs error_prepend/error_append_hint (1.); add
->>> invocation of the macro at start of functions which do
->>> local_err+error_propagate scenario the check errors, drop local errors
->>> from them and just use *errp instead (2., 3.).
->>=20
->> The paragraph talks about two cases: 1. and 2.+3.=20
->
-> Hmm, I don't think so.. 1. and 2. are issues. 3. is a refactoring.. We ju=
-st
-> fix achieve 2 and 3 by one action.
->
->> Makes me think we
->> want two paragraphs, each illustrated with an example.
->>=20
->> What about you provide the examples, and then I try to polish the prose?
->
-> 1: error_fatal problem
->
-> Assume the following code flow:
->
-> int f1(errp) {
->     ...
->     ret =3D f2(errp);
->     if (ret < 0) {
->        error_append_hint(errp, "very useful hint");
->        return ret;
->     }
->     ...
-> }
->
-> Now, if we call f1 with &error_fatal argument and f2 fails, the program
-> will exit immediately inside f2, when setting the errp. User will not
-> see the hint.
->
-> So, in this case we should use local_err.
-
-How does this example look after the transformation?
-
-> 2: error_abort problem
->
-> Now, consider functions without return value. We normally use local_err
-> variable to catch failures:
->
-> void f1(errp) {
->     Error *local_err =3D NULL;
->     ...
->     f2(&local_err);
->     if (local_err) {
->         error_propagate(errp, local_err);
->         return;
->     }
->     ...
-> }
->
-> Now, if we call f2 with &error_abort and f2 fails, the stack in resulting
-> crash dump will point to error_propagate, not to the failure point in f2,
-> which complicates debugging.
->
-> So, we should never wrap error_abort by local_err.
-
-Likewise.
-
->
-> =3D=3D=3D
->
-> Our solution:
->
-> - Fixes [1.], adding invocation of new macro into functions with error_ap=
-pen_hint/error_prepend,
->    New macro will wrap error_fatal.
-> - Fixes [2.], by switching from hand-written local_err to smart macro, wh=
-ich never
->    wraps error_abort.
-> - Handles [3.], by switching to macro, which is less code
-> - Additionally, macro doesn't wrap normal non-zero errp, to avoid extra p=
-ropagations
->    (in fact, error_propagate is called, but returns immediately on first =
-if (!local_err))
-
+MDUuMTIuMjAxOSAxNTozNiwgTWFya3VzIEFybWJydXN0ZXIgd3JvdGU6DQo+IFZsYWRpbWlyIFNl
+bWVudHNvdi1PZ2lldnNraXkgPHZzZW1lbnRzb3ZAdmlydHVvenpvLmNvbT4gd3JpdGVzOg0KPiAN
+Cj4+IDA0LjEyLjIwMTkgMTc6NTksIE1hcmt1cyBBcm1icnVzdGVyIHdyb3RlOg0KPj4+IFZsYWRp
+bWlyIFNlbWVudHNvdi1PZ2lldnNraXkgPHZzZW1lbnRzb3ZAdmlydHVvenpvLmNvbT4gd3JpdGVz
+Og0KPj4+DQo+Pj4+IEhlcmUgaXMgaW50cm9kdWNlZCBFUlJQX0FVVE9fUFJPUEFHQVRFIG1hY3Jv
+LCB0byBiZSB1c2VkIGF0IHN0YXJ0IG9mDQo+Pj4+IGZ1bmN0aW9ucyB3aXRoIGVycnAgT1VUIHBh
+cmFtZXRlci4NCj4+Pj4NCj4+Pj4gSXQgaGFzIHRocmVlIGdvYWxzOg0KPj4+Pg0KPj4+PiAxLiBG
+aXggaXNzdWUgd2l0aCBlcnJvcl9mYXRhbCAmIGVycm9yX3ByZXBlbmQvZXJyb3JfYXBwZW5kX2hp
+bnQ6IHVzZXINCj4+Pj4gY2FuJ3Qgc2VlIHRoaXMgYWRkaXRpb25hbCBpbmZvcm1hdGlvbiwgYmVj
+YXVzZSBleGl0KCkgaGFwcGVucyBpbg0KPj4+PiBlcnJvcl9zZXRnIGVhcmxpZXIgdGhhbiBpbmZv
+cm1hdGlvbiBpcyBhZGRlZC4gW1JlcG9ydGVkIGJ5IEdyZWcgS3Vyel0NCj4+Pj4NCj4+Pj4gMi4g
+Rml4IGlzc3VlIHdpdGggZXJyb3JfYWJvcnQgJiBlcnJvcl9wcm9wYWdhdGU6IHdoZW4gd2Ugd3Jh
+cA0KPj4+PiBlcnJvcl9hYm9ydCBieSBsb2NhbF9lcnIrZXJyb3JfcHJvcGFnYXRlLCByZXN1bHRp
+bmcgY29yZWR1bXAgd2lsbA0KPj4+PiByZWZlciB0byBlcnJvcl9wcm9wYWdhdGUgYW5kIG5vdCB0
+byB0aGUgcGxhY2Ugd2hlcmUgZXJyb3IgaGFwcGVuZWQuDQo+Pj4NCj4+PiBJIGdldCB3aGF0IHlv
+dSBtZWFuLCBidXQgSSBoYXZlIHBsZW50eSBvZiBjb250ZXh0Lg0KPj4+DQo+Pj4+ICh0aGUgbWFj
+cm8gaXRzZWxmIGRvZXNuJ3QgZml4IHRoZSBpc3N1ZSwgYnV0IGl0IGFsbG93cyB0byBbMy5dIGRy
+b3AgYWxsDQo+Pj4+IGxvY2FsX2VycitlcnJvcl9wcm9wYWdhdGUgcGF0dGVybiwgd2hpY2ggd2ls
+bCBkZWZpbml0ZWx5IGZpeCB0aGUgaXNzdWUpDQo+Pj4NCj4+PiBUaGUgcGFyZW50aGVzaXMgaXMg
+bm90IHBhcnQgb2YgdGhlIGdvYWwuDQo+Pj4NCj4+Pj4gW1JlcG9ydGVkIGJ5IEtldmluIFdvbGZd
+DQo+Pj4+DQo+Pj4+IDMuIERyb3AgbG9jYWxfZXJyK2Vycm9yX3Byb3BhZ2F0ZSBwYXR0ZXJuLCB3
+aGljaCBpcyB1c2VkIHRvIHdvcmthcm91bmQNCj4+Pj4gdm9pZCBmdW5jdGlvbnMgd2l0aCBlcnJw
+IHBhcmFtZXRlciwgd2hlbiBjYWxsZXIgd2FudHMgdG8ga25vdyByZXN1bHRpbmcNCj4+Pj4gc3Rh
+dHVzLiAoTm90ZTogYWN0dWFsbHkgdGhlc2UgZnVuY3Rpb25zIGNvdWxkIGJlIG1lcmVseSB1cGRh
+dGVkIHRvDQo+Pj4+IHJldHVybiBpbnQgZXJyb3IgY29kZSkuDQo+Pj4+DQo+Pj4+IFRvIGFjaGll
+dmUgdGhlc2UgZ29hbHMsIHdlIG5lZWQgdG8gYWRkIGludm9jYXRpb24gb2YgdGhlIG1hY3JvIGF0
+IHN0YXJ0DQo+Pj4+IG9mIGZ1bmN0aW9ucywgd2hpY2ggbmVlZHMgZXJyb3JfcHJlcGVuZC9lcnJv
+cl9hcHBlbmRfaGludCAoMS4pOyBhZGQNCj4+Pj4gaW52b2NhdGlvbiBvZiB0aGUgbWFjcm8gYXQg
+c3RhcnQgb2YgZnVuY3Rpb25zIHdoaWNoIGRvDQo+Pj4+IGxvY2FsX2VycitlcnJvcl9wcm9wYWdh
+dGUgc2NlbmFyaW8gdGhlIGNoZWNrIGVycm9ycywgZHJvcCBsb2NhbCBlcnJvcnMNCj4+Pj4gZnJv
+bSB0aGVtIGFuZCBqdXN0IHVzZSAqZXJycCBpbnN0ZWFkICgyLiwgMy4pLg0KPj4+DQo+Pj4gVGhl
+IHBhcmFncmFwaCB0YWxrcyBhYm91dCB0d28gY2FzZXM6IDEuIGFuZCAyLiszLg0KPj4NCj4+IEht
+bSwgSSBkb24ndCB0aGluayBzby4uIDEuIGFuZCAyLiBhcmUgaXNzdWVzLiAzLiBpcyBhIHJlZmFj
+dG9yaW5nLi4gV2UganVzdA0KPj4gZml4IGFjaGlldmUgMiBhbmQgMyBieSBvbmUgYWN0aW9uLg0K
+Pj4NCj4+PiBNYWtlcyBtZSB0aGluayB3ZQ0KPj4+IHdhbnQgdHdvIHBhcmFncmFwaHMsIGVhY2gg
+aWxsdXN0cmF0ZWQgd2l0aCBhbiBleGFtcGxlLg0KPj4+DQo+Pj4gV2hhdCBhYm91dCB5b3UgcHJv
+dmlkZSB0aGUgZXhhbXBsZXMsIGFuZCB0aGVuIEkgdHJ5IHRvIHBvbGlzaCB0aGUgcHJvc2U/DQo+
+Pg0KPj4gMTogZXJyb3JfZmF0YWwgcHJvYmxlbQ0KPj4NCj4+IEFzc3VtZSB0aGUgZm9sbG93aW5n
+IGNvZGUgZmxvdzoNCj4+DQo+PiBpbnQgZjEoZXJycCkgew0KPj4gICAgICAuLi4NCj4+ICAgICAg
+cmV0ID0gZjIoZXJycCk7DQo+PiAgICAgIGlmIChyZXQgPCAwKSB7DQo+PiAgICAgICAgIGVycm9y
+X2FwcGVuZF9oaW50KGVycnAsICJ2ZXJ5IHVzZWZ1bCBoaW50Iik7DQo+PiAgICAgICAgIHJldHVy
+biByZXQ7DQo+PiAgICAgIH0NCj4+ICAgICAgLi4uDQo+PiB9DQo+Pg0KPj4gTm93LCBpZiB3ZSBj
+YWxsIGYxIHdpdGggJmVycm9yX2ZhdGFsIGFyZ3VtZW50IGFuZCBmMiBmYWlscywgdGhlIHByb2dy
+YW0NCj4+IHdpbGwgZXhpdCBpbW1lZGlhdGVseSBpbnNpZGUgZjIsIHdoZW4gc2V0dGluZyB0aGUg
+ZXJycC4gVXNlciB3aWxsIG5vdA0KPj4gc2VlIHRoZSBoaW50Lg0KPj4NCj4+IFNvLCBpbiB0aGlz
+IGNhc2Ugd2Ugc2hvdWxkIHVzZSBsb2NhbF9lcnIuDQo+IA0KPiBIb3cgZG9lcyB0aGlzIGV4YW1w
+bGUgbG9vayBhZnRlciB0aGUgdHJhbnNmb3JtYXRpb24/DQoNCkdvb2QgcG9pbnQuDQoNCmludCBm
+MShlcnJwKSB7DQogICAgRVJSUF9BVVRPX1BST1BBR0FURSgpOw0KICAgIC4uLg0KICAgIHJldCA9
+IGYyKGVycnApOw0KICAgIGlmIChyZXQgPCAwKSB7DQogICAgICAgZXJyb3JfYXBwZW5kX2hpbnQo
+ZXJycCwgInZlcnkgdXNlZnVsIGhpbnQiKTsNCiAgICAgICByZXR1cm4gcmV0Ow0KICAgIH0NCiAg
+ICAuLi4NCn0NCg0KLSBub3RoaW5nIGNoYW5nZWQsIG9ubHkgYWRkIG1hY3JvIGF0IHN0YXJ0LiBC
+dXQgbm93IGVycnAgaXMgc2FmZSwgaWYgaXQgd2FzDQplcnJvcl9mYXRhbCBpdCBpcyB3cmFwcGVk
+IGJ5IGxvY2FsIGVycm9yLCBhbmQgd2lsbCBvbmx5IGNhbGwgZXhpdCBvbiBhdXRvbWF0aWMNCnBy
+b3BhZ2F0aW9uIG9uIGYxIGZpbmlzaC4NCg0KPiANCj4+IDI6IGVycm9yX2Fib3J0IHByb2JsZW0N
+Cj4+DQo+PiBOb3csIGNvbnNpZGVyIGZ1bmN0aW9ucyB3aXRob3V0IHJldHVybiB2YWx1ZS4gV2Ug
+bm9ybWFsbHkgdXNlIGxvY2FsX2Vycg0KPj4gdmFyaWFibGUgdG8gY2F0Y2ggZmFpbHVyZXM6DQo+
+Pg0KPj4gdm9pZCBmMShlcnJwKSB7DQo+PiAgICAgIEVycm9yICpsb2NhbF9lcnIgPSBOVUxMOw0K
+Pj4gICAgICAuLi4NCj4+ICAgICAgZjIoJmxvY2FsX2Vycik7DQo+PiAgICAgIGlmIChsb2NhbF9l
+cnIpIHsNCj4+ICAgICAgICAgIGVycm9yX3Byb3BhZ2F0ZShlcnJwLCBsb2NhbF9lcnIpOw0KPj4g
+ICAgICAgICAgcmV0dXJuOw0KPj4gICAgICB9DQo+PiAgICAgIC4uLg0KPj4gfQ0KPj4NCj4+IE5v
+dywgaWYgd2UgY2FsbCBmMiB3aXRoICZlcnJvcl9hYm9ydCBhbmQgZjIgZmFpbHMsIHRoZSBzdGFj
+ayBpbiByZXN1bHRpbmcNCj4+IGNyYXNoIGR1bXAgd2lsbCBwb2ludCB0byBlcnJvcl9wcm9wYWdh
+dGUsIG5vdCB0byB0aGUgZmFpbHVyZSBwb2ludCBpbiBmMiwNCj4+IHdoaWNoIGNvbXBsaWNhdGVz
+IGRlYnVnZ2luZy4NCj4+DQo+PiBTbywgd2Ugc2hvdWxkIG5ldmVyIHdyYXAgZXJyb3JfYWJvcnQg
+YnkgbG9jYWxfZXJyLg0KPiANCj4gTGlrZXdpc2UuDQoNCkFuZCBoZXJlOg0KDQp2b2lkIGYxKGVy
+cnApIHsNCiAgICAgRVJSUF9BVVRPX1BST1BBR0FURSgpOw0KICAgICAuLi4NCiAgICAgZjIoZXJy
+cCk7DQogICAgIGlmICgqZXJycCkgew0KICAgICAgICAgcmV0dXJuOw0KICAgICB9DQogICAgIC4u
+Lg0KDQotIGlmIGVycnAgd2FzIE5VTEwsIGl0IGlzIHdyYXBwZWQsIHNvIGRlcmVmZXJlbmNpbmcg
+ZXJycCBpcyBzYWZlLiBPbiByZXR1cm4sDQogICBsb2NhbCBlcnJvciBpcyBhdXRvbWF0aWNhbGx5
+IHByb3BhZ2F0ZWQgdG8gb3JpZ2luYWwgb25lLg0KDQo+IA0KPj4NCj4+ID09PQ0KPj4NCj4+IE91
+ciBzb2x1dGlvbjoNCj4+DQo+PiAtIEZpeGVzIFsxLl0sIGFkZGluZyBpbnZvY2F0aW9uIG9mIG5l
+dyBtYWNybyBpbnRvIGZ1bmN0aW9ucyB3aXRoIGVycm9yX2FwcGVuX2hpbnQvZXJyb3JfcHJlcGVu
+ZCwNCj4+ICAgICBOZXcgbWFjcm8gd2lsbCB3cmFwIGVycm9yX2ZhdGFsLg0KPj4gLSBGaXhlcyBb
+Mi5dLCBieSBzd2l0Y2hpbmcgZnJvbSBoYW5kLXdyaXR0ZW4gbG9jYWxfZXJyIHRvIHNtYXJ0IG1h
+Y3JvLCB3aGljaCBuZXZlcg0KPj4gICAgIHdyYXBzIGVycm9yX2Fib3J0Lg0KPj4gLSBIYW5kbGVz
+IFszLl0sIGJ5IHN3aXRjaGluZyB0byBtYWNybywgd2hpY2ggaXMgbGVzcyBjb2RlDQo+PiAtIEFk
+ZGl0aW9uYWxseSwgbWFjcm8gZG9lc24ndCB3cmFwIG5vcm1hbCBub24temVybyBlcnJwLCB0byBh
+dm9pZCBleHRyYSBwcm9wYWdhdGlvbnMNCj4+ICAgICAoaW4gZmFjdCwgZXJyb3JfcHJvcGFnYXRl
+IGlzIGNhbGxlZCwgYnV0IHJldHVybnMgaW1tZWRpYXRlbHkgb24gZmlyc3QgaWYgKCFsb2NhbF9l
+cnIpKQ0KPiANCg0KDQotLSANCkJlc3QgcmVnYXJkcywNClZsYWRpbWlyDQo=
 
