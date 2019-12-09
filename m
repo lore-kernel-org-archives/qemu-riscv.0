@@ -1,66 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ieNaX-00071B-Jk
-	for mharc-qemu-riscv@gnu.org; Mon, 09 Dec 2019 13:16:53 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:34600)
+	id 1ieNaY-00072z-Po
+	for mharc-qemu-riscv@gnu.org; Mon, 09 Dec 2019 13:16:54 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:34627)
  by lists.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <prvs=23948302b=alistair.francis@wdc.com>)
- id 1ieNaT-0006vz-Mq
- for qemu-riscv@nongnu.org; Mon, 09 Dec 2019 13:16:50 -0500
+ id 1ieNaV-0006z9-V7
+ for qemu-riscv@nongnu.org; Mon, 09 Dec 2019 13:16:52 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
  (envelope-from <prvs=23948302b=alistair.francis@wdc.com>)
- id 1ieNaS-0007GL-GY
- for qemu-riscv@nongnu.org; Mon, 09 Dec 2019 13:16:49 -0500
+ id 1ieNaU-0007Hs-Vh
+ for qemu-riscv@nongnu.org; Mon, 09 Dec 2019 13:16:51 -0500
 Received: from esa2.hgst.iphmx.com ([68.232.143.124]:7351)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <prvs=23948302b=alistair.francis@wdc.com>)
- id 1ieNaQ-000793-38; Mon, 09 Dec 2019 13:16:46 -0500
+ id 1ieNaS-000793-MO; Mon, 09 Dec 2019 13:16:48 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1575915425; x=1607451425;
+ t=1575915429; x=1607451429;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=FEn9iowGIhh/4J3ieDV3VnOcaKziBmbfgw3ywvga+og=;
- b=qo1XQQfY5sYCO2HjpANtAaaP3BJMw0NjwVbf3X5Z5WZlGL7AwiS1wFVH
- +yAFoJO2q9sjpv1EqCkdXtsbNsZ7pnpeboZxqh8d2GsuZnr7GzvDDtaPC
- kpyDuEHzg2Y7yisd8Kip6GhAl4dl9XgC+ppc6fFitM9iwaLHG6mKxlqAg
- WZzoN1HXVuHon5DQDagsDCXxS8DfRF0nhuK4uAtQ8dSzEuzEc1poTlBXN
- wF1IEFhxxlEtiyLUys/3KYNaUWbp9VjEpKmXeSxrzqyV2YhhLoLkEk1Ak
- Yvmf7tLij+OAas6U+kZvjNfpxmLSCnzSqdY8kq/Tlo/qFssQ3sZb2r+03 w==;
-IronPort-SDR: fEE5b2wtSB9W6n9k8p8mgBp++fjCmYSkotwIbGBSgH8hWeFngDTUtciFZsTcAlzhlI88LSjzzf
- EI6WU4qs5fdyH6J7E3jUApJICpi9ao6Jv/uNekUPK8mqdFSeLEkNebgmxz2qpPaJGFUNGLtlTK
- /VX3tpnYrA+yMnEvjNvCf+y2lNdrddOe+J27ywY5P6Y06KLyz7NyQtSRoA8O7uUgbmO/mW9OqK
- 8Jc0UB6m67kKr9+8a/5fQiNUV25GRPyx1lpQaYn2QyZUR/HI8vCtcVKEA2GHcIRJVJrLb9u6cX
- GAM=
-X-IronPort-AV: E=Sophos;i="5.69,296,1571673600"; d="scan'208";a="226411940"
+ bh=38AbqMpKSlFAyAmt2P22sbgAzKpx4WRYDp8rZGy1W24=;
+ b=AGPnhzq+kr88a1FxgJl4siOx7clny+wge5ovXjvTAtRwLIP36lYBVHF/
+ 4SfiRz4nxhAYaS17tfkbEzHiZom9poiaJzS7ybZQLAkUJAN7VAHUBAPe5
+ K+wBk6sgHuE8Gxj/6S7NT8dSevcRtWgBMoDcGle6Jzexgrhhx9r0IgCCA
+ wISrGQT+aAr7ksi4lw+gkpxEX9D+T2mFzrymVs/pFAB8WVRPsqNIAbA6X
+ IniYTM4AaoWpLNTsZz0r5EMJ4GuUZD0tHQiv1OqZH2Aix9wVOeUT4FkZ0
+ bfc6qfNR0uAckYEPDSAMj5o6y1k6GAg4oGkFzA+q9DU3yvvzTNx9wwETy g==;
+IronPort-SDR: ES2iYsj0ABSkl8Yuh1yZxgX9GCLus6RCL7IlE94r725XP2kPaPXyNuNLxNkuV3QUW4i4D+JvGh
+ uNJf4iIgf/N8EsWBRHAlV1Cw5oUOIOOLZ6OlDt9JJDQ2qvSEYubUl7v8A4iNVR5iuoDDvIDwVd
+ IRTjSVagXdTF7NRWnrGQQDpvmqeMk4aalPRG3hr23d5A1HQCAGmRIhzULvoibRdb0soRqI1taf
+ DxfymixD4zIc/2PE4j+lzLI03BpbjPojs8UkvYMx5ff5jH879IMTTxulM7frbXaaw0IZkuu34d
+ 5sw=
+X-IronPort-AV: E=Sophos;i="5.69,296,1571673600"; d="scan'208";a="226411946"
 Received: from h199-255-45-15.hgst.com (HELO uls-op-cesaep02.wdc.com)
  ([199.255.45.15])
- by ob1.hgst.iphmx.com with ESMTP; 10 Dec 2019 02:17:04 +0800
-IronPort-SDR: I/E2bnUfZqlEEENB+CFwIzz9VdDa+6llq/muRARwaoPfrugHGkF8Vg9T3YS7d5SVVtH++T7Hll
- 3fg7riK4mNCO+5JBhqfVfGb1A6HybkENvNHT0LqdkfqmpxQPasHa30WfJvs2MLj4Rt2U77rseh
- 4zqQJ3xedoI1ncm885et2SiN9sg9Bi9sb8U7vfydKE0RXshGHPiAkE1zn+hWat/nB93hgk1KV4
- Gw7tt55G3TPO0RgopKAzS1b6feALrmPD1mC7F5AKirvrppZGZUo4Gh6Bam7bl44fGuk6QFh2UN
- 4hraKcZVawGWljWkXO6gr+jd
+ by ob1.hgst.iphmx.com with ESMTP; 10 Dec 2019 02:17:08 +0800
+IronPort-SDR: wVkgsR5aYj5UUQ4f1LRS2rZcwlQbKLCTGd8F5dXBl7D0PuRfF9vQrN/TMVBB5mW6S9kpSsQyxB
+ EHxYOwWvrSYCqDxlp0qy8lgNClRW/habj2XYS7pXFBAnTjWz3lWM2x7xFr19egYfVO/kdhA52y
+ MyYISsKIRVAj3BMfmF603v+qPQOA4txiUbk7CJAw0TTq4cOdcthsQNIeAcL/gPvMZin3f4KeXq
+ 4n6GSi6XZPR78HqznnSQhqHW65pVRpRQO1gLEwTq3FlZ8EkO5BtVu2y98iddhheVFaewADxcKC
+ lBPRko402Tg/EERKnUVbl84O
 Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
  by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 09 Dec 2019 10:11:02 -0800
-IronPort-SDR: 2IJIx8AacBGV4Dyw909ZHGldOjiHpe38VPvOCZ0wsQJ0q3NSYuWFtu5JnztlskbwQgJVoxFCfj
- OekPcrfUvydO/gm3HIVFx0dmOT6NgThreQRjEPOBw2UxrvxsKL8lJHH4he1d8U2RA84Rn/u15W
- Z8y2OR6AaM7v1vUAmN6ZBFbWC9TAEpN1m20hCezt98CxhYiYnOaKNVQiphMkxBCA4JZcDIThy0
- hUDRD5D7zGfKWBDeA3e7L80XgQi0n9PASPFLzUrqbiZBM8YOmlNZSFbxE0VKdvpkzYgiMwmeQ5
- Jk0=
+ 09 Dec 2019 10:11:04 -0800
+IronPort-SDR: szeDcx6Lzw6l7llnfxVAE6Bb8IvmepzqVq/J8bU/USH+MA+zfcpFd/AdFV63l8ZW6J6UxpU92o
+ zSyfwAiyOgdT57Dq38mq5lBn5ummiLwBG4gSmnu8sCKBA7bW8IRS3iEnrdXvPRrCV0vzF1ZFDw
+ MP5QaKweS6CHwtOdTZ9DAy/0iRt+Qa7V0HE/jOOP9VM1Y4Y1x/0WsQaeBGiWrxGjRBcHWvZRtm
+ j6ViWciw5PFK9/JW9BSJ4OV2nsa4/XCHkOZzcItiYhOExPEGHFi/FZCfxIgpaS3IcxGOGr2j6X
+ FVY=
 WDCIronportException: Internal
 Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
  risc6-mainframe.int.fusionio.com) ([10.196.158.235])
- by uls-op-cesaip02.wdc.com with ESMTP; 09 Dec 2019 10:16:45 -0800
+ by uls-op-cesaip02.wdc.com with ESMTP; 09 Dec 2019 10:16:48 -0800
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: palmer@dabbelt.com,
 	alistair.francis@wdc.com,
 	alistair23@gmail.com
-Subject: [PATCH v1 09/36] target/riscv: Fix CSR perm checking for HS mode
-Date: Mon,  9 Dec 2019 10:11:04 -0800
-Message-Id: <72b377cf058f6d159a40301b6880f017404ef9cd.1575914822.git.alistair.francis@wdc.com>
+Subject: [PATCH v1 10/36] target/riscv: Print priv and virt in disas log
+Date: Mon,  9 Dec 2019 10:11:06 -0800
+Message-Id: <cb6b09422da8ec4c680889779188c780338a33de.1575914822.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.24.0
 In-Reply-To: <cover.1575914822.git.alistair.francis@wdc.com>
 References: <cover.1575914822.git.alistair.francis@wdc.com>
@@ -79,47 +79,34 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Dec 2019 18:16:52 -0000
-
-Update the CSR permission checking to work correctly when we are in
-HS-mode.
+X-List-Received-Date: Mon, 09 Dec 2019 18:16:54 -0000
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
 ---
- target/riscv/csr.c | 18 ++++++++++++++----
- 1 file changed, 14 insertions(+), 4 deletions(-)
+ target/riscv/translate.c | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 6a0a59edfd..eebfc1823d 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -802,12 +802,22 @@ int riscv_csrrw(CPURISCVState *env, int csrno, target_ulong *ret_value,
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index ab6a891dc3..1a379bd2ae 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -808,7 +808,15 @@ static void riscv_tr_tb_stop(DisasContextBase *dcbase, CPUState *cpu)
  
-     /* check privileges and return -1 if check fails */
- #if !defined(CONFIG_USER_ONLY)
--    int csr_priv = get_field(csrno, 0x300);
-+    int effective_priv = env->priv;
-     int read_only = get_field(csrno, 0xC00) == 3;
--    if ((!env->debugger) && (env->priv < csr_priv)) {
--        return -1;
+ static void riscv_tr_disas_log(const DisasContextBase *dcbase, CPUState *cpu)
+ {
++#ifndef CONFIG_USER_ONLY
++    RISCVCPU *rvcpu = RISCV_CPU(cpu);
++    CPURISCVState *env = &rvcpu->env;
++#endif
 +
-+    if (riscv_has_ext(env, RVH) &&
-+        env->priv == PRV_S &&
-+        !riscv_cpu_virt_enabled(env)) {
-+        /*
-+         * We are in S mode without virtualisation, therefore we are in HS Mode.
-+         * Add 1 to the effective privledge level to allow us to access the
-+         * Hypervisor CSRs.
-+         */
-+        effective_priv++;
-     }
--    if (write_mask && read_only) {
-+
-+    if ((write_mask && read_only) ||
-+        (!env->debugger && (effective_priv < get_field(csrno, 0x300)))) {
-         return -1;
-     }
- #endif
+     qemu_log("IN: %s\n", lookup_symbol(dcbase->pc_first));
++#ifndef CONFIG_USER_ONLY
++    qemu_log("Priv: "TARGET_FMT_ld"; Virt: "TARGET_FMT_ld"\n", env->priv, env->virt);
++#endif
+     log_target_disas(cpu, dcbase->pc_first, dcbase->tb->size);
+ }
+ 
 -- 
 2.24.0
 
