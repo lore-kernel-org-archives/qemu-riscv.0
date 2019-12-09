@@ -1,74 +1,73 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ieNb4-0007lH-CI
-	for mharc-qemu-riscv@gnu.org; Mon, 09 Dec 2019 13:17:26 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:34954)
+	id 1ieNbB-0007tp-QC
+	for mharc-qemu-riscv@gnu.org; Mon, 09 Dec 2019 13:17:33 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:34989)
  by lists.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <prvs=23948302b=alistair.francis@wdc.com>)
- id 1ieNb1-0007gI-FW
- for qemu-riscv@nongnu.org; Mon, 09 Dec 2019 13:17:24 -0500
+ id 1ieNb6-0007ox-Hn
+ for qemu-riscv@nongnu.org; Mon, 09 Dec 2019 13:17:29 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
  (envelope-from <prvs=23948302b=alistair.francis@wdc.com>)
- id 1ieNb0-0007a5-ER
- for qemu-riscv@nongnu.org; Mon, 09 Dec 2019 13:17:23 -0500
-Received: from esa1.hgst.iphmx.com ([68.232.141.245]:28155)
+ id 1ieNb5-0007cS-6N
+ for qemu-riscv@nongnu.org; Mon, 09 Dec 2019 13:17:28 -0500
+Received: from esa4.hgst.iphmx.com ([216.71.154.42]:52991)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <prvs=23948302b=alistair.francis@wdc.com>)
- id 1ieNay-0007TS-2P; Mon, 09 Dec 2019 13:17:20 -0500
+ id 1ieNb1-0007aD-Eu; Mon, 09 Dec 2019 13:17:23 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1575915440; x=1607451440;
+ t=1575915443; x=1607451443;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=3GUezvYl0H8iOtJ+zLcxM7nTRgaszMLdmG6eo3ecBcI=;
- b=BMOTsgTDdOzYILvl3umC/CHzYvGBbqNvX02aAG4ysJzqYv1J9/ljt+ka
- K/k9fff94vDa3QnoxttOT5evjhJQSfBobUBW76F9Q1iRGfBBCFlkAUkzm
- AjdTwoVP0Gw4AJ1ksBemTezkfz/pjfbHp4VMgvi6pwA0eAmt1J1scHVbK
- dQksfS08DZtiqG9ZcQljKNXM2Mf8X8gtROBOqA0KxWP8lzePkqlgIjtMC
- NGht/GdZ/TSGGB1PLnDTCox+ZUM6d7n74lPIqjqOIkjn4KSJ3xnpIhCgM
- N4sD6pRpjBD/j6fsMVpxHDKg3DWmtvc9fzKJDUYsRmw26HaGSPwX0aav7 A==;
-IronPort-SDR: U6OAfgGlMhagaUT1KWsP86v2txHAYTs83vy+5IDmxNcJ/KKIc1axkylpoYpf5M4Vqiho+RdSLP
- qwmgRJEcabBBfzJNY+g92I7orczm5kOQb6rQ5JXukONZmQtjDSUwYLgb7daGiOqgSqhBXIpWIF
- 2eo1UQGI5vRSDsr7QHynHJK9wZL91Fcq4L324x2IW3FKRbRN16XmrcnM76bR3ao/918ekthD4T
- cm3fzie/aoizzUpSaOkRVNGvZEAwZp/3XaVpfGasNeVvy13pvv6dwCleVW41fPpfCRhtrocV3X
- dFw=
-X-IronPort-AV: E=Sophos;i="5.69,296,1571673600"; d="scan'208";a="232461570"
-Received: from h199-255-45-15.hgst.com (HELO uls-op-cesaep02.wdc.com)
- ([199.255.45.15])
- by ob1.hgst.iphmx.com with ESMTP; 10 Dec 2019 02:17:19 +0800
-IronPort-SDR: f+dCn0Xe3dPlCDA3C1gYB6Io20BFFVOJAoubgxrShWHkrWJeCb8Ub+3DEgGNsV3j5ym1Pn7cBt
- Ke2rBUs1Yvuo5sY31Ek9ml0Fyk5/BypVCFXZ0er8FwQjbQdCtqlFco6ar74ifFvLuumabrR0Lq
- VNpxfEZHSdCwX45waglqnrsrTTbFvw0O3jzKQGtsB6/sPkxMKKkfhkU4SkQZUA7Qj6MLf28SPY
- 0U7/d/VWyVEUIh5jg114wIENxHHmUVRbBI/phfMsIg7UkPdZLHnDQ3NcNlNssAm1J0sEbDO+cC
- zzUzp5uUfQl9vgfLYrpqYxNQ
-Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
- by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 09 Dec 2019 10:11:36 -0800
-IronPort-SDR: Nx/ONmtuUC5/tRqFPD2IDWEn4zy1z83RMi+PQEXMjLfcSqYbjcRy0oQc0dP+F/9QM7UXXIZ8lT
- zUh6yruwBdAfsg1xG/XFvdPEADIhVzR/bNFTYA/OG+NspV9erXuS8CMNWIYd80ip6XHv+evOz4
- 6AGS3WklFF81fcubxIvDlwCjBl0AIInHt2M59cQUov42e/4SRvy3ixF9fRIsYSyKpbHcswNJNI
- L8k8htQ8Naj7f9wXfOjsCmZrXn6XA8rpEmjqwJJNidncLMGdcOQw2prm3wr5GbXTprr5e1hRyq
- ZZw=
+ bh=IycmilN1P4zdLVNS81S76S54ZxRSpj6iUkohzNbbz80=;
+ b=i/WhW1ydeMQ/ogH1oJujM8FKu9qIJP7dNj0cyNOc85n5BbET2NPUt9tz
+ f/+6lUNveT9X/1DSFYRcrFSFT2QtilX58MAa5wsrkPYiOk8eVAVQ83/gg
+ Ii4tsbybjiNaTVWw5FnrZhiFe3zL1d++UgJYK6l3nTUXIahyHLvfmHi5+
+ fogJzdJu6v/VLcwPd4GPyupp8pnXnhSkdlOQgg0gMdSSlg/yc+1DpKPRO
+ skdgwgMtymKq7W5kzRkNWOPoNKVRL2JeZzxpa9Fa991D9GczrqkB5Lr0c
+ qGjE7sDlt7MhbHFDG0G54oOSZ8FBj6G5CF6QZ3mnHn2VUNP9cFEDUiGfQ Q==;
+IronPort-SDR: aQ8c1cm0ah4SYMPSxnNpP+ygoOLEUZK/tk9nZ4RGyngUC6tNHN9baW0tt1zB3Afhz5R2HyNoT+
+ FxNTkg01nxobDrgOj+CTw/XM4xCwWgLSFaTwCYQ25A7SGc3GpxP86s3s/NkVZ9jJ7bVqm79BXr
+ LtFNgRaXsmCN+t+i5j7j2iem0aieVZPlBCOv24MlNx75IRlfFzBo4WZ4LQhiOIIsd2rj00swaz
+ nCdTK4dWyemZAmv2d2bWKa0xYeGDqgHwQrimI4OMNIBbX+xmOQYSujh9VkWWIiOhxg7Vu67+PO
+ Ons=
+X-IronPort-AV: E=Sophos;i="5.69,296,1571673600"; d="scan'208";a="124925583"
+Received: from h199-255-45-14.hgst.com (HELO uls-op-cesaep01.wdc.com)
+ ([199.255.45.14])
+ by ob1.hgst.iphmx.com with ESMTP; 10 Dec 2019 02:17:22 +0800
+IronPort-SDR: k18Gk9h70Et/nCBgQ+rFaV1JQUJ10GKQnHZFD74p6pr5bh8ax2ANXFsgHmBEkhF2f6Nc8Gorld
+ wOzE3j6f0NYPHWfwLZGvUiU1JBNYMVUyLDQbV+UmmpkulroLOoGm0Ber16eRxBlQr4w4w0Dm82
+ bypXQhXbkF4DIfL/r/YgWTc9Ma9SjW5r3264x89SxAB2EHCFHESugWhyeCbXSH9NLkh6gtaSBR
+ otIdaRvstShFen9gbB7fnYtXzILizqGCx7kIiBFpKnP/v9e5zFWcfWhXqH8NiO5G2+sUjUq8Ay
+ qu/ExcK3IAQDaSC/yKegfslM
+Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
+ by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 09 Dec 2019 10:12:00 -0800
+IronPort-SDR: pkopMyrvo5GY3QgwgFf36cG9LfovaTuyCQ7GrsOMA771Q411R8o0at7p2qJjmETJcFdSExlWnU
+ NHDGbMeo5E6zRmGL/VjTjdXoptHbrID83aHOow7sajRv0Qsi2W8jUd9yT9RbjtV3joEKwOGc3W
+ bw9NsJMEIKWxZlvqKeJyuEN0Viv7obJ1us2MMHRLaFblhXmSVPUtsgkBildg82PZ+fvCROUv2l
+ aU3IdPKrR7fzXbImxgNaf8qPQ8w0DAMWTH2PiPLj5NpZcB2fiqT65PmxqA4IuVjhAqs4lI0kZb
+ W6Y=
 WDCIronportException: Internal
 Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
  risc6-mainframe.int.fusionio.com) ([10.196.158.235])
- by uls-op-cesaip02.wdc.com with ESMTP; 09 Dec 2019 10:17:19 -0800
+ by uls-op-cesaip01.wdc.com with ESMTP; 09 Dec 2019 10:17:23 -0800
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: palmer@dabbelt.com,
 	alistair.francis@wdc.com,
 	alistair23@gmail.com
-Subject: [PATCH v1 22/36] target/riscv: Generate illegal instruction on WFI
- when V=1
-Date: Mon,  9 Dec 2019 10:11:37 -0800
-Message-Id: <b1b5cc3f1f924b8dadb615feac199df7ab266335.1575914822.git.alistair.francis@wdc.com>
+Subject: [PATCH v1 23/36] target/riscv: Add hypvervisor trap support
+Date: Mon,  9 Dec 2019 10:11:40 -0800
+Message-Id: <f3bdee4a9bee10980939c37968aa45b406824e48.1575914822.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.24.0
 In-Reply-To: <cover.1575914822.git.alistair.francis@wdc.com>
 References: <cover.1575914822.git.alistair.francis@wdc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: FreeBSD 9.x [fuzzy]
-X-Received-From: 68.232.141.245
+X-Received-From: 216.71.154.42
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -80,31 +79,118 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Dec 2019 18:17:25 -0000
+X-List-Received-Date: Mon, 09 Dec 2019 18:17:30 -0000
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
 ---
- target/riscv/op_helper.c | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+ target/riscv/cpu_helper.c | 65 +++++++++++++++++++++++++++++++++------
+ 1 file changed, 55 insertions(+), 10 deletions(-)
 
-diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
-index d150551bc9..beb34e705b 100644
---- a/target/riscv/op_helper.c
-+++ b/target/riscv/op_helper.c
-@@ -130,9 +130,10 @@ void helper_wfi(CPURISCVState *env)
- {
-     CPUState *cs = env_cpu(env);
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index 1b747abf93..2c6d2bc3a3 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -641,6 +641,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
  
--    if (env->priv == PRV_S &&
-+    if ((env->priv == PRV_S &&
-         env->priv_ver >= PRIV_VERSION_1_10_0 &&
--        get_field(*env->mstatus, MSTATUS_TW)) {
-+        get_field(*env->mstatus, MSTATUS_TW)) ||
-+        riscv_cpu_virt_enabled(env)) {
-         riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
+     RISCVCPU *cpu = RISCV_CPU(cs);
+     CPURISCVState *env = &cpu->env;
++    target_ulong s;
+ 
+     /* cs->exception is 32-bits wide unlike mcause which is XLEN-bits wide
+      * so we mask off the MSB and separate into trap type and cause.
+@@ -650,13 +651,6 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+     target_ulong deleg = async ? env->mideleg : env->medeleg;
+     target_ulong tval = 0;
+ 
+-    static const int ecall_cause_map[] = {
+-        [PRV_U] = RISCV_EXCP_U_ECALL,
+-        [PRV_S] = RISCV_EXCP_S_ECALL,
+-        [PRV_H] = RISCV_EXCP_VS_ECALL,
+-        [PRV_M] = RISCV_EXCP_M_ECALL
+-    };
+-
+     if (!async) {
+         /* set tval to badaddr for traps with address information */
+         switch (cause) {
+@@ -680,7 +674,16 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+         /* ecall is dispatched as one cause so translate based on mode */
+         if (cause == RISCV_EXCP_U_ECALL) {
+             assert(env->priv <= 3);
+-            cause = ecall_cause_map[env->priv];
++
++            if (env->priv == PRV_M) {
++                cause = RISCV_EXCP_M_ECALL;
++            } else if (env->priv == PRV_S && riscv_cpu_virt_enabled(env)) {
++                cause = RISCV_EXCP_VS_ECALL;
++            } else if (env->priv == PRV_S && !riscv_cpu_virt_enabled(env)) {
++                cause = RISCV_EXCP_S_ECALL;
++            } else if (env->priv == PRV_U) {
++                cause = RISCV_EXCP_U_ECALL;
++            }
+         }
+     }
+ 
+@@ -690,7 +693,36 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+     if (env->priv <= PRV_S &&
+             cause < TARGET_LONG_BITS && ((deleg >> cause) & 1)) {
+         /* handle the trap in S-mode */
+-        target_ulong s = *env->mstatus;
++        if (riscv_has_ext(env, RVH)) {
++            target_ulong hdeleg = async ? env->hideleg : env->hedeleg;
++
++            if (riscv_cpu_virt_enabled(env) && ((hdeleg >> cause) & 1) &&
++                !riscv_cpu_force_hs_excep_enabled(env)) {
++                /* Trap to VS mode */
++            } else if (riscv_cpu_virt_enabled(env)) {
++                /* Trap into HS mode, from virt */
++                riscv_cpu_swap_hypervisor_regs(env);
++                env->hstatus = set_field(env->hstatus, HSTATUS_SP2V,
++                                         get_field(env->hstatus, HSTATUS_SPV));
++                env->hstatus = set_field(env->hstatus, HSTATUS_SP2P,
++                                         get_field(*env->mstatus, SSTATUS_SPP));
++                env->hstatus = set_field(env->hstatus, HSTATUS_SPV,
++                                         riscv_cpu_virt_enabled(env));
++
++                riscv_cpu_set_virt_enabled(env, 0);
++                riscv_cpu_set_force_hs_excep(env, 0);
++            } else {
++                /* Trap into HS mode */
++                env->hstatus = set_field(env->hstatus, HSTATUS_SP2V,
++                                         get_field(env->hstatus, HSTATUS_SPV));
++                env->hstatus = set_field(env->hstatus, HSTATUS_SP2P,
++                                         get_field(*env->mstatus, SSTATUS_SPP));
++                env->hstatus = set_field(env->hstatus, HSTATUS_SPV,
++                                         riscv_cpu_virt_enabled(env));
++            }
++        }
++
++        s = *env->mstatus;
+         s = set_field(s, MSTATUS_SPIE, env->priv_ver >= PRIV_VERSION_1_10_0 ?
+             get_field(s, MSTATUS_SIE) : get_field(s, MSTATUS_UIE << env->priv));
+         s = set_field(s, MSTATUS_SPP, env->priv);
+@@ -704,7 +736,20 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+         riscv_cpu_set_mode(env, PRV_S);
      } else {
-         cs->halted = 1;
+         /* handle the trap in M-mode */
+-        target_ulong s = *env->mstatus;
++        if (riscv_has_ext(env, RVH)) {
++            if (riscv_cpu_virt_enabled(env)) {
++                riscv_cpu_swap_hypervisor_regs(env);
++            }
++            *env->mstatus = set_field(*env->mstatus, MSTATUS_MPV,
++                                      riscv_cpu_virt_enabled(env));
++            *env->mstatus = set_field(*env->mstatus, MSTATUS_MTL,
++                                      riscv_cpu_force_hs_excep_enabled(env));
++
++            /* Trapping to M mode, virt is disabled */
++            riscv_cpu_set_virt_enabled(env, 0);
++        }
++
++        s = *env->mstatus;
+         s = set_field(s, MSTATUS_MPIE, env->priv_ver >= PRIV_VERSION_1_10_0 ?
+             get_field(s, MSTATUS_MIE) : get_field(s, MSTATUS_UIE << env->priv));
+         s = set_field(s, MSTATUS_MPP, env->priv);
 -- 
 2.24.0
 
