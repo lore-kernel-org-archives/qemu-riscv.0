@@ -1,67 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ieNb2-0007ht-PA
-	for mharc-qemu-riscv@gnu.org; Mon, 09 Dec 2019 13:17:24 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:34934)
+	id 1ieNb4-0007lH-CI
+	for mharc-qemu-riscv@gnu.org; Mon, 09 Dec 2019 13:17:26 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:34954)
  by lists.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <prvs=23948302b=alistair.francis@wdc.com>)
- id 1ieNay-0007cd-QK
- for qemu-riscv@nongnu.org; Mon, 09 Dec 2019 13:17:21 -0500
+ id 1ieNb1-0007gI-FW
+ for qemu-riscv@nongnu.org; Mon, 09 Dec 2019 13:17:24 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
  (envelope-from <prvs=23948302b=alistair.francis@wdc.com>)
- id 1ieNax-0007Yc-MC
- for qemu-riscv@nongnu.org; Mon, 09 Dec 2019 13:17:20 -0500
+ id 1ieNb0-0007a5-ER
+ for qemu-riscv@nongnu.org; Mon, 09 Dec 2019 13:17:23 -0500
 Received: from esa1.hgst.iphmx.com ([68.232.141.245]:28155)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <prvs=23948302b=alistair.francis@wdc.com>)
- id 1ieNav-0007TS-Fp; Mon, 09 Dec 2019 13:17:17 -0500
+ id 1ieNay-0007TS-2P; Mon, 09 Dec 2019 13:17:20 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1575915437; x=1607451437;
+ t=1575915440; x=1607451440;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=TFSujUNdp0fo5gAIrnEbfPJsI1zPU918UV3JpgTjZL8=;
- b=F6jO8qVfEFlIkZctV86NO566xzgUPV0njeGtvl+hhfkbqvdHsRo0DJyR
- 2+LgJcNQusC8nk08H+svlJKczGaowD34WXHkBugEwLNnSCYk7a2eJSRdX
- CjUF9Yp3po4AV9bydKMoKVO5dT18WCnmbAsBaa7M89MYNsajTDsjDWWd4
- Rt8LUfUXhTqZu6nLlrFjU74bgdGQAxJRa3i0R1qc5hdNYFG5VY4HN2l77
- beZjzHt+e0Vmd1av4geDt7XICIvf0GBQuZeo7GuKP9U72rlv+yw2/ouPn
- QEPDPatXI/aMH7hJ6Awj+m9Fwdml5T9nkI9+vOPHGMvspH5xKMUObJibo g==;
-IronPort-SDR: u6jASHphV8PHKQSJGmF5Qr+2H/9vZ3po/tGaFSsM8L5tWKjpngK2W8mh0g80DDBj0fFZxZOp0n
- aNWNN8UAelVsDbcPrGsXL3zh6eny8pCHkwHQciRghDHSEoWzJJZGmJ1y1XRFHSeZahJclnC7yN
- q3g2jIf0ndCBMo3JB28lwVSlHJVpt6Kvcqc5lmpswwgopDwF8CT/kg6BNJdekcc9srsQFkeCp2
- EWLq9cviseYPUcF/puYFgJAajFxb+QBOkC7QW1cESHOVmb5NVMI1EZzZRwcy5t6UNfbhhngWcc
- Q3A=
-X-IronPort-AV: E=Sophos;i="5.69,296,1571673600"; d="scan'208";a="232461567"
+ bh=3GUezvYl0H8iOtJ+zLcxM7nTRgaszMLdmG6eo3ecBcI=;
+ b=BMOTsgTDdOzYILvl3umC/CHzYvGBbqNvX02aAG4ysJzqYv1J9/ljt+ka
+ K/k9fff94vDa3QnoxttOT5evjhJQSfBobUBW76F9Q1iRGfBBCFlkAUkzm
+ AjdTwoVP0Gw4AJ1ksBemTezkfz/pjfbHp4VMgvi6pwA0eAmt1J1scHVbK
+ dQksfS08DZtiqG9ZcQljKNXM2Mf8X8gtROBOqA0KxWP8lzePkqlgIjtMC
+ NGht/GdZ/TSGGB1PLnDTCox+ZUM6d7n74lPIqjqOIkjn4KSJ3xnpIhCgM
+ N4sD6pRpjBD/j6fsMVpxHDKg3DWmtvc9fzKJDUYsRmw26HaGSPwX0aav7 A==;
+IronPort-SDR: U6OAfgGlMhagaUT1KWsP86v2txHAYTs83vy+5IDmxNcJ/KKIc1axkylpoYpf5M4Vqiho+RdSLP
+ qwmgRJEcabBBfzJNY+g92I7orczm5kOQb6rQ5JXukONZmQtjDSUwYLgb7daGiOqgSqhBXIpWIF
+ 2eo1UQGI5vRSDsr7QHynHJK9wZL91Fcq4L324x2IW3FKRbRN16XmrcnM76bR3ao/918ekthD4T
+ cm3fzie/aoizzUpSaOkRVNGvZEAwZp/3XaVpfGasNeVvy13pvv6dwCleVW41fPpfCRhtrocV3X
+ dFw=
+X-IronPort-AV: E=Sophos;i="5.69,296,1571673600"; d="scan'208";a="232461570"
 Received: from h199-255-45-15.hgst.com (HELO uls-op-cesaep02.wdc.com)
  ([199.255.45.15])
- by ob1.hgst.iphmx.com with ESMTP; 10 Dec 2019 02:17:17 +0800
-IronPort-SDR: epEIDOkEFfExFIDGFPtGlU7mRPXEkrrswQk1CxKG5W695AdeDCeN+BJRkylOd8BUldRz24DlFj
- 6H3QbQ5QkocyDp2ALIB9fiV7VSeeVEmZ05j4nOPC+EGphgx+F+1FZ1SdyywA47TH3lSzmF8kBE
- uIXc+/UeO8F8iQzMgdLOCmmZbiXbaBrA/SKMQqTxVfm6TpNTOtwCpfdNjmEYlyNo+AMzvx8Ujx
- LnGiOt9+gi0QheVol+ycMj9T9yt81u3J7inf143DeL6BeHbIdFUQZxY2T0R/s4WHyNyS3k7iud
- NGqFB+CynzsMz/40dFoawlc2
+ by ob1.hgst.iphmx.com with ESMTP; 10 Dec 2019 02:17:19 +0800
+IronPort-SDR: f+dCn0Xe3dPlCDA3C1gYB6Io20BFFVOJAoubgxrShWHkrWJeCb8Ub+3DEgGNsV3j5ym1Pn7cBt
+ Ke2rBUs1Yvuo5sY31Ek9ml0Fyk5/BypVCFXZ0er8FwQjbQdCtqlFco6ar74ifFvLuumabrR0Lq
+ VNpxfEZHSdCwX45waglqnrsrTTbFvw0O3jzKQGtsB6/sPkxMKKkfhkU4SkQZUA7Qj6MLf28SPY
+ 0U7/d/VWyVEUIh5jg114wIENxHHmUVRbBI/phfMsIg7UkPdZLHnDQ3NcNlNssAm1J0sEbDO+cC
+ zzUzp5uUfQl9vgfLYrpqYxNQ
 Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
  by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 09 Dec 2019 10:11:33 -0800
-IronPort-SDR: v5Roef3/032ULFTDUhDn59Nc0BqOW0C9tVGptykmuKPEFG1Kj6u24HlTs36+7BbrdG0a4gN1lM
- wFjMm3slknIyRRdlfROQzDhHjMlaFXfbbwbaJz871iwu3DWD571Tj2J1uQoJ4/MWqpdGAOksRh
- RJyuOlwt7GYFDq42MJ+VEuxvnkoaBfWZ4n48fpllS7Jg4wC2odch8axQizjnoqmdwRqcZdoMK7
- jegYdvQp+YCEUZ5DZgd1b4V6KR/oP9NWNnRKjpoPtFX8NAVHm1u+d5ILcOzSxYnZZZQ6ovXn79
- V/E=
+ 09 Dec 2019 10:11:36 -0800
+IronPort-SDR: Nx/ONmtuUC5/tRqFPD2IDWEn4zy1z83RMi+PQEXMjLfcSqYbjcRy0oQc0dP+F/9QM7UXXIZ8lT
+ zUh6yruwBdAfsg1xG/XFvdPEADIhVzR/bNFTYA/OG+NspV9erXuS8CMNWIYd80ip6XHv+evOz4
+ 6AGS3WklFF81fcubxIvDlwCjBl0AIInHt2M59cQUov42e/4SRvy3ixF9fRIsYSyKpbHcswNJNI
+ L8k8htQ8Naj7f9wXfOjsCmZrXn6XA8rpEmjqwJJNidncLMGdcOQw2prm3wr5GbXTprr5e1hRyq
+ ZZw=
 WDCIronportException: Internal
 Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
  risc6-mainframe.int.fusionio.com) ([10.196.158.235])
- by uls-op-cesaip02.wdc.com with ESMTP; 09 Dec 2019 10:17:16 -0800
+ by uls-op-cesaip02.wdc.com with ESMTP; 09 Dec 2019 10:17:19 -0800
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: palmer@dabbelt.com,
 	alistair.francis@wdc.com,
 	alistair23@gmail.com
-Subject: [PATCH v1 21/36] target/ricsv: Flush the TLB on virtulisation mode
- changes
-Date: Mon,  9 Dec 2019 10:11:35 -0800
-Message-Id: <a2d1713d75b21824bee2fe71a2633acef4c22ba7.1575914822.git.alistair.francis@wdc.com>
+Subject: [PATCH v1 22/36] target/riscv: Generate illegal instruction on WFI
+ when V=1
+Date: Mon,  9 Dec 2019 10:11:37 -0800
+Message-Id: <b1b5cc3f1f924b8dadb615feac199df7ab266335.1575914822.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.24.0
 In-Reply-To: <cover.1575914822.git.alistair.francis@wdc.com>
 References: <cover.1575914822.git.alistair.francis@wdc.com>
@@ -80,34 +80,31 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Dec 2019 18:17:23 -0000
-
-To ensure our TLB isn't out-of-date we flush it on all virt mode
-changes. Unlike priv mode this isn't saved in the mmu_idx as all
-guests share V=1. The easiest option is just to flush on all changes.
+X-List-Received-Date: Mon, 09 Dec 2019 18:17:25 -0000
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
 ---
- target/riscv/cpu_helper.c | 5 +++++
- 1 file changed, 5 insertions(+)
+ target/riscv/op_helper.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 85eed5d885..1b747abf93 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -183,6 +183,11 @@ void riscv_cpu_set_virt_enabled(CPURISCVState *env, bool enable)
-         return;
-     }
+diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+index d150551bc9..beb34e705b 100644
+--- a/target/riscv/op_helper.c
++++ b/target/riscv/op_helper.c
+@@ -130,9 +130,10 @@ void helper_wfi(CPURISCVState *env)
+ {
+     CPUState *cs = env_cpu(env);
  
-+    /* Flush the TLB on all virt mode changes. */
-+    if (get_field(env->virt, VIRT_ONOFF) != enable) {
-+        tlb_flush(env_cpu(env));
-+    }
-+
-     env->virt = set_field(env->virt, VIRT_ONOFF, enable);
- }
- 
+-    if (env->priv == PRV_S &&
++    if ((env->priv == PRV_S &&
+         env->priv_ver >= PRIV_VERSION_1_10_0 &&
+-        get_field(*env->mstatus, MSTATUS_TW)) {
++        get_field(*env->mstatus, MSTATUS_TW)) ||
++        riscv_cpu_virt_enabled(env)) {
+         riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
+     } else {
+         cs->halted = 1;
 -- 
 2.24.0
 
