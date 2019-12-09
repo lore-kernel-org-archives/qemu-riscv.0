@@ -1,131 +1,73 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1idEPH-0002PY-VH
-	for mharc-qemu-riscv@gnu.org; Fri, 06 Dec 2019 09:16:32 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:35549)
+	id 1ieNaD-0006ZI-IC
+	for mharc-qemu-riscv@gnu.org; Mon, 09 Dec 2019 13:16:33 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:34385)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <armbru@redhat.com>) id 1idEP9-0002Ht-PJ
- for qemu-riscv@nongnu.org; Fri, 06 Dec 2019 09:16:25 -0500
+ (envelope-from <prvs=23948302b=alistair.francis@wdc.com>)
+ id 1ieNaA-0006V9-Eq
+ for qemu-riscv@nongnu.org; Mon, 09 Dec 2019 13:16:31 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <armbru@redhat.com>) id 1idEP7-0002l5-Fv
- for qemu-riscv@nongnu.org; Fri, 06 Dec 2019 09:16:23 -0500
-Received: from us-smtp-1.mimecast.com ([205.139.110.61]:42190
- helo=us-smtp-delivery-1.mimecast.com)
+ (envelope-from <prvs=23948302b=alistair.francis@wdc.com>)
+ id 1ieNa9-00074o-FO
+ for qemu-riscv@nongnu.org; Mon, 09 Dec 2019 13:16:30 -0500
+Received: from esa3.hgst.iphmx.com ([216.71.153.141]:57627)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <armbru@redhat.com>) id 1idEP7-0002hP-8K
- for qemu-riscv@nongnu.org; Fri, 06 Dec 2019 09:16:21 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1575641773;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=QydCtaGu0VxNLL1vkJgck5UBv6FIuo7+xYoT62obZJU=;
- b=WNuPiCVFqtykdArdtsfKsuIY130OeRw9Q16csGfmLPUU3DG0XYUTGs5Clgb4OLG88Anakw
- bz3xRoryi2HKw0K2w7UVZuZ+9moEcAfKm47Q7xWfxW6P9pJ21Q1u+u9GxWMKtqugRQadKe
- yMD1Yxu6e2iC4TjlKkzgwfBK1f3P1eI=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-348-Ywo88t0dNVOFL__UeWWsrg-1; Fri, 06 Dec 2019 03:14:29 -0500
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
- [10.5.11.23])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 34BFA102CE28;
- Fri,  6 Dec 2019 08:14:25 +0000 (UTC)
-Received: from blackfin.pond.sub.org (ovpn-116-134.ams2.redhat.com
- [10.36.116.134])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id A2D8819C7F;
- Fri,  6 Dec 2019 08:13:58 +0000 (UTC)
-Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
- id 22B421138606; Fri,  6 Dec 2019 09:13:57 +0100 (CET)
-From: Markus Armbruster <armbru@redhat.com>
-To: Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>
-Cc: Stefan Hajnoczi <stefanha@redhat.com>,  Jeff Cody <codyprime@gmail.com>,
- Jan Kiszka <jan.kiszka@siemens.com>,  Alberto Garcia <berto@igalia.com>,
- Hailiang Zhang <zhang.zhanghailiang@huawei.com>,  "qemu-block\@nongnu.org"
- <qemu-block@nongnu.org>,  Aleksandar Rikalo <arikalo@wavecomp.com>,  Halil
- Pasic <pasic@linux.ibm.com>,  =?utf-8?Q?Herv=C3=A9?= Poussineau
- <hpoussin@reactos.org>,
- Anthony Perard <anthony.perard@citrix.com>,  Samuel Thibault
- <samuel.thibault@ens-lyon.org>,  Laszlo Ersek <lersek@redhat.com>,  Jason
- Wang <jasowang@redhat.com>,  Laurent Vivier <lvivier@redhat.com>,  Eduardo
- Habkost <ehabkost@redhat.com>,  Xie Changlong <xiechanglong.d@gmail.com>,
- Peter Lieven <pl@kamp.de>,  "Dr. David Alan Gilbert"
- <dgilbert@redhat.com>,  Beniamino Galvani <b.galvani@gmail.com>,  Eric
- Auger <eric.auger@redhat.com>,  Alex Williamson
- <alex.williamson@redhat.com>,  Ronnie Sahlberg <ronniesahlberg@gmail.com>,
- John Snow <jsnow@redhat.com>,  Richard Henderson <rth@twiddle.net>,
- Kevin Wolf <kwolf@redhat.com>,  Andrew Jeffery <andrew@aj.id.au>,  Chris
- Wulff <crwulff@gmail.com>,  Subbaraya Sundeep <sundeep.lkml@gmail.com>,
- Michael Walle <michael@walle.cc>,  "qemu-ppc\@nongnu.org"
- <qemu-ppc@nongnu.org>,  Bastian Koppelmann
- <kbastian@mail.uni-paderborn.de>,  Igor Mammedov <imammedo@redhat.com>,
- Fam Zheng <fam@euphon.net>,  Peter Maydell <peter.maydell@linaro.org>,
- "sheepdog\@lists.wpkg.org" <sheepdog@lists.wpkg.org>,  Matthew Rosato
- <mjrosato@linux.ibm.com>,  David Hildenbrand <david@redhat.com>,  Palmer
- Dabbelt <palmer@sifive.com>,  Eric Farman <farman@linux.ibm.com>,  Max
- Filippov <jcmvbkbc@gmail.com>,  Hannes Reinecke <hare@suse.com>,  Stefano
- Stabellini <sstabellini@kernel.org>,  "Gonglei \(Arei\)"
- <arei.gonglei@huawei.com>,  Liu Yuan <namei.unix@gmail.com>,  Artyom
- Tarasenko <atar4qemu@gmail.com>,  Thomas Huth <thuth@redhat.com>,  Amit
- Shah <amit@kernel.org>,  Stefan Weil <sw@weilnetz.de>,  Greg Kurz
- <groug@kaod.org>,  Yuval Shaia <yuval.shaia@oracle.com>,
- "qemu-s390x\@nongnu.org" <qemu-s390x@nongnu.org>,  "qemu-arm\@nongnu.org"
- <qemu-arm@nongnu.org>,  Peter Chubb <peter.chubb@nicta.com.au>,
- =?utf-8?Q?C=C3=A9dric?= Le
- Goater <clg@kaod.org>,  Stafford Horne <shorne@gmail.com>,
- "qemu-riscv\@nongnu.org" <qemu-riscv@nongnu.org>,  Cornelia Huck
- <cohuck@redhat.com>,  Aleksandar Markovic <amarkovic@wavecomp.com>,
- Aurelien Jarno <aurelien@aurel32.net>,  Paul Burton
- <pburton@wavecomp.com>,  Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Paul Durrant <paul@xen.org>,  Anthony Green <green@moxielogic.com>,  Gerd
- Hoffmann <kraxel@redhat.com>,  "Edgar E. Iglesias"
- <edgar.iglesias@gmail.com>,  Guan Xuetao <gxt@mprc.pku.edu.cn>,  Ari
- Sundholm <ari@tuxera.com>,  Juan Quintela <quintela@redhat.com>,  Michael
- Roth <mdroth@linux.vnet.ibm.com>,  Christian Borntraeger
- <borntraeger@de.ibm.com>,  Joel Stanley <joel@jms.id.au>,  Jason Dillaman
- <dillaman@redhat.com>,  Antony Pavlov <antonynpavlov@gmail.com>,
- "xen-devel\@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- "integration\@gluster.org" <integration@gluster.org>,  Philippe
- =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@redhat.com>,  "Richard W.M. Jones"
- <rjones@redhat.com>,  Andrew Baumann <Andrew.Baumann@microsoft.com>,  Max
- Reitz <mreitz@redhat.com>,  Denis Lunev <den@virtuozzo.com>,  "Michael S.
- Tsirkin" <mst@redhat.com>,  Mark Cave-Ayland
- <mark.cave-ayland@ilande.co.uk>,  "qemu-devel\@nongnu.org"
- <qemu-devel@nongnu.org>,  Vincenzo Maffione <v.maffione@gmail.com>,  Marek
- Vasut <marex@denx.de>,  =?utf-8?Q?Marc-Andr=C3=A9?= Lureau
- <marcandre.lureau@redhat.com>,
- Alistair Francis <alistair@alistair23.me>,  Pavel Dovgalyuk
- <pavel.dovgaluk@ispras.ru>,  Giuseppe Lettieri <g.lettieri@iet.unipi.it>,
- Luigi Rizzo <rizzo@iet.unipi.it>,  David Gibson
- <david@gibson.dropbear.id.au>,  Tony Krowiak <akrowiak@linux.ibm.com>,
- Daniel P. =?utf-8?Q?Berrang=C3=A9?= <berrange@redhat.com>,  Xiao Guangrong
- <xiaoguangrong.eric@gmail.com>,  Pierre Morel <pmorel@linux.ibm.com>,  Wen
- Congyang <wencongyang2@huawei.com>,  Jean-Christophe Dubois
- <jcd@tribudubois.net>,  Paolo Bonzini <pbonzini@redhat.com>,  Stefan
- Berger <stefanb@linux.ibm.com>
-Subject: Re: [RFC v5 024/126] error: auto propagated local_err
-References: <20191011160552.22907-1-vsementsov@virtuozzo.com>
- <20191011160552.22907-25-vsementsov@virtuozzo.com>
- <87muc8p24w.fsf@dusky.pond.sub.org>
- <55393c08-5bda-8042-1a95-f350b3781d99@virtuozzo.com>
- <87d0d3c5k7.fsf@dusky.pond.sub.org>
- <eef60af5-ff92-3df7-bad5-c981690d66ad@virtuozzo.com>
- <a6df5b5b-7b76-fe38-cbd4-f2473a109d3d@virtuozzo.com>
-Date: Fri, 06 Dec 2019 09:13:57 +0100
-In-Reply-To: <a6df5b5b-7b76-fe38-cbd4-f2473a109d3d@virtuozzo.com> (Vladimir
- Sementsov-Ogievskiy's message of "Thu, 5 Dec 2019 16:36:42 +0000")
-Message-ID: <87h82dna62.fsf@dusky.pond.sub.org>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/26.2 (gnu/linux)
+ (Exim 4.71) (envelope-from <prvs=23948302b=alistair.francis@wdc.com>)
+ id 1ieNa6-00072D-3T; Mon, 09 Dec 2019 13:16:26 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1575915386; x=1607451386;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=vQ0Qc2m9OoP+JuOdf45hxQEXAivSiOJH4JVyasN8uls=;
+ b=W5u6z9Kj8dQnA4bbHD2XW0Vio/qyZx/eu9VadHrgur5YZEuQtVW3na03
+ 60Q6BHNsm78YUfegbUBE1jYlUfpLJktWGW4ZbZNs7RP+E6Hqa1dWL+Bn9
+ qtx1ZEV3c4TJPAGsLkiX73Tn7ITr4DkzeeE35gx+aSNdEIajsborB45tn
+ QBAvlcOGJ4cPd4xUi0ZGAVNID0k2j/7eKx7JqrCFO7KcT5IY9E4KffdV8
+ bMTj8YqnYxCbUW+rWtNtvNZohDStmip+EcCZGzDCRBles6CSiteqadTIb
+ fjcH7yijvDhQtxrYewVNMw3Ugyc/w/xaMF/xiirWglvq3/rBWE4ms3lZS Q==;
+IronPort-SDR: GvkjpfjA42fzO/IMzrXJKCIKj/AuDU2gYaZpcthUPMR0Om7bQeC/hc9K9swnhdntwSbgBKHBB0
+ yoFquwtOLXkuWaNgselpNonG0ShUlzXdtfMDu3H2YK6k4gTsjOEij/9pwxwTc5wJkX4+28LLly
+ gdtmWymcuTbzdajHlo3m9A5C9WKR/ZMXfg+WDumiQ19iQ9D/sGzyEQR3wkMo9bg2/YWctLymg9
+ B2oW/Dxp7rphA8Fl8h0B2djsuDOwASExRMWkxgDzDjPLMY95dwPNxkTDj5xAeEAu3ajIfDaV+c
+ DqI=
+X-IronPort-AV: E=Sophos;i="5.69,296,1571673600"; d="scan'208";a="129370397"
+Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com)
+ ([199.255.45.15])
+ by ob1.hgst.iphmx.com with ESMTP; 10 Dec 2019 02:16:24 +0800
+IronPort-SDR: /ksCScIUzaOpEdCPJX1Z2rvp20Pt09Uc5NrAyYABMRQw3LrNRLn1cAX32cZSpqNPOhNcLD+U0A
+ Udh3zWMYvhGPFE9M3WDk5ydGoeY3AJ5Ntxq9RZpVu4t7ivXVQzxC5onfDZQ6T0byH1assP86Qe
+ c17ZxFlspVWFhf/0J6e7eofvA8gAvGkBlFxTCeudYRPzaYlMZw5O0O/Q5rZH15HJZ+labK8hEu
+ dFWFkcHpBAbKDVTHLObpDcYbwsd+80P+rK3hK/n/fcxi/BurZ3bIneL0Pd1iPgAJ6Ajb97NTqJ
+ AA2w8/EphSalj7vBqnfEclDR
+Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
+ by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 09 Dec 2019 10:10:41 -0800
+IronPort-SDR: 4nq7+TJHNO/s9ZdE38Gi2P//me/LcmH91d3R5Yo96/UNQHvM7J5W5b+MOfCTaEA/9ZXYxA5bhD
+ xStIox1Ocps/pX2kp9DduGtwOC/UcQsiWux0jP+E4ks4EbX0JtOnPuFE+5MiaXsAiXxZBYTnSZ
+ ZDvB0D/zdtdBceJ1CnMkrQhGKToPzrK3N8CRUrf++yIn9reiGAAE0Phcf4duHM7UUQZIERuFP6
+ i9PZGJ88N8l3QVLmbBCTLObRJFgpAxzlABIr+TB52hMrnonPmk1Ri4xdVt3Z8rhR0Oeinm8hEG
+ 2u8=
+WDCIronportException: Internal
+Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
+ risc6-mainframe.int.fusionio.com) ([10.196.158.235])
+ by uls-op-cesaip01.wdc.com with ESMTP; 09 Dec 2019 10:16:25 -0800
+From: Alistair Francis <alistair.francis@wdc.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: palmer@dabbelt.com,
+	alistair.francis@wdc.com,
+	alistair23@gmail.com
+Subject: [PATCH v1 01/36] target/riscv: Convert MIP CSR to target_ulong
+Date: Mon,  9 Dec 2019 10:10:43 -0800
+Message-Id: <aa8557d53c1f6d3265e2b2c9bc4e127eddb995ea.1575914822.git.alistair.francis@wdc.com>
+X-Mailer: git-send-email 2.24.0
+In-Reply-To: <cover.1575914822.git.alistair.francis@wdc.com>
+References: <cover.1575914822.git.alistair.francis@wdc.com>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
-X-MC-Unique: Ywo88t0dNVOFL__UeWWsrg-1
-X-Mimecast-Spam-Score: 0
-Content-Type: text/plain
-Content-Transfer-Encoding: quoted-printable
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
- [fuzzy]
-X-Received-From: 205.139.110.61
+Content-Transfer-Encoding: 8bit
+X-detected-operating-system: by eggs.gnu.org: FreeBSD 9.x [fuzzy]
+X-Received-From: 216.71.153.141
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -137,161 +79,45 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Dec 2019 14:16:27 -0000
+X-List-Received-Date: Mon, 09 Dec 2019 18:16:32 -0000
 
-Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com> writes:
+The MIP CSR is a xlen CSR, it was only 32-bits to allow atomic access.
+Now that we don't use atomics for MIP we can change this back to a xlen
+CSR.
 
-> 05.12.2019 17:58, Vladimir Sementsov-Ogievskiy wrote:
->> 05.12.2019 15:36, Markus Armbruster wrote:
->>> Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com> writes:
->>>
->>>> 04.12.2019 17:59, Markus Armbruster wrote:
->>>>> Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com> writes:
->>>>>
->>>>>> Here is introduced ERRP_AUTO_PROPAGATE macro, to be used at start of
->>>>>> functions with errp OUT parameter.
->>>>>>
->>>>>> It has three goals:
->>>>>>
->>>>>> 1. Fix issue with error_fatal & error_prepend/error_append_hint: use=
-r
->>>>>> can't see this additional information, because exit() happens in
->>>>>> error_setg earlier than information is added. [Reported by Greg Kurz=
-]
->>>>>>
->>>>>> 2. Fix issue with error_abort & error_propagate: when we wrap
->>>>>> error_abort by local_err+error_propagate, resulting coredump will
->>>>>> refer to error_propagate and not to the place where error happened.
->>>>>
->>>>> I get what you mean, but I have plenty of context.
->>>>>
->>>>>> (the macro itself doesn't fix the issue, but it allows to [3.] drop =
-all
->>>>>> local_err+error_propagate pattern, which will definitely fix the iss=
-ue)
->>>>>
->>>>> The parenthesis is not part of the goal.
->>>>>
->>>>>> [Reported by Kevin Wolf]
->>>>>>
->>>>>> 3. Drop local_err+error_propagate pattern, which is used to workarou=
-nd
->>>>>> void functions with errp parameter, when caller wants to know result=
-ing
->>>>>> status. (Note: actually these functions could be merely updated to
->>>>>> return int error code).
->>>>>>
->>>>>> To achieve these goals, we need to add invocation of the macro at st=
-art
->>>>>> of functions, which needs error_prepend/error_append_hint (1.); add
->>>>>> invocation of the macro at start of functions which do
->>>>>> local_err+error_propagate scenario the check errors, drop local erro=
-rs
->>>>>> from them and just use *errp instead (2., 3.).
->>>>>
->>>>> The paragraph talks about two cases: 1. and 2.+3.
->>>>
->>>> Hmm, I don't think so.. 1. and 2. are issues. 3. is a refactoring.. We=
- just
->>>> fix achieve 2 and 3 by one action.
->>>>
->>>>> Makes me think we
->>>>> want two paragraphs, each illustrated with an example.
->>>>>
->>>>> What about you provide the examples, and then I try to polish the pro=
-se?
->>>>
->>>> 1: error_fatal problem
->>>>
->>>> Assume the following code flow:
->>>>
->>>> int f1(errp) {
->>>>       ...
->>>>       ret =3D f2(errp);
->>>>       if (ret < 0) {
->>>>          error_append_hint(errp, "very useful hint");
->>>>          return ret;
->>>>       }
->>>>       ...
->>>> }
->>>>
->>>> Now, if we call f1 with &error_fatal argument and f2 fails, the progra=
-m
->>>> will exit immediately inside f2, when setting the errp. User will not
->>>> see the hint.
->>>>
->>>> So, in this case we should use local_err.
->>>
->>> How does this example look after the transformation?
->>=20
->> Good point.
->>=20
->> int f1(errp) {
->>      ERRP_AUTO_PROPAGATE();
->>      ...
->>      ret =3D f2(errp);
->>      if (ret < 0) {
->>         error_append_hint(errp, "very useful hint");
->>         return ret;
->>      }
->>      ...
->> }
->>=20
->> - nothing changed, only add macro at start. But now errp is safe, if it =
-was
->> error_fatal it is wrapped by local error, and will only call exit on aut=
-omatic
->> propagation on f1 finish.
->>=20
->>>
->>>> 2: error_abort problem
->>>>
->>>> Now, consider functions without return value. We normally use local_er=
-r
->>>> variable to catch failures:
->>>>
->>>> void f1(errp) {
->>>>       Error *local_err =3D NULL;
->>>>       ...
->>>>       f2(&local_err);
->>>>       if (local_err) {
->>>>           error_propagate(errp, local_err);
->>>>           return;
->>>>       }
->>>>       ...
->>>> }
->>>>
->>>> Now, if we call f2 with &error_abort and f2 fails, the stack in result=
-ing
->>>> crash dump will point to error_propagate, not to the failure point in =
-f2,
->>>> which complicates debugging.
->>>>
->>>> So, we should never wrap error_abort by local_err.
->>>
->>> Likewise.
->>=20
->> And here:
->>=20
->> void f1(errp) {
->>       ERRP_AUTO_PROPAGATE();
->>       ...
->>       f2(errp);
->>       if (*errp) {
->>           return;
->>       }
->>       ...
->>=20
->> - if errp was NULL, it is wrapped, so dereferencing errp is safe. On ret=
-urn,
->>     local error is automatically propagated to original one.
->
-> and if it was error_abort, it is not wrapped, so will crash where failed.
+Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+---
+ target/riscv/cpu.c | 2 +-
+ target/riscv/cpu.h | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-We still need to avoid passing on unwrapped @errp when we want to ignore
-some errors, as in fit_load_fdt(), but that should be quite rare.
-Doesn't invalidate your approach.
-
-[...]
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index d37861a430..e521ebe2e1 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -224,7 +224,7 @@ static void riscv_cpu_dump_state(CPUState *cs, FILE *f, int flags)
+ #ifndef CONFIG_USER_ONLY
+     qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mhartid ", env->mhartid);
+     qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mstatus ", env->mstatus);
+-    qemu_fprintf(f, " %s 0x%x\n", "mip     ", env->mip);
++    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mip     ", env->mip);
+     qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mie     ", env->mie);
+     qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mideleg ", env->mideleg);
+     qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "medeleg ", env->medeleg);
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index e59343e13c..f889427869 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -121,7 +121,7 @@ struct CPURISCVState {
+     target_ulong mhartid;
+     target_ulong mstatus;
+ 
+-    uint32_t mip;
++    target_ulong mip;
+     uint32_t miclaim;
+ 
+     target_ulong mie;
+-- 
+2.24.0
 
 
