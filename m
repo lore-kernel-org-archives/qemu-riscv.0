@@ -1,73 +1,73 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ieNaH-0006eR-4q
-	for mharc-qemu-riscv@gnu.org; Mon, 09 Dec 2019 13:16:37 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:34442)
+	id 1ieNaM-0006mO-VP
+	for mharc-qemu-riscv@gnu.org; Mon, 09 Dec 2019 13:16:42 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:34470)
  by lists.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <prvs=23948302b=alistair.francis@wdc.com>)
- id 1ieNaE-0006aE-04
- for qemu-riscv@nongnu.org; Mon, 09 Dec 2019 13:16:34 -0500
+ id 1ieNaI-0006g2-8q
+ for qemu-riscv@nongnu.org; Mon, 09 Dec 2019 13:16:39 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
  (envelope-from <prvs=23948302b=alistair.francis@wdc.com>)
- id 1ieNaC-00077Q-LP
- for qemu-riscv@nongnu.org; Mon, 09 Dec 2019 13:16:33 -0500
-Received: from esa3.hgst.iphmx.com ([216.71.153.141]:57632)
+ id 1ieNaH-00079g-1V
+ for qemu-riscv@nongnu.org; Mon, 09 Dec 2019 13:16:38 -0500
+Received: from esa6.hgst.iphmx.com ([216.71.154.45]:18394)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <prvs=23948302b=alistair.francis@wdc.com>)
- id 1ieNaA-00073h-Fb; Mon, 09 Dec 2019 13:16:30 -0500
+ id 1ieNaE-00077f-B9; Mon, 09 Dec 2019 13:16:34 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1575915390; x=1607451390;
+ t=1575915395; x=1607451395;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=eZ4GmpjmK0ndi25FbF/XUvsZz/5T+5wl/pA8my/wzRw=;
- b=kKpAzn8MM2jWaJhHs+fbAMB9dKuaGJCq3mxjC2TnMx3M+BSaRY3+3Uad
- jYJF0IZ6Pw/DZAzo6uuvsCi4otkvdJb+R16Wave7N7H4mKBG1ynO7LBxD
- PkUMan+JijfH74flmhVUvgCRsXv6liAmtNST/8m9IyPzN6ldP5dWfqJIy
- lJR8hPUxKw6BWvLS9oWeldxBamWm9iHsXan+/39HsPt2XRe/3yb/LzCqM
- lBLwjXQJgge7mPe0iRhAn2RVsy04qeoOmgWrTdJ9BrDW5GDkONv9rUGAH
- EhqWtqvIASbjt/AF4DWeTDZIfKCvzQW2QLH1VuOhYc8Sb5l/gaQVRaohG Q==;
-IronPort-SDR: OBs0RUQfunrWkWIXrzKERZk/fjr7at1ewSK54plXENsmGzcW5PW5p42Gx4x3K3UoeOeTLrCOF7
- JktsMy+dQrRo+m+fKjaWMxmRu1JMjIiaFS5ntmNrl0KLDYNwxGHvb3ty+4FeMYSSB3P6d157St
- udRTRGc7O/Di/QlILfYZUxvN32Z97PPd4dRCFGmo7L3l9Jam6CuiOr1V587RPqQuNEEylddcFU
- cYzx9JJJsyIK7K2Kmi2M6bkpci508on8DBgKEvnGtHfvUKCbAL4VYTaXAhn5yzt1KGN+Qp2koN
- Paw=
-X-IronPort-AV: E=Sophos;i="5.69,296,1571673600"; d="scan'208";a="129370408"
-Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com)
- ([199.255.45.15])
- by ob1.hgst.iphmx.com with ESMTP; 10 Dec 2019 02:16:30 +0800
-IronPort-SDR: OE+ts604FoKWxfFugpaJUAEo6RC7Z2ZJBsxqE8wRmtNL9XMBWFdOoJP3eBSZcXrfx3H1v3sPO8
- 2hutSIhAUIj0AceDIhhHMhke1MXMoOv3eCxmBKXOkkEgfROa9tBjdbTFtnP1Z1OiUuSFvnTPpq
- OkuLfols19kyWjXAwfdX1PNnWNJWI5Pg+oTJySn5VAi1kpbBTwxRGs+J+QlLicXXZZm4oviLfY
- 1yHJhOG2Y78UPW2ZeCHxpJZai0weLU+rspasLlOPJJys2BvVCgZJ3wm1s5Tc1/Ae/StOVSh6h5
- 4AcDEuuCuw8leCqVaSMO/vsb
-Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
- by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 09 Dec 2019 10:10:46 -0800
-IronPort-SDR: sDtIlTbk+iY7m3S/zqRBW2DRxC0hKC2VcJeIK/W+Qq9mk9A8P3WLcohlgDdioWxkDha1vOVh1u
- z9xP7LQ0XigHMdCLUITBhGQG2Tg9ICY3iNt5G1pmyndFC9GOk6ITIuo+8o8A+r4ybgHm4by52r
- WPyOHxqb9lgzPQzsz1IU0mT1k9MyjvkHLFk6uJD0gw6Os5PFATCMtUsY2T2c+BAnKhCTStLJDp
- IC3SqKtQlQTd8OSrVUelfsoOGgJ+ZIIZOt0KgCHIqY75KIKhzVLLYiz4LG6ZaKLwzdG3vHruxo
- NFM=
+ bh=eDhmGY3IwRn13ta4fPcQvnOxJ2q4aLyJ5Tn0JitqhXs=;
+ b=rqNoPDJb6/fcvp8Rb+rXK0oh8YS4r03CSX9AA9OOL++ZB4R+m9Ej6chW
+ sg3JLadWv0rszaloBH8RPiNqoGg4b0iien2/JemfstdcnwxHODxWqlElN
+ ieivGGuHiAvUfHhUUPF5Z3oSAMqVNGOSv6IccQAc2aQ+a5z12TZreNXZJ
+ ZOoNLEY8ZDI2XOH6hSIau3VmGxIAUay8/7f/cf6VNoqrX9NHJ55sDDvHg
+ WRWJLJMUAT9xh5LQ7tN8AUy1B2vbyYmiNpXr1vxAiIftOKPO+qFtCpMAk
+ Py0SBRPy7DpLD8SDT9PJ456cLSKTud2hjMmIOuW7MYwIPCj9h85inlAh8 g==;
+IronPort-SDR: Y/9Jhi9krwgk0CVXaEUcT3TnRzlAljEj5LPF1wm+rXWcI9lu+XTKihCA1U5bHRG9Gx8VnQi3eP
+ 2zgai5bvViw1l7iTHDQ8UdgXytzm51Mzcj64dH04VKHPCFbysT1+JJ2SC9CCeBcsQErLfq5FyV
+ V27hYHhEKA2kjat323UtwdQUnTMGZok011p0j5B9LtOBT/aXYT832CUklnM7yuKwRnta2putS6
+ fyG6ezMwM3Sm8TWg8IN+0ppBe8vFHmy8MSVuvEQQc6vZ9sPoe++BNJyHSRIfOqdNQvvo+4IPGJ
+ 25s=
+X-IronPort-AV: E=Sophos;i="5.69,296,1571673600"; d="scan'208";a="126543423"
+Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
+ ([199.255.45.14])
+ by ob1.hgst.iphmx.com with ESMTP; 10 Dec 2019 02:16:33 +0800
+IronPort-SDR: YjzZ3zLMBoEBPELpbhOpEy6e8ExriUADxEqwlKsAX9EEkF5NImjAb6kaF/3ujZIWKZyyJDLc/0
+ y5wbmTrSiVJD6TFiQucHgyTjhHSQTQbzqcerXzm77wj7cT6o3riblCoU3eZOaDJYvJI2IGh7g5
+ 75MQLJbt1kQI8VHgeTZ5dDl15lCAkfzaXjNbLDnOEqBqANtJlPtXa8YEJJFYOaeKERLTebgDPL
+ YVt28g21/3m2iuIdlUc2p272sxXjuzUAwRXm/iRnly/XyRpogEmWQrdieWgEH0jN6cHHJtNALR
+ OCc8562I5bRW76XpnvJUIWz6
+Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
+ by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 09 Dec 2019 10:11:10 -0800
+IronPort-SDR: C7Hk5aqiZDPXE19NgLHlo4Eaqimm74bsfCR5nA8Lae8SrvqWBPnDPzx3nDD6BgYa1mhkJglWLA
+ npsd2vWTEl8lwEhDYrEP0AfX6WqC5WPvFjdSrkGLImeuKslo4MvgelpPGkzNIPEc7yyhS1Gsoe
+ ouhbPnjKDmNqpAc+nv+0OJBW7C50wudHKQqixq37RoqoS4FXeQym+ayQXlSolGOxHSx+M6mKNm
+ scaEPFU4v13Ys5cyrZ692GViKWlKMB82pRVkI9sSa4F4Uu03mntLM/a1mG3YEB6gKlM5S1R936
+ 0xk=
 WDCIronportException: Internal
 Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
  risc6-mainframe.int.fusionio.com) ([10.196.158.235])
- by uls-op-cesaip01.wdc.com with ESMTP; 09 Dec 2019 10:16:30 -0800
+ by uls-op-cesaip02.wdc.com with ESMTP; 09 Dec 2019 10:16:32 -0800
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: palmer@dabbelt.com,
 	alistair.francis@wdc.com,
 	alistair23@gmail.com
-Subject: [PATCH v1 03/36] target/riscv: Add the Hypervisor extension
-Date: Mon,  9 Dec 2019 10:10:48 -0800
-Message-Id: <a61a1739c01c587a5e65a93398317ae644426aff.1575914822.git.alistair.francis@wdc.com>
+Subject: [PATCH v1 04/36] target/riscv: Add the Hypervisor CSRs to CPUState
+Date: Mon,  9 Dec 2019 10:10:50 -0800
+Message-Id: <4b2d4e889d460e27d8f674d110fd1561768cd035.1575914822.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.24.0
 In-Reply-To: <cover.1575914822.git.alistair.francis@wdc.com>
 References: <cover.1575914822.git.alistair.francis@wdc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: FreeBSD 9.x [fuzzy]
-X-Received-From: 216.71.153.141
+X-Received-From: 216.71.154.45
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -79,27 +79,147 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Dec 2019 18:16:36 -0000
+X-List-Received-Date: Mon, 09 Dec 2019 18:16:40 -0000
+
+Add the Hypervisor CSRs to CPUState and at the same time (to avoid
+bisect issues) update the CSR macros for the v0.5 Hyp spec.
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Chih-Min Chao <chihmin.chao@sifive.com>
-Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
 ---
- target/riscv/cpu.h | 1 +
- 1 file changed, 1 insertion(+)
+ target/riscv/cpu.h      | 21 +++++++++++++++++++++
+ target/riscv/cpu_bits.h | 34 +++++++++++++++++++++-------------
+ target/riscv/gdbstub.c  | 11 ++++++-----
+ 3 files changed, 48 insertions(+), 18 deletions(-)
 
 diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index f889427869..91e1c56fc4 100644
+index 91e1c56fc4..bab938103d 100644
 --- a/target/riscv/cpu.h
 +++ b/target/riscv/cpu.h
-@@ -67,6 +67,7 @@
- #define RVC RV('C')
- #define RVS RV('S')
- #define RVU RV('U')
-+#define RVH RV('H')
+@@ -143,6 +143,27 @@ struct CPURISCVState {
+     target_ulong mcause;
+     target_ulong mtval;  /* since: priv-1.10.0 */
  
- /* S extension denotes that Supervisor mode exists, however it is possible
-    to have a core that support S mode but does not have an MMU and there
++    /* Hypervisor CSRs */
++    target_ulong hstatus;
++    target_ulong hedeleg;
++    target_ulong hideleg;
++    target_ulong hcounteren;
++    target_ulong htval;
++    target_ulong htinst;
++    target_ulong hgatp;
++
++    /* Virtual CSRs */
++    target_ulong vsstatus;
++    target_ulong vstvec;
++    target_ulong vsscratch;
++    target_ulong vsepc;
++    target_ulong vscause;
++    target_ulong vstval;
++    target_ulong vsatp;
++
++    target_ulong mtval2;
++    target_ulong mtinst;
++
+     target_ulong scounteren;
+     target_ulong mcounteren;
+ 
+diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+index e99834856c..25c0fb258d 100644
+--- a/target/riscv/cpu_bits.h
++++ b/target/riscv/cpu_bits.h
+@@ -177,8 +177,14 @@
+ #define CSR_HSTATUS         0x600
+ #define CSR_HEDELEG         0x602
+ #define CSR_HIDELEG         0x603
+-#define CSR_HCOUNTERNEN     0x606
++#define CSR_HIE             0x604
++#define CSR_HCOUNTEREN      0x606
++#define CSR_HTVAL           0x643
++#define CSR_HIP             0x644
++#define CSR_HTINST          0x64A
+ #define CSR_HGATP           0x680
++#define CSR_HTIMEDELTA      0x605
++#define CSR_HTIMEDELTAH     0x615
+ 
+ #if defined(TARGET_RISCV32)
+ #define HGATP_MODE           SATP32_MODE
+@@ -191,6 +197,20 @@
+ #define HGATP_PPN            SATP64_PPN
+ #endif
+ 
++/* Virtual CSRs */
++#define CSR_VSSTATUS        0x200
++#define CSR_VSIE            0x204
++#define CSR_VSTVEC          0x205
++#define CSR_VSSCRATCH       0x240
++#define CSR_VSEPC           0x241
++#define CSR_VSCAUSE         0x242
++#define CSR_VSTVAL          0x243
++#define CSR_VSIP            0x244
++#define CSR_VSATP           0x280
++
++#define CSR_MTINST          0x34a
++#define CSR_MTVAL2          0x34b
++
+ /* Physical Memory Protection */
+ #define CSR_PMPCFG0         0x3a0
+ #define CSR_PMPCFG1         0x3a1
+@@ -313,17 +333,6 @@
+ #define CSR_MHPMCOUNTER30H  0xb9e
+ #define CSR_MHPMCOUNTER31H  0xb9f
+ 
+-/* Legacy Hypervisor Trap Setup (priv v1.9.1) */
+-#define CSR_HIE             0x204
+-#define CSR_HTVEC           0x205
+-
+-/* Legacy Hypervisor Trap Handling (priv v1.9.1) */
+-#define CSR_HSCRATCH        0x240
+-#define CSR_HEPC            0x241
+-#define CSR_HCAUSE          0x242
+-#define CSR_HBADADDR        0x243
+-#define CSR_HIP             0x244
+-
+ /* Legacy Machine Protection and Translation (priv v1.9.1) */
+ #define CSR_MBASE           0x380
+ #define CSR_MBOUND          0x381
+@@ -400,7 +409,6 @@
+ 
+ /* hstatus CSR bits */
+ #define HSTATUS_SPRV         0x00000001
+-#define HSTATUS_STL          0x00000040
+ #define HSTATUS_SPV          0x00000080
+ #define HSTATUS_SP2P         0x00000100
+ #define HSTATUS_SP2V         0x00000200
+diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
+index 1a7947e019..6d606f0d90 100644
+--- a/target/riscv/gdbstub.c
++++ b/target/riscv/gdbstub.c
+@@ -130,6 +130,8 @@ static int csr_register_map[] = {
+     CSR_MCAUSE,
+     CSR_MTVAL,
+     CSR_MIP,
++    CSR_MTINST,
++    CSR_MTVAL2,
+     CSR_PMPCFG0,
+     CSR_PMPCFG1,
+     CSR_PMPCFG2,
+@@ -252,12 +254,11 @@ static int csr_register_map[] = {
+     CSR_HEDELEG,
+     CSR_HIDELEG,
+     CSR_HIE,
+-    CSR_HTVEC,
+-    CSR_HSCRATCH,
+-    CSR_HEPC,
+-    CSR_HCAUSE,
+-    CSR_HBADADDR,
++    CSR_HCOUNTEREN,
++    CSR_HTVAL,
+     CSR_HIP,
++    CSR_HTINST,
++    CSR_HGATP,
+     CSR_MBASE,
+     CSR_MBOUND,
+     CSR_MIBASE,
 -- 
 2.24.0
 
