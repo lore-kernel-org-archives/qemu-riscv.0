@@ -1,66 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ieNaD-0006ZI-IC
-	for mharc-qemu-riscv@gnu.org; Mon, 09 Dec 2019 13:16:33 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:34385)
+	id 1ieNaE-0006aj-Fu
+	for mharc-qemu-riscv@gnu.org; Mon, 09 Dec 2019 13:16:34 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:34415)
  by lists.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <prvs=23948302b=alistair.francis@wdc.com>)
- id 1ieNaA-0006V9-Eq
- for qemu-riscv@nongnu.org; Mon, 09 Dec 2019 13:16:31 -0500
+ id 1ieNaB-0006Wp-QO
+ for qemu-riscv@nongnu.org; Mon, 09 Dec 2019 13:16:32 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
  (envelope-from <prvs=23948302b=alistair.francis@wdc.com>)
- id 1ieNa9-00074o-FO
- for qemu-riscv@nongnu.org; Mon, 09 Dec 2019 13:16:30 -0500
-Received: from esa3.hgst.iphmx.com ([216.71.153.141]:57627)
+ id 1ieNaA-00075w-O6
+ for qemu-riscv@nongnu.org; Mon, 09 Dec 2019 13:16:31 -0500
+Received: from esa3.hgst.iphmx.com ([216.71.153.141]:57632)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <prvs=23948302b=alistair.francis@wdc.com>)
- id 1ieNa6-00072D-3T; Mon, 09 Dec 2019 13:16:26 -0500
+ id 1ieNa8-00073h-Dk; Mon, 09 Dec 2019 13:16:28 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1575915386; x=1607451386;
+ t=1575915388; x=1607451388;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=vQ0Qc2m9OoP+JuOdf45hxQEXAivSiOJH4JVyasN8uls=;
- b=W5u6z9Kj8dQnA4bbHD2XW0Vio/qyZx/eu9VadHrgur5YZEuQtVW3na03
- 60Q6BHNsm78YUfegbUBE1jYlUfpLJktWGW4ZbZNs7RP+E6Hqa1dWL+Bn9
- qtx1ZEV3c4TJPAGsLkiX73Tn7ITr4DkzeeE35gx+aSNdEIajsborB45tn
- QBAvlcOGJ4cPd4xUi0ZGAVNID0k2j/7eKx7JqrCFO7KcT5IY9E4KffdV8
- bMTj8YqnYxCbUW+rWtNtvNZohDStmip+EcCZGzDCRBles6CSiteqadTIb
- fjcH7yijvDhQtxrYewVNMw3Ugyc/w/xaMF/xiirWglvq3/rBWE4ms3lZS Q==;
-IronPort-SDR: GvkjpfjA42fzO/IMzrXJKCIKj/AuDU2gYaZpcthUPMR0Om7bQeC/hc9K9swnhdntwSbgBKHBB0
- yoFquwtOLXkuWaNgselpNonG0ShUlzXdtfMDu3H2YK6k4gTsjOEij/9pwxwTc5wJkX4+28LLly
- gdtmWymcuTbzdajHlo3m9A5C9WKR/ZMXfg+WDumiQ19iQ9D/sGzyEQR3wkMo9bg2/YWctLymg9
- B2oW/Dxp7rphA8Fl8h0B2djsuDOwASExRMWkxgDzDjPLMY95dwPNxkTDj5xAeEAu3ajIfDaV+c
- DqI=
-X-IronPort-AV: E=Sophos;i="5.69,296,1571673600"; d="scan'208";a="129370397"
+ bh=Dys0PWzpucJXCLJWA35Bq97629MmvwsOaIFCuZq7/+E=;
+ b=NMX+qKevn/KSjzpQXyhT4yyf3D6pLvGA3M2T3DaOZLd5wAwtiwU+DBAU
+ uLAomQxrkki1ZjitNQYQgCaJhiI3K/3yXub22F8J9oKJanEgEvhFqqW1Q
+ if+Vk457INnYMvjm/g/ttEwVGti4/XKXmgzGBMGIabC1tLciUUv3Yc7mX
+ 3AxI7+o7bn4dJNK6nsWFrTPwEIbU+k8y/zH/N/MqGJSNwA+KWR94cyO8u
+ 09q2tAqZkvB+m/8jusmRGDHW4ba7hci/wLgWmAAqfAh2DJReg/wwrU2gB
+ 2OmcvZ6RGhOzV4cxYPwUjJ5THs8LF13X+CRoQmq3KSN+SkUkrHHUXqRoX w==;
+IronPort-SDR: lS4q1EtRCmAAX1q/1DjASAMcFYzQKhb6pHUF2OT3Zqb3TZjE/7Lt0cVH3E2MTqKFpAVHZXqTUK
+ KHgkbcVf8HiOpA1wmdEt6EgI3mVzbO0tZ1KRZgyGh2xjttwo86vddrwTMJIaf+dqTtH1G8Cf/a
+ VIpIepMdit14hN1WC7jj0FlUIseVU0XdUT36zMFwKcPFerK+wzmhLknWrhDZIc5WF7GwXxsy4l
+ L7Tz5QmwWQvgB5le/+LpayCewFN7MukRHoMIZpsZ2GtiOKNfK9gTYOzzriYYGqUPcOcGRp0GrW
+ jXk=
+X-IronPort-AV: E=Sophos;i="5.69,296,1571673600"; d="scan'208";a="129370403"
 Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com)
  ([199.255.45.15])
- by ob1.hgst.iphmx.com with ESMTP; 10 Dec 2019 02:16:24 +0800
-IronPort-SDR: /ksCScIUzaOpEdCPJX1Z2rvp20Pt09Uc5NrAyYABMRQw3LrNRLn1cAX32cZSpqNPOhNcLD+U0A
- Udh3zWMYvhGPFE9M3WDk5ydGoeY3AJ5Ntxq9RZpVu4t7ivXVQzxC5onfDZQ6T0byH1assP86Qe
- c17ZxFlspVWFhf/0J6e7eofvA8gAvGkBlFxTCeudYRPzaYlMZw5O0O/Q5rZH15HJZ+labK8hEu
- dFWFkcHpBAbKDVTHLObpDcYbwsd+80P+rK3hK/n/fcxi/BurZ3bIneL0Pd1iPgAJ6Ajb97NTqJ
- AA2w8/EphSalj7vBqnfEclDR
+ by ob1.hgst.iphmx.com with ESMTP; 10 Dec 2019 02:16:27 +0800
+IronPort-SDR: 6fNXwaX2de/01TFmzEzZmWBAKneFQxGPGCHXJZK1/fON937WN2nXaZX9NXQVNZcAEMqUAsJ1Ba
+ 0AJR2+tjh4LTXZQBTXUfH5Q5Nv6l7yvddWMZKZ+kMtzKFZZ6PmYDJ4uDlNySUo0kRZYQBi6n01
+ o9l2I85FjJ/UUGXHXOp86spm7SZhzeb3MMzRwgrsH8F3F9HIH7ztJTnLyw0Dgjd3OdDN99m/+K
+ vy58uuoRNdYpQwQVRVZKGEucVYaWH9bNKIIwmDvT3NoxEAqrQoG+wRjWa9uASJjQd6NRQRnPtf
+ 2MYl4odTjUshgz4DidHRulBr
 Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
  by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 09 Dec 2019 10:10:41 -0800
-IronPort-SDR: 4nq7+TJHNO/s9ZdE38Gi2P//me/LcmH91d3R5Yo96/UNQHvM7J5W5b+MOfCTaEA/9ZXYxA5bhD
- xStIox1Ocps/pX2kp9DduGtwOC/UcQsiWux0jP+E4ks4EbX0JtOnPuFE+5MiaXsAiXxZBYTnSZ
- ZDvB0D/zdtdBceJ1CnMkrQhGKToPzrK3N8CRUrf++yIn9reiGAAE0Phcf4duHM7UUQZIERuFP6
- i9PZGJ88N8l3QVLmbBCTLObRJFgpAxzlABIr+TB52hMrnonPmk1Ri4xdVt3Z8rhR0Oeinm8hEG
- 2u8=
+ 09 Dec 2019 10:10:43 -0800
+IronPort-SDR: 4b6YO3UXNRUxpvvnxQGgMNqQaBHE/hb+43abs8WjXehAAvpL1fYfe9iqBGF7A+ZtQGf+9SK2xU
+ 2y9iylsqLvexEI3TzK0XWdc24RJZIEOzt4WwSgJBpjg4DfeEapXoF8yAzZ2B68D5eDmAmNzDz1
+ vkaK24qBCPPcpxTvofsy9IDOHZRs7e7b13YPr7Yz+Wq2+phZDeTdMoF7JMJbI3cRLWQEod7RQU
+ 2tf/vCR5kYX1CPaWzDiIUxTxjiEc+5Un62o4vm6S/fmcp0XsHwZRqWnbNARB3IWFGu8qLLYvYj
+ 1PA=
 WDCIronportException: Internal
 Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
  risc6-mainframe.int.fusionio.com) ([10.196.158.235])
- by uls-op-cesaip01.wdc.com with ESMTP; 09 Dec 2019 10:16:25 -0800
+ by uls-op-cesaip01.wdc.com with ESMTP; 09 Dec 2019 10:16:28 -0800
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: palmer@dabbelt.com,
 	alistair.francis@wdc.com,
 	alistair23@gmail.com
-Subject: [PATCH v1 01/36] target/riscv: Convert MIP CSR to target_ulong
-Date: Mon,  9 Dec 2019 10:10:43 -0800
-Message-Id: <aa8557d53c1f6d3265e2b2c9bc4e127eddb995ea.1575914822.git.alistair.francis@wdc.com>
+Subject: [PATCH v1 02/36] target/riscv: Don't set write permissions on dirty
+ PTEs
+Date: Mon,  9 Dec 2019 10:10:45 -0800
+Message-Id: <6a38e1a02e9a3d38fc311809772a152f0d99fd7a.1575914822.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.24.0
 In-Reply-To: <cover.1575914822.git.alistair.francis@wdc.com>
 References: <cover.1575914822.git.alistair.francis@wdc.com>
@@ -79,44 +80,36 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Dec 2019 18:16:32 -0000
+X-List-Received-Date: Mon, 09 Dec 2019 18:16:34 -0000
 
-The MIP CSR is a xlen CSR, it was only 32-bits to allow atomic access.
-Now that we don't use atomics for MIP we can change this back to a xlen
-CSR.
+Setting write permission on dirty PTEs results in userspace inside a
+Hypervisor guest (VU) becoming corrupted. This appears to be because it
+ends up with write permission in the second stage translation in cases
+where we aren't doing a store.
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
 ---
- target/riscv/cpu.c | 2 +-
- target/riscv/cpu.h | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ target/riscv/cpu_helper.c | 6 ++----
+ 1 file changed, 2 insertions(+), 4 deletions(-)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index d37861a430..e521ebe2e1 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -224,7 +224,7 @@ static void riscv_cpu_dump_state(CPUState *cs, FILE *f, int flags)
- #ifndef CONFIG_USER_ONLY
-     qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mhartid ", env->mhartid);
-     qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mstatus ", env->mstatus);
--    qemu_fprintf(f, " %s 0x%x\n", "mip     ", env->mip);
-+    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mip     ", env->mip);
-     qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mie     ", env->mie);
-     qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mideleg ", env->mideleg);
-     qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "medeleg ", env->medeleg);
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index e59343e13c..f889427869 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -121,7 +121,7 @@ struct CPURISCVState {
-     target_ulong mhartid;
-     target_ulong mstatus;
- 
--    uint32_t mip;
-+    target_ulong mip;
-     uint32_t miclaim;
- 
-     target_ulong mie;
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index 767c8762ac..0de3a468eb 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -344,10 +344,8 @@ restart:
+             if ((pte & PTE_X)) {
+                 *prot |= PAGE_EXEC;
+             }
+-            /* add write permission on stores or if the page is already dirty,
+-               so that we TLB miss on later writes to update the dirty bit */
+-            if ((pte & PTE_W) &&
+-                    (access_type == MMU_DATA_STORE || (pte & PTE_D))) {
++            /* add write permission on stores */
++            if ((pte & PTE_W) && (access_type == MMU_DATA_STORE)) {
+                 *prot |= PAGE_WRITE;
+             }
+             return TRANSLATE_SUCCESS;
 -- 
 2.24.0
 
