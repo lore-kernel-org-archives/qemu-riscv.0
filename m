@@ -1,79 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ieaE7-0000aM-Jo
-	for mharc-qemu-riscv@gnu.org; Tue, 10 Dec 2019 02:46:35 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:50660)
+	id 1iekPW-0000Qy-GX
+	for mharc-qemu-riscv@gnu.org; Tue, 10 Dec 2019 13:39:02 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:39954)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <philmd@redhat.com>) id 1ieaE4-0000WC-Kp
- for qemu-riscv@nongnu.org; Tue, 10 Dec 2019 02:46:33 -0500
+ (envelope-from <alistair23@gmail.com>) id 1iekPT-0000Q3-Mv
+ for qemu-riscv@nongnu.org; Tue, 10 Dec 2019 13:39:00 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <philmd@redhat.com>) id 1ieaE3-0004MY-LF
- for qemu-riscv@nongnu.org; Tue, 10 Dec 2019 02:46:32 -0500
-Received: from us-smtp-2.mimecast.com ([207.211.31.81]:31118
- helo=us-smtp-delivery-1.mimecast.com)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <philmd@redhat.com>) id 1ieaE3-0004MG-I9
- for qemu-riscv@nongnu.org; Tue, 10 Dec 2019 02:46:31 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1575963991;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=QQ25A+0pF6nBtpKg+xD9aL/MQYr2cTEedC/jGQsZ8+s=;
- b=EDBhvH8hsRodn/P9O82o/D287nrpv5YPPZWUqGAsqwhZO4IiLyR3rURYfghkyjf07eCEbN
- fV0sKpHd4feRuSyQcRHGCWrY1x+9NKmJ0fYtIV5uKRAwq7IvB3Yi8K2HZvQU5nGqOdQFOf
- SeWsfpwEpxhgLhL8ohJOhrDM+GmajKY=
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-293-XPCRUPapO3-KWPMgBAiwDA-1; Tue, 10 Dec 2019 02:46:25 -0500
-Received: by mail-wm1-f70.google.com with SMTP id n4so312329wmd.7
- for <qemu-riscv@nongnu.org>; Mon, 09 Dec 2019 23:46:24 -0800 (PST)
+ (envelope-from <alistair23@gmail.com>) id 1iekPS-0002QZ-Jy
+ for qemu-riscv@nongnu.org; Tue, 10 Dec 2019 13:38:59 -0500
+Received: from mail-lf1-x143.google.com ([2a00:1450:4864:20::143]:36799)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <alistair23@gmail.com>)
+ id 1iekPS-0002PJ-DA; Tue, 10 Dec 2019 13:38:58 -0500
+Received: by mail-lf1-x143.google.com with SMTP id n12so14571030lfe.3;
+ Tue, 10 Dec 2019 10:38:58 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=3Um02XhQDSOXqFThAJBB5utYQHbTlMcj0aoANmKJJuk=;
+ b=CQ6UQ94apAhPFmtn0lQ1Nv8qeDAtP59Pt1hwQXFS1eP/JPkJc7hD4pHj6JJJ9au0Zw
+ tXOPBL8JlUhapBF+h15uRO3Wri26ZqgrbZ03FtM680qOGU6xLu0MItW0N52ySFfbtBj3
+ rhLjdg7JH6R3QF4Jjn8S//T9fvWd0o0PSShydf654vpWh8CThO07ydiIZnbk9ihq1RQO
+ gW+0d7wfp2Xtr/rZxq4dz6ewtrNx7z4XFYjGOmWArn06xwojscoCreSAHNafyxRkrCsq
+ uJlUmtPfvUI37JLuGIDjntWVG4JzQJvsJXJ8/1g07/LHzIOaeR0/nBX8fGs1A/OIeiJR
+ Z9Sw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=uGM1ba9buYPlDv6UNhIOch/jwXPlXBPyZOgkBtSLCUc=;
- b=VdVsljFOETN+S7G30ea8nUXqOMIPqur9tOYNSF4iaQglIw9pX7vlF8KN5C2lNS2PPi
- /Lzc35nsFUO5DSc/m0MIkwBrqwzgU8m5EwEjNAnOdKH44mtFfY4YvLQroKYdT+w5mUsZ
- HuaUvlY7fr7TFVLrI32/zNym4Tv0rBYKQ7EYM8uywqtyzQexCq//XQDmEaAimgAdd6O2
- 9AG8EFDtpRYiJCxkhjA3TE1Y34aK9q2X8BEScGw8JlI/oEJ/FNg9xNdJ6RZC1/3yW6hx
- SxZU4BYExQ7uu4QEDZwPOMwXiJsO5EV5MaIdUYQpSX8RB4fAFWYw3wA56uReuxT41gkI
- tBNw==
-X-Gm-Message-State: APjAAAWNL6w8fObdNhG6ssG28N1Sfp3SBMuKVk0AMsYDfjMqZxwadkW0
- LWJ0U89Q4+gEFEhQ6CHBZbvJvBFdJ7xLp2N1lxM5oBy92UDYzv+wtODIW6Or32KvjyrEXfE/ogQ
- 9FlSsXbWfhJY7qOI=
-X-Received: by 2002:adf:fe90:: with SMTP id l16mr1573614wrr.265.1575963983997; 
- Mon, 09 Dec 2019 23:46:23 -0800 (PST)
-X-Google-Smtp-Source: APXvYqyPqb4pu90PhO5DPn7WRh8fYb9z0Xkfu9+f6MI0m2F8V0HAHpepGctWm9QUthFMsSE4Y16dnA==
-X-Received: by 2002:adf:fe90:: with SMTP id l16mr1573584wrr.265.1575963983687; 
- Mon, 09 Dec 2019 23:46:23 -0800 (PST)
-Received: from [192.168.1.35] (182.red-88-21-103.staticip.rima-tde.net.
- [88.21.103.182])
- by smtp.gmail.com with ESMTPSA id a16sm2286767wrt.37.2019.12.09.23.46.22
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 09 Dec 2019 23:46:23 -0800 (PST)
-Subject: Re: [PATCH] riscv/sifive_u: fix a memory leak in soc_realize()
-To: pannengyuan@huawei.com, palmer@dabbelt.com, Alistair.Francis@wdc.com,
- sagark@eecs.berkeley.edu, kbastian@mail.uni-paderborn.de
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
- zhang.zhanghailiang@huawei.com
-References: <1575962077-28800-1-git-send-email-pannengyuan@huawei.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>
-Message-ID: <eed2a144-0253-8435-6e81-991f71acc602@redhat.com>
-Date: Tue, 10 Dec 2019 08:46:22 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.2.2
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=3Um02XhQDSOXqFThAJBB5utYQHbTlMcj0aoANmKJJuk=;
+ b=t9Bf18Er/xgB5tEvfcJ1lqVkN/UNWStrz5fqQEewAErh40z0ZZ/4HjovfzonYa02Ee
+ 4XRZBG13l8ZSNiBYFy/o6z00blkagpOVv9U1x4cYJlohHM9i5QQpufwhmZ4FKBLeURSs
+ zbzms+kAz7CrFUpNZh7H90IhRap8Fs6hxvsCnxIObiDZKWKIBczEfbwJdJIMtTGhVFgZ
+ WterS1HBpU5j4BQwbx0MkhGnbOF7LQP9Rv5E9G5VOlHjAYx+lF84aDO2ZOuHAqN/UB7R
+ +YI5uISj4NdnhOWdJ40vQtkDEDJMZiytVwnJ5h1Gzl7ps4TM73JsvHxK+tWwunhSgCN+
+ 7FKw==
+X-Gm-Message-State: APjAAAWhijGmDr5n1OHuBvNufAahPAg4hK3BCUa1L8T8aW3As6tQy7BG
+ 2COeBRW9znaDysiYF0gdbiDDzWPbRbh9VqUmCEM=
+X-Google-Smtp-Source: APXvYqzCPPMdqUl/gbARWa3GIyn/8VO3DBPZHjdMuD3Py/uVn9/N6/x//wcU1RN1/6r0eN2lirTj6AjTmDsi0qAdIfM=
+X-Received: by 2002:a19:c0b:: with SMTP id 11mr17290123lfm.135.1576003136065; 
+ Tue, 10 Dec 2019 10:38:56 -0800 (PST)
 MIME-Version: 1.0
+References: <1575962077-28800-1-git-send-email-pannengyuan@huawei.com>
 In-Reply-To: <1575962077-28800-1-git-send-email-pannengyuan@huawei.com>
-Content-Language: en-US
-X-MC-Unique: XPCRUPapO3-KWPMgBAiwDA-1
-X-Mimecast-Spam-Score: 0
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
- [fuzzy]
-X-Received-From: 207.211.31.81
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 10 Dec 2019 10:38:29 -0800
+Message-ID: <CAKmqyKNH0NdhksX35C7Cm1e51in-iRBrmH8TJWGYregCgLgO6w@mail.gmail.com>
+Subject: Re: [PATCH] riscv/sifive_u: fix a memory leak in soc_realize()
+To: pannengyuan@huawei.com
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ zhang.zhanghailiang@huawei.com
+Content-Type: text/plain; charset="UTF-8"
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2a00:1450:4864:20::143
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -85,35 +69,40 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Dec 2019 07:46:34 -0000
+X-List-Received-Date: Tue, 10 Dec 2019 18:39:00 -0000
 
-On 12/10/19 8:14 AM, pannengyuan@huawei.com wrote:
+On Mon, Dec 9, 2019 at 11:15 PM <pannengyuan@huawei.com> wrote:
+>
 > From: Pan Nengyuan <pannengyuan@huawei.com>
->=20
+>
 > Fix a minor memory leak in riscv_sifive_u_soc_realize()
->=20
+>
 > Reported-by: Euler Robot <euler.robot@huawei.com>
 > Signed-off-by: Pan Nengyuan <pannengyuan@huawei.com>
+
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+
+Alistair
+
 > ---
->   hw/riscv/sifive_u.c | 1 +
->   1 file changed, 1 insertion(+)
->=20
+>  hw/riscv/sifive_u.c | 1 +
+>  1 file changed, 1 insertion(+)
+>
 > diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
 > index 0140e95..0e12b3c 100644
 > --- a/hw/riscv/sifive_u.c
 > +++ b/hw/riscv/sifive_u.c
-> @@ -542,6 +542,7 @@ static void riscv_sifive_u_soc_realize(DeviceState *d=
-ev, Error **errp)
->           SIFIVE_U_PLIC_CONTEXT_BASE,
->           SIFIVE_U_PLIC_CONTEXT_STRIDE,
->           memmap[SIFIVE_U_PLIC].size);
+> @@ -542,6 +542,7 @@ static void riscv_sifive_u_soc_realize(DeviceState *dev, Error **errp)
+>          SIFIVE_U_PLIC_CONTEXT_BASE,
+>          SIFIVE_U_PLIC_CONTEXT_STRIDE,
+>          memmap[SIFIVE_U_PLIC].size);
 > +    g_free(plic_hart_config);
->       sifive_uart_create(system_memory, memmap[SIFIVE_U_UART0].base,
->           serial_hd(0), qdev_get_gpio_in(DEVICE(s->plic), SIFIVE_U_UART0_=
-IRQ));
->       sifive_uart_create(system_memory, memmap[SIFIVE_U_UART1].base,
->=20
-
-Reviewed-by: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
-
+>      sifive_uart_create(system_memory, memmap[SIFIVE_U_UART0].base,
+>          serial_hd(0), qdev_get_gpio_in(DEVICE(s->plic), SIFIVE_U_UART0_IRQ));
+>      sifive_uart_create(system_memory, memmap[SIFIVE_U_UART1].base,
+> --
+> 2.7.2.windows.1
+>
+>
+>
 
