@@ -1,39 +1,40 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ihFx8-0004Oc-9u
-	for mharc-qemu-riscv@gnu.org; Tue, 17 Dec 2019 11:44:06 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53550)
+	id 1ihFxV-0004nD-54
+	for mharc-qemu-riscv@gnu.org; Tue, 17 Dec 2019 11:44:29 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:53758)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <philmd@redhat.com>) id 1ihFx2-0004La-Bn
- for qemu-riscv@nongnu.org; Tue, 17 Dec 2019 11:44:02 -0500
+ (envelope-from <philmd@redhat.com>) id 1ihFxR-0004hB-Cp
+ for qemu-riscv@nongnu.org; Tue, 17 Dec 2019 11:44:26 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <philmd@redhat.com>) id 1ihFx1-0006pF-3m
- for qemu-riscv@nongnu.org; Tue, 17 Dec 2019 11:44:00 -0500
-Received: from us-smtp-1.mimecast.com ([207.211.31.81]:33468)
+ (envelope-from <philmd@redhat.com>) id 1ihFxQ-0007Ft-9l
+ for qemu-riscv@nongnu.org; Tue, 17 Dec 2019 11:44:25 -0500
+Received: from us-smtp-1.mimecast.com ([207.211.31.81]:47114
+ helo=us-smtp-delivery-1.mimecast.com)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <philmd@redhat.com>) id 1ihFx1-0006oS-0Y
- for qemu-riscv@nongnu.org; Tue, 17 Dec 2019 11:43:59 -0500
+ (Exim 4.71) (envelope-from <philmd@redhat.com>) id 1ihFxQ-0007Fc-4t
+ for qemu-riscv@nongnu.org; Tue, 17 Dec 2019 11:44:24 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1576601038;
+ s=mimecast20190719; t=1576601063;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=KFfF62p0wtfpbuoQUs8fUU7/4Wwx9UtbFBKJZwS7G3M=;
- b=SGmsAHzClc+DEc2K6fdH7BqAXGTLei4Z+4ch+sOtlcdwyHP7Do9N2F0BsWc1I/P7VZdYMh
- CDoS+JD+VdAmD6cb4bkK1aPrwUnrci2ilyjBUWmt91apVFHujPnHqBoVLrTquVwKW24VZx
- wMJv22t4dsdG7KTbX4P7FL1JnkiZkXI=
+ bh=MYVIpFLxZh/foCyP2XwIVnvo4LnIBsgaGRLRhMaYw14=;
+ b=PRqc/4FSK0EezMtFucpWfaxMAvKfPmdv8O7abU8yVdZQ3Cch10WgYk1xIdXKN4cXn8Wqnz
+ Wu9eWtTpKD9OXwBjKfhMz8woVhSUZJnb6vjvsG69P0UN0lt8b8DYStKP1ai2zwEW0AWryU
+ WmEli4lyDxsVgxivK5++v+O4qIvxueE=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-1-7TX2JT0qOyim0MLRiwnoeg-1; Tue, 17 Dec 2019 11:43:54 -0500
+ us-mta-279-wgik6hrlOhGkOgAq2xvtuQ-1; Tue, 17 Dec 2019 11:44:19 -0500
 Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
  [10.5.11.15])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 16A93A0A6B;
- Tue, 17 Dec 2019 16:43:50 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 770751023150;
+ Tue, 17 Dec 2019 16:44:15 +0000 (UTC)
 Received: from x1w.redhat.com (ovpn-205-147.brq.redhat.com [10.40.205.147])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 2B5E468877;
- Tue, 17 Dec 2019 16:43:25 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 7598D68877;
+ Tue, 17 Dec 2019 16:43:50 +0000 (UTC)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
 To: Paolo Bonzini <pbonzini@redhat.com>,
  =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
@@ -68,15 +69,15 @@ Cc: Cornelia Huck <cohuck@redhat.com>, Zhang Chen <chen.zhang@intel.com>,
  Samuel Thibault <samuel.thibault@ens-lyon.org>,
  Amit Shah <amit@kernel.org>, qemu-riscv@nongnu.org,
  Halil Pasic <pasic@linux.ibm.com>, Thomas Huth <huth@tuxfamily.org>
-Subject: [RFC PATCH 11/14] net/vhost-user: Explicit we ignore few QEMUChrEvent
+Subject: [RFC PATCH 12/14] vhost-user-blk: Explicit we ignore few QEMUChrEvent
  in IOEventHandler
-Date: Tue, 17 Dec 2019 17:38:05 +0100
-Message-Id: <20191217163808.20068-12-philmd@redhat.com>
+Date: Tue, 17 Dec 2019 17:38:06 +0100
+Message-Id: <20191217163808.20068-13-philmd@redhat.com>
 In-Reply-To: <20191217163808.20068-1-philmd@redhat.com>
 References: <20191217163808.20068-1-philmd@redhat.com>
 MIME-Version: 1.0
 X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
-X-MC-Unique: 7TX2JT0qOyim0MLRiwnoeg-1
+X-MC-Unique: wgik6hrlOhGkOgAq2xvtuQ-1
 X-Mimecast-Spam-Score: 0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
@@ -94,48 +95,51 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Dec 2019 16:44:02 -0000
+X-List-Received-Date: Tue, 17 Dec 2019 16:44:27 -0000
 
 The Chardev events are listed in the QEMUChrEvent enum. To be
 able to use this enum in the IOEventHandler typedef, we need to
 explicit when frontends ignore some events, to silent GCC the
 following warnings:
 
-    CC      net/vhost-user.o
-  net/vhost-user.c: In function =E2=80=98net_vhost_user_event=E2=80=99:
-  net/vhost-user.c:269:5: error: enumeration value =E2=80=98CHR_EVENT_BREAK=
-=E2=80=99 not handled in switch [-Werror=3Dswitch]
-    269 |     switch (event) {
+    CC      s390x-softmmu/hw/block/vhost-user-blk.o
+  hw/block/vhost-user-blk.c: In function =E2=80=98vhost_user_blk_event=E2=
+=80=99:
+  hw/block/vhost-user-blk.c:370:5: error: enumeration value =E2=80=98CHR_EV=
+ENT_BREAK=E2=80=99 not handled in switch [-Werror=3Dswitch]
+    370 |     switch (event) {
         |     ^~~~~~
-  net/vhost-user.c:269:5: error: enumeration value =E2=80=98CHR_EVENT_MUX_I=
-N=E2=80=99 not handled in switch [-Werror=3Dswitch]
-  net/vhost-user.c:269:5: error: enumeration value =E2=80=98CHR_EVENT_MUX_O=
-UT=E2=80=99 not handled in switch [-Werror=3Dswitch]
+  hw/block/vhost-user-blk.c:370:5: error: enumeration value =E2=80=98CHR_EV=
+ENT_MUX_IN=E2=80=99 not handled in switch [-Werror=3Dswitch]
+  hw/block/vhost-user-blk.c:370:5: error: enumeration value =E2=80=98CHR_EV=
+ENT_MUX_OUT=E2=80=99 not handled in switch [-Werror=3Dswitch]
   cc1: all warnings being treated as errors
 
 Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
 ---
 Cc: "Michael S. Tsirkin" <mst@redhat.com>
-Cc: Jason Wang <jasowang@redhat.com>
+Cc: Kevin Wolf <kwolf@redhat.com>
+Cc: Max Reitz <mreitz@redhat.com>
+Cc: qemu-block@nongnu.org
 ---
- net/vhost-user.c | 3 +++
+ hw/block/vhost-user-blk.c | 3 +++
  1 file changed, 3 insertions(+)
 
-diff --git a/net/vhost-user.c b/net/vhost-user.c
-index 014199d600..383d68024e 100644
---- a/net/vhost-user.c
-+++ b/net/vhost-user.c
-@@ -294,6 +294,9 @@ static void net_vhost_user_event(void *opaque, int even=
+diff --git a/hw/block/vhost-user-blk.c b/hw/block/vhost-user-blk.c
+index 63da9bb619..4e2b2efdd3 100644
+--- a/hw/block/vhost-user-blk.c
++++ b/hw/block/vhost-user-blk.c
+@@ -383,6 +383,9 @@ static void vhost_user_blk_event(void *opaque, int even=
 t)
-             aio_bh_schedule_oneshot(ctx, chr_closed_bh, opaque);
+             s->watch =3D 0;
          }
          break;
 +    default:
 +        /* Ignore */
 +        break;
      }
+ }
 =20
-     if (err) {
 --=20
 2.21.0
 
