@@ -1,40 +1,40 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ihFvr-0002bm-0k
-	for mharc-qemu-riscv@gnu.org; Tue, 17 Dec 2019 11:42:47 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:52799)
+	id 1ihFwG-0003CR-8i
+	for mharc-qemu-riscv@gnu.org; Tue, 17 Dec 2019 11:43:12 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:52980)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <philmd@redhat.com>) id 1ihFvm-0002WB-TI
- for qemu-riscv@nongnu.org; Tue, 17 Dec 2019 11:42:43 -0500
+ (envelope-from <philmd@redhat.com>) id 1ihFwC-00036g-3l
+ for qemu-riscv@nongnu.org; Tue, 17 Dec 2019 11:43:09 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <philmd@redhat.com>) id 1ihFvl-0004t7-Pc
- for qemu-riscv@nongnu.org; Tue, 17 Dec 2019 11:42:42 -0500
-Received: from us-smtp-delivery-1.mimecast.com ([205.139.110.120]:49239
- helo=us-smtp-1.mimecast.com)
+ (envelope-from <philmd@redhat.com>) id 1ihFwB-0005OX-2O
+ for qemu-riscv@nongnu.org; Tue, 17 Dec 2019 11:43:07 -0500
+Received: from us-smtp-1.mimecast.com ([207.211.31.81]:51777
+ helo=us-smtp-delivery-1.mimecast.com)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <philmd@redhat.com>) id 1ihFvl-0004sa-JZ
- for qemu-riscv@nongnu.org; Tue, 17 Dec 2019 11:42:41 -0500
+ (Exim 4.71) (envelope-from <philmd@redhat.com>) id 1ihFwA-0005Nw-Uo
+ for qemu-riscv@nongnu.org; Tue, 17 Dec 2019 11:43:07 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1576600961;
+ s=mimecast20190719; t=1576600986;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=1q0+8G9RTWbeMkR4IbHhx3lZKW72mNyCaGGTfMLDypg=;
- b=KhjVgIQOJeERrHh59Uic7l81qFudpOo5sS4d4+09CI7s4jfg3Z9LukbP5jJxfjBAT5DNFe
- rprGpolUU0GQbQ0LeEqolPp8MkQt0A/CrTdFtlUAkFjzZozKu4SVACinhyT8+bjXvHFG2U
- 4BAYA+qg3jnG+VLEHkq7zwfMj/Q2fh8=
+ bh=LWPdmhlylc1YC5H9DvoZFc9kbqPgnBG8SfVBw2Anx8I=;
+ b=PXJo1+fbrtrISifAMs+xnXJAp8Z8JpikzQ9xdtf/5hia42uzWLYq613BHhxy8RNBG4LCyc
+ PezH1RB7JBytPSeY1shT8HWRy/hVNfQFOHqhHR2CgKNe+bEB1NZ27RHVJfo9uH5ez5lD/n
+ lo3GM6fR5PSC091J5b8B6w9UjVxZ1yk=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-374-FX8W9uU1OgGW6LcCMY_TFA-1; Tue, 17 Dec 2019 11:42:35 -0500
+ us-mta-253-itWGShRrPOK60sk3Fmx78g-1; Tue, 17 Dec 2019 11:43:03 -0500
 Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
  [10.5.11.15])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 62959593D8;
- Tue, 17 Dec 2019 16:42:31 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 6EDC86A2A6;
+ Tue, 17 Dec 2019 16:42:57 +0000 (UTC)
 Received: from x1w.redhat.com (ovpn-205-147.brq.redhat.com [10.40.205.147])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 3B4AF68865;
- Tue, 17 Dec 2019 16:42:07 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id C5A5B68865;
+ Tue, 17 Dec 2019 16:42:31 +0000 (UTC)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
 To: Paolo Bonzini <pbonzini@redhat.com>,
  =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
@@ -69,21 +69,21 @@ Cc: Cornelia Huck <cohuck@redhat.com>, Zhang Chen <chen.zhang@intel.com>,
  Samuel Thibault <samuel.thibault@ens-lyon.org>,
  Amit Shah <amit@kernel.org>, qemu-riscv@nongnu.org,
  Halil Pasic <pasic@linux.ibm.com>, Thomas Huth <huth@tuxfamily.org>
-Subject: [RFC PATCH 08/14] hw/usb/redirect: Explicit we ignore few
- QEMUChrEvent in IOEventHandler
-Date: Tue, 17 Dec 2019 17:38:02 +0100
-Message-Id: <20191217163808.20068-9-philmd@redhat.com>
+Subject: [RFC PATCH 09/14] monitor/qmp: Explicit we ignore few QEMUChrEvent in
+ IOEventHandler
+Date: Tue, 17 Dec 2019 17:38:03 +0100
+Message-Id: <20191217163808.20068-10-philmd@redhat.com>
 In-Reply-To: <20191217163808.20068-1-philmd@redhat.com>
 References: <20191217163808.20068-1-philmd@redhat.com>
 MIME-Version: 1.0
 X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
-X-MC-Unique: FX8W9uU1OgGW6LcCMY_TFA-1
+X-MC-Unique: itWGShRrPOK60sk3Fmx78g-1
 X-Mimecast-Spam-Score: 0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
  [fuzzy]
-X-Received-From: 205.139.110.120
+X-Received-From: 207.211.31.81
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -95,40 +95,39 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Dec 2019 16:42:45 -0000
+X-List-Received-Date: Tue, 17 Dec 2019 16:43:10 -0000
 
 The Chardev events are listed in the QEMUChrEvent enum. To be
 able to use this enum in the IOEventHandler typedef, we need to
 explicit when frontends ignore some events, to silent GCC the
 following warnings:
 
-    CC      hw/usb/redirect.o
-  hw/usb/redirect.c: In function =E2=80=98usbredir_chardev_event=E2=80=99:
-  hw/usb/redirect.c:1361:5: error: enumeration value =E2=80=98CHR_EVENT_BRE=
-AK=E2=80=99 not handled in switch [-Werror=3Dswitch]
-   1361 |     switch (event) {
+    CC      monitor/qmp.o
+  monitor/qmp.c: In function =E2=80=98monitor_qmp_event=E2=80=99:
+  monitor/qmp.c:345:5: error: enumeration value =E2=80=98CHR_EVENT_BREAK=E2=
+=80=99 not handled in switch [-Werror=3Dswitch]
+    345 |     switch (event) {
         |     ^~~~~~
-  hw/usb/redirect.c:1361:5: error: enumeration value =E2=80=98CHR_EVENT_MUX=
-_IN=E2=80=99 not handled in switch [-Werror=3Dswitch]
-  hw/usb/redirect.c:1361:5: error: enumeration value =E2=80=98CHR_EVENT_MUX=
-_OUT=E2=80=99 not handled in switch [-Werror=3Dswitch]
+  monitor/qmp.c:345:5: error: enumeration value =E2=80=98CHR_EVENT_MUX_IN=
+=E2=80=99 not handled in switch [-Werror=3Dswitch]
+  monitor/qmp.c:345:5: error: enumeration value =E2=80=98CHR_EVENT_MUX_OUT=
+=E2=80=99 not handled in switch [-Werror=3Dswitch]
   cc1: all warnings being treated as errors
 
 Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
 ---
-Cc: Gerd Hoffmann <kraxel@redhat.com>
+Cc: Markus Armbruster <armbru@redhat.com>
 ---
- hw/usb/redirect.c | 3 +++
+ monitor/qmp.c | 3 +++
  1 file changed, 3 insertions(+)
 
-diff --git a/hw/usb/redirect.c b/hw/usb/redirect.c
-index e0f5ca6f81..acc376cc95 100644
---- a/hw/usb/redirect.c
-+++ b/hw/usb/redirect.c
-@@ -1370,6 +1370,9 @@ static void usbredir_chardev_event(void *opaque, int =
-event)
-         DPRINTF("chardev close\n");
-         qemu_bh_schedule(dev->chardev_close_bh);
+diff --git a/monitor/qmp.c b/monitor/qmp.c
+index b67a8e7d1f..d666b07e68 100644
+--- a/monitor/qmp.c
++++ b/monitor/qmp.c
+@@ -365,6 +365,9 @@ static void monitor_qmp_event(void *opaque, int event)
+         mon_refcount--;
+         monitor_fdsets_cleanup();
          break;
 +    default:
 +        /* Ignore */
