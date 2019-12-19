@@ -1,109 +1,91 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ihvZ4-0001p9-Un
-	for mharc-qemu-riscv@gnu.org; Thu, 19 Dec 2019 08:10:02 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:35422)
+	id 1ihzwD-0002wC-QF
+	for mharc-qemu-riscv@gnu.org; Thu, 19 Dec 2019 12:50:13 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:50299)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <philmd@redhat.com>) id 1ihvYy-0001k6-Tw
- for qemu-riscv@nongnu.org; Thu, 19 Dec 2019 08:09:59 -0500
+ (envelope-from <alex.bennee@linaro.org>) id 1ihzw8-0002nI-GU
+ for qemu-riscv@nongnu.org; Thu, 19 Dec 2019 12:50:10 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <philmd@redhat.com>) id 1ihvYu-0006uh-MT
- for qemu-riscv@nongnu.org; Thu, 19 Dec 2019 08:09:55 -0500
-Received: from us-smtp-1.mimecast.com ([205.139.110.61]:48304
- helo=us-smtp-delivery-1.mimecast.com)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <philmd@redhat.com>) id 1ihvYu-0006oA-D5
- for qemu-riscv@nongnu.org; Thu, 19 Dec 2019 08:09:52 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1576760991;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=SuzS+0RI392neHe9EkEjexF+DgTfoqg6pQIc+0/RiGk=;
- b=BG5bgpOlcZCOc34IZa9IDTwbAF624+Ozykpd+fRWXYWpM0V6HwKcD1co3NQaalSqwpFGV1
- eTwY0o0a53iQupFtoFzuNTBjMDhwQk3fsPlQa551f54S4kBXs6APpDs2i+cKbgJ6qAUgPX
- 9nhpqlcyHbWf7x0Dn22JrEQsAAuWCDQ=
-Received: from mail-ed1-f71.google.com (mail-ed1-f71.google.com
- [209.85.208.71]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-76-H9Qp9LyiMQyqV1wvMuvJbQ-1; Thu, 19 Dec 2019 08:09:49 -0500
-Received: by mail-ed1-f71.google.com with SMTP id b13so3497641edf.0
- for <qemu-riscv@nongnu.org>; Thu, 19 Dec 2019 05:09:49 -0800 (PST)
+ (envelope-from <alex.bennee@linaro.org>) id 1ihzw6-000202-KW
+ for qemu-riscv@nongnu.org; Thu, 19 Dec 2019 12:50:08 -0500
+Received: from mail-wr1-x442.google.com ([2a00:1450:4864:20::442]:36715)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <alex.bennee@linaro.org>)
+ id 1ihzw6-0001vr-CA
+ for qemu-riscv@nongnu.org; Thu, 19 Dec 2019 12:50:06 -0500
+Received: by mail-wr1-x442.google.com with SMTP id z3so6901214wru.3
+ for <qemu-riscv@nongnu.org>; Thu, 19 Dec 2019 09:50:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=references:user-agent:from:to:cc:subject:in-reply-to:date
+ :message-id:mime-version:content-transfer-encoding;
+ bh=+7J6cwWsK5m8RqJIJw6UIA4O+t2/hnH9oWFBaj1UuGk=;
+ b=aqmdw2Fxer+fvZqA0W7mDAfv3bUKgoVaVNuTu1BbpO4Sh7mH/QseDpDry+Y2fds+qu
+ vEw48Q7sd5ZaGYJa9O5z/x/m/+IqONfjxP6BYR//UsU7nU7MHpM9MYVOio82jTd4ay5k
+ /Dmhih6XpTVhDBtxQ0L0lBLhj8D+kRj/XbSltCWnVe0xZk/Yo7lcH9I3REA4xottjyC+
+ 1hNCbx6IbOhtfOjPnJjnqPGvEWNDePIwIcKrA17s+tcTo+ge34AZhy54rywi/25LqkC4
+ o275hzNubYxw0OJ4FApSuYhP0yvZX/2PfXlU+yIv1uz1nT8U34Lco+2zmQXseuvjAEAb
+ R2KA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=Ni05vfEtEsgSJx+IszN8ATEGfrX2nnauYNLHkipway8=;
- b=dEoSAP6gAJB1/3D68gXX+w4PX8xEsf3N3iGPo3rst/l72P/qjk6M/VxypLHo2BC5mY
- 1lEt+0YxsC+PUoAdOmT0VZS2jS0vbOaOXOjBOJPNs8s14GaqUXXZNaMqAKFhBCEByLnx
- f0Vg5GXzoJagooWhPM873eAFVJiL2P5iJgV4537fXaUKmcolAsMJSl56aisIIvvoollP
- a77F5PU7U2cl6xU/7IpRU3FGd0jDPfjcWKiVcu36wp5hH2jT0wCH0/b3qgDfqXNj43sK
- uPQZqEKpZ5a5VXCEB/aCp8LHfRBgtgSYdO4p9LGlF+dsJhTVBlfq6M/4yL27coNMpK6o
- odmg==
-X-Gm-Message-State: APjAAAWzoxHcM7Qk10bcfkCiYnoikiQZATpWkMn/NLU08RwvZOPEGNGu
- Pi7qCwz1W/21yWETnhoGizPP6Iu67Vrp0Yn6O9vES8c8bT8YvYzSPQNLK+6t37qNr1uhp7y50cz
- wUzVDqUjiJaGH7t4=
-X-Received: by 2002:a50:8522:: with SMTP id 31mr9076198edr.237.1576760987691; 
- Thu, 19 Dec 2019 05:09:47 -0800 (PST)
-X-Google-Smtp-Source: APXvYqz/adgrbgJoCgmy56SiGC2LIO/SZZdbSv5QlB93ULWzoIEaQX5tN2zW1BKIP1XXj+7bB7rUng==
-X-Received: by 2002:a50:8522:: with SMTP id 31mr9076104edr.237.1576760986995; 
- Thu, 19 Dec 2019 05:09:46 -0800 (PST)
-Received: from [192.168.1.35] (34.red-83-42-66.dynamicip.rima-tde.net.
- [83.42.66.34])
- by smtp.gmail.com with ESMTPSA id e2sm474808eja.37.2019.12.19.05.09.43
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 19 Dec 2019 05:09:46 -0800 (PST)
-Subject: Re: [RFC PATCH 13/14] hw/char/terminal3270: Explicit ignored
- QEMUChrEvent in IOEventHandler
-To: Markus Armbruster <armbru@redhat.com>
-Cc: Paolo Bonzini <pbonzini@redhat.com>,
- =?UTF-8?Q?Marc-Andr=c3=a9_Lureau?= <marcandre.lureau@redhat.com>,
- qemu-devel@nongnu.org, Peter Maydell <peter.maydell@linaro.org>,
- Li Zhijian <lizhijian@cn.fujitsu.com>, Paul Burton <pburton@wavecomp.com>,
- Jason Wang <jasowang@redhat.com>,
- KONRAD Frederic <frederic.konrad@adacore.com>,
- Gerd Hoffmann <kraxel@redhat.com>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Alberto Garcia <berto@igalia.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, qemu-block@nongnu.org,
- "Michael S. Tsirkin" <mst@redhat.com>, Halil Pasic <pasic@linux.ibm.com>,
- Christian Borntraeger <borntraeger@de.ibm.com>,
- "Gonglei (Arei)" <arei.gonglei@huawei.com>, Joel Stanley <joel@jms.id.au>,
- Samuel Thibault <samuel.thibault@ens-lyon.org>,
- Aleksandar Rikalo <aleksandar.rikalo@rt-rk.com>,
- Antony Pavlov <antonynpavlov@gmail.com>, Laurent Vivier
- <lvivier@redhat.com>, Corey Minyard <minyard@acm.org>,
- Amit Shah <amit@kernel.org>, Alistair Francis <alistair@alistair23.me>,
- "Dr. David Alan Gilbert" <dgilbert@redhat.com>,
- Fabien Chouteau <chouteau@adacore.com>, qemu-s390x@nongnu.org,
- qemu-arm@nongnu.org, Peter Chubb <peter.chubb@nicta.com.au>,
- =?UTF-8?Q?Alex_Benn=c3=a9e?= <alex.bennee@linaro.org>,
- Kevin Wolf <kwolf@redhat.com>, qemu-riscv@nongnu.org,
- Igor Mitsyanko <i.mitsyanko@gmail.com>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Cornelia Huck <cohuck@redhat.com>, Max Reitz <mreitz@redhat.com>,
- Zhang Chen <chen.zhang@intel.com>, Michael Walle <michael@walle.cc>,
- Palmer Dabbelt <palmer@dabbelt.com>, Thomas Huth <huth@tuxfamily.org>,
- Aleksandar Markovic <amarkovic@wavecomp.com>,
- Aurelien Jarno <aurelien@aurel32.net>
-References: <20191217163808.20068-1-philmd@redhat.com>
- <20191217163808.20068-14-philmd@redhat.com>
- <87sglgx0w1.fsf@dusky.pond.sub.org>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>
-Message-ID: <214a1da6-d974-4f98-0113-ea0b1ea9f244@redhat.com>
-Date: Thu, 19 Dec 2019 14:09:42 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.2.2
+ h=x-gm-message-state:references:user-agent:from:to:cc:subject
+ :in-reply-to:date:message-id:mime-version:content-transfer-encoding;
+ bh=+7J6cwWsK5m8RqJIJw6UIA4O+t2/hnH9oWFBaj1UuGk=;
+ b=Z6o3qGF61Ea0iwbX/jyU8SssnsFM6r3x0RSeGDxRJDN4I/x8jjJpABGuBPAIPxG3Vh
+ clsqZ3sI1B6tV3eb6r4awNe6f6DwEwjTKb2fH2qcKDpS6G5ATgIP4XfBlnp6Y8gnbRmF
+ laBg8AXK6/qNp+16tQPGgKYaAAZPxHmuwulgtBlW9HMHa89khWm7PhxKLjpslczo4MvV
+ Bydk0cpZ0u7DehE1yriUcwdBFgOXW9rPc6vrp7uyqA67IU3E34Y3LAipwWrFQh9B54Tp
+ 5woa34dQwc1VS+9M9yQnEyUabtSaSJoi0YpcpTnglm/LXBIhgrlXLS4lafpaKX0ySIrU
+ ZNUQ==
+X-Gm-Message-State: APjAAAW2ZZ6b3dMuJZGxH+dV9KRwVhxPMkSAnl1JsQVTXwNZ3gIYJlY+
+ X94GewjW3DwsfkhpcSLPOGvvsw==
+X-Google-Smtp-Source: APXvYqz13j+q5pdEgvqzsgbPKB8JtdS/k6KeljD9N1df6AJ+pYoOVFElzTAtoGfaBs0k0l0e37/Krw==
+X-Received: by 2002:adf:fa12:: with SMTP id m18mr10353018wrr.309.1576777803448; 
+ Thu, 19 Dec 2019 09:50:03 -0800 (PST)
+Received: from zen.linaroharston ([51.148.130.216])
+ by smtp.gmail.com with ESMTPSA id x10sm6945535wrv.60.2019.12.19.09.50.01
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 19 Dec 2019 09:50:01 -0800 (PST)
+Received: from zen (localhost [127.0.0.1])
+ by zen.linaroharston (Postfix) with ESMTP id C55D51FF87;
+ Thu, 19 Dec 2019 17:50:00 +0000 (GMT)
+References: <20191211170520.7747-1-alex.bennee@linaro.org>
+ <20191211170520.7747-9-alex.bennee@linaro.org>
+ <b65e722f-7524-9269-3f36-6045ab5393c5@greensocs.com>
+User-agent: mu4e 1.3.5; emacs 27.0.50
+From: Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>
+To: Damien Hedde <damien.hedde@greensocs.com>
+Cc: qemu-devel@nongnu.org, richard.henderson@linaro.org,
+ alan.hayward@arm.com, luis.machado@linaro.org, Philippe =?utf-8?Q?Mathieu?=
+ =?utf-8?Q?-Daud=C3=A9?=
+ <philmd@redhat.com>, Eduardo Habkost <ehabkost@redhat.com>, Marcel
+ Apfelbaum <marcel.apfelbaum@gmail.com>, Richard Henderson
+ <rth@twiddle.net>, Peter Maydell <peter.maydell@linaro.org>, "Edgar E.
+ Iglesias" <edgar.iglesias@gmail.com>, Paolo Bonzini <pbonzini@redhat.com>,
+ Michael Walle <michael@walle.cc>, Laurent Vivier <laurent@vivier.eu>,
+ Aurelien Jarno <aurelien@aurel32.net>, Aleksandar Markovic
+ <amarkovic@wavecomp.com>, Aleksandar Rikalo <aleksandar.rikalo@rt-rk.com>,
+ Chris Wulff <crwulff@gmail.com>, Marek Vasut <marex@denx.de>, Stafford
+ Horne <shorne@gmail.com>, David Gibson <david@gibson.dropbear.id.au>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Alistair Francis
+ <Alistair.Francis@wdc.com>, Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, David Hildenbrand
+ <david@redhat.com>, Cornelia Huck <cohuck@redhat.com>, Mark Cave-Ayland
+ <mark.cave-ayland@ilande.co.uk>, Artyom Tarasenko <atar4qemu@gmail.com>,
+ Max Filippov <jcmvbkbc@gmail.com>, "open list:ARM TCG CPUs"
+ <qemu-arm@nongnu.org>, "open list:PowerPC TCG CPUs" <qemu-ppc@nongnu.org>,
+ "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>, "open list:S390 TCG
+ CPUs" <qemu-s390x@nongnu.org>
+Subject: Re: [PATCH v3 08/20] gdbstub: extend GByteArray to read register
+ helpers
+In-reply-to: <b65e722f-7524-9269-3f36-6045ab5393c5@greensocs.com>
+Date: Thu, 19 Dec 2019 17:50:00 +0000
+Message-ID: <87mubodx2v.fsf@linaro.org>
 MIME-Version: 1.0
-In-Reply-To: <87sglgx0w1.fsf@dusky.pond.sub.org>
-Content-Language: en-US
-X-MC-Unique: H9Qp9LyiMQyqV1wvMuvJbQ-1
-X-Mimecast-Spam-Score: 0
-Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
- [fuzzy]
-X-Received-From: 205.139.110.61
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2a00:1450:4864:20::442
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -115,71 +97,187 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Dec 2019 13:09:59 -0000
+X-List-Received-Date: Thu, 19 Dec 2019 17:50:11 -0000
 
-Hi Markus,
 
-On 12/19/19 7:52 AM, Markus Armbruster wrote:
-> Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com> writes:
->=20
->> The Chardev events are listed in the QEMUChrEvent enum. To be
->> able to use this enum in the IOEventHandler typedef, we need to
->> explicit when frontends ignore some events, to silent GCC the
->> following warnings:
->>
->>      CC      s390x-softmmu/hw/char/terminal3270.o
->>    hw/char/terminal3270.c: In function =E2=80=98chr_event=E2=80=99:
->>    hw/char/terminal3270.c:156:5: error: enumeration value =E2=80=98CHR_E=
-VENT_BREAK=E2=80=99 not handled in switch [-Werror=3Dswitch]
->>      156 |     switch (event) {
->>          |     ^~~~~~
->>    hw/char/terminal3270.c:156:5: error: enumeration value =E2=80=98CHR_E=
-VENT_MUX_IN=E2=80=99 not handled in switch [-Werror=3Dswitch]
->>    hw/char/terminal3270.c:156:5: error: enumeration value =E2=80=98CHR_E=
-VENT_MUX_OUT=E2=80=99 not handled in switch [-Werror=3Dswitch]
->>    cc1: all warnings being treated as errors
->>
->> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
->> ---
->> Cc: Cornelia Huck <cohuck@redhat.com>
->> Cc: Halil Pasic <pasic@linux.ibm.com>
->> Cc: Christian Borntraeger <borntraeger@de.ibm.com>
->> Cc: "Marc-Andr=C3=A9 Lureau" <marcandre.lureau@redhat.com>
->> Cc: Paolo Bonzini <pbonzini@redhat.com>
->> Cc: qemu-s390x@nongnu.org
->> ---
->>   hw/char/terminal3270.c | 3 +++
->>   1 file changed, 3 insertions(+)
->>
->> diff --git a/hw/char/terminal3270.c b/hw/char/terminal3270.c
->> index 6859c1bcb2..9e59a2d92b 100644
->> --- a/hw/char/terminal3270.c
->> +++ b/hw/char/terminal3270.c
->> @@ -166,6 +166,9 @@ static void chr_event(void *opaque, int event)
->>           sch->curr_status.scsw.dstat =3D SCSW_DSTAT_DEVICE_END;
->>           css_conditional_io_interrupt(sch);
->>           break;
->> +    default:
->> +        /* Ignore */
->> +        break;
->>       }
->>   }
->=20
-> I doubt the /* Ignore */ comment is worth its keep.
+Damien Hedde <damien.hedde@greensocs.com> writes:
 
-OK I don't mind dropping it.
+> Hi Alex,
+>
+> On 12/11/19 6:05 PM, Alex Benn=C3=A9e wrote:
+>> Instead of passing a pointer to memory now just extend the GByteArray
+>> to all the read register helpers. They can then safely append their
+>> data through the normal way. We don't bother with this abstraction for
+>> write registers as we have already ensured the buffer being copied
+>> from is the correct size.
+>>=20
+>> Signed-off-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
+>
+> [...]
+>
+>> diff --git a/target/arm/helper.c b/target/arm/helper.c
+>> index 0ac950d6c71..6476245e789 100644
+>> --- a/target/arm/helper.c
+>> +++ b/target/arm/helper.c
+>> @@ -47,30 +47,27 @@ static bool get_phys_addr_lpae(CPUARMState *env, tar=
+get_ulong address,
+>>=20=20
+>>  static void switch_mode(CPUARMState *env, int mode);
+>>=20=20
+>> -static int vfp_gdb_get_reg(CPUARMState *env, uint8_t *buf, int reg)
+>> +static int vfp_gdb_get_reg(CPUARMState *env, GByteArray *buf, int reg)
+>>  {
+>>      int nregs;
+>>=20=20
+>>      /* VFP data registers are always little-endian.  */
+>>      nregs =3D arm_feature(env, ARM_FEATURE_VFP3) ? 32 : 16;
+>>      if (reg < nregs) {
+>> -        stq_le_p(buf, *aa32_vfp_dreg(env, reg));
+>> -        return 8;
+>> +        return gdb_get_reg64(buf, *aa32_vfp_dreg(env, reg));
+>
+> It was a little-endian version, you've put a target-endian version.
+> Is that what you meant ?
 
-> Splitting PATCH 02-13 feels excessive to me.
+Yes - I suspect this would have been broken if used by a big-endian
+system. gdbstub generally (SVE excepted) wants things in target order.
 
-I agree, but I have the feeling when a patch touch many subsystems, we=20
-don't wait for all the maintainers to Ack it, we are fine with 2 or 3.
-In this case, maybe a subsystem neglected a QEMUChrEvent case, so I=20
-prefer to have each of them to confirm we can ignore the missing cases.
+>
+>>      }
+>>      if (arm_feature(env, ARM_FEATURE_NEON)) {
+>>          /* Aliases for Q regs.  */
+>>          nregs +=3D 16;
+>>          if (reg < nregs) {
+>>              uint64_t *q =3D aa32_vfp_qreg(env, reg - 32);
+>> -            stq_le_p(buf, q[0]);
+>> -            stq_le_p(buf + 8, q[1]);
+>> -            return 16;
+>> +            return gdb_get_reg128(buf, q[0], q[1]);
+>
+> Ditto here.
+>
+>>          }
+>>      }
+>>      switch (reg - nregs) {
+>> -    case 0: stl_p(buf, env->vfp.xregs[ARM_VFP_FPSID]); return 4;
+>> -    case 1: stl_p(buf, vfp_get_fpscr(env)); return 4;
+>> -    case 2: stl_p(buf, env->vfp.xregs[ARM_VFP_FPEXC]); return 4;
+>> +    case 0: return gdb_get_reg32(buf, env->vfp.xregs[ARM_VFP_FPSID]); b=
+reak;
+>> +    case 1: return gdb_get_reg32(buf, vfp_get_fpscr(env)); break;
+>> +    case 2: return gdb_get_reg32(buf, env->vfp.xregs[ARM_VFP_FPEXC]); b=
+reak;
+>>      }
+>>      return 0;
+>>  }
+>> @@ -101,7 +98,7 @@ static int vfp_gdb_set_reg(CPUARMState *env, uint8_t =
+*buf, int reg)
+>>      return 0;
+>>  }
+>>=20=20
+>> -static int aarch64_fpu_gdb_get_reg(CPUARMState *env, uint8_t *buf, int =
+reg)
+>> +static int aarch64_fpu_gdb_get_reg(CPUARMState *env, GByteArray *buf, i=
+nt reg)
+>>  {
+>>      switch (reg) {
+>>      case 0 ... 31:
+>> @@ -204,7 +201,7 @@ static void write_raw_cp_reg(CPUARMState *env, const=
+ ARMCPRegInfo *ri,
+>>      }
+>>  }
+>>=20=20
+>> -static int arm_gdb_get_sysreg(CPUARMState *env, uint8_t *buf, int reg)
+>> +static int arm_gdb_get_sysreg(CPUARMState *env, GByteArray *buf, int re=
+g)
+>>  {
+>>      ARMCPU *cpu =3D env_archcpu(env);
+>>      const ARMCPRegInfo *ri;
+>
+> [...]
+>
+>> diff --git a/target/ppc/gdbstub.c b/target/ppc/gdbstub.c
+>> index 823759c92e7..6f08021cc22 100644
+>> --- a/target/ppc/gdbstub.c
+>> +++ b/target/ppc/gdbstub.c
+>> @@ -114,10 +114,11 @@ void ppc_maybe_bswap_register(CPUPPCState *env, ui=
+nt8_t *mem_buf, int len)
+>>   * the FP regs zero size when talking to a newer gdb.
+>>   */
+>>=20=20
+>> -int ppc_cpu_gdb_read_register(CPUState *cs, uint8_t *mem_buf, int n)
+>> +int ppc_cpu_gdb_read_register(CPUState *cs, GByteArray *buf, int n)
+>>  {
+>>      PowerPCCPU *cpu =3D POWERPC_CPU(cs);
+>>      CPUPPCState *env =3D &cpu->env;
+>> +    uint8_t *mem_buf;
+>>      int r =3D ppc_gdb_register_len(n);
+>>=20=20
+>>      if (!r) {
+>> @@ -126,17 +127,17 @@ int ppc_cpu_gdb_read_register(CPUState *cs, uint8_=
+t *mem_buf, int n)
+>>=20=20
+>>      if (n < 32) {
+>>          /* gprs */
+>> -        gdb_get_regl(mem_buf, env->gpr[n]);
+>> +        gdb_get_regl(buf, env->gpr[n]);
+>>      } else if (n < 64) {
+>>          /* fprs */
+>> -        stfq_p(mem_buf, *cpu_fpr_ptr(env, n - 32));
+>> +        gdb_get_reg64(buf, *cpu_fpr_ptr(env, n - 32));
+>>      } else {
+>>          switch (n) {
+>>          case 64:
+>> -            gdb_get_regl(mem_buf, env->nip);
+>> +            gdb_get_regl(buf, env->nip);
+>>              break;
+>>          case 65:
+>> -            gdb_get_regl(mem_buf, env->msr);
+>> +            gdb_get_regl(buf, env->msr);
+>>              break;
+>>          case 66:
+>>              {
+>> @@ -145,31 +146,33 @@ int ppc_cpu_gdb_read_register(CPUState *cs, uint8_=
+t *mem_buf, int n)
+>>                  for (i =3D 0; i < 8; i++) {
+>>                      cr |=3D env->crf[i] << (32 - ((i + 1) * 4));
+>>                  }
+>> -                gdb_get_reg32(mem_buf, cr);
+>> +                gdb_get_reg32(buf, cr);
+>>                  break;
+>>              }
+>>          case 67:
+>> -            gdb_get_regl(mem_buf, env->lr);
+>> +            gdb_get_regl(buf, env->lr);
+>>              break;
+>>          case 68:
+>> -            gdb_get_regl(mem_buf, env->ctr);
+>> +            gdb_get_regl(buf, env->ctr);
+>>              break;
+>>          case 69:
+>> -            gdb_get_reg32(mem_buf, env->xer);
+>> +            gdb_get_reg32(buf, env->xer);
+>>              break;
+>>          case 70:
+>> -            gdb_get_reg32(mem_buf, env->fpscr);
+>> +            gdb_get_reg32(buf, env->fpscr);
+>>              break;
+>>          }
+>>      }
+>> +    mem_buf =3D buf->data - r;
+>
+> Should it not be something more like this ?
+> mem_buf =3D buf->data + buf->len - r;
 
-In v2 I don't replace by a 'default' entry, all the cases are explicit.
+Good catch.
 
-Regards,
+>
+> There seem to be the same issue below for every
+> ppc_maybe_bswap_register() call.
 
-Phil.
+Fixed.
 
+
+--=20
+Alex Benn=C3=A9e
 
