@@ -1,85 +1,40 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1inCvk-00034R-Pi
-	for mharc-qemu-riscv@gnu.org; Thu, 02 Jan 2020 21:43:16 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53460)
+	id 1inDo1-00029l-Ty
+	for mharc-qemu-riscv@gnu.org; Thu, 02 Jan 2020 22:39:21 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:51873)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <alistair23@gmail.com>) id 1inCvh-0002zu-Rt
- for qemu-riscv@nongnu.org; Thu, 02 Jan 2020 21:43:14 -0500
+ (envelope-from <zhiwei_liu@c-sky.com>) id 1inDnz-000297-Sz
+ for qemu-riscv@nongnu.org; Thu, 02 Jan 2020 22:39:20 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1inCvg-0005A6-UA
- for qemu-riscv@nongnu.org; Thu, 02 Jan 2020 21:43:13 -0500
-Received: from mail-lj1-x242.google.com ([2a00:1450:4864:20::242]:34394)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1inCva-0004ve-Ex; Thu, 02 Jan 2020 21:43:06 -0500
-Received: by mail-lj1-x242.google.com with SMTP id z22so37753000ljg.1;
- Thu, 02 Jan 2020 18:43:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=+7cA0d0Hyi5444bKwVYHxmPS0oGCkXfU/S2Nefqv/E4=;
- b=sf2Lzd2hOuHlbhMGyxYZNV5Cvzh+3KLU8lTMbdmKHMjHNh0igsRrL4XjCAk4yRP8vf
- s/OjWrR6da7a2LVtU5DeediGnZbXeF4F/Dp76/g8PuMr8i2mtdYPg7S9M+ZZeqxXx30p
- eUi2GAw68sH8XnxlQNcJj5TJ7E1NyzlKLM6xa91OJqT7SYkm84GvPH23zQggZ2daCl0a
- rjrQ+GkiLEecFyt2uN+r94Qft6M0goUgtbv3NLqccuBOLRS4kibs2CdOTPxFJghJ69Xw
- DyrwAnU6vA74NzWNMy9eMT/YARCg2dl7x2Qryev3G/6DA+nfrE7iGijvPqyBDAPm6NKl
- XeyA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=+7cA0d0Hyi5444bKwVYHxmPS0oGCkXfU/S2Nefqv/E4=;
- b=e3W2egTjOhGsXM1pUhCn5zHC0G8DFn+aDLT8iYgW37ho0kjebaqPIORQYh4n2H/9Qt
- UjVGzpcCqMZ0wCBhItWvSyEOlovucNKb9+Dr3XnOA0TUI3hmWjQK+tYn/WoazkgFaKv9
- 4F3NWm6E71Tn88Y0x6oNwn3C3Zxj7IO7cL7Xnf0ID2znRcpRtb7PUvGYrO4BT8NzWGY+
- JEuPJmTQhGEx2F20sBSkreyvvcVB1BRg6FTnxB2WUtsCcsJEpJMmfeqP1cm6bpn8EXQt
- oGFCoDR6DailBtZq8GMlzwat4XsSs95093XKALiTyrK5FI27uQXTIgnZ9SVEvB1wZdFi
- dinA==
-X-Gm-Message-State: APjAAAWIpQUv51hk5TuVNyNqdpPVJJsJNRj+xCsD6OJyXwIYNzj4k2zX
- D4dOnvPesJIVaFvjIDOr5M8xF/ptCbn8mIAJiVQ=
-X-Google-Smtp-Source: APXvYqyJxH2lgoAOxeOFfTY00+cTVDLIOj+633dJyMoRWo0yvp9dCGNnnSHzqXFAwBHgUhI2yRIUMyNLZY/V6IVminE=
-X-Received: by 2002:a2e:96c6:: with SMTP id d6mr20605277ljj.4.1578019385388;
- Thu, 02 Jan 2020 18:43:05 -0800 (PST)
+ (envelope-from <zhiwei_liu@c-sky.com>) id 1inDny-0002rb-Ie
+ for qemu-riscv@nongnu.org; Thu, 02 Jan 2020 22:39:19 -0500
+Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:60115)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <zhiwei_liu@c-sky.com>)
+ id 1inDny-0002nj-8Z
+ for qemu-riscv@nongnu.org; Thu, 02 Jan 2020 22:39:18 -0500
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.1174554|-1; CH=green;
+ DM=CONTINUE|CONTINUE|true|0.214826-0.02182-0.763354; DS=||;
+ FP=0|0|0|0|0|-1|-1|-1; HT=e01a16367; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS;
+ RN=9; RT=9; SR=0; TI=SMTPD_---.GV9YvOJ_1578022440; 
+Received: from L-PF1D6DP4-1208.hz.ali.com(mailfrom:zhiwei_liu@c-sky.com
+ fp:SMTPD_---.GV9YvOJ_1578022440)
+ by smtp.aliyun-inc.com(10.147.42.16); Fri, 03 Jan 2020 11:34:01 +0800
+From: LIU Zhiwei <zhiwei_liu@c-sky.com>
+To: alistair23@gmail.com, richard.henderson@linaro.org,
+ chihmin.chao@sifive.com, palmer@dabbelt.com
+Cc: wenmeng_zhang@c-sky.com, wxy194768@alibaba-inc.com, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org, LIU Zhiwei <zhiwei_liu@c-sky.com>
+Subject: [PATCH v3 1/4] RISC-V: add vector extension field in CPURISCVState
+Date: Fri,  3 Jan 2020 11:33:44 +0800
+Message-Id: <20200103033347.20909-2-zhiwei_liu@c-sky.com>
+X-Mailer: git-send-email 2.23.0
+In-Reply-To: <20200103033347.20909-1-zhiwei_liu@c-sky.com>
+References: <20200103033347.20909-1-zhiwei_liu@c-sky.com>
 MIME-Version: 1.0
-References: <20200101112303.20724-1-philmd@redhat.com>
- <20200101112303.20724-5-philmd@redhat.com>
-In-Reply-To: <20200101112303.20724-5-philmd@redhat.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 2 Jan 2020 18:42:38 -0800
-Message-ID: <CAKmqyKPGWZh1a6vQk2TF=crN2yK7ZxpAvre55wx_-cuOMLrp9w@mail.gmail.com>
-Subject: Re: [PATCH v2 4/4] configure: Remove tcg/ from the preprocessor
- include search list
-To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Peter Maydell <peter.maydell@linaro.org>, 
- Chris Wulff <crwulff@gmail.com>, Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- David Hildenbrand <david@redhat.com>, Anthony Green <green@moxielogic.com>, 
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Max Filippov <jcmvbkbc@gmail.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, 
- Guan Xuetao <gxt@mprc.pku.edu.cn>, Marek Vasut <marex@denx.de>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Aleksandar Rikalo <aleksandar.rikalo@rt-rk.com>,
- Richard Henderson <rth@twiddle.net>, 
- Artyom Tarasenko <atar4qemu@gmail.com>, Eduardo Habkost <ehabkost@redhat.com>,
- Stefan Weil <sw@weilnetz.de>, 
- Riku Voipio <riku.voipio@iki.fi>, qemu-s390x <qemu-s390x@nongnu.org>, 
- qemu-arm <qemu-arm@nongnu.org>, Stafford Horne <shorne@gmail.com>, 
- David Gibson <david@gibson.dropbear.id.au>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Cornelia Huck <cohuck@redhat.com>, 
- Claudio Fontana <claudio.fontana@huawei.com>,
- Laurent Vivier <laurent@vivier.eu>, 
- Michael Walle <michael@walle.cc>, "open list:New World" <qemu-ppc@nongnu.org>, 
- Aleksandar Markovic <amarkovic@wavecomp.com>,
- Paolo Bonzini <pbonzini@redhat.com>, Aurelien Jarno <aurelien@aurel32.net>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2a00:1450:4864:20::242
+Content-Transfer-Encoding: 8bit
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 3.x [generic] [fuzzy]
+X-Received-From: 121.197.200.217
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -91,40 +46,47 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Jan 2020 02:43:15 -0000
+X-List-Received-Date: Fri, 03 Jan 2020 03:39:21 -0000
 
-On Wed, Jan 1, 2020 at 3:25 AM Philippe Mathieu-Daud=C3=A9 <philmd@redhat.c=
-om> wrote:
->
-> All tcg includes are relative to the repository root directory,
-> we can safely remove the tcg/ directory from the include search
-> path list.
->
-> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
+The 32 vector registers will be viewed as a continuous memory block.
+It avoids the convension between element index and (regno,offset).
+Thus elements can be directly accessed by offset from the first vector
+base address.
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
+---
+ target/riscv/cpu.h | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
 
-Alistair
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 0adb307f32..af66674461 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -93,9 +93,23 @@ typedef struct CPURISCVState CPURISCVState;
+ 
+ #include "pmp.h"
+ 
++#define RV_VLEN_MAX 4096
++
+ struct CPURISCVState {
+     target_ulong gpr[32];
+     uint64_t fpr[32]; /* assume both F and D extensions */
++
++    /* vector coprocessor state.  */
++    struct {
++         uint64_t vreg[32 * RV_VLEN_MAX / 64];
++         target_ulong vxrm;
++         target_ulong vxsat;
++         target_ulong vl;
++         target_ulong vstart;
++         target_ulong vtype;
++    } vext;
++
++    bool         foflag;
+     target_ulong pc;
+     target_ulong load_res;
+     target_ulong load_val;
+-- 
+2.23.0
 
-> ---
->  configure | 1 -
->  1 file changed, 1 deletion(-)
->
-> diff --git a/configure b/configure
-> index 940bf9e87a..74dad08580 100755
-> --- a/configure
-> +++ b/configure
-> @@ -7436,7 +7436,6 @@ elif test "$ARCH" =3D "riscv32" || test "$ARCH" =3D=
- "riscv64" ; then
->  else
->    QEMU_INCLUDES=3D"-iquote \$(SRC_PATH)/tcg/\$(ARCH) $QEMU_INCLUDES"
->  fi
-> -QEMU_INCLUDES=3D"-iquote \$(SRC_PATH)/tcg $QEMU_INCLUDES"
->
->  echo "TOOLS=3D$tools" >> $config_host_mak
->  echo "ROMS=3D$roms" >> $config_host_mak
-> --
-> 2.21.0
->
->
 
