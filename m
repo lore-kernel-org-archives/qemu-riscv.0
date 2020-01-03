@@ -1,21 +1,22 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1inDo1-00029l-Ty
-	for mharc-qemu-riscv@gnu.org; Thu, 02 Jan 2020 22:39:21 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:51873)
+	id 1inDo2-0002B4-Re
+	for mharc-qemu-riscv@gnu.org; Thu, 02 Jan 2020 22:39:22 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:51866)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <zhiwei_liu@c-sky.com>) id 1inDnz-000297-Sz
- for qemu-riscv@nongnu.org; Thu, 02 Jan 2020 22:39:20 -0500
+ (envelope-from <zhiwei_liu@c-sky.com>) id 1inDnz-000296-R5
+ for qemu-riscv@nongnu.org; Thu, 02 Jan 2020 22:39:21 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <zhiwei_liu@c-sky.com>) id 1inDny-0002rb-Ie
+ (envelope-from <zhiwei_liu@c-sky.com>) id 1inDny-0002re-Ie
  for qemu-riscv@nongnu.org; Thu, 02 Jan 2020 22:39:19 -0500
-Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:60115)
+Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:46752)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1inDny-0002nj-8Z
+ id 1inDny-0002ng-94
  for qemu-riscv@nongnu.org; Thu, 02 Jan 2020 22:39:18 -0500
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.1174554|-1; CH=green;
- DM=CONTINUE|CONTINUE|true|0.214826-0.02182-0.763354; DS=||;
- FP=0|0|0|0|0|-1|-1|-1; HT=e01a16367; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS;
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07436336|-1; CH=green;
+ DM=CONTINUE|CONTINUE|true|0.168916-0.0204064-0.810677;
+ DS=CONTINUE|ham_system_inform|0.029211-8.42937e-05-0.970705;
+ FP=0|0|0|0|0|-1|-1|-1; HT=e01l07426; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS;
  RN=9; RT=9; SR=0; TI=SMTPD_---.GV9YvOJ_1578022440; 
 Received: from L-PF1D6DP4-1208.hz.ali.com(mailfrom:zhiwei_liu@c-sky.com
  fp:SMTPD_---.GV9YvOJ_1578022440)
@@ -25,9 +26,10 @@ To: alistair23@gmail.com, richard.henderson@linaro.org,
  chihmin.chao@sifive.com, palmer@dabbelt.com
 Cc: wenmeng_zhang@c-sky.com, wxy194768@alibaba-inc.com, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org, LIU Zhiwei <zhiwei_liu@c-sky.com>
-Subject: [PATCH v3 1/4] RISC-V: add vector extension field in CPURISCVState
-Date: Fri,  3 Jan 2020 11:33:44 +0800
-Message-Id: <20200103033347.20909-2-zhiwei_liu@c-sky.com>
+Subject: [PATCH v3 2/4] RISC-V: configure and turn on vector extension from
+ command line
+Date: Fri,  3 Jan 2020 11:33:45 +0800
+Message-Id: <20200103033347.20909-3-zhiwei_liu@c-sky.com>
 X-Mailer: git-send-email 2.23.0
 In-Reply-To: <20200103033347.20909-1-zhiwei_liu@c-sky.com>
 References: <20200103033347.20909-1-zhiwei_liu@c-sky.com>
@@ -48,44 +50,159 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Fri, 03 Jan 2020 03:39:21 -0000
 
-The 32 vector registers will be viewed as a continuous memory block.
-It avoids the convension between element index and (regno,offset).
-Thus elements can be directly accessed by offset from the first vector
-base address.
+Vector extension is default on only for "any" cpu. It can be turned
+on by command line "-cpu rv64,vlen=128,elen=64,vext_spec=v0.7.1".
+
+vlen is the vector register length, default value is 128 bit.
+elen is the max operator size in bits, default value is 64 bit.
+vext_spec is the vector specification version, default value is v0.7.1.
+Thest properties and cpu can be specified with other values.
 
 Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
 ---
- target/riscv/cpu.h | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
+ target/riscv/cpu.c | 42 ++++++++++++++++++++++++++++++++++++++++--
+ target/riscv/cpu.h |  8 ++++++++
+ 2 files changed, 48 insertions(+), 2 deletions(-)
 
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index f8d07bd20a..c2370a0a57 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -94,6 +94,11 @@ static void set_priv_version(CPURISCVState *env, int priv_ver)
+     env->priv_ver = priv_ver;
+ }
+ 
++static void set_vext_version(CPURISCVState *env, int vext_ver)
++{
++    env->vext_ver = vext_ver;
++}
++
+ static void set_feature(CPURISCVState *env, int feature)
+ {
+     env->features |= (1ULL << feature);
+@@ -109,7 +114,7 @@ static void set_resetvec(CPURISCVState *env, int resetvec)
+ static void riscv_any_cpu_init(Object *obj)
+ {
+     CPURISCVState *env = &RISCV_CPU(obj)->env;
+-    set_misa(env, RVXLEN | RVI | RVM | RVA | RVF | RVD | RVC | RVU);
++    set_misa(env, RVXLEN | RVI | RVM | RVA | RVF | RVD | RVC | RVU | RVV);
+     set_priv_version(env, PRIV_VERSION_1_11_0);
+     set_resetvec(env, DEFAULT_RSTVEC);
+ }
+@@ -317,6 +322,7 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+     CPURISCVState *env = &cpu->env;
+     RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(dev);
+     int priv_version = PRIV_VERSION_1_11_0;
++    int vext_version = VEXT_VERSION_0_07_1;
+     target_ulong target_misa = 0;
+     Error *local_err = NULL;
+ 
+@@ -340,8 +346,18 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+             return;
+         }
+     }
+-
++    if (cpu->cfg.vext_spec) {
++        if (!g_strcmp0(cpu->cfg.vext_spec, "v0.7.1")) {
++            vext_version = VEXT_VERSION_0_07_1;
++        } else {
++            error_setg(errp,
++                       "Unsupported vector spec version '%s'",
++                       cpu->cfg.vext_spec);
++            return;
++        }
++    }
+     set_priv_version(env, priv_version);
++    set_vext_version(env, vext_version);
+     set_resetvec(env, DEFAULT_RSTVEC);
+ 
+     if (cpu->cfg.mmu) {
+@@ -406,6 +422,24 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+         if (cpu->cfg.ext_u) {
+             target_misa |= RVU;
+         }
++        if (cpu->cfg.ext_v) {
++            target_misa |= RVV;
++            if (!is_power_of_2(cpu->cfg.vlen)) {
++                error_setg(errp,
++                       "Vector extension VLEN must be power of 2");
++                return;
++            }
++            if (cpu->cfg.vlen > RV_VLEN_MAX) {
++                error_setg(errp,
++                       "Vector extension VLEN must <= %d", RV_VLEN_MAX);
++                return;
++            }
++            if (!is_power_of_2(cpu->cfg.elen)) {
++                error_setg(errp,
++                       "Vector extension ELEN must be power of 2");
++                return;
++            }
++        }
+ 
+         set_misa(env, RVXLEN | target_misa);
+     }
+@@ -441,10 +475,14 @@ static Property riscv_cpu_properties[] = {
+     DEFINE_PROP_BOOL("c", RISCVCPU, cfg.ext_c, true),
+     DEFINE_PROP_BOOL("s", RISCVCPU, cfg.ext_s, true),
+     DEFINE_PROP_BOOL("u", RISCVCPU, cfg.ext_u, true),
++    DEFINE_PROP_BOOL("v", RISCVCPU, cfg.ext_v, false),
+     DEFINE_PROP_BOOL("Counters", RISCVCPU, cfg.ext_counters, true),
+     DEFINE_PROP_BOOL("Zifencei", RISCVCPU, cfg.ext_ifencei, true),
+     DEFINE_PROP_BOOL("Zicsr", RISCVCPU, cfg.ext_icsr, true),
+     DEFINE_PROP_STRING("priv_spec", RISCVCPU, cfg.priv_spec),
++    DEFINE_PROP_STRING("vext_spec", RISCVCPU, cfg.vext_spec),
++    DEFINE_PROP_UINT16("vlen", RISCVCPU, cfg.vlen, 128),
++    DEFINE_PROP_UINT16("elen", RISCVCPU, cfg.elen, 64),
+     DEFINE_PROP_BOOL("mmu", RISCVCPU, cfg.mmu, true),
+     DEFINE_PROP_BOOL("pmp", RISCVCPU, cfg.pmp, true),
+     DEFINE_PROP_END_OF_LIST(),
 diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 0adb307f32..af66674461 100644
+index af66674461..d0b106583a 100644
 --- a/target/riscv/cpu.h
 +++ b/target/riscv/cpu.h
-@@ -93,9 +93,23 @@ typedef struct CPURISCVState CPURISCVState;
+@@ -64,6 +64,7 @@
+ #define RVA RV('A')
+ #define RVF RV('F')
+ #define RVD RV('D')
++#define RVV RV('V')
+ #define RVC RV('C')
+ #define RVS RV('S')
+ #define RVU RV('U')
+@@ -82,6 +83,8 @@ enum {
+ #define PRIV_VERSION_1_10_0 0x00011000
+ #define PRIV_VERSION_1_11_0 0x00011100
  
- #include "pmp.h"
++#define VEXT_VERSION_0_07_1 0x00000071
++
+ #define TRANSLATE_PMP_FAIL 2
+ #define TRANSLATE_FAIL 1
+ #define TRANSLATE_SUCCESS 0
+@@ -119,6 +122,7 @@ struct CPURISCVState {
+     target_ulong badaddr;
  
-+#define RV_VLEN_MAX 4096
-+
- struct CPURISCVState {
-     target_ulong gpr[32];
-     uint64_t fpr[32]; /* assume both F and D extensions */
-+
-+    /* vector coprocessor state.  */
-+    struct {
-+         uint64_t vreg[32 * RV_VLEN_MAX / 64];
-+         target_ulong vxrm;
-+         target_ulong vxsat;
-+         target_ulong vl;
-+         target_ulong vstart;
-+         target_ulong vtype;
-+    } vext;
-+
-+    bool         foflag;
-     target_ulong pc;
-     target_ulong load_res;
-     target_ulong load_val;
+     target_ulong priv_ver;
++    target_ulong vext_ver;
+     target_ulong misa;
+     target_ulong misa_mask;
+ 
+@@ -236,12 +240,16 @@ typedef struct RISCVCPU {
+         bool ext_c;
+         bool ext_s;
+         bool ext_u;
++        bool ext_v;
+         bool ext_counters;
+         bool ext_ifencei;
+         bool ext_icsr;
+ 
+         char *priv_spec;
+         char *user_spec;
++        char *vext_spec;
++        uint16_t vlen;
++        uint16_t elen;
+         bool mmu;
+         bool pmp;
+     } cfg;
 -- 
 2.23.0
 
