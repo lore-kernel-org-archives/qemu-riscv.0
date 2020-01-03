@@ -1,42 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1inHtq-0002e7-Iv
-	for mharc-qemu-riscv@gnu.org; Fri, 03 Jan 2020 03:01:38 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:33049)
+	id 1inNr3-0000Aq-6L
+	for mharc-qemu-riscv@gnu.org; Fri, 03 Jan 2020 09:23:09 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:34855)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <Yiting.Wang@windriver.com>) id 1inEBq-00063J-0T
- for qemu-riscv@nongnu.org; Thu, 02 Jan 2020 23:03:58 -0500
+ (envelope-from <bmeng.cn@gmail.com>) id 1inNr0-00008a-SU
+ for qemu-riscv@nongnu.org; Fri, 03 Jan 2020 09:23:07 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <Yiting.Wang@windriver.com>) id 1inEBo-0003Q2-VT
- for qemu-riscv@nongnu.org; Thu, 02 Jan 2020 23:03:57 -0500
-Received: from mail1.windriver.com ([147.11.146.13]:34826)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <Yiting.Wang@windriver.com>)
- id 1inEBl-00035n-FE; Thu, 02 Jan 2020 23:03:53 -0500
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
- [147.11.189.40])
- by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id 0033rlmD027404
- (version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL);
- Thu, 2 Jan 2020 19:53:47 -0800 (PST)
-Received: from pek-vx-bsp3.wrs.com (128.224.156.141) by
- ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server (TLS) id
- 14.3.468.0; Thu, 2 Jan 2020 19:53:46 -0800
-From: Yiting Wang <yiting.wang@windriver.com>
-To: Alistair Francis <Alistair.Francis@wdc.com>, Bastian Koppelmann
- <kbastian@mail.uni-paderborn.de>,
- Palmer Dabbelt <palmerdabbelt@google.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, <qemu-devel@nongnu.org>,
- <qemu-riscv@nongnu.org>
-Subject: [PATCH] riscv: Set xPIE to 1 after xRET
-Date: Fri, 3 Jan 2020 11:53:42 +0800
-Message-ID: <1578023622-49180-1-git-send-email-yiting.wang@windriver.com>
-X-Mailer: git-send-email 2.7.4
+ (envelope-from <bmeng.cn@gmail.com>) id 1inNqz-0002TR-QP
+ for qemu-riscv@nongnu.org; Fri, 03 Jan 2020 09:23:06 -0500
+Received: from mail-yw1-xc41.google.com ([2607:f8b0:4864:20::c41]:39962)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
+ id 1inNqt-0002ES-Rp; Fri, 03 Jan 2020 09:22:59 -0500
+Received: by mail-yw1-xc41.google.com with SMTP id i126so18558150ywe.7;
+ Fri, 03 Jan 2020 06:22:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=t/9tzaHSOw4Etp7svWNKYnXFNtq34ho3I41bW1D5osI=;
+ b=dk6pbeG7AUH8bfzp+WhT9SYHFtfhCibFqgTwcNiCjben8Pxymvv9VdJktJtvTEdtIr
+ 8srB/Rz0eFpi6Bk9dV7FCu5EavlxMKbuclVvJ/pob5EOWbRWVi5BVe7WtZMGy5Seeb+w
+ uttgqPsZUzdRJts150iJAjgi1jY7oTwDUckyCk3ngS9p1ZASE5jNmT614djWrUkAAKMK
+ puHU76Il3sQvkLWp071XgweeYCwuRB0uTAVAyaMk+IV8vuuJ1hieXVDK4zZl8kXSCNZR
+ 34cUgdf6gIAS2/NKJws4aI9Cx/D2H3GLy9mEcuBIAbIBclC/wf2cJRsN6mLljYoV+Ij0
+ FU5g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=t/9tzaHSOw4Etp7svWNKYnXFNtq34ho3I41bW1D5osI=;
+ b=rKQSj5ccdLJgsR4aaniLqnz/k2Xb1Q5HvzeI+VGiJZauQCUsRAeixqjD6kjTgSnMpb
+ hn9EQw+LHLczs5Jd9M+c6EeU8Psf1DU1tr2CVkzu4ZbFzAUwL3X0+EcRDH8a95L5G0+Q
+ bcWIGj9QuFGBEdxrJnjDB82p82wfj9IcSwYMFFlWuAqhty8GGXhXoPg+3UAlfH5uwkb/
+ jZTZq6q7pqRJl3GC8E0xBidFaKHQ+/UkHxrwkunGY/2F/84mli5sB8S5xoK2usbXq95e
+ wA2Bg9dpEz6C0yMZF3vOtK8W08pCWW2vV5Jt/dfCmeEzZ7YS8CKL9yqv9j8f5dh0FGCj
+ lh9w==
+X-Gm-Message-State: APjAAAVU0wZe77XlKIA3QGT1ju4WA9+LmMxV9wZVQOEG/PKoU1uy397T
+ LuYtkzxSg1eB1XbUn6ITILRVC9pUbygDrmcpw9A=
+X-Google-Smtp-Source: APXvYqwB31lYh0qxre9PwNjvlspHDl5I/84mN1oVe+8lhSSxCsY8901NQfWZBuE0+WXpk0QEKTjJAKedCNHKUpdI5U8=
+X-Received: by 2002:a81:7841:: with SMTP id t62mr66924993ywc.140.1578061378986; 
+ Fri, 03 Jan 2020 06:22:58 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Originating-IP: [128.224.156.141]
-X-detected-operating-system: by eggs.gnu.org: Windows NT kernel [generic]
- [fuzzy]
-X-Received-From: 147.11.146.13
-X-Mailman-Approved-At: Fri, 03 Jan 2020 03:01:35 -0500
+References: <1578023622-49180-1-git-send-email-yiting.wang@windriver.com>
+In-Reply-To: <1578023622-49180-1-git-send-email-yiting.wang@windriver.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Fri, 3 Jan 2020 22:22:48 +0800
+Message-ID: <CAEUhbmWVBAK2EUCiTOFpY4c1k=Tcva4iYP-jBsDPJ-uEfGNSYg@mail.gmail.com>
+Subject: Re: [PATCH] riscv: Set xPIE to 1 after xRET
+To: Yiting Wang <yiting.wang@windriver.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Palmer Dabbelt <palmerdabbelt@google.com>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2607:f8b0:4864:20::c41
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -48,40 +68,20 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Jan 2020 04:03:59 -0000
+X-List-Received-Date: Fri, 03 Jan 2020 14:23:08 -0000
 
-When executing an xRET instruction, supposing xPP holds the
-value y, xIE is set to xPIE; the privilege mode is changed to y;
-xPIE is set to 1. But QEMU sets xPIE to 0 incorrectly.
+On Fri, Jan 3, 2020 at 4:03 PM Yiting Wang <yiting.wang@windriver.com> wrote:
+>
+> When executing an xRET instruction, supposing xPP holds the
+> value y, xIE is set to xPIE; the privilege mode is changed to y;
+> xPIE is set to 1. But QEMU sets xPIE to 0 incorrectly.
+>
+> Signed-off-by: Yiting Wang <yiting.wang@windriver.com>
+> ---
+>  target/riscv/op_helper.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>
 
-Signed-off-by: Yiting Wang <yiting.wang@windriver.com>
----
- target/riscv/op_helper.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
-index 331cc36..e87c911 100644
---- a/target/riscv/op_helper.c
-+++ b/target/riscv/op_helper.c
-@@ -93,7 +93,7 @@ target_ulong helper_sret(CPURISCVState *env, target_ulong cpu_pc_deb)
-         env->priv_ver >= PRIV_VERSION_1_10_0 ?
-         MSTATUS_SIE : MSTATUS_UIE << prev_priv,
-         get_field(mstatus, MSTATUS_SPIE));
--    mstatus = set_field(mstatus, MSTATUS_SPIE, 0);
-+    mstatus = set_field(mstatus, MSTATUS_SPIE, 1);
-     mstatus = set_field(mstatus, MSTATUS_SPP, PRV_U);
-     riscv_cpu_set_mode(env, prev_priv);
-     env->mstatus = mstatus;
-@@ -118,7 +118,7 @@ target_ulong helper_mret(CPURISCVState *env, target_ulong cpu_pc_deb)
-         env->priv_ver >= PRIV_VERSION_1_10_0 ?
-         MSTATUS_MIE : MSTATUS_UIE << prev_priv,
-         get_field(mstatus, MSTATUS_MPIE));
--    mstatus = set_field(mstatus, MSTATUS_MPIE, 0);
-+    mstatus = set_field(mstatus, MSTATUS_MPIE, 1);
-     mstatus = set_field(mstatus, MSTATUS_MPP, PRV_U);
-     riscv_cpu_set_mode(env, prev_priv);
-     env->mstatus = mstatus;
--- 
-2.7.4
-
+Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+Tested-by: Bin Meng <bmeng.cn@gmail.com>
 
