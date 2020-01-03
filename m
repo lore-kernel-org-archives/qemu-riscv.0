@@ -1,118 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1inBdU-0006WT-Dv
-	for mharc-qemu-riscv@gnu.org; Thu, 02 Jan 2020 20:20:20 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43478)
+	id 1inCOp-0007oL-3j
+	for mharc-qemu-riscv@gnu.org; Thu, 02 Jan 2020 21:09:15 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:53808)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <rth7680@gmail.com>) id 1inBdS-0006WM-7Z
- for qemu-riscv@nongnu.org; Thu, 02 Jan 2020 20:20:19 -0500
+ (envelope-from <alistair23@gmail.com>) id 1inCOm-0007l5-Di
+ for qemu-riscv@nongnu.org; Thu, 02 Jan 2020 21:09:13 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <rth7680@gmail.com>) id 1inBdR-000422-0N
- for qemu-riscv@nongnu.org; Thu, 02 Jan 2020 20:20:18 -0500
-Received: from mail-pf1-x444.google.com ([2607:f8b0:4864:20::444]:37034)
+ (envelope-from <alistair23@gmail.com>) id 1inCOl-0006pW-FD
+ for qemu-riscv@nongnu.org; Thu, 02 Jan 2020 21:09:12 -0500
+Received: from mail-lf1-x144.google.com ([2a00:1450:4864:20::144]:39527)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <rth7680@gmail.com>)
- id 1inBdQ-0003zl-Qf; Thu, 02 Jan 2020 20:20:16 -0500
-Received: by mail-pf1-x444.google.com with SMTP id p14so22826972pfn.4;
- Thu, 02 Jan 2020 17:20:16 -0800 (PST)
+ (Exim 4.71) (envelope-from <alistair23@gmail.com>)
+ id 1inCOi-0006m9-SN; Thu, 02 Jan 2020 21:09:09 -0500
+Received: by mail-lf1-x144.google.com with SMTP id y1so31000429lfb.6;
+ Thu, 02 Jan 2020 18:09:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=sender:subject:to:cc:references:from:autocrypt:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=GD40s/tUbUanspRuAIelM3ult2DJvl9iASATBW5QYYU=;
- b=A7NS7d65+KO8/AXqM5iy7u1L6JLo7WvBT8ZnNh5dl+axIPPv2VFPaKnwrqy58lgcc6
- IrJ9JQfxteR8Ip7kklMCodxf0PPZnDMr11NaUGvoAMmjCMUELa3k+zyL74U4w4ZAzpeb
- K6IV9xHpUzVCo0oq3TCJUEtCsJ9i+YPt9xgj05FZwaIUfRM5pHEOrba/2Ms0O83QbPgO
- hElZVZswZUT+fF38zFu2CrXaTnDvepU6rwQjQ+QO8JSNRioe7f2aVNP/HJSP/Qm8cD2y
- JkhiWCBB+E3pvdO6WfZElTMhT1fZiU3p59QiJWGmO203qRvjvpAmb2Sv7ti5Ij+BQ5HB
- Nl3Q==
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=l8QDKYxk0sJNh5vSS9NGjFYqiMTqN7rFRbE8+T4VhPw=;
+ b=Vdqp48cPEId9OmcQKc2Juvl+pFgxTvZQhTEpTzeAixJP42Bd17fwI0bijSJkVzObHx
+ 3fEC0048mmwS7dvE+YCT1Jx8Q25KkbrLayuJA9pf/7J3N2d60pPi9+T8vjN7wWtYuKYs
+ WUi5Yew1a54G+bUDnBtpkIw7ZBNaliH0MIE9dr+mV5QXw/wBsSmSo6aruFzAIUv60IlM
+ pnJSPThcd/OlrhuhlqBxKgyI1Pz2LpfNOhyJoX02olhgCde5UR5XRHnFYScxM+aSish7
+ OEjYw4fnA1bQZWgsxTVDGVy4ANvbrUQK8XIQ5+6WiQM+q/QBqZkXxxFW+TOyjsiN9xEt
+ qADw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:sender:subject:to:cc:references:from:autocrypt
- :message-id:date:user-agent:mime-version:in-reply-to
- :content-language:content-transfer-encoding;
- bh=GD40s/tUbUanspRuAIelM3ult2DJvl9iASATBW5QYYU=;
- b=LHutVAeq3ricvmXq3i1S46ORWEsKRTdlWEyH9vPpCSDyeMKQJlat3U7yvgBf+TGaSl
- YF/SUhyAQLxfpckOdmedpa8RosxmZPGaWQ1GDgPOiToj+4sFUzDdMYgc2ijVAKzFOXOp
- GwBRTjgn49/j8nyR6FXFap58G1rQKelHSmOJ8MurRwyP3aGZJciLlKucpFqu2a/LDkep
- 7XVL3EWCDoB3L8vW2zwAtlaVPTn+DOQcM+U+up0kJ0IULrm19Gg6iXIStnec6D3vy8ok
- yKqqAqFfWihDlc74iampnZIst/0lQuG+XSry5jWobjecuU8TBWuXge3hUzmYQTweyaSd
- nyWw==
-X-Gm-Message-State: APjAAAWsY/eLeG0pyLKyJttjvOo5Ey61T1hlgJj/yM6sTOGxuH/ZJCqO
- aqzHFHlERLJ8U2gdVFHSvrs=
-X-Google-Smtp-Source: APXvYqyTSjheyI6n364IpYP5Sqnq5cjq+aQ3bF/jeKEzgFpqkeFJR8UgReE0JyclZ7kgqJio14k4jQ==
-X-Received: by 2002:a63:484b:: with SMTP id x11mr94312119pgk.148.1578014414825; 
- Thu, 02 Jan 2020 17:20:14 -0800 (PST)
-Received: from [10.103.5.8] (59-100-211-22.bri.static-ipl.aapt.com.au.
- [59.100.211.22]) by smtp.googlemail.com with ESMTPSA id
- o134sm61034779pfg.137.2020.01.02.17.19.59
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 02 Jan 2020 17:20:13 -0800 (PST)
-Sender: Richard Henderson <rth7680@gmail.com>
-Subject: Re: [PATCH v2 0/4] tcg: Include tcg files using tcg/ dirname, reduce
- cpp search path list
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>,
- qemu-devel@nongnu.org
-Cc: qemu-ppc@nongnu.org, Max Filippov <jcmvbkbc@gmail.com>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Aleksandar Rikalo <aleksandar.rikalo@rt-rk.com>,
- Anthony Green <green@moxielogic.com>,
- Peter Maydell <peter.maydell@linaro.org>,
- Eduardo Habkost <ehabkost@redhat.com>,
- Claudio Fontana <claudio.fontana@huawei.com>, Chris Wulff
- <crwulff@gmail.com>, Laurent Vivier <laurent@vivier.eu>,
- Stafford Horne <shorne@gmail.com>, qemu-arm@nongnu.org,
- David Gibson <david@gibson.dropbear.id.au>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Cornelia Huck <cohuck@redhat.com>, David Hildenbrand <david@redhat.com>,
- Stefan Weil <sw@weilnetz.de>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>, qemu-s390x@nongnu.org,
- Aleksandar Markovic <amarkovic@wavecomp.com>,
- Andrzej Zaborowski <balrogg@gmail.com>, Guan Xuetao <gxt@mprc.pku.edu.cn>,
- Riku Voipio <riku.voipio@iki.fi>, Aurelien Jarno <aurelien@aurel32.net>,
- qemu-riscv@nongnu.org, Michael Walle <michael@walle.cc>,
- Artyom Tarasenko <atar4qemu@gmail.com>, Marek Vasut <marex@denx.de>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>
-References: <20200101112303.20724-1-philmd@redhat.com>
-From: Richard Henderson <rth@twiddle.net>
-Autocrypt: addr=rth@twiddle.net; prefer-encrypt=mutual; keydata=
- mQENBFGuLC8BCADcAoWcnW9lTsDMzbO3MBU+KbiGaj5JPatEUscRDkQYM2fyNjJp2tIWDK5a
- n4yngeXB3eX61WbYR3QraRK8mlYLGxyAdHMEQfPipbqf3TmN043fssT2bc82ApJcs1zvLYgI
- rhMht7Dck7A0wNC1jo+ZjVVFig5gDTN7gOzaAdBtV8tVNUddwkLzzaGpfihhSD6U46NdqKOG
- Wlnn6TrkMy0QGdQ5NaXHkRlUjnnUTSW/nKfoxD+EI+A9V4sYOd8mc/TL4aJh/i/AiU57eLbo
- n17uQI6/VTWDUWl8USiz4x9c8vmqlywLx00tAFxxoRWqk4KVJlj+Sh0up/D/sJ+vPpgBABEB
- AAG0I1JpY2hhcmQgSGVuZGVyc29uIDxydGhAdHdpZGRsZS5uZXQ+iQFYBBMBAgBCAhsDBgsJ
- CAcDAgYVCAIJCgsEFgIDAQIeAQIXgAIZARYhBJyxjdr46EmtKvwWpK0ScMxN0CebBQJdweUY
- BQkP1h/pAAoJEK0ScMxN0CebqDsH/0YyfnXk+Dc++H37VCEKgRet2i1ATFzxRnifkvmdxha0
- V+PVptQ2fwSe+w3KxoFecD8W75nysmUjrU/FicW9yU5YRlGONPZjruG02/KzmhA5PzWJdYO3
- i/t0qRayvWIcX2qA/flsXEbmb/BbAFM05LQIdcOu74eiBFe5CBCOWBDJeneE1urIE0hSYxoh
- nCcG60ULrNj13ohZ4zAEluoY32qIo7/OPWmtR88cPrEbZT8k+RqgZbsotzaPT1/RlL74fL8k
- ofYfTgKAFH7eEy6fF2nzDp2GThVn+3sA62xtpSXUf/X1m75B40KOcq1EQbHypNTmBc1wt13e
- ibhPNEVX2am5AQ0EUa4sLwEIALITHfH3gciRNfQIe7awDTDvn6H3C6gDyCAnv5LiuLTLZiyK
- NZp3lNO3rPowyKrGT2RIDlumlqPgdeHzqEEX91YK0yk2vdFvwU04rJ4D+qRgdUPoeICLD1zo
- PwOv2FaY6Tf8dKYas1RHF5QU5yQNey8j7IYYoE2yGPn2PtBmvtmK4iLataUEvx0U385Zr+jf
- HscqwTiToryeDC8Io/9BsMvAssE5Yf5URS2nJ7LFOvc4njsQJPF1i9egBXaIloqv7p2hVCKJ
- Hl5UWIxitQ9QQIl6iU4LCpz8mVYTXwv48IAVpbUf7+ak9V9Kk3jCeQnlxCJBUHjUhoIzinbS
- JHPHtkkAEQEAAYkBPAQYAQIAJgIbDBYhBJyxjdr46EmtKvwWpK0ScMxN0CebBQJdweVIBQkP
- 1iAZAAoJEK0ScMxN0CebGHUH/RtouOlWl6To97tQsTJUq/2YwmRpFOsvV0/zCX4fKBGAbeZi
- VaELSt2+3UEErA+n8HwbQmjJ6IrdhA9GustOpOyCcbLVSMwql/OlAwBtDzCcC8dTU4zcuY2a
- rGG2A8i5krU85G9r1wowVcWZBsdmW7/dKiNoadLQiig4bHNiSaV4ograas5efyEjqTxiY+yG
- hzPw5DK2kbp2co8iDF1vW0LWPeLFBinCgItcI9LvgHWaB3rwjOfvNpMn5m64SoQYHB8wbnid
- erAjOzkBzmqnfS1tAUr8mtESStEwrEmNv0ZoA6S0Wt+c9pyTr+BpG4OFlhj7ZI+Eh7zOrr33
- q9OBIdA=
-Message-ID: <ea560ebf-7ae5-a72d-2f03-e7097ab0ba8c@twiddle.net>
-Date: Fri, 3 Jan 2020 12:19:55 +1100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.2.2
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=l8QDKYxk0sJNh5vSS9NGjFYqiMTqN7rFRbE8+T4VhPw=;
+ b=Ymcn+fqGinsEoWr7aFSWSAK4vnuCrEYkQpE+5YlVfA8dDKNILwlps2GyO1yNYwzFmJ
+ SWnKBZ7XOjjEY8Q05wgi5pig6ZbDrRLNDv0l9f64B0Ni7yzO7AijNZOh+ux7kVSQLDzE
+ E346PLjBz0uppdZEP/7ixBXxp4deKmYfm2OcMgFY4uTVwxV+Y3mB9OR48BCRKYTurpn/
+ mgXEAgKuuMgl0tyIrubiE8a1J4qh9NdTn2wJexSO1LtT/yPgWCUbpRWJJWMG249HfzCA
+ 589+QEIT3IbpdeAmCdHoKL1gZrtqx2Zib+7tuXgQcsRm8Ol+OlfaWSkc8PaBQ62NMpn3
+ /i9Q==
+X-Gm-Message-State: APjAAAVFBFVxLlfry8Ww0Wd4giy/YHJ0R8ATpxn8S93zJhygKcpDjoDE
+ uh0nhtOxPcglNdp9oOq3JvZ2kChATHG3fTISIT0=
+X-Google-Smtp-Source: APXvYqzEVgFN2vcIftNKj/jDoZCix10wCo8BufTrfV7MTmk8M9qktKu4oQBkRDmEhq6icf8DGQ9gbLwxCoYi7iBximg=
+X-Received: by 2002:a19:8a41:: with SMTP id m62mr48223003lfd.5.1578017346414; 
+ Thu, 02 Jan 2020 18:09:06 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <20200101112303.20724-1-philmd@redhat.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+References: <cover.1575914822.git.alistair.francis@wdc.com>
+ <aa8557d53c1f6d3265e2b2c9bc4e127eddb995ea.1575914822.git.alistair.francis@wdc.com>
+ <mhng-7890ef29-2f3d-4600-8bd5-5ad839f404a0@palmerdabbelt-glaptop>
+In-Reply-To: <mhng-7890ef29-2f3d-4600-8bd5-5ad839f404a0@palmerdabbelt-glaptop>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Thu, 2 Jan 2020 18:08:40 -0800
+Message-ID: <CAKmqyKNwE77qjEGHVewWhZcx3DKESvAArjqixmFR-72g=+DgLA@mail.gmail.com>
+Subject: Re: [PATCH v1 01/36] target/riscv: Convert MIP CSR to target_ulong
+To: Palmer Dabbelt <palmerdabbelt@google.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::444
+X-Received-From: 2a00:1450:4864:20::144
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -124,27 +67,55 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Jan 2020 01:20:19 -0000
+X-List-Received-Date: Fri, 03 Jan 2020 02:09:13 -0000
 
-On 1/1/20 10:22 PM, Philippe Mathieu-Daudé wrote:
-> Noticed we could clean this while reviewing Richard patch last night:
-> https://www.mail-archive.com/qemu-devel@nongnu.org/msg667606.html
-> 
-> Since v1:
-> - moved headers to include/tcg/ (Paolo)
-> - include in .inc.c relative to parent (Stefan)
-> 
-> v1: https://lists.gnu.org/archive/html/qemu-devel/2019-12/msg05356.html
-> 
-> Philippe Mathieu-Daudé (4):
->   tcg: Search includes from the project root source directory
->   tcg: Search includes in the parent source directory
->   tcg: Move TCG headers to include/tcg/
->   configure: Remove tcg/ from the preprocessor include search list
+On Thu, Jan 2, 2020 at 10:18 AM Palmer Dabbelt <palmerdabbelt@google.com> wrote:
+>
+> On Mon, 09 Dec 2019 10:10:43 PST (-0800), Alistair Francis wrote:
+> > The MIP CSR is a xlen CSR, it was only 32-bits to allow atomic access.
+> > Now that we don't use atomics for MIP we can change this back to a xlen
+> > CSR.
+> >
+> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> > ---
+> >  target/riscv/cpu.c | 2 +-
+> >  target/riscv/cpu.h | 2 +-
+> >  2 files changed, 2 insertions(+), 2 deletions(-)
+> >
+> > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> > index d37861a430..e521ebe2e1 100644
+> > --- a/target/riscv/cpu.c
+> > +++ b/target/riscv/cpu.c
+> > @@ -224,7 +224,7 @@ static void riscv_cpu_dump_state(CPUState *cs, FILE *f, int flags)
+> >  #ifndef CONFIG_USER_ONLY
+> >      qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mhartid ", env->mhartid);
+> >      qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mstatus ", env->mstatus);
+> > -    qemu_fprintf(f, " %s 0x%x\n", "mip     ", env->mip);
+> > +    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mip     ", env->mip);
+> >      qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mie     ", env->mie);
+> >      qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mideleg ", env->mideleg);
+> >      qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "medeleg ", env->medeleg);
+> > diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> > index e59343e13c..f889427869 100644
+> > --- a/target/riscv/cpu.h
+> > +++ b/target/riscv/cpu.h
+> > @@ -121,7 +121,7 @@ struct CPURISCVState {
+> >      target_ulong mhartid;
+> >      target_ulong mstatus;
+> >
+> > -    uint32_t mip;
+> > +    target_ulong mip;
+> >      uint32_t miclaim;
+> >
+> >      target_ulong mie;
+>
+> Reviewed-by: Palmer Dabbelt <palmerdabbelt@google.com>
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Will queue shortly.
+Thanks!
 
+Can you just apply the patches from this series as they are reviewed?
 
-r~
+Also, can you review this series :)
+
+Alistair
 
