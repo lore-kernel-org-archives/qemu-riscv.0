@@ -1,45 +1,68 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1io9RD-00082s-Aj
-	for mharc-qemu-riscv@gnu.org; Sun, 05 Jan 2020 12:11:39 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:60986)
+	id 1ioWX3-0001Hm-5l
+	for mharc-qemu-riscv@gnu.org; Mon, 06 Jan 2020 12:51:13 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:35571)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <aurelien@aurel32.net>) id 1io9FL-0007Ls-9a
- for qemu-riscv@nongnu.org; Sun, 05 Jan 2020 11:59:24 -0500
+ (envelope-from <palmerdabbelt@google.com>) id 1ioWX0-0001HP-Kc
+ for qemu-riscv@nongnu.org; Mon, 06 Jan 2020 12:51:11 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <aurelien@aurel32.net>) id 1io9FJ-0002H7-Tq
- for qemu-riscv@nongnu.org; Sun, 05 Jan 2020 11:59:23 -0500
-Received: from hall.aurel32.net ([2001:bc8:30d7:100::1]:37822)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <aurelien@aurel32.net>)
- id 1io9FH-0002Ev-Cd; Sun, 05 Jan 2020 11:59:19 -0500
-Received: from [2a01:e35:2fdd:a4e1:fe91:fc89:bc43:b814] (helo=ohm.rr44.fr)
- by hall.aurel32.net with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.92) (envelope-from <aurelien@aurel32.net>)
- id 1io9FE-0005bk-ST; Sun, 05 Jan 2020 17:59:16 +0100
-Received: from aurel32 by ohm.rr44.fr with local (Exim 4.92.3)
- (envelope-from <aurelien@aurel32.net>)
- id 1io9FE-007hSH-Dn; Sun, 05 Jan 2020 17:59:16 +0100
-Date: Sun, 5 Jan 2020 17:59:16 +0100
-From: Aurelien Jarno <aurelien@aurel32.net>
-To: Alistair Francis <alistair.francis@wdc.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair23@gmail.com,
- palmer@dabbelt.com, bmeng.cn@gmail.com
-Subject: Re: [Qemu-devel] [PATCH v4 3/7] target/riscv: Create function to
- test if FP is enabled
-Message-ID: <20200105165916.GA1834646@aurel32.net>
-References: <cover.1566573576.git.alistair.francis@wdc.com>
- <5cc26abb98a9534720f09674b4b9caafb8f2cf0a.1566573576.git.alistair.francis@wdc.com>
- <20200105163640.GA1752551@aurel32.net>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-15
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-In-Reply-To: <20200105163640.GA1752551@aurel32.net>
-User-Agent: Mutt/1.13.2 (2019-12-18)
+ (envelope-from <palmerdabbelt@google.com>) id 1ioWWz-0002Eh-Gf
+ for qemu-riscv@nongnu.org; Mon, 06 Jan 2020 12:51:10 -0500
+Received: from mail-pf1-x444.google.com ([2607:f8b0:4864:20::444]:44545)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <palmerdabbelt@google.com>)
+ id 1ioWWz-0002C0-9X
+ for qemu-riscv@nongnu.org; Mon, 06 Jan 2020 12:51:09 -0500
+Received: by mail-pf1-x444.google.com with SMTP id 195so26418907pfw.11
+ for <qemu-riscv@nongnu.org>; Mon, 06 Jan 2020 09:51:06 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
+ h=date:from:subject:cc:to:in-reply-to:references:message-id
+ :mime-version:content-transfer-encoding;
+ bh=oC2sr88t+bxCA7MEstlJC7JQToE8IQv/b76cf7Wna2s=;
+ b=cXE7GDhRYxyCS5UcqQktkwZTC5TNkE58ZArey/CN5QP2s+uR7kle2b91f711++6jnp
+ R7cBZ8PT/Xz722+sPkopoYF9f8+F5perkLq6zZ9WrfsPvx48N5bt3sJh30+FrrX238U/
+ J6bYt7RwOGsQz6XPAAUqjbnQyQ3KW6wAjYfK/kxrVdvFBAA1b6hD7RsUPBCFd/MjUurh
+ +Ri6H201ZuvmiY7mhHqUKFT+8rLB1lts9axl3IgSvSVjXMO6Rizu0L4jQyAoTHlEY3rA
+ QTi5WnzvGWyEhZ5jecxmW+MwaR2qqhYVtsb74YP2VlEIdHaBmBSXMm9GrFD6ZBAN4QYh
+ +xhQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:subject:cc:to:in-reply-to:references
+ :message-id:mime-version:content-transfer-encoding;
+ bh=oC2sr88t+bxCA7MEstlJC7JQToE8IQv/b76cf7Wna2s=;
+ b=O3zAsORb3jBWPVu5rhduoOZ3vFrdi9eyrGjWOVa6dCT9O62gK98oi3eedk1RAiT4Hb
+ hMIM0sbpWkEnWtMHwQQk7itRGpUPHLDCjgZtBS9BAHHElqXDWLLGJrEGV4VZxq0cBFqC
+ hBKq5O4wP7BLLQ0c69XF5B86RGMHXVoHVCZZsXSKKLyjkGJYp430ZZBu8d5C5tEuXIrj
+ FBRueR00XiKEAJh43+7U9uHuRyDT6xityRedo/vYb/XnTP4+QwJdCv9d1GIZ/qeol0eg
+ OcFo4n4qc5R0xkNjveesbVSySfeozLOqJyHeVP19u/ibfIpswF56MCbP9FZBZiuad95g
+ Qn+w==
+X-Gm-Message-State: APjAAAXdcrBz8JysoekrEZ2YhmNlVbxKM3XSuh0lKEHxPWUq2jpgNUxA
+ zJlR4Fb4+y32YAi1aSiojwlFNg==
+X-Google-Smtp-Source: APXvYqzxTcU5mYeZFCkstumU+j3dHQ9cMO3ynAufjcUQ6jrPxPyMMcxR9BN9Pw124oJLI2OreGAStQ==
+X-Received: by 2002:a63:fe50:: with SMTP id x16mr93610332pgj.31.1578333065423; 
+ Mon, 06 Jan 2020 09:51:05 -0800 (PST)
+Received: from localhost ([2620:0:1000:2514:7f69:cd98:a2a2:a03d])
+ by smtp.gmail.com with ESMTPSA id 68sm72969594pge.14.2020.01.06.09.51.04
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 06 Jan 2020 09:51:05 -0800 (PST)
+Date: Mon, 06 Jan 2020 09:51:05 -0800 (PST)
+X-Google-Original-Date: Mon, 06 Jan 2020 09:50:25 PST (-0800)
+From: Palmer Dabbelt <palmerdabbelt@google.com>
+X-Google-Original-From: Palmer Dabbelt <palmer@dabbelt.com>
+Subject: Re: [PATCH v1 02/36] target/riscv: Don't set write permissions on
+ dirty PTEs
+CC: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
+ Alistair Francis <Alistair.Francis@wdc.com>, alistair23@gmail.com
+To: Alistair Francis <Alistair.Francis@wdc.com>
+In-Reply-To: <6a38e1a02e9a3d38fc311809772a152f0d99fd7a.1575914822.git.alistair.francis@wdc.com>
+References: <6a38e1a02e9a3d38fc311809772a152f0d99fd7a.1575914822.git.alistair.francis@wdc.com><cover.1575914822.git.alistair.francis@wdc.com>
+Message-ID: <mhng-23785a15-6ae5-4a3a-8474-9bff5d0c2109@palmerdabbelt-glaptop>
+Mime-Version: 1.0 (MHng)
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2001:bc8:30d7:100::1
-X-Mailman-Approved-At: Sun, 05 Jan 2020 12:11:36 -0500
+X-Received-From: 2607:f8b0:4864:20::444
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -51,49 +74,45 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 05 Jan 2020 16:59:24 -0000
+X-List-Received-Date: Mon, 06 Jan 2020 17:51:11 -0000
 
-On 2020-01-05 17:36, Aurelien Jarno wrote:
-> > diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> > index e0d4586760..2789215b5e 100644
-> > --- a/target/riscv/csr.c
-> > +++ b/target/riscv/csr.c
->=20
-> [ snip=A0]
->=20
-> > @@ -307,6 +307,7 @@ static int write_mstatus(CPURISCVState *env, int cs=
-rno, target_ulong val)
-> >  {
-> >      target_ulong mstatus =3D env->mstatus;
-> >      target_ulong mask =3D 0;
-> > +    int dirty;
-> > =20
-> >      /* flush tlb on mstatus fields that affect VM */
-> >      if (env->priv_ver <=3D PRIV_VERSION_1_09_1) {
-> > @@ -340,8 +341,9 @@ static int write_mstatus(CPURISCVState *env, int cs=
-rno, target_ulong val)
-> > =20
-> >      mstatus =3D (mstatus & ~mask) | (val & mask);
-> > =20
-> > -    int dirty =3D ((mstatus & MSTATUS_FS) =3D=3D MSTATUS_FS) |
-> > -                ((mstatus & MSTATUS_XS) =3D=3D MSTATUS_XS);
-> > +    dirty =3D (riscv_cpu_fp_enabled(env) &&
-> > +             ((mstatus & MSTATUS_FS) =3D=3D MSTATUS_FS)) |
-> > +            ((mstatus & MSTATUS_XS) =3D=3D MSTATUS_XS);
-> >      mstatus =3D set_field(mstatus, MSTATUS_SD, dirty);
-> >      env->mstatus =3D mstatus;
->=20
-> This patch, and more precisely the above two hunks broke
-> qemu-system-riscv64. More precisely, when running a Debian sid system
-> inside QEMU, sshd hangs during key exchange.
+On Mon, 09 Dec 2019 10:10:45 PST (-0800), Alistair Francis wrote:
+> Setting write permission on dirty PTEs results in userspace inside a
+> Hypervisor guest (VU) becoming corrupted. This appears to be because it
+> ends up with write permission in the second stage translation in cases
+> where we aren't doing a store.
+>
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+> ---
+>  target/riscv/cpu_helper.c | 6 ++----
+>  1 file changed, 2 insertions(+), 4 deletions(-)
+>
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index 767c8762ac..0de3a468eb 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -344,10 +344,8 @@ restart:
+>              if ((pte & PTE_X)) {
+>                  *prot |= PAGE_EXEC;
+>              }
+> -            /* add write permission on stores or if the page is already dirty,
+> -               so that we TLB miss on later writes to update the dirty bit */
+> -            if ((pte & PTE_W) &&
+> -                    (access_type == MMU_DATA_STORE || (pte & PTE_D))) {
+> +            /* add write permission on stores */
+> +            if ((pte & PTE_W) && (access_type == MMU_DATA_STORE)) {
+>                  *prot |= PAGE_WRITE;
+>              }
+>              return TRANSLATE_SUCCESS;
 
-The problem is that at this stage, mstatus !=3D env->status. Prior to that
-patch, dirty was computed exclusively on the new mstatus status, after
-the update by val. With this patch, riscv_cpu_fp_enabled() refers to the
-old value of mstatus. Therefore when FS is changed from "Off" (FS =3D 00)
-to "Dirty" (FS =3D=3D 11), the SD bit is not set.
+This is at least the second time I've spent a day or two trying to figure out
+what the right thing to do here is, and once again I'm lost.  I think what's
+really getting me is the original comment: why would this cause us to TLB miss,
+wouldn't it cause us to not TLB miss?
 
---=20
-Aurelien Jarno                          GPG: 4096R/1DDD8C9B
-aurelien@aurel32.net                 http://www.aurel32.net
+Assuming that's the case, it seems to me more like there's some missing fence
+in whatever program is blowing up due to this -- maybe it's just reading from
+the page before marking it as read-only, then relying on writes to trap without
+doing the requisite fence.
 
