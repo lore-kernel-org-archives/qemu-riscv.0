@@ -1,44 +1,42 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iodt1-0008QP-79
-	for mharc-qemu-riscv@gnu.org; Mon, 06 Jan 2020 20:42:23 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:40394)
+	id 1ioeLc-0004L2-6y
+	for mharc-qemu-riscv@gnu.org; Mon, 06 Jan 2020 21:11:56 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:53981)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <zhiwei_liu@c-sky.com>) id 1iodsy-0008Mz-LC
- for qemu-riscv@nongnu.org; Mon, 06 Jan 2020 20:42:21 -0500
+ (envelope-from <zhiwei_liu@c-sky.com>) id 1ioeLY-0004GF-OH
+ for qemu-riscv@nongnu.org; Mon, 06 Jan 2020 21:11:54 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <zhiwei_liu@c-sky.com>) id 1iodsx-0008T8-L8
- for qemu-riscv@nongnu.org; Mon, 06 Jan 2020 20:42:20 -0500
-Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:43212)
+ (envelope-from <zhiwei_liu@c-sky.com>) id 1ioeLW-0007sK-Hp
+ for qemu-riscv@nongnu.org; Mon, 06 Jan 2020 21:11:52 -0500
+Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:57272)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1iodsv-0008HV-60; Mon, 06 Jan 2020 20:42:17 -0500
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.1198329|-1; CH=green;
- DM=CONTINUE|CONTINUE|true|0.209858-0.00807429-0.782067;
- DS=CONTINUE|ham_news_journal|0.00943224-0.000278512-0.990289;
- FP=0|0|0|0|0|-1|-1|-1; HT=e02c03300; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS;
- RN=9; RT=9; SR=0; TI=SMTPD_---.GXacsWy_1578361327; 
+ id 1ioeLQ-0007W9-Hf; Mon, 06 Jan 2020 21:11:45 -0500
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07436288|-1; CH=green;
+ DM=CONTINUE|CONTINUE|true|0.254382-0.0116724-0.733945;
+ DS=CONTINUE|ham_regular_dialog|0.712369-0.00131796-0.286313;
+ FP=0|0|0|0|0|-1|-1|-1; HT=e02c03306; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS;
+ RN=8; RT=8; SR=0; TI=SMTPD_---.GXbeIzi_1578363098; 
 Received: from 172.16.31.150(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.GXacsWy_1578361327)
- by smtp.aliyun-inc.com(10.147.42.241);
- Tue, 07 Jan 2020 09:42:07 +0800
-Subject: Re: [PATCH v3 2/4] RISC-V: configure and turn on vector extension
- from command line
-To: Jim Wilson <jimw@sifive.com>, alistair23@gmail.com,
- richard.henderson@linaro.org, chihmin.chao@sifive.com, palmer@dabbelt.com
-Cc: wenmeng_zhang@c-sky.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
- wxy194768@alibaba-inc.com
+ fp:SMTPD_---.GXbeIzi_1578363098)
+ by smtp.aliyun-inc.com(10.147.40.44); Tue, 07 Jan 2020 10:11:38 +0800
+Subject: Re: [PATCH v3 4/4] RISC-V: add vector extension configure instruction
+To: Richard Henderson <richard.henderson@linaro.org>, alistair23@gmail.com,
+ chihmin.chao@sifive.com, palmer@dabbelt.com
+Cc: wenmeng_zhang@c-sky.com, wxy194768@alibaba-inc.com,
+ qemu-devel@nongnu.org, qemu-riscv@nongnu.org
 References: <20200103033347.20909-1-zhiwei_liu@c-sky.com>
- <20200103033347.20909-3-zhiwei_liu@c-sky.com>
- <2e85f9fd-c254-5403-43ac-6988c013e319@sifive.com>
+ <20200103033347.20909-5-zhiwei_liu@c-sky.com>
+ <94fd7ef0-3ee7-d836-3feb-00a8b93ab585@linaro.org>
 From: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Message-ID: <88b684d8-3718-6673-dd78-afdf22d500be@c-sky.com>
-Date: Tue, 7 Jan 2020 09:42:03 +0800
+Message-ID: <d49e779c-57e5-114b-3e14-96d7e98144b5@c-sky.com>
+Date: Tue, 7 Jan 2020 10:11:34 +0800
 User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
  Thunderbird/68.3.1
 MIME-Version: 1.0
-In-Reply-To: <2e85f9fd-c254-5403-43ac-6988c013e319@sifive.com>
+In-Reply-To: <94fd7ef0-3ee7-d836-3feb-00a8b93ab585@linaro.org>
 Content-Type: multipart/alternative;
- boundary="------------8327F7377B8089BE63DF69DE"
+ boundary="------------8D66D43FB19310A341D75560"
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 3.x [generic] [fuzzy]
 X-Received-From: 121.197.200.217
 X-BeenThere: qemu-riscv@nongnu.org
@@ -52,34 +50,178 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Jan 2020 01:42:22 -0000
+X-List-Received-Date: Tue, 07 Jan 2020 02:11:55 -0000
 
 This is a multi-part message in MIME format.
---------------8327F7377B8089BE63DF69DE
+--------------8D66D43FB19310A341D75560
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
 
+Hi Richard,
 
-On 2020/1/7 5:48, Jim Wilson wrote:
-> On 1/2/20 7:33 PM, LIU Zhiwei wrote:
->> +            if (cpu->cfg.vlen > RV_VLEN_MAX) {
->> +                error_setg(errp,
->> +                       "Vector extension VLEN must <= %d", 
->> RV_VLEN_MAX);
->> +                return;
+Thanks for the comments of the part 1.  It's really very helpful.
+I accept most of the comments.
+
+On 2020/1/4 7:41, Richard Henderson wrote:
+> On 1/3/20 2:33 PM, LIU Zhiwei wrote:
+>> vsetvl and vsetvli are two configure instructions for vl, vtype. TB flags
+>> should update after configure instructions. The (ill, lmul, sew ) of vtype
+>> and the bit of (VSTART == 0 && VL == VLMAX) will be placed within tb_flags.
+>>
+>> Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
+>> ---
+>>   target/riscv/Makefile.objs              |  2 +-
+>>   target/riscv/cpu.c                      |  1 +
+>>   target/riscv/cpu.h                      | 55 ++++++++++++++++++++-----
+>>   target/riscv/helper.h                   |  2 +
+>>   target/riscv/insn32.decode              |  5 +++
+>>   target/riscv/insn_trans/trans_rvv.inc.c | 52 +++++++++++++++++++++++
+>>   target/riscv/translate.c                | 17 +++++++-
+>>   target/riscv/vector_helper.c            | 51 +++++++++++++++++++++++
+>>   8 files changed, 172 insertions(+), 13 deletions(-)
+>>   create mode 100644 target/riscv/insn_trans/trans_rvv.inc.c
+>>   create mode 100644 target/riscv/vector_helper.c
+>>
+>> diff --git a/target/riscv/Makefile.objs b/target/riscv/Makefile.objs
+>> index b1c79bc1d1..d577cef9e0 100644
+>> --- a/target/riscv/Makefile.objs
+>> +++ b/target/riscv/Makefile.objs
+>> @@ -1,4 +1,4 @@
+>> -obj-y += translate.o op_helper.o cpu_helper.o cpu.o csr.o fpu_helper.o gdbstub.o pmp.o
+>> +obj-y += translate.o op_helper.o cpu_helper.o cpu.o csr.o fpu_helper.o vector_helper.o gdbstub.o pmp.o
+>>   
+>>   DECODETREE = $(SRC_PATH)/scripts/decodetree.py
+>>   
+>> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+>> index c2370a0a57..3ff7b50bff 100644
+>> --- a/target/riscv/cpu.c
+>> +++ b/target/riscv/cpu.c
+>> @@ -347,6 +347,7 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+>>           }
+>>       }
+>>       if (cpu->cfg.vext_spec) {
+>> +        env->vext.vtype = ~((target_ulong)-1 >> 1);
+> Better as FIELD_DP64(0, VTYPE, VILL, 1),
 >
-> There is no architectural maximum for VLEN.  This is simply an 
-> implementation choice so you can use static arrays instead of malloc.  
-> I think this error should be reworded to something like "Vector 
-> extension implementation only supports VLEN <= %d."
-Thanks. It's good to reduce ambiguous.
+>
+>> +struct VTYPE {
+>> +#ifdef HOST_WORDS_BIGENDIAN
+>> +    target_ulong vill:1;
+>> +    target_ulong reserved:sizeof(target_ulong) * 8 - 7;
+>> +    target_ulong sew:3;
+>> +    target_ulong lmul:2;
+>> +#else
+>> +    target_ulong lmul:2;
+>> +    target_ulong sew:3;
+>> +    target_ulong reserved:sizeof(target_ulong) * 8 - 7;
+>> +    target_ulong vill:1;
+>> +#endif
+>> +};
+> Do not use bit fields to describe target register layout.
+> Use FIELD().
+OK. I think there is no need to the handle endianess here.  FIELD() is good.
+
+>> -#define TB_FLAGS_MMU_MASK   3
+>> -#define TB_FLAGS_MSTATUS_FS MSTATUS_FS
+>> +typedef CPURISCVState CPUArchState;
+>> +typedef RISCVCPU ArchCPU;
+>> +#include "exec/cpu-all.h"
+>> +
+>> +FIELD(TB_FLAGS, MMU, 0, 2)
+>> +FIELD(TB_FLAGS, FS, 13, 2)
+> The change to use FIELD for MMU and FS should be made separately from adding
+> the vector state.
+>
+>> +FIELD(TB_FLAGS, VL_EQ_VLMAX, 16, 1)
+>> +FIELD(TB_FLAGS, LMUL, 17, 2)
+>> +FIELD(TB_FLAGS, SEW, 19, 3)
+>> +FIELD(TB_FLAGS, VILL, 22, 1)
+> Why are you leaving holes in TB_FLAGS?  I know why the original hole was there,
+> since it corresponded to simple masks on other registers.
+>
+>> +    vlmax = (1 << vtype->lmul) * cpu->cfg.vlen / (8 * (1 << vtype->sew));
+> Wow, this can be simplified a lot.
+>
+>     (1 << LMUL) * VLEN / (8 * (1 << SEW))
+>   = (VLEN << LMUL) / (8 << SEW)
+>   = (VLEN << LMUL) >> (SEW + 3)
+>   = VLEN >> (SEW + 3 - LMUL)
+>
+Good.
+>> +    vl_eq_vlmax = (env->vext.vstart == 0) && (vlmax == env->vext.vl);
+>> +
+>> +    flags = FIELD_DP32(flags, TB_FLAGS, VILL, vtype->vill);
+>> +    flags = FIELD_DP32(flags, TB_FLAGS, SEW, vtype->sew);
+>> +    flags = FIELD_DP32(flags, TB_FLAGS, LMUL, vtype->lmul);
+>> +    flags = FIELD_DP32(flags, TB_FLAGS, VL_EQ_VLMAX, vl_eq_vlmax);
+> I wonder if perhaps this all ought to be nested under
+>
+>    if (env->misa & RVV) {
+>        ...
+>    } else {
+>        flag = FIELD_DP32(flags, TB_FLAGS, VILL, 1);
+>    }
+>
+> so that, for the normal case when RVV is disabled, we don't bother computing
+> all of those bits.
+>
+>> +static bool trans_vsetvl(DisasContext *ctx, arg_vsetvl * a)
+>> +{
+>> +    TCGv s1, s2, d;
+>> +    d = tcg_temp_new();
+>> +    s1 = tcg_temp_new();
+>> +    s2 = tcg_temp_new();
+>> +    gen_get_gpr(s1, a->rs1);
+>> +    gen_get_gpr(s2, a->rs2);
+>> +    gen_helper_vector_vsetvli(d, cpu_env, s1, s2);
+>> +    tcg_gen_st_tl(d, cpu_env, offsetof(CPURISCVState, vext.vl));
+> Why are you performing the store to vl inline, as opposed to within the helper
+> funtion?
+>
+>> +    exit_tb(ctx);
+> A normal exit is correct for vsetvl, because the new state is variable.
+>
+>> +static bool trans_vsetvli(DisasContext *ctx, arg_vsetvli * a)
+>> +{
+>> +    TCGv s1, s2, d;
+>> +    d = tcg_temp_new();
+>> +    s1 = tcg_temp_new();
+>> +    s2 = tcg_const_tl(a->zimm);
+>> +    gen_get_gpr(s1, a->rs1);
+>> +    gen_helper_vector_vsetvli(d, cpu_env, s1, s2);
+>> +    tcg_gen_st_tl(d, cpu_env, offsetof(CPURISCVState, vext.vl));
+>> +    exit_tb(ctx);
+> You could use
+>
+>    gen_goto_tb(ctx, 0, ctx->base.pc_next)
+>
+> here, because the new state is unknown but constant.  It will be the same every
+> time the instruction is executed, and thus can compute the new state only once,
+> saving that computation in the link to the next tb.
+>
+>> +target_ulong VECTOR_HELPER(vsetvli)(CPURISCVState *env, target_ulong s1,
+>> +    target_ulong s2)
+>> +{
+>> +    int vlmax, vl;
+>> +    RISCVCPU *cpu = env_archcpu(env);
+>> +    struct VTYPE *vtype = (struct VTYPE *)&s2;
+> FIELD_EX64 for all uses of VTYPE.
+>
+>> +
+>> +    if (vtype->sew > cpu->cfg.elen) { /* only set vill bit. */
+>> +        env->vext.vtype = ~((target_ulong)-1 >> 1);
+> FIELD_DP64.
+>
+>> +    vlmax = (1 << vtype->lmul) * cpu->cfg.vlen / (8 * (1 << vtype->sew));
+> Same simplification as before.  Perhaps extract this to an inline function for
+> clarity, documenting the algebraic simplification only once.
+>
+> r~
+Best Regards,
 Zhiwei
-> The other errors here are for architecture requirements and are OK.
->
-> Jim
 
 
---------------8327F7377B8089BE63DF69DE
+--------------8D66D43FB19310A341D75560
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 8bit
 
@@ -88,55 +230,265 @@ Content-Transfer-Encoding: 8bit
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   </head>
   <body>
+    Hi Richard,<br>
     <br>
-    <div class="moz-cite-prefix">On 2020/1/7 5:48, Jim Wilson wrote:<br>
-    </div>
-    <blockquote type="cite"
-      cite="mid:2e85f9fd-c254-5403-43ac-6988c013e319@sifive.com">On
-      1/2/20 7:33 PM, LIU Zhiwei wrote:
-      <br>
-      <blockquote type="cite">+            if (cpu-&gt;cfg.vlen &gt;
-        RV_VLEN_MAX) {
-        <br>
-        +                error_setg(errp,
-        <br>
-        +                       "Vector extension VLEN must &lt;= %d",
-        RV_VLEN_MAX);
-        <br>
-        +                return;
-        <br>
-      </blockquote>
-      <br>
-      There is no architectural maximum for VLEN.  This is simply an
-      implementation choice so you can use static arrays instead of
-      malloc.  I think this error should be reworded to something like
-      "Vector extension implementation only supports VLEN &lt;= %d."
-      <br>
-       
-    </blockquote>
-    Thanks. It's good to reduce ambiguous.<br>
-    Zhiwei<br>
-    <span style="color: rgb(51, 51, 51); font-family: tahoma, 微软雅黑, 宋体,
-      arial, georgia, verdana, helvetica, sans-serif; font-size: 14px;
-      font-style: normal; font-variant-ligatures: normal;
-      font-variant-caps: normal; font-weight: 400; letter-spacing:
-      normal; orphans: 2; text-align: start; text-indent: 0px;
-      text-transform: none; white-space: normal; widows: 2;
-      word-spacing: 0px; -webkit-text-stroke-width: 0px;
+    Thanks for the comments of the part 1.  It's really very helpful. <br>
+    I accept most of the comments.<span style="color: rgb(51, 51, 51);
+      font-family: arial; font-size: 13px; font-style: normal;
+      font-variant-ligatures: normal; font-variant-caps: normal;
+      font-weight: 400; letter-spacing: normal; orphans: 2; text-align:
+      left; text-indent: 0px; text-transform: none; white-space: normal;
+      widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px;
       background-color: rgb(255, 255, 255); text-decoration-style:
       initial; text-decoration-color: initial; display: inline
-      !important; float: none;"></span>
+      !important; float: none;"></span><br>
+    <br>
+    <div class="moz-cite-prefix">On 2020/1/4 7:41, Richard Henderson
+      wrote:<br>
+    </div>
     <blockquote type="cite"
-      cite="mid:2e85f9fd-c254-5403-43ac-6988c013e319@sifive.com">The
-      other errors here are for architecture requirements and are OK.
-      <br>
-      <br>
-      Jim
-      <br>
+      cite="mid:94fd7ef0-3ee7-d836-3feb-00a8b93ab585@linaro.org">
+      <pre class="moz-quote-pre" wrap="">On 1/3/20 2:33 PM, LIU Zhiwei wrote:
+</pre>
+      <blockquote type="cite">
+        <pre class="moz-quote-pre" wrap="">vsetvl and vsetvli are two configure instructions for vl, vtype. TB flags
+should update after configure instructions. The (ill, lmul, sew ) of vtype
+and the bit of (VSTART == 0 &amp;&amp; VL == VLMAX) will be placed within tb_flags.
+
+Signed-off-by: LIU Zhiwei <a class="moz-txt-link-rfc2396E" href="mailto:zhiwei_liu@c-sky.com">&lt;zhiwei_liu@c-sky.com&gt;</a>
+---
+ target/riscv/Makefile.objs              |  2 +-
+ target/riscv/cpu.c                      |  1 +
+ target/riscv/cpu.h                      | 55 ++++++++++++++++++++-----
+ target/riscv/helper.h                   |  2 +
+ target/riscv/insn32.decode              |  5 +++
+ target/riscv/insn_trans/trans_rvv.inc.c | 52 +++++++++++++++++++++++
+ target/riscv/translate.c                | 17 +++++++-
+ target/riscv/vector_helper.c            | 51 +++++++++++++++++++++++
+ 8 files changed, 172 insertions(+), 13 deletions(-)
+ create mode 100644 target/riscv/insn_trans/trans_rvv.inc.c
+ create mode 100644 target/riscv/vector_helper.c
+
+diff --git a/target/riscv/Makefile.objs b/target/riscv/Makefile.objs
+index b1c79bc1d1..d577cef9e0 100644
+--- a/target/riscv/Makefile.objs
++++ b/target/riscv/Makefile.objs
+@@ -1,4 +1,4 @@
+-obj-y += translate.o op_helper.o cpu_helper.o cpu.o csr.o fpu_helper.o gdbstub.o pmp.o
++obj-y += translate.o op_helper.o cpu_helper.o cpu.o csr.o fpu_helper.o vector_helper.o gdbstub.o pmp.o
+ 
+ DECODETREE = $(SRC_PATH)/scripts/decodetree.py
+ 
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index c2370a0a57..3ff7b50bff 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -347,6 +347,7 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+         }
+     }
+     if (cpu-&gt;cfg.vext_spec) {
++        env-&gt;vext.vtype = ~((target_ulong)-1 &gt;&gt; 1);
+</pre>
+      </blockquote>
+      <pre class="moz-quote-pre" wrap="">
+Better as FIELD_DP64(0, VTYPE, VILL, 1),
+
+
+</pre>
+      <blockquote type="cite">
+        <pre class="moz-quote-pre" wrap="">+struct VTYPE {
++#ifdef HOST_WORDS_BIGENDIAN
++    target_ulong vill:1;
++    target_ulong reserved:sizeof(target_ulong) * 8 - 7;
++    target_ulong sew:3;
++    target_ulong lmul:2;
++#else
++    target_ulong lmul:2;
++    target_ulong sew:3;
++    target_ulong reserved:sizeof(target_ulong) * 8 - 7;
++    target_ulong vill:1;
++#endif
++};
+</pre>
+      </blockquote>
+      <pre class="moz-quote-pre" wrap="">
+Do not use bit fields to describe target register layout.
+Use FIELD().
+</pre>
+    </blockquote>
+    OK. I think there is no need to the handle endianess here.  FIELD()
+    is good.<br>
+    <br>
+    <blockquote type="cite"
+      cite="mid:94fd7ef0-3ee7-d836-3feb-00a8b93ab585@linaro.org">
+      <pre class="moz-quote-pre" wrap="">
+</pre>
+      <blockquote type="cite">
+        <pre class="moz-quote-pre" wrap="">-#define TB_FLAGS_MMU_MASK   3
+-#define TB_FLAGS_MSTATUS_FS MSTATUS_FS
++typedef CPURISCVState CPUArchState;
++typedef RISCVCPU ArchCPU;
++#include "exec/cpu-all.h"
++
++FIELD(TB_FLAGS, MMU, 0, 2)
++FIELD(TB_FLAGS, FS, 13, 2)
+</pre>
+      </blockquote>
+      <pre class="moz-quote-pre" wrap="">
+The change to use FIELD for MMU and FS should be made separately from adding
+the vector state.
+
+</pre>
+      <blockquote type="cite">
+        <pre class="moz-quote-pre" wrap="">+FIELD(TB_FLAGS, VL_EQ_VLMAX, 16, 1)
++FIELD(TB_FLAGS, LMUL, 17, 2)
++FIELD(TB_FLAGS, SEW, 19, 3)
++FIELD(TB_FLAGS, VILL, 22, 1)
+</pre>
+      </blockquote>
+      <pre class="moz-quote-pre" wrap="">
+Why are you leaving holes in TB_FLAGS?  I know why the original hole was there,
+since it corresponded to simple masks on other registers.
+
+</pre>
+      <blockquote type="cite">
+        <pre class="moz-quote-pre" wrap="">+    vlmax = (1 &lt;&lt; vtype-&gt;lmul) * cpu-&gt;cfg.vlen / (8 * (1 &lt;&lt; vtype-&gt;sew));
+</pre>
+      </blockquote>
+      <pre class="moz-quote-pre" wrap="">
+Wow, this can be simplified a lot.
+
+   (1 &lt;&lt; LMUL) * VLEN / (8 * (1 &lt;&lt; SEW))
+ = (VLEN &lt;&lt; LMUL) / (8 &lt;&lt; SEW)
+ = (VLEN &lt;&lt; LMUL) &gt;&gt; (SEW + 3)
+ = VLEN &gt;&gt; (SEW + 3 - LMUL)
+
+</pre>
+    </blockquote>
+    Good.<br>
+    <blockquote type="cite"
+      cite="mid:94fd7ef0-3ee7-d836-3feb-00a8b93ab585@linaro.org">
+      <pre class="moz-quote-pre" wrap="">
+</pre>
+      <blockquote type="cite">
+        <pre class="moz-quote-pre" wrap="">+    vl_eq_vlmax = (env-&gt;vext.vstart == 0) &amp;&amp; (vlmax == env-&gt;vext.vl);
++
++    flags = FIELD_DP32(flags, TB_FLAGS, VILL, vtype-&gt;vill);
++    flags = FIELD_DP32(flags, TB_FLAGS, SEW, vtype-&gt;sew);
++    flags = FIELD_DP32(flags, TB_FLAGS, LMUL, vtype-&gt;lmul);
++    flags = FIELD_DP32(flags, TB_FLAGS, VL_EQ_VLMAX, vl_eq_vlmax);
+</pre>
+      </blockquote>
+      <pre class="moz-quote-pre" wrap="">
+I wonder if perhaps this all ought to be nested under
+
+  if (env-&gt;misa &amp; RVV) {
+      ...
+  } else {
+      flag = FIELD_DP32(flags, TB_FLAGS, VILL, 1);
+  }
+
+so that, for the normal case when RVV is disabled, we don't bother computing
+all of those bits.
+
+</pre>
+      <blockquote type="cite">
+        <pre class="moz-quote-pre" wrap="">+static bool trans_vsetvl(DisasContext *ctx, arg_vsetvl * a)
++{
++    TCGv s1, s2, d;
++    d = tcg_temp_new();
++    s1 = tcg_temp_new();
++    s2 = tcg_temp_new();
++    gen_get_gpr(s1, a-&gt;rs1);
++    gen_get_gpr(s2, a-&gt;rs2);
++    gen_helper_vector_vsetvli(d, cpu_env, s1, s2);
++    tcg_gen_st_tl(d, cpu_env, offsetof(CPURISCVState, vext.vl));
+</pre>
+      </blockquote>
+      <pre class="moz-quote-pre" wrap="">
+Why are you performing the store to vl inline, as opposed to within the helper
+funtion?
+
+</pre>
+      <blockquote type="cite">
+        <pre class="moz-quote-pre" wrap="">+    exit_tb(ctx);
+</pre>
+      </blockquote>
+      <pre class="moz-quote-pre" wrap="">
+A normal exit is correct for vsetvl, because the new state is variable.
+
+</pre>
+      <blockquote type="cite">
+        <pre class="moz-quote-pre" wrap="">+static bool trans_vsetvli(DisasContext *ctx, arg_vsetvli * a)
++{
++    TCGv s1, s2, d;
++    d = tcg_temp_new();
++    s1 = tcg_temp_new();
++    s2 = tcg_const_tl(a-&gt;zimm);
++    gen_get_gpr(s1, a-&gt;rs1);
++    gen_helper_vector_vsetvli(d, cpu_env, s1, s2);
++    tcg_gen_st_tl(d, cpu_env, offsetof(CPURISCVState, vext.vl));
++    exit_tb(ctx);
+</pre>
+      </blockquote>
+      <pre class="moz-quote-pre" wrap="">
+You could use
+
+  gen_goto_tb(ctx, 0, ctx-&gt;base.pc_next)
+
+here, because the new state is unknown but constant.  It will be the same every
+time the instruction is executed, and thus can compute the new state only once,
+saving that computation in the link to the next tb.
+
+</pre>
+      <blockquote type="cite">
+        <pre class="moz-quote-pre" wrap="">+target_ulong VECTOR_HELPER(vsetvli)(CPURISCVState *env, target_ulong s1,
++    target_ulong s2)
++{
++    int vlmax, vl;
++    RISCVCPU *cpu = env_archcpu(env);
++    struct VTYPE *vtype = (struct VTYPE *)&amp;s2;
+</pre>
+      </blockquote>
+      <pre class="moz-quote-pre" wrap="">
+FIELD_EX64 for all uses of VTYPE.
+
+</pre>
+      <blockquote type="cite">
+        <pre class="moz-quote-pre" wrap="">+
++    if (vtype-&gt;sew &gt; cpu-&gt;cfg.elen) { /* only set vill bit. */
++        env-&gt;vext.vtype = ~((target_ulong)-1 &gt;&gt; 1);
+</pre>
+      </blockquote>
+      <pre class="moz-quote-pre" wrap="">
+FIELD_DP64.
+
+</pre>
+      <blockquote type="cite">
+        <pre class="moz-quote-pre" wrap="">+    vlmax = (1 &lt;&lt; vtype-&gt;lmul) * cpu-&gt;cfg.vlen / (8 * (1 &lt;&lt; vtype-&gt;sew));
+</pre>
+      </blockquote>
+      <pre class="moz-quote-pre" wrap="">
+Same simplification as before.  Perhaps extract this to an inline function for
+clarity, documenting the algebraic simplification only once.
+</pre>
+    </blockquote>
+    <blockquote type="cite"
+      cite="mid:94fd7ef0-3ee7-d836-3feb-00a8b93ab585@linaro.org">
+      <pre class="moz-quote-pre" wrap="">
+
+r~</pre>
+    </blockquote>
+    Best Regards,<br>
+    Zhiwei<br>
+    <blockquote type="cite"
+      cite="mid:94fd7ef0-3ee7-d836-3feb-00a8b93ab585@linaro.org">
+      <pre class="moz-quote-pre" wrap="">
+</pre>
     </blockquote>
     <br>
   </body>
 </html>
 
---------------8327F7377B8089BE63DF69DE--
+--------------8D66D43FB19310A341D75560--
 
