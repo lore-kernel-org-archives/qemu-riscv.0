@@ -1,44 +1,100 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ioeLc-0004L2-6y
-	for mharc-qemu-riscv@gnu.org; Mon, 06 Jan 2020 21:11:56 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53981)
+	id 1iomVe-0004l8-Qa
+	for mharc-qemu-riscv@gnu.org; Tue, 07 Jan 2020 05:54:50 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:60338)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <zhiwei_liu@c-sky.com>) id 1ioeLY-0004GF-OH
- for qemu-riscv@nongnu.org; Mon, 06 Jan 2020 21:11:54 -0500
+ (envelope-from <pbonzini@redhat.com>) id 1iomVZ-0004QS-D2
+ for qemu-riscv@nongnu.org; Tue, 07 Jan 2020 05:54:46 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <zhiwei_liu@c-sky.com>) id 1ioeLW-0007sK-Hp
- for qemu-riscv@nongnu.org; Mon, 06 Jan 2020 21:11:52 -0500
-Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:57272)
+ (envelope-from <pbonzini@redhat.com>) id 1iomVX-0007Dd-RH
+ for qemu-riscv@nongnu.org; Tue, 07 Jan 2020 05:54:45 -0500
+Received: from us-smtp-delivery-1.mimecast.com ([205.139.110.120]:48942
+ helo=us-smtp-1.mimecast.com)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1ioeLQ-0007W9-Hf; Mon, 06 Jan 2020 21:11:45 -0500
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07436288|-1; CH=green;
- DM=CONTINUE|CONTINUE|true|0.254382-0.0116724-0.733945;
- DS=CONTINUE|ham_regular_dialog|0.712369-0.00131796-0.286313;
- FP=0|0|0|0|0|-1|-1|-1; HT=e02c03306; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS;
- RN=8; RT=8; SR=0; TI=SMTPD_---.GXbeIzi_1578363098; 
-Received: from 172.16.31.150(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.GXbeIzi_1578363098)
- by smtp.aliyun-inc.com(10.147.40.44); Tue, 07 Jan 2020 10:11:38 +0800
-Subject: Re: [PATCH v3 4/4] RISC-V: add vector extension configure instruction
-To: Richard Henderson <richard.henderson@linaro.org>, alistair23@gmail.com,
- chihmin.chao@sifive.com, palmer@dabbelt.com
-Cc: wenmeng_zhang@c-sky.com, wxy194768@alibaba-inc.com,
- qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-References: <20200103033347.20909-1-zhiwei_liu@c-sky.com>
- <20200103033347.20909-5-zhiwei_liu@c-sky.com>
- <94fd7ef0-3ee7-d836-3feb-00a8b93ab585@linaro.org>
-From: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Message-ID: <d49e779c-57e5-114b-3e14-96d7e98144b5@c-sky.com>
-Date: Tue, 7 Jan 2020 10:11:34 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.3.1
+ (Exim 4.71) (envelope-from <pbonzini@redhat.com>) id 1iomVX-0007DE-O6
+ for qemu-riscv@nongnu.org; Tue, 07 Jan 2020 05:54:43 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1578394483;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=TjodyhE9M9oMNhZED49rT8Ro16OowE6OEG/lcmHdm+4=;
+ b=achWDeH1FO5tPr6SRl+uP8IdAOVZ7+uASQ1EDXYaH105dryytstl86YDiZKtHNpl+/hsZU
+ /5D6h/XIHfPdZyl6lxlOthkjWI28Zo74+hOtdas3LQMMfElW03Ggjeu2NDX1DXyZkhLg1i
+ LDtzOBf4mdkz1uqPUBFwVDxXImQy7CY=
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-288-w-9jRm1PPGO4ggCW1PbmHg-1; Tue, 07 Jan 2020 05:54:42 -0500
+Received: by mail-wr1-f70.google.com with SMTP id h30so19707023wrh.5
+ for <qemu-riscv@nongnu.org>; Tue, 07 Jan 2020 02:54:42 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=5457hFrQC5z9kErgtWtmvH8rSFNPXA9e5vzM+pY/1rY=;
+ b=OMArXHoquVOfWbPiNwpzkKKMwRRBwlCBgbUPqQoSLViEdiWhbfLg2DM7OpOcbqUpjL
+ wANMJzv9CTyEk4XkyIwwMKTFJjaF4wR+8LuTCoSd5KbnOd2C/72P99wemseo6A5JtRHF
+ D93KHchRkl/T+HgZfrwpUe6AVJQgpd40HvpU85Rtp4OEg65ZDTEGcScEHaEkZ9IN/S6W
+ g2PsHloU2q2FVi+2xf+U5x1fcy0fQj5nGqogSScENB+VxaidinxN3JAao+aGpwOxkdYI
+ mfpIZQ91s0PFmPPUpz06fOpP4e0M8m252/Uyap6LLD5mNz1uiCvtpL1xNM0zTZPKXQ37
+ zKXg==
+X-Gm-Message-State: APjAAAXct8D4bKP5h146WSvDA4P2bA0g7DH0l8uPQd33Sio3pQpXGH0C
+ FnpI5IcWigTaIHx1skQuy3BnRc0waZBCGdGXUUAif9ORkO+bx0+9gLx9hvHiIlfabOOtTAkFSQM
+ XeiFH9IvcnY/erw4=
+X-Received: by 2002:a7b:cf39:: with SMTP id m25mr40202761wmg.146.1578394480698; 
+ Tue, 07 Jan 2020 02:54:40 -0800 (PST)
+X-Google-Smtp-Source: APXvYqxveQL3hZ2QnDilbrDEMNPP9vZyLZC+g3A3mQqLxulCBFmSQCH9Ui3lRCyB0gmc8tBAU61G8Q==
+X-Received: by 2002:a7b:cf39:: with SMTP id m25mr40202714wmg.146.1578394480338; 
+ Tue, 07 Jan 2020 02:54:40 -0800 (PST)
+Received: from ?IPv6:2001:b07:6468:f312:c6d:4079:b74c:e329?
+ ([2001:b07:6468:f312:c6d:4079:b74c:e329])
+ by smtp.gmail.com with ESMTPSA id f1sm76414366wru.6.2020.01.07.02.54.38
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 07 Jan 2020 02:54:39 -0800 (PST)
+Subject: Re: [PATCH v2 2/4] tcg: Search includes in the parent source directory
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>,
+ qemu-devel@nongnu.org
+Cc: qemu-ppc@nongnu.org, Max Filippov <jcmvbkbc@gmail.com>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Aleksandar Rikalo <aleksandar.rikalo@rt-rk.com>,
+ Anthony Green <green@moxielogic.com>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Eduardo Habkost <ehabkost@redhat.com>,
+ Claudio Fontana <claudio.fontana@huawei.com>, Chris Wulff
+ <crwulff@gmail.com>, Laurent Vivier <laurent@vivier.eu>,
+ Stafford Horne <shorne@gmail.com>, qemu-arm@nongnu.org,
+ David Gibson <david@gibson.dropbear.id.au>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Cornelia Huck <cohuck@redhat.com>, David Hildenbrand <david@redhat.com>,
+ Stefan Weil <sw@weilnetz.de>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>, qemu-s390x@nongnu.org,
+ Aleksandar Markovic <amarkovic@wavecomp.com>,
+ Andrzej Zaborowski <balrogg@gmail.com>, Guan Xuetao <gxt@mprc.pku.edu.cn>,
+ Richard Henderson <rth@twiddle.net>, Riku Voipio <riku.voipio@iki.fi>,
+ Aurelien Jarno <aurelien@aurel32.net>, qemu-riscv@nongnu.org,
+ Michael Walle <michael@walle.cc>, Artyom Tarasenko <atar4qemu@gmail.com>,
+ Marek Vasut <marex@denx.de>, Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>
+References: <20200101112303.20724-1-philmd@redhat.com>
+ <20200101112303.20724-3-philmd@redhat.com>
+From: Paolo Bonzini <pbonzini@redhat.com>
+Message-ID: <f298aa7f-d9bf-36ea-ffdf-b07e02fe6575@redhat.com>
+Date: Tue, 7 Jan 2020 11:54:37 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.1.1
 MIME-Version: 1.0
-In-Reply-To: <94fd7ef0-3ee7-d836-3feb-00a8b93ab585@linaro.org>
-Content-Type: multipart/alternative;
- boundary="------------8D66D43FB19310A341D75560"
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 3.x [generic] [fuzzy]
-X-Received-From: 121.197.200.217
+In-Reply-To: <20200101112303.20724-3-philmd@redhat.com>
+Content-Language: en-US
+X-MC-Unique: w-9jRm1PPGO4ggCW1PbmHg-1
+X-Mimecast-Spam-Score: 0
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+ [fuzzy]
+X-Received-From: 205.139.110.120
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -50,445 +106,203 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Jan 2020 02:11:55 -0000
+X-List-Received-Date: Tue, 07 Jan 2020 10:54:49 -0000
 
-This is a multi-part message in MIME format.
---------------8D66D43FB19310A341D75560
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
+On 01/01/20 12:23, Philippe Mathieu-Daud=C3=A9 wrote:
+> All the *.inc.c files included by tcg/$TARGET/tcg-target.inc.c
+> are in tcg/, their parent directory. To simplify the preprocessor
+> search path, include the relative parent path: '..'.
+>=20
+> Patch created mechanically by running:
+>=20
+>   $ for x in tcg-pool.inc.c tcg-ldst.inc.c; do \
+>     sed -i "s,#include \"$x\",#include \"../$x\"," \
+>       $(git grep -l "#include \"$x\""); \
+>     done
+>=20
+> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
 
-Hi Richard,
+Another possibility is to move the .inc.c files to include/tcg (probably
+renaming them to .inc.h in the meanwhile) but this is good too.
 
-Thanks for the comments of the part 1.  It's really very helpful.
-I accept most of the comments.
+Paolo
 
-On 2020/1/4 7:41, Richard Henderson wrote:
-> On 1/3/20 2:33 PM, LIU Zhiwei wrote:
->> vsetvl and vsetvli are two configure instructions for vl, vtype. TB flags
->> should update after configure instructions. The (ill, lmul, sew ) of vtype
->> and the bit of (VSTART == 0 && VL == VLMAX) will be placed within tb_flags.
->>
->> Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
->> ---
->>   target/riscv/Makefile.objs              |  2 +-
->>   target/riscv/cpu.c                      |  1 +
->>   target/riscv/cpu.h                      | 55 ++++++++++++++++++++-----
->>   target/riscv/helper.h                   |  2 +
->>   target/riscv/insn32.decode              |  5 +++
->>   target/riscv/insn_trans/trans_rvv.inc.c | 52 +++++++++++++++++++++++
->>   target/riscv/translate.c                | 17 +++++++-
->>   target/riscv/vector_helper.c            | 51 +++++++++++++++++++++++
->>   8 files changed, 172 insertions(+), 13 deletions(-)
->>   create mode 100644 target/riscv/insn_trans/trans_rvv.inc.c
->>   create mode 100644 target/riscv/vector_helper.c
->>
->> diff --git a/target/riscv/Makefile.objs b/target/riscv/Makefile.objs
->> index b1c79bc1d1..d577cef9e0 100644
->> --- a/target/riscv/Makefile.objs
->> +++ b/target/riscv/Makefile.objs
->> @@ -1,4 +1,4 @@
->> -obj-y += translate.o op_helper.o cpu_helper.o cpu.o csr.o fpu_helper.o gdbstub.o pmp.o
->> +obj-y += translate.o op_helper.o cpu_helper.o cpu.o csr.o fpu_helper.o vector_helper.o gdbstub.o pmp.o
->>   
->>   DECODETREE = $(SRC_PATH)/scripts/decodetree.py
->>   
->> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
->> index c2370a0a57..3ff7b50bff 100644
->> --- a/target/riscv/cpu.c
->> +++ b/target/riscv/cpu.c
->> @@ -347,6 +347,7 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
->>           }
->>       }
->>       if (cpu->cfg.vext_spec) {
->> +        env->vext.vtype = ~((target_ulong)-1 >> 1);
-> Better as FIELD_DP64(0, VTYPE, VILL, 1),
->
->
->> +struct VTYPE {
->> +#ifdef HOST_WORDS_BIGENDIAN
->> +    target_ulong vill:1;
->> +    target_ulong reserved:sizeof(target_ulong) * 8 - 7;
->> +    target_ulong sew:3;
->> +    target_ulong lmul:2;
->> +#else
->> +    target_ulong lmul:2;
->> +    target_ulong sew:3;
->> +    target_ulong reserved:sizeof(target_ulong) * 8 - 7;
->> +    target_ulong vill:1;
->> +#endif
->> +};
-> Do not use bit fields to describe target register layout.
-> Use FIELD().
-OK. I think there is no need to the handle endianess here.  FIELD() is good.
+> ---
+>  tcg/aarch64/tcg-target.inc.c | 4 ++--
+>  tcg/arm/tcg-target.inc.c     | 4 ++--
+>  tcg/i386/tcg-target.inc.c    | 4 ++--
+>  tcg/mips/tcg-target.inc.c    | 2 +-
+>  tcg/ppc/tcg-target.inc.c     | 4 ++--
+>  tcg/riscv/tcg-target.inc.c   | 4 ++--
+>  tcg/s390/tcg-target.inc.c    | 4 ++--
+>  tcg/sparc/tcg-target.inc.c   | 2 +-
+>  8 files changed, 14 insertions(+), 14 deletions(-)
+>=20
+> diff --git a/tcg/aarch64/tcg-target.inc.c b/tcg/aarch64/tcg-target.inc.c
+> index 3f921015d3..843fd0ca69 100644
+> --- a/tcg/aarch64/tcg-target.inc.c
+> +++ b/tcg/aarch64/tcg-target.inc.c
+> @@ -10,7 +10,7 @@
+>   * See the COPYING file in the top-level directory for details.
+>   */
+> =20
+> -#include "tcg-pool.inc.c"
+> +#include "../tcg-pool.inc.c"
+>  #include "qemu/bitops.h"
+> =20
+>  /* We're going to re-use TCGType in setting of the SF bit, which control=
+s
+> @@ -1541,7 +1541,7 @@ static void tcg_out_cltz(TCGContext *s, TCGType ext=
+, TCGReg d,
+>  }
+> =20
+>  #ifdef CONFIG_SOFTMMU
+> -#include "tcg-ldst.inc.c"
+> +#include "../tcg-ldst.inc.c"
+> =20
+>  /* helper signature: helper_ret_ld_mmu(CPUState *env, target_ulong addr,
+>   *                                     TCGMemOpIdx oi, uintptr_t ra)
+> diff --git a/tcg/arm/tcg-target.inc.c b/tcg/arm/tcg-target.inc.c
+> index 94d80d79d1..fffb6611e2 100644
+> --- a/tcg/arm/tcg-target.inc.c
+> +++ b/tcg/arm/tcg-target.inc.c
+> @@ -23,7 +23,7 @@
+>   */
+> =20
+>  #include "elf.h"
+> -#include "tcg-pool.inc.c"
+> +#include "../tcg-pool.inc.c"
+> =20
+>  int arm_arch =3D __ARM_ARCH;
+> =20
+> @@ -1131,7 +1131,7 @@ static TCGCond tcg_out_cmp2(TCGContext *s, const TC=
+GArg *args,
+>  }
+> =20
+>  #ifdef CONFIG_SOFTMMU
+> -#include "tcg-ldst.inc.c"
+> +#include "../tcg-ldst.inc.c"
+> =20
+>  /* helper signature: helper_ret_ld_mmu(CPUState *env, target_ulong addr,
+>   *                                     int mmu_idx, uintptr_t ra)
+> diff --git a/tcg/i386/tcg-target.inc.c b/tcg/i386/tcg-target.inc.c
+> index 9d8ed974e0..cdedcb2b25 100644
+> --- a/tcg/i386/tcg-target.inc.c
+> +++ b/tcg/i386/tcg-target.inc.c
+> @@ -22,7 +22,7 @@
+>   * THE SOFTWARE.
+>   */
+> =20
+> -#include "tcg-pool.inc.c"
+> +#include "../tcg-pool.inc.c"
+> =20
+>  #ifdef CONFIG_DEBUG_TCG
+>  static const char * const tcg_target_reg_names[TCG_TARGET_NB_REGS] =3D {
+> @@ -1647,7 +1647,7 @@ static void tcg_out_nopn(TCGContext *s, int n)
+>  }
+> =20
+>  #if defined(CONFIG_SOFTMMU)
+> -#include "tcg-ldst.inc.c"
+> +#include "../tcg-ldst.inc.c"
+> =20
+>  /* helper signature: helper_ret_ld_mmu(CPUState *env, target_ulong addr,
+>   *                                     int mmu_idx, uintptr_t ra)
+> diff --git a/tcg/mips/tcg-target.inc.c b/tcg/mips/tcg-target.inc.c
+> index 5442167045..1da663ce84 100644
+> --- a/tcg/mips/tcg-target.inc.c
+> +++ b/tcg/mips/tcg-target.inc.c
+> @@ -1107,7 +1107,7 @@ static void tcg_out_call(TCGContext *s, tcg_insn_un=
+it *arg)
+>  }
+> =20
+>  #if defined(CONFIG_SOFTMMU)
+> -#include "tcg-ldst.inc.c"
+> +#include "../tcg-ldst.inc.c"
+> =20
+>  static void * const qemu_ld_helpers[16] =3D {
+>      [MO_UB]   =3D helper_ret_ldub_mmu,
+> diff --git a/tcg/ppc/tcg-target.inc.c b/tcg/ppc/tcg-target.inc.c
+> index d308d69aba..ee1f9227c1 100644
+> --- a/tcg/ppc/tcg-target.inc.c
+> +++ b/tcg/ppc/tcg-target.inc.c
+> @@ -23,7 +23,7 @@
+>   */
+> =20
+>  #include "elf.h"
+> -#include "tcg-pool.inc.c"
+> +#include "../tcg-pool.inc.c"
+> =20
+>  #if defined _CALL_DARWIN || defined __APPLE__
+>  #define TCG_TARGET_CALL_DARWIN
+> @@ -1845,7 +1845,7 @@ static const uint32_t qemu_exts_opc[4] =3D {
+>  };
+> =20
+>  #if defined (CONFIG_SOFTMMU)
+> -#include "tcg-ldst.inc.c"
+> +#include "../tcg-ldst.inc.c"
+> =20
+>  /* helper signature: helper_ld_mmu(CPUState *env, target_ulong addr,
+>   *                                 int mmu_idx, uintptr_t ra)
+> diff --git a/tcg/riscv/tcg-target.inc.c b/tcg/riscv/tcg-target.inc.c
+> index 7018509693..2bc0ba71f2 100644
+> --- a/tcg/riscv/tcg-target.inc.c
+> +++ b/tcg/riscv/tcg-target.inc.c
+> @@ -27,7 +27,7 @@
+>   * THE SOFTWARE.
+>   */
+> =20
+> -#include "tcg-pool.inc.c"
+> +#include "../tcg-pool.inc.c"
+> =20
+>  #ifdef CONFIG_DEBUG_TCG
+>  static const char * const tcg_target_reg_names[TCG_TARGET_NB_REGS] =3D {
+> @@ -921,7 +921,7 @@ static void tcg_out_mb(TCGContext *s, TCGArg a0)
+>   */
+> =20
+>  #if defined(CONFIG_SOFTMMU)
+> -#include "tcg-ldst.inc.c"
+> +#include "../tcg-ldst.inc.c"
+> =20
+>  /* helper signature: helper_ret_ld_mmu(CPUState *env, target_ulong addr,
+>   *                                     TCGMemOpIdx oi, uintptr_t ra)
+> diff --git a/tcg/s390/tcg-target.inc.c b/tcg/s390/tcg-target.inc.c
+> index 8aaa4cebe8..b07e9ff7d6 100644
+> --- a/tcg/s390/tcg-target.inc.c
+> +++ b/tcg/s390/tcg-target.inc.c
+> @@ -29,7 +29,7 @@
+>  #error "unsupported code generation mode"
+>  #endif
+> =20
+> -#include "tcg-pool.inc.c"
+> +#include "../tcg-pool.inc.c"
+>  #include "elf.h"
+> =20
+>  /* ??? The translation blocks produced by TCG are generally small enough=
+ to
+> @@ -1536,7 +1536,7 @@ static void tcg_out_qemu_st_direct(TCGContext *s, M=
+emOp opc, TCGReg data,
+>  }
+> =20
+>  #if defined(CONFIG_SOFTMMU)
+> -#include "tcg-ldst.inc.c"
+> +#include "../tcg-ldst.inc.c"
+> =20
+>  /* We're expecting to use a 20-bit negative offset on the tlb memory ops=
+.  */
+>  QEMU_BUILD_BUG_ON(TLB_MASK_TABLE_OFS(0) > 0);
+> diff --git a/tcg/sparc/tcg-target.inc.c b/tcg/sparc/tcg-target.inc.c
+> index d7986cda5c..65fddb310d 100644
+> --- a/tcg/sparc/tcg-target.inc.c
+> +++ b/tcg/sparc/tcg-target.inc.c
+> @@ -22,7 +22,7 @@
+>   * THE SOFTWARE.
+>   */
+> =20
+> -#include "tcg-pool.inc.c"
+> +#include "../tcg-pool.inc.c"
+> =20
+>  #ifdef CONFIG_DEBUG_TCG
+>  static const char * const tcg_target_reg_names[TCG_TARGET_NB_REGS] =3D {
+>=20
 
->> -#define TB_FLAGS_MMU_MASK   3
->> -#define TB_FLAGS_MSTATUS_FS MSTATUS_FS
->> +typedef CPURISCVState CPUArchState;
->> +typedef RISCVCPU ArchCPU;
->> +#include "exec/cpu-all.h"
->> +
->> +FIELD(TB_FLAGS, MMU, 0, 2)
->> +FIELD(TB_FLAGS, FS, 13, 2)
-> The change to use FIELD for MMU and FS should be made separately from adding
-> the vector state.
->
->> +FIELD(TB_FLAGS, VL_EQ_VLMAX, 16, 1)
->> +FIELD(TB_FLAGS, LMUL, 17, 2)
->> +FIELD(TB_FLAGS, SEW, 19, 3)
->> +FIELD(TB_FLAGS, VILL, 22, 1)
-> Why are you leaving holes in TB_FLAGS?  I know why the original hole was there,
-> since it corresponded to simple masks on other registers.
->
->> +    vlmax = (1 << vtype->lmul) * cpu->cfg.vlen / (8 * (1 << vtype->sew));
-> Wow, this can be simplified a lot.
->
->     (1 << LMUL) * VLEN / (8 * (1 << SEW))
->   = (VLEN << LMUL) / (8 << SEW)
->   = (VLEN << LMUL) >> (SEW + 3)
->   = VLEN >> (SEW + 3 - LMUL)
->
-Good.
->> +    vl_eq_vlmax = (env->vext.vstart == 0) && (vlmax == env->vext.vl);
->> +
->> +    flags = FIELD_DP32(flags, TB_FLAGS, VILL, vtype->vill);
->> +    flags = FIELD_DP32(flags, TB_FLAGS, SEW, vtype->sew);
->> +    flags = FIELD_DP32(flags, TB_FLAGS, LMUL, vtype->lmul);
->> +    flags = FIELD_DP32(flags, TB_FLAGS, VL_EQ_VLMAX, vl_eq_vlmax);
-> I wonder if perhaps this all ought to be nested under
->
->    if (env->misa & RVV) {
->        ...
->    } else {
->        flag = FIELD_DP32(flags, TB_FLAGS, VILL, 1);
->    }
->
-> so that, for the normal case when RVV is disabled, we don't bother computing
-> all of those bits.
->
->> +static bool trans_vsetvl(DisasContext *ctx, arg_vsetvl * a)
->> +{
->> +    TCGv s1, s2, d;
->> +    d = tcg_temp_new();
->> +    s1 = tcg_temp_new();
->> +    s2 = tcg_temp_new();
->> +    gen_get_gpr(s1, a->rs1);
->> +    gen_get_gpr(s2, a->rs2);
->> +    gen_helper_vector_vsetvli(d, cpu_env, s1, s2);
->> +    tcg_gen_st_tl(d, cpu_env, offsetof(CPURISCVState, vext.vl));
-> Why are you performing the store to vl inline, as opposed to within the helper
-> funtion?
->
->> +    exit_tb(ctx);
-> A normal exit is correct for vsetvl, because the new state is variable.
->
->> +static bool trans_vsetvli(DisasContext *ctx, arg_vsetvli * a)
->> +{
->> +    TCGv s1, s2, d;
->> +    d = tcg_temp_new();
->> +    s1 = tcg_temp_new();
->> +    s2 = tcg_const_tl(a->zimm);
->> +    gen_get_gpr(s1, a->rs1);
->> +    gen_helper_vector_vsetvli(d, cpu_env, s1, s2);
->> +    tcg_gen_st_tl(d, cpu_env, offsetof(CPURISCVState, vext.vl));
->> +    exit_tb(ctx);
-> You could use
->
->    gen_goto_tb(ctx, 0, ctx->base.pc_next)
->
-> here, because the new state is unknown but constant.  It will be the same every
-> time the instruction is executed, and thus can compute the new state only once,
-> saving that computation in the link to the next tb.
->
->> +target_ulong VECTOR_HELPER(vsetvli)(CPURISCVState *env, target_ulong s1,
->> +    target_ulong s2)
->> +{
->> +    int vlmax, vl;
->> +    RISCVCPU *cpu = env_archcpu(env);
->> +    struct VTYPE *vtype = (struct VTYPE *)&s2;
-> FIELD_EX64 for all uses of VTYPE.
->
->> +
->> +    if (vtype->sew > cpu->cfg.elen) { /* only set vill bit. */
->> +        env->vext.vtype = ~((target_ulong)-1 >> 1);
-> FIELD_DP64.
->
->> +    vlmax = (1 << vtype->lmul) * cpu->cfg.vlen / (8 * (1 << vtype->sew));
-> Same simplification as before.  Perhaps extract this to an inline function for
-> clarity, documenting the algebraic simplification only once.
->
-> r~
-Best Regards,
-Zhiwei
-
-
---------------8D66D43FB19310A341D75560
-Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: 8bit
-
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  </head>
-  <body>
-    Hi Richard,<br>
-    <br>
-    Thanks for the comments of the part 1.  It's really very helpful. <br>
-    I accept most of the comments.<span style="color: rgb(51, 51, 51);
-      font-family: arial; font-size: 13px; font-style: normal;
-      font-variant-ligatures: normal; font-variant-caps: normal;
-      font-weight: 400; letter-spacing: normal; orphans: 2; text-align:
-      left; text-indent: 0px; text-transform: none; white-space: normal;
-      widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px;
-      background-color: rgb(255, 255, 255); text-decoration-style:
-      initial; text-decoration-color: initial; display: inline
-      !important; float: none;"></span><br>
-    <br>
-    <div class="moz-cite-prefix">On 2020/1/4 7:41, Richard Henderson
-      wrote:<br>
-    </div>
-    <blockquote type="cite"
-      cite="mid:94fd7ef0-3ee7-d836-3feb-00a8b93ab585@linaro.org">
-      <pre class="moz-quote-pre" wrap="">On 1/3/20 2:33 PM, LIU Zhiwei wrote:
-</pre>
-      <blockquote type="cite">
-        <pre class="moz-quote-pre" wrap="">vsetvl and vsetvli are two configure instructions for vl, vtype. TB flags
-should update after configure instructions. The (ill, lmul, sew ) of vtype
-and the bit of (VSTART == 0 &amp;&amp; VL == VLMAX) will be placed within tb_flags.
-
-Signed-off-by: LIU Zhiwei <a class="moz-txt-link-rfc2396E" href="mailto:zhiwei_liu@c-sky.com">&lt;zhiwei_liu@c-sky.com&gt;</a>
----
- target/riscv/Makefile.objs              |  2 +-
- target/riscv/cpu.c                      |  1 +
- target/riscv/cpu.h                      | 55 ++++++++++++++++++++-----
- target/riscv/helper.h                   |  2 +
- target/riscv/insn32.decode              |  5 +++
- target/riscv/insn_trans/trans_rvv.inc.c | 52 +++++++++++++++++++++++
- target/riscv/translate.c                | 17 +++++++-
- target/riscv/vector_helper.c            | 51 +++++++++++++++++++++++
- 8 files changed, 172 insertions(+), 13 deletions(-)
- create mode 100644 target/riscv/insn_trans/trans_rvv.inc.c
- create mode 100644 target/riscv/vector_helper.c
-
-diff --git a/target/riscv/Makefile.objs b/target/riscv/Makefile.objs
-index b1c79bc1d1..d577cef9e0 100644
---- a/target/riscv/Makefile.objs
-+++ b/target/riscv/Makefile.objs
-@@ -1,4 +1,4 @@
--obj-y += translate.o op_helper.o cpu_helper.o cpu.o csr.o fpu_helper.o gdbstub.o pmp.o
-+obj-y += translate.o op_helper.o cpu_helper.o cpu.o csr.o fpu_helper.o vector_helper.o gdbstub.o pmp.o
- 
- DECODETREE = $(SRC_PATH)/scripts/decodetree.py
- 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index c2370a0a57..3ff7b50bff 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -347,6 +347,7 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
-         }
-     }
-     if (cpu-&gt;cfg.vext_spec) {
-+        env-&gt;vext.vtype = ~((target_ulong)-1 &gt;&gt; 1);
-</pre>
-      </blockquote>
-      <pre class="moz-quote-pre" wrap="">
-Better as FIELD_DP64(0, VTYPE, VILL, 1),
-
-
-</pre>
-      <blockquote type="cite">
-        <pre class="moz-quote-pre" wrap="">+struct VTYPE {
-+#ifdef HOST_WORDS_BIGENDIAN
-+    target_ulong vill:1;
-+    target_ulong reserved:sizeof(target_ulong) * 8 - 7;
-+    target_ulong sew:3;
-+    target_ulong lmul:2;
-+#else
-+    target_ulong lmul:2;
-+    target_ulong sew:3;
-+    target_ulong reserved:sizeof(target_ulong) * 8 - 7;
-+    target_ulong vill:1;
-+#endif
-+};
-</pre>
-      </blockquote>
-      <pre class="moz-quote-pre" wrap="">
-Do not use bit fields to describe target register layout.
-Use FIELD().
-</pre>
-    </blockquote>
-    OK. I think there is no need to the handle endianess here.  FIELD()
-    is good.<br>
-    <br>
-    <blockquote type="cite"
-      cite="mid:94fd7ef0-3ee7-d836-3feb-00a8b93ab585@linaro.org">
-      <pre class="moz-quote-pre" wrap="">
-</pre>
-      <blockquote type="cite">
-        <pre class="moz-quote-pre" wrap="">-#define TB_FLAGS_MMU_MASK   3
--#define TB_FLAGS_MSTATUS_FS MSTATUS_FS
-+typedef CPURISCVState CPUArchState;
-+typedef RISCVCPU ArchCPU;
-+#include "exec/cpu-all.h"
-+
-+FIELD(TB_FLAGS, MMU, 0, 2)
-+FIELD(TB_FLAGS, FS, 13, 2)
-</pre>
-      </blockquote>
-      <pre class="moz-quote-pre" wrap="">
-The change to use FIELD for MMU and FS should be made separately from adding
-the vector state.
-
-</pre>
-      <blockquote type="cite">
-        <pre class="moz-quote-pre" wrap="">+FIELD(TB_FLAGS, VL_EQ_VLMAX, 16, 1)
-+FIELD(TB_FLAGS, LMUL, 17, 2)
-+FIELD(TB_FLAGS, SEW, 19, 3)
-+FIELD(TB_FLAGS, VILL, 22, 1)
-</pre>
-      </blockquote>
-      <pre class="moz-quote-pre" wrap="">
-Why are you leaving holes in TB_FLAGS?  I know why the original hole was there,
-since it corresponded to simple masks on other registers.
-
-</pre>
-      <blockquote type="cite">
-        <pre class="moz-quote-pre" wrap="">+    vlmax = (1 &lt;&lt; vtype-&gt;lmul) * cpu-&gt;cfg.vlen / (8 * (1 &lt;&lt; vtype-&gt;sew));
-</pre>
-      </blockquote>
-      <pre class="moz-quote-pre" wrap="">
-Wow, this can be simplified a lot.
-
-   (1 &lt;&lt; LMUL) * VLEN / (8 * (1 &lt;&lt; SEW))
- = (VLEN &lt;&lt; LMUL) / (8 &lt;&lt; SEW)
- = (VLEN &lt;&lt; LMUL) &gt;&gt; (SEW + 3)
- = VLEN &gt;&gt; (SEW + 3 - LMUL)
-
-</pre>
-    </blockquote>
-    Good.<br>
-    <blockquote type="cite"
-      cite="mid:94fd7ef0-3ee7-d836-3feb-00a8b93ab585@linaro.org">
-      <pre class="moz-quote-pre" wrap="">
-</pre>
-      <blockquote type="cite">
-        <pre class="moz-quote-pre" wrap="">+    vl_eq_vlmax = (env-&gt;vext.vstart == 0) &amp;&amp; (vlmax == env-&gt;vext.vl);
-+
-+    flags = FIELD_DP32(flags, TB_FLAGS, VILL, vtype-&gt;vill);
-+    flags = FIELD_DP32(flags, TB_FLAGS, SEW, vtype-&gt;sew);
-+    flags = FIELD_DP32(flags, TB_FLAGS, LMUL, vtype-&gt;lmul);
-+    flags = FIELD_DP32(flags, TB_FLAGS, VL_EQ_VLMAX, vl_eq_vlmax);
-</pre>
-      </blockquote>
-      <pre class="moz-quote-pre" wrap="">
-I wonder if perhaps this all ought to be nested under
-
-  if (env-&gt;misa &amp; RVV) {
-      ...
-  } else {
-      flag = FIELD_DP32(flags, TB_FLAGS, VILL, 1);
-  }
-
-so that, for the normal case when RVV is disabled, we don't bother computing
-all of those bits.
-
-</pre>
-      <blockquote type="cite">
-        <pre class="moz-quote-pre" wrap="">+static bool trans_vsetvl(DisasContext *ctx, arg_vsetvl * a)
-+{
-+    TCGv s1, s2, d;
-+    d = tcg_temp_new();
-+    s1 = tcg_temp_new();
-+    s2 = tcg_temp_new();
-+    gen_get_gpr(s1, a-&gt;rs1);
-+    gen_get_gpr(s2, a-&gt;rs2);
-+    gen_helper_vector_vsetvli(d, cpu_env, s1, s2);
-+    tcg_gen_st_tl(d, cpu_env, offsetof(CPURISCVState, vext.vl));
-</pre>
-      </blockquote>
-      <pre class="moz-quote-pre" wrap="">
-Why are you performing the store to vl inline, as opposed to within the helper
-funtion?
-
-</pre>
-      <blockquote type="cite">
-        <pre class="moz-quote-pre" wrap="">+    exit_tb(ctx);
-</pre>
-      </blockquote>
-      <pre class="moz-quote-pre" wrap="">
-A normal exit is correct for vsetvl, because the new state is variable.
-
-</pre>
-      <blockquote type="cite">
-        <pre class="moz-quote-pre" wrap="">+static bool trans_vsetvli(DisasContext *ctx, arg_vsetvli * a)
-+{
-+    TCGv s1, s2, d;
-+    d = tcg_temp_new();
-+    s1 = tcg_temp_new();
-+    s2 = tcg_const_tl(a-&gt;zimm);
-+    gen_get_gpr(s1, a-&gt;rs1);
-+    gen_helper_vector_vsetvli(d, cpu_env, s1, s2);
-+    tcg_gen_st_tl(d, cpu_env, offsetof(CPURISCVState, vext.vl));
-+    exit_tb(ctx);
-</pre>
-      </blockquote>
-      <pre class="moz-quote-pre" wrap="">
-You could use
-
-  gen_goto_tb(ctx, 0, ctx-&gt;base.pc_next)
-
-here, because the new state is unknown but constant.  It will be the same every
-time the instruction is executed, and thus can compute the new state only once,
-saving that computation in the link to the next tb.
-
-</pre>
-      <blockquote type="cite">
-        <pre class="moz-quote-pre" wrap="">+target_ulong VECTOR_HELPER(vsetvli)(CPURISCVState *env, target_ulong s1,
-+    target_ulong s2)
-+{
-+    int vlmax, vl;
-+    RISCVCPU *cpu = env_archcpu(env);
-+    struct VTYPE *vtype = (struct VTYPE *)&amp;s2;
-</pre>
-      </blockquote>
-      <pre class="moz-quote-pre" wrap="">
-FIELD_EX64 for all uses of VTYPE.
-
-</pre>
-      <blockquote type="cite">
-        <pre class="moz-quote-pre" wrap="">+
-+    if (vtype-&gt;sew &gt; cpu-&gt;cfg.elen) { /* only set vill bit. */
-+        env-&gt;vext.vtype = ~((target_ulong)-1 &gt;&gt; 1);
-</pre>
-      </blockquote>
-      <pre class="moz-quote-pre" wrap="">
-FIELD_DP64.
-
-</pre>
-      <blockquote type="cite">
-        <pre class="moz-quote-pre" wrap="">+    vlmax = (1 &lt;&lt; vtype-&gt;lmul) * cpu-&gt;cfg.vlen / (8 * (1 &lt;&lt; vtype-&gt;sew));
-</pre>
-      </blockquote>
-      <pre class="moz-quote-pre" wrap="">
-Same simplification as before.  Perhaps extract this to an inline function for
-clarity, documenting the algebraic simplification only once.
-</pre>
-    </blockquote>
-    <blockquote type="cite"
-      cite="mid:94fd7ef0-3ee7-d836-3feb-00a8b93ab585@linaro.org">
-      <pre class="moz-quote-pre" wrap="">
-
-r~</pre>
-    </blockquote>
-    Best Regards,<br>
-    Zhiwei<br>
-    <blockquote type="cite"
-      cite="mid:94fd7ef0-3ee7-d836-3feb-00a8b93ab585@linaro.org">
-      <pre class="moz-quote-pre" wrap="">
-</pre>
-    </blockquote>
-    <br>
-  </body>
-</html>
-
---------------8D66D43FB19310A341D75560--
 
