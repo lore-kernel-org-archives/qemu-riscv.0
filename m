@@ -1,111 +1,68 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ioqhU-0005Sa-NF
-	for mharc-qemu-riscv@gnu.org; Tue, 07 Jan 2020 10:23:20 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:38805)
+	id 1iotak-0007kj-TJ
+	for mharc-qemu-riscv@gnu.org; Tue, 07 Jan 2020 13:28:34 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:48312)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <pbonzini@redhat.com>) id 1ioqhQ-0005Kt-Cm
- for qemu-riscv@nongnu.org; Tue, 07 Jan 2020 10:23:17 -0500
+ (envelope-from <palmerdabbelt@google.com>) id 1iotai-0007jT-8k
+ for qemu-riscv@nongnu.org; Tue, 07 Jan 2020 13:28:33 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <pbonzini@redhat.com>) id 1ioqhP-0007dk-4U
- for qemu-riscv@nongnu.org; Tue, 07 Jan 2020 10:23:16 -0500
-Received: from us-smtp-1.mimecast.com ([207.211.31.81]:33675
- helo=us-smtp-delivery-1.mimecast.com)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <pbonzini@redhat.com>) id 1ioqhP-0007dI-1S
- for qemu-riscv@nongnu.org; Tue, 07 Jan 2020 10:23:15 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1578410594;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=vEZl/neS+NROZ3mdO1oRodcW72dgDNfEVAbmZRX2WOo=;
- b=Ii2kvMAY5e0uf7Ik7+2z2orRKnlQHFASSNY84i7Ng5vrVIStowlIbSQzKvNRaK992cIvIT
- IJC70oQXdde3okO/sRQ5seT8KsNi98ZvZOBS+zescXLKdli/XeMcyCwt+rUHO3cbeUdaFB
- 6nS/lJJG1tN1s9ShG2PzMVDV/fTE01M=
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-85-ndqKTzjZOVWf2IvVjGUh_g-1; Tue, 07 Jan 2020 10:23:13 -0500
-Received: by mail-wr1-f72.google.com with SMTP id v17so67245wrm.17
- for <qemu-riscv@nongnu.org>; Tue, 07 Jan 2020 07:23:13 -0800 (PST)
+ (envelope-from <palmerdabbelt@google.com>) id 1iotah-0003V7-09
+ for qemu-riscv@nongnu.org; Tue, 07 Jan 2020 13:28:32 -0500
+Received: from mail-pl1-x643.google.com ([2607:f8b0:4864:20::643]:45113)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <palmerdabbelt@google.com>)
+ id 1iotag-0003Ry-OJ
+ for qemu-riscv@nongnu.org; Tue, 07 Jan 2020 13:28:30 -0500
+Received: by mail-pl1-x643.google.com with SMTP id b22so38540pls.12
+ for <qemu-riscv@nongnu.org>; Tue, 07 Jan 2020 10:28:27 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
+ h=date:from:subject:cc:to:in-reply-to:references:message-id
+ :mime-version:content-transfer-encoding;
+ bh=tjnPToxzH35dkt51Mt0Z9aB+X5UsaKioUuHEUhQveRE=;
+ b=b5psLchSBh5VbIHy9pPtCyglQospEb9TVxMBr9cOBvhJo1xqHmyLYAQHd9aMh2/rkk
+ fe75rAjpS0Qq8urq0q3ZZXjZG4dOHpDIFj6pal9ZIhHGuVK2H6/TIG/CYkj5kZ323wDx
+ VORN4bEf3h/pIsXjwdMxGrVLrY8R2OsEvI8N/Az3wZAIl4u/R7A9Mzpdmr2nFBHiSfSq
+ 1tcSW0bbZbtHy6OGUB2pgOJNfkLO93AIpXJTjzm9PwJV9+2pRbaRuOVUvF5eavddW1ud
+ oX+Ccklh/ZHNggI/z6yRAVspb9k3gHPMWXRBa5PHdTlin70QG5CF+irQLmbcZjgRF3mY
+ jBWg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=/wc1xxXSPNaCZ+dYdazVsN00S+wbJbcYuMJ74BKeA2g=;
- b=daOnXF7u6FSeL44qegcZK2h8wvqnK8WLR9OqygwDmh91sOc6Zaisqsyb7RKbAB9qjA
- 6CJt9cUQrNEYxFYgMteff5BgkOmy6TFWZDTHK/nA+t0UYDsXBTZZLYvnpra/+fJYaO8z
- v2ha+9M93HIJp2XyJ1yVxzfJMihub8iDyvp857w9eBfg/BDGg96RFqtcdRqy8LsweVQ8
- YsJroyKuBt+BxpN2wt0tKfdtpvSQRJe/dlftmBr7Re7PP72nG2VkB9//orSYn8grdNZO
- vcRw5BRrDIoeiiv0sOM20ja3yxpcHbufl+OhXBvaIh6flYXhogvyCNb5OGHS+T28sMan
- +brg==
-X-Gm-Message-State: APjAAAVjeAojmns+KDWY9kshat9o3OGoT1gyY+9ZeOW2pvl1qyBaar60
- a4xVhFhXf1htOXnSpfgkJcwkMIKCz94CP3l6B2YYQjzuWK5aR7rcjPC39HHbIuF76eOYdw+4E4z
- EHkxxz6R15lcVMYM=
-X-Received: by 2002:adf:f308:: with SMTP id i8mr49579817wro.42.1578410591988; 
- Tue, 07 Jan 2020 07:23:11 -0800 (PST)
-X-Google-Smtp-Source: APXvYqyoAFGs2BOpjY0uBeuBN7Yc7/c6alEMV8/94B6n+mL/HLVDW5sduo9VmBSvBDk/vaL1rnBQXA==
-X-Received: by 2002:adf:f308:: with SMTP id i8mr49579799wro.42.1578410591769; 
- Tue, 07 Jan 2020 07:23:11 -0800 (PST)
-Received: from ?IPv6:2001:b07:6468:f312:c6d:4079:b74c:e329?
- ([2001:b07:6468:f312:c6d:4079:b74c:e329])
- by smtp.gmail.com with ESMTPSA id d10sm182760wrw.64.2020.01.07.07.23.09
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 07 Jan 2020 07:23:11 -0800 (PST)
-Subject: Re: [PATCH v2 00/14] chardev: Use QEMUChrEvent enum in IOEventHandler
- typedef
-To: =?UTF-8?Q?Marc-Andr=c3=a9_Lureau?= <marcandre.lureau@redhat.com>,
- =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>
-Cc: qemu-devel <qemu-devel@nongnu.org>,
- "Gonglei (Arei)" <arei.gonglei@huawei.com>,
- =?UTF-8?Q?Alex_Benn=c3=a9e?= <alex.bennee@linaro.org>,
- Andrzej Zaborowski <balrogg@gmail.com>,
- Peter Maydell <peter.maydell@linaro.org>, "Michael S. Tsirkin"
- <mst@redhat.com>, Kevin Wolf <kwolf@redhat.com>,
- Max Reitz <mreitz@redhat.com>, "Edgar E. Iglesias"
- <edgar.iglesias@gmail.com>, Alistair Francis <alistair@alistair23.me>,
- Antony Pavlov <antonynpavlov@gmail.com>,
- Igor Mitsyanko <i.mitsyanko@gmail.com>,
- Fabien Chouteau <chouteau@adacore.com>,
- KONRAD Frederic <frederic.konrad@adacore.com>,
- Peter Chubb <peter.chubb@nicta.com.au>, Alberto Garcia <berto@igalia.com>,
- Michael Walle <michael@walle.cc>, Thomas Huth <huth@tuxfamily.org>,
- Joel Stanley <joel@jms.id.au>, Cornelia Huck <cohuck@redhat.com>,
- Halil Pasic <pasic@linux.ibm.com>,
- Christian Borntraeger <borntraeger@de.ibm.com>,
- Laurent Vivier <lvivier@redhat.com>, Amit Shah <amit@kernel.org>,
- Corey Minyard <minyard@acm.org>, Paul Burton <pburton@wavecomp.com>,
- Aleksandar Rikalo <aleksandar.rikalo@rt-rk.com>,
- Aurelien Jarno <aurelien@aurel32.net>,
- Aleksandar Markovic <amarkovic@wavecomp.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Gerd Hoffmann <kraxel@redhat.com>,
- Samuel Thibault <samuel.thibault@ens-lyon.org>,
- "Dr. David Alan Gilbert" <dgilbert@redhat.com>,
- Markus Armbruster <armbru@redhat.com>, Zhang Chen <chen.zhang@intel.com>,
- Li Zhijian <lizhijian@cn.fujitsu.com>, Jason Wang <jasowang@redhat.com>,
- qemu-arm <qemu-arm@nongnu.org>, qemu-block <qemu-block@nongnu.org>,
- qemu-s390x@nongnu.org, qemu-riscv@nongnu.org
-References: <20191218172009.8868-1-philmd@redhat.com>
- <CAMxuvayWibPU6_mEcYEqsWUhSRra33MvwPrbAYr254ZYaYKBgg@mail.gmail.com>
-From: Paolo Bonzini <pbonzini@redhat.com>
-Message-ID: <5b35d7f9-4590-2764-b48f-8d841c86fe3e@redhat.com>
-Date: Tue, 7 Jan 2020 16:23:08 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.1.1
-MIME-Version: 1.0
-In-Reply-To: <CAMxuvayWibPU6_mEcYEqsWUhSRra33MvwPrbAYr254ZYaYKBgg@mail.gmail.com>
-Content-Language: en-US
-X-MC-Unique: ndqKTzjZOVWf2IvVjGUh_g-1
-X-Mimecast-Spam-Score: 0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
- [fuzzy]
-X-Received-From: 207.211.31.81
+ h=x-gm-message-state:date:from:subject:cc:to:in-reply-to:references
+ :message-id:mime-version:content-transfer-encoding;
+ bh=tjnPToxzH35dkt51Mt0Z9aB+X5UsaKioUuHEUhQveRE=;
+ b=CSedqbDzRE9alWEr4N/XvEj/UzWDfGW/3XQ5qlIrWjLSNLepuOVAK0v196QtOm4kCp
+ kDvWlvp+PY3VxGsRGtVj/jLeALhrXZx0tRoeu15XgCceVPWmPXeu8rUY0yvyVkmgQ8lG
+ AqEbuxMKnv/3I5QSDYhm1I98YjPVOMkqMXJVPBAPCRJl4aLQ+jtVrrxfvXW2T2gDYpeS
+ u1+xPLkhcOqmjvOcuFV3meYFxaFb5NZc4K3EAf3Bq1uuLMPdnxfiCDNmeIYY1i56Hfkc
+ gaYhSupb4mcR1SVneIlMVtg24tUtgitaskj4/1Fiu7cAMFIFBDLGPpEb/UiBDsRE8mf+
+ 2dhw==
+X-Gm-Message-State: APjAAAWBdew+8sLHNkhE6FiQK7hqqzeo2tFrYhs8/zHALz6R1s5tIEU1
+ 0FH6Y1yxiS5DCPz6lOy1SQi7Ew==
+X-Google-Smtp-Source: APXvYqw3DfjroWgwKA1TFw9koubRZeWxlLUEKO+nM/sz15YlvlF+zFnv/Ygp0exasQGfIJNZ/pSzEw==
+X-Received: by 2002:a17:902:8f85:: with SMTP id
+ z5mr1023921plo.43.1578421706743; 
+ Tue, 07 Jan 2020 10:28:26 -0800 (PST)
+Received: from localhost ([2620:0:1000:2514:7f69:cd98:a2a2:a03d])
+ by smtp.gmail.com with ESMTPSA id w6sm248338pfq.99.2020.01.07.10.28.26
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 07 Jan 2020 10:28:26 -0800 (PST)
+Date: Tue, 07 Jan 2020 10:28:26 -0800 (PST)
+X-Google-Original-Date: Tue, 07 Jan 2020 10:25:41 PST (-0800)
+From: Palmer Dabbelt <palmerdabbelt@google.com>
+X-Google-Original-From: Palmer Dabbelt <palmer@dabbelt.com>
+Subject: Re: [PATCH v1 04/36] target/riscv: Add the Hypervisor CSRs to CPUState
+CC: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
+ Alistair Francis <Alistair.Francis@wdc.com>, alistair23@gmail.com
+To: Alistair Francis <Alistair.Francis@wdc.com>
+In-Reply-To: <4b2d4e889d460e27d8f674d110fd1561768cd035.1575914822.git.alistair.francis@wdc.com>
+References: <4b2d4e889d460e27d8f674d110fd1561768cd035.1575914822.git.alistair.francis@wdc.com><cover.1575914822.git.alistair.francis@wdc.com>
+Message-ID: <mhng-85e3faed-06a1-495e-9a5e-3d995ced2b73@palmerdabbelt-glaptop>
+Mime-Version: 1.0 (MHng)
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2607:f8b0:4864:20::643
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -117,62 +74,148 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Jan 2020 15:23:19 -0000
+X-List-Received-Date: Tue, 07 Jan 2020 18:28:33 -0000
 
-On 20/12/19 14:32, Marc-Andr=C3=A9 Lureau wrote:
-> On Wed, Dec 18, 2019 at 9:20 PM Philippe Mathieu-Daud=C3=A9
-> <philmd@redhat.com> wrote:
->>
->> Hi,
->>
->> After this chat on #qemu IRC:
->> 13:20 <stsquad> so what is the difference between a IOReadHandler and IO=
-EventHandler?
->> 13:25 <f4bug> stsquad: one is in-band and the other out-of-band?
->> 13:26 <stsquad> f4bug: ahh yes it seems so - connect/disconnect etc...
->> 13:27 <f4bug> see QEMUChrEvent for IOEventHandler
->>
->> I thought it might be a good opportunity to make the IOEventHandler
->> typedef meaning more obvious, by using the QEMUChrEvent enum.
->>
->> To be able to build I had to explicit all enums ignored in the
->> switch(event) statement by these frontends.
->>
->> Then I used a coccinelle spatch to change the various IOEventHandler.
->> I don't think the last patch can be split, but suggestions are welcome!
->>
->> Regards,
->>
->> Phil.
->>
->> v2:
->> - do blindly ignore all events using a 'default' case.
->>
->> Philippe Mathieu-Daud=C3=A9 (14):
->>   hw/ipmi: Remove unnecessary declarations
->>   hw/ipmi: Explicit we ignore some QEMUChrEvent in IOEventHandler
->>   hw/char/terminal3270: Explicit ignored QEMUChrEvent in IOEventHandler
->>   hw/usb/dev-serial: Explicit we ignore few QEMUChrEvent in IOEventHandl=
-er
->>   hw/usb/redirect: Explicit we ignore few QEMUChrEvent in IOEventHandler
->>   ccid-card-passthru: Explicit we ignore QEMUChrEvent in IOEventHandler
->>   vhost-user-crypto: Explicit we ignore some QEMUChrEvent in IOEventHand=
-ler
->>   vhost-user-net: Explicit we ignore few QEMUChrEvent in IOEventHandler
->>   vhost-user-blk: Explicit we ignore few QEMUChrEvent in IOEventHandler
->>   virtio-console: Explicit we ignore some QEMUChrEvent in IOEventHandler
->>   monitor/qmp: Explicit we ignore few QEMUChrEvent in IOEventHandler
->>   monitor/hmp: Explicit we ignore a QEMUChrEvent in IOEventHandler
->>   chardev/char: Explicit we ignore some QEMUChrEvent in IOEventHandler
->>   chardev: Use QEMUChrEvent enum in IOEventHandler typedef
->=20
-> Reviewed-by: Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com>
->=20
-> (I guess Paolo will take the series for next PR?)
+On Mon, 09 Dec 2019 10:10:50 PST (-0800), Alistair Francis wrote:
+> Add the Hypervisor CSRs to CPUState and at the same time (to avoid
+> bisect issues) update the CSR macros for the v0.5 Hyp spec.
+>
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> ---
+>  target/riscv/cpu.h      | 21 +++++++++++++++++++++
+>  target/riscv/cpu_bits.h | 34 +++++++++++++++++++++-------------
+>  target/riscv/gdbstub.c  | 11 ++++++-----
+>  3 files changed, 48 insertions(+), 18 deletions(-)
+>
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 91e1c56fc4..bab938103d 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -143,6 +143,27 @@ struct CPURISCVState {
+>      target_ulong mcause;
+>      target_ulong mtval;  /* since: priv-1.10.0 */
+>
+> +    /* Hypervisor CSRs */
+> +    target_ulong hstatus;
+> +    target_ulong hedeleg;
+> +    target_ulong hideleg;
+> +    target_ulong hcounteren;
+> +    target_ulong htval;
+> +    target_ulong htinst;
+> +    target_ulong hgatp;
+> +
+> +    /* Virtual CSRs */
+> +    target_ulong vsstatus;
+> +    target_ulong vstvec;
+> +    target_ulong vsscratch;
+> +    target_ulong vsepc;
+> +    target_ulong vscause;
+> +    target_ulong vstval;
+> +    target_ulong vsatp;
+> +
+> +    target_ulong mtval2;
+> +    target_ulong mtinst;
+> +
+>      target_ulong scounteren;
+>      target_ulong mcounteren;
+>
+> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+> index e99834856c..25c0fb258d 100644
+> --- a/target/riscv/cpu_bits.h
+> +++ b/target/riscv/cpu_bits.h
+> @@ -177,8 +177,14 @@
+>  #define CSR_HSTATUS         0x600
+>  #define CSR_HEDELEG         0x602
+>  #define CSR_HIDELEG         0x603
+> -#define CSR_HCOUNTERNEN     0x606
+> +#define CSR_HIE             0x604
+> +#define CSR_HCOUNTEREN      0x606
+> +#define CSR_HTVAL           0x643
+> +#define CSR_HIP             0x644
+> +#define CSR_HTINST          0x64A
+>  #define CSR_HGATP           0x680
+> +#define CSR_HTIMEDELTA      0x605
+> +#define CSR_HTIMEDELTAH     0x615
+>
+>  #if defined(TARGET_RISCV32)
+>  #define HGATP_MODE           SATP32_MODE
+> @@ -191,6 +197,20 @@
+>  #define HGATP_PPN            SATP64_PPN
+>  #endif
+>
+> +/* Virtual CSRs */
+> +#define CSR_VSSTATUS        0x200
+> +#define CSR_VSIE            0x204
+> +#define CSR_VSTVEC          0x205
+> +#define CSR_VSSCRATCH       0x240
+> +#define CSR_VSEPC           0x241
+> +#define CSR_VSCAUSE         0x242
+> +#define CSR_VSTVAL          0x243
+> +#define CSR_VSIP            0x244
+> +#define CSR_VSATP           0x280
+> +
+> +#define CSR_MTINST          0x34a
+> +#define CSR_MTVAL2          0x34b
+> +
+>  /* Physical Memory Protection */
+>  #define CSR_PMPCFG0         0x3a0
+>  #define CSR_PMPCFG1         0x3a1
+> @@ -313,17 +333,6 @@
+>  #define CSR_MHPMCOUNTER30H  0xb9e
+>  #define CSR_MHPMCOUNTER31H  0xb9f
+>
+> -/* Legacy Hypervisor Trap Setup (priv v1.9.1) */
+> -#define CSR_HIE             0x204
+> -#define CSR_HTVEC           0x205
+> -
+> -/* Legacy Hypervisor Trap Handling (priv v1.9.1) */
+> -#define CSR_HSCRATCH        0x240
+> -#define CSR_HEPC            0x241
+> -#define CSR_HCAUSE          0x242
+> -#define CSR_HBADADDR        0x243
+> -#define CSR_HIP             0x244
+> -
+>  /* Legacy Machine Protection and Translation (priv v1.9.1) */
+>  #define CSR_MBASE           0x380
+>  #define CSR_MBOUND          0x381
+> @@ -400,7 +409,6 @@
+>
+>  /* hstatus CSR bits */
+>  #define HSTATUS_SPRV         0x00000001
+> -#define HSTATUS_STL          0x00000040
+>  #define HSTATUS_SPV          0x00000080
+>  #define HSTATUS_SP2P         0x00000100
+>  #define HSTATUS_SP2V         0x00000200
+> diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
+> index 1a7947e019..6d606f0d90 100644
+> --- a/target/riscv/gdbstub.c
+> +++ b/target/riscv/gdbstub.c
+> @@ -130,6 +130,8 @@ static int csr_register_map[] = {
+>      CSR_MCAUSE,
+>      CSR_MTVAL,
+>      CSR_MIP,
+> +    CSR_MTINST,
+> +    CSR_MTVAL2,
+>      CSR_PMPCFG0,
+>      CSR_PMPCFG1,
+>      CSR_PMPCFG2,
+> @@ -252,12 +254,11 @@ static int csr_register_map[] = {
+>      CSR_HEDELEG,
+>      CSR_HIDELEG,
+>      CSR_HIE,
+> -    CSR_HTVEC,
+> -    CSR_HSCRATCH,
+> -    CSR_HEPC,
+> -    CSR_HCAUSE,
+> -    CSR_HBADADDR,
+> +    CSR_HCOUNTEREN,
+> +    CSR_HTVAL,
+>      CSR_HIP,
+> +    CSR_HTINST,
+> +    CSR_HGATP,
+>      CSR_MBASE,
+>      CSR_MBOUND,
+>      CSR_MIBASE,
 
-Yes, I'm queuing it.  I'll check Richard's remark before sending out the
-pull request.
-
-Paolo
-
+Reviewed-by: Palmer Dabbelt <palmerdabbelt@google.com>
 
