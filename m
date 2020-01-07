@@ -1,59 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iomVe-0004l8-Qa
-	for mharc-qemu-riscv@gnu.org; Tue, 07 Jan 2020 05:54:50 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:60338)
+	id 1iomWA-0006jE-AQ
+	for mharc-qemu-riscv@gnu.org; Tue, 07 Jan 2020 05:55:22 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:60578)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <pbonzini@redhat.com>) id 1iomVZ-0004QS-D2
- for qemu-riscv@nongnu.org; Tue, 07 Jan 2020 05:54:46 -0500
+ (envelope-from <pbonzini@redhat.com>) id 1iomW5-0006Rs-H7
+ for qemu-riscv@nongnu.org; Tue, 07 Jan 2020 05:55:18 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <pbonzini@redhat.com>) id 1iomVX-0007Dd-RH
- for qemu-riscv@nongnu.org; Tue, 07 Jan 2020 05:54:45 -0500
-Received: from us-smtp-delivery-1.mimecast.com ([205.139.110.120]:48942
- helo=us-smtp-1.mimecast.com)
+ (envelope-from <pbonzini@redhat.com>) id 1iomW4-0007a1-7J
+ for qemu-riscv@nongnu.org; Tue, 07 Jan 2020 05:55:17 -0500
+Received: from us-smtp-1.mimecast.com ([205.139.110.61]:48450
+ helo=us-smtp-delivery-1.mimecast.com)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <pbonzini@redhat.com>) id 1iomVX-0007DE-O6
- for qemu-riscv@nongnu.org; Tue, 07 Jan 2020 05:54:43 -0500
+ (Exim 4.71) (envelope-from <pbonzini@redhat.com>) id 1iomW4-0007ZY-3n
+ for qemu-riscv@nongnu.org; Tue, 07 Jan 2020 05:55:16 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1578394483;
+ s=mimecast20190719; t=1578394515;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=TjodyhE9M9oMNhZED49rT8Ro16OowE6OEG/lcmHdm+4=;
- b=achWDeH1FO5tPr6SRl+uP8IdAOVZ7+uASQ1EDXYaH105dryytstl86YDiZKtHNpl+/hsZU
- /5D6h/XIHfPdZyl6lxlOthkjWI28Zo74+hOtdas3LQMMfElW03Ggjeu2NDX1DXyZkhLg1i
- LDtzOBf4mdkz1uqPUBFwVDxXImQy7CY=
-Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
- [209.85.221.70]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-288-w-9jRm1PPGO4ggCW1PbmHg-1; Tue, 07 Jan 2020 05:54:42 -0500
-Received: by mail-wr1-f70.google.com with SMTP id h30so19707023wrh.5
- for <qemu-riscv@nongnu.org>; Tue, 07 Jan 2020 02:54:42 -0800 (PST)
+ bh=hhXZK6waXiBnmr0odxU7NgxYYfDC6HfydIaPIS8FwCc=;
+ b=J+HfmfNkEqjAd/sxeT08o4NW783maOwxGygoikmq/0uQTlCMo9HZ3cvPy7Yv27yiIUsKp0
+ xhX1RmYmJ+ePhvYe+y3fVaIGfqi6aCZUUU0kOpP61Xli5URlegvZKDoSCyto8nx6VQgPBR
+ GBTMkMc23HY0T5OYjKoCqV842KttWqk=
+Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
+ [209.85.128.71]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-218-upc-xrmbPTWdda5cpwVGrQ-1; Tue, 07 Jan 2020 05:55:14 -0500
+Received: by mail-wm1-f71.google.com with SMTP id 7so1828115wmf.9
+ for <qemu-riscv@nongnu.org>; Tue, 07 Jan 2020 02:55:14 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:to:cc:references:from:message-id:date
  :user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=5457hFrQC5z9kErgtWtmvH8rSFNPXA9e5vzM+pY/1rY=;
- b=OMArXHoquVOfWbPiNwpzkKKMwRRBwlCBgbUPqQoSLViEdiWhbfLg2DM7OpOcbqUpjL
- wANMJzv9CTyEk4XkyIwwMKTFJjaF4wR+8LuTCoSd5KbnOd2C/72P99wemseo6A5JtRHF
- D93KHchRkl/T+HgZfrwpUe6AVJQgpd40HvpU85Rtp4OEg65ZDTEGcScEHaEkZ9IN/S6W
- g2PsHloU2q2FVi+2xf+U5x1fcy0fQj5nGqogSScENB+VxaidinxN3JAao+aGpwOxkdYI
- mfpIZQ91s0PFmPPUpz06fOpP4e0M8m252/Uyap6LLD5mNz1uiCvtpL1xNM0zTZPKXQ37
- zKXg==
-X-Gm-Message-State: APjAAAXct8D4bKP5h146WSvDA4P2bA0g7DH0l8uPQd33Sio3pQpXGH0C
- FnpI5IcWigTaIHx1skQuy3BnRc0waZBCGdGXUUAif9ORkO+bx0+9gLx9hvHiIlfabOOtTAkFSQM
- XeiFH9IvcnY/erw4=
-X-Received: by 2002:a7b:cf39:: with SMTP id m25mr40202761wmg.146.1578394480698; 
- Tue, 07 Jan 2020 02:54:40 -0800 (PST)
-X-Google-Smtp-Source: APXvYqxveQL3hZ2QnDilbrDEMNPP9vZyLZC+g3A3mQqLxulCBFmSQCH9Ui3lRCyB0gmc8tBAU61G8Q==
-X-Received: by 2002:a7b:cf39:: with SMTP id m25mr40202714wmg.146.1578394480338; 
- Tue, 07 Jan 2020 02:54:40 -0800 (PST)
+ bh=Os9CxIhXNJ0oXSGR+KwiDvplTNsja19E/C5m6OPss7M=;
+ b=V1osNizWkj0kOlRSRk9pz+CjH537n9BiDhtdKTd1Wm7jCqDfmLz6r8vOJ3gMEH/ZTP
+ ZM4yr+GuIK4jGQsEWjaoZp/LQSLosPn0D2kRgKoUl0uRnEudYX22TZ+80CebgL3H1FKn
+ IEdQgL96GjzdbfVeqr2LGcswP3Rj5wSen6DqxckQyg3erGdg7/h6CcWbPa1iv+e7Wn42
+ FsnRsK38FmjoF3NXzEitq6GemiTHDfzoHLYi1vO2eZxd6orwL2by25TyhR0RJZrsMdFO
+ XMN3y9yKiyG/UZqvUWHAh83V/pLk02XBBpwvflUxROiluipNJR3pB+9L9UHxe7qT/3Y2
+ 5qdw==
+X-Gm-Message-State: APjAAAUCMUuizkf7Tzr54b+dXDVTux75BKh4g6UpLLs4Pk7u1+kAkBbA
+ ouVt0jpSe84G5rUt1xd2R/nTR6Lj+a3tre5TAdU07B4OE/6+FSsVRYe1XZoib84CdvmRWPkC+uO
+ 36QaLGXjsK2SfUis=
+X-Received: by 2002:adf:eb51:: with SMTP id u17mr108866033wrn.29.1578394513128; 
+ Tue, 07 Jan 2020 02:55:13 -0800 (PST)
+X-Google-Smtp-Source: APXvYqwZn0VYd/V/zNYe59k7LQ+zqsc3ubQbxlc7tCrvQ7YFApgV27+KayJZSkJZ6YzamX7G1QzoAA==
+X-Received: by 2002:adf:eb51:: with SMTP id u17mr108866018wrn.29.1578394512923; 
+ Tue, 07 Jan 2020 02:55:12 -0800 (PST)
 Received: from ?IPv6:2001:b07:6468:f312:c6d:4079:b74c:e329?
  ([2001:b07:6468:f312:c6d:4079:b74c:e329])
- by smtp.gmail.com with ESMTPSA id f1sm76414366wru.6.2020.01.07.02.54.38
+ by smtp.gmail.com with ESMTPSA id t1sm26610479wma.43.2020.01.07.02.55.09
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 07 Jan 2020 02:54:39 -0800 (PST)
-Subject: Re: [PATCH v2 2/4] tcg: Search includes in the parent source directory
+ Tue, 07 Jan 2020 02:55:12 -0800 (PST)
+Subject: Re: [PATCH v2 0/4] tcg: Include tcg files using tcg/ dirname, reduce
+ cpp search path list
 To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>,
  qemu-devel@nongnu.org
 Cc: qemu-ppc@nongnu.org, Max Filippov <jcmvbkbc@gmail.com>,
@@ -79,22 +80,21 @@ Cc: qemu-ppc@nongnu.org, Max Filippov <jcmvbkbc@gmail.com>,
  "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
  Palmer Dabbelt <palmer@dabbelt.com>
 References: <20200101112303.20724-1-philmd@redhat.com>
- <20200101112303.20724-3-philmd@redhat.com>
 From: Paolo Bonzini <pbonzini@redhat.com>
-Message-ID: <f298aa7f-d9bf-36ea-ffdf-b07e02fe6575@redhat.com>
-Date: Tue, 7 Jan 2020 11:54:37 +0100
+Message-ID: <ddded8a0-0df1-7408-b8c3-6a8ae1a5f438@redhat.com>
+Date: Tue, 7 Jan 2020 11:55:09 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.1.1
 MIME-Version: 1.0
-In-Reply-To: <20200101112303.20724-3-philmd@redhat.com>
+In-Reply-To: <20200101112303.20724-1-philmd@redhat.com>
 Content-Language: en-US
-X-MC-Unique: w-9jRm1PPGO4ggCW1PbmHg-1
+X-MC-Unique: upc-xrmbPTWdda5cpwVGrQ-1
 X-Mimecast-Spam-Score: 0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
  [fuzzy]
-X-Received-From: 205.139.110.120
+X-Received-From: 205.139.110.61
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -106,203 +106,23 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Jan 2020 10:54:49 -0000
+X-List-Received-Date: Tue, 07 Jan 2020 10:55:21 -0000
 
-On 01/01/20 12:23, Philippe Mathieu-Daud=C3=A9 wrote:
-> All the *.inc.c files included by tcg/$TARGET/tcg-target.inc.c
-> are in tcg/, their parent directory. To simplify the preprocessor
-> search path, include the relative parent path: '..'.
+On 01/01/20 12:22, Philippe Mathieu-Daud=C3=A9 wrote:
+> Noticed we could clean this while reviewing Richard patch last night:
+> https://www.mail-archive.com/qemu-devel@nongnu.org/msg667606.html
 >=20
-> Patch created mechanically by running:
+> Since v1:
+> - moved headers to include/tcg/ (Paolo)
+> - include in .inc.c relative to parent (Stefan)
 >=20
->   $ for x in tcg-pool.inc.c tcg-ldst.inc.c; do \
->     sed -i "s,#include \"$x\",#include \"../$x\"," \
->       $(git grep -l "#include \"$x\""); \
->     done
->=20
-> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
+> v1: https://lists.gnu.org/archive/html/qemu-devel/2019-12/msg05356.html
 
-Another possibility is to move the .inc.c files to include/tcg (probably
-renaming them to .inc.h in the meanwhile) but this is good too.
+
+Reviewed-by: Paolo Bonzini <pbonzini@redhat.com>
+
+but I'll let Richad pick it up.
 
 Paolo
-
-> ---
->  tcg/aarch64/tcg-target.inc.c | 4 ++--
->  tcg/arm/tcg-target.inc.c     | 4 ++--
->  tcg/i386/tcg-target.inc.c    | 4 ++--
->  tcg/mips/tcg-target.inc.c    | 2 +-
->  tcg/ppc/tcg-target.inc.c     | 4 ++--
->  tcg/riscv/tcg-target.inc.c   | 4 ++--
->  tcg/s390/tcg-target.inc.c    | 4 ++--
->  tcg/sparc/tcg-target.inc.c   | 2 +-
->  8 files changed, 14 insertions(+), 14 deletions(-)
->=20
-> diff --git a/tcg/aarch64/tcg-target.inc.c b/tcg/aarch64/tcg-target.inc.c
-> index 3f921015d3..843fd0ca69 100644
-> --- a/tcg/aarch64/tcg-target.inc.c
-> +++ b/tcg/aarch64/tcg-target.inc.c
-> @@ -10,7 +10,7 @@
->   * See the COPYING file in the top-level directory for details.
->   */
-> =20
-> -#include "tcg-pool.inc.c"
-> +#include "../tcg-pool.inc.c"
->  #include "qemu/bitops.h"
-> =20
->  /* We're going to re-use TCGType in setting of the SF bit, which control=
-s
-> @@ -1541,7 +1541,7 @@ static void tcg_out_cltz(TCGContext *s, TCGType ext=
-, TCGReg d,
->  }
-> =20
->  #ifdef CONFIG_SOFTMMU
-> -#include "tcg-ldst.inc.c"
-> +#include "../tcg-ldst.inc.c"
-> =20
->  /* helper signature: helper_ret_ld_mmu(CPUState *env, target_ulong addr,
->   *                                     TCGMemOpIdx oi, uintptr_t ra)
-> diff --git a/tcg/arm/tcg-target.inc.c b/tcg/arm/tcg-target.inc.c
-> index 94d80d79d1..fffb6611e2 100644
-> --- a/tcg/arm/tcg-target.inc.c
-> +++ b/tcg/arm/tcg-target.inc.c
-> @@ -23,7 +23,7 @@
->   */
-> =20
->  #include "elf.h"
-> -#include "tcg-pool.inc.c"
-> +#include "../tcg-pool.inc.c"
-> =20
->  int arm_arch =3D __ARM_ARCH;
-> =20
-> @@ -1131,7 +1131,7 @@ static TCGCond tcg_out_cmp2(TCGContext *s, const TC=
-GArg *args,
->  }
-> =20
->  #ifdef CONFIG_SOFTMMU
-> -#include "tcg-ldst.inc.c"
-> +#include "../tcg-ldst.inc.c"
-> =20
->  /* helper signature: helper_ret_ld_mmu(CPUState *env, target_ulong addr,
->   *                                     int mmu_idx, uintptr_t ra)
-> diff --git a/tcg/i386/tcg-target.inc.c b/tcg/i386/tcg-target.inc.c
-> index 9d8ed974e0..cdedcb2b25 100644
-> --- a/tcg/i386/tcg-target.inc.c
-> +++ b/tcg/i386/tcg-target.inc.c
-> @@ -22,7 +22,7 @@
->   * THE SOFTWARE.
->   */
-> =20
-> -#include "tcg-pool.inc.c"
-> +#include "../tcg-pool.inc.c"
-> =20
->  #ifdef CONFIG_DEBUG_TCG
->  static const char * const tcg_target_reg_names[TCG_TARGET_NB_REGS] =3D {
-> @@ -1647,7 +1647,7 @@ static void tcg_out_nopn(TCGContext *s, int n)
->  }
-> =20
->  #if defined(CONFIG_SOFTMMU)
-> -#include "tcg-ldst.inc.c"
-> +#include "../tcg-ldst.inc.c"
-> =20
->  /* helper signature: helper_ret_ld_mmu(CPUState *env, target_ulong addr,
->   *                                     int mmu_idx, uintptr_t ra)
-> diff --git a/tcg/mips/tcg-target.inc.c b/tcg/mips/tcg-target.inc.c
-> index 5442167045..1da663ce84 100644
-> --- a/tcg/mips/tcg-target.inc.c
-> +++ b/tcg/mips/tcg-target.inc.c
-> @@ -1107,7 +1107,7 @@ static void tcg_out_call(TCGContext *s, tcg_insn_un=
-it *arg)
->  }
-> =20
->  #if defined(CONFIG_SOFTMMU)
-> -#include "tcg-ldst.inc.c"
-> +#include "../tcg-ldst.inc.c"
-> =20
->  static void * const qemu_ld_helpers[16] =3D {
->      [MO_UB]   =3D helper_ret_ldub_mmu,
-> diff --git a/tcg/ppc/tcg-target.inc.c b/tcg/ppc/tcg-target.inc.c
-> index d308d69aba..ee1f9227c1 100644
-> --- a/tcg/ppc/tcg-target.inc.c
-> +++ b/tcg/ppc/tcg-target.inc.c
-> @@ -23,7 +23,7 @@
->   */
-> =20
->  #include "elf.h"
-> -#include "tcg-pool.inc.c"
-> +#include "../tcg-pool.inc.c"
-> =20
->  #if defined _CALL_DARWIN || defined __APPLE__
->  #define TCG_TARGET_CALL_DARWIN
-> @@ -1845,7 +1845,7 @@ static const uint32_t qemu_exts_opc[4] =3D {
->  };
-> =20
->  #if defined (CONFIG_SOFTMMU)
-> -#include "tcg-ldst.inc.c"
-> +#include "../tcg-ldst.inc.c"
-> =20
->  /* helper signature: helper_ld_mmu(CPUState *env, target_ulong addr,
->   *                                 int mmu_idx, uintptr_t ra)
-> diff --git a/tcg/riscv/tcg-target.inc.c b/tcg/riscv/tcg-target.inc.c
-> index 7018509693..2bc0ba71f2 100644
-> --- a/tcg/riscv/tcg-target.inc.c
-> +++ b/tcg/riscv/tcg-target.inc.c
-> @@ -27,7 +27,7 @@
->   * THE SOFTWARE.
->   */
-> =20
-> -#include "tcg-pool.inc.c"
-> +#include "../tcg-pool.inc.c"
-> =20
->  #ifdef CONFIG_DEBUG_TCG
->  static const char * const tcg_target_reg_names[TCG_TARGET_NB_REGS] =3D {
-> @@ -921,7 +921,7 @@ static void tcg_out_mb(TCGContext *s, TCGArg a0)
->   */
-> =20
->  #if defined(CONFIG_SOFTMMU)
-> -#include "tcg-ldst.inc.c"
-> +#include "../tcg-ldst.inc.c"
-> =20
->  /* helper signature: helper_ret_ld_mmu(CPUState *env, target_ulong addr,
->   *                                     TCGMemOpIdx oi, uintptr_t ra)
-> diff --git a/tcg/s390/tcg-target.inc.c b/tcg/s390/tcg-target.inc.c
-> index 8aaa4cebe8..b07e9ff7d6 100644
-> --- a/tcg/s390/tcg-target.inc.c
-> +++ b/tcg/s390/tcg-target.inc.c
-> @@ -29,7 +29,7 @@
->  #error "unsupported code generation mode"
->  #endif
-> =20
-> -#include "tcg-pool.inc.c"
-> +#include "../tcg-pool.inc.c"
->  #include "elf.h"
-> =20
->  /* ??? The translation blocks produced by TCG are generally small enough=
- to
-> @@ -1536,7 +1536,7 @@ static void tcg_out_qemu_st_direct(TCGContext *s, M=
-emOp opc, TCGReg data,
->  }
-> =20
->  #if defined(CONFIG_SOFTMMU)
-> -#include "tcg-ldst.inc.c"
-> +#include "../tcg-ldst.inc.c"
-> =20
->  /* We're expecting to use a 20-bit negative offset on the tlb memory ops=
-.  */
->  QEMU_BUILD_BUG_ON(TLB_MASK_TABLE_OFS(0) > 0);
-> diff --git a/tcg/sparc/tcg-target.inc.c b/tcg/sparc/tcg-target.inc.c
-> index d7986cda5c..65fddb310d 100644
-> --- a/tcg/sparc/tcg-target.inc.c
-> +++ b/tcg/sparc/tcg-target.inc.c
-> @@ -22,7 +22,7 @@
->   * THE SOFTWARE.
->   */
-> =20
-> -#include "tcg-pool.inc.c"
-> +#include "../tcg-pool.inc.c"
-> =20
->  #ifdef CONFIG_DEBUG_TCG
->  static const char * const tcg_target_reg_names[TCG_TARGET_NB_REGS] =3D {
->=20
 
 
