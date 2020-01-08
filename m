@@ -1,68 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ip0kj-0006On-V4
-	for mharc-qemu-riscv@gnu.org; Tue, 07 Jan 2020 21:07:21 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42671)
+	id 1ip0kk-0006Pb-CG
+	for mharc-qemu-riscv@gnu.org; Tue, 07 Jan 2020 21:07:22 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:42666)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <palmerdabbelt@google.com>) id 1ip0kg-0006JH-Cx
+ (envelope-from <palmerdabbelt@google.com>) id 1ip0kg-0006Im-7R
  for qemu-riscv@nongnu.org; Tue, 07 Jan 2020 21:07:19 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmerdabbelt@google.com>) id 1ip0kf-0000CG-Fj
- for qemu-riscv@nongnu.org; Tue, 07 Jan 2020 21:07:18 -0500
-Received: from mail-pf1-x442.google.com ([2607:f8b0:4864:20::442]:35325)
+ (envelope-from <palmerdabbelt@google.com>) id 1ip0ke-0000Bb-OD
+ for qemu-riscv@nongnu.org; Tue, 07 Jan 2020 21:07:17 -0500
+Received: from mail-pj1-x1043.google.com ([2607:f8b0:4864:20::1043]:39317)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <palmerdabbelt@google.com>)
- id 1ip0kf-0000BW-9q
- for qemu-riscv@nongnu.org; Tue, 07 Jan 2020 21:07:17 -0500
-Received: by mail-pf1-x442.google.com with SMTP id i23so808419pfo.2
- for <qemu-riscv@nongnu.org>; Tue, 07 Jan 2020 18:07:17 -0800 (PST)
+ id 1ip0ke-0000Aq-GK
+ for qemu-riscv@nongnu.org; Tue, 07 Jan 2020 21:07:16 -0500
+Received: by mail-pj1-x1043.google.com with SMTP id t101so382967pjb.4
+ for <qemu-riscv@nongnu.org>; Tue, 07 Jan 2020 18:07:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
  h=date:from:subject:cc:to:in-reply-to:references:message-id
  :mime-version:content-transfer-encoding;
- bh=ryMKAswZa6GtlJHI1XGaeDcICda12Y4PVe7eW7k6yRg=;
- b=FGPYGdB2mfSDyk1aZQq8tDKJv+VYmMSVEywvyr2qrBeqA4/GcIops6KdWKo66lCWPA
- LkFsesj3YA1GSTX6Kf3pqQ6dA2VBMww7kCZsfAe8ASAcvVwDAV1dHbHGnABPsm83TW9D
- AYn3eg3RdKxPONZaWpuPGHSSDnZy4OAKd2C6Umj/Su1wHigVN7YnijYd876ncerz9/lp
- HdLzfg7F3Fx61lf+QW/U+7cDY3rRf25ivYNCwkM7wrIZeIXckZ+DwFJ+BunRN7yghamV
- Rr76HkXBs63KiuLoEB0vdEs0JQQqJHvJpR4v9BBzxaKHgXsyY3+e+FKZEIoAl/w76Tko
- hDLg==
+ bh=MiNODDWVO4yc/L/Pc1YPuc7B7iALbiFd05MQOgI5d0A=;
+ b=XvRPdLkrFpVCutBxKTH1nD+xr4PBVlFFIUJUk7HF67b79U2FeI0GQ7K3AqcJd92RMY
+ YiSSFzebkXGLPBLNQV31euOYU6X/QUBhAzxkE0B9oTu9tjAA1LAkHr1//8rBIRMK2uGQ
+ 1WgtwyhUKGFmY2/gjU/YQTYaW5sUT+U1O/ZwpgSefzSYt+wDQpeN2AGixvOmGOromHxs
+ JRPioGhtMotfFKW4HlNT4l8oGtlmGTTjwPI2tfQUZX47QD2JcOauHYh/Mcx90imgvI7u
+ Ll7d9lpPSGACMayCRPyKYg5ZUMCSS2NF3X+ew0X2ghniWLzSsKdGDIfLBeyBO+4NWFY6
+ fFHw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:subject:cc:to:in-reply-to:references
  :message-id:mime-version:content-transfer-encoding;
- bh=ryMKAswZa6GtlJHI1XGaeDcICda12Y4PVe7eW7k6yRg=;
- b=maL8EBtpcgrTGBPSgtEOubGTRqU/iS4Z0UjvSlh10rni1k7RDKjBsgPvFfeKoQ1ZEm
- fiSVtsP+BWEkIU/+GqFs6aEVK6bfIXLuzKtS25dl3nOgBrey44kctEqmeD/D9+KGZynE
- euJUmMPsqEBAw+YjlDsbfJwzRn4BBSZaMcSzN6n86ya539RS+sRJCTCSC2+LpiHOeXn3
- Uc/F5XnbZzYa/i9Pi/eVttQDN5pHxCo8ascRpCDnvN94HBJ+eKSSo/0UGKsJkVr9D9Fc
- v35LtUWFnq1NcR1moOtwJEDbpieUMQ2o/T6uO4Lpo+C6H2T1Sfi3KV88Qz6RcuKexI7+
- lT+Q==
-X-Gm-Message-State: APjAAAUyiH87RGOIxxUU6eJaRft5rtDl/T/yOvcI2cef+MjMnmjaYCXj
- xEqw8vcXxc4q/SSfNWuUzafsvg==
-X-Google-Smtp-Source: APXvYqxsT8Mi7I1IY6DJ1QH0UEOB+WNQtv8RiIcQpTwarIJvPp7f6Pj2cAlfjK8YphMwuXzlpzFkjg==
-X-Received: by 2002:a63:941:: with SMTP id 62mr2850483pgj.203.1578449235963;
- Tue, 07 Jan 2020 18:07:15 -0800 (PST)
+ bh=MiNODDWVO4yc/L/Pc1YPuc7B7iALbiFd05MQOgI5d0A=;
+ b=WTaOB074om4RNyEV/W1xZEE7ls6bSJcOl5OR+mhfJDqUJzpdA992TY7k5WLoEHvzyi
+ 59VSiFF3Tt3kxAOz8tqFPnoQySNb3kfOrecuhfLHCC1re7F/MO92ujCHkP9VMSCZY8UK
+ DVvgrjQAOyIgWRzdFPV0vZJOnVoZ3dRZ8QGrvRKse/SHqKLWCnI+KKRI7PRu2nVigzd/
+ LZ4/DhTZKywHkctbfwYssNjxWrWPnDBVnT3HeGCmUC1dUK5+ZA4ehc6Fsv50ZQynmBda
+ PJmq/rNzKYkgSkx8e42WeM9QJbP2p9EPk4jVnriSeNOdNHXpq92YT1qeuQjGjKVuwaAb
+ LdNg==
+X-Gm-Message-State: APjAAAXHKhnQnJJ0ZTJ/ST8fBVxi6W8zO+unT+0AQuaf/UvjoSKY5nZ1
+ Fid3UcI/Ok4kL/y9O1sMXz58Ww==
+X-Google-Smtp-Source: APXvYqyM7oSGL8ibqDOvDbRVp4lYilXW1WU0cSW7LnuEm0Vo7oBjhtBR5OLC7TDoCzaPN3r6WKM7fQ==
+X-Received: by 2002:a17:90a:8d84:: with SMTP id
+ d4mr1798695pjo.114.1578449234787; 
+ Tue, 07 Jan 2020 18:07:14 -0800 (PST)
 Received: from localhost ([2620:0:1000:2514:7f69:cd98:a2a2:a03d])
- by smtp.gmail.com with ESMTPSA id g18sm896820pfi.80.2020.01.07.18.07.15
+ by smtp.gmail.com with ESMTPSA id s7sm868505pjk.22.2020.01.07.18.07.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 Jan 2020 18:07:15 -0800 (PST)
-Date: Tue, 07 Jan 2020 18:07:15 -0800 (PST)
-X-Google-Original-Date: Tue, 07 Jan 2020 18:07:06 PST (-0800)
+ Tue, 07 Jan 2020 18:07:14 -0800 (PST)
+Date: Tue, 07 Jan 2020 18:07:14 -0800 (PST)
+X-Google-Original-Date: Tue, 07 Jan 2020 17:36:58 PST (-0800)
 From: Palmer Dabbelt <palmerdabbelt@google.com>
 X-Google-Original-From: Palmer Dabbelt <palmer@dabbelt.com>
-Subject: Re: [PATCH v1 17/36] target/riscv: Set VS bits in mideleg for Hyp
- extension
+Subject: Re: [PATCH v1 16/36] target/riscv: Add virtual register swapping
+ function
 CC: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
  Alistair Francis <Alistair.Francis@wdc.com>, alistair23@gmail.com
 To: Alistair Francis <Alistair.Francis@wdc.com>
-In-Reply-To: <b1313a76928acfe101247e33248f000e1f82f558.1575914822.git.alistair.francis@wdc.com>
-References: <b1313a76928acfe101247e33248f000e1f82f558.1575914822.git.alistair.francis@wdc.com><cover.1575914822.git.alistair.francis@wdc.com>
-Message-ID: <mhng-1d91cb12-dd7c-4160-9e39-a1d5a9f5023a@palmerdabbelt-glaptop>
+In-Reply-To: <e89e42f47b337c82ff7fe0ef50986e2df0d7214a.1575914822.git.alistair.francis@wdc.com>
+References: <e89e42f47b337c82ff7fe0ef50986e2df0d7214a.1575914822.git.alistair.francis@wdc.com><cover.1575914822.git.alistair.francis@wdc.com>
+Message-ID: <mhng-7d5b34f4-067d-4a7b-a114-b9ac12db9809@palmerdabbelt-glaptop>
 Mime-Version: 1.0 (MHng)
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::442
+X-Received-From: 2607:f8b0:4864:20::1043
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -76,28 +77,142 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Wed, 08 Jan 2020 02:07:20 -0000
 
-On Mon, 09 Dec 2019 10:11:24 PST (-0800), Alistair Francis wrote:
+On Mon, 09 Dec 2019 10:11:22 PST (-0800), Alistair Francis wrote:
 > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 > ---
->  target/riscv/csr.c | 3 +++
->  1 file changed, 3 insertions(+)
+>  target/riscv/cpu.h        | 10 +++++++
+>  target/riscv/cpu_bits.h   |  7 +++++
+>  target/riscv/cpu_helper.c | 63 +++++++++++++++++++++++++++++++++++++++
+>  3 files changed, 80 insertions(+)
 >
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index a4b598d49a..fc38c45a7e 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -449,6 +449,9 @@ static int read_mideleg(CPURISCVState *env, int csrno, target_ulong *val)
->  static int write_mideleg(CPURISCVState *env, int csrno, target_ulong val)
->  {
->      env->mideleg = (env->mideleg & ~delegable_ints) | (val & delegable_ints);
-> +    if (riscv_has_ext(env, RVH)) {
-> +        env->mideleg |= VS_MODE_INTERRUPTS;
-> +    }
->      return 0;
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 9dc8303c62..eb089fbdb6 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -125,6 +125,7 @@ struct CPURISCVState {
+>      target_ulong *mstatus;
+>
+>      target_ulong mip;
+> +
+>      uint32_t miclaim;
+>
+>      target_ulong mie;
+> @@ -173,6 +174,14 @@ struct CPURISCVState {
+>      target_ulong mtval2;
+>      target_ulong mtinst;
+>
+> +    /* HS Backup CSRs */
+> +    target_ulong stvec_hs;
+> +    target_ulong sscratch_hs;
+> +    target_ulong sepc_hs;
+> +    target_ulong scause_hs;
+> +    target_ulong stval_hs;
+> +    target_ulong satp_hs;
+> +
+>      target_ulong scounteren;
+>      target_ulong mcounteren;
+>
+> @@ -303,6 +312,7 @@ void riscv_cpu_list(void);
+>  #define cpu_mmu_index riscv_cpu_mmu_index
+>
+>  #ifndef CONFIG_USER_ONLY
+> +void riscv_cpu_swap_hypervisor_regs(CPURISCVState *env);
+>  int riscv_cpu_claim_interrupts(RISCVCPU *cpu, uint32_t interrupts);
+>  uint32_t riscv_cpu_update_mip(RISCVCPU *cpu, uint32_t mask, uint32_t value);
+>  #define BOOL_TO_MASK(x) (-!!(x)) /* helper for riscv_cpu_update_mip value */
+> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+> index ad6479796c..a24654d137 100644
+> --- a/target/riscv/cpu_bits.h
+> +++ b/target/riscv/cpu_bits.h
+> @@ -553,4 +553,11 @@
+>  #define SIP_STIP                           MIP_STIP
+>  #define SIP_SEIP                           MIP_SEIP
+>
+> +/* MIE masks */
+> +#define MIE_SEIE                           (1 << IRQ_S_EXT)
+> +#define MIE_UEIE                           (1 << IRQ_U_EXT)
+> +#define MIE_STIE                           (1 << IRQ_S_TIMER)
+> +#define MIE_UTIE                           (1 << IRQ_U_TIMER)
+> +#define MIE_SSIE                           (1 << IRQ_S_SOFT)
+> +#define MIE_USIE                           (1 << IRQ_U_SOFT)
+>  #endif
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index 9684da7f7d..63439c9370 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -82,6 +82,69 @@ bool riscv_cpu_fp_enabled(CPURISCVState *env)
+>      return false;
 >  }
+>
+> +void riscv_cpu_swap_hypervisor_regs(CPURISCVState *env)
+> +{
+> +    target_ulong mstatus_mask = MSTATUS_MXR | MSTATUS_SUM | MSTATUS_FS |
+> +                                MSTATUS_SPP | MSTATUS_SPIE | MSTATUS_SIE;
+> +    bool current_virt = riscv_cpu_virt_enabled(env);
+> +
+> +    g_assert(riscv_has_ext(env, RVH));
+> +
+> +#if defined(TARGET_RISCV64)
+> +    mstatus_mask |= MSTATUS64_UXL;
+> +#endif
+> +
+> +    if (current_virt) {
+> +        /* Current V=1 and we are about to change to V=0 */
+> +        env->mstatus = &env->mstatus_novirt;
+> +        *env->mstatus &= mstatus_mask;
+> +        *env->mstatus |= env->vsstatus & ~mstatus_mask;
+> +        /* Ensure that vsstatus only holds the correct bits */
+> +        env->vsstatus &= mstatus_mask;
+> +
+> +        env->vstvec = env->stvec;
+> +        env->stvec = env->stvec_hs;
+> +
+> +        env->vsscratch = env->sscratch;
+> +        env->sscratch = env->sscratch_hs;
+> +
+> +        env->vsepc = env->sepc;
+> +        env->sepc = env->sepc_hs;
+> +
+> +        env->vscause = env->scause;
+> +        env->scause = env->scause_hs;
+> +
+> +        env->vstval = env->sbadaddr;
+> +        env->sbadaddr = env->stval_hs;
+> +
+> +        env->vsatp = env->satp;
+> +        env->satp = env->satp_hs;
+> +    } else {
+> +        /* Current V=0 and we are about to change to V=1 */
+> +        env->mstatus = &env->vsstatus;
+> +        *env->mstatus &= mstatus_mask;
+> +        *env->mstatus |= env->mstatus_novirt & ~mstatus_mask;
+> +
+> +        env->stvec_hs = env->stvec;
+> +        env->stvec = env->vstvec;
+> +
+> +        env->sscratch_hs = env->sscratch;
+> +        env->sscratch = env->vsscratch;
+> +
+> +        env->sepc_hs = env->sepc;
+> +        env->sepc = env->vsepc;
+> +
+> +        env->scause_hs = env->scause;
+> +        env->scause = env->vscause;
+> +
+> +        env->stval_hs = env->sbadaddr;
+> +        env->sbadaddr = env->vstval;
+> +
+> +        env->satp_hs = env->satp;
+> +        env->satp = env->vsatp;
+> +    }
+> +}
+> +
+>  bool riscv_cpu_virt_enabled(CPURISCVState *env)
+>  {
+>      if (!riscv_has_ext(env, RVH)) {
 
-Do you have any idea why?  The spec is explicit that this is the case, but I'm
-surprised.
+Modulo that question about the concept of pointer swapping on the previous
+patch:
 
 Reviewed-by: Palmer Dabbelt <palmerdabbelt@google.com>
 
