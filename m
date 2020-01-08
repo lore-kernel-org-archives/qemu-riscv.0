@@ -1,69 +1,75 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ip0kk-0006Pb-CG
-	for mharc-qemu-riscv@gnu.org; Tue, 07 Jan 2020 21:07:22 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42666)
+	id 1ip0lo-00086H-R6
+	for mharc-qemu-riscv@gnu.org; Tue, 07 Jan 2020 21:08:28 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43309)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <palmerdabbelt@google.com>) id 1ip0kg-0006Im-7R
- for qemu-riscv@nongnu.org; Tue, 07 Jan 2020 21:07:19 -0500
+ (envelope-from <richard.henderson@linaro.org>) id 1ip0lm-00082O-5s
+ for qemu-riscv@nongnu.org; Tue, 07 Jan 2020 21:08:27 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmerdabbelt@google.com>) id 1ip0ke-0000Bb-OD
- for qemu-riscv@nongnu.org; Tue, 07 Jan 2020 21:07:17 -0500
-Received: from mail-pj1-x1043.google.com ([2607:f8b0:4864:20::1043]:39317)
+ (envelope-from <richard.henderson@linaro.org>) id 1ip0lk-0000v3-TC
+ for qemu-riscv@nongnu.org; Tue, 07 Jan 2020 21:08:26 -0500
+Received: from mail-pj1-x1042.google.com ([2607:f8b0:4864:20::1042]:40741)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmerdabbelt@google.com>)
- id 1ip0ke-0000Aq-GK
- for qemu-riscv@nongnu.org; Tue, 07 Jan 2020 21:07:16 -0500
-Received: by mail-pj1-x1043.google.com with SMTP id t101so382967pjb.4
- for <qemu-riscv@nongnu.org>; Tue, 07 Jan 2020 18:07:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
- h=date:from:subject:cc:to:in-reply-to:references:message-id
- :mime-version:content-transfer-encoding;
- bh=MiNODDWVO4yc/L/Pc1YPuc7B7iALbiFd05MQOgI5d0A=;
- b=XvRPdLkrFpVCutBxKTH1nD+xr4PBVlFFIUJUk7HF67b79U2FeI0GQ7K3AqcJd92RMY
- YiSSFzebkXGLPBLNQV31euOYU6X/QUBhAzxkE0B9oTu9tjAA1LAkHr1//8rBIRMK2uGQ
- 1WgtwyhUKGFmY2/gjU/YQTYaW5sUT+U1O/ZwpgSefzSYt+wDQpeN2AGixvOmGOromHxs
- JRPioGhtMotfFKW4HlNT4l8oGtlmGTTjwPI2tfQUZX47QD2JcOauHYh/Mcx90imgvI7u
- Ll7d9lpPSGACMayCRPyKYg5ZUMCSS2NF3X+ew0X2ghniWLzSsKdGDIfLBeyBO+4NWFY6
- fFHw==
+ (Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
+ id 1ip0lk-0000uE-OE
+ for qemu-riscv@nongnu.org; Tue, 07 Jan 2020 21:08:24 -0500
+Received: by mail-pj1-x1042.google.com with SMTP id bg7so381546pjb.5
+ for <qemu-riscv@nongnu.org>; Tue, 07 Jan 2020 18:08:24 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=3fuuhX0eJM0s+kyXhD/xA6Ut4i7rclacySX8jl6CuB4=;
+ b=ph9Ysv0twycmmUpyXjw4eNsE0I4aJon4eXE9gFHW5mSF7CCOwVAhQq4iqOMgaabcT5
+ v13Q2Hfx9n1AisSD9oUuMzhKRIUatHvdn5c1/4cAkngv8nv8f34wrVxwfUXvnhctre8Q
+ avSWqO+QxcFcNzJI5tiYeNZ4+16gPMeIIKNJFL7CSjXTgQT5nZrjlOpslscDceJSc/a5
+ Kludwddhs2kXp3Q4noTs0+4C3ibDqP4h/v7xucHXr4RQiceuAyYZIOEq62Am86w3k0dn
+ ngY+kCzgMNicPF8ZDDb/yNJKHmo/D5InwTH/a58nhbuo4p7OimbAKipEOcdnjxGcBZ3h
+ F67w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:subject:cc:to:in-reply-to:references
- :message-id:mime-version:content-transfer-encoding;
- bh=MiNODDWVO4yc/L/Pc1YPuc7B7iALbiFd05MQOgI5d0A=;
- b=WTaOB074om4RNyEV/W1xZEE7ls6bSJcOl5OR+mhfJDqUJzpdA992TY7k5WLoEHvzyi
- 59VSiFF3Tt3kxAOz8tqFPnoQySNb3kfOrecuhfLHCC1re7F/MO92ujCHkP9VMSCZY8UK
- DVvgrjQAOyIgWRzdFPV0vZJOnVoZ3dRZ8QGrvRKse/SHqKLWCnI+KKRI7PRu2nVigzd/
- LZ4/DhTZKywHkctbfwYssNjxWrWPnDBVnT3HeGCmUC1dUK5+ZA4ehc6Fsv50ZQynmBda
- PJmq/rNzKYkgSkx8e42WeM9QJbP2p9EPk4jVnriSeNOdNHXpq92YT1qeuQjGjKVuwaAb
- LdNg==
-X-Gm-Message-State: APjAAAXHKhnQnJJ0ZTJ/ST8fBVxi6W8zO+unT+0AQuaf/UvjoSKY5nZ1
- Fid3UcI/Ok4kL/y9O1sMXz58Ww==
-X-Google-Smtp-Source: APXvYqyM7oSGL8ibqDOvDbRVp4lYilXW1WU0cSW7LnuEm0Vo7oBjhtBR5OLC7TDoCzaPN3r6WKM7fQ==
-X-Received: by 2002:a17:90a:8d84:: with SMTP id
- d4mr1798695pjo.114.1578449234787; 
- Tue, 07 Jan 2020 18:07:14 -0800 (PST)
-Received: from localhost ([2620:0:1000:2514:7f69:cd98:a2a2:a03d])
- by smtp.gmail.com with ESMTPSA id s7sm868505pjk.22.2020.01.07.18.07.14
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 Jan 2020 18:07:14 -0800 (PST)
-Date: Tue, 07 Jan 2020 18:07:14 -0800 (PST)
-X-Google-Original-Date: Tue, 07 Jan 2020 17:36:58 PST (-0800)
-From: Palmer Dabbelt <palmerdabbelt@google.com>
-X-Google-Original-From: Palmer Dabbelt <palmer@dabbelt.com>
-Subject: Re: [PATCH v1 16/36] target/riscv: Add virtual register swapping
- function
-CC: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- Alistair Francis <Alistair.Francis@wdc.com>, alistair23@gmail.com
-To: Alistair Francis <Alistair.Francis@wdc.com>
-In-Reply-To: <e89e42f47b337c82ff7fe0ef50986e2df0d7214a.1575914822.git.alistair.francis@wdc.com>
-References: <e89e42f47b337c82ff7fe0ef50986e2df0d7214a.1575914822.git.alistair.francis@wdc.com><cover.1575914822.git.alistair.francis@wdc.com>
-Message-ID: <mhng-7d5b34f4-067d-4a7b-a114-b9ac12db9809@palmerdabbelt-glaptop>
-Mime-Version: 1.0 (MHng)
-Content-Type: text/plain; charset=utf-8; format=flowed
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=3fuuhX0eJM0s+kyXhD/xA6Ut4i7rclacySX8jl6CuB4=;
+ b=eCMLEKZV82h4u2OhRP/RA7oUMZe4K/mmaxZevuqf/7Cextx/AuFH7E9qPYb45BFb5/
+ Uy6kc38Tt3wK5/FJrGrQsh4PWe2KX2DxaiaOBm3IT3JyWhLYb44uV1I9j1+bWsQq7ed4
+ xw0V2CJXDo8XZOL7F4Y/v/GWOo2/axr9FFXo5J+aaeSlNxr2U8MmTJKLRIIpGjKZNV5y
+ iIS4b+FzT/M0JUbNFWJ5kxD20duI4E28Y3d7U//o96aLb61iMHhn+QDLWEyHUBxRSabI
+ V0/0T0fA6oq6mUebpU4w045iBwAQN9L8c8cXZ4kao5kviTHJ6PybCseNNsaoksUp8Dsw
+ p+fA==
+X-Gm-Message-State: APjAAAXTIw5IvqQsdI6fsDcCmgCsda56KbSH8PFLMqxpyCqVVnDEcOV5
+ Fl5nlqU5uaCqTI6PYwEqUFKny0byOe3Itw==
+X-Google-Smtp-Source: APXvYqxwzm8yecKqfZJ8RcKzbUlP95DbsDwr/XEYafYFdFyr/YzlSRyukoSrmi3yYvU2vL4Z9L7JNg==
+X-Received: by 2002:a17:90a:ac18:: with SMTP id
+ o24mr1792794pjq.33.1578449303170; 
+ Tue, 07 Jan 2020 18:08:23 -0800 (PST)
+Received: from [192.168.15.12] (alanje.lnk.telstra.net. [120.151.179.201])
+ by smtp.gmail.com with ESMTPSA id n4sm1025409pgg.88.2020.01.07.18.08.19
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 07 Jan 2020 18:08:22 -0800 (PST)
+Subject: Re: [Qemu-devel] [PATCH v2 05/17] RISC-V: add vector extension load
+ and store instructions
+To: LIU Zhiwei <zhiwei_liu@c-sky.com>, Alistair.Francis@wdc.com,
+ palmer@dabbelt.com, Chih-Min Chao <chihmin.chao@sifive.com>
+Cc: wxy194768@alibaba-inc.com, wenmeng_zhang <wenmeng_zhang@c-sky.com>,
+ qemu-devel@nongnu.org, Jim Wilson <jimw@sifive.com>, qemu-riscv@nongnu.org
+References: <1568183141-67641-1-git-send-email-zhiwei_liu@c-sky.com>
+ <1568183141-67641-6-git-send-email-zhiwei_liu@c-sky.com>
+ <4da4da5b-afb8-c9be-99af-0544c6eeb233@linaro.org>
+ <b927f28a-2057-ed1e-c426-63cf9fade27f@c-sky.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+Message-ID: <3a10c873-f293-a37b-e98c-f1964702efe8@linaro.org>
+Date: Wed, 8 Jan 2020 12:08:15 +1000
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.2.2
+MIME-Version: 1.0
+In-Reply-To: <b927f28a-2057-ed1e-c426-63cf9fade27f@c-sky.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
 Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::1043
+X-Received-From: 2607:f8b0:4864:20::1042
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -75,144 +81,73 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Jan 2020 02:07:20 -0000
+X-List-Received-Date: Wed, 08 Jan 2020 02:08:28 -0000
 
-On Mon, 09 Dec 2019 10:11:22 PST (-0800), Alistair Francis wrote:
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> ---
->  target/riscv/cpu.h        | 10 +++++++
->  target/riscv/cpu_bits.h   |  7 +++++
->  target/riscv/cpu_helper.c | 63 +++++++++++++++++++++++++++++++++++++++
->  3 files changed, 80 insertions(+)
->
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 9dc8303c62..eb089fbdb6 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -125,6 +125,7 @@ struct CPURISCVState {
->      target_ulong *mstatus;
->
->      target_ulong mip;
-> +
->      uint32_t miclaim;
->
->      target_ulong mie;
-> @@ -173,6 +174,14 @@ struct CPURISCVState {
->      target_ulong mtval2;
->      target_ulong mtinst;
->
-> +    /* HS Backup CSRs */
-> +    target_ulong stvec_hs;
-> +    target_ulong sscratch_hs;
-> +    target_ulong sepc_hs;
-> +    target_ulong scause_hs;
-> +    target_ulong stval_hs;
-> +    target_ulong satp_hs;
-> +
->      target_ulong scounteren;
->      target_ulong mcounteren;
->
-> @@ -303,6 +312,7 @@ void riscv_cpu_list(void);
->  #define cpu_mmu_index riscv_cpu_mmu_index
->
->  #ifndef CONFIG_USER_ONLY
-> +void riscv_cpu_swap_hypervisor_regs(CPURISCVState *env);
->  int riscv_cpu_claim_interrupts(RISCVCPU *cpu, uint32_t interrupts);
->  uint32_t riscv_cpu_update_mip(RISCVCPU *cpu, uint32_t mask, uint32_t value);
->  #define BOOL_TO_MASK(x) (-!!(x)) /* helper for riscv_cpu_update_mip value */
-> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-> index ad6479796c..a24654d137 100644
-> --- a/target/riscv/cpu_bits.h
-> +++ b/target/riscv/cpu_bits.h
-> @@ -553,4 +553,11 @@
->  #define SIP_STIP                           MIP_STIP
->  #define SIP_SEIP                           MIP_SEIP
->
-> +/* MIE masks */
-> +#define MIE_SEIE                           (1 << IRQ_S_EXT)
-> +#define MIE_UEIE                           (1 << IRQ_U_EXT)
-> +#define MIE_STIE                           (1 << IRQ_S_TIMER)
-> +#define MIE_UTIE                           (1 << IRQ_U_TIMER)
-> +#define MIE_SSIE                           (1 << IRQ_S_SOFT)
-> +#define MIE_USIE                           (1 << IRQ_U_SOFT)
->  #endif
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index 9684da7f7d..63439c9370 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -82,6 +82,69 @@ bool riscv_cpu_fp_enabled(CPURISCVState *env)
->      return false;
->  }
->
-> +void riscv_cpu_swap_hypervisor_regs(CPURISCVState *env)
-> +{
-> +    target_ulong mstatus_mask = MSTATUS_MXR | MSTATUS_SUM | MSTATUS_FS |
-> +                                MSTATUS_SPP | MSTATUS_SPIE | MSTATUS_SIE;
-> +    bool current_virt = riscv_cpu_virt_enabled(env);
-> +
-> +    g_assert(riscv_has_ext(env, RVH));
-> +
-> +#if defined(TARGET_RISCV64)
-> +    mstatus_mask |= MSTATUS64_UXL;
-> +#endif
-> +
-> +    if (current_virt) {
-> +        /* Current V=1 and we are about to change to V=0 */
-> +        env->mstatus = &env->mstatus_novirt;
-> +        *env->mstatus &= mstatus_mask;
-> +        *env->mstatus |= env->vsstatus & ~mstatus_mask;
-> +        /* Ensure that vsstatus only holds the correct bits */
-> +        env->vsstatus &= mstatus_mask;
-> +
-> +        env->vstvec = env->stvec;
-> +        env->stvec = env->stvec_hs;
-> +
-> +        env->vsscratch = env->sscratch;
-> +        env->sscratch = env->sscratch_hs;
-> +
-> +        env->vsepc = env->sepc;
-> +        env->sepc = env->sepc_hs;
-> +
-> +        env->vscause = env->scause;
-> +        env->scause = env->scause_hs;
-> +
-> +        env->vstval = env->sbadaddr;
-> +        env->sbadaddr = env->stval_hs;
-> +
-> +        env->vsatp = env->satp;
-> +        env->satp = env->satp_hs;
-> +    } else {
-> +        /* Current V=0 and we are about to change to V=1 */
-> +        env->mstatus = &env->vsstatus;
-> +        *env->mstatus &= mstatus_mask;
-> +        *env->mstatus |= env->mstatus_novirt & ~mstatus_mask;
-> +
-> +        env->stvec_hs = env->stvec;
-> +        env->stvec = env->vstvec;
-> +
-> +        env->sscratch_hs = env->sscratch;
-> +        env->sscratch = env->vsscratch;
-> +
-> +        env->sepc_hs = env->sepc;
-> +        env->sepc = env->vsepc;
-> +
-> +        env->scause_hs = env->scause;
-> +        env->scause = env->vscause;
-> +
-> +        env->stval_hs = env->sbadaddr;
-> +        env->sbadaddr = env->vstval;
-> +
-> +        env->satp_hs = env->satp;
-> +        env->satp = env->vsatp;
-> +    }
-> +}
-> +
->  bool riscv_cpu_virt_enabled(CPURISCVState *env)
->  {
->      if (!riscv_has_ext(env, RVH)) {
+On 1/8/20 11:32 AM, LIU Zhiwei wrote:
+>>> +            switch (width) {
+>>> +            case 8:
+>>> +                if (vector_elem_mask(env, vm, width, lmul, i)) {
+>>> +                    while (k >= 0) {
+>>> +                        read = i * (nf + 1)  + k;
+>>> +                        env->vfp.vreg[dest + k * lmul].u8[j] =
+>>> +                            cpu_ldub_data(env, env->gpr[rs1] + read);
+>> You must not modify vreg[x] before you've recognized all possible exceptions,
+>> e.g. validating that a subsequent access will not trigger a page fault.
+>> Otherwise you will have a partially modified register value when the exception
+>> handler is entered.
+> There are two questions here.
+> 
+> 1) How to validate access before real access to registers?
+> 
+> As pointed in another comment for patchset v1, 
+> 
+> "instructions that perform more than one host store must probe
+>       the entire range to be stored before performing any stores.
+> "
 
-Modulo that question about the concept of pointer swapping on the previous
-patch:
+Use probe_access (or one of the probe_write/probe_read helpers).
 
-Reviewed-by: Palmer Dabbelt <palmerdabbelt@google.com>
+Ideally one would then use the result, which is a host address, and perform
+direct loads/stores using that.  The result may be null, indicating that the
+operation needs the i/o path.  But in any case, after the probe we are
+guaranteed that the page is mapped and readable/writable.
+
+Note that probe_* does not allow [addr, addr+size) to cross a page boundary.
+So you do have to be prepared for the vector operation to consist of 2 pages,
+and probe both of them.
+
+> I didn't see the validation of page in SVE,  for example, sve_st1_r,
+> which directly use the  helper_ret_*_mmu  that may cause an page fault
+> exception or ovelap a watchpoint,
+> before probe the entire range to be stored .
+
+Yes, this is a bug in SVE that will be fixed.
+
+Note that you should not use helper_ret_* anymore.  I've just introduced
+cpu_{ld,st}*_mmuidx_ra() that should be used instead.
+
+> 2) Why not use the  cpu_ld*  API?
+
+It's possible to use cpu_ld*, but then you need to store the results into a
+temporary, and copy the result to the register afterward.
+
+But I think it's better to probe first and avoid a second copy.
+
+> I see in SVE that ld*_p is used to directly access the host memory. And
+> helper_ret_*_mmu
+> is used to access guest memory. But from the definition of cpu_ld*, it's the
+> combination of
+> ld*_p and helper_ret_*_mmu.
+
+This is all changed now, FWIW.
+
+> I will take it.  However I didn't have  a big-endian host to test the feature.
+
+You can apply for a gcc compile farm account, and then you will have access to
+ppc64 big-endian hosts.
+
+  https://cfarm.tetaneutral.net/users/new/
+
+
+r~
 
