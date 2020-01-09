@@ -1,62 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ipNZW-0007dZ-NZ
-	for mharc-qemu-riscv@gnu.org; Wed, 08 Jan 2020 21:29:18 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:55446)
+	id 1ipNZY-0007fx-Gn
+	for mharc-qemu-riscv@gnu.org; Wed, 08 Jan 2020 21:29:20 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:55598)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <palmerdabbelt@google.com>) id 1ipNZQ-0007bJ-70
- for qemu-riscv@nongnu.org; Wed, 08 Jan 2020 21:29:17 -0500
+ (envelope-from <palmerdabbelt@google.com>) id 1ipNZR-0007bO-HZ
+ for qemu-riscv@nongnu.org; Wed, 08 Jan 2020 21:29:18 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmerdabbelt@google.com>) id 1ipNZM-0007Ht-VC
- for qemu-riscv@nongnu.org; Wed, 08 Jan 2020 21:29:12 -0500
-Received: from mail-pf1-x443.google.com ([2607:f8b0:4864:20::443]:46626)
+ (envelope-from <palmerdabbelt@google.com>) id 1ipNZP-0007Ll-6v
+ for qemu-riscv@nongnu.org; Wed, 08 Jan 2020 21:29:13 -0500
+Received: from mail-pf1-x443.google.com ([2607:f8b0:4864:20::443]:39289)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <palmerdabbelt@google.com>)
- id 1ipNZM-0007GA-NN
- for qemu-riscv@nongnu.org; Wed, 08 Jan 2020 21:29:08 -0500
-Received: by mail-pf1-x443.google.com with SMTP id n9so2560463pff.13
- for <qemu-riscv@nongnu.org>; Wed, 08 Jan 2020 18:29:08 -0800 (PST)
+ id 1ipNZO-0007Kd-VQ
+ for qemu-riscv@nongnu.org; Wed, 08 Jan 2020 21:29:11 -0500
+Received: by mail-pf1-x443.google.com with SMTP id q10so2585896pfs.6
+ for <qemu-riscv@nongnu.org>; Wed, 08 Jan 2020 18:29:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
  h=date:from:subject:cc:to:in-reply-to:references:message-id
  :mime-version:content-transfer-encoding;
- bh=c1g4KjNM+qkVDVTlknC7rp97fBZUpR2N0uQTHXmdxPw=;
- b=v3sg1jl2PhAGEgNA5gc+TG7kPpfhw2ek/p8HujvU/8ckuTj0XiYryrEBRlX2mVd+ll
- v63dEf/RXGIdTBVetE17ASAIUGbabimCerPbkl45fzZ1Rp13hPdWLtG2zIQOYKn+GA1k
- 0J7NkRyxBUE0O0tVBx4bzDICmNVo2Q4VW9hsU2f6KFYOA4HaQF5hfar/8dvNdGk+RUAg
- emJrb42Rpks2rR6OgD1AHPO1k7FfchkEANSKpGU/u5RmKLhOGt97Usx/d0GbOSNqhrOm
- K1WmBX9fY8XwEG9CfA9c1bUNUqba9E5nNVLm3EdKa+7K3OZeH1YqZmQSCUohAusnbsgf
- Ne5A==
+ bh=OJpwUxUV10+vYr6gKA66GfXYLyKZRcdceafVK3pMzf4=;
+ b=uPaKxCIpLMrk1B1WrHhkLmamcqi1KwRR/nIl6ofwPRCvC434ssobdaa9EPjpjFLUYe
+ R6xplOu7d8/pLGVrObtCzY5CDobE23AZeM8m39gHtc4LrEAZajsJXiA/DZw9ImWnKXoH
+ GhdPVYCzQRiClg01jzY6+IVkkbJnQdL9usfmZVwpp4umBDKZdqAiOw7YXSULtD3X+0Tj
+ Pz52eaLWLzglgFuyAiAd0IyLKSSfMLPUqxgzHqK1fp8BgOrgLnD16BWxwOuY+xc9+Nz/
+ d6taNTqszSArQw7vSFYPu0ePEA8Ord4uOHnTwX1K3oda+9xc/YZEAA4fqO1E7jaCRUfu
+ wMPQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:subject:cc:to:in-reply-to:references
  :message-id:mime-version:content-transfer-encoding;
- bh=c1g4KjNM+qkVDVTlknC7rp97fBZUpR2N0uQTHXmdxPw=;
- b=W51GpV/oovNaYLY7g0DgebfI2lEeW/15BtHsVyIFDRP23CDm01M8IFRWWHRj/ASmaR
- WGyKQeCWZMczIKNqfh/Oreo3PMsIiSkGIwFsDIQP0ns0zcFJh5Ve96n3zIR7Xle905Fy
- 5E59n1MskVHVuKxkZKro9dGLaNMYICQKwdzGzqoQMqc6HQ8FKcnbaffqLVQTKH5iPRgr
- SkKa/WcazS7PSiI7+gr8mTC8btXikPKUUuazy0d/tUbS8MAX2zuHHp2mJMuihhrchvtx
- Ol6w37/bUOfmY77Ic+DyE0xCHLcekEC3sm0Iy8olqMIZdLqXQf/mQHtJqD9oIaFM31wI
- c+eA==
-X-Gm-Message-State: APjAAAUQxe2RKHyLJadZUykav1RicfL0NCnrXD1W+PxBRJZTlovkaRmH
- XsA4e3Vui7/ZMQwvvPsBygwccw==
-X-Google-Smtp-Source: APXvYqyEeCBzdLzq4pOo9ZRxOQqfdwJ4r5z87zXhpUzSbk3JIUSpgWEaQPs8hIWNejyt3Q0BleALxQ==
-X-Received: by 2002:aa7:9562:: with SMTP id x2mr8587219pfq.147.1578536947505; 
- Wed, 08 Jan 2020 18:29:07 -0800 (PST)
+ bh=OJpwUxUV10+vYr6gKA66GfXYLyKZRcdceafVK3pMzf4=;
+ b=fWNbU77aL/Iu5HbgXhuhoKGWCQ/f3/3tQEN/GMTW5eB2BHC5rBm2gMrYlPdn4o+9+Q
+ i0VPkDBAL7TNkhT2L4Fx1jkgg5uJuLB1JDCV1JQBLUxXhou1IZFVm7RFeDjpeHYEJRSZ
+ FBZFuDGbOmjKhNHTulWZzaiFKtxfNvVI0w+U2XeUed4XRUlixJkt1XCUKJ/T/4dyQd1I
+ Jn4hsjUVahgKbmOIGQJePNfUoREmZe0VvQc8Zeo296P7eHRmXGuWhpZ94xF/q01mpTrC
+ cOei87qilReMZJZSBQ0+n2TG8WAa0yokORNF4mOUwX8g7gpRzOkJqxlRctC/wzyOZGt4
+ QdGg==
+X-Gm-Message-State: APjAAAWuw0bPWZoD8mebGS1XXloQ+8NkOELnwx6otKFosvo+gg8lab3I
+ uUrLUqgnttVC2OLRUYzKMfvzBg==
+X-Google-Smtp-Source: APXvYqx+Hk9fT5wt6feQ3aa/ekhsI6vr5lF2BIrfp05Gw9rGN0TpNJDpDqSnA+R3d/qZaRLp7JbNNA==
+X-Received: by 2002:a62:33c6:: with SMTP id z189mr8699089pfz.246.1578536949965; 
+ Wed, 08 Jan 2020 18:29:09 -0800 (PST)
 Received: from localhost (189.8.197.35.bc.googleusercontent.com.
  [35.197.8.189])
- by smtp.gmail.com with ESMTPSA id q11sm5193077pff.111.2020.01.08.18.29.06
+ by smtp.gmail.com with ESMTPSA id a6sm4847000pgg.25.2020.01.08.18.29.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Jan 2020 18:29:07 -0800 (PST)
-Date: Wed, 08 Jan 2020 18:29:07 -0800 (PST)
-X-Google-Original-Date: Wed, 08 Jan 2020 18:27:19 PST (-0800)
+ Wed, 08 Jan 2020 18:29:09 -0800 (PST)
+Date: Wed, 08 Jan 2020 18:29:09 -0800 (PST)
+X-Google-Original-Date: Wed, 08 Jan 2020 18:29:00 PST (-0800)
 From: Palmer Dabbelt <palmerdabbelt@google.com>
 X-Google-Original-From: Palmer Dabbelt <palmer@dabbelt.com>
-Subject: Re: [PATCH v1 33/36] target/riscv: Set htval and mtval2 on execptions
+Subject: Re: [PATCH v1 34/36] target/riscv: Add support for the 32-bit
+ MSTATUSH CSR
 CC: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
  Alistair Francis <Alistair.Francis@wdc.com>, alistair23@gmail.com
 To: Alistair Francis <Alistair.Francis@wdc.com>
-In-Reply-To: <3d0d12048c2cf4c5c5ec888b9ff602620285fa5b.1575914822.git.alistair.francis@wdc.com>
-References: <3d0d12048c2cf4c5c5ec888b9ff602620285fa5b.1575914822.git.alistair.francis@wdc.com><cover.1575914822.git.alistair.francis@wdc.com>
-Message-ID: <mhng-2a93260d-6691-4cf1-920c-01af14feedea@palmerdabbelt-glaptop>
+In-Reply-To: <2c161240299cf0f78fe676ec6b1c59e94203c324.1575914822.git.alistair.francis@wdc.com>
+References: <2c161240299cf0f78fe676ec6b1c59e94203c324.1575914822.git.alistair.francis@wdc.com><cover.1575914822.git.alistair.francis@wdc.com>
+Message-ID: <mhng-ed859073-c5ab-407c-a322-480fee5a730d@palmerdabbelt-glaptop>
 Mime-Version: 1.0 (MHng)
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
@@ -74,70 +75,162 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Jan 2020 02:29:18 -0000
+X-List-Received-Date: Thu, 09 Jan 2020 02:29:19 -0000
 
-On Mon, 09 Dec 2019 10:12:06 PST (-0800), Alistair Francis wrote:
+On Mon, 09 Dec 2019 10:12:09 PST (-0800), Alistair Francis wrote:
 > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 > ---
->  target/riscv/cpu_helper.c | 10 ++++++++++
->  1 file changed, 10 insertions(+)
+>  target/riscv/cpu.c        |  6 ++++++
+>  target/riscv/cpu.h        |  7 +++++++
+>  target/riscv/cpu_bits.h   |  3 +++
+>  target/riscv/cpu_helper.c |  7 +++++++
+>  target/riscv/csr.c        | 25 +++++++++++++++++++++++++
+>  target/riscv/op_helper.c  |  4 ++++
+>  6 files changed, 52 insertions(+)
 >
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index e61cf46a73..ac8f53a49d 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -237,6 +237,9 @@ static void riscv_cpu_dump_state(CPUState *cs, FILE *f, int flags)
+>  #ifndef CONFIG_USER_ONLY
+>      qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mhartid ", env->mhartid);
+>      qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mstatus ", *env->mstatus);
+> +#ifdef TARGET_RISCV32
+> +    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mstatush ", *env->mstatush);
+> +#endif
+>      if (riscv_has_ext(env, RVH)) {
+>          qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "hstatus ", env->hstatus);
+>          qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "vsstatus ", env->vsstatus);
+> @@ -473,6 +476,9 @@ static void riscv_cpu_init(Object *obj)
+>
+>  #ifndef CONFIG_USER_ONLY
+>      env->mstatus = &env->mstatus_novirt;
+> +# ifdef TARGET_RISCV32
+> +    env->mstatush = &env->mstatush_novirt;
+> +# endif
+>  #endif
+>  }
+>
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index b411a1f900..84a07971dc 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -127,6 +127,10 @@ struct CPURISCVState {
+>
+>      target_ulong mip;
+>
+> +#ifdef TARGET_RISCV32
+> +    target_ulong *mstatush;
+> +#endif
+> +
+>      uint32_t miclaim;
+>
+>      target_ulong mie;
+> @@ -153,6 +157,9 @@ struct CPURISCVState {
+>       * required to handle the Hypervisor register swapping.
+>       */
+>      target_ulong mstatus_novirt;
+> +#ifdef TARGET_RISCV32
+> +    target_ulong mstatush_novirt;
+> +#endif
+>
+>      /* Hypervisor CSRs */
+>      target_ulong hstatus;
+> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+> index a24654d137..049032f2ae 100644
+> --- a/target/riscv/cpu_bits.h
+> +++ b/target/riscv/cpu_bits.h
+> @@ -135,6 +135,9 @@
+>  #define CSR_MTVEC           0x305
+>  #define CSR_MCOUNTEREN      0x306
+>
+> +/* 32-bit only */
+> +#define CSR_MSTATUSH        0x310
+> +
+>  /* Legacy Counter Setup (priv v1.9.1) */
+>  /* Update to #define CSR_MCOUNTINHIBIT 0x320 for 1.11.0 */
+>  #define CSR_MUCOUNTEREN     0x320
 > diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index 43c6629014..aa033b8590 100644
+> index aa033b8590..c2ad0bbce7 100644
 > --- a/target/riscv/cpu_helper.c
 > +++ b/target/riscv/cpu_helper.c
-> @@ -841,6 +841,8 @@ void riscv_cpu_do_interrupt(CPUState *cs)
->      target_ulong cause = cs->exception_index & RISCV_EXCP_INT_MASK;
->      target_ulong deleg = async ? env->mideleg : env->medeleg;
->      target_ulong tval = 0;
-> +    target_ulong htval = 0;
-> +    target_ulong mtval2 = 0;
->
->      if (!async) {
->          /* set tval to badaddr for traps with address information */
-> @@ -900,6 +902,8 @@ void riscv_cpu_do_interrupt(CPUState *cs)
->                  env->hstatus = set_field(env->hstatus, HSTATUS_SPV,
->                                           riscv_cpu_virt_enabled(env));
->
-> +                htval = env->guest_phys_fault_addr;
-> +
->                  riscv_cpu_set_virt_enabled(env, 0);
->                  riscv_cpu_set_force_hs_excep(env, 0);
->              } else {
-> @@ -910,6 +914,8 @@ void riscv_cpu_do_interrupt(CPUState *cs)
->                                           get_field(*env->mstatus, SSTATUS_SPP));
->                  env->hstatus = set_field(env->hstatus, HSTATUS_SPV,
->                                           riscv_cpu_virt_enabled(env));
-> +
-> +                htval = env->guest_phys_fault_addr;
+> @@ -938,10 +938,17 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+>              if (riscv_cpu_virt_enabled(env)) {
+>                  riscv_cpu_swap_hypervisor_regs(env);
 >              }
->          }
->
-> @@ -922,6 +928,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
->          env->scause = cause | ((target_ulong)async << (TARGET_LONG_BITS - 1));
->          env->sepc = env->pc;
->          env->sbadaddr = tval;
-> +        env->htval = htval;
->          env->pc = (env->stvec >> 2 << 2) +
->              ((async && (env->stvec & 3) == 1) ? cause * 4 : 0);
->          riscv_cpu_set_mode(env, PRV_S);
-> @@ -936,6 +943,8 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+> +#ifdef TARGET_RISCV32
+> +            *env->mstatush = set_field(*env->mstatush, MSTATUS_MPV,
+> +                                       riscv_cpu_virt_enabled(env));
+> +            *env->mstatush = set_field(*env->mstatush, MSTATUS_MTL,
+> +                                       riscv_cpu_force_hs_excep_enabled(env));
+> +#else
+>              *env->mstatus = set_field(*env->mstatus, MSTATUS_MPV,
+>                                        riscv_cpu_virt_enabled(env));
 >              *env->mstatus = set_field(*env->mstatus, MSTATUS_MTL,
 >                                        riscv_cpu_force_hs_excep_enabled(env));
+> +#endif
 >
-> +            mtval2 = env->guest_phys_fault_addr;
+>              mtval2 = env->guest_phys_fault_addr;
+>
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index d028dfb60b..b28058f9d5 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -372,6 +372,27 @@ static int write_mstatus(CPURISCVState *env, int csrno, target_ulong val)
+>      return 0;
+>  }
+>
+> +#ifdef TARGET_RISCV32
+> +static int read_mstatush(CPURISCVState *env, int csrno, target_ulong *val)
+> +{
+> +    *val = *env->mstatush;
+> +    return 0;
+> +}
 > +
->              /* Trapping to M mode, virt is disabled */
->              riscv_cpu_set_virt_enabled(env, 0);
->          }
-> @@ -949,6 +958,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
->          env->mcause = cause | ~(((target_ulong)-1) >> async);
->          env->mepc = env->pc;
->          env->mbadaddr = tval;
-> +        env->mtval2 = mtval2;
->          env->pc = (env->mtvec >> 2 << 2) +
->              ((async && (env->mtvec & 3) == 1) ? cause * 4 : 0);
->          riscv_cpu_set_mode(env, PRV_M);
+> +static int write_mstatush(CPURISCVState *env, int csrno, target_ulong val)
+> +{
+> +    if ((val ^ *env->mstatush) & (MSTATUS_MPV)) {
+> +        tlb_flush(env_cpu(env));
+> +    }
+> +
+> +    val &= MSTATUS_MPV | MSTATUS_MTL;
+> +
+> +    *env->mstatush = val;
+> +
+> +    return 0;
+> +}
+> +#endif
+> +
+>  static int read_misa(CPURISCVState *env, int csrno, target_ulong *val)
+>  {
+>      *val = env->misa;
+> @@ -1215,6 +1236,10 @@ static riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+>      [CSR_MTVEC] =               { any,  read_mtvec,       write_mtvec       },
+>      [CSR_MCOUNTEREN] =          { any,  read_mcounteren,  write_mcounteren  },
+>
+> +#if defined(TARGET_RISCV32)
+> +    [CSR_MSTATUSH] =            { any,  read_mstatush,    write_mstatush    },
+> +#endif
+> +
+>      /* Legacy Counter Setup (priv v1.9.1) */
+>      [CSR_MUCOUNTEREN] =         { any,  read_mucounteren, write_mucounteren },
+>      [CSR_MSCOUNTEREN] =         { any,  read_mscounteren, write_mscounteren },
+> diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+> index e5128570e6..a0a631d722 100644
+> --- a/target/riscv/op_helper.c
+> +++ b/target/riscv/op_helper.c
+> @@ -153,7 +153,11 @@ target_ulong helper_mret(CPURISCVState *env, target_ulong cpu_pc_deb)
+>          get_field(mstatus, MSTATUS_MPIE));
+>      mstatus = set_field(mstatus, MSTATUS_MPIE, 1);
+>      mstatus = set_field(mstatus, MSTATUS_MPP, 0);
+> +#ifdef TARGET_RISCV32
+> +    *env->mstatush = set_field(*env->mstatush, MSTATUS_MPV, 0);
+> +#else
+>      mstatus = set_field(mstatus, MSTATUS_MPV, 0);
+> +#endif
+>      *env->mstatus = mstatus;
+>      riscv_cpu_set_mode(env, prev_priv);
 
 Reviewed-by: Palmer Dabbelt <palmerdabbelt@google.com>
 
