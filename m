@@ -1,68 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ipM0c-0002iq-84
-	for mharc-qemu-riscv@gnu.org; Wed, 08 Jan 2020 19:49:10 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:56260)
+	id 1ipM0j-0002lq-6a
+	for mharc-qemu-riscv@gnu.org; Wed, 08 Jan 2020 19:49:17 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:56369)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <palmerdabbelt@google.com>) id 1ipM0Y-0002ga-7e
- for qemu-riscv@nongnu.org; Wed, 08 Jan 2020 19:49:08 -0500
+ (envelope-from <palmerdabbelt@google.com>) id 1ipM0a-0002gp-5F
+ for qemu-riscv@nongnu.org; Wed, 08 Jan 2020 19:49:09 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmerdabbelt@google.com>) id 1ipM0W-00082F-5l
+ (envelope-from <palmerdabbelt@google.com>) id 1ipM0V-00080n-I4
  for qemu-riscv@nongnu.org; Wed, 08 Jan 2020 19:49:06 -0500
-Received: from mail-pl1-x642.google.com ([2607:f8b0:4864:20::642]:41138)
+Received: from mail-pj1-x1043.google.com ([2607:f8b0:4864:20::1043]:53539)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <palmerdabbelt@google.com>)
- id 1ipM0V-00080C-VT
- for qemu-riscv@nongnu.org; Wed, 08 Jan 2020 19:49:04 -0500
-Received: by mail-pl1-x642.google.com with SMTP id bd4so1809311plb.8
+ id 1ipM0V-0007xj-7S
+ for qemu-riscv@nongnu.org; Wed, 08 Jan 2020 19:49:03 -0500
+Received: by mail-pj1-x1043.google.com with SMTP id n96so357007pjc.3
  for <qemu-riscv@nongnu.org>; Wed, 08 Jan 2020 16:49:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
  h=date:from:subject:cc:to:in-reply-to:references:message-id
  :mime-version:content-transfer-encoding;
- bh=H3zSPRBKP4ZzdR/6KbzozHd86904u26K/mFmLx9RqzI=;
- b=feh1JZ0rixUc1SjMjv50oJb+Uu0jBd1QfUGkdIbmUF5sZoItk0fH7Db7tog+l1OVyA
- O9NQCNB3K0pra7lD1nuchRau60eAPdIIErh1IksBuIYc8iCau2N4YV9zKFu7WISVT6yQ
- TslejvK561l3b7IBA6S2mxO8r5zvPGciY6HWySoKnBKNMhISoHLeoUNR9YZtTcyC7qYV
- af2TWoNv6xqbeZPY8tHdFQ8st2A7+q21hHZKH17TftXAaUgbdiwUQlb2Kyub0atwwukS
- wE3Dliy7tKS4c5OqmFn6aaibx7MInXh7JDJ6vcd3G5SC4l0mbxFH+NGJgyxyC8a/IowV
- rI6Q==
+ bh=oxaYPFpeBulaqXEI8e0zvCoQvUmXj9BsGZbI3S9AAPs=;
+ b=nkBNJ+gTd8TFhEZGeXvAhmb3pYpL/KVs8I7Ll0TdBovsXPpv8syPKMpVdE/iLvJ4uX
+ WhAQlZGJUWMX4NHeo+/1Tjbzo3G/nbanH2qbJEj/mEq+TsjtbapakzX3ogb4gKy0dKRe
+ QJ9NmNtft7veyc95li3xo8mpeqRYxBFfVWHnKmxcgEx4yiZv0Ak45yiwjXHOsO5kNQfE
+ JHoef3ZolmCHbGOJDpEgzZSKl/S3dt5Rw2sH95Z+KW76KaLwvHJNKNL61yDZaqjfH+sY
+ qj7YV+eM7DHHNaPvi2pGhdkOapeCTr6ma63o7WEOjDT2qIc6noE7zXiyT6Y10PSXDZHg
+ s1mQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:subject:cc:to:in-reply-to:references
  :message-id:mime-version:content-transfer-encoding;
- bh=H3zSPRBKP4ZzdR/6KbzozHd86904u26K/mFmLx9RqzI=;
- b=LX1SELs1+HkhitVbvK0dxMPl0cuVQMKEpnU4i6ld6EB6XffHyfW7Dv1YSY8kfw8e0U
- sb9EqWN2i8XFxP1o8Zuo0EW3hWp+t2yNgRSon5UKkrdncNB8H99Gu+7u72GMiIl13Mgj
- WMsEvAS5R8hOud4Z232/PXDMW4mA31mzLiNpGXzg6TLeSstNdZlTHk8xxK4YNWDc6bO3
- DDPiNqBAL6TG+IxPTF7aVJuMnbWjcx4wIv9sprp9zdclyXXJTZWy4awZdeSrQh1hwZho
- pBQGmnEP2W42UEJBAbGDP/zyGUbungV2HmUvoEvnx3ftN9xyjnaEB8CSQ6lqWuFu6CSU
- 4Vzw==
-X-Gm-Message-State: APjAAAUk5aIxdf950AfTn2SQf3KP0BRR2XBT4lZSxPFlFxz83VOwWaBv
- ysZW6NTUEjg1H15LOpGSA1aQVg==
-X-Google-Smtp-Source: APXvYqxlNnHVU8Ubb9ccyNzIKNObfpQSyuIe2VJ4nm//zGUmzvwpz4fhSU0OO4ISvy8yuiRoUV5gow==
-X-Received: by 2002:a17:90a:a88d:: with SMTP id
- h13mr1739046pjq.55.1578530942843; 
- Wed, 08 Jan 2020 16:49:02 -0800 (PST)
+ bh=oxaYPFpeBulaqXEI8e0zvCoQvUmXj9BsGZbI3S9AAPs=;
+ b=VRFHxW0Qau9r7RZMPWacM8XCMitu/poP4hi9IZvdURb47Qbayb+tNRP6bvnDc7JVTF
+ wjf5uaCYg+IKFD9jPEaAYbw8oPyefZbrDTiyY9J4NPMeA6qsrcF/I8u0ykeu7e+oisYc
+ Of5pG94XMwMHFS4lnqk2rSAC32DU+wzSTJIIJZD+Bel8YkUF+owAJBDwTjyPCX+rQ0Iy
+ 9XHbUkMRRq/y0bVC7+I2k9swrKxLn+6VgBjby/yx0p49facJHaHOwogYILnLBRrAEcmY
+ uNMfrCj+5siEPH+OWiopXcAr24bPPNZaL/5DQKyIMDej83doqdTMHZiuYCagiExFrYoh
+ E7Iw==
+X-Gm-Message-State: APjAAAV8c7PuseqZ1noJctjThhMtdERGY9+UUg5pH8W7xZdSNPvbwFp6
+ 1N0L4m+BJAm1Oh5OEVIsJa9IUg==
+X-Google-Smtp-Source: APXvYqxtbOAz2lj1ecTrwijbnMiRA6uUhDyK2H/O8kDV8Edf+yj07PhtKh5x2enJPb5STdwsU55V+g==
+X-Received: by 2002:a17:902:34d:: with SMTP id
+ 71mr8391407pld.140.1578530941637; 
+ Wed, 08 Jan 2020 16:49:01 -0800 (PST)
 Received: from localhost ([2620:0:1000:2514:7f69:cd98:a2a2:a03d])
- by smtp.gmail.com with ESMTPSA id z29sm5115273pge.21.2020.01.08.16.49.02
+ by smtp.gmail.com with ESMTPSA id w7sm451134pjb.31.2020.01.08.16.49.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Jan 2020 16:49:02 -0800 (PST)
-Date: Wed, 08 Jan 2020 16:49:02 -0800 (PST)
-X-Google-Original-Date: Wed, 08 Jan 2020 14:40:48 PST (-0800)
+ Wed, 08 Jan 2020 16:49:00 -0800 (PST)
+Date: Wed, 08 Jan 2020 16:49:00 -0800 (PST)
+X-Google-Original-Date: Wed, 08 Jan 2020 14:40:34 PST (-0800)
 From: Palmer Dabbelt <palmerdabbelt@google.com>
 X-Google-Original-From: Palmer Dabbelt <palmer@dabbelt.com>
-Subject: Re: [PATCH v1 26/36] target/riscv: Remove the hret instruction
+Subject: Re: [PATCH v1 19/36] target/riscv: Extend the SIP CSR to support
+ virtulisation
 CC: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
  Alistair Francis <Alistair.Francis@wdc.com>, alistair23@gmail.com
 To: Alistair Francis <Alistair.Francis@wdc.com>
-In-Reply-To: <c83aac89b3f1825c4c3ae282495a28572031f7d5.1575914822.git.alistair.francis@wdc.com>
-References: <c83aac89b3f1825c4c3ae282495a28572031f7d5.1575914822.git.alistair.francis@wdc.com><cover.1575914822.git.alistair.francis@wdc.com>
-Message-ID: <mhng-5bd4e131-6645-4d27-8255-5837e004f8c2@palmerdabbelt-glaptop>
+In-Reply-To: <eecc3f2848d9afa8e640f608bd13112868ca2e5f.1575914822.git.alistair.francis@wdc.com>
+References: <eecc3f2848d9afa8e640f608bd13112868ca2e5f.1575914822.git.alistair.francis@wdc.com><cover.1575914822.git.alistair.francis@wdc.com>
+Message-ID: <mhng-d8e48454-f32d-4bff-8601-38ad43e83134@palmerdabbelt-glaptop>
 Mime-Version: 1.0 (MHng)
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::642
+X-Received-From: 2607:f8b0:4864:20::1043
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -74,46 +75,39 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Jan 2020 00:49:08 -0000
+X-List-Received-Date: Thu, 09 Jan 2020 00:49:10 -0000
 
-On Mon, 09 Dec 2019 10:11:48 PST (-0800), Alistair Francis wrote:
-> The hret instruction does not exist in the new spec versions, so remove
-> it from QEMU.
->
+On Mon, 09 Dec 2019 10:11:30 PST (-0800), Alistair Francis wrote:
 > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 > ---
->  target/riscv/insn32.decode                     | 1 -
->  target/riscv/insn_trans/trans_privileged.inc.c | 5 -----
->  2 files changed, 6 deletions(-)
+>  target/riscv/csr.c | 13 ++++++++++++-
+>  1 file changed, 12 insertions(+), 1 deletion(-)
 >
-> diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-> index cfd9ca6d2b..b883672e63 100644
-> --- a/target/riscv/insn32.decode
-> +++ b/target/riscv/insn32.decode
-> @@ -75,7 +75,6 @@ ecall       000000000000     00000 000 00000 1110011
->  ebreak      000000000001     00000 000 00000 1110011
->  uret        0000000    00010 00000 000 00000 1110011
->  sret        0001000    00010 00000 000 00000 1110011
-> -hret        0010000    00010 00000 000 00000 1110011
->  mret        0011000    00010 00000 000 00000 1110011
->  wfi         0001000    00101 00000 000 00000 1110011
->  hfence_gvma 0110001    ..... ..... 000 00000 1110011 @hfence_gvma
-> diff --git a/target/riscv/insn_trans/trans_privileged.inc.c b/target/riscv/insn_trans/trans_privileged.inc.c
-> index b9b5a89b52..76c2fad71c 100644
-> --- a/target/riscv/insn_trans/trans_privileged.inc.c
-> +++ b/target/riscv/insn_trans/trans_privileged.inc.c
-> @@ -58,11 +58,6 @@ static bool trans_sret(DisasContext *ctx, arg_sret *a)
->  #endif
->  }
->
-> -static bool trans_hret(DisasContext *ctx, arg_hret *a)
-> -{
-> -    return false;
-> -}
-> -
->  static bool trans_mret(DisasContext *ctx, arg_mret *a)
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index 54edfb280e..d028dfb60b 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -744,8 +744,19 @@ static int write_sbadaddr(CPURISCVState *env, int csrno, target_ulong val)
+>  static int rmw_sip(CPURISCVState *env, int csrno, target_ulong *ret_value,
+>                     target_ulong new_value, target_ulong write_mask)
 >  {
->  #ifndef CONFIG_USER_ONLY
+> -    int ret = rmw_mip(env, CSR_MSTATUS, ret_value, new_value,
+> +    int ret;
+> +
+> +    if (riscv_cpu_virt_enabled(env)) {
+> +        /* Shift the new values to line up with the VS bits */
+> +        ret = rmw_mip(env, CSR_MSTATUS, ret_value, new_value << 1,
+> +                      (write_mask & sip_writable_mask) << 1 & env->mideleg);
+> +        ret &= vsip_writable_mask;
+> +        ret >>= 1;
+> +    } else {
+> +        ret = rmw_mip(env, CSR_MSTATUS, ret_value, new_value,
+>                        write_mask & env->mideleg & sip_writable_mask);
+> +    }
+> +
+>      *ret_value &= env->mideleg;
+>      return ret;
+>  }
 
 Reviewed-by: Palmer Dabbelt <palmerdabbelt@google.com>
 
