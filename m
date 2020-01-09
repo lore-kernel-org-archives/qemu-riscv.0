@@ -1,72 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ipNe2-0004vc-FY
-	for mharc-qemu-riscv@gnu.org; Wed, 08 Jan 2020 21:33:58 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:60058)
+	id 1ipNgR-0006zL-Ci
+	for mharc-qemu-riscv@gnu.org; Wed, 08 Jan 2020 21:36:27 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:48737)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <richard.henderson@linaro.org>) id 1ipNdy-0004pO-6v
- for qemu-riscv@nongnu.org; Wed, 08 Jan 2020 21:33:56 -0500
+ (envelope-from <palmerdabbelt@google.com>) id 1ipNgL-0006xO-Uq
+ for qemu-riscv@nongnu.org; Wed, 08 Jan 2020 21:36:25 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <richard.henderson@linaro.org>) id 1ipNdr-0008DP-Nf
- for qemu-riscv@nongnu.org; Wed, 08 Jan 2020 21:33:52 -0500
-Received: from mail-pg1-x544.google.com ([2607:f8b0:4864:20::544]:36643)
+ (envelope-from <palmerdabbelt@google.com>) id 1ipNgI-0004mT-C3
+ for qemu-riscv@nongnu.org; Wed, 08 Jan 2020 21:36:21 -0500
+Received: from mail-pl1-x644.google.com ([2607:f8b0:4864:20::644]:41659)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
- id 1ipNdr-00089w-1I
- for qemu-riscv@nongnu.org; Wed, 08 Jan 2020 21:33:47 -0500
-Received: by mail-pg1-x544.google.com with SMTP id k3so2468099pgc.3
- for <qemu-riscv@nongnu.org>; Wed, 08 Jan 2020 18:33:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=dzbZeJ1AmuhqCmb+aBieEB+CAtkvNLr1xBssq6CpAf0=;
- b=Vtb6BQbGYLY2s+0W7WooxVUejGgs6eHG2iQBswd40q2aawdXKcYNUd+rLiI4qF6D+V
- cQwLh2Ud0yimPHVsmEpVTLvl3g6Es2YwmBSUTYDhNE8XBLgaKbY4OTNufpNWrWqqtK1J
- 3rU24YUqN8567GCZaT/W+sWnmwHWO48/2bl+BNQzhB32PjS1Tn8pcyYJpb9Q4XDoXLB4
- TlpFS1Cbbd5tNA/2edFIoY1UxnwDT9OM3hzlYaVqgyDMDn5HBYB9E27arV8NkBNzngbg
- Wx5t3MuXDnR2Lyq92k7BBJ8MqpNz3BYHHWN5jjMCvet+/mfpkj4sC5klo1t0lZt6bFXw
- ebEA==
+ (Exim 4.71) (envelope-from <palmerdabbelt@google.com>)
+ id 1ipNgH-0004hG-UN
+ for qemu-riscv@nongnu.org; Wed, 08 Jan 2020 21:36:18 -0500
+Received: by mail-pl1-x644.google.com with SMTP id bd4so1907814plb.8
+ for <qemu-riscv@nongnu.org>; Wed, 08 Jan 2020 18:36:15 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
+ h=date:from:subject:cc:to:in-reply-to:references:message-id
+ :mime-version:content-transfer-encoding;
+ bh=1u20Y16UTLTK3vGnMCMvTg+KplB+/S/bHmNElPoWiDI=;
+ b=O6bLA1LOZeQlJADeWsre7LaHvyWkHEKyhJJxTfuA4Z1qQjwdO99fIIDr1drLpj7qtm
+ k5tnLbeEJuzXNaK482Kl3HkHk5drFlWcZZBuSuWyHCxxnN+dbxkanGvlSCktFmUH3Rgg
+ e6dlcOKjGK5+RcDhSIZz+2eOCZsa/6ulvKzKoJslUMEPTrDOe4u1KoPLZ8rSiyEFxVQD
+ 55fB5YgRWFFIZF0c+wR5m3Ubh1z+dvvEo2apvne+iiqk4ovp9IOpe6sW3wGBU7KJrs6Y
+ c6ZQUgsvJrB/hQQj3uBcxTOqdA6a4Sr+We0NAzXmIK4F1LIDtODUVVkvCeINancE859R
+ BAVg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=dzbZeJ1AmuhqCmb+aBieEB+CAtkvNLr1xBssq6CpAf0=;
- b=uaeQeTKfaek7APsKebNCjmZwkL+RpgJmUMPJtUJeSv5a4IiP6Sped4a52ySWljqxwE
- E4jMVPUoL9PGE+UHHOUtfooU31YZyxONGtXLlk2nc5ilmNpPrzzidJ+zQ++VqRmYrw4N
- 3zH5NiTXvXvpIq1PrrrWqYteZudT5PPWu3hy8f9qvGn12NTrkftTPq9Tot2eh3Omtm3Q
- BWJg7mhxOpe1QEnaJqC8XePCIse74WjVSaCmTZvf+y5ERJffeFnMc29Q2byG4V5mcBR8
- xS25mh9xZl5DO7Nw+wp4JsMzXPNF9brKmuA/L1u2qqoWHPNAhLk7e/HHQ0n+bpu6ZnYS
- pFQg==
-X-Gm-Message-State: APjAAAUCFgDA2KBH8E2mnBB4/4wpn4spkgkmbHwPIuCpiQN0NEYAP9vr
- hoQeDL+uxBnGJtVsvLHWNwrY0A==
-X-Google-Smtp-Source: APXvYqy13ScqvGzA0BpAqddmBg1gNyMf6JOmLtEHTs34w37xSfEg25z2i9/aaJrlOzcTah1Uz9OVdg==
-X-Received: by 2002:a63:5818:: with SMTP id m24mr8733836pgb.358.1578537225660; 
- Wed, 08 Jan 2020 18:33:45 -0800 (PST)
-Received: from [192.168.15.12] (alanje.lnk.telstra.net. [120.151.179.201])
- by smtp.gmail.com with ESMTPSA id k12sm4853409pgm.65.2020.01.08.18.33.42
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 08 Jan 2020 18:33:45 -0800 (PST)
-Subject: Re: [PATCH v1 20/36] target/riscv: Add support for virtual interrupt
- setting
-To: Palmer Dabbelt <palmerdabbelt@google.com>,
- Alistair Francis <Alistair.Francis@wdc.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair23@gmail.com
-References: <2389483485d4642a6e5670e2546c62e493e91fd6.1575914822.git.alistair.francis@wdc.com>
- <cover.1575914822.git.alistair.francis@wdc.com>
- <mhng-6814f8b9-d54a-4663-900c-83023307a658@palmerdabbelt-glaptop>
-From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <200650e5-cb77-0518-8f27-30d0cf23de22@linaro.org>
-Date: Thu, 9 Jan 2020 13:33:40 +1100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.2.2
-MIME-Version: 1.0
-In-Reply-To: <mhng-6814f8b9-d54a-4663-900c-83023307a658@palmerdabbelt-glaptop>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
+ h=x-gm-message-state:date:from:subject:cc:to:in-reply-to:references
+ :message-id:mime-version:content-transfer-encoding;
+ bh=1u20Y16UTLTK3vGnMCMvTg+KplB+/S/bHmNElPoWiDI=;
+ b=OQgRyuaYPL1miZs6zfYU71xzNSr/FTyoRvkH9AyTFq3Tb18zLh4t9jdKGE+4rBjHAV
+ pGjllMbju8L9fIWXr/eK6vKp2MtlBrhWyYz3iXhU5s70TZeaD0xbvNMl0DSMa7Adi9yH
+ ryyKYrsaNMaWxZx81WqsOJovKX3QdKyjse26ZzRLGftLSaMY6NvyRUSE353bIq7Qn7Xl
+ pzrDAYg2O8wzWe+dNqShntYaexVDsBmh5mHnfmh2PkLhxB/9A1N6ZK0tfLzSNBtrj84q
+ w58HzqPps9aLBleQ/OqLbEo3cVYoxN65QFiLVkCf6a/ZWYOW+I7PR0NgL+C0AtAj43PP
+ MS+g==
+X-Gm-Message-State: APjAAAWzASfNOHtl/A0Yd0uQqjLt1g/JiIOiKLBPUuObNAhRkEkTrM+q
+ 8WX2vC4zfRaFQtznpCPrLFP71A==
+X-Google-Smtp-Source: APXvYqzQKG7/Dt2LK8mdtNaB1XN0G//XlUNpBLg9uK3Qrz9IEBS4zegYYcVP7AD7HK+7d2idcD4J/A==
+X-Received: by 2002:a17:90b:941:: with SMTP id
+ dw1mr2350377pjb.21.1578537373890; 
+ Wed, 08 Jan 2020 18:36:13 -0800 (PST)
+Received: from localhost (189.8.197.35.bc.googleusercontent.com.
+ [35.197.8.189])
+ by smtp.gmail.com with ESMTPSA id p21sm5094988pfn.103.2020.01.08.18.36.13
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 08 Jan 2020 18:36:13 -0800 (PST)
+Date: Wed, 08 Jan 2020 18:36:13 -0800 (PST)
+X-Google-Original-Date: Wed, 08 Jan 2020 18:35:57 PST (-0800)
+From: Palmer Dabbelt <palmerdabbelt@google.com>
+X-Google-Original-From: Palmer Dabbelt <palmer@dabbelt.com>
+Subject: Re: [PATCH v1 35/36] target/riscv: Add the MSTATUS_MPV_ISSET helper
+ macro
+CC: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
+ Alistair Francis <Alistair.Francis@wdc.com>, alistair23@gmail.com
+To: Alistair Francis <Alistair.Francis@wdc.com>
+In-Reply-To: <c6b8c2739278b63e5e03c2a2095254fa0afedbda.1575914822.git.alistair.francis@wdc.com>
+References: <c6b8c2739278b63e5e03c2a2095254fa0afedbda.1575914822.git.alistair.francis@wdc.com><cover.1575914822.git.alistair.francis@wdc.com>
+Message-ID: <mhng-ac524f0b-4bc9-41ab-a177-7d3da237a83a@palmerdabbelt-glaptop>
+Mime-Version: 1.0 (MHng)
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::544
+X-Received-From: 2607:f8b0:4864:20::644
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -78,23 +76,92 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Jan 2020 02:33:56 -0000
+X-List-Received-Date: Thu, 09 Jan 2020 02:36:25 -0000
 
-On 1/9/20 11:49 AM, Palmer Dabbelt wrote:
->> +    irqs = (pending & ~env->mideleg & -mie) | (pending &  env->mideleg & -sie);
-> 
-> Isn't "-unsigned" implementation defined?  I can't get GCC to throw a warning
-> and it was already there, so maybe I'm just wrong?
+On Mon, 09 Dec 2019 10:12:12 PST (-0800), Alistair Francis wrote:
+> Add a helper macro MSTATUS_MPV_ISSET() which will determine if the
+> MSTATUS_MPV bit is set for both 32-bit and 64-bit RISC-V.
+>
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> ---
+>  target/riscv/cpu_bits.h   | 11 +++++++++++
+>  target/riscv/cpu_helper.c |  4 ++--
+>  target/riscv/op_helper.c  |  2 +-
+>  target/riscv/translate.c  |  2 +-
+>  4 files changed, 15 insertions(+), 4 deletions(-)
+>
+> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+> index 049032f2ae..dd012a514e 100644
+> --- a/target/riscv/cpu_bits.h
+> +++ b/target/riscv/cpu_bits.h
+> @@ -363,8 +363,19 @@
+>  #define MSTATUS_TVM         0x00100000 /* since: priv-1.10 */
+>  #define MSTATUS_TW          0x20000000 /* since: priv-1.10 */
+>  #define MSTATUS_TSR         0x40000000 /* since: priv-1.10 */
+> +#if defined(TARGET_RISCV64)
+>  #define MSTATUS_MTL         0x4000000000ULL
+>  #define MSTATUS_MPV         0x8000000000ULL
+> +#elif defined(TARGET_RISCV32)
+> +#define MSTATUS_MTL         0x00000040
+> +#define MSTATUS_MPV         0x00000080
+> +#endif
+> +
+> +#ifdef TARGET_RISCV32
+> +# define MSTATUS_MPV_ISSET(env)  get_field(*env->mstatush, MSTATUS_MPV)
+> +#else
+> +# define MSTATUS_MPV_ISSET(env)  get_field(*env->mstatus, MSTATUS_MPV)
+> +#endif
+>
+>  #define MSTATUS64_UXL       0x0000000300000000ULL
+>  #define MSTATUS64_SXL       0x0000000C00000000ULL
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index c2ad0bbce7..7166e6199e 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -314,7 +314,7 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
+>              mode = get_field(*env->mstatus, MSTATUS_MPP);
+>
+>              if (riscv_has_ext(env, RVH) &&
+> -                get_field(*env->mstatus, MSTATUS_MPV)) {
+> +                MSTATUS_MPV_ISSET(env)) {
+>                  use_background = true;
+>              }
+>          }
+> @@ -714,7 +714,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+>          m_mode_two_stage = env->priv == PRV_M &&
+>                             access_type != MMU_INST_FETCH &&
+>                             get_field(*env->mstatus, MSTATUS_MPRV) &&
+> -                           get_field(*env->mstatus, MSTATUS_MPV);
+> +                           MSTATUS_MPV_ISSET(env);
+>
+>          hs_mode_two_stage = env->priv == PRV_S &&
+>                              !riscv_cpu_virt_enabled(env) &&
+> diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+> index a0a631d722..b0b9890a15 100644
+> --- a/target/riscv/op_helper.c
+> +++ b/target/riscv/op_helper.c
+> @@ -146,7 +146,7 @@ target_ulong helper_mret(CPURISCVState *env, target_ulong cpu_pc_deb)
+>
+>      target_ulong mstatus = *env->mstatus;
+>      target_ulong prev_priv = get_field(mstatus, MSTATUS_MPP);
+> -    target_ulong prev_virt = get_field(mstatus, MSTATUS_MPV);
+> +    target_ulong prev_virt = MSTATUS_MPV_ISSET(env);
+>      mstatus = set_field(mstatus,
+>          env->priv_ver >= PRIV_VERSION_1_10_0 ?
+>          MSTATUS_MIE : MSTATUS_UIE << prev_priv,
+> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+> index dd93e12b45..0a28f208a2 100644
+> --- a/target/riscv/translate.c
+> +++ b/target/riscv/translate.c
+> @@ -752,7 +752,7 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
+>          ctx->virt_enabled = riscv_cpu_virt_enabled(env);
+>          if (env->priv_ver == PRV_M &&
+>              get_field(*env->mstatus, MSTATUS_MPRV) &&
+> -            get_field(*env->mstatus, MSTATUS_MPV)) {
+> +            MSTATUS_MPV_ISSET(env)) {
+>              ctx->virt_enabled = true;
+>          } else if (env->priv == PRV_S &&
+>                     !riscv_cpu_virt_enabled(env) &&
 
-(1) You're confusing implementation defined with undefined, and unsigned
-arithmetic is the former not the latter.
-
-(2) There is no such thing as ones-compliment or sign-magnitude integer
-hardware anymore, so for this case "implementation defined" is in fact universal.
-
-(3) We build with -fwrapv, so we're explicitly asking for sane behaviour from
-our signed types as well.
-
-
-r~
+Reviewed-by: Palmer Dabbelt <palmerdabbelt@google.com>
 
