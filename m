@@ -1,70 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ipNgR-0006zL-Ci
-	for mharc-qemu-riscv@gnu.org; Wed, 08 Jan 2020 21:36:27 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:48737)
+	id 1iphRl-0006fu-A3
+	for mharc-qemu-riscv@gnu.org; Thu, 09 Jan 2020 18:42:37 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:36341)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <palmerdabbelt@google.com>) id 1ipNgL-0006xO-Uq
- for qemu-riscv@nongnu.org; Wed, 08 Jan 2020 21:36:25 -0500
+ (envelope-from <palmerdabbelt@google.com>) id 1iphRi-0006fL-KB
+ for qemu-riscv@nongnu.org; Thu, 09 Jan 2020 18:42:35 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmerdabbelt@google.com>) id 1ipNgI-0004mT-C3
- for qemu-riscv@nongnu.org; Wed, 08 Jan 2020 21:36:21 -0500
-Received: from mail-pl1-x644.google.com ([2607:f8b0:4864:20::644]:41659)
+ (envelope-from <palmerdabbelt@google.com>) id 1iphRh-0006QC-Fw
+ for qemu-riscv@nongnu.org; Thu, 09 Jan 2020 18:42:34 -0500
+Received: from mail-pg1-x544.google.com ([2607:f8b0:4864:20::544]:43872)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <palmerdabbelt@google.com>)
- id 1ipNgH-0004hG-UN
- for qemu-riscv@nongnu.org; Wed, 08 Jan 2020 21:36:18 -0500
-Received: by mail-pl1-x644.google.com with SMTP id bd4so1907814plb.8
- for <qemu-riscv@nongnu.org>; Wed, 08 Jan 2020 18:36:15 -0800 (PST)
+ id 1iphRh-00067x-6d
+ for qemu-riscv@nongnu.org; Thu, 09 Jan 2020 18:42:33 -0500
+Received: by mail-pg1-x544.google.com with SMTP id k197so58883pga.10
+ for <qemu-riscv@nongnu.org>; Thu, 09 Jan 2020 15:42:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
  h=date:from:subject:cc:to:in-reply-to:references:message-id
  :mime-version:content-transfer-encoding;
- bh=1u20Y16UTLTK3vGnMCMvTg+KplB+/S/bHmNElPoWiDI=;
- b=O6bLA1LOZeQlJADeWsre7LaHvyWkHEKyhJJxTfuA4Z1qQjwdO99fIIDr1drLpj7qtm
- k5tnLbeEJuzXNaK482Kl3HkHk5drFlWcZZBuSuWyHCxxnN+dbxkanGvlSCktFmUH3Rgg
- e6dlcOKjGK5+RcDhSIZz+2eOCZsa/6ulvKzKoJslUMEPTrDOe4u1KoPLZ8rSiyEFxVQD
- 55fB5YgRWFFIZF0c+wR5m3Ubh1z+dvvEo2apvne+iiqk4ovp9IOpe6sW3wGBU7KJrs6Y
- c6ZQUgsvJrB/hQQj3uBcxTOqdA6a4Sr+We0NAzXmIK4F1LIDtODUVVkvCeINancE859R
- BAVg==
+ bh=mefVIwlrKKDip3XVpDDxb1wot7pwoE9ZiAmCZtDHxak=;
+ b=Kv06fIbEbumpO+4n9WTcgZqd9BjBPpldJ8BUGkRYqhynEqf+r9ewN3C5cgPWhKI7oJ
+ AbJgzE4P/zIrX0znwqTx4nhL4QkUHBfdjwDvWiwN/krVZnR9F1pQQ5p1Pr0rzq/zLMx2
+ Bcwj7rilVIJnXGgMG4jWcsZt3/y8AGd4/OU7uc7f2IyM/R3nxd9OTlbUJichFvK3H5eZ
+ Ew37uOgV0c0OPTccm8shyxXLPSWvZjeUPkA2K3L8i2r+1pQeYjKTTaoEkIoFk2zwjNyy
+ PKV9tBlPHWrx+Ak8cjoxHz0p3sfNvUW6K9Vr+HxLmcJiqAlyTkEWgx701eWhGvoDi9tM
+ 4+sw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:subject:cc:to:in-reply-to:references
  :message-id:mime-version:content-transfer-encoding;
- bh=1u20Y16UTLTK3vGnMCMvTg+KplB+/S/bHmNElPoWiDI=;
- b=OQgRyuaYPL1miZs6zfYU71xzNSr/FTyoRvkH9AyTFq3Tb18zLh4t9jdKGE+4rBjHAV
- pGjllMbju8L9fIWXr/eK6vKp2MtlBrhWyYz3iXhU5s70TZeaD0xbvNMl0DSMa7Adi9yH
- ryyKYrsaNMaWxZx81WqsOJovKX3QdKyjse26ZzRLGftLSaMY6NvyRUSE353bIq7Qn7Xl
- pzrDAYg2O8wzWe+dNqShntYaexVDsBmh5mHnfmh2PkLhxB/9A1N6ZK0tfLzSNBtrj84q
- w58HzqPps9aLBleQ/OqLbEo3cVYoxN65QFiLVkCf6a/ZWYOW+I7PR0NgL+C0AtAj43PP
- MS+g==
-X-Gm-Message-State: APjAAAWzASfNOHtl/A0Yd0uQqjLt1g/JiIOiKLBPUuObNAhRkEkTrM+q
- 8WX2vC4zfRaFQtznpCPrLFP71A==
-X-Google-Smtp-Source: APXvYqzQKG7/Dt2LK8mdtNaB1XN0G//XlUNpBLg9uK3Qrz9IEBS4zegYYcVP7AD7HK+7d2idcD4J/A==
-X-Received: by 2002:a17:90b:941:: with SMTP id
- dw1mr2350377pjb.21.1578537373890; 
- Wed, 08 Jan 2020 18:36:13 -0800 (PST)
-Received: from localhost (189.8.197.35.bc.googleusercontent.com.
- [35.197.8.189])
- by smtp.gmail.com with ESMTPSA id p21sm5094988pfn.103.2020.01.08.18.36.13
+ bh=mefVIwlrKKDip3XVpDDxb1wot7pwoE9ZiAmCZtDHxak=;
+ b=h0+LY6rxUQk2OUXAhcjxyl5iU/yVGqgXyWMH+EbLmFRd7GXefFsrR6l7txc9AQoiKl
+ OwZtKleblPs1Tz4WoM1EU0pObtsPp9Hld3/WUGMGKbGxJvbTWe47hfvKSxuWcv1RWV7X
+ yFov9quLPOAAew1luL2yaMCbax873AY3QYjgPM5cfCK/2HB1c3yyiY0Cbb8AnFCoGTJy
+ 0MgeNMrA3KxJYjh19seU10rbEeqjVS+23PTF/68ywJXs3z+FCgyxkBQCYunqpsyc3PSE
+ LlJfbwB12g0RiWzBAm3MX5Kz3LtjHy0JbC53eDwS3Q6TE25sTJbHIkwxF2T5iddBkufJ
+ erVA==
+X-Gm-Message-State: APjAAAW0DyjcO66ArmJXWeE4Xvo2Pg6SBLdn/3Ftdr9hoLSl9BT/+wTx
+ NV7UFHg2eyQfXBQ0LCITcdkf7g==
+X-Google-Smtp-Source: APXvYqzThfhawpHp3qkzVWCcDVR5G+UIrqQ5Xl+luqRP15w8dF/AL3uXejLQJlQYkfqM7Jk2v+lqHA==
+X-Received: by 2002:a62:18f:: with SMTP id 137mr504226pfb.84.1578613348899;
+ Thu, 09 Jan 2020 15:42:28 -0800 (PST)
+Received: from localhost ([2620:0:1000:2514:7f69:cd98:a2a2:a03d])
+ by smtp.gmail.com with ESMTPSA id q12sm131706pfh.158.2020.01.09.15.42.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Jan 2020 18:36:13 -0800 (PST)
-Date: Wed, 08 Jan 2020 18:36:13 -0800 (PST)
-X-Google-Original-Date: Wed, 08 Jan 2020 18:35:57 PST (-0800)
+ Thu, 09 Jan 2020 15:42:28 -0800 (PST)
+Date: Thu, 09 Jan 2020 15:42:28 -0800 (PST)
+X-Google-Original-Date: Thu, 09 Jan 2020 15:38:32 PST (-0800)
 From: Palmer Dabbelt <palmerdabbelt@google.com>
 X-Google-Original-From: Palmer Dabbelt <palmer@dabbelt.com>
-Subject: Re: [PATCH v1 35/36] target/riscv: Add the MSTATUS_MPV_ISSET helper
- macro
-CC: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- Alistair Francis <Alistair.Francis@wdc.com>, alistair23@gmail.com
-To: Alistair Francis <Alistair.Francis@wdc.com>
-In-Reply-To: <c6b8c2739278b63e5e03c2a2095254fa0afedbda.1575914822.git.alistair.francis@wdc.com>
-References: <c6b8c2739278b63e5e03c2a2095254fa0afedbda.1575914822.git.alistair.francis@wdc.com><cover.1575914822.git.alistair.francis@wdc.com>
-Message-ID: <mhng-ac524f0b-4bc9-41ab-a177-7d3da237a83a@palmerdabbelt-glaptop>
+Subject: Re: [PATCH] riscv/sifive_u: fix a memory leak in soc_realize()
+CC: pannengyuan@huawei.com, Alistair Francis <Alistair.Francis@wdc.com>,
+ sagark@eecs.berkeley.edu, Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ qemu-riscv@nongnu.org, 
+ qemu-devel@nongnu.org, zhang.zhanghailiang@huawei.com
+To: alistair23@gmail.com
+In-Reply-To: <CAKmqyKNH0NdhksX35C7Cm1e51in-iRBrmH8TJWGYregCgLgO6w@mail.gmail.com>
+References: <CAKmqyKNH0NdhksX35C7Cm1e51in-iRBrmH8TJWGYregCgLgO6w@mail.gmail.com>
+ <1575962077-28800-1-git-send-email-pannengyuan@huawei.com>
+Message-ID: <mhng-8d4724ea-7312-45f2-8f14-fb3175ca9b6a@palmerdabbelt-glaptop>
 Mime-Version: 1.0 (MHng)
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::644
+X-Received-From: 2607:f8b0:4864:20::544
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -76,92 +76,45 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Jan 2020 02:36:25 -0000
+X-List-Received-Date: Thu, 09 Jan 2020 23:42:35 -0000
 
-On Mon, 09 Dec 2019 10:12:12 PST (-0800), Alistair Francis wrote:
-> Add a helper macro MSTATUS_MPV_ISSET() which will determine if the
-> MSTATUS_MPV bit is set for both 32-bit and 64-bit RISC-V.
+On Tue, 10 Dec 2019 10:38:29 PST (-0800), alistair23@gmail.com wrote:
+> On Mon, Dec 9, 2019 at 11:15 PM <pannengyuan@huawei.com> wrote:
+>>
+>> From: Pan Nengyuan <pannengyuan@huawei.com>
+>>
+>> Fix a minor memory leak in riscv_sifive_u_soc_realize()
+>>
+>> Reported-by: Euler Robot <euler.robot@huawei.com>
+>> Signed-off-by: Pan Nengyuan <pannengyuan@huawei.com>
 >
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> ---
->  target/riscv/cpu_bits.h   | 11 +++++++++++
->  target/riscv/cpu_helper.c |  4 ++--
->  target/riscv/op_helper.c  |  2 +-
->  target/riscv/translate.c  |  2 +-
->  4 files changed, 15 insertions(+), 4 deletions(-)
->
-> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-> index 049032f2ae..dd012a514e 100644
-> --- a/target/riscv/cpu_bits.h
-> +++ b/target/riscv/cpu_bits.h
-> @@ -363,8 +363,19 @@
->  #define MSTATUS_TVM         0x00100000 /* since: priv-1.10 */
->  #define MSTATUS_TW          0x20000000 /* since: priv-1.10 */
->  #define MSTATUS_TSR         0x40000000 /* since: priv-1.10 */
-> +#if defined(TARGET_RISCV64)
->  #define MSTATUS_MTL         0x4000000000ULL
->  #define MSTATUS_MPV         0x8000000000ULL
-> +#elif defined(TARGET_RISCV32)
-> +#define MSTATUS_MTL         0x00000040
-> +#define MSTATUS_MPV         0x00000080
-> +#endif
-> +
-> +#ifdef TARGET_RISCV32
-> +# define MSTATUS_MPV_ISSET(env)  get_field(*env->mstatush, MSTATUS_MPV)
-> +#else
-> +# define MSTATUS_MPV_ISSET(env)  get_field(*env->mstatus, MSTATUS_MPV)
-> +#endif
->
->  #define MSTATUS64_UXL       0x0000000300000000ULL
->  #define MSTATUS64_SXL       0x0000000C00000000ULL
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index c2ad0bbce7..7166e6199e 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -314,7 +314,7 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
->              mode = get_field(*env->mstatus, MSTATUS_MPP);
->
->              if (riscv_has_ext(env, RVH) &&
-> -                get_field(*env->mstatus, MSTATUS_MPV)) {
-> +                MSTATUS_MPV_ISSET(env)) {
->                  use_background = true;
->              }
->          }
-> @@ -714,7 +714,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
->          m_mode_two_stage = env->priv == PRV_M &&
->                             access_type != MMU_INST_FETCH &&
->                             get_field(*env->mstatus, MSTATUS_MPRV) &&
-> -                           get_field(*env->mstatus, MSTATUS_MPV);
-> +                           MSTATUS_MPV_ISSET(env);
->
->          hs_mode_two_stage = env->priv == PRV_S &&
->                              !riscv_cpu_virt_enabled(env) &&
-> diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
-> index a0a631d722..b0b9890a15 100644
-> --- a/target/riscv/op_helper.c
-> +++ b/target/riscv/op_helper.c
-> @@ -146,7 +146,7 @@ target_ulong helper_mret(CPURISCVState *env, target_ulong cpu_pc_deb)
->
->      target_ulong mstatus = *env->mstatus;
->      target_ulong prev_priv = get_field(mstatus, MSTATUS_MPP);
-> -    target_ulong prev_virt = get_field(mstatus, MSTATUS_MPV);
-> +    target_ulong prev_virt = MSTATUS_MPV_ISSET(env);
->      mstatus = set_field(mstatus,
->          env->priv_ver >= PRIV_VERSION_1_10_0 ?
->          MSTATUS_MIE : MSTATUS_UIE << prev_priv,
-> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index dd93e12b45..0a28f208a2 100644
-> --- a/target/riscv/translate.c
-> +++ b/target/riscv/translate.c
-> @@ -752,7 +752,7 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
->          ctx->virt_enabled = riscv_cpu_virt_enabled(env);
->          if (env->priv_ver == PRV_M &&
->              get_field(*env->mstatus, MSTATUS_MPRV) &&
-> -            get_field(*env->mstatus, MSTATUS_MPV)) {
-> +            MSTATUS_MPV_ISSET(env)) {
->              ctx->virt_enabled = true;
->          } else if (env->priv == PRV_S &&
->                     !riscv_cpu_virt_enabled(env) &&
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-Reviewed-by: Palmer Dabbelt <palmerdabbelt@google.com>
+Thanks.  This is in the queue, I'm hoping to submit a PR after the H patch set
+is ready to go.
+
+>
+> Alistair
+>
+>> ---
+>>  hw/riscv/sifive_u.c | 1 +
+>>  1 file changed, 1 insertion(+)
+>>
+>> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+>> index 0140e95..0e12b3c 100644
+>> --- a/hw/riscv/sifive_u.c
+>> +++ b/hw/riscv/sifive_u.c
+>> @@ -542,6 +542,7 @@ static void riscv_sifive_u_soc_realize(DeviceState *dev, Error **errp)
+>>          SIFIVE_U_PLIC_CONTEXT_BASE,
+>>          SIFIVE_U_PLIC_CONTEXT_STRIDE,
+>>          memmap[SIFIVE_U_PLIC].size);
+>> +    g_free(plic_hart_config);
+>>      sifive_uart_create(system_memory, memmap[SIFIVE_U_UART0].base,
+>>          serial_hd(0), qdev_get_gpio_in(DEVICE(s->plic), SIFIVE_U_UART0_IRQ));
+>>      sifive_uart_create(system_memory, memmap[SIFIVE_U_UART1].base,
+>> --
+>> 2.7.2.windows.1
+>>
+>>
+>>
 
