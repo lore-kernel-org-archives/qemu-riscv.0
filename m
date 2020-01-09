@@ -1,63 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ipHt8-0007Un-W0
-	for mharc-qemu-riscv@gnu.org; Wed, 08 Jan 2020 15:25:11 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:34849)
+	id 1ipM0c-0002iq-84
+	for mharc-qemu-riscv@gnu.org; Wed, 08 Jan 2020 19:49:10 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:56260)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <palmerdabbelt@google.com>) id 1ipHt6-0007UL-O3
- for qemu-riscv@nongnu.org; Wed, 08 Jan 2020 15:25:09 -0500
+ (envelope-from <palmerdabbelt@google.com>) id 1ipM0Y-0002ga-7e
+ for qemu-riscv@nongnu.org; Wed, 08 Jan 2020 19:49:08 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmerdabbelt@google.com>) id 1ipHt5-0001ca-Iu
- for qemu-riscv@nongnu.org; Wed, 08 Jan 2020 15:25:08 -0500
-Received: from mail-pl1-x642.google.com ([2607:f8b0:4864:20::642]:34671)
+ (envelope-from <palmerdabbelt@google.com>) id 1ipM0W-00082F-5l
+ for qemu-riscv@nongnu.org; Wed, 08 Jan 2020 19:49:06 -0500
+Received: from mail-pl1-x642.google.com ([2607:f8b0:4864:20::642]:41138)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <palmerdabbelt@google.com>)
- id 1ipHt5-0001YG-BM
- for qemu-riscv@nongnu.org; Wed, 08 Jan 2020 15:25:07 -0500
-Received: by mail-pl1-x642.google.com with SMTP id x17so1586397pln.1
- for <qemu-riscv@nongnu.org>; Wed, 08 Jan 2020 12:25:04 -0800 (PST)
+ id 1ipM0V-00080C-VT
+ for qemu-riscv@nongnu.org; Wed, 08 Jan 2020 19:49:04 -0500
+Received: by mail-pl1-x642.google.com with SMTP id bd4so1809311plb.8
+ for <qemu-riscv@nongnu.org>; Wed, 08 Jan 2020 16:49:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
  h=date:from:subject:cc:to:in-reply-to:references:message-id
  :mime-version:content-transfer-encoding;
- bh=vCD0gNLjsZ1HX5BFdK6+0i47Hz9qh5wOkptLUWktIG8=;
- b=ox49SkzM9wH8gPUlsCaQ66Hjyp2pHkUACuSQY8W+jkZS3HSNUu07DR7m3Sw9cSvSMr
- DxhJp1cGYhymCYgUISpGDqGLWcMbjilmDBRfeTzcFVchZunSJANTkY/y+/cRgYNYyT3d
- TEjgPyXorAYpsMK3QjQPEoq+VfJ2demiLPPB/+RGdOi4YnKEOGH0yrusJl6lEV6rpnWu
- 4a7mA9e9jRIu4+O2I6gLzmbg45+xTZtmZkND8iloVTk6m1p5CmDSQ5zbxcEXw24jC46X
- tAdSoUbv502EWevsxp7+OVjQYi/4KO7YBLszQz2V0Ck3JurcCv5tEoyryFJiw8HOR5jD
- 0Rxg==
+ bh=H3zSPRBKP4ZzdR/6KbzozHd86904u26K/mFmLx9RqzI=;
+ b=feh1JZ0rixUc1SjMjv50oJb+Uu0jBd1QfUGkdIbmUF5sZoItk0fH7Db7tog+l1OVyA
+ O9NQCNB3K0pra7lD1nuchRau60eAPdIIErh1IksBuIYc8iCau2N4YV9zKFu7WISVT6yQ
+ TslejvK561l3b7IBA6S2mxO8r5zvPGciY6HWySoKnBKNMhISoHLeoUNR9YZtTcyC7qYV
+ af2TWoNv6xqbeZPY8tHdFQ8st2A7+q21hHZKH17TftXAaUgbdiwUQlb2Kyub0atwwukS
+ wE3Dliy7tKS4c5OqmFn6aaibx7MInXh7JDJ6vcd3G5SC4l0mbxFH+NGJgyxyC8a/IowV
+ rI6Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:subject:cc:to:in-reply-to:references
  :message-id:mime-version:content-transfer-encoding;
- bh=vCD0gNLjsZ1HX5BFdK6+0i47Hz9qh5wOkptLUWktIG8=;
- b=XVgr93L4PT4s6f+ROrsaLph+UiSZ4b2aayR139j7ecilJXh537gx4ZpIhWKHjoJeCa
- RoZvlcwTJi4F02L+IT0I+LYaY+1ap694FeiQtwdZek5rDrhmBhj0b70eTjKpYnAglfM4
- KHdkXXCYrTyxNKZb/tx+1eSDyMRxCgy6Bo3m0G2063cR6hJXsMOGfgtZfSh+J7iq+Pu5
- VTokOMew1WgdoZ1nyo2wX1a1GaADx768L1soKNWRz5tIDmxWsAoF71iG2HBwMHJc5W75
- lSVk8jhJU5vu7oErCV2M540pvuOZd9LlGfzaEuN240o9CgHwxLrFyqi14fpiFa+FzIMI
- 0hSw==
-X-Gm-Message-State: APjAAAWuiMyyLsTtOwVpqpAF2nYinupLbin6r5BpuOZD/f790XQ+h2jp
- 8JFlrQdA0w/+oQh+T/SDJay6yQ==
-X-Google-Smtp-Source: APXvYqwYSwi/4Drsq6AyflNQMfKMlP47vRSQTj/SjyijdlVQY1Zs9VLhVhCKj3THlX00u/BouozSgA==
-X-Received: by 2002:a17:902:7006:: with SMTP id
- y6mr7253333plk.84.1578515103273; 
- Wed, 08 Jan 2020 12:25:03 -0800 (PST)
+ bh=H3zSPRBKP4ZzdR/6KbzozHd86904u26K/mFmLx9RqzI=;
+ b=LX1SELs1+HkhitVbvK0dxMPl0cuVQMKEpnU4i6ld6EB6XffHyfW7Dv1YSY8kfw8e0U
+ sb9EqWN2i8XFxP1o8Zuo0EW3hWp+t2yNgRSon5UKkrdncNB8H99Gu+7u72GMiIl13Mgj
+ WMsEvAS5R8hOud4Z232/PXDMW4mA31mzLiNpGXzg6TLeSstNdZlTHk8xxK4YNWDc6bO3
+ DDPiNqBAL6TG+IxPTF7aVJuMnbWjcx4wIv9sprp9zdclyXXJTZWy4awZdeSrQh1hwZho
+ pBQGmnEP2W42UEJBAbGDP/zyGUbungV2HmUvoEvnx3ftN9xyjnaEB8CSQ6lqWuFu6CSU
+ 4Vzw==
+X-Gm-Message-State: APjAAAUk5aIxdf950AfTn2SQf3KP0BRR2XBT4lZSxPFlFxz83VOwWaBv
+ ysZW6NTUEjg1H15LOpGSA1aQVg==
+X-Google-Smtp-Source: APXvYqxlNnHVU8Ubb9ccyNzIKNObfpQSyuIe2VJ4nm//zGUmzvwpz4fhSU0OO4ISvy8yuiRoUV5gow==
+X-Received: by 2002:a17:90a:a88d:: with SMTP id
+ h13mr1739046pjq.55.1578530942843; 
+ Wed, 08 Jan 2020 16:49:02 -0800 (PST)
 Received: from localhost ([2620:0:1000:2514:7f69:cd98:a2a2:a03d])
- by smtp.gmail.com with ESMTPSA id b19sm4514883pfo.56.2020.01.08.12.25.02
+ by smtp.gmail.com with ESMTPSA id z29sm5115273pge.21.2020.01.08.16.49.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Jan 2020 12:25:02 -0800 (PST)
-Date: Wed, 08 Jan 2020 12:25:02 -0800 (PST)
-X-Google-Original-Date: Wed, 08 Jan 2020 12:24:57 PST (-0800)
+ Wed, 08 Jan 2020 16:49:02 -0800 (PST)
+Date: Wed, 08 Jan 2020 16:49:02 -0800 (PST)
+X-Google-Original-Date: Wed, 08 Jan 2020 14:40:48 PST (-0800)
 From: Palmer Dabbelt <palmerdabbelt@google.com>
 X-Google-Original-From: Palmer Dabbelt <palmer@dabbelt.com>
-Subject: Re: [PATCH v1 18/36] target/riscv: Extend the MIE CSR to support
- virtulisation
+Subject: Re: [PATCH v1 26/36] target/riscv: Remove the hret instruction
 CC: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
  Alistair Francis <Alistair.Francis@wdc.com>, alistair23@gmail.com
 To: Alistair Francis <Alistair.Francis@wdc.com>
-In-Reply-To: <6ec43c1bf0886d917fcd88d3751d72def5507db2.1575914822.git.alistair.francis@wdc.com>
-References: <6ec43c1bf0886d917fcd88d3751d72def5507db2.1575914822.git.alistair.francis@wdc.com><cover.1575914822.git.alistair.francis@wdc.com>
-Message-ID: <mhng-d2e58623-a1c9-433f-9a4a-0d3d49c07b7b@palmerdabbelt-glaptop>
+In-Reply-To: <c83aac89b3f1825c4c3ae282495a28572031f7d5.1575914822.git.alistair.francis@wdc.com>
+References: <c83aac89b3f1825c4c3ae282495a28572031f7d5.1575914822.git.alistair.francis@wdc.com><cover.1575914822.git.alistair.francis@wdc.com>
+Message-ID: <mhng-5bd4e131-6645-4d27-8255-5837e004f8c2@palmerdabbelt-glaptop>
 Mime-Version: 1.0 (MHng)
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
@@ -75,60 +74,46 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Jan 2020 20:25:10 -0000
+X-List-Received-Date: Thu, 09 Jan 2020 00:49:08 -0000
 
-On Mon, 09 Dec 2019 10:11:27 PST (-0800), Alistair Francis wrote:
+On Mon, 09 Dec 2019 10:11:48 PST (-0800), Alistair Francis wrote:
+> The hret instruction does not exist in the new spec versions, so remove
+> it from QEMU.
+>
 > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 > ---
->  target/riscv/csr.c | 24 ++++++++++++++++++++----
->  1 file changed, 20 insertions(+), 4 deletions(-)
+>  target/riscv/insn32.decode                     | 1 -
+>  target/riscv/insn_trans/trans_privileged.inc.c | 5 -----
+>  2 files changed, 6 deletions(-)
 >
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index fc38c45a7e..54edfb280e 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -244,8 +244,10 @@ static int read_timeh(CPURISCVState *env, int csrno, target_ulong *val)
->  #define S_MODE_INTERRUPTS  (MIP_SSIP | MIP_STIP | MIP_SEIP)
->  #define VS_MODE_INTERRUPTS (MIP_VSSIP | MIP_VSTIP | MIP_VSEIP)
->
-> -static const target_ulong delegable_ints = S_MODE_INTERRUPTS;
-> -static const target_ulong all_ints = M_MODE_INTERRUPTS | S_MODE_INTERRUPTS;
-> +static const target_ulong delegable_ints = S_MODE_INTERRUPTS |
-> +                                           VS_MODE_INTERRUPTS;
-> +static const target_ulong all_ints = M_MODE_INTERRUPTS | S_MODE_INTERRUPTS |
-> +                                     VS_MODE_INTERRUPTS;
->  static const target_ulong delegable_excps =
->      (1ULL << (RISCV_EXCP_INST_ADDR_MIS)) |
->      (1ULL << (RISCV_EXCP_INST_ACCESS_FAULT)) |
-> @@ -631,13 +633,27 @@ static int write_sstatus(CPURISCVState *env, int csrno, target_ulong val)
->
->  static int read_sie(CPURISCVState *env, int csrno, target_ulong *val)
->  {
-> -    *val = env->mie & env->mideleg;
-> +    if (riscv_cpu_virt_enabled(env)) {
-> +        /* Tell the guest the VS bits, shifted to the S bit locations */
-> +        *val = (env->mie & env->mideleg & VS_MODE_INTERRUPTS) >> 1;
-> +    } else {
-> +        *val = env->mie & env->mideleg;
-> +    }
->      return 0;
+> diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+> index cfd9ca6d2b..b883672e63 100644
+> --- a/target/riscv/insn32.decode
+> +++ b/target/riscv/insn32.decode
+> @@ -75,7 +75,6 @@ ecall       000000000000     00000 000 00000 1110011
+>  ebreak      000000000001     00000 000 00000 1110011
+>  uret        0000000    00010 00000 000 00000 1110011
+>  sret        0001000    00010 00000 000 00000 1110011
+> -hret        0010000    00010 00000 000 00000 1110011
+>  mret        0011000    00010 00000 000 00000 1110011
+>  wfi         0001000    00101 00000 000 00000 1110011
+>  hfence_gvma 0110001    ..... ..... 000 00000 1110011 @hfence_gvma
+> diff --git a/target/riscv/insn_trans/trans_privileged.inc.c b/target/riscv/insn_trans/trans_privileged.inc.c
+> index b9b5a89b52..76c2fad71c 100644
+> --- a/target/riscv/insn_trans/trans_privileged.inc.c
+> +++ b/target/riscv/insn_trans/trans_privileged.inc.c
+> @@ -58,11 +58,6 @@ static bool trans_sret(DisasContext *ctx, arg_sret *a)
+>  #endif
 >  }
 >
->  static int write_sie(CPURISCVState *env, int csrno, target_ulong val)
+> -static bool trans_hret(DisasContext *ctx, arg_hret *a)
+> -{
+> -    return false;
+> -}
+> -
+>  static bool trans_mret(DisasContext *ctx, arg_mret *a)
 >  {
-> -    target_ulong newval = (env->mie & ~env->mideleg) | (val & env->mideleg);
-> +    target_ulong newval;
-> +
-> +    if (riscv_cpu_virt_enabled(env)) {
-> +        /* Shift the guests S bits to VS */
-> +        newval = (env->mie & ~VS_MODE_INTERRUPTS) |
-> +                 ((val << 1) & VS_MODE_INTERRUPTS);
-> +    } else {
-> +        newval = (env->mie & ~S_MODE_INTERRUPTS) | (val & S_MODE_INTERRUPTS);
-> +    }
-> +
->      return write_mie(env, CSR_MIE, newval);
->  }
+>  #ifndef CONFIG_USER_ONLY
 
 Reviewed-by: Palmer Dabbelt <palmerdabbelt@google.com>
 
