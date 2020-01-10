@@ -1,63 +1,39 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ipp5j-0001Ba-KD
-	for mharc-qemu-riscv@gnu.org; Fri, 10 Jan 2020 02:52:23 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:47241)
+	id 1ippPx-00033R-Tj
+	for mharc-qemu-riscv@gnu.org; Fri, 10 Jan 2020 03:13:17 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:45843)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <bmeng.cn@gmail.com>) id 1ipp5h-00018u-7G
- for qemu-riscv@nongnu.org; Fri, 10 Jan 2020 02:52:22 -0500
+ (envelope-from <zhiwei_liu@c-sky.com>) id 1ippPu-00030R-Lo
+ for qemu-riscv@nongnu.org; Fri, 10 Jan 2020 03:13:15 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <bmeng.cn@gmail.com>) id 1ipp5g-0007vE-69
- for qemu-riscv@nongnu.org; Fri, 10 Jan 2020 02:52:21 -0500
-Received: from mail-yb1-xb44.google.com ([2607:f8b0:4864:20::b44]:37772)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
- id 1ipp5d-0007cr-I3; Fri, 10 Jan 2020 02:52:17 -0500
-Received: by mail-yb1-xb44.google.com with SMTP id o199so390442ybc.4;
- Thu, 09 Jan 2020 23:52:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=pGc28JUK4brkkBXgGYVjWG6E2diYpG1C4549iKELVuY=;
- b=mEByfTPg2xYtDNJeUQ4bPizh4zHOR9LBehXyNnenOJtWzb78c/jUDtWmlxeFhdI9/A
- DxlE5ZXhrxIrmgK3ZyyuI4gmvQ2oVzMGZr7Mzpor90NOiylce6Fn86YHQaAIL2yC2xYX
- WtIuu0+zpGsO65aQLzUxcmyRk6N51fEkBrVRq+VK9B6HQ2rMYNIy6o13BjE4vWyIKssR
- lafFlhJhkFMstGaiwBK8AKEBJGeu8wemMeIEtggCnZqYomIGxIh342mw3m47wVgQGqhs
- O/BuROKcBzan83IlV03zfnUFOtSBzcqihkzpxUhWWV1qdPIb1mfaW945r4YiGdxgxFiO
- rtfw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=pGc28JUK4brkkBXgGYVjWG6E2diYpG1C4549iKELVuY=;
- b=iioSzntMPiNQpbTLbhm6S7z1+xbWxOl93wUFxJoUEgZOs0vSzbfhiaSy/I1Ci+lMdt
- tW6kZNf/lkUcIegimF96a/zkGzRWlySRYQZo8DiyV5YfiQ+pjBM6TK4LBxM+0dS0abTq
- Pejh8PX/OpGoG0iZrjTkHlOPFKXHkjfmKB1lkOlLxl+lzCAICnvhe0Ewkck6dzXonRMT
- NcyRWZYi81y4mrOYhrQsnhELvFyumOobxo1yrZm9IalwRc9mkkh5LBVzl34vzy/2qkWp
- stFg46XSdORFGeZyq80Y5U8R6NyLpQRU3i+aN4IqKvpK1iwe30WTTmwyq6r0Y00z6Hgb
- 80sQ==
-X-Gm-Message-State: APjAAAXs2cfqEU0JivXaEexqw6zghBZNxqMzqPChC7zcT1eJZVp1hX7Q
- 1oaEiKvl5XamWYO3QXw8n24L2aSnMjRBXFWHQi4=
-X-Google-Smtp-Source: APXvYqwH1tzEWsjJY/tum0YIpQntOtbjA1v70r9i2G5YJGspTgGMld42roZwsCla5+VSxte8x7IvWY8gQlZYRrb4/pM=
-X-Received: by 2002:a25:b1a7:: with SMTP id h39mr1265160ybj.29.1578642736052; 
- Thu, 09 Jan 2020 23:52:16 -0800 (PST)
+ (envelope-from <zhiwei_liu@c-sky.com>) id 1ippPt-0004ge-FA
+ for qemu-riscv@nongnu.org; Fri, 10 Jan 2020 03:13:14 -0500
+Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:49220)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <zhiwei_liu@c-sky.com>)
+ id 1ippPq-0003xX-H2; Fri, 10 Jan 2020 03:13:10 -0500
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.08015814|-1; CH=green;
+ DM=CONTINUE|CONTINUE|true|0.380576-0.0141733-0.605251;
+ DS=CONTINUE|ham_system_inform|0.0907534-0.000993834-0.908253;
+ FP=0|0|0|0|0|-1|-1|-1; HT=e02c03306; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS;
+ RN=10; RT=10; SR=0; TI=SMTPD_---.GZbTVKh_1578643981; 
+Received: from L-PF1D6DP4-1208.hz.ali.com(mailfrom:zhiwei_liu@c-sky.com
+ fp:SMTPD_---.GZbTVKh_1578643981)
+ by smtp.aliyun-inc.com(10.147.41.158);
+ Fri, 10 Jan 2020 16:13:01 +0800
+From: LIU Zhiwei <zhiwei_liu@c-sky.com>
+To: Alistair.Francis@wdc.com, palmer@dabbelt.com, chihmin.chao@sifive.com,
+ jimw@sifive.com, bmeng.cn@gmail.com
+Cc: wenmeng_zhang@c-sky.com, wxy194768@alibaba-inc.com, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org, LIU Zhiwei <zhiwei_liu@c-sky.com>
+Subject: [PATCH 1/3] select gdb fpu xml by single or double float extension
+Date: Fri, 10 Jan 2020 16:12:18 +0800
+Message-Id: <20200110081220.891-1-zhiwei_liu@c-sky.com>
+X-Mailer: git-send-email 2.23.0
 MIME-Version: 1.0
-References: <CAEUhbmUuCOzd_Y6ip_oh13gt83rM8EffdXWRCa=KybOjAvEN-A@mail.gmail.com>
- <mhng-b2e05f4a-7c3d-4be1-a843-a19b4054760a@palmerdabbelt.mtv.corp.google.com>
-In-Reply-To: <mhng-b2e05f4a-7c3d-4be1-a843-a19b4054760a@palmerdabbelt.mtv.corp.google.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Fri, 10 Jan 2020 15:52:05 +0800
-Message-ID: <CAEUhbmXRaHqxNt2XCgsjUDfR+VoMOjb5f38V6Yu35HWV1nkKeQ@mail.gmail.com>
-Subject: Re: [PATCH] riscv: sifive_u: Add a "serial" property for board serial
- number
-To: Palmer Dabbelt <palmerdabbelt@google.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2607:f8b0:4864:20::b44
+Content-Transfer-Encoding: 8bit
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 3.x [generic] [fuzzy]
+X-Received-From: 121.197.200.217
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -69,43 +45,73 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Jan 2020 07:52:22 -0000
+X-List-Received-Date: Fri, 10 Jan 2020 08:13:15 -0000
 
-Hi Palmer,
+There is no reason why RISCV32 can't use RVD extension,
+or RISCV64 can't just use RVF extension. And gdb will check
+flen according to RVD or RVF feature in elf header.
 
-On Fri, Nov 22, 2019 at 10:38 AM Palmer Dabbelt
-<palmerdabbelt@google.com> wrote:
->
-> On Thu, 21 Nov 2019 17:10:18 PST (-0800), bmeng.cn@gmail.com wrote:
-> > On Sat, Nov 16, 2019 at 11:08 PM Bin Meng <bmeng.cn@gmail.com> wrote:
-> >>
-> >> At present the board serial number is hard-coded to 1, and passed
-> >> to OTP model during initialization. Firmware (FSBL, U-Boot) uses
-> >> the serial number to generate a unique MAC address for the on-chip
-> >> ethernet controller. When multiple QEMU 'sifive_u' instances are
-> >> created and connected to the same subnet, they all have the same
-> >> MAC address hence it creates a unusable network.
-> >>
-> >> A new "serial" property is introduced to specify the board serial
-> >> number. When not given, the default serial number 1 is used.
-> >>
-> >> Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
-> >> ---
-> >>
-> >>  hw/riscv/sifive_u.c         | 21 ++++++++++++++++++++-
-> >>  include/hw/riscv/sifive_u.h |  1 +
-> >>  2 files changed, 21 insertions(+), 1 deletion(-)
-> >>
-> >
-> > ping?
->
-> Sorry, it looks like I dropped this one.  I've put it in the queue for 5.0,
-> with a
->
-> Reviewed-by: Palmer Dabbelt <palmerdabbelt@google.com>
+Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
+---
+ configure              |  4 ++--
+ target/riscv/gdbstub.c | 14 ++++++--------
+ 2 files changed, 8 insertions(+), 10 deletions(-)
 
-Has this been applied somewhere?
+diff --git a/configure b/configure
+index 0ce2c0354a..2757c0a5a5 100755
+--- a/configure
++++ b/configure
+@@ -7679,13 +7679,13 @@ case "$target_name" in
+     TARGET_BASE_ARCH=riscv
+     TARGET_ABI_DIR=riscv
+     mttcg=yes
+-    gdb_xml_files="riscv-32bit-cpu.xml riscv-32bit-fpu.xml riscv-32bit-csr.xml riscv-32bit-virtual.xml"
++    gdb_xml_files="riscv-32bit-cpu.xml riscv-32bit-fpu.xml riscv-64bit-fpu.xml riscv-32bit-csr.xml riscv-32bit-virtual.xml"
+   ;;
+   riscv64)
+     TARGET_BASE_ARCH=riscv
+     TARGET_ABI_DIR=riscv
+     mttcg=yes
+-    gdb_xml_files="riscv-64bit-cpu.xml riscv-64bit-fpu.xml riscv-64bit-csr.xml riscv-64bit-virtual.xml"
++    gdb_xml_files="riscv-64bit-cpu.xml riscv-32bit-fpu.xml riscv-64bit-fpu.xml riscv-64bit-csr.xml riscv-64bit-virtual.xml"
+   ;;
+   sh4|sh4eb)
+     TARGET_ARCH=sh4
+diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
+index 1a7947e019..e3c9b320fb 100644
+--- a/target/riscv/gdbstub.c
++++ b/target/riscv/gdbstub.c
+@@ -403,23 +403,21 @@ void riscv_cpu_register_gdb_regs_for_features(CPUState *cs)
+ {
+     RISCVCPU *cpu = RISCV_CPU(cs);
+     CPURISCVState *env = &cpu->env;
+-#if defined(TARGET_RISCV32)
+-    if (env->misa & RVF) {
++    if (env->misa & RVD) {
++        gdb_register_coprocessor(cs, riscv_gdb_get_fpu, riscv_gdb_set_fpu,
++                                 36, "riscv-64bit-fpu.xml", 0);
++    } else if (env->misa & RVF) {
+         gdb_register_coprocessor(cs, riscv_gdb_get_fpu, riscv_gdb_set_fpu,
+-                                 36, "riscv-32bit-fpu.xml", 0);
++                                  36, "riscv-32bit-fpu.xml", 0);
+     }
+ 
++#if defined(TARGET_RISCV32)
+     gdb_register_coprocessor(cs, riscv_gdb_get_csr, riscv_gdb_set_csr,
+                              240, "riscv-32bit-csr.xml", 0);
+ 
+     gdb_register_coprocessor(cs, riscv_gdb_get_virtual, riscv_gdb_set_virtual,
+                              1, "riscv-32bit-virtual.xml", 0);
+ #elif defined(TARGET_RISCV64)
+-    if (env->misa & RVF) {
+-        gdb_register_coprocessor(cs, riscv_gdb_get_fpu, riscv_gdb_set_fpu,
+-                                 36, "riscv-64bit-fpu.xml", 0);
+-    }
+-
+     gdb_register_coprocessor(cs, riscv_gdb_get_csr, riscv_gdb_set_csr,
+                              240, "riscv-64bit-csr.xml", 0);
+ 
+-- 
+2.23.0
 
-Regards,
-Bin
 
