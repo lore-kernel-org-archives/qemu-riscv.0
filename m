@@ -1,72 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1irC0H-0001uh-Sg
-	for mharc-qemu-riscv@gnu.org; Mon, 13 Jan 2020 21:32:26 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:51096)
+	id 1irIPw-0002u8-JM
+	for mharc-qemu-riscv@gnu.org; Tue, 14 Jan 2020 04:23:20 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:56699)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <richard.henderson@linaro.org>) id 1irC0E-0001p0-Sx
- for qemu-riscv@nongnu.org; Mon, 13 Jan 2020 21:32:24 -0500
+ (envelope-from <shihpo.hung@sifive.com>) id 1irIPt-0002tp-Gc
+ for qemu-riscv@nongnu.org; Tue, 14 Jan 2020 04:23:18 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <richard.henderson@linaro.org>) id 1irC0D-0004V1-MU
- for qemu-riscv@nongnu.org; Mon, 13 Jan 2020 21:32:22 -0500
-Received: from mail-pf1-x432.google.com ([2607:f8b0:4864:20::432]:42661)
+ (envelope-from <shihpo.hung@sifive.com>) id 1irIPs-0005Rg-5K
+ for qemu-riscv@nongnu.org; Tue, 14 Jan 2020 04:23:17 -0500
+Received: from mail-wm1-x344.google.com ([2a00:1450:4864:20::344]:56004)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
- id 1irC0D-0004Sn-DN
- for qemu-riscv@nongnu.org; Mon, 13 Jan 2020 21:32:21 -0500
-Received: by mail-pf1-x432.google.com with SMTP id 4so5816511pfz.9
- for <qemu-riscv@nongnu.org>; Mon, 13 Jan 2020 18:32:19 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=JdqfIiYkq/VKmhsBw7D0uiWQSjkGafNQwfuH6P8ZXls=;
- b=WPq4mNWv60VwEnNpYEK4sQHEH5vKsMc+3bxnP28yojQVDDWURcvta0tiiW2bychPpg
- 8tZX4ysSNW6Md90jThTFBrZ3+ZkgkujNJfkG5HeSWuXzuie2vOwNZl/JC3vnaCFGNz2o
- 4PgKbhTvF83AcOm8Ap5Lhm3QnzN1hp1fZEjfgdSpTFOIPHCuFyubiEWXebGjf7XOPu2k
- YK8VGoWmtQvEQGfgc53NBcwdiu1H/KTMzVNtYDiZy1bzct4zF2dM1UuEjtA+iM1XERIq
- zJc1ZUAUbMzGFLJu6ORiNWE/4loBtTxLv4SoNgy0jrjAOkVN9O6SjuZzmUGGMxRGsu/4
- ItDA==
+ (Exim 4.71) (envelope-from <shihpo.hung@sifive.com>)
+ id 1irIPr-0005RH-Sd
+ for qemu-riscv@nongnu.org; Tue, 14 Jan 2020 04:23:16 -0500
+Received: by mail-wm1-x344.google.com with SMTP id q9so12869189wmj.5
+ for <qemu-riscv@nongnu.org>; Tue, 14 Jan 2020 01:23:15 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=iPeDJfmX+J9JbWkJuINWmfwIPDEVf2XLnDWb9B1TWPg=;
+ b=aQOD5X1peBcWxJLpQxo32r2MHu9a2ry77QKtnoMspmRDkFOHAUFjsqO2GOctZi15Rp
+ ROOOBqsT9s0M+QPy9PpNBRtxBApbNGI5QsE8kyhwn7/t8j0RJFowXnYkRNOK9JQLETQG
+ mggoMrYyHPrDS06CqHIeQDYcUyfppI+lGDX++5zhMqcJD4ejW4ig38wdJZ6d7hXnYC2M
+ 1EmpnfsbAr88beMycoeaETM6Y2dsprE06o8ZNn9jOt9qSctyRaUbk9Zfkjk3I3uYTlDP
+ 2l/khFhTboDz0vOblCFY98F+UeVxX9ruBPXxe0dO9xGbOHvsmu83tw/QLI4UbhQsTd8X
+ 9nIA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=JdqfIiYkq/VKmhsBw7D0uiWQSjkGafNQwfuH6P8ZXls=;
- b=PVbPNpfcut2fIENKUVx0Y8Qya+PRpe878yoG71r+jNRwCVdwdnUnL/5Em+CAjgLWjN
- PZwBJ+nO9nMp++8kzJMrYcZl9hwSciOTAdFoYayALVlBFa/F6TVi2eA7373K3wjucYcO
- pKdn4sGxKzO1dAfMIHwQCiNCskBp73jQArEp+gyq2e7E0pR7PD+I5OFcTSz+i3Bw9Rnt
- rOeQ48wwz86++Jrv0nD0PTC9ih/SigMCC4AJoqfgYXPpwFGnU9viWF1v6WFFhIBJgq+0
- QmSn+wzf0RDLybR11bYWZWjElRogEX3+v3ajTjeS5hfJTibadN+DmlU+BhMprlRdUv6t
- Wm+A==
-X-Gm-Message-State: APjAAAUwM9pEsv7HzGmLNWjiO94iqlBs8SGCEDIzvtetBVDiGgybpHt1
- Xg/oTK/kig1rSND5kNdwSvWtgw==
-X-Google-Smtp-Source: APXvYqzs8RpM/TsARJGwA9Qg+uy4YQ9zHVygIku2hvo5QKrWM7T7ovYpuPKsBIi1DkZial4/hAEcqg==
-X-Received: by 2002:a63:e0f:: with SMTP id d15mr24122546pgl.255.1578969138694; 
- Mon, 13 Jan 2020 18:32:18 -0800 (PST)
-Received: from [192.168.3.43] (rrcs-66-91-136-155.west.biz.rr.com.
- [66.91.136.155])
- by smtp.gmail.com with ESMTPSA id d129sm16140203pfd.115.2020.01.13.18.32.16
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 13 Jan 2020 18:32:17 -0800 (PST)
-Subject: Re: [PATCH] target/riscv: Set mstatus.DS & FS correctly
-To: shihpo.hung@sifive.com, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>
-References: <1578647134-13216-1-git-send-email-shihpo.hung@sifive.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <19df333a-9a93-d3af-e7ab-fce212bb4978@linaro.org>
-Date: Mon, 13 Jan 2020 16:32:13 -1000
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.2.2
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=iPeDJfmX+J9JbWkJuINWmfwIPDEVf2XLnDWb9B1TWPg=;
+ b=CiHZDwt8Fy9gKzsucDbPPINjLOB+UtGr0r2vCXco2gZHsxdj30HOqGPc4CnibJ6PK3
+ cR95Vk2PWeFtIlzqQ15MZj3GqRxdzoI7Y55on0zjiKuGts5NuXWjN19jjPE0kctivcuQ
+ TBH+9miuLIB83U4BVc/ZHQXiSFbRq/TpjxAamp8r7wegoUQbbAuMBauX3jrGE+lFEhgt
+ Rnod4g6pUN04zfW8aODnARmg/C4MK4oUaLPyoh+0zv46lyR4zW47QrGzCOROBlHQl58D
+ 5wj+M09E07IWzmF/2umnwQLFn6GAclkwBtgJUJdBxfk+ejzPO7SXSEeQRPvPMZpBVV68
+ g+WQ==
+X-Gm-Message-State: APjAAAUWJJibLZYAHdBQKf12nstYgAeA0e4UCUaSt0gJnNnyrkrkJKrA
+ Dwx6fc6jJqA7EzDFUpTE1FdFL2DobrIujcVC0o0ejA==
+X-Google-Smtp-Source: APXvYqxVfzDei3APqPZld6ioOps6RTUSFSmjqqzznkLEOIyiiG5jYt0f/VNTvSorLmscKBuH+kZvqeu7zrLSv1Yd6F8=
+X-Received: by 2002:a7b:cf2d:: with SMTP id m13mr25901438wmg.163.1578993794085; 
+ Tue, 14 Jan 2020 01:23:14 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <1578647134-13216-1-git-send-email-shihpo.hung@sifive.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+References: <1578647134-13216-1-git-send-email-shihpo.hung@sifive.com>
+ <19df333a-9a93-d3af-e7ab-fce212bb4978@linaro.org>
+In-Reply-To: <19df333a-9a93-d3af-e7ab-fce212bb4978@linaro.org>
+From: ShihPo Hung <shihpo.hung@sifive.com>
+Date: Tue, 14 Jan 2020 17:23:02 +0800
+Message-ID: <CALoQrweYaT27OPbF9yC=3JmxnGom=mg1kJdW5XFBpkM_Q4aKww@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: Set mstatus.DS & FS correctly
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <Alistair.Francis@wdc.com>
+Content-Type: multipart/alternative; boundary="000000000000330d37059c1624d3"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::432
+X-Received-From: 2a00:1450:4864:20::344
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -78,19 +69,58 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Jan 2020 02:32:24 -0000
+X-List-Received-Date: Tue, 14 Jan 2020 09:23:19 -0000
 
-On 1/9/20 11:05 PM, shihpo.hung@sifive.com wrote:
-> Because ctx->mstatus_fs changes dynamically during runtime, we should
-> remove the mstatus_fs check at the translation stage.
+--000000000000330d37059c1624d3
+Content-Type: text/plain; charset="UTF-8"
 
-This change is incorrect.
+On Tue, Jan 14, 2020 at 10:32 AM Richard Henderson <
+richard.henderson@linaro.org> wrote:
 
-The actual bug is in cpu_get_tb_cpu_state(), as I just noticed during review:
+> On 1/9/20 11:05 PM, shihpo.hung@sifive.com wrote:
+> > Because ctx->mstatus_fs changes dynamically during runtime, we should
+> > remove the mstatus_fs check at the translation stage.
+>
+> This change is incorrect.
+>
+> The actual bug is in cpu_get_tb_cpu_state(), as I just noticed during
+> review:
+>
+> "[PATCH 2/3] RISC-V: use FIELD macro to define tb flags"
+> https://lists.gnu.org/archive/html/qemu-devel/2020-01/msg02455.html
 
-"[PATCH 2/3] RISC-V: use FIELD macro to define tb flags"
-https://lists.gnu.org/archive/html/qemu-devel/2020-01/msg02455.html
 
+I didn't understand the purpose of mstatus_fs, but now I get it.
+Thanks for pointing me to.
+I will resend my patches.
 
-r~
+--000000000000330d37059c1624d3
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
+<div dir=3D"ltr" class=3D"gmail_attr">On Tue, Jan 14, 2020 at 10:32 AM Rich=
+ard Henderson &lt;<a href=3D"mailto:richard.henderson@linaro.org">richard.h=
+enderson@linaro.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quot=
+e" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204)=
+;padding-left:1ex">On 1/9/20 11:05 PM, <a href=3D"mailto:shihpo.hung@sifive=
+.com" target=3D"_blank">shihpo.hung@sifive.com</a> wrote:<br>
+&gt; Because ctx-&gt;mstatus_fs changes dynamically during runtime, we shou=
+ld<br>
+&gt; remove the mstatus_fs check at the translation stage.<br>
+<br>
+This change is incorrect.<br>
+<br>
+The actual bug is in cpu_get_tb_cpu_state(), as I just noticed during revie=
+w:<br>
+<br>
+&quot;[PATCH 2/3] RISC-V: use FIELD macro to define tb flags&quot;<br>
+<a href=3D"https://lists.gnu.org/archive/html/qemu-devel/2020-01/msg02455.h=
+tml" rel=3D"noreferrer" target=3D"_blank">https://lists.gnu.org/archive/htm=
+l/qemu-devel/2020-01/msg02455.html</a></blockquote><div><br></div><div>I di=
+dn&#39;t understand the purpose of mstatus_fs, but now I get it.</div><div>=
+Thanks for pointing me to.</div><div>I will resend my patches.</div></div><=
+/div>
+
+--000000000000330d37059c1624d3--
 
