@@ -1,71 +1,74 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iq3bF-0004bg-Om
-	for mharc-qemu-riscv@gnu.org; Fri, 10 Jan 2020 18:21:53 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:39082)
+	id 1irBr6-0004bK-T5
+	for mharc-qemu-riscv@gnu.org; Mon, 13 Jan 2020 21:22:56 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:50114)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <palmerdabbelt@google.com>) id 1iq3bD-0004XD-CM
- for qemu-riscv@nongnu.org; Fri, 10 Jan 2020 18:21:52 -0500
+ (envelope-from <richard.henderson@linaro.org>) id 1irBr4-0004aw-C8
+ for qemu-riscv@nongnu.org; Mon, 13 Jan 2020 21:22:55 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmerdabbelt@google.com>) id 1iq3bC-0007gK-8G
- for qemu-riscv@nongnu.org; Fri, 10 Jan 2020 18:21:51 -0500
-Received: from mail-pl1-x643.google.com ([2607:f8b0:4864:20::643]:37950)
+ (envelope-from <richard.henderson@linaro.org>) id 1irBr3-0005hz-6v
+ for qemu-riscv@nongnu.org; Mon, 13 Jan 2020 21:22:54 -0500
+Received: from mail-pl1-x641.google.com ([2607:f8b0:4864:20::641]:37210)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmerdabbelt@google.com>)
- id 1iq3bB-0007aq-Uv
- for qemu-riscv@nongnu.org; Fri, 10 Jan 2020 18:21:50 -0500
-Received: by mail-pl1-x643.google.com with SMTP id f20so1416040plj.5
- for <qemu-riscv@nongnu.org>; Fri, 10 Jan 2020 15:21:49 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
- h=date:subject:cc:from:to:in-reply-to:references:message-id
- :mime-version:content-transfer-encoding;
- bh=kp4O2WYhB8M8qVlAzWL7aiNxbf6XZnIfXB6Jtayw4L4=;
- b=RUpX9MuFG6Ns9tW/Xr3iOZeoKJxbdY3eeb3NdsmnuVTsrbzYRelZmK4G4J0SDJR3J4
- DL6NtHNwEDOaXHqar+3rIe6NDT1r5bSGp6Pf1vaaRK/iE/j4DJ/V+taQFvtXBwTrSghw
- vGTYRpAJsLodc437iqZeQDramO91KzdhBhmIumZPspc0UCOaAb6a3WFLnjVTId1X1kFd
- CIvghCeSInE1D9w+26Z61JVWG2O+DiDknm7kHezm8LXv+kE5Gq9DtzM1tc0hhMf/X8h3
- 53LEmH2uL3UB8Voixr1TtTg/MAO811FeE7YKOEMaFaiGZNNuuA4i9r8eWygL9zikCZiu
- /H0A==
+ (Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
+ id 1irBr2-0005gz-VP
+ for qemu-riscv@nongnu.org; Mon, 13 Jan 2020 21:22:53 -0500
+Received: by mail-pl1-x641.google.com with SMTP id c23so4599124plz.4
+ for <qemu-riscv@nongnu.org>; Mon, 13 Jan 2020 18:22:52 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=zaMRfDDkwZFafC/d7zTUCZiiLUs80i9tPo/guQhpPYk=;
+ b=tG0k1okRg6PF/SUOmbHMDtEdrpNXFkRPk+u9qzpYNJ43OQ8wvBn1uqXbfL08GlvH0T
+ K9nmsgiMPZMTxFAeGhsVvRBp179IAFsfSifJBiLw5TTd4+SVP7Th9mI5FyLnRR+qDmze
+ 9rHClOZLIhj7gw2QL06ccI4TxAutXski8ByfmpushqLuFJjuXzjIBHOiiZHls1A+7Ya2
+ W5AcCYSyAMXWve4vf7TG48yKq4i6ydTGOhyugsa3bFmLwyKtjTcqJVF4N91PAaQQiS7D
+ HminyQlKfV/gfa/jR8t1XeX3TjuTJhPFVqE7C2RRbUoAkORA/Lq3fdJgI1ye4r7XfJoa
+ cxVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:subject:cc:from:to:in-reply-to:references
- :message-id:mime-version:content-transfer-encoding;
- bh=kp4O2WYhB8M8qVlAzWL7aiNxbf6XZnIfXB6Jtayw4L4=;
- b=DAXBpHJr7wg10gHDsU0uzc2BMzgeatdjCz+mgnO29G4r3y/7OtzGpQCWR+013KWQe6
- fClH2zOTK5oKJ5Ldd0lmE0nd3hfrlsirID8lf0CWsZBdhS40PJEqIXQXHuY2NKpZ7BJf
- fabEKPe/knYr7WOBPoUJhNaadiyY8BDi4xUQpvPA3RZ1IIj8jIJKO/7mUVSKKznTO6GG
- qYh3xpFNvCtciekUR1ghSPk7xbM9wPAM4EHPc5N1+ygY2X//9wPqyzUS8KXqIvE7hXaT
- pJM6hRhdlLfOAbAKPpU5atsHcHjyxVJM1V5de6G3NyVwqh+QTCcNckbS07GKhwHXcFXR
- 7lHQ==
-X-Gm-Message-State: APjAAAWgiRv+088igG1ctycFJExqn0yW3t7nSaKhfCOuDfMXGUhUgAlY
- CHcLVrlFdcLSXzx1nv71sJ9lHA==
-X-Google-Smtp-Source: APXvYqz6xXUJ4zZZpOTSaL1cVn4+QLeQO/6XZJYY6tfdUGJNavPb6Q34Zd5A/E97ytkTnzzkh/y0fQ==
-X-Received: by 2002:a17:902:b083:: with SMTP id
- p3mr1156648plr.141.1578698508540; 
- Fri, 10 Jan 2020 15:21:48 -0800 (PST)
-Received: from localhost ([2620:0:1000:2514:7f69:cd98:a2a2:a03d])
- by smtp.gmail.com with ESMTPSA id z6sm4232940pfa.155.2020.01.10.15.21.47
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Jan 2020 15:21:48 -0800 (PST)
-Date: Fri, 10 Jan 2020 15:21:48 -0800 (PST)
-X-Google-Original-Date: Fri, 10 Jan 2020 15:15:14 PST (-0800)
-Subject: Re: [PATCH v1 20/36] target/riscv: Add support for virtual interrupt
- setting
-CC: Alistair Francis <Alistair.Francis@wdc.com>, alistair23@gmail.com,
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-From: Palmer Dabbelt <palmerdabbelt@google.com>
-To: richard.henderson@linaro.org
-In-Reply-To: <200650e5-cb77-0518-8f27-30d0cf23de22@linaro.org>
-References: <200650e5-cb77-0518-8f27-30d0cf23de22@linaro.org>
- <2389483485d4642a6e5670e2546c62e493e91fd6.1575914822.git.alistair.francis@wdc.com>
- <cover.1575914822.git.alistair.francis@wdc.com>
- <mhng-6814f8b9-d54a-4663-900c-83023307a658@palmerdabbelt-glaptop>
-Message-ID: <mhng-ea44da17-abec-4d68-b276-9ac8cd3e18ce@palmerdabbelt-glaptop>
-Mime-Version: 1.0 (MHng)
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=zaMRfDDkwZFafC/d7zTUCZiiLUs80i9tPo/guQhpPYk=;
+ b=Fl1S5ti9vzmhJaKKW46mIs1wb8b9Xb0Krn6tQgnhvtLm7JVyrI6zVvQezIigS8bKga
+ 74YslFobMIzEhJA8CWSreTSCy56+kSb/5aiIV93eMXfQ436TdbmPGxhvp17raYXBiCPF
+ swux4lvFj5hR+p7OtupdvVxYa3hJ2JWsInSfcNrMx8D73FIrNXq5GWtf+tIp2p5sS9WA
+ tpc090nVuRu7nIiNVdH1vE6bhGs1za5UzbED8H5PxjYYozXr+SHqCBGVn0/gxV9KGhuc
+ AfME5R4S7srQFUY2IzNyj5+kSRvkC1/75t/8dDPPKeoFV3Ad42QuefjCuRdrxC2aTpfD
+ 9+EA==
+X-Gm-Message-State: APjAAAWB4Ml8w2Ds29symFIU6W9j3HaPY5pefhODQ6B75rdwk5EgyDJS
+ t9oG3dlzqp9LecTOcJIEXnEUVg==
+X-Google-Smtp-Source: APXvYqyRBTBN/J+WLMJ0AlYXzTkOErUBjPWJfJHuqHHWbexG0x8xs7219Ho0pvGKongS+BbW4g6w9A==
+X-Received: by 2002:a17:902:7406:: with SMTP id
+ g6mr162776pll.103.1578968571659; 
+ Mon, 13 Jan 2020 18:22:51 -0800 (PST)
+Received: from [192.168.3.43] (rrcs-66-91-136-155.west.biz.rr.com.
+ [66.91.136.155])
+ by smtp.gmail.com with ESMTPSA id y38sm14853715pgk.33.2020.01.13.18.22.49
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 13 Jan 2020 18:22:51 -0800 (PST)
+Subject: Re: [PATCH 2/3] RISC-V: use FIELD macro to define tb flags
+To: LIU Zhiwei <zhiwei_liu@c-sky.com>, Alistair.Francis@wdc.com,
+ palmer@dabbelt.com, chihmin.chao@sifive.com, jimw@sifive.com,
+ bmeng.cn@gmail.com
+Cc: wenmeng_zhang@c-sky.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
+ wxy194768@alibaba-inc.com
+References: <20200110081220.891-1-zhiwei_liu@c-sky.com>
+ <20200110081220.891-2-zhiwei_liu@c-sky.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+Message-ID: <0df8de4c-b348-370f-bdd8-17a60f29505c@linaro.org>
+Date: Mon, 13 Jan 2020 16:22:46 -1000
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.2.2
+MIME-Version: 1.0
+In-Reply-To: <20200110081220.891-2-zhiwei_liu@c-sky.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::643
+X-Received-From: 2607:f8b0:4864:20::641
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -77,27 +80,38 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Jan 2020 23:21:52 -0000
+X-List-Received-Date: Tue, 14 Jan 2020 02:22:55 -0000
 
-On Wed, 08 Jan 2020 18:33:40 PST (-0800), richard.henderson@linaro.org wrote:
-> On 1/9/20 11:49 AM, Palmer Dabbelt wrote:
->>> +    irqs = (pending & ~env->mideleg & -mie) | (pending &  env->mideleg & -sie);
->>
->> Isn't "-unsigned" implementation defined?  I can't get GCC to throw a warning
->> and it was already there, so maybe I'm just wrong?
->
-> (1) You're confusing implementation defined with undefined, and unsigned
-> arithmetic is the former not the latter.
->
-> (2) There is no such thing as ones-compliment or sign-magnitude integer
-> hardware anymore, so for this case "implementation defined" is in fact universal.
->
-> (3) We build with -fwrapv, so we're explicitly asking for sane behaviour from
-> our signed types as well.
+On 1/9/20 10:12 PM, LIU Zhiwei wrote:
+>      if (riscv_cpu_fp_enabled(env)) {
+> -        *flags |= TB_FLAGS_MSTATUS_FS;
+> +        flags = FIELD_DP32(flags, TB_FLAGS, FS, (env->mstatus & MSTATUS_FS));
+>      }
 
-Ah, thanks -- I didn't know we had -fwrapv.  In that case we're safe!
+This is wrong.  You're inserting the low two bits of
 
->
->
-> r~
+  env->mstatus & MSTATUS_FS
+
+into TB_FLAGS.  Which, knowing that MSTATUS_FS == 0x6000, is of course always 0.
+
+Because of how TB_FLAGS_MSTATUS_FS is defined, overlapping MSTATUS_FS, you
+could just have
+
+    *flags |= env->mstatus & MSTATUS_FS;
+
+
+BTW, the *existing* code is wrong.  This merges all non-disabled states to
+dirty.  This means that the code in mark_fs_dirty in translate.c that handles
+initial and clean states is unreachable, and that the kernel's dirty state
+tracking will not work.
+
+Has the riscv kernel stopped doing lazy fp context switching?  I would imagine
+that it has if this code is to be believed...
+
+BTW2, for the purpose of tb_flags, initial and clean states are identical.  We
+should probably fold them, to avoid generating two different TBs for the two
+states.
+
+
+r~
 
