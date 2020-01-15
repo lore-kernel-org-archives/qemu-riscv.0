@@ -1,49 +1,49 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1irc00-00066w-RU
-	for mharc-qemu-riscv@gnu.org; Wed, 15 Jan 2020 01:17:52 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:58909)
+	id 1irc02-00068w-0c
+	for mharc-qemu-riscv@gnu.org; Wed, 15 Jan 2020 01:17:54 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58951)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <shihpo.hung@sifive.com>) id 1irbzx-000640-3w
- for qemu-riscv@nongnu.org; Wed, 15 Jan 2020 01:17:50 -0500
+ (envelope-from <shihpo.hung@sifive.com>) id 1irbzz-00064T-6o
+ for qemu-riscv@nongnu.org; Wed, 15 Jan 2020 01:17:52 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <shihpo.hung@sifive.com>) id 1irbzw-0003XV-2u
- for qemu-riscv@nongnu.org; Wed, 15 Jan 2020 01:17:49 -0500
-Received: from mail-pj1-x1041.google.com ([2607:f8b0:4864:20::1041]:34007)
+ (envelope-from <shihpo.hung@sifive.com>) id 1irbzy-0003Yx-7b
+ for qemu-riscv@nongnu.org; Wed, 15 Jan 2020 01:17:51 -0500
+Received: from mail-pg1-x544.google.com ([2607:f8b0:4864:20::544]:45891)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <shihpo.hung@sifive.com>)
- id 1irbzv-0003X1-UC
- for qemu-riscv@nongnu.org; Wed, 15 Jan 2020 01:17:48 -0500
-Received: by mail-pj1-x1041.google.com with SMTP id s94so1700026pjc.1
- for <qemu-riscv@nongnu.org>; Tue, 14 Jan 2020 22:17:47 -0800 (PST)
+ id 1irbzy-0003YX-2T
+ for qemu-riscv@nongnu.org; Wed, 15 Jan 2020 01:17:50 -0500
+Received: by mail-pg1-x544.google.com with SMTP id b9so7681228pgk.12
+ for <qemu-riscv@nongnu.org>; Tue, 14 Jan 2020 22:17:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
- h=from:to:cc:subject:date:message-id;
- bh=Jx3r2seKwSeUadPVhjH4OOR8DMwWWFpbD6d3Ui5d1O8=;
- b=Iy6Wlf8FywDmtcjxTWf0Q1wvPc/Miuzbi2uWt3BzSrgtQWcGESmCLvGAglCiN2qN98
- 9/ZWl02NeLoRXGURZ9ysiTXOyj/NYq4EuePi6qF4leEOtMi8rwErIrpz390+3WPhvoje
- bEoqdvJ2Xux1CBZrBw1DnQXFJ6OiZtWc29Krn8RyAPTUa6axQowYWqcLty+btNPap4ad
- cTyFdHkwRGcwIIzbDvSH/XXY/1U6P5OfLM40FOloJm3+PMDzVM4sxs4k1s86Qx2jIdGf
- oRMnykzfLQRdl16aFOnXe1s243fujiCPU6nkG4AlF/qIsNuLzzVLhUjCaFrpkh79xPnq
- jCTw==
+ h=from:to:cc:subject:date:message-id:in-reply-to:references;
+ bh=XvfKywIyN+RwyR3E6jjNNc/Bw1GozEvyfw9ydD7+K7k=;
+ b=Iy6XAh2zvz8Q8EdA/L9Hi5CTh987KwkItfDHuwsZqZ19as5S4d8fjPGb2lGF6GCYWO
+ Pzqv56mDo9fH9KROvn9I8qh+Q1R5dwMZYng5SI4VO7fB/ak33JrxdlJmNwAF+VgXwhNt
+ GJOpzWo1TGles3KpXQMK/Pua/468yORq9ye9SFet7/q6Ft9lRnnpaX6k5N0l865DzY+8
+ OXZeObAmpHHwB6XdyXVsqGEqpSgvv1ajAVsZpNk6ri+pnctJFMjn7Ktto8Ku4UsP+YF0
+ qs87b1lhRsi3cRSMSsk9pIwxsdwll+0gW7Q1b9pzKT+QoNJUVd+x/soGEraI5zVqoyx4
+ c/Lw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id;
- bh=Jx3r2seKwSeUadPVhjH4OOR8DMwWWFpbD6d3Ui5d1O8=;
- b=gtFOKGp9esC03w1MF6/a0PLQOcZ+8ca+bh9OQdXn/Xs/m23Hw+DAi9wYP5SizJ5mb6
- PUHvaEOAfZy/1I6tI3qMK17+4MsRv4pmV+K+UXUZ/8VJ4Cb7HDZBg5j9Nr4pTmGrdFnj
- yB2Q0F4+dkxS1xH3S/I4aWVrkJJSfr8cuaurACuzt8r7BS5pCfNXPyX/bu+mviT2RGmF
- va/o0xiKvjismt+aWK5Xqgyt4JHBBr57iPeNO90fodKSRrLgX8i+J1LZLSV0PWSt3ek8
- TUt3ObPjMcTad5wN4nxqw8e7zt8wzamzpOY7zaBAhpWj+mvecHYQ2YJ/hqTHAI9ExFBR
- wUUg==
-X-Gm-Message-State: APjAAAVAA3xqoF6ORmYp4RZkMioWP9ZdWNMVku6/NkGOS7mfHX5MGZ3d
- +jZ+FVlAfZDZVS6Dhuw2Uc+ZQeAm5tA1JA==
-X-Google-Smtp-Source: APXvYqzrCCLc5US08o/zjGzN1k1QnbEN+ADAX5uJfoWSEM5Y8AvoExONDVL82wqaP4iwY2Twitnmkw==
-X-Received: by 2002:a17:90a:d995:: with SMTP id
- d21mr34127974pjv.118.1579069066564; 
- Tue, 14 Jan 2020 22:17:46 -0800 (PST)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references;
+ bh=XvfKywIyN+RwyR3E6jjNNc/Bw1GozEvyfw9ydD7+K7k=;
+ b=IwuRlPFNdGrGCNeEjRz6lY73ClM0ph9lHfCltBvhSraZU7K6KiC6nQeyqTQs7xKh65
+ obl0IPzktHOPW0Sg6PoBGTorZYJeIO93s62RqUsjDP8VFO2t5QtqCg/CvsL3w/GC4IGx
+ bsBWMtxBSdklstQFpMlUqSWQo3TUns/6ZQzim5aF811Gbi5jf8cyCLx759rB9tSlKVFd
+ epJtcyCV+Vdy7cFEL+Wh855tlIYvRQELjalpXGuHskokXm+rIV4SLmJDcysDyUDfEh1W
+ bdZhQzP7Si4GqZHTfaFunTGwLaHdUBgntP/LOIMtYbFltwc27FyI/9/dIGyJdmjpt/Fr
+ X45A==
+X-Gm-Message-State: APjAAAXo/K7XvYGJ1alOxARRzWBNZkWfmJ+UDibShTZORH5dxU4Nud5J
+ +4sQfWtRIqWIPHIER+ZFZh+dOBQ7EHdIfA==
+X-Google-Smtp-Source: APXvYqxOkmWgD0XBT8SxjkB/S8mPFZyWbuBg5P/Hvb1crQ0RTw5MItzyQhPIR+xALPsRwfbTP5dFeQ==
+X-Received: by 2002:a63:9d8f:: with SMTP id i137mr31033690pgd.33.1579069068917; 
+ Tue, 14 Jan 2020 22:17:48 -0800 (PST)
 Received: from gamma04.internal.sifive.com ([64.62.193.194])
- by smtp.gmail.com with ESMTPSA id w123sm20633601pfb.167.2020.01.14.22.17.45
+ by smtp.gmail.com with ESMTPSA id w123sm20633601pfb.167.2020.01.14.22.17.47
  (version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
- Tue, 14 Jan 2020 22:17:45 -0800 (PST)
+ Tue, 14 Jan 2020 22:17:48 -0800 (PST)
 From: shihpo.hung@sifive.com
 To: qemu-riscv@nongnu.org
 Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
@@ -52,13 +52,15 @@ Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
  Richard Henderson <richard.henderson@linaro.org>,
  ShihPo Hung <shihpo.hung@sifive.com>
-Subject: [PATCH v3 1/3] target/riscv: Fix tb->flags FS status
-Date: Tue, 14 Jan 2020 22:17:31 -0800
-Message-Id: <1579069053-22190-1-git-send-email-shihpo.hung@sifive.com>
+Subject: [PATCH v3 3/3] target/riscv: update mstatus.SD when FS is set dirty
+Date: Tue, 14 Jan 2020 22:17:33 -0800
+Message-Id: <1579069053-22190-3-git-send-email-shihpo.hung@sifive.com>
 X-Mailer: git-send-email 2.7.4
+In-Reply-To: <1579069053-22190-1-git-send-email-shihpo.hung@sifive.com>
+References: <1579069053-22190-1-git-send-email-shihpo.hung@sifive.com>
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::1041
+X-Received-From: 2607:f8b0:4864:20::544
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -70,47 +72,45 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Jan 2020 06:17:50 -0000
+X-List-Received-Date: Wed, 15 Jan 2020 06:17:52 -0000
 
-It was found that running libquantum on riscv-linux qemu produced an
-incorrect result. After investigation, FP registers are not saved
-during context switch due to incorrect mstatus.FS.
+remove the check becuase SD bit should summarize FS and XS fields
+unconditionally.
 
-In current implementation tb->flags merges all non-disabled state to
-dirty. This means the code in mark_fs_dirty in translate.c that
-handles initial and clean states is unreachable.
-
-This patch fixes it and is successfully tested with:
-  libquantum
-
-Thanks to Richard for pointing out the actual bug.
-
-v3: remove the redundant condition
-v2: root cause FS problem
-
-Suggested-by: Richard Henderson <richard.henderson@linaro.org>
 Signed-off-by: ShihPo Hung <shihpo.hung@sifive.com>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/riscv/cpu.h | 5 +----
- 1 file changed, 1 insertion(+), 4 deletions(-)
+ target/riscv/csr.c       | 3 +--
+ target/riscv/translate.c | 2 +-
+ 2 files changed, 2 insertions(+), 3 deletions(-)
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index e59343e..de0a8d8 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -293,10 +293,7 @@ static inline void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
- #ifdef CONFIG_USER_ONLY
-     *flags = TB_FLAGS_MSTATUS_FS;
- #else
--    *flags = cpu_mmu_index(env, 0);
--    if (riscv_cpu_fp_enabled(env)) {
--        *flags |= TB_FLAGS_MSTATUS_FS;
--    }
-+    *flags = cpu_mmu_index(env, 0) | (env->mstatus & MSTATUS_FS);
- #endif
- }
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index da02f9f..0e34c29 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -341,8 +341,7 @@ static int write_mstatus(CPURISCVState *env, int csrno, target_ulong val)
  
+     mstatus = (mstatus & ~mask) | (val & mask);
+ 
+-    dirty = (riscv_cpu_fp_enabled(env) &&
+-             ((mstatus & MSTATUS_FS) == MSTATUS_FS)) |
++    dirty = ((mstatus & MSTATUS_FS) == MSTATUS_FS) |
+             ((mstatus & MSTATUS_XS) == MSTATUS_XS);
+     mstatus = set_field(mstatus, MSTATUS_SD, dirty);
+     env->mstatus = mstatus;
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index ab6a891..8e40ed3 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -394,7 +394,7 @@ static void mark_fs_dirty(DisasContext *ctx)
+ 
+     tmp = tcg_temp_new();
+     tcg_gen_ld_tl(tmp, cpu_env, offsetof(CPURISCVState, mstatus));
+-    tcg_gen_ori_tl(tmp, tmp, MSTATUS_FS);
++    tcg_gen_ori_tl(tmp, tmp, MSTATUS_FS | MSTATUS_SD);
+     tcg_gen_st_tl(tmp, cpu_env, offsetof(CPURISCVState, mstatus));
+     tcg_temp_free(tmp);
+ }
 -- 
 2.7.4
 
