@@ -1,88 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1is1vl-000326-8s
-	for mharc-qemu-riscv@gnu.org; Thu, 16 Jan 2020 04:59:13 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42301)
+	id 1isQR7-0007BD-Ql
+	for mharc-qemu-riscv@gnu.org; Fri, 17 Jan 2020 07:09:13 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:39558)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <damien.hedde@greensocs.com>) id 1is1vi-000302-7U
- for qemu-riscv@nongnu.org; Thu, 16 Jan 2020 04:59:11 -0500
+ (envelope-from <alistair23@gmail.com>) id 1isQR5-00078o-Gv
+ for qemu-riscv@nongnu.org; Fri, 17 Jan 2020 07:09:12 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <damien.hedde@greensocs.com>) id 1is1vh-0002HZ-9S
- for qemu-riscv@nongnu.org; Thu, 16 Jan 2020 04:59:10 -0500
-Received: from beetle.greensocs.com ([5.135.226.135]:33210)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <damien.hedde@greensocs.com>)
- id 1is1va-0002CI-7S; Thu, 16 Jan 2020 04:59:02 -0500
-Received: from [172.16.11.102] (crumble.bar.greensocs.com [172.16.11.102])
- by beetle.greensocs.com (Postfix) with ESMTPSA id 5C33396EF0;
- Thu, 16 Jan 2020 09:58:58 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=greensocs.com;
- s=mail; t=1579168739;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=gWggCHq2iVR6vAYfpXZ4nhLLYMEos/TRGVmYjXTFUWU=;
- b=CID4Z2SUnkjZwvSR+HkST/klc7AMaktQ2hQBNwRatGJljUsj9Uhsi4w62wyrVVJTGGMalw
- ZfjAVEfnpMESMPcCrf/Cd6o/7p4seOsYSFgjh91h3tOVmXSxYFSiglHm7UW2T5MFRV8rId
- V9PgyAbXUL4ASZgXM11IWFF/+1DWkao=
-Subject: Re: [PATCH v5 08/22] gdbstub: extend GByteArray to read register
- helpers
-To: =?UTF-8?Q?Alex_Benn=c3=a9e?= <alex.bennee@linaro.org>,
- qemu-devel@nongnu.org
-Cc: Peter Maydell <peter.maydell@linaro.org>,
- Cornelia Huck <cohuck@redhat.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- David Hildenbrand <david@redhat.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Max Filippov <jcmvbkbc@gmail.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, Marek Vasut <marex@denx.de>,
- "open list:PowerPC TCG CPUs" <qemu-ppc@nongnu.org>,
- Aleksandar Rikalo <aleksandar.rikalo@rt-rk.com>,
- Richard Henderson <rth@twiddle.net>,
- =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>,
- Artyom Tarasenko <atar4qemu@gmail.com>, Eduardo Habkost
- <ehabkost@redhat.com>, Richard Henderson <richard.henderson@linaro.org>,
- "open list:S390 TCG CPUs" <qemu-s390x@nongnu.org>, qemu-arm@nongnu.org,
- Stafford Horne <shorne@gmail.com>, David Gibson
- <david@gibson.dropbear.id.au>,
- "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Chris Wulff <crwulff@gmail.com>, Laurent Vivier <laurent@vivier.eu>,
- Michael Walle <michael@walle.cc>, Palmer Dabbelt <palmer@dabbelt.com>,
- Aleksandar Markovic <amarkovic@wavecomp.com>,
- Paolo Bonzini <pbonzini@redhat.com>, Aurelien Jarno <aurelien@aurel32.net>
-References: <20200114150953.27659-1-alex.bennee@linaro.org>
- <20200114150953.27659-9-alex.bennee@linaro.org>
-From: Damien Hedde <damien.hedde@greensocs.com>
-Message-ID: <e0cd91d5-4105-5417-22ec-b2367687ae4c@greensocs.com>
-Date: Thu, 16 Jan 2020 10:58:57 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.4.1
+ (envelope-from <alistair23@gmail.com>) id 1isQR4-0003es-4M
+ for qemu-riscv@nongnu.org; Fri, 17 Jan 2020 07:09:11 -0500
+Received: from mail-lj1-x242.google.com ([2a00:1450:4864:20::242]:41407)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <alistair23@gmail.com>)
+ id 1isQR1-0003XO-0K; Fri, 17 Jan 2020 07:09:07 -0500
+Received: by mail-lj1-x242.google.com with SMTP id h23so26228406ljc.8;
+ Fri, 17 Jan 2020 04:09:06 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=d5VKE+G4ouQXs1X4IYyRBMyUcbawyRF/tVv23S/eQBU=;
+ b=rbBd5qM3NTouYB4O/AZyuk0G6xkSyTxDs5Xl5Pr5QOWkboozNAA7b09sDntYGZGZT0
+ DJs4XKC3GHdQboMKoqlYNgDmzXgyIWdYjNmMQfNYunLRh6fCYeRPX8oZJ13KLnQT69ph
+ cDIbru6I2Y77oZCjTKE71MqRVXd6/nVPSHpnDFjey8jXP+cn+kafYNMLPj4v4C4xX2KM
+ 8Z9HKIIuv9NwNCjxPZL2djibxW6rzmUfZPsSFAZwudga0mmk0F9dt6XamVwM2oqtYS6I
+ uv5cIWcTxSZbl3VJ+2oH7w4tmyA+xY1enU1jlS8EzIGO8LD9C5W+81MhkyI8+3fVICC/
+ MB4g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=d5VKE+G4ouQXs1X4IYyRBMyUcbawyRF/tVv23S/eQBU=;
+ b=G53Ia0R9/OJcJWVYeCR5peSPG+F3lgufXCn9QFQpM6ZBjiEupjn9zqwKtJ7Gp+UKPM
+ ++0FEDYIPrF7JgyX7MEgY1+5Nz7uigdQrDkWIC+mNeUh9wBEFYxmqX8nVhFZN6nbx2r2
+ hIWQ/kM60NaMwIJk8yQao6ljgzXXDZ8RexgHSuClC8VvWsj2RDVXyq0ofSiz70sPv+Lj
+ TwNzOKUqciOa6i+3UkENLsSTFraRR0oM5WSwBATljLfkDvt9yaRqzd+It3yoOnYtel/W
+ 2RnYfaHAAJieJ5l1qKnxlH2TCW2h2p8Hhkpa5gxYsauXi9RwMcxkKIsc+qKReaBblvND
+ O2Fg==
+X-Gm-Message-State: APjAAAX58MMnJ2BtYULNH7wTR+kSi/yRR+svjPUwejduIlkeIWI3McG4
+ 5OK8FLthFeWnFt7HU5GnlHgfQGYn5PZlNd4I6DE=
+X-Google-Smtp-Source: APXvYqyY4Tx6Je1B7yZyu8PRabhvxtQbv7VVJc0DEmHPKM5cohRNkH+RJufrdO93H5p35mcsGmPjdZ8/3vuUcoeKTfU=
+X-Received: by 2002:a2e:8946:: with SMTP id b6mr5364709ljk.1.1579262945077;
+ Fri, 17 Jan 2020 04:09:05 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <20200114150953.27659-9-alex.bennee@linaro.org>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US-large
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=greensocs.com; 
- s=mail; t=1579168739;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=gWggCHq2iVR6vAYfpXZ4nhLLYMEos/TRGVmYjXTFUWU=;
- b=o1+u6b/JID6xTVs6KfoDaHnPeMu0bLT1P/h43XF1Xl+YSCOYhK16pMiJTMCR1BWyUEsZ0+
- Blx067AZxAUfAUqu/gaQx1CEQGjGzIquLnvcbILKycFfDlKIGs1zanYiOu9UJkwsQ/UYLH
- Hveb7532MjMQY+VgJotRrCHITKtJUNU=
-ARC-Seal: i=1; s=mail; d=greensocs.com; t=1579168739; a=rsa-sha256; cv=none;
- b=Yrmm4XQH7iXon0GAHvjIQRTKNugnh8S9fKPh6BJwz1znHl0absnQ4Me52Q48loIBdr3sC3
- ZEUY7pK2oe5WwpkpxBmk2LX+Lq5dQy0TPAoZEco3sEGQ6xBJTLHLNlRdoNnSRCVl0rR8nu
- nlOzmtPh/11sWBW8mocjgURHZjv8BpU=
-ARC-Authentication-Results: i=1; ORIGINATING;
- auth=pass smtp.auth=damien smtp.mailfrom=damien.hedde@greensocs.com
+References: <20190821162831.27811-1-georg.kotheimer@kernkonzept.com>
+ <87zhez4ied.fsf@linaro.org>
+In-Reply-To: <87zhez4ied.fsf@linaro.org>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Fri, 17 Jan 2020 22:08:37 +1000
+Message-ID: <CAKmqyKNOQBomr66+2pUj8Kugo-yPXf4Sc6wD0afW-aZFCDQo3w@mail.gmail.com>
+Subject: Re: [Qemu-devel] [PATCH v3] RISC-V: Select FPU gdb xml file based on
+ the supported extensions
+To: =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Palmer Dabbelt <palmer@sifive.com>, Alistair Francis <alistair.francis@wdc.com>,
+ Georg Kotheimer <georg.kotheimer@kernkonzept.com>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
- [fuzzy]
-X-Received-From: 5.135.226.135
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2a00:1450:4864:20::242
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -94,29 +70,174 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Jan 2020 09:59:11 -0000
+X-List-Received-Date: Fri, 17 Jan 2020 12:09:13 -0000
 
+On Tue, Jan 7, 2020 at 10:21 PM Alex Benn=C3=A9e <alex.bennee@linaro.org> w=
+rote:
+>
+>
+> Georg Kotheimer <georg.kotheimer@kernkonzept.com> writes:
+>
+> > The size of the FPU registers depends solely on the floating point
+> > extensions supported by the target architecture.
+> > However, in the previous implementation the floating point register
+> > size was derived from whether the target architecture is 32-bit or
+> > 64-bit.
+> >
+> > To allow RVF without RVD, changes to riscv_gdb_get_fpu() and
+> > riscv_gdb_set_fpu() were necessary.
+> >
+> > Signed-off-by: Georg Kotheimer <georg.kotheimer@kernkonzept.com>
+> > ---
+> >  configure              |  4 ++--
+> >  target/riscv/gdbstub.c | 45 ++++++++++++++++++++++++------------------
+> >  2 files changed, 28 insertions(+), 21 deletions(-)
+> >
+> > diff --git a/configure b/configure
+> > index 714e7fb6a1..44ee953022 100755
+> > --- a/configure
+> > +++ b/configure
+> > @@ -7596,14 +7596,14 @@ case "$target_name" in
+> >      TARGET_BASE_ARCH=3Driscv
+> >      TARGET_ABI_DIR=3Driscv
+> >      mttcg=3Dyes
+> > -    gdb_xml_files=3D"riscv-32bit-cpu.xml riscv-32bit-fpu.xml riscv-32b=
+it-csr.xml"
+> > +    gdb_xml_files=3D"riscv-32bit-cpu.xml riscv-32bit-fpu.xml riscv-64b=
+it-fpu.xml riscv-32bit-csr.xml"
+> >      target_compiler=3D$cross_cc_riscv32
+> >    ;;
+> >    riscv64)
+> >      TARGET_BASE_ARCH=3Driscv
+> >      TARGET_ABI_DIR=3Driscv
+> >      mttcg=3Dyes
+> > -    gdb_xml_files=3D"riscv-64bit-cpu.xml riscv-64bit-fpu.xml riscv-64b=
+it-csr.xml"
+> > +    gdb_xml_files=3D"riscv-64bit-cpu.xml riscv-32bit-fpu.xml riscv-64b=
+it-fpu.xml riscv-64bit-csr.xml"
+> >      target_compiler=3D$cross_cc_riscv64
+> >    ;;
+> >    sh4|sh4eb)
+> > diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
+> > index 27be93279b..89b2543c9d 100644
+> > --- a/target/riscv/gdbstub.c
+> > +++ b/target/riscv/gdbstub.c
+> > @@ -303,19 +303,22 @@ int riscv_cpu_gdb_write_register(CPUState *cs, ui=
+nt8_t *mem_buf, int n)
+> >  static int riscv_gdb_get_fpu(CPURISCVState *env, uint8_t *mem_buf, int=
+ n)
+> >  {
+> >      if (n < 32) {
+> > -        return gdb_get_reg64(mem_buf, env->fpr[n]);
+> > +        if (env->misa & RVD) {
+> > +            return gdb_get_reg64(mem_buf, env->fpr[n]);
+> > +        }
+> > +        return gdb_get_reg32(mem_buf, env->fpr[n]);
+> >      /* there is hole between ft11 and fflags in fpu.xml */
+> >      } else if (n < 36 && n > 32) {
+> >          target_ulong val =3D 0;
+> >          int result;
+> >          /*
+> > -         * CSR_FFLAGS is at index 8 in csr_register, and gdb says it i=
+s FP
+> > -         * register 33, so we recalculate the map index.
+> > +         * CSR_FFLAGS is at index 1 in the csr space, and gdb says it =
+is FP
+> > +         * register 33, so we recalculate the csr index.
+> >           * This also works for CSR_FRM and CSR_FCSR.
+> >           */
+> > -        result =3D riscv_csrrw_debug(env, n - 33 +  8, &val, 0, 0);
+> > +        result =3D riscv_csrrw_debug(env, n - 33 + CSR_FFLAGS, &val, 0=
+, 0);
+> >          if (result =3D=3D 0) {
+> > -            return gdb_get_regl(mem_buf, val);
+> > +            return gdb_get_reg32(mem_buf, val);
+> >          }
+> >      }
+> >      return 0;
+> > @@ -324,20 +327,25 @@ static int riscv_gdb_get_fpu(CPURISCVState *env, =
+uint8_t *mem_buf, int n)
+> >  static int riscv_gdb_set_fpu(CPURISCVState *env, uint8_t *mem_buf, int=
+ n)
+> >  {
+> >      if (n < 32) {
+> > -        env->fpr[n] =3D ldq_p(mem_buf); /* always 64-bit */
+> > -        return sizeof(uint64_t);
+> > +        if (env->misa & RVD) {
+> > +            env->fpr[n] =3D ldq_p(mem_buf);
+> > +            return sizeof(uint64_t);
+> > +        } else {
+> > +            env->fpr[n] =3D ldl_p(mem_buf);
+> > +            return sizeof(uint32_t);
+> > +        }
+>
+> What endianess can RISC-V support? Unless specifically stated by the
+> architecture values should be returned in tgarget endian format.
 
+It can support both.
 
-On 1/14/20 4:09 PM, Alex Benn=C3=A9e wrote:
-> Instead of passing a pointer to memory now just extend the GByteArray
-> to all the read register helpers. They can then safely append their
-> data through the normal way. We don't bother with this abstraction for
-> write registers as we have already ensured the buffer being copied
-> from is the correct size.
->=20
-> Signed-off-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
-> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
->=20
-> ---
-> v4
->   - fix mem_buf calculation for ppc_maybe_bswap_register
-> v5
->   - introduce gdb_get_reg_ptr and use for ppc
-> ---
+What needs to be changed?
 
-Reviewed-by: Damien Hedde <damien.hedde@greensocs.com>
+Alistair
 
---
-Damien
+>
+> >      /* there is hole between ft11 and fflags in fpu.xml */
+> >      } else if (n < 36 && n > 32) {
+> > -        target_ulong val =3D ldtul_p(mem_buf);
+> > +        target_ulong val =3D ldl_p(mem_buf);
+> >          int result;
+> >          /*
+> > -         * CSR_FFLAGS is at index 8 in csr_register, and gdb says it i=
+s FP
+> > -         * register 33, so we recalculate the map index.
+> > +         * CSR_FFLAGS is at index 1 in the csr space, and gdb says it =
+is FP
+> > +         * register 33, so we recalculate the csr index.
+> >           * This also works for CSR_FRM and CSR_FCSR.
+> >           */
+> > -        result =3D riscv_csrrw_debug(env, n - 33 + 8, NULL, val, -1);
+> > +        result =3D riscv_csrrw_debug(env, n - 33 + CSR_FFLAGS, NULL, v=
+al, -1);
+> >          if (result =3D=3D 0) {
+> > -            return sizeof(target_ulong);
+> > +            return sizeof(uint32_t);
+> >          }
+> >      }
+> >      return 0;
+> > @@ -375,20 +383,19 @@ void riscv_cpu_register_gdb_regs_for_features(CPU=
+State *cs)
+> >  {
+> >      RISCVCPU *cpu =3D RISCV_CPU(cs);
+> >      CPURISCVState *env =3D &cpu->env;
+> > -#if defined(TARGET_RISCV32)
+> > -    if (env->misa & RVF) {
+> > +
+> > +    if (env->misa & RVD) {
+> > +        gdb_register_coprocessor(cs, riscv_gdb_get_fpu, riscv_gdb_set_=
+fpu,
+> > +                                 36, "riscv-64bit-fpu.xml", 0);
+> > +    } else if (env->misa & RVF) {
+> >          gdb_register_coprocessor(cs, riscv_gdb_get_fpu, riscv_gdb_set_=
+fpu,
+> >                                   36, "riscv-32bit-fpu.xml", 0);
+> >      }
+> >
+> > +#if defined(TARGET_RISCV32)
+> >      gdb_register_coprocessor(cs, riscv_gdb_get_csr, riscv_gdb_set_csr,
+> >                               4096, "riscv-32bit-csr.xml", 0);
+> >  #elif defined(TARGET_RISCV64)
+> > -    if (env->misa & RVF) {
+> > -        gdb_register_coprocessor(cs, riscv_gdb_get_fpu, riscv_gdb_set_=
+fpu,
+> > -                                 36, "riscv-64bit-fpu.xml", 0);
+> > -    }
+> > -
+> >      gdb_register_coprocessor(cs, riscv_gdb_get_csr, riscv_gdb_set_csr,
+> >                               4096, "riscv-64bit-csr.xml", 0);
+> >  #endif
+>
+>
+> --
+> Alex Benn=C3=A9e
+>
 
