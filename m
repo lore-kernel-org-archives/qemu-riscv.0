@@ -1,64 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1isQR7-0007BD-Ql
-	for mharc-qemu-riscv@gnu.org; Fri, 17 Jan 2020 07:09:13 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:39558)
+	id 1itKzA-0000Pj-Tl
+	for mharc-qemu-riscv@gnu.org; Sun, 19 Jan 2020 19:32:08 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:36071)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <alistair23@gmail.com>) id 1isQR5-00078o-Gv
- for qemu-riscv@nongnu.org; Fri, 17 Jan 2020 07:09:12 -0500
+ (envelope-from <alistair23@gmail.com>) id 1itKz8-0000Kd-DJ
+ for qemu-riscv@nongnu.org; Sun, 19 Jan 2020 19:32:07 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1isQR4-0003es-4M
- for qemu-riscv@nongnu.org; Fri, 17 Jan 2020 07:09:11 -0500
-Received: from mail-lj1-x242.google.com ([2a00:1450:4864:20::242]:41407)
+ (envelope-from <alistair23@gmail.com>) id 1itKz7-0001YP-6c
+ for qemu-riscv@nongnu.org; Sun, 19 Jan 2020 19:32:06 -0500
+Received: from mail-lj1-x243.google.com ([2a00:1450:4864:20::243]:42332)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1isQR1-0003XO-0K; Fri, 17 Jan 2020 07:09:07 -0500
-Received: by mail-lj1-x242.google.com with SMTP id h23so26228406ljc.8;
- Fri, 17 Jan 2020 04:09:06 -0800 (PST)
+ id 1itKz4-0001Wv-L4; Sun, 19 Jan 2020 19:32:02 -0500
+Received: by mail-lj1-x243.google.com with SMTP id y4so31998236ljj.9;
+ Sun, 19 Jan 2020 16:32:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=d5VKE+G4ouQXs1X4IYyRBMyUcbawyRF/tVv23S/eQBU=;
- b=rbBd5qM3NTouYB4O/AZyuk0G6xkSyTxDs5Xl5Pr5QOWkboozNAA7b09sDntYGZGZT0
- DJs4XKC3GHdQboMKoqlYNgDmzXgyIWdYjNmMQfNYunLRh6fCYeRPX8oZJ13KLnQT69ph
- cDIbru6I2Y77oZCjTKE71MqRVXd6/nVPSHpnDFjey8jXP+cn+kafYNMLPj4v4C4xX2KM
- 8Z9HKIIuv9NwNCjxPZL2djibxW6rzmUfZPsSFAZwudga0mmk0F9dt6XamVwM2oqtYS6I
- uv5cIWcTxSZbl3VJ+2oH7w4tmyA+xY1enU1jlS8EzIGO8LD9C5W+81MhkyI8+3fVICC/
- MB4g==
+ :cc; bh=RmMqJrBOHe/Q6dl3NvKH6ZqysU0tMXFP4wNB72lxUak=;
+ b=ejBObqipHnJeBwVKO8A0Qxhj26xaDtSk5mllczuFxJ6bH8hy0n9z2CR0UGuO32RW8G
+ cNR3Jrc/x3fgbkmgsq7LJuqUcrtdiGPkGT4Dk9ToVbNC/BSxa8TDKhhM0pjVUj/ttgEY
+ WWEcl8ug6dspJl8aKC2Y6ppW2KELluqag+nayAW15Ywnk43iQixLZaRk2BlPf50+UmJP
+ LIlsrTPBy77o1L/m772GTFufw6qeIt+4HWcWVLXjO/4Csk7bp3HWBZujyZQzd2xAWzmF
+ 46SaZzvvOe7JgPcYKdATSJXWmYCVbwXhsnId+pdyKP0YzeRuSwMj2yyQ/gxuYk4WwnFw
+ 3K4A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=d5VKE+G4ouQXs1X4IYyRBMyUcbawyRF/tVv23S/eQBU=;
- b=G53Ia0R9/OJcJWVYeCR5peSPG+F3lgufXCn9QFQpM6ZBjiEupjn9zqwKtJ7Gp+UKPM
- ++0FEDYIPrF7JgyX7MEgY1+5Nz7uigdQrDkWIC+mNeUh9wBEFYxmqX8nVhFZN6nbx2r2
- hIWQ/kM60NaMwIJk8yQao6ljgzXXDZ8RexgHSuClC8VvWsj2RDVXyq0ofSiz70sPv+Lj
- TwNzOKUqciOa6i+3UkENLsSTFraRR0oM5WSwBATljLfkDvt9yaRqzd+It3yoOnYtel/W
- 2RnYfaHAAJieJ5l1qKnxlH2TCW2h2p8Hhkpa5gxYsauXi9RwMcxkKIsc+qKReaBblvND
- O2Fg==
-X-Gm-Message-State: APjAAAX58MMnJ2BtYULNH7wTR+kSi/yRR+svjPUwejduIlkeIWI3McG4
- 5OK8FLthFeWnFt7HU5GnlHgfQGYn5PZlNd4I6DE=
-X-Google-Smtp-Source: APXvYqyY4Tx6Je1B7yZyu8PRabhvxtQbv7VVJc0DEmHPKM5cohRNkH+RJufrdO93H5p35mcsGmPjdZ8/3vuUcoeKTfU=
-X-Received: by 2002:a2e:8946:: with SMTP id b6mr5364709ljk.1.1579262945077;
- Fri, 17 Jan 2020 04:09:05 -0800 (PST)
+ :message-id:subject:to:cc;
+ bh=RmMqJrBOHe/Q6dl3NvKH6ZqysU0tMXFP4wNB72lxUak=;
+ b=dQYc5nXXmFeHmscawf69k1kjkjW9MbohBq97/tQTPslr2d/bm43U8x7jkfcISn+Z5q
+ JKumZ+rfiRp3DdHLJObiZ50DLlJIQeGGCTB/wDBwyvDDHQrWlJAhe6liJW2O6k+H5Hzb
+ 5ks9ydT6EOZ9w2MEV0FMpHdFMdtEY77FaRlsJQZts9oq3ytMP/PkI2TaOIV4mGKiSmHw
+ 5gqB0E5GGbqo9XNdJn3sa/2uEp8zar1u4PTMfpmEbd+bo7pHsE5CSr8FfgU1FWjs22xB
+ YdOe8Qi80MSlke26xKV/bzIZrdEsD4T5xfjjFbnYc4jG00mwj915s22aXVnUolyzmNes
+ Z03g==
+X-Gm-Message-State: APjAAAWCm9Tm6KNNIDUZgxBDSQ1SpvFgkmk7Pv8AWsTuijWHiWfFDzFg
+ tvbHUqs4M1kSvjsQzw4Z8JQB3NHQYjD9FC0wez0=
+X-Google-Smtp-Source: APXvYqwdI2GF5LljLjWCzvIUotTwMq3HbLZBStbBeyL3q/4lLHDGeYTTRqUcKRgazawTEkJZWyOE7VBg4hTZ8T9nqW4=
+X-Received: by 2002:a2e:461a:: with SMTP id t26mr11762156lja.204.1579480320636; 
+ Sun, 19 Jan 2020 16:32:00 -0800 (PST)
 MIME-Version: 1.0
-References: <20190821162831.27811-1-georg.kotheimer@kernkonzept.com>
- <87zhez4ied.fsf@linaro.org>
-In-Reply-To: <87zhez4ied.fsf@linaro.org>
+References: <cover.1566573576.git.alistair.francis@wdc.com>
+ <5cc26abb98a9534720f09674b4b9caafb8f2cf0a.1566573576.git.alistair.francis@wdc.com>
+ <20200105163640.GA1752551@aurel32.net> <20200105165916.GA1834646@aurel32.net>
+In-Reply-To: <20200105165916.GA1834646@aurel32.net>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 17 Jan 2020 22:08:37 +1000
-Message-ID: <CAKmqyKNOQBomr66+2pUj8Kugo-yPXf4Sc6wD0afW-aZFCDQo3w@mail.gmail.com>
-Subject: Re: [Qemu-devel] [PATCH v3] RISC-V: Select FPU gdb xml file based on
- the supported extensions
-To: =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+Date: Mon, 20 Jan 2020 10:31:33 +1000
+Message-ID: <CAKmqyKNd8ihSXTcdS9da_pGkinFVnJKAAsg4fR4LzBEUH8NZ2A@mail.gmail.com>
+Subject: Re: [Qemu-devel] [PATCH v4 3/7] target/riscv: Create function to test
+ if FP is enabled
+To: Aurelien Jarno <aurelien@aurel32.net>
+Cc: Alistair Francis <alistair.francis@wdc.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Palmer Dabbelt <palmer@sifive.com>, Alistair Francis <alistair.francis@wdc.com>,
- Georg Kotheimer <georg.kotheimer@kernkonzept.com>
+ Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bmeng.cn@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::242
+X-Received-From: 2a00:1450:4864:20::243
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -70,174 +69,59 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Jan 2020 12:09:13 -0000
+X-List-Received-Date: Mon, 20 Jan 2020 00:32:07 -0000
 
-On Tue, Jan 7, 2020 at 10:21 PM Alex Benn=C3=A9e <alex.bennee@linaro.org> w=
-rote:
+On Mon, Jan 6, 2020 at 2:59 AM Aurelien Jarno <aurelien@aurel32.net> wrote:
 >
->
-> Georg Kotheimer <georg.kotheimer@kernkonzept.com> writes:
->
-> > The size of the FPU registers depends solely on the floating point
-> > extensions supported by the target architecture.
-> > However, in the previous implementation the floating point register
-> > size was derived from whether the target architecture is 32-bit or
-> > 64-bit.
+> On 2020-01-05 17:36, Aurelien Jarno wrote:
+> > > diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> > > index e0d4586760..2789215b5e 100644
+> > > --- a/target/riscv/csr.c
+> > > +++ b/target/riscv/csr.c
 > >
-> > To allow RVF without RVD, changes to riscv_gdb_get_fpu() and
-> > riscv_gdb_set_fpu() were necessary.
+> > [ snip ]
 > >
-> > Signed-off-by: Georg Kotheimer <georg.kotheimer@kernkonzept.com>
-> > ---
-> >  configure              |  4 ++--
-> >  target/riscv/gdbstub.c | 45 ++++++++++++++++++++++++------------------
-> >  2 files changed, 28 insertions(+), 21 deletions(-)
+> > > @@ -307,6 +307,7 @@ static int write_mstatus(CPURISCVState *env, int csrno, target_ulong val)
+> > >  {
+> > >      target_ulong mstatus = env->mstatus;
+> > >      target_ulong mask = 0;
+> > > +    int dirty;
+> > >
+> > >      /* flush tlb on mstatus fields that affect VM */
+> > >      if (env->priv_ver <= PRIV_VERSION_1_09_1) {
+> > > @@ -340,8 +341,9 @@ static int write_mstatus(CPURISCVState *env, int csrno, target_ulong val)
+> > >
+> > >      mstatus = (mstatus & ~mask) | (val & mask);
+> > >
+> > > -    int dirty = ((mstatus & MSTATUS_FS) == MSTATUS_FS) |
+> > > -                ((mstatus & MSTATUS_XS) == MSTATUS_XS);
+> > > +    dirty = (riscv_cpu_fp_enabled(env) &&
+> > > +             ((mstatus & MSTATUS_FS) == MSTATUS_FS)) |
+> > > +            ((mstatus & MSTATUS_XS) == MSTATUS_XS);
+> > >      mstatus = set_field(mstatus, MSTATUS_SD, dirty);
+> > >      env->mstatus = mstatus;
 > >
-> > diff --git a/configure b/configure
-> > index 714e7fb6a1..44ee953022 100755
-> > --- a/configure
-> > +++ b/configure
-> > @@ -7596,14 +7596,14 @@ case "$target_name" in
-> >      TARGET_BASE_ARCH=3Driscv
-> >      TARGET_ABI_DIR=3Driscv
-> >      mttcg=3Dyes
-> > -    gdb_xml_files=3D"riscv-32bit-cpu.xml riscv-32bit-fpu.xml riscv-32b=
-it-csr.xml"
-> > +    gdb_xml_files=3D"riscv-32bit-cpu.xml riscv-32bit-fpu.xml riscv-64b=
-it-fpu.xml riscv-32bit-csr.xml"
-> >      target_compiler=3D$cross_cc_riscv32
-> >    ;;
-> >    riscv64)
-> >      TARGET_BASE_ARCH=3Driscv
-> >      TARGET_ABI_DIR=3Driscv
-> >      mttcg=3Dyes
-> > -    gdb_xml_files=3D"riscv-64bit-cpu.xml riscv-64bit-fpu.xml riscv-64b=
-it-csr.xml"
-> > +    gdb_xml_files=3D"riscv-64bit-cpu.xml riscv-32bit-fpu.xml riscv-64b=
-it-fpu.xml riscv-64bit-csr.xml"
-> >      target_compiler=3D$cross_cc_riscv64
-> >    ;;
-> >    sh4|sh4eb)
-> > diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
-> > index 27be93279b..89b2543c9d 100644
-> > --- a/target/riscv/gdbstub.c
-> > +++ b/target/riscv/gdbstub.c
-> > @@ -303,19 +303,22 @@ int riscv_cpu_gdb_write_register(CPUState *cs, ui=
-nt8_t *mem_buf, int n)
-> >  static int riscv_gdb_get_fpu(CPURISCVState *env, uint8_t *mem_buf, int=
- n)
-> >  {
-> >      if (n < 32) {
-> > -        return gdb_get_reg64(mem_buf, env->fpr[n]);
-> > +        if (env->misa & RVD) {
-> > +            return gdb_get_reg64(mem_buf, env->fpr[n]);
-> > +        }
-> > +        return gdb_get_reg32(mem_buf, env->fpr[n]);
-> >      /* there is hole between ft11 and fflags in fpu.xml */
-> >      } else if (n < 36 && n > 32) {
-> >          target_ulong val =3D 0;
-> >          int result;
-> >          /*
-> > -         * CSR_FFLAGS is at index 8 in csr_register, and gdb says it i=
-s FP
-> > -         * register 33, so we recalculate the map index.
-> > +         * CSR_FFLAGS is at index 1 in the csr space, and gdb says it =
-is FP
-> > +         * register 33, so we recalculate the csr index.
-> >           * This also works for CSR_FRM and CSR_FCSR.
-> >           */
-> > -        result =3D riscv_csrrw_debug(env, n - 33 +  8, &val, 0, 0);
-> > +        result =3D riscv_csrrw_debug(env, n - 33 + CSR_FFLAGS, &val, 0=
-, 0);
-> >          if (result =3D=3D 0) {
-> > -            return gdb_get_regl(mem_buf, val);
-> > +            return gdb_get_reg32(mem_buf, val);
-> >          }
-> >      }
-> >      return 0;
-> > @@ -324,20 +327,25 @@ static int riscv_gdb_get_fpu(CPURISCVState *env, =
-uint8_t *mem_buf, int n)
-> >  static int riscv_gdb_set_fpu(CPURISCVState *env, uint8_t *mem_buf, int=
- n)
-> >  {
-> >      if (n < 32) {
-> > -        env->fpr[n] =3D ldq_p(mem_buf); /* always 64-bit */
-> > -        return sizeof(uint64_t);
-> > +        if (env->misa & RVD) {
-> > +            env->fpr[n] =3D ldq_p(mem_buf);
-> > +            return sizeof(uint64_t);
-> > +        } else {
-> > +            env->fpr[n] =3D ldl_p(mem_buf);
-> > +            return sizeof(uint32_t);
-> > +        }
+> > This patch, and more precisely the above two hunks broke
+> > qemu-system-riscv64. More precisely, when running a Debian sid system
+> > inside QEMU, sshd hangs during key exchange.
 >
-> What endianess can RISC-V support? Unless specifically stated by the
-> architecture values should be returned in tgarget endian format.
+> The problem is that at this stage, mstatus != env->status. Prior to that
+> patch, dirty was computed exclusively on the new mstatus status, after
+> the update by val. With this patch, riscv_cpu_fp_enabled() refers to the
+> old value of mstatus. Therefore when FS is changed from "Off" (FS = 00)
+> to "Dirty" (FS == 11), the SD bit is not set.
 
-It can support both.
+Thanks for reporting this!
 
-What needs to be changed?
+Can you try this branch (it should be a PR to mainline QEMU soon) and
+let me know if that fixes the issue?
+
+https://github.com/palmer-dabbelt/qemu/commits/for-master
 
 Alistair
 
 >
-> >      /* there is hole between ft11 and fflags in fpu.xml */
-> >      } else if (n < 36 && n > 32) {
-> > -        target_ulong val =3D ldtul_p(mem_buf);
-> > +        target_ulong val =3D ldl_p(mem_buf);
-> >          int result;
-> >          /*
-> > -         * CSR_FFLAGS is at index 8 in csr_register, and gdb says it i=
-s FP
-> > -         * register 33, so we recalculate the map index.
-> > +         * CSR_FFLAGS is at index 1 in the csr space, and gdb says it =
-is FP
-> > +         * register 33, so we recalculate the csr index.
-> >           * This also works for CSR_FRM and CSR_FCSR.
-> >           */
-> > -        result =3D riscv_csrrw_debug(env, n - 33 + 8, NULL, val, -1);
-> > +        result =3D riscv_csrrw_debug(env, n - 33 + CSR_FFLAGS, NULL, v=
-al, -1);
-> >          if (result =3D=3D 0) {
-> > -            return sizeof(target_ulong);
-> > +            return sizeof(uint32_t);
-> >          }
-> >      }
-> >      return 0;
-> > @@ -375,20 +383,19 @@ void riscv_cpu_register_gdb_regs_for_features(CPU=
-State *cs)
-> >  {
-> >      RISCVCPU *cpu =3D RISCV_CPU(cs);
-> >      CPURISCVState *env =3D &cpu->env;
-> > -#if defined(TARGET_RISCV32)
-> > -    if (env->misa & RVF) {
-> > +
-> > +    if (env->misa & RVD) {
-> > +        gdb_register_coprocessor(cs, riscv_gdb_get_fpu, riscv_gdb_set_=
-fpu,
-> > +                                 36, "riscv-64bit-fpu.xml", 0);
-> > +    } else if (env->misa & RVF) {
-> >          gdb_register_coprocessor(cs, riscv_gdb_get_fpu, riscv_gdb_set_=
-fpu,
-> >                                   36, "riscv-32bit-fpu.xml", 0);
-> >      }
-> >
-> > +#if defined(TARGET_RISCV32)
-> >      gdb_register_coprocessor(cs, riscv_gdb_get_csr, riscv_gdb_set_csr,
-> >                               4096, "riscv-32bit-csr.xml", 0);
-> >  #elif defined(TARGET_RISCV64)
-> > -    if (env->misa & RVF) {
-> > -        gdb_register_coprocessor(cs, riscv_gdb_get_fpu, riscv_gdb_set_=
-fpu,
-> > -                                 36, "riscv-64bit-fpu.xml", 0);
-> > -    }
-> > -
-> >      gdb_register_coprocessor(cs, riscv_gdb_get_csr, riscv_gdb_set_csr,
-> >                               4096, "riscv-64bit-csr.xml", 0);
-> >  #endif
->
->
 > --
-> Alex Benn=C3=A9e
->
+> Aurelien Jarno                          GPG: 4096R/1DDD8C9B
+> aurelien@aurel32.net                 http://www.aurel32.net
 
