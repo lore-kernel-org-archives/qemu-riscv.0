@@ -1,54 +1,54 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iu39O-0001nK-26
-	for mharc-qemu-riscv@gnu.org; Tue, 21 Jan 2020 18:41:38 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:58884)
+	id 1iu39Q-0001pQ-3G
+	for mharc-qemu-riscv@gnu.org; Tue, 21 Jan 2020 18:41:40 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58888)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <palmerdabbelt@google.com>) id 1iu39J-0001f1-3V
+ (envelope-from <palmerdabbelt@google.com>) id 1iu39J-0001f5-3P
  for qemu-riscv@nongnu.org; Tue, 21 Jan 2020 18:41:34 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmerdabbelt@google.com>) id 1iu39H-0004rj-2q
+ (envelope-from <palmerdabbelt@google.com>) id 1iu39H-0004sA-98
  for qemu-riscv@nongnu.org; Tue, 21 Jan 2020 18:41:32 -0500
-Received: from mail-pj1-x1031.google.com ([2607:f8b0:4864:20::1031]:40415)
+Received: from mail-pl1-x62a.google.com ([2607:f8b0:4864:20::62a]:44721)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <palmerdabbelt@google.com>)
- id 1iu39F-0004q8-Mx
- for qemu-riscv@nongnu.org; Tue, 21 Jan 2020 18:41:30 -0500
-Received: by mail-pj1-x1031.google.com with SMTP id bg7so2407459pjb.5
- for <qemu-riscv@nongnu.org>; Tue, 21 Jan 2020 15:41:29 -0800 (PST)
+ id 1iu39H-0004qu-29
+ for qemu-riscv@nongnu.org; Tue, 21 Jan 2020 18:41:31 -0500
+Received: by mail-pl1-x62a.google.com with SMTP id d9so2033251plo.11
+ for <qemu-riscv@nongnu.org>; Tue, 21 Jan 2020 15:41:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
  h=subject:date:message-id:mime-version:content-transfer-encoding:cc
  :from:to:in-reply-to:references;
- bh=Eswd/iZsVKMQNZDhJhB6RGXioT8oGHLH2OtVyxEhoVI=;
- b=g5jzp4VEzZtEYjyB2n+UMYhAJVojVzgtSlGuSgaIGVI3Xz9DZs6es54aY49CvGBcr0
- uPEX7/6LOY8042zKWOvTCeffJ092IixvFbkrSvbsrvrepJKjgnVQHTmjFR0fxx0VuCK/
- rFNgQ0/y8zPagTCpREDtT6wtOLnk60kP36/gvpj3Is0Dn9MiK0uO+XC1yYDmWqBdLq82
- eddUZB4Q+toID6CE3QtGNRZ7upxBNhYJQAebKkaYzlknhkBeBZkKZQJGCrawhUiZXAOU
- PE2cRqzz4h7JKgt4n77ZYb9KJ92pYB54fNpe6aUHG+jP11TPMmXQHiiwTKxCiPaITWAZ
- Ej3g==
+ bh=3ZBJ3lOl6bAM6O++EHYM72vy4b6t2MTsiNBFdeYBurI=;
+ b=IEYMdxA3S1BERn6sPZiFD8pAcLbFnXyIWED3sMkvXxrYnPV7sS0BViHvNkLvad0DfF
+ JMxpDSSSdBTeceCzf9ava/yk/SHtPV8XlhS4SMdASannEG4i4u2PziSqH4IiaV84PYnz
+ K/wJKE+plqDs02njgPFh8r4VAO15TbXXyex5ul5jkwssQw1pedzuBZYu8WxVxOi9JXvb
+ ZboLzhR/QbmfQE0terQD9mJKYz3UiQH1Y4R+Zotrd9PHd5a+3DteUtaxOrDI5+NZ+DmK
+ 7GmxZwBIY6kKQaYJ4drBZTwoMxBaoXiF8xia/dLEfugwQZEOsn3KWHXY4ksgEcOLBddP
+ urcg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:date:message-id:mime-version
  :content-transfer-encoding:cc:from:to:in-reply-to:references;
- bh=Eswd/iZsVKMQNZDhJhB6RGXioT8oGHLH2OtVyxEhoVI=;
- b=HHFyKgj5DpH211KpFiDOlrzt1ezqzwQh1yBLRybM2Evzg9lYfUhODPREbviIWDFh5t
- qV3aqXsuU5GZ6IQQDsbEJ4siOumeWkupYDR2YimJk3ocYezLqDOluDIh91uIAS7+bKpA
- zKSXuAVhm6mTlmDF2fu43qewXos/cgDFwWRgWi800/ZfTj7plesi3wideLiUPgMcfYLg
- 82XzFNY8/zHykpx6Yi5cbKe0M8V09ojbIMUlETY1vCMIrk0PzSeRQjBqy8cZiUgeyfHo
- rXQO+EvDgKb4HHq5Cqwms7odjeEmZFamsbKjuFRGjHAexgfP2k+Ro1bceGV6dzcw7yMZ
- 0Syw==
-X-Gm-Message-State: APjAAAW5FoE5N2NsEdg2iL505PNqkspVl+WExi09NqDOqo/xKd79WvTA
- MENEPS/yNNcrrTki9rH6NIaryg==
-X-Google-Smtp-Source: APXvYqyapoWzSwZDcjb0Z6XQ1Sm7nP8kOBmwfpPwwxspCOGCABxo2x5O63fDZI54cl5hLP8uF06cjA==
-X-Received: by 2002:a17:902:124:: with SMTP id
- 33mr7798768plb.115.1579650088186; 
- Tue, 21 Jan 2020 15:41:28 -0800 (PST)
+ bh=3ZBJ3lOl6bAM6O++EHYM72vy4b6t2MTsiNBFdeYBurI=;
+ b=W1sBUL7Y1plYKGSbWm1fc9fta1U2f2noFc43aYHcNIZMQ1j5wep+gQkK6kurJac6/g
+ bWRDzKmcDhXr1FA3ZzaS6O232iB49mFij2tFWQMNdy7b5kZkXarGXOeZHfysz/1w3euD
+ KucWspusaUvSxm6yF7W+cjfxgkKC7R0QycmVaQQa6Ixn7v5hNkSVhG6WFSRMaCcN5fkP
+ RPnkkWloUbogaVpyTnnePMVMh8ajHGb3uZ3KVeuaZtjYYtnlo8mUhj6oRKu67Ry1po4I
+ WfXTtsd7ixT//kGeOl6TbTr4+2dg0W/Kfu5GOcmvDj8vtzoSwfd37257h8srvVvpu0vR
+ w2pQ==
+X-Gm-Message-State: APjAAAVMqU7PHZhU1DNLer+rK9bC5lNcJTvsBxIBLmofLzMQOA/wgXrO
+ 1jZIOtGkd4Fw+3Vkt+YSsJ/y1Q==
+X-Google-Smtp-Source: APXvYqxtvJS9NyZQN9Z2EZ9LfOBj6cdr+3X4Dm8phYlu8yFquxdsbxgM4hnRJ+Nj4uJhpKzIq9IoGw==
+X-Received: by 2002:a17:902:265:: with SMTP id
+ 92mr7395675plc.188.1579650089333; 
+ Tue, 21 Jan 2020 15:41:29 -0800 (PST)
 Received: from localhost ([2620:0:1000:2514:7f69:cd98:a2a2:a03d])
- by smtp.gmail.com with ESMTPSA id m14sm555650pjf.3.2020.01.21.15.41.27
+ by smtp.gmail.com with ESMTPSA id d4sm533552pjz.12.2020.01.21.15.41.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 21 Jan 2020 15:41:27 -0800 (PST)
-Subject: [PULL 4/5] target/riscv: fsd/fsw doesn't dirty FP state
-Date: Tue, 21 Jan 2020 14:57:01 -0800
-Message-Id: <20200121225703.148465-5-palmerdabbelt@google.com>
+ Tue, 21 Jan 2020 15:41:28 -0800 (PST)
+Subject: [PULL 5/5] target/riscv: update mstatus.SD when FS is set dirty
+Date: Tue, 21 Jan 2020 14:57:02 -0800
+Message-Id: <20200121225703.148465-6-palmerdabbelt@google.com>
 X-Mailer: git-send-email 2.25.0.341.g760bfbb309-goog
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -63,7 +63,7 @@ In-Reply-To: <20200121225703.148465-1-palmerdabbelt@google.com>
 References: <20200121225703.148465-1-palmerdabbelt@google.com>
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::1031
+X-Received-From: 2607:f8b0:4864:20::62a
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -79,39 +79,45 @@ X-List-Received-Date: Tue, 21 Jan 2020 23:41:35 -0000
 
 From: ShihPo Hung <shihpo.hung@sifive.com>
 
+remove the check becuase SD bit should summarize FS and XS fields
+unconditionally.
+
 Signed-off-by: ShihPo Hung <shihpo.hung@sifive.com>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Signed-off-by: Palmer Dabbelt <palmerdabbelt@google.com>
 ---
- target/riscv/insn_trans/trans_rvd.inc.c | 1 -
- target/riscv/insn_trans/trans_rvf.inc.c | 1 -
- 2 files changed, 2 deletions(-)
+ target/riscv/csr.c       | 3 +--
+ target/riscv/translate.c | 2 +-
+ 2 files changed, 2 insertions(+), 3 deletions(-)
 
-diff --git a/target/riscv/insn_trans/trans_rvd.inc.c b/target/riscv/insn_trans/trans_rvd.inc.c
-index 393fa0248c..ea1044f13b 100644
---- a/target/riscv/insn_trans/trans_rvd.inc.c
-+++ b/target/riscv/insn_trans/trans_rvd.inc.c
-@@ -43,7 +43,6 @@ static bool trans_fsd(DisasContext *ctx, arg_fsd *a)
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index da02f9f0b1..0e34c292c5 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -341,8 +341,7 @@ static int write_mstatus(CPURISCVState *env, int csrno, target_ulong val)
  
-     tcg_gen_qemu_st_i64(cpu_fpr[a->rs2], t0, ctx->mem_idx, MO_TEQ);
+     mstatus = (mstatus & ~mask) | (val & mask);
  
--    mark_fs_dirty(ctx);
-     tcg_temp_free(t0);
-     return true;
+-    dirty = (riscv_cpu_fp_enabled(env) &&
+-             ((mstatus & MSTATUS_FS) == MSTATUS_FS)) |
++    dirty = ((mstatus & MSTATUS_FS) == MSTATUS_FS) |
+             ((mstatus & MSTATUS_XS) == MSTATUS_XS);
+     mstatus = set_field(mstatus, MSTATUS_SD, dirty);
+     env->mstatus = mstatus;
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index ab6a891dc3..8e40ed3ac4 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -394,7 +394,7 @@ static void mark_fs_dirty(DisasContext *ctx)
+ 
+     tmp = tcg_temp_new();
+     tcg_gen_ld_tl(tmp, cpu_env, offsetof(CPURISCVState, mstatus));
+-    tcg_gen_ori_tl(tmp, tmp, MSTATUS_FS);
++    tcg_gen_ori_tl(tmp, tmp, MSTATUS_FS | MSTATUS_SD);
+     tcg_gen_st_tl(tmp, cpu_env, offsetof(CPURISCVState, mstatus));
+     tcg_temp_free(tmp);
  }
-diff --git a/target/riscv/insn_trans/trans_rvf.inc.c b/target/riscv/insn_trans/trans_rvf.inc.c
-index 172dbfa919..e23cd639a6 100644
---- a/target/riscv/insn_trans/trans_rvf.inc.c
-+++ b/target/riscv/insn_trans/trans_rvf.inc.c
-@@ -52,7 +52,6 @@ static bool trans_fsw(DisasContext *ctx, arg_fsw *a)
-     tcg_gen_qemu_st_i64(cpu_fpr[a->rs2], t0, ctx->mem_idx, MO_TEUL);
- 
-     tcg_temp_free(t0);
--    mark_fs_dirty(ctx);
-     return true;
- }
- 
 -- 
 2.25.0.341.g760bfbb309-goog
 
