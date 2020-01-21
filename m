@@ -1,64 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ittJi-0003Ck-IH
-	for mharc-qemu-riscv@gnu.org; Tue, 21 Jan 2020 08:11:38 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:58271)
+	id 1ittRN-0003vV-I5
+	for mharc-qemu-riscv@gnu.org; Tue, 21 Jan 2020 08:19:33 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59310)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <fintelia@gmail.com>) id 1ittJf-00037S-1y
- for qemu-riscv@nongnu.org; Tue, 21 Jan 2020 08:11:36 -0500
+ (envelope-from <bounce+d13a72.9b4e76-qemu-riscv=nongnu.org@fintelia.io>)
+ id 1ittRG-0003mD-O7
+ for qemu-riscv@nongnu.org; Tue, 21 Jan 2020 08:19:30 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <fintelia@gmail.com>) id 1ittJd-00039O-Pm
- for qemu-riscv@nongnu.org; Tue, 21 Jan 2020 08:11:34 -0500
-Received: from mail-lf1-x142.google.com ([2a00:1450:4864:20::142]:36570)
+ (envelope-from <bounce+d13a72.9b4e76-qemu-riscv=nongnu.org@fintelia.io>)
+ id 1ittRD-0007B5-6e
+ for qemu-riscv@nongnu.org; Tue, 21 Jan 2020 08:19:26 -0500
+Received: from rs224.mailgun.us ([209.61.151.224]:41393)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <fintelia@gmail.com>)
- id 1ittJd-00038j-Ha; Tue, 21 Jan 2020 08:11:33 -0500
-Received: by mail-lf1-x142.google.com with SMTP id f24so2237159lfh.3;
- Tue, 21 Jan 2020 05:11:33 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=n+O6NkyOPzJuZtsFRRj/7c77BA+yueZ6QCF2y/JENJk=;
- b=kG11sCTL3MU7NnD3BW1oqiYi+hEIMLpM18ci+2T8TaIvokMMhmRlxboCXhIck8rNG+
- KKfBgoeyL6laTnUO5Qw0+LcRfcXd8Rl0DoiFBu6eImpuKdFy2cT1Tz8JYwvxgOvwY29F
- i7WsvSW3c2MepzTvOa8d99uH+yCS6e1IkocjXzbhgRmaz57fkh93WJCz2At7Oshr+yvM
- 4otBefH7N5tLxF0kIm0xMzhqg+AAoToNMA0/perPluKeBnIpZtXBRg9UBgrQzeeHTKIf
- 7Ka7OWV87TayoDJuyg1ZdVdP/Z/wvcT9U0Xp44Je5Wmfug4XAQYetqOyK8QaurhOonwZ
- v0KA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=n+O6NkyOPzJuZtsFRRj/7c77BA+yueZ6QCF2y/JENJk=;
- b=gfuGZbMLwgOT4X9MgcPpTFgfHbVUck1wS6CgjMokhdFb7EJucPbyK1inQrbO3rQRx4
- B1lgCmXf+PulgbR4N1MquyfH6thmLj1Y70FcEumX/GcETzb4zmL00b9nxRzU1sH/yekl
- zPQ/BjLcQCdyGrpaFhYwnQDBAO6wWXFW2YxklFuKctPrIIfnZWlpcxcLq+Wgx//GCIjB
- X4BBw7x1y30OJfzRZWy4Li8Sf7mSJ4HAs2KqQBmBWWRnr3mefjbCKqGWtQOEDxPPy3n+
- QnvggT9asjKYRrjI+pfg8z8Zc3xiWLEzuZps4NEGlYvgBwvZTRIqi3DYZMl6ETaQ29mW
- 9//A==
-X-Gm-Message-State: APjAAAUCRWAwi/Lbi26FHIFgT9lwZufH2p1yf9L5dMKOZvNKZQq3kvWq
- 2tpmvSNCpwZLfPOAcxCTD5XQtUkbzP1chRmD/Hw=
-X-Google-Smtp-Source: APXvYqwedYNY8e5XcfSJOmahUhBfbirEy3W7iG0UhfonbcZ/sXWmb5bnImgV1cj8Q/+UKFpDuvZBmx1GQtc7PQAUeTs=
-X-Received: by 2002:a19:5503:: with SMTP id n3mr2649930lfe.136.1579612291830; 
- Tue, 21 Jan 2020 05:11:31 -0800 (PST)
+ (Exim 4.71)
+ (envelope-from <bounce+d13a72.9b4e76-qemu-riscv=nongnu.org@fintelia.io>)
+ id 1ittRA-00077y-Bj
+ for qemu-riscv@nongnu.org; Tue, 21 Jan 2020 08:19:23 -0500
+DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=fintelia.io; q=dns/txt;
+ s=pic; 
+ t=1579612762; h=Content-Type: Cc: To: Subject: Message-ID: Date: From:
+ In-Reply-To: References: MIME-Version: Sender;
+ bh=FPLCMDiSkQF/kfQwaJ9geG60O7odRN9ix3UGXChDxjU=;
+ b=Sl8+Tw/1oDbul2KalCwbrj6M9iCTp8SVnJpWVL02e7lf37ZjZmRfbvye4ZRgzp1HYW52GKgs
+ Us730aMouqoVCn7aZdrlJGuHuFVUkmJRh3kwOJ7q8eKUOVlACKZya8olr0kRvv8Zfu+IWv07
+ A4RF6BrVF5sKWO7xzFjfchur8SIiDdxRNId5ZxzwAqwCWccZKRuh6KbnaDJfG2MkjciKlY2v
+ 0mDfGTNux+MHdIRxRXkg8ruBegxcMqkO0UWdJGF1i5NIGqwPLjUJKu0AdLr5p5AUYPw19ZGk
+ UNiXxH0fCZ7VbWwc0P1vmD63jt1Y1zRTbQ5SHXPfqZNUwUgMYRfI9Q==
+X-Mailgun-Sending-Ip: 209.61.151.224
+X-Mailgun-Sid: WyJkNjk0ZSIsICJxZW11LXJpc2N2QG5vbmdudS5vcmciLCAiOWI0ZTc2Il0=
+Sender: jonathan@fintelia.io
+Received: from mail-lj1-f180.google.com (mail-lj1-f180.google.com
+ [209.85.208.180])
+ by mxa.mailgun.org with ESMTP id 5e26fa53.7fbc18108df0-smtp-out-n01;
+ Tue, 21 Jan 2020 13:19:15 -0000 (UTC)
+Received: by mail-lj1-f180.google.com with SMTP id j1so2747219lja.2;
+ Tue, 21 Jan 2020 05:19:15 -0800 (PST)
+X-Gm-Message-State: APjAAAWx3JQUGinFyRg92BwSFG8JEhRPAAZy+vzue5kEUkWnGjlPJnEc
+ ZAO5MFlXaumlAVjU6941iS7dIzy/4BHUvCypQBU=
+X-Google-Smtp-Source: APXvYqyonyOKJN95NoJvd8Vm29+1Rvu04DJ5zbVd3JYirFsYel2VZW9aBjMECDY9eD1r7OJ2JLVavrk+fNjHkEC+Xys=
+X-Received: by 2002:a05:651c:321:: with SMTP id
+ b1mr16692354ljp.62.1579612754311; 
+ Tue, 21 Jan 2020 05:19:14 -0800 (PST)
 MIME-Version: 1.0
-References: <20200121085910.28834-1-anup.patel@wdc.com>
-In-Reply-To: <20200121085910.28834-1-anup.patel@wdc.com>
-From: Jonathan Behrens <fintelia@gmail.com>
-Date: Tue, 21 Jan 2020 08:11:05 -0500
-Message-ID: <CANnJOVHw=-yL2=j3L2XNkqYjDGnULkc-NQRzuWm2k=BWRH7EGQ@mail.gmail.com>
-Subject: Re: [PATCH 0/2] RISC-V TIME CSR for privileged mode
-To: Anup Patel <Anup.Patel@wdc.com>
-Cc: Peter Maydell <peter.maydell@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Atish Patra <Atish.Patra@wdc.com>,
- "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>,
- Anup Patel <anup@brainfault.org>
-Content-Type: multipart/alternative; boundary="0000000000008997d5059ca625e4"
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2a00:1450:4864:20::142
+References: <62fcfe747245cf8edcabcbe8f1f0b59be035fad6.1579584948.git.alistair.francis@wdc.com>
+In-Reply-To: <62fcfe747245cf8edcabcbe8f1f0b59be035fad6.1579584948.git.alistair.francis@wdc.com>
+From: Jonathan Behrens <jonathan@fintelia.io>
+Date: Tue, 21 Jan 2020 08:18:48 -0500
+X-Gmail-Original-Message-ID: <CANnJOVFD5yH-fnfjO2u3zTBCgq-OVsBNZMB6-CKdXftU_03qzg@mail.gmail.com>
+Message-ID: <CANnJOVFD5yH-fnfjO2u3zTBCgq-OVsBNZMB6-CKdXftU_03qzg@mail.gmail.com>
+Subject: Re: [PATCH v1 1/1] target/riscv: Correctly implement TSR trap
+To: Alistair Francis <alistair.francis@wdc.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, Alistair Francis <alistair23@gmail.com>
+Content-Type: multipart/alternative; boundary="0000000000001a7e3d059ca64113"
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+ [fuzzy]
+X-Received-From: 209.61.151.224
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -70,86 +68,107 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Jan 2020 13:11:37 -0000
+X-List-Received-Date: Tue, 21 Jan 2020 13:19:32 -0000
 
---0000000000008997d5059ca625e4
+--0000000000001a7e3d059ca64113
 Content-Type: text/plain; charset="UTF-8"
 
-This series doesn't seem to touch mcounteren.TM which should be hardwired
-to zero if no callback in provided, and writable otherwise. (I had a patch
-to do the hardwiring unconditionally, but it seems to have been
-accidentally dropped.) Other than that, I think the design is quite good.
+Looks good to me. Though this is I think the third bug in privilege
+checking in op_helper.c which is only like 150 lines long total. It would
+be really good to fully double check that there aren't any more lurking
+there...
 
-Jonathan
+Reviewed-by: Jonathan Behrens <jonathan@fintelia.io
+<palmerdabbelt@google.com>>
 
-On Tue, Jan 21, 2020 at 3:59 AM Anup Patel <Anup.Patel@wdc.com> wrote:
+On Tue, Jan 21, 2020 at 12:45 AM Alistair Francis <alistair.francis@wdc.com>
+wrote:
 
-> This series adds emulation of TIME CSRs for privileged mode. With
-> this series, we see approximately 25+% improvement in hackbench
-> numbers for non-virtualized (or Host) Linux and 40+% improvement
-> in hackbench numbers for Guest/VM Linux.
+> As reported in: https://bugs.launchpad.net/qemu/+bug/1851939 we weren't
+> correctly handling illegal instructions based on the value of MSTATUS_TSR
+> and the current privledge level.
 >
-> These patches are based on mainline/alistair/riscv-hyp-ext-v0.5.1
-> branch of https://github.com/kvm-riscv/qemu.git and can be found
-> in riscv_time_csr_v1 branch of same repo.
+> This patch fixes the issue raised in the bug by raising an illegal
+> instruction if TSR is set and we are in S-Mode.
 >
-> Anup Patel (2):
->   target/riscv: Emulate TIME CSRs for privileged mode
->   hw/riscv: Provide rdtime callback for TCG in CLINT emulation
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> ---
+>  target/riscv/op_helper.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >
->  hw/riscv/sifive_clint.c   |  1 +
->  target/riscv/cpu.h        |  5 +++
->  target/riscv/cpu_helper.c |  5 +++
->  target/riscv/csr.c        | 80 +++++++++++++++++++++++++++++++++++++--
->  4 files changed, 87 insertions(+), 4 deletions(-)
+> diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+> index 331cc36232..eed8eea6f2 100644
+> --- a/target/riscv/op_helper.c
+> +++ b/target/riscv/op_helper.c
+> @@ -83,7 +83,7 @@ target_ulong helper_sret(CPURISCVState *env,
+> target_ulong cpu_pc_deb)
+>      }
+>
+>      if (env->priv_ver >= PRIV_VERSION_1_10_0 &&
+> -        get_field(env->mstatus, MSTATUS_TSR)) {
+> +        get_field(env->mstatus, MSTATUS_TSR) && !(env->priv >= PRV_M)) {
+>          riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
+>      }
 >
 > --
-> 2.17.1
+> 2.24.1
 >
 >
 >
 
---0000000000008997d5059ca625e4
+--0000000000001a7e3d059ca64113
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr"><div>This series doesn&#39;t seem to touch mcounteren.TM w=
-hich should be hardwired to zero if no callback in provided, and writable o=
-therwise. (I had a patch to do the hardwiring unconditionally, but it seems=
- to have been accidentally dropped.) Other than that, I think the design is=
- quite good.</div><div><br></div><div>Jonathan<br></div></div><br><div clas=
-s=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Tue, Jan 21, 202=
-0 at 3:59 AM Anup Patel &lt;<a href=3D"mailto:Anup.Patel@wdc.com">Anup.Pate=
-l@wdc.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=
-=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding=
--left:1ex">This series adds emulation of TIME CSRs for privileged mode. Wit=
-h<br>
-this series, we see approximately 25+% improvement in hackbench<br>
-numbers for non-virtualized (or Host) Linux and 40+% improvement<br>
-in hackbench numbers for Guest/VM Linux.<br>
+<div dir=3D"ltr"><div>Looks good to me. Though this is I think the third bu=
+g in privilege checking in op_helper.c which is only like 150 lines long to=
+tal. It would be really good to fully double check that there aren&#39;t an=
+y more lurking there...<br></div><div><br></div><div>Reviewed-by: Jonathan =
+Behrens &lt;<a href=3D"mailto:jonathan@fintelia.io">jonathan@fintelia.io</a=
+><a href=3D"mailto:palmerdabbelt@google.com" target=3D"_blank"></a>&gt;</di=
+v></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr=
+">On Tue, Jan 21, 2020 at 12:45 AM Alistair Francis &lt;<a href=3D"mailto:a=
+listair.francis@wdc.com">alistair.francis@wdc.com</a>&gt; wrote:<br></div><=
+blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-l=
+eft:1px solid rgb(204,204,204);padding-left:1ex">As reported in: <a href=3D=
+"https://bugs.launchpad.net/qemu/+bug/1851939" rel=3D"noreferrer" target=3D=
+"_blank">https://bugs.launchpad.net/qemu/+bug/1851939</a> we weren&#39;t<br=
+>
+correctly handling illegal instructions based on the value of MSTATUS_TSR<b=
+r>
+and the current privledge level.<br>
 <br>
-These patches are based on mainline/alistair/riscv-hyp-ext-v0.5.1<br>
-branch of <a href=3D"https://github.com/kvm-riscv/qemu.git" rel=3D"noreferr=
-er" target=3D"_blank">https://github.com/kvm-riscv/qemu.git</a> and can be =
-found<br>
-in riscv_time_csr_v1 branch of same repo.<br>
+This patch fixes the issue raised in the bug by raising an illegal<br>
+instruction if TSR is set and we are in S-Mode.<br>
 <br>
-Anup Patel (2):<br>
-=C2=A0 target/riscv: Emulate TIME CSRs for privileged mode<br>
-=C2=A0 hw/riscv: Provide rdtime callback for TCG in CLINT emulation<br>
+Signed-off-by: Alistair Francis &lt;<a href=3D"mailto:alistair.francis@wdc.=
+com" target=3D"_blank">alistair.francis@wdc.com</a>&gt;<br>
+---<br>
+=C2=A0target/riscv/op_helper.c | 2 +-<br>
+=C2=A01 file changed, 1 insertion(+), 1 deletion(-)<br>
 <br>
-=C2=A0hw/riscv/sifive_clint.c=C2=A0 =C2=A0|=C2=A0 1 +<br>
-=C2=A0target/riscv/cpu.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 5 +++<br>
-=C2=A0target/riscv/cpu_helper.c |=C2=A0 5 +++<br>
-=C2=A0target/riscv/csr.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 | 80 ++++++++++++++++++=
-+++++++++++++++++++--<br>
-=C2=A04 files changed, 87 insertions(+), 4 deletions(-)<br>
+diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c<br>
+index 331cc36232..eed8eea6f2 100644<br>
+--- a/target/riscv/op_helper.c<br>
++++ b/target/riscv/op_helper.c<br>
+@@ -83,7 +83,7 @@ target_ulong helper_sret(CPURISCVState *env, target_ulong=
+ cpu_pc_deb)<br>
+=C2=A0 =C2=A0 =C2=A0}<br>
+<br>
+=C2=A0 =C2=A0 =C2=A0if (env-&gt;priv_ver &gt;=3D PRIV_VERSION_1_10_0 &amp;&=
+amp;<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 get_field(env-&gt;mstatus, MSTATUS_TSR)) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 get_field(env-&gt;mstatus, MSTATUS_TSR) &amp;&=
+amp; !(env-&gt;priv &gt;=3D PRV_M)) {<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0riscv_raise_exception(env, RISCV_EXCP_ILL=
+EGAL_INST, GETPC());<br>
+=C2=A0 =C2=A0 =C2=A0}<br>
 <br>
 -- <br>
-2.17.1<br>
+2.24.1<br>
 <br>
 <br>
 </blockquote></div>
 
---0000000000008997d5059ca625e4--
+--0000000000001a7e3d059ca64113--
 
