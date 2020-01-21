@@ -1,52 +1,53 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1itr0v-0001vi-Ks
-	for mharc-qemu-riscv@gnu.org; Tue, 21 Jan 2020 05:44:05 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37173)
+	id 1itr1f-0002lG-7i
+	for mharc-qemu-riscv@gnu.org; Tue, 21 Jan 2020 05:44:51 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:37281)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <alistair23@gmail.com>) id 1itr0s-0001vW-NB
- for qemu-riscv@nongnu.org; Tue, 21 Jan 2020 05:44:04 -0500
+ (envelope-from <alistair23@gmail.com>) id 1itr1c-0002h2-G9
+ for qemu-riscv@nongnu.org; Tue, 21 Jan 2020 05:44:49 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1itr0r-0005mp-7d
- for qemu-riscv@nongnu.org; Tue, 21 Jan 2020 05:44:02 -0500
-Received: from mail-lf1-x143.google.com ([2a00:1450:4864:20::143]:36120)
+ (envelope-from <alistair23@gmail.com>) id 1itr1b-0006Um-Iq
+ for qemu-riscv@nongnu.org; Tue, 21 Jan 2020 05:44:48 -0500
+Received: from mail-lj1-x241.google.com ([2a00:1450:4864:20::241]:41951)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1itr0q-0005mW-Vr; Tue, 21 Jan 2020 05:44:01 -0500
-Received: by mail-lf1-x143.google.com with SMTP id f24so1880120lfh.3;
- Tue, 21 Jan 2020 02:44:00 -0800 (PST)
+ id 1itr1b-0006UM-CG; Tue, 21 Jan 2020 05:44:47 -0500
+Received: by mail-lj1-x241.google.com with SMTP id h23so2210452ljc.8;
+ Tue, 21 Jan 2020 02:44:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=LH5XwY6XS/oMmZmSr5Hjxd99SJgY+3/Uf3sl4xq7rZg=;
- b=Za57UbWIbk58m92C1gv25Y7n69cMhvj5LQk5mrnryciKD7llDVCfGRr0cMIokzVVJ4
- bJxXbjqCNPqdHTqEiSVIm1uHgPteWY3Cq1QTuNyFHClRYWyOtYQl4TRGWIza20++ify4
- jUIqDGGTCuD/f0K0tYzrKn0Q1NSuBhhhrmEaHXFdIA0J/ZxlVO9EM5NFq3zQziiharv2
- zcthzSayDBJrgv1hYiKIVVCPo4O0EyohpHf8BahyI8xGwHQsvlQ+JQQX7G5iKwu4azJr
- 1XapiVaJE8nzjj/WVrnyM2TJY/OU8lvzUU24FSaqyCRl6rvEN7dsIPlFv4XgfaSMI7A2
- TVKQ==
+ :cc; bh=NBCTh5HwTl9ddrB9gE8PK+L3swUoYyQPLEhhi4wxcuE=;
+ b=CeceOeGbtWCnlbssy9q4E2tNMoywoVxi3M6FSTgi7hdg6Sr94LCYLUG8N4EodndEgd
+ y+JAKg5E2kQqTp/7zg8V67WIUQv3bqz65Cqc0gbyIKMwaXoERDtnVeDdkdEJbOSX6CuI
+ FrZUr2UXsZYJWOW6DGs0vOV2gyFRpL7fA666NZpscskyJffsHPocEWwBqEol/doTKbm9
+ xzNVUbjIM2yDIuPEMHWKUr39p/b8Cz0aYnP3Xjwce+GMVhNgo5khA5Z6woIOSDvGGsYl
+ LufqhjUSj0ONuUjrNYPUGPA/vyul5M76SfTRJq698HR1qZ6l8jKnilgWY7Guv1S/1yZN
+ 7Ing==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=LH5XwY6XS/oMmZmSr5Hjxd99SJgY+3/Uf3sl4xq7rZg=;
- b=c0ENk2Ki2ZWk6KQqLEskOMoRIA7m2iL8UYRxGrcMqgdgSqO+jn9SJNxPYiT47hCiBJ
- z4YKgbIYa+dHogOMSg66JX8555LebmhZ9+L0xen7LFSd0wrFMElnI77qnHZZVlCRuYMV
- yLSMtqmsOkCCb2WBrJ10PVfcwQaYTdgKJ6GNPHW4KeQakiSHiBc9uFLaPvF65Lh2SKmV
- kpQ1+cK4dg1+Ks/q9BMF7iRQLYW78nb5GZvTHMYO2oH6UkrmXzin5xMMrz63RJJYbTGr
- viZ7gC45CYmHpIo3Ut5Y2NKhiOMDtSPb2E+3/z/XoB06EV4LID+BYL3uZWBpHTJ+oTSh
- cE8w==
-X-Gm-Message-State: APjAAAV6gGlCj6jcsACtm3oyDBlb4HnuRQf+1eHQdSLCuLDPodPliNm9
- xIUlhwfrsjC50bKwkcIg9PcmYn/U2rXLm9c+b4k=
-X-Google-Smtp-Source: APXvYqzrGr8NGlBl8ekn0xdAISJvUEnIBB+xzCkyDQC1TuKVfWomzKwjtPppUn+vlDPWdUSUPMKRyT5nQJ0HSc9PyQw=
-X-Received: by 2002:ac2:5f68:: with SMTP id c8mr2266883lfc.196.1579603439321; 
- Tue, 21 Jan 2020 02:43:59 -0800 (PST)
+ bh=NBCTh5HwTl9ddrB9gE8PK+L3swUoYyQPLEhhi4wxcuE=;
+ b=mSInmTZtGaJmzwEhg2HZlN2mmULFO2XcLEDZlLPbFK5s9qCqonPwdV7yYOl7FSINu5
+ AJQ5ZzIRxK5eVU0rxKXwmsiYMW6aXwlyFrfs5qVldBEqP5NyYY9TkIB66oN1HYID/wSL
+ d3iuN8CKOcQIsU2vW/+bpbdZLsTp+4jcobdWIWQSat/bwcw609kKmaALCuLyCvvxf82T
+ j5jgxsIyAmC8FSbw+VwEVDJDfL7T/p8RaE7pxjhpvxc+Y+2JFSf9Iv+zgaFheuteuQ/V
+ M8PyTPnFYWzz4YTn9YNJwSfbaSkcmnFIcxiYT1jmt3fEs92RIthu27l4T2gKIf1ZjgmU
+ Hn8w==
+X-Gm-Message-State: APjAAAWn6cyU5nVJhvWAeSbGx7K2LdO1W5qJJ0SVe2vm2gqiGAh5F4Tt
+ y1e5fnqXHqT+setvih+cXiByud20BjUSHdvJFPk=
+X-Google-Smtp-Source: APXvYqz0tLH4PmP9F6REfutfksROAEKHuPt1C2fVw0dOY7SE+5+l6PpOI1CRw3kJ7cR4fnWwgHFlIYgYz120zTocifQ=
+X-Received: by 2002:a2e:9a51:: with SMTP id k17mr16066036ljj.206.1579603486168; 
+ Tue, 21 Jan 2020 02:44:46 -0800 (PST)
 MIME-Version: 1.0
 References: <20200121085910.28834-1-anup.patel@wdc.com>
- <20200121085910.28834-2-anup.patel@wdc.com>
-In-Reply-To: <20200121085910.28834-2-anup.patel@wdc.com>
+ <20200121085910.28834-3-anup.patel@wdc.com>
+In-Reply-To: <20200121085910.28834-3-anup.patel@wdc.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 21 Jan 2020 20:43:32 +1000
-Message-ID: <CAKmqyKOkTXdYW+FgyEhYKPuhgHHAZ=h+Z9GXhHOuF3ru3sxcLQ@mail.gmail.com>
-Subject: Re: [PATCH 1/2] target/riscv: Emulate TIME CSRs for privileged mode
+Date: Tue, 21 Jan 2020 20:44:19 +1000
+Message-ID: <CAKmqyKOiWkqFbikTwbT51vZJ3hKj=oSFFQwJYUXLZT0kB--7Ow@mail.gmail.com>
+Subject: Re: [PATCH 2/2] hw/riscv: Provide rdtime callback for TCG in CLINT
+ emulation
 To: Anup Patel <Anup.Patel@wdc.com>
 Cc: Peter Maydell <peter.maydell@linaro.org>,
  Palmer Dabbelt <palmer@dabbelt.com>, 
@@ -59,7 +60,7 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
 Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::143
+X-Received-From: 2a00:1450:4864:20::241
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -71,201 +72,36 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Jan 2020 10:44:04 -0000
+X-List-Received-Date: Tue, 21 Jan 2020 10:44:49 -0000
 
-On Tue, Jan 21, 2020 at 7:03 PM Anup Patel <Anup.Patel@wdc.com> wrote:
+On Tue, Jan 21, 2020 at 7:04 PM Anup Patel <Anup.Patel@wdc.com> wrote:
 >
-> Currently, TIME CSRs are emulated only for user-only mode. This
-> patch add TIME CSRs emulation for privileged mode.
->
-> For privileged mode, the TIME CSRs will return value provided
-> by rdtime callback which is registered by QEMU machine/platform
-> emulation (i.e. CLINT emulation). If rdtime callback is not
-> available then the monitor (i.e. OpenSBI) will trap-n-emulate
-> TIME CSRs in software.
->
-> We see 25+% performance improvement in hackbench numbers when
-> TIME CSRs are not trap-n-emulated.
+> This patch extends CLINT emulation to provide rdtime callback for
+> TCG. This rdtime callback will be called wheneven TIME CSRs are
+> read in privileged modes.
 >
 > Signed-off-by: Anup Patel <anup.patel@wdc.com>
-> ---
->  target/riscv/cpu.h        |  5 +++
->  target/riscv/cpu_helper.c |  5 +++
->  target/riscv/csr.c        | 80 +++++++++++++++++++++++++++++++++++++--
->  3 files changed, 86 insertions(+), 4 deletions(-)
->
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 53bc6af5f7..473e01da6c 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -169,6 +169,7 @@ struct CPURISCVState {
->      target_ulong htval;
->      target_ulong htinst;
->      target_ulong hgatp;
-> +    uint64_t htimedelta;
->
->      /* Virtual CSRs */
->      target_ulong vsstatus;
-> @@ -204,6 +205,9 @@ struct CPURISCVState {
->      /* physical memory protection */
->      pmp_table_t pmp_state;
->
-> +    /* machine specific rdtime callback */
-> +    uint64_t (*rdtime_fn)(void);
-> +
->      /* True if in debugger mode.  */
->      bool debugger;
->  #endif
-> @@ -325,6 +329,7 @@ void riscv_cpu_swap_hypervisor_regs(CPURISCVState *env);
->  int riscv_cpu_claim_interrupts(RISCVCPU *cpu, uint32_t interrupts);
->  uint32_t riscv_cpu_update_mip(RISCVCPU *cpu, uint32_t mask, uint32_t value);
->  #define BOOL_TO_MASK(x) (-!!(x)) /* helper for riscv_cpu_update_mip value */
-> +void riscv_cpu_set_rdtime_fn(CPURISCVState *env, uint64_t (*fn)(void));
->  #endif
->  void riscv_cpu_set_mode(CPURISCVState *env, target_ulong newpriv);
->
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index 7166e6199e..c85f44d933 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -250,6 +250,11 @@ uint32_t riscv_cpu_update_mip(RISCVCPU *cpu, uint32_t mask, uint32_t value)
->      return old;
->  }
->
-> +void riscv_cpu_set_rdtime_fn(CPURISCVState *env, uint64_t (*fn)(void))
-> +{
-> +    env->rdtime_fn = fn;
-> +}
-> +
->  void riscv_cpu_set_mode(CPURISCVState *env, target_ulong newpriv)
->  {
->      if (newpriv > PRV_M) {
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index b28058f9d5..a55b543735 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -238,6 +238,30 @@ static int read_timeh(CPURISCVState *env, int csrno, target_ulong *val)
->
->  #else /* CONFIG_USER_ONLY */
->
-> +static int read_time(CPURISCVState *env, int csrno, target_ulong *val)
-> +{
-> +    uint64_t delta = riscv_cpu_virt_enabled(env) ? env->htimedelta : 0;
-> +
-> +    if (!env->rdtime_fn)
-> +        return -1;
-
-QEMU uses brackets around single line if statements (like Rust :) ).
-Can you add brackets to all of them?
-
-After that:
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
-> +
-> +    *val = env->rdtime_fn() + delta;
-> +    return 0;
-> +}
-> +
-> +#if defined(TARGET_RISCV32)
-> +static int read_timeh(CPURISCVState *env, int csrno, target_ulong *val)
-> +{
-> +    uint64_t delta = riscv_cpu_virt_enabled(env) ? env->htimedelta : 0;
-> +
-> +    if (!env->rdtime_fn)
-> +        return -1;
-> +
-> +    *val = (env->rdtime_fn() + delta) >> 32;
-> +    return 0;
-> +}
-> +#endif
-> +
->  /* Machine constants */
+> ---
+>  hw/riscv/sifive_clint.c | 1 +
+>  1 file changed, 1 insertion(+)
 >
->  #define M_MODE_INTERRUPTS  (MIP_MSIP | MIP_MTIP | MIP_MEIP)
-> @@ -931,6 +955,52 @@ static int write_hgatp(CPURISCVState *env, int csrno, target_ulong val)
->      return 0;
->  }
->
-> +static int read_htimedelta(CPURISCVState *env, int csrno, target_ulong *val)
-> +{
-> +    if (!env->rdtime_fn)
-> +        return -1;
-> +
-> +#if defined(TARGET_RISCV32)
-> +    *val = env->htimedelta & 0xffffffff;
-> +#else
-> +    *val = env->htimedelta;
-> +#endif
-> +    return 0;
-> +}
-> +
-> +static int write_htimedelta(CPURISCVState *env, int csrno, target_ulong val)
-> +{
-> +    if (!env->rdtime_fn)
-> +        return -1;
-> +
-> +#if defined(TARGET_RISCV32)
-> +    env->htimedelta = deposit64(env->htimedelta, 0, 32, (uint64_t)val);
-> +#else
-> +    env->htimedelta = val;
-> +#endif
-> +    return 0;
-> +}
-> +
-> +#if defined(TARGET_RISCV32)
-> +static int read_htimedeltah(CPURISCVState *env, int csrno, target_ulong *val)
-> +{
-> +    if (!env->rdtime_fn)
-> +        return -1;
-> +
-> +    *val = env->htimedelta >> 32;
-> +    return 0;
-> +}
-> +
-> +static int write_htimedeltah(CPURISCVState *env, int csrno, target_ulong val)
-> +{
-> +    if (!env->rdtime_fn)
-> +        return -1;
-> +
-> +    env->htimedelta = deposit64(env->htimedelta, 32, 32, (uint64_t)val);
-> +    return 0;
-> +}
-> +#endif
-> +
->  /* Virtual CSR Registers */
->  static int read_vsstatus(CPURISCVState *env, int csrno, target_ulong *val)
->  {
-> @@ -1203,14 +1273,12 @@ static riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
->      [CSR_INSTRETH] =            { ctr,  read_instreth                       },
->  #endif
->
-> -    /* User-level time CSRs are only available in linux-user
-> -     * In privileged mode, the monitor emulates these CSRs */
-> -#if defined(CONFIG_USER_ONLY)
-> +    /* In privileged mode, the monitor will have to emulate TIME CSRs only if
-> +     * rdtime callback is not provided by machine/platform emulation */
->      [CSR_TIME] =                { ctr,  read_time                           },
->  #if defined(TARGET_RISCV32)
->      [CSR_TIMEH] =               { ctr,  read_timeh                          },
->  #endif
-> -#endif
->
->  #if !defined(CONFIG_USER_ONLY)
->      /* Machine Timers and Counters */
-> @@ -1276,6 +1344,10 @@ static riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
->      [CSR_HTVAL] =               { hmode,   read_htval,       write_htval      },
->      [CSR_HTINST] =              { hmode,   read_htinst,      write_htinst     },
->      [CSR_HGATP] =               { hmode,   read_hgatp,       write_hgatp      },
-> +    [CSR_HTIMEDELTA] =          { hmode,   read_htimedelta,  write_htimedelta },
-> +#if defined(TARGET_RISCV32)
-> +    [CSR_HTIMEDELTAH] =         { hmode,   read_htimedeltah, write_htimedeltah},
-> +#endif
->
->      [CSR_VSSTATUS] =            { hmode,   read_vsstatus,    write_vsstatus   },
->      [CSR_VSIP] =                { hmode,   NULL,     NULL,     rmw_vsip       },
+> diff --git a/hw/riscv/sifive_clint.c b/hw/riscv/sifive_clint.c
+> index e5a8f75cee..805503dc27 100644
+> --- a/hw/riscv/sifive_clint.c
+> +++ b/hw/riscv/sifive_clint.c
+> @@ -236,6 +236,7 @@ DeviceState *sifive_clint_create(hwaddr addr, hwaddr size, uint32_t num_harts,
+>          if (!env) {
+>              continue;
+>          }
+> +        riscv_cpu_set_rdtime_fn(env, cpu_riscv_read_rtc);
+>          env->timer = timer_new_ns(QEMU_CLOCK_VIRTUAL,
+>                                    &sifive_clint_timer_cb, cpu);
+>          env->timecmp = 0;
 > --
 > 2.17.1
 >
