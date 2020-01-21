@@ -1,71 +1,122 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1itmKO-0007r6-9w
-	for mharc-qemu-riscv@gnu.org; Tue, 21 Jan 2020 00:43:52 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:39220)
+	id 1itpO2-00072Q-3c
+	for mharc-qemu-riscv@gnu.org; Tue, 21 Jan 2020 03:59:50 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:55194)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <prvs=2824d4cde=alistair.francis@wdc.com>)
- id 1itmKK-0007p7-K6
- for qemu-riscv@nongnu.org; Tue, 21 Jan 2020 00:43:49 -0500
+ (envelope-from <prvs=2824cb5c5=Anup.Patel@wdc.com>)
+ id 1itpNy-00071W-KF
+ for qemu-riscv@nongnu.org; Tue, 21 Jan 2020 03:59:48 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <prvs=2824d4cde=alistair.francis@wdc.com>)
- id 1itmKJ-0000HK-DM
- for qemu-riscv@nongnu.org; Tue, 21 Jan 2020 00:43:48 -0500
-Received: from esa5.hgst.iphmx.com ([216.71.153.144]:8430)
+ (envelope-from <prvs=2824cb5c5=Anup.Patel@wdc.com>)
+ id 1itpNw-00055E-9r
+ for qemu-riscv@nongnu.org; Tue, 21 Jan 2020 03:59:46 -0500
+Received: from esa3.hgst.iphmx.com ([216.71.153.141]:23932)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <prvs=2824d4cde=alistair.francis@wdc.com>)
- id 1itmKD-0000Dz-17; Tue, 21 Jan 2020 00:43:42 -0500
+ (Exim 4.71) (envelope-from <prvs=2824cb5c5=Anup.Patel@wdc.com>)
+ id 1itpNv-00052I-E6; Tue, 21 Jan 2020 03:59:44 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1579585422; x=1611121422;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=FMdWdt/Z43YWUxuzhWdNT2m+FqenMICqOXGj1pOq2Lg=;
- b=axnazXxbRnkt37uTWwvSngn4ZQumYZF+NDzwZ2rvm3s2mg9v4ipU9O6k
- WtG3jiTqYpt7MjLIpt6Cag39qqbpVdDWLgll9k24h0Q506CsReabWh/ru
- WqIPhi/p0r0WdHHN6Cj3e3CvjxcHIJbWqPQGI6WRJslbthL1E3QaovBD0
- 1skpcvi2pToz5cZ/cZQLstRqFgE55XjwIZm361oDRkGXVMZwWXIDS23g3
- 6YrJMGXuaeX58x8+RR7Bs6mQ6Qwiq7cucFdfQfihAItFZR5ZOK8l25fUJ
- vt/p1tZI9VaMB+DBTVISaq5+OvrB4/fyisASwZp6hO8LraOOLgb0aBP3R g==;
-IronPort-SDR: 4VOcymynlmdcPSsjKwRxnxi08wzEV5E3l/ba2Ap0cSyp2Hfaq+hqZF5dHSLz/qOMxK6xHdz2F+
- ZESrc4k8pBS+8fZlbwr/0eEW4OvdnqLLa3rr3/NECZB5x5nqWHUhrc+pg2HN+QI7hitjTeufKc
- dg4MgM9AvkfZf3F1ZJHZoAP99uf/bwYbntGyo4Mw1BFEfVhl5xbTww3ikYtb4/S0ApliW1En7J
- X8hCLVgLZLeupXrrHjkxhZRoXi7CwLnH7LgYyLS6Gn2IJdFnaDG8BNsTE1k3br1d5N7BuBtiq3
- nmk=
-X-IronPort-AV: E=Sophos;i="5.70,344,1574092800"; d="scan'208";a="128661668"
-Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
- ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 21 Jan 2020 13:43:38 +0800
-IronPort-SDR: Db/JG4eSK859bhXNKSl4/AHkl5JJ8uOGXZBQ+BthxzrvsJbqZO86vc22My8t+QtkoWO2yYYBYl
- VBwQhIjEPuKwCKaU1pPhKo0acrouXB5mbkWduaR+ZLnuzGGa02nIia89DbQqU7vNinHRoWf/tI
- OkXRqV+nKboXdojyB9uBYlUFzNsFJel5iAcXPuXgVPEpWrNwbbZUcZRJZjc8ZOSkg7PESNXG35
- panr6py7Yk65i86JiLlAEnjXgI/bjm6GoZfbW7UU86RoJTVLop9z1+YcAWEh9c6sGWKfcoKkdg
- 1cdbGG9EEcu+yuv/X/GoCA9P
-Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
- by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 20 Jan 2020 21:37:04 -0800
-IronPort-SDR: exNu54BcSpl0NYhcPJIRR0Mi8PJs7ladHxmDqrjivEp12sfX104CeHIGf3LAKqzYAkpDDju/Ko
- EncOac9eygkopobwJlm3buSZRj9mXl+yUUjdbQM/wRtU3he7aCxnpqLtbnz7KMwOO5A4eA8No+
- +ZjSaz4D16XxDrzx8Q6JQTnY/icEiRrLAY+WJ0nG9WoBArQwhMEexrRYLbHR9iqwWwT1e9gjuo
- sYSqz/CysEqYTyLfHDsEyHmyKfDnexnovIrCMD8spalRACwB7rHnShl1Khi4kFEMXY0Ox0OeSv
- jio=
-WDCIronportException: Internal
-Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
- risc6-mainframe.int.fusionio.com) ([10.196.158.235])
- by uls-op-cesaip02.wdc.com with ESMTP; 20 Jan 2020 21:43:37 -0800
-From: Alistair Francis <alistair.francis@wdc.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: palmer@dabbelt.com,
-	alistair.francis@wdc.com,
-	alistair23@gmail.com
-Subject: [PATCH v1 1/1] target/riscv: Correctly implement TSR trap
-Date: Mon, 20 Jan 2020 21:36:57 -0800
-Message-Id: <62fcfe747245cf8edcabcbe8f1f0b59be035fad6.1579584948.git.alistair.francis@wdc.com>
-X-Mailer: git-send-email 2.24.1
+ t=1579597184; x=1611133184;
+ h=from:to:cc:subject:date:message-id:
+ content-transfer-encoding:mime-version;
+ bh=Tlm0ImV8eIuzFbEQvXaeXRpyGZGdrpzsXb9GkgRHMss=;
+ b=iNLJyaWPy7oxlKD/jyixmItj0V/c+Ybn8XcqELpT/tvpjNqmotwZKRrM
+ ib4Hx8T4+1EqRSg+0cnZT6YIl3ZPZutU672mQj7FN7Tv9CvQ+JgjMzbMi
+ qEjm3ZrBJzRIwfe25FQTgr2huHUhea7eSeUevmB6ku/OEYII6X++092KG
+ 3vFE5lEcdCdBy7I9s8WFEPf0/nj1El2SylumTiYbAyvRwtNmssPKQRXSl
+ Fi3qsoEWRjCe7yQjZOWlWBGQPKy1SaCM73BZNWEo9x6Jf3S7SxYiGLVFN
+ brWku2y2m+AKn6imm3c9/88MPPsIVqKOMHxLW8so8v49BgIi8oyu6pCTV g==;
+IronPort-SDR: CxGPbuNHlNPpbD5p8knFxp20KvlfLMGhH0OL8VlWkGjSeZqxEpCiMjj00sTXQ5f6zJOrT/sWtZ
+ e7VV4CDuzTTpbT8il13vHS6WI4ddY43y/+gzwsTddzpoJYKNdyKOul5ioYiXKIbYF8nWcjadR+
+ tbPdykQ2OVpCjaG4W4PswY8Ul3C79UE299t1qo7CwLpK9vUOiUhK4C94MvU0R9VmmwCsf8369P
+ NulN84QGV9Y8Ix6bM+Im8pIZVJGeBzj/FQFAe2T1/kHOVMmxVkphDKhYQM3TIl4chX3PQOYApP
+ nl4=
+X-IronPort-AV: E=Sophos;i="5.70,345,1574092800"; d="scan'208";a="132437023"
+Received: from mail-cys01nam02lp2052.outbound.protection.outlook.com (HELO
+ NAM02-CY1-obe.outbound.protection.outlook.com) ([104.47.37.52])
+ by ob1.hgst.iphmx.com with ESMTP; 21 Jan 2020 16:59:40 +0800
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=m4oDFS+sMSZEWfy3j1140LDufn3tNKUo6EBdoqyXOSkqODAWN6hnNt0iBv6LT0DbWLc2eu4pswxcIEyKBOTPgu5iJfTaybM1meCkVeXfdfBkQK+8oeABb01SVOa0lswG7ELofcReBku38g8TKTS/KsE4cPbaasqX3SL0NckLqLtl/mQQwd/A8F5uA4FbCzfu7OgnGxF2zLULVJssGUXLxGeRoZ6sI82jRw9DzKuvVri6pELD+/hQJPO8tTBB24RL8cBZMhW1IyZjJ3f4pyXuwjTgjb4cYVcSK87c26ldKReWQ9+GxIc8hNg01qijjmfP7kT3fGrl4zt7Oofs/Z9Tng==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=bSvCstKqJhvm1PUbS/1LmS0cpXEi6lr0bODGzILJXaM=;
+ b=RveX3u/PdngZnEbYuna6UQM5SGXcCuP5G5Anfbh0AHot6AapVsVHZW8O5Gkou6MYAEYYjEkct8BWtFq089wh3KUMDw7vWGz3hEw8tXZSNSyR7zme5/2TQ434u5ke3t/tpf720oN8AKu2Ag9ZlN9gK9gXFbd2q3zSReeQ71Ot4Vwhv1QiH2TGwN2Px4Uegutnc8Kquz0WWvJ2eDKaHVJDV26OimaObumeGCicZUu+sUfuWUHaQDZX2FuRTwI/vLl/CYxJNHvdsae5IuO4Of8X4gT3VY26AJvZB5aN/FA0Sfddtk7f6c9ajvxwLTdwQ2KFRhJ4I9LGqsg4WF43ingicQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=wdc.com; dmarc=pass action=none header.from=wdc.com; dkim=pass
+ header.d=wdc.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=bSvCstKqJhvm1PUbS/1LmS0cpXEi6lr0bODGzILJXaM=;
+ b=uvyiCuGfosrnrFpzj0GYvte5MpCeQBBtee7OytsQR7XeAGMupuikJIvBIAacIMt85OJGBJo/N97J45+ZVsqaqq0ClPP42/6NDq2pKWTntp85ukef5Q0zjuovFmxDUn858v1WHlj77fiYx3yKuU8CShuHxEsdr6NJpnzrl/ckqxg=
+Received: from MN2PR04MB6061.namprd04.prod.outlook.com (20.178.246.15) by
+ MN2PR04MB5839.namprd04.prod.outlook.com (20.179.21.93) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.2644.21; Tue, 21 Jan 2020 08:59:36 +0000
+Received: from MN2PR04MB6061.namprd04.prod.outlook.com
+ ([fe80::a9a0:3ffa:371f:ad89]) by MN2PR04MB6061.namprd04.prod.outlook.com
+ ([fe80::a9a0:3ffa:371f:ad89%7]) with mapi id 15.20.2644.027; Tue, 21 Jan 2020
+ 08:59:36 +0000
+Received: from wdc.com (129.253.179.161) by
+ MAXPR0101CA0061.INDPRD01.PROD.OUTLOOK.COM (2603:1096:a00:e::23) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2644.19 via Frontend
+ Transport; Tue, 21 Jan 2020 08:59:33 +0000
+From: Anup Patel <Anup.Patel@wdc.com>
+To: Peter Maydell <peter.maydell@linaro.org>, Palmer Dabbelt
+ <palmer@dabbelt.com>, Alistair Francis <Alistair.Francis@wdc.com>, Sagar
+ Karandikar <sagark@eecs.berkeley.edu>
+CC: Atish Patra <Atish.Patra@wdc.com>, Anup Patel <anup@brainfault.org>,
+ "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>, "qemu-devel@nongnu.org"
+ <qemu-devel@nongnu.org>, Anup Patel <Anup.Patel@wdc.com>
+Subject: [PATCH 0/2] RISC-V TIME CSR for privileged mode
+Thread-Topic: [PATCH 0/2] RISC-V TIME CSR for privileged mode
+Thread-Index: AQHV0DkaO9M7k6us1ESwit6CjZ6jNA==
+Date: Tue, 21 Jan 2020 08:59:36 +0000
+Message-ID: <20200121085910.28834-1-anup.patel@wdc.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-clientproxiedby: MAXPR0101CA0061.INDPRD01.PROD.OUTLOOK.COM
+ (2603:1096:a00:e::23) To MN2PR04MB6061.namprd04.prod.outlook.com
+ (2603:10b6:208:d8::15)
+authentication-results: spf=none (sender IP is )
+ smtp.mailfrom=Anup.Patel@wdc.com; 
+x-ms-exchange-messagesentrepresentingtype: 1
+x-mailer: git-send-email 2.17.1
+x-originating-ip: [129.253.179.161]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-ht: Tenant
+x-ms-office365-filtering-correlation-id: e6384103-b819-4b4f-6281-08d79e503d33
+x-ms-traffictypediagnostic: MN2PR04MB5839:
+x-ms-exchange-transport-forked: True
+x-microsoft-antispam-prvs: <MN2PR04MB583910D61A1253716AC1F6F08D0D0@MN2PR04MB5839.namprd04.prod.outlook.com>
+wdcipoutbound: EOP-TRUE
+x-ms-oob-tlc-oobclassifiers: OLM:4125;
+x-forefront-prvs: 0289B6431E
+x-forefront-antispam-report: SFV:NSPM;
+ SFS:(10019020)(4636009)(376002)(366004)(39860400002)(346002)(396003)(136003)(189003)(199004)(186003)(16526019)(8676002)(478600001)(8936002)(81166006)(81156014)(26005)(8886007)(966005)(2616005)(956004)(55016002)(2906002)(1076003)(4326008)(44832011)(110136005)(86362001)(52116002)(7696005)(71200400001)(54906003)(5660300002)(36756003)(316002)(66946007)(66476007)(66556008)(4744005)(64756008)(66446008);
+ DIR:OUT; SFP:1102; SCL:1; SRVR:MN2PR04MB5839;
+ H:MN2PR04MB6061.namprd04.prod.outlook.com; FPR:; SPF:None; LANG:en;
+ PTR:InfoNoRecords; MX:1; A:1; 
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: c7kPpHSA6XN7nVtJh6FxQ+YzErwy+3apRDBJx47wwOxNC2KSsgIxcUvz2Hhhe+5+NCuNnMP//kSBHGGN4Pv4s9W8wj+vieAY/RpYndR5RQ5o05bKbaK3hVWIqIX3FLSD7DMwhZ+qhSaHiuSPQem/Gl+7Cg7pFek+BWakrtLnpRnZDPKgKDUAhvgsFb6+bf8CEL7hOeB5QTidUjCOE0TUOmVvL1+9OgmwznrpUZ0bHVl4j4TMmmr2Qpi/1PjiIcgIX+/EQt6XW8TQ5ToA+woQ7cM22P6d5Q4bSdRBVLSAmNn11skq45DuD0QH4oUQzq1qDCnwGBxqrZvZnIv1ALFnpHtU42rLjPgchW8mfz+07uHq4HEOSMmTRMOXZgXWvN6wBO5wNQf60wZ6yvgSEmbxbHAZg+6MVi7VUsaJ6x84LyxPt/CNb/VS5vH9AzyHRJEW/TFRFkFu/q9oTI4+KRv5016REEbAumCrO/chZqS1OHAZJbs6yy8EDXHPLQT7LfLhJrumLZLIYYlTJ8bgNtXlDg==
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-OriginatorOrg: wdc.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: e6384103-b819-4b4f-6281-08d79e503d33
+X-MS-Exchange-CrossTenant-originalarrivaltime: 21 Jan 2020 08:59:36.2031 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: IQCQ2vfME+7/kwZDFL6gphvxpEsLcqwvXS8zgmQWSumhsUcn7wilj6bL5twibUGWqeK2mJBUIMHYcBMCNnB/jg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR04MB5839
 X-detected-operating-system: by eggs.gnu.org: FreeBSD 9.x [fuzzy]
-X-Received-From: 216.71.153.144
+X-Received-From: 216.71.153.141
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -77,34 +128,28 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Jan 2020 05:43:50 -0000
+X-List-Received-Date: Tue, 21 Jan 2020 08:59:48 -0000
 
-As reported in: https://bugs.launchpad.net/qemu/+bug/1851939 we weren't
-correctly handling illegal instructions based on the value of MSTATUS_TSR
-and the current privledge level.
+This series adds emulation of TIME CSRs for privileged mode. With
+this series, we see approximately 25+% improvement in hackbench
+numbers for non-virtualized (or Host) Linux and 40+% improvement
+in hackbench numbers for Guest/VM Linux.
 
-This patch fixes the issue raised in the bug by raising an illegal
-instruction if TSR is set and we are in S-Mode.
+These patches are based on mainline/alistair/riscv-hyp-ext-v0.5.1
+branch of https://github.com/kvm-riscv/qemu.git and can be found
+in riscv_time_csr_v1 branch of same repo.
 
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
----
- target/riscv/op_helper.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Anup Patel (2):
+  target/riscv: Emulate TIME CSRs for privileged mode
+  hw/riscv: Provide rdtime callback for TCG in CLINT emulation
 
-diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
-index 331cc36232..eed8eea6f2 100644
---- a/target/riscv/op_helper.c
-+++ b/target/riscv/op_helper.c
-@@ -83,7 +83,7 @@ target_ulong helper_sret(CPURISCVState *env, target_ulong cpu_pc_deb)
-     }
- 
-     if (env->priv_ver >= PRIV_VERSION_1_10_0 &&
--        get_field(env->mstatus, MSTATUS_TSR)) {
-+        get_field(env->mstatus, MSTATUS_TSR) && !(env->priv >= PRV_M)) {
-         riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
-     }
- 
--- 
-2.24.1
+ hw/riscv/sifive_clint.c   |  1 +
+ target/riscv/cpu.h        |  5 +++
+ target/riscv/cpu_helper.c |  5 +++
+ target/riscv/csr.c        | 80 +++++++++++++++++++++++++++++++++++++--
+ 4 files changed, 87 insertions(+), 4 deletions(-)
+
+--=20
+2.17.1
 
 
