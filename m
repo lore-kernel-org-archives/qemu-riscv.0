@@ -1,123 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iuFt9-0003eP-Ne
-	for mharc-qemu-riscv@gnu.org; Wed, 22 Jan 2020 08:17:44 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:50989)
+	id 1iuOHO-0003ph-CH
+	for mharc-qemu-riscv@gnu.org; Wed, 22 Jan 2020 17:15:18 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:35532)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <prvs=283669e78=Anup.Patel@wdc.com>)
- id 1iuFt4-0003eH-It
- for qemu-riscv@nongnu.org; Wed, 22 Jan 2020 08:17:41 -0500
+ (envelope-from <fintelia@gmail.com>) id 1iuOHI-0003hw-7Z
+ for qemu-riscv@nongnu.org; Wed, 22 Jan 2020 17:15:17 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <prvs=283669e78=Anup.Patel@wdc.com>)
- id 1iuFt2-0006v9-SM
- for qemu-riscv@nongnu.org; Wed, 22 Jan 2020 08:17:38 -0500
-Received: from esa3.hgst.iphmx.com ([216.71.153.141]:9745)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <prvs=283669e78=Anup.Patel@wdc.com>)
- id 1iuFt2-0006tC-3y; Wed, 22 Jan 2020 08:17:36 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1579699056; x=1611235056;
- h=from:to:cc:subject:date:message-id:
- content-transfer-encoding:mime-version;
- bh=6tuPoaypj07XJjlk89cQM6z7K5QJRTuutpmvv5LiUFU=;
- b=hq63O5BkSKS7SorakSpXYZnw2a88XS3sSIQ4q0ZmeybTspH0XZtUyUI3
- L+EoBmTe/RAtSdw9LK6CFcVSSxUqJy64OkVbu2zQ2/G2l7fbMgmrSB5FW
- E+DH2V84UYRMpNE7h5cJSxXx0i6eFOtOnefXvidQJr2xSAIKfZOKBlZ2q
- gK8D4sc0fMbs5qPC0G1M6nC2uAV/5VuYe/Qfna3zCvUDRdiP6SmmFo58y
- yUNKGvQWhIDJKGnONaYHLnDQanuqG62IoBwNzQQjh5pDtGA8Xk0Il5nSs
- v0SI2VSN70b7RdbIZ9F8Oa/eCb+/rIgP7stZsMGLvVIQ9NWW9w7ADkaqL w==;
-IronPort-SDR: 80xa65dqTBcIAHFg+8lJ779gnpMi0ZdPaEzIvc8pFTIazhVxQtfzwwJLw4p/+BSMV+vHR69ydg
- XZqyg4knItzF7GffAY15PEk8OpswjbjsJ3g/62rNDzxRv6140q5PjAIt4M4xapP8ZF//VAfhDt
- ek3FZWHuZgnRWe/MB3QWjOTnWMRLiNg7NqZ+yTwdu15X2z341WOsejBSVrvxNaLflRSLfvWyUO
- c2coBo5LlpVzDSXzfYlcdinVcD0IKitJjgRFs8V2AKSHV8yRGRg5xUbqQ5z3oq14A5txMY/Rs4
- PaU=
-X-IronPort-AV: E=Sophos;i="5.70,350,1574092800"; d="scan'208";a="132534402"
-Received: from mail-mw2nam12lp2043.outbound.protection.outlook.com (HELO
- NAM12-MW2-obe.outbound.protection.outlook.com) ([104.47.66.43])
- by ob1.hgst.iphmx.com with ESMTP; 22 Jan 2020 21:17:30 +0800
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=M9FOiUPt2oNZxj2rGLx4mli3FROP4ZG8R8NdnxE9X4tJeypHALrEAktnQ83UpmAA1vp/kkanutRpxSQ2sT1PLoD6hvdTfeBKQzOr48epxEYNvzYkDsMb6HMF8ZBkOLvDvV1Mne+wtrPSHAFzC/7x1YFWO+U7cufYiILePalAK4OLScksv1y+G9DAH6iVJUupKzasHhXmC+TtC+o93a08/wnzTgGkf5XXYUG09vz9tH9XzR6phXsG1bmt2nZmGSecIJ4YJWdAuINNYztUZNmfrNGmjp1WybjFpqkSmQdzsqU+KiCP/UH4Xo++W+JZkg9i+X8witZTUSEeHz1/k5fcuw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=HkjGzq06zsyd5O0eBKMfSbSDcCp+YK1l4KUWZXMHfo4=;
- b=B6cAXc5FISwVavwIickEkrQywUtMgi92FzrFcPBHR0zxCiiAJLwsGBW4YWB3SqQHEjjqy5sEYvEUUkV+0bYZA2LB/s3gaIOeTYegMkHJ1Dvw9Oc2voLYnpHpvXmnlJ9Dh9Eo6LMMUV36NIJjGibpS1NQzhDAL//c18c5V53jrglNEGr6uBuvkxRFkAqpNV13pik6DUlD4nAlpqVIoEkq1c77nsGGP7OT2Co9vDtAQTN8bJP1VKct9PeJjHf3tk2lfeRWWUh88a5/JcpJO8OmK8l/SYeyQmM9TuCuVOqXQTVidOsiTEqtxstyLFPqeutpKrbhm7mITK1MUSwyIHWMfQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=wdc.com; dmarc=pass action=none header.from=wdc.com; dkim=pass
- header.d=wdc.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=HkjGzq06zsyd5O0eBKMfSbSDcCp+YK1l4KUWZXMHfo4=;
- b=LoEKqneFQZGfDEBzDRNWzUoycwhFpxnT9hkAP8MFLkcrmLtMTI8MspC6jeslrpXitORSC6ujDIjRVcPcemkvTQbpGY078cy6wdWOfYMAOW0SQ3ATqC9KZBSU6PmChknopmSP1iFkSlZ+vQAhcxA1U1EvwHg/k34cXbPszLcDZz0=
-Received: from MN2PR04MB6061.namprd04.prod.outlook.com (20.178.246.15) by
- MN2PR04MB6800.namprd04.prod.outlook.com (10.186.145.213) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.2644.25; Wed, 22 Jan 2020 13:17:23 +0000
-Received: from MN2PR04MB6061.namprd04.prod.outlook.com
- ([fe80::a9a0:3ffa:371f:ad89]) by MN2PR04MB6061.namprd04.prod.outlook.com
- ([fe80::a9a0:3ffa:371f:ad89%7]) with mapi id 15.20.2644.027; Wed, 22 Jan 2020
- 13:17:23 +0000
-Received: from wdc.com (106.51.28.174) by
- MAXPR0101CA0040.INDPRD01.PROD.OUTLOOK.COM (2603:1096:a00:d::26) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2644.18 via Frontend
- Transport; Wed, 22 Jan 2020 13:17:19 +0000
-From: Anup Patel <Anup.Patel@wdc.com>
-To: Peter Maydell <peter.maydell@linaro.org>, Palmer Dabbelt
- <palmer@dabbelt.com>, Alistair Francis <Alistair.Francis@wdc.com>, Sagar
- Karandikar <sagark@eecs.berkeley.edu>
-CC: Atish Patra <Atish.Patra@wdc.com>, Christoph Hellwig <hch@lst.de>, Anup
- Patel <anup@brainfault.org>, "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, Anup Patel
- <Anup.Patel@wdc.com>
-Subject: [PATCH v2] riscv/virt: Add syscon reboot and poweroff DT nodes
-Thread-Topic: [PATCH v2] riscv/virt: Add syscon reboot and poweroff DT nodes
-Thread-Index: AQHV0SZIt4qZDvt9QUaSbSZUw8ntvQ==
-Date: Wed, 22 Jan 2020 13:17:23 +0000
-Message-ID: <20200122131641.34953-1-anup.patel@wdc.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-clientproxiedby: MAXPR0101CA0040.INDPRD01.PROD.OUTLOOK.COM
- (2603:1096:a00:d::26) To MN2PR04MB6061.namprd04.prod.outlook.com
- (2603:10b6:208:d8::15)
-authentication-results: spf=none (sender IP is )
- smtp.mailfrom=Anup.Patel@wdc.com; 
-x-ms-exchange-messagesentrepresentingtype: 1
-x-mailer: git-send-email 2.17.1
-x-originating-ip: [106.51.28.174]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-ht: Tenant
-x-ms-office365-filtering-correlation-id: 36d43101-27fe-452d-daaa-08d79f3d6b15
-x-ms-traffictypediagnostic: MN2PR04MB6800:|MN2PR04MB6800:
-x-ms-exchange-transport-forked: True
-x-microsoft-antispam-prvs: <MN2PR04MB6800E66479B51127636EC4F38D0C0@MN2PR04MB6800.namprd04.prod.outlook.com>
-wdcipoutbound: EOP-TRUE
-x-ms-oob-tlc-oobclassifiers: OLM:40;
-x-forefront-prvs: 029097202E
-x-forefront-antispam-report: SFV:SPM;
- SFS:(10019020)(4636009)(396003)(346002)(136003)(39860400002)(366004)(376002)(189003)(199004)(316002)(44832011)(8886007)(5660300002)(54906003)(71200400001)(6666004)(110136005)(8936002)(1006002)(86362001)(81166006)(81156014)(8676002)(1076003)(16526019)(66476007)(55236004)(478600001)(66446008)(66946007)(64756008)(4326008)(26005)(66556008)(36756003)(956004)(7696005)(2616005)(52116002)(55016002)(2906002)(186003)(20680400001)(32040200004);
- DIR:OUT; SFP:1501; SCL:5; SRVR:MN2PR04MB6800;
- H:MN2PR04MB6061.namprd04.prod.outlook.com; FPR:; SPF:None; LANG:en;
- PTR:InfoNoRecords; MX:1; A:1; CAT:OSPM; 
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: wgq6cvn19k780qPm5ncUjiuShpEyvwlYg/V072O74RMmyiMs+QM48ZJZ93mjP9N/F+EUPY46kB6Q77zhk1fO7lXnNSGrwodHxUWM5H30jCde8TGolmNCtTWiyaLs7DfVRXFXuQ+SfvKFJlRSJX3HDmIqSK8MudF1WiSFeJogZLHOiRtDyEe+671mP4hHGfzVTNvXT7cjZrUUUl/wrSiMnhHbFjohBceDLD3KCotz0r1dkKtOo8/7q1vh70G6hgQ1sA7dADEvMbM07ELJ7fNsG2LHhMRhE3GhZNySJh7Ehf4N6K296aWfN/iVlm0tJOqvorcuBsQIAeGZ6lhC0eyOWBr3O/vpLlqzqPmaRP97ZW5pvHPV0OvT6rSzDRymdwMz4JjLiwx3OXbc2B+B3fJlXrek1RaVRHumRTqpJxyzlQYmPTGOuHdc7+q0r/TTidKWDUFgCsXQ69X0VhICv4Eh2LP05ITYQiIiZ4rUNKLavq6CTILJaFWiUs0+KJA2sb5MdLKS/MeCnrvBpXFumSi4VtwgsopJxCgsQ3PT5x5s/6rzUSFnwOLGC6SHFJmAmSxFfOJS97Z+j884qpeK43/5PBccIFMVI/B+dJDG0svsq290ZFVYUEfF/4IOwKpKCDdJsTnuv1SFkMUPEodGuOcGIw/ZVF+/3QP7f+NhzPsga9pgooXUCR7MV0B9RPlgFnBnhOoBDi1RhE5yDnNO5KjWvLxBSvrPMD031bnS/JRbW3j8ee79WzoJblg/WXcN5HMyFbu+qKmbInsDwTt/ShkGSLWk1t05G7z65SOpOFEYyfxey7F3cJUYoRaw+wd5kio5
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+ (envelope-from <fintelia@gmail.com>) id 1iuOHD-0004Mx-Fg
+ for qemu-riscv@nongnu.org; Wed, 22 Jan 2020 17:15:12 -0500
+Received: from mail-lj1-x244.google.com ([2a00:1450:4864:20::244]:39795)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <fintelia@gmail.com>)
+ id 1iuOHC-0004KB-KK; Wed, 22 Jan 2020 17:15:07 -0500
+Received: by mail-lj1-x244.google.com with SMTP id o11so857592ljc.6;
+ Wed, 22 Jan 2020 14:15:05 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=19DEDK4kH3iX+QfmIeb2FRxhOfNjYNHtfXzt0sNyNbI=;
+ b=uvdeQ1ihaP+qNnpptW1odegs1u/zJgNSd4jckBDulztRMGLfCyBzt+NhGK7QhL6D/L
+ jwafdD9tz4vdfcA22qI3Bil4GQESg7Fgm3tUiRbSxIaA88HumIWS4bQAaKIkjuxiHfTT
+ y+Iuxpc4JwnE0p1ilH9/F4/HUfjgBM/EoBkbpGRpcdM/IQchtk/OaUO4av+Tbm4OGnqj
+ DuXsdoQbBCIWmRYdvt5swikzCzgY/uc1tWjkMmd4nLK7I6sDJXCXyc27b/WIqmboSzwk
+ jNe5QufFkl4sIcWFAONgN5xYO3kR2QuS9mOvFR0pbDsphXkyq2ewxz3okEpcDWcnW6vT
+ D5mA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=19DEDK4kH3iX+QfmIeb2FRxhOfNjYNHtfXzt0sNyNbI=;
+ b=SB21YdwQakANKa3AKqyNY4pAMY5tRvtpt1uf1sdkqBsBBGSzkmK1npPs6VqufgesuW
+ MWyolQl08y4Zq5hBeUnE2m64ilhs9Fp8VZobRMDv7F2KqFyhbtXVnzWpEWabcYAzsIxl
+ 6gMod4vNnG3YQ617tZPtowyOjA6G9YnXYk5euFvSYybI1sa258VKkvpU+wWPJSjbNULY
+ fQjnit7csmYUJdgolWPcEuHlmOR2aGqzWjKCSrFLaFss846qf0T6ZRUeQk65wrcjBu88
+ IEX674zurN98+g0BthOOTQSZWjBEg4eLKAsAocLvuUhQhlseeWCD8XpfA8garQ33V2Bg
+ d5jQ==
+X-Gm-Message-State: APjAAAVUb4p/QCClnnVH9ZACtG+ERjW3siHCdatKL2zMc+SJH/hnKV/b
+ TPcDFKoNfUlqaBgWqrVOGc96E56X7qflKZSb0v0=
+X-Google-Smtp-Source: APXvYqxf3YtzrXK+Zs0Y5cY7kKrUUM2rCtNbsJ8rpzBYFdS3KXbT/m1qnW2C3hMj/d32PipK+TqgT+7fut2GHLG+jCA=
+X-Received: by 2002:a2e:9a11:: with SMTP id o17mr20668645lji.256.1579731304481; 
+ Wed, 22 Jan 2020 14:15:04 -0800 (PST)
 MIME-Version: 1.0
-X-OriginatorOrg: wdc.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 36d43101-27fe-452d-daaa-08d79f3d6b15
-X-MS-Exchange-CrossTenant-originalarrivaltime: 22 Jan 2020 13:17:23.7638 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: uVtgy1sVuG4Y+JTzFLbJ6wXshxqa6Z7REj4z9QooLLV5wFmVDZgKyTnrwUMwC1MmlHs6L/2KzH9Uf27Ge4qiyg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR04MB6800
-X-detected-operating-system: by eggs.gnu.org: FreeBSD 9.x [fuzzy]
-X-Received-From: 216.71.153.141
+References: <cover.1575914822.git.alistair.francis@wdc.com>
+ <8c0eebc3868757e9ed312ac35e1f5325d5a18e76.1575914822.git.alistair.francis@wdc.com>
+ <mhng-b22b75ac-a0c4-4d53-909c-2a8fd9506cd3@palmerdabbelt-glaptop>
+ <CAKmqyKPOn_ULNu6i+s-0k-GGkZ0Gz9adNQcD1UU77u9t77ZXXQ@mail.gmail.com>
+ <CANnJOVHAYA4uij86C0aBMp6FnZW=+i-v_K7iAcbTiEuUfkT8dQ@mail.gmail.com>
+ <CAKmqyKNrM6WnPRbcsLw-7xgW4Wo5=BJ1JRknYnXcnWZ6t4mMJg@mail.gmail.com>
+In-Reply-To: <CAKmqyKNrM6WnPRbcsLw-7xgW4Wo5=BJ1JRknYnXcnWZ6t4mMJg@mail.gmail.com>
+From: Jonathan Behrens <fintelia@gmail.com>
+Date: Wed, 22 Jan 2020 17:13:37 -0500
+Message-ID: <CANnJOVERnZBSv=FLT-t3r+RDKrf5VdiPxzhZahzDTpUeb0=pHw@mail.gmail.com>
+Subject: Re: [PATCH v1 15/36] target/riscv: Convert mstatus to pointers
+To: Alistair Francis <alistair23@gmail.com>
+Cc: Palmer Dabbelt <palmerdabbelt@google.com>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
+Content-Type: multipart/alternative; boundary="0000000000003e8797059cc1db5c"
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2a00:1450:4864:20::244
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -129,84 +71,1174 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Jan 2020 13:17:42 -0000
+X-List-Received-Date: Wed, 22 Jan 2020 22:15:17 -0000
 
-The SiFive test device found on virt machine can be used by
-generic syscon reboot and poweroff drivers available in Linux
-kernel.
+--0000000000003e8797059cc1db5c
+Content-Type: text/plain; charset="UTF-8"
 
-This patch updates FDT generation in virt machine so that
-Linux kernel can probe and use generic syscon drivers.
+>
+> I was trying to avoid forcing everyone to understand the Hypervisor
+> extension to develop for RISC-V.
 
-Signed-off-by: Anup Patel <anup.patel@wdc.com>
----
-Changes since v1:
- - Rebased on latest QEMU master commit 3e08b2b9cb64bff2b73fa9128c0e49bfcde=
-0dd40
----
- hw/riscv/virt.c | 26 ++++++++++++++++++++++----
- 1 file changed, 22 insertions(+), 4 deletions(-)
 
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index c44b865959..6d682f8a78 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -182,11 +182,10 @@ static void create_fdt(RISCVVirtState *s, const struc=
-t MemmapEntry *memmap,
-     uint64_t mem_size, const char *cmdline)
- {
-     void *fdt;
--    int cpu;
-+    int cpu, i;
-     uint32_t *cells;
-     char *nodename;
--    uint32_t plic_phandle, phandle =3D 1;
--    int i;
-+    uint32_t plic_phandle, test_phandle, phandle =3D 1;
-     hwaddr flashsize =3D virt_memmap[VIRT_FLASH].size / 2;
-     hwaddr flashbase =3D virt_memmap[VIRT_FLASH].base;
-=20
-@@ -356,16 +355,35 @@ static void create_fdt(RISCVVirtState *s, const struc=
-t MemmapEntry *memmap,
-     create_pcie_irq_map(fdt, nodename, plic_phandle);
-     g_free(nodename);
-=20
-+    test_phandle =3D phandle++;
-     nodename =3D g_strdup_printf("/test@%lx",
-         (long)memmap[VIRT_TEST].base);
-     qemu_fdt_add_subnode(fdt, nodename);
-     {
--        const char compat[] =3D "sifive,test1\0sifive,test0";
-+        const char compat[] =3D "sifive,test1\0sifive,test0\0syscon";
-         qemu_fdt_setprop(fdt, nodename, "compatible", compat, sizeof(compa=
-t));
-     }
-     qemu_fdt_setprop_cells(fdt, nodename, "reg",
-         0x0, memmap[VIRT_TEST].base,
-         0x0, memmap[VIRT_TEST].size);
-+    qemu_fdt_setprop_cell(fdt, nodename, "phandle", test_phandle);
-+    test_phandle =3D qemu_fdt_get_phandle(fdt, nodename);
-+    g_free(nodename);
-+
-+    nodename =3D g_strdup_printf("/reboot");
-+    qemu_fdt_add_subnode(fdt, nodename);
-+    qemu_fdt_setprop_string(fdt, nodename, "compatible", "syscon-reboot");
-+    qemu_fdt_setprop_cell(fdt, nodename, "regmap", test_phandle);
-+    qemu_fdt_setprop_cell(fdt, nodename, "offset", 0x0);
-+    qemu_fdt_setprop_cell(fdt, nodename, "value", FINISHER_RESET);
-+    g_free(nodename);
-+
-+    nodename =3D g_strdup_printf("/poweroff");
-+    qemu_fdt_add_subnode(fdt, nodename);
-+    qemu_fdt_setprop_string(fdt, nodename, "compatible", "syscon-poweroff"=
-);
-+    qemu_fdt_setprop_cell(fdt, nodename, "regmap", test_phandle);
-+    qemu_fdt_setprop_cell(fdt, nodename, "offset", 0x0);
-+    qemu_fdt_setprop_cell(fdt, nodename, "value", FINISHER_PASS);
-     g_free(nodename);
-=20
-     nodename =3D g_strdup_printf("/uart@%lx",
---=20
-2.17.1
+I agree a full understanding of the hypervisor extension shouldn't be
+required. But if code is going to be dealing with supervisor mode
+registers, then whether the machine is in HS or VS mode is going to matter
+in a lot of cases. The cases where it doesn't matter are particularly
+troubling: it wouldn't be obvious from reading the code whether the author
+forgot about the possibility of register swapping or if the code actually
+works then too. Plus, for custom forks we can always add a one line comment
+above the register declarations saying you can just s*xxx*[NOVIRT] to
+access the normal supervisor registers unless you want to make sure your
+code works with the H-extension.
 
+For example we don't have to check
+> virtualization status to dump the registers, we can just dump them and
+> know they are in the correct state (we do dump more is we have the
+> extension though). Image if someone adds a new way to dump registers,
+> I would like them not to care about if we are in V=1 or V=0 and they
+> can just dump them and know that the CSRs are correct.
+>
+
+This is almost a best case for being orthogonal to other features because
+you don't have to understand anything about how the registers impact
+machine execution in order to dump them.
+
+But even here it is somewhat debatable whether a naive implementation would
+dump the "correct" versions of these registers. One view is that what you
+really want would be the values that M-mode code would see since it has the
+most objective view of the system. Another is that they are the values that
+would be returned if the the current operating mode tried to access them,
+or undefined if that access would trap. Maybe you even want to query the
+value for a specific mode independent of the current privilege level. If
+the behavior you want happens to match up to the chosen design, then yes a
+naive implementation that is oblivious the hypervisor extension will work
+without having to understand anything. However, I'd attribute that more to
+luck than elegance of a particular option.
+
+Jonathan
+
+On Tue, Jan 21, 2020 at 7:01 PM Alistair Francis <alistair23@gmail.com>
+wrote:
+
+> On Tue, Jan 21, 2020 at 10:56 PM Jonathan Behrens <fintelia@gmail.com>
+> wrote:
+> >
+> > When I looked through the relevant code a few months ago, I couldn't
+> find anywhere that could actually be agnostic to whether the real or
+> virtual registers were in effect (other than emulating the actual CSR
+> modification instructions). For almost all state, the VS behavior is
+> filtered by HS-mode code. For example, you can grab satp in either mode but
+> to properly do address translation you also have to factor in hgatp so you
+> need to know the virtualization state anyway. Similarly, floating point
+> co-proccessor state is tracked in two places with V=1 so that both the host
+> and the guest can independently track dirty bits, but of course only the
+> one in the "real" mstatus applies in non-virtualized mode.
+>
+> So the idea is that if you aren't interested in the Hypervisor
+> extension you can just access the CSRs as usual (inside QEMU's source
+> code). That is you don't need to know anything about the Hypervisor
+> extension to add support for other extensions or to work on the RISC-V
+> target in QEMU.
+>
+> I was trying to avoid forcing everyone to understand the Hypervisor
+> extension to develop for RISC-V. For example we don't have to check
+> virtulasition status to dump the registers, we can just dump them and
+> know they are in the correct state (we do dump more is we have the
+> extension though). Image if someone adds a new way to dump registers,
+> I would like them not to care about if we are in V=1 or V=0 and they
+> can just dump them and know that the CSRs are correct.
+>
+> >
+> > The idea of using an array to track the two versions of registers seemed
+> really elegant to me. If you know you want the host version you access
+> element zero. If you know you want the guest version you access element
+> one. And if you want the version that the running code would see you index
+> by the virtualization mode. In any case, the choice indicates that you
+> thought though which was the right option to use in that instance.
+>
+> mstatus really is the only one that has any complications. The others
+> have a vs* version, which could be converted to an array but it
+> doesn't really matter as we just swap them.
+>
+> Alistair
+>
+> >
+> > Jonathan
+> >
+> > On Tue, Jan 21, 2020 at 6:02 AM Alistair Francis <alistair23@gmail.com>
+> wrote:
+> >>
+> >> On Wed, Jan 8, 2020 at 11:30 AM Palmer Dabbelt <
+> palmerdabbelt@google.com> wrote:
+> >> >
+> >> > On Mon, 09 Dec 2019 10:11:19 PST (-0800), Alistair Francis wrote:
+> >> > > To handle the new Hypervisor CSR register aliasing let's use
+> pointers.
+> >> >
+> >> > For some reason I thought we were making this explicit?  In other
+> words,
+> >> > requiring that all callers provide which privilege mode they're using
+> when
+> >> > accessing these CSRs, as opposed to swapping around pointers.  I
+> don't actually
+> >> > care that much, but IIRC when we were talking with the ARM guys at
+> Plumbers
+> >> > they were pretty adament that would end up being a much cleaner
+> implementation
+> >> > as they'd tried this way and later changed over.
+> >>
+> >> I think their implementation is different so it doesn't apply the same
+> here.
+> >>
+> >> My main concern is that due to the modularity of RISC-V I don't expect
+> >> all future developers to keep track of the Hypervisor extensions. This
+> >> way we always have the correct state in the registers.
+> >>
+> >> There is only one pointer variable left, so we could drop the pointer
+> >> swapping part, but for now it's still here.
+> >>
+> >> Alistair
+> >>
+> >> >
+> >> > > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> >> > > ---
+> >> > >  target/riscv/cpu.c        | 11 +++++++++--
+> >> > >  target/riscv/cpu.h        |  9 ++++++++-
+> >> > >  target/riscv/cpu_helper.c | 30 +++++++++++++++---------------
+> >> > >  target/riscv/csr.c        | 20 ++++++++++----------
+> >> > >  target/riscv/op_helper.c  | 14 +++++++-------
+> >> > >  5 files changed, 49 insertions(+), 35 deletions(-)
+> >> > >
+> >> > > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> >> > > index a07c5689b3..e61cf46a73 100644
+> >> > > --- a/target/riscv/cpu.c
+> >> > > +++ b/target/riscv/cpu.c
+> >> > > @@ -236,7 +236,7 @@ static void riscv_cpu_dump_state(CPUState *cs,
+> FILE *f, int flags)
+> >> > >      qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "pc      ",
+> env->pc);
+> >> > >  #ifndef CONFIG_USER_ONLY
+> >> > >      qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mhartid ",
+> env->mhartid);
+> >> > > -    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mstatus ",
+> env->mstatus);
+> >> > > +    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mstatus ",
+> *env->mstatus);
+> >> > >      if (riscv_has_ext(env, RVH)) {
+> >> > >          qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "hstatus ",
+> env->hstatus);
+> >> > >          qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "vsstatus ",
+> env->vsstatus);
+> >> > > @@ -336,7 +336,7 @@ static void riscv_cpu_reset(CPUState *cs)
+> >> > >      mcc->parent_reset(cs);
+> >> > >  #ifndef CONFIG_USER_ONLY
+> >> > >      env->priv = PRV_M;
+> >> > > -    env->mstatus &= ~(MSTATUS_MIE | MSTATUS_MPRV);
+> >> > > +    *env->mstatus &= ~(MSTATUS_MIE | MSTATUS_MPRV);
+> >> > >      env->mcause = 0;
+> >> > >      env->pc = env->resetvec;
+> >> > >  #endif
+> >> > > @@ -465,8 +465,15 @@ static void riscv_cpu_realize(DeviceState
+> *dev, Error **errp)
+> >> > >  static void riscv_cpu_init(Object *obj)
+> >> > >  {
+> >> > >      RISCVCPU *cpu = RISCV_CPU(obj);
+> >> > > +#ifndef CONFIG_USER_ONLY
+> >> > > +    CPURISCVState *env = &cpu->env;
+> >> > > +#endif
+> >> > >
+> >> > >      cpu_set_cpustate_pointers(cpu);
+> >> > > +
+> >> > > +#ifndef CONFIG_USER_ONLY
+> >> > > +    env->mstatus = &env->mstatus_novirt;
+> >> > > +#endif
+> >> > >  }
+> >> > >
+> >> > >  static const VMStateDescription vmstate_riscv_cpu = {
+> >> > > diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> >> > > index 21ae5a8b19..9dc8303c62 100644
+> >> > > --- a/target/riscv/cpu.h
+> >> > > +++ b/target/riscv/cpu.h
+> >> > > @@ -122,7 +122,7 @@ struct CPURISCVState {
+> >> > >      target_ulong resetvec;
+> >> > >
+> >> > >      target_ulong mhartid;
+> >> > > -    target_ulong mstatus;
+> >> > > +    target_ulong *mstatus;
+> >> > >
+> >> > >      target_ulong mip;
+> >> > >      uint32_t miclaim;
+> >> > > @@ -145,6 +145,13 @@ struct CPURISCVState {
+> >> > >      target_ulong mcause;
+> >> > >      target_ulong mtval;  /* since: priv-1.10.0 */
+> >> > >
+> >> > > +    /* The following registers are the "real" versions that the
+> pointer
+> >> > > +     * versions point to. These should never be used unless you
+> know what you
+> >> > > +     * are doing. To access these use the pointer versions
+> instead. This is
+> >> > > +     * required to handle the Hypervisor register swapping.
+> >> > > +     */
+> >> > > +    target_ulong mstatus_novirt;
+> >> > > +
+> >> > >      /* Hypervisor CSRs */
+> >> > >      target_ulong hstatus;
+> >> > >      target_ulong hedeleg;
+> >> > > diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> >> > > index b00f66824a..9684da7f7d 100644
+> >> > > --- a/target/riscv/cpu_helper.c
+> >> > > +++ b/target/riscv/cpu_helper.c
+> >> > > @@ -37,8 +37,8 @@ int riscv_cpu_mmu_index(CPURISCVState *env, bool
+> ifetch)
+> >> > >  #ifndef CONFIG_USER_ONLY
+> >> > >  static int riscv_cpu_local_irq_pending(CPURISCVState *env)
+> >> > >  {
+> >> > > -    target_ulong mstatus_mie = get_field(env->mstatus,
+> MSTATUS_MIE);
+> >> > > -    target_ulong mstatus_sie = get_field(env->mstatus,
+> MSTATUS_SIE);
+> >> > > +    target_ulong mstatus_mie = get_field(*env->mstatus,
+> MSTATUS_MIE);
+> >> > > +    target_ulong mstatus_sie = get_field(*env->mstatus,
+> MSTATUS_SIE);
+> >> > >      target_ulong pending = env->mip & env->mie;
+> >> > >      target_ulong mie = env->priv < PRV_M || (env->priv == PRV_M &&
+> mstatus_mie);
+> >> > >      target_ulong sie = env->priv < PRV_S || (env->priv == PRV_S &&
+> mstatus_sie);
+> >> > > @@ -75,7 +75,7 @@ bool riscv_cpu_exec_interrupt(CPUState *cs, int
+> interrupt_request)
+> >> > >  /* Return true is floating point support is currently enabled */
+> >> > >  bool riscv_cpu_fp_enabled(CPURISCVState *env)
+> >> > >  {
+> >> > > -    if (env->mstatus & MSTATUS_FS) {
+> >> > > +    if (*env->mstatus & MSTATUS_FS) {
+> >> > >          return true;
+> >> > >      }
+> >> > >
+> >> > > @@ -198,8 +198,8 @@ static int get_physical_address(CPURISCVState
+> *env, hwaddr *physical,
+> >> > >      int mode = mmu_idx;
+> >> > >
+> >> > >      if (mode == PRV_M && access_type != MMU_INST_FETCH) {
+> >> > > -        if (get_field(env->mstatus, MSTATUS_MPRV)) {
+> >> > > -            mode = get_field(env->mstatus, MSTATUS_MPP);
+> >> > > +        if (get_field(*env->mstatus, MSTATUS_MPRV)) {
+> >> > > +            mode = get_field(*env->mstatus, MSTATUS_MPP);
+> >> > >          }
+> >> > >      }
+> >> > >
+> >> > > @@ -213,11 +213,11 @@ static int get_physical_address(CPURISCVState
+> *env, hwaddr *physical,
+> >> > >
+> >> > >      hwaddr base;
+> >> > >      int levels, ptidxbits, ptesize, vm, sum;
+> >> > > -    int mxr = get_field(env->mstatus, MSTATUS_MXR);
+> >> > > +    int mxr = get_field(*env->mstatus, MSTATUS_MXR);
+> >> > >
+> >> > >      if (env->priv_ver >= PRIV_VERSION_1_10_0) {
+> >> > >          base = (hwaddr)get_field(env->satp, SATP_PPN) << PGSHIFT;
+> >> > > -        sum = get_field(env->mstatus, MSTATUS_SUM);
+> >> > > +        sum = get_field(*env->mstatus, MSTATUS_SUM);
+> >> > >          vm = get_field(env->satp, SATP_MODE);
+> >> > >          switch (vm) {
+> >> > >          case VM_1_10_SV32:
+> >> > > @@ -237,8 +237,8 @@ static int get_physical_address(CPURISCVState
+> *env, hwaddr *physical,
+> >> > >          }
+> >> > >      } else {
+> >> > >          base = (hwaddr)(env->sptbr) << PGSHIFT;
+> >> > > -        sum = !get_field(env->mstatus, MSTATUS_PUM);
+> >> > > -        vm = get_field(env->mstatus, MSTATUS_VM);
+> >> > > +        sum = !get_field(*env->mstatus, MSTATUS_PUM);
+> >> > > +        vm = get_field(*env->mstatus, MSTATUS_VM);
+> >> > >          switch (vm) {
+> >> > >          case VM_1_09_SV32:
+> >> > >            levels = 2; ptidxbits = 10; ptesize = 4; break;
+> >> > > @@ -492,8 +492,8 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr
+> address, int size,
+> >> > >      ret = get_physical_address(env, &pa, &prot, address,
+> access_type, mmu_idx);
+> >> > >
+> >> > >      if (mode == PRV_M && access_type != MMU_INST_FETCH) {
+> >> > > -        if (get_field(env->mstatus, MSTATUS_MPRV)) {
+> >> > > -            mode = get_field(env->mstatus, MSTATUS_MPP);
+> >> > > +        if (get_field(*env->mstatus, MSTATUS_MPRV)) {
+> >> > > +            mode = get_field(*env->mstatus, MSTATUS_MPP);
+> >> > >          }
+> >> > >      }
+> >> > >
+> >> > > @@ -599,12 +599,12 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+> >> > >      if (env->priv <= PRV_S &&
+> >> > >              cause < TARGET_LONG_BITS && ((deleg >> cause) & 1)) {
+> >> > >          /* handle the trap in S-mode */
+> >> > > -        target_ulong s = env->mstatus;
+> >> > > +        target_ulong s = *env->mstatus;
+> >> > >          s = set_field(s, MSTATUS_SPIE, env->priv_ver >=
+> PRIV_VERSION_1_10_0 ?
+> >> > >              get_field(s, MSTATUS_SIE) : get_field(s, MSTATUS_UIE
+> << env->priv));
+> >> > >          s = set_field(s, MSTATUS_SPP, env->priv);
+> >> > >          s = set_field(s, MSTATUS_SIE, 0);
+> >> > > -        env->mstatus = s;
+> >> > > +        *env->mstatus = s;
+> >> > >          env->scause = cause | ((target_ulong)async <<
+> (TARGET_LONG_BITS - 1));
+> >> > >          env->sepc = env->pc;
+> >> > >          env->sbadaddr = tval;
+> >> > > @@ -613,12 +613,12 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+> >> > >          riscv_cpu_set_mode(env, PRV_S);
+> >> > >      } else {
+> >> > >          /* handle the trap in M-mode */
+> >> > > -        target_ulong s = env->mstatus;
+> >> > > +        target_ulong s = *env->mstatus;
+> >> > >          s = set_field(s, MSTATUS_MPIE, env->priv_ver >=
+> PRIV_VERSION_1_10_0 ?
+> >> > >              get_field(s, MSTATUS_MIE) : get_field(s, MSTATUS_UIE
+> << env->priv));
+> >> > >          s = set_field(s, MSTATUS_MPP, env->priv);
+> >> > >          s = set_field(s, MSTATUS_MIE, 0);
+> >> > > -        env->mstatus = s;
+> >> > > +        *env->mstatus = s;
+> >> > >          env->mcause = cause | ~(((target_ulong)-1) >> async);
+> >> > >          env->mepc = env->pc;
+> >> > >          env->mbadaddr = tval;
+> >> > > diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> >> > > index 74e911af08..a4b598d49a 100644
+> >> > > --- a/target/riscv/csr.c
+> >> > > +++ b/target/riscv/csr.c
+> >> > > @@ -136,7 +136,7 @@ static int write_fflags(CPURISCVState *env, int
+> csrno, target_ulong val)
+> >> > >      if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
+> >> > >          return -1;
+> >> > >      }
+> >> > > -    env->mstatus |= MSTATUS_FS;
+> >> > > +    *env->mstatus |= MSTATUS_FS;
+> >> > >  #endif
+> >> > >      riscv_cpu_set_fflags(env, val & (FSR_AEXC >> FSR_AEXC_SHIFT));
+> >> > >      return 0;
+> >> > > @@ -159,7 +159,7 @@ static int write_frm(CPURISCVState *env, int
+> csrno, target_ulong val)
+> >> > >      if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
+> >> > >          return -1;
+> >> > >      }
+> >> > > -    env->mstatus |= MSTATUS_FS;
+> >> > > +    *env->mstatus |= MSTATUS_FS;
+> >> > >  #endif
+> >> > >      env->frm = val & (FSR_RD >> FSR_RD_SHIFT);
+> >> > >      return 0;
+> >> > > @@ -183,7 +183,7 @@ static int write_fcsr(CPURISCVState *env, int
+> csrno, target_ulong val)
+> >> > >      if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
+> >> > >          return -1;
+> >> > >      }
+> >> > > -    env->mstatus |= MSTATUS_FS;
+> >> > > +    *env->mstatus |= MSTATUS_FS;
+> >> > >  #endif
+> >> > >      env->frm = (val & FSR_RD) >> FSR_RD_SHIFT;
+> >> > >      riscv_cpu_set_fflags(env, (val & FSR_AEXC) >> FSR_AEXC_SHIFT);
+> >> > > @@ -313,7 +313,7 @@ static int read_mhartid(CPURISCVState *env, int
+> csrno, target_ulong *val)
+> >> > >  /* Machine Trap Setup */
+> >> > >  static int read_mstatus(CPURISCVState *env, int csrno,
+> target_ulong *val)
+> >> > >  {
+> >> > > -    *val = env->mstatus;
+> >> > > +    *val = *env->mstatus;
+> >> > >      return 0;
+> >> > >  }
+> >> > >
+> >> > > @@ -325,7 +325,7 @@ static int validate_vm(CPURISCVState *env,
+> target_ulong vm)
+> >> > >
+> >> > >  static int write_mstatus(CPURISCVState *env, int csrno,
+> target_ulong val)
+> >> > >  {
+> >> > > -    target_ulong mstatus = env->mstatus;
+> >> > > +    target_ulong mstatus = *env->mstatus;
+> >> > >      target_ulong mask = 0;
+> >> > >      int dirty;
+> >> > >
+> >> > > @@ -365,7 +365,7 @@ static int write_mstatus(CPURISCVState *env,
+> int csrno, target_ulong val)
+> >> > >               ((mstatus & MSTATUS_FS) == MSTATUS_FS)) |
+> >> > >              ((mstatus & MSTATUS_XS) == MSTATUS_XS);
+> >> > >      mstatus = set_field(mstatus, MSTATUS_SD, dirty);
+> >> > > -    env->mstatus = mstatus;
+> >> > > +    *env->mstatus = mstatus;
+> >> > >
+> >> > >      return 0;
+> >> > >  }
+> >> > > @@ -614,7 +614,7 @@ static int read_sstatus(CPURISCVState *env, int
+> csrno, target_ulong *val)
+> >> > >  {
+> >> > >      target_ulong mask = ((env->priv_ver >= PRIV_VERSION_1_10_0) ?
+> >> > >                           sstatus_v1_10_mask : sstatus_v1_9_mask);
+> >> > > -    *val = env->mstatus & mask;
+> >> > > +    *val = *env->mstatus & mask;
+> >> > >      return 0;
+> >> > >  }
+> >> > >
+> >> > > @@ -622,7 +622,7 @@ static int write_sstatus(CPURISCVState *env,
+> int csrno, target_ulong val)
+> >> > >  {
+> >> > >      target_ulong mask = ((env->priv_ver >= PRIV_VERSION_1_10_0) ?
+> >> > >                           sstatus_v1_10_mask : sstatus_v1_9_mask);
+> >> > > -    target_ulong newval = (env->mstatus & ~mask) | (val & mask);
+> >> > > +    target_ulong newval = (*env->mstatus & ~mask) | (val & mask);
+> >> > >      return write_mstatus(env, CSR_MSTATUS, newval);
+> >> > >  }
+> >> > >
+> >> > > @@ -737,7 +737,7 @@ static int read_satp(CPURISCVState *env, int
+> csrno, target_ulong *val)
+> >> > >      if (!riscv_feature(env, RISCV_FEATURE_MMU)) {
+> >> > >          *val = 0;
+> >> > >      } else if (env->priv_ver >= PRIV_VERSION_1_10_0) {
+> >> > > -        if (env->priv == PRV_S && get_field(env->mstatus,
+> MSTATUS_TVM)) {
+> >> > > +        if (env->priv == PRV_S && get_field(*env->mstatus,
+> MSTATUS_TVM)) {
+> >> > >              return -1;
+> >> > >          } else {
+> >> > >              *val = env->satp;
+> >> > > @@ -762,7 +762,7 @@ static int write_satp(CPURISCVState *env, int
+> csrno, target_ulong val)
+> >> > >          validate_vm(env, get_field(val, SATP_MODE)) &&
+> >> > >          ((val ^ env->satp) & (SATP_MODE | SATP_ASID | SATP_PPN)))
+> >> > >      {
+> >> > > -        if (env->priv == PRV_S && get_field(env->mstatus,
+> MSTATUS_TVM)) {
+> >> > > +        if (env->priv == PRV_S && get_field(*env->mstatus,
+> MSTATUS_TVM)) {
+> >> > >              return -1;
+> >> > >          } else {
+> >> > >              if((val ^ env->satp) & SATP_ASID) {
+> >> > > diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+> >> > > index 331cc36232..d150551bc9 100644
+> >> > > --- a/target/riscv/op_helper.c
+> >> > > +++ b/target/riscv/op_helper.c
+> >> > > @@ -83,11 +83,11 @@ target_ulong helper_sret(CPURISCVState *env,
+> target_ulong cpu_pc_deb)
+> >> > >      }
+> >> > >
+> >> > >      if (env->priv_ver >= PRIV_VERSION_1_10_0 &&
+> >> > > -        get_field(env->mstatus, MSTATUS_TSR)) {
+> >> > > +        get_field(*env->mstatus, MSTATUS_TSR)) {
+> >> > >          riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST,
+> GETPC());
+> >> > >      }
+> >> > >
+> >> > > -    target_ulong mstatus = env->mstatus;
+> >> > > +    target_ulong mstatus = *env->mstatus;
+> >> > >      target_ulong prev_priv = get_field(mstatus, MSTATUS_SPP);
+> >> > >      mstatus = set_field(mstatus,
+> >> > >          env->priv_ver >= PRIV_VERSION_1_10_0 ?
+> >> > > @@ -96,7 +96,7 @@ target_ulong helper_sret(CPURISCVState *env,
+> target_ulong cpu_pc_deb)
+> >> > >      mstatus = set_field(mstatus, MSTATUS_SPIE, 0);
+> >> > >      mstatus = set_field(mstatus, MSTATUS_SPP, PRV_U);
+> >> > >      riscv_cpu_set_mode(env, prev_priv);
+> >> > > -    env->mstatus = mstatus;
+> >> > > +    *env->mstatus = mstatus;
+> >> > >
+> >> > >      return retpc;
+> >> > >  }
+> >> > > @@ -112,7 +112,7 @@ target_ulong helper_mret(CPURISCVState *env,
+> target_ulong cpu_pc_deb)
+> >> > >          riscv_raise_exception(env, RISCV_EXCP_INST_ADDR_MIS,
+> GETPC());
+> >> > >      }
+> >> > >
+> >> > > -    target_ulong mstatus = env->mstatus;
+> >> > > +    target_ulong mstatus = *env->mstatus;
+> >> > >      target_ulong prev_priv = get_field(mstatus, MSTATUS_MPP);
+> >> > >      mstatus = set_field(mstatus,
+> >> > >          env->priv_ver >= PRIV_VERSION_1_10_0 ?
+> >> > > @@ -121,7 +121,7 @@ target_ulong helper_mret(CPURISCVState *env,
+> target_ulong cpu_pc_deb)
+> >> > >      mstatus = set_field(mstatus, MSTATUS_MPIE, 0);
+> >> > >      mstatus = set_field(mstatus, MSTATUS_MPP, PRV_U);
+> >> > >      riscv_cpu_set_mode(env, prev_priv);
+> >> > > -    env->mstatus = mstatus;
+> >> > > +    *env->mstatus = mstatus;
+> >> > >
+> >> > >      return retpc;
+> >> > >  }
+> >> > > @@ -132,7 +132,7 @@ void helper_wfi(CPURISCVState *env)
+> >> > >
+> >> > >      if (env->priv == PRV_S &&
+> >> > >          env->priv_ver >= PRIV_VERSION_1_10_0 &&
+> >> > > -        get_field(env->mstatus, MSTATUS_TW)) {
+> >> > > +        get_field(*env->mstatus, MSTATUS_TW)) {
+> >> > >          riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST,
+> GETPC());
+> >> > >      } else {
+> >> > >          cs->halted = 1;
+> >> > > @@ -147,7 +147,7 @@ void helper_tlb_flush(CPURISCVState *env)
+> >> > >      if (!(env->priv >= PRV_S) ||
+> >> > >          (env->priv == PRV_S &&
+> >> > >           env->priv_ver >= PRIV_VERSION_1_10_0 &&
+> >> > > -         get_field(env->mstatus, MSTATUS_TVM))) {
+> >> > > +         get_field(*env->mstatus, MSTATUS_TVM))) {
+> >> > >          riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST,
+> GETPC());
+> >> > >      } else {
+> >> > >          tlb_flush(cs);
+> >>
+>
+
+--0000000000003e8797059cc1db5c
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px =
+0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
+I was trying to avoid forcing everyone to understand the Hypervisor<br>
+extension to develop for RISC-V.</blockquote><div><br></div><div>I agree a =
+full understanding of the hypervisor extension shouldn&#39;t be required. B=
+ut if code is going to be dealing with supervisor mode registers, then whet=
+her the machine is in HS or VS mode is going to matter in a lot of cases. T=
+he cases where it doesn&#39;t matter are particularly troubling: it wouldn&=
+#39;t be obvious from reading the code whether the author forgot about the =
+possibility of register swapping or if the code actually works then too. Pl=
+us, for custom forks we can always add a one line comment above the registe=
+r declarations saying you can just s<i>xxx</i>[NOVIRT] to access the normal=
+ supervisor registers unless you want to make sure your code works with the=
+ H-extension.<br></div><div><br></div><blockquote class=3D"gmail_quote" sty=
+le=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);paddi=
+ng-left:1ex"><div>For example we don&#39;t have to check<br>
+virtualization status to dump the registers, we can just dump them and<br>
+know they are in the correct state (we do dump more is we have the<br>
+extension though). Image if someone adds a new way to dump registers,<br>
+I would like them not to care about if we are in V=3D1 or V=3D0 and they<br=
+>
+can just dump them and know that the CSRs are correct.</div></blockquote><d=
+iv><br></div><div>This is almost a best case for being orthogonal to other =
+features because you don&#39;t have to understand anything about how the re=
+gisters impact machine execution in order to dump them.<br></div><div><br><=
+/div><div>But even here it is somewhat debatable whether a naive implementa=
+tion would dump the &quot;correct&quot; versions of these registers. One vi=
+ew is that what you really want would be the values that M-mode code would =
+see since it has the most objective view of the system. Another is that the=
+y are the values that would be returned if the the current operating mode t=
+ried to access them, or undefined if that access would trap. Maybe you even=
+ want to query the value for a specific mode independent of the current pri=
+vilege level. If the behavior you want happens to match up to the chosen de=
+sign, then yes a naive implementation that is oblivious the hypervisor exte=
+nsion will work without having to understand anything. However, I&#39;d att=
+ribute that more to luck than elegance of a particular option.</div><div><b=
+r></div><div>Jonathan<br></div></div><br><div class=3D"gmail_quote"><div di=
+r=3D"ltr" class=3D"gmail_attr">On Tue, Jan 21, 2020 at 7:01 PM Alistair Fra=
+ncis &lt;<a href=3D"mailto:alistair23@gmail.com" target=3D"_blank">alistair=
+23@gmail.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" styl=
+e=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);paddin=
+g-left:1ex">On Tue, Jan 21, 2020 at 10:56 PM Jonathan Behrens &lt;<a href=
+=3D"mailto:fintelia@gmail.com" target=3D"_blank">fintelia@gmail.com</a>&gt;=
+ wrote:<br>
+&gt;<br>
+&gt; When I looked through the relevant code a few months ago, I couldn&#39=
+;t find anywhere that could actually be agnostic to whether the real or vir=
+tual registers were in effect (other than emulating the actual CSR modifica=
+tion instructions). For almost all state, the VS behavior is filtered by HS=
+-mode code. For example, you can grab satp in either mode but to properly d=
+o address translation you also have to factor in hgatp so you need to know =
+the virtualization state anyway. Similarly, floating point co-proccessor st=
+ate is tracked in two places with V=3D1 so that both the host and the guest=
+ can independently track dirty bits, but of course only the one in the &quo=
+t;real&quot; mstatus applies in non-virtualized mode.<br>
+<br>
+So the idea is that if you aren&#39;t interested in the Hypervisor<br>
+extension you can just access the CSRs as usual (inside QEMU&#39;s source<b=
+r>
+code). That is you don&#39;t need to know anything about the Hypervisor<br>
+extension to add support for other extensions or to work on the RISC-V<br>
+target in QEMU.<br>
+<br>
+I was trying to avoid forcing everyone to understand the Hypervisor<br>
+extension to develop for RISC-V. For example we don&#39;t have to check<br>
+virtulasition status to dump the registers, we can just dump them and<br>
+know they are in the correct state (we do dump more is we have the<br>
+extension though). Image if someone adds a new way to dump registers,<br>
+I would like them not to care about if we are in V=3D1 or V=3D0 and they<br=
+>
+can just dump them and know that the CSRs are correct.<br>
+<br>
+&gt;<br>
+&gt; The idea of using an array to track the two versions of registers seem=
+ed really elegant to me. If you know you want the host version you access e=
+lement zero. If you know you want the guest version you access element one.=
+ And if you want the version that the running code would see you index by t=
+he virtualization mode. In any case, the choice indicates that you thought =
+though which was the right option to use in that instance.<br>
+<br>
+mstatus really is the only one that has any complications. The others<br>
+have a vs* version, which could be converted to an array but it<br>
+doesn&#39;t really matter as we just swap them.<br>
+<br>
+Alistair<br>
+<br>
+&gt;<br>
+&gt; Jonathan<br>
+&gt;<br>
+&gt; On Tue, Jan 21, 2020 at 6:02 AM Alistair Francis &lt;<a href=3D"mailto=
+:alistair23@gmail.com" target=3D"_blank">alistair23@gmail.com</a>&gt; wrote=
+:<br>
+&gt;&gt;<br>
+&gt;&gt; On Wed, Jan 8, 2020 at 11:30 AM Palmer Dabbelt &lt;<a href=3D"mail=
+to:palmerdabbelt@google.com" target=3D"_blank">palmerdabbelt@google.com</a>=
+&gt; wrote:<br>
+&gt;&gt; &gt;<br>
+&gt;&gt; &gt; On Mon, 09 Dec 2019 10:11:19 PST (-0800), Alistair Francis wr=
+ote:<br>
+&gt;&gt; &gt; &gt; To handle the new Hypervisor CSR register aliasing let&#=
+39;s use pointers.<br>
+&gt;&gt; &gt;<br>
+&gt;&gt; &gt; For some reason I thought we were making this explicit?=C2=A0=
+ In other words,<br>
+&gt;&gt; &gt; requiring that all callers provide which privilege mode they&=
+#39;re using when<br>
+&gt;&gt; &gt; accessing these CSRs, as opposed to swapping around pointers.=
+=C2=A0 I don&#39;t actually<br>
+&gt;&gt; &gt; care that much, but IIRC when we were talking with the ARM gu=
+ys at Plumbers<br>
+&gt;&gt; &gt; they were pretty adament that would end up being a much clean=
+er implementation<br>
+&gt;&gt; &gt; as they&#39;d tried this way and later changed over.<br>
+&gt;&gt;<br>
+&gt;&gt; I think their implementation is different so it doesn&#39;t apply =
+the same here.<br>
+&gt;&gt;<br>
+&gt;&gt; My main concern is that due to the modularity of RISC-V I don&#39;=
+t expect<br>
+&gt;&gt; all future developers to keep track of the Hypervisor extensions. =
+This<br>
+&gt;&gt; way we always have the correct state in the registers.<br>
+&gt;&gt;<br>
+&gt;&gt; There is only one pointer variable left, so we could drop the poin=
+ter<br>
+&gt;&gt; swapping part, but for now it&#39;s still here.<br>
+&gt;&gt;<br>
+&gt;&gt; Alistair<br>
+&gt;&gt;<br>
+&gt;&gt; &gt;<br>
+&gt;&gt; &gt; &gt; Signed-off-by: Alistair Francis &lt;<a href=3D"mailto:al=
+istair.francis@wdc.com" target=3D"_blank">alistair.francis@wdc.com</a>&gt;<=
+br>
+&gt;&gt; &gt; &gt; ---<br>
+&gt;&gt; &gt; &gt;=C2=A0 target/riscv/cpu.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 | 11=
+ +++++++++--<br>
+&gt;&gt; &gt; &gt;=C2=A0 target/riscv/cpu.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=
+=A0 9 ++++++++-<br>
+&gt;&gt; &gt; &gt;=C2=A0 target/riscv/cpu_helper.c | 30 +++++++++++++++----=
+-----------<br>
+&gt;&gt; &gt; &gt;=C2=A0 target/riscv/csr.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 | 20=
+ ++++++++++----------<br>
+&gt;&gt; &gt; &gt;=C2=A0 target/riscv/op_helper.c=C2=A0 | 14 +++++++-------=
+<br>
+&gt;&gt; &gt; &gt;=C2=A0 5 files changed, 49 insertions(+), 35 deletions(-)=
+<br>
+&gt;&gt; &gt; &gt;<br>
+&gt;&gt; &gt; &gt; diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c<br>
+&gt;&gt; &gt; &gt; index a07c5689b3..e61cf46a73 100644<br>
+&gt;&gt; &gt; &gt; --- a/target/riscv/cpu.c<br>
+&gt;&gt; &gt; &gt; +++ b/target/riscv/cpu.c<br>
+&gt;&gt; &gt; &gt; @@ -236,7 +236,7 @@ static void riscv_cpu_dump_state(CPU=
+State *cs, FILE *f, int flags)<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 qemu_fprintf(f, &quot; %s &quot; TAR=
+GET_FMT_lx &quot;\n&quot;, &quot;pc=C2=A0 =C2=A0 =C2=A0 &quot;, env-&gt;pc)=
+;<br>
+&gt;&gt; &gt; &gt;=C2=A0 #ifndef CONFIG_USER_ONLY<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 qemu_fprintf(f, &quot; %s &quot; TAR=
+GET_FMT_lx &quot;\n&quot;, &quot;mhartid &quot;, env-&gt;mhartid);<br>
+&gt;&gt; &gt; &gt; -=C2=A0 =C2=A0 qemu_fprintf(f, &quot; %s &quot; TARGET_F=
+MT_lx &quot;\n&quot;, &quot;mstatus &quot;, env-&gt;mstatus);<br>
+&gt;&gt; &gt; &gt; +=C2=A0 =C2=A0 qemu_fprintf(f, &quot; %s &quot; TARGET_F=
+MT_lx &quot;\n&quot;, &quot;mstatus &quot;, *env-&gt;mstatus);<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 if (riscv_has_ext(env, RVH)) {<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 qemu_fprintf(f, &quot;=
+ %s &quot; TARGET_FMT_lx &quot;\n&quot;, &quot;hstatus &quot;, env-&gt;hsta=
+tus);<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 qemu_fprintf(f, &quot;=
+ %s &quot; TARGET_FMT_lx &quot;\n&quot;, &quot;vsstatus &quot;, env-&gt;vss=
+tatus);<br>
+&gt;&gt; &gt; &gt; @@ -336,7 +336,7 @@ static void riscv_cpu_reset(CPUState=
+ *cs)<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 mcc-&gt;parent_reset(cs);<br>
+&gt;&gt; &gt; &gt;=C2=A0 #ifndef CONFIG_USER_ONLY<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 env-&gt;priv =3D PRV_M;<br>
+&gt;&gt; &gt; &gt; -=C2=A0 =C2=A0 env-&gt;mstatus &amp;=3D ~(MSTATUS_MIE | =
+MSTATUS_MPRV);<br>
+&gt;&gt; &gt; &gt; +=C2=A0 =C2=A0 *env-&gt;mstatus &amp;=3D ~(MSTATUS_MIE |=
+ MSTATUS_MPRV);<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 env-&gt;mcause =3D 0;<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 env-&gt;pc =3D env-&gt;resetvec;<br>
+&gt;&gt; &gt; &gt;=C2=A0 #endif<br>
+&gt;&gt; &gt; &gt; @@ -465,8 +465,15 @@ static void riscv_cpu_realize(Devic=
+eState *dev, Error **errp)<br>
+&gt;&gt; &gt; &gt;=C2=A0 static void riscv_cpu_init(Object *obj)<br>
+&gt;&gt; &gt; &gt;=C2=A0 {<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 RISCVCPU *cpu =3D RISCV_CPU(obj);<br=
+>
+&gt;&gt; &gt; &gt; +#ifndef CONFIG_USER_ONLY<br>
+&gt;&gt; &gt; &gt; +=C2=A0 =C2=A0 CPURISCVState *env =3D &amp;cpu-&gt;env;<=
+br>
+&gt;&gt; &gt; &gt; +#endif<br>
+&gt;&gt; &gt; &gt;<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 cpu_set_cpustate_pointers(cpu);<br>
+&gt;&gt; &gt; &gt; +<br>
+&gt;&gt; &gt; &gt; +#ifndef CONFIG_USER_ONLY<br>
+&gt;&gt; &gt; &gt; +=C2=A0 =C2=A0 env-&gt;mstatus =3D &amp;env-&gt;mstatus_=
+novirt;<br>
+&gt;&gt; &gt; &gt; +#endif<br>
+&gt;&gt; &gt; &gt;=C2=A0 }<br>
+&gt;&gt; &gt; &gt;<br>
+&gt;&gt; &gt; &gt;=C2=A0 static const VMStateDescription vmstate_riscv_cpu =
+=3D {<br>
+&gt;&gt; &gt; &gt; diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h<br>
+&gt;&gt; &gt; &gt; index 21ae5a8b19..9dc8303c62 100644<br>
+&gt;&gt; &gt; &gt; --- a/target/riscv/cpu.h<br>
+&gt;&gt; &gt; &gt; +++ b/target/riscv/cpu.h<br>
+&gt;&gt; &gt; &gt; @@ -122,7 +122,7 @@ struct CPURISCVState {<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 target_ulong resetvec;<br>
+&gt;&gt; &gt; &gt;<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 target_ulong mhartid;<br>
+&gt;&gt; &gt; &gt; -=C2=A0 =C2=A0 target_ulong mstatus;<br>
+&gt;&gt; &gt; &gt; +=C2=A0 =C2=A0 target_ulong *mstatus;<br>
+&gt;&gt; &gt; &gt;<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 target_ulong mip;<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 uint32_t miclaim;<br>
+&gt;&gt; &gt; &gt; @@ -145,6 +145,13 @@ struct CPURISCVState {<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 target_ulong mcause;<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 target_ulong mtval;=C2=A0 /* since: =
+priv-1.10.0 */<br>
+&gt;&gt; &gt; &gt;<br>
+&gt;&gt; &gt; &gt; +=C2=A0 =C2=A0 /* The following registers are the &quot;=
+real&quot; versions that the pointer<br>
+&gt;&gt; &gt; &gt; +=C2=A0 =C2=A0 =C2=A0* versions point to. These should n=
+ever be used unless you know what you<br>
+&gt;&gt; &gt; &gt; +=C2=A0 =C2=A0 =C2=A0* are doing. To access these use th=
+e pointer versions instead. This is<br>
+&gt;&gt; &gt; &gt; +=C2=A0 =C2=A0 =C2=A0* required to handle the Hypervisor=
+ register swapping.<br>
+&gt;&gt; &gt; &gt; +=C2=A0 =C2=A0 =C2=A0*/<br>
+&gt;&gt; &gt; &gt; +=C2=A0 =C2=A0 target_ulong mstatus_novirt;<br>
+&gt;&gt; &gt; &gt; +<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 /* Hypervisor CSRs */<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 target_ulong hstatus;<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 target_ulong hedeleg;<br>
+&gt;&gt; &gt; &gt; diff --git a/target/riscv/cpu_helper.c b/target/riscv/cp=
+u_helper.c<br>
+&gt;&gt; &gt; &gt; index b00f66824a..9684da7f7d 100644<br>
+&gt;&gt; &gt; &gt; --- a/target/riscv/cpu_helper.c<br>
+&gt;&gt; &gt; &gt; +++ b/target/riscv/cpu_helper.c<br>
+&gt;&gt; &gt; &gt; @@ -37,8 +37,8 @@ int riscv_cpu_mmu_index(CPURISCVState =
+*env, bool ifetch)<br>
+&gt;&gt; &gt; &gt;=C2=A0 #ifndef CONFIG_USER_ONLY<br>
+&gt;&gt; &gt; &gt;=C2=A0 static int riscv_cpu_local_irq_pending(CPURISCVSta=
+te *env)<br>
+&gt;&gt; &gt; &gt;=C2=A0 {<br>
+&gt;&gt; &gt; &gt; -=C2=A0 =C2=A0 target_ulong mstatus_mie =3D get_field(en=
+v-&gt;mstatus, MSTATUS_MIE);<br>
+&gt;&gt; &gt; &gt; -=C2=A0 =C2=A0 target_ulong mstatus_sie =3D get_field(en=
+v-&gt;mstatus, MSTATUS_SIE);<br>
+&gt;&gt; &gt; &gt; +=C2=A0 =C2=A0 target_ulong mstatus_mie =3D get_field(*e=
+nv-&gt;mstatus, MSTATUS_MIE);<br>
+&gt;&gt; &gt; &gt; +=C2=A0 =C2=A0 target_ulong mstatus_sie =3D get_field(*e=
+nv-&gt;mstatus, MSTATUS_SIE);<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 target_ulong pending =3D env-&gt;mip=
+ &amp; env-&gt;mie;<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 target_ulong mie =3D env-&gt;priv &l=
+t; PRV_M || (env-&gt;priv =3D=3D PRV_M &amp;&amp; mstatus_mie);<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 target_ulong sie =3D env-&gt;priv &l=
+t; PRV_S || (env-&gt;priv =3D=3D PRV_S &amp;&amp; mstatus_sie);<br>
+&gt;&gt; &gt; &gt; @@ -75,7 +75,7 @@ bool riscv_cpu_exec_interrupt(CPUState=
+ *cs, int interrupt_request)<br>
+&gt;&gt; &gt; &gt;=C2=A0 /* Return true is floating point support is curren=
+tly enabled */<br>
+&gt;&gt; &gt; &gt;=C2=A0 bool riscv_cpu_fp_enabled(CPURISCVState *env)<br>
+&gt;&gt; &gt; &gt;=C2=A0 {<br>
+&gt;&gt; &gt; &gt; -=C2=A0 =C2=A0 if (env-&gt;mstatus &amp; MSTATUS_FS) {<b=
+r>
+&gt;&gt; &gt; &gt; +=C2=A0 =C2=A0 if (*env-&gt;mstatus &amp; MSTATUS_FS) {<=
+br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return true;<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 }<br>
+&gt;&gt; &gt; &gt;<br>
+&gt;&gt; &gt; &gt; @@ -198,8 +198,8 @@ static int get_physical_address(CPUR=
+ISCVState *env, hwaddr *physical,<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 int mode =3D mmu_idx;<br>
+&gt;&gt; &gt; &gt;<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 if (mode =3D=3D PRV_M &amp;&amp; acc=
+ess_type !=3D MMU_INST_FETCH) {<br>
+&gt;&gt; &gt; &gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (get_field(env-&gt;mstat=
+us, MSTATUS_MPRV)) {<br>
+&gt;&gt; &gt; &gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 mode =3D get_=
+field(env-&gt;mstatus, MSTATUS_MPP);<br>
+&gt;&gt; &gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (get_field(*env-&gt;msta=
+tus, MSTATUS_MPRV)) {<br>
+&gt;&gt; &gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 mode =3D get_=
+field(*env-&gt;mstatus, MSTATUS_MPP);<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 }<br>
+&gt;&gt; &gt; &gt;<br>
+&gt;&gt; &gt; &gt; @@ -213,11 +213,11 @@ static int get_physical_address(CP=
+URISCVState *env, hwaddr *physical,<br>
+&gt;&gt; &gt; &gt;<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 hwaddr base;<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 int levels, ptidxbits, ptesize, vm, =
+sum;<br>
+&gt;&gt; &gt; &gt; -=C2=A0 =C2=A0 int mxr =3D get_field(env-&gt;mstatus, MS=
+TATUS_MXR);<br>
+&gt;&gt; &gt; &gt; +=C2=A0 =C2=A0 int mxr =3D get_field(*env-&gt;mstatus, M=
+STATUS_MXR);<br>
+&gt;&gt; &gt; &gt;<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 if (env-&gt;priv_ver &gt;=3D PRIV_VE=
+RSION_1_10_0) {<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 base =3D (hwaddr)get_f=
+ield(env-&gt;satp, SATP_PPN) &lt;&lt; PGSHIFT;<br>
+&gt;&gt; &gt; &gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 sum =3D get_field(env-&gt;m=
+status, MSTATUS_SUM);<br>
+&gt;&gt; &gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 sum =3D get_field(*env-&gt;=
+mstatus, MSTATUS_SUM);<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 vm =3D get_field(env-&=
+gt;satp, SATP_MODE);<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 switch (vm) {<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 case VM_1_10_SV32:<br>
+&gt;&gt; &gt; &gt; @@ -237,8 +237,8 @@ static int get_physical_address(CPUR=
+ISCVState *env, hwaddr *physical,<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 } else {<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 base =3D (hwaddr)(env-=
+&gt;sptbr) &lt;&lt; PGSHIFT;<br>
+&gt;&gt; &gt; &gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 sum =3D !get_field(env-&gt;=
+mstatus, MSTATUS_PUM);<br>
+&gt;&gt; &gt; &gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 vm =3D get_field(env-&gt;ms=
+tatus, MSTATUS_VM);<br>
+&gt;&gt; &gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 sum =3D !get_field(*env-&gt=
+;mstatus, MSTATUS_PUM);<br>
+&gt;&gt; &gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 vm =3D get_field(*env-&gt;m=
+status, MSTATUS_VM);<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 switch (vm) {<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 case VM_1_09_SV32:<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 levels =3D 2; p=
+tidxbits =3D 10; ptesize =3D 4; break;<br>
+&gt;&gt; &gt; &gt; @@ -492,8 +492,8 @@ bool riscv_cpu_tlb_fill(CPUState *cs=
+, vaddr address, int size,<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 ret =3D get_physical_address(env, &a=
+mp;pa, &amp;prot, address, access_type, mmu_idx);<br>
+&gt;&gt; &gt; &gt;<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 if (mode =3D=3D PRV_M &amp;&amp; acc=
+ess_type !=3D MMU_INST_FETCH) {<br>
+&gt;&gt; &gt; &gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (get_field(env-&gt;mstat=
+us, MSTATUS_MPRV)) {<br>
+&gt;&gt; &gt; &gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 mode =3D get_=
+field(env-&gt;mstatus, MSTATUS_MPP);<br>
+&gt;&gt; &gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (get_field(*env-&gt;msta=
+tus, MSTATUS_MPRV)) {<br>
+&gt;&gt; &gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 mode =3D get_=
+field(*env-&gt;mstatus, MSTATUS_MPP);<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 }<br>
+&gt;&gt; &gt; &gt;<br>
+&gt;&gt; &gt; &gt; @@ -599,12 +599,12 @@ void riscv_cpu_do_interrupt(CPUSta=
+te *cs)<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 if (env-&gt;priv &lt;=3D PRV_S &amp;=
+&amp;<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 cause &l=
+t; TARGET_LONG_BITS &amp;&amp; ((deleg &gt;&gt; cause) &amp; 1)) {<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 /* handle the trap in =
+S-mode */<br>
+&gt;&gt; &gt; &gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 target_ulong s =3D env-&gt;=
+mstatus;<br>
+&gt;&gt; &gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 target_ulong s =3D *env-&gt=
+;mstatus;<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 s =3D set_field(s, MST=
+ATUS_SPIE, env-&gt;priv_ver &gt;=3D PRIV_VERSION_1_10_0 ?<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 get_fiel=
+d(s, MSTATUS_SIE) : get_field(s, MSTATUS_UIE &lt;&lt; env-&gt;priv));<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 s =3D set_field(s, MST=
+ATUS_SPP, env-&gt;priv);<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 s =3D set_field(s, MST=
+ATUS_SIE, 0);<br>
+&gt;&gt; &gt; &gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 env-&gt;mstatus =3D s;<br>
+&gt;&gt; &gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 *env-&gt;mstatus =3D s;<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 env-&gt;scause =3D cau=
+se | ((target_ulong)async &lt;&lt; (TARGET_LONG_BITS - 1));<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 env-&gt;sepc =3D env-&=
+gt;pc;<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 env-&gt;sbadaddr =3D t=
+val;<br>
+&gt;&gt; &gt; &gt; @@ -613,12 +613,12 @@ void riscv_cpu_do_interrupt(CPUSta=
+te *cs)<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 riscv_cpu_set_mode(env=
+, PRV_S);<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 } else {<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 /* handle the trap in =
+M-mode */<br>
+&gt;&gt; &gt; &gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 target_ulong s =3D env-&gt;=
+mstatus;<br>
+&gt;&gt; &gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 target_ulong s =3D *env-&gt=
+;mstatus;<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 s =3D set_field(s, MST=
+ATUS_MPIE, env-&gt;priv_ver &gt;=3D PRIV_VERSION_1_10_0 ?<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 get_fiel=
+d(s, MSTATUS_MIE) : get_field(s, MSTATUS_UIE &lt;&lt; env-&gt;priv));<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 s =3D set_field(s, MST=
+ATUS_MPP, env-&gt;priv);<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 s =3D set_field(s, MST=
+ATUS_MIE, 0);<br>
+&gt;&gt; &gt; &gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 env-&gt;mstatus =3D s;<br>
+&gt;&gt; &gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 *env-&gt;mstatus =3D s;<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 env-&gt;mcause =3D cau=
+se | ~(((target_ulong)-1) &gt;&gt; async);<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 env-&gt;mepc =3D env-&=
+gt;pc;<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 env-&gt;mbadaddr =3D t=
+val;<br>
+&gt;&gt; &gt; &gt; diff --git a/target/riscv/csr.c b/target/riscv/csr.c<br>
+&gt;&gt; &gt; &gt; index 74e911af08..a4b598d49a 100644<br>
+&gt;&gt; &gt; &gt; --- a/target/riscv/csr.c<br>
+&gt;&gt; &gt; &gt; +++ b/target/riscv/csr.c<br>
+&gt;&gt; &gt; &gt; @@ -136,7 +136,7 @@ static int write_fflags(CPURISCVStat=
+e *env, int csrno, target_ulong val)<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 if (!env-&gt;debugger &amp;&amp; !ri=
+scv_cpu_fp_enabled(env)) {<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return -1;<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 }<br>
+&gt;&gt; &gt; &gt; -=C2=A0 =C2=A0 env-&gt;mstatus |=3D MSTATUS_FS;<br>
+&gt;&gt; &gt; &gt; +=C2=A0 =C2=A0 *env-&gt;mstatus |=3D MSTATUS_FS;<br>
+&gt;&gt; &gt; &gt;=C2=A0 #endif<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 riscv_cpu_set_fflags(env, val &amp; =
+(FSR_AEXC &gt;&gt; FSR_AEXC_SHIFT));<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 return 0;<br>
+&gt;&gt; &gt; &gt; @@ -159,7 +159,7 @@ static int write_frm(CPURISCVState *=
+env, int csrno, target_ulong val)<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 if (!env-&gt;debugger &amp;&amp; !ri=
+scv_cpu_fp_enabled(env)) {<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return -1;<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 }<br>
+&gt;&gt; &gt; &gt; -=C2=A0 =C2=A0 env-&gt;mstatus |=3D MSTATUS_FS;<br>
+&gt;&gt; &gt; &gt; +=C2=A0 =C2=A0 *env-&gt;mstatus |=3D MSTATUS_FS;<br>
+&gt;&gt; &gt; &gt;=C2=A0 #endif<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 env-&gt;frm =3D val &amp; (FSR_RD &g=
+t;&gt; FSR_RD_SHIFT);<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 return 0;<br>
+&gt;&gt; &gt; &gt; @@ -183,7 +183,7 @@ static int write_fcsr(CPURISCVState =
+*env, int csrno, target_ulong val)<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 if (!env-&gt;debugger &amp;&amp; !ri=
+scv_cpu_fp_enabled(env)) {<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return -1;<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 }<br>
+&gt;&gt; &gt; &gt; -=C2=A0 =C2=A0 env-&gt;mstatus |=3D MSTATUS_FS;<br>
+&gt;&gt; &gt; &gt; +=C2=A0 =C2=A0 *env-&gt;mstatus |=3D MSTATUS_FS;<br>
+&gt;&gt; &gt; &gt;=C2=A0 #endif<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 env-&gt;frm =3D (val &amp; FSR_RD) &=
+gt;&gt; FSR_RD_SHIFT;<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 riscv_cpu_set_fflags(env, (val &amp;=
+ FSR_AEXC) &gt;&gt; FSR_AEXC_SHIFT);<br>
+&gt;&gt; &gt; &gt; @@ -313,7 +313,7 @@ static int read_mhartid(CPURISCVStat=
+e *env, int csrno, target_ulong *val)<br>
+&gt;&gt; &gt; &gt;=C2=A0 /* Machine Trap Setup */<br>
+&gt;&gt; &gt; &gt;=C2=A0 static int read_mstatus(CPURISCVState *env, int cs=
+rno, target_ulong *val)<br>
+&gt;&gt; &gt; &gt;=C2=A0 {<br>
+&gt;&gt; &gt; &gt; -=C2=A0 =C2=A0 *val =3D env-&gt;mstatus;<br>
+&gt;&gt; &gt; &gt; +=C2=A0 =C2=A0 *val =3D *env-&gt;mstatus;<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 return 0;<br>
+&gt;&gt; &gt; &gt;=C2=A0 }<br>
+&gt;&gt; &gt; &gt;<br>
+&gt;&gt; &gt; &gt; @@ -325,7 +325,7 @@ static int validate_vm(CPURISCVState=
+ *env, target_ulong vm)<br>
+&gt;&gt; &gt; &gt;<br>
+&gt;&gt; &gt; &gt;=C2=A0 static int write_mstatus(CPURISCVState *env, int c=
+srno, target_ulong val)<br>
+&gt;&gt; &gt; &gt;=C2=A0 {<br>
+&gt;&gt; &gt; &gt; -=C2=A0 =C2=A0 target_ulong mstatus =3D env-&gt;mstatus;=
+<br>
+&gt;&gt; &gt; &gt; +=C2=A0 =C2=A0 target_ulong mstatus =3D *env-&gt;mstatus=
+;<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 target_ulong mask =3D 0;<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 int dirty;<br>
+&gt;&gt; &gt; &gt;<br>
+&gt;&gt; &gt; &gt; @@ -365,7 +365,7 @@ static int write_mstatus(CPURISCVSta=
+te *env, int csrno, target_ulong val)<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0((=
+mstatus &amp; MSTATUS_FS) =3D=3D MSTATUS_FS)) |<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ((mstatu=
+s &amp; MSTATUS_XS) =3D=3D MSTATUS_XS);<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 mstatus =3D set_field(mstatus, MSTAT=
+US_SD, dirty);<br>
+&gt;&gt; &gt; &gt; -=C2=A0 =C2=A0 env-&gt;mstatus =3D mstatus;<br>
+&gt;&gt; &gt; &gt; +=C2=A0 =C2=A0 *env-&gt;mstatus =3D mstatus;<br>
+&gt;&gt; &gt; &gt;<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 return 0;<br>
+&gt;&gt; &gt; &gt;=C2=A0 }<br>
+&gt;&gt; &gt; &gt; @@ -614,7 +614,7 @@ static int read_sstatus(CPURISCVStat=
+e *env, int csrno, target_ulong *val)<br>
+&gt;&gt; &gt; &gt;=C2=A0 {<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 target_ulong mask =3D ((env-&gt;priv=
+_ver &gt;=3D PRIV_VERSION_1_10_0) ?<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0sstatus_v1_10_mask : sstatus_v1_9_=
+mask);<br>
+&gt;&gt; &gt; &gt; -=C2=A0 =C2=A0 *val =3D env-&gt;mstatus &amp; mask;<br>
+&gt;&gt; &gt; &gt; +=C2=A0 =C2=A0 *val =3D *env-&gt;mstatus &amp; mask;<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 return 0;<br>
+&gt;&gt; &gt; &gt;=C2=A0 }<br>
+&gt;&gt; &gt; &gt;<br>
+&gt;&gt; &gt; &gt; @@ -622,7 +622,7 @@ static int write_sstatus(CPURISCVSta=
+te *env, int csrno, target_ulong val)<br>
+&gt;&gt; &gt; &gt;=C2=A0 {<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 target_ulong mask =3D ((env-&gt;priv=
+_ver &gt;=3D PRIV_VERSION_1_10_0) ?<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0sstatus_v1_10_mask : sstatus_v1_9_=
+mask);<br>
+&gt;&gt; &gt; &gt; -=C2=A0 =C2=A0 target_ulong newval =3D (env-&gt;mstatus =
+&amp; ~mask) | (val &amp; mask);<br>
+&gt;&gt; &gt; &gt; +=C2=A0 =C2=A0 target_ulong newval =3D (*env-&gt;mstatus=
+ &amp; ~mask) | (val &amp; mask);<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 return write_mstatus(env, CSR_MSTATU=
+S, newval);<br>
+&gt;&gt; &gt; &gt;=C2=A0 }<br>
+&gt;&gt; &gt; &gt;<br>
+&gt;&gt; &gt; &gt; @@ -737,7 +737,7 @@ static int read_satp(CPURISCVState *=
+env, int csrno, target_ulong *val)<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 if (!riscv_feature(env, RISCV_FEATUR=
+E_MMU)) {<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 *val =3D 0;<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 } else if (env-&gt;priv_ver &gt;=3D =
+PRIV_VERSION_1_10_0) {<br>
+&gt;&gt; &gt; &gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (env-&gt;priv =3D=3D PRV=
+_S &amp;&amp; get_field(env-&gt;mstatus, MSTATUS_TVM)) {<br>
+&gt;&gt; &gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (env-&gt;priv =3D=3D PRV=
+_S &amp;&amp; get_field(*env-&gt;mstatus, MSTATUS_TVM)) {<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return -=
+1;<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 } else {<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 *val =3D=
+ env-&gt;satp;<br>
+&gt;&gt; &gt; &gt; @@ -762,7 +762,7 @@ static int write_satp(CPURISCVState =
+*env, int csrno, target_ulong val)<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 validate_vm(env, get_f=
+ield(val, SATP_MODE)) &amp;&amp;<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ((val ^ env-&gt;satp) =
+&amp; (SATP_MODE | SATP_ASID | SATP_PPN)))<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 {<br>
+&gt;&gt; &gt; &gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (env-&gt;priv =3D=3D PRV=
+_S &amp;&amp; get_field(env-&gt;mstatus, MSTATUS_TVM)) {<br>
+&gt;&gt; &gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (env-&gt;priv =3D=3D PRV=
+_S &amp;&amp; get_field(*env-&gt;mstatus, MSTATUS_TVM)) {<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return -=
+1;<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 } else {<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if((val =
+^ env-&gt;satp) &amp; SATP_ASID) {<br>
+&gt;&gt; &gt; &gt; diff --git a/target/riscv/op_helper.c b/target/riscv/op_=
+helper.c<br>
+&gt;&gt; &gt; &gt; index 331cc36232..d150551bc9 100644<br>
+&gt;&gt; &gt; &gt; --- a/target/riscv/op_helper.c<br>
+&gt;&gt; &gt; &gt; +++ b/target/riscv/op_helper.c<br>
+&gt;&gt; &gt; &gt; @@ -83,11 +83,11 @@ target_ulong helper_sret(CPURISCVSta=
+te *env, target_ulong cpu_pc_deb)<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 }<br>
+&gt;&gt; &gt; &gt;<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 if (env-&gt;priv_ver &gt;=3D PRIV_VE=
+RSION_1_10_0 &amp;&amp;<br>
+&gt;&gt; &gt; &gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 get_field(env-&gt;mstatus, =
+MSTATUS_TSR)) {<br>
+&gt;&gt; &gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 get_field(*env-&gt;mstatus,=
+ MSTATUS_TSR)) {<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 riscv_raise_exception(=
+env, RISCV_EXCP_ILLEGAL_INST, GETPC());<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 }<br>
+&gt;&gt; &gt; &gt;<br>
+&gt;&gt; &gt; &gt; -=C2=A0 =C2=A0 target_ulong mstatus =3D env-&gt;mstatus;=
+<br>
+&gt;&gt; &gt; &gt; +=C2=A0 =C2=A0 target_ulong mstatus =3D *env-&gt;mstatus=
+;<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 target_ulong prev_priv =3D get_field=
+(mstatus, MSTATUS_SPP);<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 mstatus =3D set_field(mstatus,<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 env-&gt;priv_ver &gt;=
+=3D PRIV_VERSION_1_10_0 ?<br>
+&gt;&gt; &gt; &gt; @@ -96,7 +96,7 @@ target_ulong helper_sret(CPURISCVState=
+ *env, target_ulong cpu_pc_deb)<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 mstatus =3D set_field(mstatus, MSTAT=
+US_SPIE, 0);<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 mstatus =3D set_field(mstatus, MSTAT=
+US_SPP, PRV_U);<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 riscv_cpu_set_mode(env, prev_priv);<=
+br>
+&gt;&gt; &gt; &gt; -=C2=A0 =C2=A0 env-&gt;mstatus =3D mstatus;<br>
+&gt;&gt; &gt; &gt; +=C2=A0 =C2=A0 *env-&gt;mstatus =3D mstatus;<br>
+&gt;&gt; &gt; &gt;<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 return retpc;<br>
+&gt;&gt; &gt; &gt;=C2=A0 }<br>
+&gt;&gt; &gt; &gt; @@ -112,7 +112,7 @@ target_ulong helper_mret(CPURISCVSta=
+te *env, target_ulong cpu_pc_deb)<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 riscv_raise_exception(=
+env, RISCV_EXCP_INST_ADDR_MIS, GETPC());<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 }<br>
+&gt;&gt; &gt; &gt;<br>
+&gt;&gt; &gt; &gt; -=C2=A0 =C2=A0 target_ulong mstatus =3D env-&gt;mstatus;=
+<br>
+&gt;&gt; &gt; &gt; +=C2=A0 =C2=A0 target_ulong mstatus =3D *env-&gt;mstatus=
+;<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 target_ulong prev_priv =3D get_field=
+(mstatus, MSTATUS_MPP);<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 mstatus =3D set_field(mstatus,<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 env-&gt;priv_ver &gt;=
+=3D PRIV_VERSION_1_10_0 ?<br>
+&gt;&gt; &gt; &gt; @@ -121,7 +121,7 @@ target_ulong helper_mret(CPURISCVSta=
+te *env, target_ulong cpu_pc_deb)<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 mstatus =3D set_field(mstatus, MSTAT=
+US_MPIE, 0);<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 mstatus =3D set_field(mstatus, MSTAT=
+US_MPP, PRV_U);<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 riscv_cpu_set_mode(env, prev_priv);<=
+br>
+&gt;&gt; &gt; &gt; -=C2=A0 =C2=A0 env-&gt;mstatus =3D mstatus;<br>
+&gt;&gt; &gt; &gt; +=C2=A0 =C2=A0 *env-&gt;mstatus =3D mstatus;<br>
+&gt;&gt; &gt; &gt;<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 return retpc;<br>
+&gt;&gt; &gt; &gt;=C2=A0 }<br>
+&gt;&gt; &gt; &gt; @@ -132,7 +132,7 @@ void helper_wfi(CPURISCVState *env)<=
+br>
+&gt;&gt; &gt; &gt;<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 if (env-&gt;priv =3D=3D PRV_S &amp;&=
+amp;<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 env-&gt;priv_ver &gt;=
+=3D PRIV_VERSION_1_10_0 &amp;&amp;<br>
+&gt;&gt; &gt; &gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 get_field(env-&gt;mstatus, =
+MSTATUS_TW)) {<br>
+&gt;&gt; &gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 get_field(*env-&gt;mstatus,=
+ MSTATUS_TW)) {<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 riscv_raise_exception(=
+env, RISCV_EXCP_ILLEGAL_INST, GETPC());<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 } else {<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 cs-&gt;halted =3D 1;<b=
+r>
+&gt;&gt; &gt; &gt; @@ -147,7 +147,7 @@ void helper_tlb_flush(CPURISCVState =
+*env)<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 if (!(env-&gt;priv &gt;=3D PRV_S) ||=
+<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 (env-&gt;priv =3D=3D P=
+RV_S &amp;&amp;<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0env-&gt;priv_ver=
+ &gt;=3D PRIV_VERSION_1_10_0 &amp;&amp;<br>
+&gt;&gt; &gt; &gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0get_field(env-&gt;mst=
+atus, MSTATUS_TVM))) {<br>
+&gt;&gt; &gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0get_field(*env-&gt;ms=
+tatus, MSTATUS_TVM))) {<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 riscv_raise_exception(=
+env, RISCV_EXCP_ILLEGAL_INST, GETPC());<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 } else {<br>
+&gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 tlb_flush(cs);<br>
+&gt;&gt;<br>
+</blockquote></div>
+
+--0000000000003e8797059cc1db5c--
 
