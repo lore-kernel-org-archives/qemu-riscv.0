@@ -1,57 +1,75 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iuiXt-0002go-AP
-	for mharc-qemu-riscv@gnu.org; Thu, 23 Jan 2020 14:53:41 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:39205)
+	id 1ium09-0008HP-3f
+	for mharc-qemu-riscv@gnu.org; Thu, 23 Jan 2020 18:35:05 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:55013)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <bounce+d13a72.9b4e76-qemu-riscv=nongnu.org@fintelia.io>)
- id 1iuiXo-0002U1-Hk
- for qemu-riscv@nongnu.org; Thu, 23 Jan 2020 14:53:39 -0500
+ (envelope-from <richard.henderson@linaro.org>) id 1ium06-0008H9-Mj
+ for qemu-riscv@nongnu.org; Thu, 23 Jan 2020 18:35:03 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <bounce+d13a72.9b4e76-qemu-riscv=nongnu.org@fintelia.io>)
- id 1iuiXn-0000pm-HC
- for qemu-riscv@nongnu.org; Thu, 23 Jan 2020 14:53:36 -0500
-Received: from rs224.mailgun.us ([209.61.151.224]:31785)
+ (envelope-from <richard.henderson@linaro.org>) id 1ium05-0001iX-KP
+ for qemu-riscv@nongnu.org; Thu, 23 Jan 2020 18:35:02 -0500
+Received: from mail-pl1-x644.google.com ([2607:f8b0:4864:20::644]:46186)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71)
- (envelope-from <bounce+d13a72.9b4e76-qemu-riscv=nongnu.org@fintelia.io>)
- id 1iuiXn-0000l8-Bk
- for qemu-riscv@nongnu.org; Thu, 23 Jan 2020 14:53:35 -0500
-DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=fintelia.io; q=dns/txt;
- s=pic; 
- t=1579809209; h=Content-Transfer-Encoding: MIME-Version: Message-Id:
- Date: Subject: Cc: To: From: Sender;
- bh=8t+fDncYfgnFj/SFRiDptoWecMF8tAS/UKt2nRHgxxQ=;
- b=XPCxl8DOP04VubHDUT+Pl5xqKqfVdI02jiyZev/xNzdrEZF189YdyjpHGaX6e158PE+0D0i0
- BOT5vJ4rtXT+b5Of6/b5GMT2xXketMQWMCoI8BBS8KZoRMjUiJdTb4eA/9qjBRyANwbvlQTd
- G6OerZZlXjULEdqTFeQlip83yH3lOPJEu9lWKqkspvP5HIsGo+fS93PW/i16EEZsuAG/QPkn
- TNTxBNynI0ZeBr1GyouPvuQP/uz48IhMCrLSejaBjvayM1gt1iRLiAf9K4olWqKPHNKgBobY
- zQBeVaKHyJlm7zZ+oxyeMmkU+fzh40OtA3/P+f6I2lROHQ1RsVd3pw==
-X-Mailgun-Sending-Ip: 209.61.151.224
-X-Mailgun-Sid: WyJkNjk0ZSIsICJxZW11LXJpc2N2QG5vbmdudS5vcmciLCAiOWI0ZTc2Il0=
-Sender: jonathan@fintelia.io
-Received: from jonathan-ThinkPad-X1-Carbon.pdos.lcs.mit.edu
- (26-5-211.dynamic.csail.mit.edu [18.26.5.211])
- by mxa.mailgun.org with ESMTP id 5e29f9b7.7fca702fc818-smtp-out-n03;
- Thu, 23 Jan 2020 19:53:27 -0000 (UTC)
-From: Jonathan Behrens <jonathan@fintelia.io>
-To: 
-Cc: Jonathan Behrens <jonathan@fintelia.io>,
- Palmer Dabbelt <palmerdabbelt@google.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Palmer Dabbelt <palmer@sifive.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
+ (Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
+ id 1ium05-0001gC-Cc
+ for qemu-riscv@nongnu.org; Thu, 23 Jan 2020 18:35:01 -0500
+Received: by mail-pl1-x644.google.com with SMTP id y8so2021310pll.13
+ for <qemu-riscv@nongnu.org>; Thu, 23 Jan 2020 15:35:01 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=tt6ehp+Xt0YHdAnahiF95kNQWd8dbzh7qju1RrRwJPI=;
+ b=q0XfNlXlOIj2YOncttfvXZcBL/NytBRTBs62CHugdvn4Giey2sTnqrKNq9lM9hj868
+ e4n31lEcl/WUX3uedLXr6Nx/Znb1VE0kiXW3WypgsgOFUgLecepfT5pkvAKerudaELSL
+ ExEKz/XyMx6yHbXHPUUYHUzPl/1rPtP9yJy7tgQ8RQV+EmMHkvdWvHZh1q1QypOmOFgB
+ exy0xcZazqMy2yCxUjwDxYSVcS1p5IXbf5saFjDsy7rZ0xa62WgqXiFj9CQ70b2SnJi7
+ ypKVnlu3sUO8O5QFg3U9uvNHmplwjrEVgSOkj8aBhPkCvJ+88XbEG5qQo4/GIpYNFAwt
+ QNbg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=tt6ehp+Xt0YHdAnahiF95kNQWd8dbzh7qju1RrRwJPI=;
+ b=VQb3fmH0J2r/GOetgSwJW87k+R0B+HDy/fxFFtgiLdUdGMLkRAodc+ePQsko0zzg/G
+ go0Rp3NTDclMUTMDVTgW33maoDic9vFXWxrSZkr2/h+fulMBy+Dxyj6+U4TiQNuIDFNP
+ F6GowCP4nzMKi+yz7Espj8S0T7lLL2EDj5yye+Rg9eeKeH6F3gpY8HUmcJionLlkT6Jb
+ iq/DmwsXsre74/ln4yv413MqorROQfJC+hDLNS1cLZ8c3QcLtKhbO0G5KEaiuGj1mw5D
+ RdZBfQuwJi2TGhuMUax3M27vbVgNQJltGU3bip8RGlYCL1nUtMtXxvK+fDlM7P91+5yt
+ VH1A==
+X-Gm-Message-State: APjAAAW9eThfj181CczFejo8hhfyBz9l9WvLVyCWzHgqgYhkC2HGWetJ
+ zI8sMsQIxdjZCynVk27ldNAw2Q==
+X-Google-Smtp-Source: APXvYqxAXt1PTx0kJ62pguqQ/zezQs3hfZZkh+hdc/MoiMyIzcuEM7IffbiQvd+WUyGpy5mcGtVUSQ==
+X-Received: by 2002:a17:90a:3aaf:: with SMTP id b44mr156666pjc.9.1579822499882; 
+ Thu, 23 Jan 2020 15:34:59 -0800 (PST)
+Received: from [10.5.50.117] (rrcs-173-198-77-92.west.biz.rr.com.
+ [173.198.77.92])
+ by smtp.gmail.com with ESMTPSA id m14sm4133081pjf.3.2020.01.23.15.34.57
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 23 Jan 2020 15:34:59 -0800 (PST)
+Subject: Re: [PATCH] target/riscv: Disallow WFI instruction from U-mode
+To: Jonathan Behrens <jonathan@fintelia.io>
+Cc: Palmer Dabbelt <palmer@sifive.com>,
+ "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs),
- qemu-devel@nongnu.org (open list:All patches CC here)
-Subject: [PATCH] target/riscv: Disallow WFI instruction from U-mode
-Date: Thu, 23 Jan 2020 14:52:00 -0500
-Message-Id: <20200123195200.206355-1-jonathan@fintelia.io>
-X-Mailer: git-send-email 2.25.0
+ Palmer Dabbelt <palmerdabbelt@google.com>,
+ "open list:All patches CC here" <qemu-devel@nongnu.org>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+References: <20200123195200.206355-1-jonathan@fintelia.io>
+From: Richard Henderson <richard.henderson@linaro.org>
+Message-ID: <5d74dfd1-f1f5-df3d-e0b1-771781497553@linaro.org>
+Date: Thu, 23 Jan 2020 13:34:55 -1000
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.4.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
-X-Received-From: 209.61.151.224
+In-Reply-To: <20200123195200.206355-1-jonathan@fintelia.io>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2607:f8b0:4864:20::644
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -63,40 +81,13 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Jan 2020 19:53:39 -0000
+X-List-Received-Date: Thu, 23 Jan 2020 23:35:03 -0000
 
-From the RISC-V Priviliged Specification:
+On 1/23/20 9:52 AM, Jonathan Behrens wrote:
+> +    if (!(env->priv >= PRV_S) ||
 
-"When S-mode is implemented, then executing WFI in U-mode causes an illegal
-instruction exception, unless it completes within an implementation-specific,
-bounded time limit. A future revision of this specification might add a feature
-that allows S-mode to selectively permit WFI in U-mode."
+For integers, !(x >= y) is a poor way to write x < y.
 
-Signed-off-by: Jonathan Behrens <jonathan@fintelia.io>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
----
- target/riscv/op_helper.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
-index 331cc36232..2e5a980192 100644
---- a/target/riscv/op_helper.c
-+++ b/target/riscv/op_helper.c
-@@ -129,10 +129,10 @@ target_ulong helper_mret(CPURISCVState *env, target_ulong cpu_pc_deb)
- void helper_wfi(CPURISCVState *env)
- {
-     CPUState *cs = env_cpu(env);
--
--    if (env->priv == PRV_S &&
--        env->priv_ver >= PRIV_VERSION_1_10_0 &&
--        get_field(env->mstatus, MSTATUS_TW)) {
-+    if (!(env->priv >= PRV_S) ||
-+        (env->priv == PRV_S &&
-+         env->priv_ver >= PRIV_VERSION_1_10_0 &&
-+         get_field(env->mstatus, MSTATUS_TW))) {
-         riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
-     } else {
-         cs->halted = 1;
--- 
-2.25.0
+r~
 
