@@ -1,52 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iunDB-0002zA-5Y
+	id 1iunDB-00030c-Kp
 	for mharc-qemu-riscv@gnu.org; Thu, 23 Jan 2020 19:52:37 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44638)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44657)
  by lists.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1iunD3-0002qL-A2
+ id 1iunD4-0002tF-Ei
  for qemu-riscv@nongnu.org; Thu, 23 Jan 2020 19:52:31 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
  (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1iunD1-0005pm-Ls
- for qemu-riscv@nongnu.org; Thu, 23 Jan 2020 19:52:29 -0500
-Received: from mail-wr1-x441.google.com ([2a00:1450:4864:20::441]:34474)
+ id 1iunD3-0005t0-6S
+ for qemu-riscv@nongnu.org; Thu, 23 Jan 2020 19:52:30 -0500
+Received: from mail-wr1-x441.google.com ([2a00:1450:4864:20::441]:33401)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1iunCx-0005ek-RX; Thu, 23 Jan 2020 19:52:24 -0500
-Received: by mail-wr1-x441.google.com with SMTP id t2so90970wrr.1;
- Thu, 23 Jan 2020 16:52:23 -0800 (PST)
+ id 1iunD0-0005ih-0u; Thu, 23 Jan 2020 19:52:26 -0500
+Received: by mail-wr1-x441.google.com with SMTP id b6so93268wrq.0;
+ Thu, 23 Jan 2020 16:52:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=sLoFhPRTsuQW0YnaNUatCV3smyi2QhBP5JRij1kuWcA=;
- b=QdUtDPZi7Mq5jPI3IMXwK/f302XolF+ZplVhL1Pa0Sz0m09yfm98Ke55GvfmSIbnSV
- gbeBa6BGaCzqUVVzlauoUa51/eMeqw0h7Zs9tT0H6wUJK1bk1fJ60W2avNb0chl/w4SJ
- DdJ6hXs+cJzCjxFkENsaFyeqL1GKfrymblDyTzZ7diush5/OoqN/mYfxQS6XdqlyG5QE
- U/OfwQb99R4WQ5lp2Z1Z0hYx20niFp3Rg2pGbK3O5YPivCKqQYV2a2v81ng+VHPIGbHE
- Gxe06DIu9940venz9yw/hjq/H653tLQECpUIB3OdUoAebLDAiK+f7nZekcK0tBvev5nh
- aLIQ==
+ bh=R/V3ZxLfy/2R74Pz6NGLpeVPUx20O4nw7Zu8GDJsXKQ=;
+ b=IYu+2GNm1smweyx+X98CjqnJ3S4SzAqZWw3cb0gpjbCAPJt32isR2vs3ED0P52Vv5Z
+ U3zlsKB/+YT9+GtQ5+Ho9iR10bCEh4oyUxCHJiAQvFipenNzHBn0XeWO+8fhKfcjh6Lj
+ zAWdiIVQikjyRhsVwTajluZwZ5XjL9TENVQuCWM3THl3nRV8kAgd+gT4/Iuk8fYGqFBK
+ DI7hDbHTYrYR7IdU0o8NvWhyF9Z2Cg1c0g4tnRDVVQq9TC9udfN7u/1uZoKUa7QzgBbC
+ 2e1kXOIKi4dbHQ25pPYEGQk3jAalha20bTOyJrjZdKod2vkcEjbtJuxbIb+LHr0GYfp6
+ tb/w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
  :in-reply-to:references:mime-version:content-transfer-encoding;
- bh=sLoFhPRTsuQW0YnaNUatCV3smyi2QhBP5JRij1kuWcA=;
- b=Sgg7bHUOPelb+ZiR1XGQoE6W2mYJBckomB2o12z4kqazPzstK5ARriwy1brfwRH1OV
- lmv1o+Rz7Mu5jtgVt0HjNJVQGL1RFIHrg5K7ReO+H7ebKS2HrJj3ZCi3qyEnG8VY6fMU
- 2H738In/apsaoLQvDAQw6hT/B4R++JHIc/zFq4nR0W2fquLGTjMX20jZZzVa43iEvliZ
- 6sEfjSrmWNFHoo7UGxrwCL3xqlJw48o9zJCmOKEHOahxsWzovQBVn/AjqUqffvl0b9Cw
- j9IgQHnUp39MmzFtS7XZJvG2V6GAhs454Eh1/yXog9u+BMEz6A46f/yXQOmRM1up/Nsz
- SPWw==
-X-Gm-Message-State: APjAAAWogbDkJJSQVys5sROeeA7Trx1Rn3ofsfeAXKPCsxcSK6HAMiwF
- KPhEO25asE+0jm6aVC+9bQ0HdpHL
-X-Google-Smtp-Source: APXvYqzCGtGqYfoPHmtcJYNvZ7E8CpUJ0DeRZhcvTLFIaBr/0ohOtOq+5hq2t3LhnlXlRbW+sT2hNA==
-X-Received: by 2002:a5d:6652:: with SMTP id f18mr893224wrw.246.1579827142619; 
- Thu, 23 Jan 2020 16:52:22 -0800 (PST)
+ bh=R/V3ZxLfy/2R74Pz6NGLpeVPUx20O4nw7Zu8GDJsXKQ=;
+ b=oAE5gyjZyUsvblmBZ/WFCCoWlGDx5doVaBDTfNmgVCZi+0+g8IqW0eD+3NdFCjDp/R
+ byyXPAsDkyuLMhuq7GSSiJoTLzrivpO3EXRx4aPLJDy32/hUXc6J/Vf+4OEZbjyDHp/c
+ ub/uluPRUh+xozZo0tUA+OByrWxKZoLejWBQ/MZJvbcBclHTTnRvvTpf2UQgdcY+++cX
+ nYrKewNa9PvBylNZ8egl7Y+uBCKCnAkyNTPdUrvzp0q8N/EE0eUtM4luldBB/YVoaFwt
+ eLLTnrC80HsfHts8ViYTFMXUwI40JQoVuYpDMlpuALwd7wFJY6KemPfJFILUe513SS4P
+ ez5g==
+X-Gm-Message-State: APjAAAWmZWCbyeA3D2e4TyCrU6a9w/oKDpiQDVbnbxPTzWmCJIHfziqd
+ lo4rkB7UyonvksnloU1TZdeD0B+0
+X-Google-Smtp-Source: APXvYqwqpcr0Tq7ZvKG6JB4a1F2M5IOToBnfXxqe9F1wsXeX9lgVh+q4ulGGbOjaxxO+WWAoIm3Njg==
+X-Received: by 2002:adf:f58a:: with SMTP id f10mr896473wro.105.1579827144799; 
+ Thu, 23 Jan 2020 16:52:24 -0800 (PST)
 Received: from x1w.redhat.com (113.red-83-57-172.dynamicip.rima-tde.net.
  [83.57.172.113])
- by smtp.gmail.com with ESMTPSA id s139sm4598271wme.35.2020.01.23.16.52.20
+ by smtp.gmail.com with ESMTPSA id s139sm4598271wme.35.2020.01.23.16.52.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 23 Jan 2020 16:52:22 -0800 (PST)
+ Thu, 23 Jan 2020 16:52:24 -0800 (PST)
 Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
  <philippe.mathieu.daude@gmail.com>
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
@@ -65,10 +65,10 @@ Cc: Alistair Francis <Alistair.Francis@wdc.com>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
  dovgaluk@ispras.ru, Eduardo Habkost <ehabkost@redhat.com>,
  Palmer Dabbelt <palmer@dabbelt.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
-Subject: [PATCH rc2 21/25] hw/avr: Add some Arduino boards
-Date: Fri, 24 Jan 2020 01:51:27 +0100
-Message-Id: <20200124005131.16276-22-f4bug@amsat.org>
+ Aleksandar Markovic <amarkovic@wavecomp.com>
+Subject: [PATCH rc2 22/25] target/avr: Update build system
+Date: Fri, 24 Jan 2020 01:51:28 +0100
+Message-Id: <20200124005131.16276-23-f4bug@amsat.org>
 X-Mailer: git-send-email 2.21.1
 In-Reply-To: <20200124005131.16276-1-f4bug@amsat.org>
 References: <20200124005131.16276-1-f4bug@amsat.org>
@@ -90,230 +90,101 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Jan 2020 00:52:31 -0000
+X-List-Received-Date: Fri, 24 Jan 2020 00:52:32 -0000
 
-Arduino boards are build with AVR chipsets.
-Add some of the popular boards:
+From: Michael Rolnik <mrolnik@gmail.com>
 
-- Arduino Duemilanove
-- Arduino Uno
-- Arduino Mega
+Make AVR support buildable
 
-For more information:
-  https://www.arduino.cc/en/Main/Products
-  https://store.arduino.cc/arduino-genuino/most-popular
-
-Reviewed-by: Igor Mammedov <imammedo@redhat.com>
-Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
-Message-Id: <20200120220107.17825-15-f4bug@amsat.org>
+Signed-off-by: Michael Rolnik <mrolnik@gmail.com>
+Tested-by: Philippe Mathieu-Daudé <philmd@redhat.com>
+Reviewed-by: Aleksandar Markovic <amarkovic@wavecomp.com>
+Message-Id: <20200118191416.19934-19-mrolnik@gmail.com>
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
-rc2:
-- Use avr_load_firmware (Aleksandar)
-- No default machine on AVR (Richard)
-- Add entry in MAINTAINERS (Michael is still the maintainer of hw/avr/)
----
- hw/avr/arduino.c     | 151 +++++++++++++++++++++++++++++++++++++++++++
- MAINTAINERS          |   6 ++
- hw/avr/Kconfig       |   4 ++
- hw/avr/Makefile.objs |   1 +
- 4 files changed, 162 insertions(+)
- create mode 100644 hw/avr/arduino.c
+ configure                       |  7 +++++++
+ default-configs/avr-softmmu.mak |  5 +++++
+ target/avr/Makefile.objs        | 34 +++++++++++++++++++++++++++++++++
+ 3 files changed, 46 insertions(+)
+ create mode 100644 default-configs/avr-softmmu.mak
+ create mode 100644 target/avr/Makefile.objs
 
-diff --git a/hw/avr/arduino.c b/hw/avr/arduino.c
+diff --git a/configure b/configure
+index 557e4382ea..94e79ca634 100755
+--- a/configure
++++ b/configure
+@@ -7612,6 +7612,10 @@ case "$target_name" in
+     mttcg="yes"
+     gdb_xml_files="aarch64-core.xml aarch64-fpu.xml arm-core.xml arm-vfp.xml arm-vfp3.xml arm-neon.xml"
+   ;;
++  avr)
++    gdb_xml_files="avr-cpu.xml"
++    target_compiler=$cross_cc_avr
++  ;;
+   cris)
+   ;;
+   hppa)
+@@ -7831,6 +7835,9 @@ for i in $ARCH $TARGET_BASE_ARCH ; do
+       disas_config "ARM_A64"
+     fi
+   ;;
++  avr)
++    disas_config "AVR"
++  ;;
+   cris)
+     disas_config "CRIS"
+   ;;
+diff --git a/default-configs/avr-softmmu.mak b/default-configs/avr-softmmu.mak
 new file mode 100644
-index 0000000000..2fb2e96ffe
+index 0000000000..80218add98
 --- /dev/null
-+++ b/hw/avr/arduino.c
-@@ -0,0 +1,151 @@
-+/*
-+ * QEMU Arduino boards
-+ *
-+ * Copyright (c) 2019 Philippe Mathieu-Daudé
-+ *
-+ * This work is licensed under the terms of the GNU GPLv2 or later.
-+ * See the COPYING file in the top-level directory.
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ */
++++ b/default-configs/avr-softmmu.mak
+@@ -0,0 +1,5 @@
++# Default configuration for avr-softmmu
 +
-+/* TODO: Implement the use of EXTRAM */
++# Boards:
++#
++CONFIG_ARDUINO=y
+diff --git a/target/avr/Makefile.objs b/target/avr/Makefile.objs
+new file mode 100644
+index 0000000000..7523e0c6e2
+--- /dev/null
++++ b/target/avr/Makefile.objs
+@@ -0,0 +1,34 @@
++#
++#  QEMU AVR CPU
++#
++#  Copyright (c) 2019 Michael Rolnik
++#
++#  This library is free software; you can redistribute it and/or
++#  modify it under the terms of the GNU Lesser General Public
++#  License as published by the Free Software Foundation; either
++#  version 2.1 of the License, or (at your option) any later version.
++#
++#  This library is distributed in the hope that it will be useful,
++#  but WITHOUT ANY WARRANTY; without even the implied warranty of
++#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++#  Lesser General Public License for more details.
++#
++#  You should have received a copy of the GNU Lesser General Public
++#  License along with this library; if not, see
++#  <http://www.gnu.org/licenses/lgpl-2.1.html>
++#
 +
-+#include "qemu/osdep.h"
-+#include "qapi/error.h"
-+#include "hw/boards.h"
-+#include "atmel_atmega.h"
-+#include "boot.h"
++DECODETREE = $(SRC_PATH)/scripts/decodetree.py
++decode-y = $(SRC_PATH)/target/avr/insn.decode
 +
-+typedef struct ArduinoMachineState {
-+    /*< private >*/
-+    MachineState parent_obj;
-+    /*< public >*/
-+    AtmegaMcuState mcu;
-+} ArduinoMachineState;
++target/avr/decode_insn.inc.c: $(decode-y) $(DECODETREE)
++	$(call quiet-command, \
++	  $(PYTHON) $(DECODETREE) -o $@ --decode decode_insn --insnwidth 16 $<, \
++	  "GEN", $(TARGET_DIR)$@)
 +
-+typedef struct ArduinoMachineClass {
-+    /*< private >*/
-+    MachineClass parent_class;
-+    /*< public >*/
-+    const char *mcu_type;
-+    uint64_t xtal_hz;
-+} ArduinoMachineClass;
++target/avr/translate.o: target/avr/decode_insn.inc.c
 +
-+#define TYPE_ARDUINO_MACHINE \
-+        MACHINE_TYPE_NAME("arduino")
-+#define ARDUINO_MACHINE(obj) \
-+        OBJECT_CHECK(ArduinoMachineState, (obj), TYPE_ARDUINO_MACHINE)
-+#define ARDUINO_MACHINE_CLASS(klass) \
-+        OBJECT_CLASS_CHECK(ArduinoMachineClass, (klass), TYPE_ARDUINO_MACHINE)
-+#define ARDUINO_MACHINE_GET_CLASS(obj) \
-+        OBJECT_GET_CLASS(ArduinoMachineClass, (obj), TYPE_ARDUINO_MACHINE)
-+
-+static void arduino_machine_init(MachineState *machine)
-+{
-+    ArduinoMachineClass *amc = ARDUINO_MACHINE_GET_CLASS(machine);
-+    ArduinoMachineState *ams = ARDUINO_MACHINE(machine);
-+
-+    sysbus_init_child_obj(OBJECT(machine), "mcu", &ams->mcu, sizeof(ams->mcu),
-+                          amc->mcu_type);
-+    object_property_set_uint(OBJECT(&ams->mcu), amc->xtal_hz,
-+                             "xtal-frequency-hz", &error_abort);
-+    object_property_set_bool(OBJECT(&ams->mcu), true, "realized",
-+                             &error_abort);
-+
-+    if (machine->firmware) {
-+        if (!avr_load_firmware(&ams->mcu.cpu, machine,
-+                               &ams->mcu.flash, machine->firmware)) {
-+            exit(1);
-+        }
-+    }
-+}
-+
-+static void arduino_machine_class_init(ObjectClass *oc, void *data)
-+{
-+    MachineClass *mc = MACHINE_CLASS(oc);
-+
-+    mc->init = arduino_machine_init;
-+    mc->default_cpus = 1;
-+    mc->min_cpus = mc->default_cpus;
-+    mc->max_cpus = mc->default_cpus;
-+    mc->no_floppy = 1;
-+    mc->no_cdrom = 1;
-+    mc->no_parallel = 1;
-+}
-+
-+static void arduino_duemilanove_class_init(ObjectClass *oc, void *data)
-+{
-+    MachineClass *mc = MACHINE_CLASS(oc);
-+    ArduinoMachineClass *amc = ARDUINO_MACHINE_CLASS(oc);
-+
-+    /* https://www.arduino.cc/en/Main/ArduinoBoardDuemilanove */
-+    mc->desc        = "Arduino Duemilanove (ATmega168)",
-+    mc->alias       = "2009";
-+    amc->mcu_type   = TYPE_ATMEGA168_MCU;
-+    amc->xtal_hz    = 16 * 1000 * 1000;
-+};
-+
-+static void arduino_uno_class_init(ObjectClass *oc, void *data)
-+{
-+    MachineClass *mc = MACHINE_CLASS(oc);
-+    ArduinoMachineClass *amc = ARDUINO_MACHINE_CLASS(oc);
-+
-+    /* https://store.arduino.cc/arduino-uno-rev3 */
-+    mc->desc        = "Arduino UNO (ATmega328P)";
-+    mc->alias       = "uno";
-+    amc->mcu_type   = TYPE_ATMEGA328_MCU;
-+    amc->xtal_hz    = 16 * 1000 * 1000;
-+};
-+
-+static void arduino_mega_class_init(ObjectClass *oc, void *data)
-+{
-+    MachineClass *mc = MACHINE_CLASS(oc);
-+    ArduinoMachineClass *amc = ARDUINO_MACHINE_CLASS(oc);
-+
-+    /* https://www.arduino.cc/en/Main/ArduinoBoardMega */
-+    mc->desc        = "Arduino Mega (ATmega1280)";
-+    mc->alias       = "mega";
-+    amc->mcu_type   = TYPE_ATMEGA1280_MCU;
-+    amc->xtal_hz    = 16 * 1000 * 1000;
-+};
-+
-+static void arduino_mega2560_class_init(ObjectClass *oc, void *data)
-+{
-+    MachineClass *mc = MACHINE_CLASS(oc);
-+    ArduinoMachineClass *amc = ARDUINO_MACHINE_CLASS(oc);
-+
-+    /* https://store.arduino.cc/arduino-mega-2560-rev3 */
-+    mc->desc        = "Arduino Mega 2560 (ATmega2560)";
-+    mc->alias       = "mega2560";
-+    amc->mcu_type   = TYPE_ATMEGA2560_MCU;
-+    amc->xtal_hz    = 16 * 1000 * 1000; /* CSTCE16M0V53-R0 */
-+};
-+
-+static const TypeInfo arduino_machine_types[] = {
-+    {
-+        .name          = MACHINE_TYPE_NAME("arduino-duemilanove"),
-+        .parent        = TYPE_ARDUINO_MACHINE,
-+        .class_init    = arduino_duemilanove_class_init,
-+    }, {
-+        .name          = MACHINE_TYPE_NAME("arduino-uno"),
-+        .parent        = TYPE_ARDUINO_MACHINE,
-+        .class_init    = arduino_uno_class_init,
-+    }, {
-+        .name          = MACHINE_TYPE_NAME("arduino-mega"),
-+        .parent        = TYPE_ARDUINO_MACHINE,
-+        .class_init    = arduino_mega_class_init,
-+    }, {
-+        .name          = MACHINE_TYPE_NAME("arduino-mega-2560-v3"),
-+        .parent        = TYPE_ARDUINO_MACHINE,
-+        .class_init    = arduino_mega2560_class_init,
-+    }, {
-+        .name           = TYPE_ARDUINO_MACHINE,
-+        .parent         = TYPE_MACHINE,
-+        .instance_size  = sizeof(ArduinoMachineState),
-+        .class_size     = sizeof(ArduinoMachineClass),
-+        .class_init     = arduino_machine_class_init,
-+        .abstract       = true,
-+    }
-+};
-+
-+DEFINE_TYPES(arduino_machine_types)
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 066515ac8e..07c8912489 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -904,6 +904,12 @@ F: hw/misc/atmel_power.c
- F: include/hw/misc/atmel_power.h
- F: tests/acceptance/machine_avr6.py
- 
-+Arduino
-+M: Philippe Mathieu-Daudé <f4bug@amsat.org>
-+S: Maintained
-+F: hw/avr/arduino.c
-+F: hw/avr/atmel_atmega.*
-+
- CRIS Machines
- -------------
- Axis Dev88
-diff --git a/hw/avr/Kconfig b/hw/avr/Kconfig
-index da3b10afec..59d9649d27 100644
---- a/hw/avr/Kconfig
-+++ b/hw/avr/Kconfig
-@@ -3,3 +3,7 @@ config ATMEL_ATMEGA_MCU
-     select ATMEL_TIMER16
-     select ATMEL_USART
-     select ATMEL_POWER
-+
-+config ARDUINO
-+    select ATMEL_ATMEGA_MCU
-+    select UNIMP
-diff --git a/hw/avr/Makefile.objs b/hw/avr/Makefile.objs
-index 1f73fd5469..c8a131923c 100644
---- a/hw/avr/Makefile.objs
-+++ b/hw/avr/Makefile.objs
-@@ -1,2 +1,3 @@
- obj-y += boot.o
- obj-$(CONFIG_ATMEL_ATMEGA_MCU) += atmel_atmega.o
-+obj-$(CONFIG_ARDUINO) += arduino.o
++obj-y += translate.o cpu.o helper.o
++obj-y += gdbstub.o
++obj-y += disas.o
++obj-$(CONFIG_SOFTMMU) += machine.o
 -- 
 2.21.1
 
