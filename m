@@ -1,78 +1,119 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iv0JD-0001TC-9a
+	id 1iv0JD-0001Tj-F5
 	for mharc-qemu-riscv@gnu.org; Fri, 24 Jan 2020 09:51:43 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37845)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:40400)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <mrolnik@gmail.com>) id 1iuxVF-0004sc-0Z
- for qemu-riscv@nongnu.org; Fri, 24 Jan 2020 06:51:58 -0500
+ (envelope-from <S.E.Harris@kent.ac.uk>) id 1iuxjy-00020g-7C
+ for qemu-riscv@nongnu.org; Fri, 24 Jan 2020 07:07:11 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <mrolnik@gmail.com>) id 1iuxVD-0007j8-Cz
- for qemu-riscv@nongnu.org; Fri, 24 Jan 2020 06:51:56 -0500
-Received: from mail-qk1-x742.google.com ([2607:f8b0:4864:20::742]:45968)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <mrolnik@gmail.com>)
- id 1iuxUt-0007IX-Po; Fri, 24 Jan 2020 06:51:35 -0500
-Received: by mail-qk1-x742.google.com with SMTP id x1so1670774qkl.12;
- Fri, 24 Jan 2020 03:51:35 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=GrVMXjfrcr2eF7DXVXKBVq1WpBAlVvsTbTzoO22R6VA=;
- b=JRHqhCW9MeRS1vU8M8vpEr7qo/g9HCDyJxVPsl1UOi9SLiDmAVgh6T6cMqY9/ygX7a
- 4EFZyFyN+BfqKn8Mkwlenq/4KkcZXMRSDfDm6Epm2N0lX0b0/gEt0nLej4iIWr5eWFF7
- pkG3gCHdfbku8ysvp/StRsrmwP4vCKHco4QKCoSkXI9V/jMQBJJpwU37amDFNul7Awbh
- JOOhEUjkOZKYgjFPOJP7gjeZrsLr76n39Qn5lAv3Ge3CXe8PNaSxQHQJ8/rObFbYmCmX
- kQDV9ArSps2QNPYhK9+dLZFMW0oaHsRqihaM7mYUubWW2hC0AN3iZIQgFbaBeDqRQNKU
- R0+g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=GrVMXjfrcr2eF7DXVXKBVq1WpBAlVvsTbTzoO22R6VA=;
- b=e9wjJERCQdNHrFnx6EPx9iTYzXfWXZ8wDdc2qqMt9cKPZITgCnefZ3oHebvsMfTdtm
- zCsI8Kr5lF5Li6i4cY+3nL6gnPXpFBlq4QkrUCT2fD51JxARf+p5rb60CmLgbpxZYBi0
- I7N+fR5IQ2dMTM4CAwoyfXvf6XC2VyQpfIfXRN850aYptH2tTrGDf+vFxcbFctJy08mz
- ge20MSSkPOViz0Ewrj99FGi0IvXEheX/04oK1iy1t7eWcyl+ZWu++59C/p/JykBFqahD
- nByqZaEVtcx6Z5l5nHDjZxFT0td6vo/0v63hztXV95jjxgtCIwxlQsP6jVDDGraU0n0m
- cN1A==
-X-Gm-Message-State: APjAAAUIwaSnfp2c8BF5fqyVQPJol/g4k4MEA+E8n2af3ZCfd7/hMI3Y
- KBqcLhCDR7UPBFRgZSInFaH3hdwebWGLDRKhkpM=
-X-Google-Smtp-Source: APXvYqxQtpvIK1sSJsGRhgreUN5Lc+h3/GxiFEFigO5h8FjtJFQ8dYbpwwJ+Qa/SAZnt6HOrbmOAUz+I772vpfNhHds=
-X-Received: by 2002:ae9:dc85:: with SMTP id q127mr2091509qkf.460.1579866694568; 
- Fri, 24 Jan 2020 03:51:34 -0800 (PST)
-MIME-Version: 1.0
+ (envelope-from <S.E.Harris@kent.ac.uk>) id 1iuxjx-0007eW-2K
+ for qemu-riscv@nongnu.org; Fri, 24 Jan 2020 07:07:10 -0500
+Received: from mail-eopbgr150070.outbound.protection.outlook.com
+ ([40.107.15.70]:24448 helo=EUR01-DB5-obe.outbound.protection.outlook.com)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <S.E.Harris@kent.ac.uk>)
+ id 1iuxju-0007ZX-3p; Fri, 24 Jan 2020 07:07:06 -0500
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=Yg3fW1Zs7sdwKW0pVjZDhMk4q0FF0BhUk6rIC5/zfCWIoT0e5v0ChVkfSaeW4wza42I3RNiidhcX48KQIqzAWHzxsS4Z5zRekhlDa3qwCI7ov6wt3mYNgzoGdmFtxpU1wwfHZxZXxvwLHVVB/ulIpDxB+caOpRvdwsncIElJFGvanrXgsMrGDxATI2bNRsqvXcVeyD0Or5Dch1Na5t4hD4oguTnu+hoOytfepMDb9tNM76UTPe8KTG+dNiEAnh5s86jrMlPoDkMZ7GzC4pWEwqtYQv4p93ntZqhyCGbmjKQIRwebfnZsXXvfkGjO/WYG18dUUCQt0PDNDNu3PldiSg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=yI0mltqYSISy/I024hlvmGm/UPqF0z6LfE11Hx65y+w=;
+ b=WOAkEO6K4d5/XinSPo+bWyAaUxJCC62Br2IVbl1YGuYiWQ+5fnUHGm5cuF39BxfBZapgo1SZkaTOkUUwh0CLEAIr4W0JEQF9/rZcVGT87P55n3uM2FIAFdNryP+nFiDNY83fheQpbmyxwpb9YEN99mOCal4GtHvpA+YDY4QmyLAJP+Xl3dq27SqTgbII/zzTUcnF4+aRdP4WghxGlft/bF2Dxoev9dIRayT2RVSVgUuyUHEFKKqNcTpE5on4wJR+jg/fu3ibMQm7BVVCa2GRdwtC7yGQtD690VyH3A9x/YbvU8IizHRIR9Jnd/HN7MbnbhyMx/URknervnH7W0n3iQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=kent.ac.uk; dmarc=pass action=none header.from=kent.ac.uk;
+ dkim=pass header.d=kent.ac.uk; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=livekentac.onmicrosoft.com; s=selector2-livekentac-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=yI0mltqYSISy/I024hlvmGm/UPqF0z6LfE11Hx65y+w=;
+ b=QdpYmtYJHKUH0cUdxqwrHq54cZDKN2rffZNchAAX1n4LusCFvHIgLphrsWN0tGFY6A0c9NmFQY8+lJaEsSBOcl1EIrycLM9/QuGdac98xQwnJv9eNAEcIzAUwJNGB+9EistY2UMQAJa1sCwiqzoHc4SNQYhmv5jl1JOSlsFtqcs=
+Received: from DB7PR01MB4348.eurprd01.prod.exchangelabs.com (52.135.135.22) by
+ DB7PR01MB5180.eurprd01.prod.exchangelabs.com (20.178.107.30) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.2644.19; Fri, 24 Jan 2020 12:07:02 +0000
+Received: from DB7PR01MB4348.eurprd01.prod.exchangelabs.com
+ ([fe80::8072:b37a:57c5:7d6a]) by DB7PR01MB4348.eurprd01.prod.exchangelabs.com
+ ([fe80::8072:b37a:57c5:7d6a%7]) with mapi id 15.20.2665.017; Fri, 24 Jan 2020
+ 12:07:02 +0000
+Received: from cadance (129.12.216.170) by
+ LO2P265CA0092.GBRP265.PROD.OUTLOOK.COM (2603:10a6:600:8::32) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.2623.10 via Frontend Transport; Fri, 24 Jan 2020 12:07:01 +0000
+From: Sarah Harris <seh53@kent.ac.uk>
+To: =?iso-8859-1?Q?Philippe_Mathieu-Daud=E9?= <philmd@redhat.com>
+CC: =?iso-8859-1?Q?Alex_Benn=E9e?= <alex.bennee@linaro.org>,
+ =?iso-8859-1?Q?Philippe_Mathieu-Daud=E9?= <f4bug@amsat.org>, S.Harris
+ <S.E.Harris@kent.ac.uk>, E.Robbins <E.J.C.Robbins@kent.ac.uk>,
+ "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, "mrolnik@gmail.com"
+ <mrolnik@gmail.com>, "richard.henderson@linaro.org"
+ <richard.henderson@linaro.org>, "me@xcancerberox.com.ar"
+ <me@xcancerberox.com.ar>, Alistair Francis <Alistair.Francis@wdc.com>, Paolo
+ Bonzini <pbonzini@redhat.com>, "thuth@redhat.com" <thuth@redhat.com>,
+ "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>, Bastian Koppelmann
+ <kbastian@mail.uni-paderborn.de>, "imammedo@redhat.com"
+ <imammedo@redhat.com>, Markus Armbruster <armbru@redhat.com>, Laurent Vivier
+ <lvivier@redhat.com>, Fam Zheng <fam@euphon.net>, Marcel Apfelbaum
+ <marcel.apfelbaum@gmail.com>, Eric Blake <eblake@redhat.com>, Sagar
+ Karandikar <sagark@eecs.berkeley.edu>, "aleksandar.m.mail@gmail.com"
+ <aleksandar.m.mail@gmail.com>, =?iso-8859-1?Q?Marc-Andr=E9_Lureau?=
+ <marcandre.lureau@redhat.com>, "dovgaluk@ispras.ru" <dovgaluk@ispras.ru>,
+ Eduardo Habkost <ehabkost@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>
+Subject: Re: [PATCH rc2 12/25] hw/timer: Add limited support for Atmel 16 bit
+ timer peripheral
+Thread-Topic: [PATCH rc2 12/25] hw/timer: Add limited support for Atmel 16 bit
+ timer peripheral
+Thread-Index: AQHV0lCDRBxm0GoaUk2I8zLlB2gHJ6f5oUaAgAACfICAABVHAA==
+Date: Fri, 24 Jan 2020 12:07:02 +0000
+Message-ID: <20200124120722.705ae8bac5cfc939dae2db5f@kent.ac.uk>
 References: <20200124005131.16276-1-f4bug@amsat.org>
- <20200124005131.16276-15-f4bug@amsat.org>
- <50348fa2-0fda-78fd-ad64-f7cc94d6d158@redhat.com>
-In-Reply-To: <50348fa2-0fda-78fd-ad64-f7cc94d6d158@redhat.com>
-From: Michael Rolnik <mrolnik@gmail.com>
-Date: Fri, 24 Jan 2020 13:50:52 +0200
-Message-ID: <CAK4993g9pssL5ikSCHxbdnPDoxiwiGYeOenYOjRvtBgXU2H0Rg@mail.gmail.com>
-Subject: Re: [PATCH rc2 14/25] target/avr: Add section about AVR into QEMU
- documentation
-To: Thomas Huth <thuth@redhat.com>
-Cc: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>, 
- QEMU Developers <qemu-devel@nongnu.org>,
- Richard Henderson <richard.henderson@linaro.org>, 
- Joaquin de Andres <me@xcancerberox.com.ar>,
- Alistair Francis <Alistair.Francis@wdc.com>, 
- Paolo Bonzini <pbonzini@redhat.com>, Sarah Harris <S.E.Harris@kent.ac.uk>,
- qemu-riscv@nongnu.org, 
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Igor Mammedov <imammedo@redhat.com>, 
- Markus Armbruster <armbru@redhat.com>, Laurent Vivier <lvivier@redhat.com>,
- Fam Zheng <fam@euphon.net>, 
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, Eric Blake <eblake@redhat.com>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Aleksandar Markovic <aleksandar.m.mail@gmail.com>, 
- =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>, 
- =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>, 
- Pavel Dovgalyuk <dovgaluk@ispras.ru>, Eduardo Habkost <ehabkost@redhat.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>
-Content-Type: multipart/alternative; boundary="0000000000001f4f71059ce16156"
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2607:f8b0:4864:20::742
+ <20200124005131.16276-13-f4bug@amsat.org>	<875zh1yw38.fsf@linaro.org>
+ <790c5181-c4b0-ea7b-f4e4-07bacae220b2@redhat.com>
+In-Reply-To: <790c5181-c4b0-ea7b-f4e4-07bacae220b2@redhat.com>
+Accept-Language: en-GB, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-clientproxiedby: LO2P265CA0092.GBRP265.PROD.OUTLOOK.COM
+ (2603:10a6:600:8::32) To DB7PR01MB4348.eurprd01.prod.exchangelabs.com
+ (2603:10a6:5:2f::22)
+authentication-results: spf=none (sender IP is )
+ smtp.mailfrom=S.E.Harris@kent.ac.uk; 
+x-ms-exchange-messagesentrepresentingtype: 1
+x-mailer: Sylpheed 3.7.0 (GTK+ 2.24.32; x86_64-unknown-linux-gnu)
+x-originating-ip: [129.12.216.170]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: fc000f6d-c802-44d1-7872-08d7a0c5eba3
+x-ms-traffictypediagnostic: DB7PR01MB5180:
+x-ms-exchange-transport-forked: True
+x-microsoft-antispam-prvs: <DB7PR01MB518050F1F06F88E40849206BF70E0@DB7PR01MB5180.eurprd01.prod.exchangelabs.com>
+x-ms-oob-tlc-oobclassifiers: OLM:7691;
+x-forefront-prvs: 02929ECF07
+x-forefront-antispam-report: SFV:NSPM;
+ SFS:(10009020)(4636009)(346002)(376002)(136003)(39860400002)(366004)(396003)(189003)(199004)(36756003)(52116002)(64756008)(66476007)(66556008)(53546011)(66946007)(6496006)(71200400001)(66446008)(786003)(16526019)(7416002)(316002)(26005)(186003)(54906003)(2616005)(956004)(8936002)(81166006)(6486002)(8676002)(81156014)(4326008)(1076003)(2906002)(478600001)(6916009)(5660300002);
+ DIR:OUT; SFP:1101; SCL:1; SRVR:DB7PR01MB5180;
+ H:DB7PR01MB4348.eurprd01.prod.exchangelabs.com; FPR:; SPF:None; LANG:en;
+ PTR:InfoNoRecords; MX:1; A:1; 
+received-spf: None (protection.outlook.com: kent.ac.uk does not designate
+ permitted sender hosts)
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: 4C1aQD9gUShEJuTmBDRUMvsD6HZlt4gCliqcXtExvrjqgXLd+PPZkaB79cRb/ywrekv+/V4c8BTjeE6k41CuGHzvuPLGWUoZ5iykFW+tYRAE27GgILpdlTHoHRxu/jzhIulcCeAImXBF9UTXQyBWTj4WiNKlWWuMRn0LWIXdg5DU34kmAOw0JZZxV9URt3xpz6txenSLXbc3SodPiwHEM5ORvJjkuUmrxCb+ga1/pFLgESX3lE9Q8jjEFYf/q5yezxHEgjeV9bvZzxk17CSn/vmtKgX8DFkpf8RkZapTCWF0bLEv9k4VydMO6QUXoc1yKaLJ0dB1039otKtUrP1wowBnPh9XXiwqJFZPYMqqfpnk5Vtmh5bYsfj0WN5EsnlYJPtM7Rl/3qFJxqo0ErSPsCcQgC1HGQlqFATjYCnOMmyK+bgnKnEq6RdAlgDba8/a
+Content-Type: text/plain; charset="iso-8859-1"
+Content-ID: <EC46ED32E308594085092F62ADCA09F7@eurprd01.prod.exchangelabs.com>
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+X-OriginatorOrg: kent.ac.uk
+X-MS-Exchange-CrossTenant-Network-Message-Id: fc000f6d-c802-44d1-7872-08d7a0c5eba3
+X-MS-Exchange-CrossTenant-originalarrivaltime: 24 Jan 2020 12:07:02.4513 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 51a9fa56-3f32-449a-a721-3e3f49aa5e9a
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: gmP9/GjTXVRE9oQhmj3aEtniZUUdyWPpNJaR9v3uzEYWvJaW79aFHLs9iD+64IpbDdmqV2xnQB4vXIfnxMZGZw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB7PR01MB5180
+X-detected-operating-system: by eggs.gnu.org: Windows 7 or 8 [fuzzy]
+X-Received-From: 40.107.15.70
 X-Mailman-Approved-At: Fri, 24 Jan 2020 09:51:40 -0500
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -85,245 +126,85 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Jan 2020 11:51:58 -0000
+X-List-Received-Date: Fri, 24 Jan 2020 12:07:11 -0000
 
---0000000000001f4f71059ce16156
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Hi,
 
-Hi Thomas.
+Do I understand correctly that you need Ed to email a "Signed-off-by: Ed Ro=
+bbins <email>" himself?
+Ed's cc'ed already, but I'll email him directly to make sure he's seen this=
+ discussion.
 
-I will fix it. thanks.
+Sarah
 
-Michael Rolnik
+On Fri, 24 Jan 2020 11:51:13 +0100
+Philippe Mathieu-Daud=E9 <philmd@redhat.com> wrote:
 
-On Fri, Jan 24, 2020 at 9:14 AM Thomas Huth <thuth@redhat.com> wrote:
-
-> On 24/01/2020 01.51, Philippe Mathieu-Daud=C3=A9 wrote:
-> > From: Michael Rolnik <mrolnik@gmail.com>
-> >
-> > Signed-off-by: Michael Rolnik <mrolnik@gmail.com>
-> > Message-Id: <20200118191416.19934-16-mrolnik@gmail.com>
-> > Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
-> > [PMD: Fixed typos]
-> > Signed-off-by: Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org>
-> > ---
-> > rc2: Fixed typos, s/sample/Arduino/, removed -serial section (thuth)
-> > ---
-> >  qemu-doc.texi | 51 +++++++++++++++++++++++++++++++++++++++++++++++++++
-> >  1 file changed, 51 insertions(+)
-> >
-> > diff --git a/qemu-doc.texi b/qemu-doc.texi
-> > index 39f950471f..89df1d325e 100644
-> > --- a/qemu-doc.texi
-> > +++ b/qemu-doc.texi
-> > @@ -1741,6 +1741,7 @@ differences are mentioned in the following
-> sections.
-> >  * Microblaze System emulator::
-> >  * SH4 System emulator::
-> >  * Xtensa System emulator::
-> > +* AVR System emulator::
-> >  @end menu
-> >
-> >  @node PowerPC System emulator
-> > @@ -2514,6 +2515,56 @@ so should only be used with trusted guest OS.
-> >
-> >  @c man end
-> >
-> > +@node AVR System emulator
-> > +@section AVR System emulator
-> > +@cindex system emulation (AVR)
-> > +
-> > +Use the executable @file{qemu-system-avr} to emulates a AVR 8 bit base=
+> Hello Sarah,
+>=20
+> On 1/24/20 11:42 AM, Alex Benn=E9e wrote:
+> >=20
+> > Philippe Mathieu-Daud=E9 <f4bug@amsat.org> writes:
+> >=20
+> >> From: Michael Rolnik <mrolnik@gmail.com>
+> >>
+> >> These were designed to facilitate testing but should provide enough
+> >> function to be useful in other contexts.  Only a subset of the functio=
+ns
+> >> of each peripheral is implemented, mainly due to the lack of a standar=
 d
-> machine
-> > +having one for the following cores: avr1, avr2, avr25, avr3, avr31,
-> avr35, avr4,
-> > +avr5, avr51, avr6, avrtiny, xmega2, xmega3, xmega4, xmega5, xmega6 and
-> xmega7.
-> > +
-> > +As for now it supports few Arduino boards for educational and testing
-> purposes.
-> > +These boards use a ATmega controller, which model is limited to USART =
-&
-> 16 bit
-> > +timer devices, enought to run FreeRTOS based applications (like this
-> @url{
-> https://github.com/seharris/qemu-avr-tests/blob/master/free-rtos/Demo/AVR=
-_ATMega2560_GCC/demo.elf,,demo
-> })
-> > +
-> > +Following are examples of possible usages, assuming program.elf is
-> compiled for
-> > +AVR cpu
-> > +@itemize
-> > +
-> > +@item Continuous non interrupted execution
-> > +@example
-> > +qemu-system-avr -kernel program.elf
-> > +@end example
-> > +
-> > +@item Continuous non interrupted execution with serial output into
-> telnet window
-> > +@example
-> > +qemu-system-avr -kernel program.elf -serial tcp::5678,server,nowait
-> -nographic
-> > +@end example
-> > +and then in another shell
-> > +@example
-> > +telnet localhost 5678
-> > +@end example
-> > +
-> > +@item Debugging wit GDB debugger
-> > +@example
-> > +qemu-system-avr -kernel program.elf -s -S
-> > +@end example
-> > +and then in another shell
-> > +@example
-> > +avr-gdb program.elf
-> > +@end example
-> > +and then within GDB shell
-> > +@example
-> > +target remote :1234
-> > +@end example
-> > +
-> > +@item Print out executed instructions
-> > +@example
-> > +qemu-system-avr -kernel program.elf -d in_asm
->
-> If you don't have a default board anymore, I think you need to list -M
-> here, too.
-> And didn't you mention that -kernel is not working anyway? Do you need
-> to replace it with -bios ?
->
->  Thomas
->
->
-
---=20
-Best Regards,
-Michael Rolnik
-
---0000000000001f4f71059ce16156
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Hi Thomas.<div><br></div><div>I will fix it. thanks.</div>=
-<div><br></div><div>Michael Rolnik</div></div><br><div class=3D"gmail_quote=
-"><div dir=3D"ltr" class=3D"gmail_attr">On Fri, Jan 24, 2020 at 9:14 AM Tho=
-mas Huth &lt;<a href=3D"mailto:thuth@redhat.com">thuth@redhat.com</a>&gt; w=
-rote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0p=
-x 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">On 24/01/2=
-020 01.51, Philippe Mathieu-Daud=C3=A9 wrote:<br>
-&gt; From: Michael Rolnik &lt;<a href=3D"mailto:mrolnik@gmail.com" target=
-=3D"_blank">mrolnik@gmail.com</a>&gt;<br>
-&gt; <br>
-&gt; Signed-off-by: Michael Rolnik &lt;<a href=3D"mailto:mrolnik@gmail.com"=
- target=3D"_blank">mrolnik@gmail.com</a>&gt;<br>
-&gt; Message-Id: &lt;<a href=3D"mailto:20200118191416.19934-16-mrolnik@gmai=
-l.com" target=3D"_blank">20200118191416.19934-16-mrolnik@gmail.com</a>&gt;<=
-br>
-&gt; Signed-off-by: Richard Henderson &lt;<a href=3D"mailto:richard.henders=
-on@linaro.org" target=3D"_blank">richard.henderson@linaro.org</a>&gt;<br>
-&gt; [PMD: Fixed typos]<br>
-&gt; Signed-off-by: Philippe Mathieu-Daud=C3=A9 &lt;<a href=3D"mailto:f4bug=
-@amsat.org" target=3D"_blank">f4bug@amsat.org</a>&gt;<br>
-&gt; ---<br>
-&gt; rc2: Fixed typos, s/sample/Arduino/, removed -serial section (thuth)<b=
-r>
-&gt; ---<br>
-&gt;=C2=A0 qemu-doc.texi | 51 +++++++++++++++++++++++++++++++++++++++++++++=
-++++++<br>
-&gt;=C2=A0 1 file changed, 51 insertions(+)<br>
-&gt; <br>
-&gt; diff --git a/qemu-doc.texi b/qemu-doc.texi<br>
-&gt; index 39f950471f..89df1d325e 100644<br>
-&gt; --- a/qemu-doc.texi<br>
-&gt; +++ b/qemu-doc.texi<br>
-&gt; @@ -1741,6 +1741,7 @@ differences are mentioned in the following secti=
-ons.<br>
-&gt;=C2=A0 * Microblaze System emulator::<br>
-&gt;=C2=A0 * SH4 System emulator::<br>
-&gt;=C2=A0 * Xtensa System emulator::<br>
-&gt; +* AVR System emulator::<br>
-&gt;=C2=A0 @end menu<br>
-&gt;=C2=A0 <br>
-&gt;=C2=A0 @node PowerPC System emulator<br>
-&gt; @@ -2514,6 +2515,56 @@ so should only be used with trusted guest OS.<b=
-r>
-&gt;=C2=A0 <br>
-&gt;=C2=A0 @c man end<br>
-&gt;=C2=A0 <br>
-&gt; +@node AVR System emulator<br>
-&gt; +@section AVR System emulator<br>
-&gt; +@cindex system emulation (AVR)<br>
-&gt; +<br>
-&gt; +Use the executable @file{qemu-system-avr} to emulates a AVR 8 bit bas=
-ed machine<br>
-&gt; +having one for the following cores: avr1, avr2, avr25, avr3, avr31, a=
-vr35, avr4,<br>
-&gt; +avr5, avr51, avr6, avrtiny, xmega2, xmega3, xmega4, xmega5, xmega6 an=
-d xmega7.<br>
-&gt; +<br>
-&gt; +As for now it supports few Arduino boards for educational and testing=
- purposes.<br>
-&gt; +These boards use a ATmega controller, which model is limited to USART=
- &amp; 16 bit<br>
-&gt; +timer devices, enought to run FreeRTOS based applications (like this =
-@url{<a href=3D"https://github.com/seharris/qemu-avr-tests/blob/master/free=
--rtos/Demo/AVR_ATMega2560_GCC/demo.elf,,demo" rel=3D"noreferrer" target=3D"=
-_blank">https://github.com/seharris/qemu-avr-tests/blob/master/free-rtos/De=
-mo/AVR_ATMega2560_GCC/demo.elf,,demo</a>})<br>
-&gt; +<br>
-&gt; +Following are examples of possible usages, assuming program.elf is co=
-mpiled for<br>
-&gt; +AVR cpu<br>
-&gt; +@itemize<br>
-&gt; +<br>
-&gt; +@item Continuous non interrupted execution<br>
-&gt; +@example<br>
-&gt; +qemu-system-avr -kernel program.elf<br>
-&gt; +@end example<br>
-&gt; +<br>
-&gt; +@item Continuous non interrupted execution with serial output into te=
-lnet window<br>
-&gt; +@example<br>
-&gt; +qemu-system-avr -kernel program.elf -serial tcp::5678,server,nowait -=
-nographic<br>
-&gt; +@end example<br>
-&gt; +and then in another shell<br>
-&gt; +@example<br>
-&gt; +telnet localhost 5678<br>
-&gt; +@end example<br>
-&gt; +<br>
-&gt; +@item Debugging wit GDB debugger<br>
-&gt; +@example<br>
-&gt; +qemu-system-avr -kernel program.elf -s -S<br>
-&gt; +@end example<br>
-&gt; +and then in another shell<br>
-&gt; +@example<br>
-&gt; +avr-gdb program.elf<br>
-&gt; +@end example<br>
-&gt; +and then within GDB shell<br>
-&gt; +@example<br>
-&gt; +target remote :1234<br>
-&gt; +@end example<br>
-&gt; +<br>
-&gt; +@item Print out executed instructions<br>
-&gt; +@example<br>
-&gt; +qemu-system-avr -kernel program.elf -d in_asm<br>
-<br>
-If you don&#39;t have a default board anymore, I think you need to list -M<=
-br>
-here, too.<br>
-And didn&#39;t you mention that -kernel is not working anyway? Do you need<=
-br>
-to replace it with -bios ?<br>
-<br>
-=C2=A0Thomas<br>
-<br>
-</blockquote></div><br clear=3D"all"><div><br></div>-- <br><div dir=3D"ltr"=
- class=3D"gmail_signature">Best Regards,<br>Michael Rolnik</div>
-
---0000000000001f4f71059ce16156--
+> >> way to handle electrical connections (like GPIO pins).
+> >>
+> >> Signed-off-by: Sarah Harris <S.E.Harris@kent.ac.uk>
+> >> Message-Id: <20200118191416.19934-13-mrolnik@gmail.com>
+> >> Signed-off-by: Philippe Mathieu-Daud=E9 <f4bug@amsat.org>
+> >> [rth: Squash info mtree fixes and a file rename from f4bug, which was:=
+]
+> >> Suggested-by: Aleksandar Markovic <aleksandar.m.mail@gmail.com>
+> >> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+> >> [PMD: Use qemu_log_mask(LOG_UNIMP), replace goto by return]
+> >> Signed-off-by: Philippe Mathieu-Daud=E9 <f4bug@amsat.org>
+> >> ---
+> > <snip>
+> >> --- /dev/null
+> >> +++ b/include/hw/timer/atmel_timer16.h
+> >> @@ -0,0 +1,94 @@
+> >> +/*
+> >> + * Atmel AVR 16 bit timer
+> >> + *
+> >> + * Copyright (c) 2018 University of Kent
+> >> + * Author: Ed Robbins
+> >=20
+> > No sign off from the author here?
+>=20
+> Hmmm I Sarah Harris's one, who is from the University of Kent, isn't it=20
+> enough? (I remember patched from Xilinx with Edgar S-o-b but from other=20
+> authors, Edgar vouched for Xilinx).
+>=20
+> Sarah, can you get Ed Signed-off-by?
+>=20
+> >> --- /dev/null
+> >> +++ b/hw/timer/atmel_timer16.c
+> >> @@ -0,0 +1,605 @@
+> > <snip>
+> >> +
+> >> +/* Helper macros */
+> >> +#define VAL16(l, h) ((h << 8) | l)
+> >> +#define DB_PRINT(fmt, args...) /* Nothing */
+> >> +/*#define DB_PRINT(fmt, args...) printf("%s: " fmt "\n", __func__, ##
+> >> args)*/
+> >=20
+> > Format strings are likely to bitrot. Either use a if (GATE) or
+> > tracepoints.
+>=20
+> Yes...
+>=20
+> > <snip>
+> >=20
+> > Otherwise:
+> >=20
+> > Reviewed-by: Alex Benn=E9e <alex.bennee@linaro.org>
+>=20
+> Thanks!
+>=20
 
