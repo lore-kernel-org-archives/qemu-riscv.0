@@ -1,82 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iuwgu-0005iA-Hh
-	for mharc-qemu-riscv@gnu.org; Fri, 24 Jan 2020 05:59:56 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:57363)
+	id 1iuyBO-0006xb-JA
+	for mharc-qemu-riscv@gnu.org; Fri, 24 Jan 2020 07:35:30 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:48045)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <alex.bennee@linaro.org>) id 1iuwgr-0005f7-R0
- for qemu-riscv@nongnu.org; Fri, 24 Jan 2020 05:59:55 -0500
+ (envelope-from <peter.maydell@linaro.org>) id 1iuyBL-0006tg-L5
+ for qemu-riscv@nongnu.org; Fri, 24 Jan 2020 07:35:28 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alex.bennee@linaro.org>) id 1iuwgq-0001kI-A7
- for qemu-riscv@nongnu.org; Fri, 24 Jan 2020 05:59:53 -0500
-Received: from mail-wr1-x442.google.com ([2a00:1450:4864:20::442]:41910)
+ (envelope-from <peter.maydell@linaro.org>) id 1iuyBK-00028K-Eo
+ for qemu-riscv@nongnu.org; Fri, 24 Jan 2020 07:35:27 -0500
+Received: from mail-ot1-x32e.google.com ([2607:f8b0:4864:20::32e]:37594)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <alex.bennee@linaro.org>)
- id 1iuwgq-0001if-2T
- for qemu-riscv@nongnu.org; Fri, 24 Jan 2020 05:59:52 -0500
-Received: by mail-wr1-x442.google.com with SMTP id c9so1431983wrw.8
- for <qemu-riscv@nongnu.org>; Fri, 24 Jan 2020 02:59:52 -0800 (PST)
+ (Exim 4.71) (envelope-from <peter.maydell@linaro.org>)
+ id 1iuyBK-00027G-8z
+ for qemu-riscv@nongnu.org; Fri, 24 Jan 2020 07:35:26 -0500
+Received: by mail-ot1-x32e.google.com with SMTP id d3so1140356otp.4
+ for <qemu-riscv@nongnu.org>; Fri, 24 Jan 2020 04:35:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=references:user-agent:from:to:cc:subject:in-reply-to:date
- :message-id:mime-version:content-transfer-encoding;
- bh=ZmUmEug5AG28bLAgJ6PJuweGUXbP2m9I2E5+btjjs4w=;
- b=BQlrhYLqOQXCanLjBuAYXAyYvDzHYa53Q/HNC8GMGZn3YgX8+so4Dt3G3HWsZhcv4S
- KzR67JxB0z6jjpbI77Bz3mfQFkdZXSIWV/1csEPJHQphokuxBMTfHc5sSIi7jxAvF/4v
- L12/ZmPE+1FgVGN+kCGPHU3y50boYBrNSB8gJFOQvVFJIFNxMdD31zYMtj9pjstWpcwL
- irlLsQT9xk/vYbMQiVJ/y2nT6AwGVLxEdNrXs7T7MHR8jedmIWHLxuLldAz1jZFE2Sdy
- i2d+Qzh6KTAhxmdQc4Ys/d1mhN/8GtCvyfnBv4HvUecA/Pl3sFrOPHgKAs38qURUxLo3
- noVw==
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=oNAtJLnuhmMFXycXLNnPn7OxpMKxfxO07z4pOrrGKGA=;
+ b=XzAT4W2IoM1bMkR3LSgVDVTu9eb2Z1tCXkew/RPz8RjGmPAwyUMHzTWZUf1ayNPKWf
+ i5x2VzzAH8H7z+PmHw8klh2q2wfH1cGP7/uOUUuZkcUAtVwLYOP/9HgBuW9MnhVp9BUZ
+ SJ52sGpyguZMmdqpuSbUp+O6jzzSGbqSlJuQUcF2+EBo2LSc7EigBeBtEC+Ogto1lQ1M
+ BTj8cjkQwkDpGuKzWczcx/fub8o5KWUyxnal2/dawkPZH4E1hGWuwn1ChAKmBr+4IcYc
+ 4cpZXVRwGmGQUrhxX/RvXldvNp6jZ2TaX036rPjhGfF5cfbJn5CVsjFTp3nhYCYuYY8S
+ fB1g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:references:user-agent:from:to:cc:subject
- :in-reply-to:date:message-id:mime-version:content-transfer-encoding;
- bh=ZmUmEug5AG28bLAgJ6PJuweGUXbP2m9I2E5+btjjs4w=;
- b=ZVh3fhI0KltpGPMQE/nhUzJIf/3/jlJ6cRZi1I90NH61uBzRzwj9Bs20eRY6mGkrmK
- PPlu0nkNBOw1ixjYjz5JqyO3nEbpGRb5w0r/RJcHVliKIz50C444Kn7w4/z6qjGUAUo7
- xwZnpjHbH5ASZe3rflzXBzTAwjSiHtFv23JKyDQhn91/dFzNkxj1JyJZ5zkErFb1c9/d
- pdDPSU7FfEL61sKeIfSVfcsci9C4/+P0y7j8qfMVbIr2oE5uRbbjRJoGC37VBJiANFMA
- +4oISV/AjYTiSRSpeIey/wvj3xM5mm0qiz8vW4w4UF8t+tu4Dk+KvXSsG6iDMATQ54cy
- hgFQ==
-X-Gm-Message-State: APjAAAVhL9BJxg0RksLqW0on6iNWHy7wzeslTqG+ABXrqLSIRqcgmVXJ
- gOKFPO7TrRbAXVsDpeE4wxYxSA==
-X-Google-Smtp-Source: APXvYqw4C2Gc+lLo+JULZMsoy+kz+1daIvNaPY9AHGBORNEDgSJBVmrVDhsk4uM24M9ViEFHFdeaZA==
-X-Received: by 2002:adf:ff84:: with SMTP id j4mr3729741wrr.27.1579863590776;
- Fri, 24 Jan 2020 02:59:50 -0800 (PST)
-Received: from zen.linaroharston ([51.148.130.216])
- by smtp.gmail.com with ESMTPSA id t12sm6604421wrs.96.2020.01.24.02.59.48
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 24 Jan 2020 02:59:49 -0800 (PST)
-Received: from zen (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id DC0E41FF87;
- Fri, 24 Jan 2020 10:59:47 +0000 (GMT)
-References: <20200124005131.16276-1-f4bug@amsat.org>
- <20200124005131.16276-23-f4bug@amsat.org>
-User-agent: mu4e 1.3.6; emacs 28.0.50
-From: Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
-Cc: qemu-devel@nongnu.org, mrolnik@gmail.com, richard.henderson@linaro.org,
- me@xcancerberox.com.ar, Alistair Francis <Alistair.Francis@wdc.com>, Paolo
- Bonzini <pbonzini@redhat.com>, S.E.Harris@kent.ac.uk, thuth@redhat.com,
- qemu-riscv@nongnu.org, Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?=
- <philmd@redhat.com>, Bastian
- Koppelmann <kbastian@mail.uni-paderborn.de>, imammedo@redhat.com, Markus
- Armbruster <armbru@redhat.com>, Laurent Vivier <lvivier@redhat.com>, Fam
- Zheng <fam@euphon.net>, Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Eric Blake <eblake@redhat.com>, Sagar Karandikar
- <sagark@eecs.berkeley.edu>, aleksandar.m.mail@gmail.com, =?utf-8?Q?Marc-A?=
- =?utf-8?Q?ndr=C3=A9?= Lureau
- <marcandre.lureau@redhat.com>, dovgaluk@ispras.ru, Eduardo Habkost
- <ehabkost@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>, Aleksandar
- Markovic <amarkovic@wavecomp.com>
-Subject: Re: [PATCH rc2 22/25] target/avr: Update build system
-In-reply-to: <20200124005131.16276-23-f4bug@amsat.org>
-Date: Fri, 24 Jan 2020 10:59:47 +0000
-Message-ID: <8736c5yva4.fsf@linaro.org>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=oNAtJLnuhmMFXycXLNnPn7OxpMKxfxO07z4pOrrGKGA=;
+ b=KrMK37IZOf8wNTxVYgaS5KzE7ZLo510s4y6vajVYII1UM6DdcqOtinbnTz1hYAecuS
+ yu4kUYj1SHsXjNHlmxUUvHlEY9mByZ6hcuhtu3dxiJGkl4wbvKmyNmtnC5cPoDqbi7RB
+ hAOEWfa3hWBOu/2GBKcqzNEtyrorwfH740q8+Rsc8UgArCIeeHVrR/IUlffXwopmTLIQ
+ bLHekfv+ItZ5PNdCtQGBZiT3nVYYL9krIXce7NU48GJ4VQHJxyi34JeTx//KH43kOcpO
+ BFo1+1okydmtgqSSiG4ArCtxCfvAJqycaCNJmG6Xd/GtTLaNbm3WO88L559ag0k4oSv2
+ ZPDQ==
+X-Gm-Message-State: APjAAAV+aYOEZ6RVMqkXUJqLxkE8izfycwi1BPBcQ+mGQSkPlpSrxOPU
+ MPiWzJxqOP1m9i/60hHZ+tKPpFwOLNpqC+PN5oHpgQ==
+X-Google-Smtp-Source: APXvYqzk++7qX0uy7J/QkZb1zfqlYyTqpnw5HE4NQLZFa69aWTTeyndiSzgpfxD2wXnYxfLm0R+HS6M9YHIvoRY2JSo=
+X-Received: by 2002:a05:6830:4a4:: with SMTP id
+ l4mr2490043otd.91.1579869325298; 
+ Fri, 24 Jan 2020 04:35:25 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+References: <20200121225703.148465-1-palmerdabbelt@google.com>
+ <CAFEAcA9YoAjASu4F1hZRjbq5S+h8GtBUVb9dgecMdaWb9YENEw@mail.gmail.com>
+ <mhng-ea4d4047-6dfa-4be0-8ce7-424b1d17560a@palmerdabbelt-glaptop1>
+In-Reply-To: <mhng-ea4d4047-6dfa-4be0-8ce7-424b1d17560a@palmerdabbelt-glaptop1>
+From: Peter Maydell <peter.maydell@linaro.org>
+Date: Fri, 24 Jan 2020 12:35:14 +0000
+Message-ID: <CAFEAcA9HnhKE1nS+ubmCD4AgS-EZ_J_XcWapzUvM2pegHs-imw@mail.gmail.com>
+Subject: Re: [PULL] RISC-V Patches for the 5.0 Soft Freeze, Part 1
+To: Palmer Dabbelt <palmerdabbelt@google.com>
+Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ QEMU Developers <qemu-devel@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::442
+X-Received-From: 2607:f8b0:4864:20::32e
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -88,115 +68,32 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Jan 2020 10:59:55 -0000
+X-List-Received-Date: Fri, 24 Jan 2020 12:35:28 -0000
 
-
-Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org> writes:
-
-> From: Michael Rolnik <mrolnik@gmail.com>
+On Thu, 23 Jan 2020 at 18:43, Palmer Dabbelt <palmerdabbelt@google.com> wrote:
+> On Thu, 23 Jan 2020 06:38:07 PST (-0800), Peter Maydell wrote:
+> > Hi. This pull request doesn't seem to be signed with the GPG
+> > key that I have on record for you...
 >
-> Make AVR support buildable
+> When I moved to Google I got a Yubikey and made new subkeys for it.  If I
+> understand correctly the new subkeys should be signed by my main key, but maybe
+> that didn't make it to your keyring?  I see
 >
-> Signed-off-by: Michael Rolnik <mrolnik@gmail.com>
-> Tested-by: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
-> Reviewed-by: Aleksandar Markovic <amarkovic@wavecomp.com>
-> Message-Id: <20200118191416.19934-19-mrolnik@gmail.com>
-> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
-> ---
->  configure                       |  7 +++++++
->  default-configs/avr-softmmu.mak |  5 +++++
->  target/avr/Makefile.objs        | 34 +++++++++++++++++++++++++++++++++
->  3 files changed, 46 insertions(+)
->  create mode 100644 default-configs/avr-softmmu.mak
->  create mode 100644 target/avr/Makefile.objs
->
-> diff --git a/configure b/configure
-> index 557e4382ea..94e79ca634 100755
-> --- a/configure
-> +++ b/configure
-> @@ -7612,6 +7612,10 @@ case "$target_name" in
->      mttcg=3D"yes"
->      gdb_xml_files=3D"aarch64-core.xml aarch64-fpu.xml arm-core.xml arm-v=
-fp.xml arm-vfp3.xml arm-neon.xml"
->    ;;
-> +  avr)
-> +    gdb_xml_files=3D"avr-cpu.xml"
-> +    target_compiler=3D$cross_cc_avr
+>     $ gpg --list-keys palmer@dabbelt.com
+>     pub   rsa4096 2017-06-06 [SC] [expires: 2027-11-13]
+>           00CE76D1834960DFCE886DF8EF4CA1502CCBAB41
+>     uid           [ultimate] Palmer Dabbelt <palmer@dabbelt.com>
+>     uid           [ultimate] Palmer Dabbelt <palmerdabbelt@google.com>
+>     sub   rsa4096 2017-06-06 [E]
+>     sub   rsa4096 2019-11-26 [S] [expires: 2024-11-24]
+>     sub   rsa4096 2019-11-26 [A] [expires: 2024-11-24]
+>     sub   rsa4096 2019-11-26 [E] [expires: 2024-11-24]
 
-I don't think you want this here. target_compiler belongs in the
-tests/tcg/configure.sh config.
+Yeah, I have those. I think I must have fumbled something
+when I retried the pullreq after doing a refresh of your
+gpg key, because I just did a retry now and it's fine.
+(I'm just running the pull through my tests now.)
 
-A docker target with the compiler would also be nice.
-
-> +  ;;
->    cris)
->    ;;
->    hppa)
-> @@ -7831,6 +7835,9 @@ for i in $ARCH $TARGET_BASE_ARCH ; do
->        disas_config "ARM_A64"
->      fi
->    ;;
-> +  avr)
-> +    disas_config "AVR"
-> +  ;;
->    cris)
->      disas_config "CRIS"
->    ;;
-> diff --git a/default-configs/avr-softmmu.mak b/default-configs/avr-softmm=
-u.mak
-> new file mode 100644
-> index 0000000000..80218add98
-> --- /dev/null
-> +++ b/default-configs/avr-softmmu.mak
-> @@ -0,0 +1,5 @@
-> +# Default configuration for avr-softmmu
-> +
-> +# Boards:
-> +#
-> +CONFIG_ARDUINO=3Dy
-> diff --git a/target/avr/Makefile.objs b/target/avr/Makefile.objs
-> new file mode 100644
-> index 0000000000..7523e0c6e2
-> --- /dev/null
-> +++ b/target/avr/Makefile.objs
-> @@ -0,0 +1,34 @@
-> +#
-> +#  QEMU AVR CPU
-> +#
-> +#  Copyright (c) 2019 Michael Rolnik
-> +#
-> +#  This library is free software; you can redistribute it and/or
-> +#  modify it under the terms of the GNU Lesser General Public
-> +#  License as published by the Free Software Foundation; either
-> +#  version 2.1 of the License, or (at your option) any later version.
-> +#
-> +#  This library is distributed in the hope that it will be useful,
-> +#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-> +#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-> +#  Lesser General Public License for more details.
-> +#
-> +#  You should have received a copy of the GNU Lesser General Public
-> +#  License along with this library; if not, see
-> +#  <http://www.gnu.org/licenses/lgpl-2.1.html>
-> +#
-> +
-> +DECODETREE =3D $(SRC_PATH)/scripts/decodetree.py
-> +decode-y =3D $(SRC_PATH)/target/avr/insn.decode
-> +
-> +target/avr/decode_insn.inc.c: $(decode-y) $(DECODETREE)
-> +	$(call quiet-command, \
-> +	  $(PYTHON) $(DECODETREE) -o $@ --decode decode_insn --insnwidth 16 $<,=
- \
-> +	  "GEN", $(TARGET_DIR)$@)
-> +
-> +target/avr/translate.o: target/avr/decode_insn.inc.c
-> +
-> +obj-y +=3D translate.o cpu.o helper.o
-> +obj-y +=3D gdbstub.o
-> +obj-y +=3D disas.o
-> +obj-$(CONFIG_SOFTMMU) +=3D machine.o
-
-
---=20
-Alex Benn=C3=A9e
+thanks
+-- PMM
 
