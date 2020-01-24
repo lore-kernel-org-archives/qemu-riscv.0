@@ -1,94 +1,91 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iuyPG-0006fH-FG
-	for mharc-qemu-riscv@gnu.org; Fri, 24 Jan 2020 07:49:50 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53828)
+	id 1iuyQA-0007qC-Pt
+	for mharc-qemu-riscv@gnu.org; Fri, 24 Jan 2020 07:50:46 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:54383)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <philmd@redhat.com>) id 1iuyPD-0006Z0-64
- for qemu-riscv@nongnu.org; Fri, 24 Jan 2020 07:49:49 -0500
+ (envelope-from <philmd@redhat.com>) id 1iuyQ7-0007mj-ML
+ for qemu-riscv@nongnu.org; Fri, 24 Jan 2020 07:50:44 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <philmd@redhat.com>) id 1iuyPA-00014P-Iy
- for qemu-riscv@nongnu.org; Fri, 24 Jan 2020 07:49:46 -0500
-Received: from us-smtp-1.mimecast.com ([205.139.110.61]:46866
- helo=us-smtp-delivery-1.mimecast.com)
+ (envelope-from <philmd@redhat.com>) id 1iuyQ6-0003RO-GF
+ for qemu-riscv@nongnu.org; Fri, 24 Jan 2020 07:50:43 -0500
+Received: from us-smtp-delivery-1.mimecast.com ([205.139.110.120]:24064
+ helo=us-smtp-1.mimecast.com)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <philmd@redhat.com>) id 1iuyPA-000124-E3
- for qemu-riscv@nongnu.org; Fri, 24 Jan 2020 07:49:44 -0500
+ (Exim 4.71) (envelope-from <philmd@redhat.com>) id 1iuyQ6-0003P3-Cw
+ for qemu-riscv@nongnu.org; Fri, 24 Jan 2020 07:50:42 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1579870183;
+ s=mimecast20190719; t=1579870241;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=UaVr7FaAPrzlakHju3fBTVcglRGeU5edmafiCiWxbx4=;
- b=bK8kRROdQAwLJ3w0B9PQJUTzk53uLWrwlWk+dUS2nYJvp/2sW6tI6P4D//v0Z4J32sVu3X
- t2gGCt3Alpw+9p4KdsA7g/u73wj+qGXX6uEkaaat5DclYqJFKHIbY6V4misU/cSFFAldwj
- 2N1TYPiFuj4tcn6yKvOXMMoayvRxOGQ=
-Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
- [209.85.221.69]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-376-Sc5_P8r9NkKf3SK04886-A-1; Fri, 24 Jan 2020 07:49:41 -0500
-Received: by mail-wr1-f69.google.com with SMTP id r2so1100800wrp.7
- for <qemu-riscv@nongnu.org>; Fri, 24 Jan 2020 04:49:41 -0800 (PST)
+ bh=w+mp3//erqSzd3/gVz70vg47VpR5prs2RkavX6aqb1Y=;
+ b=WtKjxWxpNMgOkD1A/+tld1Gt3PF/33DSXr65qnjfbVfDlLVp3+oRInDQ32ytIO73Ix+EyF
+ N8/jea8xt2lhBBAirb5mBAIUlwVmInde7rquBLrSsw1VyQR7+ZuZnFpMZMjdpMNru28t5o
+ zNQ9puaI6nKSULAyalQibydg0bfrNaw=
+Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
+ [209.85.221.72]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-146-CARgVwVFPd-Yu4CLt59q_A-1; Fri, 24 Jan 2020 07:50:40 -0500
+Received: by mail-wr1-f72.google.com with SMTP id z10so1095707wrt.21
+ for <qemu-riscv@nongnu.org>; Fri, 24 Jan 2020 04:50:39 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:to:cc:references:from:message-id:date
  :user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=HAvV1dC5xoQRUBS2/CTV2GT9Qa0yMY+Lz/g8I+J+m00=;
- b=G1QNwd3FubRTGqyN0aW8mt/RrGHDRN5ITYeGfGfcPIYOSZM+HvKT76Alnw07IBKYwW
- hwEMXlsqCpy/5RjqstPtAqXhp31wXNmDPBPzsJrOXs6lTM6LgujdKeWYqBMRXK7TD0WQ
- OrwV29w6SEl0zbfURO+N1SCVp5bYOm48ANUEiAgLINGM22BaBwX+A/lSdKjSt/QQVt2J
- bO4zMyQs6vngdNhXuUXJCaHr8+HzLkFvvGHXCFxr6PMI+wTbuSIU1Q4v3WQEO77b8zBh
- RDwlg+5sYX1s7+KmXsuQDjyGrlo2goU8Pnsr1gFuzxlSGLQcyOgO3KJ5dhbvlBKj5E/O
- RBAA==
-X-Gm-Message-State: APjAAAUZiijjM7Ok4ymmoyHvAyX8Hp5arqDXyKlqiFt2ScGlXhuLpLu2
- a4pk6i+jSHtobLF9QT+QLTl27sA/4qjmfiQ5Z60550IXEHO2WtkZsNeA8XldfOVSSt/GGEG7pPb
- zJtajHt/odLoy6ig=
-X-Received: by 2002:a5d:4085:: with SMTP id o5mr4113708wrp.321.1579870180631; 
- Fri, 24 Jan 2020 04:49:40 -0800 (PST)
-X-Google-Smtp-Source: APXvYqx+1NKwwKukHPGIajVcd16qteybc1uuPclxRSM4A0ejDE+j2k6zu7p/oZJIG94pSatZ6dTDOg==
-X-Received: by 2002:a5d:4085:: with SMTP id o5mr4113646wrp.321.1579870180113; 
- Fri, 24 Jan 2020 04:49:40 -0800 (PST)
+ bh=pZFI9gdEY18DUnDJSvo+WwYq1TaEIq/5uGQsvODasOA=;
+ b=IjyQ0JPtTjr3WtqNx9KBko+Fz0IwBrLvN6qeHT4zX3WiohI1aKoFRjz2tQBTEeaJFG
+ epakwAVzMWIgrXdCJHfasxjZWMZ2E66pOQCklo1auwj+W3eJf2FUQOkguws85VChyIa7
+ JDzqOx9qIWlpZjoY3Oa5X0rsxNuBXGf+EL9W0KnY80gMp3IRsF74hysHAmUqga7fYdjm
+ rDNUy0iFXqDtzsoUur5T+2n9BewrfJqn3LsKika2I41/bjpwJ8/WG0sKVY8otyZX151i
+ BNHZrwnYj93z4WIdnFmLCwDIh25z16D23mZ6lmFKgoy03Xp2GGNN65yKrqxR8D/QtI0h
+ ndrQ==
+X-Gm-Message-State: APjAAAUgKqIsjee+ivPwn+42r/mNO2T4STnr2slr9PAZygul9cYqs6iC
+ 5KygI9G+pmSezbVXAVtTCom9tYJkV+IU3ZuO1ZxYqHtQ0xvMOcDM9BkvCTwX4wZCK7v1Zpvkvnq
+ Xndbi6dybK10Kf5w=
+X-Received: by 2002:a1c:a515:: with SMTP id o21mr3312381wme.85.1579870238901; 
+ Fri, 24 Jan 2020 04:50:38 -0800 (PST)
+X-Google-Smtp-Source: APXvYqy9xuGA+8xUOx+T4ycfpMnXOJQ4+8Vv1fgz+eVy24bn2FurvT1MnntKKwP6G2KHUFlpOsFwCg==
+X-Received: by 2002:a1c:a515:: with SMTP id o21mr3312350wme.85.1579870238661; 
+ Fri, 24 Jan 2020 04:50:38 -0800 (PST)
 Received: from [192.168.1.35] (113.red-83-57-172.dynamicip.rima-tde.net.
  [83.57.172.113])
- by smtp.gmail.com with ESMTPSA id t81sm6911368wmg.6.2020.01.24.04.49.37
+ by smtp.gmail.com with ESMTPSA id p17sm6819636wmk.30.2020.01.24.04.50.37
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 24 Jan 2020 04:49:39 -0800 (PST)
-Subject: Re: [PATCH rc2 00/25] target/avr merger
-To: Michael Rolnik <mrolnik@gmail.com>,
- =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
-Cc: QEMU Developers <qemu-devel@nongnu.org>,
- Richard Henderson <richard.henderson@linaro.org>,
- Joaquin de Andres <me@xcancerberox.com.ar>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Paolo Bonzini <pbonzini@redhat.com>, Sarah Harris <S.E.Harris@kent.ac.uk>,
- Thomas Huth <thuth@redhat.com>, qemu-riscv@nongnu.org,
+ Fri, 24 Jan 2020 04:50:38 -0800 (PST)
+Subject: Re: [PATCH rc2 12/25] hw/timer: Add limited support for Atmel 16 bit
+ timer peripheral
+To: Thomas Huth <thuth@redhat.com>, =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?=
+ <f4bug@amsat.org>, qemu-devel@nongnu.org, mrolnik@gmail.com,
+ richard.henderson@linaro.org, me@xcancerberox.com.ar
+Cc: Laurent Vivier <lvivier@redhat.com>, Fam Zheng <fam@euphon.net>,
+ S.E.Harris@kent.ac.uk, qemu-riscv@nongnu.org,
+ Eduardo Habkost <ehabkost@redhat.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, dovgaluk@ispras.ru,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Igor Mammedov <imammedo@redhat.com>, Markus Armbruster <armbru@redhat.com>,
- Laurent Vivier <lvivier@redhat.com>, Fam Zheng <fam@euphon.net>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, Eric Blake
- <eblake@redhat.com>, Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Aleksandar Markovic <aleksandar.m.mail@gmail.com>,
- =?UTF-8?Q?Marc-Andr=c3=a9_Lureau?= <marcandre.lureau@redhat.com>,
- =?UTF-8?Q?Alex_Benn=c3=a9e?= <alex.bennee@linaro.org>,
- Pavel Dovgalyuk <dovgaluk@ispras.ru>, Eduardo Habkost <ehabkost@redhat.com>,
- Palmer Dabbelt <palmer@dabbelt.com>
+ Markus Armbruster <armbru@redhat.com>, =?UTF-8?Q?Alex_Benn=c3=a9e?=
+ <alex.bennee@linaro.org>, =?UTF-8?Q?Marc-Andr=c3=a9_Lureau?=
+ <marcandre.lureau@redhat.com>, Alistair Francis <Alistair.Francis@wdc.com>,
+ imammedo@redhat.com, Paolo Bonzini <pbonzini@redhat.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, aleksandar.m.mail@gmail.com
 References: <20200124005131.16276-1-f4bug@amsat.org>
- <CAK4993iG+t7fZS=cekXfJVpDQ_L7jLu8i2V4mHVLbS-r69=AVg@mail.gmail.com>
+ <20200124005131.16276-13-f4bug@amsat.org>
+ <4f9a6d13-63b3-3df6-ecd9-def3908f90b3@redhat.com>
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>
-Message-ID: <00c08b6d-6ca2-7fa6-3dab-b834aea5a8d3@redhat.com>
-Date: Fri, 24 Jan 2020 13:49:37 +0100
+Message-ID: <3adbf3cf-37bf-237e-7c8f-1f2e9e7a5a70@redhat.com>
+Date: Fri, 24 Jan 2020 13:50:36 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.2.2
 MIME-Version: 1.0
-In-Reply-To: <CAK4993iG+t7fZS=cekXfJVpDQ_L7jLu8i2V4mHVLbS-r69=AVg@mail.gmail.com>
+In-Reply-To: <4f9a6d13-63b3-3df6-ecd9-def3908f90b3@redhat.com>
 Content-Language: en-US
-X-MC-Unique: Sc5_P8r9NkKf3SK04886-A-1
+X-MC-Unique: CARgVwVFPd-Yu4CLt59q_A-1
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
-X-Received-From: 205.139.110.61
+X-Received-From: 205.139.110.120
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -100,262 +97,83 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Jan 2020 12:49:49 -0000
+X-List-Received-Date: Fri, 24 Jan 2020 12:50:45 -0000
 
-On 1/24/20 12:41 PM, Michael Rolnik wrote:
-> Tested-by: Michael Rolnik <mrolnik@gmail.com <mailto:mrolnik@gmail.com>>
+On 1/24/20 9:16 AM, Thomas Huth wrote:
+> On 24/01/2020 01.51, Philippe Mathieu-Daud=C3=A9 wrote:
+>> From: Michael Rolnik <mrolnik@gmail.com>
+>>
+>> These were designed to facilitate testing but should provide enough
+>> function to be useful in other contexts.  Only a subset of the functions
+>> of each peripheral is implemented, mainly due to the lack of a standard
+>> way to handle electrical connections (like GPIO pins).
+>>
+>> Signed-off-by: Sarah Harris <S.E.Harris@kent.ac.uk>
+>> Message-Id: <20200118191416.19934-13-mrolnik@gmail.com>
+>> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org>
+>> [rth: Squash info mtree fixes and a file rename from f4bug, which was:]
+>> Suggested-by: Aleksandar Markovic <aleksandar.m.mail@gmail.com>
+>> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+>> [PMD: Use qemu_log_mask(LOG_UNIMP), replace goto by return]
+>> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org>
+>> ---
+>> rc2: Use qemu_log_mask(LOG_UNIMP), replace goto by return (thuth)
+>> ---
+>>   include/hw/timer/atmel_timer16.h |  94 +++++
+>>   hw/timer/atmel_timer16.c         | 605 +++++++++++++++++++++++++++++++
+>>   hw/timer/Kconfig                 |   3 +
+>>   hw/timer/Makefile.objs           |   2 +
+>>   4 files changed, 704 insertions(+)
+>>   create mode 100644 include/hw/timer/atmel_timer16.h
+>>   create mode 100644 hw/timer/atmel_timer16.c
+> [...]
+>> +static void avr_timer16_clksrc_update(AVRTimer16State *t16)
+>> +{
+>> +    uint16_t divider =3D 0;
+>> +    switch (CLKSRC(t16)) {
+>> +    case T16_CLKSRC_EXT_FALLING:
+>> +    case T16_CLKSRC_EXT_RISING:
+>> +        qemu_log_mask(LOG_UNIMP, "%s: external clock source unsupported=
+\n",
+>> +                      __func__);
+>> +        break;
+>> +    case T16_CLKSRC_STOPPED:
+>> +        break;
+>> +    case T16_CLKSRC_DIV1:
+>> +        divider =3D 1;
+>> +        break;
+>> +    case T16_CLKSRC_DIV8:
+>> +        divider =3D 8;
+>> +        break;
+>> +    case T16_CLKSRC_DIV64:
+>> +        divider =3D 64;
+>> +        break;
+>> +    case T16_CLKSRC_DIV256:
+>> +        divider =3D 256;
+>> +        break;
+>> +    case T16_CLKSRC_DIV1024:
+>> +        divider =3D 1024;
+>> +        break;
+>> +    default:
+>> +        break;
+>> +    }
+>> +    if (divider) {
+>> +        t16->freq_hz =3D t16->cpu_freq_hz / divider;
+>> +        t16->period_ns =3D NANOSECONDS_PER_SECOND / t16->freq_hz;
+>> +        DB_PRINT("Timer frequency %" PRIu64 " hz, period %" PRIu64 " ns=
+ (%f s)",
+>> +                 t16->freq_hz, t16->period_ns, 1 / (double)t16->freq_hz=
+);
+>> +    }
+>> +    return;
+>> +}
+>=20
+> You can remove the "return;" at the end of the function now, too.
 
-Thanks a lot!
+Oops I didn't notice.
 
-> The only thing I want to change is instead of -kernel put -bios in=20
-> qemu-doc.texi file. Should I send a new series?
+Richard, do you mind to remove this single line?
 
-Please do NOT :)
-
-Richard can do the trivial fixup directly.
-
-> On Fri, Jan 24, 2020 at 2:51 AM Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.=
-org=20
-> <mailto:f4bug@amsat.org>> wrote:
->=20
->     This is the AVR port from Michael release (merge) candidate 2.
->=20
->     Since v1 [1]:
->     - Addressed Thomas comments
->     - Fixed a non-critical bug in ATmega (incorrect SRAM base address)
->     - Added ELF parsing requested by Aleksandar
->     - Dropped default machine (as with the ARM port)
->=20
->     Change since rc1:
->=20
->     $ git backport-diff -u avr-rc1 -r origin/master..
->     Key:
->     [----] : patches are identical
->     [####] : number of functional differences between
->     upstream/downstream patch
->     [down] : patch is downstream-only
->     The flags [FC] indicate (F)unctional and (C)ontextual differences,
->     respectively
->=20
->     001/25:[----] [--] 'target/avr: Add outward facing interfaces and
->     core CPU logic'
->     002/25:[----] [--] 'target/avr: Add instruction helpers'
->     003/25:[----] [--] 'target/avr: Add instruction translation -
->     Registers definition'
->     004/25:[----] [--] 'target/avr: Add instruction translation -
->     Arithmetic and Logic Instructions'
->     005/25:[----] [--] 'target/avr: Add instruction translation - Branch
->     Instructions'
->     006/25:[----] [--] 'target/avr: Add instruction translation - Data
->     Transfer Instructions'
->     007/25:[----] [--] 'target/avr: Add instruction translation - Bit
->     and Bit-test Instructions'
->     008/25:[----] [--] 'target/avr: Add instruction translation - MCU
->     Control Instructions'
->     009/25:[----] [--] 'target/avr: Add instruction translation - CPU
->     main translation function'
->     010/25:[----] [--] 'target/avr: Add instruction disassembly function'
->     011/25:[----] [--] 'hw/char: Add limited support for Atmel USART
->     peripheral'
->     012/25:[0045] [FC] 'hw/timer: Add limited support for Atmel 16 bit
->     timer peripheral'
->     013/25:[----] [--] 'hw/misc: Add Atmel power device'
->     014/25:[0024] [FC] 'target/avr: Add section about AVR into QEMU
->     documentation'
->     015/25:[----] [--] 'target/avr: Register AVR support with the rest
->     of QEMU'
->     016/25:[----] [--] 'target/avr: Add machine none test'
->     017/25:[0002] [FC] 'target/avr: Update MAINTAINERS file'
->     018/25:[down]=C2=A0 =C2=A0 =C2=A0 'hw/core/loader: Let load_elf popul=
-ate the
->     processor-specific flags'
->     019/25:[down]=C2=A0 =C2=A0 =C2=A0 'hw/avr: Add helper to load raw/ELF=
- firmware
->     binaries'
->     020/25:[0015] [FC] 'hw/avr: Add some ATmega microcontrollers'
->     021/25:[0040] [FC] 'hw/avr: Add some Arduino boards'
->     022/25:[----] [--] 'target/avr: Update build system'
->     023/25:[----] [--] 'tests/boot-serial-test: Test some Arduino boards
->     (AVR based)'
->     024/25:[----] [--] 'tests/acceptance: Test the Arduino MEGA2560 board=
-'
->     025/25:[----] [--] '.travis.yml: Run the AVR acceptance tests'
->=20
->     Repo: https://gitlab.com/philmd/qemu/commits/avr-rc2
->=20
->     [1] https://www.mail-archive.com/qemu-devel@nongnu.org/msg672926.html
->     Supersedes: <20200123000307.11541-1-richard.henderson@linaro.org
->     <mailto:20200123000307.11541-1-richard.henderson@linaro.org>>
->=20
->     Michael Rolnik (20):
->      =C2=A0 target/avr: Add outward facing interfaces and core CPU logic
->      =C2=A0 target/avr: Add instruction helpers
->      =C2=A0 target/avr: Add instruction translation - Registers definitio=
-n
->      =C2=A0 target/avr: Add instruction translation - Arithmetic and Logi=
-c
->      =C2=A0 =C2=A0 Instructions
->      =C2=A0 target/avr: Add instruction translation - Branch Instructions
->      =C2=A0 target/avr: Add instruction translation - Data Transfer Instr=
-uctions
->      =C2=A0 target/avr: Add instruction translation - Bit and Bit-test
->      =C2=A0 =C2=A0 Instructions
->      =C2=A0 target/avr: Add instruction translation - MCU Control Instruc=
-tions
->      =C2=A0 target/avr: Add instruction translation - CPU main translatio=
-n
->      =C2=A0 =C2=A0 function
->      =C2=A0 target/avr: Add instruction disassembly function
->      =C2=A0 hw/char: Add limited support for Atmel USART peripheral
->      =C2=A0 hw/timer: Add limited support for Atmel 16 bit timer peripher=
-al
->      =C2=A0 hw/misc: Add Atmel power device
->      =C2=A0 target/avr: Add section about AVR into QEMU documentation
->      =C2=A0 target/avr: Register AVR support with the rest of QEMU
->      =C2=A0 target/avr: Add machine none test
->      =C2=A0 target/avr: Update MAINTAINERS file
->      =C2=A0 target/avr: Update build system
->      =C2=A0 tests/boot-serial-test: Test some Arduino boards (AVR based)
->      =C2=A0 tests/acceptance: Test the Arduino MEGA2560 board
->=20
->     Philippe Mathieu-Daud=C3=A9 (5):
->      =C2=A0 hw/core/loader: Let load_elf populate the processor-specific =
-flags
->      =C2=A0 hw/avr: Add helper to load raw/ELF firmware binaries
->      =C2=A0 hw/avr: Add some ATmega microcontrollers
->      =C2=A0 hw/avr: Add some Arduino boards
->      =C2=A0 .travis.yml: Run the AVR acceptance tests
->=20
->      =C2=A0qemu-doc.texi=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A051 +
->      =C2=A0configure=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A0 7 +
->      =C2=A0default-configs/avr-softmmu.mak=C2=A0 |=C2=A0 =C2=A0 5 +
->      =C2=A0qapi/machine.json=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 |=C2=A0 =C2=A0 3 +-
->      =C2=A0hw/avr/atmel_atmega.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- |=C2=A0 =C2=A048 +
->      =C2=A0hw/avr/boot.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A033 +
->      =C2=A0include/disas/dis-asm.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=
-=A0 =C2=A019 +
->      =C2=A0include/elf.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A0 2 +
->      =C2=A0include/hw/char/atmel_usart.h=C2=A0 =C2=A0 |=C2=A0 =C2=A093 +
->      =C2=A0include/hw/elf_ops.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0|=C2=A0 =C2=A0 6 +-
->      =C2=A0include/hw/loader.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 |=C2=A0 =C2=A0 6 +-
->      =C2=A0include/hw/misc/atmel_power.h=C2=A0 =C2=A0 |=C2=A0 =C2=A046 +
->      =C2=A0include/hw/timer/atmel_timer16.h |=C2=A0 =C2=A094 +
->      =C2=A0include/sysemu/arch_init.h=C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 =
-=C2=A0 1 +
->      =C2=A0target/avr/cpu-param.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0|=C2=A0 =C2=A037 +
->      =C2=A0target/avr/cpu-qom.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0|=C2=A0 =C2=A054 +
->      =C2=A0target/avr/cpu.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0|=C2=A0 259 +++
->      =C2=A0target/avr/helper.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 |=C2=A0 =C2=A029 +
->      =C2=A0arch_init.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A0 2 +
->      =C2=A0hw/avr/arduino.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0|=C2=A0 151 ++
->      =C2=A0hw/avr/atmel_atmega.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- |=C2=A0 470 +++++
->      =C2=A0hw/avr/boot.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A074 +
->      =C2=A0hw/char/atmel_usart.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- |=C2=A0 320 ++++
->      =C2=A0hw/core/loader.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A015 +-
->      =C2=A0hw/misc/atmel_power.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- |=C2=A0 112 ++
->      =C2=A0hw/riscv/boot.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A0 2 +-
->      =C2=A0hw/timer/atmel_timer16.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=
-=A0 605 ++++++
->      =C2=A0target/avr/cpu.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0|=C2=A0 826 ++++++++
->      =C2=A0target/avr/disas.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0|=C2=A0 246 +++
->      =C2=A0target/avr/gdbstub.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0|=C2=A0 =C2=A084 +
->      =C2=A0target/avr/helper.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 |=C2=A0 347 ++++
->      =C2=A0target/avr/machine.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0|=C2=A0 121 ++
->      =C2=A0target/avr/translate.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0| 2997 ++++++++++++++++++++++++++++++
->      =C2=A0tests/qtest/boot-serial-test.c=C2=A0 =C2=A0|=C2=A0 =C2=A011 +
->      =C2=A0tests/qtest/machine-none-test.c=C2=A0 |=C2=A0 =C2=A0 1 +
->      =C2=A0.travis.yml=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A0 2 +-
->      =C2=A0MAINTAINERS=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A030 +
->      =C2=A0gdb-xml/avr-cpu.xml=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 |=C2=A0 =C2=A049 +
->      =C2=A0hw/avr/Kconfig=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A0 9 +
->      =C2=A0hw/avr/Makefile.objs=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0|=C2=A0 =C2=A0 3 +
->      =C2=A0hw/char/Kconfig=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A0 3 +
->      =C2=A0hw/char/Makefile.objs=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- |=C2=A0 =C2=A0 1 +
->      =C2=A0hw/misc/Kconfig=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A0 3 +
->      =C2=A0hw/misc/Makefile.objs=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- |=C2=A0 =C2=A0 2 +
->      =C2=A0hw/timer/Kconfig=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A0 3 +
->      =C2=A0hw/timer/Makefile.objs=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0|=C2=A0 =C2=A0 2 +
->      =C2=A0target/avr/Makefile.objs=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=
-=A0 =C2=A034 +
->      =C2=A0target/avr/insn.decode=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0|=C2=A0 182 ++
->      =C2=A0tests/acceptance/machine_avr6.py |=C2=A0 =C2=A050 +
->      =C2=A0tests/qtest/Makefile.include=C2=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A0=
- 2 +
->      =C2=A050 files changed, 7539 insertions(+), 13 deletions(-)
->      =C2=A0create mode 100644 default-configs/avr-softmmu.mak
->      =C2=A0create mode 100644 hw/avr/atmel_atmega.h
->      =C2=A0create mode 100644 hw/avr/boot.h
->      =C2=A0create mode 100644 include/hw/char/atmel_usart.h
->      =C2=A0create mode 100644 include/hw/misc/atmel_power.h
->      =C2=A0create mode 100644 include/hw/timer/atmel_timer16.h
->      =C2=A0create mode 100644 target/avr/cpu-param.h
->      =C2=A0create mode 100644 target/avr/cpu-qom.h
->      =C2=A0create mode 100644 target/avr/cpu.h
->      =C2=A0create mode 100644 target/avr/helper.h
->      =C2=A0create mode 100644 hw/avr/arduino.c
->      =C2=A0create mode 100644 hw/avr/atmel_atmega.c
->      =C2=A0create mode 100644 hw/avr/boot.c
->      =C2=A0create mode 100644 hw/char/atmel_usart.c
->      =C2=A0create mode 100644 hw/misc/atmel_power.c
->      =C2=A0create mode 100644 hw/timer/atmel_timer16.c
->      =C2=A0create mode 100644 target/avr/cpu.c
->      =C2=A0create mode 100644 target/avr/disas.c
->      =C2=A0create mode 100644 target/avr/gdbstub.c
->      =C2=A0create mode 100644 target/avr/helper.c
->      =C2=A0create mode 100644 target/avr/machine.c
->      =C2=A0create mode 100644 target/avr/translate.c
->      =C2=A0create mode 100644 gdb-xml/avr-cpu.xml
->      =C2=A0create mode 100644 hw/avr/Kconfig
->      =C2=A0create mode 100644 hw/avr/Makefile.objs
->      =C2=A0create mode 100644 target/avr/Makefile.objs
->      =C2=A0create mode 100644 target/avr/insn.decode
->      =C2=A0create mode 100644 tests/acceptance/machine_avr6.py
->=20
->     --=20
->     2.21.1
->=20
->=20
->=20
-> --=20
-> Best Regards,
-> Michael Rolnik
+Thanks both :)
 
 
