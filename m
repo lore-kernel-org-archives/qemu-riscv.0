@@ -1,52 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iunCl-0002IJ-Uy
-	for mharc-qemu-riscv@gnu.org; Thu, 23 Jan 2020 19:52:11 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44352)
+	id 1iunCn-0002Ma-R1
+	for mharc-qemu-riscv@gnu.org; Thu, 23 Jan 2020 19:52:13 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44397)
  by lists.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1iunCf-00021Y-CW
- for qemu-riscv@nongnu.org; Thu, 23 Jan 2020 19:52:10 -0500
+ id 1iunCj-0002Cx-Qq
+ for qemu-riscv@nongnu.org; Thu, 23 Jan 2020 19:52:12 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
  (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1iunCa-0005DO-Kp
- for qemu-riscv@nongnu.org; Thu, 23 Jan 2020 19:52:05 -0500
-Received: from mail-wr1-x441.google.com ([2a00:1450:4864:20::441]:38483)
+ id 1iunCh-0005Kb-GF
+ for qemu-riscv@nongnu.org; Thu, 23 Jan 2020 19:52:09 -0500
+Received: from mail-wr1-x442.google.com ([2a00:1450:4864:20::442]:33397)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1iunCR-00055T-1i; Thu, 23 Jan 2020 19:51:51 -0500
-Received: by mail-wr1-x441.google.com with SMTP id y17so73767wrh.5;
- Thu, 23 Jan 2020 16:51:50 -0800 (PST)
+ id 1iunCc-0005ES-9N; Thu, 23 Jan 2020 19:52:02 -0500
+Received: by mail-wr1-x442.google.com with SMTP id b6so92605wrq.0;
+ Thu, 23 Jan 2020 16:52:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=yEZWk0lG1Qw+t7F/fbLX1QbVSJjoK5uaV1TSNjYgFzs=;
- b=TDPT22EeS1aQ9HmtlPqJhdUo/wgzgqxnH89q04rSQdPAoOjEznIZJCBiyar00h86E7
- pdHCF2QYqiopqlFZjmnTU0USukTPy2XBMzv4qgPCvKtOQ3tA+57a0pePkmI2vMnFKGgT
- Uu3cmTObl8gK2FQnfuemNdMedFGgfxvhtSbRt/vHU6Cjn3dmXkRjCbXDzmEcaWWc5RRk
- uieIW+iln3kaebsYVw7DINjHDPkkF+FUF1V9HBoZc9bbsu6SSburoYfcUHwG9U+AtpQe
- Uhpprrg5iacfQ7caNspPh/g1pbK3ZWPqopcX/8IAmQX0xomCIIQ/xdRetMeU0PHVVxfx
- Zbpw==
+ bh=OkUkdzYyhyXtcxB9T2HII5hsYZWDXSWKiEC8THq6zfo=;
+ b=S4tBjhltrn+CaXhsyRwkojvfEyyyxrN0r0+LQgg1uhOHkOJcWTc6kRL+5lmTzvh0H7
+ dQ2aN+UY2EYZsl2i4C+8kqVxCSBkr1DCrsVp7nhnaKq+9GL2UhMG3jbDpouG0myroCIq
+ 0saV14lTBF095zdRVe558JinvrXz9b8G1Ph4o3n/Rau10r2KS/GjNe6YLqc74431YJkl
+ bAG5XTor0/dRpz0W+7mVfcqpgW+5zNcKLzoAtgTWoDgC5NcN01ME2FfZ0XO20mQjyy7P
+ geEWKLaRtVlCCX3YMKr3E1LEF/1yD4wqrHhegC5X0LuC8A1qYEYNdqvxIP0HL0BmmZ0M
+ gsGA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
  :in-reply-to:references:mime-version:content-transfer-encoding;
- bh=yEZWk0lG1Qw+t7F/fbLX1QbVSJjoK5uaV1TSNjYgFzs=;
- b=JBSJA795Rukp5ci1CMkuqYleI7997yGpWDIF8E9HqCHVyniOTF7m0kCpycHiyE/ARA
- 4qQB1BSCYTTq4eR085zsBz9BASWU6Do02ekFKf9eLl9tqgx/kU2Fe4sr4uY6s2OAeiru
- vkdWCG4XDA+DW4gAUH+hnsKMXM4ND+DXpue/ewipEbaUbut70OFGWu+Upgy7OUOii426
- VmsjH1bSVUSXU1LgatwT7GCImVhadQgXOSqMRB5H0HOyuceW2RPYmeWqckV9fm2SUOqh
- BvNtOcApUjgsc2/GMc+Tzx65wTfrdfXV9cW615eGApfAxHVj9HlbTSX9IcRo2iYHsbxf
- qhcA==
-X-Gm-Message-State: APjAAAUanlb97tf5evle9nkphi7f1q3e1dl9za03ZdOVOq7cVyl+Qiym
- tFrgdBrTNSO4qCmcpMm6PRcGmzB3
-X-Google-Smtp-Source: APXvYqwylTWHmzSg87p+/M0zNgqgqOLArvmyyjEoYYGZRjjMH93tIjQl5A1OBqH+Lynp+Nt/AjWnWQ==
-X-Received: by 2002:a5d:46c7:: with SMTP id g7mr824540wrs.11.1579827109093;
- Thu, 23 Jan 2020 16:51:49 -0800 (PST)
+ bh=OkUkdzYyhyXtcxB9T2HII5hsYZWDXSWKiEC8THq6zfo=;
+ b=GZIM5VThqU9fesRGeV8T4UyrGb3bKiW/RQoe5vfdv8Pn5d+oTZ+oLLc0lqQSiUvWwG
+ OCYlQbw7IUFb1kY87sSvGKuBfJ2c48ZMs1vb9sLWPOJ/Gzr0xUHgSrVnlGt6AglpGI8w
+ 9sGR4a5zDGaIClpglwYIfYerhdPS8PiL9WDQx7jmRolyejqFL2xsaTBmkGWbLar9e/S8
+ nGX+hvRKJtQgXG7ck7hyoRIKda3DtqjV+RrVmH1zxCH3byv//DsAy4DaQt00ejQFk85y
+ OgN5pDzKVaIzBDzXyOBxqcEhkZfQoLTl5blBe6fOrB5UZ7HSufGxCUq6zWE77l6q69E/
+ HKrQ==
+X-Gm-Message-State: APjAAAUal+mVTWoxBtSyxQwLesSZ5pE4fGJO2KZeG7xKI1ofy3z5zgn/
+ tkpsXcgsc837fRFq2h4liy/m46O8
+X-Google-Smtp-Source: APXvYqxlz+3HmZ/x4bHUAn12Wr8Z5+uUk4jYVbb31JrOLlg8lpN5sVagYAIpVwihRTd6sPUSsnbfiA==
+X-Received: by 2002:a5d:6b88:: with SMTP id n8mr893903wrx.288.1579827120858;
+ Thu, 23 Jan 2020 16:52:00 -0800 (PST)
 Received: from x1w.redhat.com (113.red-83-57-172.dynamicip.rima-tde.net.
  [83.57.172.113])
- by smtp.gmail.com with ESMTPSA id s139sm4598271wme.35.2020.01.23.16.51.47
+ by smtp.gmail.com with ESMTPSA id s139sm4598271wme.35.2020.01.23.16.51.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 23 Jan 2020 16:51:48 -0800 (PST)
+ Thu, 23 Jan 2020 16:52:00 -0800 (PST)
 Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
  <philippe.mathieu.daude@gmail.com>
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
@@ -64,11 +64,12 @@ Cc: Alistair Francis <Alistair.Francis@wdc.com>,
  =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
  dovgaluk@ispras.ru, Eduardo Habkost <ehabkost@redhat.com>,
- Palmer Dabbelt <palmer@dabbelt.com>
-Subject: [PATCH rc2 06/25] target/avr: Add instruction translation - Data
- Transfer Instructions
-Date: Fri, 24 Jan 2020 01:51:12 +0100
-Message-Id: <20200124005131.16276-7-f4bug@amsat.org>
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
+Subject: [PATCH rc2 11/25] hw/char: Add limited support for Atmel USART
+ peripheral
+Date: Fri, 24 Jan 2020 01:51:17 +0100
+Message-Id: <20200124005131.16276-12-f4bug@amsat.org>
 X-Mailer: git-send-email 2.21.1
 In-Reply-To: <20200124005131.16276-1-f4bug@amsat.org>
 References: <20200124005131.16276-1-f4bug@amsat.org>
@@ -78,7 +79,7 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::441
+X-Received-From: 2a00:1450:4864:20::442
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -90,1079 +91,478 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Jan 2020 00:52:10 -0000
+X-List-Received-Date: Fri, 24 Jan 2020 00:52:12 -0000
 
 From: Michael Rolnik <mrolnik@gmail.com>
 
-This includes:
-    - MOV, MOVW
-    - LDI, LDS LDX LDY LDZ
-    - LDDY, LDDZ
-    - STS, STX STY STZ
-    - STDY, STDZ
-    - LPM, LPMX
-    - ELPM, ELPMX
-    - SPM, SPMX
-    - IN, OUT
-    - PUSH, POP
-    - XCH
-    - LAS, LAC LAT
+These were designed to facilitate testing but should provide enough
+function to be useful in other contexts.  Only a subset of the functions
+of each peripheral is implemented, mainly due to the lack of a standard
+way to handle electrical connections (like GPIO pins).
 
-Signed-off-by: Michael Rolnik <mrolnik@gmail.com>
-Tested-by: Philippe Mathieu-Daudé <philmd@redhat.com>
-Message-Id: <20200118191416.19934-7-mrolnik@gmail.com>
+Signed-off-by: Sarah Harris <S.E.Harris@kent.ac.uk>
+Message-Id: <20200118191416.19934-12-mrolnik@gmail.com>
+Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
+[rth: Squash I/O size fix and file rename from f4bug, which was:]
+Suggested-by: Aleksandar Markovic <aleksandar.m.mail@gmail.com>
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/avr/translate.c | 987 +++++++++++++++++++++++++++++++++++++++++
- target/avr/insn.decode |  43 ++
- 2 files changed, 1030 insertions(+)
+ include/hw/char/atmel_usart.h |  93 ++++++++++
+ hw/char/atmel_usart.c         | 320 ++++++++++++++++++++++++++++++++++
+ hw/char/Kconfig               |   3 +
+ hw/char/Makefile.objs         |   1 +
+ 4 files changed, 417 insertions(+)
+ create mode 100644 include/hw/char/atmel_usart.h
+ create mode 100644 hw/char/atmel_usart.c
 
-diff --git a/target/avr/translate.c b/target/avr/translate.c
-index 3d4005740a..4a62d9312a 100644
---- a/target/avr/translate.c
-+++ b/target/avr/translate.c
-@@ -1453,3 +1453,990 @@ static bool trans_BRBS(DisasContext *ctx, arg_BRBS *a)
-     ctx->bstate = DISAS_CHAIN;
-     return true;
- }
-+
+diff --git a/include/hw/char/atmel_usart.h b/include/hw/char/atmel_usart.h
+new file mode 100644
+index 0000000000..fd35feac60
+--- /dev/null
++++ b/include/hw/char/atmel_usart.h
+@@ -0,0 +1,93 @@
 +/*
-+ * Data Transfer Instructions
-+ */
-+
-+/*
-+ *  in the gen_set_addr & gen_get_addr functions
-+ *  H assumed to be in 0x00ff0000 format
-+ *  M assumed to be in 0x000000ff format
-+ *  L assumed to be in 0x000000ff format
-+ */
-+static void gen_set_addr(TCGv addr, TCGv H, TCGv M, TCGv L)
-+{
-+
-+    tcg_gen_andi_tl(L, addr, 0x000000ff);
-+
-+    tcg_gen_andi_tl(M, addr, 0x0000ff00);
-+    tcg_gen_shri_tl(M, M, 8);
-+
-+    tcg_gen_andi_tl(H, addr, 0x00ff0000);
-+}
-+
-+static void gen_set_xaddr(TCGv addr)
-+{
-+    gen_set_addr(addr, cpu_rampX, cpu_r[27], cpu_r[26]);
-+}
-+
-+static void gen_set_yaddr(TCGv addr)
-+{
-+    gen_set_addr(addr, cpu_rampY, cpu_r[29], cpu_r[28]);
-+}
-+
-+static void gen_set_zaddr(TCGv addr)
-+{
-+    gen_set_addr(addr, cpu_rampZ, cpu_r[31], cpu_r[30]);
-+}
-+
-+static TCGv gen_get_addr(TCGv H, TCGv M, TCGv L)
-+{
-+    TCGv addr = tcg_temp_new_i32();
-+
-+    tcg_gen_deposit_tl(addr, M, H, 8, 8);
-+    tcg_gen_deposit_tl(addr, L, addr, 8, 16);
-+
-+    return addr;
-+}
-+
-+static TCGv gen_get_xaddr(void)
-+{
-+    return gen_get_addr(cpu_rampX, cpu_r[27], cpu_r[26]);
-+}
-+
-+static TCGv gen_get_yaddr(void)
-+{
-+    return gen_get_addr(cpu_rampY, cpu_r[29], cpu_r[28]);
-+}
-+
-+static TCGv gen_get_zaddr(void)
-+{
-+    return gen_get_addr(cpu_rampZ, cpu_r[31], cpu_r[30]);
-+}
-+
-+/*
-+ *  Load one byte indirect from data space to register and stores an clear
-+ *  the bits in data space specified by the register. The instruction can only
-+ *  be used towards internal SRAM.  The data location is pointed to by the Z (16
-+ *  bits) Pointer Register in the Register File. Memory access is limited to the
-+ *  current data segment of 64KB. To access another data segment in devices with
-+ *  more than 64KB data space, the RAMPZ in register in the I/O area has to be
-+ *  changed.  The Z-pointer Register is left unchanged by the operation. This
-+ *  instruction is especially suited for clearing status bits stored in SRAM.
-+ */
-+static void gen_data_store(DisasContext *ctx, TCGv data, TCGv addr)
-+{
-+    if (ctx->tb->flags & TB_FLAGS_FULL_ACCESS) {
-+        gen_helper_fullwr(cpu_env, data, addr);
-+    } else {
-+        tcg_gen_qemu_st8(data, addr, MMU_DATA_IDX); /* mem[addr] = data */
-+    }
-+}
-+
-+static void gen_data_load(DisasContext *ctx, TCGv data, TCGv addr)
-+{
-+    if (ctx->tb->flags & TB_FLAGS_FULL_ACCESS) {
-+        gen_helper_fullrd(data, cpu_env, addr);
-+    } else {
-+        tcg_gen_qemu_ld8u(data, addr, MMU_DATA_IDX); /* data = mem[addr] */
-+    }
-+}
-+
-+/*
-+ *  This instruction makes a copy of one register into another. The source
-+ *  register Rr is left unchanged, while the destination register Rd is loaded
-+ *  with a copy of Rr.
-+ */
-+static bool trans_MOV(DisasContext *ctx, arg_MOV *a)
-+{
-+    TCGv Rd = cpu_r[a->rd];
-+    TCGv Rr = cpu_r[a->rr];
-+
-+    tcg_gen_mov_tl(Rd, Rr);
-+
-+    return true;
-+}
-+
-+/*
-+ *  This instruction makes a copy of one register pair into another register
-+ *  pair. The source register pair Rr+1:Rr is left unchanged, while the
-+ *  destination register pair Rd+1:Rd is loaded with a copy of Rr + 1:Rr.  This
-+ *  instruction is not available in all devices. Refer to the device specific
-+ *  instruction set summary.
-+ */
-+static bool trans_MOVW(DisasContext *ctx, arg_MOVW *a)
-+{
-+    if (!avr_have_feature(ctx, AVR_FEATURE_MOVW)) {
-+        return true;
-+    }
-+
-+    TCGv RdL = cpu_r[a->rd];
-+    TCGv RdH = cpu_r[a->rd + 1];
-+    TCGv RrL = cpu_r[a->rr];
-+    TCGv RrH = cpu_r[a->rr + 1];
-+
-+    tcg_gen_mov_tl(RdH, RrH);
-+    tcg_gen_mov_tl(RdL, RrL);
-+
-+    return true;
-+}
-+
-+/*
-+ * Loads an 8 bit constant directly to register 16 to 31.
-+ */
-+static bool trans_LDI(DisasContext *ctx, arg_LDI *a)
-+{
-+    TCGv Rd = cpu_r[a->rd];
-+    int imm = a->imm;
-+
-+    tcg_gen_movi_tl(Rd, imm);
-+
-+    return true;
-+}
-+
-+/*
-+ *  Loads one byte from the data space to a register. For parts with SRAM,
-+ *  the data space consists of the Register File, I/O memory and internal SRAM
-+ *  (and external SRAM if applicable). For parts without SRAM, the data space
-+ *  consists of the register file only. The EEPROM has a separate address space.
-+ *  A 16-bit address must be supplied. Memory access is limited to the current
-+ *  data segment of 64KB. The LDS instruction uses the RAMPD Register to access
-+ *  memory above 64KB. To access another data segment in devices with more than
-+ *  64KB data space, the RAMPD in register in the I/O area has to be changed.
-+ *  This instruction is not available in all devices. Refer to the device
-+ *  specific instruction set summary.
-+ */
-+static bool trans_LDS(DisasContext *ctx, arg_LDS *a)
-+{
-+    TCGv Rd = cpu_r[a->rd];
-+    TCGv addr = tcg_temp_new_i32();
-+    TCGv H = cpu_rampD;
-+    a->imm = next_word(ctx);
-+
-+    tcg_gen_mov_tl(addr, H); /* addr = H:M:L */
-+    tcg_gen_shli_tl(addr, addr, 16);
-+    tcg_gen_ori_tl(addr, addr, a->imm);
-+
-+    gen_data_load(ctx, Rd, addr);
-+
-+    tcg_temp_free_i32(addr);
-+
-+    return true;
-+}
-+
-+/*
-+ *  Loads one byte indirect from the data space to a register. For parts
-+ *  with SRAM, the data space consists of the Register File, I/O memory and
-+ *  internal SRAM (and external SRAM if applicable). For parts without SRAM, the
-+ *  data space consists of the Register File only. In some parts the Flash
-+ *  Memory has been mapped to the data space and can be read using this command.
-+ *  The EEPROM has a separate address space.  The data location is pointed to by
-+ *  the X (16 bits) Pointer Register in the Register File. Memory access is
-+ *  limited to the current data segment of 64KB. To access another data segment
-+ *  in devices with more than 64KB data space, the RAMPX in register in the I/O
-+ *  area has to be changed.  The X-pointer Register can either be left unchanged
-+ *  by the operation, or it can be post-incremented or predecremented.  These
-+ *  features are especially suited for accessing arrays, tables, and Stack
-+ *  Pointer usage of the X-pointer Register. Note that only the low byte of the
-+ *  X-pointer is updated in devices with no more than 256 bytes data space. For
-+ *  such devices, the high byte of the pointer is not used by this instruction
-+ *  and can be used for other purposes. The RAMPX Register in the I/O area is
-+ *  updated in parts with more than 64KB data space or more than 64KB Program
-+ *  memory, and the increment/decrement is added to the entire 24-bit address on
-+ *  such devices.  Not all variants of this instruction is available in all
-+ *  devices. Refer to the device specific instruction set summary.  In the
-+ *  Reduced Core tinyAVR the LD instruction can be used to achieve the same
-+ *  operation as LPM since the program memory is mapped to the data memory
-+ *  space.
-+ */
-+static bool trans_LDX1(DisasContext *ctx, arg_LDX1 *a)
-+{
-+    TCGv Rd = cpu_r[a->rd];
-+    TCGv addr = gen_get_xaddr();
-+
-+    gen_data_load(ctx, Rd, addr);
-+
-+    tcg_temp_free_i32(addr);
-+
-+    return true;
-+}
-+
-+static bool trans_LDX2(DisasContext *ctx, arg_LDX2 *a)
-+{
-+    TCGv Rd = cpu_r[a->rd];
-+    TCGv addr = gen_get_xaddr();
-+
-+    gen_data_load(ctx, Rd, addr);
-+    tcg_gen_addi_tl(addr, addr, 1); /* addr = addr + 1 */
-+
-+    gen_set_xaddr(addr);
-+
-+    tcg_temp_free_i32(addr);
-+
-+    return true;
-+}
-+
-+static bool trans_LDX3(DisasContext *ctx, arg_LDX3 *a)
-+{
-+    TCGv Rd = cpu_r[a->rd];
-+    TCGv addr = gen_get_xaddr();
-+
-+    tcg_gen_subi_tl(addr, addr, 1); /* addr = addr - 1 */
-+    gen_data_load(ctx, Rd, addr);
-+    gen_set_xaddr(addr);
-+
-+    tcg_temp_free_i32(addr);
-+
-+    return true;
-+}
-+
-+/*
-+ *  Loads one byte indirect with or without displacement from the data space
-+ *  to a register. For parts with SRAM, the data space consists of the Register
-+ *  File, I/O memory and internal SRAM (and external SRAM if applicable). For
-+ *  parts without SRAM, the data space consists of the Register File only. In
-+ *  some parts the Flash Memory has been mapped to the data space and can be
-+ *  read using this command. The EEPROM has a separate address space.  The data
-+ *  location is pointed to by the Y (16 bits) Pointer Register in the Register
-+ *  File. Memory access is limited to the current data segment of 64KB. To
-+ *  access another data segment in devices with more than 64KB data space, the
-+ *  RAMPY in register in the I/O area has to be changed.  The Y-pointer Register
-+ *  can either be left unchanged by the operation, or it can be post-incremented
-+ *  or predecremented.  These features are especially suited for accessing
-+ *  arrays, tables, and Stack Pointer usage of the Y-pointer Register. Note that
-+ *  only the low byte of the Y-pointer is updated in devices with no more than
-+ *  256 bytes data space. For such devices, the high byte of the pointer is not
-+ *  used by this instruction and can be used for other purposes. The RAMPY
-+ *  Register in the I/O area is updated in parts with more than 64KB data space
-+ *  or more than 64KB Program memory, and the increment/decrement/displacement
-+ *  is added to the entire 24-bit address on such devices.  Not all variants of
-+ *  this instruction is available in all devices. Refer to the device specific
-+ *  instruction set summary.  In the Reduced Core tinyAVR the LD instruction can
-+ *  be used to achieve the same operation as LPM since the program memory is
-+ *  mapped to the data memory space.
-+ */
-+static bool trans_LDY2(DisasContext *ctx, arg_LDY2 *a)
-+{
-+    TCGv Rd = cpu_r[a->rd];
-+    TCGv addr = gen_get_yaddr();
-+
-+    gen_data_load(ctx, Rd, addr);
-+    tcg_gen_addi_tl(addr, addr, 1); /* addr = addr + 1 */
-+
-+    gen_set_yaddr(addr);
-+
-+    tcg_temp_free_i32(addr);
-+
-+    return true;
-+}
-+
-+static bool trans_LDY3(DisasContext *ctx, arg_LDY3 *a)
-+{
-+    TCGv Rd = cpu_r[a->rd];
-+    TCGv addr = gen_get_yaddr();
-+
-+    tcg_gen_subi_tl(addr, addr, 1); /* addr = addr - 1 */
-+    gen_data_load(ctx, Rd, addr);
-+    gen_set_yaddr(addr);
-+
-+    tcg_temp_free_i32(addr);
-+
-+    return true;
-+}
-+
-+static bool trans_LDDY(DisasContext *ctx, arg_LDDY *a)
-+{
-+    TCGv Rd = cpu_r[a->rd];
-+    TCGv addr = gen_get_yaddr();
-+
-+    tcg_gen_addi_tl(addr, addr, a->imm); /* addr = addr + q */
-+    gen_data_load(ctx, Rd, addr);
-+
-+    tcg_temp_free_i32(addr);
-+
-+    return true;
-+}
-+
-+/*
-+ *  Loads one byte indirect with or without displacement from the data space
-+ *  to a register. For parts with SRAM, the data space consists of the Register
-+ *  File, I/O memory and internal SRAM (and external SRAM if applicable). For
-+ *  parts without SRAM, the data space consists of the Register File only. In
-+ *  some parts the Flash Memory has been mapped to the data space and can be
-+ *  read using this command. The EEPROM has a separate address space.  The data
-+ *  location is pointed to by the Z (16 bits) Pointer Register in the Register
-+ *  File. Memory access is limited to the current data segment of 64KB. To
-+ *  access another data segment in devices with more than 64KB data space, the
-+ *  RAMPZ in register in the I/O area has to be changed.  The Z-pointer Register
-+ *  can either be left unchanged by the operation, or it can be post-incremented
-+ *  or predecremented.  These features are especially suited for Stack Pointer
-+ *  usage of the Z-pointer Register, however because the Z-pointer Register can
-+ *  be used for indirect subroutine calls, indirect jumps and table lookup, it
-+ *  is often more convenient to use the X or Y-pointer as a dedicated Stack
-+ *  Pointer. Note that only the low byte of the Z-pointer is updated in devices
-+ *  with no more than 256 bytes data space. For such devices, the high byte of
-+ *  the pointer is not used by this instruction and can be used for other
-+ *  purposes. The RAMPZ Register in the I/O area is updated in parts with more
-+ *  than 64KB data space or more than 64KB Program memory, and the
-+ *  increment/decrement/displacement is added to the entire 24-bit address on
-+ *  such devices.  Not all variants of this instruction is available in all
-+ *  devices. Refer to the device specific instruction set summary.  In the
-+ *  Reduced Core tinyAVR the LD instruction can be used to achieve the same
-+ *  operation as LPM since the program memory is mapped to the data memory
-+ *  space.  For using the Z-pointer for table lookup in Program memory see the
-+ *  LPM and ELPM instructions.
-+ */
-+static bool trans_LDZ2(DisasContext *ctx, arg_LDZ2 *a)
-+{
-+    TCGv Rd = cpu_r[a->rd];
-+    TCGv addr = gen_get_zaddr();
-+
-+    gen_data_load(ctx, Rd, addr);
-+    tcg_gen_addi_tl(addr, addr, 1); /* addr = addr + 1 */
-+
-+    gen_set_zaddr(addr);
-+
-+    tcg_temp_free_i32(addr);
-+
-+    return true;
-+}
-+
-+static bool trans_LDZ3(DisasContext *ctx, arg_LDZ3 *a)
-+{
-+    TCGv Rd = cpu_r[a->rd];
-+    TCGv addr = gen_get_zaddr();
-+
-+    tcg_gen_subi_tl(addr, addr, 1); /* addr = addr - 1 */
-+    gen_data_load(ctx, Rd, addr);
-+
-+    gen_set_zaddr(addr);
-+
-+    tcg_temp_free_i32(addr);
-+
-+    return true;
-+}
-+
-+static bool trans_LDDZ(DisasContext *ctx, arg_LDDZ *a)
-+{
-+    TCGv Rd = cpu_r[a->rd];
-+    TCGv addr = gen_get_zaddr();
-+
-+    tcg_gen_addi_tl(addr, addr, a->imm); /* addr = addr + q */
-+    gen_data_load(ctx, Rd, addr);
-+
-+    tcg_temp_free_i32(addr);
-+
-+    return true;
-+}
-+
-+/*
-+ *  Stores one byte from a Register to the data space. For parts with SRAM,
-+ *  the data space consists of the Register File, I/O memory and internal SRAM
-+ *  (and external SRAM if applicable). For parts without SRAM, the data space
-+ *  consists of the Register File only. The EEPROM has a separate address space.
-+ *  A 16-bit address must be supplied. Memory access is limited to the current
-+ *  data segment of 64KB. The STS instruction uses the RAMPD Register to access
-+ *  memory above 64KB. To access another data segment in devices with more than
-+ *  64KB data space, the RAMPD in register in the I/O area has to be changed.
-+ *  This instruction is not available in all devices. Refer to the device
-+ *  specific instruction set summary.
-+ */
-+static bool trans_STS(DisasContext *ctx, arg_STS *a)
-+{
-+    TCGv Rd = cpu_r[a->rd];
-+    TCGv addr = tcg_temp_new_i32();
-+    TCGv H = cpu_rampD;
-+    a->imm = next_word(ctx);
-+
-+    tcg_gen_mov_tl(addr, H); /* addr = H:M:L */
-+    tcg_gen_shli_tl(addr, addr, 16);
-+    tcg_gen_ori_tl(addr, addr, a->imm);
-+    gen_data_store(ctx, Rd, addr);
-+
-+    tcg_temp_free_i32(addr);
-+
-+    return true;
-+}
-+
-+/*
-+ * Stores one byte indirect from a register to data space. For parts with SRAM,
-+ * the data space consists of the Register File, I/O memory, and internal SRAM
-+ * (and external SRAM if applicable). For parts without SRAM, the data space
-+ * consists of the Register File only. The EEPROM has a separate address space.
++ * Atmel AVR USART
 + *
-+ * The data location is pointed to by the X (16 bits) Pointer Register in the
-+ * Register File. Memory access is limited to the current data segment of 64KB.
-+ * To access another data segment in devices with more than 64KB data space, the
-+ * RAMPX in register in the I/O area has to be changed.
++ * Copyright (c) 2018 University of Kent
++ * Author: Sarah Harris
 + *
-+ * The X-pointer Register can either be left unchanged by the operation, or it
-+ * can be post-incremented or pre-decremented. These features are especially
-+ * suited for accessing arrays, tables, and Stack Pointer usage of the
-+ * X-pointer Register. Note that only the low byte of the X-pointer is updated
-+ * in devices with no more than 256 bytes data space. For such devices, the high
-+ * byte of the pointer is not used by this instruction and can be used for other
-+ * purposes. The RAMPX Register in the I/O area is updated in parts with more
-+ * than 64KB data space or more than 64KB Program memory, and the increment /
-+ * decrement is added to the entire 24-bit address on such devices.
++ * This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Lesser General Public
++ * License as published by the Free Software Foundation; either
++ * version 2.1 of the License, or (at your option) any later version.
++ *
++ * This library is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ * Lesser General Public License for more details.
++ *
++ * You should have received a copy of the GNU Lesser General Public
++ * License along with this library; if not, see
++ * <http://www.gnu.org/licenses/lgpl-2.1.html>
 + */
-+static bool trans_STX1(DisasContext *ctx, arg_STX1 *a)
-+{
-+    TCGv Rd = cpu_r[a->rr];
-+    TCGv addr = gen_get_xaddr();
 +
-+    gen_data_store(ctx, Rd, addr);
++#ifndef HW_CHAR_ATMEL_USART_H
++#define HW_CHAR_ATMEL_USART_H
 +
-+    tcg_temp_free_i32(addr);
++#include "hw/sysbus.h"
++#include "chardev/char-fe.h"
++#include "hw/hw.h"
 +
-+    return true;
-+}
++/* Offsets of registers. */
++#define USART_DR   0x06
++#define USART_CSRA  0x00
++#define USART_CSRB  0x01
++#define USART_CSRC  0x02
++#define USART_BRRH 0x05
++#define USART_BRRL 0x04
 +
-+static bool trans_STX2(DisasContext *ctx, arg_STX2 *a)
-+{
-+    TCGv Rd = cpu_r[a->rr];
-+    TCGv addr = gen_get_xaddr();
++/* Relevant bits in regiters. */
++#define USART_CSRA_RXC    (1 << 7)
++#define USART_CSRA_TXC    (1 << 6)
++#define USART_CSRA_DRE    (1 << 5)
++#define USART_CSRA_MPCM   (1 << 0)
 +
-+    gen_data_store(ctx, Rd, addr);
-+    tcg_gen_addi_tl(addr, addr, 1); /* addr = addr + 1 */
-+    gen_set_xaddr(addr);
++#define USART_CSRB_RXCIE  (1 << 7)
++#define USART_CSRB_TXCIE  (1 << 6)
++#define USART_CSRB_DREIE  (1 << 5)
++#define USART_CSRB_RXEN   (1 << 4)
++#define USART_CSRB_TXEN   (1 << 3)
++#define USART_CSRB_CSZ2   (1 << 2)
++#define USART_CSRB_RXB8   (1 << 1)
++#define USART_CSRB_TXB8   (1 << 0)
 +
-+    tcg_temp_free_i32(addr);
++#define USART_CSRC_MSEL1  (1 << 7)
++#define USART_CSRC_MSEL0  (1 << 6)
++#define USART_CSRC_PM1    (1 << 5)
++#define USART_CSRC_PM0    (1 << 4)
++#define USART_CSRC_CSZ1   (1 << 2)
++#define USART_CSRC_CSZ0   (1 << 1)
 +
-+    return true;
-+}
++#define TYPE_AVR_USART "atmel-usart"
++#define AVR_USART(obj) \
++    OBJECT_CHECK(AVRUsartState, (obj), TYPE_AVR_USART)
 +
-+static bool trans_STX3(DisasContext *ctx, arg_STX3 *a)
-+{
-+    TCGv Rd = cpu_r[a->rr];
-+    TCGv addr = gen_get_xaddr();
++typedef struct {
++    /* <private> */
++    SysBusDevice parent_obj;
 +
-+    tcg_gen_subi_tl(addr, addr, 1); /* addr = addr - 1 */
-+    gen_data_store(ctx, Rd, addr);
-+    gen_set_xaddr(addr);
++    /* <public> */
++    MemoryRegion mmio;
 +
-+    tcg_temp_free_i32(addr);
++    CharBackend chr;
 +
-+    return true;
-+}
++    bool enabled;
 +
++    uint8_t data;
++    bool data_valid;
++    uint8_t char_mask;
++    /* Control and Status Registers */
++    uint8_t csra;
++    uint8_t csrb;
++    uint8_t csrc;
++    /* Baud Rate Registers (low/high byte) */
++    uint8_t brrh;
++    uint8_t brrl;
++
++    /* Receive Complete */
++    qemu_irq rxc_irq;
++    /* Transmit Complete */
++    qemu_irq txc_irq;
++    /* Data Register Empty */
++    qemu_irq dre_irq;
++} AVRUsartState;
++
++#endif /* HW_CHAR_ATMEL_USART_H */
+diff --git a/hw/char/atmel_usart.c b/hw/char/atmel_usart.c
+new file mode 100644
+index 0000000000..a7004c212a
+--- /dev/null
++++ b/hw/char/atmel_usart.c
+@@ -0,0 +1,320 @@
 +/*
-+ * Stores one byte indirect with or without displacement from a register to data
-+ * space. For parts with SRAM, the data space consists of the Register File, I/O
-+ * memory, and internal SRAM (and external SRAM if applicable). For parts
-+ * without SRAM, the data space consists of the Register File only. The EEPROM
-+ * has a separate address space.
++ * Atmel AVR USART
 + *
-+ * The data location is pointed to by the Y (16 bits) Pointer Register in the
-+ * Register File. Memory access is limited to the current data segment of 64KB.
-+ * To access another data segment in devices with more than 64KB data space, the
-+ * RAMPY in register in the I/O area has to be changed.
++ * Copyright (c) 2018 University of Kent
++ * Author: Sarah Harris
 + *
-+ * The Y-pointer Register can either be left unchanged by the operation, or it
-+ * can be post-incremented or pre-decremented. These features are especially
-+ * suited for accessing arrays, tables, and Stack Pointer usage of the Y-pointer
-+ * Register. Note that only the low byte of the Y-pointer is updated in devices
-+ * with no more than 256 bytes data space. For such devices, the high byte of
-+ * the pointer is not used by this instruction and can be used for other
-+ * purposes. The RAMPY Register in the I/O area is updated in parts with more
-+ * than 64KB data space or more than 64KB Program memory, and the increment /
-+ * decrement / displacement is added to the entire 24-bit address on such
-+ * devices.
++ * This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Lesser General Public
++ * License as published by the Free Software Foundation; either
++ * version 2.1 of the License, or (at your option) any later version.
++ *
++ * This library is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ * Lesser General Public License for more details.
++ *
++ * You should have received a copy of the GNU Lesser General Public
++ * License along with this library; if not, see
++ * <http://www.gnu.org/licenses/lgpl-2.1.html>
 + */
-+static bool trans_STY2(DisasContext *ctx, arg_STY2 *a)
++
++#include "qemu/osdep.h"
++#include "hw/char/atmel_usart.h"
++#include "qemu/log.h"
++#include "hw/irq.h"
++#include "hw/qdev-properties.h"
++
++static int avr_usart_can_receive(void *opaque)
 +{
-+    TCGv Rd = cpu_r[a->rd];
-+    TCGv addr = gen_get_yaddr();
++    AVRUsartState *usart = opaque;
 +
-+    gen_data_store(ctx, Rd, addr);
-+    tcg_gen_addi_tl(addr, addr, 1); /* addr = addr + 1 */
-+    gen_set_yaddr(addr);
-+
-+    tcg_temp_free_i32(addr);
-+
-+    return true;
++    if (usart->data_valid || !(usart->csrb & USART_CSRB_RXEN)) {
++        return 0;
++    }
++    return 1;
 +}
 +
-+static bool trans_STY3(DisasContext *ctx, arg_STY3 *a)
++static void avr_usart_receive(void *opaque, const uint8_t *buffer, int size)
 +{
-+    TCGv Rd = cpu_r[a->rd];
-+    TCGv addr = gen_get_yaddr();
-+
-+    tcg_gen_subi_tl(addr, addr, 1); /* addr = addr - 1 */
-+    gen_data_store(ctx, Rd, addr);
-+    gen_set_yaddr(addr);
-+
-+    tcg_temp_free_i32(addr);
-+
-+    return true;
++    AVRUsartState *usart = opaque;
++    assert(size == 1);
++    assert(!usart->data_valid);
++    usart->data = buffer[0];
++    usart->data_valid = true;
++    usart->csra |= USART_CSRA_RXC;
++    if (usart->csrb & USART_CSRB_RXCIE) {
++        qemu_set_irq(usart->rxc_irq, 1);
++    }
 +}
 +
-+static bool trans_STDY(DisasContext *ctx, arg_STDY *a)
++static void update_char_mask(AVRUsartState *usart)
 +{
-+    TCGv Rd = cpu_r[a->rd];
-+    TCGv addr = gen_get_yaddr();
-+
-+    tcg_gen_addi_tl(addr, addr, a->imm); /* addr = addr + q */
-+    gen_data_store(ctx, Rd, addr);
-+
-+    tcg_temp_free_i32(addr);
-+
-+    return true;
++    uint8_t mode = ((usart->csrc & USART_CSRC_CSZ0) ? 1 : 0) |
++        ((usart->csrc & USART_CSRC_CSZ1) ? 2 : 0) |
++        ((usart->csrb & USART_CSRB_CSZ2) ? 4 : 0);
++    switch (mode) {
++    case 0:
++        usart->char_mask = 0b11111;
++        break;
++    case 1:
++        usart->char_mask = 0b111111;
++        break;
++    case 2:
++        usart->char_mask = 0b1111111;
++        break;
++    case 3:
++        usart->char_mask = 0b11111111;
++        break;
++    case 4:
++        /* Fallthrough. */
++    case 5:
++        /* Fallthrough. */
++    case 6:
++        qemu_log_mask(
++            LOG_GUEST_ERROR,
++            "%s: Reserved character size 0x%x\n",
++            __func__,
++            mode);
++        break;
++    case 7:
++        qemu_log_mask(
++            LOG_GUEST_ERROR,
++            "%s: Nine bit character size not supported (forcing eight)\n",
++            __func__);
++        usart->char_mask = 0b11111111;
++        break;
++    default:
++        assert(0);
++    }
 +}
 +
-+/*
-+ * Stores one byte indirect with or without displacement from a register to data
-+ * space. For parts with SRAM, the data space consists of the Register File, I/O
-+ * memory, and internal SRAM (and external SRAM if applicable). For parts
-+ * without SRAM, the data space consists of the Register File only. The EEPROM
-+ * has a separate address space.
-+ *
-+ * The data location is pointed to by the Y (16 bits) Pointer Register in the
-+ * Register File. Memory access is limited to the current data segment of 64KB.
-+ * To access another data segment in devices with more than 64KB data space, the
-+ * RAMPY in register in the I/O area has to be changed.
-+ *
-+ * The Y-pointer Register can either be left unchanged by the operation, or it
-+ * can be post-incremented or pre-decremented. These features are especially
-+ * suited for accessing arrays, tables, and Stack Pointer usage of the Y-pointer
-+ * Register. Note that only the low byte of the Y-pointer is updated in devices
-+ * with no more than 256 bytes data space. For such devices, the high byte of
-+ * the pointer is not used by this instruction and can be used for other
-+ * purposes. The RAMPY Register in the I/O area is updated in parts with more
-+ * than 64KB data space or more than 64KB Program memory, and the increment /
-+ * decrement / displacement is added to the entire 24-bit address on such
-+ * devices.
-+ */
-+static bool trans_STZ2(DisasContext *ctx, arg_STZ2 *a)
++static void avr_usart_reset(DeviceState *dev)
 +{
-+    TCGv Rd = cpu_r[a->rd];
-+    TCGv addr = gen_get_zaddr();
-+
-+    gen_data_store(ctx, Rd, addr);
-+    tcg_gen_addi_tl(addr, addr, 1); /* addr = addr + 1 */
-+
-+    gen_set_zaddr(addr);
-+
-+    tcg_temp_free_i32(addr);
-+
-+    return true;
++    AVRUsartState *usart = AVR_USART(dev);
++    usart->data_valid = false;
++    usart->csra = 0b00100000;
++    usart->csrb = 0b00000000;
++    usart->csrc = 0b00000110;
++    usart->brrl = 0;
++    usart->brrh = 0;
++    update_char_mask(usart);
++    qemu_set_irq(usart->rxc_irq, 0);
++    qemu_set_irq(usart->txc_irq, 0);
++    qemu_set_irq(usart->dre_irq, 0);
 +}
 +
-+static bool trans_STZ3(DisasContext *ctx, arg_STZ3 *a)
++static uint64_t avr_usart_read(void *opaque, hwaddr addr, unsigned int size)
 +{
-+    TCGv Rd = cpu_r[a->rd];
-+    TCGv addr = gen_get_zaddr();
++    AVRUsartState *usart = opaque;
++    uint8_t data;
++    assert(size == 1);
 +
-+    tcg_gen_subi_tl(addr, addr, 1); /* addr = addr - 1 */
-+    gen_data_store(ctx, Rd, addr);
-+
-+    gen_set_zaddr(addr);
-+
-+    tcg_temp_free_i32(addr);
-+
-+    return true;
-+}
-+
-+static bool trans_STDZ(DisasContext *ctx, arg_STDZ *a)
-+{
-+    TCGv Rd = cpu_r[a->rd];
-+    TCGv addr = gen_get_zaddr();
-+
-+    tcg_gen_addi_tl(addr, addr, a->imm); /* addr = addr + q */
-+    gen_data_store(ctx, Rd, addr);
-+
-+    tcg_temp_free_i32(addr);
-+
-+    return true;
-+}
-+
-+/*
-+ *  Loads one byte pointed to by the Z-register into the destination
-+ *  register Rd. This instruction features a 100% space effective constant
-+ *  initialization or constant data fetch. The Program memory is organized in
-+ *  16-bit words while the Z-pointer is a byte address. Thus, the least
-+ *  significant bit of the Z-pointer selects either low byte (ZLSB = 0) or high
-+ *  byte (ZLSB = 1). This instruction can address the first 64KB (32K words) of
-+ *  Program memory. The Zpointer Register can either be left unchanged by the
-+ *  operation, or it can be incremented. The incrementation does not apply to
-+ *  the RAMPZ Register.
-+ *
-+ *  Devices with Self-Programming capability can use the LPM instruction to read
-+ *  the Fuse and Lock bit values.
-+ */
-+static bool trans_LPM1(DisasContext *ctx, arg_LPM1 *a)
-+{
-+    if (!avr_have_feature(ctx, AVR_FEATURE_LPM)) {
-+        return true;
++    if (!usart->enabled) {
++        return 0;
 +    }
 +
-+    TCGv Rd = cpu_r[0];
-+    TCGv addr = tcg_temp_new_i32();
-+    TCGv H = cpu_r[31];
-+    TCGv L = cpu_r[30];
-+
-+    tcg_gen_shli_tl(addr, H, 8); /* addr = H:L */
-+    tcg_gen_or_tl(addr, addr, L);
-+    tcg_gen_qemu_ld8u(Rd, addr, MMU_CODE_IDX); /* Rd = mem[addr] */
-+
-+    tcg_temp_free_i32(addr);
-+
-+    return true;
++    switch (addr) {
++    case USART_DR:
++        if (!(usart->csrb & USART_CSRB_RXEN)) {
++            /* Receiver disabled, ignore. */
++            return 0;
++        }
++        if (usart->data_valid) {
++            data = usart->data & usart->char_mask;
++            usart->data_valid = false;
++        } else {
++            data = 0;
++        }
++        usart->csra &= 0xff ^ USART_CSRA_RXC;
++        qemu_set_irq(usart->rxc_irq, 0);
++        qemu_chr_fe_accept_input(&usart->chr);
++        return data;
++    case USART_CSRA:
++        return usart->csra;
++    case USART_CSRB:
++        return usart->csrb;
++    case USART_CSRC:
++        return usart->csrc;
++    case USART_BRRL:
++        return usart->brrl;
++    case USART_BRRH:
++        return usart->brrh;
++    default:
++        qemu_log_mask(
++            LOG_GUEST_ERROR,
++            "%s: Bad offset 0x%"HWADDR_PRIx"\n",
++            __func__,
++            addr);
++    }
++    return 0;
 +}
 +
-+static bool trans_LPM2(DisasContext *ctx, arg_LPM2 *a)
++static void avr_usart_write(void *opaque, hwaddr addr, uint64_t value,
++                                unsigned int size)
 +{
-+    if (!avr_have_feature(ctx, AVR_FEATURE_LPM)) {
-+        return true;
++    AVRUsartState *usart = opaque;
++    uint8_t mask;
++    uint8_t data;
++    assert((value & 0xff) == value);
++    assert(size == 1);
++
++    if (!usart->enabled) {
++        return;
 +    }
 +
-+    TCGv Rd = cpu_r[a->rd];
-+    TCGv addr = tcg_temp_new_i32();
-+    TCGv H = cpu_r[31];
-+    TCGv L = cpu_r[30];
-+
-+    tcg_gen_shli_tl(addr, H, 8); /* addr = H:L */
-+    tcg_gen_or_tl(addr, addr, L);
-+    tcg_gen_qemu_ld8u(Rd, addr, MMU_CODE_IDX); /* Rd = mem[addr] */
-+
-+    tcg_temp_free_i32(addr);
-+
-+    return true;
-+}
-+
-+static bool trans_LPMX(DisasContext *ctx, arg_LPMX *a)
-+{
-+    if (!avr_have_feature(ctx, AVR_FEATURE_LPMX)) {
-+        return true;
++    switch (addr) {
++    case USART_DR:
++        if (!(usart->csrb & USART_CSRB_TXEN)) {
++            /* Transmitter disabled, ignore. */
++            return;
++        }
++        usart->csra |= USART_CSRA_TXC;
++        usart->csra |= USART_CSRA_DRE;
++        if (usart->csrb & USART_CSRB_TXCIE) {
++            qemu_set_irq(usart->txc_irq, 1);
++            usart->csra &= 0xff ^ USART_CSRA_TXC;
++        }
++        if (usart->csrb & USART_CSRB_DREIE) {
++            qemu_set_irq(usart->dre_irq, 1);
++        }
++        data = value;
++        qemu_chr_fe_write_all(&usart->chr, &data, 1);
++        break;
++    case USART_CSRA:
++        mask = 0b01000011;
++        /* Mask read-only bits. */
++        value = (value & mask) | (usart->csra & (0xff ^ mask));
++        usart->csra = value;
++        if (value & USART_CSRA_TXC) {
++            usart->csra ^= USART_CSRA_TXC;
++            qemu_set_irq(usart->txc_irq, 0);
++        }
++        if (value & USART_CSRA_MPCM) {
++            qemu_log_mask(
++                LOG_GUEST_ERROR,
++                "%s: MPCM not supported by USART\n",
++                __func__);
++        }
++        break;
++    case USART_CSRB:
++        mask = 0b11111101;
++        /* Mask read-only bits. */
++        value = (value & mask) | (usart->csrb & (0xff ^ mask));
++        usart->csrb = value;
++        if (!(value & USART_CSRB_RXEN)) {
++            /* Receiver disabled, flush input buffer. */
++            usart->data_valid = false;
++        }
++        qemu_set_irq(usart->rxc_irq,
++            ((value & USART_CSRB_RXCIE) &&
++            (usart->csra & USART_CSRA_RXC)) ? 1 : 0);
++        qemu_set_irq(usart->txc_irq,
++            ((value & USART_CSRB_TXCIE) &&
++            (usart->csra & USART_CSRA_TXC)) ? 1 : 0);
++        qemu_set_irq(usart->dre_irq,
++            ((value & USART_CSRB_DREIE) &&
++            (usart->csra & USART_CSRA_DRE)) ? 1 : 0);
++        update_char_mask(usart);
++        break;
++    case USART_CSRC:
++        usart->csrc = value;
++        if ((value & USART_CSRC_MSEL1) && (value & USART_CSRC_MSEL0)) {
++            qemu_log_mask(
++                LOG_GUEST_ERROR,
++                "%s: SPI mode not supported by USART\n",
++                __func__);
++        }
++        if ((value & USART_CSRC_MSEL1) && !(value & USART_CSRC_MSEL0)) {
++            qemu_log_mask(LOG_GUEST_ERROR, "%s: Bad USART mode\n", __func__);
++        }
++        if (!(value & USART_CSRC_PM1) && (value & USART_CSRC_PM0)) {
++            qemu_log_mask(
++                LOG_GUEST_ERROR,
++                "%s: Bad USART parity mode\n",
++                __func__);
++        }
++        update_char_mask(usart);
++        break;
++    case USART_BRRL:
++        usart->brrl = value;
++        break;
++    case USART_BRRH:
++        usart->brrh = value & 0b00001111;
++        break;
++    default:
++        qemu_log_mask(
++            LOG_GUEST_ERROR,
++            "%s: Bad offset 0x%"HWADDR_PRIx"\n",
++            __func__,
++            addr);
 +    }
-+
-+    TCGv Rd = cpu_r[a->rd];
-+    TCGv addr = tcg_temp_new_i32();
-+    TCGv H = cpu_r[31];
-+    TCGv L = cpu_r[30];
-+
-+    tcg_gen_shli_tl(addr, H, 8); /* addr = H:L */
-+    tcg_gen_or_tl(addr, addr, L);
-+    tcg_gen_qemu_ld8u(Rd, addr, MMU_CODE_IDX); /* Rd = mem[addr] */
-+    tcg_gen_addi_tl(addr, addr, 1); /* addr = addr + 1 */
-+    tcg_gen_andi_tl(L, addr, 0xff);
-+    tcg_gen_shri_tl(addr, addr, 8);
-+    tcg_gen_andi_tl(H, addr, 0xff);
-+
-+    tcg_temp_free_i32(addr);
-+
-+    return true;
 +}
 +
++static const MemoryRegionOps avr_usart_ops = {
++    .read = avr_usart_read,
++    .write = avr_usart_write,
++    .endianness = DEVICE_NATIVE_ENDIAN,
++    .impl = {.min_access_size = 1, .max_access_size = 1}
++};
 +
-+/*
-+ *  Loads one byte pointed to by the Z-register and the RAMPZ Register in
-+ *  the I/O space, and places this byte in the destination register Rd. This
-+ *  instruction features a 100% space effective constant initialization or
-+ *  constant data fetch. The Program memory is organized in 16-bit words while
-+ *  the Z-pointer is a byte address. Thus, the least significant bit of the
-+ *  Z-pointer selects either low byte (ZLSB = 0) or high byte (ZLSB = 1). This
-+ *  instruction can address the entire Program memory space. The Z-pointer
-+ *  Register can either be left unchanged by the operation, or it can be
-+ *  incremented. The incrementation applies to the entire 24-bit concatenation
-+ *  of the RAMPZ and Z-pointer Registers.
-+ *
-+ *  Devices with Self-Programming capability can use the ELPM instruction to
-+ *  read the Fuse and Lock bit value.
-+ */
-+static bool trans_ELPM1(DisasContext *ctx, arg_ELPM1 *a)
++static Property avr_usart_properties[] = {
++    DEFINE_PROP_CHR("chardev", AVRUsartState, chr),
++    DEFINE_PROP_END_OF_LIST(),
++};
++
++static void avr_usart_pr(void *opaque, int irq, int level)
 +{
-+    if (!avr_have_feature(ctx, AVR_FEATURE_ELPM)) {
-+        return true;
++    AVRUsartState *s = AVR_USART(opaque);
++
++    s->enabled = !level;
++
++    if (!s->enabled) {
++        avr_usart_reset(DEVICE(s));
 +    }
-+
-+    TCGv Rd = cpu_r[0];
-+    TCGv addr = gen_get_zaddr();
-+
-+    tcg_gen_qemu_ld8u(Rd, addr, MMU_CODE_IDX); /* Rd = mem[addr] */
-+
-+    tcg_temp_free_i32(addr);
-+
-+    return true;
 +}
 +
-+static bool trans_ELPM2(DisasContext *ctx, arg_ELPM2 *a)
++static void avr_usart_init(Object *obj)
 +{
-+    if (!avr_have_feature(ctx, AVR_FEATURE_ELPM)) {
-+        return true;
-+    }
-+
-+    TCGv Rd = cpu_r[a->rd];
-+    TCGv addr = gen_get_zaddr();
-+
-+    tcg_gen_qemu_ld8u(Rd, addr, MMU_CODE_IDX); /* Rd = mem[addr] */
-+
-+    tcg_temp_free_i32(addr);
-+
-+    return true;
++    AVRUsartState *s = AVR_USART(obj);
++    sysbus_init_irq(SYS_BUS_DEVICE(obj), &s->rxc_irq);
++    sysbus_init_irq(SYS_BUS_DEVICE(obj), &s->dre_irq);
++    sysbus_init_irq(SYS_BUS_DEVICE(obj), &s->txc_irq);
++    memory_region_init_io(&s->mmio, obj, &avr_usart_ops, s, TYPE_AVR_USART, 7);
++    sysbus_init_mmio(SYS_BUS_DEVICE(obj), &s->mmio);
++    qdev_init_gpio_in(DEVICE(s), avr_usart_pr, 1);
++    s->enabled = true;
 +}
 +
-+static bool trans_ELPMX(DisasContext *ctx, arg_ELPMX *a)
++static void avr_usart_realize(DeviceState *dev, Error **errp)
 +{
-+    if (!avr_have_feature(ctx, AVR_FEATURE_ELPMX)) {
-+        return true;
-+    }
-+
-+    TCGv Rd = cpu_r[a->rd];
-+    TCGv addr = gen_get_zaddr();
-+
-+    tcg_gen_qemu_ld8u(Rd, addr, MMU_CODE_IDX); /* Rd = mem[addr] */
-+    tcg_gen_addi_tl(addr, addr, 1); /* addr = addr + 1 */
-+    gen_set_zaddr(addr);
-+
-+    tcg_temp_free_i32(addr);
-+
-+    return true;
++    AVRUsartState *s = AVR_USART(dev);
++    qemu_chr_fe_set_handlers(&s->chr, avr_usart_can_receive,
++                             avr_usart_receive, NULL, NULL,
++                             s, NULL, true);
++    avr_usart_reset(dev);
 +}
 +
-+/*
-+ *  SPM can be used to erase a page in the Program memory, to write a page
-+ *  in the Program memory (that is already erased), and to set Boot Loader Lock
-+ *  bits. In some devices, the Program memory can be written one word at a time,
-+ *  in other devices an entire page can be programmed simultaneously after first
-+ *  filling a temporary page buffer. In all cases, the Program memory must be
-+ *  erased one page at a time. When erasing the Program memory, the RAMPZ and
-+ *  Z-register are used as page address. When writing the Program memory, the
-+ *  RAMPZ and Z-register are used as page or word address, and the R1:R0
-+ *  register pair is used as data(1). When setting the Boot Loader Lock bits,
-+ *  the R1:R0 register pair is used as data. Refer to the device documentation
-+ *  for detailed description of SPM usage. This instruction can address the
-+ *  entire Program memory.
-+ *
-+ *  The SPM instruction is not available in all devices. Refer to the device
-+ *  specific instruction set summary.
-+ *
-+ *  Note: 1. R1 determines the instruction high byte, and R0 determines the
-+ *  instruction low byte.
-+ */
-+static bool trans_SPM(DisasContext *ctx, arg_SPM *a)
++static void avr_usart_class_init(ObjectClass *klass, void *data)
 +{
-+    /* TODO */
-+    if (!avr_have_feature(ctx, AVR_FEATURE_SPM)) {
-+        return true;
-+    }
++    DeviceClass *dc = DEVICE_CLASS(klass);
 +
-+    return true;
++    dc->reset = avr_usart_reset;
++    dc->props = avr_usart_properties;
++    dc->realize = avr_usart_realize;
 +}
 +
-+static bool trans_SPMX(DisasContext *ctx, arg_SPMX *a)
++static const TypeInfo avr_usart_info = {
++    .name          = TYPE_AVR_USART,
++    .parent        = TYPE_SYS_BUS_DEVICE,
++    .instance_size = sizeof(AVRUsartState),
++    .instance_init = avr_usart_init,
++    .class_init    = avr_usart_class_init,
++};
++
++static void avr_usart_register_types(void)
 +{
-+    /* TODO */
-+    if (!avr_have_feature(ctx, AVR_FEATURE_SPMX)) {
-+        return true;
-+    }
-+
-+    return true;
++    type_register_static(&avr_usart_info);
 +}
 +
-+/*
-+ *  Loads data from the I/O Space (Ports, Timers, Configuration Registers,
-+ *  etc.) into register Rd in the Register File.
-+ */
-+static bool trans_IN(DisasContext *ctx, arg_IN *a)
-+{
-+    TCGv Rd = cpu_r[a->rd];
-+    TCGv port = tcg_const_i32(a->imm);
++type_init(avr_usart_register_types)
+diff --git a/hw/char/Kconfig b/hw/char/Kconfig
+index 40e7a8b8bb..5a27681884 100644
+--- a/hw/char/Kconfig
++++ b/hw/char/Kconfig
+@@ -46,3 +46,6 @@ config SCLPCONSOLE
+ 
+ config TERMINAL3270
+     bool
 +
-+    gen_helper_inb(Rd, cpu_env, port);
-+
-+    tcg_temp_free_i32(port);
-+
-+    return true;
-+}
-+
-+/*
-+ *  Stores data from register Rr in the Register File to I/O Space (Ports,
-+ *  Timers, Configuration Registers, etc.).
-+ */
-+static bool trans_OUT(DisasContext *ctx, arg_OUT *a)
-+{
-+    TCGv Rd = cpu_r[a->rd];
-+    TCGv port = tcg_const_i32(a->imm);
-+
-+    gen_helper_outb(cpu_env, port, Rd);
-+
-+    tcg_temp_free_i32(port);
-+
-+    return true;
-+}
-+
-+/*
-+ *  This instruction stores the contents of register Rr on the STACK. The
-+ *  Stack Pointer is post-decremented by 1 after the PUSH.  This instruction is
-+ *  not available in all devices. Refer to the device specific instruction set
-+ *  summary.
-+ */
-+static bool trans_PUSH(DisasContext *ctx, arg_PUSH *a)
-+{
-+    TCGv Rd = cpu_r[a->rd];
-+
-+    gen_data_store(ctx, Rd, cpu_sp);
-+    tcg_gen_subi_tl(cpu_sp, cpu_sp, 1);
-+
-+    return true;
-+}
-+
-+/*
-+ *  This instruction loads register Rd with a byte from the STACK. The Stack
-+ *  Pointer is pre-incremented by 1 before the POP.  This instruction is not
-+ *  available in all devices. Refer to the device specific instruction set
-+ *  summary.
-+ */
-+static bool trans_POP(DisasContext *ctx, arg_POP *a)
-+{
-+    /*
-+     * Using a temp to work around some strange behaviour:
-+     * tcg_gen_addi_tl(cpu_sp, cpu_sp, 1);
-+     * gen_data_load(ctx, Rd, cpu_sp);
-+     * seems to cause the add to happen twice.
-+     * This doesn't happen if either the add or the load is removed.
-+     */
-+    TCGv t1 = tcg_temp_new_i32();
-+    TCGv Rd = cpu_r[a->rd];
-+
-+    tcg_gen_addi_tl(t1, cpu_sp, 1);
-+    gen_data_load(ctx, Rd, t1);
-+    tcg_gen_mov_tl(cpu_sp, t1);
-+
-+    return true;
-+}
-+
-+/*
-+ *  Exchanges one byte indirect between register and data space.  The data
-+ *  location is pointed to by the Z (16 bits) Pointer Register in the Register
-+ *  File. Memory access is limited to the current data segment of 64KB. To
-+ *  access another data segment in devices with more than 64KB data space, the
-+ *  RAMPZ in register in the I/O area has to be changed.
-+ *
-+ *  The Z-pointer Register is left unchanged by the operation. This instruction
-+ *  is especially suited for writing/reading status bits stored in SRAM.
-+ */
-+static bool trans_XCH(DisasContext *ctx, arg_XCH *a)
-+{
-+    if (!avr_have_feature(ctx, AVR_FEATURE_RMW)) {
-+        return true;
-+    }
-+
-+    TCGv Rd = cpu_r[a->rd];
-+    TCGv t0 = tcg_temp_new_i32();
-+    TCGv addr = gen_get_zaddr();
-+
-+    gen_data_load(ctx, t0, addr);
-+    gen_data_store(ctx, Rd, addr);
-+    tcg_gen_mov_tl(Rd, t0);
-+
-+    tcg_temp_free_i32(t0);
-+    tcg_temp_free_i32(addr);
-+
-+    return true;
-+}
-+
-+/*
-+ *  Load one byte indirect from data space to register and set bits in data
-+ *  space specified by the register. The instruction can only be used towards
-+ *  internal SRAM.  The data location is pointed to by the Z (16 bits) Pointer
-+ *  Register in the Register File. Memory access is limited to the current data
-+ *  segment of 64KB. To access another data segment in devices with more than
-+ *  64KB data space, the RAMPZ in register in the I/O area has to be changed.
-+ *
-+ *  The Z-pointer Register is left unchanged by the operation. This instruction
-+ *  is especially suited for setting status bits stored in SRAM.
-+ */
-+static bool trans_LAS(DisasContext *ctx, arg_LAS *a)
-+{
-+    if (!avr_have_feature(ctx, AVR_FEATURE_RMW)) {
-+        return true;
-+    }
-+
-+    TCGv Rr = cpu_r[a->rd];
-+    TCGv addr = gen_get_zaddr();
-+    TCGv t0 = tcg_temp_new_i32();
-+    TCGv t1 = tcg_temp_new_i32();
-+
-+    gen_data_load(ctx, t0, addr); /* t0 = mem[addr] */
-+    tcg_gen_or_tl(t1, t0, Rr);
-+    tcg_gen_mov_tl(Rr, t0); /* Rr = t0 */
-+    gen_data_store(ctx, t1, addr); /* mem[addr] = t1 */
-+
-+    tcg_temp_free_i32(t1);
-+    tcg_temp_free_i32(t0);
-+    tcg_temp_free_i32(addr);
-+
-+    return true;
-+}
-+
-+/*
-+ *  Load one byte indirect from data space to register and stores and clear
-+ *  the bits in data space specified by the register. The instruction can
-+ *  only be used towards internal SRAM.  The data location is pointed to by
-+ *  the Z (16 bits) Pointer Register in the Register File. Memory access is
-+ *  limited to the current data segment of 64KB. To access another data
-+ *  segment in devices with more than 64KB data space, the RAMPZ in register
-+ *  in the I/O area has to be changed.
-+ *
-+ *  The Z-pointer Register is left unchanged by the operation. This instruction
-+ *  is especially suited for clearing status bits stored in SRAM.
-+ */
-+static bool trans_LAC(DisasContext *ctx, arg_LAC *a)
-+{
-+    if (!avr_have_feature(ctx, AVR_FEATURE_RMW)) {
-+        return true;
-+    }
-+
-+    TCGv Rr = cpu_r[a->rd];
-+    TCGv addr = gen_get_zaddr();
-+    TCGv t0 = tcg_temp_new_i32();
-+    TCGv t1 = tcg_temp_new_i32();
-+
-+    gen_data_load(ctx, t0, addr); /* t0 = mem[addr] */
-+    tcg_gen_andc_tl(t1, t0, Rr); /* t1 = t0 & (0xff - Rr) = t0 & ~Rr */
-+    tcg_gen_mov_tl(Rr, t0); /* Rr = t0 */
-+    gen_data_store(ctx, t1, addr); /* mem[addr] = t1 */
-+
-+    tcg_temp_free_i32(t1);
-+    tcg_temp_free_i32(t0);
-+    tcg_temp_free_i32(addr);
-+
-+    return true;
-+}
-+
-+
-+/*
-+ *  Load one byte indirect from data space to register and toggles bits in
-+ *  the data space specified by the register.  The instruction can only be used
-+ *  towards SRAM.  The data location is pointed to by the Z (16 bits) Pointer
-+ *  Register in the Register File. Memory access is limited to the current data
-+ *  segment of 64KB. To access another data segment in devices with more than
-+ *  64KB data space, the RAMPZ in register in the I/O area has to be changed.
-+ *
-+ *  The Z-pointer Register is left unchanged by the operation. This instruction
-+ *  is especially suited for changing status bits stored in SRAM.
-+ */
-+static bool trans_LAT(DisasContext *ctx, arg_LAT *a)
-+{
-+    if (!avr_have_feature(ctx, AVR_FEATURE_RMW)) {
-+        return true;
-+    }
-+
-+    TCGv Rd = cpu_r[a->rd];
-+    TCGv addr = gen_get_zaddr();
-+    TCGv t0 = tcg_temp_new_i32();
-+    TCGv t1 = tcg_temp_new_i32();
-+
-+    gen_data_load(ctx, t0, addr); /* t0 = mem[addr] */
-+    tcg_gen_xor_tl(t1, t0, Rd);
-+    tcg_gen_mov_tl(Rd, t0); /* Rd = t0 */
-+    gen_data_store(ctx, t1, addr); /* mem[addr] = t1 */
-+
-+    tcg_temp_free_i32(t1);
-+    tcg_temp_free_i32(t0);
-+    tcg_temp_free_i32(addr);
-+
-+    return true;
-+}
-diff --git a/target/avr/insn.decode b/target/avr/insn.decode
-index 32034c10d2..3f9304f8b0 100644
---- a/target/avr/insn.decode
-+++ b/target/avr/insn.decode
-@@ -115,3 +115,46 @@ SBIC            1001 1001 reg:5 bit:3
- SBIS            1001 1011 reg:5 bit:3
- BRBS            1111 00 ....... ...         @op_bit_imm
- BRBC            1111 01 ....... ...         @op_bit_imm
-+
-+#
-+# Data Transfer Instructions
-+#
-+MOV             0010 11 . ..... ....        @op_rd_rr
-+MOVW            0000 0001 .... ....         &rd_rr      rd=%rd_d rr=%rr_d
-+LDI             1110 .... .... ....         @op_rd_imm8
-+LDS             1001 000 ..... 0000         @ldst_s
-+LDX1            1001 000 rd:5 1100
-+LDX2            1001 000 rd:5 1101
-+LDX3            1001 000 rd:5 1110
-+LDY2            1001 000 rd:5 1001
-+LDY3            1001 000 rd:5 1010
-+LDZ2            1001 000 rd:5 0001
-+LDZ3            1001 000 rd:5 0010
-+LDDY            10 . 0 .. 0 ..... 1 ...     @ldst_d
-+LDDZ            10 . 0 .. 0 ..... 0 ...     @ldst_d
-+STS             1001 001 ..... 0000         @ldst_s
-+STX1            1001 001 rr:5 1100
-+STX2            1001 001 rr:5 1101
-+STX3            1001 001 rr:5 1110
-+STY2            1001 001 rd:5 1001
-+STY3            1001 001 rd:5 1010
-+STZ2            1001 001 rd:5 0001
-+STZ3            1001 001 rd:5 0010
-+STDY            10 . 0 .. 1 ..... 1 ...     @ldst_d
-+STDZ            10 . 0 .. 1 ..... 0 ...     @ldst_d
-+LPM1            1001 0101 1100 1000
-+LPM2            1001 000 rd:5 0100
-+LPMX            1001 000 rd:5 0101
-+ELPM1           1001 0101 1101 1000
-+ELPM2           1001 000 rd:5 0110
-+ELPMX           1001 000 rd:5 0111
-+SPM             1001 0101 1110 1000
-+SPMX            1001 0101 1111 1000
-+IN              1011 0 .. ..... ....        @io_rd_imm
-+OUT             1011 1 .. ..... ....        @io_rd_imm
-+PUSH            1001 001 rd:5 1111
-+POP             1001 000 rd:5 1111
-+XCH             1001 001 rd:5 0100
-+LAC             1001 001 rd:5 0110
-+LAS             1001 001 rd:5 0101
-+LAT             1001 001 rd:5 0111
++config ATMEL_USART
++    bool
+diff --git a/hw/char/Makefile.objs b/hw/char/Makefile.objs
+index 02d8a66925..c23ad3b4a7 100644
+--- a/hw/char/Makefile.objs
++++ b/hw/char/Makefile.objs
+@@ -21,6 +21,7 @@ obj-$(CONFIG_PSERIES) += spapr_vty.o
+ obj-$(CONFIG_DIGIC) += digic-uart.o
+ obj-$(CONFIG_STM32F2XX_USART) += stm32f2xx_usart.o
+ obj-$(CONFIG_RASPI) += bcm2835_aux.o
++common-obj-$(CONFIG_ATMEL_USART) += atmel_usart.o
+ 
+ common-obj-$(CONFIG_CMSDK_APB_UART) += cmsdk-apb-uart.o
+ common-obj-$(CONFIG_ETRAXFS) += etraxfs_ser.o
 -- 
 2.21.1
 
