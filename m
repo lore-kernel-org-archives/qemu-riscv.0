@@ -1,69 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iunNR-0008DU-5M
-	for mharc-qemu-riscv@gnu.org; Thu, 23 Jan 2020 20:03:13 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:45917)
+	id 1iupZB-0003pl-Pc
+	for mharc-qemu-riscv@gnu.org; Thu, 23 Jan 2020 22:23:29 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:32803)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1iunNM-0008AY-4r
- for qemu-riscv@nongnu.org; Thu, 23 Jan 2020 20:03:09 -0500
+ (envelope-from <bounce+d13a72.9b4e76-qemu-riscv=nongnu.org@fintelia.io>)
+ id 1iupZ9-0003pV-Eu
+ for qemu-riscv@nongnu.org; Thu, 23 Jan 2020 22:23:28 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1iunNK-00054W-Cn
- for qemu-riscv@nongnu.org; Thu, 23 Jan 2020 20:03:08 -0500
-Received: from mail-yw1-f66.google.com ([209.85.161.66]:38822)
+ (envelope-from <bounce+d13a72.9b4e76-qemu-riscv=nongnu.org@fintelia.io>)
+ id 1iupZ8-0003M5-FZ
+ for qemu-riscv@nongnu.org; Thu, 23 Jan 2020 22:23:27 -0500
+Received: from rs224.mailgun.us ([209.61.151.224]:64719)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1iunNF-000526-Nu; Thu, 23 Jan 2020 20:03:01 -0500
-Received: by mail-yw1-f66.google.com with SMTP id 10so141200ywv.5;
- Thu, 23 Jan 2020 17:03:01 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=ysquuZehZ4DPpSnCP77axJlHaML3RSGdHHMCEMv0Kh4=;
- b=DiQQeHZdaIYHMABKCKjsVyh7lCOFIL0Pt8DbHdTaZlvdlm1T0niVBf2u5H0iOQyaGe
- t1o2px2bOg1+bmF6zi4g9nh8AgLxfR0rtPXYQRCg+s6s/hkT24qwu0ySfvirpsra6yU8
- 4KNEuLI1RuteR/jWUu9aO2YoFGDE5NSMrej6ik2x1o6ZzteJtR4ieE55BdWDUmOjpFHM
- ODezKN8N+SMuB4CScEgoCz/t3xgLKcPNqaHvzHMEUY9k1/0wc7b2TfWdfCuMcmPA3iMG
- S5ifs0Tll+ni0npIhmhs41GFTTgtwexuT/S/jZQhkT9QCciPQjfNL6iW8zucLffY0YV4
- kC8Q==
-X-Gm-Message-State: APjAAAU51Yg9HuVLVQW3HwZGt5BS3cvXErBvL8AHeC+732rex4cli8e8
- lTGET/+AeCMKIy3VE08X1T8DXZaSDl3xTJmKJbxmIw==
-X-Google-Smtp-Source: APXvYqwxwRitLqcVpV9pOujfcfzK6dUUZ6IcCyzXhjHPEGym99sE+S3ohmX2q4T69hFSDjBSedLNUiFLPe1mmHB8Vnc=
-X-Received: by 2002:a0d:e890:: with SMTP id r138mr313231ywe.315.1579827780728; 
- Thu, 23 Jan 2020 17:03:00 -0800 (PST)
+ (Exim 4.71)
+ (envelope-from <bounce+d13a72.9b4e76-qemu-riscv=nongnu.org@fintelia.io>)
+ id 1iupZ7-0003L5-43
+ for qemu-riscv@nongnu.org; Thu, 23 Jan 2020 22:23:26 -0500
+DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=fintelia.io; q=dns/txt;
+ s=pic; 
+ t=1579836206; h=Content-Type: Cc: To: Subject: Message-ID: Date: From:
+ In-Reply-To: References: MIME-Version: Sender;
+ bh=ApKgkmw6aGyORE9DRhnBP4AbLmTM1OpHrHOib//MXSo=;
+ b=w48+QY76KBM4HATWmr6mfmkEam8LL+ilfLbIAC2/nFs7OVIl2GyC8c7oQsGubbG0toMMJIe/
+ ayGaPUtmdg8m6mlw2eWoZLkmXJPQa01G62VqmTe33hAp9rUbehIoebVmtLf/vV2I+HQMyhIP
+ U+5LE1YO/FQb9IbqyHlKyth8kFRkd82abNfr216Ug9NZ3ssSq+1PO/q4w5/k/l/F8yVBqbMD
+ TfIfeyR9tAwNrpRLvUOizW5WfkISNjyuaG0kBxUVnmYoZDfDHtLmXITUIqTKdi3NVT69W02U
+ wbMsI0AV6fYf53IQNRuh7I5+kaiIdgLxFslLWmPm2roJAkZ4QSWIxg==
+X-Mailgun-Sending-Ip: 209.61.151.224
+X-Mailgun-Sid: WyJkNjk0ZSIsICJxZW11LXJpc2N2QG5vbmdudS5vcmciLCAiOWI0ZTc2Il0=
+Sender: jonathan@fintelia.io
+Received: from mail-lj1-f182.google.com (mail-lj1-f182.google.com
+ [209.85.208.182])
+ by mxa.mailgun.org with ESMTP id 5e2a6327.7f0606e0fab0-smtp-out-n01;
+ Fri, 24 Jan 2020 03:23:19 -0000 (UTC)
+Received: by mail-lj1-f182.google.com with SMTP id o11so790421ljc.6;
+ Thu, 23 Jan 2020 19:23:18 -0800 (PST)
+X-Gm-Message-State: APjAAAXrK3HXUavFjboBdLrgCj58JdlFI2sDzrwU39HjqLHRz5Bq5Ufr
+ VYVwBK0kKk/PImkn4rE7iVniM/2Gn27DtmMk9Rc=
+X-Google-Smtp-Source: APXvYqyhXAxEUX1ZTUy5fCcbzrAmUp65xftvCScytbdvS45VSQS7X/pBazg0hSCHDIMU4UBDCAyFUJJ70GyTzKW/Aas=
+X-Received: by 2002:a2e:7009:: with SMTP id l9mr889727ljc.96.1579836197030;
+ Thu, 23 Jan 2020 19:23:17 -0800 (PST)
 MIME-Version: 1.0
-References: <20200124005131.16276-1-f4bug@amsat.org>
-In-Reply-To: <20200124005131.16276-1-f4bug@amsat.org>
-From: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>
-Date: Fri, 24 Jan 2020 02:02:49 +0100
-Message-ID: <CAAdtpL7y1Nsv_ivDcUHXgLn_FFOYVczmb5aPtvKhbaq8wbkXcg@mail.gmail.com>
-Subject: Re: [PATCH rc2 00/25] target/avr merger
-To: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Michael Rolnik <mrolnik@gmail.com>, 
- Richard Henderson <richard.henderson@linaro.org>,
- Joaquin de Andres <me@xcancerberox.com.ar>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>,
- Paolo Bonzini <pbonzini@redhat.com>, 
- Sarah Harris <S.E.Harris@kent.ac.uk>, Thomas Huth <thuth@redhat.com>,
- qemu-riscv@nongnu.org, 
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Igor Mammedov <imammedo@redhat.com>, 
- Markus Armbruster <armbru@redhat.com>, Laurent Vivier <lvivier@redhat.com>,
- Fam Zheng <fam@euphon.net>, 
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, Eric Blake <eblake@redhat.com>, 
+References: <20200123195200.206355-1-jonathan@fintelia.io>
+ <5d74dfd1-f1f5-df3d-e0b1-771781497553@linaro.org>
+In-Reply-To: <5d74dfd1-f1f5-df3d-e0b1-771781497553@linaro.org>
+From: Jonathan Behrens <jonathan@fintelia.io>
+Date: Thu, 23 Jan 2020 22:22:51 -0500
+X-Gmail-Original-Message-ID: <CANnJOVFwL3UeOzf49r9JvUkFEN-2WJ2o-A0kME=HLOMUf7mO7A@mail.gmail.com>
+Message-ID: <CANnJOVFwL3UeOzf49r9JvUkFEN-2WJ2o-A0kME=HLOMUf7mO7A@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: Disallow WFI instruction from U-mode
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: Palmer Dabbelt <palmer@sifive.com>,
+ "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>, 
  Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Aleksandar Markovic <aleksandar.m.mail@gmail.com>, 
- =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>, 
- =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>, 
- Pavel Dovgalyuk <dovgaluk@ispras.ru>, Eduardo Habkost <ehabkost@redhat.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Palmer Dabbelt <palmerdabbelt@google.com>, 
+ "open list:All patches CC here" <qemu-devel@nongnu.org>,
+ Alistair Francis <Alistair.Francis@wdc.com>
+Content-Type: multipart/alternative; boundary="00000000000053d075059cda47da"
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
- [fuzzy]
-X-Received-From: 209.85.161.66
+X-Received-From: 209.61.151.224
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -75,193 +71,55 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Jan 2020 01:03:10 -0000
+X-List-Received-Date: Fri, 24 Jan 2020 03:23:28 -0000
 
-On Fri, Jan 24, 2020 at 1:51 AM Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.or=
-g> wrote:
->
-> This is the AVR port from Michael release (merge) candidate 2.
->
-> Since v1 [1]:
-> - Addressed Thomas comments
-> - Fixed a non-critical bug in ATmega (incorrect SRAM base address)
-> - Added ELF parsing requested by Aleksandar
-> - Dropped default machine (as with the ARM port)
->
-> Change since rc1:
->
-> $ git backport-diff -u avr-rc1 -r origin/master..
-> Key:
-> [----] : patches are identical
-> [####] : number of functional differences between upstream/downstream pat=
-ch
-> [down] : patch is downstream-only
-> The flags [FC] indicate (F)unctional and (C)ontextual differences, respec=
-tively
->
-> 001/25:[----] [--] 'target/avr: Add outward facing interfaces and core CP=
-U logic'
-> 002/25:[----] [--] 'target/avr: Add instruction helpers'
-> 003/25:[----] [--] 'target/avr: Add instruction translation - Registers d=
-efinition'
-> 004/25:[----] [--] 'target/avr: Add instruction translation - Arithmetic =
-and Logic Instructions'
-> 005/25:[----] [--] 'target/avr: Add instruction translation - Branch Inst=
-ructions'
-> 006/25:[----] [--] 'target/avr: Add instruction translation - Data Transf=
-er Instructions'
-> 007/25:[----] [--] 'target/avr: Add instruction translation - Bit and Bit=
--test Instructions'
-> 008/25:[----] [--] 'target/avr: Add instruction translation - MCU Control=
- Instructions'
-> 009/25:[----] [--] 'target/avr: Add instruction translation - CPU main tr=
-anslation function'
-> 010/25:[----] [--] 'target/avr: Add instruction disassembly function'
-> 011/25:[----] [--] 'hw/char: Add limited support for Atmel USART peripher=
-al'
-> 012/25:[0045] [FC] 'hw/timer: Add limited support for Atmel 16 bit timer =
-peripheral'
-> 013/25:[----] [--] 'hw/misc: Add Atmel power device'
-> 014/25:[0024] [FC] 'target/avr: Add section about AVR into QEMU documenta=
-tion'
-> 015/25:[----] [--] 'target/avr: Register AVR support with the rest of QEM=
-U'
-> 016/25:[----] [--] 'target/avr: Add machine none test'
-> 017/25:[0002] [FC] 'target/avr: Update MAINTAINERS file'
-> 018/25:[down]      'hw/core/loader: Let load_elf populate the processor-s=
-pecific flags'
-> 019/25:[down]      'hw/avr: Add helper to load raw/ELF firmware binaries'
-> 020/25:[0015] [FC] 'hw/avr: Add some ATmega microcontrollers'
-> 021/25:[0040] [FC] 'hw/avr: Add some Arduino boards'
+--00000000000053d075059cda47da
+Content-Type: text/plain; charset="UTF-8"
 
-Patchew can be used to quickly visualize the few changes:
-https://patchew.org/QEMU/20200123000307.11541-1-richard.henderson@linaro.or=
-g/diff/20200124005131.16276-1-f4bug@amsat.org/
+Haha, fair enough. I just copied that line from one of the other functions
+in that file, which all use the same style. The check is actually a bit
+worse than it looks because PRV_S is defined to be 1. Hence, the whole
+thing is equivalent to just writing `env->priv == PRV_U`. I can send out a
+new version with that changed.
 
-> 022/25:[----] [--] 'target/avr: Update build system'
-> 023/25:[----] [--] 'tests/boot-serial-test: Test some Arduino boards (AVR=
- based)'
-> 024/25:[----] [--] 'tests/acceptance: Test the Arduino MEGA2560 board'
-> 025/25:[----] [--] '.travis.yml: Run the AVR acceptance tests'
+Jonathan
+
+On Thu, Jan 23, 2020 at 6:35 PM Richard Henderson <
+richard.henderson@linaro.org> wrote:
+
+> On 1/23/20 9:52 AM, Jonathan Behrens wrote:
+> > +    if (!(env->priv >= PRV_S) ||
 >
-> Repo: https://gitlab.com/philmd/qemu/commits/avr-rc2
+> For integers, !(x >= y) is a poor way to write x < y.
 >
-> [1] https://www.mail-archive.com/qemu-devel@nongnu.org/msg672926.html
-> Supersedes: <20200123000307.11541-1-richard.henderson@linaro.org>
 >
-> Michael Rolnik (20):
->   target/avr: Add outward facing interfaces and core CPU logic
->   target/avr: Add instruction helpers
->   target/avr: Add instruction translation - Registers definition
->   target/avr: Add instruction translation - Arithmetic and Logic
->     Instructions
->   target/avr: Add instruction translation - Branch Instructions
->   target/avr: Add instruction translation - Data Transfer Instructions
->   target/avr: Add instruction translation - Bit and Bit-test
->     Instructions
->   target/avr: Add instruction translation - MCU Control Instructions
->   target/avr: Add instruction translation - CPU main translation
->     function
->   target/avr: Add instruction disassembly function
->   hw/char: Add limited support for Atmel USART peripheral
->   hw/timer: Add limited support for Atmel 16 bit timer peripheral
->   hw/misc: Add Atmel power device
->   target/avr: Add section about AVR into QEMU documentation
->   target/avr: Register AVR support with the rest of QEMU
->   target/avr: Add machine none test
->   target/avr: Update MAINTAINERS file
->   target/avr: Update build system
->   tests/boot-serial-test: Test some Arduino boards (AVR based)
->   tests/acceptance: Test the Arduino MEGA2560 board
+> r~
 >
-> Philippe Mathieu-Daud=C3=A9 (5):
->   hw/core/loader: Let load_elf populate the processor-specific flags
->   hw/avr: Add helper to load raw/ELF firmware binaries
->   hw/avr: Add some ATmega microcontrollers
->   hw/avr: Add some Arduino boards
->   .travis.yml: Run the AVR acceptance tests
 >
->  qemu-doc.texi                    |   51 +
->  configure                        |    7 +
->  default-configs/avr-softmmu.mak  |    5 +
->  qapi/machine.json                |    3 +-
->  hw/avr/atmel_atmega.h            |   48 +
->  hw/avr/boot.h                    |   33 +
->  include/disas/dis-asm.h          |   19 +
->  include/elf.h                    |    2 +
->  include/hw/char/atmel_usart.h    |   93 +
->  include/hw/elf_ops.h             |    6 +-
->  include/hw/loader.h              |    6 +-
->  include/hw/misc/atmel_power.h    |   46 +
->  include/hw/timer/atmel_timer16.h |   94 +
->  include/sysemu/arch_init.h       |    1 +
->  target/avr/cpu-param.h           |   37 +
->  target/avr/cpu-qom.h             |   54 +
->  target/avr/cpu.h                 |  259 +++
->  target/avr/helper.h              |   29 +
->  arch_init.c                      |    2 +
->  hw/avr/arduino.c                 |  151 ++
->  hw/avr/atmel_atmega.c            |  470 +++++
->  hw/avr/boot.c                    |   74 +
->  hw/char/atmel_usart.c            |  320 ++++
->  hw/core/loader.c                 |   15 +-
->  hw/misc/atmel_power.c            |  112 ++
->  hw/riscv/boot.c                  |    2 +-
->  hw/timer/atmel_timer16.c         |  605 ++++++
->  target/avr/cpu.c                 |  826 ++++++++
->  target/avr/disas.c               |  246 +++
->  target/avr/gdbstub.c             |   84 +
->  target/avr/helper.c              |  347 ++++
->  target/avr/machine.c             |  121 ++
->  target/avr/translate.c           | 2997 ++++++++++++++++++++++++++++++
->  tests/qtest/boot-serial-test.c   |   11 +
->  tests/qtest/machine-none-test.c  |    1 +
->  .travis.yml                      |    2 +-
->  MAINTAINERS                      |   30 +
->  gdb-xml/avr-cpu.xml              |   49 +
->  hw/avr/Kconfig                   |    9 +
->  hw/avr/Makefile.objs             |    3 +
->  hw/char/Kconfig                  |    3 +
->  hw/char/Makefile.objs            |    1 +
->  hw/misc/Kconfig                  |    3 +
->  hw/misc/Makefile.objs            |    2 +
->  hw/timer/Kconfig                 |    3 +
->  hw/timer/Makefile.objs           |    2 +
->  target/avr/Makefile.objs         |   34 +
->  target/avr/insn.decode           |  182 ++
->  tests/acceptance/machine_avr6.py |   50 +
->  tests/qtest/Makefile.include     |    2 +
->  50 files changed, 7539 insertions(+), 13 deletions(-)
->  create mode 100644 default-configs/avr-softmmu.mak
->  create mode 100644 hw/avr/atmel_atmega.h
->  create mode 100644 hw/avr/boot.h
->  create mode 100644 include/hw/char/atmel_usart.h
->  create mode 100644 include/hw/misc/atmel_power.h
->  create mode 100644 include/hw/timer/atmel_timer16.h
->  create mode 100644 target/avr/cpu-param.h
->  create mode 100644 target/avr/cpu-qom.h
->  create mode 100644 target/avr/cpu.h
->  create mode 100644 target/avr/helper.h
->  create mode 100644 hw/avr/arduino.c
->  create mode 100644 hw/avr/atmel_atmega.c
->  create mode 100644 hw/avr/boot.c
->  create mode 100644 hw/char/atmel_usart.c
->  create mode 100644 hw/misc/atmel_power.c
->  create mode 100644 hw/timer/atmel_timer16.c
->  create mode 100644 target/avr/cpu.c
->  create mode 100644 target/avr/disas.c
->  create mode 100644 target/avr/gdbstub.c
->  create mode 100644 target/avr/helper.c
->  create mode 100644 target/avr/machine.c
->  create mode 100644 target/avr/translate.c
->  create mode 100644 gdb-xml/avr-cpu.xml
->  create mode 100644 hw/avr/Kconfig
->  create mode 100644 hw/avr/Makefile.objs
->  create mode 100644 target/avr/Makefile.objs
->  create mode 100644 target/avr/insn.decode
->  create mode 100644 tests/acceptance/machine_avr6.py
->
-> --
-> 2.21.1
->
+
+--00000000000053d075059cda47da
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div>Haha, fair enough. I just copied that line from one o=
+f the other functions in that file, which all use the same style. The check=
+ is actually a bit worse than it looks because PRV_S is defined to be  1. H=
+ence, the whole thing is equivalent to just writing `env-&gt;priv =3D=3D PR=
+V_U`. I can send out a new version with that changed.</div><div><br></div><=
+div>Jonathan<br></div></div><br><div class=3D"gmail_quote"><div dir=3D"ltr"=
+ class=3D"gmail_attr">On Thu, Jan 23, 2020 at 6:35 PM Richard Henderson &lt=
+;<a href=3D"mailto:richard.henderson@linaro.org">richard.henderson@linaro.o=
+rg</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margi=
+n:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex=
+">On 1/23/20 9:52 AM, Jonathan Behrens wrote:<br>
+&gt; +=C2=A0 =C2=A0 if (!(env-&gt;priv &gt;=3D PRV_S) ||<br>
+<br>
+For integers, !(x &gt;=3D y) is a poor way to write x &lt; y.<br>
+<br>
+<br>
+r~<br>
+<br>
+</blockquote></div>
+
+--00000000000053d075059cda47da--
 
