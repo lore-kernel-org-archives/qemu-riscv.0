@@ -1,90 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iuySP-00011p-9Z
-	for mharc-qemu-riscv@gnu.org; Fri, 24 Jan 2020 07:53:05 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:55806)
+	id 1iuyvQ-0004Rf-3J
+	for mharc-qemu-riscv@gnu.org; Fri, 24 Jan 2020 08:23:04 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:60658)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <philmd@redhat.com>) id 1iuySN-00011V-9O
- for qemu-riscv@nongnu.org; Fri, 24 Jan 2020 07:53:04 -0500
+ (envelope-from <peter.maydell@linaro.org>) id 1iuyvN-0004RJ-3v
+ for qemu-riscv@nongnu.org; Fri, 24 Jan 2020 08:23:02 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <philmd@redhat.com>) id 1iuySM-0003iW-2G
- for qemu-riscv@nongnu.org; Fri, 24 Jan 2020 07:53:03 -0500
-Received: from us-smtp-2.mimecast.com ([205.139.110.61]:56385
- helo=us-smtp-delivery-1.mimecast.com)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <philmd@redhat.com>) id 1iuySL-0003e1-V1
- for qemu-riscv@nongnu.org; Fri, 24 Jan 2020 07:53:02 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1579870381;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=5bVOjj7Ju6IxK95jp5dAIPZ3xLwwMi6xKkMechx+Ako=;
- b=Qe+8SXyIBqzW3ALgJgRGinNAOVojdUOZBfJu5u3xy7x/0coVw3Crv2hnzCSYYPG64SyoM2
- I99waOG+DWlf5jwHtDk7PJ8IjDytef2ET5jY1NJVSg1YXHUDXuqARDKMB+xjUpTSHU5o/b
- AwErGntsfZmUSPIA4efjGYOHoBQrUws=
-Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
- [209.85.221.69]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-206-eU_MVRajM2a-Q7ztsl7EAA-1; Fri, 24 Jan 2020 07:52:59 -0500
-Received: by mail-wr1-f69.google.com with SMTP id h30so1115646wrh.5
- for <qemu-riscv@nongnu.org>; Fri, 24 Jan 2020 04:52:59 -0800 (PST)
+ (envelope-from <peter.maydell@linaro.org>) id 1iuyvM-00045p-0b
+ for qemu-riscv@nongnu.org; Fri, 24 Jan 2020 08:23:01 -0500
+Received: from mail-ot1-x341.google.com ([2607:f8b0:4864:20::341]:37996)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <peter.maydell@linaro.org>)
+ id 1iuyvL-00044r-RV
+ for qemu-riscv@nongnu.org; Fri, 24 Jan 2020 08:22:59 -0500
+Received: by mail-ot1-x341.google.com with SMTP id z9so1567932oth.5
+ for <qemu-riscv@nongnu.org>; Fri, 24 Jan 2020 05:22:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=ZfZNubndxTwD4Z8P2Tco1rSJrq5QdrlRCT/CLQh4dE4=;
+ b=I4ZoS0q4pCnJRQsZUdPYyd3lf2TPU4W/U1Htw7LmEib8X67qeZ8QBbFkXzSlIJc9Rs
+ I9s+gbvyUCrurSAi6eZm+g67aDzs3tl/71q0d2gyvVHs+OehE2ypaUMUjNmUuqBMMQIr
+ I83t46C4fzLD7t15OqmZ+1Xpr8ioDR2nNUCsjjuCxMBcASHe6gAX3hG3n/dtfNtiwPTm
+ Ws+wINmTdUT2/028tRJc+dy4dc79MdCl+f0CE90nqwgklVUsEvZafXT8BRbr1BCs9ci/
+ 5GcUSpWLmejKqERrjQSMv596u23feZ5XFqdQL+PNZEeSBv8HJO5z32eZVW1eu9Itc9jJ
+ 8mig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=duKxw9CDUcDeIO1l0oFi5IfctU/inKkCNIKDVjZASbw=;
- b=jGS/wWfc87EKmz1EDB1HFqck/NvH1kMJvAvidhlcb5NSo7+kdUGnkB79lNOGDd1XwF
- 2UpgRq/CH3gF7eyFcWbCcJbm4zEng5h5lDjaX8zHEE3C/grFeLHnkgqQX9zFq0AA4Drb
- Am2iIxUE4sPchxygCQnMvXU5mKWRXr034JVPIHYI9PK3raJILOrJrVAdqpAKD/RD8ZOm
- zfFlVDhGx5l6+/CK1tPjDA8nyS+/KUF10XQVuwMCs/CH2ixCDCVFL7EFNBDMwtvHE0HP
- ozk3V2HU8UzBhSVDoCP1LRVu1jg+zRDj3UUSHhQbf0htFdPnYtdW6sSLc32wtGW2Sk5f
- pzyQ==
-X-Gm-Message-State: APjAAAUjU/uaqWWjgFmR/4CrlkLbh0c4ICtYkJO9Raq9MHtkjm5jxHzJ
- Ru4TB2XYSuyUj0C8aJP5HX+GmhEMFKF8IGEdmI7XF/YnDe6cPS18NXcro4Ba/Au84Mk2YCm5I4C
- pQzuWowc1vgCeNKw=
-X-Received: by 2002:adf:f6c8:: with SMTP id y8mr4085123wrp.167.1579870378353; 
- Fri, 24 Jan 2020 04:52:58 -0800 (PST)
-X-Google-Smtp-Source: APXvYqwNmAlR7orhHdhQ5Vi8dkVrF7gYRPWG3v+DfDcOu8KVlldqst7WIKjWGKCtSV5xf7nVo073Pg==
-X-Received: by 2002:adf:f6c8:: with SMTP id y8mr4085089wrp.167.1579870378089; 
- Fri, 24 Jan 2020 04:52:58 -0800 (PST)
-Received: from [192.168.1.35] (113.red-83-57-172.dynamicip.rima-tde.net.
- [83.57.172.113])
- by smtp.gmail.com with ESMTPSA id h17sm7859267wrs.18.2020.01.24.04.52.56
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 24 Jan 2020 04:52:57 -0800 (PST)
-Subject: Re: [PATCH rc2 12/25] hw/timer: Add limited support for Atmel 16 bit
- timer peripheral
-To: =?UTF-8?Q?Alex_Benn=c3=a9e?= <alex.bennee@linaro.org>,
- =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
-Cc: qemu-devel@nongnu.org, mrolnik@gmail.com, richard.henderson@linaro.org,
- me@xcancerberox.com.ar, Alistair Francis <Alistair.Francis@wdc.com>,
- Paolo Bonzini <pbonzini@redhat.com>, S.E.Harris@kent.ac.uk,
- thuth@redhat.com, qemu-riscv@nongnu.org,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, imammedo@redhat.com,
- Markus Armbruster <armbru@redhat.com>, Laurent Vivier <lvivier@redhat.com>,
- Fam Zheng <fam@euphon.net>, Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Eric Blake <eblake@redhat.com>, Sagar Karandikar <sagark@eecs.berkeley.edu>,
- aleksandar.m.mail@gmail.com, =?UTF-8?Q?Marc-Andr=c3=a9_Lureau?=
- <marcandre.lureau@redhat.com>, dovgaluk@ispras.ru,
- Eduardo Habkost <ehabkost@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>
-References: <20200124005131.16276-1-f4bug@amsat.org>
- <20200124005131.16276-13-f4bug@amsat.org> <875zh1yw38.fsf@linaro.org>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>
-Message-ID: <28386847-9b49-2be7-a6df-f6ce030855ec@redhat.com>
-Date: Fri, 24 Jan 2020 13:52:55 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.2.2
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=ZfZNubndxTwD4Z8P2Tco1rSJrq5QdrlRCT/CLQh4dE4=;
+ b=kmsja4u5rJJE3cjW4VWReGOB7jjZ3RuKo0a+PYK+KLfucoA6Y0N3Rok0TGJvoec8SP
+ Z/6X9AgT7gsNyvzTq3YiYU9eEslNCS70aV3YVhIom9ZosTuzcSF4/rGXnAC3Yx7nOoBs
+ 2HXhyjKBJDscjo2nt2YPWIJgUMhyy8N3Lr1cIyYOi4p902UKYfBvMwBLX2JKi1f60QPL
+ cZRZAvm/JlU2ZHc5Z7GVbTEK4PYrVe2Hnen/47JyZ2wqtuHkVGx80c11oHrFjs1OGpLA
+ bIyvKvw9cE3rm0XVAgPMaFfvpmxfrObk9jDaQ1Xvm+hw+m2WaCsoq1/kEl2jwovb9J8q
+ xK+w==
+X-Gm-Message-State: APjAAAWreluN6uaX25enI+Vl2fHmZYSBPv6kVpECgRI+CL8PEvvak9Az
+ S4rKlQ+cQvpk++DQyT2tqrd7hHbQnnQQ2qG9GthNSXvUVfA=
+X-Google-Smtp-Source: APXvYqwIA+fB1f41fYWZjwTmvfA+wnNJbKU7duh3cS62X45h0e6LDzN73JAFZ8eoQeMzeaCFWThKWq6PsEzYsGWMA9o=
+X-Received: by 2002:a05:6830:4a4:: with SMTP id
+ l4mr2638018otd.91.1579872178423; 
+ Fri, 24 Jan 2020 05:22:58 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <875zh1yw38.fsf@linaro.org>
-Content-Language: en-US
-X-MC-Unique: eU_MVRajM2a-Q7ztsl7EAA-1
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
-X-Received-From: 205.139.110.61
+References: <20200121225703.148465-1-palmerdabbelt@google.com>
+In-Reply-To: <20200121225703.148465-1-palmerdabbelt@google.com>
+From: Peter Maydell <peter.maydell@linaro.org>
+Date: Fri, 24 Jan 2020 13:22:47 +0000
+Message-ID: <CAFEAcA_UKdGYLRPQd2rChqG5vJ=OCsjRzGNf1j3VcJznJ4YLxQ@mail.gmail.com>
+Subject: Re: [PULL] RISC-V Patches for the 5.0 Soft Freeze, Part 1
+To: Palmer Dabbelt <palmerdabbelt@google.com>
+Cc: QEMU Developers <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2607:f8b0:4864:20::341
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -96,50 +66,54 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Jan 2020 12:53:04 -0000
+X-List-Received-Date: Fri, 24 Jan 2020 13:23:02 -0000
 
-On 1/24/20 11:42 AM, Alex Benn=C3=A9e wrote:
-> Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org> writes:
->=20
->> From: Michael Rolnik <mrolnik@gmail.com>
->>
->> These were designed to facilitate testing but should provide enough
->> function to be useful in other contexts.  Only a subset of the functions
->> of each peripheral is implemented, mainly due to the lack of a standard
->> way to handle electrical connections (like GPIO pins).
->>
->> Signed-off-by: Sarah Harris <S.E.Harris@kent.ac.uk>
->> Message-Id: <20200118191416.19934-13-mrolnik@gmail.com>
->> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org>
->> [rth: Squash info mtree fixes and a file rename from f4bug, which was:]
->> Suggested-by: Aleksandar Markovic <aleksandar.m.mail@gmail.com>
->> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
->> [PMD: Use qemu_log_mask(LOG_UNIMP), replace goto by return]
->> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org>
->> ---
-<snip>
->> --- /dev/null
->> +++ b/hw/timer/atmel_timer16.c
->> @@ -0,0 +1,605 @@
-> <snip>
->> +
->> +/* Helper macros */
->> +#define VAL16(l, h) ((h << 8) | l)
->> +#define DB_PRINT(fmt, args...) /* Nothing */
->> +/*#define DB_PRINT(fmt, args...) printf("%s: " fmt "\n", __func__, ##
->> args)*/
->=20
-> Format strings are likely to bitrot. Either use a if (GATE) or
-> tracepoints.
+On Tue, 21 Jan 2020 at 23:41, Palmer Dabbelt <palmerdabbelt@google.com> wrote:
+>
+> The following changes since commit 28b58f19d269633b3d14b6aebf1e92b3cd3ab56e:
+>
+>   ui/gtk: Get display refresh rate with GDK version 3.22 or later (2020-01-16 14:03:45 +0000)
+>
+> are available in the Git repository at:
+>
+>   git@github.com:palmer-dabbelt/qemu.git tags/riscv-for-master-5.0-sf1
+>
+> for you to fetch changes up to 82f014671cf057de51c4a577c9e2ad637dcec6f9:
+>
+>   target/riscv: update mstatus.SD when FS is set dirty (2020-01-16 10:03:15 -0800)
+>
+> ----------------------------------------------------------------
+> RISC-V Patches for the 5.0 Soft Freeze, Part 1
+>
+> This patch set contains a handful of collected fixes that I'd like to target
+> for the 5.0 soft freeze (I know that's a long way away, I just don't know what
+> else to call these):
+>
+> * A fix for a memory leak initializing the sifive_u board.
+> * Fixes to privilege mode emulation related to interrupts and fstatus.
+>
+> Notably absent is the H extension implementation.  That's pretty much reviewed,
+> but not quite ready to go yet and I didn't want to hold back these important
+> fixes.  This boots 32-bit and 64-bit Linux (buildroot this time, just for fun)
+> and passes "make check".
+>
+> ----------------------------------------------------------------
+> Pan Nengyuan (1):
+>       riscv/sifive_u: fix a memory leak in soc_realize()
+>
+> ShihPo Hung (3):
+>       target/riscv: Fix tb->flags FS status
+>       target/riscv: fsd/fsw doesn't dirty FP state
+>       target/riscv: update mstatus.SD when FS is set dirty
+>
+> Yiting Wang (1):
+>       riscv: Set xPIE to 1 after xRET
+>
 
-To avoid respining, I'll do in a new a patch on top of this series,
-and Richard can choose to squash it directly.
+Applied, thanks.
 
-> <snip>
->=20
-> Otherwise:
->=20
-> Reviewed-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
->=20
+Please update the changelog at https://wiki.qemu.org/ChangeLog/5.0
+for any user-visible changes.
 
+-- PMM
 
