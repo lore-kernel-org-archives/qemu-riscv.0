@@ -1,52 +1,53 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iunD3-0002qT-EF
-	for mharc-qemu-riscv@gnu.org; Thu, 23 Jan 2020 19:52:29 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44590)
+	id 1iunD4-0002tk-Nq
+	for mharc-qemu-riscv@gnu.org; Thu, 23 Jan 2020 19:52:30 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44608)
  by lists.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1iunD0-0002il-4k
- for qemu-riscv@nongnu.org; Thu, 23 Jan 2020 19:52:27 -0500
+ id 1iunD1-0002lr-7T
+ for qemu-riscv@nongnu.org; Thu, 23 Jan 2020 19:52:28 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
  (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1iunCy-0005hU-Hq
- for qemu-riscv@nongnu.org; Thu, 23 Jan 2020 19:52:26 -0500
-Received: from mail-wr1-x443.google.com ([2a00:1450:4864:20::443]:33400)
+ id 1iunCz-0005jw-O9
+ for qemu-riscv@nongnu.org; Thu, 23 Jan 2020 19:52:27 -0500
+Received: from mail-wm1-x342.google.com ([2a00:1450:4864:20::342]:36158)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1iunCr-0005Wh-JW; Thu, 23 Jan 2020 19:52:17 -0500
-Received: by mail-wr1-x443.google.com with SMTP id b6so93009wrq.0;
- Thu, 23 Jan 2020 16:52:17 -0800 (PST)
+ id 1iunCw-0005ZT-1b; Thu, 23 Jan 2020 19:52:22 -0500
+Received: by mail-wm1-x342.google.com with SMTP id p17so146748wma.1;
+ Thu, 23 Jan 2020 16:52:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=dGXYfTp1tAJSxkUbjHMAEY4QwD94q//Di6i1M2vBqg8=;
- b=rJXHPXxVsSFpjxXqwp+Qnd5zHRqmU2NWiYFTlyIhLD7zKrfxRIJhpj4aZW22Nx2XEI
- Z1TYLhpPwO8zrlDVbexQRPAaVJa+ua74BTDpFHcMWRI27MDG5OMOlnJUTcGdLFd86SgG
- DwkMVefqfPZBCCyfIuRyi2G9OcHvmaHBjBMog0VsXcTbrVaAOVRNhxsSbsXJAJVlaWSx
- OH9Mxjqbobm7mKzEJQJmP4kSnov/yBjCnZfUkQ5Au0fqSD8oQUXoeKqSECGiJDhOHzmy
- 9bQMRaZfeDV2YQwKFfZ60WbauHPx2uDjiDCcSaGbLR+wOxktxXbFZCr3/MTQtn7HuG9R
- f+BA==
+ bh=Wn/b5e0hYxjWbkJVXyQPyX2UxO9y0IeO0Qmgm+3sqXU=;
+ b=DHK64CCEwniEBPz36VcJhwTa1sb6g9uNqsyRPJI1yA2fGEfny1zU3i9i0DrTrEGn9d
+ TSLUh7AzaWJ1984CZsHnOgE5RYyTeStk5zHg14w1NW4+qZWdiVqAqWUZwwFj8Gv70wQb
+ PmzUze64oBRWLxdYMaLRTUvQ5Ti70gGD9xGyxgFIc34kUmL3vLmwIB0OQJ2w8uSmFpGE
+ yIZoehrAIYopuQOGF3G5/cDL/kSEC0trDjIvK7kVAXjfUwAjuL9Z1o6I18aWyy2dc+kX
+ qJsvk5OWbDEq1GHiUQIEvGlBp7lcAlu3aUbh9CmO5dbIZlz8vrJrvizkQTOvMuFj+HSu
+ DG0A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
  :in-reply-to:references:mime-version:content-transfer-encoding;
- bh=dGXYfTp1tAJSxkUbjHMAEY4QwD94q//Di6i1M2vBqg8=;
- b=E0aWRC1jbfTpCDJn26K94RKX9EdZQ60Os9hkKFINzmSUqkStu+WCvy3QrD7lnFNrog
- okD2qvbRUwUhyaoIH8xVqXTPtGpqXcHmyseMPFLg0iQJGzjBftiREpwzyIYf9cOe3mm4
- PTNDJLS/OiY2h6g5DclJFKJzebO2dnyMCD6NV5E85xhhW1W1rT/ccdi0yRs0adwUZdaE
- rT684X6VrPLMB1umEyrXjbdetGxWipk9CA0hCTBw54QMsCKEouiFzUfEqSGyJSfnZW7Q
- NIhzHMEk/EnQgcl7bvPzb8r5yxYrd9zYHb70aaI8l2O17CQYkq2OobqdE8O+GINnNGlG
- f0qw==
-X-Gm-Message-State: APjAAAX5p2KvIeyGGKO2Ey00KKUC3PWlbAR6EsUhcfr73S/ncJWYKzsF
- lndqqs/x/50fSfY/idUDVyVxCe8X
-X-Google-Smtp-Source: APXvYqzJyMp4pn8qYZJFl0vNPC1Is6VnlD3AF/RY6fL1eC8lo+QlqVu1hOyynAuSp6/QOpWHZ8OGRw==
-X-Received: by 2002:a5d:6344:: with SMTP id b4mr832418wrw.414.1579827136244;
- Thu, 23 Jan 2020 16:52:16 -0800 (PST)
+ bh=Wn/b5e0hYxjWbkJVXyQPyX2UxO9y0IeO0Qmgm+3sqXU=;
+ b=t1ULE9Sdqp7p1T+upAepkglsXD2QoPeF3azdBSD8KpPzog4BhOeNxEnCrCMDC5/KsD
+ RsGuxN4StcBUR6eKeZRxne8+scgZ2RvyB82MV2RSHIzSMFusBs6+VSBboOxuEO45bCBe
+ /KRLPLrnN50K4RJ8cBhXu7LrnCnU4/K0s2bY437Sp475ysE8r4wAWwJNcHgCwexxzAMd
+ WgMzFhFy6Xzw6L9A15i89bCMoIYIwc4G20+Z84SahJ1VGwGY7K15Z2RkF8wmAu/mMWZQ
+ fdDyOrHSym0VxG1rt09/rXHVQ45c00hkI1AX0S71gEKkwpvg5VB7bRcueSX3sExarudZ
+ fPWg==
+X-Gm-Message-State: APjAAAXp2fq+26iMIE2b+kgH0FqHD3uvv7evN3pDOmhh7Evoa3TTdk34
+ 5LzD8+wjKH7kB8leqsnaoIcxbLao
+X-Google-Smtp-Source: APXvYqx4MdJ5ovjlpVfAtGzGfuaL+KumnswpemnAk2jS7XrGPHVQpAPD6HXtTo228S56ZPU7Al5Q4A==
+X-Received: by 2002:a05:600c:1009:: with SMTP id
+ c9mr554909wmc.162.1579827138366; 
+ Thu, 23 Jan 2020 16:52:18 -0800 (PST)
 Received: from x1w.redhat.com (113.red-83-57-172.dynamicip.rima-tde.net.
  [83.57.172.113])
- by smtp.gmail.com with ESMTPSA id s139sm4598271wme.35.2020.01.23.16.52.14
+ by smtp.gmail.com with ESMTPSA id s139sm4598271wme.35.2020.01.23.16.52.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 23 Jan 2020 16:52:15 -0800 (PST)
+ Thu, 23 Jan 2020 16:52:17 -0800 (PST)
 Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
  <philippe.mathieu.daude@gmail.com>
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
@@ -65,12 +66,10 @@ Cc: Alistair Francis <Alistair.Francis@wdc.com>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
  dovgaluk@ispras.ru, Eduardo Habkost <ehabkost@redhat.com>,
  Palmer Dabbelt <palmer@dabbelt.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>,
- Aleksandar Markovic <amarkovic@wavecomp.com>
-Subject: [PATCH rc2 18/25] hw/core/loader: Let load_elf populate the
- processor-specific flags
-Date: Fri, 24 Jan 2020 01:51:24 +0100
-Message-Id: <20200124005131.16276-19-f4bug@amsat.org>
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
+Subject: [PATCH rc2 19/25] hw/avr: Add helper to load raw/ELF firmware binaries
+Date: Fri, 24 Jan 2020 01:51:25 +0100
+Message-Id: <20200124005131.16276-20-f4bug@amsat.org>
 X-Mailer: git-send-email 2.21.1
 In-Reply-To: <20200124005131.16276-1-f4bug@amsat.org>
 References: <20200124005131.16276-1-f4bug@amsat.org>
@@ -80,7 +79,7 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::443
+X-Received-From: 2a00:1450:4864:20::342
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -92,128 +91,162 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Jan 2020 00:52:27 -0000
+X-List-Received-Date: Fri, 24 Jan 2020 00:52:28 -0000
 
-One some architectures (like AVR) we can determine
-the cpu type by reading the ELF flags.
+Add avr_load_firmware() function to load firmware in ELF or
+raw binary format.
 
-Signed-off-by: Michael Rolnik <mrolnik@gmail.com>
-Reviewed-by: Aleksandar Markovic <amarkovic@wavecomp.com>
-Message-Id: <<20191218210329.1960-16-mrolnik@gmail.com>
-[PMD: Extracted from bigger patch,
-      Replaced 'uint32_t *pe_flags' by 'int proc_flags']
+Suggested-by: Aleksandar Markovic <aleksandar.m.mail@gmail.com>
 Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 ---
- include/hw/elf_ops.h |  6 +++++-
- include/hw/loader.h  |  6 ++++--
- hw/core/loader.c     | 15 ++++++++-------
- hw/riscv/boot.c      |  2 +-
- 4 files changed, 18 insertions(+), 11 deletions(-)
+ hw/avr/boot.h        | 33 ++++++++++++++++++++
+ include/elf.h        |  2 ++
+ hw/avr/boot.c        | 74 ++++++++++++++++++++++++++++++++++++++++++++
+ hw/avr/Makefile.objs |  1 +
+ 4 files changed, 110 insertions(+)
+ create mode 100644 hw/avr/boot.h
+ create mode 100644 hw/avr/boot.c
+ create mode 100644 hw/avr/Makefile.objs
 
-diff --git a/include/hw/elf_ops.h b/include/hw/elf_ops.h
-index e07d276df7..5d0f9587d3 100644
---- a/include/hw/elf_ops.h
-+++ b/include/hw/elf_ops.h
-@@ -316,7 +316,8 @@ static int glue(load_elf, SZ)(const char *name, int fd,
-                               void *translate_opaque,
-                               int must_swab, uint64_t *pentry,
-                               uint64_t *lowaddr, uint64_t *highaddr,
--                              int elf_machine, int clear_lsb, int data_swab,
-+                              int *proc_flags, int elf_machine,
-+                              int clear_lsb, int data_swab,
-                               AddressSpace *as, bool load_rom,
-                               symbol_fn_t sym_cb)
- {
-@@ -389,6 +390,9 @@ static int glue(load_elf, SZ)(const char *name, int fd,
-             }
-     }
+diff --git a/hw/avr/boot.h b/hw/avr/boot.h
+new file mode 100644
+index 0000000000..62bc10c922
+--- /dev/null
++++ b/hw/avr/boot.h
+@@ -0,0 +1,33 @@
++/*
++ * AVR loader helpers
++ *
++ * Copyright (c) 2019 Philippe Mathieu-Daudé
++ *
++ * This work is licensed under the terms of the GNU GPLv2 or later.
++ * See the COPYING file in the top-level directory.
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ */
++
++#ifndef HW_AVR_BOOT_H
++#define HW_AVR_BOOT_H
++
++#include "hw/boards.h"
++#include "cpu.h"
++
++/**
++ * avr_load_firmware:   load an image into a memory region
++ *
++ * @cpu:        Handle a AVR CPU object
++ * @ms:         A MachineState
++ * @mr:         Memory Region to load into
++ * @firmware:   Path to the firmware file (raw binary or ELF format)
++ *
++ * Load a firmware supplied by the machine or by the user  with the
++ * '-bios' command line option, and put it in target memory.
++ *
++ * Returns: true on success, false on error.
++ */
++bool avr_load_firmware(AVRCPU *cpu, MachineState *ms,
++                       MemoryRegion *mr, const char *firmware);
++
++#endif
+diff --git a/include/elf.h b/include/elf.h
+index 3501e0c8d0..53cdfa23b7 100644
+--- a/include/elf.h
++++ b/include/elf.h
+@@ -202,6 +202,8 @@ typedef struct mips_elf_abiflags_v0 {
+ #define EM_MOXIE           223     /* Moxie processor family */
+ #define EM_MOXIE_OLD       0xFEED
  
-+    if (proc_flags) {
-+        *proc_flags = (elf_sword)ehdr.e_flags;
++#define EM_AVR 83 /* AVR 8-bit microcontroller */
++
+ /* This is the info that is needed to parse the dynamic section of the file */
+ #define DT_NULL		0
+ #define DT_NEEDED	1
+diff --git a/hw/avr/boot.c b/hw/avr/boot.c
+new file mode 100644
+index 0000000000..2d9bd0fe59
+--- /dev/null
++++ b/hw/avr/boot.c
+@@ -0,0 +1,74 @@
++/*
++ * AVR loader helpers
++ *
++ * Copyright (c) 2019 Philippe Mathieu-Daudé
++ *
++ * This work is licensed under the terms of the GNU GPLv2 or later.
++ * See the COPYING file in the top-level directory.
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ */
++
++#include "qemu/osdep.h"
++#include "qemu-common.h"
++#include "hw/loader.h"
++#include "elf.h"
++#include "boot.h"
++#include "qemu/error-report.h"
++
++bool avr_load_firmware(AVRCPU *cpu, MachineState *ms,
++                       MemoryRegion *mr, const char *firmware)
++{
++    const char *filename;
++    int bytes_loaded;
++    uint64_t entry;
++    int e_flags;
++
++    filename = qemu_find_file(QEMU_FILE_TYPE_BIOS, firmware);
++    if (filename == NULL) {
++        error_report("Unable to find %s", firmware);
++        return false;
 +    }
-     if (pentry)
-         *pentry = (uint64_t)(elf_sword)ehdr.e_entry;
- 
-diff --git a/include/hw/loader.h b/include/hw/loader.h
-index 48a96cd559..cc5ede7b90 100644
---- a/include/hw/loader.h
-+++ b/include/hw/loader.h
-@@ -101,6 +101,7 @@ const char *load_elf_strerror(int error);
-  * @pentry: Populated with program entry point. Ignored if NULL.
-  * @lowaddr: Populated with lowest loaded address. Ignored if NULL.
-  * @highaddr: Populated with highest loaded address. Ignored if NULL.
-+ * @proc_flags: Populated with ELF processor-specific flags. Ignore if NULL.
-  * @bigendian: Expected ELF endianness. 0 for LE otherwise BE
-  * @elf_machine: Expected ELF machine type
-  * @clear_lsb: Set to mask off LSB of addresses (Some architectures use
-@@ -131,8 +132,9 @@ int load_elf_ram_sym(const char *filename,
-                      uint64_t (*elf_note_fn)(void *, void *, bool),
-                      uint64_t (*translate_fn)(void *, uint64_t),
-                      void *translate_opaque, uint64_t *pentry,
--                     uint64_t *lowaddr, uint64_t *highaddr, int big_endian,
--                     int elf_machine, int clear_lsb, int data_swab,
-+                     uint64_t *lowaddr, uint64_t *highaddr, int *proc_flags,
-+                     int big_endian, int elf_machine,
-+                     int clear_lsb, int data_swab,
-                      AddressSpace *as, bool load_rom, symbol_fn_t sym_cb);
- 
- /** load_elf_ram:
-diff --git a/hw/core/loader.c b/hw/core/loader.c
-index 5099f27dc8..3bee2f8ae0 100644
---- a/hw/core/loader.c
-+++ b/hw/core/loader.c
-@@ -438,7 +438,7 @@ int load_elf_ram(const char *filename,
- {
-     return load_elf_ram_sym(filename, elf_note_fn,
-                             translate_fn, translate_opaque,
--                            pentry, lowaddr, highaddr, big_endian,
-+                            pentry, lowaddr, highaddr, NULL, big_endian,
-                             elf_machine, clear_lsb, data_swab, as,
-                             load_rom, NULL);
- }
-@@ -448,8 +448,9 @@ int load_elf_ram_sym(const char *filename,
-                      uint64_t (*elf_note_fn)(void *, void *, bool),
-                      uint64_t (*translate_fn)(void *, uint64_t),
-                      void *translate_opaque, uint64_t *pentry,
--                     uint64_t *lowaddr, uint64_t *highaddr, int big_endian,
--                     int elf_machine, int clear_lsb, int data_swab,
-+                     uint64_t *lowaddr, uint64_t *highaddr, int *proc_flags,
-+                     int big_endian, int elf_machine,
-+                     int clear_lsb, int data_swab,
-                      AddressSpace *as, bool load_rom, symbol_fn_t sym_cb)
- {
-     int fd, data_order, target_data_order, must_swab, ret = ELF_LOAD_FAILED;
-@@ -490,13 +491,13 @@ int load_elf_ram_sym(const char *filename,
-     if (e_ident[EI_CLASS] == ELFCLASS64) {
-         ret = load_elf64(filename, fd, elf_note_fn,
-                          translate_fn, translate_opaque, must_swab,
--                         pentry, lowaddr, highaddr, elf_machine, clear_lsb,
--                         data_swab, as, load_rom, sym_cb);
-+                         pentry, lowaddr, highaddr, proc_flags, elf_machine,
-+                         clear_lsb, data_swab, as, load_rom, sym_cb);
-     } else {
-         ret = load_elf32(filename, fd, elf_note_fn,
-                          translate_fn, translate_opaque, must_swab,
--                         pentry, lowaddr, highaddr, elf_machine, clear_lsb,
--                         data_swab, as, load_rom, sym_cb);
-+                         pentry, lowaddr, highaddr, proc_flags, elf_machine,
-+                         clear_lsb, data_swab, as, load_rom, sym_cb);
-     }
- 
-  fail:
-diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
-index 027303d2a3..746ca1f795 100644
---- a/hw/riscv/boot.c
-+++ b/hw/riscv/boot.c
-@@ -119,7 +119,7 @@ target_ulong riscv_load_kernel(const char *kernel_filename, symbol_fn_t sym_cb)
-     uint64_t kernel_entry, kernel_high;
- 
-     if (load_elf_ram_sym(kernel_filename, NULL, NULL, NULL,
--                         &kernel_entry, NULL, &kernel_high, 0,
-+                         &kernel_entry, NULL, &kernel_high, NULL, 0,
-                          EM_RISCV, 1, 0, NULL, true, sym_cb) > 0) {
-         return kernel_entry;
-     }
++
++    bytes_loaded = load_elf_ram_sym(filename,
++                                    NULL, NULL, NULL,
++                                    &entry, NULL, NULL,
++                                    &e_flags, 0, EM_AVR, 0, 0,
++                                    NULL, true, NULL);
++    if (bytes_loaded >= 0) {
++        /* If ELF file is provided, determine CPU type reading ELF e_flags. */
++        const char *elf_cpu = avr_flags_to_cpu_type(e_flags, NULL);
++        const char *mcu_cpu_type = object_get_typename(OBJECT(cpu));
++        int cpu_len = strlen(mcu_cpu_type) - strlen(AVR_CPU_TYPE_SUFFIX);
++
++        if (entry) {
++            error_report("BIOS entry_point must be 0x0000 "
++                         "(ELF image '%s' has entry_point 0x%04" PRIx64 ")",
++                         firmware, entry);
++            return false;
++        }
++        if (!elf_cpu) {
++            warn_report("Could not determine CPU type for ELF image '%s', "
++                        "assuming '%.*s' CPU",
++                         firmware, cpu_len, mcu_cpu_type);
++            return true;
++        }
++        if (strcmp(elf_cpu, mcu_cpu_type)) {
++            error_report("Current machine: %s with '%.*s' CPU",
++                         MACHINE_GET_CLASS(ms)->desc, cpu_len, mcu_cpu_type);
++            error_report("ELF image '%s' is for '%.*s' CPU",
++                         firmware,
++                         (int)(strlen(elf_cpu) - strlen(AVR_CPU_TYPE_SUFFIX)),
++                         elf_cpu);
++            return false;
++        }
++    } else {
++        bytes_loaded = load_image_targphys(filename, OFFSET_CODE,
++                                           memory_region_size(mr));
++    }
++    if (bytes_loaded < 0) {
++        error_report("Unable to load firmware image %s as ELF or raw binary",
++                     firmware);
++        return false;
++    }
++    return true;
++}
+diff --git a/hw/avr/Makefile.objs b/hw/avr/Makefile.objs
+new file mode 100644
+index 0000000000..123f174f0e
+--- /dev/null
++++ b/hw/avr/Makefile.objs
+@@ -0,0 +1 @@
++obj-y += boot.o
 -- 
 2.21.1
 
