@@ -1,52 +1,53 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iunCn-0002Ma-R1
-	for mharc-qemu-riscv@gnu.org; Thu, 23 Jan 2020 19:52:13 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44397)
+	id 1iunCp-0002Q9-8l
+	for mharc-qemu-riscv@gnu.org; Thu, 23 Jan 2020 19:52:15 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44428)
  by lists.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1iunCj-0002Cx-Qq
- for qemu-riscv@nongnu.org; Thu, 23 Jan 2020 19:52:12 -0500
+ id 1iunCl-0002IC-Qb
+ for qemu-riscv@nongnu.org; Thu, 23 Jan 2020 19:52:13 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
  (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1iunCh-0005Kb-GF
- for qemu-riscv@nongnu.org; Thu, 23 Jan 2020 19:52:09 -0500
-Received: from mail-wr1-x442.google.com ([2a00:1450:4864:20::442]:33397)
+ id 1iunCk-0005NB-70
+ for qemu-riscv@nongnu.org; Thu, 23 Jan 2020 19:52:11 -0500
+Received: from mail-wm1-x343.google.com ([2a00:1450:4864:20::343]:34188)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1iunCc-0005ES-9N; Thu, 23 Jan 2020 19:52:02 -0500
-Received: by mail-wr1-x442.google.com with SMTP id b6so92605wrq.0;
- Thu, 23 Jan 2020 16:52:02 -0800 (PST)
+ id 1iunCg-0005J6-Id; Thu, 23 Jan 2020 19:52:06 -0500
+Received: by mail-wm1-x343.google.com with SMTP id s144so3007406wme.1;
+ Thu, 23 Jan 2020 16:52:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=OkUkdzYyhyXtcxB9T2HII5hsYZWDXSWKiEC8THq6zfo=;
- b=S4tBjhltrn+CaXhsyRwkojvfEyyyxrN0r0+LQgg1uhOHkOJcWTc6kRL+5lmTzvh0H7
- dQ2aN+UY2EYZsl2i4C+8kqVxCSBkr1DCrsVp7nhnaKq+9GL2UhMG3jbDpouG0myroCIq
- 0saV14lTBF095zdRVe558JinvrXz9b8G1Ph4o3n/Rau10r2KS/GjNe6YLqc74431YJkl
- bAG5XTor0/dRpz0W+7mVfcqpgW+5zNcKLzoAtgTWoDgC5NcN01ME2FfZ0XO20mQjyy7P
- geEWKLaRtVlCCX3YMKr3E1LEF/1yD4wqrHhegC5X0LuC8A1qYEYNdqvxIP0HL0BmmZ0M
- gsGA==
+ bh=J3qwH5nB+ktm+X0YAoP4RKFh5TB1rhPNUkL1SuqyNYw=;
+ b=aWsoP6Broiq7V2M/brzbOiIdxz9OAMW3aoOxm0PB52SZePoN6wG8Zmgtyza818UBy8
+ /5c+3aBDNlvg+ZjJNIWJ4EHzBbHIQV3araDjIw89E36Xot5ODreA3u6TD7KvV2XBLVjl
+ HV8ZxhNz3+px8c7YUWi1cglZtE00bYOarQHLFSxfxaPs2dRObtOjor9ui8iIOX4JmhzL
+ yDylb9mG9jeE3OiumRYzY/Hq07f129yVJowpgkc7zT8LkPyPcOX0aw8uNt8QOLFmVMNi
+ PuupqQNwK8U2cdG70empwEVIvVK9TAs0LqeU6vSNnobhSc/McvLp7t+WvU06czXm6RRw
+ 4SFQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
  :in-reply-to:references:mime-version:content-transfer-encoding;
- bh=OkUkdzYyhyXtcxB9T2HII5hsYZWDXSWKiEC8THq6zfo=;
- b=GZIM5VThqU9fesRGeV8T4UyrGb3bKiW/RQoe5vfdv8Pn5d+oTZ+oLLc0lqQSiUvWwG
- OCYlQbw7IUFb1kY87sSvGKuBfJ2c48ZMs1vb9sLWPOJ/Gzr0xUHgSrVnlGt6AglpGI8w
- 9sGR4a5zDGaIClpglwYIfYerhdPS8PiL9WDQx7jmRolyejqFL2xsaTBmkGWbLar9e/S8
- nGX+hvRKJtQgXG7ck7hyoRIKda3DtqjV+RrVmH1zxCH3byv//DsAy4DaQt00ejQFk85y
- OgN5pDzKVaIzBDzXyOBxqcEhkZfQoLTl5blBe6fOrB5UZ7HSufGxCUq6zWE77l6q69E/
- HKrQ==
-X-Gm-Message-State: APjAAAUal+mVTWoxBtSyxQwLesSZ5pE4fGJO2KZeG7xKI1ofy3z5zgn/
- tkpsXcgsc837fRFq2h4liy/m46O8
-X-Google-Smtp-Source: APXvYqxlz+3HmZ/x4bHUAn12Wr8Z5+uUk4jYVbb31JrOLlg8lpN5sVagYAIpVwihRTd6sPUSsnbfiA==
-X-Received: by 2002:a5d:6b88:: with SMTP id n8mr893903wrx.288.1579827120858;
- Thu, 23 Jan 2020 16:52:00 -0800 (PST)
+ bh=J3qwH5nB+ktm+X0YAoP4RKFh5TB1rhPNUkL1SuqyNYw=;
+ b=aHCWUMYauNXc5dzBqvt9DtYGibQINsh62fvu0sbxNoa84pGZrEum+lQxDZherwCYHj
+ +fbV8FiASKddpuFLfNvQxRPxKJJadFmykeUG+qmv1kas1HSzCgd2YiJMQzbjy01F/oA9
+ i3wyp9V5E+qkAAWuepHkKbEOjww0W31wrIYz0ld2JsArRVFGZ970G7NihpXNlbIcFMS+
+ d9BHDuylspBw+GE/XqA5mwxaUeodm9kVjmjFGDEbp3UJ+K1fgpYMV/CYjyZFCvQAe030
+ TtsC4GOiAFevlWVYiVZLQ1yoMjWXD7sQeSUiBtuywdu+0+BWDEL0itX89lOjRV7n7CvO
+ I2Qw==
+X-Gm-Message-State: APjAAAVBEjpiKD880PG/NdmoVksRWmvj2XFdW+g3a1TyTPOO7al20twH
+ 8pMBNuAbf2Ey74oLgz/QGTg97cI5
+X-Google-Smtp-Source: APXvYqw24vLy1IIoF0TrkQxenjk0HTiwDJz8rO/GTwWG1vTyGMUXdNwICltPj1kPtB45JONegneRXg==
+X-Received: by 2002:a05:600c:2046:: with SMTP id
+ p6mr505648wmg.167.1579827125352; 
+ Thu, 23 Jan 2020 16:52:05 -0800 (PST)
 Received: from x1w.redhat.com (113.red-83-57-172.dynamicip.rima-tde.net.
  [83.57.172.113])
- by smtp.gmail.com with ESMTPSA id s139sm4598271wme.35.2020.01.23.16.51.59
+ by smtp.gmail.com with ESMTPSA id s139sm4598271wme.35.2020.01.23.16.52.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 23 Jan 2020 16:52:00 -0800 (PST)
+ Thu, 23 Jan 2020 16:52:04 -0800 (PST)
 Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
  <philippe.mathieu.daude@gmail.com>
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
@@ -66,10 +67,9 @@ Cc: Alistair Francis <Alistair.Francis@wdc.com>,
  dovgaluk@ispras.ru, Eduardo Habkost <ehabkost@redhat.com>,
  Palmer Dabbelt <palmer@dabbelt.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
-Subject: [PATCH rc2 11/25] hw/char: Add limited support for Atmel USART
- peripheral
-Date: Fri, 24 Jan 2020 01:51:17 +0100
-Message-Id: <20200124005131.16276-12-f4bug@amsat.org>
+Subject: [PATCH rc2 13/25] hw/misc: Add Atmel power device
+Date: Fri, 24 Jan 2020 01:51:19 +0100
+Message-Id: <20200124005131.16276-14-f4bug@amsat.org>
 X-Mailer: git-send-email 2.21.1
 In-Reply-To: <20200124005131.16276-1-f4bug@amsat.org>
 References: <20200124005131.16276-1-f4bug@amsat.org>
@@ -79,7 +79,7 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::442
+X-Received-From: 2a00:1450:4864:20::343
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -91,478 +91,221 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Jan 2020 00:52:12 -0000
+X-List-Received-Date: Fri, 24 Jan 2020 00:52:13 -0000
 
 From: Michael Rolnik <mrolnik@gmail.com>
 
-These were designed to facilitate testing but should provide enough
-function to be useful in other contexts.  Only a subset of the functions
-of each peripheral is implemented, mainly due to the lack of a standard
-way to handle electrical connections (like GPIO pins).
+This is a simple device of just one register, whenver this register is
+written it calls qemu_set_irq function for each of 8 bits/IRQs..
+It is used to implement AVR Power Reduction
 
-Signed-off-by: Sarah Harris <S.E.Harris@kent.ac.uk>
-Message-Id: <20200118191416.19934-12-mrolnik@gmail.com>
+Signed-off-by: Michael Rolnik <mrolnik@gmail.com>
+Message-Id: <20200118191416.19934-14-mrolnik@gmail.com>
 Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
-[rth: Squash I/O size fix and file rename from f4bug, which was:]
+[rth: Squash include fix and file rename from f4bug, which was:]
 Suggested-by: Aleksandar Markovic <aleksandar.m.mail@gmail.com>
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- include/hw/char/atmel_usart.h |  93 ++++++++++
- hw/char/atmel_usart.c         | 320 ++++++++++++++++++++++++++++++++++
- hw/char/Kconfig               |   3 +
- hw/char/Makefile.objs         |   1 +
- 4 files changed, 417 insertions(+)
- create mode 100644 include/hw/char/atmel_usart.h
- create mode 100644 hw/char/atmel_usart.c
+ include/hw/misc/atmel_power.h |  46 ++++++++++++++
+ hw/misc/atmel_power.c         | 112 ++++++++++++++++++++++++++++++++++
+ hw/misc/Kconfig               |   3 +
+ hw/misc/Makefile.objs         |   2 +
+ 4 files changed, 163 insertions(+)
+ create mode 100644 include/hw/misc/atmel_power.h
+ create mode 100644 hw/misc/atmel_power.c
 
-diff --git a/include/hw/char/atmel_usart.h b/include/hw/char/atmel_usart.h
+diff --git a/include/hw/misc/atmel_power.h b/include/hw/misc/atmel_power.h
 new file mode 100644
-index 0000000000..fd35feac60
+index 0000000000..5366e9693f
 --- /dev/null
-+++ b/include/hw/char/atmel_usart.h
-@@ -0,0 +1,93 @@
++++ b/include/hw/misc/atmel_power.h
+@@ -0,0 +1,46 @@
 +/*
-+ * Atmel AVR USART
++ * Atmel AVR Power Reduction Management
 + *
-+ * Copyright (c) 2018 University of Kent
-+ * Author: Sarah Harris
++ * Copyright (c) 2019 Michael Rolnik
 + *
-+ * This library is free software; you can redistribute it and/or
-+ * modify it under the terms of the GNU Lesser General Public
-+ * License as published by the Free Software Foundation; either
-+ * version 2.1 of the License, or (at your option) any later version.
++ * Permission is hereby granted, free of charge, to any person obtaining a copy
++ * of this software and associated documentation files (the "Software"), to deal
++ * in the Software without restriction, including without limitation the rights
++ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
++ * copies of the Software, and to permit persons to whom the Software is
++ * furnished to do so, subject to the following conditions:
 + *
-+ * This library is distributed in the hope that it will be useful,
-+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
-+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-+ * Lesser General Public License for more details.
++ * The above copyright notice and this permission notice shall be included in
++ * all copies or substantial portions of the Software.
 + *
-+ * You should have received a copy of the GNU Lesser General Public
-+ * License along with this library; if not, see
-+ * <http://www.gnu.org/licenses/lgpl-2.1.html>
++ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
++ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
++ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
++ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
++ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
++ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
++ * THE SOFTWARE.
 + */
 +
-+#ifndef HW_CHAR_ATMEL_USART_H
-+#define HW_CHAR_ATMEL_USART_H
++#ifndef HW_MISC_ATMEL_POWER_H
++#define HW_MISC_ATMEL_POWER_H
 +
 +#include "hw/sysbus.h"
-+#include "chardev/char-fe.h"
 +#include "hw/hw.h"
 +
-+/* Offsets of registers. */
-+#define USART_DR   0x06
-+#define USART_CSRA  0x00
-+#define USART_CSRB  0x01
-+#define USART_CSRC  0x02
-+#define USART_BRRH 0x05
-+#define USART_BRRL 0x04
 +
-+/* Relevant bits in regiters. */
-+#define USART_CSRA_RXC    (1 << 7)
-+#define USART_CSRA_TXC    (1 << 6)
-+#define USART_CSRA_DRE    (1 << 5)
-+#define USART_CSRA_MPCM   (1 << 0)
-+
-+#define USART_CSRB_RXCIE  (1 << 7)
-+#define USART_CSRB_TXCIE  (1 << 6)
-+#define USART_CSRB_DREIE  (1 << 5)
-+#define USART_CSRB_RXEN   (1 << 4)
-+#define USART_CSRB_TXEN   (1 << 3)
-+#define USART_CSRB_CSZ2   (1 << 2)
-+#define USART_CSRB_RXB8   (1 << 1)
-+#define USART_CSRB_TXB8   (1 << 0)
-+
-+#define USART_CSRC_MSEL1  (1 << 7)
-+#define USART_CSRC_MSEL0  (1 << 6)
-+#define USART_CSRC_PM1    (1 << 5)
-+#define USART_CSRC_PM0    (1 << 4)
-+#define USART_CSRC_CSZ1   (1 << 2)
-+#define USART_CSRC_CSZ0   (1 << 1)
-+
-+#define TYPE_AVR_USART "atmel-usart"
-+#define AVR_USART(obj) \
-+    OBJECT_CHECK(AVRUsartState, (obj), TYPE_AVR_USART)
++#define TYPE_AVR_MASK "atmel-power"
++#define AVR_MASK(obj) OBJECT_CHECK(AVRMaskState, (obj), TYPE_AVR_MASK)
 +
 +typedef struct {
 +    /* <private> */
 +    SysBusDevice parent_obj;
 +
 +    /* <public> */
-+    MemoryRegion mmio;
++    MemoryRegion iomem;
 +
-+    CharBackend chr;
++    uint8_t val;
++    qemu_irq irq[8];
++} AVRMaskState;
 +
-+    bool enabled;
-+
-+    uint8_t data;
-+    bool data_valid;
-+    uint8_t char_mask;
-+    /* Control and Status Registers */
-+    uint8_t csra;
-+    uint8_t csrb;
-+    uint8_t csrc;
-+    /* Baud Rate Registers (low/high byte) */
-+    uint8_t brrh;
-+    uint8_t brrl;
-+
-+    /* Receive Complete */
-+    qemu_irq rxc_irq;
-+    /* Transmit Complete */
-+    qemu_irq txc_irq;
-+    /* Data Register Empty */
-+    qemu_irq dre_irq;
-+} AVRUsartState;
-+
-+#endif /* HW_CHAR_ATMEL_USART_H */
-diff --git a/hw/char/atmel_usart.c b/hw/char/atmel_usart.c
++#endif /* HW_MISC_ATMEL_POWER_H */
+diff --git a/hw/misc/atmel_power.c b/hw/misc/atmel_power.c
 new file mode 100644
-index 0000000000..a7004c212a
+index 0000000000..adab729f66
 --- /dev/null
-+++ b/hw/char/atmel_usart.c
-@@ -0,0 +1,320 @@
++++ b/hw/misc/atmel_power.c
+@@ -0,0 +1,112 @@
 +/*
-+ * Atmel AVR USART
++ * Atmel AVR Power Reduction Management
 + *
-+ * Copyright (c) 2018 University of Kent
-+ * Author: Sarah Harris
++ * Copyright (c) 2019 Michael Rolnik
 + *
-+ * This library is free software; you can redistribute it and/or
-+ * modify it under the terms of the GNU Lesser General Public
-+ * License as published by the Free Software Foundation; either
-+ * version 2.1 of the License, or (at your option) any later version.
++ * Permission is hereby granted, free of charge, to any person obtaining a copy
++ * of this software and associated documentation files (the "Software"), to deal
++ * in the Software without restriction, including without limitation the rights
++ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
++ * copies of the Software, and to permit persons to whom the Software is
++ * furnished to do so, subject to the following conditions:
 + *
-+ * This library is distributed in the hope that it will be useful,
-+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
-+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-+ * Lesser General Public License for more details.
++ * The above copyright notice and this permission notice shall be included in
++ * all copies or substantial portions of the Software.
 + *
-+ * You should have received a copy of the GNU Lesser General Public
-+ * License along with this library; if not, see
-+ * <http://www.gnu.org/licenses/lgpl-2.1.html>
++ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
++ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
++ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
++ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
++ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
++ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
++ * THE SOFTWARE.
 + */
 +
 +#include "qemu/osdep.h"
-+#include "hw/char/atmel_usart.h"
++#include "hw/misc/atmel_power.h"
 +#include "qemu/log.h"
-+#include "hw/irq.h"
 +#include "hw/qdev-properties.h"
++#include "hw/irq.h"
 +
-+static int avr_usart_can_receive(void *opaque)
++#define DB_PRINT(fmt, args...) /* Nothing */
++/*#define DB_PRINT(fmt, args...) printf("%s: " fmt "\n", __func__, ## args)*/
++
++static void avr_mask_reset(DeviceState *dev)
 +{
-+    AVRUsartState *usart = opaque;
++    AVRMaskState *s = AVR_MASK(dev);
 +
-+    if (usart->data_valid || !(usart->csrb & USART_CSRB_RXEN)) {
-+        return 0;
++    s->val = 0x00;
++
++    for (int i = 0; i < 8; i++) {
++        qemu_set_irq(s->irq[i], 0);
 +    }
-+    return 1;
 +}
 +
-+static void avr_usart_receive(void *opaque, const uint8_t *buffer, int size)
++static uint64_t avr_mask_read(void *opaque, hwaddr offset, unsigned size)
 +{
-+    AVRUsartState *usart = opaque;
 +    assert(size == 1);
-+    assert(!usart->data_valid);
-+    usart->data = buffer[0];
-+    usart->data_valid = true;
-+    usart->csra |= USART_CSRA_RXC;
-+    if (usart->csrb & USART_CSRB_RXCIE) {
-+        qemu_set_irq(usart->rxc_irq, 1);
-+    }
++    assert(offset == 0);
++    AVRMaskState *s = opaque;
++
++    return (uint64_t)s->val;
 +}
 +
-+static void update_char_mask(AVRUsartState *usart)
++static void avr_mask_write(void *opaque, hwaddr offset,
++                              uint64_t val64, unsigned size)
 +{
-+    uint8_t mode = ((usart->csrc & USART_CSRC_CSZ0) ? 1 : 0) |
-+        ((usart->csrc & USART_CSRC_CSZ1) ? 2 : 0) |
-+        ((usart->csrb & USART_CSRB_CSZ2) ? 4 : 0);
-+    switch (mode) {
-+    case 0:
-+        usart->char_mask = 0b11111;
-+        break;
-+    case 1:
-+        usart->char_mask = 0b111111;
-+        break;
-+    case 2:
-+        usart->char_mask = 0b1111111;
-+        break;
-+    case 3:
-+        usart->char_mask = 0b11111111;
-+        break;
-+    case 4:
-+        /* Fallthrough. */
-+    case 5:
-+        /* Fallthrough. */
-+    case 6:
-+        qemu_log_mask(
-+            LOG_GUEST_ERROR,
-+            "%s: Reserved character size 0x%x\n",
-+            __func__,
-+            mode);
-+        break;
-+    case 7:
-+        qemu_log_mask(
-+            LOG_GUEST_ERROR,
-+            "%s: Nine bit character size not supported (forcing eight)\n",
-+            __func__);
-+        usart->char_mask = 0b11111111;
-+        break;
-+    default:
-+        assert(0);
-+    }
-+}
-+
-+static void avr_usart_reset(DeviceState *dev)
-+{
-+    AVRUsartState *usart = AVR_USART(dev);
-+    usart->data_valid = false;
-+    usart->csra = 0b00100000;
-+    usart->csrb = 0b00000000;
-+    usart->csrc = 0b00000110;
-+    usart->brrl = 0;
-+    usart->brrh = 0;
-+    update_char_mask(usart);
-+    qemu_set_irq(usart->rxc_irq, 0);
-+    qemu_set_irq(usart->txc_irq, 0);
-+    qemu_set_irq(usart->dre_irq, 0);
-+}
-+
-+static uint64_t avr_usart_read(void *opaque, hwaddr addr, unsigned int size)
-+{
-+    AVRUsartState *usart = opaque;
-+    uint8_t data;
 +    assert(size == 1);
++    assert(offset == 0);
++    AVRMaskState *s = opaque;
++    uint8_t val8 = val64;
 +
-+    if (!usart->enabled) {
-+        return 0;
-+    }
++    DB_PRINT("write %d to offset %d", val8, (uint8_t)offset);
 +
-+    switch (addr) {
-+    case USART_DR:
-+        if (!(usart->csrb & USART_CSRB_RXEN)) {
-+            /* Receiver disabled, ignore. */
-+            return 0;
-+        }
-+        if (usart->data_valid) {
-+            data = usart->data & usart->char_mask;
-+            usart->data_valid = false;
-+        } else {
-+            data = 0;
-+        }
-+        usart->csra &= 0xff ^ USART_CSRA_RXC;
-+        qemu_set_irq(usart->rxc_irq, 0);
-+        qemu_chr_fe_accept_input(&usart->chr);
-+        return data;
-+    case USART_CSRA:
-+        return usart->csra;
-+    case USART_CSRB:
-+        return usart->csrb;
-+    case USART_CSRC:
-+        return usart->csrc;
-+    case USART_BRRL:
-+        return usart->brrl;
-+    case USART_BRRH:
-+        return usart->brrh;
-+    default:
-+        qemu_log_mask(
-+            LOG_GUEST_ERROR,
-+            "%s: Bad offset 0x%"HWADDR_PRIx"\n",
-+            __func__,
-+            addr);
-+    }
-+    return 0;
-+}
-+
-+static void avr_usart_write(void *opaque, hwaddr addr, uint64_t value,
-+                                unsigned int size)
-+{
-+    AVRUsartState *usart = opaque;
-+    uint8_t mask;
-+    uint8_t data;
-+    assert((value & 0xff) == value);
-+    assert(size == 1);
-+
-+    if (!usart->enabled) {
-+        return;
-+    }
-+
-+    switch (addr) {
-+    case USART_DR:
-+        if (!(usart->csrb & USART_CSRB_TXEN)) {
-+            /* Transmitter disabled, ignore. */
-+            return;
-+        }
-+        usart->csra |= USART_CSRA_TXC;
-+        usart->csra |= USART_CSRA_DRE;
-+        if (usart->csrb & USART_CSRB_TXCIE) {
-+            qemu_set_irq(usart->txc_irq, 1);
-+            usart->csra &= 0xff ^ USART_CSRA_TXC;
-+        }
-+        if (usart->csrb & USART_CSRB_DREIE) {
-+            qemu_set_irq(usart->dre_irq, 1);
-+        }
-+        data = value;
-+        qemu_chr_fe_write_all(&usart->chr, &data, 1);
-+        break;
-+    case USART_CSRA:
-+        mask = 0b01000011;
-+        /* Mask read-only bits. */
-+        value = (value & mask) | (usart->csra & (0xff ^ mask));
-+        usart->csra = value;
-+        if (value & USART_CSRA_TXC) {
-+            usart->csra ^= USART_CSRA_TXC;
-+            qemu_set_irq(usart->txc_irq, 0);
-+        }
-+        if (value & USART_CSRA_MPCM) {
-+            qemu_log_mask(
-+                LOG_GUEST_ERROR,
-+                "%s: MPCM not supported by USART\n",
-+                __func__);
-+        }
-+        break;
-+    case USART_CSRB:
-+        mask = 0b11111101;
-+        /* Mask read-only bits. */
-+        value = (value & mask) | (usart->csrb & (0xff ^ mask));
-+        usart->csrb = value;
-+        if (!(value & USART_CSRB_RXEN)) {
-+            /* Receiver disabled, flush input buffer. */
-+            usart->data_valid = false;
-+        }
-+        qemu_set_irq(usart->rxc_irq,
-+            ((value & USART_CSRB_RXCIE) &&
-+            (usart->csra & USART_CSRA_RXC)) ? 1 : 0);
-+        qemu_set_irq(usart->txc_irq,
-+            ((value & USART_CSRB_TXCIE) &&
-+            (usart->csra & USART_CSRA_TXC)) ? 1 : 0);
-+        qemu_set_irq(usart->dre_irq,
-+            ((value & USART_CSRB_DREIE) &&
-+            (usart->csra & USART_CSRA_DRE)) ? 1 : 0);
-+        update_char_mask(usart);
-+        break;
-+    case USART_CSRC:
-+        usart->csrc = value;
-+        if ((value & USART_CSRC_MSEL1) && (value & USART_CSRC_MSEL0)) {
-+            qemu_log_mask(
-+                LOG_GUEST_ERROR,
-+                "%s: SPI mode not supported by USART\n",
-+                __func__);
-+        }
-+        if ((value & USART_CSRC_MSEL1) && !(value & USART_CSRC_MSEL0)) {
-+            qemu_log_mask(LOG_GUEST_ERROR, "%s: Bad USART mode\n", __func__);
-+        }
-+        if (!(value & USART_CSRC_PM1) && (value & USART_CSRC_PM0)) {
-+            qemu_log_mask(
-+                LOG_GUEST_ERROR,
-+                "%s: Bad USART parity mode\n",
-+                __func__);
-+        }
-+        update_char_mask(usart);
-+        break;
-+    case USART_BRRL:
-+        usart->brrl = value;
-+        break;
-+    case USART_BRRH:
-+        usart->brrh = value & 0b00001111;
-+        break;
-+    default:
-+        qemu_log_mask(
-+            LOG_GUEST_ERROR,
-+            "%s: Bad offset 0x%"HWADDR_PRIx"\n",
-+            __func__,
-+            addr);
++    s->val = val8;
++    for (int i = 0; i < 8; i++) {
++        qemu_set_irq(s->irq[i], (val8 & (1 << i)) != 0);
 +    }
 +}
 +
-+static const MemoryRegionOps avr_usart_ops = {
-+    .read = avr_usart_read,
-+    .write = avr_usart_write,
++static const MemoryRegionOps avr_mask_ops = {
++    .read = avr_mask_read,
++    .write = avr_mask_write,
 +    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .impl = {.min_access_size = 1, .max_access_size = 1}
++    .impl = {.max_access_size = 1}
 +};
 +
-+static Property avr_usart_properties[] = {
-+    DEFINE_PROP_CHR("chardev", AVRUsartState, chr),
-+    DEFINE_PROP_END_OF_LIST(),
-+};
-+
-+static void avr_usart_pr(void *opaque, int irq, int level)
++static void avr_mask_init(Object *dev)
 +{
-+    AVRUsartState *s = AVR_USART(opaque);
++    AVRMaskState *s = AVR_MASK(dev);
++    SysBusDevice *busdev = SYS_BUS_DEVICE(dev);
 +
-+    s->enabled = !level;
++    memory_region_init_io(&s->iomem, dev, &avr_mask_ops, s, TYPE_AVR_MASK,
++            0x01);
++    sysbus_init_mmio(busdev, &s->iomem);
 +
-+    if (!s->enabled) {
-+        avr_usart_reset(DEVICE(s));
++    for (int i = 0; i < 8; i++) {
++        sysbus_init_irq(busdev, &s->irq[i]);
 +    }
++    s->val = 0x00;
 +}
 +
-+static void avr_usart_init(Object *obj)
-+{
-+    AVRUsartState *s = AVR_USART(obj);
-+    sysbus_init_irq(SYS_BUS_DEVICE(obj), &s->rxc_irq);
-+    sysbus_init_irq(SYS_BUS_DEVICE(obj), &s->dre_irq);
-+    sysbus_init_irq(SYS_BUS_DEVICE(obj), &s->txc_irq);
-+    memory_region_init_io(&s->mmio, obj, &avr_usart_ops, s, TYPE_AVR_USART, 7);
-+    sysbus_init_mmio(SYS_BUS_DEVICE(obj), &s->mmio);
-+    qdev_init_gpio_in(DEVICE(s), avr_usart_pr, 1);
-+    s->enabled = true;
-+}
-+
-+static void avr_usart_realize(DeviceState *dev, Error **errp)
-+{
-+    AVRUsartState *s = AVR_USART(dev);
-+    qemu_chr_fe_set_handlers(&s->chr, avr_usart_can_receive,
-+                             avr_usart_receive, NULL, NULL,
-+                             s, NULL, true);
-+    avr_usart_reset(dev);
-+}
-+
-+static void avr_usart_class_init(ObjectClass *klass, void *data)
++static void avr_mask_class_init(ObjectClass *klass, void *data)
 +{
 +    DeviceClass *dc = DEVICE_CLASS(klass);
 +
-+    dc->reset = avr_usart_reset;
-+    dc->props = avr_usart_properties;
-+    dc->realize = avr_usart_realize;
++    dc->reset = avr_mask_reset;
 +}
 +
-+static const TypeInfo avr_usart_info = {
-+    .name          = TYPE_AVR_USART,
++static const TypeInfo avr_mask_info = {
++    .name          = TYPE_AVR_MASK,
 +    .parent        = TYPE_SYS_BUS_DEVICE,
-+    .instance_size = sizeof(AVRUsartState),
-+    .instance_init = avr_usart_init,
-+    .class_init    = avr_usart_class_init,
++    .instance_size = sizeof(AVRMaskState),
++    .class_init    = avr_mask_class_init,
++    .instance_init = avr_mask_init,
 +};
 +
-+static void avr_usart_register_types(void)
++static void avr_mask_register_types(void)
 +{
-+    type_register_static(&avr_usart_info);
++    type_register_static(&avr_mask_info);
 +}
 +
-+type_init(avr_usart_register_types)
-diff --git a/hw/char/Kconfig b/hw/char/Kconfig
-index 40e7a8b8bb..5a27681884 100644
---- a/hw/char/Kconfig
-+++ b/hw/char/Kconfig
-@@ -46,3 +46,6 @@ config SCLPCONSOLE
++type_init(avr_mask_register_types)
+diff --git a/hw/misc/Kconfig b/hw/misc/Kconfig
+index bdd77d8020..3a3c32e1b0 100644
+--- a/hw/misc/Kconfig
++++ b/hw/misc/Kconfig
+@@ -131,4 +131,7 @@ config MAC_VIA
+     select MOS6522
+     select ADB
  
- config TERMINAL3270
-     bool
-+
-+config ATMEL_USART
++config ATMEL_POWER
 +    bool
-diff --git a/hw/char/Makefile.objs b/hw/char/Makefile.objs
-index 02d8a66925..c23ad3b4a7 100644
---- a/hw/char/Makefile.objs
-+++ b/hw/char/Makefile.objs
-@@ -21,6 +21,7 @@ obj-$(CONFIG_PSERIES) += spapr_vty.o
- obj-$(CONFIG_DIGIC) += digic-uart.o
- obj-$(CONFIG_STM32F2XX_USART) += stm32f2xx_usart.o
- obj-$(CONFIG_RASPI) += bcm2835_aux.o
-+common-obj-$(CONFIG_ATMEL_USART) += atmel_usart.o
++
+ source macio/Kconfig
+diff --git a/hw/misc/Makefile.objs b/hw/misc/Makefile.objs
+index da993f45b7..e605964f4b 100644
+--- a/hw/misc/Makefile.objs
++++ b/hw/misc/Makefile.objs
+@@ -85,3 +85,5 @@ common-obj-$(CONFIG_NRF51_SOC) += nrf51_rng.o
+ obj-$(CONFIG_MAC_VIA) += mac_via.o
  
- common-obj-$(CONFIG_CMSDK_APB_UART) += cmsdk-apb-uart.o
- common-obj-$(CONFIG_ETRAXFS) += etraxfs_ser.o
+ common-obj-$(CONFIG_GRLIB) += grlib_ahb_apb_pnp.o
++
++obj-$(CONFIG_ATMEL_POWER) += atmel_power.o
 -- 
 2.21.1
 
