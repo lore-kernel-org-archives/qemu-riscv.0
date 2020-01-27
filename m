@@ -1,69 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iw9yk-0005sx-Rr
-	for mharc-qemu-riscv@gnu.org; Mon, 27 Jan 2020 14:23:22 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53978)
+	id 1iwDl9-0005O5-OJ
+	for mharc-qemu-riscv@gnu.org; Mon, 27 Jan 2020 18:25:35 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59089)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <palmerdabbelt@google.com>) id 1iw9yh-0005rq-OQ
- for qemu-riscv@nongnu.org; Mon, 27 Jan 2020 14:23:21 -0500
+ (envelope-from <alistair23@gmail.com>) id 1iwDl6-0005Ne-HX
+ for qemu-riscv@nongnu.org; Mon, 27 Jan 2020 18:25:33 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmerdabbelt@google.com>) id 1iw9yg-0005bi-JD
- for qemu-riscv@nongnu.org; Mon, 27 Jan 2020 14:23:19 -0500
-Received: from mail-pl1-x635.google.com ([2607:f8b0:4864:20::635]:40220)
+ (envelope-from <alistair23@gmail.com>) id 1iwDl5-0007cg-D7
+ for qemu-riscv@nongnu.org; Mon, 27 Jan 2020 18:25:32 -0500
+Received: from mail-lj1-x241.google.com ([2a00:1450:4864:20::241]:45807)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmerdabbelt@google.com>)
- id 1iw9yg-0005Wz-Bc
- for qemu-riscv@nongnu.org; Mon, 27 Jan 2020 14:23:18 -0500
-Received: by mail-pl1-x635.google.com with SMTP id y1so578732plp.7
- for <qemu-riscv@nongnu.org>; Mon, 27 Jan 2020 11:23:17 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
- h=date:subject:cc:from:to:in-reply-to:references:message-id
- :mime-version:content-transfer-encoding;
- bh=JbOpXni6WU5muY6ZX256vLuCT+7/Qgls9M9WK/J6QbA=;
- b=LxzTXA/2FZFrTdc3nMBhrnRTi7FGybheo1WgFZnukzmL8sJyuG8Ha9/ULLTYCLLtlB
- EDKVv78hn6O16mbGvnLBsRlSyVu4vVWu0EJIlR2p5GsXgllRak6jbxfE6wpyoy6/mHGs
- LSLCYihR/bS1vVXRPuSb604uv7oswp0QOeOy6sWDXMKTDi0L+epNoMAl9NrFv0LKEzEX
- vIUyeZIeq6iXEKu5ZqTx7eLHTLwno7DR3ZSW8mhML/0Km89Zy8x25s0zag1gJI1ga90P
- GmIs3vADNEp+1QykkQoEjY+QXnOyZUgj4tDOWL693Ckqo5vdTKGOXiBsjvODslx7trRv
- buIQ==
+ (Exim 4.71) (envelope-from <alistair23@gmail.com>)
+ id 1iwDl5-0007ZG-5J; Mon, 27 Jan 2020 18:25:31 -0500
+Received: by mail-lj1-x241.google.com with SMTP id j26so12713894ljc.12;
+ Mon, 27 Jan 2020 15:25:30 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=UE5AqgYvA6UBWpRmfXlp68ySM3Hlmg+yT66iiHh1NxQ=;
+ b=Z2p2GgUut9zaIyFlChoqBweMy9z3YKaDzcaU8IQbOLxYG3x9VQQrJxj5iwD5Hh9qPh
+ OTL7R/WrWO+oKDPwFFL6JmjNQlWrUWFJSIGig7FO0I5jkGXanzw61RehEAD1LMrd2fy5
+ lXHDNASSzRXNNOeb9257UbzISlQcfMCRhr95ghJWvhShn/lk8sL1+qbOmRtdmtVGqne8
+ 5X7aoqh74/UIL9a0Unjq4zT6TLNmtD6ADc1oHnB+QhflD4AQ7vr46O5kEAe4FA1Zxhia
+ A+oEvdNrs2za5k6ekjl79cYhyOLcK5BjWpVch0yBIaxvgY27cfQovqycJ06q10lwPU4Z
+ HNXw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:subject:cc:from:to:in-reply-to:references
- :message-id:mime-version:content-transfer-encoding;
- bh=JbOpXni6WU5muY6ZX256vLuCT+7/Qgls9M9WK/J6QbA=;
- b=AnvyqRyxc9jjt3zg3v5ZV4NlC1ogvU4uOY2/1NqOqWzTo1/fJDL2uPh99x3jQ+n8db
- xhqkL0zIR3UrUkbxYcfDWhQcDH2F7NClI3L1Vp3iLVlm74WlZkFQwve4jlICfT1BZU8R
- 9gUOOx80JCXxOGUbNPTW9vKOngFk/VS3tgNhTmC/6kNHJmNyrZhaMwAc69y9MniWznec
- oyn5qPotjIwVsy5UQTLnbDrfcxoJqCL7zGV0sydpqKQfm+oHofFl5jsR8JKFSXa2jtRo
- zyV1U1I/yXvWjSxYKCqGanLyphcpn4ZiVHHhIzZH1EXA1QPVfS3oh20qE7XdBkp9FNDf
- giVA==
-X-Gm-Message-State: APjAAAX2WOv0z10rSISCYe7Bpfn28sstnYpiJXnXWp5fAZho12nBJyaA
- opqJB0gqZPTr/A0iH7AaIg3Wkwd+tQw=
-X-Google-Smtp-Source: APXvYqzjhnYbCujhvxLhAAx/fAUl7D4yF+p/dyU3g+lPmEOfeP5tsHM5eb7OAc5mBP9mRnKDa+CB3Q==
-X-Received: by 2002:a17:90a:36af:: with SMTP id
- t44mr184738pjb.25.1580152996110; 
- Mon, 27 Jan 2020 11:23:16 -0800 (PST)
-Received: from localhost ([2620:0:1000:2514:7e26:c73d:3c43:9c13])
- by smtp.gmail.com with ESMTPSA id v9sm17127654pja.26.2020.01.27.11.23.14
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 Jan 2020 11:23:15 -0800 (PST)
-Date: Mon, 27 Jan 2020 11:23:15 -0800 (PST)
-X-Google-Original-Date: Mon, 27 Jan 2020 11:23:12 PST (-0800)
-Subject: Re: [PULL] RISC-V Patches for the 5.0 Soft Freeze, Part 1
-CC: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-From: Palmer Dabbelt <palmerdabbelt@google.com>
-To: Peter Maydell <peter.maydell@linaro.org>
-In-Reply-To: <CAFEAcA9HnhKE1nS+ubmCD4AgS-EZ_J_XcWapzUvM2pegHs-imw@mail.gmail.com>
-References: <CAFEAcA9HnhKE1nS+ubmCD4AgS-EZ_J_XcWapzUvM2pegHs-imw@mail.gmail.com>
- <20200121225703.148465-1-palmerdabbelt@google.com>
- <CAFEAcA9YoAjASu4F1hZRjbq5S+h8GtBUVb9dgecMdaWb9YENEw@mail.gmail.com>
- <mhng-ea4d4047-6dfa-4be0-8ce7-424b1d17560a@palmerdabbelt-glaptop1>
-Message-ID: <mhng-3bff4d7f-3418-49db-879f-0df5612feccd@palmerdabbelt-glaptop2>
-Mime-Version: 1.0 (MHng)
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=UE5AqgYvA6UBWpRmfXlp68ySM3Hlmg+yT66iiHh1NxQ=;
+ b=hdmSUnk2NYSYQ13ox68COk3U33KpHaano9HX3LAeVjsFojiMBjElsm6f/O8g7hWNKS
+ eWtcBiGVhuYFLmRrsneFDliA67lx1yVJphsbm9Hwk3NBJ2gayywX8TJyHZufjFiIYYhv
+ dOqp0NoZEB8kILLynTKj846Sxdko8px6DMS/RvddXM799ERWB7oxJgpEUkv62zk3AhTe
+ bw0zVV13/AQDw8xKMq8Fk6gVnrgc98rU/zYwG/9158UimS5DdABDagfc++son7ejDPSn
+ 18EL7mDbE4DsyRW+a+REW04ckp9WPYQO8JhtNZ7NtiiIjK/Owm5LMuEsR/NthEqy3Crl
+ nfpg==
+X-Gm-Message-State: APjAAAWaGl3kp62TOTucz/p2R1kPSD/aiHnGomhByNnVyhozahDbt1Ph
+ c/0Dz51lJjeeyk7LBlvZHhrOUYtWp44+kIWdVX8=
+X-Google-Smtp-Source: APXvYqzqRcTdngtqgVS/id/aMayGZsOjAlojYN6lPJdkKvoA1RMHlPqsQjlAiQbuYNLTRDWX1dNdYrb8WMNB9l9NHnY=
+X-Received: by 2002:a2e:7818:: with SMTP id t24mr11264487ljc.195.1580167529349; 
+ Mon, 27 Jan 2020 15:25:29 -0800 (PST)
+MIME-Version: 1.0
+References: <20200122131641.34953-1-anup.patel@wdc.com>
+In-Reply-To: <20200122131641.34953-1-anup.patel@wdc.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 28 Jan 2020 09:25:02 +1000
+Message-ID: <CAKmqyKO1n58Zk_FmmqqjaMwCpLVJeBMc062eS=AEFyaWENPNEA@mail.gmail.com>
+Subject: Re: [PATCH v2] riscv/virt: Add syscon reboot and poweroff DT nodes
+To: Anup Patel <Anup.Patel@wdc.com>
+Cc: Peter Maydell <peter.maydell@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>,
+ Anup Patel <anup@brainfault.org>, 
+ "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>,
+ Atish Patra <Atish.Patra@wdc.com>, Christoph Hellwig <hch@lst.de>
+Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::635
+X-Received-From: 2a00:1450:4864:20::241
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -75,32 +70,87 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Jan 2020 19:23:21 -0000
+X-List-Received-Date: Mon, 27 Jan 2020 23:25:33 -0000
 
-On Fri, 24 Jan 2020 04:35:14 PST (-0800), Peter Maydell wrote:
-> On Thu, 23 Jan 2020 at 18:43, Palmer Dabbelt <palmerdabbelt@google.com> wrote:
->> On Thu, 23 Jan 2020 06:38:07 PST (-0800), Peter Maydell wrote:
->> > Hi. This pull request doesn't seem to be signed with the GPG
->> > key that I have on record for you...
->>
->> When I moved to Google I got a Yubikey and made new subkeys for it.  If I
->> understand correctly the new subkeys should be signed by my main key, but maybe
->> that didn't make it to your keyring?  I see
->>
->>     $ gpg --list-keys palmer@dabbelt.com
->>     pub   rsa4096 2017-06-06 [SC] [expires: 2027-11-13]
->>           00CE76D1834960DFCE886DF8EF4CA1502CCBAB41
->>     uid           [ultimate] Palmer Dabbelt <palmer@dabbelt.com>
->>     uid           [ultimate] Palmer Dabbelt <palmerdabbelt@google.com>
->>     sub   rsa4096 2017-06-06 [E]
->>     sub   rsa4096 2019-11-26 [S] [expires: 2024-11-24]
->>     sub   rsa4096 2019-11-26 [A] [expires: 2024-11-24]
->>     sub   rsa4096 2019-11-26 [E] [expires: 2024-11-24]
+On Wed, Jan 22, 2020 at 11:18 PM Anup Patel <Anup.Patel@wdc.com> wrote:
 >
-> Yeah, I have those. I think I must have fumbled something
-> when I retried the pullreq after doing a refresh of your
-> gpg key, because I just did a retry now and it's fine.
-> (I'm just running the pull through my tests now.)
+> The SiFive test device found on virt machine can be used by
+> generic syscon reboot and poweroff drivers available in Linux
+> kernel.
+>
+> This patch updates FDT generation in virt machine so that
+> Linux kernel can probe and use generic syscon drivers.
+>
+> Signed-off-by: Anup Patel <anup.patel@wdc.com>
 
-Thanks!
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+
+Alistair
+
+> ---
+> Changes since v1:
+>  - Rebased on latest QEMU master commit 3e08b2b9cb64bff2b73fa9128c0e49bfcde0dd40
+> ---
+>  hw/riscv/virt.c | 26 ++++++++++++++++++++++----
+>  1 file changed, 22 insertions(+), 4 deletions(-)
+>
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index c44b865959..6d682f8a78 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -182,11 +182,10 @@ static void create_fdt(RISCVVirtState *s, const struct MemmapEntry *memmap,
+>      uint64_t mem_size, const char *cmdline)
+>  {
+>      void *fdt;
+> -    int cpu;
+> +    int cpu, i;
+>      uint32_t *cells;
+>      char *nodename;
+> -    uint32_t plic_phandle, phandle = 1;
+> -    int i;
+> +    uint32_t plic_phandle, test_phandle, phandle = 1;
+>      hwaddr flashsize = virt_memmap[VIRT_FLASH].size / 2;
+>      hwaddr flashbase = virt_memmap[VIRT_FLASH].base;
+>
+> @@ -356,16 +355,35 @@ static void create_fdt(RISCVVirtState *s, const struct MemmapEntry *memmap,
+>      create_pcie_irq_map(fdt, nodename, plic_phandle);
+>      g_free(nodename);
+>
+> +    test_phandle = phandle++;
+>      nodename = g_strdup_printf("/test@%lx",
+>          (long)memmap[VIRT_TEST].base);
+>      qemu_fdt_add_subnode(fdt, nodename);
+>      {
+> -        const char compat[] = "sifive,test1\0sifive,test0";
+> +        const char compat[] = "sifive,test1\0sifive,test0\0syscon";
+>          qemu_fdt_setprop(fdt, nodename, "compatible", compat, sizeof(compat));
+>      }
+>      qemu_fdt_setprop_cells(fdt, nodename, "reg",
+>          0x0, memmap[VIRT_TEST].base,
+>          0x0, memmap[VIRT_TEST].size);
+> +    qemu_fdt_setprop_cell(fdt, nodename, "phandle", test_phandle);
+> +    test_phandle = qemu_fdt_get_phandle(fdt, nodename);
+> +    g_free(nodename);
+> +
+> +    nodename = g_strdup_printf("/reboot");
+> +    qemu_fdt_add_subnode(fdt, nodename);
+> +    qemu_fdt_setprop_string(fdt, nodename, "compatible", "syscon-reboot");
+> +    qemu_fdt_setprop_cell(fdt, nodename, "regmap", test_phandle);
+> +    qemu_fdt_setprop_cell(fdt, nodename, "offset", 0x0);
+> +    qemu_fdt_setprop_cell(fdt, nodename, "value", FINISHER_RESET);
+> +    g_free(nodename);
+> +
+> +    nodename = g_strdup_printf("/poweroff");
+> +    qemu_fdt_add_subnode(fdt, nodename);
+> +    qemu_fdt_setprop_string(fdt, nodename, "compatible", "syscon-poweroff");
+> +    qemu_fdt_setprop_cell(fdt, nodename, "regmap", test_phandle);
+> +    qemu_fdt_setprop_cell(fdt, nodename, "offset", 0x0);
+> +    qemu_fdt_setprop_cell(fdt, nodename, "value", FINISHER_PASS);
+>      g_free(nodename);
+>
+>      nodename = g_strdup_printf("/uart@%lx",
+> --
+> 2.17.1
+>
+>
 
