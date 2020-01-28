@@ -1,52 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iwaGv-0008E7-U5
-	for mharc-qemu-riscv@gnu.org; Tue, 28 Jan 2020 18:27:53 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:57327)
+	id 1iwaOg-00056F-RA
+	for mharc-qemu-riscv@gnu.org; Tue, 28 Jan 2020 18:35:54 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:34341)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <alistair23@gmail.com>) id 1iwaGs-0008BS-HD
- for qemu-riscv@nongnu.org; Tue, 28 Jan 2020 18:27:52 -0500
+ (envelope-from <alistair23@gmail.com>) id 1iwaOc-00053b-Ue
+ for qemu-riscv@nongnu.org; Tue, 28 Jan 2020 18:35:52 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1iwaGq-00027g-Er
- for qemu-riscv@nongnu.org; Tue, 28 Jan 2020 18:27:49 -0500
-Received: from mail-lj1-x243.google.com ([2a00:1450:4864:20::243]:33677)
+ (envelope-from <alistair23@gmail.com>) id 1iwaOb-0006fg-Ns
+ for qemu-riscv@nongnu.org; Tue, 28 Jan 2020 18:35:50 -0500
+Received: from mail-lf1-x142.google.com ([2a00:1450:4864:20::142]:41457)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1iwaGn-0001yO-NE; Tue, 28 Jan 2020 18:27:45 -0500
-Received: by mail-lj1-x243.google.com with SMTP id y6so16562761lji.0;
- Tue, 28 Jan 2020 15:27:44 -0800 (PST)
+ id 1iwaOY-0006P1-ST; Tue, 28 Jan 2020 18:35:47 -0500
+Received: by mail-lf1-x142.google.com with SMTP id m30so10450194lfp.8;
+ Tue, 28 Jan 2020 15:35:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=4PKHUnAgCm58jfcKAD2lQvWlutxR+lsplLxYXjp+J8U=;
- b=iz+A5+ezpMUpgEllWqUgb2E1P8tEqSlGnLRkeKsJm4r8Y3SKGqi5HYqsBEHr+XmUxU
- Qky9dy/+XRH9cHyd74er74v6qNc3N9+GnL/GDSAHzkC6w+930PcjaELdtsbxbhYTlSqI
- JgEr/aWhaUtSeKNPUuA4T0Ta3s86RfZ3LHrDPVQPQ8bpZjHAxwkvHgPHA3NUULxZmGnt
- 9nBcJQtJEzFqF8e573hDjDGk44yEEJ6xi8MwAhLtOI3/6tGRzZKkLTuYEjyLSx0hX76W
- OYaUsMNTCxorFU4zwVXLPuJIH7MzmCC9orfwrNEo6jrv1Ik7/LXt/9z64U0JH5A4iP9N
- 3F4w==
+ :cc; bh=1i7hsIzmCffF09mnyOMdgtFSyGxp4xB2YWtQQN6vT/4=;
+ b=PhpCO83HDiwUlvnWb2RXxAsl0cfEpRFNMvUC2dmgUTknfjQ1bcpcsf9CZs8ZDbeldF
+ xJjxvKj0DFXyTI8QXH21aoCMXpcogYAr4tOC6Y4rORPucH7sNgUtdfarvSAdapkzxkVk
+ 4EoXQhg5MDqbjH+VV6Zx9aNcEvYRprci6F+R6UU0bnDFzaOOCIRmwVKykDtpurOzGUbm
+ Cfz8IGVi68Ih5QB0hRjFnVMzHgC96IAgQuqGdEqik23rhq3EJ04zRET46sUMBJ0B7sjK
+ pejcQ+bjeY26wcBqXXSiMMjevJGiBgkh04c4WhaC4D7H8rJgKxZ6RIm8ykARG0X58sFc
+ pvLg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=4PKHUnAgCm58jfcKAD2lQvWlutxR+lsplLxYXjp+J8U=;
- b=GJvefw0ul+lqnCpuKj+xysQAzAa6XmHeXxtTozyne4Nrh1b2cnuY5gD12yMSQyqjyx
- 0V/DQCdPE2kNBPduPQ2jq3uByrvbahJXawyGlL39kxzIQiWg0QDJ/ExNJwzd8ZcfbBzL
- qzNQECgB7lgCoOaeYRlhpqPOLvGRoL/GRZPNUhAgI4UO0fuNY45zrIC4hFo4/8ZeEB7g
- DDRwXPv6/r/kitIQ3Jsk9ioOn+3Bap7GZY0qDYNrZ3NTW8fP5RSl0mBaj13aqvJDcc6O
- WVKqZ12JWXa5Y5TmdL+xchjQmoELUuKZvwBOIjYsEVLeyGz+KwwwMR+pEXP4mAtuRVqm
- YsNQ==
-X-Gm-Message-State: APjAAAVL59otTwP7GPpVJbkaHm0nL8I3phhIj5YUXVFKLzu38D4up1r+
- VLw7BunnS3qXgnd3eyy4c06Mt/150nOWEFYkhfk=
-X-Google-Smtp-Source: APXvYqwPiptIIYpFmtKZSLyA2wg4IdYhDO5bgU6Lj7/v8XcJrdhVJ6G4ewSZX2ni6k4U0IPspWVOyJaqja89g+wM6iw=
-X-Received: by 2002:a2e:b4ac:: with SMTP id q12mr10001289ljm.285.1580254063352; 
- Tue, 28 Jan 2020 15:27:43 -0800 (PST)
+ bh=1i7hsIzmCffF09mnyOMdgtFSyGxp4xB2YWtQQN6vT/4=;
+ b=kOdLrWJgrr2HKZZ63lcZuxNse7mScedmph3kiwbyJi+AcvY7ql2+hkN4HWApzMMYZn
+ JN+b5Yew1H4OWjXrKjjPJOcld8tSEFeHqHB1wdU6xiTShKCzS1ye81v1wX6eevFubkT2
+ D9h0l/u7OiTcakswc6Z9v2knEa71WqZcFOy32KBpwk4x9Bu8FP8aUG/n5uwH2h74VnLq
+ OWFAYn1fuBkbFjA28Uhq2HT33mlUusHBDtVUU6w25GeOCB5VntOO2NQmKDYT63N6kWx+
+ 9Gq3D39a9vYd5Xps0UfpHOiYF7YhZD9YFYHehAHOmprBXvM30IBi3lxgUSecIHB0cv3P
+ f0fg==
+X-Gm-Message-State: APjAAAXaMiqVq26GCRND+dcMIicwnGXW/5JL+Dm6zU184E0I53lv87Bh
+ v9aePqbXDhVyT+Aoym9KCLksKjDnJoRWqnW/pAc=
+X-Google-Smtp-Source: APXvYqzAo6sOD+nSPatMT25Gujkb0/6PUi/rdhv9WVDK4jY8q+CpGi5LT/iOiBfPsodESHOt8FPiufOIt2ZND8/MFrY=
+X-Received: by 2002:ac2:5310:: with SMTP id c16mr3803854lfh.102.1580254544081; 
+ Tue, 28 Jan 2020 15:35:44 -0800 (PST)
 MIME-Version: 1.0
-References: <20200128223955.464556-1-keithp@keithp.com>
-In-Reply-To: <20200128223955.464556-1-keithp@keithp.com>
+References: <20200128233216.515171-1-keithp@keithp.com>
+In-Reply-To: <20200128233216.515171-1-keithp@keithp.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 28 Jan 2020 15:27:16 -0800
-Message-ID: <CAKmqyKOpG1QYD_w1EHEUEs-8J1RAx=k8xMqxRZ5H0nD2N7q_+w@mail.gmail.com>
+Date: Tue, 28 Jan 2020 15:35:17 -0800
+Message-ID: <CAKmqyKMN=3P7V=m+3na6zh_711gw2qDkosWxjgLG_DbUGm9sYQ@mail.gmail.com>
 Subject: Re: [PATCH] riscv: Separate FPU register size from core register size
- in gdbstub
+ in gdbstub [v2]
 To: Keith Packard <keithp@keithp.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  Palmer Dabbelt <palmer@dabbelt.com>, 
@@ -57,7 +57,7 @@ Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
 Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::243
+X-Received-From: 2a00:1450:4864:20::142
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -69,9 +69,9 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Jan 2020 23:27:52 -0000
+X-List-Received-Date: Tue, 28 Jan 2020 23:35:52 -0000
 
-On Tue, Jan 28, 2020 at 2:40 PM Keith Packard via <qemu-devel@nongnu.org> wrote:
+On Tue, Jan 28, 2020 at 3:33 PM Keith Packard via <qemu-devel@nongnu.org> wrote:
 >
 > The size of the FPU registers is dictated by the 'f' and 'd' features,
 > not the core processor register size. Processors with the 'd' feature
@@ -79,10 +79,20 @@ On Tue, Jan 28, 2020 at 2:40 PM Keith Packard via <qemu-devel@nongnu.org> wrote:
 > the 'f' feature have 32-bit FPU registers.
 >
 > Signed-off-by: Keith Packard <keithp@keithp.com>
+
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+
+Alistair
+
+>
+> ---
+>
+> v2:
+>     Fix checkpatch formatting complaints.
 > ---
 >  configure              |  4 ++--
->  target/riscv/gdbstub.c | 18 +++++++++---------
->  2 files changed, 11 insertions(+), 11 deletions(-)
+>  target/riscv/gdbstub.c | 20 +++++++++++---------
+>  2 files changed, 13 insertions(+), 11 deletions(-)
 >
 > diff --git a/configure b/configure
 > index a72a5def57..c21bff8d10 100755
@@ -105,29 +115,24 @@ On Tue, Jan 28, 2020 at 2:40 PM Keith Packard via <qemu-devel@nongnu.org> wrote:
 >    sh4|sh4eb)
 >      TARGET_ARCH=sh4
 > diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
-> index 1a7947e019..c1803a5916 100644
+> index 1a7947e019..1a72f7be9c 100644
 > --- a/target/riscv/gdbstub.c
 > +++ b/target/riscv/gdbstub.c
-> @@ -303,7 +303,10 @@ int riscv_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
+> @@ -303,7 +303,12 @@ int riscv_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
 >  static int riscv_gdb_get_fpu(CPURISCVState *env, uint8_t *mem_buf, int n)
 >  {
 >      if (n < 32) {
 > -        return gdb_get_reg64(mem_buf, env->fpr[n]);
-> +        if (env->misa & RVD)
+> +        if (env->misa & RVD) {
 > +            return gdb_get_reg64(mem_buf, env->fpr[n]);
-> +        if (env->misa & RVF)
+> +        }
+> +        if (env->misa & RVF) {
 > +            return gdb_get_reg32(mem_buf, env->fpr[n]);
-
-You need brackets around all if statements, besides that:
-
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-
-Alistair
-
+> +        }
 >      /* there is hole between ft11 and fflags in fpu.xml */
 >      } else if (n < 36 && n > 32) {
 >          target_ulong val = 0;
-> @@ -403,23 +406,20 @@ void riscv_cpu_register_gdb_regs_for_features(CPUState *cs)
+> @@ -403,23 +408,20 @@ void riscv_cpu_register_gdb_regs_for_features(CPUState *cs)
 >  {
 >      RISCVCPU *cpu = RISCV_CPU(cs);
 >      CPURISCVState *env = &cpu->env;
