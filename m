@@ -1,64 +1,41 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iwUPw-0002zP-PP
-	for mharc-qemu-riscv@gnu.org; Tue, 28 Jan 2020 12:12:48 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42908)
+	id 1iwZdR-0005EH-5k
+	for mharc-qemu-riscv@gnu.org; Tue, 28 Jan 2020 17:47:06 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:48246)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <josemartins90@gmail.com>) id 1iwUPu-0002zJ-Db
- for qemu-riscv@nongnu.org; Tue, 28 Jan 2020 12:12:47 -0500
+ (envelope-from <no-reply@patchew.org>) id 1iwZdM-0005BJ-RQ
+ for qemu-riscv@nongnu.org; Tue, 28 Jan 2020 17:47:02 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <josemartins90@gmail.com>) id 1iwUPt-0001bm-Ad
- for qemu-riscv@nongnu.org; Tue, 28 Jan 2020 12:12:46 -0500
-Received: from mail-wm1-x342.google.com ([2a00:1450:4864:20::342]:51632)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <josemartins90@gmail.com>)
- id 1iwUPt-0001aw-4O
- for qemu-riscv@nongnu.org; Tue, 28 Jan 2020 12:12:45 -0500
-Received: by mail-wm1-x342.google.com with SMTP id t23so3383470wmi.1
- for <qemu-riscv@nongnu.org>; Tue, 28 Jan 2020 09:12:44 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=date:from:to:subject:message-id:mime-version:content-disposition
- :content-transfer-encoding:user-agent;
- bh=kN9ifczQL8keW4QDrKt6zbT06z7gDhVP2w5CMl0zq9Q=;
- b=s8a0qxmMKPqAg6Gi3JYbTqUlQmv/jEGAwmFrVnX9RcXEtXnUzS4XiDUrmb5NvdumQ9
- Qsp7fymwNMbapXcqiiGkgSU60wUxDUaHR98vH09DJpmg1mu+8Oq7httjRqZizLMXfgRh
- OpwJ0+NeguqmCbtiP0UGgZeKBD1GAnJ1jkpfySQpwq9sbEBR1sxS6NGJclooaxAnsngh
- o8mLlZSe7/CHBXxyqJDPVeTTHGXX2rOB5gk0kIaWZGBJpume9l3mjcifi5yBLIXWcDiS
- yxeHgtRTtqsuFDpprs56l0n8f212eNJVvH1UN1rJYuMu68XQgBLU5R0O298/QX/scG6c
- eBEg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:subject:message-id:mime-version
- :content-disposition:content-transfer-encoding:user-agent;
- bh=kN9ifczQL8keW4QDrKt6zbT06z7gDhVP2w5CMl0zq9Q=;
- b=M5fzPAMvwK+aM/IpVWl8u9lUQRggDE6aIN2F8IjqHpAniWLbVjFk5ksGFhe/O7hcCv
- +fnrSW+bnwfxBF9QjApzy7/goO5sBnaUBwtV812Z78ECEIxZpILR1HocVsrUgNO3ixLV
- nkzV6ZXdJ++NWSDwAzEdmoDS8EXrOrjtMXYHjMZGqc6vmS3HX4NLWtzCEZoFF5QWSGnU
- cLrie4aW7JeDzY1l4NjgX82U6AfDqLkq+0VT6Mlj74y2w9GTntWzwQphz1ZYc2IV5Smp
- eVmQBTBOSl/O3p5mCFDYYJkloyGO6LS1NcsgqXHMZiLq/+/JX/99Krbq2R8GbcfAY6Mm
- LnMg==
-X-Gm-Message-State: APjAAAWL1+o3L5hilviXB7UsLX0sF5G2yy1gUFk4de12UvypO24iZGT7
- RAxq2w1uYBIV3tBPDgsiL+ZGAnauDko=
-X-Google-Smtp-Source: APXvYqzhjBCm5AtXDQQ84i+DiFbiEqecEg1/tfdFD2Ua0hilkAkrAMymN2AZNUL6cQzK3D/mw3YNOw==
-X-Received: by 2002:a1c:1d02:: with SMTP id d2mr6422335wmd.185.1580231563101; 
- Tue, 28 Jan 2020 09:12:43 -0800 (PST)
-Received: from n552vx ([193.137.92.130])
- by smtp.gmail.com with ESMTPSA id i204sm4022695wma.44.2020.01.28.09.12.41
- for <qemu-riscv@nongnu.org>
- (version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
- Tue, 28 Jan 2020 09:12:42 -0800 (PST)
-Date: Tue, 28 Jan 2020 17:12:35 +0000
-From: Jose Martins <josemartins90@gmail.com>
-To: qemu-riscv@nongnu.org
-Subject: [PATCH] riscv/target: fix vs interrupt delegation
-Message-ID: <20200128171233.qpuyzpiopgvqxuuz@n552vx>
+ (envelope-from <no-reply@patchew.org>) id 1iwZdK-0005CM-N1
+ for qemu-riscv@nongnu.org; Tue, 28 Jan 2020 17:47:00 -0500
+Resent-Date: Tue, 28 Jan 2020 17:47:00 -0500
+Resent-Message-Id: <E1iwZdK-0005CM-N1@eggs.gnu.org>
+Received: from sender4-of-o51.zoho.com ([136.143.188.51]:21120)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <no-reply@patchew.org>)
+ id 1iwZdG-0004wr-HQ; Tue, 28 Jan 2020 17:46:54 -0500
+Received: from [172.17.0.3] (23.253.156.214 [23.253.156.214]) by
+ mx.zohomail.com with SMTPS id 1580251594449591.4796643350552;
+ Tue, 28 Jan 2020 14:46:34 -0800 (PST)
+In-Reply-To: <20200128223955.464556-1-keithp@keithp.com>
+Reply-To: <qemu-devel@nongnu.org>
+Subject: Re: [PATCH] riscv: Separate FPU register size from core register size
+ in gdbstub
+Message-ID: <158025159282.18399.1270920230383164028@f6d1ed32ca6b>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-User-Agent: NeoMutt/20171215
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2a00:1450:4864:20::342
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+Resent-From: 
+From: no-reply@patchew.org
+To: qemu-devel@nongnu.org
+Cc: qemu-devel@nongnu.org, palmer@dabbelt.com, Alistair.Francis@wdc.com,
+ sagark@eecs.berkeley.edu, kbastian@mail.uni-paderborn.de,
+ qemu-riscv@nongnu.org, keithp@keithp.com
+Date: Tue, 28 Jan 2020 14:46:34 -0800 (PST)
+X-ZohoMailClient: External
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+ [fuzzy]
+X-Received-From: 136.143.188.51
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -70,58 +47,36 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Jan 2020 17:12:47 -0000
+X-List-Received-Date: Tue, 28 Jan 2020 22:47:02 -0000
 
-Hello,
-
-I've been having an issue delegating external interrupts to VS mode. I've set
-the VSEI bit in hideleg. Then, to trigger the interrupt I set the VSEIP bit in
-hip. However, this does not forward the external interrupt to VS mode, but to
-HS mode.
-
-Looking through the code, I see the VS to S interrupt cause translation is done
-in riscv_cpu_local_irq_pending by immediately shifting right the pending vs
-interrupts. So, this function will return the same cause either this is a HS
-interrupt or a VS interrupt. Later, in riscv_cpu_do_interrupt, this is not
-taken into account when checking the pending interrupt against the hypervisor
-interrupt delegation register (hideleg). There will never be a match as the "normal"
-supervisor interrupt cannot be delegated to VS mode.
-
-I believe an easy fix is to delay the cause translation until we know this
-is indeed a delegated VS mode interrupt. Here is a patch:
-
-Signed-off-by: José Martins <josemartins90@gmail.com>
----
- target/riscv/cpu_helper.c | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
-
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 7166e6199e..161dc34e0d 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -46,7 +46,7 @@ static int riscv_cpu_local_irq_pending(CPURISCVState *env)
-     target_ulong pending = env->mip & env->mie &
-                                ~(MIP_VSSIP | MIP_VSTIP | MIP_VSEIP);
-     target_ulong vspending = (env->mip & env->mie &
--                              (MIP_VSSIP | MIP_VSTIP | MIP_VSEIP)) >> 1;
-+                              (MIP_VSSIP | MIP_VSTIP | MIP_VSEIP));
-
-     target_ulong mie    = env->priv < PRV_M ||
-                           (env->priv == PRV_M && mstatus_mie);
-@@ -892,6 +892,9 @@ void riscv_cpu_do_interrupt(CPUState *cs)
-             if (riscv_cpu_virt_enabled(env) && ((hdeleg >> cause) & 1) &&
-                 !riscv_cpu_force_hs_excep_enabled(env)) {
-                 /* Trap to VS mode */
-+                if(async){
-+                    cause -= 1;
-+                }
-             } else if (riscv_cpu_virt_enabled(env)) {
-                 /* Trap into HS mode, from virt */
-                 riscv_cpu_swap_hypervisor_regs(env);
---
-2.17.1
-
-Regards,
-Jose
-
+UGF0Y2hldyBVUkw6IGh0dHBzOi8vcGF0Y2hldy5vcmcvUUVNVS8yMDIwMDEyODIyMzk1NS40NjQ1
+NTYtMS1rZWl0aHBAa2VpdGhwLmNvbS8KCgoKSGksCgpUaGlzIHNlcmllcyBzZWVtcyB0byBoYXZl
+IHNvbWUgY29kaW5nIHN0eWxlIHByb2JsZW1zLiBTZWUgb3V0cHV0IGJlbG93IGZvcgptb3JlIGlu
+Zm9ybWF0aW9uOgoKVHlwZTogc2VyaWVzCk1lc3NhZ2UtaWQ6IDIwMjAwMTI4MjIzOTU1LjQ2NDU1
+Ni0xLWtlaXRocEBrZWl0aHAuY29tClN1YmplY3Q6IFtQQVRDSF0gcmlzY3Y6IFNlcGFyYXRlIEZQ
+VSByZWdpc3RlciBzaXplIGZyb20gY29yZSByZWdpc3RlciBzaXplIGluIGdkYnN0dWIKCj09PSBU
+RVNUIFNDUklQVCBCRUdJTiA9PT0KIyEvYmluL2Jhc2gKZ2l0IHJldi1wYXJzZSBiYXNlID4gL2Rl
+di9udWxsIHx8IGV4aXQgMApnaXQgY29uZmlnIC0tbG9jYWwgZGlmZi5yZW5hbWVsaW1pdCAwCmdp
+dCBjb25maWcgLS1sb2NhbCBkaWZmLnJlbmFtZXMgVHJ1ZQpnaXQgY29uZmlnIC0tbG9jYWwgZGlm
+Zi5hbGdvcml0aG0gaGlzdG9ncmFtCi4vc2NyaXB0cy9jaGVja3BhdGNoLnBsIC0tbWFpbGJhY2sg
+YmFzZS4uCj09PSBURVNUIFNDUklQVCBFTkQgPT09CgpVcGRhdGluZyAzYzhjZjVhOWMyMWZmODc4
+MjE2NGQxZGVmN2Y0NGJkODg4NzEzMzg0CkZyb20gaHR0cHM6Ly9naXRodWIuY29tL3BhdGNoZXct
+cHJvamVjdC9xZW11CiAqIFtuZXcgdGFnXSAgICAgICAgIHBhdGNoZXcvMjAyMDAxMjgyMjM5NTUu
+NDY0NTU2LTEta2VpdGhwQGtlaXRocC5jb20gLT4gcGF0Y2hldy8yMDIwMDEyODIyMzk1NS40NjQ1
+NTYtMS1rZWl0aHBAa2VpdGhwLmNvbQpTd2l0Y2hlZCB0byBhIG5ldyBicmFuY2ggJ3Rlc3QnCmY4
+NzA0YTggcmlzY3Y6IFNlcGFyYXRlIEZQVSByZWdpc3RlciBzaXplIGZyb20gY29yZSByZWdpc3Rl
+ciBzaXplIGluIGdkYnN0dWIKCj09PSBPVVRQVVQgQkVHSU4gPT09CkVSUk9SOiBicmFjZXMge30g
+YXJlIG5lY2Vzc2FyeSBmb3IgYWxsIGFybXMgb2YgdGhpcyBzdGF0ZW1lbnQKIzQ0OiBGSUxFOiB0
+YXJnZXQvcmlzY3YvZ2Ric3R1Yi5jOjMwNjoKKyAgICAgICAgaWYgKGVudi0+bWlzYSAmIFJWRCkK
+Wy4uLl0KCnRvdGFsOiAxIGVycm9ycywgMCB3YXJuaW5ncywgNTQgbGluZXMgY2hlY2tlZAoKQ29t
+bWl0IGY4NzA0YTg1ZjE3YSAocmlzY3Y6IFNlcGFyYXRlIEZQVSByZWdpc3RlciBzaXplIGZyb20g
+Y29yZSByZWdpc3RlciBzaXplIGluIGdkYnN0dWIpIGhhcyBzdHlsZSBwcm9ibGVtcywgcGxlYXNl
+IHJldmlldy4gIElmIGFueSBvZiB0aGVzZSBlcnJvcnMKYXJlIGZhbHNlIHBvc2l0aXZlcyByZXBv
+cnQgdGhlbSB0byB0aGUgbWFpbnRhaW5lciwgc2VlCkNIRUNLUEFUQ0ggaW4gTUFJTlRBSU5FUlMu
+Cj09PSBPVVRQVVQgRU5EID09PQoKVGVzdCBjb21tYW5kIGV4aXRlZCB3aXRoIGNvZGU6IDEKCgpU
+aGUgZnVsbCBsb2cgaXMgYXZhaWxhYmxlIGF0Cmh0dHA6Ly9wYXRjaGV3Lm9yZy9sb2dzLzIwMjAw
+MTI4MjIzOTU1LjQ2NDU1Ni0xLWtlaXRocEBrZWl0aHAuY29tL3Rlc3RpbmcuY2hlY2twYXRjaC8/
+dHlwZT1tZXNzYWdlLgotLS0KRW1haWwgZ2VuZXJhdGVkIGF1dG9tYXRpY2FsbHkgYnkgUGF0Y2hl
+dyBbaHR0cHM6Ly9wYXRjaGV3Lm9yZy9dLgpQbGVhc2Ugc2VuZCB5b3VyIGZlZWRiYWNrIHRvIHBh
+dGNoZXctZGV2ZWxAcmVkaGF0LmNvbQ==
 
