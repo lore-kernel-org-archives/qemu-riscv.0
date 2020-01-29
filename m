@@ -1,65 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iwaa6-0001WZ-2O
-	for mharc-qemu-riscv@gnu.org; Tue, 28 Jan 2020 18:47:42 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:33670)
+	id 1iwpHJ-00038n-68
+	for mharc-qemu-riscv@gnu.org; Wed, 29 Jan 2020 10:29:17 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:46819)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <keithp@keithp.com>) id 1iwaNg-0003zf-Ub
- for qemu-riscv@nongnu.org; Tue, 28 Jan 2020 18:34:53 -0500
+ (envelope-from <palmerdabbelt@google.com>) id 1iwpHG-00038Z-Tn
+ for qemu-riscv@nongnu.org; Wed, 29 Jan 2020 10:29:15 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <keithp@keithp.com>) id 1iwaNg-0003uc-2E
- for qemu-riscv@nongnu.org; Tue, 28 Jan 2020 18:34:52 -0500
-Received: from home.keithp.com ([63.227.221.253]:44670 helo=elaine.keithp.com)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <keithp@keithp.com>)
- id 1iwaNd-0003ko-32; Tue, 28 Jan 2020 18:34:49 -0500
-Received: from localhost (localhost [127.0.0.1])
- by elaine.keithp.com (Postfix) with ESMTP id 2DFD83F2A89E;
- Tue, 28 Jan 2020 15:34:48 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=keithp.com; s=mail;
- t=1580254488; bh=+p0k5tb8ZttMZ50WWyUz1i4/f41iRVLYEz/z8eBqkgM=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=AEbN6Yq5lKRHgvsG8JWBYqh9utmoz71CszaoOpNznRK9KM+Kd/JX93mzbV4JUTUz7
- eosTdN8sMGWr1nquQtXPSzIWoA0BnarM1inDOwurO7IyxVkJQBTArRMDXymm71aZVK
- Kb7XG6tWCRvO9psUbAmyQdiVXSsvHDc9C/ezsdTSQ7BmQTzxNXCo567dvDCYZljFFT
- Cz9TH8w2C5RHkcvt8GW8uZ887m8wr0/yQkzE15Q1dISGw4PVcbQusN06rj+GQ4r36U
- VcgmfDnRif7kuvHf8cTEyevhSeD6cKU7HGv9zVUcVoxwH1ZehfkEiMwy/VSYTGulat
- RfIjJSnGBVfMQ==
-X-Virus-Scanned: Debian amavisd-new at keithp.com
-Received: from elaine.keithp.com ([127.0.0.1])
- by localhost (elaine.keithp.com [127.0.0.1]) (amavisd-new, port 10024)
- with LMTP id ZEzBFwehzoUJ; Tue, 28 Jan 2020 15:34:47 -0800 (PST)
-Received: from keithp.com (koto.keithp.com [10.0.0.2])
- by elaine.keithp.com (Postfix) with ESMTPSA id 9C7F23F2A895;
- Tue, 28 Jan 2020 15:34:47 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=keithp.com; s=mail;
- t=1580254487; bh=+p0k5tb8ZttMZ50WWyUz1i4/f41iRVLYEz/z8eBqkgM=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=UUxlameO2nWHeXy/510P28tBe/S/lwhjgYrcTBCQFW295vNlWfgCs4jYc7VjxV7QD
- IEDU15UEhyCz0Iu9Oq1yULtgXqP9+1t5lSmbVutx7WR69wQBKnVMtx4flnEsgflt94
- xpqk2JHciY0CZqZo3C2R8gpRoQQE9pbpbuNx0hdvXDvdtTS3zV3JJEjUDXkqMcSlFc
- mrArL7/9sT5DIYPmb6y/qLUtix/IR4MXRpkWnOvKnQH2wO9wtmvii5V8xAnGc8eDV8
- h0yz/O7xO+akHoAcFsypX710nkzIQOZLHxenzd1qh+wDlLMfUhrlvxryk0gYbDDjmP
- rkPBfx06g4YxA==
-Received: by keithp.com (Postfix, from userid 1000)
- id 8832B1582162; Tue, 28 Jan 2020 15:34:47 -0800 (PST)
-From: "Keith Packard" <keithp@keithp.com>
-To: qemu-devel@nongnu.org
-Cc: Riku Voipio <riku.voipio@iki.fi>, Laurent Vivier <laurent@vivier.eu>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, qemu-riscv@nongnu.org
-Subject: Re: [PATCH] riscv: Add semihosting support [v3]
-In-Reply-To: <20200128231840.508986-1-keithp@keithp.com>
-References: <20200128231840.508986-1-keithp@keithp.com>
-Date: Tue, 28 Jan 2020 15:34:47 -0800
-Message-ID: <87lfprrw88.fsf@keithp.org>
-MIME-Version: 1.0
-Content-Type: multipart/signed; boundary="=-=-=";
- micalg=pgp-sha256; protocol="application/pgp-signature"
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
-X-Received-From: 63.227.221.253
-X-Mailman-Approved-At: Tue, 28 Jan 2020 18:47:38 -0500
+ (envelope-from <palmerdabbelt@google.com>) id 1iwpHF-0008Pl-Sp
+ for qemu-riscv@nongnu.org; Wed, 29 Jan 2020 10:29:14 -0500
+Received: from mail-wr1-x444.google.com ([2a00:1450:4864:20::444]:41394)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <palmerdabbelt@google.com>)
+ id 1iwpHF-0008MJ-Ke
+ for qemu-riscv@nongnu.org; Wed, 29 Jan 2020 10:29:13 -0500
+Received: by mail-wr1-x444.google.com with SMTP id c9so20676645wrw.8
+ for <qemu-riscv@nongnu.org>; Wed, 29 Jan 2020 07:29:12 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
+ h=date:subject:cc:from:to:in-reply-to:references:message-id
+ :mime-version:content-transfer-encoding;
+ bh=/OepjiM66bZe8KwsOgHG8bTCJYzjbGSZ/EkEmj4RXsc=;
+ b=OTEKiEVOBmM8V1L4U7WPSvkW0qbL9igEx4jyxr1Po7mAQQ4RH5E/4GdzH9ngaexTFc
+ uBbf+wHCRH1re131HKG6JHGHpZMFyPRizOqdAqRW2GMn267WswLUJt37C48tv0X0cQeC
+ cQqsQEzSCER/NGKz7SMf5nqIWDr4TbslA/VWo0maCrGucS9l1OWQa23C/a7MZFCQ00bb
+ vJeb8DvIJCbsUmt7NxrOVuHiUFjd6DUALeipPivQ2/jN1f3dmM1mdfHuE0LWTrecGY6z
+ Tue51n8g0MqlxmhrInjgPEDj2sKP+ih9DAesQUQO4EXqZqO4BuiaHUjgBRdekulH9f3t
+ t7WQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:subject:cc:from:to:in-reply-to:references
+ :message-id:mime-version:content-transfer-encoding;
+ bh=/OepjiM66bZe8KwsOgHG8bTCJYzjbGSZ/EkEmj4RXsc=;
+ b=plptapbcSp612trrsBfe5C2AsB++jTKWhT8aRHsaMSi9fhnwERUKfbs+bCqmJNZuhN
+ LSBqP094t0hr1HboI+N8CORx/qlPS4gOrXjt1iLUQ+3E510V1HXT2MMxV9SC0DoMGlMh
+ QwzhYHpjBfsjGUPbqSOMI2d3UC1PnPveOvQa5D8LfooDR1C05P55OQ3C7Lo9EG7ZLjjR
+ FynVvN9MWObYdAnIuUC/FsmI5fhwPxCOA1WsTNGa3yWXSIulp/LJ7KF7vHc06S2seYZm
+ gb1oITUd0YeE+ZVp8TOHiVg/17f1yucx5i9gcvH5ijz5pbTOnwJunrkxzxGzL0R5b1d3
+ cTzQ==
+X-Gm-Message-State: APjAAAWohy0ARvvVYkq/UYkra8smTozHy9MYGHT1/Ay+2ew0IBbazJUo
+ d6hYZpuvS2/bk/8Wzub7Vd5Iqw==
+X-Google-Smtp-Source: APXvYqxSdv2Bu4x6KY+14S+ce+NFPS1gCqWJTTT3ubj5CcfxJtt6kaAOSD5gmao6t9a2I9gCXL8qVQ==
+X-Received: by 2002:a5d:4ec2:: with SMTP id s2mr33695170wrv.291.1580311751448; 
+ Wed, 29 Jan 2020 07:29:11 -0800 (PST)
+Received: from localhost ([2a00:79e0:d:11:1da2:3fd4:a302:4fff])
+ by smtp.gmail.com with ESMTPSA id b17sm3264260wrx.15.2020.01.29.07.29.10
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 29 Jan 2020 07:29:11 -0800 (PST)
+Date: Wed, 29 Jan 2020 07:29:11 -0800 (PST)
+X-Google-Original-Date: Wed, 29 Jan 2020 15:28:50 GMT (+0000)
+Subject: Re: [PATCH] riscv: sifive_u: Add a "serial" property for board serial
+ number
+CC: Alistair Francis <Alistair.Francis@wdc.com>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, sagark@eecs.berkeley.edu,
+ qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+From: Palmer Dabbelt <palmerdabbelt@google.com>
+To: bmeng.cn@gmail.com
+In-Reply-To: <CAEUhbmXRaHqxNt2XCgsjUDfR+VoMOjb5f38V6Yu35HWV1nkKeQ@mail.gmail.com>
+References: <CAEUhbmXRaHqxNt2XCgsjUDfR+VoMOjb5f38V6Yu35HWV1nkKeQ@mail.gmail.com>
+ <CAEUhbmUuCOzd_Y6ip_oh13gt83rM8EffdXWRCa=KybOjAvEN-A@mail.gmail.com>
+ <mhng-b2e05f4a-7c3d-4be1-a843-a19b4054760a@palmerdabbelt.mtv.corp.google.com>
+Message-ID: <mhng-e3089574-e78c-4b6c-961e-cac55f0f23d4@palmerdabbelt-glaptop1>
+Mime-Version: 1.0 (MHng)
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2a00:1450:4864:20::444
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -71,41 +76,51 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Jan 2020 23:34:54 -0000
+X-List-Received-Date: Wed, 29 Jan 2020 15:29:16 -0000
 
---=-=-=
-Content-Type: text/plain
-Content-Transfer-Encoding: quoted-printable
+On Fri, 10 Jan 2020 07:52:05 GMT (+0000), bmeng.cn@gmail.com wrote:
+> Hi Palmer,
+>
+> On Fri, Nov 22, 2019 at 10:38 AM Palmer Dabbelt
+> <palmerdabbelt@google.com> wrote:
+>>
+>> On Thu, 21 Nov 2019 17:10:18 PST (-0800), bmeng.cn@gmail.com wrote:
+>> > On Sat, Nov 16, 2019 at 11:08 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+>> >>
+>> >> At present the board serial number is hard-coded to 1, and passed
+>> >> to OTP model during initialization. Firmware (FSBL, U-Boot) uses
+>> >> the serial number to generate a unique MAC address for the on-chip
+>> >> ethernet controller. When multiple QEMU 'sifive_u' instances are
+>> >> created and connected to the same subnet, they all have the same
+>> >> MAC address hence it creates a unusable network.
+>> >>
+>> >> A new "serial" property is introduced to specify the board serial
+>> >> number. When not given, the default serial number 1 is used.
+>> >>
+>> >> Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
+>> >> ---
+>> >>
+>> >>  hw/riscv/sifive_u.c         | 21 ++++++++++++++++++++-
+>> >>  include/hw/riscv/sifive_u.h |  1 +
+>> >>  2 files changed, 21 insertions(+), 1 deletion(-)
+>> >>
+>> >
+>> > ping?
+>>
+>> Sorry, it looks like I dropped this one.  I've put it in the queue for 5.0,
+>> with a
+>>
+>> Reviewed-by: Palmer Dabbelt <palmerdabbelt@google.com>
+>
+> Has this been applied somewhere?
 
-Keith Packard <keithp@keithp.com> writes:
+Weird, not sure how I managed to screw this up again.  It's actually on for-master as 
 
-> Adapt the arm semihosting support code for RISCV. This implementation
-> is based on the standard for RISC-V semihosting as documented in
+    * a828041ba6 - riscv: sifive_u: Add a "serial" property for board serial number (50 seconds ago) <Bin Meng>
 
-Sorry for the noise on the list; I failed to run checkpatch.pl before
-submitting. I've re-submittd [v4] with the formatting errors corrected.
+with any luck I'll manage to avoid screwing it up a third time.
 
-=2D-=20
-=2Dkeith
-
---=-=-=
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEEw4O3eCVWE9/bQJ2R2yIaaQAAABEFAl4wxRcACgkQ2yIaaQAA
-ABH7qg/9FVPgw6oQtuHRtcbrT+QXuzq4zJ9v2przHuXeLcGnuoKyvoaXG8Tr3XuK
-hthU80KlfwVx1OJ9aBGD2/cRxFxzggBmEeQthpxM2KIMFrMIv+r4/X8IcEXsD5tg
-pfzRGDs6JhxAd268TwPCQqlN7XUITMJEbZaERDkkiSKcEj5UZlhFflCKceccUWP3
-klgV/xIoMahHbgALzoeikUPSGenjQMyYH2Y/OfznH0ypJRl2E0vvKIrUYfrwrI3P
-P87HWXIYukTKxIJLAZKwEzp6AYpNiG2iAXac6c/zJBto/BSmiux83RzpROE41NrW
-zuYep4XISLS4IQ6OsyaaRdjJIyB22wOUhQs0HCa6OIWSowkzW+Xb/S/YpSF/0ISN
-+chPFNobHSFuOAF9IJq3DtpzXQpQ0ByA+MmUaNgfPtzt8zmuLjSBS4QT+U+H+mvL
-rL/KM96pGNGjnHiCdzLSAShKfhIDSkofBg3Gv9ixVoXXEOm43f4HGdXU8STwheqS
-jYSD/RSGbdpCR4yqxWsO+soFI39z1/jgsrKn0XK9QGox/WcH7M1g9X9rDupP/WJn
-5DlgJKBcDnHPVcGVVky9/GS+3AkIpdd8hvgLWUOUrQ3IDath0MemQaR82hCimlNr
-zhyoPOdxcOUxS7czAjFWJHGur117oFdWOScBACjbkm8IlhTYz2A=
-=hemM
------END PGP SIGNATURE-----
---=-=-=--
+>
+> Regards,
+> Bin
 
