@@ -1,66 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iwqTF-0001Ju-2b
-	for mharc-qemu-riscv@gnu.org; Wed, 29 Jan 2020 11:45:42 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44149)
+	id 1iwrkh-0002R8-TA
+	for mharc-qemu-riscv@gnu.org; Wed, 29 Jan 2020 13:07:47 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:45202)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <keithp@keithp.com>) id 1iwqTB-0001GK-76
- for qemu-riscv@nongnu.org; Wed, 29 Jan 2020 11:45:38 -0500
+ (envelope-from <fintelia@gmail.com>) id 1iwrkf-0002Nj-2X
+ for qemu-riscv@nongnu.org; Wed, 29 Jan 2020 13:07:46 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <keithp@keithp.com>) id 1iwqTA-0008KU-5J
- for qemu-riscv@nongnu.org; Wed, 29 Jan 2020 11:45:37 -0500
-Received: from home.keithp.com ([63.227.221.253]:50190 helo=elaine.keithp.com)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <keithp@keithp.com>)
- id 1iwqT4-00083r-EP; Wed, 29 Jan 2020 11:45:31 -0500
-Received: from localhost (localhost [127.0.0.1])
- by elaine.keithp.com (Postfix) with ESMTP id 45B923F2A8ED;
- Wed, 29 Jan 2020 08:45:28 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=keithp.com; s=mail;
- t=1580316328; bh=AQ7qwDOrgr4oCXbypzhvadC6PyJ4NatHch4UA6L6ykA=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=RD6TMZnTWaEtpPa8vpmhDA325+sxDObVt6pBKjRYrKmD2EudMif7/dvxGt/0SJXk3
- gvs/KnKnQy4fg9WUygIzpkweabR8QAjHxY0AgHsg0IjXhkdtcBBwouN4ca1SLIXSdf
- AoZ9yyezBd2SSFdSA3XGiRMaQatReORhRpKIafKg2Br0vn1GpIJp/JHlgcC/bejcZ0
- FKvmyTLy5eKcIDqoBcC6mXw0L9/DxyyhBN0wywXoQsE6OVehm6AEfwr+ynC7VqA/g3
- FMjTFYeMCUctqsN8lns4mV55IevXZjLHviQ11c8Gsxyko+cfiIxrFw2DAiadnDL/zM
- mx3GWeJnG90XQ==
-X-Virus-Scanned: Debian amavisd-new at keithp.com
-Received: from elaine.keithp.com ([127.0.0.1])
- by localhost (elaine.keithp.com [127.0.0.1]) (amavisd-new, port 10024)
- with LMTP id Tmxo_cOdKbCG; Wed, 29 Jan 2020 08:45:28 -0800 (PST)
-Received: from keithp.com (koto.keithp.com [10.0.0.2])
- by elaine.keithp.com (Postfix) with ESMTPSA id DD9A03F2A8EB;
- Wed, 29 Jan 2020 08:45:27 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=keithp.com; s=mail;
- t=1580316327; bh=AQ7qwDOrgr4oCXbypzhvadC6PyJ4NatHch4UA6L6ykA=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=evulIWUclSre/ENP/QGh8RQhduNzs7DvX6qSDlEIkRJjZqGyWm83WPN7l+9AUF3DU
- //rJs4qOZW8U6HMs2IN5QJAhM19/q1agc9rdD0hicMUzvhUNuzY3YUadfGyO1/ngXD
- VyH88ZNC6mPijOWhJlygOiny+YtFsAJLk+oSetMsVsijGCQtvBUBbh3Jq2gXBcxty4
- mnDCZQr1172K6NVu5zJv6kbgRaxk2hNG3XafWR4DQDtFU1xOR+nXWjVnfDTaEduAT9
- So6UARstWlV6A1svI1bLt++qzDCmwoRX0UJlPiRi7MkxcNA4ljD9ID+7+FiZDm2Csw
- QVoWS+VKZhu/A==
-Received: by keithp.com (Postfix, from userid 1000)
- id BEAF61582162; Wed, 29 Jan 2020 08:45:27 -0800 (PST)
-From: "Keith Packard" <keithp@keithp.com>
-To: Peter Maydell <peter.maydell@linaro.org>
-Cc: QEMU Developers <qemu-devel@nongnu.org>, Riku Voipio <riku.voipio@iki.fi>,
- Laurent Vivier <laurent@vivier.eu>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- "open list\:RISC-V" <qemu-riscv@nongnu.org>
-Subject: Re: [PATCH] riscv: Add semihosting support [v4]
-In-Reply-To: <CAFEAcA_dD3eAfKvOGOoXe3NWKg1PiW8=s2Xk41w19Tk67R-R4A@mail.gmail.com>
+ (envelope-from <fintelia@gmail.com>) id 1iwrkd-0002le-Uv
+ for qemu-riscv@nongnu.org; Wed, 29 Jan 2020 13:07:44 -0500
+Received: from mail-lj1-x243.google.com ([2a00:1450:4864:20::243]:38242)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <fintelia@gmail.com>)
+ id 1iwrkb-0002h2-B1; Wed, 29 Jan 2020 13:07:41 -0500
+Received: by mail-lj1-x243.google.com with SMTP id w1so355928ljh.5;
+ Wed, 29 Jan 2020 10:07:40 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=46JFxFrxdqcmsGAe6aUXjC3g01hxO0+G9hBRQ5spp+g=;
+ b=Q8epl+3dXxlSnro/s0h9/jB32S7xjCi9VNrYLBthrLXZyVoQ9akKTWuxtKUYF58PQI
+ LctVbAvnyc62V0ZiM4dHaK0uldzf2l++m67+z087lphLiLvS05gVOORd0iSf1KEw+nnd
+ h1C8LBcGAM/1KuC0pvyCYTuCJe0b48HkKLynicmFYMFyAylgsJPjKb69/nNOWQ8DavYQ
+ v3dOTOkTFMHqatsKFH0H1/T7sVnqHl5kvueZ/0PNimJVqasiy5EHqniNdERFMC6dDHVY
+ wUAZs/0OmD2CXikyweFPpTxN+JyInfLfVgxA3oVHuV65gVvNtXuKGl87pTypQlvK9uTl
+ jswQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=46JFxFrxdqcmsGAe6aUXjC3g01hxO0+G9hBRQ5spp+g=;
+ b=VkJukF7qti818YOnTyZH/Oxlp9Qs3t9Ladl2NXqi8Jiq1KadTnYuLDdDMh0bilKoR9
+ J1CXgwGjxe/k8Nxryba1AWMqnX01rXhvA1g4zTJoVinjdyNpn/wWeU1z09y3G7BH6H1y
+ DMqcE2ctjfxz5HPtfNiCBuT6UqWn9LJP2w0J2ytNig/4DxgLRy55KuivoFGGd/kJfR/V
+ JnSPgLxqUc/QmRodmVEaUg7PXDn0yBI/Sx+95uZv9pd0aeLh9u9Ij26UfqfYKv2sXpHN
+ ++G2LzizhmRHqqYeoZfqL7ATrz4Hb0kUML+Lrd+Po+pZvv9283eDv+4luefuMDRCWF3H
+ yA+w==
+X-Gm-Message-State: APjAAAVLMIs4HL3dq/WGJq9glgEtLp6Nt5hiPQS2nhRdlLtG69K54gBS
+ umeSWwKwng/DScvkRJp9dXhrnv8zeoBKiXrN29g=
+X-Google-Smtp-Source: APXvYqzNeIiLWwLNSAYsZOxzav1SbFf8BoK5IgIkGnhak4kmilG+s/vCzf1FOokberBsucJGc+J5sgOVUGkbAOnPZow=
+X-Received: by 2002:a2e:7009:: with SMTP id l9mr239244ljc.96.1580321259499;
+ Wed, 29 Jan 2020 10:07:39 -0800 (PST)
+MIME-Version: 1.0
 References: <20200128233224.515233-1-keithp@keithp.com>
  <CAFEAcA_dD3eAfKvOGOoXe3NWKg1PiW8=s2Xk41w19Tk67R-R4A@mail.gmail.com>
-Date: Wed, 29 Jan 2020 08:45:27 -0800
-Message-ID: <877e1arz2w.fsf@keithp.org>
-MIME-Version: 1.0
-Content-Type: multipart/signed; boundary="=-=-=";
- micalg=pgp-sha256; protocol="application/pgp-signature"
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
-X-Received-From: 63.227.221.253
+ <877e1arz2w.fsf@keithp.org>
+In-Reply-To: <877e1arz2w.fsf@keithp.org>
+From: Jonathan Behrens <fintelia@gmail.com>
+Date: Wed, 29 Jan 2020 13:06:11 -0500
+Message-ID: <CANnJOVHkNN2+dnd6UJF3MpU1uLTEoCk2tnJrNzowh3UX4u3mfw@mail.gmail.com>
+Subject: Re: [PATCH] riscv: Add semihosting support [v4]
+To: Keith Packard <keithp@keithp.com>
+Cc: Peter Maydell <peter.maydell@linaro.org>,
+ QEMU Developers <qemu-devel@nongnu.org>, 
+ Riku Voipio <riku.voipio@iki.fi>, Laurent Vivier <laurent@vivier.eu>, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
+Content-Type: multipart/alternative; boundary="0000000000004db680059d4b3770"
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2a00:1450:4864:20::243
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -72,50 +72,83 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Jan 2020 16:45:39 -0000
+X-List-Received-Date: Wed, 29 Jan 2020 18:07:46 -0000
 
---=-=-=
-Content-Type: text/plain
+--0000000000004db680059d4b3770
+Content-Type: text/plain; charset="UTF-8"
+
+The text you are referencing (the couple italic paragraphs below section
+2.8 in the unprivileged ISA) is non-normative and "can be skipped if the
+reader is only interested in the specification itself". This convention of
+making indented italic text non-normative is described at the bottom of
+page 1 of the linked document.
+
+Jonathan
+
+On Wed, Jan 29, 2020 at 11:45 AM Keith Packard via <qemu-riscv@nongnu.org>
+wrote:
+
+> Peter Maydell <peter.maydell@linaro.org> writes:
+>
+> > True but irrelevant. You need to refer to a proper
+> > risc-v specification for your semihosting.
+>
+> The RISC-V Foundation defined semihosting as relative to the existing
+> ARM specification, so using a link to that is appropriate here.
+>
+> Here's the current specification of the unprivileged ISA, which includes
+> the definition of semihosting
+>
+>         https://riscv.org/specifications/
+>
+> While it may be nice in some abstract sense to create a "better"
+> semihosting spec, that's not what the RISC-V foundation has decided to
+> do.
+>
+> --
+> -keith
+>
+
+--0000000000004db680059d4b3770
+Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Peter Maydell <peter.maydell@linaro.org> writes:
+<div dir=3D"ltr"><div>The text you are referencing (the couple italic parag=
+raphs below section 2.8 in the unprivileged ISA) is non-normative and &quot=
+;can be skipped if the reader is only interested in the specification itsel=
+f&quot;. This convention of making indented italic text non-normative is de=
+scribed at the bottom of page 1 of the linked document.<br></div><div><br><=
+/div><div>Jonathan<br></div></div><br><div class=3D"gmail_quote"><div dir=
+=3D"ltr" class=3D"gmail_attr">On Wed, Jan 29, 2020 at 11:45 AM Keith Packar=
+d via &lt;<a href=3D"mailto:qemu-riscv@nongnu.org">qemu-riscv@nongnu.org</a=
+>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px=
+ 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">Pet=
+er Maydell &lt;<a href=3D"mailto:peter.maydell@linaro.org" target=3D"_blank=
+">peter.maydell@linaro.org</a>&gt; writes:<br>
+<br>
+&gt; True but irrelevant. You need to refer to a proper<br>
+&gt; risc-v specification for your semihosting.<br>
+<br>
+The RISC-V Foundation defined semihosting as relative to the existing<br>
+ARM specification, so using a link to that is appropriate here.<br>
+<br>
+Here&#39;s the current specification of the unprivileged ISA, which include=
+s<br>
+the definition of semihosting<br>
+<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 <a href=3D"https://riscv.org/specifications/" r=
+el=3D"noreferrer" target=3D"_blank">https://riscv.org/specifications/</a><b=
+r>
+<br>
+While it may be nice in some abstract sense to create a &quot;better&quot;<=
+br>
+semihosting spec, that&#39;s not what the RISC-V foundation has decided to<=
+br>
+do.<br>
+<br>
+-- <br>
+-keith<br>
+</blockquote></div>
 
-> True but irrelevant. You need to refer to a proper
-> risc-v specification for your semihosting.
-
-The RISC-V Foundation defined semihosting as relative to the existing
-ARM specification, so using a link to that is appropriate here.
-
-Here's the current specification of the unprivileged ISA, which includes
-the definition of semihosting
-
-        https://riscv.org/specifications/
-
-While it may be nice in some abstract sense to create a "better"
-semihosting spec, that's not what the RISC-V foundation has decided to
-do.
-
-=2D-=20
-=2Dkeith
-
---=-=-=
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEEw4O3eCVWE9/bQJ2R2yIaaQAAABEFAl4xtqcACgkQ2yIaaQAA
-ABGTww//fZsnRw7sJLy7xuY29NXr60SREv4ldVOQktPdPEJFbkLwz7e+Iqvbfm6q
-pg/4Okfp6wDvCip+mduu7PFSjIbRG3yoqpChCJWaHcmPUJQJ5xcsZJ2v2TE5XdbU
-WJvBXaaf3PkTdPNmcSMjCiTiksSjqePNAYPn3b5xNz9LhlVwzo5tWDopbdHLEbWQ
-aSLhCFZwm7mq39Fia9thnTUuXkyZkDTAYbwdW30mEonBtnZ6PoJGcrTM+4JvdIR9
-A8uur3hkJDyFoF7ykw783tI9Z8rIqGGNxvEpLvudQlbBn9x8/z/GcgGWIojlYfVf
-gQLhSEK8PGkaiAkZ6huA3sPkeMoC72x3vnB5uCondbxTS42KEtLIUBnwSvuBUlwd
-y3O3H02kClAiOcsGLRccMuYpw9s+7dSDAXqerwS3dIl4gxXYzI17c5BG0cwn8OOX
-sbTNBoZoEyERrLnOXQs1q9NKMG6xkvVUvIsYwBnEMMoM+Ve2fhd/N0AmIj7yhnKj
-i8ahgFGORWyCNQOqL/oO33yNKMERoPJl8XBonwGweb45KRZ0wKq6eNUxr67fGmv/
-R7biHBPW86tVoMRIXYK4HyUEeAbFiIMUWf8OhPA96iHt0hqK3/iV/Kj+daoc9j4a
-tnZ5QmcozYWNRHa+XghS3jO4tlxFSLeUvYfKHM6RrHnoyqk2Cec=
-=KogH
------END PGP SIGNATURE-----
---=-=-=--
+--0000000000004db680059d4b3770--
 
