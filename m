@@ -1,70 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1iwpHJ-00038n-68
-	for mharc-qemu-riscv@gnu.org; Wed, 29 Jan 2020 10:29:17 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:46819)
+	id 1iwpjW-0007VC-DV
+	for mharc-qemu-riscv@gnu.org; Wed, 29 Jan 2020 10:58:26 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:56802)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <palmerdabbelt@google.com>) id 1iwpHG-00038Z-Tn
- for qemu-riscv@nongnu.org; Wed, 29 Jan 2020 10:29:15 -0500
+ (envelope-from <peter.maydell@linaro.org>) id 1iwpjS-0007RO-VD
+ for qemu-riscv@nongnu.org; Wed, 29 Jan 2020 10:58:24 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmerdabbelt@google.com>) id 1iwpHF-0008Pl-Sp
- for qemu-riscv@nongnu.org; Wed, 29 Jan 2020 10:29:14 -0500
-Received: from mail-wr1-x444.google.com ([2a00:1450:4864:20::444]:41394)
+ (envelope-from <peter.maydell@linaro.org>) id 1iwpjR-0005XP-Ej
+ for qemu-riscv@nongnu.org; Wed, 29 Jan 2020 10:58:22 -0500
+Received: from mail-oi1-x244.google.com ([2607:f8b0:4864:20::244]:33664)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmerdabbelt@google.com>)
- id 1iwpHF-0008MJ-Ke
- for qemu-riscv@nongnu.org; Wed, 29 Jan 2020 10:29:13 -0500
-Received: by mail-wr1-x444.google.com with SMTP id c9so20676645wrw.8
- for <qemu-riscv@nongnu.org>; Wed, 29 Jan 2020 07:29:12 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
- h=date:subject:cc:from:to:in-reply-to:references:message-id
- :mime-version:content-transfer-encoding;
- bh=/OepjiM66bZe8KwsOgHG8bTCJYzjbGSZ/EkEmj4RXsc=;
- b=OTEKiEVOBmM8V1L4U7WPSvkW0qbL9igEx4jyxr1Po7mAQQ4RH5E/4GdzH9ngaexTFc
- uBbf+wHCRH1re131HKG6JHGHpZMFyPRizOqdAqRW2GMn267WswLUJt37C48tv0X0cQeC
- cQqsQEzSCER/NGKz7SMf5nqIWDr4TbslA/VWo0maCrGucS9l1OWQa23C/a7MZFCQ00bb
- vJeb8DvIJCbsUmt7NxrOVuHiUFjd6DUALeipPivQ2/jN1f3dmM1mdfHuE0LWTrecGY6z
- Tue51n8g0MqlxmhrInjgPEDj2sKP+ih9DAesQUQO4EXqZqO4BuiaHUjgBRdekulH9f3t
- t7WQ==
+ (Exim 4.71) (envelope-from <peter.maydell@linaro.org>)
+ id 1iwpjR-0005Ux-7B
+ for qemu-riscv@nongnu.org; Wed, 29 Jan 2020 10:58:21 -0500
+Received: by mail-oi1-x244.google.com with SMTP id q81so221479oig.0
+ for <qemu-riscv@nongnu.org>; Wed, 29 Jan 2020 07:58:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=xREOXbAGrSczc9ttMRDemdVlY/CguXIIJAyyD1SVFlw=;
+ b=XlqQa1Yjr0duEQyBW2haJk6+mOeD8eQofvemgcB+Qhw20fvWz6pSZuCfaZsk4lc5gM
+ sLXXk/X1ZnhajFsyllCBOmbChvU5z2gn5wSLIDkGDZPj9aC0Py6nIQ6Xg23hoWspIxXZ
+ CMFw+2kTFc3yxgD1dj8xK/WTRZEwbyC4FlraHBa57P+nSRMb6wm2kTZouf9JL57NWAds
+ CUAdLYSNzSLo7NpK5jCCyyK5Mff+G/LY0QvvL1fuDfKbVVwlJh0j4rvCWi/lvs1xHr96
+ aDUFgKPQ5U5u+eUuMDzOMT2eCpEMLKd22PGDkeGmlNKEGsoFKx6e4aDIa142i8GSXIOR
+ 40dA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:subject:cc:from:to:in-reply-to:references
- :message-id:mime-version:content-transfer-encoding;
- bh=/OepjiM66bZe8KwsOgHG8bTCJYzjbGSZ/EkEmj4RXsc=;
- b=plptapbcSp612trrsBfe5C2AsB++jTKWhT8aRHsaMSi9fhnwERUKfbs+bCqmJNZuhN
- LSBqP094t0hr1HboI+N8CORx/qlPS4gOrXjt1iLUQ+3E510V1HXT2MMxV9SC0DoMGlMh
- QwzhYHpjBfsjGUPbqSOMI2d3UC1PnPveOvQa5D8LfooDR1C05P55OQ3C7Lo9EG7ZLjjR
- FynVvN9MWObYdAnIuUC/FsmI5fhwPxCOA1WsTNGa3yWXSIulp/LJ7KF7vHc06S2seYZm
- gb1oITUd0YeE+ZVp8TOHiVg/17f1yucx5i9gcvH5ijz5pbTOnwJunrkxzxGzL0R5b1d3
- cTzQ==
-X-Gm-Message-State: APjAAAWohy0ARvvVYkq/UYkra8smTozHy9MYGHT1/Ay+2ew0IBbazJUo
- d6hYZpuvS2/bk/8Wzub7Vd5Iqw==
-X-Google-Smtp-Source: APXvYqxSdv2Bu4x6KY+14S+ce+NFPS1gCqWJTTT3ubj5CcfxJtt6kaAOSD5gmao6t9a2I9gCXL8qVQ==
-X-Received: by 2002:a5d:4ec2:: with SMTP id s2mr33695170wrv.291.1580311751448; 
- Wed, 29 Jan 2020 07:29:11 -0800 (PST)
-Received: from localhost ([2a00:79e0:d:11:1da2:3fd4:a302:4fff])
- by smtp.gmail.com with ESMTPSA id b17sm3264260wrx.15.2020.01.29.07.29.10
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 29 Jan 2020 07:29:11 -0800 (PST)
-Date: Wed, 29 Jan 2020 07:29:11 -0800 (PST)
-X-Google-Original-Date: Wed, 29 Jan 2020 15:28:50 GMT (+0000)
-Subject: Re: [PATCH] riscv: sifive_u: Add a "serial" property for board serial
- number
-CC: Alistair Francis <Alistair.Francis@wdc.com>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, sagark@eecs.berkeley.edu,
- qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-From: Palmer Dabbelt <palmerdabbelt@google.com>
-To: bmeng.cn@gmail.com
-In-Reply-To: <CAEUhbmXRaHqxNt2XCgsjUDfR+VoMOjb5f38V6Yu35HWV1nkKeQ@mail.gmail.com>
-References: <CAEUhbmXRaHqxNt2XCgsjUDfR+VoMOjb5f38V6Yu35HWV1nkKeQ@mail.gmail.com>
- <CAEUhbmUuCOzd_Y6ip_oh13gt83rM8EffdXWRCa=KybOjAvEN-A@mail.gmail.com>
- <mhng-b2e05f4a-7c3d-4be1-a843-a19b4054760a@palmerdabbelt.mtv.corp.google.com>
-Message-ID: <mhng-e3089574-e78c-4b6c-961e-cac55f0f23d4@palmerdabbelt-glaptop1>
-Mime-Version: 1.0 (MHng)
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=xREOXbAGrSczc9ttMRDemdVlY/CguXIIJAyyD1SVFlw=;
+ b=RiqdtoOfCDim19lZmhDofUQ9Wn5TorTEtnG8zobVwSXRAUtvqoMkET1DjiwRo4dMdI
+ TkOcGnEn0DlAwXoWdWlQnhapalJcTd49RZ7jNwjAR6qzSRntO07EcQWjIMKXRvqWmMT4
+ SNadFZv1jauVf+DQfKIHtY16nLo2KBflbWGG5nSiTOwyZ4yHlJPNNF/f+MW/t8b1SSJS
+ DEsDc5Q/OaUR+gJVmEJ8Gx9pEem4ndwkEOFeHxZtm0szMu2oXIlgkqDRZBOSKf2wNmP6
+ 3UgGZCBS+c/xMn07q9lmHDsMJOV9oG3gnYTEs0ShYUIxyiA3fgnQTCeubck91S+3wShb
+ G7vw==
+X-Gm-Message-State: APjAAAV7Vxa3zxNyD36mQn0yDInqJZ/ZKQ842wmo+vw52U0R8aoDyFVf
+ QJdp2ggUU3o8q53XRV8hfasNDZSo1kp/YGFpRWy1/A==
+X-Google-Smtp-Source: APXvYqxSjyTd1sHx3dlk1l6GRSfjlxkNfWlrrMceTItGFra1TSow2LVhKIOsGji21CA/xnORfFnq7aTz4lyh8dRubbs=
+X-Received: by 2002:aca:b2c5:: with SMTP id b188mr6887740oif.163.1580313499976; 
+ Wed, 29 Jan 2020 07:58:19 -0800 (PST)
+MIME-Version: 1.0
+References: <20200128233224.515233-1-keithp@keithp.com>
+In-Reply-To: <20200128233224.515233-1-keithp@keithp.com>
+From: Peter Maydell <peter.maydell@linaro.org>
+Date: Wed, 29 Jan 2020 15:58:08 +0000
+Message-ID: <CAFEAcA_dD3eAfKvOGOoXe3NWKg1PiW8=s2Xk41w19Tk67R-R4A@mail.gmail.com>
+Subject: Re: [PATCH] riscv: Add semihosting support [v4]
+To: Keith Packard <keithp@keithp.com>
+Cc: QEMU Developers <qemu-devel@nongnu.org>, Riku Voipio <riku.voipio@iki.fi>, 
+ Laurent Vivier <laurent@vivier.eu>, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::444
+X-Received-From: 2607:f8b0:4864:20::244
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -76,51 +69,91 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Jan 2020 15:29:16 -0000
+X-List-Received-Date: Wed, 29 Jan 2020 15:58:24 -0000
 
-On Fri, 10 Jan 2020 07:52:05 GMT (+0000), bmeng.cn@gmail.com wrote:
-> Hi Palmer,
+On Tue, 28 Jan 2020 at 23:34, Keith Packard via <qemu-devel@nongnu.org> wrote:
 >
-> On Fri, Nov 22, 2019 at 10:38 AM Palmer Dabbelt
-> <palmerdabbelt@google.com> wrote:
->>
->> On Thu, 21 Nov 2019 17:10:18 PST (-0800), bmeng.cn@gmail.com wrote:
->> > On Sat, Nov 16, 2019 at 11:08 PM Bin Meng <bmeng.cn@gmail.com> wrote:
->> >>
->> >> At present the board serial number is hard-coded to 1, and passed
->> >> to OTP model during initialization. Firmware (FSBL, U-Boot) uses
->> >> the serial number to generate a unique MAC address for the on-chip
->> >> ethernet controller. When multiple QEMU 'sifive_u' instances are
->> >> created and connected to the same subnet, they all have the same
->> >> MAC address hence it creates a unusable network.
->> >>
->> >> A new "serial" property is introduced to specify the board serial
->> >> number. When not given, the default serial number 1 is used.
->> >>
->> >> Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
->> >> ---
->> >>
->> >>  hw/riscv/sifive_u.c         | 21 ++++++++++++++++++++-
->> >>  include/hw/riscv/sifive_u.h |  1 +
->> >>  2 files changed, 21 insertions(+), 1 deletion(-)
->> >>
->> >
->> > ping?
->>
->> Sorry, it looks like I dropped this one.  I've put it in the queue for 5.0,
->> with a
->>
->> Reviewed-by: Palmer Dabbelt <palmerdabbelt@google.com>
+> Adapt the arm semihosting support code for RISCV. This implementation
+> is based on the standard for RISC-V semihosting as documented in
 >
-> Has this been applied somewhere?
-
-Weird, not sure how I managed to screw this up again.  It's actually on for-master as 
-
-    * a828041ba6 - riscv: sifive_u: Add a "serial" property for board serial number (50 seconds ago) <Bin Meng>
-
-with any luck I'll manage to avoid screwing it up a third time.
-
+>         https://riscv.org/specifications/
 >
-> Regards,
-> Bin
+> Signed-off-by: Keith Packard <keithp@keithp.com>
+>
+> ---
+
+> + *  ARM Semihosting is documented in:
+> + *     Semihosting for AArch32 and AArch64 Release 2.0
+> + *     https://static.docs.arm.com/100863/0200/semihosting.pdf
+
+True but irrelevant. You need to refer to a proper
+risc-v specification for your semihosting.
+
+> +    case TARGET_SYS_EXIT:
+> +    case TARGET_SYS_EXIT_EXTENDED:
+> +        if (nr == TARGET_SYS_EXIT_EXTENDED || sizeof(target_ulong) == 0) {
+> +            /*
+> +             * The A64 version of SYS_EXIT takes a parameter block,
+> +             * so the application-exit type can return a subcode which
+> +             * is the exit status code from the application.
+> +             * SYS_EXIT_EXTENDED is an a new-in-v2.0 optional function
+> +             * which allows A32/T32 guests to also provide a status code.
+> +             */
+
+This code and comment describe Arm semihosting, where we
+made this bad decision about the API for 32-bit Arm, fixed
+it for 64-bit Arm and then put in an extension to add the more
+sensible API to 32-bit as a backwards-compatible new function.
+Nobody else should make this API choice from the start.
+What does RISC-V want to do here? This should be in
+your specification.
+
+> +            GET_ARG(0);
+> +            GET_ARG(1);
+> +
+> +            if (arg0 == ADP_Stopped_ApplicationExit) {
+> +                ret = arg1;
+> +            } else {
+> +                ret = 1;
+> +            }
+> +        } else {
+> +            /*
+> +             * The A32/T32 version of SYS_EXIT specifies only
+> +             * Stopped_ApplicationExit as normal exit, but does not
+> +             * allow the guest to specify the exit status code.
+> +             * Everything else is considered an error.
+> +             */
+> +            ret = (args == ADP_Stopped_ApplicationExit) ? 0 : 1;
+> +        }
+> +        gdb_exit(env, ret);
+> +        exit(ret);
+> +    case TARGET_SYS_SYNCCACHE:
+> +        /*
+> +         * Clean the D-cache and invalidate the I-cache for the specified
+> +         * virtual address range. This is a nop for us since we don't
+> +         * implement caches. This is only present on A64.
+> +         */
+> +        if (sizeof(target_ulong) == 8) {
+> +            return 0;
+> +        }
+> +        /* fall through -- invalid for A32/T32 */
+
+Again, this is an Arm-ism, where the old A32 ABI
+doesn't have this function but the new A64 one does. What
+does RISC-V want to specify here?
+
+> +    default:
+> +        fprintf(stderr, "qemu: Unsupported SemiHosting SWI 0x%02x\n", nr);
+> +        cpu_dump_state(cs, stderr, 0);
+> +        abort();
+
+This is repeating the Arm ABI mistake of allowing implementations
+to just crash and burn if they're handed a function call they don't
+recognize. Ideally it should be avoided in a new ABI.
+
+> +    }
+> +}
+
+thanks
+-- PMM
 
