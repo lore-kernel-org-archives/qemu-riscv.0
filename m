@@ -1,64 +1,81 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ixI3z-0003se-GP
-	for mharc-qemu-riscv@gnu.org; Thu, 30 Jan 2020 17:13:27 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42382)
+	id 1ixIYT-0002ED-1z
+	for mharc-qemu-riscv@gnu.org; Thu, 30 Jan 2020 17:44:57 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:55746)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <keithp@keithp.com>) id 1ixI3x-0003oG-9m
- for qemu-riscv@nongnu.org; Thu, 30 Jan 2020 17:13:26 -0500
+ (envelope-from <aleksandar.m.mail@gmail.com>) id 1ixIYQ-00029T-E0
+ for qemu-riscv@nongnu.org; Thu, 30 Jan 2020 17:44:55 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <keithp@keithp.com>) id 1ixI3w-00041U-CF
- for qemu-riscv@nongnu.org; Thu, 30 Jan 2020 17:13:25 -0500
-Received: from home.keithp.com ([63.227.221.253]:33170 helo=elaine.keithp.com)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <keithp@keithp.com>)
- id 1ixI3t-0003oD-Rw; Thu, 30 Jan 2020 17:13:22 -0500
-Received: from localhost (localhost [127.0.0.1])
- by elaine.keithp.com (Postfix) with ESMTP id 93B913F2AA6C;
- Thu, 30 Jan 2020 14:13:17 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=keithp.com; s=mail;
- t=1580422397; bh=yaVHPGyh874+mQ78S8X2p8uzfvXeaQLIIHBITFxyqsQ=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=pyF0PfWEvm86RmPnDF43aYq9Pto7fpSYebXHHLpe06MaJesgZeqQaZMa5oA4jdQTw
- XpivhHPxyNoku/OBEfR4hoBmVVTVunq5Lu37hWyDbCiES+eU6wIRnPrU/6OPzi8ADg
- QeBmCr6R/XawVm4hCCNvTxV3FdCQ+8DI01x3QxThIH5PdhOtZ2Bhk3k0mj0YvYOzws
- t9I7PNxXPBg/eAuGVzQWuNDmS1JARKpRfywx/lIccwOqcxbyBS92HjxELhVUhk+Bir
- zPcWaO6aJHlG6ytu/+jb3MrChwinRqx7jwAwmMoOh2opOWxNkHaq4Q6Mnbt7CseFpq
- fQ4RLAISO4ztA==
-X-Virus-Scanned: Debian amavisd-new at keithp.com
-Received: from elaine.keithp.com ([127.0.0.1])
- by localhost (elaine.keithp.com [127.0.0.1]) (amavisd-new, port 10024)
- with LMTP id lza7xOK8U_12; Thu, 30 Jan 2020 14:13:17 -0800 (PST)
-Received: from keithp.com (koto.keithp.com [10.0.0.2])
- by elaine.keithp.com (Postfix) with ESMTPSA id 3350F3F2A963;
- Thu, 30 Jan 2020 14:13:17 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=keithp.com; s=mail;
- t=1580422397; bh=yaVHPGyh874+mQ78S8X2p8uzfvXeaQLIIHBITFxyqsQ=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=pyF0PfWEvm86RmPnDF43aYq9Pto7fpSYebXHHLpe06MaJesgZeqQaZMa5oA4jdQTw
- XpivhHPxyNoku/OBEfR4hoBmVVTVunq5Lu37hWyDbCiES+eU6wIRnPrU/6OPzi8ADg
- QeBmCr6R/XawVm4hCCNvTxV3FdCQ+8DI01x3QxThIH5PdhOtZ2Bhk3k0mj0YvYOzws
- t9I7PNxXPBg/eAuGVzQWuNDmS1JARKpRfywx/lIccwOqcxbyBS92HjxELhVUhk+Bir
- zPcWaO6aJHlG6ytu/+jb3MrChwinRqx7jwAwmMoOh2opOWxNkHaq4Q6Mnbt7CseFpq
- fQ4RLAISO4ztA==
-Received: by keithp.com (Postfix, from userid 1000)
- id AAF781582162; Thu, 30 Jan 2020 14:13:16 -0800 (PST)
-From: "Keith Packard" <keithp@keithp.com>
-To: Palmer Dabbelt <palmerdabbelt@google.com>
-Cc: qemu-devel@nongnu.org, Alistair Francis <Alistair.Francis@wdc.com>,
- sagark@eecs.berkeley.edu, Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- qemu-riscv@nongnu.org
-Subject: Re: [PATCH] riscv: Separate FPU register size from core register size
- in gdbstub [v2]
-In-Reply-To: <mhng-2ed22ad1-9efc-4ffb-856b-0d63ad8a9173@palmerdabbelt-glaptop1>
-References: <20200128233216.515171-1-keithp@keithp.com>
- <mhng-2ed22ad1-9efc-4ffb-856b-0d63ad8a9173@palmerdabbelt-glaptop1>
-Date: Thu, 30 Jan 2020 14:13:16 -0800
-Message-ID: <87sgjwr3sz.fsf@keithp.org>
+ (envelope-from <aleksandar.m.mail@gmail.com>) id 1ixIYP-00015N-EY
+ for qemu-riscv@nongnu.org; Thu, 30 Jan 2020 17:44:54 -0500
+Received: from mail-ot1-x344.google.com ([2607:f8b0:4864:20::344]:46897)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <aleksandar.m.mail@gmail.com>)
+ id 1ixIYN-00011t-Ds; Thu, 30 Jan 2020 17:44:51 -0500
+Received: by mail-ot1-x344.google.com with SMTP id g64so4689620otb.13;
+ Thu, 30 Jan 2020 14:44:51 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=iLRray2RDn1E7iHTOsfdVOo1NJI5AxqxL25YXlBeNwI=;
+ b=qA1cg1I4X1k3gKwj2Ul2JndecWGOCXKkUfgHqGlFWfY2N441H4hGwHzkr1KULnBMZx
+ OofLEjBtotx20wM0ucQ8PJFb+yReYkTVwRx+IJNLUHG9BTjOoKYLYNjggIfop4y7WrUE
+ FF3r7nYU2HIG22BUm0dXjJtMEmrrOMOGVYjnaHydrFRDhRhuA/V8WFVWyXgL5//nM1vL
+ FULW2N5/cUV0EQs1xpOlARleozYSEsQS4HREwaN+a53sgz4MS0l/CBzAlT1jAdXKw05F
+ yFflDZah0BdOZuKW+kxNeLzo2TSqf7FZOgxh1gV1q4pK5wFUUhKqAVufkROluL4A6pz6
+ EmJQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=iLRray2RDn1E7iHTOsfdVOo1NJI5AxqxL25YXlBeNwI=;
+ b=pjTXT51aG2IZR48VqJnPke8RlKVTT/MSlplpoTf7D4hUO83cu/Er5nRv8kUYtMIaDC
+ ncHKRe633e+HGVoxVJAj9zcjDuVesSN7a5bdY1lv8q6qQB+HlFviZxu52Juk0S5rkA3z
+ y+dM36PpC5JCioH0HsEQF//2FXlj14C8ZWjK51BKUrLM5UEPLXJ0s/TiTvBM0pRAP6Ct
+ htlcZA79FT3MS8L4R74636lDYREKLOsA4I0yZtSnBIXb40h+4f9/ybpULkvzssjf1m8T
+ WMbvjJDqEDBhZU6dDKqk5UUtLQ2sulgdEGVZczHyBY9+4BViktExmI8XbKrF2/TkElKN
+ D5Wg==
+X-Gm-Message-State: APjAAAXbpEROAdvfxLIaKBJsPC7FPuWw1L7xv6o+ur4qC/I92vmxbwFc
+ iNWQJBWYkuWo6Va1fhzEN5Wo4dL9lMsWUxleFT4=
+X-Google-Smtp-Source: APXvYqylDXy5GRGmdZoQAZMmn7cnNxjJZqqKAlZH1WHtAbYzUCM+PfbwI5LQiGU0gpktKSgf2gOVfRmCPmqgJXIsjdw=
+X-Received: by 2002:a05:6830:12c3:: with SMTP id
+ a3mr5502320otq.341.1580424290276; 
+ Thu, 30 Jan 2020 14:44:50 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; boundary="=-=-=";
- micalg=pgp-sha256; protocol="application/pgp-signature"
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
-X-Received-From: 63.227.221.253
+References: <20200124005131.16276-1-f4bug@amsat.org>
+ <20200124005131.16276-13-f4bug@amsat.org>
+ <875zh1yw38.fsf@linaro.org> <790c5181-c4b0-ea7b-f4e4-07bacae220b2@redhat.com>
+ <20200124120722.705ae8bac5cfc939dae2db5f@kent.ac.uk>
+In-Reply-To: <20200124120722.705ae8bac5cfc939dae2db5f@kent.ac.uk>
+From: Aleksandar Markovic <aleksandar.m.mail@gmail.com>
+Date: Thu, 30 Jan 2020 23:44:39 +0100
+Message-ID: <CAL1e-=hCH7WQU-10zrOZW5imibZxAz7Ao0DVxekJEjSVB5pQhA@mail.gmail.com>
+Subject: Re: [PATCH rc2 12/25] hw/timer: Add limited support for Atmel 16 bit
+ timer peripheral
+To: Sarah Harris <seh53@kent.ac.uk>
+Cc: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>, 
+ =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>, 
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>, 
+ "S.Harris" <S.E.Harris@kent.ac.uk>, "E.Robbins" <E.J.C.Robbins@kent.ac.uk>, 
+ "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>,
+ "mrolnik@gmail.com" <mrolnik@gmail.com>, 
+ "richard.henderson@linaro.org" <richard.henderson@linaro.org>, 
+ "me@xcancerberox.com.ar" <me@xcancerberox.com.ar>,
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ Paolo Bonzini <pbonzini@redhat.com>, "thuth@redhat.com" <thuth@redhat.com>, 
+ "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
+ "imammedo@redhat.com" <imammedo@redhat.com>,
+ Markus Armbruster <armbru@redhat.com>, 
+ Laurent Vivier <lvivier@redhat.com>, Fam Zheng <fam@euphon.net>, 
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, Eric Blake <eblake@redhat.com>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>, 
+ "dovgaluk@ispras.ru" <dovgaluk@ispras.ru>,
+ Eduardo Habkost <ehabkost@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>
+Content-Type: text/plain; charset="UTF-8"
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2607:f8b0:4864:20::344
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -70,45 +87,20 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Jan 2020 22:13:26 -0000
+X-List-Received-Date: Thu, 30 Jan 2020 22:44:55 -0000
 
---=-=-=
-Content-Type: text/plain
-Content-Transfer-Encoding: quoted-printable
+On Fri, Jan 24, 2020 at 1:07 PM Sarah Harris <seh53@kent.ac.uk> wrote:
+>
+> Hi,
+>
+> Do I understand correctly that you need Ed to email a "Signed-off-by: Ed Robbins <email>" himself?
+> Ed's cc'ed already, but I'll email him directly to make sure he's seen this discussion.
+>
+> Sarah
+>
 
-Palmer Dabbelt <palmerdabbelt@google.com> writes:
+All authors should have their "Signed-off-by:" line in the commit
+message. That is what Alex meant. I will fix that in rc4.
 
-> This isn't working for me.  When I apply it on top of my for-master (whic=
-h is
-> very close to master), I get=20
-
->     warning: while parsing target description (at line 1): Could not load=
- XML document "riscv-64bit-fpu.xml"
-
-If you're building from an existing directory, I think you'll have to
-force re-creation of riscv32-softmmu/gdbstub-xml.c
-
-=2D-=20
-=2Dkeith
-
---=-=-=
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEEw4O3eCVWE9/bQJ2R2yIaaQAAABEFAl4zVPwACgkQ2yIaaQAA
-ABHtExAAh+e3lWokXF31WEoms5bPrxYYzR9r8wyRH2+JPNYfK1uM5aZLuGSkZhrV
-y3woNgwg1zv5A+xFIDGc+i6gt+H504rrpC+cx9KOWQr5m4PHxhXGKb9CmVSffIMh
-uojLzicVZB1nS308LE+UEub6YoFJjET+qSjUX/C6ehjaEsSuTxRLYdcfzTXSbkRv
-wDujGskwx/5z/xpbaeL4aLQNlYNCrLDiqDZeJiav+6sfgwJzEYg3sB55AwD0r1Qo
-241vRlTV+12OICluHiy9nx2EvGQTFF3R0Psw5S7b41oZEgpAnVlQwFl9MUg4v0R1
-dcsqMEmLVR/orsvlanDzPHaCJNY8ydi7mEsTZHking2npjxLXWovTRDhAA7tLGR6
-0QV0iKfKkP2u0Cxsc4LJMoa8/6KXkkzPFTeMr6BXntKaKaGNDB5Bd78VX+32jNkL
-Dfue+tNdKgsxR0waSDqDmxuYEI1eUWlucYG3QMNwTPeGRylUPUgxAjJ2Smok1hnZ
-Qcrq/A82ucjRNePkP14IkSgh98McGxSNVOEp7JWLS4fx1F+Rjy3ZW/sPC1qOHaEB
-PhQPkawwGxH2wJBjD+7ZufYF41JV5Wll5N8upFAOCeCVtOs/8fS/8eMRCufjx1Ii
-ohUgh/zo6eF2IkxOIB1AWTFNqaW1qxgRUAuq77dbB9G4QL8nF3c=
-=PEBC
------END PGP SIGNATURE-----
---=-=-=--
+Aleksandar
 
