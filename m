@@ -1,71 +1,68 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ix89C-0000jd-SX
-	for mharc-qemu-riscv@gnu.org; Thu, 30 Jan 2020 06:38:10 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:35765)
+	id 1ix8WL-0001z2-1W
+	for mharc-qemu-riscv@gnu.org; Thu, 30 Jan 2020 07:02:05 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44163)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <palmerdabbelt@google.com>) id 1ix899-0000jN-VE
- for qemu-riscv@nongnu.org; Thu, 30 Jan 2020 06:38:09 -0500
+ (envelope-from <peter.maydell@linaro.org>) id 1ix8WJ-0001yE-Ef
+ for qemu-riscv@nongnu.org; Thu, 30 Jan 2020 07:02:04 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmerdabbelt@google.com>) id 1ix898-0007lD-Oc
- for qemu-riscv@nongnu.org; Thu, 30 Jan 2020 06:38:07 -0500
-Received: from mail-wr1-x444.google.com ([2a00:1450:4864:20::444]:45713)
+ (envelope-from <peter.maydell@linaro.org>) id 1ix8WI-0000Au-Al
+ for qemu-riscv@nongnu.org; Thu, 30 Jan 2020 07:02:03 -0500
+Received: from mail-ot1-x344.google.com ([2607:f8b0:4864:20::344]:35598)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmerdabbelt@google.com>)
- id 1ix898-0007jg-G5
- for qemu-riscv@nongnu.org; Thu, 30 Jan 2020 06:38:06 -0500
-Received: by mail-wr1-x444.google.com with SMTP id a6so3568376wrx.12
- for <qemu-riscv@nongnu.org>; Thu, 30 Jan 2020 03:38:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
- h=date:subject:cc:from:to:in-reply-to:references:message-id
- :mime-version:content-transfer-encoding;
- bh=bhkInt9r79AEuYhyosUHrzvXZsZM2oAc3Emt2SMYCm4=;
- b=WIctcHmxGDiEZcqmOR+QEsq8erTlN02GpH7c9FOm5aCxs1A41484TY74/v4jucYgSi
- 5gwsQPyeE859fh3Qy3+2oBA7sU5KKc54DwapkT4h8FAVX0pu9Ci9B2ph/tPpesA11mzh
- C4OzVQ7VoKMgTLAKC45ckKDhUd3PRTZrzEPmKnSIYNCbQZaDHwBbYQWs5Bxo1SPc+IcV
- ++bfs23mVUHyuVCAHHlO4wSs2OxmACZduzbVjZxoeBBycDPyURDyVWIT9duny65WRFuO
- H8C2owTh9xAyZylyInIJeEhSaTPx9gI50+7iZRNHiA9Fj2ubgdRFkLcqQ+z+8gqZJmOD
- h11Q==
+ (Exim 4.71) (envelope-from <peter.maydell@linaro.org>)
+ id 1ix8WI-000093-1h
+ for qemu-riscv@nongnu.org; Thu, 30 Jan 2020 07:02:02 -0500
+Received: by mail-ot1-x344.google.com with SMTP id r16so2887694otd.2
+ for <qemu-riscv@nongnu.org>; Thu, 30 Jan 2020 04:02:01 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=xxw7LGpjcS0XvMQAfylVU83imD07D+/OPuhF16qkAtM=;
+ b=YshytP5YvPMF6g4/ODj5mUzXQnGZz2vRH9SIsRAo1ofSVFz/k5MTSbE4R4keAfgkV1
+ PGyRK9QTrpPg1jysz/lC5YjWr66E8Xf26t4vHmt2UqiyZk93cMOsjbw89dylFFOya+dC
+ G/rktwaUkQ7sawV0r0uL7fMaBXeXBe0us+hCjZEGzxSFBC4VIFHcVtnkPpZIsXn/32Ig
+ nASueKGc0+IBoWQzrkTDQfL/nHxozb9G7EHY5TRmUdpXomgxhdglwYt2ZdW1YSBbCkW8
+ YdFgjDj61BnN3nQCHVFKfupMnrDyPKj2Rl2L3H8VflJpOR2flNr3JqqkPWK5tfLvJHPg
+ owFg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:subject:cc:from:to:in-reply-to:references
- :message-id:mime-version:content-transfer-encoding;
- bh=bhkInt9r79AEuYhyosUHrzvXZsZM2oAc3Emt2SMYCm4=;
- b=mSA97o1PAb30QpFlrb8nRpagve67IoEICa0hGHzG2vH7PrI6QFK4ONtSk6lGLvDoac
- p6JU1/JudzACMY0h4+N4mVFL62WT307SzceP303Fs1OWyIdsXWvAQeTCS+MJbONohPNc
- 5MvlRZMjCnIxACVZqDnMoG9WyOie+fV+3PGqRK4kdiwbKgORiL8BFXSvq/AyVMner8xU
- EDmQc1LenV6pEE1TieBXr3n23qpdddp2u2N8pWqhhBnApFBdBCZmyQq+ESJVLwssMcOd
- h6yUjAnrBNQdl7Y400eYh1n0OV5Oeu9n9X6DJYt1JTM5FJpRGkKvfZ/p0W2XtmEqaCxj
- wI3Q==
-X-Gm-Message-State: APjAAAWEPSwEJv6dNA7yjmTGxMtKYG/vh38R9WjGNj14qeC6F7pGaWJZ
- SGwwsxTVvXMP6u3kOGMUFui33A==
-X-Google-Smtp-Source: APXvYqwJz0ev1puKtSY+USN2og4xSUWMN8L6EzzHc3O4MLMfYZn1SNHsaHIrniRwpL5fY1VzfwbNdQ==
-X-Received: by 2002:a5d:5283:: with SMTP id c3mr5229683wrv.148.1580384285000; 
- Thu, 30 Jan 2020 03:38:05 -0800 (PST)
-Received: from localhost ([2a00:79e0:d:11:1da2:3fd4:a302:4fff])
- by smtp.gmail.com with ESMTPSA id o2sm5891178wmh.46.2020.01.30.03.38.04
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 30 Jan 2020 03:38:04 -0800 (PST)
-Date: Thu, 30 Jan 2020 03:38:04 -0800 (PST)
-X-Google-Original-Date: Thu, 30 Jan 2020 11:38:00 GMT (+0000)
-Subject: Re: [PATCH] riscv: Add semihosting support [v4]
-CC: keithp@keithp.com, qemu-devel@nongnu.org, riku.voipio@iki.fi,
- laurent@vivier.eu, 
- Alistair Francis <Alistair.Francis@wdc.com>, sagark@eecs.berkeley.edu,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, qemu-riscv@nongnu.org
-From: Palmer Dabbelt <palmerdabbelt@google.com>
-To: Peter Maydell <peter.maydell@linaro.org>
-In-Reply-To: <CAFEAcA8Vs5Bp7tPgxLOG_T0350-Y_w7SitNzNuvHZN6AB=b0gg@mail.gmail.com>
-References: <CAFEAcA8Vs5Bp7tPgxLOG_T0350-Y_w7SitNzNuvHZN6AB=b0gg@mail.gmail.com>
- <20200128233224.515233-1-keithp@keithp.com>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=xxw7LGpjcS0XvMQAfylVU83imD07D+/OPuhF16qkAtM=;
+ b=RlrcuL6YADKfWb5CiyO+M+0cQ0HRfkTIHXkJYgZkmfsb6S6XNjk/ip0XWEgRGF7X56
+ hJuY2KKxKYevVdhGummKtogzR9LBVpefmhQz2ky2wxZcB5fggMIjDudDzv3U6EdZg73o
+ J6Z7L0mkr/lSuao7g9apLd0MLfYtkPx8mw9uj1S0+7iFyWNTktiVMUmdvUvbmDw3SRpI
+ FHeVkKcpyoX1S30t3Fa8RFuAp7AQLQnV7sNMd5p40X5UORg5Zm2Hu26bnXpLg5ZwzTmW
+ wrub0OvQsyd+o75BBvBXbifm/vS19Gm7mwqHxfHq8efPv3r1jLcPuwgSJgflCGinDpbz
+ GecQ==
+X-Gm-Message-State: APjAAAVXyh5nOcqTQ50Zx6zZjfuOWH6AW4pDZTDMUZk+5LI8jjR4tayY
+ MEoZvnGVtCCDDA6mnEbgncRYe21NMyB7DSmk2lDiEg==
+X-Google-Smtp-Source: APXvYqwbN4WOCluiYyP0XrbXsjQX/o5vt4l1tTZteBNV/cms8NgBm8cP9T2sb82ph1mo9yNceB+ircdO3Wb0C5r2tvI=
+X-Received: by 2002:a05:6830:4a4:: with SMTP id
+ l4mr3202538otd.91.1580385720791; 
+ Thu, 30 Jan 2020 04:02:00 -0800 (PST)
+MIME-Version: 1.0
+References: <20200128233224.515233-1-keithp@keithp.com>
  <CAFEAcA_dD3eAfKvOGOoXe3NWKg1PiW8=s2Xk41w19Tk67R-R4A@mail.gmail.com>
  <877e1arz2w.fsf@keithp.org>
-Message-ID: <mhng-e399eb36-5106-485c-972c-db2610e42dff@palmerdabbelt-glaptop1>
-Mime-Version: 1.0 (MHng)
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
+ <CAFEAcA8Vs5Bp7tPgxLOG_T0350-Y_w7SitNzNuvHZN6AB=b0gg@mail.gmail.com>
+ <mhng-e399eb36-5106-485c-972c-db2610e42dff@palmerdabbelt-glaptop1>
+In-Reply-To: <mhng-e399eb36-5106-485c-972c-db2610e42dff@palmerdabbelt-glaptop1>
+From: Peter Maydell <peter.maydell@linaro.org>
+Date: Thu, 30 Jan 2020 12:01:49 +0000
+Message-ID: <CAFEAcA_df6Uc_kqAvbELOQyUSnv-n+bDvJtYf2s5wCxwNXm-eg@mail.gmail.com>
+Subject: Re: [PATCH] riscv: Add semihosting support [v4]
+To: Palmer Dabbelt <palmerdabbelt@google.com>
+Cc: Keith Packard <keithp@keithp.com>, QEMU Developers <qemu-devel@nongnu.org>,
+ Riku Voipio <riku.voipio@iki.fi>, Laurent Vivier <laurent@vivier.eu>, 
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::444
+X-Received-From: 2607:f8b0:4864:20::344
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -77,73 +74,28 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Jan 2020 11:38:09 -0000
+X-List-Received-Date: Thu, 30 Jan 2020 12:02:04 -0000
 
-On Thu, 30 Jan 2020 10:54:37 GMT (+0000), Peter Maydell wrote:
-> On Wed, 29 Jan 2020 at 16:45, Keith Packard <keithp@keithp.com> wrote:
->>
->> Peter Maydell <peter.maydell@linaro.org> writes:
->>
->> > True but irrelevant. You need to refer to a proper
->> > risc-v specification for your semihosting.
->>
->> The RISC-V Foundation defined semihosting as relative to the existing
->> ARM specification, so using a link to that is appropriate here.
->>
->> Here's the current specification of the unprivileged ISA, which includes
->> the definition of semihosting
->>
->>         https://riscv.org/specifications/
->>
->> While it may be nice in some abstract sense to create a "better"
->> semihosting spec, that's not what the RISC-V foundation has decided to
->> do.
->
-> We've gone round this several times. You can't just
-> say "it's the arm spec", because you're not arm and
-> your architecture is different. You need to actually
-> document what the architecture-specific parts are,
-> even if you want to mostly say "and we follow the
-> Arm spec most of the time". If you really really want
-> to say "32 bit RISC-V is gratuitously different from
-> 64-bit RISC-V in these areas because we just blindly
-> copied the way Arm happened to have historically
-> developed" then you can do that if you like, but you
-> need to actually write it down in a document somewhere.
->
-> You're trying to implement an ABI which has multiple
-> different implementations of both consumers and
-> producers; it's not a good idea to shortcut the
-> process of actually writing down what the requirements
-> between the two ends are.
+On Thu, 30 Jan 2020 at 11:38, Palmer Dabbelt <palmerdabbelt@google.com> wrote:
+> * The semihosting comment doesn't define the semihosting call numbers, just the
+>   sequence to get to a call.  That said, we haven't written down the Linux ABI
+>   either -- though there's a much larger breadth of software out there that
+>   implements it and won't break ABI compatibility, so maybe that's considered
+>   sufficient in Linux land where it's not for semihosting.
 
-I think, more concretely, the issues here are:
+I think the difference with Linux is that there's a clear
+single authoritative source for what the ABI is -- Linus's
+'mainline' kernel (so for instance random out-of-tree forks,
+syscall patch proposals, etc that have not yet hit mainline
+don't count as being fixed-in-stone ABI). Semihosting doesn't
+have the same single clear "owning project", at least on
+the Arm side of things.
 
-* The only mention of "semihosting" in the RISC-V specification is in the
-  commentary, which is not considered a normative part of the specification.
-* The interface that commentary contains is defined as maybe being obsolete
-  already, but no new concrete interface is defined.
-* The semihosting comment doesn't define the semihosting call numbers, just the
-  sequence to get to a call.  That said, we haven't written down the Linux ABI
-  either -- though there's a much larger breadth of software out there that
-  implements it and won't break ABI compatibility, so maybe that's considered
-  sufficient in Linux land where it's not for semihosting.
+I don't think a semihosting specification for RISC-V needs
+necessarily to be a very heavyweight thing -- it is, after
+all, a debug API at heart -- but I do agree that you should
+have one.
 
-It seems to me like the right way to go forward is to put together a
-semihosting ABI specification as a RISC-V specification.  That would give
-everyone who cares about their pre-specification implementations a chance to
-get together to figure out which parts they want to keep, and give us a path to
-move forwards.  There's more work that needs to be done here to put together a
-system that will actually work (for example, how to we insert breakpoints if
-we're using ebreak to indicate semihosting and haven't reserved NOP
-sequences?), so this does warrant a bit of thought.
-
-I know it's a bit of a headache in the short term to get a specification
-together, but we've had so many headaches of the "there's no spec" sort that at
-least it'll be a change of pace :)
-
->
-> thanks
-> -- PMM
-
+thanks
+-- PMM
 
