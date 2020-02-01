@@ -1,66 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ixhH0-0000z0-Hq
+	id 1ixhH0-0000z7-Mh
 	for mharc-qemu-riscv@gnu.org; Fri, 31 Jan 2020 20:08:34 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:56593)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:56606)
  by lists.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <prvs=2939926b3=alistair.francis@wdc.com>)
- id 1ixhGx-0000rf-QO
- for qemu-riscv@nongnu.org; Fri, 31 Jan 2020 20:08:32 -0500
+ id 1ixhGy-0000tu-In
+ for qemu-riscv@nongnu.org; Fri, 31 Jan 2020 20:08:33 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
  (envelope-from <prvs=2939926b3=alistair.francis@wdc.com>)
- id 1ixhGw-0006B0-OQ
- for qemu-riscv@nongnu.org; Fri, 31 Jan 2020 20:08:31 -0500
+ id 1ixhGx-0006BE-G2
+ for qemu-riscv@nongnu.org; Fri, 31 Jan 2020 20:08:32 -0500
 Received: from esa4.hgst.iphmx.com ([216.71.154.42]:17129)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <prvs=2939926b3=alistair.francis@wdc.com>)
- id 1ixhGt-00069K-5j; Fri, 31 Jan 2020 20:08:27 -0500
+ id 1ixhGu-00069K-SW; Fri, 31 Jan 2020 20:08:29 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1580519306; x=1612055306;
+ t=1580519308; x=1612055308;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=qHmpHK7fMKpNGGhV9Hhlvy1FKVh4htbFkoX5Q5QqcLg=;
- b=MfztiVEChcG0LHHSyeCsGOwxMCYYL3tefaSLFhnbgndLJzD2utAyvZ4S
- jccsZhnIGPiSSVM1zmQOPYvDxa89la/esSC7ZRWlRc7v9saOCRl03yrss
- NdQ4TEGTQKk7hRYcA5ZoFYy2cWvckb8SUT/n2AAnVDstg3fL+4HCjepQG
- t6VnYBJb2x/QxzrbnXErsflRYhzcz7RJKRN+xdScUjQKJmiJRc1kbfIt6
- O+dWCDFZk6IWGh2kY8zreieIYLKAq/LqpJ16iMbK1GKasG8zaSDgHU90E
- +rGPhtBX03zzhSggzCgpErjTMOAB6Y4SiZYAl2mhKxTbpbCUvRjeZ0s+3 w==;
-IronPort-SDR: grma4uEqsKthSrLxvnTt/141IKHrFi4/cpW3cSBUKwniBVb3LB3Ysl4gr1HBv/9wL9gSbybssh
- IduILATd3MfupYZxQh7dlXUaQxdx8P6AHqB2LvlosPk1RpLR5qxOyG8Nv20TAFsrkwoO3rK9Xs
- XL9qnQFytJydmuc+HcCMoMlQIorrGWso8bXPtmRR0VcMERVj73mceKguR+1oz96SSM47H67Bbf
- OLJAbUU3G4VsQ6zsDZFKQ5kGhYqTN8c/br/FUYPOXb6DdtnGBcbQyvPZ8VVftYzyBOIunrOvG1
- 72A=
-X-IronPort-AV: E=Sophos;i="5.70,388,1574092800"; d="scan'208";a="128872404"
+ bh=9qktGF13kdXFA93/pM0XjdXemD5w7LblcIOe3JTZvfk=;
+ b=EHRbF8mM2YvbrwVaAjOp7y4wO/IG4NsiKZSKmuMx5qr9E/hyCc7pYxcw
+ m9Fu3IC9u10uPblxGndaqVGobxdLQkuBQnOtnYMGUCiQZBBUw8CSpK8aQ
+ TcZP+iqxrSljbKFwPSo4LSZS52Q7UqP6BxKwAf/mdq1wQA6BOZCCw4SDD
+ FYVToR8KsOw3LWcIfEwmY03nHUY4svFkpp60lA9CaZ2OKPaPxJb4lDPUY
+ 8YpJRnwAD6+wFbDIrUKQS6tJwOAIvSfy3tNZaCEK/eK7lyfWVNh3Epge6
+ w5QsKNx18f5Iheh9baY30ZTOutSkMRLSIM2jzHH1RS9YA5un3lwqKvVOv g==;
+IronPort-SDR: 9VeqVS1qU9QX0vQ09W1wDOddcrsx/AzEby1OsEGPaeUeidriQCqB7AL9gNwrMhDWFuzc7oc6aK
+ ExroPOPIar3HYXntQg/n3lGIvf5J+DQnUkjsUKwBpqopO1vYdPTONgnCr3UAyouDn7z9cr+qi3
+ ceNckirGJfxhByZ6OLZZMAZGhb3vBf2uh+C+jqjiuMASg6aTj84I4+dhwE8PD4kFa6akpM95xo
+ mE2sZKBnSQpPt3Kb1S0bUbfGzuifW6X4uwqoGMsgA6sUjAE57o4ly1ZMFoBPLMDtuQlxAWSuKO
+ NEc=
+X-IronPort-AV: E=Sophos;i="5.70,388,1574092800"; d="scan'208";a="128872405"
 Received: from h199-255-45-14.hgst.com (HELO uls-op-cesaep01.wdc.com)
  ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 01 Feb 2020 09:08:25 +0800
-IronPort-SDR: ZEHBl/Bs84AP1MgveHDtj6+WxSltm5yofuGIp5cXTlTHyFNKhRzWtRR52DkeY5MdulIQKRtkjP
- LtoG2kNvSd+k4sRZPMINW7qDCPYkJuLafD4kBFXKms9YO2kUOj++gjA0GSJpRmfjDRrXatMX9z
- xfpQikTGb+Cm65scKSeAwDcG0+xnzu/6HUdbVay6KtvNWfEUCGr4pOFsjvio8XDr0I9bIpXJOo
- 6WSBrxxL1k32lcdrgeFwp+QAZZvjy1Dzh8yvCYzD9SNwa+HKibSgE1Wo4clED7g6Qul2mWRmvf
- d8WmPj4UENVWL5cOuE/0Lkr8
-Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
+ by ob1.hgst.iphmx.com with ESMTP; 01 Feb 2020 09:08:28 +0800
+IronPort-SDR: w9M0gE2uve5IomOwjCFaLmwJ0CZmNNVSiMvaNdtYpaSekPZdzU+eZsuW8JpCnA984UNpWOciqI
+ OObw6Bp+VCCyAj/IDHW2UpDWAJBERzh71U4B2sXSyDi9fzG+aYuNFL22zm4bVtOBshMful0jVx
+ CGUC1km7+yu3/7C7hHIIvwGwkibAogBp/x7rO6DSS56m9Jn1gvqRbpgm2HBnTJXGssd+gfnX6/
+ hxCD5J8VgrqsOlfHfoNFaMRTyvLBfxAjxEFQj96lgxuUo7x1TmF3AnwuAmkVTY8+OiZD54vRkV
+ cI61gjVMiFK1/a0J4rNLp8Bo
+Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
  by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 31 Jan 2020 17:01:34 -0800
-IronPort-SDR: aiuFksYtyuxjj1i78HV/cOnorUUGUOiNwS8f/1vXTppCkEUaII/CKgEL+SjtY8hNYA8jX18KhM
- mbhWTZRgG1q5XPziPunQZiVnbrFdlnGlvFvqiQHJpP2sZpM/8MeYDnDTNJjj093GFIDFXMKvcT
- z7GYo8KsvuGGQX9puOfuOBl5NL4U+54NGaSjrPm0RraoVDmwAhbOaiUX1U3KqRrslfa92Xo7Q1
- CgRSnRvGNN0J8Z2HWuJA+j5e9lihIORi1sePBhGh0K06obDLnICvs5Sja/SXyrp0Q+Z/5sFqq/
- EIY=
+ 31 Jan 2020 17:01:36 -0800
+IronPort-SDR: bN5PNFomiyDzBxAAfxOZobFiN4gOTeQxKzhsalvpBB4Ykzl4lObDPL1PasLnGO1meJ4+54TxS/
+ uDRFE9VNgFhFun6zCORy+p046HlABuWQ4x+wbgBj+m18dVfZbK1F9G8jDwr9dA0FxaxVIHRsGy
+ LHd9dsDvDU4DzOQQTb4N7kw7KVZ1a+kyiAXg3NPCrtelS10Cg5GkyMVAy2U102pHz7Fz6MKeqh
+ FtyvBNQ22/Qj62+L+apgodanFWT6V3al65Wr/EbtPBDwRK4Tb3a12MDVnSZLepee9RATiWosn9
+ kSU=
 WDCIronportException: Internal
 Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
  risc6-mainframe.int.fusionio.com) ([10.196.158.235])
- by uls-op-cesaip01.wdc.com with ESMTP; 31 Jan 2020 17:08:25 -0800
+ by uls-op-cesaip02.wdc.com with ESMTP; 31 Jan 2020 17:08:28 -0800
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: palmer@dabbelt.com,
 	alistair.francis@wdc.com,
 	alistair23@gmail.com
-Subject: [PATCH v2 05/35] target/riscv: Rename the H irqs to VS irqs
-Date: Fri, 31 Jan 2020 17:01:49 -0800
-Message-Id: <7d2a69b0dab41c20e1e7aa186596040fb50423e5.1580518859.git.alistair.francis@wdc.com>
+Subject: [PATCH v2 06/35] target/riscv: Add the virtulisation mode
+Date: Fri, 31 Jan 2020 17:01:51 -0800
+Message-Id: <0a577a9823fa87fce9e0bda9035f764410c5d237.1580518859.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.25.0
 In-Reply-To: <cover.1580518859.git.alistair.francis@wdc.com>
 References: <cover.1580518859.git.alistair.francis@wdc.com>
@@ -84,72 +84,76 @@ X-List-Received-Date: Sat, 01 Feb 2020 01:08:33 -0000
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 Reviewed-by: Palmer Dabbelt <palmerdabbelt@google.com>
 ---
- target/riscv/cpu.c      |  6 +++---
- target/riscv/cpu_bits.h | 12 ++++++------
- 2 files changed, 9 insertions(+), 9 deletions(-)
+ target/riscv/cpu.h        |  4 ++++
+ target/riscv/cpu_bits.h   |  3 +++
+ target/riscv/cpu_helper.c | 18 ++++++++++++++++++
+ 3 files changed, 25 insertions(+)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 2f62f5ea19..f7a35c74c2 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -80,14 +80,14 @@ const char * const riscv_excp_names[] = {
- const char * const riscv_intr_names[] = {
-     "u_software",
-     "s_software",
--    "h_software",
-+    "vs_software",
-     "m_software",
-     "u_timer",
-     "s_timer",
--    "h_timer",
-+    "vs_timer",
-     "m_timer",
-     "u_external",
--    "s_external",
-+    "vs_external",
-     "h_external",
-     "m_external",
-     "reserved",
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index c7f7ae5c38..a9cbd8584e 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -117,6 +117,8 @@ struct CPURISCVState {
+ 
+ #ifndef CONFIG_USER_ONLY
+     target_ulong priv;
++    /* This contains QEMU specific information about the virt state. */
++    target_ulong virt;
+     target_ulong resetvec;
+ 
+     target_ulong mhartid;
+@@ -269,6 +271,8 @@ int riscv_cpu_gdb_read_register(CPUState *cpu, uint8_t *buf, int reg);
+ int riscv_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
+ bool riscv_cpu_exec_interrupt(CPUState *cs, int interrupt_request);
+ bool riscv_cpu_fp_enabled(CPURISCVState *env);
++bool riscv_cpu_virt_enabled(CPURISCVState *env);
++void riscv_cpu_set_virt_enabled(CPURISCVState *env, bool enable);
+ int riscv_cpu_mmu_index(CPURISCVState *env, bool ifetch);
+ hwaddr riscv_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
+ void  riscv_cpu_do_unaligned_access(CPUState *cs, vaddr addr,
 diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-index 9ce73c36de..eeaa03c0f8 100644
+index eeaa03c0f8..2cdb0de4fe 100644
 --- a/target/riscv/cpu_bits.h
 +++ b/target/riscv/cpu_bits.h
-@@ -514,29 +514,29 @@
- /* Interrupt causes */
- #define IRQ_U_SOFT                         0
- #define IRQ_S_SOFT                         1
--#define IRQ_H_SOFT                         2  /* reserved */
-+#define IRQ_VS_SOFT                        2
- #define IRQ_M_SOFT                         3
- #define IRQ_U_TIMER                        4
- #define IRQ_S_TIMER                        5
--#define IRQ_H_TIMER                        6  /* reserved */
-+#define IRQ_VS_TIMER                       6
- #define IRQ_M_TIMER                        7
- #define IRQ_U_EXT                          8
- #define IRQ_S_EXT                          9
--#define IRQ_H_EXT                          10 /* reserved */
-+#define IRQ_VS_EXT                         10
- #define IRQ_M_EXT                          11
+@@ -430,6 +430,9 @@
+ #define PRV_H 2 /* Reserved */
+ #define PRV_M 3
  
- /* mip masks */
- #define MIP_USIP                           (1 << IRQ_U_SOFT)
- #define MIP_SSIP                           (1 << IRQ_S_SOFT)
--#define MIP_HSIP                           (1 << IRQ_H_SOFT)
-+#define MIP_VSSIP                          (1 << IRQ_VS_SOFT)
- #define MIP_MSIP                           (1 << IRQ_M_SOFT)
- #define MIP_UTIP                           (1 << IRQ_U_TIMER)
- #define MIP_STIP                           (1 << IRQ_S_TIMER)
--#define MIP_HTIP                           (1 << IRQ_H_TIMER)
-+#define MIP_VSTIP                          (1 << IRQ_VS_TIMER)
- #define MIP_MTIP                           (1 << IRQ_M_TIMER)
- #define MIP_UEIP                           (1 << IRQ_U_EXT)
- #define MIP_SEIP                           (1 << IRQ_S_EXT)
--#define MIP_HEIP                           (1 << IRQ_H_EXT)
-+#define MIP_VSEIP                          (1 << IRQ_VS_EXT)
- #define MIP_MEIP                           (1 << IRQ_M_EXT)
++/* Virtulisation Register Fields */
++#define VIRT_ONOFF          1
++
+ /* RV32 satp CSR field masks */
+ #define SATP32_MODE         0x80000000
+ #define SATP32_ASID         0x7fc00000
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index 8f746fb06f..5844e543f3 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -82,6 +82,24 @@ bool riscv_cpu_fp_enabled(CPURISCVState *env)
+     return false;
+ }
  
- /* sip masks */
++bool riscv_cpu_virt_enabled(CPURISCVState *env)
++{
++    if (!riscv_has_ext(env, RVH)) {
++        return false;
++    }
++
++    return get_field(env->virt, VIRT_ONOFF);
++}
++
++void riscv_cpu_set_virt_enabled(CPURISCVState *env, bool enable)
++{
++    if (!riscv_has_ext(env, RVH)) {
++        return;
++    }
++
++    env->virt = set_field(env->virt, VIRT_ONOFF, enable);
++}
++
+ int riscv_cpu_claim_interrupts(RISCVCPU *cpu, uint32_t interrupts)
+ {
+     CPURISCVState *env = &cpu->env;
 -- 
 2.25.0
 
