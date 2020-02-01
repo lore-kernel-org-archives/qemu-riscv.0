@@ -1,67 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ixhGy-0000s6-3a
-	for mharc-qemu-riscv@gnu.org; Fri, 31 Jan 2020 20:08:32 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:56563)
+	id 1ixhH0-0000z0-Hq
+	for mharc-qemu-riscv@gnu.org; Fri, 31 Jan 2020 20:08:34 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:56593)
  by lists.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <prvs=2939926b3=alistair.francis@wdc.com>)
- id 1ixhGv-0000kI-Bw
- for qemu-riscv@nongnu.org; Fri, 31 Jan 2020 20:08:30 -0500
+ id 1ixhGx-0000rf-QO
+ for qemu-riscv@nongnu.org; Fri, 31 Jan 2020 20:08:32 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
  (envelope-from <prvs=2939926b3=alistair.francis@wdc.com>)
- id 1ixhGt-00069c-15
- for qemu-riscv@nongnu.org; Fri, 31 Jan 2020 20:08:29 -0500
-Received: from esa4.hgst.iphmx.com ([216.71.154.42]:17116)
+ id 1ixhGw-0006B0-OQ
+ for qemu-riscv@nongnu.org; Fri, 31 Jan 2020 20:08:31 -0500
+Received: from esa4.hgst.iphmx.com ([216.71.154.42]:17129)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <prvs=2939926b3=alistair.francis@wdc.com>)
- id 1ixhGp-00066c-QW; Fri, 31 Jan 2020 20:08:24 -0500
+ id 1ixhGt-00069K-5j; Fri, 31 Jan 2020 20:08:27 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1580519303; x=1612055303;
+ t=1580519306; x=1612055306;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=YRa6ARi8+mYcdsjZeYRg4ygWAjXx/YacYe2wA7JM02o=;
- b=YWlssfJwW2G63Z/ju549sd9KFWgpXV21PjV/Lf8XkHr2H6wrOdjQKQBr
- KgZsxk1sgz5JhFRs92K9mKBVl634UQqvREd0CSQIAosueYxPiULYZYqtL
- fB5EMHrK2F16iU7V7vQrXbPLdqXSEcqcW07P7COzJECUoIXtJaQjW1nec
- bcFsuP//89xhU//s54D1S/qOIAkJ1FlsAYg4Tx4BGYr/uxdRU0L9z7tFp
- NYoaSN4QTmDf0kzJc8Ly0hBhG4oOKUBHFoDEg260GPXdC+UGiz2Z6v2dY
- /PuDOMqhpSxAJ901scx6VnPfCadWw7TqCsnKj5dLhWyKBxa+4gtt/icoa Q==;
-IronPort-SDR: uiOgO3H61nxndAssytoXePYCM/S+dYFJPNbJd0vbtuRvnsZr6J+QuGY4y+kSN6qj8V7RO8Fajs
- ChmAMI34ZQFUOElmTz32dwlzPBKvmPm+iRQ5FHISld2xsgEOv03Myn4O/6jMtbMGmPfa6t/kEY
- v19MSdiVHIUsjm0Y8FZ5Rq0WRy47AhXGASMEjS+Y2zk88ae9PMPSTEGVcsxtb+L6oIYXii1UDl
- gVGFJx7NWHPwOBbL7Ti5Clh/EfZ1BELtTD8cj4V/O8Fc5XAMT+lJQtHk3WQ5vNEUmiEoknYSTE
- gAY=
-X-IronPort-AV: E=Sophos;i="5.70,388,1574092800"; d="scan'208";a="128872402"
+ bh=qHmpHK7fMKpNGGhV9Hhlvy1FKVh4htbFkoX5Q5QqcLg=;
+ b=MfztiVEChcG0LHHSyeCsGOwxMCYYL3tefaSLFhnbgndLJzD2utAyvZ4S
+ jccsZhnIGPiSSVM1zmQOPYvDxa89la/esSC7ZRWlRc7v9saOCRl03yrss
+ NdQ4TEGTQKk7hRYcA5ZoFYy2cWvckb8SUT/n2AAnVDstg3fL+4HCjepQG
+ t6VnYBJb2x/QxzrbnXErsflRYhzcz7RJKRN+xdScUjQKJmiJRc1kbfIt6
+ O+dWCDFZk6IWGh2kY8zreieIYLKAq/LqpJ16iMbK1GKasG8zaSDgHU90E
+ +rGPhtBX03zzhSggzCgpErjTMOAB6Y4SiZYAl2mhKxTbpbCUvRjeZ0s+3 w==;
+IronPort-SDR: grma4uEqsKthSrLxvnTt/141IKHrFi4/cpW3cSBUKwniBVb3LB3Ysl4gr1HBv/9wL9gSbybssh
+ IduILATd3MfupYZxQh7dlXUaQxdx8P6AHqB2LvlosPk1RpLR5qxOyG8Nv20TAFsrkwoO3rK9Xs
+ XL9qnQFytJydmuc+HcCMoMlQIorrGWso8bXPtmRR0VcMERVj73mceKguR+1oz96SSM47H67Bbf
+ OLJAbUU3G4VsQ6zsDZFKQ5kGhYqTN8c/br/FUYPOXb6DdtnGBcbQyvPZ8VVftYzyBOIunrOvG1
+ 72A=
+X-IronPort-AV: E=Sophos;i="5.70,388,1574092800"; d="scan'208";a="128872404"
 Received: from h199-255-45-14.hgst.com (HELO uls-op-cesaep01.wdc.com)
  ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 01 Feb 2020 09:08:22 +0800
-IronPort-SDR: UpDMHeyob1j8UC4sv74HVVcjPf/XywpLuCGdctuRy3x3YVslTLwjXw4Shv0W+Xy4TLT2Md5okO
- yxHlNMTV2xqza2jOZjZ6c/qd+5aZHGSFKqqV1l77h6s1CflwqnYSMXZHDnSMzbUkc1M7Zzy9RC
- 3GlSQTsnY3szt3VxqtiIizTiNekrZYa0MaMLfBTfrX4gGAvlP90OpAixuHpIkUXWO3s0NFCqM+
- z5xLuXWOod/XFSfewuIxvusyyikFOFZfBDzzYccXNQi3pVFwRxjC/unp8um0103J7cu19FrFxF
- uu0IP+kUgrslXULilfwLYTFw
-Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
+ by ob1.hgst.iphmx.com with ESMTP; 01 Feb 2020 09:08:25 +0800
+IronPort-SDR: ZEHBl/Bs84AP1MgveHDtj6+WxSltm5yofuGIp5cXTlTHyFNKhRzWtRR52DkeY5MdulIQKRtkjP
+ LtoG2kNvSd+k4sRZPMINW7qDCPYkJuLafD4kBFXKms9YO2kUOj++gjA0GSJpRmfjDRrXatMX9z
+ xfpQikTGb+Cm65scKSeAwDcG0+xnzu/6HUdbVay6KtvNWfEUCGr4pOFsjvio8XDr0I9bIpXJOo
+ 6WSBrxxL1k32lcdrgeFwp+QAZZvjy1Dzh8yvCYzD9SNwa+HKibSgE1Wo4clED7g6Qul2mWRmvf
+ d8WmPj4UENVWL5cOuE/0Lkr8
+Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
  by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 31 Jan 2020 17:01:31 -0800
-IronPort-SDR: dscKByiUP6t5mdmOW+gsHz2J9yzGw1XM2/RbnF/E22YFmUCJ3o8fwADVgpuzOpf2EQ1RK4jQGv
- EOEw4Iv5Xv2r/Egr8IGqSVOw7ZzgcH0t35Dv2waixtc/4moYEeAnc8puOBHj67WTrUavtHILC2
- PFRvHllH2yCXD0DbM/KtRPYmopp5SRlG+NXKQJi8nlz1Yig8RJHgMUtTexGE3uz7MfbBMWcoFp
- kpNcA2+1qHi79o2N2OFtltJF3duAWlWmafUZCPc5F+VvOQtAl9Q0/jSoI4wNXnuXEA/dq/Lbqw
- 8fU=
+ 31 Jan 2020 17:01:34 -0800
+IronPort-SDR: aiuFksYtyuxjj1i78HV/cOnorUUGUOiNwS8f/1vXTppCkEUaII/CKgEL+SjtY8hNYA8jX18KhM
+ mbhWTZRgG1q5XPziPunQZiVnbrFdlnGlvFvqiQHJpP2sZpM/8MeYDnDTNJjj093GFIDFXMKvcT
+ z7GYo8KsvuGGQX9puOfuOBl5NL4U+54NGaSjrPm0RraoVDmwAhbOaiUX1U3KqRrslfa92Xo7Q1
+ CgRSnRvGNN0J8Z2HWuJA+j5e9lihIORi1sePBhGh0K06obDLnICvs5Sja/SXyrp0Q+Z/5sFqq/
+ EIY=
 WDCIronportException: Internal
 Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
  risc6-mainframe.int.fusionio.com) ([10.196.158.235])
- by uls-op-cesaip02.wdc.com with ESMTP; 31 Jan 2020 17:08:23 -0800
+ by uls-op-cesaip01.wdc.com with ESMTP; 31 Jan 2020 17:08:25 -0800
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: palmer@dabbelt.com,
 	alistair.francis@wdc.com,
 	alistair23@gmail.com
-Subject: [PATCH v2 04/35] target/riscv: Add support for the new execption
- numbers
-Date: Fri, 31 Jan 2020 17:01:46 -0800
-Message-Id: <e22c9c800f00864238d7658cc76e03dbd952bdf4.1580518859.git.alistair.francis@wdc.com>
+Subject: [PATCH v2 05/35] target/riscv: Rename the H irqs to VS irqs
+Date: Fri, 31 Jan 2020 17:01:49 -0800
+Message-Id: <7d2a69b0dab41c20e1e7aa186596040fb50423e5.1580518859.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.25.0
 In-Reply-To: <cover.1580518859.git.alistair.francis@wdc.com>
 References: <cover.1580518859.git.alistair.francis@wdc.com>
@@ -80,137 +79,77 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 01 Feb 2020 01:08:30 -0000
-
-The v0.5 Hypervisor spec add new execption numbers, let's add support
-for those.
+X-List-Received-Date: Sat, 01 Feb 2020 01:08:33 -0000
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 Reviewed-by: Palmer Dabbelt <palmerdabbelt@google.com>
 ---
- target/riscv/cpu.c        |  8 ++++++++
- target/riscv/cpu_bits.h   | 35 +++++++++++++++++++----------------
- target/riscv/cpu_helper.c |  7 +++++--
- target/riscv/csr.c        |  7 +++++--
- 4 files changed, 37 insertions(+), 20 deletions(-)
+ target/riscv/cpu.c      |  6 +++---
+ target/riscv/cpu_bits.h | 12 ++++++------
+ 2 files changed, 9 insertions(+), 9 deletions(-)
 
 diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index efbd676edb..2f62f5ea19 100644
+index 2f62f5ea19..f7a35c74c2 100644
 --- a/target/riscv/cpu.c
 +++ b/target/riscv/cpu.c
-@@ -67,6 +67,14 @@ const char * const riscv_excp_names[] = {
-     "load_page_fault",
-     "reserved",
-     "store_page_fault"
-+    "reserved",
-+    "reserved",
-+    "reserved",
-+    "reserved",
-+    "guest_exec_page_fault",
-+    "guest_load_page_fault",
-+    "reserved",
-+    "guest_store_page_fault"
- };
- 
+@@ -80,14 +80,14 @@ const char * const riscv_excp_names[] = {
  const char * const riscv_intr_names[] = {
+     "u_software",
+     "s_software",
+-    "h_software",
++    "vs_software",
+     "m_software",
+     "u_timer",
+     "s_timer",
+-    "h_timer",
++    "vs_timer",
+     "m_timer",
+     "u_external",
+-    "s_external",
++    "vs_external",
+     "h_external",
+     "m_external",
+     "reserved",
 diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-index 25c0fb258d..9ce73c36de 100644
+index 9ce73c36de..eeaa03c0f8 100644
 --- a/target/riscv/cpu_bits.h
 +++ b/target/riscv/cpu_bits.h
-@@ -488,22 +488,25 @@
- #define DEFAULT_RSTVEC      0x1000
+@@ -514,29 +514,29 @@
+ /* Interrupt causes */
+ #define IRQ_U_SOFT                         0
+ #define IRQ_S_SOFT                         1
+-#define IRQ_H_SOFT                         2  /* reserved */
++#define IRQ_VS_SOFT                        2
+ #define IRQ_M_SOFT                         3
+ #define IRQ_U_TIMER                        4
+ #define IRQ_S_TIMER                        5
+-#define IRQ_H_TIMER                        6  /* reserved */
++#define IRQ_VS_TIMER                       6
+ #define IRQ_M_TIMER                        7
+ #define IRQ_U_EXT                          8
+ #define IRQ_S_EXT                          9
+-#define IRQ_H_EXT                          10 /* reserved */
++#define IRQ_VS_EXT                         10
+ #define IRQ_M_EXT                          11
  
- /* Exception causes */
--#define EXCP_NONE                          -1 /* sentinel value */
--#define RISCV_EXCP_INST_ADDR_MIS           0x0
--#define RISCV_EXCP_INST_ACCESS_FAULT       0x1
--#define RISCV_EXCP_ILLEGAL_INST            0x2
--#define RISCV_EXCP_BREAKPOINT              0x3
--#define RISCV_EXCP_LOAD_ADDR_MIS           0x4
--#define RISCV_EXCP_LOAD_ACCESS_FAULT       0x5
--#define RISCV_EXCP_STORE_AMO_ADDR_MIS      0x6
--#define RISCV_EXCP_STORE_AMO_ACCESS_FAULT  0x7
--#define RISCV_EXCP_U_ECALL                 0x8
--#define RISCV_EXCP_S_ECALL                 0x9
--#define RISCV_EXCP_H_ECALL                 0xa
--#define RISCV_EXCP_M_ECALL                 0xb
--#define RISCV_EXCP_INST_PAGE_FAULT         0xc /* since: priv-1.10.0 */
--#define RISCV_EXCP_LOAD_PAGE_FAULT         0xd /* since: priv-1.10.0 */
--#define RISCV_EXCP_STORE_PAGE_FAULT        0xf /* since: priv-1.10.0 */
-+#define EXCP_NONE                                -1 /* sentinel value */
-+#define RISCV_EXCP_INST_ADDR_MIS                 0x0
-+#define RISCV_EXCP_INST_ACCESS_FAULT             0x1
-+#define RISCV_EXCP_ILLEGAL_INST                  0x2
-+#define RISCV_EXCP_BREAKPOINT                    0x3
-+#define RISCV_EXCP_LOAD_ADDR_MIS                 0x4
-+#define RISCV_EXCP_LOAD_ACCESS_FAULT             0x5
-+#define RISCV_EXCP_STORE_AMO_ADDR_MIS            0x6
-+#define RISCV_EXCP_STORE_AMO_ACCESS_FAULT        0x7
-+#define RISCV_EXCP_U_ECALL                       0x8
-+#define RISCV_EXCP_S_ECALL                      0x9
-+#define RISCV_EXCP_VS_ECALL                      0xa
-+#define RISCV_EXCP_M_ECALL                       0xb
-+#define RISCV_EXCP_INST_PAGE_FAULT               0xc /* since: priv-1.10.0 */
-+#define RISCV_EXCP_LOAD_PAGE_FAULT               0xd /* since: priv-1.10.0 */
-+#define RISCV_EXCP_STORE_PAGE_FAULT              0xf /* since: priv-1.10.0 */
-+#define RISCV_EXCP_INST_GUEST_PAGE_FAULT         0x14
-+#define RISCV_EXCP_LOAD_GUEST_ACCESS_FAULT       0x15
-+#define RISCV_EXCP_STORE_GUEST_AMO_ACCESS_FAULT  0x17
+ /* mip masks */
+ #define MIP_USIP                           (1 << IRQ_U_SOFT)
+ #define MIP_SSIP                           (1 << IRQ_S_SOFT)
+-#define MIP_HSIP                           (1 << IRQ_H_SOFT)
++#define MIP_VSSIP                          (1 << IRQ_VS_SOFT)
+ #define MIP_MSIP                           (1 << IRQ_M_SOFT)
+ #define MIP_UTIP                           (1 << IRQ_U_TIMER)
+ #define MIP_STIP                           (1 << IRQ_S_TIMER)
+-#define MIP_HTIP                           (1 << IRQ_H_TIMER)
++#define MIP_VSTIP                          (1 << IRQ_VS_TIMER)
+ #define MIP_MTIP                           (1 << IRQ_M_TIMER)
+ #define MIP_UEIP                           (1 << IRQ_U_EXT)
+ #define MIP_SEIP                           (1 << IRQ_S_EXT)
+-#define MIP_HEIP                           (1 << IRQ_H_EXT)
++#define MIP_VSEIP                          (1 << IRQ_VS_EXT)
+ #define MIP_MEIP                           (1 << IRQ_M_EXT)
  
- #define RISCV_EXCP_INT_FLAG                0x80000000
- #define RISCV_EXCP_INT_MASK                0x7fffffff
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index b8e85d5b20..8f746fb06f 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -526,13 +526,16 @@ void riscv_cpu_do_interrupt(CPUState *cs)
-     static const int ecall_cause_map[] = {
-         [PRV_U] = RISCV_EXCP_U_ECALL,
-         [PRV_S] = RISCV_EXCP_S_ECALL,
--        [PRV_H] = RISCV_EXCP_H_ECALL,
-+        [PRV_H] = RISCV_EXCP_VS_ECALL,
-         [PRV_M] = RISCV_EXCP_M_ECALL
-     };
- 
-     if (!async) {
-         /* set tval to badaddr for traps with address information */
-         switch (cause) {
-+        case RISCV_EXCP_INST_GUEST_PAGE_FAULT:
-+        case RISCV_EXCP_LOAD_GUEST_ACCESS_FAULT:
-+        case RISCV_EXCP_STORE_GUEST_AMO_ACCESS_FAULT:
-         case RISCV_EXCP_INST_ADDR_MIS:
-         case RISCV_EXCP_INST_ACCESS_FAULT:
-         case RISCV_EXCP_LOAD_ADDR_MIS:
-@@ -554,7 +557,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
-         }
-     }
- 
--    trace_riscv_trap(env->mhartid, async, cause, env->pc, tval, cause < 16 ?
-+    trace_riscv_trap(env->mhartid, async, cause, env->pc, tval, cause < 23 ?
-         (async ? riscv_intr_names : riscv_excp_names)[cause] : "(unknown)");
- 
-     if (env->priv <= PRV_S &&
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 0e34c292c5..ca27359c7e 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -242,11 +242,14 @@ static const target_ulong delegable_excps =
-     (1ULL << (RISCV_EXCP_STORE_AMO_ACCESS_FAULT)) |
-     (1ULL << (RISCV_EXCP_U_ECALL)) |
-     (1ULL << (RISCV_EXCP_S_ECALL)) |
--    (1ULL << (RISCV_EXCP_H_ECALL)) |
-+    (1ULL << (RISCV_EXCP_VS_ECALL)) |
-     (1ULL << (RISCV_EXCP_M_ECALL)) |
-     (1ULL << (RISCV_EXCP_INST_PAGE_FAULT)) |
-     (1ULL << (RISCV_EXCP_LOAD_PAGE_FAULT)) |
--    (1ULL << (RISCV_EXCP_STORE_PAGE_FAULT));
-+    (1ULL << (RISCV_EXCP_STORE_PAGE_FAULT)) |
-+    (1ULL << (RISCV_EXCP_INST_GUEST_PAGE_FAULT)) |
-+    (1ULL << (RISCV_EXCP_LOAD_GUEST_ACCESS_FAULT)) |
-+    (1ULL << (RISCV_EXCP_STORE_GUEST_AMO_ACCESS_FAULT));
- static const target_ulong sstatus_v1_9_mask = SSTATUS_SIE | SSTATUS_SPIE |
-     SSTATUS_UIE | SSTATUS_UPIE | SSTATUS_SPP | SSTATUS_FS | SSTATUS_XS |
-     SSTATUS_SUM | SSTATUS_SD;
+ /* sip masks */
 -- 
 2.25.0
 
