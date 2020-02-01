@@ -1,66 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ixhH7-0001Fh-9a
-	for mharc-qemu-riscv@gnu.org; Fri, 31 Jan 2020 20:08:41 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:56650)
+	id 1ixhH8-0001KL-MN
+	for mharc-qemu-riscv@gnu.org; Fri, 31 Jan 2020 20:08:42 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:56676)
  by lists.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <prvs=2939926b3=alistair.francis@wdc.com>)
- id 1ixhH3-00015A-Do
- for qemu-riscv@nongnu.org; Fri, 31 Jan 2020 20:08:38 -0500
+ id 1ixhH7-0001F8-0g
+ for qemu-riscv@nongnu.org; Fri, 31 Jan 2020 20:08:41 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
  (envelope-from <prvs=2939926b3=alistair.francis@wdc.com>)
- id 1ixhH2-0006D5-Bu
- for qemu-riscv@nongnu.org; Fri, 31 Jan 2020 20:08:37 -0500
+ id 1ixhH5-0006Ds-2X
+ for qemu-riscv@nongnu.org; Fri, 31 Jan 2020 20:08:40 -0500
 Received: from esa4.hgst.iphmx.com ([216.71.154.42]:17129)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <prvs=2939926b3=alistair.francis@wdc.com>)
- id 1ixhH0-00069K-3X; Fri, 31 Jan 2020 20:08:34 -0500
+ id 1ixhH2-00069K-MM; Fri, 31 Jan 2020 20:08:36 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1580519313; x=1612055313;
+ t=1580519316; x=1612055316;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=cmLzQpUoUHVRHXGrA7b8U45rElR7fLzQ2/9P3hAehNM=;
- b=VLSo/fu9yJx7GqQUucu121MkbLw2c0diqseVYUMTGf691HCkd3BliMtz
- EbDaqeg7DWox9aqeeXT+B3IT9koLjKW3sQM1H7TOkF+KLjckgOf9Zw7bE
- deJRPyLLH2M7Tnh71vAZAsWRG89KoP52YGcJBJA2/7wweycGxljNK3sMH
- 3TsqnASLwSTgPYEPZp1WtMliXIAIlIxlCot1rua1JaOr6ElwFkclULQkk
- SvozSFKGlZieTzc99IJuBtymnowLzszHQRv0in/KYh8HLTPANB6/87mMW
- kOiFjVdiDV+pTXQkQM9sV5P9zQ8pxR5dVb/CnngLWZ/Oag9QlOe4ctzAF A==;
-IronPort-SDR: x3x5BpWiR1aBk9v98dn5z9kf3JnoXGY2QJsbEixXJdoFy//t8227XNUFjyhSrpridTYz8VeWCe
- vDfn7Ix1t2g29zjcxnZPRNpgnss0fZmpllMvrRMcANDa7bjuStCqol1m8tbGuNYWflki//l3cA
- FgfFqH66kei1CxLs2bTjHVv36ylOZVJeGc5ZIrEjZPFHChLMIVi3ubMDwS9rr0hHhOwj9CySMD
- KcxWG3KfIaY8lbPyZxPFqAwQrjDsprdI9voi65xCkiModh0rCF/bPAVduSArtUdVUCgO09IRjT
- VXQ=
-X-IronPort-AV: E=Sophos;i="5.70,388,1574092800"; d="scan'208";a="128872422"
+ bh=NaQyl9TejrG1PIkqOwhTth+GsoVfdYSSLyrBaoAGPZs=;
+ b=rty22U2D6k0awQAVxIUTJKmR5vqHmiXiM3TFFTV45dQDdaLA+TSHT+dU
+ WROaEFwvnrlbKuIOU0kOk4Ba/9v7tai+lwY1owk7p4iF5XcL9EWeKeFcs
+ kXfTb55c/5r3UJ1SYF07EUeqW0iWCKdfpAi/sCSRW43JNxu09EQETYQuX
+ InpJmj3kCcmtVzGwP6LdPTtIbTjo69o2DkqemN6J+OEnVjFtifTE1FT4Q
+ PF1jUp6GgFClDL6rSCgX++yHDawHKXfyC9ocZ1G0jLnHQ5GHkNvkvsGja
+ UCxgmKqRW1Ny43BuBVVFwMwFFG4unrQ/Z8geN7UKrB3sDku7C33f4O6wi g==;
+IronPort-SDR: qxRq72Lbk8v+kyvdNPbnhsLoaT2WBIAZvnEb7JKXKaNoRQXeb7XZSo4DbdYceSR4szf7hg/PwM
+ lhXFKdq025Nr/DaBZ8H8bBPCOgr/gowc+Lou3xdJ7VVXxyqUC/ZvWrDHIcKDrDewJohAVFmM/N
+ CSS0WEi+gqyOkLWWUx49XJtNADdOStwVveBVG57kQBE2HE9W0JckV2H1gch1HZih+EmRqa2wf5
+ cV5citXS/+aGgZ3J8XqQ+Iy2OT+rmErP1TUeZ5JP1zRAlY6z0Wbx4bE5piDS+xdCg/Um5pBQqt
+ c9A=
+X-IronPort-AV: E=Sophos;i="5.70,388,1574092800"; d="scan'208";a="128872427"
 Received: from h199-255-45-14.hgst.com (HELO uls-op-cesaep01.wdc.com)
  ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 01 Feb 2020 09:08:33 +0800
-IronPort-SDR: rBz1BYKFbPS1f3ILpzmrPAZvyDv4wIT7IlFC1xyMIVkzZvufxpZQQOHRVBgq3EILWJB+GCGF8o
- RXTOqVDM92OVWM//yp9+G6cXtx71Yii3aoeTNssx0LhPnuaqKDoWCOayfY7rSzAMVSyXvxWriO
- ghv9g4ewZSSbdmpLXxvjmiZBL0mTwuamcVUU74/JczRAVWdC5em/1u6wFtFdYPCO2b6wizPkuG
- DaQ993Wjkgt7v3xdLIqG69/e7yDd+Lyi/wPuhFj6TGYOwot4fNnJTGfk/x7wKFoH3MrLsXQyBK
- A3r8fHLCWUIoIh17u/uQjVkA
-Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
+ by ob1.hgst.iphmx.com with ESMTP; 01 Feb 2020 09:08:35 +0800
+IronPort-SDR: Q3tNeCmW15mC5eHAxvJsvbshVuyvy/bzYLPBw/tqRw/zDoeAmyrBDVaX4FR7rguD4bfilZKPNC
+ 6vBNPIbcMOXMw2hnuWO+KobJx4KjmPeSeeih+roBbhyxg6bnEuDBlo4OCof1MIuQS6XavT3iCF
+ 56v7SIN0KHb31o6CNgxLFXpeRRUk6THhFDEpxXN559+/Hq5uQhWiFDRQU2OE1xQb3NFu/4+kty
+ NFumkQHWJ9UTdGWpCSgDL1u51rABFbhHido+lipLaLep2ZnUrlqh8avbOK9tp9piy4OvFIIUVx
+ SyrGTOF3M4sggavEVcw6gsdZ
+Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
  by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 31 Jan 2020 17:01:42 -0800
-IronPort-SDR: +E+ewVnSIc0LQHYZH2IZZkWoLvi/273mf4ESsbMWXG5WMp4lENOiawL9/lZuUVdgo5q+3Gpzg7
- +yy+Nty10AUL+w4SEsgY0clcD+n3hjsNYJQP+QjbbRH4YFsCBs/tC/TwGeNbwKntTFzvqLSVp0
- VbeM8D8WBSJeTUAvunVGGGaSBVB/EBNhux2nYKxSDTgsr0f2hmBP8t9dWxatI0hLLMPOE2Tald
- okjYRAYKotc+K7Dwk0c1olDJLoOZD/AWEyhcCdgSGr2xxgGWo9p/IiSvY6KHCgDRXPRQOff83L
- 9UE=
+ 31 Jan 2020 17:01:44 -0800
+IronPort-SDR: muiTzIm4QTnPJYD1EBSURe4sHDPC0n2wGUrYbiH0Y5J7/PyWueStEkul0U+EebsRTk14CZSHb4
+ AJfLFJ0Hjve1gbZ4sQof0q7f8AqayVBKIMi946pIHi/MMqH3tFG0M/mNfVZw26wnsO+ZGVvFme
+ btwQxc9/kOjmXzKR5x5x9vYS+ZyoSDgE7c2cU/rsmYg5FRxgQUKeDz02taMYPphg0UvnN5xrOe
+ dckadRf/QEJhAuhLBbYUKf3y/0nc4GBeIbAYpuS1/6v96AyOA56Bc0bzI6TjU8ILhuahJY+/bh
+ uis=
 WDCIronportException: Internal
 Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
  risc6-mainframe.int.fusionio.com) ([10.196.158.235])
- by uls-op-cesaip01.wdc.com with ESMTP; 31 Jan 2020 17:08:33 -0800
+ by uls-op-cesaip02.wdc.com with ESMTP; 31 Jan 2020 17:08:36 -0800
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: palmer@dabbelt.com,
 	alistair.francis@wdc.com,
 	alistair23@gmail.com
-Subject: [PATCH v2 08/35] target/riscv: Fix CSR perm checking for HS mode
-Date: Fri, 31 Jan 2020 17:01:56 -0800
-Message-Id: <a7101c563ccc9f6a0999dac69adfe09d59e1af5f.1580518859.git.alistair.francis@wdc.com>
+Subject: [PATCH v2 09/35] target/riscv: Print priv and virt in disas log
+Date: Fri, 31 Jan 2020 17:01:59 -0800
+Message-Id: <30e4366934ba648c0a46b46fb406d32d66cc1734.1580518859.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.25.0
 In-Reply-To: <cover.1580518859.git.alistair.francis@wdc.com>
 References: <cover.1580518859.git.alistair.francis@wdc.com>
@@ -79,48 +79,34 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 01 Feb 2020 01:08:38 -0000
-
-Update the CSR permission checking to work correctly when we are in
-HS-mode.
+X-List-Received-Date: Sat, 01 Feb 2020 01:08:42 -0000
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Palmer Dabbelt <palmerdabbelt@google.com>
+Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
 ---
- target/riscv/csr.c | 18 ++++++++++++++----
- 1 file changed, 14 insertions(+), 4 deletions(-)
+ target/riscv/translate.c | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index ca27359c7e..c63b2f980c 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -801,12 +801,22 @@ int riscv_csrrw(CPURISCVState *env, int csrno, target_ulong *ret_value,
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index 14dc71156b..afa2d6eea2 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -808,7 +808,15 @@ static void riscv_tr_tb_stop(DisasContextBase *dcbase, CPUState *cpu)
  
-     /* check privileges and return -1 if check fails */
- #if !defined(CONFIG_USER_ONLY)
--    int csr_priv = get_field(csrno, 0x300);
-+    int effective_priv = env->priv;
-     int read_only = get_field(csrno, 0xC00) == 3;
--    if ((!env->debugger) && (env->priv < csr_priv)) {
--        return -1;
+ static void riscv_tr_disas_log(const DisasContextBase *dcbase, CPUState *cpu)
+ {
++#ifndef CONFIG_USER_ONLY
++    RISCVCPU *rvcpu = RISCV_CPU(cpu);
++    CPURISCVState *env = &rvcpu->env;
++#endif
 +
-+    if (riscv_has_ext(env, RVH) &&
-+        env->priv == PRV_S &&
-+        !riscv_cpu_virt_enabled(env)) {
-+        /*
-+         * We are in S mode without virtualisation, therefore we are in HS Mode.
-+         * Add 1 to the effective privledge level to allow us to access the
-+         * Hypervisor CSRs.
-+         */
-+        effective_priv++;
-     }
--    if (write_mask && read_only) {
-+
-+    if ((write_mask && read_only) ||
-+        (!env->debugger && (effective_priv < get_field(csrno, 0x300)))) {
-         return -1;
-     }
- #endif
+     qemu_log("IN: %s\n", lookup_symbol(dcbase->pc_first));
++#ifndef CONFIG_USER_ONLY
++    qemu_log("Priv: "TARGET_FMT_ld"; Virt: "TARGET_FMT_ld"\n", env->priv, env->virt);
++#endif
+     log_target_disas(cpu, dcbase->pc_first, dcbase->tb->size);
+ }
+ 
 -- 
 2.25.0
 
