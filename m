@@ -1,66 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ixhHD-0001WC-2K
-	for mharc-qemu-riscv@gnu.org; Fri, 31 Jan 2020 20:08:47 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:56709)
+	id 1ixhHE-0001bY-Uo
+	for mharc-qemu-riscv@gnu.org; Fri, 31 Jan 2020 20:08:48 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:56732)
  by lists.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <prvs=2939926b3=alistair.francis@wdc.com>)
- id 1ixhHA-0001P2-Bv
- for qemu-riscv@nongnu.org; Fri, 31 Jan 2020 20:08:45 -0500
+ id 1ixhHC-0001Ub-FM
+ for qemu-riscv@nongnu.org; Fri, 31 Jan 2020 20:08:47 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
  (envelope-from <prvs=2939926b3=alistair.francis@wdc.com>)
- id 1ixhH9-0006GS-6V
- for qemu-riscv@nongnu.org; Fri, 31 Jan 2020 20:08:44 -0500
+ id 1ixhHB-0006HW-56
+ for qemu-riscv@nongnu.org; Fri, 31 Jan 2020 20:08:46 -0500
 Received: from esa4.hgst.iphmx.com ([216.71.154.42]:17129)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <prvs=2939926b3=alistair.francis@wdc.com>)
- id 1ixhH5-00069K-Ca; Fri, 31 Jan 2020 20:08:40 -0500
+ id 1ixhH7-00069K-Vu; Fri, 31 Jan 2020 20:08:42 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1580519319; x=1612055319;
+ t=1580519321; x=1612055321;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=qGd7qT32AdFg6ETX1x7TTJd0eMuZuc3r+atPCoHmT2M=;
- b=j66htQbcJl9HIAcQYzpKWF8Y5+gEFgWtr8hE1SK126SURVTxR32zyDFD
- RCz1O+tBBE3uf6rEDPNRw7W5ssi8T4JL5ufWA5jfv7Uxq0uZGXD16hidg
- YUlACg6AA67/rXV1ft5f2t3dOldiAAPlQkbfQ6g2t3U+jnYEJHeuuoEuu
- u8AVXTTBIuGy/7BnZP6bChBD/AHhNF2s50jSFSH/+Pb8dmKlpNYBlxE+n
- EQHvz7OIZPXIGA6PhpC0rFmvaeZ2jlSUut6n6NRr/8F4n3k+CNa2EXLRp
- raX8pBd20+k4SWR7N72cecrr2nR9Q+a7Iw56uZqFpl1F66R8W/4pqUD1C w==;
-IronPort-SDR: E+iN05315r6ly9k+DKPEh6aiEH0GICIRXyDeXQTf+kzCQy48JAetr2G0CIvAYn8mxn997Y8n48
- dkA8Gd1aCN/RrZahGk4C40Q208tFu5XndPnwccxu92z79sWJ+Dt7lgRfaD55xFpTqDythf4OMc
- pCmZp8+TnBEFLxB3W0O7vyIVetm1w3zn0kdlSyHtf0pDnJKbBQK/5cDiv/vr/79rjl86ZXfzxJ
- A1DLCv/VxbR7ivLlvnFjdQlfS8jONTro9/tVscJsCpx0JIKMsh3x57PALgO3K+H/BwiDUU2QId
- Spc=
-X-IronPort-AV: E=Sophos;i="5.70,388,1574092800"; d="scan'208";a="128872431"
+ bh=B9CW2D87kxG8sTRffNO4m7KGLxFdZPFGIXCinNvhpZM=;
+ b=c1zt23Wu8qr3PJDON2ZTc3XOg9OsJAeB0jypBO2KbL1/8pZtWA1frdnL
+ Pz6VfJdCmjiRqS5zfvB/aBp2v5OatU8gC2KvxGTp7NEHBlyqKfxokOBl2
+ 2OBHMiudcNtUFg5TVTvAhhr2QHj2jdxjTWRQK2VWFlWJawATliQ4ISwc/
+ ZFr5oj9pUB+aV0Lcp5YR94pZVAhO6+0TwMpsuc5ZPQQDX2u59gbDEKnfT
+ 0GfBWYH3XWtvSNAjXf1yuCQ5BoDaPSTcZaewfpUWEiC6ItNdzcp/uOPeS
+ qgNXWEr2jkIOOo3d+Nsz5EdGeyjPM3joTXGwYRVQG/UzJLs++/dEhcDoV Q==;
+IronPort-SDR: ttbJaCw+5e2VNZu+j8l9fzVhhZ7mlp6p0U8tV55lOL059rfuImugnZLbxcdUse7yHtOG4mHnRs
+ Cy477MHUpXqZrvlBoJss1n+ktQJAZDW/Mb4UBal15Mw40IexdhgDOOZ0LeO8T5lVRaqMRi+pwf
+ +gxbY9T/FPRmHyvxt7WvA3BQM+ognQqS0XjH50FrlbiwkNiH/zr70aFrCSH1aG0KmnwqMORhUG
+ q6Wq1ef4HhtjprwJmfoCJe92rfOW1IVOCY2A5PCrHhtIyDvP+C9gZAFLCM8QoJU7TjzsNfd8wS
+ jfE=
+X-IronPort-AV: E=Sophos;i="5.70,388,1574092800"; d="scan'208";a="128872433"
 Received: from h199-255-45-14.hgst.com (HELO uls-op-cesaep01.wdc.com)
  ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 01 Feb 2020 09:08:38 +0800
-IronPort-SDR: c0FrkWSiy4ljiqR8ciIo0OqqpBQrSA03qB8gEqywKDVPae6XUYBLjSyBDSJQ2SQhVPv7VU0X5J
- Xm5Sw78nQ+nDUacwTZJZ20LCUQmCgOFZX3ckOltnACwL51nz7c8q+CLP5ncmOzBtu81sYQYG8P
- yzz2VmfGqJUPwR6yyrft06u8Q04xQwZlSfVgiTc4QDwlEkSugc6QFB0Fk8ADix4K8gtIbYkM5D
- hTHyM3C+u29x8Ih/zX3C8xqijQIkz8d6/VzMHDGSQcAsFNJupdF40kNvqcpiKNm5uyzZsvEbrH
- iPFfrn4Uw5c1JoM+p1rvG7Fp
+ by ob1.hgst.iphmx.com with ESMTP; 01 Feb 2020 09:08:41 +0800
+IronPort-SDR: kx1ov1bH/yZRqiS+W3UN+8GGpaXTEK9BYucecjr7fNMMXU1yo6rorfV/IntvptAjazhDiMoVCX
+ mOMQ9ORk1XL0N23FJP/yTk/6EGpSYYtm/09ZTRaeaCnBcAbo4HpUE9vFcS4+aQAuBzx/qdUoxQ
+ 6UMRxx2kim2p286WVuFrm5zTdWUrSoRN1mdhdS3Y7mwe3ioxtDQUDg94zodB7fxaeW9b/hsyFy
+ C7OdjnlISZh76aZbcM6cGpZaH/UshohzT+UEUR6MInR2Pe27RnfXLHoFiXPzxZHwem5bwB3cSL
+ xhcTFYip3LFqDAkAVRQ8W6lI
 Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
  by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 31 Jan 2020 17:01:47 -0800
-IronPort-SDR: s043P9oOK3GOrB3H9HXgBrlaOg82m1YxLkCMDnjuyojzU6iFeVK5Rm7B6x1fkK1nYRCKqXDqtf
- N9BqhRaE4g6J7vru9ksxtHHVcHAaegRiVzGmXqE/TG4ZWdwvfNQOCsW9lQS6IBWKiLKLex8Sz3
- L21qjVKpQ2MoFhfcVzz5OGPDl+WwRafp3J/VskgJT9uuQN1nsFWtGrjhkNz4Zoko02vLSaqpHE
- y9kTGMmGt7RBwSJXYbFMdrQSccNoX3y7zLOovcoTX6h32orAR4/r/ZvViJRwsy33nyTUfy4y3i
- s/0=
+ 31 Jan 2020 17:01:49 -0800
+IronPort-SDR: TsEmG+Cy0SOkRuTOxTg7S5JpAPEgG+vG0QBL7Ix2DnkflX0Im7TqIsVEw8crGMxQZwl6uR7Rwe
+ u/pQyUHq6zgVRIphbjdl5tIigv70glTYvqTjSepKw9V8PxLDCec32p1Ywoe6iZnse4NVhDBvoU
+ O5npzyvXLvV/qbxiTDmB7i8LssxkkZrvOWg9JuZgsvnyEf32iB7tWMMrGvQjBK3WnsNlfK8n9j
+ J+qoaPYevU0lTdJcJTOSv2kBT0xmViC2Rqas9dhQl8XefTZG+fbpfshhjVGkiGA5ie2qdaQL9R
+ zeY=
 WDCIronportException: Internal
 Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
  risc6-mainframe.int.fusionio.com) ([10.196.158.235])
- by uls-op-cesaip02.wdc.com with ESMTP; 31 Jan 2020 17:08:39 -0800
+ by uls-op-cesaip02.wdc.com with ESMTP; 31 Jan 2020 17:08:41 -0800
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: palmer@dabbelt.com,
 	alistair.francis@wdc.com,
 	alistair23@gmail.com
-Subject: [PATCH v2 10/35] target/riscv: Dump Hypervisor registers if enabled
-Date: Fri, 31 Jan 2020 17:02:02 -0800
-Message-Id: <2549ce7b2a2646780b23200e11b4c072608e1ce0.1580518859.git.alistair.francis@wdc.com>
+Subject: [PATCH v2 11/35] target/riscv: Add Hypervisor CSR access functions
+Date: Fri, 31 Jan 2020 17:02:04 -0800
+Message-Id: <5407d42e2e32b76f6f2fe7731f48c28f80cbd026.1580518859.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.25.0
 In-Reply-To: <cover.1580518859.git.alistair.francis@wdc.com>
 References: <cover.1580518859.git.alistair.francis@wdc.com>
@@ -79,74 +79,189 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 01 Feb 2020 01:08:45 -0000
-
-Dump the Hypervisor registers and the current Hypervisor state.
-
-While we are editing this code let's also dump stvec and scause.
+X-List-Received-Date: Sat, 01 Feb 2020 01:08:48 -0000
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-Signed-off-by: Atish Patra <atish.patra@wdc.com>
-Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
+Reviewed-by: Palmer Dabbelt <palmerdabbelt@google.com>
 ---
- target/riscv/cpu.c | 33 +++++++++++++++++++++++++++++++++
- 1 file changed, 33 insertions(+)
+ target/riscv/csr.c | 136 ++++++++++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 134 insertions(+), 2 deletions(-)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index f7a35c74c2..44ad768a84 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -228,17 +228,50 @@ static void riscv_cpu_dump_state(CPUState *cs, FILE *f, int flags)
-     CPURISCVState *env = &cpu->env;
-     int i;
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index c63b2f980c..bee639e92e 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -98,6 +98,20 @@ static int smode(CPURISCVState *env, int csrno)
+     return -!riscv_has_ext(env, RVS);
+ }
  
-+#if !defined(CONFIG_USER_ONLY)
-+    if (riscv_has_ext(env, RVH)) {
-+        qemu_fprintf(f, " %s %d\n", "V      =  ", riscv_cpu_virt_enabled(env));
++static int hmode(CPURISCVState *env, int csrno)
++{
++    if (riscv_has_ext(env, RVS) &&
++        riscv_has_ext(env, RVH)) {
++        /* Hypervisor extension is supported */
++        if ((env->priv == PRV_S && !riscv_cpu_virt_enabled(env)) ||
++            env->priv == PRV_M) {
++            return 0;
++        }
 +    }
-+#endif
-     qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "pc      ", env->pc);
- #ifndef CONFIG_USER_ONLY
-     qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mhartid ", env->mhartid);
-     qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mstatus ", env->mstatus);
-+    if (riscv_has_ext(env, RVH)) {
-+        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "hstatus ", env->hstatus);
-+        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "vsstatus ", env->vsstatus);
-+    }
-     qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mip     ", env->mip);
-     qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mie     ", env->mie);
-     qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mideleg ", env->mideleg);
-+    if (riscv_has_ext(env, RVH)) {
-+        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "hideleg ", env->hideleg);
-+    }
-     qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "medeleg ", env->medeleg);
-+    if (riscv_has_ext(env, RVH)) {
-+        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "hedeleg ", env->hedeleg);
-+    }
-     qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mtvec   ", env->mtvec);
-+    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "stvec   ", env->stvec);
-+    if (riscv_has_ext(env, RVH)) {
-+        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "vstvec  ", env->vstvec);
-+    }
-     qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mepc    ", env->mepc);
-+    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "sepc    ", env->sepc);
-+    if (riscv_has_ext(env, RVH)) {
-+        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "vsepc   ", env->vsepc);
-+    }
-     qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mcause  ", env->mcause);
-+    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "scause  ", env->scause);
-+    if (riscv_has_ext(env, RVH)) {
-+        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "vscause ", env->vscause);
-+    }
-+    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mtval ", env->mtval);
-+    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "stval ", env->sbadaddr);
-+    if (riscv_has_ext(env, RVH)) {
-+        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "htval ", env->htval);
-+        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mtval2 ", env->mtval2);
-+    }
- #endif
++
++    return -1;
++}
++
+ static int pmp(CPURISCVState *env, int csrno)
+ {
+     return -!riscv_feature(env, RISCV_FEATURE_PMP);
+@@ -226,8 +240,9 @@ static int read_timeh(CPURISCVState *env, int csrno, target_ulong *val)
  
-     for (i = 0; i < 32; i++) {
+ /* Machine constants */
+ 
+-#define M_MODE_INTERRUPTS (MIP_MSIP | MIP_MTIP | MIP_MEIP)
+-#define S_MODE_INTERRUPTS (MIP_SSIP | MIP_STIP | MIP_SEIP)
++#define M_MODE_INTERRUPTS  (MIP_MSIP | MIP_MTIP | MIP_MEIP)
++#define S_MODE_INTERRUPTS  (MIP_SSIP | MIP_STIP | MIP_SEIP)
++#define VS_MODE_INTERRUPTS (MIP_VSSIP | MIP_VSTIP | MIP_VSEIP)
+ 
+ static const target_ulong delegable_ints = S_MODE_INTERRUPTS;
+ static const target_ulong all_ints = M_MODE_INTERRUPTS | S_MODE_INTERRUPTS;
+@@ -257,6 +272,7 @@ static const target_ulong sstatus_v1_10_mask = SSTATUS_SIE | SSTATUS_SPIE |
+     SSTATUS_UIE | SSTATUS_UPIE | SSTATUS_SPP | SSTATUS_FS | SSTATUS_XS |
+     SSTATUS_SUM | SSTATUS_MXR | SSTATUS_SD;
+ static const target_ulong sip_writable_mask = SIP_SSIP | MIP_USIP | MIP_UEIP;
++static const target_ulong hip_writable_mask = MIP_VSSIP | MIP_VSTIP | MIP_VSEIP;
+ 
+ #if defined(TARGET_RISCV32)
+ static const char valid_vm_1_09[16] = {
+@@ -756,6 +772,112 @@ static int write_satp(CPURISCVState *env, int csrno, target_ulong val)
+     return 0;
+ }
+ 
++/* Hypervisor Extensions */
++static int read_hstatus(CPURISCVState *env, int csrno, target_ulong *val)
++{
++    *val = env->hstatus;
++    return 0;
++}
++
++static int write_hstatus(CPURISCVState *env, int csrno, target_ulong val)
++{
++    env->hstatus = val;
++    return 0;
++}
++
++static int read_hedeleg(CPURISCVState *env, int csrno, target_ulong *val)
++{
++    *val = env->hedeleg;
++    return 0;
++}
++
++static int write_hedeleg(CPURISCVState *env, int csrno, target_ulong val)
++{
++    env->hedeleg = val;
++    return 0;
++}
++
++static int read_hideleg(CPURISCVState *env, int csrno, target_ulong *val)
++{
++    *val = env->hideleg;
++    return 0;
++}
++
++static int write_hideleg(CPURISCVState *env, int csrno, target_ulong val)
++{
++    env->hideleg = val;
++    return 0;
++}
++
++static int rmw_hip(CPURISCVState *env, int csrno, target_ulong *ret_value,
++                   target_ulong new_value, target_ulong write_mask)
++{
++    int ret = rmw_mip(env, 0, ret_value, new_value,
++                      write_mask & hip_writable_mask);
++
++    return ret;
++}
++
++static int read_hie(CPURISCVState *env, int csrno, target_ulong *val)
++{
++    *val = env->mie & VS_MODE_INTERRUPTS;
++    return 0;
++}
++
++static int write_hie(CPURISCVState *env, int csrno, target_ulong val)
++{
++    target_ulong newval = (env->mie & ~VS_MODE_INTERRUPTS) | (val & VS_MODE_INTERRUPTS);
++    return write_mie(env, CSR_MIE, newval);
++}
++
++static int read_hcounteren(CPURISCVState *env, int csrno, target_ulong *val)
++{
++    *val = env->hcounteren;
++    return 0;
++}
++
++static int write_hcounteren(CPURISCVState *env, int csrno, target_ulong val)
++{
++    env->hcounteren = val;
++    return 0;
++}
++
++static int read_htval(CPURISCVState *env, int csrno, target_ulong *val)
++{
++    *val = env->htval;
++    return 0;
++}
++
++static int write_htval(CPURISCVState *env, int csrno, target_ulong val)
++{
++    env->htval = val;
++    return 0;
++}
++
++static int read_htinst(CPURISCVState *env, int csrno, target_ulong *val)
++{
++    *val = env->htinst;
++    return 0;
++}
++
++static int write_htinst(CPURISCVState *env, int csrno, target_ulong val)
++{
++    env->htinst = val;
++    return 0;
++}
++
++static int read_hgatp(CPURISCVState *env, int csrno, target_ulong *val)
++{
++    *val = env->hgatp;
++    return 0;
++}
++
++static int write_hgatp(CPURISCVState *env, int csrno, target_ulong val)
++{
++    env->hgatp = val;
++    return 0;
++}
++
+ /* Physical Memory Protection */
+ static int read_pmpcfg(CPURISCVState *env, int csrno, target_ulong *val)
+ {
+@@ -959,6 +1081,16 @@ static riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+     /* Supervisor Protection and Translation */
+     [CSR_SATP] =                { smode, read_satp,        write_satp        },
+ 
++    [CSR_HSTATUS] =             { hmode,   read_hstatus,     write_hstatus    },
++    [CSR_HEDELEG] =             { hmode,   read_hedeleg,     write_hedeleg    },
++    [CSR_HIDELEG] =             { hmode,   read_hideleg,     write_hideleg    },
++    [CSR_HIP] =                 { hmode,   NULL,     NULL,     rmw_hip        },
++    [CSR_HIE] =                 { hmode,   read_hie,         write_hie        },
++    [CSR_HCOUNTEREN] =          { hmode,   read_hcounteren,  write_hcounteren },
++    [CSR_HTVAL] =               { hmode,   read_htval,       write_htval      },
++    [CSR_HTINST] =              { hmode,   read_htinst,      write_htinst     },
++    [CSR_HGATP] =               { hmode,   read_hgatp,       write_hgatp      },
++
+     /* Physical Memory Protection */
+     [CSR_PMPCFG0  ... CSR_PMPADDR9] =  { pmp,   read_pmpcfg,  write_pmpcfg   },
+     [CSR_PMPADDR0 ... CSR_PMPADDR15] = { pmp,   read_pmpaddr, write_pmpaddr  },
 -- 
 2.25.0
 
