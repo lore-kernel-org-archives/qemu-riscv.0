@@ -1,66 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ixhH5-00019d-3H
-	for mharc-qemu-riscv@gnu.org; Fri, 31 Jan 2020 20:08:39 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:56636)
+	id 1ixhH7-0001Fh-9a
+	for mharc-qemu-riscv@gnu.org; Fri, 31 Jan 2020 20:08:41 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:56650)
  by lists.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <prvs=2939926b3=alistair.francis@wdc.com>)
- id 1ixhH2-00011e-5f
- for qemu-riscv@nongnu.org; Fri, 31 Jan 2020 20:08:37 -0500
+ id 1ixhH3-00015A-Do
+ for qemu-riscv@nongnu.org; Fri, 31 Jan 2020 20:08:38 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
  (envelope-from <prvs=2939926b3=alistair.francis@wdc.com>)
- id 1ixhH0-0006CK-4P
- for qemu-riscv@nongnu.org; Fri, 31 Jan 2020 20:08:36 -0500
+ id 1ixhH2-0006D5-Bu
+ for qemu-riscv@nongnu.org; Fri, 31 Jan 2020 20:08:37 -0500
 Received: from esa4.hgst.iphmx.com ([216.71.154.42]:17129)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <prvs=2939926b3=alistair.francis@wdc.com>)
- id 1ixhGx-00069K-Ek; Fri, 31 Jan 2020 20:08:31 -0500
+ id 1ixhH0-00069K-3X; Fri, 31 Jan 2020 20:08:34 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1580519311; x=1612055311;
+ t=1580519313; x=1612055313;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=S5ikj43BW09W7DpWY91HdhEmZ2Szq/7wkspRnDe8aKg=;
- b=P1t6gI6/ntKlAlf1cTecKc3GFyq4nrIZsjoErDAFkd6AJIUdjbocElVh
- U+Bt4q7yk2UkMJ0VzzBhzUvH60vb9hm0lE/wid8A7OlP4bd1b6U1PaHkj
- 1pSqHHbQbE/rtwXcanyHwxFOxuwytxagykVx6gTleeUKdxd5Z/YlaIdKb
- iVmIcrUpeuQC/X1W3kw1GJOutGQRPGEJan4FkGi3y5NJYyGaMGHwHqQOX
- IWLz7NnwPu38OhvwN2DuzICNivtMYVjrhIKhy6pEWncy0N4HDRPrJj0Fw
- hvUv3vfBVpnmV07nV6oTfSXGZK8hsos3AkZNNbDBTjiwkaCwxkaKTjdOF A==;
-IronPort-SDR: 1+iZG5YcJB2GsKBow70vEOihcCmyi3h7lc4BtFLPE65r8Fz9HCPGg+uDQyLZgpbdr4LeR0IFJa
- llBhacrBLyErhHhiOfne49ELFRyO1r1ckboAYG/uNMOH8ZYJbq6IHRxkgSFWvi9U7KoNo6nfWd
- E4LyHB1HLiMvn5EiZgaBL8A4n0xaPUZRGlc+UNYwL5d/RLdTVWacboghTlJQDNhNF23IcrnJAn
- buZVg2Lr6+nHbkVY4g1uWOIcygWa6w6Svwkq/QRU5UHzz3EdMA7qGQJLdcUPFyaqTI9+g47Riw
- xZ0=
-X-IronPort-AV: E=Sophos;i="5.70,388,1574092800"; d="scan'208";a="128872410"
+ bh=cmLzQpUoUHVRHXGrA7b8U45rElR7fLzQ2/9P3hAehNM=;
+ b=VLSo/fu9yJx7GqQUucu121MkbLw2c0diqseVYUMTGf691HCkd3BliMtz
+ EbDaqeg7DWox9aqeeXT+B3IT9koLjKW3sQM1H7TOkF+KLjckgOf9Zw7bE
+ deJRPyLLH2M7Tnh71vAZAsWRG89KoP52YGcJBJA2/7wweycGxljNK3sMH
+ 3TsqnASLwSTgPYEPZp1WtMliXIAIlIxlCot1rua1JaOr6ElwFkclULQkk
+ SvozSFKGlZieTzc99IJuBtymnowLzszHQRv0in/KYh8HLTPANB6/87mMW
+ kOiFjVdiDV+pTXQkQM9sV5P9zQ8pxR5dVb/CnngLWZ/Oag9QlOe4ctzAF A==;
+IronPort-SDR: x3x5BpWiR1aBk9v98dn5z9kf3JnoXGY2QJsbEixXJdoFy//t8227XNUFjyhSrpridTYz8VeWCe
+ vDfn7Ix1t2g29zjcxnZPRNpgnss0fZmpllMvrRMcANDa7bjuStCqol1m8tbGuNYWflki//l3cA
+ FgfFqH66kei1CxLs2bTjHVv36ylOZVJeGc5ZIrEjZPFHChLMIVi3ubMDwS9rr0hHhOwj9CySMD
+ KcxWG3KfIaY8lbPyZxPFqAwQrjDsprdI9voi65xCkiModh0rCF/bPAVduSArtUdVUCgO09IRjT
+ VXQ=
+X-IronPort-AV: E=Sophos;i="5.70,388,1574092800"; d="scan'208";a="128872422"
 Received: from h199-255-45-14.hgst.com (HELO uls-op-cesaep01.wdc.com)
  ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 01 Feb 2020 09:08:30 +0800
-IronPort-SDR: 86F3ub2aInJaH7mA/oCkW8HHixJhcvuagzydjN/1oFXOlkxEJivFUuLRNhtpXU1LpkNVTB8f5l
- 94mlfh77y5ftqgSMrA5LO/HKKhInz/JCfGhXm9IwhmbxsyntU3xJvU7JU13Kj033ZV9K1b7awX
- Yyh3HC7lwfr2jr8NU/8W2MhJPuelESLdmrlAdWssvaj5ehE1kVsDKYUFNI+rxvHScph9R5mfXg
- QD2TRA7ytSgVyv0YSIVMFSRirYJYtNlx0jvE+a87RTkEh5m7OX/IN86ekNmHbgzVnI9nVc0Mds
- WvfvlQ1GeCIlZ97uNh4ClmzE
-Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
+ by ob1.hgst.iphmx.com with ESMTP; 01 Feb 2020 09:08:33 +0800
+IronPort-SDR: rBz1BYKFbPS1f3ILpzmrPAZvyDv4wIT7IlFC1xyMIVkzZvufxpZQQOHRVBgq3EILWJB+GCGF8o
+ RXTOqVDM92OVWM//yp9+G6cXtx71Yii3aoeTNssx0LhPnuaqKDoWCOayfY7rSzAMVSyXvxWriO
+ ghv9g4ewZSSbdmpLXxvjmiZBL0mTwuamcVUU74/JczRAVWdC5em/1u6wFtFdYPCO2b6wizPkuG
+ DaQ993Wjkgt7v3xdLIqG69/e7yDd+Lyi/wPuhFj6TGYOwot4fNnJTGfk/x7wKFoH3MrLsXQyBK
+ A3r8fHLCWUIoIh17u/uQjVkA
+Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
  by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 31 Jan 2020 17:01:39 -0800
-IronPort-SDR: NDA60NNVOTYqjShnHlAStl+fjUFnXwfBfhE/VLx8JLrMwhVAYEdoJZ+6hO1Sou7GgEQ/X1i2lE
- AYKiMxTZdcDAO8ePr55Fy1RI1eqxb59aI18eMr7OTiSBGikSFPKPAjYDTJw090tjwh+TN4rzLA
- 7Xx89rvFtALnD7/uxehuAK25ltce9CMyS41kb0DlLB4TJka/BD0f+DSAVNoigFx0Pw8XcUuL7Y
- FE2Dk9VUKkxEuqD3N9j3u2AvAkNn4ThinE04yk7HWRoVllRBLjvTSnXTJ6FSeQw60wRPKm//GV
- f2k=
+ 31 Jan 2020 17:01:42 -0800
+IronPort-SDR: +E+ewVnSIc0LQHYZH2IZZkWoLvi/273mf4ESsbMWXG5WMp4lENOiawL9/lZuUVdgo5q+3Gpzg7
+ +yy+Nty10AUL+w4SEsgY0clcD+n3hjsNYJQP+QjbbRH4YFsCBs/tC/TwGeNbwKntTFzvqLSVp0
+ VbeM8D8WBSJeTUAvunVGGGaSBVB/EBNhux2nYKxSDTgsr0f2hmBP8t9dWxatI0hLLMPOE2Tald
+ okjYRAYKotc+K7Dwk0c1olDJLoOZD/AWEyhcCdgSGr2xxgGWo9p/IiSvY6KHCgDRXPRQOff83L
+ 9UE=
 WDCIronportException: Internal
 Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
  risc6-mainframe.int.fusionio.com) ([10.196.158.235])
- by uls-op-cesaip02.wdc.com with ESMTP; 31 Jan 2020 17:08:31 -0800
+ by uls-op-cesaip01.wdc.com with ESMTP; 31 Jan 2020 17:08:33 -0800
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: palmer@dabbelt.com,
 	alistair.francis@wdc.com,
 	alistair23@gmail.com
-Subject: [PATCH v2 07/35] target/riscv: Add the force HS exception mode
-Date: Fri, 31 Jan 2020 17:01:54 -0800
-Message-Id: <aa605609b28f811897f61d9b6a48f2ad6e396f0f.1580518859.git.alistair.francis@wdc.com>
+Subject: [PATCH v2 08/35] target/riscv: Fix CSR perm checking for HS mode
+Date: Fri, 31 Jan 2020 17:01:56 -0800
+Message-Id: <a7101c563ccc9f6a0999dac69adfe09d59e1af5f.1580518859.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.25.0
 In-Reply-To: <cover.1580518859.git.alistair.francis@wdc.com>
 References: <cover.1580518859.git.alistair.francis@wdc.com>
@@ -79,79 +79,48 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 01 Feb 2020 01:08:37 -0000
+X-List-Received-Date: Sat, 01 Feb 2020 01:08:38 -0000
 
-Add a FORCE_HS_EXCEP mode to the RISC-V virtulisation status. This bit
-specifies if an exeption should be taken to HS mode no matter the
-current delegation status. This is used when an exeption must be taken
-to HS mode, such as when handling interrupts.
+Update the CSR permission checking to work correctly when we are in
+HS-mode.
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Palmer Dabbelt <palmerdabbelt@google.com>
 ---
- target/riscv/cpu.h        |  2 ++
- target/riscv/cpu_bits.h   |  6 ++++++
- target/riscv/cpu_helper.c | 18 ++++++++++++++++++
- 3 files changed, 26 insertions(+)
+ target/riscv/csr.c | 18 ++++++++++++++----
+ 1 file changed, 14 insertions(+), 4 deletions(-)
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index a9cbd8584e..42720d65f9 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -273,6 +273,8 @@ bool riscv_cpu_exec_interrupt(CPUState *cs, int interrupt_request);
- bool riscv_cpu_fp_enabled(CPURISCVState *env);
- bool riscv_cpu_virt_enabled(CPURISCVState *env);
- void riscv_cpu_set_virt_enabled(CPURISCVState *env, bool enable);
-+bool riscv_cpu_force_hs_excep_enabled(CPURISCVState *env);
-+void riscv_cpu_set_force_hs_excep(CPURISCVState *env, bool enable);
- int riscv_cpu_mmu_index(CPURISCVState *env, bool ifetch);
- hwaddr riscv_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
- void  riscv_cpu_do_unaligned_access(CPUState *cs, vaddr addr,
-diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-index 2cdb0de4fe..ad6479796c 100644
---- a/target/riscv/cpu_bits.h
-+++ b/target/riscv/cpu_bits.h
-@@ -432,6 +432,12 @@
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index ca27359c7e..c63b2f980c 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -801,12 +801,22 @@ int riscv_csrrw(CPURISCVState *env, int csrno, target_ulong *ret_value,
  
- /* Virtulisation Register Fields */
- #define VIRT_ONOFF          1
-+/* This is used to save state for when we take an exception. If this is set
-+ * that means that we want to force a HS level exception (no matter what the
-+ * delegation is set to). This will occur for things such as a second level
-+ * page table fault.
-+ */
-+#define FORCE_HS_EXCEP      2
- 
- /* RV32 satp CSR field masks */
- #define SATP32_MODE         0x80000000
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 5844e543f3..1e28103500 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -100,6 +100,24 @@ void riscv_cpu_set_virt_enabled(CPURISCVState *env, bool enable)
-     env->virt = set_field(env->virt, VIRT_ONOFF, enable);
- }
- 
-+bool riscv_cpu_force_hs_excep_enabled(CPURISCVState *env)
-+{
-+    if (!riscv_has_ext(env, RVH)) {
-+        return false;
-+    }
+     /* check privileges and return -1 if check fails */
+ #if !defined(CONFIG_USER_ONLY)
+-    int csr_priv = get_field(csrno, 0x300);
++    int effective_priv = env->priv;
+     int read_only = get_field(csrno, 0xC00) == 3;
+-    if ((!env->debugger) && (env->priv < csr_priv)) {
+-        return -1;
 +
-+    return get_field(env->virt, FORCE_HS_EXCEP);
-+}
++    if (riscv_has_ext(env, RVH) &&
++        env->priv == PRV_S &&
++        !riscv_cpu_virt_enabled(env)) {
++        /*
++         * We are in S mode without virtualisation, therefore we are in HS Mode.
++         * Add 1 to the effective privledge level to allow us to access the
++         * Hypervisor CSRs.
++         */
++        effective_priv++;
+     }
+-    if (write_mask && read_only) {
 +
-+void riscv_cpu_set_force_hs_excep(CPURISCVState *env, bool enable)
-+{
-+    if (!riscv_has_ext(env, RVH)) {
-+        return;
-+    }
-+
-+    env->virt = set_field(env->virt, FORCE_HS_EXCEP, enable);
-+}
-+
- int riscv_cpu_claim_interrupts(RISCVCPU *cpu, uint32_t interrupts)
- {
-     CPURISCVState *env = &cpu->env;
++    if ((write_mask && read_only) ||
++        (!env->debugger && (effective_priv < get_field(csrno, 0x300)))) {
+         return -1;
+     }
+ #endif
 -- 
 2.25.0
 
