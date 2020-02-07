@@ -1,121 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1j0857-0003kF-Dw
-	for mharc-qemu-riscv@gnu.org; Fri, 07 Feb 2020 13:10:21 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:50852)
+	id 1j08px-0001De-60
+	for mharc-qemu-riscv@gnu.org; Fri, 07 Feb 2020 13:58:45 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:57558)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <laurent@vivier.eu>) id 1j0854-0003fF-TY
- for qemu-riscv@nongnu.org; Fri, 07 Feb 2020 13:10:20 -0500
+ (envelope-from <robert.foley@linaro.org>) id 1j06a9-0008E7-3w
+ for qemu-riscv@nongnu.org; Fri, 07 Feb 2020 11:34:18 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <laurent@vivier.eu>) id 1j0853-0002Qz-Qf
- for qemu-riscv@nongnu.org; Fri, 07 Feb 2020 13:10:18 -0500
-Received: from mout.kundenserver.de ([217.72.192.75]:56251)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <laurent@vivier.eu>)
- id 1j084u-00025W-OY; Fri, 07 Feb 2020 13:10:08 -0500
-Received: from [192.168.100.1] ([78.238.229.36]) by mrelayeu.kundenserver.de
- (mreue108 [213.165.67.119]) with ESMTPSA (Nemesis) id
- 1Mn2iP-1jPWUB3S5P-00k7iN; Fri, 07 Feb 2020 19:06:09 +0100
-Subject: Re: [PATCH v4 3/3] vl: Abort if multiple machines are registered as
- default
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>,
- qemu-devel@nongnu.org
-Cc: Aleksandar Rikalo <aleksandar.rikalo@rt-rk.com>,
- Guan Xuetao <gxt@mprc.pku.edu.cn>, qemu-ppc@nongnu.org,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- David Gibson <david@gibson.dropbear.id.au>,
- Christian Borntraeger <borntraeger@de.ibm.com>,
- Paolo Bonzini <pbonzini@redhat.com>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Eduardo Habkost <ehabkost@redhat.com>, Anthony Green <green@moxielogic.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Artyom Tarasenko <atar4qemu@gmail.com>, qemu-trivial@nongnu.org,
- Cornelia Huck <cohuck@redhat.com>, Aurelien Jarno <aurelien@aurel32.net>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>, qemu-riscv@nongnu.org,
- "Michael S. Tsirkin" <mst@redhat.com>,
- Aleksandar Markovic <amarkovic@wavecomp.com>, Marek Vasut <marex@denx.de>,
- Palmer Dabbelt <palmer@dabbelt.com>, Michael Walle <michael@walle.cc>,
- Halil Pasic <pasic@linux.ibm.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, qemu-s390x@nongnu.org,
- Richard Henderson <rth@twiddle.net>, Thomas Huth <huth@tuxfamily.org>,
- Magnus Damm <magnus.damm@gmail.com>, David Hildenbrand <david@redhat.com>,
- Chris Wulff <crwulff@gmail.com>, Stafford Horne <shorne@gmail.com>,
- Helge Deller <deller@gmx.de>, Alistair Francis <Alistair.Francis@wdc.com>,
- Jia Liu <proljc@gmail.com>, =?UTF-8?Q?Marc-Andr=c3=a9_Lureau?=
- <marcandre.lureau@gmail.com>
-References: <20200207161948.15972-1-philmd@redhat.com>
- <20200207161948.15972-4-philmd@redhat.com>
-From: Laurent Vivier <laurent@vivier.eu>
-Autocrypt: addr=laurent@vivier.eu; prefer-encrypt=mutual; keydata=
- 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
-Message-ID: <f8b5897f-c11f-0272-cac8-f63e12f3783e@vivier.eu>
-Date: Fri, 7 Feb 2020 19:05:58 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.3.1
+ (envelope-from <robert.foley@linaro.org>) id 1j06a4-00061c-Mm
+ for qemu-riscv@nongnu.org; Fri, 07 Feb 2020 11:34:17 -0500
+Received: from mail-lf1-x142.google.com ([2a00:1450:4864:20::142]:39727)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <robert.foley@linaro.org>)
+ id 1j06a4-0005zq-Cu
+ for qemu-riscv@nongnu.org; Fri, 07 Feb 2020 11:34:12 -0500
+Received: by mail-lf1-x142.google.com with SMTP id t23so1924014lfk.6
+ for <qemu-riscv@nongnu.org>; Fri, 07 Feb 2020 08:34:11 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=UTMAv6rzdbL/Zo/Vu84sRuIP+QwRS1wmkIfbvmMS5mk=;
+ b=ikBu6CjMl6UHMgytb/IwD31sOfq6VGwJow2chcXTKb/110Y5Hf3R3LBcPISGn6vmpV
+ +hN1d3zxiK+U9ZzRv3FnRTq57tuxOtsRv/KvoQFc5nMgjyWBo1NX8OUzuhHiZCqSBOZm
+ jwPHsZ1VMEiufB4JFMCVLpUjR31O4kClgI3HXvN9IeFBNdbmwKScwS+ISWyRQXuvGvyE
+ uvzEM4JwDaSQZuVmd+rTRy7pSFRbLwsXf2/VCrc9x86QNI5wnuxwFoTzwpI0H3d/Dv9T
+ 4LDg5da8L5AnBjEcz3S1dOSEFNOOgVfBJa6AFIarWNRJo7emcDaqkvb2U+dIVYFnQ6j/
+ EEag==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=UTMAv6rzdbL/Zo/Vu84sRuIP+QwRS1wmkIfbvmMS5mk=;
+ b=kRWVQkxeSLt83z/G7rT5HJortcPndzvpFIR8D6sBVjooL7A0rMxgrHJxcaQo6+LrPN
+ Gl3c0Jc5BB+t+8VSP6eMWcg4IUx4zCjwykShgysvDh/R5R2wZ8JDWNQAl5KIrFbwJ9Xy
+ yPeuSyljvV7f/79ey8FW4tKuWa0NRYxfEsv/Urs/y5NsTGT4FRbZ+1FhHLCzRpZ+4Rvy
+ 6KUvHi/b799fCrUc+kV+dt4ufyE/EkqgJIZKD6zTVZD04/yMi075BIO9aq4cnh4GFjFP
+ /LCbNepJgn4IuBA7wqMkmvNeM0WSlEQ25GAOHRvyxvYE0ro9yEDxA/Z95Atpd7ZuXz21
+ RK5w==
+X-Gm-Message-State: APjAAAVQwmeV4xMQMDocKC6pFF/TL58Vr+Y0pLTifME4Aay+5UcXdgv/
+ hfp38i36VD7RP+VzxG8/5h45iT2iVO0YTxxu0gSdTg==
+X-Google-Smtp-Source: APXvYqwLqn35kITPXh8/Ln+qXZaWC5KJKa+p7VWWFCUl1JhowP5FJFKwJWzksmgdoxXlemw9ODDAWfdJTICII5gHWLc=
+X-Received: by 2002:a19:6445:: with SMTP id b5mr4848227lfj.187.1581093250498; 
+ Fri, 07 Feb 2020 08:34:10 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <20200207161948.15972-4-philmd@redhat.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: fr
-Content-Transfer-Encoding: 8bit
-X-Provags-ID: V03:K1:DEDuIkX6UTzl0UIsKYz9L2Bxi66PAdlc/VZ1uyo5ezk6RL6Uz6x
- otK8AEVbV8hr8cRlhAOB94M2/g6+zaHzwHOsCx2dRaZYdMbHukGSWvE1LZDuUqRSOvBe73p
- QJK99PcVsvvvX71VEJVc5FaXAihGPg29I3BiEXk2Fa0K1sVX47hM3a7GB8k2Ivyh19/kErx
- OhgfgljBD9gKaOD+VvnBA==
-X-UI-Out-Filterresults: notjunk:1;V03:K0:cDzOnH2VS0Y=:ZzTSstoTh6yNBdM0xm+NTb
- q3PUr3hM2yQtMt4GhUyGHLKcTV+GWEMBjFR3Z4VQWKVr1Ov5LFQbpSiVjaWSNsg3J72dGD51U
- dvFrmd8xORHkEw9D5VD4WKK3TruF3KZx6psJqy0LzFtUmIO20I5cx+XVlHyvUNIQyrZUxEVfh
- iNvFORH8+HLL4sCinHZP7+hJP0VNnKwyEBUivTazsePEcfY9mMa5Hmd4bbQnZ4c35O9qD9mIx
- ThHdr/HgxUF//G/oseJw1pWKsfKPxmjZhKkpVxF8nTfamQzUNOGQ64BHXIo6iuWFDf5u3AJN/
- /1js3Jd6PqkCTwSSL92bwaCsGPVpLdk3r588FPA/31sP8r848h7NCgg1KqadMvlFOnptnvDR9
- qrcF7eD2uFSwuyaMrzCyZai2OZrjU3om0pGFnZ9HsxEezLssM6hY4vAi0gzfJKgfouevjr7ts
- uPaOAUjp3lQfYLSCvfCoS9cwrj9c2cYntS5tL71iyboUWxA1bcJ20EvjLs5W7gC53DyX2Eb0y
- TaRePhrkz6JBMB+Tcy55NVmjoodJQxjioCCbcOmF27JQ/lrHmBYpRLVLhoA/W0HRhkuw2OtYP
- SCQ8RzuTnMh7X3cpW8/8OqdqyZO9ypdRnb7qY6vH0uB6AsQ8yNKrhPuPePpy5P1nLQ8ibCz5S
- cO1eF6k5WV8SG6ySGJDLqLiQ+DZw0Q9/NHnsu9ru+LHgTh13X3uze+ReG0hWZ92JBzm2kk9We
- Qm0espPbEE+eSouHXwUYm/S1LNtJ49Ho8hksyaK5nIGyK7S+9PKhRgrc0TJgwkb9negUFormx
- tuRCDYPieR5sqUrVxzPj8Z8mp+VYnGBcADmQeXh0ay6DO+bZGgF12UehtWDHZHXcnYY/WqD
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
-X-Received-From: 217.72.192.75
+References: <20200207150118.23007-1-alex.bennee@linaro.org>
+ <20200207150118.23007-5-alex.bennee@linaro.org>
+In-Reply-To: <20200207150118.23007-5-alex.bennee@linaro.org>
+From: Robert Foley <robert.foley@linaro.org>
+Date: Fri, 7 Feb 2020 11:33:34 -0500
+Message-ID: <CAEyhzFuaDk6CCO72UD0vE9j+Eo=StnoEpWEg5iqOubGhdzXxag@mail.gmail.com>
+Subject: Re: [PATCH v1 4/5] target/riscv: progressively load the instruction
+ during decode
+To: =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>
+Cc: qemu-devel@nongnu.org, cota@braap.org, aaron@os.amperecomputing.com, 
+ Peter Puhov <peter.puhov@linaro.org>, kuhn.chenqun@huawei.com,
+ robhenry@microsoft.com, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
+ "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2a00:1450:4864:20::142
+X-Mailman-Approved-At: Fri, 07 Feb 2020 13:58:43 -0500
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -127,57 +75,123 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Feb 2020 18:10:20 -0000
+X-List-Received-Date: Fri, 07 Feb 2020 16:34:18 -0000
 
-Le 07/02/2020 à 17:19, Philippe Mathieu-Daudé a écrit :
-> It would be confusing to have multiple default machines.
-> Abort if this ever occurs.
-> 
-> Signed-off-by: Philippe Mathieu-Daudé <philmd@redhat.com>
-> ---
-> v2: Use assert() instead of human friendly message (Marc-André)
-> v3: Move the check to find_machine() (Michael)
-> 
-> Cc: Marc-André Lureau <marcandre.lureau@gmail.com>
-> Cc: Laurent Vivier <laurent@vivier.eu>
-> Cc: Michael S. Tsirkin <mst@redhat.com>
-> ---
->  vl.c | 6 ++++--
->  1 file changed, 4 insertions(+), 2 deletions(-)
-> 
-> diff --git a/vl.c b/vl.c
-> index 7dcb0879c4..ebc203af0d 100644
-> --- a/vl.c
-> +++ b/vl.c
-> @@ -1184,16 +1184,18 @@ static MachineClass *find_machine(const char *name, GSList *machines)
->  static MachineClass *find_default_machine(GSList *machines)
+Hi,
+On Fri, 7 Feb 2020 at 10:01, Alex Benn=C3=A9e <alex.bennee@linaro.org> wrot=
+e:
+> -static void decode_RV32_64C0(DisasContext *ctx)
+> +static void decode_RV32_64C0(DisasContext *ctx, uint16_t opcode)
 >  {
->      GSList *el;
-> +    MachineClass *default_machineclass = NULL;
->  
->      for (el = machines; el; el = el->next) {
->          MachineClass *mc = el->data;
->  
->          if (mc->is_default) {
-> -            return mc;
-> +            assert(default_machineclass == NULL && "Multiple default machines");
-> +            default_machineclass = mc;
+> -    uint8_t funct3 =3D extract32(ctx->opcode, 13, 3);
+> -    uint8_t rd_rs2 =3D GET_C_RS2S(ctx->opcode);
+> -    uint8_t rs1s =3D GET_C_RS1S(ctx->opcode);
+> +    uint8_t funct3 =3D extract32(opcode, 13, 3);
+
+We noticed that a uint16_t opcode is passed into this function and
+then passed on to extract32().
+This is a minor point, but the extract32() will validate the start and
+length values passed in according to 32 bits, not 16 bits.
+static inline uint32_t extract32(uint32_t value, int start, int length)
+{
+    assert(start >=3D 0 && length > 0 && length <=3D 32 - start);
+Since we have an extract32() and extract64(), maybe we could add an
+extract16() and use it here?
+
+Thanks & Regards,
+-Rob
+> +    uint8_t rd_rs2 =3D GET_C_RS2S(opcode);
+> +    uint8_t rs1s =3D GET_C_RS1S(opcode);
+>
+>      switch (funct3) {
+>      case 3:
+>  #if defined(TARGET_RISCV64)
+>          /* C.LD(RV64/128) -> ld rd', offset[7:3](rs1')*/
+>          gen_load_c(ctx, OPC_RISC_LD, rd_rs2, rs1s,
+> -                 GET_C_LD_IMM(ctx->opcode));
+> +                 GET_C_LD_IMM(opcode));
+>  #else
+>          /* C.FLW (RV32) -> flw rd', offset[6:2](rs1')*/
+>          gen_fp_load(ctx, OPC_RISC_FLW, rd_rs2, rs1s,
+> -                    GET_C_LW_IMM(ctx->opcode));
+> +                    GET_C_LW_IMM(opcode));
+>  #endif
+>          break;
+>      case 7:
+>  #if defined(TARGET_RISCV64)
+>          /* C.SD (RV64/128) -> sd rs2', offset[7:3](rs1')*/
+>          gen_store_c(ctx, OPC_RISC_SD, rs1s, rd_rs2,
+> -                  GET_C_LD_IMM(ctx->opcode));
+> +                  GET_C_LD_IMM(opcode));
+>  #else
+>          /* C.FSW (RV32) -> fsw rs2', offset[6:2](rs1')*/
+>          gen_fp_store(ctx, OPC_RISC_FSW, rs1s, rd_rs2,
+> -                     GET_C_LW_IMM(ctx->opcode));
+> +                     GET_C_LW_IMM(opcode));
+>  #endif
+>          break;
+>      }
+>  }
+>
+> -static void decode_RV32_64C(DisasContext *ctx)
+> +static void decode_RV32_64C(DisasContext *ctx, uint16_t opcode)
+>  {
+> -    uint8_t op =3D extract32(ctx->opcode, 0, 2);
+> +    uint8_t op =3D extract32(opcode, 0, 2);
+>
+>      switch (op) {
+>      case 0:
+> -        decode_RV32_64C0(ctx);
+> +        decode_RV32_64C0(ctx, opcode);
+>          break;
+>      }
+>  }
+> @@ -709,22 +708,24 @@ static bool gen_shift(DisasContext *ctx, arg_r *a,
+>  /* Include the auto-generated decoder for 16 bit insn */
+>  #include "decode_insn16.inc.c"
+>
+> -static void decode_opc(DisasContext *ctx)
+> +static void decode_opc(CPURISCVState *env, DisasContext *ctx, uint16_t o=
+pcode)
+>  {
+>      /* check for compressed insn */
+> -    if (extract32(ctx->opcode, 0, 2) !=3D 3) {
+> +    if (extract32(opcode, 0, 2) !=3D 3) {
+>          if (!has_ext(ctx, RVC)) {
+>              gen_exception_illegal(ctx);
+>          } else {
+>              ctx->pc_succ_insn =3D ctx->base.pc_next + 2;
+> -            if (!decode_insn16(ctx, ctx->opcode)) {
+> +            if (!decode_insn16(ctx, opcode)) {
+>                  /* fall back to old decoder */
+> -                decode_RV32_64C(ctx);
+> +                decode_RV32_64C(ctx, opcode);
+>              }
+>          }
+>      } else {
+> +        uint32_t opcode32 =3D opcode;
+> +        opcode32 =3D deposit32(opcode32, 16, 16, translator_lduw(env, ct=
+x->base.pc_next + 2));
+>          ctx->pc_succ_insn =3D ctx->base.pc_next + 4;
+> -        if (!decode_insn32(ctx, ctx->opcode)) {
+> +        if (!decode_insn32(ctx, opcode32)) {
+>              gen_exception_illegal(ctx);
 >          }
 >      }
->  
-> -    return NULL;
-> +    return default_machineclass;
->  }
->  
->  static int machine_help_func(QemuOpts *opts, MachineState *machine)
-> 
-
-Reviewed-by: Laurent Vivier <laurent@vivier.eu>
-Tested-by: Laurent Vivier <laurent@vivier.eu>
-
-I've tested "make check" actually fails when we have several default
-machines.
-
-Thanks,
-Laurent
+> @@ -776,9 +777,9 @@ static void riscv_tr_translate_insn(DisasContextBase =
+*dcbase, CPUState *cpu)
+>  {
+>      DisasContext *ctx =3D container_of(dcbase, DisasContext, base);
+>      CPURISCVState *env =3D cpu->env_ptr;
+> +    uint16_t opcode16 =3D translator_lduw(env, ctx->base.pc_next);
+>
+> -    ctx->opcode =3D translator_ldl(env, ctx->base.pc_next);
+> -    decode_opc(ctx);
+> +    decode_opc(env, ctx, opcode16);
+>      ctx->base.pc_next =3D ctx->pc_succ_insn;
+>
+>      if (ctx->base.is_jmp =3D=3D DISAS_NEXT) {
+> --
+> 2.20.1
+>
 
