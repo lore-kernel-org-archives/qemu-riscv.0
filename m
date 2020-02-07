@@ -1,58 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1j04M1-0003JG-CE
-	for mharc-qemu-riscv@gnu.org; Fri, 07 Feb 2020 09:11:33 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:46380)
+	id 1j04MY-0004BP-Re
+	for mharc-qemu-riscv@gnu.org; Fri, 07 Feb 2020 09:12:06 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:46593)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <mst@redhat.com>) id 1j04Lx-0003Fe-In
- for qemu-riscv@nongnu.org; Fri, 07 Feb 2020 09:11:31 -0500
+ (envelope-from <mst@redhat.com>) id 1j04MV-00044u-0Q
+ for qemu-riscv@nongnu.org; Fri, 07 Feb 2020 09:12:05 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <mst@redhat.com>) id 1j04Lw-0003N2-Ha
- for qemu-riscv@nongnu.org; Fri, 07 Feb 2020 09:11:29 -0500
-Received: from us-smtp-delivery-1.mimecast.com ([205.139.110.120]:26592
- helo=us-smtp-1.mimecast.com)
+ (envelope-from <mst@redhat.com>) id 1j04MS-0005Db-SR
+ for qemu-riscv@nongnu.org; Fri, 07 Feb 2020 09:12:02 -0500
+Received: from us-smtp-2.mimecast.com ([205.139.110.61]:21411
+ helo=us-smtp-delivery-1.mimecast.com)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <mst@redhat.com>) id 1j04Lw-0003Lf-DS
- for qemu-riscv@nongnu.org; Fri, 07 Feb 2020 09:11:28 -0500
+ (Exim 4.71) (envelope-from <mst@redhat.com>) id 1j04MS-0005Bx-M9
+ for qemu-riscv@nongnu.org; Fri, 07 Feb 2020 09:12:00 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1581084687;
+ s=mimecast20190719; t=1581084720;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=o81+JWmLU/tFz7R4cIBaX3fO8pUbp9JTZdiL9GKDwS8=;
- b=YyRol/tngp4sph/BUE0LTmtt5PjcOPzWccZgigURuc6O7a4ksKapiChUuAuxabDLtNfhUn
- x3VqkQSJtKiTrM07jW4IjIsaC0nQm5zrtsT7obHiUjYsVxzaV2H0ZYBZr11xzkkDawwsZu
- eGF+b1sWLEmq6Vk2nA0sPvoRWZi0c+Y=
-Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com
- [209.85.160.199]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-104-PK0IWXl5M42XlNjxmZWVng-1; Fri, 07 Feb 2020 09:11:25 -0500
-Received: by mail-qt1-f199.google.com with SMTP id x8so1650133qtq.14
- for <qemu-riscv@nongnu.org>; Fri, 07 Feb 2020 06:11:25 -0800 (PST)
+ bh=6TjHajrN0mlRz0BMlNRML/6cly1rc1kdQgsANeJuvWI=;
+ b=h1rrrCAViCGjLVdsW7X/ab2ihDlcXY0lWLi/hUfMVVrJM+McXdYWAeKvCaqQI+LLUbOLBk
+ XsMhdqQkoKTDF/2afgNX6+o7RE2nCxWVM7xRlSwYWznjW8y0lQMmeDDI5XqhpdyXRLi5x2
+ yOwOF1EI3+lZRs5ceVxAt/ADyKi1mq8=
+Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com
+ [209.85.219.72]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-92--h9dp5tWOdyBrgvnxCzrDA-1; Fri, 07 Feb 2020 09:11:56 -0500
+Received: by mail-qv1-f72.google.com with SMTP id l1so1208224qvu.13
+ for <qemu-riscv@nongnu.org>; Fri, 07 Feb 2020 06:11:55 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:content-transfer-encoding
  :in-reply-to;
- bh=r7HLC+pRyHdtI1HUnYeCh7nUdsYVlBwhAa0vgrpGZwE=;
- b=hz9CHY9dviEnSqSiBr27PpSPegxwwmjcy3LbAU4BdryJyTqQsl0mfDU4wux0OMoOsb
- 955SK+puZI8QqaaIEIBtTJzUiCNnD5wwaXCD2nhdf8rogb1hR0iWrSbmOIwTGrXpA7g2
- SFNfmK8fI6OMdy8Wjhoni/3EDJb/FI+tJ4jzUyY5xyTIbJSmIGg9b+ugRFonIc4t1KsN
- AgZ85qlTDFKYiRjDHgrGR+OWN+aDZFVCdw5cmI6DnYDz99nq/jqawqGqmqiK1fN7Tq1N
- Ct7m/fiqko+Z5qho74hbhuMWSG9yxJ7PpInjuIImpIoeDFniQ3JL+Q7nRnmqkhjWAVlB
- iJDw==
-X-Gm-Message-State: APjAAAVA2rDOMtYn2oDSau4UVjqPCQpaa+Nxm6rblgAIjtkHmWbjlUll
- rRsXFyVIrWWTqwDqbV+GPoza7mdKiVPQijUes6F9l+cl3iakm7gdoQ3tBw/vNAOkNyIen8e7T85
- NM5BVlloFkDI8QMY=
-X-Received: by 2002:ae9:f50c:: with SMTP id o12mr7535343qkg.42.1581084685173; 
- Fri, 07 Feb 2020 06:11:25 -0800 (PST)
-X-Google-Smtp-Source: APXvYqybFpSe7hEw7HPlsSHWTeTred/Bqbnh34A8vvhVkNG91NbRJEbUtCucDkm6pF0Z6PlJOt/FQw==
-X-Received: by 2002:ae9:f50c:: with SMTP id o12mr7535300qkg.42.1581084684907; 
- Fri, 07 Feb 2020 06:11:24 -0800 (PST)
+ bh=P18RyiRncFmX7cElpeGbBm30B1Ow2frTFyKSy9a8YGQ=;
+ b=iGQrx7PE/D3xJgqHwtApFh7AOJlq8Sd1h6dv0GqmrDH6LyWaaooWwll78NTcDfTxct
+ Fa0GP/1RrTzTeM/pmLzfyS7dxpMzyWtMtW2PoMRSRvjNBVhAuNBL+ByUVpNTHZ2D0fZY
+ B8zdCN8/XsHbXRpArJCedU13X1YXIUXYCsrna+Qw1w0rzhYeJO8x9W+Oa2XxdNNLhjH5
+ unxi9duPmYW3sLYOgggmDwgRZDN6rY+0isoOKp26Mdvx5MWWNetFzjsfglYJEAzGOAEX
+ oVObC4AbZQGNf3Fmr0vV3lnkCFIZvnk1elHLdc9O3BQwkRTgWGJ8QiT5hO5JJh/AQQcU
+ X1SA==
+X-Gm-Message-State: APjAAAUdaZRzSiMeSVFtCq06QIDqErALiKOEgdQ8ILwuRIDIBSKEAG45
+ ANNfrM+7Im3nF1YHWPRq6v2rek4VUpXr8m6igwqzkjhheEiTzulkQgMHoImQgwEspk6tpQVry5x
+ lLddEnCLyvmvBAzs=
+X-Received: by 2002:a0c:e790:: with SMTP id x16mr6831223qvn.18.1581084713587; 
+ Fri, 07 Feb 2020 06:11:53 -0800 (PST)
+X-Google-Smtp-Source: APXvYqzaMiqPDTa5JzaDzi2fOzkF30tIDAX7YArevNfUA5bBAnH71pAP9e9iwutOzEmOHtEil0DusQ==
+X-Received: by 2002:a0c:e790:: with SMTP id x16mr6831167qvn.18.1581084713205; 
+ Fri, 07 Feb 2020 06:11:53 -0800 (PST)
 Received: from redhat.com (bzq-79-176-41-183.red.bezeqint.net. [79.176.41.183])
- by smtp.gmail.com with ESMTPSA id d17sm1358069qkc.9.2020.02.07.06.11.17
+ by smtp.gmail.com with ESMTPSA id n32sm1442294qtk.66.2020.02.07.06.11.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 07 Feb 2020 06:11:24 -0800 (PST)
-Date: Fri, 7 Feb 2020 09:11:15 -0500
+ Fri, 07 Feb 2020 06:11:52 -0800 (PST)
+Date: Fri, 7 Feb 2020 09:11:44 -0500
 From: "Michael S. Tsirkin" <mst@redhat.com>
 To: Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@redhat.com>
 Cc: qemu-devel@nongnu.org, Alistair Francis <Alistair.Francis@wdc.com>,
@@ -80,23 +80,21 @@ Cc: qemu-devel@nongnu.org, Alistair Francis <Alistair.Francis@wdc.com>,
  "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
  Eduardo Habkost <ehabkost@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
  Laurent Vivier <laurent@vivier.eu>, Palmer Dabbelt <palmer@dabbelt.com>,
- Thomas Huth <huth@tuxfamily.org>, Magnus Damm <magnus.damm@gmail.com>,
- =?iso-8859-1?Q?Marc-Andr=E9?= Lureau <marcandre.lureau@gmail.com>
-Subject: Re: [PATCH v3 3/3] vl: Abort if multiple machines are registered as
- default
-Message-ID: <20200207090427-mutt-send-email-mst@kernel.org>
+ Thomas Huth <huth@tuxfamily.org>, Magnus Damm <magnus.damm@gmail.com>
+Subject: Re: [PATCH v3 2/3] hw: Make MachineClass::is_default a boolean type
+Message-ID: <20200207091138-mutt-send-email-mst@kernel.org>
 References: <20200207130453.16666-1-philmd@redhat.com>
- <20200207130453.16666-4-philmd@redhat.com>
+ <20200207130453.16666-3-philmd@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <20200207130453.16666-4-philmd@redhat.com>
-X-MC-Unique: PK0IWXl5M42XlNjxmZWVng-1
+In-Reply-To: <20200207130453.16666-3-philmd@redhat.com>
+X-MC-Unique: -h9dp5tWOdyBrgvnxCzrDA-1
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=iso-8859-1
 Content-Transfer-Encoding: quoted-printable
 Content-Disposition: inline
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
-X-Received-From: 205.139.110.120
+X-Received-From: 205.139.110.61
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -108,51 +106,386 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Feb 2020 14:11:31 -0000
+X-List-Received-Date: Fri, 07 Feb 2020 14:12:05 -0000
 
-On Fri, Feb 07, 2020 at 02:04:53PM +0100, Philippe Mathieu-Daud=E9 wrote:
-> It would be confusing to have multiple default machines.
-> Abort if this ever occurs.
+On Fri, Feb 07, 2020 at 02:04:52PM +0100, Philippe Mathieu-Daud=E9 wrote:
+> There's no good reason for it to be type int, change it to bool.
 >=20
+> Suggested-by: Richard Henderson <richard.henderson@linaro.org>
 > Signed-off-by: Philippe Mathieu-Daud=E9 <philmd@redhat.com>
-> ---
-> v2: Use assert() instead of human friendly message (Marc-Andr=E9)
->=20
-> Cc: Marc-Andr=E9 Lureau <marcandre.lureau@gmail.com>
-> Cc: Laurent Vivier <laurent@vivier.eu>
 
-Is it really worth adding counting logic just so we can assert?
-There are a bunch of other places that deal with
-default, like qmp query machines and find_default_machine.
+Reviewed-by: Michael S. Tsirkin <mst@redhat.com>
 
 > ---
->  vl.c | 4 ++++
->  1 file changed, 4 insertions(+)
+> v3: new patch
+> ---
+>  include/hw/boards.h                      |  2 +-
+>  hw/alpha/dp264.c                         |  2 +-
+>  hw/cris/axis_dev88.c                     |  2 +-
+>  hw/hppa/machine.c                        |  2 +-
+>  hw/i386/pc_piix.c                        | 10 +++++-----
+>  hw/lm32/lm32_boards.c                    |  2 +-
+>  hw/m68k/mcf5208.c                        |  2 +-
+>  hw/microblaze/petalogix_s3adsp1800_mmu.c |  2 +-
+>  hw/mips/mips_malta.c                     |  2 +-
+>  hw/moxie/moxiesim.c                      |  2 +-
+>  hw/nios2/10m50_devboard.c                |  2 +-
+>  hw/openrisc/openrisc_sim.c               |  2 +-
+>  hw/ppc/mac_oldworld.c                    |  2 +-
+>  hw/ppc/spapr.c                           |  2 +-
+>  hw/riscv/spike.c                         |  2 +-
+>  hw/s390x/s390-virtio-ccw.c               |  2 +-
+>  hw/sh4/shix.c                            |  2 +-
+>  hw/sparc/sun4m.c                         |  2 +-
+>  hw/sparc64/niagara.c                     |  2 +-
+>  hw/sparc64/sun4u.c                       |  4 ++--
+>  hw/unicore32/puv3.c                      |  2 +-
+>  21 files changed, 26 insertions(+), 26 deletions(-)
 >=20
-> diff --git a/vl.c b/vl.c
-> index 7dcb0879c4..b3e0f7af25 100644
-> --- a/vl.c
-> +++ b/vl.c
-> @@ -2354,6 +2354,8 @@ static MachineClass *machine_parse(const char *name=
-, GSList *machines)
->      GSList *el;
+> diff --git a/include/hw/boards.h b/include/hw/boards.h
+> index fb1b43d5b9..30498cb367 100644
+> --- a/include/hw/boards.h
+> +++ b/include/hw/boards.h
+> @@ -200,7 +200,7 @@ struct MachineClass {
+>          no_sdcard:1,
+>          pci_allow_0_address:1,
+>          legacy_fw_cfg_order:1;
+> -    int is_default;
+> +    bool is_default;
+>      const char *default_machine_opts;
+>      const char *default_boot_order;
+>      const char *default_display;
+> diff --git a/hw/alpha/dp264.c b/hw/alpha/dp264.c
+> index a8f9a89cc4..083a198a64 100644
+> --- a/hw/alpha/dp264.c
+> +++ b/hw/alpha/dp264.c
+> @@ -181,7 +181,7 @@ static void clipper_machine_init(MachineClass *mc)
+>      mc->init =3D clipper_init;
+>      mc->block_default_type =3D IF_IDE;
+>      mc->max_cpus =3D 4;
+> -    mc->is_default =3D 1;
+> +    mc->is_default =3D true;
+>      mc->default_cpu_type =3D ALPHA_CPU_TYPE_NAME("ev67");
+>  }
 > =20
->      if (is_help_option(name)) {
-> +        int default_count =3D 0;
-> +
->          printf("Supported machines are:\n");
->          machines =3D g_slist_sort(machines, machine_class_cmp);
->          for (el =3D machines; el; el =3D el->next) {
-> @@ -2364,7 +2366,9 @@ static MachineClass *machine_parse(const char *name=
-, GSList *machines)
->              printf("%-20s %s%s%s\n", mc->name, mc->desc,
->                     mc->is_default ? " (default)" : "",
->                     mc->deprecation_reason ? " (deprecated)" : "");
-> +            default_count +=3D !!mc->is_default;
->          }
-> +        assert(default_count <=3D 1);
->          exit(0);
->      }
+> diff --git a/hw/cris/axis_dev88.c b/hw/cris/axis_dev88.c
+> index be7760476a..de7b49188b 100644
+> --- a/hw/cris/axis_dev88.c
+> +++ b/hw/cris/axis_dev88.c
+> @@ -349,7 +349,7 @@ static void axisdev88_machine_init(MachineClass *mc)
+>  {
+>      mc->desc =3D "AXIS devboard 88";
+>      mc->init =3D axisdev88_init;
+> -    mc->is_default =3D 1;
+> +    mc->is_default =3D true;
+>      mc->default_cpu_type =3D CRIS_CPU_TYPE_NAME("crisv32");
+>  }
+> =20
+> diff --git a/hw/hppa/machine.c b/hw/hppa/machine.c
+> index d8755ec422..83ae87f565 100644
+> --- a/hw/hppa/machine.c
+> +++ b/hw/hppa/machine.c
+> @@ -295,7 +295,7 @@ static void machine_hppa_machine_init(MachineClass *m=
+c)
+>      mc->block_default_type =3D IF_SCSI;
+>      mc->max_cpus =3D HPPA_MAX_CPUS;
+>      mc->default_cpus =3D 1;
+> -    mc->is_default =3D 1;
+> +    mc->is_default =3D true;
+>      mc->default_ram_size =3D 512 * MiB;
+>      mc->default_boot_order =3D "cd";
+>  }
+> diff --git a/hw/i386/pc_piix.c b/hw/i386/pc_piix.c
+> index fa12203079..9088db8fb6 100644
+> --- a/hw/i386/pc_piix.c
+> +++ b/hw/i386/pc_piix.c
+> @@ -423,7 +423,7 @@ static void pc_i440fx_5_0_machine_options(MachineClas=
+s *m)
+>      PCMachineClass *pcmc =3D PC_MACHINE_CLASS(m);
+>      pc_i440fx_machine_options(m);
+>      m->alias =3D "pc";
+> -    m->is_default =3D 1;
+> +    m->is_default =3D true;
+>      pcmc->default_cpu_version =3D 1;
+>  }
+> =20
+> @@ -434,7 +434,7 @@ static void pc_i440fx_4_2_machine_options(MachineClas=
+s *m)
+>  {
+>      pc_i440fx_5_0_machine_options(m);
+>      m->alias =3D NULL;
+> -    m->is_default =3D 0;
+> +    m->is_default =3D false;
+>      compat_props_add(m->compat_props, hw_compat_4_2, hw_compat_4_2_len);
+>      compat_props_add(m->compat_props, pc_compat_4_2, pc_compat_4_2_len);
+>  }
+> @@ -446,7 +446,7 @@ static void pc_i440fx_4_1_machine_options(MachineClas=
+s *m)
+>  {
+>      pc_i440fx_4_2_machine_options(m);
+>      m->alias =3D NULL;
+> -    m->is_default =3D 0;
+> +    m->is_default =3D false;
+>      compat_props_add(m->compat_props, hw_compat_4_1, hw_compat_4_1_len);
+>      compat_props_add(m->compat_props, pc_compat_4_1, pc_compat_4_1_len);
+>  }
+> @@ -459,7 +459,7 @@ static void pc_i440fx_4_0_machine_options(MachineClas=
+s *m)
+>      PCMachineClass *pcmc =3D PC_MACHINE_CLASS(m);
+>      pc_i440fx_4_1_machine_options(m);
+>      m->alias =3D NULL;
+> -    m->is_default =3D 0;
+> +    m->is_default =3D false;
+>      pcmc->default_cpu_version =3D CPU_VERSION_LEGACY;
+>      compat_props_add(m->compat_props, hw_compat_4_0, hw_compat_4_0_len);
+>      compat_props_add(m->compat_props, pc_compat_4_0, pc_compat_4_0_len);
+> @@ -473,7 +473,7 @@ static void pc_i440fx_3_1_machine_options(MachineClas=
+s *m)
+>      PCMachineClass *pcmc =3D PC_MACHINE_CLASS(m);
+> =20
+>      pc_i440fx_4_0_machine_options(m);
+> -    m->is_default =3D 0;
+> +    m->is_default =3D false;
+>      pcmc->do_not_add_smb_acpi =3D true;
+>      m->smbus_no_migration_support =3D true;
+>      m->alias =3D NULL;
+> diff --git a/hw/lm32/lm32_boards.c b/hw/lm32/lm32_boards.c
+> index 156b050abc..352f69532e 100644
+> --- a/hw/lm32/lm32_boards.c
+> +++ b/hw/lm32/lm32_boards.c
+> @@ -286,7 +286,7 @@ static void lm32_evr_class_init(ObjectClass *oc, void=
+ *data)
+> =20
+>      mc->desc =3D "LatticeMico32 EVR32 eval system";
+>      mc->init =3D lm32_evr_init;
+> -    mc->is_default =3D 1;
+> +    mc->is_default =3D true;
+>      mc->default_cpu_type =3D LM32_CPU_TYPE_NAME("lm32-full");
+>  }
+> =20
+> diff --git a/hw/m68k/mcf5208.c b/hw/m68k/mcf5208.c
+> index a999c21982..5f8f6e4475 100644
+> --- a/hw/m68k/mcf5208.c
+> +++ b/hw/m68k/mcf5208.c
+> @@ -352,7 +352,7 @@ static void mcf5208evb_machine_init(MachineClass *mc)
+>  {
+>      mc->desc =3D "MCF5208EVB";
+>      mc->init =3D mcf5208evb_init;
+> -    mc->is_default =3D 1;
+> +    mc->is_default =3D true;
+>      mc->default_cpu_type =3D M68K_CPU_TYPE_NAME("m5208");
+>  }
+> =20
+> diff --git a/hw/microblaze/petalogix_s3adsp1800_mmu.c b/hw/microblaze/pet=
+alogix_s3adsp1800_mmu.c
+> index 849bafc186..0bb6cdea8d 100644
+> --- a/hw/microblaze/petalogix_s3adsp1800_mmu.c
+> +++ b/hw/microblaze/petalogix_s3adsp1800_mmu.c
+> @@ -132,7 +132,7 @@ static void petalogix_s3adsp1800_machine_init(Machine=
+Class *mc)
+>  {
+>      mc->desc =3D "PetaLogix linux refdesign for xilinx Spartan 3ADSP1800=
+";
+>      mc->init =3D petalogix_s3adsp1800_init;
+> -    mc->is_default =3D 1;
+> +    mc->is_default =3D true;
+>  }
+> =20
+>  DEFINE_MACHINE("petalogix-s3adsp1800", petalogix_s3adsp1800_machine_init=
+)
+> diff --git a/hw/mips/mips_malta.c b/hw/mips/mips_malta.c
+> index 34b76bb6a1..499eac8d33 100644
+> --- a/hw/mips/mips_malta.c
+> +++ b/hw/mips/mips_malta.c
+> @@ -1442,7 +1442,7 @@ static void mips_malta_machine_init(MachineClass *m=
+c)
+>      mc->init =3D mips_malta_init;
+>      mc->block_default_type =3D IF_IDE;
+>      mc->max_cpus =3D 16;
+> -    mc->is_default =3D 1;
+> +    mc->is_default =3D true;
+>  #ifdef TARGET_MIPS64
+>      mc->default_cpu_type =3D MIPS_CPU_TYPE_NAME("20Kc");
+>  #else
+> diff --git a/hw/moxie/moxiesim.c b/hw/moxie/moxiesim.c
+> index 1d06e39fcb..51a98287b5 100644
+> --- a/hw/moxie/moxiesim.c
+> +++ b/hw/moxie/moxiesim.c
+> @@ -150,7 +150,7 @@ static void moxiesim_machine_init(MachineClass *mc)
+>  {
+>      mc->desc =3D "Moxie simulator platform";
+>      mc->init =3D moxiesim_init;
+> -    mc->is_default =3D 1;
+> +    mc->is_default =3D true;
+>      mc->default_cpu_type =3D MOXIE_CPU_TYPE_NAME("MoxieLite");
+>  }
+> =20
+> diff --git a/hw/nios2/10m50_devboard.c b/hw/nios2/10m50_devboard.c
+> index ad8b2fc670..33dc2bf511 100644
+> --- a/hw/nios2/10m50_devboard.c
+> +++ b/hw/nios2/10m50_devboard.c
+> @@ -120,7 +120,7 @@ static void nios2_10m50_ghrd_machine_init(struct Mach=
+ineClass *mc)
+>  {
+>      mc->desc =3D "Altera 10M50 GHRD Nios II design";
+>      mc->init =3D nios2_10m50_ghrd_init;
+> -    mc->is_default =3D 1;
+> +    mc->is_default =3D true;
+>  }
+> =20
+>  DEFINE_MACHINE("10m50-ghrd", nios2_10m50_ghrd_machine_init);
+> diff --git a/hw/openrisc/openrisc_sim.c b/hw/openrisc/openrisc_sim.c
+> index ad5371250f..d08ce61811 100644
+> --- a/hw/openrisc/openrisc_sim.c
+> +++ b/hw/openrisc/openrisc_sim.c
+> @@ -176,7 +176,7 @@ static void openrisc_sim_machine_init(MachineClass *m=
+c)
+>      mc->desc =3D "or1k simulation";
+>      mc->init =3D openrisc_sim_init;
+>      mc->max_cpus =3D 2;
+> -    mc->is_default =3D 1;
+> +    mc->is_default =3D true;
+>      mc->default_cpu_type =3D OPENRISC_CPU_TYPE_NAME("or1200");
+>  }
+> =20
+> diff --git a/hw/ppc/mac_oldworld.c b/hw/ppc/mac_oldworld.c
+> index 7318d7e9b4..1630663bc2 100644
+> --- a/hw/ppc/mac_oldworld.c
+> +++ b/hw/ppc/mac_oldworld.c
+> @@ -438,7 +438,7 @@ static void heathrow_class_init(ObjectClass *oc, void=
+ *data)
+>      mc->block_default_type =3D IF_IDE;
+>      mc->max_cpus =3D MAX_CPUS;
+>  #ifndef TARGET_PPC64
+> -    mc->is_default =3D 1;
+> +    mc->is_default =3D true;
+>  #endif
+>      /* TOFIX "cad" when Mac floppy is implemented */
+>      mc->default_boot_order =3D "cd";
+> diff --git a/hw/ppc/spapr.c b/hw/ppc/spapr.c
+> index c9b2e0a5e0..e3e3208cd8 100644
+> --- a/hw/ppc/spapr.c
+> +++ b/hw/ppc/spapr.c
+> @@ -4493,7 +4493,7 @@ static const TypeInfo spapr_machine_info =3D {
+>          spapr_machine_##suffix##_class_options(mc);                  \
+>          if (latest) {                                                \
+>              mc->alias =3D "pseries";                                   \
+> -            mc->is_default =3D 1;                                      \
+> +            mc->is_default =3D true;                                   \
+>          }                                                            \
+>      }                                                                \
+>      static const TypeInfo spapr_machine_##suffix##_info =3D {          \
+> diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
+> index 8823681783..6f03857660 100644
+> --- a/hw/riscv/spike.c
+> +++ b/hw/riscv/spike.c
+> @@ -448,7 +448,7 @@ static void spike_machine_init(MachineClass *mc)
+>      mc->desc =3D "RISC-V Spike Board";
+>      mc->init =3D spike_board_init;
+>      mc->max_cpus =3D 1;
+> -    mc->is_default =3D 1;
+> +    mc->is_default =3D true;
+>      mc->default_cpu_type =3D SPIKE_V1_10_0_CPU;
+>  }
+> =20
+> diff --git a/hw/s390x/s390-virtio-ccw.c b/hw/s390x/s390-virtio-ccw.c
+> index e759eb5f83..c4b291e434 100644
+> --- a/hw/s390x/s390-virtio-ccw.c
+> +++ b/hw/s390x/s390-virtio-ccw.c
+> @@ -631,7 +631,7 @@ bool css_migration_enabled(void)
+>          mc->desc =3D "VirtIO-ccw based S390 machine v" verstr;          =
+        \
+>          if (latest) {                                                   =
+      \
+>              mc->alias =3D "s390-ccw-virtio";                            =
+        \
+> -            mc->is_default =3D 1;                                       =
+        \
+> +            mc->is_default =3D true;                                    =
+        \
+>          }                                                               =
+      \
+>      }                                                                   =
+      \
+>      static void ccw_machine_##suffix##_instance_init(Object *obj)       =
+      \
+> diff --git a/hw/sh4/shix.c b/hw/sh4/shix.c
+> index 2fc2915428..68b14ee5e7 100644
+> --- a/hw/sh4/shix.c
+> +++ b/hw/sh4/shix.c
+> @@ -82,7 +82,7 @@ static void shix_machine_init(MachineClass *mc)
+>  {
+>      mc->desc =3D "shix card";
+>      mc->init =3D shix_init;
+> -    mc->is_default =3D 1;
+> +    mc->is_default =3D true;
+>      mc->default_cpu_type =3D TYPE_SH7750R_CPU;
+>  }
+> =20
+> diff --git a/hw/sparc/sun4m.c b/hw/sparc/sun4m.c
+> index 25e96db5ca..d6c9772f95 100644
+> --- a/hw/sparc/sun4m.c
+> +++ b/hw/sparc/sun4m.c
+> @@ -1411,7 +1411,7 @@ static void ss5_class_init(ObjectClass *oc, void *d=
+ata)
+>      mc->desc =3D "Sun4m platform, SPARCstation 5";
+>      mc->init =3D ss5_init;
+>      mc->block_default_type =3D IF_SCSI;
+> -    mc->is_default =3D 1;
+> +    mc->is_default =3D true;
+>      mc->default_boot_order =3D "c";
+>      mc->default_cpu_type =3D SPARC_CPU_TYPE_NAME("Fujitsu-MB86904");
+>      mc->default_display =3D "tcx";
+> diff --git a/hw/sparc64/niagara.c b/hw/sparc64/niagara.c
+> index 5eb2d097b9..81a1748fad 100644
+> --- a/hw/sparc64/niagara.c
+> +++ b/hw/sparc64/niagara.c
+> @@ -170,7 +170,7 @@ static void niagara_class_init(ObjectClass *oc, void =
+*data)
+> =20
+>      mc->desc =3D "Sun4v platform, Niagara";
+>      mc->init =3D niagara_init;
+> -    mc->max_cpus =3D 1; /* XXX for now */
+> +    mc->max_cpus =3D true; /* XXX for now */
+>      mc->default_boot_order =3D "c";
+>      mc->default_cpu_type =3D SPARC_CPU_TYPE_NAME("Sun-UltraSparc-T1");
+>  }
+> diff --git a/hw/sparc64/sun4u.c b/hw/sparc64/sun4u.c
+> index b7ac42f7a5..3c2c9d2eb0 100644
+> --- a/hw/sparc64/sun4u.c
+> +++ b/hw/sparc64/sun4u.c
+> @@ -816,7 +816,7 @@ static void sun4u_class_init(ObjectClass *oc, void *d=
+ata)
+>      mc->init =3D sun4u_init;
+>      mc->block_default_type =3D IF_IDE;
+>      mc->max_cpus =3D 1; /* XXX for now */
+> -    mc->is_default =3D 1;
+> +    mc->is_default =3D true;
+>      mc->default_boot_order =3D "c";
+>      mc->default_cpu_type =3D SPARC_CPU_TYPE_NAME("TI-UltraSparc-IIi");
+>      mc->ignore_boot_device_suffixes =3D true;
+> @@ -841,7 +841,7 @@ static void sun4v_class_init(ObjectClass *oc, void *d=
+ata)
+>      mc->desc =3D "Sun4v platform";
+>      mc->init =3D sun4v_init;
+>      mc->block_default_type =3D IF_IDE;
+> -    mc->max_cpus =3D 1; /* XXX for now */
+> +    mc->max_cpus =3D true; /* XXX for now */
+>      mc->default_boot_order =3D "c";
+>      mc->default_cpu_type =3D SPARC_CPU_TYPE_NAME("Sun-UltraSparc-T1");
+>      mc->default_display =3D "std";
+> diff --git a/hw/unicore32/puv3.c b/hw/unicore32/puv3.c
+> index 7e933de228..7f9c0238fe 100644
+> --- a/hw/unicore32/puv3.c
+> +++ b/hw/unicore32/puv3.c
+> @@ -140,7 +140,7 @@ static void puv3_machine_init(MachineClass *mc)
+>  {
+>      mc->desc =3D "PKUnity Version-3 based on UniCore32";
+>      mc->init =3D puv3_init;
+> -    mc->is_default =3D 1;
+> +    mc->is_default =3D true;
+>      mc->default_cpu_type =3D UNICORE32_CPU_TYPE_NAME("UniCore-II");
+>  }
 > =20
 > --=20
 > 2.21.1
