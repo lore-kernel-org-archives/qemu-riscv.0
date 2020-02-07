@@ -1,76 +1,79 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1j058M-0000zf-FZ
-	for mharc-qemu-riscv@gnu.org; Fri, 07 Feb 2020 10:01:30 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:60317)
+	id 1j06NA-000154-S1
+	for mharc-qemu-riscv@gnu.org; Fri, 07 Feb 2020 11:20:52 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:54193)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <alex.bennee@linaro.org>) id 1j058J-0000uG-Rv
- for qemu-riscv@nongnu.org; Fri, 07 Feb 2020 10:01:29 -0500
+ (envelope-from <philmd@redhat.com>) id 1j06N8-0000xC-3Z
+ for qemu-riscv@nongnu.org; Fri, 07 Feb 2020 11:20:51 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alex.bennee@linaro.org>) id 1j058I-000479-DX
- for qemu-riscv@nongnu.org; Fri, 07 Feb 2020 10:01:27 -0500
-Received: from mail-wm1-x343.google.com ([2a00:1450:4864:20::343]:36829)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <alex.bennee@linaro.org>)
- id 1j058I-00040r-5U
- for qemu-riscv@nongnu.org; Fri, 07 Feb 2020 10:01:26 -0500
-Received: by mail-wm1-x343.google.com with SMTP id p17so3141969wma.1
- for <qemu-riscv@nongnu.org>; Fri, 07 Feb 2020 07:01:26 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=U6Am3X6OQTZ1x+tf20LucVI7jeDaV7FG5H5GI7lV8EE=;
- b=w2WmCj33W1pPjplq1vkGvP4r1LLm/qIZk/PhWqJ2Ao2pD2xj1LPBVu1ZAdDEC0C5DY
- YSKINVK4XvBick/c6PVD+n0aS729CVzuF+EaMguiB3oV3SVr2cUsNBHsfKg4X3am0xWu
- 0SNDwohlhnz72jbGkdz8/1TGMuO7NynmCQFEvjm/I/n9cMSybW/+ptVslwkXo86GEZJe
- mBv9yqp29GLdn4Da4ty9P3Ugw4R+2tFsADBU59s4WKiORfC1aaLw8jD/CHMOqR1VV+HL
- vZS3q1Dh5BtWtgB9SRwUs8SPiF/z2MhezuehcCB/sV3USuaqRSLTIMckwR86PqYuiouP
- Nd+Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=U6Am3X6OQTZ1x+tf20LucVI7jeDaV7FG5H5GI7lV8EE=;
- b=Hywt8VLOqAjgPnyikO3JXsmj2oKVqbUO9Okj7AseOCNAUUVwBThRM68c1jJzFL5BU7
- cdC2u54wVyRykq1aclV5GIhQyhRTM02ugRTy+arTC7bW7DbyTcQfbHiMCysu6j7BfLEQ
- W0h4A4/J223Zuet35OKfJvFZ58nZcfGlvN9HcYA9CGfUB3VD6TbfnLarGoO7Q/yodKno
- fpA89L6X37mLvFLegg1w3uAuagj6pOt//x12V3P8ssOL+O2Q6hcCulVe6LABhcVj72DJ
- ZFtzPe9U4kXMF2nTkDFjb1J7IiJmu07KZO8kNJh+coBDIZdpYNaUMtKoK4tilmeqxoWS
- 5OXQ==
-X-Gm-Message-State: APjAAAXFTE/CMFuMlXkrEGFEuTPIZsmrzCH1dIZn+iLUsUWcfcfNEnK0
- 2mrOzw7BmThLkGkV7CbSTO+jKQ==
-X-Google-Smtp-Source: APXvYqxOMp8kveOFWUrZwYWQwbPSBkD6s7EKiNuV1LixsgOVeUhIHRE1vmd+9Be0JLtXQNSSaTScZw==
-X-Received: by 2002:a1c:7907:: with SMTP id l7mr4652088wme.37.1581087685087;
- Fri, 07 Feb 2020 07:01:25 -0800 (PST)
-Received: from zen.linaroharston ([51.148.130.216])
- by smtp.gmail.com with ESMTPSA id d23sm3790469wra.30.2020.02.07.07.01.19
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 07 Feb 2020 07:01:22 -0800 (PST)
-Received: from zen.lan (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id 4621E1FF91;
- Fri,  7 Feb 2020 15:01:19 +0000 (GMT)
-From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
+ (envelope-from <philmd@redhat.com>) id 1j06N6-0003CL-W0
+ for qemu-riscv@nongnu.org; Fri, 07 Feb 2020 11:20:50 -0500
+Received: from us-smtp-2.mimecast.com ([205.139.110.61]:46038
+ helo=us-smtp-1.mimecast.com)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <philmd@redhat.com>) id 1j06N6-0003Aa-S5
+ for qemu-riscv@nongnu.org; Fri, 07 Feb 2020 11:20:48 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1581092448;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=SqpfzpI4dpRLXc3WqQjo05yB0n6jdXmIRafCXmc4x+0=;
+ b=iOY9/ZQulaAcZgeVtu40EoF410xSv+HEGjLKWxX83gdZJTfFBnNQ5KeNeLx3E0qVfOj92t
+ K731anyM0J2PoxJOIA6yuFl+4wVto87Qeb17NqNjTONLyjcRzHypXP7+Dqn+m/CMukww+b
+ K2ADQ0WkHSR9oAXwhsN8lgz6+AB+A7M=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-14-mzrnWNmBPwSd3OFiMujIqw-1; Fri, 07 Feb 2020 11:20:29 -0500
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
+ [10.5.11.15])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 3CDADDB23;
+ Fri,  7 Feb 2020 16:20:25 +0000 (UTC)
+Received: from x1w.redhat.com (ovpn-204-88.brq.redhat.com [10.40.204.88])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id D6E49790D8;
+ Fri,  7 Feb 2020 16:20:00 +0000 (UTC)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
 To: qemu-devel@nongnu.org
-Cc: cota@braap.org, aaron@os.amperecomputing.com, peter.puhov@linaro.org,
- robert.foley@linaro.org, kuhn.chenqun@huawei.com, robhenry@microsoft.com,
- =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
+Cc: Aleksandar Rikalo <aleksandar.rikalo@rt-rk.com>,
+ Guan Xuetao <gxt@mprc.pku.edu.cn>, qemu-ppc@nongnu.org,
  Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ David Gibson <david@gibson.dropbear.id.au>,
+ Christian Borntraeger <borntraeger@de.ibm.com>,
+ Paolo Bonzini <pbonzini@redhat.com>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
-Subject: [PATCH v1 4/5] target/riscv: progressively load the instruction
- during decode
-Date: Fri,  7 Feb 2020 15:01:17 +0000
-Message-Id: <20200207150118.23007-5-alex.bennee@linaro.org>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20200207150118.23007-1-alex.bennee@linaro.org>
-References: <20200207150118.23007-1-alex.bennee@linaro.org>
+ Eduardo Habkost <ehabkost@redhat.com>, Laurent Vivier <laurent@vivier.eu>,
+ Anthony Green <green@moxielogic.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Artyom Tarasenko <atar4qemu@gmail.com>, qemu-trivial@nongnu.org,
+ Cornelia Huck <cohuck@redhat.com>, Aurelien Jarno <aurelien@aurel32.net>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>, qemu-riscv@nongnu.org,
+ "Michael S. Tsirkin" <mst@redhat.com>,
+ Aleksandar Markovic <amarkovic@wavecomp.com>, Marek Vasut <marex@denx.de>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Michael Walle <michael@walle.cc>,
+ Halil Pasic <pasic@linux.ibm.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, qemu-s390x@nongnu.org,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>,
+ Richard Henderson <rth@twiddle.net>, Thomas Huth <huth@tuxfamily.org>,
+ Magnus Damm <magnus.damm@gmail.com>, David Hildenbrand <david@redhat.com>,
+ Chris Wulff <crwulff@gmail.com>, Stafford Horne <shorne@gmail.com>,
+ Helge Deller <deller@gmx.de>, Alistair Francis <Alistair.Francis@wdc.com>,
+ Jia Liu <proljc@gmail.com>
+Subject: [PATCH v4 0/3] Make MachineClass::is_default boolean,
+ refuse  multiple default machines
+Date: Fri,  7 Feb 2020 17:19:45 +0100
+Message-Id: <20200207161948.15972-1-philmd@redhat.com>
 MIME-Version: 1.0
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
+X-MC-Unique: mzrnWNmBPwSd3OFiMujIqw-1
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2a00:1450:4864:20::343
+Content-Transfer-Encoding: quoted-printable
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+X-Received-From: 205.139.110.61
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -82,133 +85,47 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Feb 2020 15:01:29 -0000
+X-List-Received-Date: Fri, 07 Feb 2020 16:20:51 -0000
 
-The plugin system would throw up a harmless warning when it detected
-that a disassembly of an instruction didn't use all it's bytes. Fix
-the riscv decoder to only load the instruction bytes it needs as it
-needs them.
+Cleanup after reviewing "ppc: function to setup latest class options":
+https://www.mail-archive.com/qemu-devel@nongnu.org/msg677709.html
 
-This drops opcode from the ctx in favour if passing the appropriately
-sized opcode down a few levels of the decode.
+Since v3:
+- addressed Laurent & Michael comments
 
-Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
----
- target/riscv/translate.c | 39 ++++++++++++++++++++-------------------
- 1 file changed, 20 insertions(+), 19 deletions(-)
+Philippe Mathieu-Daud=C3=A9 (3):
+  hw: Do not initialize MachineClass::is_default to 0
+  hw: Make MachineClass::is_default a boolean type
+  vl: Abort if multiple machines are registered as default
 
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 14dc71156be..99f2bcf177c 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -44,7 +44,6 @@ typedef struct DisasContext {
-     /* pc_succ_insn points to the instruction following base.pc_next */
-     target_ulong pc_succ_insn;
-     target_ulong priv_ver;
--    uint32_t opcode;
-     uint32_t mstatus_fs;
-     uint32_t misa;
-     uint32_t mem_idx;
-@@ -492,45 +491,45 @@ static void gen_set_rm(DisasContext *ctx, int rm)
-     tcg_temp_free_i32(t0);
- }
- 
--static void decode_RV32_64C0(DisasContext *ctx)
-+static void decode_RV32_64C0(DisasContext *ctx, uint16_t opcode)
- {
--    uint8_t funct3 = extract32(ctx->opcode, 13, 3);
--    uint8_t rd_rs2 = GET_C_RS2S(ctx->opcode);
--    uint8_t rs1s = GET_C_RS1S(ctx->opcode);
-+    uint8_t funct3 = extract32(opcode, 13, 3);
-+    uint8_t rd_rs2 = GET_C_RS2S(opcode);
-+    uint8_t rs1s = GET_C_RS1S(opcode);
- 
-     switch (funct3) {
-     case 3:
- #if defined(TARGET_RISCV64)
-         /* C.LD(RV64/128) -> ld rd', offset[7:3](rs1')*/
-         gen_load_c(ctx, OPC_RISC_LD, rd_rs2, rs1s,
--                 GET_C_LD_IMM(ctx->opcode));
-+                 GET_C_LD_IMM(opcode));
- #else
-         /* C.FLW (RV32) -> flw rd', offset[6:2](rs1')*/
-         gen_fp_load(ctx, OPC_RISC_FLW, rd_rs2, rs1s,
--                    GET_C_LW_IMM(ctx->opcode));
-+                    GET_C_LW_IMM(opcode));
- #endif
-         break;
-     case 7:
- #if defined(TARGET_RISCV64)
-         /* C.SD (RV64/128) -> sd rs2', offset[7:3](rs1')*/
-         gen_store_c(ctx, OPC_RISC_SD, rs1s, rd_rs2,
--                  GET_C_LD_IMM(ctx->opcode));
-+                  GET_C_LD_IMM(opcode));
- #else
-         /* C.FSW (RV32) -> fsw rs2', offset[6:2](rs1')*/
-         gen_fp_store(ctx, OPC_RISC_FSW, rs1s, rd_rs2,
--                     GET_C_LW_IMM(ctx->opcode));
-+                     GET_C_LW_IMM(opcode));
- #endif
-         break;
-     }
- }
- 
--static void decode_RV32_64C(DisasContext *ctx)
-+static void decode_RV32_64C(DisasContext *ctx, uint16_t opcode)
- {
--    uint8_t op = extract32(ctx->opcode, 0, 2);
-+    uint8_t op = extract32(opcode, 0, 2);
- 
-     switch (op) {
-     case 0:
--        decode_RV32_64C0(ctx);
-+        decode_RV32_64C0(ctx, opcode);
-         break;
-     }
- }
-@@ -709,22 +708,24 @@ static bool gen_shift(DisasContext *ctx, arg_r *a,
- /* Include the auto-generated decoder for 16 bit insn */
- #include "decode_insn16.inc.c"
- 
--static void decode_opc(DisasContext *ctx)
-+static void decode_opc(CPURISCVState *env, DisasContext *ctx, uint16_t opcode)
- {
-     /* check for compressed insn */
--    if (extract32(ctx->opcode, 0, 2) != 3) {
-+    if (extract32(opcode, 0, 2) != 3) {
-         if (!has_ext(ctx, RVC)) {
-             gen_exception_illegal(ctx);
-         } else {
-             ctx->pc_succ_insn = ctx->base.pc_next + 2;
--            if (!decode_insn16(ctx, ctx->opcode)) {
-+            if (!decode_insn16(ctx, opcode)) {
-                 /* fall back to old decoder */
--                decode_RV32_64C(ctx);
-+                decode_RV32_64C(ctx, opcode);
-             }
-         }
-     } else {
-+        uint32_t opcode32 = opcode;
-+        opcode32 = deposit32(opcode32, 16, 16, translator_lduw(env, ctx->base.pc_next + 2));
-         ctx->pc_succ_insn = ctx->base.pc_next + 4;
--        if (!decode_insn32(ctx, ctx->opcode)) {
-+        if (!decode_insn32(ctx, opcode32)) {
-             gen_exception_illegal(ctx);
-         }
-     }
-@@ -776,9 +777,9 @@ static void riscv_tr_translate_insn(DisasContextBase *dcbase, CPUState *cpu)
- {
-     DisasContext *ctx = container_of(dcbase, DisasContext, base);
-     CPURISCVState *env = cpu->env_ptr;
-+    uint16_t opcode16 = translator_lduw(env, ctx->base.pc_next);
- 
--    ctx->opcode = translator_ldl(env, ctx->base.pc_next);
--    decode_opc(ctx);
-+    decode_opc(env, ctx, opcode16);
-     ctx->base.pc_next = ctx->pc_succ_insn;
- 
-     if (ctx->base.is_jmp == DISAS_NEXT) {
--- 
-2.20.1
+ include/hw/boards.h                      |  4 +++-
+ hw/alpha/dp264.c                         |  2 +-
+ hw/cris/axis_dev88.c                     |  2 +-
+ hw/hppa/machine.c                        |  2 +-
+ hw/i386/pc_piix.c                        | 10 +++++-----
+ hw/lm32/lm32_boards.c                    |  3 +--
+ hw/lm32/milkymist.c                      |  1 -
+ hw/m68k/mcf5208.c                        |  2 +-
+ hw/m68k/q800.c                           |  1 -
+ hw/microblaze/petalogix_ml605_mmu.c      |  1 -
+ hw/microblaze/petalogix_s3adsp1800_mmu.c |  2 +-
+ hw/mips/mips_malta.c                     |  2 +-
+ hw/moxie/moxiesim.c                      |  2 +-
+ hw/nios2/10m50_devboard.c                |  2 +-
+ hw/openrisc/openrisc_sim.c               |  2 +-
+ hw/ppc/mac_oldworld.c                    |  2 +-
+ hw/ppc/spapr.c                           |  2 +-
+ hw/riscv/spike.c                         |  2 +-
+ hw/s390x/s390-virtio-ccw.c               |  2 +-
+ hw/sh4/shix.c                            |  2 +-
+ hw/sparc/sun4m.c                         |  2 +-
+ hw/sparc64/sun4u.c                       |  2 +-
+ hw/tricore/tricore_testboard.c           |  1 -
+ hw/unicore32/puv3.c                      |  2 +-
+ vl.c                                     |  6 ++++--
+ 25 files changed, 30 insertions(+), 31 deletions(-)
+
+--=20
+2.21.1
 
 
