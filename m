@@ -1,61 +1,44 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1j15zX-0001Yu-0J
-	for mharc-qemu-riscv@gnu.org; Mon, 10 Feb 2020 05:08:35 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49643)
+	id 1j16Hj-0002HL-9q
+	for mharc-qemu-riscv@gnu.org; Mon, 10 Feb 2020 05:27:23 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:51958)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <philmd@redhat.com>) id 1j15zU-0001YR-Rb
- for qemu-riscv@nongnu.org; Mon, 10 Feb 2020 05:08:33 -0500
+ (envelope-from <thuth@redhat.com>) id 1j16Hg-0002Cb-0u
+ for qemu-riscv@nongnu.org; Mon, 10 Feb 2020 05:27:21 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <philmd@redhat.com>) id 1j15zT-0003cw-Qs
- for qemu-riscv@nongnu.org; Mon, 10 Feb 2020 05:08:32 -0500
-Received: from us-smtp-1.mimecast.com ([205.139.110.61]:59918
+ (envelope-from <thuth@redhat.com>) id 1j16Hd-0000Pv-Sz
+ for qemu-riscv@nongnu.org; Mon, 10 Feb 2020 05:27:18 -0500
+Received: from us-smtp-1.mimecast.com ([205.139.110.61]:28927
  helo=us-smtp-delivery-1.mimecast.com)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <philmd@redhat.com>) id 1j15zT-0003cE-NN
- for qemu-riscv@nongnu.org; Mon, 10 Feb 2020 05:08:31 -0500
+ (Exim 4.71) (envelope-from <thuth@redhat.com>) id 1j16Hd-0000P1-PW
+ for qemu-riscv@nongnu.org; Mon, 10 Feb 2020 05:27:17 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1581329310;
+ s=mimecast20190719; t=1581330436;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=GEwOIU5Knq6SawMhFxJo/HE+63XcAfDlm1ZnWDPhA4s=;
- b=YJ2l+PGDoP4J01O76EYaDi/7v3rCUUjX13TJMMNMttWaSytEU4kvGxT35D0cRcPvtgeMAz
- yy8wP3XDtFLfgQkjAiHsfZ/CaaxTmCxb2NNwBJszOOVWajgBF6EzSCJJsQ9dPm+7OcDrcb
- dHSSeEvqyxAAfLod9OV7ofFXuhHerkc=
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-210-U6AXMn7wO--CByGWEza_lw-1; Mon, 10 Feb 2020 05:08:28 -0500
-Received: by mail-wr1-f72.google.com with SMTP id w6so4754933wrm.16
- for <qemu-riscv@nongnu.org>; Mon, 10 Feb 2020 02:08:28 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=5Ul9+bFbs4YFu9JtS6vW944J+gWMQesivcq7ADHTFdg=;
- b=GbEGNY4yIKiZykbbSECbGSXxqC0Lb6GtWLnHOQqiVuc6Bm6lNb8GJ8SskSuNMOQX5R
- J10bY8yjudIo8I1xVI5GIwyyi39F1K+ivIeAtG27PmA22QspTsj2JS4CuPmF+Q3H5Tlf
- Gnm9wZMF1PGROahjTMsf5aWnma9Kwky0G7+UPH8bEWgMAemOTLZCZ3iLJBnIzEQ2V8SA
- 6fG/g6RUg0+99yOzLehXNjLIjgHNsxb0Mn+3T8e3HDDWLh+HBKgyLdRwjWrd04QvdXhf
- xRpwsAcSonoWNVHpkyExLTnDa5HQqMfMf/ePjksuP6/lZdRgeMXDRy2nmQr5dPtoVd5b
- wuOg==
-X-Gm-Message-State: APjAAAU5RtUtFE1kA9IqUPDg+DdkC8I4zYOhqt50aKXyey04dtP2t0zO
- Udw9I4DChYQ+23iJEEO50ZQWkNh1hdEFi0Y67lUlCCG4uBwCJpokuTqYSZORhjAdvMINLUmbo+h
- Iqhub0Ub+GztYoHg=
-X-Received: by 2002:a1c:7c05:: with SMTP id x5mr14580580wmc.15.1581329307708; 
- Mon, 10 Feb 2020 02:08:27 -0800 (PST)
-X-Google-Smtp-Source: APXvYqzemucSh+LJEgGRApO0q2hZLXGUqIUUyrnPIjVxUOYQ08fnpizbAEBzS/n1i6tuXyyYaVE/+Q==
-X-Received: by 2002:a1c:7c05:: with SMTP id x5mr14580564wmc.15.1581329307495; 
- Mon, 10 Feb 2020 02:08:27 -0800 (PST)
-Received: from [192.168.1.35] (78.red-88-21-202.staticip.rima-tde.net.
- [88.21.202.78])
- by smtp.gmail.com with ESMTPSA id y139sm15275033wmd.24.2020.02.10.02.08.25
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 10 Feb 2020 02:08:26 -0800 (PST)
+ in-reply-to:in-reply-to:references:references:openpgp:openpgp;
+ bh=3I1JFY4Uk5ZJJe8bsZVXIweUHXgN2+/GrubmWyn6ecU=;
+ b=hbxYgJMBripsLTe8ywiodB+5j4TDjK3xIGP0vN/u8p6LKWzF/2vuPI5AMB/6VUrOFDrNqx
+ ty37jYEo6Pfob7lG/CuzhkE+KfytNiaQ8eE96y7H3LtvCMu8PAlGUHDY+qhZwg/UB8kq6m
+ TUqOY2khOiF5aloXIDEgB1Zr1w3gBLw=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-358-gvisQ3hQOLWKGW1cKue-RQ-1; Mon, 10 Feb 2020 05:27:15 -0500
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
+ [10.5.11.13])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id DC56213EA;
+ Mon, 10 Feb 2020 10:27:10 +0000 (UTC)
+Received: from thuth.remote.csb (ovpn-116-219.ams2.redhat.com [10.36.116.219])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 7B4828ED0B;
+ Mon, 10 Feb 2020 10:26:54 +0000 (UTC)
 Subject: Re: Tricore default machine
-To: Thomas Huth <thuth@redhat.com>, qemu-devel@nongnu.org
-Cc: Chris Wulff <crwulff@gmail.com>,
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>,
+ qemu-devel@nongnu.org
+Cc: Cornelia Huck <cohuck@redhat.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>,
  "Michael S. Tsirkin" <mst@redhat.com>, Anthony Green <green@moxielogic.com>,
  Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
@@ -66,35 +49,37 @@ Cc: Chris Wulff <crwulff@gmail.com>,
  Helge Deller <deller@gmx.de>, David Hildenbrand <david@redhat.com>,
  Magnus Damm <magnus.damm@gmail.com>, Halil Pasic <pasic@linux.ibm.com>,
  Christian Borntraeger <borntraeger@de.ibm.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, qemu-ppc@nongnu.org,
  Aleksandar Rikalo <aleksandar.rikalo@rt-rk.com>,
- Richard Henderson <rth@twiddle.net>, Artyom Tarasenko <atar4qemu@gmail.com>,
- Eduardo Habkost <ehabkost@redhat.com>,
- Richard Henderson <richard.henderson@linaro.org>, qemu-s390x@nongnu.org,
- Stafford Horne <shorne@gmail.com>, David Gibson
- <david@gibson.dropbear.id.au>, qemu-riscv@nongnu.org,
+ David Gibson <david@gibson.dropbear.id.au>,
+ Artyom Tarasenko <atar4qemu@gmail.com>, Eduardo Habkost
+ <ehabkost@redhat.com>, Richard Henderson <richard.henderson@linaro.org>,
+ qemu-s390x@nongnu.org, Stafford Horne <shorne@gmail.com>,
+ Richard Henderson <rth@twiddle.net>, qemu-riscv@nongnu.org,
  Thomas Huth <huth@tuxfamily.org>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Cornelia Huck <cohuck@redhat.com>, Laurent Vivier <laurent@vivier.eu>,
- Michael Walle <michael@walle.cc>, qemu-ppc@nongnu.org,
+ Chris Wulff <crwulff@gmail.com>, Laurent Vivier <laurent@vivier.eu>,
+ Michael Walle <michael@walle.cc>, Palmer Dabbelt <palmer@dabbelt.com>,
  Aleksandar Markovic <amarkovic@wavecomp.com>,
  Paolo Bonzini <pbonzini@redhat.com>, Aurelien Jarno <aurelien@aurel32.net>
 References: <20200207161948.15972-1-philmd@redhat.com>
  <20200207161948.15972-2-philmd@redhat.com>
  <9590e020-226d-bc85-e496-95b4f0116f69@redhat.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>
-Message-ID: <e4157357-7697-a2d5-8662-f5bd12d74619@redhat.com>
-Date: Mon, 10 Feb 2020 11:08:25 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.4.1
+ <e4157357-7697-a2d5-8662-f5bd12d74619@redhat.com>
+From: Thomas Huth <thuth@redhat.com>
+Openpgp: preference=signencrypt
+Message-ID: <f7b72c47-4202-d220-7b29-bd5ad6283700@redhat.com>
+Date: Mon, 10 Feb 2020 11:26:52 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.9.0
 MIME-Version: 1.0
-In-Reply-To: <9590e020-226d-bc85-e496-95b4f0116f69@redhat.com>
+In-Reply-To: <e4157357-7697-a2d5-8662-f5bd12d74619@redhat.com>
 Content-Language: en-US
-X-MC-Unique: U6AXMn7wO--CByGWEza_lw-1
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
+X-MC-Unique: gvisQ3hQOLWKGW1cKue-RQ-1
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
 X-Received-From: 205.139.110.61
@@ -109,47 +94,62 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Feb 2020 10:08:33 -0000
+X-List-Received-Date: Mon, 10 Feb 2020 10:27:21 -0000
 
-On 2/10/20 10:35 AM, Thomas Huth wrote:
-> On 07/02/2020 17.19, Philippe Mathieu-Daud=C3=A9 wrote:
->> The MachineClass is already zeroed on creation.
+On 10/02/2020 11.08, Philippe Mathieu-Daud=C3=A9 wrote:
+> On 2/10/20 10:35 AM, Thomas Huth wrote:
+>> On 07/02/2020 17.19, Philippe Mathieu-Daud=C3=A9 wrote:
+>>> The MachineClass is already zeroed on creation.
+>>>
+>>> Note: The code setting is_default=3D0 in hw/i386/pc_piix.c is
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 different (related to compat optio=
+ns). When adding a
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 new versioned machine, we want it =
+to be the new default,
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 so we have to mark the previous on=
+e as not default.
+>>>
+>>> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
+>>> ---
+>>> v3: new patch
+>>> ---
+>>> =C2=A0 hw/lm32/lm32_boards.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 | 1 -
+>>> =C2=A0 hw/lm32/milkymist.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 | 1 -
+>>> =C2=A0 hw/m68k/q800.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0 | 1 -
+>>> =C2=A0 hw/microblaze/petalogix_ml605_mmu.c | 1 -
+>>> =C2=A0 hw/tricore/tricore_testboard.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 | 1=
+ -
+>>> =C2=A0 5 files changed, 5 deletions(-)
+>> [...]
+>>> diff --git a/hw/tricore/tricore_testboard.c
+>>> b/hw/tricore/tricore_testboard.c
+>>> index 20c9ccb3ce..8ec2b5bddd 100644
+>>> --- a/hw/tricore/tricore_testboard.c
+>>> +++ b/hw/tricore/tricore_testboard.c
+>>> @@ -105,7 +105,6 @@ static void ttb_machine_init(MachineClass *mc)
+>>> =C2=A0 {
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 mc->desc =3D "a minimal TriCore board";
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 mc->init =3D tricoreboard_init;
+>>> -=C2=A0=C2=A0=C2=A0 mc->is_default =3D 0;
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 mc->default_cpu_type =3D TRICORE_CPU_TYP=
+E_NAME("tc1796");
+>>> =C2=A0 }
 >>
->> Note: The code setting is_default=3D0 in hw/i386/pc_piix.c is
->>        different (related to compat options). When adding a
->>        new versioned machine, we want it to be the new default,
->>        so we have to mark the previous one as not default.
->>
->> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
->> ---
->> v3: new patch
->> ---
->>   hw/lm32/lm32_boards.c               | 1 -
->>   hw/lm32/milkymist.c                 | 1 -
->>   hw/m68k/q800.c                      | 1 -
->>   hw/microblaze/petalogix_ml605_mmu.c | 1 -
->>   hw/tricore/tricore_testboard.c      | 1 -
->>   5 files changed, 5 deletions(-)
-> [...]
->> diff --git a/hw/tricore/tricore_testboard.c b/hw/tricore/tricore_testboa=
-rd.c
->> index 20c9ccb3ce..8ec2b5bddd 100644
->> --- a/hw/tricore/tricore_testboard.c
->> +++ b/hw/tricore/tricore_testboard.c
->> @@ -105,7 +105,6 @@ static void ttb_machine_init(MachineClass *mc)
->>   {
->>       mc->desc =3D "a minimal TriCore board";
->>       mc->init =3D tricoreboard_init;
->> -    mc->is_default =3D 0;
->>       mc->default_cpu_type =3D TRICORE_CPU_TYPE_NAME("tc1796");
->>   }
+>> I wonder whether we should simply make that machine the default for
+>> qemu-system-tricore? There is only one machine here, and not having a
+>> default machine always causes some headaches in the tests...
+>> (see e.g. tests/qemu-iotests/check for example)
 >=20
-> I wonder whether we should simply make that machine the default for
-> qemu-system-tricore? There is only one machine here, and not having a
-> default machine always causes some headaches in the tests...
-> (see e.g. tests/qemu-iotests/check for example)
+> Or make it generic? If a architecture has a single machine, use it by
+> default?
 
-Or make it generic? If a architecture has a single machine, use it by=20
-default?
+Sounds like a good idea, too ... we've got a couple of targets that have
+only one machine.
+
+ Thomas
 
 
