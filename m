@@ -1,41 +1,42 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1j15Hl-00067z-43
-	for mharc-qemu-riscv@gnu.org; Mon, 10 Feb 2020 04:23:21 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43706)
+	id 1j15Tv-0005W7-F1
+	for mharc-qemu-riscv@gnu.org; Mon, 10 Feb 2020 04:35:55 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:45529)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <thuth@redhat.com>) id 1j15Hi-00066z-4X
- for qemu-riscv@nongnu.org; Mon, 10 Feb 2020 04:23:19 -0500
+ (envelope-from <thuth@redhat.com>) id 1j15Ts-0005V7-TZ
+ for qemu-riscv@nongnu.org; Mon, 10 Feb 2020 04:35:53 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <thuth@redhat.com>) id 1j15Hg-0003Wi-4i
- for qemu-riscv@nongnu.org; Mon, 10 Feb 2020 04:23:17 -0500
-Received: from us-smtp-delivery-1.mimecast.com ([207.211.31.120]:33081
- helo=us-smtp-1.mimecast.com)
+ (envelope-from <thuth@redhat.com>) id 1j15Tr-0005AB-QW
+ for qemu-riscv@nongnu.org; Mon, 10 Feb 2020 04:35:52 -0500
+Received: from us-smtp-1.mimecast.com ([207.211.31.81]:56699
+ helo=us-smtp-delivery-1.mimecast.com)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <thuth@redhat.com>) id 1j15Hf-0003VL-OB
- for qemu-riscv@nongnu.org; Mon, 10 Feb 2020 04:23:16 -0500
+ (Exim 4.71) (envelope-from <thuth@redhat.com>) id 1j15Tr-00059W-NE
+ for qemu-riscv@nongnu.org; Mon, 10 Feb 2020 04:35:51 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1581326595;
+ s=mimecast20190719; t=1581327351;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:openpgp:openpgp;
- bh=gD+HNLzM7ECZRmNnNVB/w4eyEsLWPMIA0svlJ7VXYTo=;
- b=GvabC8/Q7lPDdXyGaKPiz9aI7mu+BhTo5y0oqn6b1yz2gxKAzlUXf1OD4dDR0UPdUJSaVx
- PE0d5phtZqKalBQgNzB/S13hCW034VM8JJXtsYxDkGBD1ot7jVYXcjxCnvfbs6oVj4jIoz
- hQt3LQvYt9os/0dtfxU3bzFTI+Rw5zg=
+ bh=xuBMgiSqdTSsGF1dZsZw842HHLW31mEJyhLUTT87ehY=;
+ b=X+9buSOACrAs+kekRTW79nju+80vxTboJf6At2t7r9MhBPZrP0Ihcl/uVhiUB4qyGjs+hm
+ yPHKT+gJGndX+LfsDEdtnvYnrPGKR5LCZNfTzrR5itYUjzYEBPlr+Zu2XKRYn93FWMn7y5
+ rCoKkPxndCCwmrdMgv30D7cBNBACa6E=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-13-QOQ3nhCcMMuRcedbnZNcww-1; Mon, 10 Feb 2020 04:23:12 -0500
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
- [10.5.11.15])
+ us-mta-215-Y0kBKoXXPk2KYvYl9-B9LA-1; Mon, 10 Feb 2020 04:35:49 -0500
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
+ [10.5.11.12])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 92406101FC74;
- Mon, 10 Feb 2020 09:23:07 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 0CD7E18A6EC2;
+ Mon, 10 Feb 2020 09:35:45 +0000 (UTC)
 Received: from thuth.remote.csb (ovpn-116-219.ams2.redhat.com [10.36.116.219])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id E6252790E0;
- Mon, 10 Feb 2020 09:22:47 +0000 (UTC)
-Subject: Re: [PATCH v4 2/3] hw: Make MachineClass::is_default a boolean type
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 6EC2960BF1;
+ Mon, 10 Feb 2020 09:35:25 +0000 (UTC)
+Subject: Tricore default machine (was: [PATCH v4 1/3] hw: Do not initialize
+ MachineClass::is_default to 0)
 To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>,
  qemu-devel@nongnu.org
 Cc: Chris Wulff <crwulff@gmail.com>,
@@ -64,25 +65,25 @@ Cc: Chris Wulff <crwulff@gmail.com>,
  Aleksandar Markovic <amarkovic@wavecomp.com>,
  Paolo Bonzini <pbonzini@redhat.com>, Aurelien Jarno <aurelien@aurel32.net>
 References: <20200207161948.15972-1-philmd@redhat.com>
- <20200207161948.15972-3-philmd@redhat.com>
+ <20200207161948.15972-2-philmd@redhat.com>
 From: Thomas Huth <thuth@redhat.com>
 Openpgp: preference=signencrypt
-Message-ID: <6cbffb9e-05d7-c2ac-12bd-2eb7cc7d54ae@redhat.com>
-Date: Mon, 10 Feb 2020 10:22:45 +0100
+Message-ID: <9590e020-226d-bc85-e496-95b4f0116f69@redhat.com>
+Date: Mon, 10 Feb 2020 10:35:23 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
  Thunderbird/60.9.0
 MIME-Version: 1.0
-In-Reply-To: <20200207161948.15972-3-philmd@redhat.com>
+In-Reply-To: <20200207161948.15972-2-philmd@redhat.com>
 Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
-X-MC-Unique: QOQ3nhCcMMuRcedbnZNcww-1
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
+X-MC-Unique: Y0kBKoXXPk2KYvYl9-B9LA-1
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
  [fuzzy]
-X-Received-From: 207.211.31.120
+X-Received-From: 207.211.31.81
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -94,85 +95,45 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Feb 2020 09:23:19 -0000
+X-List-Received-Date: Mon, 10 Feb 2020 09:35:54 -0000
 
 On 07/02/2020 17.19, Philippe Mathieu-Daud=C3=A9 wrote:
-> There's no good reason for it to be type int, change it to bool.
+> The MachineClass is already zeroed on creation.
 >=20
-> Suggested-by: Richard Henderson <richard.henderson@linaro.org>
-> Reviewed-by: Michael S. Tsirkin <mst@redhat.com>
+> Note: The code setting is_default=3D0 in hw/i386/pc_piix.c is
+>       different (related to compat options). When adding a
+>       new versioned machine, we want it to be the new default,
+>       so we have to mark the previous one as not default.
+>=20
 > Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
 > ---
-> v4:
-> - fixed incorrect changes to max_cpus (Laurent)
-> - describe field
+> v3: new patch
 > ---
+>  hw/lm32/lm32_boards.c               | 1 -
+>  hw/lm32/milkymist.c                 | 1 -
+>  hw/m68k/q800.c                      | 1 -
+>  hw/microblaze/petalogix_ml605_mmu.c | 1 -
+>  hw/tricore/tricore_testboard.c      | 1 -
+>  5 files changed, 5 deletions(-)
 [...]
-> diff --git a/hw/i386/pc_piix.c b/hw/i386/pc_piix.c
-> index fa12203079..9088db8fb6 100644
-> --- a/hw/i386/pc_piix.c
-> +++ b/hw/i386/pc_piix.c
-> @@ -423,7 +423,7 @@ static void pc_i440fx_5_0_machine_options(MachineClas=
-s *m)
->      PCMachineClass *pcmc =3D PC_MACHINE_CLASS(m);
->      pc_i440fx_machine_options(m);
->      m->alias =3D "pc";
-> -    m->is_default =3D 1;
-> +    m->is_default =3D true;
->      pcmc->default_cpu_version =3D 1;
->  }
-> =20
-> @@ -434,7 +434,7 @@ static void pc_i440fx_4_2_machine_options(MachineClas=
-s *m)
+> diff --git a/hw/tricore/tricore_testboard.c b/hw/tricore/tricore_testboar=
+d.c
+> index 20c9ccb3ce..8ec2b5bddd 100644
+> --- a/hw/tricore/tricore_testboard.c
+> +++ b/hw/tricore/tricore_testboard.c
+> @@ -105,7 +105,6 @@ static void ttb_machine_init(MachineClass *mc)
 >  {
->      pc_i440fx_5_0_machine_options(m);
->      m->alias =3D NULL;
-> -    m->is_default =3D 0;
-> +    m->is_default =3D false;
->      compat_props_add(m->compat_props, hw_compat_4_2, hw_compat_4_2_len);
->      compat_props_add(m->compat_props, pc_compat_4_2, pc_compat_4_2_len);
+>      mc->desc =3D "a minimal TriCore board";
+>      mc->init =3D tricoreboard_init;
+> -    mc->is_default =3D 0;
+>      mc->default_cpu_type =3D TRICORE_CPU_TYPE_NAME("tc1796");
 >  }
-> @@ -446,7 +446,7 @@ static void pc_i440fx_4_1_machine_options(MachineClas=
-s *m)
->  {
->      pc_i440fx_4_2_machine_options(m);
 
-Since we're calling pc_i440fx_4_2_machine_options() here...
+I wonder whether we should simply make that machine the default for
+qemu-system-tricore? There is only one machine here, and not having a
+default machine always causes some headaches in the tests...
+(see e.g. tests/qemu-iotests/check for example)
 
->      m->alias =3D NULL;
-> -    m->is_default =3D 0;
-> +    m->is_default =3D false;
-
-... you could even remove this line now...
-
->      compat_props_add(m->compat_props, hw_compat_4_1, hw_compat_4_1_len);
->      compat_props_add(m->compat_props, pc_compat_4_1, pc_compat_4_1_len);
->  }
-> @@ -459,7 +459,7 @@ static void pc_i440fx_4_0_machine_options(MachineClas=
-s *m)
->      PCMachineClass *pcmc =3D PC_MACHINE_CLASS(m);
->      pc_i440fx_4_1_machine_options(m);
->      m->alias =3D NULL;
-> -    m->is_default =3D 0;
-> +    m->is_default =3D false;
-
-... and this one, too.
-
->      pcmc->default_cpu_version =3D CPU_VERSION_LEGACY;
->      compat_props_add(m->compat_props, hw_compat_4_0, hw_compat_4_0_len);
->      compat_props_add(m->compat_props, pc_compat_4_0, pc_compat_4_0_len);
-> @@ -473,7 +473,7 @@ static void pc_i440fx_3_1_machine_options(MachineClas=
-s *m)
->      PCMachineClass *pcmc =3D PC_MACHINE_CLASS(m);
-> =20
->      pc_i440fx_4_0_machine_options(m);
-> -    m->is_default =3D 0;
-> +    m->is_default =3D false;
-
-dito.
-
-But that could also be done in a later patch, so:
-
-Reviewed-by: Thomas Huth <thuth@redhat.com>
+ Thomas
 
 
