@@ -1,67 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1j1DLT-0007yR-5x
-	for mharc-qemu-riscv@gnu.org; Mon, 10 Feb 2020 12:59:43 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:57755)
+	id 1j1E9F-00023g-S1
+	for mharc-qemu-riscv@gnu.org; Mon, 10 Feb 2020 13:51:10 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47194)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <palmerdabbelt@google.com>) id 1j1DLP-0007xx-NV
- for qemu-riscv@nongnu.org; Mon, 10 Feb 2020 12:59:40 -0500
+ (envelope-from <palmerdabbelt@google.com>) id 1j1E9B-00022u-1J
+ for qemu-riscv@nongnu.org; Mon, 10 Feb 2020 13:51:06 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmerdabbelt@google.com>) id 1j1DLO-0005KP-Mj
- for qemu-riscv@nongnu.org; Mon, 10 Feb 2020 12:59:39 -0500
-Received: from mail-pf1-x442.google.com ([2607:f8b0:4864:20::442]:41158)
+ (envelope-from <palmerdabbelt@google.com>) id 1j1E97-0006nt-8M
+ for qemu-riscv@nongnu.org; Mon, 10 Feb 2020 13:51:03 -0500
+Received: from mail-pj1-x1044.google.com ([2607:f8b0:4864:20::1044]:56243)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <palmerdabbelt@google.com>)
- id 1j1DLN-0005JA-Od
- for qemu-riscv@nongnu.org; Mon, 10 Feb 2020 12:59:37 -0500
-Received: by mail-pf1-x442.google.com with SMTP id j9so4065835pfa.8
- for <qemu-riscv@nongnu.org>; Mon, 10 Feb 2020 09:59:37 -0800 (PST)
+ id 1j1E95-0006kS-Cy
+ for qemu-riscv@nongnu.org; Mon, 10 Feb 2020 13:50:59 -0500
+Received: by mail-pj1-x1044.google.com with SMTP id d5so142692pjz.5
+ for <qemu-riscv@nongnu.org>; Mon, 10 Feb 2020 10:50:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
- h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
+ h=date:from:subject:in-reply-to:cc:to:message-id:mime-version
  :content-transfer-encoding;
- bh=aHgzZrsrwcWeQ87VMrWjH4rMXOkj/mrqsMJ6vGEraG4=;
- b=vTwuFsXRyylgRKGarS+ot9yCdYqTChm7nPjrlyI3dcpgTLF6UgViuj0/epNyF8QYFy
- ha+damVOOgwrHRPkVOmTwrdH7NIDl92QvTV9NUCrWL0oBG4C4a9oxdMXJUkQXekhgsFe
- vrt3J/Hl5RNu79mwXJtxn+IsCeTaJb2d4wQqlx0zNNFRn5XM/6pSF4mHp01Fs2FbtPqu
- 8cClocKFDbKi1m5Pf3nwBNduLXUkEdT1+Oc3zHpvhcb3L4W5ukl7wcfRyE/peFOIoM/Z
- Q2WbLT4nDaYTYlMD5J7x8bbjE5TDiC4gwv+le0/bYx8+jia2fU+zh0eYEzbx4OFv5zLQ
- DnBA==
+ bh=AJq3udkvqyyW9bCJfvWVkPQb883xwdiDvKuw5HNezPc=;
+ b=jkl5JFzfFnPR8uZsx3HSgeQpncwRjoNwxTk+yq/0WMp3trgS1dvEvl144qBcWAOGyp
+ 7m3wT4LbakztNEMvP+AJn5jnfCoIBdNlYRR89A52+NnsgJbKxooq0j2+RYvz1QCLBm1x
+ 75DOpBtNtLP5VD1p1bEVYnUYagyBBH2K7sPW5vabk7JkFX9rXNDyZoqR0AMOzfOuQ69y
+ DY2HsAw3cfe2Zu01QgbVYIasIAH07t/OdoFJu4ybqT36uU7yrHqmp+DymSAmo5xUHxaR
+ L0sfqeVXlJNqu4zJOLHsTY1vHOm3YriRxNeFrq2BI8IQzGzXCui4MY/tRKbduejuRWlE
+ 2+/Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
+ h=x-gm-message-state:date:from:subject:in-reply-to:cc:to:message-id
  :mime-version:content-transfer-encoding;
- bh=aHgzZrsrwcWeQ87VMrWjH4rMXOkj/mrqsMJ6vGEraG4=;
- b=ioNHVafZcyhBCZ9kaPwjEvS8skcX0xanZF13aqGNyDZeKbug6OnysoAf9J2F1fy3Bc
- NxoHbZQio6i/ntdr1OPolIL8tAJVIRc885/Gk5iAp/9iQcanifieVjCNRxkeW3dv+Qrd
- gf7r/arBorSgnZEYKxew29jK2hP3Praqw4lQNyTf2mXJ5jGJhTbgh6/gcUlmhID4KvR8
- L9d2H7KQ1fiZbQeGNLs8sjaED48bktKwRf6kFkAV/iyYCvwBG9+/2LsS/k6um0vGJX3E
- xzWpsyPPY1aplH173llMiM7KYO9E6gfUZJDYuTIOJfbviIvAUlQe2NEfbASal1IO3HO/
- N2wg==
-X-Gm-Message-State: APjAAAWm66614jFAuViskrg5V5kEK8Zsc7O/5b245YSQIHJzI2yKLJX9
- UJHJVdCnQbf7qFVRBQMrbtKSow==
-X-Google-Smtp-Source: APXvYqzz7JxOl4/fuWUB8t5abHmZ1dcaoJ7fcrxkXF6ka3tgscWf0jYlxHx85/e3Vwc/VkfJ+0lhMg==
-X-Received: by 2002:a63:2701:: with SMTP id n1mr2834110pgn.332.1581357576255; 
- Mon, 10 Feb 2020 09:59:36 -0800 (PST)
-Received: from localhost (pat_11.qualcomm.com. [192.35.156.11])
- by smtp.gmail.com with ESMTPSA id h26sm1155458pfr.9.2020.02.10.09.59.35
+ bh=AJq3udkvqyyW9bCJfvWVkPQb883xwdiDvKuw5HNezPc=;
+ b=Lb67z/CvHFoJ8V9HEOWbAalrzY2BDOzzql7KgqGGce3Bfmq7E5YwG4QAe2h7/NY4PH
+ tYg6UlBTNad/E7pXZwpOn6AmeXhU9aXwPiL/1ayHGxBD1/FIT7fSKIWV75rAM9vSpwYI
+ gL9Vq0aHEu7/HPGNvdG++4hyegcXSvsZzowSvr/B5bCLwahLSEbjdMuR54NFvEWcoK4H
+ LkotMLohZFaxVjGljvqwIbF4P0Dt2gXBE9CiHzRVIOKFNWALs3cfq+7+HvXuBJVsQbjp
+ 5b/ncqos2hVWJQZ7CegEMIemWDBI/ptyb26Hwg1zBlocppJz8VRgeMTqBVxd6u8DarDR
+ HUfg==
+X-Gm-Message-State: APjAAAXqE6AdGqNIfLnio6arLkYFbHRADl2Hs+gHyZFkzpfsDAgyGglC
+ p4oZZ8O/1OW+9GAMKXjw19jvrg==
+X-Google-Smtp-Source: APXvYqxL/BnrnQAXhTC2G/VDrUD2JylynYAfc69A5yCRIGqlxitsTBHerXJM8lq8RP2oGoovDZO62A==
+X-Received: by 2002:a17:90a:d103:: with SMTP id
+ l3mr538543pju.116.1581360656350; 
+ Mon, 10 Feb 2020 10:50:56 -0800 (PST)
+Received: from localhost ([2600:1012:b161:af3e:21a9:6308:301b:ae65])
+ by smtp.gmail.com with ESMTPSA id v184sm1192356pfc.67.2020.02.10.10.50.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 10 Feb 2020 09:59:35 -0800 (PST)
-Date: Mon, 10 Feb 2020 09:59:35 -0800 (PST)
-X-Google-Original-Date: Mon, 10 Feb 2020 07:10:57 PST (-0800)
-Subject: Re: [PATCH] riscv: Separate FPU register size from core register size
- in gdbstub [v2]
-In-Reply-To: <87sgjwr3sz.fsf@keithp.org>
-CC: qemu-devel@nongnu.org, Alistair Francis <Alistair.Francis@wdc.com>,
- sagark@eecs.berkeley.edu, Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- qemu-riscv@nongnu.org
+ Mon, 10 Feb 2020 10:50:55 -0800 (PST)
+Date: Mon, 10 Feb 2020 10:50:55 -0800 (PST)
+X-Google-Original-Date: Mon, 10 Feb 2020 10:50:53 PST (-0800)
 From: Palmer Dabbelt <palmerdabbelt@google.com>
-To: keithp@keithp.com
-Message-ID: <mhng-640eeb10-fc1a-41fd-b870-5f76e8fcdab4@palmerdabbelt-glaptop1>
+X-Google-Original-From: Palmer Dabbelt <palmer@dabbelt.com>
+Subject: Re: [PATCH v2 00/35]  Add RISC-V Hypervisor Extension v0.5
+In-Reply-To: <cover.1580518859.git.alistair.francis@wdc.com>
+CC: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
+ Alistair Francis <Alistair.Francis@wdc.com>, alistair23@gmail.com
+To: Alistair Francis <Alistair.Francis@wdc.com>
+Message-ID: <mhng-f46568ad-b708-4cc5-92ba-d7bd931020ce@palmerdabbelt-glaptop1>
 Mime-Version: 1.0 (MHng)
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::442
+X-Received-From: 2607:f8b0:4864:20::1044
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -73,22 +73,128 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Feb 2020 17:59:40 -0000
+X-List-Received-Date: Mon, 10 Feb 2020 18:51:07 -0000
 
-On Thu, 30 Jan 2020 14:13:16 PST (-0800), keithp@keithp.com wrote:
-> Palmer Dabbelt <palmerdabbelt@google.com> writes:
+On Fri, 31 Jan 2020 17:01:35 PST (-0800), Alistair Francis wrote:
+> This patch series adds the RISC-V Hypervisor extension v0.5. This is the
+> latest draft spec of the Hypervisor extension.
 >
->> This isn't working for me.  When I apply it on top of my for-master (which is
->> very close to master), I get 
+> The Hypervisor extension is disabled by default, so this series should
+> result in no changes to anyone using QEMU unless they enable the
+> extension. The extention can be enabled with the -cpu property (see
+> below).
 >
->>     warning: while parsing target description (at line 1): Could not load XML document "riscv-64bit-fpu.xml"
+> Testing of this implementation has been done by using the baremetal
+> Xvisor Hypervisor. We are able to run two Linux guests (that's all I
+> have tried) as guests in 64-bit. In 32-bit so far I can only run
+> baremetal guests, but I think this is a baremetal boot loader issue and
+> not an issue in QEMU.
 >
-> If you're building from an existing directory, I think you'll have to
-> force re-creation of riscv32-softmmu/gdbstub-xml.c
+> The RISC-V KVM implementation was also written using these patches. The
+> KVM implementation is currently under review.
+>
+> At the moment this spec is in a draft state and is subject to change. As
+> QEMU is extreamly useful in early bring up I think it makes sense for
+> QEMU to support non-frozen extensions.
+>
+> Thanks to Anup for doing the initial port of Xvisor. The port is avaliable here:
+> https://github.com/avpatel/xvisor-next and will run on QEMU.
+>
+> Also thanks to Atish for implementing the SBI call support in Xvisor and
+> for lots of help debugging.
+>
+> To run this yourself:
+>  1. Apply this patch series to QEMU. The latest branch can be found here:
+>       https://github.com/alistair23/qemu/tree/mainline/alistair/riscv-hyp-ext-v0.5.next
+>  2. Get the version of OpenSBI that supports the H extension. This can
+>     be found here:
+>       https://github.com/avpatel/opensbi/tree/riscv_hyp_ext_0_5_v1
+>  3. Build the next release of Xvisor. It is available here:
+>       https://github.com/avpatel/xvisor-next
+>  4. Make sure you build the Xvisor tests, see here for details:
+>       https://github.com/avpatel/xvisor-next/tree/master/tests/riscv/virt64/linux
+>  5. Run QEMU:
+>      ./riscv64-softmmu/qemu-system-riscv64 -nographic \
+>        -machine virt -cpu rv64,x-h=true \
+>        -serial mon:stdio -serial null -m 4G \
+>        -device loader,file=vmm.bin,addr=0x80200000 \
+>        -kernel fw_jump.elf \
+>        -initrd vmm-disk-linux.img \
+>        -append "vmm.console=uart@10000000 vmm.bootcmd=\"vfs mount initrd /;vfs run /boot.xscript;vfs cat /system/banner.txt\""
+>
+>    Once you get to the prompt you can start the geust by running:
+>      guest kick guest0
+>    You can then bind to the serial port using:
+>      vserial bind guest0/uart0
+>    Then you can start Linux using:
+>      autoexec
+>
+>  This was all tested with the mainline 5.2/5.3 kernels.
+>
+> There is very early work on a Xen port as well which is avaliable here:
+> https://github.com/alistair23/xen/tree/alistair/riscv-port
+>
+> ToDo/Issues
+>  - Get 32-bit fully working
+>
+> v2:
+>  - Don't use riscv_cpu_set_force_hs_excep() for 2nd stage MMU fauls as
+>    the v0.5 spec has a specific fault
+>  - Address review comments
+>  - Rebase on master
+>  - Remove pointers for mstatus
+>
+> Alistair Francis (35):
+>   target/riscv: Convert MIP CSR to target_ulong
+>   target/riscv: Add the Hypervisor extension
+>   target/riscv: Add the Hypervisor CSRs to CPUState
+>   target/riscv: Add support for the new execption numbers
+>   target/riscv: Rename the H irqs to VS irqs
+>   target/riscv: Add the virtulisation mode
+>   target/riscv: Add the force HS exception mode
+>   target/riscv: Fix CSR perm checking for HS mode
+>   target/riscv: Print priv and virt in disas log
+>   target/riscv: Dump Hypervisor registers if enabled
+>   target/riscv: Add Hypervisor CSR access functions
+>   target/riscv: Add Hypervisor virtual CSRs accesses
+>   target/riscv: Add Hypervisor machine CSRs accesses
+>   target/riscv: Add virtual register swapping function
+>   target/riscv: Set VS bits in mideleg for Hyp extension
+>   target/riscv: Extend the MIE CSR to support virtulisation
+>   target/riscv: Extend the SIP CSR to support virtulisation
+>   target/riscv: Add support for virtual interrupt setting
+>   target/ricsv: Flush the TLB on virtulisation mode changes
+>   target/riscv: Generate illegal instruction on WFI when V=1
+>   target/riscv: Add hypvervisor trap support
+>   target/riscv: Add Hypervisor trap return support
+>   target/riscv: Add hfence instructions
+>   target/riscv: Remove the hret instruction
+>   target/riscv: Only set TB flags with FP status if enabled
+>   target/riscv: Disable guest FP support based on virtual status
+>   target/riscv: Mark both sstatus and msstatus_hs as dirty
+>   target/riscv: Respect MPRV and SPRV for floating point ops
+>   target/riscv: Allow specifying MMU stage
+>   target/riscv: Implement second stage MMU
+>   target/riscv: Raise the new execptions when 2nd stage translation
+>     fails
+>   target/riscv: Set htval and mtval2 on execptions
+>   target/riscv: Add support for the 32-bit MSTATUSH CSR
+>   target/riscv: Add the MSTATUS_MPV_ISSET helper macro
+>   target/riscv: Allow enabling the Hypervisor extension
+>
+>  target/riscv/cpu.c                            |  57 ++-
+>  target/riscv/cpu.h                            |  58 ++-
+>  target/riscv/cpu_bits.h                       | 111 ++--
+>  target/riscv/cpu_helper.c                     | 481 ++++++++++++++++--
+>  target/riscv/csr.c                            | 369 +++++++++++++-
+>  target/riscv/gdbstub.c                        |  11 +-
+>  target/riscv/insn32.decode                    |  22 +-
+>  .../riscv/insn_trans/trans_privileged.inc.c   |  45 +-
+>  target/riscv/op_helper.c                      |  71 ++-
+>  target/riscv/translate.c                      |  34 ++
+>  10 files changed, 1130 insertions(+), 129 deletions(-)
 
-That worked, thanks.  It's in the queue, with a note in case I forget again :)
-
->
-> -- 
-> -keith
+Thanks.  I'm going to send out the current queue, just to make sure it doesn't
+get blocked, and then dig through all this.  It should be essentially ready to
+go, IIRC there were just a few patches that changed enough to warrant a review.
 
