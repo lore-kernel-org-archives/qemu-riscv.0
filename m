@@ -1,66 +1,73 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1j1Gsx-0002mm-B3
-	for mharc-qemu-riscv@gnu.org; Mon, 10 Feb 2020 16:46:31 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:33793)
+	id 1j1Xqy-0008IS-Jv
+	for mharc-qemu-riscv@gnu.org; Tue, 11 Feb 2020 10:53:36 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47925)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <palmerdabbelt@google.com>) id 1j1Gsu-0002iQ-NW
- for qemu-riscv@nongnu.org; Mon, 10 Feb 2020 16:46:29 -0500
+ (envelope-from <richard.henderson@linaro.org>) id 1j1Xqv-0008GF-PR
+ for qemu-riscv@nongnu.org; Tue, 11 Feb 2020 10:53:34 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmerdabbelt@google.com>) id 1j1Gst-0007GJ-Cj
- for qemu-riscv@nongnu.org; Mon, 10 Feb 2020 16:46:28 -0500
-Received: from mail-pf1-x442.google.com ([2607:f8b0:4864:20::442]:44350)
+ (envelope-from <richard.henderson@linaro.org>) id 1j1Xqu-00032F-DJ
+ for qemu-riscv@nongnu.org; Tue, 11 Feb 2020 10:53:33 -0500
+Received: from mail-pg1-x544.google.com ([2607:f8b0:4864:20::544]:44094)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmerdabbelt@google.com>)
- id 1j1Gss-0007BL-S7
- for qemu-riscv@nongnu.org; Mon, 10 Feb 2020 16:46:27 -0500
-Received: by mail-pf1-x442.google.com with SMTP id y5so4340671pfb.11
- for <qemu-riscv@nongnu.org>; Mon, 10 Feb 2020 13:46:26 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
- h=date:from:subject:in-reply-to:cc:to:message-id:mime-version
- :content-transfer-encoding;
- bh=IeOm7hpSFIGFkdQhxKOH2BAg3N9pNkx3FwZUvGEAD5Y=;
- b=QFBqB0Lv48H86rdRKD4AW7PPBUVqhgB4n1/JCgqv+PqvkRAceDKyYV7JmKRkGdcjXD
- zSdf+NRwwKisCRwGjb6VLdDgPCZv1ZpKv4dEQzQcuZAqwZ4PmV6q0v05YIRQWfqpFgLA
- 2EDqKQGQtDOr/awV0aBh9dveBK/6Jfd12zhWSD7b/ppXNH+k5p1lwP5cAvuAzfTGT0LD
- kQZ18LIpfy0D4DXxBClt9Owo8e4H5vCbXwsyPwZFnsmkbY/y9aHrYWp4XXQLcIi7KCFZ
- AR757KjKN5BsctLjrz36j4t1q0nDwDjEC1Y+pQ1QDJX2fK39+RyRyB0yLHxqJ37R2qA1
- XiGg==
+ (Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
+ id 1j1Xqu-000318-6K
+ for qemu-riscv@nongnu.org; Tue, 11 Feb 2020 10:53:32 -0500
+Received: by mail-pg1-x544.google.com with SMTP id g3so5921539pgs.11
+ for <qemu-riscv@nongnu.org>; Tue, 11 Feb 2020 07:53:31 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=9lFy3+MRR7TYYly5eGGTBavGK2tFmldkiIzr326jGWQ=;
+ b=czqUf3QM3gjnueyJNa0yGj3Iw49keeCxC2H+pHMxhlJ83KMMtbB8uVvrctrDHX5nbN
+ onSactF5wakAyH0HbT0j0ao5CHSxv5Pa/frwy457R3PIXA3wH8dH6XXwe1Av1BsIreFu
+ 9kXkYWUt/w7Eb+8RAS0S86lf0mzdPh8vR5AZqxh1BpKxKlUZ5hsgqnJPMJg0DMR9iYjl
+ rZ/TinAZLblY+88ULd+9Re46+doBzhpfiGnu/y6yPh4YlchvIrr2tP/efyHggbGsWD0z
+ 1YpTRcY0F4o72jkVDyLUdIhGe70vNAGVeo+u86qc2m1g5xIML4yAvC4fQiMDEsdG79AZ
+ nX8Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:subject:in-reply-to:cc:to:message-id
- :mime-version:content-transfer-encoding;
- bh=IeOm7hpSFIGFkdQhxKOH2BAg3N9pNkx3FwZUvGEAD5Y=;
- b=BghnOMX3Z3HGT5GgbAHHo6j7Pfz9O9LsHEKPv0dwfvKsdqeq2Vgtr3k3vk8WO0vSAG
- 8zfHthvtWuD18ZIJiAwU7ZKs8uVS0ZHLe5Vix9K/SokbfeBbMDUJRx7RtwkmvhAwe3ig
- RSm5HI+5NzR/vqNmx2zUivFF9MBDO7iAAoW2yhZJOTFPSTYHFKmtzIsjCbX/bCY+bSvM
- 7HxpN6ddMsIxjstbLCs/immAqHqOLPHUXTRAs6iIsmzdIUZZ9HXrolSLggCTXm3QAwRF
- xiicxuALV8Y1Ib1TAB1dwgdUHRITtYMA8vP6XHtmaETY5dcJxne5U9nkUN5F/wBiUYo1
- WSGg==
-X-Gm-Message-State: APjAAAXbY8j+AKtJt6vLyZZ517IoxTLvsCboXO/7C6CysdVzeazkF6tE
- jctBeK7wtuQ5oqh3tuGRinorpA==
-X-Google-Smtp-Source: APXvYqyzjqx++4TuPpPinFpXXZarmgvZQIjG4hfHR19fCqm8huUWzBgcK4set+PBcXGbHqwRTdjj4w==
-X-Received: by 2002:a62:6342:: with SMTP id x63mr3047294pfb.103.1581371185341; 
- Mon, 10 Feb 2020 13:46:25 -0800 (PST)
-Received: from localhost ([2600:1012:b161:af3e:21a9:6308:301b:ae65])
- by smtp.gmail.com with ESMTPSA id k63sm385817pjb.10.2020.02.10.13.46.24
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 10 Feb 2020 13:46:24 -0800 (PST)
-Date: Mon, 10 Feb 2020 13:46:24 -0800 (PST)
-X-Google-Original-Date: Mon, 10 Feb 2020 13:44:59 PST (-0800)
-From: Palmer Dabbelt <palmerdabbelt@google.com>
-X-Google-Original-From: Palmer Dabbelt <palmer@dabbelt.com>
-Subject: Re: [PATCH v2 07/35] target/riscv: Add the force HS exception mode
-In-Reply-To: <aa605609b28f811897f61d9b6a48f2ad6e396f0f.1580518859.git.alistair.francis@wdc.com>
-CC: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- Alistair Francis <Alistair.Francis@wdc.com>, alistair23@gmail.com
-To: Alistair Francis <Alistair.Francis@wdc.com>
-Message-ID: <mhng-d8e0b6f3-e24d-4dce-a5a2-a46e59db8950@palmerdabbelt-glaptop1>
-Mime-Version: 1.0 (MHng)
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=9lFy3+MRR7TYYly5eGGTBavGK2tFmldkiIzr326jGWQ=;
+ b=Z3/5fgHQlytE/ha4jc7Ynmujs6HlSNsyxPVBJWfCliM0MrMpWp3tO6njxhmDZqvJoa
+ kwOUohl8GROp2+JkE8FY4jSlIbyR/0hsudoj47fkp3UZXAwvmtDijH97OAqhjC+x6In3
+ Wrq5FTmzN/XnrplorGrf2f6+xIHEey2Snp5h3SG0a6PXZR5gGrX8VGb9Bk6uIuanoi2e
+ BTi4/Rn+KSZ3YaCOOCuu3a8kMmz2i789tG/CRNn/2MPC4qUlWm2VKB60cdZNs33IJxuj
+ AXBLFq+IE2RTPj007rZB7MOPm/BHM8RAYDRvG2O0uZLLAtwQp7jjjwkzyDI4bSCTVTlW
+ pqjQ==
+X-Gm-Message-State: APjAAAXv4JYTbAgYZ27/EUV5mDzXemYWSa1vEEzjBtShroRF2RRwhrgg
+ 3IYM1QVWGMUY3ta289znih5n0SCgTmU=
+X-Google-Smtp-Source: APXvYqxGoKYN75yWZb6ileXm0lw3EqYrHtO7FrYohtsNpyoeyvWVXYPr3DFXCOt7IQv3N8HbLijkzA==
+X-Received: by 2002:a62:342:: with SMTP id 63mr3830595pfd.19.1581436410470;
+ Tue, 11 Feb 2020 07:53:30 -0800 (PST)
+Received: from [192.168.1.11] (97-126-123-70.tukw.qwest.net. [97.126.123.70])
+ by smtp.gmail.com with ESMTPSA id
+ f18sm4582819pgn.2.2020.02.11.07.53.29
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 11 Feb 2020 07:53:29 -0800 (PST)
+Subject: Re: [PATCH v4 1/4] target/riscv: add vector extension field in
+ CPURISCVState
+To: LIU Zhiwei <zhiwei_liu@c-sky.com>, alistair23@gmail.com,
+ chihmin.chao@sifive.com, palmer@dabbelt.com
+Cc: wenmeng_zhang@c-sky.com, wxy194768@alibaba-inc.com,
+ qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+References: <20200210081240.11481-1-zhiwei_liu@c-sky.com>
+ <20200210081240.11481-2-zhiwei_liu@c-sky.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+Message-ID: <cc4d0b93-013f-5cf5-4ff4-248ab99eec70@linaro.org>
+Date: Tue, 11 Feb 2020 07:53:27 -0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.4.1
+MIME-Version: 1.0
+In-Reply-To: <20200210081240.11481-2-zhiwei_liu@c-sky.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::442
+X-Received-From: 2607:f8b0:4864:20::544
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -72,80 +79,24 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Feb 2020 21:46:30 -0000
+X-List-Received-Date: Tue, 11 Feb 2020 15:53:34 -0000
 
-On Fri, 31 Jan 2020 17:01:54 PST (-0800), Alistair Francis wrote:
-> Add a FORCE_HS_EXCEP mode to the RISC-V virtulisation status. This bit
-> specifies if an exeption should be taken to HS mode no matter the
-> current delegation status. This is used when an exeption must be taken
-> to HS mode, such as when handling interrupts.
->
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+On 2/10/20 8:12 AM, LIU Zhiwei wrote:
+> The 32 vector registers will be viewed as a continuous memory block.
+> It avoids the convension between element index and (regno,offset).
+> Thus elements can be directly accessed by offset from the first vector
+> base address.
+> 
+> Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
 > ---
->  target/riscv/cpu.h        |  2 ++
->  target/riscv/cpu_bits.h   |  6 ++++++
->  target/riscv/cpu_helper.c | 18 ++++++++++++++++++
->  3 files changed, 26 insertions(+)
->
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index a9cbd8584e..42720d65f9 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -273,6 +273,8 @@ bool riscv_cpu_exec_interrupt(CPUState *cs, int interrupt_request);
->  bool riscv_cpu_fp_enabled(CPURISCVState *env);
->  bool riscv_cpu_virt_enabled(CPURISCVState *env);
->  void riscv_cpu_set_virt_enabled(CPURISCVState *env, bool enable);
-> +bool riscv_cpu_force_hs_excep_enabled(CPURISCVState *env);
-> +void riscv_cpu_set_force_hs_excep(CPURISCVState *env, bool enable);
->  int riscv_cpu_mmu_index(CPURISCVState *env, bool ifetch);
->  hwaddr riscv_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
->  void  riscv_cpu_do_unaligned_access(CPUState *cs, vaddr addr,
-> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-> index 2cdb0de4fe..ad6479796c 100644
-> --- a/target/riscv/cpu_bits.h
-> +++ b/target/riscv/cpu_bits.h
-> @@ -432,6 +432,12 @@
->
->  /* Virtulisation Register Fields */
->  #define VIRT_ONOFF          1
-> +/* This is used to save state for when we take an exception. If this is set
-> + * that means that we want to force a HS level exception (no matter what the
-> + * delegation is set to). This will occur for things such as a second level
-> + * page table fault.
-> + */
-> +#define FORCE_HS_EXCEP      2
->
->  /* RV32 satp CSR field masks */
->  #define SATP32_MODE         0x80000000
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index 5844e543f3..1e28103500 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -100,6 +100,24 @@ void riscv_cpu_set_virt_enabled(CPURISCVState *env, bool enable)
->      env->virt = set_field(env->virt, VIRT_ONOFF, enable);
->  }
->
-> +bool riscv_cpu_force_hs_excep_enabled(CPURISCVState *env)
-> +{
-> +    if (!riscv_has_ext(env, RVH)) {
-> +        return false;
-> +    }
-> +
-> +    return get_field(env->virt, FORCE_HS_EXCEP);
-> +}
-> +
-> +void riscv_cpu_set_force_hs_excep(CPURISCVState *env, bool enable)
-> +{
-> +    if (!riscv_has_ext(env, RVH)) {
-> +        return;
-> +    }
-> +
-> +    env->virt = set_field(env->virt, FORCE_HS_EXCEP, enable);
-> +}
-> +
->  int riscv_cpu_claim_interrupts(RISCVCPU *cpu, uint32_t interrupts)
->  {
->      CPURISCVState *env = &cpu->env;
+>  target/riscv/cpu.h | 13 +++++++++++++
+>  1 file changed, 13 insertions(+)
 
-Reviewed-by: Palmer Dabbelt <palmerdabbelt@google.com>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+
+I still don't think you need to put stuff into a sub-structure.  These register
+names are unique in the manual, and not subdivided there.
+
+
+r~
 
