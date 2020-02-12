@@ -1,74 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1j1xgc-0004za-7E
-	for mharc-qemu-riscv@gnu.org; Wed, 12 Feb 2020 14:28:38 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:33000)
+	id 1j1yEm-0006aF-4B
+	for mharc-qemu-riscv@gnu.org; Wed, 12 Feb 2020 15:03:56 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:37795)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <richard.henderson@linaro.org>) id 1j1xgZ-0004z6-MO
- for qemu-riscv@nongnu.org; Wed, 12 Feb 2020 14:28:36 -0500
+ (envelope-from <palmerdabbelt@google.com>) id 1j1yEj-0006a0-Vn
+ for qemu-riscv@nongnu.org; Wed, 12 Feb 2020 15:03:55 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <richard.henderson@linaro.org>) id 1j1xgX-0001VM-SX
- for qemu-riscv@nongnu.org; Wed, 12 Feb 2020 14:28:35 -0500
-Received: from mail-pj1-x1044.google.com ([2607:f8b0:4864:20::1044]:52135)
+ (envelope-from <palmerdabbelt@google.com>) id 1j1yEi-00020b-NG
+ for qemu-riscv@nongnu.org; Wed, 12 Feb 2020 15:03:53 -0500
+Received: from mail-pg1-x543.google.com ([2607:f8b0:4864:20::543]:46248)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
- id 1j1xgX-0001Ue-JO
- for qemu-riscv@nongnu.org; Wed, 12 Feb 2020 14:28:33 -0500
-Received: by mail-pj1-x1044.google.com with SMTP id fa20so1297313pjb.1
- for <qemu-riscv@nongnu.org>; Wed, 12 Feb 2020 11:28:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=VzX5fZdMXet860J5nqoU7jijjZtWDUjHCSpcSvWlf68=;
- b=JqOekRwsKI0HLeeiPGVjrFLm01QbRefDuQJ1od5blTW54IygSKNK0YNJG/uqvpB9sD
- BZSCApz3yTKe8OmH3Mr4CjK8KfrL7rxQjF2vCKxhyKmalg1agQ/5EljfVgvW5KllF2Mt
- vihbgeCsnDfgAtI7DZ4PJCFrX8lcp81Zxa0yG1UPYUgJt3Rbrx7FsR0zyzNiREgfDF0d
- YRC/J2pbF+AblcXetL1QZK1EpaZI0vvQanpbbGl6dVX9Fi5ZArPnaR0gNYUXPi3B2BIb
- /DRgoqQsHiSXx9WB6i7P1uX/MUs84T14BDgB6ve85pV5NB2a8R3l1SGMWEdCjBnOhWpX
- lRcg==
+ (Exim 4.71) (envelope-from <palmerdabbelt@google.com>)
+ id 1j1yEi-00020C-FF
+ for qemu-riscv@nongnu.org; Wed, 12 Feb 2020 15:03:52 -0500
+Received: by mail-pg1-x543.google.com with SMTP id b35so1625519pgm.13
+ for <qemu-riscv@nongnu.org>; Wed, 12 Feb 2020 12:03:52 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
+ h=date:from:subject:in-reply-to:cc:to:message-id:mime-version
+ :content-transfer-encoding;
+ bh=ku0u44AaXoWhDq+EGfoD3hhpjQe5d615GZuiFC5+jSA=;
+ b=Ae0cQpHxGFtKGvlbMZLYFXBCzA4+0XVN1wH5eVR0pxQsUcTivZoI0HYzDWz3g3bTvt
+ vkoSLquSjQnLfjHNhfaNWBsBmQZfYccxAmQL56M0aZ7xMm8pHtYNBzVLGvvVOvFC5309
+ QWtlQQs0UDdUQ8ReSE/ii6YvxrCNo2Qm9etaevZlBPQIN6wGgs97uCJe0yMheAuwDRdg
+ YAHIYLgaIvEDBMDrSwrwD5hs+61u0bT8NWfnmpiccqXEQfqFjaGNgrPgaJbPoN4BDvcW
+ 7flzD8PeSyuL1VP+MW9Cf3psBlC2jpJKUs8BrgI6yVryYu8pC9H48LcSMazTneFrL0Il
+ as/g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=VzX5fZdMXet860J5nqoU7jijjZtWDUjHCSpcSvWlf68=;
- b=WqjJCJ0WrC6ew/WDgQq+V1v151BFHeuEE8Zswg1//anVM/Zia/zz0Yitc9UY5bhsfv
- /KOcI2tom/owlHmkCWkDgeSBlJtnwYnu4S+dqNFuEu+yKisbx67AophRjg7wGVzQ+aiv
- BKnzCxzQMR9QHH02KIGXwbWGb5K5NnqkB1a4B7Un6USOXOkCB5a9vWcjQBTIGGrD2Y4u
- 9yn0sKiLo2khMnT7uX8gDnnMW81W2dy9w+yTwbLldjsKoQoCLV4ugSQNTo1hy7kQGvbH
- u2Aqgk82zTyfSXz+PIh27HQ+YZJnp5yThQx2+4Y8c3kQ+QeNVZ9MIhDGxAAdwi1aSTKW
- kP9g==
-X-Gm-Message-State: APjAAAXU5G9BrgbkRs0NByYuobiowlZ2XOIpp23P4rUMY38yQlh0pfnm
- j9fqKNsLFpuEn84DzNoE5T5K4kAFrVc=
-X-Google-Smtp-Source: APXvYqwJsy4QBFrkbCfhSaogBblmqVjiJIqzmwt05iKrUtfJk3W0hWuuO46t+ROW/AsfwbDkcKTKjg==
-X-Received: by 2002:a17:90a:6545:: with SMTP id f5mr724869pjs.42.1581535711650; 
- Wed, 12 Feb 2020 11:28:31 -0800 (PST)
-Received: from [192.168.1.11] (97-126-123-70.tukw.qwest.net. [97.126.123.70])
- by smtp.gmail.com with ESMTPSA id
- c184sm36953pfa.39.2020.02.12.11.28.30
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 12 Feb 2020 11:28:30 -0800 (PST)
-Subject: Re: [PATCH v4 4/4] target/riscv: add vector configure instruction
-To: LIU Zhiwei <zhiwei_liu@c-sky.com>, alistair23@gmail.com,
- chihmin.chao@sifive.com, palmer@dabbelt.com
-Cc: wenmeng_zhang@c-sky.com, wxy194768@alibaba-inc.com,
- qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-References: <20200210081240.11481-1-zhiwei_liu@c-sky.com>
- <20200210081240.11481-5-zhiwei_liu@c-sky.com>
- <053777e2-7180-5584-cf7f-7876800d9dc8@linaro.org>
- <bb1f595d-fbe8-93a2-c67c-25be7996aec3@c-sky.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <ae088484-c0ac-6e69-0b50-1d2e1455a591@linaro.org>
-Date: Wed, 12 Feb 2020 11:28:28 -0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.4.1
-MIME-Version: 1.0
-In-Reply-To: <bb1f595d-fbe8-93a2-c67c-25be7996aec3@c-sky.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
+ h=x-gm-message-state:date:from:subject:in-reply-to:cc:to:message-id
+ :mime-version:content-transfer-encoding;
+ bh=ku0u44AaXoWhDq+EGfoD3hhpjQe5d615GZuiFC5+jSA=;
+ b=R05DWDHq2NLUNadGsY3dDxfILACZvSo2PUDk2dS+mildT4wz7flsuaxHrK2WSWhe97
+ YmXFMb2dAPWDuoRbzKGOFKVLw7vSs4MdNFqtyG2VNzY27vxdY7EGIv8ZpnGaUPVWm6v9
+ d+cLJ+Oyhjqjro+XZ0pbftUFE/If5d29erkxsR6FZBHZB01pUysPKHp1SOa1gqfgqnbd
+ yKvuTqq8BT0SkBDKwFE3BDV7k0SqpV+l5uwWpzrUtPLpyoARhimhrirGahMwLS1i0I/M
+ BrUSFOLZ8QHaQUsvLy4afsfM6D89w/k+3y9jlK68t8ttBR9iSExTwsgFequxHCERuFdY
+ nlHg==
+X-Gm-Message-State: APjAAAXDTfnQHlXYmldyscNxz18uPbAZg0I++ybO00jxmsXat8XOLXdA
+ T5JFn7h5r6M0kkbQWz/akSTZYQ==
+X-Google-Smtp-Source: APXvYqybEyBz6aZCFIco49ZXh1fSVeezuSMKPMUySe5EwzVt3DY/FyxkZlAiYcCH+jrIfdTOdbLFJg==
+X-Received: by 2002:a62:790e:: with SMTP id u14mr13693447pfc.174.1581537830747; 
+ Wed, 12 Feb 2020 12:03:50 -0800 (PST)
+Received: from localhost ([2620:0:1000:2514:23a5:d584:6a92:3e3c])
+ by smtp.gmail.com with ESMTPSA id b24sm73925pfo.84.2020.02.12.12.03.50
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 12 Feb 2020 12:03:50 -0800 (PST)
+Date: Wed, 12 Feb 2020 12:03:50 -0800 (PST)
+X-Google-Original-Date: Wed, 12 Feb 2020 12:03:47 PST (-0800)
+From: Palmer Dabbelt <palmerdabbelt@google.com>
+X-Google-Original-From: Palmer Dabbelt <palmer@dabbelt.com>
+Subject: Re: [PATCH v2 21/35] target/riscv: Add hypvervisor trap support
+In-Reply-To: <7ee4badbb4dfc33ab2e75151b69559f09d733575.1580518859.git.alistair.francis@wdc.com>
+CC: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
+ Alistair Francis <Alistair.Francis@wdc.com>, alistair23@gmail.com
+To: Alistair Francis <Alistair.Francis@wdc.com>
+Message-ID: <mhng-d32ca7fd-b39f-45d3-a373-ff66d707397b@palmerdabbelt-glaptop1>
+Mime-Version: 1.0 (MHng)
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::1044
+X-Received-From: 2607:f8b0:4864:20::543
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -80,58 +72,128 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Feb 2020 19:28:36 -0000
+X-List-Received-Date: Wed, 12 Feb 2020 20:03:55 -0000
 
-On 2/12/20 12:09 AM, LIU Zhiwei wrote:
-> 
-> 
-> On 2020/2/12 0:56, Richard Henderson wrote:
->> On 2/10/20 8:12 AM, LIU Zhiwei wrote:
->>>   static inline void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
->>> -                                        target_ulong *cs_base, uint32_t
->>> *flags)
->>> +                                        target_ulong *cs_base, uint32_t
->>> *pflags)
->>>   {
->>> +    uint32_t flags = 0;
->>> +    uint32_t vlmax;
->>> +    uint8_t vl_eq_vlmax;
->> bool.
-> OK.
-> 
-> Is it clearer to use "bool" here? Or it's wrong to use "uint8_t "?
+On Fri, 31 Jan 2020 17:02:30 PST (-0800), Alistair Francis wrote:
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> ---
+>  target/riscv/cpu_helper.c | 69 +++++++++++++++++++++++++++++++++------
+>  1 file changed, 59 insertions(+), 10 deletions(-)
+>
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index 98017df33b..e7728cb0ca 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -639,6 +639,8 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+>
+>      RISCVCPU *cpu = RISCV_CPU(cs);
+>      CPURISCVState *env = &cpu->env;
+> +    bool force_hs_execp = riscv_cpu_force_hs_excep_enabled(env);
+> +    target_ulong s;
+>
+>      /* cs->exception is 32-bits wide unlike mcause which is XLEN-bits wide
+>       * so we mask off the MSB and separate into trap type and cause.
+> @@ -648,19 +650,14 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+>      target_ulong deleg = async ? env->mideleg : env->medeleg;
+>      target_ulong tval = 0;
+>
+> -    static const int ecall_cause_map[] = {
+> -        [PRV_U] = RISCV_EXCP_U_ECALL,
+> -        [PRV_S] = RISCV_EXCP_S_ECALL,
+> -        [PRV_H] = RISCV_EXCP_VS_ECALL,
+> -        [PRV_M] = RISCV_EXCP_M_ECALL
+> -    };
+> -
+>      if (!async) {
+>          /* set tval to badaddr for traps with address information */
+>          switch (cause) {
+>          case RISCV_EXCP_INST_GUEST_PAGE_FAULT:
+>          case RISCV_EXCP_LOAD_GUEST_ACCESS_FAULT:
+>          case RISCV_EXCP_STORE_GUEST_AMO_ACCESS_FAULT:
+> +            force_hs_execp = true;
+> +            /* fallthrough */
+>          case RISCV_EXCP_INST_ADDR_MIS:
+>          case RISCV_EXCP_INST_ACCESS_FAULT:
+>          case RISCV_EXCP_LOAD_ADDR_MIS:
+> @@ -678,7 +675,16 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+>          /* ecall is dispatched as one cause so translate based on mode */
+>          if (cause == RISCV_EXCP_U_ECALL) {
+>              assert(env->priv <= 3);
+> -            cause = ecall_cause_map[env->priv];
+> +
+> +            if (env->priv == PRV_M) {
+> +                cause = RISCV_EXCP_M_ECALL;
+> +            } else if (env->priv == PRV_S && riscv_cpu_virt_enabled(env)) {
+> +                cause = RISCV_EXCP_VS_ECALL;
+> +            } else if (env->priv == PRV_S && !riscv_cpu_virt_enabled(env)) {
+> +                cause = RISCV_EXCP_S_ECALL;
+> +            } else if (env->priv == PRV_U) {
+> +                cause = RISCV_EXCP_U_ECALL;
+> +            }
+>          }
+>      }
+>
+> @@ -688,7 +694,36 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+>      if (env->priv <= PRV_S &&
+>              cause < TARGET_LONG_BITS && ((deleg >> cause) & 1)) {
+>          /* handle the trap in S-mode */
+> -        target_ulong s = env->mstatus;
+> +        if (riscv_has_ext(env, RVH)) {
+> +            target_ulong hdeleg = async ? env->hideleg : env->hedeleg;
+> +
+> +            if (riscv_cpu_virt_enabled(env) && ((hdeleg >> cause) & 1) &&
+> +                !force_hs_execp) {
+> +                /* Trap to VS mode */
+> +            } else if (riscv_cpu_virt_enabled(env)) {
+> +                /* Trap into HS mode, from virt */
+> +                riscv_cpu_swap_hypervisor_regs(env);
+> +                env->hstatus = set_field(env->hstatus, HSTATUS_SP2V,
+> +                                         get_field(env->hstatus, HSTATUS_SPV));
+> +                env->hstatus = set_field(env->hstatus, HSTATUS_SP2P,
+> +                                         get_field(env->mstatus, SSTATUS_SPP));
+> +                env->hstatus = set_field(env->hstatus, HSTATUS_SPV,
+> +                                         riscv_cpu_virt_enabled(env));
+> +
+> +                riscv_cpu_set_virt_enabled(env, 0);
+> +                riscv_cpu_set_force_hs_excep(env, 0);
+> +            } else {
+> +                /* Trap into HS mode */
+> +                env->hstatus = set_field(env->hstatus, HSTATUS_SP2V,
+> +                                         get_field(env->hstatus, HSTATUS_SPV));
+> +                env->hstatus = set_field(env->hstatus, HSTATUS_SP2P,
+> +                                         get_field(env->mstatus, SSTATUS_SPP));
+> +                env->hstatus = set_field(env->hstatus, HSTATUS_SPV,
+> +                                         riscv_cpu_virt_enabled(env));
+> +            }
+> +        }
+> +
+> +        s = env->mstatus;
+>          s = set_field(s, MSTATUS_SPIE, env->priv_ver >= PRIV_VERSION_1_10_0 ?
+>              get_field(s, MSTATUS_SIE) : get_field(s, MSTATUS_UIE << env->priv));
+>          s = set_field(s, MSTATUS_SPP, env->priv);
+> @@ -702,7 +737,21 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+>          riscv_cpu_set_mode(env, PRV_S);
+>      } else {
+>          /* handle the trap in M-mode */
+> -        target_ulong s = env->mstatus;
+> +        if (riscv_has_ext(env, RVH)) {
+> +            if (riscv_cpu_virt_enabled(env)) {
+> +                riscv_cpu_swap_hypervisor_regs(env);
+> +            }
+> +            env->mstatus = set_field(env->mstatus, MSTATUS_MPV,
+> +                                      riscv_cpu_virt_enabled(env));
+> +            env->mstatus = set_field(env->mstatus, MSTATUS_MTL,
+> +                                      riscv_cpu_force_hs_excep_enabled(env));
+> +
+> +            /* Trapping to M mode, virt is disabled */
+> +            riscv_cpu_set_virt_enabled(env, 0);
+> +            riscv_cpu_set_force_hs_excep(env, 0);
+> +        }
+> +
+> +        s = env->mstatus;
+>          s = set_field(s, MSTATUS_MPIE, env->priv_ver >= PRIV_VERSION_1_10_0 ?
+>              get_field(s, MSTATUS_MIE) : get_field(s, MSTATUS_UIE << env->priv));
+>          s = set_field(s, MSTATUS_MPP, env->priv);
 
-It is clearer.  Using uint8_t makes me wonder what else you were going to put
-in that variable, but the answer from the code below is nothing.
-
->>> +    if (sew > cpu->cfg.elen) { /* only set vill bit. */
->>> +        env->vext.vtype = FIELD_DP64(0, VTYPE, VILL, 1);
->>> +        env->vext.vl = 0;
->>> +        env->vext.vstart = 0;
->>> +        return 0;
->>> +    }
->> You're missing checks against EDIV, VILL and the RESERVED field == 0.
-> This implementation does not support "Zvediv" . So I did not check it. I'm not
-> sure if I should check(ediv==0).
-> 
-> I missed check  "VILL" filed.  Fix up it next patch.
-> 
-> I'm not quite sure if I should set VILL if  the RESERVED field != 0.
-
-
-The manual says
-
-  # If the vtype setting is not supported by the implementation,
-  # then the vill bit is set in vtype, the remaining bits in
-  # vtype are set to zero, and the vl register is also set
-  # to zero.
-
-So yes, you most certainly have to check ediv == 0.
-
-By extension, I believe the entire RESERVED field should be checked.
-Otherwise, we don't get the same forward compatible behaviour for the next
-vector extension beyond Zvediv.
-
-
-r~
+Reviewed-by: Palmer Dabbelt <palmerdabbelt@google.com>
 
