@@ -1,67 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1j2JGv-0004EU-B1
-	for mharc-qemu-riscv@gnu.org; Thu, 13 Feb 2020 13:31:33 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:39616)
+	id 1j2JPB-0004iz-BW
+	for mharc-qemu-riscv@gnu.org; Thu, 13 Feb 2020 13:40:05 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:55631)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <palmerdabbelt@google.com>) id 1j2JGs-0004Ah-J9
- for qemu-riscv@nongnu.org; Thu, 13 Feb 2020 13:31:31 -0500
+ (envelope-from <palmerdabbelt@google.com>) id 1j2JP8-0004gJ-HI
+ for qemu-riscv@nongnu.org; Thu, 13 Feb 2020 13:40:03 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmerdabbelt@google.com>) id 1j2JGr-0003bj-IA
- for qemu-riscv@nongnu.org; Thu, 13 Feb 2020 13:31:30 -0500
-Received: from mail-pg1-x543.google.com ([2607:f8b0:4864:20::543]:38679)
+ (envelope-from <palmerdabbelt@google.com>) id 1j2JP6-0002dS-5j
+ for qemu-riscv@nongnu.org; Thu, 13 Feb 2020 13:40:02 -0500
+Received: from mail-pf1-x443.google.com ([2607:f8b0:4864:20::443]:39000)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <palmerdabbelt@google.com>)
- id 1j2JGr-0003Yl-BA
- for qemu-riscv@nongnu.org; Thu, 13 Feb 2020 13:31:29 -0500
-Received: by mail-pg1-x543.google.com with SMTP id d6so3557816pgn.5
- for <qemu-riscv@nongnu.org>; Thu, 13 Feb 2020 10:31:28 -0800 (PST)
+ id 1j2JP5-0002bP-V6
+ for qemu-riscv@nongnu.org; Thu, 13 Feb 2020 13:40:00 -0500
+Received: by mail-pf1-x443.google.com with SMTP id 84so3497117pfy.6
+ for <qemu-riscv@nongnu.org>; Thu, 13 Feb 2020 10:39:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
  h=date:from:subject:in-reply-to:cc:to:message-id:mime-version
  :content-transfer-encoding;
- bh=e1B/DYZh4ud6jziUk6EW6H965tP5guCdaoUQ3+Ha3jQ=;
- b=SmpkQnSzhjpVoohMrKBe+I4Pi+O1Ie26fWJfUBW+gihdO23FwR5Zwg2vfiNnJQUZHx
- A3u4jkbimOYDRHnrkNWmOHs0vu+rZDLmR+/T9XwgGVQJ9/xZz1ju4YzHMyNM1aGnpMbK
- C+HBHT6N9jO/lMTjbd4iv9IRANY9EWaz9XMP0YLBHvUuNFy0KoDI+TgKlYpbyF5mWA/2
- bYfFspltR0e6rmaKD/VmcLAqldWNzPwlcD4y/WHJR/hW2/CAkmfHDvLrsBBR0R64fn22
- Ca8v0YVGbjFSSXQ7g4gdPyOfE4nh48RUPQDw7CVGnnHfJ+dq/5G1/vR/iEuTBj3JCXGa
- YXVQ==
+ bh=WpagkWEB+HFU0SwhFjWW2kqcjRn0A0RQR9U9vbiDKXQ=;
+ b=t34QHKT8C0S4sCPcE3usOzJDQl+dEARKOQE5ebVrlAopYWEcOLNDRfqJ7jntHw9x7q
+ tyVyIqQRZ4xlvmen45w8utj/fZFTtrM14hsBsJVUQhThb/av/2piqtLijezEhPEzxeqA
+ IzI3W3a9Lb0voCvEN9oet/VVinYRAWD+gn8XGb9wHB1TfOjXmunRAaEin9ywDdjFyZoJ
+ Jo/iVmWiAdZ/psMRFoRSzcoP5AVdtF1wFFdjDgYIWBbMo/aBusjvsXZS1k340bddjJAW
+ /Y2Bes93Co0FsnvffOuV7WJoAMiREB5kHo2mQE6t80Kl5Y2VfTX+JLjgbuO9aa8C6M4t
+ Vm8A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:subject:in-reply-to:cc:to:message-id
  :mime-version:content-transfer-encoding;
- bh=e1B/DYZh4ud6jziUk6EW6H965tP5guCdaoUQ3+Ha3jQ=;
- b=ujGSHDvzs8vmI8wANzGDl1y0RYiEOYoTOHQvXCFRbAqxI2m5iImYKiASa80NIEA364
- uVjDVGVjmsW9W5oMEpMl2Q4VKvBGUYP0FDb8KR3zr+thR9Z74pt7FukNm5lIPSEfPOco
- WAgq46W9qvZbf+AuivXVGif7xgiWE3dvH6p77pUs8LgdzIQWxNdgoyPUVJE+NerJsgjU
- lqQC8QQfGjjqFemcXMcxc82v+s9ydWSQyuxMa/GSZ+Zgm3frTDytUBA2v/TZmSOSQnTr
- 88ABr2kxPu5Th+gl040XGp3nNeKNU+GT9fy3qr6Ibsazk5C5HVSG7SlAnyep4/dUO7lh
- BatQ==
-X-Gm-Message-State: APjAAAXyHUmJagvnrtG0Z1gsEy4Fm2S/oVDcT6e/GEGh9s8RRLBZNMrJ
- 8RIPz4X3byOOA/mFXJe9MvVXYg==
-X-Google-Smtp-Source: APXvYqwAwU37DkF4MiduiPYDVUXvJggcmf0+8uP3J+zA8IjMqYvEjnVs5mW9CXaTkeVFhA12OaPyPw==
-X-Received: by 2002:a63:1f54:: with SMTP id q20mr18134875pgm.400.1581618687341; 
- Thu, 13 Feb 2020 10:31:27 -0800 (PST)
+ bh=WpagkWEB+HFU0SwhFjWW2kqcjRn0A0RQR9U9vbiDKXQ=;
+ b=Bw8di9oEG50sXVe7+SWntJh7gNotnyl1q/FZEmDiptvInvsKN/f0Rvvq2BZ13sHp1M
+ Hb83gy0EnfzeCBD4lmRq+oJjmJ/D9+NApJgC5MEiWLxF9Ita75tp+t1UXBLWDF4lRllK
+ kxoVvD2DizXrnwBh9EXGNSY9lDptIPi845z5TcNI4bDMWh2G+ggsZ5bCc19KoEUNfzB0
+ kQCr4GhoTBI+XkfQ76RsJjB54oiqG4IWtmp+jtYt/bdBb+kkFoKpCNaggodZT8ZgEtVl
+ /050Y6I3eRzwSE5jIi8QHz9CZ6QpfagJfhip6XlT4bpxpc6Um6ILgVrPeOcIBUdlR79S
+ 2ksA==
+X-Gm-Message-State: APjAAAVocRFYkFARpT4gKoQ2jH4KB9kEuoleimoPPjDZX1Xpaarxz/pC
+ SQ/XGLcPHHlZbwDzJLiwwmLBfg==
+X-Google-Smtp-Source: APXvYqzglZCrYD/PN02be8NKeMBx4SQKMzF49fdoW+9/MyGwPdDpxHV9NhCssyHUpqrYYvMvHUoHFg==
+X-Received: by 2002:a65:404d:: with SMTP id h13mr17092537pgp.156.1581619198677; 
+ Thu, 13 Feb 2020 10:39:58 -0800 (PST)
 Received: from localhost ([2620:0:1000:2514:23a5:d584:6a92:3e3c])
- by smtp.gmail.com with ESMTPSA id q15sm3937679pgm.47.2020.02.13.10.31.26
+ by smtp.gmail.com with ESMTPSA id 23sm3911509pfh.28.2020.02.13.10.39.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 13 Feb 2020 10:31:26 -0800 (PST)
-Date: Thu, 13 Feb 2020 10:31:26 -0800 (PST)
-X-Google-Original-Date: Thu, 13 Feb 2020 10:31:24 PST (-0800)
+ Thu, 13 Feb 2020 10:39:58 -0800 (PST)
+Date: Thu, 13 Feb 2020 10:39:58 -0800 (PST)
+X-Google-Original-Date: Thu, 13 Feb 2020 10:39:56 PST (-0800)
 From: Palmer Dabbelt <palmerdabbelt@google.com>
 X-Google-Original-From: Palmer Dabbelt <palmer@dabbelt.com>
-Subject: Re: [PATCH v2 25/35] target/riscv: Only set TB flags with FP status
- if enabled
-In-Reply-To: <e8605241a8acc3ead0177d723f70a44d08234b24.1580518859.git.alistair.francis@wdc.com>
+Subject: Re: [PATCH v2 26/35] target/riscv: Disable guest FP support based on
+ virtual status
+In-Reply-To: <af25bd3f009f8f73b43c91ab5205bfcb9d28666b.1580518859.git.alistair.francis@wdc.com>
 CC: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
  Alistair Francis <Alistair.Francis@wdc.com>, alistair23@gmail.com
 To: Alistair Francis <Alistair.Francis@wdc.com>
-Message-ID: <mhng-758094f5-1608-4295-942c-de47919a054b@palmerdabbelt-glaptop1>
+Message-ID: <mhng-7d291f79-4c48-48a5-858f-65ca37fdf4c3@palmerdabbelt-glaptop1>
 Mime-Version: 1.0 (MHng)
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::543
+X-Received-From: 2607:f8b0:4864:20::443
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -73,29 +73,31 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Feb 2020 18:31:31 -0000
+X-List-Received-Date: Thu, 13 Feb 2020 18:40:03 -0000
 
-On Fri, 31 Jan 2020 17:02:41 PST (-0800), Alistair Francis wrote:
+On Fri, 31 Jan 2020 17:02:44 PST (-0800), Alistair Francis wrote:
+> When the Hypervisor extension is in use we only enable floating point
+> support when both status and vsstatus have enabled floating point
+> support.
+>
 > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 > ---
->  target/riscv/cpu.h | 5 ++++-
->  1 file changed, 4 insertions(+), 1 deletion(-)
+>  target/riscv/cpu_helper.c | 3 +++
+>  1 file changed, 3 insertions(+)
 >
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 5b889a0065..aa04e5cca7 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -332,7 +332,10 @@ static inline void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
->  #ifdef CONFIG_USER_ONLY
->      *flags = TB_FLAGS_MSTATUS_FS;
->  #else
-> -    *flags = cpu_mmu_index(env, 0) | (env->mstatus & MSTATUS_FS);
-> +    *flags = cpu_mmu_index(env, 0);
-> +    if (riscv_cpu_fp_enabled(env)) {
-> +        *flags |= env->mstatus & MSTATUS_FS;
-> +    }
->  #endif
->  }
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index e7728cb0ca..827a38324c 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -99,6 +99,9 @@ bool riscv_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
+>  bool riscv_cpu_fp_enabled(CPURISCVState *env)
+>  {
+>      if (env->mstatus & MSTATUS_FS) {
+> +        if (riscv_cpu_virt_enabled(env) && !(env->mstatus_hs & MSTATUS_FS)) {
+> +            return false;
+> +        }
+>          return true;
+>      }
 
 Reviewed-by: Palmer Dabbelt <palmerdabbelt@google.com>
 
