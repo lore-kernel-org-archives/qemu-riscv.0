@@ -1,59 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1j2Ddr-00074v-BF
-	for mharc-qemu-riscv@gnu.org; Thu, 13 Feb 2020 07:30:51 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:40637)
+	id 1j2JGv-0004EU-B1
+	for mharc-qemu-riscv@gnu.org; Thu, 13 Feb 2020 13:31:33 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:39616)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <bmeng.cn@gmail.com>) id 1j2Ddn-0006yw-PA
- for qemu-riscv@nongnu.org; Thu, 13 Feb 2020 07:30:49 -0500
+ (envelope-from <palmerdabbelt@google.com>) id 1j2JGs-0004Ah-J9
+ for qemu-riscv@nongnu.org; Thu, 13 Feb 2020 13:31:31 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <bmeng.cn@gmail.com>) id 1j2Ddm-0006qs-GX
- for qemu-riscv@nongnu.org; Thu, 13 Feb 2020 07:30:47 -0500
-Received: from mail-yw1-xc44.google.com ([2607:f8b0:4864:20::c44]:36915)
+ (envelope-from <palmerdabbelt@google.com>) id 1j2JGr-0003bj-IA
+ for qemu-riscv@nongnu.org; Thu, 13 Feb 2020 13:31:30 -0500
+Received: from mail-pg1-x543.google.com ([2607:f8b0:4864:20::543]:38679)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
- id 1j2Ddj-0006nK-NK; Thu, 13 Feb 2020 07:30:43 -0500
-Received: by mail-yw1-xc44.google.com with SMTP id l5so2502873ywd.4;
- Thu, 13 Feb 2020 04:30:43 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=fpTaUf8q+PPxyFmXzrg+tjSsNXG8nNZhHyqmFn4KNbw=;
- b=c7YEMxro7WI9INakdYK0VP44w6y0MZ3LJ2TlpO3bWenRKdAOPmbPggZL96TjoIQqHs
- oBIBuBtONXaER9HfiY9rSUrPWvSyre5cNIo0E6ITXDI5zjYckxHIW2RvNKb7+MtRvMnn
- yiX+JP43roE+R22Nd52USLZ7Xu2WO2w0Fb9XY4LwgCcgbF/PjrFR4znzBHC8+czUOusv
- AFTHBGoWEIq481yGDKluLi8kiCM/MSXpafJNV8E3OG4zosCT0Bzjc4zgT3xOAsmVXvKy
- gpDNM71lzl0iCxaUVB93MvCswXxiI5tovcrNttnDvm5x2iHvNIMrIN4XcNmnry77J8Fa
- w0MQ==
+ (Exim 4.71) (envelope-from <palmerdabbelt@google.com>)
+ id 1j2JGr-0003Yl-BA
+ for qemu-riscv@nongnu.org; Thu, 13 Feb 2020 13:31:29 -0500
+Received: by mail-pg1-x543.google.com with SMTP id d6so3557816pgn.5
+ for <qemu-riscv@nongnu.org>; Thu, 13 Feb 2020 10:31:28 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
+ h=date:from:subject:in-reply-to:cc:to:message-id:mime-version
+ :content-transfer-encoding;
+ bh=e1B/DYZh4ud6jziUk6EW6H965tP5guCdaoUQ3+Ha3jQ=;
+ b=SmpkQnSzhjpVoohMrKBe+I4Pi+O1Ie26fWJfUBW+gihdO23FwR5Zwg2vfiNnJQUZHx
+ A3u4jkbimOYDRHnrkNWmOHs0vu+rZDLmR+/T9XwgGVQJ9/xZz1ju4YzHMyNM1aGnpMbK
+ C+HBHT6N9jO/lMTjbd4iv9IRANY9EWaz9XMP0YLBHvUuNFy0KoDI+TgKlYpbyF5mWA/2
+ bYfFspltR0e6rmaKD/VmcLAqldWNzPwlcD4y/WHJR/hW2/CAkmfHDvLrsBBR0R64fn22
+ Ca8v0YVGbjFSSXQ7g4gdPyOfE4nh48RUPQDw7CVGnnHfJ+dq/5G1/vR/iEuTBj3JCXGa
+ YXVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=fpTaUf8q+PPxyFmXzrg+tjSsNXG8nNZhHyqmFn4KNbw=;
- b=lKCvtkkV4Roko3hXBxrP5xf+5T9j5x8t1nAUF/bDq9Z7SMTvB8VT9O0qqfgOSSkuZ6
- Gi3eZ4mfE4uF6waJ9qPmMsIEsKUc0kC0hYv1OZa4RKqoL4TDANYqjciVW1uq02ygEFzQ
- hzvxLFkt3ZP0q7Xa3r6WKs5cC4oDbvK/CllddCrn7Xz7gmfmrOcn3LAi2Ab/+LhbCQZB
- jgis/U5oKLmPhYWvYu6AyruG/wtsCPTmtcGQ7X5FP6/bR4LiXOQQugcEmiJ0h3feseHc
- CEf0Gxem9Ffl9aZ3FZ64SCpsK5S7Xt4OrDknTyBLGpllaKzCUD6pEH6fF1x/eMFBBKuF
- V21Q==
-X-Gm-Message-State: APjAAAV+7/v7mUWhpYQp50R0Kx6Spvu9iKw2xCvi7FdkmOK5153CA3EW
- cjPkH7h5IBqJMqJd1V79PEw5hUj9mZZTL/ah9DU=
-X-Google-Smtp-Source: APXvYqyBycb4QemjbfWjCs8fItbMDPnlVSpEelaax7mOX0mrlamaciPsdYmMNCtQssUmdBmJqQ/8e6ysxaXYc0KZYyM=
-X-Received: by 2002:a0d:eb0d:: with SMTP id u13mr2898570ywe.257.1581597042884; 
- Thu, 13 Feb 2020 04:30:42 -0800 (PST)
-MIME-Version: 1.0
-References: <20200212172921.36796-1-palmerdabbelt@google.com>
-In-Reply-To: <20200212172921.36796-1-palmerdabbelt@google.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Thu, 13 Feb 2020 20:30:32 +0800
-Message-ID: <CAEUhbmVBJvHGhQBVX5=TjMtL-+KKE=4L7LVS5GnFotLh85uBcg@mail.gmail.com>
-Subject: Re: [PULL] RISC-V Patches for the 5.0 Soft Freeze, Part 2
-To: Palmer Dabbelt <palmerdabbelt@google.com>
-Cc: Peter Maydell <peter.maydell@linaro.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
+ h=x-gm-message-state:date:from:subject:in-reply-to:cc:to:message-id
+ :mime-version:content-transfer-encoding;
+ bh=e1B/DYZh4ud6jziUk6EW6H965tP5guCdaoUQ3+Ha3jQ=;
+ b=ujGSHDvzs8vmI8wANzGDl1y0RYiEOYoTOHQvXCFRbAqxI2m5iImYKiASa80NIEA364
+ uVjDVGVjmsW9W5oMEpMl2Q4VKvBGUYP0FDb8KR3zr+thR9Z74pt7FukNm5lIPSEfPOco
+ WAgq46W9qvZbf+AuivXVGif7xgiWE3dvH6p77pUs8LgdzIQWxNdgoyPUVJE+NerJsgjU
+ lqQC8QQfGjjqFemcXMcxc82v+s9ydWSQyuxMa/GSZ+Zgm3frTDytUBA2v/TZmSOSQnTr
+ 88ABr2kxPu5Th+gl040XGp3nNeKNU+GT9fy3qr6Ibsazk5C5HVSG7SlAnyep4/dUO7lh
+ BatQ==
+X-Gm-Message-State: APjAAAXyHUmJagvnrtG0Z1gsEy4Fm2S/oVDcT6e/GEGh9s8RRLBZNMrJ
+ 8RIPz4X3byOOA/mFXJe9MvVXYg==
+X-Google-Smtp-Source: APXvYqwAwU37DkF4MiduiPYDVUXvJggcmf0+8uP3J+zA8IjMqYvEjnVs5mW9CXaTkeVFhA12OaPyPw==
+X-Received: by 2002:a63:1f54:: with SMTP id q20mr18134875pgm.400.1581618687341; 
+ Thu, 13 Feb 2020 10:31:27 -0800 (PST)
+Received: from localhost ([2620:0:1000:2514:23a5:d584:6a92:3e3c])
+ by smtp.gmail.com with ESMTPSA id q15sm3937679pgm.47.2020.02.13.10.31.26
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 13 Feb 2020 10:31:26 -0800 (PST)
+Date: Thu, 13 Feb 2020 10:31:26 -0800 (PST)
+X-Google-Original-Date: Thu, 13 Feb 2020 10:31:24 PST (-0800)
+From: Palmer Dabbelt <palmerdabbelt@google.com>
+X-Google-Original-From: Palmer Dabbelt <palmer@dabbelt.com>
+Subject: Re: [PATCH v2 25/35] target/riscv: Only set TB flags with FP status
+ if enabled
+In-Reply-To: <e8605241a8acc3ead0177d723f70a44d08234b24.1580518859.git.alistair.francis@wdc.com>
+CC: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
+ Alistair Francis <Alistair.Francis@wdc.com>, alistair23@gmail.com
+To: Alistair Francis <Alistair.Francis@wdc.com>
+Message-ID: <mhng-758094f5-1608-4295-942c-de47919a054b@palmerdabbelt-glaptop1>
+Mime-Version: 1.0 (MHng)
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::c44
+X-Received-From: 2607:f8b0:4864:20::543
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -65,56 +73,29 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Feb 2020 12:30:50 -0000
+X-List-Received-Date: Thu, 13 Feb 2020 18:31:31 -0000
 
-Hi Palmer,
+On Fri, 31 Jan 2020 17:02:41 PST (-0800), Alistair Francis wrote:
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> ---
+>  target/riscv/cpu.h | 5 ++++-
+>  1 file changed, 4 insertions(+), 1 deletion(-)
+>
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 5b889a0065..aa04e5cca7 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -332,7 +332,10 @@ static inline void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
+>  #ifdef CONFIG_USER_ONLY
+>      *flags = TB_FLAGS_MSTATUS_FS;
+>  #else
+> -    *flags = cpu_mmu_index(env, 0) | (env->mstatus & MSTATUS_FS);
+> +    *flags = cpu_mmu_index(env, 0);
+> +    if (riscv_cpu_fp_enabled(env)) {
+> +        *flags |= env->mstatus & MSTATUS_FS;
+> +    }
+>  #endif
+>  }
 
-On Thu, Feb 13, 2020 at 1:30 AM Palmer Dabbelt <palmerdabbelt@google.com> wrote:
->
-> The following changes since commit 81a23caf47956778c5a5056ad656d1ef92bf9659:
->
->   Merge remote-tracking branch 'remotes/stefanha/tags/block-pull-request' into staging (2020-02-10 17:08:51 +0000)
->
-> are available in the Git repository at:
->
->   git@github.com:palmer-dabbelt/qemu.git tags/riscv-for-master-5.0-sf2
->
-> for you to fetch changes up to 9c8fdcece53e05590441785ab22d91a22da36e29:
->
->   MAINTAINERS: Add maintainer entry for Goldfish RTC (2020-02-10 12:01:39 -0800)
->
-> ----------------------------------------------------------------
-> RISC-V Patches for the 5.0 Soft Freeze, Part 2
->
-> This is a fairly light-weight pull request, but I wanted to send it out to
-> avoid the Goldfish stuff getting buried as the next PR should contain the H
-> extension implementation.
->
-> As far as this PR goes, it contains:
->
-> * The addition of syscon device tree nodes for reboot and poweroff, which
->   allows Linux to control QEMU without an additional driver.  The existing
->   device was already compatible with the syscon interface.
-> * A fix to our GDB stub to avoid confusing XLEN and FLEN, specifically useful
->   for rv32id-based systems.
-> * A device emulation for the Goldfish RTC device, a simple memory-mapped RTC.
-> * The addition of the Goldfish RTC device to the RISC-V virt board.
->
-> This passes "make check" and boots buildroot for me.
->
-
-This PR is still missing: http://patchwork.ozlabs.org/patch/1199516/
-
-> ----------------------------------------------------------------
->
-> Peter: I'm sending hw/rtc code because it was suggested that the Goldfish
-> implementation gets handled via the RISC-V tree as our virt board is the only
-> user.  I'm happy to do things differently in the future (maybe send
-> goldfish-specific PRs?) if that's better for you.  Just LMK what makes sense, I
-> anticipate that this'll be a pretty low traffic device so I'm fine with pretty
-> much anything.
->
-
-Regards,
-Bin
+Reviewed-by: Palmer Dabbelt <palmerdabbelt@google.com>
 
