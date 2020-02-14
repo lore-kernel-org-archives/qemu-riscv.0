@@ -1,65 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1j2VIn-0002Bg-Br
-	for mharc-qemu-riscv@gnu.org; Fri, 14 Feb 2020 02:22:17 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:52126)
+	id 1j2VIq-0002If-IU
+	for mharc-qemu-riscv@gnu.org; Fri, 14 Feb 2020 02:22:20 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:52164)
  by lists.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <prvs=3066d6cb9=Anup.Patel@wdc.com>)
- id 1j2VIi-00025u-JJ
- for qemu-riscv@nongnu.org; Fri, 14 Feb 2020 02:22:14 -0500
+ id 1j2VIn-0002CB-GF
+ for qemu-riscv@nongnu.org; Fri, 14 Feb 2020 02:22:18 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
  (envelope-from <prvs=3066d6cb9=Anup.Patel@wdc.com>)
- id 1j2VIh-00047Q-Fo
- for qemu-riscv@nongnu.org; Fri, 14 Feb 2020 02:22:12 -0500
-Received: from esa3.hgst.iphmx.com ([216.71.153.141]:14555)
+ id 1j2VIm-0004Gj-G7
+ for qemu-riscv@nongnu.org; Fri, 14 Feb 2020 02:22:17 -0500
+Received: from esa6.hgst.iphmx.com ([216.71.154.45]:45300)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <prvs=3066d6cb9=Anup.Patel@wdc.com>)
- id 1j2VIh-00044h-6f; Fri, 14 Feb 2020 02:22:11 -0500
+ id 1j2VIm-0004FI-6a; Fri, 14 Feb 2020 02:22:16 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1581664931; x=1613200931;
+ t=1581664937; x=1613200937;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version;
- bh=YjCTXHezOVLFDooZkPJzdfDny5vRw/HCQyAxyBXHGEY=;
- b=HyElCl4dZmDWTT00HOYRnDpFs5cDpf/cFqFxqV4eFHbSmEsnC59/UmDr
- ZlLKuyqP3l4PXiYhVizKQf9X22x8I78cdioNi4u2aNHqujquBAFI7p61x
- OIz5ZJNn7H9K9T8DlHcyze5ZhPc0U3aYI4ay4rkEZDrcrXiD7YQ2hxs3w
- ROz/lybZquPj3pOu9qy5HQHM3t94ppEPovR+/sSR0Phvj5ZQ1oLyBDR0+
- Kg2KEEFndk2iFECtn/adS8yWBQj8RMnPSuT4WAB9AVkVtxGfs5SL4ydYW
- ZWFM5rSobQqaYMGoqdoW+21njt64kng58zv4qL3pd+kEfIWl1eqcxIJg2 Q==;
-IronPort-SDR: LelLP4ixCVHoehVOnoDLYHjs4vaKd7qw/8CwtP3wZEOTy9dP8rM8zCmxjTLzOgdLPcAv0gS0Lo
- OgQ6Lsr8UtKBeqPb9KfZTHBEeyM7IfXrcZYa/n1NUBwS1IVbzjOy6mNnXXrEXfnWrbOZSo3V4x
- UC7N5Wfr2ERcWpxthfMFeadgQGJtH8vFck/BP4RtE8g2+uFJaHqDn7BFf0gH34U2CdtI4dlxUt
- 6MStGSQYDV9it2jIDKd7zz9Yig4ypQ/XAVvrnaKmxPhm06XdP8DvMsfuRSnb9a7KZ5Ss1giKo3
- kvg=
-X-IronPort-AV: E=Sophos;i="5.70,439,1574092800"; d="scan'208";a="134205083"
-Received: from mail-dm6nam12lp2177.outbound.protection.outlook.com (HELO
- NAM12-DM6-obe.outbound.protection.outlook.com) ([104.47.59.177])
- by ob1.hgst.iphmx.com with ESMTP; 14 Feb 2020 15:22:09 +0800
+ bh=b0pmzSsDhT7gX+NebTupjIXf2AnJNhohnxsqzoXtTic=;
+ b=SUiR3V6dmEdz1rI1ttqRodiYMS9gTokwe2mYcuJ8LekVP9HlA8Oh5owY
+ z25AIDImsy5qPaeAD4KHbelP+dgzLtKUsznATpD7Bov0TjBSIa+cCJmI8
+ xR9GcusyFGe7MjaEPlP2vOYAQLBVx5ZedMM4BMQull6l3HDxLVn/7SYJd
+ ps87Uxwnzha8lPAY9fGlkui7BxCJ6bRVdsve92uzZ0JYyU67/XpCK6lFR
+ WBAtyh5v7w/8veFWP66I0CVgaET9eL1vJcR2q30fVsZm4q7MpJ7Wne2wK
+ +DDeOo2ycat+ERKCrLG/WW6JjW+tgiLQcxktRU1NYoa9yujTcfaZ65YNc w==;
+IronPort-SDR: AZ7M/Xw6vQHEBRWqXJXTft3xPWPzPcrwHhWWMC4cafaIbIK1dBafaCPsXwAMMEZ6UJxIa037Gn
+ sQts9f2O48JN8SPf/yfunLngjxdLkmCcudy9+bsw468MbB0Fy3VW7qdjPCiWFtU5/aEbqcFduI
+ Sd2SAt7qREPbqHOBTGukgZij09UH2nPyN2V2GpljeljMhUfZcP5uLEHguVS/6i/VwVRP79bXIc
+ RwhIGLPT5fGzVbpGW9A6TUTlPKeEkpy2LVI5+XNECFWipq3Dgkgen800FjPSzvzuA+fgmwhLE5
+ Kuo=
+X-IronPort-AV: E=Sophos;i="5.70,439,1574092800"; d="scan'208";a="131289875"
+Received: from mail-dm6nam12lp2170.outbound.protection.outlook.com (HELO
+ NAM12-DM6-obe.outbound.protection.outlook.com) ([104.47.59.170])
+ by ob1.hgst.iphmx.com with ESMTP; 14 Feb 2020 15:22:15 +0800
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=PgwKwBEMzz6GxFjgWM2ME1hJdctio0pLbarwTbp3XZlTNzAjXvI1AkKLqY30GDWUI6FnAtuayRI4riWFD9VoAxbR5d5FJ2JDaml/4Depr5HqaZ98KqbcEYW8sugTfywWHYUJrfVZuIF15idj0cDIrLzxsjPVbwI5D7VCUxfETMwGmk91rpmWSwDVfEYQnbQljWgiOycIlmJn2fVwNFrHAmgR2KUkNH9+1sjmTdO8uhgg7+XpeNBBu6Fll9g1lzyDqqzZrv00LslpYDarxd/XedbdcWyl/A5m9LERwCQoKEQ/CcGpR+TO+Ixgm+f+AgyYyzSxTKze3ZY5zjJuJczYGA==
+ b=POEGboh7xZSgJpgfDNxNI6tIRm+YAwoPDGcvfdLyyIqlhCOdgkLKyhA2to7CG3YMp29G5JC+q6JcZEj4Mv1b6tySZoxgj6sZgfZqeK0J2f7u2GRIZRT5lCTrGFsz3y+2SYzM5Q8epVwgOQxOTx1AySHqYRM86Om0fBGJU/FZ6RkE/mKM/EJK83kIIONIDcGsVVKQ/q4n/gjWz9GMZDsxn0UqAfPl1LWH3R7H/oT8+a3KNog926lNLQxvUtNqM359fbtGN3zbfh58hSQHUsE+8fHQAX6twB2YTBZaQk0/8pODbNheCBi9z+VgwrjXM5kdM+NLhKqqy6YDD5PfaXgHLA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=8KldUSXrRbZP7oM7jgWvNMHmehtZ98ROrsNtNL+l25s=;
- b=NOLhkS3q9grSDTKbbQD88oK4Q2AvunxaaZ77EK5t9tI7DCoONwMOLVBhJIPUj3i0XpWer9+klnSZ+S4jDwIprS0qUusnDG5OWmkxWP7bDQnqktbqsrgwY8uU1gOJPde0zZpA+Aq5oGg0RZSLM6X4gBIlp+08qU3tpdKbJttIOifwj3WwbyWwMvRgsCtiqbh+llNQbXuTBrwt+NZ015aCP1GdegkJ07GsXHHk6t4267nuYaS0W8BkWTkXcvlq659MD7YdNd6qUXQ3TES4Dd/ZZMOtxyOmaW56mC7m9MNbWt7jNXTXXt0n8qTRFL7Lg0NL0M5vaj2HjPzxla7Vy6Qxjw==
+ bh=MGk173WuRUlWDVEV2Da9UJ3AE1WKlQ9G9E1ZfLWaCaE=;
+ b=gk+4sP/LMJL++4hL0WKJsAGiWd+sh0hbTMKPwhgbmT9agOVWXPDHHLc3GV5FqJaWNiUrFfK3UQPi4hBLRjylWHS07FQ+5CcuNU7eGYNK8fgTBcFOWxhkHSaNqV8sqwNFVn2gVO/zcpmDgMzWIJ3En3cuCdDPZU9r99jA8EoP8fUo0FR/U5SBxtvnRmHjRE8ReU9spjTgwtB/cztOGJLkhtAv3GvlFGAj7K+y3RBx6vpvqQQESlHq2Xa5In8HDLc/Ri8oA0O6w52zsVPl6Y5udwVE7hm37hMKYxpjQPvovPBW4uDQ4TP/M4dc75UsTR6y2LrVZ3YEPlbT+9vlUG5GhA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=wdc.com; dmarc=pass action=none header.from=wdc.com; dkim=pass
  header.d=wdc.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=8KldUSXrRbZP7oM7jgWvNMHmehtZ98ROrsNtNL+l25s=;
- b=CYKCmXMH62dTP3/gyBHbaG+vS/RIblbCIkEA/uCNgmT+0BVTuncq2/gzUZGjBMPsiJDs0aePASAIx/g2teR0PHx9vhjt9fKBR5m8E3JO1VIkWiEYI9NN7Eo3H3BSDwdfYcissmu0JlonLoqtD1oNpKR72TxTq3afkJXK3o1ncs4=
+ bh=MGk173WuRUlWDVEV2Da9UJ3AE1WKlQ9G9E1ZfLWaCaE=;
+ b=hwiPLnY87ZsagIcJg7v7ImXaFQBApHi/4JGljoYOR2WsrCpgJ0FCA/wSwQnjekcAqCKdf05lERduFYR7sP7NlgVDA6sYWDhHi3cwl+LtNsRiaLhuoyU13N5utAo3CO09P54kB5ZMGAjdzWR8U7kqccqj10a6aGPxO/P7MndmMLg=
 Authentication-Results: spf=none (sender IP is )
  smtp.mailfrom=Anup.Patel@wdc.com; 
 Received: from MN2PR04MB6061.namprd04.prod.outlook.com (20.178.246.15) by
  MN2PR04MB6288.namprd04.prod.outlook.com (52.132.169.214) with Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.2729.23; Fri, 14 Feb 2020 07:22:07 +0000
+ 15.20.2729.23; Fri, 14 Feb 2020 07:22:13 +0000
 Received: from MN2PR04MB6061.namprd04.prod.outlook.com
  ([fe80::a9a0:3ffa:371f:ad89]) by MN2PR04MB6061.namprd04.prod.outlook.com
  ([fe80::a9a0:3ffa:371f:ad89%7]) with mapi id 15.20.2729.025; Fri, 14 Feb 2020
- 07:22:07 +0000
+ 07:22:13 +0000
 From: Anup Patel <anup.patel@wdc.com>
 To: Peter Maydell <peter.maydell@linaro.org>,
  Palmer Dabbelt <palmer@dabbelt.com>,
@@ -68,10 +68,9 @@ To: Peter Maydell <peter.maydell@linaro.org>,
 Cc: Atish Patra <atish.patra@wdc.com>, Anup Patel <anup@brainfault.org>,
  qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
  Anup Patel <anup.patel@wdc.com>
-Subject: [PATCH 2/3] hw/riscv/spike: Allow loading firmware separately using
- -bios option
-Date: Fri, 14 Feb 2020 12:51:26 +0530
-Message-Id: <20200214072127.64330-3-anup.patel@wdc.com>
+Subject: [PATCH 3/3] hw/riscv/spike: Allow more than one CPUs
+Date: Fri, 14 Feb 2020 12:51:27 +0530
+Message-Id: <20200214072127.64330-4-anup.patel@wdc.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200214072127.64330-1-anup.patel@wdc.com>
 References: <20200214072127.64330-1-anup.patel@wdc.com>
@@ -84,37 +83,37 @@ Received: from wdc.com (106.51.31.230) by
  MA1PR0101CA0015.INDPRD01.PROD.OUTLOOK.COM (2603:1096:a00:21::25) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2729.23 via Frontend
- Transport; Fri, 14 Feb 2020 07:22:03 +0000
+ Transport; Fri, 14 Feb 2020 07:22:09 +0000
 X-Mailer: git-send-email 2.17.1
 X-Originating-IP: [106.51.31.230]
 X-MS-PublicTrafficType: Email
 X-MS-Office365-Filtering-HT: Tenant
-X-MS-Office365-Filtering-Correlation-Id: d843a3b1-541f-4c26-f6e1-08d7b11e991d
+X-MS-Office365-Filtering-Correlation-Id: 3b45c916-a3da-4008-2378-08d7b11e9c72
 X-MS-TrafficTypeDiagnostic: MN2PR04MB6288:
 X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: <MN2PR04MB62880204A9C61D247F1E5FC08D150@MN2PR04MB6288.namprd04.prod.outlook.com>
+X-Microsoft-Antispam-PRVS: <MN2PR04MB628895C8E9B8CD594770B8E68D150@MN2PR04MB6288.namprd04.prod.outlook.com>
 WDCIPOUTBOUND: EOP-TRUE
-X-MS-Oob-TLC-OOBClassifiers: OLM:93;
+X-MS-Oob-TLC-OOBClassifiers: OLM:5797;
 X-Forefront-PRVS: 03137AC81E
 X-Forefront-Antispam-Report: SFV:NSPM;
- SFS:(10019020)(4636009)(136003)(346002)(376002)(39860400002)(366004)(396003)(199004)(189003)(110136005)(478600001)(54906003)(316002)(52116002)(1076003)(7696005)(66946007)(36756003)(16526019)(8676002)(4326008)(81156014)(1006002)(44832011)(55236004)(8886007)(2906002)(956004)(26005)(66556008)(66476007)(8936002)(2616005)(5660300002)(86362001)(186003)(55016002)(81166006)(6666004)(32040200004);
+ SFS:(10019020)(4636009)(136003)(346002)(376002)(39860400002)(366004)(396003)(199004)(189003)(110136005)(478600001)(54906003)(316002)(52116002)(1076003)(7696005)(66946007)(36756003)(16526019)(8676002)(4326008)(4744005)(81156014)(1006002)(44832011)(55236004)(8886007)(2906002)(956004)(26005)(66556008)(66476007)(8936002)(2616005)(5660300002)(86362001)(186003)(55016002)(81166006)(6666004)(32040200004);
  DIR:OUT; SFP:1102; SCL:1; SRVR:MN2PR04MB6288;
  H:MN2PR04MB6061.namprd04.prod.outlook.com; FPR:; SPF:None; LANG:en;
  PTR:InfoNoRecords; A:1; MX:1; 
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: atlXZihIX+ZMZOJiM1uTDsuYXpyY07OEhqR7i6uJEDM4bA3z/VN1rktheNbqFHwgzdWLkNuApbX1K77aCeabd8XkbEby52YJs+WjouusNMn1A2omm9tb6gk6yb8m234Sp7mUiQt07lpswtZPrmuPkU2L86Xo9LK/m/CyJ4eLYkLrcHp/m1or7LhsJSVvfL4TyWBofaHSzm0J92pGjW05KdaXkp1oKcCu3YNzTXbbYBJto8oBbAMzyRcVFbfxvu0HmsxkSGfxNcj+Ycoat3yMpqRVuoqRZhy03wNDQR9LhTtWt47/rOzn2gSSDyUhT5k7mbGVxIdGfBTVhWHZdjCWOCqwnJRR/76uD4XUhzrqu5o0US4GB0FPUmk0r5onLL9m97bPvSD8vECq5/2lVD+xM8G5fzaeIEv1bkq72QEdqmOyAvEpDzZnolRH0UyjjlOFSj4H76WRxtVSlAxH1k4VXLvcjkeB0S5CtxLHqBZ4AsVFmlPwcZtzx1tSFQN4L/nY
-X-MS-Exchange-AntiSpam-MessageData: 0Nlaqx+kRGeyllYgxxTOkSWOuCpw29JaHWFweN5P0HVD94cUchNMbe9NkuBgIm7pPURkLATDUCMqb4UUTiXVpTWsmBMw1W4KG7uvB5uf6DVAWxAtBoIo3ZFd9lHcUMRozshUuzWybpif4Lf3bHKCkw==
+X-Microsoft-Antispam-Message-Info: d2oVMRC2/mQGjO9IS/ZVeMb94q9zRQ0kNJnjOCqW1nkATIL22RlR36e4iS47nSQRV5hqtzyjMmtPBBBl2TbU4V7CYahhNxfmUcqvsEogG+fqfnCdm5/fr/zORWjbEGGpyK538jxlirwuUx/IzRwFS3Mw6+s7itz/Bh5Tr0ONpa7OPEmEFo8QrJ1GDyg06sw4irihG2F2r/F5+sjWtUB8wdK5txDPt53K+oX8iq2L+WnfvqFHeflr8Pew2Dj2055d6LIv3GQYqmpNKwtqIHo7pWOmsVx1SvJG+H1W+wU4GEzaS0Oac3IHKE9qGM99aGtiQOrdk85vIZQGBDBywaQyW1Jf+qk+hvQ/DXrdgFzzfrZ06dG9YUGUv80Ao2FAyd9+nfwun8io6Bs6vm41bOeJOUJ7HCZzDyiy66cjN+hMJOFbh6krz8ULd/TCeqeMYBywtow8WDG9c1R/IoCJa+tSyQPH5LNeACOWCa51HjIitc1iParHogEMg/W5f3yepU/9
+X-MS-Exchange-AntiSpam-MessageData: ku/s4C4uI+7ezBZYSpud+MG+qGYll8jEIFmRvCrHU90cRRzu7nnKvfUIqhpY23yqCF42f7YHmxbof3gI6rHxm3fYGN+HqgF+IXjyFVtErOKEfaFR8TFH1PXHs5n/UAWA9LkRtS+INvxbPnOAnDtTmQ==
 X-OriginatorOrg: wdc.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d843a3b1-541f-4c26-f6e1-08d7b11e991d
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Feb 2020 07:22:07.5975 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3b45c916-a3da-4008-2378-08d7b11e9c72
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Feb 2020 07:22:13.2013 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: b61c8803-16f3-4c35-9b17-6f65f441df86
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: DRnj1e60Lh6Q3t7yr8tTeCkYpsJMGQ8zv9DQMcV/rpT3A9T8nO7t1r4fN2vZJhDzKq9pRD4Gq8jx9cu0tiotVQ==
+X-MS-Exchange-CrossTenant-UserPrincipalName: u3H93okejwB4ryZi+GLlLiywC/5mvB94U4CbaHcqkjVEIsXBX0jW0inCAa4ogxxYgSLJpJ/mLBCnTM0JF1n9jg==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR04MB6288
 X-detected-operating-system: by eggs.gnu.org: FreeBSD 9.x [fuzzy]
-X-Received-From: 216.71.153.141
+X-Received-From: 216.71.154.45
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -126,59 +125,33 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Feb 2020 07:22:14 -0000
+X-List-Received-Date: Fri, 14 Feb 2020 07:22:18 -0000
 
-This patch extends Spike machine support to allow loading OpenSBI
-firmware (fw_jump.elf) separately using -bios option.
+Currently, the upstream Spike ISA simulator allows more than
+one CPUs so we update QEMU Spike machine on similar lines to
+allow more than one CPUs.
+
+The maximum number of CPUs for QEMU Spike machine is kept
+same as QEMU Virt machine.
 
 Signed-off-by: Anup Patel <anup.patel@wdc.com>
 ---
- hw/riscv/spike.c | 24 +++++++++++++++++++++++-
- 1 file changed, 23 insertions(+), 1 deletion(-)
+ hw/riscv/spike.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
-index 8823681783..060a86f922 100644
+index 060a86f922..1eac0d9a83 100644
 --- a/hw/riscv/spike.c
 +++ b/hw/riscv/spike.c
-@@ -45,6 +45,12 @@
- 
- #include <libfdt.h>
- 
-+#if defined(TARGET_RISCV32)
-+# define BIOS_FILENAME "opensbi-riscv32-spike-fw_jump.elf"
-+#else
-+# define BIOS_FILENAME "opensbi-riscv64-spike-fw_jump.elf"
-+#endif
-+
- static const struct MemmapEntry {
-     hwaddr base;
-     hwaddr size;
-@@ -183,8 +189,24 @@ static void spike_board_init(MachineState *machine)
-     memory_region_add_subregion(system_memory, memmap[SPIKE_MROM].base,
-                                 mask_rom);
- 
-+    riscv_find_and_load_firmware(machine, BIOS_FILENAME,
-+                                 memmap[SPIKE_DRAM].base,
-+                                 htif_symbol_callback);
-+
-     if (machine->kernel_filename) {
--        riscv_load_kernel(machine->kernel_filename, htif_symbol_callback);
-+        uint64_t kernel_entry = riscv_load_kernel(machine->kernel_filename,
-+                                                  htif_symbol_callback);
-+
-+        if (machine->initrd_filename) {
-+            hwaddr start;
-+            hwaddr end = riscv_load_initrd(machine->initrd_filename,
-+                                           machine->ram_size, kernel_entry,
-+                                           &start);
-+            qemu_fdt_setprop_cell(s->fdt, "/chosen",
-+                                  "linux,initrd-start", start);
-+            qemu_fdt_setprop_cell(s->fdt, "/chosen", "linux,initrd-end",
-+                                  end);
-+        }
-     }
- 
-     /* reset vector */
+@@ -469,7 +469,7 @@ static void spike_machine_init(MachineClass *mc)
+ {
+     mc->desc = "RISC-V Spike Board";
+     mc->init = spike_board_init;
+-    mc->max_cpus = 1;
++    mc->max_cpus = 8;
+     mc->is_default = 1;
+     mc->default_cpu_type = SPIKE_V1_10_0_CPU;
+ }
 -- 
 2.17.1
 
