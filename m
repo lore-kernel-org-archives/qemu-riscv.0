@@ -1,68 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1j48Ej-000372-QO
-	for mharc-qemu-riscv@gnu.org; Tue, 18 Feb 2020 14:08:49 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43745)
+	id 1j4BZ7-0000DD-MD
+	for mharc-qemu-riscv@gnu.org; Tue, 18 Feb 2020 17:42:05 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:60188)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <palmer@dabbelt.com>) id 1j48Eg-00036J-Nz
- for qemu-riscv@nongnu.org; Tue, 18 Feb 2020 14:08:47 -0500
+ (envelope-from <alistair23@gmail.com>) id 1j4BZ5-0000Bw-3w
+ for qemu-riscv@nongnu.org; Tue, 18 Feb 2020 17:42:04 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmer@dabbelt.com>) id 1j48Ee-0007X9-1U
- for qemu-riscv@nongnu.org; Tue, 18 Feb 2020 14:08:46 -0500
-Received: from mail-pf1-x444.google.com ([2607:f8b0:4864:20::444]:40138)
+ (envelope-from <alistair23@gmail.com>) id 1j4BZ0-0003uV-9v
+ for qemu-riscv@nongnu.org; Tue, 18 Feb 2020 17:42:01 -0500
+Received: from mail-lj1-x244.google.com ([2a00:1450:4864:20::244]:43256)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1j48Ed-0007Tp-Lt
- for qemu-riscv@nongnu.org; Tue, 18 Feb 2020 14:08:43 -0500
-Received: by mail-pf1-x444.google.com with SMTP id b185so790860pfb.7
- for <qemu-riscv@nongnu.org>; Tue, 18 Feb 2020 11:08:43 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=dabbelt-com.20150623.gappssmtp.com; s=20150623;
- h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
- :content-transfer-encoding;
- bh=y1yweMyAnFLAEcb3Lg5dXjOcfOHy4NAuPVv09AZ8FnY=;
- b=dCvxxbIzQe1yCD6yVioHMLY7OvQ55n8MPrGIg0wk+aPPrkYO7I+NpjZ0/QLBe2Mi/F
- FK7/4p/3BACaPwzkNNIacKJQYYJFxrLe1WSpiQEmjwhmv4RNxDk3wXyI7UQrl9/EjVwh
- XFPzYeWbmlvxepgdpnYPldAhXTY9qEy4WgC0uQ469+cZ5fUIVJqxAD+3apx/rwWoROPQ
- pmElmSngu9eejM00M+z/WcxqwjIB4Wxr4V3tkRDkaFLoKMTdPm5w6uaoKTocMmjG1BC7
- eJl1Qcjqy9ge/ll8rrpGzkh41lYJz6nrWSHf0NwLDjFjPTgMICQCPgi+VFXeWTM7jO8R
- FBbg==
+ (Exim 4.71) (envelope-from <alistair23@gmail.com>)
+ id 1j4BYx-0003kO-1P; Tue, 18 Feb 2020 17:41:55 -0500
+Received: by mail-lj1-x244.google.com with SMTP id a13so24888982ljm.10;
+ Tue, 18 Feb 2020 14:41:54 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=QuKvaVnrUysWMIbGL23jrhUN+9Nh6y0irw4MyiCGRM4=;
+ b=n326L2RDS8b9xspWS8nfAkJBts2KhF07nHk9/tB/Rs/Z0mPhM1jjwfxMkMidZVefqp
+ 2koNMdPvsWsIyK5pBccRNlD7GoS0qM3LXB/fEMC/oH+njl1Wa3NcqSYHk2JLnAyDmZ9z
+ 0RNooZ8Bey1KbXFXPkhD59B5ufCwdPwqJJRH0KySNbTVLqjIIuIgoDplCzVP7248qPcA
+ koCx3wRsNAuSowSWAbj10LCVWXZ3PNF6v4u9p3p49pAbaomT/2iCcYfE540zt5BGjWBb
+ jikosUjLv0v2+aSky/FC7OB7bdRLOi/1sdtb7hfCy+VxNccZLmj6UfrlxCBSeBga8h2y
+ 65Bg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
- :mime-version:content-transfer-encoding;
- bh=y1yweMyAnFLAEcb3Lg5dXjOcfOHy4NAuPVv09AZ8FnY=;
- b=EszZpJoZrOzri6gJSt7uSbt3bJJ7A1IvONR4ZQYYqq28y0RrZJKt56dltRYZwGl+9q
- +M67wOl3sKH63UAFkZApDrmAJRxZfMJNzaR+MjNCbUr08miRUNLgYcwgocF8HRIKKi1B
- p80AX7xF7OxFfZvcqUq57X5dh4w/mjKN82p2RZA69zWVZHo/oq4OddVzcllysezTTh95
- qCscEHDYHFxe3yzNg8Kq9hHZQyihDdbKLFI2+3PSiVd6LLpUnvzFPUdpgJwbsoOHAIls
- EheSmKcZzMCDeAzY6fjf84MM2GIppuarNJwrfJxqUCBjvEQVkXI/e6FrBR4NhnggkAP3
- 5pdw==
-X-Gm-Message-State: APjAAAUZim8EyMnKWHf/NWSrBZrmlpCLxDXiH5gLBisdByzzRekjADRh
- edstHh06mOk6wbe1IB/B7KInKA==
-X-Google-Smtp-Source: APXvYqyXqh0FZJp8c3ODQwvjM1apH5TTcDCwuuqXGPtDNDWCI6YZCShY5YzAIYLUHN2El7epFGZHJw==
-X-Received: by 2002:a63:5561:: with SMTP id f33mr24499873pgm.14.1582052921952; 
- Tue, 18 Feb 2020 11:08:41 -0800 (PST)
-Received: from localhost ([2620:0:1000:2514:23a5:d584:6a92:3e3c])
- by smtp.gmail.com with ESMTPSA id g13sm5314651pgh.82.2020.02.18.11.08.41
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Feb 2020 11:08:41 -0800 (PST)
-Date: Tue, 18 Feb 2020 11:08:41 -0800 (PST)
-X-Google-Original-Date: Tue, 18 Feb 2020 11:08:34 PST (-0800)
-Subject: Re: [PATCH v3 0/2] RISC-V TIME CSR for privileged mode
-In-Reply-To: <20200202134217.14264-1-anup.patel@wdc.com>
-CC: Peter Maydell <peter.maydell@linaro.org>,
- Alistair Francis <Alistair.Francis@wdc.com>, sagark@eecs.berkeley.edu,
- Atish Patra <Atish.Patra@wdc.com>, 
- anup@brainfault.org, qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
- Anup Patel <Anup.Patel@wdc.com>
-From: Palmer Dabbelt <palmer@dabbelt.com>
-To: Anup Patel <Anup.Patel@wdc.com>
-Message-ID: <mhng-5b433044-9056-4323-88ce-626a1bd2c128@palmerdabbelt-glaptop1>
-Mime-Version: 1.0 (MHng)
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=QuKvaVnrUysWMIbGL23jrhUN+9Nh6y0irw4MyiCGRM4=;
+ b=Nz/JGMs6flKX6kiNx7FpqAlsUNOjkqgSEx+N9GctJGJlDDMjVnfmsOVJDkD6xuIsCM
+ NfmLNj5cNvrGBaxj3YMsZ1MYsfP7o2/dvm6bUxzBzFxg61wXWGr21BhUfiPwcAgo4E08
+ HMzNjzW+FXH0RskeWPBQ4HaRun+g+j52zvzBz3PoAdx/jEBOplp4RlvoVBZnjWLGgd9s
+ jyyQgwjwAaBSlSl5NwNZ3ywE4TK9WeoZQkdZBiD9DbcaoKAFYOtWPF4yC5Heprv+Iv8a
+ 5C1BoJ9/9vlG5tPtWE1tiv/DIcaP2NH1Nd9W/lCar/7BDWkaCVqPBhsvC6mpYk5iAvdq
+ se+g==
+X-Gm-Message-State: APjAAAXhe2KBzDEMjTM+W6KrGp13NE1Mv5djiOTxxmQVy9qMd5GAeyNv
+ dykJ2o43UwAUQ9ziHDmJINTbC1Fc25c30kVVWvo=
+X-Google-Smtp-Source: APXvYqycpNodkOUgAT4ZJwG6MZqNkl8kOax61OBeNcrvGoCX9eAQwRdA/3ZPEoFcNP+54jEjs1hkXGdtf0onwvF6Tgc=
+X-Received: by 2002:a2e:8197:: with SMTP id e23mr13351957ljg.250.1582065713559; 
+ Tue, 18 Feb 2020 14:41:53 -0800 (PST)
+MIME-Version: 1.0
+References: <20200210081240.11481-1-zhiwei_liu@c-sky.com>
+ <20200210081240.11481-3-zhiwei_liu@c-sky.com>
+In-Reply-To: <20200210081240.11481-3-zhiwei_liu@c-sky.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 18 Feb 2020 14:34:27 -0800
+Message-ID: <CAKmqyKORm9dfkgSOe0WR1aDBzJyMq9YP9+bBPwkeX2J2jYmLAg@mail.gmail.com>
+Subject: Re: [PATCH v4 2/4] target/riscv: configure and turn on vector
+ extension from command line
+To: LIU Zhiwei <zhiwei_liu@c-sky.com>
+Cc: Richard Henderson <richard.henderson@linaro.org>,
+ Chih-Min Chao <chihmin.chao@sifive.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, wenmeng_zhang@c-sky.com,
+ wxy194768@alibaba-inc.com, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::444
+X-Received-From: 2a00:1450:4864:20::244
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -74,40 +70,178 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Feb 2020 19:08:48 -0000
+X-List-Received-Date: Tue, 18 Feb 2020 22:42:04 -0000
 
-On Sun, 02 Feb 2020 05:42:15 PST (-0800), Anup Patel wrote:
-> This series adds emulation of TIME CSRs for privileged mode. With
-> this series, we see approximately 25+% improvement in hackbench
-> numbers for non-virtualized (or Host) Linux and 40+% improvement
-> in hackbench numbers for Guest/VM Linux.
+On Mon, Feb 10, 2020 at 12:12 AM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
 >
-> These patches are based on mainline/alistair/riscv-hyp-ext-v0.5.1
-> branch of https://github.com/kvm-riscv/qemu.git and can be found
-> in riscv_time_csr_v3 branch of same repo.
+> Vector extension is default on only for "any" cpu. It can be turned
+> on by command line "-cpu rv64,v=true,vlen=128,elen=64,vext_spec=v0.7.1".
 >
-> Changes since v2:
->  - Register CLINT rdtime callback only for QEMU RISC-V virt machine
+> vlen is the vector register length, default value is 128 bit.
+> elen is the max operator size in bits, default value is 64 bit.
+> vext_spec is the vector specification version, default value is v0.7.1.
+> Thest properties and cpu can be specified with other values.
 >
-> Changes since v1:
->  - Use braces for single-line if-statements
->
-> Anup Patel (2):
->   target/riscv: Emulate TIME CSRs for privileged mode
->   hw/riscv: Provide rdtime callback for TCG in CLINT emulation
->
->  hw/riscv/sifive_clint.c         |  6 ++-
->  hw/riscv/sifive_e.c             |  2 +-
->  hw/riscv/sifive_u.c             |  2 +-
->  hw/riscv/spike.c                |  9 ++--
->  hw/riscv/virt.c                 |  2 +-
->  include/hw/riscv/sifive_clint.h |  3 +-
->  target/riscv/cpu.h              |  5 ++
->  target/riscv/cpu_helper.c       |  5 ++
->  target/riscv/csr.c              | 86 +++++++++++++++++++++++++++++++--
->  9 files changed, 108 insertions(+), 12 deletions(-)
+> Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
 
-This is queued for the next pull request.
+This looks fine to me. Shouldn't this be the last patch though? As in
+once the vector extension has been added to QEMU you can turn it on
+from the command line. Right now this turns it on but it isn't
+implemented.
 
-Thanks!
+Alistair
+
+> ---
+>  target/riscv/cpu.c | 48 ++++++++++++++++++++++++++++++++++++++++++++--
+>  target/riscv/cpu.h |  8 ++++++++
+>  2 files changed, 54 insertions(+), 2 deletions(-)
+>
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 8c86ebc109..95fdb6261e 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -98,6 +98,11 @@ static void set_priv_version(CPURISCVState *env, int priv_ver)
+>      env->priv_ver = priv_ver;
+>  }
+>
+> +static void set_vext_version(CPURISCVState *env, int vext_ver)
+> +{
+> +    env->vext_ver = vext_ver;
+> +}
+> +
+>  static void set_feature(CPURISCVState *env, int feature)
+>  {
+>      env->features |= (1ULL << feature);
+> @@ -113,7 +118,7 @@ static void set_resetvec(CPURISCVState *env, int resetvec)
+>  static void riscv_any_cpu_init(Object *obj)
+>  {
+>      CPURISCVState *env = &RISCV_CPU(obj)->env;
+> -    set_misa(env, RVXLEN | RVI | RVM | RVA | RVF | RVD | RVC | RVU);
+> +    set_misa(env, RVXLEN | RVI | RVM | RVA | RVF | RVD | RVC | RVU | RVV);
+>      set_priv_version(env, PRIV_VERSION_1_11_0);
+>      set_resetvec(env, DEFAULT_RSTVEC);
+>  }
+> @@ -320,6 +325,7 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+>      CPURISCVState *env = &cpu->env;
+>      RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(dev);
+>      int priv_version = PRIV_VERSION_1_11_0;
+> +    int vext_version = VEXT_VERSION_0_07_1;
+>      target_ulong target_misa = 0;
+>      Error *local_err = NULL;
+>
+> @@ -343,8 +349,18 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+>              return;
+>          }
+>      }
+> -
+> +    if (cpu->cfg.vext_spec) {
+> +        if (!g_strcmp0(cpu->cfg.vext_spec, "v0.7.1")) {
+> +            vext_version = VEXT_VERSION_0_07_1;
+> +        } else {
+> +            error_setg(errp,
+> +                       "Unsupported vector spec version '%s'",
+> +                       cpu->cfg.vext_spec);
+> +            return;
+> +        }
+> +    }
+>      set_priv_version(env, priv_version);
+> +    set_vext_version(env, vext_version);
+>      set_resetvec(env, DEFAULT_RSTVEC);
+>
+>      if (cpu->cfg.mmu) {
+> @@ -409,6 +425,30 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+>          if (cpu->cfg.ext_u) {
+>              target_misa |= RVU;
+>          }
+> +        if (cpu->cfg.ext_v) {
+> +            target_misa |= RVV;
+> +            if (!is_power_of_2(cpu->cfg.vlen)) {
+> +                error_setg(errp,
+> +                       "Vector extension VLEN must be power of 2");
+> +                return;
+> +            }
+> +            if (cpu->cfg.vlen > RV_VLEN_MAX || cpu->cfg.vlen < 128) {
+> +                error_setg(errp,
+> +                       "Vector extension implementation only supports VLEN "
+> +                       "in the range [128, %d]", RV_VLEN_MAX);
+> +                return;
+> +            }
+> +            if (!is_power_of_2(cpu->cfg.elen)) {
+> +                error_setg(errp,
+> +                       "Vector extension ELEN must be power of 2");
+> +                return;
+> +            }
+> +            if (cpu->cfg.elen > 64) {
+> +                error_setg(errp,
+> +                       "Vector extension ELEN must <= 64");
+> +                return;
+> +            }
+> +        }
+>
+>          set_misa(env, RVXLEN | target_misa);
+>      }
+> @@ -444,10 +484,14 @@ static Property riscv_cpu_properties[] = {
+>      DEFINE_PROP_BOOL("c", RISCVCPU, cfg.ext_c, true),
+>      DEFINE_PROP_BOOL("s", RISCVCPU, cfg.ext_s, true),
+>      DEFINE_PROP_BOOL("u", RISCVCPU, cfg.ext_u, true),
+> +    DEFINE_PROP_BOOL("v", RISCVCPU, cfg.ext_v, false),
+>      DEFINE_PROP_BOOL("Counters", RISCVCPU, cfg.ext_counters, true),
+>      DEFINE_PROP_BOOL("Zifencei", RISCVCPU, cfg.ext_ifencei, true),
+>      DEFINE_PROP_BOOL("Zicsr", RISCVCPU, cfg.ext_icsr, true),
+>      DEFINE_PROP_STRING("priv_spec", RISCVCPU, cfg.priv_spec),
+> +    DEFINE_PROP_STRING("vext_spec", RISCVCPU, cfg.vext_spec),
+> +    DEFINE_PROP_UINT16("vlen", RISCVCPU, cfg.vlen, 128),
+> +    DEFINE_PROP_UINT16("elen", RISCVCPU, cfg.elen, 64),
+>      DEFINE_PROP_BOOL("mmu", RISCVCPU, cfg.mmu, true),
+>      DEFINE_PROP_BOOL("pmp", RISCVCPU, cfg.pmp, true),
+>      DEFINE_PROP_END_OF_LIST(),
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 07e63016a7..bf2b4b55af 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -64,6 +64,7 @@
+>  #define RVA RV('A')
+>  #define RVF RV('F')
+>  #define RVD RV('D')
+> +#define RVV RV('V')
+>  #define RVC RV('C')
+>  #define RVS RV('S')
+>  #define RVU RV('U')
+> @@ -82,6 +83,8 @@ enum {
+>  #define PRIV_VERSION_1_10_0 0x00011000
+>  #define PRIV_VERSION_1_11_0 0x00011100
+>
+> +#define VEXT_VERSION_0_07_1 0x00000701
+> +
+>  #define TRANSLATE_PMP_FAIL 2
+>  #define TRANSLATE_FAIL 1
+>  #define TRANSLATE_SUCCESS 0
+> @@ -118,6 +121,7 @@ struct CPURISCVState {
+>      target_ulong badaddr;
+>
+>      target_ulong priv_ver;
+> +    target_ulong vext_ver;
+>      target_ulong misa;
+>      target_ulong misa_mask;
+>
+> @@ -226,12 +230,16 @@ typedef struct RISCVCPU {
+>          bool ext_c;
+>          bool ext_s;
+>          bool ext_u;
+> +        bool ext_v;
+>          bool ext_counters;
+>          bool ext_ifencei;
+>          bool ext_icsr;
+>
+>          char *priv_spec;
+>          char *user_spec;
+> +        char *vext_spec;
+> +        uint16_t vlen;
+> +        uint16_t elen;
+>          bool mmu;
+>          bool pmp;
+>      } cfg;
+> --
+> 2.23.0
+>
 
