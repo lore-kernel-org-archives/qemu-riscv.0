@@ -1,68 +1,47 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1j4Dup-0004Co-Pt
-	for mharc-qemu-riscv@gnu.org; Tue, 18 Feb 2020 20:12:39 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:45246)
+	id 1j4LBD-00055X-0l
+	for mharc-qemu-riscv@gnu.org; Wed, 19 Feb 2020 03:58:03 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:39408)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <alistair23@gmail.com>) id 1j4Dum-00047d-Ix
- for qemu-riscv@nongnu.org; Tue, 18 Feb 2020 20:12:38 -0500
+ (envelope-from <zhiwei_liu@c-sky.com>) id 1j4LB9-0004zx-Fu
+ for qemu-riscv@nongnu.org; Wed, 19 Feb 2020 03:58:01 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1j4Dul-0001jz-4Y
- for qemu-riscv@nongnu.org; Tue, 18 Feb 2020 20:12:36 -0500
-Received: from mail-lj1-x243.google.com ([2a00:1450:4864:20::243]:32866)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1j4Duh-0001hL-UO; Tue, 18 Feb 2020 20:12:32 -0500
-Received: by mail-lj1-x243.google.com with SMTP id y6so25214417lji.0;
- Tue, 18 Feb 2020 17:12:31 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=Uc1rnFArpCrnrzRHRbrRKPXAtcLPWZhS6Dh9jV3fr98=;
- b=fC8atTUUcwQUtlrQ3llBUGK62W9sc2NKjni3JO24HSZJXkt30PAYDViG3v2szM9F8Y
- vBZ3NnZJ9rtKHf3WySFilPH3GnAfu4GSxheUEEptXtZvrDfopjPr75SG/PGSzwEkn1IN
- 5GaDoHlG7h1Em4F2VVOoGUN+cqOcnBTFKk8DOabq6EbHjq0ExfTpglsqd7UOLE3gwKor
- FJTakfXiS3BdsqrCqjIxQ6HdpYGSWaIqr07mfIvkAttx2rloDVVxiMDCZv3Gep6mpmwj
- sd9GJrTVdslB5Io9RjcDEbNjM12Lg4gKZ9C+TwGtkr7o+YImZmnfVx/BuXX2JbBW3Hmt
- ih/g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=Uc1rnFArpCrnrzRHRbrRKPXAtcLPWZhS6Dh9jV3fr98=;
- b=uTxrLtOUsO/WOl4TNMKLuC0koEO4T5m1H5MBAzsurS5HLugoIWWuzTOCIizElax9u2
- Sbjg4iR3cUIc1tTeLJR97CvnM9MOgZof0LaRd5qPh/xKfA5zdX4Up29M1EqjB2v32Bu7
- 9TJH6owC/NFGMq3G4GXDJc2qijNLXT04Cm4S2Gh5e8nOGRgWo/gPxi/4MAx6knWqEhqb
- PIJFRJT4IkPR5IcGHMPnUTj6judrOCj5YYmv0zRzuMrNkwNsAtTctIu4cfMFHyTKvWzQ
- PY4vmirPCaOV75SnHDQde5S+88bmaxpf8C8A099mcRgsrnl1XaDsbjmsX6BEd5OpiLJI
- A72g==
-X-Gm-Message-State: APjAAAU+qncRYLiAR5hUXXlFsaoyPGFI/+Ak/MEMw2MaL91fvgoDP26o
- 8MmOn0IVMFYVn4ocDF/fwvgC4+k1Gk1xVVot86c=
-X-Google-Smtp-Source: APXvYqynZMmaKkJBsEo6H45GxcOmQ4R8MCmjGLXLeVo+g7XsmWvOxMB0bH9lxjQUj+AdBxYN8qXOgmE4UPBNfxbS/PQ=
-X-Received: by 2002:a2e:a36a:: with SMTP id i10mr13978247ljn.107.1582074749973; 
- Tue, 18 Feb 2020 17:12:29 -0800 (PST)
+ (envelope-from <zhiwei_liu@c-sky.com>) id 1j4LB6-0000s9-VZ
+ for qemu-riscv@nongnu.org; Wed, 19 Feb 2020 03:57:59 -0500
+Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:51920)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <zhiwei_liu@c-sky.com>)
+ id 1j4LB0-0000j4-RV; Wed, 19 Feb 2020 03:57:51 -0500
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07436282|-1; CH=green;
+ DM=CONTINUE|CONTINUE|true|0.156279-0.0175105-0.82621;
+ DS=CONTINUE|ham_regular_dialog|0.0025126-0.000487853-0.997;
+ FP=0|0|0|0|0|-1|-1|-1; HT=e01a16370; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS;
+ RN=8; RT=8; SR=0; TI=SMTPD_---.GpeGyvm_1582102663; 
+Received: from 30.39.130.137(mailfrom:zhiwei_liu@c-sky.com
+ fp:SMTPD_---.GpeGyvm_1582102663)
+ by smtp.aliyun-inc.com(10.147.40.200);
+ Wed, 19 Feb 2020 16:57:44 +0800
+Subject: Re: [PATCH v3 1/5] target/riscv: add vector unit stride load and
+ store instructions
+To: Richard Henderson <richard.henderson@linaro.org>, alistair23@gmail.com,
+ chihmin.chao@sifive.com, palmer@dabbelt.com
+Cc: wenmeng_zhang@c-sky.com, wxy194768@alibaba-inc.com,
+ qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+References: <20200210074256.11412-1-zhiwei_liu@c-sky.com>
+ <20200210074256.11412-2-zhiwei_liu@c-sky.com>
+ <9054a6fb-adee-4dcc-d7c6-9a974a83668a@linaro.org>
+From: LIU Zhiwei <zhiwei_liu@c-sky.com>
+Message-ID: <a76824fb-3608-2b30-fe8f-ac705b73e42a@c-sky.com>
+Date: Wed, 19 Feb 2020 16:57:43 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
+ Thunderbird/68.4.1
 MIME-Version: 1.0
-References: <20200210081240.11481-1-zhiwei_liu@c-sky.com>
- <20200210081240.11481-3-zhiwei_liu@c-sky.com>
- <CAKmqyKORm9dfkgSOe0WR1aDBzJyMq9YP9+bBPwkeX2J2jYmLAg@mail.gmail.com>
- <0eb6836a-b133-b3b1-6ef6-74dd341b1dd5@c-sky.com>
-In-Reply-To: <0eb6836a-b133-b3b1-6ef6-74dd341b1dd5@c-sky.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 18 Feb 2020 17:05:04 -0800
-Message-ID: <CAKmqyKOhaHLcixnX2edge=t9xOYR7Sq486+ky1xd_OmWLO54Gw@mail.gmail.com>
-Subject: Re: [PATCH v4 2/4] target/riscv: configure and turn on vector
- extension from command line
-To: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Cc: Richard Henderson <richard.henderson@linaro.org>,
- Chih-Min Chao <chihmin.chao@sifive.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>, wenmeng_zhang@c-sky.com,
- wxy194768@alibaba-inc.com, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2a00:1450:4864:20::243
+In-Reply-To: <9054a6fb-adee-4dcc-d7c6-9a974a83668a@linaro.org>
+Content-Type: multipart/alternative;
+ boundary="------------BDA17EA78D28803C57DE9B44"
+Content-Language: en-US
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 3.x [generic] [fuzzy]
+X-Received-From: 121.197.200.217
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -74,213 +53,592 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Feb 2020 01:12:38 -0000
+X-List-Received-Date: Wed, 19 Feb 2020 08:58:02 -0000
 
-On Tue, Feb 18, 2020 at 4:46 PM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
+This is a multi-part message in MIME format.
+--------------BDA17EA78D28803C57DE9B44
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
+
+Hi, Richard
+Thanks for your informative comments. I'm addressing these comments.
+And a little confused in some comments.
+On 2020/2/12 14:38, Richard Henderson wrote:
+> On 2/9/20 11:42 PM, LIU Zhiwei wrote:
+>> +/*
+>> + * As simd_desc supports at most 256 bytes, and in this implementation,
+>> + * the max vector group length is 2048 bytes. So split it into two parts.
+>> + *
+>> + * The first part is floor(maxsz, 64), encoded in maxsz of simd_desc.
+>> + * The second part is (maxsz % 64) >> 3, encoded in data of simd_desc.
+>> + */
+>> +static uint32_t maxsz_part1(uint32_t maxsz)
+>> +{
+>> +    return ((maxsz & ~(0x3f)) >> 3) + 0x8; /* add offset 8 to avoid return 0 */
+>> +}
+>> +
+>> +static uint32_t maxsz_part2(uint32_t maxsz)
+>> +{
+>> +    return (maxsz & 0x3f) >> 3;
+>> +}
+> I would much rather adjust simd_desc to support 2048 bytes.
 >
-> Hi, Alistair
+> I've just posted a patch set that removes an assert in target/arm that would
+> trigger if SIMD_DATA_SHIFT was increased to make room for a larger oprsz.
 >
-> On 2020/2/19 6:34, Alistair Francis wrote:
-> > On Mon, Feb 10, 2020 at 12:12 AM LIU Zhiwei <zhiwei_liu@c-sky.com> wrot=
-e:
-> >> Vector extension is default on only for "any" cpu. It can be turned
-> >> on by command line "-cpu rv64,v=3Dtrue,vlen=3D128,elen=3D64,vext_spec=
-=3Dv0.7.1".
-> >>
-> >> vlen is the vector register length, default value is 128 bit.
-> >> elen is the max operator size in bits, default value is 64 bit.
-> >> vext_spec is the vector specification version, default value is v0.7.1=
-.
-> >> Thest properties and cpu can be specified with other values.
-> >>
-> >> Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
-> > This looks fine to me. Shouldn't this be the last patch though?
-> Yes=EF=BC=8C it should be the last patch.
-> > As in
-> > once the vector extension has been added to QEMU you can turn it on
-> > from the command line. Right now this turns it on but it isn't
-> > implemented.
-> Maybe I should just add fields in RISCVCPU structure. And never open the
-> vector extension on or add configure properties until the implementation
-> is ready.
-
-Yes, I think that is a good idea.
-
+> Or, since we're not going through tcg_gen_gvec_* for ldst, don't bother with
+> simd_desc at all, and just pass vlen, unencoded.
 >
-> It's still a little awkward as the reviewers will not be able to test
-> the patch until the
-> last patch.
-
-I understand, but I don't think anyone is going to want to test the
-extension half way through it being added to QEMU. This way we can
-start to merge patches even without full support as users can't turn
-it on.
-
-Alistair
-
+>> +/* define check conditions data structure */
+>> +struct vext_check_ctx {
+>> +
+>> +    struct vext_reg {
+>> +        uint8_t reg;
+>> +        bool widen;
+>> +        bool need_check;
+>> +    } check_reg[6];
+>> +
+>> +    struct vext_overlap_mask {
+>> +        uint8_t reg;
+>> +        uint8_t vm;
+>> +        bool need_check;
+>> +    } check_overlap_mask;
+>> +
+>> +    struct vext_nf {
+>> +        uint8_t nf;
+>> +        bool need_check;
+>> +    } check_nf;
+>> +    target_ulong check_misa;
+>> +
+>> +} vchkctx;
+> You cannot use a global variable.  The data must be thread-safe.
 >
-> > Alistair
-> >
-> >> ---
-> >>   target/riscv/cpu.c | 48 ++++++++++++++++++++++++++++++++++++++++++++=
---
-> >>   target/riscv/cpu.h |  8 ++++++++
-> >>   2 files changed, 54 insertions(+), 2 deletions(-)
-> >>
-> >> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> >> index 8c86ebc109..95fdb6261e 100644
-> >> --- a/target/riscv/cpu.c
-> >> +++ b/target/riscv/cpu.c
-> >> @@ -98,6 +98,11 @@ static void set_priv_version(CPURISCVState *env, in=
-t priv_ver)
-> >>       env->priv_ver =3D priv_ver;
-> >>   }
-> >>
-> >> +static void set_vext_version(CPURISCVState *env, int vext_ver)
-> >> +{
-> >> +    env->vext_ver =3D vext_ver;
-> >> +}
-> >> +
-> >>   static void set_feature(CPURISCVState *env, int feature)
-> >>   {
-> >>       env->features |=3D (1ULL << feature);
-> >> @@ -113,7 +118,7 @@ static void set_resetvec(CPURISCVState *env, int r=
-esetvec)
-> >>   static void riscv_any_cpu_init(Object *obj)
-> >>   {
-> >>       CPURISCVState *env =3D &RISCV_CPU(obj)->env;
-> >> -    set_misa(env, RVXLEN | RVI | RVM | RVA | RVF | RVD | RVC | RVU);
-> >> +    set_misa(env, RVXLEN | RVI | RVM | RVA | RVF | RVD | RVC | RVU | =
-RVV);
-> >>       set_priv_version(env, PRIV_VERSION_1_11_0);
-> >>       set_resetvec(env, DEFAULT_RSTVEC);
-> >>   }
-> >> @@ -320,6 +325,7 @@ static void riscv_cpu_realize(DeviceState *dev, Er=
-ror **errp)
-> >>       CPURISCVState *env =3D &cpu->env;
-> >>       RISCVCPUClass *mcc =3D RISCV_CPU_GET_CLASS(dev);
-> >>       int priv_version =3D PRIV_VERSION_1_11_0;
-> >> +    int vext_version =3D VEXT_VERSION_0_07_1;
-> >>       target_ulong target_misa =3D 0;
-> >>       Error *local_err =3D NULL;
-> >>
-> >> @@ -343,8 +349,18 @@ static void riscv_cpu_realize(DeviceState *dev, E=
-rror **errp)
-> >>               return;
-> >>           }
-> >>       }
-> >> -
-> >> +    if (cpu->cfg.vext_spec) {
-> >> +        if (!g_strcmp0(cpu->cfg.vext_spec, "v0.7.1")) {
-> >> +            vext_version =3D VEXT_VERSION_0_07_1;
-> >> +        } else {
-> >> +            error_setg(errp,
-> >> +                       "Unsupported vector spec version '%s'",
-> >> +                       cpu->cfg.vext_spec);
-> >> +            return;
-> >> +        }
-> >> +    }
-> >>       set_priv_version(env, priv_version);
-> >> +    set_vext_version(env, vext_version);
-> >>       set_resetvec(env, DEFAULT_RSTVEC);
-> >>
-> >>       if (cpu->cfg.mmu) {
-> >> @@ -409,6 +425,30 @@ static void riscv_cpu_realize(DeviceState *dev, E=
-rror **errp)
-> >>           if (cpu->cfg.ext_u) {
-> >>               target_misa |=3D RVU;
-> >>           }
-> >> +        if (cpu->cfg.ext_v) {
-> >> +            target_misa |=3D RVV;
-> >> +            if (!is_power_of_2(cpu->cfg.vlen)) {
-> >> +                error_setg(errp,
-> >> +                       "Vector extension VLEN must be power of 2");
-> >> +                return;
-> >> +            }
-> >> +            if (cpu->cfg.vlen > RV_VLEN_MAX || cpu->cfg.vlen < 128) {
-> >> +                error_setg(errp,
-> >> +                       "Vector extension implementation only supports=
- VLEN "
-> >> +                       "in the range [128, %d]", RV_VLEN_MAX);
-> >> +                return;
-> >> +            }
-> >> +            if (!is_power_of_2(cpu->cfg.elen)) {
-> >> +                error_setg(errp,
-> >> +                       "Vector extension ELEN must be power of 2");
-> >> +                return;
-> >> +            }
-> >> +            if (cpu->cfg.elen > 64) {
-> >> +                error_setg(errp,
-> >> +                       "Vector extension ELEN must <=3D 64");
-> >> +                return;
-> >> +            }
-> >> +        }
-> >>
-> >>           set_misa(env, RVXLEN | target_misa);
-> >>       }
-> >> @@ -444,10 +484,14 @@ static Property riscv_cpu_properties[] =3D {
-> >>       DEFINE_PROP_BOOL("c", RISCVCPU, cfg.ext_c, true),
-> >>       DEFINE_PROP_BOOL("s", RISCVCPU, cfg.ext_s, true),
-> >>       DEFINE_PROP_BOOL("u", RISCVCPU, cfg.ext_u, true),
-> >> +    DEFINE_PROP_BOOL("v", RISCVCPU, cfg.ext_v, false),
-> >>       DEFINE_PROP_BOOL("Counters", RISCVCPU, cfg.ext_counters, true),
-> >>       DEFINE_PROP_BOOL("Zifencei", RISCVCPU, cfg.ext_ifencei, true),
-> >>       DEFINE_PROP_BOOL("Zicsr", RISCVCPU, cfg.ext_icsr, true),
-> >>       DEFINE_PROP_STRING("priv_spec", RISCVCPU, cfg.priv_spec),
-> >> +    DEFINE_PROP_STRING("vext_spec", RISCVCPU, cfg.vext_spec),
-> >> +    DEFINE_PROP_UINT16("vlen", RISCVCPU, cfg.vlen, 128),
-> >> +    DEFINE_PROP_UINT16("elen", RISCVCPU, cfg.elen, 64),
-> >>       DEFINE_PROP_BOOL("mmu", RISCVCPU, cfg.mmu, true),
-> >>       DEFINE_PROP_BOOL("pmp", RISCVCPU, cfg.pmp, true),
-> >>       DEFINE_PROP_END_OF_LIST(),
-> >> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> >> index 07e63016a7..bf2b4b55af 100644
-> >> --- a/target/riscv/cpu.h
-> >> +++ b/target/riscv/cpu.h
-> >> @@ -64,6 +64,7 @@
-> >>   #define RVA RV('A')
-> >>   #define RVF RV('F')
-> >>   #define RVD RV('D')
-> >> +#define RVV RV('V')
-> >>   #define RVC RV('C')
-> >>   #define RVS RV('S')
-> >>   #define RVU RV('U')
-> >> @@ -82,6 +83,8 @@ enum {
-> >>   #define PRIV_VERSION_1_10_0 0x00011000
-> >>   #define PRIV_VERSION_1_11_0 0x00011100
-> >>
-> >> +#define VEXT_VERSION_0_07_1 0x00000701
-> >> +
-> >>   #define TRANSLATE_PMP_FAIL 2
-> >>   #define TRANSLATE_FAIL 1
-> >>   #define TRANSLATE_SUCCESS 0
-> >> @@ -118,6 +121,7 @@ struct CPURISCVState {
-> >>       target_ulong badaddr;
-> >>
-> >>       target_ulong priv_ver;
-> >> +    target_ulong vext_ver;
-> >>       target_ulong misa;
-> >>       target_ulong misa_mask;
-> >>
-> >> @@ -226,12 +230,16 @@ typedef struct RISCVCPU {
-> >>           bool ext_c;
-> >>           bool ext_s;
-> >>           bool ext_u;
-> >> +        bool ext_v;
-> >>           bool ext_counters;
-> >>           bool ext_ifencei;
-> >>           bool ext_icsr;
-> >>
-> >>           char *priv_spec;
-> >>           char *user_spec;
-> >> +        char *vext_spec;
-> >> +        uint16_t vlen;
-> >> +        uint16_t elen;
-> >>           bool mmu;
-> >>           bool pmp;
-> >>       } cfg;
-> >> --
-> >> 2.23.0
-> >>
+> If we're going to do the checks this way, with a structure, it needs to be on
+> the stack or within DisasContext.
 >
+>> +#define GEN_VEXT_LD_US_TRANS(NAME, DO_OP, SEQ)                            \
+>> +static bool trans_##NAME(DisasContext *s, arg_r2nfvm* a)                  \
+>> +{                                                                         \
+>> +    vchkctx.check_misa = RVV;                                             \
+>> +    vchkctx.check_overlap_mask.need_check = true;                         \
+>> +    vchkctx.check_overlap_mask.reg = a->rd;                               \
+>> +    vchkctx.check_overlap_mask.vm = a->vm;                                \
+>> +    vchkctx.check_reg[0].need_check = true;                               \
+>> +    vchkctx.check_reg[0].reg = a->rd;                                     \
+>> +    vchkctx.check_reg[0].widen = false;                                   \
+>> +    vchkctx.check_nf.need_check = true;                                   \
+>> +    vchkctx.check_nf.nf = a->nf;                                          \
+>> +                                                                          \
+>> +    if (!vext_check(s)) {                                                 \
+>> +        return false;                                                     \
+>> +    }                                                                     \
+>> +    return DO_OP(s, a, SEQ);                                              \
+>> +}
+> I don't see the improvement from a pointer.  Something like
+>
+>      if (vext_check_isa_ill(s) &&
+>          vext_check_overlap(s, a->rd, a->rm) &&
+>          vext_check_reg(s, a->rd, false) &&
+>          vext_check_nf(s, a->nf)) {
+>          return DO_OP(s, a, SEQ);
+>      }
+>      return false;
+>
+> seems just as clear without the extra data.
+>
+>> +#ifdef CONFIG_USER_ONLY
+>> +#define MO_SB 0
+>> +#define MO_LESW 0
+>> +#define MO_LESL 0
+>> +#define MO_LEQ 0
+>> +#define MO_UB 0
+>> +#define MO_LEUW 0
+>> +#define MO_LEUL 0
+>> +#endif
+> What is this for?  We already define these unconditionally.
+>
+>
+>> +static inline int vext_elem_mask(void *v0, int mlen, int index)
+>> +{
+>> +    int idx = (index * mlen) / 8;
+>> +    int pos = (index * mlen) % 8;
+>> +
+>> +    return (*((uint8_t *)v0 + idx) >> pos) & 0x1;
+>> +}
+> This is a little-endian indexing of the mask.  Just above we talk about using a
+> host-endian ordering of uint64_t.
+>
+> Thus this must be based on uint64_t instead of uint8_t.
+>
+>> +/*
+>> + * This function checks watchpoint before really load operation.
+>> + *
+>> + * In softmmu mode, the TLB API probe_access is enough for watchpoint check.
+>> + * In user mode, there is no watchpoint support now.
+>> + *
+>> + * It will triggle an exception if there is no mapping in TLB
+>> + * and page table walk can't fill the TLB entry. Then the guest
+>> + * software can return here after process the exception or never return.
+>> + */
+>> +static void probe_read_access(CPURISCVState *env, target_ulong addr,
+>> +        target_ulong len, uintptr_t ra)
+>> +{
+>> +    while (len) {
+>> +        const target_ulong pagelen = -(addr | TARGET_PAGE_MASK);
+>> +        const target_ulong curlen = MIN(pagelen, len);
+>> +
+>> +        probe_read(env, addr, curlen, cpu_mmu_index(env, false), ra);
+> The return value here is non-null when we can read directly from host memory.
+> It would be a shame to throw that work away.
+>
+>
+>> +/* data structure and common functions for load and store */
+>> +typedef void vext_ld_elem_fn(CPURISCVState *env, target_ulong addr,
+>> +        uint32_t idx, void *vd, uintptr_t retaddr);
+>> +typedef void vext_st_elem_fn(CPURISCVState *env, target_ulong addr,
+>> +        uint32_t idx, void *vd, uintptr_t retaddr);
+>> +typedef target_ulong vext_get_index_addr(target_ulong base,
+>> +        uint32_t idx, void *vs2);
+>> +typedef void vext_ld_clear_elem(void *vd, uint32_t idx,
+>> +        uint32_t cnt, uint32_t tot);
+>> +
+>> +struct vext_ldst_ctx {
+>> +    struct vext_common_ctx vcc;
+>> +    uint32_t nf;
+>> +    target_ulong base;
+>> +    target_ulong stride;
+>> +    int mmuidx;
+>> +
+>> +    vext_ld_elem_fn *ld_elem;
+>> +    vext_st_elem_fn *st_elem;
+>> +    vext_get_index_addr *get_index_addr;
+>> +    vext_ld_clear_elem *clear_elem;
+>> +};
+> I think you should pass these elements directly, as needed, rather than putting
+> them all in a struct.
+>
+> This would allow the main helper function to be inlined, which in turn allows
+> the mini helper functions to be inlined.
+1. What's the main helper function? What's is the mini helper functions 
+here?
+
+I guess main helper function is such code like:
+
+    #define GEN_VEXT_LD_UNIT_STRIDE(NAME, MTYPE, ETYPE)                \
+    void HELPER(NAME##_mask)(void *vd, target_ulong base, void *v0, \
+             CPURISCVState *env, uint32_t
+    desc)                                              \
+    { \
+         static struct vext_ldst_ctx ctx;                                \
+         vext_common_ctx_init(&ctx.vcc, sizeof(ETYPE),                 
+                    \
+             sizeof(MTYPE), env->vl, desc);                               \
+         ctx.nf = vext_nf(desc);                                  \
+         ctx.base = base;                                     \
+         ctx.ld_elem = vext_##NAME##_ld_elem;                  \
+         ctx.clear_elem = vext_##NAME##_clear_elem;               \
+       \
+         vext_ld_unit_stride_mask(vd, v0, env, &ctx, GETPC());          
+                 \
+    } \
+
+And the mini helper function is such code like:
+
+    static void vext_ld_unit_stride_mask(void *vd, void *v0,
+    CPURISCVState *env,
+             struct vext_ldst_ctx *ctx, uintptr_t ra)
+    {
+         uint32_t i, k;
+         struct vext_common_ctx *s = &ctx->vcc;
+
+         if (s->vl == 0) {
+             return;
+         }
+         /* probe every access*/
+         for (i = 0; i < s->vl; i++) {
+             if (!s->vm && !vext_elem_mask(v0, s->mlen, i)) {
+                 continue;
+             }
+             probe_read_access(env, ctx->base + ctx->nf * i * s->msz,
+                     ctx->nf * s->msz, ra);
+         }
+         /* load bytes from guest memory */
+         for (i = 0; i < s->vl; i++) {
+             k = 0;
+             if (!s->vm && !vext_elem_mask(v0, s->mlen, i)) {
+                 continue;
+             }
+             while (k < ctx->nf) {
+                 target_ulong addr = ctx->base + (i * ctx->nf + k) * s->msz;
+                 ctx->ld_elem(env, addr, i + k * s->vlmax, vd, ra);
+                 k++;
+             }
+         }
+         /* clear tail elements */
+         for (k = 0; k < ctx->nf; k++) {
+             ctx->clear_elem(vd, s->vl + k * s->vlmax, s->vl * s->esz,
+                     s->vlmax * s->esz);
+         }
+    }
+
+Is it right?
+2.  The number of  parameters grows a lot when pass directly to mini 
+helper functions.
+
+For example, the number of parameters increases from 5 to 11.
+
+    static void vext_ld_unit_stride(void *vd, target_ulong base, void *v0,
+             CPURISCVState *env,  vext_ld_elem_fn *ld_elem,
+             vext_ld_clear_elem *clear_elem，uint32_t vlmax,
+             uint32_t nf, uint32_t esz, uint32_t msz, uintptr_t ra)
+
+
+As vlmax and nf can be extracted  from desc, another form of mini helper
+will increases the number of parameters from 5 to 10.
+
+Is it OK?
+
+BTW: In this patchset, I use a lot macros to generate code.  Is it OK?
+
+Best Regards,
+Zhiwei
+>
+> r~
+
+
+--------------BDA17EA78D28803C57DE9B44
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: 8bit
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+    Hi, Richard<br>
+    Thanks for your informative comments. I'm addressing these comments.
+    <br>
+    And a little confused in some comments.<br>
+    <div class="moz-cite-prefix">On 2020/2/12 14:38, Richard Henderson
+      wrote:<br>
+    </div>
+    <blockquote type="cite"
+      cite="mid:9054a6fb-adee-4dcc-d7c6-9a974a83668a@linaro.org">
+      <pre class="moz-quote-pre" wrap="">On 2/9/20 11:42 PM, LIU Zhiwei wrote:
+</pre>
+      <blockquote type="cite">
+        <pre class="moz-quote-pre" wrap="">+/*
++ * As simd_desc supports at most 256 bytes, and in this implementation,
++ * the max vector group length is 2048 bytes. So split it into two parts.
++ *
++ * The first part is floor(maxsz, 64), encoded in maxsz of simd_desc.
++ * The second part is (maxsz % 64) &gt;&gt; 3, encoded in data of simd_desc.
++ */
++static uint32_t maxsz_part1(uint32_t maxsz)
++{
++    return ((maxsz &amp; ~(0x3f)) &gt;&gt; 3) + 0x8; /* add offset 8 to avoid return 0 */
++}
++
++static uint32_t maxsz_part2(uint32_t maxsz)
++{
++    return (maxsz &amp; 0x3f) &gt;&gt; 3;
++}
+</pre>
+      </blockquote>
+      <pre class="moz-quote-pre" wrap="">
+I would much rather adjust simd_desc to support 2048 bytes.
+
+I've just posted a patch set that removes an assert in target/arm that would
+trigger if SIMD_DATA_SHIFT was increased to make room for a larger oprsz.
+
+Or, since we're not going through tcg_gen_gvec_* for ldst, don't bother with
+simd_desc at all, and just pass vlen, unencoded.
+
+</pre>
+      <blockquote type="cite">
+        <pre class="moz-quote-pre" wrap="">+/* define check conditions data structure */
++struct vext_check_ctx {
++
++    struct vext_reg {
++        uint8_t reg;
++        bool widen;
++        bool need_check;
++    } check_reg[6];
++
++    struct vext_overlap_mask {
++        uint8_t reg;
++        uint8_t vm;
++        bool need_check;
++    } check_overlap_mask;
++
++    struct vext_nf {
++        uint8_t nf;
++        bool need_check;
++    } check_nf;
++    target_ulong check_misa;
++
++} vchkctx;
+</pre>
+      </blockquote>
+      <pre class="moz-quote-pre" wrap="">
+You cannot use a global variable.  The data must be thread-safe.
+
+If we're going to do the checks this way, with a structure, it needs to be on
+the stack or within DisasContext.
+
+</pre>
+      <blockquote type="cite">
+        <pre class="moz-quote-pre" wrap="">+#define GEN_VEXT_LD_US_TRANS(NAME, DO_OP, SEQ)                            \
++static bool trans_##NAME(DisasContext *s, arg_r2nfvm* a)                  \
++{                                                                         \
++    vchkctx.check_misa = RVV;                                             \
++    vchkctx.check_overlap_mask.need_check = true;                         \
++    vchkctx.check_overlap_mask.reg = a-&gt;rd;                               \
++    vchkctx.check_overlap_mask.vm = a-&gt;vm;                                \
++    vchkctx.check_reg[0].need_check = true;                               \
++    vchkctx.check_reg[0].reg = a-&gt;rd;                                     \
++    vchkctx.check_reg[0].widen = false;                                   \
++    vchkctx.check_nf.need_check = true;                                   \
++    vchkctx.check_nf.nf = a-&gt;nf;                                          \
++                                                                          \
++    if (!vext_check(s)) {                                                 \
++        return false;                                                     \
++    }                                                                     \
++    return DO_OP(s, a, SEQ);                                              \
++}
+</pre>
+      </blockquote>
+      <pre class="moz-quote-pre" wrap="">
+I don't see the improvement from a pointer.  Something like
+
+    if (vext_check_isa_ill(s) &amp;&amp;
+        vext_check_overlap(s, a-&gt;rd, a-&gt;rm) &amp;&amp;
+        vext_check_reg(s, a-&gt;rd, false) &amp;&amp;
+        vext_check_nf(s, a-&gt;nf)) {
+        return DO_OP(s, a, SEQ);
+    }
+    return false;
+
+seems just as clear without the extra data.
+
+</pre>
+      <blockquote type="cite">
+        <pre class="moz-quote-pre" wrap="">+#ifdef CONFIG_USER_ONLY
++#define MO_SB 0
++#define MO_LESW 0
++#define MO_LESL 0
++#define MO_LEQ 0
++#define MO_UB 0
++#define MO_LEUW 0
++#define MO_LEUL 0
++#endif
+</pre>
+      </blockquote>
+      <pre class="moz-quote-pre" wrap="">
+What is this for?  We already define these unconditionally.
+
+
+</pre>
+      <blockquote type="cite">
+        <pre class="moz-quote-pre" wrap="">+static inline int vext_elem_mask(void *v0, int mlen, int index)
++{
++    int idx = (index * mlen) / 8;
++    int pos = (index * mlen) % 8;
++
++    return (*((uint8_t *)v0 + idx) &gt;&gt; pos) &amp; 0x1;
++}
+</pre>
+      </blockquote>
+      <pre class="moz-quote-pre" wrap="">
+This is a little-endian indexing of the mask.  Just above we talk about using a
+host-endian ordering of uint64_t.
+
+Thus this must be based on uint64_t instead of uint8_t.
+
+</pre>
+      <blockquote type="cite">
+        <pre class="moz-quote-pre" wrap="">+/*
++ * This function checks watchpoint before really load operation.
++ *
++ * In softmmu mode, the TLB API probe_access is enough for watchpoint check.
++ * In user mode, there is no watchpoint support now.
++ *
++ * It will triggle an exception if there is no mapping in TLB
++ * and page table walk can't fill the TLB entry. Then the guest
++ * software can return here after process the exception or never return.
++ */
++static void probe_read_access(CPURISCVState *env, target_ulong addr,
++        target_ulong len, uintptr_t ra)
++{
++    while (len) {
++        const target_ulong pagelen = -(addr | TARGET_PAGE_MASK);
++        const target_ulong curlen = MIN(pagelen, len);
++
++        probe_read(env, addr, curlen, cpu_mmu_index(env, false), ra);
+</pre>
+      </blockquote>
+      <pre class="moz-quote-pre" wrap="">
+The return value here is non-null when we can read directly from host memory.
+It would be a shame to throw that work away.
+
+
+</pre>
+      <blockquote type="cite">
+        <pre class="moz-quote-pre" wrap="">+/* data structure and common functions for load and store */
++typedef void vext_ld_elem_fn(CPURISCVState *env, target_ulong addr,
++        uint32_t idx, void *vd, uintptr_t retaddr);
++typedef void vext_st_elem_fn(CPURISCVState *env, target_ulong addr,
++        uint32_t idx, void *vd, uintptr_t retaddr);
++typedef target_ulong vext_get_index_addr(target_ulong base,
++        uint32_t idx, void *vs2);
++typedef void vext_ld_clear_elem(void *vd, uint32_t idx,
++        uint32_t cnt, uint32_t tot);
++
++struct vext_ldst_ctx {
++    struct vext_common_ctx vcc;
++    uint32_t nf;
++    target_ulong base;
++    target_ulong stride;
++    int mmuidx;
++
++    vext_ld_elem_fn *ld_elem;
++    vext_st_elem_fn *st_elem;
++    vext_get_index_addr *get_index_addr;
++    vext_ld_clear_elem *clear_elem;
++};
+</pre>
+      </blockquote>
+      <pre class="moz-quote-pre" wrap="">
+I think you should pass these elements directly, as needed, rather than putting
+them all in a struct.
+
+This would allow the main helper function to be inlined, which in turn allows
+the mini helper functions to be inlined.
+</pre>
+    </blockquote>
+    1. What's the main helper function? What's is the mini helper
+    functions here?<br>
+    <br>
+    I guess main helper function is such code like:<br>
+    <br>
+    <blockquote>#define GEN_VEXT_LD_UNIT_STRIDE(NAME, MTYPE,
+      ETYPE)                \<br>
+      void HELPER(NAME##_mask)(void *vd, target_ulong base, void *v0,  
+      \<br>
+              CPURISCVState *env, uint32_t
+      desc)                                              \<br>
+{                                                                                                             
+      \<br>
+          static struct vext_ldst_ctx ctx;                             
+                                     \<br>
+          vext_common_ctx_init(&amp;ctx.vcc,
+      sizeof(ETYPE),                                 \<br>
+              sizeof(MTYPE), env-&gt;vl, desc);                        
+                                    \<br>
+          ctx.nf = vext_nf(desc);                                      
+                                       \<br>
+          ctx.base = base;                                             
+                                          \<br>
+          ctx.ld_elem = vext_##NAME##_ld_elem;                         
+                       \<br>
+          ctx.clear_elem = vext_##NAME##_clear_elem;                   
+                    \<br>
+                                                                                                            
+        \<br>
+          vext_ld_unit_stride_mask(vd, v0, env, &amp;ctx,
+      GETPC());                       \<br>
+}                                                                                                             
+      \<br>
+    </blockquote>
+    And the mini helper function is such code like:<br>
+    <blockquote>static void vext_ld_unit_stride_mask(void *vd, void *v0,
+      CPURISCVState *env,<br>
+              struct vext_ldst_ctx *ctx, uintptr_t ra)<br>
+      {<br>
+          uint32_t i, k;<br>
+          struct vext_common_ctx *s = &amp;ctx-&gt;vcc;<br>
+      <br>
+          if (s-&gt;vl == 0) {<br>
+              return;<br>
+          }<br>
+          /* probe every access*/<br>
+          for (i = 0; i &lt; s-&gt;vl; i++) {<br>
+              if (!s-&gt;vm &amp;&amp; !vext_elem_mask(v0, s-&gt;mlen,
+      i)) {<br>
+                  continue;<br>
+              }<br>
+              probe_read_access(env, ctx-&gt;base + ctx-&gt;nf * i *
+      s-&gt;msz,<br>
+                      ctx-&gt;nf * s-&gt;msz, ra);<br>
+          }<br>
+          /* load bytes from guest memory */<br>
+          for (i = 0; i &lt; s-&gt;vl; i++) {<br>
+              k = 0;<br>
+              if (!s-&gt;vm &amp;&amp; !vext_elem_mask(v0, s-&gt;mlen,
+      i)) {<br>
+                  continue;<br>
+              }<br>
+              while (k &lt; ctx-&gt;nf) {<br>
+                  target_ulong addr = ctx-&gt;base + (i * ctx-&gt;nf +
+      k) * s-&gt;msz;<br>
+                  ctx-&gt;ld_elem(env, addr, i + k * s-&gt;vlmax, vd,
+      ra);<br>
+                  k++;<br>
+              }<br>
+          }<br>
+          /* clear tail elements */<br>
+          for (k = 0; k &lt; ctx-&gt;nf; k++) {<br>
+              ctx-&gt;clear_elem(vd, s-&gt;vl + k * s-&gt;vlmax,
+      s-&gt;vl * s-&gt;esz,<br>
+                      s-&gt;vlmax * s-&gt;esz);<br>
+          }<br>
+      }<br>
+    </blockquote>
+    Is it right?<br>
+    2.  The number of  parameters grows a lot when pass directly to mini
+    helper functions.<br>
+    <br>
+    For example, the number of parameters increases from 5 to 11. <br>
+    <br>
+    <blockquote>static void vext_ld_unit_stride(void *vd, target_ulong
+      base, void *v0,<br>
+              CPURISCVState *env,  vext_ld_elem_fn *ld_elem, <br>
+              vext_ld_clear_elem *clear_elem，uint32_t vlmax,<br>
+              uint32_t nf, uint32_t esz, uint32_t msz, uintptr_t ra)<br>
+    </blockquote>
+    <br>
+    As vlmax and nf can be extracted  from desc, another form of mini
+    helper <br>
+    will increases the number of parameters from 5 to 10.<br>
+    <br>
+    Is it OK?<br>
+    <br>
+    BTW: In this patchset, I use a lot macros to generate code.  Is it
+    OK?<br>
+    <span style="color: rgb(51, 51, 51); font-family: arial; font-size:
+      13px; font-style: normal; font-variant-ligatures: normal;
+      font-variant-caps: normal; font-weight: 400; letter-spacing:
+      normal; orphans: 2; text-align: start; text-indent: 0px;
+      text-transform: none; white-space: normal; widows: 2;
+      word-spacing: 0px; -webkit-text-stroke-width: 0px;
+      background-color: rgb(255, 255, 255); text-decoration-style:
+      initial; text-decoration-color: initial; display: inline
+      !important; float: none;">
+    </span>
+    <div class="moz-cite-prefix"><br>
+      Best Regards,<br>
+      Zhiwei<br>
+    </div>
+    <blockquote type="cite"
+      cite="mid:9054a6fb-adee-4dcc-d7c6-9a974a83668a@linaro.org">
+      <pre class="moz-quote-pre" wrap="">
+
+r~
+</pre>
+    </blockquote>
+    <br>
+  </body>
+</html>
+
+--------------BDA17EA78D28803C57DE9B44--
 
