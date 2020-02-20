@@ -1,47 +1,40 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1j4LBD-00055X-0l
-	for mharc-qemu-riscv@gnu.org; Wed, 19 Feb 2020 03:58:03 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:39408)
+	id 1j4mNz-00049X-FZ
+	for mharc-qemu-riscv@gnu.org; Thu, 20 Feb 2020 09:01:03 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43145)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <zhiwei_liu@c-sky.com>) id 1j4LB9-0004zx-Fu
- for qemu-riscv@nongnu.org; Wed, 19 Feb 2020 03:58:01 -0500
+ (envelope-from <zhangleizheng@eswin.com>) id 1j4gxD-0001dQ-DG
+ for qemu-riscv@nongnu.org; Thu, 20 Feb 2020 03:13:04 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <zhiwei_liu@c-sky.com>) id 1j4LB6-0000s9-VZ
- for qemu-riscv@nongnu.org; Wed, 19 Feb 2020 03:57:59 -0500
-Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:51920)
+ (envelope-from <zhangleizheng@eswin.com>) id 1j4gxA-0004Sc-IO
+ for qemu-riscv@nongnu.org; Thu, 20 Feb 2020 03:13:01 -0500
+Received: from mail142-33.mail.alibaba.com ([198.11.142.33]:45808)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1j4LB0-0000j4-RV; Wed, 19 Feb 2020 03:57:51 -0500
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07436282|-1; CH=green;
- DM=CONTINUE|CONTINUE|true|0.156279-0.0175105-0.82621;
- DS=CONTINUE|ham_regular_dialog|0.0025126-0.000487853-0.997;
- FP=0|0|0|0|0|-1|-1|-1; HT=e01a16370; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS;
- RN=8; RT=8; SR=0; TI=SMTPD_---.GpeGyvm_1582102663; 
-Received: from 30.39.130.137(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.GpeGyvm_1582102663)
- by smtp.aliyun-inc.com(10.147.40.200);
- Wed, 19 Feb 2020 16:57:44 +0800
-Subject: Re: [PATCH v3 1/5] target/riscv: add vector unit stride load and
- store instructions
-To: Richard Henderson <richard.henderson@linaro.org>, alistair23@gmail.com,
- chihmin.chao@sifive.com, palmer@dabbelt.com
-Cc: wenmeng_zhang@c-sky.com, wxy194768@alibaba-inc.com,
- qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-References: <20200210074256.11412-1-zhiwei_liu@c-sky.com>
- <20200210074256.11412-2-zhiwei_liu@c-sky.com>
- <9054a6fb-adee-4dcc-d7c6-9a974a83668a@linaro.org>
-From: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Message-ID: <a76824fb-3608-2b30-fe8f-ac705b73e42a@c-sky.com>
-Date: Wed, 19 Feb 2020 16:57:43 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.4.1
+ (Exim 4.71) (envelope-from <zhangleizheng@eswin.com>)
+ id 1j4gxA-0004R7-1j
+ for qemu-riscv@nongnu.org; Thu, 20 Feb 2020 03:13:00 -0500
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.2977259|-1; CH=green;
+ DM=CONTINUE|CONTINUE|true|0.475437-0.00910519-0.515458;
+ DS=CONTINUE|ham_social|0.0254006-0.000228026-0.974371; FP=0|0|0|0|0|-1|-1|-1;
+ HT=e02c03297; MF=zhangleizheng@eswin.com; NM=1; PH=DW; RN=1; RT=1; SR=0;
+ TI=W4_5790132_v5_0AB101D9_1582184498884_o7001c1m; 
+Received: from WS-web
+ (zhangleizheng@eswin.com[W4_5790132_v5_0AB101D9_1582184498884_o7001c1m]) by
+ e02c03290.eu6 at Thu, 20 Feb 2020 15:42:05 +0800
+Date: Thu, 20 Feb 2020 15:42:05 +0800
+From: "=?UTF-8?B?5byg6Zu35q2j?=" <zhangleizheng@eswin.com>
+To: "qemu-riscv" <qemu-riscv@nongnu.org>
+Reply-To: "=?UTF-8?B?5byg6Zu35q2j?=" <zhangleizheng@eswin.com>
+Message-ID: <15483ad9-fb8a-4e7d-9223-b71243c4248a.zhangleizheng@eswin.com>
+Subject: =?UTF-8?B?YWJvdXQgcWVtdSBkaXNwbGF5?=
+X-Mailer: [Alimail-Mailagent revision 24439][W4_5790132][v5][Chrome]
 MIME-Version: 1.0
-In-Reply-To: <9054a6fb-adee-4dcc-d7c6-9a974a83668a@linaro.org>
-Content-Type: multipart/alternative;
- boundary="------------BDA17EA78D28803C57DE9B44"
-Content-Language: en-US
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 3.x [generic] [fuzzy]
-X-Received-From: 121.197.200.217
+x-aliyun-mail-creator: W4_5790132_v5_AoSTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV09XNjQpIEFwcGxlV2ViS2l0LzUzNy4zNiAoS0hUTUwsIGxpa2UgR2Vja28pIENocm9tZS82My4wLjMyMzkuMTMyIFNhZmFyaS81MzcuMzY=zN
+Content-Type: multipart/related;
+ boundary="----=ALIBOUNDARY_25688_5770e940_5e4e384d_d8d39"
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 3.x
+X-Received-From: 198.11.142.33
+X-Mailman-Approved-At: Thu, 20 Feb 2020 09:01:01 -0500
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -53,592 +46,379 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Feb 2020 08:58:02 -0000
-
-This is a multi-part message in MIME format.
---------------BDA17EA78D28803C57DE9B44
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-
-Hi, Richard
-Thanks for your informative comments. I'm addressing these comments.
-And a little confused in some comments.
-On 2020/2/12 14:38, Richard Henderson wrote:
-> On 2/9/20 11:42 PM, LIU Zhiwei wrote:
->> +/*
->> + * As simd_desc supports at most 256 bytes, and in this implementation,
->> + * the max vector group length is 2048 bytes. So split it into two parts.
->> + *
->> + * The first part is floor(maxsz, 64), encoded in maxsz of simd_desc.
->> + * The second part is (maxsz % 64) >> 3, encoded in data of simd_desc.
->> + */
->> +static uint32_t maxsz_part1(uint32_t maxsz)
->> +{
->> +    return ((maxsz & ~(0x3f)) >> 3) + 0x8; /* add offset 8 to avoid return 0 */
->> +}
->> +
->> +static uint32_t maxsz_part2(uint32_t maxsz)
->> +{
->> +    return (maxsz & 0x3f) >> 3;
->> +}
-> I would much rather adjust simd_desc to support 2048 bytes.
->
-> I've just posted a patch set that removes an assert in target/arm that would
-> trigger if SIMD_DATA_SHIFT was increased to make room for a larger oprsz.
->
-> Or, since we're not going through tcg_gen_gvec_* for ldst, don't bother with
-> simd_desc at all, and just pass vlen, unencoded.
->
->> +/* define check conditions data structure */
->> +struct vext_check_ctx {
->> +
->> +    struct vext_reg {
->> +        uint8_t reg;
->> +        bool widen;
->> +        bool need_check;
->> +    } check_reg[6];
->> +
->> +    struct vext_overlap_mask {
->> +        uint8_t reg;
->> +        uint8_t vm;
->> +        bool need_check;
->> +    } check_overlap_mask;
->> +
->> +    struct vext_nf {
->> +        uint8_t nf;
->> +        bool need_check;
->> +    } check_nf;
->> +    target_ulong check_misa;
->> +
->> +} vchkctx;
-> You cannot use a global variable.  The data must be thread-safe.
->
-> If we're going to do the checks this way, with a structure, it needs to be on
-> the stack or within DisasContext.
->
->> +#define GEN_VEXT_LD_US_TRANS(NAME, DO_OP, SEQ)                            \
->> +static bool trans_##NAME(DisasContext *s, arg_r2nfvm* a)                  \
->> +{                                                                         \
->> +    vchkctx.check_misa = RVV;                                             \
->> +    vchkctx.check_overlap_mask.need_check = true;                         \
->> +    vchkctx.check_overlap_mask.reg = a->rd;                               \
->> +    vchkctx.check_overlap_mask.vm = a->vm;                                \
->> +    vchkctx.check_reg[0].need_check = true;                               \
->> +    vchkctx.check_reg[0].reg = a->rd;                                     \
->> +    vchkctx.check_reg[0].widen = false;                                   \
->> +    vchkctx.check_nf.need_check = true;                                   \
->> +    vchkctx.check_nf.nf = a->nf;                                          \
->> +                                                                          \
->> +    if (!vext_check(s)) {                                                 \
->> +        return false;                                                     \
->> +    }                                                                     \
->> +    return DO_OP(s, a, SEQ);                                              \
->> +}
-> I don't see the improvement from a pointer.  Something like
->
->      if (vext_check_isa_ill(s) &&
->          vext_check_overlap(s, a->rd, a->rm) &&
->          vext_check_reg(s, a->rd, false) &&
->          vext_check_nf(s, a->nf)) {
->          return DO_OP(s, a, SEQ);
->      }
->      return false;
->
-> seems just as clear without the extra data.
->
->> +#ifdef CONFIG_USER_ONLY
->> +#define MO_SB 0
->> +#define MO_LESW 0
->> +#define MO_LESL 0
->> +#define MO_LEQ 0
->> +#define MO_UB 0
->> +#define MO_LEUW 0
->> +#define MO_LEUL 0
->> +#endif
-> What is this for?  We already define these unconditionally.
->
->
->> +static inline int vext_elem_mask(void *v0, int mlen, int index)
->> +{
->> +    int idx = (index * mlen) / 8;
->> +    int pos = (index * mlen) % 8;
->> +
->> +    return (*((uint8_t *)v0 + idx) >> pos) & 0x1;
->> +}
-> This is a little-endian indexing of the mask.  Just above we talk about using a
-> host-endian ordering of uint64_t.
->
-> Thus this must be based on uint64_t instead of uint8_t.
->
->> +/*
->> + * This function checks watchpoint before really load operation.
->> + *
->> + * In softmmu mode, the TLB API probe_access is enough for watchpoint check.
->> + * In user mode, there is no watchpoint support now.
->> + *
->> + * It will triggle an exception if there is no mapping in TLB
->> + * and page table walk can't fill the TLB entry. Then the guest
->> + * software can return here after process the exception or never return.
->> + */
->> +static void probe_read_access(CPURISCVState *env, target_ulong addr,
->> +        target_ulong len, uintptr_t ra)
->> +{
->> +    while (len) {
->> +        const target_ulong pagelen = -(addr | TARGET_PAGE_MASK);
->> +        const target_ulong curlen = MIN(pagelen, len);
->> +
->> +        probe_read(env, addr, curlen, cpu_mmu_index(env, false), ra);
-> The return value here is non-null when we can read directly from host memory.
-> It would be a shame to throw that work away.
->
->
->> +/* data structure and common functions for load and store */
->> +typedef void vext_ld_elem_fn(CPURISCVState *env, target_ulong addr,
->> +        uint32_t idx, void *vd, uintptr_t retaddr);
->> +typedef void vext_st_elem_fn(CPURISCVState *env, target_ulong addr,
->> +        uint32_t idx, void *vd, uintptr_t retaddr);
->> +typedef target_ulong vext_get_index_addr(target_ulong base,
->> +        uint32_t idx, void *vs2);
->> +typedef void vext_ld_clear_elem(void *vd, uint32_t idx,
->> +        uint32_t cnt, uint32_t tot);
->> +
->> +struct vext_ldst_ctx {
->> +    struct vext_common_ctx vcc;
->> +    uint32_t nf;
->> +    target_ulong base;
->> +    target_ulong stride;
->> +    int mmuidx;
->> +
->> +    vext_ld_elem_fn *ld_elem;
->> +    vext_st_elem_fn *st_elem;
->> +    vext_get_index_addr *get_index_addr;
->> +    vext_ld_clear_elem *clear_elem;
->> +};
-> I think you should pass these elements directly, as needed, rather than putting
-> them all in a struct.
->
-> This would allow the main helper function to be inlined, which in turn allows
-> the mini helper functions to be inlined.
-1. What's the main helper function? What's is the mini helper functions 
-here?
-
-I guess main helper function is such code like:
-
-    #define GEN_VEXT_LD_UNIT_STRIDE(NAME, MTYPE, ETYPE)                \
-    void HELPER(NAME##_mask)(void *vd, target_ulong base, void *v0, \
-             CPURISCVState *env, uint32_t
-    desc)                                              \
-    { \
-         static struct vext_ldst_ctx ctx;                                \
-         vext_common_ctx_init(&ctx.vcc, sizeof(ETYPE),                 
-                    \
-             sizeof(MTYPE), env->vl, desc);                               \
-         ctx.nf = vext_nf(desc);                                  \
-         ctx.base = base;                                     \
-         ctx.ld_elem = vext_##NAME##_ld_elem;                  \
-         ctx.clear_elem = vext_##NAME##_clear_elem;               \
-       \
-         vext_ld_unit_stride_mask(vd, v0, env, &ctx, GETPC());          
-                 \
-    } \
-
-And the mini helper function is such code like:
-
-    static void vext_ld_unit_stride_mask(void *vd, void *v0,
-    CPURISCVState *env,
-             struct vext_ldst_ctx *ctx, uintptr_t ra)
-    {
-         uint32_t i, k;
-         struct vext_common_ctx *s = &ctx->vcc;
-
-         if (s->vl == 0) {
-             return;
-         }
-         /* probe every access*/
-         for (i = 0; i < s->vl; i++) {
-             if (!s->vm && !vext_elem_mask(v0, s->mlen, i)) {
-                 continue;
-             }
-             probe_read_access(env, ctx->base + ctx->nf * i * s->msz,
-                     ctx->nf * s->msz, ra);
-         }
-         /* load bytes from guest memory */
-         for (i = 0; i < s->vl; i++) {
-             k = 0;
-             if (!s->vm && !vext_elem_mask(v0, s->mlen, i)) {
-                 continue;
-             }
-             while (k < ctx->nf) {
-                 target_ulong addr = ctx->base + (i * ctx->nf + k) * s->msz;
-                 ctx->ld_elem(env, addr, i + k * s->vlmax, vd, ra);
-                 k++;
-             }
-         }
-         /* clear tail elements */
-         for (k = 0; k < ctx->nf; k++) {
-             ctx->clear_elem(vd, s->vl + k * s->vlmax, s->vl * s->esz,
-                     s->vlmax * s->esz);
-         }
-    }
-
-Is it right?
-2.  The number of  parameters grows a lot when pass directly to mini 
-helper functions.
-
-For example, the number of parameters increases from 5 to 11.
-
-    static void vext_ld_unit_stride(void *vd, target_ulong base, void *v0,
-             CPURISCVState *env,  vext_ld_elem_fn *ld_elem,
-             vext_ld_clear_elem *clear_elem，uint32_t vlmax,
-             uint32_t nf, uint32_t esz, uint32_t msz, uintptr_t ra)
+X-List-Received-Date: Thu, 20 Feb 2020 08:13:04 -0000
 
 
-As vlmax and nf can be extracted  from desc, another form of mini helper
-will increases the number of parameters from 5 to 10.
+------=ALIBOUNDARY_25688_5770e940_5e4e384d_d8d39
+Content-Type: multipart/alternative;
+  boundary="----=ALIBOUNDARY_25688_5770e940_5e4e384d_d8d3a"
 
-Is it OK?
+------=ALIBOUNDARY_25688_5770e940_5e4e384d_d8d3a
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: base64
 
-BTW: In this patchset, I use a lot macros to generate code.  Is it OK?
+CkhlbGxvOgpJIHdvdWxkIGxpa2UgdG8gYXNrIHRoZSBmb2xsb3dpbmcgcXVlc3Rpb25zIGFib3V0
+IHFlbXUtNC4yLjAuCgoxLiBEb2VzIHFlbXUtc3lzdGVtLXJpc2N2NjQgc3VwcG9ydCBMaW51eCB3
+aXRoIGdyYXBoaWNhbCBpbnRlcmZhY2Ugbm93PwoyLiBJZiBxZW11LXN5c3RlbS1yaXNjdjY0IHN1
+cHBvcnRzIExpbnV4IHdpdGggZ3JhcGhpY2FsIGludGVyZmFjZSwgaG93IHNob3VsZCB0aGUgc3Rh
+cnR1cCBwYXJhbWV0ZXJzIG9mIFFFTVUgYmUgc2V0PyAgICAgICAgIEZvciBleGFtcGxlOiAtIGRp
+c3BsYXkgWFhYIC0gVkdBIFhYWCAtIGRldmljZSBYWFgKMy4gSSBzdGFydCBRRU1VIHdpdGggdGhl
+IGZvbGxvd2luZyBwYXJhbWV0ZXJzOgpxZW11LXN5c3RlbS1yaXNjdjY0ICBcCiAgICAgICAgIC1t
+YWNoaW5lICB2aXJ0ICAtbSA1MTIgXAota2VybmVsICBmd19qdW1wLmVsZiAgXAotZGV2aWNlICBs
+b2FkZXIsZmlsZT1JbWFnZSxhZGRyPTB4ODAyMDAwMDAgIFwKICAgICAgICAgLWRyaXZlIGlkPWRp
+c2swLGZpbGU9ZGVtby1jb3JlaXAteGZjZTQtZnJlZWRvbS11NTQwLnJvb3Rmcy5leHQ0LGlmPW5v
+bmUsZm9ybWF0PXJhdyBcCiAgICAgICAgLWRldmljZSAgdmlydGlvLWJsay1kZXZpY2UsZHJpdmU9
+ZGlzazAgXAogICAgICAgIC1vYmplY3QgIHJuZy1yYW5kb20sZmlsZW5hbWU9L2Rldi91cmFuZG9t
+LGlkPXJuZzAgXAogICAgICAgIC1kZXZpY2UgIHZpcnRpby1ybmctZGV2aWNlLHJuZz1ybmcwIC1z
+aG93LWN1cnNvciAtbW9uaXRvciBudWxsICBcCiAgICAgICAgLWFwcGVuZCAgJ3Jvb3Q9L2Rldi92
+ZGEgcncgaGlnaHJlcz1vZmYgIGNvbnNvbGU9dHR5UzAgbWVtPTUxMk0gIGVhcmx5Y29uPXNiaSAn
+IFwKICAgICAgICAtZGlzcGxheSAgZ3RrLGdsPW9uIC1kZXZpY2UgdmlydGlvLWdwdS1kZXZpY2Us
+dmlyZ2w9b24gLXZnYSBzdGQKVGhlIGZvbGxvd2luZyBpbnRlcmZhY2UgYXBwZWFyczoKQ2FuIHlv
+dSBnaXZlIG1lIHNvbWUgc3VnZ2VzdGlvbnPvvJ8KClRoYW5rIHlvdS4=
+------=ALIBOUNDARY_25688_5770e940_5e4e384d_d8d3a
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: base64
 
-Best Regards,
-Zhiwei
->
-> r~
+PGRpdiBjbGFzcz0iX19hbGl5dW5fZW1haWxfYm9keV9ibG9jayI+PGRpdiAgc3R5bGU9ImxpbmUt
+aGVpZ2h0OjEuNztmb250LWZhbWlseTpUYWhvbWEsQXJpYWwsU1RIZWl0aSxTaW1TdW47Zm9udC1z
+aXplOjE0LjBweDtjb2xvcjojMDAwMDAwOyI+PGRpdiAgc3R5bGU9ImNsZWFyOmJvdGg7Ij48YnIg
+PjwvZGl2PjxkaXYgIHN0eWxlPSJjbGVhcjpib3RoOyI+PGRpdiAgY2xhc3M9IiBfX2FsaXl1bl9u
+b2RlX2hhc19jb2xvciIgc3R5bGU9Im1hcmdpbjouMHB4O3BhZGRpbmc6LjBweDtib3JkZXItdG9w
+Oi4wcHg7Ym9yZGVyLXJpZ2h0Oi4wcHg7Ym9yZGVyLWJvdHRvbTpub25lO2JvcmRlci1sZWZ0Oi4w
+cHg7Ym9yZGVyLWltYWdlOmluaXRpYWw7b3V0bGluZTouMHB4O2NvbG9yOiMwMDAwMDA7Zm9udC1z
+aXplOjE0LjBweDtmb250LXN0eWxlOm5vcm1hbDtmb250LXZhcmlhbnQtbGlnYXR1cmVzOm5vcm1h
+bDtmb250LXZhcmlhbnQtY2Fwczpub3JtYWw7Zm9udC13ZWlnaHQ6NDAwO3RleHQtYWxpZ246c3Rh
+cnQ7dGV4dC1pbmRlbnQ6LjBweDt0ZXh0LXRyYW5zZm9ybTpub25lO3RleHQtZGVjb3JhdGlvbi1z
+dHlsZTppbml0aWFsO3RleHQtZGVjb3JhdGlvbi1jb2xvcjppbml0aWFsO2xpbmUtaGVpZ2h0OjEu
+Nztmb250LWZhbWlseTpUYWhvbWEsQXJpYWwsU1RIZWl0aSxTaW1TdW47Ij48ZGl2ICBzdHlsZT0i
+bWFyZ2luOi4wcHg7cGFkZGluZzouMHB4O2JvcmRlcjouMHB4O291dGxpbmU6LjBweDtjbGVhcjpi
+b3RoOyI+SGVsbG86PGJyID48L2Rpdj48ZGl2ICBzdHlsZT0ibWFyZ2luOi4wcHg7cGFkZGluZzou
+MHB4O2JvcmRlcjouMHB4O291dGxpbmU6LjBweDtjbGVhcjpib3RoOyI+PHNwYW4gIHN0eWxlPSJt
+YXJnaW46LjBweDtwYWRkaW5nOi4wcHg7Ym9yZGVyOi4wcHg7b3V0bGluZTouMHB4OyI+SSZuYnNw
+O3dvdWxkJm5ic3A7bGlrZSZuYnNwO3RvJm5ic3A7YXNrJm5ic3A7dGhlJm5ic3A7Zm9sbG93aW5n
+Jm5ic3A7cXVlc3Rpb25zJm5ic3A7YWJvdXQmbmJzcDtxZW11LTQuMi4wLjwvc3Bhbj48L2Rpdj48
+ZGl2ICBzdHlsZT0ibWFyZ2luOi4wcHg7cGFkZGluZzouMHB4O2JvcmRlcjouMHB4O291dGxpbmU6
+LjBweDtjbGVhcjpib3RoOyI+PHNwYW4gIHN0eWxlPSJtYXJnaW46LjBweDtwYWRkaW5nOi4wcHg7
+Ym9yZGVyOi4wcHg7b3V0bGluZTouMHB4OyI+PGJyID48L3NwYW4+PC9kaXY+PGRpdiAgc3R5bGU9
+Im1hcmdpbjouMHB4O3BhZGRpbmc6LjBweDtib3JkZXI6LjBweDtvdXRsaW5lOi4wcHg7Y2xlYXI6
+Ym90aDsiPjxzcGFuICBzdHlsZT0ibWFyZ2luOi4wcHg7cGFkZGluZzouMHB4O2JvcmRlcjouMHB4
+O291dGxpbmU6LjBweDsiPjEuJm5ic3A7RG9lcyZuYnNwO3FlbXUtc3lzdGVtLXJpc2N2NjQmbmJz
+cDtzdXBwb3J0Jm5ic3A7TGludXgmbmJzcDt3aXRoJm5ic3A7Z3JhcGhpY2FsJm5ic3A7aW50ZXJm
+YWNlJm5ic3A7bm93Pzwvc3Bhbj48L2Rpdj48ZGl2ICBzdHlsZT0ibWFyZ2luOi4wcHg7cGFkZGlu
+ZzouMHB4O2JvcmRlcjouMHB4O291dGxpbmU6LjBweDtjbGVhcjpib3RoOyI+PHNwYW4gIHN0eWxl
+PSJtYXJnaW46LjBweDtwYWRkaW5nOi4wcHg7Ym9yZGVyOi4wcHg7b3V0bGluZTouMHB4OyI+Mi4m
+bmJzcDtJZiZuYnNwO3FlbXUtc3lzdGVtLXJpc2N2NjQmbmJzcDtzdXBwb3J0cyZuYnNwO0xpbnV4
+Jm5ic3A7d2l0aCZuYnNwO2dyYXBoaWNhbCZuYnNwO2ludGVyZmFjZSwmbmJzcDtob3cmbmJzcDtz
+aG91bGQmbmJzcDt0aGUmbmJzcDtzdGFydHVwJm5ic3A7cGFyYW1ldGVycyZuYnNwO29mJm5ic3A7
+UUVNVSZuYnNwO2JlJm5ic3A7c2V0PyZuYnNwOyAmbmJzcDsgJm5ic3A7ICZuYnNwOyAmbmJzcDtG
+b3ImbmJzcDtleGFtcGxlOiZuYnNwOy0mbmJzcDtkaXNwbGF5Jm5ic3A7WFhYJm5ic3A7LSZuYnNw
+O1ZHQSZuYnNwO1hYWCZuYnNwOy0mbmJzcDtkZXZpY2UmbmJzcDtYWFg8L3NwYW4+PC9kaXY+PGRp
+diAgc3R5bGU9Im1hcmdpbjouMHB4O3BhZGRpbmc6LjBweDtib3JkZXItdG9wOi4wcHg7Ym9yZGVy
+LXJpZ2h0Oi4wcHg7Ym9yZGVyLWJvdHRvbTpub25lO2JvcmRlci1sZWZ0Oi4wcHg7Ym9yZGVyLWlt
+YWdlOmluaXRpYWw7b3V0bGluZTouMHB4O2NsZWFyOmJvdGg7Ij48c3BhbiAgc3R5bGU9Im1hcmdp
+bjouMHB4O3BhZGRpbmc6LjBweDtib3JkZXI6LjBweDtvdXRsaW5lOi4wcHg7Ij4zLiZuYnNwO0km
+bmJzcDtzdGFydCZuYnNwO1FFTVUmbmJzcDt3aXRoJm5ic3A7dGhlJm5ic3A7Zm9sbG93aW5nJm5i
+c3A7cGFyYW1ldGVyczo8L3NwYW4+PHAgIGNsYXNzPSJNc29Ob3JtYWwiIHN0eWxlPSJtYXJnaW46
+LjBweDt0ZXh0LWFsaWduOmp1c3RpZnk7Zm9udC1mYW1pbHk6Q2FsaWJyaTtmb250LXNpemU6MTQu
+MHB4O3RleHQtaW5kZW50OjI4LjBweDsiPjxzcGFuICBzdHlsZT0ibWFyZ2luOi4wcHg7cGFkZGlu
+ZzouMHB4O2JvcmRlcjouMHB4O291dGxpbmU6LjBweDtmb250LWZhbWlseTpDYWxpYnJpO2ZvbnQt
+c2l6ZToxNC4wcHg7Ij5xZW11LXN5c3RlbS1yaXNjdjY0ICZuYnNwO1w8L3NwYW4+PC9wPjxwICBj
+bGFzcz0iTXNvTm9ybWFsIiBzdHlsZT0ibWFyZ2luOi4wcHg7dGV4dC1hbGlnbjpqdXN0aWZ5O2Zv
+bnQtZmFtaWx5OkNhbGlicmk7Zm9udC1zaXplOjE0LjBweDt0ZXh0LWluZGVudDoyOC4wcHg7Ij48
+c3BhbiAgc3R5bGU9Im1hcmdpbjouMHB4O3BhZGRpbmc6LjBweDtib3JkZXI6LjBweDtvdXRsaW5l
+Oi4wcHg7Zm9udC1mYW1pbHk6Q2FsaWJyaTtmb250LXNpemU6MTQuMHB4OyI+Jm5ic3A7Jm5ic3A7
+Jm5ic3A7Jm5ic3A7Jm5ic3A7ICZuYnNwOyAmbmJzcDstbWFjaGluZTxzcGFuID4mbmJzcDs8L3Nw
+YW4+PC9zcGFuPjxzcGFuICBzdHlsZT0ibWFyZ2luOi4wcHg7cGFkZGluZzouMHB4O2JvcmRlcjou
+MHB4O291dGxpbmU6LjBweDtmb250LWZhbWlseTrlrovkvZM7Zm9udC1zaXplOjE0LjBweDsiPiZu
+YnNwOzwvc3Bhbj48c3BhbiAgc3R5bGU9Im1hcmdpbjouMHB4O3BhZGRpbmc6LjBweDtib3JkZXI6
+LjBweDtvdXRsaW5lOi4wcHg7Zm9udC1mYW1pbHk6Q2FsaWJyaTtmb250LXNpemU6MTQuMHB4OyI+
+dmlydCAmbmJzcDstbSA1MTIgXDwvc3Bhbj48L3A+PHAgIGNsYXNzPSJNc29Ob3JtYWwiIHN0eWxl
+PSJtYXJnaW46LjBweDt0ZXh0LWFsaWduOmp1c3RpZnk7Zm9udC1mYW1pbHk6Q2FsaWJyaTtmb250
+LXNpemU6MTQuMHB4O3RleHQtaW5kZW50OjU2LjBweDsiPjxzcGFuICBzdHlsZT0ibWFyZ2luOi4w
+cHg7cGFkZGluZzouMHB4O2JvcmRlcjouMHB4O291dGxpbmU6LjBweDtmb250LWZhbWlseTpDYWxp
+YnJpO2ZvbnQtc2l6ZToxNC4wcHg7Ij4ta2VybmVsPHNwYW4gPiZuYnNwOzwvc3Bhbj48L3NwYW4+
+PHNwYW4gIHN0eWxlPSJtYXJnaW46LjBweDtwYWRkaW5nOi4wcHg7Ym9yZGVyOi4wcHg7b3V0bGlu
+ZTouMHB4O2ZvbnQtZmFtaWx5OuWui+S9kztmb250LXNpemU6MTQuMHB4OyI+Jm5ic3A7PC9zcGFu
+PjxzcGFuICBzdHlsZT0ibWFyZ2luOi4wcHg7cGFkZGluZzouMHB4O2JvcmRlcjouMHB4O291dGxp
+bmU6LjBweDtmb250LWZhbWlseTpDYWxpYnJpO2ZvbnQtc2l6ZToxNC4wcHg7Ij5md19qdW1wLmVs
+Zjwvc3Bhbj48c3BhbiAgc3R5bGU9Im1hcmdpbjouMHB4O3BhZGRpbmc6LjBweDtib3JkZXI6LjBw
+eDtvdXRsaW5lOi4wcHg7Zm9udC1mYW1pbHk65a6L5L2TO2ZvbnQtc2l6ZToxNC4wcHg7Ij4mbmJz
+cDs8L3NwYW4+PHNwYW4gIHN0eWxlPSJtYXJnaW46LjBweDtwYWRkaW5nOi4wcHg7Ym9yZGVyOi4w
+cHg7b3V0bGluZTouMHB4O2ZvbnQtZmFtaWx5OkNhbGlicmk7Zm9udC1zaXplOjE0LjBweDsiPiZu
+YnNwO1w8L3NwYW4+PC9wPjxwICBjbGFzcz0iTXNvTm9ybWFsIiBzdHlsZT0ibWFyZ2luOi4wcHg7
+dGV4dC1hbGlnbjpqdXN0aWZ5O2ZvbnQtZmFtaWx5OkNhbGlicmk7Zm9udC1zaXplOjE0LjBweDt0
+ZXh0LWluZGVudDo1Ni4wcHg7Ij48c3BhbiAgc3R5bGU9Im1hcmdpbjouMHB4O3BhZGRpbmc6LjBw
+eDtib3JkZXI6LjBweDtvdXRsaW5lOi4wcHg7Zm9udC1mYW1pbHk6Q2FsaWJyaTtmb250LXNpemU6
+MTQuMHB4OyI+LWRldmljZTwvc3Bhbj48c3BhbiAgc3R5bGU9Im1hcmdpbjouMHB4O3BhZGRpbmc6
+LjBweDtib3JkZXI6LjBweDtvdXRsaW5lOi4wcHg7Zm9udC1mYW1pbHk65a6L5L2TO2ZvbnQtc2l6
+ZToxNC4wcHg7Ij4mbmJzcDs8L3NwYW4+PHNwYW4gIHN0eWxlPSJtYXJnaW46LjBweDtwYWRkaW5n
+Oi4wcHg7Ym9yZGVyOi4wcHg7b3V0bGluZTouMHB4O2ZvbnQtZmFtaWx5OkNhbGlicmk7Zm9udC1z
+aXplOjE0LjBweDsiPiZuYnNwO2xvYWRlcixmaWxlPUltYWdlLGFkZHI9MHg4MDIwMDAwMCAmbmJz
+cDtcPC9zcGFuPjwvcD48cCAgY2xhc3M9Ik1zb05vcm1hbCIgc3R5bGU9Im1hcmdpbjouMHB4O3Rl
+eHQtYWxpZ246anVzdGlmeTtmb250LWZhbWlseTpDYWxpYnJpO2ZvbnQtc2l6ZToxNC4wcHg7dGV4
+dC1pbmRlbnQ6MjguMHB4OyI+PHNwYW4gIHN0eWxlPSJtYXJnaW46LjBweDtwYWRkaW5nOi4wcHg7
+Ym9yZGVyOi4wcHg7b3V0bGluZTouMHB4O2ZvbnQtZmFtaWx5OkNhbGlicmk7Zm9udC1zaXplOjE0
+LjBweDsiPiZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZu
+YnNwOy1kcml2ZTwvc3Bhbj48c3BhbiAgc3R5bGU9Im1hcmdpbjouMHB4O3BhZGRpbmc6LjBweDti
+b3JkZXI6LjBweDtvdXRsaW5lOi4wcHg7Zm9udC1mYW1pbHk65a6L5L2TO2ZvbnQtc2l6ZToxNC4w
+cHg7Ij4mbmJzcDsmbmJzcDsmbmJzcDs8L3NwYW4+PHNwYW4gIHN0eWxlPSJtYXJnaW46LjBweDtw
+YWRkaW5nOi4wcHg7Ym9yZGVyOi4wcHg7b3V0bGluZTouMHB4O2ZvbnQtZmFtaWx5OkNhbGlicmk7
+Zm9udC1zaXplOjE0LjBweDsiPmlkPWRpc2swLGZpbGU9ZGVtby1jb3JlaXAteGZjZTQtZnJlZWRv
+bS11NTQwLnJvb3Rmcy5leHQ0LGlmPW5vbmUsZm9ybWF0PXJhdyBcPC9zcGFuPjwvcD48cCAgY2xh
+c3M9Ik1zb05vcm1hbCIgc3R5bGU9Im1hcmdpbjouMHB4O3RleHQtYWxpZ246anVzdGlmeTtmb250
+LWZhbWlseTpDYWxpYnJpO2ZvbnQtc2l6ZToxNC4wcHg7dGV4dC1pbmRlbnQ6MjguMHB4OyI+PHNw
+YW4gIHN0eWxlPSJtYXJnaW46LjBweDtwYWRkaW5nOi4wcHg7Ym9yZGVyOi4wcHg7b3V0bGluZTou
+MHB4O2ZvbnQtZmFtaWx5OkNhbGlicmk7Zm9udC1zaXplOjE0LjBweDsiPiZuYnNwOyZuYnNwOyZu
+YnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOy1kZXZpY2U8L3NwYW4+PHNwYW4gIHN0
+eWxlPSJtYXJnaW46LjBweDtwYWRkaW5nOi4wcHg7Ym9yZGVyOi4wcHg7b3V0bGluZTouMHB4O2Zv
+bnQtZmFtaWx5OuWui+S9kztmb250LXNpemU6MTQuMHB4OyI+Jm5ic3A7PC9zcGFuPjxzcGFuICBz
+dHlsZT0ibWFyZ2luOi4wcHg7cGFkZGluZzouMHB4O2JvcmRlcjouMHB4O291dGxpbmU6LjBweDtm
+b250LWZhbWlseTpDYWxpYnJpO2ZvbnQtc2l6ZToxNC4wcHg7Ij4mbmJzcDt2aXJ0aW8tYmxrLWRl
+dmljZSxkcml2ZT1kaXNrMCBcPC9zcGFuPjwvcD48cCAgY2xhc3M9Ik1zb05vcm1hbCIgc3R5bGU9
+Im1hcmdpbjouMHB4O3RleHQtYWxpZ246anVzdGlmeTtmb250LWZhbWlseTpDYWxpYnJpO2ZvbnQt
+c2l6ZToxNC4wcHg7dGV4dC1pbmRlbnQ6MjguMHB4OyI+PHNwYW4gIHN0eWxlPSJtYXJnaW46LjBw
+eDtwYWRkaW5nOi4wcHg7Ym9yZGVyOi4wcHg7b3V0bGluZTouMHB4O2ZvbnQtZmFtaWx5OkNhbGli
+cmk7Zm9udC1zaXplOjE0LjBweDsiPiZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNw
+OyZuYnNwOyZuYnNwOy1vYmplY3Q8L3NwYW4+PHNwYW4gIHN0eWxlPSJtYXJnaW46LjBweDtwYWRk
+aW5nOi4wcHg7Ym9yZGVyOi4wcHg7b3V0bGluZTouMHB4O2ZvbnQtZmFtaWx5OuWui+S9kztmb250
+LXNpemU6MTQuMHB4OyI+Jm5ic3A7PC9zcGFuPjxzcGFuICBzdHlsZT0ibWFyZ2luOi4wcHg7cGFk
+ZGluZzouMHB4O2JvcmRlcjouMHB4O291dGxpbmU6LjBweDtmb250LWZhbWlseTpDYWxpYnJpO2Zv
+bnQtc2l6ZToxNC4wcHg7Ij4mbmJzcDtybmctcmFuZG9tLGZpbGVuYW1lPS9kZXYvdXJhbmRvbSxp
+ZD1ybmcwIFw8L3NwYW4+PC9wPjxwICBjbGFzcz0iTXNvTm9ybWFsIiBzdHlsZT0ibWFyZ2luOi4w
+cHg7dGV4dC1hbGlnbjpqdXN0aWZ5O2ZvbnQtZmFtaWx5OkNhbGlicmk7Zm9udC1zaXplOjE0LjBw
+eDt0ZXh0LWluZGVudDoyOC4wcHg7Ij48c3BhbiAgc3R5bGU9Im1hcmdpbjouMHB4O3BhZGRpbmc6
+LjBweDtib3JkZXI6LjBweDtvdXRsaW5lOi4wcHg7Zm9udC1mYW1pbHk6Q2FsaWJyaTtmb250LXNp
+emU6MTQuMHB4OyI+Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5i
+c3A7LWRldmljZTwvc3Bhbj48c3BhbiAgc3R5bGU9Im1hcmdpbjouMHB4O3BhZGRpbmc6LjBweDti
+b3JkZXI6LjBweDtvdXRsaW5lOi4wcHg7Zm9udC1mYW1pbHk65a6L5L2TO2ZvbnQtc2l6ZToxNC4w
+cHg7Ij4mbmJzcDs8L3NwYW4+PHNwYW4gIHN0eWxlPSJtYXJnaW46LjBweDtwYWRkaW5nOi4wcHg7
+Ym9yZGVyOi4wcHg7b3V0bGluZTouMHB4O2ZvbnQtZmFtaWx5OkNhbGlicmk7Zm9udC1zaXplOjE0
+LjBweDsiPiZuYnNwO3ZpcnRpby1ybmctZGV2aWNlLHJuZz1ybmcwIC1zaG93LWN1cnNvciAtbW9u
+aXRvciBudWxsPC9zcGFuPjxzcGFuICBzdHlsZT0ibWFyZ2luOi4wcHg7cGFkZGluZzouMHB4O2Jv
+cmRlcjouMHB4O291dGxpbmU6LjBweDtmb250LWZhbWlseTrlrovkvZM7Zm9udC1zaXplOjE0LjBw
+eDsiPiZuYnNwOzwvc3Bhbj48c3BhbiAgc3R5bGU9Im1hcmdpbjouMHB4O3BhZGRpbmc6LjBweDti
+b3JkZXI6LjBweDtvdXRsaW5lOi4wcHg7Zm9udC1mYW1pbHk6Q2FsaWJyaTtmb250LXNpemU6MTQu
+MHB4OyI+Jm5ic3A7XDwvc3Bhbj48L3A+PHAgIGNsYXNzPSJNc29Ob3JtYWwiIHN0eWxlPSJtYXJn
+aW46LjBweDt0ZXh0LWFsaWduOmp1c3RpZnk7Zm9udC1mYW1pbHk6Q2FsaWJyaTtmb250LXNpemU6
+MTQuMHB4O3RleHQtaW5kZW50OjI4LjBweDsiPjxzcGFuICBzdHlsZT0ibWFyZ2luOi4wcHg7cGFk
+ZGluZzouMHB4O2JvcmRlcjouMHB4O291dGxpbmU6LjBweDtmb250LWZhbWlseTpDYWxpYnJpO2Zv
+bnQtc2l6ZToxNC4wcHg7Ij4mbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJz
+cDsmbmJzcDstYXBwZW5kPHNwYW4gPiZuYnNwOzwvc3Bhbj48L3NwYW4+PHNwYW4gIHN0eWxlPSJt
+YXJnaW46LjBweDtwYWRkaW5nOi4wcHg7Ym9yZGVyOi4wcHg7b3V0bGluZTouMHB4O2ZvbnQtZmFt
+aWx5OuWui+S9kztmb250LXNpemU6MTQuMHB4OyI+Jm5ic3A7PC9zcGFuPjxzcGFuICBzdHlsZT0i
+bWFyZ2luOi4wcHg7cGFkZGluZzouMHB4O2JvcmRlcjouMHB4O291dGxpbmU6LjBweDtmb250LWZh
+bWlseTpDYWxpYnJpO2ZvbnQtc2l6ZToxNC4wcHg7Ij4ncm9vdD0vZGV2L3ZkYSBydyBoaWdocmVz
+PW9mZiAmbmJzcDtjb25zb2xlPXR0eVMwIG1lbT01MTJNICZuYnNwO2Vhcmx5Y29uPXNiaSAnIFw8
+L3NwYW4+PC9wPjxwICBjbGFzcz0iTXNvTm9ybWFsIiBzdHlsZT0ibWFyZ2luOi4wcHg7dGV4dC1h
+bGlnbjpqdXN0aWZ5O2ZvbnQtZmFtaWx5OkNhbGlicmk7Zm9udC1zaXplOjE0LjBweDt0ZXh0LWlu
+ZGVudDoyOC4wcHg7Ij48c3BhbiAgc3R5bGU9Im1hcmdpbjouMHB4O3BhZGRpbmc6LjBweDtib3Jk
+ZXI6LjBweDtvdXRsaW5lOi4wcHg7Zm9udC1mYW1pbHk6Q2FsaWJyaTtmb250LXNpemU6MTQuMHB4
+OyI+Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7LWRpc3Bs
+YXk8c3BhbiA+Jm5ic3A7PC9zcGFuPjwvc3Bhbj48c3BhbiAgc3R5bGU9Im1hcmdpbjouMHB4O3Bh
+ZGRpbmc6LjBweDtib3JkZXI6LjBweDtvdXRsaW5lOi4wcHg7Zm9udC1mYW1pbHk65a6L5L2TO2Zv
+bnQtc2l6ZToxNC4wcHg7Ij4mbmJzcDs8L3NwYW4+PHNwYW4gIHN0eWxlPSJtYXJnaW46LjBweDtw
+YWRkaW5nOi4wcHg7Ym9yZGVyOi4wcHg7b3V0bGluZTouMHB4O2ZvbnQtZmFtaWx5OkNhbGlicmk7
+Zm9udC1zaXplOjE0LjBweDsiPmd0ayxnbD1vbiAtZGV2aWNlIHZpcnRpby1ncHUtZGV2aWNlLHZp
+cmdsPW9uIC12Z2E8c3BhbiA+Jm5ic3A7PC9zcGFuPjwvc3Bhbj48c3BhbiAgc3R5bGU9Im1hcmdp
+bjouMHB4O3BhZGRpbmc6LjBweDtib3JkZXI6LjBweDtvdXRsaW5lOi4wcHg7Zm9udC1mYW1pbHk6
+5a6L5L2TO2ZvbnQtc2l6ZToxNC4wcHg7Ij5zdGQ8L3NwYW4+PC9wPjxwICBjbGFzcz0iTXNvTm9y
+bWFsIiBzdHlsZT0ibWFyZ2luOi4wcHg7dGV4dC1hbGlnbjpqdXN0aWZ5O2ZvbnQtZmFtaWx5OkNh
+bGlicmk7Zm9udC1zaXplOjE0LjBweDt0ZXh0LWluZGVudDoyOC4wcHg7Ij5UaGUmbmJzcDtmb2xs
+b3dpbmcmbmJzcDtpbnRlcmZhY2UmbmJzcDthcHBlYXJzOjwvcD48L2Rpdj48L2Rpdj48aW1nICBz
+cmM9ImNpZDpfX2FsaXl1bjE1ODIxODQ1MjUwNDE2ODU5MSIgc3R5bGU9Im1hcmdpbjouMHB4O3Bh
+ZGRpbmc6LjBweDtib3JkZXI6LjBweDtvdXRsaW5lOi4wcHg7dmVydGljYWwtYWxpZ246Ym90dG9t
+OyI+PGRpdiAgc3R5bGU9Im1hcmdpbjouMHB4O3BhZGRpbmc6LjBweDtvdXRsaW5lOi4wcHg7Y29s
+b3I6IzAwMDAwMDtmb250LXNpemU6MTQuMHB4O2ZvbnQtc3R5bGU6bm9ybWFsO2ZvbnQtdmFyaWFu
+dC1saWdhdHVyZXM6bm9ybWFsO2ZvbnQtdmFyaWFudC1jYXBzOm5vcm1hbDtmb250LXdlaWdodDo0
+MDA7dGV4dC1hbGlnbjpzdGFydDt0ZXh0LWluZGVudDouMHB4O3RleHQtdHJhbnNmb3JtOm5vbmU7
+dGV4dC1kZWNvcmF0aW9uLXN0eWxlOmluaXRpYWw7dGV4dC1kZWNvcmF0aW9uLWNvbG9yOmluaXRp
+YWw7bGluZS1oZWlnaHQ6MS43O2ZvbnQtZmFtaWx5OlRhaG9tYSxBcmlhbCxTVEhlaXRpLFNpbVN1
+bjtib3JkZXI6LjBweDtjbGVhcjpib3RoOyI+PHNwYW4gIHN0eWxlPSJtYXJnaW46LjBweDtwYWRk
+aW5nOi4wcHg7Ym9yZGVyOi4wcHg7b3V0bGluZTouMHB4OyI+Q2FuJm5ic3A7eW91Jm5ic3A7Z2l2
+ZSZuYnNwO21lJm5ic3A7c29tZSZuYnNwO3N1Z2dlc3Rpb25z77yfPC9zcGFuPjwvZGl2PjxkaXYg
+IHN0eWxlPSJtYXJnaW46LjBweDtwYWRkaW5nOi4wcHg7b3V0bGluZTouMHB4O2NvbG9yOiMwMDAw
+MDA7Zm9udC1zaXplOjE0LjBweDtmb250LXN0eWxlOm5vcm1hbDtmb250LXZhcmlhbnQtbGlnYXR1
+cmVzOm5vcm1hbDtmb250LXZhcmlhbnQtY2Fwczpub3JtYWw7Zm9udC13ZWlnaHQ6NDAwO3RleHQt
+YWxpZ246c3RhcnQ7dGV4dC1pbmRlbnQ6LjBweDt0ZXh0LXRyYW5zZm9ybTpub25lO3RleHQtZGVj
+b3JhdGlvbi1zdHlsZTppbml0aWFsO3RleHQtZGVjb3JhdGlvbi1jb2xvcjppbml0aWFsO2xpbmUt
+aGVpZ2h0OjEuNztmb250LWZhbWlseTpUYWhvbWEsQXJpYWwsU1RIZWl0aSxTaW1TdW47Ym9yZGVy
+Oi4wcHg7Y2xlYXI6Ym90aDsiPjxiciA+PC9kaXY+PGRpdiAgc3R5bGU9Im1hcmdpbjouMHB4O3Bh
+ZGRpbmc6LjBweDtvdXRsaW5lOi4wcHg7Y29sb3I6IzAwMDAwMDtmb250LXNpemU6MTQuMHB4O2Zv
+bnQtc3R5bGU6bm9ybWFsO2ZvbnQtdmFyaWFudC1saWdhdHVyZXM6bm9ybWFsO2ZvbnQtdmFyaWFu
+dC1jYXBzOm5vcm1hbDtmb250LXdlaWdodDo0MDA7dGV4dC1hbGlnbjpzdGFydDt0ZXh0LWluZGVu
+dDouMHB4O3RleHQtdHJhbnNmb3JtOm5vbmU7dGV4dC1kZWNvcmF0aW9uLXN0eWxlOmluaXRpYWw7
+dGV4dC1kZWNvcmF0aW9uLWNvbG9yOmluaXRpYWw7bGluZS1oZWlnaHQ6MS43O2ZvbnQtZmFtaWx5
+OlRhaG9tYSxBcmlhbCxTVEhlaXRpLFNpbVN1bjtib3JkZXI6LjBweDtjbGVhcjpib3RoOyI+PGRp
+diA+PC9kaXY+PHNwYW4gIHN0eWxlPSJtYXJnaW46LjBweDtwYWRkaW5nOi4wcHg7Ym9yZGVyOi4w
+cHg7b3V0bGluZTouMHB4OyI+PHNwYW4gPlRoYW5rJm5ic3A7eW91Ljwvc3Bhbj48L3NwYW4+PC9k
+aXY+PC9kaXY+PC9kaXY+PC9kaXY+
+------=ALIBOUNDARY_25688_5770e940_5e4e384d_d8d3a--
 
+------=ALIBOUNDARY_25688_5770e940_5e4e384d_d8d39
+Content-Type: application/octet-stream
+Content-ID: <__aliyun158218452504168591>
+Content-Disposition: inline; filename="=?UTF-8?B?UVHmiKrlm74yMDIwMDIyMDEyMjgyNi5wbmc=?="
+Content-Transfer-Encoding: base64
 
---------------BDA17EA78D28803C57DE9B44
-Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: 8bit
+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
+8ZOlcfhZb4gLX3dUrHnkkRjjCDMAwE4bJwAborkhYqBv05kHlQ3x8K03x533fCv+7QebD0cORf9A
+OYpNzdFYLcDBZUvj5ZgbF1x1bpx8zBFxxBGHxczmV9b8Khsei9t/sDKOfPsH4gNXvD5OO+G4OOms
+8+Osw/f8JZMrGx6P2+9ZGYe+9dfiv155XpxefayTTz83LnnDMdG8M8uQ2+v9aXyv+jnMeev74srD
+l8fddz0d452bMZF5DK/4cfzohRlx4RVnRs/jj8WS4eFY9Wj196MvicvnrY6HHnwh9B8AsKeMfQi4
+0BSNTTGyArh5fWvw+R/E/7lh27v19Q5EoaMlWqoxs+GFO+JL/zQtfuny6+NDF7dEcagvutctj0Ur
+Nh9y7Yun/vXz8dnua+Oai94bv/XOjZeKeehfnorHlu7pT603Fn79c/HZde+Ma950fXzwHc3VD62J
+Fx/+Rjx8/6LY5UXAaoo9f/ed8dSlvxBzn7gz7t7hodkJzGN4Vfzoh8/ENUdNiQcfenFjXK96NB56
+/h1xdPH+uHeJw78AwJ5TmP+m83c5hQAAmHwOnPcCBgBgnxCAAADJCEAAgGQEIABAMgIQACCZ2pXo
+nAUMAJCIFUAAgGQEIABAMgIQACAZAQgAkIwABABIRgACACQjAAEAkhGAAADJCEAAgGQEIABAMgIQ
+ACAZAQgAkIwABABIRgACACQjAAEAkhGAAADJCEAAgGQEIABAMgIQACAZAQgAkIwABABIRgACACQj
+AAEAkhGAAADJCEAAgGQEIABAMgIQACAZAQgAkIwABABIRgACACQjAAEAkhGAAADJCEAAgGQEIABA
+MgIQACAZAQgAkIwABABIRgACACQjAAEAkhGAAADJCEAAgGQEIABAMgIQACAZAQgAkIwABABIRgAC
+ACQjAAEAkhGAAADJCEAAgGQEIABAMgIQACAZAQgAkIwABABIRgACACQjAAEAkhGAAADJCEAAgGQE
+IABAMgIQACAZAQgAkIwABABIRgACACQjAAEAkhGAAADJCEAAgGQEIABAMgIQACAZAQgAkIwABABI
+RgACACQjAAEAkhGAAADJCEAAgGQEIABAMgIQACAZAQgAkIwABABIRgACACQjAAEAkhGAAADJCEAA
+gGQEIABAMgIQACAZAQgAkIwABABIRgACACQjAAEAkhGAAADJCEAAgGQEIABAMgIQACAZAQgAkIwA
+BABIRgACACQjAAEAkhGAAADJCEAAgGQEIABAMgIQACAZAQgAkIwABABIRgACACQjAAEAkhGAAADJ
+CEAAgGQEIABAMgIQACAZAQgAkIwABABIRgACACQjAAEAkhGAAADJCEAAgGQEIABAMgIQACAZAQgA
+kIwABABIRgACACQjAAEAkhGAAADJCEAAgGQEIABAMgIQACAZAQgAkIwABABIRgACACQjAAEAkhGA
+AADJCEAAgGQEIABAMgIQACAZAQgAkIwABABIRgACACQjAAEAkhGAAADJCEAAgGQEIABAMgIQACAZ
+AQgAkIwABABIRgACACQjAAEAkhGAAADJCEAAgGQEIABAMgIQACAZAQgAkIwABABIRgACACQjAAEA
+khGAAADJCEAAgGQEIABAMgIQACAZAQgAkIwABABIRgACACQjAAEAkhGAAADJCEAAgGQEIABAMgIQ
+ACAZAQgAkIwABABIRgACACQjAAEAkhGAAADJCEAAgGQEIABAMgIQACAZAQgAkIwABABIRgACACQj
+AAEAkhGAAADJCEAAgGQEIABAMgIQACAZAQgAkIwABABIRgACACQjAAEAkhGAAADJCEAAgGQEIABA
+MgIQACAZAQgAkIwABABIRgACACQjAAEAkhGAAADJCEAAgGQEIABAMgIQACAZAQgAkIwABABIRgAC
+ACQjAAEAkhGAAADJCEAAgGQEIABAMgIQACAZAQgAkIwABABIRgACACQjAAEAkhGAAADJCEAAgGQE
+IABAMgIQACAZAQgAkIwABABIRgACACQjAAEAkhGAAADJCEAAgGQEIABAMgIQACAZAQgAkIwABABI
+RgACACQjAAEAkhGAAADJCEAAgGTq9vcEeG248cYbt/n79ddfv1/msLOPu/W898ec96Rd+fy3375m
+V8fY0fY7mt/uPP5Evo+7+/ntiTnsaPvtt9uXz88dPdbe/PodKP8O9/bnuL+emzAaK4Dstq13Xpt3
+YNsH4b6aw856rexw9/XXe2ft7fkdCN/HPRHfe3LMnbU/v4YHwvdvXwXuaPbXfpPcrACyW0bbadb+
+bEc2+ezuf3z7e/v9Pf5r3Wv563cgrMBt3m/u7ko+TJQAZK/Y/ifasf6+9cdG235Ht29/2944jLmj
+w9s7mv9EH2+sw2D74vPf0WOPN7+JbL+j+U107NFun4id+dpuf7+JfH939Qeenf3+7cq/n12Zx3i3
+78zzf6LPn52Z21jPz/E+tqsmMv6+3D/BnuQQMPvV9oePt99x7uj2rT822t93di6j7bjHeuyJzG9H
+tr7//vz8x9pmR/ObyPYTmd94c97Vr+1Exx9rnls/1kSfA7syr4l+/0Z7fu7u82+i859IkI71/Nx6
+7rsyvz3x/d9b9uX+CfY0K4DsMbuzUjPea6C2Pyyyt3agO/pPbn/PL6u9+R/+RFeOxprDvlzRGe8x
+dncFclfnvy+e/wdS8I1lMswRticA2WP21grN1v/J7Oi+e9pED/fsr/m91k3k6783Hmd7B/r3dH/O
+b28+//fV9393HejPDxiNQ8BMCgfqIaDNDvT5MTbhvvs8/2HyEYDslr2x0996NWHrP0/08bbfZm/a
+lfntbfvy898VB9L8xnqR//58fu3u+Nmf/7tiT857V58/EzkBaLJ9XTmwFaq/Kvt7Ekx+2/8nMN4J
+FTtzFt1Ebh9rDrsy760/tqfmP9E5TOTxxxt/V8+yHO0xxntt3HhnRu7q/Cby+Js/viuPP9btO3p9
+51j32dn5TcSOQmp3nx8Tfdyd/fruiX+/u/P9H+/1wztrIp/79uPviX+fE3nOWKlmTxOAAOw1+zpc
+9vbjCTFeKxwCBuA1QfzBxFkBBGCv2J1LQ+3K+Hv6Mfb2+LA/CUAAgGQcAgYASEYAAgAkIwABAJIR
+gAAAyQhAAIBkBCAAQDICEAAgGQEIAJCMAAQASEYAAgAkIwABAJIRgAAAyQhAAIBkBCAAQDICEAAg
+GQEIAJCMAAQASEYAAgAkIwABAJIRgAAAyQhAAIBkBCAAQDICEAAgGQEIAJCMAAQASEYAAgAkIwAB
+AJIRgAAAyQhAAIBkBCAAQDICEAAgGQEIAJCMAAQASEYAAgAkIwABAJIRgAAAyQhAAIBkBCAAQDIC
+EAAgGQEIAJCMAAQASEYAAgAkIwABAJIRgAAAyQhAAIBkBCAAQDICEAAgGQEIAJCMAAQASEYAAgAk
+IwABAJIRgAAAyQhAAIBkBCAAQDICEAAgGQEIAJCMAAQASEYAAgAkIwABAJIRgAAAyQhAAIBkBCAA
+QDICEAAgGQEIAJCMAAQASEYAAgAkIwABAJIRgAAAyQhAAIBkBCAAQDICEAAgGQEIAJCMAAQASEYA
+AgAkIwABAJIRgAAAyQhAAIBkBCAAQDICEAAgGQEIAJCMAAQASEYAAgAkIwABAJIRgAAAyQhAAIBk
+BCAAQDICEAAgGQEIAJCMAAQASEYAAgAkIxmHO7sAAALXSURBVAABAJIRgAAAyQhAAIBkBCAAQDIC
+EAAgGQEIAJCMAAQASEYAAgAkIwABAJIRgAAAyQhAAIBkBCAAQDICEAAgGQEIAJCMAAQASEYAAgAk
+IwABAJIRgAAAyQhAAIBkBCAAQDICEAAgGQEIAJCMAAQASEYAAgAkIwABAJIRgAAAyQhAAIBkBCAA
+QDICEAAgGQEIAJCMAAQASEYAAgAkIwABAJIRgAAAyQhAAIBkBCAAQDICEAAgGQEIAJCMAAQASEYA
+AgAkIwABAJIRgAAAyQhAAIBkBCAAQDICEAAgGQEIAJCMAAQASEYAAgAkIwABAJIRgAAAyQhAAIBk
+BCAAQDICEAAgGQEIAJCMAAQASEYAAgAkIwABAJIRgAAAyQhAAIBkBCAAQDICEAAgGQEIAJCMAAQA
+SEYAAgAkIwABAJIRgAAAyQhAAIBkBCAAQDICEAAgGQEIAJCMAAQASEYAAgAkIwABAJIRgAAAyQhA
+AIBkBCAAQDICEAAgGQEIAJCMAAQASEYAAgAkIwABAJIRgAAAyQhAAIBkBCAAQDICEAAgGQEIAJCM
+AAQASEYAAgAkIwABAJIRgAAAyQhAAIBkBCAAQDICEAAgGQEIAJCMAAQASEYAAgAkIwABAJIRgAAA
+yQhAAIBkBCAAQDICEAAgGQEIAJCMAAQASEYAAgAkIwABAJIRgAAAyQhAAIBkBCAAQDICEAAgGQEI
+AJCMAAQASEYAAgAkIwABAJIRgAAAyQhAAIBkBCAAQDICEAAgGQEIAJCMAAQASEYAAgAkIwABAJIR
+gAAAyQhAAIBkBCAAQDICEAAgGQEIAJCMAAQASEYAAgAkIwABAJIRgAAAyQhAAIBkBCAAQDICEAAg
+GQEIAJCMAAQASEYAAgAkIwABAJIRgAAAyQhAAIBkBCAAQDICEAAgGQEIAJCMAAQASEYAAgAkIwAB
+AJIRgAAAyQhAAIBkBCAAQDL/H1XlVfGya3e4AAAAAElFTkSuQmCC
 
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  </head>
-  <body>
-    Hi, Richard<br>
-    Thanks for your informative comments. I'm addressing these comments.
-    <br>
-    And a little confused in some comments.<br>
-    <div class="moz-cite-prefix">On 2020/2/12 14:38, Richard Henderson
-      wrote:<br>
-    </div>
-    <blockquote type="cite"
-      cite="mid:9054a6fb-adee-4dcc-d7c6-9a974a83668a@linaro.org">
-      <pre class="moz-quote-pre" wrap="">On 2/9/20 11:42 PM, LIU Zhiwei wrote:
-</pre>
-      <blockquote type="cite">
-        <pre class="moz-quote-pre" wrap="">+/*
-+ * As simd_desc supports at most 256 bytes, and in this implementation,
-+ * the max vector group length is 2048 bytes. So split it into two parts.
-+ *
-+ * The first part is floor(maxsz, 64), encoded in maxsz of simd_desc.
-+ * The second part is (maxsz % 64) &gt;&gt; 3, encoded in data of simd_desc.
-+ */
-+static uint32_t maxsz_part1(uint32_t maxsz)
-+{
-+    return ((maxsz &amp; ~(0x3f)) &gt;&gt; 3) + 0x8; /* add offset 8 to avoid return 0 */
-+}
-+
-+static uint32_t maxsz_part2(uint32_t maxsz)
-+{
-+    return (maxsz &amp; 0x3f) &gt;&gt; 3;
-+}
-</pre>
-      </blockquote>
-      <pre class="moz-quote-pre" wrap="">
-I would much rather adjust simd_desc to support 2048 bytes.
+------=ALIBOUNDARY_25688_5770e940_5e4e384d_d8d39--
 
-I've just posted a patch set that removes an assert in target/arm that would
-trigger if SIMD_DATA_SHIFT was increased to make room for a larger oprsz.
-
-Or, since we're not going through tcg_gen_gvec_* for ldst, don't bother with
-simd_desc at all, and just pass vlen, unencoded.
-
-</pre>
-      <blockquote type="cite">
-        <pre class="moz-quote-pre" wrap="">+/* define check conditions data structure */
-+struct vext_check_ctx {
-+
-+    struct vext_reg {
-+        uint8_t reg;
-+        bool widen;
-+        bool need_check;
-+    } check_reg[6];
-+
-+    struct vext_overlap_mask {
-+        uint8_t reg;
-+        uint8_t vm;
-+        bool need_check;
-+    } check_overlap_mask;
-+
-+    struct vext_nf {
-+        uint8_t nf;
-+        bool need_check;
-+    } check_nf;
-+    target_ulong check_misa;
-+
-+} vchkctx;
-</pre>
-      </blockquote>
-      <pre class="moz-quote-pre" wrap="">
-You cannot use a global variable.  The data must be thread-safe.
-
-If we're going to do the checks this way, with a structure, it needs to be on
-the stack or within DisasContext.
-
-</pre>
-      <blockquote type="cite">
-        <pre class="moz-quote-pre" wrap="">+#define GEN_VEXT_LD_US_TRANS(NAME, DO_OP, SEQ)                            \
-+static bool trans_##NAME(DisasContext *s, arg_r2nfvm* a)                  \
-+{                                                                         \
-+    vchkctx.check_misa = RVV;                                             \
-+    vchkctx.check_overlap_mask.need_check = true;                         \
-+    vchkctx.check_overlap_mask.reg = a-&gt;rd;                               \
-+    vchkctx.check_overlap_mask.vm = a-&gt;vm;                                \
-+    vchkctx.check_reg[0].need_check = true;                               \
-+    vchkctx.check_reg[0].reg = a-&gt;rd;                                     \
-+    vchkctx.check_reg[0].widen = false;                                   \
-+    vchkctx.check_nf.need_check = true;                                   \
-+    vchkctx.check_nf.nf = a-&gt;nf;                                          \
-+                                                                          \
-+    if (!vext_check(s)) {                                                 \
-+        return false;                                                     \
-+    }                                                                     \
-+    return DO_OP(s, a, SEQ);                                              \
-+}
-</pre>
-      </blockquote>
-      <pre class="moz-quote-pre" wrap="">
-I don't see the improvement from a pointer.  Something like
-
-    if (vext_check_isa_ill(s) &amp;&amp;
-        vext_check_overlap(s, a-&gt;rd, a-&gt;rm) &amp;&amp;
-        vext_check_reg(s, a-&gt;rd, false) &amp;&amp;
-        vext_check_nf(s, a-&gt;nf)) {
-        return DO_OP(s, a, SEQ);
-    }
-    return false;
-
-seems just as clear without the extra data.
-
-</pre>
-      <blockquote type="cite">
-        <pre class="moz-quote-pre" wrap="">+#ifdef CONFIG_USER_ONLY
-+#define MO_SB 0
-+#define MO_LESW 0
-+#define MO_LESL 0
-+#define MO_LEQ 0
-+#define MO_UB 0
-+#define MO_LEUW 0
-+#define MO_LEUL 0
-+#endif
-</pre>
-      </blockquote>
-      <pre class="moz-quote-pre" wrap="">
-What is this for?  We already define these unconditionally.
-
-
-</pre>
-      <blockquote type="cite">
-        <pre class="moz-quote-pre" wrap="">+static inline int vext_elem_mask(void *v0, int mlen, int index)
-+{
-+    int idx = (index * mlen) / 8;
-+    int pos = (index * mlen) % 8;
-+
-+    return (*((uint8_t *)v0 + idx) &gt;&gt; pos) &amp; 0x1;
-+}
-</pre>
-      </blockquote>
-      <pre class="moz-quote-pre" wrap="">
-This is a little-endian indexing of the mask.  Just above we talk about using a
-host-endian ordering of uint64_t.
-
-Thus this must be based on uint64_t instead of uint8_t.
-
-</pre>
-      <blockquote type="cite">
-        <pre class="moz-quote-pre" wrap="">+/*
-+ * This function checks watchpoint before really load operation.
-+ *
-+ * In softmmu mode, the TLB API probe_access is enough for watchpoint check.
-+ * In user mode, there is no watchpoint support now.
-+ *
-+ * It will triggle an exception if there is no mapping in TLB
-+ * and page table walk can't fill the TLB entry. Then the guest
-+ * software can return here after process the exception or never return.
-+ */
-+static void probe_read_access(CPURISCVState *env, target_ulong addr,
-+        target_ulong len, uintptr_t ra)
-+{
-+    while (len) {
-+        const target_ulong pagelen = -(addr | TARGET_PAGE_MASK);
-+        const target_ulong curlen = MIN(pagelen, len);
-+
-+        probe_read(env, addr, curlen, cpu_mmu_index(env, false), ra);
-</pre>
-      </blockquote>
-      <pre class="moz-quote-pre" wrap="">
-The return value here is non-null when we can read directly from host memory.
-It would be a shame to throw that work away.
-
-
-</pre>
-      <blockquote type="cite">
-        <pre class="moz-quote-pre" wrap="">+/* data structure and common functions for load and store */
-+typedef void vext_ld_elem_fn(CPURISCVState *env, target_ulong addr,
-+        uint32_t idx, void *vd, uintptr_t retaddr);
-+typedef void vext_st_elem_fn(CPURISCVState *env, target_ulong addr,
-+        uint32_t idx, void *vd, uintptr_t retaddr);
-+typedef target_ulong vext_get_index_addr(target_ulong base,
-+        uint32_t idx, void *vs2);
-+typedef void vext_ld_clear_elem(void *vd, uint32_t idx,
-+        uint32_t cnt, uint32_t tot);
-+
-+struct vext_ldst_ctx {
-+    struct vext_common_ctx vcc;
-+    uint32_t nf;
-+    target_ulong base;
-+    target_ulong stride;
-+    int mmuidx;
-+
-+    vext_ld_elem_fn *ld_elem;
-+    vext_st_elem_fn *st_elem;
-+    vext_get_index_addr *get_index_addr;
-+    vext_ld_clear_elem *clear_elem;
-+};
-</pre>
-      </blockquote>
-      <pre class="moz-quote-pre" wrap="">
-I think you should pass these elements directly, as needed, rather than putting
-them all in a struct.
-
-This would allow the main helper function to be inlined, which in turn allows
-the mini helper functions to be inlined.
-</pre>
-    </blockquote>
-    1. What's the main helper function? What's is the mini helper
-    functions here?<br>
-    <br>
-    I guess main helper function is such code like:<br>
-    <br>
-    <blockquote>#define GEN_VEXT_LD_UNIT_STRIDE(NAME, MTYPE,
-      ETYPE)                \<br>
-      void HELPER(NAME##_mask)(void *vd, target_ulong base, void *v0,  
-      \<br>
-              CPURISCVState *env, uint32_t
-      desc)                                              \<br>
-{                                                                                                             
-      \<br>
-          static struct vext_ldst_ctx ctx;                             
-                                     \<br>
-          vext_common_ctx_init(&amp;ctx.vcc,
-      sizeof(ETYPE),                                 \<br>
-              sizeof(MTYPE), env-&gt;vl, desc);                        
-                                    \<br>
-          ctx.nf = vext_nf(desc);                                      
-                                       \<br>
-          ctx.base = base;                                             
-                                          \<br>
-          ctx.ld_elem = vext_##NAME##_ld_elem;                         
-                       \<br>
-          ctx.clear_elem = vext_##NAME##_clear_elem;                   
-                    \<br>
-                                                                                                            
-        \<br>
-          vext_ld_unit_stride_mask(vd, v0, env, &amp;ctx,
-      GETPC());                       \<br>
-}                                                                                                             
-      \<br>
-    </blockquote>
-    And the mini helper function is such code like:<br>
-    <blockquote>static void vext_ld_unit_stride_mask(void *vd, void *v0,
-      CPURISCVState *env,<br>
-              struct vext_ldst_ctx *ctx, uintptr_t ra)<br>
-      {<br>
-          uint32_t i, k;<br>
-          struct vext_common_ctx *s = &amp;ctx-&gt;vcc;<br>
-      <br>
-          if (s-&gt;vl == 0) {<br>
-              return;<br>
-          }<br>
-          /* probe every access*/<br>
-          for (i = 0; i &lt; s-&gt;vl; i++) {<br>
-              if (!s-&gt;vm &amp;&amp; !vext_elem_mask(v0, s-&gt;mlen,
-      i)) {<br>
-                  continue;<br>
-              }<br>
-              probe_read_access(env, ctx-&gt;base + ctx-&gt;nf * i *
-      s-&gt;msz,<br>
-                      ctx-&gt;nf * s-&gt;msz, ra);<br>
-          }<br>
-          /* load bytes from guest memory */<br>
-          for (i = 0; i &lt; s-&gt;vl; i++) {<br>
-              k = 0;<br>
-              if (!s-&gt;vm &amp;&amp; !vext_elem_mask(v0, s-&gt;mlen,
-      i)) {<br>
-                  continue;<br>
-              }<br>
-              while (k &lt; ctx-&gt;nf) {<br>
-                  target_ulong addr = ctx-&gt;base + (i * ctx-&gt;nf +
-      k) * s-&gt;msz;<br>
-                  ctx-&gt;ld_elem(env, addr, i + k * s-&gt;vlmax, vd,
-      ra);<br>
-                  k++;<br>
-              }<br>
-          }<br>
-          /* clear tail elements */<br>
-          for (k = 0; k &lt; ctx-&gt;nf; k++) {<br>
-              ctx-&gt;clear_elem(vd, s-&gt;vl + k * s-&gt;vlmax,
-      s-&gt;vl * s-&gt;esz,<br>
-                      s-&gt;vlmax * s-&gt;esz);<br>
-          }<br>
-      }<br>
-    </blockquote>
-    Is it right?<br>
-    2.  The number of  parameters grows a lot when pass directly to mini
-    helper functions.<br>
-    <br>
-    For example, the number of parameters increases from 5 to 11. <br>
-    <br>
-    <blockquote>static void vext_ld_unit_stride(void *vd, target_ulong
-      base, void *v0,<br>
-              CPURISCVState *env,  vext_ld_elem_fn *ld_elem, <br>
-              vext_ld_clear_elem *clear_elem，uint32_t vlmax,<br>
-              uint32_t nf, uint32_t esz, uint32_t msz, uintptr_t ra)<br>
-    </blockquote>
-    <br>
-    As vlmax and nf can be extracted  from desc, another form of mini
-    helper <br>
-    will increases the number of parameters from 5 to 10.<br>
-    <br>
-    Is it OK?<br>
-    <br>
-    BTW: In this patchset, I use a lot macros to generate code.  Is it
-    OK?<br>
-    <span style="color: rgb(51, 51, 51); font-family: arial; font-size:
-      13px; font-style: normal; font-variant-ligatures: normal;
-      font-variant-caps: normal; font-weight: 400; letter-spacing:
-      normal; orphans: 2; text-align: start; text-indent: 0px;
-      text-transform: none; white-space: normal; widows: 2;
-      word-spacing: 0px; -webkit-text-stroke-width: 0px;
-      background-color: rgb(255, 255, 255); text-decoration-style:
-      initial; text-decoration-color: initial; display: inline
-      !important; float: none;">
-    </span>
-    <div class="moz-cite-prefix"><br>
-      Best Regards,<br>
-      Zhiwei<br>
-    </div>
-    <blockquote type="cite"
-      cite="mid:9054a6fb-adee-4dcc-d7c6-9a974a83668a@linaro.org">
-      <pre class="moz-quote-pre" wrap="">
-
-r~
-</pre>
-    </blockquote>
-    <br>
-  </body>
-</html>
-
---------------BDA17EA78D28803C57DE9B44--
 
