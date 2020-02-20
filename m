@@ -1,59 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1j4qsp-0000UZ-LI
-	for mharc-qemu-riscv@gnu.org; Thu, 20 Feb 2020 13:49:11 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:52370)
+	id 1j4vCQ-0000U9-Ke
+	for mharc-qemu-riscv@gnu.org; Thu, 20 Feb 2020 18:25:42 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:57970)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <alistair23@gmail.com>) id 1j4qsn-0000OH-4P
- for qemu-riscv@nongnu.org; Thu, 20 Feb 2020 13:49:10 -0500
+ (envelope-from <prvs=31236d5d8=alistair.francis@wdc.com>)
+ id 1j4vCO-0000Q3-0n
+ for qemu-riscv@nongnu.org; Thu, 20 Feb 2020 18:25:40 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1j4qsm-0004p9-49
- for qemu-riscv@nongnu.org; Thu, 20 Feb 2020 13:49:09 -0500
-Received: from mail-lj1-x244.google.com ([2a00:1450:4864:20::244]:45988)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1j4qsj-0004mA-Kw; Thu, 20 Feb 2020 13:49:05 -0500
-Received: by mail-lj1-x244.google.com with SMTP id e18so5278409ljn.12;
- Thu, 20 Feb 2020 10:49:05 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=71TT2HpdSHLsDhX9J/G2ZIHBB+dHYvP1+1iIDro8cH4=;
- b=SM4iNG8hPNBALFGOsFKyC9r0Hq9S7V0LGNn96OVqtOt5zONcMcqECWt/GgI2bQ1q1C
- Q9t7zy74RvM7EmoSTa5lTHj8M3WcQE1431rIunJs7wb4uRE1W414GhPhHgCfxZGVmuCg
- suuNemisXcmhKFoZk6IBlRWe+KtbueKv3iRq1jFek+ttviyBO4FYRpBjYA03Fim31R9I
- SsKiJ6f1RRPak15QxGtvaynM1ZP3YW9rUnlfaiy/dXZCxpUMrwFAzuPh0YehUwwSD8qF
- XW4NISPWCJ33IjZSUe50c5uD/v0pGdotBbD6AKZEkH/9hMZ4FYN3WmQoTnbpMzXroBlB
- ZFPQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=71TT2HpdSHLsDhX9J/G2ZIHBB+dHYvP1+1iIDro8cH4=;
- b=nBWtvJGTSdiWjGXeHbjk0YXfhOJzxibuDi7u8VZYQ58bNSMTmlQQP0UchQnL79iScE
- T4kzSE1bDMVTVRBwiyGKBpoR+HRk+xHZR8fOxhyRJzJR44k4WFft160tbxRjihcf0cgW
- rXdLPj3ffWetU/8V7WPV3+lJCNdm5aK7/ixb/kYRsnOPtydiOxM0dBowa2OICxXg73Yz
- wUIqDz3I4jzPIXqa9v7x1EMXR5xUMjpzUQVvkQbjqauNKAd3XlQGs7qxaXnQ7KPBEh39
- 7mHh+1WW5B6rz8ggaFCSEM9UdiKk+G1VReZKVfveDwiX427F9s0+UpMcqZ/Gko4kLh5i
- XLoA==
-X-Gm-Message-State: APjAAAVaN4tZFjRDK6bPAZYcgFC4KFJYsU6PeYWKOoZL4oAfKDQONKh5
- HrSsfnBsZ2wrKJWnRAkEv+dn14fTTURLzzoikg4=
-X-Google-Smtp-Source: APXvYqwlFnd3DphkB9k9WTNmuFgtbussvdoLKY2UTBPmDdcYa07uvu8/Z5bRIFsZ87Vx/zhkWYbWx6bYQb8kf6fWvuQ=
-X-Received: by 2002:a2e:7609:: with SMTP id r9mr19668707ljc.238.1582224543639; 
- Thu, 20 Feb 2020 10:49:03 -0800 (PST)
+ (envelope-from <prvs=31236d5d8=alistair.francis@wdc.com>)
+ id 1j4vCN-0000jG-1c
+ for qemu-riscv@nongnu.org; Thu, 20 Feb 2020 18:25:39 -0500
+Received: from esa1.hgst.iphmx.com ([68.232.141.245]:25475)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <prvs=31236d5d8=alistair.francis@wdc.com>)
+ id 1j4vCJ-0000cC-5W; Thu, 20 Feb 2020 18:25:36 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1582241135; x=1613777135;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=CTtvlFVlfUk+6Z7t8xLZa0mdHFDbLmlhar9dnkiWWyo=;
+ b=Uv2I5HG3DbUfERGIT79wLZXfJQ0o+UmDmpt/CEpfW2Gm5av2Ds+8Y1OX
+ 10Hkh/iKza0OPSeKh0X8xlv3ej55b9bzjJ5uYTh8c1aRFt2eYwC5SbD6g
+ FaPlhl+yrGRQhvibrIeOTBvYqukdHXskqzzONp8+//n3dtDQfS3Pgm9sx
+ /7CGSfyPPZCJuPwZaFZFVU0kOZtuFJm4D1TQ7a1zkmQ2akCYY1I6qT7L4
+ j6whJxBwjjg8LfNSL0puCRAZ62IDmVB/maVxuluAsCYSM42nd9w+bvOG2
+ Fr4PG5kE6n9Zossje/5PKUcPufAqIwddlKnhbrJuwl8LV8gXPg9CK6f5f w==;
+IronPort-SDR: Zduc/7A2KKTOh0Of3hJo7LzNCUx48OpNF1r9nppGYa9uyXgEsMOKLirF+2ZSU13skUzqf4d0Ub
+ l5/fCy2gqRftOVNjBmDi/4od6mAmXM/YY2+wCGFLg65BF+onFOj2y54Wm/TvwcbWCXdHU4wPLY
+ O55ERoha8+QL5VqeQ8zoxV7D6DhkfHANf0GWXIu3jmDqH+0gagNGtvAXCfkp7nUZnVSky04h6W
+ LWSRcgJCgikvxbI2+aAtkPP8mJgmQR8zD9B+OISER7pmv30AXUFBmoTj+8Xs7bBMN+tCx+iZMF
+ Mok=
+X-IronPort-AV: E=Sophos;i="5.70,466,1574092800"; d="scan'208";a="238445365"
+Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
+ ([199.255.45.14])
+ by ob1.hgst.iphmx.com with ESMTP; 21 Feb 2020 07:25:30 +0800
+IronPort-SDR: qibtHccDZiXDtgnSVsGiq+MiKKfznY730rf/e2lI5ESlJ0lrbMWC4I2Xrp8BGxO9rs8V+jk2sN
+ tSirnBW+2GBIyqFSCwre/hmHliPiCTKxkUsvSWloPxWfLaukW+yv2JgcxGyEUMlu2upQrLmuEK
+ lpwiaK5GnPWVhJlNUGtZz4wX1YwqlFRs8CsWD/YNd3ayaZJpB8cHAwopwqv6ZuhYpdl9j5Oo4A
+ 2QmRwsI9/mGEq0ypTpa+wrZ4GN8h1PvadHPkloEXV1CmuPi5wo72vCWrlWVcwGxgvuacARcvhH
+ COWtfudBZ/FS/g5w/moNv05c
+Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
+ by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 20 Feb 2020 15:18:04 -0800
+IronPort-SDR: 9B69YXSp/tlTC0jV3JItcdl7/5dg8MWtm2gBtqZAE0dv4v3hKzvbKbUx+tkERKokIGbiYDvTCF
+ ku88MZOFf8Hzn4Yrlsbd9m/WMx+Yf8xyuPI0Bt+pwjOQosNu33yHQ6EhHc2gLjEuXuzxHfsswA
+ r+DLMhs7q/muVeUC7gUtD5RB38kLd7lJkIv27W6AQqaBrWfwlbWm6QawZAXNkwOQQZe4AYnGBM
+ F7xYWKLj3wTbZLRr+V4qpGpmrsdAHTqML/xfsLs9NOCFEhrvyl0uwThMedubESJlu5CGJlZQ8E
+ q70=
+WDCIronportException: Internal
+Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
+ risc6-mainframe.int.fusionio.com) ([10.196.158.235])
+ by uls-op-cesaip01.wdc.com with ESMTP; 20 Feb 2020 15:25:30 -0800
+From: Alistair Francis <alistair.francis@wdc.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: palmer@dabbelt.com, alistair.francis@wdc.com, alistair23@gmail.com,
+ laurent@vivier.eu
+Subject: [PATCH v1 0/2]  linux-user: generate syscall_nr.sh for RISC-V
+Date: Thu, 20 Feb 2020 15:18:28 -0800
+Message-Id: <cover.1582240656.git.alistair.francis@wdc.com>
+X-Mailer: git-send-email 2.25.0
 MIME-Version: 1.0
-References: <62fcfe747245cf8edcabcbe8f1f0b59be035fad6.1579584948.git.alistair.francis@wdc.com>
-In-Reply-To: <62fcfe747245cf8edcabcbe8f1f0b59be035fad6.1579584948.git.alistair.francis@wdc.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 20 Feb 2020 10:41:35 -0800
-Message-ID: <CAKmqyKPGJQMqW7ZbWBYRDUxH_PRRSvUW6tEwBAdW+MTE-RG5+w@mail.gmail.com>
-Subject: Re: [PATCH v1 1/1] target/riscv: Correctly implement TSR trap
-To: Alistair Francis <alistair.francis@wdc.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>
-Content-Type: text/plain; charset="UTF-8"
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2a00:1450:4864:20::244
+Content-Transfer-Encoding: 8bit
+X-detected-operating-system: by eggs.gnu.org: FreeBSD 9.x [fuzzy]
+X-Received-From: 68.232.141.245
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -65,42 +76,29 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Feb 2020 18:49:10 -0000
+X-List-Received-Date: Thu, 20 Feb 2020 23:25:41 -0000
 
-On Mon, Jan 20, 2020 at 9:43 PM Alistair Francis
-<alistair.francis@wdc.com> wrote:
->
-> As reported in: https://bugs.launchpad.net/qemu/+bug/1851939 we weren't
-> correctly handling illegal instructions based on the value of MSTATUS_TSR
-> and the current privledge level.
->
-> This patch fixes the issue raised in the bug by raising an illegal
-> instruction if TSR is set and we are in S-Mode.
->
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+This series updates the RISC-V syscall_nr.sh based on the 5.5 kernel.
+There are two parts to this. One is just adding the new syscalls, the
+other part is updating the RV32 syscalls to match the fact that RV32 is
+a 64-bit time_t architectures (y2038) safe.
 
-@Palmer Dabbelt  Ping!
+we need to make some changes to syscall.c to avoid warnings/errors
+during compliling with the new syscall.
 
-Alistair
+I did some RV32 user space testing after applying these patches. I ran the
+glibc testsuite in userspace and I don't see any regressions.
 
-> ---
->  target/riscv/op_helper.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
-> index 331cc36232..eed8eea6f2 100644
-> --- a/target/riscv/op_helper.c
-> +++ b/target/riscv/op_helper.c
-> @@ -83,7 +83,7 @@ target_ulong helper_sret(CPURISCVState *env, target_ulong cpu_pc_deb)
->      }
->
->      if (env->priv_ver >= PRIV_VERSION_1_10_0 &&
-> -        get_field(env->mstatus, MSTATUS_TSR)) {
-> +        get_field(env->mstatus, MSTATUS_TSR) && !(env->priv >= PRV_M)) {
->          riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
->      }
->
-> --
-> 2.24.1
->
+Alistair Francis (2):
+  linux-user: Protect more syscalls
+  linux-user/riscv: Update the syscall_nr's to the 5.5 kernel
+
+ linux-user/riscv/syscall_nr.h | 160 +++++++++++++++++++++++++++++++++-
+ linux-user/strace.c           |   2 +
+ linux-user/syscall.c          |  18 ++++
+ 3 files changed, 178 insertions(+), 2 deletions(-)
+
+-- 
+2.25.0
+
 
