@@ -1,66 +1,68 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1j4vCQ-0000U9-Ke
-	for mharc-qemu-riscv@gnu.org; Thu, 20 Feb 2020 18:25:42 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:57970)
+	id 1j4vCR-0000X4-O1
+	for mharc-qemu-riscv@gnu.org; Thu, 20 Feb 2020 18:25:43 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:57984)
  by lists.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <prvs=31236d5d8=alistair.francis@wdc.com>)
- id 1j4vCO-0000Q3-0n
- for qemu-riscv@nongnu.org; Thu, 20 Feb 2020 18:25:40 -0500
+ id 1j4vCO-0000RE-OC
+ for qemu-riscv@nongnu.org; Thu, 20 Feb 2020 18:25:42 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
  (envelope-from <prvs=31236d5d8=alistair.francis@wdc.com>)
- id 1j4vCN-0000jG-1c
- for qemu-riscv@nongnu.org; Thu, 20 Feb 2020 18:25:39 -0500
-Received: from esa1.hgst.iphmx.com ([68.232.141.245]:25475)
+ id 1j4vCN-0000jO-Dv
+ for qemu-riscv@nongnu.org; Thu, 20 Feb 2020 18:25:40 -0500
+Received: from esa1.hgst.iphmx.com ([68.232.141.245]:25480)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <prvs=31236d5d8=alistair.francis@wdc.com>)
- id 1j4vCJ-0000cC-5W; Thu, 20 Feb 2020 18:25:36 -0500
+ id 1j4vCK-0000h3-CR; Thu, 20 Feb 2020 18:25:36 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1582241135; x=1613777135;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=CTtvlFVlfUk+6Z7t8xLZa0mdHFDbLmlhar9dnkiWWyo=;
- b=Uv2I5HG3DbUfERGIT79wLZXfJQ0o+UmDmpt/CEpfW2Gm5av2Ds+8Y1OX
- 10Hkh/iKza0OPSeKh0X8xlv3ej55b9bzjJ5uYTh8c1aRFt2eYwC5SbD6g
- FaPlhl+yrGRQhvibrIeOTBvYqukdHXskqzzONp8+//n3dtDQfS3Pgm9sx
- /7CGSfyPPZCJuPwZaFZFVU0kOZtuFJm4D1TQ7a1zkmQ2akCYY1I6qT7L4
- j6whJxBwjjg8LfNSL0puCRAZ62IDmVB/maVxuluAsCYSM42nd9w+bvOG2
- Fr4PG5kE6n9Zossje/5PKUcPufAqIwddlKnhbrJuwl8LV8gXPg9CK6f5f w==;
-IronPort-SDR: Zduc/7A2KKTOh0Of3hJo7LzNCUx48OpNF1r9nppGYa9uyXgEsMOKLirF+2ZSU13skUzqf4d0Ub
- l5/fCy2gqRftOVNjBmDi/4od6mAmXM/YY2+wCGFLg65BF+onFOj2y54Wm/TvwcbWCXdHU4wPLY
- O55ERoha8+QL5VqeQ8zoxV7D6DhkfHANf0GWXIu3jmDqH+0gagNGtvAXCfkp7nUZnVSky04h6W
- LWSRcgJCgikvxbI2+aAtkPP8mJgmQR8zD9B+OISER7pmv30AXUFBmoTj+8Xs7bBMN+tCx+iZMF
- Mok=
-X-IronPort-AV: E=Sophos;i="5.70,466,1574092800"; d="scan'208";a="238445365"
+ t=1582241136; x=1613777136;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=Vx2cxzup8vY5IuEbJlVv7GFIa45fWd375ToC+PpsS6c=;
+ b=e+OQc6bv6lUqjFsI3gPHsQSH7KdRqRQ+i0SpaT2qp96+ti6iJ96yQIt9
+ JOjaKbufNbiX1Cx2eV1kXq+xukX9KzJK13kq9WXaZgD/4dbZhD1eXeDO0
+ KLDD+YjZvN6vahBKENjbgn5E0rwzAw4h89KOZlZJ4hXMZcjTG41sh1Jfw
+ pAK9EXYG/p/6YOl5LE5vSJNKXrdnsct+9TBjtlJMlXDm8V53/jZU2/SD8
+ /hFu5ynRyzpsVNoWKPJ00nSQh5EK/9NzYZZgEpPx3OS62AhxHqY6IlEe1
+ 20tQjFB1t42D2tFWulgRyfvrF5KAv4hyzeNvh++1AVacx4njh4KHA5c1+ w==;
+IronPort-SDR: ebeWKn3AHm/p0dvnDo+KpYEl44JjYhvoCvG3TNeddBFn4u0984VR0h7VLaJvfYLNhZifGgVQnn
+ UwXzRBRccIHSkXYzk/FzO1912NVMPhEkzraOB/dXGUzwzwiAfL/M4Pv3HtsPj/MtPTcgFMAZQ6
+ 80S5nJHPBPSd0Nwk0gNFPx3IEB4VSPsBHWdeq/4jVSt/ck8B7obW1aWEOsTIr4UqUuf0H1hQqG
+ UeNCqYrBXUZDPLLrJ2/OE0GWKJbABRWk6bZQEc3ykr1X3Kl4vtAdTlkmO1aRrlRqfMdVTcfD1L
+ iBU=
+X-IronPort-AV: E=Sophos;i="5.70,466,1574092800"; d="scan'208";a="238445369"
 Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
  ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 21 Feb 2020 07:25:30 +0800
-IronPort-SDR: qibtHccDZiXDtgnSVsGiq+MiKKfznY730rf/e2lI5ESlJ0lrbMWC4I2Xrp8BGxO9rs8V+jk2sN
- tSirnBW+2GBIyqFSCwre/hmHliPiCTKxkUsvSWloPxWfLaukW+yv2JgcxGyEUMlu2upQrLmuEK
- lpwiaK5GnPWVhJlNUGtZz4wX1YwqlFRs8CsWD/YNd3ayaZJpB8cHAwopwqv6ZuhYpdl9j5Oo4A
- 2QmRwsI9/mGEq0ypTpa+wrZ4GN8h1PvadHPkloEXV1CmuPi5wo72vCWrlWVcwGxgvuacARcvhH
- COWtfudBZ/FS/g5w/moNv05c
+ by ob1.hgst.iphmx.com with ESMTP; 21 Feb 2020 07:25:32 +0800
+IronPort-SDR: cSXEs0a74B95GWAYMphGbHeQ7Fa8faFHq7EMCz0ISKxwZhOkZtsBEYDi/NGNtDA7WTM0nDq+Nx
+ nby30nWwDbLtlbZVMAxvE81VvxLPYHvo0tFqY/Y3QzOPlh8CODr6/o2Olx6R54pqqVZej9+Znz
+ JhWpPAuQCXGCR7dHAGAy6y1tqzPIr+r4jynGBYMWI01AUvsEc53RmOrNfy35bShGJj9LOxd8Us
+ WjoyTYsRXIGFuX753fEZWsdcgz0SuwdSX/RtAyBz7CSOYWJAGyb9+tlzVjG3O02/2kragUy96C
+ WgYkyhLMxMG32CqecgFj9a7U
 Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
  by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 20 Feb 2020 15:18:04 -0800
-IronPort-SDR: 9B69YXSp/tlTC0jV3JItcdl7/5dg8MWtm2gBtqZAE0dv4v3hKzvbKbUx+tkERKokIGbiYDvTCF
- ku88MZOFf8Hzn4Yrlsbd9m/WMx+Yf8xyuPI0Bt+pwjOQosNu33yHQ6EhHc2gLjEuXuzxHfsswA
- r+DLMhs7q/muVeUC7gUtD5RB38kLd7lJkIv27W6AQqaBrWfwlbWm6QawZAXNkwOQQZe4AYnGBM
- F7xYWKLj3wTbZLRr+V4qpGpmrsdAHTqML/xfsLs9NOCFEhrvyl0uwThMedubESJlu5CGJlZQ8E
- q70=
+ 20 Feb 2020 15:18:07 -0800
+IronPort-SDR: M6qZzrYVnUwdBsCewUNc2clQPmAuDVfolpmWfhmbeLNDY/YcfTSL6uD5sbFIw4ZGR6xSmlPGb6
+ XWZffDasY0if7Oj9YdKnCwpiEjBbM5XSGaXf0fDzVBjzpUyWnJpLjgvuUBbNpQQ88PsbxIv+9T
+ uXAAR5BQNuY8ktkpmU6GSQBrZd8gjq3a2nWAUgle8FTVrDwGzWsMRivIiujWXNMPw34fUO97ZC
+ AmqB1JKptYYjxzenrbl3UfP44zN0zvbeyYablJpQPXNZ6uieWs2vAalyIKQfg+t3tUbpHirmya
+ 4+Q=
 WDCIronportException: Internal
 Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
  risc6-mainframe.int.fusionio.com) ([10.196.158.235])
- by uls-op-cesaip01.wdc.com with ESMTP; 20 Feb 2020 15:25:30 -0800
+ by uls-op-cesaip01.wdc.com with ESMTP; 20 Feb 2020 15:25:33 -0800
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: palmer@dabbelt.com, alistair.francis@wdc.com, alistair23@gmail.com,
  laurent@vivier.eu
-Subject: [PATCH v1 0/2]  linux-user: generate syscall_nr.sh for RISC-V
-Date: Thu, 20 Feb 2020 15:18:28 -0800
-Message-Id: <cover.1582240656.git.alistair.francis@wdc.com>
+Subject: [PATCH v1 1/2] linux-user: Protect more syscalls
+Date: Thu, 20 Feb 2020 15:18:30 -0800
+Message-Id: <3fd846fa30a95eb11e2b27d95fce19f3d619d8f0.1582240656.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.25.0
+In-Reply-To: <cover.1582240656.git.alistair.francis@wdc.com>
+References: <cover.1582240656.git.alistair.francis@wdc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: FreeBSD 9.x [fuzzy]
@@ -76,28 +78,164 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Feb 2020 23:25:41 -0000
+X-List-Received-Date: Thu, 20 Feb 2020 23:25:42 -0000
 
-This series updates the RISC-V syscall_nr.sh based on the 5.5 kernel.
-There are two parts to this. One is just adding the new syscalls, the
-other part is updating the RV32 syscalls to match the fact that RV32 is
-a 64-bit time_t architectures (y2038) safe.
+New y2038 safe 32-bit architectures (like RISC-V) don't support old
+syscalls with a 32-bit time_t. The kernel defines new *_time64 versions
+of these syscalls. Add some more #ifdefs to syscall.c in linux-user to
+allow us to compile without these old syscalls.
 
-we need to make some changes to syscall.c to avoid warnings/errors
-during compliling with the new syscall.
+Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+---
+ linux-user/strace.c  |  2 ++
+ linux-user/syscall.c | 18 ++++++++++++++++++
+ 2 files changed, 20 insertions(+)
 
-I did some RV32 user space testing after applying these patches. I ran the
-glibc testsuite in userspace and I don't see any regressions.
-
-Alistair Francis (2):
-  linux-user: Protect more syscalls
-  linux-user/riscv: Update the syscall_nr's to the 5.5 kernel
-
- linux-user/riscv/syscall_nr.h | 160 +++++++++++++++++++++++++++++++++-
- linux-user/strace.c           |   2 +
- linux-user/syscall.c          |  18 ++++
- 3 files changed, 178 insertions(+), 2 deletions(-)
-
+diff --git a/linux-user/strace.c b/linux-user/strace.c
+index 3d4d684450..2eb8ae3d31 100644
+--- a/linux-user/strace.c
++++ b/linux-user/strace.c
+@@ -770,6 +770,7 @@ print_syscall_ret_newselect(const struct syscallname *name, abi_long ret)
+ #define TARGET_TIME_OOP      3   /* leap second in progress */
+ #define TARGET_TIME_WAIT     4   /* leap second has occurred */
+ #define TARGET_TIME_ERROR    5   /* clock not synchronized */
++#ifdef TARGET_NR_adjtimex
+ static void
+ print_syscall_ret_adjtimex(const struct syscallname *name, abi_long ret)
+ {
+@@ -808,6 +809,7 @@ print_syscall_ret_adjtimex(const struct syscallname *name, abi_long ret)
+ 
+     gemu_log("\n");
+ }
++#endif
+ 
+ UNUSED static struct flags access_flags[] = {
+     FLAG_GENERIC(F_OK),
+diff --git a/linux-user/syscall.c b/linux-user/syscall.c
+index c930577686..44632a7f6a 100644
+--- a/linux-user/syscall.c
++++ b/linux-user/syscall.c
+@@ -738,8 +738,10 @@ safe_syscall3(ssize_t, read, int, fd, void *, buff, size_t, count)
+ safe_syscall3(ssize_t, write, int, fd, const void *, buff, size_t, count)
+ safe_syscall4(int, openat, int, dirfd, const char *, pathname, \
+               int, flags, mode_t, mode)
++#if defined(TARGET_NR_wait4)
+ safe_syscall4(pid_t, wait4, pid_t, pid, int *, status, int, options, \
+               struct rusage *, rusage)
++#endif
+ safe_syscall5(int, waitid, idtype_t, idtype, id_t, id, siginfo_t *, infop, \
+               int, options, struct rusage *, rusage)
+ safe_syscall3(int, execve, const char *, filename, char **, argv, char **, envp)
+@@ -776,8 +778,10 @@ safe_syscall4(int, rt_sigtimedwait, const sigset_t *, these, siginfo_t *, uinfo,
+               const struct timespec *, uts, size_t, sigsetsize)
+ safe_syscall4(int, accept4, int, fd, struct sockaddr *, addr, socklen_t *, len,
+               int, flags)
++#if defined(TARGET_NR_nanosleep)
+ safe_syscall2(int, nanosleep, const struct timespec *, req,
+               struct timespec *, rem)
++#endif
+ #ifdef TARGET_NR_clock_nanosleep
+ safe_syscall4(int, clock_nanosleep, const clockid_t, clock, int, flags,
+               const struct timespec *, req, struct timespec *, rem)
+@@ -1063,6 +1067,7 @@ static inline abi_long host_to_target_rusage(abi_ulong target_addr,
+     return 0;
+ }
+ 
++#ifdef TARGET_NR_setrlimit
+ static inline rlim_t target_to_host_rlim(abi_ulong target_rlim)
+ {
+     abi_ulong target_rlim_swap;
+@@ -1078,7 +1083,9 @@ static inline rlim_t target_to_host_rlim(abi_ulong target_rlim)
+     
+     return result;
+ }
++#endif
+ 
++#if defined(TARGET_NR_getrlimit) || defined (TARGET_NR_ugetrlimit)
+ static inline abi_ulong host_to_target_rlim(rlim_t rlim)
+ {
+     abi_ulong target_rlim_swap;
+@@ -1092,6 +1099,7 @@ static inline abi_ulong host_to_target_rlim(rlim_t rlim)
+     
+     return result;
+ }
++#endif
+ 
+ static inline int target_to_host_resource(int code)
+ {
+@@ -8584,6 +8592,7 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
+             }
+         }
+         return ret;
++#if defined(TARGET_NR_gettimeofday)
+     case TARGET_NR_gettimeofday:
+         {
+             struct timeval tv;
+@@ -8594,6 +8603,8 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
+             }
+         }
+         return ret;
++#endif
++#if defined(TARGET_NR_settimeofday)
+     case TARGET_NR_settimeofday:
+         {
+             struct timeval tv, *ptv = NULL;
+@@ -8615,6 +8626,7 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
+ 
+             return get_errno(settimeofday(ptv, ptz));
+         }
++#endif
+ #if defined(TARGET_NR_select)
+     case TARGET_NR_select:
+ #if defined(TARGET_WANT_NI_OLD_SELECT)
+@@ -9260,6 +9272,7 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
+         return do_syscall(cpu_env, arg1 & 0xffff, arg2, arg3, arg4, arg5,
+                           arg6, arg7, arg8, 0);
+ #endif
++#if defined(TARGET_NR_wait4)
+     case TARGET_NR_wait4:
+         {
+             int status;
+@@ -9287,6 +9300,7 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
+             }
+         }
+         return ret;
++#endif
+ #ifdef TARGET_NR_swapoff
+     case TARGET_NR_swapoff:
+         if (!(p = lock_user_string(arg1)))
+@@ -9431,6 +9445,7 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
+         return do_vm86(cpu_env, arg1, arg2);
+ #endif
+ #endif
++#if defined(TARGET_NR_adjtimex)
+     case TARGET_NR_adjtimex:
+         {
+             struct timex host_buf;
+@@ -9446,6 +9461,7 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
+             }
+         }
+         return ret;
++#endif
+ #if defined(TARGET_NR_clock_adjtime) && defined(CONFIG_CLOCK_ADJTIME)
+     case TARGET_NR_clock_adjtime:
+         {
+@@ -9971,6 +9987,7 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
+             }
+         }
+         return ret;
++#if defined(TARGET_NR_nanosleep)
+     case TARGET_NR_nanosleep:
+         {
+             struct timespec req, rem;
+@@ -9981,6 +9998,7 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
+             }
+         }
+         return ret;
++#endif
+     case TARGET_NR_prctl:
+         switch (arg1) {
+         case PR_GET_PDEATHSIG:
 -- 
 2.25.0
 
