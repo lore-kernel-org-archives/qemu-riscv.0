@@ -1,73 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1j4vCT-0000at-Q6
-	for mharc-qemu-riscv@gnu.org; Thu, 20 Feb 2020 18:25:45 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:57995)
+	id 1j4vIN-00063G-LS
+	for mharc-qemu-riscv@gnu.org; Thu, 20 Feb 2020 18:31:51 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58482)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <prvs=31236d5d8=alistair.francis@wdc.com>)
- id 1j4vCQ-0000UF-Ij
- for qemu-riscv@nongnu.org; Thu, 20 Feb 2020 18:25:44 -0500
+ (envelope-from <no-reply@patchew.org>) id 1j4vIJ-0005zH-UT
+ for qemu-riscv@nongnu.org; Thu, 20 Feb 2020 18:31:49 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <prvs=31236d5d8=alistair.francis@wdc.com>)
- id 1j4vCO-0000jh-IG
- for qemu-riscv@nongnu.org; Thu, 20 Feb 2020 18:25:42 -0500
-Received: from esa1.hgst.iphmx.com ([68.232.141.245]:25475)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <prvs=31236d5d8=alistair.francis@wdc.com>)
- id 1j4vCK-0000cC-Fv; Thu, 20 Feb 2020 18:25:36 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1582241136; x=1613777136;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=pphneEu+0XJ0W0mLSsU1iLuHvA72OElJOv+QZQ5usrU=;
- b=eSRjkd6zAXeEBP0UuFbqiuzISWOOmrBl5YtKmiJfHt4uDgS0CxoVg1mj
- LB05zxOvzNLIojt1ZBW2U6P2YacT0kZpQ/N9QJQ+m6jIUdK/96WJPzjFD
- xZY1Fm4XhA9sW1wYJ8A0sDzf3fsmPE+cVWRUZjqriWynzRDmEWysiJoJP
- MO8EHMy/sZa+75b/gI6XAl/7D5qnWHCLiCS9eyDxvOHfoyZIA0WDiin1y
- 5nXDeNS0qe3KnduZ9Dx65PIezjtuI1S+Xk33feRPut6p0PZXGlQBlNsFH
- vNt7Qw1W5M7NopboWmGyTl1rgGxtfitiCdCKoBE+ps+PR+eRdzPZ2pWMa w==;
-IronPort-SDR: 5QLIowRdNnoHjs4ErvH61XduoRf2FLqFJQ34jH6dEMiCvTvsDLdy0W+tRfGJhhP9GnQLxYU89k
- Tl75J4Z+i2edl44Ps9mk7eL5b/I2qJXDtaHfFlakIsH0j45l3hVgOSbCsWihAB9skONWyd+SsA
- 3ReDKggSiRKMorolXX6NpmOVfDjibTrYXyAS1eh2/Nqdm0tjD/tYA45Uq0V1qQAFTKXP4ZnNhx
- ZA38OzOdAHwjbiMUslSEspKCr+VrU1YO2r5xD6AfD8cw1ftF54Yvj/bE75hu1peu+H3pkLbD+T
- mgA=
-X-IronPort-AV: E=Sophos;i="5.70,466,1574092800"; d="scan'208";a="238445372"
-Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
- ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 21 Feb 2020 07:25:35 +0800
-IronPort-SDR: XXM+ZwE+wmzFmTDl3ozFEiKR+mnQTeCSwVrpBxOuWuPMmgqldVu7QuTVWo0AZ7WFP0UmYQB21c
- CvxdoCw8e+nM2KEWpD3yOc8Lz0ZACT3WqGoVb+K9etIFphaA7MFl79FIqCnilk8uoPUQ6J1B/+
- XwDKeMTBdh7cM1ituL+IC7TeVr2PJ0+ITmGGubuWPOxc0y6kKwRCRfbwzeUJiGK8EMs5eHoDOM
- 5sCB0a0mf14OVBlsWbewU8EX4BIgHhqO452SDPMenQkcGfpxlcGdPoA4QBFFXTlCJ9jwTFinHz
- 2MRppKNDKsdfUbxZ0Knk/mT0
-Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
- by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 20 Feb 2020 15:18:10 -0800
-IronPort-SDR: 62RLw+4Xp5swZT4eQdPg++cvt9e1q6alElAlNHohu2JuhX09U2OAAl7Ok4w4I2x4gQECOSXr6m
- jXA6zVuzQAb6++51yokzPx5dT4Pafhc9TeW73hUAjgXsJ7fBhllLWH84/NMupgGdyr2uAw1kn9
- ZdodLvaMkSjABFaS9CvfYKYDUcUodFXtWFBr9AIV/K+1QFGmvjnNJDRh/Wnyuk06P4myJd6E9q
- WWDCbLiJE2retPY5sQDlm3mEU4W2LvqaW77fNim0/EPCtkgE8ZiIcB9H8AMcC5D6PDcpZzqK9j
- E1Q=
-WDCIronportException: Internal
-Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
- risc6-mainframe.int.fusionio.com) ([10.196.158.235])
- by uls-op-cesaip01.wdc.com with ESMTP; 20 Feb 2020 15:25:36 -0800
-From: Alistair Francis <alistair.francis@wdc.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: palmer@dabbelt.com, alistair.francis@wdc.com, alistair23@gmail.com,
- laurent@vivier.eu
-Subject: [PATCH v1 2/2] linux-user/riscv: Update the syscall_nr's to the 5.5
- kernel
-Date: Thu, 20 Feb 2020 15:18:33 -0800
-Message-Id: <8f6625e62bd766eacdae40e9a74186f247fe16b0.1582240656.git.alistair.francis@wdc.com>
-X-Mailer: git-send-email 2.25.0
+ (envelope-from <no-reply@patchew.org>) id 1j4vII-0002xm-Q4
+ for qemu-riscv@nongnu.org; Thu, 20 Feb 2020 18:31:47 -0500
+Resent-Date: Thu, 20 Feb 2020 18:31:47 -0500
+Resent-Message-Id: <E1j4vII-0002xm-Q4@eggs.gnu.org>
+Received: from sender4-of-o51.zoho.com ([136.143.188.51]:21112)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <no-reply@patchew.org>)
+ id 1j4vIF-0002wE-Bi; Thu, 20 Feb 2020 18:31:43 -0500
+ARC-Seal: i=1; a=rsa-sha256; t=1582241493; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=IBZx4vvC2CcPSCDpcoKEeD7raB91ny277podRleZjP0/CBDymKleG7HRi9hfmjrIMLh7hGAJgv38MEX+I9UKmXK55lk9k0TPtpj1WEQygDFS4ZUcjiGFVufWfi5Hc3aXx6R0V/NJjF7uT3Bs+crWZzPISJeXN06+TkTdIVdtQQw=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1582241493;
+ h=Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:MIME-Version:Message-ID:Reply-To:Subject:To;
+ bh=DybI+LTU4t5xk9booofuIZWmeqXuhmJDgSjNIXyx85I=; 
+ b=iQ3w8lJQLWZG6tRYd9JYn+cBa7ao7cohSiA8xH9wotSRnR3WMlS0jAxe9xRR5L5OfCms6egelx6DMwWT8o9j5v+/4Hqmyh6LQtYo0JCpsqGUiSkVvrR36hOeWX3/DDES68MpyeO9hM1gp3XH78vUaJXJ4KjNtPciUStwHAaAnEk=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+ dkim=pass  header.i=patchew.org;
+ spf=pass  smtp.mailfrom=no-reply@patchew.org;
+ dmarc=pass header.from=<no-reply@patchew.org>
+ header.from=<no-reply@patchew.org>
+Received: from [172.17.0.3] (23.253.156.214 [23.253.156.214]) by
+ mx.zohomail.com with SMTPS id 1582241491341404.01756982908;
+ Thu, 20 Feb 2020 15:31:31 -0800 (PST)
+Reply-To: <qemu-devel@nongnu.org>
 In-Reply-To: <cover.1582240656.git.alistair.francis@wdc.com>
-References: <cover.1582240656.git.alistair.francis@wdc.com>
+Subject: Re: [PATCH v1 0/2]  linux-user: generate syscall_nr.sh for RISC-V
+Message-ID: <158224149003.31180.5954402657995887989@a1bbccc8075a>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-detected-operating-system: by eggs.gnu.org: FreeBSD 9.x [fuzzy]
-X-Received-From: 68.232.141.245
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+Resent-From: 
+From: no-reply@patchew.org
+To: alistair.francis@wdc.com
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
+ palmer@dabbelt.com, laurent@vivier.eu, alistair23@gmail.com
+Date: Thu, 20 Feb 2020 15:31:31 -0800 (PST)
+X-ZohoMailClient: External
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+ [fuzzy]
+X-Received-From: 136.143.188.51
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -79,401 +58,48 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Feb 2020 23:25:44 -0000
+X-List-Received-Date: Thu, 20 Feb 2020 23:31:49 -0000
 
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
----
- linux-user/riscv/syscall_nr.h | 160 +++++++++++++++++++++++++++++++++-
- 1 file changed, 158 insertions(+), 2 deletions(-)
-
-diff --git a/linux-user/riscv/syscall_nr.h b/linux-user/riscv/syscall_nr.h
-index 5c87282209..b2b071969b 100644
---- a/linux-user/riscv/syscall_nr.h
-+++ b/linux-user/riscv/syscall_nr.h
-@@ -10,7 +10,10 @@
- #define TARGET_NR_io_destroy 1
- #define TARGET_NR_io_submit 2
- #define TARGET_NR_io_cancel 3
-+#ifndef TARGET_RISCV32
- #define TARGET_NR_io_getevents 4
-+#endif
-+
- #define TARGET_NR_setxattr 5
- #define TARGET_NR_lsetxattr 6
- #define TARGET_NR_fsetxattr 7
-@@ -23,12 +26,17 @@
- #define TARGET_NR_removexattr 14
- #define TARGET_NR_lremovexattr 15
- #define TARGET_NR_fremovexattr 16
-+
- #define TARGET_NR_getcwd 17
-+
- #define TARGET_NR_lookup_dcookie 18
-+
- #define TARGET_NR_eventfd2 19
-+
- #define TARGET_NR_epoll_create1 20
- #define TARGET_NR_epoll_ctl 21
- #define TARGET_NR_epoll_pwait 22
-+
- #define TARGET_NR_dup 23
- #define TARGET_NR_dup3 24
- #ifdef TARGET_RISCV32
-@@ -36,27 +44,35 @@
- #else
- #define TARGET_NR_fcntl 25
- #endif
-+
- #define TARGET_NR_inotify_init1 26
- #define TARGET_NR_inotify_add_watch 27
- #define TARGET_NR_inotify_rm_watch 28
-+
- #define TARGET_NR_ioctl 29
-+
- #define TARGET_NR_ioprio_set 30
- #define TARGET_NR_ioprio_get 31
-+
- #define TARGET_NR_flock 32
-+
- #define TARGET_NR_mknodat 33
- #define TARGET_NR_mkdirat 34
- #define TARGET_NR_unlinkat 35
- #define TARGET_NR_symlinkat 36
- #define TARGET_NR_linkat 37
--#define TARGET_NR_renameat 38
-+
- #define TARGET_NR_umount2 39
- #define TARGET_NR_mount 40
- #define TARGET_NR_pivot_root 41
-+
- #define TARGET_NR_nfsservctl 42
-+
- #define TARGET_NR_statfs 43
- #define TARGET_NR_fstatfs 44
- #define TARGET_NR_truncate 45
- #define TARGET_NR_ftruncate 46
-+
- #define TARGET_NR_fallocate 47
- #define TARGET_NR_faccessat 48
- #define TARGET_NR_chdir 49
-@@ -69,9 +85,13 @@
- #define TARGET_NR_openat 56
- #define TARGET_NR_close 57
- #define TARGET_NR_vhangup 58
-+
- #define TARGET_NR_pipe2 59
-+
- #define TARGET_NR_quotactl 60
-+
- #define TARGET_NR_getdents64 61
-+
- #ifdef TARGET_RISCV32
- #define TARGET_NR__llseek 62
- #else
-@@ -85,53 +105,91 @@
- #define TARGET_NR_pwrite64 68
- #define TARGET_NR_preadv 69
- #define TARGET_NR_pwritev 70
-+
- #define TARGET_NR_sendfile 71
-+
-+#ifndef TARGET_RISCV32
- #define TARGET_NR_pselect6 72
- #define TARGET_NR_ppoll 73
-+#endif
-+
- #define TARGET_NR_signalfd4 74
-+
- #define TARGET_NR_vmsplice 75
- #define TARGET_NR_splice 76
- #define TARGET_NR_tee 77
-+
- #define TARGET_NR_readlinkat 78
- #define TARGET_NR_newfstatat 79
- #define TARGET_NR_fstat 80
-+
- #define TARGET_NR_sync 81
- #define TARGET_NR_fsync 82
- #define TARGET_NR_fdatasync 83
- #define TARGET_NR_sync_file_range 84
-+
- #define TARGET_NR_timerfd_create 85
-+#ifndef TARGET_RISCV32
- #define TARGET_NR_timerfd_settime 86
- #define TARGET_NR_timerfd_gettime 87
-+#endif
-+
-+#ifndef TARGET_RISCV32
- #define TARGET_NR_utimensat 88
-+#endif
-+
- #define TARGET_NR_acct 89
-+
- #define TARGET_NR_capget 90
- #define TARGET_NR_capset 91
-+
- #define TARGET_NR_personality 92
-+
- #define TARGET_NR_exit 93
- #define TARGET_NR_exit_group 94
- #define TARGET_NR_waitid 95
-+
- #define TARGET_NR_set_tid_address 96
- #define TARGET_NR_unshare 97
-+
-+#ifndef TARGET_RISCV32
- #define TARGET_NR_futex 98
-+#endif
- #define TARGET_NR_set_robust_list 99
- #define TARGET_NR_get_robust_list 100
-+
-+#ifndef TARGET_RISCV32
- #define TARGET_NR_nanosleep 101
-+#endif
-+
- #define TARGET_NR_getitimer 102
- #define TARGET_NR_setitimer 103
-+
- #define TARGET_NR_kexec_load 104
-+
- #define TARGET_NR_init_module 105
- #define TARGET_NR_delete_module 106
-+
- #define TARGET_NR_timer_create 107
-+#ifndef TARGET_RISCV32
- #define TARGET_NR_timer_gettime 108
-+#endif
- #define TARGET_NR_timer_getoverrun 109
-+#ifndef TARGET_RISCV32
- #define TARGET_NR_timer_settime 110
-+#endif
- #define TARGET_NR_timer_delete 111
-+#ifndef TARGET_RISCV32
- #define TARGET_NR_clock_settime 112
- #define TARGET_NR_clock_gettime 113
- #define TARGET_NR_clock_getres 114
- #define TARGET_NR_clock_nanosleep 115
-+#endif
-+
- #define TARGET_NR_syslog 116
-+
- #define TARGET_NR_ptrace 117
-+
- #define TARGET_NR_sched_setparam 118
- #define TARGET_NR_sched_setscheduler 119
- #define TARGET_NR_sched_getscheduler 120
-@@ -141,7 +199,10 @@
- #define TARGET_NR_sched_yield 124
- #define TARGET_NR_sched_get_priority_max 125
- #define TARGET_NR_sched_get_priority_min 126
-+#ifndef TARGET_RISCV32
- #define TARGET_NR_sched_rr_get_interval 127
-+#endif
-+
- #define TARGET_NR_restart_syscall 128
- #define TARGET_NR_kill 129
- #define TARGET_NR_tkill 130
-@@ -151,9 +212,12 @@
- #define TARGET_NR_rt_sigaction 134
- #define TARGET_NR_rt_sigprocmask 135
- #define TARGET_NR_rt_sigpending 136
-+#ifndef TARGET_RISCV32
- #define TARGET_NR_rt_sigtimedwait 137
-+#endif
- #define TARGET_NR_rt_sigqueueinfo 138
- #define TARGET_NR_rt_sigreturn 139
-+
- #define TARGET_NR_setpriority 140
- #define TARGET_NR_getpriority 141
- #define TARGET_NR_reboot 142
-@@ -177,15 +241,23 @@
- #define TARGET_NR_uname 160
- #define TARGET_NR_sethostname 161
- #define TARGET_NR_setdomainname 162
-+
-+#ifndef TARGET_RISCV32
- #define TARGET_NR_getrlimit 163
- #define TARGET_NR_setrlimit 164
-+#endif
-+
- #define TARGET_NR_getrusage 165
- #define TARGET_NR_umask 166
- #define TARGET_NR_prctl 167
- #define TARGET_NR_getcpu 168
-+
-+#ifndef TARGET_RISCV32
- #define TARGET_NR_gettimeofday 169
- #define TARGET_NR_settimeofday 170
- #define TARGET_NR_adjtimex 171
-+#endif
-+
- #define TARGET_NR_getpid 172
- #define TARGET_NR_getppid 173
- #define TARGET_NR_getuid 174
-@@ -194,24 +266,34 @@
- #define TARGET_NR_getegid 177
- #define TARGET_NR_gettid 178
- #define TARGET_NR_sysinfo 179
-+
- #define TARGET_NR_mq_open 180
- #define TARGET_NR_mq_unlink 181
-+#ifndef TARGET_RISCV32
- #define TARGET_NR_mq_timedsend 182
- #define TARGET_NR_mq_timedreceive 183
-+#endif
- #define TARGET_NR_mq_notify 184
- #define TARGET_NR_mq_getsetattr 185
-+
- #define TARGET_NR_msgget 186
- #define TARGET_NR_msgctl 187
- #define TARGET_NR_msgrcv 188
- #define TARGET_NR_msgsnd 189
-+
- #define TARGET_NR_semget 190
- #define TARGET_NR_semctl 191
-+
-+#ifndef TARGET_RISCV32
- #define TARGET_NR_semtimedop 192
-+#endif
- #define TARGET_NR_semop 193
-+
- #define TARGET_NR_shmget 194
- #define TARGET_NR_shmctl 195
- #define TARGET_NR_shmat 196
- #define TARGET_NR_shmdt 197
-+
- #define TARGET_NR_socket 198
- #define TARGET_NR_socketpair 199
- #define TARGET_NR_bind 200
-@@ -227,15 +309,20 @@
- #define TARGET_NR_shutdown 210
- #define TARGET_NR_sendmsg 211
- #define TARGET_NR_recvmsg 212
-+
- #define TARGET_NR_readahead 213
-+
- #define TARGET_NR_brk 214
- #define TARGET_NR_munmap 215
- #define TARGET_NR_mremap 216
-+
- #define TARGET_NR_add_key 217
- #define TARGET_NR_request_key 218
- #define TARGET_NR_keyctl 219
-+
- #define TARGET_NR_clone 220
- #define TARGET_NR_execve 221
-+
- #ifdef TARGET_RISCV32
- #define TARGET_NR_mmap2 222
- #define TARGET_NR_fadvise64_64 223
-@@ -243,6 +330,7 @@
- #define TARGET_NR_mmap 222
- #define TARGET_NR_fadvise64 223
- #endif
-+
- #define TARGET_NR_swapon 224
- #define TARGET_NR_swapoff 225
- #define TARGET_NR_mprotect 226
-@@ -259,18 +347,29 @@
- #define TARGET_NR_set_mempolicy 237
- #define TARGET_NR_migrate_pages 238
- #define TARGET_NR_move_pages 239
-+
- #define TARGET_NR_rt_tgsigqueueinfo 240
- #define TARGET_NR_perf_event_open 241
- #define TARGET_NR_accept4 242
-+#ifndef TARGET_RISCV32
- #define TARGET_NR_recvmmsg 243
-+#endif
-+
- #define TARGET_NR_arch_specific_syscall 244
-+
-+#define TARGET_NR_riscv_flush_icache TARGET_NR_arch_specific_syscall + 15
-+
-+#ifndef TARGET_RISCV32
- #define TARGET_NR_wait4 260
-+#endif
- #define TARGET_NR_prlimit64 261
- #define TARGET_NR_fanotify_init 262
- #define TARGET_NR_fanotify_mark 263
- #define TARGET_NR_name_to_handle_at 264
- #define TARGET_NR_open_by_handle_at 265
-+#ifndef TARGET_RISCV32
- #define TARGET_NR_clock_adjtime 266
-+#endif
- #define TARGET_NR_syncfs 267
- #define TARGET_NR_setns 268
- #define TARGET_NR_sendmmsg 269
-@@ -296,10 +395,67 @@
- #define TARGET_NR_pkey_alloc 289
- #define TARGET_NR_pkey_free 290
- #define TARGET_NR_statx 291
-+#ifndef TARGET_RISCV32
- #define TARGET_NR_io_pgetevents 292
-+#endif
- #define TARGET_NR_rseq 293
- #define TARGET_NR_kexec_file_load 294
- 
--#define TARGET_NR_syscalls (TARGET_NR_kexec_file_load + 1)
-+#ifdef TARGET_RISCV32
-+#define TARGET_NR_clock_gettime64 403
-+#define TARGET_NR_clock_settime64 404
-+#define TARGET_NR_clock_adjtime64 405
-+#define TARGET_NR_clock_getres_time64 406
-+#define TARGET_NR_clock_nanosleep_time64 407
-+#define TARGET_NR_timer_gettime64 408
-+#define TARGET_NR_timer_settime64 409
-+#define TARGET_NR_timerfd_gettime64 410
-+#define TARGET_NR_timerfd_settime64 411
-+#define TARGET_NR_utimensat_time64 412
-+#define TARGET_NR_pselect6_time64 413
-+#define TARGET_NR_ppoll_time64 414
-+#define TARGET_NR_io_pgetevents_time64 416
-+#define TARGET_NR_recvmmsg_time64 417
-+#define TARGET_NR_mq_timedsend_time64 418
-+#define TARGET_NR_mq_timedreceive_time64 419
-+#define TARGET_NR_semtimedop_time64 420
-+#define TARGET_NR_rt_sigtimedwait_time64 421
-+#define TARGET_NR_futex_time64 422
-+#define TARGET_NR_sched_rr_get_interval_time64 423
-+#endif
-+
-+#define TARGET_NR_pidfd_send_signal 424
-+#define TARGET_NR_io_uring_setup 425
-+#define TARGET_NR_io_uring_enter 426
-+#define TARGET_NR_io_uring_register 427
-+#define TARGET_NR_open_tree 428
-+#define TARGET_NR_move_mount 429
-+#define TARGET_NR_fsopen 430
-+#define TARGET_NR_fsconfig 431
-+#define TARGET_NR_fsmount 432
-+#define TARGET_NR_fspick 433
-+#define TARGET_NR_pidfd_open 434
-+#define TARGET_NR_clone3 435
-+
-+#define TARGET_NR_syscalls (TARGET_NR_clone3 + 1)
-+
-+/* Alias some of the older pre 64-bit time_t syscalls to the 64-bit
-+ * ones for RV32. This is based on the list used by glibc. */
-+#ifdef TARGET_RISCV32
-+#define TARGET_NR_futex TARGET_NR_futex_time64
-+#define TARGET_NR_rt_sigtimedwait TARGET_NR_rt_sigtimedwait_time64
-+#define TARGET_NR_ppoll TARGET_NR_ppoll_time64
-+#define TARGET_NR_utimensat TARGET_NR_utimensat_time64
-+#define TARGET_NR_pselect6 TARGET_NR_pselect6_time64
-+#define TARGET_NR_recvmmsg TARGET_NR_recvmmsg_time64
-+#define TARGET_NR_semtimedop TARGET_NR_semtimedop_time64
-+#define TARGET_NR_mq_timedreceive TARGET_NR_mq_timedreceive_time64
-+#define TARGET_NR_mq_timedsend TARGET_NR_mq_timedsend_time64
-+#define TARGET_NR_clock_getres TARGET_NR_clock_getres_time64
-+#define TARGET_NR_timerfd_settime TARGET_NR_timerfd_settime64
-+#define TARGET_NR_timerfd_gettime TARGET_NR_timerfd_gettime64
-+#define TARGET_NR_sched_rr_get_interval TARGET_NR_sched_rr_get_interval_time64
-+#define TARGET_NR_clock_adjtime TARGET_NR_clock_adjtime64
-+#endif
- 
- #endif
--- 
-2.25.0
-
+UGF0Y2hldyBVUkw6IGh0dHBzOi8vcGF0Y2hldy5vcmcvUUVNVS9jb3Zlci4xNTgyMjQwNjU2Lmdp
+dC5hbGlzdGFpci5mcmFuY2lzQHdkYy5jb20vCgoKCkhpLAoKVGhpcyBzZXJpZXMgc2VlbXMgdG8g
+aGF2ZSBzb21lIGNvZGluZyBzdHlsZSBwcm9ibGVtcy4gU2VlIG91dHB1dCBiZWxvdyBmb3IKbW9y
+ZSBpbmZvcm1hdGlvbjoKClN1YmplY3Q6IFtQQVRDSCB2MSAwLzJdICBsaW51eC11c2VyOiBnZW5l
+cmF0ZSBzeXNjYWxsX25yLnNoIGZvciBSSVNDLVYKTWVzc2FnZS1pZDogY292ZXIuMTU4MjI0MDY1
+Ni5naXQuYWxpc3RhaXIuZnJhbmNpc0B3ZGMuY29tClR5cGU6IHNlcmllcwoKPT09IFRFU1QgU0NS
+SVBUIEJFR0lOID09PQojIS9iaW4vYmFzaApnaXQgcmV2LXBhcnNlIGJhc2UgPiAvZGV2L251bGwg
+fHwgZXhpdCAwCmdpdCBjb25maWcgLS1sb2NhbCBkaWZmLnJlbmFtZWxpbWl0IDAKZ2l0IGNvbmZp
+ZyAtLWxvY2FsIGRpZmYucmVuYW1lcyBUcnVlCmdpdCBjb25maWcgLS1sb2NhbCBkaWZmLmFsZ29y
+aXRobSBoaXN0b2dyYW0KLi9zY3JpcHRzL2NoZWNrcGF0Y2gucGwgLS1tYWlsYmFjayBiYXNlLi4K
+PT09IFRFU1QgU0NSSVBUIEVORCA9PT0KClVwZGF0aW5nIDNjOGNmNWE5YzIxZmY4NzgyMTY0ZDFk
+ZWY3ZjQ0YmQ4ODg3MTMzODQKRnJvbSBodHRwczovL2dpdGh1Yi5jb20vcGF0Y2hldy1wcm9qZWN0
+L3FlbXUKICogW25ldyB0YWddICAgICAgICAgcGF0Y2hldy9jb3Zlci4xNTgyMjQwNjU2LmdpdC5h
+bGlzdGFpci5mcmFuY2lzQHdkYy5jb20gLT4gcGF0Y2hldy9jb3Zlci4xNTgyMjQwNjU2LmdpdC5h
+bGlzdGFpci5mcmFuY2lzQHdkYy5jb20KU3dpdGNoZWQgdG8gYSBuZXcgYnJhbmNoICd0ZXN0Jwph
+OGY5NWZmIGxpbnV4LXVzZXIvcmlzY3Y6IFVwZGF0ZSB0aGUgc3lzY2FsbF9ucidzIHRvIHRoZSA1
+LjUga2VybmVsCjhmMzE5ZmUgbGludXgtdXNlcjogUHJvdGVjdCBtb3JlIHN5c2NhbGxzCgo9PT0g
+T1VUUFVUIEJFR0lOID09PQoxLzIgQ2hlY2tpbmcgY29tbWl0IDhmMzE5ZmU0MDQ0ZiAobGludXgt
+dXNlcjogUHJvdGVjdCBtb3JlIHN5c2NhbGxzKQpFUlJPUjogc3BhY2UgcHJvaGliaXRlZCBiZXR3
+ZWVuIGZ1bmN0aW9uIG5hbWUgYW5kIG9wZW4gcGFyZW50aGVzaXMgJygnCiM3NTogRklMRTogbGlu
+dXgtdXNlci9zeXNjYWxsLmM6MTA4ODoKKyNpZiBkZWZpbmVkKFRBUkdFVF9OUl9nZXRybGltaXQp
+IHx8IGRlZmluZWQgKFRBUkdFVF9OUl91Z2V0cmxpbWl0KQoKdG90YWw6IDEgZXJyb3JzLCAwIHdh
+cm5pbmdzLCAxMjEgbGluZXMgY2hlY2tlZAoKUGF0Y2ggMS8yIGhhcyBzdHlsZSBwcm9ibGVtcywg
+cGxlYXNlIHJldmlldy4gIElmIGFueSBvZiB0aGVzZSBlcnJvcnMKYXJlIGZhbHNlIHBvc2l0aXZl
+cyByZXBvcnQgdGhlbSB0byB0aGUgbWFpbnRhaW5lciwgc2VlCkNIRUNLUEFUQ0ggaW4gTUFJTlRB
+SU5FUlMuCgoyLzIgQ2hlY2tpbmcgY29tbWl0IGE4Zjk1ZmY3OGQyMCAobGludXgtdXNlci9yaXNj
+djogVXBkYXRlIHRoZSBzeXNjYWxsX25yJ3MgdG8gdGhlIDUuNSBrZXJuZWwpCldBUk5JTkc6IEJs
+b2NrIGNvbW1lbnRzIHVzZSBhIGxlYWRpbmcgLyogb24gYSBzZXBhcmF0ZSBsaW5lCiMzNzc6IEZJ
+TEU6IGxpbnV4LXVzZXIvcmlzY3Yvc3lzY2FsbF9uci5oOjQ0MjoKKy8qIEFsaWFzIHNvbWUgb2Yg
+dGhlIG9sZGVyIHByZSA2NC1iaXQgdGltZV90IHN5c2NhbGxzIHRvIHRoZSA2NC1iaXQKCldBUk5J
+Tkc6IEJsb2NrIGNvbW1lbnRzIHVzZSBhIHRyYWlsaW5nICovIG9uIGEgc2VwYXJhdGUgbGluZQoj
+Mzc4OiBGSUxFOiBsaW51eC11c2VyL3Jpc2N2L3N5c2NhbGxfbnIuaDo0NDM6CisgKiBvbmVzIGZv
+ciBSVjMyLiBUaGlzIGlzIGJhc2VkIG9uIHRoZSBsaXN0IHVzZWQgYnkgZ2xpYmMuICovCgp0b3Rh
+bDogMCBlcnJvcnMsIDIgd2FybmluZ3MsIDM3MCBsaW5lcyBjaGVja2VkCgpQYXRjaCAyLzIgaGFz
+IHN0eWxlIHByb2JsZW1zLCBwbGVhc2UgcmV2aWV3LiAgSWYgYW55IG9mIHRoZXNlIGVycm9ycwph
+cmUgZmFsc2UgcG9zaXRpdmVzIHJlcG9ydCB0aGVtIHRvIHRoZSBtYWludGFpbmVyLCBzZWUKQ0hF
+Q0tQQVRDSCBpbiBNQUlOVEFJTkVSUy4KPT09IE9VVFBVVCBFTkQgPT09CgpUZXN0IGNvbW1hbmQg
+ZXhpdGVkIHdpdGggY29kZTogMQoKClRoZSBmdWxsIGxvZyBpcyBhdmFpbGFibGUgYXQKaHR0cDov
+L3BhdGNoZXcub3JnL2xvZ3MvY292ZXIuMTU4MjI0MDY1Ni5naXQuYWxpc3RhaXIuZnJhbmNpc0B3
+ZGMuY29tL3Rlc3RpbmcuY2hlY2twYXRjaC8/dHlwZT1tZXNzYWdlLgotLS0KRW1haWwgZ2VuZXJh
+dGVkIGF1dG9tYXRpY2FsbHkgYnkgUGF0Y2hldyBbaHR0cHM6Ly9wYXRjaGV3Lm9yZy9dLgpQbGVh
+c2Ugc2VuZCB5b3VyIGZlZWRiYWNrIHRvIHBhdGNoZXctZGV2ZWxAcmVkaGF0LmNvbQ==
 
