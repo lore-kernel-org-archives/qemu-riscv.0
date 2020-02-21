@@ -1,78 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1j5CDs-0004iE-SY
-	for mharc-qemu-riscv@gnu.org; Fri, 21 Feb 2020 12:36:20 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:38876)
+	id 1j5EHv-00048b-HL
+	for mharc-qemu-riscv@gnu.org; Fri, 21 Feb 2020 14:48:39 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44794)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <peter.maydell@linaro.org>) id 1j5CDp-0004bZ-KW
- for qemu-riscv@nongnu.org; Fri, 21 Feb 2020 12:36:18 -0500
+ (envelope-from <alistair23@gmail.com>) id 1j5EHr-00045r-Du
+ for qemu-riscv@nongnu.org; Fri, 21 Feb 2020 14:48:36 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <peter.maydell@linaro.org>) id 1j5CDn-0000qe-9R
- for qemu-riscv@nongnu.org; Fri, 21 Feb 2020 12:36:16 -0500
-Received: from mail-oi1-x243.google.com ([2607:f8b0:4864:20::243]:46313)
+ (envelope-from <alistair23@gmail.com>) id 1j5EHq-0007YC-2l
+ for qemu-riscv@nongnu.org; Fri, 21 Feb 2020 14:48:35 -0500
+Received: from mail-lf1-x144.google.com ([2a00:1450:4864:20::144]:36298)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <peter.maydell@linaro.org>)
- id 1j5CDn-0000pv-3B
- for qemu-riscv@nongnu.org; Fri, 21 Feb 2020 12:36:15 -0500
-Received: by mail-oi1-x243.google.com with SMTP id a22so2324326oid.13
- for <qemu-riscv@nongnu.org>; Fri, 21 Feb 2020 09:36:15 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ (Exim 4.71) (envelope-from <alistair23@gmail.com>)
+ id 1j5EHp-0007XE-R4; Fri, 21 Feb 2020 14:48:34 -0500
+Received: by mail-lf1-x144.google.com with SMTP id f24so2345984lfh.3;
+ Fri, 21 Feb 2020 11:48:33 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=0hZPLrTx+QxGezTlJEFQJMlOxfvv4M75Fk3m8GySp+k=;
- b=U2b/wbq02FNihsBqsviMPt31jwOChWp25VW+C94NWjLSj9BQTP3TiXjrdP7o/Hr2W3
- uSLOF7xKUTGbjB5nr3MM9e/H9wvkgIGWp0h1tGFNwz2egdNqx38JTNfjp2aRd3znaye5
- HIcIkq5hk83QRvDLr/LNxW6ZWRn7CYwhUpkFmry71tGpSiSFwg9vhD2OSj7jjTIwHuiS
- pvzDRvoHxMOgWXHtt3DBEsx4DFkLAE2AJlWcTRo8+VUoXRH/n2H1eBcCDvcrY8dGDC7I
- pYvhqhP6cv06WiMO8XLBLXdfRPb0dRJLOm/Ps6FBEedGpN16TVdb4sbqcsfT+SkFpoMe
- aQxQ==
+ :cc; bh=sapn+jpPCNk3Dm9ydmgp0LW7y1MLHCMChd43Rt/WXnQ=;
+ b=Ofl7iXyZ5H7Rs+gAIE3lFS/iqBE1mUcBs4RkuMczleShU6R2NxC5RTcOUdDd7tg63q
+ Ml0Iav3Dy48JNH4veL/jbq41BR3T7WxXXllad16sjej6km4cdBQHJdW8vyyZbdCngn16
+ Fv0Gi27HRtkM45ixKtgZjYLXvEGREyfDBXRFTd4sL06KKBRVUhUHc3hREEYybv1NjIB1
+ rvotkkku4rJjmHS3uHneI8f07WUFpGJEgxCLaleyIvN79D9Lm8RgtkOtE3qZEfMFreA5
+ avx2gF6It9vYKtL7yF55B1mEjIEnHwBsLxCoY/JqLnclUp5ThUt2N7kbpcwju2HZKp2A
+ bhpA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=0hZPLrTx+QxGezTlJEFQJMlOxfvv4M75Fk3m8GySp+k=;
- b=pkTRPhHM5Wes85Ln/SE7OV69BZ78RfwV7Xd7d3RPjs6ABGdpuJqi700R839iktukAZ
- pxn9Hbu6qeT+4VAyA8blLI9Szxje59+boc8GXWOvJrZTCacZ/RlgK6oKHPWAqV4VLt+i
- O4DkL3nMptDrFb3z81DiMPZS8kw05FeY6ankO4jOkPTyMaRTWiqxVdrYBIW2zZIDlcU+
- c3YZRobTIoeWzf4czN6JXWCzulJZyRplsk/zIG56Zf+7nFVFXnUOMjaDz7YJ9VR/AX2B
- Hzk3Hj7hjYLuqTDpgJ6SCEbuf0N920i1b4HiT64Bm88ECVH1H21I+nK25ZzwwdXPmfsV
- oWsA==
-X-Gm-Message-State: APjAAAURzLEtlG7qVnv03LG12t3UQ/47qd63HMSn+57krNytYVHjL94Z
- /a8CSiKTR+Zf1OdYV+IZy8x0vgfvbwY0GAyHEE0J4A==
-X-Google-Smtp-Source: APXvYqxBxfiMzNYJBdQd5tbj09NPw89aj7x9fXxH8sgTJ2tSl6KBacWukJH47LxuJTcXu05BUZzIAD44OmjsLSadG9U=
-X-Received: by 2002:a05:6808:3b2:: with SMTP id
- n18mr2834616oie.146.1582306574231; 
- Fri, 21 Feb 2020 09:36:14 -0800 (PST)
+ :message-id:subject:to:cc;
+ bh=sapn+jpPCNk3Dm9ydmgp0LW7y1MLHCMChd43Rt/WXnQ=;
+ b=LVuJtk3g3dO18MJ/OniASxpM47s3SfuUHeXRg7gYwJHFEjai6PcjOzKh/ahx0m/CEk
+ FrQOBRhtPzjL+r9ZQfI1fCfrVeZQhMg62N+0o4puJl2cfK2Fb0TSAgtP6Xm6b7iU7Fbc
+ VGqfkuEH+O0sOqljYiAPhdnhGON/3B1GbSWn5gX/3qmfiLd7lRHtZe9A6VofXWV6iizV
+ FqjkSaYIttA2usY0BqxSBUbAvsIiBHc9vgULPYU6HVGvI09kQRD0ZD1hoeDPu5gfQaW8
+ UA3XBBuqGYTZUIi/064Kq7SHxLBHX+xGj9+3FuIKpaqXq6PRz2RhUU2AzZBdz3xkneMR
+ MVRQ==
+X-Gm-Message-State: APjAAAVnf4zQdFNHcxyTKO4Lo4qKrE+NacTBuc8VyUoTMggpLrvI2FLN
+ lkZ9TGn2dpnFU0rtIhT+wWW4Go0jQOi5udFnVtKmkJsc
+X-Google-Smtp-Source: APXvYqz3cdnLOteJTBjv7wL/GUtS040vtyRfToNdgj245nLbJTEGSp1fCPl669iBuMlsxhkYREpB6G/luAUYAQN1eQI=
+X-Received: by 2002:a19:23d0:: with SMTP id
+ j199mr20721823lfj.137.1582314511946; 
+ Fri, 21 Feb 2020 11:48:31 -0800 (PST)
 MIME-Version: 1.0
-References: <20200221173049.18134-1-philmd@redhat.com>
- <20200221173049.18134-3-philmd@redhat.com>
-In-Reply-To: <20200221173049.18134-3-philmd@redhat.com>
-From: Peter Maydell <peter.maydell@linaro.org>
-Date: Fri, 21 Feb 2020 17:36:03 +0000
-Message-ID: <CAFEAcA8+LWYhNjaXUu-Y2oat1hsKGbt6Hcir_yeNpmY+c6+8KA@mail.gmail.com>
-Subject: Re: [PATCH 2/7] hw/arm: Let devices own the MemoryRegion they create
-To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>
-Cc: QEMU Developers <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "Michael S. Tsirkin" <mst@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>, 
- =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>, 
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Alistair Francis <alistair@alistair23.me>, qemu-arm <qemu-arm@nongnu.org>,
- =?UTF-8?Q?Herv=C3=A9_Poussineau?= <hpoussin@reactos.org>, 
- Peter Chubb <peter.chubb@nicta.com.au>,
- Subbaraya Sundeep <sundeep.lkml@gmail.com>, 
- Aleksandar Rikalo <aleksandar.rikalo@rt-rk.com>,
- Laurent Vivier <laurent@vivier.eu>, Palmer Dabbelt <palmer@dabbelt.com>,
- Jean-Christophe Dubois <jcd@tribudubois.net>, 
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+References: <20200214072127.64330-1-anup.patel@wdc.com>
+ <20200214072127.64330-2-anup.patel@wdc.com>
+In-Reply-To: <20200214072127.64330-2-anup.patel@wdc.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Fri, 21 Feb 2020 11:48:05 -0800
+Message-ID: <CAKmqyKMrTxjpsxcoV_=n-KDSdqoHD9uApK-Fo+Jnofx5sBXN2A@mail.gmail.com>
+Subject: Re: [PATCH 1/3] hw/riscv: Add optional symbol callback ptr to
+ riscv_load_firmware()
+To: Anup Patel <anup.patel@wdc.com>
+Cc: Peter Maydell <peter.maydell@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <Alistair.Francis@wdc.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Joel Stanley <joel@jms.id.au>, Igor Mitsyanko <i.mitsyanko@gmail.com>
+ Atish Patra <atish.patra@wdc.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Anup Patel <anup@brainfault.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::243
+X-Received-From: 2a00:1450:4864:20::144
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -84,66 +72,120 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Feb 2020 17:36:19 -0000
+X-List-Received-Date: Fri, 21 Feb 2020 19:48:37 -0000
 
-On Fri, 21 Feb 2020 at 17:31, Philippe Mathieu-Daud=C3=A9 <philmd@redhat.co=
-m> wrote:
+On Thu, Feb 13, 2020 at 11:24 PM Anup Patel <anup.patel@wdc.com> wrote:
 >
-> To avoid orphean memory regions being added in the /unattached
-
-("orphan")
-
-> QOM container, use the memory_region_owner_nonnull.cocci script
-> to set the correct ownership.
+> This patch adds an optional function pointer, "sym_cb", to
+> riscv_load_firmware() which provides the possibility to access
+> the symbol table during kernel loading.
 >
-> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
+> The pointer is ignored, if supplied with flat (non-elf) firmware image.
+>
+> The Spike board requires it locate the HTIF symbols from firmware ELF
+> passed via "-bios" option.
+>
+> Signed-off-by: Anup Patel <anup.patel@wdc.com>
+
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+
+Alistair
+
 > ---
->  hw/arm/exynos4210.c    | 14 +++++++-------
->  hw/arm/fsl-imx25.c     | 14 +++++++-------
->  hw/arm/fsl-imx31.c     | 10 +++++-----
->  hw/arm/fsl-imx6.c      | 10 +++++-----
->  hw/arm/fsl-imx6ul.c    | 14 +++++++-------
->  hw/arm/msf2-soc.c      |  8 ++++----
->  hw/arm/nrf51_soc.c     |  2 +-
->  hw/arm/stm32f205_soc.c | 10 +++++-----
->  hw/arm/stm32f405_soc.c | 13 +++++++------
->  hw/arm/xlnx-zynqmp.c   | 13 ++++++-------
->  10 files changed, 54 insertions(+), 54 deletions(-)
+>  hw/riscv/boot.c         | 13 ++++++++-----
+>  hw/riscv/sifive_u.c     |  2 +-
+>  hw/riscv/virt.c         |  2 +-
+>  include/hw/riscv/boot.h |  6 ++++--
+>  4 files changed, 14 insertions(+), 9 deletions(-)
 >
-> diff --git a/hw/arm/exynos4210.c b/hw/arm/exynos4210.c
-> index 59a27bdd68..d4b05336ee 100644
-> --- a/hw/arm/exynos4210.c
-> +++ b/hw/arm/exynos4210.c
-> @@ -305,28 +305,28 @@ static void exynos4210_realize(DeviceState *socdev,=
- Error **errp)
->      /*** Memory ***/
+> diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
+> index 027303d2a3..7ec94dc701 100644
+> --- a/hw/riscv/boot.c
+> +++ b/hw/riscv/boot.c
+> @@ -36,7 +36,8 @@
 >
->      /* Chip-ID and OMR */
-> -    memory_region_init_io(&s->chipid_mem, NULL, &exynos4210_chipid_and_o=
-mr_ops,
-> -        NULL, "exynos4210.chipid", sizeof(chipid_and_omr));
-> +    memory_region_init_io(&s->chipid_mem, OBJECT(socdev),
-> +                          &exynos4210_chipid_and_omr_ops, NULL,
-> +                          "exynos4210.chipid", sizeof(chipid_and_omr));
->      memory_region_add_subregion(system_mem, EXYNOS4210_CHIPID_ADDR,
->                                  &s->chipid_mem);
+>  void riscv_find_and_load_firmware(MachineState *machine,
+>                                    const char *default_machine_firmware,
+> -                                  hwaddr firmware_load_addr)
+> +                                  hwaddr firmware_load_addr,
+> +                                  symbol_fn_t sym_cb)
+>  {
+>      char *firmware_filename = NULL;
 >
->      /* Internal ROM */
-> -    memory_region_init_ram(&s->irom_mem, NULL, "exynos4210.irom",
-> +    memory_region_init_ram(&s->irom_mem, OBJECT(socdev), "exynos4210.iro=
-m",
->                             EXYNOS4210_IROM_SIZE, &error_fatal);
-
-I have a feeling that the owner of a RAM memory region affects
-the name we use for the underlying ramblock, which in turn
-is used in the on-the-wire data stream in migration, which means
-that changing ownership breaks migration compatibility.
-That's probably OK in most cases as we don't care too much
-about migration-compat on most boards, but I think it does
-mean that you want to keep those changes separated out from
-the ones for IO and alias regions, which I think shouldn't
-have visible effects.
-
-thanks
--- PMM
+> @@ -76,7 +77,7 @@ void riscv_find_and_load_firmware(MachineState *machine,
+>
+>      if (firmware_filename) {
+>          /* If not "none" load the firmware */
+> -        riscv_load_firmware(firmware_filename, firmware_load_addr);
+> +        riscv_load_firmware(firmware_filename, firmware_load_addr, sym_cb);
+>          g_free(firmware_filename);
+>      }
+>  }
+> @@ -96,12 +97,14 @@ char *riscv_find_firmware(const char *firmware_filename)
+>  }
+>
+>  target_ulong riscv_load_firmware(const char *firmware_filename,
+> -                                 hwaddr firmware_load_addr)
+> +                                 hwaddr firmware_load_addr,
+> +                                 symbol_fn_t sym_cb)
+>  {
+>      uint64_t firmware_entry, firmware_start, firmware_end;
+>
+> -    if (load_elf(firmware_filename, NULL, NULL, NULL, &firmware_entry,
+> -                 &firmware_start, &firmware_end, 0, EM_RISCV, 1, 0) > 0) {
+> +    if (load_elf_ram_sym(firmware_filename, NULL, NULL, NULL,
+> +                         &firmware_entry, &firmware_start, &firmware_end, 0,
+> +                         EM_RISCV, 1, 0, NULL, true, sym_cb) > 0) {
+>          return firmware_entry;
+>      }
+>
+> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+> index 0140e95732..0c84215f42 100644
+> --- a/hw/riscv/sifive_u.c
+> +++ b/hw/riscv/sifive_u.c
+> @@ -341,7 +341,7 @@ static void riscv_sifive_u_init(MachineState *machine)
+>      create_fdt(s, memmap, machine->ram_size, machine->kernel_cmdline);
+>
+>      riscv_find_and_load_firmware(machine, BIOS_FILENAME,
+> -                                 memmap[SIFIVE_U_DRAM].base);
+> +                                 memmap[SIFIVE_U_DRAM].base, NULL);
+>
+>      if (machine->kernel_filename) {
+>          uint64_t kernel_entry = riscv_load_kernel(machine->kernel_filename,
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index c44b865959..90a5bfef63 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -476,7 +476,7 @@ static void riscv_virt_board_init(MachineState *machine)
+>                                  mask_rom);
+>
+>      riscv_find_and_load_firmware(machine, BIOS_FILENAME,
+> -                                 memmap[VIRT_DRAM].base);
+> +                                 memmap[VIRT_DRAM].base, NULL);
+>
+>      if (machine->kernel_filename) {
+>          uint64_t kernel_entry = riscv_load_kernel(machine->kernel_filename,
+> diff --git a/include/hw/riscv/boot.h b/include/hw/riscv/boot.h
+> index df80051fbc..474a940ad5 100644
+> --- a/include/hw/riscv/boot.h
+> +++ b/include/hw/riscv/boot.h
+> @@ -24,10 +24,12 @@
+>
+>  void riscv_find_and_load_firmware(MachineState *machine,
+>                                    const char *default_machine_firmware,
+> -                                  hwaddr firmware_load_addr);
+> +                                  hwaddr firmware_load_addr,
+> +                                  symbol_fn_t sym_cb);
+>  char *riscv_find_firmware(const char *firmware_filename);
+>  target_ulong riscv_load_firmware(const char *firmware_filename,
+> -                                 hwaddr firmware_load_addr);
+> +                                 hwaddr firmware_load_addr,
+> +                                 symbol_fn_t sym_cb);
+>  target_ulong riscv_load_kernel(const char *kernel_filename,
+>                                 symbol_fn_t sym_cb);
+>  hwaddr riscv_load_initrd(const char *filename, uint64_t mem_size,
+> --
+> 2.17.1
+>
+>
 
