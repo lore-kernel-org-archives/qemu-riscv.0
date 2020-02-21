@@ -1,52 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1j4vIN-00063G-LS
-	for mharc-qemu-riscv@gnu.org; Thu, 20 Feb 2020 18:31:51 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:58482)
+	id 1j4yDL-0000ki-OS
+	for mharc-qemu-riscv@gnu.org; Thu, 20 Feb 2020 21:38:51 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59009)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <no-reply@patchew.org>) id 1j4vIJ-0005zH-UT
- for qemu-riscv@nongnu.org; Thu, 20 Feb 2020 18:31:49 -0500
+ (envelope-from <bmeng.cn@gmail.com>) id 1j4yDJ-0000is-RW
+ for qemu-riscv@nongnu.org; Thu, 20 Feb 2020 21:38:50 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <no-reply@patchew.org>) id 1j4vII-0002xm-Q4
- for qemu-riscv@nongnu.org; Thu, 20 Feb 2020 18:31:47 -0500
-Resent-Date: Thu, 20 Feb 2020 18:31:47 -0500
-Resent-Message-Id: <E1j4vII-0002xm-Q4@eggs.gnu.org>
-Received: from sender4-of-o51.zoho.com ([136.143.188.51]:21112)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <no-reply@patchew.org>)
- id 1j4vIF-0002wE-Bi; Thu, 20 Feb 2020 18:31:43 -0500
-ARC-Seal: i=1; a=rsa-sha256; t=1582241493; cv=none; 
- d=zohomail.com; s=zohoarc; 
- b=IBZx4vvC2CcPSCDpcoKEeD7raB91ny277podRleZjP0/CBDymKleG7HRi9hfmjrIMLh7hGAJgv38MEX+I9UKmXK55lk9k0TPtpj1WEQygDFS4ZUcjiGFVufWfi5Hc3aXx6R0V/NJjF7uT3Bs+crWZzPISJeXN06+TkTdIVdtQQw=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1582241493;
- h=Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:MIME-Version:Message-ID:Reply-To:Subject:To;
- bh=DybI+LTU4t5xk9booofuIZWmeqXuhmJDgSjNIXyx85I=; 
- b=iQ3w8lJQLWZG6tRYd9JYn+cBa7ao7cohSiA8xH9wotSRnR3WMlS0jAxe9xRR5L5OfCms6egelx6DMwWT8o9j5v+/4Hqmyh6LQtYo0JCpsqGUiSkVvrR36hOeWX3/DDES68MpyeO9hM1gp3XH78vUaJXJ4KjNtPciUStwHAaAnEk=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
- dkim=pass  header.i=patchew.org;
- spf=pass  smtp.mailfrom=no-reply@patchew.org;
- dmarc=pass header.from=<no-reply@patchew.org>
- header.from=<no-reply@patchew.org>
-Received: from [172.17.0.3] (23.253.156.214 [23.253.156.214]) by
- mx.zohomail.com with SMTPS id 1582241491341404.01756982908;
- Thu, 20 Feb 2020 15:31:31 -0800 (PST)
-Reply-To: <qemu-devel@nongnu.org>
-In-Reply-To: <cover.1582240656.git.alistair.francis@wdc.com>
-Subject: Re: [PATCH v1 0/2]  linux-user: generate syscall_nr.sh for RISC-V
-Message-ID: <158224149003.31180.5954402657995887989@a1bbccc8075a>
+ (envelope-from <bmeng.cn@gmail.com>) id 1j4yDI-0007ba-Tk
+ for qemu-riscv@nongnu.org; Thu, 20 Feb 2020 21:38:49 -0500
+Received: from mail-yw1-xc30.google.com ([2607:f8b0:4864:20::c30]:36504)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
+ id 1j4yDG-0007UZ-PQ; Thu, 20 Feb 2020 21:38:46 -0500
+Received: by mail-yw1-xc30.google.com with SMTP id n184so438813ywc.3;
+ Thu, 20 Feb 2020 18:38:46 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=9mJqNg+kd+Gnur2BCeF91WJfZ2SqDXmGECeJIATH4fY=;
+ b=ofK53K3tKYbQyevhOmAsegcpMBB1URHWKWMmxFG5WzodnbIY3SdBQAiDaeScAS4DmK
+ 2vXfaJbWtqxCPdhCmU5XBDgwRzIwTBPN2eGTExpB+sDFmrw1bEL9AnYIDcI8NBifZEly
+ adk0C9MgTq7+Vdn27bKBonSu+hWzwhud92cVgy7o+uLA8VP1GQa1d0Sh1fxm1ScZWCDN
+ B42foE/ZWyMKG50AgHNe+f1yUTagmGL3qNruWOLQLCVLAyJQNnLmTjZ8j2v2mZmeHL4T
+ 5Kz9jYwhmqslICKR/eEd/Hvh+TdNcSxiolYLn4FV+bgTAiHvNZTUOM9Md6SLIv3Q2PrH
+ XN5A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=9mJqNg+kd+Gnur2BCeF91WJfZ2SqDXmGECeJIATH4fY=;
+ b=QTyY4DVGW8MVj6eo2nv9oDtpWgRZ/T3FIbw3lwc/Ze3qoiYY89Jj17BWRzfHjLBCZ4
+ SpfeWogjfiMmbc5+XEacPFnJok5MJWgWHDZ6GHw4vi66W1R2Lwsy9GNLSmDfqZgjBgQ7
+ B0cho7NYN2l4FcLUPPDrJ7MMOrJfyTtf+qRbEFi4286aoS1XLXay5es7IFd4MM1fREw+
+ ORSTDrovOYEuUfRia2YGF12t2tu5eIDuY2PeqMEU4SLPqzvMkH3LQZXnGQvWRZpeTQn/
+ t2G4AMOGO9XCwPhz+LHMzbAmV6YwT87AK79yBfMM6nNahVe65OBJY2VtpHU4rOl9pt/Q
+ IOmg==
+X-Gm-Message-State: APjAAAW0gND18XNAD++mRbqtvv2Qouew4TCHaTk5Fe40vJfFHazel9Gf
+ WzZ0XiwoO4P+i9qw+ThGLnmHn9aCBBwWDmFak1A=
+X-Google-Smtp-Source: APXvYqzycAbddCUu5M52aui6RtGg3wAB8VVWFjrIkikTw2jazsAnA5pgI/1UXiMQ9lj2327ApdDZj+sqCpcvnZDP2ZI=
+X-Received: by 2002:a81:8606:: with SMTP id w6mr27116959ywf.137.1582252726048; 
+ Thu, 20 Feb 2020 18:38:46 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-Resent-From: 
-From: no-reply@patchew.org
-To: alistair.francis@wdc.com
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
- palmer@dabbelt.com, laurent@vivier.eu, alistair23@gmail.com
-Date: Thu, 20 Feb 2020 15:31:31 -0800 (PST)
-X-ZohoMailClient: External
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
- [fuzzy]
-X-Received-From: 136.143.188.51
+References: <1582209758-2996-1-git-send-email-bmeng.cn@gmail.com>
+ <f92f1ec7-ac03-a012-f232-32c533beb9d2@redhat.com>
+In-Reply-To: <f92f1ec7-ac03-a012-f232-32c533beb9d2@redhat.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Fri, 21 Feb 2020 10:38:34 +0800
+Message-ID: <CAEUhbmV9ouup0aqrUvEfpGFAoggVNJXw-PLD0xYurBXg+h3OMA@mail.gmail.com>
+Subject: Re: [PATCH 1/2] riscv: roms: Add 32-bit OpenSBI firmware image for
+ sifive_u
+To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Palmer Dabbelt <palmerdabbelt@google.com>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2607:f8b0:4864:20::c30
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -58,48 +72,43 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Feb 2020 23:31:49 -0000
+X-List-Received-Date: Fri, 21 Feb 2020 02:38:50 -0000
 
-UGF0Y2hldyBVUkw6IGh0dHBzOi8vcGF0Y2hldy5vcmcvUUVNVS9jb3Zlci4xNTgyMjQwNjU2Lmdp
-dC5hbGlzdGFpci5mcmFuY2lzQHdkYy5jb20vCgoKCkhpLAoKVGhpcyBzZXJpZXMgc2VlbXMgdG8g
-aGF2ZSBzb21lIGNvZGluZyBzdHlsZSBwcm9ibGVtcy4gU2VlIG91dHB1dCBiZWxvdyBmb3IKbW9y
-ZSBpbmZvcm1hdGlvbjoKClN1YmplY3Q6IFtQQVRDSCB2MSAwLzJdICBsaW51eC11c2VyOiBnZW5l
-cmF0ZSBzeXNjYWxsX25yLnNoIGZvciBSSVNDLVYKTWVzc2FnZS1pZDogY292ZXIuMTU4MjI0MDY1
-Ni5naXQuYWxpc3RhaXIuZnJhbmNpc0B3ZGMuY29tClR5cGU6IHNlcmllcwoKPT09IFRFU1QgU0NS
-SVBUIEJFR0lOID09PQojIS9iaW4vYmFzaApnaXQgcmV2LXBhcnNlIGJhc2UgPiAvZGV2L251bGwg
-fHwgZXhpdCAwCmdpdCBjb25maWcgLS1sb2NhbCBkaWZmLnJlbmFtZWxpbWl0IDAKZ2l0IGNvbmZp
-ZyAtLWxvY2FsIGRpZmYucmVuYW1lcyBUcnVlCmdpdCBjb25maWcgLS1sb2NhbCBkaWZmLmFsZ29y
-aXRobSBoaXN0b2dyYW0KLi9zY3JpcHRzL2NoZWNrcGF0Y2gucGwgLS1tYWlsYmFjayBiYXNlLi4K
-PT09IFRFU1QgU0NSSVBUIEVORCA9PT0KClVwZGF0aW5nIDNjOGNmNWE5YzIxZmY4NzgyMTY0ZDFk
-ZWY3ZjQ0YmQ4ODg3MTMzODQKRnJvbSBodHRwczovL2dpdGh1Yi5jb20vcGF0Y2hldy1wcm9qZWN0
-L3FlbXUKICogW25ldyB0YWddICAgICAgICAgcGF0Y2hldy9jb3Zlci4xNTgyMjQwNjU2LmdpdC5h
-bGlzdGFpci5mcmFuY2lzQHdkYy5jb20gLT4gcGF0Y2hldy9jb3Zlci4xNTgyMjQwNjU2LmdpdC5h
-bGlzdGFpci5mcmFuY2lzQHdkYy5jb20KU3dpdGNoZWQgdG8gYSBuZXcgYnJhbmNoICd0ZXN0Jwph
-OGY5NWZmIGxpbnV4LXVzZXIvcmlzY3Y6IFVwZGF0ZSB0aGUgc3lzY2FsbF9ucidzIHRvIHRoZSA1
-LjUga2VybmVsCjhmMzE5ZmUgbGludXgtdXNlcjogUHJvdGVjdCBtb3JlIHN5c2NhbGxzCgo9PT0g
-T1VUUFVUIEJFR0lOID09PQoxLzIgQ2hlY2tpbmcgY29tbWl0IDhmMzE5ZmU0MDQ0ZiAobGludXgt
-dXNlcjogUHJvdGVjdCBtb3JlIHN5c2NhbGxzKQpFUlJPUjogc3BhY2UgcHJvaGliaXRlZCBiZXR3
-ZWVuIGZ1bmN0aW9uIG5hbWUgYW5kIG9wZW4gcGFyZW50aGVzaXMgJygnCiM3NTogRklMRTogbGlu
-dXgtdXNlci9zeXNjYWxsLmM6MTA4ODoKKyNpZiBkZWZpbmVkKFRBUkdFVF9OUl9nZXRybGltaXQp
-IHx8IGRlZmluZWQgKFRBUkdFVF9OUl91Z2V0cmxpbWl0KQoKdG90YWw6IDEgZXJyb3JzLCAwIHdh
-cm5pbmdzLCAxMjEgbGluZXMgY2hlY2tlZAoKUGF0Y2ggMS8yIGhhcyBzdHlsZSBwcm9ibGVtcywg
-cGxlYXNlIHJldmlldy4gIElmIGFueSBvZiB0aGVzZSBlcnJvcnMKYXJlIGZhbHNlIHBvc2l0aXZl
-cyByZXBvcnQgdGhlbSB0byB0aGUgbWFpbnRhaW5lciwgc2VlCkNIRUNLUEFUQ0ggaW4gTUFJTlRB
-SU5FUlMuCgoyLzIgQ2hlY2tpbmcgY29tbWl0IGE4Zjk1ZmY3OGQyMCAobGludXgtdXNlci9yaXNj
-djogVXBkYXRlIHRoZSBzeXNjYWxsX25yJ3MgdG8gdGhlIDUuNSBrZXJuZWwpCldBUk5JTkc6IEJs
-b2NrIGNvbW1lbnRzIHVzZSBhIGxlYWRpbmcgLyogb24gYSBzZXBhcmF0ZSBsaW5lCiMzNzc6IEZJ
-TEU6IGxpbnV4LXVzZXIvcmlzY3Yvc3lzY2FsbF9uci5oOjQ0MjoKKy8qIEFsaWFzIHNvbWUgb2Yg
-dGhlIG9sZGVyIHByZSA2NC1iaXQgdGltZV90IHN5c2NhbGxzIHRvIHRoZSA2NC1iaXQKCldBUk5J
-Tkc6IEJsb2NrIGNvbW1lbnRzIHVzZSBhIHRyYWlsaW5nICovIG9uIGEgc2VwYXJhdGUgbGluZQoj
-Mzc4OiBGSUxFOiBsaW51eC11c2VyL3Jpc2N2L3N5c2NhbGxfbnIuaDo0NDM6CisgKiBvbmVzIGZv
-ciBSVjMyLiBUaGlzIGlzIGJhc2VkIG9uIHRoZSBsaXN0IHVzZWQgYnkgZ2xpYmMuICovCgp0b3Rh
-bDogMCBlcnJvcnMsIDIgd2FybmluZ3MsIDM3MCBsaW5lcyBjaGVja2VkCgpQYXRjaCAyLzIgaGFz
-IHN0eWxlIHByb2JsZW1zLCBwbGVhc2UgcmV2aWV3LiAgSWYgYW55IG9mIHRoZXNlIGVycm9ycwph
-cmUgZmFsc2UgcG9zaXRpdmVzIHJlcG9ydCB0aGVtIHRvIHRoZSBtYWludGFpbmVyLCBzZWUKQ0hF
-Q0tQQVRDSCBpbiBNQUlOVEFJTkVSUy4KPT09IE9VVFBVVCBFTkQgPT09CgpUZXN0IGNvbW1hbmQg
-ZXhpdGVkIHdpdGggY29kZTogMQoKClRoZSBmdWxsIGxvZyBpcyBhdmFpbGFibGUgYXQKaHR0cDov
-L3BhdGNoZXcub3JnL2xvZ3MvY292ZXIuMTU4MjI0MDY1Ni5naXQuYWxpc3RhaXIuZnJhbmNpc0B3
-ZGMuY29tL3Rlc3RpbmcuY2hlY2twYXRjaC8/dHlwZT1tZXNzYWdlLgotLS0KRW1haWwgZ2VuZXJh
-dGVkIGF1dG9tYXRpY2FsbHkgYnkgUGF0Y2hldyBbaHR0cHM6Ly9wYXRjaGV3Lm9yZy9dLgpQbGVh
-c2Ugc2VuZCB5b3VyIGZlZWRiYWNrIHRvIHBhdGNoZXctZGV2ZWxAcmVkaGF0LmNvbQ==
+Hi Philippe,
+
+On Fri, Feb 21, 2020 at 1:31 AM Philippe Mathieu-Daud=C3=A9
+<philmd@redhat.com> wrote:
+>
+> Hi Bin,
+>
+> On 2/20/20 3:42 PM, Bin Meng wrote:
+> > Although the real world SiFive HiFive Unleashed board is a 64-bit
+> > hardware configuration, with QEMU it is possible to test 32-bit
+> > configuration with the same hardware features.
+> >
+> > This updates the roms Makefile to add the build rules for creating
+> > the 32-bit OpenSBI firmware image for sifive_u machine. A pre-built
+> > OpenSBI image (built from commit 3e7d666) has been added as the
+> > default bios for 32-bit sifive_u machine.
+>
+> With QEMU:
+>
+> fatal: ambiguous argument '3e7d666': unknown revision or path not in the
+> working tree.
+>
+> This looks like an OpenSBI commit but QEMU only include up to v0.5.
+>
+> Can you build v0.5? Else can you update the submodule?
+>
+
+Will do in v2.
+
+> Also, can you add a CI job to build this, so we have reproducible builds
+> (see QEMU commit 71920809ceabed as example)?
+
+I cannot find any document for how to test CI job with gitlab CI. Does
+QEMU has a public CI runner for testing?
+
+Regards,
+Bin
 
