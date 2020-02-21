@@ -1,17 +1,17 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1j5C8u-0006PH-Ic
-	for mharc-qemu-riscv@gnu.org; Fri, 21 Feb 2020 12:31:12 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:38179)
+	id 1j5C8v-0006RE-81
+	for mharc-qemu-riscv@gnu.org; Fri, 21 Feb 2020 12:31:13 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:38164)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <philmd@redhat.com>) id 1j5C8r-0006IE-SK
- for qemu-riscv@nongnu.org; Fri, 21 Feb 2020 12:31:11 -0500
+ (envelope-from <philmd@redhat.com>) id 1j5C8r-0006HM-Ge
+ for qemu-riscv@nongnu.org; Fri, 21 Feb 2020 12:31:10 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <philmd@redhat.com>) id 1j5C8q-00081V-Fp
+ (envelope-from <philmd@redhat.com>) id 1j5C8q-00081M-9j
  for qemu-riscv@nongnu.org; Fri, 21 Feb 2020 12:31:09 -0500
-Received: from us-smtp-delivery-1.mimecast.com ([205.139.110.120]:51211
+Received: from us-smtp-delivery-1.mimecast.com ([205.139.110.120]:50072
  helo=us-smtp-1.mimecast.com)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <philmd@redhat.com>) id 1j5C8q-00081A-BO
+ (Exim 4.71) (envelope-from <philmd@redhat.com>) id 1j5C8q-000817-63
  for qemu-riscv@nongnu.org; Fri, 21 Feb 2020 12:31:08 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
  s=mimecast20190719; t=1582306267;
@@ -19,40 +19,40 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=iIJbNClAaopu3XcwBy22eUj/Xx5fmW+fWgqNqWuWF1g=;
- b=h1ETS4/G0b/xmFkGDnuajaBdMtKjNjqPtwxrEy1cBuHJr/G/fXiLKIinqv02V2M44e7GV5
- PRK0Nb/LDx4twwIMxxEe3z93TS+dPY56Qgi43UorSmgtTXoewHjakGhEtPAL5rDILOt284
- w5xFZHLMTOUPLKQyCdlqfud3omugMcE=
-Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
- [209.85.221.69]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-46-GbDSxIiyN5SdRIl4Cdug_g-1; Fri, 21 Feb 2020 12:30:56 -0500
-X-MC-Unique: GbDSxIiyN5SdRIl4Cdug_g-1
-Received: by mail-wr1-f69.google.com with SMTP id d8so1312081wrq.12
- for <qemu-riscv@nongnu.org>; Fri, 21 Feb 2020 09:30:56 -0800 (PST)
+ bh=WcJ0r25XnABvMzyrrGJORHDPS5fue3w9osOFGOe2Mkc=;
+ b=ESUscsSldpayKZq6GbAqKDqn3745z+nJuq29aBjfZ1Q7p2xXJ1NqiL58qTVyZZH6h82PET
+ +S/4qDiBbJyvwbTjnAvU4oCn75qy3EHHN8OPQiCnFErF7GFsXgSm9wOrNRFB6lCYF6u+Zi
+ Jfk/w5XjoVDDKRP+7phvu+8L8LEv1SM=
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-60-QTN2jR8SM1qUvJGuu-eXEw-1; Fri, 21 Feb 2020 12:31:05 -0500
+X-MC-Unique: QTN2jR8SM1qUvJGuu-eXEw-1
+Received: by mail-wm1-f72.google.com with SMTP id u11so902905wmb.4
+ for <qemu-riscv@nongnu.org>; Fri, 21 Feb 2020 09:31:04 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=WhcONAkiFDeuSeZsi9vQPsSpTSVQ47zvNIPLgZ1YRDk=;
- b=ju+X/OOkY7CXwoiZci+6nPQnLxZr+NHf514NzewOmAfTeKSOJEG1oP3KzmnpBppDCY
- aGC78Ozltd4TJBnRU4Ca88qkHdp8doAARueY8uDLDZR5DY4W4pFPnr7DNAksCuvj6U7r
- jzmTEmsiHt+4FCy8WUUe2QTBfdhOSxWgq57JK8oKyI9jxCDWbLPJxhykKgXllA1/vYja
- M7KqsV9gRSF94OoYbp+uqtpgfAMo+/hmwH8uljuwvJur9gXGm1WdWCUrh7enEw+STuQj
- N/hd9frUslrkQyT3d63t8eSbsrpoaEqfNor047sABwmuZkAh+xNertNFG7bEMh38xL89
- Tbcg==
-X-Gm-Message-State: APjAAAU3IHBwoRojjRBuVMZDYd6QO7njPOgdU73nWyYCpjliCG/k3z5m
- tUn3b2rQBc+IkYsMagxmCu+tTgSwdj3IFDMlDj48NyYzxMI3TOWjGmqMOLutPXHD37wq+lmstvu
- 5m1TQ3u+FbHNs7l4=
-X-Received: by 2002:a5d:4a06:: with SMTP id m6mr50053543wrq.155.1582306254965; 
- Fri, 21 Feb 2020 09:30:54 -0800 (PST)
-X-Google-Smtp-Source: APXvYqy0eeMUTxcT7eJ1BFPV35jFa5u7G1EKn9bk9D2WAVnrHFmnGoyOcBdg2D1PUH07W7NO+HPBBQ==
-X-Received: by 2002:a5d:4a06:: with SMTP id m6mr50053522wrq.155.1582306254743; 
- Fri, 21 Feb 2020 09:30:54 -0800 (PST)
+ bh=vBRFsAffF41rgxvlY5ZKXchGXzJT1TmiIiTOimH9EdI=;
+ b=SZL/5JfHFkD2+OFgR2D5WQqs2MFKzSUsQk0BiEbvp7Ggk3yFtYu3USmypdoOiMFG97
+ 2la5nhnfpX/pNX4463XE+/l/d5zWMqOXYXzfLsqbaj9iJauN3ZNAEVgkrTVvRn5syUkw
+ 5Pc4Q125vzk2Np9FWfEMKokw4y8r96fXvhEdzB4rQVZswI4rLo7CXMXi70wCr04KqWhv
+ bbC3qKGYmxggYNk1RQd9Lusvrj/LvOXRxB8G/bd+hHICFdA4K7jF7PiXpf2XjxYPxyAB
+ sJT5B5cibHXwuUWZdFBcr+UlwHstJgOa6b5bRBC7oR+3SmhZnDS1LzeNTsvYVm5ypq8l
+ EYZw==
+X-Gm-Message-State: APjAAAVWEyWJjMtk5QeN98ZECK1D/1bSdtv0bbIbrgoCSqyfl8/b6/M1
+ vNfLbyAYIBLqsDcCi1rtZ5bu3whOCKJq0UUGkcSb1xqj1eNztjK9Ak0A1OY+z3/BDQE6lN86ykj
+ Z5HNXBmCGgYRSaFg=
+X-Received: by 2002:a1c:bdc6:: with SMTP id n189mr5069508wmf.102.1582306263743; 
+ Fri, 21 Feb 2020 09:31:03 -0800 (PST)
+X-Google-Smtp-Source: APXvYqzEI/3oNsoby0bNnihrImcdqmlWs6JCexTdc29W5L27hyKcBACqbzBuXeY5ABZ/RF+Qns1Heg==
+X-Received: by 2002:a1c:bdc6:: with SMTP id n189mr5069492wmf.102.1582306263543; 
+ Fri, 21 Feb 2020 09:31:03 -0800 (PST)
 Received: from x1w.redhat.com (78.red-88-21-202.staticip.rima-tde.net.
  [88.21.202.78])
- by smtp.gmail.com with ESMTPSA id h18sm5000871wrv.78.2020.02.21.09.30.52
+ by smtp.gmail.com with ESMTPSA id h18sm5000871wrv.78.2020.02.21.09.31.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 21 Feb 2020 09:30:53 -0800 (PST)
+ Fri, 21 Feb 2020 09:31:03 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, "Michael S. Tsirkin" <mst@redhat.com>,
@@ -73,10 +73,9 @@ Cc: qemu-riscv@nongnu.org, "Michael S. Tsirkin" <mst@redhat.com>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
  Joel Stanley <joel@jms.id.au>, Igor Mitsyanko <i.mitsyanko@gmail.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
-Subject: [PATCH 1/7] scripts/coccinelle: Add a script to let devices own their
- MemoryRegions
-Date: Fri, 21 Feb 2020 18:30:43 +0100
-Message-Id: <20200221173049.18134-2-philmd@redhat.com>
+Subject: [PATCH 6/7] hw/dma: Let devices own the MemoryRegion they create
+Date: Fri, 21 Feb 2020 18:30:48 +0100
+Message-Id: <20200221173049.18134-7-philmd@redhat.com>
 X-Mailer: git-send-email 2.21.1
 In-Reply-To: <20200221173049.18134-1-philmd@redhat.com>
 References: <20200221173049.18134-1-philmd@redhat.com>
@@ -101,126 +100,47 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Fri, 21 Feb 2020 17:31:11 -0000
 
-When a device creates a MemoryRegion without setting its ownership,
-the MemoryRegion is added to the machine "/unattached" container in
-the QOM tree.
-
-Example with the Samsung SMDKC210 board:
-
-  $ arm-softmmu/qemu-system-arm -M smdkc210 -S -monitor stdio
-  (qemu) info qom-tree
-  /machine (smdkc210-machine)
-    /unattached (container)
-      /io[0] (qemu:memory-region)
-      /exynos4210.dram0[0] (qemu:memory-region)
-      /exynos4210.irom[0] (qemu:memory-region)
-      /exynos4210.iram[0] (qemu:memory-region)
-      /exynos4210.chipid[0] (qemu:memory-region)
-      ...
-      /device[26] (exynos4210.uart)
-        /exynos4210.uart[0] (qemu:memory-region)
-    /soc (exynos4210)
-      ^
-       \__ [*]
-
-The irom/iram/chipid regions should go under 'soc' at [*].
-
-Add a coccinelle script to do automatic semantic patching.
+To avoid orphean memory regions being added in the /unattached
+QOM container, use the memory_region_owner_nonnull.cocci script
+to set the correct ownership.
 
 Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
 ---
- .../memory_region_owner_nonnull.cocci         | 80 +++++++++++++++++++
- 1 file changed, 80 insertions(+)
- create mode 100644 scripts/coccinelle/memory_region_owner_nonnull.cocci
+ hw/dma/i8257.c  | 2 +-
+ hw/dma/rc4030.c | 4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/scripts/coccinelle/memory_region_owner_nonnull.cocci b/scripts=
-/coccinelle/memory_region_owner_nonnull.cocci
-new file mode 100644
-index 0000000000..6748a200b2
---- /dev/null
-+++ b/scripts/coccinelle/memory_region_owner_nonnull.cocci
-@@ -0,0 +1,80 @@
-+/*
-+  Usage:
-+
-+    spatch \
-+        --macro-file scripts/cocci-macro-file.h \
-+        --sp-file scripts/coccinelle/memory_region_owner_nonnull.cocci \
-+        --keep-comments \
-+        --in-place \
-+        --dir .
-+
-+*/
-+
-+// Device is owner
-+@@
-+typedef DeviceState;
-+identifier device_fn, dev, obj;
-+expression E1, E2, E3, E4, E5;
-+@@
-+static void device_fn(DeviceState *dev, ...)
-+{
-+  ...
-+  Object *obj =3D OBJECT(dev);
-+  <+...
-+(
-+- memory_region_init(E1, NULL, E2, E3);
-++ memory_region_init(E1, obj, E2, E3);
-+|
-+- memory_region_init_io(E1, NULL, E2, E3, E4, E5);
-++ memory_region_init_io(E1, obj, E2, E3, E4, E5);
-+|
-+- memory_region_init_alias(E1, NULL, E2, E3, E4, E5);
-++ memory_region_init_alias(E1, obj, E2, E3, E4, E5);
-+|
-+- memory_region_init_rom(E1, NULL, E2, E3, E4);
-++ memory_region_init_rom(E1, obj, E2, E3, E4);
-+|
-+- memory_region_init_ram(E1, NULL, E2, E3, E4);
-++ memory_region_init_ram(E1, obj, E2, E3, E4);
-+|
-+- memory_region_init_ram_ptr(E1, NULL, E2, E3, E4);
-++ memory_region_init_ram_ptr(E1, obj, E2, E3, E4);
-+|
-+- memory_region_init_ram_shared_nomigrate(E1, NULL, E2, E3, E4, E5);
-++ memory_region_init_ram_shared_nomigrate(E1, obj, E2, E3, E4, E5);
-+)
-+  ...+>
-+}
-+
-+// Device is owner
-+@@
-+identifier device_fn, dev;
-+expression E1, E2, E3, E4, E5;
-+@@
-+static void device_fn(DeviceState *dev, ...)
-+{
-+  <+...
-+(
-+- memory_region_init(E1, NULL, E2, E3);
-++ memory_region_init(E1, OBJECT(dev), E2, E3);
-+|
-+- memory_region_init_io(E1, NULL, E2, E3, E4, E5);
-++ memory_region_init_io(E1, OBJECT(dev), E2, E3, E4, E5);
-+|
-+- memory_region_init_alias(E1, NULL, E2, E3, E4, E5);
-++ memory_region_init_alias(E1, OBJECT(dev), E2, E3, E4, E5);
-+|
-+- memory_region_init_rom(E1, NULL, E2, E3, E4);
-++ memory_region_init_rom(E1, OBJECT(dev), E2, E3, E4);
-+|
-+- memory_region_init_ram(E1, NULL, E2, E3, E4);
-++ memory_region_init_ram(E1, OBJECT(dev), E2, E3, E4);
-+|
-+- memory_region_init_ram_ptr(E1, NULL, E2, E3, E4);
-++ memory_region_init_ram_ptr(E1, OBJECT(dev), E2, E3, E4);
-+|
-+- memory_region_init_ram_shared_nomigrate(E1, NULL, E2, E3, E4, E5);
-++ memory_region_init_ram_shared_nomigrate(E1, OBJECT(dev), E2, E3, E4, E5)=
-;
-+)
-+  ...+>
-+}
+diff --git a/hw/dma/i8257.c b/hw/dma/i8257.c
+index bad8debae4..ef15c06d77 100644
+--- a/hw/dma/i8257.c
++++ b/hw/dma/i8257.c
+@@ -553,7 +553,7 @@ static void i8257_realize(DeviceState *dev, Error **err=
+p)
+     I8257State *d =3D I8257(dev);
+     int i;
+=20
+-    memory_region_init_io(&d->channel_io, NULL, &channel_io_ops, d,
++    memory_region_init_io(&d->channel_io, OBJECT(dev), &channel_io_ops, d,
+                           "dma-chan", 8 << d->dshift);
+     memory_region_add_subregion(isa_address_space_io(isa),
+                                 d->base, &d->channel_io);
+diff --git a/hw/dma/rc4030.c b/hw/dma/rc4030.c
+index c4cf8236f4..f62eb3d2a3 100644
+--- a/hw/dma/rc4030.c
++++ b/hw/dma/rc4030.c
+@@ -679,9 +679,9 @@ static void rc4030_realize(DeviceState *dev, Error **er=
+rp)
+     s->periodic_timer =3D timer_new_ns(QEMU_CLOCK_VIRTUAL,
+                                      rc4030_periodic_timer, s);
+=20
+-    memory_region_init_io(&s->iomem_chipset, NULL, &rc4030_ops, s,
++    memory_region_init_io(&s->iomem_chipset, o, &rc4030_ops, s,
+                           "rc4030.chipset", 0x300);
+-    memory_region_init_io(&s->iomem_jazzio, NULL, &jazzio_ops, s,
++    memory_region_init_io(&s->iomem_jazzio, o, &jazzio_ops, s,
+                           "rc4030.jazzio", 0x00001000);
+=20
+     memory_region_init_iommu(&s->dma_mr, sizeof(s->dma_mr),
 --=20
 2.21.1
 
