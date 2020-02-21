@@ -1,66 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1j4yDL-0000ki-OS
-	for mharc-qemu-riscv@gnu.org; Thu, 20 Feb 2020 21:38:51 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:59009)
+	id 1j51Gb-0008OZ-JQ
+	for mharc-qemu-riscv@gnu.org; Fri, 21 Feb 2020 00:54:25 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:41003)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <bmeng.cn@gmail.com>) id 1j4yDJ-0000is-RW
- for qemu-riscv@nongnu.org; Thu, 20 Feb 2020 21:38:50 -0500
+ (envelope-from <anup@brainfault.org>) id 1j51GZ-0008OF-99
+ for qemu-riscv@nongnu.org; Fri, 21 Feb 2020 00:54:24 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <bmeng.cn@gmail.com>) id 1j4yDI-0007ba-Tk
- for qemu-riscv@nongnu.org; Thu, 20 Feb 2020 21:38:49 -0500
-Received: from mail-yw1-xc30.google.com ([2607:f8b0:4864:20::c30]:36504)
+ (envelope-from <anup@brainfault.org>) id 1j51GY-000139-BO
+ for qemu-riscv@nongnu.org; Fri, 21 Feb 2020 00:54:23 -0500
+Received: from mail-wm1-x332.google.com ([2a00:1450:4864:20::332]:37186)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
- id 1j4yDG-0007UZ-PQ; Thu, 20 Feb 2020 21:38:46 -0500
-Received: by mail-yw1-xc30.google.com with SMTP id n184so438813ywc.3;
- Thu, 20 Feb 2020 18:38:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ (Exim 4.71) (envelope-from <anup@brainfault.org>) id 1j51GX-0000v9-Sy
+ for qemu-riscv@nongnu.org; Fri, 21 Feb 2020 00:54:22 -0500
+Received: by mail-wm1-x332.google.com with SMTP id a6so401093wme.2
+ for <qemu-riscv@nongnu.org>; Thu, 20 Feb 2020 21:54:21 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=brainfault-org.20150623.gappssmtp.com; s=20150623;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
  :cc:content-transfer-encoding;
- bh=9mJqNg+kd+Gnur2BCeF91WJfZ2SqDXmGECeJIATH4fY=;
- b=ofK53K3tKYbQyevhOmAsegcpMBB1URHWKWMmxFG5WzodnbIY3SdBQAiDaeScAS4DmK
- 2vXfaJbWtqxCPdhCmU5XBDgwRzIwTBPN2eGTExpB+sDFmrw1bEL9AnYIDcI8NBifZEly
- adk0C9MgTq7+Vdn27bKBonSu+hWzwhud92cVgy7o+uLA8VP1GQa1d0Sh1fxm1ScZWCDN
- B42foE/ZWyMKG50AgHNe+f1yUTagmGL3qNruWOLQLCVLAyJQNnLmTjZ8j2v2mZmeHL4T
- 5Kz9jYwhmqslICKR/eEd/Hvh+TdNcSxiolYLn4FV+bgTAiHvNZTUOM9Md6SLIv3Q2PrH
- XN5A==
+ bh=FOGTHs9kui+0Fe8cbcIr0Sj9QwDBZZ90d+AJJ7QZ3lk=;
+ b=mzsQTFQFszhk8PfM/9N6jEzfshHdsvNnLqGx2qxXUO0b705U44qnlbFUWkCv1bhpiV
+ 26Yyly2crA+048vhj7qfZllsYOyzE73GorV3QKzQiHevSPzo6pX5K21Pw/LcqNO2/vMz
+ CW46IludijItbxTVhARDI/lCm+pUx3CjyPP2V6avXa8BqGnVgjQLRfKONhF9kLMoPu+0
+ hNOU4nbEvcgmLiaD92qng1RQD83N62NCNQV2M81IZaiuD8HPKM1PdlrBI5/+eZwKTefu
+ U2fAhoB0vAnQA3ZMus949oucf/YqwqWQ4QhK54DpjgxOuvKyFRISIDFXCCbmHfR4QoCO
+ gp4g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc:content-transfer-encoding;
- bh=9mJqNg+kd+Gnur2BCeF91WJfZ2SqDXmGECeJIATH4fY=;
- b=QTyY4DVGW8MVj6eo2nv9oDtpWgRZ/T3FIbw3lwc/Ze3qoiYY89Jj17BWRzfHjLBCZ4
- SpfeWogjfiMmbc5+XEacPFnJok5MJWgWHDZ6GHw4vi66W1R2Lwsy9GNLSmDfqZgjBgQ7
- B0cho7NYN2l4FcLUPPDrJ7MMOrJfyTtf+qRbEFi4286aoS1XLXay5es7IFd4MM1fREw+
- ORSTDrovOYEuUfRia2YGF12t2tu5eIDuY2PeqMEU4SLPqzvMkH3LQZXnGQvWRZpeTQn/
- t2G4AMOGO9XCwPhz+LHMzbAmV6YwT87AK79yBfMM6nNahVe65OBJY2VtpHU4rOl9pt/Q
- IOmg==
-X-Gm-Message-State: APjAAAW0gND18XNAD++mRbqtvv2Qouew4TCHaTk5Fe40vJfFHazel9Gf
- WzZ0XiwoO4P+i9qw+ThGLnmHn9aCBBwWDmFak1A=
-X-Google-Smtp-Source: APXvYqzycAbddCUu5M52aui6RtGg3wAB8VVWFjrIkikTw2jazsAnA5pgI/1UXiMQ9lj2327ApdDZj+sqCpcvnZDP2ZI=
-X-Received: by 2002:a81:8606:: with SMTP id w6mr27116959ywf.137.1582252726048; 
- Thu, 20 Feb 2020 18:38:46 -0800 (PST)
+ bh=FOGTHs9kui+0Fe8cbcIr0Sj9QwDBZZ90d+AJJ7QZ3lk=;
+ b=kjhrFxSA5XuK7Pt+Giq7GrEfQGE0O70olfsKg/kpwSKUnidlljxZRWs6F3S5fDUJ8J
+ BBVojxUmnh1FaYiT90JKIJF+Czt7al9YfR/KDw99naTA827dfYYqefbWk0Rs/rpKHNiO
+ 3UtojKsBZAzy4/C34cfp6y8MU6PG1bYiyORW5NVVHmfg5ixQQZLLKLws9SZM+H/lM9AL
+ LfpUieSXzKgxWwycjZCZYz05BsQGUi8JtcbiMF63Wmi68kXcKKSDyx5uYltTUbnsDt2T
+ FVnhcBlADosPaVR/fo0Ti4Jv6xh249Sla2C2GEDiwBiqT7OqB8Es7fgIp8NNVfJzmL/s
+ dJCQ==
+X-Gm-Message-State: APjAAAXHqX4Iy5WZkfO/sy4TrWYrq1ZMOVtMUG0NwmyZ8VTIMFfQd03I
+ ExrEKbC7T4PcZF08fVQL205Qx9EwJJ1uKN1IVRzU2Q==
+X-Google-Smtp-Source: APXvYqzmkFq7NiMPgFDWtrKSJiSEIn/Atd6Dg2LhhoF0siIz8MKKFZRQS5Am8aJv2c/6Q1eS9WTEZKhJNd8Ln1J59SM=
+X-Received: by 2002:a1c:1984:: with SMTP id 126mr1495374wmz.78.1582264459711; 
+ Thu, 20 Feb 2020 21:54:19 -0800 (PST)
 MIME-Version: 1.0
 References: <1582209758-2996-1-git-send-email-bmeng.cn@gmail.com>
  <f92f1ec7-ac03-a012-f232-32c533beb9d2@redhat.com>
-In-Reply-To: <f92f1ec7-ac03-a012-f232-32c533beb9d2@redhat.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Fri, 21 Feb 2020 10:38:34 +0800
-Message-ID: <CAEUhbmV9ouup0aqrUvEfpGFAoggVNJXw-PLD0xYurBXg+h3OMA@mail.gmail.com>
+ <CAEUhbmV9ouup0aqrUvEfpGFAoggVNJXw-PLD0xYurBXg+h3OMA@mail.gmail.com>
+In-Reply-To: <CAEUhbmV9ouup0aqrUvEfpGFAoggVNJXw-PLD0xYurBXg+h3OMA@mail.gmail.com>
+From: Anup Patel <anup@brainfault.org>
+Date: Fri, 21 Feb 2020 11:24:07 +0530
+Message-ID: <CAAhSdy0edkypzbhhLw2g52F2w6GrS46OKi461Fghuk5AZfCjgQ@mail.gmail.com>
 Subject: Re: [PATCH 1/2] riscv: roms: Add 32-bit OpenSBI firmware image for
  sifive_u
-To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>, 
+ "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
  Palmer Dabbelt <palmerdabbelt@google.com>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>
+ Alistair Francis <Alistair.Francis@wdc.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::c30
+X-Received-From: 2a00:1450:4864:20::332
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -72,43 +75,55 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Feb 2020 02:38:50 -0000
+X-List-Received-Date: Fri, 21 Feb 2020 05:54:24 -0000
 
-Hi Philippe,
-
-On Fri, Feb 21, 2020 at 1:31 AM Philippe Mathieu-Daud=C3=A9
-<philmd@redhat.com> wrote:
+On Fri, Feb 21, 2020 at 8:08 AM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
-> Hi Bin,
+> Hi Philippe,
 >
-> On 2/20/20 3:42 PM, Bin Meng wrote:
-> > Although the real world SiFive HiFive Unleashed board is a 64-bit
-> > hardware configuration, with QEMU it is possible to test 32-bit
-> > configuration with the same hardware features.
+> On Fri, Feb 21, 2020 at 1:31 AM Philippe Mathieu-Daud=C3=A9
+> <philmd@redhat.com> wrote:
 > >
-> > This updates the roms Makefile to add the build rules for creating
-> > the 32-bit OpenSBI firmware image for sifive_u machine. A pre-built
-> > OpenSBI image (built from commit 3e7d666) has been added as the
-> > default bios for 32-bit sifive_u machine.
+> > Hi Bin,
+> >
+> > On 2/20/20 3:42 PM, Bin Meng wrote:
+> > > Although the real world SiFive HiFive Unleashed board is a 64-bit
+> > > hardware configuration, with QEMU it is possible to test 32-bit
+> > > configuration with the same hardware features.
+> > >
+> > > This updates the roms Makefile to add the build rules for creating
+> > > the 32-bit OpenSBI firmware image for sifive_u machine. A pre-built
+> > > OpenSBI image (built from commit 3e7d666) has been added as the
+> > > default bios for 32-bit sifive_u machine.
+> >
+> > With QEMU:
+> >
+> > fatal: ambiguous argument '3e7d666': unknown revision or path not in th=
+e
+> > working tree.
+> >
+> > This looks like an OpenSBI commit but QEMU only include up to v0.5.
+> >
+> > Can you build v0.5? Else can you update the submodule?
+> >
 >
-> With QEMU:
->
-> fatal: ambiguous argument '3e7d666': unknown revision or path not in the
-> working tree.
->
-> This looks like an OpenSBI commit but QEMU only include up to v0.5.
->
-> Can you build v0.5? Else can you update the submodule?
->
+> Will do in v2.
 
-Will do in v2.
+We plan to release OpenSBI v0.6 on monday (24th Feb 2020) so maybe
+you can update all RISC-V ROM images based on OpenSBI v0.6 ??
 
-> Also, can you add a CI job to build this, so we have reproducible builds
-> (see QEMU commit 71920809ceabed as example)?
-
-I cannot find any document for how to test CI job with gitlab CI. Does
-QEMU has a public CI runner for testing?
+>
+> > Also, can you add a CI job to build this, so we have reproducible build=
+s
+> > (see QEMU commit 71920809ceabed as example)?
+>
+> I cannot find any document for how to test CI job with gitlab CI. Does
+> QEMU has a public CI runner for testing?
+>
+> Regards,
+> Bin
+>
 
 Regards,
-Bin
+Anup
 
