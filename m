@@ -1,92 +1,78 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1j5C8x-0006WX-BY
-	for mharc-qemu-riscv@gnu.org; Fri, 21 Feb 2020 12:31:15 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:38216)
+	id 1j5CDs-0004iE-SY
+	for mharc-qemu-riscv@gnu.org; Fri, 21 Feb 2020 12:36:20 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:38876)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <philmd@redhat.com>) id 1j5C8t-0006Nt-VA
- for qemu-riscv@nongnu.org; Fri, 21 Feb 2020 12:31:13 -0500
+ (envelope-from <peter.maydell@linaro.org>) id 1j5CDp-0004bZ-KW
+ for qemu-riscv@nongnu.org; Fri, 21 Feb 2020 12:36:18 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <philmd@redhat.com>) id 1j5C8s-00082o-QH
- for qemu-riscv@nongnu.org; Fri, 21 Feb 2020 12:31:11 -0500
-Received: from us-smtp-1.mimecast.com ([207.211.31.81]:51887)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <philmd@redhat.com>) id 1j5C8s-00082j-Mk
- for qemu-riscv@nongnu.org; Fri, 21 Feb 2020 12:31:10 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1582306270;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=5SCSWK+x3Mgxa8dMA1mlI9fXFXh3qxL+ElfqjZu1bX0=;
- b=dZS6RvCLneQgDmmzy8xoM+YYoNIzIqsJhITNJewqz4aJQCfPXR5seJHOICqMHFsbwJrykf
- NQAj7XiaQeu3pOHCT6A4J8ECSOkGiBZYcVi5NKPUvFjcvIcixy0z+WuD7Vtu5x1sqDcFzK
- L2NdlCat3ZD2T4Fa+w+tXMpAy05NmOk=
-Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
- [209.85.221.69]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-9-_3MrjPVvMPiXlRXW1SvShA-1; Fri, 21 Feb 2020 12:31:06 -0500
-X-MC-Unique: _3MrjPVvMPiXlRXW1SvShA-1
-Received: by mail-wr1-f69.google.com with SMTP id o6so1313466wrp.8
- for <qemu-riscv@nongnu.org>; Fri, 21 Feb 2020 09:31:06 -0800 (PST)
+ (envelope-from <peter.maydell@linaro.org>) id 1j5CDn-0000qe-9R
+ for qemu-riscv@nongnu.org; Fri, 21 Feb 2020 12:36:16 -0500
+Received: from mail-oi1-x243.google.com ([2607:f8b0:4864:20::243]:46313)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <peter.maydell@linaro.org>)
+ id 1j5CDn-0000pv-3B
+ for qemu-riscv@nongnu.org; Fri, 21 Feb 2020 12:36:15 -0500
+Received: by mail-oi1-x243.google.com with SMTP id a22so2324326oid.13
+ for <qemu-riscv@nongnu.org>; Fri, 21 Feb 2020 09:36:15 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=0hZPLrTx+QxGezTlJEFQJMlOxfvv4M75Fk3m8GySp+k=;
+ b=U2b/wbq02FNihsBqsviMPt31jwOChWp25VW+C94NWjLSj9BQTP3TiXjrdP7o/Hr2W3
+ uSLOF7xKUTGbjB5nr3MM9e/H9wvkgIGWp0h1tGFNwz2egdNqx38JTNfjp2aRd3znaye5
+ HIcIkq5hk83QRvDLr/LNxW6ZWRn7CYwhUpkFmry71tGpSiSFwg9vhD2OSj7jjTIwHuiS
+ pvzDRvoHxMOgWXHtt3DBEsx4DFkLAE2AJlWcTRo8+VUoXRH/n2H1eBcCDvcrY8dGDC7I
+ pYvhqhP6cv06WiMO8XLBLXdfRPb0dRJLOm/Ps6FBEedGpN16TVdb4sbqcsfT+SkFpoMe
+ aQxQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=uT16+Xkl8LuYgM/9VDKdGjve7Io5iSq3xRh//xaioN4=;
- b=S9FcMLhndb7x+JSySsgz37EqOoZi/jmcUPooZmrb9SzhXp/fULdCKTDZ3pw2Hr8XsX
- 54zeAZlWgCmZpyNwMy1chPPkNJzBOfhHQ6cLzgZCS9mG3SiqrzYsLN35fKflPzsDbCY2
- 9pvThAOaEmwE65BSLZf781OyQe10ugo/8dV5PCzA8Bs9ZztDPbUwnY2VK841dc4rPMlI
- tAo4u/HVwyy2hforA7yVWV3afiVqyoh9EgEVi3Uo3yTTFLFkQbdUkYOcY1q0gzReI+tO
- zeJwn0i91YwhlIo495hDAYBN0egIk95KFDt7OTTFlk3MXnDHL/5d/GEmL+jE4eqWkG6s
- /UOA==
-X-Gm-Message-State: APjAAAUPl25Q6iVFrSc6Md8CFgHQ0yi+EIhliq+iCoRPJt3fCURZ4fI2
- peczul/wj6QapRPNZ9H1IoxnKEBI/FDiTToLMTy49kT0farCMZPFlJBXjSbMomDHu1fvFh9x4Aq
- rBIcsO/c0G9Q+QIM=
-X-Received: by 2002:a1c:f717:: with SMTP id v23mr5024105wmh.172.1582306265268; 
- Fri, 21 Feb 2020 09:31:05 -0800 (PST)
-X-Google-Smtp-Source: APXvYqwPvt3TF/zPnf7stsTmNpxIiEO+ICSYWHDYXBQCMP2TTK3YwUaChff0LmYEe/BwApgSAvw4TQ==
-X-Received: by 2002:a1c:f717:: with SMTP id v23mr5024074wmh.172.1582306265019; 
- Fri, 21 Feb 2020 09:31:05 -0800 (PST)
-Received: from x1w.redhat.com (78.red-88-21-202.staticip.rima-tde.net.
- [88.21.202.78])
- by smtp.gmail.com with ESMTPSA id h18sm5000871wrv.78.2020.02.21.09.31.03
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 21 Feb 2020 09:31:04 -0800 (PST)
-From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, "Michael S. Tsirkin" <mst@redhat.com>,
- Paolo Bonzini <pbonzini@redhat.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=0hZPLrTx+QxGezTlJEFQJMlOxfvv4M75Fk3m8GySp+k=;
+ b=pkTRPhHM5Wes85Ln/SE7OV69BZ78RfwV7Xd7d3RPjs6ABGdpuJqi700R839iktukAZ
+ pxn9Hbu6qeT+4VAyA8blLI9Szxje59+boc8GXWOvJrZTCacZ/RlgK6oKHPWAqV4VLt+i
+ O4DkL3nMptDrFb3z81DiMPZS8kw05FeY6ankO4jOkPTyMaRTWiqxVdrYBIW2zZIDlcU+
+ c3YZRobTIoeWzf4czN6JXWCzulJZyRplsk/zIG56Zf+7nFVFXnUOMjaDz7YJ9VR/AX2B
+ Hzk3Hj7hjYLuqTDpgJ6SCEbuf0N920i1b4HiT64Bm88ECVH1H21I+nK25ZzwwdXPmfsV
+ oWsA==
+X-Gm-Message-State: APjAAAURzLEtlG7qVnv03LG12t3UQ/47qd63HMSn+57krNytYVHjL94Z
+ /a8CSiKTR+Zf1OdYV+IZy8x0vgfvbwY0GAyHEE0J4A==
+X-Google-Smtp-Source: APXvYqxBxfiMzNYJBdQd5tbj09NPw89aj7x9fXxH8sgTJ2tSl6KBacWukJH47LxuJTcXu05BUZzIAD44OmjsLSadG9U=
+X-Received: by 2002:a05:6808:3b2:: with SMTP id
+ n18mr2834616oie.146.1582306574231; 
+ Fri, 21 Feb 2020 09:36:14 -0800 (PST)
+MIME-Version: 1.0
+References: <20200221173049.18134-1-philmd@redhat.com>
+ <20200221173049.18134-3-philmd@redhat.com>
+In-Reply-To: <20200221173049.18134-3-philmd@redhat.com>
+From: Peter Maydell <peter.maydell@linaro.org>
+Date: Fri, 21 Feb 2020 17:36:03 +0000
+Message-ID: <CAFEAcA8+LWYhNjaXUu-Y2oat1hsKGbt6Hcir_yeNpmY+c6+8KA@mail.gmail.com>
+Subject: Re: [PATCH 2/7] hw/arm: Let devices own the MemoryRegion they create
+To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>
+Cc: QEMU Developers <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ "Michael S. Tsirkin" <mst@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>, 
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>, 
  Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Alistair Francis <alistair@alistair23.me>, qemu-arm@nongnu.org,
- =?UTF-8?q?Herv=C3=A9=20Poussineau?= <hpoussin@reactos.org>,
+ Alistair Francis <alistair@alistair23.me>, qemu-arm <qemu-arm@nongnu.org>,
+ =?UTF-8?Q?Herv=C3=A9_Poussineau?= <hpoussin@reactos.org>, 
  Peter Chubb <peter.chubb@nicta.com.au>,
- Peter Maydell <peter.maydell@linaro.org>,
- Subbaraya Sundeep <sundeep.lkml@gmail.com>,
+ Subbaraya Sundeep <sundeep.lkml@gmail.com>, 
  Aleksandar Rikalo <aleksandar.rikalo@rt-rk.com>,
  Laurent Vivier <laurent@vivier.eu>, Palmer Dabbelt <palmer@dabbelt.com>,
- Jean-Christophe Dubois <jcd@tribudubois.net>,
+ Jean-Christophe Dubois <jcd@tribudubois.net>, 
  "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Joel Stanley <joel@jms.id.au>, Igor Mitsyanko <i.mitsyanko@gmail.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
-Subject: [PATCH 7/7] hw/riscv: Let devices own the MemoryRegion they create
-Date: Fri, 21 Feb 2020 18:30:49 +0100
-Message-Id: <20200221173049.18134-8-philmd@redhat.com>
-X-Mailer: git-send-email 2.21.1
-In-Reply-To: <20200221173049.18134-1-philmd@redhat.com>
-References: <20200221173049.18134-1-philmd@redhat.com>
-MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=UTF-8;
-	text/plain; charset="utf-8"
+ Joel Stanley <joel@jms.id.au>, Igor Mitsyanko <i.mitsyanko@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
- [fuzzy]
-X-Received-From: 207.211.31.81
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2607:f8b0:4864:20::243
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -98,74 +84,66 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Feb 2020 17:31:13 -0000
+X-List-Received-Date: Fri, 21 Feb 2020 17:36:19 -0000
 
-To avoid orphean memory regions being added in the /unattached
-QOM container, use the memory_region_owner_nonnull.cocci script
-to set the correct ownership.
+On Fri, 21 Feb 2020 at 17:31, Philippe Mathieu-Daud=C3=A9 <philmd@redhat.co=
+m> wrote:
+>
+> To avoid orphean memory regions being added in the /unattached
 
-Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
----
- hw/riscv/sifive_e.c | 8 ++++----
- hw/riscv/sifive_u.c | 4 ++--
- 2 files changed, 6 insertions(+), 6 deletions(-)
+("orphan")
 
-diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
-index 8a6b0348df..583015c247 100644
---- a/hw/riscv/sifive_e.c
-+++ b/hw/riscv/sifive_e.c
-@@ -145,8 +145,8 @@ static void riscv_sifive_e_soc_realize(DeviceState *dev=
-, Error **errp)
-                             &error_abort);
-=20
-     /* Mask ROM */
--    memory_region_init_rom(&s->mask_rom, NULL, "riscv.sifive.e.mrom",
--        memmap[SIFIVE_E_MROM].size, &error_fatal);
-+    memory_region_init_rom(&s->mask_rom, OBJECT(dev), "riscv.sifive.e.mrom=
-",
-+                           memmap[SIFIVE_E_MROM].size, &error_fatal);
-     memory_region_add_subregion(sys_mem,
-         memmap[SIFIVE_E_MROM].base, &s->mask_rom);
-=20
-@@ -208,8 +208,8 @@ static void riscv_sifive_e_soc_realize(DeviceState *dev=
-, Error **errp)
-         memmap[SIFIVE_E_PWM2].base, memmap[SIFIVE_E_PWM2].size);
-=20
-     /* Flash memory */
--    memory_region_init_ram(&s->xip_mem, NULL, "riscv.sifive.e.xip",
--        memmap[SIFIVE_E_XIP].size, &error_fatal);
-+    memory_region_init_ram(&s->xip_mem, OBJECT(dev), "riscv.sifive.e.xip",
-+                           memmap[SIFIVE_E_XIP].size, &error_fatal);
-     memory_region_set_readonly(&s->xip_mem, true);
-     memory_region_add_subregion(sys_mem, memmap[SIFIVE_E_XIP].base,
-         &s->xip_mem);
-diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-index 0e12b3ccef..592830a3a2 100644
---- a/hw/riscv/sifive_u.c
-+++ b/hw/riscv/sifive_u.c
-@@ -497,7 +497,7 @@ static void riscv_sifive_u_soc_realize(DeviceState *dev=
-, Error **errp)
-                              &error_abort);
-=20
-     /* boot rom */
--    memory_region_init_rom(mask_rom, NULL, "riscv.sifive.u.mrom",
-+    memory_region_init_rom(mask_rom, OBJECT(dev), "riscv.sifive.u.mrom",
-                            memmap[SIFIVE_U_MROM].size, &error_fatal);
-     memory_region_add_subregion(system_memory, memmap[SIFIVE_U_MROM].base,
-                                 mask_rom);
-@@ -511,7 +511,7 @@ static void riscv_sifive_u_soc_realize(DeviceState *dev=
-, Error **errp)
-      * leave it enabled all the time. This won't break anything, but will =
-be
-      * too generous to misbehaving guests.
-      */
--    memory_region_init_ram(l2lim_mem, NULL, "riscv.sifive.u.l2lim",
-+    memory_region_init_ram(l2lim_mem, OBJECT(dev), "riscv.sifive.u.l2lim",
-                            memmap[SIFIVE_U_L2LIM].size, &error_fatal);
-     memory_region_add_subregion(system_memory, memmap[SIFIVE_U_L2LIM].base=
-,
-                                 l2lim_mem);
---=20
-2.21.1
+> QOM container, use the memory_region_owner_nonnull.cocci script
+> to set the correct ownership.
+>
+> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
+> ---
+>  hw/arm/exynos4210.c    | 14 +++++++-------
+>  hw/arm/fsl-imx25.c     | 14 +++++++-------
+>  hw/arm/fsl-imx31.c     | 10 +++++-----
+>  hw/arm/fsl-imx6.c      | 10 +++++-----
+>  hw/arm/fsl-imx6ul.c    | 14 +++++++-------
+>  hw/arm/msf2-soc.c      |  8 ++++----
+>  hw/arm/nrf51_soc.c     |  2 +-
+>  hw/arm/stm32f205_soc.c | 10 +++++-----
+>  hw/arm/stm32f405_soc.c | 13 +++++++------
+>  hw/arm/xlnx-zynqmp.c   | 13 ++++++-------
+>  10 files changed, 54 insertions(+), 54 deletions(-)
+>
+> diff --git a/hw/arm/exynos4210.c b/hw/arm/exynos4210.c
+> index 59a27bdd68..d4b05336ee 100644
+> --- a/hw/arm/exynos4210.c
+> +++ b/hw/arm/exynos4210.c
+> @@ -305,28 +305,28 @@ static void exynos4210_realize(DeviceState *socdev,=
+ Error **errp)
+>      /*** Memory ***/
+>
+>      /* Chip-ID and OMR */
+> -    memory_region_init_io(&s->chipid_mem, NULL, &exynos4210_chipid_and_o=
+mr_ops,
+> -        NULL, "exynos4210.chipid", sizeof(chipid_and_omr));
+> +    memory_region_init_io(&s->chipid_mem, OBJECT(socdev),
+> +                          &exynos4210_chipid_and_omr_ops, NULL,
+> +                          "exynos4210.chipid", sizeof(chipid_and_omr));
+>      memory_region_add_subregion(system_mem, EXYNOS4210_CHIPID_ADDR,
+>                                  &s->chipid_mem);
+>
+>      /* Internal ROM */
+> -    memory_region_init_ram(&s->irom_mem, NULL, "exynos4210.irom",
+> +    memory_region_init_ram(&s->irom_mem, OBJECT(socdev), "exynos4210.iro=
+m",
+>                             EXYNOS4210_IROM_SIZE, &error_fatal);
 
+I have a feeling that the owner of a RAM memory region affects
+the name we use for the underlying ramblock, which in turn
+is used in the on-the-wire data stream in migration, which means
+that changing ownership breaks migration compatibility.
+That's probably OK in most cases as we don't care too much
+about migration-compat on most boards, but I think it does
+mean that you want to keep those changes separated out from
+the ones for IO and alias regions, which I think shouldn't
+have visible effects.
+
+thanks
+-- PMM
 
