@@ -1,58 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1j5C8t-0006My-Nc
-	for mharc-qemu-riscv@gnu.org; Fri, 21 Feb 2020 12:31:11 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:38146)
+	id 1j5C8u-0006PH-Ic
+	for mharc-qemu-riscv@gnu.org; Fri, 21 Feb 2020 12:31:12 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:38179)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <philmd@redhat.com>) id 1j5C8q-0006Fz-Ql
- for qemu-riscv@nongnu.org; Fri, 21 Feb 2020 12:31:09 -0500
+ (envelope-from <philmd@redhat.com>) id 1j5C8r-0006IE-SK
+ for qemu-riscv@nongnu.org; Fri, 21 Feb 2020 12:31:11 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <philmd@redhat.com>) id 1j5C8p-00080h-I0
- for qemu-riscv@nongnu.org; Fri, 21 Feb 2020 12:31:08 -0500
-Received: from us-smtp-delivery-1.mimecast.com ([205.139.110.120]:25572
+ (envelope-from <philmd@redhat.com>) id 1j5C8q-00081V-Fp
+ for qemu-riscv@nongnu.org; Fri, 21 Feb 2020 12:31:09 -0500
+Received: from us-smtp-delivery-1.mimecast.com ([205.139.110.120]:51211
  helo=us-smtp-1.mimecast.com)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <philmd@redhat.com>) id 1j5C8p-0007ze-Dd
- for qemu-riscv@nongnu.org; Fri, 21 Feb 2020 12:31:07 -0500
+ (Exim 4.71) (envelope-from <philmd@redhat.com>) id 1j5C8q-00081A-BO
+ for qemu-riscv@nongnu.org; Fri, 21 Feb 2020 12:31:08 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1582306265;
+ s=mimecast20190719; t=1582306267;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=VEFA07cxDExgBn425ggzA1li5B5q1BBqRYxz1LjraoI=;
- b=HItnXlY0Kxdz/YhP2oWzPJMnZLpaqZ6/kQ5MJ0Lkzr3PE2WbLu9gZCvblZ/r9uI4OMwVwb
- 4RQhotmbmxVx+drvaTQyEa1oeNhupW6/C3eep7pkTPte6Y2NDSQj8jryM1hLfIxfSvzG5T
- yo6kiW9qG2qe1lvVJd0XK1ekcf5+kow=
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
- [209.85.221.71]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-66-4RJpfScSMJ-l6O4_goBK-A-1; Fri, 21 Feb 2020 12:31:03 -0500
-X-MC-Unique: 4RJpfScSMJ-l6O4_goBK-A-1
-Received: by mail-wr1-f71.google.com with SMTP id d15so1328105wru.1
- for <qemu-riscv@nongnu.org>; Fri, 21 Feb 2020 09:31:03 -0800 (PST)
+ bh=iIJbNClAaopu3XcwBy22eUj/Xx5fmW+fWgqNqWuWF1g=;
+ b=h1ETS4/G0b/xmFkGDnuajaBdMtKjNjqPtwxrEy1cBuHJr/G/fXiLKIinqv02V2M44e7GV5
+ PRK0Nb/LDx4twwIMxxEe3z93TS+dPY56Qgi43UorSmgtTXoewHjakGhEtPAL5rDILOt284
+ w5xFZHLMTOUPLKQyCdlqfud3omugMcE=
+Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
+ [209.85.221.69]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-46-GbDSxIiyN5SdRIl4Cdug_g-1; Fri, 21 Feb 2020 12:30:56 -0500
+X-MC-Unique: GbDSxIiyN5SdRIl4Cdug_g-1
+Received: by mail-wr1-f69.google.com with SMTP id d8so1312081wrq.12
+ for <qemu-riscv@nongnu.org>; Fri, 21 Feb 2020 09:30:56 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=EJXr99FJ98twgvm41idHKUIEhs+PYW203OES1NY0r5o=;
- b=FvhGwdkO0gkacdDVDy2JhzOzvdENdSR0OoHgLsz+qV1CQ1M/clUT+xXZE16QnHUDqB
- IaXjREqkN73+ywLI13Xm+WZIhhPTXpvhtOjTT0q4STBMxAoJEdZKbDlHCbGccwRozVg5
- +fnoI8k34xY44jmKYnZW6yh3gwr8/7uTt2/G5JXpVhiEm9vDePeTbVGG5fwBjpRHfFYD
- Ad+au3pmekrzKjxAjq2iXLAZl/UrF3e1bqZiXJgn8qhpOyS8sf5jL89JIgs5fh9KufCM
- 6sgNrw/5RzmcSjei9kgVQE+fBMLeVZNISQhWwEE+uwb3O2iFecHoPEtLejwhhbhhDqy/
- SoiQ==
-X-Gm-Message-State: APjAAAU8yyRsS28Wpx4iw8hki6fgrSI85RUxkFsWKlA6WZP+o8ZKPQqD
- 24JSBcrQvhUfZXVZsYt9yYsdAXEuG/QzEamkwmdZNaosLmdbJHpzotFlnVDZ08DQBuhhOFDj+D9
- eBWfLpAltiFqmF4Q=
-X-Received: by 2002:a1c:e388:: with SMTP id a130mr4895514wmh.176.1582306262282; 
- Fri, 21 Feb 2020 09:31:02 -0800 (PST)
-X-Google-Smtp-Source: APXvYqzxKK4rofAtrCdp/lELRI9WruL74WpqyFZLmhDMq/d7/UXqXq6F7h1gVJASQwbnvwlXqxfsag==
-X-Received: by 2002:a1c:e388:: with SMTP id a130mr4895477wmh.176.1582306261997; 
- Fri, 21 Feb 2020 09:31:01 -0800 (PST)
+ bh=WhcONAkiFDeuSeZsi9vQPsSpTSVQ47zvNIPLgZ1YRDk=;
+ b=ju+X/OOkY7CXwoiZci+6nPQnLxZr+NHf514NzewOmAfTeKSOJEG1oP3KzmnpBppDCY
+ aGC78Ozltd4TJBnRU4Ca88qkHdp8doAARueY8uDLDZR5DY4W4pFPnr7DNAksCuvj6U7r
+ jzmTEmsiHt+4FCy8WUUe2QTBfdhOSxWgq57JK8oKyI9jxCDWbLPJxhykKgXllA1/vYja
+ M7KqsV9gRSF94OoYbp+uqtpgfAMo+/hmwH8uljuwvJur9gXGm1WdWCUrh7enEw+STuQj
+ N/hd9frUslrkQyT3d63t8eSbsrpoaEqfNor047sABwmuZkAh+xNertNFG7bEMh38xL89
+ Tbcg==
+X-Gm-Message-State: APjAAAU3IHBwoRojjRBuVMZDYd6QO7njPOgdU73nWyYCpjliCG/k3z5m
+ tUn3b2rQBc+IkYsMagxmCu+tTgSwdj3IFDMlDj48NyYzxMI3TOWjGmqMOLutPXHD37wq+lmstvu
+ 5m1TQ3u+FbHNs7l4=
+X-Received: by 2002:a5d:4a06:: with SMTP id m6mr50053543wrq.155.1582306254965; 
+ Fri, 21 Feb 2020 09:30:54 -0800 (PST)
+X-Google-Smtp-Source: APXvYqy0eeMUTxcT7eJ1BFPV35jFa5u7G1EKn9bk9D2WAVnrHFmnGoyOcBdg2D1PUH07W7NO+HPBBQ==
+X-Received: by 2002:a5d:4a06:: with SMTP id m6mr50053522wrq.155.1582306254743; 
+ Fri, 21 Feb 2020 09:30:54 -0800 (PST)
 Received: from x1w.redhat.com (78.red-88-21-202.staticip.rima-tde.net.
  [88.21.202.78])
- by smtp.gmail.com with ESMTPSA id h18sm5000871wrv.78.2020.02.21.09.31.00
+ by smtp.gmail.com with ESMTPSA id h18sm5000871wrv.78.2020.02.21.09.30.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 21 Feb 2020 09:31:01 -0800 (PST)
+ Fri, 21 Feb 2020 09:30:53 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, "Michael S. Tsirkin" <mst@redhat.com>,
@@ -73,9 +73,10 @@ Cc: qemu-riscv@nongnu.org, "Michael S. Tsirkin" <mst@redhat.com>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
  Joel Stanley <joel@jms.id.au>, Igor Mitsyanko <i.mitsyanko@gmail.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
-Subject: [PATCH 5/7] hw/display: Let devices own the MemoryRegion they create
-Date: Fri, 21 Feb 2020 18:30:47 +0100
-Message-Id: <20200221173049.18134-6-philmd@redhat.com>
+Subject: [PATCH 1/7] scripts/coccinelle: Add a script to let devices own their
+ MemoryRegions
+Date: Fri, 21 Feb 2020 18:30:43 +0100
+Message-Id: <20200221173049.18134-2-philmd@redhat.com>
 X-Mailer: git-send-email 2.21.1
 In-Reply-To: <20200221173049.18134-1-philmd@redhat.com>
 References: <20200221173049.18134-1-philmd@redhat.com>
@@ -98,88 +99,128 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Feb 2020 17:31:10 -0000
+X-List-Received-Date: Fri, 21 Feb 2020 17:31:11 -0000
 
-To avoid orphean memory regions being added in the /unattached
-QOM container, use the memory_region_owner_nonnull.cocci script
-to set the correct ownership.
+When a device creates a MemoryRegion without setting its ownership,
+the MemoryRegion is added to the machine "/unattached" container in
+the QOM tree.
+
+Example with the Samsung SMDKC210 board:
+
+  $ arm-softmmu/qemu-system-arm -M smdkc210 -S -monitor stdio
+  (qemu) info qom-tree
+  /machine (smdkc210-machine)
+    /unattached (container)
+      /io[0] (qemu:memory-region)
+      /exynos4210.dram0[0] (qemu:memory-region)
+      /exynos4210.irom[0] (qemu:memory-region)
+      /exynos4210.iram[0] (qemu:memory-region)
+      /exynos4210.chipid[0] (qemu:memory-region)
+      ...
+      /device[26] (exynos4210.uart)
+        /exynos4210.uart[0] (qemu:memory-region)
+    /soc (exynos4210)
+      ^
+       \__ [*]
+
+The irom/iram/chipid regions should go under 'soc' at [*].
+
+Add a coccinelle script to do automatic semantic patching.
 
 Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
 ---
- hw/display/cg3.c        | 4 ++--
- hw/display/g364fb.c     | 5 +++--
- hw/display/macfb.c      | 4 ++--
- hw/display/vmware_vga.c | 4 ++--
- 4 files changed, 9 insertions(+), 8 deletions(-)
+ .../memory_region_owner_nonnull.cocci         | 80 +++++++++++++++++++
+ 1 file changed, 80 insertions(+)
+ create mode 100644 scripts/coccinelle/memory_region_owner_nonnull.cocci
 
-diff --git a/hw/display/cg3.c b/hw/display/cg3.c
-index 4fb67c6b1c..db2e291d16 100644
---- a/hw/display/cg3.c
-+++ b/hw/display/cg3.c
-@@ -315,8 +315,8 @@ static void cg3_realizefn(DeviceState *dev, Error **err=
-p)
-         }
-     }
-=20
--    memory_region_init_ram(&s->vram_mem, NULL, "cg3.vram", s->vram_size,
--                           &error_fatal);
-+    memory_region_init_ram(&s->vram_mem, OBJECT(dev), "cg3.vram",
-+                           s->vram_size, &error_fatal);
-     memory_region_set_log(&s->vram_mem, true, DIRTY_MEMORY_VGA);
-     sysbus_init_mmio(sbd, &s->vram_mem);
-=20
-diff --git a/hw/display/g364fb.c b/hw/display/g364fb.c
-index 55185c95c6..28785cceda 100644
---- a/hw/display/g364fb.c
-+++ b/hw/display/g364fb.c
-@@ -477,8 +477,9 @@ static void g364fb_init(DeviceState *dev, G364State *s)
-=20
-     s->con =3D graphic_console_init(dev, 0, &g364fb_ops, s);
-=20
--    memory_region_init_io(&s->mem_ctrl, NULL, &g364fb_ctrl_ops, s, "ctrl",=
- 0x180000);
--    memory_region_init_ram_ptr(&s->mem_vram, NULL, "vram",
-+    memory_region_init_io(&s->mem_ctrl, OBJECT(dev), &g364fb_ctrl_ops, s,
-+                          "ctrl", 0x180000);
-+    memory_region_init_ram_ptr(&s->mem_vram, OBJECT(dev), "vram",
-                                s->vram_size, s->vram);
-     vmstate_register_ram(&s->mem_vram, dev);
-     memory_region_set_log(&s->mem_vram, true, DIRTY_MEMORY_VGA);
-diff --git a/hw/display/macfb.c b/hw/display/macfb.c
-index 8bff16d535..b68faff4bb 100644
---- a/hw/display/macfb.c
-+++ b/hw/display/macfb.c
-@@ -362,8 +362,8 @@ static void macfb_common_realize(DeviceState *dev, Macf=
-bState *s, Error **errp)
-         return;
-     }
-=20
--    memory_region_init_io(&s->mem_ctrl, NULL, &macfb_ctrl_ops, s, "macfb-c=
-trl",
--                          0x1000);
-+    memory_region_init_io(&s->mem_ctrl, OBJECT(dev), &macfb_ctrl_ops, s,
-+                          "macfb-ctrl", 0x1000);
-=20
-     memory_region_init_ram_nomigrate(&s->mem_vram, OBJECT(s), "macfb-vram"=
-,
-                                      MACFB_VRAM_SIZE, errp);
-diff --git a/hw/display/vmware_vga.c b/hw/display/vmware_vga.c
-index 58ea82e3e5..79574e3c46 100644
---- a/hw/display/vmware_vga.c
-+++ b/hw/display/vmware_vga.c
-@@ -1238,8 +1238,8 @@ static void vmsvga_init(DeviceState *dev, struct vmsv=
-ga_state_s *s,
-     s->vga.con =3D graphic_console_init(dev, 0, &vmsvga_ops, s);
-=20
-     s->fifo_size =3D SVGA_FIFO_SIZE;
--    memory_region_init_ram(&s->fifo_ram, NULL, "vmsvga.fifo", s->fifo_size=
-,
--                           &error_fatal);
-+    memory_region_init_ram(&s->fifo_ram, OBJECT(dev), "vmsvga.fifo",
-+                           s->fifo_size, &error_fatal);
-     s->fifo_ptr =3D memory_region_get_ram_ptr(&s->fifo_ram);
-=20
-     vga_common_init(&s->vga, OBJECT(dev));
+diff --git a/scripts/coccinelle/memory_region_owner_nonnull.cocci b/scripts=
+/coccinelle/memory_region_owner_nonnull.cocci
+new file mode 100644
+index 0000000000..6748a200b2
+--- /dev/null
++++ b/scripts/coccinelle/memory_region_owner_nonnull.cocci
+@@ -0,0 +1,80 @@
++/*
++  Usage:
++
++    spatch \
++        --macro-file scripts/cocci-macro-file.h \
++        --sp-file scripts/coccinelle/memory_region_owner_nonnull.cocci \
++        --keep-comments \
++        --in-place \
++        --dir .
++
++*/
++
++// Device is owner
++@@
++typedef DeviceState;
++identifier device_fn, dev, obj;
++expression E1, E2, E3, E4, E5;
++@@
++static void device_fn(DeviceState *dev, ...)
++{
++  ...
++  Object *obj =3D OBJECT(dev);
++  <+...
++(
++- memory_region_init(E1, NULL, E2, E3);
+++ memory_region_init(E1, obj, E2, E3);
++|
++- memory_region_init_io(E1, NULL, E2, E3, E4, E5);
+++ memory_region_init_io(E1, obj, E2, E3, E4, E5);
++|
++- memory_region_init_alias(E1, NULL, E2, E3, E4, E5);
+++ memory_region_init_alias(E1, obj, E2, E3, E4, E5);
++|
++- memory_region_init_rom(E1, NULL, E2, E3, E4);
+++ memory_region_init_rom(E1, obj, E2, E3, E4);
++|
++- memory_region_init_ram(E1, NULL, E2, E3, E4);
+++ memory_region_init_ram(E1, obj, E2, E3, E4);
++|
++- memory_region_init_ram_ptr(E1, NULL, E2, E3, E4);
+++ memory_region_init_ram_ptr(E1, obj, E2, E3, E4);
++|
++- memory_region_init_ram_shared_nomigrate(E1, NULL, E2, E3, E4, E5);
+++ memory_region_init_ram_shared_nomigrate(E1, obj, E2, E3, E4, E5);
++)
++  ...+>
++}
++
++// Device is owner
++@@
++identifier device_fn, dev;
++expression E1, E2, E3, E4, E5;
++@@
++static void device_fn(DeviceState *dev, ...)
++{
++  <+...
++(
++- memory_region_init(E1, NULL, E2, E3);
+++ memory_region_init(E1, OBJECT(dev), E2, E3);
++|
++- memory_region_init_io(E1, NULL, E2, E3, E4, E5);
+++ memory_region_init_io(E1, OBJECT(dev), E2, E3, E4, E5);
++|
++- memory_region_init_alias(E1, NULL, E2, E3, E4, E5);
+++ memory_region_init_alias(E1, OBJECT(dev), E2, E3, E4, E5);
++|
++- memory_region_init_rom(E1, NULL, E2, E3, E4);
+++ memory_region_init_rom(E1, OBJECT(dev), E2, E3, E4);
++|
++- memory_region_init_ram(E1, NULL, E2, E3, E4);
+++ memory_region_init_ram(E1, OBJECT(dev), E2, E3, E4);
++|
++- memory_region_init_ram_ptr(E1, NULL, E2, E3, E4);
+++ memory_region_init_ram_ptr(E1, OBJECT(dev), E2, E3, E4);
++|
++- memory_region_init_ram_shared_nomigrate(E1, NULL, E2, E3, E4, E5);
+++ memory_region_init_ram_shared_nomigrate(E1, OBJECT(dev), E2, E3, E4, E5)=
+;
++)
++  ...+>
++}
 --=20
 2.21.1
 
