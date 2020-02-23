@@ -1,58 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1j5rdt-00044O-IP
-	for mharc-qemu-riscv@gnu.org; Sun, 23 Feb 2020 08:49:57 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:54865)
+	id 1j5sRV-00020p-BN
+	for mharc-qemu-riscv@gnu.org; Sun, 23 Feb 2020 09:41:13 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:50730)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <rajnesh.kanwal49@gmail.com>) id 1j5oVU-0004Rd-2S
- for qemu-riscv@nongnu.org; Sun, 23 Feb 2020 05:29:04 -0500
+ (envelope-from <josemartins90@gmail.com>) id 1j5sRS-00020U-QM
+ for qemu-riscv@nongnu.org; Sun, 23 Feb 2020 09:41:11 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <rajnesh.kanwal49@gmail.com>) id 1j5oVT-0008SU-28
- for qemu-riscv@nongnu.org; Sun, 23 Feb 2020 05:29:03 -0500
-Received: from mail-wr1-x442.google.com ([2a00:1450:4864:20::442]:34071)
+ (envelope-from <josemartins90@gmail.com>) id 1j5sRQ-00042g-VP
+ for qemu-riscv@nongnu.org; Sun, 23 Feb 2020 09:41:10 -0500
+Received: from mail-il1-x141.google.com ([2607:f8b0:4864:20::141]:44630)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <rajnesh.kanwal49@gmail.com>)
- id 1j5oVS-0008Ph-Qn; Sun, 23 Feb 2020 05:29:03 -0500
-Received: by mail-wr1-x442.google.com with SMTP id n10so6971231wrm.1;
- Sun, 23 Feb 2020 02:29:02 -0800 (PST)
+ (Exim 4.71) (envelope-from <josemartins90@gmail.com>)
+ id 1j5sRQ-00041a-Gr; Sun, 23 Feb 2020 09:41:08 -0500
+Received: by mail-il1-x141.google.com with SMTP id s85so5588074ill.11;
+ Sun, 23 Feb 2020 06:41:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id;
- bh=TM0po14P+3grtw7weLJ5287+nGsBf+PNGMb9u/cakCE=;
- b=nHxHXUxotyXd+192QWPAnZS9EktplofVyDTTmiAlpiTdTbo45ksNCiJC6nUpIMvsVw
- +psdlSF27kgzBZ7HZbquSnj8TX5vF3y4uzDkP5pc7vAtDCuY9tRhWXYDPrJYWTvQCXLL
- 5mvKNQPsTAPxrag6YrnXbatT9h4oHni4pAQZPRP+t9NzbBJEOXpMjrotajecV4FgI9kT
- 5hstby1g4nhrg7H9aVZqNdAjxoEu41Zs7EKRoq/xGSQ+hlXSVb6BgOfCh/VV7dG/zD8E
- xScZMq5MazBsF4rQbV0tUTy2h9msbHcNHj3ostPDmyi0JXnas2DLRTE23eLNdgVbE35Z
- TrJw==
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=jNHXUNQXmlDSrfSwk27t/N3ZsEx3GEk/3uPgFOGyZXs=;
+ b=Tv2oDBTVldiEYJMnbSDkMuFPfIa6m05OS2WpAAs/g+hlTRFsGRvAgrS9l1D/gegP9V
+ OjarEpM5r3rk/l+azPGDqupQ9rlIl22TzhH8/1oC5p8sA6WLcj7ozinpFNHc2p+bNdE4
+ 7lLTnLDPMmZirqBZsxmrJA/aAmPQXgakSdNAnL+CQAS9QRFDW23mPBtlU3ATtZWHZu+W
+ sO/WjjzwMPNrmIBfvBGjvC7Rw0tumPhb4bqDgi3HiP9K+h7B1OfM58gy3D95cfvv37ay
+ MHQ/C4af/VeUKzgLkN2aEVZqBSgflBVlyauMmgofQUiTHI8bzHzWL5hHxSXJVOCZEyhb
+ 99Aw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id;
- bh=TM0po14P+3grtw7weLJ5287+nGsBf+PNGMb9u/cakCE=;
- b=GK71eLskGtSOUMFXiVCPBathiqLRNVBWgMrR8s8IPOup+iT6cT42e0As8oVM0e4Cix
- yXfcdADKbOQjm6mrOtaf+do/IrwEeGHqfnF9dqJXsOjIzXOfim20kXulw4P0rLtq0hEC
- pchbfJupWEg6ywdJYTg6gk2n4YjUzHbl8/bqOf24YG0mFt1bdDrsDaaCHnx9l72LCosm
- TqV3GB/Ck/TL1f0ixyLTiBngIrDFpkgn11cvM78Nq/HCdRS6CA6T8akWCniiSzXHeUK1
- pVWHPdh5tBsygaznYUBZGMemtZbpYS8C3Rebki8SmPeprIuC7NPw96A6wwqCqq6FprWl
- fY0g==
-X-Gm-Message-State: APjAAAWa0okD1iQVcSJP+O8j+Eyid09VIXeasktRf4CTLENMBouCbscX
- YmL2FaOEUpRScsq6kTE4+Ta5Yu9b0PI=
-X-Google-Smtp-Source: APXvYqx82OMtIH8ebi7iXTWq6xGNGAlF2DH3KrdLfVHwQCozJKklh9Nttz25zeUStmzqS+sLTq1qfw==
-X-Received: by 2002:adf:f406:: with SMTP id g6mr60750328wro.189.1582453740307; 
- Sun, 23 Feb 2020 02:29:00 -0800 (PST)
-Received: from PKL-RAJNESH-UBUNTU.pkl.mentorg.com ([110.93.212.98])
- by smtp.gmail.com with ESMTPSA id j11sm12723017wmi.3.2020.02.23.02.28.58
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 23 Feb 2020 02:28:59 -0800 (PST)
-From: rajnesh.kanwal49@gmail.com
-To: qemu-riscv@nongnu.org
-Cc: alistair.francis@wdc.com, palmerdabbelt@google.com, qemu-devel@nongnu.org
-Subject: [PATCH 1/1] target/riscv: Fix VS mode interrupts forwarding.
-Date: Sun, 23 Feb 2020 15:28:06 +0500
-Message-Id: <0c4859f90948ba392da456c9e1daf8fde8f5b22e.1582453384.git.rajnesh.kanwal49@gmail.com>
-X-Mailer: git-send-email 2.17.1
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=jNHXUNQXmlDSrfSwk27t/N3ZsEx3GEk/3uPgFOGyZXs=;
+ b=AL9SKoSuRzv09bTClqCQadyPa1lOaUKHNE+wrl4stfjwtgvae0UjjgdxdH1CwIwePU
+ PsWjOalM530VKjgHdxJ27oS/ukqJTHGDdKfJA/asDnd3AANG1sKcXwFpQfa5oUMn6DpF
+ kF1dyqGiYe5QUwe6csgwlEPvy/uKNsbn/UZ9vFEecizdIidMpisT2Ebj8dcRKoSHvwAg
+ mxLpwSIxCpvftutK6D75aNdE+T4xtlW2AjfzQNi98BvcjV4C6f4lA/EAUnGeVYJJtIfs
+ FoUz9oHndBtH+rPUKnRJ83LTA8ynN1x55EuEcjFd9y7Ir7k3VVu0WI2K4XE606mClEH/
+ tisA==
+X-Gm-Message-State: APjAAAV90p/F5hg9cRB3FiVMwY3NPHyhltNZrzfd30C2x2iJNOmSLDok
+ OhBjdFTX/MNum9IEi/57l5ARQnQYXPfNf/UTAkw=
+X-Google-Smtp-Source: APXvYqwquY2NuWheRKs2Fkdw2PmHyc/8B/yws3YeR8AXr5kZESWl8auIEbo1UUDlPGOg3FBx24KrdQbq/cRPR5IT86o=
+X-Received: by 2002:a92:1f16:: with SMTP id i22mr53254413ile.206.1582468866751; 
+ Sun, 23 Feb 2020 06:41:06 -0800 (PST)
+MIME-Version: 1.0
+References: <0c4859f90948ba392da456c9e1daf8fde8f5b22e.1582453384.git.rajnesh.kanwal49@gmail.com>
+In-Reply-To: <0c4859f90948ba392da456c9e1daf8fde8f5b22e.1582453384.git.rajnesh.kanwal49@gmail.com>
+From: Jose Martins <josemartins90@gmail.com>
+Date: Sun, 23 Feb 2020 14:40:55 +0000
+Message-ID: <CAC41xo0PWCZw4mrcEfRq9fv+b3mSk9sN0mWhFXPwgdD6LR8xnQ@mail.gmail.com>
+Subject: Re: [PATCH 1/1] target/riscv: Fix VS mode interrupts forwarding.
+To: rajnesh.kanwal49@gmail.com
+Cc: qemu-riscv@nongnu.org, palmerdabbelt@google.com, alistair.francis@wdc.com, 
+ qemu-devel@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::442
-X-Mailman-Approved-At: Sun, 23 Feb 2020 08:49:56 -0500
+X-Received-From: 2607:f8b0:4864:20::141
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -64,51 +64,60 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 23 Feb 2020 10:29:05 -0000
+X-List-Received-Date: Sun, 23 Feb 2020 14:41:11 -0000
 
-From: Rajnesh Kanwal <rajnesh.kanwal49@gmail.com>
+Hello rajnesh,
 
-Currently riscv_cpu_local_irq_pending is used to find out pending
-interrupt and VS mode interrupts are being shifted to represent
-S mode interrupts in this function. So when the cause returned by
-this function is passed to riscv_cpu_do_interrupt to actually
-forward the interrupt, the VS mode forwarding check does not work
-as intended and interrupt is actually forwarded to hypervisor. This
-patch fixes this issue.
+I had already submitted almost this exact patch a few weeks ago.
 
-Signed-off-by: Rajnesh Kanwal <rajnesh.kanwal49@gmail.com>
----
- target/riscv/cpu_helper.c | 9 ++++++++-
- 1 file changed, 8 insertions(+), 1 deletion(-)
+Jose
 
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index b9e90dfd9a..59535ecba6 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -46,7 +46,7 @@ static int riscv_cpu_local_irq_pending(CPURISCVState *env)
-     target_ulong pending = env->mip & env->mie &
-                                ~(MIP_VSSIP | MIP_VSTIP | MIP_VSEIP);
-     target_ulong vspending = (env->mip & env->mie &
--                              (MIP_VSSIP | MIP_VSTIP | MIP_VSEIP)) >> 1;
-+                              (MIP_VSSIP | MIP_VSTIP | MIP_VSEIP));
- 
-     target_ulong mie    = env->priv < PRV_M ||
-                           (env->priv == PRV_M && mstatus_mie);
-@@ -900,6 +900,13 @@ void riscv_cpu_do_interrupt(CPUState *cs)
- 
-             if (riscv_cpu_virt_enabled(env) && ((hdeleg >> cause) & 1) &&
-                 !force_hs_execp) {
-+                /*
-+                 * See if we need to adjust cause. Yes if its VS mode interrupt
-+                 * no if hypervisor has delegated one of hs mode's interrupt
-+                 */
-+                if (cause == IRQ_VS_TIMER || cause == IRQ_VS_SOFT ||
-+                    cause == IRQ_VS_EXT)
-+                    cause = cause - 1;
-                 /* Trap to VS mode */
-             } else if (riscv_cpu_virt_enabled(env)) {
-                 /* Trap into HS mode, from virt */
--- 
-2.17.1
-
+On Sun, 23 Feb 2020 at 13:51, <rajnesh.kanwal49@gmail.com> wrote:
+>
+> From: Rajnesh Kanwal <rajnesh.kanwal49@gmail.com>
+>
+> Currently riscv_cpu_local_irq_pending is used to find out pending
+> interrupt and VS mode interrupts are being shifted to represent
+> S mode interrupts in this function. So when the cause returned by
+> this function is passed to riscv_cpu_do_interrupt to actually
+> forward the interrupt, the VS mode forwarding check does not work
+> as intended and interrupt is actually forwarded to hypervisor. This
+> patch fixes this issue.
+>
+> Signed-off-by: Rajnesh Kanwal <rajnesh.kanwal49@gmail.com>
+> ---
+>  target/riscv/cpu_helper.c | 9 ++++++++-
+>  1 file changed, 8 insertions(+), 1 deletion(-)
+>
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index b9e90dfd9a..59535ecba6 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -46,7 +46,7 @@ static int riscv_cpu_local_irq_pending(CPURISCVState *env)
+>      target_ulong pending = env->mip & env->mie &
+>                                 ~(MIP_VSSIP | MIP_VSTIP | MIP_VSEIP);
+>      target_ulong vspending = (env->mip & env->mie &
+> -                              (MIP_VSSIP | MIP_VSTIP | MIP_VSEIP)) >> 1;
+> +                              (MIP_VSSIP | MIP_VSTIP | MIP_VSEIP));
+>
+>      target_ulong mie    = env->priv < PRV_M ||
+>                            (env->priv == PRV_M && mstatus_mie);
+> @@ -900,6 +900,13 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+>
+>              if (riscv_cpu_virt_enabled(env) && ((hdeleg >> cause) & 1) &&
+>                  !force_hs_execp) {
+> +                /*
+> +                 * See if we need to adjust cause. Yes if its VS mode interrupt
+> +                 * no if hypervisor has delegated one of hs mode's interrupt
+> +                 */
+> +                if (cause == IRQ_VS_TIMER || cause == IRQ_VS_SOFT ||
+> +                    cause == IRQ_VS_EXT)
+> +                    cause = cause - 1;
+>                  /* Trap to VS mode */
+>              } else if (riscv_cpu_virt_enabled(env)) {
+>                  /* Trap into HS mode, from virt */
+> --
+> 2.17.1
+>
+>
 
