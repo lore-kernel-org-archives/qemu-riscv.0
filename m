@@ -1,62 +1,104 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1j5iQp-0008AQ-0V
-	for mharc-qemu-riscv@gnu.org; Sat, 22 Feb 2020 22:59:51 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:55540)
+	id 1j5nCI-0000sL-9D
+	for mharc-qemu-riscv@gnu.org; Sun, 23 Feb 2020 04:05:10 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49083)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <bmeng.cn@gmail.com>) id 1j5iQn-00088T-4B
- for qemu-riscv@nongnu.org; Sat, 22 Feb 2020 22:59:50 -0500
+ (envelope-from <pbonzini@redhat.com>) id 1j5nCF-0000rn-Vr
+ for qemu-riscv@nongnu.org; Sun, 23 Feb 2020 04:05:08 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <bmeng.cn@gmail.com>) id 1j5iQl-00025O-W5
- for qemu-riscv@nongnu.org; Sat, 22 Feb 2020 22:59:49 -0500
-Received: from mail-yw1-xc41.google.com ([2607:f8b0:4864:20::c41]:35416)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
- id 1j5iQj-00024P-Su; Sat, 22 Feb 2020 22:59:45 -0500
-Received: by mail-yw1-xc41.google.com with SMTP id i190so3634317ywc.2;
- Sat, 22 Feb 2020 19:59:45 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to;
- bh=mLUD0Tfh1gY4f7W+19o7k3ooXhot98r8f2MwTNGaSjI=;
- b=UhWrUyOQT0667mMAjDcFFeNnKFHGNNad1bXV5IgYNRMl2qgkKwMsYCltp6Pyyu3i33
- 5/rwJk8dHvX5vWCQKjAn6LsTdH6I68MyfYBPkszYcE0Vp/Q8/G2UdQNcRaksj9HQHmXH
- X/188B4iJS9trXm4jfT7oX4TySaiTXaui91TmtVQqjwofWWAd6sLSa/ZXUtXpVLH4hb/
- 2Vodvpmdk/fz26Ox5UDYtacGRluSKzNJwxPfk33aRTTniQmciSLPg8KoyvEuxfCRLbWA
- MN2vH2S11bxcoIRshRGvcR+NPS9//GHdaGaSaut2gSFsGi6ZSXcD9FfNWZFTIFvH3Rga
- vZ6g==
+ (envelope-from <pbonzini@redhat.com>) id 1j5nCF-0000TL-30
+ for qemu-riscv@nongnu.org; Sun, 23 Feb 2020 04:05:07 -0500
+Received: from us-smtp-delivery-1.mimecast.com ([205.139.110.120]:37768
+ helo=us-smtp-1.mimecast.com)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <pbonzini@redhat.com>) id 1j5nCE-0000Sc-Vj
+ for qemu-riscv@nongnu.org; Sun, 23 Feb 2020 04:05:07 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1582448705;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=9+qfRDJ631+3BrpIbQmZINXk2gQQnyP0CW4SShz+z8s=;
+ b=QBuTCP5Y9dynw5qtXOWBMyNMf/6J2V5cpUJR1heGJ204Jze4o3TBPGHBZnuJRjii0jZU1C
+ 6VQNPp+toTwtPicvp3lznMAwfiC3I7r6mFtpupzrt/3WW6Otwt4q1ANnwHJ4NW/I16ZEln
+ TkSm0T7cemk68ccKyDAHmFm0BWVqiU0=
+Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
+ [209.85.221.71]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-260-ilrfIu2JOtO3mpvQzJoWGw-1; Sun, 23 Feb 2020 04:05:04 -0500
+X-MC-Unique: ilrfIu2JOtO3mpvQzJoWGw-1
+Received: by mail-wr1-f71.google.com with SMTP id s13so3692914wru.7
+ for <qemu-riscv@nongnu.org>; Sun, 23 Feb 2020 01:05:04 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to;
- bh=mLUD0Tfh1gY4f7W+19o7k3ooXhot98r8f2MwTNGaSjI=;
- b=m/QFxIGK8nJbLL6N40FVEmQi+S9e4hxkPukOSlpoXdbH0PfsaqLaxg3eMmUtUKp+BM
- dm29IQoPlh0VceD2ATdzB8/4G7vpdT9fRCX5Z7TN+bUs0higG/eDK0/CGNWo+rhSjMCK
- yC6RqyVID8B2Y8BqPuaQB5LAV5ARNkNHjXGX6M69MEiAQFZwouJwKD85zrFz44E/SF4Z
- QmPzxDpHOHku/DM81YyYql2m49XizdFyzzL4OjweUdvdR1Va/beJqtRQHn+mdKOfBLpL
- nyDUleVKKnj9zJmWiJZZs0Y5j8g0ot7aWnN3LlSljw1MAZwx7E8VY1JQAVCARWuJIK5M
- 1kAA==
-X-Gm-Message-State: APjAAAWYE+prkHTCpKDZtyWg1ajDYvOy8BOD8bf+lsy49+Jf8HEEYDIn
- wZSsfkNmXMaTqMuVk3yKlTKqM74M8O3D7Mtdisk=
-X-Google-Smtp-Source: APXvYqxejFPsQw1szrYkluQSgPPx0gdyjbEJMpe00VxKkfVhCpTcdCANXN2jgPAX2CW3JP5/nVxP/T74lAK5AfQhzVU=
-X-Received: by 2002:a81:8a06:: with SMTP id a6mr34218699ywg.240.1582430384989; 
- Sat, 22 Feb 2020 19:59:44 -0800 (PST)
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=9+qfRDJ631+3BrpIbQmZINXk2gQQnyP0CW4SShz+z8s=;
+ b=IX5Rp9p/1PVKAwLc7DH3oUQJIU5/K6F4KAVw6U4qK8XHNIrcLSlK90faZu8jL8XW8V
+ frSYe/6S/sQUiac2ClI/clB2lPns2ruRvKYPBV1KvYA3CzZGl8uq4hokKriqsQVpRXJI
+ FvPC7MTpNduoirSiGXzEILD+nO2o+eLdyfuE1wLdq+95agdPkR9p9KXqx33qPYbziDvW
+ U/ekcKsXeyyaaVhkoqsSBDbTDEIVsItKjriN4TAnrixZURwvjyPmWOMZNAcN0KcoE7pP
+ F0Cq9NrBdN0il0mbhROChDvik8RP3wYsjOxGNpSb86+JjpR6FTLg3a2GXZ9CT09e4vve
+ c9Hw==
+X-Gm-Message-State: APjAAAW68v15zd4/fyB/X9IeDIsnZLGL8fqf93PAA81Fs6CxObaInOUZ
+ xEP88yA6FzlcRwRxbW9JwE36YN7bNQpkFYP3LLreDhI87O6ZbQBF9U2fj52C0WVhHxoPtpyDrEK
+ HSC//a5LiinG4V84=
+X-Received: by 2002:a7b:c416:: with SMTP id k22mr15868213wmi.10.1582448703175; 
+ Sun, 23 Feb 2020 01:05:03 -0800 (PST)
+X-Google-Smtp-Source: APXvYqyITY7Qxt5lA0/QWLVp60oNQOPXzXfoCcVMOHbTs40SM+MbNUVweR2hRsFcxTU3r5XAUUkhWg==
+X-Received: by 2002:a7b:c416:: with SMTP id k22mr15868151wmi.10.1582448702893; 
+ Sun, 23 Feb 2020 01:05:02 -0800 (PST)
+Received: from ?IPv6:2001:b07:6468:f312:ec41:5e57:ff4d:8e51?
+ ([2001:b07:6468:f312:ec41:5e57:ff4d:8e51])
+ by smtp.gmail.com with ESMTPSA id o2sm12051784wmh.46.2020.02.23.01.04.58
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 23 Feb 2020 01:05:02 -0800 (PST)
+Subject: Re: [PATCH v3 2/3] hw: Make MachineClass::is_default a boolean type
+To: "Michael S. Tsirkin" <mst@redhat.com>, Laurent Vivier <laurent@vivier.eu>
+Cc: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>,
+ qemu-devel@nongnu.org, Alistair Francis <Alistair.Francis@wdc.com>,
+ Aurelien Jarno <aurelien@aurel32.net>, qemu-trivial@nongnu.org,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Anthony Green <green@moxielogic.com>,
+ Christian Borntraeger <borntraeger@de.ibm.com>,
+ Guan Xuetao <gxt@mprc.pku.edu.cn>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Richard Henderson <rth@twiddle.net>,
+ Aleksandar Markovic <amarkovic@wavecomp.com>,
+ Aleksandar Rikalo <aleksandar.rikalo@rt-rk.com>,
+ Stafford Horne <shorne@gmail.com>, David Gibson
+ <david@gibson.dropbear.id.au>, Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ Michael Walle <michael@walle.cc>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Chris Wulff <crwulff@gmail.com>, qemu-s390x@nongnu.org,
+ Cornelia Huck <cohuck@redhat.com>, David Hildenbrand <david@redhat.com>,
+ Halil Pasic <pasic@linux.ibm.com>, Helge Deller <deller@gmx.de>,
+ Artyom Tarasenko <atar4qemu@gmail.com>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, qemu-ppc@nongnu.org,
+ qemu-riscv@nongnu.org, Marek Vasut <marex@denx.de>,
+ Jia Liu <proljc@gmail.com>, "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Eduardo Habkost <ehabkost@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Thomas Huth <huth@tuxfamily.org>, Magnus Damm <magnus.damm@gmail.com>
+References: <20200207130453.16666-1-philmd@redhat.com>
+ <20200207130453.16666-3-philmd@redhat.com>
+ <20200207091138-mutt-send-email-mst@kernel.org>
+ <16ec9b38-94e4-bd2d-a47f-83a27289ab47@vivier.eu>
+ <20200207092450-mutt-send-email-mst@kernel.org>
+From: Paolo Bonzini <pbonzini@redhat.com>
+Message-ID: <9dfd96b4-e924-5803-2d8b-182458fc936b@redhat.com>
+Date: Sun, 23 Feb 2020 10:04:58 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.1.1
 MIME-Version: 1.0
-References: <1581861317-30977-1-git-send-email-bmeng.cn@gmail.com>
-In-Reply-To: <1581861317-30977-1-git-send-email-bmeng.cn@gmail.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Sun, 23 Feb 2020 11:59:34 +0800
-Message-ID: <CAEUhbmVJJNhgDvenWnWU134NneGDmtc_7i5TP2vKtKh=QzYrjQ@mail.gmail.com>
-Subject: Re: [PATCH v2] riscv: sifive_u: Add a "serial" property for board
- serial number
-To: Alistair Francis <Alistair.Francis@wdc.com>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Palmer Dabbelt <palmerdabbelt@google.com>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2607:f8b0:4864:20::c41
+In-Reply-To: <20200207092450-mutt-send-email-mst@kernel.org>
+Content-Language: en-US
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+X-Received-From: 205.139.110.120
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -68,37 +110,25 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 23 Feb 2020 03:59:50 -0000
+X-List-Received-Date: Sun, 23 Feb 2020 09:05:09 -0000
 
-On Sun, Feb 16, 2020 at 9:55 PM Bin Meng <bmeng.cn@gmail.com> wrote:
->
-> At present the board serial number is hard-coded to 1, and passed
-> to OTP model during initialization. Firmware (FSBL, U-Boot) uses
-> the serial number to generate a unique MAC address for the on-chip
-> ethernet controller. When multiple QEMU 'sifive_u' instances are
-> created and connected to the same subnet, they all have the same
-> MAC address hence it creates a unusable network.
->
-> A new "serial" property is introduced to specify the board serial
-> number. When not given, the default serial number 1 is used.
->
-> Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
->
-> ---
->
-> Changes in v2:
-> - Move setting OTP serial number property from riscv_sifive_u_soc_init()
->   to riscv_sifive_u_soc_realize(), to fix the 'check-qtest-riscv' error.
->   I am not really sure why doing so could fix the 'make check' error.
->   The v1 patch worked fine and nothing seems wrong.
->
->  hw/riscv/sifive_u.c         | 21 ++++++++++++++++++++-
->  include/hw/riscv/sifive_u.h |  1 +
->  2 files changed, 21 insertions(+), 1 deletion(-)
->
+On 07/02/20 15:25, Michael S. Tsirkin wrote:
+>>>> @@ -841,7 +841,7 @@ static void sun4v_class_init(ObjectClass *oc, void *data)
+>>>>      mc->desc = "Sun4v platform";
+>>>>      mc->init = sun4v_init;
+>>>>      mc->block_default_type = IF_IDE;
+>>>> -    mc->max_cpus = 1; /* XXX for now */
+>>>> +    mc->max_cpus = true; /* XXX for now */
+>>
+>> and here ^^
+>>
+>> Thanks,
+>> Laurent
+> 
+> Ooh good catch. Which probably means we don't have a unit test for these
 
-Ping?
+"= true" just becomes "= 1".
 
-Regards,
-Bin
+Paolo
+
 
