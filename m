@@ -1,119 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1j6BYZ-000580-QE
-	for mharc-qemu-riscv@gnu.org; Mon, 24 Feb 2020 06:05:47 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49335)
+	id 1j6DyV-0002oy-9C
+	for mharc-qemu-riscv@gnu.org; Mon, 24 Feb 2020 08:40:43 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:42436)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <prvs=316298c0a=Anup.Patel@wdc.com>)
- id 1j6BYW-00057N-5E
- for qemu-riscv@nongnu.org; Mon, 24 Feb 2020 06:05:46 -0500
+ (envelope-from <bmeng.cn@gmail.com>) id 1j6DyQ-0002m2-LZ
+ for qemu-riscv@nongnu.org; Mon, 24 Feb 2020 08:40:40 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <prvs=316298c0a=Anup.Patel@wdc.com>)
- id 1j6BYU-00069a-BD
- for qemu-riscv@nongnu.org; Mon, 24 Feb 2020 06:05:43 -0500
-Received: from esa6.hgst.iphmx.com ([216.71.154.45]:21480)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <prvs=316298c0a=Anup.Patel@wdc.com>)
- id 1j6BYT-00067N-HQ; Mon, 24 Feb 2020 06:05:42 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1582542342; x=1614078342;
- h=from:to:cc:subject:date:message-id:references:
- in-reply-to:content-transfer-encoding:mime-version;
- bh=gd5DkkKzXhqc5kSO8uwDvHSXDED69THV++JzYRlk6Fc=;
- b=WMAgGKHYpA9fvLUZ7sth0nR4C0UzBDfUXYEbPDZ5wTnAQMcabMMathYD
- rM2hmCrikS32bdkocrYMdelc85OBlelaJ7toXJFuq5BjLRgroXehXS/IF
- CXJ6Iqp2Flmiv1S0sWPlO99QWrCD9X/BQmhCQs9IX2wTAD1xuxJj0/v5l
- 5c6cCXHOr5Q8FV1nQUmnlOxBJEJ3Xe3XgS901OVHpqt8l8R4gVR5JSQpw
- /G2odJT8aROqHRYSOibzAY9RC9EEGVEpo/3fsLkWHpSQu53IEEwUtm+XB
- Aw75wf12+IXDfgzovvR9Xq9X3pzx+ajOOvV8VwSoFTujm4Ui+FCk5tSid A==;
-IronPort-SDR: bnTyEMBLYEIs3gDHyQbErlqMxokV6aaYGOQgdnk5E5rsaa8V9Qpec/kRDAxvSiGJfmtFeCvFup
- ALtRznt7phE6R7PbBip1c+PY/49XL9RddCU39PiGZN9+NMlqnsW5tEIekt5bhgsc4YMmwLqYY1
- y78QZNrzteZ9jJ8k2yH8D3d6Llgx5IFpO4r9QiYxVCZz35dXKuhId8qnPt20dqddG5YJ29Hb7e
- +Y/CuCl8kPjOBWL8AZ+Gwd3Z2gLYfkrDfD/xvm4ICN6SVe1I4sjMCPp1MROkzpic68U67SwX4r
- k4U=
-X-IronPort-AV: E=Sophos;i="5.70,479,1574092800"; d="scan'208";a="132018478"
-Received: from mail-bn8nam12lp2175.outbound.protection.outlook.com (HELO
- NAM12-BN8-obe.outbound.protection.outlook.com) ([104.47.55.175])
- by ob1.hgst.iphmx.com with ESMTP; 24 Feb 2020 19:05:36 +0800
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=h77A7Wdz+v39FGrvO0z11YlLosvkiObLTb1tcJxCR47WW/PcDVDWOriJJqxmbaK/i7nnMUIEmSQUz3W2v2GMG3gyAdElV6xOXvEQ8LDuTqNJsC/q/nXCforrM9kShUNmpPrRyjIAr867GY8Jw8wNKpHxM3tEwvOM4jBMALYt+DIWmsyyjHcL2LLpaoidf7UnvaREv42OtDi2GE9iaOKLNvyyi5Wh4wPChtl/VB7X2QnqUCOmgqaEVFqdF08Sqwij+cGGpHd9oDBEw8BonzKZxw//fnXe1M8vtloKj6jodaPBWeBlUQc2eFRXSGFw9ONg/o/uTyolhIyTOkSAb0TSEA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=gd5DkkKzXhqc5kSO8uwDvHSXDED69THV++JzYRlk6Fc=;
- b=Iny++xaMDb/xHoMbmlOroyojTjZXUnanwDicg7MIjYcAHtBiRxppo4UQ4tqf8VTZCfHJbO2vc/5tTPjn7uw84PMS1VD8DSSoGx9k8cTcR8gJL8uDhyMOXGukAZs5jvtkwq0xyQ03wbKPakIAgv0ujiIQLieXzlyy80aZaQrNDfz9V0OBrdeZWnGOfVgJOc0vD2DvxdXoxUtrtKih2wTAgHWnJ9AaOxWndXovyuBNVmygSj17x0G5NqZyhIYO3d0cXlr5RmcnMaY7oyfFkEslm6GitDW047/D6+ARIXA6JjjnUsaui71izvWRKpZQMzMeQz5be5aQGYkftNP1kaUT2Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=wdc.com; dmarc=pass action=none header.from=wdc.com; dkim=pass
- header.d=wdc.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=gd5DkkKzXhqc5kSO8uwDvHSXDED69THV++JzYRlk6Fc=;
- b=vGjR2DjGAbs+Iga2xDRsS/8StMT/jOdVLNRYNO3ujH817fo1xFlR1jDxdt9TggTINMzYr9Ft7nN0P/n1ecR3oXav9zZk8vOMMLfwPRtbK73i0iEB0iInh2zwjsNyfITcjKbsdq5GOph4043bmBEFfhzP4wqUOzysT78tMMgvvTU=
-Received: from MN2PR04MB6061.namprd04.prod.outlook.com (2603:10b6:208:d8::15)
- by MN2PR04MB6078.namprd04.prod.outlook.com (2603:10b6:208:e3::17)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2750.21; Mon, 24 Feb
- 2020 11:05:35 +0000
-Received: from MN2PR04MB6061.namprd04.prod.outlook.com
- ([fe80::159d:10c9:f6df:64c8]) by MN2PR04MB6061.namprd04.prod.outlook.com
- ([fe80::159d:10c9:f6df:64c8%6]) with mapi id 15.20.2750.021; Mon, 24 Feb 2020
- 11:05:35 +0000
-From: Anup Patel <Anup.Patel@wdc.com>
-To: Rajnesh Kanwal <rajnesh.kanwal49@gmail.com>, Jose Martins
- <josemartins90@gmail.com>
-CC: Alistair Francis <Alistair.Francis@wdc.com>, "palmerdabbelt@google.com"
- <palmerdabbelt@google.com>, "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>,
- "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>
-Subject: RE: [PATCH 1/1] target/riscv: Fix VS mode interrupts forwarding.
-Thread-Topic: [PATCH 1/1] target/riscv: Fix VS mode interrupts forwarding.
-Thread-Index: AQHV6lA85AxxfPtdLUe1fUudkiM/e6go2eGAgAAIJICAAAhYgIABNyOAgAANuUA=
-Date: Mon, 24 Feb 2020 11:05:34 +0000
-Message-ID: <MN2PR04MB6061244D856F92F469E8E53B8DEC0@MN2PR04MB6061.namprd04.prod.outlook.com>
-References: <0c4859f90948ba392da456c9e1daf8fde8f5b22e.1582453384.git.rajnesh.kanwal49@gmail.com>
- <CAC41xo0PWCZw4mrcEfRq9fv+b3mSk9sN0mWhFXPwgdD6LR8xnQ@mail.gmail.com>
- <CAHfcQ+GGCXj6f+PMMvqNhg=Lzpi1Ke+OaEO6-pb5gjSngm3Upg@mail.gmail.com>
- <CAC41xo0V_F4ExJjoYx4AWQXViX-WwgfFx219EyCb8mk-okKUAQ@mail.gmail.com>
- <CAHfcQ+Fw_mEAyGXwry8_jdXBJcMoV3-x8T61oypzQ3_-1Tn_Pw@mail.gmail.com>
-In-Reply-To: <CAHfcQ+Fw_mEAyGXwry8_jdXBJcMoV3-x8T61oypzQ3_-1Tn_Pw@mail.gmail.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: spf=none (sender IP is )
- smtp.mailfrom=Anup.Patel@wdc.com; 
-x-originating-ip: [49.207.61.74]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-ht: Tenant
-x-ms-office365-filtering-correlation-id: 19ca400b-3ad3-482d-aa64-08d7b91978f2
-x-ms-traffictypediagnostic: MN2PR04MB6078:
-x-ms-exchange-transport-forked: True
-x-microsoft-antispam-prvs: <MN2PR04MB6078A7B462C921EC3C0A59E88DEC0@MN2PR04MB6078.namprd04.prod.outlook.com>
-wdcipoutbound: EOP-TRUE
-x-ms-oob-tlc-oobclassifiers: OLM:10000;
-x-forefront-prvs: 032334F434
-x-forefront-antispam-report: SFV:NSPM;
- SFS:(10019020)(4636009)(346002)(376002)(136003)(396003)(366004)(39860400002)(189003)(199004)(316002)(52536014)(86362001)(71200400001)(8936002)(2906002)(7696005)(4326008)(8676002)(81166006)(81156014)(186003)(54906003)(966005)(55236004)(64756008)(66556008)(76116006)(33656002)(53546011)(55016002)(5660300002)(478600001)(9686003)(6506007)(26005)(66946007)(110136005)(66476007)(66446008);
- DIR:OUT; SFP:1102; SCL:1; SRVR:MN2PR04MB6078;
- H:MN2PR04MB6061.namprd04.prod.outlook.com; FPR:; SPF:None; LANG:en;
- PTR:InfoNoRecords; MX:1; A:1; 
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: bMnOCpRfnEcWN5rcB2Ri8Iv5Y4Xd8ZaGYh5LdSPoKYasaVG/qcHMmXIJ6FMx5yBHpwk+HCnHSW5yXzpN7b46tUHZhMT2bUdxStj9g4c1Goe10X/muoPsHcZBJCQNZSRp4KvF3EFIZfrrpmcfVOXRYn7sBq1l6STR78vfKQrc/8ywM6aQdCK1OH0lYamhy44MK+TRngSSdj9RHmv3qcIANAm7uH366gDqVGl61WNDjrNk3Re2aUP58sIY17koVlxxvvsiQCu4qOFAG1Cat76Zntz6G5R6twPdi7XbHJ7Vg+uQL0zNpyYe+6Z3hi1cLnCeadoITlCRjZfZju4zPYDB6mhbNvBUaV3rG98zOQN45r4o4yNdSKuqQ7aFafpktvL8eocpTAaAoWUCT+7ToLUtWZomom4IZu7sVqrFk6nD7I+WsS553kqRnHqy4ZPq0bDxOMQyDTCzWxgKUk1c0sj4msgwmE0+slNhXjBWS4YmSfHi4Pm0DIdr6tQJ8jGhe2BrzVoquHtCsvfZ4bRsJgFJIw==
-x-ms-exchange-antispam-messagedata: smddx9Lv+t8oRIMz2cdOWUjMkuHOOrMxCw8Id2Q+hQmra2zFBC+AbFryQ1Jv5KsfFNmqBbplCkIBTnb4EnL7dSsVSN7c0mXf+jYO+gkKfbLzNAXDt68Xd+hwh4QyrM90NUb8zgm8KLr17ZbX3silHg==
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ (envelope-from <bmeng.cn@gmail.com>) id 1j6DyP-0004TP-Dn
+ for qemu-riscv@nongnu.org; Mon, 24 Feb 2020 08:40:38 -0500
+Received: from mail-pj1-x1042.google.com ([2607:f8b0:4864:20::1042]:53263)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
+ id 1j6DyM-0004S0-NP; Mon, 24 Feb 2020 08:40:34 -0500
+Received: by mail-pj1-x1042.google.com with SMTP id n96so4231059pjc.3;
+ Mon, 24 Feb 2020 05:40:34 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=from:to:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=+BgHlUg/hUCo/8ZQNXk2OJTXVat9hUNnUrO9vW0g3z8=;
+ b=KrMP0C/20z4qiekWgELLGrqlRcX0Fi4Hb5Q79RikkQ8rM872+dsF+0NrmqaFK1PWGC
+ KQ7CgtXINLOWHMV7GnoO11tNnplR97FyA3V/gq9oAZglWL8Hhy0y7H1XdojGcikQY+WD
+ +W+gynm8qpMVtrqbZL3F4WpcfgpKoYzXXETMrEb0iUrRTYwFqRE63LwE7eOYwFC3fhxi
+ JFSLL9AzajEYnK2aF+XD1q/h2gK8/g1Ti0riQ/dUbNap+gO+tXqG1g7nkqber+jy2dEQ
+ F4Jnvce2vBPn7oHsTFyAGJP1B7jlTOUExTJC5mQqOBlpb3WRY+mxWiJnuhnUDTDiwD6G
+ BbBw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=+BgHlUg/hUCo/8ZQNXk2OJTXVat9hUNnUrO9vW0g3z8=;
+ b=hAj2gGB9wbUpHFx0yYTAOzGUcynh4jiNrdgWPWeRIlw4skSmRdKqRBpYcSNIWO3OoX
+ iKrhI3cO74i8QQzdiYGnPEe7TYXjadyW6tbjbnrW7hbopCeFrX9La6b1hAtQq8E3Qq4u
+ jh2q7EsZeCgAmDJb3H2q1QXrrH6BRds5Fe2vre9nghdWAfSMeUBJZcUppC3yzzZUH2jp
+ fDpvnsH4kJenaCzuUG79Dg61cuXPFJw4cTdVXx8Id56Zb7RwleCd5EO5SBT7DvRW8b5y
+ VAJH/qMWyXH6+rT9XslI+cvmo3/l+TAp64IbAypP5d7EIQdExd8P3bNDpeOGsKrAmbJV
+ xung==
+X-Gm-Message-State: APjAAAVzwb91lZmTCYiLJPiqMuJ0/pimIzKgoVoTP6SP3q2qqoCBvrdX
+ t0+XADnX0FbpQe3qwmOuz2c=
+X-Google-Smtp-Source: APXvYqyn9oB/FFouD3CzYviNzP3K6jwddkBgJlPkJuAaYWj9B7NGwjw8zSt7IlBlTYf4/BsC3WCZbA==
+X-Received: by 2002:a17:90a:f0c1:: with SMTP id
+ fa1mr20894397pjb.129.1582551633179; 
+ Mon, 24 Feb 2020 05:40:33 -0800 (PST)
+Received: from localhost.localdomain (unknown-224-80.windriver.com.
+ [147.11.224.80])
+ by smtp.gmail.com with ESMTPSA id p4sm12912258pgh.14.2020.02.24.05.40.32
+ (version=TLS1 cipher=AES128-SHA bits=128/128);
+ Mon, 24 Feb 2020 05:40:32 -0800 (PST)
+From: Bin Meng <bmeng.cn@gmail.com>
+To: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Palmer Dabbelt <palmerdabbelt@google.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Subject: [PATCH v2 0/4] riscv: Upgrade OpenSBI to v0.6 and add 32-bit sifive_u
+ bios image
+Date: Mon, 24 Feb 2020 05:39:40 -0800
+Message-Id: <1582551584-20093-1-git-send-email-bmeng.cn@gmail.com>
+X-Mailer: git-send-email 1.7.1
 MIME-Version: 1.0
-X-OriginatorOrg: wdc.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 19ca400b-3ad3-482d-aa64-08d7b91978f2
-X-MS-Exchange-CrossTenant-originalarrivaltime: 24 Feb 2020 11:05:34.9535 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: rj2+rzqdzPYvKIXSKK/hH/Jrjk+oV3k1n5AxoQKutJrFjguZvZukX88EciaIJTY51eqrq1vKHiRfqZRoHsaWLg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR04MB6078
-X-detected-operating-system: by eggs.gnu.org: FreeBSD 9.x [fuzzy]
-X-Received-From: 216.71.154.45
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2607:f8b0:4864:20::1042
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -125,93 +75,46 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Feb 2020 11:05:46 -0000
+X-List-Received-Date: Mon, 24 Feb 2020 13:40:40 -0000
 
-SGksDQoNClllcywgaW5kZWVkIHRoaXMgaGFzIHRvIGJlIGZpeGVkIGluIFFFTVUsIFh2aXNvciBh
-bmQgS1ZNLg0KDQpCZWZvcmUgZml4aW5nIFh2aXNvciBhbmQgS1ZNLCB3ZSBoYXZlIHRvIGZpcnN0
-IGZpeCB0aGlzIGluIFFFTVUuDQoNCkZvciBYdmlzb3IgUklTQy1WLCBmZWVsIGZyZWUgdG8gc2Vu
-ZCBwYXRjaCB0byBYdmlzb3ItZGV2ZWxAZ29vZ2xlZ3JvdXBzLmNvbQ0KRm9yIEtWTSBSSVNDLVYs
-IEkgd2lsbCB1cGRhdGUgaXQgaW4gdjExIHBhdGNoIHNlcmllcyBhbmQgS1ZNIFJJU0MtViBnaXQg
-cmVwbyBhcyB3ZWxsLg0KDQpSZWdhcmRzLA0KQW51cA0KDQpGcm9tOiBRZW11LXJpc2N2IDxxZW11
-LXJpc2N2LWJvdW5jZXMrYW51cC5wYXRlbD13ZGMuY29tQG5vbmdudS5vcmc+IE9uIEJlaGFsZiBP
-ZiBSYWpuZXNoIEthbndhbA0KU2VudDogTW9uZGF5LCBGZWJydWFyeSAyNCwgMjAyMCAzOjQ0IFBN
-DQpUbzogSm9zZSBNYXJ0aW5zIDxqb3NlbWFydGluczkwQGdtYWlsLmNvbT4NCkNjOiBBbGlzdGFp
-ciBGcmFuY2lzIDxBbGlzdGFpci5GcmFuY2lzQHdkYy5jb20+OyBwYWxtZXJkYWJiZWx0QGdvb2ds
-ZS5jb207IHFlbXUtcmlzY3ZAbm9uZ251Lm9yZzsgcWVtdS1kZXZlbEBub25nbnUub3JnDQpTdWJq
-ZWN0OiBSZTogW1BBVENIIDEvMV0gdGFyZ2V0L3Jpc2N2OiBGaXggVlMgbW9kZSBpbnRlcnJ1cHRz
-IGZvcndhcmRpbmcuDQoNCk5pY2UgY2F0Y2guIFlvdSBhcmUgcmlnaHQuIEkgd2FzIGEgYml0IGNv
-bmZ1c2VkIGFmdGVyIGxvb2tpbmcgYXQgY3VycmVudCB4dmlzb3IgYW5kIEtWTSBwb3J0LiBUaGV5
-IGFyZSBkZWxlZ2F0aW5nIFMgbW9kZSBpbnRlcnJ1cHRzIHRvIFZTIG1vZGUsIGFzIHBlciBteSB1
-bmRlcnN0YW5kaW5nIGFmdGVyIGxvb2tpbmcgYXQgaHR0cHM6Ly9naXRodWIuY29tL2t2bS1yaXNj
-di9saW51eC9ibG9iL3Jpc2N2X2t2bV9tYXN0ZXIvYXJjaC9yaXNjdi9rdm0vbWFpbi5jIGxpbmUg
-bm8uIDM0LiBJIHdpbGwgc2VlIGlmIHRoZXJlIGlzIGEgd2F5IHRvIGRlY2xpbmUgYSBwYXRjaC4g
-DQpUaGFua3MgZm9yIHBvaW50aW5nIHRoYXQgb3V0Lg0KUmVnYXJkcywNClJham5lc2gNCg0KT24g
-U3VuLCBGZWIgMjMsIDIwMjAgYXQgODo0MCBQTSBKb3NlIE1hcnRpbnMgPG1haWx0bzpqb3NlbWFy
-dGluczkwQGdtYWlsLmNvbT4gd3JvdGU6DQpObyBwcm9ibGVtLiBCdXQgSSdtIGZhaWxpbmcgdG8g
-c2VlIHdoYXQgeW91IG1lYW4uIE15IHJlYXNvbmluZyB3YXM6DQp0aGUgc3BlY2lmaWNhdGlvbiBt
-YW5kYXRlcyB0aGF0IG9ubHkgVlMgbW9kZSBpbnRlcnJ1cHQgYml0cyBhcmUNCndyaXRhYmxlIGlu
-IGhpZGVsZWcsIGFsbCB0aGUgb3RoZXJzIG11c3QgYmUgaGFyZHdpcmVkIHRvIHplcm8uIFRoaXMN
-Cm1lYW5zIHRoZSBoeXBlcnZpc29yIGNhbid0IHJlYWxseSBkZWxlZ2F0ZSBTIG1vZGUgaW50ZXJy
-dXB0cyBhcyB5b3UNCmFyZSBzYXlpbmcuIFNvLCBpZiB0aGlzIGlzIGltcGxlbWVudGVkIGNvcnJl
-Y3RseSwgeW91IHdpbGwgbmV2ZXIgZ2V0DQppbnNpZGUgdGhhdCBpZiBjb25kaXRpb24gYmVjYXVz
-ZSBvZiBhbiBIUyBpbnRlcnJ1cHQuIEFuZCBhbGwNCmRlbGVnYXRhYmxlIGFzeW5jaHJvbm91cyBl
-eGNlcHRpb24gdmFsdWVzIG11c3QgYmUgZGVjcmVtZW50ZWQuIFNvLA0KY2hlY2tpbmcgaWYgdGhp
-cyBpcyBhbiBhc3luYyBleGNlcHRpb24gc2hvdWxkIGRvIHRoZSBqb2IuDQoNCkpvc2UNCg0KT24g
-U3VuLCAyMyBGZWIgMjAyMCBhdCAxNToxMCwgUmFqbmVzaCBLYW53YWwgPG1haWx0bzpyYWpuZXNo
-LmthbndhbDQ5QGdtYWlsLmNvbT4gd3JvdGU6DQo+DQo+IEhlbGxvIEpvc2UsDQo+DQo+IFNvcnJ5
-IEkgZGlkbid0IHNlZSB0aGF0IGFzIGl0IGhhZG4ndCBiZWNhbWUgYSBwYXJ0IG9mIHRoZSBwb3J0
-LiBJIGRvbid0IGtub3cgaG93DQo+IHRoZXkgcHJvY2VlZCB3aXRoIHNhbWUgcGF0Y2hlcy4NCj4N
-Cj4gSnVzdCB0byBhZGQsIHRoZXJlIGlzIGEgbWlub3IgcHJvYmxlbSB3aXRoIHlvdXIgcGF0Y2gu
-IFRoZSBjYXVzZSB2YWx1ZSBzaG91bGQNCj4gb25seSBiZSBkZWNyZW1lbnRlZCBieSBvbmUgZm9y
-IFZTIG1vZGUgaW50ZXJydXB0cy4gSW4gY2FzZSBpZiBoeXBlcnZpc29yIGhhcw0KPiBkZWxlZ2F0
-ZWQgUyBtb2RlIGludGVycnVwdHMgdGhlbiB3ZSBzaG91bGQgbm90IGRlY3JlbWVudCBjYXVzZSBm
-b3IgdGhvc2UNCj4gaW50ZXJydXB0cy4NCj4NCj4gUmVnYXJkcywNCj4gUmFqbmVzaA0KPg0KPg0K
-PiBPbiBTdW4sIEZlYiAyMywgMjAyMCBhdCA3OjQxIFBNIEpvc2UgTWFydGlucyA8bWFpbHRvOmpv
-c2VtYXJ0aW5zOTBAZ21haWwuY29tPiB3cm90ZToNCj4+DQo+PiBIZWxsbyByYWpuZXNoLA0KPj4N
-Cj4+IEkgaGFkIGFscmVhZHkgc3VibWl0dGVkIGFsbW9zdCB0aGlzIGV4YWN0IHBhdGNoIGEgZmV3
-IHdlZWtzIGFnby4NCj4+DQo+PiBKb3NlDQo+Pg0KPj4gT24gU3VuLCAyMyBGZWIgMjAyMCBhdCAx
-Mzo1MSwgPG1haWx0bzpyYWpuZXNoLmthbndhbDQ5QGdtYWlsLmNvbT4gd3JvdGU6DQo+PiA+DQo+
-PiA+IEZyb206IFJham5lc2ggS2Fud2FsIDxtYWlsdG86cmFqbmVzaC5rYW53YWw0OUBnbWFpbC5j
-b20+DQo+PiA+DQo+PiA+IEN1cnJlbnRseSByaXNjdl9jcHVfbG9jYWxfaXJxX3BlbmRpbmcgaXMg
-dXNlZCB0byBmaW5kIG91dCBwZW5kaW5nDQo+PiA+IGludGVycnVwdCBhbmQgVlMgbW9kZSBpbnRl
-cnJ1cHRzIGFyZSBiZWluZyBzaGlmdGVkIHRvIHJlcHJlc2VudA0KPj4gPiBTIG1vZGUgaW50ZXJy
-dXB0cyBpbiB0aGlzIGZ1bmN0aW9uLiBTbyB3aGVuIHRoZSBjYXVzZSByZXR1cm5lZCBieQ0KPj4g
-PiB0aGlzIGZ1bmN0aW9uIGlzIHBhc3NlZCB0byByaXNjdl9jcHVfZG9faW50ZXJydXB0IHRvIGFj
-dHVhbGx5DQo+PiA+IGZvcndhcmQgdGhlIGludGVycnVwdCwgdGhlIFZTIG1vZGUgZm9yd2FyZGlu
-ZyBjaGVjayBkb2VzIG5vdCB3b3JrDQo+PiA+IGFzIGludGVuZGVkIGFuZCBpbnRlcnJ1cHQgaXMg
-YWN0dWFsbHkgZm9yd2FyZGVkIHRvIGh5cGVydmlzb3IuIFRoaXMNCj4+ID4gcGF0Y2ggZml4ZXMg
-dGhpcyBpc3N1ZS4NCj4+ID4NCj4+ID4gU2lnbmVkLW9mZi1ieTogUmFqbmVzaCBLYW53YWwgPG1h
-aWx0bzpyYWpuZXNoLmthbndhbDQ5QGdtYWlsLmNvbT4NCj4+ID4gLS0tDQo+PiA+wqAgdGFyZ2V0
-L3Jpc2N2L2NwdV9oZWxwZXIuYyB8IDkgKysrKysrKystDQo+PiA+wqAgMSBmaWxlIGNoYW5nZWQs
-IDggaW5zZXJ0aW9ucygrKSwgMSBkZWxldGlvbigtKQ0KPj4gPg0KPj4gPiBkaWZmIC0tZ2l0IGEv
-dGFyZ2V0L3Jpc2N2L2NwdV9oZWxwZXIuYyBiL3RhcmdldC9yaXNjdi9jcHVfaGVscGVyLmMNCj4+
-ID4gaW5kZXggYjllOTBkZmQ5YS4uNTk1MzVlY2JhNiAxMDA2NDQNCj4+ID4gLS0tIGEvdGFyZ2V0
-L3Jpc2N2L2NwdV9oZWxwZXIuYw0KPj4gPiArKysgYi90YXJnZXQvcmlzY3YvY3B1X2hlbHBlci5j
-DQo+PiA+IEBAIC00Niw3ICs0Niw3IEBAIHN0YXRpYyBpbnQgcmlzY3ZfY3B1X2xvY2FsX2lycV9w
-ZW5kaW5nKENQVVJJU0NWU3RhdGUgKmVudikNCj4+ID7CoCDCoCDCoCB0YXJnZXRfdWxvbmcgcGVu
-ZGluZyA9IGVudi0+bWlwICYgZW52LT5taWUgJg0KPj4gPsKgIMKgIMKgIMKgIMKgIMKgIMKgIMKg
-IMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgfihNSVBfVlNTSVAgfCBNSVBfVlNUSVAgfCBNSVBf
-VlNFSVApOw0KPj4gPsKgIMKgIMKgIHRhcmdldF91bG9uZyB2c3BlbmRpbmcgPSAoZW52LT5taXAg
-JiBlbnYtPm1pZSAmDQo+PiA+IC3CoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDC
-oCDCoCDCoCAoTUlQX1ZTU0lQIHwgTUlQX1ZTVElQIHwgTUlQX1ZTRUlQKSkgPj4gMTsNCj4+ID4g
-K8KgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIChNSVBfVlNTSVAg
-fCBNSVBfVlNUSVAgfCBNSVBfVlNFSVApKTsNCj4+ID4NCj4+ID7CoCDCoCDCoCB0YXJnZXRfdWxv
-bmcgbWllwqAgwqAgPSBlbnYtPnByaXYgPCBQUlZfTSB8fA0KPj4gPsKgIMKgIMKgIMKgIMKgIMKg
-IMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIChlbnYtPnByaXYgPT0gUFJWX00gJiYgbXN0YXR1c19t
-aWUpOw0KPj4gPiBAQCAtOTAwLDYgKzkwMCwxMyBAQCB2b2lkIHJpc2N2X2NwdV9kb19pbnRlcnJ1
-cHQoQ1BVU3RhdGUgKmNzKQ0KPj4gPg0KPj4gPsKgIMKgIMKgIMKgIMKgIMKgIMKgIGlmIChyaXNj
-dl9jcHVfdmlydF9lbmFibGVkKGVudikgJiYgKChoZGVsZWcgPj4gY2F1c2UpICYgMSkgJiYNCj4+
-ID7CoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCAhZm9yY2VfaHNfZXhlY3ApIHsNCj4+ID4gK8Kg
-IMKgIMKgIMKgIMKgIMKgIMKgIMKgIC8qDQo+PiA+ICvCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDC
-oCogU2VlIGlmIHdlIG5lZWQgdG8gYWRqdXN0IGNhdXNlLiBZZXMgaWYgaXRzIFZTIG1vZGUgaW50
-ZXJydXB0DQo+PiA+ICvCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCogbm8gaWYgaHlwZXJ2aXNv
-ciBoYXMgZGVsZWdhdGVkIG9uZSBvZiBocyBtb2RlJ3MgaW50ZXJydXB0DQo+PiA+ICvCoCDCoCDC
-oCDCoCDCoCDCoCDCoCDCoCDCoCovDQo+PiA+ICvCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCBpZiAo
-Y2F1c2UgPT0gSVJRX1ZTX1RJTUVSIHx8IGNhdXNlID09IElSUV9WU19TT0ZUIHx8DQo+PiA+ICvC
-oCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCBjYXVzZSA9PSBJUlFfVlNfRVhUKQ0KPj4gPiAr
-wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgY2F1c2UgPSBjYXVzZSAtIDE7DQo+PiA+wqAg
-wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgLyogVHJhcCB0byBWUyBtb2RlICovDQo+PiA+wqAgwqAg
-wqAgwqAgwqAgwqAgwqAgfSBlbHNlIGlmIChyaXNjdl9jcHVfdmlydF9lbmFibGVkKGVudikpIHsN
-Cj4+ID7CoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCAvKiBUcmFwIGludG8gSFMgbW9kZSwgZnJv
-bSB2aXJ0ICovDQo+PiA+IC0tDQo+PiA+IDIuMTcuMQ0KPj4gPg0KPj4gPg0K
+
+This series advances the roms/opensbi submodule to the v0.6 release,
+and builds and captures platform firmware binaries from that release.
+
+A 32-bit sifive_u bios image has also been added, so that we can have
+32-bit test coverage for SiFive specific drivers that cannot be done
+with the 'virt' machine.
+
+Two GitLab CI jobs are added to build the OpenSBI firmware binaries.
+
+Changes in v2:
+- new patch: Upgrade opensbi from v0.5 to v0.6
+- Update the 32-bit sifive_u bios image to OpenSBI v0.6
+- new patch: Add GitLab jobs to build OpenSBI firmware binaries
+
+Bin Meng (4):
+  roms: opensbi: Upgrade from v0.5 to v0.6
+  roms: opensbi: Add 32-bit firmware image for sifive_u machine
+  riscv: sifive_u: Update BIOS_FILENAME for 32-bit
+  gitlab-ci.yml: Add jobs to build OpenSBI firmware binaries
+
+ .gitlab-ci-opensbi.yml                       |  63 +++++++++++++++++++++++++++
+ .gitlab-ci.d/opensbi/Dockerfile              |  33 ++++++++++++++
+ .gitlab-ci.yml                               |   1 +
+ Makefile                                     |   2 +-
+ hw/riscv/sifive_u.c                          |   6 ++-
+ pc-bios/opensbi-riscv32-sifive_u-fw_jump.bin | Bin 0 -> 49472 bytes
+ pc-bios/opensbi-riscv32-virt-fw_jump.bin     | Bin 40984 -> 41280 bytes
+ pc-bios/opensbi-riscv64-sifive_u-fw_jump.bin | Bin 49160 -> 53760 bytes
+ pc-bios/opensbi-riscv64-virt-fw_jump.bin     | Bin 45064 -> 49664 bytes
+ roms/Makefile                                |   7 +++
+ roms/opensbi                                 |   2 +-
+ 11 files changed, 111 insertions(+), 3 deletions(-)
+ create mode 100644 .gitlab-ci-opensbi.yml
+ create mode 100644 .gitlab-ci.d/opensbi/Dockerfile
+ create mode 100644 pc-bios/opensbi-riscv32-sifive_u-fw_jump.bin
+
+-- 
+2.7.4
+
 
