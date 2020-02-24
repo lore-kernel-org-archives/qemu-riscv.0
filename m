@@ -1,88 +1,73 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1j6LGc-0002bp-32
-	for mharc-qemu-riscv@gnu.org; Mon, 24 Feb 2020 16:27:59 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:58246)
+	id 1j6N9z-00020E-Mb
+	for mharc-qemu-riscv@gnu.org; Mon, 24 Feb 2020 18:29:11 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:45989)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <alistair23@gmail.com>) id 1j6LGZ-0002UC-6a
- for qemu-riscv@nongnu.org; Mon, 24 Feb 2020 16:27:52 -0500
+ (envelope-from <prvs=316f2015f=alistair.francis@wdc.com>)
+ id 1j6N9x-0001yp-Q9
+ for qemu-riscv@nongnu.org; Mon, 24 Feb 2020 18:29:10 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1j6LGX-0001hC-Rz
- for qemu-riscv@nongnu.org; Mon, 24 Feb 2020 16:27:51 -0500
-Received: from mail-lj1-x243.google.com ([2a00:1450:4864:20::243]:37759)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1j6LGO-0001Te-N0; Mon, 24 Feb 2020 16:27:40 -0500
-Received: by mail-lj1-x243.google.com with SMTP id q23so11765485ljm.4;
- Mon, 24 Feb 2020 13:27:40 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=3PAZFGKX8bAlTMnssUbYxm+Yr9ej4zeJyuNTmFdnjaY=;
- b=d8aD68TgYftRkSO8GLD9OWf5kVrnsEccRTtMrZO3I1BF+pKyMMf2dG526sPdScDahN
- LiZUtB6xzcTcNGGu+JYR3vl+4okQXtwSUMFNRQKSLB1T6j6MWyUUa6O4+Y5kuWOnOcgP
- mJUr3mqIgIrypgH0wdwumWb0mGqC0LqKE3hMi/EmVeZ3MpXmQ0u02Cpe5z6YBXJNbrck
- El3K173IG62xu1/t0B146vLrVwKNg2ruY4b3rVgwiTqlGQV/gjZxdLDYPO1mXDdl8OTg
- H9W3FdXy1KfrUmentwGNAAGRhpIHKdWXA5cN6d8rd/TAa6PF0IyHZR7PaKS5m77yqEy3
- pzXA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=3PAZFGKX8bAlTMnssUbYxm+Yr9ej4zeJyuNTmFdnjaY=;
- b=Kpq6OgeCC5cHdGTU5SxLRfIDuSHr/USLjdUXCaaEW8C3iJrBkRgcEFMQgFzu8IuXDZ
- wGnbXLnGNEA4csj8RrCB8iQm00At7j7g4FzM/b5vDzgQ0ANqSSOs+3Da51TRLAxbHaKV
- 8sWUTDwRWm+70cqOENvhGnS2XatKJX/aH/UC/FUmC892Ti3nxH1Vs7iZ8OL4OJOk+UFa
- IYPqSgJqn/DC0QFMVcgVyz1FAM1h45AOLl6DfRqvSUKs/aTUxXusEWMyyudMknMFHpDz
- WEq2V2eWxPgrzCT9mYgB2eSDwf6hOno0u7IhyhifUu6HC3AP09VQVepSnvpZ+oyXlmhc
- Gxkg==
-X-Gm-Message-State: APjAAAWZcprCpYyXUBddyVOwz/CD+Ouf1kCCSDgCboQHZ6/1Hhos46MF
- Rn7LLmHZ+tTah6ptRiBRTWPSNdHGTLp6DuG6ngc=
-X-Google-Smtp-Source: APXvYqyzAy69956c0aKgqY3Y0/0dNFNSxN5Hd03KssudeYr4bp7jypI6cvLT2QT9Ij3JLYRX4pdMlyrKreI9llN/mDM=
-X-Received: by 2002:a2e:8119:: with SMTP id d25mr32063176ljg.76.1582579659099; 
- Mon, 24 Feb 2020 13:27:39 -0800 (PST)
+ (envelope-from <prvs=316f2015f=alistair.francis@wdc.com>)
+ id 1j6N9w-0003jC-MO
+ for qemu-riscv@nongnu.org; Mon, 24 Feb 2020 18:29:09 -0500
+Received: from esa5.hgst.iphmx.com ([216.71.153.144]:4174)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <prvs=316f2015f=alistair.francis@wdc.com>)
+ id 1j6N9t-0003gT-2C; Mon, 24 Feb 2020 18:29:05 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1582586945; x=1614122945;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=6nlvhj4e2J6SSR0V7PBzO9S+jbx6jNBp6RnKq9ByxI8=;
+ b=g4huoNMBKBHhFuGNtEfYISdDKGuHmOOfZ1w4+jcMXUiAVo2HnVSixCn/
+ xvqE/0TwWuwrM5s3Fkxi8HZjltNmK68U/lsScCRGKKy5HbX2OktO/4OIR
+ LRK+PT163n8/mVEit2vuJr/tvlpHQ3YTXRbG8zf386E/anD2q3DlwlcPm
+ wyZB1BCWSU2cfgOxcTDk2YWeq34vZ0Gv7vf1/u96b3VX/fC3IHdlDTJ82
+ nN6T3DW3Cp0biMppPVBKpZOWBfAr2ze+JnPmN4pDr8quOdlYEExq7OFaf
+ MyVf7lT14cd4Hkb99NOOEFp1gBMGO9LYfs7SwvXaZXhTy9uqM0RsVSXDh A==;
+IronPort-SDR: YvaWxmAo6d6lUymxWeeilcPt2RxTMtSLdCz5UC5GpSMTRSLA5eIh82Hqeo9xMEycefFubJnR9z
+ EpZCM+REhL4qFlsthaOJz3c6YQOQMFQdPriANumTaNR0d/wR5gTPCElffXUGMQg4OrJQBmfb/e
+ fLDT5w2fn73UemWVTvvG2+MVtZhfcX97ghURpIHy9KEp9W39xnL0hngEM4PykqLNL6QHO/b08K
+ Iz+uLJomEcj5TKkqv+MezLTtIIogxr1C+HMkNOJXX+ixYJ6fr/9aJKj1/ndImvtLknnQoKqQkU
+ ygk=
+X-IronPort-AV: E=Sophos;i="5.70,481,1574092800"; d="scan'208";a="131148347"
+Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
+ ([199.255.45.14])
+ by ob1.hgst.iphmx.com with ESMTP; 25 Feb 2020 07:29:01 +0800
+IronPort-SDR: YLBasxiRWBJjQH2lZDbw43QbKRxukazJ2n5z0V+MJJ24cUXkOQ+ES+Bu7U8wVMZeUJCjKhXR7c
+ Pba3+ZzgUe5KPPE8orzzcp905v5p0WyYlBYqCXBl0npDcbx/tAzo0XegOupgYqbnxf1vyjE2yc
+ CvD7XBl0ona7bvisxxhqs3dkqRckpFGf7VwzeuWuSnGN4MWX3Oa9mZna9EOzBYfkfVtmyb5/yq
+ djAbrLGq3Ze7nDeGbwO0NkUZN9sKBcBHeM8ZtElB2/ivfYfCAYQMcZsbE0PrUX6XwsOd+yrbBM
+ vldG0iTCZLEHOTEQ38x6nHm9
+Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
+ by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 24 Feb 2020 15:21:28 -0800
+IronPort-SDR: pUEzuyVTCgJMD7WF13yAX0ry0CgN+85trRXeqKQnC0il+cYaG6YLzVXhn/zLtCQZV3eK2P6Zvp
+ tfyb1uliQDp+XcPOWTNo6quyX2kb0f+zNN4SLVHkIQN+TliMeQcgKV9ucooFDmzlbtaUVpjWZS
+ /ANQvbJQ88mUBWnXSBTgKalFW3GUftsTLzg2dqlXaO2KFrsdHFwRXRUK6aXKDdgc/tvqAQRCyd
+ hTuNAgcZDhC/oZf7D25/l2F9gvs2r8In3Fqe7ABPW4awajKqBdqoQmDpXLr5/9pBs1BdRC57zj
+ DE4=
+WDCIronportException: Internal
+Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
+ risc6-mainframe.int.fusionio.com) ([10.196.158.235])
+ by uls-op-cesaip01.wdc.com with ESMTP; 24 Feb 2020 15:29:00 -0800
+From: Alistair Francis <alistair.francis@wdc.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org,
+	laurent@vivier.eu
+Cc: palmer@dabbelt.com,
+	alistair.francis@wdc.com,
+	alistair23@gmail.com
+Subject: [PATCH v2 0/2]  linux-user: generate syscall_nr.sh for RISC-V
+Date: Mon, 24 Feb 2020 15:21:52 -0800
+Message-Id: <cover.1582586444.git.alistair.francis@wdc.com>
+X-Mailer: git-send-email 2.25.0
 MIME-Version: 1.0
-References: <20200224204828.23167-1-philmd@redhat.com>
- <20200224204828.23167-6-philmd@redhat.com>
-In-Reply-To: <20200224204828.23167-6-philmd@redhat.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 24 Feb 2020 13:20:05 -0800
-Message-ID: <CAKmqyKPcWkN4fhu+kmU8d+wsPLt_4BJB74Tao-P7nJpBQa1jZA@mail.gmail.com>
-Subject: Re: [PATCH v2 05/32] hw/arm: Use memory_region_init_rom() with
- read-only regions
-To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>
-Cc: Peter Maydell <peter.maydell@linaro.org>,
- Paolo Bonzini <pbonzini@redhat.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- "Michael S. Tsirkin" <mst@redhat.com>, Jason Wang <jasowang@redhat.com>, 
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>, 
- KONRAD Frederic <frederic.konrad@adacore.com>,
- Alistair Francis <Alistair.Francis@wdc.com>, 
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, Max Reitz <mreitz@redhat.com>, 
- Qemu-block <qemu-block@nongnu.org>, Magnus Damm <magnus.damm@gmail.com>, 
- =?UTF-8?Q?Herv=C3=A9_Poussineau?= <hpoussin@reactos.org>, 
- Joel Stanley <joel@jms.id.au>, Palmer Dabbelt <palmer@dabbelt.com>, 
- Aleksandar Rikalo <aleksandar.rikalo@rt-rk.com>,
- Richard Henderson <rth@twiddle.net>, 
- Artyom Tarasenko <atar4qemu@gmail.com>, Eduardo Habkost <ehabkost@redhat.com>, 
- Alistair Francis <alistair@alistair23.me>,
- Fabien Chouteau <chouteau@adacore.com>, 
- qemu-arm <qemu-arm@nongnu.org>, Peter Chubb <peter.chubb@nicta.com.au>, 
- =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>, 
- Subbaraya Sundeep <sundeep.lkml@gmail.com>,
- David Gibson <david@gibson.dropbear.id.au>, 
- Kevin Wolf <kwolf@redhat.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Igor Mitsyanko <i.mitsyanko@gmail.com>, Laurent Vivier <laurent@vivier.eu>, 
- Jean-Christophe Dubois <jcd@tribudubois.net>, Michael Walle <michael@walle.cc>,
- "open list:New World" <qemu-ppc@nongnu.org>,
- Aleksandar Markovic <amarkovic@wavecomp.com>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Aurelien Jarno <aurelien@aurel32.net>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2a00:1450:4864:20::243
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-detected-operating-system: by eggs.gnu.org: FreeBSD 9.x [fuzzy]
+X-Received-From: 216.71.153.144
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -94,165 +79,34 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Feb 2020 21:27:53 -0000
+X-List-Received-Date: Mon, 24 Feb 2020 23:29:10 -0000
 
-On Mon, Feb 24, 2020 at 12:51 PM Philippe Mathieu-Daud=C3=A9
-<philmd@redhat.com> wrote:
->
-> This commit was produced with the Coccinelle script
-> scripts/coccinelle/memory-region-housekeeping.cocci.
->
-> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
+This series updates the RISC-V syscall_nr.sh based on the 5.5 kernel.
 
-This looks good for the ROM regions, for the flash regions this
-doesn't change the current functionality but I'm not sure it's any
-clearer.
+There are two parts to this. One is just adding the new syscalls, the
+other part is updating the RV32 syscalls to match the fact that RV32 is
+a 64-bit time_t architectures (y2038) safe.
 
-Either way though:
+we need to make some changes to syscall.c to avoid warnings/errors
+during compliling with the new syscall.
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+I did some RV32 user space testing after applying these patches. I ran the
+glibc testsuite in userspace and I don't see any regressions.
 
-Alistair
+Alistair Francis (2):
+  linux-user: Protect more syscalls
+  linux-user/riscv: Update the syscall_nr's to the 5.5 kernel
 
-> ---
->  hw/arm/exynos4210.c | 3 +--
->  hw/arm/mainstone.c  | 3 +--
->  hw/arm/omap_sx1.c   | 6 ++----
->  hw/arm/palm.c       | 3 +--
->  hw/arm/spitz.c      | 3 +--
->  hw/arm/stellaris.c  | 3 +--
->  hw/arm/tosa.c       | 3 +--
->  7 files changed, 8 insertions(+), 16 deletions(-)
->
-> diff --git a/hw/arm/exynos4210.c b/hw/arm/exynos4210.c
-> index 59a27bdd68..3af6502a5e 100644
-> --- a/hw/arm/exynos4210.c
-> +++ b/hw/arm/exynos4210.c
-> @@ -311,9 +311,8 @@ static void exynos4210_realize(DeviceState *socdev, E=
-rror **errp)
->                                  &s->chipid_mem);
->
->      /* Internal ROM */
-> -    memory_region_init_ram(&s->irom_mem, NULL, "exynos4210.irom",
-> +    memory_region_init_rom(&s->irom_mem, NULL, "exynos4210.irom",
->                             EXYNOS4210_IROM_SIZE, &error_fatal);
-> -    memory_region_set_readonly(&s->irom_mem, true);
->      memory_region_add_subregion(system_mem, EXYNOS4210_IROM_BASE_ADDR,
->                                  &s->irom_mem);
->      /* mirror of iROM */
-> diff --git a/hw/arm/mainstone.c b/hw/arm/mainstone.c
-> index 6e64dfab50..05a806b422 100644
-> --- a/hw/arm/mainstone.c
-> +++ b/hw/arm/mainstone.c
-> @@ -125,9 +125,8 @@ static void mainstone_common_init(MemoryRegion *addre=
-ss_space_mem,
->      /* Setup CPU & memory */
->      mpu =3D pxa270_init(address_space_mem, mainstone_binfo.ram_size,
->                        machine->cpu_type);
-> -    memory_region_init_ram(rom, NULL, "mainstone.rom", MAINSTONE_ROM,
-> +    memory_region_init_rom(rom, NULL, "mainstone.rom", MAINSTONE_ROM,
->                             &error_fatal);
-> -    memory_region_set_readonly(rom, true);
->      memory_region_add_subregion(address_space_mem, 0, rom);
->
->  #ifdef TARGET_WORDS_BIGENDIAN
-> diff --git a/hw/arm/omap_sx1.c b/hw/arm/omap_sx1.c
-> index be245714db..6c3fd1b271 100644
-> --- a/hw/arm/omap_sx1.c
-> +++ b/hw/arm/omap_sx1.c
-> @@ -126,9 +126,8 @@ static void sx1_init(MachineState *machine, const int=
- version)
->      mpu =3D omap310_mpu_init(dram, machine->cpu_type);
->
->      /* External Flash (EMIFS) */
-> -    memory_region_init_ram(flash, NULL, "omap_sx1.flash0-0", flash_size,
-> +    memory_region_init_rom(flash, NULL, "omap_sx1.flash0-0", flash_size,
->                             &error_fatal);
-> -    memory_region_set_readonly(flash, true);
->      memory_region_add_subregion(address_space, OMAP_CS0_BASE, flash);
->
->      memory_region_init_io(&cs[0], NULL, &static_ops, &cs0val,
-> @@ -168,9 +167,8 @@ static void sx1_init(MachineState *machine, const int=
- version)
->      if ((version =3D=3D 1) &&
->              (dinfo =3D drive_get(IF_PFLASH, 0, fl_idx)) !=3D NULL) {
->          MemoryRegion *flash_1 =3D g_new(MemoryRegion, 1);
-> -        memory_region_init_ram(flash_1, NULL, "omap_sx1.flash1-0",
-> +        memory_region_init_rom(flash_1, NULL, "omap_sx1.flash1-0",
->                                 flash1_size, &error_fatal);
-> -        memory_region_set_readonly(flash_1, true);
->          memory_region_add_subregion(address_space, OMAP_CS1_BASE, flash_=
-1);
->
->          memory_region_init_io(&cs[1], NULL, &static_ops, &cs1val,
-> diff --git a/hw/arm/palm.c b/hw/arm/palm.c
-> index 72eca8cc55..265d5891a6 100644
-> --- a/hw/arm/palm.c
-> +++ b/hw/arm/palm.c
-> @@ -206,9 +206,8 @@ static void palmte_init(MachineState *machine)
->      mpu =3D omap310_mpu_init(dram, machine->cpu_type);
->
->      /* External Flash (EMIFS) */
-> -    memory_region_init_ram(flash, NULL, "palmte.flash", flash_size,
-> +    memory_region_init_rom(flash, NULL, "palmte.flash", flash_size,
->                             &error_fatal);
-> -    memory_region_set_readonly(flash, true);
->      memory_region_add_subregion(address_space_mem, OMAP_CS0_BASE, flash)=
-;
->
->      memory_region_init_io(&cs[0], NULL, &static_ops, &cs0val, "palmte-cs=
-0",
-> diff --git a/hw/arm/spitz.c b/hw/arm/spitz.c
-> index e001088103..1d27399721 100644
-> --- a/hw/arm/spitz.c
-> +++ b/hw/arm/spitz.c
-> @@ -924,8 +924,7 @@ static void spitz_common_init(MachineState *machine,
->
->      sl_flash_register(mpu, (model =3D=3D spitz) ? FLASH_128M : FLASH_102=
-4M);
->
-> -    memory_region_init_ram(rom, NULL, "spitz.rom", SPITZ_ROM, &error_fat=
-al);
-> -    memory_region_set_readonly(rom, true);
-> +    memory_region_init_rom(rom, NULL, "spitz.rom", SPITZ_ROM, &error_fat=
-al);
->      memory_region_add_subregion(address_space_mem, 0, rom);
->
->      /* Setup peripherals */
-> diff --git a/hw/arm/stellaris.c b/hw/arm/stellaris.c
-> index 221a78674e..d136ba1a92 100644
-> --- a/hw/arm/stellaris.c
-> +++ b/hw/arm/stellaris.c
-> @@ -1300,9 +1300,8 @@ static void stellaris_init(MachineState *ms, stella=
-ris_board_info *board)
->      sram_size =3D ((board->dc0 >> 18) + 1) * 1024;
->
->      /* Flash programming is done via the SCU, so pretend it is ROM.  */
-> -    memory_region_init_ram(flash, NULL, "stellaris.flash", flash_size,
-> +    memory_region_init_rom(flash, NULL, "stellaris.flash", flash_size,
->                             &error_fatal);
-> -    memory_region_set_readonly(flash, true);
->      memory_region_add_subregion(system_memory, 0, flash);
->
->      memory_region_init_ram(sram, NULL, "stellaris.sram", sram_size,
-> diff --git a/hw/arm/tosa.c b/hw/arm/tosa.c
-> index 4d95a1f3e2..5dee2d76c6 100644
-> --- a/hw/arm/tosa.c
-> +++ b/hw/arm/tosa.c
-> @@ -226,8 +226,7 @@ static void tosa_init(MachineState *machine)
->
->      mpu =3D pxa255_init(address_space_mem, tosa_binfo.ram_size);
->
-> -    memory_region_init_ram(rom, NULL, "tosa.rom", TOSA_ROM, &error_fatal=
-);
-> -    memory_region_set_readonly(rom, true);
-> +    memory_region_init_rom(rom, NULL, "tosa.rom", TOSA_ROM, &error_fatal=
-);
->      memory_region_add_subregion(address_space_mem, 0, rom);
->
->      tmio =3D tc6393xb_init(address_space_mem, 0x10000000,
-> --
-> 2.21.1
->
->
+ linux-user/riscv/syscall32_nr.h | 314 ++++++++++++++++++++++++++++++++
+ linux-user/riscv/syscall64_nr.h | 303 ++++++++++++++++++++++++++++++
+ linux-user/riscv/syscall_nr.h   | 294 +-----------------------------
+ linux-user/strace.c             |   2 +
+ linux-user/syscall.c            |  20 ++
+ 5 files changed, 641 insertions(+), 292 deletions(-)
+ create mode 100644 linux-user/riscv/syscall32_nr.h
+ create mode 100644 linux-user/riscv/syscall64_nr.h
+
+-- 
+2.25.0
+
 
