@@ -1,67 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1j6JK1-0007XY-Bb
-	for mharc-qemu-riscv@gnu.org; Mon, 24 Feb 2020 14:23:17 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37216)
+	id 1j6JYK-0005sb-FC
+	for mharc-qemu-riscv@gnu.org; Mon, 24 Feb 2020 14:38:04 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:38695)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <alistair23@gmail.com>) id 1j6JJy-0007Uw-2v
- for qemu-riscv@nongnu.org; Mon, 24 Feb 2020 14:23:15 -0500
+ (envelope-from <alistair23@gmail.com>) id 1j6JYD-0005qE-Fh
+ for qemu-riscv@nongnu.org; Mon, 24 Feb 2020 14:37:59 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1j6JJv-0008JF-I8
- for qemu-riscv@nongnu.org; Mon, 24 Feb 2020 14:23:14 -0500
-Received: from mail-lj1-x241.google.com ([2a00:1450:4864:20::241]:34613)
+ (envelope-from <alistair23@gmail.com>) id 1j6JYB-0001yP-4l
+ for qemu-riscv@nongnu.org; Mon, 24 Feb 2020 14:37:57 -0500
+Received: from mail-lf1-x143.google.com ([2a00:1450:4864:20::143]:43872)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1j6JJs-0008Fb-2T; Mon, 24 Feb 2020 14:23:08 -0500
-Received: by mail-lj1-x241.google.com with SMTP id x7so11424724ljc.1;
- Mon, 24 Feb 2020 11:23:07 -0800 (PST)
+ id 1j6JY6-0001u4-K2; Mon, 24 Feb 2020 14:37:50 -0500
+Received: by mail-lf1-x143.google.com with SMTP id s23so7645609lfs.10;
+ Mon, 24 Feb 2020 11:37:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
  :cc:content-transfer-encoding;
- bh=f+WrzGPi9LdZONqGSGEOmJiNSYp/XVgP1eRp33dxT5E=;
- b=O36wpSYxykerRRrDngn5t9HPZPRN4c1w+FsEjUo68wlEJggAjS/QZpJe9Cnx9EHw6M
- U4EXU+XbWY347xyNqlx69Y1p7BInSdyLzDUuB5grThI3trrdrWVk7AOI9ZgptJFvieUj
- vfxB7iCcZrZUtNArCG6ybBYMPQNLDAb9pKFlgoPRAA1EyGWMUQOZ0rPvZo4porMYXPa7
- 5c+JHo92BVB8uSCF4YXxuW4eoLvcrw4griel0AzsLIxBJ6R2G0/N6aTDb8SJZbJnHU/e
- 7hLH4RBjRHn69wfMB0TfFf6zGXHtYACoKS6hAKx0LyZiXNXEvLHUVDbjqzh/gIPChjZ0
- oD3w==
+ bh=SeBol39Auyj/DV6Xa2naReBcWWk1pKAnATkCPcagDdo=;
+ b=ZqXLYzfbhgLZ3IVkP1yEU5cneNq5tBOq+wSrtY+i+2NdWaTibDvTfYdevGsmT3gEI8
+ q11buL4gWFKMn4E6ERzcSoHJY7ePuQawNG4ASjehESn73MbcyCcXqG+VPIAniiiI859Y
+ y8AjIYnoE1R8psURoSdxeffufvva/GDh/Brbf6zvQQGc82NqU0QWyXeA643i+7DFVc9e
+ gJi8gFZ5dffoDN839WwiYHjqCPaKOd+CH5Mvb/qe5SuoBEpZzxFkmArPpSELFGliVUPn
+ c1hjYm9fORiG8J1uk0aspaBZSWq8gmT2hnI2P1IVX+rnCdkGZ0m1OC/80I/yJ5csEaAu
+ d6bw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc:content-transfer-encoding;
- bh=f+WrzGPi9LdZONqGSGEOmJiNSYp/XVgP1eRp33dxT5E=;
- b=hOvc3VLSEa5o8t0YadjsJAuRb3IMO27S7yBBvY/xGO2GnxLjKovEWa2wKiVCKQCML+
- ZZemJ3k9Bzxj1wnl2srwD32rdJc+mpRCMJsGTinNLmwCuaPpGN0stZVe38UNqJXN1bQ/
- dE+7BVqIildNYeeqOeHmZjR5RyaoaF7Wfv1THasNo+uAtN3Yw+/2XGF2O+5QUBlnJycJ
- EXmV0fnD02xXlwWHIOuOTTj1Q+n/MD39125qsp/cur1clYv8hnf2om8KqKo/XHEYFiu9
- qWc+ITV4tSi9hvlMaws92TCswe/YnrcC+KcZT/cYg8MvhKMuk8Cv8XO/nkTlcdEv2wUX
- XFXg==
-X-Gm-Message-State: APjAAAXshcAz89Ya8qTAbBOI+0Qeg8o5SirUClVN/bGMxUtiBLU66XIg
- jY1Ajd+YafzIQjXvRUBGBL0qLiqJvlNGZIoBP9Q=
-X-Google-Smtp-Source: APXvYqzLnLC4GhMRWq6GXhx3yy3Dw3K6JggHRJsuHbm3iPLKOPxVnL9oW5RBS58JIZ6vPxiqr95O/kIre1w/HJlXXe8=
-X-Received: by 2002:a2e:7818:: with SMTP id t24mr30576516ljc.195.1582572186344; 
- Mon, 24 Feb 2020 11:23:06 -0800 (PST)
+ bh=SeBol39Auyj/DV6Xa2naReBcWWk1pKAnATkCPcagDdo=;
+ b=CHHcGZ+aGyHUDdehppQbzG7AP9KDVS4jwlj/SdDK7reiq+JrjqUtwVRobrsgkL+sEX
+ Al6W1KGFR7sKdt26sHJd5/wrVnMS/bpG+/4mb/4Wq8OwDqpETkFu7OsDPyDM/i/LVWcY
+ HUFhr52EwUJROjtNXZPXEQ1eRSHBHvn7nDyYYaYzXWf1WsFYvzdsAnP15VfU4CvNcO0m
+ Oz+mpFbK176TRhIhA7gVhug4XsZMuRrhRqq+hdQMNFpKk9ohDaxtOOMiTvcF+a+8VygI
+ Br6BA8hiduj2f6GWTsH9NjOkxcoodwaKybXOwsDPLZpYlP//asqMcSnSwovpSdmYZNfK
+ S+Fg==
+X-Gm-Message-State: APjAAAUr26o+Sysy831hjh75N7dkKz9vAQ0xZ54pfoqWrCNOu/YvStk9
+ K5zTdSDUJdio8fBp4dBt9ImixSFCnmlBpZy/LKo=
+X-Google-Smtp-Source: APXvYqxHmxPPI0mHOttg6KvcJmm+56U9tW80DPYzo4w8zRPbDdIaB7dDmGy4hm2qF29N4MJsPv7siCL73hkE7ddZULE=
+X-Received: by 2002:a19:8585:: with SMTP id h127mr7269186lfd.196.1582573068738; 
+ Mon, 24 Feb 2020 11:37:48 -0800 (PST)
 MIME-Version: 1.0
-References: <1582551584-20093-1-git-send-email-bmeng.cn@gmail.com>
- <1582551584-20093-5-git-send-email-bmeng.cn@gmail.com>
-In-Reply-To: <1582551584-20093-5-git-send-email-bmeng.cn@gmail.com>
+References: <cover.1582240656.git.alistair.francis@wdc.com>
+ <8f6625e62bd766eacdae40e9a74186f247fe16b0.1582240656.git.alistair.francis@wdc.com>
+ <2a44aa3a-dd98-3691-6cb0-94ca9b78c87f@vivier.eu>
+In-Reply-To: <2a44aa3a-dd98-3691-6cb0-94ca9b78c87f@vivier.eu>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 24 Feb 2020 11:15:30 -0800
-Message-ID: <CAKmqyKMkrg0fjO5yA-sz1Qva2ET9fmT28tFYfDzhtc=53Hrd+A@mail.gmail.com>
-Subject: Re: [PATCH v2 4/4] gitlab-ci.yml: Add jobs to build OpenSBI firmware
- binaries
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Palmer Dabbelt <palmerdabbelt@google.com>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+Date: Mon, 24 Feb 2020 11:30:14 -0800
+Message-ID: <CAKmqyKMfzvz6Yb7=eZmKZfBkoESX1T8zHU4UO5gr7d9FWgjDTA@mail.gmail.com>
+Subject: Re: [PATCH v1 2/2] linux-user/riscv: Update the syscall_nr's to the
+ 5.5 kernel
+To: Laurent Vivier <laurent@vivier.eu>
+Cc: Alistair Francis <alistair.francis@wdc.com>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::241
+X-Received-From: 2a00:1450:4864:20::143
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -73,184 +71,426 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Feb 2020 19:23:15 -0000
+X-List-Received-Date: Mon, 24 Feb 2020 19:37:59 -0000
 
-On Mon, Feb 24, 2020 at 5:40 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+On Sat, Feb 22, 2020 at 3:29 AM Laurent Vivier <laurent@vivier.eu> wrote:
 >
-> Add two GitLab jobs to build the OpenSBI firmware binaries.
+> Le 21/02/2020 =C3=A0 00:18, Alistair Francis a =C3=A9crit :
+> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> > ---
+> >  linux-user/riscv/syscall_nr.h | 160 +++++++++++++++++++++++++++++++++-
+> >  1 file changed, 158 insertions(+), 2 deletions(-)
 >
-> The first job builds a Docker image with the packages requisite
-> to build OpenSBI, and stores this image in the GitLab registry.
-> The second job pulls the image from the registry and builds the
-> OpenSBI firmware binaries.
+> Could you avoid to add blanck lines: this makes review more difficult
+> and patch bigger for nothing.
 >
-> The docker image is only rebuilt if the GitLab YAML or the
-> Dockerfile is updated. The second job is only built when the
-> roms/opensbi/ submodule is updated, when a git-ref starts with
-> 'opensbi' or when the last commit contains 'OpenSBI'. The files
-> generated are archived in the artifacts.zip file.
+> Perhaps it would be easier too to have two files, one for 32bit and one
+> for 64 bit and a syscall_nr.h like this:
 >
-> With OpenSBI v0.6, it took 2 minutes 56 seconds to build
-> the docker image, and 1 minute 24 seconds to generate the
-> artifacts.zip with the firmware binaries (filesize: 111KiB).
->
-> See: https://gitlab.com/lbmeng/qemu/pipelines/120520138
->
-> Suggested-by: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
-> Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
+> #ifdef TARGET_RISCV32
+> #include "syscall32_nr.h"
+> #else
+> #include "syscall64_nr.h"
+> #endif
 
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
+Works for me, fixed in v2.
 
 Alistair
 
 >
-> ---
+> Thanks,
+> Laurent
 >
-> Changes in v2:
-> - new patch: Add GitLab jobs to build OpenSBI firmware binaries
->
->  .gitlab-ci-opensbi.yml          | 63 +++++++++++++++++++++++++++++++++++=
-++++++
->  .gitlab-ci.d/opensbi/Dockerfile | 33 +++++++++++++++++++++
->  .gitlab-ci.yml                  |  1 +
->  3 files changed, 97 insertions(+)
->  create mode 100644 .gitlab-ci-opensbi.yml
->  create mode 100644 .gitlab-ci.d/opensbi/Dockerfile
->
-> diff --git a/.gitlab-ci-opensbi.yml b/.gitlab-ci-opensbi.yml
-> new file mode 100644
-> index 0000000..dd051c0
-> --- /dev/null
-> +++ b/.gitlab-ci-opensbi.yml
-> @@ -0,0 +1,63 @@
-> +docker-opensbi:
-> + stage: build
-> + rules: # Only run this job when the Dockerfile is modified
-> + - changes:
-> +   - .gitlab-ci-opensbi.yml
-> +   - .gitlab-ci.d/opensbi/Dockerfile
-> +   when: always
-> + image: docker:19.03.1
-> + services:
-> + - docker:19.03.1-dind
-> + variables:
-> +  GIT_DEPTH: 3
-> +  IMAGE_TAG: $CI_REGISTRY_IMAGE:opensbi-cross-build
-> +  # We don't use TLS
-> +  DOCKER_HOST: tcp://docker:2375
-> +  DOCKER_TLS_CERTDIR: ""
-> + before_script:
-> + - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGIST=
-RY
-> + script:
-> + - docker pull $IMAGE_TAG || true
-> + - docker build --cache-from $IMAGE_TAG --tag $CI_REGISTRY_IMAGE:$CI_COM=
-MIT_SHA
-> +                                        --tag $IMAGE_TAG .gitlab-ci.d/op=
-ensbi
-> + - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
-> + - docker push $IMAGE_TAG
-> +
-> +build-opensbi:
-> + rules: # Only run this job when ...
-> + - changes: # ... roms/opensbi/ is modified (submodule updated)
-> +   - roms/opensbi/*
-> +   when: always
-> + - if: '$CI_COMMIT_REF_NAME =3D~ /^opensbi/' # or the branch/tag starts =
-with 'opensbi'
-> +   when: always
-> + - if: '$CI_COMMIT_MESSAGE =3D~ /opensbi/i' # or last commit description=
- contains 'OpenSBI'
-> +   when: always
-> + artifacts:
-> +   paths: # 'artifacts.zip' will contains the following files:
-> +   - pc-bios/opensbi-riscv32-sifive_u-fw_jump.bin
-> +   - pc-bios/opensbi-riscv32-virt-fw_jump.bin
-> +   - pc-bios/opensbi-riscv64-sifive_u-fw_jump.bin
-> +   - pc-bios/opensbi-riscv64-virt-fw_jump.bin
-> +   - opensbi32-virt-stdout.log
-> +   - opensbi32-virt-stderr.log
-> +   - opensbi64-virt-stdout.log
-> +   - opensbi64-virt-stderr.log
-> +   - opensbi32-sifive_u-stdout.log
-> +   - opensbi32-sifive_u-stderr.log
-> +   - opensbi64-sifive_u-stdout.log
-> +   - opensbi64-sifive_u-stderr.log
-> + image: $CI_REGISTRY_IMAGE:opensbi-cross-build
-> + variables:
-> +   GIT_DEPTH: 3
-> + script: # Clone the required submodules and build OpenSBI
-> + - git submodule update --init roms/opensbi
-> + - export JOBS=3D$(($(getconf _NPROCESSORS_ONLN) + 1))
-> + - echo "=3D=3D=3D Using ${JOBS} simultaneous jobs =3D=3D=3D"
-> + - make -j${JOBS} -C roms/opensbi clean
-> + - make -j${JOBS} -C roms opensbi32-virt 2>&1 1>opensbi32-virt-stdout.lo=
-g | tee -a opensbi32-virt-stderr.log >&2
-> + - make -j${JOBS} -C roms/opensbi clean
-> + - make -j${JOBS} -C roms opensbi64-virt 2>&1 1>opensbi64-virt-stdout.lo=
-g | tee -a opensbi64-virt-stderr.log >&2
-> + - make -j${JOBS} -C roms/opensbi clean
-> + - make -j${JOBS} -C roms opensbi32-sifive_u 2>&1 1>opensbi32-sifive_u-s=
-tdout.log | tee -a opensbi32-sifive_u-stderr.log >&2
-> + - make -j${JOBS} -C roms/opensbi clean
-> + - make -j${JOBS} -C roms opensbi64-sifive_u 2>&1 1>opensbi64-sifive_u-s=
-tdout.log | tee -a opensbi64-sifive_u-stderr.log >&2
-> diff --git a/.gitlab-ci.d/opensbi/Dockerfile b/.gitlab-ci.d/opensbi/Docke=
-rfile
-> new file mode 100644
-> index 0000000..4ba8a4d
-> --- /dev/null
-> +++ b/.gitlab-ci.d/opensbi/Dockerfile
-> @@ -0,0 +1,33 @@
-> +#
-> +# Docker image to cross-compile OpenSBI firmware binaries
-> +#
-> +FROM ubuntu:18.04
-> +
-> +MAINTAINER Bin Meng <bmeng.cn@gmail.com>
-> +
-> +# Install packages required to build OpenSBI
-> +RUN apt update \
-> +    && \
-> +    \
-> +    DEBIAN_FRONTEND=3Dnoninteractive \
-> +    apt install --assume-yes --no-install-recommends \
-> +        build-essential \
-> +        ca-certificates \
-> +        git \
-> +        make \
-> +        wget \
-> +    && \
-> +    \
-> +    rm -rf /var/lib/apt/lists/*
-> +
-> +# Manually install the kernel.org "Crosstool" based toolchains for gcc-8=
-.3
-> +RUN wget -O - \
-> +    https://mirrors.edge.kernel.org/pub/tools/crosstool/files/bin/x86_64=
-/8.3.0/x86_64-gcc-8.3.0-nolibc-riscv32-linux.tar.xz \
-> +    | tar -C /opt -xJ
-> +RUN wget -O - \
-> +    https://mirrors.edge.kernel.org/pub/tools/crosstool/files/bin/x86_64=
-/8.3.0/x86_64-gcc-8.3.0-nolibc-riscv64-linux.tar.xz \
-> +    | tar -C /opt -xJ
-> +
-> +# Export the toolchains to the system path
-> +ENV PATH=3D"/opt/gcc-8.3.0-nolibc/riscv32-linux/bin:${PATH}"
-> +ENV PATH=3D"/opt/gcc-8.3.0-nolibc/riscv64-linux/bin:${PATH}"
-> diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-> index c15e394..4c3a72b 100644
-> --- a/.gitlab-ci.yml
-> +++ b/.gitlab-ci.yml
-> @@ -1,5 +1,6 @@
->  include:
->    - local: '/.gitlab-ci-edk2.yml'
-> +  - local: '/.gitlab-ci-opensbi.yml'
->
->  before_script:
->   - apt-get update -qq
-> --
-> 2.7.4
->
+> > diff --git a/linux-user/riscv/syscall_nr.h b/linux-user/riscv/syscall_n=
+r.h
+> > index 5c87282209..b2b071969b 100644
+> > --- a/linux-user/riscv/syscall_nr.h
+> > +++ b/linux-user/riscv/syscall_nr.h
+> > @@ -10,7 +10,10 @@
+> >  #define TARGET_NR_io_destroy 1
+> >  #define TARGET_NR_io_submit 2
+> >  #define TARGET_NR_io_cancel 3
+> > +#ifndef TARGET_RISCV32
+> >  #define TARGET_NR_io_getevents 4
+> > +#endif
+> > +
+> >  #define TARGET_NR_setxattr 5
+> >  #define TARGET_NR_lsetxattr 6
+> >  #define TARGET_NR_fsetxattr 7
+> > @@ -23,12 +26,17 @@
+> >  #define TARGET_NR_removexattr 14
+> >  #define TARGET_NR_lremovexattr 15
+> >  #define TARGET_NR_fremovexattr 16
+> > +
+> >  #define TARGET_NR_getcwd 17
+> > +
+> >  #define TARGET_NR_lookup_dcookie 18
+> > +
+> >  #define TARGET_NR_eventfd2 19
+> > +
+> >  #define TARGET_NR_epoll_create1 20
+> >  #define TARGET_NR_epoll_ctl 21
+> >  #define TARGET_NR_epoll_pwait 22
+> > +
+> >  #define TARGET_NR_dup 23
+> >  #define TARGET_NR_dup3 24
+> >  #ifdef TARGET_RISCV32
+> > @@ -36,27 +44,35 @@
+> >  #else
+> >  #define TARGET_NR_fcntl 25
+> >  #endif
+> > +
+> >  #define TARGET_NR_inotify_init1 26
+> >  #define TARGET_NR_inotify_add_watch 27
+> >  #define TARGET_NR_inotify_rm_watch 28
+> > +
+> >  #define TARGET_NR_ioctl 29
+> > +
+> >  #define TARGET_NR_ioprio_set 30
+> >  #define TARGET_NR_ioprio_get 31
+> > +
+> >  #define TARGET_NR_flock 32
+> > +
+> >  #define TARGET_NR_mknodat 33
+> >  #define TARGET_NR_mkdirat 34
+> >  #define TARGET_NR_unlinkat 35
+> >  #define TARGET_NR_symlinkat 36
+> >  #define TARGET_NR_linkat 37
+> > -#define TARGET_NR_renameat 38
+> > +
+> >  #define TARGET_NR_umount2 39
+> >  #define TARGET_NR_mount 40
+> >  #define TARGET_NR_pivot_root 41
+> > +
+> >  #define TARGET_NR_nfsservctl 42
+> > +
+> >  #define TARGET_NR_statfs 43
+> >  #define TARGET_NR_fstatfs 44
+> >  #define TARGET_NR_truncate 45
+> >  #define TARGET_NR_ftruncate 46
+> > +
+> >  #define TARGET_NR_fallocate 47
+> >  #define TARGET_NR_faccessat 48
+> >  #define TARGET_NR_chdir 49
+> > @@ -69,9 +85,13 @@
+> >  #define TARGET_NR_openat 56
+> >  #define TARGET_NR_close 57
+> >  #define TARGET_NR_vhangup 58
+> > +
+> >  #define TARGET_NR_pipe2 59
+> > +
+> >  #define TARGET_NR_quotactl 60
+> > +
+> >  #define TARGET_NR_getdents64 61
+> > +
+> >  #ifdef TARGET_RISCV32
+> >  #define TARGET_NR__llseek 62
+> >  #else
+> > @@ -85,53 +105,91 @@
+> >  #define TARGET_NR_pwrite64 68
+> >  #define TARGET_NR_preadv 69
+> >  #define TARGET_NR_pwritev 70
+> > +
+> >  #define TARGET_NR_sendfile 71
+> > +
+> > +#ifndef TARGET_RISCV32
+> >  #define TARGET_NR_pselect6 72
+> >  #define TARGET_NR_ppoll 73
+> > +#endif
+> > +
+> >  #define TARGET_NR_signalfd4 74
+> > +
+> >  #define TARGET_NR_vmsplice 75
+> >  #define TARGET_NR_splice 76
+> >  #define TARGET_NR_tee 77
+> > +
+> >  #define TARGET_NR_readlinkat 78
+> >  #define TARGET_NR_newfstatat 79
+> >  #define TARGET_NR_fstat 80
+> > +
+> >  #define TARGET_NR_sync 81
+> >  #define TARGET_NR_fsync 82
+> >  #define TARGET_NR_fdatasync 83
+> >  #define TARGET_NR_sync_file_range 84
+> > +
+> >  #define TARGET_NR_timerfd_create 85
+> > +#ifndef TARGET_RISCV32
+> >  #define TARGET_NR_timerfd_settime 86
+> >  #define TARGET_NR_timerfd_gettime 87
+> > +#endif
+> > +
+> > +#ifndef TARGET_RISCV32
+> >  #define TARGET_NR_utimensat 88
+> > +#endif
+> > +
+> >  #define TARGET_NR_acct 89
+> > +
+> >  #define TARGET_NR_capget 90
+> >  #define TARGET_NR_capset 91
+> > +
+> >  #define TARGET_NR_personality 92
+> > +
+> >  #define TARGET_NR_exit 93
+> >  #define TARGET_NR_exit_group 94
+> >  #define TARGET_NR_waitid 95
+> > +
+> >  #define TARGET_NR_set_tid_address 96
+> >  #define TARGET_NR_unshare 97
+> > +
+> > +#ifndef TARGET_RISCV32
+> >  #define TARGET_NR_futex 98
+> > +#endif
+> >  #define TARGET_NR_set_robust_list 99
+> >  #define TARGET_NR_get_robust_list 100
+> > +
+> > +#ifndef TARGET_RISCV32
+> >  #define TARGET_NR_nanosleep 101
+> > +#endif
+> > +
+> >  #define TARGET_NR_getitimer 102
+> >  #define TARGET_NR_setitimer 103
+> > +
+> >  #define TARGET_NR_kexec_load 104
+> > +
+> >  #define TARGET_NR_init_module 105
+> >  #define TARGET_NR_delete_module 106
+> > +
+> >  #define TARGET_NR_timer_create 107
+> > +#ifndef TARGET_RISCV32
+> >  #define TARGET_NR_timer_gettime 108
+> > +#endif
+> >  #define TARGET_NR_timer_getoverrun 109
+> > +#ifndef TARGET_RISCV32
+> >  #define TARGET_NR_timer_settime 110
+> > +#endif
+> >  #define TARGET_NR_timer_delete 111
+> > +#ifndef TARGET_RISCV32
+> >  #define TARGET_NR_clock_settime 112
+> >  #define TARGET_NR_clock_gettime 113
+> >  #define TARGET_NR_clock_getres 114
+> >  #define TARGET_NR_clock_nanosleep 115
+> > +#endif
+> > +
+> >  #define TARGET_NR_syslog 116
+> > +
+> >  #define TARGET_NR_ptrace 117
+> > +
+> >  #define TARGET_NR_sched_setparam 118
+> >  #define TARGET_NR_sched_setscheduler 119
+> >  #define TARGET_NR_sched_getscheduler 120
+> > @@ -141,7 +199,10 @@
+> >  #define TARGET_NR_sched_yield 124
+> >  #define TARGET_NR_sched_get_priority_max 125
+> >  #define TARGET_NR_sched_get_priority_min 126
+> > +#ifndef TARGET_RISCV32
+> >  #define TARGET_NR_sched_rr_get_interval 127
+> > +#endif
+> > +
+> >  #define TARGET_NR_restart_syscall 128
+> >  #define TARGET_NR_kill 129
+> >  #define TARGET_NR_tkill 130
+> > @@ -151,9 +212,12 @@
+> >  #define TARGET_NR_rt_sigaction 134
+> >  #define TARGET_NR_rt_sigprocmask 135
+> >  #define TARGET_NR_rt_sigpending 136
+> > +#ifndef TARGET_RISCV32
+> >  #define TARGET_NR_rt_sigtimedwait 137
+> > +#endif
+> >  #define TARGET_NR_rt_sigqueueinfo 138
+> >  #define TARGET_NR_rt_sigreturn 139
+> > +
+> >  #define TARGET_NR_setpriority 140
+> >  #define TARGET_NR_getpriority 141
+> >  #define TARGET_NR_reboot 142
+> > @@ -177,15 +241,23 @@
+> >  #define TARGET_NR_uname 160
+> >  #define TARGET_NR_sethostname 161
+> >  #define TARGET_NR_setdomainname 162
+> > +
+> > +#ifndef TARGET_RISCV32
+> >  #define TARGET_NR_getrlimit 163
+> >  #define TARGET_NR_setrlimit 164
+> > +#endif
+> > +
+> >  #define TARGET_NR_getrusage 165
+> >  #define TARGET_NR_umask 166
+> >  #define TARGET_NR_prctl 167
+> >  #define TARGET_NR_getcpu 168
+> > +
+> > +#ifndef TARGET_RISCV32
+> >  #define TARGET_NR_gettimeofday 169
+> >  #define TARGET_NR_settimeofday 170
+> >  #define TARGET_NR_adjtimex 171
+> > +#endif
+> > +
+> >  #define TARGET_NR_getpid 172
+> >  #define TARGET_NR_getppid 173
+> >  #define TARGET_NR_getuid 174
+> > @@ -194,24 +266,34 @@
+> >  #define TARGET_NR_getegid 177
+> >  #define TARGET_NR_gettid 178
+> >  #define TARGET_NR_sysinfo 179
+> > +
+> >  #define TARGET_NR_mq_open 180
+> >  #define TARGET_NR_mq_unlink 181
+> > +#ifndef TARGET_RISCV32
+> >  #define TARGET_NR_mq_timedsend 182
+> >  #define TARGET_NR_mq_timedreceive 183
+> > +#endif
+> >  #define TARGET_NR_mq_notify 184
+> >  #define TARGET_NR_mq_getsetattr 185
+> > +
+> >  #define TARGET_NR_msgget 186
+> >  #define TARGET_NR_msgctl 187
+> >  #define TARGET_NR_msgrcv 188
+> >  #define TARGET_NR_msgsnd 189
+> > +
+> >  #define TARGET_NR_semget 190
+> >  #define TARGET_NR_semctl 191
+> > +
+> > +#ifndef TARGET_RISCV32
+> >  #define TARGET_NR_semtimedop 192
+> > +#endif
+> >  #define TARGET_NR_semop 193
+> > +
+> >  #define TARGET_NR_shmget 194
+> >  #define TARGET_NR_shmctl 195
+> >  #define TARGET_NR_shmat 196
+> >  #define TARGET_NR_shmdt 197
+> > +
+> >  #define TARGET_NR_socket 198
+> >  #define TARGET_NR_socketpair 199
+> >  #define TARGET_NR_bind 200
+> > @@ -227,15 +309,20 @@
+> >  #define TARGET_NR_shutdown 210
+> >  #define TARGET_NR_sendmsg 211
+> >  #define TARGET_NR_recvmsg 212
+> > +
+> >  #define TARGET_NR_readahead 213
+> > +
+> >  #define TARGET_NR_brk 214
+> >  #define TARGET_NR_munmap 215
+> >  #define TARGET_NR_mremap 216
+> > +
+> >  #define TARGET_NR_add_key 217
+> >  #define TARGET_NR_request_key 218
+> >  #define TARGET_NR_keyctl 219
+> > +
+> >  #define TARGET_NR_clone 220
+> >  #define TARGET_NR_execve 221
+> > +
+> >  #ifdef TARGET_RISCV32
+> >  #define TARGET_NR_mmap2 222
+> >  #define TARGET_NR_fadvise64_64 223
+> > @@ -243,6 +330,7 @@
+> >  #define TARGET_NR_mmap 222
+> >  #define TARGET_NR_fadvise64 223
+> >  #endif
+> > +
+> >  #define TARGET_NR_swapon 224
+> >  #define TARGET_NR_swapoff 225
+> >  #define TARGET_NR_mprotect 226
+> > @@ -259,18 +347,29 @@
+> >  #define TARGET_NR_set_mempolicy 237
+> >  #define TARGET_NR_migrate_pages 238
+> >  #define TARGET_NR_move_pages 239
+> > +
+> >  #define TARGET_NR_rt_tgsigqueueinfo 240
+> >  #define TARGET_NR_perf_event_open 241
+> >  #define TARGET_NR_accept4 242
+> > +#ifndef TARGET_RISCV32
+> >  #define TARGET_NR_recvmmsg 243
+> > +#endif
+> > +
+> >  #define TARGET_NR_arch_specific_syscall 244
+> > +
+> > +#define TARGET_NR_riscv_flush_icache TARGET_NR_arch_specific_syscall +=
+ 15
+> > +
+> > +#ifndef TARGET_RISCV32
+> >  #define TARGET_NR_wait4 260
+> > +#endif
+> >  #define TARGET_NR_prlimit64 261
+> >  #define TARGET_NR_fanotify_init 262
+> >  #define TARGET_NR_fanotify_mark 263
+> >  #define TARGET_NR_name_to_handle_at 264
+> >  #define TARGET_NR_open_by_handle_at 265
+> > +#ifndef TARGET_RISCV32
+> >  #define TARGET_NR_clock_adjtime 266
+> > +#endif
+> >  #define TARGET_NR_syncfs 267
+> >  #define TARGET_NR_setns 268
+> >  #define TARGET_NR_sendmmsg 269
+> > @@ -296,10 +395,67 @@
+> >  #define TARGET_NR_pkey_alloc 289
+> >  #define TARGET_NR_pkey_free 290
+> >  #define TARGET_NR_statx 291
+> > +#ifndef TARGET_RISCV32
+> >  #define TARGET_NR_io_pgetevents 292
+> > +#endif
+> >  #define TARGET_NR_rseq 293
+> >  #define TARGET_NR_kexec_file_load 294
+> >
+> > -#define TARGET_NR_syscalls (TARGET_NR_kexec_file_load + 1)
+> > +#ifdef TARGET_RISCV32
+> > +#define TARGET_NR_clock_gettime64 403
+> > +#define TARGET_NR_clock_settime64 404
+> > +#define TARGET_NR_clock_adjtime64 405
+> > +#define TARGET_NR_clock_getres_time64 406
+> > +#define TARGET_NR_clock_nanosleep_time64 407
+> > +#define TARGET_NR_timer_gettime64 408
+> > +#define TARGET_NR_timer_settime64 409
+> > +#define TARGET_NR_timerfd_gettime64 410
+> > +#define TARGET_NR_timerfd_settime64 411
+> > +#define TARGET_NR_utimensat_time64 412
+> > +#define TARGET_NR_pselect6_time64 413
+> > +#define TARGET_NR_ppoll_time64 414
+> > +#define TARGET_NR_io_pgetevents_time64 416
+> > +#define TARGET_NR_recvmmsg_time64 417
+> > +#define TARGET_NR_mq_timedsend_time64 418
+> > +#define TARGET_NR_mq_timedreceive_time64 419
+> > +#define TARGET_NR_semtimedop_time64 420
+> > +#define TARGET_NR_rt_sigtimedwait_time64 421
+> > +#define TARGET_NR_futex_time64 422
+> > +#define TARGET_NR_sched_rr_get_interval_time64 423
+> > +#endif
+> > +
+> > +#define TARGET_NR_pidfd_send_signal 424
+> > +#define TARGET_NR_io_uring_setup 425
+> > +#define TARGET_NR_io_uring_enter 426
+> > +#define TARGET_NR_io_uring_register 427
+> > +#define TARGET_NR_open_tree 428
+> > +#define TARGET_NR_move_mount 429
+> > +#define TARGET_NR_fsopen 430
+> > +#define TARGET_NR_fsconfig 431
+> > +#define TARGET_NR_fsmount 432
+> > +#define TARGET_NR_fspick 433
+> > +#define TARGET_NR_pidfd_open 434
+> > +#define TARGET_NR_clone3 435
+> > +
+> > +#define TARGET_NR_syscalls (TARGET_NR_clone3 + 1)
+> > +
+> > +/* Alias some of the older pre 64-bit time_t syscalls to the 64-bit
+> > + * ones for RV32. This is based on the list used by glibc. */
+> > +#ifdef TARGET_RISCV32
+> > +#define TARGET_NR_futex TARGET_NR_futex_time64
+> > +#define TARGET_NR_rt_sigtimedwait TARGET_NR_rt_sigtimedwait_time64
+> > +#define TARGET_NR_ppoll TARGET_NR_ppoll_time64
+> > +#define TARGET_NR_utimensat TARGET_NR_utimensat_time64
+> > +#define TARGET_NR_pselect6 TARGET_NR_pselect6_time64
+> > +#define TARGET_NR_recvmmsg TARGET_NR_recvmmsg_time64
+> > +#define TARGET_NR_semtimedop TARGET_NR_semtimedop_time64
+> > +#define TARGET_NR_mq_timedreceive TARGET_NR_mq_timedreceive_time64
+> > +#define TARGET_NR_mq_timedsend TARGET_NR_mq_timedsend_time64
+> > +#define TARGET_NR_clock_getres TARGET_NR_clock_getres_time64
+> > +#define TARGET_NR_timerfd_settime TARGET_NR_timerfd_settime64
+> > +#define TARGET_NR_timerfd_gettime TARGET_NR_timerfd_gettime64
+> > +#define TARGET_NR_sched_rr_get_interval TARGET_NR_sched_rr_get_interva=
+l_time64
+> > +#define TARGET_NR_clock_adjtime TARGET_NR_clock_adjtime64
+> > +#endif
+> >
+> >  #endif
+> >
 >
 
