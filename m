@@ -1,81 +1,95 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1j6Zkc-00046G-W5
-	for mharc-qemu-riscv@gnu.org; Tue, 25 Feb 2020 07:55:51 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:34269)
+	id 1j6aQt-0002DA-CE
+	for mharc-qemu-riscv@gnu.org; Tue, 25 Feb 2020 08:39:31 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:40878)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <alex.bennee@linaro.org>) id 1j6ZkZ-0003xR-Vf
- for qemu-riscv@nongnu.org; Tue, 25 Feb 2020 07:55:49 -0500
+ (envelope-from <laurent@vivier.eu>) id 1j6aQq-00028Z-VR
+ for qemu-riscv@nongnu.org; Tue, 25 Feb 2020 08:39:29 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alex.bennee@linaro.org>) id 1j6ZkY-0004Fe-Hz
- for qemu-riscv@nongnu.org; Tue, 25 Feb 2020 07:55:47 -0500
-Received: from mail-wm1-x343.google.com ([2a00:1450:4864:20::343]:50955)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <alex.bennee@linaro.org>)
- id 1j6ZkY-0004Dz-9O
- for qemu-riscv@nongnu.org; Tue, 25 Feb 2020 07:55:46 -0500
-Received: by mail-wm1-x343.google.com with SMTP id a5so2899568wmb.0
- for <qemu-riscv@nongnu.org>; Tue, 25 Feb 2020 04:55:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=k4RkOSmwzwH2dQilc05ZWPR0LyOE7aaRoCCPjbXdJZE=;
- b=lLJD8/8U2pEK6tt9h1UuIe+5luto6aqJ7iVDNz+QI/kNbnb4rgqY30zuM5JMMqFIqw
- RlqsZOPlripJH8/V5WD7S+J8CYFOzQGEBx38zZP+jicQOjwEPdDYnht6SdsW/zonChG2
- A5FOYrBXqUhXcSPTJF9rGtzwO0mVfUcRRboL3ZuuzWcrDZdPAAQArTy22Q7M+JKm+wqZ
- r/Iid0+0lKGzjzAFPRE63b84lgoAybm5chwUaE3IJoYe+Dazz1RvU96UasH2YpQmHCy0
- UB331wPEAQh/67UJyiBGB2uHmPz6Kk2YPZWBdqoHaZPM6Fz+j5kx07YFmKho4tr9mNGs
- 7xLg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=k4RkOSmwzwH2dQilc05ZWPR0LyOE7aaRoCCPjbXdJZE=;
- b=nzUZy0ciHECRLCs1HWnz9TW/KR4LS6PuvKvZPnSqE73ComZ+Z2LVn2e7QwC+PnGcYl
- DDOAAO9C1l+i5K2ak6gC02B9PSGf/gXSJ6v8GnlCa/nz+FMbIWSN5LNUly1am6syCMIj
- HH0xKAlAgqyYFoZHJWfb5HCS3Tp7bZ/QS1K267l0lVMBFXoR7juRkAhLWVIDbvSbanIH
- E1SupVbOPCdHZulAwSBEvdPKuCanTLt22xMMa0SnyuAWct6KnMvpzmWiPuskP4LNLwWT
- mOWwiRUQMUYte3NCIh+1mrQ7NG0rJqzjCzM2Q2k8T1OQICnWdegTBLaPMQHjCxUvt59F
- H3/g==
-X-Gm-Message-State: APjAAAULIzYektzSNQpyThZNqp8rljDTP/AoBFourzHFUZzDsscW/n62
- Z+1uItnNIr7nJNC9lEcPGTAtSQ==
-X-Google-Smtp-Source: APXvYqwJkJnbO9/aXL5DdiuIAX5GZT3q4YvEyjq3Ir/LRxRisDv2pXCpeK6xn/wBPArWRf2LBNaTDA==
-X-Received: by 2002:a1c:c208:: with SMTP id s8mr5282583wmf.30.1582635345203;
- Tue, 25 Feb 2020 04:55:45 -0800 (PST)
-Received: from zen.linaroharston ([51.148.130.216])
- by smtp.gmail.com with ESMTPSA id z19sm4022542wmi.35.2020.02.25.04.55.39
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 25 Feb 2020 04:55:44 -0800 (PST)
-Received: from zen.home.arpa (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id 88E1C1FF9E;
- Tue, 25 Feb 2020 12:47:11 +0000 (GMT)
-From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: qemu-devel@nongnu.org
-Cc: cota@braap.org, aaron@os.amperecomputing.com, peter.puhov@linaro.org,
- robert.foley@linaro.org, kuhn.chenqun@huawei.com, robhenry@microsoft.com,
- fam@euphon.net, berrange@redhat.com, f4bug@amsat.org,
- richard.henderson@linaro.org, balrogg@gmail.com, aurelien@aurel32.net,
- pbonzini@redhat.com, stefanha@redhat.com, stefanb@linux.vnet.ibm.com,
- marcandre.lureau@redhat.com,
- =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Alistair Francis <alistair.francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
-Subject: [PATCH v3 14/19] target/riscv: progressively load the instruction
- during decode
-Date: Tue, 25 Feb 2020 12:47:05 +0000
-Message-Id: <20200225124710.14152-15-alex.bennee@linaro.org>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20200225124710.14152-1-alex.bennee@linaro.org>
-References: <20200225124710.14152-1-alex.bennee@linaro.org>
+ (envelope-from <laurent@vivier.eu>) id 1j6aQp-00040c-UP
+ for qemu-riscv@nongnu.org; Tue, 25 Feb 2020 08:39:28 -0500
+Received: from mout.kundenserver.de ([212.227.126.134]:51777)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <laurent@vivier.eu>)
+ id 1j6aQh-0003wZ-DK; Tue, 25 Feb 2020 08:39:19 -0500
+Received: from [192.168.100.1] ([78.238.229.36]) by mrelayeu.kundenserver.de
+ (mreue011 [213.165.67.103]) with ESMTPSA (Nemesis) id
+ 1MderZ-1jfe854921-00ZctR; Tue, 25 Feb 2020 14:39:09 +0100
+Subject: Re: [PATCH v2 0/2] linux-user: generate syscall_nr.sh for RISC-V
+To: Alistair Francis <alistair.francis@wdc.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: palmer@dabbelt.com, alistair23@gmail.com
+References: <cover.1582586444.git.alistair.francis@wdc.com>
+From: Laurent Vivier <laurent@vivier.eu>
+Autocrypt: addr=laurent@vivier.eu; prefer-encrypt=mutual; keydata=
+ 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
+Message-ID: <306320d5-b305-1890-3185-05353363cce5@vivier.eu>
+Date: Tue, 25 Feb 2020 14:39:07 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.4.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2a00:1450:4864:20::343
+In-Reply-To: <cover.1582586444.git.alistair.francis@wdc.com>
+Content-Type: multipart/mixed; boundary="------------17E998FEEABEE81D847F8E95"
+Content-Language: fr
+X-Provags-ID: V03:K1:yHakMpK4dNtICglTp42N0h0fWqZUfFufcCVceau3t769sYrpgng
+ r6wewy0jrE6kFkttXR0ndnwOlDu1102nossA7RiRM450h0ZHMzTrNZouwBi98undB4UCtdA
+ GmEr5UpW0/J455h2CElWtJwvq1xOMH6DDb8G6peaxCNOmCGbEq/J7QZWBEIW3LKw/RM0KV5
+ xctCL/0euQTDhsEibASGg==
+X-UI-Out-Filterresults: notjunk:1;V03:K0:x2x6S7VRW7Q=:y/EJy8oOLW7Q4iqy4KYznE
+ PveQNWtaqUr7uo9Yu6wS+AkkMLnCFV+95RH6TfV4MBg0k71Ishvy/1/LQyo+O43ShBpOiskZa
+ KLDVFNVv43LYz4fX8IqZLy+JEORylgrLaAByZ1G4ypEGpQmsRzsJYZ7qXMRZrpHUzRxqKtvwm
+ 5FND65cTivT9EfReWzxKOxVKTXYVazQ441FsDhRCVOOkeB6yEKkccIPzWPbAQEey18PyXceBa
+ UzYiabeEOrdwUYY6i3dkLQWBJRAmAAQIXjSeCRh7XIFbC9HSJQvjCNFjshNV/SWCRpThMrnjR
+ Cr6eVgQdUIfHLAxz1XbTRhWohhAFS+uXXBTjISIYhMtxL6H/2GqikfDF/oCDNXs+zCW5kTPSu
+ vkz9ZQWA65Hm51PVvqJQ/n/SGvsNwt7nyUzLLhgT3kOvpPgp+4peHneiBZoaQkiYvCEp5czM8
+ Ka3yJaqdNbr4eMpcgr4kA243udNSPlsXBrOlJhbBRv8LyuDETCK3HXs2dpKuxznWfpYzygezG
+ 1eZOs7JoUhrYLBgnjlSBNOzNZffbAiqrMyP0uRUY69ljgJuyydh6XrJHNQO0xDS3cKQgxqiT/
+ TwJBIfvRSDyjVg4fKQdIRpMd+qPQoB+O+x/lxz8lOL0Ak3XWYaYtfroeX0Kq8SUspM9ulEnHl
+ 06MdCOJO3NYHMWVPhxOMMtJaOaf0tRIgpCZxKIcdktV4j2/8nHrZzIbCSzf84aXbqP5w5bRqL
+ hebqhyPZ7JAxn9e5u0BeLMaBLik2SKs+8iwS7cdYcI3FHRCsCu0cGjBlGUqhs/Ep+3RfTkBSc
+ +8MHHSCozBHh81rhY9LRXzf1LxcV06rEeeGGVcHpmTny39S8Sr2U4pZXyvhIoL1vNVTDZMF
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+X-Received-From: 212.227.126.134
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -87,167 +101,97 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Feb 2020 12:55:49 -0000
+X-List-Received-Date: Tue, 25 Feb 2020 13:39:30 -0000
 
-The plugin system would throw up a harmless warning when it detected
-that a disassembly of an instruction didn't use all it's bytes. Fix
-the riscv decoder to only load the instruction bytes it needs as it
-needs them.
+This is a multi-part message in MIME format.
+--------------17E998FEEABEE81D847F8E95
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
 
-This drops opcode from the ctx in favour if passing the appropriately
-sized opcode down a few levels of the decode.
+Le 25/02/2020 à 00:21, Alistair Francis a écrit :
+> This series updates the RISC-V syscall_nr.sh based on the 5.5 kernel.
+> 
+> There are two parts to this. One is just adding the new syscalls, the
+> other part is updating the RV32 syscalls to match the fact that RV32 is
+> a 64-bit time_t architectures (y2038) safe.
+> 
+> we need to make some changes to syscall.c to avoid warnings/errors
+> during compliling with the new syscall.
+> 
+> I did some RV32 user space testing after applying these patches. I ran the
+> glibc testsuite in userspace and I don't see any regressions.
+> 
+> Alistair Francis (2):
+>   linux-user: Protect more syscalls
+>   linux-user/riscv: Update the syscall_nr's to the 5.5 kernel
+> 
+>  linux-user/riscv/syscall32_nr.h | 314 ++++++++++++++++++++++++++++++++
+>  linux-user/riscv/syscall64_nr.h | 303 ++++++++++++++++++++++++++++++
+>  linux-user/riscv/syscall_nr.h   | 294 +-----------------------------
+>  linux-user/strace.c             |   2 +
+>  linux-user/syscall.c            |  20 ++
+>  5 files changed, 641 insertions(+), 292 deletions(-)
+>  create mode 100644 linux-user/riscv/syscall32_nr.h
+>  create mode 100644 linux-user/riscv/syscall64_nr.h
+> 
 
-Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Robert Foley <robert.foley@linaro.org>
+I have written a shell script to generate the syscall_nr.h from the
+asm-generic, but as it uses a lot of cpp, tr, sed and grep, the result
+needs to be checked.
 
----
-v2
-  - use extract16 for uint16_t opcodes
----
- target/riscv/instmap.h   |  8 ++++----
- target/riscv/translate.c | 40 +++++++++++++++++++++-------------------
- 2 files changed, 25 insertions(+), 23 deletions(-)
+If it can help, it is in attachment.
 
-diff --git a/target/riscv/instmap.h b/target/riscv/instmap.h
-index f8ad7d60fd5..40b6d2b64de 100644
---- a/target/riscv/instmap.h
-+++ b/target/riscv/instmap.h
-@@ -344,8 +344,8 @@ enum {
- #define GET_C_LW_IMM(inst)          ((extract32(inst, 6, 1) << 2) \
-                                     | (extract32(inst, 10, 3) << 3) \
-                                     | (extract32(inst, 5, 1) << 6))
--#define GET_C_LD_IMM(inst)          ((extract32(inst, 10, 3) << 3) \
--                                    | (extract32(inst, 5, 2) << 6))
-+#define GET_C_LD_IMM(inst)          ((extract16(inst, 10, 3) << 3) \
-+                                    | (extract16(inst, 5, 2) << 6))
- #define GET_C_J_IMM(inst)           ((extract32(inst, 3, 3) << 1) \
-                                     | (extract32(inst, 11, 1) << 4) \
-                                     | (extract32(inst, 2, 1) << 5) \
-@@ -363,7 +363,7 @@ enum {
- #define GET_C_RD(inst)              GET_RD(inst)
- #define GET_C_RS1(inst)             GET_RD(inst)
- #define GET_C_RS2(inst)             extract32(inst, 2, 5)
--#define GET_C_RS1S(inst)            (8 + extract32(inst, 7, 3))
--#define GET_C_RS2S(inst)            (8 + extract32(inst, 2, 3))
-+#define GET_C_RS1S(inst)            (8 + extract16(inst, 7, 3))
-+#define GET_C_RS2S(inst)            (8 + extract16(inst, 2, 3))
- 
- #endif
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 14dc71156be..d5de7f468a7 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -44,7 +44,6 @@ typedef struct DisasContext {
-     /* pc_succ_insn points to the instruction following base.pc_next */
-     target_ulong pc_succ_insn;
-     target_ulong priv_ver;
--    uint32_t opcode;
-     uint32_t mstatus_fs;
-     uint32_t misa;
-     uint32_t mem_idx;
-@@ -492,45 +491,45 @@ static void gen_set_rm(DisasContext *ctx, int rm)
-     tcg_temp_free_i32(t0);
- }
- 
--static void decode_RV32_64C0(DisasContext *ctx)
-+static void decode_RV32_64C0(DisasContext *ctx, uint16_t opcode)
- {
--    uint8_t funct3 = extract32(ctx->opcode, 13, 3);
--    uint8_t rd_rs2 = GET_C_RS2S(ctx->opcode);
--    uint8_t rs1s = GET_C_RS1S(ctx->opcode);
-+    uint8_t funct3 = extract16(opcode, 13, 3);
-+    uint8_t rd_rs2 = GET_C_RS2S(opcode);
-+    uint8_t rs1s = GET_C_RS1S(opcode);
- 
-     switch (funct3) {
-     case 3:
- #if defined(TARGET_RISCV64)
-         /* C.LD(RV64/128) -> ld rd', offset[7:3](rs1')*/
-         gen_load_c(ctx, OPC_RISC_LD, rd_rs2, rs1s,
--                 GET_C_LD_IMM(ctx->opcode));
-+                 GET_C_LD_IMM(opcode));
- #else
-         /* C.FLW (RV32) -> flw rd', offset[6:2](rs1')*/
-         gen_fp_load(ctx, OPC_RISC_FLW, rd_rs2, rs1s,
--                    GET_C_LW_IMM(ctx->opcode));
-+                    GET_C_LW_IMM(opcode));
- #endif
-         break;
-     case 7:
- #if defined(TARGET_RISCV64)
-         /* C.SD (RV64/128) -> sd rs2', offset[7:3](rs1')*/
-         gen_store_c(ctx, OPC_RISC_SD, rs1s, rd_rs2,
--                  GET_C_LD_IMM(ctx->opcode));
-+                  GET_C_LD_IMM(opcode));
- #else
-         /* C.FSW (RV32) -> fsw rs2', offset[6:2](rs1')*/
-         gen_fp_store(ctx, OPC_RISC_FSW, rs1s, rd_rs2,
--                     GET_C_LW_IMM(ctx->opcode));
-+                     GET_C_LW_IMM(opcode));
- #endif
-         break;
-     }
- }
- 
--static void decode_RV32_64C(DisasContext *ctx)
-+static void decode_RV32_64C(DisasContext *ctx, uint16_t opcode)
- {
--    uint8_t op = extract32(ctx->opcode, 0, 2);
-+    uint8_t op = extract16(opcode, 0, 2);
- 
-     switch (op) {
-     case 0:
--        decode_RV32_64C0(ctx);
-+        decode_RV32_64C0(ctx, opcode);
-         break;
-     }
- }
-@@ -709,22 +708,25 @@ static bool gen_shift(DisasContext *ctx, arg_r *a,
- /* Include the auto-generated decoder for 16 bit insn */
- #include "decode_insn16.inc.c"
- 
--static void decode_opc(DisasContext *ctx)
-+static void decode_opc(CPURISCVState *env, DisasContext *ctx, uint16_t opcode)
- {
-     /* check for compressed insn */
--    if (extract32(ctx->opcode, 0, 2) != 3) {
-+    if (extract16(opcode, 0, 2) != 3) {
-         if (!has_ext(ctx, RVC)) {
-             gen_exception_illegal(ctx);
-         } else {
-             ctx->pc_succ_insn = ctx->base.pc_next + 2;
--            if (!decode_insn16(ctx, ctx->opcode)) {
-+            if (!decode_insn16(ctx, opcode)) {
-                 /* fall back to old decoder */
--                decode_RV32_64C(ctx);
-+                decode_RV32_64C(ctx, opcode);
-             }
-         }
-     } else {
-+        uint32_t opcode32 = opcode;
-+        opcode32 = deposit32(opcode32, 16, 16,
-+                             translator_lduw(env, ctx->base.pc_next + 2));
-         ctx->pc_succ_insn = ctx->base.pc_next + 4;
--        if (!decode_insn32(ctx, ctx->opcode)) {
-+        if (!decode_insn32(ctx, opcode32)) {
-             gen_exception_illegal(ctx);
-         }
-     }
-@@ -776,9 +778,9 @@ static void riscv_tr_translate_insn(DisasContextBase *dcbase, CPUState *cpu)
- {
-     DisasContext *ctx = container_of(dcbase, DisasContext, base);
-     CPURISCVState *env = cpu->env_ptr;
-+    uint16_t opcode16 = translator_lduw(env, ctx->base.pc_next);
- 
--    ctx->opcode = translator_ldl(env, ctx->base.pc_next);
--    decode_opc(ctx);
-+    decode_opc(env, ctx, opcode16);
-     ctx->base.pc_next = ctx->pc_succ_insn;
- 
-     if (ctx->base.is_jmp == DISAS_NEXT) {
--- 
-2.20.1
+Put it in scripts, and run it as:
 
+scripts/gensyscalls.sh /path/to/linux
+
+then check the result with something like "git diff -w"
+
+Thanks,
+Laurent
+
+--------------17E998FEEABEE81D847F8E95
+Content-Type: application/x-shellscript;
+ name="gensyscalls.sh"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment;
+ filename="gensyscalls.sh"
+
+IyEvYmluL3NoCgpsaW51eD0iJDEiCm91dHB1dD0iJDIiCgpUTVA9JChta3RlbXAgLWQpCgpp
+ZiBbICIkbGludXgiID0gIiIgXSA7IHRoZW4KICAgIGVjaG8gIk5lZWRzIHBhdGggdG8gbGlu
+dXggc291cmNlIHRyZWUiIDE+JjIKICAgIGV4aXQgMQpmaQoKaWYgWyAiJG91dHB1dCIgPSAi
+IiBdIDsgdGhlbgogICAgb3V0cHV0PSIkUFdEIgpmaQoKdXBwZXIoKQp7CiAgICBlY2hvICIk
+MSIgfCB0ciAiWzpsb3dlcjpdIiAiWzp1cHBlcjpdIiB8IHRyICJbOnB1bmN0Ol0iICJfIgp9
+CgpxZW11X2FyY2goKQp7CiAgICBjYXNlICIkMSIgaW4KICAgIGFybTY0KQogICAgICAgIGVj
+aG8gImFhcmNoNjQiCiAgICAgICAgOzsKICAgICopCiAgICAgICAgdXBwZXIgIiQxIgogICAg
+ICAgIDs7CiAgICBlc2FjCn0KCnJlYWRfaW5jbHVkZXMoKQp7CiAgICBhcmNoPSQxCiAgICBi
+aXRzPSQyCgogICAgIGNwcCAtUCAtbm9zdGRpbmMgLWZkaXJlY3RpdmVzLW9ubHkgXAogICAg
+ICAgIC1EX1VBUElfQVNNXyQodXBwZXIgJHthcmNofSlfQklUU1BFUkxPTkdfSCBcCiAgICAg
+ICAgLURfX0JJVFNfUEVSX0xPTkc9JHtiaXRzfSBcCiAgICAgICAgLUkke2xpbnV4fS9hcmNo
+LyR7YXJjaH0vaW5jbHVkZS91YXBpLyBcCiAgICAgICAgLUkke2xpbnV4fS9pbmNsdWRlL3Vh
+cGkgXAogICAgICAgIC1JJHtUTVB9IFwKICAgICAgICAiJHtsaW51eH0vYXJjaC8ke2FyY2h9
+L2luY2x1ZGUvdWFwaS9hc20vdW5pc3RkLmgiCn0KCmZpbHRlcl9kZWZpbmVzKCkKewogICAg
+Z3JlcCAtZSAiI2RlZmluZSBfX05SXyIgLWUgIiNkZWZpbmUgX19OUjMyNjQiCn0KCnJlbmFt
+ZV9kZWZpbmVzKCkKewogICAgc2VkICJzLyBfX05SXy8gVEFSR0VUX05SXy9nO3MvKF9fTlJf
+LyhUQVJHRVRfTlJfL2ciCn0KCmV2YWx1YXRlX3ZhbHVlcygpCnsKICAgIHNlZCAicy8jZGVm
+aW5lIFRBUkdFVF9OUl8vUUVNVSBUQVJHRVRfTlJfLyIgfCBcCiAgICBjcHAgLVAgLW5vc3Rk
+aW5jIHwgXAogICAgc2VkICJzL15RRU1VIC8jZGVmaW5lIC8iCn0KCmdlbmVyYXRlX3N5c2Nh
+bGxfbnIoKQp7CiAgICBhcmNoPSQxCiAgICBiaXRzPSQyCiAgICBmaWxlPSIkMyIKICAgIGd1
+YXJkPSIkKHVwcGVyIExJTlVYX1VTRVJfJChxZW11X2FyY2ggJGFyY2gpXyQoYmFzZW5hbWUg
+IiRmaWxlIikpIgoKICAgIChlY2hvICIvKiIKICAgIGVjaG8gIiAqIFRoaXMgZmlsZSBjb250
+YWlucyB0aGUgc3lzdGVtIGNhbGwgbnVtYmVycy4iCiAgICBlY2hvICIgKi8iCiAgICBlY2hv
+ICIjaWZuZGVmICR7Z3VhcmR9IgogICAgZWNobyAiI2RlZmluZSAke2d1YXJkfSIKICAgIGVj
+aG8KICAgIHJlYWRfaW5jbHVkZXMgJGFyY2ggJGJpdHMgfCBmaWx0ZXJfZGVmaW5lcyB8IHJl
+bmFtZV9kZWZpbmVzIHwgXAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGV2YWx1
+YXRlX3ZhbHVlcyB8IHNvcnQgLW4gLWsgMwogICAgZWNobwogICAgZWNobyAiI2VuZGlmIC8q
+ICR7Z3VhcmR9ICovIgogICAgZWNobykgPiAiJGZpbGUiCn0KCm1rZGlyICIkVE1QL2FzbSIK
+PiAiJFRNUC9hc20vYml0c3BlcmxvbmcuaCIKCmdlbmVyYXRlX3N5c2NhbGxfbnIgYXJtNjQg
+NjQgIiRvdXRwdXQvbGludXgtdXNlci9hYXJjaDY0L3N5c2NhbGxfbnIuaCIKZ2VuZXJhdGVf
+c3lzY2FsbF9uciBuaW9zMiAzMiAiJG91dHB1dC9saW51eC11c2VyL25pb3MyL3N5c2NhbGxf
+bnIuaCIKZ2VuZXJhdGVfc3lzY2FsbF9uciBvcGVucmlzYyAzMiAiJG91dHB1dC9saW51eC11
+c2VyL29wZW5yaXNjL3N5c2NhbGxfbnIuaCIKCmdlbmVyYXRlX3N5c2NhbGxfbnIgcmlzY3Yg
+MzIgIiRvdXRwdXQvbGludXgtdXNlci9yaXNjdi9zeXNjYWxsMzJfbnIuaCIKZ2VuZXJhdGVf
+c3lzY2FsbF9uciByaXNjdiA2NCAiJG91dHB1dC9saW51eC11c2VyL3Jpc2N2L3N5c2NhbGw2
+NF9uci5oIgpybSAtZnIgIiRUTVAiCg==
+--------------17E998FEEABEE81D847F8E95--
 
