@@ -1,97 +1,108 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1j6Ysn-000081-Lt
-	for mharc-qemu-riscv@gnu.org; Tue, 25 Feb 2020 07:00:13 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:51091)
+	id 1j6ZUm-0005AJ-Vn
+	for mharc-qemu-riscv@gnu.org; Tue, 25 Feb 2020 07:39:28 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:57504)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <laurent@vivier.eu>) id 1j6Ysf-0008Hs-QP
- for qemu-riscv@nongnu.org; Tue, 25 Feb 2020 07:00:10 -0500
+ (envelope-from <pbonzini@redhat.com>) id 1j6ZUj-00051O-NO
+ for qemu-riscv@nongnu.org; Tue, 25 Feb 2020 07:39:26 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <laurent@vivier.eu>) id 1j6Yse-00066M-Et
- for qemu-riscv@nongnu.org; Tue, 25 Feb 2020 07:00:05 -0500
-Received: from mout.kundenserver.de ([212.227.126.131]:54953)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <laurent@vivier.eu>)
- id 1j6Yse-00065w-5f; Tue, 25 Feb 2020 07:00:04 -0500
-Received: from [192.168.100.1] ([78.238.229.36]) by mrelayeu.kundenserver.de
- (mreue010 [213.165.67.103]) with ESMTPSA (Nemesis) id
- 1MHXWL-1jAjrb100v-00DXfU; Tue, 25 Feb 2020 12:59:58 +0100
-To: Alistair Francis <alistair.francis@wdc.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: palmer@dabbelt.com, alistair23@gmail.com
-References: <cover.1582586444.git.alistair.francis@wdc.com>
- <205d84c5c51c54c8bb6a4a2927b7e1729fe42cdd.1582586444.git.alistair.francis@wdc.com>
-From: Laurent Vivier <laurent@vivier.eu>
-Autocrypt: addr=laurent@vivier.eu; prefer-encrypt=mutual; keydata=
- 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
-Subject: Re: [PATCH v2 1/2] linux-user: Protect more syscalls
-Message-ID: <4d5ad27a-0655-4c15-123a-8ae7ed6bedf2@vivier.eu>
-Date: Tue, 25 Feb 2020 12:59:57 +0100
+ (envelope-from <pbonzini@redhat.com>) id 1j6ZUi-00047u-L0
+ for qemu-riscv@nongnu.org; Tue, 25 Feb 2020 07:39:25 -0500
+Received: from us-smtp-2.mimecast.com ([207.211.31.81]:27394
+ helo=us-smtp-delivery-1.mimecast.com)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <pbonzini@redhat.com>) id 1j6ZUi-00047a-Hf
+ for qemu-riscv@nongnu.org; Tue, 25 Feb 2020 07:39:24 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1582634364;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=prlOgWgQ9Ik+E3eF9Wnb1i83rqLIAzGc5kS9vOvkF4o=;
+ b=d9E7m6YFEXVjeg+csDmhL9gg3I+5oG7ElYfH2L4dLzAWgO1uTGtN0MtMHdTPS5QvHLPdz+
+ v+vk7wjXhJlb5uMk1/pg01JKo9i2nyTzUnmXtouk0uGiJPKTG8jktLa6Mwk4qeVruwmrfN
+ piil4AtQOpurKs2AxeC8+UUx+uAXn4o=
+Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
+ [209.85.128.71]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-369-uPpdn3hBO1mvmIT6JIUXLA-1; Tue, 25 Feb 2020 07:39:19 -0500
+X-MC-Unique: uPpdn3hBO1mvmIT6JIUXLA-1
+Received: by mail-wm1-f71.google.com with SMTP id y125so586334wmg.1
+ for <qemu-riscv@nongnu.org>; Tue, 25 Feb 2020 04:39:19 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=kztbPaVB/2XMFABxpPNGrrCj9r6pdnumsQimldYZmLg=;
+ b=FVU/v0zzPo0QLA9cGGJXA5zijCiRJyDG6G2P80zyi+nQ1lgQ1I3dn1qEzpZTWvHTYR
+ 0Q688Tp1HQ3WuzU84khZYgFVSh0laKNKo8k9L6GKDmvqeLWoYZ/t5FHOblJRqQMqs6bi
+ 2/dpiG+s5clHs7EFE8XsFeZnz9JEuDbxo0W9Pd77ekDV0Duy1Ex5vb8izgDZYoKkMQRd
+ KHtUUFnyVGANSgVn6TOVfysfxyGrCpxkJhD646KgeOKSlUOviiB7cbR7qwONlu6MYOH2
+ gy31YOAOI/vY+l6r0MkDhCCjTJCJAzaSBJQk4avlrqPyhxV+YpZWUrv2tzfudU1MdOHA
+ pSdQ==
+X-Gm-Message-State: APjAAAUG/8WFvxiF1W2DAXPxxAo0AOzD827a3J2hTF8MFG6LwXL/MGm6
+ HPQosf6o+uMxPYlS37xy1Ri158lH6Ba+PEVC+2evuGCpM4kZzSy1VS+2jMHh9SMBG+cdUzyncfX
+ /TKbYtFefxE0gNH8=
+X-Received: by 2002:a1c:541b:: with SMTP id i27mr5524339wmb.137.1582634358170; 
+ Tue, 25 Feb 2020 04:39:18 -0800 (PST)
+X-Google-Smtp-Source: APXvYqwMxOydfsyqbVFz+9ojWD99h41Ff9l0Bl/3ROeYCCGkjzMVH3uMtzNaJvjeoky0SS3gZviSrg==
+X-Received: by 2002:a1c:541b:: with SMTP id i27mr5524296wmb.137.1582634357874; 
+ Tue, 25 Feb 2020 04:39:17 -0800 (PST)
+Received: from ?IPv6:2001:b07:6468:f312:3577:1cfe:d98a:5fb6?
+ ([2001:b07:6468:f312:3577:1cfe:d98a:5fb6])
+ by smtp.gmail.com with ESMTPSA id w8sm3982443wmm.0.2020.02.25.04.39.15
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 25 Feb 2020 04:39:17 -0800 (PST)
+Subject: Re: [PATCH RESEND v2 18/32] hw/i386/pc_sysfw: Simplify using
+ memory_region_init_alias()
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>,
+ qemu-devel@nongnu.org, Peter Maydell <peter.maydell@linaro.org>,
+ "Dr. David Alan Gilbert" <dgilbert@redhat.com>
+Cc: Kevin Wolf <kwolf@redhat.com>, Alistair Francis <alistair@alistair23.me>, 
+ qemu-block@nongnu.org, Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Joel Stanley <joel@jms.id.au>, qemu-ppc@nongnu.org,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ Magnus Damm <magnus.damm@gmail.com>,
+ Aleksandar Markovic <amarkovic@wavecomp.com>,
+ Aleksandar Rikalo <aleksandar.rikalo@rt-rk.com>,
+ Jason Wang <jasowang@redhat.com>, Igor Mitsyanko <i.mitsyanko@gmail.com>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Laurent Vivier <laurent@vivier.eu>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Peter Chubb <peter.chubb@nicta.com.au>, Max Reitz <mreitz@redhat.com>,
+ Subbaraya Sundeep <sundeep.lkml@gmail.com>,
+ KONRAD Frederic <frederic.konrad@adacore.com>,
+ =?UTF-8?Q?Marc-Andr=c3=a9_Lureau?= <marcandre.lureau@redhat.com>,
+ Andrzej Zaborowski <balrogg@gmail.com>,
+ =?UTF-8?Q?Herv=c3=a9_Poussineau?= <hpoussin@reactos.org>,
+ qemu-arm@nongnu.org, Aurelien Jarno <aurelien@aurel32.net>,
+ Michael Walle <michael@walle.cc>, Artyom Tarasenko <atar4qemu@gmail.com>,
+ Eduardo Habkost <ehabkost@redhat.com>, "Michael S. Tsirkin"
+ <mst@redhat.com>, Richard Henderson <rth@twiddle.net>,
+ David Gibson <david@gibson.dropbear.id.au>,
+ Jean-Christophe Dubois <jcd@tribudubois.net>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>, qemu-riscv@nongnu.org,
+ Fabien Chouteau <chouteau@adacore.com>
+References: <20200224205533.23798-1-philmd@redhat.com>
+ <20200224205533.23798-19-philmd@redhat.com>
+ <532522f3-fc33-4405-1819-fe89c3ed088e@redhat.com>
+From: Paolo Bonzini <pbonzini@redhat.com>
+Message-ID: <683355b0-cf04-d57a-92aa-500dbf1b94a8@redhat.com>
+Date: Tue, 25 Feb 2020 13:39:15 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.4.1
 MIME-Version: 1.0
-In-Reply-To: <205d84c5c51c54c8bb6a4a2927b7e1729fe42cdd.1582586444.git.alistair.francis@wdc.com>
+In-Reply-To: <532522f3-fc33-4405-1819-fe89c3ed088e@redhat.com>
+Content-Language: en-US
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=utf-8
-Content-Language: fr
-Content-Transfer-Encoding: 8bit
-X-Provags-ID: V03:K1:PEGEras+ZNXreqY9xSxR18aJiYsuDeYEo9KPdKxxLs+Yun+T/UO
- VQ3XmFkIQpoc/mK1WlZiNHI4L/rIoCJ9eUicyq+o7+bZcspRekL9yo1QBBNOB3l/4NNuM1w
- ox9IOVE5wv5UYDI50MNPBROqYGPsxx88SHcJZgn2FeE1jxgi9Hx9C2KVQ2SpcoTT/4ofZSe
- aWpBEX+iiv5FGTUKEgAWQ==
-X-UI-Out-Filterresults: notjunk:1;V03:K0:MEkB4zhY4gc=:SosM9qn+s9GUAN//eDeU+g
- q8r2kWVW7r6+UkZaNUdxcp+hjxS7bncOvhudCVnzClSsX8uhdFZKCWGZ9x17O9g1a94x5IQ8w
- hYR/n13648HiaiN8T1feYc/f+yiwNIEd3GV5g/wxJBEA1IV1sMKtQGDevkBYph0rJPyPosxsA
- sWttA4Mo2PXO9lZ2hOuY5AiUjVtx+NpPouvfLI0UM8zPsBnbMqT9kWzj+pFsYrjh0dbtWhE5a
- 09PebR6Qeg3OU26ynW/nR+XVOiOTL767tRPIQsI9CwT3bj1gTdf3yKaXyaHBrJB3FEnlNdMER
- W34OlQ3vCjXopUTuIa8hx04oOU8hpbPyK9piq14txGH2ogydeMLJyI5CVm2MGXWCY68GpaTL/
- phkYEnpGd1uh8i+AgKZG2wWi6m/DQ4SAOLqmVwDJLtMPqCt0mEzso6LWIXOC2JOhNnJf1qpJG
- 5DqdM6MPmY2B3+tmJBAa0sviXRkPbWdEfjIWw/WBxis5Zcvwfwl7iCUbB/J1cMrtWAZzObMPB
- coRsO+/ZTMUbeLVyTpHILwl+2BWttWsT9L5RAHWCzG1YCwjz/x42ZavdOwGx9gmHnhIsntNi3
- r/U1QBiyb7yakeBSqBJKfgJfqJzDG7FvQLp8dmXjGFAXiy4p2taWJdCmun51aOj4LN+bSclKC
- O00UFKldyqEskQSCksVwHlCOWRR3knuctPuZNHyzEBN5L//VfokaPTaJGhqXrFuDpIAB+Fmgz
- wGw40kE4Kh2ZBcbJiK2VNlNnZ5OlHFdlWeOSXJaMci/QIO+2ZV+Fz50Qzdpvh1rNtDWX/qsMR
- LXsgDViJX3iiIQQQPQrC5yhRusAfMtf06J6gKwQxNBg9p2xmP/VmedoJJl13qMDeJ0D1Obm
+Content-Transfer-Encoding: quoted-printable
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
-X-Received-From: 212.227.126.131
+ [fuzzy]
+X-Received-From: 207.211.31.81
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -103,55 +114,68 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Feb 2020 12:00:11 -0000
+X-List-Received-Date: Tue, 25 Feb 2020 12:39:27 -0000
 
-Le 25/02/2020 à 00:21, Alistair Francis a écrit :
-> New y2038 safe 32-bit architectures (like RISC-V) don't support old
-> syscalls with a 32-bit time_t. The kernel defines new *_time64 versions
-> of these syscalls. Add some more #ifdefs to syscall.c in linux-user to
-> allow us to compile without these old syscalls.
-> 
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> Reviewed-by: Philippe Mathieu-Daudé <philmd@redhat.com>
-> ---
->  linux-user/strace.c  |  2 ++
->  linux-user/syscall.c | 20 ++++++++++++++++++++
->  2 files changed, 22 insertions(+)
-> 
-> diff --git a/linux-user/strace.c b/linux-user/strace.c
-> index 4f7130b2ff..6420ccd97b 100644
-> --- a/linux-user/strace.c
-> +++ b/linux-user/strace.c
-> @@ -775,6 +775,7 @@ print_syscall_ret_newselect(const struct syscallname *name, abi_long ret)
->  #define TARGET_TIME_OOP      3   /* leap second in progress */
->  #define TARGET_TIME_WAIT     4   /* leap second has occurred */
->  #define TARGET_TIME_ERROR    5   /* clock not synchronized */
-> +#ifdef TARGET_NR_adjtimex
->  static void
->  print_syscall_ret_adjtimex(const struct syscallname *name, abi_long ret)
->  {
-> @@ -813,6 +814,7 @@ print_syscall_ret_adjtimex(const struct syscallname *name, abi_long ret)
->  
->      qemu_log("\n");
->  }
-> +#endif
->  
->  UNUSED static struct flags access_flags[] = {
->      FLAG_GENERIC(F_OK),
-> diff --git a/linux-user/syscall.c b/linux-user/syscall.c
-> index 8d27d10807..5a2156f95a 100644
-> --- a/linux-user/syscall.c
-> +++ b/linux-user/syscall.c
-> @@ -742,8 +742,10 @@ safe_syscall3(ssize_t, read, int, fd, void *, buff, size_t, count)
->  safe_syscall3(ssize_t, write, int, fd, const void *, buff, size_t, count)
->  safe_syscall4(int, openat, int, dirfd, const char *, pathname, \
->                int, flags, mode_t, mode)
-> +#if defined(TARGET_NR_wait4)
->  safe_syscall4(pid_t, wait4, pid_t, pid, int *, status, int, options, \
->                struct rusage *, rusage)
+On 25/02/20 11:05, Philippe Mathieu-Daud=C3=A9 wrote:
+>>
+>> pc_isa_bios_init() does a manual copy of a part of the BIOS,
+>> from a read-only region. We can simplify by directly aliasing
+>> the same part.
+>>
+>> Before:
+>>
+>> =C2=A0=C2=A0 (qemu) info mtree
+>> =C2=A0=C2=A0 memory-region: system
+>> =C2=A0=C2=A0=C2=A0=C2=A0 0000000000000000-ffffffffffffffff (prio 0, i/o)=
+: system
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 0000000000000000-0000000007ffffff (=
+prio 0, ram): alias
+>> ram-below-4g @pc.ram 0000000000000000-0000000007ffffff
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 0000000000000000-ffffffffffffffff (=
+prio -1, i/o): pci
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 00000000000a0000-000000=
+00000bffff (prio 1, i/o): vga-lowmem
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 00000000000c0000-000000=
+00000dffff (prio 1, rom): pc.rom
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 00000000000e0000-000000=
+00000fffff (prio 1, rom): isa-bios
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ...
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 00000000fff00000-00000000ffffffff (=
+prio 0, romd): system.flash0
+>>
+>> After:
+>>
+>> =C2=A0=C2=A0 (qemu) info mtree
+>> =C2=A0=C2=A0 memory-region: system
+>> =C2=A0=C2=A0=C2=A0=C2=A0 0000000000000000-ffffffffffffffff (prio 0, i/o)=
+: system
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 0000000000000000-0000000007ffffff (=
+prio 0, ram): alias
+>> ram-below-4g @pc.ram 0000000000000000-0000000007ffffff
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 0000000000000000-ffffffffffffffff (=
+prio -1, i/o): pci
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 00000000000a0000-000000=
+00000bffff (prio 1, i/o): vga-lowmem
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 00000000000c0000-000000=
+00000dffff (prio 1, rom): pc.rom
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 00000000000e0000-000000=
+00000fffff (prio 1, romd): alias
+>> isa-bios @system.flash0 00000000000e0000-00000000000fffff
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ...
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 00000000fff00000-00000000ffffffff (=
+prio 0, romd): system.flash0
+>=20
+> IIUC migrating old -> new is OK, the previous ROM copy is discarded.
+>=20
+> What about new -> old, does it require specific handling? Do we care?
 
-safe_wait4 is also used in TARGET_NR_waitpid
+Old->new is broken because the "isa-bios" memory region is not found.
 
-Thanks,
-Laurent
+qemu-system-x86_64: Unknown ramblock "isa-bios", cannot accept migration
+qemu-system-x86_64: error while loading state for instance 0x0 of device 'r=
+am'
+qemu-system-x86_64: load of migration failed: Invalid argument
+
+Paolo
+
 
