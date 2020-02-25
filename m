@@ -1,25 +1,25 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1j6Yjx-00008j-PP
-	for mharc-qemu-riscv@gnu.org; Tue, 25 Feb 2020 06:51:05 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:48956)
+	id 1j6Ysn-000081-Lt
+	for mharc-qemu-riscv@gnu.org; Tue, 25 Feb 2020 07:00:13 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:51091)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <laurent@vivier.eu>) id 1j6Yjs-00008Y-BI
- for qemu-riscv@nongnu.org; Tue, 25 Feb 2020 06:51:03 -0500
+ (envelope-from <laurent@vivier.eu>) id 1j6Ysf-0008Hs-QP
+ for qemu-riscv@nongnu.org; Tue, 25 Feb 2020 07:00:10 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <laurent@vivier.eu>) id 1j6Yjo-0004iS-J3
- for qemu-riscv@nongnu.org; Tue, 25 Feb 2020 06:51:00 -0500
-Received: from mout.kundenserver.de ([212.227.126.187]:58649)
+ (envelope-from <laurent@vivier.eu>) id 1j6Yse-00066M-Et
+ for qemu-riscv@nongnu.org; Tue, 25 Feb 2020 07:00:05 -0500
+Received: from mout.kundenserver.de ([212.227.126.131]:54953)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <laurent@vivier.eu>)
- id 1j6Yjo-0004aT-9y; Tue, 25 Feb 2020 06:50:56 -0500
+ id 1j6Yse-00065w-5f; Tue, 25 Feb 2020 07:00:04 -0500
 Received: from [192.168.100.1] ([78.238.229.36]) by mrelayeu.kundenserver.de
  (mreue010 [213.165.67.103]) with ESMTPSA (Nemesis) id
- 1MRmwM-1j0bPh3vhq-00TAxC; Tue, 25 Feb 2020 12:50:48 +0100
+ 1MHXWL-1jAjrb100v-00DXfU; Tue, 25 Feb 2020 12:59:58 +0100
 To: Alistair Francis <alistair.francis@wdc.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
 Cc: palmer@dabbelt.com, alistair23@gmail.com
 References: <cover.1582586444.git.alistair.francis@wdc.com>
- <85f33856ee6f32125e5c81a9561346b28b340a3e.1582586444.git.alistair.francis@wdc.com>
+ <205d84c5c51c54c8bb6a4a2927b7e1729fe42cdd.1582586444.git.alistair.francis@wdc.com>
 From: Laurent Vivier <laurent@vivier.eu>
 Autocrypt: addr=laurent@vivier.eu; prefer-encrypt=mutual; keydata=
  mQINBFYFJhkBEAC2me7w2+RizYOKZM+vZCx69GTewOwqzHrrHSG07MUAxJ6AY29/+HYf6EY2
@@ -63,36 +63,35 @@ Autocrypt: addr=laurent@vivier.eu; prefer-encrypt=mutual; keydata=
  OpKgu3nD0ahBDqANU/ZmNNarBJEwvM2vfusmNnWm3QMIwxNuJghRyuFfx694Im1js0ZY3LEU
  JGSHFG4ZynA+ZFUPA6Xf0wHeJOxGKCGIyeKORsteIqgnkINW9fnKJw2pgk8qHkwVc3Vu+wGS
  ZiJK0xFusPQehjWTHn9WjMG1zvQ5TQQHxau/2FkP45+nRPco6vVFQe8JmgtRF8WFJA==
-Subject: Re: [PATCH v2 2/2] linux-user/riscv: Update the syscall_nr's to the
- 5.5 kernel
-Message-ID: <24431d59-b535-97d4-95d7-fe4401e10787@vivier.eu>
-Date: Tue, 25 Feb 2020 12:50:46 +0100
+Subject: Re: [PATCH v2 1/2] linux-user: Protect more syscalls
+Message-ID: <4d5ad27a-0655-4c15-123a-8ae7ed6bedf2@vivier.eu>
+Date: Tue, 25 Feb 2020 12:59:57 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.4.1
 MIME-Version: 1.0
-In-Reply-To: <85f33856ee6f32125e5c81a9561346b28b340a3e.1582586444.git.alistair.francis@wdc.com>
+In-Reply-To: <205d84c5c51c54c8bb6a4a2927b7e1729fe42cdd.1582586444.git.alistair.francis@wdc.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: fr
 Content-Transfer-Encoding: 8bit
-X-Provags-ID: V03:K1:FIufnv1rhz7E1+H8VSn54aocjcTgXDaOpBotsU5jwu2uh7lvm8m
- lL9yiebAqYrb0ryRfwOmpVO4GR7dlJKWll/vYoLB7JMSn5XYSTWLDFEgba0u5sLajd7DrU0
- U8e3FTXpQmOdadHEzRf/rW+Smz/DE+xYhkq3ir9rshSiX4ztFS5VFkThK7v0AZpkP2vDid6
- 3mR/bvp2+t82UR+NdyWSw==
-X-UI-Out-Filterresults: notjunk:1;V03:K0:PXXhXhA9HHc=:EYoqOO+PEUGfUhozqtRnHj
- uFtJ8A/WrNefTg8njqojVCbUKgDqlPlyPBU1BvAH7yO2IkWqOvGom5wgBMMIcOQEPVbzfWj/R
- GUKCF43xlIOmA701oinMntKi22L77z2EBRH5m5mW6ttr+Z2A2cxVCCBIac486c7b1Ao35KntX
- yqnkTlJJKlmvTIW4nwKFnJzH1pW6r1EXy/d82EtRcfKc5IVktxH1G1wGo5K9xAHw3dWvH6pn/
- RzuIZfY9NcrudIR8Y11czjs/s4m3mSkk2DIxjnaJh4oB1G/iCjL5ACSfESZc9GBX+6QK4t+9f
- gF0uzekRUl/ax1FSjuVl7DTshX8+1fFAaVXHFlTPCJy0JeLZFWeBIeTQGcK1fELNh+dMsQF2q
- cTrw3M7xzYgTNpDVCkIWbM14vBf28Scjumeuqx8WjLquP9ibv+Vm/M9sjRGZWUIEjvldn1xVV
- t/X2UNtQV9CBtPIfDdertlKbjqhKfUB6n7zVpSAgAj/bbjBzn3FmCTzCM8esg5on0hOYCqSzM
- AxA7L2BX+dyTIDXXC1Pq2tGfMDOgFWvoEHF6OKK4L6w/wvsQexW+YoC9QSJbi1KcdPJj+dSM7
- oTuM7er9WhWofIqbssDnvmnO2Tj3sX392PIXrI3TRSjb0rByVKp1li6H9nTuVZODxGxu/HsWC
- pTIc+kzV2tH3LKG+Ei45fZjIesYdDqICbJG3t3b3DxPhryGeUp1lkZhsCXHyoICbVV0K086aG
- lPsQcKAuKFlYVYOOXxBkW3Nj+xYP/0Ua9vbOPqCFDENbz7S5efwSPBmv6wqV2drDWqOuKMVgU
- mamMfsjoXXYCZX1t8/Gdyg1BESXm1/x2x17hh2jnuPHJPo1NrwCj/x+FkeGp+EpGDDxIzY+
+X-Provags-ID: V03:K1:PEGEras+ZNXreqY9xSxR18aJiYsuDeYEo9KPdKxxLs+Yun+T/UO
+ VQ3XmFkIQpoc/mK1WlZiNHI4L/rIoCJ9eUicyq+o7+bZcspRekL9yo1QBBNOB3l/4NNuM1w
+ ox9IOVE5wv5UYDI50MNPBROqYGPsxx88SHcJZgn2FeE1jxgi9Hx9C2KVQ2SpcoTT/4ofZSe
+ aWpBEX+iiv5FGTUKEgAWQ==
+X-UI-Out-Filterresults: notjunk:1;V03:K0:MEkB4zhY4gc=:SosM9qn+s9GUAN//eDeU+g
+ q8r2kWVW7r6+UkZaNUdxcp+hjxS7bncOvhudCVnzClSsX8uhdFZKCWGZ9x17O9g1a94x5IQ8w
+ hYR/n13648HiaiN8T1feYc/f+yiwNIEd3GV5g/wxJBEA1IV1sMKtQGDevkBYph0rJPyPosxsA
+ sWttA4Mo2PXO9lZ2hOuY5AiUjVtx+NpPouvfLI0UM8zPsBnbMqT9kWzj+pFsYrjh0dbtWhE5a
+ 09PebR6Qeg3OU26ynW/nR+XVOiOTL767tRPIQsI9CwT3bj1gTdf3yKaXyaHBrJB3FEnlNdMER
+ W34OlQ3vCjXopUTuIa8hx04oOU8hpbPyK9piq14txGH2ogydeMLJyI5CVm2MGXWCY68GpaTL/
+ phkYEnpGd1uh8i+AgKZG2wWi6m/DQ4SAOLqmVwDJLtMPqCt0mEzso6LWIXOC2JOhNnJf1qpJG
+ 5DqdM6MPmY2B3+tmJBAa0sviXRkPbWdEfjIWw/WBxis5Zcvwfwl7iCUbB/J1cMrtWAZzObMPB
+ coRsO+/ZTMUbeLVyTpHILwl+2BWttWsT9L5RAHWCzG1YCwjz/x42ZavdOwGx9gmHnhIsntNi3
+ r/U1QBiyb7yakeBSqBJKfgJfqJzDG7FvQLp8dmXjGFAXiy4p2taWJdCmun51aOj4LN+bSclKC
+ O00UFKldyqEskQSCksVwHlCOWRR3knuctPuZNHyzEBN5L//VfokaPTaJGhqXrFuDpIAB+Fmgz
+ wGw40kE4Kh2ZBcbJiK2VNlNnZ5OlHFdlWeOSXJaMci/QIO+2ZV+Fz50Qzdpvh1rNtDWX/qsMR
+ LXsgDViJX3iiIQQQPQrC5yhRusAfMtf06J6gKwQxNBg9p2xmP/VmedoJJl13qMDeJ0D1Obm
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
-X-Received-From: 212.227.126.187
+X-Received-From: 212.227.126.131
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -104,206 +103,55 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Feb 2020 11:51:04 -0000
+X-List-Received-Date: Tue, 25 Feb 2020 12:00:11 -0000
 
 Le 25/02/2020 à 00:21, Alistair Francis a écrit :
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> ---
->  linux-user/riscv/syscall32_nr.h | 314 ++++++++++++++++++++++++++++++++
->  linux-user/riscv/syscall64_nr.h | 303 ++++++++++++++++++++++++++++++
->  linux-user/riscv/syscall_nr.h   | 294 +-----------------------------
->  3 files changed, 619 insertions(+), 292 deletions(-)
->  create mode 100644 linux-user/riscv/syscall32_nr.h
->  create mode 100644 linux-user/riscv/syscall64_nr.h
+> New y2038 safe 32-bit architectures (like RISC-V) don't support old
+> syscalls with a 32-bit time_t. The kernel defines new *_time64 versions
+> of these syscalls. Add some more #ifdefs to syscall.c in linux-user to
+> allow us to compile without these old syscalls.
 > 
-> diff --git a/linux-user/riscv/syscall32_nr.h b/linux-user/riscv/syscall32_nr.h
-> new file mode 100644
-> index 0000000000..c3bf5930d0
-> --- /dev/null
-> +++ b/linux-user/riscv/syscall32_nr.h
-> @@ -0,0 +1,314 @@
-> +/*
-> + * Syscall numbers from asm-generic for RV32.
-> + */
-> +
-> +#ifndef LINUX_USER_RISCV_SYSCALL32_NR_H
-> +#define LINUX_USER_RISCV_SYSCALL32_NR_H
-> +
-> +#define TARGET_NR_io_setup 0
-> +#define TARGET_NR_io_destroy 1
-> +#define TARGET_NR_io_submit 2
-> +#define TARGET_NR_io_cancel 3
-> +#define TARGET_NR_setxattr 5
-> +#define TARGET_NR_lsetxattr 6
-> +#define TARGET_NR_fsetxattr 7
-> +#define TARGET_NR_getxattr 8
-> +#define TARGET_NR_lgetxattr 9
-> +#define TARGET_NR_fgetxattr 10
-> +#define TARGET_NR_listxattr 11
-> +#define TARGET_NR_llistxattr 12
-> +#define TARGET_NR_flistxattr 13
-> +#define TARGET_NR_removexattr 14
-> +#define TARGET_NR_lremovexattr 15
-> +#define TARGET_NR_fremovexattr 16
-> +#define TARGET_NR_getcwd 17
-> +#define TARGET_NR_lookup_dcookie 18
-> +#define TARGET_NR_eventfd2 19
-> +#define TARGET_NR_epoll_create1 20
-> +#define TARGET_NR_epoll_ctl 21
-> +#define TARGET_NR_epoll_pwait 22
-> +#define TARGET_NR_dup 23
-> +#define TARGET_NR_dup3 24
-> +#define TARGET_NR_fcntl64 25
-> +#define TARGET_NR_inotify_init1 26
-> +#define TARGET_NR_inotify_add_watch 27
-> +#define TARGET_NR_inotify_rm_watch 28
-> +#define TARGET_NR_ioctl 29
-> +#define TARGET_NR_ioprio_set 30
-> +#define TARGET_NR_ioprio_get 31
-> +#define TARGET_NR_flock 32
-> +#define TARGET_NR_mknodat 33
-> +#define TARGET_NR_mkdirat 34
-> +#define TARGET_NR_unlinkat 35
-> +#define TARGET_NR_symlinkat 36
-> +#define TARGET_NR_linkat 37
-> +#define TARGET_NR_umount2 39
-> +#define TARGET_NR_mount 40
-> +#define TARGET_NR_pivot_root 41
-> +#define TARGET_NR_nfsservctl 42
-> +#define TARGET_NR_statfs 43
-> +#define TARGET_NR_fstatfs 44
-> +#define TARGET_NR_truncate 45
-> +#define TARGET_NR_ftruncate 46
-
-For riscv32, it's the 64bit version name to use:
-
-#define TARGET_NR_statfs64 43
-#define TARGET_NR_fstatfs64 44
-#define TARGET_NR_truncate64 45
-#define TARGET_NR_ftruncate64 46
-(and below)
-
-because:
-
-include/uapi/asm-generic/unistd.h
-
-#if __BITS_PER_LONG == 64 && !defined(__SYSCALL_COMPAT)
-...
-#else
-#define __NR_fcntl64 __NR3264_fcntl
-#define __NR_statfs64 __NR3264_statfs
-#define __NR_fstatfs64 __NR3264_fstatfs
-#define __NR_truncate64 __NR3264_truncate
-#define __NR_ftruncate64 __NR3264_ftruncate
-#define __NR_llseek __NR3264_lseek
-#define __NR_sendfile64 __NR3264_sendfile
-#if defined(__ARCH_WANT_NEW_STAT) || defined(__ARCH_WANT_STAT64)
-#define __NR_fstatat64 __NR3264_fstatat
-#define __NR_fstat64 __NR3264_fstat
-#endif
-...
-
-arch/riscv/include/uapi/asm/unistd.h
-#define __ARCH_WANT_NEW_STAT
-
-arch/riscv/include/uapi/asm/bitsperlong.h
-
-#define __BITS_PER_LONG (__SIZEOF_POINTER__ * 8)
-
-...
-> +#define TARGET_NR_getdents64 61
-> +#define TARGET_NR__llseek 62
-
-TARGET_NR_llseek
-
-> +#define TARGET_NR_read 63
-> +#define TARGET_NR_write 64
-> +#define TARGET_NR_readv 65
-> +#define TARGET_NR_writev 66
-> +#define TARGET_NR_pread64 67
-> +#define TARGET_NR_pwrite64 68
-> +#define TARGET_NR_preadv 69
-> +#define TARGET_NR_pwritev 70
-> +#define TARGET_NR_sendfile 71
-
-TARGET_NR_sendfile64
-
-> +#define TARGET_NR_signalfd4 74
-> +#define TARGET_NR_vmsplice 75
-> +#define TARGET_NR_splice 76
-> +#define TARGET_NR_tee 77
-> +#define TARGET_NR_readlinkat 78
-> +#define TARGET_NR_newfstatat 79
-> +#define TARGET_NR_fstat 80
-
-#define TARGET_NR_fstatat64 79
-#define TARGET_NR_fstat64 80
-
-...
-> +#define TARGET_NR_sethostname 161
-> +#define TARGET_NR_setdomainname 162
-
-#define TARGET_NR_getrlimit 163
-#define TARGET_NR_setrlimit 164
-
-because
-
-include/uapi/asm-generic/unistd.h
-
-#ifdef __ARCH_WANT_SET_GET_RLIMIT
-/* getrlimit and setrlimit are superseded with prlimit64 */
-#define __NR_getrlimit 163
-__SC_COMP(__NR_getrlimit, sys_getrlimit, compat_sys_getrlimit)
-#define __NR_setrlimit 164
-__SC_COMP(__NR_setrlimit, sys_setrlimit, compat_sys_setrlimit)
-#endif
-
-arch/riscv/include/uapi/asm/unistd.h
-
-#define __ARCH_WANT_SET_GET_RLIMIT
-
-...
-> +#define TARGET_NR_arch_specific_syscall 244
-> +#define TARGET_NR_riscv_flush_icache TARGET_NR_arch_specific_syscall + 15
-
-It should be good to keep parenthesis around the declaration:
-
-(TARGET_NR_arch_specific_syscall + 15)
-
-...
-
-I think you can remove following defintion as they should be translated
-by the target glibc.
-
-> +/*
-> + * Alias some of the older pre 64-bit time_t syscalls to the 64-bit
-> + * ones for RV32. This is based on the list used by glibc.
-> + */
-> +#define TARGET_NR_futex TARGET_NR_futex_time64
-> +#define TARGET_NR_rt_sigtimedwait TARGET_NR_rt_sigtimedwait_time64
-> +#define TARGET_NR_ppoll TARGET_NR_ppoll_time64
-> +#define TARGET_NR_utimensat TARGET_NR_utimensat_time64
-> +#define TARGET_NR_pselect6 TARGET_NR_pselect6_time64
-> +#define TARGET_NR_recvmmsg TARGET_NR_recvmmsg_time64
-> +#define TARGET_NR_semtimedop TARGET_NR_semtimedop_time64
-> +#define TARGET_NR_mq_timedreceive TARGET_NR_mq_timedreceive_time64
-> +#define TARGET_NR_mq_timedsend TARGET_NR_mq_timedsend_time64
-> +#define TARGET_NR_clock_getres TARGET_NR_clock_getres_time64
-> +#define TARGET_NR_timerfd_settime TARGET_NR_timerfd_settime64
-> +#define TARGET_NR_timerfd_gettime TARGET_NR_timerfd_gettime64
-> +#define TARGET_NR_sched_rr_get_interval TARGET_NR_sched_rr_get_interval_time64
-> +#define TARGET_NR_clock_adjtime TARGET_NR_clock_adjtime64
-> +
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> Reviewed-by: Philippe Mathieu-Daudé <philmd@redhat.com>
+> ---
+>  linux-user/strace.c  |  2 ++
+>  linux-user/syscall.c | 20 ++++++++++++++++++++
+>  2 files changed, 22 insertions(+)
+> 
+> diff --git a/linux-user/strace.c b/linux-user/strace.c
+> index 4f7130b2ff..6420ccd97b 100644
+> --- a/linux-user/strace.c
+> +++ b/linux-user/strace.c
+> @@ -775,6 +775,7 @@ print_syscall_ret_newselect(const struct syscallname *name, abi_long ret)
+>  #define TARGET_TIME_OOP      3   /* leap second in progress */
+>  #define TARGET_TIME_WAIT     4   /* leap second has occurred */
+>  #define TARGET_TIME_ERROR    5   /* clock not synchronized */
+> +#ifdef TARGET_NR_adjtimex
+>  static void
+>  print_syscall_ret_adjtimex(const struct syscallname *name, abi_long ret)
+>  {
+> @@ -813,6 +814,7 @@ print_syscall_ret_adjtimex(const struct syscallname *name, abi_long ret)
+>  
+>      qemu_log("\n");
+>  }
 > +#endif
-> diff --git a/linux-user/riscv/syscall64_nr.h b/linux-user/riscv/syscall64_nr.h
-> new file mode 100644
-> index 0000000000..b58364b570
-> --- /dev/null
-> +++ b/linux-user/riscv/syscall64_nr.h
+>  
+>  UNUSED static struct flags access_flags[] = {
+>      FLAG_GENERIC(F_OK),
+> diff --git a/linux-user/syscall.c b/linux-user/syscall.c
+> index 8d27d10807..5a2156f95a 100644
+> --- a/linux-user/syscall.c
+> +++ b/linux-user/syscall.c
+> @@ -742,8 +742,10 @@ safe_syscall3(ssize_t, read, int, fd, void *, buff, size_t, count)
+>  safe_syscall3(ssize_t, write, int, fd, const void *, buff, size_t, count)
+>  safe_syscall4(int, openat, int, dirfd, const char *, pathname, \
+>                int, flags, mode_t, mode)
+> +#if defined(TARGET_NR_wait4)
+>  safe_syscall4(pid_t, wait4, pid_t, pid, int *, status, int, options, \
+>                struct rusage *, rusage)
 
-syscall64_nr.h is correct.
+safe_wait4 is also used in TARGET_NR_waitpid
 
 Thanks,
 Laurent
-
 
