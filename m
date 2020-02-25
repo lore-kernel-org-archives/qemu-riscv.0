@@ -1,108 +1,81 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1j6ZUm-0005AJ-Vn
-	for mharc-qemu-riscv@gnu.org; Tue, 25 Feb 2020 07:39:28 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:57504)
+	id 1j6Zkc-00046G-W5
+	for mharc-qemu-riscv@gnu.org; Tue, 25 Feb 2020 07:55:51 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:34269)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <pbonzini@redhat.com>) id 1j6ZUj-00051O-NO
- for qemu-riscv@nongnu.org; Tue, 25 Feb 2020 07:39:26 -0500
+ (envelope-from <alex.bennee@linaro.org>) id 1j6ZkZ-0003xR-Vf
+ for qemu-riscv@nongnu.org; Tue, 25 Feb 2020 07:55:49 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <pbonzini@redhat.com>) id 1j6ZUi-00047u-L0
- for qemu-riscv@nongnu.org; Tue, 25 Feb 2020 07:39:25 -0500
-Received: from us-smtp-2.mimecast.com ([207.211.31.81]:27394
- helo=us-smtp-delivery-1.mimecast.com)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <pbonzini@redhat.com>) id 1j6ZUi-00047a-Hf
- for qemu-riscv@nongnu.org; Tue, 25 Feb 2020 07:39:24 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1582634364;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=prlOgWgQ9Ik+E3eF9Wnb1i83rqLIAzGc5kS9vOvkF4o=;
- b=d9E7m6YFEXVjeg+csDmhL9gg3I+5oG7ElYfH2L4dLzAWgO1uTGtN0MtMHdTPS5QvHLPdz+
- v+vk7wjXhJlb5uMk1/pg01JKo9i2nyTzUnmXtouk0uGiJPKTG8jktLa6Mwk4qeVruwmrfN
- piil4AtQOpurKs2AxeC8+UUx+uAXn4o=
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
- [209.85.128.71]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-369-uPpdn3hBO1mvmIT6JIUXLA-1; Tue, 25 Feb 2020 07:39:19 -0500
-X-MC-Unique: uPpdn3hBO1mvmIT6JIUXLA-1
-Received: by mail-wm1-f71.google.com with SMTP id y125so586334wmg.1
- for <qemu-riscv@nongnu.org>; Tue, 25 Feb 2020 04:39:19 -0800 (PST)
+ (envelope-from <alex.bennee@linaro.org>) id 1j6ZkY-0004Fe-Hz
+ for qemu-riscv@nongnu.org; Tue, 25 Feb 2020 07:55:47 -0500
+Received: from mail-wm1-x343.google.com ([2a00:1450:4864:20::343]:50955)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <alex.bennee@linaro.org>)
+ id 1j6ZkY-0004Dz-9O
+ for qemu-riscv@nongnu.org; Tue, 25 Feb 2020 07:55:46 -0500
+Received: by mail-wm1-x343.google.com with SMTP id a5so2899568wmb.0
+ for <qemu-riscv@nongnu.org>; Tue, 25 Feb 2020 04:55:46 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding;
+ bh=k4RkOSmwzwH2dQilc05ZWPR0LyOE7aaRoCCPjbXdJZE=;
+ b=lLJD8/8U2pEK6tt9h1UuIe+5luto6aqJ7iVDNz+QI/kNbnb4rgqY30zuM5JMMqFIqw
+ RlqsZOPlripJH8/V5WD7S+J8CYFOzQGEBx38zZP+jicQOjwEPdDYnht6SdsW/zonChG2
+ A5FOYrBXqUhXcSPTJF9rGtzwO0mVfUcRRboL3ZuuzWcrDZdPAAQArTy22Q7M+JKm+wqZ
+ r/Iid0+0lKGzjzAFPRE63b84lgoAybm5chwUaE3IJoYe+Dazz1RvU96UasH2YpQmHCy0
+ UB331wPEAQh/67UJyiBGB2uHmPz6Kk2YPZWBdqoHaZPM6Fz+j5kx07YFmKho4tr9mNGs
+ 7xLg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=kztbPaVB/2XMFABxpPNGrrCj9r6pdnumsQimldYZmLg=;
- b=FVU/v0zzPo0QLA9cGGJXA5zijCiRJyDG6G2P80zyi+nQ1lgQ1I3dn1qEzpZTWvHTYR
- 0Q688Tp1HQ3WuzU84khZYgFVSh0laKNKo8k9L6GKDmvqeLWoYZ/t5FHOblJRqQMqs6bi
- 2/dpiG+s5clHs7EFE8XsFeZnz9JEuDbxo0W9Pd77ekDV0Duy1Ex5vb8izgDZYoKkMQRd
- KHtUUFnyVGANSgVn6TOVfysfxyGrCpxkJhD646KgeOKSlUOviiB7cbR7qwONlu6MYOH2
- gy31YOAOI/vY+l6r0MkDhCCjTJCJAzaSBJQk4avlrqPyhxV+YpZWUrv2tzfudU1MdOHA
- pSdQ==
-X-Gm-Message-State: APjAAAUG/8WFvxiF1W2DAXPxxAo0AOzD827a3J2hTF8MFG6LwXL/MGm6
- HPQosf6o+uMxPYlS37xy1Ri158lH6Ba+PEVC+2evuGCpM4kZzSy1VS+2jMHh9SMBG+cdUzyncfX
- /TKbYtFefxE0gNH8=
-X-Received: by 2002:a1c:541b:: with SMTP id i27mr5524339wmb.137.1582634358170; 
- Tue, 25 Feb 2020 04:39:18 -0800 (PST)
-X-Google-Smtp-Source: APXvYqwMxOydfsyqbVFz+9ojWD99h41Ff9l0Bl/3ROeYCCGkjzMVH3uMtzNaJvjeoky0SS3gZviSrg==
-X-Received: by 2002:a1c:541b:: with SMTP id i27mr5524296wmb.137.1582634357874; 
- Tue, 25 Feb 2020 04:39:17 -0800 (PST)
-Received: from ?IPv6:2001:b07:6468:f312:3577:1cfe:d98a:5fb6?
- ([2001:b07:6468:f312:3577:1cfe:d98a:5fb6])
- by smtp.gmail.com with ESMTPSA id w8sm3982443wmm.0.2020.02.25.04.39.15
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 25 Feb 2020 04:39:17 -0800 (PST)
-Subject: Re: [PATCH RESEND v2 18/32] hw/i386/pc_sysfw: Simplify using
- memory_region_init_alias()
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>,
- qemu-devel@nongnu.org, Peter Maydell <peter.maydell@linaro.org>,
- "Dr. David Alan Gilbert" <dgilbert@redhat.com>
-Cc: Kevin Wolf <kwolf@redhat.com>, Alistair Francis <alistair@alistair23.me>, 
- qemu-block@nongnu.org, Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Joel Stanley <joel@jms.id.au>, qemu-ppc@nongnu.org,
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=k4RkOSmwzwH2dQilc05ZWPR0LyOE7aaRoCCPjbXdJZE=;
+ b=nzUZy0ciHECRLCs1HWnz9TW/KR4LS6PuvKvZPnSqE73ComZ+Z2LVn2e7QwC+PnGcYl
+ DDOAAO9C1l+i5K2ak6gC02B9PSGf/gXSJ6v8GnlCa/nz+FMbIWSN5LNUly1am6syCMIj
+ HH0xKAlAgqyYFoZHJWfb5HCS3Tp7bZ/QS1K267l0lVMBFXoR7juRkAhLWVIDbvSbanIH
+ E1SupVbOPCdHZulAwSBEvdPKuCanTLt22xMMa0SnyuAWct6KnMvpzmWiPuskP4LNLwWT
+ mOWwiRUQMUYte3NCIh+1mrQ7NG0rJqzjCzM2Q2k8T1OQICnWdegTBLaPMQHjCxUvt59F
+ H3/g==
+X-Gm-Message-State: APjAAAULIzYektzSNQpyThZNqp8rljDTP/AoBFourzHFUZzDsscW/n62
+ Z+1uItnNIr7nJNC9lEcPGTAtSQ==
+X-Google-Smtp-Source: APXvYqwJkJnbO9/aXL5DdiuIAX5GZT3q4YvEyjq3Ir/LRxRisDv2pXCpeK6xn/wBPArWRf2LBNaTDA==
+X-Received: by 2002:a1c:c208:: with SMTP id s8mr5282583wmf.30.1582635345203;
+ Tue, 25 Feb 2020 04:55:45 -0800 (PST)
+Received: from zen.linaroharston ([51.148.130.216])
+ by smtp.gmail.com with ESMTPSA id z19sm4022542wmi.35.2020.02.25.04.55.39
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 25 Feb 2020 04:55:44 -0800 (PST)
+Received: from zen.home.arpa (localhost [127.0.0.1])
+ by zen.linaroharston (Postfix) with ESMTP id 88E1C1FF9E;
+ Tue, 25 Feb 2020 12:47:11 +0000 (GMT)
+From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: cota@braap.org, aaron@os.amperecomputing.com, peter.puhov@linaro.org,
+ robert.foley@linaro.org, kuhn.chenqun@huawei.com, robhenry@microsoft.com,
+ fam@euphon.net, berrange@redhat.com, f4bug@amsat.org,
+ richard.henderson@linaro.org, balrogg@gmail.com, aurelien@aurel32.net,
+ pbonzini@redhat.com, stefanha@redhat.com, stefanb@linux.vnet.ibm.com,
+ marcandre.lureau@redhat.com,
+ =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <Alistair.Francis@wdc.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Magnus Damm <magnus.damm@gmail.com>,
- Aleksandar Markovic <amarkovic@wavecomp.com>,
- Aleksandar Rikalo <aleksandar.rikalo@rt-rk.com>,
- Jason Wang <jasowang@redhat.com>, Igor Mitsyanko <i.mitsyanko@gmail.com>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Laurent Vivier <laurent@vivier.eu>, Palmer Dabbelt <palmer@dabbelt.com>,
- Peter Chubb <peter.chubb@nicta.com.au>, Max Reitz <mreitz@redhat.com>,
- Subbaraya Sundeep <sundeep.lkml@gmail.com>,
- KONRAD Frederic <frederic.konrad@adacore.com>,
- =?UTF-8?Q?Marc-Andr=c3=a9_Lureau?= <marcandre.lureau@redhat.com>,
- Andrzej Zaborowski <balrogg@gmail.com>,
- =?UTF-8?Q?Herv=c3=a9_Poussineau?= <hpoussin@reactos.org>,
- qemu-arm@nongnu.org, Aurelien Jarno <aurelien@aurel32.net>,
- Michael Walle <michael@walle.cc>, Artyom Tarasenko <atar4qemu@gmail.com>,
- Eduardo Habkost <ehabkost@redhat.com>, "Michael S. Tsirkin"
- <mst@redhat.com>, Richard Henderson <rth@twiddle.net>,
- David Gibson <david@gibson.dropbear.id.au>,
- Jean-Christophe Dubois <jcd@tribudubois.net>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>, qemu-riscv@nongnu.org,
- Fabien Chouteau <chouteau@adacore.com>
-References: <20200224205533.23798-1-philmd@redhat.com>
- <20200224205533.23798-19-philmd@redhat.com>
- <532522f3-fc33-4405-1819-fe89c3ed088e@redhat.com>
-From: Paolo Bonzini <pbonzini@redhat.com>
-Message-ID: <683355b0-cf04-d57a-92aa-500dbf1b94a8@redhat.com>
-Date: Tue, 25 Feb 2020 13:39:15 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.4.1
+ qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
+Subject: [PATCH v3 14/19] target/riscv: progressively load the instruction
+ during decode
+Date: Tue, 25 Feb 2020 12:47:05 +0000
+Message-Id: <20200225124710.14152-15-alex.bennee@linaro.org>
+X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20200225124710.14152-1-alex.bennee@linaro.org>
+References: <20200225124710.14152-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
-In-Reply-To: <532522f3-fc33-4405-1819-fe89c3ed088e@redhat.com>
-Content-Language: en-US
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
- [fuzzy]
-X-Received-From: 207.211.31.81
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2a00:1450:4864:20::343
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -114,68 +87,167 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Feb 2020 12:39:27 -0000
+X-List-Received-Date: Tue, 25 Feb 2020 12:55:49 -0000
 
-On 25/02/20 11:05, Philippe Mathieu-Daud=C3=A9 wrote:
->>
->> pc_isa_bios_init() does a manual copy of a part of the BIOS,
->> from a read-only region. We can simplify by directly aliasing
->> the same part.
->>
->> Before:
->>
->> =C2=A0=C2=A0 (qemu) info mtree
->> =C2=A0=C2=A0 memory-region: system
->> =C2=A0=C2=A0=C2=A0=C2=A0 0000000000000000-ffffffffffffffff (prio 0, i/o)=
-: system
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 0000000000000000-0000000007ffffff (=
-prio 0, ram): alias
->> ram-below-4g @pc.ram 0000000000000000-0000000007ffffff
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 0000000000000000-ffffffffffffffff (=
-prio -1, i/o): pci
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 00000000000a0000-000000=
-00000bffff (prio 1, i/o): vga-lowmem
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 00000000000c0000-000000=
-00000dffff (prio 1, rom): pc.rom
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 00000000000e0000-000000=
-00000fffff (prio 1, rom): isa-bios
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ...
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 00000000fff00000-00000000ffffffff (=
-prio 0, romd): system.flash0
->>
->> After:
->>
->> =C2=A0=C2=A0 (qemu) info mtree
->> =C2=A0=C2=A0 memory-region: system
->> =C2=A0=C2=A0=C2=A0=C2=A0 0000000000000000-ffffffffffffffff (prio 0, i/o)=
-: system
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 0000000000000000-0000000007ffffff (=
-prio 0, ram): alias
->> ram-below-4g @pc.ram 0000000000000000-0000000007ffffff
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 0000000000000000-ffffffffffffffff (=
-prio -1, i/o): pci
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 00000000000a0000-000000=
-00000bffff (prio 1, i/o): vga-lowmem
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 00000000000c0000-000000=
-00000dffff (prio 1, rom): pc.rom
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 00000000000e0000-000000=
-00000fffff (prio 1, romd): alias
->> isa-bios @system.flash0 00000000000e0000-00000000000fffff
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ...
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 00000000fff00000-00000000ffffffff (=
-prio 0, romd): system.flash0
->=20
-> IIUC migrating old -> new is OK, the previous ROM copy is discarded.
->=20
-> What about new -> old, does it require specific handling? Do we care?
+The plugin system would throw up a harmless warning when it detected
+that a disassembly of an instruction didn't use all it's bytes. Fix
+the riscv decoder to only load the instruction bytes it needs as it
+needs them.
 
-Old->new is broken because the "isa-bios" memory region is not found.
+This drops opcode from the ctx in favour if passing the appropriately
+sized opcode down a few levels of the decode.
 
-qemu-system-x86_64: Unknown ramblock "isa-bios", cannot accept migration
-qemu-system-x86_64: error while loading state for instance 0x0 of device 'r=
-am'
-qemu-system-x86_64: load of migration failed: Invalid argument
+Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Robert Foley <robert.foley@linaro.org>
 
-Paolo
+---
+v2
+  - use extract16 for uint16_t opcodes
+---
+ target/riscv/instmap.h   |  8 ++++----
+ target/riscv/translate.c | 40 +++++++++++++++++++++-------------------
+ 2 files changed, 25 insertions(+), 23 deletions(-)
+
+diff --git a/target/riscv/instmap.h b/target/riscv/instmap.h
+index f8ad7d60fd5..40b6d2b64de 100644
+--- a/target/riscv/instmap.h
++++ b/target/riscv/instmap.h
+@@ -344,8 +344,8 @@ enum {
+ #define GET_C_LW_IMM(inst)          ((extract32(inst, 6, 1) << 2) \
+                                     | (extract32(inst, 10, 3) << 3) \
+                                     | (extract32(inst, 5, 1) << 6))
+-#define GET_C_LD_IMM(inst)          ((extract32(inst, 10, 3) << 3) \
+-                                    | (extract32(inst, 5, 2) << 6))
++#define GET_C_LD_IMM(inst)          ((extract16(inst, 10, 3) << 3) \
++                                    | (extract16(inst, 5, 2) << 6))
+ #define GET_C_J_IMM(inst)           ((extract32(inst, 3, 3) << 1) \
+                                     | (extract32(inst, 11, 1) << 4) \
+                                     | (extract32(inst, 2, 1) << 5) \
+@@ -363,7 +363,7 @@ enum {
+ #define GET_C_RD(inst)              GET_RD(inst)
+ #define GET_C_RS1(inst)             GET_RD(inst)
+ #define GET_C_RS2(inst)             extract32(inst, 2, 5)
+-#define GET_C_RS1S(inst)            (8 + extract32(inst, 7, 3))
+-#define GET_C_RS2S(inst)            (8 + extract32(inst, 2, 3))
++#define GET_C_RS1S(inst)            (8 + extract16(inst, 7, 3))
++#define GET_C_RS2S(inst)            (8 + extract16(inst, 2, 3))
+ 
+ #endif
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index 14dc71156be..d5de7f468a7 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -44,7 +44,6 @@ typedef struct DisasContext {
+     /* pc_succ_insn points to the instruction following base.pc_next */
+     target_ulong pc_succ_insn;
+     target_ulong priv_ver;
+-    uint32_t opcode;
+     uint32_t mstatus_fs;
+     uint32_t misa;
+     uint32_t mem_idx;
+@@ -492,45 +491,45 @@ static void gen_set_rm(DisasContext *ctx, int rm)
+     tcg_temp_free_i32(t0);
+ }
+ 
+-static void decode_RV32_64C0(DisasContext *ctx)
++static void decode_RV32_64C0(DisasContext *ctx, uint16_t opcode)
+ {
+-    uint8_t funct3 = extract32(ctx->opcode, 13, 3);
+-    uint8_t rd_rs2 = GET_C_RS2S(ctx->opcode);
+-    uint8_t rs1s = GET_C_RS1S(ctx->opcode);
++    uint8_t funct3 = extract16(opcode, 13, 3);
++    uint8_t rd_rs2 = GET_C_RS2S(opcode);
++    uint8_t rs1s = GET_C_RS1S(opcode);
+ 
+     switch (funct3) {
+     case 3:
+ #if defined(TARGET_RISCV64)
+         /* C.LD(RV64/128) -> ld rd', offset[7:3](rs1')*/
+         gen_load_c(ctx, OPC_RISC_LD, rd_rs2, rs1s,
+-                 GET_C_LD_IMM(ctx->opcode));
++                 GET_C_LD_IMM(opcode));
+ #else
+         /* C.FLW (RV32) -> flw rd', offset[6:2](rs1')*/
+         gen_fp_load(ctx, OPC_RISC_FLW, rd_rs2, rs1s,
+-                    GET_C_LW_IMM(ctx->opcode));
++                    GET_C_LW_IMM(opcode));
+ #endif
+         break;
+     case 7:
+ #if defined(TARGET_RISCV64)
+         /* C.SD (RV64/128) -> sd rs2', offset[7:3](rs1')*/
+         gen_store_c(ctx, OPC_RISC_SD, rs1s, rd_rs2,
+-                  GET_C_LD_IMM(ctx->opcode));
++                  GET_C_LD_IMM(opcode));
+ #else
+         /* C.FSW (RV32) -> fsw rs2', offset[6:2](rs1')*/
+         gen_fp_store(ctx, OPC_RISC_FSW, rs1s, rd_rs2,
+-                     GET_C_LW_IMM(ctx->opcode));
++                     GET_C_LW_IMM(opcode));
+ #endif
+         break;
+     }
+ }
+ 
+-static void decode_RV32_64C(DisasContext *ctx)
++static void decode_RV32_64C(DisasContext *ctx, uint16_t opcode)
+ {
+-    uint8_t op = extract32(ctx->opcode, 0, 2);
++    uint8_t op = extract16(opcode, 0, 2);
+ 
+     switch (op) {
+     case 0:
+-        decode_RV32_64C0(ctx);
++        decode_RV32_64C0(ctx, opcode);
+         break;
+     }
+ }
+@@ -709,22 +708,25 @@ static bool gen_shift(DisasContext *ctx, arg_r *a,
+ /* Include the auto-generated decoder for 16 bit insn */
+ #include "decode_insn16.inc.c"
+ 
+-static void decode_opc(DisasContext *ctx)
++static void decode_opc(CPURISCVState *env, DisasContext *ctx, uint16_t opcode)
+ {
+     /* check for compressed insn */
+-    if (extract32(ctx->opcode, 0, 2) != 3) {
++    if (extract16(opcode, 0, 2) != 3) {
+         if (!has_ext(ctx, RVC)) {
+             gen_exception_illegal(ctx);
+         } else {
+             ctx->pc_succ_insn = ctx->base.pc_next + 2;
+-            if (!decode_insn16(ctx, ctx->opcode)) {
++            if (!decode_insn16(ctx, opcode)) {
+                 /* fall back to old decoder */
+-                decode_RV32_64C(ctx);
++                decode_RV32_64C(ctx, opcode);
+             }
+         }
+     } else {
++        uint32_t opcode32 = opcode;
++        opcode32 = deposit32(opcode32, 16, 16,
++                             translator_lduw(env, ctx->base.pc_next + 2));
+         ctx->pc_succ_insn = ctx->base.pc_next + 4;
+-        if (!decode_insn32(ctx, ctx->opcode)) {
++        if (!decode_insn32(ctx, opcode32)) {
+             gen_exception_illegal(ctx);
+         }
+     }
+@@ -776,9 +778,9 @@ static void riscv_tr_translate_insn(DisasContextBase *dcbase, CPUState *cpu)
+ {
+     DisasContext *ctx = container_of(dcbase, DisasContext, base);
+     CPURISCVState *env = cpu->env_ptr;
++    uint16_t opcode16 = translator_lduw(env, ctx->base.pc_next);
+ 
+-    ctx->opcode = translator_ldl(env, ctx->base.pc_next);
+-    decode_opc(ctx);
++    decode_opc(env, ctx, opcode16);
+     ctx->base.pc_next = ctx->pc_succ_insn;
+ 
+     if (ctx->base.is_jmp == DISAS_NEXT) {
+-- 
+2.20.1
 
 
