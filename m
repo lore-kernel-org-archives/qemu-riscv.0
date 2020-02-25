@@ -1,69 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1j6O1c-0001DD-BC
-	for mharc-qemu-riscv@gnu.org; Mon, 24 Feb 2020 19:24:36 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:52533)
+	id 1j6SN6-0002RF-Bc
+	for mharc-qemu-riscv@gnu.org; Tue, 25 Feb 2020 00:03:04 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:56296)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <dgibson@ozlabs.org>) id 1j6O1Z-00015p-7P
- for qemu-riscv@nongnu.org; Mon, 24 Feb 2020 19:24:34 -0500
+ (envelope-from <bmeng.cn@gmail.com>) id 1j6SN3-0002Mi-7h
+ for qemu-riscv@nongnu.org; Tue, 25 Feb 2020 00:03:02 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <dgibson@ozlabs.org>) id 1j6O1Y-0000Po-4R
- for qemu-riscv@nongnu.org; Mon, 24 Feb 2020 19:24:33 -0500
-Received: from bilbo.ozlabs.org ([2401:3900:2:1::2]:36027 helo=ozlabs.org)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <dgibson@ozlabs.org>)
- id 1j6O1N-0000Iv-L5; Mon, 24 Feb 2020 19:24:21 -0500
-Received: by ozlabs.org (Postfix, from userid 1007)
- id 48RKS00vBDz9sPk; Tue, 25 Feb 2020 11:24:16 +1100 (AEDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=gibson.dropbear.id.au; s=201602; t=1582590256;
- bh=cun3UG0RH1Z9pqffGg41V0R5H4abPrUo0JHVCdwl8DM=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=d6NhK1hYXytACCdz50B0nIeq/pqkhsGd9Cf4y/mFfwuua8B8tNulEvn1q6IHWfhkx
- h6uWw/oUL++nq3fSHxWM/g9cH3oKEBM8m8G+uNe1FFyjYknckA5CcLy38hzzMnIMtn
- Y+aT9dz84IxlX7OLrT9CbyTe8PBYED7vp2S5MasQ=
-Date: Tue, 25 Feb 2020 11:23:23 +1100
-From: David Gibson <david@gibson.dropbear.id.au>
-To: Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@redhat.com>
-Cc: qemu-devel@nongnu.org, Paolo Bonzini <pbonzini@redhat.com>,
- Peter Maydell <peter.maydell@linaro.org>, Kevin Wolf <kwolf@redhat.com>,
- Alistair Francis <alistair@alistair23.me>, qemu-block@nongnu.org,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Joel Stanley <joel@jms.id.au>, qemu-ppc@nongnu.org,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Magnus Damm <magnus.damm@gmail.com>,
- Aleksandar Markovic <amarkovic@wavecomp.com>,
- Aleksandar Rikalo <aleksandar.rikalo@rt-rk.com>,
- Jason Wang <jasowang@redhat.com>, Igor Mitsyanko <i.mitsyanko@gmail.com>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Laurent Vivier <laurent@vivier.eu>, Palmer Dabbelt <palmer@dabbelt.com>,
- Peter Chubb <peter.chubb@nicta.com.au>, Max Reitz <mreitz@redhat.com>,
- Subbaraya Sundeep <sundeep.lkml@gmail.com>,
- KONRAD Frederic <frederic.konrad@adacore.com>,
- =?iso-8859-1?Q?Marc-Andr=E9?= Lureau <marcandre.lureau@redhat.com>,
- Andrzej Zaborowski <balrogg@gmail.com>,
- =?iso-8859-1?Q?Herv=E9?= Poussineau <hpoussin@reactos.org>,
- qemu-arm@nongnu.org, Aurelien Jarno <aurelien@aurel32.net>,
- Michael Walle <michael@walle.cc>, Artyom Tarasenko <atar4qemu@gmail.com>,
- Eduardo Habkost <ehabkost@redhat.com>,
- "Michael S. Tsirkin" <mst@redhat.com>, Richard Henderson <rth@twiddle.net>,
- Jean-Christophe Dubois <jcd@tribudubois.net>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- qemu-riscv@nongnu.org, Fabien Chouteau <chouteau@adacore.com>
-Subject: Re: [PATCH RESEND v2 10/32] hw/pci-host: Use
- memory_region_init_rom() with read-only regions
-Message-ID: <20200225002323.GB41629@umbus.fritz.box>
-References: <20200224205533.23798-1-philmd@redhat.com>
- <20200224205533.23798-11-philmd@redhat.com>
+ (envelope-from <bmeng.cn@gmail.com>) id 1j6SMy-0006T5-Q7
+ for qemu-riscv@nongnu.org; Tue, 25 Feb 2020 00:02:58 -0500
+Received: from mail-yw1-xc43.google.com ([2607:f8b0:4864:20::c43]:33036)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
+ id 1j6SMt-0006QH-3U; Tue, 25 Feb 2020 00:02:51 -0500
+Received: by mail-yw1-xc43.google.com with SMTP id 192so6648508ywy.0;
+ Mon, 24 Feb 2020 21:02:51 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=dUfWyb4cW6U+R2QC2dfg53WZphb8Myv6rhJaDKQEJgk=;
+ b=ZOZUUmA6sHQEABEKQ4fj19bfsL7L4myVsCrsKcK6o98DdpAxeuXDJoN9Ix4l5juGQs
+ JSGhG0u+twuqQkbnGkxK+c4G9O/AhxHT80n9Rl54VjA0yDE6WFXjuSUIhw0HMpDga5In
+ sfLVoI+8zaB8h6cFT3jPB1nU8EKmINjeIG4sBt5tlfZ7fhS3W6nB/Q+sqi6iQPTbkjFo
+ fcGUuEu7G3u9m80vZ9Hng9+O+uU+NSJRpat96WOWg7aLPuswhwxrQEnoEXdEtgKxlFbZ
+ S/4g30boJ9EBug+InXkaj+e6bOamSgTD5wbfSB4L/vfbP9Gw8lOQuBS+DyKLZ9jsAhT1
+ /SAQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=dUfWyb4cW6U+R2QC2dfg53WZphb8Myv6rhJaDKQEJgk=;
+ b=lnAYlQzqSyRA6BjXpBMG4afzGuioXxrd5Dp/HmQMn2atzCWYQ902t40SjGtmbVg22P
+ fSdCPwR2HALOM8Tu3csu+nND3d0GvWJ/T2G5B048hVgv8cDIiwAQBecML/BQJsvz8AGh
+ 0h1mhFeYSlOikmzd8gNW1g3deIAEkg8+c4o67E/Tl4q0vPfTyQsDbfFqov+qJbi6WjeR
+ BrAxvCaiKZx2Mvht2PHDR046C6Zwgmtp9OTV1y16Ddq4ewoYp36RQHKrvRJTgwqi4vfp
+ DC3VNmZRJpWrTbjoa09WTQEZyPemQOdgMFhnlb8uKu0OWaXgv+LC1ixU5C3+30MSvb2j
+ Tyfw==
+X-Gm-Message-State: APjAAAWh1g3M8Y8P+VUGcc77HdMqGdTiU5SZzSLNcrLNNw9pZ5xr8Eb3
+ yIU+SSl5JgXM8X1h4XQkuACsi5ug1PyyjpPFbyo=
+X-Google-Smtp-Source: APXvYqwAEPF9s5j2iNNINrs6oBxCSRd3s7TJKCLtzqcFnBvAlRe4GUd563EyxQ2rvYIJw4SjEX2y1sSfdha8QuHy4U0=
+X-Received: by 2002:a25:38c2:: with SMTP id
+ f185mr21580308yba.490.1582606970169; 
+ Mon, 24 Feb 2020 21:02:50 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="PmA2V3Z32TCmWXqI"
-Content-Disposition: inline
-In-Reply-To: <20200224205533.23798-11-philmd@redhat.com>
+References: <1581861317-30977-1-git-send-email-bmeng.cn@gmail.com>
+ <CAKmqyKNw6bwiWKbT=0_Yy4CZNrnSjUtyU_TL0G2HMq1WKstK4g@mail.gmail.com>
+In-Reply-To: <CAKmqyKNw6bwiWKbT=0_Yy4CZNrnSjUtyU_TL0G2HMq1WKstK4g@mail.gmail.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Tue, 25 Feb 2020 13:02:39 +0800
+Message-ID: <CAEUhbmUi=6JyQhEeh0348XgDwhkybC-OJ+ErD=RrgrtS7dNsGg@mail.gmail.com>
+Subject: Re: [PATCH v2] riscv: sifive_u: Add a "serial" property for board
+ serial number
+To: Alistair Francis <alistair23@gmail.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Palmer Dabbelt <palmerdabbelt@google.com>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2401:3900:2:1::2
+X-Received-From: 2607:f8b0:4864:20::c43
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -75,71 +71,132 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Feb 2020 00:24:34 -0000
+X-List-Received-Date: Tue, 25 Feb 2020 05:03:02 -0000
 
+Hi Alistair,
 
---PmA2V3Z32TCmWXqI
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Tue, Feb 25, 2020 at 5:14 AM Alistair Francis <alistair23@gmail.com> wrote:
+>
+> On Sun, Feb 16, 2020 at 5:56 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+> >
+> > At present the board serial number is hard-coded to 1, and passed
+> > to OTP model during initialization. Firmware (FSBL, U-Boot) uses
+> > the serial number to generate a unique MAC address for the on-chip
+> > ethernet controller. When multiple QEMU 'sifive_u' instances are
+> > created and connected to the same subnet, they all have the same
+> > MAC address hence it creates a unusable network.
+> >
+> > A new "serial" property is introduced to specify the board serial
+> > number. When not given, the default serial number 1 is used.
+> >
+> > Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
+> >
+> > ---
+> >
+> > Changes in v2:
+> > - Move setting OTP serial number property from riscv_sifive_u_soc_init()
+> >   to riscv_sifive_u_soc_realize(), to fix the 'check-qtest-riscv' error.
+> >   I am not really sure why doing so could fix the 'make check' error.
+> >   The v1 patch worked fine and nothing seems wrong.
+> >
+> >  hw/riscv/sifive_u.c         | 21 ++++++++++++++++++++-
+> >  include/hw/riscv/sifive_u.h |  1 +
+> >  2 files changed, 21 insertions(+), 1 deletion(-)
+> >
+> > diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+> > index 0e12b3c..ca561d3 100644
+> > --- a/hw/riscv/sifive_u.c
+> > +++ b/hw/riscv/sifive_u.c
+> > @@ -34,6 +34,7 @@
+> >  #include "qemu/log.h"
+> >  #include "qemu/error-report.h"
+> >  #include "qapi/error.h"
+> > +#include "qapi/visitor.h"
+> >  #include "hw/boards.h"
+> >  #include "hw/loader.h"
+> >  #include "hw/sysbus.h"
+> > @@ -434,7 +435,6 @@ static void riscv_sifive_u_soc_init(Object *obj)
+> >                            TYPE_SIFIVE_U_PRCI);
+> >      sysbus_init_child_obj(obj, "otp", &s->otp, sizeof(s->otp),
+> >                            TYPE_SIFIVE_U_OTP);
+> > -    qdev_prop_set_uint32(DEVICE(&s->otp), "serial", OTP_SERIAL);
+> >      sysbus_init_child_obj(obj, "gem", &s->gem, sizeof(s->gem),
+> >                            TYPE_CADENCE_GEM);
+> >  }
+> > @@ -453,6 +453,18 @@ static void sifive_u_set_start_in_flash(Object *obj, bool value, Error **errp)
+> >      s->start_in_flash = value;
+> >  }
+> >
+> > +static void sifive_u_get_serial(Object *obj, Visitor *v, const char *name,
+> > +                                void *opaque, Error **errp)
+> > +{
+> > +    visit_type_uint32(v, name, (uint32_t *)opaque, errp);
+> > +}
+> > +
+> > +static void sifive_u_set_serial(Object *obj, Visitor *v, const char *name,
+> > +                                void *opaque, Error **errp)
+> > +{
+> > +    visit_type_uint32(v, name, (uint32_t *)opaque, errp);
+>
+> This is a little confusing. Maybe it's worth adding a comment that
+> opaque is s->serial?
 
-On Mon, Feb 24, 2020 at 09:55:11PM +0100, Philippe Mathieu-Daud=E9 wrote:
-> This commit was produced with the Coccinelle script
-> scripts/coccinelle/memory-region-housekeeping.cocci.
->=20
-> Signed-off-by: Philippe Mathieu-Daud=E9 <philmd@redhat.com>
+Yes, I can add a comment.
 
-Acked-by: David Gibson <david@gibson.dropbear.id.au>
+>
+> Either that or change opaque to be SiFiveUState *s and then access
+> serial via the struct.
 
-> ---
->  hw/pci-host/prep.c | 5 ++---
->  1 file changed, 2 insertions(+), 3 deletions(-)
->=20
-> diff --git a/hw/pci-host/prep.c b/hw/pci-host/prep.c
-> index 1aff72bec6..1a02e9a670 100644
-> --- a/hw/pci-host/prep.c
-> +++ b/hw/pci-host/prep.c
-> @@ -325,9 +325,8 @@ static void raven_realize(PCIDevice *d, Error **errp)
->      d->config[0x0D] =3D 0x10; // latency_timer
->      d->config[0x34] =3D 0x00; // capabilities_pointer
-> =20
-> -    memory_region_init_ram_nomigrate(&s->bios, OBJECT(s), "bios", BIOS_S=
-IZE,
-> -                           &error_fatal);
-> -    memory_region_set_readonly(&s->bios, true);
-> +    memory_region_init_rom_nomigrate(&s->bios, OBJECT(s), "bios", BIOS_S=
-IZE,
-> +                                     &error_fatal);
->      memory_region_add_subregion(get_system_memory(), (uint32_t)(-BIOS_SI=
-ZE),
->                                  &s->bios);
->      if (s->bios_name) {
+Do you mean something like this?
 
---=20
-David Gibson			| I'll have my music baroque, and my code
-david AT gibson.dropbear.id.au	| minimalist, thank you.  NOT _the_ _other_
-				| _way_ _around_!
-http://www.ozlabs.org/~dgibson
+Calling object_property_add() with opaque as NULL, not &s->serial:
 
---PmA2V3Z32TCmWXqI
-Content-Type: application/pgp-signature; name="signature.asc"
+object_property_add(obj, "serial", "uint32", sifive_u_get_serial,
+                        sifive_u_set_serial, NULL, NULL, NULL);
 
------BEGIN PGP SIGNATURE-----
+Then in the sifive_u_get_serial() or sifive_u_set_serial(), replace
+opaque with RISCV_U_MACHINE(obj)->serial.
 
-iQIzBAEBCAAdFiEEdfRlhq5hpmzETofcbDjKyiDZs5IFAl5UaPsACgkQbDjKyiDZ
-s5Jz/BAAyL0YcNW8OyEoEcaBBOAUlpAd/mqoO8OMFJMygGZtJ4Sgqi7l2Z6uC0I7
-G22idvtISCYsuylCjvkVJg96QHuXGdnMyBR+g8CvU4lZcYkBKAD2d0mK2LYzq32q
-89TdYgtkHZl5fQQf2zLkdqJqzfBIjFQ7/v5tEAvirPgdfX0Vpj7r/AEIxTgfXmh3
-6RojUYtqB1iWjLF7AJi4LY0ZPdR5d+Ia2+Uz7tTQPnc6bPKeYS+dWmHkkQV8IWrH
-TLfAnmtOQ+hH1RBXTb0TvPhYP0AIjcdaG9ZKyE1X/JLmvnjZcSU5okOv2RMY26D5
-RhyJf0Z6V7rN6Y/FFapF6hML0hE9zqJMm11s3yq1IG3LH8ZmFrBJu8YB8+nDbtuk
-p/vhuFjoGHuKwadYD4Q63iYvCJIJIQZkgXB0I1m32sMF16M8Y4DM8N1Tticaa37E
-f4EWX0Sn/Jadxah62JUNPrHpqHLo4MaS2YWpR4+mc/MlAhVOyony5viRqQeuLlKq
-apJILrBlbOsZ73Fd/zdwwgyYLAwuZ1TC2DxxJayjBKDdc5aAAtmnrD+aQnZQSnum
-qu2AGC53z2+bpNQ5gKJz4IjXYi/DrOGEw42VPArpa+B366Sbn0g0DNiE2bGsoUXl
-KgWAg1Q31OLCf4Rb1RGJvLd8mes5SNwiHdSmqISZE9nBs5L7Wp8=
-=g5T0
------END PGP SIGNATURE-----
+Wow, it looks we have designed so flexible APIs :)
 
---PmA2V3Z32TCmWXqI--
+>
+> > +}
+> > +
+> >  static void riscv_sifive_u_machine_instance_init(Object *obj)
+> >  {
+> >      SiFiveUState *s = RISCV_U_MACHINE(obj);
+> > @@ -464,11 +476,17 @@ static void riscv_sifive_u_machine_instance_init(Object *obj)
+> >                                      "Set on to tell QEMU's ROM to jump to " \
+> >                                      "flash. Otherwise QEMU will jump to DRAM",
+> >                                      NULL);
+> > +
+> > +    s->serial = OTP_SERIAL;
+> > +    object_property_add(obj, "serial", "uint32", sifive_u_get_serial,
+> > +                        sifive_u_set_serial, NULL, &s->serial, NULL);
+> > +    object_property_set_description(obj, "serial", "Board serial number", NULL);
+> >  }
+> >
+> >  static void riscv_sifive_u_soc_realize(DeviceState *dev, Error **errp)
+> >  {
+> >      MachineState *ms = MACHINE(qdev_get_machine());
+> > +    SiFiveUState *us = RISCV_U_MACHINE(ms);
+>
+> I don't think the Soc should access the machine like this. What if we
+> use this Soc on a different machine?
+>
+
+Yes, agree. The v1 patch does this in the riscv_sifive_u_init(), but
+it could not pass the "make check". See the changelog I mentioned. Do
+you know how to fix the "make check" properly? The issue is quite
+strange. The v1 patch worked perfectly OK and I did not observe any
+crash during my normal use, but with "make check" QEMU RISC-V crashes
+with the v1 patch.
+
+> There should be a SoC "serial" property that is set before realise as well.
+>
+
+v1 patch: http://patchwork.ozlabs.org/patch/1196127/
+
+Regards,
+Bin
 
