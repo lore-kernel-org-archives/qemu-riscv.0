@@ -1,71 +1,73 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1j73AY-0003JH-JP
-	for mharc-qemu-riscv@gnu.org; Wed, 26 Feb 2020 15:20:34 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:55861)
+	id 1j74Jf-0006S8-He
+	for mharc-qemu-riscv@gnu.org; Wed, 26 Feb 2020 16:34:03 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:35621)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <jimw@sifive.com>) id 1j73AV-0003Iv-RC
- for qemu-riscv@nongnu.org; Wed, 26 Feb 2020 15:20:32 -0500
+ (envelope-from <prvs=318e6e5d7=alistair.francis@wdc.com>)
+ id 1j74Jd-0006PX-K7
+ for qemu-riscv@nongnu.org; Wed, 26 Feb 2020 16:34:02 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <jimw@sifive.com>) id 1j73AU-0003AS-Nm
- for qemu-riscv@nongnu.org; Wed, 26 Feb 2020 15:20:31 -0500
-Received: from mail-pl1-x641.google.com ([2607:f8b0:4864:20::641]:34077)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <jimw@sifive.com>) id 1j73AU-00038J-H6
- for qemu-riscv@nongnu.org; Wed, 26 Feb 2020 15:20:30 -0500
-Received: by mail-pl1-x641.google.com with SMTP id j7so153526plt.1
- for <qemu-riscv@nongnu.org>; Wed, 26 Feb 2020 12:20:30 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
- h=subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=oJWjAQwpDaloA1vYB6E/tU+1xm/T5uuZ3jou5Q1NBrY=;
- b=OIGAPcCLASLWxLJ6fxKKsaAVwnHxxeOEvokFjsc3z/p4Ldg30bcCry2A//dd0fGMKO
- 8hqccB2NLQX2Dlrc5V4lcXFYGRk3lLR41Yp7bFwkh2OJsSwwtxvenm2MPLdLAIOm6afm
- SsqtRKYgAAzXuWRsszMzMIddc8ogWyzMLwjCh3lNwM5ezxR9pMAaYb5jKWvZOOpHKtzZ
- q7UR4z5Ced/G3ilaYmGC3+Zy0RcJ86nMkKQXSMUILtu81uZIKWbB+FF0nF3mG2C/WeAg
- gV2wDxdPKNLmkuQGfzur5YdH6pPgvX2FGBka+Oj5fCgEswNZJZULuoYalBB7xcoFCcC9
- Xylw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=oJWjAQwpDaloA1vYB6E/tU+1xm/T5uuZ3jou5Q1NBrY=;
- b=IoWbkUFRplCu8EodHm1ZqoZcCybMzNUJ1KMR1RXI14yDLfTyBQQSq+JwtnGK+aFby/
- /R95/zjwxA+bfsJfaBYCsSW2/1FEeSmpaQERpxBO0ghkSF7f+sNgHhhGB1GRxeFMNWGb
- QlSTOIMu50W3z8XAcC15mKsrlgjruTY3k98NIf/Q77vzBObfmK1imj2ZXBMRhXdQsRDN
- aaRDI5WZQmXtr0TJn3MmSeToZko0t3M0rQf+UeNV5AUErb59yw9OvSOCN8eIfifOXqYh
- 0MnO4rtp34NEj3tGk0S1vFnK+3Hq45hEriqMHNPtfvr+r6NvDxgvGwVroTIL9BPqr5K3
- eu4A==
-X-Gm-Message-State: APjAAAVosmOMPUzKcfmKI+mHAhLmVXrMSvyu6VqZmVhumyvdT3D07cIP
- wu2aVL+Aeug9nU9IVMa0zLyD4g==
-X-Google-Smtp-Source: APXvYqwcqtXv4AvMq1tzOTs2GVcyBqes8O6+rt/MYjPddtxo38/Bjxm7rYynFhmGWSbm0mVTGTPTcQ==
-X-Received: by 2002:a17:90a:a88d:: with SMTP id
- h13mr896990pjq.48.1582748429173; 
- Wed, 26 Feb 2020 12:20:29 -0800 (PST)
-Received: from [10.17.0.226] ([12.206.222.5])
- by smtp.gmail.com with ESMTPSA id a35sm3950894pgl.20.2020.02.26.12.20.28
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 26 Feb 2020 12:20:28 -0800 (PST)
-Subject: Re: [PATCH v5 4/4] target/riscv: add vector configure instruction
-To: LIU Zhiwei <zhiwei_liu@c-sky.com>, richard.henderson@linaro.org,
- alistair23@gmail.com, chihmin.chao@sifive.com, palmer@dabbelt.com
-Cc: wenmeng_zhang@c-sky.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
- wxy194768@alibaba-inc.com
-References: <20200221094531.61894-1-zhiwei_liu@c-sky.com>
- <20200221094531.61894-5-zhiwei_liu@c-sky.com>
-From: Jim Wilson <jimw@sifive.com>
-Message-ID: <f2ce2ebc-0e79-d65a-86b3-5f705b541fc2@sifive.com>
-Date: Wed, 26 Feb 2020 12:20:28 -0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.4.1
+ (envelope-from <prvs=318e6e5d7=alistair.francis@wdc.com>)
+ id 1j74Jc-0008HE-Kl
+ for qemu-riscv@nongnu.org; Wed, 26 Feb 2020 16:34:01 -0500
+Received: from esa4.hgst.iphmx.com ([216.71.154.42]:40495)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <prvs=318e6e5d7=alistair.francis@wdc.com>)
+ id 1j74JY-0007Rf-5t; Wed, 26 Feb 2020 16:33:57 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1582752836; x=1614288836;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=/Yr+NsYahJv8yUruEV1ZVjd4qMjABf1iX16ytZnHrck=;
+ b=TQg2SU6Gd+ZCSW3YU/LrDm/xj27h5c+Oq2IhKeHMP8JGiQ9gHsHK7g7u
+ sk/xbW77Gcvjy2DfRaH9FIJDjSo1Cn+XrrOzX2wd+J/ioRQLByU7lYKRW
+ B6Z5PZl5dP8T++CtUDw6q+Gl54L5+CwQklHt1SkicFM/hXL3Gyi/Opq6f
+ FxjLPwRmRjWGrn68veInOOokbdVYHxdTH9vmU6TVcD4tk4cBWNmi1SaXp
+ LbFa80fZOU3J4Q64bi1aOQjn+3k0B1F8HOsrHjYyBufkFZaS/cGbBjOv4
+ O4lS+PQVh3ANYeqB4v+xZ5SLh3t4zOoOG8R1nOnKDD30mTiaLpQzZQI3/ A==;
+IronPort-SDR: Pv/zKOQxSmLoupxcPa3Xla6PNDzBoO9PIf4zF+zC4Di8N8TBNXX6OGGEK5HqbquLwpbmKS4gv5
+ VhF23Sdu3k5QhApLulAOY7In+9ZiJVEFey/+ITd9YXEzpfx30rkWYpVTAGBApfNbNzn1AlUpXS
+ a7/IxO3OxdLKzzb5uRq1IavtcNGnRz43rRUFkBBGnoDI5jfN4Pf8l01fFqQq58DL3mBgwlkrSc
+ EDmhOojnpfnUoVOoSTumaey5RVPuicfpzNxdgXZt+0v+LQc0woCIaJgOXqUOhDIbvPtezgGWSL
+ wzc=
+X-IronPort-AV: E=Sophos;i="5.70,489,1574092800"; d="scan'208";a="130835623"
+Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
+ ([199.255.45.14])
+ by ob1.hgst.iphmx.com with ESMTP; 27 Feb 2020 05:33:51 +0800
+IronPort-SDR: YDjGRmrTA/7sesOnbLb70qP25q65n85tAWlmvMwf0Bfwx7Dz40ZXtjGr7G47yNK4gfCACEu3QX
+ K5nx7BQDZbNgGsSAbFfrqSM5IjSNAKaBN622INL4LxdKmoV7nnG27j4Rp6PZl3/+oYoKsB3EmE
+ /t27Nw6cwiE/Y2pPjHOkASSJSSwbaanPHYHNBJEgSQe5AbOuBymvCK/0lK3FP4FF0LAX252tJx
+ KZmX1R4XS3Y0xKXHuFd29XdkEwv3Ng5q+NWzEsTDY7F61INDxAwPdd0mwlXZENjWsSo2cccjE6
+ IkyheiOypzjVVjM9ZjCaG5uI
+Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
+ by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 26 Feb 2020 13:26:16 -0800
+IronPort-SDR: 8ZfNIRpRN7nEllnj073SSzjQgkYMUHbnRPFP4Ge5Gpj7KQUs0uluFfTABNnLkKPT6ktL6mQu1m
+ AIUfxaYHeoyS4Eq/87ROUuFQ+JcXSvVASTJ1FJha5xvpok4TGUK2quzlv74fVDz05xklBdTilj
+ YIqIEsN9q8RT9Pm+k/uhx3yV41fNfofDkGOCiWjalMP9dWB1WSD3FZbtBy0CPgXbp2DHTtR5r6
+ w9FC0j7G8oAC9uFSyizJu3wmq9ybt2d6fCpyIml6tU3FnucYyhlme/49uEWWrMJHvpW+pSRFMf
+ Jb0=
+WDCIronportException: Internal
+Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
+ risc6-mainframe.int.fusionio.com) ([10.196.158.235])
+ by uls-op-cesaip01.wdc.com with ESMTP; 26 Feb 2020 13:33:51 -0800
+From: Alistair Francis <alistair.francis@wdc.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org,
+	laurent@vivier.eu
+Cc: palmer@dabbelt.com,
+	alistair.francis@wdc.com,
+	alistair23@gmail.com
+Subject: [PATCH v3 0/2]  linux-user: generate syscall_nr.sh for RISC-V
+Date: Wed, 26 Feb 2020 13:26:41 -0800
+Message-Id: <cover.1582752329.git.alistair.francis@wdc.com>
+X-Mailer: git-send-email 2.25.0
 MIME-Version: 1.0
-In-Reply-To: <20200221094531.61894-5-zhiwei_liu@c-sky.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2607:f8b0:4864:20::641
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-detected-operating-system: by eggs.gnu.org: FreeBSD 9.x [fuzzy]
+X-Received-From: 216.71.154.42
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -77,16 +79,38 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Feb 2020 20:20:33 -0000
+X-List-Received-Date: Wed, 26 Feb 2020 21:34:02 -0000
 
-On 2/21/20 1:45 AM, LIU Zhiwei wrote:
-> +    /* Using x0 as the rs1 register specifier, encodes an infinite AVL */
-> +    if (a->rs1 == 0) {
-> +        /* As the mask is at least one bit, RV_VLEN_MAX is >= VLMAX */
-> +        s1 = tcg_const_tl(RV_VLEN_MAX);
+This series updates the RISC-V syscall_nr.sh based on the 5.5 kernel.
 
-This is wrong for the current draft of the vector spec.  x0 now means 
-don't change VL.  So this needs to be version specific.
+There are two parts to this. One is just adding the new syscalls, the
+other part is updating the RV32 syscalls to match the fact that RV32 is
+a 64-bit time_t architectures (y2038) safe.
 
-Jim
+we need to make some changes to syscall.c to avoid warnings/errors
+during compliling with the new syscall.
+
+I did some RV32 user space testing after applying these patches. I ran the
+glibc testsuite in userspace and I don't see any regressions.
+
+v3:
+ - Fix RV32 syscalls
+ - Fix #if around safe_wait4
+
+Alistair Francis (2):
+  linux-user: Protect more syscalls
+  linux-user/riscv: Update the syscall_nr's to the 5.5 kernel
+
+ linux-user/riscv/syscall32_nr.h | 314 ++++++++++++++++++++++++++++++++
+ linux-user/riscv/syscall64_nr.h | 301 ++++++++++++++++++++++++++++++
+ linux-user/riscv/syscall_nr.h   | 294 +-----------------------------
+ linux-user/strace.c             |   2 +
+ linux-user/syscall.c            |  20 ++
+ 5 files changed, 639 insertions(+), 292 deletions(-)
+ create mode 100644 linux-user/riscv/syscall32_nr.h
+ create mode 100644 linux-user/riscv/syscall64_nr.h
+
+-- 
+2.25.0
+
 
