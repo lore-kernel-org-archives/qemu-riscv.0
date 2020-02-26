@@ -1,65 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1j72Xp-0004WW-PB
-	for mharc-qemu-riscv@gnu.org; Wed, 26 Feb 2020 14:40:33 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:56232)
+	id 1j72zr-0004Xf-M5
+	for mharc-qemu-riscv@gnu.org; Wed, 26 Feb 2020 15:09:31 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47521)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <alistair23@gmail.com>) id 1j72Xn-0004Tg-22
- for qemu-riscv@nongnu.org; Wed, 26 Feb 2020 14:40:32 -0500
+ (envelope-from <jimw@sifive.com>) id 1j72zl-0004VJ-9l
+ for qemu-riscv@nongnu.org; Wed, 26 Feb 2020 15:09:26 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1j72Xl-0006W7-I6
- for qemu-riscv@nongnu.org; Wed, 26 Feb 2020 14:40:30 -0500
-Received: from mail-lj1-x242.google.com ([2a00:1450:4864:20::242]:38444)
+ (envelope-from <jimw@sifive.com>) id 1j72zk-0003Ru-AO
+ for qemu-riscv@nongnu.org; Wed, 26 Feb 2020 15:09:25 -0500
+Received: from mail-pf1-x444.google.com ([2607:f8b0:4864:20::444]:44583)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1j72Xh-0006LT-CS; Wed, 26 Feb 2020 14:40:26 -0500
-Received: by mail-lj1-x242.google.com with SMTP id w1so443740ljh.5;
- Wed, 26 Feb 2020 11:40:24 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=7UWeIBoPKSYywb3sFB8Gd4kZL5c+IuRG3eWBXLP0dvA=;
- b=VuEsNcAohsx5+60vyPeXHPuIxbXZkDVsA00pzFHFnp25vFaFOAG2Srs17GNVDLJvsS
- K7Xj/RWsNff7KFGRjoJDbS3r8fXEOj3Ixne6FoRNZODfmQfyg0qTbdcYWBues0HLOZrz
- 3SOEpPqrrFwUrkSA6lUbVR2zARoovZh0clV8Nixwq85bUoWPD4fxgQ1I2Z60DMN+UOPi
- vtIdflEocNr9Wf72lftvi5agG5P5HQrI2e7sa5/oeB+7Bwu2pzLGo1l8ChV/pjf+q/CG
- KUqZbHfjlpGjwvyAU5jRT6esXZzVivkHaqAlcjqNltZGmhIF7wfHUztmPwDJB8HPG+Vm
- Vgdg==
+ (Exim 4.71) (envelope-from <jimw@sifive.com>) id 1j72zk-0003Lv-4c
+ for qemu-riscv@nongnu.org; Wed, 26 Feb 2020 15:09:24 -0500
+Received: by mail-pf1-x444.google.com with SMTP id y5so310097pfb.11
+ for <qemu-riscv@nongnu.org>; Wed, 26 Feb 2020 12:09:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=yyJNMLyrTyG3x116AuLrSuDe5q6fImd01Q5NIv53YPk=;
+ b=ZqWSQ679yOiFiKrnknXVFrf33Pg/TulmzRwAvD6lmC1AT2rXyCo/1dOF9bZ+KSKmHe
+ BAiS89w6dVuQjI9jwM4ajmzMOXIgSzX9OEHu+4feZDJDYLSUdktqsoIzLg7Yg+Mvnj8V
+ Hun4LWLJZn0ab2Eh4CuPfAiDsiGVCHhgDnoX8X5CFQ5s9GOWRq5EqRSBR1LbCvx5LLF3
+ aa6rBuRq+ZJR4ocRkSCGQxIKF+qI94BK1M9kXrPYJE4+HP27TZLZJACI1ie2Bbp9pgo7
+ JI1+SQ8kXrOvFPTh/uooc7G04QZoNxPVd9ZrujF8q3LRthdBkccA52fb2NKiEEpawMce
+ f2ZA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=7UWeIBoPKSYywb3sFB8Gd4kZL5c+IuRG3eWBXLP0dvA=;
- b=k7N8WKqB6VrxA+GCp2caH+bycz73S61OTfLFpoRLWSnsNIAxcW6atkbnQ+5vO6A3ZV
- M74sSWcuz6T6vvBnPPJ8sMPehNTGwYIsQbbYoZd+V4g3l9mwgxpJfSnwc3gtWWmk+0RC
- bZM4YbPRy4ULUXEde5iLBsh4+86X7CEduLa54GZZjrb9KVPqptfT0cSLTvgl/9mCSMBp
- lEFV25JXTiz3lNpfchugum1SnwPmk/+qjnIb/o0aSf2B8eb6DeoWO++a7SdcahF484if
- z1wh1SqkaHXe46htw+kzBIQYV0zXVAbnt60PlIAlJWnIktN3XUSRPRMzX3iBZVZD1TKj
- U8xQ==
-X-Gm-Message-State: ANhLgQ1upr2EeP99zvuQiEI94VowDfkWTaBzlC2rZ08r581fGNuarRTP
- Mymu0yFaIEpDD7HlY99lEmxCtddoULnRZVdWH5M=
-X-Google-Smtp-Source: ADFU+vuOaotcmA4U5rnBdimVgzm3XVPuTEFCNHgxUULL4S2zymB+tiQVAgC5yeEHr5jEu3ycTTchtyZNvvkEh/t8Ocs=
-X-Received: by 2002:a2e:7818:: with SMTP id t24mr320943ljc.195.1582746023370; 
- Wed, 26 Feb 2020 11:40:23 -0800 (PST)
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=yyJNMLyrTyG3x116AuLrSuDe5q6fImd01Q5NIv53YPk=;
+ b=RVsQ+XXZhpIkNckvDWzOyT4IzdyLswkWB8dsQCamwi3Zd1SbhmXdgv30qP2sTUK3Aj
+ zFXBaPqIhn9E3vDgZTP3cb+5ABykipbUQIY73ZvJomoz/K6UGdCMst3uiL1rNDdy6Wnm
+ cJcfEW5qks25g+mF3HGZJ90k/xJA0wEhtjUxFRXAHfdsc2b2qJcjdSvt+bsUm5hko1Rd
+ 1hNteQYsALPJyc54YW+irbR6w7ztQnvNS62DUDBDkBbFqjL2zdvRjVH3A//PyT7LfIGt
+ XPU+MgrWJdEgzH1iNRbncmx2AmB/CGkHW7d4L8glSVi05SS4VLO/1nR58+8w3CuhmEEW
+ +vUg==
+X-Gm-Message-State: APjAAAUxzdK7oEZu++DlrBuGgSDhjJSqi579eWX2R18lfYHwJ/IeSS6T
+ 2YJvlN+FM8lB1XT1/DkMJrt2KA==
+X-Google-Smtp-Source: APXvYqwr4VOX3K3N87ePFT3LjDqtMkDqMtqA4FcnFkePcG6ossUeRtmCjH8TfSDQWq8NSHKFrUyC0Q==
+X-Received: by 2002:a63:2b93:: with SMTP id r141mr511283pgr.306.1582747762481; 
+ Wed, 26 Feb 2020 12:09:22 -0800 (PST)
+Received: from [10.17.0.226] ([12.206.222.5])
+ by smtp.gmail.com with ESMTPSA id dw10sm3594375pjb.11.2020.02.26.12.09.21
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 26 Feb 2020 12:09:22 -0800 (PST)
+Subject: Re: [PATCH v5 0/4] target-riscv: support vector extension part 1
+To: LIU Zhiwei <zhiwei_liu@c-sky.com>, richard.henderson@linaro.org,
+ alistair23@gmail.com, chihmin.chao@sifive.com, palmer@dabbelt.com
+Cc: wenmeng_zhang@c-sky.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
+ wxy194768@alibaba-inc.com
+References: <20200221094531.61894-1-zhiwei_liu@c-sky.com>
+From: Jim Wilson <jimw@sifive.com>
+Message-ID: <ac290e38-bb39-6551-0758-95d087fa568c@sifive.com>
+Date: Wed, 26 Feb 2020 12:09:20 -0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.4.1
 MIME-Version: 1.0
-References: <cover.1582586444.git.alistair.francis@wdc.com>
- <85f33856ee6f32125e5c81a9561346b28b340a3e.1582586444.git.alistair.francis@wdc.com>
- <24431d59-b535-97d4-95d7-fe4401e10787@vivier.eu>
-In-Reply-To: <24431d59-b535-97d4-95d7-fe4401e10787@vivier.eu>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 26 Feb 2020 11:32:45 -0800
-Message-ID: <CAKmqyKObXNXj2jsMYTvAL-eHS43Wb5upwq6mHeHo7q-4Pr4W7g@mail.gmail.com>
-Subject: Re: [PATCH v2 2/2] linux-user/riscv: Update the syscall_nr's to the
- 5.5 kernel
-To: Laurent Vivier <laurent@vivier.eu>
-Cc: Alistair Francis <alistair.francis@wdc.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+In-Reply-To: <20200221094531.61894-1-zhiwei_liu@c-sky.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::242
+X-Received-From: 2607:f8b0:4864:20::444
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -71,225 +75,36 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Feb 2020 19:40:32 -0000
+X-List-Received-Date: Wed, 26 Feb 2020 20:09:26 -0000
 
-On Tue, Feb 25, 2020 at 3:50 AM Laurent Vivier <laurent@vivier.eu> wrote:
->
-> Le 25/02/2020 =C3=A0 00:21, Alistair Francis a =C3=A9crit :
-> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> > ---
-> >  linux-user/riscv/syscall32_nr.h | 314 ++++++++++++++++++++++++++++++++
-> >  linux-user/riscv/syscall64_nr.h | 303 ++++++++++++++++++++++++++++++
-> >  linux-user/riscv/syscall_nr.h   | 294 +-----------------------------
-> >  3 files changed, 619 insertions(+), 292 deletions(-)
-> >  create mode 100644 linux-user/riscv/syscall32_nr.h
-> >  create mode 100644 linux-user/riscv/syscall64_nr.h
-> >
-> > diff --git a/linux-user/riscv/syscall32_nr.h b/linux-user/riscv/syscall=
-32_nr.h
-> > new file mode 100644
-> > index 0000000000..c3bf5930d0
-> > --- /dev/null
-> > +++ b/linux-user/riscv/syscall32_nr.h
-> > @@ -0,0 +1,314 @@
-> > +/*
-> > + * Syscall numbers from asm-generic for RV32.
-> > + */
-> > +
-> > +#ifndef LINUX_USER_RISCV_SYSCALL32_NR_H
-> > +#define LINUX_USER_RISCV_SYSCALL32_NR_H
-> > +
-> > +#define TARGET_NR_io_setup 0
-> > +#define TARGET_NR_io_destroy 1
-> > +#define TARGET_NR_io_submit 2
-> > +#define TARGET_NR_io_cancel 3
-> > +#define TARGET_NR_setxattr 5
-> > +#define TARGET_NR_lsetxattr 6
-> > +#define TARGET_NR_fsetxattr 7
-> > +#define TARGET_NR_getxattr 8
-> > +#define TARGET_NR_lgetxattr 9
-> > +#define TARGET_NR_fgetxattr 10
-> > +#define TARGET_NR_listxattr 11
-> > +#define TARGET_NR_llistxattr 12
-> > +#define TARGET_NR_flistxattr 13
-> > +#define TARGET_NR_removexattr 14
-> > +#define TARGET_NR_lremovexattr 15
-> > +#define TARGET_NR_fremovexattr 16
-> > +#define TARGET_NR_getcwd 17
-> > +#define TARGET_NR_lookup_dcookie 18
-> > +#define TARGET_NR_eventfd2 19
-> > +#define TARGET_NR_epoll_create1 20
-> > +#define TARGET_NR_epoll_ctl 21
-> > +#define TARGET_NR_epoll_pwait 22
-> > +#define TARGET_NR_dup 23
-> > +#define TARGET_NR_dup3 24
-> > +#define TARGET_NR_fcntl64 25
-> > +#define TARGET_NR_inotify_init1 26
-> > +#define TARGET_NR_inotify_add_watch 27
-> > +#define TARGET_NR_inotify_rm_watch 28
-> > +#define TARGET_NR_ioctl 29
-> > +#define TARGET_NR_ioprio_set 30
-> > +#define TARGET_NR_ioprio_get 31
-> > +#define TARGET_NR_flock 32
-> > +#define TARGET_NR_mknodat 33
-> > +#define TARGET_NR_mkdirat 34
-> > +#define TARGET_NR_unlinkat 35
-> > +#define TARGET_NR_symlinkat 36
-> > +#define TARGET_NR_linkat 37
-> > +#define TARGET_NR_umount2 39
-> > +#define TARGET_NR_mount 40
-> > +#define TARGET_NR_pivot_root 41
-> > +#define TARGET_NR_nfsservctl 42
-> > +#define TARGET_NR_statfs 43
-> > +#define TARGET_NR_fstatfs 44
-> > +#define TARGET_NR_truncate 45
-> > +#define TARGET_NR_ftruncate 46
->
-> For riscv32, it's the 64bit version name to use:
->
-> #define TARGET_NR_statfs64 43
-> #define TARGET_NR_fstatfs64 44
-> #define TARGET_NR_truncate64 45
-> #define TARGET_NR_ftruncate64 46
-> (and below)
+On 2/21/20 1:45 AM, LIU Zhiwei wrote:
+> This is the first part of v5 patchset. The changelog of v5 is only coverd
+> the part1.
+> 
+> Features:
+>    * support specification riscv-v-spec-0.7.1.
 
-Fixed! Your script also updated this :)
+I'm still concerned about versioning issues.  This implements an 
+unofficial draft of the proposed RISC-V vector extension.  This draft is 
+not compatible with the current draft, and will be even less compatible 
+with the final official version of the vector spec.
 
->
-> because:
->
-> include/uapi/asm-generic/unistd.h
->
-> #if __BITS_PER_LONG =3D=3D 64 && !defined(__SYSCALL_COMPAT)
-> ...
-> #else
-> #define __NR_fcntl64 __NR3264_fcntl
-> #define __NR_statfs64 __NR3264_statfs
-> #define __NR_fstatfs64 __NR3264_fstatfs
-> #define __NR_truncate64 __NR3264_truncate
-> #define __NR_ftruncate64 __NR3264_ftruncate
-> #define __NR_llseek __NR3264_lseek
-> #define __NR_sendfile64 __NR3264_sendfile
-> #if defined(__ARCH_WANT_NEW_STAT) || defined(__ARCH_WANT_STAT64)
-> #define __NR_fstatat64 __NR3264_fstatat
-> #define __NR_fstat64 __NR3264_fstat
-> #endif
-> ...
->
-> arch/riscv/include/uapi/asm/unistd.h
-> #define __ARCH_WANT_NEW_STAT
->
-> arch/riscv/include/uapi/asm/bitsperlong.h
->
-> #define __BITS_PER_LONG (__SIZEOF_POINTER__ * 8)
->
-> ...
-> > +#define TARGET_NR_getdents64 61
-> > +#define TARGET_NR__llseek 62
->
-> TARGET_NR_llseek
->
-> > +#define TARGET_NR_read 63
-> > +#define TARGET_NR_write 64
-> > +#define TARGET_NR_readv 65
-> > +#define TARGET_NR_writev 66
-> > +#define TARGET_NR_pread64 67
-> > +#define TARGET_NR_pwrite64 68
-> > +#define TARGET_NR_preadv 69
-> > +#define TARGET_NR_pwritev 70
-> > +#define TARGET_NR_sendfile 71
->
-> TARGET_NR_sendfile64
->
-> > +#define TARGET_NR_signalfd4 74
-> > +#define TARGET_NR_vmsplice 75
-> > +#define TARGET_NR_splice 76
-> > +#define TARGET_NR_tee 77
-> > +#define TARGET_NR_readlinkat 78
-> > +#define TARGET_NR_newfstatat 79
-> > +#define TARGET_NR_fstat 80
->
-> #define TARGET_NR_fstatat64 79
-> #define TARGET_NR_fstat64 80
->
-> ...
-> > +#define TARGET_NR_sethostname 161
-> > +#define TARGET_NR_setdomainname 162
->
-> #define TARGET_NR_getrlimit 163
-> #define TARGET_NR_setrlimit 164
->
-> because
->
-> include/uapi/asm-generic/unistd.h
->
-> #ifdef __ARCH_WANT_SET_GET_RLIMIT
-> /* getrlimit and setrlimit are superseded with prlimit64 */
-> #define __NR_getrlimit 163
-> __SC_COMP(__NR_getrlimit, sys_getrlimit, compat_sys_getrlimit)
-> #define __NR_setrlimit 164
-> __SC_COMP(__NR_setrlimit, sys_setrlimit, compat_sys_setrlimit)
-> #endif
->
-> arch/riscv/include/uapi/asm/unistd.h
->
-> #define __ARCH_WANT_SET_GET_RLIMIT
->
-> ...
-> > +#define TARGET_NR_arch_specific_syscall 244
-> > +#define TARGET_NR_riscv_flush_icache TARGET_NR_arch_specific_syscall +=
- 15
->
-> It should be good to keep parenthesis around the declaration:
->
-> (TARGET_NR_arch_specific_syscall + 15)
+The patch adds a version which is good, but there is only one check when 
+qemu starts.  Probably something like 25% of these patches will be wrong 
+for the official vector extension.  How are we going to handle this when 
+someone submits patches for the official support?  It would be better if 
+everything in these patches were conditional on the version number.  It 
+might also be better if we stopped calling this the 'v' extension and 
+maybe used another name like Xrvv071 to make it clear that it is an 
+unofficial draft of the proposed vector spec.  Or maybe be we can use 
+v0p7 but that isn't an officially supported extension name.
 
-I added brackets and fixed everything above.
+If this rvv 0.7.1 implementation is considered a temporary solution, 
+maybe we can just remove all of this work when the official rvv spec if 
+available?  But presumably it is better if we can have both this 
+implementation and the official one, which means everything needs to be 
+conditional or tied to an Xsomething extension name instead of the V 
+extension name.
 
->
-> ...
->
-> I think you can remove following defintion as they should be translated
-> by the target glibc.
-
-glibc won't be exposing these externally, the current plan is just to
-use this internally to glibc.
-
-Alistair
-
-
->
-> > +/*
-> > + * Alias some of the older pre 64-bit time_t syscalls to the 64-bit
-> > + * ones for RV32. This is based on the list used by glibc.
-> > + */
-> > +#define TARGET_NR_futex TARGET_NR_futex_time64
-> > +#define TARGET_NR_rt_sigtimedwait TARGET_NR_rt_sigtimedwait_time64
-> > +#define TARGET_NR_ppoll TARGET_NR_ppoll_time64
-> > +#define TARGET_NR_utimensat TARGET_NR_utimensat_time64
-> > +#define TARGET_NR_pselect6 TARGET_NR_pselect6_time64
-> > +#define TARGET_NR_recvmmsg TARGET_NR_recvmmsg_time64
-> > +#define TARGET_NR_semtimedop TARGET_NR_semtimedop_time64
-> > +#define TARGET_NR_mq_timedreceive TARGET_NR_mq_timedreceive_time64
-> > +#define TARGET_NR_mq_timedsend TARGET_NR_mq_timedsend_time64
-> > +#define TARGET_NR_clock_getres TARGET_NR_clock_getres_time64
-> > +#define TARGET_NR_timerfd_settime TARGET_NR_timerfd_settime64
-> > +#define TARGET_NR_timerfd_gettime TARGET_NR_timerfd_gettime64
-> > +#define TARGET_NR_sched_rr_get_interval TARGET_NR_sched_rr_get_interva=
-l_time64
-> > +#define TARGET_NR_clock_adjtime TARGET_NR_clock_adjtime64
-> > +
-> > +#endif
-> > diff --git a/linux-user/riscv/syscall64_nr.h b/linux-user/riscv/syscall=
-64_nr.h
-> > new file mode 100644
-> > index 0000000000..b58364b570
-> > --- /dev/null
-> > +++ b/linux-user/riscv/syscall64_nr.h
->
-> syscall64_nr.h is correct.
->
-> Thanks,
-> Laurent
->
+Jim
 
