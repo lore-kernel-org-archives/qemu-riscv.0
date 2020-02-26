@@ -1,90 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1j6csm-000717-NG
-	for mharc-qemu-riscv@gnu.org; Tue, 25 Feb 2020 11:16:28 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:39742)
+	id 1j6kum-0000PG-RC
+	for mharc-qemu-riscv@gnu.org; Tue, 25 Feb 2020 19:51:04 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:56847)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <alistair23@gmail.com>) id 1j6csh-0006tW-O2
- for qemu-riscv@nongnu.org; Tue, 25 Feb 2020 11:16:27 -0500
+ (envelope-from <alistair23@gmail.com>) id 1j6kuk-0000MK-AR
+ for qemu-riscv@nongnu.org; Tue, 25 Feb 2020 19:51:03 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1j6csd-0003iM-LV
- for qemu-riscv@nongnu.org; Tue, 25 Feb 2020 11:16:23 -0500
-Received: from mail-lj1-x241.google.com ([2a00:1450:4864:20::241]:46739)
+ (envelope-from <alistair23@gmail.com>) id 1j6kuj-0003Me-6n
+ for qemu-riscv@nongnu.org; Tue, 25 Feb 2020 19:51:02 -0500
+Received: from mail-lj1-x243.google.com ([2a00:1450:4864:20::243]:42110)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1j6cs9-0003ZA-LO; Tue, 25 Feb 2020 11:15:49 -0500
-Received: by mail-lj1-x241.google.com with SMTP id x14so14642346ljd.13;
- Tue, 25 Feb 2020 08:15:48 -0800 (PST)
+ id 1j6kug-0003GO-JD; Tue, 25 Feb 2020 19:50:58 -0500
+Received: by mail-lj1-x243.google.com with SMTP id d10so965549ljl.9;
+ Tue, 25 Feb 2020 16:50:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
  :cc:content-transfer-encoding;
- bh=NzPOyzyLyH0k2YO7pwRMfVAMiuzgA+gJggVDYCtlzXY=;
- b=KoyPPNDMsaV6YCaBg9WkCNNY8PbA6hx8nFVxHOq8p/WZvob7eC4VHVHUwgjeFkEK5A
- 34krWD037peMcgDZiMICakOpMAUZRQioDiRORTisj8WzZsl6PCvZarKIzEl0fBbzYq8e
- ZHvcMYKAzreUSPZ1JSuhCNd1IbF3oQ67lxzqK1Grxdiz42F8T0KmVY/6fvmMduSfu/NU
- Vn8Uvpc8lYsAQIXp7UD1wyUA23W+gixyfacsM17HCcBGqjFz9MSzeVkfJOdITsjrrtAd
- MOOZNBK9zwGjXcRgCTTg4NFM7k/Aq7/vLy4Y6NsmhWoRlWxw5sSEVu4wyxPLFw4I4JRs
- 8U/g==
+ bh=0DYAnu0qFK+bImu9vbQy4oZ3OX5QIv6i/7PEutObbk0=;
+ b=FTeANuidsptqgb/S1bYvsl5BTsWVRp0TZtj6OsyH35iZ7ggkh0wPEjuhKFp/qEkTwx
+ FBRtnLm5KTTmQXCg1fPbIuiL7LJcWhQ3VKw+ETaFaJfdMJufjGV87zh62OFDmPQnKleT
+ 6CGyk8t3v4g1EPB7013SELruFkFy34j7amJ7NNl5sDMZReoekwlVB7ZRiNs3f4v2qmsa
+ 03AM9qZmJR041pkrPZnDkBQEOUukd7Hxg4lMLUXbfAZIgO5QjgIm9QwkWShI4VXL54cX
+ bBj1F5Hyn2q7KRU+hVcdhRZpfylcQ8mBfr5NQ631CTQrYGLWHdPeZ9r9+XxT/5u74JBa
+ 77KA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc:content-transfer-encoding;
- bh=NzPOyzyLyH0k2YO7pwRMfVAMiuzgA+gJggVDYCtlzXY=;
- b=jyaDiACaoCZXNkzYL5qTvctnqZMgz8qlFDNj+pHF3JOs/8ObshqEskkLSfBwCx500y
- uG7wAGsJLJgfDOYK1RtpzUaOrArVylxvf3DGPX/tQWJgt+72QPPpF4lugKt2BS/4jqEg
- b0mY5D38l9mQ6BZBJQzmEorvpF4uXb8NekF6cip6e+zjmII8H8Dm5N0rb/H2oiuH+9YF
- 0aOLWcbYtheSnw7ajsJcfE4BCcXwp9H7+ndVRy0g+0qfFTYlXizQbz68ChhhGmfq9rts
- kEYMHyqLKKrbKFO74LOOsfF0BaxT3WVEIUAtE7WKAFvYI+BiLpFDP+eed39bAD0HeALV
- GDYg==
-X-Gm-Message-State: APjAAAXZYBmnieJ0qUhUWqJYaWjHKNgWaw0cOgRBCAVdDXeHw22FAaNF
- GMCV54SbC67lVucjUq9UHVhBCP96BiUbb+2W+LI=
-X-Google-Smtp-Source: APXvYqwrY+bO33WPOLLiu4ifSnrqXOhLRtDwl+CxvfNfU+bg1N7uHyNNIVgN9CXfeRfA5yJiGHCtP7dI3B0zBEZOtE4=
-X-Received: by 2002:a2e:a36a:: with SMTP id i10mr33008013ljn.107.1582647347518; 
- Tue, 25 Feb 2020 08:15:47 -0800 (PST)
+ bh=0DYAnu0qFK+bImu9vbQy4oZ3OX5QIv6i/7PEutObbk0=;
+ b=U/7pZ7cPyjr/2R9h6r6csGQZKKF2+NGmsuKOnKd9jOYEacnh0592hF4SsfGfDwc80Z
+ jP6jsLxco/p3RyCP2p8P9WsfXO5CmKkjPwthIP9Zon+fiV9/bXBDS77WM7avfi+e2Zy8
+ Hjks5czmxul8d9AyrQN29kLZoT3/4biyN+puPlkuyPpesKI9MQVqAUWL2F299l1yNC+N
+ L6pN4RRYCdoe/PdbRHaQviXmEt1zGrI9AQRcdn3Lu5nB0gu8epWQ2VD1Kkg8o2zc10IA
+ EB93joAZyRoJa3p3joUiWXSNvF4bCaGKk3L3xh+A8aE7ual9TVAMJPXPEdmaMNNZGktB
+ GNLQ==
+X-Gm-Message-State: APjAAAU84qH989gYhiYjYrRYoodYyojyuzjNEjdHL/5JkvkCsGaRW/Sx
+ XAPYrGzVKugAt8I5oLs89D/YhgxzXkEQDW2mPHw=
+X-Google-Smtp-Source: APXvYqxDWONWEZ+A+F8vsHyRKPtZzzZn0cXlZlwO4y0TUxMUx3h11iVoxSfqKch58uu0bMkSM9wAl1edL1J6lbeQ2g0=
+X-Received: by 2002:a2e:b0db:: with SMTP id g27mr991055ljl.74.1582678256988;
+ Tue, 25 Feb 2020 16:50:56 -0800 (PST)
 MIME-Version: 1.0
-References: <20200224204828.23167-1-philmd@redhat.com>
- <20200224204828.23167-6-philmd@redhat.com>
- <CAKmqyKPcWkN4fhu+kmU8d+wsPLt_4BJB74Tao-P7nJpBQa1jZA@mail.gmail.com>
- <62f0a8f5-82ff-e543-964a-a8759169e01f@redhat.com>
-In-Reply-To: <62f0a8f5-82ff-e543-964a-a8759169e01f@redhat.com>
+References: <cover.1582586444.git.alistair.francis@wdc.com>
+ <205d84c5c51c54c8bb6a4a2927b7e1729fe42cdd.1582586444.git.alistair.francis@wdc.com>
+ <4d5ad27a-0655-4c15-123a-8ae7ed6bedf2@vivier.eu>
+In-Reply-To: <4d5ad27a-0655-4c15-123a-8ae7ed6bedf2@vivier.eu>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 25 Feb 2020 08:15:20 -0800
-Message-ID: <CAKmqyKNPuQT2MSmOTHWGb4+X48vkbdt9DpQQ5RfMDxdeYLG6qQ@mail.gmail.com>
-Subject: Re: [PATCH v2 05/32] hw/arm: Use memory_region_init_rom() with
- read-only regions
-To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>
-Cc: Peter Maydell <peter.maydell@linaro.org>,
- Paolo Bonzini <pbonzini@redhat.com>, 
+Date: Tue, 25 Feb 2020 16:43:21 -0800
+Message-ID: <CAKmqyKO82EVS-LGJrbbuNLDEAFYxn5ueJJS2DYy=9BtAk93YnQ@mail.gmail.com>
+Subject: Re: [PATCH v2 1/2] linux-user: Protect more syscalls
+To: Laurent Vivier <laurent@vivier.eu>
+Cc: Alistair Francis <alistair.francis@wdc.com>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- "Michael S. Tsirkin" <mst@redhat.com>, Jason Wang <jasowang@redhat.com>, 
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>, 
- KONRAD Frederic <frederic.konrad@adacore.com>,
- Alistair Francis <Alistair.Francis@wdc.com>, 
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, Max Reitz <mreitz@redhat.com>, 
- Qemu-block <qemu-block@nongnu.org>, Magnus Damm <magnus.damm@gmail.com>, 
- =?UTF-8?Q?Herv=C3=A9_Poussineau?= <hpoussin@reactos.org>, 
- Joel Stanley <joel@jms.id.au>, Palmer Dabbelt <palmer@dabbelt.com>, 
- Aleksandar Rikalo <aleksandar.rikalo@rt-rk.com>,
- Richard Henderson <rth@twiddle.net>, 
- Artyom Tarasenko <atar4qemu@gmail.com>, Eduardo Habkost <ehabkost@redhat.com>, 
- Alistair Francis <alistair@alistair23.me>,
- Fabien Chouteau <chouteau@adacore.com>, 
- qemu-arm <qemu-arm@nongnu.org>, Peter Chubb <peter.chubb@nicta.com.au>, 
- =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>, 
- Subbaraya Sundeep <sundeep.lkml@gmail.com>,
- David Gibson <david@gibson.dropbear.id.au>, 
- Kevin Wolf <kwolf@redhat.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Igor Mitsyanko <i.mitsyanko@gmail.com>, Laurent Vivier <laurent@vivier.eu>, 
- Jean-Christophe Dubois <jcd@tribudubois.net>, Michael Walle <michael@walle.cc>,
- "open list:New World" <qemu-ppc@nongnu.org>,
- Aleksandar Markovic <amarkovic@wavecomp.com>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Aurelien Jarno <aurelien@aurel32.net>
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::241
+X-Received-From: 2a00:1450:4864:20::243
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -96,197 +70,67 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Feb 2020 16:16:28 -0000
+X-List-Received-Date: Wed, 26 Feb 2020 00:51:03 -0000
 
-On Tue, Feb 25, 2020 at 2:02 AM Philippe Mathieu-Daud=C3=A9
-<philmd@redhat.com> wrote:
+On Tue, Feb 25, 2020 at 3:59 AM Laurent Vivier <laurent@vivier.eu> wrote:
 >
-> On 2/24/20 10:20 PM, Alistair Francis wrote:
-> > On Mon, Feb 24, 2020 at 12:51 PM Philippe Mathieu-Daud=C3=A9
-> > <philmd@redhat.com> wrote:
-> >>
-> >> This commit was produced with the Coccinelle script
-> >> scripts/coccinelle/memory-region-housekeeping.cocci.
-> >>
-> >> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
+> Le 25/02/2020 =C3=A0 00:21, Alistair Francis a =C3=A9crit :
+> > New y2038 safe 32-bit architectures (like RISC-V) don't support old
+> > syscalls with a 32-bit time_t. The kernel defines new *_time64 versions
+> > of these syscalls. Add some more #ifdefs to syscall.c in linux-user to
+> > allow us to compile without these old syscalls.
 > >
-> > This looks good for the ROM regions, for the flash regions this
-> > doesn't change the current functionality but I'm not sure it's any
-> > clearer.
->
-> Less code makes easier review.
->
-> These regions behave as ROM on the bus, any write to the address space
-> is illegal (they are programmable via I/O registers in another address
-> space).
-
-Good point.
-
->
+> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> > Reviewed-by: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
+> > ---
+> >  linux-user/strace.c  |  2 ++
+> >  linux-user/syscall.c | 20 ++++++++++++++++++++
+> >  2 files changed, 22 insertions(+)
 > >
-> > Either way though:
+> > diff --git a/linux-user/strace.c b/linux-user/strace.c
+> > index 4f7130b2ff..6420ccd97b 100644
+> > --- a/linux-user/strace.c
+> > +++ b/linux-user/strace.c
+> > @@ -775,6 +775,7 @@ print_syscall_ret_newselect(const struct syscallnam=
+e *name, abi_long ret)
+> >  #define TARGET_TIME_OOP      3   /* leap second in progress */
+> >  #define TARGET_TIME_WAIT     4   /* leap second has occurred */
+> >  #define TARGET_TIME_ERROR    5   /* clock not synchronized */
+> > +#ifdef TARGET_NR_adjtimex
+> >  static void
+> >  print_syscall_ret_adjtimex(const struct syscallname *name, abi_long re=
+t)
+> >  {
+> > @@ -813,6 +814,7 @@ print_syscall_ret_adjtimex(const struct syscallname=
+ *name, abi_long ret)
 > >
-> > Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+> >      qemu_log("\n");
+> >  }
+> > +#endif
+> >
+> >  UNUSED static struct flags access_flags[] =3D {
+> >      FLAG_GENERIC(F_OK),
+> > diff --git a/linux-user/syscall.c b/linux-user/syscall.c
+> > index 8d27d10807..5a2156f95a 100644
+> > --- a/linux-user/syscall.c
+> > +++ b/linux-user/syscall.c
+> > @@ -742,8 +742,10 @@ safe_syscall3(ssize_t, read, int, fd, void *, buff=
+, size_t, count)
+> >  safe_syscall3(ssize_t, write, int, fd, const void *, buff, size_t, cou=
+nt)
+> >  safe_syscall4(int, openat, int, dirfd, const char *, pathname, \
+> >                int, flags, mode_t, mode)
+> > +#if defined(TARGET_NR_wait4)
+> >  safe_syscall4(pid_t, wait4, pid_t, pid, int *, status, int, options, \
+> >                struct rusage *, rusage)
 >
-> Thanks, do you want me to improve the commit description?
+> safe_wait4 is also used in TARGET_NR_waitpid
 
-Nope, it's fine :)
+Fixed!
 
 Alistair
 
 >
-> >
-> > Alistair
-> >
-> >> ---
-> >>   hw/arm/exynos4210.c | 3 +--
-> >>   hw/arm/mainstone.c  | 3 +--
-> >>   hw/arm/omap_sx1.c   | 6 ++----
-> >>   hw/arm/palm.c       | 3 +--
-> >>   hw/arm/spitz.c      | 3 +--
-> >>   hw/arm/stellaris.c  | 3 +--
-> >>   hw/arm/tosa.c       | 3 +--
-> >>   7 files changed, 8 insertions(+), 16 deletions(-)
-> >>
-> >> diff --git a/hw/arm/exynos4210.c b/hw/arm/exynos4210.c
-> >> index 59a27bdd68..3af6502a5e 100644
-> >> --- a/hw/arm/exynos4210.c
-> >> +++ b/hw/arm/exynos4210.c
-> >> @@ -311,9 +311,8 @@ static void exynos4210_realize(DeviceState *socdev=
-, Error **errp)
-> >>                                   &s->chipid_mem);
-> >>
-> >>       /* Internal ROM */
-> >> -    memory_region_init_ram(&s->irom_mem, NULL, "exynos4210.irom",
-> >> +    memory_region_init_rom(&s->irom_mem, NULL, "exynos4210.irom",
-> >>                              EXYNOS4210_IROM_SIZE, &error_fatal);
-> >> -    memory_region_set_readonly(&s->irom_mem, true);
-> >>       memory_region_add_subregion(system_mem, EXYNOS4210_IROM_BASE_ADD=
-R,
-> >>                                   &s->irom_mem);
-> >>       /* mirror of iROM */
-> >> diff --git a/hw/arm/mainstone.c b/hw/arm/mainstone.c
-> >> index 6e64dfab50..05a806b422 100644
-> >> --- a/hw/arm/mainstone.c
-> >> +++ b/hw/arm/mainstone.c
-> >> @@ -125,9 +125,8 @@ static void mainstone_common_init(MemoryRegion *ad=
-dress_space_mem,
-> >>       /* Setup CPU & memory */
-> >>       mpu =3D pxa270_init(address_space_mem, mainstone_binfo.ram_size,
-> >>                         machine->cpu_type);
-> >> -    memory_region_init_ram(rom, NULL, "mainstone.rom", MAINSTONE_ROM,
-> >> +    memory_region_init_rom(rom, NULL, "mainstone.rom", MAINSTONE_ROM,
-> >>                              &error_fatal);
-> >> -    memory_region_set_readonly(rom, true);
-> >>       memory_region_add_subregion(address_space_mem, 0, rom);
-> >>
-> >>   #ifdef TARGET_WORDS_BIGENDIAN
-> >> diff --git a/hw/arm/omap_sx1.c b/hw/arm/omap_sx1.c
-> >> index be245714db..6c3fd1b271 100644
-> >> --- a/hw/arm/omap_sx1.c
-> >> +++ b/hw/arm/omap_sx1.c
-> >> @@ -126,9 +126,8 @@ static void sx1_init(MachineState *machine, const =
-int version)
-> >>       mpu =3D omap310_mpu_init(dram, machine->cpu_type);
-> >>
-> >>       /* External Flash (EMIFS) */
-> >> -    memory_region_init_ram(flash, NULL, "omap_sx1.flash0-0", flash_si=
-ze,
-> >> +    memory_region_init_rom(flash, NULL, "omap_sx1.flash0-0", flash_si=
-ze,
-> >>                              &error_fatal);
-> >> -    memory_region_set_readonly(flash, true);
-> >>       memory_region_add_subregion(address_space, OMAP_CS0_BASE, flash)=
-;
-> >>
-> >>       memory_region_init_io(&cs[0], NULL, &static_ops, &cs0val,
-> >> @@ -168,9 +167,8 @@ static void sx1_init(MachineState *machine, const =
-int version)
-> >>       if ((version =3D=3D 1) &&
-> >>               (dinfo =3D drive_get(IF_PFLASH, 0, fl_idx)) !=3D NULL) {
-> >>           MemoryRegion *flash_1 =3D g_new(MemoryRegion, 1);
-> >> -        memory_region_init_ram(flash_1, NULL, "omap_sx1.flash1-0",
-> >> +        memory_region_init_rom(flash_1, NULL, "omap_sx1.flash1-0",
-> >>                                  flash1_size, &error_fatal);
-> >> -        memory_region_set_readonly(flash_1, true);
-> >>           memory_region_add_subregion(address_space, OMAP_CS1_BASE, fl=
-ash_1);
-> >>
-> >>           memory_region_init_io(&cs[1], NULL, &static_ops, &cs1val,
-> >> diff --git a/hw/arm/palm.c b/hw/arm/palm.c
-> >> index 72eca8cc55..265d5891a6 100644
-> >> --- a/hw/arm/palm.c
-> >> +++ b/hw/arm/palm.c
-> >> @@ -206,9 +206,8 @@ static void palmte_init(MachineState *machine)
-> >>       mpu =3D omap310_mpu_init(dram, machine->cpu_type);
-> >>
-> >>       /* External Flash (EMIFS) */
-> >> -    memory_region_init_ram(flash, NULL, "palmte.flash", flash_size,
-> >> +    memory_region_init_rom(flash, NULL, "palmte.flash", flash_size,
-> >>                              &error_fatal);
-> >> -    memory_region_set_readonly(flash, true);
-> >>       memory_region_add_subregion(address_space_mem, OMAP_CS0_BASE, fl=
-ash);
-> >>
-> >>       memory_region_init_io(&cs[0], NULL, &static_ops, &cs0val, "palmt=
-e-cs0",
-> >> diff --git a/hw/arm/spitz.c b/hw/arm/spitz.c
-> >> index e001088103..1d27399721 100644
-> >> --- a/hw/arm/spitz.c
-> >> +++ b/hw/arm/spitz.c
-> >> @@ -924,8 +924,7 @@ static void spitz_common_init(MachineState *machin=
-e,
-> >>
-> >>       sl_flash_register(mpu, (model =3D=3D spitz) ? FLASH_128M : FLASH=
-_1024M);
-> >>
-> >> -    memory_region_init_ram(rom, NULL, "spitz.rom", SPITZ_ROM, &error_=
-fatal);
-> >> -    memory_region_set_readonly(rom, true);
-> >> +    memory_region_init_rom(rom, NULL, "spitz.rom", SPITZ_ROM, &error_=
-fatal);
-> >>       memory_region_add_subregion(address_space_mem, 0, rom);
-> >>
-> >>       /* Setup peripherals */
-> >> diff --git a/hw/arm/stellaris.c b/hw/arm/stellaris.c
-> >> index 221a78674e..d136ba1a92 100644
-> >> --- a/hw/arm/stellaris.c
-> >> +++ b/hw/arm/stellaris.c
-> >> @@ -1300,9 +1300,8 @@ static void stellaris_init(MachineState *ms, ste=
-llaris_board_info *board)
-> >>       sram_size =3D ((board->dc0 >> 18) + 1) * 1024;
-> >>
-> >>       /* Flash programming is done via the SCU, so pretend it is ROM. =
- */
-> >> -    memory_region_init_ram(flash, NULL, "stellaris.flash", flash_size=
-,
-> >> +    memory_region_init_rom(flash, NULL, "stellaris.flash", flash_size=
-,
-> >>                              &error_fatal);
-> >> -    memory_region_set_readonly(flash, true);
-> >>       memory_region_add_subregion(system_memory, 0, flash);
-> >>
-> >>       memory_region_init_ram(sram, NULL, "stellaris.sram", sram_size,
-> >> diff --git a/hw/arm/tosa.c b/hw/arm/tosa.c
-> >> index 4d95a1f3e2..5dee2d76c6 100644
-> >> --- a/hw/arm/tosa.c
-> >> +++ b/hw/arm/tosa.c
-> >> @@ -226,8 +226,7 @@ static void tosa_init(MachineState *machine)
-> >>
-> >>       mpu =3D pxa255_init(address_space_mem, tosa_binfo.ram_size);
-> >>
-> >> -    memory_region_init_ram(rom, NULL, "tosa.rom", TOSA_ROM, &error_fa=
-tal);
-> >> -    memory_region_set_readonly(rom, true);
-> >> +    memory_region_init_rom(rom, NULL, "tosa.rom", TOSA_ROM, &error_fa=
-tal);
-> >>       memory_region_add_subregion(address_space_mem, 0, rom);
-> >>
-> >>       tmio =3D tc6393xb_init(address_space_mem, 0x10000000,
-> >> --
-> >> 2.21.1
-> >>
-> >>
-> >
->
+> Thanks,
+> Laurent
 
