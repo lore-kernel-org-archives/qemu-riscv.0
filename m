@@ -1,93 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1j6v1Z-0003df-E4
-	for mharc-qemu-riscv@gnu.org; Wed, 26 Feb 2020 06:38:45 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:56783)
+	id 1j711i-0000mK-OM
+	for mharc-qemu-riscv@gnu.org; Wed, 26 Feb 2020 13:03:18 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:36513)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <aleksandar.m.mail@gmail.com>) id 1j6v1W-0003WQ-4C
- for qemu-riscv@nongnu.org; Wed, 26 Feb 2020 06:38:43 -0500
+ (envelope-from <alistair23@gmail.com>) id 1j711g-0000ku-2Y
+ for qemu-riscv@nongnu.org; Wed, 26 Feb 2020 13:03:17 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <aleksandar.m.mail@gmail.com>) id 1j6v1U-0001dD-5x
- for qemu-riscv@nongnu.org; Wed, 26 Feb 2020 06:38:42 -0500
-Received: from mail-ot1-x342.google.com ([2607:f8b0:4864:20::342]:44368)
+ (envelope-from <alistair23@gmail.com>) id 1j711e-00043O-Oy
+ for qemu-riscv@nongnu.org; Wed, 26 Feb 2020 13:03:15 -0500
+Received: from mail-lf1-x141.google.com ([2a00:1450:4864:20::141]:46511)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <aleksandar.m.mail@gmail.com>)
- id 1j6v1I-0001B2-FC; Wed, 26 Feb 2020 06:38:28 -0500
-Received: by mail-ot1-x342.google.com with SMTP id h9so2612734otj.11;
- Wed, 26 Feb 2020 03:38:28 -0800 (PST)
+ (Exim 4.71) (envelope-from <alistair23@gmail.com>)
+ id 1j711e-00042Y-HV; Wed, 26 Feb 2020 13:03:14 -0500
+Received: by mail-lf1-x141.google.com with SMTP id v6so1735036lfo.13;
+ Wed, 26 Feb 2020 10:03:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:in-reply-to:references:from:date:message-id:subject:to
- :cc; bh=ccsFE83qNAPbqZpbD6TR1q94Avth12/WtUGJcx1UV4U=;
- b=nVt3YuRB0mdL7ae7kuUct1iBfuvWAeq70L0IFy1al3TiBW9qLXpgKM5McxpGfjV3I5
- Uc/wK719kxtt0zzgWKACVpvO5GPVs6W4vTF24weGpoqMFGXDG/SgJre/afgAhRAXXGJg
- Op/kUYsotTEtlcMIGygau76e10Shz3ot2YlH1oikDpuR6tNEhjOP9T2kPazV7SOshbHE
- k+plPLEAWD9YDZeZYntIDHEQZMs01icvcJn5x//sYtjsZUiQdZccRFGr5KAec/Melhty
- YSxvCKokzun4M7MoJI9O/mkPQZOcYC04rIkeSIzreCOwwvlKJCQlzmblId8GAMMj4lfE
- oPHg==
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=McGgSaZlcFv8eVYrlkvr8E4Xon69cH6tZoFAdSnivCA=;
+ b=VTgtGFTAbvKQyaDfGjLWd3L7nP0vZQJpr6ssfQ82kte19n9pSF6CnqUwi0t6+ay5Lj
+ 0czsCLvAKRABgbLdAY/nNQ3OWGQu8N+pg9LxqrxV2Wz0J4mUQFQdFhscbYk0yQwaViZl
+ DfUdJ+y9mLNOimObhpTaU97pufZwjj16RErkQJiM7OkxDz0nRY87RGKmmhxQToUtUGIA
+ b15Mq3hGU+oOYE9haCvt1xIbhL2Cb5oMkWkliwBF8thIsV81EMZEuW29HO9hzSXMvlp3
+ tO2CbpQP2O5UzUbImuLiKnBxmDjetaiiF1/gdhOxw+FfhVKW2ZG4bhmB+HTL725skHV7
+ mtjQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=ccsFE83qNAPbqZpbD6TR1q94Avth12/WtUGJcx1UV4U=;
- b=I+Q0O8Q50yeI+Topwb+Ytiviav0ace2sVBPyorr1Z481XmWITWCd/4wTujfKqqb1nB
- +5ciP2p03bG1gFOHquvMubW/ch/xPR99zNpUF0yDXur5teIKtWlYDXw8HGDcBGEFw0oe
- k72ubwZXd14O0Id448mEFO9mP6/NRjxBskf1gvzRI2kylgpt9Jb+X/CQwduP5tZmXtDr
- 56sUMKBR6I/2kubHrrMjNUR4jXqXgMj3ywrLlaUiKSyL0LlLD1PYntiWl9pBimd20sIj
- MyBFZ4q6huUmFiE9DBeS9KdRj16P2BI8O//1DTde7mKDCPSYfRn4kyXW+ks7ezEjEWAd
- YbGg==
-X-Gm-Message-State: APjAAAW/ci+Ad7NgKUzh3pV3fJVNYwUFhDz4LZAizfNymc9OKC2YQZD/
- cgGAVIMl7y+omOBqLoi+eDe6kETQXsQqW/76nsM=
-X-Google-Smtp-Source: APXvYqy8JRw8WtzzT/u5doN0Q6NXNYIyq3SXohc/WRUbpHhQCHv5s8+0MC792PwNzHhu3iko/ijrm8FH/ytkQ9suWsw=
-X-Received: by 2002:a05:6830:1042:: with SMTP id
- b2mr2577487otp.306.1582717107523; 
- Wed, 26 Feb 2020 03:38:27 -0800 (PST)
+ bh=McGgSaZlcFv8eVYrlkvr8E4Xon69cH6tZoFAdSnivCA=;
+ b=c6jSFonUk2DuIOxPX11MOTDf9MYs4A0pzlua8/IBkjUN5x9dKvpm3n5EgXgb3Wa3+i
+ Tlw18vObnxZ5mpoUYKNhOhidFiF+OrJPJhj0u4Y+2TUOhK2URlGCD6mkXY7NsRA2KlMN
+ V5p0QgIWxy927NaHSySze6n3XOeYHeUj3dT3oABdEYCvlngRpSC+nr91vavJRP54rumI
+ 22dOH2QECejBkDt3cvDpDsaqBjxWRIiPdwlC294kC4ubbRdKD3l97QFH8tRQ2vYoAl+z
+ ZffDSArJ9V0C2TwIooPUOWdZIjqqKRCgDfKcboWd/sNMfosExWj0G/226fH++PEKUGMC
+ N5wg==
+X-Gm-Message-State: APjAAAVHjW8npbo6/wei3Rb9FeEYDdApjJZNEntLb7n+UhWmLXp7lPoX
+ erPams72c3fDHklh6M3jXDnW1r4pvjW7ggujc8o=
+X-Google-Smtp-Source: APXvYqwzsKnBJfHFKrPyPl+BlL5qgDsM1htqXS96QNVIeQZhpA3Y5eipP3y1FcxaaWW0UWuCIv0IPTi7yERK/8CXPLU=
+X-Received: by 2002:a19:4a:: with SMTP id 71mr3222313lfa.50.1582740192820;
+ Wed, 26 Feb 2020 10:03:12 -0800 (PST)
 MIME-Version: 1.0
-Received: by 2002:a9d:d21:0:0:0:0:0 with HTTP;
- Wed, 26 Feb 2020 03:38:27 -0800 (PST)
-In-Reply-To: <20200224205533.23798-8-philmd@redhat.com>
-References: <20200224205533.23798-1-philmd@redhat.com>
- <20200224205533.23798-8-philmd@redhat.com>
-From: Aleksandar Markovic <aleksandar.m.mail@gmail.com>
-Date: Wed, 26 Feb 2020 12:38:27 +0100
-Message-ID: <CAL1e-=hJaaS4s=FnRhD4Bs7HOVom6WDvOMWya3359xzMPufYgA@mail.gmail.com>
-Subject: Re: [PATCH RESEND v2 07/32] hw/mips: Use memory_region_init_rom()
- with read-only regions
-To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>
-Cc: "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>,
- Paolo Bonzini <pbonzini@redhat.com>, 
- Peter Maydell <peter.maydell@linaro.org>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- "Michael S. Tsirkin" <mst@redhat.com>, Jason Wang <jasowang@redhat.com>, 
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>, 
- KONRAD Frederic <frederic.konrad@adacore.com>,
- Alistair Francis <Alistair.Francis@wdc.com>, 
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Subbaraya Sundeep <sundeep.lkml@gmail.com>, 
- "qemu-block@nongnu.org" <qemu-block@nongnu.org>,
- Magnus Damm <magnus.damm@gmail.com>, 
- =?UTF-8?Q?Herv=C3=A9_Poussineau?= <hpoussin@reactos.org>, 
- Joel Stanley <joel@jms.id.au>,
- =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>, 
- Aleksandar Rikalo <aleksandar.rikalo@rt-rk.com>,
- David Gibson <david@gibson.dropbear.id.au>, 
- Artyom Tarasenko <atar4qemu@gmail.com>, Eduardo Habkost <ehabkost@redhat.com>, 
- Jean-Christophe Dubois <jcd@tribudubois.net>,
- Alistair Francis <alistair@alistair23.me>, 
- Fabien Chouteau <chouteau@adacore.com>,
- "qemu-arm@nongnu.org" <qemu-arm@nongnu.org>, 
- Peter Chubb <peter.chubb@nicta.com.au>, Palmer Dabbelt <palmer@dabbelt.com>, 
- Richard Henderson <rth@twiddle.net>, Kevin Wolf <kwolf@redhat.com>, 
- "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>,
- Igor Mitsyanko <i.mitsyanko@gmail.com>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Laurent Vivier <laurent@vivier.eu>, 
- Max Reitz <mreitz@redhat.com>, Michael Walle <michael@walle.cc>, 
- "qemu-ppc@nongnu.org" <qemu-ppc@nongnu.org>,
- Aleksandar Markovic <amarkovic@wavecomp.com>, 
- Aurelien Jarno <aurelien@aurel32.net>
-Content-Type: multipart/alternative; boundary="000000000000f955f9059f790a2a"
+References: <0c4859f90948ba392da456c9e1daf8fde8f5b22e.1582453384.git.rajnesh.kanwal49@gmail.com>
+ <CAC41xo0PWCZw4mrcEfRq9fv+b3mSk9sN0mWhFXPwgdD6LR8xnQ@mail.gmail.com>
+ <CAKmqyKNn8V0yWA8t7dQeMwxcnmywDJoGKag9vQzwFruaygKL7Q@mail.gmail.com>
+ <CAHfcQ+HiNB+Tch2_EVS74_ii-NhUEXMFYCf1R_0nrRfvuRxqgQ@mail.gmail.com>
+In-Reply-To: <CAHfcQ+HiNB+Tch2_EVS74_ii-NhUEXMFYCf1R_0nrRfvuRxqgQ@mail.gmail.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Wed, 26 Feb 2020 09:55:34 -0800
+Message-ID: <CAKmqyKMDPXLig4E4VJvqwvd7O7DtFD0PmWD44zoGDY-izJLsHQ@mail.gmail.com>
+Subject: Re: [PATCH 1/1] target/riscv: Fix VS mode interrupts forwarding.
+To: Rajnesh Kanwal <rajnesh.kanwal49@gmail.com>
+Cc: Jose Martins <josemartins90@gmail.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Palmer Dabbelt <palmerdabbelt@google.com>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::342
+X-Received-From: 2a00:1450:4864:20::141
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -99,257 +70,84 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Feb 2020 11:38:44 -0000
+X-List-Received-Date: Wed, 26 Feb 2020 18:03:17 -0000
 
---000000000000f955f9059f790a2a
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On Wed, Feb 26, 2020 at 12:54 AM Rajnesh Kanwal
+<rajnesh.kanwal49@gmail.com> wrote:
+>
+> Here is the link to the patch
+> https://lists.nongnu.org/archive/html/qemu-riscv/2020-01/msg00191.html
 
-On Monday, February 24, 2020, Philippe Mathieu-Daud=C3=A9 <philmd@redhat.co=
-m>
-wrote:
+Ah, it doesn't look like it made it to the QEMU-devel list. Can you
+re-send it to QEMU-devel?
 
-> This commit was produced with the Coccinelle script
-> scripts/coccinelle/memory-region-housekeeping.cocci.
->
-> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
-> ---
+Alistair
 
-
-Reviewed-by: Aleksandar Markovic <amarkovic@wavecomp.com>
-
-Will be applied to the next MIPS queue, planned to be sent in next few days=
-.
-
-
->  hw/mips/mips_fulong2e.c | 3 +--
->  hw/mips/mips_jazz.c     | 6 ++----
->  hw/mips/mips_mipssim.c  | 3 +--
->  hw/mips/mips_r4k.c      | 3 +--
->  4 files changed, 5 insertions(+), 10 deletions(-)
 >
-> diff --git a/hw/mips/mips_fulong2e.c b/hw/mips/mips_fulong2e.c
-> index 2e043cbb98..547a7d3a45 100644
-> --- a/hw/mips/mips_fulong2e.c
-> +++ b/hw/mips/mips_fulong2e.c
-> @@ -319,9 +319,8 @@ static void mips_fulong2e_init(MachineState *machine)
+> -Rajnesh
 >
->      /* allocate RAM */
->      memory_region_allocate_system_memory(ram, NULL, "fulong2e.ram",
-> ram_size);
-> -    memory_region_init_ram(bios, NULL, "fulong2e.bios", BIOS_SIZE,
-> +    memory_region_init_rom(bios, NULL, "fulong2e.bios", BIOS_SIZE,
->                             &error_fatal);
-> -    memory_region_set_readonly(bios, true);
->
->      memory_region_add_subregion(address_space_mem, 0, ram);
->      memory_region_add_subregion(address_space_mem, 0x1fc00000LL, bios);
-> diff --git a/hw/mips/mips_jazz.c b/hw/mips/mips_jazz.c
-> index 66fd4d867d..cf47335ea5 100644
-> --- a/hw/mips/mips_jazz.c
-> +++ b/hw/mips/mips_jazz.c
-> @@ -195,9 +195,8 @@ static void mips_jazz_init(MachineState *machine,
->                                           machine->ram_size);
->      memory_region_add_subregion(address_space, 0, ram);
->
-> -    memory_region_init_ram(bios, NULL, "mips_jazz.bios", MAGNUM_BIOS_SIZ=
-E,
-> +    memory_region_init_rom(bios, NULL, "mips_jazz.bios", MAGNUM_BIOS_SIZ=
-E,
->                             &error_fatal);
-> -    memory_region_set_readonly(bios, true);
->      memory_region_init_alias(bios2, NULL, "mips_jazz.bios", bios,
->                               0, MAGNUM_BIOS_SIZE);
->      memory_region_add_subregion(address_space, 0x1fc00000LL, bios);
-> @@ -263,9 +262,8 @@ static void mips_jazz_init(MachineState *machine,
->          {
->              /* Simple ROM, so user doesn't have to provide one */
->              MemoryRegion *rom_mr =3D g_new(MemoryRegion, 1);
-> -            memory_region_init_ram(rom_mr, NULL, "g364fb.rom", 0x80000,
-> +            memory_region_init_rom(rom_mr, NULL, "g364fb.rom", 0x80000,
->                                     &error_fatal);
-> -            memory_region_set_readonly(rom_mr, true);
->              uint8_t *rom =3D memory_region_get_ram_ptr(rom_mr);
->              memory_region_add_subregion(address_space, 0x60000000,
-> rom_mr);
->              rom[0] =3D 0x10; /* Mips G364 */
-> diff --git a/hw/mips/mips_mipssim.c b/hw/mips/mips_mipssim.c
-> index b934ca9d51..3fdbb21680 100644
-> --- a/hw/mips/mips_mipssim.c
-> +++ b/hw/mips/mips_mipssim.c
-> @@ -169,9 +169,8 @@ mips_mipssim_init(MachineState *machine)
->      /* Allocate RAM. */
->      memory_region_allocate_system_memory(ram, NULL, "mips_mipssim.ram",
->                                           ram_size);
-> -    memory_region_init_ram(bios, NULL, "mips_mipssim.bios", BIOS_SIZE,
-> +    memory_region_init_rom(bios, NULL, "mips_mipssim.bios", BIOS_SIZE,
->                             &error_fatal);
-> -    memory_region_set_readonly(bios, true);
->
->      memory_region_add_subregion(address_space_mem, 0, ram);
->
-> diff --git a/hw/mips/mips_r4k.c b/hw/mips/mips_r4k.c
-> index b2aec434c3..54b286ceee 100644
-> --- a/hw/mips/mips_r4k.c
-> +++ b/hw/mips/mips_r4k.c
-> @@ -241,9 +241,8 @@ void mips_r4k_init(MachineState *machine)
->      dinfo =3D drive_get(IF_PFLASH, 0, 0);
->      if ((bios_size > 0) && (bios_size <=3D BIOS_SIZE)) {
->          bios =3D g_new(MemoryRegion, 1);
-> -        memory_region_init_ram(bios, NULL, "mips_r4k.bios", BIOS_SIZE,
-> +        memory_region_init_rom(bios, NULL, "mips_r4k.bios", BIOS_SIZE,
->                                 &error_fatal);
-> -        memory_region_set_readonly(bios, true);
->          memory_region_add_subregion(get_system_memory(), 0x1fc00000,
-> bios);
->
->          load_image_targphys(filename, 0x1fc00000, BIOS_SIZE);
-> --
-> 2.21.1
->
->
->
-
---000000000000f955f9059f790a2a
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<br><br>On Monday, February 24, 2020, Philippe Mathieu-Daud=C3=A9 &lt;<a hr=
-ef=3D"mailto:philmd@redhat.com">philmd@redhat.com</a>&gt; wrote:<br><blockq=
-uote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc =
-solid;padding-left:1ex">This commit was produced with the Coccinelle script=
-<br>
-scripts/coccinelle/memory-<wbr>region-housekeeping.cocci.<br>
-<br>
-Signed-off-by: Philippe Mathieu-Daud=C3=A9 &lt;<a href=3D"mailto:philmd@red=
-hat.com">philmd@redhat.com</a>&gt;<br>
----</blockquote><div><br></div><div>Reviewed-by: Aleksandar Markovic &lt;<a=
- href=3D"mailto:amarkovic@wavecomp.com">amarkovic@wavecomp.com</a>&gt;<br><=
-/div><div><br></div><div>Will be applied to the next MIPS queue, planned to=
- be sent in next few days.</div><div>=C2=A0</div><blockquote class=3D"gmail=
-_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:=
-1ex">
-=C2=A0hw/mips/mips_fulong2e.c | 3 +--<br>
-=C2=A0hw/mips/mips_jazz.c=C2=A0 =C2=A0 =C2=A0| 6 ++----<br>
-=C2=A0hw/mips/mips_mipssim.c=C2=A0 | 3 +--<br>
-=C2=A0hw/mips/mips_r4k.c=C2=A0 =C2=A0 =C2=A0 | 3 +--<br>
-=C2=A04 files changed, 5 insertions(+), 10 deletions(-)<br>
-<br>
-diff --git a/hw/mips/mips_fulong2e.c b/hw/mips/mips_fulong2e.c<br>
-index 2e043cbb98..547a7d3a45 100644<br>
---- a/hw/mips/mips_fulong2e.c<br>
-+++ b/hw/mips/mips_fulong2e.c<br>
-@@ -319,9 +319,8 @@ static void mips_fulong2e_init(<wbr>MachineState *machi=
-ne)<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0/* allocate RAM */<br>
-=C2=A0 =C2=A0 =C2=A0memory_region_allocate_system_<wbr>memory(ram, NULL, &q=
-uot;fulong2e.ram&quot;, ram_size);<br>
--=C2=A0 =C2=A0 memory_region_init_ram(bios, NULL, &quot;fulong2e.bios&quot;=
-, BIOS_SIZE,<br>
-+=C2=A0 =C2=A0 memory_region_init_rom(bios, NULL, &quot;fulong2e.bios&quot;=
-, BIOS_SIZE,<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 &amp;error_fatal);<br>
--=C2=A0 =C2=A0 memory_region_set_readonly(<wbr>bios, true);<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0memory_region_add_subregion(<wbr>address_space_mem, 0, =
-ram);<br>
-=C2=A0 =C2=A0 =C2=A0memory_region_add_subregion(<wbr>address_space_mem, 0x1=
-fc00000LL, bios);<br>
-diff --git a/hw/mips/mips_jazz.c b/hw/mips/mips_jazz.c<br>
-index 66fd4d867d..cf47335ea5 100644<br>
---- a/hw/mips/mips_jazz.c<br>
-+++ b/hw/mips/mips_jazz.c<br>
-@@ -195,9 +195,8 @@ static void mips_jazz_init(MachineState *machine,<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 m=
-achine-&gt;ram_size);<br>
-=C2=A0 =C2=A0 =C2=A0memory_region_add_subregion(<wbr>address_space, 0, ram)=
-;<br>
-<br>
--=C2=A0 =C2=A0 memory_region_init_ram(bios, NULL, &quot;mips_jazz.bios&quot=
-;, MAGNUM_BIOS_SIZE,<br>
-+=C2=A0 =C2=A0 memory_region_init_rom(bios, NULL, &quot;mips_jazz.bios&quot=
-;, MAGNUM_BIOS_SIZE,<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 &amp;error_fatal);<br>
--=C2=A0 =C2=A0 memory_region_set_readonly(<wbr>bios, true);<br>
-=C2=A0 =C2=A0 =C2=A0memory_region_init_alias(<wbr>bios2, NULL, &quot;mips_j=
-azz.bios&quot;, bios,<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0, MAGNUM_BIOS_SIZE);<br>
-=C2=A0 =C2=A0 =C2=A0memory_region_add_subregion(<wbr>address_space, 0x1fc00=
-000LL, bios);<br>
-@@ -263,9 +262,8 @@ static void mips_jazz_init(MachineState *machine,<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0{<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0/* Simple ROM, so user does=
-n&#39;t have to provide one */<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0MemoryRegion *rom_mr =3D g_=
-new(MemoryRegion, 1);<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 memory_region_init_ram(rom_mr, N=
-ULL, &quot;g364fb.rom&quot;, 0x80000,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 memory_region_init_rom(rom_mr, N=
-ULL, &quot;g364fb.rom&quot;, 0x80000,<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &amp;error_fatal);<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 memory_region_set_readonly(<wbr>=
-rom_mr, true);<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0uint8_t *rom =3D memory_reg=
-ion_get_ram_ptr(rom_<wbr>mr);<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0memory_region_add_subregion=
-(<wbr>address_space, 0x60000000, rom_mr);<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0rom[0] =3D 0x10; /* Mips G3=
-64 */<br>
-diff --git a/hw/mips/mips_mipssim.c b/hw/mips/mips_mipssim.c<br>
-index b934ca9d51..3fdbb21680 100644<br>
---- a/hw/mips/mips_mipssim.c<br>
-+++ b/hw/mips/mips_mipssim.c<br>
-@@ -169,9 +169,8 @@ mips_mipssim_init(MachineState *machine)<br>
-=C2=A0 =C2=A0 =C2=A0/* Allocate RAM. */<br>
-=C2=A0 =C2=A0 =C2=A0memory_region_allocate_system_<wbr>memory(ram, NULL, &q=
-uot;mips_mipssim.ram&quot;,<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 r=
-am_size);<br>
--=C2=A0 =C2=A0 memory_region_init_ram(bios, NULL, &quot;mips_mipssim.bios&q=
-uot;, BIOS_SIZE,<br>
-+=C2=A0 =C2=A0 memory_region_init_rom(bios, NULL, &quot;mips_mipssim.bios&q=
-uot;, BIOS_SIZE,<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 &amp;error_fatal);<br>
--=C2=A0 =C2=A0 memory_region_set_readonly(<wbr>bios, true);<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0memory_region_add_subregion(<wbr>address_space_mem, 0, =
-ram);<br>
-<br>
-diff --git a/hw/mips/mips_r4k.c b/hw/mips/mips_r4k.c<br>
-index b2aec434c3..54b286ceee 100644<br>
---- a/hw/mips/mips_r4k.c<br>
-+++ b/hw/mips/mips_r4k.c<br>
-@@ -241,9 +241,8 @@ void mips_r4k_init(MachineState *machine)<br>
-=C2=A0 =C2=A0 =C2=A0dinfo =3D drive_get(IF_PFLASH, 0, 0);<br>
-=C2=A0 =C2=A0 =C2=A0if ((bios_size &gt; 0) &amp;&amp; (bios_size &lt;=3D BI=
-OS_SIZE)) {<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0bios =3D g_new(MemoryRegion, 1);<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 memory_region_init_ram(bios, NULL, &quot;mips_=
-r4k.bios&quot;, BIOS_SIZE,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 memory_region_init_rom(bios, NULL, &quot;mips_=
-r4k.bios&quot;, BIOS_SIZE,<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &amp;error_fatal);<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 memory_region_set_readonly(<wbr>bios, true);<b=
-r>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0memory_region_add_subregion(<wbr>get_syst=
-em_memory(), 0x1fc00000, bios);<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0load_image_targphys(filename, 0x1fc00000,=
- BIOS_SIZE);<br>
--- <br>
-2.21.1<br>
-<br>
-<br>
-</blockquote>
-
---000000000000f955f9059f790a2a--
+> On Tue, Feb 25, 2020 at 12:06 AM Alistair Francis <alistair23@gmail.com> wrote:
+>>
+>> On Sun, Feb 23, 2020 at 11:23 AM Jose Martins <josemartins90@gmail.com> wrote:
+>> >
+>> > Hello rajnesh,
+>> >
+>> > I had already submitted almost this exact patch a few weeks ago.
+>>
+>> To QEMU? I don't see the patch.
+>>
+>> Alistair
+>>
+>> >
+>> > Jose
+>> >
+>> > On Sun, 23 Feb 2020 at 13:51, <rajnesh.kanwal49@gmail.com> wrote:
+>> > >
+>> > > From: Rajnesh Kanwal <rajnesh.kanwal49@gmail.com>
+>> > >
+>> > > Currently riscv_cpu_local_irq_pending is used to find out pending
+>> > > interrupt and VS mode interrupts are being shifted to represent
+>> > > S mode interrupts in this function. So when the cause returned by
+>> > > this function is passed to riscv_cpu_do_interrupt to actually
+>> > > forward the interrupt, the VS mode forwarding check does not work
+>> > > as intended and interrupt is actually forwarded to hypervisor. This
+>> > > patch fixes this issue.
+>> > >
+>> > > Signed-off-by: Rajnesh Kanwal <rajnesh.kanwal49@gmail.com>
+>> > > ---
+>> > >  target/riscv/cpu_helper.c | 9 ++++++++-
+>> > >  1 file changed, 8 insertions(+), 1 deletion(-)
+>> > >
+>> > > diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+>> > > index b9e90dfd9a..59535ecba6 100644
+>> > > --- a/target/riscv/cpu_helper.c
+>> > > +++ b/target/riscv/cpu_helper.c
+>> > > @@ -46,7 +46,7 @@ static int riscv_cpu_local_irq_pending(CPURISCVState *env)
+>> > >      target_ulong pending = env->mip & env->mie &
+>> > >                                 ~(MIP_VSSIP | MIP_VSTIP | MIP_VSEIP);
+>> > >      target_ulong vspending = (env->mip & env->mie &
+>> > > -                              (MIP_VSSIP | MIP_VSTIP | MIP_VSEIP)) >> 1;
+>> > > +                              (MIP_VSSIP | MIP_VSTIP | MIP_VSEIP));
+>> > >
+>> > >      target_ulong mie    = env->priv < PRV_M ||
+>> > >                            (env->priv == PRV_M && mstatus_mie);
+>> > > @@ -900,6 +900,13 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+>> > >
+>> > >              if (riscv_cpu_virt_enabled(env) && ((hdeleg >> cause) & 1) &&
+>> > >                  !force_hs_execp) {
+>> > > +                /*
+>> > > +                 * See if we need to adjust cause. Yes if its VS mode interrupt
+>> > > +                 * no if hypervisor has delegated one of hs mode's interrupt
+>> > > +                 */
+>> > > +                if (cause == IRQ_VS_TIMER || cause == IRQ_VS_SOFT ||
+>> > > +                    cause == IRQ_VS_EXT)
+>> > > +                    cause = cause - 1;
+>> > >                  /* Trap to VS mode */
+>> > >              } else if (riscv_cpu_virt_enabled(env)) {
+>> > >                  /* Trap into HS mode, from virt */
+>> > > --
+>> > > 2.17.1
+>> > >
+>> > >
+>> >
 
