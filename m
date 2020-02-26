@@ -1,78 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1j6rIU-0001CD-F6
-	for mharc-qemu-riscv@gnu.org; Wed, 26 Feb 2020 02:39:58 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:46333)
+	id 1j6sSJ-0003uh-Ua
+	for mharc-qemu-riscv@gnu.org; Wed, 26 Feb 2020 03:54:11 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49636)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <alex.bennee@linaro.org>) id 1j6rIP-00016d-NP
- for qemu-riscv@nongnu.org; Wed, 26 Feb 2020 02:39:56 -0500
+ (envelope-from <rajnesh.kanwal49@gmail.com>) id 1j6sSG-0003mU-CB
+ for qemu-riscv@nongnu.org; Wed, 26 Feb 2020 03:54:09 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alex.bennee@linaro.org>) id 1j6rIO-0002yG-5x
- for qemu-riscv@nongnu.org; Wed, 26 Feb 2020 02:39:53 -0500
-Received: from mail-wm1-x332.google.com ([2a00:1450:4864:20::332]:38947)
+ (envelope-from <rajnesh.kanwal49@gmail.com>) id 1j6sSE-0006U0-Sb
+ for qemu-riscv@nongnu.org; Wed, 26 Feb 2020 03:54:08 -0500
+Received: from mail-wm1-x342.google.com ([2a00:1450:4864:20::342]:36070)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <alex.bennee@linaro.org>)
- id 1j6rIN-0002wF-VQ
- for qemu-riscv@nongnu.org; Wed, 26 Feb 2020 02:39:52 -0500
-Received: by mail-wm1-x332.google.com with SMTP id c84so1840720wme.4
- for <qemu-riscv@nongnu.org>; Tue, 25 Feb 2020 23:39:51 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=oo1uiMU4weHOj8ZrNchtQRvpbKwMX83OT5bJ28vnSC8=;
- b=KaCA/TJFb5BAE1nwY2N8NQTOLYCCCQBHzqiIa9imCxOo3I6GbXHhTQ2GNU1YGP7L5k
- DUubDlkYQoiknw13ifdFJKf+zvbyRYTaPHp2I7YvJ8Omd/j1oKahhz3RGX/bZGUUfeT7
- HRXqwLIhmLIXuIdjpmj5Nz+U+8R+EuigeRL7Ulj9kswnE65tCXQFmPe/e975Z7JHIrV5
- Zy029S/bW9AX6YzfC+Bd5NO00MYfiNz/UtwWzEI13UYjrhuzo/FxErqf2PZ/xIcrUOvh
- OEhP5ocFrlSOdYvRDnKIcUsOI9VgBq/l/P6dzfkTwXFOEIE7QBc7rbcANvMtCFavsn6f
- 9jhQ==
+ (Exim 4.71) (envelope-from <rajnesh.kanwal49@gmail.com>)
+ id 1j6sSE-0005w9-KD; Wed, 26 Feb 2020 03:54:06 -0500
+Received: by mail-wm1-x342.google.com with SMTP id p17so2072333wma.1;
+ Wed, 26 Feb 2020 00:54:00 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=77UeRA00tpxkV1oP3Uaprcm66fDND8K8Kbn82D8F8sI=;
+ b=cGzDY6+qJSwMUfjXQRfIPDsuDJkbZfVWJ45UO1fANphlnv+PqqLJ/T0mRjAiKXO2sW
+ mkXasrwcrgGU5wqkK2RGBKhznHoqs6/MYMQ2KjyWRdQbWvH2Z9sRiOPndZShoni9Rs9j
+ Ur1E2TF1q/wJXmOT5FVoClvEkv+5qmV4+Qo7y/TxXnjiqn+g0nVvu6gvZIKiCP4MRRIa
+ 2p74v2uDHdqEw8LXJr7akCDCGRGQ1j/hwx9UoXmLZ8Ix+Qq7KuzGQN/gV5PColgdraoB
+ Uh17l6znATA+qVugMpeJCxdtf6zeTz2+IwbdLsOm310z5X7kZaZn5h1gr/9V1Bg3s3nu
+ Oxnw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=oo1uiMU4weHOj8ZrNchtQRvpbKwMX83OT5bJ28vnSC8=;
- b=TsEbgC9N1UmKxHnO8sbKNpE5TxDvzw18C3iyG57XRSoOKl/odqu7jiH39dzlLK4ccD
- 8xn6m+PloBa041DZtRJ3Og8gvGSnND2ChBgblQAlw/p5g3xI8A9yfPncA50NSKFnaiJg
- 9FpteC5COoqtwL/8BZyeppnLa5IQCjSThbaiiYtDbL8Q/zZ3b7CDSbUhYP1tYCx1+Vj4
- 6eprG3aFQkkR08Bp3GCHSIWLh3EsGgwcN7gB0ZjU/4JNPGmu1HQGkdneM+pGz4NG+8By
- qQkjcGVtufiapiLrzOCoVqIxXyZ++6NtwIZ0GOAG/zsrB4EAPTPfUTUH6IgLgUsOlGsh
- +dLA==
-X-Gm-Message-State: APjAAAXmFXh73D1kXSpuYcyXrXxPLl85l7MoAXsVS8PC+lM4RSypt5NZ
- /UrUT/oqowcUqwWthpXCGeZrrA==
-X-Google-Smtp-Source: APXvYqw47TWImi64jxuHfvThK5PFJFI6MCEdlqHU20ud2UIFU68k+1oVSWvXTnMJnajUfcCoyeZM5w==
-X-Received: by 2002:a1c:6a15:: with SMTP id f21mr3724836wmc.126.1582702790893; 
- Tue, 25 Feb 2020 23:39:50 -0800 (PST)
-Received: from zen.linaroharston ([51.148.130.216])
- by smtp.gmail.com with ESMTPSA id n3sm2068217wrs.8.2020.02.25.23.39.38
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 25 Feb 2020 23:39:45 -0800 (PST)
-Received: from zen.home.arpa (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id 7DABD1FF9E;
- Wed, 26 Feb 2020 07:39:30 +0000 (GMT)
-From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: peter.maydell@linaro.org
-Cc: qemu-devel@nongnu.org,
- =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Richard Henderson <richard.henderson@linaro.org>,
- Alistair Francis <alistair.francis@wdc.com>,
- Robert Foley <robert.foley@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
-Subject: [PULL 14/19] target/riscv: progressively load the instruction during
- decode
-Date: Wed, 26 Feb 2020 07:39:24 +0000
-Message-Id: <20200226073929.28237-15-alex.bennee@linaro.org>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20200226073929.28237-1-alex.bennee@linaro.org>
-References: <20200226073929.28237-1-alex.bennee@linaro.org>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=77UeRA00tpxkV1oP3Uaprcm66fDND8K8Kbn82D8F8sI=;
+ b=Iw1Af1aFINNeKTzw3ySdNbr6F5bwFHdZe2b9tg5VO9gOSzE9gbQcAL5cEkhL6LNi0i
+ nZ5/AewwJNuB7CF/lM/G7Lo5j3mGLT4cE+/vv1YrgxSUWybmwCXuSGwUSoxHhDyIuCwZ
+ z5dOh8Z446eVTnKDmzWScFmDSU1dq7JBSjY4pD8UoXX44nJ16O8ByOC88N5LKQcpU4fs
+ Hhrfk8GDILQLaqBd6YnuL6SDMs5LkgiA24bozBdXoAO4SCEqg3NN91uSeYcfJJ2+45tw
+ RXrKyqb6VIOjQ1+QwbqiTb1cY1vBSUFU9O+kxThaaWwVKE20uQ8AcZVooVv3KrFDP0Zn
+ 7LNA==
+X-Gm-Message-State: APjAAAXFNwUzJ16/qqg5yCoMAkdF9snp5kEWYOBQ4WmyPPhEfd0HJs38
+ 2Sseyuo1lSxccvVSynJvHMl+2LfqemhdNTp+FIo=
+X-Google-Smtp-Source: APXvYqyCiUGq8ND2GaPq3aIjKu75/1asmEdplHV9kILRh6871ZhavHYRh5dIEJAmTBvRKu1HviycrRM6d6O3D6nwKaQ=
+X-Received: by 2002:a05:600c:214f:: with SMTP id
+ v15mr4302656wml.110.1582707239401; 
+ Wed, 26 Feb 2020 00:53:59 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <0c4859f90948ba392da456c9e1daf8fde8f5b22e.1582453384.git.rajnesh.kanwal49@gmail.com>
+ <CAC41xo0PWCZw4mrcEfRq9fv+b3mSk9sN0mWhFXPwgdD6LR8xnQ@mail.gmail.com>
+ <CAKmqyKNn8V0yWA8t7dQeMwxcnmywDJoGKag9vQzwFruaygKL7Q@mail.gmail.com>
+In-Reply-To: <CAKmqyKNn8V0yWA8t7dQeMwxcnmywDJoGKag9vQzwFruaygKL7Q@mail.gmail.com>
+From: Rajnesh Kanwal <rajnesh.kanwal49@gmail.com>
+Date: Wed, 26 Feb 2020 13:52:52 +0500
+Message-ID: <CAHfcQ+HiNB+Tch2_EVS74_ii-NhUEXMFYCf1R_0nrRfvuRxqgQ@mail.gmail.com>
+Subject: Re: [PATCH 1/1] target/riscv: Fix VS mode interrupts forwarding.
+To: Alistair Francis <alistair23@gmail.com>
+Cc: Jose Martins <josemartins90@gmail.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Palmer Dabbelt <palmerdabbelt@google.com>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
+Content-Type: multipart/alternative; boundary="000000000000c9bbdd059f76be0d"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::332
+X-Received-From: 2a00:1450:4864:20::342
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -84,161 +70,198 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Feb 2020 07:39:56 -0000
+X-List-Received-Date: Wed, 26 Feb 2020 08:54:10 -0000
 
-The plugin system would throw up a harmless warning when it detected
-that a disassembly of an instruction didn't use all it's bytes. Fix
-the riscv decoder to only load the instruction bytes it needs as it
-needs them.
+--000000000000c9bbdd059f76be0d
+Content-Type: text/plain; charset="UTF-8"
 
-This drops opcode from the ctx in favour if passing the appropriately
-sized opcode down a few levels of the decode.
+Here is the link to the patch
+https://lists.nongnu.org/archive/html/qemu-riscv/2020-01/msg00191.html
 
-Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Robert Foley <robert.foley@linaro.org>
+-Rajnesh
 
-Message-Id: <20200225124710.14152-15-alex.bennee@linaro.org>
+On Tue, Feb 25, 2020 at 12:06 AM Alistair Francis <alistair23@gmail.com>
+wrote:
 
-diff --git a/target/riscv/instmap.h b/target/riscv/instmap.h
-index f8ad7d60fd5..40b6d2b64de 100644
---- a/target/riscv/instmap.h
-+++ b/target/riscv/instmap.h
-@@ -344,8 +344,8 @@ enum {
- #define GET_C_LW_IMM(inst)          ((extract32(inst, 6, 1) << 2) \
-                                     | (extract32(inst, 10, 3) << 3) \
-                                     | (extract32(inst, 5, 1) << 6))
--#define GET_C_LD_IMM(inst)          ((extract32(inst, 10, 3) << 3) \
--                                    | (extract32(inst, 5, 2) << 6))
-+#define GET_C_LD_IMM(inst)          ((extract16(inst, 10, 3) << 3) \
-+                                    | (extract16(inst, 5, 2) << 6))
- #define GET_C_J_IMM(inst)           ((extract32(inst, 3, 3) << 1) \
-                                     | (extract32(inst, 11, 1) << 4) \
-                                     | (extract32(inst, 2, 1) << 5) \
-@@ -363,7 +363,7 @@ enum {
- #define GET_C_RD(inst)              GET_RD(inst)
- #define GET_C_RS1(inst)             GET_RD(inst)
- #define GET_C_RS2(inst)             extract32(inst, 2, 5)
--#define GET_C_RS1S(inst)            (8 + extract32(inst, 7, 3))
--#define GET_C_RS2S(inst)            (8 + extract32(inst, 2, 3))
-+#define GET_C_RS1S(inst)            (8 + extract16(inst, 7, 3))
-+#define GET_C_RS2S(inst)            (8 + extract16(inst, 2, 3))
- 
- #endif
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 14dc71156be..d5de7f468a7 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -44,7 +44,6 @@ typedef struct DisasContext {
-     /* pc_succ_insn points to the instruction following base.pc_next */
-     target_ulong pc_succ_insn;
-     target_ulong priv_ver;
--    uint32_t opcode;
-     uint32_t mstatus_fs;
-     uint32_t misa;
-     uint32_t mem_idx;
-@@ -492,45 +491,45 @@ static void gen_set_rm(DisasContext *ctx, int rm)
-     tcg_temp_free_i32(t0);
- }
- 
--static void decode_RV32_64C0(DisasContext *ctx)
-+static void decode_RV32_64C0(DisasContext *ctx, uint16_t opcode)
- {
--    uint8_t funct3 = extract32(ctx->opcode, 13, 3);
--    uint8_t rd_rs2 = GET_C_RS2S(ctx->opcode);
--    uint8_t rs1s = GET_C_RS1S(ctx->opcode);
-+    uint8_t funct3 = extract16(opcode, 13, 3);
-+    uint8_t rd_rs2 = GET_C_RS2S(opcode);
-+    uint8_t rs1s = GET_C_RS1S(opcode);
- 
-     switch (funct3) {
-     case 3:
- #if defined(TARGET_RISCV64)
-         /* C.LD(RV64/128) -> ld rd', offset[7:3](rs1')*/
-         gen_load_c(ctx, OPC_RISC_LD, rd_rs2, rs1s,
--                 GET_C_LD_IMM(ctx->opcode));
-+                 GET_C_LD_IMM(opcode));
- #else
-         /* C.FLW (RV32) -> flw rd', offset[6:2](rs1')*/
-         gen_fp_load(ctx, OPC_RISC_FLW, rd_rs2, rs1s,
--                    GET_C_LW_IMM(ctx->opcode));
-+                    GET_C_LW_IMM(opcode));
- #endif
-         break;
-     case 7:
- #if defined(TARGET_RISCV64)
-         /* C.SD (RV64/128) -> sd rs2', offset[7:3](rs1')*/
-         gen_store_c(ctx, OPC_RISC_SD, rs1s, rd_rs2,
--                  GET_C_LD_IMM(ctx->opcode));
-+                  GET_C_LD_IMM(opcode));
- #else
-         /* C.FSW (RV32) -> fsw rs2', offset[6:2](rs1')*/
-         gen_fp_store(ctx, OPC_RISC_FSW, rs1s, rd_rs2,
--                     GET_C_LW_IMM(ctx->opcode));
-+                     GET_C_LW_IMM(opcode));
- #endif
-         break;
-     }
- }
- 
--static void decode_RV32_64C(DisasContext *ctx)
-+static void decode_RV32_64C(DisasContext *ctx, uint16_t opcode)
- {
--    uint8_t op = extract32(ctx->opcode, 0, 2);
-+    uint8_t op = extract16(opcode, 0, 2);
- 
-     switch (op) {
-     case 0:
--        decode_RV32_64C0(ctx);
-+        decode_RV32_64C0(ctx, opcode);
-         break;
-     }
- }
-@@ -709,22 +708,25 @@ static bool gen_shift(DisasContext *ctx, arg_r *a,
- /* Include the auto-generated decoder for 16 bit insn */
- #include "decode_insn16.inc.c"
- 
--static void decode_opc(DisasContext *ctx)
-+static void decode_opc(CPURISCVState *env, DisasContext *ctx, uint16_t opcode)
- {
-     /* check for compressed insn */
--    if (extract32(ctx->opcode, 0, 2) != 3) {
-+    if (extract16(opcode, 0, 2) != 3) {
-         if (!has_ext(ctx, RVC)) {
-             gen_exception_illegal(ctx);
-         } else {
-             ctx->pc_succ_insn = ctx->base.pc_next + 2;
--            if (!decode_insn16(ctx, ctx->opcode)) {
-+            if (!decode_insn16(ctx, opcode)) {
-                 /* fall back to old decoder */
--                decode_RV32_64C(ctx);
-+                decode_RV32_64C(ctx, opcode);
-             }
-         }
-     } else {
-+        uint32_t opcode32 = opcode;
-+        opcode32 = deposit32(opcode32, 16, 16,
-+                             translator_lduw(env, ctx->base.pc_next + 2));
-         ctx->pc_succ_insn = ctx->base.pc_next + 4;
--        if (!decode_insn32(ctx, ctx->opcode)) {
-+        if (!decode_insn32(ctx, opcode32)) {
-             gen_exception_illegal(ctx);
-         }
-     }
-@@ -776,9 +778,9 @@ static void riscv_tr_translate_insn(DisasContextBase *dcbase, CPUState *cpu)
- {
-     DisasContext *ctx = container_of(dcbase, DisasContext, base);
-     CPURISCVState *env = cpu->env_ptr;
-+    uint16_t opcode16 = translator_lduw(env, ctx->base.pc_next);
- 
--    ctx->opcode = translator_ldl(env, ctx->base.pc_next);
--    decode_opc(ctx);
-+    decode_opc(env, ctx, opcode16);
-     ctx->base.pc_next = ctx->pc_succ_insn;
- 
-     if (ctx->base.is_jmp == DISAS_NEXT) {
--- 
-2.20.1
+> On Sun, Feb 23, 2020 at 11:23 AM Jose Martins <josemartins90@gmail.com>
+> wrote:
+> >
+> > Hello rajnesh,
+> >
+> > I had already submitted almost this exact patch a few weeks ago.
+>
+> To QEMU? I don't see the patch.
+>
+> Alistair
+>
+> >
+> > Jose
+> >
+> > On Sun, 23 Feb 2020 at 13:51, <rajnesh.kanwal49@gmail.com> wrote:
+> > >
+> > > From: Rajnesh Kanwal <rajnesh.kanwal49@gmail.com>
+> > >
+> > > Currently riscv_cpu_local_irq_pending is used to find out pending
+> > > interrupt and VS mode interrupts are being shifted to represent
+> > > S mode interrupts in this function. So when the cause returned by
+> > > this function is passed to riscv_cpu_do_interrupt to actually
+> > > forward the interrupt, the VS mode forwarding check does not work
+> > > as intended and interrupt is actually forwarded to hypervisor. This
+> > > patch fixes this issue.
+> > >
+> > > Signed-off-by: Rajnesh Kanwal <rajnesh.kanwal49@gmail.com>
+> > > ---
+> > >  target/riscv/cpu_helper.c | 9 ++++++++-
+> > >  1 file changed, 8 insertions(+), 1 deletion(-)
+> > >
+> > > diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> > > index b9e90dfd9a..59535ecba6 100644
+> > > --- a/target/riscv/cpu_helper.c
+> > > +++ b/target/riscv/cpu_helper.c
+> > > @@ -46,7 +46,7 @@ static int riscv_cpu_local_irq_pending(CPURISCVState
+> *env)
+> > >      target_ulong pending = env->mip & env->mie &
+> > >                                 ~(MIP_VSSIP | MIP_VSTIP | MIP_VSEIP);
+> > >      target_ulong vspending = (env->mip & env->mie &
+> > > -                              (MIP_VSSIP | MIP_VSTIP | MIP_VSEIP)) >>
+> 1;
+> > > +                              (MIP_VSSIP | MIP_VSTIP | MIP_VSEIP));
+> > >
+> > >      target_ulong mie    = env->priv < PRV_M ||
+> > >                            (env->priv == PRV_M && mstatus_mie);
+> > > @@ -900,6 +900,13 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+> > >
+> > >              if (riscv_cpu_virt_enabled(env) && ((hdeleg >> cause) &
+> 1) &&
+> > >                  !force_hs_execp) {
+> > > +                /*
+> > > +                 * See if we need to adjust cause. Yes if its VS mode
+> interrupt
+> > > +                 * no if hypervisor has delegated one of hs mode's
+> interrupt
+> > > +                 */
+> > > +                if (cause == IRQ_VS_TIMER || cause == IRQ_VS_SOFT ||
+> > > +                    cause == IRQ_VS_EXT)
+> > > +                    cause = cause - 1;
+> > >                  /* Trap to VS mode */
+> > >              } else if (riscv_cpu_virt_enabled(env)) {
+> > >                  /* Trap into HS mode, from virt */
+> > > --
+> > > 2.17.1
+> > >
+> > >
+> >
+>
 
+--000000000000c9bbdd059f76be0d
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div>Here is the link to the patch <br><a href=3D"https://=
+lists.nongnu.org/archive/html/qemu-riscv/2020-01/msg00191.html">https://lis=
+ts.nongnu.org/archive/html/qemu-riscv/2020-01/msg00191.html</a><br><br></di=
+v>-Rajnesh<br></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
+=3D"gmail_attr">On Tue, Feb 25, 2020 at 12:06 AM Alistair Francis &lt;<a hr=
+ef=3D"mailto:alistair23@gmail.com">alistair23@gmail.com</a>&gt; wrote:<br><=
+/div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;bo=
+rder-left:1px solid rgb(204,204,204);padding-left:1ex">On Sun, Feb 23, 2020=
+ at 11:23 AM Jose Martins &lt;<a href=3D"mailto:josemartins90@gmail.com" ta=
+rget=3D"_blank">josemartins90@gmail.com</a>&gt; wrote:<br>
+&gt;<br>
+&gt; Hello rajnesh,<br>
+&gt;<br>
+&gt; I had already submitted almost this exact patch a few weeks ago.<br>
+<br>
+To QEMU? I don&#39;t see the patch.<br>
+<br>
+Alistair<br>
+<br>
+&gt;<br>
+&gt; Jose<br>
+&gt;<br>
+&gt; On Sun, 23 Feb 2020 at 13:51, &lt;<a href=3D"mailto:rajnesh.kanwal49@g=
+mail.com" target=3D"_blank">rajnesh.kanwal49@gmail.com</a>&gt; wrote:<br>
+&gt; &gt;<br>
+&gt; &gt; From: Rajnesh Kanwal &lt;<a href=3D"mailto:rajnesh.kanwal49@gmail=
+.com" target=3D"_blank">rajnesh.kanwal49@gmail.com</a>&gt;<br>
+&gt; &gt;<br>
+&gt; &gt; Currently riscv_cpu_local_irq_pending is used to find out pending=
+<br>
+&gt; &gt; interrupt and VS mode interrupts are being shifted to represent<b=
+r>
+&gt; &gt; S mode interrupts in this function. So when the cause returned by=
+<br>
+&gt; &gt; this function is passed to riscv_cpu_do_interrupt to actually<br>
+&gt; &gt; forward the interrupt, the VS mode forwarding check does not work=
+<br>
+&gt; &gt; as intended and interrupt is actually forwarded to hypervisor. Th=
+is<br>
+&gt; &gt; patch fixes this issue.<br>
+&gt; &gt;<br>
+&gt; &gt; Signed-off-by: Rajnesh Kanwal &lt;<a href=3D"mailto:rajnesh.kanwa=
+l49@gmail.com" target=3D"_blank">rajnesh.kanwal49@gmail.com</a>&gt;<br>
+&gt; &gt; ---<br>
+&gt; &gt;=C2=A0 target/riscv/cpu_helper.c | 9 ++++++++-<br>
+&gt; &gt;=C2=A0 1 file changed, 8 insertions(+), 1 deletion(-)<br>
+&gt; &gt;<br>
+&gt; &gt; diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.=
+c<br>
+&gt; &gt; index b9e90dfd9a..59535ecba6 100644<br>
+&gt; &gt; --- a/target/riscv/cpu_helper.c<br>
+&gt; &gt; +++ b/target/riscv/cpu_helper.c<br>
+&gt; &gt; @@ -46,7 +46,7 @@ static int riscv_cpu_local_irq_pending(CPURISCV=
+State *env)<br>
+&gt; &gt;=C2=A0 =C2=A0 =C2=A0 target_ulong pending =3D env-&gt;mip &amp; en=
+v-&gt;mie &amp;<br>
+&gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0~(MIP_VSSIP | MIP_VSTIP=
+ | MIP_VSEIP);<br>
+&gt; &gt;=C2=A0 =C2=A0 =C2=A0 target_ulong vspending =3D (env-&gt;mip &amp;=
+ env-&gt;mie &amp;<br>
+&gt; &gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 (MIP_VSSIP | MIP_VSTIP | MIP_VSEI=
+P)) &gt;&gt; 1;<br>
+&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 (MIP_VSSIP | MIP_VSTIP | MIP_VSEI=
+P));<br>
+&gt; &gt;<br>
+&gt; &gt;=C2=A0 =C2=A0 =C2=A0 target_ulong mie=C2=A0 =C2=A0 =3D env-&gt;pri=
+v &lt; PRV_M ||<br>
+&gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 (env-&gt;priv =3D=3D PRV_M &amp;&amp; mstat=
+us_mie);<br>
+&gt; &gt; @@ -900,6 +900,13 @@ void riscv_cpu_do_interrupt(CPUState *cs)<br=
+>
+&gt; &gt;<br>
+&gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if (riscv_cpu_vir=
+t_enabled(env) &amp;&amp; ((hdeleg &gt;&gt; cause) &amp; 1) &amp;&amp;<br>
+&gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 !fo=
+rce_hs_execp) {<br>
+&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 /*<br>
+&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* =
+See if we need to adjust cause. Yes if its VS mode interrupt<br>
+&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* =
+no if hypervisor has delegated one of hs mode&#39;s interrupt<br>
+&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0*/=
+<br>
+&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if (caus=
+e =3D=3D IRQ_VS_TIMER || cause =3D=3D IRQ_VS_SOFT ||<br>
+&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 cause =3D=3D IRQ_VS_EXT)<br>
+&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 cause =3D cause - 1;<br>
+&gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 /* =
+Trap to VS mode */<br>
+&gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 } else if (riscv_=
+cpu_virt_enabled(env)) {<br>
+&gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 /* =
+Trap into HS mode, from virt */<br>
+&gt; &gt; --<br>
+&gt; &gt; 2.17.1<br>
+&gt; &gt;<br>
+&gt; &gt;<br>
+&gt;<br>
+</blockquote></div>
+
+--000000000000c9bbdd059f76be0d--
 
