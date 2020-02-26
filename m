@@ -1,53 +1,53 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1j719s-0000wl-El
-	for mharc-qemu-riscv@gnu.org; Wed, 26 Feb 2020 13:11:44 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:41289)
+	id 1j71B6-0003Sq-T8
+	for mharc-qemu-riscv@gnu.org; Wed, 26 Feb 2020 13:13:00 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:41873)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <alistair23@gmail.com>) id 1j719p-0000rO-O4
- for qemu-riscv@nongnu.org; Wed, 26 Feb 2020 13:11:42 -0500
+ (envelope-from <alistair23@gmail.com>) id 1j71B4-0003Mb-2W
+ for qemu-riscv@nongnu.org; Wed, 26 Feb 2020 13:12:59 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1j719o-0007fZ-KW
- for qemu-riscv@nongnu.org; Wed, 26 Feb 2020 13:11:41 -0500
-Received: from mail-lf1-x144.google.com ([2a00:1450:4864:20::144]:33094)
+ (envelope-from <alistair23@gmail.com>) id 1j71B2-0000ma-UE
+ for qemu-riscv@nongnu.org; Wed, 26 Feb 2020 13:12:57 -0500
+Received: from mail-lj1-x243.google.com ([2a00:1450:4864:20::243]:35725)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1j719l-0007ap-Ux; Wed, 26 Feb 2020 13:11:38 -0500
-Received: by mail-lf1-x144.google.com with SMTP id n25so60543lfl.0;
- Wed, 26 Feb 2020 10:11:37 -0800 (PST)
+ id 1j71B0-0000iT-8v; Wed, 26 Feb 2020 13:12:54 -0500
+Received: by mail-lj1-x243.google.com with SMTP id q8so145119ljb.2;
+ Wed, 26 Feb 2020 10:12:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=c351DyWQ+Gmtx+Bf4ryed4Khj6jAP6+d4gMwETGlGiI=;
- b=D7XolxHsOxfl9ub+vMKmZIGpTkM9g6Yz4f+9Ou/gRqw4HfHk9JQUff2/Ue1ugoMEzk
- 15lKH2Ik9XRLX9hv7owlqn2PpiFHUhGEP5n+uqDzQPDbSgK5OTm00fOD/VACArp1k/hH
- QAzUVI8OpTAYtxR+qJKfh5JEDM9t+tRgPCSNxDsJzkaCvGm1li53mWSeHdgYkfFVSpAo
- 2+yUkMrV83f5uZ0DTq6z/whLEpY1hK63m+y9x6K5xVyQTNzejR/qt1574ScJt0GfqX5q
- 90U+T4wEEu6DUoWfwwhSVuQC/MqmA3o2ZMQWTXFfczETv5Mpznk6Mxce5Z8o7pzToaC9
- l2Bw==
+ :cc; bh=Sut3B69Gr8gmy8T2vubZY/jzcqTF52GVYnmkZIvPhvo=;
+ b=K3+rYhsq5kCjqfvlm49btupgwUGZidu+XG6J510LsikQFNAnMEGJPdierLAIoYuP2O
+ SrmXgumoZPqLEWiOfp07lV96JMxDlFMaq5IWrL9cXwbKsGzr/5uYhlxo/FkNL+/qBPP1
+ MwsM4mcHJkyO/FePz1jggC+YeZvgqZ4ufpyDLQXOa5Rcbfvy1g6zKQ+Ukx0z1i8KdWP5
+ xr7pFvguroQm2FCdcTP5h6cB5ovevO+BWceeDOKJ+dvcmXb+BBXD8dQE6GrQI0riF0+Q
+ rHjI0oZq8SfaWYzJfdA+XCkxyf3+7usxsmwkkMo3oJ/Yd2yJ5kIa1BtQpqb092iHNtLu
+ l1CA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=c351DyWQ+Gmtx+Bf4ryed4Khj6jAP6+d4gMwETGlGiI=;
- b=Pd9QmDfMeK4jUsLf3BQ1m0z7v5XByUjXgfsy9QQI9QmKCqUejGHQxL4bc2xstbEYxP
- ZmY5CQ38wzS9HFDXNaeycU/Xlc2hsnyRF8ZsMQVCzijw9v5MvHRjH2nZHUsT6/KfBZoF
- pbAPteIpxMK3BbZMX4mNse7oeqj84J0LpqtbMCDoYiCAUgFf+VR8NZ5CuKsIoomOZVIr
- xxCgBxTElENi6/zrPc7V8xbt3nODqZRlpnghAuhUJeTwp0SgSvIAbFnZ8ldmuqnSZNgR
- ZUr32odSU/2EwNrXz0XpROWS+gbyWpMWwXcBpfqo9R4y+uZTzKVvD6jWYL+Fj75P/qV3
- x2sA==
-X-Gm-Message-State: APjAAAUBIwPCkM6TOupuzHeQ9jntrPde9zk0YdRhFx3RfZ1QF5KPZf6j
- /nMWx1xH4/4UEFOxe1WnHMQk7N4U5aDC/p5ip6o=
-X-Google-Smtp-Source: APXvYqyskLVV7uP/IY30dsz9s4lD1EyYtTp24ZR2KREBubh05vX1rJCg60NjP53IaUzHuHRZ+oAU64Hs3w9B3VJmd60=
-X-Received: by 2002:a19:4a:: with SMTP id 71mr3239678lfa.50.1582740696293;
- Wed, 26 Feb 2020 10:11:36 -0800 (PST)
+ bh=Sut3B69Gr8gmy8T2vubZY/jzcqTF52GVYnmkZIvPhvo=;
+ b=iZL5tLZLSdUcbO+xE6dB5Uha7dLl+Fk7S7X3NNJTEePXhaLw0LPnpAwr4tXhmHHgD2
+ nBHDWNcSDn1PiJ3Q6ix2gH4uloMRc6JH54Dw4sKVnBKcYVcA1qxnV9R5NA2coW9xupBz
+ rBPkd9ABkctc0ih8Xj7gqFe44odZ6P8aMCj9DHYbSuII6ErZEoHh7mituKkX7SB2QeZO
+ 1DDnjxCnGGpequclhZTFsSfhU35heP0NmBx32EW+VQhBpnYbMLhWz7CAp5o5B+jTRM1H
+ Gqq1P7ycrrRo8r+4ydeHGN6+r75l9r2lYJNGcNAUtwixxdcU2Cp3IFhMFxTK73jlrNdL
+ Sm+g==
+X-Gm-Message-State: ANhLgQ1r2ziBC4IobM5wPu9ENSb05w8vT2o/EjLqV0SsOvMchSaJO4Zh
+ 5aKPat5MopOgJeCW38vjgdF0b7LjcaL2QLeq9IQ=
+X-Google-Smtp-Source: ADFU+vu4UyGUYzr1XUwVqZXVtjTjxmypgQXaF2eAAAVTWxLH1GhYtIbZsziqkpcZvLdfmV1Wm57cIGklr1ZdeyH0Zeg=
+X-Received: by 2002:a2e:a36a:: with SMTP id i10mr117252ljn.107.1582740772829; 
+ Wed, 26 Feb 2020 10:12:52 -0800 (PST)
 MIME-Version: 1.0
 References: <20200221094531.61894-1-zhiwei_liu@c-sky.com>
- <20200221094531.61894-2-zhiwei_liu@c-sky.com>
-In-Reply-To: <20200221094531.61894-2-zhiwei_liu@c-sky.com>
+ <20200221094531.61894-3-zhiwei_liu@c-sky.com>
+In-Reply-To: <20200221094531.61894-3-zhiwei_liu@c-sky.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 26 Feb 2020 10:03:58 -0800
-Message-ID: <CAKmqyKMGp_MdJuRZHDNHxAD2wR6xet8DQ6Umt-NO7uT-cr_P6w@mail.gmail.com>
-Subject: Re: [PATCH v5 1/4] target/riscv: add vector extension field in
- CPURISCVState
+Date: Wed, 26 Feb 2020 10:05:15 -0800
+Message-ID: <CAKmqyKM10H9yjQmzWhDHo2sLxKo6bq2QxV0pdpgUq5nD+qqanQ@mail.gmail.com>
+Subject: Re: [PATCH v5 2/4] target/riscv: implementation-defined constant
+ parameters
 To: LIU Zhiwei <zhiwei_liu@c-sky.com>
 Cc: Richard Henderson <richard.henderson@linaro.org>,
  Chih-Min Chao <chihmin.chao@sifive.com>, 
@@ -58,7 +58,7 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
 Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::144
+X-Received-From: 2a00:1450:4864:20::243
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -70,58 +70,87 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Feb 2020 18:11:43 -0000
+X-List-Received-Date: Wed, 26 Feb 2020 18:12:59 -0000
 
 On Fri, Feb 21, 2020 at 1:45 AM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
 >
-> The 32 vector registers will be viewed as a continuous memory block.
-> It avoids the convension between element index and (regno, offset).
-> Thus elements can be directly accessed by offset from the first vector
-> base address.
+> vlen is the vector register length in bits.
+> elen is the max element size in bits.
+> vext_spec is the vector specification version, default value is v0.7.1.
 >
 > Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
 
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  target/riscv/cpu.h | 12 ++++++++++++
->  1 file changed, 12 insertions(+)
+>  target/riscv/cpu.c | 7 +++++++
+>  target/riscv/cpu.h | 5 +++++
+>  2 files changed, 12 insertions(+)
 >
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 8c86ebc109..6900714432 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -98,6 +98,11 @@ static void set_priv_version(CPURISCVState *env, int priv_ver)
+>      env->priv_ver = priv_ver;
+>  }
+>
+> +static void set_vext_version(CPURISCVState *env, int vext_ver)
+> +{
+> +    env->vext_ver = vext_ver;
+> +}
+> +
+>  static void set_feature(CPURISCVState *env, int feature)
+>  {
+>      env->features |= (1ULL << feature);
+> @@ -320,6 +325,7 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+>      CPURISCVState *env = &cpu->env;
+>      RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(dev);
+>      int priv_version = PRIV_VERSION_1_11_0;
+> +    int vext_version = VEXT_VERSION_0_07_1;
+>      target_ulong target_misa = 0;
+>      Error *local_err = NULL;
+>
+> @@ -345,6 +351,7 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+>      }
+>
+>      set_priv_version(env, priv_version);
+> +    set_vext_version(env, vext_version);
+>      set_resetvec(env, DEFAULT_RSTVEC);
+>
+>      if (cpu->cfg.mmu) {
 > diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index de0a8d893a..2e8d01c155 100644
+> index 2e8d01c155..748bd557f9 100644
 > --- a/target/riscv/cpu.h
 > +++ b/target/riscv/cpu.h
-> @@ -64,6 +64,7 @@
->  #define RVA RV('A')
->  #define RVF RV('F')
->  #define RVD RV('D')
-> +#define RVV RV('V')
->  #define RVC RV('C')
->  #define RVS RV('S')
->  #define RVU RV('U')
-> @@ -93,9 +94,20 @@ typedef struct CPURISCVState CPURISCVState;
+> @@ -83,6 +83,8 @@ enum {
+>  #define PRIV_VERSION_1_10_0 0x00011000
+>  #define PRIV_VERSION_1_11_0 0x00011100
 >
->  #include "pmp.h"
+> +#define VEXT_VERSION_0_07_1 0x00000701
+> +
+>  #define TRANSLATE_PMP_FAIL 2
+>  #define TRANSLATE_FAIL 1
+>  #define TRANSLATE_SUCCESS 0
+> @@ -117,6 +119,7 @@ struct CPURISCVState {
+>      target_ulong badaddr;
 >
-> +#define RV_VLEN_MAX 512
-> +
->  struct CPURISCVState {
->      target_ulong gpr[32];
->      uint64_t fpr[32]; /* assume both F and D extensions */
-> +
-> +    /* vector coprocessor state. */
-> +    uint64_t vreg[32 * RV_VLEN_MAX / 64] QEMU_ALIGNED(16);
-> +    target_ulong vxrm;
-> +    target_ulong vxsat;
-> +    target_ulong vl;
-> +    target_ulong vstart;
-> +    target_ulong vtype;
-> +
->      target_ulong pc;
->      target_ulong load_res;
->      target_ulong load_val;
+>      target_ulong priv_ver;
+> +    target_ulong vext_ver;
+>      target_ulong misa;
+>      target_ulong misa_mask;
+>
+> @@ -231,6 +234,8 @@ typedef struct RISCVCPU {
+>
+>          char *priv_spec;
+>          char *user_spec;
+> +        uint16_t vlen;
+> +        uint16_t elen;
+>          bool mmu;
+>          bool pmp;
+>      } cfg;
 > --
 > 2.23.0
 >
