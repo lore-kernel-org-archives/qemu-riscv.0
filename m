@@ -1,47 +1,74 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1j78Ay-0000eu-JZ
-	for mharc-qemu-riscv@gnu.org; Wed, 26 Feb 2020 20:41:20 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:58654)
+	id 1j7OfN-0000XW-6D
+	for mharc-qemu-riscv@gnu.org; Thu, 27 Feb 2020 14:17:49 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43872)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <zhiwei_liu@c-sky.com>) id 1j78Av-0000cG-9e
- for qemu-riscv@nongnu.org; Wed, 26 Feb 2020 20:41:19 -0500
+ (envelope-from <richard.henderson@linaro.org>) id 1j7OfK-0000T2-0k
+ for qemu-riscv@nongnu.org; Thu, 27 Feb 2020 14:17:47 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <zhiwei_liu@c-sky.com>) id 1j78At-00008V-4x
- for qemu-riscv@nongnu.org; Wed, 26 Feb 2020 20:41:17 -0500
-Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:38498)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1j78An-0008F8-Tt; Wed, 26 Feb 2020 20:41:10 -0500
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07436282|-1; CH=green;
- DM=CONTINUE|CONTINUE|true|0.541992-0.0175304-0.440478;
- DS=CONTINUE|ham_alarm|0.575027-0.00144398-0.423529; FP=0|0|0|0|0|-1|-1|-1;
- HT=e02c03296; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS; RN=8; RT=8; SR=0;
- TI=SMTPD_---.GszCVyc_1582767661; 
-Received: from 192.168.3.18(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.GszCVyc_1582767661)
- by smtp.aliyun-inc.com(10.147.42.22); Thu, 27 Feb 2020 09:41:02 +0800
-Subject: Re: [PATCH v5 4/4] target/riscv: add vector configure instruction
-To: Alistair Francis <alistair23@gmail.com>
-Cc: Richard Henderson <richard.henderson@linaro.org>,
- Chih-Min Chao <chihmin.chao@sifive.com>, Palmer Dabbelt
- <palmer@dabbelt.com>, wenmeng_zhang@c-sky.com, wxy194768@alibaba-inc.com,
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>
-References: <20200221094531.61894-1-zhiwei_liu@c-sky.com>
- <20200221094531.61894-5-zhiwei_liu@c-sky.com>
- <CAKmqyKP81rcQ_meiqij-DLWvvqtH2N-zLZjkrpq+MM05ALhLhQ@mail.gmail.com>
-From: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Message-ID: <4cecb8aa-dc32-2e8f-db0c-8d444f1c768e@c-sky.com>
-Date: Thu, 27 Feb 2020 09:41:00 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.4.2
+ (envelope-from <richard.henderson@linaro.org>) id 1j7OfI-00036l-De
+ for qemu-riscv@nongnu.org; Thu, 27 Feb 2020 14:17:45 -0500
+Received: from mail-pl1-x642.google.com ([2607:f8b0:4864:20::642]:39636)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
+ id 1j7OfI-00036C-6a
+ for qemu-riscv@nongnu.org; Thu, 27 Feb 2020 14:17:44 -0500
+Received: by mail-pl1-x642.google.com with SMTP id g6so186496plp.6
+ for <qemu-riscv@nongnu.org>; Thu, 27 Feb 2020 11:17:44 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=rkZ3dNlnom8394SX7fXjtihYKPXDxrUBwwgevdf0LLw=;
+ b=vu5DrgXjdJxGo1+Q4Lq67uO6mE8thJqVTz9+hxl0L+PTYGwlvOCFGXWcd95UVCw4HB
+ CeMfgDAYkwAzDHbmmAPJY8qrNKRemY3oluOnUzS5Xp/0DoSSvWc2b8zhamXyAEoLzqJm
+ oaKatgqvySc0Vk2US6jkm8keIg+T/mI5SSKH9tdNAAAO/qY3BKB/twVVJpIltpayh0oi
+ a5GpKUQLCB7sApUGgffk75UnIGHSCJTpB4u1b0/Yvv9lyZ1/6WhzIwAdbaFn6ucrpNZx
+ USPXF9+gSfE6YO835gya8Gt37M1FdFWMuGMxl1/62BWBjdKIeEGCUvi+S8n/lP8BB1F6
+ mkdA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=rkZ3dNlnom8394SX7fXjtihYKPXDxrUBwwgevdf0LLw=;
+ b=pKacalbYU9DqGnSf7lDuGklUPiMeDwxsQN38j1elUOMsFxDMTn83CUvkLMipitLNFu
+ FjWutV/f+rluHBq0aHLsX2RP0ZafmKr3gd8yZa7vpGDvc7aizjmrx/cjYbQubMWURpHt
+ QNY3kq5ccdE/s6mJdepdnM6VWIZlVGlAE5gPil79Tr2X4sK0l/f5V8WfBvsqRIS9WJ17
+ o7bJNUn5eSPUQtlYIkMNtmo0KUoecp3Aq0vBtILXC6iBVe2ezC9K8BelqVXgtX/lx1lU
+ B/TOIozJFexvkYZ6w8/LrO4lns2X5nBHgszRy8q8tHOmd4n5O4yGZbShsgcMKRk0Prmh
+ /nqg==
+X-Gm-Message-State: APjAAAVVZJHnme4/GyADXuuiYO+Ij73c/o4z4xXbICT0Xe+VHx9dC86y
+ +8+35JOLozfQ0XRy7Et0/yth/tsLqbM=
+X-Google-Smtp-Source: APXvYqyv6vN8hBGWJ3ssD3m9+mn61b+lNdySW+MEc+9+iXhOL2IrvswEl8N/JbqtGHTz0ueUWXlVVQ==
+X-Received: by 2002:a17:90a:8806:: with SMTP id
+ s6mr414229pjn.141.1582831062693; 
+ Thu, 27 Feb 2020 11:17:42 -0800 (PST)
+Received: from [192.168.1.11] (97-126-123-70.tukw.qwest.net. [97.126.123.70])
+ by smtp.gmail.com with ESMTPSA id
+ k4sm7899602pfg.40.2020.02.27.11.17.41
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 27 Feb 2020 11:17:41 -0800 (PST)
+Subject: Re: [PATCH v4 1/5] target/riscv: add vector unit stride load and
+ store instructions
+To: LIU Zhiwei <zhiwei_liu@c-sky.com>, alistair23@gmail.com,
+ chihmin.chao@sifive.com, palmer@dabbelt.com
+Cc: wenmeng_zhang@c-sky.com, wxy194768@alibaba-inc.com,
+ linux-csky@vger.kernel.org, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+References: <20200225103508.7651-1-zhiwei_liu@c-sky.com>
+ <20200225103508.7651-2-zhiwei_liu@c-sky.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+Message-ID: <4cfb56d6-34a5-0e35-87a0-2aefaafa4221@linaro.org>
+Date: Thu, 27 Feb 2020 11:17:39 -0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.4.1
 MIME-Version: 1.0
-In-Reply-To: <CAKmqyKP81rcQ_meiqij-DLWvvqtH2N-zLZjkrpq+MM05ALhLhQ@mail.gmail.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <20200225103508.7651-2-zhiwei_liu@c-sky.com>
+Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 3.x [generic] [fuzzy]
-X-Received-From: 121.197.200.217
+Content-Transfer-Encoding: 7bit
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2607:f8b0:4864:20::642
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -53,395 +80,244 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Feb 2020 01:41:19 -0000
+X-List-Received-Date: Thu, 27 Feb 2020 19:17:47 -0000
+
+On 2/25/20 2:35 AM, LIU Zhiwei wrote:
+> +static bool vext_check_reg(DisasContext *s, uint32_t reg, bool widen)
+> +{
+> +    int legal = widen ? 2 << s->lmul : 1 << s->lmul;
+> +
+> +    return !((s->lmul == 0x3 && widen) || (reg % legal));
+> +}
+> +
+> +static bool vext_check_overlap_mask(DisasContext *s, uint32_t vd, bool vm)
+> +{
+> +    return !(s->lmul > 1 && vm == 0 && vd == 0);
+> +}
+> +
+> +static bool vext_check_nf(DisasContext *s, uint32_t nf)
+> +{
+> +    return s->lmul * (nf + 1) <= 8;
+> +}
+
+Some commentary would be good here, quoting the rule being applied.  E.g. "The
+destination vector register group for a masked vector instruction can only
+overlap the source mask regis-
+ter (v0) when LMUL=1. (Section 5.3)"
+
+> +static bool ld_us_op(DisasContext *s, arg_r2nfvm *a, uint8_t seq)
+> +{
+> +    uint8_t nf = a->nf + 1;
+
+Perhaps NF should have the +1 done during decode, so that it cannot be
+forgotten here or elsewhere.  E.g.
+
+%nf      31:3  !function=ex_plus_1
+@r2_nfvm ... ... vm:1 ..... ..... ... ..... ....... \
+         &r2nfvm %nf %rs1 %rd
+
+Where ex_plus_1 is the obvious modification of ex_shift_1().
+
+> +static inline uint32_t vext_nf(uint32_t desc)
+> +{
+> +    return (simd_data(desc) >> 11) & 0xf;
+> +}
+> +
+> +static inline uint32_t vext_mlen(uint32_t desc)
+> +{
+> +    return simd_data(desc) & 0xff;
+> +}
+> +
+> +static inline uint32_t vext_vm(uint32_t desc)
+> +{
+> +    return (simd_data(desc) >> 8) & 0x1;
+> +}
+> +
+> +static inline uint32_t vext_lmul(uint32_t desc)
+> +{
+> +    return (simd_data(desc) >> 9) & 0x3;
+> +}
+
+You should use FIELD() to define the fields, and then use FIELD_EX32 and
+FIELD_DP32 to reference them.
+
+> +/*
+> + * This function checks watchpoint before real load operation.
+> + *
+> + * In softmmu mode, the TLB API probe_access is enough for watchpoint check.
+> + * In user mode, there is no watchpoint support now.
+> + *
+> + * It will triggle an exception if there is no mapping in TLB
+
+trigger.
+
+> + * and page table walk can't fill the TLB entry. Then the guest
+> + * software can return here after process the exception or never return.
+> + */
+> +static void probe_read_access(CPURISCVState *env, target_ulong addr,
+> +        target_ulong len, uintptr_t ra)
+> +{
+> +    while (len) {
+> +        const target_ulong pagelen = -(addr | TARGET_PAGE_MASK);
+> +        const target_ulong curlen = MIN(pagelen, len);
+> +
+> +        probe_read(env, addr, curlen, cpu_mmu_index(env, false), ra);
+> +        addr += curlen;
+> +        len -= curlen;
+> +    }
+> +}
+> +
+> +static void probe_write_access(CPURISCVState *env, target_ulong addr,
+> +        target_ulong len, uintptr_t ra)
+> +{
+> +    while (len) {
+> +        const target_ulong pagelen = -(addr | TARGET_PAGE_MASK);
+> +        const target_ulong curlen = MIN(pagelen, len);
+> +
+> +        probe_write(env, addr, curlen, cpu_mmu_index(env, false), ra);
+> +        addr += curlen;
+> +        len -= curlen;
+> +    }
+> +}
+
+A loop is overkill -- the access cannot span to 3 pages.  These two functions
+can be merged using probe_access and MMU_DATA_{LOAD,STORE}.
+
+> +
+> +#ifdef HOST_WORDS_BIGENDIAN
+> +static void vext_clear(void *tail, uint32_t cnt, uint32_t tot)
+> +{
+> +    /*
+> +     * Split the remaining range to two parts.
+> +     * The first part is in the last uint64_t unit.
+> +     * The second part start from the next uint64_t unit.
+> +     */
+> +    int part1 = 0, part2 = tot - cnt;
+> +    if (cnt % 64) {
+> +        part1 = 64 - (cnt % 64);
+> +        part2 = tot - cnt - part1;
+> +        memset(tail & ~(63ULL), 0, part1);
+> +        memset((tail + 64) & ~(63ULL), 0, part2);
+
+You're confusing bit and byte offsets -- cnt and tot are both byte offsets.
+
+> +static inline int vext_elem_mask(void *v0, int mlen, int index)
+> +{
+> +
+> +    int idx = (index * mlen) / 8;
+> +    int pos = (index * mlen) % 8;
+> +
+> +    switch (mlen) {
+> +    case 8:
+> +        return *((uint8_t *)v0 + H1(index)) & 0x1;
+> +    case 16:
+> +        return *((uint16_t *)v0 + H2(index)) & 0x1;
+> +    case 32:
+> +        return *((uint32_t *)v0 + H4(index)) & 0x1;
+> +    case 64:
+> +        return *((uint64_t *)v0 + index) & 0x1;
+> +    default:
+> +        return (*((uint8_t *)v0 + H1(idx)) >> pos) & 0x1;
+> +    }
+
+This is not what I had in mind, and looks wrong as well.
+
+    int idx = (index * mlen) / 64;
+    int pos = (index * mlen) % 64;
+    return (((uint64_t *)v0)[idx] >> pos) & 1;
+
+You also might consider passing log2(mlen), so the multiplication could be
+strength-reduced to a shift.
+
+> +#define GEN_VEXT_LD_ELEM(NAME, MTYPE, ETYPE, H, LDSUF)              \
+> +static void vext_##NAME##_ld_elem(CPURISCVState *env, abi_ptr addr, \
+> +        uint32_t idx, void *vd, uintptr_t retaddr)                  \
+> +{                                                                   \
+> +    int mmu_idx = cpu_mmu_index(env, false);                        \
+> +    MTYPE data;                                                     \
+> +    ETYPE *cur = ((ETYPE *)vd + H(idx));                            \
+> +    data = cpu_##LDSUF##_mmuidx_ra(env, addr, mmu_idx, retaddr);    \
+> +    *cur = data;                                                    \
+> +}                                                                   \
+
+If you're going to use cpu_mmu_index, you might as well use cpu_SUFF_data_ra(),
+which does not require the mmu_idx parameter.
+
+> +#define GEN_VEXT_ST_ELEM(NAME, ETYPE, H, STSUF)                       \
+> +static void vext_##NAME##_st_elem(CPURISCVState *env, abi_ptr addr,   \
+> +        uint32_t idx, void *vd, uintptr_t retaddr)                    \
+> +{                                                                     \
+> +    int mmu_idx = cpu_mmu_index(env, false);                          \
+> +    ETYPE data = *((ETYPE *)vd + H(idx));                             \
+> +    cpu_##STSUF##_mmuidx_ra(env, addr, data, mmu_idx, retaddr);       \
+> +}
+
+Likewise.
+
+> +/*
+> + *** unit-stride: load vector element from continuous guest memory
+> + */
+> +static inline void vext_ld_us_mask(void *vd, void *v0, target_ulong base,
+> +        CPURISCVState *env, uint32_t desc,
+> +        vext_ld_elem_fn ld_elem,
+> +        vext_ld_clear_elem clear_elem,
+> +        uint32_t esz, uint32_t msz, uintptr_t ra)
+> +{
+> +    uint32_t i, k;
+> +    uint32_t mlen = vext_mlen(desc);
+
+You don't need to pass mlen, since it's
+
+> +/* unit-stride: store vector element to guest memory */
+> +static void vext_st_us_mask(void *vd, void *v0, target_ulong base,
+> +        CPURISCVState *env, uint32_t desc,
+> +        vext_st_elem_fn st_elem,
+> +        uint32_t esz, uint32_t msz, uintptr_t ra)
+> +{
+> +    uint32_t i, k;
+> +    uint32_t nf = vext_nf(desc);
+> +    uint32_t mlen = vext_mlen(desc);
+> +    uint32_t vlmax = vext_maxsz(desc) / esz;
+> +
+> +    /* probe every access*/
+> +    for (i = 0; i < env->vl; i++) {
+> +        if (!vext_elem_mask(v0, mlen, i)) {
+> +            continue;
+> +        }
+> +        probe_write_access(env, base + nf * i * msz, nf * msz, ra);
+> +    }
+> +    /* store bytes to guest memory */
+> +    for (i = 0; i < env->vl; i++) {
+> +        k = 0;
+> +        if (!vext_elem_mask(v0, mlen, i)) {
+> +            continue;
+> +        }
+> +        while (k < nf) {
+> +            target_ulong addr = base + (i * nf + k) * msz;
+> +            st_elem(env, addr, i + k * vlmax, vd, ra);
+> +            k++;
+> +        }
+> +    }
+> +}
+
+I'll note that vext_ld_us_mask and vext_st_us_mask are identical, except for:
+
+1) probe_read/write_access (which I already suggested merging, using
+MMUAccessType),
+
+2) the name of the ld_elem/st_elem variable (the function types are already
+identical), and
+
+3) the clear loop at the end of the load (which could be conditional on
+clear_elem != NULL; after inlining, this should be optimized away).
+
+> +static void vext_st_us(void *vd, target_ulong base,
+> +        CPURISCVState *env, uint32_t desc,
+> +        vext_st_elem_fn st_elem,
+> +        uint32_t esz, uint32_t msz, uintptr_t ra)
+
+Similarly.
 
 
-
-On 2020/2/27 3:20, Alistair Francis wrote:
->   On Fri, Feb 21, 2020 at 1:45 AM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
->> vsetvl and vsetvli are two configure instructions for vl, vtype. TB flags
->> should update after configure instructions. The (ill, lmul, sew ) of vtype
->> and the bit of (VSTART == 0 && VL == VLMAX) will be placed within tb_flags.
->>
->> Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
->> ---
->>   MAINTAINERS                             |  1 +
->>   target/riscv/Makefile.objs              |  2 +-
->>   target/riscv/cpu.h                      | 61 +++++++++++++++++++---
->>   target/riscv/helper.h                   |  2 +
->>   target/riscv/insn32.decode              |  5 ++
->>   target/riscv/insn_trans/trans_rvv.inc.c | 69 +++++++++++++++++++++++++
->>   target/riscv/translate.c                | 17 +++++-
->>   target/riscv/vector_helper.c            | 53 +++++++++++++++++++
->>   8 files changed, 199 insertions(+), 11 deletions(-)
->>   create mode 100644 target/riscv/insn_trans/trans_rvv.inc.c
->>   create mode 100644 target/riscv/vector_helper.c
->>
->> diff --git a/MAINTAINERS b/MAINTAINERS
->> index 1740a4fddc..cd2e200db9 100644
->> --- a/MAINTAINERS
->> +++ b/MAINTAINERS
->> @@ -266,6 +266,7 @@ M: Palmer Dabbelt <palmer@dabbelt.com>
->>   M: Alistair Francis <Alistair.Francis@wdc.com>
->>   M: Sagar Karandikar <sagark@eecs.berkeley.edu>
->>   M: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
->> +M: LIU Zhiwei <zhiwei_liu@c-sky.com>
-> I don't think you should add yourself here. MAINTAINERS is more for
-> people doing active patch review.
-OK.
-> RISC-V QEMU can really do with more maintainers though, so if you do
-> want to be involved you could help review patches.
-Actually my main job is to maintain and develop QEMU code，so I'd like to 
-review target/riscv code,
-however vector upstream takes a lot time .
->>   L: qemu-riscv@nongnu.org
->>   S: Supported
->>   F: target/riscv/
->> diff --git a/target/riscv/Makefile.objs b/target/riscv/Makefile.objs
->> index ff651f69f6..ff38df6219 100644
->> --- a/target/riscv/Makefile.objs
->> +++ b/target/riscv/Makefile.objs
->> @@ -1,4 +1,4 @@
->> -obj-y += translate.o op_helper.o cpu_helper.o cpu.o csr.o fpu_helper.o gdbstub.o
->> +obj-y += translate.o op_helper.o cpu_helper.o cpu.o csr.o fpu_helper.o vector_helper.o gdbstub.o
->>   obj-$(CONFIG_SOFTMMU) += pmp.o
->>
->>   ifeq ($(CONFIG_SOFTMMU),y)
->> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
->> index 748bd557f9..f7003edb86 100644
->> --- a/target/riscv/cpu.h
->> +++ b/target/riscv/cpu.h
->> @@ -21,6 +21,7 @@
->>   #define RISCV_CPU_H
->>
->>   #include "hw/core/cpu.h"
->> +#include "hw/registerfields.h"
->>   #include "exec/cpu-defs.h"
->>   #include "fpu/softfloat-types.h"
->>
->> @@ -98,6 +99,12 @@ typedef struct CPURISCVState CPURISCVState;
->>
->>   #define RV_VLEN_MAX 512
->>
->> +FIELD(VTYPE, LMUL, 0, 2)
-> Shouldn't this be VLMUL?
-OK. The same with VSEW and VEDIV.
->
->> +FIELD(VTYPE, SEW, 2, 3)
-> VSEW?
->
->> +FIELD(VTYPE, EDIV, 5, 2)
-> VEDIV?
->
->> +FIELD(VTYPE, RESERVED, 7, sizeof(target_ulong) * 8 - 9)
->> +FIELD(VTYPE, VILL, sizeof(target_ulong) * 8 - 2, 1)
->> +
->>   struct CPURISCVState {
->>       target_ulong gpr[32];
->>       uint64_t fpr[32]; /* assume both F and D extensions */
->> @@ -302,16 +309,59 @@ void riscv_cpu_set_fflags(CPURISCVState *env, target_ulong);
->>   #define TB_FLAGS_MMU_MASK   3
->>   #define TB_FLAGS_MSTATUS_FS MSTATUS_FS
->>
->> +typedef CPURISCVState CPUArchState;
->> +typedef RISCVCPU ArchCPU;
->> +#include "exec/cpu-all.h"
-> Why do you need this? Shouldn't the TB_FLAGS fields work without this.
-Because env_archcpu in cpu_get_tb_cpu_state will use it.
->> +
->> +FIELD(TB_FLAGS, VL_EQ_VLMAX, 2, 1)
->> +FIELD(TB_FLAGS, LMUL, 3, 2)
->> +FIELD(TB_FLAGS, SEW, 5, 3)
->> +FIELD(TB_FLAGS, VILL, 8, 1)
-> These should probably be defined with the other TB_FLAGS (or if you
-> need them here you can move the others up here).
-I'd like to put other TB_FLAGS in other separate patch.
->
->> +
->> +/*
->> + * A simplification for VLMAX
->> + * = (1 << LMUL) * VLEN / (8 * (1 << SEW))
->> + * = (VLEN << LMUL) / (8 << SEW)
->> + * = (VLEN << LMUL) >> (SEW + 3)
->> + * = VLEN >> (SEW + 3 - LMUL)
->> + */
->> +static inline uint32_t vext_get_vlmax(RISCVCPU *cpu, target_ulong vtype)
->> +{
->> +    uint8_t sew, lmul;
->> +
->> +    sew = FIELD_EX64(vtype, VTYPE, SEW);
->> +    lmul = FIELD_EX64(vtype, VTYPE, LMUL);
->> +    return cpu->cfg.vlen >> (sew + 3 - lmul);
-> Shouldn't we assert this isn't over RV_VLEN_MAX?
-I don't think so.  VLEN is vector register length in bits. It is checked
-against RV_VLEN_MAX in cpu realize function. If it is over RV_VLEN_MAX,
-it will exits before translate any tb.
-
-Zhiwei
-
->
-> Alistair
->
->> +}
->> +
->>   static inline void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
->> -                                        target_ulong *cs_base, uint32_t *flags)
->> +                                        target_ulong *cs_base, uint32_t *pflags)
->>   {
->> +    uint32_t flags = 0;
->> +
->>       *pc = env->pc;
->>       *cs_base = 0;
->> +
->> +    if (env->misa & RVV) {
->> +        uint32_t vlmax = vext_get_vlmax(env_archcpu(env), env->vtype);
->> +        bool vl_eq_vlmax = (env->vstart == 0) && (vlmax == env->vl);
->> +        flags = FIELD_DP32(flags, TB_FLAGS, VILL,
->> +                    FIELD_EX64(env->vtype, VTYPE, VILL));
->> +        flags = FIELD_DP32(flags, TB_FLAGS, SEW,
->> +                    FIELD_EX64(env->vtype, VTYPE, SEW));
->> +        flags = FIELD_DP32(flags, TB_FLAGS, LMUL,
->> +                    FIELD_EX64(env->vtype, VTYPE, LMUL));
->> +        flags = FIELD_DP32(flags, TB_FLAGS, VL_EQ_VLMAX, vl_eq_vlmax);
->> +    } else {
->> +        flags = FIELD_DP32(flags, TB_FLAGS, VILL, 1);
->> +    }
->> +
->>   #ifdef CONFIG_USER_ONLY
->> -    *flags = TB_FLAGS_MSTATUS_FS;
->> +    flags |= TB_FLAGS_MSTATUS_FS;
->>   #else
->> -    *flags = cpu_mmu_index(env, 0) | (env->mstatus & MSTATUS_FS);
->> +    flags |= cpu_mmu_index(env, 0) | (env->mstatus & MSTATUS_FS);
->>   #endif
->> +    *pflags = flags;
->>   }
->>
->>   int riscv_csrrw(CPURISCVState *env, int csrno, target_ulong *ret_value,
->> @@ -352,9 +402,4 @@ void riscv_set_csr_ops(int csrno, riscv_csr_operations *ops);
->>
->>   void riscv_cpu_register_gdb_regs_for_features(CPUState *cs);
->>
->> -typedef CPURISCVState CPUArchState;
->> -typedef RISCVCPU ArchCPU;
->> -
->> -#include "exec/cpu-all.h"
->> -
->>   #endif /* RISCV_CPU_H */
->> diff --git a/target/riscv/helper.h b/target/riscv/helper.h
->> index debb22a480..3c28c7e407 100644
->> --- a/target/riscv/helper.h
->> +++ b/target/riscv/helper.h
->> @@ -76,3 +76,5 @@ DEF_HELPER_2(mret, tl, env, tl)
->>   DEF_HELPER_1(wfi, void, env)
->>   DEF_HELPER_1(tlb_flush, void, env)
->>   #endif
->> +/* Vector functions */
->> +DEF_HELPER_3(vsetvl, tl, env, tl, tl)
->> diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
->> index 77f794ed70..5dc009c3cd 100644
->> --- a/target/riscv/insn32.decode
->> +++ b/target/riscv/insn32.decode
->> @@ -62,6 +62,7 @@
->>   @r_rm    .......   ..... ..... ... ..... ....... %rs2 %rs1 %rm %rd
->>   @r2_rm   .......   ..... ..... ... ..... ....... %rs1 %rm %rd
->>   @r2      .......   ..... ..... ... ..... ....... %rs1 %rd
->> +@r2_zimm . zimm:11  ..... ... ..... ....... %rs1 %rd
->>
->>   @sfence_vma ....... ..... .....   ... ..... ....... %rs2 %rs1
->>   @sfence_vm  ....... ..... .....   ... ..... ....... %rs1
->> @@ -203,3 +204,7 @@ fcvt_w_d   1100001  00000 ..... ... ..... 1010011 @r2_rm
->>   fcvt_wu_d  1100001  00001 ..... ... ..... 1010011 @r2_rm
->>   fcvt_d_w   1101001  00000 ..... ... ..... 1010011 @r2_rm
->>   fcvt_d_wu  1101001  00001 ..... ... ..... 1010011 @r2_rm
->> +
->> +# *** RV32V Extension ***
->> +vsetvli         0 ........... ..... 111 ..... 1010111  @r2_zimm
->> +vsetvl          1000000 ..... ..... 111 ..... 1010111  @r
->> diff --git a/target/riscv/insn_trans/trans_rvv.inc.c b/target/riscv/insn_trans/trans_rvv.inc.c
->> new file mode 100644
->> index 0000000000..da82c72bbf
->> --- /dev/null
->> +++ b/target/riscv/insn_trans/trans_rvv.inc.c
->> @@ -0,0 +1,69 @@
->> +/*
->> + * RISC-V translation routines for the RVV Standard Extension.
->> + *
->> + * Copyright (c) 2020 C-SKY Limited. All rights reserved.
->> + *
->> + * This program is free software; you can redistribute it and/or modify it
->> + * under the terms and conditions of the GNU General Public License,
->> + * version 2 or later, as published by the Free Software Foundation.
->> + *
->> + * This program is distributed in the hope it will be useful, but WITHOUT
->> + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
->> + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
->> + * more details.
->> + *
->> + * You should have received a copy of the GNU General Public License along with
->> + * this program.  If not, see <http://www.gnu.org/licenses/>.
->> + */
->> +
->> +static bool trans_vsetvl(DisasContext *ctx, arg_vsetvl * a)
->> +{
->> +    TCGv s1, s2, dst;
->> +    s2 = tcg_temp_new();
->> +    dst = tcg_temp_new();
->> +
->> +    /* Using x0 as the rs1 register specifier, encodes an infinite AVL */
->> +    if (a->rs1 == 0) {
->> +        /* As the mask is at least one bit, RV_VLEN_MAX is >= VLMAX */
->> +        s1 = tcg_const_tl(RV_VLEN_MAX);
->> +    } else {
->> +        s1 = tcg_temp_new();
->> +        gen_get_gpr(s1, a->rs1);
->> +    }
->> +    gen_get_gpr(s2, a->rs2);
->> +    gen_helper_vsetvl(dst, cpu_env, s1, s2);
->> +    gen_set_gpr(a->rd, dst);
->> +    tcg_gen_movi_tl(cpu_pc, ctx->pc_succ_insn);
->> +    exit_tb(ctx);
->> +    ctx->base.is_jmp = DISAS_NORETURN;
->> +
->> +    tcg_temp_free(s1);
->> +    tcg_temp_free(s2);
->> +    tcg_temp_free(dst);
->> +    return true;
->> +}
->> +
->> +static bool trans_vsetvli(DisasContext *ctx, arg_vsetvli * a)
->> +{
->> +    TCGv s1, s2, dst;
->> +    s2 = tcg_const_tl(a->zimm);
->> +    dst = tcg_temp_new();
->> +
->> +    /* Using x0 as the rs1 register specifier, encodes an infinite AVL */
->> +    if (a->rs1 == 0) {
->> +        /* As the mask is at least one bit, RV_VLEN_MAX is >= VLMAX */
->> +        s1 = tcg_const_tl(RV_VLEN_MAX);
->> +    } else {
->> +        s1 = tcg_temp_new();
->> +        gen_get_gpr(s1, a->rs1);
->> +    }
->> +    gen_helper_vsetvl(dst, cpu_env, s1, s2);
->> +    gen_set_gpr(a->rd, dst);
->> +    gen_goto_tb(ctx, 0, ctx->pc_succ_insn);
->> +    ctx->base.is_jmp = DISAS_NORETURN;
->> +
->> +    tcg_temp_free(s1);
->> +    tcg_temp_free(s2);
->> +    tcg_temp_free(dst);
->> +    return true;
->> +}
->> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
->> index 14dc71156b..cc356aabd8 100644
->> --- a/target/riscv/translate.c
->> +++ b/target/riscv/translate.c
->> @@ -55,6 +55,12 @@ typedef struct DisasContext {
->>          to reset this known value.  */
->>       int frm;
->>       bool ext_ifencei;
->> +    /* vector extension */
->> +    bool vill;
->> +    uint8_t lmul;
->> +    uint8_t sew;
->> +    uint16_t vlen;
->> +    bool vl_eq_vlmax;
->>   } DisasContext;
->>
->>   #ifdef TARGET_RISCV64
->> @@ -704,6 +710,7 @@ static bool gen_shift(DisasContext *ctx, arg_r *a,
->>   #include "insn_trans/trans_rva.inc.c"
->>   #include "insn_trans/trans_rvf.inc.c"
->>   #include "insn_trans/trans_rvd.inc.c"
->> +#include "insn_trans/trans_rvv.inc.c"
->>   #include "insn_trans/trans_privileged.inc.c"
->>
->>   /* Include the auto-generated decoder for 16 bit insn */
->> @@ -735,14 +742,20 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
->>       DisasContext *ctx = container_of(dcbase, DisasContext, base);
->>       CPURISCVState *env = cs->env_ptr;
->>       RISCVCPU *cpu = RISCV_CPU(cs);
->> +    uint32_t tb_flags = ctx->base.tb->flags;
->>
->>       ctx->pc_succ_insn = ctx->base.pc_first;
->> -    ctx->mem_idx = ctx->base.tb->flags & TB_FLAGS_MMU_MASK;
->> -    ctx->mstatus_fs = ctx->base.tb->flags & TB_FLAGS_MSTATUS_FS;
->> +    ctx->mem_idx = tb_flags & TB_FLAGS_MMU_MASK;
->> +    ctx->mstatus_fs = tb_flags & TB_FLAGS_MSTATUS_FS;
->>       ctx->priv_ver = env->priv_ver;
->>       ctx->misa = env->misa;
->>       ctx->frm = -1;  /* unknown rounding mode */
->>       ctx->ext_ifencei = cpu->cfg.ext_ifencei;
->> +    ctx->vlen = cpu->cfg.vlen;
->> +    ctx->vill = FIELD_EX32(tb_flags, TB_FLAGS, VILL);
->> +    ctx->sew = FIELD_EX32(tb_flags, TB_FLAGS, SEW);
->> +    ctx->lmul = FIELD_EX32(tb_flags, TB_FLAGS, LMUL);
->> +    ctx->vl_eq_vlmax = FIELD_EX32(tb_flags, TB_FLAGS, VL_EQ_VLMAX);
->>   }
->>
->>   static void riscv_tr_tb_start(DisasContextBase *db, CPUState *cpu)
->> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
->> new file mode 100644
->> index 0000000000..07db704656
->> --- /dev/null
->> +++ b/target/riscv/vector_helper.c
->> @@ -0,0 +1,53 @@
->> +/*
->> + * RISC-V Vector Extension Helpers for QEMU.
->> + *
->> + * Copyright (c) 2020 C-SKY Limited. All rights reserved.
->> + *
->> + * This program is free software; you can redistribute it and/or modify it
->> + * under the terms and conditions of the GNU General Public License,
->> + * version 2 or later, as published by the Free Software Foundation.
->> + *
->> + * This program is distributed in the hope it will be useful, but WITHOUT
->> + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
->> + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
->> + * more details.
->> + *
->> + * You should have received a copy of the GNU General Public License along with
->> + * this program.  If not, see <http://www.gnu.org/licenses/>.
->> + */
->> +
->> +#include "qemu/osdep.h"
->> +#include "cpu.h"
->> +#include "exec/exec-all.h"
->> +#include "exec/helper-proto.h"
->> +#include <math.h>
->> +
->> +target_ulong HELPER(vsetvl)(CPURISCVState *env, target_ulong s1,
->> +    target_ulong s2)
->> +{
->> +    int vlmax, vl;
->> +    RISCVCPU *cpu = env_archcpu(env);
->> +    uint16_t sew = 1 << FIELD_EX64(s2, VTYPE, SEW);
->> +    uint8_t ediv = FIELD_EX64(s2, VTYPE, EDIV);
->> +    bool vill = FIELD_EX64(s2, VTYPE, VILL);
->> +    target_ulong reserved = FIELD_EX64(s2, VTYPE, RESERVED);
->> +
->> +    if ((sew > cpu->cfg.elen) || vill || (ediv != 0) || (reserved != 0)) {
->> +        /* only set vill bit. */
->> +        env->vtype = FIELD_DP64(0, VTYPE, VILL, 1);
->> +        env->vl = 0;
->> +        env->vstart = 0;
->> +        return 0;
->> +    }
->> +
->> +    vlmax = vext_get_vlmax(cpu, s2);
->> +    if (s1 <= vlmax) {
->> +        vl = s1;
->> +    } else {
->> +        vl = vlmax;
->> +    }
->> +    env->vl = vl;
->> +    env->vtype = s2;
->> +    env->vstart = 0;
->> +    return vl;
->> +}
->> --
->> 2.23.0
->>
-
+r~
 
