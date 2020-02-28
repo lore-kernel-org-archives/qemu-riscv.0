@@ -1,42 +1,43 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1j7Yzl-0005L7-6g
-	for mharc-qemu-riscv@gnu.org; Fri, 28 Feb 2020 01:19:33 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:54809)
+	id 1j7boL-0003kH-O0
+	for mharc-qemu-riscv@gnu.org; Fri, 28 Feb 2020 04:19:57 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49645)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <zhiwei_liu@c-sky.com>) id 1j7Yzi-0005J8-UL
- for qemu-riscv@nongnu.org; Fri, 28 Feb 2020 01:19:31 -0500
+ (envelope-from <zhiwei_liu@c-sky.com>) id 1j7boJ-0003ja-3M
+ for qemu-riscv@nongnu.org; Fri, 28 Feb 2020 04:19:56 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <zhiwei_liu@c-sky.com>) id 1j7Yzi-0005Fy-0f
- for qemu-riscv@nongnu.org; Fri, 28 Feb 2020 01:19:30 -0500
-Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:34647)
+ (envelope-from <zhiwei_liu@c-sky.com>) id 1j7boH-0008Qu-JF
+ for qemu-riscv@nongnu.org; Fri, 28 Feb 2020 04:19:55 -0500
+Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:58150)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1j7Yzf-00059Q-0y; Fri, 28 Feb 2020 01:19:27 -0500
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.1877446|-1; CH=green;
- DM=CONTINUE|CONTINUE|true|0.466779-0.0217452-0.511476;
- DS=CONTINUE|ham_regular_dialog|0.423602-0.000318491-0.57608;
- FP=0|0|0|0|0|-1|-1|-1; HT=e02c03293; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS;
- RN=9; RT=9; SR=0; TI=SMTPD_---.GtZudvR_1582870761; 
+ id 1j7boD-0008Mh-P7; Fri, 28 Feb 2020 04:19:50 -0500
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07436313|-1; CH=green;
+ DM=CONTINUE|CONTINUE|true|0.348218-0.0323094-0.619473;
+ DS=CONTINUE|ham_regular_dialog|0.0311077-0.0068173-0.962075;
+ FP=0|0|0|0|0|-1|-1|-1; HT=e02c03312; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS;
+ RN=9; RT=9; SR=0; TI=SMTPD_---.GteTI6o_1582881580; 
 Received: from 192.168.43.249(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.GtZudvR_1582870761)
- by smtp.aliyun-inc.com(10.147.41.120);
- Fri, 28 Feb 2020 14:19:22 +0800
-Subject: Re: [PATCH v3 1/1] target/riscv: add vector integer operations
+ fp:SMTPD_---.GteTI6o_1582881580)
+ by smtp.aliyun-inc.com(10.147.40.233);
+ Fri, 28 Feb 2020 17:19:41 +0800
+Subject: Re: [PATCH v4 5/5] target/riscv: add vector amo operations
 To: Richard Henderson <richard.henderson@linaro.org>, alistair23@gmail.com,
  chihmin.chao@sifive.com, palmer@dabbelt.com
 Cc: wenmeng_zhang@c-sky.com, wxy194768@alibaba-inc.com,
  linux-csky@vger.kernel.org, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-References: <20200226024352.7719-1-zhiwei_liu@c-sky.com>
- <d47523ad-52e3-b0a8-a47d-c91442fbe48d@linaro.org>
+References: <20200225103508.7651-1-zhiwei_liu@c-sky.com>
+ <20200225103508.7651-6-zhiwei_liu@c-sky.com>
+ <03bf483e-d6bb-9de4-9934-12bfa7093ad3@linaro.org>
 From: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Message-ID: <e25d6bea-65ae-2cfc-906e-f149f4c200b7@c-sky.com>
-Date: Fri, 28 Feb 2020 14:19:21 +0800
+Message-ID: <6d008841-4356-b0f1-ece2-df8323ad8254@c-sky.com>
+Date: Fri, 28 Feb 2020 17:19:39 +0800
 User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
  Thunderbird/68.4.2
 MIME-Version: 1.0
-In-Reply-To: <d47523ad-52e3-b0a8-a47d-c91442fbe48d@linaro.org>
+In-Reply-To: <03bf483e-d6bb-9de4-9934-12bfa7093ad3@linaro.org>
 Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 Content-Language: en-US
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 3.x [generic] [fuzzy]
 X-Received-From: 121.197.200.217
@@ -51,33 +52,195 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Feb 2020 06:19:32 -0000
+X-List-Received-Date: Fri, 28 Feb 2020 09:19:56 -0000
 
 
 
-On 2020/2/28 13:46, Richard Henderson wrote:
-> On 2/25/20 6:43 PM, LIU Zhiwei wrote:
->> Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
->> ---
->>   target/riscv/helper.h                   |  395 +++++++
->>   target/riscv/insn32.decode              |  127 +++
->>   target/riscv/insn_trans/trans_rvv.inc.c |  671 +++++++++++-
->>   target/riscv/vector_helper.c            | 1308 ++++++++++++++++++++++-
->>   4 files changed, 2462 insertions(+), 39 deletions(-)
-> This patch is too large and needs splitting.
-OK.
->> -static bool vext_check_overlap_mask(DisasContext *s, uint32_t vd, bool vm)
->> +static bool vext_check_overlap_mask(DisasContext *s, uint32_t vd, bool vm,
->> +    bool widen)
->>   {
->> -    return !(s->lmul > 1 && vm == 0 && vd == 0);
->> +    return (vm != 0 || vd != 0) ? true : (!widen && (s->lmul == 0));
->>   }
->>   
-> Best to move the addition of widen back to the patch that introduced this function.
+On 2020/2/28 13:38, Richard Henderson wrote:
+> On 2/25/20 2:35 AM, LIU Zhiwei wrote:
+>> +    if (s->sew < 2) {
+>> +        return false;
+>> +    }
+> This could just as easily be in amo_check?
+Yes, it can be done in amo_check.
+>> +
+>> +    if (tb_cflags(s->base.tb) & CF_PARALLEL) {
+>> +#ifdef CONFIG_ATOMIC64
+>> +        fn = fns[0][seq][s->sew - 2];
+>> +#else
+>> +        gen_helper_exit_atomic(cpu_env);
+>> +        s->base.is_jmp = DISAS_NORETURN;
+>> +        return true;
+>> +#endif
+> Why are you raising exit_atomic without first checking that s->sew == 3?
+Yes, it should be
+
+     if (s->sew == 3) {
+
+#ifdef CONFIG_ATOMIC64
+         fn = fns[0][seq][1];
+#else
+         gen_helper_exit_atomic(cpu_env);
+         s->base.is_jmp = DISAS_NORETURN;
+         return true;
+#endif
+
+     } else {
+#ifdef TARGET_RISCV64
+
+     fn = fns[0][seq][0];
+#else
+     fn = fns[0][seq];
+#endif
+
+   }
+Is it OK?
+> We
+> can do 32-bit atomic operations always.
+Good.
 >
-> The "? true :" is a funny way to write ||.
-Oh yes. I did not notice it.
+>> +    } else {
+>> +        fn = fns[1][seq][s->sew - 2];
+>> +    }
+>> +    if (fn == NULL) {
+>> +        return false;
+>> +    }
+>> +
+>> +    return amo_trans(a->rd, a->rs1, a->rs2, data, fn, s);
+>> +}
+>> +
+>> +static bool amo_check(DisasContext *s, arg_rwdvm* a)
+>> +{
+>> +    return (vext_check_isa_ill(s, RVV | RVA) &&
+>> +            (a->wd ? vext_check_overlap_mask(s, a->rd, a->vm) : 1) &&
+>> +            vext_check_reg(s, a->rd, false) &&
+>> +            vext_check_reg(s, a->rs2, false));
+>> +}
+> I guess the "If SEW is greater than XLEN, an illegal instruction exception is
+> raised" requirement is currently in the column of NULLs in the !CONFIG_RISCV64
+> block.  But it might be better to have it explicit and save the column of NULLs.
+maybe  adds
+
+(1 << s->sew) <= sizeof(target_ulong) &&
+
+in amo_check
+> It makes sense to me to do both sew checks together, whether in amo_check or in
+> amo_op.
+>
+>> +#define GEN_VEXT_AMO_NOATOMIC_OP(NAME, ETYPE, MTYPE, H, DO_OP, SUF)      \
+>> +static void vext_##NAME##_noatomic_op(void *vs3, target_ulong addr,      \
+>> +        uint32_t wd, uint32_t idx, CPURISCVState *env, uintptr_t retaddr)\
+>> +{                                                                        \
+>> +    ETYPE ret;                                                           \
+>> +    target_ulong tmp;                                                    \
+>> +    int mmu_idx = cpu_mmu_index(env, false);                             \
+>> +    tmp = cpu_ld##SUF##_mmuidx_ra(env, addr, mmu_idx, retaddr);          \
+>> +    ret = DO_OP((ETYPE)(MTYPE)tmp, *((ETYPE *)vs3 + H(idx)));            \
+>> +    cpu_st##SUF##_mmuidx_ra(env, addr, ret, mmu_idx, retaddr);           \
+>> +    if (wd) {                                                            \
+>> +        *((ETYPE *)vs3 + H(idx)) = (target_long)(MTYPE)tmp;              \
+> The target_long cast is wrong; should be ETYPE.
+"If the AMO memory element width is less than SEW, the value returned 
+from memory
+  is sign-extended to fill SEW"
+
+So just use (target_long) to sign-extended. As you see, instructions like
+
+vamominud
+
+have the uint64_t as ETYPE.  And it can't sign-extend the value from 
+memory by (ETYPE)(MTYPE)tmp.
+> You can use cpu_ldX/stX_data (no mmu_idx or retaddr argument).  There should be
+> no faults, since you've already checked for read+write.
+Good idea.
+>> +/* atomic opreation for vector atomic insructions */
+>> +#ifndef CONFIG_USER_ONLY
+>> +#define GEN_VEXT_ATOMIC_OP(NAME, ETYPE, MTYPE, MOFLAG, H, AMO)           \
+>> +static void vext_##NAME##_atomic_op(void *vs3, target_ulong addr,        \
+>> +        uint32_t wd, uint32_t idx, CPURISCVState *env)                   \
+>> +{                                                                        \
+>> +    target_ulong tmp;                                                    \
+>> +    int mem_idx = cpu_mmu_index(env, false);                             \
+>> +    tmp = helper_atomic_##AMO##_le(env, addr, *((ETYPE *)vs3 + H(idx)),  \
+>> +            make_memop_idx(MO_ALIGN | MOFLAG, mem_idx));                 \
+>> +    if (wd) {                                                            \
+>> +        *((ETYPE *)vs3 + H(idx)) = (target_long)(MTYPE)tmp;              \
+>> +    }                                                                    \
+>> +}
+>> +#else
+>> +#define GEN_VEXT_ATOMIC_OP(NAME, ETYPE, MTYPE, MOFLAG, H, AMO)           \
+>> +static void vext_##NAME##_atomic_op(void *vs3, target_ulong addr,        \
+>> +        uint32_t wd, uint32_t idx, CPURISCVState *env)                   \
+>> +{                                                                        \
+>> +    target_ulong tmp;                                                    \
+>> +    tmp = helper_atomic_##AMO##_le(env, addr, *((ETYPE *)vs3 + H(idx))); \
+>> +    if (wd) {                                                            \
+>> +        *((ETYPE *)vs3 + H(idx)) = (target_long)(MTYPE)tmp;              \
+>> +    }                                                                    \
+>> +}
+>> +#endif
+> This is not right.  It is not legal to call these helpers from another helper
+> -- they will use the wrong GETPC() and will not unwind properly.
+Oh. I didn't notice it.
+>> +static inline void vext_amo_atomic(void *vs3, void *v0, target_ulong base,
+>> +        void *vs2, CPURISCVState *env, uint32_t desc,
+>> +        vext_get_index_addr get_index_addr,
+>> +        vext_amo_atomic_fn atomic_op,
+>> +        vext_ld_clear_elem clear_elem,
+>> +        uint32_t esz, uint32_t msz, uintptr_t ra)
+>> +{
+>> +    uint32_t i;
+>> +    target_long addr;
+>> +    uint32_t wd = vext_wd(desc);
+>> +    uint32_t vm = vext_vm(desc);
+>> +    uint32_t mlen = vext_mlen(desc);
+>> +    uint32_t vlmax = vext_maxsz(desc) / esz;
+>> +
+>> +    for (i = 0; i < env->vl; i++) {
+>> +        if (!vm && !vext_elem_mask(v0, mlen, i)) {
+>> +            continue;
+>> +        }
+>> +        probe_read_access(env, get_index_addr(base, i, vs2), msz, ra);
+>> +        probe_write_access(env, get_index_addr(base, i, vs2), msz, ra);
+>> +    }
+> You probably need to check for aligned address here too, probably first so an
+> unaligned fault has priority over an invalid page fault.
+OK, I will use  cpu_unaligned_access() to check unaligned access.
+> The missing aligned address check is the only remaining exception that the
+> helper_atomic_* functions would raise, since you have properly checked for
+> read+write.  So it might be possible to get away with using the helpers, but I
+> don't like it.
+Do you mean write my own helpers to implement atomic operations?
+
+What's the meaning of " but I don't like it. "?
+> But I do think it would be better to write your own helpers for the atomic
+> paths.  They need not check quite so much, since we have already done the
+> validation above.  You pretty much only need to use tlb_vaddr_to_host.
+>
+> If that gets too ugly, we can talk about rearranging
+> accel/tcg/atomic_template.h so that it could be reused.
+Good idea.  Perhaps use tlb_vaddr_to_host instead of atomic_mmu_lookup
+to define another macro like GEN_ATOMIC_HELPER?
+> Alternately, we could simply *always* use the non-atomic helpers, and raise
+> exit_atomic if PARALLEL.
+Yes, it's the simplest way.
+However I prefer try to define something like GEN_ATOMIC_HELPER in 
+vector_helper.c.
+>> +static inline void vext_amo_noatomic(void *vs3, void *v0, target_ulong base,
+>> +        void *vs2, CPURISCVState *env, uint32_t desc,
+>> +        vext_get_index_addr get_index_addr,
+>> +        vext_amo_noatomic_fn noatomic_op,
+>> +        vext_ld_clear_elem clear_elem,
+>> +        uint32_t esz, uint32_t msz, uintptr_t ra)
+> Without the retaddr argument to the noatomic_fn, as described above,
+> vext_amo_noatomic and vext_amo_atomic are identical.
+Yes.
+
+It's very kind of you to spend so much time to review.
+Thanks very much.
+
+Best Regards,
+Zhiwei
 >
 > r~
 
