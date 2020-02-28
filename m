@@ -1,46 +1,42 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1j7Yxa-00046H-M8
-	for mharc-qemu-riscv@gnu.org; Fri, 28 Feb 2020 01:17:18 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:54552)
+	id 1j7Yzl-0005L7-6g
+	for mharc-qemu-riscv@gnu.org; Fri, 28 Feb 2020 01:19:33 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:54809)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <zhiwei_liu@c-sky.com>) id 1j7YxX-00044S-KV
- for qemu-riscv@nongnu.org; Fri, 28 Feb 2020 01:17:16 -0500
+ (envelope-from <zhiwei_liu@c-sky.com>) id 1j7Yzi-0005J8-UL
+ for qemu-riscv@nongnu.org; Fri, 28 Feb 2020 01:19:31 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <zhiwei_liu@c-sky.com>) id 1j7YxW-0004PN-Nw
- for qemu-riscv@nongnu.org; Fri, 28 Feb 2020 01:17:15 -0500
-Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:50518)
+ (envelope-from <zhiwei_liu@c-sky.com>) id 1j7Yzi-0005Fy-0f
+ for qemu-riscv@nongnu.org; Fri, 28 Feb 2020 01:19:30 -0500
+Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:34647)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1j7YxU-0004N8-5i; Fri, 28 Feb 2020 01:17:12 -0500
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.1105056|-1; CH=green;
- DM=CONTINUE|CONTINUE|true|0.668689-0.00268013-0.328631;
- DS=CONTINUE|ham_system_inform|0.01643-0.000390589-0.983179;
- FP=0|0|0|0|0|-1|-1|-1; HT=e02c03309; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS;
- RN=9; RT=9; SR=0; TI=SMTPD_---.GtZaCA3_1582870620; 
+ id 1j7Yzf-00059Q-0y; Fri, 28 Feb 2020 01:19:27 -0500
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.1877446|-1; CH=green;
+ DM=CONTINUE|CONTINUE|true|0.466779-0.0217452-0.511476;
+ DS=CONTINUE|ham_regular_dialog|0.423602-0.000318491-0.57608;
+ FP=0|0|0|0|0|-1|-1|-1; HT=e02c03293; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS;
+ RN=9; RT=9; SR=0; TI=SMTPD_---.GtZudvR_1582870761; 
 Received: from 192.168.43.249(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.GtZaCA3_1582870620)
- by smtp.aliyun-inc.com(10.147.44.145);
- Fri, 28 Feb 2020 14:17:01 +0800
-Subject: Re: [PATCH v4 1/5] target/riscv: add vector unit stride load and
- store instructions
+ fp:SMTPD_---.GtZudvR_1582870761)
+ by smtp.aliyun-inc.com(10.147.41.120);
+ Fri, 28 Feb 2020 14:19:22 +0800
+Subject: Re: [PATCH v3 1/1] target/riscv: add vector integer operations
 To: Richard Henderson <richard.henderson@linaro.org>, alistair23@gmail.com,
  chihmin.chao@sifive.com, palmer@dabbelt.com
 Cc: wenmeng_zhang@c-sky.com, wxy194768@alibaba-inc.com,
  linux-csky@vger.kernel.org, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-References: <20200225103508.7651-1-zhiwei_liu@c-sky.com>
- <20200225103508.7651-2-zhiwei_liu@c-sky.com>
- <4cfb56d6-34a5-0e35-87a0-2aefaafa4221@linaro.org>
- <287bde05-421c-f49c-2404-fdee183c9e12@c-sky.com>
- <10e50ea8-7614-f094-a827-38ed09462f29@linaro.org>
+References: <20200226024352.7719-1-zhiwei_liu@c-sky.com>
+ <d47523ad-52e3-b0a8-a47d-c91442fbe48d@linaro.org>
 From: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Message-ID: <30622566-09d2-17b6-edc1-8726dce8cbd8@c-sky.com>
-Date: Fri, 28 Feb 2020 14:16:59 +0800
+Message-ID: <e25d6bea-65ae-2cfc-906e-f149f4c200b7@c-sky.com>
+Date: Fri, 28 Feb 2020 14:19:21 +0800
 User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
  Thunderbird/68.4.2
 MIME-Version: 1.0
-In-Reply-To: <10e50ea8-7614-f094-a827-38ed09462f29@linaro.org>
+In-Reply-To: <d47523ad-52e3-b0a8-a47d-c91442fbe48d@linaro.org>
 Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 Content-Language: en-US
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 3.x [generic] [fuzzy]
 X-Received-From: 121.197.200.217
@@ -55,40 +51,33 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Feb 2020 06:17:16 -0000
+X-List-Received-Date: Fri, 28 Feb 2020 06:19:32 -0000
 
 
 
-On 2020/2/28 11:33, Richard Henderson wrote:
-> On 2/27/20 5:50 PM, LIU Zhiwei wrote:
->>> This is not what I had in mind, and looks wrong as well.
->>>
->>>      int idx = (index * mlen) / 64;
->>>      int pos = (index * mlen) % 64;
->>>      return (((uint64_t *)v0)[idx] >> pos) & 1;
->>>
->>> You also might consider passing log2(mlen), so the multiplication could be
->>> strength-reduced to a shift.
->> I don't think so. For example, when mlen is 8 bits and index is 0, it will
->> reduce to
->>
->> return (((uint64_t *)v0)[0]) & 1
->>
->> And it's not right.
->>
->> The right bit is first bit in vector register 0. And in host big endianess,
->> it will be  the first bit of the seventh byte.
-> You've forgotten that we've just done an 8-byte big-endian load, which means
-> that we *are* looking at the first bit of the byte at offset 7.
+On 2020/2/28 13:46, Richard Henderson wrote:
+> On 2/25/20 6:43 PM, LIU Zhiwei wrote:
+>> Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
+>> ---
+>>   target/riscv/helper.h                   |  395 +++++++
+>>   target/riscv/insn32.decode              |  127 +++
+>>   target/riscv/insn_trans/trans_rvv.inc.c |  671 +++++++++++-
+>>   target/riscv/vector_helper.c            | 1308 ++++++++++++++++++++++-
+>>   4 files changed, 2462 insertions(+), 39 deletions(-)
+> This patch is too large and needs splitting.
+OK.
+>> -static bool vext_check_overlap_mask(DisasContext *s, uint32_t vd, bool vm)
+>> +static bool vext_check_overlap_mask(DisasContext *s, uint32_t vd, bool vm,
+>> +    bool widen)
+>>   {
+>> -    return !(s->lmul > 1 && vm == 0 && vd == 0);
+>> +    return (vm != 0 || vd != 0) ? true : (!widen && (s->lmul == 0));
+>>   }
+>>   
+> Best to move the addition of widen back to the patch that introduced this function.
 >
-> It is right.
-Yes, that's it.
->   
->>> You don't need to pass mlen, since it's
->> Yes.
-> I finally remembered all of the bits that go into mlen and thought I had
-> deleted that sentence -- apparently I only removed half.  ;-)
->
+> The "? true :" is a funny way to write ||.
+Oh yes. I did not notice it.
 >
 > r~
 
