@@ -1,46 +1,42 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1j81yt-0005MV-5P
-	for mharc-qemu-riscv@gnu.org; Sat, 29 Feb 2020 08:16:35 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:35176)
+	id 1j83hq-00028w-Oi
+	for mharc-qemu-riscv@gnu.org; Sat, 29 Feb 2020 10:07:06 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:46238)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <zhiwei_liu@c-sky.com>) id 1j81yp-0005MB-Su
- for qemu-riscv@nongnu.org; Sat, 29 Feb 2020 08:16:33 -0500
+ (envelope-from <zhiwei_liu@c-sky.com>) id 1j83hn-00027t-Pp
+ for qemu-riscv@nongnu.org; Sat, 29 Feb 2020 10:07:04 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <zhiwei_liu@c-sky.com>) id 1j81yo-0007JN-KI
- for qemu-riscv@nongnu.org; Sat, 29 Feb 2020 08:16:31 -0500
-Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:39714)
+ (envelope-from <zhiwei_liu@c-sky.com>) id 1j83hm-0006c2-Q0
+ for qemu-riscv@nongnu.org; Sat, 29 Feb 2020 10:07:03 -0500
+Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:41665)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1j81yk-0007FN-7k; Sat, 29 Feb 2020 08:16:27 -0500
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07439639|-1; CH=green;
- DM=CONTINUE|CONTINUE|true|0.420502-0.00878351-0.570714;
- DS=CONTINUE|ham_regular_dialog|0.0798981-0.00281304-0.917289;
- FP=0|0|0|0|0|-1|-1|-1; HT=e02c03299; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS;
- RN=9; RT=9; SR=0; TI=SMTPD_---.Gu9hB46_1582982174; 
-Received: from 30.0.153.10(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.Gu9hB46_1582982174)
- by smtp.aliyun-inc.com(10.147.41.187);
- Sat, 29 Feb 2020 21:16:14 +0800
-Subject: Re: [PATCH v4 5/5] target/riscv: add vector amo operations
-To: Richard Henderson <richard.henderson@linaro.org>, alistair23@gmail.com,
+ id 1j83hj-0006Uq-Vn; Sat, 29 Feb 2020 10:07:00 -0500
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.09570916|-1; CH=green;
+ DM=CONTINUE|CONTINUE|true|0.0847261-0.00699878-0.908275;
+ DS=CONTINUE|ham_system_inform|0.0333957-0.000332124-0.966272;
+ FP=0|0|0|0|0|-1|-1|-1; HT=e01a16378; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS;
+ RN=11; RT=11; SR=0; TI=SMTPD_---.GuBq59D_1582988809; 
+Received: from L-PF1D6DP4-1208.hz.ali.com(mailfrom:zhiwei_liu@c-sky.com
+ fp:SMTPD_---.GuBq59D_1582988809)
+ by smtp.aliyun-inc.com(10.147.40.200);
+ Sat, 29 Feb 2020 23:06:50 +0800
+From: LIU Zhiwei <zhiwei_liu@c-sky.com>
+To: richard.henderson@linaro.org, alistair23@gmail.com,
  chihmin.chao@sifive.com, palmer@dabbelt.com
 Cc: wenmeng_zhang@c-sky.com, wxy194768@alibaba-inc.com,
- linux-csky@vger.kernel.org, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-References: <20200225103508.7651-1-zhiwei_liu@c-sky.com>
- <20200225103508.7651-6-zhiwei_liu@c-sky.com>
- <03bf483e-d6bb-9de4-9934-12bfa7093ad3@linaro.org>
- <6d008841-4356-b0f1-ece2-df8323ad8254@c-sky.com>
- <a3a614d1-aa54-046b-2c14-b6e517f1fbf0@linaro.org>
-From: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Message-ID: <11e36778-50c8-64a9-35ab-bb3e2bdeb92e@c-sky.com>
-Date: Sat, 29 Feb 2020 21:16:14 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.4.2
+ linux-csky@vger.kernel.org, qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
+ LIU Zhiwei <zhiwei_liu@c-sky.com>,
+ Alistair Francis <alistair.francis@wdc.com>
+Subject: [PATCH v6 1/4] target/riscv: add vector extension field in
+ CPURISCVState
+Date: Sat, 29 Feb 2020 23:04:10 +0800
+Message-Id: <20200229150413.24950-2-zhiwei_liu@c-sky.com>
+X-Mailer: git-send-email 2.23.0
+In-Reply-To: <20200229150413.24950-1-zhiwei_liu@c-sky.com>
+References: <20200229150413.24950-1-zhiwei_liu@c-sky.com>
 MIME-Version: 1.0
-In-Reply-To: <a3a614d1-aa54-046b-2c14-b6e517f1fbf0@linaro.org>
-Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Content-Language: en-US
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 3.x [generic] [fuzzy]
 X-Received-From: 121.197.200.217
 X-BeenThere: qemu-riscv@nongnu.org
@@ -54,112 +50,54 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 29 Feb 2020 13:16:33 -0000
+X-List-Received-Date: Sat, 29 Feb 2020 15:07:04 -0000
 
+The 32 vector registers will be viewed as a continuous memory block.
+It avoids the convension between element index and (regno, offset).
+Thus elements can be directly accessed by offset from the first vector
+base address.
 
+Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+---
+ target/riscv/cpu.h | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
 
-On 2020/2/29 2:46, Richard Henderson wrote:
-> On 2/28/20 1:19 AM, LIU Zhiwei wrote:
->>>> +#define GEN_VEXT_AMO_NOATOMIC_OP(NAME, ETYPE, MTYPE, H, DO_OP, SUF)      \
->>>> +static void vext_##NAME##_noatomic_op(void *vs3, target_ulong addr,      \
->>>> +        uint32_t wd, uint32_t idx, CPURISCVState *env, uintptr_t retaddr)\
->>>> +{                                                                        \
->>>> +    ETYPE ret;                                                           \
->>>> +    target_ulong tmp;                                                    \
->>>> +    int mmu_idx = cpu_mmu_index(env, false);                             \
->>>> +    tmp = cpu_ld##SUF##_mmuidx_ra(env, addr, mmu_idx, retaddr);          \
->>>> +    ret = DO_OP((ETYPE)(MTYPE)tmp, *((ETYPE *)vs3 + H(idx)));            \
->>>> +    cpu_st##SUF##_mmuidx_ra(env, addr, ret, mmu_idx, retaddr);           \
->>>> +    if (wd) {                                                            \
->>>> +        *((ETYPE *)vs3 + H(idx)) = (target_long)(MTYPE)tmp;              \
->>> The target_long cast is wrong; should be ETYPE.
->> "If the AMO memory element width is less than SEW, the value returned from memory
->>   is sign-extended to fill SEW"
->>
->> So just use (target_long) to sign-extended. As you see, instructions like
->>
->> vamominud
->>
->> have the uint64_t as ETYPE.  And it can't sign-extend the value from memory by
->> (ETYPE)(MTYPE)tmp.
-> Casting to target_long doesn't help -- it becomes signed at a variable size,
-> possibly larger than MTYPE.
->
-> In addition, I think you're performing the operation at the wrong length.
->   The
-> text of the ISA document could be clearer, but
->
->    # If SEW > 32 bits, the value returned from memory
->    # is sign-extended to fill SEW.
->
-> You are performing the operation in ETYPE, but it should be done in MTYPE and
-> only afterward extended to ETYPE.
-Yes, I  made a mistake.It should be MTYPE.
-> For minu/maxu, you're right that you need an unsigned for the operation.  But
-> then you need a signed type of the same width for the extension.
->
-> One possibility is to *always* make MTYPE a signed type, but for the two cases
-> that require an unsigned type, provide it.  E.g.
->
-> #define GEN_VEXT_AMO_NOATOMIC_OP(NAME, ESZ, MSZ, H, DO_OP, SUF)
-> static void vext_##NAME##_noatomic_op(void *vs3,
->      target_ulong addr, uint32_t wd, uint32_t idx,
->      CPURISCVState *env, uintptr_t retaddr)
-> {
->      typedef int##ESZ##_t ETYPE;
->      typedef int##MSZ##_t MTYPE;
->      typedef uint##MSZ##_t UMTYPE;
->      ETYPE *pe3 = (ETYPE *)vs3 + H(idx);
->      MTYPE a = *pe3, b = cpu_ld##SUF##_data(env, addr);
->      a = DO_OP(a, b);
->      cpu_st##SUF##_data(env, addr, a);
->      if (wd) {
->          *pe3 = a;
->      }
-> }
->
-> /* Signed min/max */
-> #define DO_MAX(N, M)  ((N) >= (M) ? (N) : (M))
-> #define DO_MIN(N, M)  ((N) >= (M) ? (M) : (N))
->
-> /* Unsigned min/max */
-> #define DO_MAXU(N, M) DO_MAX((UMTYPE)N, (UMTYPE)M)
-> #define DO_MINU(N, M) DO_MIN((UMTYPE)N, (UMTYPE)M)
->
-> GEN_VEXT_AMO_NOATOMIC_OP(vamomaxuw_v_d, 64, 32, H8, DO_MAXU, l)
-> GEN_VEXT_AMO_NOATOMIC_OP(vamomaxud_v_d, 64, 64, H8, DO_MAXU, q)
-Perfect. I will try it.
-
->
->>> The missing aligned address check is the only remaining exception that the
->>> helper_atomic_* functions would raise, since you have properly checked for
->>> read+write.  So it might be possible to get away with using the helpers, but I
->>> don't like it.
->> Do you mean write my own helpers to implement atomic operations?
->>
->> What's the meaning of " but I don't like it. "?
-> I don't like re-using helpers in an incorrect way.
->
->>> But I do think it would be better to write your own helpers for the atomic
->>> paths.  They need not check quite so much, since we have already done the
->>> validation above.  You pretty much only need to use tlb_vaddr_to_host.
->>>
->>> If that gets too ugly, we can talk about rearranging
->>> accel/tcg/atomic_template.h so that it could be reused.
->> Good idea.  Perhaps use tlb_vaddr_to_host instead of atomic_mmu_lookup
->> to define another macro like GEN_ATOMIC_HELPER?
->>> Alternately, we could simply *always* use the non-atomic helpers, and raise
->>> exit_atomic if PARALLEL.
->> Yes, it's the simplest way.
->> However I prefer try to define something like GEN_ATOMIC_HELPER in
->> vector_helper.c.
-> I'll think about this some more.
-> In the short-term, I think non-atomic is the best we can do.
-I will accept your advice. Thanks.
-
-Best Regards,
-Zhiwei
->
-> r~
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index de0a8d893a..2e8d01c155 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -64,6 +64,7 @@
+ #define RVA RV('A')
+ #define RVF RV('F')
+ #define RVD RV('D')
++#define RVV RV('V')
+ #define RVC RV('C')
+ #define RVS RV('S')
+ #define RVU RV('U')
+@@ -93,9 +94,20 @@ typedef struct CPURISCVState CPURISCVState;
+ 
+ #include "pmp.h"
+ 
++#define RV_VLEN_MAX 512
++
+ struct CPURISCVState {
+     target_ulong gpr[32];
+     uint64_t fpr[32]; /* assume both F and D extensions */
++
++    /* vector coprocessor state. */
++    uint64_t vreg[32 * RV_VLEN_MAX / 64] QEMU_ALIGNED(16);
++    target_ulong vxrm;
++    target_ulong vxsat;
++    target_ulong vl;
++    target_ulong vstart;
++    target_ulong vtype;
++
+     target_ulong pc;
+     target_ulong load_res;
+     target_ulong load_val;
+-- 
+2.23.0
 
 
