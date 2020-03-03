@@ -1,53 +1,54 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1j8vmM-0005Sk-5G
-	for mharc-qemu-riscv@gnu.org; Mon, 02 Mar 2020 19:51:22 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:45379)
+	id 1j8vmY-0005wi-Im
+	for mharc-qemu-riscv@gnu.org; Mon, 02 Mar 2020 19:51:34 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:45505)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <palmerdabbelt@google.com>) id 1j8vkx-0002id-Tl
- for qemu-riscv@nongnu.org; Mon, 02 Mar 2020 19:49:57 -0500
+ (envelope-from <palmerdabbelt@google.com>) id 1j8vl2-0002rQ-GE
+ for qemu-riscv@nongnu.org; Mon, 02 Mar 2020 19:50:01 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmerdabbelt@google.com>) id 1j8vku-0004W3-Bl
- for qemu-riscv@nongnu.org; Mon, 02 Mar 2020 19:49:54 -0500
-Received: from mail-pf1-x429.google.com ([2607:f8b0:4864:20::429]:34187)
+ (envelope-from <palmerdabbelt@google.com>) id 1j8vl1-0004cP-43
+ for qemu-riscv@nongnu.org; Mon, 02 Mar 2020 19:50:00 -0500
+Received: from mail-pj1-x1033.google.com ([2607:f8b0:4864:20::1033]:33708)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <palmerdabbelt@google.com>)
- id 1j8vkt-0004V4-Ub
- for qemu-riscv@nongnu.org; Mon, 02 Mar 2020 19:49:52 -0500
-Received: by mail-pf1-x429.google.com with SMTP id y21so570696pfp.1
- for <qemu-riscv@nongnu.org>; Mon, 02 Mar 2020 16:49:51 -0800 (PST)
+ id 1j8vl0-0004bg-Ud
+ for qemu-riscv@nongnu.org; Mon, 02 Mar 2020 19:49:59 -0500
+Received: by mail-pj1-x1033.google.com with SMTP id m7so491565pjs.0
+ for <qemu-riscv@nongnu.org>; Mon, 02 Mar 2020 16:49:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
  h=subject:date:message-id:in-reply-to:references:mime-version
  :content-transfer-encoding:cc:from:to;
- bh=L0gAOeYyh4ssRiGbBIUEmt9mPfUm7yjv/MJPi98va64=;
- b=jN5u4Qzmk0XSF1b+OLinbGW6CpUAVvC5i4IvUJo3+uoEAFLMPctWAqBOJs3dSMIInB
- hnO5mNvS+y9IM3mdLZu0KunFnT14wO8MyYAsIkso4AFnYspk/BIIOQWfqRfyIUhn322Q
- 9swRQt2DWrQJYyiTuoona+eKMrqbZNN2kqCpQ10XIuT+QtlIimxC9/YU0prmdwHG4D5y
- J0ynL1Efl2bKM5zo4CkLntPbAfL1JvJLMiOpga3CJxehzpWkCcGuaQT2Fiuh6IVneYhh
- ww2UPf3VwNP222NcQ8GyUOnTnKIB+Du30FrczN0hGewGUBBm33u3/YkJGsPasSQRE2+i
- HfJQ==
+ bh=xTc+vPkMfohLZfVyEMM5rQlCBaxWcGBV4IgrxO2Qhx8=;
+ b=LsXMuYCzMyTQTHPlFrwbuTvpvZakc7vO1yjFBQ42C8uKnJEDUpgeYI/BkJNNpDCBn+
+ sJIH0CAzD1X60HerZI4p1QVRlnRmjRJzKBgxuo4huDAeMWQts4gpYAc4bv+sUMbvdnmT
+ EsnxIYFqyza1v1pxVMs1n1Y7K8BkNeuPo06OrSB9yfXNGgecsrxTVBKxkGSnx3aXdrb5
+ pasVlRhmy0Fc3YLWUBRqJYM1fcxhvvtljmf0D4to2F4ctjZxC3134LjJJKOCHAHR4vtk
+ uDDd3LEMtr0g0XxQt+EqDu08boGCv+GmVKTR0i+Qx7rBynlOEjSgZvZ6eb06dWeuGAPp
+ cnbQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding:cc:from:to;
- bh=L0gAOeYyh4ssRiGbBIUEmt9mPfUm7yjv/MJPi98va64=;
- b=j5VbU+pCluFjHeEgSv3V6mlTGTPj52rrNLeTbCipO23VGIsDjqkKTZXdUvmti5rL1j
- tzrkkA4399EgG1w4cheRz2cZHl01Yf9fBC99xaRi0StOOCFTWauHFonfV0osKKiSWKxd
- 5yutUUW9E7Vr6JcyiTvDCvI0Vex4Fhd77gyYs8FCCU0EQZhPUkmE/N7ILG/TUe9m4T+x
- 15uujPGlQxqOb+4vbg7KAaVferTaNJCmrXiM0xQbK3236170zFPpiAso/uMakuySd0pb
- uTiMQtoyPbKdFve8yFg3u760OgOWZ9HLEkXStqNc6cClNfz26DspD0l8f4eNZlNG1IcF
- qIIA==
-X-Gm-Message-State: ANhLgQ28i7aWMcUymyre+BDpjMNkc7mPGQBo67sRqQlBQ3qDUJMyf/fN
- 9/jiJzLyjdGltQSuw2liAJ3QRDgYeXVD0w==
-X-Google-Smtp-Source: ADFU+vu9D1s4m7d4MgW4humzghf+TfcxJoYeJct7ISzsKy43CI9sHKVgrApuSTJFaUIrsVcP2zqLgw==
-X-Received: by 2002:a63:5916:: with SMTP id n22mr1574426pgb.190.1583196589503; 
- Mon, 02 Mar 2020 16:49:49 -0800 (PST)
+ bh=xTc+vPkMfohLZfVyEMM5rQlCBaxWcGBV4IgrxO2Qhx8=;
+ b=G3wOy584bCNHJepVx7VVwAZmx5nx/8Os/RD4TeGqVucOKs2I8fPrzEkzxJkQLw2Jxz
+ XDSJeOxzreqKQ9aPBmNA8M0z62H5iGJL7xYeq4RPa2eO538vT1wRke+/rsV8V+zvVILy
+ aY2c10LtwKRIX8GjUhOU43e36P211uzTDu2/3s5wFy17IODgwq60ubHEV55V9vRKFpvP
+ VI0g4ORddJaT3M/C6AuqHU9pAp36+PBJf+/BYhlOE1pKQevsdcPNdAMAYHdAgYpqa/Ml
+ iB4g+RURtsiEwecm5zjTIgVnWW1FZ0H7jtTI5LZknQhhvOr8jr96aCmOP7gMyR4n7oBK
+ gDmA==
+X-Gm-Message-State: ANhLgQ04SDIt5H7aP68fdTNTOxN1MohVUbMYZ+vZxugIT1ZMKQCAwTgr
+ XKH2tD5k5KbKOOV2gzNfkJUzw0ojZXAuEw==
+X-Google-Smtp-Source: ADFU+vvtiPtMtogZiBGbE3rZUkUtlZF+3JGCrYw2LglTfI24TmZnr550vsdDfG1OLM4xIchTzWufdA==
+X-Received: by 2002:a17:90b:8ce:: with SMTP id
+ ds14mr1253412pjb.70.1583196597076; 
+ Mon, 02 Mar 2020 16:49:57 -0800 (PST)
 Received: from localhost ([2620:0:1000:2514:23a5:d584:6a92:3e3c])
- by smtp.gmail.com with ESMTPSA id z10sm21620999pgf.35.2020.03.02.16.49.48
+ by smtp.gmail.com with ESMTPSA id k67sm22159878pga.91.2020.03.02.16.49.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Mar 2020 16:49:48 -0800 (PST)
-Subject: [PULL 29/38] target/riscv: Allow specifying MMU stage
-Date: Mon,  2 Mar 2020 16:48:39 -0800
-Message-Id: <20200303004848.136788-30-palmerdabbelt@google.com>
+ Mon, 02 Mar 2020 16:49:56 -0800 (PST)
+Subject: [PULL 34/38] target/riscv: Add the MSTATUS_MPV_ISSET helper macro
+Date: Mon,  2 Mar 2020 16:48:44 -0800
+Message-Id: <20200303004848.136788-35-palmerdabbelt@google.com>
 X-Mailer: git-send-email 2.25.0.265.gbab2e86ba0-goog
 In-Reply-To: <20200303004848.136788-1-palmerdabbelt@google.com>
 References: <20200303004848.136788-1-palmerdabbelt@google.com>
@@ -60,7 +61,7 @@ From: Palmer Dabbelt <palmerdabbelt@google.com>
 To: Peter Maydell <peter.maydell@linaro.org>
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::429
+X-Received-From: 2607:f8b0:4864:20::1033
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -72,98 +73,95 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Mar 2020 00:49:57 -0000
+X-List-Received-Date: Tue, 03 Mar 2020 00:50:01 -0000
 
 From: Alistair Francis <alistair.francis@wdc.com>
+
+Add a helper macro MSTATUS_MPV_ISSET() which will determine if the
+MSTATUS_MPV bit is set for both 32-bit and 64-bit RISC-V.
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 Reviewed-by: Palmer Dabbelt <palmerdabbelt@google.com>
 Signed-off-by: Palmer Dabbelt <palmerdabbelt@google.com>
 ---
- target/riscv/cpu_helper.c | 37 ++++++++++++++++++++++++++++---------
- 1 file changed, 28 insertions(+), 9 deletions(-)
+ target/riscv/cpu_bits.h   | 11 +++++++++++
+ target/riscv/cpu_helper.c |  4 ++--
+ target/riscv/op_helper.c  |  2 +-
+ target/riscv/translate.c  |  2 +-
+ 4 files changed, 15 insertions(+), 4 deletions(-)
 
+diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+index 049032f2ae..7f64ee1174 100644
+--- a/target/riscv/cpu_bits.h
++++ b/target/riscv/cpu_bits.h
+@@ -363,8 +363,19 @@
+ #define MSTATUS_TVM         0x00100000 /* since: priv-1.10 */
+ #define MSTATUS_TW          0x20000000 /* since: priv-1.10 */
+ #define MSTATUS_TSR         0x40000000 /* since: priv-1.10 */
++#if defined(TARGET_RISCV64)
+ #define MSTATUS_MTL         0x4000000000ULL
+ #define MSTATUS_MPV         0x8000000000ULL
++#elif defined(TARGET_RISCV32)
++#define MSTATUS_MTL         0x00000040
++#define MSTATUS_MPV         0x00000080
++#endif
++
++#ifdef TARGET_RISCV32
++# define MSTATUS_MPV_ISSET(env)  get_field(env->mstatush, MSTATUS_MPV)
++#else
++# define MSTATUS_MPV_ISSET(env)  get_field(env->mstatus, MSTATUS_MPV)
++#endif
+ 
+ #define MSTATUS64_UXL       0x0000000300000000ULL
+ #define MSTATUS64_SXL       0x0000000C00000000ULL
 diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index d9a29d702a..8ae1038bcd 100644
+index 10f246ddf8..29a1b37d88 100644
 --- a/target/riscv/cpu_helper.c
 +++ b/target/riscv/cpu_helper.c
-@@ -277,10 +277,19 @@ void riscv_cpu_set_mode(CPURISCVState *env, target_ulong newpriv)
-  *
-  * Adapted from Spike's mmu_t::translate and mmu_t::walk
-  *
-+ * @env: CPURISCVState
-+ * @physical: This will be set to the calculated physical address
-+ * @prot: The returned protection attributes
-+ * @addr: The virtual address to be translated
-+ * @access_type: The type of MMU access
-+ * @mmu_idx: Indicates current privilege level
-+ * @first_stage: Are we in first stage translation?
-+ *               Second stage is used for hypervisor guest translation
-  */
- static int get_physical_address(CPURISCVState *env, hwaddr *physical,
-                                 int *prot, target_ulong addr,
--                                int access_type, int mmu_idx)
-+                                int access_type, int mmu_idx,
-+                                bool first_stage)
- {
-     /* NOTE: the env->pc value visible here will not be
-      * correct, but the value visible to the exception handler
-@@ -485,13 +494,21 @@ restart:
- }
+@@ -322,7 +322,7 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
+             mode = get_field(env->mstatus, MSTATUS_MPP);
  
- static void raise_mmu_exception(CPURISCVState *env, target_ulong address,
--                                MMUAccessType access_type, bool pmp_violation)
-+                                MMUAccessType access_type, bool pmp_violation,
-+                                bool first_stage)
- {
-     CPUState *cs = env_cpu(env);
--    int page_fault_exceptions =
--        (env->priv_ver >= PRIV_VERSION_1_10_0) &&
--        get_field(env->satp, SATP_MODE) != VM_1_10_MBARE &&
--        !pmp_violation;
-+    int page_fault_exceptions;
-+    if (first_stage) {
-+        page_fault_exceptions =
-+            (env->priv_ver >= PRIV_VERSION_1_10_0) &&
-+            get_field(env->satp, SATP_MODE) != VM_1_10_MBARE &&
-+            !pmp_violation;
-+    } else {
-+        page_fault_exceptions =
-+            get_field(env->hgatp, HGATP_MODE) != VM_1_10_MBARE &&
-+            !pmp_violation;
-+    }
-     switch (access_type) {
-     case MMU_INST_FETCH:
-         cs->exception_index = page_fault_exceptions ?
-@@ -518,7 +535,8 @@ hwaddr riscv_cpu_get_phys_page_debug(CPUState *cs, vaddr addr)
-     int prot;
-     int mmu_idx = cpu_mmu_index(&cpu->env, false);
+             if (riscv_has_ext(env, RVH) &&
+-                get_field(env->mstatus, MSTATUS_MPV)) {
++                MSTATUS_MPV_ISSET(env)) {
+                 use_background = true;
+             }
+         }
+@@ -722,7 +722,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+         m_mode_two_stage = env->priv == PRV_M &&
+                            access_type != MMU_INST_FETCH &&
+                            get_field(env->mstatus, MSTATUS_MPRV) &&
+-                           get_field(env->mstatus, MSTATUS_MPV);
++                           MSTATUS_MPV_ISSET(env);
  
--    if (get_physical_address(&cpu->env, &phys_addr, &prot, addr, 0, mmu_idx)) {
-+    if (get_physical_address(&cpu->env, &phys_addr, &prot, addr, 0, mmu_idx,
-+                             true)) {
-         return -1;
-     }
-     return phys_addr;
-@@ -583,7 +601,8 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-     qemu_log_mask(CPU_LOG_MMU, "%s ad %" VADDR_PRIx " rw %d mmu_idx %d\n",
-                   __func__, address, access_type, mmu_idx);
+         hs_mode_two_stage = env->priv == PRV_S &&
+                             !riscv_cpu_virt_enabled(env) &&
+diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+index dca68fa96e..8736f689c2 100644
+--- a/target/riscv/op_helper.c
++++ b/target/riscv/op_helper.c
+@@ -146,7 +146,7 @@ target_ulong helper_mret(CPURISCVState *env, target_ulong cpu_pc_deb)
  
--    ret = get_physical_address(env, &pa, &prot, address, access_type, mmu_idx);
-+    ret = get_physical_address(env, &pa, &prot, address, access_type, mmu_idx,
-+                               true);
- 
-     if (mode == PRV_M && access_type != MMU_INST_FETCH) {
-         if (get_field(env->mstatus, MSTATUS_MPRV)) {
-@@ -610,7 +629,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-     } else if (probe) {
-         return false;
-     } else {
--        raise_mmu_exception(env, address, access_type, pmp_violation);
-+        raise_mmu_exception(env, address, access_type, pmp_violation, true);
-         riscv_raise_exception(env, cs->exception_index, retaddr);
-     }
- #else
+     target_ulong mstatus = env->mstatus;
+     target_ulong prev_priv = get_field(mstatus, MSTATUS_MPP);
+-    target_ulong prev_virt = get_field(mstatus, MSTATUS_MPV);
++    target_ulong prev_virt = MSTATUS_MPV_ISSET(env);
+     mstatus = set_field(mstatus,
+         env->priv_ver >= PRIV_VERSION_1_10_0 ?
+         MSTATUS_MIE : MSTATUS_UIE << prev_priv,
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index b51ab92068..43bf7e39a6 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -755,7 +755,7 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
+         ctx->virt_enabled = riscv_cpu_virt_enabled(env);
+         if (env->priv_ver == PRV_M &&
+             get_field(env->mstatus, MSTATUS_MPRV) &&
+-            get_field(env->mstatus, MSTATUS_MPV)) {
++            MSTATUS_MPV_ISSET(env)) {
+             ctx->virt_enabled = true;
+         } else if (env->priv == PRV_S &&
+                    !riscv_cpu_virt_enabled(env) &&
 -- 
 2.25.0.265.gbab2e86ba0-goog
 
