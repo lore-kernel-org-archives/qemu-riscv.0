@@ -1,61 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1j94YT-00058T-An
-	for mharc-qemu-riscv@gnu.org; Tue, 03 Mar 2020 05:13:37 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53375)
+	id 1j96HK-0002Jd-Dn
+	for mharc-qemu-riscv@gnu.org; Tue, 03 Mar 2020 07:04:02 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43126)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <no-reply@patchew.org>) id 1j94YR-00052t-Ba
- for qemu-riscv@nongnu.org; Tue, 03 Mar 2020 05:13:36 -0500
+ (envelope-from <peter.maydell@linaro.org>) id 1j96HH-0002IY-Th
+ for qemu-riscv@nongnu.org; Tue, 03 Mar 2020 07:04:01 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <no-reply@patchew.org>) id 1j94YQ-0007YW-Cp
- for qemu-riscv@nongnu.org; Tue, 03 Mar 2020 05:13:35 -0500
-Resent-Date: Tue, 03 Mar 2020 05:13:35 -0500
-Resent-Message-Id: <E1j94YQ-0007YW-Cp@eggs.gnu.org>
-Received: from sender4-of-o51.zoho.com ([136.143.188.51]:21183)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <no-reply@patchew.org>)
- id 1j94YH-0007Mb-N3; Tue, 03 Mar 2020 05:13:25 -0500
-ARC-Seal: i=1; a=rsa-sha256; t=1583230325; cv=none; 
- d=zohomail.com; s=zohoarc; 
- b=HJui90dmal5gFRjeExeS8uWwYw89jeRE9eXk7Hvl7EvwLj+hNyu4ILSMnrk1mxKiWRFph/MsPkzSDAmnQJrPKgUSc0kpr/3GVbPxQ1vBOFKIxQVbG/Rw5QNfDQWOEvYZzQTfuO69ILGCMbjA4P5lbh3fBXbutYv7AAkHSOHcuDg=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1583230325;
- h=Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:MIME-Version:Message-ID:Reply-To:Subject:To;
- bh=6tvEHzLV8Y2BN3NFBkXfhq6qIJOKVMcB5ZrULr1xuWo=; 
- b=A5lGWHBQqjj1+QdUnpTkZfHmXgl/bURgnfS5o6n6PkABABZfz99rtcW7HKKaA54dX82QqudxmLQROZiMnXpvOaNdOaYBZ/7rG+bigj2HoblAiCC1rYfl61R3F0TjdbICMmwTnC0TkOLN3yq9BjTjXBznS1oH6oc+fTblm8k8qGg=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
- dkim=pass  header.i=patchew.org;
- spf=pass  smtp.mailfrom=no-reply@patchew.org;
- dmarc=pass header.from=<no-reply@patchew.org>
- header.from=<no-reply@patchew.org>
-Received: from [172.17.0.3] (23.253.156.214 [23.253.156.214]) by
- mx.zohomail.com with SMTPS id 1583230323372497.9472806181752;
- Tue, 3 Mar 2020 02:12:03 -0800 (PST)
-Reply-To: <qemu-devel@nongnu.org>
-In-Reply-To: <20200303100511.5498-1-peter.maydell@linaro.org>
-Subject: Re: [PATCH] cpu: Use DeviceClass reset instead of a special CPUClass
- reset
-Message-ID: <158323032029.8962.1118581099513261942@abdcc9e1aa82>
+ (envelope-from <peter.maydell@linaro.org>) id 1j96HG-0000iC-P0
+ for qemu-riscv@nongnu.org; Tue, 03 Mar 2020 07:03:59 -0500
+Received: from mail-ot1-x32e.google.com ([2607:f8b0:4864:20::32e]:34432)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <peter.maydell@linaro.org>)
+ id 1j96HG-0000gD-J4
+ for qemu-riscv@nongnu.org; Tue, 03 Mar 2020 07:03:58 -0500
+Received: by mail-ot1-x32e.google.com with SMTP id j16so2741326otl.1
+ for <qemu-riscv@nongnu.org>; Tue, 03 Mar 2020 04:03:58 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=hI8VYRVvJjS6RCyTR07Kv04tLyKyaz6W7Y7xBI99xXA=;
+ b=DR+xSv5Dh6nr99V0tcn0ogB3E33X6FnKjmq2VtyPgrVGbVVDe8VPgMsrIQss7eIZ0h
+ i6VnqwCswEXeyqMRQel0y7+Jwngr9DYNatLHWRIlqiCjhKdTx8JHacDUeL338DyEvUS6
+ K9FApMkLfQ5Fhj9fg4bvm6eLOc+UubnmN7lSxiwaZXFOEJeWEiy+zhFz8ujXHaB/nqsp
+ wk03OrHQRjvTv3188WexTy6z0rKiG3UK3vpwhMJ3NRuszkm0WCFQpeHsjb0rObpBQo2c
+ iicJmpT1x9GdvjGsjK5BYETyiNA6CHJbqipKB8mSXmssPcybLcn9kxVGXHAQ6oJdivvR
+ pGQg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=hI8VYRVvJjS6RCyTR07Kv04tLyKyaz6W7Y7xBI99xXA=;
+ b=QDSYsg07n2C2KxAdeAC8zdlMW9QYX9t4zC8BrufYCwube7NfQIE9cLdHSmBLTisUxe
+ I9+Gia5aXNOPtqA6vt9tYG7ByHKXcxdsi6KN9uVH4q3SaktHFX0O0dLS9DYEzxdqrzhd
+ 7TughWFMFKDDzEXs1oxhHNcH0bvMnbh5r9Sp0CrYBGmXONFNLtMxfybQZV4PdwHW+Wud
+ jl2zWCaix1bdS1AzAaSUOIttqos5xs+Lt2F+85zOD5VMG3lV/oyjCMD+hsPFOyt+DA3I
+ 0sNkQ3hIdR0IGBIcGIvqmwdFDCRK9NWsWfN7cNGgjh0S3f21rnfnvxGkJnd1SXiR63wO
+ lerA==
+X-Gm-Message-State: ANhLgQ3DPW6Xxy/gjccN408iYXBNXI+8v4h2wTMv/h6GH7XhtXiH/uUG
+ GcRtvDiTF6Szknape/mEWEBpDpM5Ktu7EmBCyst48A==
+X-Google-Smtp-Source: ADFU+vuONQ4q6faTVNgMXOkUZrfFdtUKgxl+vUP1sCGIK/7hrsdL/5ZDtkSkni8CH/PLDDxooW38OJGXeUME4/OCgtc=
+X-Received: by 2002:a05:6830:1406:: with SMTP id
+ v6mr3141652otp.232.1583237037383; 
+ Tue, 03 Mar 2020 04:03:57 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-Resent-From: 
-From: no-reply@patchew.org
-To: peter.maydell@linaro.org
-Cc: qemu-devel@nongnu.org, crwulff@gmail.com, sagark@eecs.berkeley.edu,
- david@redhat.com, green@moxielogic.com, mark.cave-ayland@ilande.co.uk,
- jcmvbkbc@gmail.com, Alistair.Francis@wdc.com, edgar.iglesias@gmail.com,
- marex@denx.de, qemu-ppc@nongnu.org, aleksandar.rikalo@rt-rk.com,
- rth@twiddle.net, atar4qemu@gmail.com, ehabkost@redhat.com,
- qemu-s390x@nongnu.org, qemu-arm@nongnu.org, shorne@gmail.com,
- david@gibson.dropbear.id.au, qemu-riscv@nongnu.org,
- kbastian@mail.uni-paderborn.de, cohuck@redhat.com, laurent@vivier.eu,
- michael@walle.cc, palmer@dabbelt.com, amarkovic@wavecomp.com,
- pbonzini@redhat.com, aurelien@aurel32.net
-Date: Tue, 3 Mar 2020 02:12:03 -0800 (PST)
-X-ZohoMailClient: External
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
- [fuzzy]
-X-Received-From: 136.143.188.51
+References: <20200303004848.136788-1-palmerdabbelt@google.com>
+In-Reply-To: <20200303004848.136788-1-palmerdabbelt@google.com>
+From: Peter Maydell <peter.maydell@linaro.org>
+Date: Tue, 3 Mar 2020 12:03:46 +0000
+Message-ID: <CAFEAcA-TrzErHFjHiSYmXZVG4=8d5u8vDjX-YtzAdwd0XHBSUA@mail.gmail.com>
+Subject: Re: [PULL] RISC-V Patches for the 5.0 Soft Freeze, Part 3
+To: Palmer Dabbelt <palmerdabbelt@google.com>
+Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ QEMU Developers <qemu-devel@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2607:f8b0:4864:20::32e
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -67,19 +66,40 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Mar 2020 10:13:36 -0000
+X-List-Received-Date: Tue, 03 Mar 2020 12:04:01 -0000
 
-UGF0Y2hldyBVUkw6IGh0dHBzOi8vcGF0Y2hldy5vcmcvUUVNVS8yMDIwMDMwMzEwMDUxMS41NDk4
-LTEtcGV0ZXIubWF5ZGVsbEBsaW5hcm8ub3JnLwoKCgpIaSwKClRoaXMgc2VyaWVzIGZhaWxlZCB0
-aGUgZG9ja2VyLXF1aWNrQGNlbnRvczcgYnVpbGQgdGVzdC4gUGxlYXNlIGZpbmQgdGhlIHRlc3Rp
-bmcgY29tbWFuZHMgYW5kCnRoZWlyIG91dHB1dCBiZWxvdy4gSWYgeW91IGhhdmUgRG9ja2VyIGlu
-c3RhbGxlZCwgeW91IGNhbiBwcm9iYWJseSByZXByb2R1Y2UgaXQKbG9jYWxseS4KCj09PSBURVNU
-IFNDUklQVCBCRUdJTiA9PT0KIyEvYmluL2Jhc2gKbWFrZSBkb2NrZXItaW1hZ2UtY2VudG9zNyBW
-PTEgTkVUV09SSz0xCnRpbWUgbWFrZSBkb2NrZXItdGVzdC1xdWlja0BjZW50b3M3IFNIT1dfRU5W
-PTEgSj0xNCBORVRXT1JLPTEKPT09IFRFU1QgU0NSSVBUIEVORCA9PT0KCgoKClRoZSBmdWxsIGxv
-ZyBpcyBhdmFpbGFibGUgYXQKaHR0cDovL3BhdGNoZXcub3JnL2xvZ3MvMjAyMDAzMDMxMDA1MTEu
-NTQ5OC0xLXBldGVyLm1heWRlbGxAbGluYXJvLm9yZy90ZXN0aW5nLmRvY2tlci1xdWlja0BjZW50
-b3M3Lz90eXBlPW1lc3NhZ2UuCi0tLQpFbWFpbCBnZW5lcmF0ZWQgYXV0b21hdGljYWxseSBieSBQ
-YXRjaGV3IFtodHRwczovL3BhdGNoZXcub3JnL10uClBsZWFzZSBzZW5kIHlvdXIgZmVlZGJhY2sg
-dG8gcGF0Y2hldy1kZXZlbEByZWRoYXQuY29t
+On Tue, 3 Mar 2020 at 00:48, Palmer Dabbelt <palmerdabbelt@google.com> wrote:
+>
+> The following changes since commit 8b6b68e05b43f976714ca1d2afe01a64e1d82cba:
+>
+>   Merge remote-tracking branch 'remotes/mst/tags/for_upstream' into staging (2020-02-27 19:15:15 +0000)
+>
+> are available in the Git repository at:
+>
+>   git@github.com:palmer-dabbelt/qemu.git tags/riscv-for-master-5.0-sf3
+>
+> for you to fetch changes up to 5f3616ccceb5d5c49f99838c78498e581fb42fc5:
+>
+>   hw/riscv: Provide rdtime callback for TCG in CLINT emulation (2020-02-27 13:46:37 -0800)
+>
+> ----------------------------------------------------------------
+> RISC-V Patches for the 5.0 Soft Freeze, Part 3
+>
+> This pull request is almost entirely an implementation of the draft hypervisor
+> extension.  This extension is still in draft and is expected to have
+> incompatible changes before being frozen, but we've had good luck managing
+> other RISC-V draft extensions in QEMU so far.
+>
+> Additionally, there's a fix to PCI addressing and some improvements to the
+> M-mode timer.
+>
+> This boots linux and passes make check for me.
+
+
+Applied, thanks.
+
+Please update the changelog at https://wiki.qemu.org/ChangeLog/5.0
+for any user-visible changes.
+
+-- PMM
 
