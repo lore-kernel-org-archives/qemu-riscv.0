@@ -1,60 +1,117 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1j96HK-0002Jd-Dn
-	for mharc-qemu-riscv@gnu.org; Tue, 03 Mar 2020 07:04:02 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43126)
+	id 1j986t-0000yI-Ev
+	for mharc-qemu-riscv@gnu.org; Tue, 03 Mar 2020 09:01:23 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59444)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <peter.maydell@linaro.org>) id 1j96HH-0002IY-Th
- for qemu-riscv@nongnu.org; Tue, 03 Mar 2020 07:04:01 -0500
+ (envelope-from <prvs=3240045c5=Anup.Patel@wdc.com>)
+ id 1j986q-0000y9-Us
+ for qemu-riscv@nongnu.org; Tue, 03 Mar 2020 09:01:22 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <peter.maydell@linaro.org>) id 1j96HG-0000iC-P0
- for qemu-riscv@nongnu.org; Tue, 03 Mar 2020 07:03:59 -0500
-Received: from mail-ot1-x32e.google.com ([2607:f8b0:4864:20::32e]:34432)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <peter.maydell@linaro.org>)
- id 1j96HG-0000gD-J4
- for qemu-riscv@nongnu.org; Tue, 03 Mar 2020 07:03:58 -0500
-Received: by mail-ot1-x32e.google.com with SMTP id j16so2741326otl.1
- for <qemu-riscv@nongnu.org>; Tue, 03 Mar 2020 04:03:58 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=hI8VYRVvJjS6RCyTR07Kv04tLyKyaz6W7Y7xBI99xXA=;
- b=DR+xSv5Dh6nr99V0tcn0ogB3E33X6FnKjmq2VtyPgrVGbVVDe8VPgMsrIQss7eIZ0h
- i6VnqwCswEXeyqMRQel0y7+Jwngr9DYNatLHWRIlqiCjhKdTx8JHacDUeL338DyEvUS6
- K9FApMkLfQ5Fhj9fg4bvm6eLOc+UubnmN7lSxiwaZXFOEJeWEiy+zhFz8ujXHaB/nqsp
- wk03OrHQRjvTv3188WexTy6z0rKiG3UK3vpwhMJ3NRuszkm0WCFQpeHsjb0rObpBQo2c
- iicJmpT1x9GdvjGsjK5BYETyiNA6CHJbqipKB8mSXmssPcybLcn9kxVGXHAQ6oJdivvR
- pGQg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=hI8VYRVvJjS6RCyTR07Kv04tLyKyaz6W7Y7xBI99xXA=;
- b=QDSYsg07n2C2KxAdeAC8zdlMW9QYX9t4zC8BrufYCwube7NfQIE9cLdHSmBLTisUxe
- I9+Gia5aXNOPtqA6vt9tYG7ByHKXcxdsi6KN9uVH4q3SaktHFX0O0dLS9DYEzxdqrzhd
- 7TughWFMFKDDzEXs1oxhHNcH0bvMnbh5r9Sp0CrYBGmXONFNLtMxfybQZV4PdwHW+Wud
- jl2zWCaix1bdS1AzAaSUOIttqos5xs+Lt2F+85zOD5VMG3lV/oyjCMD+hsPFOyt+DA3I
- 0sNkQ3hIdR0IGBIcGIvqmwdFDCRK9NWsWfN7cNGgjh0S3f21rnfnvxGkJnd1SXiR63wO
- lerA==
-X-Gm-Message-State: ANhLgQ3DPW6Xxy/gjccN408iYXBNXI+8v4h2wTMv/h6GH7XhtXiH/uUG
- GcRtvDiTF6Szknape/mEWEBpDpM5Ktu7EmBCyst48A==
-X-Google-Smtp-Source: ADFU+vuONQ4q6faTVNgMXOkUZrfFdtUKgxl+vUP1sCGIK/7hrsdL/5ZDtkSkni8CH/PLDDxooW38OJGXeUME4/OCgtc=
-X-Received: by 2002:a05:6830:1406:: with SMTP id
- v6mr3141652otp.232.1583237037383; 
- Tue, 03 Mar 2020 04:03:57 -0800 (PST)
+ (envelope-from <prvs=3240045c5=Anup.Patel@wdc.com>)
+ id 1j986p-0006UZ-Qs
+ for qemu-riscv@nongnu.org; Tue, 03 Mar 2020 09:01:20 -0500
+Received: from esa1.hgst.iphmx.com ([68.232.141.245]:28739)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <prvs=3240045c5=Anup.Patel@wdc.com>)
+ id 1j986p-0006TC-0G; Tue, 03 Mar 2020 09:01:19 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1583244079; x=1614780079;
+ h=from:to:cc:subject:date:message-id:mime-version;
+ bh=GCc4iKKy6lLSSEYQbc97PMJrH0hk8z7bF5hcUFEiyY0=;
+ b=liMT9HdoIymgiKcqxLT06THqzLiz0V+54U8RtHzRjZssnbaEnOPYkcif
+ 32dKwl5ATxIYin5RoKqITvF1IhzJ1sQ/SPHrg4WAVwC4wzjDJMUDmyOpu
+ FKbITRXdqoYINhNyg4jB8nQuBOLGXgJr+0/SiGKLmbL6BBCP3J6mHY7Pa
+ S+PtXqtxBCZKK73a3X3SMqUzSLfzrrKCWGzFiREkRfIyVttUkyUR75xXa
+ jcL1b7gc+cuX5fWgIjGrLOP2kcHwLTM9Hku19Vs9thiaKB5o1JZwnM8T+
+ 7Ixp8g8G6bXCns8HcpbrlV9qaq0Ue3DDAVV1v/iACnu886CjHOHisvb5n A==;
+IronPort-SDR: k4c1/z72hkBQ5FU9N9mqR5CTdQzgVHVGyhaNylYuVOkXpSCBYHFb90sdPYJWUTFniIbTiR6z9+
+ S93OdZ4BVHQZv4AUAOZgdI+aA2Mt8NQRgbCdA3AGic9C1scZJrLjRD9ji1SLRRbrg8VZt8EZCQ
+ nWUiyZSguIOUyiWehKmgzvsZtxbeg+j+6myUCQDICrmqFfWKHoaWFC214UyStaX/IybAEd7UwO
+ xjtWGMX+sozGDLANUs4BSswqwTbgdARZuKt61TE6xN8GeXhjjy++0UAcdpMsDJ/S8vO6eXY2L5
+ UII=
+X-IronPort-AV: E=Sophos;i="5.70,511,1574092800"; d="scan'208";a="239494763"
+Received: from mail-bn7nam10lp2104.outbound.protection.outlook.com (HELO
+ NAM10-BN7-obe.outbound.protection.outlook.com) ([104.47.70.104])
+ by ob1.hgst.iphmx.com with ESMTP; 03 Mar 2020 22:01:07 +0800
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=RuKzwinJjjqYA7evbR5k+TQsI+2IK0O4q8WAWgpE7lxXpIf4rTLQYetzSjoHTzfcXeMfVUkfBtcv7M4JVAv3w3EURUPLxoAT0mMtbrCNyi19QjA7KzZV6dmWSvh/8yk+mhTa2VxT4AFxN/thVw7urFKl2723/vJkXxg112/Msam2lSW9YSoO2X661BYZB3FFF9KYHRbxybqq0TEMz1mAIkzn/L3O7b1668nyvBmAbiVjiT45DG0u5V4ye+RDgOU4nWoXZo4HkLeTS8Q+hTCmmkU2fFEOY36jbxQ35C7SB4J060U2XXDeY6cN4b2MnXfLZ+/pSUoYA9ZRAQfX+VRLeA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=5Li3wslSnFTZFbsQpl1oExZOCBjgNIMSIhTf6OEhHoo=;
+ b=Sr0vr3P036hrbTc+Jr9Ak61YEpYo/YH2MUnAXMjMfQUv4oUGi1So13MD8X5VO03j+QAFx359UUcpUNCFEhcOUjGOMQbCjW4hiyQfYtGz33KiR37kwn5d/HHk9mxkcnzf23qAYtJFZRQuhFI90h/GUyXi0+hdF14WzlNgvbXz36lj+HVeTL9t15KJnaFyGbWcId3kyD544YB4zzBIQKP7t9ijpBNQuVZa5azMzJUmVur1zpQg9ASk3I8llL7ADGnT2lfzhx2S+tHqCM8cYRvAX3GPDa73lja98Wp8m6JfhdsllJ3I76rwXk3m1X65jHERiamaCznihfzXaElvp9m9VQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=wdc.com; dmarc=pass action=none header.from=wdc.com; dkim=pass
+ header.d=wdc.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=5Li3wslSnFTZFbsQpl1oExZOCBjgNIMSIhTf6OEhHoo=;
+ b=q9FaCbRd02pLZTmn/cJvOL/AbjfXM++SG03SYyzdgOS62yl/GhWM1U5bxGYUWO+H6E6aYEuREBsEFQ8C2BT+nlfRDlzieEArrXNy2c9tcwb9bnPt21YKQFopbNfjHk/yuWVIRP5VIpMNGYP3lctw26Ol+Nx0aEvsGR3lF/P4Ul0=
+Authentication-Results: spf=none (sender IP is )
+ smtp.mailfrom=Anup.Patel@wdc.com; 
+Received: from MN2PR04MB6061.namprd04.prod.outlook.com (2603:10b6:208:d8::15)
+ by MN2PR04MB7038.namprd04.prod.outlook.com (2603:10b6:208:1e6::24)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2772.18; Tue, 3 Mar
+ 2020 14:01:06 +0000
+Received: from MN2PR04MB6061.namprd04.prod.outlook.com
+ ([fe80::159d:10c9:f6df:64c8]) by MN2PR04MB6061.namprd04.prod.outlook.com
+ ([fe80::159d:10c9:f6df:64c8%6]) with mapi id 15.20.2772.019; Tue, 3 Mar 2020
+ 14:01:06 +0000
+From: Anup Patel <anup.patel@wdc.com>
+To: Peter Maydell <peter.maydell@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>
+Cc: Atish Patra <atish.patra@wdc.com>, Anup Patel <anup@brainfault.org>,
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
+ Anup Patel <anup.patel@wdc.com>
+Subject: [PATCH v2 0/3] RISC-V Spike machine improvements
+Date: Tue,  3 Mar 2020 19:30:34 +0530
+Message-Id: <20200303140037.85311-1-anup.patel@wdc.com>
+X-Mailer: git-send-email 2.17.1
+Content-Type: text/plain
+X-ClientProxiedBy: BMXPR01CA0027.INDPRD01.PROD.OUTLOOK.COM
+ (2603:1096:b00:c::13) To MN2PR04MB6061.namprd04.prod.outlook.com
+ (2603:10b6:208:d8::15)
 MIME-Version: 1.0
-References: <20200303004848.136788-1-palmerdabbelt@google.com>
-In-Reply-To: <20200303004848.136788-1-palmerdabbelt@google.com>
-From: Peter Maydell <peter.maydell@linaro.org>
-Date: Tue, 3 Mar 2020 12:03:46 +0000
-Message-ID: <CAFEAcA-TrzErHFjHiSYmXZVG4=8d5u8vDjX-YtzAdwd0XHBSUA@mail.gmail.com>
-Subject: Re: [PULL] RISC-V Patches for the 5.0 Soft Freeze, Part 3
-To: Palmer Dabbelt <palmerdabbelt@google.com>
-Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
- QEMU Developers <qemu-devel@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2607:f8b0:4864:20::32e
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from wdc.com (49.207.61.196) by
+ BMXPR01CA0027.INDPRD01.PROD.OUTLOOK.COM (2603:1096:b00:c::13) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.2772.15 via Frontend Transport; Tue, 3 Mar 2020 14:01:01 +0000
+X-Mailer: git-send-email 2.17.1
+X-Originating-IP: [49.207.61.196]
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-HT: Tenant
+X-MS-Office365-Filtering-Correlation-Id: 2e0fdd04-5288-43f1-b033-08d7bf7b50cb
+X-MS-TrafficTypeDiagnostic: MN2PR04MB7038:
+X-MS-Exchange-Transport-Forked: True
+X-Microsoft-Antispam-PRVS: <MN2PR04MB7038B11092BADFF7395392F88DE40@MN2PR04MB7038.namprd04.prod.outlook.com>
+WDCIPOUTBOUND: EOP-TRUE
+X-MS-Oob-TLC-OOBClassifiers: OLM:83;
+X-Forefront-PRVS: 03319F6FEF
+X-Forefront-Antispam-Report: SFV:NSPM;
+ SFS:(10019020)(4636009)(376002)(346002)(396003)(39860400002)(366004)(136003)(189003)(199004)(186003)(16526019)(26005)(66556008)(66476007)(55016002)(36756003)(1006002)(6666004)(86362001)(55236004)(4326008)(8886007)(478600001)(81166006)(54906003)(66946007)(1076003)(81156014)(316002)(5660300002)(110136005)(2616005)(8936002)(7696005)(52116002)(956004)(44832011)(8676002)(4744005)(2906002);
+ DIR:OUT; SFP:1102; SCL:1; SRVR:MN2PR04MB7038;
+ H:MN2PR04MB6061.namprd04.prod.outlook.com; FPR:; SPF:None; LANG:en;
+ PTR:InfoNoRecords; MX:1; A:1; 
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: tVuJMcf7KGAIaCpZ4EdhubT5w80qR9sflNVjOtLEuHpCVcPXy0/A99982sdIp/BU3B4rawHrJP0pRvdSyU14WsE6g8ptMmxzr0mFqdZhxv8uQp+QjL2OsPJiaBgrYy6o5IhSj0N2UHj+8+c8AnOLPRBRnZrPYi7s0gYgN5+CUhZknjbIbQRK6jz7skSRAdsivcxSHT5xTMGWg9gvIzB7n72zLQGMyPSBlIsbg0/rtTlLqRsb3TsnrwL8rc1ObBINGjvtWcdPGn45B+hs7ELg60REPX/NaitHb+hSUTXO6gpVHAxrXavPOd5jIPttIAG3CI+lgZ0NTxwgFU24LXgW494XGbD2z+xQ5zVd15CYDab4DRRnOKfLPX3nPhwXUqZRGmPs+k1uj4mPiT34O3LnrhVAt754cfeXcDEhx+mGNh4daM6d8A6hO+sqPwYfXpdO
+X-MS-Exchange-AntiSpam-MessageData: 0rLOiBhUMK9B7QB4zxPaqkp5GpMFs7t8G1uPyydT/Fr0rW6wbJnCfu5x7qMAGwPUsmiAfwlmzh23Souf2ofxivoq3izqh0K2k5OQHH5vkUEETUjSAVtx6SV2aVBHxll4HKgJ7Pj/0FbsfT6RSIwZzw==
+X-OriginatorOrg: wdc.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2e0fdd04-5288-43f1-b033-08d7bf7b50cb
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Mar 2020 14:01:05.9260 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: b61c8803-16f3-4c35-9b17-6f65f441df86
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: Hi1RTtYszJX997w79zp67JcmF/IPYSG05lCMBjFI7Xaf4ZaZnN6cGyyfBkgrKnxElD/ARLAjhcDskd+iEzzaEw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR04MB7038
+X-detected-operating-system: by eggs.gnu.org: FreeBSD 9.x
+X-Received-From: 68.232.141.245
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -66,40 +123,28 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Mar 2020 12:04:01 -0000
+X-List-Received-Date: Tue, 03 Mar 2020 14:01:22 -0000
 
-On Tue, 3 Mar 2020 at 00:48, Palmer Dabbelt <palmerdabbelt@google.com> wrote:
->
-> The following changes since commit 8b6b68e05b43f976714ca1d2afe01a64e1d82cba:
->
->   Merge remote-tracking branch 'remotes/mst/tags/for_upstream' into staging (2020-02-27 19:15:15 +0000)
->
-> are available in the Git repository at:
->
->   git@github.com:palmer-dabbelt/qemu.git tags/riscv-for-master-5.0-sf3
->
-> for you to fetch changes up to 5f3616ccceb5d5c49f99838c78498e581fb42fc5:
->
->   hw/riscv: Provide rdtime callback for TCG in CLINT emulation (2020-02-27 13:46:37 -0800)
->
-> ----------------------------------------------------------------
-> RISC-V Patches for the 5.0 Soft Freeze, Part 3
->
-> This pull request is almost entirely an implementation of the draft hypervisor
-> extension.  This extension is still in draft and is expected to have
-> incompatible changes before being frozen, but we've had good luck managing
-> other RISC-V draft extensions in QEMU so far.
->
-> Additionally, there's a fix to PCI addressing and some improvements to the
-> M-mode timer.
->
-> This boots linux and passes make check for me.
+This series improves QEMU Spike machine to:
+1. Allow loading OpenBI firmware using -bios option
+2. Allow more than one CPUs
 
+Changes since v1:
+ - Rebased on QEMU master (commit 2ac031d171ccd18c973014d9978b4a63f0ad5fb0)
 
-Applied, thanks.
+Anup Patel (3):
+  hw/riscv: Add optional symbol callback ptr to riscv_load_firmware()
+  hw/riscv/spike: Allow loading firmware separately using -bios option
+  hw/riscv/spike: Allow more than one CPUs
 
-Please update the changelog at https://wiki.qemu.org/ChangeLog/5.0
-for any user-visible changes.
+ hw/riscv/boot.c         | 13 ++++++++-----
+ hw/riscv/sifive_u.c     |  2 +-
+ hw/riscv/spike.c        | 26 ++++++++++++++++++++++++--
+ hw/riscv/virt.c         |  2 +-
+ include/hw/riscv/boot.h |  6 ++++--
+ 5 files changed, 38 insertions(+), 11 deletions(-)
 
--- PMM
+-- 
+2.17.1
+
 
