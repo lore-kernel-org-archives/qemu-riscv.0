@@ -1,61 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1j8vkB-0000wj-Vb
-	for mharc-qemu-riscv@gnu.org; Mon, 02 Mar 2020 19:49:07 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44690)
+	id 1j8vkD-0000yV-5W
+	for mharc-qemu-riscv@gnu.org; Mon, 02 Mar 2020 19:49:09 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44719)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <palmerdabbelt@google.com>) id 1j8vk6-0000w4-Cv
- for qemu-riscv@nongnu.org; Mon, 02 Mar 2020 19:49:03 -0500
+ (envelope-from <palmerdabbelt@google.com>) id 1j8vkA-0000wR-4r
+ for qemu-riscv@nongnu.org; Mon, 02 Mar 2020 19:49:07 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmerdabbelt@google.com>) id 1j8vk5-00045r-3K
- for qemu-riscv@nongnu.org; Mon, 02 Mar 2020 19:49:02 -0500
-Received: from mail-pf1-x42e.google.com ([2607:f8b0:4864:20::42e]:34190)
+ (envelope-from <palmerdabbelt@google.com>) id 1j8vk8-000479-8o
+ for qemu-riscv@nongnu.org; Mon, 02 Mar 2020 19:49:05 -0500
+Received: from mail-pg1-x530.google.com ([2607:f8b0:4864:20::530]:40546)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <palmerdabbelt@google.com>)
- id 1j8vk4-00045J-Uo
- for qemu-riscv@nongnu.org; Mon, 02 Mar 2020 19:49:01 -0500
-Received: by mail-pf1-x42e.google.com with SMTP id y21so569815pfp.1
- for <qemu-riscv@nongnu.org>; Mon, 02 Mar 2020 16:48:59 -0800 (PST)
+ id 1j8vk7-00046h-UY
+ for qemu-riscv@nongnu.org; Mon, 02 Mar 2020 19:49:04 -0500
+Received: by mail-pg1-x530.google.com with SMTP id t24so664560pgj.7
+ for <qemu-riscv@nongnu.org>; Mon, 02 Mar 2020 16:49:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
- h=subject:date:message-id:mime-version:content-transfer-encoding:cc
- :from:to; bh=hXvy4ghHCmI2AOaSUkFYWx1NZe3mIB7WOFd3+5BTrq0=;
- b=v8Rfav7JJfplslGmutDpYe5vA5Hagf7kEaLBPbPnFhkgIR3TEufwQM/d1xkTHuPFhr
- i1HEAUyjq1EOv+VaNlugsQRjbABAbIqvVVSiMHHKNGAfPB3lRnBFLIcXmxhDpx5RsU7l
- SaJV3VlhPK1mvW1KusDtd3HX1wSC4r4qrTZTFunBNKtOA0aTc76VsJD69VCBPp1K00eZ
- kHHY0cIIgqnIdQNVRJbtOfLrHnFJeCE6dzWwZ8u9Z5MykWx8heVDhj6av8h+lyWT8bxa
- KcxTBmIkfaZCKg330Sk0XzmcVYS8OMuolchewAxBjewOOG1XRgY6mCUoKoqH+EB1Z8X6
- Vawg==
+ h=subject:date:message-id:in-reply-to:references:mime-version
+ :content-transfer-encoding:cc:from:to;
+ bh=B0OixvxDRun+czMvNrLEKq3Xb6qPIsVdgs0f+iZ/N/w=;
+ b=LROWYOLHx5phwHtn15nNwfW3SEWM2Kod68jrhN86Lxio1eWRgbh4IOB8C+3c5qYJa3
+ lk7YcGC+lHXhqXQ9VZj215HGmFSFlimvWGN9s/SJV4DlScXScMEf84Qoe1gVXmM08Eq8
+ So47E9QmgEJWUMERNKsvHapJRduwL8+MOW8PGeT7K4M5aVMnw3Yu7nlIrces41Q4JRnt
+ p6v26/U2OnBICiFHX7X7nUgnR1PzaHTFSi7Tb+i7agwJTuK6x7wuPP/zoJb4gXv1rm4j
+ Uc1JipGc5apj7XtFuf1UA3Bh5scYw520x4dnoqmqe505IxCHA3sllC7zpBHLUqlBna8I
+ IuYA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:date:message-id:mime-version
- :content-transfer-encoding:cc:from:to;
- bh=hXvy4ghHCmI2AOaSUkFYWx1NZe3mIB7WOFd3+5BTrq0=;
- b=BOiWMeTBVsvjjgAlb/+TQ8CFuKJyVCUGbc1aQFCaW736mMKk3CH88o7Cek73PJkvpQ
- Hf8o2qcIcyGFYKoSGorEBQppvhpkLHt4rbRVsHWB9hcIVuT6d3Fj0q0U7HRAUfkzbDm4
- Wrvtl6t4EM5IUOv4cssVGComqQ3qvhNi4IIqG1nv5UxxzTTe3qeezhyfhUA/wVYqa2nK
- Jjj1DnQ1t11LVvDgLCI7+Mi6teRHJweiosA4U9Y9fcGgBCyy7bbEXDyNd4dz0hn1kY+I
- i4RNc7l7eQLR7pY4gp7kM5kUJvmzjue0XP8zCKmhpzvwqpFAkKmavp/z9jtFcxpVae2D
- SKMQ==
-X-Gm-Message-State: ANhLgQ0bcYiqVSyn6YxrigvsFlbqRD4DRQnxA4kCFN/ovgfS7hgUEvLt
- 4IqXITtvfro5ypeVXCivVZotu/kczsG6wQ==
-X-Google-Smtp-Source: ADFU+vsY8r3dEgMHJA9VO05T39SXyLZI3Z4FCXwj3vb0xd8G5Mx7QA9S9UjolcxML8FcSFWrKaeqNA==
-X-Received: by 2002:a63:384e:: with SMTP id h14mr1497701pgn.295.1583196538019; 
- Mon, 02 Mar 2020 16:48:58 -0800 (PST)
+ h=x-gm-message-state:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding:cc:from:to;
+ bh=B0OixvxDRun+czMvNrLEKq3Xb6qPIsVdgs0f+iZ/N/w=;
+ b=o/5m9qCqRFdEeaHPQbT/leMYkC/2gID+4Zng7wbVaxUJ4TPvEb9O41XYBXqUEmMFrl
+ tK5kWfvvdYurhpnUwQap6ejmYKpwIUM3XA2X2LAGa/WYc+nvoWrSS4GB5qyVQSvkZDy3
+ KgdZTEaiEeTZV60jC9/IabRSAgFBNrVU/HjV5gqo6AyJwIPn8X1+qndnjk043kRAJ7PI
+ 2CeVPV14wpxjOWfa/EENcAdgMLYP/LXaqWXkZAuPk0wZrDAIfdqxiCABiJqEgh0qUgTk
+ XMetdc1MueBtmIFpP5Ykq5xuLT7ppDCqjYG027Xj7zM9uP2sqzyg+BLBD/PYVP5YdN1V
+ d6qQ==
+X-Gm-Message-State: ANhLgQ1WDrOI91UmIi9HYhYB46ww6CtOLQtqRpStybNyb5PmUUg0w8Og
+ 0LaGWwI5RNctDI19Qtjj2Epbwf7yC90NKw==
+X-Google-Smtp-Source: ADFU+vsllffNd3sCuj8cQAWV9aVjzlRGaKxS/MMKIeGmcqQW/QttVPy3qPeo4mmWy83HqfjrVY3RoQ==
+X-Received: by 2002:a63:1404:: with SMTP id u4mr522050pgl.172.1583196541538;
+ Mon, 02 Mar 2020 16:49:01 -0800 (PST)
 Received: from localhost ([2620:0:1000:2514:23a5:d584:6a92:3e3c])
- by smtp.gmail.com with ESMTPSA id q6sm22038928pfh.127.2020.03.02.16.48.57
+ by smtp.gmail.com with ESMTPSA id g20sm348025pjv.20.2020.03.02.16.49.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Mar 2020 16:48:57 -0800 (PST)
-Subject: [PULL] RISC-V Patches for the 5.0 Soft Freeze, Part 3
-Date: Mon,  2 Mar 2020 16:48:10 -0800
-Message-Id: <20200303004848.136788-1-palmerdabbelt@google.com>
+ Mon, 02 Mar 2020 16:49:00 -0800 (PST)
+Subject: [PULL 02/38] target/riscv: Add the Hypervisor extension
+Date: Mon,  2 Mar 2020 16:48:12 -0800
+Message-Id: <20200303004848.136788-3-palmerdabbelt@google.com>
 X-Mailer: git-send-email 2.25.0.265.gbab2e86ba0-goog
+In-Reply-To: <20200303004848.136788-1-palmerdabbelt@google.com>
+References: <20200303004848.136788-1-palmerdabbelt@google.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Cc: qemu-riscv@nongnu.org,          qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org,          qemu-devel@nongnu.org,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Chih-Min Chao <chihmin.chao@sifive.com>, Palmer Dabbelt <palmer@sifive.com>, 
+ Palmer Dabbelt <palmerdabbelt@google.com>
 From: Palmer Dabbelt <palmerdabbelt@google.com>
 To: Peter Maydell <peter.maydell@linaro.org>
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::42e
+X-Received-From: 2607:f8b0:4864:20::530
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -67,94 +73,31 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Mar 2020 00:49:03 -0000
+X-List-Received-Date: Tue, 03 Mar 2020 00:49:07 -0000
 
-The following changes since commit 8b6b68e05b43f976714ca1d2afe01a64e1d82cba:
+From: Alistair Francis <alistair.francis@wdc.com>
 
-  Merge remote-tracking branch 'remotes/mst/tags/for_upstream' into staging (2020-02-27 19:15:15 +0000)
+Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Chih-Min Chao <chihmin.chao@sifive.com>
+Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
+Signed-off-by: Palmer Dabbelt <palmerdabbelt@google.com>
+---
+ target/riscv/cpu.h | 1 +
+ 1 file changed, 1 insertion(+)
 
-are available in the Git repository at:
-
-  git@github.com:palmer-dabbelt/qemu.git tags/riscv-for-master-5.0-sf3
-
-for you to fetch changes up to 5f3616ccceb5d5c49f99838c78498e581fb42fc5:
-
-  hw/riscv: Provide rdtime callback for TCG in CLINT emulation (2020-02-27 13:46:37 -0800)
-
-----------------------------------------------------------------
-RISC-V Patches for the 5.0 Soft Freeze, Part 3
-
-This pull request is almost entirely an implementation of the draft hypervisor
-extension.  This extension is still in draft and is expected to have
-incompatible changes before being frozen, but we've had good luck managing
-other RISC-V draft extensions in QEMU so far.
-
-Additionally, there's a fix to PCI addressing and some improvements to the
-M-mode timer.
-
-This boots linux and passes make check for me.
-
-----------------------------------------------------------------
-Alistair Francis (35):
-      target/riscv: Convert MIP CSR to target_ulong
-      target/riscv: Add the Hypervisor extension
-      target/riscv: Add the Hypervisor CSRs to CPUState
-      target/riscv: Add support for the new execption numbers
-      target/riscv: Rename the H irqs to VS irqs
-      target/riscv: Add the virtulisation mode
-      target/riscv: Add the force HS exception mode
-      target/riscv: Fix CSR perm checking for HS mode
-      target/riscv: Print priv and virt in disas log
-      target/riscv: Dump Hypervisor registers if enabled
-      target/riscv: Add Hypervisor CSR access functions
-      target/riscv: Add Hypervisor virtual CSRs accesses
-      target/riscv: Add Hypervisor machine CSRs accesses
-      target/riscv: Add virtual register swapping function
-      target/riscv: Set VS bits in mideleg for Hyp extension
-      target/riscv: Extend the MIE CSR to support virtulisation
-      target/riscv: Extend the SIP CSR to support virtulisation
-      target/riscv: Add support for virtual interrupt setting
-      target/ricsv: Flush the TLB on virtulisation mode changes
-      target/riscv: Generate illegal instruction on WFI when V=1
-      target/riscv: Add hypvervisor trap support
-      target/riscv: Add Hypervisor trap return support
-      target/riscv: Add hfence instructions
-      target/riscv: Remove the hret instruction
-      target/riscv: Only set TB flags with FP status if enabled
-      target/riscv: Disable guest FP support based on virtual status
-      target/riscv: Mark both sstatus and msstatus_hs as dirty
-      target/riscv: Respect MPRV and SPRV for floating point ops
-      target/riscv: Allow specifying MMU stage
-      target/riscv: Implement second stage MMU
-      target/riscv: Raise the new execptions when 2nd stage translation fails
-      target/riscv: Set htval and mtval2 on execptions
-      target/riscv: Add support for the 32-bit MSTATUSH CSR
-      target/riscv: Add the MSTATUS_MPV_ISSET helper macro
-      target/riscv: Allow enabling the Hypervisor extension
-
-Anup Patel (2):
-      target/riscv: Emulate TIME CSRs for privileged mode
-      hw/riscv: Provide rdtime callback for TCG in CLINT emulation
-
-Bin Meng (1):
-      riscv: virt: Allow PCI address 0
-
- hw/riscv/sifive_clint.c                        |   6 +-
- hw/riscv/sifive_e.c                            |   2 +-
- hw/riscv/sifive_u.c                            |   2 +-
- hw/riscv/spike.c                               |   9 +-
- hw/riscv/virt.c                                |   3 +-
- include/hw/riscv/sifive_clint.h                |   3 +-
- target/riscv/cpu.c                             |  57 ++-
- target/riscv/cpu.h                             |  63 +++-
- target/riscv/cpu_bits.h                        | 111 ++++--
- target/riscv/cpu_helper.c                      | 486 ++++++++++++++++++++++---
- target/riscv/csr.c                             | 455 ++++++++++++++++++++++-
- target/riscv/gdbstub.c                         |  11 +-
- target/riscv/insn32.decode                     |  22 +-
- target/riscv/insn_trans/trans_privileged.inc.c |  45 ++-
- target/riscv/op_helper.c                       |  71 +++-
- target/riscv/translate.c                       |  35 ++
- 16 files changed, 1240 insertions(+), 141 deletions(-)
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 95de9e58a2..010125efd6 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -67,6 +67,7 @@
+ #define RVC RV('C')
+ #define RVS RV('S')
+ #define RVU RV('U')
++#define RVH RV('H')
+ 
+ /* S extension denotes that Supervisor mode exists, however it is possible
+    to have a core that support S mode but does not have an MMU and there
+-- 
+2.25.0.265.gbab2e86ba0-goog
 
 
