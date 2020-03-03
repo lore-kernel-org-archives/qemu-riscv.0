@@ -1,65 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1j986t-0000yI-Ev
-	for mharc-qemu-riscv@gnu.org; Tue, 03 Mar 2020 09:01:23 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:59444)
+	id 1j9877-0001AD-KY
+	for mharc-qemu-riscv@gnu.org; Tue, 03 Mar 2020 09:01:37 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59485)
  by lists.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <prvs=3240045c5=Anup.Patel@wdc.com>)
- id 1j986q-0000y9-Us
- for qemu-riscv@nongnu.org; Tue, 03 Mar 2020 09:01:22 -0500
+ id 1j986y-00010g-Ia
+ for qemu-riscv@nongnu.org; Tue, 03 Mar 2020 09:01:32 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
  (envelope-from <prvs=3240045c5=Anup.Patel@wdc.com>)
- id 1j986p-0006UZ-Qs
- for qemu-riscv@nongnu.org; Tue, 03 Mar 2020 09:01:20 -0500
-Received: from esa1.hgst.iphmx.com ([68.232.141.245]:28739)
+ id 1j986s-0006VQ-Br
+ for qemu-riscv@nongnu.org; Tue, 03 Mar 2020 09:01:28 -0500
+Received: from esa6.hgst.iphmx.com ([216.71.154.45]:54521)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <prvs=3240045c5=Anup.Patel@wdc.com>)
- id 1j986p-0006TC-0G; Tue, 03 Mar 2020 09:01:19 -0500
+ id 1j986s-0006Us-27; Tue, 03 Mar 2020 09:01:22 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1583244079; x=1614780079;
- h=from:to:cc:subject:date:message-id:mime-version;
- bh=GCc4iKKy6lLSSEYQbc97PMJrH0hk8z7bF5hcUFEiyY0=;
- b=liMT9HdoIymgiKcqxLT06THqzLiz0V+54U8RtHzRjZssnbaEnOPYkcif
- 32dKwl5ATxIYin5RoKqITvF1IhzJ1sQ/SPHrg4WAVwC4wzjDJMUDmyOpu
- FKbITRXdqoYINhNyg4jB8nQuBOLGXgJr+0/SiGKLmbL6BBCP3J6mHY7Pa
- S+PtXqtxBCZKK73a3X3SMqUzSLfzrrKCWGzFiREkRfIyVttUkyUR75xXa
- jcL1b7gc+cuX5fWgIjGrLOP2kcHwLTM9Hku19Vs9thiaKB5o1JZwnM8T+
- 7Ixp8g8G6bXCns8HcpbrlV9qaq0Ue3DDAVV1v/iACnu886CjHOHisvb5n A==;
-IronPort-SDR: k4c1/z72hkBQ5FU9N9mqR5CTdQzgVHVGyhaNylYuVOkXpSCBYHFb90sdPYJWUTFniIbTiR6z9+
- S93OdZ4BVHQZv4AUAOZgdI+aA2Mt8NQRgbCdA3AGic9C1scZJrLjRD9ji1SLRRbrg8VZt8EZCQ
- nWUiyZSguIOUyiWehKmgzvsZtxbeg+j+6myUCQDICrmqFfWKHoaWFC214UyStaX/IybAEd7UwO
- xjtWGMX+sozGDLANUs4BSswqwTbgdARZuKt61TE6xN8GeXhjjy++0UAcdpMsDJ/S8vO6eXY2L5
- UII=
-X-IronPort-AV: E=Sophos;i="5.70,511,1574092800"; d="scan'208";a="239494763"
-Received: from mail-bn7nam10lp2104.outbound.protection.outlook.com (HELO
- NAM10-BN7-obe.outbound.protection.outlook.com) ([104.47.70.104])
- by ob1.hgst.iphmx.com with ESMTP; 03 Mar 2020 22:01:07 +0800
+ t=1583244082; x=1614780082;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version;
+ bh=DjkHNPqlivrNB4kus+2xGrzXcMhmSRHIAnZ7iClBfF4=;
+ b=bRmwcikJdpI+cAhDuG6f9qaIFXSjaieHpKwcROu5SDHurVY+eBsa7krg
+ dj77tBgGzcKZuAcq23VV+68GlhBqY03+6llqD5KQecMlKkpUH9fiWytqx
+ 3upINjT9b6FRCoh/rko9+V5+kO9ONR3QIOEitkCrc3CxGoWnLRf07O6jj
+ VC4KN72mlAX/inOn80NdkBeohbs0omR5gGw5VqYZVJOG+DMf2t+u/iqbO
+ 04NwHBKaH2Rk1wqLP9z/z9oQUW+N+rl7PWa43iXAQ1odUJX+6xdz582HN
+ LVYdHQHVqd8EkmOHDqY4DsaoCAv0KIEvTFgPu5XXAqVypElzC42KJib/J g==;
+IronPort-SDR: qRKNUEFNLnsFLXX6MwGjUxsXTWWVsSSADkNYL2x4tRPXzh8QaUIBzJwRxaFhdKmndeLIxfygdZ
+ 2MVOe8n88+GUSGjK8szvr7uMNAC4HM4VQACtkPfCtijjiHZig0LgXdhWnhYVUJmcVrr9srEz9L
+ JawEygYANGKiErMJDSeCv0enKs7Lg8y1hobTTIeTtxAyB+Y9iJJgYyJlUw64KqLSbUMJJCZgBS
+ H4jJ9NN6DNqUf5cxjsrkDuelCAqQbzrNBtYn07ns/MH9uzQcXhxTcbIN9qCVWHUgZyCIydw3cP
+ bh0=
+X-IronPort-AV: E=Sophos;i="5.70,511,1574092800"; d="scan'208";a="132719434"
+Received: from mail-bn8nam11lp2176.outbound.protection.outlook.com (HELO
+ NAM11-BN8-obe.outbound.protection.outlook.com) ([104.47.58.176])
+ by ob1.hgst.iphmx.com with ESMTP; 03 Mar 2020 22:01:18 +0800
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=RuKzwinJjjqYA7evbR5k+TQsI+2IK0O4q8WAWgpE7lxXpIf4rTLQYetzSjoHTzfcXeMfVUkfBtcv7M4JVAv3w3EURUPLxoAT0mMtbrCNyi19QjA7KzZV6dmWSvh/8yk+mhTa2VxT4AFxN/thVw7urFKl2723/vJkXxg112/Msam2lSW9YSoO2X661BYZB3FFF9KYHRbxybqq0TEMz1mAIkzn/L3O7b1668nyvBmAbiVjiT45DG0u5V4ye+RDgOU4nWoXZo4HkLeTS8Q+hTCmmkU2fFEOY36jbxQ35C7SB4J060U2XXDeY6cN4b2MnXfLZ+/pSUoYA9ZRAQfX+VRLeA==
+ b=YTER8XRohF9VbUkZYKW46ren0xouxXvi0sOGP4SAT5WuSpRPhceM20niKG8JnmUCRbOMdxK1WBzMN8qjWOzEChJw6QbiTNe5eOAdT2bguf3D5QZHP694SJTCJE/FodPrssVVCPygWUpYk4EyVjW/oXV0QaZoyuClU2OdsH36T7Xq2Dxp/0Opfm5V7fJ4tQeRMk+LZzCoIKID6w/AuS15tIdvMm9L5EEtc8dCaufd+NQUl8PoAjDztJEt2dvs8SWRCMV/1IcQenvFND/s0cGz+XH2o6uLSijjV08hyWD7TL/c5Kk9XSi3MCuuwJz8JCKZpYVxoEAxC8mU9Ql8KWPNFA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=5Li3wslSnFTZFbsQpl1oExZOCBjgNIMSIhTf6OEhHoo=;
- b=Sr0vr3P036hrbTc+Jr9Ak61YEpYo/YH2MUnAXMjMfQUv4oUGi1So13MD8X5VO03j+QAFx359UUcpUNCFEhcOUjGOMQbCjW4hiyQfYtGz33KiR37kwn5d/HHk9mxkcnzf23qAYtJFZRQuhFI90h/GUyXi0+hdF14WzlNgvbXz36lj+HVeTL9t15KJnaFyGbWcId3kyD544YB4zzBIQKP7t9ijpBNQuVZa5azMzJUmVur1zpQg9ASk3I8llL7ADGnT2lfzhx2S+tHqCM8cYRvAX3GPDa73lja98Wp8m6JfhdsllJ3I76rwXk3m1X65jHERiamaCznihfzXaElvp9m9VQ==
+ bh=1jgvO3QNgOhswXvvJL2ZPMXgwFsB+7qEilEYErK+CIU=;
+ b=gqj12SPPt9Vy+DEUS07dBgxetfnz9Nu+v9NNWIUFsmg/uJalZc9PKTbkkd5dtE0Wn5BfC9vEkx84TXBVxPRUdDLrCiYMsMQ5Ks9HivpFvNJllwD7UvqA6Yu6l9D1YJj/jDZqbajwoJ9vgJjxMUnVycCuApNSBTyD5JWpvI5bnbq4CymMO04L27toQJQufjp7P7fJb79VQRKLF0AeEdOY0pD6mpoV+W7jDI4p7P4SWYiPYwe2m2wIWkxFu3dfoO9iyitJaNAiclQ410Sn+HFNarv90mm7HdSRMKm+uU8xeJ1s6JDck0bvw/xudX5sYQWcs0mrNrDTG1RIFfY08G1n1Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=wdc.com; dmarc=pass action=none header.from=wdc.com; dkim=pass
  header.d=wdc.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=5Li3wslSnFTZFbsQpl1oExZOCBjgNIMSIhTf6OEhHoo=;
- b=q9FaCbRd02pLZTmn/cJvOL/AbjfXM++SG03SYyzdgOS62yl/GhWM1U5bxGYUWO+H6E6aYEuREBsEFQ8C2BT+nlfRDlzieEArrXNy2c9tcwb9bnPt21YKQFopbNfjHk/yuWVIRP5VIpMNGYP3lctw26Ol+Nx0aEvsGR3lF/P4Ul0=
+ bh=1jgvO3QNgOhswXvvJL2ZPMXgwFsB+7qEilEYErK+CIU=;
+ b=vGqtOU+lcr5aMEoZPsKh9pFryoyxoTgOX30BeK9LJfIxZcAHyHPbG3rvWMbYMhYKRbbYoPWJVRu1pZgAv4IGQMbh1/JzADwf8T0DhW0fDicKNICSdta6aLV8DbGVumdf/QssOhGAhdTwCCPJ5TR7ZVmBkX5YZEIC5qbqNr6xjv4=
 Authentication-Results: spf=none (sender IP is )
  smtp.mailfrom=Anup.Patel@wdc.com; 
 Received: from MN2PR04MB6061.namprd04.prod.outlook.com (2603:10b6:208:d8::15)
- by MN2PR04MB7038.namprd04.prod.outlook.com (2603:10b6:208:1e6::24)
+ by MN2PR04MB5949.namprd04.prod.outlook.com (2603:10b6:208:fe::24)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2772.18; Tue, 3 Mar
- 2020 14:01:06 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2772.15; Tue, 3 Mar
+ 2020 14:01:16 +0000
 Received: from MN2PR04MB6061.namprd04.prod.outlook.com
  ([fe80::159d:10c9:f6df:64c8]) by MN2PR04MB6061.namprd04.prod.outlook.com
  ([fe80::159d:10c9:f6df:64c8%6]) with mapi id 15.20.2772.019; Tue, 3 Mar 2020
- 14:01:06 +0000
+ 14:01:16 +0000
 From: Anup Patel <anup.patel@wdc.com>
 To: Peter Maydell <peter.maydell@linaro.org>,
  Palmer Dabbelt <palmer@dabbelt.com>,
@@ -68,10 +69,13 @@ To: Peter Maydell <peter.maydell@linaro.org>,
 Cc: Atish Patra <atish.patra@wdc.com>, Anup Patel <anup@brainfault.org>,
  qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
  Anup Patel <anup.patel@wdc.com>
-Subject: [PATCH v2 0/3] RISC-V Spike machine improvements
-Date: Tue,  3 Mar 2020 19:30:34 +0530
-Message-Id: <20200303140037.85311-1-anup.patel@wdc.com>
+Subject: [PATCH v2 2/3] hw/riscv/spike: Allow loading firmware separately
+ using -bios option
+Date: Tue,  3 Mar 2020 19:30:36 +0530
+Message-Id: <20200303140037.85311-3-anup.patel@wdc.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20200303140037.85311-1-anup.patel@wdc.com>
+References: <20200303140037.85311-1-anup.patel@wdc.com>
 Content-Type: text/plain
 X-ClientProxiedBy: BMXPR01CA0027.INDPRD01.PROD.OUTLOOK.COM
  (2603:1096:b00:c::13) To MN2PR04MB6061.namprd04.prod.outlook.com
@@ -81,37 +85,37 @@ X-MS-Exchange-MessageSentRepresentingType: 1
 Received: from wdc.com (49.207.61.196) by
  BMXPR01CA0027.INDPRD01.PROD.OUTLOOK.COM (2603:1096:b00:c::13) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.2772.15 via Frontend Transport; Tue, 3 Mar 2020 14:01:01 +0000
+ 15.20.2772.15 via Frontend Transport; Tue, 3 Mar 2020 14:01:13 +0000
 X-Mailer: git-send-email 2.17.1
 X-Originating-IP: [49.207.61.196]
 X-MS-PublicTrafficType: Email
 X-MS-Office365-Filtering-HT: Tenant
-X-MS-Office365-Filtering-Correlation-Id: 2e0fdd04-5288-43f1-b033-08d7bf7b50cb
-X-MS-TrafficTypeDiagnostic: MN2PR04MB7038:
+X-MS-Office365-Filtering-Correlation-Id: ce4f0ca2-f29b-401d-13ea-08d7bf7b573a
+X-MS-TrafficTypeDiagnostic: MN2PR04MB5949:
 X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: <MN2PR04MB7038B11092BADFF7395392F88DE40@MN2PR04MB7038.namprd04.prod.outlook.com>
+X-Microsoft-Antispam-PRVS: <MN2PR04MB5949CEFFC2D21B3D700E86E48DE40@MN2PR04MB5949.namprd04.prod.outlook.com>
 WDCIPOUTBOUND: EOP-TRUE
-X-MS-Oob-TLC-OOBClassifiers: OLM:83;
+X-MS-Oob-TLC-OOBClassifiers: OLM:93;
 X-Forefront-PRVS: 03319F6FEF
 X-Forefront-Antispam-Report: SFV:NSPM;
- SFS:(10019020)(4636009)(376002)(346002)(396003)(39860400002)(366004)(136003)(189003)(199004)(186003)(16526019)(26005)(66556008)(66476007)(55016002)(36756003)(1006002)(6666004)(86362001)(55236004)(4326008)(8886007)(478600001)(81166006)(54906003)(66946007)(1076003)(81156014)(316002)(5660300002)(110136005)(2616005)(8936002)(7696005)(52116002)(956004)(44832011)(8676002)(4744005)(2906002);
- DIR:OUT; SFP:1102; SCL:1; SRVR:MN2PR04MB7038;
+ SFS:(10019020)(4636009)(376002)(396003)(346002)(366004)(39860400002)(136003)(189003)(199004)(2906002)(2616005)(1006002)(6666004)(55016002)(26005)(54906003)(110136005)(8936002)(81166006)(81156014)(52116002)(44832011)(7696005)(956004)(186003)(55236004)(16526019)(8886007)(66946007)(478600001)(66476007)(316002)(86362001)(5660300002)(66556008)(8676002)(36756003)(4326008)(1076003);
+ DIR:OUT; SFP:1102; SCL:1; SRVR:MN2PR04MB5949;
  H:MN2PR04MB6061.namprd04.prod.outlook.com; FPR:; SPF:None; LANG:en;
  PTR:InfoNoRecords; MX:1; A:1; 
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: tVuJMcf7KGAIaCpZ4EdhubT5w80qR9sflNVjOtLEuHpCVcPXy0/A99982sdIp/BU3B4rawHrJP0pRvdSyU14WsE6g8ptMmxzr0mFqdZhxv8uQp+QjL2OsPJiaBgrYy6o5IhSj0N2UHj+8+c8AnOLPRBRnZrPYi7s0gYgN5+CUhZknjbIbQRK6jz7skSRAdsivcxSHT5xTMGWg9gvIzB7n72zLQGMyPSBlIsbg0/rtTlLqRsb3TsnrwL8rc1ObBINGjvtWcdPGn45B+hs7ELg60REPX/NaitHb+hSUTXO6gpVHAxrXavPOd5jIPttIAG3CI+lgZ0NTxwgFU24LXgW494XGbD2z+xQ5zVd15CYDab4DRRnOKfLPX3nPhwXUqZRGmPs+k1uj4mPiT34O3LnrhVAt754cfeXcDEhx+mGNh4daM6d8A6hO+sqPwYfXpdO
-X-MS-Exchange-AntiSpam-MessageData: 0rLOiBhUMK9B7QB4zxPaqkp5GpMFs7t8G1uPyydT/Fr0rW6wbJnCfu5x7qMAGwPUsmiAfwlmzh23Souf2ofxivoq3izqh0K2k5OQHH5vkUEETUjSAVtx6SV2aVBHxll4HKgJ7Pj/0FbsfT6RSIwZzw==
+X-Microsoft-Antispam-Message-Info: lG7eACXOF7OAtnUAB93CmsIwGkUCn3G9Cmv96zrdvimSJHKCOZmVn9u6/7L8xJsHVCgOv4Zl15BXW//oEBnJT8djSACda3w0YgqXOqZS07vqs0xXe5TD1QraHxG5oTXJZM9BXtdrCqL2NpiCN1zLhENXjvEysFsboWL0TBAUBBPXstIA9eHrN3iGsBIS9mL9IE/sj3nKpiHv4+s16ZjVaHhnvd3KLs4shsdDwsPcOd5LjXnRV3zoTq3eNfC9m3m92471KmsYUogqRx3nnl8l9lgeix6+ATtxia3ouAav82rWM6o0gSmlZ5gEI3sMm6ZgkLOrTxldsfFbrcrpvZPntV5w2l9FaqafOEP44UuTZj7EJxmBpkD1QiCKAZ1qToqXFF4ukR+QsrWKCkuUdUKDuv+Wx7e/7JtJA6VfNm0in+K+dd0ay38XstTiCrEoYuO8
+X-MS-Exchange-AntiSpam-MessageData: RX4n+M+XLeHG1vV27LU59AuOMl5zfXHxl8dDfBev8JY/UioIKxDEnE2L8m6knk193yBL8cycSw3WtQ2k4pnMwkxYEBM1y+TA52GpbDX9/t1hsR78qBWJEzYdQ3cFMFByTdaaPCq9lDTGctz6psCtoQ==
 X-OriginatorOrg: wdc.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2e0fdd04-5288-43f1-b033-08d7bf7b50cb
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Mar 2020 14:01:05.9260 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: ce4f0ca2-f29b-401d-13ea-08d7bf7b573a
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Mar 2020 14:01:16.4509 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: b61c8803-16f3-4c35-9b17-6f65f441df86
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Hi1RTtYszJX997w79zp67JcmF/IPYSG05lCMBjFI7Xaf4ZaZnN6cGyyfBkgrKnxElD/ARLAjhcDskd+iEzzaEw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR04MB7038
-X-detected-operating-system: by eggs.gnu.org: FreeBSD 9.x
-X-Received-From: 68.232.141.245
+X-MS-Exchange-CrossTenant-UserPrincipalName: UyM6QCScIKTnvF+ZxEZzBWY3KyPueJvqxkimTjPLQoefzwc5GbP72qfCppHI4OTJOCk8HtGTP9cYuyLR/Mawaw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR04MB5949
+X-detected-operating-system: by eggs.gnu.org: FreeBSD 9.x [fuzzy]
+X-Received-From: 216.71.154.45
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -123,27 +127,59 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Mar 2020 14:01:22 -0000
+X-List-Received-Date: Tue, 03 Mar 2020 14:01:32 -0000
 
-This series improves QEMU Spike machine to:
-1. Allow loading OpenBI firmware using -bios option
-2. Allow more than one CPUs
+This patch extends Spike machine support to allow loading OpenSBI
+firmware (fw_jump.elf) separately using -bios option.
 
-Changes since v1:
- - Rebased on QEMU master (commit 2ac031d171ccd18c973014d9978b4a63f0ad5fb0)
+Signed-off-by: Anup Patel <anup.patel@wdc.com>
+---
+ hw/riscv/spike.c | 24 +++++++++++++++++++++++-
+ 1 file changed, 23 insertions(+), 1 deletion(-)
 
-Anup Patel (3):
-  hw/riscv: Add optional symbol callback ptr to riscv_load_firmware()
-  hw/riscv/spike: Allow loading firmware separately using -bios option
-  hw/riscv/spike: Allow more than one CPUs
-
- hw/riscv/boot.c         | 13 ++++++++-----
- hw/riscv/sifive_u.c     |  2 +-
- hw/riscv/spike.c        | 26 ++++++++++++++++++++++++--
- hw/riscv/virt.c         |  2 +-
- include/hw/riscv/boot.h |  6 ++++--
- 5 files changed, 38 insertions(+), 11 deletions(-)
-
+diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
+index 5053fe4590..b0395e227c 100644
+--- a/hw/riscv/spike.c
++++ b/hw/riscv/spike.c
+@@ -45,6 +45,12 @@
+ 
+ #include <libfdt.h>
+ 
++#if defined(TARGET_RISCV32)
++# define BIOS_FILENAME "opensbi-riscv32-spike-fw_jump.elf"
++#else
++# define BIOS_FILENAME "opensbi-riscv64-spike-fw_jump.elf"
++#endif
++
+ static const struct MemmapEntry {
+     hwaddr base;
+     hwaddr size;
+@@ -183,8 +189,24 @@ static void spike_board_init(MachineState *machine)
+     memory_region_add_subregion(system_memory, memmap[SPIKE_MROM].base,
+                                 mask_rom);
+ 
++    riscv_find_and_load_firmware(machine, BIOS_FILENAME,
++                                 memmap[SPIKE_DRAM].base,
++                                 htif_symbol_callback);
++
+     if (machine->kernel_filename) {
+-        riscv_load_kernel(machine->kernel_filename, htif_symbol_callback);
++        uint64_t kernel_entry = riscv_load_kernel(machine->kernel_filename,
++                                                  htif_symbol_callback);
++
++        if (machine->initrd_filename) {
++            hwaddr start;
++            hwaddr end = riscv_load_initrd(machine->initrd_filename,
++                                           machine->ram_size, kernel_entry,
++                                           &start);
++            qemu_fdt_setprop_cell(s->fdt, "/chosen",
++                                  "linux,initrd-start", start);
++            qemu_fdt_setprop_cell(s->fdt, "/chosen", "linux,initrd-end",
++                                  end);
++        }
+     }
+ 
+     /* reset vector */
 -- 
 2.17.1
 
