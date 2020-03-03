@@ -1,54 +1,54 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1j8vmH-0005Oy-UL
-	for mharc-qemu-riscv@gnu.org; Mon, 02 Mar 2020 19:51:17 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:45236)
+	id 1j8vmL-0005RO-Pn
+	for mharc-qemu-riscv@gnu.org; Mon, 02 Mar 2020 19:51:21 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:45173)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <palmerdabbelt@google.com>) id 1j8vkg-00025i-OV
- for qemu-riscv@nongnu.org; Mon, 02 Mar 2020 19:49:39 -0500
+ (envelope-from <palmerdabbelt@google.com>) id 1j8vkc-0001vb-6Y
+ for qemu-riscv@nongnu.org; Mon, 02 Mar 2020 19:49:35 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmerdabbelt@google.com>) id 1j8vkf-0004Pc-Jm
- for qemu-riscv@nongnu.org; Mon, 02 Mar 2020 19:49:38 -0500
-Received: from mail-pl1-x634.google.com ([2607:f8b0:4864:20::634]:45940)
+ (envelope-from <palmerdabbelt@google.com>) id 1j8vkb-0004N0-3l
+ for qemu-riscv@nongnu.org; Mon, 02 Mar 2020 19:49:34 -0500
+Received: from mail-pf1-x42c.google.com ([2607:f8b0:4864:20::42c]:43283)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <palmerdabbelt@google.com>)
- id 1j8vkf-0004Ou-EN
- for qemu-riscv@nongnu.org; Mon, 02 Mar 2020 19:49:37 -0500
-Received: by mail-pl1-x634.google.com with SMTP id b22so492033pls.12
- for <qemu-riscv@nongnu.org>; Mon, 02 Mar 2020 16:49:37 -0800 (PST)
+ id 1j8vka-0004Mf-Ux
+ for qemu-riscv@nongnu.org; Mon, 02 Mar 2020 19:49:33 -0500
+Received: by mail-pf1-x42c.google.com with SMTP id s1so547262pfh.10
+ for <qemu-riscv@nongnu.org>; Mon, 02 Mar 2020 16:49:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
  h=subject:date:message-id:in-reply-to:references:mime-version
  :content-transfer-encoding:cc:from:to;
- bh=R6s1oATWB6yYMgO1fR6ahvnaLvJxcC15AdAU3isfkJU=;
- b=j8PBInUNjsEflSqowWu/mQPEMH6d3Mv4q85Vk/u8E4L2V/3d+adE+pLRQHM0pTL96U
- cy8DVoTZuw2ddg3eATwXRsp+pAxcat/Q1uKZthnsNRXMI0ntIcG9jzBWmGplnYHqLg8C
- f6DN9TA4H0ga1DVkz9IoCYy9SzFGZ0dYJo5AqhmUS1W4GKLJpO21wg3x5hZu3F4qA32X
- v2q2toHsC9dUAH8SHMONNZakMCbA8LdJCSqvWsg0FgdjYf1+1zuktu08eEzVacgqyg7c
- B/1zsDGhIgImOCVTCO2f3AsbRn933CiIHPxbvvtppTk+u+M/Qjc3cdUqkdQNFzWxdZpR
- kDIA==
+ bh=rNsQkuIoNOeCoqq4/C2RK4FR6al+zbYhClVtHKQOLLw=;
+ b=hB408k+WIvmJqdbZQqhwKNre9xBJqsfVWGabGoLOMJIYZD3zy7V1M1r+5Uf14uqx/P
+ o6avf31ufsPc9X75KaoCZiRmY7ciVhzO6VLf2lVwkBf9Pl4/KpnOCiU3CDjl0TgxQJ99
+ JxUoKcxTn+abiHtGpIQAydrVKAMTDWxytOENDcHSOLEUQwf176I0/O3N9AgXt5qmlBRf
+ 4KqXrcR+nsxHYjE0Y+PasopFc9MIRh3lL5R/qbt88CcMPYuSdbHZLHCFOt6LsgBugZTN
+ /2lBOgdAC7zfVS9fO1dvEiPIgeSezebDWlecxLe91vIneO1XG61jkIjm1PZ5z28rjUrw
+ 1POA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding:cc:from:to;
- bh=R6s1oATWB6yYMgO1fR6ahvnaLvJxcC15AdAU3isfkJU=;
- b=BSZ4cYa/9b8pUhC/ansJNmJtg8kNtz9dN/IEPpYjzvzvkGxFVO/Cff8TB0zk42HTw7
- 6bK3EaaNN0JKTdLUtkF2a+TLA78YOCeTScHTp3UGy483WHtNtZWrhAyVa8AAX4vdLl8t
- B0y40Piv2hETyg2gDUhFF1yX7M5BGgzfYGqJaVXBobRX7PRNqWMh1KoMAv1HO57ylyMa
- vQV7t9c5UqqkL+1SW8FXEpAvycDOeM4Yk62E8wBfZ2zeJO/SUantwyaSUv3ICNgQxIbn
- JsIbYWGWeTLXRoAYdhgUr5NtbbH6Prd5bImmr8nISegzue1jcYhapYLa7yMre9stMQLr
- 3SQQ==
-X-Gm-Message-State: ANhLgQ3krE35pYpbfnR4jSonGj1RJ3EuDlcjSGo4trKy5athPiskCUoS
- MkOPVz42oig3U0DW+cF+qg9UNuppo4XYlw==
-X-Google-Smtp-Source: ADFU+vvSj0u+mvknBgNaiaw+78kPdvNgz5Ht1gusO2FBuEYRE7JeZkaqjQqVJVAzfEdR4lFO6beMZA==
-X-Received: by 2002:a17:90a:3266:: with SMTP id
- k93mr1267410pjb.23.1583196576043; 
- Mon, 02 Mar 2020 16:49:36 -0800 (PST)
+ bh=rNsQkuIoNOeCoqq4/C2RK4FR6al+zbYhClVtHKQOLLw=;
+ b=HVfay58fxW1KU7sxe/Aa85EdG5G4vzq5/IP3BpzIYgeld6O1PsNFoUrgZnrpYf8AT7
+ t6X/8ALXshxt/67WmZrcWuXI0qQzyvO3e5y2RxxUjbdE7zmjcyiCecniKx4qUsr1YrgI
+ 2nq1KXxwGyD6SKHiYdcmUJyi/pU6q0fdwIg7cmLpLBp9pExPUor/bios4qzYXLWTqy0P
+ 6mVP2pm+tfXCxNcx2cQBaxvbz6W7ZZ0jV+vjNxOkcqaPznLE9ftcO8FXE9ZM9b9H9Knc
+ Wz1dU4VuZnl5C0I2aGRdEya0gG1jSg8Fk6a7lSRix+uMNDi13orGWaeP7Ag53z9ti6r0
+ pOwQ==
+X-Gm-Message-State: ANhLgQ2OIIGxr6M1uDQtalIfaMqxBrcSknzHbUVHhJ2YOGApC9OWsonC
+ lrp5nEf7GL6O0goiJgIaNja5QaNUqeDQxw==
+X-Google-Smtp-Source: ADFU+vv8GBm6o3EZFdJJiap3o5MIdsStvARl6zXFdo8DW4l5gDbAf2rlzTCK6mlo2vi1M9Gh20RdxA==
+X-Received: by 2002:a63:8b41:: with SMTP id j62mr1513586pge.18.1583196571641; 
+ Mon, 02 Mar 2020 16:49:31 -0800 (PST)
 Received: from localhost ([2620:0:1000:2514:23a5:d584:6a92:3e3c])
- by smtp.gmail.com with ESMTPSA id r13sm22296228pgf.1.2020.03.02.16.49.35
+ by smtp.gmail.com with ESMTPSA id f19sm15219913pgf.33.2020.03.02.16.49.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Mar 2020 16:49:35 -0800 (PST)
-Subject: [PULL 23/38] target/riscv: Add hfence instructions
-Date: Mon,  2 Mar 2020 16:48:33 -0800
-Message-Id: <20200303004848.136788-24-palmerdabbelt@google.com>
+ Mon, 02 Mar 2020 16:49:31 -0800 (PST)
+Subject: [PULL 20/38] target/riscv: Generate illegal instruction on WFI when
+ V=1
+Date: Mon,  2 Mar 2020 16:48:30 -0800
+Message-Id: <20200303004848.136788-21-palmerdabbelt@google.com>
 X-Mailer: git-send-email 2.25.0.265.gbab2e86ba0-goog
 In-Reply-To: <20200303004848.136788-1-palmerdabbelt@google.com>
 References: <20200303004848.136788-1-palmerdabbelt@google.com>
@@ -61,7 +61,7 @@ From: Palmer Dabbelt <palmerdabbelt@google.com>
 To: Peter Maydell <peter.maydell@linaro.org>
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::634
+X-Received-From: 2607:f8b0:4864:20::42c
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -73,7 +73,7 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Mar 2020 00:49:40 -0000
+X-List-Received-Date: Tue, 03 Mar 2020 00:49:35 -0000
 
 From: Alistair Francis <alistair.francis@wdc.com>
 
@@ -81,97 +81,26 @@ Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
 Signed-off-by: Palmer Dabbelt <palmerdabbelt@google.com>
 ---
- target/riscv/insn32.decode                    | 23 ++++++-----
- .../riscv/insn_trans/trans_privileged.inc.c   | 40 +++++++++++++++++++
- 2 files changed, 54 insertions(+), 9 deletions(-)
+ target/riscv/op_helper.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index 77f794ed70..cfd9ca6d2b 100644
---- a/target/riscv/insn32.decode
-+++ b/target/riscv/insn32.decode
-@@ -63,20 +63,25 @@
- @r2_rm   .......   ..... ..... ... ..... ....... %rs1 %rm %rd
- @r2      .......   ..... ..... ... ..... ....... %rs1 %rd
+diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+index e87c9115bc..455eb28907 100644
+--- a/target/riscv/op_helper.c
++++ b/target/riscv/op_helper.c
+@@ -130,9 +130,10 @@ void helper_wfi(CPURISCVState *env)
+ {
+     CPUState *cs = env_cpu(env);
  
-+@hfence_gvma ....... ..... .....   ... ..... ....... %rs2 %rs1
-+@hfence_bvma ....... ..... .....   ... ..... ....... %rs2 %rs1
-+
- @sfence_vma ....... ..... .....   ... ..... ....... %rs2 %rs1
- @sfence_vm  ....... ..... .....   ... ..... ....... %rs1
- 
- 
- # *** Privileged Instructions ***
--ecall      000000000000     00000 000 00000 1110011
--ebreak     000000000001     00000 000 00000 1110011
--uret       0000000    00010 00000 000 00000 1110011
--sret       0001000    00010 00000 000 00000 1110011
--hret       0010000    00010 00000 000 00000 1110011
--mret       0011000    00010 00000 000 00000 1110011
--wfi        0001000    00101 00000 000 00000 1110011
--sfence_vma 0001001    ..... ..... 000 00000 1110011 @sfence_vma
--sfence_vm  0001000    00100 ..... 000 00000 1110011 @sfence_vm
-+ecall       000000000000     00000 000 00000 1110011
-+ebreak      000000000001     00000 000 00000 1110011
-+uret        0000000    00010 00000 000 00000 1110011
-+sret        0001000    00010 00000 000 00000 1110011
-+hret        0010000    00010 00000 000 00000 1110011
-+mret        0011000    00010 00000 000 00000 1110011
-+wfi         0001000    00101 00000 000 00000 1110011
-+hfence_gvma 0110001    ..... ..... 000 00000 1110011 @hfence_gvma
-+hfence_bvma 0010001    ..... ..... 000 00000 1110011 @hfence_bvma
-+sfence_vma  0001001    ..... ..... 000 00000 1110011 @sfence_vma
-+sfence_vm   0001000    00100 ..... 000 00000 1110011 @sfence_vm
- 
- # *** RV32I Base Instruction Set ***
- lui      ....................       ..... 0110111 @u
-diff --git a/target/riscv/insn_trans/trans_privileged.inc.c b/target/riscv/insn_trans/trans_privileged.inc.c
-index c5e4b3e49a..b9b5a89b52 100644
---- a/target/riscv/insn_trans/trans_privileged.inc.c
-+++ b/target/riscv/insn_trans/trans_privileged.inc.c
-@@ -108,3 +108,43 @@ static bool trans_sfence_vm(DisasContext *ctx, arg_sfence_vm *a)
- #endif
-     return false;
- }
-+
-+static bool trans_hfence_gvma(DisasContext *ctx, arg_sfence_vma *a)
-+{
-+#ifndef CONFIG_USER_ONLY
-+    if (ctx->priv_ver >= PRIV_VERSION_1_10_0 &&
-+        has_ext(ctx, RVH)) {
-+        /* Hpervisor extensions exist */
-+        /*
-+         * if (env->priv == PRV_M ||
-+         *   (env->priv == PRV_S &&
-+         *    !riscv_cpu_virt_enabled(env) &&
-+         *    get_field(ctx->mstatus_fs, MSTATUS_TVM))) {
-+         */
-+            gen_helper_tlb_flush(cpu_env);
-+            return true;
-+        /* } */
-+    }
-+#endif
-+    return false;
-+}
-+
-+static bool trans_hfence_bvma(DisasContext *ctx, arg_sfence_vma *a)
-+{
-+#ifndef CONFIG_USER_ONLY
-+    if (ctx->priv_ver >= PRIV_VERSION_1_10_0 &&
-+        has_ext(ctx, RVH)) {
-+        /* Hpervisor extensions exist */
-+        /*
-+         * if (env->priv == PRV_M ||
-+         *   (env->priv == PRV_S &&
-+         *    !riscv_cpu_virt_enabled(env) &&
-+         *    get_field(ctx->mstatus_fs, MSTATUS_TVM))) {
-+         */
-+            gen_helper_tlb_flush(cpu_env);
-+            return true;
-+        /* } */
-+    }
-+#endif
-+    return false;
-+}
+-    if (env->priv == PRV_S &&
++    if ((env->priv == PRV_S &&
+         env->priv_ver >= PRIV_VERSION_1_10_0 &&
+-        get_field(env->mstatus, MSTATUS_TW)) {
++        get_field(env->mstatus, MSTATUS_TW)) ||
++        riscv_cpu_virt_enabled(env)) {
+         riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
+     } else {
+         cs->halted = 1;
 -- 
 2.25.0.265.gbab2e86ba0-goog
 
