@@ -1,53 +1,53 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1j8vkh-00027r-TV
-	for mharc-qemu-riscv@gnu.org; Mon, 02 Mar 2020 19:49:39 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44752)
+	id 1j8vkq-0002WN-B0
+	for mharc-qemu-riscv@gnu.org; Mon, 02 Mar 2020 19:49:48 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44860)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <palmerdabbelt@google.com>) id 1j8vkC-0000xW-An
- for qemu-riscv@nongnu.org; Mon, 02 Mar 2020 19:49:10 -0500
+ (envelope-from <palmerdabbelt@google.com>) id 1j8vkH-00015y-8g
+ for qemu-riscv@nongnu.org; Mon, 02 Mar 2020 19:49:14 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmerdabbelt@google.com>) id 1j8vkA-00047k-54
- for qemu-riscv@nongnu.org; Mon, 02 Mar 2020 19:49:07 -0500
-Received: from mail-pf1-x42e.google.com ([2607:f8b0:4864:20::42e]:42233)
+ (envelope-from <palmerdabbelt@google.com>) id 1j8vkG-0004BW-AX
+ for qemu-riscv@nongnu.org; Mon, 02 Mar 2020 19:49:13 -0500
+Received: from mail-pf1-x432.google.com ([2607:f8b0:4864:20::432]:34194)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <palmerdabbelt@google.com>)
- id 1j8vk9-000475-Sc
- for qemu-riscv@nongnu.org; Mon, 02 Mar 2020 19:49:06 -0500
-Received: by mail-pf1-x42e.google.com with SMTP id f5so549578pfk.9
- for <qemu-riscv@nongnu.org>; Mon, 02 Mar 2020 16:49:04 -0800 (PST)
+ id 1j8vkG-0004Ag-53
+ for qemu-riscv@nongnu.org; Mon, 02 Mar 2020 19:49:12 -0500
+Received: by mail-pf1-x432.google.com with SMTP id y21so570027pfp.1
+ for <qemu-riscv@nongnu.org>; Mon, 02 Mar 2020 16:49:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
  h=subject:date:message-id:in-reply-to:references:mime-version
  :content-transfer-encoding:cc:from:to;
- bh=+WltSHyolw+4rQE+XPimaO0DHQK7HzUxfJXf8ld/qCk=;
- b=oFu6s/Qy+KVjDpayZV7soZUhwXca0iJ0AHS2pQPCjVx3MXEd2Md9Cb2M9s7lKY5C2Y
- wfaCcknXFcvrQ7NkvSdwWFjES1QwHcNF9SkKRQPlXauw9NQ7hVdGgmQcWj33XJ4hzYQ0
- lcOC8QEeSI0fThCSRvyLf6D3G43DCnPlbw0fUQZzCSQs8FfMTvy13avGphyoW9eYrI6U
- S8XfgcDUInzgKKQlcz+50YOZckUwCa7NtgslbW6VgbEFvDvLiCeuP4nYkmEgT2uRBnAu
- BYRlEgw1e1a8LGx7lRxrPvS+OIDWcf/xNgWvRrPITQJjqrUYpQv5DibaKDktaGx/0X53
- YWCA==
+ bh=ki3pTa3uJKP5VQhwlko+f1zWD5CRp2+R1vu8jGx8azs=;
+ b=QyTHNCCKT05mcm6TzRR9XWYESyOBXRd2L+rD5+vkZ4q7hxzo/k0UrUJgZSPwx72yI2
+ RKshVwU5eFdpUyoKXt/4Jj6CHFPRJUr6NHpt/uwfoxLDXzvp8f6O7gim5+utb3LoZ8IM
+ Hp0VWj+p/GzArT73sK7YeJViLQEB7PjWK5N+f09uym13IFHlTez66eZ7wo8I7/GeKlOh
+ jvChWJDBMuAanHPi8xQ87hYW+xcE2/jQmgC6N7/VBCPT2Lbs/5qk5x1o8IVCJOKweeGH
+ Awt9ykQ9vLr1RqOfzTg4tiqFZpFBFQu/xDAkoy/bemQXBQpbz7hb1aNyG/Fwc6AlrpiK
+ 7iuw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding:cc:from:to;
- bh=+WltSHyolw+4rQE+XPimaO0DHQK7HzUxfJXf8ld/qCk=;
- b=Bh5Hhwb6wHHowDowxvvYZcfPL5WN31jLdl/bCzzrciiUXd69fWWW+CX61ZsSN/EVPq
- 3qq+i9024RXKxKWFX0fckEvIp+ecv0dGwUGyXu11XZOakhxFOnuNY7y3PXmHAidqVtkD
- D0/8wiElj6+rC/V/0hMjvKvHEA9noGFLEeiMrGD/mQIpGTFcc5cJRSnyo1o0cqUAIq4T
- H6yw3aiCxJ48OrDUKu69SzBL57BunE5VfuFihLlpFkXIiZc9GES76CEJOIVPFsOSBP3K
- KKSVN3TXWZNHlTTldFMxSTYvRjKjovTUKz9eY9+mm5iNkBRhEN3XHrEBDelNb2JOJR/7
- muzw==
-X-Gm-Message-State: ANhLgQ3G4VJYAw/5Qu1XbNCzG7nWLN0YaNWPNsp0fz6iot9jfvoFzUhE
- 7Tq2jKGrGrTUs/iwMAKfYegf5tT1QE0BCA==
-X-Google-Smtp-Source: ADFU+vuLG8/8IhkoqL0mK0ULov5VVM4mXoZPyaFd5YrvRg3BPr9yHjnh4iDUXjDhZAgBeiRfNKQ2TQ==
-X-Received: by 2002:aa7:8bdd:: with SMTP id s29mr1565556pfd.208.1583196543314; 
- Mon, 02 Mar 2020 16:49:03 -0800 (PST)
+ bh=ki3pTa3uJKP5VQhwlko+f1zWD5CRp2+R1vu8jGx8azs=;
+ b=bvoaHLV6X4Mns11kAmnKPdcexG1+T1ANgqKql9l6NKOrnQIsLq9HpbhJ1kmURpO8mz
+ Bu4ZLS++rA5xi1ypW4SNhoaFcTAAsMOKu1sp5k+RBu4DC2wDcXV0Zp6tVBje05IB0mFU
+ CIEFrp0XA3rYuxEQgJIuBOreU9da7CmhmqMAaJvb8Yxflmi2eLfuqJvHJM/sJJqA/12s
+ Ub93TZIqBOxnYnsDCuPZPyeU8I4BeFUIM7qDx0HuWND+Mrp03NH1I4jgiYoT/aZuXaGo
+ aQnkmVdBOnEN8hkFlkhN9F6sVWxf5DoNfwkxH1vJ3N6FGWdtPog8jsr+yxt1O1lch9ZR
+ xJ0w==
+X-Gm-Message-State: ANhLgQ1dIjzGx1JfW5ZG3yOK3qIDWKBLrMZN9aB39qAJsjQTzjNq3nrY
+ ZfyrIgEVPff1EOIlclo4koJPDSI3namH7A==
+X-Google-Smtp-Source: ADFU+vt9OamwOojLlilWmVCv1UfJZ0QjEEQR5Y18BXAFONXyRetjbKhjpBQv+K0AOpHVFwz1SmWz9w==
+X-Received: by 2002:a62:8301:: with SMTP id h1mr1641003pfe.146.1583196550656; 
+ Mon, 02 Mar 2020 16:49:10 -0800 (PST)
 Received: from localhost ([2620:0:1000:2514:23a5:d584:6a92:3e3c])
- by smtp.gmail.com with ESMTPSA id bb5sm108161pjb.8.2020.03.02.16.49.02
+ by smtp.gmail.com with ESMTPSA id 128sm8677325pfe.163.2020.03.02.16.49.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Mar 2020 16:49:02 -0800 (PST)
-Subject: [PULL 03/38] target/riscv: Add the Hypervisor CSRs to CPUState
-Date: Mon,  2 Mar 2020 16:48:13 -0800
-Message-Id: <20200303004848.136788-4-palmerdabbelt@google.com>
+ Mon, 02 Mar 2020 16:49:10 -0800 (PST)
+Subject: [PULL 08/38] target/riscv: Fix CSR perm checking for HS mode
+Date: Mon,  2 Mar 2020 16:48:18 -0800
+Message-Id: <20200303004848.136788-9-palmerdabbelt@google.com>
 X-Mailer: git-send-email 2.25.0.265.gbab2e86ba0-goog
 In-Reply-To: <20200303004848.136788-1-palmerdabbelt@google.com>
 References: <20200303004848.136788-1-palmerdabbelt@google.com>
@@ -60,7 +60,7 @@ From: Palmer Dabbelt <palmerdabbelt@google.com>
 To: Peter Maydell <peter.maydell@linaro.org>
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::42e
+X-Received-From: 2607:f8b0:4864:20::432
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -72,151 +72,51 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Mar 2020 00:49:10 -0000
+X-List-Received-Date: Tue, 03 Mar 2020 00:49:14 -0000
 
 From: Alistair Francis <alistair.francis@wdc.com>
 
-Add the Hypervisor CSRs to CPUState and at the same time (to avoid
-bisect issues) update the CSR macros for the v0.5 Hyp spec.
+Update the CSR permission checking to work correctly when we are in
+HS-mode.
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 Reviewed-by: Palmer Dabbelt <palmerdabbelt@google.com>
 Signed-off-by: Palmer Dabbelt <palmerdabbelt@google.com>
 ---
- target/riscv/cpu.h      | 21 +++++++++++++++++++++
- target/riscv/cpu_bits.h | 34 +++++++++++++++++++++-------------
- target/riscv/gdbstub.c  | 11 ++++++-----
- 3 files changed, 48 insertions(+), 18 deletions(-)
+ target/riscv/csr.c | 18 ++++++++++++++----
+ 1 file changed, 14 insertions(+), 4 deletions(-)
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 010125efd6..c7f7ae5c38 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -143,6 +143,27 @@ struct CPURISCVState {
-     target_ulong mcause;
-     target_ulong mtval;  /* since: priv-1.10.0 */
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index ca27359c7e..c63b2f980c 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -801,12 +801,22 @@ int riscv_csrrw(CPURISCVState *env, int csrno, target_ulong *ret_value,
  
-+    /* Hypervisor CSRs */
-+    target_ulong hstatus;
-+    target_ulong hedeleg;
-+    target_ulong hideleg;
-+    target_ulong hcounteren;
-+    target_ulong htval;
-+    target_ulong htinst;
-+    target_ulong hgatp;
+     /* check privileges and return -1 if check fails */
+ #if !defined(CONFIG_USER_ONLY)
+-    int csr_priv = get_field(csrno, 0x300);
++    int effective_priv = env->priv;
+     int read_only = get_field(csrno, 0xC00) == 3;
+-    if ((!env->debugger) && (env->priv < csr_priv)) {
+-        return -1;
 +
-+    /* Virtual CSRs */
-+    target_ulong vsstatus;
-+    target_ulong vstvec;
-+    target_ulong vsscratch;
-+    target_ulong vsepc;
-+    target_ulong vscause;
-+    target_ulong vstval;
-+    target_ulong vsatp;
++    if (riscv_has_ext(env, RVH) &&
++        env->priv == PRV_S &&
++        !riscv_cpu_virt_enabled(env)) {
++        /*
++         * We are in S mode without virtualisation, therefore we are in HS Mode.
++         * Add 1 to the effective privledge level to allow us to access the
++         * Hypervisor CSRs.
++         */
++        effective_priv++;
+     }
+-    if (write_mask && read_only) {
 +
-+    target_ulong mtval2;
-+    target_ulong mtinst;
-+
-     target_ulong scounteren;
-     target_ulong mcounteren;
- 
-diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-index e99834856c..25c0fb258d 100644
---- a/target/riscv/cpu_bits.h
-+++ b/target/riscv/cpu_bits.h
-@@ -177,8 +177,14 @@
- #define CSR_HSTATUS         0x600
- #define CSR_HEDELEG         0x602
- #define CSR_HIDELEG         0x603
--#define CSR_HCOUNTERNEN     0x606
-+#define CSR_HIE             0x604
-+#define CSR_HCOUNTEREN      0x606
-+#define CSR_HTVAL           0x643
-+#define CSR_HIP             0x644
-+#define CSR_HTINST          0x64A
- #define CSR_HGATP           0x680
-+#define CSR_HTIMEDELTA      0x605
-+#define CSR_HTIMEDELTAH     0x615
- 
- #if defined(TARGET_RISCV32)
- #define HGATP_MODE           SATP32_MODE
-@@ -191,6 +197,20 @@
- #define HGATP_PPN            SATP64_PPN
++    if ((write_mask && read_only) ||
++        (!env->debugger && (effective_priv < get_field(csrno, 0x300)))) {
+         return -1;
+     }
  #endif
- 
-+/* Virtual CSRs */
-+#define CSR_VSSTATUS        0x200
-+#define CSR_VSIE            0x204
-+#define CSR_VSTVEC          0x205
-+#define CSR_VSSCRATCH       0x240
-+#define CSR_VSEPC           0x241
-+#define CSR_VSCAUSE         0x242
-+#define CSR_VSTVAL          0x243
-+#define CSR_VSIP            0x244
-+#define CSR_VSATP           0x280
-+
-+#define CSR_MTINST          0x34a
-+#define CSR_MTVAL2          0x34b
-+
- /* Physical Memory Protection */
- #define CSR_PMPCFG0         0x3a0
- #define CSR_PMPCFG1         0x3a1
-@@ -313,17 +333,6 @@
- #define CSR_MHPMCOUNTER30H  0xb9e
- #define CSR_MHPMCOUNTER31H  0xb9f
- 
--/* Legacy Hypervisor Trap Setup (priv v1.9.1) */
--#define CSR_HIE             0x204
--#define CSR_HTVEC           0x205
--
--/* Legacy Hypervisor Trap Handling (priv v1.9.1) */
--#define CSR_HSCRATCH        0x240
--#define CSR_HEPC            0x241
--#define CSR_HCAUSE          0x242
--#define CSR_HBADADDR        0x243
--#define CSR_HIP             0x244
--
- /* Legacy Machine Protection and Translation (priv v1.9.1) */
- #define CSR_MBASE           0x380
- #define CSR_MBOUND          0x381
-@@ -400,7 +409,6 @@
- 
- /* hstatus CSR bits */
- #define HSTATUS_SPRV         0x00000001
--#define HSTATUS_STL          0x00000040
- #define HSTATUS_SPV          0x00000080
- #define HSTATUS_SP2P         0x00000100
- #define HSTATUS_SP2V         0x00000200
-diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
-index 1a72f7be9c..2f32750f2f 100644
---- a/target/riscv/gdbstub.c
-+++ b/target/riscv/gdbstub.c
-@@ -130,6 +130,8 @@ static int csr_register_map[] = {
-     CSR_MCAUSE,
-     CSR_MTVAL,
-     CSR_MIP,
-+    CSR_MTINST,
-+    CSR_MTVAL2,
-     CSR_PMPCFG0,
-     CSR_PMPCFG1,
-     CSR_PMPCFG2,
-@@ -252,12 +254,11 @@ static int csr_register_map[] = {
-     CSR_HEDELEG,
-     CSR_HIDELEG,
-     CSR_HIE,
--    CSR_HTVEC,
--    CSR_HSCRATCH,
--    CSR_HEPC,
--    CSR_HCAUSE,
--    CSR_HBADADDR,
-+    CSR_HCOUNTEREN,
-+    CSR_HTVAL,
-     CSR_HIP,
-+    CSR_HTINST,
-+    CSR_HGATP,
-     CSR_MBASE,
-     CSR_MBOUND,
-     CSR_MIBASE,
 -- 
 2.25.0.265.gbab2e86ba0-goog
 
