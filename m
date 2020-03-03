@@ -1,81 +1,86 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1j9CPT-0007aV-OH
-	for mharc-qemu-riscv@gnu.org; Tue, 03 Mar 2020 13:36:51 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49797)
+	id 1j9CUY-0004BL-HH
+	for mharc-qemu-riscv@gnu.org; Tue, 03 Mar 2020 13:42:06 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:50635)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <peter.maydell@linaro.org>) id 1j9CPR-0007V6-2H
- for qemu-riscv@nongnu.org; Tue, 03 Mar 2020 13:36:50 -0500
+ (envelope-from <richard.henderson@linaro.org>) id 1j9CUV-0004B3-Ve
+ for qemu-riscv@nongnu.org; Tue, 03 Mar 2020 13:42:05 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <peter.maydell@linaro.org>) id 1j9CPP-0002E1-T2
- for qemu-riscv@nongnu.org; Tue, 03 Mar 2020 13:36:48 -0500
-Received: from mail-ot1-x343.google.com ([2607:f8b0:4864:20::343]:41093)
+ (envelope-from <richard.henderson@linaro.org>) id 1j9CUU-0004kM-2V
+ for qemu-riscv@nongnu.org; Tue, 03 Mar 2020 13:42:03 -0500
+Received: from mail-pg1-x544.google.com ([2607:f8b0:4864:20::544]:39263)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <peter.maydell@linaro.org>)
- id 1j9CPP-0002DX-Nt
- for qemu-riscv@nongnu.org; Tue, 03 Mar 2020 13:36:47 -0500
-Received: by mail-ot1-x343.google.com with SMTP id v19so4027562ote.8
- for <qemu-riscv@nongnu.org>; Tue, 03 Mar 2020 10:36:47 -0800 (PST)
+ (Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
+ id 1j9CUS-0004iM-I4
+ for qemu-riscv@nongnu.org; Tue, 03 Mar 2020 13:42:01 -0500
+Received: by mail-pg1-x544.google.com with SMTP id s2so1939605pgv.6
+ for <qemu-riscv@nongnu.org>; Tue, 03 Mar 2020 10:42:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=LR37zhoqYD5cdd2uefRK2acO4Z+Y6+upiLQRwqRbut0=;
- b=N8PQCp9CHXAkdLPwMSgWG4Q2eV7pm7qXVEsIebX4l0gtsm9YydBUj9KAmIdnYy6bSy
- hPk06zlu1kVm0vIwLBELYt2Y/PrfrgZDiBgHftBs/RP7LhcAVYoXcy6oiXIAlKgH+3iV
- /Ma8Dq2USaGf6oi02pCD6j1OgRWFphWINb9GVIOt+twrIBAxC/1y3j/o1Uzi2PlTs7a9
- NauFZEAPcfhNa4QB+sJm8xbcNzrQIK8v0uCwhXDZJFhdopq06gk6aODoZTvDH5iTSjvB
- NP7U6ONstMs/Hbqb3tpeX84VswLh3fN6ts0IaHbPTej+NIZpRltDVtSFAHYwCRiVtJ3V
- qxcw==
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=ihGb95fli6TTZlBLRskT6NVEplBL96MsAsHOeKH3oNU=;
+ b=GPJF7rqS2uXhp9Zp1ihYIyooWwy1HXu/JLDUTZpeWFLj3YNWB2e2EWaMEuSS17xJFm
+ t5VqQBqmXIYk9b4TFHlSrUren4v+3AFTNL7BiYSWfHd1Nv2278FyzTNFVimv/FTmvxb0
+ 4ggvamMihoI3xvlaFitqGWjo5FnCu+Rsn91g7ZmpwRlGefJPr+kxIf4CFigEMMll+K6U
+ XuEdpVi7mAezg5iR/6+Yh6fYu1m3JIo4ou6NhPQd2wAh88VS/iBw5q7Udfle7bRwLuRG
+ Cvw89cEYepV/S9YYlrOvNpdGE+9vkxz+D/zrRpf4N+pcHKfGC8sZeaiUSeV6u5WXpCrW
+ z+TA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=LR37zhoqYD5cdd2uefRK2acO4Z+Y6+upiLQRwqRbut0=;
- b=bFsrhJcy8tRBxP9zHa0CUO0kRcpiT4+Tt9OPkjaBbtTtxaGbvzUOZqSQ5aN4VlsFXL
- STXDngt+MIwdHyuEyq2rjhNSdeKWdP258bc58xW/aGph/72CPErtaI2/pIawETVxuI1H
- es0C46w8s45tnApn7DOh1RPeNgJHsB2oGm9kSVELqmyPYURBkz8uVjbVSgobadKE91lK
- 4pY/fgrX8kycgMC1keqWF6ER6C8Tz7UX2/AHZxBxyG0pSux08vFxudSHUEeBWOCQwg6j
- qS6gt4s8wjYs+cwvmms7coh8/T3c+3zQq/dJtF7920dJ6t9B0scauBWwhQchJHn8+C9p
- PXPw==
-X-Gm-Message-State: ANhLgQ1Snq9y4jgqYIX4YjvtfA4WNM+JnPm2j2mV6/Mk00hk8unSfnIW
- BlJ3x8akPh2uxvAO7cjjiJMeJxIrJTUSdVW5hGxkVA==
-X-Google-Smtp-Source: ADFU+vuOuUxYkdjrkVyH7kp/w9lz6OqYgdVvDbJh7Js0g+xWoUXEToWhy2h6ta87GoOZ0bkePUaC1jkIPjTWPh/grAI=
-X-Received: by 2002:a9d:6f88:: with SMTP id h8mr4413898otq.91.1583260606806;
- Tue, 03 Mar 2020 10:36:46 -0800 (PST)
-MIME-Version: 1.0
-References: <20200303100511.5498-1-peter.maydell@linaro.org>
- <226c0d6b-feb5-d202-2fdf-ba4ae910e463@redhat.com>
- <4f960fe0-e5f5-1f8c-76a1-b1df2bef4bd9@redhat.com>
-In-Reply-To: <4f960fe0-e5f5-1f8c-76a1-b1df2bef4bd9@redhat.com>
-From: Peter Maydell <peter.maydell@linaro.org>
-Date: Tue, 3 Mar 2020 18:36:35 +0000
-Message-ID: <CAFEAcA-H9nOzSon9eqiL5w1Rq9qVWu=B1q29D4pLTd=u2cWSwQ@mail.gmail.com>
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=ihGb95fli6TTZlBLRskT6NVEplBL96MsAsHOeKH3oNU=;
+ b=VCOk8fTtZmJ/3KVsnmXd1r8dSm1XMEXXfnbUWMPavV9uqEYNFQ+QsPf6Sf0seMYo7e
+ AMKJqnrUl3KhyzbCt1Fpo/7lREewCqxyTr29ywgIEps8xiSSHQIzA+MI/5KqQqJGWuog
+ Rl43VY6rA835xjCeLrzTiMdj9PCE419i8HEQ7SBPD5qkc/lG9Xygf+pcfztcBdG2oe1s
+ k1ceRgG2yEBoGgfg9aXz0uQw2tF3tL4pOD/8INO9Od4BI5EdJr8yzSdiM53G6H0hk1FF
+ 1aVVw7UlTYFrK9mt2Fl8iQ3beeb3t19amPqWP8TCbpYmHcg5HCdjZInjDgGx/9g1qFEr
+ iUsA==
+X-Gm-Message-State: ANhLgQ2PG7jyAKp4oViTdRX8JP+pUanFwT4p/nVqDnVr1zyXnmtctBek
+ m5/YZ28P+XkUVtTGj1riCDG6/A==
+X-Google-Smtp-Source: ADFU+vsfEilGsCcupC5aebBrXellXDMXG5hC9z98bYmUDK/YGBIfkgYiy1VMzfe7nagCQN4XTyqwEg==
+X-Received: by 2002:a63:f752:: with SMTP id f18mr5306129pgk.196.1583260919257; 
+ Tue, 03 Mar 2020 10:41:59 -0800 (PST)
+Received: from [192.168.1.11] (97-126-123-70.tukw.qwest.net. [97.126.123.70])
+ by smtp.gmail.com with ESMTPSA id
+ d5sm19768937pga.36.2020.03.03.10.41.57
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 03 Mar 2020 10:41:58 -0800 (PST)
 Subject: Re: [PATCH] cpu: Use DeviceClass reset instead of a special CPUClass
  reset
-To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>
-Cc: QEMU Developers <qemu-devel@nongnu.org>, Chris Wulff <crwulff@gmail.com>, 
+To: Peter Maydell <peter.maydell@linaro.org>, qemu-devel@nongnu.org
+Cc: Chris Wulff <crwulff@gmail.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>,
- David Hildenbrand <david@redhat.com>, 
- Anthony Green <green@moxielogic.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>, 
- Max Filippov <jcmvbkbc@gmail.com>, Alistair Francis <Alistair.Francis@wdc.com>,
+ David Hildenbrand <david@redhat.com>, Anthony Green <green@moxielogic.com>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Max Filippov <jcmvbkbc@gmail.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
  "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, Marek Vasut <marex@denx.de>,
- qemu-ppc <qemu-ppc@nongnu.org>, 
- Aleksandar Rikalo <aleksandar.rikalo@rt-rk.com>,
- Richard Henderson <rth@twiddle.net>, 
- Artyom Tarasenko <atar4qemu@gmail.com>, Eduardo Habkost <ehabkost@redhat.com>, 
- qemu-s390x <qemu-s390x@nongnu.org>, qemu-arm <qemu-arm@nongnu.org>, 
- Stafford Horne <shorne@gmail.com>, David Gibson <david@gibson.dropbear.id.au>, 
- "open list:RISC-V" <qemu-riscv@nongnu.org>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
+ qemu-ppc@nongnu.org, Aleksandar Rikalo <aleksandar.rikalo@rt-rk.com>,
+ Richard Henderson <rth@twiddle.net>, Artyom Tarasenko <atar4qemu@gmail.com>,
+ Eduardo Habkost <ehabkost@redhat.com>, qemu-s390x@nongnu.org,
+ qemu-arm@nongnu.org, Stafford Horne <shorne@gmail.com>,
+ David Gibson <david@gibson.dropbear.id.au>, qemu-riscv@nongnu.org,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
  Cornelia Huck <cohuck@redhat.com>, Laurent Vivier <laurent@vivier.eu>,
  Michael Walle <michael@walle.cc>, Palmer Dabbelt <palmer@dabbelt.com>,
- Aleksandar Markovic <amarkovic@wavecomp.com>, 
+ Aleksandar Markovic <amarkovic@wavecomp.com>,
  Paolo Bonzini <pbonzini@redhat.com>, Aurelien Jarno <aurelien@aurel32.net>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+References: <20200303100511.5498-1-peter.maydell@linaro.org>
+From: Richard Henderson <richard.henderson@linaro.org>
+Message-ID: <0bea66f5-c9d6-c605-22dc-8700f022729a@linaro.org>
+Date: Tue, 3 Mar 2020 10:41:55 -0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.4.1
+MIME-Version: 1.0
+In-Reply-To: <20200303100511.5498-1-peter.maydell@linaro.org>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::343
+X-Received-From: 2607:f8b0:4864:20::544
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -87,28 +92,66 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Mar 2020 18:36:50 -0000
+X-List-Received-Date: Tue, 03 Mar 2020 18:42:05 -0000
 
-On Tue, 3 Mar 2020 at 18:33, Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com=
-> wrote:
-> Nitpick: you don't need to include the bracket symbol in the diff:
->
->    @@
->    -resetfn(CPUState *cpu)
->    +resetfn(DeviceState *dev)
->     {
->
-> (simply indent it with a space).
+On 3/3/20 2:05 AM, Peter Maydell wrote:
+> The CPUClass has a 'reset' method.  This is a legacy from when
+> TYPE_CPU used not to inherit from TYPE_DEVICE.  We don't need it any
+> more, as we can simply use the TYPE_DEVICE reset.  The 'cpu_reset()'
+> function is kept as the API which most places use to reset a CPU; it
+> is now a wrapper which calls device_cold_reset() and then the
+> tracepoint function.
+> 
+> This change should not cause CPU objects to be reset more often
+> than they are at the moment, because:
+>  * nobody is directly calling device_cold_reset() or
+>    qdev_reset_all() on CPU objects
+>  * no CPU object is on a qbus, so they will not be reset either
+>    by somebody calling qbus_reset_all()/bus_cold_reset(), or
+>    by the main "reset sysbus and everything in the qbus tree"
+>    reset that most devices are reset by
+> 
+> Note that this does not change the need for each machine or whatever
+> to use qemu_register_reset() to arrange to call cpu_reset() -- that
+> is necessary because CPU objects are not on any qbus, so they don't
+> get reset when the qbus tree rooted at the sysbus bus is reset, and
+> this isn't being changed here.
+> 
+> All the changes to the files under target/ were made using the
+> included Coccinelle script, except:
+> 
+> (1) the deletion of the now-inaccurate and not terribly useful
+> "CPUClass::reset" comments was done with a perl one-liner afterwards:
+>   perl -n -i -e '/ CPUClass::reset/ or print' target/*/*.c
+> 
+> (2) this bit of the s390 change was done by hand, because the
+> Coccinelle script is not sophisticated enough to handle the
+> parent_reset call being inside another function:
+> 
+> | @@ -96,8 +96,9 @@ static void s390_cpu_reset(CPUState *s, cpu_reset_type type)
+> |     S390CPU *cpu = S390_CPU(s);
+> |     S390CPUClass *scc = S390_CPU_GET_CLASS(cpu);
+> |     CPUS390XState *env = &cpu->env;
+> |+    DeviceState *dev = DEVICE(s);
+> |
+> |-    scc->parent_reset(s);
+> |+    scc->parent_reset(dev);
+> |     cpu->env.sigp_order = 0;
+> |     s390_cpu_set_state(S390_CPU_STATE_STOPPED, cpu);
+> 
+> Signed-off-by: Peter Maydell <peter.maydell@linaro.org>
+> ---
+> Testing was by 'make check' and 'make check-acceptance'.
+> 
+> I need this patch as a preliminary to some arm stuff I'm
+> doing, but I think it makes sense as a cleanup in its own
+> right so I'm sending it out early for review. If it's not
+> yet in master before I get round to finishing the stuff
+> that depends on it I'll resend it as part of that series.
+> ---
 
-I think this was probably leftover from trying to get Coccinelle
-to not rewrap the '{' onto the previous line, before I found
---smpl-spacing.
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
-In general I don't find it terribly useful to spend a great
-deal of time streamlining Coccinelle scripts -- I think they
-are basically one-shot uses almost all of the time, so once
-they're producing the right changes I prefer to move on.
 
-thanks
--- PMM
+r~
 
