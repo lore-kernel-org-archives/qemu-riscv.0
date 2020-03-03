@@ -1,67 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1j8vlw-0004fR-B5
-	for mharc-qemu-riscv@gnu.org; Mon, 02 Mar 2020 19:50:56 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:45449)
+	id 1j8vmB-0005MJ-Ko
+	for mharc-qemu-riscv@gnu.org; Mon, 02 Mar 2020 19:51:11 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:45150)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <palmerdabbelt@google.com>) id 1j8vl0-0002oU-Fb
- for qemu-riscv@nongnu.org; Mon, 02 Mar 2020 19:50:00 -0500
+ (envelope-from <palmerdabbelt@google.com>) id 1j8vka-0001pr-Cr
+ for qemu-riscv@nongnu.org; Mon, 02 Mar 2020 19:49:33 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmerdabbelt@google.com>) id 1j8vkx-0004Xx-TC
- for qemu-riscv@nongnu.org; Mon, 02 Mar 2020 19:49:58 -0500
-Received: from mail-pj1-x1033.google.com ([2607:f8b0:4864:20::1033]:34459)
+ (envelope-from <palmerdabbelt@google.com>) id 1j8vkZ-0004M6-GI
+ for qemu-riscv@nongnu.org; Mon, 02 Mar 2020 19:49:32 -0500
+Received: from mail-pg1-x536.google.com ([2607:f8b0:4864:20::536]:47059)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <palmerdabbelt@google.com>)
- id 1j8vkw-0004Vz-Kw
- for qemu-riscv@nongnu.org; Mon, 02 Mar 2020 19:49:55 -0500
-Received: by mail-pj1-x1033.google.com with SMTP id f2so489193pjq.1
- for <qemu-riscv@nongnu.org>; Mon, 02 Mar 2020 16:49:53 -0800 (PST)
+ id 1j8vkZ-0004LN-BU
+ for qemu-riscv@nongnu.org; Mon, 02 Mar 2020 19:49:31 -0500
+Received: by mail-pg1-x536.google.com with SMTP id y30so650540pga.13
+ for <qemu-riscv@nongnu.org>; Mon, 02 Mar 2020 16:49:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
  h=subject:date:message-id:in-reply-to:references:mime-version
  :content-transfer-encoding:cc:from:to;
- bh=rV5zl3knvvrIidJB1TNmvgksYsMzcb+ogWZjrpQb3Yk=;
- b=FmG9XRpWqdPopmGcH/tswFUg4QZU4BPkVBpHY81YOi/6VMSnMgiDM0Wfp4FdM/pIYd
- Qv2UIz/6YjSW5GvSCwmxjsNKQdtvko+8s3DyrXvArOz2mcOBRsyeyBYrH6dwdFjOE7tS
- g/NkjXoUsCuNKsbltPh+FNCV4nGNf3ArT8u3AEfmdQ9h0F1EPQuUQ5HWmAdr5OoeZ9qj
- o5WAAVgiCxrj6cFA0cU1bXTOnI4H8qjIEcMbBGKmr3rlmEu2QwN3kIIilnx9GlQw/O//
- OIBdeYr+j5cc4/MCjaZ8XZ4LoJM2m4//7sshLX9WBtWbSgU0YlNiyfOoeTbQNF5/lvCZ
- DZxA==
+ bh=31wka75p/+LkTDvlGbLqLyelOm3o2IEFpYTMuOMAQQA=;
+ b=ilLggs6Pg0+r3RYAd3BAokWMyOk3kc/kpMEzbaAvkBSgbXdlcUkz+Hf4M4PU0cCWYP
+ CbmR1UGRezGhpesHvuvIrcN7w4Uv6I1YWVJO13bFZ/PQLsIZpqmtbBN4fcRpRRgXLRvg
+ oFPZmni38vDzG8Zy2+TY9bacvvBDoZ3MLefUNabMev0QcW+T6329Z713Slj/Iu3k6bmR
+ 3NHmi4HG6NmHdkkA3oexe4mD+OihumUq0XkIJkEu4n91ro27JQ0oTl4oyePTtxjoHy7T
+ FgJAIx8JjrORIZJBcvuW2WWH7AJNRNtX3jUcZGaR63KCnm+nOF+88C/fVu0rO97aVKlo
+ g33Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding:cc:from:to;
- bh=rV5zl3knvvrIidJB1TNmvgksYsMzcb+ogWZjrpQb3Yk=;
- b=Rn7jNK0ZA1QlCYsPKLTfEyvmd01ry5/mbPdlO+kgEyuTp20oz5KpthsEdejTQXnIAl
- gxxbz3zWzVmnguEQtVMUH1hDZHX7w982kWECK314/Y2tRY2enYMX6+3o4FQqUbu9uxcf
- NSd2dlvt3KDViijU91+U8vPGHHeBMtBiVsEm7KuAsbE3MAOzZybiSPr0C0Rlt/mIXllJ
- vWzJx4/bXxLMWRJnLScDpTVWCnGwtiV0JOsN/1yX8pv1dGfA14LsdVVjrauG6HCe84L6
- 1Ex8yPhXMI0LtP5MX8Gc1JAF0WpyEYAtCO93SoSaOIBNO7jUem3n0F51MyM63MBd/qUA
- Ki4g==
-X-Gm-Message-State: ANhLgQ3Uz3bLwO/Ys62wKkipbyGg00N0sNJfC4qTwL8GjOQUdT6dtoOW
- NyagtU+AMtyf/AEfZUHMSbnQlEkbzgXBbA==
-X-Google-Smtp-Source: ADFU+vvJyYtAbkxCPBuT62a/t5tLQFt8Ob2NQwfxlXevZ4mzftugqvpbnE3d/p5thmf9CuQ1vfNw4w==
-X-Received: by 2002:a17:902:bc4a:: with SMTP id
- t10mr1712261plz.103.1583196591032; 
- Mon, 02 Mar 2020 16:49:51 -0800 (PST)
+ bh=31wka75p/+LkTDvlGbLqLyelOm3o2IEFpYTMuOMAQQA=;
+ b=U81K/X3BiUjntshbtt8MwDM04D2357DmFQ8xQPAPM8MZiAJQeXwO/I1S2XHQCxWbT+
+ 7kwM0sUl2M0KSnK1p4S+KoaIkgFuFD8VDhEbEyWmbqgLHtkNUZfDZB43SY2Fv2zK4Ky0
+ ALHB9K8Opj2P2wKJSRaA2UTrr+dPPZ0ZlzaApupaXlJrdcjTPmSpiKYQbYqZ3aCVOi69
+ KxeO9r/EG5zXOt1Jt6nHnkBGO4eTpdFegVPw0o15YnB7gHNYZhXd4B6K4KSEavmOxlul
+ celFmtNSdAaWOK4ls9qApRfP5wlzIOm96YC07oVp8FN5g123pocxvfxMlVjsiOyIEFEH
+ kvMA==
+X-Gm-Message-State: ANhLgQ2JLp1oW06pom+M/WfCjfztfKGe3MXufIyzDBD0rKVcXyv7ZcJQ
+ m3iwdhAiiJV4OoKAwpRDEkoT+8aJP4xbBA==
+X-Google-Smtp-Source: ADFU+vu3IGzBXmDZP9Ucs6XyAefiMzc8rQtbXmkGHE9pjAWGkhPOcfMD0Fk/9LihSZlJY5LitU/SGw==
+X-Received: by 2002:a62:de42:: with SMTP id h63mr1612267pfg.188.1583196570022; 
+ Mon, 02 Mar 2020 16:49:30 -0800 (PST)
 Received: from localhost ([2620:0:1000:2514:23a5:d584:6a92:3e3c])
- by smtp.gmail.com with ESMTPSA id w11sm22077229pgh.5.2020.03.02.16.49.50
+ by smtp.gmail.com with ESMTPSA id o6sm23908819pfg.180.2020.03.02.16.49.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Mar 2020 16:49:50 -0800 (PST)
-Subject: [PULL 30/38] target/riscv: Implement second stage MMU
-Date: Mon,  2 Mar 2020 16:48:40 -0800
-Message-Id: <20200303004848.136788-31-palmerdabbelt@google.com>
+ Mon, 02 Mar 2020 16:49:29 -0800 (PST)
+Subject: [PULL 19/38] target/ricsv: Flush the TLB on virtulisation mode changes
+Date: Mon,  2 Mar 2020 16:48:29 -0800
+Message-Id: <20200303004848.136788-20-palmerdabbelt@google.com>
 X-Mailer: git-send-email 2.25.0.265.gbab2e86ba0-goog
 In-Reply-To: <20200303004848.136788-1-palmerdabbelt@google.com>
 References: <20200303004848.136788-1-palmerdabbelt@google.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Cc: qemu-riscv@nongnu.org,          qemu-devel@nongnu.org,
- Alistair Francis <alistair.francis@wdc.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Palmer Dabbelt <palmer@sifive.com>,
  Palmer Dabbelt <palmerdabbelt@google.com>
 From: Palmer Dabbelt <palmerdabbelt@google.com>
 To: Peter Maydell <peter.maydell@linaro.org>
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::1033
+X-Received-From: 2607:f8b0:4864:20::536
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -73,345 +72,37 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Mar 2020 00:50:01 -0000
+X-List-Received-Date: Tue, 03 Mar 2020 00:49:33 -0000
 
 From: Alistair Francis <alistair.francis@wdc.com>
 
+To ensure our TLB isn't out-of-date we flush it on all virt mode
+changes. Unlike priv mode this isn't saved in the mmu_idx as all
+guests share V=1. The easiest option is just to flush on all changes.
+
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Palmer Dabbelt <palmerdabbelt@google.com>
+Reviewed-by: Palmer Dabbelt <palmer@sifive.com>
 Signed-off-by: Palmer Dabbelt <palmerdabbelt@google.com>
 ---
- target/riscv/cpu.h        |   1 +
- target/riscv/cpu_helper.c | 193 ++++++++++++++++++++++++++++++++++----
- 2 files changed, 175 insertions(+), 19 deletions(-)
+ target/riscv/cpu_helper.c | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index aa04e5cca7..a8534fdf2b 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -104,6 +104,7 @@ struct CPURISCVState {
-     target_ulong frm;
- 
-     target_ulong badaddr;
-+    target_ulong guest_phys_fault_addr;
- 
-     target_ulong priv_ver;
-     target_ulong misa;
 diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 8ae1038bcd..584b0c71fb 100644
+index ccf67aca05..a8b114ae16 100644
 --- a/target/riscv/cpu_helper.c
 +++ b/target/riscv/cpu_helper.c
-@@ -285,11 +285,12 @@ void riscv_cpu_set_mode(CPURISCVState *env, target_ulong newpriv)
-  * @mmu_idx: Indicates current privilege level
-  * @first_stage: Are we in first stage translation?
-  *               Second stage is used for hypervisor guest translation
-+ * @two_stage: Are we going to perform two stage translation
-  */
- static int get_physical_address(CPURISCVState *env, hwaddr *physical,
-                                 int *prot, target_ulong addr,
-                                 int access_type, int mmu_idx,
--                                bool first_stage)
-+                                bool first_stage, bool two_stage)
- {
-     /* NOTE: the env->pc value visible here will not be
-      * correct, but the value visible to the exception handler
-@@ -297,13 +298,40 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
-     MemTxResult res;
-     MemTxAttrs attrs = MEMTXATTRS_UNSPECIFIED;
-     int mode = mmu_idx;
-+    bool use_background = false;
- 
-+    /*
-+     * Check if we should use the background registers for the two
-+     * stage translation. We don't need to check if we actually need
-+     * two stage translation as that happened before this function
-+     * was called. Background registers will be used if the guest has
-+     * forced a two stage translation to be on (in HS or M mode).
-+     */
-     if (mode == PRV_M && access_type != MMU_INST_FETCH) {
-         if (get_field(env->mstatus, MSTATUS_MPRV)) {
-             mode = get_field(env->mstatus, MSTATUS_MPP);
-+
-+            if (riscv_has_ext(env, RVH) &&
-+                get_field(env->mstatus, MSTATUS_MPV)) {
-+                use_background = true;
-+            }
-+        }
-+    }
-+
-+    if (mode == PRV_S && access_type != MMU_INST_FETCH &&
-+        riscv_has_ext(env, RVH) && !riscv_cpu_virt_enabled(env)) {
-+        if (get_field(env->hstatus, HSTATUS_SPRV)) {
-+            mode = get_field(env->mstatus, SSTATUS_SPP);
-+            use_background = true;
-         }
+@@ -181,6 +181,11 @@ void riscv_cpu_set_virt_enabled(CPURISCVState *env, bool enable)
+         return;
      }
  
-+    if (first_stage == false) {
-+        /* We are in stage 2 translation, this is similar to stage 1. */
-+        /* Stage 2 is always taken as U-mode */
-+        mode = PRV_U;
++    /* Flush the TLB on all virt mode changes. */
++    if (get_field(env->virt, VIRT_ONOFF) != enable) {
++        tlb_flush(env_cpu(env));
 +    }
 +
-     if (mode == PRV_M || !riscv_feature(env, RISCV_FEATURE_MMU)) {
-         *physical = addr;
-         *prot = PAGE_READ | PAGE_WRITE | PAGE_EXEC;
-@@ -313,13 +341,30 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
-     *prot = 0;
- 
-     hwaddr base;
--    int levels, ptidxbits, ptesize, vm, sum;
--    int mxr = get_field(env->mstatus, MSTATUS_MXR);
-+    int levels, ptidxbits, ptesize, vm, sum, mxr, widened;
-+
-+    if (first_stage == true) {
-+        mxr = get_field(env->mstatus, MSTATUS_MXR);
-+    } else {
-+        mxr = get_field(env->vsstatus, MSTATUS_MXR);
-+    }
- 
-     if (env->priv_ver >= PRIV_VERSION_1_10_0) {
--        base = (hwaddr)get_field(env->satp, SATP_PPN) << PGSHIFT;
-+        if (first_stage == true) {
-+            if (use_background) {
-+                base = (hwaddr)get_field(env->vsatp, SATP_PPN) << PGSHIFT;
-+                vm = get_field(env->vsatp, SATP_MODE);
-+            } else {
-+                base = (hwaddr)get_field(env->satp, SATP_PPN) << PGSHIFT;
-+                vm = get_field(env->satp, SATP_MODE);
-+            }
-+            widened = 0;
-+        } else {
-+            base = (hwaddr)get_field(env->hgatp, HGATP_PPN) << PGSHIFT;
-+            vm = get_field(env->hgatp, HGATP_MODE);
-+            widened = 2;
-+        }
-         sum = get_field(env->mstatus, MSTATUS_SUM);
--        vm = get_field(env->satp, SATP_MODE);
-         switch (vm) {
-         case VM_1_10_SV32:
-           levels = 2; ptidxbits = 10; ptesize = 4; break;
-@@ -337,6 +382,7 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
-           g_assert_not_reached();
-         }
-     } else {
-+        widened = 0;
-         base = (hwaddr)(env->sptbr) << PGSHIFT;
-         sum = !get_field(env->mstatus, MSTATUS_PUM);
-         vm = get_field(env->mstatus, MSTATUS_VM);
-@@ -357,9 +403,16 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
-     }
- 
-     CPUState *cs = env_cpu(env);
--    int va_bits = PGSHIFT + levels * ptidxbits;
--    target_ulong mask = (1L << (TARGET_LONG_BITS - (va_bits - 1))) - 1;
--    target_ulong masked_msbs = (addr >> (va_bits - 1)) & mask;
-+    int va_bits = PGSHIFT + levels * ptidxbits + widened;
-+    target_ulong mask, masked_msbs;
-+
-+    if (TARGET_LONG_BITS > (va_bits - 1)) {
-+        mask = (1L << (TARGET_LONG_BITS - (va_bits - 1))) - 1;
-+    } else {
-+        mask = 0;
-+    }
-+    masked_msbs = (addr >> (va_bits - 1)) & mask;
-+
-     if (masked_msbs != 0 && masked_msbs != mask) {
-         return TRANSLATE_FAIL;
-     }
-@@ -371,11 +424,29 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
- restart:
- #endif
-     for (i = 0; i < levels; i++, ptshift -= ptidxbits) {
--        target_ulong idx = (addr >> (PGSHIFT + ptshift)) &
-+        target_ulong idx;
-+        if (i == 0) {
-+            idx = (addr >> (PGSHIFT + ptshift)) &
-+                           ((1 << (ptidxbits + widened)) - 1);
-+        } else {
-+            idx = (addr >> (PGSHIFT + ptshift)) &
-                            ((1 << ptidxbits) - 1);
-+        }
- 
-         /* check that physical address of PTE is legal */
--        hwaddr pte_addr = base + idx * ptesize;
-+        hwaddr pte_addr;
-+
-+        if (two_stage && first_stage) {
-+            hwaddr vbase;
-+
-+            /* Do the second stage translation on the base PTE address. */
-+            get_physical_address(env, &vbase, prot, base, access_type,
-+                                 mmu_idx, false, true);
-+
-+            pte_addr = vbase + idx * ptesize;
-+        } else {
-+            pte_addr = base + idx * ptesize;
-+        }
- 
-         if (riscv_feature(env, RISCV_FEATURE_PMP) &&
-             !pmp_hart_has_privs(env, pte_addr, sizeof(target_ulong),
-@@ -472,7 +543,12 @@ restart:
-             /* for superpage mappings, make a fake leaf PTE for the TLB's
-                benefit. */
-             target_ulong vpn = addr >> PGSHIFT;
--            *physical = (ppn | (vpn & ((1L << ptshift) - 1))) << PGSHIFT;
-+            if (i == 0) {
-+                *physical = (ppn | (vpn & ((1L << (ptshift + widened)) - 1))) <<
-+                             PGSHIFT;
-+            } else {
-+                *physical = (ppn | (vpn & ((1L << ptshift) - 1))) << PGSHIFT;
-+            }
- 
-             /* set permissions on the TLB entry */
-             if ((pte & PTE_R) || ((pte & PTE_X) && mxr)) {
-@@ -531,14 +607,23 @@ static void raise_mmu_exception(CPURISCVState *env, target_ulong address,
- hwaddr riscv_cpu_get_phys_page_debug(CPUState *cs, vaddr addr)
- {
-     RISCVCPU *cpu = RISCV_CPU(cs);
-+    CPURISCVState *env = &cpu->env;
-     hwaddr phys_addr;
-     int prot;
-     int mmu_idx = cpu_mmu_index(&cpu->env, false);
- 
--    if (get_physical_address(&cpu->env, &phys_addr, &prot, addr, 0, mmu_idx,
--                             true)) {
-+    if (get_physical_address(env, &phys_addr, &prot, addr, 0, mmu_idx,
-+                             true, riscv_cpu_virt_enabled(env))) {
-         return -1;
-     }
-+
-+    if (riscv_cpu_virt_enabled(env)) {
-+        if (get_physical_address(env, &phys_addr, &prot, phys_addr,
-+                                 0, mmu_idx, false, true)) {
-+            return -1;
-+        }
-+    }
-+
-     return phys_addr;
+     env->virt = set_field(env->virt, VIRT_ONOFF, enable);
  }
  
-@@ -592,17 +677,37 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-     RISCVCPU *cpu = RISCV_CPU(cs);
-     CPURISCVState *env = &cpu->env;
- #ifndef CONFIG_USER_ONLY
-+    vaddr im_address;
-     hwaddr pa = 0;
-     int prot;
-     bool pmp_violation = false;
-+    bool m_mode_two_stage = false;
-+    bool hs_mode_two_stage = false;
-+    bool first_stage_error = true;
-     int ret = TRANSLATE_FAIL;
-     int mode = mmu_idx;
- 
-+    env->guest_phys_fault_addr = 0;
-+
-     qemu_log_mask(CPU_LOG_MMU, "%s ad %" VADDR_PRIx " rw %d mmu_idx %d\n",
-                   __func__, address, access_type, mmu_idx);
- 
--    ret = get_physical_address(env, &pa, &prot, address, access_type, mmu_idx,
--                               true);
-+    /*
-+     * Determine if we are in M mode and MPRV is set or in HS mode and SPRV is
-+     * set and we want to access a virtulisation address.
-+     */
-+    if (riscv_has_ext(env, RVH)) {
-+        m_mode_two_stage = env->priv == PRV_M &&
-+                           access_type != MMU_INST_FETCH &&
-+                           get_field(env->mstatus, MSTATUS_MPRV) &&
-+                           get_field(env->mstatus, MSTATUS_MPV);
-+
-+        hs_mode_two_stage = env->priv == PRV_S &&
-+                            !riscv_cpu_virt_enabled(env) &&
-+                            access_type != MMU_INST_FETCH &&
-+                            get_field(env->hstatus, HSTATUS_SPRV) &&
-+                            get_field(env->hstatus, HSTATUS_SPV);
-+    }
- 
-     if (mode == PRV_M && access_type != MMU_INST_FETCH) {
-         if (get_field(env->mstatus, MSTATUS_MPRV)) {
-@@ -610,9 +715,55 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-         }
-     }
- 
--    qemu_log_mask(CPU_LOG_MMU,
--                  "%s address=%" VADDR_PRIx " ret %d physical " TARGET_FMT_plx
--                  " prot %d\n", __func__, address, ret, pa, prot);
-+    if (riscv_cpu_virt_enabled(env) || m_mode_two_stage || hs_mode_two_stage) {
-+        /* Two stage lookup */
-+        ret = get_physical_address(env, &pa, &prot, address, access_type,
-+                                   mmu_idx, true, true);
-+
-+        qemu_log_mask(CPU_LOG_MMU,
-+                      "%s 1st-stage address=%" VADDR_PRIx " ret %d physical "
-+                      TARGET_FMT_plx " prot %d\n",
-+                      __func__, address, ret, pa, prot);
-+
-+        if (ret != TRANSLATE_FAIL) {
-+            /* Second stage lookup */
-+            im_address = pa;
-+
-+            ret = get_physical_address(env, &pa, &prot, im_address,
-+                                       access_type, mmu_idx, false, true);
-+
-+            qemu_log_mask(CPU_LOG_MMU,
-+                    "%s 2nd-stage address=%" VADDR_PRIx " ret %d physical "
-+                    TARGET_FMT_plx " prot %d\n",
-+                    __func__, im_address, ret, pa, prot);
-+
-+            if (riscv_feature(env, RISCV_FEATURE_PMP) &&
-+                (ret == TRANSLATE_SUCCESS) &&
-+                !pmp_hart_has_privs(env, pa, size, 1 << access_type, mode)) {
-+                ret = TRANSLATE_PMP_FAIL;
-+            }
-+
-+            if (ret != TRANSLATE_SUCCESS) {
-+                /*
-+                 * Guest physical address translation failed, this is a HS
-+                 * level exception
-+                 */
-+                first_stage_error = false;
-+                env->guest_phys_fault_addr = (im_address |
-+                                              (address &
-+                                               (TARGET_PAGE_SIZE - 1))) >> 2;
-+            }
-+        }
-+    } else {
-+        /* Single stage lookup */
-+        ret = get_physical_address(env, &pa, &prot, address, access_type,
-+                                   mmu_idx, true, false);
-+
-+        qemu_log_mask(CPU_LOG_MMU,
-+                      "%s address=%" VADDR_PRIx " ret %d physical "
-+                      TARGET_FMT_plx " prot %d\n",
-+                      __func__, address, ret, pa, prot);
-+    }
- 
-     if (riscv_feature(env, RISCV_FEATURE_PMP) &&
-         (ret == TRANSLATE_SUCCESS) &&
-@@ -622,6 +773,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-     if (ret == TRANSLATE_PMP_FAIL) {
-         pmp_violation = true;
-     }
-+
-     if (ret == TRANSLATE_SUCCESS) {
-         tlb_set_page(cs, address & TARGET_PAGE_MASK, pa & TARGET_PAGE_MASK,
-                      prot, mmu_idx, TARGET_PAGE_SIZE);
-@@ -629,9 +781,12 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-     } else if (probe) {
-         return false;
-     } else {
--        raise_mmu_exception(env, address, access_type, pmp_violation, true);
-+        raise_mmu_exception(env, address, access_type, pmp_violation, first_stage_error);
-         riscv_raise_exception(env, cs->exception_index, retaddr);
-     }
-+
-+    return true;
-+
- #else
-     switch (access_type) {
-     case MMU_INST_FETCH:
 -- 
 2.25.0.265.gbab2e86ba0-goog
 
