@@ -1,54 +1,53 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1j8vku-0002g0-CY
-	for mharc-qemu-riscv@gnu.org; Mon, 02 Mar 2020 19:49:52 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44828)
+	id 1j8vlF-0003Jv-1z
+	for mharc-qemu-riscv@gnu.org; Mon, 02 Mar 2020 19:50:13 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:45005)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <palmerdabbelt@google.com>) id 1j8vkF-00012e-Vw
- for qemu-riscv@nongnu.org; Mon, 02 Mar 2020 19:49:13 -0500
+ (envelope-from <palmerdabbelt@google.com>) id 1j8vkR-0001QZ-0g
+ for qemu-riscv@nongnu.org; Mon, 02 Mar 2020 19:49:24 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmerdabbelt@google.com>) id 1j8vkE-0004AO-RX
- for qemu-riscv@nongnu.org; Mon, 02 Mar 2020 19:49:11 -0500
-Received: from mail-pj1-x102a.google.com ([2607:f8b0:4864:20::102a]:40174)
+ (envelope-from <palmerdabbelt@google.com>) id 1j8vkP-0004HM-QS
+ for qemu-riscv@nongnu.org; Mon, 02 Mar 2020 19:49:22 -0500
+Received: from mail-pf1-x435.google.com ([2607:f8b0:4864:20::435]:33615)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <palmerdabbelt@google.com>)
- id 1j8vkE-00049T-Mf
- for qemu-riscv@nongnu.org; Mon, 02 Mar 2020 19:49:10 -0500
-Received: by mail-pj1-x102a.google.com with SMTP id 12so535934pjb.5
- for <qemu-riscv@nongnu.org>; Mon, 02 Mar 2020 16:49:10 -0800 (PST)
+ id 1j8vkP-0004H9-LO
+ for qemu-riscv@nongnu.org; Mon, 02 Mar 2020 19:49:21 -0500
+Received: by mail-pf1-x435.google.com with SMTP id n7so571572pfn.0
+ for <qemu-riscv@nongnu.org>; Mon, 02 Mar 2020 16:49:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
  h=subject:date:message-id:in-reply-to:references:mime-version
  :content-transfer-encoding:cc:from:to;
- bh=ANkDW0pV9KWX3pfShIfpn+QJJdRLLaIrASHy4mCGa4o=;
- b=NQj8IFd9g2uBiB4uWXv4HjYv67DmVCkTfCQjvhPodfwT+H0rNKeLOJEQs7ZPMhb9rm
- AVL1fKgVUMIPR+tqdbF7yJg3m/uTXB3jeulPinJrtvChX0lzeGitssq8EKGsKhM073xy
- IUuPw2gCegKQH82IZ/cU8tyF04RqBUj7th/3z6PAfMxMQz3G41kv/z0ECwpG3jdoH7Ru
- nLBUfd1I0LG9UqKfo/Wve4E/bUY7l1weVgOSXeT2m0/IM1Qf1kqSmTREWQXkro6V00XU
- uJjAxCctUCokwi1NQu9BK/XmtFxNRD1OdbiQ30ES4dCjOTS3UMas+Uw1VfrTqiPzOFVu
- dLfw==
+ bh=qlFv3YRXTwQy0O+/NzrDPo73khkwZmApr8yWHMhQ1Bo=;
+ b=nFbyRebUfOLNRNzRRzUVIZElB2hvVhxbf9G3CsEOQYZuobhv0UJODrazDLvrIrhnH2
+ +GEqL5UuyoVTBpGzsXpEYCFaQJQrT7hwxuBA4fWnlRD4thxbBvmV6ZRX87JRCYaEKh/l
+ bPvVp/L5H2qLQNKOacKEZfAHc1NK9t8JiuLtWTOGrZNSSiMiDSEhhnP6bRh2oBN6tpx9
+ u/x3CW8LLZun7qHjbJSR4IV33Ua8HL3ZSMz8IIsLPt4t8VYdElyhAY40JzeMxT5YBDsO
+ N6nxPaNYXcUXyrzwi9rwWe+ab4Cd5n6zLdz46dRhgygdQ3A2ElcUtGkTc90jafiOLYoU
+ +8JA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding:cc:from:to;
- bh=ANkDW0pV9KWX3pfShIfpn+QJJdRLLaIrASHy4mCGa4o=;
- b=RAjJhJm87N2ZBrez5fYBBk+rnejZ0d/v4FGr1Hz/WUr7ghe6q3x7OVuD6Zh7OYh9i0
- 6Uqxaza98Dm1DFgpP2lR0TMU8/JVHaaBZR0PfuU7AStLvZ4dM+2JyB7YRFxf6V51NXyZ
- gKSyS8uisGhuoI2WuLdchaTPb7SoExT2bD4ZfbbpIdVc++q11J/757CyRjUuBxMouc4V
- RzLLhpGTeGdNHSojMR7YdyNJP498fOmc4EdGxKLSXNOrvfqI7UTD53uPffByvtil+hz+
- HXPKsJNSJBZMPb9w16R+vfnL2vs36gJD1H03ieK1DlcNronqqc/ta6N3vlGsd0e1i+vj
- aRwA==
-X-Gm-Message-State: ANhLgQ2fdkVdfJcPNObn68FC6ZQ5PlZEBRWlhBcqZ3OCK5jaL/NwfpEZ
- AlJw6mYuvU0pFugf0DDq4K1opzh9plPOXw==
-X-Google-Smtp-Source: ADFU+vsUM+d5+NDMvZshjdSzDL+34bBRrCajz6HLvUUwrbef0Je+/Cp93XE7Rkcb1i6FhjJ+bzv2Yw==
-X-Received: by 2002:a17:90b:438b:: with SMTP id
- in11mr1247550pjb.84.1583196549275; 
- Mon, 02 Mar 2020 16:49:09 -0800 (PST)
+ bh=qlFv3YRXTwQy0O+/NzrDPo73khkwZmApr8yWHMhQ1Bo=;
+ b=s5/OM2ba07fZmcHMtNGro8M1Kc4xWwRKEsTJs8sRQZmz9tETwL0/Oe0zEuAhkTFziX
+ gyr5J7XogN12w/Vv8MatDapKtyIXlYXox4427nhjWtioYg66TNAiNssee7IuTouI4wCp
+ GrIudww3CDZRxqttgdE8Nrf7JoOFY7VVusR0eqV40BQtMxX2bLhy8hdd0OsWmnQZvIcf
+ UuBjG10SZs50rQeaDLDfkv8OSLTzBq8szW/2EiebNZCxk8ems+q6FrMqTIcr3RaG8MQy
+ N3gd4n+o6OoWq2X5eFABBrgbA7w1Ulizl9wlfWqo7br5l2bYTHE/aDI0XkogBHpX2u8g
+ U4RA==
+X-Gm-Message-State: ANhLgQ09WOkHH0sLupQrRFXExzTP/IpN9sWzaRqg7x+Ktqw8mmoJlwe5
+ Mn1WbOHPt15A+oB6CVJVMGmsesSNw5GYsQ==
+X-Google-Smtp-Source: ADFU+vuat02E7wLr0Xzmldv8us6BXxDSovTdbK/XVprOfiSssOUNcwM3HZ5qRdLWz0E3xh40Sh1snQ==
+X-Received: by 2002:a63:e54b:: with SMTP id z11mr1552944pgj.160.1583196560093; 
+ Mon, 02 Mar 2020 16:49:20 -0800 (PST)
 Received: from localhost ([2620:0:1000:2514:23a5:d584:6a92:3e3c])
- by smtp.gmail.com with ESMTPSA id y23sm22450558pfn.101.2020.03.02.16.49.08
+ by smtp.gmail.com with ESMTPSA id f81sm18976998pfa.44.2020.03.02.16.49.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Mar 2020 16:49:08 -0800 (PST)
-Subject: [PULL 07/38] target/riscv: Add the force HS exception mode
-Date: Mon,  2 Mar 2020 16:48:17 -0800
-Message-Id: <20200303004848.136788-8-palmerdabbelt@google.com>
+ Mon, 02 Mar 2020 16:49:19 -0800 (PST)
+Subject: [PULL 14/38] target/riscv: Add virtual register swapping function
+Date: Mon,  2 Mar 2020 16:48:24 -0800
+Message-Id: <20200303004848.136788-15-palmerdabbelt@google.com>
 X-Mailer: git-send-email 2.25.0.265.gbab2e86ba0-goog
 In-Reply-To: <20200303004848.136788-1-palmerdabbelt@google.com>
 References: <20200303004848.136788-1-palmerdabbelt@google.com>
@@ -61,7 +60,7 @@ From: Palmer Dabbelt <palmerdabbelt@google.com>
 To: Peter Maydell <peter.maydell@linaro.org>
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::102a
+X-Received-From: 2607:f8b0:4864:20::435
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -73,83 +72,143 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Mar 2020 00:49:13 -0000
+X-List-Received-Date: Tue, 03 Mar 2020 00:49:24 -0000
 
 From: Alistair Francis <alistair.francis@wdc.com>
-
-Add a FORCE_HS_EXCEP mode to the RISC-V virtulisation status. This bit
-specifies if an exeption should be taken to HS mode no matter the
-current delegation status. This is used when an exeption must be taken
-to HS mode, such as when handling interrupts.
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 Reviewed-by: Palmer Dabbelt <palmerdabbelt@google.com>
 Signed-off-by: Palmer Dabbelt <palmerdabbelt@google.com>
 ---
- target/riscv/cpu.h        |  2 ++
- target/riscv/cpu_bits.h   |  6 ++++++
- target/riscv/cpu_helper.c | 18 ++++++++++++++++++
- 3 files changed, 26 insertions(+)
+ target/riscv/cpu.h        | 11 +++++++
+ target/riscv/cpu_bits.h   |  7 +++++
+ target/riscv/cpu_helper.c | 61 +++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 79 insertions(+)
 
 diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index a9cbd8584e..42720d65f9 100644
+index 42720d65f9..5b889a0065 100644
 --- a/target/riscv/cpu.h
 +++ b/target/riscv/cpu.h
-@@ -273,6 +273,8 @@ bool riscv_cpu_exec_interrupt(CPUState *cs, int interrupt_request);
- bool riscv_cpu_fp_enabled(CPURISCVState *env);
- bool riscv_cpu_virt_enabled(CPURISCVState *env);
- void riscv_cpu_set_virt_enabled(CPURISCVState *env, bool enable);
-+bool riscv_cpu_force_hs_excep_enabled(CPURISCVState *env);
-+void riscv_cpu_set_force_hs_excep(CPURISCVState *env, bool enable);
- int riscv_cpu_mmu_index(CPURISCVState *env, bool ifetch);
- hwaddr riscv_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
- void  riscv_cpu_do_unaligned_access(CPUState *cs, vaddr addr,
+@@ -125,6 +125,7 @@ struct CPURISCVState {
+     target_ulong mstatus;
+ 
+     target_ulong mip;
++
+     uint32_t miclaim;
+ 
+     target_ulong mie;
+@@ -166,6 +167,15 @@ struct CPURISCVState {
+     target_ulong mtval2;
+     target_ulong mtinst;
+ 
++    /* HS Backup CSRs */
++    target_ulong stvec_hs;
++    target_ulong sscratch_hs;
++    target_ulong sepc_hs;
++    target_ulong scause_hs;
++    target_ulong stval_hs;
++    target_ulong satp_hs;
++    target_ulong mstatus_hs;
++
+     target_ulong scounteren;
+     target_ulong mcounteren;
+ 
+@@ -296,6 +306,7 @@ void riscv_cpu_list(void);
+ #define cpu_mmu_index riscv_cpu_mmu_index
+ 
+ #ifndef CONFIG_USER_ONLY
++void riscv_cpu_swap_hypervisor_regs(CPURISCVState *env);
+ int riscv_cpu_claim_interrupts(RISCVCPU *cpu, uint32_t interrupts);
+ uint32_t riscv_cpu_update_mip(RISCVCPU *cpu, uint32_t mask, uint32_t value);
+ #define BOOL_TO_MASK(x) (-!!(x)) /* helper for riscv_cpu_update_mip value */
 diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-index 2cdb0de4fe..ad6479796c 100644
+index ad6479796c..a24654d137 100644
 --- a/target/riscv/cpu_bits.h
 +++ b/target/riscv/cpu_bits.h
-@@ -432,6 +432,12 @@
+@@ -553,4 +553,11 @@
+ #define SIP_STIP                           MIP_STIP
+ #define SIP_SEIP                           MIP_SEIP
  
- /* Virtulisation Register Fields */
- #define VIRT_ONOFF          1
-+/* This is used to save state for when we take an exception. If this is set
-+ * that means that we want to force a HS level exception (no matter what the
-+ * delegation is set to). This will occur for things such as a second level
-+ * page table fault.
-+ */
-+#define FORCE_HS_EXCEP      2
- 
- /* RV32 satp CSR field masks */
- #define SATP32_MODE         0x80000000
++/* MIE masks */
++#define MIE_SEIE                           (1 << IRQ_S_EXT)
++#define MIE_UEIE                           (1 << IRQ_U_EXT)
++#define MIE_STIE                           (1 << IRQ_S_TIMER)
++#define MIE_UTIE                           (1 << IRQ_U_TIMER)
++#define MIE_SSIE                           (1 << IRQ_S_SOFT)
++#define MIE_USIE                           (1 << IRQ_U_SOFT)
+ #endif
 diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index e5311160e7..e36ee7d58e 100644
+index e36ee7d58e..9d5a06499f 100644
 --- a/target/riscv/cpu_helper.c
 +++ b/target/riscv/cpu_helper.c
-@@ -100,6 +100,24 @@ void riscv_cpu_set_virt_enabled(CPURISCVState *env, bool enable)
-     env->virt = set_field(env->virt, VIRT_ONOFF, enable);
+@@ -82,6 +82,67 @@ bool riscv_cpu_fp_enabled(CPURISCVState *env)
+     return false;
  }
  
-+bool riscv_cpu_force_hs_excep_enabled(CPURISCVState *env)
++void riscv_cpu_swap_hypervisor_regs(CPURISCVState *env)
 +{
-+    if (!riscv_has_ext(env, RVH)) {
-+        return false;
-+    }
++    target_ulong mstatus_mask = MSTATUS_MXR | MSTATUS_SUM | MSTATUS_FS |
++                                MSTATUS_SPP | MSTATUS_SPIE | MSTATUS_SIE;
++    bool current_virt = riscv_cpu_virt_enabled(env);
 +
-+    return get_field(env->virt, FORCE_HS_EXCEP);
++    g_assert(riscv_has_ext(env, RVH));
++
++#if defined(TARGET_RISCV64)
++    mstatus_mask |= MSTATUS64_UXL;
++#endif
++
++    if (current_virt) {
++        /* Current V=1 and we are about to change to V=0 */
++        env->vsstatus = env->mstatus & mstatus_mask;
++        env->mstatus &= ~mstatus_mask;
++        env->mstatus |= env->mstatus_hs;
++
++        env->vstvec = env->stvec;
++        env->stvec = env->stvec_hs;
++
++        env->vsscratch = env->sscratch;
++        env->sscratch = env->sscratch_hs;
++
++        env->vsepc = env->sepc;
++        env->sepc = env->sepc_hs;
++
++        env->vscause = env->scause;
++        env->scause = env->scause_hs;
++
++        env->vstval = env->sbadaddr;
++        env->sbadaddr = env->stval_hs;
++
++        env->vsatp = env->satp;
++        env->satp = env->satp_hs;
++    } else {
++        /* Current V=0 and we are about to change to V=1 */
++        env->mstatus_hs = env->mstatus & mstatus_mask;
++        env->mstatus &= ~mstatus_mask;
++        env->mstatus |= env->vsstatus;
++
++        env->stvec_hs = env->stvec;
++        env->stvec = env->vstvec;
++
++        env->sscratch_hs = env->sscratch;
++        env->sscratch = env->vsscratch;
++
++        env->sepc_hs = env->sepc;
++        env->sepc = env->vsepc;
++
++        env->scause_hs = env->scause;
++        env->scause = env->vscause;
++
++        env->stval_hs = env->sbadaddr;
++        env->sbadaddr = env->vstval;
++
++        env->satp_hs = env->satp;
++        env->satp = env->vsatp;
++    }
 +}
 +
-+void riscv_cpu_set_force_hs_excep(CPURISCVState *env, bool enable)
-+{
-+    if (!riscv_has_ext(env, RVH)) {
-+        return;
-+    }
-+
-+    env->virt = set_field(env->virt, FORCE_HS_EXCEP, enable);
-+}
-+
- int riscv_cpu_claim_interrupts(RISCVCPU *cpu, uint32_t interrupts)
+ bool riscv_cpu_virt_enabled(CPURISCVState *env)
  {
-     CPURISCVState *env = &cpu->env;
+     if (!riscv_has_ext(env, RVH)) {
 -- 
 2.25.0.265.gbab2e86ba0-goog
 
