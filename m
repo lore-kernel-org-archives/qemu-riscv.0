@@ -1,67 +1,73 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1j9d0N-0002vv-3G
-	for mharc-qemu-riscv@gnu.org; Wed, 04 Mar 2020 18:00:43 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:41211)
+	id 1j9d9E-0006W3-BK
+	for mharc-qemu-riscv@gnu.org; Wed, 04 Mar 2020 18:09:52 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43485)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <palmer@dabbelt.com>) id 1j9d0J-0002vN-Si
- for qemu-riscv@nongnu.org; Wed, 04 Mar 2020 18:00:41 -0500
+ (envelope-from <prvs=3258e4f7a=alistair.francis@wdc.com>)
+ id 1j9d9B-0006T8-Bh
+ for qemu-riscv@nongnu.org; Wed, 04 Mar 2020 18:09:50 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmer@dabbelt.com>) id 1j9d0I-0000SY-CM
- for qemu-riscv@nongnu.org; Wed, 04 Mar 2020 18:00:39 -0500
-Received: from mail-pl1-x641.google.com ([2607:f8b0:4864:20::641]:42185)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1j9d0H-0000S7-Qw
- for qemu-riscv@nongnu.org; Wed, 04 Mar 2020 18:00:38 -0500
-Received: by mail-pl1-x641.google.com with SMTP id u3so1711464plr.9
- for <qemu-riscv@nongnu.org>; Wed, 04 Mar 2020 15:00:37 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=dabbelt-com.20150623.gappssmtp.com; s=20150623;
- h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
- :content-transfer-encoding;
- bh=A+8YyLnxsylnT/bWU3JoXEptrIiLtpYK4ca11ZtIoAs=;
- b=NTPJHBv7LkdVcUWy2EkjCDrONjt7gDGWd/PifAFSwwXzPJKFRXZZImih4SbsidHCp0
- ldMlnwzALdXXC61B/2SH9tF7WvOayz0FUkCTzfYinYYW9O+eRyynwFL5VmiT96voSweM
- 77bqHAkkWibQJGnDGTj2YWienbf3Ba3uAdHUF84SiU8YvNIdX+K3O5SckGjQXJMT7H5L
- U9mCM020A/hALwHxv2Jr29ldwQqBS0kYci+JZPTJF6g5LLeoU+BJBFXsINUOYzMxCcE6
- eXolXU/tuR1UrVloSlOQPGEmaAaOucoKPKThSJ5UE8gJVXGZYuBh1o7wUyDFGnvA8AfN
- VajQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
- :mime-version:content-transfer-encoding;
- bh=A+8YyLnxsylnT/bWU3JoXEptrIiLtpYK4ca11ZtIoAs=;
- b=Q+7Cnvqfp11iqU/F7sAPKmROPSN77GoHlG/bgxswMdgrdfGfgEtst8sp/IATy8lPxc
- /55CIdEYbT9AjItDJ9iCxHduLtrRC3Im6K7SQbCHvueMRzS3nY6079FolN5GXti3Bg2f
- 97eKP73uE65uj6LVe3/YbQXCdxMbpQdpe/i6sjyd9XHt072vDSnbZgc/b29d8rF5LbCf
- 50PpQve6lPxyUYXoHGk/d9WacWkNdQrNMWK8P/pY11vfjOPT90UHVb1f6S01MNM1749C
- CHnhP28XQhp6tNP7LoCRzn2MwxAacl+CTSb4NkA+/byvZ4SWwD3eVTWbd4udUZExCWCG
- d9yg==
-X-Gm-Message-State: ANhLgQ1oh/BIpxF7BPH+8BmA4SR/aBUuFhj1j5IQCeNXx/MGdFRo4TaI
- 1rqoFX0l8/ZUFfBKf4zZVnUBiw==
-X-Google-Smtp-Source: ADFU+vvrG1qKiFIdxgmRRB+pjG2jOxtVpzaUwBiKVUq8u3S44i7fJ2gWwm4wtYnqkLQDQwe1/O6avQ==
-X-Received: by 2002:a17:902:ab81:: with SMTP id f1mr5251896plr.5.1583362836166; 
- Wed, 04 Mar 2020 15:00:36 -0800 (PST)
-Received: from localhost ([2620:0:1000:2514:23a5:d584:6a92:3e3c])
- by smtp.gmail.com with ESMTPSA id k5sm14229898pfp.66.2020.03.04.15.00.35
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 04 Mar 2020 15:00:35 -0800 (PST)
-Date: Wed, 04 Mar 2020 15:00:35 -0800 (PST)
-X-Google-Original-Date: Wed, 04 Mar 2020 15:00:20 PST (-0800)
-Subject: Re: [PATCH v2] riscv: sifive_u: Add a "serial" property for board
- serial number
-In-Reply-To: <1581861317-30977-1-git-send-email-bmeng.cn@gmail.com>
-CC: Alistair Francis <Alistair.Francis@wdc.com>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, sagark@eecs.berkeley.edu,
- qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-From: Palmer Dabbelt <palmer@dabbelt.com>
-To: bmeng.cn@gmail.com
-Message-ID: <mhng-fb3ea639-87e6-406b-a679-a568f6d7edf9@palmerdabbelt-glaptop1>
-Mime-Version: 1.0 (MHng)
-Content-Type: text/plain; charset=utf-8; format=flowed
+ (envelope-from <prvs=3258e4f7a=alistair.francis@wdc.com>)
+ id 1j9d9A-0004js-5K
+ for qemu-riscv@nongnu.org; Wed, 04 Mar 2020 18:09:49 -0500
+Received: from esa4.hgst.iphmx.com ([216.71.154.42]:51004)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <prvs=3258e4f7a=alistair.francis@wdc.com>)
+ id 1j9d97-0004Sp-ET; Wed, 04 Mar 2020 18:09:45 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1583363385; x=1614899385;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=dpSnUXJsfXsvbPky0lT+EZH/OqTvD/6BTmdDhhB8700=;
+ b=B8yyAiZrKElW7N4BwDvfGhflTkitf5mMRq78xWrdJ4tPsmuPNcUZquwX
+ X/LbutcyU6Wyg6SiQACg96pR1SceVRXJRkqHVUnTI3TIR1pT2i1QKHrpn
+ eHDwbwbRxcAdaXPR930Jr4Mp7YNq+5GFmNYTYGsr0OZTbi+0x8VpvaH/W
+ ypSLdhuwQI1SgyHl047aoAq+aaiETDFLGxpp5bvQ2fXmrHXLG/s0SQnjN
+ xoQwQ09XFV1NyFO8+652ViTw+juxjEZ5zMRuzNsK/DQU3X702UoWkB7hs
+ LwXVgsj9QHUuEvygt93ZRewr4fLMHGSDzKtjsrTtjnjI1wDC+FZol4Ms3 w==;
+IronPort-SDR: aaz0jI4RfkXyTmV91uE1TSHpDqeYg2oQ7oyRY2w9w6eavcubfHQj/hYv/dUA5ImG9QqaUbCsX8
+ g8LtHqxp87BMzPv1UPumMfDOarEIdc4p+EcsgcAM5RGE2fQZVzMfmKVdsfzVkMcIkbFVKdGNFt
+ a6f3uY/inEw5Mqh9iSZeeiLnttnG/7XglFd2yhrvaTsA4Czw9l6mqGVlvLDUz1LnTj2xeqAuDv
+ PxXiJ1ulr9Wy5H2+gzv0SvhD8FfnXEXOF7DPisFECAsGFkyJonJw/rNdXe6+SsGThYD+HhQZkE
+ 9EY=
+X-IronPort-AV: E=Sophos;i="5.70,515,1574092800"; d="scan'208";a="131477237"
+Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
+ ([199.255.45.14])
+ by ob1.hgst.iphmx.com with ESMTP; 05 Mar 2020 07:09:42 +0800
+IronPort-SDR: hsYFAKYfg4nSVKQ8Dl80XPKiQQCXr6wNvC92md00ZBXAs1j1kvCjDV36snxcE+7ZhdBdhNJKJp
+ gpFIulhdVifZB/cWE36C1MV8S+1xcBhkiB3WvV76n+oID/zDHMl7pEqgyURM3K6ug5dWYZZvNm
+ i/eV/Zzw1dLymbtoSADVKRfwEmMOftBPSK8xPoFW3xgi9dLg/OstFUV3N2d/wM82dk26H80qsl
+ n1LWcFf1+ZJcQbpCYCDhNlz9fBjJF3GjOxqTDFkodD6SKb/I3+E0DCMLMRHSOY4iwQ0kHarTwu
+ STlAAMHiRFhI79BgPgU90LJ1
+Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
+ by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 04 Mar 2020 15:01:55 -0800
+IronPort-SDR: We84TR+jMNm9G8J/+N9Qg23q7VoSJ8G4WiR0+9LD4HTkkHFcWKUEs9OevqwBDTDroujiUo0VKC
+ nrV14wFJPggL8FTdZHWwH8k3gzl00YrNoATKZbZKHh2bnkNKBegQ/Irs0eZJnlg+YhRVmNtQQ5
+ buH4FhvOmyF6v+ALc7E0LZxhh9dFM7gzeIav83W9ok1/ZpiIgfv6Jq8h9AqfikYJP8r20cpi7h
+ rQKwUhV95ugfYHUM8iuOCyxDxsX/Yh+0TEGX7iG6GmVdKlOTC+BqlkliMwdmD32xocKtSHVV0d
+ sWA=
+WDCIronportException: Internal
+Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
+ risc6-mainframe.int.fusionio.com) ([10.196.158.235])
+ by uls-op-cesaip01.wdc.com with ESMTP; 04 Mar 2020 15:09:43 -0800
+From: Alistair Francis <alistair.francis@wdc.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: palmer@dabbelt.com,
+	alistair.francis@wdc.com,
+	alistair23@gmail.com
+Subject: [PATCH v2 1/3] riscv/sifive_u: Fix up file ordering
+Date: Wed,  4 Mar 2020 15:02:28 -0800
+Message-Id: <a814566684adc3278874f0165a0a62047c66db5b.1583362888.git.alistair.francis@wdc.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <cover.1583362888.git.alistair.francis@wdc.com>
+References: <cover.1583362888.git.alistair.francis@wdc.com>
+MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2607:f8b0:4864:20::641
+X-detected-operating-system: by eggs.gnu.org: FreeBSD 9.x [fuzzy]
+X-Received-From: 216.71.154.42
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -73,112 +79,145 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Mar 2020 23:00:41 -0000
+X-List-Received-Date: Wed, 04 Mar 2020 23:09:50 -0000
 
-On Sun, 16 Feb 2020 05:55:17 PST (-0800), bmeng.cn@gmail.com wrote:
-> At present the board serial number is hard-coded to 1, and passed
-> to OTP model during initialization. Firmware (FSBL, U-Boot) uses
-> the serial number to generate a unique MAC address for the on-chip
-> ethernet controller. When multiple QEMU 'sifive_u' instances are
-> created and connected to the same subnet, they all have the same
-> MAC address hence it creates a unusable network.
->
-> A new "serial" property is introduced to specify the board serial
-> number. When not given, the default serial number 1 is used.
->
-> Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
->
-> ---
->
-> Changes in v2:
-> - Move setting OTP serial number property from riscv_sifive_u_soc_init()
->   to riscv_sifive_u_soc_realize(), to fix the 'check-qtest-riscv' error.
->   I am not really sure why doing so could fix the 'make check' error.
->   The v1 patch worked fine and nothing seems wrong.
->
->  hw/riscv/sifive_u.c         | 21 ++++++++++++++++++++-
->  include/hw/riscv/sifive_u.h |  1 +
->  2 files changed, 21 insertions(+), 1 deletion(-)
->
-> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-> index 0e12b3c..ca561d3 100644
-> --- a/hw/riscv/sifive_u.c
-> +++ b/hw/riscv/sifive_u.c
-> @@ -34,6 +34,7 @@
->  #include "qemu/log.h"
->  #include "qemu/error-report.h"
->  #include "qapi/error.h"
-> +#include "qapi/visitor.h"
->  #include "hw/boards.h"
->  #include "hw/loader.h"
->  #include "hw/sysbus.h"
-> @@ -434,7 +435,6 @@ static void riscv_sifive_u_soc_init(Object *obj)
->                            TYPE_SIFIVE_U_PRCI);
->      sysbus_init_child_obj(obj, "otp", &s->otp, sizeof(s->otp),
->                            TYPE_SIFIVE_U_OTP);
-> -    qdev_prop_set_uint32(DEVICE(&s->otp), "serial", OTP_SERIAL);
->      sysbus_init_child_obj(obj, "gem", &s->gem, sizeof(s->gem),
->                            TYPE_CADENCE_GEM);
->  }
-> @@ -453,6 +453,18 @@ static void sifive_u_set_start_in_flash(Object *obj, bool value, Error **errp)
->      s->start_in_flash = value;
->  }
->
-> +static void sifive_u_get_serial(Object *obj, Visitor *v, const char *name,
-> +                                void *opaque, Error **errp)
-> +{
-> +    visit_type_uint32(v, name, (uint32_t *)opaque, errp);
-> +}
-> +
-> +static void sifive_u_set_serial(Object *obj, Visitor *v, const char *name,
-> +                                void *opaque, Error **errp)
-> +{
-> +    visit_type_uint32(v, name, (uint32_t *)opaque, errp);
-> +}
-> +
->  static void riscv_sifive_u_machine_instance_init(Object *obj)
->  {
->      SiFiveUState *s = RISCV_U_MACHINE(obj);
-> @@ -464,11 +476,17 @@ static void riscv_sifive_u_machine_instance_init(Object *obj)
->                                      "Set on to tell QEMU's ROM to jump to " \
->                                      "flash. Otherwise QEMU will jump to DRAM",
->                                      NULL);
-> +
-> +    s->serial = OTP_SERIAL;
-> +    object_property_add(obj, "serial", "uint32", sifive_u_get_serial,
-> +                        sifive_u_set_serial, NULL, &s->serial, NULL);
-> +    object_property_set_description(obj, "serial", "Board serial number", NULL);
->  }
->
->  static void riscv_sifive_u_soc_realize(DeviceState *dev, Error **errp)
->  {
->      MachineState *ms = MACHINE(qdev_get_machine());
-> +    SiFiveUState *us = RISCV_U_MACHINE(ms);
->      SiFiveUSoCState *s = RISCV_U_SOC(dev);
->      const struct MemmapEntry *memmap = sifive_u_memmap;
->      MemoryRegion *system_memory = get_system_memory();
-> @@ -554,6 +572,7 @@ static void riscv_sifive_u_soc_realize(DeviceState *dev, Error **errp)
->      object_property_set_bool(OBJECT(&s->prci), true, "realized", &err);
->      sysbus_mmio_map(SYS_BUS_DEVICE(&s->prci), 0, memmap[SIFIVE_U_PRCI].base);
->
-> +    qdev_prop_set_uint32(DEVICE(&s->otp), "serial", us->serial);
->      object_property_set_bool(OBJECT(&s->otp), true, "realized", &err);
->      sysbus_mmio_map(SYS_BUS_DEVICE(&s->otp), 0, memmap[SIFIVE_U_OTP].base);
->
-> diff --git a/include/hw/riscv/sifive_u.h b/include/hw/riscv/sifive_u.h
-> index 82667b5..7cf742e 100644
-> --- a/include/hw/riscv/sifive_u.h
-> +++ b/include/hw/riscv/sifive_u.h
-> @@ -59,6 +59,7 @@ typedef struct SiFiveUState {
->      int fdt_size;
->
->      bool start_in_flash;
-> +    uint32_t serial;
->  } SiFiveUState;
->
->  enum {
+Split the file into clear machine and SoC sections.
 
-Reviewed-by: Palmer Dabbelt <palmerdabbelt@google.com>
+Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+---
+ hw/riscv/sifive_u.c | 107 ++++++++++++++++++++++----------------------
+ 1 file changed, 54 insertions(+), 53 deletions(-)
 
-Thanks.  This is in the queue for the soft freeze.
+diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+index 156a003642..9a0145b5b4 100644
+--- a/hw/riscv/sifive_u.c
++++ b/hw/riscv/sifive_u.c
+@@ -399,6 +399,60 @@ static void riscv_sifive_u_init(MachineState *machine)
+                           &address_space_memory);
+ }
+ 
++static bool sifive_u_get_start_in_flash(Object *obj, Error **errp)
++{
++    SiFiveUState *s = RISCV_U_MACHINE(obj);
++
++    return s->start_in_flash;
++}
++
++static void sifive_u_set_start_in_flash(Object *obj, bool value, Error **errp)
++{
++    SiFiveUState *s = RISCV_U_MACHINE(obj);
++
++    s->start_in_flash = value;
++}
++
++static void riscv_sifive_u_machine_instance_init(Object *obj)
++{
++    SiFiveUState *s = RISCV_U_MACHINE(obj);
++
++    s->start_in_flash = false;
++    object_property_add_bool(obj, "start-in-flash", sifive_u_get_start_in_flash,
++                             sifive_u_set_start_in_flash, NULL);
++    object_property_set_description(obj, "start-in-flash",
++                                    "Set on to tell QEMU's ROM to jump to " \
++                                    "flash. Otherwise QEMU will jump to DRAM",
++                                    NULL);
++}
++
++
++static void riscv_sifive_u_machine_class_init(ObjectClass *oc, void *data)
++{
++    MachineClass *mc = MACHINE_CLASS(oc);
++
++    mc->desc = "RISC-V Board compatible with SiFive U SDK";
++    mc->init = riscv_sifive_u_init;
++    mc->max_cpus = SIFIVE_U_MANAGEMENT_CPU_COUNT + SIFIVE_U_COMPUTE_CPU_COUNT;
++    mc->min_cpus = SIFIVE_U_MANAGEMENT_CPU_COUNT + 1;
++    mc->default_cpus = mc->min_cpus;
++}
++
++static const TypeInfo riscv_sifive_u_machine_typeinfo = {
++    .name       = MACHINE_TYPE_NAME("sifive_u"),
++    .parent     = TYPE_MACHINE,
++    .class_init = riscv_sifive_u_machine_class_init,
++    .instance_init = riscv_sifive_u_machine_instance_init,
++    .instance_size = sizeof(SiFiveUState),
++};
++
++static void riscv_sifive_u_machine_init_register_types(void)
++{
++    type_register_static(&riscv_sifive_u_machine_typeinfo);
++}
++
++type_init(riscv_sifive_u_machine_init_register_types)
++
+ static void riscv_sifive_u_soc_init(Object *obj)
+ {
+     MachineState *ms = MACHINE(qdev_get_machine());
+@@ -439,33 +493,6 @@ static void riscv_sifive_u_soc_init(Object *obj)
+                           TYPE_CADENCE_GEM);
+ }
+ 
+-static bool sifive_u_get_start_in_flash(Object *obj, Error **errp)
+-{
+-    SiFiveUState *s = RISCV_U_MACHINE(obj);
+-
+-    return s->start_in_flash;
+-}
+-
+-static void sifive_u_set_start_in_flash(Object *obj, bool value, Error **errp)
+-{
+-    SiFiveUState *s = RISCV_U_MACHINE(obj);
+-
+-    s->start_in_flash = value;
+-}
+-
+-static void riscv_sifive_u_machine_instance_init(Object *obj)
+-{
+-    SiFiveUState *s = RISCV_U_MACHINE(obj);
+-
+-    s->start_in_flash = false;
+-    object_property_add_bool(obj, "start-in-flash", sifive_u_get_start_in_flash,
+-                             sifive_u_set_start_in_flash, NULL);
+-    object_property_set_description(obj, "start-in-flash",
+-                                    "Set on to tell QEMU's ROM to jump to " \
+-                                    "flash. Otherwise QEMU will jump to DRAM",
+-                                    NULL);
+-}
+-
+ static void riscv_sifive_u_soc_realize(DeviceState *dev, Error **errp)
+ {
+     MachineState *ms = MACHINE(qdev_get_machine());
+@@ -603,29 +630,3 @@ static void riscv_sifive_u_soc_register_types(void)
+ }
+ 
+ type_init(riscv_sifive_u_soc_register_types)
+-
+-static void riscv_sifive_u_machine_class_init(ObjectClass *oc, void *data)
+-{
+-    MachineClass *mc = MACHINE_CLASS(oc);
+-
+-    mc->desc = "RISC-V Board compatible with SiFive U SDK";
+-    mc->init = riscv_sifive_u_init;
+-    mc->max_cpus = SIFIVE_U_MANAGEMENT_CPU_COUNT + SIFIVE_U_COMPUTE_CPU_COUNT;
+-    mc->min_cpus = SIFIVE_U_MANAGEMENT_CPU_COUNT + 1;
+-    mc->default_cpus = mc->min_cpus;
+-}
+-
+-static const TypeInfo riscv_sifive_u_machine_typeinfo = {
+-    .name       = MACHINE_TYPE_NAME("sifive_u"),
+-    .parent     = TYPE_MACHINE,
+-    .class_init = riscv_sifive_u_machine_class_init,
+-    .instance_init = riscv_sifive_u_machine_instance_init,
+-    .instance_size = sizeof(SiFiveUState),
+-};
+-
+-static void riscv_sifive_u_machine_init_register_types(void)
+-{
+-    type_register_static(&riscv_sifive_u_machine_typeinfo);
+-}
+-
+-type_init(riscv_sifive_u_machine_init_register_types)
+-- 
+2.25.1
+
 
