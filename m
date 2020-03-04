@@ -1,74 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1j9Ixn-0003Oi-N5
-	for mharc-qemu-riscv@gnu.org; Tue, 03 Mar 2020 20:36:44 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:47904)
+	id 1j9Owc-0001aa-3B
+	for mharc-qemu-riscv@gnu.org; Wed, 04 Mar 2020 02:59:54 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:51085)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <prvs=3258e4f7a=alistair.francis@wdc.com>)
- id 1j9Ixg-0003Gx-2J
- for qemu-riscv@nongnu.org; Tue, 03 Mar 2020 20:36:37 -0500
+ (envelope-from <aleksandar.m.mail@gmail.com>) id 1j9OwZ-0001aR-1m
+ for qemu-riscv@nongnu.org; Wed, 04 Mar 2020 02:59:52 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <prvs=3258e4f7a=alistair.francis@wdc.com>)
- id 1j9Ixe-0004YI-7b
- for qemu-riscv@nongnu.org; Tue, 03 Mar 2020 20:36:35 -0500
-Received: from esa5.hgst.iphmx.com ([216.71.153.144]:26823)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <prvs=3258e4f7a=alistair.francis@wdc.com>)
- id 1j9Ixb-0004Pn-5U; Tue, 03 Mar 2020 20:36:31 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1583285792; x=1614821792;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=hLfzBwQY0GHBELl4LwyEgvgs3lqC1dQdMfJRHFbzMPY=;
- b=VAGxd6+EdaiWi7MJ4eT8mf5kNabXeNB4ezQB5Uf47Z8cFrzh71k7483H
- Mxxicd6nVD5Y0ITvTSPWbBkmdWIDQGdgkZWk3VBm4xP/cxXshwWzEP3tz
- ff8RpDcdq0IacxLc4fUPcH52aHpd5Jf1jklFTqFdinl3WiofnrjfS94EI
- GkzJRTAVfmaFKhZcfM6bqo2CkumRAX35edS6Z87h9ppQjU/5NkbhGOunw
- cgjHxQIujCD9s+6c7H/jd7s1x9v8D6Ygg/0wq7Gjb44fasA59hFuOiUBR
- NLd+kQak/wwV48cx6Gn+aNz+VoQqX/kZls/uAqc33ui0vPyzomfRuqn5K g==;
-IronPort-SDR: RbUBcKzTaBXoQlSyelxrW+DOQKQOixwj5WrJHc3iIW4rs6XeBtRU6ZECKZOcv7RamPFFahN83Y
- glK5rY5qw9ZrK3QyQ/twnOY9eaoQDt8Bex7di0MW6xFUOEaJ6IfwvYtieuH4PyWjU1Br1VtEhF
- ywKeRc+5/CwadryLg54HOxI3q8Jp3EkYOd3+ahjCcy6CuqKuiyaqtE5wjP288b0JNihrONcV/A
- 93Zemzs9iayYKATevvrG6foxwnz1Ff+6JdEPUX0mCN6Cg2u4Shmtpok82VfmqIVxX9kdTQilPg
- VKQ=
-X-IronPort-AV: E=Sophos;i="5.70,511,1574092800"; d="scan'208";a="131866070"
-Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com)
- ([199.255.45.15])
- by ob1.hgst.iphmx.com with ESMTP; 04 Mar 2020 09:36:31 +0800
-IronPort-SDR: +Rv7o+QWpKbJaMl0VCvcKjzrXQm4mH9kXjLwrksKm3AgRXISWaGC8zNgDhL1sMMhm0yjee0Dyo
- TS7jVp5AjST8IZR9crIR+dPipD0qesQ29uWEWjXeAEM6sXEmZuGeUcEqaUWt2Q6BhgwHw12bGi
- 6xg13OnoqW1wM6PnypJkb00ASUeD33OC5CJKQz/MHqKCUwqrI0e0wi48Bpi5bkKXptzlgTmadr
- h6eujJMvBxf9jf7Pk/dCsec5XcYa9diJ6zCo5wOn21iq5uq4GFnz9Psits+NtYU/4VmFiQQqFp
- 7BGFRydmGwN6sat3XQT1aAqY
-Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
- by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 03 Mar 2020 17:28:21 -0800
-IronPort-SDR: AU/UdIHFl+8WWvgg1bZIN22I63oe+qy6xca90DwU4fJkuUoL7Akxh0aG6aZdyI9oEwvuK4wN8A
- 8/AVMLo7LX/uCm0rrz5r+FJNoABTr0SIl8KHd9Ht3EWXRpxUVshV4GLZNaTnv3y08UPANJCakN
- dWQn8KdlqDcHqC5X0mRPRuNhYa502oPOybIAUADOsZh4zQFcit+HP67uaHpNzcFRATn5fT33WC
- /w91QclCAJ4f5u0Laxz0VOWa4SycGdhMe2ROBUdVA2JVdhI9EubzPOxd9knHYn1l1yX1mcHOuS
- qs8=
-WDCIronportException: Internal
-Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
- risc6-mainframe.int.fusionio.com) ([10.196.158.235])
- by uls-op-cesaip02.wdc.com with ESMTP; 03 Mar 2020 17:36:30 -0800
-From: Alistair Francis <alistair.francis@wdc.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: palmer@dabbelt.com,
-	alistair.francis@wdc.com,
-	alistair23@gmail.com
-Subject: [PATCH v1 3/3] riscv/sifive_u: Add a serial property to the sifive_u
- machine
-Date: Tue,  3 Mar 2020 17:29:17 -0800
-Message-Id: <edb4719fd6a829eb7ec4cf4c4d73f3d2f02dbf2d.1583285287.git.alistair.francis@wdc.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <cover.1583285287.git.alistair.francis@wdc.com>
-References: <cover.1583285287.git.alistair.francis@wdc.com>
+ (envelope-from <aleksandar.m.mail@gmail.com>) id 1j9OwX-0003R0-Mf
+ for qemu-riscv@nongnu.org; Wed, 04 Mar 2020 02:59:50 -0500
+Received: from mail-oi1-x241.google.com ([2607:f8b0:4864:20::241]:37026)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <aleksandar.m.mail@gmail.com>)
+ id 1j9OwT-0003Fr-FA; Wed, 04 Mar 2020 02:59:45 -0500
+Received: by mail-oi1-x241.google.com with SMTP id q65so1199181oif.4;
+ Tue, 03 Mar 2020 23:59:45 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=nAA0ECN+YiquK4Xp6XWjIb0W3XtCV5F6HrPNs0hF5qc=;
+ b=ihAF8l8YAJXgtnU9JTKdecdGx/bIZsAU0LgtaVyv3A2QXRWKfzn/lhocBfPHYnxHHp
+ dxJwnRnoebvtXutuNSiyAhmD3KClIw5Dg0zxmwPrJAThIPJIqpAdKeM0LtEyDnfcBgxG
+ d3Z6dsP1/SuZmN6pMJo5KSHgGaNff7+kAbeXixEAHusjl/d/9CfK/VAi3e8Eb5HNGB6F
+ bdmAS0J05Y6irC4c5Oyhe6TMZoY5NIXuP/MbdrLDtFSHncxmYyjfrMoAV1SIwkY5fwhm
+ lYWGnjFslGimfqeAHGtcFevXPHvmsrRTVFyddq0FXkhQALVs1PoFqTEXxyHLoySNoKOt
+ GdQg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=nAA0ECN+YiquK4Xp6XWjIb0W3XtCV5F6HrPNs0hF5qc=;
+ b=DUI/jcq9tw5nw3wly9BRai8uOmd7Er8U1CQ0v5Zo+zLjhmuMTCYILrAb1UxmLcVGWe
+ WGFxM9zaN4zKTCiGnMxcm3Czd1wrVgwz77t+T4xmkLWla4WkJr1pRSg0tyhvJPdpm7uu
+ u4f3n27k3//k/lQkT5Yo58c23BMkI3f9Y/tgDkLZxxVk0/nAw7d7p8JrIWl9olQmkTv0
+ SkwtUlKYK/h5vH/WyLEqDdrOSGlNIGX2i0HNW74KhmB7GWlts1Ir0VF20eDCzG3oJPMf
+ qJ8q378V4p/T3LWUPpZP4rPmiaD6+xb7+MyTZW/Gy2ApLwkJTCPNu/CXRhwGjGeVqUM2
+ +m+Q==
+X-Gm-Message-State: ANhLgQ3resN4zSl6L4RcF/IEak8kxxTeGfk+64WTLR3Ivbgic5hZ8BVe
+ vzu1gxlBo7ArLkULb81qh5T1qcVWAlVrm+hKa00=
+X-Google-Smtp-Source: ADFU+vuD5oxfSR9x61+Yip3c4ND5jPBQCvcWt06mhfCE6O318i2kqDaiIrQ4PqWGofFcW2bVFbY1ucyd7A0deu6MeCw=
+X-Received: by 2002:aca:c3c5:: with SMTP id t188mr931923oif.53.1583308784247; 
+ Tue, 03 Mar 2020 23:59:44 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-detected-operating-system: by eggs.gnu.org: FreeBSD 9.x [fuzzy]
-X-Received-From: 216.71.153.144
+References: <cover.1583282640.git.alistair.francis@wdc.com>
+ <406774cf394d785da30a30d99169f0b2cf1bb1de.1583282640.git.alistair.francis@wdc.com>
+In-Reply-To: <406774cf394d785da30a30d99169f0b2cf1bb1de.1583282640.git.alistair.francis@wdc.com>
+From: Aleksandar Markovic <aleksandar.m.mail@gmail.com>
+Date: Wed, 4 Mar 2020 08:59:26 +0100
+Message-ID: <CAL1e-=iQwKrze3biSJgxyWh=tMP6F1JAHx_A51f7LcTej6x+Og@mail.gmail.com>
+Subject: Re: [PATCH v4 2/3] linux-user/syscall: Add support for
+ clock_gettime64/clock_settime64
+To: Alistair Francis <Alistair.Francis@wdc.com>
+Cc: QEMU Developers <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, laurent@vivier.eu, 
+ palmer@dabbelt.com, alistair23@gmail.com
+Content-Type: multipart/alternative; boundary="000000000000a7a56b05a002cd84"
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2607:f8b0:4864:20::241
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -80,100 +67,236 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Mar 2020 01:36:37 -0000
+X-List-Received-Date: Wed, 04 Mar 2020 07:59:52 -0000
 
-From: Bin Meng <bmeng.cn@gmail.com>
+--000000000000a7a56b05a002cd84
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-At present the board serial number is hard-coded to 1, and passed
-to OTP model during initialization. Firmware (FSBL, U-Boot) uses
-the serial number to generate a unique MAC address for the on-chip
-ethernet controller. When multiple QEMU 'sifive_u' instances are
-created and connected to the same subnet, they all have the same
-MAC address hence it creates a unusable network.
+1:53 AM Sre, 04.03.2020. Alistair Francis <alistair.francis@wdc.com> =D1=98=
+=D0=B5
+=D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=BE/=D0=BB=D0=B0:
+>
+> Add support for the clock_gettime64/clock_settime64 syscalls. Currently
+> we only support these syscalls when running on 64-bit hosts.
+>
 
-A new "serial" property is introduced to specify the board serial
-number. When not given, the default serial number 1 is used.
+For clarity, "Currently we only support" should be replaced with "This
+patch supports only".
 
-Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
-Reviewed-by: Palmer Dabbelt <palmerdabbelt@google.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-Message-Id: <1573916930-19068-1-git-send-email-bmeng.cn@gmail.com>
-[ Changed by AF:
- - Use the SoC's serial property to pass the info to the SoC
- - Fixup commit title
- - Rebase on file restructuring
-]
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
----
- hw/riscv/sifive_u.c         | 20 ++++++++++++++++++++
- include/hw/riscv/sifive_u.h |  1 +
- 2 files changed, 21 insertions(+)
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> ---
+>  linux-user/syscall.c | 43 +++++++++++++++++++++++++++++++++++++++++++
+>  1 file changed, 43 insertions(+)
+>
+> diff --git a/linux-user/syscall.c b/linux-user/syscall.c
+> index c000fb07c5..82468e018d 100644
+> --- a/linux-user/syscall.c
+> +++ b/linux-user/syscall.c
+> @@ -1236,6 +1236,22 @@ static inline abi_long
+target_to_host_timespec(struct timespec *host_ts,
+>  }
+>  #endif
+>
+> +#if defined(TARGET_NR_clock_settime64) && HOST_LONG_BITS =3D=3D 64
+> +static inline abi_long target_to_host_timespec64(struct timespec
+*host_ts,
+> +                                                 abi_ulong target_addr)
+> +{
+> +    struct target_timespec *target_ts;
+> +
+> +    if (!lock_user_struct(VERIFY_READ, target_ts, target_addr, 1)) {
+> +        return -TARGET_EFAULT;
+> +    }
+> +    __get_user(host_ts->tv_sec, &target_ts->tv_sec);
+> +    __get_user(host_ts->tv_nsec, &target_ts->tv_nsec);
+> +    unlock_user_struct(target_ts, target_addr, 0);
+> +    return 0;
+> +}
+> +#endif
+> +
+>  static inline abi_long host_to_target_timespec(abi_ulong target_addr,
+>                                                 struct timespec *host_ts)
+>  {
+> @@ -11465,6 +11481,20 @@ static abi_long do_syscall1(void *cpu_env, int
+num, abi_long arg1,
+>          return ret;
+>      }
+>  #endif
+> +#ifdef TARGET_NR_clock_settime64
+> +# if HOST_LONG_BITS =3D=3D 64
+> +    case TARGET_NR_clock_settime64:
+> +    {
+> +        struct timespec ts;
+> +
+> +        ret =3D target_to_host_timespec64(&ts, arg2);
+> +        if (!is_error(ret)) {
+> +            ret =3D get_errno(clock_settime(arg1, &ts));
+> +        }
+> +        return ret;
+> +    }
+> +# endif
+> +#endif
+>  #ifdef TARGET_NR_clock_gettime
+>      case TARGET_NR_clock_gettime:
+>      {
+> @@ -11476,6 +11506,19 @@ static abi_long do_syscall1(void *cpu_env, int
+num, abi_long arg1,
+>          return ret;
+>      }
+>  #endif
+> +#ifdef TARGET_NR_clock_gettime64
+> +# if HOST_LONG_BITS =3D=3D 64
+> +    case TARGET_NR_clock_gettime64:
+> +    {
+> +        struct timespec ts;
+> +        ret =3D get_errno(clock_gettime(arg1, &ts));
+> +        if (!is_error(ret)) {
+> +            ret =3D host_to_target_timespec64(arg2, &ts);
+> +        }
+> +        return ret;
+> +    }
+> +# endif
+> +#endif
+>  #ifdef TARGET_NR_clock_getres
+>      case TARGET_NR_clock_getres:
+>      {
+> --
 
-diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-index e52f9d0bd4..f3f67cc0e3 100644
---- a/hw/riscv/sifive_u.c
-+++ b/hw/riscv/sifive_u.c
-@@ -34,6 +34,7 @@
- #include "qemu/log.h"
- #include "qemu/error-report.h"
- #include "qapi/error.h"
-+#include "qapi/visitor.h"
- #include "hw/boards.h"
- #include "hw/loader.h"
- #include "hw/sysbus.h"
-@@ -322,6 +323,8 @@ static void riscv_sifive_u_init(MachineState *machine)
-     object_initialize_child(OBJECT(machine), "soc", &s->soc,
-                             sizeof(s->soc), TYPE_RISCV_U_SOC,
-                             &error_abort, NULL);
-+    object_property_set_uint(OBJECT(&s->soc), s->serial, "serial",
-+                            &error_abort);
-     object_property_set_bool(OBJECT(&s->soc), true, "realized",
-                             &error_abort);
- 
-@@ -413,6 +416,18 @@ static void sifive_u_set_start_in_flash(Object *obj, bool value, Error **errp)
-     s->start_in_flash = value;
- }
- 
-+static void sifive_u_get_serial(Object *obj, Visitor *v, const char *name,
-+                                void *opaque, Error **errp)
-+{
-+    visit_type_uint32(v, name, (uint32_t *)opaque, errp);
-+}
-+
-+static void sifive_u_set_serial(Object *obj, Visitor *v, const char *name,
-+                                void *opaque, Error **errp)
-+{
-+    visit_type_uint32(v, name, (uint32_t *)opaque, errp);
-+}
-+
- static void riscv_sifive_u_machine_instance_init(Object *obj)
- {
-     SiFiveUState *s = RISCV_U_MACHINE(obj);
-@@ -424,6 +439,11 @@ static void riscv_sifive_u_machine_instance_init(Object *obj)
-                                     "Set on to tell QEMU's ROM to jump to " \
-                                     "flash. Otherwise QEMU will jump to DRAM",
-                                     NULL);
-+
-+    s->serial = OTP_SERIAL;
-+    object_property_add(obj, "serial", "uint32", sifive_u_get_serial,
-+                        sifive_u_set_serial, NULL, &s->serial, NULL);
-+    object_property_set_description(obj, "serial", "Board serial number", NULL);
- }
- 
- 
-diff --git a/include/hw/riscv/sifive_u.h b/include/hw/riscv/sifive_u.h
-index a2baa1de5f..16c297ec5f 100644
---- a/include/hw/riscv/sifive_u.h
-+++ b/include/hw/riscv/sifive_u.h
-@@ -61,6 +61,7 @@ typedef struct SiFiveUState {
-     int fdt_size;
- 
-     bool start_in_flash;
-+    uint32_t serial;
- } SiFiveUState;
- 
- enum {
--- 
-2.25.1
+Nice patch for the first version, still I think the patch could be much
+better.
 
+Why not support 32-bit hosts? If a 32-bit host supports
+clock_<get|set>time64(), the mapping is obvious. If not, the implementation
+could be "best effort" based, using host's clock_<get|set>time().
+
+Regards,
+Aleksandar
+
+> 2.25.1
+>
+>
+
+--000000000000a7a56b05a002cd84
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<p dir=3D"ltr"></p>
+<p dir=3D"ltr">1:53 AM Sre, 04.03.2020. Alistair Francis &lt;<a href=3D"mai=
+lto:alistair.francis@wdc.com">alistair.francis@wdc.com</a>&gt; =D1=98=D0=B5=
+ =D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=BE/=D0=BB=D0=B0:<br>
+&gt;<br>
+&gt; Add support for the clock_gettime64/clock_settime64 syscalls. Currentl=
+y<br>
+&gt; we only support these syscalls when running on 64-bit hosts.<br>
+&gt;</p>
+<p dir=3D"ltr">For clarity, &quot;Currently we only support&quot; should be=
+ replaced with &quot;This patch supports only&quot;.</p>
+<p dir=3D"ltr">&gt; Signed-off-by: Alistair Francis &lt;<a href=3D"mailto:a=
+listair.francis@wdc.com">alistair.francis@wdc.com</a>&gt;<br>
+&gt; ---<br>
+&gt; =C2=A0linux-user/syscall.c | 43 ++++++++++++++++++++++++++++++++++++++=
++++++<br>
+&gt; =C2=A01 file changed, 43 insertions(+)<br>
+&gt;<br>
+&gt; diff --git a/linux-user/syscall.c b/linux-user/syscall.c<br>
+&gt; index c000fb07c5..82468e018d 100644<br>
+&gt; --- a/linux-user/syscall.c<br>
+&gt; +++ b/linux-user/syscall.c<br>
+&gt; @@ -1236,6 +1236,22 @@ static inline abi_long target_to_host_timespec(=
+struct timespec *host_ts,<br>
+&gt; =C2=A0}<br>
+&gt; =C2=A0#endif<br>
+&gt;<br>
+&gt; +#if defined(TARGET_NR_clock_settime64) &amp;&amp; HOST_LONG_BITS =3D=
+=3D 64<br>
+&gt; +static inline abi_long target_to_host_timespec64(struct timespec *hos=
+t_ts,<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0abi_ulong target_addr)<br>
+&gt; +{<br>
+&gt; +=C2=A0 =C2=A0 struct target_timespec *target_ts;<br>
+&gt; +<br>
+&gt; +=C2=A0 =C2=A0 if (!lock_user_struct(VERIFY_READ, target_ts, target_ad=
+dr, 1)) {<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 return -TARGET_EFAULT;<br>
+&gt; +=C2=A0 =C2=A0 }<br>
+&gt; +=C2=A0 =C2=A0 __get_user(host_ts-&gt;tv_sec, &amp;target_ts-&gt;tv_se=
+c);<br>
+&gt; +=C2=A0 =C2=A0 __get_user(host_ts-&gt;tv_nsec, &amp;target_ts-&gt;tv_n=
+sec);<br>
+&gt; +=C2=A0 =C2=A0 unlock_user_struct(target_ts, target_addr, 0);<br>
+&gt; +=C2=A0 =C2=A0 return 0;<br>
+&gt; +}<br>
+&gt; +#endif<br>
+&gt; +<br>
+&gt; =C2=A0static inline abi_long host_to_target_timespec(abi_ulong target_=
+addr,<br>
+&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 struct timespec *host_ts)<br>
+&gt; =C2=A0{<br>
+&gt; @@ -11465,6 +11481,20 @@ static abi_long do_syscall1(void *cpu_env, in=
+t num, abi_long arg1,<br>
+&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return ret;<br>
+&gt; =C2=A0 =C2=A0 =C2=A0}<br>
+&gt; =C2=A0#endif<br>
+&gt; +#ifdef TARGET_NR_clock_settime64<br>
+&gt; +# if HOST_LONG_BITS =3D=3D 64<br>
+&gt; +=C2=A0 =C2=A0 case TARGET_NR_clock_settime64:<br>
+&gt; +=C2=A0 =C2=A0 {<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 struct timespec ts;<br>
+&gt; +<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 ret =3D target_to_host_timespec64(&amp;ts=
+, arg2);<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (!is_error(ret)) {<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ret =3D get_errno(clock_set=
+time(arg1, &amp;ts));<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 return ret;<br>
+&gt; +=C2=A0 =C2=A0 }<br>
+&gt; +# endif<br>
+&gt; +#endif<br>
+&gt; =C2=A0#ifdef TARGET_NR_clock_gettime<br>
+&gt; =C2=A0 =C2=A0 =C2=A0case TARGET_NR_clock_gettime:<br>
+&gt; =C2=A0 =C2=A0 =C2=A0{<br>
+&gt; @@ -11476,6 +11506,19 @@ static abi_long do_syscall1(void *cpu_env, in=
+t num, abi_long arg1,<br>
+&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return ret;<br>
+&gt; =C2=A0 =C2=A0 =C2=A0}<br>
+&gt; =C2=A0#endif<br>
+&gt; +#ifdef TARGET_NR_clock_gettime64<br>
+&gt; +# if HOST_LONG_BITS =3D=3D 64<br>
+&gt; +=C2=A0 =C2=A0 case TARGET_NR_clock_gettime64:<br>
+&gt; +=C2=A0 =C2=A0 {<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 struct timespec ts;<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 ret =3D get_errno(clock_gettime(arg1, &am=
+p;ts));<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (!is_error(ret)) {<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ret =3D host_to_target_time=
+spec64(arg2, &amp;ts);<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 return ret;<br>
+&gt; +=C2=A0 =C2=A0 }<br>
+&gt; +# endif<br>
+&gt; +#endif<br>
+&gt; =C2=A0#ifdef TARGET_NR_clock_getres<br>
+&gt; =C2=A0 =C2=A0 =C2=A0case TARGET_NR_clock_getres:<br>
+&gt; =C2=A0 =C2=A0 =C2=A0{<br>
+&gt; -- </p>
+<p dir=3D"ltr">Nice patch for the first version, still I think the patch co=
+uld be much better.</p>
+<p dir=3D"ltr">Why not support 32-bit hosts? If a 32-bit host supports cloc=
+k_&lt;get|set&gt;time64(), the mapping is obvious. If not, the implementati=
+on could be &quot;best effort&quot; based, using host&#39;s clock_&lt;get|s=
+et&gt;time().</p>
+<p dir=3D"ltr">Regards,<br>
+Aleksandar</p>
+<p dir=3D"ltr">&gt; 2.25.1<br>
+&gt;<br>
+&gt;<br>
+</p>
+
+--000000000000a7a56b05a002cd84--
 
