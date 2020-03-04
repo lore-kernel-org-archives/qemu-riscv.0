@@ -1,53 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1j9dp1-0006OL-Cv
-	for mharc-qemu-riscv@gnu.org; Wed, 04 Mar 2020 18:53:03 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53514)
+	id 1j9dxy-00025n-R1
+	for mharc-qemu-riscv@gnu.org; Wed, 04 Mar 2020 19:02:18 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:55512)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <no-reply@patchew.org>) id 1j9dow-0006O0-LJ
- for qemu-riscv@nongnu.org; Wed, 04 Mar 2020 18:52:59 -0500
+ (envelope-from <alistair23@gmail.com>) id 1j9dxw-00023N-AZ
+ for qemu-riscv@nongnu.org; Wed, 04 Mar 2020 19:02:17 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <no-reply@patchew.org>) id 1j9dov-00041d-Dq
- for qemu-riscv@nongnu.org; Wed, 04 Mar 2020 18:52:58 -0500
-Resent-Date: Wed, 04 Mar 2020 18:52:58 -0500
-Resent-Message-Id: <E1j9dov-00041d-Dq@eggs.gnu.org>
-Received: from sender4-of-o51.zoho.com ([136.143.188.51]:21192)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <no-reply@patchew.org>)
- id 1j9dos-0003wC-87; Wed, 04 Mar 2020 18:52:54 -0500
-ARC-Seal: i=1; a=rsa-sha256; t=1583365965; cv=none; 
- d=zohomail.com; s=zohoarc; 
- b=bX4QIkQBwifw498Rvhh3J35vLcXdcaM7c2TIlfY57jX+lnr/9UnYKsqHssTobiHS5O2glvrTFAa2xYuUiKGqqMiC1ubpkvBFqtLPhba5kNS1ENi6dID7OAc1HPngsnees3T7dqqYYnrUWB+iDWWLneHr/fmM/6u4CrBVgehgx+E=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1583365965;
- h=Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:MIME-Version:Message-ID:Reply-To:Subject:To;
- bh=zRBPA8psJ1uL0AxxUZPleHows8b8vfDU1XJqP9o7Lac=; 
- b=mdncwYiX4x3Xz/+JsJ/tv7rCYPZOvu4iMaLP0UvUw2q5do3lIdJfUylSRhhdQ5+aSZRtkz441pIoWKVnj/5+pnGmNUqDNtG3Qa5KwT3LXDCC7TwxrVU1q8tGEWA6Y1qFC8B6r5hdh6LwWrACDf5qZSxqDL6bvs2iXR8EJluzDpw=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
- dkim=pass  header.i=patchew.org;
- spf=pass  smtp.mailfrom=no-reply@patchew.org;
- dmarc=pass header.from=<no-reply@patchew.org>
- header.from=<no-reply@patchew.org>
-Received: from [172.17.0.3] (23.253.156.214 [23.253.156.214]) by
- mx.zohomail.com with SMTPS id 1583365963326898.1939006752978;
- Wed, 4 Mar 2020 15:52:43 -0800 (PST)
-Reply-To: <qemu-devel@nongnu.org>
-In-Reply-To: <cover.1583362888.git.alistair.francis@wdc.com>
-Subject: Re: [PATCH v2 0/3] hw/riscv: Add a serial property to the sifive_u
- machine
-Message-ID: <158336596205.21741.18419810065024647085@abdcc9e1aa82>
+ (envelope-from <alistair23@gmail.com>) id 1j9dxu-0002fA-Vd
+ for qemu-riscv@nongnu.org; Wed, 04 Mar 2020 19:02:16 -0500
+Received: from mail-vs1-xe42.google.com ([2607:f8b0:4864:20::e42]:44635)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <alistair23@gmail.com>)
+ id 1j9dxs-0002bc-4Z; Wed, 04 Mar 2020 19:02:12 -0500
+Received: by mail-vs1-xe42.google.com with SMTP id u24so2414537vso.11;
+ Wed, 04 Mar 2020 16:02:12 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=lgKn0m21RATykAjfa8cP+IEC/G3g6jyw/uYKrhhAzY4=;
+ b=LiRCwgKCgzk4OmUu5U/drOMRXT6uivxjH5+fYMKQIyNSh4WKiYxQQSJH65ML3a51MP
+ 2uaW/liFFK0//CiG+qFG5KSE0nxsMX5wEA3jGx2KVVlU8ot4bl8XtNFt0OtwmgkjInph
+ 7RBE1Rn7pstYyCDRyqkLWOkHJkJprXZ93ouYO4jaGeMrqXU/h8BFzUkSqoSmDcE0BCS8
+ L1BuxkrtO7bjb7pMHL6ki1Ln0TfKMCTuot7+RI19ShlQuCHaj8f+5L6rEOOE37ASOGnM
+ K+tQf0AJJ+NSUsYINCV3ZvTrQeCTjml52z/AnpBx5ZV93a6o+6kP7+SsPJ3VXvyxgtZl
+ tqFw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=lgKn0m21RATykAjfa8cP+IEC/G3g6jyw/uYKrhhAzY4=;
+ b=GkJFn9YzgqS7eXhWjmpD8WNcc9IvD1E698dKOLDuRzcC7ge1yrXYBcgIxvrnj1I1bN
+ nkYZLMXtN1PsF/W1rR09znGdHPUHI1qK+U50ZEl4OUU738NRsX8cVHUbCMOZ57wVaarB
+ 7wS65NY3v7SORFeqRQ84wKY/LPwdV0HjZCarBbl5xE1oNQ5aAJhYH5Atzl5U4Xj02wGV
+ tilpOo2fUGe1UMMMluaeNlcGtvymnJLoMPrDvc/H78SkZlWlyes6FEVMQsBvglNCuz9s
+ vNGw4WERXG/GMPk9vnmPDW1C9u8h9v8i5HcrXAvfzl5oM3LKJooWOPSfWylUY8UXoPpD
+ eHSw==
+X-Gm-Message-State: ANhLgQ0n5LTta4iNy3oeZx5M4LrPi/rx6GY33WQZzsOaU/mIGAhn8j/p
+ KtOgZ/hcVcfsMixxIL09huIVAcsRJzbJ59dJwbw=
+X-Google-Smtp-Source: ADFU+vvhmPJPZyxkPJMGGHMvQ/KT6lQCwX97k23GqaXqWqGxeIRJgWA0HYk0r8mbjc7qcsXJiz/+xFZL2Fs2qeiRvtY=
+X-Received: by 2002:a67:fa43:: with SMTP id j3mr2767865vsq.70.1583366530912;
+ Wed, 04 Mar 2020 16:02:10 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-Resent-From: 
-From: no-reply@patchew.org
-To: alistair.francis@wdc.com
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
- palmer@dabbelt.com, alistair23@gmail.com
-Date: Wed, 4 Mar 2020 15:52:43 -0800 (PST)
-X-ZohoMailClient: External
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
- [fuzzy]
-X-Received-From: 136.143.188.51
+References: <cover.1583285287.git.alistair.francis@wdc.com>
+ <3f5f5106d357f6ff911e4b81973840d414920b78.1583285287.git.alistair.francis@wdc.com>
+ <CAEUhbmW=T50FcppnLFAzdQNwQEwofX9U-Zyo2oJikSiS8ti4QQ@mail.gmail.com>
+In-Reply-To: <CAEUhbmW=T50FcppnLFAzdQNwQEwofX9U-Zyo2oJikSiS8ti4QQ@mail.gmail.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Wed, 4 Mar 2020 15:54:29 -0800
+Message-ID: <CAKmqyKOuHG4ACEf4y3gyUZijduXvN703qTtkSz4vBT1srLwE5g@mail.gmail.com>
+Subject: Re: [PATCH v1 1/3] riscv/sifive_u: Fix up file ordering
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Alistair Francis <alistair.francis@wdc.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Palmer Dabbelt <palmer@dabbelt.com>
+Content-Type: text/plain; charset="UTF-8"
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2607:f8b0:4864:20::e42
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -59,46 +68,169 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Mar 2020 23:52:59 -0000
+X-List-Received-Date: Thu, 05 Mar 2020 00:02:18 -0000
 
-UGF0Y2hldyBVUkw6IGh0dHBzOi8vcGF0Y2hldy5vcmcvUUVNVS9jb3Zlci4xNTgzMzYyODg4Lmdp
-dC5hbGlzdGFpci5mcmFuY2lzQHdkYy5jb20vCgoKCkhpLAoKVGhpcyBzZXJpZXMgZmFpbGVkIHRo
-ZSBkb2NrZXItcXVpY2tAY2VudG9zNyBidWlsZCB0ZXN0LiBQbGVhc2UgZmluZCB0aGUgdGVzdGlu
-ZyBjb21tYW5kcyBhbmQKdGhlaXIgb3V0cHV0IGJlbG93LiBJZiB5b3UgaGF2ZSBEb2NrZXIgaW5z
-dGFsbGVkLCB5b3UgY2FuIHByb2JhYmx5IHJlcHJvZHVjZSBpdApsb2NhbGx5LgoKPT09IFRFU1Qg
-U0NSSVBUIEJFR0lOID09PQojIS9iaW4vYmFzaAptYWtlIGRvY2tlci1pbWFnZS1jZW50b3M3IFY9
-MSBORVRXT1JLPTEKdGltZSBtYWtlIGRvY2tlci10ZXN0LXF1aWNrQGNlbnRvczcgU0hPV19FTlY9
-MSBKPTE0IE5FVFdPUks9MQo9PT0gVEVTVCBTQ1JJUFQgRU5EID09PQoKcWVtdS1zeXN0ZW0teDg2
-XzY0OiAtYWNjZWwga3ZtOiBmYWlsZWQgdG8gaW5pdGlhbGl6ZSBrdm06IE5vIHN1Y2ggZmlsZSBv
-ciBkaXJlY3RvcnkKcWVtdS1zeXN0ZW0teDg2XzY0OiBmYWxsaW5nIGJhY2sgdG8gdGNnCioqCkVS
-Uk9SOi90bXAvcWVtdS10ZXN0L3NyYy90ZXN0cy9xdGVzdC9taWdyYXRpb24taGVscGVycy5jOjEx
-OTpjaGVja19taWdyYXRpb25fc3RhdHVzOiBhc3NlcnRpb24gZmFpbGVkIChjdXJyZW50X3N0YXR1
-cyAhPSAiY29tcGxldGVkIik6ICgiY29tcGxldGVkIiAhPSAiY29tcGxldGVkIikKRVJST1IgLSBC
-YWlsIG91dCEgRVJST1I6L3RtcC9xZW11LXRlc3Qvc3JjL3Rlc3RzL3F0ZXN0L21pZ3JhdGlvbi1o
-ZWxwZXJzLmM6MTE5OmNoZWNrX21pZ3JhdGlvbl9zdGF0dXM6IGFzc2VydGlvbiBmYWlsZWQgKGN1
-cnJlbnRfc3RhdHVzICE9ICJjb21wbGV0ZWQiKTogKCJjb21wbGV0ZWQiICE9ICJjb21wbGV0ZWQi
-KQptYWtlOiAqKiogW2NoZWNrLXF0ZXN0LXg4Nl82NF0gRXJyb3IgMQptYWtlOiAqKiogV2FpdGlu
-ZyBmb3IgdW5maW5pc2hlZCBqb2JzLi4uLgogIFRFU1QgICAgaW90ZXN0LXFjb3cyOiAwNjEKICBU
-RVNUICAgIGlvdGVzdC1xY293MjogMDYyCi0tLQogICAgcmFpc2UgQ2FsbGVkUHJvY2Vzc0Vycm9y
-KHJldGNvZGUsIGNtZCkKc3VicHJvY2Vzcy5DYWxsZWRQcm9jZXNzRXJyb3I6IENvbW1hbmQgJ1sn
-c3VkbycsICctbicsICdkb2NrZXInLCAncnVuJywgJy0tbGFiZWwnLCAnY29tLnFlbXUuaW5zdGFu
-Y2UudXVpZD03ODE4ZjdiYjY4MjM0ZTNkYWVlM2MxODI2ODlhYzBkYicsICctdScsICcxMDAzJywg
-Jy0tc2VjdXJpdHktb3B0JywgJ3NlY2NvbXA9dW5jb25maW5lZCcsICctLXJtJywgJy1lJywgJ1RB
-UkdFVF9MSVNUPScsICctZScsICdFWFRSQV9DT05GSUdVUkVfT1BUUz0nLCAnLWUnLCAnVj0nLCAn
-LWUnLCAnSj0xNCcsICctZScsICdERUJVRz0nLCAnLWUnLCAnU0hPV19FTlY9MScsICctZScsICdD
-Q0FDSEVfRElSPS92YXIvdG1wL2NjYWNoZScsICctdicsICcvaG9tZS9wYXRjaGV3Mi8uY2FjaGUv
-cWVtdS1kb2NrZXItY2NhY2hlOi92YXIvdG1wL2NjYWNoZTp6JywgJy12JywgJy92YXIvdG1wL3Bh
-dGNoZXctdGVzdGVyLXRtcC1mZ3Q2NmQ4Mi9zcmMvZG9ja2VyLXNyYy4yMDIwLTAzLTA0LTE4LjQw
-LjM1Ljk4NDg6L3Zhci90bXAvcWVtdTp6LHJvJywgJ3FlbXU6Y2VudG9zNycsICcvdmFyL3RtcC9x
-ZW11L3J1bicsICd0ZXN0LXF1aWNrJ10nIHJldHVybmVkIG5vbi16ZXJvIGV4aXQgc3RhdHVzIDIu
-CmZpbHRlcj0tLWZpbHRlcj1sYWJlbD1jb20ucWVtdS5pbnN0YW5jZS51dWlkPTc4MThmN2JiNjgy
-MzRlM2RhZWUzYzE4MjY4OWFjMGRiCm1ha2VbMV06ICoqKiBbZG9ja2VyLXJ1bl0gRXJyb3IgMQpt
-YWtlWzFdOiBMZWF2aW5nIGRpcmVjdG9yeSBgL3Zhci90bXAvcGF0Y2hldy10ZXN0ZXItdG1wLWZn
-dDY2ZDgyL3NyYycKbWFrZTogKioqIFtkb2NrZXItcnVuLXRlc3QtcXVpY2tAY2VudG9zN10gRXJy
-b3IgMgoKcmVhbCAgICAxMm02Ljg0MnMKdXNlciAgICAwbTUuOTE4cwoKClRoZSBmdWxsIGxvZyBp
-cyBhdmFpbGFibGUgYXQKaHR0cDovL3BhdGNoZXcub3JnL2xvZ3MvY292ZXIuMTU4MzM2Mjg4OC5n
-aXQuYWxpc3RhaXIuZnJhbmNpc0B3ZGMuY29tL3Rlc3RpbmcuZG9ja2VyLXF1aWNrQGNlbnRvczcv
-P3R5cGU9bWVzc2FnZS4KLS0tCkVtYWlsIGdlbmVyYXRlZCBhdXRvbWF0aWNhbGx5IGJ5IFBhdGNo
-ZXcgW2h0dHBzOi8vcGF0Y2hldy5vcmcvXS4KUGxlYXNlIHNlbmQgeW91ciBmZWVkYmFjayB0byBw
-YXRjaGV3LWRldmVsQHJlZGhhdC5jb20=
+On Wed, Mar 4, 2020 at 6:10 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+>
+> On Wed, Mar 4, 2020 at 9:37 AM Alistair Francis
+> <alistair.francis@wdc.com> wrote:
+> >
+> > Split the file into clear machine and SoC sections.
+> >
+>
+> Yep, I found functions in this file are a little bit confusing as well ..
+>
+> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> > ---
+> >  hw/riscv/sifive_u.c | 107 ++++++++++++++++++++++----------------------
+> >  1 file changed, 54 insertions(+), 53 deletions(-)
+> >
+> > diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+> > index 156a003642..9a0145b5b4 100644
+> > --- a/hw/riscv/sifive_u.c
+> > +++ b/hw/riscv/sifive_u.c
+> > @@ -399,6 +399,60 @@ static void riscv_sifive_u_init(MachineState *machine)
+>
+> So while we are here, could we rename this to something like:
+> sifive_u_machine_init()? ie: drop the riscv_ prefix.
+>
+> >                            &address_space_memory);
+> >  }
+> >
+> > +static bool sifive_u_get_start_in_flash(Object *obj, Error **errp)
+>
+> and sifive_u_machine_get_start_in_flash()? and other functions too?
+>
+> > +{
+> > +    SiFiveUState *s = RISCV_U_MACHINE(obj);
+> > +
+> > +    return s->start_in_flash;
+> > +}
+> > +
+> > +static void sifive_u_set_start_in_flash(Object *obj, bool value, Error **errp)
+> > +{
+> > +    SiFiveUState *s = RISCV_U_MACHINE(obj);
+> > +
+> > +    s->start_in_flash = value;
+> > +}
+> > +
+> > +static void riscv_sifive_u_machine_instance_init(Object *obj)
+> > +{
+> > +    SiFiveUState *s = RISCV_U_MACHINE(obj);
+> > +
+> > +    s->start_in_flash = false;
+> > +    object_property_add_bool(obj, "start-in-flash", sifive_u_get_start_in_flash,
+> > +                             sifive_u_set_start_in_flash, NULL);
+> > +    object_property_set_description(obj, "start-in-flash",
+> > +                                    "Set on to tell QEMU's ROM to jump to " \
+> > +                                    "flash. Otherwise QEMU will jump to DRAM",
+> > +                                    NULL);
+> > +}
+> > +
+> > +
+> > +static void riscv_sifive_u_machine_class_init(ObjectClass *oc, void *data)
+> > +{
+> > +    MachineClass *mc = MACHINE_CLASS(oc);
+> > +
+> > +    mc->desc = "RISC-V Board compatible with SiFive U SDK";
+> > +    mc->init = riscv_sifive_u_init;
+> > +    mc->max_cpus = SIFIVE_U_MANAGEMENT_CPU_COUNT + SIFIVE_U_COMPUTE_CPU_COUNT;
+> > +    mc->min_cpus = SIFIVE_U_MANAGEMENT_CPU_COUNT + 1;
+> > +    mc->default_cpus = mc->min_cpus;
+> > +}
+> > +
+> > +static const TypeInfo riscv_sifive_u_machine_typeinfo = {
+> > +    .name       = MACHINE_TYPE_NAME("sifive_u"),
+> > +    .parent     = TYPE_MACHINE,
+> > +    .class_init = riscv_sifive_u_machine_class_init,
+> > +    .instance_init = riscv_sifive_u_machine_instance_init,
+> > +    .instance_size = sizeof(SiFiveUState),
+> > +};
+> > +
+> > +static void riscv_sifive_u_machine_init_register_types(void)
+> > +{
+> > +    type_register_static(&riscv_sifive_u_machine_typeinfo);
+> > +}
+> > +
+> > +type_init(riscv_sifive_u_machine_init_register_types)
+> > +
+> >  static void riscv_sifive_u_soc_init(Object *obj)
+>
+> Similarly this can be renamed to: sifive_u_soc_init(), and other soc functions.
+
+I missed this in v2, fixed in the next version.
+
+Alistair
+
+>
+> >  {
+> >      MachineState *ms = MACHINE(qdev_get_machine());
+> > @@ -439,33 +493,6 @@ static void riscv_sifive_u_soc_init(Object *obj)
+> >                            TYPE_CADENCE_GEM);
+> >  }
+> >
+> > -static bool sifive_u_get_start_in_flash(Object *obj, Error **errp)
+> > -{
+> > -    SiFiveUState *s = RISCV_U_MACHINE(obj);
+> > -
+> > -    return s->start_in_flash;
+> > -}
+> > -
+> > -static void sifive_u_set_start_in_flash(Object *obj, bool value, Error **errp)
+> > -{
+> > -    SiFiveUState *s = RISCV_U_MACHINE(obj);
+> > -
+> > -    s->start_in_flash = value;
+> > -}
+> > -
+> > -static void riscv_sifive_u_machine_instance_init(Object *obj)
+> > -{
+> > -    SiFiveUState *s = RISCV_U_MACHINE(obj);
+> > -
+> > -    s->start_in_flash = false;
+> > -    object_property_add_bool(obj, "start-in-flash", sifive_u_get_start_in_flash,
+> > -                             sifive_u_set_start_in_flash, NULL);
+> > -    object_property_set_description(obj, "start-in-flash",
+> > -                                    "Set on to tell QEMU's ROM to jump to " \
+> > -                                    "flash. Otherwise QEMU will jump to DRAM",
+> > -                                    NULL);
+> > -}
+> > -
+> >  static void riscv_sifive_u_soc_realize(DeviceState *dev, Error **errp)
+> >  {
+> >      MachineState *ms = MACHINE(qdev_get_machine());
+> > @@ -603,29 +630,3 @@ static void riscv_sifive_u_soc_register_types(void)
+> >  }
+> >
+> >  type_init(riscv_sifive_u_soc_register_types)
+> > -
+> > -static void riscv_sifive_u_machine_class_init(ObjectClass *oc, void *data)
+> > -{
+> > -    MachineClass *mc = MACHINE_CLASS(oc);
+> > -
+> > -    mc->desc = "RISC-V Board compatible with SiFive U SDK";
+> > -    mc->init = riscv_sifive_u_init;
+> > -    mc->max_cpus = SIFIVE_U_MANAGEMENT_CPU_COUNT + SIFIVE_U_COMPUTE_CPU_COUNT;
+> > -    mc->min_cpus = SIFIVE_U_MANAGEMENT_CPU_COUNT + 1;
+> > -    mc->default_cpus = mc->min_cpus;
+> > -}
+> > -
+> > -static const TypeInfo riscv_sifive_u_machine_typeinfo = {
+> > -    .name       = MACHINE_TYPE_NAME("sifive_u"),
+> > -    .parent     = TYPE_MACHINE,
+> > -    .class_init = riscv_sifive_u_machine_class_init,
+> > -    .instance_init = riscv_sifive_u_machine_instance_init,
+> > -    .instance_size = sizeof(SiFiveUState),
+> > -};
+> > -
+> > -static void riscv_sifive_u_machine_init_register_types(void)
+> > -{
+> > -    type_register_static(&riscv_sifive_u_machine_typeinfo);
+> > -}
+> > -
+> > -type_init(riscv_sifive_u_machine_init_register_types)
+> > --
+>
+> Regards,
+> Bin
 
