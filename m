@@ -1,61 +1,71 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1j9VJW-0004xr-Tw
-	for mharc-qemu-riscv@gnu.org; Wed, 04 Mar 2020 09:47:58 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:33349)
+	id 1j9Xui-0005q6-Ta
+	for mharc-qemu-riscv@gnu.org; Wed, 04 Mar 2020 12:34:32 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:46082)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <bmeng.cn@gmail.com>) id 1j9VJU-0004xj-8m
- for qemu-riscv@nongnu.org; Wed, 04 Mar 2020 09:47:57 -0500
+ (envelope-from <richard.henderson@linaro.org>) id 1j9Xug-0005pT-Bh
+ for qemu-riscv@nongnu.org; Wed, 04 Mar 2020 12:34:31 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <bmeng.cn@gmail.com>) id 1j9VJS-0001rk-S6
- for qemu-riscv@nongnu.org; Wed, 04 Mar 2020 09:47:56 -0500
-Received: from mail-yw1-xc42.google.com ([2607:f8b0:4864:20::c42]:44726)
+ (envelope-from <richard.henderson@linaro.org>) id 1j9Xuf-0004XZ-6m
+ for qemu-riscv@nongnu.org; Wed, 04 Mar 2020 12:34:30 -0500
+Received: from mail-pf1-x442.google.com ([2607:f8b0:4864:20::442]:34732)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
- id 1j9VJQ-0001qU-8V; Wed, 04 Mar 2020 09:47:52 -0500
-Received: by mail-yw1-xc42.google.com with SMTP id t141so2132164ywc.11;
- Wed, 04 Mar 2020 06:47:52 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=UqTXvx15Lr8wC+ArYXC7z7AhIfLiJOUI7u30NjxzlTI=;
- b=fNvPp2RYVnMM5gR9D+rqUznop0FIPUTvJeQFMQyKn0flWcKPQRmdAODpHkfqjUObqv
- remqKUPA/QwlNOtBBVp7gejH/On9VbjjcZIrrY0r0snqz8Ru5ox4kwuf9fDVa+Lcqaav
- rfFmIRdHpwzuvaqg39Ob/dSikBn+0IsiLbcjzgseivIoWxpTyNMAmiI4qOgrXVLq7CWt
- zgXhXHBtMXITses4OR6576BMydf+edOh44eTuvZ3WT52SsmjITztTIzvVzpsU1cVsRUQ
- jx/tk7RfRou1QCtZfyeDHpGm90n0U5mJ1ZXaKm9Ax1gBUaSg2AyD094IAJabjlxMSHYs
- 2NzA==
+ (Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
+ id 1j9Xue-0004WQ-Vh
+ for qemu-riscv@nongnu.org; Wed, 04 Mar 2020 12:34:29 -0500
+Received: by mail-pf1-x442.google.com with SMTP id y21so1310888pfp.1
+ for <qemu-riscv@nongnu.org>; Wed, 04 Mar 2020 09:34:28 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=za/Wo9N/jLaPQ/i3K7miQ5U2TNh+nuxKLY4yG49MZ0E=;
+ b=FXcoas8acAdwejFixBWSQ4QuSL+za/yxYBmlx07SYUxQkqJhMFgWrEkmoIF9GoWDm8
+ +AMVqhMIcUUPSWPJlIcv+RVfU3pW7T6+teoQEq9YXiQgyvcOJWuh7fAdakONGqKnKugK
+ 6c5+oKqvdVjd481u4weqFHjy/MXP5DxkOnx6QrUsdzFSeM8fD7/vyu+YJrzX0md9RXCS
+ fmGngC6TaHQ6GCCVKVuDBFy1q16SUzpOujd014obGwAPRQ9y/mWWJZIY5detjUEt1LiY
+ zClBEneMjFIpjkLwXQXxmwTbgczcVe1EOpy3iam+osKWnb5QovcBHE/DBmDLohLgX4Nj
+ 6TYg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=UqTXvx15Lr8wC+ArYXC7z7AhIfLiJOUI7u30NjxzlTI=;
- b=avCz9gvh4mxlheWTGhXZQx5pT7i/24mVjd2Hd90VkDDF1oVmaP8MEOMs7PFqJ9fBYB
- fl6oebdhoSho/jKBBPdpm0i1N000yFY8sesEHW8C/9DraUUIeeY1AwlblAkCbyRMlO09
- lYQzELgS5NmlB2lBJiDXWCaG5uqLDBs9D0i6I1NzafCyP/Z3VF+Df1P7e8R+0LtxFayf
- E1huoboLKENH0+YtzZ8pGviw2Njms8hN4EPjVF3Icmt52o6CpSh0XNi808bsg2ZULqcM
- S6AhruRkqNDS7GiR5wwJ6wff5/hyFXeYjp8ZMXp+xlKaVBnGi60zmrl/2xSVCzaAPlYa
- qOMA==
-X-Gm-Message-State: ANhLgQ27qMQh598wHTp7fPeG6KToiouWnRVG2K26gOBInpaJQ1om/cJd
- FSgFETgki7gjebU/CLQRripajV4tSLOD14fROZo=
-X-Google-Smtp-Source: ADFU+vseRePhNHXlMhWgWCiw4aOCYVSm5kYvGeZARZP5WFrfw7ZVj1Dydm44ixxzKVogxR+qB/tElBV10X5GO/YqEiI=
-X-Received: by 2002:a81:4f8d:: with SMTP id d135mr3220982ywb.257.1583333271530; 
- Wed, 04 Mar 2020 06:47:51 -0800 (PST)
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=za/Wo9N/jLaPQ/i3K7miQ5U2TNh+nuxKLY4yG49MZ0E=;
+ b=sEQ8J2h7PeMW/4O8BYjrUgNenejl19LcCsFOz0KaE2ILTIinFlh+L1HoooX9CP9BYx
+ qPfYWpwo+uKHXgGgUCUtlouyJrgku8rt7szBiAVfWt4WgMl0FOwFN5Lvh/rwR/XoxmVN
+ dKgLphujQ2USpndWJOX8EbkgxW9KFxWOUPismSb+BgLmSDuZR+xvaGPfmK6IoqnZCKbn
+ dKG80q7nrM0ucZDEBrtAc5ycPaY8dFh35nLsN4MULElKzaVVY01uypis6uW8tGHRHzBO
+ HdwbzVbFxu1GvEr/1ikwakR1oXIIjhaJbbe0syrRDg3hCRe+7xm5gOsy+3n21UVRQUod
+ BTWA==
+X-Gm-Message-State: ANhLgQ39Xfvvb2Fe0eKiPWHdF2Io7pptnrGlTJwKrcJodsA7gNAzYTrd
+ YsRXuKFFyZDLwLK3xTnfelcDoA==
+X-Google-Smtp-Source: ADFU+vsbhSvt6IAi4dJv+ukreb87qZOfKYywvpzROKQeKONLkdI9z932NABuHUm8wNZKYMTZnsfj+w==
+X-Received: by 2002:aa7:99c5:: with SMTP id v5mr4117236pfi.198.1583343267581; 
+ Wed, 04 Mar 2020 09:34:27 -0800 (PST)
+Received: from [192.168.1.11] (97-126-123-70.tukw.qwest.net. [97.126.123.70])
+ by smtp.gmail.com with ESMTPSA id
+ 19sm7101805pfn.30.2020.03.04.09.34.26
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 04 Mar 2020 09:34:26 -0800 (PST)
+Subject: Re: [PATCH v1 1/1] target/riscv: Don't set write permissions on dirty
+ PTEs
+To: Alistair Francis <alistair.francis@wdc.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: palmer@dabbelt.com, alistair23@gmail.com
+References: <c827880a47774cd3a6bcd59b79657f380da11d5d.1583284602.git.alistair.francis@wdc.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+Message-ID: <e8498727-03f8-7e04-efd3-c04763dcbfac@linaro.org>
+Date: Wed, 4 Mar 2020 09:34:24 -0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.4.1
 MIME-Version: 1.0
-References: <cover.1583285287.git.alistair.francis@wdc.com>
- <e91f9fccc49a42482d964f380b2ae085de5bfab2.1583285287.git.alistair.francis@wdc.com>
-In-Reply-To: <e91f9fccc49a42482d964f380b2ae085de5bfab2.1583285287.git.alistair.francis@wdc.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Wed, 4 Mar 2020 22:47:38 +0800
-Message-ID: <CAEUhbmWFPVOZ6Sxjd+VUENqyPxCe89QYKWP-nKSkH3Co-=FYbg@mail.gmail.com>
-Subject: Re: [PATCH v1 2/3] riscv/sifive_u: Add a serial property to the
- sifive_u SoC
-To: Alistair Francis <alistair.francis@wdc.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>, Alistair Francis <alistair23@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+In-Reply-To: <c827880a47774cd3a6bcd59b79657f380da11d5d.1583284602.git.alistair.francis@wdc.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::c42
+X-Received-From: 2607:f8b0:4864:20::442
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -67,129 +77,45 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Mar 2020 14:47:57 -0000
+X-List-Received-Date: Wed, 04 Mar 2020 17:34:31 -0000
 
-Hi Alistair,
+On 3/3/20 5:16 PM, Alistair Francis wrote:
+> The RISC-V spec specifies that when a write happens and the D bit is
+> clear the implementation will set the bit in the PTE. It does not
+> describe that the PTE being dirty means that we should provide write
+> access. This patch removes the write access granted to pages when the
+> dirty bit is set.
 
-On Wed, Mar 4, 2020 at 9:37 AM Alistair Francis
-<alistair.francis@wdc.com> wrote:
->
-> At present the board serial number is hard-coded to 1, and passed
-> to OTP model during initialization. Firmware (FSBL, U-Boot) uses
-> the serial number to generate a unique MAC address for the on-chip
-> ethernet controller. When multiple QEMU 'sifive_u' instances are
-> created and connected to the same subnet, they all have the same
-> MAC address hence it creates a unusable network.
->
-> A new "serial" property is introduced to the sifive_u SoC to specify
-> the board serial number. When not given, the default serial number
-> 1 is used.
->
-> Suggested-by: Bin Meng <bmeng.cn@gmail.com>
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> ---
->  hw/riscv/sifive_u.c         | 8 +++++++-
->  include/hw/riscv/sifive_u.h | 2 ++
->  2 files changed, 9 insertions(+), 1 deletion(-)
->
-> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-> index 9a0145b5b4..e52f9d0bd4 100644
-> --- a/hw/riscv/sifive_u.c
-> +++ b/hw/riscv/sifive_u.c
-> @@ -488,7 +488,7 @@ static void riscv_sifive_u_soc_init(Object *obj)
->                            TYPE_SIFIVE_U_PRCI);
->      sysbus_init_child_obj(obj, "otp", &s->otp, sizeof(s->otp),
->                            TYPE_SIFIVE_U_OTP);
-> -    qdev_prop_set_uint32(DEVICE(&s->otp), "serial", OTP_SERIAL);
-> +    qdev_prop_set_uint32(DEVICE(&s->otp), "serial", s->serial);
->      sysbus_init_child_obj(obj, "gem", &s->gem, sizeof(s->gem),
->                            TYPE_CADENCE_GEM);
->  }
-> @@ -607,10 +607,16 @@ static void riscv_sifive_u_soc_realize(DeviceState *dev, Error **errp)
->          memmap[SIFIVE_U_GEM_MGMT].base, memmap[SIFIVE_U_GEM_MGMT].size);
->  }
->
-> +static Property riscv_sifive_u_soc_props[] = {
-> +    DEFINE_PROP_UINT32("serial", SiFiveUSoCState, serial, OTP_SERIAL),
-> +    DEFINE_PROP_END_OF_LIST()
+The W bit by itself says we should provide write access.
 
-I am not sure how adding another level of property in the SoC could
-solve the 'make check' error.
+It is an implementation detail that we *withhold* write access when D is clear
+(etc) so that we can trap, so that we can properly set D in the future.
 
-> +};
-> +
->  static void riscv_sifive_u_soc_class_init(ObjectClass *oc, void *data)
->  {
->      DeviceClass *dc = DEVICE_CLASS(oc);
->
-> +    device_class_set_props(dc, riscv_sifive_u_soc_props);
->      dc->realize = riscv_sifive_u_soc_realize;
->      /* Reason: Uses serial_hds in realize function, thus can't be used twice */
->      dc->user_creatable = false;
-> diff --git a/include/hw/riscv/sifive_u.h b/include/hw/riscv/sifive_u.h
-> index 82667b5746..a2baa1de5f 100644
-> --- a/include/hw/riscv/sifive_u.h
-> +++ b/include/hw/riscv/sifive_u.h
-> @@ -42,6 +42,8 @@ typedef struct SiFiveUSoCState {
->      SiFiveUPRCIState prci;
->      SiFiveUOTPState otp;
->      CadenceGEMState gem;
-> +
-> +    uint32_t serial;
->  } SiFiveUSoCState;
->
->  #define TYPE_RISCV_U_MACHINE MACHINE_TYPE_NAME("sifive_u")
-> --
+The page table walk associated with a read is allowed to cache all of the
+information it finds in the PTE during that walk.  Which includes the D bit.
+If D is set, then we do not need to set it in future, so we do not need to
+trap, so we can immediately honor the W bit.
 
-But anyway this patch does not actually work as expected. See below:
+If the guest changes R/W/X within a PTE (e.g. for mprotect), it is obvious that
+a TLB flush for that page must be done.  It is no different if the guest
+changes A/D (e.g. for swapping).
 
-$ ./riscv64-softmmu/qemu-system-riscv64 -M sifive_u,serial=3
--nographic -m 2G -bios opensbi_u-boot_sifive_u_64.bin
+> Setting write permission on dirty PTEs results in userspace inside a
+> Hypervisor guest (VU) becoming corrupted. This appears to be because it
+> ends up with write permission in the second stage translation in cases
+> where we aren't doing a store.
 
-OpenSBI v0.5 (Oct 31 2019 18:38:50)
-   ____                    _____ ____ _____
-  / __ \                  / ____|  _ \_   _|
- | |  | |_ __   ___ _ __ | (___ | |_) || |
- | |  | | '_ \ / _ \ '_ \ \___ \|  _ < | |
- | |__| | |_) |  __/ | | |____) | |_) || |_
-  \____/| .__/ \___|_| |_|_____/|____/_____|
-        | |
-        |_|
+You've not really given any more information than last time this patch came around.
 
-Platform Name          : SiFive Freedom U540
-Platform HART Features : RV64ACDFIMSU
-Platform Max HARTs     : 5
-Current Hart           : 1
-Firmware Base          : 0x80000000
-Firmware Size          : 96 KB
-Runtime SBI Version    : 0.2
+I still think this must be a guest (or nested guest) bug related to clearing
+PTE bits and failing to flush the TLB properly.
 
-PMP0: 0x0000000080000000-0x000000008001ffff (A)
-PMP1: 0x0000000000000000-0xffffffffffffffff (A,R,W,X)
+I don't see how it could be a qemu tlb flushing bug.  The only primitive,
+sfence.vma, is quite heavy-handed and explicitly local to the thread.
+
+It may be a bug in qemu's implementation of second stage paging.  Which is not
+yet upstream, and I haven't gone digging in the archives to find the patch.
 
 
-U-Boot 2019.10 (Oct 31 2019 - 18:38:33 +0800)
-
-CPU:   rv64imafdcsu
-Model: SiFive HiFive Unleashed A00
-DRAM:  2 GiB
-MMC:
-In:    serial@10010000
-Out:   serial@10010000
-Err:   serial@10010000
-Net:
-Warning: ethernet@10090000 MAC addresses don't match:
-Address in ROM is          52:54:00:12:34:56
-Address in environment is  70:b3:d5:92:f0:01
-eth0: ethernet@10090000
-Hit any key to stop autoboot:  0
-
-
-See this line:
-Address in environment is  70:b3:d5:92:f0:01
-
-It should be: 70:b3:d5:92:f0:03 since I specified serial number as 3.
-
-Regards,
-Bin
+r~
 
