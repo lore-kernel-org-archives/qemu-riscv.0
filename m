@@ -1,65 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1j9tko-0007mW-Do
-	for mharc-qemu-riscv@gnu.org; Thu, 05 Mar 2020 11:53:46 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:35054)
+	id 1j9tlb-0000rI-7J
+	for mharc-qemu-riscv@gnu.org; Thu, 05 Mar 2020 11:54:35 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:35434)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <alistair23@gmail.com>) id 1j9tkg-0007Xi-2W
- for qemu-riscv@nongnu.org; Thu, 05 Mar 2020 11:53:39 -0500
+ (envelope-from <alistair23@gmail.com>) id 1j9tlX-0000jT-Im
+ for qemu-riscv@nongnu.org; Thu, 05 Mar 2020 11:54:33 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1j9tke-00007B-Sx
- for qemu-riscv@nongnu.org; Thu, 05 Mar 2020 11:53:37 -0500
-Received: from mail-ua1-x944.google.com ([2607:f8b0:4864:20::944]:45785)
+ (envelope-from <alistair23@gmail.com>) id 1j9tlW-0000l1-Af
+ for qemu-riscv@nongnu.org; Thu, 05 Mar 2020 11:54:31 -0500
+Received: from mail-vk1-xa42.google.com ([2607:f8b0:4864:20::a42]:43861)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1j9tkc-00004s-9H; Thu, 05 Mar 2020 11:53:34 -0500
-Received: by mail-ua1-x944.google.com with SMTP id q17so2307040uao.12;
- Thu, 05 Mar 2020 08:53:34 -0800 (PST)
+ id 1j9tlW-0000kj-6f; Thu, 05 Mar 2020 11:54:30 -0500
+Received: by mail-vk1-xa42.google.com with SMTP id o2so1792280vka.10;
+ Thu, 05 Mar 2020 08:54:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=eUvnCZxBFuUjpGEIJEZ+urciDIEcL24tEwB1z/oDl8M=;
- b=cBw7AzmBg+crvWZE/eR9DdR/cfkLf96R151DyU8ftwWR5hGtryLmlwkB/yZYpsZB16
- N9EcXKR4Myv8eAh2h62UNSjU+9hQqj2ZYy7JSvS4eUqTQDR7sHDfHEX6Y4VoSEU+Fvct
- czQNHtsuf+ts9H5Oj/5AhYUZIJ+Mo2BXkarFjv0FYaBkC0MJimSXIAtPhjPKD444Gr/U
- pUkK7NLgW+TLO/q42dVovIU2dSIiOhOz5W08MNHMapfZYCj1Yv+CHVDTQFk1vHePK65z
- H1wrlC99Tl+to79Ih0SeYqCI3dwCqDifzIIumh0SNXK/UV5d0J5UUQkK5cEg2qq728tL
- N5JQ==
+ :cc; bh=BavO3QYE17WJtn7dKZJxqCSrHa4W4PO4dngsSU3YGOA=;
+ b=LeJFAvRpBeekw+8Sxk1Yc9EVHMPZbVEKdm1d5rKLLgzsBzeHYE4l6htJrRqwoGehEs
+ qq8+Lxp0pvaJOgpeoUaIezyszE//fG9YkzifIjr6g7aCWyjcdwdd8ybVipCVCWWbemSq
+ 3rRbYI93pOSz5ZI2EwZhk33SBr4zkT4w6KckOLNaWzqM2Ba/O33MeDI9cBMThngy9KIT
+ Sg3297ldmdxofsHvcfoY/gJV6NdSstw2pSvGICIn0vgO9a+6C/Jbm5SmqxpE/OE/xi4m
+ Gw7XzPktyqdmvL9NEMtrsNyM9CHCrgNBG+o251dutgWpEcTVN4rJMgo3TOZdNZ7YRt0D
+ FPNQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=eUvnCZxBFuUjpGEIJEZ+urciDIEcL24tEwB1z/oDl8M=;
- b=T7A+bOas8GNP88Ha8Dq9xKR37xK3KGTlXrg/caFFNkSVRFNzNiFlb8IEBu0Wbt60i3
- 0GQSszh451UJrdUIvj9MIZggFtf0iglXcR6EfyNu4d//NJVF0mYjhm1XeMq3F1oD26me
- /JbuG/QOEuIM2UDOkkvl8OA17g1uuQ/HO3CsX3osMhYuuFlM3y6YkzJ0h0LETjXyzKvg
- 59KEa0+ZmUv6Ug25dvph2JvX5nDvHiUvdl5U977cPi1LXGdUmvkMGTwoaJQ6sq+ok1o+
- vvg3xUuURYZ1vY/WhU5/Kg9X6GDR2lgonZSdfJ3pNc/nlZrHyxP59/9ZACsNajXJgOTm
- PtCg==
-X-Gm-Message-State: ANhLgQ2+PqpEsxobiDskKJu1w+x2KHQncPM2r3mSvHYxC32L2H2BIEql
- Lar9PD5CW7RC7eWvXmcV5QktxBAOnZMvL/cy2P4=
-X-Google-Smtp-Source: ADFU+vvHkX2m0BWsdgosgikNkyE48PhsUCC3neHXDQxaOGAl+X5zHoCJnMv+lsU3bW6jhWTZOOS00Jgi5/+CDXkbJwQ=
-X-Received: by 2002:ab0:2302:: with SMTP id a2mr5149747uao.21.1583427213440;
- Thu, 05 Mar 2020 08:53:33 -0800 (PST)
+ bh=BavO3QYE17WJtn7dKZJxqCSrHa4W4PO4dngsSU3YGOA=;
+ b=o8aYDXOaFXZN4BmYwfdTDxMNQ7XF7573F5ZRiQXGhzV+pzN3wSzoFRpIgmGjUHxKyB
+ CrEP5A6wPWq0q2PJPnj3XV0iZoCT7pcQAIAuZx6DmaM7egDbZDronVzUEacpMSzkUleF
+ RTCniicg4ap1fVHEBa3Qwv2xLCCExy9MWEmLImDoAcd/I8KyINxlv1gaOl7EU+7gd1cu
+ PyRjlEmNho0RWMb9OSyzpTgkVriGk8FVZoLUr1Jr94vUoE17a/rj3XAdePahxIuERiyt
+ DZ5tJkNBG1HDwYqD3DTLX69kdTbkq2J2XkEXYXxhOV2Fx/fBHoD/GF8VY4Y5ZWXNHKol
+ JgTQ==
+X-Gm-Message-State: ANhLgQ01aVQ4CU4JtNebBcyujIs+PkULR6wyfQiqE1SaI/nqApT1R/D3
+ 0rwCGeGjqu2v48p0NL7fRXHePCcconDHYi6aPOw=
+X-Google-Smtp-Source: ADFU+vv/1IwDhGNAtivVyHztV3wmZ6LrKlPauK+nP3aSzZaHHrUsnde+L3B/L6LN2q2vkGHAVX0ocsmmTToqblO1CYg=
+X-Received: by 2002:a1f:1f50:: with SMTP id f77mr5359112vkf.37.1583427269502; 
+ Thu, 05 Mar 2020 08:54:29 -0800 (PST)
 MIME-Version: 1.0
-References: <cover.1583285287.git.alistair.francis@wdc.com>
- <e91f9fccc49a42482d964f380b2ae085de5bfab2.1583285287.git.alistair.francis@wdc.com>
- <CAEUhbmWFPVOZ6Sxjd+VUENqyPxCe89QYKWP-nKSkH3Co-=FYbg@mail.gmail.com>
- <CAKmqyKNrG4Uh_WKwEfiX=HpFoFiforzjKxnY+dZmBQBdKfZceg@mail.gmail.com>
- <CAEUhbmXTzjukKbaXqS+ivxtxbu+tcVFDCg1hcSw5roQjJhx9og@mail.gmail.com>
-In-Reply-To: <CAEUhbmXTzjukKbaXqS+ivxtxbu+tcVFDCg1hcSw5roQjJhx9og@mail.gmail.com>
+References: <20200303004848.136788-1-palmerdabbelt@google.com>
+ <20200303004848.136788-5-palmerdabbelt@google.com>
+ <CAFEAcA9gHNXfGutEZiW-PYJbhdUZEd-dPDp8iwO-Ni_cSD9gZw@mail.gmail.com>
+In-Reply-To: <CAFEAcA9gHNXfGutEZiW-PYJbhdUZEd-dPDp8iwO-Ni_cSD9gZw@mail.gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 5 Mar 2020 08:45:51 -0800
-Message-ID: <CAKmqyKMLcKKGbA3gJGDMgw77vWNdsU_GhkqC+m9OsN5tBFv0OQ@mail.gmail.com>
-Subject: Re: [PATCH v1 2/3] riscv/sifive_u: Add a serial property to the
- sifive_u SoC
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Alistair Francis <alistair.francis@wdc.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>
+Date: Thu, 5 Mar 2020 08:46:47 -0800
+Message-ID: <CAKmqyKOrw_sP=8E=DbpPJPs_5zgBq6df8O1FYD9vwq4DfLLwzw@mail.gmail.com>
+Subject: Re: [PULL 04/38] target/riscv: Add support for the new execption
+ numbers
+To: Peter Maydell <peter.maydell@linaro.org>
+Cc: Palmer Dabbelt <palmerdabbelt@google.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ QEMU Developers <qemu-devel@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::944
+X-Received-From: 2607:f8b0:4864:20::a42
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -71,83 +69,62 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Mar 2020 16:53:39 -0000
+X-List-Received-Date: Thu, 05 Mar 2020 16:54:33 -0000
 
-On Thu, Mar 5, 2020 at 1:31 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+On Thu, Mar 5, 2020 at 8:52 AM Peter Maydell <peter.maydell@linaro.org> wrote:
 >
-> Hi Alistair,
+> On Tue, 3 Mar 2020 at 00:49, Palmer Dabbelt <palmerdabbelt@google.com> wrote:
+> >
+> > From: Alistair Francis <alistair.francis@wdc.com>
+> >
+> > The v0.5 Hypervisor spec add new execption numbers, let's add support
+> > for those.
+> >
+> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> > Reviewed-by: Palmer Dabbelt <palmerdabbelt@google.com>
+> > Signed-off-by: Palmer Dabbelt <palmerdabbelt@google.com>
+> > ---
+> >  target/riscv/cpu.c        |  8 ++++++++
+> >  target/riscv/cpu_bits.h   | 35 +++++++++++++++++++----------------
+> >  target/riscv/cpu_helper.c |  7 +++++--
+> >  target/riscv/csr.c        |  7 +++++--
+> >  4 files changed, 37 insertions(+), 20 deletions(-)
+> >
+> > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> > index efbd676edb..2f62f5ea19 100644
+> > --- a/target/riscv/cpu.c
+> > +++ b/target/riscv/cpu.c
+> > @@ -67,6 +67,14 @@ const char * const riscv_excp_names[] = {
+> >      "load_page_fault",
+> >      "reserved",
+> >      "store_page_fault"
+> > +    "reserved",
 >
-> On Thu, Mar 5, 2020 at 7:13 AM Alistair Francis <alistair23@gmail.com> wrote:
-> >
-> > On Wed, Mar 4, 2020 at 6:47 AM Bin Meng <bmeng.cn@gmail.com> wrote:
-> > >
-> > > Hi Alistair,
-> > >
-> > > On Wed, Mar 4, 2020 at 9:37 AM Alistair Francis
-> > > <alistair.francis@wdc.com> wrote:
-> > > >
-> > > > At present the board serial number is hard-coded to 1, and passed
-> > > > to OTP model during initialization. Firmware (FSBL, U-Boot) uses
-> > > > the serial number to generate a unique MAC address for the on-chip
-> > > > ethernet controller. When multiple QEMU 'sifive_u' instances are
-> > > > created and connected to the same subnet, they all have the same
-> > > > MAC address hence it creates a unusable network.
-> > > >
-> > > > A new "serial" property is introduced to the sifive_u SoC to specify
-> > > > the board serial number. When not given, the default serial number
-> > > > 1 is used.
-> > > >
-> > > > Suggested-by: Bin Meng <bmeng.cn@gmail.com>
-> > > > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> > > > ---
-> > > >  hw/riscv/sifive_u.c         | 8 +++++++-
-> > > >  include/hw/riscv/sifive_u.h | 2 ++
-> > > >  2 files changed, 9 insertions(+), 1 deletion(-)
-> > > >
-> > > > diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-> > > > index 9a0145b5b4..e52f9d0bd4 100644
-> > > > --- a/hw/riscv/sifive_u.c
-> > > > +++ b/hw/riscv/sifive_u.c
-> > > > @@ -488,7 +488,7 @@ static void riscv_sifive_u_soc_init(Object *obj)
-> > > >                            TYPE_SIFIVE_U_PRCI);
-> > > >      sysbus_init_child_obj(obj, "otp", &s->otp, sizeof(s->otp),
-> > > >                            TYPE_SIFIVE_U_OTP);
-> > > > -    qdev_prop_set_uint32(DEVICE(&s->otp), "serial", OTP_SERIAL);
-> > > > +    qdev_prop_set_uint32(DEVICE(&s->otp), "serial", s->serial);
-> > > >      sysbus_init_child_obj(obj, "gem", &s->gem, sizeof(s->gem),
-> > > >                            TYPE_CADENCE_GEM);
-> > > >  }
-> > > > @@ -607,10 +607,16 @@ static void riscv_sifive_u_soc_realize(DeviceState *dev, Error **errp)
-> > > >          memmap[SIFIVE_U_GEM_MGMT].base, memmap[SIFIVE_U_GEM_MGMT].size);
-> > > >  }
-> > > >
-> > > > +static Property riscv_sifive_u_soc_props[] = {
-> > > > +    DEFINE_PROP_UINT32("serial", SiFiveUSoCState, serial, OTP_SERIAL),
-> > > > +    DEFINE_PROP_END_OF_LIST()
-> > >
-> > > I am not sure how adding another level of property in the SoC could
-> > > solve the 'make check' error.
-> >
-> > The problem is that you were adding a machine property and then you
-> > had the SoC reach up to the machine object to get the serial value.
-> > This isn't correct and is why the tests fail.
-> >
+> Hi; Coverity (CID 1420223) notice that there's no comma
+> after "store_page_fault", which means that there's been
+> a concatenation of that string and the following "reserved".
+> Could one of you send a patch which adds the missing comma?
 >
-> So looks the failure was due to a check in the test codes only? As I
-> did not see QEMU crashed during my normal usage.
+> > +    "reserved",
+> > +    "reserved",
+> > +    "reserved",
+> > +    "guest_exec_page_fault",
+> > +    "guest_load_page_fault",
+> > +    "reserved",
+> > +    "guest_store_page_fault"
+>
+> You might also like to add a trailing comma here to avoid
+> the bug happening again in future.
 
-No, the bug was in the actual implementation. You were just lucky that
-you didn't see any issues as in your case you could access the machine
-state. The make check probably added the SoC individually and hence
-caught the bug.
+Thanks for the report Peter, I'll send a patch.
 
 Alistair
 
 >
-> > This patch series instead adds a property to the machine and the SoC,
-> > where the machine sets the SoC property.
+> >  };
 > >
 >
-> Regards,
-> Bin
+> thanks
+> -- PMM
+>
 
