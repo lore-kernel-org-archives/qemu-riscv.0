@@ -1,97 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1j9xUF-00028j-QD
-	for mharc-qemu-riscv@gnu.org; Thu, 05 Mar 2020 15:52:55 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:47591)
+	id 1j9yM3-0000xB-8o
+	for mharc-qemu-riscv@gnu.org; Thu, 05 Mar 2020 16:48:31 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58093)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <laurent@vivier.eu>) id 1j9xUA-00027f-Fy
- for qemu-riscv@nongnu.org; Thu, 05 Mar 2020 15:52:51 -0500
+ (envelope-from <palmer@dabbelt.com>) id 1j9yM0-0000vE-Gr
+ for qemu-riscv@nongnu.org; Thu, 05 Mar 2020 16:48:29 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <laurent@vivier.eu>) id 1j9xU8-0003Hm-RC
- for qemu-riscv@nongnu.org; Thu, 05 Mar 2020 15:52:50 -0500
-Received: from mout.kundenserver.de ([212.227.126.134]:54161)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <laurent@vivier.eu>)
- id 1j9xU2-0003G3-TX; Thu, 05 Mar 2020 15:52:43 -0500
-Received: from [192.168.100.1] ([82.252.135.106]) by mrelayeu.kundenserver.de
- (mreue009 [213.165.67.103]) with ESMTPSA (Nemesis) id
- 1MEmAV-1j81Xy074d-00GFfj; Thu, 05 Mar 2020 21:52:37 +0100
-To: Alistair Francis <alistair.francis@wdc.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org, aleksandar.m.mail@gmail.com
-Cc: palmer@dabbelt.com, alistair23@gmail.com
-References: <cover.1583437651.git.alistair.francis@wdc.com>
- <72e025129270d09c899a48435908d52894587160.1583437651.git.alistair.francis@wdc.com>
-From: Laurent Vivier <laurent@vivier.eu>
-Autocrypt: addr=laurent@vivier.eu; prefer-encrypt=mutual; keydata=
- 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
-Subject: Re: [PATCH v5 1/3] linux-user: Protect more syscalls
-Message-ID: <9a7a1445-aad2-c3be-76eb-858ebd473c3d@vivier.eu>
-Date: Thu, 5 Mar 2020 21:52:34 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.4.1
-MIME-Version: 1.0
-In-Reply-To: <72e025129270d09c899a48435908d52894587160.1583437651.git.alistair.francis@wdc.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: fr
+ (envelope-from <palmer@dabbelt.com>) id 1j9yLy-0000ED-MF
+ for qemu-riscv@nongnu.org; Thu, 05 Mar 2020 16:48:28 -0500
+Received: from mail-pj1-x1042.google.com ([2607:f8b0:4864:20::1042]:54077)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <palmer@dabbelt.com>) id 1j9yLy-0000CO-1l
+ for qemu-riscv@nongnu.org; Thu, 05 Mar 2020 16:48:26 -0500
+Received: by mail-pj1-x1042.google.com with SMTP id cx7so154669pjb.3
+ for <qemu-riscv@nongnu.org>; Thu, 05 Mar 2020 13:48:25 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=dabbelt-com.20150623.gappssmtp.com; s=20150623;
+ h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
+ :content-transfer-encoding;
+ bh=kK7DAQhSovPQIHP7NJRB9OBqnwzxugQmovRNvrNYNqI=;
+ b=VN8EUSIHMPWB15j1ItimJ//QpF9wD1DLE15MmlC8AEGbP2rAWFuNLR8Eb0PL6LJy9g
+ J0R6gR2xmHG2Mrdf5mwcUKry7FQPaDn7eq0zW1n6BSd8yCWI9sL3g8OXJKCRkYkzkXKk
+ zRgV/Ye2UDBG4LAjPS1I8AHVcmi/06UcYljWJtAKkCPcHmnNAZcAgHdgaGgHCDIN40Fd
+ lE2jqp1O3tlXYvNkifiIF5yUP3QHmqKeZOA95PQBo77mfoUXOLir6f71TmdgYEoKWnAf
+ 0GHVpGSmcjHfe8oYFV5rJ0v/H1uj8XPOVJQB/CCPxDgsnDJ09t0fIfXyBBihgL10Xt0l
+ Tmtg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
+ :mime-version:content-transfer-encoding;
+ bh=kK7DAQhSovPQIHP7NJRB9OBqnwzxugQmovRNvrNYNqI=;
+ b=eS+/4RHVDmWoU+Up0pmVTLyFsv6bGdchzOQ8oWR79ZHIehToYiOgXpchKUJlth3Gta
+ LUZKvlxVMXfpoVaGToVGP1qR4de+UrSC492Khxd06IK/ZiK2ReGh4+LxaMYFO4PWATYH
+ DnQPIg30UbANgnLBPv27s+RpPGC6cKtvBbKDOH/KrTKLVjesa6OghEWSPov5mqsjHBZc
+ fa2YepIkW4Tcj61o08DsBVBZgs/+qMOFsNaZ2CQZfhgQ/blwf02NLotI/A9uinaQzmxE
+ 5f95E7EjpOEk5ZPiNnj+Ha8yfPvXKjNqUlyDt4hrSdwXnkJnGsvSPGaoKae/X4WLuDXD
+ JSOA==
+X-Gm-Message-State: ANhLgQ1uCk7i69BbjwuajvVkr683/LtCYwhNbJ6JGgw3j7RtVpKw58tq
+ tAzTl29cHWPnhMsNlQcHiNkCGw==
+X-Google-Smtp-Source: ADFU+vv7aYTWfRw73C18X7VOZMfb+IPxVAwTiz/ZtqRwuno90kZJ32JAUyABbKViyNypUshEEn/k8Q==
+X-Received: by 2002:a17:90a:280a:: with SMTP id
+ e10mr148301pjd.145.1583444904027; 
+ Thu, 05 Mar 2020 13:48:24 -0800 (PST)
+Received: from localhost ([2620:0:1000:2514:23a5:d584:6a92:3e3c])
+ by smtp.gmail.com with ESMTPSA id q12sm32835848pfh.158.2020.03.05.13.48.23
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 05 Mar 2020 13:48:23 -0800 (PST)
+Date: Thu, 05 Mar 2020 13:48:23 -0800 (PST)
+X-Google-Original-Date: Thu, 05 Mar 2020 13:34:29 PST (-0800)
+Subject: Re: [PATCH v1 1/1] target/riscv: Correctly implement TSR trap
+In-Reply-To: <CAKmqyKPGJQMqW7ZbWBYRDUxH_PRRSvUW6tEwBAdW+MTE-RG5+w@mail.gmail.com>
+CC: Alistair Francis <Alistair.Francis@wdc.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+From: Palmer Dabbelt <palmer@dabbelt.com>
+To: alistair23@gmail.com
+Message-ID: <mhng-11dd6ba7-bf5a-4a16-b8d7-e7b887338cf1@palmerdabbelt-glaptop1>
+Mime-Version: 1.0 (MHng)
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Provags-ID: V03:K1:xSWnLePoOW6Tyi5/1xmEft/+Sk/QmHd/oRe+kKsRcX7GEgE8HAu
- 7LjLZPWJ2NQHFs3V7tZAfZgAEoiNlZ7KxeT4kMXj1gSNigZ4yCxc4PxhUS5zmJ5EazWQsce
- V/QWnZykAjVFoq7FzDDiZ+6852VbZDKivk/KYqYSoZQuAkPmW1HUHvdAoI7dFx1IPh2uRON
- wNCWJmpDF82rucmI65Fdg==
-X-UI-Out-Filterresults: notjunk:1;V03:K0:BMbQD2NTv0U=:FbFUOf/UGawMHymy+HEdsG
- Ob5Mjdf8oPgZBcJ+3qxqI1TTftTklVw5fLzOo1bWz5Xl6pm3sTjKnSfxnN+vTEOj4W8rOg7bI
- 9Rc6oqJreNlGnxNq9r/dr2g1gMPW4F6gOkH2mOJ5wLHnKrgg5bBNznMFpGMzj6Gn/YtmKUJAd
- FWQUhoKx+0Rg3WafcdBbzfk43OckYvzId8bq72XmhJuHEcxfXWVUPLkArKyOuMVU4ph1gg5Jn
- 7cg3ghNvRyBcH/exdkP5Yn0gYtd9GmiMSZ+yhU+H8gRq+8DFyyBHsT8pGmWzLsRu2XctWI0GN
- KOpdhTOVVVuOSXzOS1Kfdyx6vfcnlA4SXh7LFldXcOG2jWhcF4yamYsW4317mgWwJcWt8rhLA
- 9AFSHeDVA19XJtxOF2q8K5j7zFJiLIAebs+SaKv5+bo8ygnmyPpsoZFyt5A1lWu3czmMKSCLw
- Z78cyDEK83UBaP28jAYT2eNkNLeCN5ltd3UsgBOZOGPitZ8r7uqeg4ciTmrkfIN3Rw0lLq1Sm
- cyTgiFh8GsonfgPtp9ngsYNq21C+nEHIGiBhDbK0kNZefTSrTU1UfdWHj6WZ3OmC1OYpSdCrt
- ++7GGu7SkG79kllRbACP1E7YwyPvct50HlJ80Lx72DDdKz0NgRU/bj5BBN7MsIRP7ZduYLo7M
- ZRmbc4A7iUA2EoGSSqx8SYoGLhhsWgAZQIx6K4ysfLldWik5iidV1O0GoYM01fQACCOr5HZ/r
- S5OEgjoEkkn2FZ/sf224y+y60CVFreXxk+UlznSCEnZwyqQoD26ikl7SLuJtG9eBeGQQARYlG
- WR+dMjjZTTT0C/m7wL6qEpSBI7v6X4y90dGeJuFSUCIYgNFPdYimElIXI9SiQgC1qX657VE
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
-X-Received-From: 212.227.126.134
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2607:f8b0:4864:20::1042
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -103,30 +72,49 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Mar 2020 20:52:51 -0000
+X-List-Received-Date: Thu, 05 Mar 2020 21:48:30 -0000
 
-Le 05/03/2020 à 20:48, Alistair Francis a écrit :
-> New y2038 safe 32-bit architectures (like RISC-V) don't support old
-> syscalls with a 32-bit time_t. The kernel defines new *_time64 versions
-> of these syscalls. Add some more #ifdefs to syscall.c in linux-user to
-> allow us to compile without these old syscalls.
+On Thu, 20 Feb 2020 10:41:35 PST (-0800), alistair23@gmail.com wrote:
+> On Mon, Jan 20, 2020 at 9:43 PM Alistair Francis
+> <alistair.francis@wdc.com> wrote:
+>>
+>> As reported in: https://bugs.launchpad.net/qemu/+bug/1851939 we weren't
+>> correctly handling illegal instructions based on the value of MSTATUS_TSR
+>> and the current privledge level.
+>>
+>> This patch fixes the issue raised in the bug by raising an illegal
+>> instruction if TSR is set and we are in S-Mode.
+>>
+>> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+>
+> @Palmer Dabbelt  Ping!
 
-You should split this patch it two parts:
-- one to add the needed "#ifdef"
-- one to manage the futex_time64 case
+Sorry, I must have missed this.  It's in the queue (with the reviews as
+collected by patchwork).
 
-For the futex_time64 you need the same work as in PATCH 2: use
-target_to_host_timespec64() with TARGET_NR_futex_time64.
+Thanks!
 
-It's a little bit hacky to alias __NR_sys_futex to __NR_futex_time64,
-and works only if timespec defined on the system is the 64bit version.
-
-A better way to do that would be to define both, __NR_sys_futex and
-__NR_sys_futex_time64 (according to the availability of their defines),
-and then to call safe_futex_time64() and if it fails because of -ENOSYS
-to try safe_futex() (we need to use __kernel_timespec and
-__kernel_old_timespec accordingly).
-
-Thanks,
-Laurent
+>
+> Alistair
+>
+>> ---
+>>  target/riscv/op_helper.c | 2 +-
+>>  1 file changed, 1 insertion(+), 1 deletion(-)
+>>
+>> diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+>> index 331cc36232..eed8eea6f2 100644
+>> --- a/target/riscv/op_helper.c
+>> +++ b/target/riscv/op_helper.c
+>> @@ -83,7 +83,7 @@ target_ulong helper_sret(CPURISCVState *env, target_ulong cpu_pc_deb)
+>>      }
+>>
+>>      if (env->priv_ver >= PRIV_VERSION_1_10_0 &&
+>> -        get_field(env->mstatus, MSTATUS_TSR)) {
+>> +        get_field(env->mstatus, MSTATUS_TSR) && !(env->priv >= PRV_M)) {
+>>          riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
+>>      }
+>>
+>> --
+>> 2.24.1
+>>
 
