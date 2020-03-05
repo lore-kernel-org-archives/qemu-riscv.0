@@ -1,63 +1,78 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1j9tlb-0000rI-7J
-	for mharc-qemu-riscv@gnu.org; Thu, 05 Mar 2020 11:54:35 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:35434)
+	id 1j9u9X-0000Hi-7N
+	for mharc-qemu-riscv@gnu.org; Thu, 05 Mar 2020 12:19:19 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:39788)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <alistair23@gmail.com>) id 1j9tlX-0000jT-Im
- for qemu-riscv@nongnu.org; Thu, 05 Mar 2020 11:54:33 -0500
+ (envelope-from <philmd@redhat.com>) id 1j9u9V-0000FJ-9q
+ for qemu-riscv@nongnu.org; Thu, 05 Mar 2020 12:19:18 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1j9tlW-0000l1-Af
- for qemu-riscv@nongnu.org; Thu, 05 Mar 2020 11:54:31 -0500
-Received: from mail-vk1-xa42.google.com ([2607:f8b0:4864:20::a42]:43861)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1j9tlW-0000kj-6f; Thu, 05 Mar 2020 11:54:30 -0500
-Received: by mail-vk1-xa42.google.com with SMTP id o2so1792280vka.10;
- Thu, 05 Mar 2020 08:54:30 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=BavO3QYE17WJtn7dKZJxqCSrHa4W4PO4dngsSU3YGOA=;
- b=LeJFAvRpBeekw+8Sxk1Yc9EVHMPZbVEKdm1d5rKLLgzsBzeHYE4l6htJrRqwoGehEs
- qq8+Lxp0pvaJOgpeoUaIezyszE//fG9YkzifIjr6g7aCWyjcdwdd8ybVipCVCWWbemSq
- 3rRbYI93pOSz5ZI2EwZhk33SBr4zkT4w6KckOLNaWzqM2Ba/O33MeDI9cBMThngy9KIT
- Sg3297ldmdxofsHvcfoY/gJV6NdSstw2pSvGICIn0vgO9a+6C/Jbm5SmqxpE/OE/xi4m
- Gw7XzPktyqdmvL9NEMtrsNyM9CHCrgNBG+o251dutgWpEcTVN4rJMgo3TOZdNZ7YRt0D
- FPNQ==
+ (envelope-from <philmd@redhat.com>) id 1j9u9U-0001rk-4E
+ for qemu-riscv@nongnu.org; Thu, 05 Mar 2020 12:19:17 -0500
+Received: from us-smtp-delivery-1.mimecast.com ([205.139.110.120]:60352
+ helo=us-smtp-1.mimecast.com)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <philmd@redhat.com>) id 1j9u9U-0001r9-0b
+ for qemu-riscv@nongnu.org; Thu, 05 Mar 2020 12:19:16 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1583428755;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=m075kaYWXTizWWYNsFBPne4bGTz38tLlhSwqjD+7aps=;
+ b=P5Lzt4tIRaSDkVWzaJZvrBn8eKTLjy5SOYJWUt0Wv5CcZyxv/aQ+v87Xu3PLA1Je/PgIyA
+ VVy/DIwc0XLF7JkTvIjyEqueAolvxLwvt9moIB5qbZM+2vIHr3i2iCSEgFps4xZaVCpAcP
+ sYnMuvQixPXEgkGNQQHbdBLKNuCfeH4=
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-166-pM8-f8x5P5m2Xp7QkB2NWA-1; Thu, 05 Mar 2020 12:19:13 -0500
+X-MC-Unique: pM8-f8x5P5m2Xp7QkB2NWA-1
+Received: by mail-wm1-f69.google.com with SMTP id m4so2337471wmi.5
+ for <qemu-riscv@nongnu.org>; Thu, 05 Mar 2020 09:19:13 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=BavO3QYE17WJtn7dKZJxqCSrHa4W4PO4dngsSU3YGOA=;
- b=o8aYDXOaFXZN4BmYwfdTDxMNQ7XF7573F5ZRiQXGhzV+pzN3wSzoFRpIgmGjUHxKyB
- CrEP5A6wPWq0q2PJPnj3XV0iZoCT7pcQAIAuZx6DmaM7egDbZDronVzUEacpMSzkUleF
- RTCniicg4ap1fVHEBa3Qwv2xLCCExy9MWEmLImDoAcd/I8KyINxlv1gaOl7EU+7gd1cu
- PyRjlEmNho0RWMb9OSyzpTgkVriGk8FVZoLUr1Jr94vUoE17a/rj3XAdePahxIuERiyt
- DZ5tJkNBG1HDwYqD3DTLX69kdTbkq2J2XkEXYXxhOV2Fx/fBHoD/GF8VY4Y5ZWXNHKol
- JgTQ==
-X-Gm-Message-State: ANhLgQ01aVQ4CU4JtNebBcyujIs+PkULR6wyfQiqE1SaI/nqApT1R/D3
- 0rwCGeGjqu2v48p0NL7fRXHePCcconDHYi6aPOw=
-X-Google-Smtp-Source: ADFU+vv/1IwDhGNAtivVyHztV3wmZ6LrKlPauK+nP3aSzZaHHrUsnde+L3B/L6LN2q2vkGHAVX0ocsmmTToqblO1CYg=
-X-Received: by 2002:a1f:1f50:: with SMTP id f77mr5359112vkf.37.1583427269502; 
- Thu, 05 Mar 2020 08:54:29 -0800 (PST)
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=ZJEZ4zyLX2SfHkzLIN23t0UhNzHX3qv5gWBaJbpSFyE=;
+ b=OeydmHhv1tsdW17rd5gpw8kUvqVvJSGT6tFc7M9x7vsYIrtiXBHIcVqgr8cQRofeOs
+ koryqffEgmKs+3DbY2Vd7Secv4w2gV9dWUEDH0lZgU2+qHJLPUAxmCLq555SHu34QclY
+ L76S0c2geRjXcPyMGSCbrtSAVpDp6SRBrGr0wNpshgMFynd7LJ4zbiUIuhyrK41oYL0W
+ G7I43MRaGJcw6EIDeEACzPCXuBtZZ0ba/Y3jFT/aWw2SKbumfg5f4jUOOGnMNZRqHxHt
+ vHuiMmhYwWWEjvVGTyQLGT67+o7AP35vdy2eS2IbY3xqnWMuzCpsbwzbzRFOX3cXXH0r
+ 0p0A==
+X-Gm-Message-State: ANhLgQ1FrxDimrReCHNvFeY5aC53vn5DOCuKNn03kk+L39Q5yrj6zwFr
+ TMG5vmh82sjKFRpy2aiP09HyKD/+pTk3O3ioTsAW2ua/hSp8Xe+o/4XwoIxnYPUsk4QkEcu9xga
+ 6on4RMU1e4LkYEA8=
+X-Received: by 2002:a1c:f008:: with SMTP id a8mr10369214wmb.81.1583428752153; 
+ Thu, 05 Mar 2020 09:19:12 -0800 (PST)
+X-Google-Smtp-Source: ADFU+vv+6dGDDf4J6C6+rueASQZjrSO96wiK8XN5inah8ICyyuW+ycS8mvkvFi6LtpPKBupf1kK+Ew==
+X-Received: by 2002:a1c:f008:: with SMTP id a8mr10369195wmb.81.1583428751933; 
+ Thu, 05 Mar 2020 09:19:11 -0800 (PST)
+Received: from [192.168.1.35] (47.red-88-21-205.staticip.rima-tde.net.
+ [88.21.205.47])
+ by smtp.gmail.com with ESMTPSA id j205sm9890331wma.42.2020.03.05.09.19.11
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 05 Mar 2020 09:19:11 -0800 (PST)
+Subject: Re: [PATCH] RISC-V: Add a missing "," in riscv_excp_names
+To: Palmer Dabbelt <palmerdabbelt@google.com>,
+ Peter Maydell <peter.maydell@linaro.org>, qemu-riscv@nongnu.org
+Cc: qemu-devel@nongnu.org
+References: <20200305164839.201311-1-palmerdabbelt@google.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>
+Message-ID: <cfc728aa-56a5-6a2d-a997-e1dfd871885c@redhat.com>
+Date: Thu, 5 Mar 2020 18:19:10 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.4.1
 MIME-Version: 1.0
-References: <20200303004848.136788-1-palmerdabbelt@google.com>
- <20200303004848.136788-5-palmerdabbelt@google.com>
- <CAFEAcA9gHNXfGutEZiW-PYJbhdUZEd-dPDp8iwO-Ni_cSD9gZw@mail.gmail.com>
-In-Reply-To: <CAFEAcA9gHNXfGutEZiW-PYJbhdUZEd-dPDp8iwO-Ni_cSD9gZw@mail.gmail.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 5 Mar 2020 08:46:47 -0800
-Message-ID: <CAKmqyKOrw_sP=8E=DbpPJPs_5zgBq6df8O1FYD9vwq4DfLLwzw@mail.gmail.com>
-Subject: Re: [PULL 04/38] target/riscv: Add support for the new execption
- numbers
-To: Peter Maydell <peter.maydell@linaro.org>
-Cc: Palmer Dabbelt <palmerdabbelt@google.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- "open list:RISC-V" <qemu-riscv@nongnu.org>,
- QEMU Developers <qemu-devel@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2607:f8b0:4864:20::a42
+In-Reply-To: <20200305164839.201311-1-palmerdabbelt@google.com>
+Content-Language: en-US
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+X-Received-From: 205.139.110.120
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -69,62 +84,48 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Mar 2020 16:54:33 -0000
+X-List-Received-Date: Thu, 05 Mar 2020 17:19:18 -0000
 
-On Thu, Mar 5, 2020 at 8:52 AM Peter Maydell <peter.maydell@linaro.org> wrote:
->
-> On Tue, 3 Mar 2020 at 00:49, Palmer Dabbelt <palmerdabbelt@google.com> wrote:
-> >
-> > From: Alistair Francis <alistair.francis@wdc.com>
-> >
-> > The v0.5 Hypervisor spec add new execption numbers, let's add support
-> > for those.
-> >
-> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> > Reviewed-by: Palmer Dabbelt <palmerdabbelt@google.com>
-> > Signed-off-by: Palmer Dabbelt <palmerdabbelt@google.com>
-> > ---
-> >  target/riscv/cpu.c        |  8 ++++++++
-> >  target/riscv/cpu_bits.h   | 35 +++++++++++++++++++----------------
-> >  target/riscv/cpu_helper.c |  7 +++++--
-> >  target/riscv/csr.c        |  7 +++++--
-> >  4 files changed, 37 insertions(+), 20 deletions(-)
-> >
-> > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> > index efbd676edb..2f62f5ea19 100644
-> > --- a/target/riscv/cpu.c
-> > +++ b/target/riscv/cpu.c
-> > @@ -67,6 +67,14 @@ const char * const riscv_excp_names[] = {
-> >      "load_page_fault",
-> >      "reserved",
-> >      "store_page_fault"
-> > +    "reserved",
->
-> Hi; Coverity (CID 1420223) notice that there's no comma
-> after "store_page_fault", which means that there's been
-> a concatenation of that string and the following "reserved".
-> Could one of you send a patch which adds the missing comma?
->
-> > +    "reserved",
-> > +    "reserved",
-> > +    "reserved",
-> > +    "guest_exec_page_fault",
-> > +    "guest_load_page_fault",
-> > +    "reserved",
-> > +    "guest_store_page_fault"
->
-> You might also like to add a trailing comma here to avoid
-> the bug happening again in future.
+On 3/5/20 5:48 PM, Palmer Dabbelt wrote:
+> THis would almost certainly cause the exception names to be reported
+> incorrectly.  Covarity found the issue (CID 1420223).  As per Peter's
 
-Thanks for the report Peter, I'll send a patch.
+"This", "Coverity" typos.
 
-Alistair
+Fixes: ab67a1d07a4
+Reviewed-by: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
 
->
-> >  };
-> >
->
-> thanks
-> -- PMM
->
+> suggestion, I've also added a comma at the end of the list to avoid the i=
+ssue
+> reappearing in the future.
+>=20
+> Signed-off-by: Palmer Dabbelt <palmerdabbelt@google.com>
+> ---
+>   target/riscv/cpu.c | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
+>=20
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index c47d10b739..c0b7023100 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -66,7 +66,7 @@ const char * const riscv_excp_names[] =3D {
+>       "exec_page_fault",
+>       "load_page_fault",
+>       "reserved",
+> -    "store_page_fault"
+> +    "store_page_fault",
+>       "reserved",
+>       "reserved",
+>       "reserved",
+> @@ -74,7 +74,7 @@ const char * const riscv_excp_names[] =3D {
+>       "guest_exec_page_fault",
+>       "guest_load_page_fault",
+>       "reserved",
+> -    "guest_store_page_fault"
+> +    "guest_store_page_fault",
+>   };
+>  =20
+>   const char * const riscv_intr_names[] =3D {
+>=20
+
 
