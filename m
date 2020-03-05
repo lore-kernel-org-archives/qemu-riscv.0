@@ -1,63 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1j9tc1-0000eS-KM
-	for mharc-qemu-riscv@gnu.org; Thu, 05 Mar 2020 11:44:45 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:33339)
+	id 1j9tiE-0002aP-Nx
+	for mharc-qemu-riscv@gnu.org; Thu, 05 Mar 2020 11:51:06 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:34297)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <peter.maydell@linaro.org>) id 1j9tby-0000Y4-Dp
- for qemu-riscv@nongnu.org; Thu, 05 Mar 2020 11:44:39 -0500
+ (envelope-from <palmerdabbelt@google.com>) id 1j9tiB-0002Tr-Px
+ for qemu-riscv@nongnu.org; Thu, 05 Mar 2020 11:51:05 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <peter.maydell@linaro.org>) id 1j9tbx-0007eg-Bz
- for qemu-riscv@nongnu.org; Thu, 05 Mar 2020 11:44:38 -0500
-Received: from mail-ot1-x334.google.com ([2607:f8b0:4864:20::334]:45184)
+ (envelope-from <palmerdabbelt@google.com>) id 1j9tiA-00066D-Lt
+ for qemu-riscv@nongnu.org; Thu, 05 Mar 2020 11:51:03 -0500
+Received: from mail-pl1-x643.google.com ([2607:f8b0:4864:20::643]:32772)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <peter.maydell@linaro.org>)
- id 1j9tbw-0007bx-7L
- for qemu-riscv@nongnu.org; Thu, 05 Mar 2020 11:44:37 -0500
-Received: by mail-ot1-x334.google.com with SMTP id f21so6307375otp.12
- for <qemu-riscv@nongnu.org>; Thu, 05 Mar 2020 08:44:36 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=8RQgxAytKvFsrqMKrCpxhTLSrB87xnJaR0cBqI+uAPM=;
- b=MlMq69bwI+qfCkLQfhaohorZEArrafzZGqJWVgEMKU3B7tbswQj6zZbpX7DV9qYjnn
- M3NORKzLyQi5YpVMgrKX8ytnekVWx8AtBQmL5g89KSVJJXJOUH9oSRBgTSAqd7MYiUOU
- IXqdQTaIz5x6lYiN68QKUXXSf4fHtJMeZG1sn5YAtmmqtXIzcM+kbaYoZOBVbu1/J1uo
- WCP155qg/DJbI6Bh78CGXuGnv2dIUHFgOGOy9GMUKxvtN3bCQ7Y4+47nU5Ii+qUuGs87
- 6o3Wi+cQ2JgMUjQAepu3uPEbgHFrSuNC2/K4OR3O6JBQco///Ah/52yMDBblLwXvk8sK
- A/lA==
+ (Exim 4.71) (envelope-from <palmerdabbelt@google.com>)
+ id 1j9tiA-00065X-EV
+ for qemu-riscv@nongnu.org; Thu, 05 Mar 2020 11:51:02 -0500
+Received: by mail-pl1-x643.google.com with SMTP id ay11so2884721plb.0
+ for <qemu-riscv@nongnu.org>; Thu, 05 Mar 2020 08:51:01 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
+ h=subject:date:message-id:mime-version:content-transfer-encoding:cc
+ :from:to; bh=1MaaEtwKMFY1TpAkMmcdOhFvki73sjGjSM2t7iCfOEQ=;
+ b=sWATFSgaSug5/N3mEcHrbK+PoJ7a6Gv9Y3fIJGJlfGQCcjjcRvXO0Xcb83LNmgUx+2
+ kgoGQp1p6EPWCpNIN8GKAwQ9hGkVNfEAYWBWTZQsrVRINeIFcOVl4BKi7trLtHfG7d9G
+ taxlKpls4W2zP9q00R7ZL6a2YSbfl4QLsJqn72LC9ibWV2xIh/qmDwVk/Om9PnYEM62u
+ 91gxzGnMlMa9czWzOKRAkZUT3OgSHz+h/WL8uqceY5cmIkj/MFXlmQvB0HUH6Z7ySbNO
+ +XCZDyGulGt22Ha4ZrWjjzIxHqD4Jdab9ufc3rzEr4kJ1N+vYMemPEAgz+iqP1nII3u9
+ cN0g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=8RQgxAytKvFsrqMKrCpxhTLSrB87xnJaR0cBqI+uAPM=;
- b=K19iOlPkdIzOA/ri18B9ZpuKjlNWOg9HIRZ5aOcPkbTnjRIq7ucPHAwJlXC4H7TxHl
- pMwV3vTM8N6ujhxoqj6I91EWAkkMY6nhhxW/l5yR71Bxr8fvJrUu0GiZkot5lyJr14qY
- Emk5uJESeZKjWV+/A6rJBuAikDyXsb2aIGbwIYTR+1a3LIwE6ztK0jhpGZLDTEBQCxPe
- 8OPs9IVdYg3sV/PdsLbpWrwjMzDAjQjizZdUsAIf+VNVu0HwSGy6jQGzjlVqfINC/dYE
- 9eVKA82KWw7xomqfCJAYBymxtHhRpP4JDC6CoEp28J7HUEIQt6rzjBNosCW/6Frp0H8G
- GsHA==
-X-Gm-Message-State: ANhLgQ2yW2pyxWxmkLWIfetaFh3Zre3FnwCZkldOYbiY7V+el2M9DtQu
- FRp8fGKdhP++lsEcy3jm8j8KOC/gp3c7nsvlnylSLA==
-X-Google-Smtp-Source: ADFU+vu6RVLX6O6uZ79AIUc2TsahspZghA3XNueFG+MI1/6mmVBtYpGGZke9sjgEbni6iel6vgj5zR+6Xk1blMnqe/Q=
-X-Received: by 2002:a05:6830:30ac:: with SMTP id
- g12mr6057165ots.221.1583426675327; 
- Thu, 05 Mar 2020 08:44:35 -0800 (PST)
+ h=x-gm-message-state:subject:date:message-id:mime-version
+ :content-transfer-encoding:cc:from:to;
+ bh=1MaaEtwKMFY1TpAkMmcdOhFvki73sjGjSM2t7iCfOEQ=;
+ b=r3L1+DjehlwLnLWYfr1d+lx8kBN07FCmkxKsvAZ/seQjsiaNI4cv4mqqAtOdewLrx3
+ rrrVjElWDx51H6//0XgqzF4nNg6awlB2cZ7KQuEnsSGszPeuBKFIpc6kX31qBt8rl7Gs
+ NUYA1LkGh7zUp/sgiz+uHE8L6UAd+okqDFEryXt7Uv0WDhB+09gG5DUdNj34pUJPj5p0
+ IQYvvEoO49AKccU5ebscEZiguUmQKMxbbM/TE139TFtGoxLcpNPYjB+FhLMcGJNoY6Yv
+ 7ToDUa7q33WhAwmAEXHqoA9XtzIS4PyUP60U7lNY9XkZ56wCr90T1hFqS+pTMqngQ4B1
+ hiJQ==
+X-Gm-Message-State: ANhLgQ0LgGksw9r4mp7MZGzN8qIl43yr/UGIb6qISckBDmzvvpum6QXf
+ 6p2UzRhtZw30U21dV009xJgAwQ==
+X-Google-Smtp-Source: ADFU+vuH7aN0Tp6YM5B0ZXPmtUMMM96PDTWdg6dNPVpFnC5hEoMDrRMOVcPRYpu+tR8djvHmm50E+Q==
+X-Received: by 2002:a17:902:9349:: with SMTP id g9mr382084plp.16.1583427060673; 
+ Thu, 05 Mar 2020 08:51:00 -0800 (PST)
+Received: from localhost ([2620:0:1000:2514:23a5:d584:6a92:3e3c])
+ by smtp.gmail.com with ESMTPSA id n9sm29033303pfq.160.2020.03.05.08.50.59
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 05 Mar 2020 08:51:00 -0800 (PST)
+Subject: [PATCH] RISC-V: Add a missing "," in riscv_excp_names
+Date: Thu,  5 Mar 2020 08:48:39 -0800
+Message-Id: <20200305164839.201311-1-palmerdabbelt@google.com>
+X-Mailer: git-send-email 2.25.0.265.gbab2e86ba0-goog
 MIME-Version: 1.0
-References: <20200303004848.136788-1-palmerdabbelt@google.com>
- <20200303004848.136788-5-palmerdabbelt@google.com>
-In-Reply-To: <20200303004848.136788-5-palmerdabbelt@google.com>
-From: Peter Maydell <peter.maydell@linaro.org>
-Date: Thu, 5 Mar 2020 16:44:20 +0000
-Message-ID: <CAFEAcA9gHNXfGutEZiW-PYJbhdUZEd-dPDp8iwO-Ni_cSD9gZw@mail.gmail.com>
-Subject: Re: [PULL 04/38] target/riscv: Add support for the new execption
- numbers
-To: Palmer Dabbelt <palmerdabbelt@google.com>
-Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
- QEMU Developers <qemu-devel@nongnu.org>, 
- Alistair Francis <alistair.francis@wdc.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmerdabbelt@google.com>
+From: Palmer Dabbelt <palmerdabbelt@google.com>
+To: Peter Maydell <peter.maydell@linaro.org>,          qemu-riscv@nongnu.org
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::334
+X-Received-From: 2607:f8b0:4864:20::643
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -69,54 +67,41 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Mar 2020 16:44:39 -0000
+X-List-Received-Date: Thu, 05 Mar 2020 16:51:05 -0000
 
-On Tue, 3 Mar 2020 at 00:49, Palmer Dabbelt <palmerdabbelt@google.com> wrote:
->
-> From: Alistair Francis <alistair.francis@wdc.com>
->
-> The v0.5 Hypervisor spec add new execption numbers, let's add support
-> for those.
->
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> Reviewed-by: Palmer Dabbelt <palmerdabbelt@google.com>
-> Signed-off-by: Palmer Dabbelt <palmerdabbelt@google.com>
-> ---
->  target/riscv/cpu.c        |  8 ++++++++
->  target/riscv/cpu_bits.h   | 35 +++++++++++++++++++----------------
->  target/riscv/cpu_helper.c |  7 +++++--
->  target/riscv/csr.c        |  7 +++++--
->  4 files changed, 37 insertions(+), 20 deletions(-)
->
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index efbd676edb..2f62f5ea19 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -67,6 +67,14 @@ const char * const riscv_excp_names[] = {
->      "load_page_fault",
->      "reserved",
->      "store_page_fault"
-> +    "reserved",
+THis would almost certainly cause the exception names to be reported
+incorrectly.  Covarity found the issue (CID 1420223).  As per Peter's
+suggestion, I've also added a comma at the end of the list to avoid the issue
+reappearing in the future.
 
-Hi; Coverity (CID 1420223) notice that there's no comma
-after "store_page_fault", which means that there's been
-a concatenation of that string and the following "reserved".
-Could one of you send a patch which adds the missing comma?
+Signed-off-by: Palmer Dabbelt <palmerdabbelt@google.com>
+---
+ target/riscv/cpu.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-> +    "reserved",
-> +    "reserved",
-> +    "reserved",
-> +    "guest_exec_page_fault",
-> +    "guest_load_page_fault",
-> +    "reserved",
-> +    "guest_store_page_fault"
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index c47d10b739..c0b7023100 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -66,7 +66,7 @@ const char * const riscv_excp_names[] = {
+     "exec_page_fault",
+     "load_page_fault",
+     "reserved",
+-    "store_page_fault"
++    "store_page_fault",
+     "reserved",
+     "reserved",
+     "reserved",
+@@ -74,7 +74,7 @@ const char * const riscv_excp_names[] = {
+     "guest_exec_page_fault",
+     "guest_load_page_fault",
+     "reserved",
+-    "guest_store_page_fault"
++    "guest_store_page_fault",
+ };
+ 
+ const char * const riscv_intr_names[] = {
+-- 
+2.25.0.265.gbab2e86ba0-goog
 
-You might also like to add a trailing comma here to avoid
-the bug happening again in future.
-
->  };
->
-
-thanks
--- PMM
 
