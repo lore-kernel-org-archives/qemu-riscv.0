@@ -1,67 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jAHld-0008K7-A6
-	for mharc-qemu-riscv@gnu.org; Fri, 06 Mar 2020 13:32:13 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42852)
+	id 1jAHlf-0008PT-Ft
+	for mharc-qemu-riscv@gnu.org; Fri, 06 Mar 2020 13:32:15 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:42901)
  by lists.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <prvs=32724e9af=alistair.francis@wdc.com>)
- id 1jAHla-0008Ev-5g
- for qemu-riscv@nongnu.org; Fri, 06 Mar 2020 13:32:11 -0500
+ id 1jAHlb-0008HF-QG
+ for qemu-riscv@nongnu.org; Fri, 06 Mar 2020 13:32:13 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
  (envelope-from <prvs=32724e9af=alistair.francis@wdc.com>)
- id 1jAHlZ-0003f5-5k
- for qemu-riscv@nongnu.org; Fri, 06 Mar 2020 13:32:10 -0500
+ id 1jAHla-0003jt-CL
+ for qemu-riscv@nongnu.org; Fri, 06 Mar 2020 13:32:11 -0500
 Received: from esa2.hgst.iphmx.com ([68.232.143.124]:47137)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <prvs=32724e9af=alistair.francis@wdc.com>)
- id 1jAHlU-0003Db-GI; Fri, 06 Mar 2020 13:32:05 -0500
+ id 1jAHlV-0003Db-II; Fri, 06 Mar 2020 13:32:06 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1583519531; x=1615055531;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=hnhaF5RvT9lzfI/K64BjONUKPQNqcdgYEwIREUbIPfc=;
- b=eFvoepmdeNNbYv75p4la56g/AnmMsCO8rTcRq4ijEr2kU1exymWMhh8c
- 8kqCovmj4gFuTpknEGrg7gUg2O/kfoRnjRHdm1kBfhwDypUM4ZVv3tQf2
- qd4sh8ON2h/ZcjTLLEMcTAfPP1ZqqehsCeqgaIlupZ/OHKcCR8qt8KAtx
- Kyb6ubhLpBv3JtzerWlgHzfrVCK5l7Ip39g2DOQ2dfgWcTtckJq8yegEi
- h20XNAJF8n904wwyYpCIUTxHUsVsCe/mhLW9JShO7Y+L909wQ0u0GOJf/
- p5MNPF+ifj7KcvXioUdKApiQ433jKCEXHiRbTw3p53MXMVWbgSKZF8D5Z g==;
-IronPort-SDR: XLoFDld+QX8fV8L4XOaoBo+U2sqFDfiklP7ZNmubDgJeArfXxSLSpDzfPaKLzIFCrddnyqj1NF
- 2ARLOe57Eu/0tNwxEA/1qafy5CgysfRG0FweCqkMqXyjo/0HZvFcY/whZ+c7XhgBkFa108UjgP
- jeI7D506JHeedzzSH3bE1OzMu55H4R2hP7XIIK1dCthwGqWgmlTnMTVL9hzKubnya60Lp/zPmH
- E4lbP0CjQWbKfoKg8m+b0+KCD79CBQkH5dC8Xobamtzrg4zAhTQ6oXLjiu7eIvrggBFAkVddMI
- N3s=
-X-IronPort-AV: E=Sophos;i="5.70,523,1574092800"; d="scan'208";a="233755468"
+ t=1583519532; x=1615055532;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=eTAQO7hK8pO+bJDBUbfEgC8vuuepk8Y/fLd6r3xIXR4=;
+ b=PUqiyVVdAZz2h8ev+y7nEZOBojKdBnl45JD+E0JAid/UqXjmb4DeC4TX
+ MIcH2mjSLX0BrJO8SnKlqyAk3y+9PzcrdCECF7gag1+xb/4wtSH0SlGnQ
+ bVDzGMKIc93Z6vnrXZYyJ+gTb7WClVGsOR0u/tHQk22ADbyXS1ESiVGYa
+ NkoCPa2MCmsUkeC0wmXmL0CoQSn49Dw5joCR0YOpeswVTQcYwmBaVrOhG
+ iFdSoMhaJQDu4jn8t/Y+Iv4IQhY+zRE5mYvWql026hu6uppAN105PYrgl
+ VcCWPx6OoGRykEl0ehlRNBgdSzEOlmks9wIv5hlQ8sS685qQq5xxnrt+h Q==;
+IronPort-SDR: sEG3zj8wLmd+JoRWqNuaAtMFIGyUQqD0dr6xZRpaNAiQKNMxyDJXH4ViuFH9HimVbN0w66Q4Ba
+ KaszW0HF/4RV0ZLpuxPxD+9/+WHL7lxhqvZM9PYa04yW7OcW4yuF41GP8p0DahS9G/UkuKm87B
+ MYNx3Rj76nm3qdKCZIcx13CkTh9AHt4mG++0jMqu4PbZiJYoAq4cZUeW41+Y4YaOb/94SX3w13
+ bc9ZpwE/HCugwBY6WcZ71MahijTDWJsHnvPaeRtlU1bn4btAmY+akmlAPiHkGHPrbcXDcywxOp
+ bPs=
+X-IronPort-AV: E=Sophos;i="5.70,523,1574092800"; d="scan'208";a="233755501"
 Received: from h199-255-45-14.hgst.com (HELO uls-op-cesaep01.wdc.com)
  ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 07 Mar 2020 02:31:51 +0800
-IronPort-SDR: j+HM8K4WqY9KXAIgMOlCYnuMfWCHcNXXqOLQDc13uOknI2i2AqO9ZkxYWZE5p7NqMdis3qkl8y
- 2TzC6ZSIf0/q/B/ivnGofn3NQXCCFrw9mkls0aNtuA285Y6f1yowTWYiU8Z0CDNUCMxNsKi0nl
- SC7ombC/ru8+BaodkbItpnPwQjBPiPoyWVE18zFbi0QA94+fy/LvluDNTQJ/xW4epkJuBbAS4p
- YsvDw9R8SVm99tdgV+u2P/MA7AWyMPfSTK1+h7PDTT0hdi1IN6JeZAEMuXXEJK1YMMF2iljLNd
- howoNC9MLKQAcNj8AuRCaVcy
+ by ob1.hgst.iphmx.com with ESMTP; 07 Mar 2020 02:31:48 +0800
+IronPort-SDR: rsrXR9CYJs+1cbRKdJbMeNNYCgs53hflmsquiDUzTC3/wHBSPUrC01tPJoKyt2zaePsu4iJ5bQ
+ a4L2LDYJsQQLY6hRx34n7FtzaT65Gyt5b8k9ZusD1Vj6oBMtzcjxgqZrUJvWMQ+wTdiuGhNFZA
+ IBFBHuYByvSZTTt9b1DPr3+XjIis62bluZl1rdpZ7q1dwuhZbqD0ma/l07BxUDknAejEB+/5c2
+ kIVdUCDX5ytVBP2XQWdgWXgZBxnODwax+crPbuZW/B1lgdwYwp6dZdsvDIwvd1CYIUWgRGLoaF
+ 2flZ9GZl9145RM3NWxM5N7nP
 Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
  by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 06 Mar 2020 10:23:47 -0800
-IronPort-SDR: lBLV0u3lRdUgtXjg3Qi1/qvmOkxXTlVelU4Gq8I73zE/UtfovI1k6+LJqiZUNgDAStIwBPtyHP
- oN5VgWp/VzoBWUJKhui7jmygM+EytYDYXflXVr4+iu7yguXK75ps2yxtQlZrDSxAQLXgECZFd9
- eBF0htFu3uWcx99pJUF4a9McDOFYuWC5IXJj7mUnkJIU/V7dQMUouEEbg0MW1tgXbP66X0t8ju
- cMeGTWq5wyHWczlAR5Qzv5VblCFUqYeWv9e8/xXYi5eTv6PI2IyhnPIy8PIN8Ln+kC4ETaoVOU
- ws4=
+ 06 Mar 2020 10:23:56 -0800
+IronPort-SDR: Q8OXUZkr945rW6E5TZ6gWlh0C44VAiuiGvlom83O660nLMAFAj3T/qA/lHoIkFGUHjDwYaCk1c
+ vQ2Ft3Yyl6CFvuSscY2OHMcOfA0zOOGmqEpYBjWwtnGorkNIiosD3rRLGOjzo5hNJbdEWrp0fl
+ DPw0j0DVoQbMqsK8QnEIbbpK8BmgA+x1dK/Rv3Ez6ajwZzBThP//bVoY4MRRVCPGTSK5HAX8bA
+ YooRBw+6QbIFCgr6wB1BI5Gh7FP4fl+QqAUwj7ul9D0cSeoBHuLfkIwW4v1ciz1rbkYTwMpe0z
+ zms=
 WDCIronportException: Internal
 Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
  risc6-mainframe.int.fusionio.com) ([10.196.158.235])
- by uls-op-cesaip02.wdc.com with ESMTP; 06 Mar 2020 10:31:37 -0800
+ by uls-op-cesaip02.wdc.com with ESMTP; 06 Mar 2020 10:31:45 -0800
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, aleksandar.m.mail@gmail.com,
  laurent@vivier.eu
 Cc: palmer@dabbelt.com,
 	alistair.francis@wdc.com,
 	alistair23@gmail.com
-Subject: [PATCH v6 0/4]  linux-user: generate syscall_nr.sh for RISC-V
-Date: Fri,  6 Mar 2020 10:24:19 -0800
-Message-Id: <cover.1583518447.git.alistair.francis@wdc.com>
+Subject: [PATCH v6 3/4] linux-user: Support futex_time64
+Date: Fri,  6 Mar 2020 10:24:28 -0800
+Message-Id: <b7595a50debfc704e63fde17425eb399a5e5a707.1583518447.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <cover.1583518447.git.alistair.francis@wdc.com>
+References: <cover.1583518447.git.alistair.francis@wdc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: FreeBSD 9.x [fuzzy]
@@ -77,41 +79,191 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Mar 2020 18:32:11 -0000
+X-List-Received-Date: Fri, 06 Mar 2020 18:32:13 -0000
 
-This series updates the RISC-V syscall_nr.sh based on the 5.5 kernel.
+Add support for host and target futex_time64. If futex_time64 exists on
+the host we try that first before falling back to the standard futux
+syscall.
 
-There are two parts to this. One is just adding the new syscalls, the
-other part is updating the RV32 syscalls to match the fact that RV32 is
-a 64-bit time_t architectures (y2038) safe.
+Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+---
+ linux-user/syscall.c | 98 ++++++++++++++++++++++++++++++++++++--------
+ 1 file changed, 80 insertions(+), 18 deletions(-)
 
-We need to make some changes to syscall.c to avoid warnings/errors
-during compliling with the new syscall.
-
-I did some RV32 user space testing after applying these patches. I ran the
-glibc testsuite in userspace and I don't see any regressions.
-
-v6:
- - Split out futex patch and make it more robust
-v5:
- - Addres comments raised on v4
-   - Don't require 64-bit host for * _time64 functions
-
-Alistair Francis (4):
-  linux-user: Protect more syscalls
-  linux-user/syscall: Add support for clock_gettime64/clock_settime64
-  linux-user: Support futex_time64
-  linux-user/riscv: Update the syscall_nr's to the 5.5 kernel
-
- linux-user/riscv/syscall32_nr.h | 295 +++++++++++++++++++++++++++++++
- linux-user/riscv/syscall64_nr.h | 301 ++++++++++++++++++++++++++++++++
- linux-user/riscv/syscall_nr.h   | 294 +------------------------------
- linux-user/strace.c             |   2 +
- linux-user/syscall.c            | 199 +++++++++++++++++++--
- 5 files changed, 783 insertions(+), 308 deletions(-)
- create mode 100644 linux-user/riscv/syscall32_nr.h
- create mode 100644 linux-user/riscv/syscall64_nr.h
-
+diff --git a/linux-user/syscall.c b/linux-user/syscall.c
+index 0f219b26c1..8a50e2d3dc 100644
+--- a/linux-user/syscall.c
++++ b/linux-user/syscall.c
+@@ -245,7 +245,12 @@ static type name (type1 arg1,type2 arg2,type3 arg3,type4 arg4,type5 arg5,	\
+ #define __NR_sys_rt_sigqueueinfo __NR_rt_sigqueueinfo
+ #define __NR_sys_rt_tgsigqueueinfo __NR_rt_tgsigqueueinfo
+ #define __NR_sys_syslog __NR_syslog
+-#define __NR_sys_futex __NR_futex
++#if defined(__NR_futex)
++# define __NR_sys_futex __NR_futex
++#endif
++#if defined(__NR_futex_time64)
++# define __NR_sys_futex_time64 __NR_futex_time64
++#endif
+ #define __NR_sys_inotify_init __NR_inotify_init
+ #define __NR_sys_inotify_add_watch __NR_inotify_add_watch
+ #define __NR_sys_inotify_rm_watch __NR_inotify_rm_watch
+@@ -295,10 +300,15 @@ _syscall1(int,exit_group,int,error_code)
+ #if defined(TARGET_NR_set_tid_address) && defined(__NR_set_tid_address)
+ _syscall1(int,set_tid_address,int *,tidptr)
+ #endif
+-#if defined(TARGET_NR_futex) && defined(__NR_futex)
++#if (defined(TARGET_NR_futex) || defined(TARGET_NR_futex_time64)) && \
++    defined(__NR_futex)
+ _syscall6(int,sys_futex,int *,uaddr,int,op,int,val,
+           const struct timespec *,timeout,int *,uaddr2,int,val3)
+ #endif
++#if defined(TARGET_NR_futex_time64) && defined(__NR_futex_time64)
++_syscall6(int,sys_futex_time64,int *,uaddr,int,op,int,val,
++          const struct timespec *,timeout,int *,uaddr2,int,val3)
++#endif
+ #define __NR_sys_sched_getaffinity __NR_sched_getaffinity
+ _syscall3(int, sys_sched_getaffinity, pid_t, pid, unsigned int, len,
+           unsigned long *, user_mask_ptr);
+@@ -762,10 +772,14 @@ safe_syscall5(int, ppoll, struct pollfd *, ufds, unsigned int, nfds,
+ safe_syscall6(int, epoll_pwait, int, epfd, struct epoll_event *, events,
+               int, maxevents, int, timeout, const sigset_t *, sigmask,
+               size_t, sigsetsize)
+-#ifdef TARGET_NR_futex
++#if defined(__NR_futex)
+ safe_syscall6(int,futex,int *,uaddr,int,op,int,val, \
+               const struct timespec *,timeout,int *,uaddr2,int,val3)
+ #endif
++#if defined(__NR_futex_time64)
++safe_syscall6(int,futex_time64,int *,uaddr,int,op,int,val, \
++              const struct timespec *,timeout,int *,uaddr2,int,val3)
++#endif
+ safe_syscall2(int, rt_sigsuspend, sigset_t *, newset, size_t, sigsetsize)
+ safe_syscall2(int, kill, pid_t, pid, int, sig)
+ safe_syscall2(int, tkill, int, tid, int, sig)
+@@ -1210,7 +1224,7 @@ static inline abi_long copy_to_user_timeval64(abi_ulong target_tv_addr,
+     return 0;
+ }
+ 
+-#if defined(TARGET_NR_futex) || \
++#if defined(TARGET_NR_futex) || defined(TARGET_NR_futex_time64) || \
+     defined(TARGET_NR_rt_sigtimedwait) || \
+     defined(TARGET_NR_pselect6) || defined(TARGET_NR_pselect6) || \
+     defined(TARGET_NR_nanosleep) || defined(TARGET_NR_clock_settime) || \
+@@ -6898,12 +6912,12 @@ static inline abi_long host_to_target_statx(struct target_statx *host_stx,
+    futexes locally would make futexes shared between multiple processes
+    tricky.  However they're probably useless because guest atomic
+    operations won't work either.  */
+-#if defined(TARGET_NR_futex)
++#if defined(TARGET_NR_futex) || defined(TARGET_NR_futex_time64)
+ static int do_futex(target_ulong uaddr, int op, int val, target_ulong timeout,
+                     target_ulong uaddr2, int val3)
+ {
+     struct timespec ts, *pts;
+-    int base_op;
++    int base_op, err = -ENOSYS;
+ 
+     /* ??? We assume FUTEX_* constants are the same on both host
+        and target.  */
+@@ -6915,18 +6929,49 @@ static int do_futex(target_ulong uaddr, int op, int val, target_ulong timeout,
+     switch (base_op) {
+     case FUTEX_WAIT:
+     case FUTEX_WAIT_BITSET:
++#ifdef __NR_futex_time64
++        struct __kernel_timespec ts64, *pts64;
++
+         if (timeout) {
+-            pts = &ts;
+-            target_to_host_timespec(pts, timeout);
++            pts64 = &ts64;
++            target_to_host_timespec64(pts64, timeout);
+         } else {
+-            pts = NULL;
++            pts64 = NULL;
++        }
++
++        err = get_errno(safe_futex_time64(g2h(uaddr), op, tswap32(val),
++                         pts64, NULL, val3));
++#endif
++#ifdef __NR_futex
++        if (err == -ENOSYS) {
++            if (timeout) {
++                pts = &ts;
++                target_to_host_timespec(pts, timeout);
++            } else {
++                pts = NULL;
++            }
++            return get_errno(safe_futex(g2h(uaddr), op, tswap32(val),
++                             pts, NULL, val3));
+         }
+-        return get_errno(safe_futex(g2h(uaddr), op, tswap32(val),
+-                         pts, NULL, val3));
++#endif
+     case FUTEX_WAKE:
+-        return get_errno(safe_futex(g2h(uaddr), op, val, NULL, NULL, 0));
++#ifdef __NR_futex_time64
++        err = get_errno(safe_futex_time64(g2h(uaddr), op, val, NULL, NULL, 0));
++#endif
++#ifdef __NR_futex
++        if (err == -ENOSYS) {
++            return get_errno(safe_futex(g2h(uaddr), op, val, NULL, NULL, 0));
++        }
++#endif
+     case FUTEX_FD:
+-        return get_errno(safe_futex(g2h(uaddr), op, val, NULL, NULL, 0));
++#ifdef __NR_futex_time64
++        err = get_errno(safe_futex_time64(g2h(uaddr), op, val, NULL, NULL, 0));
++#endif
++#ifdef __NR_futex
++        if (err == -ENOSYS) {
++            return get_errno(safe_futex(g2h(uaddr), op, val, NULL, NULL, 0));
++        }
++#endif
+     case FUTEX_REQUEUE:
+     case FUTEX_CMP_REQUEUE:
+     case FUTEX_WAKE_OP:
+@@ -6935,12 +6980,25 @@ static int do_futex(target_ulong uaddr, int op, int val, target_ulong timeout,
+            But the prototype takes a `struct timespec *'; insert casts
+            to satisfy the compiler.  We do not need to tswap TIMEOUT
+            since it's not compared to guest memory.  */
++#ifdef __NR_futex_time64
++        struct __kernel_timespec *pts64;
++        pts64 = (struct __kernel_timespec *)(uintptr_t) timeout;
++        ret = get_errno(safe_futex_time64(g2h(uaddr), op, val, pts64,
++                                   g2h(uaddr2),
++                                   (base_op == FUTEX_CMP_REQUEUE
++                                    ? tswap32(val3)
++                                    : val3)));
++#endif
++#ifdef __NR_futex
+         pts = (struct timespec *)(uintptr_t) timeout;
+-        return get_errno(safe_futex(g2h(uaddr), op, val, pts,
+-                                    g2h(uaddr2),
+-                                    (base_op == FUTEX_CMP_REQUEUE
+-                                     ? tswap32(val3)
+-                                     : val3)));
++        if (err == -ENOSYS) {
++            return get_errno(safe_futex(g2h(uaddr), op, val, pts,
++                                      g2h(uaddr2),
++                                      (base_op == FUTEX_CMP_REQUEUE
++                                       ? tswap32(val3)
++                                       : val3)));
++        }
++#endif
+     default:
+         return -TARGET_ENOSYS;
+     }
+@@ -11599,6 +11657,10 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
+     case TARGET_NR_futex:
+         return do_futex(arg1, arg2, arg3, arg4, arg5, arg6);
+ #endif
++#ifdef TARGET_NR_futex_time64
++    case TARGET_NR_futex_time64:
++        return do_futex(arg1, arg2, arg3, arg4, arg5, arg6);
++#endif
+ #if defined(TARGET_NR_inotify_init) && defined(__NR_inotify_init)
+     case TARGET_NR_inotify_init:
+         ret = get_errno(sys_inotify_init());
 -- 
 2.25.1
 
