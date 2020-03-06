@@ -1,66 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jA0YM-0002DO-NY
-	for mharc-qemu-riscv@gnu.org; Thu, 05 Mar 2020 19:09:22 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:41636)
+	id 1jA9h0-0005qe-5W
+	for mharc-qemu-riscv@gnu.org; Fri, 06 Mar 2020 04:54:54 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:46454)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <bmeng.cn@gmail.com>) id 1jA0YJ-00028J-JZ
- for qemu-riscv@nongnu.org; Thu, 05 Mar 2020 19:09:20 -0500
+ (envelope-from <peter.maydell@linaro.org>) id 1jA9gx-0005nS-OF
+ for qemu-riscv@nongnu.org; Fri, 06 Mar 2020 04:54:52 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <bmeng.cn@gmail.com>) id 1jA0YH-000576-O2
- for qemu-riscv@nongnu.org; Thu, 05 Mar 2020 19:09:19 -0500
-Received: from mail-yw1-xc43.google.com ([2607:f8b0:4864:20::c43]:39446)
+ (envelope-from <peter.maydell@linaro.org>) id 1jA9gw-0004wI-DC
+ for qemu-riscv@nongnu.org; Fri, 06 Mar 2020 04:54:51 -0500
+Received: from mail-oi1-x243.google.com ([2607:f8b0:4864:20::243]:44346)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
- id 1jA0YD-000532-MQ; Thu, 05 Mar 2020 19:09:14 -0500
-Received: by mail-yw1-xc43.google.com with SMTP id x184so596589ywd.6;
- Thu, 05 Mar 2020 16:09:13 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ (Exim 4.71) (envelope-from <peter.maydell@linaro.org>)
+ id 1jA9gw-0004tS-61
+ for qemu-riscv@nongnu.org; Fri, 06 Mar 2020 04:54:50 -0500
+Received: by mail-oi1-x243.google.com with SMTP id d62so1939072oia.11
+ for <qemu-riscv@nongnu.org>; Fri, 06 Mar 2020 01:54:50 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=0hpAbpqVVV8Fx1KNiu0bzVflU3RcKR/8lt1WaMqOnzQ=;
- b=cvUg4+ziBDHwwpuEXNWhv3xP043230Fn2yEhT9+U++pubsbWeG1spMVMgyfz5jY9MP
- xNKXGUPL+n8j8Qeu0bPL84pmgzFUhcwXpux29TAbSDOAJ6E44TdV87rBtuOIMZjF5BNV
- 3+WQt3c2QDYVA/i2Yi9h4TOS1a0cQM08JnpTJMEsCDHq7l3+W9KUdJvV+yLYmh/ycZMC
- sKcD8rz43VucIpS0wo/9pyOEIkPuYYyiVT6DdZPPcGTbnOJzeSn5il1UUSrR/OJmKNE7
- fMtxLZ9MNavvKRmC7P/NExLUvRufBU9WOS8RPtfwUI6WqQLmL+5paNrKCfEg91rAmlxs
- U84w==
+ :cc; bh=5mqvOeQPRdC0xpis/LcpEbxJY2rwTbFGI1AuPRFCDp4=;
+ b=C1ks/bWdi4sJWrj8rP0VkhNTH9vBVhh0x5NLd2w5nsVJWijOTIWpvsPEspaKdMYcsG
+ /D7q3Nmm+zQ4v/eR3gEnq5/ID5qme1f04xY+hZu7jkQ9qmovzlEf/GTrcimn7rguyXlZ
+ ATO1wwprP1IkZiQtNEA/L7y35QcRYLtxcE2xvG53WPE8vvq3kValKG8FEW0mIQKrFZ2E
+ 8eSHTtUGfTgebWUxOG7Kvv+tVTTayEG9geYXrjYSpHoQJA0k62JSkClV0IxXX28i/9TB
+ eXfz+o8h5Jr41kzrjKebB8FWGpnVSTrHkICLusVQMw2122zoifoNoxF8UuUUCaeCQ35u
+ WM3Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=0hpAbpqVVV8Fx1KNiu0bzVflU3RcKR/8lt1WaMqOnzQ=;
- b=Vpi47JK/dh8G2SDY7WLXPr3Uw7//HmU9mkZr9OjGSNvONQAMaM/6THqdCd3VE5kEKC
- 4dZ7jtlaiWTStCFCuzyA2rVLfokTRWf7SBKWLqnAwSqP0Ac4D3+GbCr0q8/7qSz7VyCW
- x9pOOoD2tqF8YcenmuF/2QDJij+w0L3uMOetkI2kvO77lUjUACtMaw8UEj1NaBYliJFC
- /plF1Fjt67mui2bYdkj62g3FC1/9lm9BXZtlSt2CZUe9fe5OguGRSO7uk7ttuUGl4V1N
- EBxfdBEhW9ZUsE0efhADAZJoD7H30+pUjKt/s5hvoS21qBln0N8g8n6hMihU1fQbecg4
- mRag==
-X-Gm-Message-State: ANhLgQ3+wGoqqjxS//tk5w0ZXsdA3AWsSsU3+13hmw/Bn9Rd4eiQ4R1w
- BMEL3yLtLcc6XUDNibSmqyCg1c2QrvY14R2Oysg=
-X-Google-Smtp-Source: ADFU+vunsyAXrU1idS/uQ7RbeRGptgEscPXeUAqSCh8Fg7nglROykz1yY6VQgdVD4SxcjgqSqB6uJx2ElyX99+0TqKU=
-X-Received: by 2002:a25:5b8a:: with SMTP id p132mr977231ybb.11.1583453352462; 
- Thu, 05 Mar 2020 16:09:12 -0800 (PST)
+ bh=5mqvOeQPRdC0xpis/LcpEbxJY2rwTbFGI1AuPRFCDp4=;
+ b=JFHdDToxtpAByK1OwXN2PKNgDeKlwolTW/LeUAMFhPp3cul6yiJ3oz7VzIqrUoukM6
+ YlmWz3D2APyhDtzXpx4ZbhVag/utdEsnQ6UkRem9he1IbMHGZVKyqdwruq7Pw6wtxkWb
+ qioYul2pUvPVXugVPVcXGQKHxGx0N0i3tFcVWjJT/WNIeUvrBpF9PjSc7yY4mW2MyWl7
+ pqbcb4dsr/00JVw7V17F/iq/qVjP8+u7b5D588rv8HEbUQRdG0qEfof7TePuHaBmmo73
+ Cevgbf7M8Uy432J1uiJ0edlmQdQHW6lb717XFn1p0WE8wdi/VVp+h0rkVke7rcvbZb1L
+ +XjA==
+X-Gm-Message-State: ANhLgQ2/jw9j6FmLr6IcdAyHPYIXyeZOxyRmbIiSUTzvJyR9Uf3g88Zb
+ c46JEDURtCqxmmyJziTTzjnJqQShxlLzsfrgPsBsdw==
+X-Google-Smtp-Source: ADFU+vudnS6HLIw9sZOxbuyM7gYSDQ1TmH8IKV5dnmKszldvaXDN8HTQyHL2Shfi+Hq6cGAAlJQZLsK3tnoCfOJqWDY=
+X-Received: by 2002:aca:3d7:: with SMTP id 206mr1989658oid.98.1583488488963;
+ Fri, 06 Mar 2020 01:54:48 -0800 (PST)
 MIME-Version: 1.0
-References: <cover.1583285287.git.alistair.francis@wdc.com>
- <e91f9fccc49a42482d964f380b2ae085de5bfab2.1583285287.git.alistair.francis@wdc.com>
- <CAEUhbmWFPVOZ6Sxjd+VUENqyPxCe89QYKWP-nKSkH3Co-=FYbg@mail.gmail.com>
- <CAKmqyKNrG4Uh_WKwEfiX=HpFoFiforzjKxnY+dZmBQBdKfZceg@mail.gmail.com>
- <CAEUhbmXTzjukKbaXqS+ivxtxbu+tcVFDCg1hcSw5roQjJhx9og@mail.gmail.com>
- <CAKmqyKMLcKKGbA3gJGDMgw77vWNdsU_GhkqC+m9OsN5tBFv0OQ@mail.gmail.com>
-In-Reply-To: <CAKmqyKMLcKKGbA3gJGDMgw77vWNdsU_GhkqC+m9OsN5tBFv0OQ@mail.gmail.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Fri, 6 Mar 2020 08:09:01 +0800
-Message-ID: <CAEUhbmX8ytjiH6JWdvZLveSaN6PS7zHF9wRcDM_yxCA48wn6tQ@mail.gmail.com>
-Subject: Re: [PATCH v1 2/3] riscv/sifive_u: Add a serial property to the
- sifive_u SoC
-To: Alistair Francis <alistair23@gmail.com>
-Cc: Alistair Francis <alistair.francis@wdc.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>
+References: <20200305200558.71104-1-palmerdabbelt@google.com>
+In-Reply-To: <20200305200558.71104-1-palmerdabbelt@google.com>
+From: Peter Maydell <peter.maydell@linaro.org>
+Date: Fri, 6 Mar 2020 09:54:37 +0000
+Message-ID: <CAFEAcA8vUdrYRbi+KxHDaMiE2enUWKEZujYGN6yJnUdrATMr-g@mail.gmail.com>
+Subject: Re: [PULL] A single RISC-V fixup
+To: Palmer Dabbelt <palmerdabbelt@google.com>
+Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ QEMU Developers <qemu-devel@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::c43
+X-Received-From: 2607:f8b0:4864:20::243
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -72,83 +65,33 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Mar 2020 00:09:21 -0000
+X-List-Received-Date: Fri, 06 Mar 2020 09:54:52 -0000
 
-Hi Alistair,
-
-On Fri, Mar 6, 2020 at 12:53 AM Alistair Francis <alistair23@gmail.com> wrote:
+On Thu, 5 Mar 2020 at 20:06, Palmer Dabbelt <palmerdabbelt@google.com> wrote:
 >
-> On Thu, Mar 5, 2020 at 1:31 AM Bin Meng <bmeng.cn@gmail.com> wrote:
-> >
-> > Hi Alistair,
-> >
-> > On Thu, Mar 5, 2020 at 7:13 AM Alistair Francis <alistair23@gmail.com> wrote:
-> > >
-> > > On Wed, Mar 4, 2020 at 6:47 AM Bin Meng <bmeng.cn@gmail.com> wrote:
-> > > >
-> > > > Hi Alistair,
-> > > >
-> > > > On Wed, Mar 4, 2020 at 9:37 AM Alistair Francis
-> > > > <alistair.francis@wdc.com> wrote:
-> > > > >
-> > > > > At present the board serial number is hard-coded to 1, and passed
-> > > > > to OTP model during initialization. Firmware (FSBL, U-Boot) uses
-> > > > > the serial number to generate a unique MAC address for the on-chip
-> > > > > ethernet controller. When multiple QEMU 'sifive_u' instances are
-> > > > > created and connected to the same subnet, they all have the same
-> > > > > MAC address hence it creates a unusable network.
-> > > > >
-> > > > > A new "serial" property is introduced to the sifive_u SoC to specify
-> > > > > the board serial number. When not given, the default serial number
-> > > > > 1 is used.
-> > > > >
-> > > > > Suggested-by: Bin Meng <bmeng.cn@gmail.com>
-> > > > > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> > > > > ---
-> > > > >  hw/riscv/sifive_u.c         | 8 +++++++-
-> > > > >  include/hw/riscv/sifive_u.h | 2 ++
-> > > > >  2 files changed, 9 insertions(+), 1 deletion(-)
-> > > > >
-> > > > > diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-> > > > > index 9a0145b5b4..e52f9d0bd4 100644
-> > > > > --- a/hw/riscv/sifive_u.c
-> > > > > +++ b/hw/riscv/sifive_u.c
-> > > > > @@ -488,7 +488,7 @@ static void riscv_sifive_u_soc_init(Object *obj)
-> > > > >                            TYPE_SIFIVE_U_PRCI);
-> > > > >      sysbus_init_child_obj(obj, "otp", &s->otp, sizeof(s->otp),
-> > > > >                            TYPE_SIFIVE_U_OTP);
-> > > > > -    qdev_prop_set_uint32(DEVICE(&s->otp), "serial", OTP_SERIAL);
-> > > > > +    qdev_prop_set_uint32(DEVICE(&s->otp), "serial", s->serial);
-> > > > >      sysbus_init_child_obj(obj, "gem", &s->gem, sizeof(s->gem),
-> > > > >                            TYPE_CADENCE_GEM);
-> > > > >  }
-> > > > > @@ -607,10 +607,16 @@ static void riscv_sifive_u_soc_realize(DeviceState *dev, Error **errp)
-> > > > >          memmap[SIFIVE_U_GEM_MGMT].base, memmap[SIFIVE_U_GEM_MGMT].size);
-> > > > >  }
-> > > > >
-> > > > > +static Property riscv_sifive_u_soc_props[] = {
-> > > > > +    DEFINE_PROP_UINT32("serial", SiFiveUSoCState, serial, OTP_SERIAL),
-> > > > > +    DEFINE_PROP_END_OF_LIST()
-> > > >
-> > > > I am not sure how adding another level of property in the SoC could
-> > > > solve the 'make check' error.
-> > >
-> > > The problem is that you were adding a machine property and then you
-> > > had the SoC reach up to the machine object to get the serial value.
-> > > This isn't correct and is why the tests fail.
-> > >
-> >
-> > So looks the failure was due to a check in the test codes only? As I
-> > did not see QEMU crashed during my normal usage.
+> merged tag 'pull-target-arm-20200305'
 >
-> No, the bug was in the actual implementation. You were just lucky that
-> you didn't see any issues as in your case you could access the machine
-> state. The make check probably added the SoC individually and hence
-> caught the bug.
+>   Merge remote-tracking branch 'remotes/pmaydell/tags/pull-target-arm-20200305' into staging (2020-03-05 16:47:37 +0000)
+>
+> are available in the Git repository at:
+>
+>   git@github.com:palmer-dabbelt/qemu.git tags/riscv-for-master-5.0-sf4
+>
+> for you to fetch changes up to fd990e86a7c99f5c99d430160243a3bcc64b0dea:
+>
+>   RISC-V: Add a missing "," in riscv_excp_names (2020-03-05 12:01:43 -0800)
+>
+> ----------------------------------------------------------------
+> A single RISC-V fixup
+>
+> This is just a single patch, which fixes a bug found by Coverity.
+>
 
-That sounds like the difference that caused the crash in the test.
-Thanks for helping this!
 
-Regards,
-Bin
+Applied, thanks.
+
+Please update the changelog at https://wiki.qemu.org/ChangeLog/5.0
+for any user-visible changes.
+
+-- PMM
 
