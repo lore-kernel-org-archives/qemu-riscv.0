@@ -1,59 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jA9h0-0005qe-5W
-	for mharc-qemu-riscv@gnu.org; Fri, 06 Mar 2020 04:54:54 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:46454)
+	id 1jAGoi-0004lN-9z
+	for mharc-qemu-riscv@gnu.org; Fri, 06 Mar 2020 12:31:20 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58211)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <peter.maydell@linaro.org>) id 1jA9gx-0005nS-OF
- for qemu-riscv@nongnu.org; Fri, 06 Mar 2020 04:54:52 -0500
+ (envelope-from <palmerdabbelt@google.com>) id 1jAGoe-0004jh-BL
+ for qemu-riscv@nongnu.org; Fri, 06 Mar 2020 12:31:18 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <peter.maydell@linaro.org>) id 1jA9gw-0004wI-DC
- for qemu-riscv@nongnu.org; Fri, 06 Mar 2020 04:54:51 -0500
-Received: from mail-oi1-x243.google.com ([2607:f8b0:4864:20::243]:44346)
+ (envelope-from <palmerdabbelt@google.com>) id 1jAGoc-0003ih-C1
+ for qemu-riscv@nongnu.org; Fri, 06 Mar 2020 12:31:15 -0500
+Received: from mail-pl1-x644.google.com ([2607:f8b0:4864:20::644]:44171)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <peter.maydell@linaro.org>)
- id 1jA9gw-0004tS-61
- for qemu-riscv@nongnu.org; Fri, 06 Mar 2020 04:54:50 -0500
-Received: by mail-oi1-x243.google.com with SMTP id d62so1939072oia.11
- for <qemu-riscv@nongnu.org>; Fri, 06 Mar 2020 01:54:50 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=5mqvOeQPRdC0xpis/LcpEbxJY2rwTbFGI1AuPRFCDp4=;
- b=C1ks/bWdi4sJWrj8rP0VkhNTH9vBVhh0x5NLd2w5nsVJWijOTIWpvsPEspaKdMYcsG
- /D7q3Nmm+zQ4v/eR3gEnq5/ID5qme1f04xY+hZu7jkQ9qmovzlEf/GTrcimn7rguyXlZ
- ATO1wwprP1IkZiQtNEA/L7y35QcRYLtxcE2xvG53WPE8vvq3kValKG8FEW0mIQKrFZ2E
- 8eSHTtUGfTgebWUxOG7Kvv+tVTTayEG9geYXrjYSpHoQJA0k62JSkClV0IxXX28i/9TB
- eXfz+o8h5Jr41kzrjKebB8FWGpnVSTrHkICLusVQMw2122zoifoNoxF8UuUUCaeCQ35u
- WM3Q==
+ (Exim 4.71) (envelope-from <palmerdabbelt@google.com>)
+ id 1jAGob-0003eF-Dy
+ for qemu-riscv@nongnu.org; Fri, 06 Mar 2020 12:31:13 -0500
+Received: by mail-pl1-x644.google.com with SMTP id d9so1124999plo.11
+ for <qemu-riscv@nongnu.org>; Fri, 06 Mar 2020 09:31:11 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
+ h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
+ :content-transfer-encoding;
+ bh=UygXtcOquP2uukbvmDPtogXvWNDERxgs47LKEBGVpuM=;
+ b=HtmpVxtXBu3s2SvVO1xTXufD//yEf3iSUGLoHJIoG4H9Yb/6hfBjd316S4JUUpeTD+
+ y/te8aR1QUYTmo88SFNHAMA70YFBNDXVPy3GzUSIsbP+qhq3G2f7M0oQpsYkmKsB40pu
+ HbavdHJBOOLxhl6idIfOdGmDKvVuTItmQ9X07SyNx/S5jhXN42u6+MfzeU73zwuM7qhb
+ 0Rmg/LF+nR4UafazVAviL3EaYH0iqBwrdR0qzsb+pqXjsxQBltPAi2lXca8Fx/6Uu3f9
+ WVWQd+lwMSK71PcUfljfz8UdcXA0g35Q3Dvf++jkWSDErePJso0QgIptvoRO58bBzSxA
+ l/5w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=5mqvOeQPRdC0xpis/LcpEbxJY2rwTbFGI1AuPRFCDp4=;
- b=JFHdDToxtpAByK1OwXN2PKNgDeKlwolTW/LeUAMFhPp3cul6yiJ3oz7VzIqrUoukM6
- YlmWz3D2APyhDtzXpx4ZbhVag/utdEsnQ6UkRem9he1IbMHGZVKyqdwruq7Pw6wtxkWb
- qioYul2pUvPVXugVPVcXGQKHxGx0N0i3tFcVWjJT/WNIeUvrBpF9PjSc7yY4mW2MyWl7
- pqbcb4dsr/00JVw7V17F/iq/qVjP8+u7b5D588rv8HEbUQRdG0qEfof7TePuHaBmmo73
- Cevgbf7M8Uy432J1uiJ0edlmQdQHW6lb717XFn1p0WE8wdi/VVp+h0rkVke7rcvbZb1L
- +XjA==
-X-Gm-Message-State: ANhLgQ2/jw9j6FmLr6IcdAyHPYIXyeZOxyRmbIiSUTzvJyR9Uf3g88Zb
- c46JEDURtCqxmmyJziTTzjnJqQShxlLzsfrgPsBsdw==
-X-Google-Smtp-Source: ADFU+vudnS6HLIw9sZOxbuyM7gYSDQ1TmH8IKV5dnmKszldvaXDN8HTQyHL2Shfi+Hq6cGAAlJQZLsK3tnoCfOJqWDY=
-X-Received: by 2002:aca:3d7:: with SMTP id 206mr1989658oid.98.1583488488963;
- Fri, 06 Mar 2020 01:54:48 -0800 (PST)
-MIME-Version: 1.0
-References: <20200305200558.71104-1-palmerdabbelt@google.com>
-In-Reply-To: <20200305200558.71104-1-palmerdabbelt@google.com>
-From: Peter Maydell <peter.maydell@linaro.org>
-Date: Fri, 6 Mar 2020 09:54:37 +0000
-Message-ID: <CAFEAcA8vUdrYRbi+KxHDaMiE2enUWKEZujYGN6yJnUdrATMr-g@mail.gmail.com>
-Subject: Re: [PULL] A single RISC-V fixup
-To: Palmer Dabbelt <palmerdabbelt@google.com>
-Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
- QEMU Developers <qemu-devel@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
+ h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
+ :mime-version:content-transfer-encoding;
+ bh=UygXtcOquP2uukbvmDPtogXvWNDERxgs47LKEBGVpuM=;
+ b=faVdxZ5JvQD2Ljdm4Fa7CCG8kKU3PnpntnOFFHn0hgS83F4mRCIrDl32EqT50m4DS/
+ p6Ubyp/435y2d7qfEQ3qhOrHpkzDim7RRRnRKWiuPpIoujRz+i2Rrom3MwiG6ASLL9Xs
+ ivJtmeNNXJODJYs0hifKr79K+ezIAAVF+4JcOMH1qi0+f3PJop2qLXl/AGr12JRlmYHn
+ m0nbuPfSvuSdU3ES6AuhXwYGBhzwoKahOKfxcNC0Mj8HRFBT6aNJ7fKS/WzDdM/7n6qE
+ TKkltdL7PQL1qembkBQ+Dlwt38fLZya4KyT5IhKI6Fl1hFuxZkU7IvhWKXfDpic87F2e
+ 8qYQ==
+X-Gm-Message-State: ANhLgQ03/vZow2BY1x7I/VWx+QuxybTajnuzjnsYCMwxi90OV51ZR/WV
+ HnZlt/Y3Szn3xaWczycn+2Sv+w==
+X-Google-Smtp-Source: ADFU+vumMQk9seVGom+SQkz8SLHJHP4r/sBiSaGD3PvX50CI6YaRXuXsCCDA7xcrJq6Zro3KEvKE/Q==
+X-Received: by 2002:a17:90a:d101:: with SMTP id
+ l1mr4874944pju.130.1583515869863; 
+ Fri, 06 Mar 2020 09:31:09 -0800 (PST)
+Received: from localhost ([2620:0:1000:2514:23a5:d584:6a92:3e3c])
+ by smtp.gmail.com with ESMTPSA id i5sm10206907pju.42.2020.03.06.09.31.08
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 06 Mar 2020 09:31:08 -0800 (PST)
+Date: Fri, 06 Mar 2020 09:31:08 -0800 (PST)
+X-Google-Original-Date: Fri, 06 Mar 2020 09:30:47 PST (-0800)
+Subject: Re: [PATCH 1/1] target/riscv: Fix VS mode interrupts forwarding.
+In-Reply-To: <CAKmqyKMDPXLig4E4VJvqwvd7O7DtFD0PmWD44zoGDY-izJLsHQ@mail.gmail.com>
+CC: rajnesh.kanwal49@gmail.com, josemartins90@gmail.com, qemu-riscv@nongnu.org,
+ Alistair Francis <Alistair.Francis@wdc.com>, qemu-devel@nongnu.org
+From: Palmer Dabbelt <palmerdabbelt@google.com>
+To: alistair23@gmail.com
+Message-ID: <mhng-4a8f061d-5e72-44e7-a2a2-b72cd52332a3@palmerdabbelt-glaptop1>
+Mime-Version: 1.0 (MHng)
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::243
+X-Received-From: 2607:f8b0:4864:20::644
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -65,33 +72,88 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Mar 2020 09:54:52 -0000
+X-List-Received-Date: Fri, 06 Mar 2020 17:31:19 -0000
 
-On Thu, 5 Mar 2020 at 20:06, Palmer Dabbelt <palmerdabbelt@google.com> wrote:
+On Wed, 26 Feb 2020 09:55:34 PST (-0800), alistair23@gmail.com wrote:
+> On Wed, Feb 26, 2020 at 12:54 AM Rajnesh Kanwal
+> <rajnesh.kanwal49@gmail.com> wrote:
+>>
+>> Here is the link to the patch
+>> https://lists.nongnu.org/archive/html/qemu-riscv/2020-01/msg00191.html
 >
-> merged tag 'pull-target-arm-20200305'
->
->   Merge remote-tracking branch 'remotes/pmaydell/tags/pull-target-arm-20200305' into staging (2020-03-05 16:47:37 +0000)
->
-> are available in the Git repository at:
->
->   git@github.com:palmer-dabbelt/qemu.git tags/riscv-for-master-5.0-sf4
->
-> for you to fetch changes up to fd990e86a7c99f5c99d430160243a3bcc64b0dea:
->
->   RISC-V: Add a missing "," in riscv_excp_names (2020-03-05 12:01:43 -0800)
->
-> ----------------------------------------------------------------
-> A single RISC-V fixup
->
-> This is just a single patch, which fixes a bug found by Coverity.
->
+> Ah, it doesn't look like it made it to the QEMU-devel list. Can you
+> re-send it to QEMU-devel?
 
+I can't find the older patch in my inbox, so I'm just taking this one.
 
-Applied, thanks.
-
-Please update the changelog at https://wiki.qemu.org/ChangeLog/5.0
-for any user-visible changes.
-
--- PMM
+>
+> Alistair
+>
+>>
+>> -Rajnesh
+>>
+>> On Tue, Feb 25, 2020 at 12:06 AM Alistair Francis <alistair23@gmail.com> wrote:
+>>>
+>>> On Sun, Feb 23, 2020 at 11:23 AM Jose Martins <josemartins90@gmail.com> wrote:
+>>> >
+>>> > Hello rajnesh,
+>>> >
+>>> > I had already submitted almost this exact patch a few weeks ago.
+>>>
+>>> To QEMU? I don't see the patch.
+>>>
+>>> Alistair
+>>>
+>>> >
+>>> > Jose
+>>> >
+>>> > On Sun, 23 Feb 2020 at 13:51, <rajnesh.kanwal49@gmail.com> wrote:
+>>> > >
+>>> > > From: Rajnesh Kanwal <rajnesh.kanwal49@gmail.com>
+>>> > >
+>>> > > Currently riscv_cpu_local_irq_pending is used to find out pending
+>>> > > interrupt and VS mode interrupts are being shifted to represent
+>>> > > S mode interrupts in this function. So when the cause returned by
+>>> > > this function is passed to riscv_cpu_do_interrupt to actually
+>>> > > forward the interrupt, the VS mode forwarding check does not work
+>>> > > as intended and interrupt is actually forwarded to hypervisor. This
+>>> > > patch fixes this issue.
+>>> > >
+>>> > > Signed-off-by: Rajnesh Kanwal <rajnesh.kanwal49@gmail.com>
+>>> > > ---
+>>> > >  target/riscv/cpu_helper.c | 9 ++++++++-
+>>> > >  1 file changed, 8 insertions(+), 1 deletion(-)
+>>> > >
+>>> > > diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+>>> > > index b9e90dfd9a..59535ecba6 100644
+>>> > > --- a/target/riscv/cpu_helper.c
+>>> > > +++ b/target/riscv/cpu_helper.c
+>>> > > @@ -46,7 +46,7 @@ static int riscv_cpu_local_irq_pending(CPURISCVState *env)
+>>> > >      target_ulong pending = env->mip & env->mie &
+>>> > >                                 ~(MIP_VSSIP | MIP_VSTIP | MIP_VSEIP);
+>>> > >      target_ulong vspending = (env->mip & env->mie &
+>>> > > -                              (MIP_VSSIP | MIP_VSTIP | MIP_VSEIP)) >> 1;
+>>> > > +                              (MIP_VSSIP | MIP_VSTIP | MIP_VSEIP));
+>>> > >
+>>> > >      target_ulong mie    = env->priv < PRV_M ||
+>>> > >                            (env->priv == PRV_M && mstatus_mie);
+>>> > > @@ -900,6 +900,13 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+>>> > >
+>>> > >              if (riscv_cpu_virt_enabled(env) && ((hdeleg >> cause) & 1) &&
+>>> > >                  !force_hs_execp) {
+>>> > > +                /*
+>>> > > +                 * See if we need to adjust cause. Yes if its VS mode interrupt
+>>> > > +                 * no if hypervisor has delegated one of hs mode's interrupt
+>>> > > +                 */
+>>> > > +                if (cause == IRQ_VS_TIMER || cause == IRQ_VS_SOFT ||
+>>> > > +                    cause == IRQ_VS_EXT)
+>>> > > +                    cause = cause - 1;
+>>> > >                  /* Trap to VS mode */
+>>> > >              } else if (riscv_cpu_virt_enabled(env)) {
+>>> > >                  /* Trap into HS mode, from virt */
+>>> > > --
+>>> > > 2.17.1
+>>> > >
+>>> > >
+>>> >
 
