@@ -1,66 +1,74 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jAGoi-0004lN-9z
-	for mharc-qemu-riscv@gnu.org; Fri, 06 Mar 2020 12:31:20 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:58211)
+	id 1jAHlc-0008Ip-Nm
+	for mharc-qemu-riscv@gnu.org; Fri, 06 Mar 2020 13:32:12 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:42861)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <palmerdabbelt@google.com>) id 1jAGoe-0004jh-BL
- for qemu-riscv@nongnu.org; Fri, 06 Mar 2020 12:31:18 -0500
+ (envelope-from <prvs=32724e9af=alistair.francis@wdc.com>)
+ id 1jAHla-0008F1-D9
+ for qemu-riscv@nongnu.org; Fri, 06 Mar 2020 13:32:11 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <palmerdabbelt@google.com>) id 1jAGoc-0003ih-C1
- for qemu-riscv@nongnu.org; Fri, 06 Mar 2020 12:31:15 -0500
-Received: from mail-pl1-x644.google.com ([2607:f8b0:4864:20::644]:44171)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <palmerdabbelt@google.com>)
- id 1jAGob-0003eF-Dy
- for qemu-riscv@nongnu.org; Fri, 06 Mar 2020 12:31:13 -0500
-Received: by mail-pl1-x644.google.com with SMTP id d9so1124999plo.11
- for <qemu-riscv@nongnu.org>; Fri, 06 Mar 2020 09:31:11 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
- h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
- :content-transfer-encoding;
- bh=UygXtcOquP2uukbvmDPtogXvWNDERxgs47LKEBGVpuM=;
- b=HtmpVxtXBu3s2SvVO1xTXufD//yEf3iSUGLoHJIoG4H9Yb/6hfBjd316S4JUUpeTD+
- y/te8aR1QUYTmo88SFNHAMA70YFBNDXVPy3GzUSIsbP+qhq3G2f7M0oQpsYkmKsB40pu
- HbavdHJBOOLxhl6idIfOdGmDKvVuTItmQ9X07SyNx/S5jhXN42u6+MfzeU73zwuM7qhb
- 0Rmg/LF+nR4UafazVAviL3EaYH0iqBwrdR0qzsb+pqXjsxQBltPAi2lXca8Fx/6Uu3f9
- WVWQd+lwMSK71PcUfljfz8UdcXA0g35Q3Dvf++jkWSDErePJso0QgIptvoRO58bBzSxA
- l/5w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
- :mime-version:content-transfer-encoding;
- bh=UygXtcOquP2uukbvmDPtogXvWNDERxgs47LKEBGVpuM=;
- b=faVdxZ5JvQD2Ljdm4Fa7CCG8kKU3PnpntnOFFHn0hgS83F4mRCIrDl32EqT50m4DS/
- p6Ubyp/435y2d7qfEQ3qhOrHpkzDim7RRRnRKWiuPpIoujRz+i2Rrom3MwiG6ASLL9Xs
- ivJtmeNNXJODJYs0hifKr79K+ezIAAVF+4JcOMH1qi0+f3PJop2qLXl/AGr12JRlmYHn
- m0nbuPfSvuSdU3ES6AuhXwYGBhzwoKahOKfxcNC0Mj8HRFBT6aNJ7fKS/WzDdM/7n6qE
- TKkltdL7PQL1qembkBQ+Dlwt38fLZya4KyT5IhKI6Fl1hFuxZkU7IvhWKXfDpic87F2e
- 8qYQ==
-X-Gm-Message-State: ANhLgQ03/vZow2BY1x7I/VWx+QuxybTajnuzjnsYCMwxi90OV51ZR/WV
- HnZlt/Y3Szn3xaWczycn+2Sv+w==
-X-Google-Smtp-Source: ADFU+vumMQk9seVGom+SQkz8SLHJHP4r/sBiSaGD3PvX50CI6YaRXuXsCCDA7xcrJq6Zro3KEvKE/Q==
-X-Received: by 2002:a17:90a:d101:: with SMTP id
- l1mr4874944pju.130.1583515869863; 
- Fri, 06 Mar 2020 09:31:09 -0800 (PST)
-Received: from localhost ([2620:0:1000:2514:23a5:d584:6a92:3e3c])
- by smtp.gmail.com with ESMTPSA id i5sm10206907pju.42.2020.03.06.09.31.08
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 06 Mar 2020 09:31:08 -0800 (PST)
-Date: Fri, 06 Mar 2020 09:31:08 -0800 (PST)
-X-Google-Original-Date: Fri, 06 Mar 2020 09:30:47 PST (-0800)
-Subject: Re: [PATCH 1/1] target/riscv: Fix VS mode interrupts forwarding.
-In-Reply-To: <CAKmqyKMDPXLig4E4VJvqwvd7O7DtFD0PmWD44zoGDY-izJLsHQ@mail.gmail.com>
-CC: rajnesh.kanwal49@gmail.com, josemartins90@gmail.com, qemu-riscv@nongnu.org,
- Alistair Francis <Alistair.Francis@wdc.com>, qemu-devel@nongnu.org
-From: Palmer Dabbelt <palmerdabbelt@google.com>
-To: alistair23@gmail.com
-Message-ID: <mhng-4a8f061d-5e72-44e7-a2a2-b72cd52332a3@palmerdabbelt-glaptop1>
-Mime-Version: 1.0 (MHng)
-Content-Type: text/plain; charset=utf-8; format=flowed
+ (envelope-from <prvs=32724e9af=alistair.francis@wdc.com>)
+ id 1jAHlZ-0003f6-5h
+ for qemu-riscv@nongnu.org; Fri, 06 Mar 2020 13:32:10 -0500
+Received: from esa2.hgst.iphmx.com ([68.232.143.124]:47162)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <prvs=32724e9af=alistair.francis@wdc.com>)
+ id 1jAHlV-0003Q8-Eq; Fri, 06 Mar 2020 13:32:05 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1583519532; x=1615055532;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=4Bhx9QdhIgpC1T3sfDyOZNyN2dm4mKGOjTxObaOqx5U=;
+ b=Vn2hh65d5QOuf2C6onEEgk6bDkbrLw0mWgmWTnQV3sVGAB3nlTTSprqQ
+ uyWoOt26lZBeV8hAwi3PQBvq2hunlYT2qCax+aBddg8NUE0wKDX8vWDFP
+ QhgTn5qgfqEkSSvQlUrw++Ea/AYwEnSp3K3GVzcjKkVH09TLLkKvt63Lf
+ MuC3BQ69xzrB2pW7XeB5PY0abMXoM6vhr6xi7OzPj2qdBfmTync9r9ZIV
+ wTw/Ymi11YiWFKmiii2LnwlYUtsaFi9bDdzkStPMPxl9k346wPgoLLG2B
+ p0PxehJd6v8MpJytnExuUQoPZadycOArNygzGlNbL2wKVunDb+GqZg2IN g==;
+IronPort-SDR: 1zF5nKzLnSjkJPBi5MHy8VZNJi7c5yJ3H6NRfvRxvrIzRGiH+yNeG+tx12Olq5z++FkFZvTDgw
+ qk+WYxnbCD5y8FU1go5JoqAkqCnHZBk1zCXTRC9CtMke4I5/KC+Ui5beyVc6wvpH//dyh4jPzZ
+ sVs9MhOloHAhbOMpwwHTPajwJMXvFaT2JiuN6MSpLabzmodXI+GXioYRV8wjbnpI4kVlBMEJvO
+ onF/edjPxE9dYt3hoGYF7jC7+eIZuilCyAEZnY2QgCOWOu2ocMX7j+aBg1dcYv3YaavMnTzskh
+ PzY=
+X-IronPort-AV: E=Sophos;i="5.70,523,1574092800"; d="scan'208";a="233755496"
+Received: from h199-255-45-14.hgst.com (HELO uls-op-cesaep01.wdc.com)
+ ([199.255.45.14])
+ by ob1.hgst.iphmx.com with ESMTP; 07 Mar 2020 02:31:46 +0800
+IronPort-SDR: WtUEOaHRqP8RsT5MFW/FtD68KETkPZ8NGeGIlkUtjVlaSXKv50Ck7WmjwYn8CBmT2TPg9mRvSq
+ YBxFqWtbVaKx70SdGXyIqlE8uGyZgiC59Db3rSlb+IZY9x8mwFTHkJfqQx/BCkKv5Ff7BqUwRe
+ XE1FC2SJoFju32q7SsJdyzCIY3ODICakhJlXXtwRlwVxEc2M8zilOVHL4zniiqWo1lJJJ6iThK
+ oB4091kl7VA53zSPU3RImPo9MlfLiHn1YDSFJ/bZge0PhaYM/ap+mndThowKUV/5eQ9yL4dpmM
+ aWyh3oZbMWBbWcny0J/x3FZE
+Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
+ by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 06 Mar 2020 10:23:53 -0800
+IronPort-SDR: +kA2M0/fxCDWIjD5hwKnf+SQ/ANpCpwoveJ03vUyo5wjtTAUN7tVWnoRqZnJEKMEtsLsg0vzwx
+ H6zWE0dHPQqzc9swUgdND7OCRTRKntx9h0jjtkChC72CsP4p6Iv6ssYXXlfBCep1ESbveI/CLj
+ /SIvAIbMJ5yg2kWLzBFUgVd/Q+SDuKrevy/0DAjGxJwkma8Pxd7bo2P3+/IG3UtWZKrtO79m+F
+ H67EVA7K+k65qSnMii/DOS62v7upnnIv3vFx+RdVmhRrff0YOQKPBMPjLOHiq3GiiOSQpLQxRD
+ ctc=
+WDCIronportException: Internal
+Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
+ risc6-mainframe.int.fusionio.com) ([10.196.158.235])
+ by uls-op-cesaip02.wdc.com with ESMTP; 06 Mar 2020 10:31:43 -0800
+From: Alistair Francis <alistair.francis@wdc.com>
+To: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, aleksandar.m.mail@gmail.com,
+ laurent@vivier.eu
+Cc: palmer@dabbelt.com,
+	alistair.francis@wdc.com,
+	alistair23@gmail.com
+Subject: [PATCH v6 2/4] linux-user/syscall: Add support for
+ clock_gettime64/clock_settime64
+Date: Fri,  6 Mar 2020 10:24:25 -0800
+Message-Id: <5fa31f8938fb16e6d07d3ec10e6ddb7a4e274f79.1583518447.git.alistair.francis@wdc.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <cover.1583518447.git.alistair.francis@wdc.com>
+References: <cover.1583518447.git.alistair.francis@wdc.com>
+MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2607:f8b0:4864:20::644
+X-detected-operating-system: by eggs.gnu.org: FreeBSD 9.x [fuzzy]
+X-Received-From: 68.232.143.124
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -72,88 +80,86 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Mar 2020 17:31:19 -0000
+X-List-Received-Date: Fri, 06 Mar 2020 18:32:11 -0000
 
-On Wed, 26 Feb 2020 09:55:34 PST (-0800), alistair23@gmail.com wrote:
-> On Wed, Feb 26, 2020 at 12:54 AM Rajnesh Kanwal
-> <rajnesh.kanwal49@gmail.com> wrote:
->>
->> Here is the link to the patch
->> https://lists.nongnu.org/archive/html/qemu-riscv/2020-01/msg00191.html
->
-> Ah, it doesn't look like it made it to the QEMU-devel list. Can you
-> re-send it to QEMU-devel?
+Add support for the clock_gettime64/clock_settime64 syscalls.
 
-I can't find the older patch in my inbox, so I'm just taking this one.
+If your host is 64-bit or is 32-bit with the *_time64 syscall then the
+timespec will correctly be a 64-bit time_t. Otherwise the host will
+return a 32-bit time_t which will be rounded to 64-bits. This will be
+incorrect after y2038.
 
->
-> Alistair
->
->>
->> -Rajnesh
->>
->> On Tue, Feb 25, 2020 at 12:06 AM Alistair Francis <alistair23@gmail.com> wrote:
->>>
->>> On Sun, Feb 23, 2020 at 11:23 AM Jose Martins <josemartins90@gmail.com> wrote:
->>> >
->>> > Hello rajnesh,
->>> >
->>> > I had already submitted almost this exact patch a few weeks ago.
->>>
->>> To QEMU? I don't see the patch.
->>>
->>> Alistair
->>>
->>> >
->>> > Jose
->>> >
->>> > On Sun, 23 Feb 2020 at 13:51, <rajnesh.kanwal49@gmail.com> wrote:
->>> > >
->>> > > From: Rajnesh Kanwal <rajnesh.kanwal49@gmail.com>
->>> > >
->>> > > Currently riscv_cpu_local_irq_pending is used to find out pending
->>> > > interrupt and VS mode interrupts are being shifted to represent
->>> > > S mode interrupts in this function. So when the cause returned by
->>> > > this function is passed to riscv_cpu_do_interrupt to actually
->>> > > forward the interrupt, the VS mode forwarding check does not work
->>> > > as intended and interrupt is actually forwarded to hypervisor. This
->>> > > patch fixes this issue.
->>> > >
->>> > > Signed-off-by: Rajnesh Kanwal <rajnesh.kanwal49@gmail.com>
->>> > > ---
->>> > >  target/riscv/cpu_helper.c | 9 ++++++++-
->>> > >  1 file changed, 8 insertions(+), 1 deletion(-)
->>> > >
->>> > > diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
->>> > > index b9e90dfd9a..59535ecba6 100644
->>> > > --- a/target/riscv/cpu_helper.c
->>> > > +++ b/target/riscv/cpu_helper.c
->>> > > @@ -46,7 +46,7 @@ static int riscv_cpu_local_irq_pending(CPURISCVState *env)
->>> > >      target_ulong pending = env->mip & env->mie &
->>> > >                                 ~(MIP_VSSIP | MIP_VSTIP | MIP_VSEIP);
->>> > >      target_ulong vspending = (env->mip & env->mie &
->>> > > -                              (MIP_VSSIP | MIP_VSTIP | MIP_VSEIP)) >> 1;
->>> > > +                              (MIP_VSSIP | MIP_VSTIP | MIP_VSEIP));
->>> > >
->>> > >      target_ulong mie    = env->priv < PRV_M ||
->>> > >                            (env->priv == PRV_M && mstatus_mie);
->>> > > @@ -900,6 +900,13 @@ void riscv_cpu_do_interrupt(CPUState *cs)
->>> > >
->>> > >              if (riscv_cpu_virt_enabled(env) && ((hdeleg >> cause) & 1) &&
->>> > >                  !force_hs_execp) {
->>> > > +                /*
->>> > > +                 * See if we need to adjust cause. Yes if its VS mode interrupt
->>> > > +                 * no if hypervisor has delegated one of hs mode's interrupt
->>> > > +                 */
->>> > > +                if (cause == IRQ_VS_TIMER || cause == IRQ_VS_SOFT ||
->>> > > +                    cause == IRQ_VS_EXT)
->>> > > +                    cause = cause - 1;
->>> > >                  /* Trap to VS mode */
->>> > >              } else if (riscv_cpu_virt_enabled(env)) {
->>> > >                  /* Trap into HS mode, from virt */
->>> > > --
->>> > > 2.17.1
->>> > >
->>> > >
->>> >
+Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Laurent Vivier <laurent@vivier.eu>
+---
+ linux-user/syscall.c | 39 +++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 39 insertions(+)
+
+diff --git a/linux-user/syscall.c b/linux-user/syscall.c
+index 1a7df23440..0f219b26c1 100644
+--- a/linux-user/syscall.c
++++ b/linux-user/syscall.c
+@@ -1231,6 +1231,22 @@ static inline abi_long target_to_host_timespec(struct timespec *host_ts,
+ }
+ #endif
+ 
++#if defined(TARGET_NR_clock_settime64)
++static inline abi_long target_to_host_timespec64(struct timespec *host_ts,
++                                                 abi_ulong target_addr)
++{
++    struct target__kernel_timespec *target_ts;
++
++    if (!lock_user_struct(VERIFY_READ, target_ts, target_addr, 1)) {
++        return -TARGET_EFAULT;
++    }
++    __get_user(host_ts->tv_sec, &target_ts->tv_sec);
++    __get_user(host_ts->tv_nsec, &target_ts->tv_nsec);
++    unlock_user_struct(target_ts, target_addr, 0);
++    return 0;
++}
++#endif
++
+ static inline abi_long host_to_target_timespec(abi_ulong target_addr,
+                                                struct timespec *host_ts)
+ {
+@@ -11460,6 +11476,18 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
+         return ret;
+     }
+ #endif
++#ifdef TARGET_NR_clock_settime64
++    case TARGET_NR_clock_settime64:
++    {
++        struct timespec ts;
++
++        ret = target_to_host_timespec64(&ts, arg2);
++        if (!is_error(ret)) {
++            ret = get_errno(clock_settime(arg1, &ts));
++        }
++        return ret;
++    }
++#endif
+ #ifdef TARGET_NR_clock_gettime
+     case TARGET_NR_clock_gettime:
+     {
+@@ -11471,6 +11499,17 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
+         return ret;
+     }
+ #endif
++#ifdef TARGET_NR_clock_gettime64
++    case TARGET_NR_clock_gettime64:
++    {
++        struct timespec ts;
++        ret = get_errno(clock_gettime(arg1, &ts));
++        if (!is_error(ret)) {
++            ret = host_to_target_timespec64(arg2, &ts);
++        }
++        return ret;
++    }
++#endif
+ #ifdef TARGET_NR_clock_getres
+     case TARGET_NR_clock_getres:
+     {
+-- 
+2.25.1
+
 
