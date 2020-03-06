@@ -1,67 +1,97 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jAJ0m-0003YC-Le
-	for mharc-qemu-riscv@gnu.org; Fri, 06 Mar 2020 14:51:56 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44446)
+	id 1jAK17-0006Dn-7g
+	for mharc-qemu-riscv@gnu.org; Fri, 06 Mar 2020 15:56:21 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:36438)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <alistair23@gmail.com>) id 1jAJ0j-0003UJ-CR
- for qemu-riscv@nongnu.org; Fri, 06 Mar 2020 14:51:54 -0500
+ (envelope-from <laurent@vivier.eu>) id 1jAK14-0006C3-2I
+ for qemu-riscv@nongnu.org; Fri, 06 Mar 2020 15:56:19 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1jAJ0i-0003nB-7d
- for qemu-riscv@nongnu.org; Fri, 06 Mar 2020 14:51:53 -0500
-Received: from mail-vk1-xa42.google.com ([2607:f8b0:4864:20::a42]:39039)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1jAJ0f-0003f3-IV; Fri, 06 Mar 2020 14:51:49 -0500
-Received: by mail-vk1-xa42.google.com with SMTP id t129so940808vkg.6;
- Fri, 06 Mar 2020 11:51:49 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=jtvBEhmbkno0g0p63SO8wukXuC60CI3AMLSaeMMvhTw=;
- b=qniVqyqbqQXLum2Ow8fSpKWv3OCgV1pUpNfmW1n9kUPoMfN+iMW1tx3QJz/Q1VnZaw
- S8BeDWoDa4h5x/XkvzKe60JSAeImFRx/rIRxMKbEMmBOiaYaqiWArBEt9SYUZXrsj6Gl
- jN2/OUUjLMkUWKSWoWEBZhGVxrcr3TkUdCO9M6cNxjFFf724AwM/P43rFZ9o/HkRgkCD
- B5P4DPo2AeIRLkSHL9t5SFB/9bSq0TOAGmUnud00zmulzd0zAGQhpTDK9dRnj1F+y/+h
- emt+K6FpUyPut9gC0lV9LD1ZdaDMYsYWu/cW1KA1zKHrDh6gXRA3YkQFCvoB8YKScXEH
- AGuQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=jtvBEhmbkno0g0p63SO8wukXuC60CI3AMLSaeMMvhTw=;
- b=WPepJ2i/UMI5LWDOELEnT0G2vAsQgMZ7g/kTlGp4haDi0x3WfZzHfDKsbTigmkRmee
- 3U5QCocdgMUzx9pPxriasDGYZbj4CrAshIgdwn4xxj2jt15jRm7SaL12BFBIiKfjdLOY
- MVuBUR2G8MLxSKMs/zXnPgaSw9lFBBwqxvsVGFm/Fgehfk9LVaWyvGIK7A3A9H1rB5Cu
- aEyGv9iZ8nH5SF5nmEwBnNali737ZJIzN7zw8SdAwIrO8fA+YC6IkW4Ituggse+S3Frx
- NbB0CNLQVKwuE2O3ncQJE/x920ejqH6WsrkejocU3ONmK7ZvwwRVtGcWhj1hydMtkN5k
- caDw==
-X-Gm-Message-State: ANhLgQ3dpA4MQfYbZFH75Htg7xK2dWx45i1Jh9c+e32LFLZ6RpBQmwdY
- TjFdrr0BqceKB3ju5NEUBb2rmTQm+GuwEeuZdI4=
-X-Google-Smtp-Source: ADFU+vvWqwScidltFbrxAW4rZinVUrKRubTyb/BS/fOwuOU0p5HekGM4mpQrEgdIhF8GlDVgjVKBlOQ8mx2n6fh5u4o=
-X-Received: by 2002:a1f:9d16:: with SMTP id g22mr2670145vke.22.1583524308549; 
- Fri, 06 Mar 2020 11:51:48 -0800 (PST)
+ (envelope-from <laurent@vivier.eu>) id 1jAK13-0007OM-4q
+ for qemu-riscv@nongnu.org; Fri, 06 Mar 2020 15:56:18 -0500
+Received: from mout.kundenserver.de ([217.72.192.75]:35561)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <laurent@vivier.eu>)
+ id 1jAK0x-0007F7-6O; Fri, 06 Mar 2020 15:56:11 -0500
+Received: from [192.168.100.1] ([82.252.135.106]) by mrelayeu.kundenserver.de
+ (mreue107 [213.165.67.119]) with ESMTPSA (Nemesis) id
+ 1MSLlu-1im9Hf19cO-00SiUY; Fri, 06 Mar 2020 21:56:03 +0100
+To: Alistair Francis <alistair.francis@wdc.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org, aleksandar.m.mail@gmail.com
+Cc: palmer@dabbelt.com, alistair23@gmail.com
+References: <cover.1583518447.git.alistair.francis@wdc.com>
+ <a933ba620f7a471fe04aa9d2a929bad280d008cb.1583518447.git.alistair.francis@wdc.com>
+From: Laurent Vivier <laurent@vivier.eu>
+Autocrypt: addr=laurent@vivier.eu; prefer-encrypt=mutual; keydata=
+ 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
+Subject: Re: [PATCH v6 1/4] linux-user: Protect more syscalls
+Message-ID: <eb571a17-4959-97cb-80bf-7bd1f4120c9d@vivier.eu>
+Date: Fri, 6 Mar 2020 21:56:01 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.4.1
 MIME-Version: 1.0
-References: <cover.1583285287.git.alistair.francis@wdc.com>
- <e91f9fccc49a42482d964f380b2ae085de5bfab2.1583285287.git.alistair.francis@wdc.com>
- <CAEUhbmWFPVOZ6Sxjd+VUENqyPxCe89QYKWP-nKSkH3Co-=FYbg@mail.gmail.com>
- <CAKmqyKNrG4Uh_WKwEfiX=HpFoFiforzjKxnY+dZmBQBdKfZceg@mail.gmail.com>
- <CAEUhbmXTzjukKbaXqS+ivxtxbu+tcVFDCg1hcSw5roQjJhx9og@mail.gmail.com>
- <CAKmqyKMLcKKGbA3gJGDMgw77vWNdsU_GhkqC+m9OsN5tBFv0OQ@mail.gmail.com>
- <CAEUhbmX8ytjiH6JWdvZLveSaN6PS7zHF9wRcDM_yxCA48wn6tQ@mail.gmail.com>
-In-Reply-To: <CAEUhbmX8ytjiH6JWdvZLveSaN6PS7zHF9wRcDM_yxCA48wn6tQ@mail.gmail.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 6 Mar 2020 11:51:21 -0800
-Message-ID: <CAKmqyKM=+xA28qo=1vXWNYf2JNDKKWmr4t6+4UxVUk+BGVt3tw@mail.gmail.com>
-Subject: Re: [PATCH v1 2/3] riscv/sifive_u: Add a serial property to the
- sifive_u SoC
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Alistair Francis <alistair.francis@wdc.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>
-Content-Type: text/plain; charset="UTF-8"
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2607:f8b0:4864:20::a42
+In-Reply-To: <a933ba620f7a471fe04aa9d2a929bad280d008cb.1583518447.git.alistair.francis@wdc.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: fr
+Content-Transfer-Encoding: 8bit
+X-Provags-ID: V03:K1:akO8ceL3Oe8mkN+EW4F4bUOdKuz3LKKn8qi0jbTvqTLrX3sQ0j2
+ q9sSFYha1JFXW4T1V3bp9AVl59ArVwXwBFtwrLqkh/LN5UVio4yfYIf45glvyrB+8O0lRhI
+ BEiSMZ3yeH4Kr9AGI2l0Hw8BGxzsXxbrQ7Wix+CeQzatNAXjTMHTGixBUYTcLlMOYpFu/nZ
+ SFkK7XYSvhsD9tL6XGDUg==
+X-UI-Out-Filterresults: notjunk:1;V03:K0:yWFqOZbnn78=:2j4wbYYnnW8Zc6vB3yGyFx
+ st81YdVlQftvkvPiiLgzGILFkXZoXaKMfmEUnYtMFR1AVFmyIx/BthLdNagczFAIXHSANYvq1
+ /JkF+mbdGRIua91VOAIwtaIpNrW4OdX8E90Wzwm0ZDULLHnlXETDJtkeZLTWooFs2v8b2j6Fr
+ FNPDbmzzz48ooeSL0/hODotG/WSGAXxvGmUwVH+4Cah/FvXR2yHlGii2aFAl3AI9PHJG8xKQu
+ 3ik1ayIhwAEIrf2TxLP8O+24KI8NHhTgPfgswxC49P9IbXsGIsyS8BC5yKsFMQxDDRJ4l9t7y
+ lSY7OqylMhICQSCep52NbXIoBnXv56BMzCg+c5mQHhM0jCcX4QKlyMje2Jh9cKQRxUgn3cWc2
+ KbXD/IFPOK+Xfd63M3nXBoBpy/Kzt88F3lxpELTO4Yp8n4j4jRUVatS21bcEwx0hb258NXCvo
+ JzEDHY8/q89sJyCVXteSFgF79CmJCP7Q3/jcHo1OyfY2ja43oySvl+gG3OALuVdcNURK3ojQA
+ xBntpBowe3GXZv0xQF6xc3bDICTVm8E356q32rC1eb/9xuI1Qj2+4nEP8OTusPkazdRIDLMIQ
+ 20HeYvpRykvt1TkWcNuHXRTgiVIMo1Ty3LA4OabtC/beP/O5ALKtUTtEQXeRTcRMKgbACzbxz
+ lGjTSlRDi1zIOmiXjXab+61mrLm/9Zr+YdGbVprMVi1TVENvF0H8bkS1J5LYNJqQ9mGjyxj66
+ B/mbGmCbMfiwzErNsopsZkqcS+wtOlWLK3TlEs1+jOa4n9Nv35ULb3GboYjTN9r7RmnbEuLGf
+ 8mcJe65QrjXVtAz6damIoZ5l/lqDPWOIWACg9zwPfGKkkySfrXQwyVcYrKm9A9KtA+STFhc
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+X-Received-From: 217.72.192.75
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -73,90 +103,32 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Mar 2020 19:51:54 -0000
+X-List-Received-Date: Fri, 06 Mar 2020 20:56:20 -0000
 
-On Thu, Mar 5, 2020 at 4:09 PM Bin Meng <bmeng.cn@gmail.com> wrote:
->
-> Hi Alistair,
->
-> On Fri, Mar 6, 2020 at 12:53 AM Alistair Francis <alistair23@gmail.com> wrote:
-> >
-> > On Thu, Mar 5, 2020 at 1:31 AM Bin Meng <bmeng.cn@gmail.com> wrote:
-> > >
-> > > Hi Alistair,
-> > >
-> > > On Thu, Mar 5, 2020 at 7:13 AM Alistair Francis <alistair23@gmail.com> wrote:
-> > > >
-> > > > On Wed, Mar 4, 2020 at 6:47 AM Bin Meng <bmeng.cn@gmail.com> wrote:
-> > > > >
-> > > > > Hi Alistair,
-> > > > >
-> > > > > On Wed, Mar 4, 2020 at 9:37 AM Alistair Francis
-> > > > > <alistair.francis@wdc.com> wrote:
-> > > > > >
-> > > > > > At present the board serial number is hard-coded to 1, and passed
-> > > > > > to OTP model during initialization. Firmware (FSBL, U-Boot) uses
-> > > > > > the serial number to generate a unique MAC address for the on-chip
-> > > > > > ethernet controller. When multiple QEMU 'sifive_u' instances are
-> > > > > > created and connected to the same subnet, they all have the same
-> > > > > > MAC address hence it creates a unusable network.
-> > > > > >
-> > > > > > A new "serial" property is introduced to the sifive_u SoC to specify
-> > > > > > the board serial number. When not given, the default serial number
-> > > > > > 1 is used.
-> > > > > >
-> > > > > > Suggested-by: Bin Meng <bmeng.cn@gmail.com>
-> > > > > > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> > > > > > ---
-> > > > > >  hw/riscv/sifive_u.c         | 8 +++++++-
-> > > > > >  include/hw/riscv/sifive_u.h | 2 ++
-> > > > > >  2 files changed, 9 insertions(+), 1 deletion(-)
-> > > > > >
-> > > > > > diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-> > > > > > index 9a0145b5b4..e52f9d0bd4 100644
-> > > > > > --- a/hw/riscv/sifive_u.c
-> > > > > > +++ b/hw/riscv/sifive_u.c
-> > > > > > @@ -488,7 +488,7 @@ static void riscv_sifive_u_soc_init(Object *obj)
-> > > > > >                            TYPE_SIFIVE_U_PRCI);
-> > > > > >      sysbus_init_child_obj(obj, "otp", &s->otp, sizeof(s->otp),
-> > > > > >                            TYPE_SIFIVE_U_OTP);
-> > > > > > -    qdev_prop_set_uint32(DEVICE(&s->otp), "serial", OTP_SERIAL);
-> > > > > > +    qdev_prop_set_uint32(DEVICE(&s->otp), "serial", s->serial);
-> > > > > >      sysbus_init_child_obj(obj, "gem", &s->gem, sizeof(s->gem),
-> > > > > >                            TYPE_CADENCE_GEM);
-> > > > > >  }
-> > > > > > @@ -607,10 +607,16 @@ static void riscv_sifive_u_soc_realize(DeviceState *dev, Error **errp)
-> > > > > >          memmap[SIFIVE_U_GEM_MGMT].base, memmap[SIFIVE_U_GEM_MGMT].size);
-> > > > > >  }
-> > > > > >
-> > > > > > +static Property riscv_sifive_u_soc_props[] = {
-> > > > > > +    DEFINE_PROP_UINT32("serial", SiFiveUSoCState, serial, OTP_SERIAL),
-> > > > > > +    DEFINE_PROP_END_OF_LIST()
-> > > > >
-> > > > > I am not sure how adding another level of property in the SoC could
-> > > > > solve the 'make check' error.
-> > > >
-> > > > The problem is that you were adding a machine property and then you
-> > > > had the SoC reach up to the machine object to get the serial value.
-> > > > This isn't correct and is why the tests fail.
-> > > >
-> > >
-> > > So looks the failure was due to a check in the test codes only? As I
-> > > did not see QEMU crashed during my normal usage.
-> >
-> > No, the bug was in the actual implementation. You were just lucky that
-> > you didn't see any issues as in your case you could access the machine
-> > state. The make check probably added the SoC individually and hence
-> > caught the bug.
->
-> That sounds like the difference that caused the crash in the test.
-> Thanks for helping this!
+Le 06/03/2020 à 19:24, Alistair Francis a écrit :
+> New y2038 safe 32-bit architectures (like RISC-V) don't support old
+> syscalls with a 32-bit time_t. The kernel defines new *_time64 versions
+> of these syscalls. Add some more #ifdefs to syscall.c in linux-user to
+> allow us to compile without these old syscalls.
+> 
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> ---
+>  linux-user/strace.c  |  2 ++
+>  linux-user/syscall.c | 68 +++++++++++++++++++++++++++++++++++++++++++-
+>  2 files changed, 69 insertions(+), 1 deletion(-)
+> 
+...
+> diff --git a/linux-user/syscall.c b/linux-user/syscall.c
+> index 8d27d10807..1a7df23440 100644
+> --- a/linux-user/syscall.c
+> +++ b/linux-user/syscall.c
+...
+>  #if defined(TARGET_NR_mq_open) && defined(__NR_mq_open)
 
-No worries!
+You can remove this line ^^ as you check individually for each syscall
+below.
 
-Alistair
+With that fixed:
 
->
-> Regards,
-> Bin
+Reviewed-by: Laurent Vivier <laurent@vivier.eu>
 
