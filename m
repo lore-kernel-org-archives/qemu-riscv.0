@@ -1,60 +1,46 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jAO3B-0005J7-MC
-	for mharc-qemu-riscv@gnu.org; Fri, 06 Mar 2020 20:14:45 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42671)
+	id 1jAR69-0002eM-5e
+	for mharc-qemu-riscv@gnu.org; Fri, 06 Mar 2020 23:30:01 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:46620)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <bmeng.cn@gmail.com>) id 1jAO38-0005Hj-Sl
- for qemu-riscv@nongnu.org; Fri, 06 Mar 2020 20:14:43 -0500
+ (envelope-from <zhiwei_liu@c-sky.com>) id 1jAR66-0002cU-Ts
+ for qemu-riscv@nongnu.org; Fri, 06 Mar 2020 23:29:59 -0500
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <bmeng.cn@gmail.com>) id 1jAO38-0005sO-2e
- for qemu-riscv@nongnu.org; Fri, 06 Mar 2020 20:14:42 -0500
-Received: from mail-yw1-xc43.google.com ([2607:f8b0:4864:20::c43]:39277)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
- id 1jAO34-0005kd-BO; Fri, 06 Mar 2020 20:14:38 -0500
-Received: by mail-yw1-xc43.google.com with SMTP id x184so4105664ywd.6;
- Fri, 06 Mar 2020 17:14:38 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=N5m4PwUiLpGLtIl1udm9QmP080l2La2lrTGrRw3FBLQ=;
- b=tZDHynh7Dm0HlthhlWqV2Zn3wNsFV7XKeLsHWgYxulrOmlA8lpuvxv5lF+V1VlQd9a
- 0oP0ib61P59TsXLyyPBFr1+Qj4/LtGk0gZk91LBzBE+sqpbAIDIf4le0S7Wmn76D15DS
- SrYqQT1LIrsNJlG2/pgKZGiFXCeL0Xr8fUoLX2N3UC8a+MC/flXgQZlIwIabNU2SsTM4
- A51+bW7pfWT5Ws13Dn8mVk+nCyP+1BLi2xRbQwfbAiZyPSB2NwNGEMw8l79vLeCkQdY/
- oHr7n7K7PEVhKcGqx9LwwpT+gdNlVvGjx+ZU8dvtG8v4ZekngHqZlkRViLR1pC29o2fx
- w+sQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=N5m4PwUiLpGLtIl1udm9QmP080l2La2lrTGrRw3FBLQ=;
- b=ZWOZqviuzYP1Y1KcicZ2ayF9zUGz+4ZnMO9NrntqKUtQW3NSk0bZhPB2B5VhS/9R7b
- feSqBTN7qwOWOS1H/XxyjctKc0S8uRp5jSAa6GGwAXqLZhKezsydDel8pRUcrKEtXFLb
- Ir9kApUGGp/23WS3I62D1bXqI9/Wl5oFly440e2hjIG7v04KNccYABW5IZ79rbIHGnWL
- 32fKg7EQ8LJj4fizZKw9trQwcLzcSvlgdpDRfMIiz8ePcEBtAIE5xqigQIVclapOZ53p
- HRpkrGJrqCn838NYpt9R8D0+PUClicG/xkIdeWEcPOrmqCGAcNeICHTcDItOmuKHySep
- oEEA==
-X-Gm-Message-State: ANhLgQ2ndMe9547Ak3GYf7dL8KYmQTVOvm2ofb51f2EQ2z/UNXtIsuzS
- PoRym8zsDzf7N6tHv330S+YJTyxwuRc8bW57QBg=
-X-Google-Smtp-Source: ADFU+vvpHn5RMQP2aAREnG2pNixV6c+UlBtsmLhz0FJmR9sXSIB2c7j8xZj5GzSjY2Kc1TAlHB1DfT0Y5Ei6m9tgGFg=
-X-Received: by 2002:a25:54d:: with SMTP id 74mr7175646ybf.490.1583543677474;
- Fri, 06 Mar 2020 17:14:37 -0800 (PST)
+ (envelope-from <zhiwei_liu@c-sky.com>) id 1jAR65-0005vF-QB
+ for qemu-riscv@nongnu.org; Fri, 06 Mar 2020 23:29:58 -0500
+Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:41645)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <zhiwei_liu@c-sky.com>)
+ id 1jAR60-0005Dd-17; Fri, 06 Mar 2020 23:29:52 -0500
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07448132|-1; CH=green; DM=||false|;
+ DS=CONTINUE|ham_regular_dialog|0.0308801-0.000130499-0.968989;
+ FP=0|0|0|0|0|-1|-1|-1; HT=e01a16378; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS;
+ RN=9; RT=9; SR=0; TI=SMTPD_---.GxPv1Mv_1583555381; 
+Received: from 192.168.3.18(mailfrom:zhiwei_liu@c-sky.com
+ fp:SMTPD_---.GxPv1Mv_1583555381)
+ by smtp.aliyun-inc.com(10.147.41.138);
+ Sat, 07 Mar 2020 12:29:42 +0800
+Subject: Re: [PATCH v4 2/5] target/riscv: add vector stride load and store
+ instructions
+To: Richard Henderson <richard.henderson@linaro.org>, alistair23@gmail.com,
+ chihmin.chao@sifive.com, palmer@dabbelt.com
+Cc: wenmeng_zhang@c-sky.com, wxy194768@alibaba-inc.com,
+ linux-csky@vger.kernel.org, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+References: <20200225103508.7651-1-zhiwei_liu@c-sky.com>
+ <20200225103508.7651-3-zhiwei_liu@c-sky.com>
+ <0e806ca9-7991-baf7-58d1-50cddf9ce4ef@linaro.org>
+From: LIU Zhiwei <zhiwei_liu@c-sky.com>
+Message-ID: <3257fc99-8c07-550d-151e-0f88ab46840d@c-sky.com>
+Date: Sat, 7 Mar 2020 12:29:42 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
+ Thunderbird/68.4.2
 MIME-Version: 1.0
-References: <cover.1583530528.git.alistair.francis@wdc.com>
- <b1b13c2243ecfe08e688240a38fec4ebe8794017.1583530528.git.alistair.francis@wdc.com>
-In-Reply-To: <b1b13c2243ecfe08e688240a38fec4ebe8794017.1583530528.git.alistair.francis@wdc.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Sat, 7 Mar 2020 09:14:26 +0800
-Message-ID: <CAEUhbmXuB_zbex6pYMZd15J_5MyuG2GQFTUhw6vZRd5Rq3uA=Q@mail.gmail.com>
-Subject: Re: [PATCH v3 1/3] riscv/sifive_u: Fix up file ordering
-To: Alistair Francis <alistair.francis@wdc.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>, Alistair Francis <alistair23@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2607:f8b0:4864:20::c43
+In-Reply-To: <0e806ca9-7991-baf7-58d1-50cddf9ce4ef@linaro.org>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 3.x [generic] [fuzzy]
+X-Received-From: 121.197.200.217
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -66,18 +52,95 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 07 Mar 2020 01:14:44 -0000
+X-List-Received-Date: Sat, 07 Mar 2020 04:30:00 -0000
 
-On Sat, Mar 7, 2020 at 5:44 AM Alistair Francis
-<alistair.francis@wdc.com> wrote:
->
-> Split the file into clear machine and SoC sections.
->
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> ---
->  hw/riscv/sifive_u.c | 109 ++++++++++++++++++++++----------------------
->  1 file changed, 55 insertions(+), 54 deletions(-)
->
 
-Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+
+On 2020/2/28 3:36, Richard Henderson wrote:
+> On 2/25/20 2:35 AM, LIU Zhiwei wrote:
+>> +GEN_VEXT_LD_ELEM(vlsb_v_b, int8_t,  int8_t,  H1, ldsb)
+>> +GEN_VEXT_LD_ELEM(vlsb_v_h, int8_t,  int16_t, H2, ldsb)
+>> +GEN_VEXT_LD_ELEM(vlsb_v_w, int8_t,  int32_t, H4, ldsb)
+>> +GEN_VEXT_LD_ELEM(vlsb_v_d, int8_t,  int64_t, H8, ldsb)
+>> +GEN_VEXT_LD_ELEM(vlsh_v_h, int16_t, int16_t, H2, ldsw)
+>> +GEN_VEXT_LD_ELEM(vlsh_v_w, int16_t, int32_t, H4, ldsw)
+>> +GEN_VEXT_LD_ELEM(vlsh_v_d, int16_t, int64_t, H8, ldsw)
+>> +GEN_VEXT_LD_ELEM(vlsw_v_w, int32_t, int32_t, H4, ldl)
+>> +GEN_VEXT_LD_ELEM(vlsw_v_d, int32_t, int64_t, H8, ldl)
+>> +GEN_VEXT_LD_ELEM(vlse_v_b, int8_t,  int8_t,  H1, ldsb)
+>> +GEN_VEXT_LD_ELEM(vlse_v_h, int16_t, int16_t, H2, ldsw)
+>> +GEN_VEXT_LD_ELEM(vlse_v_w, int32_t, int32_t, H4, ldl)
+>> +GEN_VEXT_LD_ELEM(vlse_v_d, int64_t, int64_t, H8, ldq)
+>> +GEN_VEXT_LD_ELEM(vlsbu_v_b, uint8_t,  uint8_t,  H1, ldub)
+>> +GEN_VEXT_LD_ELEM(vlsbu_v_h, uint8_t,  uint16_t, H2, ldub)
+>> +GEN_VEXT_LD_ELEM(vlsbu_v_w, uint8_t,  uint32_t, H4, ldub)
+>> +GEN_VEXT_LD_ELEM(vlsbu_v_d, uint8_t,  uint64_t, H8, ldub)
+>> +GEN_VEXT_LD_ELEM(vlshu_v_h, uint16_t, uint16_t, H2, lduw)
+>> +GEN_VEXT_LD_ELEM(vlshu_v_w, uint16_t, uint32_t, H4, lduw)
+>> +GEN_VEXT_LD_ELEM(vlshu_v_d, uint16_t, uint64_t, H8, lduw)
+>> +GEN_VEXT_LD_ELEM(vlswu_v_w, uint32_t, uint32_t, H4, ldl)
+>> +GEN_VEXT_LD_ELEM(vlswu_v_d, uint32_t, uint64_t, H8, ldl)
+> Why do you need to define new functions identical to the old ones?  Are you
+> doing this just to make the names match up?
+>
+>
+>> +GEN_VEXT_ST_ELEM(vssb_v_b, int8_t,  H1, stb)
+>> +GEN_VEXT_ST_ELEM(vssb_v_h, int16_t, H2, stb)
+>> +GEN_VEXT_ST_ELEM(vssb_v_w, int32_t, H4, stb)
+>> +GEN_VEXT_ST_ELEM(vssb_v_d, int64_t, H8, stb)
+>> +GEN_VEXT_ST_ELEM(vssh_v_h, int16_t, H2, stw)
+>> +GEN_VEXT_ST_ELEM(vssh_v_w, int32_t, H4, stw)
+>> +GEN_VEXT_ST_ELEM(vssh_v_d, int64_t, H8, stw)
+>> +GEN_VEXT_ST_ELEM(vssw_v_w, int32_t, H4, stl)
+>> +GEN_VEXT_ST_ELEM(vssw_v_d, int64_t, H8, stl)
+>> +GEN_VEXT_ST_ELEM(vsse_v_b, int8_t,  H1, stb)
+>> +GEN_VEXT_ST_ELEM(vsse_v_h, int16_t, H2, stw)
+>> +GEN_VEXT_ST_ELEM(vsse_v_w, int32_t, H4, stl)
+>> +GEN_VEXT_ST_ELEM(vsse_v_d, int64_t, H8, stq)
+> Likewise.
+>
+>> +static void vext_st_stride(void *vd, void *v0, target_ulong base,
+>> +        target_ulong stride, CPURISCVState *env, uint32_t desc,
+>> +        vext_st_elem_fn st_elem, uint32_t esz, uint32_t msz, uintptr_t ra)
+>> +{
+>> +    uint32_t i, k;
+>> +    uint32_t nf = vext_nf(desc);
+>> +    uint32_t vm = vext_vm(desc);
+>> +    uint32_t mlen = vext_mlen(desc);
+>> +    uint32_t vlmax = vext_maxsz(desc) / esz;
+>> +
+>> +    /* probe every access*/
+>> +    for (i = 0; i < env->vl; i++) {
+>> +        if (!vm && !vext_elem_mask(v0, mlen, i)) {
+>> +            continue;
+>> +        }
+>> +        probe_write_access(env, base + stride * i, nf * msz, ra);
+>> +    }
+>> +    /* store bytes to guest memory */
+>> +    for (i = 0; i < env->vl; i++) {
+>> +        k = 0;
+>> +        if (!vm && !vext_elem_mask(v0, mlen, i)) {
+>> +            continue;
+>> +        }
+>> +        while (k < nf) {
+>> +            target_ulong addr = base + stride * i + k * msz;
+>> +            st_elem(env, addr, i + k * vlmax, vd, ra);
+>> +            k++;
+>> +        }
+>> +    }
+>> +}
+> Similar comments wrt unifying the load and store helpers.
+>
+> I'll also note that vext_st_stride and vext_st_us_mask could be unified by
+> passing sizeof(ETYPE) as stride, and vm = true as a parameter.
+Maybe it is msz * nf as stride.
+
+For element index  i,  the base load memory address for stride load is 
+"i * stride".
+For unit stride load ,  the base load memory address is "i * nf * msz".
+
+Zhiwei
+>
+> r~
+
 
