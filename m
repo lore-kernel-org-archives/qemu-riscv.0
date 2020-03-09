@@ -1,144 +1,39 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jBGBK-0001kk-Mj
-	for mharc-qemu-riscv@gnu.org; Mon, 09 Mar 2020 07:02:46 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44557)
+	id 1jBHBa-00056c-BW
+	for mharc-qemu-riscv@gnu.org; Mon, 09 Mar 2020 08:07:06 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:54830)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <borntraeger@de.ibm.com>) id 1jBGBI-0001kV-MH
- for qemu-riscv@nongnu.org; Mon, 09 Mar 2020 07:02:45 -0400
+ (envelope-from <zhiwei_liu@c-sky.com>) id 1jBHBW-0004zL-U0
+ for qemu-riscv@nongnu.org; Mon, 09 Mar 2020 08:07:04 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <borntraeger@de.ibm.com>) id 1jBGBH-0003Br-Ga
- for qemu-riscv@nongnu.org; Mon, 09 Mar 2020 07:02:44 -0400
-Received: from mx0b-001b2d01.pphosted.com ([148.163.158.5]:53472
- helo=mx0a-001b2d01.pphosted.com)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <borntraeger@de.ibm.com>)
- id 1jBGBH-0003BT-BI
- for qemu-riscv@nongnu.org; Mon, 09 Mar 2020 07:02:43 -0400
-Received: from pps.filterd (m0098416.ppops.net [127.0.0.1])
- by mx0b-001b2d01.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 029Atw2h044157
- for <qemu-riscv@nongnu.org>; Mon, 9 Mar 2020 07:02:42 -0400
-Received: from e06smtp05.uk.ibm.com (e06smtp05.uk.ibm.com [195.75.94.101])
- by mx0b-001b2d01.pphosted.com with ESMTP id 2ym648ctfq-1
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
- for <qemu-riscv@nongnu.org>; Mon, 09 Mar 2020 07:02:42 -0400
-Received: from localhost
- by e06smtp05.uk.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use Only!
- Violators will be prosecuted
- for <qemu-riscv@nongnu.org> from <borntraeger@de.ibm.com>;
- Mon, 9 Mar 2020 11:02:40 -0000
-Received: from b06avi18626390.portsmouth.uk.ibm.com (9.149.26.192)
- by e06smtp05.uk.ibm.com (192.168.101.135) with IBM ESMTP SMTP Gateway:
- Authorized Use Only! Violators will be prosecuted; 
- (version=TLSv1/SSLv3 cipher=AES256-GCM-SHA384 bits=256/256)
- Mon, 9 Mar 2020 11:02:32 -0000
-Received: from d06av23.portsmouth.uk.ibm.com (d06av23.portsmouth.uk.ibm.com
- [9.149.105.59])
- by b06avi18626390.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP
- id 029B1W8x36176214
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Mon, 9 Mar 2020 11:01:32 GMT
-Received: from d06av23.portsmouth.uk.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 82C7DA405B;
- Mon,  9 Mar 2020 11:02:31 +0000 (GMT)
-Received: from d06av23.portsmouth.uk.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id A8CFDA4069;
- Mon,  9 Mar 2020 11:02:30 +0000 (GMT)
-Received: from oc7455500831.ibm.com (unknown [9.152.224.141])
- by d06av23.portsmouth.uk.ibm.com (Postfix) with ESMTP;
- Mon,  9 Mar 2020 11:02:30 +0000 (GMT)
-Subject: Re: [PATCH] cpu: Use DeviceClass reset instead of a special CPUClass
- reset
-To: Peter Maydell <peter.maydell@linaro.org>, qemu-devel@nongnu.org
-Cc: Chris Wulff <crwulff@gmail.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- David Hildenbrand <david@redhat.com>, Anthony Green <green@moxielogic.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Max Filippov <jcmvbkbc@gmail.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Marek Vasut <marex@denx.de>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, qemu-ppc@nongnu.org,
- Aleksandar Rikalo <aleksandar.rikalo@rt-rk.com>,
- Richard Henderson <rth@twiddle.net>,
- Artyom Tarasenko <atar4qemu@gmail.com>,
- Eduardo Habkost <ehabkost@redhat.com>, qemu-s390x@nongnu.org,
- qemu-arm@nongnu.org, Stafford Horne <shorne@gmail.com>,
- David Gibson <david@gibson.dropbear.id.au>, qemu-riscv@nongnu.org,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Cornelia Huck <cohuck@redhat.com>, Laurent Vivier <laurent@vivier.eu>,
- Michael Walle <michael@walle.cc>, Palmer Dabbelt <palmer@dabbelt.com>,
- Aleksandar Markovic <amarkovic@wavecomp.com>,
- Paolo Bonzini <pbonzini@redhat.com>, Aurelien Jarno <aurelien@aurel32.net>
-References: <20200303100511.5498-1-peter.maydell@linaro.org>
-From: Christian Borntraeger <borntraeger@de.ibm.com>
-Autocrypt: addr=borntraeger@de.ibm.com; prefer-encrypt=mutual; keydata=
- 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
- nS4h0HDFPrrp1C2EMVYIQrMokWvlFZbCpsdYbBI=
-Date: Mon, 9 Mar 2020 12:02:30 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.4.1
+ (envelope-from <zhiwei_liu@c-sky.com>) id 1jBHBV-0006mU-BM
+ for qemu-riscv@nongnu.org; Mon, 09 Mar 2020 08:07:02 -0400
+Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:44961)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <zhiwei_liu@c-sky.com>)
+ id 1jBHBR-0006ko-5C; Mon, 09 Mar 2020 08:06:57 -0400
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07451612|-1; CH=blue; DM=||false|;
+ DS=CONTINUE|ham_system_inform|0.271718-0.00564651-0.722635;
+ FP=1073962757830943102|1|1|7|0|-1|-1|-1; HT=e02c03267; MF=zhiwei_liu@c-sky.com;
+ NM=1; PH=DS; RN=10; RT=10; SR=0; TI=SMTPD_---.Gyaaf3X_1583755609; 
+Received: from L-PF1D6DP4-1208.hz.ali.com(mailfrom:zhiwei_liu@c-sky.com
+ fp:SMTPD_---.Gyaaf3X_1583755609)
+ by smtp.aliyun-inc.com(10.147.41.178);
+ Mon, 09 Mar 2020 20:06:50 +0800
+From: LIU Zhiwei <zhiwei_liu@c-sky.com>
+To: richard.henderson@linaro.org, alistair23@gmail.com,
+ chihmin.chao@sifive.com, palmer@dabbelt.com
+Cc: wenmeng_zhang@c-sky.com, wxy194768@alibaba-inc.com,
+ guoren@linux.alibaba.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
+ LIU Zhiwei <zhiwei_liu@c-sky.com>
+Subject: [PATCH v3 16/60] target/riscv: vector integer min/max instructions
+Date: Mon,  9 Mar 2020 20:05:00 +0800
+Message-Id: <20200309120544.13503-17-zhiwei_liu@c-sky.com>
+X-Mailer: git-send-email 2.23.0
 MIME-Version: 1.0
-In-Reply-To: <20200303100511.5498-1-peter.maydell@linaro.org>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
 Content-Transfer-Encoding: 8bit
-X-TM-AS-GCONF: 00
-x-cbid: 20030911-0020-0000-0000-000003B1DDBA
-X-IBM-AV-DETECTION: SAVI=unused REMOTE=unused XFE=unused
-x-cbparentid: 20030911-0021-0000-0000-0000220A2486
-Message-Id: <27475af3-2cc5-40bf-d469-f1ca6195e1ce@de.ibm.com>
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.572
- definitions=2020-03-09_02:2020-03-08,
- 2020-03-09 signatures=0
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0
- priorityscore=1501 mlxscore=0 suspectscore=0 bulkscore=0 spamscore=0
- clxscore=1011 phishscore=0 malwarescore=0 impostorscore=0 mlxlogscore=999
- lowpriorityscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2001150001 definitions=main-2003090077
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 3.x [generic]
-X-Received-From: 148.163.158.5
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 3.x [generic] [fuzzy]
+X-Received-From: 121.197.200.217
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -150,57 +45,181 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Mar 2020 11:02:46 -0000
+X-List-Received-Date: Mon, 09 Mar 2020 12:07:04 -0000
 
+Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
+---
+ target/riscv/helper.h                   | 33 ++++++++++++
+ target/riscv/insn32.decode              |  8 +++
+ target/riscv/insn_trans/trans_rvv.inc.c | 10 ++++
+ target/riscv/vector_helper.c            | 71 +++++++++++++++++++++++++
+ 4 files changed, 122 insertions(+)
 
-
-On 03.03.20 11:05, Peter Maydell wrote:
-> The CPUClass has a 'reset' method.  This is a legacy from when
-> TYPE_CPU used not to inherit from TYPE_DEVICE.  We don't need it any
-> more, as we can simply use the TYPE_DEVICE reset.  The 'cpu_reset()'
-> function is kept as the API which most places use to reset a CPU; it
-> is now a wrapper which calls device_cold_reset() and then the
-> tracepoint function.
-> 
-> This change should not cause CPU objects to be reset more often
-> than they are at the moment, because:
->  * nobody is directly calling device_cold_reset() or
->    qdev_reset_all() on CPU objects
->  * no CPU object is on a qbus, so they will not be reset either
->    by somebody calling qbus_reset_all()/bus_cold_reset(), or
->    by the main "reset sysbus and everything in the qbus tree"
->    reset that most devices are reset by
-> 
-> Note that this does not change the need for each machine or whatever
-> to use qemu_register_reset() to arrange to call cpu_reset() -- that
-> is necessary because CPU objects are not on any qbus, so they don't
-> get reset when the qbus tree rooted at the sysbus bus is reset, and
-> this isn't being changed here.
-> 
-> All the changes to the files under target/ were made using the
-> included Coccinelle script, except:
-> 
-> (1) the deletion of the now-inaccurate and not terribly useful
-> "CPUClass::reset" comments was done with a perl one-liner afterwards:
->   perl -n -i -e '/ CPUClass::reset/ or print' target/*/*.c
-> 
-> (2) this bit of the s390 change was done by hand, because the
-> Coccinelle script is not sophisticated enough to handle the
-> parent_reset call being inside another function:
-> 
-> | @@ -96,8 +96,9 @@ static void s390_cpu_reset(CPUState *s, cpu_reset_type type)
-> |     S390CPU *cpu = S390_CPU(s);
-> |     S390CPUClass *scc = S390_CPU_GET_CLASS(cpu);
-> |     CPUS390XState *env = &cpu->env;
-> |+    DeviceState *dev = DEVICE(s);
-> |
-> |-    scc->parent_reset(s);
-> |+    scc->parent_reset(dev);
-> |     cpu->env.sigp_order = 0;
-> |     s390_cpu_set_state(S390_CPU_STATE_STOPPED, cpu);
-> 
-
-s390 parts look sane.
-
+diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+index 4e6c47c2d2..c7d4ff185a 100644
+--- a/target/riscv/helper.h
++++ b/target/riscv/helper.h
+@@ -492,3 +492,36 @@ DEF_HELPER_6(vmsgt_vx_b, void, ptr, ptr, tl, ptr, env, i32)
+ DEF_HELPER_6(vmsgt_vx_h, void, ptr, ptr, tl, ptr, env, i32)
+ DEF_HELPER_6(vmsgt_vx_w, void, ptr, ptr, tl, ptr, env, i32)
+ DEF_HELPER_6(vmsgt_vx_d, void, ptr, ptr, tl, ptr, env, i32)
++
++DEF_HELPER_6(vminu_vv_b, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vminu_vv_h, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vminu_vv_w, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vminu_vv_d, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vmin_vv_b, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vmin_vv_h, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vmin_vv_w, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vmin_vv_d, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vmaxu_vv_b, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vmaxu_vv_h, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vmaxu_vv_w, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vmaxu_vv_d, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vmax_vv_b, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vmax_vv_h, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vmax_vv_w, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vmax_vv_d, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vminu_vx_b, void, ptr, ptr, tl, ptr, env, i32)
++DEF_HELPER_6(vminu_vx_h, void, ptr, ptr, tl, ptr, env, i32)
++DEF_HELPER_6(vminu_vx_w, void, ptr, ptr, tl, ptr, env, i32)
++DEF_HELPER_6(vminu_vx_d, void, ptr, ptr, tl, ptr, env, i32)
++DEF_HELPER_6(vmin_vx_b, void, ptr, ptr, tl, ptr, env, i32)
++DEF_HELPER_6(vmin_vx_h, void, ptr, ptr, tl, ptr, env, i32)
++DEF_HELPER_6(vmin_vx_w, void, ptr, ptr, tl, ptr, env, i32)
++DEF_HELPER_6(vmin_vx_d, void, ptr, ptr, tl, ptr, env, i32)
++DEF_HELPER_6(vmaxu_vx_b, void, ptr, ptr, tl, ptr, env, i32)
++DEF_HELPER_6(vmaxu_vx_h, void, ptr, ptr, tl, ptr, env, i32)
++DEF_HELPER_6(vmaxu_vx_w, void, ptr, ptr, tl, ptr, env, i32)
++DEF_HELPER_6(vmaxu_vx_d, void, ptr, ptr, tl, ptr, env, i32)
++DEF_HELPER_6(vmax_vx_b, void, ptr, ptr, tl, ptr, env, i32)
++DEF_HELPER_6(vmax_vx_h, void, ptr, ptr, tl, ptr, env, i32)
++DEF_HELPER_6(vmax_vx_w, void, ptr, ptr, tl, ptr, env, i32)
++DEF_HELPER_6(vmax_vx_d, void, ptr, ptr, tl, ptr, env, i32)
+diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+index 525b2fa442..a7619f4e3d 100644
+--- a/target/riscv/insn32.decode
++++ b/target/riscv/insn32.decode
+@@ -354,6 +354,14 @@ vmsgtu_vx       011110 . ..... ..... 100 ..... 1010111 @r_vm
+ vmsgtu_vi       011110 . ..... ..... 011 ..... 1010111 @r_vm
+ vmsgt_vx        011111 . ..... ..... 100 ..... 1010111 @r_vm
+ vmsgt_vi        011111 . ..... ..... 011 ..... 1010111 @r_vm
++vminu_vv        000100 . ..... ..... 000 ..... 1010111 @r_vm
++vminu_vx        000100 . ..... ..... 100 ..... 1010111 @r_vm
++vmin_vv         000101 . ..... ..... 000 ..... 1010111 @r_vm
++vmin_vx         000101 . ..... ..... 100 ..... 1010111 @r_vm
++vmaxu_vv        000110 . ..... ..... 000 ..... 1010111 @r_vm
++vmaxu_vx        000110 . ..... ..... 100 ..... 1010111 @r_vm
++vmax_vv         000111 . ..... ..... 000 ..... 1010111 @r_vm
++vmax_vx         000111 . ..... ..... 100 ..... 1010111 @r_vm
+ 
+ vsetvli         0 ........... ..... 111 ..... 1010111  @r2_zimm
+ vsetvl          1000000 ..... ..... 111 ..... 1010111  @r
+diff --git a/target/riscv/insn_trans/trans_rvv.inc.c b/target/riscv/insn_trans/trans_rvv.inc.c
+index 078d275af6..4437a77878 100644
+--- a/target/riscv/insn_trans/trans_rvv.inc.c
++++ b/target/riscv/insn_trans/trans_rvv.inc.c
+@@ -1424,3 +1424,13 @@ GEN_OPIVI_TRANS(vmsleu_vi, 1, vmsleu_vx, opivx_cmp_check)
+ GEN_OPIVI_TRANS(vmsle_vi, 0, vmsle_vx, opivx_cmp_check)
+ GEN_OPIVI_TRANS(vmsgtu_vi, 1, vmsgtu_vx, opivx_cmp_check)
+ GEN_OPIVI_TRANS(vmsgt_vi, 0, vmsgt_vx, opivx_cmp_check)
++
++/* Vector Integer Min/Max Instructions */
++GEN_OPIVV_GVEC_TRANS(vminu_vv, umin)
++GEN_OPIVV_GVEC_TRANS(vmin_vv,  smin)
++GEN_OPIVV_GVEC_TRANS(vmaxu_vv, umax)
++GEN_OPIVV_GVEC_TRANS(vmax_vv,  smax)
++GEN_OPIVX_TRANS(vminu_vx, opivx_check)
++GEN_OPIVX_TRANS(vmin_vx,  opivx_check)
++GEN_OPIVX_TRANS(vmaxu_vx, opivx_check)
++GEN_OPIVX_TRANS(vmax_vx,  opivx_check)
+diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+index e7a4e99f46..03e001262f 100644
+--- a/target/riscv/vector_helper.c
++++ b/target/riscv/vector_helper.c
+@@ -849,6 +849,10 @@ GEN_VEXT_AMO(vamomaxuw_v_w, uint32_t, uint32_t, idx_w, clearl)
+ #define OP_SSS_H int16_t, int16_t, int16_t, int16_t, int16_t
+ #define OP_SSS_W int32_t, int32_t, int32_t, int32_t, int32_t
+ #define OP_SSS_D int64_t, int64_t, int64_t, int64_t, int64_t
++#define OP_UUU_B uint8_t, uint8_t, uint8_t, uint8_t, uint8_t
++#define OP_UUU_H uint16_t, uint16_t, uint16_t, uint16_t, uint16_t
++#define OP_UUU_W uint32_t, uint32_t, uint32_t, uint32_t, uint32_t
++#define OP_UUU_D uint64_t, uint64_t, uint64_t, uint64_t, uint64_t
+ 
+ /* operation of two vector elements */
+ #define OPIVV2(NAME, TD, T1, T2, TX1, TX2, HD, HS1, HS2, OP)    \
+@@ -1479,3 +1483,70 @@ GEN_VEXT_CMP_VX(vmsgt_vx_b, int8_t,  H1, DO_MSGT)
+ GEN_VEXT_CMP_VX(vmsgt_vx_h, int16_t, H2, DO_MSGT)
+ GEN_VEXT_CMP_VX(vmsgt_vx_w, int32_t, H4, DO_MSGT)
+ GEN_VEXT_CMP_VX(vmsgt_vx_d, int64_t, H8, DO_MSGT)
++
++/* Vector Integer Min/Max Instructions */
++RVVCALL(OPIVV2, vminu_vv_b, OP_UUU_B, H1, H1, H1, DO_MIN)
++RVVCALL(OPIVV2, vminu_vv_h, OP_UUU_H, H2, H2, H2, DO_MIN)
++RVVCALL(OPIVV2, vminu_vv_w, OP_UUU_W, H4, H4, H4, DO_MIN)
++RVVCALL(OPIVV2, vminu_vv_d, OP_UUU_D, H8, H8, H8, DO_MIN)
++RVVCALL(OPIVV2, vmin_vv_b, OP_SSS_B, H1, H1, H1, DO_MIN)
++RVVCALL(OPIVV2, vmin_vv_h, OP_SSS_H, H2, H2, H2, DO_MIN)
++RVVCALL(OPIVV2, vmin_vv_w, OP_SSS_W, H4, H4, H4, DO_MIN)
++RVVCALL(OPIVV2, vmin_vv_d, OP_SSS_D, H8, H8, H8, DO_MIN)
++RVVCALL(OPIVV2, vmaxu_vv_b, OP_UUU_B, H1, H1, H1, DO_MAX)
++RVVCALL(OPIVV2, vmaxu_vv_h, OP_UUU_H, H2, H2, H2, DO_MAX)
++RVVCALL(OPIVV2, vmaxu_vv_w, OP_UUU_W, H4, H4, H4, DO_MAX)
++RVVCALL(OPIVV2, vmaxu_vv_d, OP_UUU_D, H8, H8, H8, DO_MAX)
++RVVCALL(OPIVV2, vmax_vv_b, OP_SSS_B, H1, H1, H1, DO_MAX)
++RVVCALL(OPIVV2, vmax_vv_h, OP_SSS_H, H2, H2, H2, DO_MAX)
++RVVCALL(OPIVV2, vmax_vv_w, OP_SSS_W, H4, H4, H4, DO_MAX)
++RVVCALL(OPIVV2, vmax_vv_d, OP_SSS_D, H8, H8, H8, DO_MAX)
++GEN_VEXT_VV(vminu_vv_b, 1, 1, clearb)
++GEN_VEXT_VV(vminu_vv_h, 2, 2, clearh)
++GEN_VEXT_VV(vminu_vv_w, 4, 4, clearl)
++GEN_VEXT_VV(vminu_vv_d, 8, 8, clearq)
++GEN_VEXT_VV(vmin_vv_b, 1, 1, clearb)
++GEN_VEXT_VV(vmin_vv_h, 2, 2, clearh)
++GEN_VEXT_VV(vmin_vv_w, 4, 4, clearl)
++GEN_VEXT_VV(vmin_vv_d, 8, 8, clearq)
++GEN_VEXT_VV(vmaxu_vv_b, 1, 1, clearb)
++GEN_VEXT_VV(vmaxu_vv_h, 2, 2, clearh)
++GEN_VEXT_VV(vmaxu_vv_w, 4, 4, clearl)
++GEN_VEXT_VV(vmaxu_vv_d, 8, 8, clearq)
++GEN_VEXT_VV(vmax_vv_b, 1, 1, clearb)
++GEN_VEXT_VV(vmax_vv_h, 2, 2, clearh)
++GEN_VEXT_VV(vmax_vv_w, 4, 4, clearl)
++GEN_VEXT_VV(vmax_vv_d, 8, 8, clearq)
++
++RVVCALL(OPIVX2, vminu_vx_b, OP_UUU_B, H1, H1, DO_MIN)
++RVVCALL(OPIVX2, vminu_vx_h, OP_UUU_H, H2, H2, DO_MIN)
++RVVCALL(OPIVX2, vminu_vx_w, OP_UUU_W, H4, H4, DO_MIN)
++RVVCALL(OPIVX2, vminu_vx_d, OP_UUU_D, H8, H8, DO_MIN)
++RVVCALL(OPIVX2, vmin_vx_b, OP_SSS_B, H1, H1, DO_MIN)
++RVVCALL(OPIVX2, vmin_vx_h, OP_SSS_H, H2, H2, DO_MIN)
++RVVCALL(OPIVX2, vmin_vx_w, OP_SSS_W, H4, H4, DO_MIN)
++RVVCALL(OPIVX2, vmin_vx_d, OP_SSS_D, H8, H8, DO_MIN)
++RVVCALL(OPIVX2, vmaxu_vx_b, OP_UUU_B, H1, H1, DO_MAX)
++RVVCALL(OPIVX2, vmaxu_vx_h, OP_UUU_H, H2, H2, DO_MAX)
++RVVCALL(OPIVX2, vmaxu_vx_w, OP_UUU_W, H4, H4, DO_MAX)
++RVVCALL(OPIVX2, vmaxu_vx_d, OP_UUU_D, H8, H8, DO_MAX)
++RVVCALL(OPIVX2, vmax_vx_b, OP_SSS_B, H1, H1, DO_MAX)
++RVVCALL(OPIVX2, vmax_vx_h, OP_SSS_H, H2, H2, DO_MAX)
++RVVCALL(OPIVX2, vmax_vx_w, OP_SSS_W, H4, H4, DO_MAX)
++RVVCALL(OPIVX2, vmax_vx_d, OP_SSS_D, H8, H8, DO_MAX)
++GEN_VEXT_VX(vminu_vx_b, 1, 1, clearb)
++GEN_VEXT_VX(vminu_vx_h, 2, 2, clearh)
++GEN_VEXT_VX(vminu_vx_w, 4, 4, clearl)
++GEN_VEXT_VX(vminu_vx_d, 8, 8, clearq)
++GEN_VEXT_VX(vmin_vx_b, 1, 1, clearb)
++GEN_VEXT_VX(vmin_vx_h, 2, 2, clearh)
++GEN_VEXT_VX(vmin_vx_w, 4, 4, clearl)
++GEN_VEXT_VX(vmin_vx_d, 8, 8, clearq)
++GEN_VEXT_VX(vmaxu_vx_b, 1, 1, clearb)
++GEN_VEXT_VX(vmaxu_vx_h, 2, 2, clearh)
++GEN_VEXT_VX(vmaxu_vx_w, 4, 4, clearl)
++GEN_VEXT_VX(vmaxu_vx_d, 8, 8,  clearq)
++GEN_VEXT_VX(vmax_vx_b, 1, 1, clearb)
++GEN_VEXT_VX(vmax_vx_h, 2, 2, clearh)
++GEN_VEXT_VX(vmax_vx_w, 4, 4, clearl)
++GEN_VEXT_VX(vmax_vx_d, 8, 8, clearq)
+-- 
+2.23.0
 
 
