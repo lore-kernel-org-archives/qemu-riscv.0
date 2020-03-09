@@ -1,35 +1,35 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jBDge-0008E2-Jd
+	id 1jBDge-0008Eo-Qz
 	for mharc-qemu-riscv@gnu.org; Mon, 09 Mar 2020 04:22:56 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:45142)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:45155)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <zhiwei_liu@c-sky.com>) id 1jBDgO-0007be-MF
+ (envelope-from <zhiwei_liu@c-sky.com>) id 1jBDgO-0007cU-Vh
  for qemu-riscv@nongnu.org; Mon, 09 Mar 2020 04:22:42 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <zhiwei_liu@c-sky.com>) id 1jBDgK-000831-81
+ (envelope-from <zhiwei_liu@c-sky.com>) id 1jBDgL-00084P-MY
  for qemu-riscv@nongnu.org; Mon, 09 Mar 2020 04:22:40 -0400
-Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:41827)
+Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:40037)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1jBDgD-0007aA-61; Mon, 09 Mar 2020 04:22:30 -0400
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.0762825|-1; CH=blue; DM=||false|;
- DS=CONTINUE|ham_system_inform|0.203792-0.00091317-0.795295;
- FP=0|0|0|0|0|-1|-1|-1; HT=e02c03305; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS;
+ id 1jBDgH-0007cF-As; Mon, 09 Mar 2020 04:22:33 -0400
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.08635416|-1; CH=blue; DM=||false|;
+ DS=CONTINUE|ham_system_inform|0.0171917-8.47537e-05-0.982724;
+ FP=0|0|0|0|0|-1|-1|-1; HT=e02c03296; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS;
  RN=10; RT=10; SR=0; TI=SMTPD_---.GyTxIXp_1583742101; 
 Received: from L-PF1D6DP4-1208.hz.ali.com(mailfrom:zhiwei_liu@c-sky.com
  fp:SMTPD_---.GyTxIXp_1583742101)
  by smtp.aliyun-inc.com(10.147.41.137);
- Mon, 09 Mar 2020 16:22:00 +0800
+ Mon, 09 Mar 2020 16:22:07 +0800
 From: LIU Zhiwei <zhiwei_liu@c-sky.com>
 To: richard.henderson@linaro.org, alistair23@gmail.com,
  chihmin.chao@sifive.com, palmer@dabbelt.com
 Cc: wenmeng_zhang@c-sky.com, wxy194768@alibaba-inc.com,
  guoren@linux.alibaba.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
  LIU Zhiwei <zhiwei_liu@c-sky.com>
-Subject: [PATCH v3 35/60] target/riscv: vector floating-point square-root
- instruction
-Date: Mon,  9 Mar 2020 16:20:17 +0800
-Message-Id: <20200309082042.12967-36-zhiwei_liu@c-sky.com>
+Subject: [PATCH v3 48/60] target/riscv: vector mask-register logical
+ instructions
+Date: Mon,  9 Mar 2020 16:20:30 +0800
+Message-Id: <20200309082042.12967-49-zhiwei_liu@c-sky.com>
 X-Mailer: git-send-email 2.23.0
 In-Reply-To: <20200309082042.12967-1-zhiwei_liu@c-sky.com>
 References: <20200309082042.12967-1-zhiwei_liu@c-sky.com>
@@ -52,145 +52,132 @@ X-List-Received-Date: Mon, 09 Mar 2020 08:22:43 -0000
 
 Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
 ---
- target/riscv/helper.h                   |  4 +++
- target/riscv/insn32.decode              |  3 ++
- target/riscv/insn_trans/trans_rvv.inc.c | 37 +++++++++++++++++++++++
+ target/riscv/helper.h                   |  9 ++++++
+ target/riscv/insn32.decode              |  8 +++++
+ target/riscv/insn_trans/trans_rvv.inc.c | 28 +++++++++++++++++
  target/riscv/vector_helper.c            | 40 +++++++++++++++++++++++++
- 4 files changed, 84 insertions(+)
+ 4 files changed, 85 insertions(+)
 
 diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-index 57e0fee929..c2f9871490 100644
+index b0bb617b42..9301ce0e00 100644
 --- a/target/riscv/helper.h
 +++ b/target/riscv/helper.h
-@@ -905,3 +905,7 @@ DEF_HELPER_6(vfwmsac_vf_h, void, ptr, ptr, i64, ptr, env, i32)
- DEF_HELPER_6(vfwmsac_vf_w, void, ptr, ptr, i64, ptr, env, i32)
- DEF_HELPER_6(vfwnmsac_vf_h, void, ptr, ptr, i64, ptr, env, i32)
- DEF_HELPER_6(vfwnmsac_vf_w, void, ptr, ptr, i64, ptr, env, i32)
+@@ -1074,3 +1074,12 @@ DEF_HELPER_6(vfredmin_vs_d, void, ptr, ptr, ptr, ptr, env, i32)
+ 
+ DEF_HELPER_6(vfwredsum_vs_h, void, ptr, ptr, ptr, ptr, env, i32)
+ DEF_HELPER_6(vfwredsum_vs_w, void, ptr, ptr, ptr, ptr, env, i32)
 +
-+DEF_HELPER_5(vfsqrt_v_h, void, ptr, ptr, ptr, env, i32)
-+DEF_HELPER_5(vfsqrt_v_w, void, ptr, ptr, ptr, env, i32)
-+DEF_HELPER_5(vfsqrt_v_d, void, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vmand_mm, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vmnand_mm, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vmandnot_mm, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vmxor_mm, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vmor_mm, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vmnor_mm, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vmornot_mm, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vmxnor_mm, void, ptr, ptr, ptr, ptr, env, i32)
 diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index b7cb116cf4..fc9aebc6d6 100644
+index f1efc8886d..76a9bae8bb 100644
 --- a/target/riscv/insn32.decode
 +++ b/target/riscv/insn32.decode
-@@ -45,6 +45,7 @@
- &shift     shamt rs1 rd
- &atomic    aq rl rs2 rs1 rd
- &rmrr      vm rd rs1 rs2
-+&rmr       vm rd rs2
- &rwdvm     vm wd rd rs1 rs2
- &r2nfvm    vm rd rs1 nf
- &rnfvm     vm rd rs1 rs2 nf
-@@ -68,6 +69,7 @@
- @r2_rm   .......   ..... ..... ... ..... ....... %rs1 %rm %rd
- @r2      .......   ..... ..... ... ..... ....... %rs1 %rd
- @r2_nfvm ... ... vm:1 ..... ..... ... ..... ....... &r2nfvm %nf %rs1 %rd
-+@r2_vm   ...... vm:1 ..... ..... ... ..... ....... &rmr %rs2 %rd
- @r_nfvm  ... ... vm:1 ..... ..... ... ..... ....... &rnfvm %nf %rs2 %rs1 %rd
- @r_vm    ...... vm:1 ..... ..... ... ..... ....... &rmrr %rs2 %rs1 %rd
- @r_wdvm  ..... wd:1 vm:1 ..... ..... ... ..... ....... &rwdvm %rs2 %rs1 %rd
-@@ -482,6 +484,7 @@ vfwmsac_vv      111110 . ..... ..... 001 ..... 1010111 @r_vm
- vfwmsac_vf      111110 . ..... ..... 101 ..... 1010111 @r_vm
- vfwnmsac_vv     111111 . ..... ..... 001 ..... 1010111 @r_vm
- vfwnmsac_vf     111111 . ..... ..... 101 ..... 1010111 @r_vm
-+vfsqrt_v        100011 . ..... 00000 001 ..... 1010111 @r2_vm
+@@ -539,6 +539,14 @@ vfredmin_vs     000101 . ..... ..... 001 ..... 1010111 @r_vm
+ vfredmax_vs     000111 . ..... ..... 001 ..... 1010111 @r_vm
+ # Vector widening ordered and unordered float reduction sum
+ vfwredsum_vs    1100-1 . ..... ..... 001 ..... 1010111 @r_vm
++vmand_mm        011001 - ..... ..... 010 ..... 1010111 @r
++vmnand_mm       011101 - ..... ..... 010 ..... 1010111 @r
++vmandnot_mm     011000 - ..... ..... 010 ..... 1010111 @r
++vmxor_mm        011011 - ..... ..... 010 ..... 1010111 @r
++vmor_mm         011010 - ..... ..... 010 ..... 1010111 @r
++vmnor_mm        011110 - ..... ..... 010 ..... 1010111 @r
++vmornot_mm      011100 - ..... ..... 010 ..... 1010111 @r
++vmxnor_mm       011111 - ..... ..... 010 ..... 1010111 @r
  
  vsetvli         0 ........... ..... 111 ..... 1010111  @r2_zimm
  vsetvl          1000000 ..... ..... 111 ..... 1010111  @r
 diff --git a/target/riscv/insn_trans/trans_rvv.inc.c b/target/riscv/insn_trans/trans_rvv.inc.c
-index 06d6e2625b..3e4f7de240 100644
+index ad864c9742..065b415abb 100644
 --- a/target/riscv/insn_trans/trans_rvv.inc.c
 +++ b/target/riscv/insn_trans/trans_rvv.inc.c
-@@ -1834,3 +1834,40 @@ GEN_OPFVF_WIDEN_TRANS(vfwmacc_vf)
- GEN_OPFVF_WIDEN_TRANS(vfwnmacc_vf)
- GEN_OPFVF_WIDEN_TRANS(vfwmsac_vf)
- GEN_OPFVF_WIDEN_TRANS(vfwnmsac_vf)
-+
-+/* Vector Floating-Point Square-Root Instruction */
+@@ -2052,3 +2052,31 @@ GEN_OPFVV_TRANS(vfredmin_vs, reduction_check)
+ 
+ /* Vector Widening Floating-Point Reduction Instructions */
+ GEN_OPFVV_WIDEN_TRANS(vfwredsum_vs, reduction_check)
 +
 +/*
-+ * If the current SEW does not correspond to a supported IEEE floating-point
-+ * type, an illegal instruction exception is raised
++ *** Vector Mask Operations
 + */
-+static bool opfv_check(DisasContext *s, arg_rmr *a)
-+{
-+   return (vext_check_isa_ill(s, RVV) &&
-+            vext_check_overlap_mask(s, a->rd, a->vm, false) &&
-+            vext_check_reg(s, a->rd, false) &&
-+            vext_check_reg(s, a->rs2, false) &&
-+            (s->sew != 0));
-+}
-+
-+#define GEN_OPFV_TRANS(NAME, CHECK)                                \
-+static bool trans_##NAME(DisasContext *s, arg_rmr *a)              \
++/* Vector Mask-Register Logical Instructions */
++#define GEN_MM_TRANS(NAME)                                         \
++static bool trans_##NAME(DisasContext *s, arg_r *a)                \
 +{                                                                  \
-+    if (CHECK(s, a)) {                                             \
++    if (vext_check_isa_ill(s, RVV)) {                              \
 +        uint32_t data = 0;                                         \
-+        static gen_helper_gvec_3_ptr * const fns[3] = {            \
-+            gen_helper_##NAME##_h,                                 \
-+            gen_helper_##NAME##_w,                                 \
-+            gen_helper_##NAME##_d,                                 \
-+        };                                                         \
++        gen_helper_gvec_4_ptr * fn = gen_helper_##NAME;            \
 +        data = FIELD_DP32(data, VDATA, MLEN, s->mlen);             \
-+        data = FIELD_DP32(data, VDATA, VM, a->vm);                 \
 +        data = FIELD_DP32(data, VDATA, LMUL, s->lmul);             \
-+        tcg_gen_gvec_3_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),     \
-+            vreg_ofs(s, a->rs2), cpu_env, 0,                       \
-+            s->vlen / 8, data, fns[s->sew - 1]);                   \
++        tcg_gen_gvec_4_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),     \
++            vreg_ofs(s, a->rs1), vreg_ofs(s, a->rs2),              \
++            cpu_env, 0, s->vlen / 8, data, fn);                    \
 +        return true;                                               \
 +    }                                                              \
 +    return false;                                                  \
 +}
-+GEN_OPFV_TRANS(vfsqrt_v, opfv_check)
++GEN_MM_TRANS(vmand_mm)
++GEN_MM_TRANS(vmnand_mm)
++GEN_MM_TRANS(vmandnot_mm)
++GEN_MM_TRANS(vmxor_mm)
++GEN_MM_TRANS(vmor_mm)
++GEN_MM_TRANS(vmnor_mm)
++GEN_MM_TRANS(vmornot_mm)
++GEN_MM_TRANS(vmxnor_mm)
 diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index 9bff516a15..088bb51af0 100644
+index d325fe5e2e..9e9d172cda 100644
 --- a/target/riscv/vector_helper.c
 +++ b/target/riscv/vector_helper.c
-@@ -3488,3 +3488,43 @@ RVVCALL(OPFVF3, vfwnmsac_vf_h, WOP_UUU_H, H4, H2, fwnmsac16)
- RVVCALL(OPFVF3, vfwnmsac_vf_w, WOP_UUU_W, H8, H4, fwnmsac32)
- GEN_VEXT_VF(vfwnmsac_vf_h, 2, 4, clearl)
- GEN_VEXT_VF(vfwnmsac_vf_w, 4, 8, clearq)
+@@ -4238,3 +4238,43 @@ void HELPER(vfwredsum_vs_w)(void *vd, void *v0, void *vs1,
+         clearq(vd, 1, sizeof(uint64_t), tot);
+     }
+ }
 +
-+/* Vector Floating-Point Square-Root Instruction */
-+/* (TD, T2, TX2) */
-+#define OP_UU_H uint16_t, uint16_t, uint16_t
-+#define OP_UU_W uint32_t, uint32_t, uint32_t
-+#define OP_UU_D uint64_t, uint64_t, uint64_t
-+
-+#define OPFVV1(NAME, TD, T2, TX2, HD, HS2, OP)        \
-+static void do_##NAME(void *vd, void *vs2, int i,      \
-+        CPURISCVState *env)                            \
-+{                                                      \
-+    TX2 s2 = *((T2 *)vs2 + HS2(i));                    \
-+    *((TD *)vd + HD(i)) = OP(s2, &env->fp_status);     \
++/*
++ *** Vector Mask Operations
++ */
++/* Vector Mask-Register Logical Instructions */
++#define GEN_VEXT_MASK_VV(NAME, OP)                        \
++void HELPER(NAME)(void *vd, void *v0, void *vs1,          \
++        void *vs2, CPURISCVState *env, uint32_t desc)     \
++{                                                         \
++    uint32_t mlen = vext_mlen(desc);                      \
++    uint32_t vlmax = env_archcpu(env)->cfg.vlen / mlen;   \
++    uint32_t vl = env->vl;                                \
++    uint32_t i;                                           \
++    int a, b;                                             \
++    for (i = 0; i < vl; i++) {                            \
++        a = vext_elem_mask(vs1, mlen, i);                 \
++        b = vext_elem_mask(vs2, mlen, i);                 \
++        vext_set_elem_mask(vd, mlen, i, OP(b, a));        \
++    }                                                     \
++    if (i == 0) {                                         \
++        return;                                           \
++    }                                                     \
++    for (; i < vlmax; i++) {                              \
++        vext_set_elem_mask(vd, mlen, i, 0);               \
++    }                                                     \
 +}
++#define DO_NAND(N, M)  (!(N & M))
++#define DO_ANDNOT(N, M)  (N & !M)
++#define DO_NOR(N, M)  (!(N | M))
++#define DO_ORNOT(N, M)  (N | !M)
++#define DO_XNOR(N, M)  (!(N ^ M))
 +
-+#define GEN_VEXT_V_ENV(NAME, ESZ, DSZ, CLEAR_FN)       \
-+void HELPER(NAME)(void *vd, void *v0, void *vs2,       \
-+        CPURISCVState *env, uint32_t desc)             \
-+{                                                      \
-+    uint32_t vlmax = vext_maxsz(desc) / ESZ;           \
-+    uint32_t mlen = vext_mlen(desc);                   \
-+    uint32_t vm = vext_vm(desc);                       \
-+    uint32_t vl = env->vl;                             \
-+    uint32_t i;                                        \
-+    for (i = 0; i < vl; i++) {                         \
-+        if (!vm && !vext_elem_mask(v0, mlen, i)) {     \
-+            continue;                                  \
-+        }                                              \
-+        do_##NAME(vd, vs2, i, env);                    \
-+    }                                                  \
-+    if (i != 0) {                                      \
-+        CLEAR_FN(vd, vl, vl * DSZ,  vlmax * DSZ);      \
-+    }                                                  \
-+}
-+RVVCALL(OPFVV1, vfsqrt_v_h, OP_UU_H, H2, H2, float16_sqrt)
-+RVVCALL(OPFVV1, vfsqrt_v_w, OP_UU_W, H4, H4, float32_sqrt)
-+RVVCALL(OPFVV1, vfsqrt_v_d, OP_UU_D, H8, H8, float64_sqrt)
-+GEN_VEXT_V_ENV(vfsqrt_v_h, 2, 2, clearh)
-+GEN_VEXT_V_ENV(vfsqrt_v_w, 4, 4, clearl)
-+GEN_VEXT_V_ENV(vfsqrt_v_d, 8, 8, clearq)
++GEN_VEXT_MASK_VV(vmand_mm, DO_AND)
++GEN_VEXT_MASK_VV(vmnand_mm, DO_NAND)
++GEN_VEXT_MASK_VV(vmandnot_mm, DO_ANDNOT)
++GEN_VEXT_MASK_VV(vmxor_mm, DO_XOR)
++GEN_VEXT_MASK_VV(vmor_mm, DO_OR)
++GEN_VEXT_MASK_VV(vmnor_mm, DO_NOR)
++GEN_VEXT_MASK_VV(vmornot_mm, DO_ORNOT)
++GEN_VEXT_MASK_VV(vmxnor_mm, DO_XNOR)
 -- 
 2.23.0
 
