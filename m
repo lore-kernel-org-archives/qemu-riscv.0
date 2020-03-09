@@ -1,34 +1,37 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jBHJX-0001Ou-Rq
-	for mharc-qemu-riscv@gnu.org; Mon, 09 Mar 2020 08:15:19 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:56204)
+	id 1jBHJY-0001PW-4F
+	for mharc-qemu-riscv@gnu.org; Mon, 09 Mar 2020 08:15:20 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:56215)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <zhiwei_liu@c-sky.com>) id 1jBHJR-0001B8-Ih
+ (envelope-from <zhiwei_liu@c-sky.com>) id 1jBHJS-0001Bo-3N
  for qemu-riscv@nongnu.org; Mon, 09 Mar 2020 08:15:15 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <zhiwei_liu@c-sky.com>) id 1jBHJQ-0002V6-1s
+ (envelope-from <zhiwei_liu@c-sky.com>) id 1jBHJQ-0002W1-R8
  for qemu-riscv@nongnu.org; Mon, 09 Mar 2020 08:15:13 -0400
-Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:36888)
+Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:36543)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1jBHJM-0002N2-Io; Mon, 09 Mar 2020 08:15:09 -0400
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07436283|-1; CH=blue; DM=||false|;
- DS=CONTINUE|ham_system_inform|0.284299-0.00020209-0.715499;
- FP=9121874194399893506|2|1|7|0|-1|-1|-1; HT=e02c03307; MF=zhiwei_liu@c-sky.com;
- NM=1; PH=DS; RN=10; RT=10; SR=0; TI=SMTPD_---.GyaeXy8_1583756101; 
+ id 1jBHJO-0002Na-04; Mon, 09 Mar 2020 08:15:10 -0400
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.09717409|-1; CH=blue; DM=||false|;
+ DS=CONTINUE|ham_system_inform|0.0359546-0.000358177-0.963687;
+ FP=12030644411456161715|3|1|9|0|-1|-1|-1; HT=e02c03308;
+ MF=zhiwei_liu@c-sky.com; NM=1; PH=DS; RN=11; RT=11; SR=0;
+ TI=SMTPD_---.GyaeXy8_1583756101; 
 Received: from L-PF1D6DP4-1208.hz.ali.com(mailfrom:zhiwei_liu@c-sky.com
  fp:SMTPD_---.GyaeXy8_1583756101)
  by smtp.aliyun-inc.com(10.147.41.199);
- Mon, 09 Mar 2020 20:15:03 +0800
+ Mon, 09 Mar 2020 20:15:02 +0800
 From: LIU Zhiwei <zhiwei_liu@c-sky.com>
 To: richard.henderson@linaro.org, alistair23@gmail.com,
  chihmin.chao@sifive.com, palmer@dabbelt.com
 Cc: wenmeng_zhang@c-sky.com, wxy194768@alibaba-inc.com,
  guoren@linux.alibaba.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- LIU Zhiwei <zhiwei_liu@c-sky.com>
-Subject: [PATCH v3 03/60] target/riscv: support vector extension csr
-Date: Mon,  9 Mar 2020 20:14:00 +0800
-Message-Id: <20200309121457.13719-4-zhiwei_liu@c-sky.com>
+ LIU Zhiwei <zhiwei_liu@c-sky.com>,
+ Alistair Francis <alistair.francis@wdc.com>
+Subject: [PATCH v3 01/60] target/riscv: add vector extension field in
+ CPURISCVState
+Date: Mon,  9 Mar 2020 20:13:58 +0800
+Message-Id: <20200309121457.13719-2-zhiwei_liu@c-sky.com>
 X-Mailer: git-send-email 2.23.0
 In-Reply-To: <20200309121457.13719-1-zhiwei_liu@c-sky.com>
 References: <20200309121457.13719-1-zhiwei_liu@c-sky.com>
@@ -49,166 +52,51 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Mon, 09 Mar 2020 12:15:15 -0000
 
-The v0.7.1 specification does not define vector status within mstatus.
-A future revision will define the privileged portion of the vector status.
+The 32 vector registers will be viewed as a continuous memory block.
+It avoids the convension between element index and (regno, offset).
+Thus elements can be directly accessed by offset from the first vector
+base address.
 
 Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/riscv/cpu_bits.h | 15 +++++++++
- target/riscv/csr.c      | 75 ++++++++++++++++++++++++++++++++++++++++-
- 2 files changed, 89 insertions(+), 1 deletion(-)
+ target/riscv/cpu.h | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
 
-diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-index 7f64ee1174..8117e8b5a7 100644
---- a/target/riscv/cpu_bits.h
-+++ b/target/riscv/cpu_bits.h
-@@ -29,6 +29,14 @@
- #define FSR_NXA             (FPEXC_NX << FSR_AEXC_SHIFT)
- #define FSR_AEXC            (FSR_NVA | FSR_OFA | FSR_UFA | FSR_DZA | FSR_NXA)
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 3dcdf92227..0c1f7bdd8b 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -64,6 +64,7 @@
+ #define RVA RV('A')
+ #define RVF RV('F')
+ #define RVD RV('D')
++#define RVV RV('V')
+ #define RVC RV('C')
+ #define RVS RV('S')
+ #define RVU RV('U')
+@@ -94,9 +95,20 @@ typedef struct CPURISCVState CPURISCVState;
  
-+/* Vector Fixed-Point round model */
-+#define FSR_VXRM_SHIFT      9
-+#define FSR_VXRM            (0x3 << FSR_VXRM_SHIFT)
-+
-+/* Vector Fixed-Point saturation flag */
-+#define FSR_VXSAT_SHIFT     8
-+#define FSR_VXSAT           (0x1 << FSR_VXSAT_SHIFT)
-+
- /* Control and Status Registers */
+ #include "pmp.h"
  
- /* User Trap Setup */
-@@ -48,6 +56,13 @@
- #define CSR_FRM             0x002
- #define CSR_FCSR            0x003
- 
-+/* User Vector CSRs */
-+#define CSR_VSTART          0x008
-+#define CSR_VXSAT           0x009
-+#define CSR_VXRM            0x00a
-+#define CSR_VL              0xc20
-+#define CSR_VTYPE           0xc21
++#define RV_VLEN_MAX 512
 +
- /* User Timers and Counters */
- #define CSR_CYCLE           0xc00
- #define CSR_TIME            0xc01
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 11d184cd16..d71c49dfff 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -46,6 +46,10 @@ void riscv_set_csr_ops(int csrno, riscv_csr_operations *ops)
- static int fs(CPURISCVState *env, int csrno)
- {
- #if !defined(CONFIG_USER_ONLY)
-+    /* loose check condition for fcsr in vector extension */
-+    if ((csrno == CSR_FCSR) && (env->misa & RVV)) {
-+        return 0;
-+    }
-     if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
-         return -1;
-     }
-@@ -53,6 +57,14 @@ static int fs(CPURISCVState *env, int csrno)
-     return 0;
- }
- 
-+static int vs(CPURISCVState *env, int csrno)
-+{
-+    if (env->misa & RVV) {
-+        return 0;
-+    }
-+    return -1;
-+}
+ struct CPURISCVState {
+     target_ulong gpr[32];
+     uint64_t fpr[32]; /* assume both F and D extensions */
 +
- static int ctr(CPURISCVState *env, int csrno)
- {
- #if !defined(CONFIG_USER_ONLY)
-@@ -174,6 +186,10 @@ static int read_fcsr(CPURISCVState *env, int csrno, target_ulong *val)
- #endif
-     *val = (riscv_cpu_get_fflags(env) << FSR_AEXC_SHIFT)
-         | (env->frm << FSR_RD_SHIFT);
-+    if (vs(env, csrno) >= 0) {
-+        *val |= (env->vxrm << FSR_VXRM_SHIFT)
-+                | (env->vxsat << FSR_VXSAT_SHIFT);
-+    }
-     return 0;
- }
- 
-@@ -186,10 +202,62 @@ static int write_fcsr(CPURISCVState *env, int csrno, target_ulong val)
-     env->mstatus |= MSTATUS_FS;
- #endif
-     env->frm = (val & FSR_RD) >> FSR_RD_SHIFT;
-+    if (vs(env, csrno) >= 0) {
-+        env->vxrm = (val & FSR_VXRM) >> FSR_VXRM_SHIFT;
-+        env->vxsat = (val & FSR_VXSAT) >> FSR_VXSAT_SHIFT;
-+    }
-     riscv_cpu_set_fflags(env, (val & FSR_AEXC) >> FSR_AEXC_SHIFT);
-     return 0;
- }
- 
-+static int read_vtype(CPURISCVState *env, int csrno, target_ulong *val)
-+{
-+    *val = env->vtype;
-+    return 0;
-+}
++    /* vector coprocessor state. */
++    uint64_t vreg[32 * RV_VLEN_MAX / 64] QEMU_ALIGNED(16);
++    target_ulong vxrm;
++    target_ulong vxsat;
++    target_ulong vl;
++    target_ulong vstart;
++    target_ulong vtype;
 +
-+static int read_vl(CPURISCVState *env, int csrno, target_ulong *val)
-+{
-+    *val = env->vl;
-+    return 0;
-+}
-+
-+static int read_vxrm(CPURISCVState *env, int csrno, target_ulong *val)
-+{
-+    *val = env->vxrm;
-+    return 0;
-+}
-+
-+static int write_vxrm(CPURISCVState *env, int csrno, target_ulong val)
-+{
-+    env->vxrm = val;
-+    return 0;
-+}
-+
-+static int read_vxsat(CPURISCVState *env, int csrno, target_ulong *val)
-+{
-+    *val = env->vxsat;
-+    return 0;
-+}
-+
-+static int write_vxsat(CPURISCVState *env, int csrno, target_ulong val)
-+{
-+    env->vxsat = val;
-+    return 0;
-+}
-+
-+static int read_vstart(CPURISCVState *env, int csrno, target_ulong *val)
-+{
-+    *val = env->vstart;
-+    return 0;
-+}
-+
-+static int write_vstart(CPURISCVState *env, int csrno, target_ulong val)
-+{
-+    env->vstart = val;
-+    return 0;
-+}
-+
- /* User Timers and Counters */
- static int read_instret(CPURISCVState *env, int csrno, target_ulong *val)
- {
-@@ -1269,7 +1337,12 @@ static riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
-     [CSR_FFLAGS] =              { fs,   read_fflags,      write_fflags      },
-     [CSR_FRM] =                 { fs,   read_frm,         write_frm         },
-     [CSR_FCSR] =                { fs,   read_fcsr,        write_fcsr        },
--
-+    /* Vector CSRs */
-+    [CSR_VSTART] =              { vs,   read_vstart,      write_vstart      },
-+    [CSR_VXSAT] =               { vs,   read_vxsat,       write_vxsat       },
-+    [CSR_VXRM] =                { vs,   read_vxrm,        write_vxrm        },
-+    [CSR_VL] =                  { vs,   read_vl                             },
-+    [CSR_VTYPE] =               { vs,   read_vtype                          },
-     /* User Timers and Counters */
-     [CSR_CYCLE] =               { ctr,  read_instret                        },
-     [CSR_INSTRET] =             { ctr,  read_instret                        },
+     target_ulong pc;
+     target_ulong load_res;
+     target_ulong load_val;
 -- 
 2.23.0
 
