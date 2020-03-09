@@ -1,36 +1,35 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jBHKJ-0002pv-7J
+	id 1jBHKJ-0002qg-Du
 	for mharc-qemu-riscv@gnu.org; Mon, 09 Mar 2020 08:16:07 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:56819)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:56820)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <zhiwei_liu@c-sky.com>) id 1jBHK5-0002UZ-34
+ (envelope-from <zhiwei_liu@c-sky.com>) id 1jBHK5-0002Ua-3t
  for qemu-riscv@nongnu.org; Mon, 09 Mar 2020 08:15:55 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <zhiwei_liu@c-sky.com>) id 1jBHK1-0003EE-I6
+ (envelope-from <zhiwei_liu@c-sky.com>) id 1jBHK1-0003EF-GO
  for qemu-riscv@nongnu.org; Mon, 09 Mar 2020 08:15:52 -0400
-Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:50084)
+Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:55371)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1jBHJt-0002bm-Qw; Mon, 09 Mar 2020 08:15:42 -0400
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.074415|-1; CH=blue; DM=||false|;
- DS=CONTINUE|ham_system_inform|0.687276-0.000105434-0.312618;
- FP=10292831519337153542|1|1|7|0|-1|-1|-1; HT=e02c03295;
- MF=zhiwei_liu@c-sky.com; NM=1; PH=DS; RN=10; RT=10; SR=0;
- TI=SMTPD_---.GyaeXy8_1583756101; 
+ id 1jBHJt-0002c0-Bp; Mon, 09 Mar 2020 08:15:41 -0400
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07436288|-1; CH=blue; DM=||false|;
+ DS=CONTINUE|ham_system_inform|0.196625-0.000248577-0.803126;
+ FP=1028362889771717734|1|1|7|0|-1|-1|-1; HT=e01l07447; MF=zhiwei_liu@c-sky.com;
+ NM=1; PH=DS; RN=10; RT=10; SR=0; TI=SMTPD_---.GyaeXy8_1583756101; 
 Received: from L-PF1D6DP4-1208.hz.ali.com(mailfrom:zhiwei_liu@c-sky.com
  fp:SMTPD_---.GyaeXy8_1583756101)
  by smtp.aliyun-inc.com(10.147.41.199);
- Mon, 09 Mar 2020 20:15:12 +0800
+ Mon, 09 Mar 2020 20:15:16 +0800
 From: LIU Zhiwei <zhiwei_liu@c-sky.com>
 To: richard.henderson@linaro.org, alistair23@gmail.com,
  chihmin.chao@sifive.com, palmer@dabbelt.com
 Cc: wenmeng_zhang@c-sky.com, wxy194768@alibaba-inc.com,
  guoren@linux.alibaba.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
  LIU Zhiwei <zhiwei_liu@c-sky.com>
-Subject: [PATCH v3 19/60] target/riscv: vector widening integer multiply
+Subject: [PATCH v3 28/60] target/riscv: vector narrowing fixed-point clip
  instructions
-Date: Mon,  9 Mar 2020 20:14:16 +0800
-Message-Id: <20200309121457.13719-20-zhiwei_liu@c-sky.com>
+Date: Mon,  9 Mar 2020 20:14:25 +0800
+Message-Id: <20200309121457.13719-29-zhiwei_liu@c-sky.com>
 X-Mailer: git-send-email 2.23.0
 In-Reply-To: <20200309121457.13719-1-zhiwei_liu@c-sky.com>
 References: <20200309121457.13719-1-zhiwei_liu@c-sky.com>
@@ -53,138 +52,209 @@ X-List-Received-Date: Mon, 09 Mar 2020 12:15:55 -0000
 
 Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
 ---
- target/riscv/helper.h                   | 19 +++++++++
- target/riscv/insn32.decode              |  6 +++
- target/riscv/insn_trans/trans_rvv.inc.c |  8 ++++
- target/riscv/vector_helper.c            | 51 +++++++++++++++++++++++++
- 4 files changed, 84 insertions(+)
+ target/riscv/helper.h                   |  13 +++
+ target/riscv/insn32.decode              |   6 ++
+ target/riscv/insn_trans/trans_rvv.inc.c |   8 ++
+ target/riscv/vector_helper.c            | 128 ++++++++++++++++++++++++
+ 4 files changed, 155 insertions(+)
 
 diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-index 357f149198..1704b8c512 100644
+index efc84fbd79..4cad8679ec 100644
 --- a/target/riscv/helper.h
 +++ b/target/riscv/helper.h
-@@ -591,3 +591,22 @@ DEF_HELPER_6(vrem_vx_b, void, ptr, ptr, tl, ptr, env, i32)
- DEF_HELPER_6(vrem_vx_h, void, ptr, ptr, tl, ptr, env, i32)
- DEF_HELPER_6(vrem_vx_w, void, ptr, ptr, tl, ptr, env, i32)
- DEF_HELPER_6(vrem_vx_d, void, ptr, ptr, tl, ptr, env, i32)
+@@ -772,3 +772,16 @@ DEF_HELPER_6(vssra_vx_b, void, ptr, ptr, tl, ptr, env, i32)
+ DEF_HELPER_6(vssra_vx_h, void, ptr, ptr, tl, ptr, env, i32)
+ DEF_HELPER_6(vssra_vx_w, void, ptr, ptr, tl, ptr, env, i32)
+ DEF_HELPER_6(vssra_vx_d, void, ptr, ptr, tl, ptr, env, i32)
 +
-+DEF_HELPER_6(vwmul_vv_b, void, ptr, ptr, ptr, ptr, env, i32)
-+DEF_HELPER_6(vwmul_vv_h, void, ptr, ptr, ptr, ptr, env, i32)
-+DEF_HELPER_6(vwmul_vv_w, void, ptr, ptr, ptr, ptr, env, i32)
-+DEF_HELPER_6(vwmulu_vv_b, void, ptr, ptr, ptr, ptr, env, i32)
-+DEF_HELPER_6(vwmulu_vv_h, void, ptr, ptr, ptr, ptr, env, i32)
-+DEF_HELPER_6(vwmulu_vv_w, void, ptr, ptr, ptr, ptr, env, i32)
-+DEF_HELPER_6(vwmulsu_vv_b, void, ptr, ptr, ptr, ptr, env, i32)
-+DEF_HELPER_6(vwmulsu_vv_h, void, ptr, ptr, ptr, ptr, env, i32)
-+DEF_HELPER_6(vwmulsu_vv_w, void, ptr, ptr, ptr, ptr, env, i32)
-+DEF_HELPER_6(vwmul_vx_b, void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vwmul_vx_h, void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vwmul_vx_w, void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vwmulu_vx_b, void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vwmulu_vx_h, void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vwmulu_vx_w, void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vwmulsu_vx_b, void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vwmulsu_vx_h, void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vwmulsu_vx_w, void, ptr, ptr, tl, ptr, env, i32)
++DEF_HELPER_6(vnclip_vv_b, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vnclip_vv_h, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vnclip_vv_w, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vnclipu_vv_b, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vnclipu_vv_h, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vnclipu_vv_w, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vnclipu_vx_b, void, ptr, ptr, tl, ptr, env, i32)
++DEF_HELPER_6(vnclipu_vx_h, void, ptr, ptr, tl, ptr, env, i32)
++DEF_HELPER_6(vnclipu_vx_w, void, ptr, ptr, tl, ptr, env, i32)
++DEF_HELPER_6(vnclip_vx_b, void, ptr, ptr, tl, ptr, env, i32)
++DEF_HELPER_6(vnclip_vx_h, void, ptr, ptr, tl, ptr, env, i32)
++DEF_HELPER_6(vnclip_vx_w, void, ptr, ptr, tl, ptr, env, i32)
 diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index 2afe24dd34..ceddfe4b6c 100644
+index d6d111e04a..c7d589566f 100644
 --- a/target/riscv/insn32.decode
 +++ b/target/riscv/insn32.decode
-@@ -378,6 +378,12 @@ vremu_vv        100010 . ..... ..... 010 ..... 1010111 @r_vm
- vremu_vx        100010 . ..... ..... 110 ..... 1010111 @r_vm
- vrem_vv         100011 . ..... ..... 010 ..... 1010111 @r_vm
- vrem_vx         100011 . ..... ..... 110 ..... 1010111 @r_vm
-+vwmulu_vv       111000 . ..... ..... 010 ..... 1010111 @r_vm
-+vwmulu_vx       111000 . ..... ..... 110 ..... 1010111 @r_vm
-+vwmulsu_vv      111010 . ..... ..... 010 ..... 1010111 @r_vm
-+vwmulsu_vx      111010 . ..... ..... 110 ..... 1010111 @r_vm
-+vwmul_vv        111011 . ..... ..... 010 ..... 1010111 @r_vm
-+vwmul_vx        111011 . ..... ..... 110 ..... 1010111 @r_vm
+@@ -432,6 +432,12 @@ vssrl_vi        101010 . ..... ..... 011 ..... 1010111 @r_vm
+ vssra_vv        101011 . ..... ..... 000 ..... 1010111 @r_vm
+ vssra_vx        101011 . ..... ..... 100 ..... 1010111 @r_vm
+ vssra_vi        101011 . ..... ..... 011 ..... 1010111 @r_vm
++vnclipu_vv      101110 . ..... ..... 000 ..... 1010111 @r_vm
++vnclipu_vx      101110 . ..... ..... 100 ..... 1010111 @r_vm
++vnclipu_vi      101110 . ..... ..... 011 ..... 1010111 @r_vm
++vnclip_vv       101111 . ..... ..... 000 ..... 1010111 @r_vm
++vnclip_vx       101111 . ..... ..... 100 ..... 1010111 @r_vm
++vnclip_vi       101111 . ..... ..... 011 ..... 1010111 @r_vm
  
  vsetvli         0 ........... ..... 111 ..... 1010111  @r2_zimm
  vsetvl          1000000 ..... ..... 111 ..... 1010111  @r
 diff --git a/target/riscv/insn_trans/trans_rvv.inc.c b/target/riscv/insn_trans/trans_rvv.inc.c
-index 9f0645a92b..990433f866 100644
+index 21f896ea26..11b4887275 100644
 --- a/target/riscv/insn_trans/trans_rvv.inc.c
 +++ b/target/riscv/insn_trans/trans_rvv.inc.c
-@@ -1454,3 +1454,11 @@ GEN_OPIVX_TRANS(vdivu_vx, opivx_check)
- GEN_OPIVX_TRANS(vdiv_vx, opivx_check)
- GEN_OPIVX_TRANS(vremu_vx, opivx_check)
- GEN_OPIVX_TRANS(vrem_vx, opivx_check)
+@@ -1549,3 +1549,11 @@ GEN_OPIVX_TRANS(vssrl_vx,  opivx_check)
+ GEN_OPIVX_TRANS(vssra_vx,  opivx_check)
+ GEN_OPIVI_TRANS(vssrl_vi, 1, vssrl_vx, opivx_check)
+ GEN_OPIVI_TRANS(vssra_vi, 0, vssra_vx, opivx_check)
 +
-+/* Vector Widening Integer Multiply Instructions */
-+GEN_OPIVV_WIDEN_TRANS(vwmul_vv, opivv_widen_check)
-+GEN_OPIVV_WIDEN_TRANS(vwmulu_vv, opivv_widen_check)
-+GEN_OPIVV_WIDEN_TRANS(vwmulsu_vv, opivv_widen_check)
-+GEN_OPIVX_WIDEN_TRANS(vwmul_vx)
-+GEN_OPIVX_WIDEN_TRANS(vwmulu_vx)
-+GEN_OPIVX_WIDEN_TRANS(vwmulsu_vx)
++/* Vector Narrowing Fixed-Point Clip Instructions */
++GEN_OPIVV_NARROW_TRANS(vnclipu_vv)
++GEN_OPIVV_NARROW_TRANS(vnclip_vv)
++GEN_OPIVX_NARROW_TRANS(vnclipu_vx)
++GEN_OPIVX_NARROW_TRANS(vnclip_vx)
++GEN_OPIVI_NARROW_TRANS(vnclipu_vi, 1, vnclipu_vx)
++GEN_OPIVI_NARROW_TRANS(vnclip_vi, 1, vnclip_vx)
 diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index 6330f5882f..beb84f9674 100644
+index ec0f822fcf..7f61d4c0c4 100644
 --- a/target/riscv/vector_helper.c
 +++ b/target/riscv/vector_helper.c
-@@ -857,6 +857,18 @@ GEN_VEXT_AMO(vamomaxuw_v_w, uint32_t, uint32_t, idx_w, clearl)
- #define OP_SUS_H int16_t, uint16_t, int16_t, uint16_t, int16_t
- #define OP_SUS_W int32_t, uint32_t, int32_t, uint32_t, int32_t
- #define OP_SUS_D int64_t, uint64_t, int64_t, uint64_t, int64_t
-+#define WOP_UUU_B uint16_t, uint8_t, uint8_t, uint16_t, uint16_t
-+#define WOP_UUU_H uint32_t, uint16_t, uint16_t, uint32_t, uint32_t
-+#define WOP_UUU_W uint64_t, uint32_t, uint32_t, uint64_t, uint64_t
-+#define WOP_SSS_B int16_t, int8_t, int8_t, int16_t, int16_t
-+#define WOP_SSS_H int32_t, int16_t, int16_t, int32_t, int32_t
-+#define WOP_SSS_W int64_t, int32_t, int32_t, int64_t, int64_t
-+#define WOP_SUS_B int16_t, uint8_t, int8_t, uint16_t, int16_t
-+#define WOP_SUS_H int32_t, uint16_t, int16_t, uint32_t, int32_t
-+#define WOP_SUS_W int64_t, uint32_t, int32_t, uint64_t, int64_t
-+#define WOP_SSU_B int16_t, int8_t, uint8_t, int16_t, uint16_t
-+#define WOP_SSU_H int32_t, int16_t, uint16_t, int32_t, uint32_t
-+#define WOP_SSU_W int64_t, int32_t, uint32_t, int64_t, uint64_t
+@@ -869,6 +869,12 @@ GEN_VEXT_AMO(vamomaxuw_v_w, uint32_t, uint32_t, idx_w, clearl)
+ #define WOP_SSU_B int16_t, int8_t, uint8_t, int16_t, uint16_t
+ #define WOP_SSU_H int32_t, int16_t, uint16_t, int32_t, uint32_t
+ #define WOP_SSU_W int64_t, int32_t, uint32_t, int64_t, uint64_t
++#define NOP_SSS_B int8_t, int8_t, int16_t, int8_t, int16_t
++#define NOP_SSS_H int16_t, int16_t, int32_t, int16_t, int32_t
++#define NOP_SSS_W int32_t, int32_t, int64_t, int32_t, int64_t
++#define NOP_UUU_B uint8_t, uint8_t, uint16_t, uint8_t, uint16_t
++#define NOP_UUU_H uint16_t, uint16_t, uint32_t, uint16_t, uint32_t
++#define NOP_UUU_W uint32_t, uint32_t, uint64_t, uint32_t, uint64_t
  
  /* operation of two vector elements */
  #define OPIVV2(NAME, TD, T1, T2, TX1, TX2, HD, HS1, HS2, OP)    \
-@@ -1771,3 +1783,42 @@ GEN_VEXT_VX(vrem_vx_b, 1, 1, clearb)
- GEN_VEXT_VX(vrem_vx_h, 2, 2, clearh)
- GEN_VEXT_VX(vrem_vx_w, 4, 4, clearl)
- GEN_VEXT_VX(vrem_vx_d, 8, 8, clearq)
+@@ -2812,3 +2818,125 @@ GEN_VEXT_VX_ENV(vssra_vx_b, 1, 1, clearb)
+ GEN_VEXT_VX_ENV(vssra_vx_h, 2, 2, clearh)
+ GEN_VEXT_VX_ENV(vssra_vx_w, 4, 4, clearl)
+ GEN_VEXT_VX_ENV(vssra_vx_d, 8, 8, clearq)
 +
-+/* Vector Widening Integer Multiply Instructions */
-+RVVCALL(OPIVV2, vwmul_vv_b, WOP_SSS_B, H2, H1, H1, DO_MUL)
-+RVVCALL(OPIVV2, vwmul_vv_h, WOP_SSS_H, H4, H2, H2, DO_MUL)
-+RVVCALL(OPIVV2, vwmul_vv_w, WOP_SSS_W, H8, H4, H4, DO_MUL)
-+RVVCALL(OPIVV2, vwmulu_vv_b, WOP_UUU_B, H2, H1, H1, DO_MUL)
-+RVVCALL(OPIVV2, vwmulu_vv_h, WOP_UUU_H, H4, H2, H2, DO_MUL)
-+RVVCALL(OPIVV2, vwmulu_vv_w, WOP_UUU_W, H8, H4, H4, DO_MUL)
-+RVVCALL(OPIVV2, vwmulsu_vv_b, WOP_SUS_B, H2, H1, H1, DO_MUL)
-+RVVCALL(OPIVV2, vwmulsu_vv_h, WOP_SUS_H, H4, H2, H2, DO_MUL)
-+RVVCALL(OPIVV2, vwmulsu_vv_w, WOP_SUS_W, H8, H4, H4, DO_MUL)
-+GEN_VEXT_VV(vwmul_vv_b, 1, 2, clearh)
-+GEN_VEXT_VV(vwmul_vv_h, 2, 4, clearl)
-+GEN_VEXT_VV(vwmul_vv_w, 4, 8, clearq)
-+GEN_VEXT_VV(vwmulu_vv_b, 1, 2, clearh)
-+GEN_VEXT_VV(vwmulu_vv_h, 2, 4, clearl)
-+GEN_VEXT_VV(vwmulu_vv_w, 4, 8, clearq)
-+GEN_VEXT_VV(vwmulsu_vv_b, 1, 2, clearh)
-+GEN_VEXT_VV(vwmulsu_vv_h, 2, 4, clearl)
-+GEN_VEXT_VV(vwmulsu_vv_w, 4, 8, clearq)
++/* Vector Narrowing Fixed-Point Clip Instructions */
++static int8_t vnclip8(CPURISCVState *env, int16_t a, int8_t b)
++{
++    uint8_t round, shift = b & 0xf;
++    int16_t res;
 +
-+RVVCALL(OPIVX2, vwmul_vx_b, WOP_SSS_B, H2, H1, DO_MUL)
-+RVVCALL(OPIVX2, vwmul_vx_h, WOP_SSS_H, H4, H2, DO_MUL)
-+RVVCALL(OPIVX2, vwmul_vx_w, WOP_SSS_W, H8, H4, DO_MUL)
-+RVVCALL(OPIVX2, vwmulu_vx_b, WOP_UUU_B, H2, H1, DO_MUL)
-+RVVCALL(OPIVX2, vwmulu_vx_h, WOP_UUU_H, H4, H2, DO_MUL)
-+RVVCALL(OPIVX2, vwmulu_vx_w, WOP_UUU_W, H8, H4, DO_MUL)
-+RVVCALL(OPIVX2, vwmulsu_vx_b, WOP_SUS_B, H2, H1, DO_MUL)
-+RVVCALL(OPIVX2, vwmulsu_vx_h, WOP_SUS_H, H4, H2, DO_MUL)
-+RVVCALL(OPIVX2, vwmulsu_vx_w, WOP_SUS_W, H8, H4, DO_MUL)
-+GEN_VEXT_VX(vwmul_vx_b, 1, 2, clearh)
-+GEN_VEXT_VX(vwmul_vx_h, 2, 4, clearl)
-+GEN_VEXT_VX(vwmul_vx_w, 4, 8, clearq)
-+GEN_VEXT_VX(vwmulu_vx_b, 1, 2, clearh)
-+GEN_VEXT_VX(vwmulu_vx_h, 2, 4, clearl)
-+GEN_VEXT_VX(vwmulu_vx_w, 4, 8, clearq)
-+GEN_VEXT_VX(vwmulsu_vx_b, 1, 2, clearh)
-+GEN_VEXT_VX(vwmulsu_vx_h, 2, 4, clearl)
-+GEN_VEXT_VX(vwmulsu_vx_w, 4, 8, clearq)
++    round = get_round(env, a, shift);
++    res   = (a >> shift)  + round;
++    if (res > INT8_MAX) {
++        env->vxsat = 0x1;
++        return INT8_MAX;
++    } else if (res < INT8_MIN) {
++        env->vxsat = 0x1;
++        return INT8_MIN;
++    } else {
++        return res;
++    }
++}
++static int16_t vnclip16(CPURISCVState *env, int32_t a, int16_t b)
++{
++    uint8_t round, shift = b & 0x1f;
++    int32_t res;
++
++    round = get_round(env, a, shift);
++    res   = (a >> shift)  + round;
++    if (res > INT16_MAX) {
++        env->vxsat = 0x1;
++        return INT16_MAX;
++    } else if (res < INT16_MIN) {
++        env->vxsat = 0x1;
++        return INT16_MIN;
++    } else {
++        return res;
++    }
++}
++static int32_t vnclip32(CPURISCVState *env, int64_t a, int32_t b)
++{
++    uint8_t round, shift = b & 0x3f;
++    int64_t res;
++
++    round = get_round(env, a, shift);
++    res   = (a >> shift)  + round;
++    if (res > INT32_MAX) {
++        env->vxsat = 0x1;
++        return INT32_MAX;
++    } else if (res < INT32_MIN) {
++        env->vxsat = 0x1;
++        return INT32_MIN;
++    } else {
++        return res;
++    }
++}
++RVVCALL(OPIVV2_ENV, vnclip_vv_b, NOP_SSS_B, H1, H2, H1, vnclip8)
++RVVCALL(OPIVV2_ENV, vnclip_vv_h, NOP_SSS_H, H2, H4, H2, vnclip16)
++RVVCALL(OPIVV2_ENV, vnclip_vv_w, NOP_SSS_W, H4, H8, H4, vnclip32)
++GEN_VEXT_VV_ENV(vnclip_vv_b, 1, 1, clearb)
++GEN_VEXT_VV_ENV(vnclip_vv_h, 2, 2, clearh)
++GEN_VEXT_VV_ENV(vnclip_vv_w, 4, 4, clearl)
++
++RVVCALL(OPIVX2_ENV, vnclip_vx_b, NOP_SSS_B, H1, H2, vnclip8)
++RVVCALL(OPIVX2_ENV, vnclip_vx_h, NOP_SSS_H, H2, H4, vnclip16)
++RVVCALL(OPIVX2_ENV, vnclip_vx_w, NOP_SSS_W, H4, H8, vnclip32)
++GEN_VEXT_VX_ENV(vnclip_vx_b, 1, 1, clearb)
++GEN_VEXT_VX_ENV(vnclip_vx_h, 2, 2, clearh)
++GEN_VEXT_VX_ENV(vnclip_vx_w, 4, 4, clearl)
++
++static uint8_t vnclipu8(CPURISCVState *env, uint16_t a, uint8_t b)
++{
++    uint8_t round, shift = b & 0xf;
++    uint16_t res;
++
++    round = get_round(env, a, shift);
++    res   = (a >> shift)  + round;
++    if (res > UINT8_MAX) {
++        env->vxsat = 0x1;
++        return UINT8_MAX;
++    } else {
++        return res;
++    }
++}
++static uint16_t vnclipu16(CPURISCVState *env, uint32_t a, uint16_t b)
++{
++    uint8_t round, shift = b & 0x1f;
++    uint32_t res;
++
++    round = get_round(env, a, shift);
++    res   = (a >> shift)  + round;
++    if (res > UINT16_MAX) {
++        env->vxsat = 0x1;
++        return UINT16_MAX;
++    } else {
++        return res;
++    }
++}
++static uint32_t vnclipu32(CPURISCVState *env, uint64_t a, uint32_t b)
++{
++    uint8_t round, shift = b & 0x3f;
++    int64_t res;
++
++    round = get_round(env, a, shift);
++    res   = (a >> shift)  + round;
++    if (res > UINT32_MAX) {
++        env->vxsat = 0x1;
++        return UINT32_MAX;
++    } else {
++        return res;
++    }
++}
++RVVCALL(OPIVV2_ENV, vnclipu_vv_b, NOP_UUU_B, H1, H2, H1, vnclipu8)
++RVVCALL(OPIVV2_ENV, vnclipu_vv_h, NOP_UUU_H, H2, H4, H2, vnclipu16)
++RVVCALL(OPIVV2_ENV, vnclipu_vv_w, NOP_UUU_W, H4, H8, H4, vnclipu32)
++GEN_VEXT_VV_ENV(vnclipu_vv_b, 1, 1, clearb)
++GEN_VEXT_VV_ENV(vnclipu_vv_h, 2, 2, clearh)
++GEN_VEXT_VV_ENV(vnclipu_vv_w, 4, 4, clearl)
++
++RVVCALL(OPIVX2_ENV, vnclipu_vx_b, NOP_UUU_B, H1, H2, vnclipu8)
++RVVCALL(OPIVX2_ENV, vnclipu_vx_h, NOP_UUU_H, H2, H4, vnclipu16)
++RVVCALL(OPIVX2_ENV, vnclipu_vx_w, NOP_UUU_W, H4, H8, vnclipu32)
++GEN_VEXT_VX_ENV(vnclipu_vx_b, 1, 1, clearb)
++GEN_VEXT_VX_ENV(vnclipu_vx_h, 2, 2, clearh)
++GEN_VEXT_VX_ENV(vnclipu_vx_w, 4, 4, clearl)
 -- 
 2.23.0
 
