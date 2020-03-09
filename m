@@ -1,35 +1,34 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jBHDo-0008O3-FT
-	for mharc-qemu-riscv@gnu.org; Mon, 09 Mar 2020 08:09:24 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:55278)
+	id 1jBHDw-0000JZ-1b
+	for mharc-qemu-riscv@gnu.org; Mon, 09 Mar 2020 08:09:32 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:55337)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <zhiwei_liu@c-sky.com>) id 1jBHDl-0008HQ-4V
- for qemu-riscv@nongnu.org; Mon, 09 Mar 2020 08:09:22 -0400
+ (envelope-from <zhiwei_liu@c-sky.com>) id 1jBHDt-0000AG-28
+ for qemu-riscv@nongnu.org; Mon, 09 Mar 2020 08:09:30 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <zhiwei_liu@c-sky.com>) id 1jBHDj-0007b6-U7
- for qemu-riscv@nongnu.org; Mon, 09 Mar 2020 08:09:21 -0400
-Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:37727)
+ (envelope-from <zhiwei_liu@c-sky.com>) id 1jBHDr-0007dz-Ri
+ for qemu-riscv@nongnu.org; Mon, 09 Mar 2020 08:09:28 -0400
+Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:32800)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1jBHDg-0007Xx-13; Mon, 09 Mar 2020 08:09:16 -0400
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.1069056|-1; CH=blue; DM=||false|;
- DS=CONTINUE|ham_system_inform|0.00306607-5.72884e-05-0.996877;
- FP=12607807953762479967|1|1|7|0|-1|-1|-1; HT=e02c03278;
- MF=zhiwei_liu@c-sky.com; NM=1; PH=DS; RN=10; RT=10; SR=0;
- TI=SMTPD_---.Gyaaf3X_1583755609; 
+ id 1jBHDp-0007c7-2l; Mon, 09 Mar 2020 08:09:25 -0400
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.08673008|-1; CH=blue; DM=||false|;
+ DS=CONTINUE|ham_system_inform|0.00248817-8.17171e-05-0.99743;
+ FP=3384290935992712731|1|1|7|0|-1|-1|-1; HT=e02c03312; MF=zhiwei_liu@c-sky.com;
+ NM=1; PH=DS; RN=10; RT=10; SR=0; TI=SMTPD_---.Gyaaf3X_1583755609; 
 Received: from L-PF1D6DP4-1208.hz.ali.com(mailfrom:zhiwei_liu@c-sky.com
  fp:SMTPD_---.Gyaaf3X_1583755609)
  by smtp.aliyun-inc.com(10.147.41.178);
- Mon, 09 Mar 2020 20:09:10 +0800
+ Mon, 09 Mar 2020 20:09:20 +0800
 From: LIU Zhiwei <zhiwei_liu@c-sky.com>
 To: richard.henderson@linaro.org, alistair23@gmail.com,
  chihmin.chao@sifive.com, palmer@dabbelt.com
 Cc: wenmeng_zhang@c-sky.com, wxy194768@alibaba-inc.com,
  guoren@linux.alibaba.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
  LIU Zhiwei <zhiwei_liu@c-sky.com>
-Subject: [PATCH v3 49/60] target/riscv: vector mask population count vmpopc
-Date: Mon,  9 Mar 2020 20:05:33 +0800
-Message-Id: <20200309120544.13503-50-zhiwei_liu@c-sky.com>
+Subject: [PATCH v3 50/60] target/riscv: vmfirst find-first-set mask bit
+Date: Mon,  9 Mar 2020 20:05:34 +0800
+Message-Id: <20200309120544.13503-51-zhiwei_liu@c-sky.com>
 X-Mailer: git-send-email 2.23.0
 In-Reply-To: <20200309120544.13503-17-zhiwei_liu@c-sky.com>
 References: <20200309120544.13503-17-zhiwei_liu@c-sky.com>
@@ -48,49 +47,49 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Mar 2020 12:09:22 -0000
+X-List-Received-Date: Mon, 09 Mar 2020 12:09:30 -0000
 
 Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
 ---
  target/riscv/helper.h                   |  2 ++
  target/riscv/insn32.decode              |  1 +
  target/riscv/insn_trans/trans_rvv.inc.c | 32 +++++++++++++++++++++++++
- target/riscv/vector_helper.c            | 20 ++++++++++++++++
- 4 files changed, 55 insertions(+)
+ target/riscv/vector_helper.c            | 19 +++++++++++++++
+ 4 files changed, 54 insertions(+)
 
 diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-index 9301ce0e00..3f6b8ab451 100644
+index 3f6b8ab451..363bc52dc4 100644
 --- a/target/riscv/helper.h
 +++ b/target/riscv/helper.h
-@@ -1083,3 +1083,5 @@ DEF_HELPER_6(vmor_mm, void, ptr, ptr, ptr, ptr, env, i32)
- DEF_HELPER_6(vmnor_mm, void, ptr, ptr, ptr, ptr, env, i32)
- DEF_HELPER_6(vmornot_mm, void, ptr, ptr, ptr, ptr, env, i32)
+@@ -1085,3 +1085,5 @@ DEF_HELPER_6(vmornot_mm, void, ptr, ptr, ptr, ptr, env, i32)
  DEF_HELPER_6(vmxnor_mm, void, ptr, ptr, ptr, ptr, env, i32)
+ 
+ DEF_HELPER_4(vmpopc_m, tl, ptr, ptr, env, i32)
 +
-+DEF_HELPER_4(vmpopc_m, tl, ptr, ptr, env, i32)
++DEF_HELPER_4(vmfirst_m, tl, ptr, ptr, env, i32)
 diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index 76a9bae8bb..eac767ad82 100644
+index eac767ad82..328a6c75bb 100644
 --- a/target/riscv/insn32.decode
 +++ b/target/riscv/insn32.decode
-@@ -547,6 +547,7 @@ vmor_mm         011010 - ..... ..... 010 ..... 1010111 @r
- vmnor_mm        011110 - ..... ..... 010 ..... 1010111 @r
+@@ -548,6 +548,7 @@ vmnor_mm        011110 - ..... ..... 010 ..... 1010111 @r
  vmornot_mm      011100 - ..... ..... 010 ..... 1010111 @r
  vmxnor_mm       011111 - ..... ..... 010 ..... 1010111 @r
-+vmpopc_m        010100 . ..... ----- 010 ..... 1010111 @r2_vm
+ vmpopc_m        010100 . ..... ----- 010 ..... 1010111 @r2_vm
++vmfirst_m       010101 . ..... ----- 010 ..... 1010111 @r2_vm
  
  vsetvli         0 ........... ..... 111 ..... 1010111  @r2_zimm
  vsetvl          1000000 ..... ..... 111 ..... 1010111  @r
 diff --git a/target/riscv/insn_trans/trans_rvv.inc.c b/target/riscv/insn_trans/trans_rvv.inc.c
-index 065b415abb..c56f30a257 100644
+index c56f30a257..265d94245f 100644
 --- a/target/riscv/insn_trans/trans_rvv.inc.c
 +++ b/target/riscv/insn_trans/trans_rvv.inc.c
-@@ -2080,3 +2080,35 @@ GEN_MM_TRANS(vmor_mm)
- GEN_MM_TRANS(vmnor_mm)
- GEN_MM_TRANS(vmornot_mm)
- GEN_MM_TRANS(vmxnor_mm)
+@@ -2112,3 +2112,35 @@ static bool trans_vmpopc_m(DisasContext *s, arg_rmr *a)
+     }
+     return false;
+ }
 +
-+/* Vector mask population count vmpopc */
-+static bool trans_vmpopc_m(DisasContext *s, arg_rmr *a)
++/* vmfirst find-first-set mask bit */
++static bool trans_vmfirst_m(DisasContext *s, arg_rmr *a)
 +{
 +    if (vext_check_isa_ill(s, RVV)) {
 +        TCGv_ptr src2, mask;
@@ -109,7 +108,7 @@ index 065b415abb..c56f30a257 100644
 +        tcg_gen_addi_ptr(src2, cpu_env, vreg_ofs(s, a->rs2));
 +        tcg_gen_addi_ptr(mask, cpu_env, vreg_ofs(s, 0));
 +
-+        gen_helper_vmpopc_m(dst, mask, src2, cpu_env, desc);
++        gen_helper_vmfirst_m(dst, mask, src2, cpu_env, desc);
 +        gen_set_gpr(a->rd, dst);
 +
 +        tcg_temp_free_ptr(mask);
@@ -121,19 +120,18 @@ index 065b415abb..c56f30a257 100644
 +    return false;
 +}
 diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index 9e9d172cda..4bd901e826 100644
+index 4bd901e826..8a3f8ccdec 100644
 --- a/target/riscv/vector_helper.c
 +++ b/target/riscv/vector_helper.c
-@@ -4278,3 +4278,23 @@ GEN_VEXT_MASK_VV(vmor_mm, DO_OR)
- GEN_VEXT_MASK_VV(vmnor_mm, DO_NOR)
- GEN_VEXT_MASK_VV(vmornot_mm, DO_ORNOT)
- GEN_VEXT_MASK_VV(vmxnor_mm, DO_XNOR)
+@@ -4298,3 +4298,22 @@ target_ulong HELPER(vmpopc_m)(void *v0, void *vs2, CPURISCVState *env,
+     }
+     return cnt;
+ }
 +
-+/* Vector mask population count vmpopc */
-+target_ulong HELPER(vmpopc_m)(void *v0, void *vs2, CPURISCVState *env,
++/* vmfirst find-first-set mask bit*/
++target_ulong HELPER(vmfirst_m)(void *v0, void *vs2, CPURISCVState *env,
 +        uint32_t desc)
 +{
-+    target_ulong cnt = 0;
 +    uint32_t mlen = vext_mlen(desc);
 +    uint32_t vm = vext_vm(desc);
 +    uint32_t vl = env->vl;
@@ -142,11 +140,11 @@ index 9e9d172cda..4bd901e826 100644
 +    for (i = 0; i < vl; i++) {
 +        if (vm || vext_elem_mask(v0, mlen, i)) {
 +            if (vext_elem_mask(vs2, mlen, i)) {
-+                cnt++;
++               return i;
 +            }
 +        }
 +    }
-+    return cnt;
++    return -1LL;
 +}
 -- 
 2.23.0
