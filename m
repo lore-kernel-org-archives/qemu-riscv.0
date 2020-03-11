@@ -1,62 +1,41 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jBM76-0003e5-NP
-	for mharc-qemu-riscv@gnu.org; Mon, 09 Mar 2020 13:22:48 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:58474)
+	id 1jBtar-0002bj-M6
+	for mharc-qemu-riscv@gnu.org; Wed, 11 Mar 2020 01:07:45 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:57990)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <alistair23@gmail.com>) id 1jBM73-0003a3-VC
- for qemu-riscv@nongnu.org; Mon, 09 Mar 2020 13:22:47 -0400
+ (envelope-from <zhiwei_liu@c-sky.com>) id 1jBtao-0002Xv-8K
+ for qemu-riscv@nongnu.org; Wed, 11 Mar 2020 01:07:43 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1jBM72-0000Uq-UF
- for qemu-riscv@nongnu.org; Mon, 09 Mar 2020 13:22:45 -0400
-Received: from mail-vk1-xa41.google.com ([2607:f8b0:4864:20::a41]:43248)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1jBM70-0000Th-7j; Mon, 09 Mar 2020 13:22:42 -0400
-Received: by mail-vk1-xa41.google.com with SMTP id t3so2733729vkm.10;
- Mon, 09 Mar 2020 10:22:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=8JMaAc9E7xRvTT4ZxwRDkgO+u9WlCB6dTbmmOH3cPqg=;
- b=bttYgB+kJeogOnbtuMSsYubg1unnCrnrIWn0kMul9jlAZ5gNOL7um1fAf8KbtoLwlp
- jaAhCIboZc1I0BDamnSwyKMU/7jMIHOOyJu1yOD/LdQxpjDVWqbMwE2CYqDgyMJ4am3Y
- xZg0CzE0bOen/XYMgpiobDNkLVHp7O+y+VpRuCevyZLZPPXTF0+6j588NubmqrbOhMTX
- YS/IVh/GMMOTIJX6tPz9Du8hzeCZt56kO75lm+DS9JSukywvLw9HgfUygTzLPDJMofDt
- VvhkVBsuIN2sV9YsQw0tn0il0bGIItsSI7gO6/LfPpdJrRMC43CWB7RYOoYjKpO02HGQ
- k2qg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=8JMaAc9E7xRvTT4ZxwRDkgO+u9WlCB6dTbmmOH3cPqg=;
- b=PlUcrtdiYBeR4iE/DvxCr77Cksqs4+4LkwMRUdcnxLuBOIkFCXx7gJvM6gGAo9lUbj
- qRwOVppCrkoBm+f7CgYJ6wL6KaY1Jxk26eJvMg/xY7B7/EQkavrsoxSA8n7zSUFtMYGz
- 77LPn9QsZ2LxD6KcI1qHKQUfosLBschlAgABJtjk0usQEaLf00NSDTeffI6CnKPc8LcX
- 1KdD3ANVgAWbfCgZoNX9/fv3Bkf46zNWmO7Pcz3gCqa5nhBu/S6rHvuflRscCX45vYbC
- KE9/V0KnSwFb/d1nG9KpfPC7/cjmYp2S+7doSG9OT4ppuYBeAqmdxYW5DN9zLJtHoQnn
- P60A==
-X-Gm-Message-State: ANhLgQ00lDPiN7B8056v4cOHByD0793RaqjaYXDDldfuni+vH/sugZfz
- kXLNIh4+b+ylAqzn5E174Xkqpym25Z946vqeexc=
-X-Google-Smtp-Source: ADFU+vu3VT8/9rLbVMAFZZkSbGncLCekpYVopTwR3o6tA/YbJIPC3nLXFCBMz9uox0+72mDLpO3KRbPlAA3G/HHJtIo=
-X-Received: by 2002:a1f:19c4:: with SMTP id 187mr9453499vkz.70.1583774561162; 
- Mon, 09 Mar 2020 10:22:41 -0700 (PDT)
+ (envelope-from <zhiwei_liu@c-sky.com>) id 1jBtam-00081a-M6
+ for qemu-riscv@nongnu.org; Wed, 11 Mar 2020 01:07:42 -0400
+Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:47217)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <zhiwei_liu@c-sky.com>)
+ id 1jBtai-0007tV-ED; Wed, 11 Mar 2020 01:07:36 -0400
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07436283|-1; CH=blue; DM=||false|;
+ DS=CONTINUE|ham_system_inform|0.284299-0.00020209-0.715499;
+ FP=9121874194399893506|1|1|1|0|-1|-1|-1; HT=e02c03278; MF=zhiwei_liu@c-sky.com;
+ NM=1; PH=DS; RN=10; RT=10; SR=0; TI=SMTPD_---.GzWPNs6_1583903247; 
+Received: from L-PF1D6DP4-1208.hz.ali.com(mailfrom:zhiwei_liu@c-sky.com
+ fp:SMTPD_---.GzWPNs6_1583903247)
+ by smtp.aliyun-inc.com(10.147.44.118);
+ Wed, 11 Mar 2020 13:07:29 +0800
+From: LIU Zhiwei <zhiwei_liu@c-sky.com>
+To: richard.henderson@linaro.org, alistair23@gmail.com,
+ chihmin.chao@sifive.com, palmer@dabbelt.com
+Cc: wenmeng_zhang@c-sky.com, wxy194768@alibaba-inc.com,
+ guoren@linux.alibaba.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
+ LIU Zhiwei <zhiwei_liu@c-sky.com>
+Subject: [PATCH v4 03/60] target/riscv: support vector extension csr
+Date: Wed, 11 Mar 2020 13:06:22 +0800
+Message-Id: <20200311050719.15141-4-zhiwei_liu@c-sky.com>
+X-Mailer: git-send-email 2.23.0
+In-Reply-To: <20200311050719.15141-1-zhiwei_liu@c-sky.com>
+References: <20200311050719.15141-1-zhiwei_liu@c-sky.com>
 MIME-Version: 1.0
-References: <1583585319-26603-1-git-send-email-bmeng.cn@gmail.com>
-In-Reply-To: <1583585319-26603-1-git-send-email-bmeng.cn@gmail.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 9 Mar 2020 10:14:54 -0700
-Message-ID: <CAKmqyKPEptmsw222Tt1T1qvoSvfhgMMznypEM+wr8hWYkcW0qg@mail.gmail.com>
-Subject: Re: [PATCH] hw/riscv: Generate correct "mmu-type" for 32-bit machines
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Palmer Dabbelt <palmerdabbelt@google.com>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2607:f8b0:4864:20::a41
+Content-Transfer-Encoding: 8bit
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 3.x [generic] [fuzzy]
+X-Received-From: 121.197.200.217
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -68,75 +47,169 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Mar 2020 17:22:47 -0000
+X-List-Received-Date: Wed, 11 Mar 2020 05:07:43 -0000
 
-On Sat, Mar 7, 2020 at 4:49 AM Bin Meng <bmeng.cn@gmail.com> wrote:
->
-> 32-bit machine should have its CPU's "mmu-type" set to "riscv,sv32".
->
-> Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
+The v0.7.1 specification does not define vector status within mstatus.
+A future revision will define the privileged portion of the vector status.
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
+---
+ target/riscv/cpu_bits.h | 15 +++++++++
+ target/riscv/csr.c      | 75 ++++++++++++++++++++++++++++++++++++++++-
+ 2 files changed, 89 insertions(+), 1 deletion(-)
 
-Alistair
+diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+index 7f64ee1174..8117e8b5a7 100644
+--- a/target/riscv/cpu_bits.h
++++ b/target/riscv/cpu_bits.h
+@@ -29,6 +29,14 @@
+ #define FSR_NXA             (FPEXC_NX << FSR_AEXC_SHIFT)
+ #define FSR_AEXC            (FSR_NVA | FSR_OFA | FSR_UFA | FSR_DZA | FSR_NXA)
+ 
++/* Vector Fixed-Point round model */
++#define FSR_VXRM_SHIFT      9
++#define FSR_VXRM            (0x3 << FSR_VXRM_SHIFT)
++
++/* Vector Fixed-Point saturation flag */
++#define FSR_VXSAT_SHIFT     8
++#define FSR_VXSAT           (0x1 << FSR_VXSAT_SHIFT)
++
+ /* Control and Status Registers */
+ 
+ /* User Trap Setup */
+@@ -48,6 +56,13 @@
+ #define CSR_FRM             0x002
+ #define CSR_FCSR            0x003
+ 
++/* User Vector CSRs */
++#define CSR_VSTART          0x008
++#define CSR_VXSAT           0x009
++#define CSR_VXRM            0x00a
++#define CSR_VL              0xc20
++#define CSR_VTYPE           0xc21
++
+ /* User Timers and Counters */
+ #define CSR_CYCLE           0xc00
+ #define CSR_TIME            0xc01
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index 11d184cd16..d71c49dfff 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -46,6 +46,10 @@ void riscv_set_csr_ops(int csrno, riscv_csr_operations *ops)
+ static int fs(CPURISCVState *env, int csrno)
+ {
+ #if !defined(CONFIG_USER_ONLY)
++    /* loose check condition for fcsr in vector extension */
++    if ((csrno == CSR_FCSR) && (env->misa & RVV)) {
++        return 0;
++    }
+     if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
+         return -1;
+     }
+@@ -53,6 +57,14 @@ static int fs(CPURISCVState *env, int csrno)
+     return 0;
+ }
+ 
++static int vs(CPURISCVState *env, int csrno)
++{
++    if (env->misa & RVV) {
++        return 0;
++    }
++    return -1;
++}
++
+ static int ctr(CPURISCVState *env, int csrno)
+ {
+ #if !defined(CONFIG_USER_ONLY)
+@@ -174,6 +186,10 @@ static int read_fcsr(CPURISCVState *env, int csrno, target_ulong *val)
+ #endif
+     *val = (riscv_cpu_get_fflags(env) << FSR_AEXC_SHIFT)
+         | (env->frm << FSR_RD_SHIFT);
++    if (vs(env, csrno) >= 0) {
++        *val |= (env->vxrm << FSR_VXRM_SHIFT)
++                | (env->vxsat << FSR_VXSAT_SHIFT);
++    }
+     return 0;
+ }
+ 
+@@ -186,10 +202,62 @@ static int write_fcsr(CPURISCVState *env, int csrno, target_ulong val)
+     env->mstatus |= MSTATUS_FS;
+ #endif
+     env->frm = (val & FSR_RD) >> FSR_RD_SHIFT;
++    if (vs(env, csrno) >= 0) {
++        env->vxrm = (val & FSR_VXRM) >> FSR_VXRM_SHIFT;
++        env->vxsat = (val & FSR_VXSAT) >> FSR_VXSAT_SHIFT;
++    }
+     riscv_cpu_set_fflags(env, (val & FSR_AEXC) >> FSR_AEXC_SHIFT);
+     return 0;
+ }
+ 
++static int read_vtype(CPURISCVState *env, int csrno, target_ulong *val)
++{
++    *val = env->vtype;
++    return 0;
++}
++
++static int read_vl(CPURISCVState *env, int csrno, target_ulong *val)
++{
++    *val = env->vl;
++    return 0;
++}
++
++static int read_vxrm(CPURISCVState *env, int csrno, target_ulong *val)
++{
++    *val = env->vxrm;
++    return 0;
++}
++
++static int write_vxrm(CPURISCVState *env, int csrno, target_ulong val)
++{
++    env->vxrm = val;
++    return 0;
++}
++
++static int read_vxsat(CPURISCVState *env, int csrno, target_ulong *val)
++{
++    *val = env->vxsat;
++    return 0;
++}
++
++static int write_vxsat(CPURISCVState *env, int csrno, target_ulong val)
++{
++    env->vxsat = val;
++    return 0;
++}
++
++static int read_vstart(CPURISCVState *env, int csrno, target_ulong *val)
++{
++    *val = env->vstart;
++    return 0;
++}
++
++static int write_vstart(CPURISCVState *env, int csrno, target_ulong val)
++{
++    env->vstart = val;
++    return 0;
++}
++
+ /* User Timers and Counters */
+ static int read_instret(CPURISCVState *env, int csrno, target_ulong *val)
+ {
+@@ -1269,7 +1337,12 @@ static riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+     [CSR_FFLAGS] =              { fs,   read_fflags,      write_fflags      },
+     [CSR_FRM] =                 { fs,   read_frm,         write_frm         },
+     [CSR_FCSR] =                { fs,   read_fcsr,        write_fcsr        },
+-
++    /* Vector CSRs */
++    [CSR_VSTART] =              { vs,   read_vstart,      write_vstart      },
++    [CSR_VXSAT] =               { vs,   read_vxsat,       write_vxsat       },
++    [CSR_VXRM] =                { vs,   read_vxrm,        write_vxrm        },
++    [CSR_VL] =                  { vs,   read_vl                             },
++    [CSR_VTYPE] =               { vs,   read_vtype                          },
+     /* User Timers and Counters */
+     [CSR_CYCLE] =               { ctr,  read_instret                        },
+     [CSR_INSTRET] =             { ctr,  read_instret                        },
+-- 
+2.23.0
 
-> ---
->
->  hw/riscv/sifive_u.c | 4 ++++
->  hw/riscv/spike.c    | 4 ++++
->  hw/riscv/virt.c     | 4 ++++
->  3 files changed, 12 insertions(+)
->
-> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-> index d318988..26ea777 100644
-> --- a/hw/riscv/sifive_u.c
-> +++ b/hw/riscv/sifive_u.c
-> @@ -159,7 +159,11 @@ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
->          qemu_fdt_add_subnode(fdt, nodename);
->          /* cpu 0 is the management hart that does not have mmu */
->          if (cpu != 0) {
-> +#if defined(TARGET_RISCV32)
-> +            qemu_fdt_setprop_string(fdt, nodename, "mmu-type", "riscv,sv32");
-> +#else
->              qemu_fdt_setprop_string(fdt, nodename, "mmu-type", "riscv,sv48");
-> +#endif
->              isa = riscv_isa_string(&s->soc.u_cpus.harts[cpu - 1]);
->          } else {
->              isa = riscv_isa_string(&s->soc.e_cpus.harts[0]);
-> diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
-> index 8823681..6f9a1ba 100644
-> --- a/hw/riscv/spike.c
-> +++ b/hw/riscv/spike.c
-> @@ -102,7 +102,11 @@ static void create_fdt(SpikeState *s, const struct MemmapEntry *memmap,
->          char *intc = g_strdup_printf("/cpus/cpu@%d/interrupt-controller", cpu);
->          char *isa = riscv_isa_string(&s->soc.harts[cpu]);
->          qemu_fdt_add_subnode(fdt, nodename);
-> +#if defined(TARGET_RISCV32)
-> +        qemu_fdt_setprop_string(fdt, nodename, "mmu-type", "riscv,sv32");
-> +#else
->          qemu_fdt_setprop_string(fdt, nodename, "mmu-type", "riscv,sv48");
-> +#endif
->          qemu_fdt_setprop_string(fdt, nodename, "riscv,isa", isa);
->          qemu_fdt_setprop_string(fdt, nodename, "compatible", "riscv");
->          qemu_fdt_setprop_string(fdt, nodename, "status", "okay");
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index 7f9e1e5..57f532a 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -229,7 +229,11 @@ static void create_fdt(RISCVVirtState *s, const struct MemmapEntry *memmap,
->          char *intc = g_strdup_printf("/cpus/cpu@%d/interrupt-controller", cpu);
->          char *isa = riscv_isa_string(&s->soc.harts[cpu]);
->          qemu_fdt_add_subnode(fdt, nodename);
-> +#if defined(TARGET_RISCV32)
-> +        qemu_fdt_setprop_string(fdt, nodename, "mmu-type", "riscv,sv32");
-> +#else
->          qemu_fdt_setprop_string(fdt, nodename, "mmu-type", "riscv,sv48");
-> +#endif
->          qemu_fdt_setprop_string(fdt, nodename, "riscv,isa", isa);
->          qemu_fdt_setprop_string(fdt, nodename, "compatible", "riscv");
->          qemu_fdt_setprop_string(fdt, nodename, "status", "okay");
-> --
-> 2.7.4
->
->
 
