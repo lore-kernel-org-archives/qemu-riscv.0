@@ -1,34 +1,35 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jCPYr-0006IS-Ht
-	for mharc-qemu-riscv@gnu.org; Thu, 12 Mar 2020 11:15:52 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43427)
+	id 1jCPan-0001Tn-8G
+	for mharc-qemu-riscv@gnu.org; Thu, 12 Mar 2020 11:17:49 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43940)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <zhiwei_liu@c-sky.com>) id 1jCPYg-0006Dr-Ur
- for qemu-riscv@nongnu.org; Thu, 12 Mar 2020 11:15:42 -0400
+ (envelope-from <zhiwei_liu@c-sky.com>) id 1jCPag-0001D7-VY
+ for qemu-riscv@nongnu.org; Thu, 12 Mar 2020 11:17:45 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <zhiwei_liu@c-sky.com>) id 1jCPYe-0001HT-9J
- for qemu-riscv@nongnu.org; Thu, 12 Mar 2020 11:15:38 -0400
-Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:49991)
+ (envelope-from <zhiwei_liu@c-sky.com>) id 1jCPae-0002Wk-Dj
+ for qemu-riscv@nongnu.org; Thu, 12 Mar 2020 11:17:42 -0400
+Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:35812)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1jCPYX-0001Ah-OI; Thu, 12 Mar 2020 11:15:30 -0400
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07436282|-1; CH=green; DM=||false|;
- DS=CONTINUE|ham_system_inform|0.783163-0.000272734-0.216564;
- FP=0|0|0|0|0|-1|-1|-1; HT=e02c03293; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS;
- RN=10; RT=10; SR=0; TI=SMTPD_---.H-NaWZb_1584026120; 
+ id 1jCPaW-0002O5-O0; Thu, 12 Mar 2020 11:17:34 -0400
+X-Alimail-AntiSpam: AC=PASS; BC=0.07608247|-1; BR=01201311R141ee; CH=green;
+ DM=||false|; DS=SPAM|spam_porn|0.96361-0.000343908-0.0360465;
+ FP=0|0|0|0|0|-1|-1|-1; HT=e02c03299; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS;
+ RN=10; RT=10; SR=0; TI=SMTPD_---.H-NUvNE_1584026241; 
 Received: from L-PF1D6DP4-1208.hz.ali.com(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.H-NaWZb_1584026120)
- by smtp.aliyun-inc.com(10.147.41.121);
- Thu, 12 Mar 2020 23:15:20 +0800
+ fp:SMTPD_---.H-NUvNE_1584026241)
+ by smtp.aliyun-inc.com(10.147.42.253);
+ Thu, 12 Mar 2020 23:17:21 +0800
 From: LIU Zhiwei <zhiwei_liu@c-sky.com>
 To: richard.henderson@linaro.org, alistair23@gmail.com,
  chihmin.chao@sifive.com, palmer@dabbelt.com
 Cc: wenmeng_zhang@c-sky.com, wxy194768@alibaba-inc.com,
  guoren@linux.alibaba.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
  LIU Zhiwei <zhiwei_liu@c-sky.com>
-Subject: [PATCH v5 08/60] target/riscv: add vector amo operations
-Date: Thu, 12 Mar 2020 22:58:08 +0800
-Message-Id: <20200312145900.2054-9-zhiwei_liu@c-sky.com>
+Subject: [PATCH v5 09/60] target/riscv: vector single-width integer add and
+ subtract
+Date: Thu, 12 Mar 2020 22:58:09 +0800
+Message-Id: <20200312145900.2054-10-zhiwei_liu@c-sky.com>
 X-Mailer: git-send-email 2.23.0
 In-Reply-To: <20200312145900.2054-1-zhiwei_liu@c-sky.com>
 References: <20200312145900.2054-1-zhiwei_liu@c-sky.com>
@@ -47,428 +48,437 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Mar 2020 15:15:42 -0000
-
-Vector AMOs operate as if aq and rl bits were zero on each element
-with regard to ordering relative to other instructions in the same hart.
-Vector AMOs provide no ordering guarantee between element operations
-in the same vector AMO instruction
+X-List-Received-Date: Thu, 12 Mar 2020 15:17:45 -0000
 
 Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
 ---
- target/riscv/cpu.h                      |   1 +
- target/riscv/helper.h                   |  29 +++++
- target/riscv/insn32-64.decode           |  11 ++
- target/riscv/insn32.decode              |  13 +++
- target/riscv/insn_trans/trans_rvv.inc.c | 130 +++++++++++++++++++++
- target/riscv/vector_helper.c            | 143 ++++++++++++++++++++++++
- 6 files changed, 327 insertions(+)
+ target/riscv/helper.h                   |  21 +++
+ target/riscv/insn32.decode              |  10 ++
+ target/riscv/insn_trans/trans_rvv.inc.c | 220 ++++++++++++++++++++++++
+ target/riscv/vector_helper.c            | 122 +++++++++++++
+ 4 files changed, 373 insertions(+)
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index b6ebb9b0eb..e069e55e81 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -374,6 +374,7 @@ FIELD(VDATA, MLEN, 0, 8)
- FIELD(VDATA, VM, 8, 1)
- FIELD(VDATA, LMUL, 9, 2)
- FIELD(VDATA, NF, 11, 4)
-+FIELD(VDATA, WD, 11, 1)
- 
- FIELD(TB_FLAGS, VL_EQ_VLMAX, 2, 1)
- FIELD(TB_FLAGS, LMUL, 3, 2)
 diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-index 72ba4d9bdb..70a4b05f75 100644
+index 70a4b05f75..e73701d4bb 100644
 --- a/target/riscv/helper.h
 +++ b/target/riscv/helper.h
-@@ -240,3 +240,32 @@ DEF_HELPER_5(vlhuff_v_w, void, ptr, ptr, tl, env, i32)
- DEF_HELPER_5(vlhuff_v_d, void, ptr, ptr, tl, env, i32)
- DEF_HELPER_5(vlwuff_v_w, void, ptr, ptr, tl, env, i32)
- DEF_HELPER_5(vlwuff_v_d, void, ptr, ptr, tl, env, i32)
-+#ifdef TARGET_RISCV64
-+DEF_HELPER_6(vamoswapw_v_d, void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vamoswapd_v_d, void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vamoaddw_v_d,  void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vamoaddd_v_d,  void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vamoxorw_v_d,  void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vamoxord_v_d,  void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vamoandw_v_d,  void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vamoandd_v_d,  void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vamoorw_v_d,   void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vamoord_v_d,   void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vamominw_v_d,  void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vamomind_v_d,  void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vamomaxw_v_d,  void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vamomaxd_v_d,  void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vamominuw_v_d, void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vamominud_v_d, void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vamomaxuw_v_d, void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vamomaxud_v_d, void, ptr, ptr, tl, ptr, env, i32)
-+#endif
-+DEF_HELPER_6(vamoswapw_v_w, void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vamoaddw_v_w,  void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vamoxorw_v_w,  void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vamoandw_v_w,  void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vamoorw_v_w,   void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vamominw_v_w,  void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vamomaxw_v_w,  void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vamominuw_v_w, void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vamomaxuw_v_w, void, ptr, ptr, tl, ptr, env, i32)
-diff --git a/target/riscv/insn32-64.decode b/target/riscv/insn32-64.decode
-index 380bf791bc..86153d93fa 100644
---- a/target/riscv/insn32-64.decode
-+++ b/target/riscv/insn32-64.decode
-@@ -57,6 +57,17 @@ amomax_d   10100 . . ..... ..... 011 ..... 0101111 @atom_st
- amominu_d  11000 . . ..... ..... 011 ..... 0101111 @atom_st
- amomaxu_d  11100 . . ..... ..... 011 ..... 0101111 @atom_st
- 
-+#*** Vector AMO operations (in addition to Zvamo) ***
-+vamoswapd_v     00001 . . ..... ..... 111 ..... 0101111 @r_wdvm
-+vamoaddd_v      00000 . . ..... ..... 111 ..... 0101111 @r_wdvm
-+vamoxord_v      00100 . . ..... ..... 111 ..... 0101111 @r_wdvm
-+vamoandd_v      01100 . . ..... ..... 111 ..... 0101111 @r_wdvm
-+vamoord_v       01000 . . ..... ..... 111 ..... 0101111 @r_wdvm
-+vamomind_v      10000 . . ..... ..... 111 ..... 0101111 @r_wdvm
-+vamomaxd_v      10100 . . ..... ..... 111 ..... 0101111 @r_wdvm
-+vamominud_v     11000 . . ..... ..... 111 ..... 0101111 @r_wdvm
-+vamomaxud_v     11100 . . ..... ..... 111 ..... 0101111 @r_wdvm
+@@ -269,3 +269,24 @@ DEF_HELPER_6(vamominw_v_w,  void, ptr, ptr, tl, ptr, env, i32)
+ DEF_HELPER_6(vamomaxw_v_w,  void, ptr, ptr, tl, ptr, env, i32)
+ DEF_HELPER_6(vamominuw_v_w, void, ptr, ptr, tl, ptr, env, i32)
+ DEF_HELPER_6(vamomaxuw_v_w, void, ptr, ptr, tl, ptr, env, i32)
 +
- # *** RV64F Standard Extension (in addition to RV32F) ***
- fcvt_l_s   1100000  00010 ..... ... ..... 1010011 @r2_rm
- fcvt_lu_s  1100000  00011 ..... ... ..... 1010011 @r2_rm
++DEF_HELPER_6(vadd_vv_b, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vadd_vv_h, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vadd_vv_w, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vadd_vv_d, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vsub_vv_b, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vsub_vv_h, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vsub_vv_w, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vsub_vv_d, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vadd_vx_b, void, ptr, ptr, tl, ptr, env, i32)
++DEF_HELPER_6(vadd_vx_h, void, ptr, ptr, tl, ptr, env, i32)
++DEF_HELPER_6(vadd_vx_w, void, ptr, ptr, tl, ptr, env, i32)
++DEF_HELPER_6(vadd_vx_d, void, ptr, ptr, tl, ptr, env, i32)
++DEF_HELPER_6(vsub_vx_b, void, ptr, ptr, tl, ptr, env, i32)
++DEF_HELPER_6(vsub_vx_h, void, ptr, ptr, tl, ptr, env, i32)
++DEF_HELPER_6(vsub_vx_w, void, ptr, ptr, tl, ptr, env, i32)
++DEF_HELPER_6(vsub_vx_d, void, ptr, ptr, tl, ptr, env, i32)
++DEF_HELPER_6(vrsub_vx_b, void, ptr, ptr, tl, ptr, env, i32)
++DEF_HELPER_6(vrsub_vx_h, void, ptr, ptr, tl, ptr, env, i32)
++DEF_HELPER_6(vrsub_vx_w, void, ptr, ptr, tl, ptr, env, i32)
++DEF_HELPER_6(vrsub_vx_d, void, ptr, ptr, tl, ptr, env, i32)
 diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index b76c09c8c0..1330703720 100644
+index 1330703720..d1034a0e61 100644
 --- a/target/riscv/insn32.decode
 +++ b/target/riscv/insn32.decode
 @@ -44,6 +44,7 @@
  &u    imm rd
  &shift     shamt rs1 rd
  &atomic    aq rl rs2 rs1 rd
-+&rwdvm     vm wd rd rs1 rs2
++&rmrr      vm rd rs1 rs2
+ &rwdvm     vm wd rd rs1 rs2
  &r2nfvm    vm rd rs1 nf
  &rnfvm     vm rd rs1 rs2 nf
- 
-@@ -67,6 +68,7 @@
+@@ -68,6 +69,7 @@
  @r2      .......   ..... ..... ... ..... ....... %rs1 %rd
  @r2_nfvm ... ... vm:1 ..... ..... ... ..... ....... &r2nfvm %nf %rs1 %rd
  @r_nfvm  ... ... vm:1 ..... ..... ... ..... ....... &rnfvm %nf %rs2 %rs1 %rd
-+@r_wdvm  ..... wd:1 vm:1 ..... ..... ... ..... ....... &rwdvm %rs2 %rs1 %rd
++@r_vm    ...... vm:1 ..... ..... ... ..... ....... &rmrr %rs2 %rs1 %rd
+ @r_wdvm  ..... wd:1 vm:1 ..... ..... ... ..... ....... &rwdvm %rs2 %rs1 %rd
  @r2_zimm . zimm:11  ..... ... ..... ....... %rs1 %rd
  
- @hfence_gvma ....... ..... .....   ... ..... ....... %rs2 %rs1
-@@ -261,6 +263,17 @@ vsxh_v     ... -11 . ..... ..... 101 ..... 0100111 @r_nfvm
- vsxw_v     ... -11 . ..... ..... 110 ..... 0100111 @r_nfvm
- vsxe_v     ... -11 . ..... ..... 111 ..... 0100111 @r_nfvm
+@@ -275,5 +277,13 @@ vamominuw_v     11000 . . ..... ..... 110 ..... 0101111 @r_wdvm
+ vamomaxuw_v     11100 . . ..... ..... 110 ..... 0101111 @r_wdvm
  
-+#*** Vector AMO operations are encoded under the standard AMO major opcode ***
-+vamoswapw_v     00001 . . ..... ..... 110 ..... 0101111 @r_wdvm
-+vamoaddw_v      00000 . . ..... ..... 110 ..... 0101111 @r_wdvm
-+vamoxorw_v      00100 . . ..... ..... 110 ..... 0101111 @r_wdvm
-+vamoandw_v      01100 . . ..... ..... 110 ..... 0101111 @r_wdvm
-+vamoorw_v       01000 . . ..... ..... 110 ..... 0101111 @r_wdvm
-+vamominw_v      10000 . . ..... ..... 110 ..... 0101111 @r_wdvm
-+vamomaxw_v      10100 . . ..... ..... 110 ..... 0101111 @r_wdvm
-+vamominuw_v     11000 . . ..... ..... 110 ..... 0101111 @r_wdvm
-+vamomaxuw_v     11100 . . ..... ..... 110 ..... 0101111 @r_wdvm
-+
  # *** new major opcode OP-V ***
++vadd_vv         000000 . ..... ..... 000 ..... 1010111 @r_vm
++vadd_vx         000000 . ..... ..... 100 ..... 1010111 @r_vm
++vadd_vi         000000 . ..... ..... 011 ..... 1010111 @r_vm
++vsub_vv         000010 . ..... ..... 000 ..... 1010111 @r_vm
++vsub_vx         000010 . ..... ..... 100 ..... 1010111 @r_vm
++vrsub_vx        000011 . ..... ..... 100 ..... 1010111 @r_vm
++vrsub_vi        000011 . ..... ..... 011 ..... 1010111 @r_vm
++
  vsetvli         0 ........... ..... 111 ..... 1010111  @r2_zimm
  vsetvl          1000000 ..... ..... 111 ..... 1010111  @r
 diff --git a/target/riscv/insn_trans/trans_rvv.inc.c b/target/riscv/insn_trans/trans_rvv.inc.c
-index 9d9fc886d6..3c677160c5 100644
+index 3c677160c5..00c7ec976f 100644
 --- a/target/riscv/insn_trans/trans_rvv.inc.c
 +++ b/target/riscv/insn_trans/trans_rvv.inc.c
-@@ -600,3 +600,133 @@ GEN_VEXT_TRANS(vleff_v, 3, r2nfvm, ldff_op, ld_us_check)
- GEN_VEXT_TRANS(vlbuff_v, 4, r2nfvm, ldff_op, ld_us_check)
- GEN_VEXT_TRANS(vlhuff_v, 5, r2nfvm, ldff_op, ld_us_check)
- GEN_VEXT_TRANS(vlwuff_v, 6, r2nfvm, ldff_op, ld_us_check)
+@@ -730,3 +730,223 @@ GEN_VEXT_TRANS(vamomaxd_v, 15, rwdvm, amo_op, amo_check)
+ GEN_VEXT_TRANS(vamominud_v, 16, rwdvm, amo_op, amo_check)
+ GEN_VEXT_TRANS(vamomaxud_v, 17, rwdvm, amo_op, amo_check)
+ #endif
 +
 +/*
-+ *** vector atomic operation
++ *** Vector Integer Arithmetic Instructions
 + */
-+typedef void gen_helper_amo(TCGv_ptr, TCGv_ptr, TCGv, TCGv_ptr,
++#define MAXSZ(s) (s->vlen >> (3 - s->lmul))
++
++static bool opivv_check(DisasContext *s, arg_rmrr *a)
++{
++    return (vext_check_isa_ill(s, RVV) &&
++            vext_check_overlap_mask(s, a->rd, a->vm, false) &&
++            vext_check_reg(s, a->rd, false) &&
++            vext_check_reg(s, a->rs2, false) &&
++            vext_check_reg(s, a->rs1, false));
++}
++
++/* OPIVV with GVEC IR */
++#define GEN_OPIVV_GVEC_TRANS(NAME, GVSUF)                          \
++static bool trans_##NAME(DisasContext *s, arg_rmrr *a)             \
++{                                                                  \
++    if (!opivv_check(s, a)) {                                      \
++        return false;                                              \
++    }                                                              \
++                                                                   \
++    if (a->vm && s->vl_eq_vlmax) {                                 \
++        tcg_gen_gvec_##GVSUF(8 << s->sew, vreg_ofs(s, a->rd),      \
++            vreg_ofs(s, a->rs2), vreg_ofs(s, a->rs1),              \
++            MAXSZ(s), MAXSZ(s));                                   \
++    } else {                                                       \
++        uint32_t data = 0;                                         \
++        static gen_helper_gvec_4_ptr * const fns[4] = {            \
++            gen_helper_##NAME##_b, gen_helper_##NAME##_h,          \
++            gen_helper_##NAME##_w, gen_helper_##NAME##_d,          \
++        };                                                         \
++                                                                   \
++        data = FIELD_DP32(data, VDATA, MLEN, s->mlen);             \
++        data = FIELD_DP32(data, VDATA, VM, a->vm);                 \
++        data = FIELD_DP32(data, VDATA, LMUL, s->lmul);             \
++        tcg_gen_gvec_4_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),     \
++            vreg_ofs(s, a->rs1), vreg_ofs(s, a->rs2),              \
++            cpu_env, 0, s->vlen / 8, data, fns[s->sew]);           \
++    }                                                              \
++    return true;                                                   \
++}
++GEN_OPIVV_GVEC_TRANS(vadd_vv, add)
++GEN_OPIVV_GVEC_TRANS(vsub_vv, sub)
++
++typedef void (*gen_helper_opivx)(TCGv_ptr, TCGv_ptr, TCGv, TCGv_ptr,
 +        TCGv_env, TCGv_i32);
 +
-+static bool amo_trans(uint32_t vd, uint32_t rs1, uint32_t vs2,
-+        uint32_t data, gen_helper_amo *fn, DisasContext *s)
++static bool opivx_trans(uint32_t vd, uint32_t rs1, uint32_t vs2,
++        uint32_t data, gen_helper_opivx fn, DisasContext *s)
 +{
-+    TCGv_ptr dest, mask, index;
-+    TCGv base;
++    TCGv_ptr dest, src2, mask;
++    TCGv src1;
 +    TCGv_i32 desc;
 +
 +    dest = tcg_temp_new_ptr();
 +    mask = tcg_temp_new_ptr();
-+    index = tcg_temp_new_ptr();
-+    base = tcg_temp_new();
++    src2 = tcg_temp_new_ptr();
++    src1 = tcg_temp_new();
++    gen_get_gpr(src1, rs1);
 +    desc = tcg_const_i32(simd_desc(0, s->vlen / 8, data));
 +
-+    gen_get_gpr(base, rs1);
 +    tcg_gen_addi_ptr(dest, cpu_env, vreg_ofs(s, vd));
-+    tcg_gen_addi_ptr(index, cpu_env, vreg_ofs(s, vs2));
++    tcg_gen_addi_ptr(src2, cpu_env, vreg_ofs(s, vs2));
 +    tcg_gen_addi_ptr(mask, cpu_env, vreg_ofs(s, 0));
 +
-+    fn(dest, mask, base, index, cpu_env, desc);
++    fn(dest, mask, src1, src2, cpu_env, desc);
 +
 +    tcg_temp_free_ptr(dest);
 +    tcg_temp_free_ptr(mask);
-+    tcg_temp_free_ptr(index);
-+    tcg_temp_free(base);
++    tcg_temp_free_ptr(src2);
++    tcg_temp_free(src1);
 +    tcg_temp_free_i32(desc);
 +    return true;
 +}
 +
-+static bool amo_op(DisasContext *s, arg_rwdvm *a, uint8_t seq)
++static bool opivx_check(DisasContext *s, arg_rmrr *a)
 +{
-+    uint32_t data = 0;
-+    gen_helper_amo *fn;
-+    static gen_helper_amo *const fnsw[9] = {
-+        /* no atomic operation */
-+        gen_helper_vamoswapw_v_w,
-+        gen_helper_vamoaddw_v_w,
-+        gen_helper_vamoxorw_v_w,
-+        gen_helper_vamoandw_v_w,
-+        gen_helper_vamoorw_v_w,
-+        gen_helper_vamominw_v_w,
-+        gen_helper_vamomaxw_v_w,
-+        gen_helper_vamominuw_v_w,
-+        gen_helper_vamomaxuw_v_w
-+    };
-+#ifdef TARGET_RISCV64
-+    static gen_helper_amo *const fnsd[18] = {
-+        gen_helper_vamoswapw_v_d,
-+        gen_helper_vamoaddw_v_d,
-+        gen_helper_vamoxorw_v_d,
-+        gen_helper_vamoandw_v_d,
-+        gen_helper_vamoorw_v_d,
-+        gen_helper_vamominw_v_d,
-+        gen_helper_vamomaxw_v_d,
-+        gen_helper_vamominuw_v_d,
-+        gen_helper_vamomaxuw_v_d,
-+        gen_helper_vamoswapd_v_d,
-+        gen_helper_vamoaddd_v_d,
-+        gen_helper_vamoxord_v_d,
-+        gen_helper_vamoandd_v_d,
-+        gen_helper_vamoord_v_d,
-+        gen_helper_vamomind_v_d,
-+        gen_helper_vamomaxd_v_d,
-+        gen_helper_vamominud_v_d,
-+        gen_helper_vamomaxud_v_d
-+    };
-+#endif
-+
-+    if (tb_cflags(s->base.tb) & CF_PARALLEL) {
-+        gen_helper_exit_atomic(cpu_env);
-+        s->base.is_jmp = DISAS_NORETURN;
-+        return true;
-+    } else {
-+        fn = fnsw[seq];
-+#ifdef TARGET_RISCV64
-+        if (s->sew == 3) {
-+            fn = fnsd[seq];
-+        }
-+#endif
-+    }
-+
-+    data = FIELD_DP32(data, VDATA, MLEN, s->mlen);
-+    data = FIELD_DP32(data, VDATA, VM, a->vm);
-+    data = FIELD_DP32(data, VDATA, LMUL, s->lmul);
-+    data = FIELD_DP32(data, VDATA, WD, a->wd);
-+    return amo_trans(a->rd, a->rs1, a->rs2, data, fn, s);
-+}
-+/*
-+ * There are two rules check here.
-+ *
-+ * 1. SEW must be at least as wide as the AMO memory element size.
-+ *
-+ * 2. If SEW is greater than XLEN, an illegal instruction exception is raised.
-+ */
-+static bool amo_check(DisasContext *s, arg_rwdvm* a)
-+{
-+    return (vext_check_isa_ill(s, RVV | RVA) &&
-+            (!a->wd || vext_check_overlap_mask(s, a->rd, a->vm, false)) &&
++    return (vext_check_isa_ill(s, RVV) &&
++            vext_check_overlap_mask(s, a->rd, a->vm, false) &&
 +            vext_check_reg(s, a->rd, false) &&
-+            vext_check_reg(s, a->rs2, false) &&
-+            ((1 << s->sew) <= sizeof(target_ulong)) &&
-+            ((1 << s->sew) >= 4));
++            vext_check_reg(s, a->rs2, false));
++}
++/* OPIVX with GVEC IR */
++#define GEN_OPIVX_GVEC_TRANS(NAME, GVSUF)                                     \
++static bool trans_##NAME(DisasContext *s, arg_rmrr *a)                        \
++{                                                                             \
++    if (!opivx_check(s, a)) {                                                 \
++        return false;                                                         \
++    }                                                                         \
++                                                                              \
++    if (a->vm && s->vl_eq_vlmax) {                                            \
++        TCGv_i64 src1 = tcg_temp_new_i64();                                   \
++        TCGv tmp = tcg_temp_new();                                            \
++        gen_get_gpr(tmp, a->rs1);                                             \
++        tcg_gen_ext_tl_i64(src1, tmp);                                        \
++        tcg_gen_gvec_##GVSUF(8 << s->sew, vreg_ofs(s, a->rd),                 \
++            vreg_ofs(s, a->rs2), src1, MAXSZ(s), MAXSZ(s));                   \
++        tcg_temp_free_i64(src1);                                              \
++        tcg_temp_free(tmp);                                                   \
++        return true;                                                          \
++    } else {                                                                  \
++        uint32_t data = 0;                                                    \
++        static gen_helper_opivx const fns[4] = {                              \
++            gen_helper_##NAME##_b, gen_helper_##NAME##_h,                     \
++            gen_helper_##NAME##_w, gen_helper_##NAME##_d,                     \
++        };                                                                    \
++                                                                              \
++        data = FIELD_DP32(data, VDATA, MLEN, s->mlen);                        \
++        data = FIELD_DP32(data, VDATA, VM, a->vm);                            \
++        data = FIELD_DP32(data, VDATA, LMUL, s->lmul);                        \
++        return opivx_trans(a->rd, a->rs1, a->rs2, data, fns[s->sew], s);      \
++    }                                                                         \
++    return true;                                                              \
++}
++GEN_OPIVX_GVEC_TRANS(vadd_vx, adds)
++GEN_OPIVX_GVEC_TRANS(vsub_vx, subs)
++
++/* OPIVX without GVEC IR */
++#define GEN_OPIVX_TRANS(NAME, CHECK)                                     \
++static bool trans_##NAME(DisasContext *s, arg_rmrr *a)                   \
++{                                                                        \
++    if (CHECK(s, a)) {                                                   \
++        uint32_t data = 0;                                               \
++        static gen_helper_opivx const fns[4] = {                         \
++            gen_helper_##NAME##_b, gen_helper_##NAME##_h,                \
++            gen_helper_##NAME##_w, gen_helper_##NAME##_d,                \
++        };                                                               \
++                                                                         \
++        data = FIELD_DP32(data, VDATA, MLEN, s->mlen);                   \
++        data = FIELD_DP32(data, VDATA, VM, a->vm);                       \
++        data = FIELD_DP32(data, VDATA, LMUL, s->lmul);                   \
++        return opivx_trans(a->rd, a->rs1, a->rs2, data, fns[s->sew], s); \
++    }                                                                    \
++    return false;                                                        \
 +}
 +
-+GEN_VEXT_TRANS(vamoswapw_v, 0, rwdvm, amo_op, amo_check)
-+GEN_VEXT_TRANS(vamoaddw_v, 1, rwdvm, amo_op, amo_check)
-+GEN_VEXT_TRANS(vamoxorw_v, 2, rwdvm, amo_op, amo_check)
-+GEN_VEXT_TRANS(vamoandw_v, 3, rwdvm, amo_op, amo_check)
-+GEN_VEXT_TRANS(vamoorw_v, 4, rwdvm, amo_op, amo_check)
-+GEN_VEXT_TRANS(vamominw_v, 5, rwdvm, amo_op, amo_check)
-+GEN_VEXT_TRANS(vamomaxw_v, 6, rwdvm, amo_op, amo_check)
-+GEN_VEXT_TRANS(vamominuw_v, 7, rwdvm, amo_op, amo_check)
-+GEN_VEXT_TRANS(vamomaxuw_v, 8, rwdvm, amo_op, amo_check)
-+#ifdef TARGET_RISCV64
-+GEN_VEXT_TRANS(vamoswapd_v, 9, rwdvm, amo_op, amo_check)
-+GEN_VEXT_TRANS(vamoaddd_v, 10, rwdvm, amo_op, amo_check)
-+GEN_VEXT_TRANS(vamoxord_v, 11, rwdvm, amo_op, amo_check)
-+GEN_VEXT_TRANS(vamoandd_v, 12, rwdvm, amo_op, amo_check)
-+GEN_VEXT_TRANS(vamoord_v, 13, rwdvm, amo_op, amo_check)
-+GEN_VEXT_TRANS(vamomind_v, 14, rwdvm, amo_op, amo_check)
-+GEN_VEXT_TRANS(vamomaxd_v, 15, rwdvm, amo_op, amo_check)
-+GEN_VEXT_TRANS(vamominud_v, 16, rwdvm, amo_op, amo_check)
-+GEN_VEXT_TRANS(vamomaxud_v, 17, rwdvm, amo_op, amo_check)
-+#endif
++GEN_OPIVX_TRANS(vrsub_vx, opivx_check)
++
++static bool opivi_trans(uint32_t vd, uint32_t imm, uint32_t vs2,
++        uint32_t data, gen_helper_opivx fn, DisasContext *s, int zx)
++{
++    TCGv_ptr dest, src2, mask;
++    TCGv src1;
++    TCGv_i32 desc;
++
++    dest = tcg_temp_new_ptr();
++    mask = tcg_temp_new_ptr();
++    src2 = tcg_temp_new_ptr();
++    if (zx) {
++        src1 = tcg_const_tl(imm);
++    } else {
++        src1 = tcg_const_tl(sextract64(imm, 0, 5));
++    }
++    desc = tcg_const_i32(simd_desc(0, s->vlen / 8, data));
++
++    tcg_gen_addi_ptr(dest, cpu_env, vreg_ofs(s, vd));
++    tcg_gen_addi_ptr(src2, cpu_env, vreg_ofs(s, vs2));
++    tcg_gen_addi_ptr(mask, cpu_env, vreg_ofs(s, 0));
++
++    fn(dest, mask, src1, src2, cpu_env, desc);
++
++    tcg_temp_free_ptr(dest);
++    tcg_temp_free_ptr(mask);
++    tcg_temp_free_ptr(src2);
++    tcg_temp_free(src1);
++    tcg_temp_free_i32(desc);
++    return true;
++}
++
++/* OPIVI with GVEC IR */
++#define GEN_OPIVI_GVEC_TRANS(NAME, ZX, OPIVX, GVSUF)                 \
++static bool trans_##NAME(DisasContext *s, arg_rmrr *a)               \
++{                                                                    \
++    if (!opivx_check(s, a)) {                                        \
++        return false;                                                \
++    }                                                                \
++                                                                     \
++    if (a->vm && s->vl_eq_vlmax) {                                   \
++        tcg_gen_gvec_##GVSUF(8 << s->sew, vreg_ofs(s, a->rd),        \
++            vreg_ofs(s, a->rs2), sextract64(a->rs1, 0, 5),           \
++            MAXSZ(s), MAXSZ(s));                                     \
++        return true;                                                 \
++    } else {                                                         \
++        uint32_t data = 0;                                           \
++        static gen_helper_opivx const fns[4] = {                     \
++            gen_helper_##OPIVX##_b, gen_helper_##OPIVX##_h,          \
++            gen_helper_##OPIVX##_w, gen_helper_##OPIVX##_d,          \
++        };                                                           \
++                                                                     \
++        data = FIELD_DP32(data, VDATA, MLEN, s->mlen);               \
++        data = FIELD_DP32(data, VDATA, VM, a->vm);                   \
++        data = FIELD_DP32(data, VDATA, LMUL, s->lmul);               \
++        return opivi_trans(a->rd, a->rs1, a->rs2, data,              \
++                fns[s->sew], s, ZX);                                 \
++    }                                                                \
++    return true;                                                     \
++}
++GEN_OPIVI_GVEC_TRANS(vadd_vi, 0, vadd_vx, addi)
++
++/* OPIVI without GVEC IR */
++#define GEN_OPIVI_TRANS(NAME, ZX, OPIVX, CHECK)                          \
++static bool trans_##NAME(DisasContext *s, arg_rmrr *a)                   \
++{                                                                        \
++    if (CHECK(s, a)) {                                                   \
++        uint32_t data = 0;                                               \
++        static gen_helper_opivx const fns[4] = {                         \
++            gen_helper_##OPIVX##_b, gen_helper_##OPIVX##_h,              \
++            gen_helper_##OPIVX##_w, gen_helper_##OPIVX##_d,              \
++        };                                                               \
++        data = FIELD_DP32(data, VDATA, MLEN, s->mlen);                   \
++        data = FIELD_DP32(data, VDATA, VM, a->vm);                       \
++        data = FIELD_DP32(data, VDATA, LMUL, s->lmul);                   \
++        return opivi_trans(a->rd, a->rs1, a->rs2, data,                  \
++                fns[s->sew], s, ZX);                                     \
++    }                                                                    \
++    return false;                                                        \
++}
++GEN_OPIVI_TRANS(vrsub_vi, 0, vrsub_vx, opivx_check)
 diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index 3841301b74..f9b409b169 100644
+index f9b409b169..abdf3b82a8 100644
 --- a/target/riscv/vector_helper.c
 +++ b/target/riscv/vector_helper.c
-@@ -94,6 +94,11 @@ static inline uint32_t vext_lmul(uint32_t desc)
-     return FIELD_EX32(simd_data(desc), VDATA, LMUL);
- }
- 
-+static uint32_t vext_wd(uint32_t desc)
-+{
-+    return (simd_data(desc) >> 11) & 0x1;
-+}
-+
- /*
-  * Get vector group length in bytes. Its range is [64, 2048].
-  *
-@@ -685,3 +690,141 @@ GEN_VEXT_LDFF(vlhuff_v_w, uint16_t, uint32_t, MO_LEUW, ldhu_w, clearl)
- GEN_VEXT_LDFF(vlhuff_v_d, uint16_t, uint64_t, MO_LEUW, ldhu_d, clearq)
- GEN_VEXT_LDFF(vlwuff_v_w, uint32_t, uint32_t, MO_LEUL, ldwu_w, clearl)
- GEN_VEXT_LDFF(vlwuff_v_d, uint32_t, uint64_t, MO_LEUL, ldwu_d, clearq)
+@@ -828,3 +828,125 @@ GEN_VEXT_AMO(vamominw_v_w,  int32_t,  int32_t,  idx_w, clearl)
+ GEN_VEXT_AMO(vamomaxw_v_w,  int32_t,  int32_t,  idx_w, clearl)
+ GEN_VEXT_AMO(vamominuw_v_w, uint32_t, uint32_t, idx_w, clearl)
+ GEN_VEXT_AMO(vamomaxuw_v_w, uint32_t, uint32_t, idx_w, clearl)
 +
 +/*
-+ *** Vector AMO Operations (Zvamo)
++ *** Vector Integer Arithmetic Instructions
 + */
-+typedef void (*vext_amo_noatomic_fn)(void *vs3, target_ulong addr,
-+        uint32_t wd, uint32_t idx, CPURISCVState *env, uintptr_t retaddr);
 +
-+/* no atomic opreation for vector atomic insructions */
-+#define DO_SWAP(N, M) (M)
-+#define DO_AND(N, M)  (N & M)
-+#define DO_XOR(N, M)  (N ^ M)
-+#define DO_OR(N, M)   (N | M)
-+#define DO_ADD(N, M)  (N + M)
++/* expand macro args before macro */
++#define RVVCALL(macro, ...)  macro(__VA_ARGS__)
 +
-+#define GEN_VEXT_AMO_NOATOMIC_OP(NAME, ESZ, MSZ, H, DO_OP, SUF) \
-+static void vext_##NAME##_noatomic_op(void *vs3,                \
-+            target_ulong addr, uint32_t wd, uint32_t idx,       \
-+                CPURISCVState *env, uintptr_t retaddr)          \
++/* (TD, T1, T2, TX1, TX2) */
++#define OP_SSS_B int8_t, int8_t, int8_t, int8_t, int8_t
++#define OP_SSS_H int16_t, int16_t, int16_t, int16_t, int16_t
++#define OP_SSS_W int32_t, int32_t, int32_t, int32_t, int32_t
++#define OP_SSS_D int64_t, int64_t, int64_t, int64_t, int64_t
++
++/* operation of two vector elements */
++#define OPIVV2(NAME, TD, T1, T2, TX1, TX2, HD, HS1, HS2, OP)    \
++static void do_##NAME(void *vd, void *vs1, void *vs2, int i)    \
 +{                                                               \
-+    typedef int##ESZ##_t ETYPE;                                 \
-+    typedef int##MSZ##_t MTYPE;                                 \
-+    typedef uint##MSZ##_t UMTYPE __attribute__((unused));       \
-+    ETYPE *pe3 = (ETYPE *)vs3 + H(idx);                         \
-+    MTYPE a = *pe3, b = cpu_ld##SUF##_data(env, addr);          \
-+    a = DO_OP(a, b);                                            \
-+    cpu_st##SUF##_data(env, addr, a);                           \
-+    if (wd) {                                                   \
-+        *pe3 = a;                                               \
-+    }                                                           \
++    TX1 s1 = *((T1 *)vs1 + HS1(i));                             \
++    TX2 s2 = *((T2 *)vs2 + HS2(i));                             \
++    *((TD *)vd + HD(i)) = OP(s2, s1);                           \
++}
++#define DO_SUB(N, M) (N - M)
++#define DO_RSUB(N, M) (M - N)
++
++RVVCALL(OPIVV2, vadd_vv_b, OP_SSS_B, H1, H1, H1, DO_ADD)
++RVVCALL(OPIVV2, vadd_vv_h, OP_SSS_H, H2, H2, H2, DO_ADD)
++RVVCALL(OPIVV2, vadd_vv_w, OP_SSS_W, H4, H4, H4, DO_ADD)
++RVVCALL(OPIVV2, vadd_vv_d, OP_SSS_D, H8, H8, H8, DO_ADD)
++RVVCALL(OPIVV2, vsub_vv_b, OP_SSS_B, H1, H1, H1, DO_SUB)
++RVVCALL(OPIVV2, vsub_vv_h, OP_SSS_H, H2, H2, H2, DO_SUB)
++RVVCALL(OPIVV2, vsub_vv_w, OP_SSS_W, H4, H4, H4, DO_SUB)
++RVVCALL(OPIVV2, vsub_vv_d, OP_SSS_D, H8, H8, H8, DO_SUB)
++
++/* generate the helpers for OPIVV */
++#define GEN_VEXT_VV(NAME, ESZ, DSZ, CLEAR_FN)             \
++void HELPER(NAME)(void *vd, void *v0, void *vs1,          \
++        void *vs2, CPURISCVState *env, uint32_t desc)     \
++{                                                         \
++    uint32_t vlmax = vext_maxsz(desc) / ESZ;              \
++    uint32_t mlen = vext_mlen(desc);                      \
++    uint32_t vm = vext_vm(desc);                          \
++    uint32_t vl = env->vl;                                \
++    uint32_t i;                                           \
++    for (i = 0; i < vl; i++) {                            \
++        if (!vm && !vext_elem_mask(v0, mlen, i)) {        \
++            continue;                                     \
++        }                                                 \
++        do_##NAME(vd, vs1, vs2, i);                       \
++    }                                                     \
++    if (i != 0) {                                         \
++        CLEAR_FN(vd, vl, vl * DSZ,  vlmax * DSZ);         \
++    }                                                     \
 +}
 +
-+/* Signed min/max */
-+#define DO_MAX(N, M)  ((N) >= (M) ? (N) : (M))
-+#define DO_MIN(N, M)  ((N) >= (M) ? (M) : (N))
++GEN_VEXT_VV(vadd_vv_b, 1, 1, clearb)
++GEN_VEXT_VV(vadd_vv_h, 2, 2, clearh)
++GEN_VEXT_VV(vadd_vv_w, 4, 4, clearl)
++GEN_VEXT_VV(vadd_vv_d, 8, 8, clearq)
++GEN_VEXT_VV(vsub_vv_b, 1, 1, clearb)
++GEN_VEXT_VV(vsub_vv_h, 2, 2, clearh)
++GEN_VEXT_VV(vsub_vv_w, 4, 4, clearl)
++GEN_VEXT_VV(vsub_vv_d, 8, 8, clearq)
 +
-+/* Unsigned min/max */
-+#define DO_MAXU(N, M) DO_MAX((UMTYPE)N, (UMTYPE)M)
-+#define DO_MINU(N, M) DO_MIN((UMTYPE)N, (UMTYPE)M)
-+
-+GEN_VEXT_AMO_NOATOMIC_OP(vamoswapw_v_w, 32, 32, H4, DO_SWAP, l)
-+GEN_VEXT_AMO_NOATOMIC_OP(vamoaddw_v_w,  32, 32, H4, DO_ADD,  l)
-+GEN_VEXT_AMO_NOATOMIC_OP(vamoxorw_v_w,  32, 32, H4, DO_XOR,  l)
-+GEN_VEXT_AMO_NOATOMIC_OP(vamoandw_v_w,  32, 32, H4, DO_AND,  l)
-+GEN_VEXT_AMO_NOATOMIC_OP(vamoorw_v_w,   32, 32, H4, DO_OR,   l)
-+GEN_VEXT_AMO_NOATOMIC_OP(vamominw_v_w,  32, 32, H4, DO_MIN,  l)
-+GEN_VEXT_AMO_NOATOMIC_OP(vamomaxw_v_w,  32, 32, H4, DO_MAX,  l)
-+GEN_VEXT_AMO_NOATOMIC_OP(vamominuw_v_w, 32, 32, H4, DO_MINU, l)
-+GEN_VEXT_AMO_NOATOMIC_OP(vamomaxuw_v_w, 32, 32, H4, DO_MAXU, l)
-+#ifdef TARGET_RISCV64
-+GEN_VEXT_AMO_NOATOMIC_OP(vamoswapw_v_d, 64, 32, H8, DO_SWAP, l)
-+GEN_VEXT_AMO_NOATOMIC_OP(vamoswapd_v_d, 64, 64, H8, DO_SWAP, q)
-+GEN_VEXT_AMO_NOATOMIC_OP(vamoaddw_v_d,  64, 32, H8, DO_ADD,  l)
-+GEN_VEXT_AMO_NOATOMIC_OP(vamoaddd_v_d,  64, 64, H8, DO_ADD,  q)
-+GEN_VEXT_AMO_NOATOMIC_OP(vamoxorw_v_d,  64, 32, H8, DO_XOR,  l)
-+GEN_VEXT_AMO_NOATOMIC_OP(vamoxord_v_d,  64, 64, H8, DO_XOR,  q)
-+GEN_VEXT_AMO_NOATOMIC_OP(vamoandw_v_d,  64, 32, H8, DO_AND,  l)
-+GEN_VEXT_AMO_NOATOMIC_OP(vamoandd_v_d,  64, 64, H8, DO_AND,  q)
-+GEN_VEXT_AMO_NOATOMIC_OP(vamoorw_v_d,   64, 32, H8, DO_OR,   l)
-+GEN_VEXT_AMO_NOATOMIC_OP(vamoord_v_d,   64, 64, H8, DO_OR,   q)
-+GEN_VEXT_AMO_NOATOMIC_OP(vamominw_v_d,  64, 32, H8, DO_MIN,  l)
-+GEN_VEXT_AMO_NOATOMIC_OP(vamomind_v_d,  64, 64, H8, DO_MIN,  q)
-+GEN_VEXT_AMO_NOATOMIC_OP(vamomaxw_v_d,  64, 32, H8, DO_MAX,  l)
-+GEN_VEXT_AMO_NOATOMIC_OP(vamomaxd_v_d,  64, 64, H8, DO_MAX,  q)
-+GEN_VEXT_AMO_NOATOMIC_OP(vamominuw_v_d, 64, 32, H8, DO_MINU, l)
-+GEN_VEXT_AMO_NOATOMIC_OP(vamominud_v_d, 64, 64, H8, DO_MINU, q)
-+GEN_VEXT_AMO_NOATOMIC_OP(vamomaxuw_v_d, 64, 32, H8, DO_MAXU, l)
-+GEN_VEXT_AMO_NOATOMIC_OP(vamomaxud_v_d, 64, 64, H8, DO_MAXU, q)
-+#endif
-+
-+static inline void vext_amo_noatomic(void *vs3, void *v0, target_ulong base,
-+        void *vs2, CPURISCVState *env, uint32_t desc,
-+        vext_get_index_addr get_index_addr,
-+        vext_amo_noatomic_fn noatomic_op,
-+        vext_ld_clear_elem clear_elem,
-+        uint32_t esz, uint32_t msz, uintptr_t ra)
-+{
-+    uint32_t i;
-+    target_long addr;
-+    uint32_t wd = vext_wd(desc);
-+    uint32_t vm = vext_vm(desc);
-+    uint32_t mlen = vext_mlen(desc);
-+    uint32_t vlmax = vext_maxsz(desc) / esz;
-+
-+    for (i = 0; i < env->vl; i++) {
-+        if (!vm && !vext_elem_mask(v0, mlen, i)) {
-+            continue;
-+        }
-+        probe_pages(env, get_index_addr(base, i, vs2), msz, ra, MMU_DATA_LOAD);
-+        probe_pages(env, get_index_addr(base, i, vs2), msz, ra, MMU_DATA_STORE);
-+    }
-+    for (i = 0; i < env->vl; i++) {
-+        if (!vm && !vext_elem_mask(v0, mlen, i)) {
-+            continue;
-+        }
-+        addr = get_index_addr(base, i, vs2);
-+        noatomic_op(vs3, addr, wd, i, env, ra);
-+    }
-+    clear_elem(vs3, env->vl, env->vl * esz, vlmax * esz);
++/*
++ * If XLEN < SEW, the value from the x register is sign-extended to SEW bits.
++ * So (target_long)s1 is need. (T1)(target_long)s1 gives the real operator type.
++ * (TX1)(T1)(target_long)s1 expands the operator type of widen operations
++ * or narrow operations
++ */
++#define OPIVX2(NAME, TD, T1, T2, TX1, TX2, HD, HS2, OP)             \
++static void do_##NAME(void *vd, target_ulong s1, void *vs2, int i)  \
++{                                                                   \
++    TX2 s2 = *((T2 *)vs2 + HS2(i));                                 \
++    *((TD *)vd + HD(i)) = OP(s2, (TX1)(T1)(target_long)s1);         \
 +}
++RVVCALL(OPIVX2, vadd_vx_b, OP_SSS_B, H1, H1, DO_ADD)
++RVVCALL(OPIVX2, vadd_vx_h, OP_SSS_H, H2, H2, DO_ADD)
++RVVCALL(OPIVX2, vadd_vx_w, OP_SSS_W, H4, H4, DO_ADD)
++RVVCALL(OPIVX2, vadd_vx_d, OP_SSS_D, H8, H8, DO_ADD)
++RVVCALL(OPIVX2, vsub_vx_b, OP_SSS_B, H1, H1, DO_SUB)
++RVVCALL(OPIVX2, vsub_vx_h, OP_SSS_H, H2, H2, DO_SUB)
++RVVCALL(OPIVX2, vsub_vx_w, OP_SSS_W, H4, H4, DO_SUB)
++RVVCALL(OPIVX2, vsub_vx_d, OP_SSS_D, H8, H8, DO_SUB)
++RVVCALL(OPIVX2, vrsub_vx_b, OP_SSS_B, H1, H1, DO_RSUB)
++RVVCALL(OPIVX2, vrsub_vx_h, OP_SSS_H, H2, H2, DO_RSUB)
++RVVCALL(OPIVX2, vrsub_vx_w, OP_SSS_W, H4, H4, DO_RSUB)
++RVVCALL(OPIVX2, vrsub_vx_d, OP_SSS_D, H8, H8, DO_RSUB)
 +
-+#define GEN_VEXT_AMO(NAME, MTYPE, ETYPE, INDEX_FN, CLEAR_FN)    \
-+void HELPER(NAME)(void *vs3, void *v0, target_ulong base,       \
-+        void *vs2, CPURISCVState *env, uint32_t desc)           \
-+{                                                               \
-+    vext_amo_noatomic(vs3, v0, base, vs2, env, desc,            \
-+        INDEX_FN, vext_##NAME##_noatomic_op, CLEAR_FN,          \
-+        sizeof(ETYPE), sizeof(MTYPE), GETPC());                 \
++/* generate the helpers for instructions with one vector and one sclar */
++#define GEN_VEXT_VX(NAME, ESZ, DSZ, CLEAR_FN)             \
++void HELPER(NAME)(void *vd, void *v0, target_ulong s1,    \
++        void *vs2, CPURISCVState *env, uint32_t desc)     \
++{                                                         \
++    uint32_t vlmax = vext_maxsz(desc) / ESZ;              \
++    uint32_t mlen = vext_mlen(desc);                      \
++    uint32_t vm = vext_vm(desc);                          \
++    uint32_t vl = env->vl;                                \
++    uint32_t i;                                           \
++                                                          \
++    for (i = 0; i < vl; i++) {                            \
++        if (!vm && !vext_elem_mask(v0, mlen, i)) {        \
++            continue;                                     \
++        }                                                 \
++        do_##NAME(vd, s1, vs2, i);                        \
++    }                                                     \
++    if (i != 0) {                                         \
++        CLEAR_FN(vd, vl, vl * DSZ,  vlmax * DSZ);         \
++    }                                                     \
 +}
-+
-+#ifdef TARGET_RISCV64
-+GEN_VEXT_AMO(vamoswapw_v_d, int32_t,  int64_t,  idx_d, clearq)
-+GEN_VEXT_AMO(vamoswapd_v_d, int64_t,  int64_t,  idx_d, clearq)
-+GEN_VEXT_AMO(vamoaddw_v_d,  int32_t,  int64_t,  idx_d, clearq)
-+GEN_VEXT_AMO(vamoaddd_v_d,  int64_t,  int64_t,  idx_d, clearq)
-+GEN_VEXT_AMO(vamoxorw_v_d,  int32_t,  int64_t,  idx_d, clearq)
-+GEN_VEXT_AMO(vamoxord_v_d,  int64_t,  int64_t,  idx_d, clearq)
-+GEN_VEXT_AMO(vamoandw_v_d,  int32_t,  int64_t,  idx_d, clearq)
-+GEN_VEXT_AMO(vamoandd_v_d,  int64_t,  int64_t,  idx_d, clearq)
-+GEN_VEXT_AMO(vamoorw_v_d,   int32_t,  int64_t,  idx_d, clearq)
-+GEN_VEXT_AMO(vamoord_v_d,   int64_t,  int64_t,  idx_d, clearq)
-+GEN_VEXT_AMO(vamominw_v_d,  int32_t,  int64_t,  idx_d, clearq)
-+GEN_VEXT_AMO(vamomind_v_d,  int64_t,  int64_t,  idx_d, clearq)
-+GEN_VEXT_AMO(vamomaxw_v_d,  int32_t,  int64_t,  idx_d, clearq)
-+GEN_VEXT_AMO(vamomaxd_v_d,  int64_t,  int64_t,  idx_d, clearq)
-+GEN_VEXT_AMO(vamominuw_v_d, uint32_t, uint64_t, idx_d, clearq)
-+GEN_VEXT_AMO(vamominud_v_d, uint64_t, uint64_t, idx_d, clearq)
-+GEN_VEXT_AMO(vamomaxuw_v_d, uint32_t, uint64_t, idx_d, clearq)
-+GEN_VEXT_AMO(vamomaxud_v_d, uint64_t, uint64_t, idx_d, clearq)
-+#endif
-+GEN_VEXT_AMO(vamoswapw_v_w, int32_t,  int32_t,  idx_w, clearl)
-+GEN_VEXT_AMO(vamoaddw_v_w,  int32_t,  int32_t,  idx_w, clearl)
-+GEN_VEXT_AMO(vamoxorw_v_w,  int32_t,  int32_t,  idx_w, clearl)
-+GEN_VEXT_AMO(vamoandw_v_w,  int32_t,  int32_t,  idx_w, clearl)
-+GEN_VEXT_AMO(vamoorw_v_w,   int32_t,  int32_t,  idx_w, clearl)
-+GEN_VEXT_AMO(vamominw_v_w,  int32_t,  int32_t,  idx_w, clearl)
-+GEN_VEXT_AMO(vamomaxw_v_w,  int32_t,  int32_t,  idx_w, clearl)
-+GEN_VEXT_AMO(vamominuw_v_w, uint32_t, uint32_t, idx_w, clearl)
-+GEN_VEXT_AMO(vamomaxuw_v_w, uint32_t, uint32_t, idx_w, clearl)
++GEN_VEXT_VX(vadd_vx_b, 1, 1, clearb)
++GEN_VEXT_VX(vadd_vx_h, 2, 2, clearh)
++GEN_VEXT_VX(vadd_vx_w, 4, 4, clearl)
++GEN_VEXT_VX(vadd_vx_d, 8, 8, clearq)
++GEN_VEXT_VX(vsub_vx_b, 1, 1, clearb)
++GEN_VEXT_VX(vsub_vx_h, 2, 2, clearh)
++GEN_VEXT_VX(vsub_vx_w, 4, 4, clearl)
++GEN_VEXT_VX(vsub_vx_d, 8, 8, clearq)
++GEN_VEXT_VX(vrsub_vx_b, 1, 1, clearb)
++GEN_VEXT_VX(vrsub_vx_h, 2, 2, clearh)
++GEN_VEXT_VX(vrsub_vx_w, 4, 4, clearl)
++GEN_VEXT_VX(vrsub_vx_d, 8, 8, clearq)
 -- 
 2.23.0
 
