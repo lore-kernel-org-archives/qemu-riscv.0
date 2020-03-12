@@ -1,67 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jCWCg-0006cB-Ec
-	for mharc-qemu-riscv@gnu.org; Thu, 12 Mar 2020 18:21:22 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:59681)
+	id 1jCWCj-0006mM-Gb
+	for mharc-qemu-riscv@gnu.org; Thu, 12 Mar 2020 18:21:25 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59751)
  by lists.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <prvs=33364f698=alistair.francis@wdc.com>)
- id 1jCWCd-0006UT-OG
- for qemu-riscv@nongnu.org; Thu, 12 Mar 2020 18:21:20 -0400
+ id 1jCWCh-0006eT-2Q
+ for qemu-riscv@nongnu.org; Thu, 12 Mar 2020 18:21:24 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
  (envelope-from <prvs=33364f698=alistair.francis@wdc.com>)
- id 1jCWCc-0006wp-D8
- for qemu-riscv@nongnu.org; Thu, 12 Mar 2020 18:21:19 -0400
-Received: from esa5.hgst.iphmx.com ([216.71.153.144]:2609)
+ id 1jCWCf-00070d-WD
+ for qemu-riscv@nongnu.org; Thu, 12 Mar 2020 18:21:22 -0400
+Received: from esa5.hgst.iphmx.com ([216.71.153.144]:2615)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <prvs=33364f698=alistair.francis@wdc.com>)
- id 1jCWCZ-0006lB-61; Thu, 12 Mar 2020 18:21:16 -0400
+ id 1jCWCd-0006wv-9O; Thu, 12 Mar 2020 18:21:19 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1584051675; x=1615587675;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=GoZJQchoYXwF0R/sjN4Tl3zNom6stxJDG2pdHtkur7k=;
- b=Sm4ynYFaI1AOlrqHkmj/KAVbeboptylVAxBS791O+Lcntb2jMo9qgbP8
- SMrG8vdNfJZhISSTqxpkp3seNIh4dKH4X3jRnjzPvE7nTFN0sFHCLPw0J
- t3Z8NemihaBZNlIR0U+cp2vkRrh53Q0eAfwAiYHIjtLx9KjLCUf3pVsm6
- m/QwhprA+yXW8FmL0bZdrpc7TmLY0pgursg0wcLwxi/1tysHhEuSyEpfq
- VDVS6ZSNDIdRzmGkdgOzdB7kDXo4eR29nnMMds74zCa/UUjoToPuUKpZd
- hBdBKjXVVceePgZd8vKp8XEE84jgw16t+xLaK89+tiehDhM5Mmgzqgfhe w==;
-IronPort-SDR: Lut0Vvo0Itg0meOTDwZySzO9m6Ka7HzS4MK20d2qibPBbG5pMsZV9RCeRLOqaB7Bc/GIdUGjz1
- pIOE7gsqFkdOiwOoJ0ACRFUoj4QsPBbe7C0cLTlo/mGqD3iNbEX+mbHmtwrqPl6olCxUfp4v3L
- XQDASxu+6cpxHxjLu9sn2P4DP6PlgH6TbBDjEkmx3VZVwItoNDh0a2q9EQcB/5ER32Oa6n8JQj
- oBqCkBFgHc1b8reFAmmTTWjx4SoQMi77ICSSsM4RwkTaJ9wO5LXVi4Cx4rH3aEqb76TMr2wJeA
- hqs=
-X-IronPort-AV: E=Sophos;i="5.70,546,1574092800"; d="scan'208";a="132788028"
+ t=1584051679; x=1615587679;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=5LAi0O+mTaWDQDimiBocyA7wHcDy5fDRMj7L3Yuk5mg=;
+ b=ZakfkO5X80PhknbeXRXXb1UNn38JLmyn7+p+/0cezpPn2qRkT+LyjhYi
+ 21Us5s7QnKy5E4cfxZJgXilUD+mZzjLTOQMvt68twI0GtM7bC4gSqsbgq
+ FExtMrVPGbfogLa7ALxi9/bEu06TxJX0VHA7AwQUqorVhTJwn63s3Zn5z
+ EYuALiLqZHvMxdwpaH1H0D+Ud0FRRGGFYfAEzyCgm63X7bL0FPQz8Hzex
+ USJu/tnPHeXPsiIZOng9dUJNtnL/qAVBe9hDUcyzMOTtJkDkzLhEH0mfH
+ IPAV3VdGQopS4Bwc1FRumh4rw0gEhD4AV0Mz4cRElod0pWxhADmoNsSf2 Q==;
+IronPort-SDR: H8yzzcsIrc82r1hKc/Htk/XYYECa4uBwGna4QwMzDvb8QJ844M1lWlj7piULuz0eZw/bXPmILL
+ 895nqevogKAe9SOvVnwK4mW7TAQaWJsQlT+T7z7yqE8DIYvxvTGToWNPAgFeO0SjaZ4GYepFNt
+ qQ2l+XYwlr2PB7MLxrSqkPn0RogguY3RRnlcDMEYxHfzArEuK7pSmM/hgjTcnhGNJlH0V2MmBo
+ 1Tk00jqaRGcsDxoTwrYtEzHvQ6br38j06MkIfVZVjsDIKAWkzcpr4AJxsPYR/kJSVXXhpunaHB
+ yew=
+X-IronPort-AV: E=Sophos;i="5.70,546,1574092800"; d="scan'208";a="132788033"
 Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com)
  ([199.255.45.15])
- by ob1.hgst.iphmx.com with ESMTP; 13 Mar 2020 06:21:11 +0800
-IronPort-SDR: s1XmOwgL9Bkb433GEYu0UKihbalBwGFClMJJKKI7gZb6sCF+yE2Wmq3aWqeNP7Jz7FxKYgs76U
- V8ndd/ww4rrAZfd5t+A4qKKQfGoDsBK4kOqcXj1sYOa7IZx1MlgijUmV5WSIg3/Gr7mnkHiBYO
- 4SpkosqkNl8B1+vaO6Xe4eDDzcfl4mK2yuLVdUzLKvggfFZ1hKgbRuubkMB0sHOtwEiQP95rfE
- a1ADYKp9ed2E1gdcI+xHke8Q7cYPKlTs4d3I6aZyho+dNoMoKa5viiRdk2Ef7NufGhY+abE2lU
- 5qiMwxhVQrA+83f2uIsvcVD/
+ by ob1.hgst.iphmx.com with ESMTP; 13 Mar 2020 06:21:18 +0800
+IronPort-SDR: 0IFkWC1tlMGGpfb9T++h4RXmzeT++3paYwqx6jTTV+Dxq/bvs0WQwzRIznEZ6cvlWK+8B8jLZ4
+ JTAnbPENSTFNKxVLnp0k9u+6AqErqMcHivvIZ1VYY7ExOrh1FR8zSa5ssAa/CDnXi4p9kog04x
+ MIE52adXkA9jD39D9YbW+oYCutqA7S9uM1t/5OOPsh9U6Y1MYUqg/HV9/bOtZ7qsgAJ9xQdWyq
+ 1Shp3C3aOItaYWzUt10i7UGlILS0jPee6Jkvz8yIvEET43F7/KZkpJW7qTpM9Mwi1OkXw65YX9
+ nLLr+BPC2tf5UFk3WBmS7xa6
 Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
  by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 12 Mar 2020 15:12:47 -0700
-IronPort-SDR: oWdRiyV84L1wDmfi0VGDCA6ns5Kvgki3TS1czE0nd50pSpEua5he7x0+eWcqywS0z5q6YJIEHb
- 8MioLV+0E4orcU2oqdrv613EL5DIz0AeAyE5wmT+jbwA5GqHbzmHPkWy3KVeUc6j+Syn5KrHoL
- hAT3t6SBi5Scc6Cs8dV3Q6/hDfVj1mtRPM07buU7K/SjS/oF2SR09PjAaJs6xjxiU281+WTT4I
- lvqQ+ULkTHcvvGUnuV+fq6QRoNIv3UARksPijwcihNwP32GnLEtr7hsKLHUuO1FIUll2zdgosv
- UmI=
+ 12 Mar 2020 15:12:54 -0700
+IronPort-SDR: JK7R22lJTYQO+0klgOm1ensyYBy3Bj9B1hpLssB0XSuWy6/Uoi9+6/VQqqGXplnr4LkVMYWkNB
+ HV082rgzOyYukcQRZLc7aOZU+eQHyhIap0jdkRW1CWbzBl7sB9qXuIf2mp7X6sijfK16j+0x7L
+ TBESd929J+Sgy1Ar4Rqr1j1PVugkJR4vr6bJtv0rD0tGjRyoOwRYd+dtiz36FWdFBm45KHesH0
+ XEIDm+3yBMD3BanwURdPQ5RCEPqC+7Guoyw0nt0+PcTf7B9Jmfpf4J5lilM1/F9GCoMTVzO/fU
+ rWU=
 WDCIronportException: Internal
 Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
  risc6-mainframe.int.fusionio.com) ([10.196.158.235])
- by uls-op-cesaip02.wdc.com with ESMTP; 12 Mar 2020 15:21:11 -0700
+ by uls-op-cesaip02.wdc.com with ESMTP; 12 Mar 2020 15:21:18 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, laurent@vivier.eu,
  aleksandar.m.mail@gmail.com
 Cc: palmer@dabbelt.com,
 	alistair.francis@wdc.com,
 	alistair23@gmail.com
-Subject: [PATCH v7 0/4]  linux-user: generate syscall_nr.sh for RISC-V
-Date: Thu, 12 Mar 2020 15:13:45 -0700
-Message-Id: <cover.1584051142.git.alistair.francis@wdc.com>
+Subject: [PATCH v7 2/4] linux-user/syscall: Add support for
+ clock_gettime64/clock_settime64
+Date: Thu, 12 Mar 2020 15:13:53 -0700
+Message-Id: <4a7fd05532400d10aa0f684c9043e2ac7b34d91c.1584051142.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <cover.1584051142.git.alistair.francis@wdc.com>
+References: <cover.1584051142.git.alistair.francis@wdc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: FreeBSD 9.x [fuzzy]
@@ -77,43 +80,85 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Mar 2020 22:21:21 -0000
+X-List-Received-Date: Thu, 12 Mar 2020 22:21:24 -0000
 
-This series updates the RISC-V syscall_nr.sh based on the 5.5 kernel.
+Add support for the clock_gettime64/clock_settime64 syscalls.
 
-There are two parts to this. One is just adding the new syscalls, the
-other part is updating the RV32 syscalls to match the fact that RV32 is
-a 64-bit time_t architectures (y2038) safe.
+If your host is 64-bit or is 32-bit with the *_time64 syscall then the
+timespec will correctly be a 64-bit time_t. Otherwise the host will
+return a 32-bit time_t which will be rounded to 64-bits. This will be
+incorrect after y2038.
 
-We need to make some changes to syscall.c to avoid warnings/errors
-during compliling with the new syscall.
+Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Laurent Vivier <laurent@vivier.eu>
+---
+ linux-user/syscall.c | 39 +++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 39 insertions(+)
 
-I did some RV32 user space testing after applying these patches. I ran the
-glibc testsuite in userspace and I don't see any regressions.
-
-v7:
- - Update futuex_time64 support to work correctly
-v6:
- - Split out futex patch and make it more robust
-v5:
- - Addres comments raised on v4
-   - Don't require 64-bit host for * _time64 functions
-
-Alistair Francis (4):
-  linux-user: Protect more syscalls
-  linux-user/syscall: Add support for clock_gettime64/clock_settime64
-  linux-user: Support futex_time64
-  linux-user/riscv: Update the syscall_nr's to the 5.5 kernel
-
- linux-user/riscv/syscall32_nr.h | 295 +++++++++++++++++++++++++++++++
- linux-user/riscv/syscall64_nr.h | 301 ++++++++++++++++++++++++++++++++
- linux-user/riscv/syscall_nr.h   | 294 +------------------------------
- linux-user/strace.c             |   2 +
- linux-user/syscall.c            | 247 ++++++++++++++++++++++++--
- 5 files changed, 834 insertions(+), 305 deletions(-)
- create mode 100644 linux-user/riscv/syscall32_nr.h
- create mode 100644 linux-user/riscv/syscall64_nr.h
-
+diff --git a/linux-user/syscall.c b/linux-user/syscall.c
+index 909bec94a5..60fd775d9c 100644
+--- a/linux-user/syscall.c
++++ b/linux-user/syscall.c
+@@ -1229,6 +1229,22 @@ static inline abi_long target_to_host_timespec(struct timespec *host_ts,
+ }
+ #endif
+ 
++#if defined(TARGET_NR_clock_settime64)
++static inline abi_long target_to_host_timespec64(struct timespec *host_ts,
++                                                 abi_ulong target_addr)
++{
++    struct target__kernel_timespec *target_ts;
++
++    if (!lock_user_struct(VERIFY_READ, target_ts, target_addr, 1)) {
++        return -TARGET_EFAULT;
++    }
++    __get_user(host_ts->tv_sec, &target_ts->tv_sec);
++    __get_user(host_ts->tv_nsec, &target_ts->tv_nsec);
++    unlock_user_struct(target_ts, target_addr, 0);
++    return 0;
++}
++#endif
++
+ static inline abi_long host_to_target_timespec(abi_ulong target_addr,
+                                                struct timespec *host_ts)
+ {
+@@ -11458,6 +11474,18 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
+         return ret;
+     }
+ #endif
++#ifdef TARGET_NR_clock_settime64
++    case TARGET_NR_clock_settime64:
++    {
++        struct timespec ts;
++
++        ret = target_to_host_timespec64(&ts, arg2);
++        if (!is_error(ret)) {
++            ret = get_errno(clock_settime(arg1, &ts));
++        }
++        return ret;
++    }
++#endif
+ #ifdef TARGET_NR_clock_gettime
+     case TARGET_NR_clock_gettime:
+     {
+@@ -11469,6 +11497,17 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
+         return ret;
+     }
+ #endif
++#ifdef TARGET_NR_clock_gettime64
++    case TARGET_NR_clock_gettime64:
++    {
++        struct timespec ts;
++        ret = get_errno(clock_gettime(arg1, &ts));
++        if (!is_error(ret)) {
++            ret = host_to_target_timespec64(arg2, &ts);
++        }
++        return ret;
++    }
++#endif
+ #ifdef TARGET_NR_clock_getres
+     case TARGET_NR_clock_getres:
+     {
 -- 
 2.25.1
 
