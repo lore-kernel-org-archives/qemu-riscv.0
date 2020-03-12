@@ -1,65 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jCW7C-0001dH-6W
-	for mharc-qemu-riscv@gnu.org; Thu, 12 Mar 2020 18:15:42 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:54326)
+	id 1jCWA5-00011J-9e
+	for mharc-qemu-riscv@gnu.org; Thu, 12 Mar 2020 18:18:41 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:57102)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <alistair23@gmail.com>) id 1jCW79-0001Rc-Eb
- for qemu-riscv@nongnu.org; Thu, 12 Mar 2020 18:15:40 -0400
+ (envelope-from <alistair23@gmail.com>) id 1jCWA3-0000wf-DO
+ for qemu-riscv@nongnu.org; Thu, 12 Mar 2020 18:18:40 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1jCW78-00068F-7s
- for qemu-riscv@nongnu.org; Thu, 12 Mar 2020 18:15:39 -0400
-Received: from mail-vk1-xa41.google.com ([2607:f8b0:4864:20::a41]:43938)
+ (envelope-from <alistair23@gmail.com>) id 1jCWA1-0002vC-Rv
+ for qemu-riscv@nongnu.org; Thu, 12 Mar 2020 18:18:39 -0400
+Received: from mail-vs1-xe41.google.com ([2607:f8b0:4864:20::e41]:41870)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1jCW73-0005z6-Kr; Thu, 12 Mar 2020 18:15:33 -0400
-Received: by mail-vk1-xa41.google.com with SMTP id t3so2060899vkm.10;
- Thu, 12 Mar 2020 15:15:33 -0700 (PDT)
+ id 1jCW9x-0002ec-78; Thu, 12 Mar 2020 18:18:33 -0400
+Received: by mail-vs1-xe41.google.com with SMTP id k188so4803610vsc.8;
+ Thu, 12 Mar 2020 15:18:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=o/HkkMcrEHAWXFQusdHwU8phyQPq6T2aBZNnkj4Us1o=;
- b=ZSqEC4PvT0GZFzmU4AK4rWA9/tvtmakdAKfiamMEQz5BJnmcJYT57GuxATFINlwgL7
- ejksZfREkoG/0KFcEAndhMM7gNxxPYqZMJVf3uRFxDKQSThQGSlwWnVfW+4dtNqAc3ff
- OZstFgyheUoT4xRGkVGTaN7q+Fhv40a3aPMz7lH0NtEPVeY5gN0GYyMzV5EcbaZNM2Ny
- bhOBVzqZLv8M+0VwUICt/2rB7lDPy1r1/qnsf9eCfw8WxcEPMvyaJa0b62qrfC0plwhw
- XXP2dhrp/RnNferAU5GvpLW+Y/id+22rgXasKcWiZn5LMTnnsbJjDAhoZp+jd3IW9MIb
- irqw==
+ :cc; bh=YTsxPebLhJOXvZgqRuXZJBBSNDFAxW3YxtsYuyeObAs=;
+ b=YiA/bHdiT7mesIIZfb+iirFJhcFhfSLKIybPQWPf1T9t6BK5iPkyPlcm28DUqA5S9I
+ iVTCV4EC3eKpr/RRq+7dwOqlkFgI7L+7rsApiyBxUQwE/4GiFhzPOuuAo9I/nu6BXrSk
+ dZzLZt7SD67vJs4PyGco8o4cmDqPCBsCpFTWJXgJGFGuJPjLq78kJ73AyU7+FbU04LEe
+ XL4kmbDdvWZAJ31aNYxT4VVmNi8y7lPoUp5e9I744biiNdDqFviLkzhlo7667Rd6O9aS
+ 4TUl31RDnsoiZDYNQe2YJ+GwYDdIRdNzYDhQU4BvJ0zMTRjrkSA5pXm1KyMgzajZCenO
+ cHGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=o/HkkMcrEHAWXFQusdHwU8phyQPq6T2aBZNnkj4Us1o=;
- b=BNgOQmC+t++6OSOY6JSV9sk99bVfDhXuvwlJFyTIL3UjOIfO9KtfQpAbjwEMYoCcgw
- UUoODBjdIxDeyORy1he41FD8YYl1Vf5hcs6INeFc2tIxQPMQPy0YKiBDj8nlKrj1zYmX
- LbuCg74aDFU6EXaxN+G0WzCB5sNht+2izBxRi/VCSoa7liimHcOFvj3izDrpskTDIhyG
- yLmlC4/mO0PVQ8eJlUGp39QNIUvyU4PMtEn909JRn8+Zl6j6v6XDIW2KctVbUpXbhbWI
- Cu3oLuVFQgH0I+gXJrRV+N8N0cGj8FJax/YXUEb6Z3xOXaYnlWjV96bct38PB4i16roL
- sHsg==
-X-Gm-Message-State: ANhLgQ1miDC1ESSQNGCHnni/0Ajq9/jiRS/IRroqjK8hFQbE69X/tYj3
- EVwjaV2Agie5PwUqrUOAkBsg/nnGdNd7yfPeEH4=
-X-Google-Smtp-Source: ADFU+vst7lZRwIQtqa7jjyRuEzM36EzZeLMJfvzNJesRQfOZDgnUezlLvgol61/g2gWX0R5W1frrhD7DzxhrAx9TAf8=
-X-Received: by 2002:ac5:c1ca:: with SMTP id g10mr7059195vkk.16.1584051333014; 
- Thu, 12 Mar 2020 15:15:33 -0700 (PDT)
+ bh=YTsxPebLhJOXvZgqRuXZJBBSNDFAxW3YxtsYuyeObAs=;
+ b=Zx5hPA7WMD0UNVjJTXgS+h1fTYIYXYy5kaEzAMfC8DfBI1Vewk0xCpj/xBdqw4i+0m
+ 3WcR68xZAY4aJ8b2F9GpIuXTU6z4+8Lp+MU9zbodkRLYrjioyJeaKkGM4FEXa4J0suNl
+ yM8fpOjua4bvpJb+Mj2YOoFUL3WntWGJ32DJ9ryz3x3FhyO6UihfsD4fW6rQklhpmZ/t
+ etlNZ8dEY3WQ6wlXBHWgKVfjD9hOrkNaLAYmxU+YcDJ5Qx3Mdj9d1kONs2oPqq+G/IQl
+ ISb3otcO5p25cMhSQaX4mtHPi9epWRo5JO4U1R1/IIkP3RcMeG1ujddSWB7MHBHgWncE
+ J5kQ==
+X-Gm-Message-State: ANhLgQ3ah3MWZZV1ga0ZBc2lxR3nXosnYn9QPf2ncnWACmhQOHx9W4uA
+ VpIiRDfP6PYyBgCxqvqaINdxVLcifDu2y4vHI+l8hWQk
+X-Google-Smtp-Source: ADFU+vtbO6Q/BerUcDBUWYH0U0RbplLyV39qIKZ89GEDMDCrbfOB8AaWZ292EAEethlK9RTtw3YiZALvVqfI+nicEVU=
+X-Received: by 2002:a67:e09a:: with SMTP id f26mr5531613vsl.70.1584051509540; 
+ Thu, 12 Mar 2020 15:18:29 -0700 (PDT)
 MIME-Version: 1.0
-References: <20200312145900.2054-1-zhiwei_liu@c-sky.com>
- <20200312145900.2054-5-zhiwei_liu@c-sky.com>
- <CAKmqyKOA2xH+wCZ2L1TGDoL+3kfdEVGFKcqARua_e7GdN_iTuQ@mail.gmail.com>
- <ae6e17bd-bd61-2365-1451-da4a05b82ee1@c-sky.com>
-In-Reply-To: <ae6e17bd-bd61-2365-1451-da4a05b82ee1@c-sky.com>
+References: <c827880a47774cd3a6bcd59b79657f380da11d5d.1583284602.git.alistair.francis@wdc.com>
+ <e8498727-03f8-7e04-efd3-c04763dcbfac@linaro.org>
+In-Reply-To: <e8498727-03f8-7e04-efd3-c04763dcbfac@linaro.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 12 Mar 2020 15:07:41 -0700
-Message-ID: <CAKmqyKOjeB3cnypSjm46WrfYAkwN9Uxonf0cKyCERKs5hcc-CA@mail.gmail.com>
-Subject: Re: [PATCH v5 04/60] target/riscv: add vector configure instruction
-To: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Cc: Richard Henderson <richard.henderson@linaro.org>,
- Chih-Min Chao <chihmin.chao@sifive.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>, wenmeng_zhang@c-sky.com,
- wxy194768@alibaba-inc.com, guoren@linux.alibaba.com, 
+Date: Thu, 12 Mar 2020 15:10:36 -0700
+Message-ID: <CAKmqyKOnb+CpnugoUkeL_kabyiCfZCmWyNF9uV5GUBT_pek=0g@mail.gmail.com>
+Subject: Re: [PATCH v1 1/1] target/riscv: Don't set write permissions on dirty
+ PTEs
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: Alistair Francis <alistair.francis@wdc.com>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::a41
+X-Received-From: 2607:f8b0:4864:20::e41
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -71,83 +68,70 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Mar 2020 22:15:41 -0000
+X-List-Received-Date: Thu, 12 Mar 2020 22:18:40 -0000
 
-On Thu, Mar 12, 2020 at 3:00 PM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
+On Wed, Mar 4, 2020 at 9:34 AM Richard Henderson
+<richard.henderson@linaro.org> wrote:
 >
+> On 3/3/20 5:16 PM, Alistair Francis wrote:
+> > The RISC-V spec specifies that when a write happens and the D bit is
+> > clear the implementation will set the bit in the PTE. It does not
+> > describe that the PTE being dirty means that we should provide write
+> > access. This patch removes the write access granted to pages when the
+> > dirty bit is set.
 >
+> The W bit by itself says we should provide write access.
 >
-> On 2020/3/13 5:23, Alistair Francis wrote:
-> > On Thu, Mar 12, 2020 at 8:07 AM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
-> >> vsetvl and vsetvli are two configure instructions for vl, vtype. TB flags
-> >> should update after configure instructions. The (ill, lmul, sew ) of vtype
-> >> and the bit of (VSTART == 0 && VL == VLMAX) will be placed within tb_flags.
-> >>
-> >> Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
-> >> ---
-> >>   target/riscv/Makefile.objs              |  2 +-
-> >>   target/riscv/cpu.h                      | 63 ++++++++++++++++++----
-> >>   target/riscv/helper.h                   |  2 +
-> >>   target/riscv/insn32.decode              |  5 ++
-> >>   target/riscv/insn_trans/trans_rvv.inc.c | 69 +++++++++++++++++++++++++
-> >>   target/riscv/translate.c                | 17 +++++-
-> >>   target/riscv/vector_helper.c            | 53 +++++++++++++++++++
-> >>   7 files changed, 199 insertions(+), 12 deletions(-)
-> >>   create mode 100644 target/riscv/insn_trans/trans_rvv.inc.c
-> >>   create mode 100644 target/riscv/vector_helper.c
-> >>
+> It is an implementation detail that we *withhold* write access when D is clear
+> (etc) so that we can trap, so that we can properly set D in the future.
+>
+> The page table walk associated with a read is allowed to cache all of the
+> information it finds in the PTE during that walk.  Which includes the D bit.
+> If D is set, then we do not need to set it in future, so we do not need to
+> trap, so we can immediately honor the W bit.
 
-...
+Ok, I understand what is going on here now. I agree that my patch is wrong.
 
-> >> +    gen_get_gpr(s2, a->rs2);
-> >> +    gen_helper_vsetvl(dst, cpu_env, s1, s2);
-> >> +    gen_set_gpr(a->rd, dst);
-> >> +    tcg_gen_movi_tl(cpu_pc, ctx->pc_succ_insn);
-> >> +    exit_tb(ctx);
-> > Why does this
-> As the vsetvl will change vtype, the tb flags of the instructions next
-> to the vsetvl
-> will change(some tb flags  are from vtype, like LMUL).
-> >
-> >> +    ctx->base.is_jmp = DISAS_NORETURN;
-> >> +
-> >> +    tcg_temp_free(s1);
-> >> +    tcg_temp_free(s2);
-> >> +    tcg_temp_free(dst);
-> >> +    return true;
-> >> +}
-> >> +
-> >> +static bool trans_vsetvli(DisasContext *ctx, arg_vsetvli * a)
-> >> +{
-> >> +    TCGv s1, s2, dst;
-> >> +    s2 = tcg_const_tl(a->zimm);
-> >> +    dst = tcg_temp_new();
-> >> +
-> >> +    /* Using x0 as the rs1 register specifier, encodes an infinite AVL */
-> >> +    if (a->rs1 == 0) {
-> >> +        /* As the mask is at least one bit, RV_VLEN_MAX is >= VLMAX */
-> >> +        s1 = tcg_const_tl(RV_VLEN_MAX);
-> >> +    } else {
-> >> +        s1 = tcg_temp_new();
-> >> +        gen_get_gpr(s1, a->rs1);
-> >> +    }
-> >> +    gen_helper_vsetvl(dst, cpu_env, s1, s2);
-> >> +    gen_set_gpr(a->rd, dst);
-> >> +    gen_goto_tb(ctx, 0, ctx->pc_succ_insn);
-> > Need to be different to this?
-> Although vsetvli will also change vtype, the vtype will be a constant.
-> So the tb flags of  the instruction(A) next to
-> it will always be same with the tb flags at first translation of A.
-> That's why gen_goto_tb is enough.
+>
+> If the guest changes R/W/X within a PTE (e.g. for mprotect), it is obvious that
+> a TLB flush for that page must be done.  It is no different if the guest
+> changes A/D (e.g. for swapping).
 
-Ah ok. Makes sense.
+Agreed.
 
-Once you fix the one nit pick I had you can add my reviewed by:
+>
+> > Setting write permission on dirty PTEs results in userspace inside a
+> > Hypervisor guest (VU) becoming corrupted. This appears to be because it
+> > ends up with write permission in the second stage translation in cases
+> > where we aren't doing a store.
+>
+> You've not really given any more information than last time this patch came around.
+>
+> I still think this must be a guest (or nested guest) bug related to clearing
+> PTE bits and failing to flush the TLB properly.
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+It think so as well now. I have changed the Linux guest and Hypervisor
+to be very aggressive with flushing but still can't get guest user
+space working. I'll keep digging and see if I can figure out what's
+going on.
+
+>
+> I don't see how it could be a qemu tlb flushing bug.  The only primitive,
+> sfence.vma, is quite heavy-handed and explicitly local to the thread.
+
+Yes, both sfence and hfence flush all TLBs, so that doesn't seem to be
+the problem.
+
+>
+> It may be a bug in qemu's implementation of second stage paging.  Which is not
+> yet upstream, and I haven't gone digging in the archives to find the patch.
+
+It's upstream now, I have double checked it though and I can't see
+anything wrong.
 
 Alistair
 
 >
-> Zhiwei
+>
+> r~
 
