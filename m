@@ -1,62 +1,71 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jCWA5-00011J-9e
-	for mharc-qemu-riscv@gnu.org; Thu, 12 Mar 2020 18:18:41 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:57102)
+	id 1jCWCg-0006cB-Ec
+	for mharc-qemu-riscv@gnu.org; Thu, 12 Mar 2020 18:21:22 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59681)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <alistair23@gmail.com>) id 1jCWA3-0000wf-DO
- for qemu-riscv@nongnu.org; Thu, 12 Mar 2020 18:18:40 -0400
+ (envelope-from <prvs=33364f698=alistair.francis@wdc.com>)
+ id 1jCWCd-0006UT-OG
+ for qemu-riscv@nongnu.org; Thu, 12 Mar 2020 18:21:20 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1jCWA1-0002vC-Rv
- for qemu-riscv@nongnu.org; Thu, 12 Mar 2020 18:18:39 -0400
-Received: from mail-vs1-xe41.google.com ([2607:f8b0:4864:20::e41]:41870)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1jCW9x-0002ec-78; Thu, 12 Mar 2020 18:18:33 -0400
-Received: by mail-vs1-xe41.google.com with SMTP id k188so4803610vsc.8;
- Thu, 12 Mar 2020 15:18:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=YTsxPebLhJOXvZgqRuXZJBBSNDFAxW3YxtsYuyeObAs=;
- b=YiA/bHdiT7mesIIZfb+iirFJhcFhfSLKIybPQWPf1T9t6BK5iPkyPlcm28DUqA5S9I
- iVTCV4EC3eKpr/RRq+7dwOqlkFgI7L+7rsApiyBxUQwE/4GiFhzPOuuAo9I/nu6BXrSk
- dZzLZt7SD67vJs4PyGco8o4cmDqPCBsCpFTWJXgJGFGuJPjLq78kJ73AyU7+FbU04LEe
- XL4kmbDdvWZAJ31aNYxT4VVmNi8y7lPoUp5e9I744biiNdDqFviLkzhlo7667Rd6O9aS
- 4TUl31RDnsoiZDYNQe2YJ+GwYDdIRdNzYDhQU4BvJ0zMTRjrkSA5pXm1KyMgzajZCenO
- cHGw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=YTsxPebLhJOXvZgqRuXZJBBSNDFAxW3YxtsYuyeObAs=;
- b=Zx5hPA7WMD0UNVjJTXgS+h1fTYIYXYy5kaEzAMfC8DfBI1Vewk0xCpj/xBdqw4i+0m
- 3WcR68xZAY4aJ8b2F9GpIuXTU6z4+8Lp+MU9zbodkRLYrjioyJeaKkGM4FEXa4J0suNl
- yM8fpOjua4bvpJb+Mj2YOoFUL3WntWGJ32DJ9ryz3x3FhyO6UihfsD4fW6rQklhpmZ/t
- etlNZ8dEY3WQ6wlXBHWgKVfjD9hOrkNaLAYmxU+YcDJ5Qx3Mdj9d1kONs2oPqq+G/IQl
- ISb3otcO5p25cMhSQaX4mtHPi9epWRo5JO4U1R1/IIkP3RcMeG1ujddSWB7MHBHgWncE
- J5kQ==
-X-Gm-Message-State: ANhLgQ3ah3MWZZV1ga0ZBc2lxR3nXosnYn9QPf2ncnWACmhQOHx9W4uA
- VpIiRDfP6PYyBgCxqvqaINdxVLcifDu2y4vHI+l8hWQk
-X-Google-Smtp-Source: ADFU+vtbO6Q/BerUcDBUWYH0U0RbplLyV39qIKZ89GEDMDCrbfOB8AaWZ292EAEethlK9RTtw3YiZALvVqfI+nicEVU=
-X-Received: by 2002:a67:e09a:: with SMTP id f26mr5531613vsl.70.1584051509540; 
- Thu, 12 Mar 2020 15:18:29 -0700 (PDT)
+ (envelope-from <prvs=33364f698=alistair.francis@wdc.com>)
+ id 1jCWCc-0006wp-D8
+ for qemu-riscv@nongnu.org; Thu, 12 Mar 2020 18:21:19 -0400
+Received: from esa5.hgst.iphmx.com ([216.71.153.144]:2609)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <prvs=33364f698=alistair.francis@wdc.com>)
+ id 1jCWCZ-0006lB-61; Thu, 12 Mar 2020 18:21:16 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1584051675; x=1615587675;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=GoZJQchoYXwF0R/sjN4Tl3zNom6stxJDG2pdHtkur7k=;
+ b=Sm4ynYFaI1AOlrqHkmj/KAVbeboptylVAxBS791O+Lcntb2jMo9qgbP8
+ SMrG8vdNfJZhISSTqxpkp3seNIh4dKH4X3jRnjzPvE7nTFN0sFHCLPw0J
+ t3Z8NemihaBZNlIR0U+cp2vkRrh53Q0eAfwAiYHIjtLx9KjLCUf3pVsm6
+ m/QwhprA+yXW8FmL0bZdrpc7TmLY0pgursg0wcLwxi/1tysHhEuSyEpfq
+ VDVS6ZSNDIdRzmGkdgOzdB7kDXo4eR29nnMMds74zCa/UUjoToPuUKpZd
+ hBdBKjXVVceePgZd8vKp8XEE84jgw16t+xLaK89+tiehDhM5Mmgzqgfhe w==;
+IronPort-SDR: Lut0Vvo0Itg0meOTDwZySzO9m6Ka7HzS4MK20d2qibPBbG5pMsZV9RCeRLOqaB7Bc/GIdUGjz1
+ pIOE7gsqFkdOiwOoJ0ACRFUoj4QsPBbe7C0cLTlo/mGqD3iNbEX+mbHmtwrqPl6olCxUfp4v3L
+ XQDASxu+6cpxHxjLu9sn2P4DP6PlgH6TbBDjEkmx3VZVwItoNDh0a2q9EQcB/5ER32Oa6n8JQj
+ oBqCkBFgHc1b8reFAmmTTWjx4SoQMi77ICSSsM4RwkTaJ9wO5LXVi4Cx4rH3aEqb76TMr2wJeA
+ hqs=
+X-IronPort-AV: E=Sophos;i="5.70,546,1574092800"; d="scan'208";a="132788028"
+Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com)
+ ([199.255.45.15])
+ by ob1.hgst.iphmx.com with ESMTP; 13 Mar 2020 06:21:11 +0800
+IronPort-SDR: s1XmOwgL9Bkb433GEYu0UKihbalBwGFClMJJKKI7gZb6sCF+yE2Wmq3aWqeNP7Jz7FxKYgs76U
+ V8ndd/ww4rrAZfd5t+A4qKKQfGoDsBK4kOqcXj1sYOa7IZx1MlgijUmV5WSIg3/Gr7mnkHiBYO
+ 4SpkosqkNl8B1+vaO6Xe4eDDzcfl4mK2yuLVdUzLKvggfFZ1hKgbRuubkMB0sHOtwEiQP95rfE
+ a1ADYKp9ed2E1gdcI+xHke8Q7cYPKlTs4d3I6aZyho+dNoMoKa5viiRdk2Ef7NufGhY+abE2lU
+ 5qiMwxhVQrA+83f2uIsvcVD/
+Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
+ by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 12 Mar 2020 15:12:47 -0700
+IronPort-SDR: oWdRiyV84L1wDmfi0VGDCA6ns5Kvgki3TS1czE0nd50pSpEua5he7x0+eWcqywS0z5q6YJIEHb
+ 8MioLV+0E4orcU2oqdrv613EL5DIz0AeAyE5wmT+jbwA5GqHbzmHPkWy3KVeUc6j+Syn5KrHoL
+ hAT3t6SBi5Scc6Cs8dV3Q6/hDfVj1mtRPM07buU7K/SjS/oF2SR09PjAaJs6xjxiU281+WTT4I
+ lvqQ+ULkTHcvvGUnuV+fq6QRoNIv3UARksPijwcihNwP32GnLEtr7hsKLHUuO1FIUll2zdgosv
+ UmI=
+WDCIronportException: Internal
+Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
+ risc6-mainframe.int.fusionio.com) ([10.196.158.235])
+ by uls-op-cesaip02.wdc.com with ESMTP; 12 Mar 2020 15:21:11 -0700
+From: Alistair Francis <alistair.francis@wdc.com>
+To: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, laurent@vivier.eu,
+ aleksandar.m.mail@gmail.com
+Cc: palmer@dabbelt.com,
+	alistair.francis@wdc.com,
+	alistair23@gmail.com
+Subject: [PATCH v7 0/4]  linux-user: generate syscall_nr.sh for RISC-V
+Date: Thu, 12 Mar 2020 15:13:45 -0700
+Message-Id: <cover.1584051142.git.alistair.francis@wdc.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <c827880a47774cd3a6bcd59b79657f380da11d5d.1583284602.git.alistair.francis@wdc.com>
- <e8498727-03f8-7e04-efd3-c04763dcbfac@linaro.org>
-In-Reply-To: <e8498727-03f8-7e04-efd3-c04763dcbfac@linaro.org>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 12 Mar 2020 15:10:36 -0700
-Message-ID: <CAKmqyKOnb+CpnugoUkeL_kabyiCfZCmWyNF9uV5GUBT_pek=0g@mail.gmail.com>
-Subject: Re: [PATCH v1 1/1] target/riscv: Don't set write permissions on dirty
- PTEs
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: Alistair Francis <alistair.francis@wdc.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>
-Content-Type: text/plain; charset="UTF-8"
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2607:f8b0:4864:20::e41
+Content-Transfer-Encoding: 8bit
+X-detected-operating-system: by eggs.gnu.org: FreeBSD 9.x [fuzzy]
+X-Received-From: 216.71.153.144
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -68,70 +77,44 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Mar 2020 22:18:40 -0000
+X-List-Received-Date: Thu, 12 Mar 2020 22:21:21 -0000
 
-On Wed, Mar 4, 2020 at 9:34 AM Richard Henderson
-<richard.henderson@linaro.org> wrote:
->
-> On 3/3/20 5:16 PM, Alistair Francis wrote:
-> > The RISC-V spec specifies that when a write happens and the D bit is
-> > clear the implementation will set the bit in the PTE. It does not
-> > describe that the PTE being dirty means that we should provide write
-> > access. This patch removes the write access granted to pages when the
-> > dirty bit is set.
->
-> The W bit by itself says we should provide write access.
->
-> It is an implementation detail that we *withhold* write access when D is clear
-> (etc) so that we can trap, so that we can properly set D in the future.
->
-> The page table walk associated with a read is allowed to cache all of the
-> information it finds in the PTE during that walk.  Which includes the D bit.
-> If D is set, then we do not need to set it in future, so we do not need to
-> trap, so we can immediately honor the W bit.
+This series updates the RISC-V syscall_nr.sh based on the 5.5 kernel.
 
-Ok, I understand what is going on here now. I agree that my patch is wrong.
+There are two parts to this. One is just adding the new syscalls, the
+other part is updating the RV32 syscalls to match the fact that RV32 is
+a 64-bit time_t architectures (y2038) safe.
 
->
-> If the guest changes R/W/X within a PTE (e.g. for mprotect), it is obvious that
-> a TLB flush for that page must be done.  It is no different if the guest
-> changes A/D (e.g. for swapping).
+We need to make some changes to syscall.c to avoid warnings/errors
+during compliling with the new syscall.
 
-Agreed.
+I did some RV32 user space testing after applying these patches. I ran the
+glibc testsuite in userspace and I don't see any regressions.
 
->
-> > Setting write permission on dirty PTEs results in userspace inside a
-> > Hypervisor guest (VU) becoming corrupted. This appears to be because it
-> > ends up with write permission in the second stage translation in cases
-> > where we aren't doing a store.
->
-> You've not really given any more information than last time this patch came around.
->
-> I still think this must be a guest (or nested guest) bug related to clearing
-> PTE bits and failing to flush the TLB properly.
+v7:
+ - Update futuex_time64 support to work correctly
+v6:
+ - Split out futex patch and make it more robust
+v5:
+ - Addres comments raised on v4
+   - Don't require 64-bit host for * _time64 functions
 
-It think so as well now. I have changed the Linux guest and Hypervisor
-to be very aggressive with flushing but still can't get guest user
-space working. I'll keep digging and see if I can figure out what's
-going on.
+Alistair Francis (4):
+  linux-user: Protect more syscalls
+  linux-user/syscall: Add support for clock_gettime64/clock_settime64
+  linux-user: Support futex_time64
+  linux-user/riscv: Update the syscall_nr's to the 5.5 kernel
 
->
-> I don't see how it could be a qemu tlb flushing bug.  The only primitive,
-> sfence.vma, is quite heavy-handed and explicitly local to the thread.
+ linux-user/riscv/syscall32_nr.h | 295 +++++++++++++++++++++++++++++++
+ linux-user/riscv/syscall64_nr.h | 301 ++++++++++++++++++++++++++++++++
+ linux-user/riscv/syscall_nr.h   | 294 +------------------------------
+ linux-user/strace.c             |   2 +
+ linux-user/syscall.c            | 247 ++++++++++++++++++++++++--
+ 5 files changed, 834 insertions(+), 305 deletions(-)
+ create mode 100644 linux-user/riscv/syscall32_nr.h
+ create mode 100644 linux-user/riscv/syscall64_nr.h
 
-Yes, both sfence and hfence flush all TLBs, so that doesn't seem to be
-the problem.
+-- 
+2.25.1
 
->
-> It may be a bug in qemu's implementation of second stage paging.  Which is not
-> yet upstream, and I haven't gone digging in the archives to find the patch.
-
-It's upstream now, I have double checked it though and I can't see
-anything wrong.
-
-Alistair
-
->
->
-> r~
 
