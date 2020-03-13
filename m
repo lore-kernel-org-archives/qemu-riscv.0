@@ -1,58 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jCpC3-0001Iz-GY
-	for mharc-qemu-riscv@gnu.org; Fri, 13 Mar 2020 14:37:59 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:54789)
+	id 1jCpC9-0001Wg-KO
+	for mharc-qemu-riscv@gnu.org; Fri, 13 Mar 2020 14:38:05 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:54978)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <philmd@redhat.com>) id 1jCpC0-0001Ax-D9
- for qemu-riscv@nongnu.org; Fri, 13 Mar 2020 14:37:57 -0400
+ (envelope-from <philmd@redhat.com>) id 1jCpC5-0001PY-TZ
+ for qemu-riscv@nongnu.org; Fri, 13 Mar 2020 14:38:03 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <philmd@redhat.com>) id 1jCpBy-0004kv-Vj
- for qemu-riscv@nongnu.org; Fri, 13 Mar 2020 14:37:56 -0400
-Received: from us-smtp-delivery-1.mimecast.com ([207.211.31.120]:52507
- helo=us-smtp-1.mimecast.com)
+ (envelope-from <philmd@redhat.com>) id 1jCpC4-00051w-PO
+ for qemu-riscv@nongnu.org; Fri, 13 Mar 2020 14:38:01 -0400
+Received: from us-smtp-1.mimecast.com ([205.139.110.61]:24195
+ helo=us-smtp-delivery-1.mimecast.com)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <philmd@redhat.com>) id 1jCpBy-0004kD-QW
- for qemu-riscv@nongnu.org; Fri, 13 Mar 2020 14:37:54 -0400
+ (Exim 4.71) (envelope-from <philmd@redhat.com>) id 1jCpC4-00050P-LU
+ for qemu-riscv@nongnu.org; Fri, 13 Mar 2020 14:38:00 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1584124674;
+ s=mimecast20190719; t=1584124680;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=g6kDoneuZrMhDVCRmujvDk3IfPp3E6PHImkHQw061IY=;
- b=N3NLwkeLsHolGeQ7T3a6eo35xVaOMqEnSRhIHXXBtV7e0grtkpd6taBiMaL9q6/81M1R3r
- aTgI4fUeevRetrPB4sVpYEZvQ7JOlrHIm+ALrrW1HCplM90uWRKGl/dpUiTjnvI8HjogJU
- EuZnqVAYipAROp6hfggn2TKXLQJEWGA=
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-331-Ot5aXAhYNlOH9Lc5EJm-3g-1; Fri, 13 Mar 2020 14:37:53 -0400
-X-MC-Unique: Ot5aXAhYNlOH9Lc5EJm-3g-1
-Received: by mail-wr1-f72.google.com with SMTP id 31so4761211wrq.0
- for <qemu-riscv@nongnu.org>; Fri, 13 Mar 2020 11:37:52 -0700 (PDT)
+ bh=JMDYkzt1lBUpYc+oo4cCc5AD+w7GESjUgDgAA86mAF8=;
+ b=aduHS4nk2CHl9mdgr5REBiEntNPGKcgOKOuZftgBgJCILfspbdG/mbVZFScpR+TBN0YQ48
+ a0AUpvg8xQoyqp+LC0TigknhgeHCGUtnhlf/AI5t9ozfhc5C8qeHd6na+SYjn5XOiuPDQg
+ DNAtyuHNDl9sHqkEhOXrihaq7oru7R4=
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-226-mLVvVeTBPxWWeWc1-JiPlw-1; Fri, 13 Mar 2020 14:37:58 -0400
+X-MC-Unique: mLVvVeTBPxWWeWc1-JiPlw-1
+Received: by mail-wr1-f70.google.com with SMTP id w11so4708060wrp.20
+ for <qemu-riscv@nongnu.org>; Fri, 13 Mar 2020 11:37:58 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=iYsZ3FxrwnOLNhhBs5OQJLjNJeFk+YWQzk3XZ1uOqWs=;
- b=JL48snp2O2+RWBTVeJnmQUUsdnuX3g3WHf47ky2NBuV/8oHDmEtnwtJH8RxeM52Hcc
- UxOBPeMrsE3Pj8wuxlfCXzcIQzF6KA105rYXBsYEalsbRH5vz6DG/b6UMwyjbK1+KLnW
- nNBPXdKJ8kZmK2X03K76lTZRumLBfPfiDMSdRpIkuN/R6TpPqgUyFQRjTWIRFsXAf2I6
- hZNDMTGH1l0qi3XX/jqJOSn/EYTPSc4Ncsu9aQw37wYFgnwcOwytfrdGungLC54A1+lQ
- jd5O1Lz5NBSEPC0BmCroXx8KD5B1EjE6hI7m7l93gaySSZl7v38h8NTdWjXLM6Bv/YCV
- 1+sw==
-X-Gm-Message-State: ANhLgQ1Fj1I18OloIYlpo51/WOOR4WZ2eaxWkqviWJDo7xmGz9R9oNAY
- tmL64RblPGsu+kU0IkVgArClkUVH6IYCtgodFKa5Byvb8AHRrnu0ryOz3zP+gWp1erhMNDBpfPf
- eh1bIQEaOb2QpL9o=
-X-Received: by 2002:a5d:574e:: with SMTP id q14mr18374362wrw.330.1584124671735; 
- Fri, 13 Mar 2020 11:37:51 -0700 (PDT)
-X-Google-Smtp-Source: ADFU+vuzB9FhPCxZc8c+0Bt5wwNy9uUOC87j76T5iMKQTrkMJKvPhtuZkOqXgFb/ot1hwBoMX14+LQ==
-X-Received: by 2002:a5d:574e:: with SMTP id q14mr18374340wrw.330.1584124671486; 
- Fri, 13 Mar 2020 11:37:51 -0700 (PDT)
+ bh=IUJwu5mIghgObyHS7qfpHw05F+W1fo3IIale5ma1lsg=;
+ b=a9hDNOq0MTTGWFOE6vd0WVlQwjv/J9vqPQpVODNoPGZO/clycDF5bkbCiI0uksdarS
+ Q6WjAKiiObdpTiMz3HuD1vin4xqIO/pwpTLT7ZS2zRXEF986OztUnXH/eawWJXh0h+Bv
+ c8zfLJtbm7RiKFojPPxaR8TZHgOQUu/OtDWX6n10pdda9mgcqhcrRIMF4smD6nRXR7IV
+ tP2jUwuMFN7Ss7UxT/AXIkTJYufrQJSIWC5JoWlqRSlxfHBWl5tbWfCxTAnWZCIrB+QQ
+ 3YrfOcFhf8WUBeWsvP5RPyhv4P9S5MTp9beR+OkVoNjrbrGKzisBiki7fh2PFeIBimJp
+ AbUg==
+X-Gm-Message-State: ANhLgQ0X+oMj88EqBKeawJo4nNknj8Ca9NS76pnWk8o5ygaGMOfthpi3
+ yyZ4E5B7Hdpt9ecDP6ICXZC6bHt1CdWF92qoI8+kq6+3EOmjW/YMOJoIMXPBuwEYDprgbcheViz
+ 5pn3UnwOS0dxd/pA=
+X-Received: by 2002:a05:6000:12d2:: with SMTP id
+ l18mr18412640wrx.240.1584124676640; 
+ Fri, 13 Mar 2020 11:37:56 -0700 (PDT)
+X-Google-Smtp-Source: ADFU+vuQgtDba68GKbgL+OtxixjWPY6YDPO3kDmuQFbZyGRp3cq7WJ2+l5hb5NCjjxv5ygLu7MTvmw==
+X-Received: by 2002:a05:6000:12d2:: with SMTP id
+ l18mr18412615wrx.240.1584124676447; 
+ Fri, 13 Mar 2020 11:37:56 -0700 (PDT)
 Received: from x1w.redhat.com (47.red-88-21-205.staticip.rima-tde.net.
  [88.21.205.47])
- by smtp.gmail.com with ESMTPSA id g129sm19273217wmg.12.2020.03.13.11.37.50
+ by smtp.gmail.com with ESMTPSA id l18sm10978168wrr.17.2020.03.13.11.37.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Mar 2020 11:37:51 -0700 (PDT)
+ Fri, 13 Mar 2020 11:37:55 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: David Hildenbrand <david@redhat.com>, Laurent Vivier <laurent@vivier.eu>,
@@ -68,10 +70,10 @@ Cc: David Hildenbrand <david@redhat.com>, Laurent Vivier <laurent@vivier.eu>,
  Peter Maydell <peter.maydell@linaro.org>,
  Eduardo Habkost <ehabkost@redhat.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
-Subject: [PATCH 11/14] target: Restrict write_elfXX_note() handlers to
+Subject: [PATCH 12/14] target/i386: Restrict CpuClass::get_crash_info() to
  system-mode
-Date: Fri, 13 Mar 2020 19:36:49 +0100
-Message-Id: <20200313183652.10258-12-philmd@redhat.com>
+Date: Fri, 13 Mar 2020 19:36:50 +0100
+Message-Id: <20200313183652.10258-13-philmd@redhat.com>
 X-Mailer: git-send-email 2.21.1
 In-Reply-To: <20200313183652.10258-1-philmd@redhat.com>
 References: <20200313183652.10258-1-philmd@redhat.com>
@@ -82,8 +84,7 @@ Content-Type: text/plain; charset=UTF-8;
 	text/plain; charset="utf-8"
 Content-Transfer-Encoding: quoted-printable
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
- [fuzzy]
-X-Received-From: 207.211.31.120
+X-Received-From: 205.139.110.61
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -95,131 +96,65 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Mar 2020 18:37:58 -0000
+X-List-Received-Date: Fri, 13 Mar 2020 18:38:04 -0000
 
 Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
 ---
- target/arm/cpu.h                | 10 +++++-----
- target/i386/cpu.h               | 18 +++++++++---------
- target/ppc/cpu.h                |  2 --
- target/s390x/internal.h         |  3 ++-
- target/ppc/translate_init.inc.c |  2 --
- 5 files changed, 16 insertions(+), 19 deletions(-)
+ target/i386/cpu.c | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-diff --git a/target/arm/cpu.h b/target/arm/cpu.h
-index 4ffd991b6f..8a22212521 100644
---- a/target/arm/cpu.h
-+++ b/target/arm/cpu.h
-@@ -958,6 +958,11 @@ void arm_cpu_post_init(Object *obj);
- uint64_t arm_cpu_mp_affinity(int idx, uint8_t clustersz);
+diff --git a/target/i386/cpu.c b/target/i386/cpu.c
+index 92fafa2659..a84553e50c 100644
+--- a/target/i386/cpu.c
++++ b/target/i386/cpu.c
+@@ -6778,6 +6778,7 @@ static void x86_cpu_register_feature_bit_props(X86CPU=
+ *cpu,
+     x86_cpu_register_bit_prop(cpu, name, w, bitnr);
+ }
 =20
- #ifndef CONFIG_USER_ONLY
-+int arm_cpu_write_elf64_note(WriteCoreDumpFunction f, CPUState *cs,
-+                             int cpuid, void *opaque);
-+int arm_cpu_write_elf32_note(WriteCoreDumpFunction f, CPUState *cs,
-+                             int cpuid, void *opaque);
-+
- extern const VMStateDescription vmstate_arm_cpu;
- #endif
-=20
-@@ -982,11 +987,6 @@ int arm_gen_dynamic_xml(CPUState *cpu);
-  */
- const char *arm_gdb_get_dynamic_xml(CPUState *cpu, const char *xmlname);
-=20
--int arm_cpu_write_elf64_note(WriteCoreDumpFunction f, CPUState *cs,
--                             int cpuid, void *opaque);
--int arm_cpu_write_elf32_note(WriteCoreDumpFunction f, CPUState *cs,
--                             int cpuid, void *opaque);
--
- #ifdef TARGET_AARCH64
- int aarch64_cpu_gdb_read_register(CPUState *cpu, uint8_t *buf, int reg);
- int aarch64_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
-diff --git a/target/i386/cpu.h b/target/i386/cpu.h
-index 576f309bbf..f25fe5fc7c 100644
---- a/target/i386/cpu.h
-+++ b/target/i386/cpu.h
-@@ -1738,6 +1738,15 @@ struct X86CPU {
-=20
-=20
- #ifndef CONFIG_USER_ONLY
-+int x86_cpu_write_elf64_note(WriteCoreDumpFunction f, CPUState *cpu,
-+                             int cpuid, void *opaque);
-+int x86_cpu_write_elf32_note(WriteCoreDumpFunction f, CPUState *cpu,
-+                             int cpuid, void *opaque);
-+int x86_cpu_write_elf64_qemunote(WriteCoreDumpFunction f, CPUState *cpu,
-+                                 void *opaque);
-+int x86_cpu_write_elf32_qemunote(WriteCoreDumpFunction f, CPUState *cpu,
-+                                 void *opaque);
-+
- extern VMStateDescription vmstate_x86_cpu;
- #endif
-=20
-@@ -1749,15 +1758,6 @@ void x86_cpu_do_interrupt(CPUState *cpu);
- bool x86_cpu_exec_interrupt(CPUState *cpu, int int_req);
- int x86_cpu_pending_interrupt(CPUState *cs, int interrupt_request);
-=20
--int x86_cpu_write_elf64_note(WriteCoreDumpFunction f, CPUState *cpu,
--                             int cpuid, void *opaque);
--int x86_cpu_write_elf32_note(WriteCoreDumpFunction f, CPUState *cpu,
--                             int cpuid, void *opaque);
--int x86_cpu_write_elf64_qemunote(WriteCoreDumpFunction f, CPUState *cpu,
--                                 void *opaque);
--int x86_cpu_write_elf32_qemunote(WriteCoreDumpFunction f, CPUState *cpu,
--                                 void *opaque);
--
- void x86_cpu_get_memory_mapping(CPUState *cpu, MemoryMappingList *list,
-                                 Error **errp);
-=20
-diff --git a/target/ppc/cpu.h b/target/ppc/cpu.h
-index b283042515..b9fb76d0b3 100644
---- a/target/ppc/cpu.h
-+++ b/target/ppc/cpu.h
-@@ -1225,12 +1225,10 @@ int ppc_cpu_gdb_write_register_apple(CPUState *cpu,=
- uint8_t *buf, int reg);
- #ifndef CONFIG_USER_ONLY
- void ppc_gdb_gen_spr_xml(PowerPCCPU *cpu);
- const char *ppc_gdb_get_dynamic_xml(CPUState *cs, const char *xml_name);
--#endif
- int ppc64_cpu_write_elf64_note(WriteCoreDumpFunction f, CPUState *cs,
-                                int cpuid, void *opaque);
- int ppc32_cpu_write_elf32_note(WriteCoreDumpFunction f, CPUState *cs,
-                                int cpuid, void *opaque);
--#ifndef CONFIG_USER_ONLY
- void ppc_cpu_do_system_reset(CPUState *cs);
- extern const VMStateDescription vmstate_ppc_cpu;
- #endif
-diff --git a/target/s390x/internal.h b/target/s390x/internal.h
-index d37816104d..dcbd8d2065 100644
---- a/target/s390x/internal.h
-+++ b/target/s390x/internal.h
-@@ -226,9 +226,10 @@ static inline hwaddr decode_basedisp_s(CPUS390XState *=
-env, uint32_t ipb,
- #define decode_basedisp_rs decode_basedisp_s
-=20
- /* arch_dump.c */
 +#if !defined(CONFIG_USER_ONLY)
- int s390_cpu_write_elf64_note(WriteCoreDumpFunction f, CPUState *cs,
-                               int cpuid, void *opaque);
--
+ static GuestPanicInformation *x86_cpu_get_crash_info(CPUState *cs)
+ {
+     X86CPU *cpu =3D X86_CPU(cs);
+@@ -6821,6 +6822,7 @@ static void x86_cpu_get_crash_info_qom(Object *obj, V=
+isitor *v,
+                                      errp);
+     qapi_free_GuestPanicInformation(panic_info);
+ }
++#endif /* !CONFIG_USER_ONLY */
+=20
+ static void x86_cpu_initfn(Object *obj)
+ {
+@@ -6866,8 +6868,10 @@ static void x86_cpu_initfn(Object *obj)
+                         x86_cpu_get_unavailable_features,
+                         NULL, NULL, NULL, &error_abort);
+=20
++#if !defined(CONFIG_USER_ONLY)
+     object_property_add(obj, "crash-information", "GuestPanicInformation",
+                         x86_cpu_get_crash_info_qom, NULL, NULL, NULL, NULL=
+);
 +#endif
 =20
- /* cc_helper.c */
- const char *cc_name(enum cc_op cc_op);
-diff --git a/target/ppc/translate_init.inc.c b/target/ppc/translate_init.in=
-c.c
-index 53995f62ea..768ec18a28 100644
---- a/target/ppc/translate_init.inc.c
-+++ b/target/ppc/translate_init.inc.c
-@@ -10902,8 +10902,6 @@ static void ppc_cpu_class_init(ObjectClass *oc, voi=
-d *data)
- #ifndef CONFIG_USER_ONLY
-     cc->get_phys_page_debug =3D ppc_cpu_get_phys_page_debug;
-     cc->vmsd =3D &vmstate_ppc_cpu;
--#endif
--#if defined(CONFIG_SOFTMMU)
-     cc->write_elf64_note =3D ppc64_cpu_write_elf64_note;
-     cc->write_elf32_note =3D ppc32_cpu_write_elf32_note;
+     for (w =3D 0; w < FEATURE_WORDS; w++) {
+         int bitnr;
+@@ -7180,7 +7184,6 @@ static void x86_cpu_common_class_init(ObjectClass *oc=
+, void *data)
+     cc->cpu_exec_interrupt =3D x86_cpu_exec_interrupt;
  #endif
+     cc->dump_state =3D x86_cpu_dump_state;
+-    cc->get_crash_info =3D x86_cpu_get_crash_info;
+     cc->set_pc =3D x86_cpu_set_pc;
+     cc->synchronize_from_tb =3D x86_cpu_synchronize_from_tb;
+     cc->gdb_read_register =3D x86_cpu_gdb_read_register;
+@@ -7191,6 +7194,7 @@ static void x86_cpu_common_class_init(ObjectClass *oc=
+, void *data)
+     cc->asidx_from_attrs =3D x86_asidx_from_attrs;
+     cc->get_memory_mapping =3D x86_cpu_get_memory_mapping;
+     cc->get_phys_page_attrs_debug =3D x86_cpu_get_phys_page_attrs_debug;
++    cc->get_crash_info =3D x86_cpu_get_crash_info;
+     cc->write_elf64_note =3D x86_cpu_write_elf64_note;
+     cc->write_elf64_qemunote =3D x86_cpu_write_elf64_qemunote;
+     cc->write_elf32_note =3D x86_cpu_write_elf32_note;
 --=20
 2.21.1
 
