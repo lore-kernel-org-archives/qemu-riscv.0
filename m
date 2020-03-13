@@ -1,42 +1,76 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jCbMf-0007Dc-HL
-	for mharc-qemu-riscv@gnu.org; Thu, 12 Mar 2020 23:52:01 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:48109)
+	id 1jCcpz-0007lK-1P
+	for mharc-qemu-riscv@gnu.org; Fri, 13 Mar 2020 01:26:26 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59988)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <jiangyifei@huawei.com>) id 1jCbMS-0006y4-J6
- for qemu-riscv@nongnu.org; Thu, 12 Mar 2020 23:51:50 -0400
+ (envelope-from <richard.henderson@linaro.org>) id 1jCcpw-0007kp-Pl
+ for qemu-riscv@nongnu.org; Fri, 13 Mar 2020 01:26:21 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <jiangyifei@huawei.com>) id 1jCbMQ-0000jy-Kk
- for qemu-riscv@nongnu.org; Thu, 12 Mar 2020 23:51:48 -0400
-Received: from szxga05-in.huawei.com ([45.249.212.191]:3284 helo=huawei.com)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <jiangyifei@huawei.com>)
- id 1jCbMI-0000M6-93; Thu, 12 Mar 2020 23:51:38 -0400
-Received: from DGGEMS413-HUB.china.huawei.com (unknown [172.30.72.60])
- by Forcepoint Email with ESMTP id 72366771CD93184FE310;
- Fri, 13 Mar 2020 11:51:26 +0800 (CST)
-Received: from huawei.com (10.133.201.158) by DGGEMS413-HUB.china.huawei.com
- (10.3.19.213) with Microsoft SMTP Server id 14.3.487.0; Fri, 13 Mar 2020
- 11:51:19 +0800
-From: Yifei Jiang <jiangyifei@huawei.com>
-To: <qemu-devel@nongnu.org>, <qemu-riscv@nongnu.org>
-CC: <anup.patel@wdc.com>, <palmer@dabbelt.com>, <Alistair.Francis@wdc.com>,
- <sagark@eecs.berkeley.edu>, <kbastian@mail.uni-paderborn.de>,
- <victor.zhangxiaofeng@huawei.com>, <zhang.zhanghailiang@huawei.com>,
- <dengkai1@huawei.com>, <yinyipeng1@huawei.com>, Yifei Jiang
- <jiangyifei@huawei.com>
-Subject: [PATCH RFC 0/9] Add riscv64 kvm accel support
-Date: Fri, 13 Mar 2020 11:49:40 +0800
-Message-ID: <20200313034949.3028-1-jiangyifei@huawei.com>
-X-Mailer: git-send-email 2.23.0.windows.1
+ (envelope-from <richard.henderson@linaro.org>) id 1jCcpv-0004h1-L7
+ for qemu-riscv@nongnu.org; Fri, 13 Mar 2020 01:26:20 -0400
+Received: from mail-pl1-x641.google.com ([2607:f8b0:4864:20::641]:33171)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
+ id 1jCcpv-0004fB-DO
+ for qemu-riscv@nongnu.org; Fri, 13 Mar 2020 01:26:19 -0400
+Received: by mail-pl1-x641.google.com with SMTP id ay11so3690828plb.0
+ for <qemu-riscv@nongnu.org>; Thu, 12 Mar 2020 22:26:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=+e4fyTDy0r9KzAFfSiWr6DhKCoTvO7zjWFgRj7An7YQ=;
+ b=PzdIMajMaby/N9WxVfihw1viCtJ4LpuMMhd0qnhD7fCFwS+kw+T2TPOPxdUkfgRwzk
+ c9T3+e8YQwP6CT5K/kD/EHLvwR/qLqtwJttI9foZiq80qkmbq+i9xX9USVcZEYxZg/ew
+ kC9hN8uTa4FzOIl0tgX5T62yep3syMQI/O8rrWSLJhhrtgBWRAV7CD5bXorFyOCfaIrX
+ 4XEv5xAiZaNT8PS6heOEnaiXJvbNG92nQ/6ShlcoL9GOLyTYIGUgPLCFeMlgO1r4cCos
+ iW9JuNuSy+ZWCKm6ga8erbgZiIC4KWPbpUFMjnBcxb0m308pniZyK6zrK+QdO4igc8xI
+ yLrw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=+e4fyTDy0r9KzAFfSiWr6DhKCoTvO7zjWFgRj7An7YQ=;
+ b=hyilLswqA4lqivlvdDG1djdCNWideTAUpTyBgbBesNP1G88y9L5W41C1QTrfkzf+yT
+ qDlTm/hoVWo/S/gyHNmwWS284NX2p+xplGvUIWHdGgzOH3rHpV7/RhQP+a0y1HtsLKkb
+ Q2z75vld2Qe7TxbLZUrhbSvYX1Fztp6E44EXnPrpvp3lBGepZB5YJOQUGB8yBvx7nlqQ
+ 8EJYcb6SLHxdw5WOwbH9uMEDJv+qFGKRF2r9xJatrjde/nulUPUfF2sPhtbM33o+ln49
+ PMUSveo79hCU6YgQeIlFQZxSawTMXp54MKXYSTTmdBE3EcxbxSMKB+63n+fz8kbrymiI
+ 6c7A==
+X-Gm-Message-State: ANhLgQ2x3XNSUWz7s5HCQ6r5S73f3e13GhtwwN/YjI/xoK2X1ZRUYQaH
+ DT0iLn1eHOoniHJoQ/LQV7LrCg==
+X-Google-Smtp-Source: ADFU+vuWX8zs/99Ab7pYAT0ImUYzl5YtT4f5xYcMUKY9HwI0YsALMcvlAnOa56GibgU9iMyJb/wFzA==
+X-Received: by 2002:a17:90a:d103:: with SMTP id
+ l3mr7984625pju.116.1584077178258; 
+ Thu, 12 Mar 2020 22:26:18 -0700 (PDT)
+Received: from [192.168.1.11] (97-126-123-70.tukw.qwest.net. [97.126.123.70])
+ by smtp.gmail.com with ESMTPSA id
+ ep10sm10467049pjb.26.2020.03.12.22.26.16
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 12 Mar 2020 22:26:17 -0700 (PDT)
+Subject: Re: [PATCH v1 1/1] target/riscv: Don't set write permissions on dirty
+ PTEs
+To: Alistair Francis <alistair23@gmail.com>
+Cc: Alistair Francis <alistair.francis@wdc.com>,
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>
+References: <c827880a47774cd3a6bcd59b79657f380da11d5d.1583284602.git.alistair.francis@wdc.com>
+ <e8498727-03f8-7e04-efd3-c04763dcbfac@linaro.org>
+ <CAKmqyKOnb+CpnugoUkeL_kabyiCfZCmWyNF9uV5GUBT_pek=0g@mail.gmail.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+Message-ID: <47b0bc38-6384-9ab4-7c3e-d5ed405ea90d@linaro.org>
+Date: Thu, 12 Mar 2020 22:26:15 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.4.1
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Originating-IP: [10.133.201.158]
-X-CFilter-Loop: Reflected
-Content-Transfer-Encoding: quoted-printable
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
- [fuzzy]
-X-Received-From: 45.249.212.191
+In-Reply-To: <CAKmqyKOnb+CpnugoUkeL_kabyiCfZCmWyNF9uV5GUBT_pek=0g@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2607:f8b0:4864:20::641
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -48,84 +82,29 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Mar 2020 03:51:50 -0000
+X-List-Received-Date: Fri, 13 Mar 2020 05:26:21 -0000
 
-Hi,
+On 3/12/20 3:10 PM, Alistair Francis wrote:
+>> I still think this must be a guest (or nested guest) bug related to clearing
+>> PTE bits and failing to flush the TLB properly.
+> 
+> It think so as well now. I have changed the Linux guest and Hypervisor
+> to be very aggressive with flushing but still can't get guest user
+> space working. I'll keep digging and see if I can figure out what's
+> going on.
+> 
+>>
+>> I don't see how it could be a qemu tlb flushing bug.  The only primitive,
+>> sfence.vma, is quite heavy-handed and explicitly local to the thread.
+> 
+> Yes, both sfence and hfence flush all TLBs, so that doesn't seem to be
+> the problem.
 
-This series adds riscv64 kvm support, It is based on riscv_kvm_master
-branch at https://github.com/kvm-riscv/linux.
+Here's an idea: change the tlb_flush() calls to tlb_flush_all_cpus_synced().
 
-This series depends on above pending changes which haven't yet been
-accepted, so this QEMU patch series is blocked until that dependency
-has been dealt with, but is worth reviewing anyway.
-
-Several steps to use this:
-
-1. Build riscv64 emulation
-$ ./configure --target-list=3Driscv64-softmmu
-$ make -j$(nproc)
-
-2. Build kernel
-riscv_kvm_master branch at https://github.com/kvm-riscv/linux
-
-3. Build QEMU VM
-I cross build in riscv toolchain
-$ PKG_CONFIG_LIBDIR=3D<toolchain pkgconfig path>
-$ export PKG_CONFIG_SYSROOT_DIR=3D<toolchain sysroot path>
-$ ./configure --target-list=3Driscv64-softmmu --enable-kvm \
---cross-prefix=3Driscv64-linux-gnu- --disable-libiscsi --disable-glusterf=
-s \
---disable-libusb --disable-usb-redir --audio-drv-list=3D --disable-opengl=
- \
---disable-libxml2
-
-4. Start riscv64 emulation
-$ ./qemu-system-riscv64 -M virt -m 4096M -cpu rv64,x-h=3Dtrue -nographic =
-\
-        -name guest=3Driscv-hyp,debug-threads=3Don \
-        -smp 4 \
-        -kernel ./fw_jump.elf \
-        -device loader,file=3D./Image,addr=3D0x80200000 \
-        -drive file=3D./hyp.img,format=3Draw,id=3Dhd0 \
-        -device virtio-blk-device,drive=3Dhd0 \
-        -append "root=3D/dev/vda rw console=3DttyS0 earlycon=3Dsbi"
-
-5. Start kvm-acceled QEMU VM in riscv64 emulation
-$ ./qemu-system-riscv64 -M virt,accel=3Dkvm -m 1024M -cpu host -nographic=
- \
-        -name guest=3Driscv-guset \
-         -smp 2 \
-        -kernel ./Image \
-        -drive file=3D./guest.img,format=3Draw,id=3Dhd0 \
-        -device virtio-blk-device,drive=3Dhd0 \
-        -append "root=3D/dev/vda rw console=3DttyS0 earlycon=3Dsbi"
-
-Yifei Jiang (9):
-  linux-header: Update linux/kvm.h
-  target/riscv: Add target/riscv/kvm.c to place the public kvm interface
-  target/riscv: Implement function kvm_arch_init_vcpu
-  target/riscv: Implement kvm_arch_get_registers
-  target/riscv: Implement kvm_arch_put_registers
-  target/riscv: Support start kernel directly by KVM
-  hw/riscv: PLIC update external interrupt by KVM when kvm enabled
-  target/riscv: Handler KVM_EXIT_RISCV_SBI exit
-  target/riscv: add host riscv64 cpu type
-
- configure                  |   1 +
- hw/riscv/sifive_plic.c     |  31 ++-
- hw/riscv/virt.c            |  15 +-
- linux-headers/linux/kvm.h  |   8 +
- target/riscv/Makefile.objs |   1 +
- target/riscv/cpu.c         |   9 +
- target/riscv/cpu.h         |   4 +
- target/riscv/kvm.c         | 513 +++++++++++++++++++++++++++++++++++++
- target/riscv/kvm_riscv.h   |  25 ++
- 9 files changed, 596 insertions(+), 11 deletions(-)
- create mode 100644 target/riscv/kvm.c
- create mode 100644 target/riscv/kvm_riscv.h
-
---=20
-2.19.1
+If that works, it suggests a guest interprocessor interrupt bug in the tlb
+shoot-down.
 
 
+r~
 
