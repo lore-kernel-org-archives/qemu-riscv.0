@@ -1,48 +1,49 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jCYXE-0004il-Dl
+	id 1jCYXE-0004jA-Jy
 	for mharc-qemu-riscv@gnu.org; Thu, 12 Mar 2020 20:50:44 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:32992)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:32991)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <coreyw7@fb.com>) id 1jCYCt-0004EF-0l
- for qemu-riscv@nongnu.org; Thu, 12 Mar 2020 20:29:43 -0400
+ (envelope-from <coreyw7@fb.com>) id 1jCYCt-0004EE-0c
+ for qemu-riscv@nongnu.org; Thu, 12 Mar 2020 20:29:44 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <coreyw7@fb.com>) id 1jCYCq-0002EC-TP
+ (envelope-from <coreyw7@fb.com>) id 1jCYCq-0002EE-TQ
  for qemu-riscv@nongnu.org; Thu, 12 Mar 2020 20:29:42 -0400
-Received: from wnew1-smtp.messagingengine.com ([64.147.123.26]:49147)
+Received: from wnew1-smtp.messagingengine.com ([64.147.123.26]:60067)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <coreyw7@fb.com>)
- id 1jCYCm-00023W-FY; Thu, 12 Mar 2020 20:29:36 -0400
+ id 1jCYCm-00026h-S8; Thu, 12 Mar 2020 20:29:37 -0400
 Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
- by mailnew.west.internal (Postfix) with ESMTP id 7219659B;
- Thu, 12 Mar 2020 20:29:33 -0400 (EDT)
+ by mailnew.west.internal (Postfix) with ESMTP id 36F7F5C1;
+ Thu, 12 Mar 2020 20:29:35 -0400 (EDT)
 Received: from mailfrontend2 ([10.202.2.163])
- by compute3.internal (MEProxy); Thu, 12 Mar 2020 20:29:33 -0400
+ by compute3.internal (MEProxy); Thu, 12 Mar 2020 20:29:35 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:content-transfer-encoding:date:from
- :message-id:mime-version:subject:to:x-me-proxy:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm2; bh=fsRtuS8klfa5SD3pP
- frMomknIQY0F1oVMbRs0q2bW/Q=; b=P8ZjeQrTAhzmJC80KaQ+eiKahCp276w6G
- YzF4bl50Tet9kjOtFl1K2WYvRQPS2kLtjsCMCpN/o3EhUuVRyGOCjcpWEfyYICLb
- etmeTndnIMKoKY6ZoVLjg4Ku10Q7OL/DrZTxw5RleMuFtfaHUB6kk4WSOCmrk5H+
- WyrzM1ulVPmr8um9EcXJ82X4kXD9uYK37kBJ4rTatqkVOGp8Ti6Y1PXqdTKElGpU
- SXzzPQT/YOJVP4tzXgYnCpIFG4JX7MBRwZovKeiijfDnl0NqmLMl5U1LimtMLnhV
- JXH7yB28nJ++GdLKGNPQj1ok2GvRdP2QJxszeBcJxfzvYWLuzT/2w==
-X-ME-Sender: <xms:7NNqXjVBbyFumCcT6kZxajmRoLb51uT13KaGL_ycH4Vm-Wg6Kc9SAA>
+ :in-reply-to:message-id:mime-version:references:subject:to
+ :x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
+ fm2; bh=z5i76bGEffOQrMkoMBClRukxuQsLtxLA5shXKZlaPV4=; b=olaJTCzO
+ L3W/paf7sxZmUrmwD4hGOab591dB8OVsjM9HwN5h6TsGqtBa2kv0NwoMO+8zlfDe
+ ghfmpOer+Mf1GSDduBOaCwNCK4omFnBbFdRFbXvlqNCAB7/77PhjCFgbexNXqN3c
+ PeqFZ12vmAL4T4l5tZ1pk4i7QIanJKgmvIOkK/1Z8FLNvDwZApUVviUbWQ2XR8dg
+ 72TZMIdB6K8uoa3dR96dP3h+mVIyvssY1WxmfYRKC7b8hRFkxEE9DKcAuSpuoLP9
+ QJrUAHql1bFE5n7XDBA4+LS8m7C0FvcpTDVV5goDZvqoVwTq23efQx9JjJbHnHlC
+ iKWoRDJLG2TwPw==
+X-ME-Sender: <xms:7tNqXtn8GGI3mj3Ve9CWk4S2sjygvogulSV98_io9ubcKfIsKt3kGQ>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedugedruddviedgvdduucetufdoteggodetrfdotf
  fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
  uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
- cujfgurhephffvufffkffoggfgsedtkeertdertddtnecuhfhrohhmpeevohhrvgihucgh
- hhgrrhhtohhnuceotghorhgvhiifjeesfhgsrdgtohhmqeenucfkphepudeifedrudduge
- drudefvddruddvkeenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhl
- fhhrohhmpegtohhrvgihfiejsehfsgdrtghomh
-X-ME-Proxy: <xmx:7NNqXk7RvSeYussFh5v5HfTIxM7ZqwYxo4iy5xCFBVMPHpr6WWvjcA>
- <xmx:7NNqXmoBPHQvpT-dzWVD0G3llO6j8UamnCi-tpnrbYwoJWbxTYmrSg>
- <xmx:7NNqXvn0uS8u5niQgnv5XxXzfltHAfIc3Admy6JPv1_44ygGxEmdZA>
- <xmx:7dNqXv8FO8e5idrhK8Zkxf9x_uck7My3KHYI8g-gIiCXZvNs4GREmaJVAfU>
+ cujfgurhephffvufffkffojghfggfgsedtkeertdertddtnecuhfhrohhmpeevohhrvgih
+ ucghhhgrrhhtohhnuceotghorhgvhiifjeesfhgsrdgtohhmqeenucfkphepudeifedrud
+ dugedrudefvddruddvkeenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgr
+ ihhlfhhrohhmpegtohhrvgihfiejsehfsgdrtghomh
+X-ME-Proxy: <xmx:7tNqXhL4q1CzIpztxxOI3HttO-R-KpBk3DjhqZIg9rWWdV2ApEHSrA>
+ <xmx:7tNqXpxvk5FMigX0YqBJdEhsgjjybpIxFy2L0t64_MvqyPRBofPO2Q>
+ <xmx:7tNqXqvXLH_XhLCiebRc8nG6G8OktkuGobeQOnqJBm2fwGfFzWDe6A>
+ <xmx:7tNqXtf_PvP3FuG3lb2CX49FWKcxx_etIMSJIYB0eoSGHKWubTO6pL_Rac8>
 Received: from coreyw7-fedora-MJ09BKJM.thefacebook.com (unknown
  [163.114.132.128])
- by mail.messagingengine.com (Postfix) with ESMTPA id 2003F3061363;
- Thu, 12 Mar 2020 20:29:31 -0400 (EDT)
+ by mail.messagingengine.com (Postfix) with ESMTPA id C9FEE3061393;
+ Thu, 12 Mar 2020 20:29:33 -0400 (EDT)
 From: Corey Wharton <coreyw7@fb.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -51,10 +52,12 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
  Corey Wharton <coreyw7@fb.com>
-Subject: [PATCH 0/2] Support different CPU types for the sifive_e machine
-Date: Thu, 12 Mar 2020 17:29:21 -0700
-Message-Id: <20200313002923.30905-1-coreyw7@fb.com>
+Subject: [PATCH 1/2] riscv: sifive_e: Support changing CPU type
+Date: Thu, 12 Mar 2020 17:29:22 -0700
+Message-Id: <20200313002923.30905-2-coreyw7@fb.com>
 X-Mailer: git-send-email 2.21.1
+In-Reply-To: <20200313002923.30905-1-coreyw7@fb.com>
+References: <20200313002923.30905-1-coreyw7@fb.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
@@ -74,25 +77,35 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Fri, 13 Mar 2020 00:29:44 -0000
 
-The purpose of this patch set is to allow the sifive_e machine to run
-with different CPU targets to enable different ISA entensions. To that
-end it also introduces a new sifive-e34 CPU type which provides the
-same ISA as sifive-e31, with the addition of the single precision
-floating-point extension (f). The default CPU for the sifive_e machine
-is unchanged.
+Allows the CPU to be changed from the default via the -cpu command
+line option.
 
-A user can change the default CPU type by specifying it with the '-cpu'
-option on the command line.
+Signed-off-by: Corey Wharton <coreyw7@fb.com>
+---
+ hw/riscv/sifive_e.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-Corey Wharton (2):
-  riscv: sifive_e: Support changing CPU type
-  target/riscv: Add a sifive-e34 cpu type
-
- hw/riscv/sifive_e.c |  3 ++-
- target/riscv/cpu.c  | 10 ++++++++++
- target/riscv/cpu.h  |  1 +
- 3 files changed, 13 insertions(+), 1 deletion(-)
-
+diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
+index a254cad489..b0a611adb9 100644
+--- a/hw/riscv/sifive_e.c
++++ b/hw/riscv/sifive_e.c
+@@ -123,7 +123,7 @@ static void riscv_sifive_e_soc_init(Object *obj)
+     object_initialize_child(obj, "cpus", &s->cpus,
+                             sizeof(s->cpus), TYPE_RISCV_HART_ARRAY,
+                             &error_abort, NULL);
+-    object_property_set_str(OBJECT(&s->cpus), SIFIVE_E_CPU, "cpu-type",
++    object_property_set_str(OBJECT(&s->cpus), ms->cpu_type, "cpu-type",
+                             &error_abort);
+     object_property_set_int(OBJECT(&s->cpus), ms->smp.cpus, "num-harts",
+                             &error_abort);
+@@ -220,6 +220,7 @@ static void riscv_sifive_e_machine_init(MachineClass *mc)
+     mc->desc = "RISC-V Board compatible with SiFive E SDK";
+     mc->init = riscv_sifive_e_init;
+     mc->max_cpus = 1;
++    mc->default_cpu_type = SIFIVE_E_CPU;
+ }
+ 
+ DEFINE_MACHINE("sifive_e", riscv_sifive_e_machine_init)
 -- 
 2.21.1
 
