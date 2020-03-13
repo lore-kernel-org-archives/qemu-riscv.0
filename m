@@ -1,57 +1,57 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jCuI1-0002Ym-S9
-	for mharc-qemu-riscv@gnu.org; Fri, 13 Mar 2020 20:04:29 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49623)
+	id 1jCuI6-0002gP-NK
+	for mharc-qemu-riscv@gnu.org; Fri, 13 Mar 2020 20:04:34 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49721)
  by lists.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <prvs=335a9ddda=alistair.francis@wdc.com>)
- id 1jCuHw-0002RB-8T
- for qemu-riscv@nongnu.org; Fri, 13 Mar 2020 20:04:26 -0400
+ id 1jCuI3-0002cM-L9
+ for qemu-riscv@nongnu.org; Fri, 13 Mar 2020 20:04:33 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
  (envelope-from <prvs=335a9ddda=alistair.francis@wdc.com>)
- id 1jCuHt-00033A-Oa
- for qemu-riscv@nongnu.org; Fri, 13 Mar 2020 20:04:24 -0400
-Received: from esa2.hgst.iphmx.com ([68.232.143.124]:59687)
+ id 1jCuHy-0003V8-2S
+ for qemu-riscv@nongnu.org; Fri, 13 Mar 2020 20:04:31 -0400
+Received: from esa2.hgst.iphmx.com ([68.232.143.124]:59693)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <prvs=335a9ddda=alistair.francis@wdc.com>)
- id 1jCuHo-0002AI-R2; Fri, 13 Mar 2020 20:04:17 -0400
+ id 1jCuHt-0002Yq-C8; Fri, 13 Mar 2020 20:04:22 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1584144272; x=1615680272;
+ t=1584144279; x=1615680279;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=wtY6/07CEnlBgNZoHZvs3rVtogp8ZadnRYqDrA/+9tk=;
- b=fCD9eVHhjynqqqWsihMuUsrISCRD7lCXQJ8+NkFe5kBmN0CM/Rq0t/4q
- nEpQppwyBlG8oCtXFijT4Xd/3gA/gGRcqSMR/U7IDpbUfPZVvZHgSe5AU
- qJLox3BZFHo9qBBTkIC9SmRbR2JeX3+TsbPufw/xvImYgR5TOxlo6EFQY
- BKqQPuGyl1CvXu+6g43Sw9oSUmM9Tm6RxAYV9tyUKTDqkMtxOLWY7Y+OU
- teeBPo/lMDzZh5fm4nK3mAzEhITIArbCc5xmywMiPmC94U/Dw7qD3VqEp
- qgE3JLgGIFgrx5aCn2Krz3mrh0hkA2XFtil77wFSvrNDhmhJiraVlRP4A w==;
-IronPort-SDR: c3eDV8+iTOd/Zm7nziWapWOe4GJKJnlt3I087TwB8yHFG9SKOXyOgPldA2K+zUnJo7aWyeKeO7
- pWpwQZ2w11NaB6LqFCMkLF1wNtQFEDPWE0+AlGjpfkOlkQi+myuDbTsMFNTtGQqhi0KlpWDG75
- TFxR0mMqFqQXFvO1vCSh+Ke9Yd9QgEA+uux+TMGlDA6n4UkfdiH8n1dNMF+IISonC09qSDv9bE
- YFFPPj7xQ2NAmY0h5xyDgxbT8OcUwHn73ZvBKfJ7CaLFEf8IBfAAf3c9o+EDxFltkIVDtwj0to
- H/8=
-X-IronPort-AV: E=Sophos;i="5.70,550,1574092800"; d="scan'208";a="234512342"
+ bh=3HisU7zCItfaflTyS6bwMq0turN0EQ+6wUbCyjJmRkY=;
+ b=mqtJ2j8tS408uUipkGm6XbXz58yRX8+Nn9wlxE14IGzYSrLI1WgruveZ
+ Fct6HnSNs+V2CH1nX10yPtmaTMedOVnSa3eK8xJcJiLHN7kgFRft/x4X2
+ B7aNrf2XFwnYIUcKkpPJ1gh+hrB/h6QY7Jcldvp1NCU5tF8TFSBFrPsrm
+ JWVxHqP4VNBkXlI7koFH0BL0MI636BQBtGDQ/0ORBoGhgEv2BVwZgf+J6
+ wRL+FMc4NI8i+p42IfduRnbWCgEanPUSPWSwDa7wari1o1Q1qYoMKITkS
+ H52P4h+ncbL1alze1MbFglLgUEjZPqnG68Ne2URwG0fCUqpMJJ+sJv8PY A==;
+IronPort-SDR: l816svgXKGsxDqxr55N6Ya+EsAWGUbCRtDCAoUNsbmq8VMFkCBJKYb8tDK6YAugqdVXe5On8DF
+ wr1NULOvdCmxsrEBiPvBvBV6+4m5j+ZCkhxVEVZef69J+EV+242LuaYbh4UewslwSqzm6lsQ56
+ QKh+yXzdD99u14fIS2bWrCLQ0CIRmmfZCEf1pESsMZJB6gGw05QRKpIPAdaJ2wPaVK84e9pdi6
+ DAfKsntPeDzKnleMaAI1w9t0JywsywyLchVP2fAHEv3Et7uraRk4uH4Fzde+/9ZuP+AJs7YFYS
+ hcs=
+X-IronPort-AV: E=Sophos;i="5.70,550,1574092800"; d="scan'208";a="234512352"
 Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
  ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 14 Mar 2020 08:04:30 +0800
-IronPort-SDR: aVLdrnqCkDqN0VTPkP3zBin3eSDsjmruBZrIqEyycaG1CgPrjjgjSLomPUned6tGzxQNOvJ5Yu
- h7DVoNYhw7kyMbTp6ooloMD7wFDlMReQbRVsJUFhsAZaEE6dMmkEyMf2g8EP0ZLQ6vtlC9yvCm
- 12dC13bqs2V5aFUgednHeG2j9YEFBWBGyAK4vwX3IwB/JTxTiOmXO0t72cyN9tXmlLHj6lfj8D
- zaL5drx9wBAp5ULSTIUKUR19KJ0tO6f19TolbuBdS8urlA2m7qgLF1uZLhvGNpzGvSnu+62OAV
- jO2FoncT35dlM2NAo8vCZcKC
+ by ob1.hgst.iphmx.com with ESMTP; 14 Mar 2020 08:04:38 +0800
+IronPort-SDR: MC1tdlixrNaxqRPQVtMsth66PJaF2YHDMFcfdt1itfX0nNmG0zphSUUU6g+HylCJuRiRTVDgsB
+ ikNR34VSniAPUhjDy7oqKDlRs7oviganSh2kefqxdtwwHthGQiC5EznlcqUozsDQbn597kLQPC
+ uA/QgEOCO8PS/ppTJnupNNW5id64UfbE/IyoBXjQEnPK8X8rHEoCI6xwrsVLuvPad3Apv86YKI
+ AcPEV0//25GpW2S6onpcsmwhVNaMTwh4RJqQh5Gu/JyRV3uQTfqAdiGCxYNWCmj8mKWxShJMvH
+ CIhkp1lv7Enyv4pdtLCMAXDu
 Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
  by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 13 Mar 2020 16:56:13 -0700
-IronPort-SDR: QkNNfHAdiZP1HyQBXW5NsM9Nr/lHwZBLQa30Wetl1ll8ZKTswIGsJ2p97Lq6GdgyZsxCshFYfg
- 6QwoHO9WHh/aNhzug8Z7r8r/jiYPu3X9TClkhQ69oLytjI5eqsgJ8UqhMdDApUUYNSLlcHVV7S
- tBaOTldrTnf6v04cRZ3amqQTsnYY6YAjKZSsrSjLQu8qMknhIQoA50Gwk3B1ZX86tCkj02FcNa
- meq03uHVmAYGsP7I18hq8mT12A2qL2Owy1uxaMVjOLEKypyLpro+pGf2AoP7JIaKWUmBDZOtKF
- TgE=
+ 13 Mar 2020 16:56:18 -0700
+IronPort-SDR: 4Scab1YHr2pp6hnXihg7qoaeDueaDXXaJWdVW1xRK+TWvcWV4bccEM93/fneiAIMNt8gahjA5J
+ ShCrNT1EolUDZ4JlofFqs9ZkJV8+LIqVgdFVvfsfSRRMuPk+QVkjtVr6rqrhn0qeWOVPAES7Ke
+ L28UbtCrwMEJxfZiHkdiIIFME6K5qRmznq1XZ7a+q66ASd0O9eYDxSQKvtFCMbG12yNdzypMcu
+ wb2r2dcIsOAAidxVZFEmVVmZVk/Fc+ZXAoHwN09HIRTvTWbXgsClKAxV2PlcPcMKLPYZh8HPxK
+ A0k=
 WDCIronportException: Internal
 Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
  risc6-mainframe.int.fusionio.com) ([10.196.158.235])
- by uls-op-cesaip02.wdc.com with ESMTP; 13 Mar 2020 17:04:16 -0700
+ by uls-op-cesaip02.wdc.com with ESMTP; 13 Mar 2020 17:04:21 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org,
@@ -59,9 +59,9 @@ To: qemu-devel@nongnu.org,
 Cc: palmer@dabbelt.com,
 	alistair.francis@wdc.com,
 	alistair23@gmail.com
-Subject: [PATCH v8 1/4] linux-user: Protect more syscalls
-Date: Fri, 13 Mar 2020 16:56:48 -0700
-Message-Id: <e77c0caf46fc5f0447c0a176ccdf44d414b04038.1584143748.git.alistair.francis@wdc.com>
+Subject: [PATCH v8 3/4] linux-user: Support futex_time64
+Date: Fri, 13 Mar 2020 16:56:53 -0700
+Message-Id: <517832730838e1d0b5eda26781b280854d792f9e.1584143748.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <cover.1584143748.git.alistair.francis@wdc.com>
 References: <cover.1584143748.git.alistair.francis@wdc.com>
@@ -80,386 +80,242 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 14 Mar 2020 00:04:26 -0000
+X-List-Received-Date: Sat, 14 Mar 2020 00:04:34 -0000
 
-New y2038 safe 32-bit architectures (like RISC-V) don't support old
-syscalls with a 32-bit time_t. The kernel defines new *_time64 versions
-of these syscalls. Add some more #ifdefs to syscall.c in linux-user to
-allow us to compile without these old syscalls.
+Add support for host and target futex_time64. If futex_time64 exists on
+the host we try that first before falling back to the standard futux
+syscall.
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Laurent Vivier <laurent@vivier.eu>
 ---
- linux-user/strace.c  |  2 ++
- linux-user/syscall.c | 68 ++++++++++++++++++++++++++++++++++++++++++--
- 2 files changed, 68 insertions(+), 2 deletions(-)
+ linux-user/syscall.c | 144 +++++++++++++++++++++++++++++++++++++++----
+ 1 file changed, 131 insertions(+), 13 deletions(-)
 
-diff --git a/linux-user/strace.c b/linux-user/strace.c
-index 4f7130b2ff..6420ccd97b 100644
---- a/linux-user/strace.c
-+++ b/linux-user/strace.c
-@@ -775,6 +775,7 @@ print_syscall_ret_newselect(const struct syscallname *name, abi_long ret)
- #define TARGET_TIME_OOP      3   /* leap second in progress */
- #define TARGET_TIME_WAIT     4   /* leap second has occurred */
- #define TARGET_TIME_ERROR    5   /* clock not synchronized */
-+#ifdef TARGET_NR_adjtimex
- static void
- print_syscall_ret_adjtimex(const struct syscallname *name, abi_long ret)
- {
-@@ -813,6 +814,7 @@ print_syscall_ret_adjtimex(const struct syscallname *name, abi_long ret)
- 
-     qemu_log("\n");
- }
-+#endif
- 
- UNUSED static struct flags access_flags[] = {
-     FLAG_GENERIC(F_OK),
 diff --git a/linux-user/syscall.c b/linux-user/syscall.c
-index 8d27d10807..909bec94a5 100644
+index 60fd775d9c..b3bfb02688 100644
 --- a/linux-user/syscall.c
 +++ b/linux-user/syscall.c
-@@ -742,21 +742,30 @@ safe_syscall3(ssize_t, read, int, fd, void *, buff, size_t, count)
- safe_syscall3(ssize_t, write, int, fd, const void *, buff, size_t, count)
- safe_syscall4(int, openat, int, dirfd, const char *, pathname, \
-               int, flags, mode_t, mode)
-+#if defined(TARGET_NR_wait4) || defined(TARGET_NR_waitpid)
- safe_syscall4(pid_t, wait4, pid_t, pid, int *, status, int, options, \
-               struct rusage *, rusage)
+@@ -245,7 +245,12 @@ static type name (type1 arg1,type2 arg2,type3 arg3,type4 arg4,type5 arg5,	\
+ #define __NR_sys_rt_sigqueueinfo __NR_rt_sigqueueinfo
+ #define __NR_sys_rt_tgsigqueueinfo __NR_rt_tgsigqueueinfo
+ #define __NR_sys_syslog __NR_syslog
+-#define __NR_sys_futex __NR_futex
++#if defined(__NR_futex)
++# define __NR_sys_futex __NR_futex
 +#endif
- safe_syscall5(int, waitid, idtype_t, idtype, id_t, id, siginfo_t *, infop, \
-               int, options, struct rusage *, rusage)
- safe_syscall3(int, execve, const char *, filename, char **, argv, char **, envp)
-+#if defined(TARGET_NR_select) || defined(TARGET_NR__newselect) || \
-+    defined(TARGET_NR_pselect6)
- safe_syscall6(int, pselect6, int, nfds, fd_set *, readfds, fd_set *, writefds, \
-               fd_set *, exceptfds, struct timespec *, timeout, void *, sig)
++#if defined(__NR_futex_time64)
++# define __NR_sys_futex_time64 __NR_futex_time64
 +#endif
-+#if defined(TARGET_NR_ppoll) || defined(TARGET_NR_poll)
- safe_syscall5(int, ppoll, struct pollfd *, ufds, unsigned int, nfds,
-               struct timespec *, tsp, const sigset_t *, sigmask,
-               size_t, sigsetsize)
+ #define __NR_sys_inotify_init __NR_inotify_init
+ #define __NR_sys_inotify_add_watch __NR_inotify_add_watch
+ #define __NR_sys_inotify_rm_watch __NR_inotify_rm_watch
+@@ -295,10 +300,16 @@ _syscall1(int,exit_group,int,error_code)
+ #if defined(TARGET_NR_set_tid_address) && defined(__NR_set_tid_address)
+ _syscall1(int,set_tid_address,int *,tidptr)
+ #endif
+-#if defined(TARGET_NR_futex) && defined(__NR_futex)
++#if (defined(TARGET_NR_futex) && defined(__NR_futex)) || \
++    (defined(TARGET_NR_futex_time64) && \
++        (HOST_LONG_BITS == 64 && defined(__NR_futex)))
+ _syscall6(int,sys_futex,int *,uaddr,int,op,int,val,
+           const struct timespec *,timeout,int *,uaddr2,int,val3)
+ #endif
++#if (defined(TARGET_NR_futex_time64) && defined(__NR_futex_teim64))
++_syscall6(int,sys_futex_time64,int *,uaddr,int,op,int,val,
++          const struct timespec *,timeout,int *,uaddr2,int,val3)
 +#endif
+ #define __NR_sys_sched_getaffinity __NR_sched_getaffinity
+ _syscall3(int, sys_sched_getaffinity, pid_t, pid, unsigned int, len,
+           unsigned long *, user_mask_ptr);
+@@ -762,10 +773,14 @@ safe_syscall5(int, ppoll, struct pollfd *, ufds, unsigned int, nfds,
  safe_syscall6(int, epoll_pwait, int, epfd, struct epoll_event *, events,
                int, maxevents, int, timeout, const sigset_t *, sigmask,
                size_t, sigsetsize)
-+#ifdef TARGET_NR_futex
+-#ifdef TARGET_NR_futex
++#if defined(__NR_futex)
  safe_syscall6(int,futex,int *,uaddr,int,op,int,val, \
                const struct timespec *,timeout,int *,uaddr2,int,val3)
+ #endif
++#if defined(__NR_futex_time64)
++safe_syscall6(int,futex_time64,int *,uaddr,int,op,int,val, \
++              const struct timespec *,timeout,int *,uaddr2,int,val3)
 +#endif
  safe_syscall2(int, rt_sigsuspend, sigset_t *, newset, size_t, sigsetsize)
  safe_syscall2(int, kill, pid_t, pid, int, sig)
  safe_syscall2(int, tkill, int, tid, int, sig)
-@@ -776,12 +785,16 @@ safe_syscall6(ssize_t, recvfrom, int, fd, void *, buf, size_t, len,
- safe_syscall3(ssize_t, sendmsg, int, fd, const struct msghdr *, msg, int, flags)
- safe_syscall3(ssize_t, recvmsg, int, fd, struct msghdr *, msg, int, flags)
- safe_syscall2(int, flock, int, fd, int, operation)
-+#ifdef TARGET_NR_rt_sigtimedwait
- safe_syscall4(int, rt_sigtimedwait, const sigset_t *, these, siginfo_t *, uinfo,
-               const struct timespec *, uts, size_t, sigsetsize)
-+#endif
- safe_syscall4(int, accept4, int, fd, struct sockaddr *, addr, socklen_t *, len,
-               int, flags)
-+#if defined(TARGET_NR_nanosleep)
- safe_syscall2(int, nanosleep, const struct timespec *, req,
-               struct timespec *, rem)
-+#endif
- #ifdef TARGET_NR_clock_nanosleep
- safe_syscall4(int, clock_nanosleep, const clockid_t, clock, int, flags,
-               const struct timespec *, req, struct timespec *, rem)
-@@ -802,9 +815,11 @@ safe_syscall5(int, msgrcv, int, msgid, void *, msgp, size_t, sz,
- safe_syscall4(int, semtimedop, int, semid, struct sembuf *, tsops,
-               unsigned, nsops, const struct timespec *, timeout)
- #endif
--#if defined(TARGET_NR_mq_open) && defined(__NR_mq_open)
-+#ifdef TARGET_NR_mq_timedsend
- safe_syscall5(int, mq_timedsend, int, mqdes, const char *, msg_ptr,
-               size_t, len, unsigned, prio, const struct timespec *, timeout)
-+#endif
-+#ifdef TARGET_NR_mq_timedreceive
- safe_syscall5(int, mq_timedreceive, int, mqdes, char *, msg_ptr,
-               size_t, len, unsigned *, prio, const struct timespec *, timeout)
- #endif
-@@ -946,6 +961,8 @@ abi_long do_brk(abi_ulong new_brk)
-     return target_brk;
- }
- 
-+#if defined(TARGET_NR_select) || defined(TARGET_NR__newselect) || \
-+    defined(TARGET_NR_pselect6)
- static inline abi_long copy_from_user_fdset(fd_set *fds,
-                                             abi_ulong target_fds_addr,
-                                             int n)
-@@ -1021,6 +1038,7 @@ static inline abi_long copy_to_user_fdset(abi_ulong target_fds_addr,
- 
-     return 0;
- }
-+#endif
- 
- #if defined(__alpha__)
- #define HOST_HZ 1024
-@@ -1067,6 +1085,7 @@ static inline abi_long host_to_target_rusage(abi_ulong target_addr,
-     return 0;
- }
- 
-+#ifdef TARGET_NR_setrlimit
- static inline rlim_t target_to_host_rlim(abi_ulong target_rlim)
- {
-     abi_ulong target_rlim_swap;
-@@ -1082,7 +1101,9 @@ static inline rlim_t target_to_host_rlim(abi_ulong target_rlim)
-     
-     return result;
- }
-+#endif
- 
-+#if defined(TARGET_NR_getrlimit) || defined(TARGET_NR_ugetrlimit)
- static inline abi_ulong host_to_target_rlim(rlim_t rlim)
- {
-     abi_ulong target_rlim_swap;
-@@ -1096,6 +1117,7 @@ static inline abi_ulong host_to_target_rlim(rlim_t rlim)
-     
-     return result;
- }
-+#endif
- 
- static inline int target_to_host_resource(int code)
- {
-@@ -1186,6 +1208,12 @@ static inline abi_long copy_to_user_timeval64(abi_ulong target_tv_addr,
-     return 0;
- }
- 
-+#if defined(TARGET_NR_futex) || \
-+    defined(TARGET_NR_rt_sigtimedwait) || \
-+    defined(TARGET_NR_pselect6) || defined(TARGET_NR_pselect6) || \
-+    defined(TARGET_NR_nanosleep) || defined(TARGET_NR_clock_settime) || \
-+    defined(TARGET_NR_utimensat) || defined(TARGET_NR_mq_timedsend) || \
-+    defined(TARGET_NR_mq_timedreceive)
- static inline abi_long target_to_host_timespec(struct timespec *host_ts,
-                                                abi_ulong target_addr)
- {
-@@ -1199,6 +1227,7 @@ static inline abi_long target_to_host_timespec(struct timespec *host_ts,
-     unlock_user_struct(target_ts, target_addr, 0);
-     return 0;
- }
-+#endif
- 
- static inline abi_long host_to_target_timespec(abi_ulong target_addr,
-                                                struct timespec *host_ts)
-@@ -1228,6 +1257,7 @@ static inline abi_long host_to_target_timespec64(abi_ulong target_addr,
-     return 0;
- }
- 
-+#if defined(TARGET_NR_settimeofday)
- static inline abi_long copy_from_user_timezone(struct timezone *tz,
-                                                abi_ulong target_tz_addr)
- {
-@@ -1244,6 +1274,7 @@ static inline abi_long copy_from_user_timezone(struct timezone *tz,
- 
-     return 0;
- }
-+#endif
- 
- #if defined(TARGET_NR_mq_open) && defined(__NR_mq_open)
- #include <mqueue.h>
-@@ -6565,6 +6596,8 @@ static inline abi_long target_ftruncate64(void *cpu_env, abi_long arg1,
+@@ -1229,7 +1244,7 @@ static inline abi_long target_to_host_timespec(struct timespec *host_ts,
  }
  #endif
  
-+#if defined(TARGET_NR_timer_settime) || \
-+    (defined(TARGET_NR_timerfd_settime) && defined(CONFIG_TIMERFD))
- static inline abi_long target_to_host_itimerspec(struct itimerspec *host_itspec,
+-#if defined(TARGET_NR_clock_settime64)
++#if defined(TARGET_NR_clock_settime64) || defined(TARGET_NR_futex_time64)
+ static inline abi_long target_to_host_timespec64(struct timespec *host_ts,
                                                   abi_ulong target_addr)
  {
-@@ -6584,7 +6617,11 @@ static inline abi_long target_to_host_itimerspec(struct itimerspec *host_itspec,
-     unlock_user_struct(target_itspec, target_addr, 1);
-     return 0;
+@@ -6890,6 +6905,55 @@ static inline abi_long host_to_target_statx(struct target_statx *host_stx,
  }
-+#endif
+ #endif
  
-+#if ((defined(TARGET_NR_timerfd_gettime) || \
-+      defined(TARGET_NR_timerfd_settime)) && defined(CONFIG_TIMERFD)) || \
-+    defined(TARGET_NR_timer_gettime) || defined(TARGET_NR_timer_settime)
- static inline abi_long host_to_target_itimerspec(abi_ulong target_addr,
-                                                struct itimerspec *host_its)
- {
-@@ -6603,7 +6640,10 @@ static inline abi_long host_to_target_itimerspec(abi_ulong target_addr,
-     unlock_user_struct(target_itspec, target_addr, 0);
-     return 0;
- }
++static int do_sys_futex(int *uaddr, int op, int val,
++                         const struct timespec *timeout, int *uaddr2,
++                         int val3)
++{
++#if HOST_LONG_BITS == 64
++#if defined(__NR_futex)
++    /* always a 64-bit time_t, it doesn't define _time64 version  */
++    return sys_futex(uaddr, op, val, timeout, uaddr2, val3);
++
 +#endif
- 
-+#if defined(TARGET_NR_adjtimex) || \
-+    (defined(TARGET_NR_clock_adjtime) && defined(CONFIG_CLOCK_ADJTIME))
- static inline abi_long target_to_host_timex(struct timex *host_tx,
-                                             abi_long target_addr)
- {
-@@ -6673,7 +6713,7 @@ static inline abi_long host_to_target_timex(abi_long target_addr,
-     unlock_user_struct(target_tx, target_addr, 1);
-     return 0;
- }
--
++#else /* HOST_LONG_BITS == 64 */
++#if defined(__NR_futex_time64)
++    if (sizeof(timeout->tv_sec) == 8) {
++        /* _time64 function on 32bit arch */
++        return sys_futex_time64(uaddr, op, val, timeout, uaddr2, val3);
++    }
 +#endif
++#if defined(__NR_futex)
++    /* old function on 32bit arch */
++    return sys_futex(uaddr, op, val, timeout, uaddr2, val3);
++#endif
++#endif /* HOST_LONG_BITS == 64 */
++    g_assert_not_reached();
++}
++
++static int do_safe_futex(int *uaddr, int op, int val,
++                         const struct timespec *timeout, int *uaddr2,
++                         int val3)
++{
++#if HOST_LONG_BITS == 64
++#if defined(__NR_futex)
++    /* always a 64-bit time_t, it doesn't define _time64 version  */
++    return get_errno(safe_futex(uaddr, op, val, timeout, uaddr2, val3));
++#endif
++#else /* HOST_LONG_BITS == 64 */
++#if defined(__NR_futex_time64)
++    if (sizeof(timeout->tv_sec) == 8) {
++        /* _time64 function on 32bit arch */
++        return get_errno(safe_futex_time64(uaddr, op, val, timeout, uaddr2,
++                                           val3));
++    }
++#endif
++#if defined(__NR_futex)
++    /* old function on 32bit arch */
++    return get_errno(safe_futex(uaddr, op, val, timeout, uaddr2, val3));
++#endif
++#endif /* HOST_LONG_BITS == 64 */
++    return -TARGET_ENOSYS;
++}
  
- static inline abi_long target_to_host_sigevent(struct sigevent *host_sevp,
-                                                abi_ulong target_addr)
-@@ -6840,6 +6880,7 @@ static inline abi_long host_to_target_statx(struct target_statx *host_stx,
-    futexes locally would make futexes shared between multiple processes
-    tricky.  However they're probably useless because guest atomic
-    operations won't work either.  */
-+#if defined(TARGET_NR_futex)
- static int do_futex(target_ulong uaddr, int op, int val, target_ulong timeout,
-                     target_ulong uaddr2, int val3)
- {
-@@ -6886,6 +6927,7 @@ static int do_futex(target_ulong uaddr, int op, int val, target_ulong timeout,
+ /* ??? Using host futex calls even when target atomic operations
+    are not really atomic probably breaks things.  However implementing
+@@ -6919,12 +6983,61 @@ static int do_futex(target_ulong uaddr, int op, int val, target_ulong timeout,
+         } else {
+             pts = NULL;
+         }
+-        return get_errno(safe_futex(g2h(uaddr), op, tswap32(val),
++        return get_errno(do_safe_futex(g2h(uaddr), op, tswap32(val),
++                         pts, NULL, val3));
++    case FUTEX_WAKE:
++        return get_errno(do_safe_futex(g2h(uaddr), op, val, NULL, NULL, 0));
++    case FUTEX_FD:
++        return get_errno(do_safe_futex(g2h(uaddr), op, val, NULL, NULL, 0));
++    case FUTEX_REQUEUE:
++    case FUTEX_CMP_REQUEUE:
++    case FUTEX_WAKE_OP:
++        /* For FUTEX_REQUEUE, FUTEX_CMP_REQUEUE, and FUTEX_WAKE_OP, the
++           TIMEOUT parameter is interpreted as a uint32_t by the kernel.
++           But the prototype takes a `struct timespec *'; insert casts
++           to satisfy the compiler.  We do not need to tswap TIMEOUT
++           since it's not compared to guest memory.  */
++        pts = (struct timespec *)(uintptr_t) timeout;
++        return get_errno(do_safe_futex(g2h(uaddr), op, val, pts,
++                                       g2h(uaddr2),
++                                       (base_op == FUTEX_CMP_REQUEUE
++                                        ? tswap32(val3)
++                                        : val3)));
++    default:
++        return -TARGET_ENOSYS;
++    }
++}
++#endif
++
++#if defined(TARGET_NR_futex_time64)
++static int do_futex_time64(target_ulong uaddr, int op, int val, target_ulong timeout,
++                           target_ulong uaddr2, int val3)
++{
++    struct timespec ts, *pts;
++    int base_op;
++
++    /* ??? We assume FUTEX_* constants are the same on both host
++       and target.  */
++#ifdef FUTEX_CMD_MASK
++    base_op = op & FUTEX_CMD_MASK;
++#else
++    base_op = op;
++#endif
++    switch (base_op) {
++    case FUTEX_WAIT:
++    case FUTEX_WAIT_BITSET:
++        if (timeout) {
++            pts = &ts;
++            target_to_host_timespec64(pts, timeout);
++        } else {
++            pts = NULL;
++        }
++        return get_errno(do_safe_futex(g2h(uaddr), op, tswap32(val),
+                          pts, NULL, val3));
+     case FUTEX_WAKE:
+-        return get_errno(safe_futex(g2h(uaddr), op, val, NULL, NULL, 0));
++        return get_errno(do_safe_futex(g2h(uaddr), op, val, NULL, NULL, 0));
+     case FUTEX_FD:
+-        return get_errno(safe_futex(g2h(uaddr), op, val, NULL, NULL, 0));
++        return get_errno(do_safe_futex(g2h(uaddr), op, val, NULL, NULL, 0));
+     case FUTEX_REQUEUE:
+     case FUTEX_CMP_REQUEUE:
+     case FUTEX_WAKE_OP:
+@@ -6934,16 +7047,17 @@ static int do_futex(target_ulong uaddr, int op, int val, target_ulong timeout,
+            to satisfy the compiler.  We do not need to tswap TIMEOUT
+            since it's not compared to guest memory.  */
+         pts = (struct timespec *)(uintptr_t) timeout;
+-        return get_errno(safe_futex(g2h(uaddr), op, val, pts,
+-                                    g2h(uaddr2),
+-                                    (base_op == FUTEX_CMP_REQUEUE
+-                                     ? tswap32(val3)
+-                                     : val3)));
++        return get_errno(do_safe_futex(g2h(uaddr), op, val, pts,
++                                       g2h(uaddr2),
++                                       (base_op == FUTEX_CMP_REQUEUE
++                                        ? tswap32(val3)
++                                        : val3)));
+     default:
          return -TARGET_ENOSYS;
      }
  }
-+#endif
+ #endif
++
  #if defined(TARGET_NR_name_to_handle_at) && defined(CONFIG_OPEN_BY_HANDLE)
  static abi_long do_name_to_handle_at(abi_long dirfd, abi_long pathname,
                                       abi_long handle, abi_long mount_id,
-@@ -8494,6 +8536,7 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
+@@ -7505,7 +7619,7 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
+             ts = cpu->opaque;
+             if (ts->child_tidptr) {
+                 put_user_u32(0, ts->child_tidptr);
+-                sys_futex(g2h(ts->child_tidptr), FUTEX_WAKE, INT_MAX,
++                do_sys_futex(g2h(ts->child_tidptr), FUTEX_WAKE, INT_MAX,
+                           NULL, NULL, 0);
              }
-         }
-         return ret;
-+#ifdef TARGET_NR_rt_sigtimedwait
-     case TARGET_NR_rt_sigtimedwait:
-         {
-             sigset_t set;
-@@ -8530,6 +8573,7 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
-             }
-         }
-         return ret;
-+#endif
-     case TARGET_NR_rt_sigqueueinfo:
-         {
-             siginfo_t uinfo;
-@@ -8629,6 +8673,7 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
-             }
-         }
-         return ret;
-+#if defined(TARGET_NR_gettimeofday)
-     case TARGET_NR_gettimeofday:
-         {
-             struct timeval tv;
-@@ -8639,6 +8684,8 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
-             }
-         }
-         return ret;
-+#endif
-+#if defined(TARGET_NR_settimeofday)
-     case TARGET_NR_settimeofday:
-         {
-             struct timeval tv, *ptv = NULL;
-@@ -8660,6 +8707,7 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
- 
-             return get_errno(settimeofday(ptv, ptz));
-         }
-+#endif
- #if defined(TARGET_NR_select)
-     case TARGET_NR_select:
- #if defined(TARGET_WANT_NI_OLD_SELECT)
-@@ -9131,6 +9179,8 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
- #ifdef TARGET_NR_sendmmsg
-     case TARGET_NR_sendmmsg:
-         return do_sendrecvmmsg(arg1, arg2, arg3, arg4, 1);
-+#endif
-+#ifdef TARGET_NR_recvmmsg
-     case TARGET_NR_recvmmsg:
-         return do_sendrecvmmsg(arg1, arg2, arg3, arg4, 0);
- #endif
-@@ -9305,6 +9355,7 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
-         return do_syscall(cpu_env, arg1 & 0xffff, arg2, arg3, arg4, arg5,
-                           arg6, arg7, arg8, 0);
- #endif
-+#if defined(TARGET_NR_wait4)
-     case TARGET_NR_wait4:
-         {
-             int status;
-@@ -9332,6 +9383,7 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
-             }
-         }
-         return ret;
-+#endif
- #ifdef TARGET_NR_swapoff
-     case TARGET_NR_swapoff:
-         if (!(p = lock_user_string(arg1)))
-@@ -9476,6 +9528,7 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
-         return do_vm86(cpu_env, arg1, arg2);
- #endif
- #endif
-+#if defined(TARGET_NR_adjtimex)
-     case TARGET_NR_adjtimex:
-         {
-             struct timex host_buf;
-@@ -9491,6 +9544,7 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
-             }
-         }
-         return ret;
-+#endif
- #if defined(TARGET_NR_clock_adjtime) && defined(CONFIG_CLOCK_ADJTIME)
-     case TARGET_NR_clock_adjtime:
-         {
-@@ -10007,6 +10061,7 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
-         return get_errno(sched_get_priority_max(arg1));
-     case TARGET_NR_sched_get_priority_min:
-         return get_errno(sched_get_priority_min(arg1));
-+#ifdef TARGET_NR_sched_rr_get_interval
-     case TARGET_NR_sched_rr_get_interval:
-         {
-             struct timespec ts;
-@@ -10016,6 +10071,8 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
-             }
-         }
-         return ret;
-+#endif
-+#if defined(TARGET_NR_nanosleep)
-     case TARGET_NR_nanosleep:
-         {
-             struct timespec req, rem;
-@@ -10026,6 +10083,7 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
-             }
-         }
-         return ret;
-+#endif
-     case TARGET_NR_prctl:
-         switch (arg1) {
-         case PR_GET_PDEATHSIG:
-@@ -11496,8 +11554,10 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
-         }
-         return ret;
- #endif
-+#ifdef TARGET_NR_futex
+             thread_cpu = NULL;
+@@ -11597,6 +11711,10 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
      case TARGET_NR_futex:
          return do_futex(arg1, arg2, arg3, arg4, arg5, arg6);
+ #endif
++#ifdef TARGET_NR_futex_time64
++    case TARGET_NR_futex_time64:
++        return do_futex_time64(arg1, arg2, arg3, arg4, arg5, arg6);
 +#endif
  #if defined(TARGET_NR_inotify_init) && defined(__NR_inotify_init)
      case TARGET_NR_inotify_init:
          ret = get_errno(sys_inotify_init());
-@@ -11562,6 +11622,7 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
-         unlock_user (p, arg1, 0);
-         return ret;
- 
-+#ifdef TARGET_NR_mq_timedsend
-     case TARGET_NR_mq_timedsend:
-         {
-             struct timespec ts;
-@@ -11577,7 +11638,9 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
-             unlock_user (p, arg2, arg3);
-         }
-         return ret;
-+#endif
- 
-+#ifdef TARGET_NR_mq_timedreceive
-     case TARGET_NR_mq_timedreceive:
-         {
-             struct timespec ts;
-@@ -11598,6 +11661,7 @@ static abi_long do_syscall1(void *cpu_env, int num, abi_long arg1,
-                 put_user_u32(prio, arg4);
-         }
-         return ret;
-+#endif
- 
-     /* Not implemented for now... */
- /*     case TARGET_NR_mq_notify: */
 -- 
 2.25.1
 
