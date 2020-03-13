@@ -1,64 +1,109 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jCslu-0006LV-EP
-	for mharc-qemu-riscv@gnu.org; Fri, 13 Mar 2020 18:27:14 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:40669)
+	id 1jCsnO-0007dd-9N
+	for mharc-qemu-riscv@gnu.org; Fri, 13 Mar 2020 18:28:46 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:41956)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <alistair23@gmail.com>) id 1jCslr-0006JM-Sv
- for qemu-riscv@nongnu.org; Fri, 13 Mar 2020 18:27:12 -0400
+ (envelope-from <laurent@vivier.eu>) id 1jCsnM-0007az-Qb
+ for qemu-riscv@nongnu.org; Fri, 13 Mar 2020 18:28:45 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1jCslq-0007jo-MN
- for qemu-riscv@nongnu.org; Fri, 13 Mar 2020 18:27:11 -0400
-Received: from mail-ua1-x943.google.com ([2607:f8b0:4864:20::943]:34483)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1jCslo-0007dQ-GP; Fri, 13 Mar 2020 18:27:08 -0400
-Received: by mail-ua1-x943.google.com with SMTP id g21so4228910uaj.1;
- Fri, 13 Mar 2020 15:27:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=hjrk1RSYoPPLiFmW2tKrZHbwnLGZUr0D7yWhYjGg1fs=;
- b=mzqXvGzsZpfyohuHNos4iRRQSvSlqpdww+hrQLr+54bj4Vx7UMhZyPSSroLF77fjp2
- kIvFihb0sYrpHmLIKUduKUTkxyLairnY1hP5hTJhfpml2+oAQ0lm/GxzxbCI5wGU5KF9
- j3QTSadjMeVKzfRxlcfjZ+lP58X0LonqtsuyudDnxhW8oIEDLsS8F9pSFwi0xTz++OCm
- 5XcSfn8rTXSZs9ZpWX4a+IBUzLUkJbcsOKs/se5FWZwE7ocPU0gZ8UHmIdK8XRnvx962
- LN7m0CfZnZiRBQ/hNfHFd/UlggY+kAALh1COmhMxWsZGqdBBw9TZTw8NNRK1USGhscD9
- j+LQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=hjrk1RSYoPPLiFmW2tKrZHbwnLGZUr0D7yWhYjGg1fs=;
- b=mTalqf3sc+PimcmIV+NBoJBkRrGo1AQ3v6+xhuuhcQNrdNGraxY4VE+E/vXZ1BDT1x
- lb34DFk8kHGfbnBOw2GWaAThX1rbE4VES5DMCMSoUQl46Y42cOsKRZBexXUemmq7/KGj
- CX//YlhxR+auJEcknnjsRIbZmI6ssvvcoXMZKVrBzvY2vJgtPhn9TPKuVLOj8DZ45gcf
- D58dbMqkdHWf89jQJRlE2gvg9aXQmejhy1LB4u3vNA3CKtFEeobJ2hy+oKfFzzO2odAj
- dLFes4dJUMGx1n2wlZoUR/uz6q+48tWUTFyx3Gh1ypLRO1yFcUJ1I/M1iN56uXb4MCQe
- pSHw==
-X-Gm-Message-State: ANhLgQ1mqlOYKTUfhU7/D+NhmGvHRh1tdfrMx8f0PyA/Xu6zywo8beKR
- 0qoPdx6oWQ2RX0xSDO1A12UMy2q8LG6AiYmHQfoB1Nkb
-X-Google-Smtp-Source: ADFU+vvAtG/0+8x8AmEHxrxjbxcZLVQHDYxf9pJkdaZ+Z+3HsoI9Y+O5yxTO6qkQhw/FnI9+6/h/2BoAdioWmzvHUIQ=
-X-Received: by 2002:ab0:2881:: with SMTP id s1mr6934174uap.8.1584138427814;
- Fri, 13 Mar 2020 15:27:07 -0700 (PDT)
+ (envelope-from <laurent@vivier.eu>) id 1jCsnL-0003VP-TY
+ for qemu-riscv@nongnu.org; Fri, 13 Mar 2020 18:28:44 -0400
+Received: from mout.kundenserver.de ([212.227.17.10]:60579)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <laurent@vivier.eu>)
+ id 1jCsnH-0003PF-SH; Fri, 13 Mar 2020 18:28:40 -0400
+Received: from [192.168.100.1] ([82.252.135.106]) by mrelayeu.kundenserver.de
+ (mreue109 [213.165.67.119]) with ESMTPSA (Nemesis) id
+ 1MYvTy-1ir0Iu1vN2-00UnpF; Fri, 13 Mar 2020 23:28:12 +0100
+Subject: Re: [PATCH 01/14] Makefile: Only build virtiofsd if system-mode is
+ enabled
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>,
+ qemu-devel@nongnu.org
+Cc: David Hildenbrand <david@redhat.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>, qemu-ppc@nongnu.org,
+ Cornelia Huck <cohuck@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
+ =?UTF-8?Q?Alex_Benn=c3=a9e?= <alex.bennee@linaro.org>,
+ qemu-s390x@nongnu.org, Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Richard Henderson <rth@twiddle.net>,
+ David Gibson <david@gibson.dropbear.id.au>, qemu-riscv@nongnu.org,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, qemu-arm@nongnu.org,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Eduardo Habkost <ehabkost@redhat.com>
+References: <20200313183652.10258-1-philmd@redhat.com>
+ <20200313183652.10258-2-philmd@redhat.com>
+From: Laurent Vivier <laurent@vivier.eu>
+Autocrypt: addr=laurent@vivier.eu; prefer-encrypt=mutual; keydata=
+ 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
+Message-ID: <8f73d608-d28e-b896-b1f0-f95d599502f0@vivier.eu>
+Date: Fri, 13 Mar 2020 23:28:08 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.5.0
 MIME-Version: 1.0
-References: <c827880a47774cd3a6bcd59b79657f380da11d5d.1583284602.git.alistair.francis@wdc.com>
- <e8498727-03f8-7e04-efd3-c04763dcbfac@linaro.org>
- <CAKmqyKOnb+CpnugoUkeL_kabyiCfZCmWyNF9uV5GUBT_pek=0g@mail.gmail.com>
- <47b0bc38-6384-9ab4-7c3e-d5ed405ea90d@linaro.org>
-In-Reply-To: <47b0bc38-6384-9ab4-7c3e-d5ed405ea90d@linaro.org>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 13 Mar 2020 15:26:41 -0700
-Message-ID: <CAKmqyKO5hztm3icsGpDGL5D9Uo6sHV2dSMizTtgAzsY06S59wg@mail.gmail.com>
-Subject: Re: [PATCH v1 1/1] target/riscv: Don't set write permissions on dirty
- PTEs
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: Alistair Francis <alistair.francis@wdc.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>
-Content-Type: text/plain; charset="UTF-8"
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2607:f8b0:4864:20::943
+In-Reply-To: <20200313183652.10258-2-philmd@redhat.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: fr
+Content-Transfer-Encoding: 8bit
+X-Provags-ID: V03:K1:GJ3gnRQxCXjWGbgTtvoU7ubZlsKm52xUwMVXyWdc+auF9DgiLxa
+ cBjBv8foQaYpDy9nLte7NlJkyA5fgDSgIDKR6er7bU37HVn46uhIWbKXxufTbpFAJ8NIT9l
+ GZYJZn5tFdaiP+26hbN8zL6/5EIQP7ytbt/jDtAuAhwoNREwlNCbRgv36k8loHeV/xrOfFf
+ jQzYhlHPYsWgc9WaQKAsw==
+X-UI-Out-Filterresults: notjunk:1;V03:K0:oomdNi3/hLc=:G6jmWVCgGpY2jdMtcdEFIF
+ dr52O8j6SewKAR8x1xHiyLdECkwFtU3kRldha4aiJCs0XpRW/wegPV+DVpE0o/qY45SebEp/T
+ 0A+p15ilH0K3qt6zseY+msugGi5YYtJd/GGc0kfdEv903MHfUiADshzu9iIHQzvXcWP5qNjBq
+ TVHvFjsNlAz13ibvN4oAfDVIkJjWQIs35gd4Thh/GlgUqKJ7OwgS8NQSmare6IjcB+yF6caWp
+ 2vwT52jVR+6dB3xSQ188Gbk5tZnwQCQCdMVd/nO+5mvReEUFWQBN0R0B/W1/MjSiXWdbGYj1L
+ vsLjziNgUXL7XGE9KwXsSJ47zW/IzArfNJE7+229ERho4UVkHKWkiyO3ipPCpOURoPyYKgD1w
+ 2n4zrBbKHV7+k7bKRtabxyYeJ31w4R78AM6wFq3dvmZBhKdQ4spA1III73TdHe21+U4oKClho
+ wsiVv9AkNepPSwOaXKJ1lOKhbxnTqMtaAEI579TX6RhVOBqwrOpF8XNKNuvc5JgeOEUdHQ/cu
+ rDNl1fU4iwDZIK59Euwhcf70iZjsrz4ZevMY+3rfJ8H316kg+LZE7IJUsyHgjKvrM/Av9ZzUL
+ A9tZvb4YP0Q5/Tttn9xEBjoTYSjNl2GBJCvw4IOpvs7181ngCPUrY6L5Y+T9bYpXq6Sb55z18
+ Aq3BLJN+5xbcFQbmvUQqx2eELG1l/LTC/unJwsB6xMAUx6HefAkJDVmrMqfVWdy4gmrnVecjY
+ b3vYg92yHG0grj7WShgs1CS0oRxEbcptUM1CcSbncW64urZMm0OSUaH5ouOXodFWr3KOnwGKn
+ rdxYG1wWngibizMlj2nGXbLAlX4LOxY12vBgqlM+LB0y5HyTKjSZ+odZXyKZcAIghsvaAk8
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+X-Received-From: 212.227.17.10
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -70,37 +115,39 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Mar 2020 22:27:13 -0000
+X-List-Received-Date: Fri, 13 Mar 2020 22:28:45 -0000
 
-On Thu, Mar 12, 2020 at 10:26 PM Richard Henderson
-<richard.henderson@linaro.org> wrote:
->
-> On 3/12/20 3:10 PM, Alistair Francis wrote:
-> >> I still think this must be a guest (or nested guest) bug related to clearing
-> >> PTE bits and failing to flush the TLB properly.
-> >
-> > It think so as well now. I have changed the Linux guest and Hypervisor
-> > to be very aggressive with flushing but still can't get guest user
-> > space working. I'll keep digging and see if I can figure out what's
-> > going on.
-> >
-> >>
-> >> I don't see how it could be a qemu tlb flushing bug.  The only primitive,
-> >> sfence.vma, is quite heavy-handed and explicitly local to the thread.
-> >
-> > Yes, both sfence and hfence flush all TLBs, so that doesn't seem to be
-> > the problem.
->
-> Here's an idea: change the tlb_flush() calls to tlb_flush_all_cpus_synced().
->
-> If that works, it suggests a guest interprocessor interrupt bug in the tlb
-> shoot-down.
+Le 13/03/2020 à 19:36, Philippe Mathieu-Daudé a écrit :
+> Do not build the virtiofsd helper when configured with
+> --disable-system.
+> 
+> Signed-off-by: Philippe Mathieu-Daudé <philmd@redhat.com>
+> ---
+>  Makefile | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/Makefile b/Makefile
+> index 7df22fcc5d..ed77b6e50b 100644
+> --- a/Makefile
+> +++ b/Makefile
+> @@ -346,8 +346,8 @@ vhost-user-json-y += contrib/vhost-user-gpu/50-qemu-gpu.json
+>  endif
+>  
+>  ifeq ($(CONFIG_LINUX)$(CONFIG_SECCOMP)$(CONFIG_LIBCAP_NG),yyy)
+> -HELPERS-y += virtiofsd$(EXESUF)
+> -vhost-user-json-y += tools/virtiofsd/50-qemu-virtiofsd.json
+> +HELPERS-$(CONFIG_SOFTMMU) += virtiofsd$(EXESUF)
+> +vhost-user-json-$(CONFIG_SOFTMMU) += tools/virtiofsd/50-qemu-virtiofsd.json
+>  endif
+>  
+>  # Sphinx does not allow building manuals into the same directory as
+> 
 
-No change. I'll keep looking.
+Why don't you do that instead?
 
-Alistair
+  ifeq
+($(CONFIG_LINUX)$(CONFIG_SECCOMP)$(CONFIG_LIBCAP_NG)$(CONFIG_SOFTMMU),yyyy)
 
->
->
-> r~
+Thanks,
+Laurent
 
