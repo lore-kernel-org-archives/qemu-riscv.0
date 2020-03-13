@@ -1,23 +1,23 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jCbMf-0007Cp-9n
+	id 1jCbMf-0007Dc-HL
 	for mharc-qemu-riscv@gnu.org; Thu, 12 Mar 2020 23:52:01 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:48035)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:48109)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <jiangyifei@huawei.com>) id 1jCbMQ-0006v9-NF
- for qemu-riscv@nongnu.org; Thu, 12 Mar 2020 23:51:48 -0400
+ (envelope-from <jiangyifei@huawei.com>) id 1jCbMS-0006y4-J6
+ for qemu-riscv@nongnu.org; Thu, 12 Mar 2020 23:51:50 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <jiangyifei@huawei.com>) id 1jCbMK-0000hQ-IO
- for qemu-riscv@nongnu.org; Thu, 12 Mar 2020 23:51:42 -0400
-Received: from szxga06-in.huawei.com ([45.249.212.32]:35008 helo=huawei.com)
+ (envelope-from <jiangyifei@huawei.com>) id 1jCbMQ-0000jy-Kk
+ for qemu-riscv@nongnu.org; Thu, 12 Mar 2020 23:51:48 -0400
+Received: from szxga05-in.huawei.com ([45.249.212.191]:3284 helo=huawei.com)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <jiangyifei@huawei.com>)
- id 1jCbMH-0000SJ-Ay; Thu, 12 Mar 2020 23:51:37 -0400
+ id 1jCbMI-0000M6-93; Thu, 12 Mar 2020 23:51:38 -0400
 Received: from DGGEMS413-HUB.china.huawei.com (unknown [172.30.72.60])
- by Forcepoint Email with ESMTP id 9C4DA5360106C1A36A6D;
- Fri, 13 Mar 2020 11:51:31 +0800 (CST)
+ by Forcepoint Email with ESMTP id 72366771CD93184FE310;
+ Fri, 13 Mar 2020 11:51:26 +0800 (CST)
 Received: from huawei.com (10.133.201.158) by DGGEMS413-HUB.china.huawei.com
  (10.3.19.213) with Microsoft SMTP Server id 14.3.487.0; Fri, 13 Mar 2020
- 11:51:22 +0800
+ 11:51:19 +0800
 From: Yifei Jiang <jiangyifei@huawei.com>
 To: <qemu-devel@nongnu.org>, <qemu-riscv@nongnu.org>
 CC: <anup.patel@wdc.com>, <palmer@dabbelt.com>, <Alistair.Francis@wdc.com>,
@@ -25,12 +25,10 @@ CC: <anup.patel@wdc.com>, <palmer@dabbelt.com>, <Alistair.Francis@wdc.com>,
  <victor.zhangxiaofeng@huawei.com>, <zhang.zhanghailiang@huawei.com>,
  <dengkai1@huawei.com>, <yinyipeng1@huawei.com>, Yifei Jiang
  <jiangyifei@huawei.com>
-Subject: [PATCH RFC 5/9] target/riscv: Implement kvm_arch_put_registers
-Date: Fri, 13 Mar 2020 11:49:45 +0800
-Message-ID: <20200313034949.3028-6-jiangyifei@huawei.com>
+Subject: [PATCH RFC 0/9] Add riscv64 kvm accel support
+Date: Fri, 13 Mar 2020 11:49:40 +0800
+Message-ID: <20200313034949.3028-1-jiangyifei@huawei.com>
 X-Mailer: git-send-email 2.23.0.windows.1
-In-Reply-To: <20200313034949.3028-1-jiangyifei@huawei.com>
-References: <20200313034949.3028-1-jiangyifei@huawei.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.133.201.158]
@@ -38,7 +36,7 @@ X-CFilter-Loop: Reflected
 Content-Transfer-Encoding: quoted-printable
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
  [fuzzy]
-X-Received-From: 45.249.212.32
+X-Received-From: 45.249.212.191
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -50,184 +48,82 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Mar 2020 03:51:48 -0000
+X-List-Received-Date: Fri, 13 Mar 2020 03:51:50 -0000
 
-Put GPR CSR and FP registers by kvm by KVM_SET_ONE_REG ioctl
+Hi,
 
-Signed-off-by: Yifei Jiang <jiangyifei@huawei.com>
-Signed-off-by: Yipeng Yin <yinyipeng1@huawei.com>
----
- target/riscv/kvm.c | 136 ++++++++++++++++++++++++++++++++++++++++++++-
- 1 file changed, 135 insertions(+), 1 deletion(-)
+This series adds riscv64 kvm support, It is based on riscv_kvm_master
+branch at https://github.com/kvm-riscv/linux.
 
-diff --git a/target/riscv/kvm.c b/target/riscv/kvm.c
-index 8d5069b9e9..6dffda36bb 100644
---- a/target/riscv/kvm.c
-+++ b/target/riscv/kvm.c
-@@ -85,6 +85,31 @@ static int kvm_riscv_get_regs_core(CPUState *cs)
-     return ret;
- }
-=20
-+static int kvm_riscv_put_regs_core(CPUState *cs)
-+{
-+    int ret =3D 0;
-+    int i;
-+    uint64_t reg;
-+    CPURISCVState *env =3D &RISCV_CPU(cs)->env;
-+
-+    reg =3D env->pc;
-+    ret =3D kvm_set_one_reg(cs, RISCV_CORE_REG(regs.pc), &reg);
-+    if (ret) {
-+        return ret;
-+    }
-+
-+    for (i =3D 1; i < 32; i++) {
-+        __u64 id =3D kvm_riscv_reg_id(KVM_REG_RISCV_CORE, i);
-+        reg =3D env->gpr[i];
-+        ret =3D kvm_set_one_reg(cs, id, &reg);
-+        if (ret) {
-+            return ret;
-+        }
-+    }
-+
-+    return ret;
-+}
-+
- static int kvm_riscv_get_regs_csr(CPUState *cs)
- {
-     int ret =3D 0;
-@@ -142,6 +167,64 @@ static int kvm_riscv_get_regs_csr(CPUState *cs)
-     return ret;
- }
-=20
-+static int kvm_riscv_put_regs_csr(CPUState *cs)
-+{
-+    int ret =3D 0;
-+    uint64_t reg;
-+    CPURISCVState *env =3D &RISCV_CPU(cs)->env;
-+
-+    reg =3D env->mstatus;
-+    ret =3D kvm_set_one_reg(cs, RISCV_CSR_REG(sstatus), &reg);
-+    if (ret) {
-+        return ret;
-+    }
-+
-+    reg =3D env->mie;
-+    ret =3D kvm_set_one_reg(cs, RISCV_CSR_REG(sie), &reg);
-+    if (ret) {
-+        return ret;
-+    }
-+
-+    reg =3D env->stvec;
-+    ret =3D kvm_set_one_reg(cs, RISCV_CSR_REG(stvec), &reg);
-+    if (ret) {
-+        return ret;
-+    }
-+
-+    reg =3D env->sscratch;
-+    ret =3D kvm_set_one_reg(cs, RISCV_CSR_REG(sscratch), &reg);
-+    if (ret) {
-+        return ret;
-+    }
-+
-+    reg =3D env->sepc;
-+    ret =3D kvm_set_one_reg(cs, RISCV_CSR_REG(sepc), &reg);
-+    if (ret) {
-+        return ret;
-+    }
-+
-+    reg =3D env->scause;
-+    ret =3D kvm_set_one_reg(cs, RISCV_CSR_REG(scause), &reg);
-+    if (ret) {
-+        return ret;
-+    }
-+
-+    reg =3D env->mip;
-+    ret =3D kvm_set_one_reg(cs, RISCV_CSR_REG(sip), &reg);
-+    if (ret) {
-+        return ret;
-+    }
-+
-+    reg =3D env->satp;
-+    ret =3D kvm_set_one_reg(cs, RISCV_CSR_REG(sstatus), &reg);
-+    if (ret) {
-+        return ret;
-+    }
-+
-+    return ret;
-+}
-+
-+
- static int kvm_riscv_get_regs_fp(CPUState *cs)
- {
-     int ret =3D 0;
-@@ -175,6 +258,40 @@ static int kvm_riscv_get_regs_fp(CPUState *cs)
-     return ret;
- }
-=20
-+static int kvm_riscv_put_regs_fp(CPUState *cs)
-+{
-+    int ret =3D 0;
-+    int i;
-+    CPURISCVState *env =3D &RISCV_CPU(cs)->env;
-+
-+    if (riscv_has_ext(env, RVD)) {
-+        uint64_t reg;
-+        for (i =3D 0; i < 32; i++) {
-+            reg =3D env->fpr[i];
-+            ret =3D kvm_set_one_reg(cs, RISCV_FP_D_REG(i), &reg);
-+            if (ret) {
-+                return ret;
-+            }
-+        }
-+        return ret;
-+    }
-+
-+    if (riscv_has_ext(env, RVF)) {
-+        uint32_t reg;
-+        for (i =3D 0; i < 32; i++) {
-+            reg =3D env->fpr[i];
-+            ret =3D kvm_set_one_reg(cs, RISCV_FP_F_REG(i), &reg);
-+            if (ret) {
-+                return ret;
-+            }
-+        }
-+        return ret;
-+    }
-+
-+    return ret;
-+}
-+
-+
- const KVMCapabilityInfo kvm_arch_required_capabilities[] =3D {
-     KVM_CAP_LAST_INFO
- };
-@@ -203,7 +320,24 @@ int kvm_arch_get_registers(CPUState *cs)
-=20
- int kvm_arch_put_registers(CPUState *cs, int level)
- {
--    return 0;
-+    int ret =3D 0;
-+
-+    ret =3D kvm_riscv_put_regs_core(cs);
-+    if (ret) {
-+        return ret;
-+    }
-+
-+    ret =3D kvm_riscv_put_regs_csr(cs);
-+    if (ret) {
-+        return ret;
-+    }
-+
-+    ret =3D kvm_riscv_put_regs_fp(cs);
-+    if (ret) {
-+        return ret;
-+    }
-+
-+    return ret;
- }
-=20
- int kvm_arch_release_virq_post(int virq)
+This series depends on above pending changes which haven't yet been
+accepted, so this QEMU patch series is blocked until that dependency
+has been dealt with, but is worth reviewing anyway.
+
+Several steps to use this:
+
+1. Build riscv64 emulation
+$ ./configure --target-list=3Driscv64-softmmu
+$ make -j$(nproc)
+
+2. Build kernel
+riscv_kvm_master branch at https://github.com/kvm-riscv/linux
+
+3. Build QEMU VM
+I cross build in riscv toolchain
+$ PKG_CONFIG_LIBDIR=3D<toolchain pkgconfig path>
+$ export PKG_CONFIG_SYSROOT_DIR=3D<toolchain sysroot path>
+$ ./configure --target-list=3Driscv64-softmmu --enable-kvm \
+--cross-prefix=3Driscv64-linux-gnu- --disable-libiscsi --disable-glusterf=
+s \
+--disable-libusb --disable-usb-redir --audio-drv-list=3D --disable-opengl=
+ \
+--disable-libxml2
+
+4. Start riscv64 emulation
+$ ./qemu-system-riscv64 -M virt -m 4096M -cpu rv64,x-h=3Dtrue -nographic =
+\
+        -name guest=3Driscv-hyp,debug-threads=3Don \
+        -smp 4 \
+        -kernel ./fw_jump.elf \
+        -device loader,file=3D./Image,addr=3D0x80200000 \
+        -drive file=3D./hyp.img,format=3Draw,id=3Dhd0 \
+        -device virtio-blk-device,drive=3Dhd0 \
+        -append "root=3D/dev/vda rw console=3DttyS0 earlycon=3Dsbi"
+
+5. Start kvm-acceled QEMU VM in riscv64 emulation
+$ ./qemu-system-riscv64 -M virt,accel=3Dkvm -m 1024M -cpu host -nographic=
+ \
+        -name guest=3Driscv-guset \
+         -smp 2 \
+        -kernel ./Image \
+        -drive file=3D./guest.img,format=3Draw,id=3Dhd0 \
+        -device virtio-blk-device,drive=3Dhd0 \
+        -append "root=3D/dev/vda rw console=3DttyS0 earlycon=3Dsbi"
+
+Yifei Jiang (9):
+  linux-header: Update linux/kvm.h
+  target/riscv: Add target/riscv/kvm.c to place the public kvm interface
+  target/riscv: Implement function kvm_arch_init_vcpu
+  target/riscv: Implement kvm_arch_get_registers
+  target/riscv: Implement kvm_arch_put_registers
+  target/riscv: Support start kernel directly by KVM
+  hw/riscv: PLIC update external interrupt by KVM when kvm enabled
+  target/riscv: Handler KVM_EXIT_RISCV_SBI exit
+  target/riscv: add host riscv64 cpu type
+
+ configure                  |   1 +
+ hw/riscv/sifive_plic.c     |  31 ++-
+ hw/riscv/virt.c            |  15 +-
+ linux-headers/linux/kvm.h  |   8 +
+ target/riscv/Makefile.objs |   1 +
+ target/riscv/cpu.c         |   9 +
+ target/riscv/cpu.h         |   4 +
+ target/riscv/kvm.c         | 513 +++++++++++++++++++++++++++++++++++++
+ target/riscv/kvm_riscv.h   |  25 ++
+ 9 files changed, 596 insertions(+), 11 deletions(-)
+ create mode 100644 target/riscv/kvm.c
+ create mode 100644 target/riscv/kvm_riscv.h
+
 --=20
 2.19.1
 
