@@ -1,58 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jCpBo-0000fK-FI
-	for mharc-qemu-riscv@gnu.org; Fri, 13 Mar 2020 14:37:44 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:54282)
+	id 1jCpBu-0000uw-DR
+	for mharc-qemu-riscv@gnu.org; Fri, 13 Mar 2020 14:37:50 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:54484)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <philmd@redhat.com>) id 1jCpBl-0000Y5-4g
- for qemu-riscv@nongnu.org; Fri, 13 Mar 2020 14:37:42 -0400
+ (envelope-from <philmd@redhat.com>) id 1jCpBr-0000me-76
+ for qemu-riscv@nongnu.org; Fri, 13 Mar 2020 14:37:48 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <philmd@redhat.com>) id 1jCpBk-00041u-7h
- for qemu-riscv@nongnu.org; Fri, 13 Mar 2020 14:37:41 -0400
-Received: from us-smtp-1.mimecast.com ([205.139.110.61]:30085
+ (envelope-from <philmd@redhat.com>) id 1jCpBq-0004Kq-4E
+ for qemu-riscv@nongnu.org; Fri, 13 Mar 2020 14:37:47 -0400
+Received: from us-smtp-2.mimecast.com ([207.211.31.81]:54610
  helo=us-smtp-delivery-1.mimecast.com)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <philmd@redhat.com>) id 1jCpBk-00040J-31
- for qemu-riscv@nongnu.org; Fri, 13 Mar 2020 14:37:40 -0400
+ (Exim 4.71) (envelope-from <philmd@redhat.com>) id 1jCpBp-0004JS-W1
+ for qemu-riscv@nongnu.org; Fri, 13 Mar 2020 14:37:46 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1584124659;
+ s=mimecast20190719; t=1584124665;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=3SuVECRO5K7Gvy7TFYYgJaxwMNPrKIUm0bQrl4kHjTk=;
- b=bl1XhSYVoMl2TreOxlRdsvtqiNdmlrpa0tFISeeesUCi2Xr5rlQ3KmtEVlP6GT+lbEBJX2
- 3DdKPMW1Pp6pHx11IqTWE/OrkqnN0lE8Oi9d+QlJeQcCLTml6/n/RDmgg/zYfi2DADjRxl
- fwk7HHO7AWyu9aKRcxLLJSFYyI9eiew=
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-400-DQATcE3yNyGcxQwt2Dr9gQ-1; Fri, 13 Mar 2020 14:37:37 -0400
-X-MC-Unique: DQATcE3yNyGcxQwt2Dr9gQ-1
-Received: by mail-wm1-f72.google.com with SMTP id z26so3675887wmk.1
- for <qemu-riscv@nongnu.org>; Fri, 13 Mar 2020 11:37:37 -0700 (PDT)
+ bh=wGoD8B/E7ALRdyPVkuOPFi6qepohKGtXhwvJlBp3QNU=;
+ b=I3/44eZM7F9dP2rtD1alcB3gGQX+6OJ8XG5ShCI4lcLC4AmTcWx7SZAbu5GI4pDJtq+9Li
+ 5WGEv1AqV4pkxzVuJfbdKpWYpYxN796sX8pbRi5omDQEw+euzPYN4b3Xoop5jsiykbJ0V+
+ FCNlsoIoctJ/fmGtqjZqQQjC2ArLBbU=
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-453-EdWluhlqPXWvntfL-jngTQ-1; Fri, 13 Mar 2020 14:37:44 -0400
+X-MC-Unique: EdWluhlqPXWvntfL-jngTQ-1
+Received: by mail-wm1-f70.google.com with SMTP id e26so3289646wmk.8
+ for <qemu-riscv@nongnu.org>; Fri, 13 Mar 2020 11:37:43 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=7qrHY3POAwgPR/yw4WHGaOw9mwemlFbyLT5p0JEbbnw=;
- b=NjjfZBeE7eiH1vq7izCVo+APpopI4THYGfTnf8N87Ld4Ex8UUcBxr1cKvv8qPnXoAD
- Tl7ITA0Q/3/kRva928DuLSwWiYX8PHcXBcuXASY6fRzuet8+q9Q4OvkwDDSkR67XiRNT
- qAQTgOPrjUeFp28B9lqhXpfsyeI8TrmwLXXXsjZV7YHTbEov949oFsAtWoYWnbIB1YlB
- TUVO9BeR95xzosqGc59tlw9hrC9kY6vxViwDAaeJGwm/bux55z0XoP34hMfmi4erDo55
- SA2gGyQ6dk9B4tV1VdasUQmEHbnb4MGb5O8LSXtUHuhyc0kvqfFlfZnEM/S4zY5oFEyK
- zldQ==
-X-Gm-Message-State: ANhLgQ3ebQyH12Gjc5yj3i1pUmlaR1vIDihaZtO9XF4DWwxBBYnxx8a3
- QNKB2jdbo2WH3uwyspcrjkD9glGYns6WkM0dVfQ3S4GcFtNz0iYVhi8khKH6erZKkzXP0uq5DlW
- m5bkfqJyL7AeMOGE=
-X-Received: by 2002:a1c:9cd1:: with SMTP id f200mr10863175wme.80.1584124656632; 
- Fri, 13 Mar 2020 11:37:36 -0700 (PDT)
-X-Google-Smtp-Source: ADFU+vvhA9+6w6SxST3JF6c4Ko2DAdhDZUQcupyXKHijFIIWpb7ZBMQOtnHcAwPsLhSqhwg+SoVqzw==
-X-Received: by 2002:a1c:9cd1:: with SMTP id f200mr10863153wme.80.1584124656402; 
- Fri, 13 Mar 2020 11:37:36 -0700 (PDT)
+ bh=T76tUQ+vOJYR7iIj3p+P6wqlEgQ0pagAj6PhTCTXdsc=;
+ b=ayHMkhxWRo4eirTK0qhbxzi4MMqYfpJJfv5lInkC+6WF3iZcAgdggUkv6Punlg/2JJ
+ aL74+N8HX+GrLo31Zp3jdVeRLR++69l4L1O170CgADCey5OflEmQecZFtM+VwST9xZgk
+ XyFnqXJTqaZtu9lEC/Kkz3fw8EJ+CMMozNucQuIlBsrEhm/JK9MfcBd5ZHSLH1GQrf73
+ 2WwQFRzdISLAuamVZLiMrpRuesvfdzNbJKNZWt7VbXdj/6dhe7v5hZem1jUK0yKhscx8
+ NUCOxQs+sm2v+JaUvMcWRnCHD9ib/sNXCQAnXBRBO90ZvQPetizg3CV9NUsAdNLqVhEH
+ YnQg==
+X-Gm-Message-State: ANhLgQ3xdfhybXVxYcc/ef0nBb3uuscz/fHbxCFTnyxyvvu6wtUPb3jL
+ PdxPkKO12rl3fDJUOUpuaSLMROVe6eyel1fnqUGEShe/plqmKW4zJY2+TfGglRoAwpcHW0T8mkZ
+ AYSjtIYlmt3ogNhM=
+X-Received: by 2002:a7b:ce94:: with SMTP id q20mr11560601wmj.157.1584124661705; 
+ Fri, 13 Mar 2020 11:37:41 -0700 (PDT)
+X-Google-Smtp-Source: ADFU+vt55lOk8cq/FfDyGsqCjNX/EF/f1KG2Wt2coox2gOYadwCTOT9928FGmsSSu/bYROjhTtyiSQ==
+X-Received: by 2002:a7b:ce94:: with SMTP id q20mr11560582wmj.157.1584124661544; 
+ Fri, 13 Mar 2020 11:37:41 -0700 (PDT)
 Received: from x1w.redhat.com (47.red-88-21-205.staticip.rima-tde.net.
  [88.21.205.47])
- by smtp.gmail.com with ESMTPSA id b6sm24047514wrv.43.2020.03.13.11.37.35
+ by smtp.gmail.com with ESMTPSA id w10sm4132784wrr.49.2020.03.13.11.37.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Mar 2020 11:37:35 -0700 (PDT)
+ Fri, 13 Mar 2020 11:37:40 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: David Hildenbrand <david@redhat.com>, Laurent Vivier <laurent@vivier.eu>,
@@ -68,10 +68,9 @@ Cc: David Hildenbrand <david@redhat.com>, Laurent Vivier <laurent@vivier.eu>,
  Peter Maydell <peter.maydell@linaro.org>,
  Eduardo Habkost <ehabkost@redhat.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
-Subject: [PATCH 08/14] exec: Assert CPU migration is not used on user-only
- build
-Date: Fri, 13 Mar 2020 19:36:46 +0100
-Message-Id: <20200313183652.10258-9-philmd@redhat.com>
+Subject: [PATCH 09/14] exec: Drop redundant #ifdeffery
+Date: Fri, 13 Mar 2020 19:36:47 +0100
+Message-Id: <20200313183652.10258-10-philmd@redhat.com>
 X-Mailer: git-send-email 2.21.1
 In-Reply-To: <20200313183652.10258-1-philmd@redhat.com>
 References: <20200313183652.10258-1-philmd@redhat.com>
@@ -82,7 +81,8 @@ Content-Type: text/plain; charset=UTF-8;
 	text/plain; charset="utf-8"
 Content-Transfer-Encoding: quoted-printable
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
-X-Received-From: 205.139.110.61
+ [fuzzy]
+X-Received-From: 207.211.31.81
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -94,28 +94,28 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Mar 2020 18:37:42 -0000
+X-List-Received-Date: Fri, 13 Mar 2020 18:37:48 -0000
 
 Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
 ---
- exec.c | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ exec.c | 4 ----
+ 1 file changed, 4 deletions(-)
 
 diff --git a/exec.c b/exec.c
-index 0cc500d53a..7bc9828c5b 100644
+index 7bc9828c5b..f258502966 100644
 --- a/exec.c
 +++ b/exec.c
-@@ -946,7 +946,9 @@ void cpu_exec_realizefn(CPUState *cpu, Error **errp)
+@@ -185,10 +185,6 @@ struct DirtyBitmapSnapshot {
+     unsigned long dirty[];
+ };
 =20
-     qemu_plugin_vcpu_init_hook(cpu);
-=20
--#ifndef CONFIG_USER_ONLY
-+#ifdef CONFIG_USER_ONLY
-+    assert(cc->vmsd =3D=3D NULL);
-+#else /* !CONFIG_USER_ONLY */
-     if (qdev_get_vmsd(DEVICE(cpu)) =3D=3D NULL) {
-         vmstate_register(NULL, cpu->cpu_index, &vmstate_cpu_common, cpu);
-     }
+-#endif
+-
+-#if !defined(CONFIG_USER_ONLY)
+-
+ static void phys_map_node_reserve(PhysPageMap *map, unsigned nodes)
+ {
+     static unsigned alloc_hint =3D 16;
 --=20
 2.21.1
 
