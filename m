@@ -1,109 +1,49 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jCsnO-0007dd-9N
-	for mharc-qemu-riscv@gnu.org; Fri, 13 Mar 2020 18:28:46 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:41956)
+	id 1jCt0D-0004vV-UR
+	for mharc-qemu-riscv@gnu.org; Fri, 13 Mar 2020 18:42:01 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:50548)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <laurent@vivier.eu>) id 1jCsnM-0007az-Qb
- for qemu-riscv@nongnu.org; Fri, 13 Mar 2020 18:28:45 -0400
+ (envelope-from <zhiwei_liu@c-sky.com>) id 1jCt0B-0004uG-6Z
+ for qemu-riscv@nongnu.org; Fri, 13 Mar 2020 18:42:00 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <laurent@vivier.eu>) id 1jCsnL-0003VP-TY
- for qemu-riscv@nongnu.org; Fri, 13 Mar 2020 18:28:44 -0400
-Received: from mout.kundenserver.de ([212.227.17.10]:60579)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <laurent@vivier.eu>)
- id 1jCsnH-0003PF-SH; Fri, 13 Mar 2020 18:28:40 -0400
-Received: from [192.168.100.1] ([82.252.135.106]) by mrelayeu.kundenserver.de
- (mreue109 [213.165.67.119]) with ESMTPSA (Nemesis) id
- 1MYvTy-1ir0Iu1vN2-00UnpF; Fri, 13 Mar 2020 23:28:12 +0100
-Subject: Re: [PATCH 01/14] Makefile: Only build virtiofsd if system-mode is
- enabled
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>,
- qemu-devel@nongnu.org
-Cc: David Hildenbrand <david@redhat.com>,
- Alistair Francis <Alistair.Francis@wdc.com>, qemu-ppc@nongnu.org,
- Cornelia Huck <cohuck@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
- =?UTF-8?Q?Alex_Benn=c3=a9e?= <alex.bennee@linaro.org>,
- qemu-s390x@nongnu.org, Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Richard Henderson <rth@twiddle.net>,
- David Gibson <david@gibson.dropbear.id.au>, qemu-riscv@nongnu.org,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, qemu-arm@nongnu.org,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Peter Maydell <peter.maydell@linaro.org>,
- Eduardo Habkost <ehabkost@redhat.com>
-References: <20200313183652.10258-1-philmd@redhat.com>
- <20200313183652.10258-2-philmd@redhat.com>
-From: Laurent Vivier <laurent@vivier.eu>
-Autocrypt: addr=laurent@vivier.eu; prefer-encrypt=mutual; keydata=
- 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
-Message-ID: <8f73d608-d28e-b896-b1f0-f95d599502f0@vivier.eu>
-Date: Fri, 13 Mar 2020 23:28:08 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ (envelope-from <zhiwei_liu@c-sky.com>) id 1jCt09-00067A-FJ
+ for qemu-riscv@nongnu.org; Fri, 13 Mar 2020 18:41:59 -0400
+Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:57789)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <zhiwei_liu@c-sky.com>)
+ id 1jCt03-0005T3-4s; Fri, 13 Mar 2020 18:41:51 -0400
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07436282|-1; BR=01201311R141ec; CH=green;
+ DM=||false|; DS=SPAM|spam_education_ad|0.830845-0.000596479-0.168558;
+ FP=0|0|0|0|0|-1|-1|-1; HT=e02c03303; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS;
+ RN=9; RT=9; SR=0; TI=SMTPD_---.H.4qaF3_1584139302; 
+Received: from 192.168.3.18(mailfrom:zhiwei_liu@c-sky.com
+ fp:SMTPD_---.H.4qaF3_1584139302)
+ by smtp.aliyun-inc.com(10.147.42.135);
+ Sat, 14 Mar 2020 06:41:42 +0800
+Subject: Re: [PATCH v5 07/60] target/riscv: add fault-only-first unit stride
+ load
+To: Alistair Francis <alistair23@gmail.com>
+Cc: Richard Henderson <richard.henderson@linaro.org>,
+ Chih-Min Chao <chihmin.chao@sifive.com>, Palmer Dabbelt
+ <palmer@dabbelt.com>, wenmeng_zhang@c-sky.com, wxy194768@alibaba-inc.com,
+ guoren@linux.alibaba.com,
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
+References: <20200312145900.2054-1-zhiwei_liu@c-sky.com>
+ <20200312145900.2054-8-zhiwei_liu@c-sky.com>
+ <CAKmqyKMSUHtMSVBRLBfxm1oOJ4swS-5mrUobVd+VSY+S0No2+Q@mail.gmail.com>
+From: LIU Zhiwei <zhiwei_liu@c-sky.com>
+Message-ID: <77d0ec72-cdad-9375-b736-2478a37c8f34@c-sky.com>
+Date: Sat, 14 Mar 2020 06:41:41 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
  Thunderbird/68.5.0
 MIME-Version: 1.0
-In-Reply-To: <20200313183652.10258-2-philmd@redhat.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: fr
-Content-Transfer-Encoding: 8bit
-X-Provags-ID: V03:K1:GJ3gnRQxCXjWGbgTtvoU7ubZlsKm52xUwMVXyWdc+auF9DgiLxa
- cBjBv8foQaYpDy9nLte7NlJkyA5fgDSgIDKR6er7bU37HVn46uhIWbKXxufTbpFAJ8NIT9l
- GZYJZn5tFdaiP+26hbN8zL6/5EIQP7ytbt/jDtAuAhwoNREwlNCbRgv36k8loHeV/xrOfFf
- jQzYhlHPYsWgc9WaQKAsw==
-X-UI-Out-Filterresults: notjunk:1;V03:K0:oomdNi3/hLc=:G6jmWVCgGpY2jdMtcdEFIF
- dr52O8j6SewKAR8x1xHiyLdECkwFtU3kRldha4aiJCs0XpRW/wegPV+DVpE0o/qY45SebEp/T
- 0A+p15ilH0K3qt6zseY+msugGi5YYtJd/GGc0kfdEv903MHfUiADshzu9iIHQzvXcWP5qNjBq
- TVHvFjsNlAz13ibvN4oAfDVIkJjWQIs35gd4Thh/GlgUqKJ7OwgS8NQSmare6IjcB+yF6caWp
- 2vwT52jVR+6dB3xSQ188Gbk5tZnwQCQCdMVd/nO+5mvReEUFWQBN0R0B/W1/MjSiXWdbGYj1L
- vsLjziNgUXL7XGE9KwXsSJ47zW/IzArfNJE7+229ERho4UVkHKWkiyO3ipPCpOURoPyYKgD1w
- 2n4zrBbKHV7+k7bKRtabxyYeJ31w4R78AM6wFq3dvmZBhKdQ4spA1III73TdHe21+U4oKClho
- wsiVv9AkNepPSwOaXKJ1lOKhbxnTqMtaAEI579TX6RhVOBqwrOpF8XNKNuvc5JgeOEUdHQ/cu
- rDNl1fU4iwDZIK59Euwhcf70iZjsrz4ZevMY+3rfJ8H316kg+LZE7IJUsyHgjKvrM/Av9ZzUL
- A9tZvb4YP0Q5/Tttn9xEBjoTYSjNl2GBJCvw4IOpvs7181ngCPUrY6L5Y+T9bYpXq6Sb55z18
- Aq3BLJN+5xbcFQbmvUQqx2eELG1l/LTC/unJwsB6xMAUx6HefAkJDVmrMqfVWdy4gmrnVecjY
- b3vYg92yHG0grj7WShgs1CS0oRxEbcptUM1CcSbncW64urZMm0OSUaH5ouOXodFWr3KOnwGKn
- rdxYG1wWngibizMlj2nGXbLAlX4LOxY12vBgqlM+LB0y5HyTKjSZ+odZXyKZcAIghsvaAk8
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
-X-Received-From: 212.227.17.10
+In-Reply-To: <CAKmqyKMSUHtMSVBRLBfxm1oOJ4swS-5mrUobVd+VSY+S0No2+Q@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Content-Language: en-US
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 3.x [generic] [fuzzy]
+X-Received-From: 121.197.200.217
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -115,39 +55,285 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Mar 2020 22:28:45 -0000
+X-List-Received-Date: Fri, 13 Mar 2020 22:42:01 -0000
 
-Le 13/03/2020 à 19:36, Philippe Mathieu-Daudé a écrit :
-> Do not build the virtiofsd helper when configured with
-> --disable-system.
-> 
-> Signed-off-by: Philippe Mathieu-Daudé <philmd@redhat.com>
-> ---
->  Makefile | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff --git a/Makefile b/Makefile
-> index 7df22fcc5d..ed77b6e50b 100644
-> --- a/Makefile
-> +++ b/Makefile
-> @@ -346,8 +346,8 @@ vhost-user-json-y += contrib/vhost-user-gpu/50-qemu-gpu.json
->  endif
->  
->  ifeq ($(CONFIG_LINUX)$(CONFIG_SECCOMP)$(CONFIG_LIBCAP_NG),yyy)
-> -HELPERS-y += virtiofsd$(EXESUF)
-> -vhost-user-json-y += tools/virtiofsd/50-qemu-virtiofsd.json
-> +HELPERS-$(CONFIG_SOFTMMU) += virtiofsd$(EXESUF)
-> +vhost-user-json-$(CONFIG_SOFTMMU) += tools/virtiofsd/50-qemu-virtiofsd.json
->  endif
->  
->  # Sphinx does not allow building manuals into the same directory as
-> 
 
-Why don't you do that instead?
 
-  ifeq
-($(CONFIG_LINUX)$(CONFIG_SECCOMP)$(CONFIG_LIBCAP_NG)$(CONFIG_SOFTMMU),yyyy)
+On 2020/3/14 6:24, Alistair Francis wrote:
+> On Thu, Mar 12, 2020 at 8:13 AM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
+>> The unit-stride fault-only-fault load instructions are used to
+>> vectorize loops with data-dependent exit conditions(while loops).
+>> These instructions execute as a regular load except that they
+>> will only take a trap on element 0.
+>>
+>> Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
+>> ---
+>>   target/riscv/helper.h                   |  22 +++++
+>>   target/riscv/insn32.decode              |   7 ++
+>>   target/riscv/insn_trans/trans_rvv.inc.c |  69 +++++++++++++++
+>>   target/riscv/vector_helper.c            | 111 ++++++++++++++++++++++++
+>>   4 files changed, 209 insertions(+)
+>>
+>> diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+>> index f9b3da60ca..72ba4d9bdb 100644
+>> --- a/target/riscv/helper.h
+>> +++ b/target/riscv/helper.h
+>> @@ -218,3 +218,25 @@ DEF_HELPER_6(vsxe_v_b, void, ptr, ptr, tl, ptr, env, i32)
+>>   DEF_HELPER_6(vsxe_v_h, void, ptr, ptr, tl, ptr, env, i32)
+>>   DEF_HELPER_6(vsxe_v_w, void, ptr, ptr, tl, ptr, env, i32)
+>>   DEF_HELPER_6(vsxe_v_d, void, ptr, ptr, tl, ptr, env, i32)
+>> +DEF_HELPER_5(vlbff_v_b, void, ptr, ptr, tl, env, i32)
+>> +DEF_HELPER_5(vlbff_v_h, void, ptr, ptr, tl, env, i32)
+>> +DEF_HELPER_5(vlbff_v_w, void, ptr, ptr, tl, env, i32)
+>> +DEF_HELPER_5(vlbff_v_d, void, ptr, ptr, tl, env, i32)
+>> +DEF_HELPER_5(vlhff_v_h, void, ptr, ptr, tl, env, i32)
+>> +DEF_HELPER_5(vlhff_v_w, void, ptr, ptr, tl, env, i32)
+>> +DEF_HELPER_5(vlhff_v_d, void, ptr, ptr, tl, env, i32)
+>> +DEF_HELPER_5(vlwff_v_w, void, ptr, ptr, tl, env, i32)
+>> +DEF_HELPER_5(vlwff_v_d, void, ptr, ptr, tl, env, i32)
+>> +DEF_HELPER_5(vleff_v_b, void, ptr, ptr, tl, env, i32)
+>> +DEF_HELPER_5(vleff_v_h, void, ptr, ptr, tl, env, i32)
+>> +DEF_HELPER_5(vleff_v_w, void, ptr, ptr, tl, env, i32)
+>> +DEF_HELPER_5(vleff_v_d, void, ptr, ptr, tl, env, i32)
+>> +DEF_HELPER_5(vlbuff_v_b, void, ptr, ptr, tl, env, i32)
+>> +DEF_HELPER_5(vlbuff_v_h, void, ptr, ptr, tl, env, i32)
+>> +DEF_HELPER_5(vlbuff_v_w, void, ptr, ptr, tl, env, i32)
+>> +DEF_HELPER_5(vlbuff_v_d, void, ptr, ptr, tl, env, i32)
+>> +DEF_HELPER_5(vlhuff_v_h, void, ptr, ptr, tl, env, i32)
+>> +DEF_HELPER_5(vlhuff_v_w, void, ptr, ptr, tl, env, i32)
+>> +DEF_HELPER_5(vlhuff_v_d, void, ptr, ptr, tl, env, i32)
+>> +DEF_HELPER_5(vlwuff_v_w, void, ptr, ptr, tl, env, i32)
+>> +DEF_HELPER_5(vlwuff_v_d, void, ptr, ptr, tl, env, i32)
+>> diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+>> index bc36df33b5..b76c09c8c0 100644
+>> --- a/target/riscv/insn32.decode
+>> +++ b/target/riscv/insn32.decode
+>> @@ -224,6 +224,13 @@ vle_v      ... 000 . 00000 ..... 111 ..... 0000111 @r2_nfvm
+>>   vlbu_v     ... 000 . 00000 ..... 000 ..... 0000111 @r2_nfvm
+>>   vlhu_v     ... 000 . 00000 ..... 101 ..... 0000111 @r2_nfvm
+>>   vlwu_v     ... 000 . 00000 ..... 110 ..... 0000111 @r2_nfvm
+>> +vlbff_v    ... 100 . 10000 ..... 000 ..... 0000111 @r2_nfvm
+>> +vlhff_v    ... 100 . 10000 ..... 101 ..... 0000111 @r2_nfvm
+>> +vlwff_v    ... 100 . 10000 ..... 110 ..... 0000111 @r2_nfvm
+>> +vleff_v    ... 000 . 10000 ..... 111 ..... 0000111 @r2_nfvm
+>> +vlbuff_v   ... 000 . 10000 ..... 000 ..... 0000111 @r2_nfvm
+>> +vlhuff_v   ... 000 . 10000 ..... 101 ..... 0000111 @r2_nfvm
+>> +vlwuff_v   ... 000 . 10000 ..... 110 ..... 0000111 @r2_nfvm
+>>   vsb_v      ... 000 . 00000 ..... 000 ..... 0100111 @r2_nfvm
+>>   vsh_v      ... 000 . 00000 ..... 101 ..... 0100111 @r2_nfvm
+>>   vsw_v      ... 000 . 00000 ..... 110 ..... 0100111 @r2_nfvm
+>> diff --git a/target/riscv/insn_trans/trans_rvv.inc.c b/target/riscv/insn_trans/trans_rvv.inc.c
+>> index 5d1eeef323..9d9fc886d6 100644
+>> --- a/target/riscv/insn_trans/trans_rvv.inc.c
+>> +++ b/target/riscv/insn_trans/trans_rvv.inc.c
+>> @@ -531,3 +531,72 @@ GEN_VEXT_TRANS(vsxb_v, 0, rnfvm, st_index_op, st_index_check)
+>>   GEN_VEXT_TRANS(vsxh_v, 1, rnfvm, st_index_op, st_index_check)
+>>   GEN_VEXT_TRANS(vsxw_v, 2, rnfvm, st_index_op, st_index_check)
+>>   GEN_VEXT_TRANS(vsxe_v, 3, rnfvm, st_index_op, st_index_check)
+>> +
+>> +/*
+>> + *** unit stride fault-only-first load
+>> + */
+>> +static bool ldff_trans(uint32_t vd, uint32_t rs1, uint32_t data,
+>> +        gen_helper_ldst_us *fn, DisasContext *s)
+>> +{
+>> +    TCGv_ptr dest, mask;
+>> +    TCGv base;
+>> +    TCGv_i32 desc;
+>> +
+>> +    dest = tcg_temp_new_ptr();
+>> +    mask = tcg_temp_new_ptr();
+>> +    base = tcg_temp_new();
+>> +    desc = tcg_const_i32(simd_desc(0, s->vlen / 8, data));
+>> +
+>> +    gen_get_gpr(base, rs1);
+>> +    tcg_gen_addi_ptr(dest, cpu_env, vreg_ofs(s, vd));
+>> +    tcg_gen_addi_ptr(mask, cpu_env, vreg_ofs(s, 0));
+>> +
+>> +    fn(dest, mask, base, cpu_env, desc);
+>> +
+>> +    tcg_temp_free_ptr(dest);
+>> +    tcg_temp_free_ptr(mask);
+>> +    tcg_temp_free(base);
+>> +    tcg_temp_free_i32(desc);
+>> +    return true;
+>> +}
+>> +
+>> +static bool ldff_op(DisasContext *s, arg_r2nfvm *a, uint8_t seq)
+>> +{
+>> +    uint32_t data = 0;
+>> +    gen_helper_ldst_us *fn;
+>> +    static gen_helper_ldst_us * const fns[7][4] = {
+>> +        { gen_helper_vlbff_v_b,  gen_helper_vlbff_v_h,
+>> +          gen_helper_vlbff_v_w,  gen_helper_vlbff_v_d },
+>> +        { NULL,                  gen_helper_vlhff_v_h,
+>> +          gen_helper_vlhff_v_w,  gen_helper_vlhff_v_d },
+>> +        { NULL,                  NULL,
+>> +          gen_helper_vlwff_v_w,  gen_helper_vlwff_v_d },
+>> +        { gen_helper_vleff_v_b,  gen_helper_vleff_v_h,
+>> +          gen_helper_vleff_v_w,  gen_helper_vleff_v_d },
+>> +        { gen_helper_vlbuff_v_b, gen_helper_vlbuff_v_h,
+>> +          gen_helper_vlbuff_v_w, gen_helper_vlbuff_v_d },
+>> +        { NULL,                  gen_helper_vlhuff_v_h,
+>> +          gen_helper_vlhuff_v_w, gen_helper_vlhuff_v_d },
+>> +        { NULL,                  NULL,
+>> +          gen_helper_vlwuff_v_w, gen_helper_vlwuff_v_d }
+>> +    };
+>> +
+>> +    fn =  fns[seq][s->sew];
+>> +    if (fn == NULL) {
+>> +        return false;
+>> +    }
+>> +
+>> +    data = FIELD_DP32(data, VDATA, MLEN, s->mlen);
+>> +    data = FIELD_DP32(data, VDATA, VM, a->vm);
+>> +    data = FIELD_DP32(data, VDATA, LMUL, s->lmul);
+>> +    data = FIELD_DP32(data, VDATA, NF, a->nf);
+>> +    return ldff_trans(a->rd, a->rs1, data, fn, s);
+>> +}
+>> +
+>> +GEN_VEXT_TRANS(vlbff_v, 0, r2nfvm, ldff_op, ld_us_check)
+>> +GEN_VEXT_TRANS(vlhff_v, 1, r2nfvm, ldff_op, ld_us_check)
+>> +GEN_VEXT_TRANS(vlwff_v, 2, r2nfvm, ldff_op, ld_us_check)
+>> +GEN_VEXT_TRANS(vleff_v, 3, r2nfvm, ldff_op, ld_us_check)
+>> +GEN_VEXT_TRANS(vlbuff_v, 4, r2nfvm, ldff_op, ld_us_check)
+>> +GEN_VEXT_TRANS(vlhuff_v, 5, r2nfvm, ldff_op, ld_us_check)
+>> +GEN_VEXT_TRANS(vlwuff_v, 6, r2nfvm, ldff_op, ld_us_check)
+>> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+>> index 35cb9f09b4..3841301b74 100644
+>> --- a/target/riscv/vector_helper.c
+>> +++ b/target/riscv/vector_helper.c
+>> @@ -574,3 +574,114 @@ GEN_VEXT_ST_INDEX(vsxe_v_b, int8_t,  int8_t,  idx_b, ste_b)
+>>   GEN_VEXT_ST_INDEX(vsxe_v_h, int16_t, int16_t, idx_h, ste_h)
+>>   GEN_VEXT_ST_INDEX(vsxe_v_w, int32_t, int32_t, idx_w, ste_w)
+>>   GEN_VEXT_ST_INDEX(vsxe_v_d, int64_t, int64_t, idx_d, ste_d)
+>> +
+>> +/*
+>> + *** unit-stride fault-only-fisrt load instructions
+>> + */
+>> +static inline void vext_ldff(void *vd, void *v0, target_ulong base,
+>> +        CPURISCVState *env, uint32_t desc,
+>> +        vext_ldst_elem_fn ldst_elem,
+>> +        vext_ld_clear_elem clear_elem,
+>> +        int mmuidx, uint32_t esz, uint32_t msz, uintptr_t ra)
+>> +{
+>> +    void *host;
+>> +    uint32_t i, k, vl = 0;
+>> +    uint32_t mlen = vext_mlen(desc);
+>> +    uint32_t nf = vext_nf(desc);
+>> +    uint32_t vm = vext_vm(desc);
+>> +    uint32_t vlmax = vext_maxsz(desc) / esz;
+>> +    target_ulong addr, offset, remain;
+>> +
+>> +    if (env->vl == 0) {
+>> +        return;
+>> +    }
+>> +    /* probe every access*/
+>> +    for (i = 0; i < env->vl; i++) {
+>> +        if (!vm && !vext_elem_mask(v0, mlen, i)) {
+>> +            continue;
+>> +        }
+>> +        addr = base + nf * i * msz;
+>> +        if (i == 0) {
+>> +            probe_pages(env, addr, nf * msz, ra, MMU_DATA_LOAD);
+>> +        } else {
+>> +            /* if it triggers an exception, no need to check watchpoint */
+>> +            offset = -(addr | TARGET_PAGE_MASK);
+> You can move this assign into the while loop below
+>
+>> +            remain = nf * msz;
+>> +            while (remain > 0) {
+>> +                host = tlb_vaddr_to_host(env, addr, MMU_DATA_LOAD, mmuidx);
+>> +                if (host) {
+>> +#ifdef CONFIG_USER_ONLY
+>> +                    if (page_check_range(addr, nf * msz, PAGE_READ) < 0) {
+>> +                        vl = i;
+>> +                        goto ProbeSuccess;
+>> +                    }
+>> +#else
+>> +                    probe_pages(env, addr, nf * msz, ra, MMU_DATA_LOAD);
+>> +#endif
+>> +                } else {
+>> +                    vl = i;
+>> +                    goto ProbeSuccess;
+>> +                }
+>> +                if (remain <=  offset) {
+>> +                    break;
+>> +                }
+>> +                remain -= offset;
+>> +                addr += offset;
+>> +                offset = -(addr | TARGET_PAGE_MASK);
+> and then remove this
+Good idea. Thanks.
+I will move it next patch set.
 
-Thanks,
-Laurent
+Zhiwei
+>
+>> +            }
+>> +        }
+>> +    }
+>> +ProbeSuccess:
+>> +    /* load bytes from guest memory */
+>> +    if (vl != 0) {
+>> +        env->vl = vl;
+>> +    }
+>> +    for (i = 0; i < env->vl; i++) {
+>> +        k = 0;
+>> +        if (!vm && !vext_elem_mask(v0, mlen, i)) {
+>> +            continue;
+>> +        }
+>> +        while (k < nf) {
+>> +            target_ulong addr = base + (i * nf + k) * msz;
+>> +            ldst_elem(env, addr, i + k * vlmax, vd, ra);
+>> +            k++;
+>> +        }
+>> +    }
+>> +    /* clear tail elements */
+>> +    if (vl != 0) {
+>> +        return;
+>> +    }
+>> +    for (k = 0; k < nf; k++) {
+>> +        clear_elem(vd, env->vl + k * vlmax, env->vl * esz, vlmax * esz);
+>> +    }
+>> +}
+>> +
+>> +#define GEN_VEXT_LDFF(NAME, MTYPE, ETYPE, MMUIDX, LOAD_FN, CLEAR_FN)  \
+>> +void HELPER(NAME)(void *vd, void *v0, target_ulong base,              \
+>> +        CPURISCVState *env, uint32_t desc)                            \
+>> +{                                                                     \
+>> +    vext_ldff(vd, v0, base, env, desc, LOAD_FN, CLEAR_FN, MMUIDX,     \
+>> +        sizeof(ETYPE), sizeof(MTYPE), GETPC());                       \
+>> +}
+>> +GEN_VEXT_LDFF(vlbff_v_b,  int8_t,   int8_t,   MO_SB,   ldb_b,  clearb)
+>> +GEN_VEXT_LDFF(vlbff_v_h,  int8_t,   int16_t,  MO_SB,   ldb_h,  clearh)
+>> +GEN_VEXT_LDFF(vlbff_v_w,  int8_t,   int32_t,  MO_SB,   ldb_w,  clearl)
+>> +GEN_VEXT_LDFF(vlbff_v_d,  int8_t,   int64_t,  MO_SB,   ldb_d,  clearq)
+>> +GEN_VEXT_LDFF(vlhff_v_h,  int16_t,  int16_t,  MO_LESW, ldh_h,  clearh)
+>> +GEN_VEXT_LDFF(vlhff_v_w,  int16_t,  int32_t,  MO_LESW, ldh_w,  clearl)
+>> +GEN_VEXT_LDFF(vlhff_v_d,  int16_t,  int64_t,  MO_LESW, ldh_d,  clearq)
+>> +GEN_VEXT_LDFF(vlwff_v_w,  int32_t,  int32_t,  MO_LESL, ldw_w,  clearl)
+>> +GEN_VEXT_LDFF(vlwff_v_d,  int32_t,  int64_t,  MO_LESL, ldw_d,  clearq)
+>> +GEN_VEXT_LDFF(vleff_v_b,  int8_t,   int8_t,   MO_SB,   lde_b,  clearb)
+>> +GEN_VEXT_LDFF(vleff_v_h,  int16_t,  int16_t,  MO_LESW, lde_h,  clearh)
+>> +GEN_VEXT_LDFF(vleff_v_w,  int32_t,  int32_t,  MO_LESL, lde_w,  clearl)
+>> +GEN_VEXT_LDFF(vleff_v_d,  int64_t,  int64_t,  MO_LEQ,  lde_d,  clearq)
+>> +GEN_VEXT_LDFF(vlbuff_v_b, uint8_t,  uint8_t,  MO_UB,   ldbu_b, clearb)
+>> +GEN_VEXT_LDFF(vlbuff_v_h, uint8_t,  uint16_t, MO_UB,   ldbu_h, clearh)
+>> +GEN_VEXT_LDFF(vlbuff_v_w, uint8_t,  uint32_t, MO_UB,   ldbu_w, clearl)
+>> +GEN_VEXT_LDFF(vlbuff_v_d, uint8_t,  uint64_t, MO_UB,   ldbu_d, clearq)
+>> +GEN_VEXT_LDFF(vlhuff_v_h, uint16_t, uint16_t, MO_LEUW, ldhu_h, clearh)
+>> +GEN_VEXT_LDFF(vlhuff_v_w, uint16_t, uint32_t, MO_LEUW, ldhu_w, clearl)
+>> +GEN_VEXT_LDFF(vlhuff_v_d, uint16_t, uint64_t, MO_LEUW, ldhu_d, clearq)
+>> +GEN_VEXT_LDFF(vlwuff_v_w, uint32_t, uint32_t, MO_LEUL, ldwu_w, clearl)
+>> +GEN_VEXT_LDFF(vlwuff_v_d, uint32_t, uint64_t, MO_LEUL, ldwu_d, clearq)
+> Otherwise looks good.
+>
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+>
+> Alistair
+>
+>> --
+>> 2.23.0
+>>
+
 
