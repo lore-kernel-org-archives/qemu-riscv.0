@@ -1,65 +1,53 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jCdMV-0000kq-W1
-	for mharc-qemu-riscv@gnu.org; Fri, 13 Mar 2020 02:00:00 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:59545)
+	id 1jCeL6-0000eY-Rv
+	for mharc-qemu-riscv@gnu.org; Fri, 13 Mar 2020 03:02:36 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43757)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <anup@brainfault.org>) id 1jCdMT-0000kY-EF
- for qemu-riscv@nongnu.org; Fri, 13 Mar 2020 01:59:58 -0400
+ (envelope-from <jiangyifei@huawei.com>) id 1jCeL4-0000a0-1Q
+ for qemu-riscv@nongnu.org; Fri, 13 Mar 2020 03:02:35 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <anup@brainfault.org>) id 1jCdMS-0007n4-23
- for qemu-riscv@nongnu.org; Fri, 13 Mar 2020 01:59:57 -0400
-Received: from mail-wm1-x343.google.com ([2a00:1450:4864:20::343]:54564)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <anup@brainfault.org>) id 1jCdMR-0007hX-KG
- for qemu-riscv@nongnu.org; Fri, 13 Mar 2020 01:59:55 -0400
-Received: by mail-wm1-x343.google.com with SMTP id n8so8579335wmc.4
- for <qemu-riscv@nongnu.org>; Thu, 12 Mar 2020 22:59:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=brainfault-org.20150623.gappssmtp.com; s=20150623;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=p465tcub9AtF403vel847oSX/UQZFTn1XjkxGFY82+k=;
- b=g+m67uUkzjiEcGfM+zf3yEkTVI0c8GAyaiyH5WaB6WiCzGmeF77AjFCcXulYq108Oi
- wSgodk2+1srQRDsJLIcaZQed5960QGoE7nD+ynBoqcPFjPo+cMR1a/4YTpP2lARkJHCu
- AENPMO0b1KyZ1f1bNvKkxena6f4pI1IlZsffJezzZtXTP0pEk5DzPIVZuFUHBUOcGW6q
- BSYLydmQRI0AaNJJqe6Waq0cyO6BuyJcdrpAZbbzI5v1dmEyl5i4cIOBbWAE9kcLiIx7
- xKHRgn/eSBPQCoEe7WMYfn3Eo0egS3y4Ve/IFQKzfl9OZQlZH84vE9MLvkGE0ypfDJ3/
- yF0A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=p465tcub9AtF403vel847oSX/UQZFTn1XjkxGFY82+k=;
- b=rXWqdxLJjR6NzQGgU5vRZHx8WiY5ep9EjDlD1BZx3ggJjtE/SB9jQfSZHfJMNCqP1P
- tO2zP0oJmcN6SunwQma+jdQEWZpys7ow+Xd0uHE2YbBPGMBjmCMF8TkypOk0xM4pVM9Z
- jGYx3uQVUROrpu/gSw0paRDxMMfmNLm49aeOJ7TEfexMu/Xi71KViw3XFQ7wgg8p20U4
- HO3yEWxmIoECr03HgWB1ywMeJKbCqzMz0tDWPIUjXPE6+3JS4gLOYp08Rxxtu4AK5Srb
- 7B8DzVSMfEsY3XHduSbM1Nu28acx6yrA1Rcj8T/j5qP3kpPqH6w+Qct3xERwfYlv/qFe
- uBsA==
-X-Gm-Message-State: ANhLgQ0ld62lu+7iTDVwb0Pqgb/1FL4sVlHRlYObvf6+yU+fu+APFVfy
- BHRLjtdGTVBJoomag96IbrPTIz+v9Q7lGTa9w4o7eQ==
-X-Google-Smtp-Source: ADFU+vuQt9NFWcDjNAnjPs/vg14y9i3Uffm3kMCCH640ZKv2hXYyLGYT7TZSUYeeavFORnTqy2Lmr5b6oMGQjBKZVRw=
-X-Received: by 2002:a1c:6146:: with SMTP id v67mr9117387wmb.78.1584079193400; 
- Thu, 12 Mar 2020 22:59:53 -0700 (PDT)
-MIME-Version: 1.0
+ (envelope-from <jiangyifei@huawei.com>) id 1jCeL2-0004ha-IK
+ for qemu-riscv@nongnu.org; Fri, 13 Mar 2020 03:02:33 -0400
+Received: from szxga02-in.huawei.com ([45.249.212.188]:2510 helo=huawei.com)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <jiangyifei@huawei.com>)
+ id 1jCeKy-0004Be-U6; Fri, 13 Mar 2020 03:02:29 -0400
+Received: from DGGEMM401-HUB.china.huawei.com (unknown [172.30.72.54])
+ by Forcepoint Email with ESMTP id 3D56C256F584CE755062;
+ Fri, 13 Mar 2020 15:02:20 +0800 (CST)
+Received: from DGGEMM505-MBX.china.huawei.com ([169.254.1.8]) by
+ DGGEMM401-HUB.china.huawei.com ([10.3.20.209]) with mapi id 14.03.0439.000;
+ Fri, 13 Mar 2020 15:02:12 +0800
+From: Jiangyifei <jiangyifei@huawei.com>
+To: Anup Patel <anup@brainfault.org>
+CC: QEMU Developers <qemu-devel@nongnu.org>, "open list:RISC-V"
+ <qemu-riscv@nongnu.org>, Anup Patel <anup.patel@wdc.com>, Zhanghailiang
+ <zhang.zhanghailiang@huawei.com>, Sagar Karandikar
+ <sagark@eecs.berkeley.edu>, Bastian Koppelmann
+ <kbastian@mail.uni-paderborn.de>, "Zhangxiaofeng (F)"
+ <victor.zhangxiaofeng@huawei.com>, Alistair Francis
+ <Alistair.Francis@wdc.com>, yinyipeng <yinyipeng1@huawei.com>, Palmer Dabbelt
+ <palmer@dabbelt.com>, "dengkai (A)" <dengkai1@huawei.com>
+Subject: RE: [PATCH RFC 0/9] Add riscv64 kvm accel support
+Thread-Topic: [PATCH RFC 0/9] Add riscv64 kvm accel support
+Thread-Index: AQHV+OqsP3y56Dmww0a/2synn2NrhKhFgTqAgACQGBA=
+Date: Fri, 13 Mar 2020 07:02:12 +0000
+Message-ID: <3915816D913D8241BB43E932213F57D4ADC56065@DGGEMM505-MBX.china.huawei.com>
 References: <20200313034949.3028-1-jiangyifei@huawei.com>
-In-Reply-To: <20200313034949.3028-1-jiangyifei@huawei.com>
-From: Anup Patel <anup@brainfault.org>
-Date: Fri, 13 Mar 2020 11:29:41 +0530
-Message-ID: <CAAhSdy3-K5rxiJkjBp8iUnDqVZz0hQkNCVactmamsOcVZv3GOQ@mail.gmail.com>
-Subject: Re: [PATCH RFC 0/9] Add riscv64 kvm accel support
-To: Yifei Jiang <jiangyifei@huawei.com>
-Cc: QEMU Developers <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Anup Patel <anup.patel@wdc.com>, zhang.zhanghailiang@huawei.com, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- victor.zhangxiaofeng@huawei.com, 
- Alistair Francis <Alistair.Francis@wdc.com>, yinyipeng1@huawei.com, 
- Palmer Dabbelt <palmer@dabbelt.com>, dengkai1@huawei.com
-Content-Type: text/plain; charset="UTF-8"
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2a00:1450:4864:20::343
+ <CAAhSdy3-K5rxiJkjBp8iUnDqVZz0hQkNCVactmamsOcVZv3GOQ@mail.gmail.com>
+In-Reply-To: <CAAhSdy3-K5rxiJkjBp8iUnDqVZz0hQkNCVactmamsOcVZv3GOQ@mail.gmail.com>
+Accept-Language: zh-CN, en-US
+Content-Language: zh-CN
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.133.201.158]
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+MIME-Version: 1.0
+X-CFilter-Loop: Reflected
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+ [fuzzy]
+X-Received-From: 45.249.212.188
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -71,104 +59,92 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Mar 2020 05:59:58 -0000
+X-List-Received-Date: Fri, 13 Mar 2020 07:02:35 -0000
 
-On Fri, Mar 13, 2020 at 9:23 AM Yifei Jiang <jiangyifei@huawei.com> wrote:
->
-> Hi,
->
-> This series adds riscv64 kvm support, It is based on riscv_kvm_master
-> branch at https://github.com/kvm-riscv/linux.
->
-> This series depends on above pending changes which haven't yet been
-> accepted, so this QEMU patch series is blocked until that dependency
-> has been dealt with, but is worth reviewing anyway.
->
-> Several steps to use this:
->
-> 1. Build riscv64 emulation
-> $ ./configure --target-list=riscv64-softmmu
-> $ make -j$(nproc)
->
-> 2. Build kernel
-> riscv_kvm_master branch at https://github.com/kvm-riscv/linux
->
-> 3. Build QEMU VM
-> I cross build in riscv toolchain
-> $ PKG_CONFIG_LIBDIR=<toolchain pkgconfig path>
-> $ export PKG_CONFIG_SYSROOT_DIR=<toolchain sysroot path>
-> $ ./configure --target-list=riscv64-softmmu --enable-kvm \
-> --cross-prefix=riscv64-linux-gnu- --disable-libiscsi --disable-glusterfs \
-> --disable-libusb --disable-usb-redir --audio-drv-list= --disable-opengl \
-> --disable-libxml2
->
-> 4. Start riscv64 emulation
-> $ ./qemu-system-riscv64 -M virt -m 4096M -cpu rv64,x-h=true -nographic \
->         -name guest=riscv-hyp,debug-threads=on \
->         -smp 4 \
->         -kernel ./fw_jump.elf \
->         -device loader,file=./Image,addr=0x80200000 \
->         -drive file=./hyp.img,format=raw,id=hd0 \
->         -device virtio-blk-device,drive=hd0 \
->         -append "root=/dev/vda rw console=ttyS0 earlycon=sbi"
->
-> 5. Start kvm-acceled QEMU VM in riscv64 emulation
-> $ ./qemu-system-riscv64 -M virt,accel=kvm -m 1024M -cpu host -nographic \
->         -name guest=riscv-guset \
->          -smp 2 \
->         -kernel ./Image \
->         -drive file=./guest.img,format=raw,id=hd0 \
->         -device virtio-blk-device,drive=hd0 \
->         -append "root=/dev/vda rw console=ttyS0 earlycon=sbi"
->
-> Yifei Jiang (9):
->   linux-header: Update linux/kvm.h
->   target/riscv: Add target/riscv/kvm.c to place the public kvm interface
->   target/riscv: Implement function kvm_arch_init_vcpu
->   target/riscv: Implement kvm_arch_get_registers
->   target/riscv: Implement kvm_arch_put_registers
->   target/riscv: Support start kernel directly by KVM
->   hw/riscv: PLIC update external interrupt by KVM when kvm enabled
->   target/riscv: Handler KVM_EXIT_RISCV_SBI exit
->   target/riscv: add host riscv64 cpu type
->
->  configure                  |   1 +
->  hw/riscv/sifive_plic.c     |  31 ++-
->  hw/riscv/virt.c            |  15 +-
->  linux-headers/linux/kvm.h  |   8 +
->  target/riscv/Makefile.objs |   1 +
->  target/riscv/cpu.c         |   9 +
->  target/riscv/cpu.h         |   4 +
->  target/riscv/kvm.c         | 513 +++++++++++++++++++++++++++++++++++++
->  target/riscv/kvm_riscv.h   |  25 ++
->  9 files changed, 596 insertions(+), 11 deletions(-)
->  create mode 100644 target/riscv/kvm.c
->  create mode 100644 target/riscv/kvm_riscv.h
->
-> --
-> 2.19.1
->
->
->
-
-First of all many thanks for doing QEMU KVM support. It wasted
-bit of my time because I was already doing it but I am happy to
-see the patches on list sooner.
-
-In future, please CC the KVM RISC-V mailing list for all QEMU KVM
-RISC-V work. The KVM RISC-V mailing list for related projects
-(QEMU, KVMTOOL, libvirt, etc) and not just Linux KVM RISC-V.
-
-Currently, we can only review this patch series and get it in final
-shape but it can only be merged in QEMU after Linux KVM RISC-V
-patches are merged in Linux kernel.
-
-I will be sending out KVM RISC-V v11 series today. There is
-a crucial bug fix related to HIDELEG CSR programing. This
-bug fix is required in both QEMU and KVM RISC-V. Palmer has
-already accepted QEMU HIDELEG CSR fix. The KVM RISC-V
-v11 series will have this fix as well.
-
-Thanks & Regards,
-Anup Patel
+DQo+IC0tLS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0tDQo+IEZyb206IEFudXAgUGF0ZWwgW21haWx0
+bzphbnVwQGJyYWluZmF1bHQub3JnXQ0KPiBTZW50OiBGcmlkYXksIE1hcmNoIDEzLCAyMDIwIDI6
+MDAgUE0NCj4gVG86IEppYW5neWlmZWkgPGppYW5neWlmZWlAaHVhd2VpLmNvbT4NCj4gQ2M6IFFF
+TVUgRGV2ZWxvcGVycyA8cWVtdS1kZXZlbEBub25nbnUub3JnPjsgb3BlbiBsaXN0OlJJU0MtViA8
+cWVtdS0NCj4gcmlzY3ZAbm9uZ251Lm9yZz47IEFudXAgUGF0ZWwgPGFudXAucGF0ZWxAd2RjLmNv
+bT47IFpoYW5naGFpbGlhbmcNCj4gPHpoYW5nLnpoYW5naGFpbGlhbmdAaHVhd2VpLmNvbT47IFNh
+Z2FyIEthcmFuZGlrYXINCj4gPHNhZ2Fya0BlZWNzLmJlcmtlbGV5LmVkdT47IEJhc3RpYW4gS29w
+cGVsbWFubiA8a2Jhc3RpYW5AbWFpbC51bmktDQo+IHBhZGVyYm9ybi5kZT47IFpoYW5neGlhb2Zl
+bmcgKEYpIDx2aWN0b3Iuemhhbmd4aWFvZmVuZ0BodWF3ZWkuY29tPjsNCj4gQWxpc3RhaXIgRnJh
+bmNpcyA8QWxpc3RhaXIuRnJhbmNpc0B3ZGMuY29tPjsgeWlueWlwZW5nDQo+IDx5aW55aXBlbmcx
+QGh1YXdlaS5jb20+OyBQYWxtZXIgRGFiYmVsdCA8cGFsbWVyQGRhYmJlbHQuY29tPjsNCj4gZGVu
+Z2thaSAoQSkgPGRlbmdrYWkxQGh1YXdlaS5jb20+DQo+IFN1YmplY3Q6IFJlOiBbUEFUQ0ggUkZD
+IDAvOV0gQWRkIHJpc2N2NjQga3ZtIGFjY2VsIHN1cHBvcnQNCj4gDQo+IE9uIEZyaSwgTWFyIDEz
+LCAyMDIwIGF0IDk6MjMgQU0gWWlmZWkgSmlhbmcgPGppYW5neWlmZWlAaHVhd2VpLmNvbT4gd3Jv
+dGU6DQo+ID4NCj4gPiBIaSwNCj4gPg0KPiA+IFRoaXMgc2VyaWVzIGFkZHMgcmlzY3Y2NCBrdm0g
+c3VwcG9ydCwgSXQgaXMgYmFzZWQgb24gcmlzY3Zfa3ZtX21hc3Rlcg0KPiA+IGJyYW5jaCBhdCBo
+dHRwczovL2dpdGh1Yi5jb20va3ZtLXJpc2N2L2xpbnV4Lg0KPiA+DQo+ID4gVGhpcyBzZXJpZXMg
+ZGVwZW5kcyBvbiBhYm92ZSBwZW5kaW5nIGNoYW5nZXMgd2hpY2ggaGF2ZW4ndCB5ZXQgYmVlbg0K
+PiA+IGFjY2VwdGVkLCBzbyB0aGlzIFFFTVUgcGF0Y2ggc2VyaWVzIGlzIGJsb2NrZWQgdW50aWwg
+dGhhdCBkZXBlbmRlbmN5DQo+ID4gaGFzIGJlZW4gZGVhbHQgd2l0aCwgYnV0IGlzIHdvcnRoIHJl
+dmlld2luZyBhbnl3YXkuDQo+ID4NCj4gPiBTZXZlcmFsIHN0ZXBzIHRvIHVzZSB0aGlzOg0KPiA+
+DQo+ID4gMS4gQnVpbGQgcmlzY3Y2NCBlbXVsYXRpb24NCj4gPiAkIC4vY29uZmlndXJlIC0tdGFy
+Z2V0LWxpc3Q9cmlzY3Y2NC1zb2Z0bW11ICQgbWFrZSAtaiQobnByb2MpDQo+ID4NCj4gPiAyLiBC
+dWlsZCBrZXJuZWwNCj4gPiByaXNjdl9rdm1fbWFzdGVyIGJyYW5jaCBhdCBodHRwczovL2dpdGh1
+Yi5jb20va3ZtLXJpc2N2L2xpbnV4DQo+ID4NCj4gPiAzLiBCdWlsZCBRRU1VIFZNDQo+ID4gSSBj
+cm9zcyBidWlsZCBpbiByaXNjdiB0b29sY2hhaW4NCj4gPiAkIFBLR19DT05GSUdfTElCRElSPTx0
+b29sY2hhaW4gcGtnY29uZmlnIHBhdGg+ICQgZXhwb3J0DQo+ID4gUEtHX0NPTkZJR19TWVNST09U
+X0RJUj08dG9vbGNoYWluIHN5c3Jvb3QgcGF0aD4gJCAuL2NvbmZpZ3VyZQ0KPiA+IC0tdGFyZ2V0
+LWxpc3Q9cmlzY3Y2NC1zb2Z0bW11IC0tZW5hYmxlLWt2bSBcDQo+ID4gLS1jcm9zcy1wcmVmaXg9
+cmlzY3Y2NC1saW51eC1nbnUtIC0tZGlzYWJsZS1saWJpc2NzaQ0KPiA+IC0tZGlzYWJsZS1nbHVz
+dGVyZnMgXCAtLWRpc2FibGUtbGlidXNiIC0tZGlzYWJsZS11c2ItcmVkaXINCj4gPiAtLWF1ZGlv
+LWRydi1saXN0PSAtLWRpc2FibGUtb3BlbmdsIFwNCj4gPiAtLWRpc2FibGUtbGlieG1sMg0KPiA+
+DQo+ID4gNC4gU3RhcnQgcmlzY3Y2NCBlbXVsYXRpb24NCj4gPiAkIC4vcWVtdS1zeXN0ZW0tcmlz
+Y3Y2NCAtTSB2aXJ0IC1tIDQwOTZNIC1jcHUgcnY2NCx4LWg9dHJ1ZSAtbm9ncmFwaGljIFwNCj4g
+PiAgICAgICAgIC1uYW1lIGd1ZXN0PXJpc2N2LWh5cCxkZWJ1Zy10aHJlYWRzPW9uIFwNCj4gPiAg
+ICAgICAgIC1zbXAgNCBcDQo+ID4gICAgICAgICAta2VybmVsIC4vZndfanVtcC5lbGYgXA0KPiA+
+ICAgICAgICAgLWRldmljZSBsb2FkZXIsZmlsZT0uL0ltYWdlLGFkZHI9MHg4MDIwMDAwMCBcDQo+
+ID4gICAgICAgICAtZHJpdmUgZmlsZT0uL2h5cC5pbWcsZm9ybWF0PXJhdyxpZD1oZDAgXA0KPiA+
+ICAgICAgICAgLWRldmljZSB2aXJ0aW8tYmxrLWRldmljZSxkcml2ZT1oZDAgXA0KPiA+ICAgICAg
+ICAgLWFwcGVuZCAicm9vdD0vZGV2L3ZkYSBydyBjb25zb2xlPXR0eVMwIGVhcmx5Y29uPXNiaSIN
+Cj4gPg0KPiA+IDUuIFN0YXJ0IGt2bS1hY2NlbGVkIFFFTVUgVk0gaW4gcmlzY3Y2NCBlbXVsYXRp
+b24gJA0KPiA+IC4vcWVtdS1zeXN0ZW0tcmlzY3Y2NCAtTSB2aXJ0LGFjY2VsPWt2bSAtbSAxMDI0
+TSAtY3B1IGhvc3QgLW5vZ3JhcGhpYyBcDQo+ID4gICAgICAgICAtbmFtZSBndWVzdD1yaXNjdi1n
+dXNldCBcDQo+ID4gICAgICAgICAgLXNtcCAyIFwNCj4gPiAgICAgICAgIC1rZXJuZWwgLi9JbWFn
+ZSBcDQo+ID4gICAgICAgICAtZHJpdmUgZmlsZT0uL2d1ZXN0LmltZyxmb3JtYXQ9cmF3LGlkPWhk
+MCBcDQo+ID4gICAgICAgICAtZGV2aWNlIHZpcnRpby1ibGstZGV2aWNlLGRyaXZlPWhkMCBcDQo+
+ID4gICAgICAgICAtYXBwZW5kICJyb290PS9kZXYvdmRhIHJ3IGNvbnNvbGU9dHR5UzAgZWFybHlj
+b249c2JpIg0KPiA+DQo+ID4gWWlmZWkgSmlhbmcgKDkpOg0KPiA+ICAgbGludXgtaGVhZGVyOiBV
+cGRhdGUgbGludXgva3ZtLmgNCj4gPiAgIHRhcmdldC9yaXNjdjogQWRkIHRhcmdldC9yaXNjdi9r
+dm0uYyB0byBwbGFjZSB0aGUgcHVibGljIGt2bSBpbnRlcmZhY2UNCj4gPiAgIHRhcmdldC9yaXNj
+djogSW1wbGVtZW50IGZ1bmN0aW9uIGt2bV9hcmNoX2luaXRfdmNwdQ0KPiA+ICAgdGFyZ2V0L3Jp
+c2N2OiBJbXBsZW1lbnQga3ZtX2FyY2hfZ2V0X3JlZ2lzdGVycw0KPiA+ICAgdGFyZ2V0L3Jpc2N2
+OiBJbXBsZW1lbnQga3ZtX2FyY2hfcHV0X3JlZ2lzdGVycw0KPiA+ICAgdGFyZ2V0L3Jpc2N2OiBT
+dXBwb3J0IHN0YXJ0IGtlcm5lbCBkaXJlY3RseSBieSBLVk0NCj4gPiAgIGh3L3Jpc2N2OiBQTElD
+IHVwZGF0ZSBleHRlcm5hbCBpbnRlcnJ1cHQgYnkgS1ZNIHdoZW4ga3ZtIGVuYWJsZWQNCj4gPiAg
+IHRhcmdldC9yaXNjdjogSGFuZGxlciBLVk1fRVhJVF9SSVNDVl9TQkkgZXhpdA0KPiA+ICAgdGFy
+Z2V0L3Jpc2N2OiBhZGQgaG9zdCByaXNjdjY0IGNwdSB0eXBlDQo+ID4NCj4gPiAgY29uZmlndXJl
+ICAgICAgICAgICAgICAgICAgfCAgIDEgKw0KPiA+ICBody9yaXNjdi9zaWZpdmVfcGxpYy5jICAg
+ICB8ICAzMSArKy0NCj4gPiAgaHcvcmlzY3YvdmlydC5jICAgICAgICAgICAgfCAgMTUgKy0NCj4g
+PiAgbGludXgtaGVhZGVycy9saW51eC9rdm0uaCAgfCAgIDggKw0KPiA+ICB0YXJnZXQvcmlzY3Yv
+TWFrZWZpbGUub2JqcyB8ICAgMSArDQo+ID4gIHRhcmdldC9yaXNjdi9jcHUuYyAgICAgICAgIHwg
+ICA5ICsNCj4gPiAgdGFyZ2V0L3Jpc2N2L2NwdS5oICAgICAgICAgfCAgIDQgKw0KPiA+ICB0YXJn
+ZXQvcmlzY3Yva3ZtLmMgICAgICAgICB8IDUxMw0KPiArKysrKysrKysrKysrKysrKysrKysrKysr
+KysrKysrKysrKysrDQo+ID4gIHRhcmdldC9yaXNjdi9rdm1fcmlzY3YuaCAgIHwgIDI1ICsrDQo+
+ID4gIDkgZmlsZXMgY2hhbmdlZCwgNTk2IGluc2VydGlvbnMoKyksIDExIGRlbGV0aW9ucygtKSAg
+Y3JlYXRlIG1vZGUNCj4gPiAxMDA2NDQgdGFyZ2V0L3Jpc2N2L2t2bS5jICBjcmVhdGUgbW9kZSAx
+MDA2NDQgdGFyZ2V0L3Jpc2N2L2t2bV9yaXNjdi5oDQo+ID4NCj4gPiAtLQ0KPiA+IDIuMTkuMQ0K
+PiA+DQo+ID4NCj4gPg0KPiANCj4gRmlyc3Qgb2YgYWxsIG1hbnkgdGhhbmtzIGZvciBkb2luZyBR
+RU1VIEtWTSBzdXBwb3J0LiBJdCB3YXN0ZWQgYml0IG9mIG15DQo+IHRpbWUgYmVjYXVzZSBJIHdh
+cyBhbHJlYWR5IGRvaW5nIGl0IGJ1dCBJIGFtIGhhcHB5IHRvIHNlZSB0aGUgcGF0Y2hlcyBvbiBs
+aXN0DQo+IHNvb25lci4NCj4gDQo+IEluIGZ1dHVyZSwgcGxlYXNlIENDIHRoZSBLVk0gUklTQy1W
+IG1haWxpbmcgbGlzdCBmb3IgYWxsIFFFTVUgS1ZNIFJJU0MtVg0KPiB3b3JrLiBUaGUgS1ZNIFJJ
+U0MtViBtYWlsaW5nIGxpc3QgZm9yIHJlbGF0ZWQgcHJvamVjdHMgKFFFTVUsIEtWTVRPT0wsDQo+
+IGxpYnZpcnQsIGV0YykgYW5kIG5vdCBqdXN0IExpbnV4IEtWTSBSSVNDLVYuDQo+IA0KPiBDdXJy
+ZW50bHksIHdlIGNhbiBvbmx5IHJldmlldyB0aGlzIHBhdGNoIHNlcmllcyBhbmQgZ2V0IGl0IGlu
+IGZpbmFsIHNoYXBlIGJ1dCBpdA0KPiBjYW4gb25seSBiZSBtZXJnZWQgaW4gUUVNVSBhZnRlciBM
+aW51eCBLVk0gUklTQy1WIHBhdGNoZXMgYXJlIG1lcmdlZCBpbg0KPiBMaW51eCBrZXJuZWwuDQo+
+IA0KPiBJIHdpbGwgYmUgc2VuZGluZyBvdXQgS1ZNIFJJU0MtViB2MTEgc2VyaWVzIHRvZGF5LiBU
+aGVyZSBpcyBhIGNydWNpYWwgYnVnIGZpeA0KPiByZWxhdGVkIHRvIEhJREVMRUcgQ1NSIHByb2dy
+YW1pbmcuIFRoaXMgYnVnIGZpeCBpcyByZXF1aXJlZCBpbiBib3RoIFFFTVUNCj4gYW5kIEtWTSBS
+SVNDLVYuIFBhbG1lciBoYXMgYWxyZWFkeSBhY2NlcHRlZCBRRU1VIEhJREVMRUcgQ1NSIGZpeC4g
+VGhlDQo+IEtWTSBSSVNDLVYNCj4gdjExIHNlcmllcyB3aWxsIGhhdmUgdGhpcyBmaXggYXMgd2Vs
+bC4NCj4gDQo+IFRoYW5rcyAmIFJlZ2FyZHMsDQo+IEFudXAgUGF0ZWwNCg0KVGhhbmsgeW91IGZv
+ciB5b3VyIHF1aWNrIHJlcGx5IGFuZCBiZWluZyBhYmxlIHRvIHJldmlldyBmb3IgdXMuIFdlIHdp
+bGwgc29vbiBiZSB2ZXJpZnlpbmcgYmFzZWQgb24gdGhlIEtWTSBSSVNDLVYgdjExIHNlcmllcy4N
+Cg0KUmVnYXJkcywNCllpZmVpIEppYW5nDQo=
 
