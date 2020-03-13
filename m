@@ -1,52 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jClWe-0006Ep-19
-	for mharc-qemu-riscv@gnu.org; Fri, 13 Mar 2020 10:43:00 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37602)
+	id 1jCp7B-0005XC-8n
+	for mharc-qemu-riscv@gnu.org; Fri, 13 Mar 2020 14:32:57 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49335)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <bmeng.cn@gmail.com>) id 1jClWb-000690-Av
- for qemu-riscv@nongnu.org; Fri, 13 Mar 2020 10:42:58 -0400
+ (envelope-from <alistair23@gmail.com>) id 1jCp77-0005Qz-VT
+ for qemu-riscv@nongnu.org; Fri, 13 Mar 2020 14:32:55 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <bmeng.cn@gmail.com>) id 1jClWa-0004IU-CF
- for qemu-riscv@nongnu.org; Fri, 13 Mar 2020 10:42:57 -0400
-Received: from mail-qk1-x741.google.com ([2607:f8b0:4864:20::741]:34107)
+ (envelope-from <alistair23@gmail.com>) id 1jCp77-00036L-27
+ for qemu-riscv@nongnu.org; Fri, 13 Mar 2020 14:32:53 -0400
+Received: from mail-ua1-x942.google.com ([2607:f8b0:4864:20::942]:40134)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
- id 1jClWY-0004EB-42; Fri, 13 Mar 2020 10:42:54 -0400
-Received: by mail-qk1-x741.google.com with SMTP id f3so12861446qkh.1;
- Fri, 13 Mar 2020 07:42:53 -0700 (PDT)
+ (Exim 4.71) (envelope-from <alistair23@gmail.com>)
+ id 1jCp73-00031M-23; Fri, 13 Mar 2020 14:32:50 -0400
+Received: by mail-ua1-x942.google.com with SMTP id t20so3914995uao.7;
+ Fri, 13 Mar 2020 11:32:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=Lhs5M5RF6Irfg5/8Tr2QKI3TibURWqz0tQXtnJQFmiQ=;
- b=P+bB1Up9lLBMBTbnwhXno66SDsfTzpDUn1gvrFWiPfLHMhPB42LpqgqKT0paOXcnpD
- 9yS5kcAJDeon/NTOrr5Ef8UXDA9VfTohtpC7UWX7uT1+otYZWCbr35JWyObceqhstJkD
- Y1wEW/paatMM+BjW73iEkoHCsrObA7NiOgyt69HLdG9foIRFjP2yp9PQ/S6F4tQaf8m1
- iFC27SEGOXAYGBOA2cPETUP/c8aJHmmVY7VyP4ub4RIZdOYMjaLBjQpZd4VuAwU2kC3D
- kyDMSFa9q1LhUvx7bOzF7LKMUnb9RiER2s1FuhB71eBfcRYTLizrhehZCTWJ3Mhh47Y4
- 6oBg==
+ :cc; bh=YeVTQOf6rtHWhmWd6q33ZsNwxEbBRUt5T26QVD7T45E=;
+ b=Xare2t6LOXCCiRVHvD1QaxW41w5cV67Ti/5iUeWqAsue5NTL2d2P7pxUET9o668UFX
+ JUqdVj7tSHn0PghH569qtfAHodeSSaRtFVdXc6fmokfPpTjo83dYKwPl0LXNUVSsuMem
+ ILsviY4rR5xfo73jW3mraymShAulWxaUyvt1jM/eQLvgJK7RHXtBJtCbsPTZ5926z+u+
+ C4Ydl8KdmRoKIsTAakZ6sObY+InLgmMM4vf4mxnAe+GPo4nrRDNRO7K3pIY+c4vO77Wu
+ l6zlLwyzqvwA0SHE/3zFOADWDfxHeH+TEiJmeRQL1CGQjOXIa/7jQ97ezl4T1J2L8hX5
+ NU2w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=Lhs5M5RF6Irfg5/8Tr2QKI3TibURWqz0tQXtnJQFmiQ=;
- b=Jt0XgCCLJlg6Zn0x4s+Vr7DeYp+8Dvcpr01QHBRNP1Ya1yZ6TrXYkAnLIHgXy8aE/M
- 4qpsZiDZ8Of2qoxR9hACvWQ5ElREetOT+aPTYQdN9oePNCjJujfVvkiJdjVHLEt8wpAU
- UW3pezZZpAz0WaGu2A25PCMOiPXxWJ8Uvc+PmJ90NF3chEeKobEa+Sc05lHFqoGQ05md
- cySp0rCTuNb7HBWBC/QzsgwDevn1XdLfMsyiXKmAP+BqAcYw0XNtNuw4AKafZ7hHTWkK
- 12CEkr9qnyEaTCWtb3/f4EC5x4uBgV0jXlNn1myXvytirw8F9JqXN5wd+ZvZ2UKau/a3
- 7bQg==
-X-Gm-Message-State: ANhLgQ1a7ygbPAG4rtQf4tEhx6wDr1V68Rn1ucJ2bdym63T4ibOwLo6U
- tKQinykwfvlDAOIJS3wrO/r9F6Tx2TXWFhG3b+4=
-X-Google-Smtp-Source: ADFU+vuKC5EMT5QTHxKxYuKJKIgoBVW37c0lpgzbJLCbZUWztjLJ5NGGpG/jn6Ew7BMrptaNL/rWwkvbNkF6sJUCzMs=
-X-Received: by 2002:a25:e7c5:: with SMTP id e188mr15706035ybh.65.1584110573124; 
- Fri, 13 Mar 2020 07:42:53 -0700 (PDT)
+ bh=YeVTQOf6rtHWhmWd6q33ZsNwxEbBRUt5T26QVD7T45E=;
+ b=kX5aSh1EgI9ybVx6k2XJYBg7WyMvXE8JKPrTcGOUjB99skBlxxBpcPjlSnWgpvKfdz
+ 6u9cbrlyBR0wZwjiKBISi69fx7h3SlZxJQy4w/U7+fjTKnUd0/2JpeZpThnO9hCLoF3s
+ stg+Rf0NTGRSEC1iDZT+5NPoajETDApmwTyivGOVG8dxZj/BKwxHkzS7uoXmam4/zAkr
+ JqLLet0+Y2yFwJnSxAtZUP2Z0tCpuct81ImHIZTrGfVxmk04MF5DGEKeieDifZkrYtrY
+ euwiwweBxiDYWdthnSyD1qm5j0mg9cAcQm5RUSCOBnnFHhGB9nCUaCTu99kUZ7Akqsyi
+ tEfQ==
+X-Gm-Message-State: ANhLgQ0+ePf1UZwwjdyooTEn1pujJeevUhM426ibhUMN3utHjb5K1kd7
+ 0gXSrQzwCTQFSODPhRm6QtZ3d4NEO3aYfYZZqec=
+X-Google-Smtp-Source: ADFU+vu5f13DtUswJwOEUXBneNM5E60MeXMzyOBDV/MxkvTjesbqkGztkY0f55yEXyyxCzTCcKVkqpJ8C1mE5me4rgg=
+X-Received: by 2002:a9f:3311:: with SMTP id o17mr9495641uab.30.1584124366851; 
+ Fri, 13 Mar 2020 11:32:46 -0700 (PDT)
 MIME-Version: 1.0
 References: <20200313005508.1906-1-coreyw7@fb.com>
- <20200313005508.1906-3-coreyw7@fb.com>
-In-Reply-To: <20200313005508.1906-3-coreyw7@fb.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Fri, 13 Mar 2020 22:42:42 +0800
-Message-ID: <CAEUhbmVwSgXMUM9kwby5quRfye-N4aPkB=wOA75m9fwmuKE4HA@mail.gmail.com>
-Subject: Re: [PATCH 2/2] target/riscv: Add a sifive-e34 cpu type
+ <20200313005508.1906-2-coreyw7@fb.com>
+In-Reply-To: <20200313005508.1906-2-coreyw7@fb.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Fri, 13 Mar 2020 11:32:20 -0700
+Message-ID: <CAKmqyKMK+nharq3_FbUFKACjg7yODjT7cg6VTqAWLjQ5U4fhOg@mail.gmail.com>
+Subject: Re: [PATCH 1/2] riscv: sifive_e: Support changing CPU type
 To: Corey Wharton <coreyw7@fb.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
@@ -57,7 +57,7 @@ Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
 Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::741
+X-Received-From: 2607:f8b0:4864:20::942
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -69,44 +69,46 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Mar 2020 14:42:58 -0000
+X-List-Received-Date: Fri, 13 Mar 2020 18:32:55 -0000
 
-On Fri, Mar 13, 2020 at 9:00 AM Corey Wharton <coreyw7@fb.com> wrote:
+On Thu, Mar 12, 2020 at 5:58 PM Corey Wharton <coreyw7@fb.com> wrote:
 >
-> The sifive-e34 cpu type is the same as the sifive-e31 with the
-> single precision floating-point extension enabled.
+> Allows the CPU to be changed from the default via the -cpu command
+> line option.
 >
 > Signed-off-by: Corey Wharton <coreyw7@fb.com>
+
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+
+Alistair
+
 > ---
->  target/riscv/cpu.c | 10 ++++++++++
->  target/riscv/cpu.h |  1 +
->  2 files changed, 11 insertions(+)
+>  hw/riscv/sifive_e.c | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
 >
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index c0b7023100..d415cd06eb 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -164,6 +164,15 @@ static void rv32imacu_nommu_cpu_init(Object *obj)
->      set_feature(env, RISCV_FEATURE_PMP);
+> diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
+> index a254cad489..b0a611adb9 100644
+> --- a/hw/riscv/sifive_e.c
+> +++ b/hw/riscv/sifive_e.c
+> @@ -123,7 +123,7 @@ static void riscv_sifive_e_soc_init(Object *obj)
+>      object_initialize_child(obj, "cpus", &s->cpus,
+>                              sizeof(s->cpus), TYPE_RISCV_HART_ARRAY,
+>                              &error_abort, NULL);
+> -    object_property_set_str(OBJECT(&s->cpus), SIFIVE_E_CPU, "cpu-type",
+> +    object_property_set_str(OBJECT(&s->cpus), ms->cpu_type, "cpu-type",
+>                              &error_abort);
+>      object_property_set_int(OBJECT(&s->cpus), ms->smp.cpus, "num-harts",
+>                              &error_abort);
+> @@ -220,6 +220,7 @@ static void riscv_sifive_e_machine_init(MachineClass *mc)
+>      mc->desc = "RISC-V Board compatible with SiFive E SDK";
+>      mc->init = riscv_sifive_e_init;
+>      mc->max_cpus = 1;
+> +    mc->default_cpu_type = SIFIVE_E_CPU;
 >  }
 >
-> +static void rv32imafcu_nommu_cpu_init(Object *obj)
-> +{
-> +    CPURISCVState *env = &RISCV_CPU(obj)->env;
-> +    set_misa(env, RV32 | RVI | RVM | RVA | RVF | RVC);
-
-This is missing RVU.
-
-> +    set_priv_version(env, PRIV_VERSION_1_10_0);
-> +    set_resetvec(env, DEFAULT_RSTVEC);
-> +    set_feature(env, RISCV_FEATURE_PMP);
-> +}
-> +
->  #elif defined(TARGET_RISCV64)
+>  DEFINE_MACHINE("sifive_e", riscv_sifive_e_machine_init)
+> --
+> 2.21.1
 >
-
-[snip]
-
-Regards,
-Bin
+>
 
