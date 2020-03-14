@@ -1,46 +1,74 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jCzyk-0006k8-NN
-	for mharc-qemu-riscv@gnu.org; Sat, 14 Mar 2020 02:08:58 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37993)
+	id 1jD00b-0007oC-Vb
+	for mharc-qemu-riscv@gnu.org; Sat, 14 Mar 2020 02:10:53 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:38518)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <zhiwei_liu@c-sky.com>) id 1jCzyh-0006gw-Cq
- for qemu-riscv@nongnu.org; Sat, 14 Mar 2020 02:08:56 -0400
+ (envelope-from <richard.henderson@linaro.org>) id 1jD00Y-0007mg-UU
+ for qemu-riscv@nongnu.org; Sat, 14 Mar 2020 02:10:51 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <zhiwei_liu@c-sky.com>) id 1jCzyg-0003dw-Hg
- for qemu-riscv@nongnu.org; Sat, 14 Mar 2020 02:08:55 -0400
-Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:35451)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1jCzye-0003WA-1j; Sat, 14 Mar 2020 02:08:52 -0400
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.1391121|-1; CH=green; DM=||false|;
- DS=CONTINUE|ham_regular_dialog|0.0128873-0.000655853-0.986457;
- FP=0|0|0|0|0|-1|-1|-1; HT=e02c03294; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS;
- RN=9; RT=9; SR=0; TI=SMTPD_---.H.EP9Tl_1584166121; 
-Received: from 192.168.3.18(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.H.EP9Tl_1584166121)
- by smtp.aliyun-inc.com(10.147.42.253);
- Sat, 14 Mar 2020 14:08:42 +0800
-Subject: Re: [PATCH v5 11/60] target/riscv: vector integer add-with-carry /
- subtract-with-borrow instructions
-To: Richard Henderson <richard.henderson@linaro.org>, alistair23@gmail.com,
+ (envelope-from <richard.henderson@linaro.org>) id 1jD00X-0005wC-VG
+ for qemu-riscv@nongnu.org; Sat, 14 Mar 2020 02:10:50 -0400
+Received: from mail-pj1-x1043.google.com ([2607:f8b0:4864:20::1043]:35633)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
+ id 1jD00X-0005ty-QY
+ for qemu-riscv@nongnu.org; Sat, 14 Mar 2020 02:10:49 -0400
+Received: by mail-pj1-x1043.google.com with SMTP id mq3so5493014pjb.0
+ for <qemu-riscv@nongnu.org>; Fri, 13 Mar 2020 23:10:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=LBoJKx8A8qtZQp7JbE01RexiLGiQ8B+fMtyuFPwUvCo=;
+ b=uyEeMcgYvlDhF/8klO8mUJ7cJvzzQTgyMW/m661ROaj7I5QSa3GZAfp2H1NZchvDbl
+ azHyRqYXHc9rO6c6b6foTFrta+7QD/FztQl7AIyowBv8m8ZK9OmAmgbllVtHctkRQLmX
+ kGW4IbCUBzF4th2GAjlQmdT9HDdld8y0Eo4rc7LB7DbsPemUuWtfK4ONdq8xydyydX2z
+ nwSDV8dLcHb1PVkvrv0b5uqxR7+xl0SwvmTBhqtWjWO9Hdw88ibGoeFV+SZxpojSSsQW
+ cDChT5AcbUyhTdm3NhSpsHI2FBOCvjaG8GlirdCA6bUXI75tnELvnLpDa7/m7SxGzZLD
+ JWRQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=LBoJKx8A8qtZQp7JbE01RexiLGiQ8B+fMtyuFPwUvCo=;
+ b=MOfZ0Dol4Q7iT/Xsa4U4HQ66Lv/k23e2WM4yIxDc1aQRaGCzbPdFxWhIwd5ZT4TYhW
+ /gCp4gSOzwh1uT7rQqVBD5PlxKSBKpRDByljyDomG88pfupS+aau+X0HzfjChn0riA0Q
+ lsWZO7znYrSxglu3QVhXnt2ZcrtLkzGag+ZRTKCY8VseHPhQ26gsseCQM9Qli3p1YddC
+ Q/jCxtq0hvFXxcbz8VzFu3ndgDcQCnJV5gqwpH9vqOaGDfhhdt365cJ1OY7wrBpevPJP
+ 5JOQjKUorDFcwlY0dxD0ObGSsQVA7ttR28eHvxmKEzHp2pBbJbrx/q12fWSKLTbvvWtn
+ qetw==
+X-Gm-Message-State: ANhLgQ3CcteuyCIyaH/N+SLA2T+8OOx/UUgOKRHUTRcQ3UZwjfYzvb6F
+ +xLcv+rhVnoTwSJdA8pP0rqUGN0eArI=
+X-Google-Smtp-Source: ADFU+vsJZcTvdxDTdHjxQNnez/Cc48Yeh5GeJW5SoPjzdwigLWPoeXS6SeRVHRJsyCqhzDO/FoE4+g==
+X-Received: by 2002:a17:902:864a:: with SMTP id
+ y10mr17171249plt.2.1584166248535; 
+ Fri, 13 Mar 2020 23:10:48 -0700 (PDT)
+Received: from [192.168.1.11] (97-126-123-70.tukw.qwest.net. [97.126.123.70])
+ by smtp.gmail.com with ESMTPSA id
+ r22sm13184477pjo.3.2020.03.13.23.10.47
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 13 Mar 2020 23:10:47 -0700 (PDT)
+Subject: Re: [PATCH v5 14/60] target/riscv: vector narrowing integer right
+ shift instructions
+To: LIU Zhiwei <zhiwei_liu@c-sky.com>, alistair23@gmail.com,
  chihmin.chao@sifive.com, palmer@dabbelt.com
 Cc: wenmeng_zhang@c-sky.com, wxy194768@alibaba-inc.com,
  guoren@linux.alibaba.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
 References: <20200312145900.2054-1-zhiwei_liu@c-sky.com>
- <20200312145900.2054-12-zhiwei_liu@c-sky.com>
- <77fcc875-ba5e-ea18-1228-6a1e7989491b@linaro.org>
-From: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Message-ID: <50916105-3aca-9e3c-6402-9b4001e4fc09@c-sky.com>
-Date: Sat, 14 Mar 2020 14:08:41 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.5.0
+ <20200312145900.2054-15-zhiwei_liu@c-sky.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+Message-ID: <55ea569f-3e60-7943-5975-af8baac6e38a@linaro.org>
+Date: Fri, 13 Mar 2020 23:10:45 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.4.1
 MIME-Version: 1.0
-In-Reply-To: <77fcc875-ba5e-ea18-1228-6a1e7989491b@linaro.org>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
+In-Reply-To: <20200312145900.2054-15-zhiwei_liu@c-sky.com>
+Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 3.x [generic] [fuzzy]
-X-Received-From: 121.197.200.217
+Content-Transfer-Encoding: 7bit
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2607:f8b0:4864:20::1043
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -52,31 +80,19 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 14 Mar 2020 06:08:56 -0000
+X-List-Received-Date: Sat, 14 Mar 2020 06:10:52 -0000
+
+On 3/12/20 7:58 AM, LIU Zhiwei wrote:
+> Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
+> ---
+>  target/riscv/helper.h                   | 13 ++++
+>  target/riscv/insn32.decode              |  6 ++
+>  target/riscv/insn_trans/trans_rvv.inc.c | 91 +++++++++++++++++++++++++
+>  target/riscv/vector_helper.c            | 14 ++++
+>  4 files changed, 124 insertions(+)
+
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
 
-
-On 2020/3/14 13:58, Richard Henderson wrote:
-> On 3/12/20 7:58 AM, LIU Zhiwei wrote:
->> +#define DO_MADC(N, M, C) ((__typeof(N))(N + M + C) < N ? 1 : 0)
-> Incorrect.  E.g N = 1, M = UINT_MAX, C = 1, adds to 1, which is not less than
-> N, despite the carry-out.
-Yes, it really the corner case. I should test C first.
-
-Thanks for pointing that.
-
-Zhiwei
->
-> You want
->
->      C ? N + M <= N : N + M < N
->
->> +#define DO_MSBC(N, M, C) ((__typeof(N))(N - M - C) > N ? 1 : 0)
-> Similarly
->
->      C ? N <= M : N < M
->
->
-> r~
-
+r~
 
