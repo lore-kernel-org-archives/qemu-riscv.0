@@ -1,51 +1,48 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jCuWP-0001Fm-Ez
-	for mharc-qemu-riscv@gnu.org; Fri, 13 Mar 2020 20:19:21 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:33321)
+	id 1jCunI-0004zX-RH
+	for mharc-qemu-riscv@gnu.org; Fri, 13 Mar 2020 20:36:48 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43641)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <no-reply@patchew.org>) id 1jCuWM-0001CE-4y
- for qemu-riscv@nongnu.org; Fri, 13 Mar 2020 20:19:19 -0400
+ (envelope-from <zhiwei_liu@c-sky.com>) id 1jCunE-0004vL-VQ
+ for qemu-riscv@nongnu.org; Fri, 13 Mar 2020 20:36:47 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <no-reply@patchew.org>) id 1jCuWK-0003RU-DY
- for qemu-riscv@nongnu.org; Fri, 13 Mar 2020 20:19:18 -0400
-Resent-Date: Fri, 13 Mar 2020 20:19:18 -0400
-Resent-Message-Id: <E1jCuWK-0003RU-DY@eggs.gnu.org>
-Received: from sender4-of-o51.zoho.com ([136.143.188.51]:21109)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <no-reply@patchew.org>)
- id 1jCuWE-0002bK-Va; Fri, 13 Mar 2020 20:19:11 -0400
-ARC-Seal: i=1; a=rsa-sha256; t=1584145139; cv=none; 
- d=zohomail.com; s=zohoarc; 
- b=V7Y/m0JWq5jdcxHibpjp1yfcsqsEZ6iN4fydpE0wyEOJ24GJM4XLn68hwkrBjh9sJIEtAgNfg9+AAkWiVnzzLljrRwvHUoSKnrvgH6BOH6rfY+YW6Qj6PZ8djvBlq5CPS1clIsHNKYLlkhxXxmjtgkzMK3lehNmNEPbNtVYU0jk=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1584145139;
- h=Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:MIME-Version:Message-ID:Reply-To:Subject:To;
- bh=nMsWJiWnpGf90GhTIN9asCJCosJL5cOs2o+v5Xgz7iA=; 
- b=HKhpdpR6QKPlDw3j+4m37zOaH0ok+GRYEybX1x6q8RL1EyJrvcVCFN1BnHpOjzkq5iPyaE0sg8UxEQT67VpAmFHyjd5X6nS/vXxhVY3sk4/uS5fL8Fz7BaGTvpsT/u/nM41GkPoovPUMgJsVGRsQDOxOSIrDPDLgX71b/sFLGxA=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
- spf=pass  smtp.mailfrom=no-reply@patchew.org;
- dmarc=pass header.from=<no-reply@patchew.org>
- header.from=<no-reply@patchew.org>
-Received: from [172.17.0.3] (23.253.156.214 [23.253.156.214]) by
- mx.zohomail.com with SMTPS id 1584145138003243.07732028742635;
- Fri, 13 Mar 2020 17:18:58 -0700 (PDT)
-In-Reply-To: <cover.1584143748.git.alistair.francis@wdc.com>
-Subject: Re: [PATCH v8 0/4]  linux-user: generate syscall_nr.sh for RISC-V
-Reply-To: <qemu-devel@nongnu.org>
-Message-ID: <158414513652.29765.9214965526138586973@39012742ff91>
+ (envelope-from <zhiwei_liu@c-sky.com>) id 1jCunC-0005NX-FX
+ for qemu-riscv@nongnu.org; Fri, 13 Mar 2020 20:36:44 -0400
+Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:54649)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <zhiwei_liu@c-sky.com>)
+ id 1jCun5-0004zk-HB; Fri, 13 Mar 2020 20:36:36 -0400
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07436282|-1; CH=green; DM=||false|;
+ DS=CONTINUE|ham_regular_dialog|0.315262-0.000689414-0.684049;
+ FP=0|0|0|0|0|-1|-1|-1; HT=e02c03307; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS;
+ RN=9; RT=9; SR=0; TI=SMTPD_---.H.6w8My_1584146186; 
+Received: from 192.168.3.18(mailfrom:zhiwei_liu@c-sky.com
+ fp:SMTPD_---.H.6w8My_1584146186)
+ by smtp.aliyun-inc.com(10.147.41.137);
+ Sat, 14 Mar 2020 08:36:26 +0800
+Subject: Re: [PATCH v5 08/60] target/riscv: add vector amo operations
+To: Alistair Francis <alistair23@gmail.com>
+Cc: Richard Henderson <richard.henderson@linaro.org>,
+ Chih-Min Chao <chihmin.chao@sifive.com>, Palmer Dabbelt
+ <palmer@dabbelt.com>, wenmeng_zhang@c-sky.com, wxy194768@alibaba-inc.com,
+ guoren@linux.alibaba.com,
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
+References: <20200312145900.2054-1-zhiwei_liu@c-sky.com>
+ <20200312145900.2054-9-zhiwei_liu@c-sky.com>
+ <CAKmqyKPPVVO8oxe8HDsQ+D4Cj1XuXASY5A1x1qfY606=16WZ2A@mail.gmail.com>
+From: LIU Zhiwei <zhiwei_liu@c-sky.com>
+Message-ID: <220da129-3d6b-9873-550d-cbcdd814f86b@c-sky.com>
+Date: Sat, 14 Mar 2020 08:36:26 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
+ Thunderbird/68.5.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-Resent-From: 
-From: no-reply@patchew.org
-To: alistair.francis@wdc.com
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, laurent@vivier.eu,
- alistair.francis@wdc.com, palmer@dabbelt.com, alistair23@gmail.com
-Date: Fri, 13 Mar 2020 17:18:58 -0700 (PDT)
-X-ZohoMailClient: External
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
- [fuzzy]
-X-Received-From: 136.143.188.51
+In-Reply-To: <CAKmqyKPPVVO8oxe8HDsQ+D4Cj1XuXASY5A1x1qfY606=16WZ2A@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 3.x [generic] [fuzzy]
+X-Received-From: 121.197.200.217
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -57,173 +54,469 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 14 Mar 2020 00:19:20 -0000
+X-List-Received-Date: Sat, 14 Mar 2020 00:36:47 -0000
 
-UGF0Y2hldyBVUkw6IGh0dHBzOi8vcGF0Y2hldy5vcmcvUUVNVS9jb3Zlci4xNTg0MTQzNzQ4Lmdp
-dC5hbGlzdGFpci5mcmFuY2lzQHdkYy5jb20vCgoKCkhpLAoKVGhpcyBzZXJpZXMgc2VlbXMgdG8g
-aGF2ZSBzb21lIGNvZGluZyBzdHlsZSBwcm9ibGVtcy4gU2VlIG91dHB1dCBiZWxvdyBmb3IKbW9y
-ZSBpbmZvcm1hdGlvbjoKClN1YmplY3Q6IFtQQVRDSCB2OCAwLzRdICBsaW51eC11c2VyOiBnZW5l
-cmF0ZSBzeXNjYWxsX25yLnNoIGZvciBSSVNDLVYKTWVzc2FnZS1pZDogY292ZXIuMTU4NDE0Mzc0
-OC5naXQuYWxpc3RhaXIuZnJhbmNpc0B3ZGMuY29tClR5cGU6IHNlcmllcwoKPT09IFRFU1QgU0NS
-SVBUIEJFR0lOID09PQojIS9iaW4vYmFzaApnaXQgcmV2LXBhcnNlIGJhc2UgPiAvZGV2L251bGwg
-fHwgZXhpdCAwCmdpdCBjb25maWcgLS1sb2NhbCBkaWZmLnJlbmFtZWxpbWl0IDAKZ2l0IGNvbmZp
-ZyAtLWxvY2FsIGRpZmYucmVuYW1lcyBUcnVlCmdpdCBjb25maWcgLS1sb2NhbCBkaWZmLmFsZ29y
-aXRobSBoaXN0b2dyYW0KLi9zY3JpcHRzL2NoZWNrcGF0Y2gucGwgLS1tYWlsYmFjayBiYXNlLi4K
-PT09IFRFU1QgU0NSSVBUIEVORCA9PT0KClVwZGF0aW5nIDNjOGNmNWE5YzIxZmY4NzgyMTY0ZDFk
-ZWY3ZjQ0YmQ4ODg3MTMzODQKU3dpdGNoZWQgdG8gYSBuZXcgYnJhbmNoICd0ZXN0JwozNjE3MDc5
-IGxpbnV4LXVzZXIvcmlzY3Y6IFVwZGF0ZSB0aGUgc3lzY2FsbF9ucidzIHRvIHRoZSA1LjUga2Vy
-bmVsCjUyNmFjZGEgbGludXgtdXNlcjogU3VwcG9ydCBmdXRleF90aW1lNjQKYjhhNjFmZSBsaW51
-eC11c2VyL3N5c2NhbGw6IEFkZCBzdXBwb3J0IGZvciBjbG9ja19nZXR0aW1lNjQvY2xvY2tfc2V0
-dGltZTY0CjY4NTQyMGUgbGludXgtdXNlcjogUHJvdGVjdCBtb3JlIHN5c2NhbGxzCgo9PT0gT1VU
-UFVUIEJFR0lOID09PQoxLzQgQ2hlY2tpbmcgY29tbWl0IDY4NTQyMGUwN2YxYiAobGludXgtdXNl
-cjogUHJvdGVjdCBtb3JlIHN5c2NhbGxzKQoyLzQgQ2hlY2tpbmcgY29tbWl0IGI4YTYxZmVmMGZk
-YyAobGludXgtdXNlci9zeXNjYWxsOiBBZGQgc3VwcG9ydCBmb3IgY2xvY2tfZ2V0dGltZTY0L2Ns
-b2NrX3NldHRpbWU2NCkKMy80IENoZWNraW5nIGNvbW1pdCA1MjZhY2RhZjA2ODYgKGxpbnV4LXVz
-ZXI6IFN1cHBvcnQgZnV0ZXhfdGltZTY0KQpXQVJOSU5HOiBhcmNoaXRlY3R1cmUgc3BlY2lmaWMg
-ZGVmaW5lcyBzaG91bGQgYmUgYXZvaWRlZAojMjM6IEZJTEU6IGxpbnV4LXVzZXIvc3lzY2FsbC5j
-OjI0ODoKKyNpZiBkZWZpbmVkKF9fTlJfZnV0ZXgpCgpXQVJOSU5HOiBhcmNoaXRlY3R1cmUgc3Bl
-Y2lmaWMgZGVmaW5lcyBzaG91bGQgYmUgYXZvaWRlZAojMjY6IEZJTEU6IGxpbnV4LXVzZXIvc3lz
-Y2FsbC5jOjI1MToKKyNpZiBkZWZpbmVkKF9fTlJfZnV0ZXhfdGltZTY0KQoKV0FSTklORzogYXJj
-aGl0ZWN0dXJlIHNwZWNpZmljIGRlZmluZXMgc2hvdWxkIGJlIGF2b2lkZWQKIzM3OiBGSUxFOiBs
-aW51eC11c2VyL3N5c2NhbGwuYzozMDM6CisjaWYgKGRlZmluZWQoVEFSR0VUX05SX2Z1dGV4KSAm
-JiBkZWZpbmVkKF9fTlJfZnV0ZXgpKSB8fCBcCgpXQVJOSU5HOiBhcmNoaXRlY3R1cmUgc3BlY2lm
-aWMgZGVmaW5lcyBzaG91bGQgYmUgYXZvaWRlZAojNDM6IEZJTEU6IGxpbnV4LXVzZXIvc3lzY2Fs
-bC5jOjMwOToKKyNpZiAoZGVmaW5lZChUQVJHRVRfTlJfZnV0ZXhfdGltZTY0KSAmJiBkZWZpbmVk
-KF9fTlJfZnV0ZXhfdGVpbTY0KSkKCkVSUk9SOiBzcGFjZSByZXF1aXJlZCBhZnRlciB0aGF0ICcs
-JyAoY3R4OlZ4VikKIzQ0OiBGSUxFOiBsaW51eC11c2VyL3N5c2NhbGwuYzozMTA6Citfc3lzY2Fs
-bDYoaW50LHN5c19mdXRleF90aW1lNjQsaW50ICosdWFkZHIsaW50LG9wLGludCx2YWwsCiAgICAg
-ICAgICAgICAgXgoKRVJST1I6IHNwYWNlIHJlcXVpcmVkIGFmdGVyIHRoYXQgJywnIChjdHg6VnhW
-KQojNDQ6IEZJTEU6IGxpbnV4LXVzZXIvc3lzY2FsbC5jOjMxMDoKK19zeXNjYWxsNihpbnQsc3lz
-X2Z1dGV4X3RpbWU2NCxpbnQgKix1YWRkcixpbnQsb3AsaW50LHZhbCwKICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgIF4KCkVSUk9SOiBzcGFjZSByZXF1aXJlZCBhZnRlciB0aGF0ICcsJyAo
-Y3R4Ok94VikKIzQ0OiBGSUxFOiBsaW51eC11c2VyL3N5c2NhbGwuYzozMTA6Citfc3lzY2FsbDYo
-aW50LHN5c19mdXRleF90aW1lNjQsaW50ICosdWFkZHIsaW50LG9wLGludCx2YWwsCiAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBeCgpFUlJPUjogc3BhY2UgcmVxdWlyZWQgYWZ0
-ZXIgdGhhdCAnLCcgKGN0eDpWeFYpCiM0NDogRklMRTogbGludXgtdXNlci9zeXNjYWxsLmM6MzEw
-OgorX3N5c2NhbGw2KGludCxzeXNfZnV0ZXhfdGltZTY0LGludCAqLHVhZGRyLGludCxvcCxpbnQs
-dmFsLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXgoKRVJST1I6
-IHNwYWNlIHJlcXVpcmVkIGFmdGVyIHRoYXQgJywnIChjdHg6VnhWKQojNDQ6IEZJTEU6IGxpbnV4
-LXVzZXIvc3lzY2FsbC5jOjMxMDoKK19zeXNjYWxsNihpbnQsc3lzX2Z1dGV4X3RpbWU2NCxpbnQg
-Kix1YWRkcixpbnQsb3AsaW50LHZhbCwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICBeCgpFUlJPUjogc3BhY2UgcmVxdWlyZWQgYWZ0ZXIgdGhhdCAnLCcgKGN0
-eDpWeFYpCiM0NDogRklMRTogbGludXgtdXNlci9zeXNjYWxsLmM6MzEwOgorX3N5c2NhbGw2KGlu
-dCxzeXNfZnV0ZXhfdGltZTY0LGludCAqLHVhZGRyLGludCxvcCxpbnQsdmFsLAogICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIF4KCkVSUk9SOiBzcGFjZSBy
-ZXF1aXJlZCBhZnRlciB0aGF0ICcsJyAoY3R4OlZ4VikKIzQ0OiBGSUxFOiBsaW51eC11c2VyL3N5
-c2NhbGwuYzozMTA6Citfc3lzY2FsbDYoaW50LHN5c19mdXRleF90aW1lNjQsaW50ICosdWFkZHIs
-aW50LG9wLGludCx2YWwsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgIF4KCkVSUk9SOiBzcGFjZSByZXF1aXJlZCBhZnRlciB0aGF0ICcsJyAoY3R4
-Ok94VikKIzQ1OiBGSUxFOiBsaW51eC11c2VyL3N5c2NhbGwuYzozMTE6CisgICAgICAgICAgY29u
-c3Qgc3RydWN0IHRpbWVzcGVjICosdGltZW91dCxpbnQgKix1YWRkcjIsaW50LHZhbDMpCiAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBeCgpFUlJPUjogc3BhY2UgcmVxdWlyZWQgYWZ0
-ZXIgdGhhdCAnLCcgKGN0eDpWeFYpCiM0NTogRklMRTogbGludXgtdXNlci9zeXNjYWxsLmM6MzEx
-OgorICAgICAgICAgIGNvbnN0IHN0cnVjdCB0aW1lc3BlYyAqLHRpbWVvdXQsaW50ICosdWFkZHIy
-LGludCx2YWwzKQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBeCgpF
-UlJPUjogc3BhY2UgcmVxdWlyZWQgYWZ0ZXIgdGhhdCAnLCcgKGN0eDpPeFYpCiM0NTogRklMRTog
-bGludXgtdXNlci9zeXNjYWxsLmM6MzExOgorICAgICAgICAgIGNvbnN0IHN0cnVjdCB0aW1lc3Bl
-YyAqLHRpbWVvdXQsaW50ICosdWFkZHIyLGludCx2YWwzKQogICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICBeCgpFUlJPUjogc3BhY2UgcmVxdWlyZWQgYWZ0ZXIg
-dGhhdCAnLCcgKGN0eDpWeFYpCiM0NTogRklMRTogbGludXgtdXNlci9zeXNjYWxsLmM6MzExOgor
-ICAgICAgICAgIGNvbnN0IHN0cnVjdCB0aW1lc3BlYyAqLHRpbWVvdXQsaW50ICosdWFkZHIyLGlu
-dCx2YWwzKQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgXgoKRVJST1I6IHNwYWNlIHJlcXVpcmVkIGFmdGVyIHRoYXQgJywnIChjdHg6VnhWKQoj
-NDU6IEZJTEU6IGxpbnV4LXVzZXIvc3lzY2FsbC5jOjMxMToKKyAgICAgICAgICBjb25zdCBzdHJ1
-Y3QgdGltZXNwZWMgKix0aW1lb3V0LGludCAqLHVhZGRyMixpbnQsdmFsMykKICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBeCgpXQVJOSU5H
-OiBhcmNoaXRlY3R1cmUgc3BlY2lmaWMgZGVmaW5lcyBzaG91bGQgYmUgYXZvaWRlZAojNTU6IEZJ
-TEU6IGxpbnV4LXVzZXIvc3lzY2FsbC5jOjc3NjoKKyNpZiBkZWZpbmVkKF9fTlJfZnV0ZXgpCgpX
-QVJOSU5HOiBhcmNoaXRlY3R1cmUgc3BlY2lmaWMgZGVmaW5lcyBzaG91bGQgYmUgYXZvaWRlZAoj
-NTk6IEZJTEU6IGxpbnV4LXVzZXIvc3lzY2FsbC5jOjc4MDoKKyNpZiBkZWZpbmVkKF9fTlJfZnV0
-ZXhfdGltZTY0KQoKRVJST1I6IHNwYWNlIHJlcXVpcmVkIGFmdGVyIHRoYXQgJywnIChjdHg6VnhW
-KQojNjA6IEZJTEU6IGxpbnV4LXVzZXIvc3lzY2FsbC5jOjc4MToKK3NhZmVfc3lzY2FsbDYoaW50
-LGZ1dGV4X3RpbWU2NCxpbnQgKix1YWRkcixpbnQsb3AsaW50LHZhbCwgXAogICAgICAgICAgICAg
-ICAgICBeCgpFUlJPUjogc3BhY2UgcmVxdWlyZWQgYWZ0ZXIgdGhhdCAnLCcgKGN0eDpWeFYpCiM2
-MDogRklMRTogbGludXgtdXNlci9zeXNjYWxsLmM6NzgxOgorc2FmZV9zeXNjYWxsNihpbnQsZnV0
-ZXhfdGltZTY0LGludCAqLHVhZGRyLGludCxvcCxpbnQsdmFsLCBcCiAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICBeCgpFUlJPUjogc3BhY2UgcmVxdWlyZWQgYWZ0ZXIgdGhhdCAnLCcgKGN0
-eDpPeFYpCiM2MDogRklMRTogbGludXgtdXNlci9zeXNjYWxsLmM6NzgxOgorc2FmZV9zeXNjYWxs
-NihpbnQsZnV0ZXhfdGltZTY0LGludCAqLHVhZGRyLGludCxvcCxpbnQsdmFsLCBcCiAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBeCgpFUlJPUjogc3BhY2UgcmVxdWlyZWQgYWZ0
-ZXIgdGhhdCAnLCcgKGN0eDpWeFYpCiM2MDogRklMRTogbGludXgtdXNlci9zeXNjYWxsLmM6Nzgx
-Ogorc2FmZV9zeXNjYWxsNihpbnQsZnV0ZXhfdGltZTY0LGludCAqLHVhZGRyLGludCxvcCxpbnQs
-dmFsLCBcCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBeCgpFUlJP
-Ujogc3BhY2UgcmVxdWlyZWQgYWZ0ZXIgdGhhdCAnLCcgKGN0eDpWeFYpCiM2MDogRklMRTogbGlu
-dXgtdXNlci9zeXNjYWxsLmM6NzgxOgorc2FmZV9zeXNjYWxsNihpbnQsZnV0ZXhfdGltZTY0LGlu
-dCAqLHVhZGRyLGludCxvcCxpbnQsdmFsLCBcCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgXgoKRVJST1I6IHNwYWNlIHJlcXVpcmVkIGFmdGVyIHRoYXQgJywn
-IChjdHg6VnhWKQojNjA6IEZJTEU6IGxpbnV4LXVzZXIvc3lzY2FsbC5jOjc4MToKK3NhZmVfc3lz
-Y2FsbDYoaW50LGZ1dGV4X3RpbWU2NCxpbnQgKix1YWRkcixpbnQsb3AsaW50LHZhbCwgXAogICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIF4KCkVSUk9SOiBz
-cGFjZSByZXF1aXJlZCBhZnRlciB0aGF0ICcsJyAoY3R4OlZ4VikKIzYwOiBGSUxFOiBsaW51eC11
-c2VyL3N5c2NhbGwuYzo3ODE6CitzYWZlX3N5c2NhbGw2KGludCxmdXRleF90aW1lNjQsaW50ICos
-dWFkZHIsaW50LG9wLGludCx2YWwsIFwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgXgoKRVJST1I6IHNwYWNlIHJlcXVpcmVkIGFmdGVyIHRoYXQg
-JywnIChjdHg6T3hWKQojNjE6IEZJTEU6IGxpbnV4LXVzZXIvc3lzY2FsbC5jOjc4MjoKKyAgICAg
-ICAgICAgICAgY29uc3Qgc3RydWN0IHRpbWVzcGVjICosdGltZW91dCxpbnQgKix1YWRkcjIsaW50
-LHZhbDMpCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXgoKRVJST1I6IHNw
-YWNlIHJlcXVpcmVkIGFmdGVyIHRoYXQgJywnIChjdHg6VnhWKQojNjE6IEZJTEU6IGxpbnV4LXVz
-ZXIvc3lzY2FsbC5jOjc4MjoKKyAgICAgICAgICAgICAgY29uc3Qgc3RydWN0IHRpbWVzcGVjICos
-dGltZW91dCxpbnQgKix1YWRkcjIsaW50LHZhbDMpCiAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICBeCgpFUlJPUjogc3BhY2UgcmVxdWlyZWQgYWZ0ZXIgdGhhdCAn
-LCcgKGN0eDpPeFYpCiM2MTogRklMRTogbGludXgtdXNlci9zeXNjYWxsLmM6NzgyOgorICAgICAg
-ICAgICAgICBjb25zdCBzdHJ1Y3QgdGltZXNwZWMgKix0aW1lb3V0LGludCAqLHVhZGRyMixpbnQs
-dmFsMykKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-IF4KCkVSUk9SOiBzcGFjZSByZXF1aXJlZCBhZnRlciB0aGF0ICcsJyAoY3R4OlZ4VikKIzYxOiBG
-SUxFOiBsaW51eC11c2VyL3N5c2NhbGwuYzo3ODI6CisgICAgICAgICAgICAgIGNvbnN0IHN0cnVj
-dCB0aW1lc3BlYyAqLHRpbWVvdXQsaW50ICosdWFkZHIyLGludCx2YWwzKQogICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIF4KCkVSUk9SOiBz
-cGFjZSByZXF1aXJlZCBhZnRlciB0aGF0ICcsJyAoY3R4OlZ4VikKIzYxOiBGSUxFOiBsaW51eC11
-c2VyL3N5c2NhbGwuYzo3ODI6CisgICAgICAgICAgICAgIGNvbnN0IHN0cnVjdCB0aW1lc3BlYyAq
-LHRpbWVvdXQsaW50ICosdWFkZHIyLGludCx2YWwzKQogICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBeCgpXQVJOSU5HOiBhcmNoaXRl
-Y3R1cmUgc3BlY2lmaWMgZGVmaW5lcyBzaG91bGQgYmUgYXZvaWRlZAojODQ6IEZJTEU6IGxpbnV4
-LXVzZXIvc3lzY2FsbC5jOjY5MTM6CisjaWYgZGVmaW5lZChfX05SX2Z1dGV4KQoKV0FSTklORzog
-YXJjaGl0ZWN0dXJlIHNwZWNpZmljIGRlZmluZXMgc2hvdWxkIGJlIGF2b2lkZWQKIzkwOiBGSUxF
-OiBsaW51eC11c2VyL3N5c2NhbGwuYzo2OTE5OgorI2lmIGRlZmluZWQoX19OUl9mdXRleF90aW1l
-NjQpCgpXQVJOSU5HOiBhcmNoaXRlY3R1cmUgc3BlY2lmaWMgZGVmaW5lcyBzaG91bGQgYmUgYXZv
-aWRlZAojOTY6IEZJTEU6IGxpbnV4LXVzZXIvc3lzY2FsbC5jOjY5MjU6CisjaWYgZGVmaW5lZChf
-X05SX2Z1dGV4KQoKV0FSTklORzogYXJjaGl0ZWN0dXJlIHNwZWNpZmljIGRlZmluZXMgc2hvdWxk
-IGJlIGF2b2lkZWQKIzEwOTogRklMRTogbGludXgtdXNlci9zeXNjYWxsLmM6NjkzODoKKyNpZiBk
-ZWZpbmVkKF9fTlJfZnV0ZXgpCgpXQVJOSU5HOiBhcmNoaXRlY3R1cmUgc3BlY2lmaWMgZGVmaW5l
-cyBzaG91bGQgYmUgYXZvaWRlZAojMTE0OiBGSUxFOiBsaW51eC11c2VyL3N5c2NhbGwuYzo2OTQz
-OgorI2lmIGRlZmluZWQoX19OUl9mdXRleF90aW1lNjQpCgpXQVJOSU5HOiBhcmNoaXRlY3R1cmUg
-c3BlY2lmaWMgZGVmaW5lcyBzaG91bGQgYmUgYXZvaWRlZAojMTIxOiBGSUxFOiBsaW51eC11c2Vy
-L3N5c2NhbGwuYzo2OTUwOgorI2lmIGRlZmluZWQoX19OUl9mdXRleCkKCldBUk5JTkc6IGxpbmUg
-b3ZlciA4MCBjaGFyYWN0ZXJzCiMxNjg6IEZJTEU6IGxpbnV4LXVzZXIvc3lzY2FsbC5jOjcwMTM6
-CitzdGF0aWMgaW50IGRvX2Z1dGV4X3RpbWU2NCh0YXJnZXRfdWxvbmcgdWFkZHIsIGludCBvcCwg
-aW50IHZhbCwgdGFyZ2V0X3Vsb25nIHRpbWVvdXQsCgpXQVJOSU5HOiBCbG9jayBjb21tZW50cyB1
-c2UgYSBsZWFkaW5nIC8qIG9uIGEgc2VwYXJhdGUgbGluZQojMTc0OiBGSUxFOiBsaW51eC11c2Vy
-L3N5c2NhbGwuYzo3MDE5OgorICAgIC8qID8/PyBXZSBhc3N1bWUgRlVURVhfKiBjb25zdGFudHMg
-YXJlIHRoZSBzYW1lIG9uIGJvdGggaG9zdAoKV0FSTklORzogQmxvY2sgY29tbWVudHMgdXNlICog
-b24gc3Vic2VxdWVudCBsaW5lcwojMTc1OiBGSUxFOiBsaW51eC11c2VyL3N5c2NhbGwuYzo3MDIw
-OgorICAgIC8qID8/PyBXZSBhc3N1bWUgRlVURVhfKiBjb25zdGFudHMgYXJlIHRoZSBzYW1lIG9u
-IGJvdGggaG9zdAorICAgICAgIGFuZCB0YXJnZXQuICAqLwoKV0FSTklORzogQmxvY2sgY29tbWVu
-dHMgdXNlIGEgdHJhaWxpbmcgKi8gb24gYSBzZXBhcmF0ZSBsaW5lCiMxNzU6IEZJTEU6IGxpbnV4
-LXVzZXIvc3lzY2FsbC5jOjcwMjA6CisgICAgICAgYW5kIHRhcmdldC4gICovCgpXQVJOSU5HOiBC
-bG9jayBjb21tZW50cyB1c2UgYSBsZWFkaW5nIC8qIG9uIGEgc2VwYXJhdGUgbGluZQojMTk5OiBG
-SUxFOiBsaW51eC11c2VyL3N5c2NhbGwuYzo3MDQ0OgorICAgICAgICAvKiBGb3IgRlVURVhfUkVR
-VUVVRSwgRlVURVhfQ01QX1JFUVVFVUUsIGFuZCBGVVRFWF9XQUtFX09QLCB0aGUKCldBUk5JTkc6
-IEJsb2NrIGNvbW1lbnRzIHVzZSAqIG9uIHN1YnNlcXVlbnQgbGluZXMKIzIwMDogRklMRTogbGlu
-dXgtdXNlci9zeXNjYWxsLmM6NzA0NToKKyAgICAgICAgLyogRm9yIEZVVEVYX1JFUVVFVUUsIEZV
-VEVYX0NNUF9SRVFVRVVFLCBhbmQgRlVURVhfV0FLRV9PUCwgdGhlCisgICAgICAgICAgIFRJTUVP
-VVQgcGFyYW1ldGVyIGlzIGludGVycHJldGVkIGFzIGEgdWludDMyX3QgYnkgdGhlIGtlcm5lbC4K
-CldBUk5JTkc6IEJsb2NrIGNvbW1lbnRzIHVzZSBhIHRyYWlsaW5nICovIG9uIGEgc2VwYXJhdGUg
-bGluZQojMjAzOiBGSUxFOiBsaW51eC11c2VyL3N5c2NhbGwuYzo3MDQ4OgorICAgICAgICAgICBz
-aW5jZSBpdCdzIG5vdCBjb21wYXJlZCB0byBndWVzdCBtZW1vcnkuICAqLwoKdG90YWw6IDI0IGVy
-cm9ycywgMTkgd2FybmluZ3MsIDIxMiBsaW5lcyBjaGVja2VkCgpQYXRjaCAzLzQgaGFzIHN0eWxl
-IHByb2JsZW1zLCBwbGVhc2UgcmV2aWV3LiAgSWYgYW55IG9mIHRoZXNlIGVycm9ycwphcmUgZmFs
-c2UgcG9zaXRpdmVzIHJlcG9ydCB0aGVtIHRvIHRoZSBtYWludGFpbmVyLCBzZWUKQ0hFQ0tQQVRD
-SCBpbiBNQUlOVEFJTkVSUy4KCjQvNCBDaGVja2luZyBjb21taXQgMzYxNzA3OTQyNjRjIChsaW51
-eC11c2VyL3Jpc2N2OiBVcGRhdGUgdGhlIHN5c2NhbGxfbnIncyB0byB0aGUgNS41IGtlcm5lbCkK
-V0FSTklORzogYWRkZWQsIG1vdmVkIG9yIGRlbGV0ZWQgZmlsZShzKSwgZG9lcyBNQUlOVEFJTkVS
-UyBuZWVkIHVwZGF0aW5nPwojMTI6IApuZXcgZmlsZSBtb2RlIDEwMDY0NAoKdG90YWw6IDAgZXJy
-b3JzLCAxIHdhcm5pbmdzLCA4OTggbGluZXMgY2hlY2tlZAoKUGF0Y2ggNC80IGhhcyBzdHlsZSBw
-cm9ibGVtcywgcGxlYXNlIHJldmlldy4gIElmIGFueSBvZiB0aGVzZSBlcnJvcnMKYXJlIGZhbHNl
-IHBvc2l0aXZlcyByZXBvcnQgdGhlbSB0byB0aGUgbWFpbnRhaW5lciwgc2VlCkNIRUNLUEFUQ0gg
-aW4gTUFJTlRBSU5FUlMuCj09PSBPVVRQVVQgRU5EID09PQoKVGVzdCBjb21tYW5kIGV4aXRlZCB3
-aXRoIGNvZGU6IDEKCgpUaGUgZnVsbCBsb2cgaXMgYXZhaWxhYmxlIGF0Cmh0dHA6Ly9wYXRjaGV3
-Lm9yZy9sb2dzL2NvdmVyLjE1ODQxNDM3NDguZ2l0LmFsaXN0YWlyLmZyYW5jaXNAd2RjLmNvbS90
-ZXN0aW5nLmNoZWNrcGF0Y2gvP3R5cGU9bWVzc2FnZS4KLS0tCkVtYWlsIGdlbmVyYXRlZCBhdXRv
-bWF0aWNhbGx5IGJ5IFBhdGNoZXcgW2h0dHBzOi8vcGF0Y2hldy5vcmcvXS4KUGxlYXNlIHNlbmQg
-eW91ciBmZWVkYmFjayB0byBwYXRjaGV3LWRldmVsQHJlZGhhdC5jb20=
+
+
+On 2020/3/14 8:02, Alistair Francis wrote:
+> On Thu, Mar 12, 2020 at 8:15 AM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
+>> Vector AMOs operate as if aq and rl bits were zero on each element
+>> with regard to ordering relative to other instructions in the same hart.
+>> Vector AMOs provide no ordering guarantee between element operations
+>> in the same vector AMO instruction
+>>
+>> Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
+>> ---
+>>   target/riscv/cpu.h                      |   1 +
+>>   target/riscv/helper.h                   |  29 +++++
+>>   target/riscv/insn32-64.decode           |  11 ++
+>>   target/riscv/insn32.decode              |  13 +++
+>>   target/riscv/insn_trans/trans_rvv.inc.c | 130 +++++++++++++++++++++
+>>   target/riscv/vector_helper.c            | 143 ++++++++++++++++++++++++
+>>   6 files changed, 327 insertions(+)
+>>
+>> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+>> index b6ebb9b0eb..e069e55e81 100644
+>> --- a/target/riscv/cpu.h
+>> +++ b/target/riscv/cpu.h
+>> @@ -374,6 +374,7 @@ FIELD(VDATA, MLEN, 0, 8)
+>>   FIELD(VDATA, VM, 8, 1)
+>>   FIELD(VDATA, LMUL, 9, 2)
+>>   FIELD(VDATA, NF, 11, 4)
+>> +FIELD(VDATA, WD, 11, 1)
+>>
+>>   FIELD(TB_FLAGS, VL_EQ_VLMAX, 2, 1)
+>>   FIELD(TB_FLAGS, LMUL, 3, 2)
+>> diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+>> index 72ba4d9bdb..70a4b05f75 100644
+>> --- a/target/riscv/helper.h
+>> +++ b/target/riscv/helper.h
+>> @@ -240,3 +240,32 @@ DEF_HELPER_5(vlhuff_v_w, void, ptr, ptr, tl, env, i32)
+>>   DEF_HELPER_5(vlhuff_v_d, void, ptr, ptr, tl, env, i32)
+>>   DEF_HELPER_5(vlwuff_v_w, void, ptr, ptr, tl, env, i32)
+>>   DEF_HELPER_5(vlwuff_v_d, void, ptr, ptr, tl, env, i32)
+>> +#ifdef TARGET_RISCV64
+>> +DEF_HELPER_6(vamoswapw_v_d, void, ptr, ptr, tl, ptr, env, i32)
+>> +DEF_HELPER_6(vamoswapd_v_d, void, ptr, ptr, tl, ptr, env, i32)
+>> +DEF_HELPER_6(vamoaddw_v_d,  void, ptr, ptr, tl, ptr, env, i32)
+>> +DEF_HELPER_6(vamoaddd_v_d,  void, ptr, ptr, tl, ptr, env, i32)
+>> +DEF_HELPER_6(vamoxorw_v_d,  void, ptr, ptr, tl, ptr, env, i32)
+>> +DEF_HELPER_6(vamoxord_v_d,  void, ptr, ptr, tl, ptr, env, i32)
+>> +DEF_HELPER_6(vamoandw_v_d,  void, ptr, ptr, tl, ptr, env, i32)
+>> +DEF_HELPER_6(vamoandd_v_d,  void, ptr, ptr, tl, ptr, env, i32)
+>> +DEF_HELPER_6(vamoorw_v_d,   void, ptr, ptr, tl, ptr, env, i32)
+>> +DEF_HELPER_6(vamoord_v_d,   void, ptr, ptr, tl, ptr, env, i32)
+>> +DEF_HELPER_6(vamominw_v_d,  void, ptr, ptr, tl, ptr, env, i32)
+>> +DEF_HELPER_6(vamomind_v_d,  void, ptr, ptr, tl, ptr, env, i32)
+>> +DEF_HELPER_6(vamomaxw_v_d,  void, ptr, ptr, tl, ptr, env, i32)
+>> +DEF_HELPER_6(vamomaxd_v_d,  void, ptr, ptr, tl, ptr, env, i32)
+>> +DEF_HELPER_6(vamominuw_v_d, void, ptr, ptr, tl, ptr, env, i32)
+>> +DEF_HELPER_6(vamominud_v_d, void, ptr, ptr, tl, ptr, env, i32)
+>> +DEF_HELPER_6(vamomaxuw_v_d, void, ptr, ptr, tl, ptr, env, i32)
+>> +DEF_HELPER_6(vamomaxud_v_d, void, ptr, ptr, tl, ptr, env, i32)
+>> +#endif
+>> +DEF_HELPER_6(vamoswapw_v_w, void, ptr, ptr, tl, ptr, env, i32)
+>> +DEF_HELPER_6(vamoaddw_v_w,  void, ptr, ptr, tl, ptr, env, i32)
+>> +DEF_HELPER_6(vamoxorw_v_w,  void, ptr, ptr, tl, ptr, env, i32)
+>> +DEF_HELPER_6(vamoandw_v_w,  void, ptr, ptr, tl, ptr, env, i32)
+>> +DEF_HELPER_6(vamoorw_v_w,   void, ptr, ptr, tl, ptr, env, i32)
+>> +DEF_HELPER_6(vamominw_v_w,  void, ptr, ptr, tl, ptr, env, i32)
+>> +DEF_HELPER_6(vamomaxw_v_w,  void, ptr, ptr, tl, ptr, env, i32)
+>> +DEF_HELPER_6(vamominuw_v_w, void, ptr, ptr, tl, ptr, env, i32)
+>> +DEF_HELPER_6(vamomaxuw_v_w, void, ptr, ptr, tl, ptr, env, i32)
+>> diff --git a/target/riscv/insn32-64.decode b/target/riscv/insn32-64.decode
+>> index 380bf791bc..86153d93fa 100644
+>> --- a/target/riscv/insn32-64.decode
+>> +++ b/target/riscv/insn32-64.decode
+>> @@ -57,6 +57,17 @@ amomax_d   10100 . . ..... ..... 011 ..... 0101111 @atom_st
+>>   amominu_d  11000 . . ..... ..... 011 ..... 0101111 @atom_st
+>>   amomaxu_d  11100 . . ..... ..... 011 ..... 0101111 @atom_st
+>>
+>> +#*** Vector AMO operations (in addition to Zvamo) ***
+>> +vamoswapd_v     00001 . . ..... ..... 111 ..... 0101111 @r_wdvm
+>> +vamoaddd_v      00000 . . ..... ..... 111 ..... 0101111 @r_wdvm
+>> +vamoxord_v      00100 . . ..... ..... 111 ..... 0101111 @r_wdvm
+>> +vamoandd_v      01100 . . ..... ..... 111 ..... 0101111 @r_wdvm
+>> +vamoord_v       01000 . . ..... ..... 111 ..... 0101111 @r_wdvm
+>> +vamomind_v      10000 . . ..... ..... 111 ..... 0101111 @r_wdvm
+>> +vamomaxd_v      10100 . . ..... ..... 111 ..... 0101111 @r_wdvm
+>> +vamominud_v     11000 . . ..... ..... 111 ..... 0101111 @r_wdvm
+>> +vamomaxud_v     11100 . . ..... ..... 111 ..... 0101111 @r_wdvm
+>> +
+>>   # *** RV64F Standard Extension (in addition to RV32F) ***
+>>   fcvt_l_s   1100000  00010 ..... ... ..... 1010011 @r2_rm
+>>   fcvt_lu_s  1100000  00011 ..... ... ..... 1010011 @r2_rm
+>> diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+>> index b76c09c8c0..1330703720 100644
+>> --- a/target/riscv/insn32.decode
+>> +++ b/target/riscv/insn32.decode
+>> @@ -44,6 +44,7 @@
+>>   &u    imm rd
+>>   &shift     shamt rs1 rd
+>>   &atomic    aq rl rs2 rs1 rd
+>> +&rwdvm     vm wd rd rs1 rs2
+>>   &r2nfvm    vm rd rs1 nf
+>>   &rnfvm     vm rd rs1 rs2 nf
+>>
+>> @@ -67,6 +68,7 @@
+>>   @r2      .......   ..... ..... ... ..... ....... %rs1 %rd
+>>   @r2_nfvm ... ... vm:1 ..... ..... ... ..... ....... &r2nfvm %nf %rs1 %rd
+>>   @r_nfvm  ... ... vm:1 ..... ..... ... ..... ....... &rnfvm %nf %rs2 %rs1 %rd
+>> +@r_wdvm  ..... wd:1 vm:1 ..... ..... ... ..... ....... &rwdvm %rs2 %rs1 %rd
+>>   @r2_zimm . zimm:11  ..... ... ..... ....... %rs1 %rd
+>>
+>>   @hfence_gvma ....... ..... .....   ... ..... ....... %rs2 %rs1
+>> @@ -261,6 +263,17 @@ vsxh_v     ... -11 . ..... ..... 101 ..... 0100111 @r_nfvm
+>>   vsxw_v     ... -11 . ..... ..... 110 ..... 0100111 @r_nfvm
+>>   vsxe_v     ... -11 . ..... ..... 111 ..... 0100111 @r_nfvm
+>>
+>> +#*** Vector AMO operations are encoded under the standard AMO major opcode ***
+>> +vamoswapw_v     00001 . . ..... ..... 110 ..... 0101111 @r_wdvm
+>> +vamoaddw_v      00000 . . ..... ..... 110 ..... 0101111 @r_wdvm
+>> +vamoxorw_v      00100 . . ..... ..... 110 ..... 0101111 @r_wdvm
+>> +vamoandw_v      01100 . . ..... ..... 110 ..... 0101111 @r_wdvm
+>> +vamoorw_v       01000 . . ..... ..... 110 ..... 0101111 @r_wdvm
+>> +vamominw_v      10000 . . ..... ..... 110 ..... 0101111 @r_wdvm
+>> +vamomaxw_v      10100 . . ..... ..... 110 ..... 0101111 @r_wdvm
+>> +vamominuw_v     11000 . . ..... ..... 110 ..... 0101111 @r_wdvm
+>> +vamomaxuw_v     11100 . . ..... ..... 110 ..... 0101111 @r_wdvm
+>> +
+>>   # *** new major opcode OP-V ***
+>>   vsetvli         0 ........... ..... 111 ..... 1010111  @r2_zimm
+>>   vsetvl          1000000 ..... ..... 111 ..... 1010111  @r
+>> diff --git a/target/riscv/insn_trans/trans_rvv.inc.c b/target/riscv/insn_trans/trans_rvv.inc.c
+>> index 9d9fc886d6..3c677160c5 100644
+>> --- a/target/riscv/insn_trans/trans_rvv.inc.c
+>> +++ b/target/riscv/insn_trans/trans_rvv.inc.c
+>> @@ -600,3 +600,133 @@ GEN_VEXT_TRANS(vleff_v, 3, r2nfvm, ldff_op, ld_us_check)
+>>   GEN_VEXT_TRANS(vlbuff_v, 4, r2nfvm, ldff_op, ld_us_check)
+>>   GEN_VEXT_TRANS(vlhuff_v, 5, r2nfvm, ldff_op, ld_us_check)
+>>   GEN_VEXT_TRANS(vlwuff_v, 6, r2nfvm, ldff_op, ld_us_check)
+>> +
+>> +/*
+>> + *** vector atomic operation
+>> + */
+>> +typedef void gen_helper_amo(TCGv_ptr, TCGv_ptr, TCGv, TCGv_ptr,
+>> +        TCGv_env, TCGv_i32);
+>> +
+>> +static bool amo_trans(uint32_t vd, uint32_t rs1, uint32_t vs2,
+>> +        uint32_t data, gen_helper_amo *fn, DisasContext *s)
+>> +{
+>> +    TCGv_ptr dest, mask, index;
+>> +    TCGv base;
+>> +    TCGv_i32 desc;
+>> +
+>> +    dest = tcg_temp_new_ptr();
+>> +    mask = tcg_temp_new_ptr();
+>> +    index = tcg_temp_new_ptr();
+>> +    base = tcg_temp_new();
+>> +    desc = tcg_const_i32(simd_desc(0, s->vlen / 8, data));
+>> +
+>> +    gen_get_gpr(base, rs1);
+>> +    tcg_gen_addi_ptr(dest, cpu_env, vreg_ofs(s, vd));
+>> +    tcg_gen_addi_ptr(index, cpu_env, vreg_ofs(s, vs2));
+>> +    tcg_gen_addi_ptr(mask, cpu_env, vreg_ofs(s, 0));
+>> +
+>> +    fn(dest, mask, base, index, cpu_env, desc);
+>> +
+>> +    tcg_temp_free_ptr(dest);
+>> +    tcg_temp_free_ptr(mask);
+>> +    tcg_temp_free_ptr(index);
+>> +    tcg_temp_free(base);
+>> +    tcg_temp_free_i32(desc);
+>> +    return true;
+>> +}
+>> +
+>> +static bool amo_op(DisasContext *s, arg_rwdvm *a, uint8_t seq)
+>> +{
+>> +    uint32_t data = 0;
+>> +    gen_helper_amo *fn;
+>> +    static gen_helper_amo *const fnsw[9] = {
+>> +        /* no atomic operation */
+>> +        gen_helper_vamoswapw_v_w,
+>> +        gen_helper_vamoaddw_v_w,
+>> +        gen_helper_vamoxorw_v_w,
+>> +        gen_helper_vamoandw_v_w,
+>> +        gen_helper_vamoorw_v_w,
+>> +        gen_helper_vamominw_v_w,
+>> +        gen_helper_vamomaxw_v_w,
+>> +        gen_helper_vamominuw_v_w,
+>> +        gen_helper_vamomaxuw_v_w
+>> +    };
+>> +#ifdef TARGET_RISCV64
+>> +    static gen_helper_amo *const fnsd[18] = {
+>> +        gen_helper_vamoswapw_v_d,
+>> +        gen_helper_vamoaddw_v_d,
+>> +        gen_helper_vamoxorw_v_d,
+>> +        gen_helper_vamoandw_v_d,
+>> +        gen_helper_vamoorw_v_d,
+>> +        gen_helper_vamominw_v_d,
+>> +        gen_helper_vamomaxw_v_d,
+>> +        gen_helper_vamominuw_v_d,
+>> +        gen_helper_vamomaxuw_v_d,
+>> +        gen_helper_vamoswapd_v_d,
+>> +        gen_helper_vamoaddd_v_d,
+>> +        gen_helper_vamoxord_v_d,
+>> +        gen_helper_vamoandd_v_d,
+>> +        gen_helper_vamoord_v_d,
+>> +        gen_helper_vamomind_v_d,
+>> +        gen_helper_vamomaxd_v_d,
+>> +        gen_helper_vamominud_v_d,
+>> +        gen_helper_vamomaxud_v_d
+>> +    };
+>> +#endif
+>> +
+>> +    if (tb_cflags(s->base.tb) & CF_PARALLEL) {
+>> +        gen_helper_exit_atomic(cpu_env);
+>> +        s->base.is_jmp = DISAS_NORETURN;
+>> +        return true;
+>> +    } else {
+>> +        fn = fnsw[seq];
+>> +#ifdef TARGET_RISCV64
+>> +        if (s->sew == 3) {
+>> +            fn = fnsd[seq];
+>> +        }
+>> +#endif
+>> +    }
+>> +
+>> +    data = FIELD_DP32(data, VDATA, MLEN, s->mlen);
+>> +    data = FIELD_DP32(data, VDATA, VM, a->vm);
+>> +    data = FIELD_DP32(data, VDATA, LMUL, s->lmul);
+>> +    data = FIELD_DP32(data, VDATA, WD, a->wd);
+>> +    return amo_trans(a->rd, a->rs1, a->rs2, data, fn, s);
+>> +}
+>> +/*
+>> + * There are two rules check here.
+>> + *
+>> + * 1. SEW must be at least as wide as the AMO memory element size.
+>> + *
+>> + * 2. If SEW is greater than XLEN, an illegal instruction exception is raised.
+>> + */
+>> +static bool amo_check(DisasContext *s, arg_rwdvm* a)
+>> +{
+>> +    return (vext_check_isa_ill(s, RVV | RVA) &&
+>> +            (!a->wd || vext_check_overlap_mask(s, a->rd, a->vm, false)) &&
+>> +            vext_check_reg(s, a->rd, false) &&
+>> +            vext_check_reg(s, a->rs2, false) &&
+>> +            ((1 << s->sew) <= sizeof(target_ulong)) &&
+>> +            ((1 << s->sew) >= 4));
+>> +}
+>> +
+>> +GEN_VEXT_TRANS(vamoswapw_v, 0, rwdvm, amo_op, amo_check)
+>> +GEN_VEXT_TRANS(vamoaddw_v, 1, rwdvm, amo_op, amo_check)
+>> +GEN_VEXT_TRANS(vamoxorw_v, 2, rwdvm, amo_op, amo_check)
+>> +GEN_VEXT_TRANS(vamoandw_v, 3, rwdvm, amo_op, amo_check)
+>> +GEN_VEXT_TRANS(vamoorw_v, 4, rwdvm, amo_op, amo_check)
+>> +GEN_VEXT_TRANS(vamominw_v, 5, rwdvm, amo_op, amo_check)
+>> +GEN_VEXT_TRANS(vamomaxw_v, 6, rwdvm, amo_op, amo_check)
+>> +GEN_VEXT_TRANS(vamominuw_v, 7, rwdvm, amo_op, amo_check)
+>> +GEN_VEXT_TRANS(vamomaxuw_v, 8, rwdvm, amo_op, amo_check)
+>> +#ifdef TARGET_RISCV64
+>> +GEN_VEXT_TRANS(vamoswapd_v, 9, rwdvm, amo_op, amo_check)
+>> +GEN_VEXT_TRANS(vamoaddd_v, 10, rwdvm, amo_op, amo_check)
+>> +GEN_VEXT_TRANS(vamoxord_v, 11, rwdvm, amo_op, amo_check)
+>> +GEN_VEXT_TRANS(vamoandd_v, 12, rwdvm, amo_op, amo_check)
+>> +GEN_VEXT_TRANS(vamoord_v, 13, rwdvm, amo_op, amo_check)
+>> +GEN_VEXT_TRANS(vamomind_v, 14, rwdvm, amo_op, amo_check)
+>> +GEN_VEXT_TRANS(vamomaxd_v, 15, rwdvm, amo_op, amo_check)
+>> +GEN_VEXT_TRANS(vamominud_v, 16, rwdvm, amo_op, amo_check)
+>> +GEN_VEXT_TRANS(vamomaxud_v, 17, rwdvm, amo_op, amo_check)
+>> +#endif
+>> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+>> index 3841301b74..f9b409b169 100644
+>> --- a/target/riscv/vector_helper.c
+>> +++ b/target/riscv/vector_helper.c
+>> @@ -94,6 +94,11 @@ static inline uint32_t vext_lmul(uint32_t desc)
+>>       return FIELD_EX32(simd_data(desc), VDATA, LMUL);
+>>   }
+>>
+>> +static uint32_t vext_wd(uint32_t desc)
+>> +{
+>> +    return (simd_data(desc) >> 11) & 0x1;
+>> +}
+>> +
+>>   /*
+>>    * Get vector group length in bytes. Its range is [64, 2048].
+>>    *
+>> @@ -685,3 +690,141 @@ GEN_VEXT_LDFF(vlhuff_v_w, uint16_t, uint32_t, MO_LEUW, ldhu_w, clearl)
+>>   GEN_VEXT_LDFF(vlhuff_v_d, uint16_t, uint64_t, MO_LEUW, ldhu_d, clearq)
+>>   GEN_VEXT_LDFF(vlwuff_v_w, uint32_t, uint32_t, MO_LEUL, ldwu_w, clearl)
+>>   GEN_VEXT_LDFF(vlwuff_v_d, uint32_t, uint64_t, MO_LEUL, ldwu_d, clearq)
+>> +
+>> +/*
+>> + *** Vector AMO Operations (Zvamo)
+>> + */
+>> +typedef void (*vext_amo_noatomic_fn)(void *vs3, target_ulong addr,
+>> +        uint32_t wd, uint32_t idx, CPURISCVState *env, uintptr_t retaddr);
+>> +
+>> +/* no atomic opreation for vector atomic insructions */
+>> +#define DO_SWAP(N, M) (M)
+>> +#define DO_AND(N, M)  (N & M)
+>> +#define DO_XOR(N, M)  (N ^ M)
+>> +#define DO_OR(N, M)   (N | M)
+>> +#define DO_ADD(N, M)  (N + M)
+> Why don't these need to be atomic?
+>
+>> +
+>> +#define GEN_VEXT_AMO_NOATOMIC_OP(NAME, ESZ, MSZ, H, DO_OP, SUF) \
+>> +static void vext_##NAME##_noatomic_op(void *vs3,                \
+>> +            target_ulong addr, uint32_t wd, uint32_t idx,       \
+>> +                CPURISCVState *env, uintptr_t retaddr)          \
+>> +{                                                               \
+>> +    typedef int##ESZ##_t ETYPE;                                 \
+>> +    typedef int##MSZ##_t MTYPE;                                 \
+>> +    typedef uint##MSZ##_t UMTYPE __attribute__((unused));       \
+>> +    ETYPE *pe3 = (ETYPE *)vs3 + H(idx);                         \
+>> +    MTYPE a = *pe3, b = cpu_ld##SUF##_data(env, addr);          \
+>> +    a = DO_OP(a, b);                                            \
+>> +    cpu_st##SUF##_data(env, addr, a);                           \
+>> +    if (wd) {                                                   \
+>> +        *pe3 = a;                                               \
+>> +    }                                                           \
+>> +}
+>> +
+>> +/* Signed min/max */
+>> +#define DO_MAX(N, M)  ((N) >= (M) ? (N) : (M))
+>> +#define DO_MIN(N, M)  ((N) >= (M) ? (M) : (N))
+>> +
+>> +/* Unsigned min/max */
+>> +#define DO_MAXU(N, M) DO_MAX((UMTYPE)N, (UMTYPE)M)
+>> +#define DO_MINU(N, M) DO_MIN((UMTYPE)N, (UMTYPE)M)
+>> +
+>> +GEN_VEXT_AMO_NOATOMIC_OP(vamoswapw_v_w, 32, 32, H4, DO_SWAP, l)
+>> +GEN_VEXT_AMO_NOATOMIC_OP(vamoaddw_v_w,  32, 32, H4, DO_ADD,  l)
+>> +GEN_VEXT_AMO_NOATOMIC_OP(vamoxorw_v_w,  32, 32, H4, DO_XOR,  l)
+>> +GEN_VEXT_AMO_NOATOMIC_OP(vamoandw_v_w,  32, 32, H4, DO_AND,  l)
+>> +GEN_VEXT_AMO_NOATOMIC_OP(vamoorw_v_w,   32, 32, H4, DO_OR,   l)
+>> +GEN_VEXT_AMO_NOATOMIC_OP(vamominw_v_w,  32, 32, H4, DO_MIN,  l)
+>> +GEN_VEXT_AMO_NOATOMIC_OP(vamomaxw_v_w,  32, 32, H4, DO_MAX,  l)
+>> +GEN_VEXT_AMO_NOATOMIC_OP(vamominuw_v_w, 32, 32, H4, DO_MINU, l)
+>> +GEN_VEXT_AMO_NOATOMIC_OP(vamomaxuw_v_w, 32, 32, H4, DO_MAXU, l)
+>> +#ifdef TARGET_RISCV64
+>> +GEN_VEXT_AMO_NOATOMIC_OP(vamoswapw_v_d, 64, 32, H8, DO_SWAP, l)
+>> +GEN_VEXT_AMO_NOATOMIC_OP(vamoswapd_v_d, 64, 64, H8, DO_SWAP, q)
+>> +GEN_VEXT_AMO_NOATOMIC_OP(vamoaddw_v_d,  64, 32, H8, DO_ADD,  l)
+>> +GEN_VEXT_AMO_NOATOMIC_OP(vamoaddd_v_d,  64, 64, H8, DO_ADD,  q)
+>> +GEN_VEXT_AMO_NOATOMIC_OP(vamoxorw_v_d,  64, 32, H8, DO_XOR,  l)
+>> +GEN_VEXT_AMO_NOATOMIC_OP(vamoxord_v_d,  64, 64, H8, DO_XOR,  q)
+>> +GEN_VEXT_AMO_NOATOMIC_OP(vamoandw_v_d,  64, 32, H8, DO_AND,  l)
+>> +GEN_VEXT_AMO_NOATOMIC_OP(vamoandd_v_d,  64, 64, H8, DO_AND,  q)
+>> +GEN_VEXT_AMO_NOATOMIC_OP(vamoorw_v_d,   64, 32, H8, DO_OR,   l)
+>> +GEN_VEXT_AMO_NOATOMIC_OP(vamoord_v_d,   64, 64, H8, DO_OR,   q)
+>> +GEN_VEXT_AMO_NOATOMIC_OP(vamominw_v_d,  64, 32, H8, DO_MIN,  l)
+>> +GEN_VEXT_AMO_NOATOMIC_OP(vamomind_v_d,  64, 64, H8, DO_MIN,  q)
+>> +GEN_VEXT_AMO_NOATOMIC_OP(vamomaxw_v_d,  64, 32, H8, DO_MAX,  l)
+>> +GEN_VEXT_AMO_NOATOMIC_OP(vamomaxd_v_d,  64, 64, H8, DO_MAX,  q)
+>> +GEN_VEXT_AMO_NOATOMIC_OP(vamominuw_v_d, 64, 32, H8, DO_MINU, l)
+>> +GEN_VEXT_AMO_NOATOMIC_OP(vamominud_v_d, 64, 64, H8, DO_MINU, q)
+>> +GEN_VEXT_AMO_NOATOMIC_OP(vamomaxuw_v_d, 64, 32, H8, DO_MAXU, l)
+>> +GEN_VEXT_AMO_NOATOMIC_OP(vamomaxud_v_d, 64, 64, H8, DO_MAXU, q)
+>> +#endif
+> I'm confused why these are different to
+>
+>> +
+>> +static inline void vext_amo_noatomic(void *vs3, void *v0, target_ulong base,
+>> +        void *vs2, CPURISCVState *env, uint32_t desc,
+>> +        vext_get_index_addr get_index_addr,
+>> +        vext_amo_noatomic_fn noatomic_op,
+>> +        vext_ld_clear_elem clear_elem,
+>> +        uint32_t esz, uint32_t msz, uintptr_t ra)
+>> +{
+>> +    uint32_t i;
+>> +    target_long addr;
+>> +    uint32_t wd = vext_wd(desc);
+>> +    uint32_t vm = vext_vm(desc);
+>> +    uint32_t mlen = vext_mlen(desc);
+>> +    uint32_t vlmax = vext_maxsz(desc) / esz;
+>> +
+>> +    for (i = 0; i < env->vl; i++) {
+>> +        if (!vm && !vext_elem_mask(v0, mlen, i)) {
+>> +            continue;
+>> +        }
+>> +        probe_pages(env, get_index_addr(base, i, vs2), msz, ra, MMU_DATA_LOAD);
+>> +        probe_pages(env, get_index_addr(base, i, vs2), msz, ra, MMU_DATA_STORE);
+>> +    }
+>> +    for (i = 0; i < env->vl; i++) {
+>> +        if (!vm && !vext_elem_mask(v0, mlen, i)) {
+>> +            continue;
+>> +        }
+>> +        addr = get_index_addr(base, i, vs2);
+>> +        noatomic_op(vs3, addr, wd, i, env, ra);
+>> +    }
+>> +    clear_elem(vs3, env->vl, env->vl * esz, vlmax * esz);
+>> +}
+>> +
+>> +#define GEN_VEXT_AMO(NAME, MTYPE, ETYPE, INDEX_FN, CLEAR_FN)    \
+>> +void HELPER(NAME)(void *vs3, void *v0, target_ulong base,       \
+>> +        void *vs2, CPURISCVState *env, uint32_t desc)           \
+>> +{                                                               \
+>> +    vext_amo_noatomic(vs3, v0, base, vs2, env, desc,            \
+>> +        INDEX_FN, vext_##NAME##_noatomic_op, CLEAR_FN,          \
+>> +        sizeof(ETYPE), sizeof(MTYPE), GETPC());                 \
+>> +}
+>> +
+>> +#ifdef TARGET_RISCV64
+>> +GEN_VEXT_AMO(vamoswapw_v_d, int32_t,  int64_t,  idx_d, clearq)
+>> +GEN_VEXT_AMO(vamoswapd_v_d, int64_t,  int64_t,  idx_d, clearq)
+>> +GEN_VEXT_AMO(vamoaddw_v_d,  int32_t,  int64_t,  idx_d, clearq)
+>> +GEN_VEXT_AMO(vamoaddd_v_d,  int64_t,  int64_t,  idx_d, clearq)
+>> +GEN_VEXT_AMO(vamoxorw_v_d,  int32_t,  int64_t,  idx_d, clearq)
+>> +GEN_VEXT_AMO(vamoxord_v_d,  int64_t,  int64_t,  idx_d, clearq)
+>> +GEN_VEXT_AMO(vamoandw_v_d,  int32_t,  int64_t,  idx_d, clearq)
+>> +GEN_VEXT_AMO(vamoandd_v_d,  int64_t,  int64_t,  idx_d, clearq)
+>> +GEN_VEXT_AMO(vamoorw_v_d,   int32_t,  int64_t,  idx_d, clearq)
+>> +GEN_VEXT_AMO(vamoord_v_d,   int64_t,  int64_t,  idx_d, clearq)
+>> +GEN_VEXT_AMO(vamominw_v_d,  int32_t,  int64_t,  idx_d, clearq)
+>> +GEN_VEXT_AMO(vamomind_v_d,  int64_t,  int64_t,  idx_d, clearq)
+>> +GEN_VEXT_AMO(vamomaxw_v_d,  int32_t,  int64_t,  idx_d, clearq)
+>> +GEN_VEXT_AMO(vamomaxd_v_d,  int64_t,  int64_t,  idx_d, clearq)
+>> +GEN_VEXT_AMO(vamominuw_v_d, uint32_t, uint64_t, idx_d, clearq)
+>> +GEN_VEXT_AMO(vamominud_v_d, uint64_t, uint64_t, idx_d, clearq)
+>> +GEN_VEXT_AMO(vamomaxuw_v_d, uint32_t, uint64_t, idx_d, clearq)
+>> +GEN_VEXT_AMO(vamomaxud_v_d, uint64_t, uint64_t, idx_d, clearq)
+>> +#endif
+>> +GEN_VEXT_AMO(vamoswapw_v_w, int32_t,  int32_t,  idx_w, clearl)
+>> +GEN_VEXT_AMO(vamoaddw_v_w,  int32_t,  int32_t,  idx_w, clearl)
+>> +GEN_VEXT_AMO(vamoxorw_v_w,  int32_t,  int32_t,  idx_w, clearl)
+>> +GEN_VEXT_AMO(vamoandw_v_w,  int32_t,  int32_t,  idx_w, clearl)
+>> +GEN_VEXT_AMO(vamoorw_v_w,   int32_t,  int32_t,  idx_w, clearl)
+>> +GEN_VEXT_AMO(vamominw_v_w,  int32_t,  int32_t,  idx_w, clearl)
+>> +GEN_VEXT_AMO(vamomaxw_v_w,  int32_t,  int32_t,  idx_w, clearl)
+>> +GEN_VEXT_AMO(vamominuw_v_w, uint32_t, uint32_t, idx_w, clearl)
+>> +GEN_VEXT_AMO(vamomaxuw_v_w, uint32_t, uint32_t, idx_w, clearl)
+> These?
+GEN_VEXT_AMO is to generate atomic helper functions.
+GEN_VEXT_AMO_NOATOMIC_OP is  to generate a function to process just one 
+element in the vector register groups,
+which will be used in atomic helper functions.
+
+Once before there were to macros for atomic operation, 
+GEN_VEXT_AMO_ATOMIC_OP and GEN_VEXT_AMO_NOATOMIC_OP.
+Therefore two OPS were available for atomic instructions elements. When 
+needs paralell, it will use ATOMIC_OP, otherwise
+use the NOATOMIC_OP.
+
+However GEN_VEXT_AMO_ATOMIC_OP needs call some atomic helpers in TCG 
+runtime.
+The atomic helpers are designed for atomic TCG IR. I can only use them 
+with very cautiously.
+
+As Richard suggests, I should not use the atomic helpers in vector 
+helpers.  An atomic op will be
+replaced by an atomic exit exception and a noatomic op.
+
+That's the reason why I name it GEN_VEXT_AMO_NOATOMIC_OP. If in the 
+future,  the proper
+atomic APIs were created, I will also add  a GEN_VEXT_AMO_ATOMIC_OP 
+macro here.
+
+Zhiwei
+
+>
+> Alistair
+>
+>> --
+>> 2.23.0
+>>
+
 
