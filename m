@@ -1,47 +1,74 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jD0Lr-0002lp-G4
-	for mharc-qemu-riscv@gnu.org; Sat, 14 Mar 2020 02:32:51 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53698)
+	id 1jD0MR-00036c-DD
+	for mharc-qemu-riscv@gnu.org; Sat, 14 Mar 2020 02:33:27 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:54173)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <zhiwei_liu@c-sky.com>) id 1jD0Lo-0002lS-Kb
- for qemu-riscv@nongnu.org; Sat, 14 Mar 2020 02:32:49 -0400
+ (envelope-from <richard.henderson@linaro.org>) id 1jD0MP-00034i-QW
+ for qemu-riscv@nongnu.org; Sat, 14 Mar 2020 02:33:26 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <zhiwei_liu@c-sky.com>) id 1jD0Ln-0003IH-Pk
- for qemu-riscv@nongnu.org; Sat, 14 Mar 2020 02:32:48 -0400
-Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:41499)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1jD0Ll-0001xD-1f; Sat, 14 Mar 2020 02:32:45 -0400
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.1550802|-1; CH=green; DM=||false|;
- DS=CONTINUE|ham_social|0.0297961-0.00168917-0.968515; FP=0|0|0|0|0|-1|-1|-1;
- HT=e02c03278; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS; RN=9; RT=9; SR=0;
- TI=SMTPD_---.H.EqM.b_1584167543; 
-Received: from 192.168.3.18(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.H.EqM.b_1584167543)
- by smtp.aliyun-inc.com(10.147.42.198);
- Sat, 14 Mar 2020 14:32:23 +0800
-Subject: Re: [PATCH v5 11/60] target/riscv: vector integer add-with-carry /
- subtract-with-borrow instructions
-To: Richard Henderson <richard.henderson@linaro.org>, alistair23@gmail.com,
+ (envelope-from <richard.henderson@linaro.org>) id 1jD0MO-0004wr-MR
+ for qemu-riscv@nongnu.org; Sat, 14 Mar 2020 02:33:25 -0400
+Received: from mail-pj1-x1043.google.com ([2607:f8b0:4864:20::1043]:50760)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
+ id 1jD0MO-0004u3-Gf
+ for qemu-riscv@nongnu.org; Sat, 14 Mar 2020 02:33:24 -0400
+Received: by mail-pj1-x1043.google.com with SMTP id u10so5267366pjy.0
+ for <qemu-riscv@nongnu.org>; Fri, 13 Mar 2020 23:33:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=Ds2kqrrs33istRt1suE15np/U24q3ZUB/Pre1HY/bNA=;
+ b=ye7Xs+yT96GXaA53U+0gOnWLJW3xyJDAXv/+Xjq4qSdoAGD5z3uiHCX/cf8wfIJDtf
+ JiVOx5qdgwAZS1XXOCuBI1YyPfeuPPeF/TcOgB/By7T0B3fWYtf5Z9H4/q+KNPFuVWRC
+ 2/OntIpxXmVhiWQ0oBlEi7Xwc0uqz6weKqcAGiK0SWIEwcNjcqG994l0O3Y1HtnYt3mB
+ vVy9knsktdbqAggM6UsQhK49Y0yEahr2Yf/Y7iIdDXeBJxwnNAs921eYfx2JzDR4bsVM
+ oSC4/lK4pPvGCdqUDamk7ZryXp+J9uundWFbpV+zM8+3hdDHH87zlsngqPlDFs/9qxcC
+ rR5Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=Ds2kqrrs33istRt1suE15np/U24q3ZUB/Pre1HY/bNA=;
+ b=gkjBSFj7hamMpAjg68NoGI5EY57WPJxQjMmQlY/fSd0WxXObfXhEY5n9lLnZfhCmus
+ nwrJul/1pv+Y1HkEtiHLhZYqHatm81s/FCkpkxKG4wjDPPcIS7dJ/ozOIvWHgZVvWhTd
+ r6vQBQeP/l2AC2yqI5vPZ3u0WvPSQ+FQ3ZV1mR99/pOBohD3YFvnI8jGrdj+qC9oCdQJ
+ SaVRZ8EENubNEoKVdPAhiuHABnRygtkLmfdJfPkQqtT3AuxCgg/RRNooyF00kPOMwO4y
+ CNT+SNrHns9N2Ks6n6pCoWEzyodw/fqqShHKVv+Z9iuzVBi1H0S2FPDRBmvzvBVhGq5C
+ 1aJQ==
+X-Gm-Message-State: ANhLgQ00lJ1x1DCNFrGRkuzcfsnCQeItkMdGUNv/T601ruOYItJQc7Ur
+ qMS6EgqmQzrXLUA67/hvy3VMHnKnd5U=
+X-Google-Smtp-Source: ADFU+vuoAVBfJIMVFkicPcuUQB7K/1wuT+s0zRTfAvPYrgGea5l20Vuoz2CeDevuHit3glNpNSc7EQ==
+X-Received: by 2002:a17:90a:5d0a:: with SMTP id
+ s10mr13660398pji.166.1584167603165; 
+ Fri, 13 Mar 2020 23:33:23 -0700 (PDT)
+Received: from [192.168.1.11] (97-126-123-70.tukw.qwest.net. [97.126.123.70])
+ by smtp.gmail.com with ESMTPSA id
+ 129sm35422072pfw.84.2020.03.13.23.33.22
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 13 Mar 2020 23:33:22 -0700 (PDT)
+Subject: Re: [PATCH v5 15/60] target/riscv: vector integer comparison
+ instructions
+To: LIU Zhiwei <zhiwei_liu@c-sky.com>, alistair23@gmail.com,
  chihmin.chao@sifive.com, palmer@dabbelt.com
 Cc: wenmeng_zhang@c-sky.com, wxy194768@alibaba-inc.com,
  guoren@linux.alibaba.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
 References: <20200312145900.2054-1-zhiwei_liu@c-sky.com>
- <20200312145900.2054-12-zhiwei_liu@c-sky.com>
- <77fcc875-ba5e-ea18-1228-6a1e7989491b@linaro.org>
- <6de2ad7d-c83a-a3a0-622c-51aaf28c36a7@linaro.org>
-From: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Message-ID: <de473cbf-9c9e-7ce7-6314-9c0ebec67e03@c-sky.com>
-Date: Sat, 14 Mar 2020 14:32:22 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.5.0
+ <20200312145900.2054-16-zhiwei_liu@c-sky.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+Message-ID: <d6a3f967-559b-41cf-5bda-f206c89fe837@linaro.org>
+Date: Fri, 13 Mar 2020 23:33:20 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.4.1
 MIME-Version: 1.0
-In-Reply-To: <6de2ad7d-c83a-a3a0-622c-51aaf28c36a7@linaro.org>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
+In-Reply-To: <20200312145900.2054-16-zhiwei_liu@c-sky.com>
+Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 3.x [generic] [fuzzy]
-X-Received-From: 121.197.200.217
+Content-Transfer-Encoding: 7bit
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2607:f8b0:4864:20::1043
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -53,22 +80,25 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 14 Mar 2020 06:32:49 -0000
+X-List-Received-Date: Sat, 14 Mar 2020 06:33:26 -0000
+
+On 3/12/20 7:58 AM, LIU Zhiwei wrote:
+> +/* Vector Integer Comparison Instructions */
+> +#define DO_MSEQ(N, M) ((N == M) ? 1 : 0)
+> +#define DO_MSNE(N, M) ((N != M) ? 1 : 0)
+> +#define DO_MSLTU(N, M) ((N < M) ? 1 : 0)
+> +#define DO_MSLT(N, M) ((N < M) ? 1 : 0)
+> +#define DO_MSLEU(N, M) ((N <= M) ? 1 : 0)
+> +#define DO_MSLE(N, M) ((N <= M) ? 1 : 0)
+> +#define DO_MSGTU(N, M) ((N > M) ? 1 : 0)
+> +#define DO_MSGT(N, M) ((N > M) ? 1 : 0)
+
+You can drop the ? 1 : 0.  You can drop the LT/LTU (etc) distinction, since
+that comes from the type.
+
+Otherwise,
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
 
-
-On 2020/3/14 14:16, Richard Henderson wrote:
-> On 3/13/20 10:58 PM, Richard Henderson wrote:
->>      C ? N + M <= N : N + M < N
-> Ho hum.  N + M + 1 <= N.
-> I'm sure you saw the typo...
->
-
-You give the corner case and the very precise answer.
-
-Thanks very much.
-
-Zhiwei
-> r~
-
+r~
 
