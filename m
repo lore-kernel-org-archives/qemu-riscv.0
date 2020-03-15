@@ -1,73 +1,73 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jDKM2-00088V-GH
-	for mharc-qemu-riscv@gnu.org; Sat, 14 Mar 2020 23:54:22 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:46180)
+	id 1jDL3q-0003YQ-FD
+	for mharc-qemu-riscv@gnu.org; Sun, 15 Mar 2020 00:39:38 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:34070)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <richard.henderson@linaro.org>) id 1jDKLz-00088K-Td
- for qemu-riscv@nongnu.org; Sat, 14 Mar 2020 23:54:20 -0400
+ (envelope-from <richard.henderson@linaro.org>) id 1jDL3n-0003Xi-4g
+ for qemu-riscv@nongnu.org; Sun, 15 Mar 2020 00:39:36 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <richard.henderson@linaro.org>) id 1jDKLy-0000ju-IA
- for qemu-riscv@nongnu.org; Sat, 14 Mar 2020 23:54:19 -0400
-Received: from mail-pj1-x1044.google.com ([2607:f8b0:4864:20::1044]:55188)
+ (envelope-from <richard.henderson@linaro.org>) id 1jDL3k-0000ns-HD
+ for qemu-riscv@nongnu.org; Sun, 15 Mar 2020 00:39:34 -0400
+Received: from mail-pg1-x544.google.com ([2607:f8b0:4864:20::544]:38693)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
- id 1jDKLy-0000en-Cm
- for qemu-riscv@nongnu.org; Sat, 14 Mar 2020 23:54:18 -0400
-Received: by mail-pj1-x1044.google.com with SMTP id np16so6182085pjb.4
- for <qemu-riscv@nongnu.org>; Sat, 14 Mar 2020 20:54:18 -0700 (PDT)
+ id 1jDL3k-0000ll-Bc
+ for qemu-riscv@nongnu.org; Sun, 15 Mar 2020 00:39:32 -0400
+Received: by mail-pg1-x544.google.com with SMTP id x7so7543946pgh.5
+ for <qemu-riscv@nongnu.org>; Sat, 14 Mar 2020 21:39:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=ui3Lo/LuSx3DTr/rn3Sq3dRraUq/YXECRClwT6l0PdI=;
- b=xXSJSm9LApPhdUHbGxVMf8oZjQpcRWAavkuvL5RkO+IFDuChLrM/HPb37qOZjTDTcH
- gpKJ62LCJL2EIZa8Pb7jJS9ePExyRKQzxe1vqX1tU6+GgbJ8RA2UFVSVT9PZ0JbbWcXx
- JWbmxH18/615bhRX2c6AHegXLfVdv+OBJeGjykF35z06nOi5RrGsba/t3+o3JqpphIDp
- TkTjwPurC3CxassSLur0xgfnHojHEk0YjVJbhvwwKDqbrG0tArandnbG7j1vfAfLBGYq
- +rnew+sClyWV5iwbfNCOicfzkEstLczHo5IW8Jd/nPy4nwNa/JJ6gUkPX6IzHt9xMpeu
- 2Pjw==
+ bh=s16QEYtYuVl6kaAXf8JRCtqdRmKDf7BXnrBkTbNAeTQ=;
+ b=AGzYGI3ic4ajQEZ1B8na2tMLl4kLvQ8+lo6nORHBW9zMO4ZDpajsutghfb5RQV0D00
+ lDfgK32Xhzqvf8F8J/4Mnti7hn0xSxb8iBVsBIaIElYi9X0UfMUykIR7GdFUCx0VyQuT
+ i0KtT54oarTgmRNOO9r7ITIK01BX+zO1iaeQJOFU+rWWb0AsywwI+aNkTQ3ZdTff0ZNA
+ FJPON+8bsQhkhHS8WzSME+HkUaW+g9+9cODvTcJkkY1OLdpSDRhndHjA6sZdkH/dtRqT
+ NXkpc2vUPMH9AgaCiZi9D/zCKFRIUDa6nvyCxAKjYnvTBBHvZLlyuRInw8Gz5MHbFVWs
+ TTMw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:to:cc:references:from:message-id:date
  :user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=ui3Lo/LuSx3DTr/rn3Sq3dRraUq/YXECRClwT6l0PdI=;
- b=iguXGBm4vy0dBQGvVD8zwT345FjYXuTsMWK9695V9W7QOYhZfF4ies7QGC/cQ5tXJJ
- +EE8QzNqWK0yy5TfebPyqJqYQFWPkz+EeTPzSaAc6MJDAqFFdclPz/P4OMCgK5elMAt/
- GI24FGHNQ3dXfKq5DVFMpSn8leMTvQKJ8fiSbkrkYsAjXbCAFUQFZth4etaRxUiHHcrx
- MjknU24JDnbXWEiMNsaSBAAhTPTixkh8z0giMMQS/mC59acHcSpP3oi1SJeGB/R/XGWR
- xsaThNwtto6tjd5uuPvVxpLiaRqD0hrH1paKNYe0KIUvDjr7r66GRg/xxVqjy/zMVZLg
- N+Mg==
-X-Gm-Message-State: ANhLgQ1UQVeZDw6BDMKdHIH9Rwv2nzJJdGGztl5MOxitoMzmstAO81aK
- TuOsCwVJVzyuy22Q2pnmTMLCzEYxVWU=
-X-Google-Smtp-Source: ADFU+vtbIiuaKzZxFaQJwla5r2hPdYkptI3xA3ztRX6g3/g4/1IumZIby1S51bhEp9GnlhJ2BcP4bg==
-X-Received: by 2002:a17:90b:1889:: with SMTP id
- mn9mr17514795pjb.85.1584244455641; 
- Sat, 14 Mar 2020 20:54:15 -0700 (PDT)
+ bh=s16QEYtYuVl6kaAXf8JRCtqdRmKDf7BXnrBkTbNAeTQ=;
+ b=TYXIQm9RrostPCsdM2MuDHZIJn5h2cXeGgXrwjea99wEI090lCOOGYnH+7YIqiHuIg
+ nJr0xnBCRE/s79KpyjCGnR4EJHIlFfK1H9IhYrWRf8c1tYy08FP7JN+Inrm68OtGx5eC
+ 5GEhkmvcTMaizZG+x19382MKAp53suu7nH+x6CSGeCQIGA35aOR/qHLKsfhEQVRZgipR
+ EGdGByNwGhRoi4Q2qHBptA2KOfDoHmuQ5jWsAiGom71Sp+2jb5inm++G/dYHX5VMMIDw
+ teqnFtL6zkxiUq7CTqtZcRfZlvJs+xWv9ss3poAFQlR8/1XWJYfx/AuODIC9Bs54T7R3
+ CJbA==
+X-Gm-Message-State: ANhLgQ2YptEpA5+dpYRQS3nnn9GW9rj90vCe8uB17bPPsKSBIJCL/dCD
+ +A9+VmhEyKc19J+XTRzI7emd8Zplzsw=
+X-Google-Smtp-Source: ADFU+vsHiq4xdcMVfgUEKzSxLlohDFiNX02XS+OvJHI4RFxvPteGb9rfF4m1J0BEv6bdjMKJLgEBGA==
+X-Received: by 2002:a62:382:: with SMTP id 124mr21379290pfd.11.1584247170887; 
+ Sat, 14 Mar 2020 21:39:30 -0700 (PDT)
 Received: from [192.168.1.11] (97-126-123-70.tukw.qwest.net. [97.126.123.70])
  by smtp.gmail.com with ESMTPSA id
- r10sm56769986pgv.25.2020.03.14.20.54.14
+ j5sm22554886pfe.32.2020.03.14.21.39.29
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 14 Mar 2020 20:54:15 -0700 (PDT)
-Subject: Re: [PATCH v5 55/60] target/riscv: integer scalar move instruction
+ Sat, 14 Mar 2020 21:39:30 -0700 (PDT)
+Subject: Re: [PATCH v5 56/60] target/riscv: floating-point scalar move
+ instructions
 To: LIU Zhiwei <zhiwei_liu@c-sky.com>, alistair23@gmail.com,
  chihmin.chao@sifive.com, palmer@dabbelt.com
 Cc: wenmeng_zhang@c-sky.com, wxy194768@alibaba-inc.com,
  guoren@linux.alibaba.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
 References: <20200312145900.2054-1-zhiwei_liu@c-sky.com>
- <20200312145900.2054-56-zhiwei_liu@c-sky.com>
+ <20200312145900.2054-57-zhiwei_liu@c-sky.com>
 From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <183a0b1a-8889-988c-6f75-db23acdd4123@linaro.org>
-Date: Sat, 14 Mar 2020 20:54:13 -0700
+Message-ID: <8b9161d1-f64f-5677-70a7-ec197d9d3d43@linaro.org>
+Date: Sat, 14 Mar 2020 21:39:27 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.4.1
 MIME-Version: 1.0
-In-Reply-To: <20200312145900.2054-56-zhiwei_liu@c-sky.com>
+In-Reply-To: <20200312145900.2054-57-zhiwei_liu@c-sky.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::1044
+X-Received-From: 2607:f8b0:4864:20::544
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -79,23 +79,128 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 Mar 2020 03:54:21 -0000
+X-List-Received-Date: Sun, 15 Mar 2020 04:39:36 -0000
 
 On 3/12/20 7:58 AM, LIU Zhiwei wrote:
 > Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
 > ---
->  target/riscv/helper.h                   |  5 +++++
->  target/riscv/insn32.decode              |  1 +
->  target/riscv/insn_trans/trans_rvv.inc.c | 26 +++++++++++++++++++++++++
->  target/riscv/vector_helper.c            | 15 ++++++++++++++
->  4 files changed, 47 insertions(+)
+>  target/riscv/helper.h                   |  9 +++++
+>  target/riscv/insn32.decode              |  2 ++
+>  target/riscv/insn_trans/trans_rvv.inc.c | 47 +++++++++++++++++++++++++
+>  target/riscv/vector_helper.c            | 36 +++++++++++++++++++
+>  4 files changed, 94 insertions(+)
+> 
+> diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+> index 41cecd266c..7a689a5c07 100644
+> --- a/target/riscv/helper.h
+> +++ b/target/riscv/helper.h
+> @@ -1111,3 +1111,12 @@ DEF_HELPER_3(vmv_s_x_b, void, ptr, tl, env)
+>  DEF_HELPER_3(vmv_s_x_h, void, ptr, tl, env)
+>  DEF_HELPER_3(vmv_s_x_w, void, ptr, tl, env)
+>  DEF_HELPER_3(vmv_s_x_d, void, ptr, tl, env)
+> +
+> +DEF_HELPER_2(vfmv_f_s_b, i64, ptr, env)
+> +DEF_HELPER_2(vfmv_f_s_h, i64, ptr, env)
+> +DEF_HELPER_2(vfmv_f_s_w, i64, ptr, env)
+> +DEF_HELPER_2(vfmv_f_s_d, i64, ptr, env)
+> +DEF_HELPER_3(vfmv_s_f_b, void, ptr, i64, env)
+> +DEF_HELPER_3(vfmv_s_f_h, void, ptr, i64, env)
+> +DEF_HELPER_3(vfmv_s_f_w, void, ptr, i64, env)
+> +DEF_HELPER_3(vfmv_s_f_d, void, ptr, i64, env)
+> diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+> index 7e1efeec05..bfdce0979c 100644
+> --- a/target/riscv/insn32.decode
+> +++ b/target/riscv/insn32.decode
+> @@ -557,6 +557,8 @@ viota_m         010110 . ..... 10000 010 ..... 1010111 @r2_vm
+>  vid_v           010110 . 00000 10001 010 ..... 1010111 @r1_vm
+>  vext_x_v        001100 1 ..... ..... 010 ..... 1010111 @r
+>  vmv_s_x         001101 1 00000 ..... 110 ..... 1010111 @r2
+> +vfmv_f_s        001100 1 ..... 00000 001 ..... 1010111 @r2rd
+> +vfmv_s_f        001101 1 00000 ..... 101 ..... 1010111 @r2
+>  
+>  vsetvli         0 ........... ..... 111 ..... 1010111  @r2_zimm
+>  vsetvl          1000000 ..... ..... 111 ..... 1010111  @r
+> diff --git a/target/riscv/insn_trans/trans_rvv.inc.c b/target/riscv/insn_trans/trans_rvv.inc.c
+> index 7720ffecde..99cd45b0aa 100644
+> --- a/target/riscv/insn_trans/trans_rvv.inc.c
+> +++ b/target/riscv/insn_trans/trans_rvv.inc.c
+> @@ -2269,3 +2269,50 @@ static bool trans_vmv_s_x(DisasContext *s, arg_vmv_s_x *a)
+>      }
+>      return false;
+>  }
+> +
+> +/* Floating-Point Scalar Move Instructions */
+> +typedef void (* gen_helper_vfmv_f_s)(TCGv_i64, TCGv_ptr, TCGv_env);
+> +static bool trans_vfmv_f_s(DisasContext *s, arg_vfmv_f_s *a)
+> +{
+> +    if (vext_check_isa_ill(s, RVV)) {
+> +        TCGv_ptr src2;
+> +        gen_helper_vfmv_f_s fns[4] = {
+> +            gen_helper_vfmv_f_s_b, gen_helper_vfmv_f_s_h,
+> +            gen_helper_vfmv_f_s_w, gen_helper_vfmv_f_s_d
+> +        };
+> +
+> +        src2 = tcg_temp_new_ptr();
+> +        tcg_gen_addi_ptr(src2, cpu_env, vreg_ofs(s, a->rs2));
+> +
+> +        fns[s->sew](cpu_fpr[a->rd], src2, cpu_env);
+> +
+> +        tcg_temp_free_ptr(src2);
+> +        return true;
+> +    }
+> +    return false;
+> +}
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+SEW == MO_8 should raise illegal instruction exception.
 
-What an annoying difference here between 0.7.1 and 0.8.
-With 0.8, we can inline this operation as for vmv.x.s.
+Need a check for fp enabled.  Presumably
+
+    if (s->mstatus_fs == 0 || !has_ext(s, RVF)) {
+        return false;
+    }
+
+Need to mark_fs_dirty().
+
+Like integer vmv.x.s, this can be done inline.  The nan-boxing is trivial as well.
+
+For 0.8, we will have to validate the nan-boxing for SEW=MO_64 && !RVD.  That's
+still not hard to do inline.
+
+
+
+> +
+> +typedef void (* gen_helper_vfmv_s_f)(TCGv_ptr, TCGv_i64, TCGv_env);
+> +static bool trans_vfmv_s_f(DisasContext *s, arg_vfmv_s_f *a)
+> +{
+> +    if (vext_check_isa_ill(s, RVV | RVF) ||
+> +        vext_check_isa_ill(s, RVV | RVD)) {
+> +        TCGv_ptr dest;
+> +        TCGv_i64 src1;
+> +        gen_helper_vfmv_s_f fns[4] = {
+> +            gen_helper_vfmv_s_f_b, gen_helper_vfmv_s_f_h,
+> +            gen_helper_vfmv_s_f_w, gen_helper_vfmv_s_f_d
+> +        };
+> +
+> +        src1 = tcg_temp_new_i64();
+> +        dest = tcg_temp_new_ptr();
+> +        tcg_gen_addi_ptr(dest, cpu_env, vreg_ofs(s, a->rd));
+> +
+> +        fns[s->sew](dest, src1, cpu_env);
+> +
+> +        tcg_temp_free_i64(src1);
+> +        tcg_temp_free_ptr(dest);
+> +        return true;
+> +    }
+> +    return false;
+> +}
+
+Again, SEW == MO_8 is illegal.  Missing fp enable check.
+
+I don't believe RVD without RVF is legal; you should not need to check for both.
+
+Missing nan-boxing for SEW==MO_64 && FLEN==32 (!RVD).  Which I think should be
+done here inline, so that the uint64_t passed to the helper is always correct.
 
 
 r~
-
 
