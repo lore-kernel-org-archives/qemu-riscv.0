@@ -1,78 +1,87 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jDcfW-0005aN-Ek
-	for mharc-qemu-riscv@gnu.org; Sun, 15 Mar 2020 19:27:42 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:33468)
+	id 1jDd8w-0003UK-B7
+	for mharc-qemu-riscv@gnu.org; Sun, 15 Mar 2020 19:58:06 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44160)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <richard.henderson@linaro.org>) id 1jDcfS-0005ZU-77
- for qemu-riscv@nongnu.org; Sun, 15 Mar 2020 19:27:40 -0400
+ (envelope-from <philmd@redhat.com>) id 1jDd8s-0003T6-CN
+ for qemu-riscv@nongnu.org; Sun, 15 Mar 2020 19:58:03 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <richard.henderson@linaro.org>) id 1jDcfR-0002EG-35
- for qemu-riscv@nongnu.org; Sun, 15 Mar 2020 19:27:37 -0400
-Received: from mail-pg1-x543.google.com ([2607:f8b0:4864:20::543]:33140)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
- id 1jDcfQ-0002CC-RQ
- for qemu-riscv@nongnu.org; Sun, 15 Mar 2020 19:27:37 -0400
-Received: by mail-pg1-x543.google.com with SMTP id m5so8640351pgg.0
- for <qemu-riscv@nongnu.org>; Sun, 15 Mar 2020 16:27:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=7kzRqUlLpkGjDOydIsoDKwsazMahQVbzT0T2HoBLlxQ=;
- b=IxNeug0L1ffIqU2BO8WEllFNhMJbqy54y+4HisD1mrqZu7ZvnG7H97sfceyU1W2F5U
- UsNSfc2aUJYuXLel+Ph8PjasFV8F1y1HrwepQKGK2wIhaAgiLJ10r4QdxNNpllFnq5d6
- I/u+YGy+XhD0Ukr39LYwhuWFez8OnKvrosW8kkZ8iXHwXch5XDMVbBjZ88opAZhJoOpN
- Rl/W9f/u9/k0A3Q6JHgmNe+0S5wSRLKF3SdW9pi4FaUZhrHYogAQPIqO/NFxj1EClQ26
- 0Z7X5siiM+CZdcODlC+NDOYc23Aqz8rkHD0PM43QzYkscRCVg2zi+ykQlvFOg+ArPN/y
- rnOw==
+ (envelope-from <philmd@redhat.com>) id 1jDd8r-0000zD-7h
+ for qemu-riscv@nongnu.org; Sun, 15 Mar 2020 19:58:02 -0400
+Received: from us-smtp-1.mimecast.com ([207.211.31.81]:26673
+ helo=us-smtp-delivery-1.mimecast.com)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <philmd@redhat.com>) id 1jDd8r-0000yb-3l
+ for qemu-riscv@nongnu.org; Sun, 15 Mar 2020 19:58:01 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1584316680;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=HrqXLxTQz0mEYrpZdea1ftAFgDjw4GVpWcXSJKx0Kfk=;
+ b=W+cdevNYtgJic5EwEQzLN7WhsPVMZGmEeBVbiMSBC113aI+kUULa0ByUrz/wi44yBb1ua4
+ iJyJGC2k+rUsgYAc8hOdgqL74al7fMLE2mE3DjPTuTEhqCrbtrrpwF7iNe1u5sMHIZJEJ1
+ frdhXvlwqu1CVMSwLK0ftcktjsD8zrk=
+Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
+ [209.85.221.72]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-41-ZQ4gcmiMMJuG5T8vyRc_8A-1; Sun, 15 Mar 2020 19:57:59 -0400
+X-MC-Unique: ZQ4gcmiMMJuG5T8vyRc_8A-1
+Received: by mail-wr1-f72.google.com with SMTP id b11so8107317wru.21
+ for <qemu-riscv@nongnu.org>; Sun, 15 Mar 2020 16:57:58 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=7kzRqUlLpkGjDOydIsoDKwsazMahQVbzT0T2HoBLlxQ=;
- b=sP6+cR77NR01BIJMj8p3mhTeMLAh9uGH0+v9ArXAWQx91cO9sYmbivWxLWbTuanqsH
- oLsoqdPMGntBBo+RTjhWeqAl23z9dKVdl1wlxuv7qyNl3qL1ZawhyBQDydtBb/Rj02UJ
- y6d6wBLjomo0kP7by59a+chWHmcLihrMOB3uDKsvG58mM3fIwA7Bat8DEUHsalqP2xhk
- UQVyPlXOvSVXUSTpJPa5Ic3asj6eo9apoMF685iWV9gyrNhO+zfIqk53zUFOQhcihqA+
- 1XJ1TYdZkuM3JSHoeOfBF1Fj/tQPtnIiMLY7wNI6VwoT1WHUB0JDNWeVi55ScT76sxu3
- eSvw==
-X-Gm-Message-State: ANhLgQ0YQKn7+Eb+DWnlTuLSkdvcaCNqCuqExBm45hs5rLDsCWvX/RWz
- aLvSCPMXewBxmClhhQhxJZ6eqBbRoC4=
-X-Google-Smtp-Source: ADFU+vuExsYpZ3cHVZw6YERRgXKeYQAvx9SsZxCJrBulDM9ZhXR+zJhpimV6dFUbkprPjUGzfsDsIg==
-X-Received: by 2002:aa7:9790:: with SMTP id o16mr23754567pfp.322.1584314855272; 
- Sun, 15 Mar 2020 16:27:35 -0700 (PDT)
-Received: from [192.168.1.11] (97-126-123-70.tukw.qwest.net. [97.126.123.70])
- by smtp.gmail.com with ESMTPSA id
- c11sm14574147pfc.216.2020.03.15.16.27.34
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 15 Mar 2020 16:27:34 -0700 (PDT)
-Subject: Re: [PATCH v5 24/60] target/riscv: vector single-width averaging add
- and subtract
-To: LIU Zhiwei <zhiwei_liu@c-sky.com>, alistair23@gmail.com,
- chihmin.chao@sifive.com, palmer@dabbelt.com
-Cc: wenmeng_zhang@c-sky.com, wxy194768@alibaba-inc.com,
- guoren@linux.alibaba.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-References: <20200312145900.2054-1-zhiwei_liu@c-sky.com>
- <20200312145900.2054-25-zhiwei_liu@c-sky.com>
- <834922de-5107-0d00-6d4d-47bd830129a5@linaro.org>
- <2db448ea-f17f-e627-055d-fb3cdf6cfddc@linaro.org>
- <d48f77ee-ad99-26fa-a597-6cdcd2d55508@c-sky.com>
- <426e31f8-1b54-7b5a-b2a9-a2742f9c74af@linaro.org>
- <e40db19f-0bf6-9ccd-3f41-855f67cf88f2@c-sky.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <af9227f2-eba9-eb27-d409-c95556b046e7@linaro.org>
-Date: Sun, 15 Mar 2020 16:27:32 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.4.1
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=pZnziEWWIqS/GPOcov+nb6Dnv8MFQCtODqZczgbWweM=;
+ b=helItQhqvi70pVoD4i9TbyTHjpvSRJoc0weBjxRDKtqeXke/Ru/D1XuzJ9CiC8Tclx
+ 090XHvXAMRdkTiDbhA8ey5cH44/NFPBZ6bpmuMeLBUYY2jVz3/lMioY+N5/MncP/8WPQ
+ 3ORZNl08inJ+90fxoGlWjNNj56ovpxkSIpxdP30tGAGnujIcwTY8oGfzHhe7OIoePVQ5
+ uQQpkzKmEiYtllk697/C9eiwwHs74eD1OexpL0YXSNxoNwyEuVWrWN+C7NzhC9PAFS/F
+ ResmQQuS8Yyuei1+vQoI6CyIIDt9ptVedQUg4FbXmHDE2iDkdJwj8g+N3j35AWmPHEmg
+ ovhA==
+X-Gm-Message-State: ANhLgQ1V3u0zt4khyCmf5zFBwDZ+mZvcSjvrO2FJ1+lgy/ED7i3scRYX
+ XcqZGUF5e4uoYvhfSa1rxZj05JbwjiQN3izkhBDDt9XmR66dYi/TKSw1g5VqaTxqQLRZJ6Cj4nC
+ j/cqsY5iZZCtUws0=
+X-Received: by 2002:a5d:4b82:: with SMTP id b2mr31959721wrt.102.1584316678139; 
+ Sun, 15 Mar 2020 16:57:58 -0700 (PDT)
+X-Google-Smtp-Source: ADFU+vvvFt9gU4znEJ4H91Jd+cteS6sghn/vl4FgyB2z0OHcVOS/QTpXxbRNQNhQnyf400OsrgpbWA==
+X-Received: by 2002:a5d:4b82:: with SMTP id b2mr31959706wrt.102.1584316677988; 
+ Sun, 15 Mar 2020 16:57:57 -0700 (PDT)
+Received: from localhost.localdomain (191.red-83-42-66.dynamicip.rima-tde.net.
+ [83.42.66.191])
+ by smtp.gmail.com with ESMTPSA id j39sm12580913wre.11.2020.03.15.16.57.56
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 15 Mar 2020 16:57:57 -0700 (PDT)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
+To: qemu-devel@nongnu.org
+Cc: Paolo Bonzini <pbonzini@redhat.com>, Cornelia Huck <cohuck@redhat.com>,
+ qemu-s390x@nongnu.org, Laurent Vivier <laurent@vivier.eu>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Richard Henderson <rth@twiddle.net>, Eduardo Habkost <ehabkost@redhat.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
+Subject: [PATCH v2 07/12] target/riscv/cpu: Restrict CPU migration to
+ system-mode
+Date: Mon, 16 Mar 2020 00:57:11 +0100
+Message-Id: <20200315235716.28448-8-philmd@redhat.com>
+X-Mailer: git-send-email 2.21.1
+In-Reply-To: <20200315235716.28448-1-philmd@redhat.com>
+References: <20200315235716.28448-1-philmd@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <e40db19f-0bf6-9ccd-3f41-855f67cf88f2@c-sky.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2607:f8b0:4864:20::543
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=UTF-8;
+	text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+ [fuzzy]
+X-Received-From: 207.211.31.81
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -84,46 +93,50 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 Mar 2020 23:27:40 -0000
+X-List-Received-Date: Sun, 15 Mar 2020 23:58:03 -0000
 
-On 3/15/20 4:23 PM, LIU Zhiwei wrote:
-> Many other fixed point instructions also need vxsat besides vxsrm.
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
+---
+ target/riscv/cpu.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-Ah yes.
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index c0b7023100..b59e09209e 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -475,10 +475,12 @@ static void riscv_cpu_init(Object *obj)
+     cpu_set_cpustate_pointers(cpu);
+ }
+=20
++#ifndef CONFIG_USER_ONLY
+ static const VMStateDescription vmstate_riscv_cpu =3D {
+     .name =3D "cpu",
+     .unmigratable =3D 1,
+ };
++#endif
+=20
+ static Property riscv_cpu_properties[] =3D {
+     DEFINE_PROP_BOOL("i", RISCVCPU, cfg.ext_i, true),
+@@ -534,13 +536,13 @@ static void riscv_cpu_class_init(ObjectClass *c, void=
+ *data)
+     cc->do_transaction_failed =3D riscv_cpu_do_transaction_failed;
+     cc->do_unaligned_access =3D riscv_cpu_do_unaligned_access;
+     cc->get_phys_page_debug =3D riscv_cpu_get_phys_page_debug;
++    /* For now, mark unmigratable: */
++    cc->vmsd =3D &vmstate_riscv_cpu;
+ #endif
+ #ifdef CONFIG_TCG
+     cc->tcg_initialize =3D riscv_translate_init;
+     cc->tlb_fill =3D riscv_cpu_tlb_fill;
+ #endif
+-    /* For now, mark unmigratable: */
+-    cc->vmsd =3D &vmstate_riscv_cpu;
+     device_class_set_props(dc, riscv_cpu_properties);
+ }
+=20
+--=20
+2.21.1
 
-> In that cases, can I just define OPIVV2_RM like this:
-> 
-> #define OPIVV2_RM(NAME, TD, T1, T2, TX1, TX2, HD, HS1, HS2, OP)     \
-> static inline void                                                  \
-> do_##NAME(void *vd, void *vs1, void *vs2, int i,                    \
->           CPURISCVState *env, int vxrm)                             \
-> {                                                                   \
->     TX1 s1 = *((T1 *)vs1 + HS1(i));                                 \
->     TX2 s2 = *((T2 *)vs2 + HS2(i));                                 \
->     *((TD *)vd + HD(i)) = OP(env, vxrm, s2, s1);                    \
-> }
-> 
-> static inline int32_t aadd32(|__attribute__((unused)) |CPURISCVState *env, 
-> 			     int vxrm, int32_t a, int32_t b)
-
-You can drop the unused.  We don't turn on warnings for unused arguments, as we
-have a *lot* of them for exactly this reason -- keeping a common functional
-interface.
-
-
-> {
->     int64_t res = (int64_t)a + b;
->     uint8_t round = get_round(vxrm, res, 1);
-> 
->     return (res >> 1) + round;
-> }
-> 
-> 
-> In this way， I can write just one OPIVV2_RM instead of (OPIVV2_RM,
-> OPIVV2_RM_ENV, OPIVV2_ENV).
-
-Yes, that's fine.
-
-
-r~
 
