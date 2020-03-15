@@ -1,54 +1,54 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jDZjl-0007DQ-4V
-	for mharc-qemu-riscv@gnu.org; Sun, 15 Mar 2020 16:19:53 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:48219)
+	id 1jDa3T-0004ce-0g
+	for mharc-qemu-riscv@gnu.org; Sun, 15 Mar 2020 16:40:15 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:34106)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <richard.henderson@linaro.org>) id 1jDZji-0007BH-9c
- for qemu-riscv@nongnu.org; Sun, 15 Mar 2020 16:19:51 -0400
+ (envelope-from <richard.henderson@linaro.org>) id 1jDa3P-0004a7-VO
+ for qemu-riscv@nongnu.org; Sun, 15 Mar 2020 16:40:13 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <richard.henderson@linaro.org>) id 1jDZjh-0007P1-EK
- for qemu-riscv@nongnu.org; Sun, 15 Mar 2020 16:19:50 -0400
-Received: from mail-pg1-x543.google.com ([2607:f8b0:4864:20::543]:37791)
+ (envelope-from <richard.henderson@linaro.org>) id 1jDa3O-0004PH-Ja
+ for qemu-riscv@nongnu.org; Sun, 15 Mar 2020 16:40:11 -0400
+Received: from mail-pj1-x1043.google.com ([2607:f8b0:4864:20::1043]:53272)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
- id 1jDZjh-0007N8-8M
- for qemu-riscv@nongnu.org; Sun, 15 Mar 2020 16:19:49 -0400
-Received: by mail-pg1-x543.google.com with SMTP id a32so7568297pga.4
- for <qemu-riscv@nongnu.org>; Sun, 15 Mar 2020 13:19:49 -0700 (PDT)
+ id 1jDa3K-0004F8-Fv
+ for qemu-riscv@nongnu.org; Sun, 15 Mar 2020 16:40:07 -0400
+Received: by mail-pj1-x1043.google.com with SMTP id l36so7035052pjb.3
+ for <qemu-riscv@nongnu.org>; Sun, 15 Mar 2020 13:40:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=rgAzwP1RNdbzF19h1Tajq+qOWbKSzm/2QF2DRk4/VSA=;
- b=HM0vAKACykr+cRWDfm0nJRMCVT/PRe2cnmJKHIYjmgwjXKlFAL3QF/EIrkPE98mKrY
- oNSVVRBtizAqBwSG/1Ov1R3JxP/B9UP5FtPpQc64sDDBZ6Bbu0dcQOQVNuoeGVR819nR
- 40R6TIpNaJu35M5EWJZrTGvgGmHzwEJrxHr/riKasCmJ5qN3FLl4VfOeaBzlqCGFoh0R
- S/gutPjWU9tLvTA6wXQdUtkfqlJQa53716Fo1ogQbfna/0ZGhgTL6+5hxjnbtXx8/fRr
- 4RbOpykM/Di10FWpb+DVx8cDeyqXv5lKDwTafABSW0j0+qYPUuOOOK2PvnbA45H9gB1t
- BkFQ==
+ bh=9gLA/pZNjQ+TUALc0hVvV5WrZ8BDZlIZEDjxYRqsuHI=;
+ b=nRuztsa80DwR5gQPGt2mUZhxzXN+SRoIJNBobx4nRHzIa0fZHOvflO9YKV8ldDUc4Y
+ fJczNcGeOBpoknDknsZ5V32QwMtxwH6uha0/tUGQitnsMf/lTu80Q50O4E2bkZX3mnvz
+ EvcLXaHzJwhOClgx6EUgMARUuY9I8ZaLMB9l0F9CuGdlvihn7CigC8uYji1iHFdNnN+6
+ PqEraSJVh57Ux1ir9sDq/zUp7ua7wJDKyfdZXu8QuMWPN7PJ3LwTRNN/3jmn4ELcq8rz
+ NOOY/pFp9Uk3Dv+BMNtu/RwFBXnhMU6sopr9Jc1dikOYfr8mTnLddI9srsRl8E/F3+EL
+ BKZA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:to:cc:references:from:message-id:date
  :user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=rgAzwP1RNdbzF19h1Tajq+qOWbKSzm/2QF2DRk4/VSA=;
- b=PcPIuPju1EE3//cr+Vyh9FxQzG9+UKJXn7kufwT1J+0efpuYeT5U/4ajE8siJEtCX7
- MZquULBH+Cpxsj8VZuqRj9RFFwpQzhbWXuwKiwfn7lEjlq0O+nSopoA8vQy9AgUSaQCv
- taoAyIMZu0Mph0/OkjG5ecVvAbaie19n6cqGhQNymmbbOqrxVMOyL/fUCmnBDaID4rSr
- WOKbRQXorpfOC4AXDtV7M9ZWkctJ6++kNJsSeGSOCJKvSiV6lbfE0jPQdGFdQidE9juv
- 3VDKCrfvv+dP9DTbmQRItpkx/NySR4vwpqLrkxSMN8ca36Xdo6BiSvMB6AACsrijsj4q
- /kLA==
-X-Gm-Message-State: ANhLgQ1PYVfBoFGBKXlQAjlUog+PU5ccwG4mhGKxk8quoqk0fA1uvTQH
- h5JH0wW89jf+9ZftAze1SOwJkA==
-X-Google-Smtp-Source: ADFU+vs6JkeiTZmfEUpTqoxA9cFlC+QBG6k/LOz3q4+6Qo1BH6dI+qUP2CmFNpJGYeSEMpg1XHZQrA==
-X-Received: by 2002:a63:7c1d:: with SMTP id x29mr22588491pgc.197.1584303588218; 
- Sun, 15 Mar 2020 13:19:48 -0700 (PDT)
+ bh=9gLA/pZNjQ+TUALc0hVvV5WrZ8BDZlIZEDjxYRqsuHI=;
+ b=JeTOCjdnwydd+EEc0k4dBVySMCALdwIZa9Iwl5woKeB67zHq8msvtDP4LnDqrnAo7U
+ EppYfqn/h+VESt11MU3nEYvKNootXUdpTBbDpc1+59D9SsUibWvyf1HvhZdfeKjVvPRA
+ ImGFgeCb9xOuzAldjEyGAwZweghx09Vtp7w8vBlZz7UeaLLWfMOo0cDYP/3Ez0XvS4DN
+ uYLr13hU6rqRtJyLuOxr15MLEmcylRixrKcZbt1j5knRqgVXCtjfMLv/78mhIEeobEjg
+ 7PhiQ3L/Pd3AqEAWJGPLBUTEWfiDcuWhqw9L8EGjfHIZUsiKNjcU6WwKETTDG7Z1n1dy
+ 3xMg==
+X-Gm-Message-State: ANhLgQ141C9IdkE5Etq55BqBsZoKyC8OXRXZOVKZ3JsmXY+1aQUQZ+zg
+ Mj2CEwJ4LvABHkaqxWlQQjIe/A==
+X-Google-Smtp-Source: ADFU+vttMD152WsTeFSMYGGYcAbMGnI0q4g5skx6XoWm5Wvhv6BH0KfgNicSkTJvvY9rMR+iX07B/g==
+X-Received: by 2002:a17:902:ab98:: with SMTP id
+ f24mr3028309plr.87.1584304801189; 
+ Sun, 15 Mar 2020 13:40:01 -0700 (PDT)
 Received: from [192.168.1.11] (97-126-123-70.tukw.qwest.net. [97.126.123.70])
  by smtp.gmail.com with ESMTPSA id
- 8sm25288960pfp.67.2020.03.15.13.19.46
+ q91sm11269628pjb.11.2020.03.15.13.39.59
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 15 Mar 2020 13:19:47 -0700 (PDT)
-Subject: Re: [PATCH 08/14] exec: Assert CPU migration is not used on user-only
- build
+ Sun, 15 Mar 2020 13:40:00 -0700 (PDT)
+Subject: Re: [PATCH 09/14] exec: Drop redundant #ifdeffery
 To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>,
  qemu-devel@nongnu.org
 Cc: Peter Maydell <peter.maydell@linaro.org>, qemu-riscv@nongnu.org,
@@ -64,20 +64,20 @@ Cc: Peter Maydell <peter.maydell@linaro.org>, qemu-riscv@nongnu.org,
  =?UTF-8?Q?Alex_Benn=c3=a9e?= <alex.bennee@linaro.org>,
  Palmer Dabbelt <palmer@dabbelt.com>, Richard Henderson <rth@twiddle.net>
 References: <20200313183652.10258-1-philmd@redhat.com>
- <20200313183652.10258-9-philmd@redhat.com>
+ <20200313183652.10258-10-philmd@redhat.com>
 From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <c61d62a5-ceca-745d-ed60-78719955912a@linaro.org>
-Date: Sun, 15 Mar 2020 13:19:45 -0700
+Message-ID: <fdbcdfba-9467-2270-7309-abe8e509edc2@linaro.org>
+Date: Sun, 15 Mar 2020 13:39:58 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.4.1
 MIME-Version: 1.0
-In-Reply-To: <20200313183652.10258-9-philmd@redhat.com>
+In-Reply-To: <20200313183652.10258-10-philmd@redhat.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::543
+X-Received-From: 2607:f8b0:4864:20::1043
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -89,15 +89,69 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 Mar 2020 20:19:51 -0000
+X-List-Received-Date: Sun, 15 Mar 2020 20:40:13 -0000
 
 On 3/13/20 11:36 AM, Philippe Mathieu-Daudé wrote:
 > Signed-off-by: Philippe Mathieu-Daudé <philmd@redhat.com>
 > ---
->  exec.c | 4 +++-
->  1 file changed, 3 insertions(+), 1 deletion(-)
+>  exec.c | 4 ----
+>  1 file changed, 4 deletions(-)
+> 
+> diff --git a/exec.c b/exec.c
+> index 7bc9828c5b..f258502966 100644
+> --- a/exec.c
+> +++ b/exec.c
+> @@ -185,10 +185,6 @@ struct DirtyBitmapSnapshot {
+>      unsigned long dirty[];
+>  };
+>  
+> -#endif
+> -
+> -#if !defined(CONFIG_USER_ONLY)
+> -
+>  static void phys_map_node_reserve(PhysPageMap *map, unsigned nodes)
+>  {
+>      static unsigned alloc_hint = 16;
+> 
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+There's even more than that.  Looking further down,
+
+>     745 #endif
+>     746 
+>     747 #if !defined(CONFIG_USER_ONLY)
+
+This is the #endif that paired with the one at 190.
+
+Later,
+
+>     988 #if defined(CONFIG_USER_ONLY)
+...
+>    1000 #else
+...
+>    1031 #endif
+>    1032 
+>    1033 #ifndef CONFIG_USER_ONLY
+
+So those three lines are redundant.
+
+Later,
+
+>    1252 #if !defined(CONFIG_USER_ONLY)
+...
+>    1438 #endif /* defined(CONFIG_USER_ONLY) */
+>    1439 
+>    1440 #if !defined(CONFIG_USER_ONLY)
+
+Clearly these ifdefs are very hard to follow.  I would thus welcome a split of
+this file.
+
+Possibly into exec-common.c (with functions present in both softmmu and
+user-only, with ifdefs *inside* functions only), and exec-system.c (with no
+/#if.*CONFIG_USER_ONLY/).
+
+But exec.c is over 4000 lines, so if there's another logical split into even
+more files, that would be even better.
+
 
 r~
 
