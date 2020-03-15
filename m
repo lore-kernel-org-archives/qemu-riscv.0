@@ -1,92 +1,85 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jDbcr-000335-DJ
-	for mharc-qemu-riscv@gnu.org; Sun, 15 Mar 2020 18:20:53 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37815)
+	id 1jDbpN-0007lc-KP
+	for mharc-qemu-riscv@gnu.org; Sun, 15 Mar 2020 18:33:49 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:56926)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <philmd@redhat.com>) id 1jDbcm-00032P-N1
- for qemu-riscv@nongnu.org; Sun, 15 Mar 2020 18:20:50 -0400
+ (envelope-from <richard.henderson@linaro.org>) id 1jDbpK-0007jK-85
+ for qemu-riscv@nongnu.org; Sun, 15 Mar 2020 18:33:47 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <philmd@redhat.com>) id 1jDbcl-0001eW-H5
- for qemu-riscv@nongnu.org; Sun, 15 Mar 2020 18:20:48 -0400
-Received: from us-smtp-2.mimecast.com ([205.139.110.61]:56303
- helo=us-smtp-delivery-1.mimecast.com)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <philmd@redhat.com>) id 1jDbcl-0001ZO-9w
- for qemu-riscv@nongnu.org; Sun, 15 Mar 2020 18:20:47 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1584310846;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=Y2D7bkdwvbndMrUyNh6sDviBz4171BxInLQo0HF5lyY=;
- b=hP5LgxDDtKidkMd0wxZbcDsg+nF+IRCq5TeuUxiMNC/YlycBLP5tVNUacaupkiR3/dkNkg
- qfeySuK45E3Ajx7vV1ptf/9hWfS2B8h95ZkEGNPIchGL2kPDssX3OItO4evjWx3zda3yLD
- tQ5agTWT3HOr93Z2LsUTvcMyIzfX9Zg=
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
- [209.85.128.71]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-274-JIaEPWZrNj-yVB16c-5apw-1; Sun, 15 Mar 2020 18:20:45 -0400
-X-MC-Unique: JIaEPWZrNj-yVB16c-5apw-1
-Received: by mail-wm1-f71.google.com with SMTP id i24so2972359wml.1
- for <qemu-riscv@nongnu.org>; Sun, 15 Mar 2020 15:20:45 -0700 (PDT)
+ (envelope-from <richard.henderson@linaro.org>) id 1jDbpI-0006YJ-Vl
+ for qemu-riscv@nongnu.org; Sun, 15 Mar 2020 18:33:46 -0400
+Received: from mail-pg1-x544.google.com ([2607:f8b0:4864:20::544]:43260)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
+ id 1jDbpI-0006Q2-6C
+ for qemu-riscv@nongnu.org; Sun, 15 Mar 2020 18:33:44 -0400
+Received: by mail-pg1-x544.google.com with SMTP id u12so8561156pgb.10
+ for <qemu-riscv@nongnu.org>; Sun, 15 Mar 2020 15:33:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=C8xrtjZPdhkGh9RyuMEXja32sZxVcrJKH8SOoPBFV+I=;
+ b=S7p11nb7RkRO3B2CKas/xZBbykefVMuGQavF9k2EpUSryb4hk0D7aR0ykRSR/ya3Vc
+ g3Jkp0sQuy3AlvNbiZ4DkN7PWuuQBoQAjKFHxJ9yEwzGUKqy2wLs/UPcoguqYEbHOUaD
+ +YIYh00mfewuYg5l+YaNFqbisx9f4IXkLx52Yarnoiy9wLpnCpXyEHXuIc+winQlkk3g
+ WcVXW6hSSm2XswORQWkwFn/5o7DvNSmncCExThyvk0iJo8q90FABr2I4K6oL2Rrl1PGk
+ 7e+B57NEQLXRmvq0O8ifOWBaXPmvVJctdB8Q5nv3S2XdrmRiMUjOipbwzfLC0HgM7lSE
+ uGwQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:to:cc:references:from:message-id:date
  :user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=jli2nez5UekOBc427wJHMKwGcjgVsf+7alJp/mq+nCI=;
- b=iR97m9seu6UTke/7lXILuCztCKBvIALTZlH1LUdpaIfhJJ4qfO7H2pRIoIF7/Jt/ym
- SCzysgvaSNyXYlDrKiB+Dk8I364sTiEtENANIZZjmDB9RWHe8gHxKQODLnhmIjhH2roA
- lMPnq1ywFKMd3mlpE3GDB2S55mUG/zJyoCZFdHy8R8qPJIp1F0K/NKRcZwci8iMmG/3s
- uQkn+1W0LdcNiFxtp2Y22wb6tBix3Z1bfpo7s8dlm20GEbJQdciN6L2A0ozlTjh8ePh/
- U1RodD3yTxuS3oAB3QZ1lfXORHcX4jaRE3csy3IMIK9ep/+J68ibwWFLgbIKqO9ckrBx
- 9WAg==
-X-Gm-Message-State: ANhLgQ1Zjwbv0NEWWAxKhqiWqVpCcSisWPWlYlW7DzLZJyNf1NAbYWlS
- vtXciFE27XO2SdDpZiXmICeRVjXmZbuYN3d5zD+XLKKaaB2SBbYeEmK2FfAwEHjhHzTWKFfLkqv
- 3M0llo3IKbZOefjY=
-X-Received: by 2002:a05:6000:10c6:: with SMTP id
- b6mr8106425wrx.130.1584310844210; 
- Sun, 15 Mar 2020 15:20:44 -0700 (PDT)
-X-Google-Smtp-Source: ADFU+vs6KxVepLGqG+3FvdCYOFEixDOrgXfo9SUxpugF5dxHBxknKmVnV7QCaGv3YG5nhvVlnzHbwA==
-X-Received: by 2002:a05:6000:10c6:: with SMTP id
- b6mr8106393wrx.130.1584310843984; 
- Sun, 15 Mar 2020 15:20:43 -0700 (PDT)
-Received: from [192.168.1.40] (191.red-83-42-66.dynamicip.rima-tde.net.
- [83.42.66.191])
- by smtp.gmail.com with ESMTPSA id c2sm27522294wma.39.2020.03.15.15.20.41
+ bh=C8xrtjZPdhkGh9RyuMEXja32sZxVcrJKH8SOoPBFV+I=;
+ b=dLkZOpzqfluxkmC423iM//DIzLZqxbtoKSVLu4RUMt0Mk5I/nNLZdYAKIlfOQk4Wxa
+ O8Equ1w7kco9F92z1bzVxUVP7KRb/UuqQdm3A7TPy4a/jcuLtvFLSb3AviivVJVxHTof
+ 3/XUAv8lRDWYk5f84NZBiTOahEQWTMksO1dsWx5BjAEn1DyVX0mzlFjGcN7p027B9GiM
+ g1cu9FvPyaj+BWTOWfn7SS4AJTHH6jJj2mpHSC8mo4Zq37bXdARIxpThRcVw+LnaQpKZ
+ sgDk8tVS4EHPfF7Reelz4WpKdq4WBZehXuWw93DpdOlRfSfrnOzJifXuaAEnrsvR0d5o
+ 2dIg==
+X-Gm-Message-State: ANhLgQ1dZOzT+WethTbTX+qv8DxCKkUJ3yUULnwA4R4AJWIRD1fdDujp
+ 8dmHMQZ6SfOEf2Z3HtJQ5aHzzA==
+X-Google-Smtp-Source: ADFU+vv4ID1TV72I/f91ubBzIpArlK8S71wQ1JT6Z3mqMXjq0lOpmdWDq1J+3g+wmfbKprdmTM4tqQ==
+X-Received: by 2002:a62:e20a:: with SMTP id a10mr23092322pfi.270.1584311623231; 
+ Sun, 15 Mar 2020 15:33:43 -0700 (PDT)
+Received: from [192.168.1.11] (97-126-123-70.tukw.qwest.net. [97.126.123.70])
+ by smtp.gmail.com with ESMTPSA id
+ 11sm13757742pfv.43.2020.03.15.15.33.41
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 15 Mar 2020 15:20:43 -0700 (PDT)
-Subject: Re: [PATCH 09/14] exec: Drop redundant #ifdeffery
-To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
+ Sun, 15 Mar 2020 15:33:42 -0700 (PDT)
+Subject: Re: [PATCH 01/14] Makefile: Only build virtiofsd if system-mode is
+ enabled
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>,
+ Laurent Vivier <laurent@vivier.eu>, qemu-devel@nongnu.org
 Cc: Peter Maydell <peter.maydell@linaro.org>, qemu-riscv@nongnu.org,
  Eduardo Habkost <ehabkost@redhat.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>,
  David Hildenbrand <david@redhat.com>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Cornelia Huck <cohuck@redhat.com>, Laurent Vivier <laurent@vivier.eu>,
- qemu-s390x@nongnu.org, qemu-arm@nongnu.org, qemu-ppc@nongnu.org,
- Paolo Bonzini <pbonzini@redhat.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
+ Cornelia Huck <cohuck@redhat.com>, qemu-s390x@nongnu.org,
+ qemu-arm@nongnu.org, qemu-ppc@nongnu.org, Paolo Bonzini
+ <pbonzini@redhat.com>, Alistair Francis <Alistair.Francis@wdc.com>,
  David Gibson <david@gibson.dropbear.id.au>,
  =?UTF-8?Q?Alex_Benn=c3=a9e?= <alex.bennee@linaro.org>,
  Palmer Dabbelt <palmer@dabbelt.com>, Richard Henderson <rth@twiddle.net>
 References: <20200313183652.10258-1-philmd@redhat.com>
- <20200313183652.10258-10-philmd@redhat.com>
- <fdbcdfba-9467-2270-7309-abe8e509edc2@linaro.org>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>
-Message-ID: <ee7ce742-7750-eee7-67a4-804f65f114a1@redhat.com>
-Date: Sun, 15 Mar 2020 23:20:40 +0100
+ <20200313183652.10258-2-philmd@redhat.com>
+ <8f73d608-d28e-b896-b1f0-f95d599502f0@vivier.eu>
+ <d9b29b2b-58ff-512c-c426-0ffe7bcad295@linaro.org>
+ <29d183c5-6dc5-39a0-e8be-fa2e7f37d331@redhat.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+Message-ID: <c9c4a379-4710-b2c4-54ae-e33b02de5c64@linaro.org>
+Date: Sun, 15 Mar 2020 15:33:40 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.4.1
 MIME-Version: 1.0
-In-Reply-To: <fdbcdfba-9467-2270-7309-abe8e509edc2@linaro.org>
+In-Reply-To: <29d183c5-6dc5-39a0-e8be-fa2e7f37d331@redhat.com>
+Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
-X-Received-From: 205.139.110.61
+Content-Transfer-Encoding: 8bit
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2607:f8b0:4864:20::544
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -98,80 +91,43 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 Mar 2020 22:20:51 -0000
+X-List-Received-Date: Sun, 15 Mar 2020 22:33:47 -0000
 
-On 3/15/20 9:39 PM, Richard Henderson wrote:
-> On 3/13/20 11:36 AM, Philippe Mathieu-Daud=C3=A9 wrote:
->> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
->> ---
->>   exec.c | 4 ----
->>   1 file changed, 4 deletions(-)
->>
->> diff --git a/exec.c b/exec.c
->> index 7bc9828c5b..f258502966 100644
->> --- a/exec.c
->> +++ b/exec.c
->> @@ -185,10 +185,6 @@ struct DirtyBitmapSnapshot {
->>       unsigned long dirty[];
->>   };
->>  =20
->> -#endif
->> -
->> -#if !defined(CONFIG_USER_ONLY)
->> -
->>   static void phys_map_node_reserve(PhysPageMap *map, unsigned nodes)
->>   {
->>       static unsigned alloc_hint =3D 16;
->>
->=20
-> There's even more than that.  Looking further down,
->=20
->>      745 #endif
->>      746
->>      747 #if !defined(CONFIG_USER_ONLY)
->=20
-> This is the #endif that paired with the one at 190.
->=20
-> Later,
->=20
->>      988 #if defined(CONFIG_USER_ONLY)
-> ...
->>     1000 #else
-> ...
->>     1031 #endif
->>     1032
->>     1033 #ifndef CONFIG_USER_ONLY
->=20
-> So those three lines are redundant.
->=20
-> Later,
->=20
->>     1252 #if !defined(CONFIG_USER_ONLY)
-> ...
->>     1438 #endif /* defined(CONFIG_USER_ONLY) */
->>     1439
->>     1440 #if !defined(CONFIG_USER_ONLY)
->=20
-> Clearly these ifdefs are very hard to follow.  I would thus welcome a spl=
-it of
-> this file.
->=20
-> Possibly into exec-common.c (with functions present in both softmmu and
-> user-only, with ifdefs *inside* functions only), and exec-system.c (with =
-no
-> /#if.*CONFIG_USER_ONLY/).
->=20
-> But exec.c is over 4000 lines, so if there's another logical split into e=
-ven
-> more files, that would be even better.
+On 3/15/20 3:16 PM, Philippe Mathieu-Daudé wrote:
+> On 3/15/20 8:40 PM, Richard Henderson wrote:
+>> On 3/13/20 3:28 PM, Laurent Vivier wrote:
+>>>>   ifeq ($(CONFIG_LINUX)$(CONFIG_SECCOMP)$(CONFIG_LIBCAP_NG),yyy)
+>>>> -HELPERS-y += virtiofsd$(EXESUF)
+>>>> -vhost-user-json-y += tools/virtiofsd/50-qemu-virtiofsd.json
+>>>> +HELPERS-$(CONFIG_SOFTMMU) += virtiofsd$(EXESUF)
+>>>> +vhost-user-json-$(CONFIG_SOFTMMU) += tools/virtiofsd/50-qemu-virtiofsd.json
+>> ...
+>>>
+>>> Why don't you do that instead?
+>>>
+>>>    ifeq
+>>> ($(CONFIG_LINUX)$(CONFIG_SECCOMP)$(CONFIG_LIBCAP_NG)$(CONFIG_SOFTMMU),yyyy)
+> 
+> This was my first option but checkpatch complained because it is 80 chars long...
+> 
+> I also tried:
+> 
+> ifeq \
+> ($(CONFIG_LINUX)$(CONFIG_SECCOMP)$(CONFIG_LIBCAP_NG)$(CONFIG_SOFTMMU),yyyy)
+> 
+> which is uglier and still too long.
+> 
+> Following qemu-bridge-helper syntax I also tried:
+> 
+> ifeq ($(CONFIG_SECCOMP)$(CONFIG_LIBCAP_NG),yy)
+> HELPERS-$(call land,$(CONFIG_SOFTMMU),$(CONFIG_LINUX)) += virtiofsd$(EXESUF)
+> 
+> which is also too long ¯\_(ツ)_/¯
+> 
+> If you accept checkpatch complain I can use the form you prefer :)
 
-OK, I am taking notes for the 5.0 cycle.
+Hmph.  Of the choices, I prefer the 80+ char line.
 
-We can drop this patch for this series objective, as it is mostly cosmetic.
 
->=20
->=20
-> r~
->=20
-
+r~
 
