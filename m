@@ -1,54 +1,55 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jDZiN-0006V6-5B
-	for mharc-qemu-riscv@gnu.org; Sun, 15 Mar 2020 16:18:31 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:45239)
+	id 1jDZil-0006hh-Sg
+	for mharc-qemu-riscv@gnu.org; Sun, 15 Mar 2020 16:18:51 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:46134)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <richard.henderson@linaro.org>) id 1jDZiK-0006TA-GG
- for qemu-riscv@nongnu.org; Sun, 15 Mar 2020 16:18:25 -0400
+ (envelope-from <richard.henderson@linaro.org>) id 1jDZif-0006fI-VG
+ for qemu-riscv@nongnu.org; Sun, 15 Mar 2020 16:18:50 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <richard.henderson@linaro.org>) id 1jDZiJ-0001m4-Ht
- for qemu-riscv@nongnu.org; Sun, 15 Mar 2020 16:18:24 -0400
-Received: from mail-pl1-x642.google.com ([2607:f8b0:4864:20::642]:35357)
+ (envelope-from <richard.henderson@linaro.org>) id 1jDZie-0003YJ-Rw
+ for qemu-riscv@nongnu.org; Sun, 15 Mar 2020 16:18:45 -0400
+Received: from mail-pl1-x641.google.com ([2607:f8b0:4864:20::641]:43060)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
- id 1jDZiJ-0001h2-AN
- for qemu-riscv@nongnu.org; Sun, 15 Mar 2020 16:18:23 -0400
-Received: by mail-pl1-x642.google.com with SMTP id g6so6953940plt.2
- for <qemu-riscv@nongnu.org>; Sun, 15 Mar 2020 13:18:23 -0700 (PDT)
+ id 1jDZie-0003Pz-LA
+ for qemu-riscv@nongnu.org; Sun, 15 Mar 2020 16:18:44 -0400
+Received: by mail-pl1-x641.google.com with SMTP id f8so6941220plt.10
+ for <qemu-riscv@nongnu.org>; Sun, 15 Mar 2020 13:18:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=hUbgdJ8axJNBUNavUWRYwmcrmlXlzsQv8v+AhElMzek=;
- b=RucN+341Pl+98/KvSN2eY+qezA3vEcRqE3AjB/4Rf63S2hr0bM1rExlB/XwbFI90Me
- PLuAgBlYSqSlG+txsaNPVK3kQ2llL7+IN5V4DZmAaK+zMxftjvQnJW4pp0rHOingxnrg
- xMkbNgie2vhRQz5iSBV7JWSnzmifnS2fK5fV9olR3ZFWtsd+4ROSnoA6jAIiBaas7gUN
- PcNI3b9bk02PC94xkf35OjROnsQfuy8lVvjn3IRml69T3pk+ROUV7G67+4leH/IEnfHY
- wlKay4tNAuAXWtw0EcI/0jkPhih2eba287kF6byYGHOPcwqPT8V/51q6/O4mb5ZZmvlu
- pB7A==
+ bh=tPwZ4NakikcOwfVAMZAy1h09eFvA6fIiEKchL4XH/+c=;
+ b=EnV4etukqVd7OmLP+BhkKk8weN8D0vlQZVmEMHx2UrDW+rZucpSJSrh/XBSneukxxn
+ ir1riOfWIyVKivQ5ia64PwezK8pVNUAOOJl0Ab1j3JfmoQPCZ/QlwV1YF/mbKh+AmXQy
+ QIw4e49PD/gktjD1GyL35NWim+pYdKnFYkeG5CxPUJi7scrnCgsm63oIxM6SoHkKaAD9
+ Wkjh/bu8C4kfTTbl99s/kRehq2dhw6EYlJhuiL2luKb3Vi8GOeVuwKkgA68kjJAiMyD1
+ gIaMReDynxRKdvNGF6jGWa0Tnt43WiO4yFRKckt6XOeg1ENqOifVdbuU+gasgRZzlpOI
+ waag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:to:cc:references:from:message-id:date
  :user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=hUbgdJ8axJNBUNavUWRYwmcrmlXlzsQv8v+AhElMzek=;
- b=NV5kgpPiBDWcm7w+KctpdlDBP74xpGOi4MFY+2vnFVWa/tqGYW/o3nNiVRJBCVek8n
- cIRbHtJf9anQ+7HpbR7WE+bmyn3GgrHb51f72tc0C8H4wlJVgXJKWnwyFGcPDo+UPO0D
- 8P6+cr8RplyvGgMwIOrVTBU62LY3PUobJwuZaUK6cZYMLc7+Ye+xz3TJUFXb59gkgX7O
- ziEQd+PW3f+1T5U2oJPQshvyIMGAf3EQMzsy+iwIVWDPjsIbAv5ff+0wI80Bz+wjTNc3
- XLqJQtl6VCjLUdwuVYiqk1dHSLNyQqekLsDiB+WugOHmpt1OjtJ1rMyelp+JAaOysG88
- 01zg==
-X-Gm-Message-State: ANhLgQ36KrBTbyhQiJOHTKEr/5RaPleGDo1v+et0BSYy58yhYPHj0tty
- X+C4ucrUXt8G+KfDmet4w5b3JQ==
-X-Google-Smtp-Source: ADFU+vs/addkmQN34sUVbe/KT4pAtgwLGl2LIxE4JatwXayNepsIoE1ea57z4d0zFfseanAvIUJJ8A==
-X-Received: by 2002:a17:90a:e2c4:: with SMTP id
- fr4mr21482382pjb.91.1584303502400; 
- Sun, 15 Mar 2020 13:18:22 -0700 (PDT)
+ bh=tPwZ4NakikcOwfVAMZAy1h09eFvA6fIiEKchL4XH/+c=;
+ b=s/MP79DafGAbKYtwYCutwBQXthkwhD+zePH/m+2donys0kflzw+GpOipAenDle0qz3
+ xwIHTig1Q5SWmMdpQt3oRHiFvw+iTfGGBq1sENI+ARrDZZONgK6L3hIGJYlMpy12mE2B
+ VVeC4ZLqPBUcTYXuswbMFCTr4L1If3RzF6HdvEZSYL2snZLVq4eKShXBDuDmNAh1BQ3m
+ Z7u3FXp/xaynnTQT4lp39mpbNdQdM0Or4hl3eLKQhJZJ7OAvuGEd20asHLcARU9HHrc4
+ vAuAFSv1CK5xOOwmVnIRNjH+9nzBds3+dwoXrgh87RJp/jho9AqAXRuLkjF9F8aJp2o8
+ wMUA==
+X-Gm-Message-State: ANhLgQ3Y0qHyZW+yYNozJWw4Oh5dKK7Wlqg91Dh/LK4TWeio+lxCLBWF
+ sAA9S7k5sTDEeVIYocp4PX77OQ==
+X-Google-Smtp-Source: ADFU+vvoMqGceWF21tpQ/ru1JYPityst91oYzA5zXFpXLbhVxqkhKFjGKFGAdvC8Uj0oaFXbnNX6eg==
+X-Received: by 2002:a17:902:6bc3:: with SMTP id
+ m3mr23984325plt.27.1584303522679; 
+ Sun, 15 Mar 2020 13:18:42 -0700 (PDT)
 Received: from [192.168.1.11] (97-126-123-70.tukw.qwest.net. [97.126.123.70])
  by smtp.gmail.com with ESMTPSA id
- f17sm51074460pge.48.2020.03.15.13.18.21
+ k5sm17444826pju.29.2020.03.15.13.18.41
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 15 Mar 2020 13:18:21 -0700 (PDT)
-Subject: Re: [PATCH 06/14] util/Makefile: Reduce the user-mode object list
+ Sun, 15 Mar 2020 13:18:42 -0700 (PDT)
+Subject: Re: [PATCH 07/14] target/riscv/cpu: Restrict CPU migration to
+ system-mode
 To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>,
  qemu-devel@nongnu.org
 Cc: Peter Maydell <peter.maydell@linaro.org>, qemu-riscv@nongnu.org,
@@ -64,20 +65,20 @@ Cc: Peter Maydell <peter.maydell@linaro.org>, qemu-riscv@nongnu.org,
  =?UTF-8?Q?Alex_Benn=c3=a9e?= <alex.bennee@linaro.org>,
  Palmer Dabbelt <palmer@dabbelt.com>, Richard Henderson <rth@twiddle.net>
 References: <20200313183652.10258-1-philmd@redhat.com>
- <20200313183652.10258-7-philmd@redhat.com>
+ <20200313183652.10258-8-philmd@redhat.com>
 From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <d20dc940-1d2d-eed8-3240-9cf28b55d6a7@linaro.org>
-Date: Sun, 15 Mar 2020 13:18:19 -0700
+Message-ID: <ffd75cb7-4b80-f098-59e2-7c24f0e03288@linaro.org>
+Date: Sun, 15 Mar 2020 13:18:39 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.4.1
 MIME-Version: 1.0
-In-Reply-To: <20200313183652.10258-7-philmd@redhat.com>
+In-Reply-To: <20200313183652.10258-8-philmd@redhat.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::642
+X-Received-From: 2607:f8b0:4864:20::641
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -89,15 +90,13 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 Mar 2020 20:18:25 -0000
+X-List-Received-Date: Sun, 15 Mar 2020 20:18:50 -0000
 
 On 3/13/20 11:36 AM, Philippe Mathieu-Daudé wrote:
-> These stubs are not required when configured with --disable-system.
-> 
 > Signed-off-by: Philippe Mathieu-Daudé <philmd@redhat.com>
 > ---
->  util/Makefile.objs | 59 +++++++++++++++++++++++++++++-----------------
->  1 file changed, 38 insertions(+), 21 deletions(-)
+>  target/riscv/cpu.c | 6 ++++--
+>  1 file changed, 4 insertions(+), 2 deletions(-)
 
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
