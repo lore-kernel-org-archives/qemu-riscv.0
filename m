@@ -1,71 +1,83 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jDNnK-0007cy-CM
-	for mharc-qemu-riscv@gnu.org; Sun, 15 Mar 2020 03:34:46 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42245)
+	id 1jDYRR-0002Su-9d
+	for mharc-qemu-riscv@gnu.org; Sun, 15 Mar 2020 14:56:53 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:54738)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <richard.henderson@linaro.org>) id 1jDNnH-0007cG-RP
- for qemu-riscv@nongnu.org; Sun, 15 Mar 2020 03:34:44 -0400
+ (envelope-from <richard.henderson@linaro.org>) id 1jDYRO-0002RF-3I
+ for qemu-riscv@nongnu.org; Sun, 15 Mar 2020 14:56:51 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <richard.henderson@linaro.org>) id 1jDNnG-0000og-MH
- for qemu-riscv@nongnu.org; Sun, 15 Mar 2020 03:34:43 -0400
-Received: from mail-pg1-x542.google.com ([2607:f8b0:4864:20::542]:39748)
+ (envelope-from <richard.henderson@linaro.org>) id 1jDYRN-0007ct-1d
+ for qemu-riscv@nongnu.org; Sun, 15 Mar 2020 14:56:49 -0400
+Received: from mail-pl1-x641.google.com ([2607:f8b0:4864:20::641]:36287)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
- id 1jDNnG-0000iS-GY
- for qemu-riscv@nongnu.org; Sun, 15 Mar 2020 03:34:42 -0400
-Received: by mail-pg1-x542.google.com with SMTP id b22so1709015pgb.6
- for <qemu-riscv@nongnu.org>; Sun, 15 Mar 2020 00:34:42 -0700 (PDT)
+ id 1jDYRM-0007Y3-Qh
+ for qemu-riscv@nongnu.org; Sun, 15 Mar 2020 14:56:48 -0400
+Received: by mail-pl1-x641.google.com with SMTP id g2so4374511plo.3
+ for <qemu-riscv@nongnu.org>; Sun, 15 Mar 2020 11:56:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=UcVIDaZFTGg8yD62yteC6TS+hauFRwqPFO8BBLmGTuU=;
- b=eOUB3kik56bFncRNsgORN/9sDXwAs8MZqUzZD7SX1pI9vkBAJBOFvICaYs7JJnNCsS
- LRcr9ht75Uar2qy7nXjEG9YIGmBmz5DEuSDrnK63T1Y6SzwUs6WLJUgiV9A+hVcH5b7M
- tT0MsMFqZ3saI0XT8P4Os3v1+bOdqF9MewTlrjDCRXnUtT0IowAMHVn4HYktbkLEQ0DR
- MCzTq21WkCIZGap6zWOMinqfWfue/hXPUhisrnV3lygHF4zoBjAeUd+591eazucce1w1
- qqjqLOeR1jUz6LXohqvkq492msUIiQ6/qBcEoaY8ENFx2Q2rJ+LyJGp/Ed8X24HV/5W5
- Rzqw==
+ bh=+0bPhTfpVLm4Se5rDwEqA55OKY69NbCPYl3fbHYKAck=;
+ b=ilX5sU4dFpK/NhyhH1vn1BPelhTO+RwCmWtiQq2tl3gg7p90tPBze0byGPdeiBbQP3
+ k1Ax5IwEv+lu14+hNncL8j1ql0pghV65ACV+p5inZwB26AEUmg9E5Fw03g9xWhDF7b/k
+ k82e9D+RDVKByPyE1/6QfxS5qzMJVHYIUEn18cOECyAyhUAm3Wvg5EWGJ4FDYU8fYTRE
+ S038QamyzRhEyXVunuq8/4F1sIDEFxJPAExuZCjQpdjTh7+0tR7+wGdcAFHzutK9eyyc
+ r47R/2t+ns+VS5I04Gi21uh6v4Q6C0uYvfdn0fsHTlb+06SGzp3TztNbS5yibVhFT8P6
+ 0ljQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:to:cc:references:from:message-id:date
  :user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=UcVIDaZFTGg8yD62yteC6TS+hauFRwqPFO8BBLmGTuU=;
- b=VbLuSwZmBWAkPeJtC8sZomv2r5JpZ8ICmD8na+x5/KxPWUmd7YAEjFg1LSJpfVbr/K
- hiODK0EOl/J7ybOEItXvqP9MVlsnA+yl6LW/sGZymJzxMI4AbgegOwNFp/6SN++ZbZVV
- lZuf+2U4KIhP16U4Q2sMukDZKSBEpktmBXWRijFtrVtsX6a0SBwT0VRQEXULRL6vjeJG
- Rlmwuru2lLo8xS44eYRfXij+1i2g6n+8KNY5gAc6IbafauA0eprUXh0piRGfTgcnKhDW
- NQBCHfYSCLShBSOdXsvIOa6DFYR3drmtyuE1puL939l6uI+nMabJ85FDfp0ZBXyR2rMT
- zWpw==
-X-Gm-Message-State: ANhLgQ0aVpzArFKDV8EXymDGf/cKHjO9g6Hvki/IiNuJW1G/9A1gs4Rp
- 0qOA6LVjcs32ja5NWhtE9I77N5y0kOc=
-X-Google-Smtp-Source: ADFU+vs7Wrmbcy3Dcuc30/sZV5nyyNA7J4WjfdVsXLc3jthRJjMIXcJbkhlpl4NGYlVdGywq+8BikA==
-X-Received: by 2002:a62:2ad0:: with SMTP id q199mr23343148pfq.48.1584257681050; 
- Sun, 15 Mar 2020 00:34:41 -0700 (PDT)
+ bh=+0bPhTfpVLm4Se5rDwEqA55OKY69NbCPYl3fbHYKAck=;
+ b=PG2W16NuLRvURQTBq4zzzcnLUqrVcthguBSbCcuMqqyUoXIvCOa/nSYuOj5mf5p20/
+ /ZyA5X9klG4jLwVj2AGtQ6gT4+syUNskvx5RTJacLHzj5acvvkrGNozuKpY15v6UwuR1
+ FSIkm93YCrI2vKCc7u41+5k8GPuic0I0qGx2Xl96f44MyTSOPVw0TU55cNNNR5/YIaeJ
+ R8TaP8w+WJ791+SfnjsEQtn5qRl2rg7oBZIzs2pxkVfAE8yENgkZiupSm3hGk9Rp5lbg
+ quao+ePrDRq1wol16AxSgf5IciHMkN4ZcFc8Ci5tKf1JZshKKeTiwu19mG/CdGEuHioF
+ sh6g==
+X-Gm-Message-State: ANhLgQ3ML4FiMjXZw95PvHENWvTYSAandeTOT5jkYmVTbR+iRQ2Th1FK
+ ETwbcqIGWOJdCanpGw+WZNxHHw==
+X-Google-Smtp-Source: ADFU+vtXbpdOvdCuYM2qC6Qn8qlLsgLKKgnbyPRjsnLFfemCqboJpjTiLiK+B29tkCKGrkJOQQZpeg==
+X-Received: by 2002:a17:90a:1784:: with SMTP id
+ q4mr11450982pja.174.1584298607652; 
+ Sun, 15 Mar 2020 11:56:47 -0700 (PDT)
 Received: from [192.168.1.11] (97-126-123-70.tukw.qwest.net. [97.126.123.70])
  by smtp.gmail.com with ESMTPSA id
- 19sm23983161pgx.63.2020.03.15.00.34.39
+ 4sm7787455pfn.156.2020.03.15.11.56.44
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 15 Mar 2020 00:34:40 -0700 (PDT)
-Subject: Re: [PATCH v5 59/60] target/riscv: vector compress instruction
-To: LIU Zhiwei <zhiwei_liu@c-sky.com>, alistair23@gmail.com,
- chihmin.chao@sifive.com, palmer@dabbelt.com
-Cc: wenmeng_zhang@c-sky.com, wxy194768@alibaba-inc.com,
- guoren@linux.alibaba.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-References: <20200312145900.2054-1-zhiwei_liu@c-sky.com>
+ Sun, 15 Mar 2020 11:56:45 -0700 (PDT)
+Subject: Re: [PATCH 02/14] configure: Avoid building TCG when not needed
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>,
+ qemu-devel@nongnu.org
+Cc: Peter Maydell <peter.maydell@linaro.org>, qemu-riscv@nongnu.org,
+ Eduardo Habkost <ehabkost@redhat.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ David Hildenbrand <david@redhat.com>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Cornelia Huck <cohuck@redhat.com>, Laurent Vivier <laurent@vivier.eu>,
+ qemu-s390x@nongnu.org, qemu-arm@nongnu.org, qemu-ppc@nongnu.org,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ David Gibson <david@gibson.dropbear.id.au>,
+ =?UTF-8?Q?Alex_Benn=c3=a9e?= <alex.bennee@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Richard Henderson <rth@twiddle.net>
+References: <20200313183652.10258-1-philmd@redhat.com>
+ <20200313183652.10258-3-philmd@redhat.com>
 From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <f7b6a820-1ca9-f895-4599-f306d4ceaae1@linaro.org>
-Date: Sun, 15 Mar 2020 00:34:38 -0700
+Message-ID: <5d9da349-fd48-1d64-9f84-ae027c4c9d2d@linaro.org>
+Date: Sun, 15 Mar 2020 11:56:43 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.4.1
 MIME-Version: 1.0
-In-Reply-To: <20200312145900.2054-1-zhiwei_liu@c-sky.com>
+In-Reply-To: <20200313183652.10258-3-philmd@redhat.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::542
+X-Received-From: 2607:f8b0:4864:20::641
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -77,15 +89,23 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 Mar 2020 07:34:45 -0000
+X-List-Received-Date: Sun, 15 Mar 2020 18:56:51 -0000
 
-[ The patch didn't make it to the list, so reviewing
-
-https://github.com/romanheros/qemu/commit/f46b8c8bbbf0acd78746a49fe712306d7c05c7e6
-]
+On 3/13/20 11:36 AM, Philippe Mathieu-Daudé wrote:
+> Avoid building TCG when building only tools:
+> 
+>   ./configure --enable-tools --disable-system --disable-user
+> 
+> This saves us from running the soft-float tests enabled since
+> commit 76170102508.
+> 
+> Signed-off-by: Philippe Mathieu-Daudé <philmd@redhat.com>
+> ---
+>  configure | 4 ++++
+>  1 file changed, 4 insertions(+)
 
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
-
 r~
+
 
