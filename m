@@ -1,74 +1,73 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jDLiL-0001bz-Es
-	for mharc-qemu-riscv@gnu.org; Sun, 15 Mar 2020 01:21:29 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:52308)
+	id 1jDM4N-0005nA-C9
+	for mharc-qemu-riscv@gnu.org; Sun, 15 Mar 2020 01:44:15 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:53685)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <richard.henderson@linaro.org>) id 1jDLiI-0001bh-Pd
- for qemu-riscv@nongnu.org; Sun, 15 Mar 2020 01:21:27 -0400
+ (envelope-from <richard.henderson@linaro.org>) id 1jDM4J-0005mf-FF
+ for qemu-riscv@nongnu.org; Sun, 15 Mar 2020 01:44:12 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <richard.henderson@linaro.org>) id 1jDLiH-0001kh-LE
- for qemu-riscv@nongnu.org; Sun, 15 Mar 2020 01:21:26 -0400
-Received: from mail-pg1-x541.google.com ([2607:f8b0:4864:20::541]:36683)
+ (envelope-from <richard.henderson@linaro.org>) id 1jDM4I-0004KH-5n
+ for qemu-riscv@nongnu.org; Sun, 15 Mar 2020 01:44:11 -0400
+Received: from mail-pj1-x1041.google.com ([2607:f8b0:4864:20::1041]:50933)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
- id 1jDLiH-0001iH-GF
- for qemu-riscv@nongnu.org; Sun, 15 Mar 2020 01:21:25 -0400
-Received: by mail-pg1-x541.google.com with SMTP id z4so1806349pgu.3
- for <qemu-riscv@nongnu.org>; Sat, 14 Mar 2020 22:21:25 -0700 (PDT)
+ id 1jDM4I-0004Fo-0L
+ for qemu-riscv@nongnu.org; Sun, 15 Mar 2020 01:44:10 -0400
+Received: by mail-pj1-x1041.google.com with SMTP id o23so530714pjp.0
+ for <qemu-riscv@nongnu.org>; Sat, 14 Mar 2020 22:44:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=OBUlZjZUThF1vXn4ShVzOeU+yEgCM+AMAza0oNowHco=;
- b=fdKbR64rrmEtzh64KA1vSr76Z2TBBTUZs70uTOBX3dvURZ8J7tdNijtV+lhAvElMmr
- MkFrMAjigMf15aNzxfRpUxer0RS42fmBkwU838USsH7bohgMrBYGjpfRIDyF8xIV5Svh
- 5Xe2zOGLyHMpbkjM/8YHYRBx6ritFO/Jx+3RKVFOM6r91Dm3nT48ry0YBxT8FUz2V3H2
- AeV94NaGcxPjjt0qHUVZls9/Uk78IGCs4vNWGjF5TwHwXkaUZLOKhaZyjlOMnMssowOy
- HMQi9Vj/tbKeT1m7E/NyTuGTfE6A+jVx35VL4roMAzcQSTNYP+Q5wcXOjbvfs65CqJy4
- FVzA==
+ bh=uYlvfZRcyb9QoH0KfhkACBfYXYvVoV2t9YSk4TzZWPs=;
+ b=oTzdKUgDbtb6yTguR7ygkUZm6IkCRafCeiIkL+EBYIw/wF0IFj6Lop2ZByhS6c/pD2
+ 81Vevr1HQNDu3ZH0uWYkyRd3Jo9Fd7/kO8TOeArc5vOy2PyYjH5Fh5SB5MLAGFkWG39s
+ fcdidqIReJbuSZuErBriK4ZCmtEJYoWYAATG8Kq7iMk37zpd4i+MFJBOrIDCjXT+ZXhA
+ MiU5F7n2tVOMcx9yT7+b0RegUMKdgbTBbVB80+I69socdFmvMzAIESjKZzSgDhX9RNs4
+ 9yeJ6q9Hh8uD/WPvaYMReBMwBxoYrn8fX4Dilfl8AJ2HeoobfJpFXDEQ23HJNUJkVls4
+ w6fA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:to:cc:references:from:message-id:date
  :user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=OBUlZjZUThF1vXn4ShVzOeU+yEgCM+AMAza0oNowHco=;
- b=MOkmqFDv2OQAPytcduLcNVwZPU5HQG/kgjwTOMwyCH+BG/RGnhdQ668+AG/MDZpfuB
- c/FqwtrHOLHBJMCvRclFiMINM8uf2kwyO2oiDg3f+3ayvtodo88lzjQlWK7ses9w54xS
- BaTTU+LDnpc5HMOIQeBb4PsWFiQyYaIJpJPQT7pe3Xll52OD+J2rjd9rygzZH/6NIkww
- rMgk1xwGIdsu2mVDZGbmvqArlPX5xQPYbb99LHxm3HeSFK62jku4lzIViEo02GmPv30p
- 44uuozX/4C5Yogt9gE7qjMiNoVxe0fO6Q6Ub44xc7K3Cy5CIlT5qYngwsSsACuHG95q9
- wigw==
-X-Gm-Message-State: ANhLgQ1AwzyF8D4CNn7oxeyivtQ74V6oQ12AoPipdubZFoqbQkTJNR/3
- MmmySoYI7Qlof2JwZ7leeJgZz1ivXR0=
-X-Google-Smtp-Source: ADFU+vtjOg5zE0nXpZhiWARMtYcU/wI7qBV/VB1NP+62X4DBSGwW5ZfQ9Kdi1LvMia0t4YNhi7/Srw==
-X-Received: by 2002:a63:fc1c:: with SMTP id j28mr21421430pgi.289.1584249684184; 
- Sat, 14 Mar 2020 22:21:24 -0700 (PDT)
+ bh=uYlvfZRcyb9QoH0KfhkACBfYXYvVoV2t9YSk4TzZWPs=;
+ b=BxP2MobtptPDiTud+iWy46aHuApiLfQI0tDz9r8mCIaHH5WurMwih/KrrPdaM0b5iO
+ TkQ+bUwKua0kB1pmgzSbxJhmjHuN/lMD/4uvGNbVDaqApSYhJk+Tes9G1fzS2FEpVgMC
+ 1L/TxwPgIRlvfWhxORg6Jgfi2yECvBZUHNMmXgbcY5ESGNcZonwx7j2LSIUzAcEe6elL
+ COVK21+jAdn6RMCiNX05dw5Xjg1SBwVVc+yGCKVbXZqgKhExtSGaC617t9wkVhdgSf96
+ UGLDBHZsV011DyKvmUhTVEhahO2qgJKqD4w8x3FmteipJEKwcy9wyMxSaqQxU35SCbPu
+ rEJg==
+X-Gm-Message-State: ANhLgQ1Q7eheQmKj4XFXsHkVuW8ZvzFMpKW7xHxJfpZ6amHaMlBPDufi
+ 9FgPSWFK21gW1DW9PKNNusAwnxsXmfY=
+X-Google-Smtp-Source: ADFU+vtkrvkqdKBnoTpKn5/+7v0TcT/88yK+XiC+6XTOPN31/xeWATUVvmOqQuC5GnABszQrqlTSKQ==
+X-Received: by 2002:a17:902:9f85:: with SMTP id
+ g5mr3387075plq.152.1584251048707; 
+ Sat, 14 Mar 2020 22:44:08 -0700 (PDT)
 Received: from [192.168.1.11] (97-126-123-70.tukw.qwest.net. [97.126.123.70])
  by smtp.gmail.com with ESMTPSA id
- v12sm7232846pgs.0.2020.03.14.22.21.22
+ k5sm13086142pgl.3.2020.03.14.22.44.07
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 14 Mar 2020 22:21:23 -0700 (PDT)
-Subject: Re: [PATCH v5 54/60] target/riscv: integer extract instruction
+ Sat, 14 Mar 2020 22:44:07 -0700 (PDT)
+Subject: Re: [PATCH v5 58/60] target/riscv: vector register gather instruction
 To: LIU Zhiwei <zhiwei_liu@c-sky.com>, alistair23@gmail.com,
  chihmin.chao@sifive.com, palmer@dabbelt.com
 Cc: wenmeng_zhang@c-sky.com, wxy194768@alibaba-inc.com,
  guoren@linux.alibaba.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
 References: <20200312145900.2054-1-zhiwei_liu@c-sky.com>
- <20200312145900.2054-55-zhiwei_liu@c-sky.com>
- <de89d8bc-f578-ac42-58f3-4f5822c8fcfb@linaro.org>
- <9687510d-ff07-b200-b597-1405b1ff828d@c-sky.com>
+ <20200312145900.2054-59-zhiwei_liu@c-sky.com>
 From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <f7003687-4352-15ba-79d8-268df025b611@linaro.org>
-Date: Sat, 14 Mar 2020 22:21:21 -0700
+Message-ID: <f9bebb0b-324f-c1fa-8bc1-e30a633285db@linaro.org>
+Date: Sat, 14 Mar 2020 22:44:05 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.4.1
 MIME-Version: 1.0
-In-Reply-To: <9687510d-ff07-b200-b597-1405b1ff828d@c-sky.com>
+In-Reply-To: <20200312145900.2054-59-zhiwei_liu@c-sky.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::541
+X-Received-From: 2607:f8b0:4864:20::1041
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -80,124 +79,65 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 Mar 2020 05:21:28 -0000
+X-List-Received-Date: Sun, 15 Mar 2020 05:44:13 -0000
 
-On 3/14/20 10:15 PM, LIU Zhiwei wrote:
-> 
-> 
-> On 2020/3/15 10:53, Richard Henderson wrote:
->> On 3/12/20 7:58 AM, LIU Zhiwei wrote:
->>> +static bool trans_vext_x_v(DisasContext *s, arg_r *a)
->>> +{
->>> +    if (vext_check_isa_ill(s, RVV)) {
->>> +        TCGv_ptr src2;
->>> +        TCGv dest, src1;
->>> +        gen_helper_vext_x_v fns[4] = {
->>> +            gen_helper_vext_x_v_b, gen_helper_vext_x_v_h,
->>> +            gen_helper_vext_x_v_w, gen_helper_vext_x_v_d
->>> +        };
->>> +
->>> +        dest = tcg_temp_new();
->>> +        src1 = tcg_temp_new();
->>> +        src2 = tcg_temp_new_ptr();
->>> +
->>> +        gen_get_gpr(src1, a->rs1);
->>> +        tcg_gen_addi_ptr(src2, cpu_env, vreg_ofs(s, a->rs2));
->>> +
->>> +        fns[s->sew](dest, src2, src1, cpu_env);
->>> +        gen_set_gpr(a->rd, dest);
->>> +
->>> +        tcg_temp_free(dest);
->>> +        tcg_temp_free(src1);
->>> +        tcg_temp_free_ptr(src2);
->>> +        return true;
->>> +    }
->>> +    return false;
->>> +}
->> This entire operation can be performed inline easily.
->>
->> static void extract_element(TCGv dest, TCGv_ptr base,
->>                              int ofs, int sew)
->> {
->>      switch (sew) {
->>      case MO_8:
->>          tcg_gen_ld8u_tl(dest, base, ofs);
->>          break;
->>      case MO_16:
->>          tcg_gen_ld16u_tl(dest, base, ofs);
->>          break;
->>      default:
->>          tcg_gen_ld32u_tl(dest, base, ofs);
->>          break;
->> #if TARGET_LONG_BITS == 64
->>      case MO_64:
->>          tcg_gen_ld_i64(dest, base, ofs);
->>          break;
->> #endif
->>      }
->> }
->>
->> static bool trans_vext_x_v(DisasContext *s, arg_r *a)
->> {
->> ...
->>      if (a->rs1 == 0) {
->>          /* Special case vmv.x.s rd, vs2. */
->>          do_extract(dest, cpu_env,
->>                     vreg_ofs(s, a->rs2), s->sew);
->>      } else {
->>          int vlen = s->vlen >> (3 + s->sew);
->>          TCGv_i32 ofs = tcg_temp_new_i32();
->>          TCGv_ptr  base = tcg_temp_new_ptr();
->>          TCGv t_vlen, t_zero;
->>
->>          /* Mask the index to the length so that we do
->>             not produce an out-of-range load. */
->>          tcg_gen_trunc_tl_i32(ofs, cpu_gpr[a->rs1]);
->>          tcg_gen_andi_i32(ofs, ofs, vlen - 1);
->>
->>          /* Convert the index to an offset.  */
->>          tcg_gen_shli_i32(ofs, ofs, s->sew);
-> 
-> In  big endianess host, should I convert the index first before this statement.
-> 
-> #ifdef HOST_WORDS_BIGENDIAN
-> static void convert_idx(TCGv_i32 idx, int sew)
-> {
->     switch (sew) {
->     case MO_8:
->         tcg_gen_xori_i32(idx, idx, 7);
->         break;
->     case MO_16:
->         tcg_gen_xori_i32(idx, idx, 3);
->         break;
->     case MO_32:
->         tcg_gen_xori_i32(idx, idx, 1);
->         break;
->     default:
->         break;
->     }
-> }
-> #endif
-> 
-> 
-> When convert the index to an offset, use this function first
-> 
-> #ifdef HOST_WORDS_BIGENDIAN
->     convert_idx(ofs, s->sew)
-> #endif
+On 3/12/20 7:58 AM, LIU Zhiwei wrote:
+> +static bool vrgather_vx_check(DisasContext *s, arg_rmrr *a)
+> +{
+> +    return (vext_check_isa_ill(s, RVV) &&
+> +            vext_check_overlap_mask(s, a->rd, a->vm, true) &&
+> +            vext_check_reg(s, a->rd, false) &&
+> +            vext_check_reg(s, a->rs2, false) &&
+> +            (a->rd != a->rs2));
+> +}
+> +GEN_OPIVX_TRANS(vrgather_vx, vrgather_vx_check)
+> +GEN_OPIVI_TRANS(vrgather_vi, 1, vrgather_vx, vrgather_vx_check)
 
-Yes, I forgot about endian adjust.
+The unmasked versions of these should use gvec_dup.
 
-I would say
+For the immediate version, where we can validate the index at translation time,
+we can use tcg_gen_gvec_dup_mem, so that the host vector dup-from-memory
+instruction can be used.
 
-static void endian_adjust(TCGv_i32 ofs, int sew)
-{
-#ifdef HOST_WORDS_BIGENDIAN
-    tcg_gen_xori_i32(ofs, ofs, 7 >> sew);
-#endif
-}
+For the register version, we should re-use the code from vext.x.s where we load
+the element, bound the index and squash the value to zero for index >= VLMAX.
+Then use tcg_gen_gvec_dup_i64.
 
-so that you don't need the ifdef at the use site.
+For the masked versions, we should load the value, as above, and then re-use
+the vmerge helper with vs2 = vd, so that we get
+
+    vd[i] = v0[i].lsb ? val : vd[i]
+
+
+> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+> index 2219fdd6c5..5788e46dcf 100644
+> --- a/target/riscv/vector_helper.c
+> +++ b/target/riscv/vector_helper.c
+> @@ -4647,3 +4647,71 @@ GEN_VEXT_VSLIDE1DOWN_VX(vslide1down_vx_b, uint8_t, H1, clearb)
+>  GEN_VEXT_VSLIDE1DOWN_VX(vslide1down_vx_h, uint16_t, H2, clearh)
+>  GEN_VEXT_VSLIDE1DOWN_VX(vslide1down_vx_w, uint32_t, H4, clearl)
+>  GEN_VEXT_VSLIDE1DOWN_VX(vslide1down_vx_d, uint64_t, H8, clearq)
+> +
+> +/* Vector Register Gather Instruction */
+> +#define GEN_VEXT_VRGATHER_VV(NAME, ETYPE, H, CLEAR_FN)                    \
+> +void HELPER(NAME)(void *vd, void *v0, void *vs1, void *vs2,               \
+> +        CPURISCVState *env, uint32_t desc)                                \
+> +{                                                                         \
+> +    uint32_t mlen = vext_mlen(desc);                                      \
+> +    uint32_t vlmax = env_archcpu(env)->cfg.vlen / mlen;                   \
+> +    uint32_t vm = vext_vm(desc);                                          \
+> +    uint32_t vl = env->vl;                                                \
+> +    uint32_t index, i;                                                    \
+> +                                                                          \
+> +    for (i = 0; i < vl; i++) {                                            \
+> +        if (!vm && !vext_elem_mask(v0, mlen, i)) {                        \
+> +            continue;                                                     \
+> +        }                                                                 \
+> +        index = *((ETYPE *)vs1 + H(i));                                   \
+> +        if (index >= vlmax) {
+
+The type of index should be ETYPE or uint64_t, and similar for vlmax just so
+they match.
 
 
 r~
