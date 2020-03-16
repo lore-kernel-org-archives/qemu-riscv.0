@@ -1,82 +1,68 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jDuqI-0002Bw-Eu
-	for mharc-qemu-riscv@gnu.org; Mon, 16 Mar 2020 14:52:02 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:40254)
+	id 1jDuwo-0006y3-G3
+	for mharc-qemu-riscv@gnu.org; Mon, 16 Mar 2020 14:58:46 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:48335)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <philmd@redhat.com>) id 1jDuqG-000279-9L
- for qemu-riscv@nongnu.org; Mon, 16 Mar 2020 14:52:01 -0400
+ (envelope-from <alistair23@gmail.com>) id 1jDuwl-0006py-Pe
+ for qemu-riscv@nongnu.org; Mon, 16 Mar 2020 14:58:44 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <philmd@redhat.com>) id 1jDuqF-00024h-5c
- for qemu-riscv@nongnu.org; Mon, 16 Mar 2020 14:52:00 -0400
-Received: from us-smtp-delivery-74.mimecast.com ([63.128.21.74]:32474)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <philmd@redhat.com>) id 1jDuqF-00022S-1s
- for qemu-riscv@nongnu.org; Mon, 16 Mar 2020 14:51:59 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1584384718;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=lJlVMKZax5qIb1MJWYEp8Y1G4BH96heGWQHiGeb4Cus=;
- b=bLqSBK36CJXHUtMqYw5klZkwpS85/CLFqH5VXZTtNysVO1TPjXo8mzQkp3Swf5PGNuoiH8
- VF3w8zNyyPbzmp5G2rWRdGzAy+sDymOCtpBFvCU13MqixP5PHm9TcrFs7jHoLVrx7LyRhp
- S/sEiqZlwYKaTt+FXEH2k+HV0IeAlng=
-Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
- [209.85.221.70]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-310-fadWJupDOuObOFHIc6PXpA-1; Mon, 16 Mar 2020 14:51:53 -0400
-X-MC-Unique: fadWJupDOuObOFHIc6PXpA-1
-Received: by mail-wr1-f70.google.com with SMTP id n11so8983619wrs.13
- for <qemu-riscv@nongnu.org>; Mon, 16 Mar 2020 11:51:53 -0700 (PDT)
+ (envelope-from <alistair23@gmail.com>) id 1jDuwk-0001MO-IB
+ for qemu-riscv@nongnu.org; Mon, 16 Mar 2020 14:58:43 -0400
+Received: from mail-vk1-xa43.google.com ([2607:f8b0:4864:20::a43]:44920)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <alistair23@gmail.com>)
+ id 1jDuwh-0000cn-QE; Mon, 16 Mar 2020 14:58:39 -0400
+Received: by mail-vk1-xa43.google.com with SMTP id s194so5208348vkb.11;
+ Mon, 16 Mar 2020 11:58:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=YCj2j2QLvThI/7yEyvEGkibNCO6HQSKc0dHTHfIKDcY=;
+ b=bGlLYjqhuOBElLMaKSsrdR8mC6CRaROa6KBnTAsCpws2wpve3LntDOB0Q+oE4R0Idb
+ Xn8nHKI2IbSTmNeMjeJaO01UwKNzHkrYG0rUasis1zkIRxIFq+MHhDkGW0kaP8z7tL4+
+ iaknz1bsSRKSh7+Vlf2okzdk88wPqJ7WUyTLsJ7+fzuwPU36xVjshHKmoEkAD0kYysw/
+ pJMJ1vjHXVogndtc2iF1sCN/OJloYUef8O8PWKDcAWByEIM4Fzu86oBH3FSV/qFgheEF
+ XVjA5AJP9vcnuTaX0eDATnVVr8Uf3IGtnWTGqPKKdTF9/ObXE60DbfFDe+xrXTP9c+v2
+ F+UA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=NlR0W1rwyt02Ypkn/GIhl77Q2tixa1X5gZqoTZJ3XAc=;
- b=MXITn7p+KApvWA8DbINgRY/XxhaFM4soyFKTPMf1oBoIQCGecaie5FFCEhztNyPxlj
- y6L9n+0DzRXtmguZPBM8bL8MWaBISFLHB/mxGU2B578EtD/J3WUj0C2ftDJ8b0t+0FI0
- 6iyDYq9r4AXBYDMAtjMwFSln35ru49jZCQeLhl6WeGzziC94WT6vtI7RNPBwK0YShv0u
- H2wokqEort1W5TVPSqid1oNnUVaduhKwLC0+EiYgCmkDael/+nxhnPjfJ/we64nQ2/aa
- /jL+/TFMTD6q4Icr5nZRg0agMOMbAZXUntS574d0A0fINF+T9e2QgbIBnYy0o0zmr3wh
- 1KVQ==
-X-Gm-Message-State: ANhLgQ24nRWqjV/6W0KiOm1BTzheeyCpJesSdloVbACBse8af1lKFjGb
- NrUaVsOPgu7n/HGyL6v43XPmK1OphDF5wuWIDlxFG5EbcTg/ii8C9hvb/3lK+ajDJqpplONXpO0
- Zk5QpxRQ614ffkxk=
-X-Received: by 2002:a05:600c:204:: with SMTP id 4mr486840wmi.112.1584384712298; 
- Mon, 16 Mar 2020 11:51:52 -0700 (PDT)
-X-Google-Smtp-Source: ADFU+vsfokMzXIaYUKe+yPU0VT7cajBV5qDQv0gD5seZGtXEytA4OUpypM+GVgF/rry1m1L7lSzfVQ==
-X-Received: by 2002:a05:600c:204:: with SMTP id 4mr486823wmi.112.1584384712123; 
- Mon, 16 Mar 2020 11:51:52 -0700 (PDT)
-Received: from localhost.localdomain (96.red-83-59-163.dynamicip.rima-tde.net.
- [83.59.163.96])
- by smtp.gmail.com with ESMTPSA id l18sm1082013wrr.17.2020.03.16.11.51.50
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Mar 2020 11:51:51 -0700 (PDT)
-From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
-To: Paolo Bonzini <pbonzini@redhat.com>,
-	qemu-devel@nongnu.org
-Cc: Peter Maydell <peter.maydell@linaro.org>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
-Subject: [PATCH v3 20/25] hw/riscv: Let devices own the MemoryRegion they
- create
-Date: Mon, 16 Mar 2020 19:50:01 +0100
-Message-Id: <20200316185006.576-21-philmd@redhat.com>
-X-Mailer: git-send-email 2.21.1
-In-Reply-To: <20200316185006.576-1-philmd@redhat.com>
-References: <20200316185006.576-1-philmd@redhat.com>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=YCj2j2QLvThI/7yEyvEGkibNCO6HQSKc0dHTHfIKDcY=;
+ b=foMvV5V+DqfAOuNrzqIVzqdBg+YmZvP5/AuCc9upG5WkJUu6RpjB4gLd3aOx7gALF1
+ n4CNtgpN0Je6NRF1wyCW4CYzdLw5v13erqdYPZiieveprQvEpLVttw2i9KDqrGUaYjOS
+ Bob47OiTLJYKn9y7uBPTBmzB1r/cx+V+CYLDdg7H6+KTNthyaFJWGTP+L2I/A3VEfdiz
+ tkbngeIO8yW9JIsblCL0916KD2gQNq1b/wXRO6SFj21V5AELyCV2RkuLsT3bJ+5OUSWL
+ hzQgcYL8vji6s2B5cDZy+CPc7TkbQQLQ00UFHIxIw1y6GH8w7GG7quH+b8CJUuAwZEHD
+ QObQ==
+X-Gm-Message-State: ANhLgQ395Su2RAOCovfdEqmkWI4cltdvH38Q55UcSYSamBq0ZztnxQx4
+ MjAe0gZyXdkY31Eyyt9LZleAm80fliqCCws0dC8=
+X-Google-Smtp-Source: ADFU+vt1UQZbBobBOZUFnYrin4HNu6UUV4fvJ3h+wNQic8DypOo+3LRiFcH2okRqlturOlaEhHGMiHec9oeAD65CExg=
+X-Received: by 2002:a1f:9d16:: with SMTP id g22mr1216404vke.22.1584385118812; 
+ Mon, 16 Mar 2020 11:58:38 -0700 (PDT)
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=UTF-8;
-	text/plain; charset="utf-8"
+References: <20200316185006.576-1-philmd@redhat.com>
+ <20200316185006.576-21-philmd@redhat.com>
+In-Reply-To: <20200316185006.576-21-philmd@redhat.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Mon, 16 Mar 2020 11:50:46 -0700
+Message-ID: <CAKmqyKNOkFcO3hzELJ49LR9XBfGnRaBu1Uw+1iuyoj8kU4Sp4Q@mail.gmail.com>
+Subject: Re: [PATCH v3 20/25] hw/riscv: Let devices own the MemoryRegion they
+ create
+To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>
+Cc: Paolo Bonzini <pbonzini@redhat.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Peter Maydell <peter.maydell@linaro.org>, 
+ "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
-X-Received-From: 63.128.21.74
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2607:f8b0:4864:20::a43
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -88,62 +74,73 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Mar 2020 18:52:01 -0000
+X-List-Received-Date: Mon, 16 Mar 2020 18:58:45 -0000
 
-Avoid orphan memory regions being added in the /unattached QOM
-container.
+On Mon, Mar 16, 2020 at 11:54 AM Philippe Mathieu-Daud=C3=A9
+<philmd@redhat.com> wrote:
+>
+> Avoid orphan memory regions being added in the /unattached QOM
+> container.
+>
+> This commit was produced with the Coccinelle script
+> scripts/coccinelle/memory-region-housekeeping.cocci.
+>
+> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
 
-This commit was produced with the Coccinelle script
-scripts/coccinelle/memory-region-housekeeping.cocci.
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
----
- hw/riscv/sifive_e.c | 6 +++---
- hw/riscv/sifive_u.c | 2 +-
- 2 files changed, 4 insertions(+), 4 deletions(-)
+Alistair
 
-diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
-index a1974ef7be..646553a7c3 100644
---- a/hw/riscv/sifive_e.c
-+++ b/hw/riscv/sifive_e.c
-@@ -145,8 +145,8 @@ static void riscv_sifive_e_soc_realize(DeviceState *dev=
-, Error **errp)
-                             &error_abort);
-=20
-     /* Mask ROM */
--    memory_region_init_rom(&s->mask_rom, NULL, "riscv.sifive.e.mrom",
--        memmap[SIFIVE_E_MROM].size, &error_fatal);
-+    memory_region_init_rom(&s->mask_rom, OBJECT(dev), "riscv.sifive.e.mrom=
+> ---
+>  hw/riscv/sifive_e.c | 6 +++---
+>  hw/riscv/sifive_u.c | 2 +-
+>  2 files changed, 4 insertions(+), 4 deletions(-)
+>
+> diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
+> index a1974ef7be..646553a7c3 100644
+> --- a/hw/riscv/sifive_e.c
+> +++ b/hw/riscv/sifive_e.c
+> @@ -145,8 +145,8 @@ static void riscv_sifive_e_soc_realize(DeviceState *d=
+ev, Error **errp)
+>                              &error_abort);
+>
+>      /* Mask ROM */
+> -    memory_region_init_rom(&s->mask_rom, NULL, "riscv.sifive.e.mrom",
+> -        memmap[SIFIVE_E_MROM].size, &error_fatal);
+> +    memory_region_init_rom(&s->mask_rom, OBJECT(dev), "riscv.sifive.e.mr=
+om",
+> +                           memmap[SIFIVE_E_MROM].size, &error_fatal);
+>      memory_region_add_subregion(sys_mem,
+>          memmap[SIFIVE_E_MROM].base, &s->mask_rom);
+>
+> @@ -208,7 +208,7 @@ static void riscv_sifive_e_soc_realize(DeviceState *d=
+ev, Error **errp)
+>          memmap[SIFIVE_E_PWM2].base, memmap[SIFIVE_E_PWM2].size);
+>
+>      /* Flash memory */
+> -    memory_region_init_rom(&s->xip_mem, NULL, "riscv.sifive.e.xip",
+> +    memory_region_init_rom(&s->xip_mem, OBJECT(dev), "riscv.sifive.e.xip=
 ",
-+                           memmap[SIFIVE_E_MROM].size, &error_fatal);
-     memory_region_add_subregion(sys_mem,
-         memmap[SIFIVE_E_MROM].base, &s->mask_rom);
-=20
-@@ -208,7 +208,7 @@ static void riscv_sifive_e_soc_realize(DeviceState *dev=
-, Error **errp)
-         memmap[SIFIVE_E_PWM2].base, memmap[SIFIVE_E_PWM2].size);
-=20
-     /* Flash memory */
--    memory_region_init_rom(&s->xip_mem, NULL, "riscv.sifive.e.xip",
-+    memory_region_init_rom(&s->xip_mem, OBJECT(dev), "riscv.sifive.e.xip",
-                            memmap[SIFIVE_E_XIP].size, &error_fatal);
-     memory_region_add_subregion(sys_mem, memmap[SIFIVE_E_XIP].base,
-         &s->xip_mem);
-diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-index 156a003642..662d42a5a7 100644
---- a/hw/riscv/sifive_u.c
-+++ b/hw/riscv/sifive_u.c
-@@ -497,7 +497,7 @@ static void riscv_sifive_u_soc_realize(DeviceState *dev=
-, Error **errp)
-                              &error_abort);
-=20
-     /* boot rom */
--    memory_region_init_rom(mask_rom, NULL, "riscv.sifive.u.mrom",
-+    memory_region_init_rom(mask_rom, OBJECT(dev), "riscv.sifive.u.mrom",
-                            memmap[SIFIVE_U_MROM].size, &error_fatal);
-     memory_region_add_subregion(system_memory, memmap[SIFIVE_U_MROM].base,
-                                 mask_rom);
---=20
-2.21.1
-
+>                             memmap[SIFIVE_E_XIP].size, &error_fatal);
+>      memory_region_add_subregion(sys_mem, memmap[SIFIVE_E_XIP].base,
+>          &s->xip_mem);
+> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+> index 156a003642..662d42a5a7 100644
+> --- a/hw/riscv/sifive_u.c
+> +++ b/hw/riscv/sifive_u.c
+> @@ -497,7 +497,7 @@ static void riscv_sifive_u_soc_realize(DeviceState *d=
+ev, Error **errp)
+>                               &error_abort);
+>
+>      /* boot rom */
+> -    memory_region_init_rom(mask_rom, NULL, "riscv.sifive.u.mrom",
+> +    memory_region_init_rom(mask_rom, OBJECT(dev), "riscv.sifive.u.mrom",
+>                             memmap[SIFIVE_U_MROM].size, &error_fatal);
+>      memory_region_add_subregion(system_memory, memmap[SIFIVE_U_MROM].bas=
+e,
+>                                  mask_rom);
+> --
+> 2.21.1
+>
+>
 
