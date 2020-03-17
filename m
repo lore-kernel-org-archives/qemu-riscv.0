@@ -1,68 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jDuwo-0006y3-G3
-	for mharc-qemu-riscv@gnu.org; Mon, 16 Mar 2020 14:58:46 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:48335)
+	id 1jE3Ua-00089V-79
+	for mharc-qemu-riscv@gnu.org; Tue, 17 Mar 2020 00:06:12 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:45404)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <alistair23@gmail.com>) id 1jDuwl-0006py-Pe
- for qemu-riscv@nongnu.org; Mon, 16 Mar 2020 14:58:44 -0400
+ (envelope-from <palmerdabbelt@google.com>) id 1jE3UX-00087c-Bv
+ for qemu-riscv@nongnu.org; Tue, 17 Mar 2020 00:06:10 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1jDuwk-0001MO-IB
- for qemu-riscv@nongnu.org; Mon, 16 Mar 2020 14:58:43 -0400
-Received: from mail-vk1-xa43.google.com ([2607:f8b0:4864:20::a43]:44920)
+ (envelope-from <palmerdabbelt@google.com>) id 1jE3UV-00029R-37
+ for qemu-riscv@nongnu.org; Tue, 17 Mar 2020 00:06:08 -0400
+Received: from mail-pg1-x536.google.com ([2607:f8b0:4864:20::536]:38693)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1jDuwh-0000cn-QE; Mon, 16 Mar 2020 14:58:39 -0400
-Received: by mail-vk1-xa43.google.com with SMTP id s194so5208348vkb.11;
- Mon, 16 Mar 2020 11:58:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=YCj2j2QLvThI/7yEyvEGkibNCO6HQSKc0dHTHfIKDcY=;
- b=bGlLYjqhuOBElLMaKSsrdR8mC6CRaROa6KBnTAsCpws2wpve3LntDOB0Q+oE4R0Idb
- Xn8nHKI2IbSTmNeMjeJaO01UwKNzHkrYG0rUasis1zkIRxIFq+MHhDkGW0kaP8z7tL4+
- iaknz1bsSRKSh7+Vlf2okzdk88wPqJ7WUyTLsJ7+fzuwPU36xVjshHKmoEkAD0kYysw/
- pJMJ1vjHXVogndtc2iF1sCN/OJloYUef8O8PWKDcAWByEIM4Fzu86oBH3FSV/qFgheEF
- XVjA5AJP9vcnuTaX0eDATnVVr8Uf3IGtnWTGqPKKdTF9/ObXE60DbfFDe+xrXTP9c+v2
- F+UA==
+ (Exim 4.71) (envelope-from <palmerdabbelt@google.com>)
+ id 1jE3UU-0001zC-O1
+ for qemu-riscv@nongnu.org; Tue, 17 Mar 2020 00:06:06 -0400
+Received: by mail-pg1-x536.google.com with SMTP id x7so10972902pgh.5
+ for <qemu-riscv@nongnu.org>; Mon, 16 Mar 2020 21:06:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
+ h=subject:date:message-id:mime-version:content-transfer-encoding:cc
+ :from:to; bh=iNBqy/EyGYwQ63RRDbQPMjqB6icieu8FIzbCkicjV2c=;
+ b=LHF/9M3V35NDN33t2dJlKN+4XJNsJBwuofv/9JOiPoQAAZgdD7tCc44RM/+Osu1Rc9
+ A9yOtIJRV2gqQLWWVdmkEdJVdJU/noxzE4iuTp03mRVjsmfgbO+9b0v5HSuAeHyWAdxe
+ 8l5L4+FJUKUoQJc5LfLlvpuXQR3M4NGS0K21i1GW+UiyH/3OVMSGfADu/LuChAQYKnT8
+ eQnvWS6r+lp+qKfEsBrsleE2CbonzEueYlHR9xq9fUBDEyg8AOAo4Fw/x9iaOPRgC/gU
+ VJbIxLLQ+D2kS3/fcCKsj6vMNjBbLCyQKA6LSMUU7K+ypiNvvi02G4JvA1sX6BBuNXHG
+ FVuQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=YCj2j2QLvThI/7yEyvEGkibNCO6HQSKc0dHTHfIKDcY=;
- b=foMvV5V+DqfAOuNrzqIVzqdBg+YmZvP5/AuCc9upG5WkJUu6RpjB4gLd3aOx7gALF1
- n4CNtgpN0Je6NRF1wyCW4CYzdLw5v13erqdYPZiieveprQvEpLVttw2i9KDqrGUaYjOS
- Bob47OiTLJYKn9y7uBPTBmzB1r/cx+V+CYLDdg7H6+KTNthyaFJWGTP+L2I/A3VEfdiz
- tkbngeIO8yW9JIsblCL0916KD2gQNq1b/wXRO6SFj21V5AELyCV2RkuLsT3bJ+5OUSWL
- hzQgcYL8vji6s2B5cDZy+CPc7TkbQQLQ00UFHIxIw1y6GH8w7GG7quH+b8CJUuAwZEHD
- QObQ==
-X-Gm-Message-State: ANhLgQ395Su2RAOCovfdEqmkWI4cltdvH38Q55UcSYSamBq0ZztnxQx4
- MjAe0gZyXdkY31Eyyt9LZleAm80fliqCCws0dC8=
-X-Google-Smtp-Source: ADFU+vt1UQZbBobBOZUFnYrin4HNu6UUV4fvJ3h+wNQic8DypOo+3LRiFcH2okRqlturOlaEhHGMiHec9oeAD65CExg=
-X-Received: by 2002:a1f:9d16:: with SMTP id g22mr1216404vke.22.1584385118812; 
- Mon, 16 Mar 2020 11:58:38 -0700 (PDT)
+ h=x-gm-message-state:subject:date:message-id:mime-version
+ :content-transfer-encoding:cc:from:to;
+ bh=iNBqy/EyGYwQ63RRDbQPMjqB6icieu8FIzbCkicjV2c=;
+ b=OK3BMVPucrxCTxZPPC3ERisDTnyJiwbrAsV6oedX7ZKyJOOviJMK3baUdQqwr1kwYG
+ 99S6dAJfqkuw8Q/SFaJwJb8yM68nq86vNQloCd0IbGrgqTjol3AbH2ZZPXUIZhEnPtsW
+ Rdqa8foPgYvJe3iEKoz2ghkF4gZAeyAc8FUInrR0Mu+nK6qmgSQL20Vf7DmR2oUctPko
+ X4ihj7NpQlWNjw9JIdwjHrFAlSuxqRU5O/HBYS83gL+z8qHC+Bm3jaTNKh1kT6ws7yyl
+ LpXw54rr3NiGOxOsTydezVBEiNbj7klim7xgOBpmuskaOu9lyfK86OTqmThjEq8ylBcl
+ T7YA==
+X-Gm-Message-State: ANhLgQ3DEMnOZfciFSbSrYB3ordixkr6t6D+ANKwIR/goEPMLyJRqzUn
+ JSs2fASjXqNKu+qQ68AYkYGYg0tY6ZhOMg==
+X-Google-Smtp-Source: ADFU+vu4KijjLwxveeTDD/6FM+mzdNt3hMowVffwXj0NpXu0qmYVmSpKZuJWn4gXGUoXt+B+HNV7tQ==
+X-Received: by 2002:a63:28c:: with SMTP id 134mr3009660pgc.165.1584417961985; 
+ Mon, 16 Mar 2020 21:06:01 -0700 (PDT)
+Received: from localhost (c-67-161-15-180.hsd1.ca.comcast.net. [67.161.15.180])
+ by smtp.gmail.com with ESMTPSA id 26sm849506pgs.85.2020.03.16.21.06.01
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 16 Mar 2020 21:06:01 -0700 (PDT)
+Subject: [PULL] RISC-V Patches for the 5.0 Soft Freeze, Part 5
+Date: Mon, 16 Mar 2020 21:05:41 -0700
+Message-Id: <20200317040547.222501-1-palmerdabbelt@google.com>
+X-Mailer: git-send-email 2.25.1.481.gfbce0eb801-goog
 MIME-Version: 1.0
-References: <20200316185006.576-1-philmd@redhat.com>
- <20200316185006.576-21-philmd@redhat.com>
-In-Reply-To: <20200316185006.576-21-philmd@redhat.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 16 Mar 2020 11:50:46 -0700
-Message-ID: <CAKmqyKNOkFcO3hzELJ49LR9XBfGnRaBu1Uw+1iuyoj8kU4Sp4Q@mail.gmail.com>
-Subject: Re: [PATCH v3 20/25] hw/riscv: Let devices own the MemoryRegion they
- create
-To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>
-Cc: Paolo Bonzini <pbonzini@redhat.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Peter Maydell <peter.maydell@linaro.org>, 
- "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
- Alistair Francis <Alistair.Francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Cc: qemu-riscv@nongnu.org,          qemu-devel@nongnu.org
+From: Palmer Dabbelt <palmerdabbelt@google.com>
+To: Peter Maydell <peter.maydell@linaro.org>
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::a43
+X-Received-From: 2607:f8b0:4864:20::536
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -74,73 +67,61 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Mar 2020 18:58:45 -0000
+X-List-Received-Date: Tue, 17 Mar 2020 04:06:10 -0000
 
-On Mon, Mar 16, 2020 at 11:54 AM Philippe Mathieu-Daud=C3=A9
-<philmd@redhat.com> wrote:
->
-> Avoid orphan memory regions being added in the /unattached QOM
-> container.
->
-> This commit was produced with the Coccinelle script
-> scripts/coccinelle/memory-region-housekeeping.cocci.
->
-> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
+The following changes since commit a98135f727595382e200d04c2996e868b7925a01:
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+  Merge remote-tracking branch 'remotes/kraxel/tags/vga-20200316-pull-request' into staging (2020-03-16 14:55:59 +0000)
 
-Alistair
+are available in the Git repository at:
 
-> ---
->  hw/riscv/sifive_e.c | 6 +++---
->  hw/riscv/sifive_u.c | 2 +-
->  2 files changed, 4 insertions(+), 4 deletions(-)
->
-> diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
-> index a1974ef7be..646553a7c3 100644
-> --- a/hw/riscv/sifive_e.c
-> +++ b/hw/riscv/sifive_e.c
-> @@ -145,8 +145,8 @@ static void riscv_sifive_e_soc_realize(DeviceState *d=
-ev, Error **errp)
->                              &error_abort);
->
->      /* Mask ROM */
-> -    memory_region_init_rom(&s->mask_rom, NULL, "riscv.sifive.e.mrom",
-> -        memmap[SIFIVE_E_MROM].size, &error_fatal);
-> +    memory_region_init_rom(&s->mask_rom, OBJECT(dev), "riscv.sifive.e.mr=
-om",
-> +                           memmap[SIFIVE_E_MROM].size, &error_fatal);
->      memory_region_add_subregion(sys_mem,
->          memmap[SIFIVE_E_MROM].base, &s->mask_rom);
->
-> @@ -208,7 +208,7 @@ static void riscv_sifive_e_soc_realize(DeviceState *d=
-ev, Error **errp)
->          memmap[SIFIVE_E_PWM2].base, memmap[SIFIVE_E_PWM2].size);
->
->      /* Flash memory */
-> -    memory_region_init_rom(&s->xip_mem, NULL, "riscv.sifive.e.xip",
-> +    memory_region_init_rom(&s->xip_mem, OBJECT(dev), "riscv.sifive.e.xip=
-",
->                             memmap[SIFIVE_E_XIP].size, &error_fatal);
->      memory_region_add_subregion(sys_mem, memmap[SIFIVE_E_XIP].base,
->          &s->xip_mem);
-> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-> index 156a003642..662d42a5a7 100644
-> --- a/hw/riscv/sifive_u.c
-> +++ b/hw/riscv/sifive_u.c
-> @@ -497,7 +497,7 @@ static void riscv_sifive_u_soc_realize(DeviceState *d=
-ev, Error **errp)
->                               &error_abort);
->
->      /* boot rom */
-> -    memory_region_init_rom(mask_rom, NULL, "riscv.sifive.u.mrom",
-> +    memory_region_init_rom(mask_rom, OBJECT(dev), "riscv.sifive.u.mrom",
->                             memmap[SIFIVE_U_MROM].size, &error_fatal);
->      memory_region_add_subregion(system_memory, memmap[SIFIVE_U_MROM].bas=
-e,
->                                  mask_rom);
-> --
-> 2.21.1
->
->
+  git@github.com:palmer-dabbelt/qemu.git tags/riscv-for-master-5.0-sf5
+
+for you to fetch changes up to c5969a3a3c2cb9ea02ffb7e86acb059d3cf8c264:
+
+  target/riscv: Fix VS mode interrupts forwarding. (2020-03-16 17:03:51 -0700)
+
+----------------------------------------------------------------
+RISC-V Patches for the 5.0 Soft Freeze, Part 5
+
+This tag contains the last of the patches I'd like to target for the 5.0 soft
+freeze.  At this point we're mostly collecting fixes, but there are a few new
+features.  The changes include:
+
+* An OpenSBI update, including the various bits necessary to put CI together
+  and an image for the 32-bit sifive_u board.
+* A fix that disallows TSR when outside of machine mode.
+* A fix for VS-mode interrupt forwarding.
+
+----------------------------------------------------------------
+Alistair Francis (1):
+      target/riscv: Correctly implement TSR trap
+
+Bin Meng (4):
+      roms: opensbi: Upgrade from v0.5 to v0.6
+      roms: opensbi: Add 32-bit firmware image for sifive_u machine
+      riscv: sifive_u: Update BIOS_FILENAME for 32-bit
+      gitlab-ci.yml: Add jobs to build OpenSBI firmware binaries
+
+Rajnesh Kanwal (1):
+      target/riscv: Fix VS mode interrupts forwarding.
+
+ .gitlab-ci-opensbi.yml                       |  63 +++++++++++++++++++++++++++
+ .gitlab-ci.d/opensbi/Dockerfile              |  33 ++++++++++++++
+ .gitlab-ci.yml                               |   1 +
+ Makefile                                     |   2 +-
+ hw/riscv/sifive_u.c                          |   6 ++-
+ pc-bios/opensbi-riscv32-sifive_u-fw_jump.bin | Bin 0 -> 49472 bytes
+ pc-bios/opensbi-riscv32-virt-fw_jump.bin     | Bin 40984 -> 41280 bytes
+ pc-bios/opensbi-riscv64-sifive_u-fw_jump.bin | Bin 49160 -> 53760 bytes
+ pc-bios/opensbi-riscv64-virt-fw_jump.bin     | Bin 45064 -> 49664 bytes
+ roms/Makefile                                |   7 +++
+ roms/opensbi                                 |   2 +-
+ target/riscv/cpu_helper.c                    |   9 +++-
+ target/riscv/op_helper.c                     |   2 +-
+ 13 files changed, 120 insertions(+), 5 deletions(-)
+ create mode 100644 .gitlab-ci-opensbi.yml
+ create mode 100644 .gitlab-ci.d/opensbi/Dockerfile
+ create mode 100644 pc-bios/opensbi-riscv32-sifive_u-fw_jump.bin
+
 
