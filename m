@@ -1,33 +1,34 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jEFTc-0005Gf-8r
-	for mharc-qemu-riscv@gnu.org; Tue, 17 Mar 2020 12:54:00 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:57272)
+	id 1jEFVY-0000Cd-Ua
+	for mharc-qemu-riscv@gnu.org; Tue, 17 Mar 2020 12:56:00 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59369)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <zhiwei_liu@c-sky.com>) id 1jEFTZ-0005BI-9n
- for qemu-riscv@nongnu.org; Tue, 17 Mar 2020 12:53:58 -0400
+ (envelope-from <zhiwei_liu@c-sky.com>) id 1jEFVW-00007s-5x
+ for qemu-riscv@nongnu.org; Tue, 17 Mar 2020 12:55:59 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <zhiwei_liu@c-sky.com>) id 1jEFTX-00023y-W8
- for qemu-riscv@nongnu.org; Tue, 17 Mar 2020 12:53:57 -0400
-Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:40025)
+ (envelope-from <zhiwei_liu@c-sky.com>) id 1jEFVU-0004aO-K2
+ for qemu-riscv@nongnu.org; Tue, 17 Mar 2020 12:55:58 -0400
+Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:40747)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1jEFTU-0000I2-Mi; Tue, 17 Mar 2020 12:53:53 -0400
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07966728|-1; BR=01201311R111ec; CH=green;
- DM=||false|; DS=SPAM|spam_blackmail|0.843017-4.05004e-05-0.156943;
- FP=0|0|0|0|0|-1|-1|-1; HT=e01a16368; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS;
- RN=10; RT=10; SR=0; TI=SMTPD_---.H1.e5rA_1584464023; 
+ id 1jEFVR-0002W1-8R; Tue, 17 Mar 2020 12:55:53 -0400
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07669276|-1; CH=blue; DM=||false|;
+ DS=CONTINUE|ham_system_inform|0.606618-0.000358709-0.393023;
+ FP=0|0|0|0|0|-1|-1|-1; HT=e02c03305; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS;
+ RN=10; RT=10; SR=0; TI=SMTPD_---.H1.IAzM_1584464144; 
 Received: from L-PF1D6DP4-1208.hz.ali.com(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.H1.e5rA_1584464023) by smtp.aliyun-inc.com(10.147.40.7);
- Wed, 18 Mar 2020 00:53:44 +0800
+ fp:SMTPD_---.H1.IAzM_1584464144)
+ by smtp.aliyun-inc.com(10.147.44.118);
+ Wed, 18 Mar 2020 00:55:45 +0800
 From: LIU Zhiwei <zhiwei_liu@c-sky.com>
 To: richard.henderson@linaro.org, alistair23@gmail.com,
  chihmin.chao@sifive.com, palmer@dabbelt.com
 Cc: wenmeng_zhang@c-sky.com, wxy194768@alibaba-inc.com,
  guoren@linux.alibaba.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
  LIU Zhiwei <zhiwei_liu@c-sky.com>
-Subject: [PATCH v6 53/61] target/riscv: vector iota instruction
-Date: Tue, 17 Mar 2020 23:06:45 +0800
-Message-Id: <20200317150653.9008-54-zhiwei_liu@c-sky.com>
+Subject: [PATCH v6 54/61] target/riscv: vector element index instruction
+Date: Tue, 17 Mar 2020 23:06:46 +0800
+Message-Id: <20200317150653.9008-55-zhiwei_liu@c-sky.com>
 X-Mailer: git-send-email 2.23.0
 In-Reply-To: <20200317150653.9008-1-zhiwei_liu@c-sky.com>
 References: <20200317150653.9008-1-zhiwei_liu@c-sky.com>
@@ -46,91 +47,96 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Mar 2020 16:53:59 -0000
+X-List-Received-Date: Tue, 17 Mar 2020 16:55:59 -0000
 
 Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/riscv/helper.h                   |  5 ++++
- target/riscv/insn32.decode              |  1 +
- target/riscv/insn_trans/trans_rvv.inc.c | 22 ++++++++++++++++++
- target/riscv/vector_helper.c            | 31 +++++++++++++++++++++++++
- 4 files changed, 59 insertions(+)
+ target/riscv/helper.h                   |  5 +++++
+ target/riscv/insn32.decode              |  2 ++
+ target/riscv/insn_trans/trans_rvv.inc.c | 21 ++++++++++++++++++++
+ target/riscv/vector_helper.c            | 26 +++++++++++++++++++++++++
+ 4 files changed, 54 insertions(+)
 
 diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-index 3761b48eca..8e7bef8f96 100644
+index 8e7bef8f96..3d0e2e72bd 100644
 --- a/target/riscv/helper.h
 +++ b/target/riscv/helper.h
-@@ -1099,3 +1099,8 @@ DEF_HELPER_4(vmfirst_m, tl, ptr, ptr, env, i32)
- DEF_HELPER_5(vmsbf_m, void, ptr, ptr, ptr, env, i32)
- DEF_HELPER_5(vmsif_m, void, ptr, ptr, ptr, env, i32)
- DEF_HELPER_5(vmsof_m, void, ptr, ptr, ptr, env, i32)
+@@ -1104,3 +1104,8 @@ DEF_HELPER_5(viota_m_b, void, ptr, ptr, ptr, env, i32)
+ DEF_HELPER_5(viota_m_h, void, ptr, ptr, ptr, env, i32)
+ DEF_HELPER_5(viota_m_w, void, ptr, ptr, ptr, env, i32)
+ DEF_HELPER_5(viota_m_d, void, ptr, ptr, ptr, env, i32)
 +
-+DEF_HELPER_5(viota_m_b, void, ptr, ptr, ptr, env, i32)
-+DEF_HELPER_5(viota_m_h, void, ptr, ptr, ptr, env, i32)
-+DEF_HELPER_5(viota_m_w, void, ptr, ptr, ptr, env, i32)
-+DEF_HELPER_5(viota_m_d, void, ptr, ptr, ptr, env, i32)
++DEF_HELPER_4(vid_v_b, void, ptr, ptr, env, i32)
++DEF_HELPER_4(vid_v_h, void, ptr, ptr, env, i32)
++DEF_HELPER_4(vid_v_w, void, ptr, ptr, env, i32)
++DEF_HELPER_4(vid_v_d, void, ptr, ptr, env, i32)
 diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index b2bc6ab3dd..37756fa76d 100644
+index 37756fa76d..1231628cb2 100644
 --- a/target/riscv/insn32.decode
 +++ b/target/riscv/insn32.decode
-@@ -558,6 +558,7 @@ vmfirst_m       010101 . ..... ----- 010 ..... 1010111 @r2_vm
- vmsbf_m         010110 . ..... 00001 010 ..... 1010111 @r2_vm
+@@ -70,6 +70,7 @@
+ @r2      .......   ..... ..... ... ..... ....... %rs1 %rd
+ @r2_nfvm ... ... vm:1 ..... ..... ... ..... ....... &r2nfvm %nf %rs1 %rd
+ @r2_vm   ...... vm:1 ..... ..... ... ..... ....... &rmr %rs2 %rd
++@r1_vm   ...... vm:1 ..... ..... ... ..... ....... %rd
+ @r_nfvm  ... ... vm:1 ..... ..... ... ..... ....... &rnfvm %nf %rs2 %rs1 %rd
+ @r_vm    ...... vm:1 ..... ..... ... ..... ....... &rmrr %rs2 %rs1 %rd
+ @r_vm_1  ...... . ..... ..... ... ..... .......    &rmrr vm=1 %rs2 %rs1 %rd
+@@ -559,6 +560,7 @@ vmsbf_m         010110 . ..... 00001 010 ..... 1010111 @r2_vm
  vmsif_m         010110 . ..... 00011 010 ..... 1010111 @r2_vm
  vmsof_m         010110 . ..... 00010 010 ..... 1010111 @r2_vm
-+viota_m         010110 . ..... 10000 010 ..... 1010111 @r2_vm
+ viota_m         010110 . ..... 10000 010 ..... 1010111 @r2_vm
++vid_v           010110 . 00000 10001 010 ..... 1010111 @r1_vm
  
  vsetvli         0 ........... ..... 111 ..... 1010111  @r2_zimm
  vsetvl          1000000 ..... ..... 111 ..... 1010111  @r
 diff --git a/target/riscv/insn_trans/trans_rvv.inc.c b/target/riscv/insn_trans/trans_rvv.inc.c
-index 7faaa6c51b..798e7c7cff 100644
+index 798e7c7cff..fae72acaa1 100644
 --- a/target/riscv/insn_trans/trans_rvv.inc.c
 +++ b/target/riscv/insn_trans/trans_rvv.inc.c
-@@ -2304,3 +2304,25 @@ static bool trans_##NAME(DisasContext *s, arg_rmr *a)              \
- GEN_M_TRANS(vmsbf_m)
- GEN_M_TRANS(vmsif_m)
- GEN_M_TRANS(vmsof_m)
+@@ -2326,3 +2326,24 @@ static bool trans_viota_m(DisasContext *s, arg_viota_m *a)
+     }
+     return false;
+ }
 +
-+/* Vector Iota Instruction */
-+static bool trans_viota_m(DisasContext *s, arg_viota_m *a)
++/* Vector Element Index Instruction */
++static bool trans_vid_v(DisasContext *s, arg_vid_v *a)
 +{
 +    if (vext_check_isa_ill(s) &&
 +        vext_check_reg(s, a->rd, false) &&
-+        vext_check_overlap_group(a->rd, 1 << s->lmul, a->rs2, 1) &&
-+        (a->vm != 0 || a->rd != 0)) {
++        vext_check_overlap_mask(s, a->rd, a->vm, false)) {
 +        uint32_t data = 0;
 +        data = FIELD_DP32(data, VDATA, MLEN, s->mlen);
 +        data = FIELD_DP32(data, VDATA, VM, a->vm);
 +        data = FIELD_DP32(data, VDATA, LMUL, s->lmul);
-+        static gen_helper_gvec_3_ptr * const fns[4] = {
-+            gen_helper_viota_m_b, gen_helper_viota_m_h,
-+            gen_helper_viota_m_w, gen_helper_viota_m_d,
++        static gen_helper_gvec_2_ptr * const fns[4] = {
++            gen_helper_vid_v_b, gen_helper_vid_v_h,
++            gen_helper_vid_v_w, gen_helper_vid_v_d,
 +        };
-+        tcg_gen_gvec_3_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),
-+            vreg_ofs(s, a->rs2), cpu_env, 0, s->vlen / 8, data, fns[s->sew]);
++        tcg_gen_gvec_2_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),
++            cpu_env, 0, s->vlen / 8, data, fns[s->sew]);
 +        return true;
 +    }
 +    return false;
 +}
 diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index 0bcb05a9dd..43bf61caca 100644
+index 43bf61caca..769894c5be 100644
 --- a/target/riscv/vector_helper.c
 +++ b/target/riscv/vector_helper.c
-@@ -4616,3 +4616,34 @@ void HELPER(vmsof_m)(void *vd, void *v0, void *vs2, CPURISCVState *env,
- {
-     vmsetm(vd, v0, vs2, env, desc, ONLY_FIRST);
- }
+@@ -4647,3 +4647,29 @@ GEN_VEXT_VIOTA_M(viota_m_b, uint8_t, H1, clearb)
+ GEN_VEXT_VIOTA_M(viota_m_h, uint16_t, H2, clearh)
+ GEN_VEXT_VIOTA_M(viota_m_w, uint32_t, H4, clearl)
+ GEN_VEXT_VIOTA_M(viota_m_d, uint64_t, H8, clearq)
 +
-+/* Vector Iota Instruction */
-+#define GEN_VEXT_VIOTA_M(NAME, ETYPE, H, CLEAR_FN)                        \
-+void HELPER(NAME)(void *vd, void *v0, void *vs2, CPURISCVState *env,      \
-+        uint32_t desc)                                                    \
++/* Vector Element Index Instruction */
++#define GEN_VEXT_VID_V(NAME, ETYPE, H, CLEAR_FN)                          \
++void HELPER(NAME)(void *vd, void *v0, CPURISCVState *env, uint32_t desc)  \
 +{                                                                         \
 +    uint32_t mlen = vext_mlen(desc);                                      \
 +    uint32_t vlmax = env_archcpu(env)->cfg.vlen / mlen;                   \
 +    uint32_t vm = vext_vm(desc);                                          \
 +    uint32_t vl = env->vl;                                                \
-+    uint32_t sum = 0;                                                     \
 +    int i;                                                                \
 +                                                                          \
 +    if (vl == 0) {                                                        \
@@ -140,17 +146,14 @@ index 0bcb05a9dd..43bf61caca 100644
 +        if (!vm && !vext_elem_mask(v0, mlen, i)) {                        \
 +            continue;                                                     \
 +        }                                                                 \
-+        *((ETYPE *)vd + H(i)) = sum;                                      \
-+        if (vext_elem_mask(vs2, mlen, i)) {                               \
-+            sum++;                                                        \
-+        }                                                                 \
++        *((ETYPE *)vd + H(i)) = i;                                        \
 +    }                                                                     \
 +    CLEAR_FN(vd, vl, vl * sizeof(ETYPE), vlmax * sizeof(ETYPE));          \
 +}
-+GEN_VEXT_VIOTA_M(viota_m_b, uint8_t, H1, clearb)
-+GEN_VEXT_VIOTA_M(viota_m_h, uint16_t, H2, clearh)
-+GEN_VEXT_VIOTA_M(viota_m_w, uint32_t, H4, clearl)
-+GEN_VEXT_VIOTA_M(viota_m_d, uint64_t, H8, clearq)
++GEN_VEXT_VID_V(vid_v_b, uint8_t, H1, clearb)
++GEN_VEXT_VID_V(vid_v_h, uint16_t, H2, clearh)
++GEN_VEXT_VID_V(vid_v_w, uint32_t, H4, clearl)
++GEN_VEXT_VID_V(vid_v_d, uint64_t, H8, clearq)
 -- 
 2.23.0
 
