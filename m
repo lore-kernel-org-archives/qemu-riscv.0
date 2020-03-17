@@ -1,80 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jEA6O-0007Pv-PS
-	for mharc-qemu-riscv@gnu.org; Tue, 17 Mar 2020 07:09:40 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:35562)
+	id 1jEBni-0001zu-Aj
+	for mharc-qemu-riscv@gnu.org; Tue, 17 Mar 2020 08:58:30 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:60489)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <peter.maydell@linaro.org>) id 1jEA6L-0007OB-NN
- for qemu-riscv@nongnu.org; Tue, 17 Mar 2020 07:09:38 -0400
+ (envelope-from <peter.maydell@linaro.org>) id 1jEBnf-0001wu-I1
+ for qemu-riscv@nongnu.org; Tue, 17 Mar 2020 08:58:28 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <peter.maydell@linaro.org>) id 1jEA6K-0006cc-My
- for qemu-riscv@nongnu.org; Tue, 17 Mar 2020 07:09:37 -0400
-Received: from mail-oi1-x243.google.com ([2607:f8b0:4864:20::243]:45018)
+ (envelope-from <peter.maydell@linaro.org>) id 1jEBne-0003NE-2N
+ for qemu-riscv@nongnu.org; Tue, 17 Mar 2020 08:58:27 -0400
+Received: from mail-oi1-x242.google.com ([2607:f8b0:4864:20::242]:41613)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <peter.maydell@linaro.org>)
- id 1jEA6K-0006W6-HL
- for qemu-riscv@nongnu.org; Tue, 17 Mar 2020 07:09:36 -0400
-Received: by mail-oi1-x243.google.com with SMTP id d62so21181861oia.11
- for <qemu-riscv@nongnu.org>; Tue, 17 Mar 2020 04:09:36 -0700 (PDT)
+ id 1jEBnd-0003Ep-Rv
+ for qemu-riscv@nongnu.org; Tue, 17 Mar 2020 08:58:25 -0400
+Received: by mail-oi1-x242.google.com with SMTP id b17so6624363oic.8
+ for <qemu-riscv@nongnu.org>; Tue, 17 Mar 2020 05:58:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=NXc1CMVP8fPkOAEbAXSA1LX5CXyYPNg1sYK75gFtxkA=;
- b=AKYFtF/g6sx/HiI0KzPvMFmMkCrG9HVQZwHH//m5UuO3M10DTjRrbinSx1ERjGgAIy
- IFJBbBo9FEDq+FYlh0xEv3STgi24H0e1TuIl2f0xaxHJPWvTr5ci+6VcJ6qASajowgto
- QTZr1eGASXUMcw8Twz25eewAXhdMjPdaUiKsw46CzKLWF15RZK+mYKmpTCOtSt+ysACS
- WHfGCZSLnNicLT8PU5H4DLccmFTS13K1OHrf3RcWM9ZQOmaXdVVB31gx19T/xfL3r5g7
- R01/EmMI04lWnYIUnT0hPYqgbNZ0EWVTISaSWBCoErPVTnwSG8LmKalh5AL0iCLVrfir
- b0yw==
+ :cc; bh=vEyOiHsdkpDwrVPBg4od8ujETT3HpbjzMWimG7ThbVk=;
+ b=FXOju6qy3oD64HclHSnvNXQR6qUBDey+YH6dLE2VkNCVekC8byyx3NxWI7phQ60jRl
+ u7lFrbc60hBFLhFjhvLW6uUVXVioegKd+wgA09WjocZa+y1kNAfmv4xUhrMytD0l2L93
+ tyWdGCZuTWlvjUdFqMftixn5teiq07GqQitAhzUDNoAdaVWtxTBsNGuaKsFzzavgQQx0
+ 2eCHDxqgJ8KLbnpB+YK4MKffLo5Q8f2o2f1dac0723I/0WlPpRQPU4/X2SDSh/VthrE1
+ TRL5/NLLiy98JX9WP9J5JnBl7ZCDPLt+7QjoDD/c0zhqwwKbcSkICBKiQnOZNIG/kk+F
+ eKnw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=NXc1CMVP8fPkOAEbAXSA1LX5CXyYPNg1sYK75gFtxkA=;
- b=OR4dP9iW70G5V6x6ifEG/aS4EDiSnoK0JnACKdzqKsWCR9U3cMFPuOf7aZrrTMq+8y
- Nzx+VL8FzKCpiIAGzufwoy2mefaBLAdAzPOrbKJHpa/7DreCpfR2fkYtIElo/OQ/8dW+
- ikB+ZKPEQKSdBI6T15c4KDhrpY6oEa32QB04+RSD1SzRE0bgv63fuTJyYNsMSI1BRXjs
- dnxr4XwSbTM29RC8E03nvv/ZAjzI/P/O5lpa8WjGOYrZjUOm9KOWUGodAAOt7giPXe0v
- i0371sLJ9rwpK6f3wi+dhqb8An7uSH5bEU8stXZFCz+TMFXCCSz6LoJsQeDgfYl2e5jm
- tl8w==
-X-Gm-Message-State: ANhLgQ2fb7oxzAs0CX9PCoESYf/ynXvWdYENRdWngBEnAIJiPw4S6Ine
- rIUvN5Z3lKWFVS5wHX4NG4yrUpova+nnUQVdiMolJQ==
-X-Google-Smtp-Source: ADFU+vs2c9DxpS0l4trZekhVLc3xZAcpRkIj9P/idCPZL/Dwnk4e6YmgjRqCs9EAE8eGRtSGWMpvmCBrez5pnUn1SKo=
-X-Received: by 2002:aca:190f:: with SMTP id l15mr2930921oii.48.1584443374646; 
- Tue, 17 Mar 2020 04:09:34 -0700 (PDT)
+ :message-id:subject:to:cc;
+ bh=vEyOiHsdkpDwrVPBg4od8ujETT3HpbjzMWimG7ThbVk=;
+ b=gfg2OHjxPhd+G54eGbMms/zTOk2yYEZnVgSRR1BFII/41HHITF5dIEXOPhzhkUni3y
+ spED0MJsUGCPe6Hm0PskKdHmHX/P3TL4j1VNcWJEe/qULRk5Kr8bJxwhieNaYjgpgiE3
+ Y9YhxpD/1MPtV826lI9GUdGWqAICmJ3M5Z+X28z8CXWFlCVqHuqfKedgThTeLc7VTEzo
+ IZ5ZmS3JvHmudMTT/cnXy7/lG1kl5WUTdZwV0Nm9dRXVD4LiMvH4bk/PfFzBa1rpTDSu
+ Z/r06sdJ7jGTV7HFqhF9iDOb/rcs/2wAEYxjBeDp+3xMJ++JhbleTrsH9ElLfGOvcKUs
+ IWSg==
+X-Gm-Message-State: ANhLgQ3sA5PgNTtzREYlPi5LHj0LAt371p68BmpNcL4jK8xGilZAnDe5
+ hkuoHrsJsCPAYRSlrQ5qN3WptDPidDLl4kl64LeNlA==
+X-Google-Smtp-Source: ADFU+vuiwazAjoxQ7YHwGhvnyjgLXrD8+Zl7gAbcwlbqqC9jnX1qXW9hUwn7VwApLlSImh7LvsBX9zQxIM1ssH+Nzog=
+X-Received: by 2002:aca:5b07:: with SMTP id p7mr3219694oib.146.1584449904852; 
+ Tue, 17 Mar 2020 05:58:24 -0700 (PDT)
 MIME-Version: 1.0
-References: <20200303100511.5498-1-peter.maydell@linaro.org>
- <c71dbe77-a883-361b-e33c-ed85ce07c0de@redhat.com>
-In-Reply-To: <c71dbe77-a883-361b-e33c-ed85ce07c0de@redhat.com>
+References: <20200317040547.222501-1-palmerdabbelt@google.com>
+In-Reply-To: <20200317040547.222501-1-palmerdabbelt@google.com>
 From: Peter Maydell <peter.maydell@linaro.org>
-Date: Tue, 17 Mar 2020 11:09:22 +0000
-Message-ID: <CAFEAcA-gZnOVD9MPwUBCcA4fvrTSaE1xEvd9dyr_r1RctiPJhg@mail.gmail.com>
-Subject: Re: [PATCH] cpu: Use DeviceClass reset instead of a special CPUClass
- reset
-To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>
-Cc: QEMU Developers <qemu-devel@nongnu.org>, Chris Wulff <crwulff@gmail.com>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- David Hildenbrand <david@redhat.com>, 
- Anthony Green <green@moxielogic.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>, 
- Max Filippov <jcmvbkbc@gmail.com>, Alistair Francis <Alistair.Francis@wdc.com>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, Marek Vasut <marex@denx.de>,
- qemu-ppc <qemu-ppc@nongnu.org>, 
- Aleksandar Rikalo <aleksandar.rikalo@rt-rk.com>,
- Richard Henderson <rth@twiddle.net>, 
- Artyom Tarasenko <atar4qemu@gmail.com>, Eduardo Habkost <ehabkost@redhat.com>, 
- qemu-s390x <qemu-s390x@nongnu.org>, qemu-arm <qemu-arm@nongnu.org>, 
- Stafford Horne <shorne@gmail.com>, David Gibson <david@gibson.dropbear.id.au>, 
- "open list:RISC-V" <qemu-riscv@nongnu.org>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
- Cornelia Huck <cohuck@redhat.com>, Laurent Vivier <laurent@vivier.eu>,
- Michael Walle <michael@walle.cc>, Palmer Dabbelt <palmer@dabbelt.com>,
- Aleksandar Markovic <amarkovic@wavecomp.com>, 
- Paolo Bonzini <pbonzini@redhat.com>, Aurelien Jarno <aurelien@aurel32.net>
+Date: Tue, 17 Mar 2020 12:58:13 +0000
+Message-ID: <CAFEAcA-Gm8U44LiS3rUxMi-qcnRJWgtisdEfJRPC4stkrbnOpg@mail.gmail.com>
+Subject: Re: [PULL] RISC-V Patches for the 5.0 Soft Freeze, Part 5
+To: Palmer Dabbelt <palmerdabbelt@google.com>
+Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ QEMU Developers <qemu-devel@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::243
+X-Received-From: 2607:f8b0:4864:20::242
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -86,20 +65,40 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Mar 2020 11:09:38 -0000
+X-List-Received-Date: Tue, 17 Mar 2020 12:58:28 -0000
 
-On Tue, 17 Mar 2020 at 11:01, Philippe Mathieu-Daud=C3=A9 <philmd@redhat.co=
-m> wrote:
+On Tue, 17 Mar 2020 at 04:06, Palmer Dabbelt <palmerdabbelt@google.com> wrote:
 >
-> ping
+> The following changes since commit a98135f727595382e200d04c2996e868b7925a01:
+>
+>   Merge remote-tracking branch 'remotes/kraxel/tags/vga-20200316-pull-request' into staging (2020-03-16 14:55:59 +0000)
+>
+> are available in the Git repository at:
+>
+>   git@github.com:palmer-dabbelt/qemu.git tags/riscv-for-master-5.0-sf5
+>
+> for you to fetch changes up to c5969a3a3c2cb9ea02ffb7e86acb059d3cf8c264:
+>
+>   target/riscv: Fix VS mode interrupts forwarding. (2020-03-16 17:03:51 -0700)
+>
+> ----------------------------------------------------------------
+> RISC-V Patches for the 5.0 Soft Freeze, Part 5
+>
+> This tag contains the last of the patches I'd like to target for the 5.0 soft
+> freeze.  At this point we're mostly collecting fixes, but there are a few new
+> features.  The changes include:
+>
+> * An OpenSBI update, including the various bits necessary to put CI together
+>   and an image for the 32-bit sifive_u board.
+> * A fix that disallows TSR when outside of machine mode.
+> * A fix for VS-mode interrupt forwarding.
+>
 
-Eduardo said he'd queued it -- I've been assuming he'll send
-a pullreq for it.
 
-(The followup work I was planning to base on this turned out
-to have complications I hadn't expected, so I've put it on
-the shelf for the moment. But this is still a good bit of cleanup.)
+Applied, thanks.
 
-thanks
+Please update the changelog at https://wiki.qemu.org/ChangeLog/5.0
+for any user-visible changes.
+
 -- PMM
 
