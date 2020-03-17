@@ -1,43 +1,75 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jEDsE-00057q-Bz
-	for mharc-qemu-riscv@gnu.org; Tue, 17 Mar 2020 11:11:18 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:56842)
+	id 1jEDsd-0005YZ-2y
+	for mharc-qemu-riscv@gnu.org; Tue, 17 Mar 2020 11:11:43 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:57152)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <zhiwei_liu@c-sky.com>) id 1jEDsC-000547-2J
- for qemu-riscv@nongnu.org; Tue, 17 Mar 2020 11:11:17 -0400
+ (envelope-from <richard.henderson@linaro.org>) id 1jEDsa-0005Ut-Uf
+ for qemu-riscv@nongnu.org; Tue, 17 Mar 2020 11:11:41 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <zhiwei_liu@c-sky.com>) id 1jEDsA-0007DY-SY
- for qemu-riscv@nongnu.org; Tue, 17 Mar 2020 11:11:15 -0400
-Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:49959)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1jEDs7-0006HQ-UZ; Tue, 17 Mar 2020 11:11:12 -0400
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07499207|-1; CH=green; DM=||false|;
- DS=CONTINUE|ham_alarm|0.0142549-0.000181945-0.985563; FP=0|0|0|0|0|-1|-1|-1;
- HT=e02c03305; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS; RN=11; RT=11; SR=0;
- TI=SMTPD_---.H0zRpQq_1584457859; 
-Received: from L-PF1D6DP4-1208.hz.ali.com(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.H0zRpQq_1584457859)
- by smtp.aliyun-inc.com(10.147.40.233);
- Tue, 17 Mar 2020 23:11:00 +0800
-From: LIU Zhiwei <zhiwei_liu@c-sky.com>
-To: richard.henderson@linaro.org, alistair23@gmail.com,
+ (envelope-from <richard.henderson@linaro.org>) id 1jEDsW-0000eu-3d
+ for qemu-riscv@nongnu.org; Tue, 17 Mar 2020 11:11:40 -0400
+Received: from mail-pf1-x443.google.com ([2607:f8b0:4864:20::443]:44785)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
+ id 1jEDsV-0000T4-8w
+ for qemu-riscv@nongnu.org; Tue, 17 Mar 2020 11:11:35 -0400
+Received: by mail-pf1-x443.google.com with SMTP id b72so12093478pfb.11
+ for <qemu-riscv@nongnu.org>; Tue, 17 Mar 2020 08:11:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=Tta7EC21Fymxe6MQDAH1hWkr88blEIewHExq5yASP0E=;
+ b=eymm8XtQiI5HEMbR6UtNQUbCmYcMFj3GOk2hCkvFrjaKhhnPfJaUfSr4q7WfRJAWcI
+ Q/x4HXISuatPO7+G4woHBfjdoCXluP0IRNiw19rM7EzeQWjG5CLs482kN/5MlEIZu8Z/
+ g/MwwcYY8C7i3zaoT+3T6fhmQqWKPkLtUR/+j6TjEFzOpeQXs0LhLwgRh5fYkI6lzCgY
+ covhyViWpFdI9DGZFUW4PhK/F13EQswuwA0oZZaaqyJau34EUg16xPzbsS5KpMcTO0m7
+ mJCJHN2PxsQJOIdnVzg8jmpZJ1M8k69hAQ8H63FeZvGIrcYuFCK0z0FXAfJ8dNawIiPd
+ mF8g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=Tta7EC21Fymxe6MQDAH1hWkr88blEIewHExq5yASP0E=;
+ b=WboABJJkQYN05k0msuflIBHl1tzPNSyxWZLeHpL3ptWjVsX3tbXYKCNgVEcSRV5l3R
+ pHhti85nqYHNfs7XotRuCxFAnHTx1nuevAqp8LtEO+dBWHjJJnlCrpSaPNhiBj4vWa+1
+ 5tqbfT+ilkiiZAALnpcEDagKYuFp3J6cWE/p+BZJB5MIbKsgH9z6aPu0QkIvyXcWi8wA
+ j2kr/rzQrLa1J7dJBHahTi4pzS2UFZNB4i19wh/3O+w+Puu/+vymSwMVd3vP+KutV5AH
+ kvZcbkqiz/9TCEfr7yxohn/3opF7chje+aShBxyr5NWRwaY/OphVuXdb5a2WZtbAcWOB
+ QRbQ==
+X-Gm-Message-State: ANhLgQ2pZT3b0T2zqdSewDYrFEN3Of3oveBQA9BkrA2W76gYpWU03oPt
+ 5eG5HovsAzrTnOIWUEM6FEBGwGv4YsI=
+X-Google-Smtp-Source: ADFU+vumVlcmLzxrLWRFzRsLLMYuQHyeX++NvPFh7Xn+2D3XzkQr7YvkfMxdOvBsGTYzsJreaoz9qg==
+X-Received: by 2002:aa7:8156:: with SMTP id d22mr3155152pfn.69.1584457893074; 
+ Tue, 17 Mar 2020 08:11:33 -0700 (PDT)
+Received: from [192.168.1.11] (97-126-123-70.tukw.qwest.net. [97.126.123.70])
+ by smtp.gmail.com with ESMTPSA id
+ h19sm3430803pfn.205.2020.03.17.08.11.31
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 17 Mar 2020 08:11:32 -0700 (PDT)
+Subject: Re: [PATCH v5 56/60] target/riscv: floating-point scalar move
+ instructions
+To: LIU Zhiwei <zhiwei_liu@c-sky.com>, alistair23@gmail.com,
  chihmin.chao@sifive.com, palmer@dabbelt.com
 Cc: wenmeng_zhang@c-sky.com, wxy194768@alibaba-inc.com,
- guoren@linux.alibaba.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- LIU Zhiwei <zhiwei_liu@c-sky.com>,
- Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH v6 02/61] target/riscv: implementation-defined constant
- parameters
-Date: Tue, 17 Mar 2020 23:05:54 +0800
-Message-Id: <20200317150653.9008-3-zhiwei_liu@c-sky.com>
-X-Mailer: git-send-email 2.23.0
-In-Reply-To: <20200317150653.9008-1-zhiwei_liu@c-sky.com>
-References: <20200317150653.9008-1-zhiwei_liu@c-sky.com>
+ guoren@linux.alibaba.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+References: <20200312145900.2054-1-zhiwei_liu@c-sky.com>
+ <20200312145900.2054-57-zhiwei_liu@c-sky.com>
+ <8b9161d1-f64f-5677-70a7-ec197d9d3d43@linaro.org>
+ <f09dfcee-3ac3-80f0-938f-30654d418605@c-sky.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+Message-ID: <1d90d6cb-ff65-5c63-d76d-dc375f9dc5bf@linaro.org>
+Date: Tue, 17 Mar 2020 08:11:29 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.4.1
 MIME-Version: 1.0
+In-Reply-To: <f09dfcee-3ac3-80f0-938f-30654d418605@c-sky.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
 Content-Transfer-Encoding: 8bit
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 3.x [generic] [fuzzy]
-X-Received-From: 121.197.200.217
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2607:f8b0:4864:20::443
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -49,83 +81,26 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Mar 2020 15:11:17 -0000
+X-List-Received-Date: Tue, 17 Mar 2020 15:11:42 -0000
 
-vlen is the vector register length in bits.
-elen is the max element size in bits.
-vext_spec is the vector specification version, default value is v0.7.1.
+On 3/16/20 11:01 PM, LIU Zhiwei wrote:
+> Two questions here. I don't find the answer in the specification.
+> 
+> 1. Should  I check RVF if the instruction uses float register,  such as all
+> float point instructions and some other instructions?
 
-Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
----
- target/riscv/cpu.c | 7 +++++++
- target/riscv/cpu.h | 5 +++++
- 2 files changed, 12 insertions(+)
+I would think so, but even the 0.8 spec isn't clear.
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index c0b7023100..6e4135583d 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -106,6 +106,11 @@ static void set_priv_version(CPURISCVState *env, int priv_ver)
-     env->priv_ver = priv_ver;
- }
- 
-+static void set_vext_version(CPURISCVState *env, int vext_ver)
-+{
-+    env->vext_ver = vext_ver;
-+}
-+
- static void set_feature(CPURISCVState *env, int feature)
- {
-     env->features |= (1ULL << feature);
-@@ -364,6 +369,7 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
-     CPURISCVState *env = &cpu->env;
-     RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(dev);
-     int priv_version = PRIV_VERSION_1_11_0;
-+    int vext_version = VEXT_VERSION_0_07_1;
-     target_ulong target_misa = 0;
-     Error *local_err = NULL;
- 
-@@ -389,6 +395,7 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
-     }
- 
-     set_priv_version(env, priv_version);
-+    set_vext_version(env, vext_version);
-     set_resetvec(env, DEFAULT_RSTVEC);
- 
-     if (cpu->cfg.mmu) {
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 0c1f7bdd8b..603715f849 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -84,6 +84,8 @@ enum {
- #define PRIV_VERSION_1_10_0 0x00011000
- #define PRIV_VERSION_1_11_0 0x00011100
- 
-+#define VEXT_VERSION_0_07_1 0x00000701
-+
- #define TRANSLATE_PMP_FAIL 2
- #define TRANSLATE_FAIL 1
- #define TRANSLATE_SUCCESS 0
-@@ -119,6 +121,7 @@ struct CPURISCVState {
-     target_ulong guest_phys_fault_addr;
- 
-     target_ulong priv_ver;
-+    target_ulong vext_ver;
-     target_ulong misa;
-     target_ulong misa_mask;
- 
-@@ -281,6 +284,8 @@ typedef struct RISCVCPU {
- 
-         char *priv_spec;
-         char *user_spec;
-+        uint16_t vlen;
-+        uint16_t elen;
-         bool mmu;
-         bool pmp;
-     } cfg;
--- 
-2.23.0
 
+> 2. Should I check mstatus_fs if the instruction uses float registers, or just
+> for instructions that write float point register?
+
+Definitely, just like the regular fp instructions.
+
+This trap is how the kernel implements lazy fp context switching, so if you
+allow access to fp when disabled you may be accessing values from a different
+process.
+
+
+r~
 
