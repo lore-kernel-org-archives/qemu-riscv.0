@@ -1,75 +1,80 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jEhad-0008I6-Hg
-	for mharc-qemu-riscv@gnu.org; Wed, 18 Mar 2020 18:55:07 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:48169)
+	id 1jEiB5-0000tN-PT
+	for mharc-qemu-riscv@gnu.org; Wed, 18 Mar 2020 19:32:47 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:40468)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <prvs=339f800bd=alistair.francis@wdc.com>)
- id 1jEhaX-0008AY-Fq
- for qemu-riscv@nongnu.org; Wed, 18 Mar 2020 18:55:05 -0400
+ (envelope-from <philmd@redhat.com>) id 1jEiB2-0000rz-K2
+ for qemu-riscv@nongnu.org; Wed, 18 Mar 2020 19:32:46 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <prvs=339f800bd=alistair.francis@wdc.com>)
- id 1jEhaT-0004SN-IP
- for qemu-riscv@nongnu.org; Wed, 18 Mar 2020 18:55:01 -0400
-Received: from esa2.hgst.iphmx.com ([68.232.143.124]:11668)
+ (envelope-from <philmd@redhat.com>) id 1jEiAy-0004pM-Sf
+ for qemu-riscv@nongnu.org; Wed, 18 Mar 2020 19:32:43 -0400
+Received: from us-smtp-delivery-74.mimecast.com ([216.205.24.74]:57535)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <prvs=339f800bd=alistair.francis@wdc.com>)
- id 1jEhaK-0003yZ-62; Wed, 18 Mar 2020 18:54:48 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1584572089; x=1616108089;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=8GG7/NwTe/v0nhGWC/8JZ1QB6iMOX/J6IecX74Zct7I=;
- b=rh1Q0Q2jcCX7vzmrl2VIPSkDr4aQ37x+eJVGtjgnqbDrR9liWdee5ai/
- YdN48LeScz1nahciKO1MGrlLPOhTddVa6vQmMZnGZ4MceEOoS7LWXr7sb
- Qk0t8gdBdzX0iqLO86gWJgzxv/1Ho0KP+tv4NNp/t6kLu9OFnjjIT9mSn
- lBBkgEAGgIgdymCp8j7WZHyzmDbD6p2SMQMDdkW5me6IwFH2vo+e/hgOF
- 9huYm1HBjMqGzskT8Fn3BbBL8xMUPuTpCbC2mrzNvQ5O9IOOhsfiQpje/
- qNTEuv0xd10J1NdXwoy7MZwnuquxBRkOCDz3jsbC+MadfEUL0rx229I1D Q==;
-IronPort-SDR: Vly0Sg87XvEhyvtM6ZeAiDoWSESVk2Y9OrPizzl+ZSW9mKGsD2OABCrFWeSbbvQ6m5Kj12Y7Z1
- LkxT1i6Ty51rFcjYYQ2yhs2LgjunrBLoK/1C1bgRWjjNvo1DJOZj04jvfLAVMgx1uaYGopUfmd
- jjX10Q95Ndu1wiH65dL1OMW96yvdOX5Rti/4eU0lgy+mJI+rfId8rkPmzl62aElls+5EcOG+fO
- fmkfOL1N5vxTuVqF28L5qoGNEYokfPutN4W2SiVDYqI54IwA3P4F1ekqWHQYtDadOFoarh1f5i
- kqs=
-X-IronPort-AV: E=Sophos;i="5.70,569,1574092800"; d="scan'208";a="235031063"
-Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com)
- ([199.255.45.15])
- by ob1.hgst.iphmx.com with ESMTP; 19 Mar 2020 06:55:12 +0800
-IronPort-SDR: s86oUGWk7udRzmTxvMd9LoOM0hvgGWqwTf3BOFxvq7qZiGPov0VFHS6vfOTqkoAj+8Jm5FPq7y
- ms6e9GWZLxrHjFcnlvBd+gCcODURc9GVWXc+oLfXwrcOyIjFKSXoCIEVirEKWPsZXVcaWX7uCT
- d/QeXFWGmPg9QeTb7wh1nZ5ZEYpf2aFEE7YqpkCQRSFeyb6EOPk6mBxstpkRbkix40KbtiEmNZ
- xWZJuWGb5W9eMkdTBwbN310hseY9oqMXxTTtQ8lYp0As7gcCtMaQ++Fqc8lVACMRU/DMQIBRPQ
- wqFSAhH943ZeGNB9gzL0qngp
-Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
- by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 18 Mar 2020 15:45:59 -0700
-IronPort-SDR: NLc0+iWn5/iezicjUG8u0NY7JUyESZEg5qTJdyc1Mffnf/yzTXr1OcIztlym6x0boj+HkjOsg7
- R7FQ+rINp7SVI9uInIVbnizuNvVJxZ28GAU+Q/o4NKnRV6bjLr8A6Ju33vE3a4U58kCzJ1Xj8p
- 8jwOdt7DNuOava+HG4DixA7vb/Z6sUqNz3vmTvKIUuv95j6UMicgtOvDpFs9631nrI2kKzpJZJ
- VyXqP+7ZFdxRYxoy/0/psNQ2eeF/m0uELjSceVZWjZr8wtj7eHOQ6RyRGP0ioQyBcB7jqXsGJR
- sZU=
-WDCIronportException: Internal
-Received: from usa005961.ad.shared (HELO risc6-mainframe.hgst.com)
- ([10.86.54.167])
- by uls-op-cesaip01.wdc.com with ESMTP; 18 Mar 2020 15:54:33 -0700
-From: Alistair Francis <alistair.francis@wdc.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org,
-	laurent@vivier.eu
-Cc: palmer@dabbelt.com,
-	alistair.francis@wdc.com,
-	alistair23@gmail.com
-Subject: [PATCH v9 4/4] linux-user/riscv: Update the syscall_nr's to the 5.5
- kernel
-Date: Wed, 18 Mar 2020 15:47:04 -0700
-Message-Id: <96a0f4704cbc4313dba60587f918c74aabcdfc38.1584571250.git.alistair.francis@wdc.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <cover.1584571250.git.alistair.francis@wdc.com>
+ (Exim 4.71) (envelope-from <philmd@redhat.com>) id 1jEiAy-0004lj-MZ
+ for qemu-riscv@nongnu.org; Wed, 18 Mar 2020 19:32:40 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1584574360;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=uRblYc4/oBvYL3A87oyakwY/OmMj2ASQSpzKKHVIlWE=;
+ b=ItY/q04FvkGFnAu3JCpapbV0qmMDtalG1Gb+zByButCHuQleaAHjiot7P9tHeG1P260Qdb
+ Tnhpw3xTuXBqeQeByp8YlPbsBP/TjBWnqhB0CetIQL8cHRHp2F9uOUNLH0fLW8fz7Iekh+
+ 4NxRidGkW89CQvMKJ77gg1hwfH+01c4=
+Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
+ [209.85.221.71]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-481-XlItAdc3Oh2bKnSFor43dA-1; Wed, 18 Mar 2020 19:32:38 -0400
+X-MC-Unique: XlItAdc3Oh2bKnSFor43dA-1
+Received: by mail-wr1-f71.google.com with SMTP id t4so96813wrv.9
+ for <qemu-riscv@nongnu.org>; Wed, 18 Mar 2020 16:32:38 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=bkPu88eFIhf0aCjYagPfrwJ7dqa2ZIKY0NNfBusOio0=;
+ b=isziLgwDK5Dd6ST6F3wVoTQeTDj9HlJ3+6CnUCvCK3aTYq3IRsZOjrOHyL3EH9FzV3
+ z+eOM/ctJ+2l974FOPTfVLVosnJXrvgRxERS0AchgmwEza4OImdi5dvKyGcZRYdfSnXT
+ OPJSR/PU0IphHcyOY9OvblrrP5wyHGYWNpclkNjgYkgxVUSG537ob8zsxqX9TrERPGGa
+ tN0uNpiJdtfD0aql2GrSVuYZi2/k1UqHcsnws3oOU7I1jvEF0JYzfKtqEJO4FbinSeIN
+ +aluw+fyeDw32KK/4xYaV0g6hKJVj0Z/c9IX4fkxCJrAnU1a5lHP7+s2fgcihK8fEqdr
+ MsgQ==
+X-Gm-Message-State: ANhLgQ1+1TmEsK4xwxYNYzpsY/NkM0h/0gdbsHntRdgMRbr/cs+Vygp9
+ 7nh0BnxGfCm7+V/QARlfnKz6MU+UzkXRRCQlQWb9fImMT1iCfDqWofiLoJ2PQG8Dv6FhVHIfF46
+ MQ+aXhad8T6h8q+k=
+X-Received: by 2002:adf:e68b:: with SMTP id r11mr351461wrm.138.1584574357106; 
+ Wed, 18 Mar 2020 16:32:37 -0700 (PDT)
+X-Google-Smtp-Source: ADFU+vto0KRPR9f7xsdz8bnjhrbkX49eJpR8MzdY1Xl+pt8wyfVdHc+yWCneAOsvmbmC+WE+7Oukbg==
+X-Received: by 2002:adf:e68b:: with SMTP id r11mr351425wrm.138.1584574356604; 
+ Wed, 18 Mar 2020 16:32:36 -0700 (PDT)
+Received: from [192.168.1.35] (37.red-83-52-54.dynamicip.rima-tde.net.
+ [83.52.54.37])
+ by smtp.gmail.com with ESMTPSA id b187sm540571wmc.14.2020.03.18.16.32.34
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 18 Mar 2020 16:32:35 -0700 (PDT)
+Subject: Re: [PATCH v9 1/4] linux-user: Protect more syscalls
+To: Alistair Francis <alistair.francis@wdc.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org, laurent@vivier.eu
+Cc: palmer@dabbelt.com, alistair23@gmail.com,
+ Paolo Bonzini <pbonzini@redhat.com>
 References: <cover.1584571250.git.alistair.francis@wdc.com>
+ <e06642c862997571f3b3d7afe637d2f73548054a.1584571250.git.alistair.francis@wdc.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>
+Message-ID: <53137b17-4b1a-334c-a2b8-cbd5aa1438da@redhat.com>
+Date: Thu, 19 Mar 2020 00:32:33 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.5.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-detected-operating-system: by eggs.gnu.org: FreeBSD 9.x [fuzzy]
-X-Received-From: 68.232.143.124
+In-Reply-To: <e06642c862997571f3b3d7afe637d2f73548054a.1584571250.git.alistair.francis@wdc.com>
+Content-Language: en-US
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+ [fuzzy]
+X-Received-From: 216.205.24.74
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -81,934 +86,459 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Mar 2020 22:55:05 -0000
+X-List-Received-Date: Wed, 18 Mar 2020 23:32:47 -0000
 
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Laurent Vivier <laurent@vivier.eu>
----
- linux-user/riscv/syscall32_nr.h | 295 +++++++++++++++++++++++++++++++
- linux-user/riscv/syscall64_nr.h | 301 ++++++++++++++++++++++++++++++++
- linux-user/riscv/syscall_nr.h   | 294 +------------------------------
- 3 files changed, 598 insertions(+), 292 deletions(-)
- create mode 100644 linux-user/riscv/syscall32_nr.h
- create mode 100644 linux-user/riscv/syscall64_nr.h
+On 3/18/20 11:46 PM, Alistair Francis wrote:
+> New y2038 safe 32-bit architectures (like RISC-V) don't support old
+> syscalls with a 32-bit time_t. The kernel defines new *_time64 versions
+> of these syscalls. Add some more #ifdefs to syscall.c in linux-user to
+> allow us to compile without these old syscalls.
+>=20
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> Reviewed-by: Laurent Vivier <laurent@vivier.eu>
+> ---
+>   linux-user/strace.c  |  2 ++
+>   linux-user/syscall.c | 68 ++++++++++++++++++++++++++++++++++++++++++--
 
-diff --git a/linux-user/riscv/syscall32_nr.h b/linux-user/riscv/syscall32_nr.h
-new file mode 100644
-index 0000000000..4fef73e954
---- /dev/null
-+++ b/linux-user/riscv/syscall32_nr.h
-@@ -0,0 +1,295 @@
-+/*
-+ * This file contains the system call numbers.
-+ */
-+#ifndef LINUX_USER_RISCV_SYSCALL32_NR_H
-+#define LINUX_USER_RISCV_SYSCALL32_NR_H
-+
-+#define TARGET_NR_io_setup 0
-+#define TARGET_NR_io_destroy 1
-+#define TARGET_NR_io_submit 2
-+#define TARGET_NR_io_cancel 3
-+#define TARGET_NR_setxattr 5
-+#define TARGET_NR_lsetxattr 6
-+#define TARGET_NR_fsetxattr 7
-+#define TARGET_NR_getxattr 8
-+#define TARGET_NR_lgetxattr 9
-+#define TARGET_NR_fgetxattr 10
-+#define TARGET_NR_listxattr 11
-+#define TARGET_NR_llistxattr 12
-+#define TARGET_NR_flistxattr 13
-+#define TARGET_NR_removexattr 14
-+#define TARGET_NR_lremovexattr 15
-+#define TARGET_NR_fremovexattr 16
-+#define TARGET_NR_getcwd 17
-+#define TARGET_NR_lookup_dcookie 18
-+#define TARGET_NR_eventfd2 19
-+#define TARGET_NR_epoll_create1 20
-+#define TARGET_NR_epoll_ctl 21
-+#define TARGET_NR_epoll_pwait 22
-+#define TARGET_NR_dup 23
-+#define TARGET_NR_dup3 24
-+#define TARGET_NR_fcntl64 25
-+#define TARGET_NR_inotify_init1 26
-+#define TARGET_NR_inotify_add_watch 27
-+#define TARGET_NR_inotify_rm_watch 28
-+#define TARGET_NR_ioctl 29
-+#define TARGET_NR_ioprio_set 30
-+#define TARGET_NR_ioprio_get 31
-+#define TARGET_NR_flock 32
-+#define TARGET_NR_mknodat 33
-+#define TARGET_NR_mkdirat 34
-+#define TARGET_NR_unlinkat 35
-+#define TARGET_NR_symlinkat 36
-+#define TARGET_NR_linkat 37
-+#define TARGET_NR_umount2 39
-+#define TARGET_NR_mount 40
-+#define TARGET_NR_pivot_root 41
-+#define TARGET_NR_nfsservctl 42
-+#define TARGET_NR_statfs64 43
-+#define TARGET_NR_fstatfs64 44
-+#define TARGET_NR_truncate64 45
-+#define TARGET_NR_ftruncate64 46
-+#define TARGET_NR_fallocate 47
-+#define TARGET_NR_faccessat 48
-+#define TARGET_NR_chdir 49
-+#define TARGET_NR_fchdir 50
-+#define TARGET_NR_chroot 51
-+#define TARGET_NR_fchmod 52
-+#define TARGET_NR_fchmodat 53
-+#define TARGET_NR_fchownat 54
-+#define TARGET_NR_fchown 55
-+#define TARGET_NR_openat 56
-+#define TARGET_NR_close 57
-+#define TARGET_NR_vhangup 58
-+#define TARGET_NR_pipe2 59
-+#define TARGET_NR_quotactl 60
-+#define TARGET_NR_getdents64 61
-+#define TARGET_NR_llseek 62
-+#define TARGET_NR_read 63
-+#define TARGET_NR_write 64
-+#define TARGET_NR_readv 65
-+#define TARGET_NR_writev 66
-+#define TARGET_NR_pread64 67
-+#define TARGET_NR_pwrite64 68
-+#define TARGET_NR_preadv 69
-+#define TARGET_NR_pwritev 70
-+#define TARGET_NR_sendfile64 71
-+#define TARGET_NR_signalfd4 74
-+#define TARGET_NR_vmsplice 75
-+#define TARGET_NR_splice 76
-+#define TARGET_NR_tee 77
-+#define TARGET_NR_readlinkat 78
-+#define TARGET_NR_fstatat64 79
-+#define TARGET_NR_fstat64 80
-+#define TARGET_NR_sync 81
-+#define TARGET_NR_fsync 82
-+#define TARGET_NR_fdatasync 83
-+#define TARGET_NR_sync_file_range 84
-+#define TARGET_NR_timerfd_create 85
-+#define TARGET_NR_acct 89
-+#define TARGET_NR_capget 90
-+#define TARGET_NR_capset 91
-+#define TARGET_NR_personality 92
-+#define TARGET_NR_exit 93
-+#define TARGET_NR_exit_group 94
-+#define TARGET_NR_waitid 95
-+#define TARGET_NR_set_tid_address 96
-+#define TARGET_NR_unshare 97
-+#define TARGET_NR_set_robust_list 99
-+#define TARGET_NR_get_robust_list 100
-+#define TARGET_NR_getitimer 102
-+#define TARGET_NR_setitimer 103
-+#define TARGET_NR_kexec_load 104
-+#define TARGET_NR_init_module 105
-+#define TARGET_NR_delete_module 106
-+#define TARGET_NR_timer_create 107
-+#define TARGET_NR_timer_getoverrun 109
-+#define TARGET_NR_timer_delete 111
-+#define TARGET_NR_syslog 116
-+#define TARGET_NR_ptrace 117
-+#define TARGET_NR_sched_setparam 118
-+#define TARGET_NR_sched_setscheduler 119
-+#define TARGET_NR_sched_getscheduler 120
-+#define TARGET_NR_sched_getparam 121
-+#define TARGET_NR_sched_setaffinity 122
-+#define TARGET_NR_sched_getaffinity 123
-+#define TARGET_NR_sched_yield 124
-+#define TARGET_NR_sched_get_priority_max 125
-+#define TARGET_NR_sched_get_priority_min 126
-+#define TARGET_NR_restart_syscall 128
-+#define TARGET_NR_kill 129
-+#define TARGET_NR_tkill 130
-+#define TARGET_NR_tgkill 131
-+#define TARGET_NR_sigaltstack 132
-+#define TARGET_NR_rt_sigsuspend 133
-+#define TARGET_NR_rt_sigaction 134
-+#define TARGET_NR_rt_sigprocmask 135
-+#define TARGET_NR_rt_sigpending 136
-+#define TARGET_NR_rt_sigqueueinfo 138
-+#define TARGET_NR_rt_sigreturn 139
-+#define TARGET_NR_setpriority 140
-+#define TARGET_NR_getpriority 141
-+#define TARGET_NR_reboot 142
-+#define TARGET_NR_setregid 143
-+#define TARGET_NR_setgid 144
-+#define TARGET_NR_setreuid 145
-+#define TARGET_NR_setuid 146
-+#define TARGET_NR_setresuid 147
-+#define TARGET_NR_getresuid 148
-+#define TARGET_NR_setresgid 149
-+#define TARGET_NR_getresgid 150
-+#define TARGET_NR_setfsuid 151
-+#define TARGET_NR_setfsgid 152
-+#define TARGET_NR_times 153
-+#define TARGET_NR_setpgid 154
-+#define TARGET_NR_getpgid 155
-+#define TARGET_NR_getsid 156
-+#define TARGET_NR_setsid 157
-+#define TARGET_NR_getgroups 158
-+#define TARGET_NR_setgroups 159
-+#define TARGET_NR_uname 160
-+#define TARGET_NR_sethostname 161
-+#define TARGET_NR_setdomainname 162
-+#define TARGET_NR_getrlimit 163
-+#define TARGET_NR_setrlimit 164
-+#define TARGET_NR_getrusage 165
-+#define TARGET_NR_umask 166
-+#define TARGET_NR_prctl 167
-+#define TARGET_NR_getcpu 168
-+#define TARGET_NR_getpid 172
-+#define TARGET_NR_getppid 173
-+#define TARGET_NR_getuid 174
-+#define TARGET_NR_geteuid 175
-+#define TARGET_NR_getgid 176
-+#define TARGET_NR_getegid 177
-+#define TARGET_NR_gettid 178
-+#define TARGET_NR_sysinfo 179
-+#define TARGET_NR_mq_open 180
-+#define TARGET_NR_mq_unlink 181
-+#define TARGET_NR_mq_notify 184
-+#define TARGET_NR_mq_getsetattr 185
-+#define TARGET_NR_msgget 186
-+#define TARGET_NR_msgctl 187
-+#define TARGET_NR_msgrcv 188
-+#define TARGET_NR_msgsnd 189
-+#define TARGET_NR_semget 190
-+#define TARGET_NR_semctl 191
-+#define TARGET_NR_semop 193
-+#define TARGET_NR_shmget 194
-+#define TARGET_NR_shmctl 195
-+#define TARGET_NR_shmat 196
-+#define TARGET_NR_shmdt 197
-+#define TARGET_NR_socket 198
-+#define TARGET_NR_socketpair 199
-+#define TARGET_NR_bind 200
-+#define TARGET_NR_listen 201
-+#define TARGET_NR_accept 202
-+#define TARGET_NR_connect 203
-+#define TARGET_NR_getsockname 204
-+#define TARGET_NR_getpeername 205
-+#define TARGET_NR_sendto 206
-+#define TARGET_NR_recvfrom 207
-+#define TARGET_NR_setsockopt 208
-+#define TARGET_NR_getsockopt 209
-+#define TARGET_NR_shutdown 210
-+#define TARGET_NR_sendmsg 211
-+#define TARGET_NR_recvmsg 212
-+#define TARGET_NR_readahead 213
-+#define TARGET_NR_brk 214
-+#define TARGET_NR_munmap 215
-+#define TARGET_NR_mremap 216
-+#define TARGET_NR_add_key 217
-+#define TARGET_NR_request_key 218
-+#define TARGET_NR_keyctl 219
-+#define TARGET_NR_clone 220
-+#define TARGET_NR_execve 221
-+#define TARGET_NR_mmap2 222
-+#define TARGET_NR_fadvise64_64 223
-+#define TARGET_NR_swapon 224
-+#define TARGET_NR_swapoff 225
-+#define TARGET_NR_mprotect 226
-+#define TARGET_NR_msync 227
-+#define TARGET_NR_mlock 228
-+#define TARGET_NR_munlock 229
-+#define TARGET_NR_mlockall 230
-+#define TARGET_NR_munlockall 231
-+#define TARGET_NR_mincore 232
-+#define TARGET_NR_madvise 233
-+#define TARGET_NR_remap_file_pages 234
-+#define TARGET_NR_mbind 235
-+#define TARGET_NR_get_mempolicy 236
-+#define TARGET_NR_set_mempolicy 237
-+#define TARGET_NR_migrate_pages 238
-+#define TARGET_NR_move_pages 239
-+#define TARGET_NR_rt_tgsigqueueinfo 240
-+#define TARGET_NR_perf_event_open 241
-+#define TARGET_NR_accept4 242
-+#define TARGET_NR_arch_specific_syscall 244
-+#define TARGET_NR_riscv_flush_icache (TARGET_NR_arch_specific_syscall + 15)
-+#define TARGET_NR_prlimit64 261
-+#define TARGET_NR_fanotify_init 262
-+#define TARGET_NR_fanotify_mark 263
-+#define TARGET_NR_name_to_handle_at 264
-+#define TARGET_NR_open_by_handle_at 265
-+#define TARGET_NR_syncfs 267
-+#define TARGET_NR_setns 268
-+#define TARGET_NR_sendmmsg 269
-+#define TARGET_NR_process_vm_readv 270
-+#define TARGET_NR_process_vm_writev 271
-+#define TARGET_NR_kcmp 272
-+#define TARGET_NR_finit_module 273
-+#define TARGET_NR_sched_setattr 274
-+#define TARGET_NR_sched_getattr 275
-+#define TARGET_NR_renameat2 276
-+#define TARGET_NR_seccomp 277
-+#define TARGET_NR_getrandom 278
-+#define TARGET_NR_memfd_create 279
-+#define TARGET_NR_bpf 280
-+#define TARGET_NR_execveat 281
-+#define TARGET_NR_userfaultfd 282
-+#define TARGET_NR_membarrier 283
-+#define TARGET_NR_mlock2 284
-+#define TARGET_NR_copy_file_range 285
-+#define TARGET_NR_preadv2 286
-+#define TARGET_NR_pwritev2 287
-+#define TARGET_NR_pkey_mprotect 288
-+#define TARGET_NR_pkey_alloc 289
-+#define TARGET_NR_pkey_free 290
-+#define TARGET_NR_statx 291
-+#define TARGET_NR_rseq 293
-+#define TARGET_NR_kexec_file_load 294
-+#define TARGET_NR_clock_gettime64 403
-+#define TARGET_NR_clock_settime64 404
-+#define TARGET_NR_clock_adjtime64 405
-+#define TARGET_NR_clock_getres_time64 406
-+#define TARGET_NR_clock_nanosleep_time64 407
-+#define TARGET_NR_timer_gettime64 408
-+#define TARGET_NR_timer_settime64 409
-+#define TARGET_NR_timerfd_gettime64 410
-+#define TARGET_NR_timerfd_settime64 411
-+#define TARGET_NR_utimensat_time64 412
-+#define TARGET_NR_pselect6_time64 413
-+#define TARGET_NR_ppoll_time64 414
-+#define TARGET_NR_io_pgetevents_time64 416
-+#define TARGET_NR_recvmmsg_time64 417
-+#define TARGET_NR_mq_timedsend_time64 418
-+#define TARGET_NR_mq_timedreceive_time64 419
-+#define TARGET_NR_semtimedop_time64 420
-+#define TARGET_NR_rt_sigtimedwait_time64 421
-+#define TARGET_NR_futex_time64 422
-+#define TARGET_NR_sched_rr_get_interval_time64 423
-+#define TARGET_NR_pidfd_send_signal 424
-+#define TARGET_NR_io_uring_setup 425
-+#define TARGET_NR_io_uring_enter 426
-+#define TARGET_NR_io_uring_register 427
-+#define TARGET_NR_open_tree 428
-+#define TARGET_NR_move_mount 429
-+#define TARGET_NR_fsopen 430
-+#define TARGET_NR_fsconfig 431
-+#define TARGET_NR_fsmount 432
-+#define TARGET_NR_fspick 433
-+#define TARGET_NR_pidfd_open 434
-+#define TARGET_NR_clone3 435
-+#define TARGET_NR_syscalls 436
-+
-+#endif /* LINUX_USER_RISCV_SYSCALL32_NR_H */
-diff --git a/linux-user/riscv/syscall64_nr.h b/linux-user/riscv/syscall64_nr.h
-new file mode 100644
-index 0000000000..cc82f3244f
---- /dev/null
-+++ b/linux-user/riscv/syscall64_nr.h
-@@ -0,0 +1,301 @@
-+/*
-+ * This file contains the system call numbers.
-+ */
-+#ifndef LINUX_USER_RISCV_SYSCALL64_NR_H
-+#define LINUX_USER_RISCV_SYSCALL64_NR_H
-+
-+#define TARGET_NR_io_setup 0
-+#define TARGET_NR_io_destroy 1
-+#define TARGET_NR_io_submit 2
-+#define TARGET_NR_io_cancel 3
-+#define TARGET_NR_io_getevents 4
-+#define TARGET_NR_setxattr 5
-+#define TARGET_NR_lsetxattr 6
-+#define TARGET_NR_fsetxattr 7
-+#define TARGET_NR_getxattr 8
-+#define TARGET_NR_lgetxattr 9
-+#define TARGET_NR_fgetxattr 10
-+#define TARGET_NR_listxattr 11
-+#define TARGET_NR_llistxattr 12
-+#define TARGET_NR_flistxattr 13
-+#define TARGET_NR_removexattr 14
-+#define TARGET_NR_lremovexattr 15
-+#define TARGET_NR_fremovexattr 16
-+#define TARGET_NR_getcwd 17
-+#define TARGET_NR_lookup_dcookie 18
-+#define TARGET_NR_eventfd2 19
-+#define TARGET_NR_epoll_create1 20
-+#define TARGET_NR_epoll_ctl 21
-+#define TARGET_NR_epoll_pwait 22
-+#define TARGET_NR_dup 23
-+#define TARGET_NR_dup3 24
-+#define TARGET_NR_fcntl 25
-+#define TARGET_NR_inotify_init1 26
-+#define TARGET_NR_inotify_add_watch 27
-+#define TARGET_NR_inotify_rm_watch 28
-+#define TARGET_NR_ioctl 29
-+#define TARGET_NR_ioprio_set 30
-+#define TARGET_NR_ioprio_get 31
-+#define TARGET_NR_flock 32
-+#define TARGET_NR_mknodat 33
-+#define TARGET_NR_mkdirat 34
-+#define TARGET_NR_unlinkat 35
-+#define TARGET_NR_symlinkat 36
-+#define TARGET_NR_linkat 37
-+#define TARGET_NR_umount2 39
-+#define TARGET_NR_mount 40
-+#define TARGET_NR_pivot_root 41
-+#define TARGET_NR_nfsservctl 42
-+#define TARGET_NR_statfs 43
-+#define TARGET_NR_fstatfs 44
-+#define TARGET_NR_truncate 45
-+#define TARGET_NR_ftruncate 46
-+#define TARGET_NR_fallocate 47
-+#define TARGET_NR_faccessat 48
-+#define TARGET_NR_chdir 49
-+#define TARGET_NR_fchdir 50
-+#define TARGET_NR_chroot 51
-+#define TARGET_NR_fchmod 52
-+#define TARGET_NR_fchmodat 53
-+#define TARGET_NR_fchownat 54
-+#define TARGET_NR_fchown 55
-+#define TARGET_NR_openat 56
-+#define TARGET_NR_close 57
-+#define TARGET_NR_vhangup 58
-+#define TARGET_NR_pipe2 59
-+#define TARGET_NR_quotactl 60
-+#define TARGET_NR_getdents64 61
-+#define TARGET_NR_lseek 62
-+#define TARGET_NR_read 63
-+#define TARGET_NR_write 64
-+#define TARGET_NR_readv 65
-+#define TARGET_NR_writev 66
-+#define TARGET_NR_pread64 67
-+#define TARGET_NR_pwrite64 68
-+#define TARGET_NR_preadv 69
-+#define TARGET_NR_pwritev 70
-+#define TARGET_NR_sendfile 71
-+#define TARGET_NR_pselect6 72
-+#define TARGET_NR_ppoll 73
-+#define TARGET_NR_signalfd4 74
-+#define TARGET_NR_vmsplice 75
-+#define TARGET_NR_splice 76
-+#define TARGET_NR_tee 77
-+#define TARGET_NR_readlinkat 78
-+#define TARGET_NR_newfstatat 79
-+#define TARGET_NR_fstat 80
-+#define TARGET_NR_sync 81
-+#define TARGET_NR_fsync 82
-+#define TARGET_NR_fdatasync 83
-+#define TARGET_NR_sync_file_range 84
-+#define TARGET_NR_timerfd_create 85
-+#define TARGET_NR_timerfd_settime 86
-+#define TARGET_NR_timerfd_gettime 87
-+#define TARGET_NR_utimensat 88
-+#define TARGET_NR_acct 89
-+#define TARGET_NR_capget 90
-+#define TARGET_NR_capset 91
-+#define TARGET_NR_personality 92
-+#define TARGET_NR_exit 93
-+#define TARGET_NR_exit_group 94
-+#define TARGET_NR_waitid 95
-+#define TARGET_NR_set_tid_address 96
-+#define TARGET_NR_unshare 97
-+#define TARGET_NR_futex 98
-+#define TARGET_NR_set_robust_list 99
-+#define TARGET_NR_get_robust_list 100
-+#define TARGET_NR_nanosleep 101
-+#define TARGET_NR_getitimer 102
-+#define TARGET_NR_setitimer 103
-+#define TARGET_NR_kexec_load 104
-+#define TARGET_NR_init_module 105
-+#define TARGET_NR_delete_module 106
-+#define TARGET_NR_timer_create 107
-+#define TARGET_NR_timer_gettime 108
-+#define TARGET_NR_timer_getoverrun 109
-+#define TARGET_NR_timer_settime 110
-+#define TARGET_NR_timer_delete 111
-+#define TARGET_NR_clock_settime 112
-+#define TARGET_NR_clock_gettime 113
-+#define TARGET_NR_clock_getres 114
-+#define TARGET_NR_clock_nanosleep 115
-+#define TARGET_NR_syslog 116
-+#define TARGET_NR_ptrace 117
-+#define TARGET_NR_sched_setparam 118
-+#define TARGET_NR_sched_setscheduler 119
-+#define TARGET_NR_sched_getscheduler 120
-+#define TARGET_NR_sched_getparam 121
-+#define TARGET_NR_sched_setaffinity 122
-+#define TARGET_NR_sched_getaffinity 123
-+#define TARGET_NR_sched_yield 124
-+#define TARGET_NR_sched_get_priority_max 125
-+#define TARGET_NR_sched_get_priority_min 126
-+#define TARGET_NR_sched_rr_get_interval 127
-+#define TARGET_NR_restart_syscall 128
-+#define TARGET_NR_kill 129
-+#define TARGET_NR_tkill 130
-+#define TARGET_NR_tgkill 131
-+#define TARGET_NR_sigaltstack 132
-+#define TARGET_NR_rt_sigsuspend 133
-+#define TARGET_NR_rt_sigaction 134
-+#define TARGET_NR_rt_sigprocmask 135
-+#define TARGET_NR_rt_sigpending 136
-+#define TARGET_NR_rt_sigtimedwait 137
-+#define TARGET_NR_rt_sigqueueinfo 138
-+#define TARGET_NR_rt_sigreturn 139
-+#define TARGET_NR_setpriority 140
-+#define TARGET_NR_getpriority 141
-+#define TARGET_NR_reboot 142
-+#define TARGET_NR_setregid 143
-+#define TARGET_NR_setgid 144
-+#define TARGET_NR_setreuid 145
-+#define TARGET_NR_setuid 146
-+#define TARGET_NR_setresuid 147
-+#define TARGET_NR_getresuid 148
-+#define TARGET_NR_setresgid 149
-+#define TARGET_NR_getresgid 150
-+#define TARGET_NR_setfsuid 151
-+#define TARGET_NR_setfsgid 152
-+#define TARGET_NR_times 153
-+#define TARGET_NR_setpgid 154
-+#define TARGET_NR_getpgid 155
-+#define TARGET_NR_getsid 156
-+#define TARGET_NR_setsid 157
-+#define TARGET_NR_getgroups 158
-+#define TARGET_NR_setgroups 159
-+#define TARGET_NR_uname 160
-+#define TARGET_NR_sethostname 161
-+#define TARGET_NR_setdomainname 162
-+#define TARGET_NR_getrlimit 163
-+#define TARGET_NR_setrlimit 164
-+#define TARGET_NR_getrusage 165
-+#define TARGET_NR_umask 166
-+#define TARGET_NR_prctl 167
-+#define TARGET_NR_getcpu 168
-+#define TARGET_NR_gettimeofday 169
-+#define TARGET_NR_settimeofday 170
-+#define TARGET_NR_adjtimex 171
-+#define TARGET_NR_getpid 172
-+#define TARGET_NR_getppid 173
-+#define TARGET_NR_getuid 174
-+#define TARGET_NR_geteuid 175
-+#define TARGET_NR_getgid 176
-+#define TARGET_NR_getegid 177
-+#define TARGET_NR_gettid 178
-+#define TARGET_NR_sysinfo 179
-+#define TARGET_NR_mq_open 180
-+#define TARGET_NR_mq_unlink 181
-+#define TARGET_NR_mq_timedsend 182
-+#define TARGET_NR_mq_timedreceive 183
-+#define TARGET_NR_mq_notify 184
-+#define TARGET_NR_mq_getsetattr 185
-+#define TARGET_NR_msgget 186
-+#define TARGET_NR_msgctl 187
-+#define TARGET_NR_msgrcv 188
-+#define TARGET_NR_msgsnd 189
-+#define TARGET_NR_semget 190
-+#define TARGET_NR_semctl 191
-+#define TARGET_NR_semtimedop 192
-+#define TARGET_NR_semop 193
-+#define TARGET_NR_shmget 194
-+#define TARGET_NR_shmctl 195
-+#define TARGET_NR_shmat 196
-+#define TARGET_NR_shmdt 197
-+#define TARGET_NR_socket 198
-+#define TARGET_NR_socketpair 199
-+#define TARGET_NR_bind 200
-+#define TARGET_NR_listen 201
-+#define TARGET_NR_accept 202
-+#define TARGET_NR_connect 203
-+#define TARGET_NR_getsockname 204
-+#define TARGET_NR_getpeername 205
-+#define TARGET_NR_sendto 206
-+#define TARGET_NR_recvfrom 207
-+#define TARGET_NR_setsockopt 208
-+#define TARGET_NR_getsockopt 209
-+#define TARGET_NR_shutdown 210
-+#define TARGET_NR_sendmsg 211
-+#define TARGET_NR_recvmsg 212
-+#define TARGET_NR_readahead 213
-+#define TARGET_NR_brk 214
-+#define TARGET_NR_munmap 215
-+#define TARGET_NR_mremap 216
-+#define TARGET_NR_add_key 217
-+#define TARGET_NR_request_key 218
-+#define TARGET_NR_keyctl 219
-+#define TARGET_NR_clone 220
-+#define TARGET_NR_execve 221
-+#define TARGET_NR_mmap 222
-+#define TARGET_NR_fadvise64 223
-+#define TARGET_NR_swapon 224
-+#define TARGET_NR_swapoff 225
-+#define TARGET_NR_mprotect 226
-+#define TARGET_NR_msync 227
-+#define TARGET_NR_mlock 228
-+#define TARGET_NR_munlock 229
-+#define TARGET_NR_mlockall 230
-+#define TARGET_NR_munlockall 231
-+#define TARGET_NR_mincore 232
-+#define TARGET_NR_madvise 233
-+#define TARGET_NR_remap_file_pages 234
-+#define TARGET_NR_mbind 235
-+#define TARGET_NR_get_mempolicy 236
-+#define TARGET_NR_set_mempolicy 237
-+#define TARGET_NR_migrate_pages 238
-+#define TARGET_NR_move_pages 239
-+#define TARGET_NR_rt_tgsigqueueinfo 240
-+#define TARGET_NR_perf_event_open 241
-+#define TARGET_NR_accept4 242
-+#define TARGET_NR_recvmmsg 243
-+#define TARGET_NR_arch_specific_syscall 244
-+#define TARGET_NR_riscv_flush_icache (TARGET_NR_arch_specific_syscall + 15)
-+#define TARGET_NR_wait4 260
-+#define TARGET_NR_prlimit64 261
-+#define TARGET_NR_fanotify_init 262
-+#define TARGET_NR_fanotify_mark 263
-+#define TARGET_NR_name_to_handle_at 264
-+#define TARGET_NR_open_by_handle_at 265
-+#define TARGET_NR_clock_adjtime 266
-+#define TARGET_NR_syncfs 267
-+#define TARGET_NR_setns 268
-+#define TARGET_NR_sendmmsg 269
-+#define TARGET_NR_process_vm_readv 270
-+#define TARGET_NR_process_vm_writev 271
-+#define TARGET_NR_kcmp 272
-+#define TARGET_NR_finit_module 273
-+#define TARGET_NR_sched_setattr 274
-+#define TARGET_NR_sched_getattr 275
-+#define TARGET_NR_renameat2 276
-+#define TARGET_NR_seccomp 277
-+#define TARGET_NR_getrandom 278
-+#define TARGET_NR_memfd_create 279
-+#define TARGET_NR_bpf 280
-+#define TARGET_NR_execveat 281
-+#define TARGET_NR_userfaultfd 282
-+#define TARGET_NR_membarrier 283
-+#define TARGET_NR_mlock2 284
-+#define TARGET_NR_copy_file_range 285
-+#define TARGET_NR_preadv2 286
-+#define TARGET_NR_pwritev2 287
-+#define TARGET_NR_pkey_mprotect 288
-+#define TARGET_NR_pkey_alloc 289
-+#define TARGET_NR_pkey_free 290
-+#define TARGET_NR_statx 291
-+#define TARGET_NR_io_pgetevents 292
-+#define TARGET_NR_rseq 293
-+#define TARGET_NR_kexec_file_load 294
-+#define TARGET_NR_pidfd_send_signal 424
-+#define TARGET_NR_io_uring_setup 425
-+#define TARGET_NR_io_uring_enter 426
-+#define TARGET_NR_io_uring_register 427
-+#define TARGET_NR_open_tree 428
-+#define TARGET_NR_move_mount 429
-+#define TARGET_NR_fsopen 430
-+#define TARGET_NR_fsconfig 431
-+#define TARGET_NR_fsmount 432
-+#define TARGET_NR_fspick 433
-+#define TARGET_NR_pidfd_open 434
-+#define TARGET_NR_clone3 435
-+#define TARGET_NR_syscalls 436
-+
-+#endif /* LINUX_USER_RISCV_SYSCALL64_NR_H */
-diff --git a/linux-user/riscv/syscall_nr.h b/linux-user/riscv/syscall_nr.h
-index 5c87282209..0a5a2f2fb1 100644
---- a/linux-user/riscv/syscall_nr.h
-+++ b/linux-user/riscv/syscall_nr.h
-@@ -6,300 +6,10 @@
- #ifndef LINUX_USER_RISCV_SYSCALL_NR_H
- #define LINUX_USER_RISCV_SYSCALL_NR_H
- 
--#define TARGET_NR_io_setup 0
--#define TARGET_NR_io_destroy 1
--#define TARGET_NR_io_submit 2
--#define TARGET_NR_io_cancel 3
--#define TARGET_NR_io_getevents 4
--#define TARGET_NR_setxattr 5
--#define TARGET_NR_lsetxattr 6
--#define TARGET_NR_fsetxattr 7
--#define TARGET_NR_getxattr 8
--#define TARGET_NR_lgetxattr 9
--#define TARGET_NR_fgetxattr 10
--#define TARGET_NR_listxattr 11
--#define TARGET_NR_llistxattr 12
--#define TARGET_NR_flistxattr 13
--#define TARGET_NR_removexattr 14
--#define TARGET_NR_lremovexattr 15
--#define TARGET_NR_fremovexattr 16
--#define TARGET_NR_getcwd 17
--#define TARGET_NR_lookup_dcookie 18
--#define TARGET_NR_eventfd2 19
--#define TARGET_NR_epoll_create1 20
--#define TARGET_NR_epoll_ctl 21
--#define TARGET_NR_epoll_pwait 22
--#define TARGET_NR_dup 23
--#define TARGET_NR_dup3 24
- #ifdef TARGET_RISCV32
--#define TARGET_NR_fcntl64 25
-+# include "syscall32_nr.h"
- #else
--#define TARGET_NR_fcntl 25
-+# include "syscall64_nr.h"
- #endif
--#define TARGET_NR_inotify_init1 26
--#define TARGET_NR_inotify_add_watch 27
--#define TARGET_NR_inotify_rm_watch 28
--#define TARGET_NR_ioctl 29
--#define TARGET_NR_ioprio_set 30
--#define TARGET_NR_ioprio_get 31
--#define TARGET_NR_flock 32
--#define TARGET_NR_mknodat 33
--#define TARGET_NR_mkdirat 34
--#define TARGET_NR_unlinkat 35
--#define TARGET_NR_symlinkat 36
--#define TARGET_NR_linkat 37
--#define TARGET_NR_renameat 38
--#define TARGET_NR_umount2 39
--#define TARGET_NR_mount 40
--#define TARGET_NR_pivot_root 41
--#define TARGET_NR_nfsservctl 42
--#define TARGET_NR_statfs 43
--#define TARGET_NR_fstatfs 44
--#define TARGET_NR_truncate 45
--#define TARGET_NR_ftruncate 46
--#define TARGET_NR_fallocate 47
--#define TARGET_NR_faccessat 48
--#define TARGET_NR_chdir 49
--#define TARGET_NR_fchdir 50
--#define TARGET_NR_chroot 51
--#define TARGET_NR_fchmod 52
--#define TARGET_NR_fchmodat 53
--#define TARGET_NR_fchownat 54
--#define TARGET_NR_fchown 55
--#define TARGET_NR_openat 56
--#define TARGET_NR_close 57
--#define TARGET_NR_vhangup 58
--#define TARGET_NR_pipe2 59
--#define TARGET_NR_quotactl 60
--#define TARGET_NR_getdents64 61
--#ifdef TARGET_RISCV32
--#define TARGET_NR__llseek 62
--#else
--#define TARGET_NR_lseek 62
--#endif
--#define TARGET_NR_read 63
--#define TARGET_NR_write 64
--#define TARGET_NR_readv 65
--#define TARGET_NR_writev 66
--#define TARGET_NR_pread64 67
--#define TARGET_NR_pwrite64 68
--#define TARGET_NR_preadv 69
--#define TARGET_NR_pwritev 70
--#define TARGET_NR_sendfile 71
--#define TARGET_NR_pselect6 72
--#define TARGET_NR_ppoll 73
--#define TARGET_NR_signalfd4 74
--#define TARGET_NR_vmsplice 75
--#define TARGET_NR_splice 76
--#define TARGET_NR_tee 77
--#define TARGET_NR_readlinkat 78
--#define TARGET_NR_newfstatat 79
--#define TARGET_NR_fstat 80
--#define TARGET_NR_sync 81
--#define TARGET_NR_fsync 82
--#define TARGET_NR_fdatasync 83
--#define TARGET_NR_sync_file_range 84
--#define TARGET_NR_timerfd_create 85
--#define TARGET_NR_timerfd_settime 86
--#define TARGET_NR_timerfd_gettime 87
--#define TARGET_NR_utimensat 88
--#define TARGET_NR_acct 89
--#define TARGET_NR_capget 90
--#define TARGET_NR_capset 91
--#define TARGET_NR_personality 92
--#define TARGET_NR_exit 93
--#define TARGET_NR_exit_group 94
--#define TARGET_NR_waitid 95
--#define TARGET_NR_set_tid_address 96
--#define TARGET_NR_unshare 97
--#define TARGET_NR_futex 98
--#define TARGET_NR_set_robust_list 99
--#define TARGET_NR_get_robust_list 100
--#define TARGET_NR_nanosleep 101
--#define TARGET_NR_getitimer 102
--#define TARGET_NR_setitimer 103
--#define TARGET_NR_kexec_load 104
--#define TARGET_NR_init_module 105
--#define TARGET_NR_delete_module 106
--#define TARGET_NR_timer_create 107
--#define TARGET_NR_timer_gettime 108
--#define TARGET_NR_timer_getoverrun 109
--#define TARGET_NR_timer_settime 110
--#define TARGET_NR_timer_delete 111
--#define TARGET_NR_clock_settime 112
--#define TARGET_NR_clock_gettime 113
--#define TARGET_NR_clock_getres 114
--#define TARGET_NR_clock_nanosleep 115
--#define TARGET_NR_syslog 116
--#define TARGET_NR_ptrace 117
--#define TARGET_NR_sched_setparam 118
--#define TARGET_NR_sched_setscheduler 119
--#define TARGET_NR_sched_getscheduler 120
--#define TARGET_NR_sched_getparam 121
--#define TARGET_NR_sched_setaffinity 122
--#define TARGET_NR_sched_getaffinity 123
--#define TARGET_NR_sched_yield 124
--#define TARGET_NR_sched_get_priority_max 125
--#define TARGET_NR_sched_get_priority_min 126
--#define TARGET_NR_sched_rr_get_interval 127
--#define TARGET_NR_restart_syscall 128
--#define TARGET_NR_kill 129
--#define TARGET_NR_tkill 130
--#define TARGET_NR_tgkill 131
--#define TARGET_NR_sigaltstack 132
--#define TARGET_NR_rt_sigsuspend 133
--#define TARGET_NR_rt_sigaction 134
--#define TARGET_NR_rt_sigprocmask 135
--#define TARGET_NR_rt_sigpending 136
--#define TARGET_NR_rt_sigtimedwait 137
--#define TARGET_NR_rt_sigqueueinfo 138
--#define TARGET_NR_rt_sigreturn 139
--#define TARGET_NR_setpriority 140
--#define TARGET_NR_getpriority 141
--#define TARGET_NR_reboot 142
--#define TARGET_NR_setregid 143
--#define TARGET_NR_setgid 144
--#define TARGET_NR_setreuid 145
--#define TARGET_NR_setuid 146
--#define TARGET_NR_setresuid 147
--#define TARGET_NR_getresuid 148
--#define TARGET_NR_setresgid 149
--#define TARGET_NR_getresgid 150
--#define TARGET_NR_setfsuid 151
--#define TARGET_NR_setfsgid 152
--#define TARGET_NR_times 153
--#define TARGET_NR_setpgid 154
--#define TARGET_NR_getpgid 155
--#define TARGET_NR_getsid 156
--#define TARGET_NR_setsid 157
--#define TARGET_NR_getgroups 158
--#define TARGET_NR_setgroups 159
--#define TARGET_NR_uname 160
--#define TARGET_NR_sethostname 161
--#define TARGET_NR_setdomainname 162
--#define TARGET_NR_getrlimit 163
--#define TARGET_NR_setrlimit 164
--#define TARGET_NR_getrusage 165
--#define TARGET_NR_umask 166
--#define TARGET_NR_prctl 167
--#define TARGET_NR_getcpu 168
--#define TARGET_NR_gettimeofday 169
--#define TARGET_NR_settimeofday 170
--#define TARGET_NR_adjtimex 171
--#define TARGET_NR_getpid 172
--#define TARGET_NR_getppid 173
--#define TARGET_NR_getuid 174
--#define TARGET_NR_geteuid 175
--#define TARGET_NR_getgid 176
--#define TARGET_NR_getegid 177
--#define TARGET_NR_gettid 178
--#define TARGET_NR_sysinfo 179
--#define TARGET_NR_mq_open 180
--#define TARGET_NR_mq_unlink 181
--#define TARGET_NR_mq_timedsend 182
--#define TARGET_NR_mq_timedreceive 183
--#define TARGET_NR_mq_notify 184
--#define TARGET_NR_mq_getsetattr 185
--#define TARGET_NR_msgget 186
--#define TARGET_NR_msgctl 187
--#define TARGET_NR_msgrcv 188
--#define TARGET_NR_msgsnd 189
--#define TARGET_NR_semget 190
--#define TARGET_NR_semctl 191
--#define TARGET_NR_semtimedop 192
--#define TARGET_NR_semop 193
--#define TARGET_NR_shmget 194
--#define TARGET_NR_shmctl 195
--#define TARGET_NR_shmat 196
--#define TARGET_NR_shmdt 197
--#define TARGET_NR_socket 198
--#define TARGET_NR_socketpair 199
--#define TARGET_NR_bind 200
--#define TARGET_NR_listen 201
--#define TARGET_NR_accept 202
--#define TARGET_NR_connect 203
--#define TARGET_NR_getsockname 204
--#define TARGET_NR_getpeername 205
--#define TARGET_NR_sendto 206
--#define TARGET_NR_recvfrom 207
--#define TARGET_NR_setsockopt 208
--#define TARGET_NR_getsockopt 209
--#define TARGET_NR_shutdown 210
--#define TARGET_NR_sendmsg 211
--#define TARGET_NR_recvmsg 212
--#define TARGET_NR_readahead 213
--#define TARGET_NR_brk 214
--#define TARGET_NR_munmap 215
--#define TARGET_NR_mremap 216
--#define TARGET_NR_add_key 217
--#define TARGET_NR_request_key 218
--#define TARGET_NR_keyctl 219
--#define TARGET_NR_clone 220
--#define TARGET_NR_execve 221
--#ifdef TARGET_RISCV32
--#define TARGET_NR_mmap2 222
--#define TARGET_NR_fadvise64_64 223
--#else
--#define TARGET_NR_mmap 222
--#define TARGET_NR_fadvise64 223
--#endif
--#define TARGET_NR_swapon 224
--#define TARGET_NR_swapoff 225
--#define TARGET_NR_mprotect 226
--#define TARGET_NR_msync 227
--#define TARGET_NR_mlock 228
--#define TARGET_NR_munlock 229
--#define TARGET_NR_mlockall 230
--#define TARGET_NR_munlockall 231
--#define TARGET_NR_mincore 232
--#define TARGET_NR_madvise 233
--#define TARGET_NR_remap_file_pages 234
--#define TARGET_NR_mbind 235
--#define TARGET_NR_get_mempolicy 236
--#define TARGET_NR_set_mempolicy 237
--#define TARGET_NR_migrate_pages 238
--#define TARGET_NR_move_pages 239
--#define TARGET_NR_rt_tgsigqueueinfo 240
--#define TARGET_NR_perf_event_open 241
--#define TARGET_NR_accept4 242
--#define TARGET_NR_recvmmsg 243
--#define TARGET_NR_arch_specific_syscall 244
--#define TARGET_NR_wait4 260
--#define TARGET_NR_prlimit64 261
--#define TARGET_NR_fanotify_init 262
--#define TARGET_NR_fanotify_mark 263
--#define TARGET_NR_name_to_handle_at 264
--#define TARGET_NR_open_by_handle_at 265
--#define TARGET_NR_clock_adjtime 266
--#define TARGET_NR_syncfs 267
--#define TARGET_NR_setns 268
--#define TARGET_NR_sendmmsg 269
--#define TARGET_NR_process_vm_readv 270
--#define TARGET_NR_process_vm_writev 271
--#define TARGET_NR_kcmp 272
--#define TARGET_NR_finit_module 273
--#define TARGET_NR_sched_setattr 274
--#define TARGET_NR_sched_getattr 275
--#define TARGET_NR_renameat2 276
--#define TARGET_NR_seccomp 277
--#define TARGET_NR_getrandom 278
--#define TARGET_NR_memfd_create 279
--#define TARGET_NR_bpf 280
--#define TARGET_NR_execveat 281
--#define TARGET_NR_userfaultfd 282
--#define TARGET_NR_membarrier 283
--#define TARGET_NR_mlock2 284
--#define TARGET_NR_copy_file_range 285
--#define TARGET_NR_preadv2 286
--#define TARGET_NR_pwritev2 287
--#define TARGET_NR_pkey_mprotect 288
--#define TARGET_NR_pkey_alloc 289
--#define TARGET_NR_pkey_free 290
--#define TARGET_NR_statx 291
--#define TARGET_NR_io_pgetevents 292
--#define TARGET_NR_rseq 293
--#define TARGET_NR_kexec_file_load 294
--
--#define TARGET_NR_syscalls (TARGET_NR_kexec_file_load + 1)
- 
- #endif
--- 
-2.25.1
+This patch is easier to review with 'git-diff --function-context'.
+
+>   2 files changed, 68 insertions(+), 2 deletions(-)
+>=20
+> diff --git a/linux-user/strace.c b/linux-user/strace.c
+> index 4f7130b2ff..6420ccd97b 100644
+> --- a/linux-user/strace.c
+> +++ b/linux-user/strace.c
+> @@ -775,6 +775,7 @@ print_syscall_ret_newselect(const struct syscallname =
+*name, abi_long ret)
+>   #define TARGET_TIME_OOP      3   /* leap second in progress */
+>   #define TARGET_TIME_WAIT     4   /* leap second has occurred */
+>   #define TARGET_TIME_ERROR    5   /* clock not synchronized */
+> +#ifdef TARGET_NR_adjtimex
+>   static void
+>   print_syscall_ret_adjtimex(const struct syscallname *name, abi_long ret=
+)
+>   {
+> @@ -813,6 +814,7 @@ print_syscall_ret_adjtimex(const struct syscallname *=
+name, abi_long ret)
+>  =20
+>       qemu_log("\n");
+>   }
+> +#endif
+>  =20
+>   UNUSED static struct flags access_flags[] =3D {
+>       FLAG_GENERIC(F_OK),
+> diff --git a/linux-user/syscall.c b/linux-user/syscall.c
+> index 8d27d10807..909bec94a5 100644
+> --- a/linux-user/syscall.c
+> +++ b/linux-user/syscall.c
+> @@ -742,21 +742,30 @@ safe_syscall3(ssize_t, read, int, fd, void *, buff,=
+ size_t, count)
+>   safe_syscall3(ssize_t, write, int, fd, const void *, buff, size_t, coun=
+t)
+>   safe_syscall4(int, openat, int, dirfd, const char *, pathname, \
+>                 int, flags, mode_t, mode)
+> +#if defined(TARGET_NR_wait4) || defined(TARGET_NR_waitpid)
+>   safe_syscall4(pid_t, wait4, pid_t, pid, int *, status, int, options, \
+>                 struct rusage *, rusage)
+> +#endif
+>   safe_syscall5(int, waitid, idtype_t, idtype, id_t, id, siginfo_t *, inf=
+op, \
+>                 int, options, struct rusage *, rusage)
+>   safe_syscall3(int, execve, const char *, filename, char **, argv, char =
+**, envp)
+> +#if defined(TARGET_NR_select) || defined(TARGET_NR__newselect) || \
+> +    defined(TARGET_NR_pselect6)
+>   safe_syscall6(int, pselect6, int, nfds, fd_set *, readfds, fd_set *, wr=
+itefds, \
+>                 fd_set *, exceptfds, struct timespec *, timeout, void *, =
+sig)
+> +#endif
+> +#if defined(TARGET_NR_ppoll) || defined(TARGET_NR_poll)
+>   safe_syscall5(int, ppoll, struct pollfd *, ufds, unsigned int, nfds,
+>                 struct timespec *, tsp, const sigset_t *, sigmask,
+>                 size_t, sigsetsize)
+> +#endif
+>   safe_syscall6(int, epoll_pwait, int, epfd, struct epoll_event *, events=
+,
+>                 int, maxevents, int, timeout, const sigset_t *, sigmask,
+>                 size_t, sigsetsize)
+> +#ifdef TARGET_NR_futex
+>   safe_syscall6(int,futex,int *,uaddr,int,op,int,val, \
+>                 const struct timespec *,timeout,int *,uaddr2,int,val3)
+> +#endif
+>   safe_syscall2(int, rt_sigsuspend, sigset_t *, newset, size_t, sigsetsiz=
+e)
+>   safe_syscall2(int, kill, pid_t, pid, int, sig)
+>   safe_syscall2(int, tkill, int, tid, int, sig)
+> @@ -776,12 +785,16 @@ safe_syscall6(ssize_t, recvfrom, int, fd, void *, b=
+uf, size_t, len,
+>   safe_syscall3(ssize_t, sendmsg, int, fd, const struct msghdr *, msg, in=
+t, flags)
+>   safe_syscall3(ssize_t, recvmsg, int, fd, struct msghdr *, msg, int, fla=
+gs)
+>   safe_syscall2(int, flock, int, fd, int, operation)
+> +#ifdef TARGET_NR_rt_sigtimedwait
+>   safe_syscall4(int, rt_sigtimedwait, const sigset_t *, these, siginfo_t =
+*, uinfo,
+>                 const struct timespec *, uts, size_t, sigsetsize)
+> +#endif
+>   safe_syscall4(int, accept4, int, fd, struct sockaddr *, addr, socklen_t=
+ *, len,
+>                 int, flags)
+> +#if defined(TARGET_NR_nanosleep)
+>   safe_syscall2(int, nanosleep, const struct timespec *, req,
+>                 struct timespec *, rem)
+> +#endif
+>   #ifdef TARGET_NR_clock_nanosleep
+>   safe_syscall4(int, clock_nanosleep, const clockid_t, clock, int, flags,
+>                 const struct timespec *, req, struct timespec *, rem)
+> @@ -802,9 +815,11 @@ safe_syscall5(int, msgrcv, int, msgid, void *, msgp,=
+ size_t, sz,
+>   safe_syscall4(int, semtimedop, int, semid, struct sembuf *, tsops,
+>                 unsigned, nsops, const struct timespec *, timeout)
+>   #endif
+> -#if defined(TARGET_NR_mq_open) && defined(__NR_mq_open)
+> +#ifdef TARGET_NR_mq_timedsend
+>   safe_syscall5(int, mq_timedsend, int, mqdes, const char *, msg_ptr,
+>                 size_t, len, unsigned, prio, const struct timespec *, tim=
+eout)
+> +#endif
+> +#ifdef TARGET_NR_mq_timedreceive
+>   safe_syscall5(int, mq_timedreceive, int, mqdes, char *, msg_ptr,
+>                 size_t, len, unsigned *, prio, const struct timespec *, t=
+imeout)
+>   #endif
+> @@ -946,6 +961,8 @@ abi_long do_brk(abi_ulong new_brk)
+>       return target_brk;
+>   }
+>  =20
+> +#if defined(TARGET_NR_select) || defined(TARGET_NR__newselect) || \
+> +    defined(TARGET_NR_pselect6)
+>   static inline abi_long copy_from_user_fdset(fd_set *fds,
+>                                               abi_ulong target_fds_addr,
+>                                               int n)
+> @@ -1021,6 +1038,7 @@ static inline abi_long copy_to_user_fdset(abi_ulong=
+ target_fds_addr,
+>  =20
+>       return 0;
+>   }
+> +#endif
+>  =20
+>   #if defined(__alpha__)
+>   #define HOST_HZ 1024
+> @@ -1067,6 +1085,7 @@ static inline abi_long host_to_target_rusage(abi_ul=
+ong target_addr,
+>       return 0;
+>   }
+>  =20
+> +#ifdef TARGET_NR_setrlimit
+>   static inline rlim_t target_to_host_rlim(abi_ulong target_rlim)
+>   {
+>       abi_ulong target_rlim_swap;
+> @@ -1082,7 +1101,9 @@ static inline rlim_t target_to_host_rlim(abi_ulong =
+target_rlim)
+>      =20
+>       return result;
+>   }
+> +#endif
+>  =20
+> +#if defined(TARGET_NR_getrlimit) || defined(TARGET_NR_ugetrlimit)
+>   static inline abi_ulong host_to_target_rlim(rlim_t rlim)
+>   {
+>       abi_ulong target_rlim_swap;
+> @@ -1096,6 +1117,7 @@ static inline abi_ulong host_to_target_rlim(rlim_t =
+rlim)
+>      =20
+>       return result;
+>   }
+> +#endif
+>  =20
+>   static inline int target_to_host_resource(int code)
+>   {
+> @@ -1186,6 +1208,12 @@ static inline abi_long copy_to_user_timeval64(abi_=
+ulong target_tv_addr,
+>       return 0;
+>   }
+>  =20
+> +#if defined(TARGET_NR_futex) || \
+> +    defined(TARGET_NR_rt_sigtimedwait) || \
+> +    defined(TARGET_NR_pselect6) || defined(TARGET_NR_pselect6) || \
+> +    defined(TARGET_NR_nanosleep) || defined(TARGET_NR_clock_settime) || =
+\
+> +    defined(TARGET_NR_utimensat) || defined(TARGET_NR_mq_timedsend) || \
+> +    defined(TARGET_NR_mq_timedreceive)
+
+Maybe we need a Kconfig equivalent for user-mode syscalls :P
+
+>   static inline abi_long target_to_host_timespec(struct timespec *host_ts=
+,
+>                                                  abi_ulong target_addr)
+>   {
+> @@ -1199,6 +1227,7 @@ static inline abi_long target_to_host_timespec(stru=
+ct timespec *host_ts,
+>       unlock_user_struct(target_ts, target_addr, 0);
+>       return 0;
+>   }
+> +#endif
+>  =20
+>   static inline abi_long host_to_target_timespec(abi_ulong target_addr,
+>                                                  struct timespec *host_ts=
+)
+> @@ -1228,6 +1257,7 @@ static inline abi_long host_to_target_timespec64(ab=
+i_ulong target_addr,
+>       return 0;
+>   }
+>  =20
+> +#if defined(TARGET_NR_settimeofday)
+>   static inline abi_long copy_from_user_timezone(struct timezone *tz,
+>                                                  abi_ulong target_tz_addr=
+)
+>   {
+> @@ -1244,6 +1274,7 @@ static inline abi_long copy_from_user_timezone(stru=
+ct timezone *tz,
+>  =20
+>       return 0;
+>   }
+> +#endif
+>  =20
+>   #if defined(TARGET_NR_mq_open) && defined(__NR_mq_open)
+>   #include <mqueue.h>
+> @@ -6565,6 +6596,8 @@ static inline abi_long target_ftruncate64(void *cpu=
+_env, abi_long arg1,
+>   }
+>   #endif
+>  =20
+> +#if defined(TARGET_NR_timer_settime) || \
+> +    (defined(TARGET_NR_timerfd_settime) && defined(CONFIG_TIMERFD))
+>   static inline abi_long target_to_host_itimerspec(struct itimerspec *hos=
+t_itspec,
+>                                                    abi_ulong target_addr)
+>   {
+> @@ -6584,7 +6617,11 @@ static inline abi_long target_to_host_itimerspec(s=
+truct itimerspec *host_itspec,
+>       unlock_user_struct(target_itspec, target_addr, 1);
+>       return 0;
+>   }
+> +#endif
+>  =20
+> +#if ((defined(TARGET_NR_timerfd_gettime) || \
+> +      defined(TARGET_NR_timerfd_settime)) && defined(CONFIG_TIMERFD)) ||=
+ \
+> +    defined(TARGET_NR_timer_gettime) || defined(TARGET_NR_timer_settime)
+>   static inline abi_long host_to_target_itimerspec(abi_ulong target_addr,
+>                                                  struct itimerspec *host_=
+its)
+>   {
+> @@ -6603,7 +6640,10 @@ static inline abi_long host_to_target_itimerspec(a=
+bi_ulong target_addr,
+>       unlock_user_struct(target_itspec, target_addr, 0);
+>       return 0;
+>   }
+> +#endif
+>  =20
+> +#if defined(TARGET_NR_adjtimex) || \
+> +    (defined(TARGET_NR_clock_adjtime) && defined(CONFIG_CLOCK_ADJTIME))
+>   static inline abi_long target_to_host_timex(struct timex *host_tx,
+>                                               abi_long target_addr)
+>   {
+> @@ -6673,7 +6713,7 @@ static inline abi_long host_to_target_timex(abi_lon=
+g target_addr,
+>       unlock_user_struct(target_tx, target_addr, 1);
+>       return 0;
+>   }
+> -
+> +#endif
+>  =20
+>   static inline abi_long target_to_host_sigevent(struct sigevent *host_se=
+vp,
+>                                                  abi_ulong target_addr)
+> @@ -6840,6 +6880,7 @@ static inline abi_long host_to_target_statx(struct =
+target_statx *host_stx,
+>      futexes locally would make futexes shared between multiple processes
+>      tricky.  However they're probably useless because guest atomic
+>      operations won't work either.  */
+> +#if defined(TARGET_NR_futex)
+>   static int do_futex(target_ulong uaddr, int op, int val, target_ulong t=
+imeout,
+>                       target_ulong uaddr2, int val3)
+>   {
+> @@ -6886,6 +6927,7 @@ static int do_futex(target_ulong uaddr, int op, int=
+ val, target_ulong timeout,
+>           return -TARGET_ENOSYS;
+>       }
+>   }
+> +#endif
+>   #if defined(TARGET_NR_name_to_handle_at) && defined(CONFIG_OPEN_BY_HAND=
+LE)
+>   static abi_long do_name_to_handle_at(abi_long dirfd, abi_long pathname,
+>                                        abi_long handle, abi_long mount_id=
+,
+> @@ -8494,6 +8536,7 @@ static abi_long do_syscall1(void *cpu_env, int num,=
+ abi_long arg1,
+>               }
+>           }
+>           return ret;
+> +#ifdef TARGET_NR_rt_sigtimedwait
+>       case TARGET_NR_rt_sigtimedwait:
+>           {
+>               sigset_t set;
+> @@ -8530,6 +8573,7 @@ static abi_long do_syscall1(void *cpu_env, int num,=
+ abi_long arg1,
+>               }
+>           }
+>           return ret;
+> +#endif
+>       case TARGET_NR_rt_sigqueueinfo:
+>           {
+>               siginfo_t uinfo;
+> @@ -8629,6 +8673,7 @@ static abi_long do_syscall1(void *cpu_env, int num,=
+ abi_long arg1,
+>               }
+>           }
+>           return ret;
+> +#if defined(TARGET_NR_gettimeofday)
+>       case TARGET_NR_gettimeofday:
+>           {
+>               struct timeval tv;
+> @@ -8639,6 +8684,8 @@ static abi_long do_syscall1(void *cpu_env, int num,=
+ abi_long arg1,
+>               }
+>           }
+>           return ret;
+> +#endif
+> +#if defined(TARGET_NR_settimeofday)
+>       case TARGET_NR_settimeofday:
+>           {
+>               struct timeval tv, *ptv =3D NULL;
+> @@ -8660,6 +8707,7 @@ static abi_long do_syscall1(void *cpu_env, int num,=
+ abi_long arg1,
+>  =20
+>               return get_errno(settimeofday(ptv, ptz));
+>           }
+> +#endif
+>   #if defined(TARGET_NR_select)
+>       case TARGET_NR_select:
+>   #if defined(TARGET_WANT_NI_OLD_SELECT)
+> @@ -9131,6 +9179,8 @@ static abi_long do_syscall1(void *cpu_env, int num,=
+ abi_long arg1,
+>   #ifdef TARGET_NR_sendmmsg
+>       case TARGET_NR_sendmmsg:
+>           return do_sendrecvmmsg(arg1, arg2, arg3, arg4, 1);
+> +#endif
+> +#ifdef TARGET_NR_recvmmsg
+>       case TARGET_NR_recvmmsg:
+>           return do_sendrecvmmsg(arg1, arg2, arg3, arg4, 0);
+>   #endif
+> @@ -9305,6 +9355,7 @@ static abi_long do_syscall1(void *cpu_env, int num,=
+ abi_long arg1,
+>           return do_syscall(cpu_env, arg1 & 0xffff, arg2, arg3, arg4, arg=
+5,
+>                             arg6, arg7, arg8, 0);
+>   #endif
+> +#if defined(TARGET_NR_wait4)
+>       case TARGET_NR_wait4:
+>           {
+>               int status;
+> @@ -9332,6 +9383,7 @@ static abi_long do_syscall1(void *cpu_env, int num,=
+ abi_long arg1,
+>               }
+>           }
+>           return ret;
+> +#endif
+>   #ifdef TARGET_NR_swapoff
+>       case TARGET_NR_swapoff:
+>           if (!(p =3D lock_user_string(arg1)))
+> @@ -9476,6 +9528,7 @@ static abi_long do_syscall1(void *cpu_env, int num,=
+ abi_long arg1,
+>           return do_vm86(cpu_env, arg1, arg2);
+>   #endif
+>   #endif
+> +#if defined(TARGET_NR_adjtimex)
+>       case TARGET_NR_adjtimex:
+>           {
+>               struct timex host_buf;
+> @@ -9491,6 +9544,7 @@ static abi_long do_syscall1(void *cpu_env, int num,=
+ abi_long arg1,
+>               }
+>           }
+>           return ret;
+> +#endif
+>   #if defined(TARGET_NR_clock_adjtime) && defined(CONFIG_CLOCK_ADJTIME)
+>       case TARGET_NR_clock_adjtime:
+>           {
+> @@ -10007,6 +10061,7 @@ static abi_long do_syscall1(void *cpu_env, int nu=
+m, abi_long arg1,
+>           return get_errno(sched_get_priority_max(arg1));
+>       case TARGET_NR_sched_get_priority_min:
+>           return get_errno(sched_get_priority_min(arg1));
+> +#ifdef TARGET_NR_sched_rr_get_interval
+>       case TARGET_NR_sched_rr_get_interval:
+>           {
+>               struct timespec ts;
+> @@ -10016,6 +10071,8 @@ static abi_long do_syscall1(void *cpu_env, int nu=
+m, abi_long arg1,
+>               }
+>           }
+>           return ret;
+> +#endif
+> +#if defined(TARGET_NR_nanosleep)
+>       case TARGET_NR_nanosleep:
+>           {
+>               struct timespec req, rem;
+> @@ -10026,6 +10083,7 @@ static abi_long do_syscall1(void *cpu_env, int nu=
+m, abi_long arg1,
+>               }
+>           }
+>           return ret;
+> +#endif
+>       case TARGET_NR_prctl:
+>           switch (arg1) {
+>           case PR_GET_PDEATHSIG:
+> @@ -11496,8 +11554,10 @@ static abi_long do_syscall1(void *cpu_env, int n=
+um, abi_long arg1,
+>           }
+>           return ret;
+>   #endif
+> +#ifdef TARGET_NR_futex
+>       case TARGET_NR_futex:
+>           return do_futex(arg1, arg2, arg3, arg4, arg5, arg6);
+> +#endif
+>   #if defined(TARGET_NR_inotify_init) && defined(__NR_inotify_init)
+>       case TARGET_NR_inotify_init:
+>           ret =3D get_errno(sys_inotify_init());
+> @@ -11562,6 +11622,7 @@ static abi_long do_syscall1(void *cpu_env, int nu=
+m, abi_long arg1,
+>           unlock_user (p, arg1, 0);
+>           return ret;
+>  =20
+> +#ifdef TARGET_NR_mq_timedsend
+>       case TARGET_NR_mq_timedsend:
+>           {
+>               struct timespec ts;
+> @@ -11577,7 +11638,9 @@ static abi_long do_syscall1(void *cpu_env, int nu=
+m, abi_long arg1,
+>               unlock_user (p, arg2, arg3);
+>           }
+>           return ret;
+> +#endif
+>  =20
+> +#ifdef TARGET_NR_mq_timedreceive
+>       case TARGET_NR_mq_timedreceive:
+>           {
+>               struct timespec ts;
+> @@ -11598,6 +11661,7 @@ static abi_long do_syscall1(void *cpu_env, int nu=
+m, abi_long arg1,
+>                   put_user_u32(prio, arg4);
+>           }
+>           return ret;
+> +#endif
+>  =20
+>       /* Not implemented for now... */
+>   /*     case TARGET_NR_mq_notify: */
+>=20
+
+I hope I didn't miss anything:
+
+Reviewed-by: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
 
 
