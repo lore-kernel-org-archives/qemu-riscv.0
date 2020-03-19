@@ -1,53 +1,53 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jEz6f-0000gn-CN
-	for mharc-qemu-riscv@gnu.org; Thu, 19 Mar 2020 13:37:21 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:35935)
+	id 1jF1dF-0000c6-3q
+	for mharc-qemu-riscv@gnu.org; Thu, 19 Mar 2020 16:19:09 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:36811)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <alistair23@gmail.com>) id 1jEz6b-0000bE-L2
- for qemu-riscv@nongnu.org; Thu, 19 Mar 2020 13:37:19 -0400
+ (envelope-from <alistair23@gmail.com>) id 1jF1dC-0000Z3-2q
+ for qemu-riscv@nongnu.org; Thu, 19 Mar 2020 16:19:07 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1jEz6Z-0004pM-64
- for qemu-riscv@nongnu.org; Thu, 19 Mar 2020 13:37:17 -0400
-Received: from mail-ua1-x942.google.com ([2607:f8b0:4864:20::942]:32872)
+ (envelope-from <alistair23@gmail.com>) id 1jF1dA-0000Ex-Bu
+ for qemu-riscv@nongnu.org; Thu, 19 Mar 2020 16:19:06 -0400
+Received: from mail-vs1-xe43.google.com ([2607:f8b0:4864:20::e43]:42389)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1jEz6T-0004jY-Hu; Thu, 19 Mar 2020 13:37:09 -0400
-Received: by mail-ua1-x942.google.com with SMTP id i7so1141483uap.0;
- Thu, 19 Mar 2020 10:37:09 -0700 (PDT)
+ id 1jF1d6-0000CI-JS; Thu, 19 Mar 2020 16:19:00 -0400
+Received: by mail-vs1-xe43.google.com with SMTP id i25so2565021vsq.9;
+ Thu, 19 Mar 2020 13:19:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=lVsTFAY0TJyKe8KOt5ouQtBDBJLmEhUyhDy1IHfLLDY=;
- b=Jz92k76+Ar2JTjWiOnt6GalfiY6wwZSwxTAmJ2cvCQMGVtlOHgM0CqPBUCzPam//bT
- DNgLTClPufGaKQHigg2triWk88iX7Pnm21vmQUN+FXlb/E1ESXPApJ99f1fC2rxgM89Z
- xstxAe0rKba/4i8MqYlN8MN1b2sbR9WWLvmpUPvRbnY62y6ibxARzt/muz5O1d3mUC9j
- +BrcZcNFhD3dtNxbShWPiimVEC2zzBnQD1Tdn5IPi4QwB/COHI3rry4VWkeGhuMbmRog
- 8WA91p/EaVG9/9SXOVMv5BcxvlrtGAdAUwS3N9lB8uL9zo9T9XhpBVZX2xOsrRO3QjjT
- PPMg==
+ :cc; bh=RLUle+BrXsLKU1wdhS9fqQe6Wxwvu4uf/cuSQFm9c/w=;
+ b=jQvY1BWo+hmKYqdY3WjQ2reu6zwMfxYnQDCD4/1oOuuW2URCfNMlOV7ZyLsRZwjIjA
+ YvZuj8HuLA/x+8DP9nHRzN8tIuYxtYTOuiB0/8AOiXOVzrrBf8BkvseiWuLjfhMZafI3
+ u4EM49ILrYho0fJih48TAwfG9BWPTw7T/z11nwjCGBAolUfRs4vGkTbRK5K8seKdJws9
+ wEndq/JRwDoUIqkFIy/GQVZHboDJUKDHLgKM50paoU0jk5FclcP3y0xpM+s8PnzVm7ab
+ 7Dbiw/bU1JGaFpchb9lGSahjpMgTeo6b/v9xt021ZLop4PA+j/tRAxMXXNkbnVy/Ua7m
+ 7APw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=lVsTFAY0TJyKe8KOt5ouQtBDBJLmEhUyhDy1IHfLLDY=;
- b=qqEnMaNssbD89hIwdvBXhtJAOWP1sNd9VCxZ5dwOqlb3tgzCTT2nQOt2++B/Vu81HD
- U8GU7+3Wn6Lh/q+fO5V2nzDG3+om2VkNfQXms3Ew3lNO76rYRLWBXjtv9wjgDXeV3aqz
- ZvI2yFjzi1KnMRkqC6B4mbRNCCIJk00gt7Vwpv7pOOOWqX/ji2VOJOoX1MQa2q8OSFcX
- HW0vhRGS5Hf5eovrZQGMa125hZ30gaYY0BWrqGuPLwADoNiNPLCAt1qWuG2ridGR47Ov
- xeBPcIzrtH5ufdCsxoIpPB0kkdUjKI8JJTFDpnHlWbG5SIs4TNfMOrWE7q7NqNlL0n3j
- 2cPg==
-X-Gm-Message-State: ANhLgQ3GAILlE+O7JTKULFLTcePrK+QC3Fwj3Hss2ep05QrtMJaEuTaB
- VN1nbZcnLGw4pq9Kw09lP4JLV+eGPez/4rGhua0=
-X-Google-Smtp-Source: ADFU+vsL8s5X7/DYTy6GVDvvENviwNdAGlzYks27sN4+7XfMg3QRJgHWDRMZ0ue9tzbxQJtVtIr6Cp/e0D1b+P4G4ls=
-X-Received: by 2002:ab0:2881:: with SMTP id s1mr2777445uap.8.1584639428534;
- Thu, 19 Mar 2020 10:37:08 -0700 (PDT)
+ bh=RLUle+BrXsLKU1wdhS9fqQe6Wxwvu4uf/cuSQFm9c/w=;
+ b=LbDS31C1dUZfOGy0vTzi2Jy+DBPvrEF7TRpjT9vNT0a++3XCuua8DnF7UxyWIfTaNY
+ /ekkupudIK68ZCOcnQ7G+GL1eyDvadMiQuXj6vXg6XGP5g/m/WpB00oJjJ1b80km/s3Y
+ seZhDyqJTsPNLUD+CEcAE54c2tLh2knFWrVRXg++FJXhWk1DGnnSTNazZmK536wDqYkT
+ GdZZZKcVsk0dJ1zZrbPTykpX4BCa2JiIpV4772jfqRH/L86RMNmi9SIkX/1aSZ8268An
+ x2mxpX4bz7TUcEqjIWccNRCvl6QXJJFJq6khj8bB1FeN61hfRahR+eMNPevEqdPCy9jj
+ f0Nw==
+X-Gm-Message-State: ANhLgQ0mT2jaEjh/G8gMgpLchDFWxXl8VMDXer/V24HtCa7I2dJzJdwF
+ txIyUSHSIPSSJFHE6BcgFESNxdWv+yEC7uM8Bng=
+X-Google-Smtp-Source: ADFU+vuqgkolwrQTdi9sT20jOtSh3YbNgNTA8kRyL5eLgZ0DTsriQguF9nh9snbnCCoYE9K1dUVsXbSfj9BD4rbXXBQ=
+X-Received: by 2002:a67:26c2:: with SMTP id m185mr3857812vsm.180.1584649139720; 
+ Thu, 19 Mar 2020 13:18:59 -0700 (PDT)
 MIME-Version: 1.0
 References: <20200317150653.9008-1-zhiwei_liu@c-sky.com>
- <20200317150653.9008-13-zhiwei_liu@c-sky.com>
-In-Reply-To: <20200317150653.9008-13-zhiwei_liu@c-sky.com>
+ <20200317150653.9008-15-zhiwei_liu@c-sky.com>
+In-Reply-To: <20200317150653.9008-15-zhiwei_liu@c-sky.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 19 Mar 2020 10:29:12 -0700
-Message-ID: <CAKmqyKNm+kZQXJz0GUDwnK7hWK5A1yOacXy+A4TprSP7Ad=TCQ@mail.gmail.com>
-Subject: Re: [PATCH v6 12/61] target/riscv: vector integer add-with-carry /
- subtract-with-borrow instructions
+Date: Thu, 19 Mar 2020 13:10:57 -0700
+Message-ID: <CAKmqyKNQQS0GmZS-8T52uOfPoadrX4pTg4AepKRf235zWDLT7A@mail.gmail.com>
+Subject: Re: [PATCH v6 14/61] target/riscv: vector single-width bit shift
+ instructions
 To: LIU Zhiwei <zhiwei_liu@c-sky.com>
 Cc: Richard Henderson <richard.henderson@linaro.org>,
  Chih-Min Chao <chihmin.chao@sifive.com>, 
@@ -58,7 +58,7 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
 Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::942
+X-Received-From: 2607:f8b0:4864:20::e43
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -70,342 +70,232 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Mar 2020 17:37:20 -0000
+X-List-Received-Date: Thu, 19 Mar 2020 20:19:08 -0000
 
-On Tue, Mar 17, 2020 at 8:31 AM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
+On Tue, Mar 17, 2020 at 8:35 AM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
 >
 > Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
+> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  target/riscv/helper.h                   |  33 ++++++
->  target/riscv/insn32.decode              |  11 ++
->  target/riscv/insn_trans/trans_rvv.inc.c |  78 +++++++++++++
->  target/riscv/vector_helper.c            | 148 ++++++++++++++++++++++++
->  4 files changed, 270 insertions(+)
+>  target/riscv/helper.h                   | 25 ++++++++
+>  target/riscv/insn32.decode              |  9 +++
+>  target/riscv/insn_trans/trans_rvv.inc.c | 54 ++++++++++++++++
+>  target/riscv/vector_helper.c            | 85 +++++++++++++++++++++++++
+>  4 files changed, 173 insertions(+)
 >
 > diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-> index 1256defb6c..72c733bf49 100644
+> index 4373e9e8c2..47284c7476 100644
 > --- a/target/riscv/helper.h
 > +++ b/target/riscv/helper.h
-> @@ -339,3 +339,36 @@ DEF_HELPER_6(vwadd_wx_w, void, ptr, ptr, tl, ptr, env, i32)
->  DEF_HELPER_6(vwsub_wx_b, void, ptr, ptr, tl, ptr, env, i32)
->  DEF_HELPER_6(vwsub_wx_h, void, ptr, ptr, tl, ptr, env, i32)
->  DEF_HELPER_6(vwsub_wx_w, void, ptr, ptr, tl, ptr, env, i32)
+> @@ -397,3 +397,28 @@ DEF_HELPER_6(vxor_vx_b, void, ptr, ptr, tl, ptr, env, i32)
+>  DEF_HELPER_6(vxor_vx_h, void, ptr, ptr, tl, ptr, env, i32)
+>  DEF_HELPER_6(vxor_vx_w, void, ptr, ptr, tl, ptr, env, i32)
+>  DEF_HELPER_6(vxor_vx_d, void, ptr, ptr, tl, ptr, env, i32)
 > +
-> +DEF_HELPER_6(vadc_vvm_b, void, ptr, ptr, ptr, ptr, env, i32)
-> +DEF_HELPER_6(vadc_vvm_h, void, ptr, ptr, ptr, ptr, env, i32)
-> +DEF_HELPER_6(vadc_vvm_w, void, ptr, ptr, ptr, ptr, env, i32)
-> +DEF_HELPER_6(vadc_vvm_d, void, ptr, ptr, ptr, ptr, env, i32)
-> +DEF_HELPER_6(vsbc_vvm_b, void, ptr, ptr, ptr, ptr, env, i32)
-> +DEF_HELPER_6(vsbc_vvm_h, void, ptr, ptr, ptr, ptr, env, i32)
-> +DEF_HELPER_6(vsbc_vvm_w, void, ptr, ptr, ptr, ptr, env, i32)
-> +DEF_HELPER_6(vsbc_vvm_d, void, ptr, ptr, ptr, ptr, env, i32)
-> +DEF_HELPER_6(vmadc_vvm_b, void, ptr, ptr, ptr, ptr, env, i32)
-> +DEF_HELPER_6(vmadc_vvm_h, void, ptr, ptr, ptr, ptr, env, i32)
-> +DEF_HELPER_6(vmadc_vvm_w, void, ptr, ptr, ptr, ptr, env, i32)
-> +DEF_HELPER_6(vmadc_vvm_d, void, ptr, ptr, ptr, ptr, env, i32)
-> +DEF_HELPER_6(vmsbc_vvm_b, void, ptr, ptr, ptr, ptr, env, i32)
-> +DEF_HELPER_6(vmsbc_vvm_h, void, ptr, ptr, ptr, ptr, env, i32)
-> +DEF_HELPER_6(vmsbc_vvm_w, void, ptr, ptr, ptr, ptr, env, i32)
-> +DEF_HELPER_6(vmsbc_vvm_d, void, ptr, ptr, ptr, ptr, env, i32)
-> +DEF_HELPER_6(vadc_vxm_b, void, ptr, ptr, tl, ptr, env, i32)
-> +DEF_HELPER_6(vadc_vxm_h, void, ptr, ptr, tl, ptr, env, i32)
-> +DEF_HELPER_6(vadc_vxm_w, void, ptr, ptr, tl, ptr, env, i32)
-> +DEF_HELPER_6(vadc_vxm_d, void, ptr, ptr, tl, ptr, env, i32)
-> +DEF_HELPER_6(vsbc_vxm_b, void, ptr, ptr, tl, ptr, env, i32)
-> +DEF_HELPER_6(vsbc_vxm_h, void, ptr, ptr, tl, ptr, env, i32)
-> +DEF_HELPER_6(vsbc_vxm_w, void, ptr, ptr, tl, ptr, env, i32)
-> +DEF_HELPER_6(vsbc_vxm_d, void, ptr, ptr, tl, ptr, env, i32)
-> +DEF_HELPER_6(vmadc_vxm_b, void, ptr, ptr, tl, ptr, env, i32)
-> +DEF_HELPER_6(vmadc_vxm_h, void, ptr, ptr, tl, ptr, env, i32)
-> +DEF_HELPER_6(vmadc_vxm_w, void, ptr, ptr, tl, ptr, env, i32)
-> +DEF_HELPER_6(vmadc_vxm_d, void, ptr, ptr, tl, ptr, env, i32)
-> +DEF_HELPER_6(vmsbc_vxm_b, void, ptr, ptr, tl, ptr, env, i32)
-> +DEF_HELPER_6(vmsbc_vxm_h, void, ptr, ptr, tl, ptr, env, i32)
-> +DEF_HELPER_6(vmsbc_vxm_w, void, ptr, ptr, tl, ptr, env, i32)
-> +DEF_HELPER_6(vmsbc_vxm_d, void, ptr, ptr, tl, ptr, env, i32)
+> +DEF_HELPER_6(vsll_vv_b, void, ptr, ptr, ptr, ptr, env, i32)
+> +DEF_HELPER_6(vsll_vv_h, void, ptr, ptr, ptr, ptr, env, i32)
+> +DEF_HELPER_6(vsll_vv_w, void, ptr, ptr, ptr, ptr, env, i32)
+> +DEF_HELPER_6(vsll_vv_d, void, ptr, ptr, ptr, ptr, env, i32)
+> +DEF_HELPER_6(vsrl_vv_b, void, ptr, ptr, ptr, ptr, env, i32)
+> +DEF_HELPER_6(vsrl_vv_h, void, ptr, ptr, ptr, ptr, env, i32)
+> +DEF_HELPER_6(vsrl_vv_w, void, ptr, ptr, ptr, ptr, env, i32)
+> +DEF_HELPER_6(vsrl_vv_d, void, ptr, ptr, ptr, ptr, env, i32)
+> +DEF_HELPER_6(vsra_vv_b, void, ptr, ptr, ptr, ptr, env, i32)
+> +DEF_HELPER_6(vsra_vv_h, void, ptr, ptr, ptr, ptr, env, i32)
+> +DEF_HELPER_6(vsra_vv_w, void, ptr, ptr, ptr, ptr, env, i32)
+> +DEF_HELPER_6(vsra_vv_d, void, ptr, ptr, ptr, ptr, env, i32)
+> +DEF_HELPER_6(vsll_vx_b, void, ptr, ptr, tl, ptr, env, i32)
+> +DEF_HELPER_6(vsll_vx_h, void, ptr, ptr, tl, ptr, env, i32)
+> +DEF_HELPER_6(vsll_vx_w, void, ptr, ptr, tl, ptr, env, i32)
+> +DEF_HELPER_6(vsll_vx_d, void, ptr, ptr, tl, ptr, env, i32)
+> +DEF_HELPER_6(vsrl_vx_b, void, ptr, ptr, tl, ptr, env, i32)
+> +DEF_HELPER_6(vsrl_vx_h, void, ptr, ptr, tl, ptr, env, i32)
+> +DEF_HELPER_6(vsrl_vx_w, void, ptr, ptr, tl, ptr, env, i32)
+> +DEF_HELPER_6(vsrl_vx_d, void, ptr, ptr, tl, ptr, env, i32)
+> +DEF_HELPER_6(vsra_vx_b, void, ptr, ptr, tl, ptr, env, i32)
+> +DEF_HELPER_6(vsra_vx_h, void, ptr, ptr, tl, ptr, env, i32)
+> +DEF_HELPER_6(vsra_vx_w, void, ptr, ptr, tl, ptr, env, i32)
+> +DEF_HELPER_6(vsra_vx_d, void, ptr, ptr, tl, ptr, env, i32)
 > diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-> index 4bdbfd16fa..022c8ea18b 100644
+> index 3ad6724632..f6d0f5aec5 100644
 > --- a/target/riscv/insn32.decode
 > +++ b/target/riscv/insn32.decode
-> @@ -70,6 +70,7 @@
->  @r2_nfvm ... ... vm:1 ..... ..... ... ..... ....... &r2nfvm %nf %rs1 %rd
->  @r_nfvm  ... ... vm:1 ..... ..... ... ..... ....... &rnfvm %nf %rs2 %rs1 %rd
->  @r_vm    ...... vm:1 ..... ..... ... ..... ....... &rmrr %rs2 %rs1 %rd
-> +@r_vm_1  ...... . ..... ..... ... ..... .......    &rmrr vm=1 %rs2 %rs1 %rd
->  @r_wdvm  ..... wd:1 vm:1 ..... ..... ... ..... ....... &rwdvm %rs2 %rs1 %rd
->  @r2_zimm . zimm:11  ..... ... ..... ....... %rs1 %rd
->
-> @@ -300,6 +301,16 @@ vwsubu_wv       110110 . ..... ..... 010 ..... 1010111 @r_vm
->  vwsubu_wx       110110 . ..... ..... 110 ..... 1010111 @r_vm
->  vwsub_wv        110111 . ..... ..... 010 ..... 1010111 @r_vm
->  vwsub_wx        110111 . ..... ..... 110 ..... 1010111 @r_vm
-> +vadc_vvm        010000 1 ..... ..... 000 ..... 1010111 @r_vm_1
-> +vadc_vxm        010000 1 ..... ..... 100 ..... 1010111 @r_vm_1
-> +vadc_vim        010000 1 ..... ..... 011 ..... 1010111 @r_vm_1
-> +vmadc_vvm       010001 1 ..... ..... 000 ..... 1010111 @r_vm_1
-> +vmadc_vxm       010001 1 ..... ..... 100 ..... 1010111 @r_vm_1
-> +vmadc_vim       010001 1 ..... ..... 011 ..... 1010111 @r_vm_1
-> +vsbc_vvm        010010 1 ..... ..... 000 ..... 1010111 @r_vm_1
-> +vsbc_vxm        010010 1 ..... ..... 100 ..... 1010111 @r_vm_1
-> +vmsbc_vvm       010011 1 ..... ..... 000 ..... 1010111 @r_vm_1
-> +vmsbc_vxm       010011 1 ..... ..... 100 ..... 1010111 @r_vm_1
+> @@ -320,6 +320,15 @@ vor_vi          001010 . ..... ..... 011 ..... 1010111 @r_vm
+>  vxor_vv         001011 . ..... ..... 000 ..... 1010111 @r_vm
+>  vxor_vx         001011 . ..... ..... 100 ..... 1010111 @r_vm
+>  vxor_vi         001011 . ..... ..... 011 ..... 1010111 @r_vm
+> +vsll_vv         100101 . ..... ..... 000 ..... 1010111 @r_vm
+> +vsll_vx         100101 . ..... ..... 100 ..... 1010111 @r_vm
+> +vsll_vi         100101 . ..... ..... 011 ..... 1010111 @r_vm
+> +vsrl_vv         101000 . ..... ..... 000 ..... 1010111 @r_vm
+> +vsrl_vx         101000 . ..... ..... 100 ..... 1010111 @r_vm
+> +vsrl_vi         101000 . ..... ..... 011 ..... 1010111 @r_vm
+> +vsra_vv         101001 . ..... ..... 000 ..... 1010111 @r_vm
+> +vsra_vx         101001 . ..... ..... 100 ..... 1010111 @r_vm
+> +vsra_vi         101001 . ..... ..... 011 ..... 1010111 @r_vm
 >
 >  vsetvli         0 ........... ..... 111 ..... 1010111  @r2_zimm
 >  vsetvl          1000000 ..... ..... 111 ..... 1010111  @r
 > diff --git a/target/riscv/insn_trans/trans_rvv.inc.c b/target/riscv/insn_trans/trans_rvv.inc.c
-> index 8f17faa3f3..4562d5f14f 100644
+> index b4ba6d83f3..6ed2466e75 100644
 > --- a/target/riscv/insn_trans/trans_rvv.inc.c
 > +++ b/target/riscv/insn_trans/trans_rvv.inc.c
-> @@ -1169,3 +1169,81 @@ GEN_OPIWX_WIDEN_TRANS(vwaddu_wx)
->  GEN_OPIWX_WIDEN_TRANS(vwadd_wx)
->  GEN_OPIWX_WIDEN_TRANS(vwsubu_wx)
->  GEN_OPIWX_WIDEN_TRANS(vwsub_wx)
+> @@ -1258,3 +1258,57 @@ GEN_OPIVX_GVEC_TRANS(vxor_vx, xors)
+>  GEN_OPIVI_GVEC_TRANS(vand_vi, 0, vand_vx, andi)
+>  GEN_OPIVI_GVEC_TRANS(vor_vi, 0, vor_vx,  ori)
+>  GEN_OPIVI_GVEC_TRANS(vxor_vi, 0, vxor_vx, xori)
 > +
-> +/* Vector Integer Add-with-Carry / Subtract-with-Borrow Instructions */
-> +/* OPIVV without GVEC IR */
-> +#define GEN_OPIVV_TRANS(NAME, CHECK)                               \
-> +static bool trans_##NAME(DisasContext *s, arg_rmrr *a)             \
-> +{                                                                  \
-> +    if (CHECK(s, a)) {                                             \
-> +        uint32_t data = 0;                                         \
-> +        static gen_helper_gvec_4_ptr * const fns[4] = {            \
-> +            gen_helper_##NAME##_b, gen_helper_##NAME##_h,          \
-> +            gen_helper_##NAME##_w, gen_helper_##NAME##_d,          \
-> +        };                                                         \
-> +        data = FIELD_DP32(data, VDATA, MLEN, s->mlen);             \
-> +        data = FIELD_DP32(data, VDATA, VM, a->vm);                 \
-> +        data = FIELD_DP32(data, VDATA, LMUL, s->lmul);             \
-> +        tcg_gen_gvec_4_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),     \
-> +            vreg_ofs(s, a->rs1), vreg_ofs(s, a->rs2),              \
-> +            cpu_env, 0, s->vlen / 8, data, fns[s->sew]);           \
-> +        return true;                                               \
-> +    }                                                              \
-> +    return false;                                                  \
-> +}
+> +/* Vector Single-Width Bit Shift Instructions */
+> +GEN_OPIVV_GVEC_TRANS(vsll_vv,  shlv)
+> +GEN_OPIVV_GVEC_TRANS(vsrl_vv,  shrv)
+> +GEN_OPIVV_GVEC_TRANS(vsra_vv,  sarv)
 > +
-> +/*
-> + * For vadc and vsbc, an illegal instruction exception is raised if the
-> + * destination vector register is v0 and LMUL > 1. (Section 12.3)
-> + */
-> +static bool opivv_vadc_check(DisasContext *s, arg_rmrr *a)
+> +typedef void GVecGen2sFn32(unsigned, uint32_t, uint32_t, TCGv_i32,
+> +                           uint32_t, uint32_t);
+> +
+> +static inline bool
+> +do_opivx_gvec_shift(DisasContext *s, arg_rmrr *a, GVecGen2sFn32 *gvec_fn,
+> +                    gen_helper_opivx *fn)
 > +{
-> +    return (vext_check_isa_ill(s) &&
-> +            vext_check_reg(s, a->rd, false) &&
-> +            vext_check_reg(s, a->rs2, false) &&
-> +            vext_check_reg(s, a->rs1, false) &&
-> +            ((a->rd != 0) || (s->lmul == 0)));
+> +    if (!opivx_check(s, a)) {
+> +        return false;
+> +    }
+> +
+> +    if (a->vm && s->vl_eq_vlmax) {
+> +        TCGv_i32 src1 = tcg_temp_new_i32();
+> +        TCGv tmp = tcg_temp_new();
+> +
+> +        gen_get_gpr(tmp, a->rs1);
+> +        tcg_gen_trunc_tl_i32(src1, tmp);
+> +        tcg_gen_extract_i32(src1, src1, 0, s->sew + 3);
+> +        gvec_fn(s->sew, vreg_ofs(s, a->rd), vreg_ofs(s, a->rs2),
+> +                src1, MAXSZ(s), MAXSZ(s));
+> +
+> +        tcg_temp_free_i32(src1);
+> +        tcg_temp_free(tmp);
+> +        return true;
+> +    } else {
+> +        return opivx_trans(a->rd, a->rs1, a->rs2, a->vm, fn, s);
+> +    }
+> +    return true;
 > +}
 > +
-> +GEN_OPIVV_TRANS(vadc_vvm, opivv_vadc_check)
-> +GEN_OPIVV_TRANS(vsbc_vvm, opivv_vadc_check)
-> +
-> +/*
-> + * For vmadc and vmsbc, an illegal instruction exception is raised if the
-> + * destination vector register overlaps a source vector register group.
-> + */
-> +static bool opivv_vmadc_check(DisasContext *s, arg_rmrr *a)
-> +{
-> +    return (vext_check_isa_ill(s) &&
-> +            vext_check_reg(s, a->rs2, false) &&
-> +            vext_check_reg(s, a->rs1, false) &&
-> +            vext_check_overlap_group(a->rd, 1, a->rs1, 1 << s->lmul) &&
-> +            vext_check_overlap_group(a->rd, 1, a->rs2, 1 << s->lmul));
+> +#define GEN_OPIVX_GVEC_SHIFT_TRANS(NAME, SUF) \
+> +static bool trans_##NAME(DisasContext *s, arg_rmrr *a)                    \
+> +{                                                                         \
+> +    static gen_helper_opivx * const fns[4] = {                            \
+> +        gen_helper_##NAME##_b, gen_helper_##NAME##_h,                     \
+> +        gen_helper_##NAME##_w, gen_helper_##NAME##_d,                     \
+> +    };                                                                    \
+> +                                                                          \
+> +    return do_opivx_gvec_shift(s, a, tcg_gen_gvec_##SUF, fns[s->sew]);    \
 > +}
 > +
-> +GEN_OPIVV_TRANS(vmadc_vvm, opivv_vmadc_check)
-> +GEN_OPIVV_TRANS(vmsbc_vvm, opivv_vmadc_check)
+> +GEN_OPIVX_GVEC_SHIFT_TRANS(vsll_vx,  shls)
+> +GEN_OPIVX_GVEC_SHIFT_TRANS(vsrl_vx,  shrs)
+> +GEN_OPIVX_GVEC_SHIFT_TRANS(vsra_vx,  sars)
 > +
-> +static bool opivx_vadc_check(DisasContext *s, arg_rmrr *a)
-> +{
-> +    return (vext_check_isa_ill(s) &&
-> +            vext_check_reg(s, a->rd, false) &&
-> +            vext_check_reg(s, a->rs2, false) &&
-> +            ((a->rd != 0) || (s->lmul == 0)));
-> +}
-> +
-> +GEN_OPIVX_TRANS(vadc_vxm, opivx_vadc_check)
-> +GEN_OPIVX_TRANS(vsbc_vxm, opivx_vadc_check)
-> +
-> +static bool opivx_vmadc_check(DisasContext *s, arg_rmrr *a)
-> +{
-> +    return (vext_check_isa_ill(s) &&
-> +            vext_check_reg(s, a->rs2, false) &&
-> +            vext_check_overlap_group(a->rd, 1, a->rs2, 1 << s->lmul));
-> +}
-> +
-> +GEN_OPIVX_TRANS(vmadc_vxm, opivx_vmadc_check)
-> +GEN_OPIVX_TRANS(vmsbc_vxm, opivx_vmadc_check)
-> +
-> +GEN_OPIVI_TRANS(vadc_vim, 0, vadc_vxm, opivx_vadc_check)
-> +GEN_OPIVI_TRANS(vmadc_vim, 0, vmadc_vxm, opivx_vmadc_check)
+> +GEN_OPIVI_GVEC_TRANS(vsll_vi, 1, vsll_vx,  shli)
+> +GEN_OPIVI_GVEC_TRANS(vsrl_vi, 1, vsrl_vx,  shri)
+> +GEN_OPIVI_GVEC_TRANS(vsra_vi, 1, vsra_vx,  sari)
 > diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-> index d0e6f12f43..9913dcbea2 100644
+> index 470bf079b2..c3518516f0 100644
 > --- a/target/riscv/vector_helper.c
 > +++ b/target/riscv/vector_helper.c
-> @@ -186,6 +186,14 @@ static void clearq(void *vd, uint32_t idx, uint32_t cnt, uint32_t tot)
->      vext_clear(cur, cnt, tot);
->  }
->
-> +static inline void vext_set_elem_mask(void *v0, int mlen, int index,
-> +        uint8_t value)
-> +{
-> +    int idx = (index * mlen) / 64;
-> +    int pos = (index * mlen) % 64;
-> +    uint64_t old = ((uint64_t *)v0)[idx];
-> +    ((uint64_t *)v0)[idx] = deposit64(old, pos, mlen, value);
-> +}
->
->  static inline int vext_elem_mask(void *v0, int mlen, int index)
->  {
-> @@ -1087,3 +1095,143 @@ GEN_VEXT_VX(vwadd_wx_w, 4, 8, clearq)
->  GEN_VEXT_VX(vwsub_wx_b, 1, 2, clearh)
->  GEN_VEXT_VX(vwsub_wx_h, 2, 4, clearl)
->  GEN_VEXT_VX(vwsub_wx_w, 4, 8, clearq)
+> @@ -1286,3 +1286,88 @@ GEN_VEXT_VX(vxor_vx_b, 1, 1, clearb)
+>  GEN_VEXT_VX(vxor_vx_h, 2, 2, clearh)
+>  GEN_VEXT_VX(vxor_vx_w, 4, 4, clearl)
+>  GEN_VEXT_VX(vxor_vx_d, 8, 8, clearq)
 > +
-> +#define DO_VADC(N, M, C) (N + M + C)
-> +#define DO_VSBC(N, M, C) (N - M - C)
+> +/* Vector Single-Width Bit Shift Instructions */
+> +#define DO_SLL(N, M)  (N << (M))
+> +#define DO_SRL(N, M)  (N >> (M))
 > +
-> +#define GEN_VEXT_VADC_VVM(NAME, ETYPE, H, DO_OP, CLEAR_FN)    \
-> +void HELPER(NAME)(void *vd, void *v0, void *vs1, void *vs2,   \
-> +                  CPURISCVState *env, uint32_t desc)          \
-> +{                                                             \
-> +    uint32_t mlen = vext_mlen(desc);                          \
-> +    uint32_t vl = env->vl;                                    \
-> +    uint32_t esz = sizeof(ETYPE);                             \
-> +    uint32_t vlmax = vext_maxsz(desc) / esz;                  \
-> +    uint32_t i;                                               \
-> +                                                              \
-> +    if (vl == 0) {                                            \
-> +        return;                                               \
-> +    }                                                         \
-> +    for (i = 0; i < vl; i++) {                                \
-> +        ETYPE s1 = *((ETYPE *)vs1 + H(i));                    \
-> +        ETYPE s2 = *((ETYPE *)vs2 + H(i));                    \
-> +        uint8_t carry = vext_elem_mask(v0, mlen, i);          \
-> +                                                              \
-> +        *((ETYPE *)vd + H(i)) = DO_OP(s2, s1, carry);         \
-> +    }                                                         \
-> +    CLEAR_FN(vd, vl, vl * esz, vlmax * esz);                  \
+> +/* generate the helpers for shift instructions with two vector operators */
+> +#define GEN_VEXT_SHIFT_VV(NAME, TS1, TS2, HS1, HS2, OP, MASK, CLEAR_FN)   \
+> +void HELPER(NAME)(void *vd, void *v0, void *vs1,                          \
+> +        void *vs2, CPURISCVState *env, uint32_t desc)                     \
+> +{                                                                         \
+> +    uint32_t mlen = vext_mlen(desc);                                      \
+> +    uint32_t vm = vext_vm(desc);                                          \
+> +    uint32_t vl = env->vl;                                                \
+> +    uint32_t esz = sizeof(TS1);                                           \
+> +    uint32_t vlmax = vext_maxsz(desc) / esz;                              \
+> +    uint32_t i;                                                           \
+> +                                                                          \
+> +    if (vl == 0) {                                                        \
+> +        return;                                                           \
+> +    }                                                                     \
+> +    for (i = 0; i < vl; i++) {                                            \
+> +        if (!vm && !vext_elem_mask(v0, mlen, i)) {                        \
+> +            continue;                                                     \
+> +        }                                                                 \
+> +        TS1 s1 = *((TS1 *)vs1 + HS1(i));                                  \
+> +        TS2 s2 = *((TS2 *)vs2 + HS2(i));                                  \
+> +        *((TS1 *)vd + HS1(i)) = OP(s2, s1 & MASK);                        \
+> +    }                                                                     \
+> +    CLEAR_FN(vd, vl, vl * esz, vlmax * esz);                              \
 > +}
 > +
-> +GEN_VEXT_VADC_VVM(vadc_vvm_b, uint8_t,  H1, DO_VADC, clearb)
-> +GEN_VEXT_VADC_VVM(vadc_vvm_h, uint16_t, H2, DO_VADC, clearh)
-> +GEN_VEXT_VADC_VVM(vadc_vvm_w, uint32_t, H4, DO_VADC, clearl)
-> +GEN_VEXT_VADC_VVM(vadc_vvm_d, uint64_t, H8, DO_VADC, clearq)
+> +GEN_VEXT_SHIFT_VV(vsll_vv_b, uint8_t,  uint8_t, H1, H1, DO_SLL, 0x7, clearb)
+> +GEN_VEXT_SHIFT_VV(vsll_vv_h, uint16_t, uint16_t, H2, H2, DO_SLL, 0xf, clearh)
+> +GEN_VEXT_SHIFT_VV(vsll_vv_w, uint32_t, uint32_t, H4, H4, DO_SLL, 0x1f, clearl)
+> +GEN_VEXT_SHIFT_VV(vsll_vv_d, uint64_t, uint64_t, H8, H8, DO_SLL, 0x3f, clearq)
 > +
-> +GEN_VEXT_VADC_VVM(vsbc_vvm_b, uint8_t,  H1, DO_VSBC, clearb)
-> +GEN_VEXT_VADC_VVM(vsbc_vvm_h, uint16_t, H2, DO_VSBC, clearh)
-> +GEN_VEXT_VADC_VVM(vsbc_vvm_w, uint32_t, H4, DO_VSBC, clearl)
-> +GEN_VEXT_VADC_VVM(vsbc_vvm_d, uint64_t, H8, DO_VSBC, clearq)
+> +GEN_VEXT_SHIFT_VV(vsrl_vv_b, uint8_t, uint8_t, H1, H1, DO_SRL, 0x7, clearb)
+> +GEN_VEXT_SHIFT_VV(vsrl_vv_h, uint16_t, uint16_t, H2, H2, DO_SRL, 0xf, clearh)
+> +GEN_VEXT_SHIFT_VV(vsrl_vv_w, uint32_t, uint32_t, H4, H4, DO_SRL, 0x1f, clearl)
+> +GEN_VEXT_SHIFT_VV(vsrl_vv_d, uint64_t, uint64_t, H8, H8, DO_SRL, 0x3f, clearq)
 > +
-> +#define GEN_VEXT_VADC_VXM(NAME, ETYPE, H, DO_OP, CLEAR_FN)               \
-> +void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2,        \
-> +                  CPURISCVState *env, uint32_t desc)                     \
-> +{                                                                        \
-> +    uint32_t mlen = vext_mlen(desc);                                     \
-> +    uint32_t vl = env->vl;                                               \
-> +    uint32_t esz = sizeof(ETYPE);                                        \
-> +    uint32_t vlmax = vext_maxsz(desc) / esz;                             \
-> +    uint32_t i;                                                          \
-> +                                                                         \
-> +    if (vl == 0) {                                                       \
-> +        return;                                                          \
-> +    }                                                                    \
-> +    for (i = 0; i < vl; i++) {                                           \
-> +        ETYPE s2 = *((ETYPE *)vs2 + H(i));                               \
-> +        uint8_t carry = vext_elem_mask(v0, mlen, i);                     \
-> +                                                                         \
-> +        *((ETYPE *)vd + H(i)) = DO_OP(s2, (ETYPE)(target_long)s1, carry);\
-> +    }                                                                    \
-> +    CLEAR_FN(vd, vl, vl * esz, vlmax * esz);                             \
+> +GEN_VEXT_SHIFT_VV(vsra_vv_b, uint8_t,  int8_t, H1, H1, DO_SRL, 0x7, clearb)
+> +GEN_VEXT_SHIFT_VV(vsra_vv_h, uint16_t, int16_t, H2, H2, DO_SRL, 0xf, clearh)
+> +GEN_VEXT_SHIFT_VV(vsra_vv_w, uint32_t, int32_t, H4, H4, DO_SRL, 0x1f, clearl)
+> +GEN_VEXT_SHIFT_VV(vsra_vv_d, uint64_t, int64_t, H8, H8, DO_SRL, 0x3f, clearq)
+> +
+> +/* generate the helpers for shift instructions with one vector and one scalar */
+> +#define GEN_VEXT_SHIFT_VX(NAME, TD, TS2, HD, HS2, OP, MASK, CLEAR_FN) \
+> +void HELPER(NAME)(void *vd, void *v0, target_ulong s1,                \
+> +        void *vs2, CPURISCVState *env, uint32_t desc)                 \
+> +{                                                                     \
+> +    uint32_t mlen = vext_mlen(desc);                                  \
+> +    uint32_t vm = vext_vm(desc);                                      \
+> +    uint32_t vl = env->vl;                                            \
+> +    uint32_t esz = sizeof(TD);                                        \
+> +    uint32_t vlmax = vext_maxsz(desc) / esz;                          \
+> +    uint32_t i;                                                       \
+> +                                                                      \
+> +    if (vl == 0) {                                                    \
+> +        return;                                                       \
+> +    }                                                                 \
+> +    for (i = 0; i < vl; i++) {                                        \
+> +        if (!vm && !vext_elem_mask(v0, mlen, i)) {                    \
+> +            continue;                                                 \
+> +        }                                                             \
+> +        TS2 s2 = *((TS2 *)vs2 + HS2(i));                              \
+> +        *((TD *)vd + HD(i)) = OP(s2, s1 & MASK);                      \
+> +    }                                                                 \
+> +    CLEAR_FN(vd, vl, vl * esz, vlmax * esz);                          \
 > +}
 > +
-> +GEN_VEXT_VADC_VXM(vadc_vxm_b, uint8_t,  H1, DO_VADC, clearb)
-> +GEN_VEXT_VADC_VXM(vadc_vxm_h, uint16_t, H2, DO_VADC, clearh)
-> +GEN_VEXT_VADC_VXM(vadc_vxm_w, uint32_t, H4, DO_VADC, clearl)
-> +GEN_VEXT_VADC_VXM(vadc_vxm_d, uint64_t, H8, DO_VADC, clearq)
+> +GEN_VEXT_SHIFT_VX(vsll_vx_b, uint8_t, int8_t, H1, H1, DO_SLL, 0x7, clearb)
+> +GEN_VEXT_SHIFT_VX(vsll_vx_h, uint16_t, int16_t, H2, H2, DO_SLL, 0xf, clearh)
+> +GEN_VEXT_SHIFT_VX(vsll_vx_w, uint32_t, int32_t, H4, H4, DO_SLL, 0x1f, clearl)
+> +GEN_VEXT_SHIFT_VX(vsll_vx_d, uint64_t, int64_t, H8, H8, DO_SLL, 0x3f, clearq)
 > +
-> +GEN_VEXT_VADC_VXM(vsbc_vxm_b, uint8_t,  H1, DO_VSBC, clearb)
-> +GEN_VEXT_VADC_VXM(vsbc_vxm_h, uint16_t, H2, DO_VSBC, clearh)
-> +GEN_VEXT_VADC_VXM(vsbc_vxm_w, uint32_t, H4, DO_VSBC, clearl)
-> +GEN_VEXT_VADC_VXM(vsbc_vxm_d, uint64_t, H8, DO_VSBC, clearq)
+> +GEN_VEXT_SHIFT_VX(vsrl_vx_b, uint8_t, uint8_t, H1, H1, DO_SRL, 0x7, clearb)
+> +GEN_VEXT_SHIFT_VX(vsrl_vx_h, uint16_t, uint16_t, H2, H2, DO_SRL, 0xf, clearh)
+> +GEN_VEXT_SHIFT_VX(vsrl_vx_w, uint32_t, uint32_t, H4, H4, DO_SRL, 0x1f, clearl)
+> +GEN_VEXT_SHIFT_VX(vsrl_vx_d, uint64_t, uint64_t, H8, H8, DO_SRL, 0x3f, clearq)
 > +
-> +#define DO_MADC(N, M, C) (C ? (__typeof(N))(N + M + 1) <= N :           \
-> +                          (__typeof(N))(N + M) < N)
-> +#define DO_MSBC(N, M, C) (C ? N <= M : N < M)
-> +
-> +#define GEN_VEXT_VMADC_VVM(NAME, ETYPE, H, DO_OP)             \
-> +void HELPER(NAME)(void *vd, void *v0, void *vs1, void *vs2,   \
-> +                  CPURISCVState *env, uint32_t desc)          \
-> +{                                                             \
-> +    uint32_t mlen = vext_mlen(desc);                          \
-> +    uint32_t vl = env->vl;                                    \
-> +    uint32_t vlmax = vext_maxsz(desc) / sizeof(ETYPE);        \
-> +    uint32_t i;                                               \
-> +                                                              \
-> +    if (vl == 0) {                                            \
-> +        return;                                               \
-> +    }                                                         \
-> +    for (i = 0; i < vl; i++) {                                \
-> +        ETYPE s1 = *((ETYPE *)vs1 + H(i));                    \
-> +        ETYPE s2 = *((ETYPE *)vs2 + H(i));                    \
-> +        uint8_t carry = vext_elem_mask(v0, mlen, i);          \
-> +                                                              \
-> +        vext_set_elem_mask(vd, mlen, i, DO_OP(s2, s1, carry));\
-> +    }                                                         \
-> +    for (; i < vlmax; i++) {                                  \
-> +        vext_set_elem_mask(vd, mlen, i, 0);                   \
-> +    }                                                         \
-> +}
-> +
-> +GEN_VEXT_VMADC_VVM(vmadc_vvm_b, uint8_t,  H1, DO_MADC)
-> +GEN_VEXT_VMADC_VVM(vmadc_vvm_h, uint16_t, H2, DO_MADC)
-> +GEN_VEXT_VMADC_VVM(vmadc_vvm_w, uint32_t, H4, DO_MADC)
-> +GEN_VEXT_VMADC_VVM(vmadc_vvm_d, uint64_t, H8, DO_MADC)
-> +
-> +GEN_VEXT_VMADC_VVM(vmsbc_vvm_b, uint8_t,  H1, DO_MSBC)
-> +GEN_VEXT_VMADC_VVM(vmsbc_vvm_h, uint16_t, H2, DO_MSBC)
-> +GEN_VEXT_VMADC_VVM(vmsbc_vvm_w, uint32_t, H4, DO_MSBC)
-> +GEN_VEXT_VMADC_VVM(vmsbc_vvm_d, uint64_t, H8, DO_MSBC)
-> +
-> +#define GEN_VEXT_VMADC_VXM(NAME, ETYPE, H, DO_OP)               \
-> +void HELPER(NAME)(void *vd, void *v0, target_ulong s1,          \
-> +                  void *vs2, CPURISCVState *env, uint32_t desc) \
-> +{                                                               \
-> +    uint32_t mlen = vext_mlen(desc);                            \
-> +    uint32_t vl = env->vl;                                      \
-> +    uint32_t vlmax = vext_maxsz(desc) / sizeof(ETYPE);          \
-> +    uint32_t i;                                                 \
-> +                                                                \
-> +    if (vl == 0) {                                              \
-> +        return;                                                 \
-> +    }                                                           \
-> +    for (i = 0; i < vl; i++) {                                  \
-> +        ETYPE s2 = *((ETYPE *)vs2 + H(i));                      \
-> +        uint8_t carry = vext_elem_mask(v0, mlen, i);            \
-> +                                                                \
-> +        vext_set_elem_mask(vd, mlen, i,                         \
-> +                DO_OP(s2, (ETYPE)(target_long)s1, carry));      \
-> +    }                                                           \
-> +    for (; i < vlmax; i++) {                                    \
-> +        vext_set_elem_mask(vd, mlen, i, 0);                     \
-> +    }                                                           \
-> +}
-> +
-> +GEN_VEXT_VMADC_VXM(vmadc_vxm_b, uint8_t,  H1, DO_MADC)
-> +GEN_VEXT_VMADC_VXM(vmadc_vxm_h, uint16_t, H2, DO_MADC)
-> +GEN_VEXT_VMADC_VXM(vmadc_vxm_w, uint32_t, H4, DO_MADC)
-> +GEN_VEXT_VMADC_VXM(vmadc_vxm_d, uint64_t, H8, DO_MADC)
-> +
-> +GEN_VEXT_VMADC_VXM(vmsbc_vxm_b, uint8_t,  H1, DO_MSBC)
-> +GEN_VEXT_VMADC_VXM(vmsbc_vxm_h, uint16_t, H2, DO_MSBC)
-> +GEN_VEXT_VMADC_VXM(vmsbc_vxm_w, uint32_t, H4, DO_MSBC)
-> +GEN_VEXT_VMADC_VXM(vmsbc_vxm_d, uint64_t, H8, DO_MSBC)
+> +GEN_VEXT_SHIFT_VX(vsra_vx_b, int8_t, int8_t, H1, H1, DO_SRL, 0x7, clearb)
+> +GEN_VEXT_SHIFT_VX(vsra_vx_h, int16_t, int16_t, H2, H2, DO_SRL, 0xf, clearh)
+> +GEN_VEXT_SHIFT_VX(vsra_vx_w, int32_t, int32_t, H4, H4, DO_SRL, 0x1f, clearl)
+> +GEN_VEXT_SHIFT_VX(vsra_vx_d, int64_t, int64_t, H8, H8, DO_SRL, 0x3f, clearq)
 > --
 > 2.23.0
 >
