@@ -1,66 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jEieN-0000tX-RE
-	for mharc-qemu-riscv@gnu.org; Wed, 18 Mar 2020 20:03:03 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53065)
+	id 1jEjDX-0006kg-Vh
+	for mharc-qemu-riscv@gnu.org; Wed, 18 Mar 2020 20:39:23 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:40388)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <alistair23@gmail.com>) id 1jEieH-0000mz-94
- for qemu-riscv@nongnu.org; Wed, 18 Mar 2020 20:03:01 -0400
+ (envelope-from <no-reply@patchew.org>) id 1jEjDU-0006fb-7w
+ for qemu-riscv@nongnu.org; Wed, 18 Mar 2020 20:39:22 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1jEieA-0000kZ-L9
- for qemu-riscv@nongnu.org; Wed, 18 Mar 2020 20:02:57 -0400
-Received: from mail-ua1-x944.google.com ([2607:f8b0:4864:20::944]:43797)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1jEidw-0000SS-TH; Wed, 18 Mar 2020 20:02:40 -0400
-Received: by mail-ua1-x944.google.com with SMTP id q24so91818ual.10;
- Wed, 18 Mar 2020 17:02:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=c027aMgoclDh6cUzIhn8ukquYi7JN7H5chamoKPGIKk=;
- b=cPkwoeYKpmMK3KmdfK2HjC603Qu/zeFHpNh4whodZd7lVDweKVmm7+sh44WfagAoUY
- KFmvB5yRKFSU9lrtuyGhKZNwyUKIagiJ8aICXaza+n5BM4vILjFgK8544gZRBoPcHzTg
- ySitFiCOPi5ut8GVqxwIvcxaMkmAFrI5tLXdUlp1fVP3+g5H+bJXBdes8S7jF8MO9Aq9
- pbZu0JLfR9B8zDz8rCROkZAmMoDW0K/WC9d2b4ncXuwX8dlhvi0fyZb331b20Er00yod
- iQNyupJO/tUHwxrXxn8/N8ukZ0IAPcuasl3+kdyJdU6uQCiDpshVO6glHKWm8cp9SLig
- OC9g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=c027aMgoclDh6cUzIhn8ukquYi7JN7H5chamoKPGIKk=;
- b=eykzcn+KWLExyrrQa8NZbIl/FY80r/HpoE8qD/QavXTLyWcGB6zLGsj6ebnKHJm0js
- mgGpHhMbf6D91lPhXP+xpI1Q9dOVtcSFGmH2p2gCP2b0ZYK7Ibpn6Isp0eoYfPEotyXP
- Oyb/wZWWJxk4yMRivDD0O95Uva+qce1NHDdFrv/DWxY+JSDDHA9dYECb18iVBh/YcrMj
- i8Bh9N/InnWNk/rXcmF+6gWkR2Ijp8ke2lztfUxQ8G/ZQUN0VBkRJF5ORjAy404W1+xN
- CMSIUTC1n3oYR41EkcQ3i/tH8nZjt15Srz07xgWidtf4l/kVpwthyKlaoRhdgvILFRKH
- FDgw==
-X-Gm-Message-State: ANhLgQ3LPQVMvypooByIcV9l1APrJ6GinjPxCTDQgWexNSjo9A/QupB9
- tEQt7718hrwSbDUfgDsTUNmfarnVZLP+dPlmhOM=
-X-Google-Smtp-Source: ADFU+vuC+ya7r3FUt8EJRWuZvHEXxDjq10EaFiLMXTGBh7MB90qGhCFSNaEXfBdg5mMQRu0GSLdTOBnHUUWkQARn8pM=
-X-Received: by 2002:ab0:630b:: with SMTP id a11mr64091uap.133.1584576155507;
- Wed, 18 Mar 2020 17:02:35 -0700 (PDT)
+ (envelope-from <no-reply@patchew.org>) id 1jEjDS-0008Vo-Gu
+ for qemu-riscv@nongnu.org; Wed, 18 Mar 2020 20:39:20 -0400
+Resent-Date: Wed, 18 Mar 2020 20:39:20 -0400
+Resent-Message-Id: <E1jEjDS-0008Vo-Gu@eggs.gnu.org>
+Received: from sender4-of-o51.zoho.com ([136.143.188.51]:21147)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <no-reply@patchew.org>)
+ id 1jEjDO-0008TN-Cy; Wed, 18 Mar 2020 20:39:14 -0400
+ARC-Seal: i=1; a=rsa-sha256; t=1584578345; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=b3dukX9tLz7fRIbXUIu603l4pPW5SIpcbKNmAYcPGuoNw2w9aHC/2vQUcv+ZFh13HrEGgIwhWrIYdN27foNtZ4hn2Htj63NKazmBD/sB8u4QaxAmOERWQe4X+EDECAyI7vJuu6V1BOd8s/j/yFRN5pJaMsygAgTkQUc3V1Kwkoo=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1584578345;
+ h=Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:MIME-Version:Message-ID:Reply-To:Subject:To;
+ bh=MMYX/4pbUCvZNBcJ930XEsCD5w2eXR/k/cNSR2lPpHo=; 
+ b=WTdyRq4Ixpek3Hu2CQI9nDvVqAGVGLmdxrgd7vDK+xTqjPzXwmW5HdWMU/EpLNuNf/4Il6i1HPcHWpep1MBxu5UQcLr9Fki3dvubJXe2A+S8hx6EEcHF+u+yV82tYV2gELXTV/xIfEzwmag6KZ59bgetuakdkTnUbF04TxmBqp0=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+ spf=pass  smtp.mailfrom=no-reply@patchew.org;
+ dmarc=pass header.from=<no-reply@patchew.org>
+ header.from=<no-reply@patchew.org>
+Received: from [172.17.0.3] (23.253.156.214 [23.253.156.214]) by
+ mx.zohomail.com with SMTPS id 15845783440601021.7550177803766;
+ Wed, 18 Mar 2020 17:39:04 -0700 (PDT)
+In-Reply-To: <cover.1584571250.git.alistair.francis@wdc.com>
+Subject: Re: [PATCH v9 0/4]  linux-user: generate syscall_nr.sh for RISC-V
+Reply-To: <qemu-devel@nongnu.org>
+Message-ID: <158457834271.25478.10507172085974405041@39012742ff91>
 MIME-Version: 1.0
-References: <20200317150653.9008-1-zhiwei_liu@c-sky.com>
- <20200317150653.9008-7-zhiwei_liu@c-sky.com>
-In-Reply-To: <20200317150653.9008-7-zhiwei_liu@c-sky.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 18 Mar 2020 16:54:40 -0700
-Message-ID: <CAKmqyKMf0XGFpKpPRMZCQaX2jUm3CVzY2XZe0i3u8c_r946HpA@mail.gmail.com>
-Subject: Re: [PATCH v6 06/61] target/riscv: add vector stride load and store
- instructions
-To: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Cc: Richard Henderson <richard.henderson@linaro.org>,
- Chih-Min Chao <chihmin.chao@sifive.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>, wenmeng_zhang@c-sky.com,
- wxy194768@alibaba-inc.com, guoren@linux.alibaba.com, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2607:f8b0:4864:20::944
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+Resent-From: 
+From: no-reply@patchew.org
+To: alistair.francis@wdc.com
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, laurent@vivier.eu,
+ alistair.francis@wdc.com, palmer@dabbelt.com, alistair23@gmail.com
+Date: Wed, 18 Mar 2020 17:39:04 -0700 (PDT)
+X-ZohoMailClient: External
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+ [fuzzy]
+X-Received-From: 136.143.188.51
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -72,1112 +57,173 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Mar 2020 00:03:02 -0000
+X-List-Received-Date: Thu, 19 Mar 2020 00:39:22 -0000
 
-On Tue, Mar 17, 2020 at 8:19 AM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
->
-> Vector strided operations access the first memory element at the base add=
-ress,
-> and then access subsequent elements at address increments given by the by=
-te
-> offset contained in the x register specified by rs2.
->
-> Vector unit-stride operations access elements stored contiguously in memo=
-ry
-> starting from the base effective address. It can been seen as a special
-> case of strided operations.
->
-> Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
-> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-
-Alistair
-
-> ---
->  target/riscv/helper.h                   | 105 ++++++
->  target/riscv/insn32.decode              |  32 ++
->  target/riscv/insn_trans/trans_rvv.inc.c | 346 ++++++++++++++++++++
->  target/riscv/internals.h                |   5 +
->  target/riscv/translate.c                |   7 +
->  target/riscv/vector_helper.c            | 406 ++++++++++++++++++++++++
->  6 files changed, 901 insertions(+)
->
-> diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-> index 3c28c7e407..87dfa90609 100644
-> --- a/target/riscv/helper.h
-> +++ b/target/riscv/helper.h
-> @@ -78,3 +78,108 @@ DEF_HELPER_1(tlb_flush, void, env)
->  #endif
->  /* Vector functions */
->  DEF_HELPER_3(vsetvl, tl, env, tl, tl)
-> +DEF_HELPER_5(vlb_v_b, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vlb_v_b_mask, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vlb_v_h, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vlb_v_h_mask, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vlb_v_w, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vlb_v_w_mask, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vlb_v_d, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vlb_v_d_mask, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vlh_v_h, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vlh_v_h_mask, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vlh_v_w, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vlh_v_w_mask, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vlh_v_d, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vlh_v_d_mask, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vlw_v_w, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vlw_v_w_mask, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vlw_v_d, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vlw_v_d_mask, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vle_v_b, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vle_v_b_mask, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vle_v_h, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vle_v_h_mask, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vle_v_w, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vle_v_w_mask, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vle_v_d, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vle_v_d_mask, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vlbu_v_b, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vlbu_v_b_mask, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vlbu_v_h, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vlbu_v_h_mask, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vlbu_v_w, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vlbu_v_w_mask, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vlbu_v_d, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vlbu_v_d_mask, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vlhu_v_h, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vlhu_v_h_mask, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vlhu_v_w, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vlhu_v_w_mask, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vlhu_v_d, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vlhu_v_d_mask, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vlwu_v_w, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vlwu_v_w_mask, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vlwu_v_d, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vlwu_v_d_mask, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vsb_v_b, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vsb_v_b_mask, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vsb_v_h, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vsb_v_h_mask, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vsb_v_w, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vsb_v_w_mask, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vsb_v_d, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vsb_v_d_mask, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vsh_v_h, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vsh_v_h_mask, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vsh_v_w, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vsh_v_w_mask, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vsh_v_d, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vsh_v_d_mask, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vsw_v_w, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vsw_v_w_mask, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vsw_v_d, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vsw_v_d_mask, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vse_v_b, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vse_v_b_mask, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vse_v_h, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vse_v_h_mask, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vse_v_w, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vse_v_w_mask, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vse_v_d, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_5(vse_v_d_mask, void, ptr, ptr, tl, env, i32)
-> +DEF_HELPER_6(vlsb_v_b, void, ptr, ptr, tl, tl, env, i32)
-> +DEF_HELPER_6(vlsb_v_h, void, ptr, ptr, tl, tl, env, i32)
-> +DEF_HELPER_6(vlsb_v_w, void, ptr, ptr, tl, tl, env, i32)
-> +DEF_HELPER_6(vlsb_v_d, void, ptr, ptr, tl, tl, env, i32)
-> +DEF_HELPER_6(vlsh_v_h, void, ptr, ptr, tl, tl, env, i32)
-> +DEF_HELPER_6(vlsh_v_w, void, ptr, ptr, tl, tl, env, i32)
-> +DEF_HELPER_6(vlsh_v_d, void, ptr, ptr, tl, tl, env, i32)
-> +DEF_HELPER_6(vlsw_v_w, void, ptr, ptr, tl, tl, env, i32)
-> +DEF_HELPER_6(vlsw_v_d, void, ptr, ptr, tl, tl, env, i32)
-> +DEF_HELPER_6(vlse_v_b, void, ptr, ptr, tl, tl, env, i32)
-> +DEF_HELPER_6(vlse_v_h, void, ptr, ptr, tl, tl, env, i32)
-> +DEF_HELPER_6(vlse_v_w, void, ptr, ptr, tl, tl, env, i32)
-> +DEF_HELPER_6(vlse_v_d, void, ptr, ptr, tl, tl, env, i32)
-> +DEF_HELPER_6(vlsbu_v_b, void, ptr, ptr, tl, tl, env, i32)
-> +DEF_HELPER_6(vlsbu_v_h, void, ptr, ptr, tl, tl, env, i32)
-> +DEF_HELPER_6(vlsbu_v_w, void, ptr, ptr, tl, tl, env, i32)
-> +DEF_HELPER_6(vlsbu_v_d, void, ptr, ptr, tl, tl, env, i32)
-> +DEF_HELPER_6(vlshu_v_h, void, ptr, ptr, tl, tl, env, i32)
-> +DEF_HELPER_6(vlshu_v_w, void, ptr, ptr, tl, tl, env, i32)
-> +DEF_HELPER_6(vlshu_v_d, void, ptr, ptr, tl, tl, env, i32)
-> +DEF_HELPER_6(vlswu_v_w, void, ptr, ptr, tl, tl, env, i32)
-> +DEF_HELPER_6(vlswu_v_d, void, ptr, ptr, tl, tl, env, i32)
-> +DEF_HELPER_6(vssb_v_b, void, ptr, ptr, tl, tl, env, i32)
-> +DEF_HELPER_6(vssb_v_h, void, ptr, ptr, tl, tl, env, i32)
-> +DEF_HELPER_6(vssb_v_w, void, ptr, ptr, tl, tl, env, i32)
-> +DEF_HELPER_6(vssb_v_d, void, ptr, ptr, tl, tl, env, i32)
-> +DEF_HELPER_6(vssh_v_h, void, ptr, ptr, tl, tl, env, i32)
-> +DEF_HELPER_6(vssh_v_w, void, ptr, ptr, tl, tl, env, i32)
-> +DEF_HELPER_6(vssh_v_d, void, ptr, ptr, tl, tl, env, i32)
-> +DEF_HELPER_6(vssw_v_w, void, ptr, ptr, tl, tl, env, i32)
-> +DEF_HELPER_6(vssw_v_d, void, ptr, ptr, tl, tl, env, i32)
-> +DEF_HELPER_6(vsse_v_b, void, ptr, ptr, tl, tl, env, i32)
-> +DEF_HELPER_6(vsse_v_h, void, ptr, ptr, tl, tl, env, i32)
-> +DEF_HELPER_6(vsse_v_w, void, ptr, ptr, tl, tl, env, i32)
-> +DEF_HELPER_6(vsse_v_d, void, ptr, ptr, tl, tl, env, i32)
-> diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-> index 53340bdbc4..ef521152c5 100644
-> --- a/target/riscv/insn32.decode
-> +++ b/target/riscv/insn32.decode
-> @@ -25,6 +25,7 @@
->  %sh10    20:10
->  %csr    20:12
->  %rm     12:3
-> +%nf     29:3                     !function=3Dex_plus_1
->
->  # immediates:
->  %imm_i    20:s12
-> @@ -43,6 +44,8 @@
->  &u    imm rd
->  &shift     shamt rs1 rd
->  &atomic    aq rl rs2 rs1 rd
-> +&r2nfvm    vm rd rs1 nf
-> +&rnfvm     vm rd rs1 rs2 nf
->
->  # Formats 32:
->  @r       .......   ..... ..... ... ..... ....... &r                %rs2 =
-%rs1 %rd
-> @@ -62,6 +65,8 @@
->  @r_rm    .......   ..... ..... ... ..... ....... %rs2 %rs1 %rm %rd
->  @r2_rm   .......   ..... ..... ... ..... ....... %rs1 %rm %rd
->  @r2      .......   ..... ..... ... ..... ....... %rs1 %rd
-> +@r2_nfvm ... ... vm:1 ..... ..... ... ..... ....... &r2nfvm %nf %rs1 %rd
-> +@r_nfvm  ... ... vm:1 ..... ..... ... ..... ....... &rnfvm %nf %rs2 %rs1=
- %rd
->  @r2_zimm . zimm:11  ..... ... ..... ....... %rs1 %rd
->
->  @hfence_gvma ....... ..... .....   ... ..... ....... %rs2 %rs1
-> @@ -210,5 +215,32 @@ fcvt_d_w   1101001  00000 ..... ... ..... 1010011 @r=
-2_rm
->  fcvt_d_wu  1101001  00001 ..... ... ..... 1010011 @r2_rm
->
->  # *** RV32V Extension ***
-> +
-> +# *** Vector loads and stores are encoded within LOADFP/STORE-FP ***
-> +vlb_v      ... 100 . 00000 ..... 000 ..... 0000111 @r2_nfvm
-> +vlh_v      ... 100 . 00000 ..... 101 ..... 0000111 @r2_nfvm
-> +vlw_v      ... 100 . 00000 ..... 110 ..... 0000111 @r2_nfvm
-> +vle_v      ... 000 . 00000 ..... 111 ..... 0000111 @r2_nfvm
-> +vlbu_v     ... 000 . 00000 ..... 000 ..... 0000111 @r2_nfvm
-> +vlhu_v     ... 000 . 00000 ..... 101 ..... 0000111 @r2_nfvm
-> +vlwu_v     ... 000 . 00000 ..... 110 ..... 0000111 @r2_nfvm
-> +vsb_v      ... 000 . 00000 ..... 000 ..... 0100111 @r2_nfvm
-> +vsh_v      ... 000 . 00000 ..... 101 ..... 0100111 @r2_nfvm
-> +vsw_v      ... 000 . 00000 ..... 110 ..... 0100111 @r2_nfvm
-> +vse_v      ... 000 . 00000 ..... 111 ..... 0100111 @r2_nfvm
-> +
-> +vlsb_v     ... 110 . ..... ..... 000 ..... 0000111 @r_nfvm
-> +vlsh_v     ... 110 . ..... ..... 101 ..... 0000111 @r_nfvm
-> +vlsw_v     ... 110 . ..... ..... 110 ..... 0000111 @r_nfvm
-> +vlse_v     ... 010 . ..... ..... 111 ..... 0000111 @r_nfvm
-> +vlsbu_v    ... 010 . ..... ..... 000 ..... 0000111 @r_nfvm
-> +vlshu_v    ... 010 . ..... ..... 101 ..... 0000111 @r_nfvm
-> +vlswu_v    ... 010 . ..... ..... 110 ..... 0000111 @r_nfvm
-> +vssb_v     ... 010 . ..... ..... 000 ..... 0100111 @r_nfvm
-> +vssh_v     ... 010 . ..... ..... 101 ..... 0100111 @r_nfvm
-> +vssw_v     ... 010 . ..... ..... 110 ..... 0100111 @r_nfvm
-> +vsse_v     ... 010 . ..... ..... 111 ..... 0100111 @r_nfvm
-> +
-> +# *** new major opcode OP-V ***
->  vsetvli         0 ........... ..... 111 ..... 1010111  @r2_zimm
->  vsetvl          1000000 ..... ..... 111 ..... 1010111  @r
-> diff --git a/target/riscv/insn_trans/trans_rvv.inc.c b/target/riscv/insn_=
-trans/trans_rvv.inc.c
-> index 7381c24295..b9d97fee22 100644
-> --- a/target/riscv/insn_trans/trans_rvv.inc.c
-> +++ b/target/riscv/insn_trans/trans_rvv.inc.c
-> @@ -15,6 +15,9 @@
->   * You should have received a copy of the GNU General Public License alo=
-ng with
->   * this program.  If not, see <http://www.gnu.org/licenses/>.
->   */
-> +#include "tcg/tcg-op-gvec.h"
-> +#include "tcg/tcg-gvec-desc.h"
-> +#include "internals.h"
->
->  static bool trans_vsetvl(DisasContext *ctx, arg_vsetvl * a)
->  {
-> @@ -67,3 +70,346 @@ static bool trans_vsetvli(DisasContext *ctx, arg_vset=
-vli * a)
->      tcg_temp_free(dst);
->      return true;
->  }
-> +
-> +/* vector register offset from env */
-> +static uint32_t vreg_ofs(DisasContext *s, int reg)
-> +{
-> +    return offsetof(CPURISCVState, vreg) + reg * s->vlen / 8;
-> +}
-> +
-> +/* check functions */
-> +
-> +/*
-> + * In cpu_get_tb_cpu_state(), set VILL if RVV was not present.
-> + * So RVV is also be checked in this function.
-> + */
-> +static bool vext_check_isa_ill(DisasContext *s)
-> +{
-> +    return !s->vill;
-> +}
-> +
-> +/*
-> + * There are two rules check here.
-> + *
-> + * 1. Vector register numbers are multiples of LMUL. (Section 3.2)
-> + *
-> + * 2. For all widening instructions, the destination LMUL value must als=
-o be
-> + *    a supported LMUL value. (Section 11.2=EF=BC=89
-> + */
-> +static bool vext_check_reg(DisasContext *s, uint32_t reg, bool widen)
-> +{
-> +    /*
-> +     * The destination vector register group results are arranged as if =
-both
-> +     * SEW and LMUL were at twice their current settings. (Section 11.2)=
-.
-> +     */
-> +    int legal =3D widen ? 2 << s->lmul : 1 << s->lmul;
-> +
-> +    return !((s->lmul =3D=3D 0x3 && widen) || (reg % legal));
-> +}
-> +
-> +/*
-> + * There are two rules check here.
-> + *
-> + * 1. The destination vector register group for a masked vector instruct=
-ion can
-> + *    only overlap the source mask register (v0) when LMUL=3D1. (Section=
- 5.3)
-> + *
-> + * 2. In widen instructions and some other insturctions, like vslideup.v=
-x,
-> + *    there is no need to check whether LMUL=3D1.
-> + */
-> +static bool vext_check_overlap_mask(DisasContext *s, uint32_t vd, bool v=
-m,
-> +    bool force)
-> +{
-> +    return (vm !=3D 0 || vd !=3D 0) || (!force && (s->lmul =3D=3D 0));
-> +}
-> +
-> +/* The LMUL setting must be such that LMUL * NFIELDS <=3D 8. (Section 7.=
-8) */
-> +static bool vext_check_nf(DisasContext *s, uint32_t nf)
-> +{
-> +    return (1 << s->lmul) * nf <=3D 8;
-> +}
-> +
-> +/* common translation macro */
-> +#define GEN_VEXT_TRANS(NAME, SEQ, ARGTYPE, OP, CHECK)      \
-> +static bool trans_##NAME(DisasContext *s, arg_##ARGTYPE *a)\
-> +{                                                          \
-> +    if (CHECK(s, a)) {                                     \
-> +        return OP(s, a, SEQ);                              \
-> +    }                                                      \
-> +    return false;                                          \
-> +}
-> +
-> +/*
-> + *** unit stride load and store
-> + */
-> +typedef void gen_helper_ldst_us(TCGv_ptr, TCGv_ptr, TCGv,
-> +        TCGv_env, TCGv_i32);
-> +
-> +static bool ldst_us_trans(uint32_t vd, uint32_t rs1, uint32_t data,
-> +        gen_helper_ldst_us *fn, DisasContext *s)
-> +{
-> +    TCGv_ptr dest, mask;
-> +    TCGv base;
-> +    TCGv_i32 desc;
-> +
-> +    dest =3D tcg_temp_new_ptr();
-> +    mask =3D tcg_temp_new_ptr();
-> +    base =3D tcg_temp_new();
-> +
-> +    /*
-> +     * As simd_desc supports at most 256 bytes, and in this implementati=
-on,
-> +     * the max vector group length is 2048 bytes. So split it into two p=
-arts.
-> +     *
-> +     * The first part is vlen in bytes, encoded in maxsz of simd_desc.
-> +     * The second part is lmul, encoded in data of simd_desc.
-> +     */
-> +    desc =3D tcg_const_i32(simd_desc(0, s->vlen / 8, data));
-> +
-> +    gen_get_gpr(base, rs1);
-> +    tcg_gen_addi_ptr(dest, cpu_env, vreg_ofs(s, vd));
-> +    tcg_gen_addi_ptr(mask, cpu_env, vreg_ofs(s, 0));
-> +
-> +    fn(dest, mask, base, cpu_env, desc);
-> +
-> +    tcg_temp_free_ptr(dest);
-> +    tcg_temp_free_ptr(mask);
-> +    tcg_temp_free(base);
-> +    tcg_temp_free_i32(desc);
-> +    return true;
-> +}
-> +
-> +static bool ld_us_op(DisasContext *s, arg_r2nfvm *a, uint8_t seq)
-> +{
-> +    uint32_t data =3D 0;
-> +    gen_helper_ldst_us *fn;
-> +    static gen_helper_ldst_us * const fns[2][7][4] =3D {
-> +        /* masked unit stride load */
-> +        { { gen_helper_vlb_v_b_mask,  gen_helper_vlb_v_h_mask,
-> +            gen_helper_vlb_v_w_mask,  gen_helper_vlb_v_d_mask },
-> +          { NULL,                     gen_helper_vlh_v_h_mask,
-> +            gen_helper_vlh_v_w_mask,  gen_helper_vlh_v_d_mask },
-> +          { NULL,                     NULL,
-> +            gen_helper_vlw_v_w_mask,  gen_helper_vlw_v_d_mask },
-> +          { gen_helper_vle_v_b_mask,  gen_helper_vle_v_h_mask,
-> +            gen_helper_vle_v_w_mask,  gen_helper_vle_v_d_mask },
-> +          { gen_helper_vlbu_v_b_mask, gen_helper_vlbu_v_h_mask,
-> +            gen_helper_vlbu_v_w_mask, gen_helper_vlbu_v_d_mask },
-> +          { NULL,                     gen_helper_vlhu_v_h_mask,
-> +            gen_helper_vlhu_v_w_mask, gen_helper_vlhu_v_d_mask },
-> +          { NULL,                     NULL,
-> +            gen_helper_vlwu_v_w_mask, gen_helper_vlwu_v_d_mask } },
-> +        /* unmasked unit stride load */
-> +        { { gen_helper_vlb_v_b,  gen_helper_vlb_v_h,
-> +            gen_helper_vlb_v_w,  gen_helper_vlb_v_d },
-> +          { NULL,                gen_helper_vlh_v_h,
-> +            gen_helper_vlh_v_w,  gen_helper_vlh_v_d },
-> +          { NULL,                NULL,
-> +            gen_helper_vlw_v_w,  gen_helper_vlw_v_d },
-> +          { gen_helper_vle_v_b,  gen_helper_vle_v_h,
-> +            gen_helper_vle_v_w,  gen_helper_vle_v_d },
-> +          { gen_helper_vlbu_v_b, gen_helper_vlbu_v_h,
-> +            gen_helper_vlbu_v_w, gen_helper_vlbu_v_d },
-> +          { NULL,                gen_helper_vlhu_v_h,
-> +            gen_helper_vlhu_v_w, gen_helper_vlhu_v_d },
-> +          { NULL,                NULL,
-> +            gen_helper_vlwu_v_w, gen_helper_vlwu_v_d } }
-> +    };
-> +
-> +    fn =3D  fns[a->vm][seq][s->sew];
-> +    if (fn =3D=3D NULL) {
-> +        return false;
-> +    }
-> +
-> +    data =3D FIELD_DP32(data, VDATA, MLEN, s->mlen);
-> +    data =3D FIELD_DP32(data, VDATA, VM, a->vm);
-> +    data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);
-> +    data =3D FIELD_DP32(data, VDATA, NF, a->nf);
-> +    return ldst_us_trans(a->rd, a->rs1, data, fn, s);
-> +}
-> +
-> +static bool ld_us_check(DisasContext *s, arg_r2nfvm* a)
-> +{
-> +    return (vext_check_isa_ill(s) &&
-> +            vext_check_overlap_mask(s, a->rd, a->vm, false) &&
-> +            vext_check_reg(s, a->rd, false) &&
-> +            vext_check_nf(s, a->nf));
-> +}
-> +
-> +GEN_VEXT_TRANS(vlb_v, 0, r2nfvm, ld_us_op, ld_us_check)
-> +GEN_VEXT_TRANS(vlh_v, 1, r2nfvm, ld_us_op, ld_us_check)
-> +GEN_VEXT_TRANS(vlw_v, 2, r2nfvm, ld_us_op, ld_us_check)
-> +GEN_VEXT_TRANS(vle_v, 3, r2nfvm, ld_us_op, ld_us_check)
-> +GEN_VEXT_TRANS(vlbu_v, 4, r2nfvm, ld_us_op, ld_us_check)
-> +GEN_VEXT_TRANS(vlhu_v, 5, r2nfvm, ld_us_op, ld_us_check)
-> +GEN_VEXT_TRANS(vlwu_v, 6, r2nfvm, ld_us_op, ld_us_check)
-> +
-> +static bool st_us_op(DisasContext *s, arg_r2nfvm *a, uint8_t seq)
-> +{
-> +    uint32_t data =3D 0;
-> +    gen_helper_ldst_us *fn;
-> +    static gen_helper_ldst_us * const fns[2][4][4] =3D {
-> +        /* masked unit stride load and store */
-> +        { { gen_helper_vsb_v_b_mask,  gen_helper_vsb_v_h_mask,
-> +            gen_helper_vsb_v_w_mask,  gen_helper_vsb_v_d_mask },
-> +          { NULL,                     gen_helper_vsh_v_h_mask,
-> +            gen_helper_vsh_v_w_mask,  gen_helper_vsh_v_d_mask },
-> +          { NULL,                     NULL,
-> +            gen_helper_vsw_v_w_mask,  gen_helper_vsw_v_d_mask },
-> +          { gen_helper_vse_v_b_mask,  gen_helper_vse_v_h_mask,
-> +            gen_helper_vse_v_w_mask,  gen_helper_vse_v_d_mask } },
-> +        /* unmasked unit stride store */
-> +        { { gen_helper_vsb_v_b,  gen_helper_vsb_v_h,
-> +            gen_helper_vsb_v_w,  gen_helper_vsb_v_d },
-> +          { NULL,                gen_helper_vsh_v_h,
-> +            gen_helper_vsh_v_w,  gen_helper_vsh_v_d },
-> +          { NULL,                NULL,
-> +            gen_helper_vsw_v_w,  gen_helper_vsw_v_d },
-> +          { gen_helper_vse_v_b,  gen_helper_vse_v_h,
-> +            gen_helper_vse_v_w,  gen_helper_vse_v_d } }
-> +    };
-> +
-> +    fn =3D  fns[a->vm][seq][s->sew];
-> +    if (fn =3D=3D NULL) {
-> +        return false;
-> +    }
-> +
-> +    data =3D FIELD_DP32(data, VDATA, MLEN, s->mlen);
-> +    data =3D FIELD_DP32(data, VDATA, VM, a->vm);
-> +    data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);
-> +    data =3D FIELD_DP32(data, VDATA, NF, a->nf);
-> +    return ldst_us_trans(a->rd, a->rs1, data, fn, s);
-> +}
-> +
-> +static bool st_us_check(DisasContext *s, arg_r2nfvm* a)
-> +{
-> +    return (vext_check_isa_ill(s) &&
-> +            vext_check_reg(s, a->rd, false) &&
-> +            vext_check_nf(s, a->nf));
-> +}
-> +
-> +GEN_VEXT_TRANS(vsb_v, 0, r2nfvm, st_us_op, st_us_check)
-> +GEN_VEXT_TRANS(vsh_v, 1, r2nfvm, st_us_op, st_us_check)
-> +GEN_VEXT_TRANS(vsw_v, 2, r2nfvm, st_us_op, st_us_check)
-> +GEN_VEXT_TRANS(vse_v, 3, r2nfvm, st_us_op, st_us_check)
-> +
-> +/*
-> + *** stride load and store
-> + */
-> +typedef void gen_helper_ldst_stride(TCGv_ptr, TCGv_ptr, TCGv,
-> +        TCGv, TCGv_env, TCGv_i32);
-> +
-> +static bool ldst_stride_trans(uint32_t vd, uint32_t rs1, uint32_t rs2,
-> +        uint32_t data, gen_helper_ldst_stride *fn, DisasContext *s)
-> +{
-> +    TCGv_ptr dest, mask;
-> +    TCGv base, stride;
-> +    TCGv_i32 desc;
-> +
-> +    dest =3D tcg_temp_new_ptr();
-> +    mask =3D tcg_temp_new_ptr();
-> +    base =3D tcg_temp_new();
-> +    stride =3D tcg_temp_new();
-> +    desc =3D tcg_const_i32(simd_desc(0, s->vlen / 8, data));
-> +
-> +    gen_get_gpr(base, rs1);
-> +    gen_get_gpr(stride, rs2);
-> +    tcg_gen_addi_ptr(dest, cpu_env, vreg_ofs(s, vd));
-> +    tcg_gen_addi_ptr(mask, cpu_env, vreg_ofs(s, 0));
-> +
-> +    fn(dest, mask, base, stride, cpu_env, desc);
-> +
-> +    tcg_temp_free_ptr(dest);
-> +    tcg_temp_free_ptr(mask);
-> +    tcg_temp_free(base);
-> +    tcg_temp_free(stride);
-> +    tcg_temp_free_i32(desc);
-> +    return true;
-> +}
-> +
-> +static bool ld_stride_op(DisasContext *s, arg_rnfvm *a, uint8_t seq)
-> +{
-> +    uint32_t data =3D 0;
-> +    gen_helper_ldst_stride *fn;
-> +    static gen_helper_ldst_stride * const fns[7][4] =3D {
-> +        { gen_helper_vlsb_v_b,  gen_helper_vlsb_v_h,
-> +          gen_helper_vlsb_v_w,  gen_helper_vlsb_v_d },
-> +        { NULL,                 gen_helper_vlsh_v_h,
-> +          gen_helper_vlsh_v_w,  gen_helper_vlsh_v_d },
-> +        { NULL,                 NULL,
-> +          gen_helper_vlsw_v_w,  gen_helper_vlsw_v_d },
-> +        { gen_helper_vlse_v_b,  gen_helper_vlse_v_h,
-> +          gen_helper_vlse_v_w,  gen_helper_vlse_v_d },
-> +        { gen_helper_vlsbu_v_b, gen_helper_vlsbu_v_h,
-> +          gen_helper_vlsbu_v_w, gen_helper_vlsbu_v_d },
-> +        { NULL,                 gen_helper_vlshu_v_h,
-> +          gen_helper_vlshu_v_w, gen_helper_vlshu_v_d },
-> +        { NULL,                 NULL,
-> +          gen_helper_vlswu_v_w, gen_helper_vlswu_v_d },
-> +    };
-> +
-> +    fn =3D  fns[seq][s->sew];
-> +    if (fn =3D=3D NULL) {
-> +        return false;
-> +    }
-> +
-> +    data =3D FIELD_DP32(data, VDATA, MLEN, s->mlen);
-> +    data =3D FIELD_DP32(data, VDATA, VM, a->vm);
-> +    data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);
-> +    data =3D FIELD_DP32(data, VDATA, NF, a->nf);
-> +    return ldst_stride_trans(a->rd, a->rs1, a->rs2, data, fn, s);
-> +}
-> +
-> +static bool ld_stride_check(DisasContext *s, arg_rnfvm* a)
-> +{
-> +    return (vext_check_isa_ill(s) &&
-> +            vext_check_overlap_mask(s, a->rd, a->vm, false) &&
-> +            vext_check_reg(s, a->rd, false) &&
-> +            vext_check_nf(s, a->nf));
-> +}
-> +
-> +GEN_VEXT_TRANS(vlsb_v, 0, rnfvm, ld_stride_op, ld_stride_check)
-> +GEN_VEXT_TRANS(vlsh_v, 1, rnfvm, ld_stride_op, ld_stride_check)
-> +GEN_VEXT_TRANS(vlsw_v, 2, rnfvm, ld_stride_op, ld_stride_check)
-> +GEN_VEXT_TRANS(vlse_v, 3, rnfvm, ld_stride_op, ld_stride_check)
-> +GEN_VEXT_TRANS(vlsbu_v, 4, rnfvm, ld_stride_op, ld_stride_check)
-> +GEN_VEXT_TRANS(vlshu_v, 5, rnfvm, ld_stride_op, ld_stride_check)
-> +GEN_VEXT_TRANS(vlswu_v, 6, rnfvm, ld_stride_op, ld_stride_check)
-> +
-> +static bool st_stride_op(DisasContext *s, arg_rnfvm *a, uint8_t seq)
-> +{
-> +    uint32_t data =3D 0;
-> +    gen_helper_ldst_stride *fn;
-> +    static gen_helper_ldst_stride * const fns[4][4] =3D {
-> +        /* masked stride store */
-> +        { gen_helper_vssb_v_b,  gen_helper_vssb_v_h,
-> +          gen_helper_vssb_v_w,  gen_helper_vssb_v_d },
-> +        { NULL,                 gen_helper_vssh_v_h,
-> +          gen_helper_vssh_v_w,  gen_helper_vssh_v_d },
-> +        { NULL,                 NULL,
-> +          gen_helper_vssw_v_w,  gen_helper_vssw_v_d },
-> +        { gen_helper_vsse_v_b,  gen_helper_vsse_v_h,
-> +          gen_helper_vsse_v_w,  gen_helper_vsse_v_d }
-> +    };
-> +
-> +    data =3D FIELD_DP32(data, VDATA, MLEN, s->mlen);
-> +    data =3D FIELD_DP32(data, VDATA, VM, a->vm);
-> +    data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);
-> +    data =3D FIELD_DP32(data, VDATA, NF, a->nf);
-> +    fn =3D  fns[seq][s->sew];
-> +    if (fn =3D=3D NULL) {
-> +        return false;
-> +    }
-> +
-> +    return ldst_stride_trans(a->rd, a->rs1, a->rs2, data, fn, s);
-> +}
-> +
-> +static bool st_stride_check(DisasContext *s, arg_rnfvm* a)
-> +{
-> +    return (vext_check_isa_ill(s) &&
-> +            vext_check_reg(s, a->rd, false) &&
-> +            vext_check_nf(s, a->nf));
-> +}
-> +
-> +GEN_VEXT_TRANS(vssb_v, 0, rnfvm, st_stride_op, st_stride_check)
-> +GEN_VEXT_TRANS(vssh_v, 1, rnfvm, st_stride_op, st_stride_check)
-> +GEN_VEXT_TRANS(vssw_v, 2, rnfvm, st_stride_op, st_stride_check)
-> +GEN_VEXT_TRANS(vsse_v, 3, rnfvm, st_stride_op, st_stride_check)
-> diff --git a/target/riscv/internals.h b/target/riscv/internals.h
-> index cabea18e1d..614e41437d 100644
-> --- a/target/riscv/internals.h
-> +++ b/target/riscv/internals.h
-> @@ -21,4 +21,9 @@
->
->  #include "hw/registerfields.h"
->
-> +/* share data between vector helpers and decode code */
-> +FIELD(VDATA, MLEN, 0, 8)
-> +FIELD(VDATA, VM, 8, 1)
-> +FIELD(VDATA, LMUL, 9, 2)
-> +FIELD(VDATA, NF, 11, 4)
->  #endif
-> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index af07ac4160..852545b77e 100644
-> --- a/target/riscv/translate.c
-> +++ b/target/riscv/translate.c
-> @@ -61,6 +61,7 @@ typedef struct DisasContext {
->      uint8_t lmul;
->      uint8_t sew;
->      uint16_t vlen;
-> +    uint16_t mlen;
->      bool vl_eq_vlmax;
->  } DisasContext;
->
-> @@ -548,6 +549,11 @@ static void decode_RV32_64C(DisasContext *ctx, uint1=
-6_t opcode)
->      }
->  }
->
-> +static int ex_plus_1(DisasContext *ctx, int nf)
-> +{
-> +    return nf + 1;
-> +}
-> +
->  #define EX_SH(amount) \
->      static int ex_shift_##amount(DisasContext *ctx, int imm) \
->      {                                         \
-> @@ -784,6 +790,7 @@ static void riscv_tr_init_disas_context(DisasContextB=
-ase *dcbase, CPUState *cs)
->      ctx->vill =3D FIELD_EX32(tb_flags, TB_FLAGS, VILL);
->      ctx->sew =3D FIELD_EX32(tb_flags, TB_FLAGS, SEW);
->      ctx->lmul =3D FIELD_EX32(tb_flags, TB_FLAGS, LMUL);
-> +    ctx->mlen =3D 1 << (ctx->sew  + 3 - ctx->lmul);
->      ctx->vl_eq_vlmax =3D FIELD_EX32(tb_flags, TB_FLAGS, VL_EQ_VLMAX);
->  }
->
-> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-> index 2afe716f2a..e24b4db8fb 100644
-> --- a/target/riscv/vector_helper.c
-> +++ b/target/riscv/vector_helper.c
-> @@ -18,8 +18,11 @@
->
->  #include "qemu/osdep.h"
->  #include "cpu.h"
-> +#include "exec/memop.h"
->  #include "exec/exec-all.h"
->  #include "exec/helper-proto.h"
-> +#include "tcg/tcg-gvec-desc.h"
-> +#include "internals.h"
->  #include <math.h>
->
->  target_ulong HELPER(vsetvl)(CPURISCVState *env, target_ulong s1,
-> @@ -51,3 +54,406 @@ target_ulong HELPER(vsetvl)(CPURISCVState *env, targe=
-t_ulong s1,
->      env->vstart =3D 0;
->      return vl;
->  }
-> +
-> +/*
-> + * Note that vector data is stored in host-endian 64-bit chunks,
-> + * so addressing units smaller than that needs a host-endian fixup.
-> + */
-> +#ifdef HOST_WORDS_BIGENDIAN
-> +#define H1(x)   ((x) ^ 7)
-> +#define H1_2(x) ((x) ^ 6)
-> +#define H1_4(x) ((x) ^ 4)
-> +#define H2(x)   ((x) ^ 3)
-> +#define H4(x)   ((x) ^ 1)
-> +#define H8(x)   ((x))
-> +#else
-> +#define H1(x)   (x)
-> +#define H1_2(x) (x)
-> +#define H1_4(x) (x)
-> +#define H2(x)   (x)
-> +#define H4(x)   (x)
-> +#define H8(x)   (x)
-> +#endif
-> +
-> +static inline uint32_t vext_nf(uint32_t desc)
-> +{
-> +    return FIELD_EX32(simd_data(desc), VDATA, NF);
-> +}
-> +
-> +static inline uint32_t vext_mlen(uint32_t desc)
-> +{
-> +    return FIELD_EX32(simd_data(desc), VDATA, MLEN);
-> +}
-> +
-> +static inline uint32_t vext_vm(uint32_t desc)
-> +{
-> +    return FIELD_EX32(simd_data(desc), VDATA, VM);
-> +}
-> +
-> +static inline uint32_t vext_lmul(uint32_t desc)
-> +{
-> +    return FIELD_EX32(simd_data(desc), VDATA, LMUL);
-> +}
-> +
-> +/*
-> + * Get vector group length in bytes. Its range is [64, 2048].
-> + *
-> + * As simd_desc support at most 256, the max vlen is 512 bits.
-> + * So vlen in bytes is encoded as maxsz.
-> + */
-> +static inline uint32_t vext_maxsz(uint32_t desc)
-> +{
-> +    return simd_maxsz(desc) << vext_lmul(desc);
-> +}
-> +
-> +/*
-> + * This function checks watchpoint before real load operation.
-> + *
-> + * In softmmu mode, the TLB API probe_access is enough for watchpoint ch=
-eck.
-> + * In user mode, there is no watchpoint support now.
-> + *
-> + * It will trigger an exception if there is no mapping in TLB
-> + * and page table walk can't fill the TLB entry. Then the guest
-> + * software can return here after process the exception or never return.
-> + */
-> +static void probe_pages(CPURISCVState *env, target_ulong addr,
-> +        target_ulong len, uintptr_t ra, MMUAccessType access_type)
-> +{
-> +    target_ulong pagelen =3D -(addr | TARGET_PAGE_MASK);
-> +    target_ulong curlen =3D MIN(pagelen, len);
-> +
-> +    probe_access(env, addr, curlen, access_type,
-> +            cpu_mmu_index(env, false), ra);
-> +    if (len > curlen) {
-> +        addr +=3D curlen;
-> +        curlen =3D len - curlen;
-> +        probe_access(env, addr, curlen, access_type,
-> +                cpu_mmu_index(env, false), ra);
-> +    }
-> +}
-> +
-> +#ifdef HOST_WORDS_BIGENDIAN
-> +static void vext_clear(void *tail, uint32_t cnt, uint32_t tot)
-> +{
-> +    /*
-> +     * Split the remaining range to two parts.
-> +     * The first part is in the last uint64_t unit.
-> +     * The second part start from the next uint64_t unit.
-> +     */
-> +    int part1 =3D 0, part2 =3D tot - cnt;
-> +    if (cnt % 8) {
-> +        part1 =3D 8 - (cnt % 8);
-> +        part2 =3D tot - cnt - part1;
-> +        memset(tail & ~(7ULL), 0, part1);
-> +        memset((tail + 8) & ~(7ULL), 0, part2);
-> +    } else {
-> +        memset(tail, 0, part2);
-> +    }
-> +}
-> +#else
-> +static void vext_clear(void *tail, uint32_t cnt, uint32_t tot)
-> +{
-> +    memset(tail, 0, tot - cnt);
-> +}
-> +#endif
-> +
-> +static void clearb(void *vd, uint32_t idx, uint32_t cnt, uint32_t tot)
-> +{
-> +    int8_t *cur =3D ((int8_t *)vd + H1(idx));
-> +    vext_clear(cur, cnt, tot);
-> +}
-> +
-> +static void clearh(void *vd, uint32_t idx, uint32_t cnt, uint32_t tot)
-> +{
-> +    int16_t *cur =3D ((int16_t *)vd + H2(idx));
-> +    vext_clear(cur, cnt, tot);
-> +}
-> +
-> +static void clearl(void *vd, uint32_t idx, uint32_t cnt, uint32_t tot)
-> +{
-> +    int32_t *cur =3D ((int32_t *)vd + H4(idx));
-> +    vext_clear(cur, cnt, tot);
-> +}
-> +
-> +static void clearq(void *vd, uint32_t idx, uint32_t cnt, uint32_t tot)
-> +{
-> +    int64_t *cur =3D (int64_t *)vd + idx;
-> +    vext_clear(cur, cnt, tot);
-> +}
-> +
-> +
-> +static inline int vext_elem_mask(void *v0, int mlen, int index)
-> +{
-> +    int idx =3D (index * mlen) / 64;
-> +    int pos =3D (index * mlen) % 64;
-> +    return (((uint64_t *)v0)[idx] >> pos) & 1;
-> +}
-> +
-> +/* elements operations for load and store */
-> +typedef void vext_ldst_elem_fn(CPURISCVState *env, target_ulong addr,
-> +        uint32_t idx, void *vd, uintptr_t retaddr);
-> +typedef void clear_fn(void *vd, uint32_t idx, uint32_t cnt, uint32_t tot=
-);
-> +
-> +#define GEN_VEXT_LD_ELEM(NAME, MTYPE, ETYPE, H, LDSUF)     \
-> +static void NAME(CPURISCVState *env, abi_ptr addr,         \
-> +        uint32_t idx, void *vd, uintptr_t retaddr)         \
-> +{                                                          \
-> +    MTYPE data;                                            \
-> +    ETYPE *cur =3D ((ETYPE *)vd + H(idx));                   \
-> +    data =3D cpu_##LDSUF##_data_ra(env, addr, retaddr);      \
-> +    *cur =3D data;                                           \
-> +}                                                          \
-> +
-> +GEN_VEXT_LD_ELEM(ldb_b, int8_t,  int8_t,  H1, ldsb)
-> +GEN_VEXT_LD_ELEM(ldb_h, int8_t,  int16_t, H2, ldsb)
-> +GEN_VEXT_LD_ELEM(ldb_w, int8_t,  int32_t, H4, ldsb)
-> +GEN_VEXT_LD_ELEM(ldb_d, int8_t,  int64_t, H8, ldsb)
-> +GEN_VEXT_LD_ELEM(ldh_h, int16_t, int16_t, H2, ldsw)
-> +GEN_VEXT_LD_ELEM(ldh_w, int16_t, int32_t, H4, ldsw)
-> +GEN_VEXT_LD_ELEM(ldh_d, int16_t, int64_t, H8, ldsw)
-> +GEN_VEXT_LD_ELEM(ldw_w, int32_t, int32_t, H4, ldl)
-> +GEN_VEXT_LD_ELEM(ldw_d, int32_t, int64_t, H8, ldl)
-> +GEN_VEXT_LD_ELEM(lde_b, int8_t,  int8_t,  H1, ldsb)
-> +GEN_VEXT_LD_ELEM(lde_h, int16_t, int16_t, H2, ldsw)
-> +GEN_VEXT_LD_ELEM(lde_w, int32_t, int32_t, H4, ldl)
-> +GEN_VEXT_LD_ELEM(lde_d, int64_t, int64_t, H8, ldq)
-> +GEN_VEXT_LD_ELEM(ldbu_b, uint8_t,  uint8_t,  H1, ldub)
-> +GEN_VEXT_LD_ELEM(ldbu_h, uint8_t,  uint16_t, H2, ldub)
-> +GEN_VEXT_LD_ELEM(ldbu_w, uint8_t,  uint32_t, H4, ldub)
-> +GEN_VEXT_LD_ELEM(ldbu_d, uint8_t,  uint64_t, H8, ldub)
-> +GEN_VEXT_LD_ELEM(ldhu_h, uint16_t, uint16_t, H2, lduw)
-> +GEN_VEXT_LD_ELEM(ldhu_w, uint16_t, uint32_t, H4, lduw)
-> +GEN_VEXT_LD_ELEM(ldhu_d, uint16_t, uint64_t, H8, lduw)
-> +GEN_VEXT_LD_ELEM(ldwu_w, uint32_t, uint32_t, H4, ldl)
-> +GEN_VEXT_LD_ELEM(ldwu_d, uint32_t, uint64_t, H8, ldl)
-> +
-> +#define GEN_VEXT_ST_ELEM(NAME, ETYPE, H, STSUF)          \
-> +static void NAME(CPURISCVState *env, abi_ptr addr,       \
-> +        uint32_t idx, void *vd, uintptr_t retaddr)       \
-> +{                                                        \
-> +    ETYPE data =3D *((ETYPE *)vd + H(idx));                \
-> +    cpu_##STSUF##_data_ra(env, addr, data, retaddr);     \
-> +}
-> +GEN_VEXT_ST_ELEM(stb_b, int8_t,  H1, stb)
-> +GEN_VEXT_ST_ELEM(stb_h, int16_t, H2, stb)
-> +GEN_VEXT_ST_ELEM(stb_w, int32_t, H4, stb)
-> +GEN_VEXT_ST_ELEM(stb_d, int64_t, H8, stb)
-> +GEN_VEXT_ST_ELEM(sth_h, int16_t, H2, stw)
-> +GEN_VEXT_ST_ELEM(sth_w, int32_t, H4, stw)
-> +GEN_VEXT_ST_ELEM(sth_d, int64_t, H8, stw)
-> +GEN_VEXT_ST_ELEM(stw_w, int32_t, H4, stl)
-> +GEN_VEXT_ST_ELEM(stw_d, int64_t, H8, stl)
-> +GEN_VEXT_ST_ELEM(ste_b, int8_t,  H1, stb)
-> +GEN_VEXT_ST_ELEM(ste_h, int16_t, H2, stw)
-> +GEN_VEXT_ST_ELEM(ste_w, int32_t, H4, stl)
-> +GEN_VEXT_ST_ELEM(ste_d, int64_t, H8, stq)
-> +
-> +/*
-> + *** stride: access vector element from strided memory
-> + */
-> +static void vext_ldst_stride(void *vd, void *v0, target_ulong base,
-> +        target_ulong stride, CPURISCVState *env, uint32_t desc, uint32_t=
- vm,
-> +        vext_ldst_elem_fn *ldst_elem, clear_fn *clear_elem,
-> +        uint32_t esz, uint32_t msz, uintptr_t ra, MMUAccessType access_t=
-ype)
-> +{
-> +    uint32_t i, k;
-> +    uint32_t nf =3D vext_nf(desc);
-> +    uint32_t mlen =3D vext_mlen(desc);
-> +    uint32_t vlmax =3D vext_maxsz(desc) / esz;
-> +
-> +    if (env->vl =3D=3D 0) {
-> +        return;
-> +    }
-> +    /* probe every access*/
-> +    for (i =3D 0; i < env->vl; i++) {
-> +        if (!vm && !vext_elem_mask(v0, mlen, i)) {
-> +            continue;
-> +        }
-> +        probe_pages(env, base + stride * i, nf * msz, ra, access_type);
-> +    }
-> +    /* do real access */
-> +    for (i =3D 0; i < env->vl; i++) {
-> +        k =3D 0;
-> +        if (!vm && !vext_elem_mask(v0, mlen, i)) {
-> +            continue;
-> +        }
-> +        while (k < nf) {
-> +            target_ulong addr =3D base + stride * i + k * msz;
-> +            ldst_elem(env, addr, i + k * vlmax, vd, ra);
-> +            k++;
-> +        }
-> +    }
-> +    /* clear tail elements */
-> +    if (clear_elem) {
-> +        for (k =3D 0; k < nf; k++) {
-> +            clear_elem(vd, env->vl + k * vlmax, env->vl * esz, vlmax * e=
-sz);
-> +        }
-> +    }
-> +}
-> +
-> +#define GEN_VEXT_LD_STRIDE(NAME, MTYPE, ETYPE, LOAD_FN, CLEAR_FN)       =
-\
-> +void HELPER(NAME)(void *vd, void * v0, target_ulong base,               =
-\
-> +        target_ulong stride, CPURISCVState *env, uint32_t desc)         =
-\
-> +{                                                                       =
-\
-> +    uint32_t vm =3D vext_vm(desc);                                      =
-  \
-> +    vext_ldst_stride(vd, v0, base, stride, env, desc, vm, LOAD_FN,      =
-\
-> +        CLEAR_FN, sizeof(ETYPE), sizeof(MTYPE), GETPC(), MMU_DATA_LOAD);=
-\
-> +}
-> +
-> +GEN_VEXT_LD_STRIDE(vlsb_v_b,  int8_t,   int8_t,   ldb_b,  clearb)
-> +GEN_VEXT_LD_STRIDE(vlsb_v_h,  int8_t,   int16_t,  ldb_h,  clearh)
-> +GEN_VEXT_LD_STRIDE(vlsb_v_w,  int8_t,   int32_t,  ldb_w,  clearl)
-> +GEN_VEXT_LD_STRIDE(vlsb_v_d,  int8_t,   int64_t,  ldb_d,  clearq)
-> +GEN_VEXT_LD_STRIDE(vlsh_v_h,  int16_t,  int16_t,  ldh_h,  clearh)
-> +GEN_VEXT_LD_STRIDE(vlsh_v_w,  int16_t,  int32_t,  ldh_w,  clearl)
-> +GEN_VEXT_LD_STRIDE(vlsh_v_d,  int16_t,  int64_t,  ldh_d,  clearq)
-> +GEN_VEXT_LD_STRIDE(vlsw_v_w,  int32_t,  int32_t,  ldw_w,  clearl)
-> +GEN_VEXT_LD_STRIDE(vlsw_v_d,  int32_t,  int64_t,  ldw_d,  clearq)
-> +GEN_VEXT_LD_STRIDE(vlse_v_b,  int8_t,   int8_t,   lde_b,  clearb)
-> +GEN_VEXT_LD_STRIDE(vlse_v_h,  int16_t,  int16_t,  lde_h,  clearh)
-> +GEN_VEXT_LD_STRIDE(vlse_v_w,  int32_t,  int32_t,  lde_w,  clearl)
-> +GEN_VEXT_LD_STRIDE(vlse_v_d,  int64_t,  int64_t,  lde_d,  clearq)
-> +GEN_VEXT_LD_STRIDE(vlsbu_v_b, uint8_t,  uint8_t,  ldbu_b, clearb)
-> +GEN_VEXT_LD_STRIDE(vlsbu_v_h, uint8_t,  uint16_t, ldbu_h, clearh)
-> +GEN_VEXT_LD_STRIDE(vlsbu_v_w, uint8_t,  uint32_t, ldbu_w, clearl)
-> +GEN_VEXT_LD_STRIDE(vlsbu_v_d, uint8_t,  uint64_t, ldbu_d, clearq)
-> +GEN_VEXT_LD_STRIDE(vlshu_v_h, uint16_t, uint16_t, ldhu_h, clearh)
-> +GEN_VEXT_LD_STRIDE(vlshu_v_w, uint16_t, uint32_t, ldhu_w, clearl)
-> +GEN_VEXT_LD_STRIDE(vlshu_v_d, uint16_t, uint64_t, ldhu_d, clearq)
-> +GEN_VEXT_LD_STRIDE(vlswu_v_w, uint32_t, uint32_t, ldwu_w, clearl)
-> +GEN_VEXT_LD_STRIDE(vlswu_v_d, uint32_t, uint64_t, ldwu_d, clearq)
-> +
-> +#define GEN_VEXT_ST_STRIDE(NAME, MTYPE, ETYPE, STORE_FN)                =
-\
-> +void HELPER(NAME)(void *vd, void *v0, target_ulong base,                =
-\
-> +        target_ulong stride, CPURISCVState *env, uint32_t desc)         =
-\
-> +{                                                                       =
-\
-> +    uint32_t vm =3D vext_vm(desc);                                      =
-  \
-> +    vext_ldst_stride(vd, v0, base, stride, env, desc, vm, STORE_FN,     =
-\
-> +        NULL, sizeof(ETYPE), sizeof(MTYPE), GETPC(), MMU_DATA_STORE);   =
-\
-> +}
-> +
-> +GEN_VEXT_ST_STRIDE(vssb_v_b, int8_t,  int8_t,  stb_b)
-> +GEN_VEXT_ST_STRIDE(vssb_v_h, int8_t,  int16_t, stb_h)
-> +GEN_VEXT_ST_STRIDE(vssb_v_w, int8_t,  int32_t, stb_w)
-> +GEN_VEXT_ST_STRIDE(vssb_v_d, int8_t,  int64_t, stb_d)
-> +GEN_VEXT_ST_STRIDE(vssh_v_h, int16_t, int16_t, sth_h)
-> +GEN_VEXT_ST_STRIDE(vssh_v_w, int16_t, int32_t, sth_w)
-> +GEN_VEXT_ST_STRIDE(vssh_v_d, int16_t, int64_t, sth_d)
-> +GEN_VEXT_ST_STRIDE(vssw_v_w, int32_t, int32_t, stw_w)
-> +GEN_VEXT_ST_STRIDE(vssw_v_d, int32_t, int64_t, stw_d)
-> +GEN_VEXT_ST_STRIDE(vsse_v_b, int8_t,  int8_t,  ste_b)
-> +GEN_VEXT_ST_STRIDE(vsse_v_h, int16_t, int16_t, ste_h)
-> +GEN_VEXT_ST_STRIDE(vsse_v_w, int32_t, int32_t, ste_w)
-> +GEN_VEXT_ST_STRIDE(vsse_v_d, int64_t, int64_t, ste_d)
-> +
-> +/*
-> + *** unit-stride: access elements stored contiguously in memory
-> + */
-> +
-> +/* unmasked unit-stride load and store operation*/
-> +static inline void vext_ldst_us(void *vd, target_ulong base,
-> +        CPURISCVState *env, uint32_t desc,
-> +        vext_ldst_elem_fn *ldst_elem,
-> +        clear_fn *clear_elem,
-> +        uint32_t esz, uint32_t msz, uintptr_t ra,
-> +        MMUAccessType access_type)
-> +{
-> +    uint32_t i, k;
-> +    uint32_t nf =3D vext_nf(desc);
-> +    uint32_t vlmax =3D vext_maxsz(desc) / esz;
-> +
-> +    if (env->vl =3D=3D 0) {
-> +        return;
-> +    }
-> +    /* probe every access */
-> +    probe_pages(env, base, env->vl * nf * msz, ra, access_type);
-> +    /* load bytes from guest memory */
-> +    for (i =3D 0; i < env->vl; i++) {
-> +        k =3D 0;
-> +        while (k < nf) {
-> +            target_ulong addr =3D base + (i * nf + k) * msz;
-> +            ldst_elem(env, addr, i + k * vlmax, vd, ra);
-> +            k++;
-> +        }
-> +    }
-> +    /* clear tail elements */
-> +    if (clear_elem) {
-> +        for (k =3D 0; k < nf; k++) {
-> +            clear_elem(vd, env->vl + k * vlmax, env->vl * esz, vlmax * e=
-sz);
-> +        }
-> +    }
-> +}
-> +
-> +/*
-> + * masked unit-stride load and store operation will be a special case of=
- stride,
-> + * stride =3D NF * sizeof (MTYPE)
-> + */
-> +
-> +#define GEN_VEXT_LD_US(NAME, MTYPE, ETYPE, LOAD_FN, CLEAR_FN)           =
-\
-> +void HELPER(NAME##_mask)(void *vd, void *v0, target_ulong base,         =
-\
-> +        CPURISCVState *env, uint32_t desc)                              =
-\
-> +{                                                                       =
-\
-> +    uint32_t stride =3D vext_nf(desc) * sizeof(MTYPE);                  =
-  \
-> +    vext_ldst_stride(vd, v0, base, stride, env, desc, false, LOAD_FN,   =
-\
-> +        CLEAR_FN, sizeof(ETYPE), sizeof(MTYPE), GETPC(), MMU_DATA_LOAD);=
-\
-> +}                                                                       =
-\
-> +                                                                        =
-\
-> +void HELPER(NAME)(void *vd, void *v0, target_ulong base,                =
-\
-> +        CPURISCVState *env, uint32_t desc)                              =
-\
-> +{                                                                       =
-\
-> +    vext_ldst_us(vd, base, env, desc, LOAD_FN, CLEAR_FN,                =
-\
-> +        sizeof(ETYPE), sizeof(MTYPE), GETPC(), MMU_DATA_LOAD);          =
-\
-> +}
-> +
-> +GEN_VEXT_LD_US(vlb_v_b,  int8_t,   int8_t,   ldb_b,  clearb)
-> +GEN_VEXT_LD_US(vlb_v_h,  int8_t,   int16_t,  ldb_h,  clearh)
-> +GEN_VEXT_LD_US(vlb_v_w,  int8_t,   int32_t,  ldb_w,  clearl)
-> +GEN_VEXT_LD_US(vlb_v_d,  int8_t,   int64_t,  ldb_d,  clearq)
-> +GEN_VEXT_LD_US(vlh_v_h,  int16_t,  int16_t,  ldh_h,  clearh)
-> +GEN_VEXT_LD_US(vlh_v_w,  int16_t,  int32_t,  ldh_w,  clearl)
-> +GEN_VEXT_LD_US(vlh_v_d,  int16_t,  int64_t,  ldh_d,  clearq)
-> +GEN_VEXT_LD_US(vlw_v_w,  int32_t,  int32_t,  ldw_w,  clearl)
-> +GEN_VEXT_LD_US(vlw_v_d,  int32_t,  int64_t,  ldw_d,  clearq)
-> +GEN_VEXT_LD_US(vle_v_b,  int8_t,   int8_t,   lde_b,  clearb)
-> +GEN_VEXT_LD_US(vle_v_h,  int16_t,  int16_t,  lde_h,  clearh)
-> +GEN_VEXT_LD_US(vle_v_w,  int32_t,  int32_t,  lde_w,  clearl)
-> +GEN_VEXT_LD_US(vle_v_d,  int64_t,  int64_t,  lde_d,  clearq)
-> +GEN_VEXT_LD_US(vlbu_v_b, uint8_t,  uint8_t,  ldbu_b, clearb)
-> +GEN_VEXT_LD_US(vlbu_v_h, uint8_t,  uint16_t, ldbu_h, clearh)
-> +GEN_VEXT_LD_US(vlbu_v_w, uint8_t,  uint32_t, ldbu_w, clearl)
-> +GEN_VEXT_LD_US(vlbu_v_d, uint8_t,  uint64_t, ldbu_d, clearq)
-> +GEN_VEXT_LD_US(vlhu_v_h, uint16_t, uint16_t, ldhu_h, clearh)
-> +GEN_VEXT_LD_US(vlhu_v_w, uint16_t, uint32_t, ldhu_w, clearl)
-> +GEN_VEXT_LD_US(vlhu_v_d, uint16_t, uint64_t, ldhu_d, clearq)
-> +GEN_VEXT_LD_US(vlwu_v_w, uint32_t, uint32_t, ldwu_w, clearl)
-> +GEN_VEXT_LD_US(vlwu_v_d, uint32_t, uint64_t, ldwu_d, clearq)
-> +
-> +#define GEN_VEXT_ST_US(NAME, MTYPE, ETYPE, STORE_FN)                    =
-\
-> +void HELPER(NAME##_mask)(void *vd, void *v0, target_ulong base,         =
-\
-> +        CPURISCVState *env, uint32_t desc)                              =
-\
-> +{                                                                       =
-\
-> +    uint32_t stride =3D vext_nf(desc) * sizeof(MTYPE);                  =
-  \
-> +    vext_ldst_stride(vd, v0, base, stride, env, desc, false, STORE_FN,  =
-\
-> +        NULL, sizeof(ETYPE), sizeof(MTYPE), GETPC(), MMU_DATA_STORE);   =
-\
-> +}                                                                       =
-\
-> +                                                                        =
-\
-> +void HELPER(NAME)(void *vd, void *v0, target_ulong base,                =
-\
-> +        CPURISCVState *env, uint32_t desc)                              =
-\
-> +{                                                                       =
-\
-> +    vext_ldst_us(vd, base, env, desc, STORE_FN, NULL,                   =
-\
-> +        sizeof(ETYPE), sizeof(MTYPE), GETPC(), MMU_DATA_STORE);         =
-\
-> +}
-> +
-> +GEN_VEXT_ST_US(vsb_v_b, int8_t,  int8_t , stb_b)
-> +GEN_VEXT_ST_US(vsb_v_h, int8_t,  int16_t, stb_h)
-> +GEN_VEXT_ST_US(vsb_v_w, int8_t,  int32_t, stb_w)
-> +GEN_VEXT_ST_US(vsb_v_d, int8_t,  int64_t, stb_d)
-> +GEN_VEXT_ST_US(vsh_v_h, int16_t, int16_t, sth_h)
-> +GEN_VEXT_ST_US(vsh_v_w, int16_t, int32_t, sth_w)
-> +GEN_VEXT_ST_US(vsh_v_d, int16_t, int64_t, sth_d)
-> +GEN_VEXT_ST_US(vsw_v_w, int32_t, int32_t, stw_w)
-> +GEN_VEXT_ST_US(vsw_v_d, int32_t, int64_t, stw_d)
-> +GEN_VEXT_ST_US(vse_v_b, int8_t,  int8_t , ste_b)
-> +GEN_VEXT_ST_US(vse_v_h, int16_t, int16_t, ste_h)
-> +GEN_VEXT_ST_US(vse_v_w, int32_t, int32_t, ste_w)
-> +GEN_VEXT_ST_US(vse_v_d, int64_t, int64_t, ste_d)
-> --
-> 2.23.0
->
+UGF0Y2hldyBVUkw6IGh0dHBzOi8vcGF0Y2hldy5vcmcvUUVNVS9jb3Zlci4xNTg0NTcxMjUwLmdp
+dC5hbGlzdGFpci5mcmFuY2lzQHdkYy5jb20vCgoKCkhpLAoKVGhpcyBzZXJpZXMgc2VlbXMgdG8g
+aGF2ZSBzb21lIGNvZGluZyBzdHlsZSBwcm9ibGVtcy4gU2VlIG91dHB1dCBiZWxvdyBmb3IKbW9y
+ZSBpbmZvcm1hdGlvbjoKClN1YmplY3Q6IFtQQVRDSCB2OSAwLzRdICBsaW51eC11c2VyOiBnZW5l
+cmF0ZSBzeXNjYWxsX25yLnNoIGZvciBSSVNDLVYKTWVzc2FnZS1pZDogY292ZXIuMTU4NDU3MTI1
+MC5naXQuYWxpc3RhaXIuZnJhbmNpc0B3ZGMuY29tClR5cGU6IHNlcmllcwoKPT09IFRFU1QgU0NS
+SVBUIEJFR0lOID09PQojIS9iaW4vYmFzaApnaXQgcmV2LXBhcnNlIGJhc2UgPiAvZGV2L251bGwg
+fHwgZXhpdCAwCmdpdCBjb25maWcgLS1sb2NhbCBkaWZmLnJlbmFtZWxpbWl0IDAKZ2l0IGNvbmZp
+ZyAtLWxvY2FsIGRpZmYucmVuYW1lcyBUcnVlCmdpdCBjb25maWcgLS1sb2NhbCBkaWZmLmFsZ29y
+aXRobSBoaXN0b2dyYW0KLi9zY3JpcHRzL2NoZWNrcGF0Y2gucGwgLS1tYWlsYmFjayBiYXNlLi4K
+PT09IFRFU1QgU0NSSVBUIEVORCA9PT0KClVwZGF0aW5nIDNjOGNmNWE5YzIxZmY4NzgyMTY0ZDFk
+ZWY3ZjQ0YmQ4ODg3MTMzODQKU3dpdGNoZWQgdG8gYSBuZXcgYnJhbmNoICd0ZXN0JwoxZDA5YzZh
+IGxpbnV4LXVzZXIvcmlzY3Y6IFVwZGF0ZSB0aGUgc3lzY2FsbF9ucidzIHRvIHRoZSA1LjUga2Vy
+bmVsCjlkNDljMDMgbGludXgtdXNlcjogU3VwcG9ydCBmdXRleF90aW1lNjQKZDI1ZDkzMyBsaW51
+eC11c2VyL3N5c2NhbGw6IEFkZCBzdXBwb3J0IGZvciBjbG9ja19nZXR0aW1lNjQvY2xvY2tfc2V0
+dGltZTY0CmRmNGI5ZTYgbGludXgtdXNlcjogUHJvdGVjdCBtb3JlIHN5c2NhbGxzCgo9PT0gT1VU
+UFVUIEJFR0lOID09PQoxLzQgQ2hlY2tpbmcgY29tbWl0IGRmNGI5ZTZiMWYwZiAobGludXgtdXNl
+cjogUHJvdGVjdCBtb3JlIHN5c2NhbGxzKQoyLzQgQ2hlY2tpbmcgY29tbWl0IGQyNWQ5MzM3MjZj
+MyAobGludXgtdXNlci9zeXNjYWxsOiBBZGQgc3VwcG9ydCBmb3IgY2xvY2tfZ2V0dGltZTY0L2Ns
+b2NrX3NldHRpbWU2NCkKMy80IENoZWNraW5nIGNvbW1pdCA5ZDQ5YzAzMGEwZjIgKGxpbnV4LXVz
+ZXI6IFN1cHBvcnQgZnV0ZXhfdGltZTY0KQpXQVJOSU5HOiBhcmNoaXRlY3R1cmUgc3BlY2lmaWMg
+ZGVmaW5lcyBzaG91bGQgYmUgYXZvaWRlZAojMjM6IEZJTEU6IGxpbnV4LXVzZXIvc3lzY2FsbC5j
+OjI0ODoKKyNpZiBkZWZpbmVkKF9fTlJfZnV0ZXgpCgpXQVJOSU5HOiBhcmNoaXRlY3R1cmUgc3Bl
+Y2lmaWMgZGVmaW5lcyBzaG91bGQgYmUgYXZvaWRlZAojMjY6IEZJTEU6IGxpbnV4LXVzZXIvc3lz
+Y2FsbC5jOjI1MToKKyNpZiBkZWZpbmVkKF9fTlJfZnV0ZXhfdGltZTY0KQoKV0FSTklORzogYXJj
+aGl0ZWN0dXJlIHNwZWNpZmljIGRlZmluZXMgc2hvdWxkIGJlIGF2b2lkZWQKIzM3OiBGSUxFOiBs
+aW51eC11c2VyL3N5c2NhbGwuYzozMDM6CisjaWYgKGRlZmluZWQoVEFSR0VUX05SX2Z1dGV4KSAm
+JiBkZWZpbmVkKF9fTlJfZnV0ZXgpKSB8fCBcCgpXQVJOSU5HOiBhcmNoaXRlY3R1cmUgc3BlY2lm
+aWMgZGVmaW5lcyBzaG91bGQgYmUgYXZvaWRlZAojNDM6IEZJTEU6IGxpbnV4LXVzZXIvc3lzY2Fs
+bC5jOjMwOToKKyNpZiBkZWZpbmVkKF9fTlJfZnV0ZXhfdGltZTY0KQoKRVJST1I6IHNwYWNlIHJl
+cXVpcmVkIGFmdGVyIHRoYXQgJywnIChjdHg6VnhWKQojNDQ6IEZJTEU6IGxpbnV4LXVzZXIvc3lz
+Y2FsbC5jOjMxMDoKK19zeXNjYWxsNihpbnQsc3lzX2Z1dGV4X3RpbWU2NCxpbnQgKix1YWRkcixp
+bnQsb3AsaW50LHZhbCwKICAgICAgICAgICAgICBeCgpFUlJPUjogc3BhY2UgcmVxdWlyZWQgYWZ0
+ZXIgdGhhdCAnLCcgKGN0eDpWeFYpCiM0NDogRklMRTogbGludXgtdXNlci9zeXNjYWxsLmM6MzEw
+OgorX3N5c2NhbGw2KGludCxzeXNfZnV0ZXhfdGltZTY0LGludCAqLHVhZGRyLGludCxvcCxpbnQs
+dmFsLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXgoKRVJST1I6IHNwYWNlIHJlcXVp
+cmVkIGFmdGVyIHRoYXQgJywnIChjdHg6T3hWKQojNDQ6IEZJTEU6IGxpbnV4LXVzZXIvc3lzY2Fs
+bC5jOjMxMDoKK19zeXNjYWxsNihpbnQsc3lzX2Z1dGV4X3RpbWU2NCxpbnQgKix1YWRkcixpbnQs
+b3AsaW50LHZhbCwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIF4KCkVSUk9S
+OiBzcGFjZSByZXF1aXJlZCBhZnRlciB0aGF0ICcsJyAoY3R4OlZ4VikKIzQ0OiBGSUxFOiBsaW51
+eC11c2VyL3N5c2NhbGwuYzozMTA6Citfc3lzY2FsbDYoaW50LHN5c19mdXRleF90aW1lNjQsaW50
+ICosdWFkZHIsaW50LG9wLGludCx2YWwsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICBeCgpFUlJPUjogc3BhY2UgcmVxdWlyZWQgYWZ0ZXIgdGhhdCAnLCcgKGN0eDpW
+eFYpCiM0NDogRklMRTogbGludXgtdXNlci9zeXNjYWxsLmM6MzEwOgorX3N5c2NhbGw2KGludCxz
+eXNfZnV0ZXhfdGltZTY0LGludCAqLHVhZGRyLGludCxvcCxpbnQsdmFsLAogICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIF4KCkVSUk9SOiBzcGFjZSByZXF1aXJl
+ZCBhZnRlciB0aGF0ICcsJyAoY3R4OlZ4VikKIzQ0OiBGSUxFOiBsaW51eC11c2VyL3N5c2NhbGwu
+YzozMTA6Citfc3lzY2FsbDYoaW50LHN5c19mdXRleF90aW1lNjQsaW50ICosdWFkZHIsaW50LG9w
+LGludCx2YWwsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgXgoKRVJST1I6IHNwYWNlIHJlcXVpcmVkIGFmdGVyIHRoYXQgJywnIChjdHg6VnhWKQojNDQ6
+IEZJTEU6IGxpbnV4LXVzZXIvc3lzY2FsbC5jOjMxMDoKK19zeXNjYWxsNihpbnQsc3lzX2Z1dGV4
+X3RpbWU2NCxpbnQgKix1YWRkcixpbnQsb3AsaW50LHZhbCwKICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXgoKRVJST1I6IHNwYWNlIHJlcXVpcmVk
+IGFmdGVyIHRoYXQgJywnIChjdHg6T3hWKQojNDU6IEZJTEU6IGxpbnV4LXVzZXIvc3lzY2FsbC5j
+OjMxMToKKyAgICAgICAgICBjb25zdCBzdHJ1Y3QgdGltZXNwZWMgKix0aW1lb3V0LGludCAqLHVh
+ZGRyMixpbnQsdmFsMykKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIF4KCkVSUk9S
+OiBzcGFjZSByZXF1aXJlZCBhZnRlciB0aGF0ICcsJyAoY3R4OlZ4VikKIzQ1OiBGSUxFOiBsaW51
+eC11c2VyL3N5c2NhbGwuYzozMTE6CisgICAgICAgICAgY29uc3Qgc3RydWN0IHRpbWVzcGVjICos
+dGltZW91dCxpbnQgKix1YWRkcjIsaW50LHZhbDMpCiAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgIF4KCkVSUk9SOiBzcGFjZSByZXF1aXJlZCBhZnRlciB0aGF0ICcsJyAo
+Y3R4Ok94VikKIzQ1OiBGSUxFOiBsaW51eC11c2VyL3N5c2NhbGwuYzozMTE6CisgICAgICAgICAg
+Y29uc3Qgc3RydWN0IHRpbWVzcGVjICosdGltZW91dCxpbnQgKix1YWRkcjIsaW50LHZhbDMpCiAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIF4KCkVSUk9SOiBz
+cGFjZSByZXF1aXJlZCBhZnRlciB0aGF0ICcsJyAoY3R4OlZ4VikKIzQ1OiBGSUxFOiBsaW51eC11
+c2VyL3N5c2NhbGwuYzozMTE6CisgICAgICAgICAgY29uc3Qgc3RydWN0IHRpbWVzcGVjICosdGlt
+ZW91dCxpbnQgKix1YWRkcjIsaW50LHZhbDMpCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICBeCgpFUlJPUjogc3BhY2UgcmVxdWlyZWQgYWZ0ZXIg
+dGhhdCAnLCcgKGN0eDpWeFYpCiM0NTogRklMRTogbGludXgtdXNlci9zeXNjYWxsLmM6MzExOgor
+ICAgICAgICAgIGNvbnN0IHN0cnVjdCB0aW1lc3BlYyAqLHRpbWVvdXQsaW50ICosdWFkZHIyLGlu
+dCx2YWwzKQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgIF4KCldBUk5JTkc6IGFyY2hpdGVjdHVyZSBzcGVjaWZpYyBkZWZpbmVzIHNob3Vs
+ZCBiZSBhdm9pZGVkCiM1NTogRklMRTogbGludXgtdXNlci9zeXNjYWxsLmM6Nzc2OgorI2lmIGRl
+ZmluZWQoX19OUl9mdXRleCkKCldBUk5JTkc6IGFyY2hpdGVjdHVyZSBzcGVjaWZpYyBkZWZpbmVz
+IHNob3VsZCBiZSBhdm9pZGVkCiM1OTogRklMRTogbGludXgtdXNlci9zeXNjYWxsLmM6NzgwOgor
+I2lmIGRlZmluZWQoX19OUl9mdXRleF90aW1lNjQpCgpFUlJPUjogc3BhY2UgcmVxdWlyZWQgYWZ0
+ZXIgdGhhdCAnLCcgKGN0eDpWeFYpCiM2MDogRklMRTogbGludXgtdXNlci9zeXNjYWxsLmM6Nzgx
+Ogorc2FmZV9zeXNjYWxsNihpbnQsZnV0ZXhfdGltZTY0LGludCAqLHVhZGRyLGludCxvcCxpbnQs
+dmFsLCBcCiAgICAgICAgICAgICAgICAgIF4KCkVSUk9SOiBzcGFjZSByZXF1aXJlZCBhZnRlciB0
+aGF0ICcsJyAoY3R4OlZ4VikKIzYwOiBGSUxFOiBsaW51eC11c2VyL3N5c2NhbGwuYzo3ODE6Citz
+YWZlX3N5c2NhbGw2KGludCxmdXRleF90aW1lNjQsaW50ICosdWFkZHIsaW50LG9wLGludCx2YWws
+IFwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIF4KCkVSUk9SOiBzcGFjZSByZXF1aXJl
+ZCBhZnRlciB0aGF0ICcsJyAoY3R4Ok94VikKIzYwOiBGSUxFOiBsaW51eC11c2VyL3N5c2NhbGwu
+Yzo3ODE6CitzYWZlX3N5c2NhbGw2KGludCxmdXRleF90aW1lNjQsaW50ICosdWFkZHIsaW50LG9w
+LGludCx2YWwsIFwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIF4KCkVSUk9S
+OiBzcGFjZSByZXF1aXJlZCBhZnRlciB0aGF0ICcsJyAoY3R4OlZ4VikKIzYwOiBGSUxFOiBsaW51
+eC11c2VyL3N5c2NhbGwuYzo3ODE6CitzYWZlX3N5c2NhbGw2KGludCxmdXRleF90aW1lNjQsaW50
+ICosdWFkZHIsaW50LG9wLGludCx2YWwsIFwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgIF4KCkVSUk9SOiBzcGFjZSByZXF1aXJlZCBhZnRlciB0aGF0ICcsJyAoY3R4
+OlZ4VikKIzYwOiBGSUxFOiBsaW51eC11c2VyL3N5c2NhbGwuYzo3ODE6CitzYWZlX3N5c2NhbGw2
+KGludCxmdXRleF90aW1lNjQsaW50ICosdWFkZHIsaW50LG9wLGludCx2YWwsIFwKICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBeCgpFUlJPUjogc3BhY2UgcmVx
+dWlyZWQgYWZ0ZXIgdGhhdCAnLCcgKGN0eDpWeFYpCiM2MDogRklMRTogbGludXgtdXNlci9zeXNj
+YWxsLmM6NzgxOgorc2FmZV9zeXNjYWxsNihpbnQsZnV0ZXhfdGltZTY0LGludCAqLHVhZGRyLGlu
+dCxvcCxpbnQsdmFsLCBcCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgXgoKRVJST1I6IHNwYWNlIHJlcXVpcmVkIGFmdGVyIHRoYXQgJywnIChjdHg6VnhW
+KQojNjA6IEZJTEU6IGxpbnV4LXVzZXIvc3lzY2FsbC5jOjc4MToKK3NhZmVfc3lzY2FsbDYoaW50
+LGZ1dGV4X3RpbWU2NCxpbnQgKix1YWRkcixpbnQsb3AsaW50LHZhbCwgXAogICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBeCgpFUlJPUjogc3BhY2Ug
+cmVxdWlyZWQgYWZ0ZXIgdGhhdCAnLCcgKGN0eDpPeFYpCiM2MTogRklMRTogbGludXgtdXNlci9z
+eXNjYWxsLmM6NzgyOgorICAgICAgICAgICAgICBjb25zdCBzdHJ1Y3QgdGltZXNwZWMgKix0aW1l
+b3V0LGludCAqLHVhZGRyMixpbnQsdmFsMykKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICBeCgpFUlJPUjogc3BhY2UgcmVxdWlyZWQgYWZ0ZXIgdGhhdCAnLCcgKGN0eDpWeFYp
+CiM2MTogRklMRTogbGludXgtdXNlci9zeXNjYWxsLmM6NzgyOgorICAgICAgICAgICAgICBjb25z
+dCBzdHJ1Y3QgdGltZXNwZWMgKix0aW1lb3V0LGludCAqLHVhZGRyMixpbnQsdmFsMykKICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIF4KCkVSUk9SOiBzcGFjZSBy
+ZXF1aXJlZCBhZnRlciB0aGF0ICcsJyAoY3R4Ok94VikKIzYxOiBGSUxFOiBsaW51eC11c2VyL3N5
+c2NhbGwuYzo3ODI6CisgICAgICAgICAgICAgIGNvbnN0IHN0cnVjdCB0aW1lc3BlYyAqLHRpbWVv
+dXQsaW50ICosdWFkZHIyLGludCx2YWwzKQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgXgoKRVJST1I6IHNwYWNlIHJlcXVpcmVkIGFmdGVyIHRoYXQg
+JywnIChjdHg6VnhWKQojNjE6IEZJTEU6IGxpbnV4LXVzZXIvc3lzY2FsbC5jOjc4MjoKKyAgICAg
+ICAgICAgICAgY29uc3Qgc3RydWN0IHRpbWVzcGVjICosdGltZW91dCxpbnQgKix1YWRkcjIsaW50
+LHZhbDMpCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgXgoKRVJST1I6IHNwYWNlIHJlcXVpcmVkIGFmdGVyIHRoYXQgJywnIChjdHg6VnhW
+KQojNjE6IEZJTEU6IGxpbnV4LXVzZXIvc3lzY2FsbC5jOjc4MjoKKyAgICAgICAgICAgICAgY29u
+c3Qgc3RydWN0IHRpbWVzcGVjICosdGltZW91dCxpbnQgKix1YWRkcjIsaW50LHZhbDMpCiAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+IF4KCldBUk5JTkc6IGFyY2hpdGVjdHVyZSBzcGVjaWZpYyBkZWZpbmVzIHNob3VsZCBiZSBhdm9p
+ZGVkCiM4NDogRklMRTogbGludXgtdXNlci9zeXNjYWxsLmM6NjkxMzoKKyNpZiBkZWZpbmVkKF9f
+TlJfZnV0ZXgpCgpXQVJOSU5HOiBhcmNoaXRlY3R1cmUgc3BlY2lmaWMgZGVmaW5lcyBzaG91bGQg
+YmUgYXZvaWRlZAojOTA6IEZJTEU6IGxpbnV4LXVzZXIvc3lzY2FsbC5jOjY5MTk6CisjaWYgZGVm
+aW5lZChfX05SX2Z1dGV4X3RpbWU2NCkKCldBUk5JTkc6IGFyY2hpdGVjdHVyZSBzcGVjaWZpYyBk
+ZWZpbmVzIHNob3VsZCBiZSBhdm9pZGVkCiM5NjogRklMRTogbGludXgtdXNlci9zeXNjYWxsLmM6
+NjkyNToKKyNpZiBkZWZpbmVkKF9fTlJfZnV0ZXgpCgpXQVJOSU5HOiBhcmNoaXRlY3R1cmUgc3Bl
+Y2lmaWMgZGVmaW5lcyBzaG91bGQgYmUgYXZvaWRlZAojMTA5OiBGSUxFOiBsaW51eC11c2VyL3N5
+c2NhbGwuYzo2OTM4OgorI2lmIGRlZmluZWQoX19OUl9mdXRleCkKCldBUk5JTkc6IGFyY2hpdGVj
+dHVyZSBzcGVjaWZpYyBkZWZpbmVzIHNob3VsZCBiZSBhdm9pZGVkCiMxMTQ6IEZJTEU6IGxpbnV4
+LXVzZXIvc3lzY2FsbC5jOjY5NDM6CisjaWYgZGVmaW5lZChfX05SX2Z1dGV4X3RpbWU2NCkKCldB
+Uk5JTkc6IGFyY2hpdGVjdHVyZSBzcGVjaWZpYyBkZWZpbmVzIHNob3VsZCBiZSBhdm9pZGVkCiMx
+MjE6IEZJTEU6IGxpbnV4LXVzZXIvc3lzY2FsbC5jOjY5NTA6CisjaWYgZGVmaW5lZChfX05SX2Z1
+dGV4KQoKV0FSTklORzogbGluZSBvdmVyIDgwIGNoYXJhY3RlcnMKIzE2ODogRklMRTogbGludXgt
+dXNlci9zeXNjYWxsLmM6NzAxMzoKK3N0YXRpYyBpbnQgZG9fZnV0ZXhfdGltZTY0KHRhcmdldF91
+bG9uZyB1YWRkciwgaW50IG9wLCBpbnQgdmFsLCB0YXJnZXRfdWxvbmcgdGltZW91dCwKCldBUk5J
+Tkc6IEJsb2NrIGNvbW1lbnRzIHVzZSBhIGxlYWRpbmcgLyogb24gYSBzZXBhcmF0ZSBsaW5lCiMx
+NzQ6IEZJTEU6IGxpbnV4LXVzZXIvc3lzY2FsbC5jOjcwMTk6CisgICAgLyogPz8/IFdlIGFzc3Vt
+ZSBGVVRFWF8qIGNvbnN0YW50cyBhcmUgdGhlIHNhbWUgb24gYm90aCBob3N0CgpXQVJOSU5HOiBC
+bG9jayBjb21tZW50cyB1c2UgKiBvbiBzdWJzZXF1ZW50IGxpbmVzCiMxNzU6IEZJTEU6IGxpbnV4
+LXVzZXIvc3lzY2FsbC5jOjcwMjA6CisgICAgLyogPz8/IFdlIGFzc3VtZSBGVVRFWF8qIGNvbnN0
+YW50cyBhcmUgdGhlIHNhbWUgb24gYm90aCBob3N0CisgICAgICAgYW5kIHRhcmdldC4gICovCgpX
+QVJOSU5HOiBCbG9jayBjb21tZW50cyB1c2UgYSB0cmFpbGluZyAqLyBvbiBhIHNlcGFyYXRlIGxp
+bmUKIzE3NTogRklMRTogbGludXgtdXNlci9zeXNjYWxsLmM6NzAyMDoKKyAgICAgICBhbmQgdGFy
+Z2V0LiAgKi8KCldBUk5JTkc6IEJsb2NrIGNvbW1lbnRzIHVzZSBhIGxlYWRpbmcgLyogb24gYSBz
+ZXBhcmF0ZSBsaW5lCiMxOTk6IEZJTEU6IGxpbnV4LXVzZXIvc3lzY2FsbC5jOjcwNDQ6CisgICAg
+ICAgIC8qIEZvciBGVVRFWF9SRVFVRVVFLCBGVVRFWF9DTVBfUkVRVUVVRSwgYW5kIEZVVEVYX1dB
+S0VfT1AsIHRoZQoKV0FSTklORzogQmxvY2sgY29tbWVudHMgdXNlICogb24gc3Vic2VxdWVudCBs
+aW5lcwojMjAwOiBGSUxFOiBsaW51eC11c2VyL3N5c2NhbGwuYzo3MDQ1OgorICAgICAgICAvKiBG
+b3IgRlVURVhfUkVRVUVVRSwgRlVURVhfQ01QX1JFUVVFVUUsIGFuZCBGVVRFWF9XQUtFX09QLCB0
+aGUKKyAgICAgICAgICAgVElNRU9VVCBwYXJhbWV0ZXIgaXMgaW50ZXJwcmV0ZWQgYXMgYSB1aW50
+MzJfdCBieSB0aGUga2VybmVsLgoKV0FSTklORzogQmxvY2sgY29tbWVudHMgdXNlIGEgdHJhaWxp
+bmcgKi8gb24gYSBzZXBhcmF0ZSBsaW5lCiMyMDM6IEZJTEU6IGxpbnV4LXVzZXIvc3lzY2FsbC5j
+OjcwNDg6CisgICAgICAgICAgIHNpbmNlIGl0J3Mgbm90IGNvbXBhcmVkIHRvIGd1ZXN0IG1lbW9y
+eS4gICovCgp0b3RhbDogMjQgZXJyb3JzLCAxOSB3YXJuaW5ncywgMjEyIGxpbmVzIGNoZWNrZWQK
+ClBhdGNoIDMvNCBoYXMgc3R5bGUgcHJvYmxlbXMsIHBsZWFzZSByZXZpZXcuICBJZiBhbnkgb2Yg
+dGhlc2UgZXJyb3JzCmFyZSBmYWxzZSBwb3NpdGl2ZXMgcmVwb3J0IHRoZW0gdG8gdGhlIG1haW50
+YWluZXIsIHNlZQpDSEVDS1BBVENIIGluIE1BSU5UQUlORVJTLgoKNC80IENoZWNraW5nIGNvbW1p
+dCAxZDA5YzZhZDAzMDggKGxpbnV4LXVzZXIvcmlzY3Y6IFVwZGF0ZSB0aGUgc3lzY2FsbF9ucidz
+IHRvIHRoZSA1LjUga2VybmVsKQpXQVJOSU5HOiBhZGRlZCwgbW92ZWQgb3IgZGVsZXRlZCBmaWxl
+KHMpLCBkb2VzIE1BSU5UQUlORVJTIG5lZWQgdXBkYXRpbmc/CiMxMjogCm5ldyBmaWxlIG1vZGUg
+MTAwNjQ0Cgp0b3RhbDogMCBlcnJvcnMsIDEgd2FybmluZ3MsIDg5OCBsaW5lcyBjaGVja2VkCgpQ
+YXRjaCA0LzQgaGFzIHN0eWxlIHByb2JsZW1zLCBwbGVhc2UgcmV2aWV3LiAgSWYgYW55IG9mIHRo
+ZXNlIGVycm9ycwphcmUgZmFsc2UgcG9zaXRpdmVzIHJlcG9ydCB0aGVtIHRvIHRoZSBtYWludGFp
+bmVyLCBzZWUKQ0hFQ0tQQVRDSCBpbiBNQUlOVEFJTkVSUy4KPT09IE9VVFBVVCBFTkQgPT09CgpU
+ZXN0IGNvbW1hbmQgZXhpdGVkIHdpdGggY29kZTogMQoKClRoZSBmdWxsIGxvZyBpcyBhdmFpbGFi
+bGUgYXQKaHR0cDovL3BhdGNoZXcub3JnL2xvZ3MvY292ZXIuMTU4NDU3MTI1MC5naXQuYWxpc3Rh
+aXIuZnJhbmNpc0B3ZGMuY29tL3Rlc3RpbmcuY2hlY2twYXRjaC8/dHlwZT1tZXNzYWdlLgotLS0K
+RW1haWwgZ2VuZXJhdGVkIGF1dG9tYXRpY2FsbHkgYnkgUGF0Y2hldyBbaHR0cHM6Ly9wYXRjaGV3
+Lm9yZy9dLgpQbGVhc2Ugc2VuZCB5b3VyIGZlZWRiYWNrIHRvIHBhdGNoZXctZGV2ZWxAcmVkaGF0
+LmNvbQ==
 
