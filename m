@@ -1,51 +1,44 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jEjkc-0003gr-Gu
-	for mharc-qemu-riscv@gnu.org; Wed, 18 Mar 2020 21:13:34 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49103)
+	id 1jEm9R-00035m-Sj
+	for mharc-qemu-riscv@gnu.org; Wed, 18 Mar 2020 23:47:21 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:56589)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <no-reply@patchew.org>) id 1jEjkZ-0003eu-H8
- for qemu-riscv@nongnu.org; Wed, 18 Mar 2020 21:13:33 -0400
+ (envelope-from <zhiwei_liu@c-sky.com>) id 1jEm9N-0002xj-I6
+ for qemu-riscv@nongnu.org; Wed, 18 Mar 2020 23:47:20 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <no-reply@patchew.org>) id 1jEjkX-00068J-Jl
- for qemu-riscv@nongnu.org; Wed, 18 Mar 2020 21:13:31 -0400
-Resent-Date: Wed, 18 Mar 2020 21:13:31 -0400
-Resent-Message-Id: <E1jEjkX-00068J-Jl@eggs.gnu.org>
-Received: from sender4-of-o51.zoho.com ([136.143.188.51]:21127)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <no-reply@patchew.org>)
- id 1jEjkT-0005OD-74; Wed, 18 Mar 2020 21:13:25 -0400
-ARC-Seal: i=1; a=rsa-sha256; t=1584580398; cv=none; 
- d=zohomail.com; s=zohoarc; 
- b=dKEGs1FUzTaLQm270zxi8HAhuRVVMpIC/vUDIjN9F1AG1AXpITd/Z3LxyAwXwVj1FVUsf8QYF8ufDmGXagTr4tNrxDluc5BGlmaYu+aVGeWWe9FRLTBcGr7bpfAGr+pIpLB9QNN+uuAFvs28b4LFWh/DVQYlzu2VS780Fk3p94g=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1584580398;
- h=Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:MIME-Version:Message-ID:Reply-To:Subject:To;
- bh=vBe//cCQ7QMIrRvK6eaivOAhTV5qxp/qjkkAu6/Kci8=; 
- b=i48SFDsLM/LIpB/uqkzJcVJ83iyK4oYSOuM6XNlzY6d+4eGautCgVIerdL3xa6yUMhZl0C3nCRnDX0lvG7j8aNY97L9xO19j3plTmYY3UG194N+UU3coIet9lxAGeanSWvkWq5BjPB/k1SXwIxW278h1aPtdHn66pHVHZHvx/pQ=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
- spf=pass  smtp.mailfrom=no-reply@patchew.org;
- dmarc=pass header.from=<no-reply@patchew.org>
- header.from=<no-reply@patchew.org>
-Received: from [172.17.0.3] (23.253.156.214 [23.253.156.214]) by
- mx.zohomail.com with SMTPS id 1584580395835228.2532722158419;
- Wed, 18 Mar 2020 18:13:15 -0700 (PDT)
-In-Reply-To: <cover.1584571250.git.alistair.francis@wdc.com>
-Subject: Re: [PATCH v9 0/4]  linux-user: generate syscall_nr.sh for RISC-V
-Reply-To: <qemu-devel@nongnu.org>
-Message-ID: <158458039459.25478.10856694513466934921@39012742ff91>
+ (envelope-from <zhiwei_liu@c-sky.com>) id 1jEm9L-0002c5-4S
+ for qemu-riscv@nongnu.org; Wed, 18 Mar 2020 23:47:17 -0400
+Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:49098)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <zhiwei_liu@c-sky.com>)
+ id 1jEm9D-00025u-MX; Wed, 18 Mar 2020 23:47:09 -0400
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07436849|-1; CH=green; DM=||false|;
+ DS=CONTINUE|ham_regular_dialog|0.120115-0.00154986-0.878335;
+ FP=0|0|0|0|0|-1|-1|-1; HT=e02c03278; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS;
+ RN=9; RT=9; SR=0; TI=SMTPD_---.H1nPPHp_1584589615; 
+Received: from 172.16.31.150(mailfrom:zhiwei_liu@c-sky.com
+ fp:SMTPD_---.H1nPPHp_1584589615)
+ by smtp.aliyun-inc.com(10.147.42.22); Thu, 19 Mar 2020 11:46:55 +0800
+Subject: Re: [PATCH v6 25/61] target/riscv: vector single-width averaging add
+ and subtract
+To: richard.henderson@linaro.org, alistair23@gmail.com,
+ chihmin.chao@sifive.com, palmer@dabbelt.com
+Cc: wenmeng_zhang@c-sky.com, wxy194768@alibaba-inc.com,
+ guoren@linux.alibaba.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+References: <20200317150653.9008-1-zhiwei_liu@c-sky.com>
+ <20200317150653.9008-26-zhiwei_liu@c-sky.com>
+From: LIU Zhiwei <zhiwei_liu@c-sky.com>
+Message-ID: <0cdf21fd-b1f1-36bf-f156-5a673199fa1f@c-sky.com>
+Date: Thu, 19 Mar 2020 11:46:51 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
+ Thunderbird/68.5.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-Resent-From: 
-From: no-reply@patchew.org
-To: alistair.francis@wdc.com
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, laurent@vivier.eu,
- alistair.francis@wdc.com, palmer@dabbelt.com, alistair23@gmail.com
-Date: Wed, 18 Mar 2020 18:13:15 -0700 (PDT)
-X-ZohoMailClient: External
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
- [fuzzy]
-X-Received-From: 136.143.188.51
+In-Reply-To: <20200317150653.9008-26-zhiwei_liu@c-sky.com>
+Content-Type: multipart/alternative;
+ boundary="------------AA80C2260A9958F4DBBA9BAA"
+Content-Language: en-US
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 3.x [generic] [fuzzy]
+X-Received-From: 121.197.200.217
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -57,172 +50,440 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Mar 2020 01:13:33 -0000
+X-List-Received-Date: Thu, 19 Mar 2020 03:47:20 -0000
 
-UGF0Y2hldyBVUkw6IGh0dHBzOi8vcGF0Y2hldy5vcmcvUUVNVS9jb3Zlci4xNTg0NTcxMjUwLmdp
-dC5hbGlzdGFpci5mcmFuY2lzQHdkYy5jb20vCgoKCkhpLAoKVGhpcyBzZXJpZXMgc2VlbXMgdG8g
-aGF2ZSBzb21lIGNvZGluZyBzdHlsZSBwcm9ibGVtcy4gU2VlIG91dHB1dCBiZWxvdyBmb3IKbW9y
-ZSBpbmZvcm1hdGlvbjoKClN1YmplY3Q6IFtQQVRDSCB2OSAwLzRdICBsaW51eC11c2VyOiBnZW5l
-cmF0ZSBzeXNjYWxsX25yLnNoIGZvciBSSVNDLVYKTWVzc2FnZS1pZDogY292ZXIuMTU4NDU3MTI1
-MC5naXQuYWxpc3RhaXIuZnJhbmNpc0B3ZGMuY29tClR5cGU6IHNlcmllcwoKPT09IFRFU1QgU0NS
-SVBUIEJFR0lOID09PQojIS9iaW4vYmFzaApnaXQgcmV2LXBhcnNlIGJhc2UgPiAvZGV2L251bGwg
-fHwgZXhpdCAwCmdpdCBjb25maWcgLS1sb2NhbCBkaWZmLnJlbmFtZWxpbWl0IDAKZ2l0IGNvbmZp
-ZyAtLWxvY2FsIGRpZmYucmVuYW1lcyBUcnVlCmdpdCBjb25maWcgLS1sb2NhbCBkaWZmLmFsZ29y
-aXRobSBoaXN0b2dyYW0KLi9zY3JpcHRzL2NoZWNrcGF0Y2gucGwgLS1tYWlsYmFjayBiYXNlLi4K
-PT09IFRFU1QgU0NSSVBUIEVORCA9PT0KClN3aXRjaGVkIHRvIGEgbmV3IGJyYW5jaCAndGVzdCcK
-Y2QyMGEzMyBsaW51eC11c2VyL3Jpc2N2OiBVcGRhdGUgdGhlIHN5c2NhbGxfbnIncyB0byB0aGUg
-NS41IGtlcm5lbAplMDY3NjdkIGxpbnV4LXVzZXI6IFN1cHBvcnQgZnV0ZXhfdGltZTY0Cjk2NWQ0
-MDYgbGludXgtdXNlci9zeXNjYWxsOiBBZGQgc3VwcG9ydCBmb3IgY2xvY2tfZ2V0dGltZTY0L2Ns
-b2NrX3NldHRpbWU2NAoyMWU0YjA3IGxpbnV4LXVzZXI6IFByb3RlY3QgbW9yZSBzeXNjYWxscwoK
-PT09IE9VVFBVVCBCRUdJTiA9PT0KMS80IENoZWNraW5nIGNvbW1pdCAyMWU0YjA3Zjc4YjggKGxp
-bnV4LXVzZXI6IFByb3RlY3QgbW9yZSBzeXNjYWxscykKMi80IENoZWNraW5nIGNvbW1pdCA5NjVk
-NDA2OTAxNDggKGxpbnV4LXVzZXIvc3lzY2FsbDogQWRkIHN1cHBvcnQgZm9yIGNsb2NrX2dldHRp
-bWU2NC9jbG9ja19zZXR0aW1lNjQpCjMvNCBDaGVja2luZyBjb21taXQgZTA2NzY3ZDU0YzljIChs
-aW51eC11c2VyOiBTdXBwb3J0IGZ1dGV4X3RpbWU2NCkKV0FSTklORzogYXJjaGl0ZWN0dXJlIHNw
-ZWNpZmljIGRlZmluZXMgc2hvdWxkIGJlIGF2b2lkZWQKIzIzOiBGSUxFOiBsaW51eC11c2VyL3N5
-c2NhbGwuYzoyNDg6CisjaWYgZGVmaW5lZChfX05SX2Z1dGV4KQoKV0FSTklORzogYXJjaGl0ZWN0
-dXJlIHNwZWNpZmljIGRlZmluZXMgc2hvdWxkIGJlIGF2b2lkZWQKIzI2OiBGSUxFOiBsaW51eC11
-c2VyL3N5c2NhbGwuYzoyNTE6CisjaWYgZGVmaW5lZChfX05SX2Z1dGV4X3RpbWU2NCkKCldBUk5J
-Tkc6IGFyY2hpdGVjdHVyZSBzcGVjaWZpYyBkZWZpbmVzIHNob3VsZCBiZSBhdm9pZGVkCiMzNzog
-RklMRTogbGludXgtdXNlci9zeXNjYWxsLmM6MzAzOgorI2lmIChkZWZpbmVkKFRBUkdFVF9OUl9m
-dXRleCkgJiYgZGVmaW5lZChfX05SX2Z1dGV4KSkgfHwgXAoKV0FSTklORzogYXJjaGl0ZWN0dXJl
-IHNwZWNpZmljIGRlZmluZXMgc2hvdWxkIGJlIGF2b2lkZWQKIzQzOiBGSUxFOiBsaW51eC11c2Vy
-L3N5c2NhbGwuYzozMDk6CisjaWYgZGVmaW5lZChfX05SX2Z1dGV4X3RpbWU2NCkKCkVSUk9SOiBz
-cGFjZSByZXF1aXJlZCBhZnRlciB0aGF0ICcsJyAoY3R4OlZ4VikKIzQ0OiBGSUxFOiBsaW51eC11
-c2VyL3N5c2NhbGwuYzozMTA6Citfc3lzY2FsbDYoaW50LHN5c19mdXRleF90aW1lNjQsaW50ICos
-dWFkZHIsaW50LG9wLGludCx2YWwsCiAgICAgICAgICAgICAgXgoKRVJST1I6IHNwYWNlIHJlcXVp
-cmVkIGFmdGVyIHRoYXQgJywnIChjdHg6VnhWKQojNDQ6IEZJTEU6IGxpbnV4LXVzZXIvc3lzY2Fs
-bC5jOjMxMDoKK19zeXNjYWxsNihpbnQsc3lzX2Z1dGV4X3RpbWU2NCxpbnQgKix1YWRkcixpbnQs
-b3AsaW50LHZhbCwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIF4KCkVSUk9SOiBzcGFj
-ZSByZXF1aXJlZCBhZnRlciB0aGF0ICcsJyAoY3R4Ok94VikKIzQ0OiBGSUxFOiBsaW51eC11c2Vy
-L3N5c2NhbGwuYzozMTA6Citfc3lzY2FsbDYoaW50LHN5c19mdXRleF90aW1lNjQsaW50ICosdWFk
-ZHIsaW50LG9wLGludCx2YWwsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBe
-CgpFUlJPUjogc3BhY2UgcmVxdWlyZWQgYWZ0ZXIgdGhhdCAnLCcgKGN0eDpWeFYpCiM0NDogRklM
-RTogbGludXgtdXNlci9zeXNjYWxsLmM6MzEwOgorX3N5c2NhbGw2KGludCxzeXNfZnV0ZXhfdGlt
-ZTY0LGludCAqLHVhZGRyLGludCxvcCxpbnQsdmFsLAogICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgXgoKRVJST1I6IHNwYWNlIHJlcXVpcmVkIGFmdGVyIHRoYXQgJywn
-IChjdHg6VnhWKQojNDQ6IEZJTEU6IGxpbnV4LXVzZXIvc3lzY2FsbC5jOjMxMDoKK19zeXNjYWxs
-NihpbnQsc3lzX2Z1dGV4X3RpbWU2NCxpbnQgKix1YWRkcixpbnQsb3AsaW50LHZhbCwKICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBeCgpFUlJPUjogc3BhY2Ug
-cmVxdWlyZWQgYWZ0ZXIgdGhhdCAnLCcgKGN0eDpWeFYpCiM0NDogRklMRTogbGludXgtdXNlci9z
-eXNjYWxsLmM6MzEwOgorX3N5c2NhbGw2KGludCxzeXNfZnV0ZXhfdGltZTY0LGludCAqLHVhZGRy
-LGludCxvcCxpbnQsdmFsLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgIF4KCkVSUk9SOiBzcGFjZSByZXF1aXJlZCBhZnRlciB0aGF0ICcsJyAoY3R4OlZ4
-VikKIzQ0OiBGSUxFOiBsaW51eC11c2VyL3N5c2NhbGwuYzozMTA6Citfc3lzY2FsbDYoaW50LHN5
-c19mdXRleF90aW1lNjQsaW50ICosdWFkZHIsaW50LG9wLGludCx2YWwsCiAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIF4KCkVSUk9SOiBzcGFjZSBy
-ZXF1aXJlZCBhZnRlciB0aGF0ICcsJyAoY3R4Ok94VikKIzQ1OiBGSUxFOiBsaW51eC11c2VyL3N5
-c2NhbGwuYzozMTE6CisgICAgICAgICAgY29uc3Qgc3RydWN0IHRpbWVzcGVjICosdGltZW91dCxp
-bnQgKix1YWRkcjIsaW50LHZhbDMpCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBe
-CgpFUlJPUjogc3BhY2UgcmVxdWlyZWQgYWZ0ZXIgdGhhdCAnLCcgKGN0eDpWeFYpCiM0NTogRklM
-RTogbGludXgtdXNlci9zeXNjYWxsLmM6MzExOgorICAgICAgICAgIGNvbnN0IHN0cnVjdCB0aW1l
-c3BlYyAqLHRpbWVvdXQsaW50ICosdWFkZHIyLGludCx2YWwzKQogICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICBeCgpFUlJPUjogc3BhY2UgcmVxdWlyZWQgYWZ0ZXIgdGhh
-dCAnLCcgKGN0eDpPeFYpCiM0NTogRklMRTogbGludXgtdXNlci9zeXNjYWxsLmM6MzExOgorICAg
-ICAgICAgIGNvbnN0IHN0cnVjdCB0aW1lc3BlYyAqLHRpbWVvdXQsaW50ICosdWFkZHIyLGludCx2
-YWwzKQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBeCgpF
-UlJPUjogc3BhY2UgcmVxdWlyZWQgYWZ0ZXIgdGhhdCAnLCcgKGN0eDpWeFYpCiM0NTogRklMRTog
-bGludXgtdXNlci9zeXNjYWxsLmM6MzExOgorICAgICAgICAgIGNvbnN0IHN0cnVjdCB0aW1lc3Bl
-YyAqLHRpbWVvdXQsaW50ICosdWFkZHIyLGludCx2YWwzKQogICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXgoKRVJST1I6IHNwYWNlIHJlcXVpcmVk
-IGFmdGVyIHRoYXQgJywnIChjdHg6VnhWKQojNDU6IEZJTEU6IGxpbnV4LXVzZXIvc3lzY2FsbC5j
-OjMxMToKKyAgICAgICAgICBjb25zdCBzdHJ1Y3QgdGltZXNwZWMgKix0aW1lb3V0LGludCAqLHVh
-ZGRyMixpbnQsdmFsMykKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICBeCgpXQVJOSU5HOiBhcmNoaXRlY3R1cmUgc3BlY2lmaWMgZGVmaW5l
-cyBzaG91bGQgYmUgYXZvaWRlZAojNTU6IEZJTEU6IGxpbnV4LXVzZXIvc3lzY2FsbC5jOjc3NjoK
-KyNpZiBkZWZpbmVkKF9fTlJfZnV0ZXgpCgpXQVJOSU5HOiBhcmNoaXRlY3R1cmUgc3BlY2lmaWMg
-ZGVmaW5lcyBzaG91bGQgYmUgYXZvaWRlZAojNTk6IEZJTEU6IGxpbnV4LXVzZXIvc3lzY2FsbC5j
-Ojc4MDoKKyNpZiBkZWZpbmVkKF9fTlJfZnV0ZXhfdGltZTY0KQoKRVJST1I6IHNwYWNlIHJlcXVp
-cmVkIGFmdGVyIHRoYXQgJywnIChjdHg6VnhWKQojNjA6IEZJTEU6IGxpbnV4LXVzZXIvc3lzY2Fs
-bC5jOjc4MToKK3NhZmVfc3lzY2FsbDYoaW50LGZ1dGV4X3RpbWU2NCxpbnQgKix1YWRkcixpbnQs
-b3AsaW50LHZhbCwgXAogICAgICAgICAgICAgICAgICBeCgpFUlJPUjogc3BhY2UgcmVxdWlyZWQg
-YWZ0ZXIgdGhhdCAnLCcgKGN0eDpWeFYpCiM2MDogRklMRTogbGludXgtdXNlci9zeXNjYWxsLmM6
-NzgxOgorc2FmZV9zeXNjYWxsNihpbnQsZnV0ZXhfdGltZTY0LGludCAqLHVhZGRyLGludCxvcCxp
-bnQsdmFsLCBcCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBeCgpFUlJPUjogc3BhY2Ug
-cmVxdWlyZWQgYWZ0ZXIgdGhhdCAnLCcgKGN0eDpPeFYpCiM2MDogRklMRTogbGludXgtdXNlci9z
-eXNjYWxsLmM6NzgxOgorc2FmZV9zeXNjYWxsNihpbnQsZnV0ZXhfdGltZTY0LGludCAqLHVhZGRy
-LGludCxvcCxpbnQsdmFsLCBcCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBe
-CgpFUlJPUjogc3BhY2UgcmVxdWlyZWQgYWZ0ZXIgdGhhdCAnLCcgKGN0eDpWeFYpCiM2MDogRklM
-RTogbGludXgtdXNlci9zeXNjYWxsLmM6NzgxOgorc2FmZV9zeXNjYWxsNihpbnQsZnV0ZXhfdGlt
-ZTY0LGludCAqLHVhZGRyLGludCxvcCxpbnQsdmFsLCBcCiAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICBeCgpFUlJPUjogc3BhY2UgcmVxdWlyZWQgYWZ0ZXIgdGhhdCAn
-LCcgKGN0eDpWeFYpCiM2MDogRklMRTogbGludXgtdXNlci9zeXNjYWxsLmM6NzgxOgorc2FmZV9z
-eXNjYWxsNihpbnQsZnV0ZXhfdGltZTY0LGludCAqLHVhZGRyLGludCxvcCxpbnQsdmFsLCBcCiAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXgoKRVJST1I6IHNw
-YWNlIHJlcXVpcmVkIGFmdGVyIHRoYXQgJywnIChjdHg6VnhWKQojNjA6IEZJTEU6IGxpbnV4LXVz
-ZXIvc3lzY2FsbC5jOjc4MToKK3NhZmVfc3lzY2FsbDYoaW50LGZ1dGV4X3RpbWU2NCxpbnQgKix1
-YWRkcixpbnQsb3AsaW50LHZhbCwgXAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgIF4KCkVSUk9SOiBzcGFjZSByZXF1aXJlZCBhZnRlciB0aGF0ICcsJyAo
-Y3R4OlZ4VikKIzYwOiBGSUxFOiBsaW51eC11c2VyL3N5c2NhbGwuYzo3ODE6CitzYWZlX3N5c2Nh
-bGw2KGludCxmdXRleF90aW1lNjQsaW50ICosdWFkZHIsaW50LG9wLGludCx2YWwsIFwKICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXgoKRVJST1I6
-IHNwYWNlIHJlcXVpcmVkIGFmdGVyIHRoYXQgJywnIChjdHg6T3hWKQojNjE6IEZJTEU6IGxpbnV4
-LXVzZXIvc3lzY2FsbC5jOjc4MjoKKyAgICAgICAgICAgICAgY29uc3Qgc3RydWN0IHRpbWVzcGVj
-ICosdGltZW91dCxpbnQgKix1YWRkcjIsaW50LHZhbDMpCiAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgXgoKRVJST1I6IHNwYWNlIHJlcXVpcmVkIGFmdGVyIHRoYXQgJywnIChj
-dHg6VnhWKQojNjE6IEZJTEU6IGxpbnV4LXVzZXIvc3lzY2FsbC5jOjc4MjoKKyAgICAgICAgICAg
-ICAgY29uc3Qgc3RydWN0IHRpbWVzcGVjICosdGltZW91dCxpbnQgKix1YWRkcjIsaW50LHZhbDMp
-CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBeCgpFUlJPUjog
-c3BhY2UgcmVxdWlyZWQgYWZ0ZXIgdGhhdCAnLCcgKGN0eDpPeFYpCiM2MTogRklMRTogbGludXgt
-dXNlci9zeXNjYWxsLmM6NzgyOgorICAgICAgICAgICAgICBjb25zdCBzdHJ1Y3QgdGltZXNwZWMg
-Kix0aW1lb3V0LGludCAqLHVhZGRyMixpbnQsdmFsMykKICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgIF4KCkVSUk9SOiBzcGFjZSByZXF1aXJlZCBhZnRl
-ciB0aGF0ICcsJyAoY3R4OlZ4VikKIzYxOiBGSUxFOiBsaW51eC11c2VyL3N5c2NhbGwuYzo3ODI6
-CisgICAgICAgICAgICAgIGNvbnN0IHN0cnVjdCB0aW1lc3BlYyAqLHRpbWVvdXQsaW50ICosdWFk
-ZHIyLGludCx2YWwzKQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgIF4KCkVSUk9SOiBzcGFjZSByZXF1aXJlZCBhZnRlciB0aGF0ICcsJyAo
-Y3R4OlZ4VikKIzYxOiBGSUxFOiBsaW51eC11c2VyL3N5c2NhbGwuYzo3ODI6CisgICAgICAgICAg
-ICAgIGNvbnN0IHN0cnVjdCB0aW1lc3BlYyAqLHRpbWVvdXQsaW50ICosdWFkZHIyLGludCx2YWwz
-KQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICBeCgpXQVJOSU5HOiBhcmNoaXRlY3R1cmUgc3BlY2lmaWMgZGVmaW5lcyBzaG91bGQg
-YmUgYXZvaWRlZAojODQ6IEZJTEU6IGxpbnV4LXVzZXIvc3lzY2FsbC5jOjY5MTM6CisjaWYgZGVm
-aW5lZChfX05SX2Z1dGV4KQoKV0FSTklORzogYXJjaGl0ZWN0dXJlIHNwZWNpZmljIGRlZmluZXMg
-c2hvdWxkIGJlIGF2b2lkZWQKIzkwOiBGSUxFOiBsaW51eC11c2VyL3N5c2NhbGwuYzo2OTE5Ogor
-I2lmIGRlZmluZWQoX19OUl9mdXRleF90aW1lNjQpCgpXQVJOSU5HOiBhcmNoaXRlY3R1cmUgc3Bl
-Y2lmaWMgZGVmaW5lcyBzaG91bGQgYmUgYXZvaWRlZAojOTY6IEZJTEU6IGxpbnV4LXVzZXIvc3lz
-Y2FsbC5jOjY5MjU6CisjaWYgZGVmaW5lZChfX05SX2Z1dGV4KQoKV0FSTklORzogYXJjaGl0ZWN0
-dXJlIHNwZWNpZmljIGRlZmluZXMgc2hvdWxkIGJlIGF2b2lkZWQKIzEwOTogRklMRTogbGludXgt
-dXNlci9zeXNjYWxsLmM6NjkzODoKKyNpZiBkZWZpbmVkKF9fTlJfZnV0ZXgpCgpXQVJOSU5HOiBh
-cmNoaXRlY3R1cmUgc3BlY2lmaWMgZGVmaW5lcyBzaG91bGQgYmUgYXZvaWRlZAojMTE0OiBGSUxF
-OiBsaW51eC11c2VyL3N5c2NhbGwuYzo2OTQzOgorI2lmIGRlZmluZWQoX19OUl9mdXRleF90aW1l
-NjQpCgpXQVJOSU5HOiBhcmNoaXRlY3R1cmUgc3BlY2lmaWMgZGVmaW5lcyBzaG91bGQgYmUgYXZv
-aWRlZAojMTIxOiBGSUxFOiBsaW51eC11c2VyL3N5c2NhbGwuYzo2OTUwOgorI2lmIGRlZmluZWQo
-X19OUl9mdXRleCkKCldBUk5JTkc6IGxpbmUgb3ZlciA4MCBjaGFyYWN0ZXJzCiMxNjg6IEZJTEU6
-IGxpbnV4LXVzZXIvc3lzY2FsbC5jOjcwMTM6CitzdGF0aWMgaW50IGRvX2Z1dGV4X3RpbWU2NCh0
-YXJnZXRfdWxvbmcgdWFkZHIsIGludCBvcCwgaW50IHZhbCwgdGFyZ2V0X3Vsb25nIHRpbWVvdXQs
-CgpXQVJOSU5HOiBCbG9jayBjb21tZW50cyB1c2UgYSBsZWFkaW5nIC8qIG9uIGEgc2VwYXJhdGUg
-bGluZQojMTc0OiBGSUxFOiBsaW51eC11c2VyL3N5c2NhbGwuYzo3MDE5OgorICAgIC8qID8/PyBX
-ZSBhc3N1bWUgRlVURVhfKiBjb25zdGFudHMgYXJlIHRoZSBzYW1lIG9uIGJvdGggaG9zdAoKV0FS
-TklORzogQmxvY2sgY29tbWVudHMgdXNlICogb24gc3Vic2VxdWVudCBsaW5lcwojMTc1OiBGSUxF
-OiBsaW51eC11c2VyL3N5c2NhbGwuYzo3MDIwOgorICAgIC8qID8/PyBXZSBhc3N1bWUgRlVURVhf
-KiBjb25zdGFudHMgYXJlIHRoZSBzYW1lIG9uIGJvdGggaG9zdAorICAgICAgIGFuZCB0YXJnZXQu
-ICAqLwoKV0FSTklORzogQmxvY2sgY29tbWVudHMgdXNlIGEgdHJhaWxpbmcgKi8gb24gYSBzZXBh
-cmF0ZSBsaW5lCiMxNzU6IEZJTEU6IGxpbnV4LXVzZXIvc3lzY2FsbC5jOjcwMjA6CisgICAgICAg
-YW5kIHRhcmdldC4gICovCgpXQVJOSU5HOiBCbG9jayBjb21tZW50cyB1c2UgYSBsZWFkaW5nIC8q
-IG9uIGEgc2VwYXJhdGUgbGluZQojMTk5OiBGSUxFOiBsaW51eC11c2VyL3N5c2NhbGwuYzo3MDQ0
-OgorICAgICAgICAvKiBGb3IgRlVURVhfUkVRVUVVRSwgRlVURVhfQ01QX1JFUVVFVUUsIGFuZCBG
-VVRFWF9XQUtFX09QLCB0aGUKCldBUk5JTkc6IEJsb2NrIGNvbW1lbnRzIHVzZSAqIG9uIHN1YnNl
-cXVlbnQgbGluZXMKIzIwMDogRklMRTogbGludXgtdXNlci9zeXNjYWxsLmM6NzA0NToKKyAgICAg
-ICAgLyogRm9yIEZVVEVYX1JFUVVFVUUsIEZVVEVYX0NNUF9SRVFVRVVFLCBhbmQgRlVURVhfV0FL
-RV9PUCwgdGhlCisgICAgICAgICAgIFRJTUVPVVQgcGFyYW1ldGVyIGlzIGludGVycHJldGVkIGFz
-IGEgdWludDMyX3QgYnkgdGhlIGtlcm5lbC4KCldBUk5JTkc6IEJsb2NrIGNvbW1lbnRzIHVzZSBh
-IHRyYWlsaW5nICovIG9uIGEgc2VwYXJhdGUgbGluZQojMjAzOiBGSUxFOiBsaW51eC11c2VyL3N5
-c2NhbGwuYzo3MDQ4OgorICAgICAgICAgICBzaW5jZSBpdCdzIG5vdCBjb21wYXJlZCB0byBndWVz
-dCBtZW1vcnkuICAqLwoKdG90YWw6IDI0IGVycm9ycywgMTkgd2FybmluZ3MsIDIxMiBsaW5lcyBj
-aGVja2VkCgpQYXRjaCAzLzQgaGFzIHN0eWxlIHByb2JsZW1zLCBwbGVhc2UgcmV2aWV3LiAgSWYg
-YW55IG9mIHRoZXNlIGVycm9ycwphcmUgZmFsc2UgcG9zaXRpdmVzIHJlcG9ydCB0aGVtIHRvIHRo
-ZSBtYWludGFpbmVyLCBzZWUKQ0hFQ0tQQVRDSCBpbiBNQUlOVEFJTkVSUy4KCjQvNCBDaGVja2lu
-ZyBjb21taXQgY2QyMGEzM2MzM2UzIChsaW51eC11c2VyL3Jpc2N2OiBVcGRhdGUgdGhlIHN5c2Nh
-bGxfbnIncyB0byB0aGUgNS41IGtlcm5lbCkKV0FSTklORzogYWRkZWQsIG1vdmVkIG9yIGRlbGV0
-ZWQgZmlsZShzKSwgZG9lcyBNQUlOVEFJTkVSUyBuZWVkIHVwZGF0aW5nPwojMTI6IApuZXcgZmls
-ZSBtb2RlIDEwMDY0NAoKdG90YWw6IDAgZXJyb3JzLCAxIHdhcm5pbmdzLCA4OTggbGluZXMgY2hl
-Y2tlZAoKUGF0Y2ggNC80IGhhcyBzdHlsZSBwcm9ibGVtcywgcGxlYXNlIHJldmlldy4gIElmIGFu
-eSBvZiB0aGVzZSBlcnJvcnMKYXJlIGZhbHNlIHBvc2l0aXZlcyByZXBvcnQgdGhlbSB0byB0aGUg
-bWFpbnRhaW5lciwgc2VlCkNIRUNLUEFUQ0ggaW4gTUFJTlRBSU5FUlMuCj09PSBPVVRQVVQgRU5E
-ID09PQoKVGVzdCBjb21tYW5kIGV4aXRlZCB3aXRoIGNvZGU6IDEKCgpUaGUgZnVsbCBsb2cgaXMg
-YXZhaWxhYmxlIGF0Cmh0dHA6Ly9wYXRjaGV3Lm9yZy9sb2dzL2NvdmVyLjE1ODQ1NzEyNTAuZ2l0
-LmFsaXN0YWlyLmZyYW5jaXNAd2RjLmNvbS90ZXN0aW5nLmNoZWNrcGF0Y2gvP3R5cGU9bWVzc2Fn
-ZS4KLS0tCkVtYWlsIGdlbmVyYXRlZCBhdXRvbWF0aWNhbGx5IGJ5IFBhdGNoZXcgW2h0dHBzOi8v
-cGF0Y2hldy5vcmcvXS4KUGxlYXNlIHNlbmQgeW91ciBmZWVkYmFjayB0byBwYXRjaGV3LWRldmVs
-QHJlZGhhdC5jb20=
+This is a multi-part message in MIME format.
+--------------AA80C2260A9958F4DBBA9BAA
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+
+
+
+On 2020/3/17 23:06, LIU Zhiwei wrote:
+
+Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
+---
+  target/riscv/helper.h                   |  17 ++++
+  target/riscv/insn32.decode              |   5 ++
+  target/riscv/insn_trans/trans_rvv.inc.c |   7 ++
+  target/riscv/vector_helper.c            | 100 ++++++++++++++++++++++++
+  4 files changed, 129 insertions(+)
+
+diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+index fd1c184852..311ce1322c 100644
+--- a/target/riscv/helper.h
++++ b/target/riscv/helper.h
+@@ -715,3 +715,20 @@ DEF_HELPER_6(vssub_vx_b, void, ptr, ptr, tl, ptr, env, i32)
+  DEF_HELPER_6(vssub_vx_h, void, ptr, ptr, tl, ptr, env, i32)
+  DEF_HELPER_6(vssub_vx_w, void, ptr, ptr, tl, ptr, env, i32)
+  DEF_HELPER_6(vssub_vx_d, void, ptr, ptr, tl, ptr, env, i32)
++
++DEF_HELPER_6(vaadd_vv_b, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vaadd_vv_h, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vaadd_vv_w, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vaadd_vv_d, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vasub_vv_b, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vasub_vv_h, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vasub_vv_w, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vasub_vv_d, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vaadd_vx_b, void, ptr, ptr, tl, ptr, env, i32)
++DEF_HELPER_6(vaadd_vx_h, void, ptr, ptr, tl, ptr, env, i32)
++DEF_HELPER_6(vaadd_vx_w, void, ptr, ptr, tl, ptr, env, i32)
++DEF_HELPER_6(vaadd_vx_d, void, ptr, ptr, tl, ptr, env, i32)
++DEF_HELPER_6(vasub_vx_b, void, ptr, ptr, tl, ptr, env, i32)
++DEF_HELPER_6(vasub_vx_h, void, ptr, ptr, tl, ptr, env, i32)
++DEF_HELPER_6(vasub_vx_w, void, ptr, ptr, tl, ptr, env, i32)
++DEF_HELPER_6(vasub_vx_d, void, ptr, ptr, tl, ptr, env, i32)
+diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+index c9a4050adc..e617d7bd60 100644
+--- a/target/riscv/insn32.decode
++++ b/target/riscv/insn32.decode
+@@ -417,6 +417,11 @@ vssubu_vv       100010 . ..... ..... 000 ..... 1010111 @r_vm
+  vssubu_vx       100010 . ..... ..... 100 ..... 1010111 @r_vm
+  vssub_vv        100011 . ..... ..... 000 ..... 1010111 @r_vm
+  vssub_vx        100011 . ..... ..... 100 ..... 1010111 @r_vm
++vaadd_vv        100100 . ..... ..... 000 ..... 1010111 @r_vm
++vaadd_vx        100100 . ..... ..... 100 ..... 1010111 @r_vm
++vaadd_vi        100100 . ..... ..... 011 ..... 1010111 @r_vm
++vasub_vv        100110 . ..... ..... 000 ..... 1010111 @r_vm
++vasub_vx        100110 . ..... ..... 100 ..... 1010111 @r_vm
+  
+  vsetvli         0 ........... ..... 111 ..... 1010111  @r2_zimm
+  vsetvl          1000000 ..... ..... 111 ..... 1010111  @r
+diff --git a/target/riscv/insn_trans/trans_rvv.inc.c b/target/riscv/insn_trans/trans_rvv.inc.c
+index dd1a508a51..ba2e7d56f4 100644
+--- a/target/riscv/insn_trans/trans_rvv.inc.c
++++ b/target/riscv/insn_trans/trans_rvv.inc.c
+@@ -1636,3 +1636,10 @@ GEN_OPIVX_TRANS(vssubu_vx,  opivx_check)
+  GEN_OPIVX_TRANS(vssub_vx,  opivx_check)
+  GEN_OPIVI_TRANS(vsaddu_vi, 1, vsaddu_vx, opivx_check)
+  GEN_OPIVI_TRANS(vsadd_vi, 0, vsadd_vx, opivx_check)
++
++/* Vector Single-Width Averaging Add and Subtract */
++GEN_OPIVV_TRANS(vaadd_vv, opivv_check)
++GEN_OPIVV_TRANS(vasub_vv, opivv_check)
++GEN_OPIVX_TRANS(vaadd_vx,  opivx_check)
++GEN_OPIVX_TRANS(vasub_vx,  opivx_check)
++GEN_OPIVI_TRANS(vaadd_vi, 0, vaadd_vx, opivx_check)
+diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+index b17cac7fd4..984a8e260f 100644
+--- a/target/riscv/vector_helper.c
++++ b/target/riscv/vector_helper.c
+@@ -2488,3 +2488,103 @@ GEN_VEXT_VX_RM(vssub_vx_b, 1, 1, clearb)
+  GEN_VEXT_VX_RM(vssub_vx_h, 2, 2, clearh)
+  GEN_VEXT_VX_RM(vssub_vx_w, 4, 4, clearl)
+  GEN_VEXT_VX_RM(vssub_vx_d, 8, 8, clearq)
++
++/* Vector Single-Width Averaging Add and Subtract */
++static inline uint8_t get_round(int vxrm, uint64_t v, uint8_t shift)
++{
++    uint8_t d = extract64(v, shift, 1);
++    uint8_t d1;
++    uint64_t D1, D2;
++
++    if (shift == 0 || shift > 64) {
++        return 0;
++    }
++
++    d1 = extract64(v, shift - 1, 1);
++    D1 = extract64(v, 0, shift);
++    if (vxrm == 0) { /* round-to-nearest-up (add +0.5 LSB) */
++        return d1;
++    } else if (vxrm == 1) { /* round-to-nearest-even */
++        if (shift > 1) {
++            D2 = extract64(v, 0, shift - 1);
++            return d1 & ((D2 != 0) | d);
++        } else {
++            return d1 & d;
++        }
++    } else if (vxrm == 3) { /* round-to-odd (OR bits into LSB, aka "jam") */
++        return !d & (D1 != 0);
++    }
++    return 0; /* round-down (truncate) */
++}
++
++static inline int32_t aadd32(CPURISCVState *env, int vxrm, int32_t a, int32_t b)
++{
++    int64_t res = (int64_t)a + b;
++    uint8_t round = get_round(vxrm, res, 1);
++
++    return (res >> 1) + round;
++}
++
++static inline int64_t aadd64(CPURISCVState *env, int vxrm, int64_t a, int64_t b)
++{
++    int64_t res = a + b;
++    uint8_t round = get_round(vxrm, res, 1);
++    int64_t over = (res ^ a) & (res ^ b) & INT64_MIN;
++
++    /* With signed overflow, bit 64 is inverse of bit 63. */
++    return ((res >> 1) ^ over) + round;
++}
++
++RVVCALL(OPIVV2_RM, vaadd_vv_b, OP_SSS_B, H1, H1, H1, aadd32)
++RVVCALL(OPIVV2_RM, vaadd_vv_h, OP_SSS_H, H2, H2, H2, aadd32)
++RVVCALL(OPIVV2_RM, vaadd_vv_w, OP_SSS_W, H4, H4, H4, aadd32)
++RVVCALL(OPIVV2_RM, vaadd_vv_d, OP_SSS_D, H8, H8, H8, aadd64)
++GEN_VEXT_VV_RM(vaadd_vv_b, 1, 1, clearb)
++GEN_VEXT_VV_RM(vaadd_vv_h, 2, 2, clearh)
++GEN_VEXT_VV_RM(vaadd_vv_w, 4, 4, clearl)
++GEN_VEXT_VV_RM(vaadd_vv_d, 8, 8, clearq)
++
++RVVCALL(OPIVX2_RM, vaadd_vx_b, OP_SSS_B, H1, H1, aadd32)
++RVVCALL(OPIVX2_RM, vaadd_vx_h, OP_SSS_H, H2, H2, aadd32)
++RVVCALL(OPIVX2_RM, vaadd_vx_w, OP_SSS_W, H4, H4, aadd32)
++RVVCALL(OPIVX2_RM, vaadd_vx_d, OP_SSS_D, H8, H8, aadd64)
++GEN_VEXT_VX_RM(vaadd_vx_b, 1, 1, clearb)
++GEN_VEXT_VX_RM(vaadd_vx_h, 2, 2, clearh)
++GEN_VEXT_VX_RM(vaadd_vx_w, 4, 4, clearl)
++GEN_VEXT_VX_RM(vaadd_vx_d, 8, 8, clearq)
++
++static inline int32_t asub32(CPURISCVState *env, int vxrm, int32_t a, int32_t b)
++{
++    int64_t res = (int64_t)a - b;
++    uint8_t round = get_round(vxrm, res, 1);
++
++    return (res >> 1) + round;
++}
++
+
+I find a corner case here.  As the spec said in Section 13.2
+
+   "There can be no overflow in the result".
+
+If the a is 0x7fffffff,  b is 0x80000000, and the round mode is round to 
+up(rnu),
+then the result is (0x7fffffff - 0x80000000 + 1) >> 1, equals 
+0x80000000, according the v0.7.1
+
+    # Averaging subtract
+
+    # result = (src1 - src2 + round) >> 1;
+
+The result is also overflow, according to v0.8. It will be calculated 
+that like here,
+
+    roundoff_signed(vs2[i] - vs1[i], 1)
+
+    roundoff_signed(v, d) = (signed(v) >> d) + r
+
+Should I check do a saturation here?
+
+Zhiwei
+
+
+
+> +static inline int64_t asub64(CPURISCVState *env, int vxrm, int64_t a, int64_t b)
+> +{
+> +    int64_t res = (int64_t)a - b;
+> +    uint8_t round = get_round(vxrm, res, 1);
+> +    int64_t over = (res ^ a) & (a ^ b) & INT64_MIN;
+> +
+> +    /* With signed overflow, bit 64 is inverse of bit 63. */
+> +    return ((res >> 1) ^ over) + round;
+> +}
+> +
+> +RVVCALL(OPIVV2_RM, vasub_vv_b, OP_SSS_B, H1, H1, H1, asub32)
+> +RVVCALL(OPIVV2_RM, vasub_vv_h, OP_SSS_H, H2, H2, H2, asub32)
+> +RVVCALL(OPIVV2_RM, vasub_vv_w, OP_SSS_W, H4, H4, H4, asub32)
+> +RVVCALL(OPIVV2_RM, vasub_vv_d, OP_SSS_D, H8, H8, H8, asub64)
+> +GEN_VEXT_VV_RM(vasub_vv_b, 1, 1, clearb)
+> +GEN_VEXT_VV_RM(vasub_vv_h, 2, 2, clearh)
+> +GEN_VEXT_VV_RM(vasub_vv_w, 4, 4, clearl)
+> +GEN_VEXT_VV_RM(vasub_vv_d, 8, 8, clearq)
+> +
+> +RVVCALL(OPIVX2_RM, vasub_vx_b, OP_SSS_B, H1, H1, asub32)
+> +RVVCALL(OPIVX2_RM, vasub_vx_h, OP_SSS_H, H2, H2, asub32)
+> +RVVCALL(OPIVX2_RM, vasub_vx_w, OP_SSS_W, H4, H4, asub32)
+> +RVVCALL(OPIVX2_RM, vasub_vx_d, OP_SSS_D, H8, H8, asub64)
+> +GEN_VEXT_VX_RM(vasub_vx_b, 1, 1, clearb)
+> +GEN_VEXT_VX_RM(vasub_vx_h, 2, 2, clearh)
+> +GEN_VEXT_VX_RM(vasub_vx_w, 4, 4, clearl)
+> +GEN_VEXT_VX_RM(vasub_vx_d, 8, 8, clearq)
+
+
+--------------AA80C2260A9958F4DBBA9BAA
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+    <br>
+    <br>
+    <div class="moz-cite-prefix">On 2020/3/17 23:06, LIU Zhiwei wrote:<br>
+    </div>
+    <pre class="moz-quote-pre" wrap="">Signed-off-by: LIU Zhiwei <a class="moz-txt-link-rfc2396E" href="mailto:zhiwei_liu@c-sky.com">&lt;zhiwei_liu@c-sky.com&gt;</a>
+---
+ target/riscv/helper.h                   |  17 ++++
+ target/riscv/insn32.decode              |   5 ++
+ target/riscv/insn_trans/trans_rvv.inc.c |   7 ++
+ target/riscv/vector_helper.c            | 100 ++++++++++++++++++++++++
+ 4 files changed, 129 insertions(+)
+
+diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+index fd1c184852..311ce1322c 100644
+--- a/target/riscv/helper.h
++++ b/target/riscv/helper.h
+@@ -715,3 +715,20 @@ DEF_HELPER_6(vssub_vx_b, void, ptr, ptr, tl, ptr, env, i32)
+ DEF_HELPER_6(vssub_vx_h, void, ptr, ptr, tl, ptr, env, i32)
+ DEF_HELPER_6(vssub_vx_w, void, ptr, ptr, tl, ptr, env, i32)
+ DEF_HELPER_6(vssub_vx_d, void, ptr, ptr, tl, ptr, env, i32)
++
++DEF_HELPER_6(vaadd_vv_b, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vaadd_vv_h, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vaadd_vv_w, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vaadd_vv_d, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vasub_vv_b, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vasub_vv_h, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vasub_vv_w, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vasub_vv_d, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vaadd_vx_b, void, ptr, ptr, tl, ptr, env, i32)
++DEF_HELPER_6(vaadd_vx_h, void, ptr, ptr, tl, ptr, env, i32)
++DEF_HELPER_6(vaadd_vx_w, void, ptr, ptr, tl, ptr, env, i32)
++DEF_HELPER_6(vaadd_vx_d, void, ptr, ptr, tl, ptr, env, i32)
++DEF_HELPER_6(vasub_vx_b, void, ptr, ptr, tl, ptr, env, i32)
++DEF_HELPER_6(vasub_vx_h, void, ptr, ptr, tl, ptr, env, i32)
++DEF_HELPER_6(vasub_vx_w, void, ptr, ptr, tl, ptr, env, i32)
++DEF_HELPER_6(vasub_vx_d, void, ptr, ptr, tl, ptr, env, i32)
+diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+index c9a4050adc..e617d7bd60 100644
+--- a/target/riscv/insn32.decode
++++ b/target/riscv/insn32.decode
+@@ -417,6 +417,11 @@ vssubu_vv       100010 . ..... ..... 000 ..... 1010111 @r_vm
+ vssubu_vx       100010 . ..... ..... 100 ..... 1010111 @r_vm
+ vssub_vv        100011 . ..... ..... 000 ..... 1010111 @r_vm
+ vssub_vx        100011 . ..... ..... 100 ..... 1010111 @r_vm
++vaadd_vv        100100 . ..... ..... 000 ..... 1010111 @r_vm
++vaadd_vx        100100 . ..... ..... 100 ..... 1010111 @r_vm
++vaadd_vi        100100 . ..... ..... 011 ..... 1010111 @r_vm
++vasub_vv        100110 . ..... ..... 000 ..... 1010111 @r_vm
++vasub_vx        100110 . ..... ..... 100 ..... 1010111 @r_vm
+ 
+ vsetvli         0 ........... ..... 111 ..... 1010111  @r2_zimm
+ vsetvl          1000000 ..... ..... 111 ..... 1010111  @r
+diff --git a/target/riscv/insn_trans/trans_rvv.inc.c b/target/riscv/insn_trans/trans_rvv.inc.c
+index dd1a508a51..ba2e7d56f4 100644
+--- a/target/riscv/insn_trans/trans_rvv.inc.c
++++ b/target/riscv/insn_trans/trans_rvv.inc.c
+@@ -1636,3 +1636,10 @@ GEN_OPIVX_TRANS(vssubu_vx,  opivx_check)
+ GEN_OPIVX_TRANS(vssub_vx,  opivx_check)
+ GEN_OPIVI_TRANS(vsaddu_vi, 1, vsaddu_vx, opivx_check)
+ GEN_OPIVI_TRANS(vsadd_vi, 0, vsadd_vx, opivx_check)
++
++/* Vector Single-Width Averaging Add and Subtract */
++GEN_OPIVV_TRANS(vaadd_vv, opivv_check)
++GEN_OPIVV_TRANS(vasub_vv, opivv_check)
++GEN_OPIVX_TRANS(vaadd_vx,  opivx_check)
++GEN_OPIVX_TRANS(vasub_vx,  opivx_check)
++GEN_OPIVI_TRANS(vaadd_vi, 0, vaadd_vx, opivx_check)
+diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+index b17cac7fd4..984a8e260f 100644
+--- a/target/riscv/vector_helper.c
++++ b/target/riscv/vector_helper.c
+@@ -2488,3 +2488,103 @@ GEN_VEXT_VX_RM(vssub_vx_b, 1, 1, clearb)
+ GEN_VEXT_VX_RM(vssub_vx_h, 2, 2, clearh)
+ GEN_VEXT_VX_RM(vssub_vx_w, 4, 4, clearl)
+ GEN_VEXT_VX_RM(vssub_vx_d, 8, 8, clearq)
++
++/* Vector Single-Width Averaging Add and Subtract */
++static inline uint8_t get_round(int vxrm, uint64_t v, uint8_t shift)
++{
++    uint8_t d = extract64(v, shift, 1);
++    uint8_t d1;
++    uint64_t D1, D2;
++
++    if (shift == 0 || shift &gt; 64) {
++        return 0;
++    }
++
++    d1 = extract64(v, shift - 1, 1);
++    D1 = extract64(v, 0, shift);
++    if (vxrm == 0) { /* round-to-nearest-up (add +0.5 LSB) */
++        return d1;
++    } else if (vxrm == 1) { /* round-to-nearest-even */
++        if (shift &gt; 1) {
++            D2 = extract64(v, 0, shift - 1);
++            return d1 &amp; ((D2 != 0) | d);
++        } else {
++            return d1 &amp; d;
++        }
++    } else if (vxrm == 3) { /* round-to-odd (OR bits into LSB, aka "jam") */
++        return !d &amp; (D1 != 0);
++    }
++    return 0; /* round-down (truncate) */
++}
++
++static inline int32_t aadd32(CPURISCVState *env, int vxrm, int32_t a, int32_t b)
++{
++    int64_t res = (int64_t)a + b;
++    uint8_t round = get_round(vxrm, res, 1);
++
++    return (res &gt;&gt; 1) + round;
++}
++
++static inline int64_t aadd64(CPURISCVState *env, int vxrm, int64_t a, int64_t b)
++{
++    int64_t res = a + b;
++    uint8_t round = get_round(vxrm, res, 1);
++    int64_t over = (res ^ a) &amp; (res ^ b) &amp; INT64_MIN;
++
++    /* With signed overflow, bit 64 is inverse of bit 63. */
++    return ((res &gt;&gt; 1) ^ over) + round;
++}
++
++RVVCALL(OPIVV2_RM, vaadd_vv_b, OP_SSS_B, H1, H1, H1, aadd32)
++RVVCALL(OPIVV2_RM, vaadd_vv_h, OP_SSS_H, H2, H2, H2, aadd32)
++RVVCALL(OPIVV2_RM, vaadd_vv_w, OP_SSS_W, H4, H4, H4, aadd32)
++RVVCALL(OPIVV2_RM, vaadd_vv_d, OP_SSS_D, H8, H8, H8, aadd64)
++GEN_VEXT_VV_RM(vaadd_vv_b, 1, 1, clearb)
++GEN_VEXT_VV_RM(vaadd_vv_h, 2, 2, clearh)
++GEN_VEXT_VV_RM(vaadd_vv_w, 4, 4, clearl)
++GEN_VEXT_VV_RM(vaadd_vv_d, 8, 8, clearq)
++
++RVVCALL(OPIVX2_RM, vaadd_vx_b, OP_SSS_B, H1, H1, aadd32)
++RVVCALL(OPIVX2_RM, vaadd_vx_h, OP_SSS_H, H2, H2, aadd32)
++RVVCALL(OPIVX2_RM, vaadd_vx_w, OP_SSS_W, H4, H4, aadd32)
++RVVCALL(OPIVX2_RM, vaadd_vx_d, OP_SSS_D, H8, H8, aadd64)
++GEN_VEXT_VX_RM(vaadd_vx_b, 1, 1, clearb)
++GEN_VEXT_VX_RM(vaadd_vx_h, 2, 2, clearh)
++GEN_VEXT_VX_RM(vaadd_vx_w, 4, 4, clearl)
++GEN_VEXT_VX_RM(vaadd_vx_d, 8, 8, clearq)
++
++static inline int32_t asub32(CPURISCVState *env, int vxrm, int32_t a, int32_t b)
++{
++    int64_t res = (int64_t)a - b;
++    uint8_t round = get_round(vxrm, res, 1);
++
++    return (res &gt;&gt; 1) + round;
++}
++</pre>
+    I find a corner case here.  As the spec said in Section 13.2<br>
+    <pre>  "There can be no overflow in the result".</pre>
+    If the a is 0x7fffffff,  b is 0x80000000, and the round mode is
+    round to up(rnu),<br>
+    then the result is (0x7fffffff - 0x80000000 + 1) &gt;&gt; 1, equals
+    0x80000000, according the v0.7.1<br>
+    <blockquote>
+      <pre># Averaging subtract</pre>
+      <pre># result = (src1 - src2 + round) &gt;&gt; 1;
+
+</pre>
+    </blockquote>
+    The result is also overflow, according to v0.8. It will be
+    calculated that like here,<br>
+    <blockquote>
+      <pre>roundoff_signed(vs2[i] - vs1[i], 1)
+
+roundoff_signed(v, d) = (signed(v) &gt;&gt; d) + r
+
+</pre>
+    </blockquote>
+    Should I check do a saturation here?<br>
+    <br>
+    Zhiwei<br>
+    <br>
+    <br>
+    <br>
+    <pre>
+</pre>
+    <blockquote type="cite"
+      cite="mid:20200317150653.9008-26-zhiwei_liu@c-sky.com">
+      <pre class="moz-quote-pre" wrap="">
++static inline int64_t asub64(CPURISCVState *env, int vxrm, int64_t a, int64_t b)
++{
++    int64_t res = (int64_t)a - b;
++    uint8_t round = get_round(vxrm, res, 1);
++    int64_t over = (res ^ a) &amp; (a ^ b) &amp; INT64_MIN;
++
++    /* With signed overflow, bit 64 is inverse of bit 63. */
++    return ((res &gt;&gt; 1) ^ over) + round;
++}
++
++RVVCALL(OPIVV2_RM, vasub_vv_b, OP_SSS_B, H1, H1, H1, asub32)
++RVVCALL(OPIVV2_RM, vasub_vv_h, OP_SSS_H, H2, H2, H2, asub32)
++RVVCALL(OPIVV2_RM, vasub_vv_w, OP_SSS_W, H4, H4, H4, asub32)
++RVVCALL(OPIVV2_RM, vasub_vv_d, OP_SSS_D, H8, H8, H8, asub64)
++GEN_VEXT_VV_RM(vasub_vv_b, 1, 1, clearb)
++GEN_VEXT_VV_RM(vasub_vv_h, 2, 2, clearh)
++GEN_VEXT_VV_RM(vasub_vv_w, 4, 4, clearl)
++GEN_VEXT_VV_RM(vasub_vv_d, 8, 8, clearq)
++
++RVVCALL(OPIVX2_RM, vasub_vx_b, OP_SSS_B, H1, H1, asub32)
++RVVCALL(OPIVX2_RM, vasub_vx_h, OP_SSS_H, H2, H2, asub32)
++RVVCALL(OPIVX2_RM, vasub_vx_w, OP_SSS_W, H4, H4, asub32)
++RVVCALL(OPIVX2_RM, vasub_vx_d, OP_SSS_D, H8, H8, asub64)
++GEN_VEXT_VX_RM(vasub_vx_b, 1, 1, clearb)
++GEN_VEXT_VX_RM(vasub_vx_h, 2, 2, clearh)
++GEN_VEXT_VX_RM(vasub_vx_w, 4, 4, clearl)
++GEN_VEXT_VX_RM(vasub_vx_d, 8, 8, clearq)
+</pre>
+    </blockquote>
+    <br>
+  </body>
+</html>
+
+--------------AA80C2260A9958F4DBBA9BAA--
 
