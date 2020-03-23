@@ -1,63 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jFMrf-00022O-Gj
-	for mharc-qemu-riscv@gnu.org; Fri, 20 Mar 2020 14:59:27 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:50770)
+	id 1jGGvi-0003J6-6I
+	for mharc-qemu-riscv@gnu.org; Mon, 23 Mar 2020 02:51:22 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:35629)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <alistair23@gmail.com>) id 1jFMrb-0001uJ-9h
- for qemu-riscv@nongnu.org; Fri, 20 Mar 2020 14:59:25 -0400
+ (envelope-from <npickito@gmail.com>) id 1jGGvf-0003EN-9o
+ for qemu-riscv@nongnu.org; Mon, 23 Mar 2020 02:51:20 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1jFMrZ-0004Uj-Kd
- for qemu-riscv@nongnu.org; Fri, 20 Mar 2020 14:59:23 -0400
-Received: from mail-vs1-xe43.google.com ([2607:f8b0:4864:20::e43]:33302)
+ (envelope-from <npickito@gmail.com>) id 1jGGvd-0002Fr-VZ
+ for qemu-riscv@nongnu.org; Mon, 23 Mar 2020 02:51:19 -0400
+Received: from mail-wr1-x444.google.com ([2a00:1450:4864:20::444]:43418)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1jFMrW-0004TI-1S; Fri, 20 Mar 2020 14:59:18 -0400
-Received: by mail-vs1-xe43.google.com with SMTP id y138so4721636vsy.0;
- Fri, 20 Mar 2020 11:59:17 -0700 (PDT)
+ (Exim 4.71) (envelope-from <npickito@gmail.com>)
+ id 1jGGvd-0002F9-NH; Mon, 23 Mar 2020 02:51:17 -0400
+Received: by mail-wr1-x444.google.com with SMTP id b2so15462381wrj.10;
+ Sun, 22 Mar 2020 23:51:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=0M0E2zttYOPxL53Ls9Q2SzLCwAGDpgmUY9ECGRowG88=;
- b=RZf7AeLObTsomwrCq65MG7aB12hrTDrcZposFym4gArf1qUrePLNRjD4rFWQd+Br5o
- 3jn1dF8oVdPA/unXw5h0VojQKDqiLE+/XQeiEm9OfvntohC9Y+bZ0U07oqFT1vU4nFoO
- OSzNrsnv3BHT9Zplg1eflGUAsmmldEd38HkjO4BQdg6Z55QlmmdmI1ukMKaANwMfxdmg
- eCNafErPYpywXO0Zl70dgRi1mnjx51ql43uf0Mn0QcbiT6YLIn7ONGubv1/mMfMGOWHB
- q6QZ1jcxhr4Q2AAh2DIHIkd/Wjy2aBKSQPisdNpm2nqtVUT1LMMxPnWXkXfmWtp81pOx
- +xPw==
+ :cc; bh=2sIlJFNgf7wDJ5p+emrpXzKOTkZ6DOWugYMcQx5pMHg=;
+ b=Gr2NEZPtPeXGumJSy72h6AKl19BlEfWZNNJPpWFyWuc7JIcycnC8/BdqLqXHw3QCDH
+ FPQ4doayfgVnROoMO/kv7Bwgwznqb/eC25I7+imv2TiTVlM5PKDnvkdjdIxatHkCSoo9
+ WhF/MCso6DLAl0cDNvyplGL2bOQe9hMjJpHkVldmbhdBzicxRhqfrzF7skKF8++ir3VM
+ NjQ2hGm03azi8Z9I2BdqRproRPdnAeaQuXx+JjSNM55SppXe2eywt0ifywdCGKvQA3L9
+ P14nLvrpCUj0CqQsmaP3wni3TrVCWGXSeKnyp0NiM6GR9gIaBt24yiggmAFdceeI+Trs
+ uAcQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=0M0E2zttYOPxL53Ls9Q2SzLCwAGDpgmUY9ECGRowG88=;
- b=jd9GHvsyLwCib9h+d/EpI+Z4Hjfrl6w32ONalCLFn5mdPcjBEGgMhpwl8mjriolGPS
- 8OejxnAStLM8j/fbYlV1KKmvZpshHnAmnzksNpF5iscDlrg+XUShHIg4Iyj5a1HF2P1V
- SKvCp85M0QOKzV/a0GsfhTtx23OTmmDx2kuyrVEf7w0paIxj7DlWcaNkqXCEHE9TxbB4
- PFjoLnI0B1zHbZVOvGhOdavHB8Dv/694RT6+k/wsvAhqkZJKjAtnqhf3ZKkGamjQ3MwG
- bs2JwFWlA5f+m59ZYJ27JQF/5qavARkaFD96k/+sWEE/MLP6xYHRFvoWLA5fbp+yTgRK
- F1gg==
-X-Gm-Message-State: ANhLgQ1Sab1WYf0P6JCNg/tromb57l3dvmuwOzIzEpRSoaKqe4f4dfWQ
- 6Sw0On9C9Fz9muh0A73GFa+KbiJ1z45DuRpgYIk=
-X-Google-Smtp-Source: ADFU+vskFGFCuIZ4OgdOK2wQBZfQ6ugIw/SngXSPlx6WSwshNJXUTAJvM4vGXa3mdUwNEKfvjvgHlmo963ju7+ZRmXw=
-X-Received: by 2002:a67:8a88:: with SMTP id m130mr2449574vsd.70.1584730757217; 
- Fri, 20 Mar 2020 11:59:17 -0700 (PDT)
+ bh=2sIlJFNgf7wDJ5p+emrpXzKOTkZ6DOWugYMcQx5pMHg=;
+ b=WeEtEbjoa5vUPkVDVt+2efX9/wvpDDWOJdCibFmN5krWUmAQHPOw2fPbyyyuLpYacM
+ ccHPPjLVffJzVx2LwSrEEuDJT8ebuwNsfH0BcDSwrYlv199CmYfYbCeqLo1bxX590IFH
+ HQmLYWZHC0KB0hHumKc7KgNq2oBNakS0f5ncC6z3LnsDqkA8+ueYMJ6Mj1N9GHs+9VGn
+ I7DFlycwit/N4lvEoH09pCQMDgwcfRtC8+rugASwm+7OacoD2/TIKJZDBi2M1m4xgQpd
+ GORe+pVRHrXJzoInhwh49KIXWBw14JMeqs+Ty1p2pBrVTLOhVlE7mzGPPX0w+jghUYU+
+ +Jrw==
+X-Gm-Message-State: ANhLgQ3creawcDYs3+X+vmSJ5Nix1QQAmYtdcuVUQZ57CuiJ72TcJDM/
+ UZQ/0QsValGaWtezzSbckzHiozWi2ruSk/v0vFM=
+X-Google-Smtp-Source: ADFU+vvzPcFjf3ekT3UE9DMT3G6DkixRvEP5hfCwhBURaIon5EiLHVsjurJ0feraotxc2K8hlgjktw12D26zTfJ/OJc=
+X-Received: by 2002:a5d:6150:: with SMTP id y16mr28230786wrt.352.1584946275409; 
+ Sun, 22 Mar 2020 23:51:15 -0700 (PDT)
 MIME-Version: 1.0
 References: <20200317150653.9008-1-zhiwei_liu@c-sky.com>
- <20200317150653.9008-20-zhiwei_liu@c-sky.com>
-In-Reply-To: <20200317150653.9008-20-zhiwei_liu@c-sky.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 20 Mar 2020 11:51:19 -0700
-Message-ID: <CAKmqyKOs8Xmt5FEsGSTYHs6+Y9Za+ymcTmNZ+73X2R4ivvH1hg@mail.gmail.com>
-Subject: Re: [PATCH v6 19/61] target/riscv: vector integer divide instructions
+ <20200317150653.9008-5-zhiwei_liu@c-sky.com>
+In-Reply-To: <20200317150653.9008-5-zhiwei_liu@c-sky.com>
+From: Kito Cheng <kito.cheng@gmail.com>
+Date: Mon, 23 Mar 2020 14:51:03 +0800
+Message-ID: <CA+yXCZCWS2fF+LOi-4bUgNXrGm=v9yuYUQR5gpk7+230Z86ykw@mail.gmail.com>
+Subject: Re: [PATCH v6 04/61] target/riscv: add vector configure instruction
 To: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Cc: Richard Henderson <richard.henderson@linaro.org>,
- Chih-Min Chao <chihmin.chao@sifive.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>, wenmeng_zhang@c-sky.com,
- wxy194768@alibaba-inc.com, guoren@linux.alibaba.com, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>
+Cc: Richard Henderson <richard.henderson@linaro.org>, alistair23@gmail.com, 
+ Chih-Min Chao <chihmin.chao@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ guoren@linux.alibaba.com, 
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org, wxy194768@alibaba-inc.com, 
+ wenmeng_zhang@c-sky.com, Alistair Francis <alistair.francis@wdc.com>
 Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::e43
+X-Received-From: 2a00:1450:4864:20::444
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -69,185 +68,93 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Mar 2020 18:59:25 -0000
+X-List-Received-Date: Mon, 23 Mar 2020 06:51:20 -0000
 
-On Tue, Mar 17, 2020 at 8:45 AM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
->
-> Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
-> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Hi Zhiwei:
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+vsetvl and vsetvli seems like missing ISA checking before translate,
+this cause those 2 instructions can be executed even RVV not enable.
+My testing env is qemu riscv64-linux-user mode.
 
-Alistair
-
-> ---
->  target/riscv/helper.h                   | 33 +++++++++++
->  target/riscv/insn32.decode              |  8 +++
->  target/riscv/insn_trans/trans_rvv.inc.c | 10 ++++
->  target/riscv/vector_helper.c            | 74 +++++++++++++++++++++++++
->  4 files changed, 125 insertions(+)
->
-> diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-> index f42a12eef3..357f149198 100644
-> --- a/target/riscv/helper.h
-> +++ b/target/riscv/helper.h
-> @@ -558,3 +558,36 @@ DEF_HELPER_6(vmulhsu_vx_b, void, ptr, ptr, tl, ptr, env, i32)
->  DEF_HELPER_6(vmulhsu_vx_h, void, ptr, ptr, tl, ptr, env, i32)
->  DEF_HELPER_6(vmulhsu_vx_w, void, ptr, ptr, tl, ptr, env, i32)
->  DEF_HELPER_6(vmulhsu_vx_d, void, ptr, ptr, tl, ptr, env, i32)
-> +
-> +DEF_HELPER_6(vdivu_vv_b, void, ptr, ptr, ptr, ptr, env, i32)
-> +DEF_HELPER_6(vdivu_vv_h, void, ptr, ptr, ptr, ptr, env, i32)
-> +DEF_HELPER_6(vdivu_vv_w, void, ptr, ptr, ptr, ptr, env, i32)
-> +DEF_HELPER_6(vdivu_vv_d, void, ptr, ptr, ptr, ptr, env, i32)
-> +DEF_HELPER_6(vdiv_vv_b, void, ptr, ptr, ptr, ptr, env, i32)
-> +DEF_HELPER_6(vdiv_vv_h, void, ptr, ptr, ptr, ptr, env, i32)
-> +DEF_HELPER_6(vdiv_vv_w, void, ptr, ptr, ptr, ptr, env, i32)
-> +DEF_HELPER_6(vdiv_vv_d, void, ptr, ptr, ptr, ptr, env, i32)
-> +DEF_HELPER_6(vremu_vv_b, void, ptr, ptr, ptr, ptr, env, i32)
-> +DEF_HELPER_6(vremu_vv_h, void, ptr, ptr, ptr, ptr, env, i32)
-> +DEF_HELPER_6(vremu_vv_w, void, ptr, ptr, ptr, ptr, env, i32)
-> +DEF_HELPER_6(vremu_vv_d, void, ptr, ptr, ptr, ptr, env, i32)
-> +DEF_HELPER_6(vrem_vv_b, void, ptr, ptr, ptr, ptr, env, i32)
-> +DEF_HELPER_6(vrem_vv_h, void, ptr, ptr, ptr, ptr, env, i32)
-> +DEF_HELPER_6(vrem_vv_w, void, ptr, ptr, ptr, ptr, env, i32)
-> +DEF_HELPER_6(vrem_vv_d, void, ptr, ptr, ptr, ptr, env, i32)
-> +DEF_HELPER_6(vdivu_vx_b, void, ptr, ptr, tl, ptr, env, i32)
-> +DEF_HELPER_6(vdivu_vx_h, void, ptr, ptr, tl, ptr, env, i32)
-> +DEF_HELPER_6(vdivu_vx_w, void, ptr, ptr, tl, ptr, env, i32)
-> +DEF_HELPER_6(vdivu_vx_d, void, ptr, ptr, tl, ptr, env, i32)
-> +DEF_HELPER_6(vdiv_vx_b, void, ptr, ptr, tl, ptr, env, i32)
-> +DEF_HELPER_6(vdiv_vx_h, void, ptr, ptr, tl, ptr, env, i32)
-> +DEF_HELPER_6(vdiv_vx_w, void, ptr, ptr, tl, ptr, env, i32)
-> +DEF_HELPER_6(vdiv_vx_d, void, ptr, ptr, tl, ptr, env, i32)
-> +DEF_HELPER_6(vremu_vx_b, void, ptr, ptr, tl, ptr, env, i32)
-> +DEF_HELPER_6(vremu_vx_h, void, ptr, ptr, tl, ptr, env, i32)
-> +DEF_HELPER_6(vremu_vx_w, void, ptr, ptr, tl, ptr, env, i32)
-> +DEF_HELPER_6(vremu_vx_d, void, ptr, ptr, tl, ptr, env, i32)
-> +DEF_HELPER_6(vrem_vx_b, void, ptr, ptr, tl, ptr, env, i32)
-> +DEF_HELPER_6(vrem_vx_h, void, ptr, ptr, tl, ptr, env, i32)
-> +DEF_HELPER_6(vrem_vx_w, void, ptr, ptr, tl, ptr, env, i32)
-> +DEF_HELPER_6(vrem_vx_d, void, ptr, ptr, tl, ptr, env, i32)
-> diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-> index abfed469bc..7fb8f8fad8 100644
-> --- a/target/riscv/insn32.decode
-> +++ b/target/riscv/insn32.decode
-> @@ -371,6 +371,14 @@ vmulhu_vv       100100 . ..... ..... 010 ..... 1010111 @r_vm
->  vmulhu_vx       100100 . ..... ..... 110 ..... 1010111 @r_vm
->  vmulhsu_vv      100110 . ..... ..... 010 ..... 1010111 @r_vm
->  vmulhsu_vx      100110 . ..... ..... 110 ..... 1010111 @r_vm
-> +vdivu_vv        100000 . ..... ..... 010 ..... 1010111 @r_vm
-> +vdivu_vx        100000 . ..... ..... 110 ..... 1010111 @r_vm
-> +vdiv_vv         100001 . ..... ..... 010 ..... 1010111 @r_vm
-> +vdiv_vx         100001 . ..... ..... 110 ..... 1010111 @r_vm
-> +vremu_vv        100010 . ..... ..... 010 ..... 1010111 @r_vm
-> +vremu_vx        100010 . ..... ..... 110 ..... 1010111 @r_vm
-> +vrem_vv         100011 . ..... ..... 010 ..... 1010111 @r_vm
-> +vrem_vx         100011 . ..... ..... 110 ..... 1010111 @r_vm
->
->  vsetvli         0 ........... ..... 111 ..... 1010111  @r2_zimm
->  vsetvl          1000000 ..... ..... 111 ..... 1010111  @r
 > diff --git a/target/riscv/insn_trans/trans_rvv.inc.c b/target/riscv/insn_trans/trans_rvv.inc.c
-> index c276beabd6..ed53eaaef5 100644
-> --- a/target/riscv/insn_trans/trans_rvv.inc.c
+> new file mode 100644
+> index 0000000000..7381c24295
+> --- /dev/null
 > +++ b/target/riscv/insn_trans/trans_rvv.inc.c
-> @@ -1462,3 +1462,13 @@ GEN_OPIVX_GVEC_TRANS(vmul_vx,  muls)
->  GEN_OPIVX_TRANS(vmulh_vx, opivx_check)
->  GEN_OPIVX_TRANS(vmulhu_vx, opivx_check)
->  GEN_OPIVX_TRANS(vmulhsu_vx, opivx_check)
+> @@ -0,0 +1,69 @@
+> +/*
+> + * RISC-V translation routines for the RVV Standard Extension.
+> + *
+> + * Copyright (c) 2020 C-SKY Limited. All rights reserved.
+> + *
+> + * This program is free software; you can redistribute it and/or modify it
+> + * under the terms and conditions of the GNU General Public License,
+> + * version 2 or later, as published by the Free Software Foundation.
+> + *
+> + * This program is distributed in the hope it will be useful, but WITHOUT
+> + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+> + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+> + * more details.
+> + *
+> + * You should have received a copy of the GNU General Public License along with
+> + * this program.  If not, see <http://www.gnu.org/licenses/>.
+> + */
 > +
-> +/* Vector Integer Divide Instructions */
-> +GEN_OPIVV_TRANS(vdivu_vv, opivv_check)
-> +GEN_OPIVV_TRANS(vdiv_vv, opivv_check)
-> +GEN_OPIVV_TRANS(vremu_vv, opivv_check)
-> +GEN_OPIVV_TRANS(vrem_vv, opivv_check)
-> +GEN_OPIVX_TRANS(vdivu_vx, opivx_check)
-> +GEN_OPIVX_TRANS(vdiv_vx, opivx_check)
-> +GEN_OPIVX_TRANS(vremu_vx, opivx_check)
-> +GEN_OPIVX_TRANS(vrem_vx, opivx_check)
-> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-> index 56ba9a7422..4fc7a08954 100644
-> --- a/target/riscv/vector_helper.c
-> +++ b/target/riscv/vector_helper.c
-> @@ -1741,3 +1741,77 @@ GEN_VEXT_VX(vmulhsu_vx_b, 1, 1, clearb)
->  GEN_VEXT_VX(vmulhsu_vx_h, 2, 2, clearh)
->  GEN_VEXT_VX(vmulhsu_vx_w, 4, 4, clearl)
->  GEN_VEXT_VX(vmulhsu_vx_d, 8, 8, clearq)
+> +static bool trans_vsetvl(DisasContext *ctx, arg_vsetvl * a)
+> +{
+
+Missing vext_check_isa_ill(s) check?
+
+> +    TCGv s1, s2, dst;
+> +    s2 = tcg_temp_new();
+> +    dst = tcg_temp_new();
 > +
-> +/* Vector Integer Divide Instructions */
-> +#define DO_DIVU(N, M) (unlikely(M == 0) ? (__typeof(N))(-1) : N / M)
-> +#define DO_REMU(N, M) (unlikely(M == 0) ? N : N % M)
-> +#define DO_DIV(N, M)  (unlikely(M == 0) ? (__typeof(N))(-1) :\
-> +        unlikely((N == -N) && (M == (__typeof(N))(-1))) ? N : N / M)
-> +#define DO_REM(N, M)  (unlikely(M == 0) ? N :\
-> +        unlikely((N == -N) && (M == (__typeof(N))(-1))) ? 0 : N % M)
+> +    /* Using x0 as the rs1 register specifier, encodes an infinite AVL */
+> +    if (a->rs1 == 0) {
+> +        /* As the mask is at least one bit, RV_VLEN_MAX is >= VLMAX */
+> +        s1 = tcg_const_tl(RV_VLEN_MAX);
+> +    } else {
+> +        s1 = tcg_temp_new();
+> +        gen_get_gpr(s1, a->rs1);
+> +    }
+> +    gen_get_gpr(s2, a->rs2);
+> +    gen_helper_vsetvl(dst, cpu_env, s1, s2);
+> +    gen_set_gpr(a->rd, dst);
+> +    tcg_gen_movi_tl(cpu_pc, ctx->pc_succ_insn);
+> +    lookup_and_goto_ptr(ctx);
+> +    ctx->base.is_jmp = DISAS_NORETURN;
 > +
-> +RVVCALL(OPIVV2, vdivu_vv_b, OP_UUU_B, H1, H1, H1, DO_DIVU)
-> +RVVCALL(OPIVV2, vdivu_vv_h, OP_UUU_H, H2, H2, H2, DO_DIVU)
-> +RVVCALL(OPIVV2, vdivu_vv_w, OP_UUU_W, H4, H4, H4, DO_DIVU)
-> +RVVCALL(OPIVV2, vdivu_vv_d, OP_UUU_D, H8, H8, H8, DO_DIVU)
-> +RVVCALL(OPIVV2, vdiv_vv_b, OP_SSS_B, H1, H1, H1, DO_DIV)
-> +RVVCALL(OPIVV2, vdiv_vv_h, OP_SSS_H, H2, H2, H2, DO_DIV)
-> +RVVCALL(OPIVV2, vdiv_vv_w, OP_SSS_W, H4, H4, H4, DO_DIV)
-> +RVVCALL(OPIVV2, vdiv_vv_d, OP_SSS_D, H8, H8, H8, DO_DIV)
-> +RVVCALL(OPIVV2, vremu_vv_b, OP_UUU_B, H1, H1, H1, DO_REMU)
-> +RVVCALL(OPIVV2, vremu_vv_h, OP_UUU_H, H2, H2, H2, DO_REMU)
-> +RVVCALL(OPIVV2, vremu_vv_w, OP_UUU_W, H4, H4, H4, DO_REMU)
-> +RVVCALL(OPIVV2, vremu_vv_d, OP_UUU_D, H8, H8, H8, DO_REMU)
-> +RVVCALL(OPIVV2, vrem_vv_b, OP_SSS_B, H1, H1, H1, DO_REM)
-> +RVVCALL(OPIVV2, vrem_vv_h, OP_SSS_H, H2, H2, H2, DO_REM)
-> +RVVCALL(OPIVV2, vrem_vv_w, OP_SSS_W, H4, H4, H4, DO_REM)
-> +RVVCALL(OPIVV2, vrem_vv_d, OP_SSS_D, H8, H8, H8, DO_REM)
-> +GEN_VEXT_VV(vdivu_vv_b, 1, 1, clearb)
-> +GEN_VEXT_VV(vdivu_vv_h, 2, 2, clearh)
-> +GEN_VEXT_VV(vdivu_vv_w, 4, 4, clearl)
-> +GEN_VEXT_VV(vdivu_vv_d, 8, 8, clearq)
-> +GEN_VEXT_VV(vdiv_vv_b, 1, 1, clearb)
-> +GEN_VEXT_VV(vdiv_vv_h, 2, 2, clearh)
-> +GEN_VEXT_VV(vdiv_vv_w, 4, 4, clearl)
-> +GEN_VEXT_VV(vdiv_vv_d, 8, 8, clearq)
-> +GEN_VEXT_VV(vremu_vv_b, 1, 1, clearb)
-> +GEN_VEXT_VV(vremu_vv_h, 2, 2, clearh)
-> +GEN_VEXT_VV(vremu_vv_w, 4, 4, clearl)
-> +GEN_VEXT_VV(vremu_vv_d, 8, 8, clearq)
-> +GEN_VEXT_VV(vrem_vv_b, 1, 1, clearb)
-> +GEN_VEXT_VV(vrem_vv_h, 2, 2, clearh)
-> +GEN_VEXT_VV(vrem_vv_w, 4, 4, clearl)
-> +GEN_VEXT_VV(vrem_vv_d, 8, 8, clearq)
+> +    tcg_temp_free(s1);
+> +    tcg_temp_free(s2);
+> +    tcg_temp_free(dst);
+> +    return true;
+> +}
 > +
-> +RVVCALL(OPIVX2, vdivu_vx_b, OP_UUU_B, H1, H1, DO_DIVU)
-> +RVVCALL(OPIVX2, vdivu_vx_h, OP_UUU_H, H2, H2, DO_DIVU)
-> +RVVCALL(OPIVX2, vdivu_vx_w, OP_UUU_W, H4, H4, DO_DIVU)
-> +RVVCALL(OPIVX2, vdivu_vx_d, OP_UUU_D, H8, H8, DO_DIVU)
-> +RVVCALL(OPIVX2, vdiv_vx_b, OP_SSS_B, H1, H1, DO_DIV)
-> +RVVCALL(OPIVX2, vdiv_vx_h, OP_SSS_H, H2, H2, DO_DIV)
-> +RVVCALL(OPIVX2, vdiv_vx_w, OP_SSS_W, H4, H4, DO_DIV)
-> +RVVCALL(OPIVX2, vdiv_vx_d, OP_SSS_D, H8, H8, DO_DIV)
-> +RVVCALL(OPIVX2, vremu_vx_b, OP_UUU_B, H1, H1, DO_REMU)
-> +RVVCALL(OPIVX2, vremu_vx_h, OP_UUU_H, H2, H2, DO_REMU)
-> +RVVCALL(OPIVX2, vremu_vx_w, OP_UUU_W, H4, H4, DO_REMU)
-> +RVVCALL(OPIVX2, vremu_vx_d, OP_UUU_D, H8, H8, DO_REMU)
-> +RVVCALL(OPIVX2, vrem_vx_b, OP_SSS_B, H1, H1, DO_REM)
-> +RVVCALL(OPIVX2, vrem_vx_h, OP_SSS_H, H2, H2, DO_REM)
-> +RVVCALL(OPIVX2, vrem_vx_w, OP_SSS_W, H4, H4, DO_REM)
-> +RVVCALL(OPIVX2, vrem_vx_d, OP_SSS_D, H8, H8, DO_REM)
-> +GEN_VEXT_VX(vdivu_vx_b, 1, 1, clearb)
-> +GEN_VEXT_VX(vdivu_vx_h, 2, 2, clearh)
-> +GEN_VEXT_VX(vdivu_vx_w, 4, 4, clearl)
-> +GEN_VEXT_VX(vdivu_vx_d, 8, 8, clearq)
-> +GEN_VEXT_VX(vdiv_vx_b, 1, 1, clearb)
-> +GEN_VEXT_VX(vdiv_vx_h, 2, 2, clearh)
-> +GEN_VEXT_VX(vdiv_vx_w, 4, 4, clearl)
-> +GEN_VEXT_VX(vdiv_vx_d, 8, 8, clearq)
-> +GEN_VEXT_VX(vremu_vx_b, 1, 1, clearb)
-> +GEN_VEXT_VX(vremu_vx_h, 2, 2, clearh)
-> +GEN_VEXT_VX(vremu_vx_w, 4, 4, clearl)
-> +GEN_VEXT_VX(vremu_vx_d, 8, 8, clearq)
-> +GEN_VEXT_VX(vrem_vx_b, 1, 1, clearb)
-> +GEN_VEXT_VX(vrem_vx_h, 2, 2, clearh)
-> +GEN_VEXT_VX(vrem_vx_w, 4, 4, clearl)
-> +GEN_VEXT_VX(vrem_vx_d, 8, 8, clearq)
-> --
-> 2.23.0
->
+> +static bool trans_vsetvli(DisasContext *ctx, arg_vsetvli * a)
+> +{
+Missing vext_check_isa_ill(s) check?
+
+
+> +    TCGv s1, s2, dst;
+> +    s2 = tcg_const_tl(a->zimm);
+> +    dst = tcg_temp_new();
+> +
+> +    /* Using x0 as the rs1 register specifier, encodes an infinite AVL */
+> +    if (a->rs1 == 0) {
+> +        /* As the mask is at least one bit, RV_VLEN_MAX is >= VLMAX */
+> +        s1 = tcg_const_tl(RV_VLEN_MAX);
+> +    } else {
+> +        s1 = tcg_temp_new();
+> +        gen_get_gpr(s1, a->rs1);
+> +    }
+> +    gen_helper_vsetvl(dst, cpu_env, s1, s2);
+> +    gen_set_gpr(a->rd, dst);
+> +    gen_goto_tb(ctx, 0, ctx->pc_succ_insn);
+> +    ctx->base.is_jmp = DISAS_NORETURN;
+> +
+> +    tcg_temp_free(s1);
+> +    tcg_temp_free(s2);
+> +    tcg_temp_free(dst);
+> +    return true;
+> +}
 
