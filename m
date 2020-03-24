@@ -1,60 +1,46 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jGYzb-0005bx-OT
-	for mharc-qemu-riscv@gnu.org; Mon, 23 Mar 2020 22:08:35 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:40877)
+	id 1jGh9v-0001uI-I6
+	for mharc-qemu-riscv@gnu.org; Tue, 24 Mar 2020 06:51:51 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:57256)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <bmeng.cn@gmail.com>) id 1jGYzZ-0005Zv-Cs
- for qemu-riscv@nongnu.org; Mon, 23 Mar 2020 22:08:34 -0400
+ (envelope-from <zhiwei_liu@c-sky.com>) id 1jGh9s-0001rE-VH
+ for qemu-riscv@nongnu.org; Tue, 24 Mar 2020 06:51:46 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <bmeng.cn@gmail.com>) id 1jGYzY-0007xx-FQ
- for qemu-riscv@nongnu.org; Mon, 23 Mar 2020 22:08:33 -0400
-Received: from mail-yb1-xb43.google.com ([2607:f8b0:4864:20::b43]:38599)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
- id 1jGYzW-0007vu-H5; Mon, 23 Mar 2020 22:08:30 -0400
-Received: by mail-yb1-xb43.google.com with SMTP id 204so1067847ybw.5;
- Mon, 23 Mar 2020 19:08:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=D07qrjjFuBwOl5e6g/jqH6or0Hlbi+mHH4dHWH5fW80=;
- b=KFNQu6xaGBF9CGLFJEYiM0PiOLFTY3p1Fw8Dv5V7D11KTkFQ4KopFZvm+YKWgyUVtt
- 5sLsAOR0001GwTK7kzjlePYFV4bP6X6qXIi5HeRu4JMwu11T8NcsfXCux/cJ3obN8PR6
- 6f5r7d8qjs9ndDkJ8UVWlKkZMSnX2sPejpumKbOyiKA7Lry3ags4qkip0tiYbkHXbbVJ
- pKp87cbkONsinoZyIU76z5f6tnZwSLaZ9BoE0EYvXiSZsdoSDqqHB2UyifW7upm4pj7p
- Y4e7Xl3x/5GzheWTwO4cwuBhvQHN38lD8oIJuq4GrJmG+J/nBVPPVHc8smaVIVmaC9V7
- DdEA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=D07qrjjFuBwOl5e6g/jqH6or0Hlbi+mHH4dHWH5fW80=;
- b=IZo9ndJzoAHq9qJUPC8SHMpwYw2yenzSkMScLJKdHpx/utLI5pFrhdWMqXF81puWXA
- I4w82YWBpu5KlrLFLdCjgiK9xrmiEaC+3JIlxFPXyTcnUwVbuM5mT6nlRIPYaX2DrJld
- arZVb/BgJlOn/wXBdG3C+422s3LPO23a5uzth0TnBAm5bip/nTYkvTFnFOeIvqwSSDpI
- a9/xzI0pX9G9rQ8eusDR7NhWskI2Rx61fEeGjo2zlvbZibgGlGk2gkT9Rw/Yd+0OKnFj
- TbjpuMrtOBvhZfxJml/zkpGEDgFkX/NflQIFqQcjAiD9QrIXuxoC64guZ7YRhYs/z1jO
- aVzg==
-X-Gm-Message-State: ANhLgQ1MSVj5aY45m0adLNLbCRhBzhhfcV4tQOal6Xv5YVglQBurSDqa
- LS7f8nG8uEAd3AL2GgYj75FmoLKy8IY+vd7yrvE=
-X-Google-Smtp-Source: ADFU+vs5RZ84/OUPi95ZvFtZRudyfY93HJgYzawnbYLYcSLfdZpX1gCS2vsKLK0Knj3TSM1kLdT87Iipei3L3WHtAdA=
-X-Received: by 2002:a25:d646:: with SMTP id n67mr10230715ybg.65.1585015709623; 
- Mon, 23 Mar 2020 19:08:29 -0700 (PDT)
+ (envelope-from <zhiwei_liu@c-sky.com>) id 1jGh9r-0003Uj-FU
+ for qemu-riscv@nongnu.org; Tue, 24 Mar 2020 06:51:44 -0400
+Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:32826)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <zhiwei_liu@c-sky.com>)
+ id 1jGh9o-00039c-30; Tue, 24 Mar 2020 06:51:40 -0400
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.0747145|-1; CH=green; DM=|CONTINUE|false|;
+ DS=CONTINUE|ham_system_inform|0.0111356-0.000973425-0.987891;
+ FP=0|0|0|0|0|-1|-1|-1; HT=e01l07381; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS;
+ RN=9; RT=9; SR=0; TI=SMTPD_---.H4Wkce9_1585047088; 
+Received: from 172.16.31.150(mailfrom:zhiwei_liu@c-sky.com
+ fp:SMTPD_---.H4Wkce9_1585047088)
+ by smtp.aliyun-inc.com(10.147.42.16); Tue, 24 Mar 2020 18:51:29 +0800
+Subject: Re: [PATCH v5 57/60] target/riscv: vector slide instructions
+To: Richard Henderson <richard.henderson@linaro.org>, alistair23@gmail.com,
+ chihmin.chao@sifive.com, palmer@dabbelt.com
+Cc: wenmeng_zhang@c-sky.com, wxy194768@alibaba-inc.com,
+ guoren@linux.alibaba.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+References: <20200312145900.2054-1-zhiwei_liu@c-sky.com>
+ <20200312145900.2054-58-zhiwei_liu@c-sky.com>
+ <28063df7-bf38-d136-2d32-39651692c4c6@linaro.org>
+ <88b87d58-5387-9d0d-b1a0-5705171f2e83@c-sky.com>
+ <76b6c079-15b2-08f1-f8e2-570efb6cfae5@linaro.org>
+From: LIU Zhiwei <zhiwei_liu@c-sky.com>
+Message-ID: <a99c100f-4b32-810a-97d7-ee54f5f65cda@c-sky.com>
+Date: Tue, 24 Mar 2020 18:51:25 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
+ Thunderbird/68.6.0
 MIME-Version: 1.0
-References: <cover.1583530528.git.alistair.francis@wdc.com>
-In-Reply-To: <cover.1583530528.git.alistair.francis@wdc.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Tue, 24 Mar 2020 10:08:19 +0800
-Message-ID: <CAEUhbmUHNLYoJutr3dg0hpEPehuzRD4r6eux1EStZxCknMst0w@mail.gmail.com>
-Subject: Re: [PATCH v3 0/3] hw/riscv: Add a serial property to sifive_u
-To: Alistair Francis <alistair.francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Alistair Francis <alistair23@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2607:f8b0:4864:20::b43
+In-Reply-To: <76b6c079-15b2-08f1-f8e2-570efb6cfae5@linaro.org>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 3.x [generic] [fuzzy]
+X-Received-From: 121.197.200.217
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -66,26 +52,128 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Mar 2020 02:08:34 -0000
+X-List-Received-Date: Tue, 24 Mar 2020 10:51:46 -0000
 
-Hi Palmer,
 
-On Sat, Mar 7, 2020 at 5:45 AM Alistair Francis
-<alistair.francis@wdc.com> wrote:
+
+On 2020/3/17 1:42, Richard Henderson wrote:
+> On 3/16/20 1:04 AM, LIU Zhiwei wrote:
+>>> As a preference, I think you can do away with this helper.
+>>> Simply use the slideup helper with argument 1, and then
+>>> afterwards store the integer register into element 0.  You should be able to
+>>> re-use code from vmv.s.x for that.
+>> When I try it, I find it is some difficult, because  vmv.s.x will clean
+>> the elements (0 < index < VLEN/SEW).
+> Well, two things about that:
 >
-> At present the board serial number is hard-coded to 1, and passed
-> to OTP model during initialization. Firmware (FSBL, U-Boot) uses
-> the serial number to generate a unique MAC address for the on-chip
-> ethernet controller. When multiple QEMU 'sifive_u' instances are
-> created and connected to the same subnet, they all have the same
-> MAC address hence it creates a unusable network.
+> (1) The 0.8 version of vmv.s.x does *not* zero the other elements, so we'll
+> want to be prepared for that.
 >
-> A new "serial" property is introduced to specify the board serial
-> number. When not given, the default serial number 1 is used.
+> (2) We have 8 insns that, in the end come down to a direct element access,
+> possibly with some other processing.
 >
+> So we'll want basic helper functions that can locate an element by immediate
+> offset and by variable offset:
+>
+> /* Compute the offset of vreg[idx] relative to cpu_env.
+>     The index must be in range of VLMAX. */
+> int vec_element_ofsi(int vreg, int idx, int sew);
+>
+> /* Compute a pointer to vreg[idx].
+>     If need_bound is true, mask idx into VLMAX,
+>     Otherwise we know a-priori that idx is already in bounds. */
+> void vec_element_ofsx(DisasContext *s, TCGv_ptr base,
+>                        TCGv idx, int sew, bool need_bound);
+>
+> /* Load idx >= VLMAX ? 0 : vreg[idx] */
+> void vec_element_loadi(DisasContext *s, TCGv_i64 val,
+>                         int vreg, int idx, int sew);
+> void vec_element_loadx(DisasContext *s, TCGv_i64 val,
+>                         int vreg, TCGv idx, int sew);
+>
+> /* Store vreg[imm] = val.
+>     The index must be in range of VLMAX.  */
+> void vec_element_storei(DisasContext *s, int vreg, int imm,
+>                          TCGv_i64 val);
+> void vec_element_storex(DisasContext *s, int vreg,
+>                          TCGv idx, TCGv_i64 val);
+>
+> (3) It would be handy to have TCGv cpu_vl.
+Do you mean I should define cpu_vl as a global TCG varible like cpu_pc?
+So that I can check vl==0 in translation time.
 
-Could you please take this for v5.0.0?
+Or just a temp variable?
+>
+> Then:
+>
+> vext.x.v:
+>      If rs1 == 0,
+>          Use vec_element_loadi(s, x[rd], vs2, 0, s->sew).
+>      else
+>          Use vec_element_loadx(s, x[rd], vs2, x[rs1], true).
+>
+> vmv.s.x:
+>      over = gen_new_label();
+>      tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
+>      For 0.7.1:
+>          Use tcg_gen_dup8i to zero all VLMAX elements of vd.
+>          If rs1 == 0, goto done.
+>      Use vec_element_storei(s, vs2, 0, x[rs1]).
+>   done:
+>      gen_set_label(over);
+>
+> vfmv.f.s:
+>      Use vec_element_loadi(x, f[rd], vs2, 0).
+>      NaN-box f[rd] as necessary for SEW.
+>
+> vfmv.s.f:
+>      tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
+>      For 0.7.1:
+>          Use tcg_gen_dup8i to zero all VLMAX elements of vd.
+>      Let tmp = f[rs1], nan-boxed as necessary for SEW.
+>      Use vec_element_storei(s, vs2, 0, tmp).
+>      gen_set_label(over);
+>
+> vslide1up.vx:
+>      Ho hum, I forgot about masking.  Some options:
+>      (1) Call a helper just as you did in your original patch.
+>      (2) Call a helper only for !vm, for vm as below.
 
-Regards,
-Bin
+Sorry, I don't get it why I need a helper for !vm.
+I think I can  call vslideup w/1 whether !vm or vm, then a store to vd[0].
+
+Zhiwei
+>      (3) Call vslideup w/1.
+>          tcg_gen_brcondi(TCG_COND_EQ, cpu_vl, 0, over);
+>          If !vm,
+>              // inline test for v0[0]
+>              vec_element_loadi(s, tmp, 0, 0, MO_8);
+>              tcg_gen_andi_i64(tmp, tmp, 1);
+>              tcg_gen_brcondi(TCG_COND_EQ, tmp, 0, over);
+>          Use vec_element_store(s, vd, 0, x[rs1]).
+>          gen_set_label(over);
+>
+> vslide1down.vx:
+>      For !vm, this is complicated enough for a helper.
+>      If using option 3 for vslide1up, then the store becomes:
+>      tcg_gen_subi_tl(tmp, cpu_vl, 1);
+>      vec_element_storex(s, base, tmp, x[rs1]);
+>
+> vrgather.vx:
+>      If !vm or !vl_eq_vlmax, use helper.
+>      vec_element_loadx(s, tmp, vs2, x[rs1]);
+>      Use tcg_gen_gvec_dup_i64 to store to tmp to vd.
+>
+> vrgather.vi:
+>      If !vm or !vl_eq_vlmax, use helper.
+>      If imm >= vlmax,
+>          Use tcg_gen_dup8i to zero vd;
+>      else,
+>          ofs = vec_element_ofsi(s, vs2, imm, s->sew);
+>          tcg_gen_gvec_dup_mem(sew, vreg_ofs(vd),
+>                               ofs, vlmax, vlmax);
+>
+>
+> r~
+
 
