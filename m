@@ -1,53 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jHBYY-0000r0-Ef
-	for mharc-qemu-riscv@gnu.org; Wed, 25 Mar 2020 15:19:14 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53669)
+	id 1jHBYc-0000xu-4J
+	for mharc-qemu-riscv@gnu.org; Wed, 25 Mar 2020 15:19:18 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:53741)
  by lists.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1jHBYV-0000iL-98
- for qemu-riscv@nongnu.org; Wed, 25 Mar 2020 15:19:12 -0400
+ id 1jHBYY-0000sT-Um
+ for qemu-riscv@nongnu.org; Wed, 25 Mar 2020 15:19:17 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
  (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1jHBYU-0000BF-4p
- for qemu-riscv@nongnu.org; Wed, 25 Mar 2020 15:19:11 -0400
-Received: from mail-wm1-x342.google.com ([2a00:1450:4864:20::342]:50236)
+ id 1jHBYX-0000EU-Ne
+ for qemu-riscv@nongnu.org; Wed, 25 Mar 2020 15:19:14 -0400
+Received: from mail-wr1-x430.google.com ([2a00:1450:4864:20::430]:39682)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1jHBYM-0008WU-1u; Wed, 25 Mar 2020 15:19:02 -0400
-Received: by mail-wm1-x342.google.com with SMTP id d198so3846530wmd.0;
- Wed, 25 Mar 2020 12:19:01 -0700 (PDT)
+ id 1jHBYO-000077-UD; Wed, 25 Mar 2020 15:19:05 -0400
+Received: by mail-wr1-x430.google.com with SMTP id p10so4693473wrt.6;
+ Wed, 25 Mar 2020 12:19:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=mJWqK5dP/JUjGEuwE5rKgl6cBOxlAe6qQTEyZU8C8W0=;
- b=VleCQCB2ornO9w/JxmRfcHEknZBnTHp7eX+ggBV84+MqPxxRabg1vxAR5ZLJUiaD8X
- WRk/rzD7DwTyQqStxRXjvhzX6OZMHkUPsBCJ5RO5HEr42KkKsglR3UCWdso+9PogQgDG
- RSQoAV09hl8gpLd5dq2pYv3iTJXnJMVHdhscJMPLG3IIxniBxbWovSYQlvHCbr9SJM+a
- QaYZjJcnjLopmdXcvMU0Ujy56D4j8yMydlmLQghGfciCIbIkKt2zOjhymPs1o9EKrzMe
- XRa92Pr9y7pvFQfRzjcW7PFyVayrRjJdQ0Zo97j34dCjki13dNHYL7UpELRBNFldy6+u
- tRpQ==
+ bh=9usvSGI/eVqKf05MvHpkRmaqSX5CGG2+AA8VX96K1ZM=;
+ b=VGPd1RDB0/AJDx07lYAilZaavW0HriN10KKEQi57luf9qajxxahydp3lel1OVZF58k
+ hDJ70tNf2E32isOLObgoh/RN52wCFJcGErCbJawZttA1CZBxr9u6/CavwWU/M7s3fQL3
+ ogvVENbDNGAFztrVOnAPyeRnbxgFiOQZkz5n3EoDEdmZ9lyRI5dWFsyrILXxcsPimNv5
+ GnvpEkXCI1fc+kx40rABmwiXoE2pqQBnnOv191dqd+SCf1UcEZW0C8CRdnEwVg6knsLS
+ 8Y653opcLUjr3pgOxIAe69+XAwxm5D51JZMLYihP7mbZqqthHrF4eZlcU8CJKJTV4EUw
+ gbyw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
  :in-reply-to:references:mime-version:content-transfer-encoding;
- bh=mJWqK5dP/JUjGEuwE5rKgl6cBOxlAe6qQTEyZU8C8W0=;
- b=kbxkKBJN7BiV9+kPIoBsOoNC5/e2i/iJfc8t7pLROcsEk3dGOks1YzvPKOJDF6r612
- ZRWuQ6Em/IAyPh4aa0RWFEpiTgm4fWl8FQpl9wPEoRX4BiJnunURzqgfo13pCgxuqA4P
- S+N+7iTQg13AiV9YDI/0na2oDEsuiurdErVillegb0NXoml5DzBSs5BaTAhPoDTSDslV
- sxDk2MULGLZO5CqzrM3o45W+PWP2RP41TRc50rv9mwnf7To0Q5x6Cm/v7NEBD8K0o0NX
- nItaDCEYWRMRa3HAQ5PWxobuDDNPlcXv2+xGNMzNlT2sl8PvdPfFDdKq0HiJG0W/tZgo
- uF8g==
-X-Gm-Message-State: ANhLgQ1vZ0/jXpVA7HPCMsBfgS6whKZsVLPE34APt6lJISVVFxG4tAtY
- A/I/dLcsH51ndnOxM5POmteUXseT0Ck=
-X-Google-Smtp-Source: ADFU+vsZJ2kDOybje24dj6jJl/WlOq2ip81mCzO5QWZlbxJukNvoz8idUswBtE/zTlmzkvq1ZJ2ocQ==
-X-Received: by 2002:a05:600c:2051:: with SMTP id
- p17mr4738300wmg.153.1585163940694; 
- Wed, 25 Mar 2020 12:19:00 -0700 (PDT)
+ bh=9usvSGI/eVqKf05MvHpkRmaqSX5CGG2+AA8VX96K1ZM=;
+ b=WWZh0nMrl/3CEsKbiZYJ1cPngRCHGgNa3qkCDhCnUWJegu2LuaU4Qb1RLGYD06uZ7B
+ 6DQU1yIX7i/0oiWYZd7sZt2ihr81pp1yvabhwHqLaWdJeUocvYMSveJiKUVf9gxyOFiR
+ TlSuxJVPkq7TAd/66MhmspQ2E/W1xB2ODhxbNh4/RV5tygpPuhhuAl3aNDrOGUORvXwr
+ ULm+PwiAwcBjmb0MibMiemKN4d1jZ9esUE5WmK1gJFGPtWib5S/60hT+MUhKvtjW0MM1
+ 2hwhozm6pjBA/3Fz5CMjR/KKOw/U6fevyHow1wBkF3VhLSQzAyffGCWTWPiixwcoQIMS
+ pdeQ==
+X-Gm-Message-State: ANhLgQ03dzI9kOao1MxG3QDVWDPmZjA4W9GQkFWQAtle87mz+TZ3UGOT
+ 1eG0oCBEYpka/Wt+qM1ywb02RSLWg98=
+X-Google-Smtp-Source: ADFU+vv/rTw1f6skK2gM0CaK7KTQ/4o0yvyb5f4/dLQOpOFPD/j5JXqBWlajQ/oVDBS7+PJzWxSdtQ==
+X-Received: by 2002:a5d:50d1:: with SMTP id f17mr5318535wrt.150.1585163943562; 
+ Wed, 25 Mar 2020 12:19:03 -0700 (PDT)
 Received: from localhost.localdomain (37.red-83-52-54.dynamicip.rima-tde.net.
  [83.52.54.37])
- by smtp.gmail.com with ESMTPSA id r17sm6345672wrx.46.2020.03.25.12.18.57
+ by smtp.gmail.com with ESMTPSA id r17sm6345672wrx.46.2020.03.25.12.19.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Mar 2020 12:18:59 -0700 (PDT)
+ Wed, 25 Mar 2020 12:19:02 -0700 (PDT)
 Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
  <philippe.mathieu.daude@gmail.com>
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
@@ -75,10 +74,10 @@ Cc: Alistair Francis <alistair@alistair23.me>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>,
  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
-Subject: [PATCH-for-5.0 09/12] hw/mips/mips_malta: Add missing
+Subject: [PATCH-for-5.0 10/12] hw/misc/macio/macio: Add missing
  error-propagation code
-Date: Wed, 25 Mar 2020 20:18:27 +0100
-Message-Id: <20200325191830.16553-10-f4bug@amsat.org>
+Date: Wed, 25 Mar 2020 20:18:28 +0100
+Message-Id: <20200325191830.16553-11-f4bug@amsat.org>
 X-Mailer: git-send-email 2.21.1
 In-Reply-To: <20200325191830.16553-1-f4bug@amsat.org>
 References: <20200325191830.16553-1-f4bug@amsat.org>
@@ -88,7 +87,7 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::342
+X-Received-From: 2a00:1450:4864:20::430
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -100,7 +99,7 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Mar 2020 19:19:12 -0000
+X-List-Received-Date: Wed, 25 Mar 2020 19:19:17 -0000
 
 Running the coccinelle script produced:
 
@@ -109,66 +108,120 @@ Running the coccinelle script produced:
     --sp-file scripts/coccinelle/object_property_missing_error_propagate.cocci \
     --keep-comments --smpl-spacing --dir hw
 
-  [[manual check required: error_propagate() might be missing in object_property_set_int() hw/mips/mips_malta.c:1193:4]]
-  [[manual check required: error_propagate() might be missing in object_property_set_str() hw/mips/mips_malta.c:1192:4]]
+  [[manual check required: error_propagate() might be missing in object_property_set_bool() hw/misc/macio/macio.c:350:8]]
 
-Add the missing error_propagate() after manual review by adding
-a Error* parameter to create_cps().
+Add the missing error_propagate() after manual review.
 
 Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 ---
- hw/mips/mips_malta.c | 19 ++++++++++++++-----
- 1 file changed, 14 insertions(+), 5 deletions(-)
+ hw/misc/macio/macio.c | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/hw/mips/mips_malta.c b/hw/mips/mips_malta.c
-index e4c4de1b4e..8d43cfd41b 100644
---- a/hw/mips/mips_malta.c
-+++ b/hw/mips/mips_malta.c
-@@ -1183,22 +1183,31 @@ static void create_cpu_without_cps(MachineState *ms,
- }
- 
- static void create_cps(MachineState *ms, MaltaState *s,
--                       qemu_irq *cbus_irq, qemu_irq *i8259_irq)
-+                       qemu_irq *cbus_irq, qemu_irq *i8259_irq,
-+                       Error **errp)
+diff --git a/hw/misc/macio/macio.c b/hw/misc/macio/macio.c
+index 79222192e8..fffb64a7d5 100644
+--- a/hw/misc/macio/macio.c
++++ b/hw/misc/macio/macio.c
+@@ -292,98 +292,102 @@ static const MemoryRegionOps timer_ops = {
+ static void macio_newworld_realize(PCIDevice *d, Error **errp)
  {
+     MacIOState *s = MACIO(d);
+     NewWorldMacIOState *ns = NEWWORLD_MACIO(d);
+     DeviceState *pic_dev = DEVICE(ns->pic);
      Error *err = NULL;
+     SysBusDevice *sysbus_dev;
+     MemoryRegion *timer_memory = NULL;
  
-     sysbus_init_child_obj(OBJECT(s), "cps", OBJECT(&s->cps), sizeof(s->cps),
-                           TYPE_MIPS_CPS);
-     object_property_set_str(OBJECT(&s->cps), ms->cpu_type, "cpu-type", &err);
-+    if (err) {
-+        error_propagate(errp, err);
-+        return;
-+    }
-     object_property_set_int(OBJECT(&s->cps), ms->smp.cpus, "num-vp", &err);
-+    if (err) {
-+        error_propagate(errp, err);
-+        return;
-+    }
-     object_property_set_bool(OBJECT(&s->cps), true, "realized", &err);
--    if (err != NULL) {
--        error_report("%s", error_get_pretty(err));
--        exit(1);
-+    if (err) {
-+        error_propagate(errp, err);
-+        return;
+     macio_common_realize(d, &err);
+     if (err) {
+         error_propagate(errp, err);
+         return;
      }
  
-     sysbus_mmio_map_overlap(SYS_BUS_DEVICE(&s->cps), 0, 0, 1);
+     sysbus_dev = SYS_BUS_DEVICE(&s->escc);
+     sysbus_connect_irq(sysbus_dev, 0, qdev_get_gpio_in(pic_dev,
+                                                        NEWWORLD_ESCCB_IRQ));
+     sysbus_connect_irq(sysbus_dev, 1, qdev_get_gpio_in(pic_dev,
+                                                        NEWWORLD_ESCCA_IRQ));
  
-     *i8259_irq = get_cps_irq(&s->cps, 3);
-     *cbus_irq = NULL;
- }
-@@ -1206,9 +1215,9 @@ static void create_cps(MachineState *ms, MaltaState *s,
- static void mips_create_cpu(MachineState *ms, MaltaState *s,
-                             qemu_irq *cbus_irq, qemu_irq *i8259_irq)
- {
-     if ((ms->smp.cpus > 1) && cpu_supports_cps_smp(ms->cpu_type)) {
--        create_cps(ms, s, cbus_irq, i8259_irq);
-+        create_cps(ms, s, cbus_irq, i8259_irq, &error_fatal);
+     /* OpenPIC */
+     sysbus_dev = SYS_BUS_DEVICE(ns->pic);
+     memory_region_add_subregion(&s->bar, 0x40000,
+                                 sysbus_mmio_get_region(sysbus_dev, 0));
+ 
+     /* IDE buses */
+     macio_realize_ide(s, &ns->ide[0],
+                       qdev_get_gpio_in(pic_dev, NEWWORLD_IDE0_IRQ),
+                       qdev_get_gpio_in(pic_dev, NEWWORLD_IDE0_DMA_IRQ),
+                       0x16, &err);
+     if (err) {
+         error_propagate(errp, err);
+         return;
+     }
+ 
+     macio_realize_ide(s, &ns->ide[1],
+                       qdev_get_gpio_in(pic_dev, NEWWORLD_IDE1_IRQ),
+                       qdev_get_gpio_in(pic_dev, NEWWORLD_IDE1_DMA_IRQ),
+                       0x1a, &err);
+     if (err) {
+         error_propagate(errp, err);
+         return;
+     }
+ 
+     /* Timer */
+     timer_memory = g_new(MemoryRegion, 1);
+     memory_region_init_io(timer_memory, OBJECT(s), &timer_ops, NULL, "timer",
+                           0x1000);
+     memory_region_add_subregion(&s->bar, 0x15000, timer_memory);
+ 
+     if (ns->has_pmu) {
+         /* GPIOs */
+         sysbus_dev = SYS_BUS_DEVICE(&ns->gpio);
+         object_property_set_link(OBJECT(&ns->gpio), OBJECT(pic_dev), "pic",
+                                  &error_abort);
+         memory_region_add_subregion(&s->bar, 0x50,
+                                     sysbus_mmio_get_region(sysbus_dev, 0));
+         object_property_set_bool(OBJECT(&ns->gpio), true, "realized", &err);
++        if (err) {
++            error_propagate(errp, err);
++            return;
++        }
+ 
+         /* PMU */
+         object_initialize_child(OBJECT(s), "pmu", &s->pmu, sizeof(s->pmu),
+                                 TYPE_VIA_PMU, &error_abort, NULL);
+         object_property_set_link(OBJECT(&s->pmu), OBJECT(sysbus_dev), "gpio",
+                                  &error_abort);
+         qdev_prop_set_bit(DEVICE(&s->pmu), "has-adb", ns->has_adb);
+         qdev_set_parent_bus(DEVICE(&s->pmu), BUS(&s->macio_bus));
+ 
+         object_property_set_bool(OBJECT(&s->pmu), true, "realized", &err);
+         if (err) {
+             error_propagate(errp, err);
+             return;
+         }
+         sysbus_dev = SYS_BUS_DEVICE(&s->pmu);
+         sysbus_connect_irq(sysbus_dev, 0, qdev_get_gpio_in(pic_dev,
+                                                            NEWWORLD_PMU_IRQ));
+         memory_region_add_subregion(&s->bar, 0x16000,
+                                     sysbus_mmio_get_region(sysbus_dev, 0));
      } else {
-         create_cpu_without_cps(ms, cbus_irq, i8259_irq);
+         /* CUDA */
+         object_initialize_child(OBJECT(s), "cuda", &s->cuda, sizeof(s->cuda),
+                                 TYPE_CUDA, &error_abort, NULL);
+         qdev_set_parent_bus(DEVICE(&s->cuda), BUS(&s->macio_bus));
+         qdev_prop_set_uint64(DEVICE(&s->cuda), "timebase-frequency",
+                              s->frequency);
+ 
+         object_property_set_bool(OBJECT(&s->cuda), true, "realized", &err);
+         if (err) {
+             error_propagate(errp, err);
+             return;
+         }
+         sysbus_dev = SYS_BUS_DEVICE(&s->cuda);
+         sysbus_connect_irq(sysbus_dev, 0, qdev_get_gpio_in(pic_dev,
+                                                            NEWWORLD_CUDA_IRQ));
+         memory_region_add_subregion(&s->bar, 0x16000,
+                                     sysbus_mmio_get_region(sysbus_dev, 0));
      }
  }
 -- 
