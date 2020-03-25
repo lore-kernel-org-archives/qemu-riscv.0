@@ -1,52 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jHBYQ-0000X2-L0
-	for mharc-qemu-riscv@gnu.org; Wed, 25 Mar 2020 15:19:06 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53508)
+	id 1jHBYW-0000kw-FS
+	for mharc-qemu-riscv@gnu.org; Wed, 25 Mar 2020 15:19:12 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:53617)
  by lists.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1jHBYM-0000QM-GM
- for qemu-riscv@nongnu.org; Wed, 25 Mar 2020 15:19:03 -0400
+ id 1jHBYS-0000bl-9W
+ for qemu-riscv@nongnu.org; Wed, 25 Mar 2020 15:19:10 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
  (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1jHBYL-000054-EJ
- for qemu-riscv@nongnu.org; Wed, 25 Mar 2020 15:19:02 -0400
-Received: from mail-wr1-x442.google.com ([2a00:1450:4864:20::442]:35968)
+ id 1jHBYQ-000096-VC
+ for qemu-riscv@nongnu.org; Wed, 25 Mar 2020 15:19:08 -0400
+Received: from mail-wm1-x342.google.com ([2a00:1450:4864:20::342]:38965)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1jHBYD-0008Pb-Be; Wed, 25 Mar 2020 15:18:53 -0400
-Received: by mail-wr1-x442.google.com with SMTP id 31so4704302wrs.3;
- Wed, 25 Mar 2020 12:18:53 -0700 (PDT)
+ id 1jHBYG-0008Rx-Ay; Wed, 25 Mar 2020 15:18:56 -0400
+Received: by mail-wm1-x342.google.com with SMTP id a9so4165536wmj.4;
+ Wed, 25 Mar 2020 12:18:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=wrJdKpRKJHYFpsu8f/k/XHLGFdJX1oGK4sHeuwFlD8Q=;
- b=BJ0/ut6kqXFsqLRtDlE1/SHKtzso+q2uxz1zm7jf93uWxv2mfeJdLUt6SEKSk2nqzS
- 7sEy6HaszD3JvjQTtblkk6FKF/v3Bl22TTwo3/XaWfuRjNIJJeZAJCuxbt2v5yQ+YtdJ
- xQU4AtzCye4vIZyvBlSh+p4CnWwjPcgP5YF/5uahBIHXnfb/y3toH1QQmu4TQjvGbn8m
- jbKxSsc5nQ6J87jGpNvgC/F6dox3wQclJPjQHWW72hYX+4ndgS0/ltFTxZ9P1TxUDsfZ
- UE6TlrDps3hK5XMfvOcfYCOBLeJc5NsypvDiR+4+DnQhWJpbf/BbqmadAqTBgo+2c447
- 6I6Q==
+ bh=r9hrbhBuaNbQeWGl1mm7dnqJYIZiyDKEgrGsnKIPUcM=;
+ b=SezOYz6oc+EApTTqVJvWAuQbWiYgDL12PNUdLUj9R0pzsIaE4R+L3VYxi5VRpB9NI8
+ oXRyNZKNjNyWGoGGjHjdAsoEd+pLRXsGb6jgsw4C32QtuDsJqRyyTFhOfWA/vRvfBc3j
+ zNVPhQAPJz8r3ObHeF3FYaVIOfnx7qflf+l3qG6AT7Q16p9/2w91ZmwF7f60tyTAaxcg
+ QLrvojwqjqwdgdEah/PyDs3kgOgx3C7jnfQxVvmOMgp/N7T29IEWXwdMmsQLPHpESqWQ
+ ihxSheQkzMJGb5yZp2p4klTgVUpY/O8VeNGVOSjo3lLCaMppBfhNdUzA/xCYDRn9NhgT
+ MK8Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
  :in-reply-to:references:mime-version:content-transfer-encoding;
- bh=wrJdKpRKJHYFpsu8f/k/XHLGFdJX1oGK4sHeuwFlD8Q=;
- b=H8ug+Y8gRPUiHtMi6FB6iohC6pRvc/4yHmng8sYYcQbBF9bs/scxt7E4juT7+Ec1/u
- /4TenhZlu4M5l2PuqHC51/KmbI1RmVrymDZHuhuU6rLbvzr6XJYt1Y7b5YHKzmB5g0Xa
- 125ZsRdByxMPAnMmp2VYdVBk4duEqT/8mhv8dlU8EgeTV1jg23MRSRgMvklk8bY64bVR
- goTS0s1uUZnC5vdqmJ+U6Y4Aw9uDOTmnYGk8iRH0KaKE1xezkGBDCCseZnVcNTFECNy1
- wUxbKYc4vS2je/fY/5i4PhwIXVYRPcSoiR4OKVLIMZT3ElBLDQgYSsw6GeMTC9O0vXk1
- 6QIg==
-X-Gm-Message-State: ANhLgQ0pjOBTd6YS1cKTSYh/B9gvgAOlKXGn53xjNc431JqsMP0kNOhU
- oaOHJRix0qlrcVKxSWqT4wZVxPZnH90=
-X-Google-Smtp-Source: ADFU+vtLpvKpCB9LLgmIxRTvJrownfGJ5Y4wqJnSnshhMqp0Ce2Ane11vdQjML1kw2Kfbs9cXVvxSg==
-X-Received: by 2002:adf:bb06:: with SMTP id r6mr5157392wrg.324.1585163932103; 
- Wed, 25 Mar 2020 12:18:52 -0700 (PDT)
+ bh=r9hrbhBuaNbQeWGl1mm7dnqJYIZiyDKEgrGsnKIPUcM=;
+ b=A77tngFstThjiZdsUKZ23Gdf55tEvXMNsk7pUYNGszSI/dIvBGZMSpJFzDy1rEfiFx
+ XyZsSZyCdhb9OgZDk2MsnsXl0fj6F3kc+wgVSmRla0tWm3eG6bB5BaIw93hnAB9+tnVn
+ h4yM8JWPEt/KNy0BTcXmBNuNtq8s6w8RS0sMA2JZicEMpGf93LhGNM9obJ0ul4Am8EWs
+ W7CN0ly7bRl1/te8rxsf/WWNOxEXZnYCgTXkd2B2eUXWJ9QOH8D9AxM0O7+5h/Jt0j3G
+ PBpsRnt4dewFv7nA0aH2C1tKqo++PBBhc5HPHmEqs/4E1f+fl9wMMRaWlT7hPCeMJv9W
+ FLfQ==
+X-Gm-Message-State: ANhLgQ1GleVf4nfo6Po6C6Vxv8EXHfpu/F3yqFabOTcDKWYMel603A6n
+ nJhEGShORNQtBfNG30scz8Yo0VX8v44=
+X-Google-Smtp-Source: ADFU+vvsD/UjeB9AddoTLd45jff2BJbXWW3gEE7CoPDDqErMz+LmEmNVorX2Nr7Fxi++HnZLzRrs/g==
+X-Received: by 2002:a1c:6285:: with SMTP id w127mr5147255wmb.133.1585163934933; 
+ Wed, 25 Mar 2020 12:18:54 -0700 (PDT)
 Received: from localhost.localdomain (37.red-83-52-54.dynamicip.rima-tde.net.
  [83.52.54.37])
- by smtp.gmail.com with ESMTPSA id r17sm6345672wrx.46.2020.03.25.12.18.49
+ by smtp.gmail.com with ESMTPSA id r17sm6345672wrx.46.2020.03.25.12.18.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Mar 2020 12:18:51 -0700 (PDT)
+ Wed, 25 Mar 2020 12:18:54 -0700 (PDT)
 Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
  <philippe.mathieu.daude@gmail.com>
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
@@ -74,10 +74,9 @@ Cc: Alistair Francis <alistair@alistair23.me>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>,
  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
-Subject: [PATCH-for-5.0 06/12] hw/dma/xilinx_axidma: Add missing
- error-propagation code
-Date: Wed, 25 Mar 2020 20:18:24 +0100
-Message-Id: <20200325191830.16553-7-f4bug@amsat.org>
+Subject: [PATCH-for-5.0 07/12] hw/mips/cps: Add missing error-propagation code
+Date: Wed, 25 Mar 2020 20:18:25 +0100
+Message-Id: <20200325191830.16553-8-f4bug@amsat.org>
 X-Mailer: git-send-email 2.21.1
 In-Reply-To: <20200325191830.16553-1-f4bug@amsat.org>
 References: <20200325191830.16553-1-f4bug@amsat.org>
@@ -87,7 +86,7 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::442
+X-Received-From: 2a00:1450:4864:20::342
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -99,71 +98,177 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Mar 2020 19:19:04 -0000
+X-List-Received-Date: Wed, 25 Mar 2020 19:19:10 -0000
 
-Running the coccinelle script produced:
+Patch created mechanically by running:
 
   $ spatch \
     --macro-file scripts/cocci-macro-file.h --include-headers \
     --sp-file scripts/coccinelle/object_property_missing_error_propagate.cocci \
-    --keep-comments --smpl-spacing --dir hw
-
-  [[manual check required: error_propagate() might be missing in object_property_set_link() hw//dma/xilinx_axidma.c:542:4]]
-
-Add the missing error_propagate() after manual review.
+    --keep-comments --smpl-spacing --in-place --dir hw
 
 Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 ---
- hw/dma/xilinx_axidma.c | 3 +++
- 1 file changed, 3 insertions(+)
+ hw/mips/cps.c | 52 +++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 52 insertions(+)
 
-diff --git a/hw/dma/xilinx_axidma.c b/hw/dma/xilinx_axidma.c
-index 018f36991b..6e3406321c 100644
---- a/hw/dma/xilinx_axidma.c
-+++ b/hw/dma/xilinx_axidma.c
-@@ -521,39 +521,42 @@ static const MemoryRegionOps axidma_ops = {
- static void xilinx_axidma_realize(DeviceState *dev, Error **errp)
+diff --git a/hw/mips/cps.c b/hw/mips/cps.c
+index 92b9b1a5f6..d682633401 100644
+--- a/hw/mips/cps.c
++++ b/hw/mips/cps.c
+@@ -68,100 +68,152 @@ static bool cpu_mips_itu_supported(CPUMIPSState *env)
+ static void mips_cps_realize(DeviceState *dev, Error **errp)
  {
-     XilinxAXIDMA *s = XILINX_AXI_DMA(dev);
-     XilinxAXIDMAStreamSlave *ds = XILINX_AXI_DMA_DATA_STREAM(&s->rx_data_dev);
-     XilinxAXIDMAStreamSlave *cs = XILINX_AXI_DMA_CONTROL_STREAM(
-                                                             &s->rx_control_dev);
-     Error *local_err = NULL;
- 
-     object_property_add_link(OBJECT(ds), "dma", TYPE_XILINX_AXI_DMA,
-                              (Object **)&ds->dma,
-                              object_property_allow_set_link,
-                              OBJ_PROP_LINK_STRONG,
-                              &local_err);
-     object_property_add_link(OBJECT(cs), "dma", TYPE_XILINX_AXI_DMA,
-                              (Object **)&cs->dma,
-                              object_property_allow_set_link,
-                              OBJ_PROP_LINK_STRONG,
-                              &local_err);
-     if (local_err) {
-         goto xilinx_axidma_realize_fail;
-     }
-     object_property_set_link(OBJECT(ds), OBJECT(s), "dma", &local_err);
-+    if (local_err) {
-+        goto xilinx_axidma_realize_fail;
-+    }
-     object_property_set_link(OBJECT(cs), OBJECT(s), "dma", &local_err);
-     if (local_err) {
-         goto xilinx_axidma_realize_fail;
-     }
- 
+     MIPSCPSState *s = MIPS_CPS(dev);
+     CPUMIPSState *env;
+     MIPSCPU *cpu;
      int i;
+     Error *err = NULL;
+     target_ulong gcr_base;
+     bool itu_present = false;
+     bool saar_present = false;
  
-     for (i = 0; i < 2; i++) {
-         struct Stream *st = &s->streams[i];
+     for (i = 0; i < s->num_vp; i++) {
+         cpu = MIPS_CPU(cpu_create(s->cpu_type));
  
-         st->nr = i;
-         st->ptimer = ptimer_init(timer_hit, st, PTIMER_POLICY_DEFAULT);
-         ptimer_transaction_begin(st->ptimer);
-         ptimer_set_freq(st->ptimer, s->freqhz);
-         ptimer_transaction_commit(st->ptimer);
+         /* Init internal devices */
+         cpu_mips_irq_init_cpu(cpu);
+         cpu_mips_clock_init(cpu);
+ 
+         env = &cpu->env;
+         if (cpu_mips_itu_supported(env)) {
+             itu_present = true;
+             /* Attach ITC Tag to the VP */
+             env->itc_tag = mips_itu_get_tag_region(&s->itu);
+             env->itu = &s->itu;
+         }
+         qemu_register_reset(main_cpu_reset, cpu);
      }
-     return;
+ 
+     cpu = MIPS_CPU(first_cpu);
+     env = &cpu->env;
+     saar_present = (bool)env->saarp;
+ 
+     /* Inter-Thread Communication Unit */
+     if (itu_present) {
+         sysbus_init_child_obj(OBJECT(dev), "itu", &s->itu, sizeof(s->itu),
+                               TYPE_MIPS_ITU);
+         object_property_set_int(OBJECT(&s->itu), 16, "num-fifo", &err);
++        if (err) {
++            error_propagate(errp, err);
++            return;
++        }
+         object_property_set_int(OBJECT(&s->itu), 16, "num-semaphores", &err);
++        if (err) {
++            error_propagate(errp, err);
++            return;
++        }
+         object_property_set_bool(OBJECT(&s->itu), saar_present, "saar-present",
+                                  &err);
++        if (err) {
++            error_propagate(errp, err);
++            return;
++        }
+         if (saar_present) {
+             s->itu.saar = &env->CP0_SAAR;
+         }
+         object_property_set_bool(OBJECT(&s->itu), true, "realized", &err);
++        if (err) {
++            error_propagate(errp, err);
++            return;
++        }
+         if (err != NULL) {
+             error_propagate(errp, err);
+             return;
+         }
+ 
+         memory_region_add_subregion(&s->container, 0,
+                            sysbus_mmio_get_region(SYS_BUS_DEVICE(&s->itu), 0));
+     }
+ 
+     /* Cluster Power Controller */
+     sysbus_init_child_obj(OBJECT(dev), "cpc", &s->cpc, sizeof(s->cpc),
+                           TYPE_MIPS_CPC);
+     object_property_set_int(OBJECT(&s->cpc), s->num_vp, "num-vp", &err);
++    if (err) {
++        error_propagate(errp, err);
++        return;
++    }
+     object_property_set_int(OBJECT(&s->cpc), 1, "vp-start-running", &err);
++    if (err) {
++        error_propagate(errp, err);
++        return;
++    }
+     object_property_set_bool(OBJECT(&s->cpc), true, "realized", &err);
+     if (err != NULL) {
+         error_propagate(errp, err);
+         return;
+     }
+ 
+     memory_region_add_subregion(&s->container, 0,
+                             sysbus_mmio_get_region(SYS_BUS_DEVICE(&s->cpc), 0));
+ 
+     /* Global Interrupt Controller */
+     sysbus_init_child_obj(OBJECT(dev), "gic", &s->gic, sizeof(s->gic),
+                           TYPE_MIPS_GIC);
+     object_property_set_int(OBJECT(&s->gic), s->num_vp, "num-vp", &err);
++    if (err) {
++        error_propagate(errp, err);
++        return;
++    }
+     object_property_set_int(OBJECT(&s->gic), 128, "num-irq", &err);
++    if (err) {
++        error_propagate(errp, err);
++        return;
++    }
+     object_property_set_bool(OBJECT(&s->gic), true, "realized", &err);
+     if (err != NULL) {
+         error_propagate(errp, err);
+         return;
+     }
+ 
+     memory_region_add_subregion(&s->container, 0,
+                             sysbus_mmio_get_region(SYS_BUS_DEVICE(&s->gic), 0));
+ 
+     /* Global Configuration Registers */
+     gcr_base = env->CP0_CMGCRBase << 4;
+ 
+     sysbus_init_child_obj(OBJECT(dev), "gcr", &s->gcr, sizeof(s->gcr),
+                           TYPE_MIPS_GCR);
+     object_property_set_int(OBJECT(&s->gcr), s->num_vp, "num-vp", &err);
++    if (err) {
++        error_propagate(errp, err);
++        return;
++    }
+     object_property_set_int(OBJECT(&s->gcr), 0x800, "gcr-rev", &err);
++    if (err) {
++        error_propagate(errp, err);
++        return;
++    }
+     object_property_set_int(OBJECT(&s->gcr), gcr_base, "gcr-base", &err);
++    if (err) {
++        error_propagate(errp, err);
++        return;
++    }
+     object_property_set_link(OBJECT(&s->gcr), OBJECT(&s->gic.mr), "gic", &err);
++    if (err) {
++        error_propagate(errp, err);
++        return;
++    }
+     object_property_set_link(OBJECT(&s->gcr), OBJECT(&s->cpc.mr), "cpc", &err);
++    if (err) {
++        error_propagate(errp, err);
++        return;
++    }
+     object_property_set_bool(OBJECT(&s->gcr), true, "realized", &err);
+     if (err != NULL) {
+         error_propagate(errp, err);
+         return;
+     }
+ 
+     memory_region_add_subregion(&s->container, gcr_base,
+                             sysbus_mmio_get_region(SYS_BUS_DEVICE(&s->gcr), 0));
+ }
 -- 
 2.21.1
 
