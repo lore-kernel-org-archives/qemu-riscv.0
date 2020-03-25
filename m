@@ -1,82 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jHD9F-0004lv-Bl
-	for mharc-qemu-riscv@gnu.org; Wed, 25 Mar 2020 17:01:14 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43356)
+	id 1jHGXY-0004Cu-17
+	for mharc-qemu-riscv@gnu.org; Wed, 25 Mar 2020 20:38:32 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43910)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <alistair23@gmail.com>) id 1jHD9A-0004fk-8y
- for qemu-riscv@nongnu.org; Wed, 25 Mar 2020 17:01:11 -0400
+ (envelope-from <dgibson@ozlabs.org>) id 1jHGXT-00041T-Ul
+ for qemu-riscv@nongnu.org; Wed, 25 Mar 2020 20:38:29 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1jHD98-0000Pi-Hh
- for qemu-riscv@nongnu.org; Wed, 25 Mar 2020 17:01:08 -0400
-Received: from mail-ua1-x942.google.com ([2607:f8b0:4864:20::942]:41494)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1jHD91-0000H6-Ta; Wed, 25 Mar 2020 17:00:59 -0400
-Received: by mail-ua1-x942.google.com with SMTP id f9so1317646uaq.8;
- Wed, 25 Mar 2020 14:00:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=XfhENZ6t3ct9uVkcrH1JI6JP+JcsPr1A0NwiLry1SUw=;
- b=p0y33Y342ud6TlvVe77z31QRkRWr24mWTFf3ssm7x6VAbAC2dOxfu6W1bRjFKJzv03
- PM63hqjU6/sfybRR+32qyNrRpWPmFDFmcZ9R6NrgGCgpqYYz8APuZh02Z/BmINb4ayYh
- pEvrOkzyQsQ3yo4X7zxBiRerV30lSmK2v2EtKAUC9q3cHff4pKReQdNnv60Dv68zSyWc
- uxIIhz+/uvROFIadeyOQby0CuxCCHXNV/iwKLEU6VDa6KPu3sRIJEE54e20EVHf168fS
- 18G4s8KriKwUbtZsFBrNzyRGPpIGrx3A9C0tBQ4jvkZivsOPmVSBMvH5BvNmW8YRYcIs
- 7eUg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=XfhENZ6t3ct9uVkcrH1JI6JP+JcsPr1A0NwiLry1SUw=;
- b=Ju8sGmeV6VmziZLs0ztrX8D0V46chd7EGQhNOct7hqESeU9jrjU4Y5WhEMiQ7iylKS
- r52T2U8ZN2oXfU0S3SJdIgEKifCS/0HiL1MUXOi1E1v4Gh3l5gjDk63p+lBTxXEp/U8D
- jOzGXOumJ3Rywh/n7as82pCfIdUBjFy/5gbhI2hZaG1O3H1ce3tUJdgseGkFCGYgP4PD
- KD07iBC/pYuH6My++R0Xfj64CUln8Adrgva2Po/boh2oG+QWGUVD5lf5f8PmPowXG/0/
- JHVWZsAGZue1ku9I5TofAzoPySu/H6Fkmv4Qd8mLHpJ5mS3ZAKWvK1vx9zy9p+raNoXp
- HTWQ==
-X-Gm-Message-State: ANhLgQ2xevjmmd02mdvo4U7io4TFJwSKV26OGpvT1Y3Pb1JvooKoLKxM
- KMcpJ2tQWpUanFZsSQY+yGQq8+AUjXlS4Yy9wyU=
-X-Google-Smtp-Source: ADFU+vvAB6SXwiNWokn1a2pZIgtrO+wuTwlRnmsHViF++X0/EeVpng7OJb8qnxm4rpkYO0pCHeipik574ReEcZKDY+Q=
-X-Received: by 2002:ab0:143:: with SMTP id 61mr4044978uak.85.1585170059328;
- Wed, 25 Mar 2020 14:00:59 -0700 (PDT)
-MIME-Version: 1.0
-References: <20200325191830.16553-1-f4bug@amsat.org>
- <20200325191830.16553-13-f4bug@amsat.org>
-In-Reply-To: <20200325191830.16553-13-f4bug@amsat.org>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 25 Mar 2020 13:52:59 -0700
-Message-ID: <CAKmqyKO6vKwnVOnVOJDNqw7_n-iUh8LyvGww=6h8E-H4OGtyWw@mail.gmail.com>
-Subject: Re: [PATCH-for-5.0 12/12] hw/riscv/sifive_u: Add missing
- error-propagation code
-To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Paul Burton <pburton@wavecomp.com>, 
+ (envelope-from <dgibson@ozlabs.org>) id 1jHGXS-0002Ul-Fk
+ for qemu-riscv@nongnu.org; Wed, 25 Mar 2020 20:38:27 -0400
+Received: from ozlabs.org ([203.11.71.1]:47609)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <dgibson@ozlabs.org>)
+ id 1jHGXI-0002AZ-1q; Wed, 25 Mar 2020 20:38:17 -0400
+Received: by ozlabs.org (Postfix, from userid 1007)
+ id 48nmL764zfz9sSJ; Thu, 26 Mar 2020 11:38:07 +1100 (AEDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=gibson.dropbear.id.au; s=201602; t=1585183087;
+ bh=rnbisUE0+51ZDSwwrAFBRyx55pg8YOyD7931PC3jY+M=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=L7RyjwFuRdBd5mV/IcT43yhdylnT1POOaqXGQNRULPIx0mWazJMZ9oZPelM7MAodw
+ zufWfEgzmO4aWK1f0mhVKuSlrpi6juYWoZM6JIafmlyke+rZQ17v5PPs6E1m47Axx3
+ dkQSpgL2vk++0ODRqx+88TKFtUCN0OQsbaKpg4tk=
+Date: Thu, 26 Mar 2020 10:55:16 +1100
+From: David Gibson <david@gibson.dropbear.id.au>
+To: Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <f4bug@amsat.org>
+Cc: qemu-devel@nongnu.org, Alistair Francis <alistair@alistair23.me>,
+ Paul Burton <pburton@wavecomp.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, qemu-ppc@nongnu.org,
+ Jason Wang <jasowang@redhat.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>,
- "Michael S. Tsirkin" <mst@redhat.com>, Jason Wang <jasowang@redhat.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>, 
- Alistair Francis <Alistair.Francis@wdc.com>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, 
- Peter Maydell <peter.maydell@linaro.org>, Markus Armbruster <armbru@redhat.com>,
- Aleksandar Markovic <aleksandar.qemu.devel@gmail.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Aleksandar Rikalo <aleksandar.rikalo@rt-rk.com>,
- Richard Henderson <rth@twiddle.net>, 
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>, 
+ Richard Henderson <rth@twiddle.net>,
+ Peter Maydell <peter.maydell@linaro.org>,
  Eduardo Habkost <ehabkost@redhat.com>,
- Alistair Francis <alistair@alistair23.me>, 
- qemu-arm <qemu-arm@nongnu.org>, David Gibson <david@gibson.dropbear.id.au>, 
- "open list:RISC-V" <qemu-riscv@nongnu.org>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
  Andrew Baumann <Andrew.Baumann@microsoft.com>,
- Jean-Christophe Dubois <jcd@tribudubois.net>, 
- "open list:New World" <qemu-ppc@nongnu.org>,
- Paolo Bonzini <pbonzini@redhat.com>, Aurelien Jarno <aurelien@aurel32.net>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2607:f8b0:4864:20::942
+ Aleksandar Markovic <aleksandar.qemu.devel@gmail.com>,
+ Jean-Christophe Dubois <jcd@tribudubois.net>,
+ "Michael S. Tsirkin" <mst@redhat.com>,
+ Markus Armbruster <armbru@redhat.com>,
+ Aurelien Jarno <aurelien@aurel32.net>,
+ Aleksandar Rikalo <aleksandar.rikalo@rt-rk.com>,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@redhat.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>
+Subject: Re: [PATCH-for-5.0 10/12] hw/misc/macio/macio: Add missing
+ error-propagation code
+Message-ID: <20200325235516.GG36889@umbus.fritz.box>
+References: <20200325191830.16553-1-f4bug@amsat.org>
+ <20200325191830.16553-11-f4bug@amsat.org>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature"; boundary="cz6wLo+OExbGG7q/"
+Content-Disposition: inline
+In-Reply-To: <20200325191830.16553-11-f4bug@amsat.org>
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+ [fuzzy]
+X-Received-From: 203.11.71.1
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -88,179 +70,185 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Mar 2020 21:01:11 -0000
+X-List-Received-Date: Thu, 26 Mar 2020 00:38:29 -0000
 
-On Wed, Mar 25, 2020 at 12:28 PM Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.o=
-rg> wrote:
->
+
+--cz6wLo+OExbGG7q/
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Wed, Mar 25, 2020 at 08:18:28PM +0100, Philippe Mathieu-Daud=E9 wrote:
 > Running the coccinelle script produced:
->
+>=20
 >   $ spatch \
 >     --macro-file scripts/cocci-macro-file.h --include-headers \
 >     --sp-file scripts/coccinelle/object_property_missing_error_propagate.=
 cocci \
 >     --keep-comments --smpl-spacing --dir hw
->
+>=20
 >   [[manual check required: error_propagate() might be missing in object_p=
-roperty_set_bool() hw/riscv/sifive_u.c:558:4]]
->   [[manual check required: error_propagate() might be missing in object_p=
-roperty_set_bool() hw/riscv/sifive_u.c:561:4]]
->
+roperty_set_bool() hw/misc/macio/macio.c:350:8]]
+>=20
 > Add the missing error_propagate() after manual review.
->
-> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org>
+>=20
+> Signed-off-by: Philippe Mathieu-Daud=E9 <f4bug@amsat.org>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-
-Alistair
+Reviewed-by: David Gibson <david@gibson.dropbear.id.au>
+Acked-by: David Gibson <david@gibson.dropbear.id.au>
 
 > ---
->  hw/riscv/sifive_u.c | 8 ++++++++
->  1 file changed, 8 insertions(+)
->
-> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-> index 56351c4faa..01e44018cd 100644
-> --- a/hw/riscv/sifive_u.c
-> +++ b/hw/riscv/sifive_u.c
-> @@ -473,113 +473,121 @@ static void riscv_sifive_u_machine_instance_init(=
-Object *obj)
->  static void riscv_sifive_u_soc_realize(DeviceState *dev, Error **errp)
+>  hw/misc/macio/macio.c | 4 ++++
+>  1 file changed, 4 insertions(+)
+>=20
+> diff --git a/hw/misc/macio/macio.c b/hw/misc/macio/macio.c
+> index 79222192e8..fffb64a7d5 100644
+> --- a/hw/misc/macio/macio.c
+> +++ b/hw/misc/macio/macio.c
+> @@ -292,98 +292,102 @@ static const MemoryRegionOps timer_ops =3D {
+>  static void macio_newworld_realize(PCIDevice *d, Error **errp)
 >  {
->      MachineState *ms =3D MACHINE(qdev_get_machine());
->      SiFiveUSoCState *s =3D RISCV_U_SOC(dev);
->      const struct MemmapEntry *memmap =3D sifive_u_memmap;
->      MemoryRegion *system_memory =3D get_system_memory();
->      MemoryRegion *mask_rom =3D g_new(MemoryRegion, 1);
->      MemoryRegion *l2lim_mem =3D g_new(MemoryRegion, 1);
->      qemu_irq plic_gpios[SIFIVE_U_PLIC_NUM_SOURCES];
->      char *plic_hart_config;
->      size_t plic_hart_config_len;
->      int i;
+>      MacIOState *s =3D MACIO(d);
+>      NewWorldMacIOState *ns =3D NEWWORLD_MACIO(d);
+>      DeviceState *pic_dev =3D DEVICE(ns->pic);
 >      Error *err =3D NULL;
->      NICInfo *nd =3D &nd_table[0];
->
->      object_property_set_bool(OBJECT(&s->e_cpus), true, "realized",
->                               &error_abort);
->      object_property_set_bool(OBJECT(&s->u_cpus), true, "realized",
->                               &error_abort);
->      /*
->       * The cluster must be realized after the RISC-V hart array containe=
-r,
->       * as the container's CPU object is only created on realize, and the
->       * CPU must exist and have been parented into the cluster before the
->       * cluster is realized.
->       */
->      object_property_set_bool(OBJECT(&s->e_cluster), true, "realized",
->                               &error_abort);
->      object_property_set_bool(OBJECT(&s->u_cluster), true, "realized",
->                               &error_abort);
->
->      /* boot rom */
->      memory_region_init_rom(mask_rom, OBJECT(dev), "riscv.sifive.u.mrom",
->                             memmap[SIFIVE_U_MROM].size, &error_fatal);
->      memory_region_add_subregion(system_memory, memmap[SIFIVE_U_MROM].bas=
-e,
->                                  mask_rom);
->
->      /*
->       * Add L2-LIM at reset size.
->       * This should be reduced in size as the L2 Cache Controller WayEnab=
-le
->       * register is incremented. Unfortunately I don't see a nice (or any=
-) way
->       * to handle reducing or blocking out the L2 LIM while still allowin=
-g it
->       * be re returned to all enabled after a reset. For the time being, =
-just
->       * leave it enabled all the time. This won't break anything, but wil=
-l be
->       * too generous to misbehaving guests.
->       */
->      memory_region_init_ram(l2lim_mem, NULL, "riscv.sifive.u.l2lim",
->                             memmap[SIFIVE_U_L2LIM].size, &error_fatal);
->      memory_region_add_subregion(system_memory, memmap[SIFIVE_U_L2LIM].ba=
-se,
->                                  l2lim_mem);
->
->      /* create PLIC hart topology configuration string */
->      plic_hart_config_len =3D (strlen(SIFIVE_U_PLIC_HART_CONFIG) + 1) *
->                             ms->smp.cpus;
->      plic_hart_config =3D g_malloc0(plic_hart_config_len);
->      for (i =3D 0; i < ms->smp.cpus; i++) {
->          if (i !=3D 0) {
->              strncat(plic_hart_config, "," SIFIVE_U_PLIC_HART_CONFIG,
->                      plic_hart_config_len);
->          } else {
->              strncat(plic_hart_config, "M", plic_hart_config_len);
->          }
->          plic_hart_config_len -=3D (strlen(SIFIVE_U_PLIC_HART_CONFIG) + 1=
-);
->      }
->
->      /* MMIO */
->      s->plic =3D sifive_plic_create(memmap[SIFIVE_U_PLIC].base,
->          plic_hart_config,
->          SIFIVE_U_PLIC_NUM_SOURCES,
->          SIFIVE_U_PLIC_NUM_PRIORITIES,
->          SIFIVE_U_PLIC_PRIORITY_BASE,
->          SIFIVE_U_PLIC_PENDING_BASE,
->          SIFIVE_U_PLIC_ENABLE_BASE,
->          SIFIVE_U_PLIC_ENABLE_STRIDE,
->          SIFIVE_U_PLIC_CONTEXT_BASE,
->          SIFIVE_U_PLIC_CONTEXT_STRIDE,
->          memmap[SIFIVE_U_PLIC].size);
->      g_free(plic_hart_config);
->      sifive_uart_create(system_memory, memmap[SIFIVE_U_UART0].base,
->          serial_hd(0), qdev_get_gpio_in(DEVICE(s->plic), SIFIVE_U_UART0_I=
-RQ));
->      sifive_uart_create(system_memory, memmap[SIFIVE_U_UART1].base,
->          serial_hd(1), qdev_get_gpio_in(DEVICE(s->plic), SIFIVE_U_UART1_I=
-RQ));
->      sifive_clint_create(memmap[SIFIVE_U_CLINT].base,
->          memmap[SIFIVE_U_CLINT].size, ms->smp.cpus,
->          SIFIVE_SIP_BASE, SIFIVE_TIMECMP_BASE, SIFIVE_TIME_BASE, false);
->
->      object_property_set_bool(OBJECT(&s->prci), true, "realized", &err);
-> +    if (err) {
-> +        error_propagate(errp, err);
-> +        return;
-> +    }
->      sysbus_mmio_map(SYS_BUS_DEVICE(&s->prci), 0, memmap[SIFIVE_U_PRCI].b=
-ase);
->
->      object_property_set_bool(OBJECT(&s->otp), true, "realized", &err);
-> +    if (err) {
-> +        error_propagate(errp, err);
-> +        return;
-> +    }
->      sysbus_mmio_map(SYS_BUS_DEVICE(&s->otp), 0, memmap[SIFIVE_U_OTP].bas=
-e);
->
->      for (i =3D 0; i < SIFIVE_U_PLIC_NUM_SOURCES; i++) {
->          plic_gpios[i] =3D qdev_get_gpio_in(DEVICE(s->plic), i);
->      }
->
->      if (nd->used) {
->          qemu_check_nic_model(nd, TYPE_CADENCE_GEM);
->          qdev_set_nic_properties(DEVICE(&s->gem), nd);
->      }
->      object_property_set_int(OBJECT(&s->gem), GEM_REVISION, "revision",
->                              &error_abort);
->      object_property_set_bool(OBJECT(&s->gem), true, "realized", &err);
+>      SysBusDevice *sysbus_dev;
+>      MemoryRegion *timer_memory =3D NULL;
+> =20
+>      macio_common_realize(d, &err);
 >      if (err) {
 >          error_propagate(errp, err);
 >          return;
 >      }
->      sysbus_mmio_map(SYS_BUS_DEVICE(&s->gem), 0, memmap[SIFIVE_U_GEM].bas=
-e);
->      sysbus_connect_irq(SYS_BUS_DEVICE(&s->gem), 0,
->                         plic_gpios[SIFIVE_U_GEM_IRQ]);
->
->      create_unimplemented_device("riscv.sifive.u.gem-mgmt",
->          memmap[SIFIVE_U_GEM_MGMT].base, memmap[SIFIVE_U_GEM_MGMT].size);
+> =20
+>      sysbus_dev =3D SYS_BUS_DEVICE(&s->escc);
+>      sysbus_connect_irq(sysbus_dev, 0, qdev_get_gpio_in(pic_dev,
+>                                                         NEWWORLD_ESCCB_IR=
+Q));
+>      sysbus_connect_irq(sysbus_dev, 1, qdev_get_gpio_in(pic_dev,
+>                                                         NEWWORLD_ESCCA_IR=
+Q));
+> =20
+>      /* OpenPIC */
+>      sysbus_dev =3D SYS_BUS_DEVICE(ns->pic);
+>      memory_region_add_subregion(&s->bar, 0x40000,
+>                                  sysbus_mmio_get_region(sysbus_dev, 0));
+> =20
+>      /* IDE buses */
+>      macio_realize_ide(s, &ns->ide[0],
+>                        qdev_get_gpio_in(pic_dev, NEWWORLD_IDE0_IRQ),
+>                        qdev_get_gpio_in(pic_dev, NEWWORLD_IDE0_DMA_IRQ),
+>                        0x16, &err);
+>      if (err) {
+>          error_propagate(errp, err);
+>          return;
+>      }
+> =20
+>      macio_realize_ide(s, &ns->ide[1],
+>                        qdev_get_gpio_in(pic_dev, NEWWORLD_IDE1_IRQ),
+>                        qdev_get_gpio_in(pic_dev, NEWWORLD_IDE1_DMA_IRQ),
+>                        0x1a, &err);
+>      if (err) {
+>          error_propagate(errp, err);
+>          return;
+>      }
+> =20
+>      /* Timer */
+>      timer_memory =3D g_new(MemoryRegion, 1);
+>      memory_region_init_io(timer_memory, OBJECT(s), &timer_ops, NULL, "ti=
+mer",
+>                            0x1000);
+>      memory_region_add_subregion(&s->bar, 0x15000, timer_memory);
+> =20
+>      if (ns->has_pmu) {
+>          /* GPIOs */
+>          sysbus_dev =3D SYS_BUS_DEVICE(&ns->gpio);
+>          object_property_set_link(OBJECT(&ns->gpio), OBJECT(pic_dev), "pi=
+c",
+>                                   &error_abort);
+>          memory_region_add_subregion(&s->bar, 0x50,
+>                                      sysbus_mmio_get_region(sysbus_dev, 0=
+));
+>          object_property_set_bool(OBJECT(&ns->gpio), true, "realized", &e=
+rr);
+> +        if (err) {
+> +            error_propagate(errp, err);
+> +            return;
+> +        }
+> =20
+>          /* PMU */
+>          object_initialize_child(OBJECT(s), "pmu", &s->pmu, sizeof(s->pmu=
+),
+>                                  TYPE_VIA_PMU, &error_abort, NULL);
+>          object_property_set_link(OBJECT(&s->pmu), OBJECT(sysbus_dev), "g=
+pio",
+>                                   &error_abort);
+>          qdev_prop_set_bit(DEVICE(&s->pmu), "has-adb", ns->has_adb);
+>          qdev_set_parent_bus(DEVICE(&s->pmu), BUS(&s->macio_bus));
+> =20
+>          object_property_set_bool(OBJECT(&s->pmu), true, "realized", &err=
+);
+>          if (err) {
+>              error_propagate(errp, err);
+>              return;
+>          }
+>          sysbus_dev =3D SYS_BUS_DEVICE(&s->pmu);
+>          sysbus_connect_irq(sysbus_dev, 0, qdev_get_gpio_in(pic_dev,
+>                                                             NEWWORLD_PMU_=
+IRQ));
+>          memory_region_add_subregion(&s->bar, 0x16000,
+>                                      sysbus_mmio_get_region(sysbus_dev, 0=
+));
+>      } else {
+>          /* CUDA */
+>          object_initialize_child(OBJECT(s), "cuda", &s->cuda, sizeof(s->c=
+uda),
+>                                  TYPE_CUDA, &error_abort, NULL);
+>          qdev_set_parent_bus(DEVICE(&s->cuda), BUS(&s->macio_bus));
+>          qdev_prop_set_uint64(DEVICE(&s->cuda), "timebase-frequency",
+>                               s->frequency);
+> =20
+>          object_property_set_bool(OBJECT(&s->cuda), true, "realized", &er=
+r);
+>          if (err) {
+>              error_propagate(errp, err);
+>              return;
+>          }
+>          sysbus_dev =3D SYS_BUS_DEVICE(&s->cuda);
+>          sysbus_connect_irq(sysbus_dev, 0, qdev_get_gpio_in(pic_dev,
+>                                                             NEWWORLD_CUDA=
+_IRQ));
+>          memory_region_add_subregion(&s->bar, 0x16000,
+>                                      sysbus_mmio_get_region(sysbus_dev, 0=
+));
+>      }
 >  }
-> --
-> 2.21.1
->
->
+
+--=20
+David Gibson			| I'll have my music baroque, and my code
+david AT gibson.dropbear.id.au	| minimalist, thank you.  NOT _the_ _other_
+				| _way_ _around_!
+http://www.ozlabs.org/~dgibson
+
+--cz6wLo+OExbGG7q/
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEEdfRlhq5hpmzETofcbDjKyiDZs5IFAl5772QACgkQbDjKyiDZ
+s5KdnA//Yc0jQHpDJOUKajuu0KFnO7KibNeOn6+mg8yZLdMu2aGV7QNeZeMpDli8
+dhrVLhk5I3dKtaIB/08e0HquG7bknaHlBMd4ioljg8FBvprdR5th/GBnCxzWvHDI
+/GCZ7B3jLPXLIldXphoiVDSWHs2BN9Du2ds1DqngsXxk7smBHLOY9OyCnZ1kONH4
+7YUo0hvJQp+73M5YZf4xzLEAb7qhHQ/jtNoaXaDiXEXJUzEdN7szRPeQrW1PJhyR
+yb4wwkEYVrS0AmoQN4nJ8sAK40PEnSPo/pgbdrg6sJ8Gn2IsgHOYDeOi/bgC+8OT
+Ukmv2ZIPY8YGV+0mpuhKq9pDpOu4F4vP/Q50L46eFJfNqF/dYDUmJq2E2OVVCGIi
+Uso2fNChSMzP0OYWjfJ5Vbh4ydcrf+JptBdf7dcxxsZYX8/4qXorjYHVz6R+cY08
+N19r5T51hVQqkf65nKgeJiJiodo1wsjS5Z7TNPXUcQhiAwhdUPeL+oouIT3DqHyc
+uce+iPPdatSwpFkW2CM6mzJwrPE1PP1dFdCAqSft+PHhHuxyjjPoiExS1Lw60KUX
+wP68051Ma54P46KBkMlBxowbMgUm7mZdYElEUXam26LWNP5NboQpdqB9gwMBvr6q
+UhRa8/VIc9P6VxtIF0EsS0o0Ct0XMoFMlQiBS9btmw3NeC33ZOM=
+=O4J9
+-----END PGP SIGNATURE-----
+
+--cz6wLo+OExbGG7q/--
 
