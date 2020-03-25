@@ -1,64 +1,90 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jHAHW-0001rn-0p
-	for mharc-qemu-riscv@gnu.org; Wed, 25 Mar 2020 13:57:34 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37959)
+	id 1jHBYA-0008OW-6i
+	for mharc-qemu-riscv@gnu.org; Wed, 25 Mar 2020 15:18:50 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:53241)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <alistair23@gmail.com>) id 1jHAHS-0001kO-QJ
- for qemu-riscv@nongnu.org; Wed, 25 Mar 2020 13:57:32 -0400
+ (envelope-from <philippe.mathieu.daude@gmail.com>)
+ id 1jHBY7-0008HO-8K
+ for qemu-riscv@nongnu.org; Wed, 25 Mar 2020 15:18:48 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1jHAHR-0001Vx-Dc
- for qemu-riscv@nongnu.org; Wed, 25 Mar 2020 13:57:30 -0400
-Received: from mail-vk1-xa44.google.com ([2607:f8b0:4864:20::a44]:36284)
+ (envelope-from <philippe.mathieu.daude@gmail.com>)
+ id 1jHBY6-0008L5-0B
+ for qemu-riscv@nongnu.org; Wed, 25 Mar 2020 15:18:47 -0400
+Received: from mail-wm1-x343.google.com ([2a00:1450:4864:20::343]:37484)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1jHAHL-0001Td-9K; Wed, 25 Mar 2020 13:57:23 -0400
-Received: by mail-vk1-xa44.google.com with SMTP id m131so935270vkh.3;
- Wed, 25 Mar 2020 10:57:23 -0700 (PDT)
+ (Exim 4.71) (envelope-from <philippe.mathieu.daude@gmail.com>)
+ id 1jHBXy-0008Fe-Kg; Wed, 25 Mar 2020 15:18:38 -0400
+Received: by mail-wm1-x343.google.com with SMTP id d1so4186648wmb.2;
+ Wed, 25 Mar 2020 12:18:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=8XBKuKHkiomYbsAdzYphsuRy+m0BwopVAsXsVOg9Wsg=;
- b=iVPi4dKSg6jjIAwnZkyZlR8QtQNVHvREPGZQtaxZzP3NATHbLxZT6m/vJ1DCB1p9rP
- EX72hXCJF3ncm0K+tvWwjdK5KuRfrbH/TI4zPbdrMvN3HSs0ERUR97ekNdrZi38R8lHO
- x/bDDqPixIFEEGmhz2yuTrJnQ99AiYk322+AfegVDQpyA8wsyZUBS8lK4GpEmJAzA+fw
- IkEVR7Vybe0Prn1L7idD/s5Ik3TDTaKn8VMADuBX+g0SzFlEORLyrSF8J5gPtD+u95w+
- 7q7M5d7AJBQMgjyEwYje64GYKhlRxxXkwlQGkldSELGUTnNzZcO7C5dfmfpZyD6yp4G0
- OVVQ==
+ h=sender:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=CkPe9c7WtsqdNtQ1gIrLaLcoK0h9RvhM17e7zhHbNJ0=;
+ b=XPPNTNEToSCPzF9RYiFistt/AyuGtTzjetGYj7RZU6CJ34srCCzuR+hcZqGawRHVjS
+ v7Uhn0JoplmJG/Uzrok1/nKqwhJLt2b7M5JpwzdWWLXheMYI+iOrPqpxNL1qXj1hMfkS
+ xo3dvBD10Fb4cf9SmCZuH5wtE0aFDaY4GpyleRETKqNomAgR1aDA1QvMQmEaQez+WVLL
+ E/N5Vhgzlo5vCAnXPoWkC9DGDls9f9vj/JiaXWnPe+VGb2bnAtc4SVfvcZ5lYan4fNjf
+ D1dDQ2R+mhJYu+Kv6Sak+5qpg0niyvjpQBbuWx6GJOPQ3OeIERx+7I2qCFL3YnUKkKj9
+ YG7g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=8XBKuKHkiomYbsAdzYphsuRy+m0BwopVAsXsVOg9Wsg=;
- b=XtlmDK07W158L7yFT4j2jR/sl19h80oYZ7wPGmpkqfv42nshk48ESyPM8fSzwyOEld
- QzG5h90cFOcubjJqidE2oBxUoTVLec3i8V+RT73I50YfLjScPZB6yi+YfFiYn42EUp/N
- vYxk0S0VoULKFBHoTNgUCd5hHpbnR50s71kDfGcqwn8AxpOMEfKZUdb7A6QZO6mOSHXJ
- +fUYsr80w4IbCG3J+gxstnqWmpWJKE6xHxN3v3UkHRzTZ7i777CCiZfhJNeuKdW2quAK
- XH7ilDbZM8NIDj6PRFxOfhrWJod5o1rYkdtd94jL7ZDQKMsF1GTwciz29qotl9d9MnHA
- olMg==
-X-Gm-Message-State: ANhLgQ26TNIMOn+oybo1r0Sf7i7bXxoYQA7rCINiJLwfxz1/xXS1q/Xz
- RxF567evGWJDYqmQmuNfCFYBonfdJZyS/XQZLXw=
-X-Google-Smtp-Source: ADFU+vtGAuzbaGJ+g1ehuxWBrsCvjjTdytj9yUTptXN/T2NfKIMhbeYzbcA8+cqvJmhRCMi7CgcVTt1bia8upqhnxYA=
-X-Received: by 2002:a1f:5e0a:: with SMTP id s10mr3391436vkb.37.1585159042486; 
- Wed, 25 Mar 2020 10:57:22 -0700 (PDT)
+ h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
+ :mime-version:content-transfer-encoding;
+ bh=CkPe9c7WtsqdNtQ1gIrLaLcoK0h9RvhM17e7zhHbNJ0=;
+ b=QJ5uVfjhk4uWMUq0zDy9eGWyDoXxJdFZGZvrnVsmQSDOuZO2Q0a65kwq12d9Zemr0z
+ R6U8q7rzHchV6U83slqpJO0++3uj0nBIY/W0A59N3PetV6Csj3w0RoqlufHfbuCExrcQ
+ 2AgMUZqytdA5ISnnRDF/vIO4PcjgS/ZN5Ir/RsSVzZN4HbW3ycgu/rnv1Y+nyBf8WeBq
+ aTr9vbfnXXQnbuRgufZudYr/eNuvKWOYpQJ/saNUHpD2I7T/7hMt6bZelkIMhvoBwBQd
+ 4bcIxIv4zWfjDX7eiC1unr2V4UmaXQzSCjrMe2T+0J264xdxtw37TsW57r/L0H4QESoQ
+ sa/A==
+X-Gm-Message-State: ANhLgQ0S70/tcHISxAgz1x7+gzJHnpkv0jC3zPso2BhnsVUxlPW8NxWf
+ Nyae0rbzWVgmZcJuBDiMbARsbSjCkGA=
+X-Google-Smtp-Source: ADFU+vu4Prm9QXq4qTH5OQBnEVGpDvhSS7WGWWe1lxLJHnTVcwZ+YzxFQUeEJzIvEU/NnGcnQr4VIA==
+X-Received: by 2002:a05:600c:24d2:: with SMTP id
+ 18mr4767560wmu.38.1585163914865; 
+ Wed, 25 Mar 2020 12:18:34 -0700 (PDT)
+Received: from localhost.localdomain (37.red-83-52-54.dynamicip.rima-tde.net.
+ [83.52.54.37])
+ by smtp.gmail.com with ESMTPSA id r17sm6345672wrx.46.2020.03.25.12.18.31
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 25 Mar 2020 12:18:33 -0700 (PDT)
+Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
+ <philippe.mathieu.daude@gmail.com>
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
+To: qemu-devel@nongnu.org
+Cc: Alistair Francis <alistair@alistair23.me>,
+ Paul Burton <pburton@wavecomp.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, qemu-ppc@nongnu.org,
+ Jason Wang <jasowang@redhat.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ Richard Henderson <rth@twiddle.net>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Eduardo Habkost <ehabkost@redhat.com>,
+ David Gibson <david@gibson.dropbear.id.au>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, qemu-arm@nongnu.org,
+ qemu-riscv@nongnu.org, Andrew Baumann <Andrew.Baumann@microsoft.com>,
+ Aleksandar Markovic <aleksandar.qemu.devel@gmail.com>,
+ Jean-Christophe Dubois <jcd@tribudubois.net>,
+ "Michael S. Tsirkin" <mst@redhat.com>,
+ Markus Armbruster <armbru@redhat.com>,
+ Aurelien Jarno <aurelien@aurel32.net>,
+ Aleksandar Rikalo <aleksandar.rikalo@rt-rk.com>,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
+Subject: [PATCH-for-5.0 00/12] hw: Add missing error-propagation code
+Date: Wed, 25 Mar 2020 20:18:18 +0100
+Message-Id: <20200325191830.16553-1-f4bug@amsat.org>
+X-Mailer: git-send-email 2.21.1
 MIME-Version: 1.0
-References: <20200317150653.9008-1-zhiwei_liu@c-sky.com>
- <20200317150653.9008-62-zhiwei_liu@c-sky.com>
-In-Reply-To: <20200317150653.9008-62-zhiwei_liu@c-sky.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 25 Mar 2020 10:49:23 -0700
-Message-ID: <CAKmqyKM=+x9gJGzLA4D9q189uvv+8Vhb=5nMLcPKuDbE2h4SOw@mail.gmail.com>
-Subject: Re: [PATCH v6 61/61] target/riscv: configure and turn on vector
- extension from command line
-To: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Cc: Richard Henderson <richard.henderson@linaro.org>,
- Chih-Min Chao <chihmin.chao@sifive.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>, wenmeng_zhang@c-sky.com,
- wxy194768@alibaba-inc.com, guoren@linux.alibaba.com, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::a44
+X-Received-From: 2a00:1450:4864:20::343
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -70,124 +96,50 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Mar 2020 17:57:32 -0000
+X-List-Received-Date: Wed, 25 Mar 2020 19:18:48 -0000
 
-On Tue, Mar 17, 2020 at 10:09 AM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
->
-> Vector extension is default off. The only way to use vector extension is
-> 1. use cpu rv32 or rv64
-> 2. turn on it by command line
-> "-cpu rv64,x-v=true,vlen=128,elen=64,vext_spec=v0.7.1".
->
-> vlen is the vector register length, default value is 128 bit.
-> elen is the max operator size in bits, default value is 64 bit.
-> vext_spec is the vector specification version, default value is v0.7.1.
-> These properties can be specified with other values.
->
-> Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
+This series is inspired of Peter fix:
+"hw/arm/xlnx-zynqmp.c: fix some error-handling code"
+https://www.mail-archive.com/qemu-devel@nongnu.org/msg691636.html
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Add a cocci script to fix the other places.
 
-Alistair
+Based-on: <20200324134947.15384-1-peter.maydell@linaro.org>
 
-> ---
->  target/riscv/cpu.c | 44 +++++++++++++++++++++++++++++++++++++++++++-
->  target/riscv/cpu.h |  2 ++
->  2 files changed, 45 insertions(+), 1 deletion(-)
->
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 6e4135583d..92cbcf1a2d 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -395,7 +395,6 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
->      }
->
->      set_priv_version(env, priv_version);
-> -    set_vext_version(env, vext_version);
->      set_resetvec(env, DEFAULT_RSTVEC);
->
->      if (cpu->cfg.mmu) {
-> @@ -463,6 +462,45 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
->          if (cpu->cfg.ext_h) {
->              target_misa |= RVH;
->          }
-> +        if (cpu->cfg.ext_v) {
-> +            target_misa |= RVV;
-> +            if (!is_power_of_2(cpu->cfg.vlen)) {
-> +                error_setg(errp,
-> +                        "Vector extension VLEN must be power of 2");
-> +                return;
-> +            }
-> +            if (cpu->cfg.vlen > RV_VLEN_MAX || cpu->cfg.vlen < 128) {
-> +                error_setg(errp,
-> +                        "Vector extension implementation only supports VLEN "
-> +                        "in the range [128, %d]", RV_VLEN_MAX);
-> +                return;
-> +            }
-> +            if (!is_power_of_2(cpu->cfg.elen)) {
-> +                error_setg(errp,
-> +                        "Vector extension ELEN must be power of 2");
-> +                return;
-> +            }
-> +            if (cpu->cfg.elen > 64 || cpu->cfg.vlen < 8) {
-> +                error_setg(errp,
-> +                        "Vector extension implementation only supports ELEN "
-> +                        "in the range [8, 64]");
-> +                return;
-> +            }
-> +            if (cpu->cfg.vext_spec) {
-> +                if (!g_strcmp0(cpu->cfg.vext_spec, "v0.7.1")) {
-> +                    vext_version = VEXT_VERSION_0_07_1;
-> +                } else {
-> +                    error_setg(errp,
-> +                           "Unsupported vector spec version '%s'",
-> +                           cpu->cfg.vext_spec);
-> +                    return;
-> +                }
-> +            } else {
-> +                qemu_log("vector verison is not specified, "
-> +                        "use the default value v0.7.1\n");
-> +            }
-> +            set_vext_version(env, vext_version);
-> +        }
->
->          set_misa(env, RVXLEN | target_misa);
->      }
-> @@ -500,10 +538,14 @@ static Property riscv_cpu_properties[] = {
->      DEFINE_PROP_BOOL("u", RISCVCPU, cfg.ext_u, true),
->      /* This is experimental so mark with 'x-' */
->      DEFINE_PROP_BOOL("x-h", RISCVCPU, cfg.ext_h, false),
-> +    DEFINE_PROP_BOOL("x-v", RISCVCPU, cfg.ext_v, false),
->      DEFINE_PROP_BOOL("Counters", RISCVCPU, cfg.ext_counters, true),
->      DEFINE_PROP_BOOL("Zifencei", RISCVCPU, cfg.ext_ifencei, true),
->      DEFINE_PROP_BOOL("Zicsr", RISCVCPU, cfg.ext_icsr, true),
->      DEFINE_PROP_STRING("priv_spec", RISCVCPU, cfg.priv_spec),
-> +    DEFINE_PROP_STRING("vext_spec", RISCVCPU, cfg.vext_spec),
-> +    DEFINE_PROP_UINT16("vlen", RISCVCPU, cfg.vlen, 128),
-> +    DEFINE_PROP_UINT16("elen", RISCVCPU, cfg.elen, 64),
->      DEFINE_PROP_BOOL("mmu", RISCVCPU, cfg.mmu, true),
->      DEFINE_PROP_BOOL("pmp", RISCVCPU, cfg.pmp, true),
->      DEFINE_PROP_END_OF_LIST(),
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index f42f075024..42ab0f141a 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -285,12 +285,14 @@ typedef struct RISCVCPU {
->          bool ext_s;
->          bool ext_u;
->          bool ext_h;
-> +        bool ext_v;
->          bool ext_counters;
->          bool ext_ifencei;
->          bool ext_icsr;
->
->          char *priv_spec;
->          char *user_spec;
-> +        char *vext_spec;
->          uint16_t vlen;
->          uint16_t elen;
->          bool mmu;
-> --
-> 2.23.0
->
+Philippe Mathieu-Daud=C3=A9 (12):
+  scripts/coccinelle: Add script to catch missing error_propagate()
+    calls
+  hw/arm/bcm2835_peripherals: Add missing error-propagation code
+  hw/arm/fsl-imx: Add missing error-propagation code
+  hw/arm/stm32fx05_soc: Add missing error-propagation code
+  hw/i386/x86: Add missing error-propagation code
+  hw/dma/xilinx_axidma: Add missing error-propagation code
+  hw/mips/cps: Add missing error-propagation code
+  hw/mips/boston: Add missing error-propagation code
+  hw/mips/mips_malta: Add missing error-propagation code
+  hw/misc/macio/macio: Add missing error-propagation code
+  hw/net/xilinx_axienet: Add missing error-propagation code
+  hw/riscv/sifive_u: Add missing error-propagation code
+
+ ...ect_property_missing_error_propagate.cocci | 58 +++++++++++++++++++
+ hw/arm/bcm2835_peripherals.c                  |  8 +++
+ hw/arm/fsl-imx25.c                            |  8 +++
+ hw/arm/fsl-imx6.c                             |  8 +++
+ hw/arm/stm32f205_soc.c                        |  4 ++
+ hw/arm/stm32f405_soc.c                        |  4 ++
+ hw/dma/xilinx_axidma.c                        |  3 +
+ hw/i386/x86.c                                 |  4 ++
+ hw/mips/boston.c                              | 17 ++----
+ hw/mips/cps.c                                 | 52 +++++++++++++++++
+ hw/mips/mips_malta.c                          | 19 ++++--
+ hw/misc/macio/macio.c                         |  4 ++
+ hw/net/xilinx_axienet.c                       |  3 +
+ hw/riscv/sifive_u.c                           |  8 +++
+ 14 files changed, 184 insertions(+), 16 deletions(-)
+ create mode 100644 scripts/coccinelle/object_property_missing_error_propagat=
+e.cocci
+
+--=20
+2.21.1
+
 
